@@ -1,33 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TGZIp-0000S1-Lf
+	(envelope-from <raj.khem@gmail.com>) id 1TGZN8-0000aC-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Sep 2012 19:52:12 +0200
-Received: by pbbro12 with SMTP id ro12so495622pbb.6
+	Tue, 25 Sep 2012 19:56:39 +0200
+Received: by padfa11 with SMTP id fa11so1610684pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2012 10:39:21 -0700 (PDT)
+	Tue, 25 Sep 2012 10:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=sUPKJSss9f+cI1/uFc8W4VbKQzyiPhOz7AZiVhvkaI8=;
-	b=gm25/h3kMMjDnlbsMHA+T4sz8bRIbysk5a80q4koY28y/u9czfh90rLaGrTHrjKIj1
-	W8lC5Bdur5vtuk6Y4EeMf7DSPkVQ8Wnuv6pi4FZ4u7fl+GrOmNGhwCPwUO00foNcdPGA
-	+12zihFCBjI+kEV+RKfcYpM+rNw43uUfdobbPjB3yppczQt0Dx/Zl/kbpF9jRMpFJpfi
-	gbBfl9rVRgrIMqL8LxxzhNeok7p8VHa4WOxZZmV62kDOrAkQye3rxwSQnyM3fsIELadx
-	SLz071T/3yhQBqB+2F2q37456QJSHr6RsWUcNeAShHOnJxjrbs31qxtvLm+fIMwAe6X8
-	Ua6w==
-Received: by 10.68.224.161 with SMTP id rd1mr48799414pbc.49.1348594761533;
-	Tue, 25 Sep 2012 10:39:21 -0700 (PDT)
+	bh=twBOL2OO+zT3IbFmLoRrejCGADu8gU41ctzTmYDD4pE=;
+	b=oJrubFopYKIo23limgv/cKymJMUBzStR/qzE2A/kJzyfZOVVzDs48H6d7xjcilFdkX
+	dmkr+AWeVm0fLcwtJx6BGyFX9JB/6dEXziLy7NVIWCaOwnlwqrLRvips1vw2GgNQIFXd
+	7JGj2cuv9Q7P+aZWgNhWhNp0c3SR0AqsKRig30WxPMP3/PPU6nzdLp02NwRAjpwmLGyj
+	Ygxl2HGt/zIkzzXxtVxVH5aCbY8zyRv64E2kQ+2FHkDfbDzzhU2KMj5Kr5+sI9kRJ60v
+	mdAGE3KlnrJ0S4kEPb9t1mr1/87W8cPg5rQyMc0eB4XRTaZUq9QuFHBUbAt+6DKDLT6Z
+	SRQw==
+Received: by 10.68.196.169 with SMTP id in9mr46227734pbc.70.1348595028855;
+	Tue, 25 Sep 2012 10:43:48 -0700 (PDT)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id gt2sm627239pbc.62.2012.09.25.10.39.19
+	by mx.google.com with ESMTPS id bn5sm472287pab.12.2012.09.25.10.43.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 25 Sep 2012 10:39:20 -0700 (PDT)
+	Tue, 25 Sep 2012 10:43:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Sep 2012 10:39:01 -0700
-Message-Id: <1348594741-21920-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 25 Sep 2012 10:43:38 -0700
+Message-Id: <1348595018-27413-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-systemd][PATCH] systemd: Upgrade past v191
+Subject: [meta-systemd][PATCH V2] systemd: Upgrade past v191
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,73 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2012 17:52:12 -0000
+X-List-Received-Date: Tue, 25 Sep 2012 17:56:39 -0000
 
 Booted on eglibc/uclibc i586 systems
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...emd-id128-internal.la-as-link-time-depend.patch |   41 ------
- .../systemd/systemd/optional_secure_getenv.patch   |  142 +++-----------------
- .../systemd/systemd/systemd-pam-fix-execvpe.patch  |   39 +++---
- .../systemd/systemd/use-rootlibdir.patch           |   31 +++--
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    5 +-
- 5 files changed, 60 insertions(+), 198 deletions(-)
- delete mode 100644 meta-systemd/recipes-core/systemd/systemd/0001-Add-libsystemd-id128-internal.la-as-link-time-depend.patch
+ .../systemd/systemd/optional_secure_getenv.patch   |   19 ++++++++++
+ .../systemd/systemd/systemd-pam-fix-execvpe.patch  |   39 +++++++++-----------
+ .../systemd/systemd/use-rootlibdir.patch           |   31 +++++++++++-----
+ meta-systemd/recipes-core/systemd/systemd_git.bb   |    4 +-
+ 4 files changed, 61 insertions(+), 32 deletions(-)
+ create mode 100644 meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd/0001-Add-libsystemd-id128-internal.la-as-link-time-depend.patch b/meta-systemd/recipes-core/systemd/systemd/0001-Add-libsystemd-id128-internal.la-as-link-time-depend.patch
-deleted file mode 100644
-index be48909..0000000
---- a/meta-systemd/recipes-core/systemd/systemd/0001-Add-libsystemd-id128-internal.la-as-link-time-depend.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 547ca840ec640580d698c00758ecc177c22b0978 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 7 Sep 2012 19:54:06 -0700
--Subject: [PATCH] Add libsystemd-id128-internal.la as link time dependency for
-- test-engine and test_job_type
--
--Fixes linking errors like
--src/core/condition.c:207: undefined reference to `sd_id128_get_machine'
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile.am |    6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 7ccec67..304a990 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1137,7 +1137,8 @@ test_engine_CFLAGS = \
-- test_engine_LDADD = \
-- 	libsystemd-core.la \
-- 	libsystemd-daemon.la \
---	libsystemd-dbus.la
--+	libsystemd-dbus.la \
--+	libsystemd-id128-internal.la
-- 
-- test_job_type_SOURCES = \
-- 	src/test/test-job-type.c
--@@ -1148,7 +1149,8 @@ test_job_type_CFLAGS = \
-- 
-- test_job_type_LDADD = \
-- 	libsystemd-core.la \
---	libsystemd-daemon.la
--+	libsystemd-daemon.la \
--+	libsystemd-id128-internal.la
-- 
-- test_ns_SOURCES = \
-- 	src/test/test-ns.c
---- 
--1.7.9.5
--
 diff --git a/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-index 6657efd..35f1467 100644
---- a/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
+new file mode 100644
+index 0000000..35f1467
+--- /dev/null
 +++ b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-@@ -1,125 +1,19 @@
--Index: git/src/core/dbus.c
+@@ -0,0 +1,19 @@
 +on uclibc secure_getenv is not available
 +therefore default to using getenv instead
 +
@@ -115,130 +67,7 @@ index 6657efd..35f1467 100644
 +
 +Upstream-Status: Pending
 +Index: git/src/shared/missing.h
- ===================================================================
----- git.orig/src/core/dbus.c	2012-09-07 19:08:00.287792474 -0700
--+++ git/src/core/dbus.c	2012-09-07 19:19:33.959818851 -0700
--@@ -955,12 +955,20 @@
-- 
--         switch (type) {
--         case DBUS_BUS_SYSTEM:
--+#ifdef HAVE___SECURE_GETENV
--                 address = __secure_getenv("DBUS_SYSTEM_BUS_ADDRESS");
--+#else
--+		address = getenv("DBUS_SYSTEM_BUS_ADDRESS");
--+#endif
--                 if (!address || !address[0])
--                         address = DBUS_SYSTEM_BUS_DEFAULT_ADDRESS;
--                 break;
--         case DBUS_BUS_SESSION:
--+#ifdef HAVE___SECURE_GETENV
--                 address = __secure_getenv("DBUS_SESSION_BUS_ADDRESS");
--+#else
--+		address = getenv("DBUS_SESSION_BUS_ADDRESS");
--+#endif
--                 if (!address || !address[0])
--                         address = DBUS_SESSION_BUS_DEFAULT_ADDRESS;
--                 break;
--@@ -1076,8 +1084,11 @@
--         } else {
--                 const char *e;
--                 char *p;
---
--+#ifdef HAVE___SECURE_GETENV
--                 e = __secure_getenv("XDG_RUNTIME_DIR");
--+#else
--+		e = getenv("XDG_RUNTIME_DIR");
--+#endif
--                 if (!e)
--                         return 0;
-- 
--Index: git/src/libudev/libudev.c
--===================================================================
----- git.orig/src/libudev/libudev.c	2012-09-07 19:08:00.319792476 -0700
--+++ git/src/libudev/libudev.c	2012-09-07 19:20:41.183821472 -0700
--@@ -191,7 +191,11 @@
--         }
-- 
--         /* environment overrides config */
--+#ifdef HAVE___SECURE_GETENV
--         env = __secure_getenv("UDEV_LOG");
--+#else
--+	env = getenv("UDEV_LOG");
--+#endif
--         if (env != NULL)
--                 udev_set_log_priority(udev, util_log_priority(env));
-- 
--Index: git/src/shared/dbus-common.c
--===================================================================
----- git.orig/src/shared/dbus-common.c	2012-09-07 19:08:00.331792476 -0700
--+++ git/src/shared/dbus-common.c	2012-09-07 19:21:37.787823562 -0700
--@@ -120,8 +120,11 @@
--                         /* If we are supposed to talk to the instance,
--                          * try via XDG_RUNTIME_DIR first, then
--                          * fallback to normal bus access */
---
--+#ifdef HAVE___SECURE_GETENV
--                         e = __secure_getenv("XDG_RUNTIME_DIR");
--+#else
--+			e = getenv("XDG_RUNTIME_DIR");
--+#endif
--                         if (e) {
--                                 char *p;
-- 
--Index: git/src/shared/log.c
--===================================================================
----- git.orig/src/shared/log.c	2012-09-07 19:08:00.335792477 -0700
--+++ git/src/shared/log.c	2012-09-07 19:24:32.875830224 -0700
--@@ -803,20 +803,32 @@
-- 
-- void log_parse_environment(void) {
--         const char *e;
---
--+#ifdef HAVE___SECURE_GETENV
--         e = __secure_getenv("SYSTEMD_LOG_TARGET");
--+#else
--+	e = getenv("SYSTEMD_LOG_TARGET");
--+#endif
--         if (e && log_set_target_from_string(e) < 0)
--                 log_warning("Failed to parse log target %s. Ignoring.", e);
---
--+#ifdef HAVE___SECURE_GETENV
--         e = __secure_getenv("SYSTEMD_LOG_LEVEL");
--+#else
--+	e = getenv("SYSTEMD_LOG_LEVEL");
--+#endif
--         if (e && log_set_max_level_from_string(e) < 0)
--                 log_warning("Failed to parse log level %s. Ignoring.", e);
---
--+#ifdef HAVE___SECURE_GETENV
--         e = __secure_getenv("SYSTEMD_LOG_COLOR");
--+#else
--+	e = getenv("SYSTEMD_LOG_COLOR");
--+#endif
--         if (e && log_show_color_from_string(e) < 0)
--                 log_warning("Failed to parse bool %s. Ignoring.", e);
---
--+#ifdef HAVE___SECURE_GETENV
--         e = __secure_getenv("SYSTEMD_LOG_LOCATION");
--+#else
--+	e = getenv("SYSTEMD_LOG_LOCATION");
--+#endif
--         if (e && log_show_location_from_string(e) < 0)
--                 log_warning("Failed to parse bool %s. Ignoring.", e);
-- }
--Index: git/configure.ac
--===================================================================
----- git.orig/configure.ac	2012-09-07 19:08:25.103793418 -0700
--+++ git/configure.ac	2012-09-07 19:26:27.875834594 -0700
--@@ -65,7 +65,7 @@
-- 
-- # check for few functions not implemented in uClibc
-- 
---AC_CHECK_FUNCS_ONCE(mkostemp execvpe posix_fallocate)
--+AC_CHECK_FUNCS_ONCE(mkostemp execvpe posix_fallocate __secure_getenv)
-- 
-- # check for %ms format support - assume always no if cross compiling
-- 
++===================================================================
 +--- git.orig/src/shared/missing.h	2012-09-22 18:46:44.141282145 -0700
 ++++ git/src/shared/missing.h	2012-09-22 18:48:44.081276570 -0700
 +@@ -233,6 +233,8 @@
@@ -398,23 +227,20 @@ index 2167216..4c471b6 100644
   		$(DESTDIR)$(tmpfilesdir) \
   		$(DESTDIR)$(sysconfdir)/tmpfiles.d \
 diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 98b098f..259da56 100644
+index 337424e..259da56 100644
 --- a/meta-systemd/recipes-core/systemd/systemd_git.bb
 +++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -23,11 +23,9 @@ PR = "r7"
+@@ -23,8 +23,7 @@ PR = "r7"
  
  inherit useradd pkgconfig autotools perlnative
  
--SRCREV = "cb273c51eaf622b1e92d5ca0656b06073cb02da2"
+-SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
 -
 +SRCREV = "31c460208d92f90f5d1d9253a9c60a8bb75ff5da"
  SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
             file://use-rootlibdir.patch \
--           file://0001-Add-libsystemd-id128-internal.la-as-link-time-depend.patch \
             file://gtk-doc.make \
-            file://touchscreen.rules \
-            file://modprobe.rules \
-@@ -41,6 +39,7 @@ UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
+@@ -40,6 +39,7 @@ UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
                               file://systemd-pam-fix-getty-unit.patch \
                               file://systemd-pam-fix-mkostemp.patch \
                               file://systemd-pam-fix-msformat.patch \
