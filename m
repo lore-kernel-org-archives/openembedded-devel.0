@@ -1,21 +1,21 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TGjCm-00075V-C3
+	(envelope-from <Jackie.Huang@windriver.com>) id 1TGlnn-0003zo-8h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Sep 2012 06:26:36 +0200
+	Wed, 26 Sep 2012 09:12:59 +0200
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q8Q4Dj3F006031
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q8Q3iFqt008552
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2012 21:13:45 -0700 (PDT)
+	Tue, 25 Sep 2012 20:44:15 -0700 (PDT)
 Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Tue, 25 Sep 2012 21:13:45 -0700
+	14.2.309.2; Tue, 25 Sep 2012 20:44:14 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Sep 2012 12:13:41 +0800
-Message-ID: <1348632821-23337-1-git-send-email-jackie.huang@windriver.com>
+Date: Wed, 26 Sep 2012 11:44:13 +0800
+Message-ID: <1348631053-21801-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.4
 MIME-Version: 1.0
 Cc: Zhenfeng.Zhao@windriver.com
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2012 04:26:36 -0000
+X-List-Received-Date: Wed, 26 Sep 2012 07:12:59 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
