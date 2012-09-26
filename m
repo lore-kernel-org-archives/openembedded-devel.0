@@ -1,33 +1,25 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TGZN8-0000aC-Vf
+	(envelope-from <Jackie.Huang@windriver.com>) id 1TGiuD-0002tu-Kf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Sep 2012 19:56:39 +0200
-Received: by padfa11 with SMTP id fa11so1610684pad.6
+	Wed, 26 Sep 2012 06:07:25 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q8Q3sVvY008621
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2012 10:43:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=twBOL2OO+zT3IbFmLoRrejCGADu8gU41ctzTmYDD4pE=;
-	b=oJrubFopYKIo23limgv/cKymJMUBzStR/qzE2A/kJzyfZOVVzDs48H6d7xjcilFdkX
-	dmkr+AWeVm0fLcwtJx6BGyFX9JB/6dEXziLy7NVIWCaOwnlwqrLRvips1vw2GgNQIFXd
-	7JGj2cuv9Q7P+aZWgNhWhNp0c3SR0AqsKRig30WxPMP3/PPU6nzdLp02NwRAjpwmLGyj
-	Ygxl2HGt/zIkzzXxtVxVH5aCbY8zyRv64E2kQ+2FHkDfbDzzhU2KMj5Kr5+sI9kRJ60v
-	mdAGE3KlnrJ0S4kEPb9t1mr1/87W8cPg5rQyMc0eB4XRTaZUq9QuFHBUbAt+6DKDLT6Z
-	SRQw==
-Received: by 10.68.196.169 with SMTP id in9mr46227734pbc.70.1348595028855;
-	Tue, 25 Sep 2012 10:43:48 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id bn5sm472287pab.12.2012.09.25.10.43.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 25 Sep 2012 10:43:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Sep 2012 10:43:38 -0700
-Message-Id: <1348595018-27413-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-systemd][PATCH V2] systemd: Upgrade past v191
+	Tue, 25 Sep 2012 20:54:31 -0700 (PDT)
+Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.309.2; Tue, 25 Sep 2012 20:54:31 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Sep 2012 11:54:29 +0800
+Message-ID: <1348631669-22341-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.4
+MIME-Version: 1.0
+Cc: Zhenfeng.Zhao@windriver.com
+Subject: [meta-networking] [PATCH] ptpd: migrate from meta-oe into meta-networking and uprev to ptpd 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,215 +33,295 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2012 17:56:39 -0000
+X-List-Received-Date: Wed, 26 Sep 2012 04:07:26 -0000
+Content-Type: text/plain
 
-Booted on eglibc/uclibc i586 systems
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../systemd/systemd/optional_secure_getenv.patch   |   19 ++++++++++
- .../systemd/systemd/systemd-pam-fix-execvpe.patch  |   39 +++++++++-----------
- .../systemd/systemd/use-rootlibdir.patch           |   31 +++++++++++-----
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    4 +-
- 4 files changed, 61 insertions(+), 32 deletions(-)
- create mode 100644 meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
+ .../ptpd/ptpd-1.0.0/add-limit-h.patch              |   26 ++++++++
+ .../ptpd/ptpd-2.2.0/adjust-daemon-name.patch       |   61 ++++++++++++++++++++
+ .../ptpd/ptpd-2.2.0/ld-as-needed.patch             |   37 ++++++++++++
+ meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb |   20 +++++++
+ meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb |   32 ++++++++++
+ .../ptpd/ptpd-1.0.0/add-limit-h.patch              |   26 --------
+ meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb    |   20 -------
+ 7 files changed, 176 insertions(+), 46 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd-1.0.0/add-limit-h.patch
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/adjust-daemon-name.patch
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb
+ create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
+ delete mode 100644 meta-oe/recipes-connectivity/ptpd/ptpd-1.0.0/add-limit-h.patch
+ delete mode 100644 meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd-1.0.0/add-limit-h.patch b/meta-networking/recipes-daemons/ptpd/ptpd-1.0.0/add-limit-h.patch
 new file mode 100644
-index 0000000..35f1467
+index 0000000..8ed3f2f
 --- /dev/null
-+++ b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-@@ -0,0 +1,19 @@
-+on uclibc secure_getenv is not available
-+therefore default to using getenv instead
++++ b/meta-networking/recipes-daemons/ptpd/ptpd-1.0.0/add-limit-h.patch
+@@ -0,0 +1,26 @@
++ptpd: fix ftbfs by including limits.h so MAX_INT defined
 +
-+Singed-off-by: Khem Raj <raj.khem@gmail.com>
++The current recipe for ptpd fails to build with:
 +
-+Upstream-Status: Pending
-+Index: git/src/shared/missing.h
-+===================================================================
-+--- git.orig/src/shared/missing.h	2012-09-22 18:46:44.141282145 -0700
-++++ git/src/shared/missing.h	2012-09-22 18:48:44.081276570 -0700
-+@@ -233,6 +233,8 @@
-+ #ifndef HAVE_SECURE_GETENV
-+ #  ifdef HAVE___SECURE_GETENV
-+ #    define secure_getenv __secure_getenv
-++#  elif defined __UCLIBC__
-++#    define secure_getenv getenv
-+ #  else
-+ #    error neither secure_getenv nor __secure_getenv are available
-+ #  endif
-diff --git a/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch b/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-index ea8b3ff..449c27f 100644
---- a/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-+++ b/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-@@ -1,29 +1,26 @@
----- systemd-pam-185/src/nspawn/nspawn.c.orig	2012-06-21 05:31:24.000000000 -0400
--+++ systemd-pam-185/src/nspawn/nspawn.c	2012-06-21 05:29:50.000000000 -0400
--@@ -61,6 +61,8 @@
-- #include "path-util.h"
-- #include "loopback-setup.h"
-+Index: git/src/nspawn/nspawn.c
-+===================================================================
-+--- git.orig/src/nspawn/nspawn.c	2012-09-22 17:57:05.000000000 -0700
-++++ git/src/nspawn/nspawn.c	2012-09-22 18:01:41.541405768 -0700
-+@@ -63,6 +63,8 @@
-+         LINK_GUEST
-+ } LinkJournal;
-  
- +#include "config.h"
- +
-  static char *arg_directory = NULL;
-  static char *arg_user = NULL;
-  static char **arg_controllers = NULL;
--@@ -1315,9 +1317,14 @@
-- 
--                         a[0] = (char*) "/sbin/init";
--                         execve(a[0], a, (char**) envp);
---                } else if (argc > optind)
---                        execvpe(argv[optind], argv + optind, (char**) envp);
---                else {
--+                } else if (argc > optind) {
-+@@ -1373,7 +1375,12 @@
-+                                 a[0] = (char*) "/sbin/init";
-+                                 execve(a[0], a, (char**) envp);
-+                         } else if (argc > optind)
- +#ifdef HAVE_EXECVPE
--+			execvpe(argv[optind], argv + optind, (char**) envp);
-+                                 execvpe(argv[optind], argv + optind, (char**) envp);
- +#else
--+			environ = (char **)envp;
--+			execvp(argv[optind], argv + optind);
--+#endif	/* HAVE_EXECVPE */
--+		} else {
--                         chdir(home ? home : "/root");
--                         execle("/bin/bash", "-bash", NULL, (char**) envp);
--                 }
-++                                environ = (char **)envp;
-++                                execvp(argv[optind], argv + optind);
-++#endif /* HAVE_EXECVPE */			
-+                         else {
-+                                 chdir(home ? home : "/root");
-+                                 execle("/bin/bash", "-bash", NULL, (char**) envp);
-diff --git a/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch b/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-index 2167216..4c471b6 100644
---- a/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-+++ b/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-@@ -11,17 +11,19 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- Index: git/Makefile.am
- ===================================================================
----- git.orig/Makefile.am	2012-07-22 16:20:38.424405916 -0700
--+++ git/Makefile.am	2012-07-22 16:23:21.232406621 -0700
--@@ -61,23 +61,23 @@
-+--- git.orig/Makefile.am	2012-09-22 11:07:58.811981199 -0700
-++++ git/Makefile.am	2012-09-22 11:09:11.267983956 -0700
-+@@ -64,25 +64,25 @@
-  
-  # Our own, non-special dirs
-  pkgsysconfdir=$(sysconfdir)/systemd
- -userunitdir=$(prefix)/lib/systemd/user
-+-userpresetdir=$(prefix)/lib/systemd/user-preset
- -tmpfilesdir=$(prefix)/lib/tmpfiles.d
- -sysctldir=$(prefix)/lib/sysctl.d
- -usergeneratordir=$(prefix)/lib/systemd/user-generators
- +userunitdir=$(prefix)/$(rootlibdir)/systemd/user
-++userpresetdir=$(prefix)/$(rootlibdir)/systemd/user-preset
- +tmpfilesdir=$(prefix)/$(rootlibdir)/tmpfiles.d
- +sysctldir=$(prefix)/$(rootlibdir)/sysctl.d
- +usergeneratordir=$(prefix)/$(rootlibdir)/systemd/user-generators
-@@ -30,8 +32,10 @@ Index: git/Makefile.am
-  systemshutdowndir=$(rootlibexecdir)/system-shutdown
-  systemsleepdir=$(rootlibexecdir)/system-sleep
- -systemunitdir=$(rootprefix)/lib/systemd/system
-+-systempresetdir=$(rootprefix)/lib/systemd/system-preset
- -udevlibexecdir=$(rootprefix)/lib/udev
- +systemunitdir=$(rootprefix)/$(rootlibdir)/systemd/system
-++systempresetdir=$(rootprefix)/$(rootlibdir)/systemd/system-preset
- +udevlibexecdir=$(rootprefix)/$(rootlibdir)/udev
-  udevhomedir = $(udevlibexecdir)
-  udevrulesdir = $(udevlibexecdir)/rules.d
-@@ -42,9 +46,9 @@ Index: git/Makefile.am
- -rootlibexecdir=$(rootprefix)/lib/systemd
- +rootlibexecdir=$(rootprefix)/$(rootlibdir)/systemd
-  
-- CLEANFILES =
-+ CLEANFILES = $(BUILT_SOURCES)
-  EXTRA_DIST =
--@@ -126,7 +126,7 @@
-+@@ -132,7 +132,7 @@
-  	-DSYSTEMD_STDIO_BRIDGE_BINARY_PATH=\"$(bindir)/systemd-stdio-bridge\" \
-  	-DROOTPREFIX=\"$(rootprefix)\" \
-  	-DRUNTIME_DIR=\"/run\" \
-@@ -53,7 +57,7 @@ Index: git/Makefile.am
-  	-DSYSTEMD_CRYPTSETUP_PATH=\"$(rootlibexecdir)/systemd-cryptsetup\" \
-  	-DSYSTEM_GENERATOR_PATH=\"$(systemgeneratordir)\" \
-  	-DUSER_GENERATOR_PATH=\"$(usergeneratordir)\" \
--@@ -2535,7 +2535,7 @@
-+@@ -2692,7 +2692,7 @@
-  
-  binfmt-install-data-hook:
-  	$(MKDIR_P) -m 0755 \
-@@ -62,7 +66,16 @@ Index: git/Makefile.am
-  		$(DESTDIR)$(sysconfdir)/binfmt.d \
-  		$(DESTDIR)$(systemunitdir)/sysinit.target.wants
-  	( cd $(DESTDIR)$(systemunitdir)/sysinit.target.wants && \
--@@ -3165,7 +3165,7 @@
-+@@ -3107,7 +3107,7 @@
++| arith.c: In function 'fromInternalTime':
++| arith.c:46: error: 'INT_MAX' undeclared (first use in this function)
++| arith.c:46: error: (Each undeclared identifier is reported only once
++| arith.c:46: error: for each function it appears in.)
++| arith.c: In function 'toInternalTime':
++| arith.c:64: error: 'INT_MAX' undeclared (first use in this function)
++| make: *** [arith.o] Error 1
++| make: *** Waiting for unfinished jobs....
++| FATAL: oe_runmake failed
++
++diff --git a/src/arith.c b/src/arith.c
++--- a/src/arith.c
+++++ b/src/arith.c
++@@ -1,6 +1,7 @@
++ /* arith.c */
 + 
-+ timedated-install-data-hook:
-+ 	$(MKDIR_P) -m 0755 \
-+-		$(DESTDIR)$(prefix)/lib/systemd/ntp-units.d \
-++		$(DESTDIR)$(prefix)/$(rootlibdir)/systemd/ntp-units.d \
-+ 		$(DESTDIR)$(sysconfdir)/systemd/ntp-units.d
-+ 	( cd $(DESTDIR)$(systemunitdir) && \
-+ 		rm -f dbus-org.freedesktop.timedate1.service  && \
-+@@ -3337,7 +3337,7 @@
-  logind-install-data-hook:
-  	$(MKDIR_P) -m 0755 \
-  		$(DESTDIR)$(systemunitdir)/multi-user.target.wants \
-@@ -71,7 +84,7 @@ Index: git/Makefile.am
-  	( cd $(DESTDIR)$(systemunitdir) && \
-  		rm -f dbus-org.freedesktop.login1.service && \
-  		$(LN_S) systemd-logind.service dbus-org.freedesktop.login1.service)
--@@ -3284,7 +3284,7 @@
-+@@ -3494,7 +3494,7 @@
-  		-e 's,@PACKAGE_VERSION\@,$(PACKAGE_VERSION),g' \
-  		-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
-  		-e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
-@@ -80,7 +93,7 @@ Index: git/Makefile.am
-  		-e 's,@prefix\@,$(prefix),g' \
-  		-e 's,@exec_prefix\@,$(exec_prefix),g' \
-  		-e 's,@libdir\@,$(libdir),g' \
--@@ -3407,9 +3407,9 @@
-+@@ -3619,9 +3619,9 @@
-  	$(MKDIR_P) -m 0755 \
-  		$(DESTDIR)$(tmpfilesdir) \
-  		$(DESTDIR)$(sysconfdir)/tmpfiles.d \
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 337424e..259da56 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -23,8 +23,7 @@ PR = "r7"
- 
- inherit useradd pkgconfig autotools perlnative
- 
--SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
++ #include "ptpd.h"
+++#include <limits.h>
++ 
++ /* from annex C of the spec */
++ UInteger32 crc_algorithm(Octet *buf, Integer16 length)
++
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/adjust-daemon-name.patch b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/adjust-daemon-name.patch
+new file mode 100644
+index 0000000..f6934b6
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/adjust-daemon-name.patch
+@@ -0,0 +1,61 @@
++Patch from http://patch-tracker.debian.org/package/ptpd
++
++Description: Executable name ptpd
++ This patch adjusts the binary executable to be called ptpd instead of ptpd2.
++ Similarly, the man page name is adjusted.
++Author: Roland Stigge <stigge@antcom.de>
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ src/Makefile |    4 ++--
++ src/ptpd2.8  |    8 ++++----
++ 2 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/src/Makefile b/src/Makefile
++index dbbe525..a672625 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -1,4 +1,4 @@
++-# Makefile for ptpd2
+++# Makefile for ptpd
++ 
++ #
++ # Compile time defines:
++@@ -42,7 +42,7 @@ CFLAGS += -DPTP_EXPERIMENTAL
++ 
++ LDFLAGS+= -lm -lrt
++ 
++-PROG = ptpd2
+++PROG = ptpd
++ SRCS = ptpd.c arith.c bmc.c protocol.c display.c\
++ 	dep/msg.c dep/net.c dep/servo.c dep/startup.c dep/sys.c dep/timer.c
++ 
++diff --git a/src/ptpd2.8 b/src/ptpd2.8
++index c6100f4..21f1906 100644
++--- a/src/ptpd2.8
+++++ b/src/ptpd2.8
++@@ -1,9 +1,9 @@
++ .\" -*- nroff -*"
++-.TH ptpd2 8 "January, 2012" "version 2.2.0" "Precision Time Protocol daemon"
+++.TH ptpd 8 "January, 2012" "version 2.2.0" "Precision Time Protocol daemon"
++ .SH NAME
++-ptpd2 \- Precision Time Protocol daemon (1588-2008)
+++ptpd \- Precision Time Protocol daemon (1588-2008)
++ .SH SYNOPSIS
++-.B ptpd2
+++.B ptpd
++ [?]
++ [-B]
++ [-c]
++@@ -182,7 +182,7 @@ run as master without NTP
++ set an initial delay request value
++ .TP
++ .B \-L
++-enable running multiple ptpd2 daemons
+++enable running multiple ptpd daemons
++ .TP
++ .B \-j
++ turn off IGMP refresh messages
++-- 
++1.7.4
++
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
+new file mode 100644
+index 0000000..7d5251b
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
+@@ -0,0 +1,37 @@
++Patch from http://patch-tracker.debian.org/package/ptpd
++
++Description: Fix ld --as-needed
++ This patch fixes the order of gcc arguments to fix ld --as-needed
++Author: Roland Stigge <stigge@antcom.de>
++Bug-Debian: http://bugs.debian.org/607583
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ src/Makefile |    4 ++--
++ 1 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/Makefile b/src/Makefile
++index a672625..88a2fc8 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -40,7 +40,7 @@ CFLAGS += -DDBG_SIGUSR2_CHANGE_DEBUG
++ 
++ CFLAGS += -DPTP_EXPERIMENTAL
++ 
++-LDFLAGS+= -lm -lrt
+++LIBS += -lm -lrt
++ 
++ PROG = ptpd
++ SRCS = ptpd.c arith.c bmc.c protocol.c display.c\
++@@ -63,7 +63,7 @@ TAGFILES = GPATH GRTAGS GSYMS GTAGS cscope.in.out cscope.out cscope.po.out
++ all: $(PROG)
++ 
++ $(PROG): $(OBJS)
++-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+++	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
++ 
++ $(OBJS): $(HDRS)
++ 
++-- 
++1.7.4
++
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb b/meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb
+new file mode 100644
+index 0000000..08e1b6b
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Precision Time Protocol (PTP) as defined by the IEEE 1588 standard"
++HOMEPAGE = "http://sourceforge.net/projects/ptpd"
++SECTION = "network"
++LICENSE = "BSD"
++
++LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=888bd1b2c9c013b93394b8bfb453c417"
++
++SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
++           file://add-limit-h.patch;striplevel=2"
++
++SRC_URI[md5sum] = "b112b2bedc7f6e6e11a838608b9e0357"
++SRC_URI[sha256sum] = "8ac1fdcad1e246b0395097dd9af29966c6823533d7e6989aae91506048fb51bc"
++
++S = "${WORKDIR}/ptpd-${PV}/src"
++
++do_install() {
++        install -d ${D}${bindir} ${D}${mandir}/man8
++        install -m 4555 ptpd ${D}${bindir}
++        install -m 644 ptpd.8 ${D}${mandir}/man8
++}
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
+new file mode 100644
+index 0000000..a393a25
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "The PTP daemon (PTPd)"
++DESCRIPTION = "The PTP daemon (PTPd) implements the Precision Time protocol (PTP) as \
++defined by the relevant IEEE 1588 standard. PTP Version 1 implements IEEE-1588-2002, \
++and PTP Version 2 implements IEEE-1588-2008. PTP was developed to provide very precise \
++time coordination of LAN connected computers."
++HOMEPAGE = "http://sourceforge.net/projects/ptpd"
++SECTION = "network"
++LICENSE = "BSD"
++
++PR = "r0"
++
++LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=3d8ac2c46c116bce2d2ad838b6cf3491"
++
++SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
++           file://adjust-daemon-name.patch;striplevel=2 \
++           file://ld-as-needed.patch;striplevel=2 \
++"
++
++SRC_URI[md5sum] = "c63a3a149d30c710773ccb02df5782a3"
++SRC_URI[sha256sum] = "f2266a22db84318d8b9ce266ea83772c03438c31f4993fa9643fa675a07c26b4"
++
++S = "${WORKDIR}/ptpd-${PV}/src"
++
++# EXTRA_OEMAKE is typically: -e MAKEFLAGS=
++# the -e causes problems as CFLAGS is modified in the Makefile.
++EXTRA_OEMAKE = ""
++
++do_install() {
++        install -d ${D}${bindir} ${D}${mandir}/man8
++        install -m 0755 ptpd ${D}${bindir}
++        install -m 0644 ptpd2.8 ${D}${mandir}/man8
++}
+diff --git a/meta-oe/recipes-connectivity/ptpd/ptpd-1.0.0/add-limit-h.patch b/meta-oe/recipes-connectivity/ptpd/ptpd-1.0.0/add-limit-h.patch
+deleted file mode 100644
+index 8ed3f2f..0000000
+--- a/meta-oe/recipes-connectivity/ptpd/ptpd-1.0.0/add-limit-h.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-ptpd: fix ftbfs by including limits.h so MAX_INT defined
 -
-+SRCREV = "31c460208d92f90f5d1d9253a9c60a8bb75ff5da"
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-            file://use-rootlibdir.patch \
-            file://gtk-doc.make \
-@@ -40,6 +39,7 @@ UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
-                              file://systemd-pam-fix-getty-unit.patch \
-                              file://systemd-pam-fix-mkostemp.patch \
-                              file://systemd-pam-fix-msformat.patch \
-+                             file://optional_secure_getenv.patch \
-                             "
- LDFLAGS_libc-uclibc_append = " -lrt"
- 
+-The current recipe for ptpd fails to build with:
+-
+-| arith.c: In function 'fromInternalTime':
+-| arith.c:46: error: 'INT_MAX' undeclared (first use in this function)
+-| arith.c:46: error: (Each undeclared identifier is reported only once
+-| arith.c:46: error: for each function it appears in.)
+-| arith.c: In function 'toInternalTime':
+-| arith.c:64: error: 'INT_MAX' undeclared (first use in this function)
+-| make: *** [arith.o] Error 1
+-| make: *** Waiting for unfinished jobs....
+-| FATAL: oe_runmake failed
+-
+-diff --git a/src/arith.c b/src/arith.c
+---- a/src/arith.c
+-+++ b/src/arith.c
+-@@ -1,6 +1,7 @@
+- /* arith.c */
+- 
+- #include "ptpd.h"
+-+#include <limits.h>
+- 
+- /* from annex C of the spec */
+- UInteger32 crc_algorithm(Octet *buf, Integer16 length)
+-
+diff --git a/meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb b/meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb
+deleted file mode 100644
+index 08e1b6b..0000000
+--- a/meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "Precision Time Protocol (PTP) as defined by the IEEE 1588 standard"
+-HOMEPAGE = "http://sourceforge.net/projects/ptpd"
+-SECTION = "network"
+-LICENSE = "BSD"
+-
+-LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=888bd1b2c9c013b93394b8bfb453c417"
+-
+-SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
+-           file://add-limit-h.patch;striplevel=2"
+-
+-SRC_URI[md5sum] = "b112b2bedc7f6e6e11a838608b9e0357"
+-SRC_URI[sha256sum] = "8ac1fdcad1e246b0395097dd9af29966c6823533d7e6989aae91506048fb51bc"
+-
+-S = "${WORKDIR}/ptpd-${PV}/src"
+-
+-do_install() {
+-        install -d ${D}${bindir} ${D}${mandir}/man8
+-        install -m 4555 ptpd ${D}${bindir}
+-        install -m 644 ptpd.8 ${D}${mandir}/man8
+-}
 -- 
-1.7.9.5
+1.7.4
 
 
 
