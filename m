@@ -1,24 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TGlyG-00064g-Ja
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Sep 2012 09:23:49 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q8Q49YJ1005501
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 25 Sep 2012 21:09:34 -0700 (PDT)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Tue, 25 Sep 2012 21:09:33 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Sep 2012 12:09:32 +0800
-Message-ID: <1348632572-23127-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.4
-MIME-Version: 1.0
-Cc: Zhenfeng.Zhao@windriver.com, jackie.huang@eindriver.com
-Subject: [meta-networking] [PATCH] iw: migrate from meta-oe into meta-networking and uprev to iw 3.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TGmEY-0006Gw-CY for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Sep 2012 09:40:38 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TGm2D-0006dv-6g for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Sep 2012 09:27:53 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Sep 2012 09:27:53 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Sep 2012 09:27:53 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 26 Sep 2012 09:27:39 +0200
+Message-ID: <k3uap8$evl$1@ger.gmane.org>
+References: <1348631669-22341-1-git-send-email-jackie.huang@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120824 Thunderbird/15.0
+In-Reply-To: <1348631669-22341-1-git-send-email-jackie.huang@windriver.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-networking] [PATCH] ptpd: migrate from meta-oe into meta-networking and uprev to ptpd 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,216 +42,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2012 07:23:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Sep 2012 07:40:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- ....sh-don-t-use-git-describe-for-versioning.patch |   44 ++++++++++++++++++++
- meta-networking/recipes-support/iw/iw_3.2.bb       |   22 ++++++++++
- meta-networking/recipes-support/iw/iw_3.6.bb       |   27 ++++++++++++
- ....sh-don-t-use-git-describe-for-versioning.patch |   44 --------------------
- meta-oe/recipes-connectivity/iw/iw_3.2.bb          |   22 ----------
- 5 files changed, 93 insertions(+), 66 deletions(-)
- create mode 100644 meta-networking/recipes-support/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
- create mode 100644 meta-networking/recipes-support/iw/iw_3.2.bb
- create mode 100644 meta-networking/recipes-support/iw/iw_3.6.bb
- delete mode 100644 meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
- delete mode 100644 meta-oe/recipes-connectivity/iw/iw_3.2.bb
+Op 26-09-12 05:54, jackie.huang@windriver.com schreef:
+> From: Jackie Huang <jackie.huang@windriver.com>
+> 
 
-diff --git a/meta-networking/recipes-support/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch b/meta-networking/recipes-support/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-new file mode 100644
-index 0000000..dfe3ca1
---- /dev/null
-+++ b/meta-networking/recipes-support/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-@@ -0,0 +1,44 @@
-+From 5310abba864cfe3a8b65af130729447604190b29 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Tue, 29 Nov 2011 17:03:27 +0100
-+Subject: [PATCH] iw: version.sh: don't use git describe for versioning
-+
-+It will detect top-level git repositories like the Angstrom setup-scripts and break.
-+
-+Upstream-status: Unknown
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+ version.sh |   16 +---------------
-+ 1 files changed, 1 insertions(+), 15 deletions(-)
-+
-+diff --git a/version.sh b/version.sh
-+index 3fb9f6d..e4a56cb 100755
-+--- a/version.sh
-++++ b/version.sh
-+@@ -3,21 +3,7 @@
-+ VERSION="3.2"
-+ OUT="$1"
-+ 
-+-if head=`git rev-parse --verify HEAD 2>/dev/null`; then
-+-	git update-index --refresh --unmerged > /dev/null
-+-	descr=$(git describe)
-+-
-+-	# on git builds check that the version number above
-+-	# is correct...
-+-	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
-+-
-+-	v="${descr#v}"
-+-	if git diff-index --name-only HEAD | read dummy ; then
-+-		v="$v"-dirty
-+-	fi
-+-else
-+-	v="$VERSION"
-+-fi
-++v="$VERSION"
-+ 
-+ echo '#include "iw.h"' > "$OUT"
-+ echo "const char iw_version[] = \"$v\";" >> "$OUT"
-+-- 
-+1.7.7.3
-+
-diff --git a/meta-networking/recipes-support/iw/iw_3.2.bb b/meta-networking/recipes-support/iw/iw_3.2.bb
-new file mode 100644
-index 0000000..65e7c8f
---- /dev/null
-+++ b/meta-networking/recipes-support/iw/iw_3.2.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
-+HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
-+SECTION = "base"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
-+
-+PR = "r1"
-+
-+DEPENDS = "libnl pkgconfig"
-+
-+SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
-+           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
-+          "
-+
-+SRC_URI[md5sum] = "80615c972a287dcd50890735469b0d1c"
-+SRC_URI[sha256sum] = "370edabe6f73cc55be77a7502a3a25d23ec2aea900ae4ca3cec19d55bf8bdb12"
-+
-+CFLAGS += "-DCONFIG_LIBNL30"
-+
-+do_install() {
-+	oe_runmake DESTDIR=${D} install
-+}
-diff --git a/meta-networking/recipes-support/iw/iw_3.6.bb b/meta-networking/recipes-support/iw/iw_3.6.bb
-new file mode 100644
-index 0000000..885624f
---- /dev/null
-+++ b/meta-networking/recipes-support/iw/iw_3.6.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
-+DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
-+wireless devices. It supports almost all new drivers that have been added \
-+to the kernel recently. "
-+HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
-+SECTION = "base"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
-+
-+PR = "r0"
-+
-+DEPENDS = "libnl pkgconfig"
-+
-+SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
-+           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
-+          "
-+
-+SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
-+SRC_URI[sha256sum] = "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
-+
-+# EXTRA_OEMAKE is typically: -e MAKEFLAGS=
-+# the -e causes problems as CFLAGS is modified in the Makefile.
-+EXTRA_OEMAKE = ""
-+
-+do_install() {
-+	oe_runmake DESTDIR=${D} install
-+}
-diff --git a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch b/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-deleted file mode 100644
-index dfe3ca1..0000000
---- a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 5310abba864cfe3a8b65af130729447604190b29 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Tue, 29 Nov 2011 17:03:27 +0100
--Subject: [PATCH] iw: version.sh: don't use git describe for versioning
--
--It will detect top-level git repositories like the Angstrom setup-scripts and break.
--
--Upstream-status: Unknown
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- version.sh |   16 +---------------
-- 1 files changed, 1 insertions(+), 15 deletions(-)
--
--diff --git a/version.sh b/version.sh
--index 3fb9f6d..e4a56cb 100755
----- a/version.sh
--+++ b/version.sh
--@@ -3,21 +3,7 @@
-- VERSION="3.2"
-- OUT="$1"
-- 
---if head=`git rev-parse --verify HEAD 2>/dev/null`; then
---	git update-index --refresh --unmerged > /dev/null
---	descr=$(git describe)
---
---	# on git builds check that the version number above
---	# is correct...
---	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
---
---	v="${descr#v}"
---	if git diff-index --name-only HEAD | read dummy ; then
---		v="$v"-dirty
---	fi
---else
---	v="$VERSION"
---fi
--+v="$VERSION"
-- 
-- echo '#include "iw.h"' > "$OUT"
-- echo "const char iw_version[] = \"$v\";" >> "$OUT"
---- 
--1.7.7.3
--
-diff --git a/meta-oe/recipes-connectivity/iw/iw_3.2.bb b/meta-oe/recipes-connectivity/iw/iw_3.2.bb
-deleted file mode 100644
-index 65e7c8f..0000000
---- a/meta-oe/recipes-connectivity/iw/iw_3.2.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
--HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
--SECTION = "base"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
--
--PR = "r1"
--
--DEPENDS = "libnl pkgconfig"
--
--SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
--           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
--          "
--
--SRC_URI[md5sum] = "80615c972a287dcd50890735469b0d1c"
--SRC_URI[sha256sum] = "370edabe6f73cc55be77a7502a3a25d23ec2aea900ae4ca3cec19d55bf8bdb12"
--
--CFLAGS += "-DCONFIG_LIBNL30"
--
--do_install() {
--	oe_runmake DESTDIR=${D} install
--}
--- 
-1.7.4
+> meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb |   20 +++++++ 
+> meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb |   32 ++++++++++
+
+First: why do we need 2 versions?
+
+> +SUMMARY = "The PTP daemon (PTPd)" +DESCRIPTION = "The PTP daemon (PTPd)
+> implements the Precision Time protocol (PTP) as \ +defined by the
+> relevant IEEE 1588 standard. PTP Version 1 implements IEEE-1588-2002, \ 
+> +and PTP Version 2 implements IEEE-1588-2008. PTP was developed to
+> provide very precise \ +time coordination of LAN connected computers." 
+> +HOMEPAGE = "http://sourceforge.net/projects/ptpd" +SECTION = "network" 
+> +LICENSE = "BSD" + +PR = "r0"
+
+Remove that
+
+> + +LIC_FILES_CHKSUM =
+> "file://../COPYRIGHT;md5=3d8ac2c46c116bce2d2ad838b6cf3491"
+
+That goes together with the LICENSE var
+
+> + +SRC_URI =
+> "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz
+> \ +           file://adjust-daemon-name.patch;striplevel=2 \ +
+> file://ld-as-needed.patch;striplevel=2 \ +" + +SRC_URI[md5sum] =
+> "c63a3a149d30c710773ccb02df5782a3" +SRC_URI[sha256sum] =
+> "f2266a22db84318d8b9ce266ea83772c03438c31f4993fa9643fa675a07c26b4" + +S =
+> "${WORKDIR}/ptpd-${PV}/src" + +# EXTRA_OEMAKE is typically: -e
+> MAKEFLAGS= +# the -e causes problems as CFLAGS is modified in the
+> Makefile. +EXTRA_OEMAKE = ""
+
+Modified how? Are the OE CFLAGS and LDFLAGS getting used or not ?
+
+> + +do_install() { +        install -d ${D}${bindir} ${D}${mandir}/man8 +
+> install -m 0755 ptpd ${D}${bindir} +        install -m 0644 ptpd2.8
+> ${D}${mandir}/man8 +}
+
+is 'make install' broken?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQYq5rMkyGM64RGpERAo2vAJ9GpL7QQJHYGSkxiYC+/ePERYqIrACfUL7Q
+lekJzXFfoWZGp43GNgPTY4k=
+=h/6e
+-----END PGP SIGNATURE-----
 
 
 
