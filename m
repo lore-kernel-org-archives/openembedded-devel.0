@@ -1,25 +1,34 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-gh0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1THbsy-0000uj-Rc
+	(envelope-from <otavio.salvador@gmail.com>) id 1THhJ0-0002V9-IH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Sep 2012 16:49:49 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 28 Sep 2012 07:36:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,502,1344236400"; d="scan'208";a="228152275"
-Received: from unknown (HELO helios.localnet) ([10.252.122.5])
-	by fmsmga002.fm.intel.com with ESMTP; 28 Sep 2012 07:36:54 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 28 Sep 2012 15:36:53 +0100
-Message-ID: <9581976.YnhpzoycFe@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
-In-Reply-To: <1348841720-27106-1-git-send-email-raj.khem@gmail.com>
-References: <1348841720-27106-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] qpf-bitstream-vera-sans-mono_1.10.bb: Fix Typo
+	Fri, 28 Sep 2012 22:37:02 +0200
+Received: by ghbz2 with SMTP id z2so1031501ghb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Sep 2012 13:24:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=/j+Usb6n/cQpE9Fj1KhdqA36ixZzJQGpAAphpZQzFSA=;
+	b=rEFK+rHizVURRzuEDlznPhuAZpIqPPlAe5kqRPjTqCSkZRsrs8v4UQQdfsBLu7jGvJ
+	JbMUMvz7cvXNw1i8oX5n3uZfOcpf8in30jB2LroQPxPZI75L1MSFPAymF8jSxgJclz3W
+	u56Y/vOIz/U7KVXWUNCLosxmdBxxmSoE6WuLjB++E+MRaB99yOJ/Z5qcW8W1vtMbgSJz
+	KCxa90jzWnj7ntfutSYRgItfgx2B6LRDitPtsPNhy8oyutC1advbklwVoiQjBbPdq+hn
+	Jyzb3XVvKxfWAlAyNFSyl4GDeBW48tGzNeqrvAw4ycnz0NydbbeXSO4qb76HPCh74p+1
+	qa9Q==
+Received: by 10.101.132.11 with SMTP id j11mr2900520ann.65.1348863845768;
+	Fri, 28 Sep 2012 13:24:05 -0700 (PDT)
+Received: from localhost.localdomain ([177.100.163.15])
+	by mx.google.com with ESMTPS id o11sm10717094anj.20.2012.09.28.13.24.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 28 Sep 2012 13:24:05 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 28 Sep 2012 17:23:50 -0300
+Message-Id: <1348863831-31989-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/2] uhd: Fix recipe syntax error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,50 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2012 14:49:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 28 Sep 2012 20:37:02 -0000
 
-On Friday 28 September 2012 07:15:20 Khem Raj wrote:
-> misplaced end quote
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-> b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb index
-> d84e3f7..95b6ebf 100644
-> --- a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-> +++ b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-> @@ -2,7 +2,7 @@ require qpf.inc
-> 
->  DESCRIPTION = "Bitstream Vera Monospaced Font, QPF for Qt/Embedded"
->  LICENSE = "Bitstream Vera"
-> -PR = "r4"
-> +PR = "r5"
-> 
->  PROVIDES += "qpf-bitstream-vera-sans-mono-small"
->  PROVIDES += "qpf-bitstream-vera-sans-mono-larger"
-> @@ -27,7 +27,7 @@ ${palmqtdir}/lib/fonts/verasansmono_10* \
->  	${palmqtdir}/lib/fonts/verasansmono_13* \
->  	${palmqtdir}/lib/fonts/verasansmono_14*"
->  FILES_qpf-bitstream-vera-sans-mono-large = "\
-> -	${palmqtdir}/lib/fonts/verasansmono_15*" \
-> +	${palmqtdir}/lib/fonts/verasansmono_15* \
->  	${palmqtdir}/lib/fonts/verasansmono_16* \
->  	${palmqtdir}/lib/fonts/verasansmono_17* \
->  	${palmqtdir}/lib/fonts/verasansmono_18* \
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-connectivity/uhd/uhd.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Merged to meta-opie master, thanks.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
+index 5e2e329..27584da 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd.inc
++++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
+@@ -7,7 +7,7 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
+ RDEPENDS_${PN} += "uhd-firmware"
+ 
+ PE = "1"
+-INC_PR = "r1"
++INC_PR = "r2"
+ 
+ inherit cmake
+ 
+@@ -20,7 +20,7 @@ FILES_${PN} += "${libdir}/libuhd.so \
+ FILES_${PN}-tests += "${datadir}/uhd/tests/*"
+ FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
+ FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
+-"                   ${datadir}/uhd/utils/.debug/* \
++                    ${datadir}/uhd/utils/.debug/* \
+                     ${datadir}/uhd/tests/.debug/* \
+                     ${datadir}/uhd/usrp_e_utils/.debug/*"
+ FILES_${PN}-examples = "${datadir}/uhd/examples/*"
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
