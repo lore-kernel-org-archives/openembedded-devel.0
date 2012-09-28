@@ -1,33 +1,25 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1THbcQ-0000RY-QC
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1THbsy-0000uj-Rc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Sep 2012 16:32:42 +0200
-Received: by daks35 with SMTP id s35so694966dak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Sep 2012 07:19:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=b7opG2kSwI5lcJJfz9dBNIoowEH5xcGPsn83y/GoXNY=;
-	b=pKDy2aOD2XalAXv/8/mRHbhyEMKXGEFviFI4TnfRCLjFD401f10Kg1H5+R128Dvr/Q
-	bf4mffSKmEOJ7rkEkwJJ4upOTvlVILWAHkfsdhPi5jfpbRStrZ7TNbDHDQN2+Rt89/a6
-	/BKrC6aZ3laC4uiWurlzLaqKBpr4vugm3PiSiHzzuIaCK53fQ7hHgV5p8h4NdrrSt8WF
-	N/QfzyhlfA9+viBYQmVAYyS/Qav43vPkJOZ3Xtwu9EVurPxfj96t4WxH48OwjvAYRAC2
-	5XtY3bqVA8xMEqfKMkS1T3uR5S2HLSUiDC4jPgnotCNzxAXQhbZA4syrewLpfbH25T6b
-	Hzwg==
-Received: by 10.68.226.38 with SMTP id rp6mr20955785pbc.116.1348841989056;
-	Fri, 28 Sep 2012 07:19:49 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id i2sm5582370pav.13.2012.09.28.07.19.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 28 Sep 2012 07:19:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Sep 2012 07:19:33 -0700
-Message-Id: <1348841973-20329-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] uhd,fuse: Fix misplaced quotations
+	Fri, 28 Sep 2012 16:49:49 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 28 Sep 2012 07:36:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,502,1344236400"; d="scan'208";a="228152275"
+Received: from unknown (HELO helios.localnet) ([10.252.122.5])
+	by fmsmga002.fm.intel.com with ESMTP; 28 Sep 2012 07:36:54 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 28 Sep 2012 15:36:53 +0100
+Message-ID: <9581976.YnhpzoycFe@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
+In-Reply-To: <1348841720-27106-1-git-send-email-raj.khem@gmail.com>
+References: <1348841720-27106-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-opie][PATCH] qpf-bitstream-vera-sans-mono_1.10.bb: Fix Typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,51 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2012 14:32:43 -0000
+X-List-Received-Date: Fri, 28 Sep 2012 14:49:49 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-connectivity/uhd/uhd.inc   |    4 ++--
- meta-oe/recipes-support/fuse/fuse_2.9.1.bb |    2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On Friday 28 September 2012 07:15:20 Khem Raj wrote:
+> misplaced end quote
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
+> b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb index
+> d84e3f7..95b6ebf 100644
+> --- a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
+> +++ b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
+> @@ -2,7 +2,7 @@ require qpf.inc
+> 
+>  DESCRIPTION = "Bitstream Vera Monospaced Font, QPF for Qt/Embedded"
+>  LICENSE = "Bitstream Vera"
+> -PR = "r4"
+> +PR = "r5"
+> 
+>  PROVIDES += "qpf-bitstream-vera-sans-mono-small"
+>  PROVIDES += "qpf-bitstream-vera-sans-mono-larger"
+> @@ -27,7 +27,7 @@ ${palmqtdir}/lib/fonts/verasansmono_10* \
+>  	${palmqtdir}/lib/fonts/verasansmono_13* \
+>  	${palmqtdir}/lib/fonts/verasansmono_14*"
+>  FILES_qpf-bitstream-vera-sans-mono-large = "\
+> -	${palmqtdir}/lib/fonts/verasansmono_15*" \
+> +	${palmqtdir}/lib/fonts/verasansmono_15* \
+>  	${palmqtdir}/lib/fonts/verasansmono_16* \
+>  	${palmqtdir}/lib/fonts/verasansmono_17* \
+>  	${palmqtdir}/lib/fonts/verasansmono_18* \
 
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
-index 5e2e329..27584da 100644
---- a/meta-oe/recipes-connectivity/uhd/uhd.inc
-+++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
-@@ -7,7 +7,7 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
- RDEPENDS_${PN} += "uhd-firmware"
- 
- PE = "1"
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- inherit cmake
- 
-@@ -20,7 +20,7 @@ FILES_${PN} += "${libdir}/libuhd.so \
- FILES_${PN}-tests += "${datadir}/uhd/tests/*"
- FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
- FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
--"                   ${datadir}/uhd/utils/.debug/* \
-+                    ${datadir}/uhd/utils/.debug/* \
-                     ${datadir}/uhd/tests/.debug/* \
-                     ${datadir}/uhd/usrp_e_utils/.debug/*"
- FILES_${PN}-examples = "${datadir}/uhd/examples/*"
-diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.1.bb b/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
-index 6718758..86a8465 100644
---- a/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
-+++ b/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
-@@ -17,7 +17,7 @@ EXTRA_OECONF = "--disable-kernel-module"
- 
- PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
- 
--RRECOMMENDS_${PN} = "kernel-module-fuse""
-+RRECOMMENDS_${PN} = "kernel-module-fuse"
- 
- FILES_${PN} += "${libdir}/libfuse.so.*"
- FILES_${PN}-dev += "${libdir}/libfuse*.la"
+Merged to meta-opie master, thanks.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
