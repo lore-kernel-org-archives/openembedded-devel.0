@@ -1,33 +1,33 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1THbYO-0000I9-2U
+	(envelope-from <raj.khem@gmail.com>) id 1THbcQ-0000RY-QC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Sep 2012 16:28:32 +0200
-Received: by padfa11 with SMTP id fa11so2332055pad.6
+	Fri, 28 Sep 2012 16:32:42 +0200
+Received: by daks35 with SMTP id s35so694966dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Sep 2012 07:15:38 -0700 (PDT)
+	Fri, 28 Sep 2012 07:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=BN7WmSp0l7eZWwLngeo6vImSZyF2FW6GRreB86U83vI=;
-	b=Qga74R1ygOOUcC1yq+x1c5LY4CXJvpUuOxNbV4e+FBWs5EZt6V2GaN9GPPkYJ1IAj8
-	UYhFXtWVWiyXOdBRvbEAN2rlPdiGQS4fRENbzHRmIUDH83MWajx362tK0AIk9d3DvMZU
-	jseg3+7nSlGjuqWITa20AMQeu6NYD4fT6sBdJaf1ItjXtKHQgf5pSbFbpNqYLHtMJAXF
-	pln3jdG6Rd12nbff2fxSRtvxTRHlHxNuc4m/eyLtA8nsnInOflBg66pljSdvPEV7CPEJ
-	T+9itE9jlbKbi7Np5j7H2O+RQl0U3Nd8Y1u/jJmWktZ1WgMnD8P/ALGXMBGRze4FCWPS
-	zlxw==
-Received: by 10.68.221.72 with SMTP id qc8mr20715871pbc.63.1348841738110;
-	Fri, 28 Sep 2012 07:15:38 -0700 (PDT)
+	bh=b7opG2kSwI5lcJJfz9dBNIoowEH5xcGPsn83y/GoXNY=;
+	b=pKDy2aOD2XalAXv/8/mRHbhyEMKXGEFviFI4TnfRCLjFD401f10Kg1H5+R128Dvr/Q
+	bf4mffSKmEOJ7rkEkwJJ4upOTvlVILWAHkfsdhPi5jfpbRStrZ7TNbDHDQN2+Rt89/a6
+	/BKrC6aZ3laC4uiWurlzLaqKBpr4vugm3PiSiHzzuIaCK53fQ7hHgV5p8h4NdrrSt8WF
+	N/QfzyhlfA9+viBYQmVAYyS/Qav43vPkJOZ3Xtwu9EVurPxfj96t4WxH48OwjvAYRAC2
+	5XtY3bqVA8xMEqfKMkS1T3uR5S2HLSUiDC4jPgnotCNzxAXQhbZA4syrewLpfbH25T6b
+	Hzwg==
+Received: by 10.68.226.38 with SMTP id rp6mr20955785pbc.116.1348841989056;
+	Fri, 28 Sep 2012 07:19:49 -0700 (PDT)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id j10sm5581770pax.4.2012.09.28.07.15.35
+	by mx.google.com with ESMTPS id i2sm5582370pav.13.2012.09.28.07.19.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 28 Sep 2012 07:15:35 -0700 (PDT)
+	Fri, 28 Sep 2012 07:19:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Sep 2012 07:15:20 -0700
-Message-Id: <1348841720-27106-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 28 Sep 2012 07:19:33 -0700
+Message-Id: <1348841973-20329-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-opie][PATCH] qpf-bitstream-vera-sans-mono_1.10.bb: Fix Typo
+Subject: [meta-oe][PATCH] uhd,fuse: Fix misplaced quotations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2012 14:28:32 -0000
-
-misplaced end quote
+X-List-Received-Date: Fri, 28 Sep 2012 14:32:43 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/uhd/uhd.inc   |    4 ++--
+ meta-oe/recipes-support/fuse/fuse_2.9.1.bb |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-index d84e3f7..95b6ebf 100644
---- a/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-+++ b/recipes-qtopia/qpf-fonts/qpf-bitstream-vera-sans-mono_1.10.bb
-@@ -2,7 +2,7 @@ require qpf.inc
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
+index 5e2e329..27584da 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd.inc
++++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
+@@ -7,7 +7,7 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
+ RDEPENDS_${PN} += "uhd-firmware"
  
- DESCRIPTION = "Bitstream Vera Monospaced Font, QPF for Qt/Embedded"
- LICENSE = "Bitstream Vera"
--PR = "r4"
-+PR = "r5"
+ PE = "1"
+-INC_PR = "r1"
++INC_PR = "r2"
  
- PROVIDES += "qpf-bitstream-vera-sans-mono-small"
- PROVIDES += "qpf-bitstream-vera-sans-mono-larger"
-@@ -27,7 +27,7 @@ ${palmqtdir}/lib/fonts/verasansmono_10* \
- 	${palmqtdir}/lib/fonts/verasansmono_13* \
- 	${palmqtdir}/lib/fonts/verasansmono_14*"
- FILES_qpf-bitstream-vera-sans-mono-large = "\
--	${palmqtdir}/lib/fonts/verasansmono_15*" \
-+	${palmqtdir}/lib/fonts/verasansmono_15* \
- 	${palmqtdir}/lib/fonts/verasansmono_16* \
- 	${palmqtdir}/lib/fonts/verasansmono_17* \
- 	${palmqtdir}/lib/fonts/verasansmono_18* \
+ inherit cmake
+ 
+@@ -20,7 +20,7 @@ FILES_${PN} += "${libdir}/libuhd.so \
+ FILES_${PN}-tests += "${datadir}/uhd/tests/*"
+ FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
+ FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
+-"                   ${datadir}/uhd/utils/.debug/* \
++                    ${datadir}/uhd/utils/.debug/* \
+                     ${datadir}/uhd/tests/.debug/* \
+                     ${datadir}/uhd/usrp_e_utils/.debug/*"
+ FILES_${PN}-examples = "${datadir}/uhd/examples/*"
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.1.bb b/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
+index 6718758..86a8465 100644
+--- a/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
++++ b/meta-oe/recipes-support/fuse/fuse_2.9.1.bb
+@@ -17,7 +17,7 @@ EXTRA_OECONF = "--disable-kernel-module"
+ 
+ PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
+ 
+-RRECOMMENDS_${PN} = "kernel-module-fuse""
++RRECOMMENDS_${PN} = "kernel-module-fuse"
+ 
+ FILES_${PN} += "${libdir}/libfuse.so.*"
+ FILES_${PN}-dev += "${libdir}/libfuse*.la"
 -- 
 1.7.9.5
 
