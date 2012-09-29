@@ -1,30 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1THs4T-0007v0-0Z
+	(envelope-from <andrei@gherzan.ro>) id 1THtOK-0000jy-GW
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Sep 2012 10:06:45 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q8T7romW012716
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 29 Sep 2012 00:53:50 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.309.2;
-	Sat, 29 Sep 2012 00:53:49 -0700
-Message-ID: <5066A90B.3000301@windriver.com>
-Date: Sat, 29 Sep 2012 15:53:47 +0800
-From: jhuang0 <jackie.huang@windriver.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+	Sat, 29 Sep 2012 11:31:20 +0200
+Received: by iebc13 with SMTP id c13so9239281ieb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Sep 2012 02:18:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:date
+	:message-id:subject:from:to:content-type:x-gm-message-state;
+	bh=2VQIkznMBxiYMsHxFKVWfpj3gobVHk7Gj56xyefi1lc=;
+	b=gQR4GWrtWjT34WVTWtcetRuGZrSJKNnodkocr2HMIhGcECk3GPSrd05tC203GbVABA
+	Lkzt+3yjyXqRePOMf3sHadEM4jMriioTHHSCC5FtXsW9KxJeQ18W/l3drAmTUSQkRqzE
+	RrHYwIKmpttl+tepQNC6KJJzhPjCmo3M+7yo4rLJb5UG8D6USirWXrJ8Gwpu9zHTluRf
+	eTp3eZ4Vfun4IbBL+FLVB/ThlY1xBeVlILZoKQ+FK85qLp+8qZhrD3tClk0UVbywHMXf
+	O4ONlhT4e5pi1T/Dlu/4lVoDeBNQ4kbx4j95U64gzMdKb2Sb6LwKKnkLrnz9uGYJM4Hb
+	L+xg==
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>, Koen Kooi
-	<koen@dominion.thruhere.net>
-References: <1348802495-13651-1-git-send-email-jackie.huang@windriver.com>
-	<k45351$rm0$1@ger.gmane.org> <5066568D.5090801@windriver.com>
-	<20120929072747.GG3049@jama.jama.net>
-In-Reply-To: <20120929072747.GG3049@jama.jama.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2 1/2] ptpd: migrate from meta-oe into meta-networking
+Received: by 10.50.7.135 with SMTP id j7mr941839iga.34.1348910305596; Sat, 29
+	Sep 2012 02:18:25 -0700 (PDT)
+Received: by 10.64.52.8 with HTTP; Sat, 29 Sep 2012 02:18:25 -0700 (PDT)
+X-Originating-IP: [79.118.166.187]
+Received: by 10.64.52.8 with HTTP; Sat, 29 Sep 2012 02:18:25 -0700 (PDT)
+In-Reply-To: <1348889736-6462-1-git-send-email-jackie.huang@windriver.com>
+References: <1348889736-6462-1-git-send-email-jackie.huang@windriver.com>
+Date: Sat, 29 Sep 2012 12:18:25 +0300
+Message-ID: <CAK18fxG59TmeuKPC6ay+XAk42CL=QkEDKzV3P0OcvYWTdb47CA@mail.gmail.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmq56ZBEVgTnwLO4Nuw4uzeXJzIOoGKozHaoPPdi/QFOEjGxDKX6Qn/ywWar3z/xZvt9y/K
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH v2] iw: update to 3.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,77 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2012 08:06:45 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Sep 2012 09:31:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Why is this an update? I see you create a new recipe...
+On Sep 29, 2012 6:35 AM, <jackie.huang@windriver.com> wrote:
 
-
-On 9/29/2012 3:27 PM, Martin Jansa wrote:
-> On Sat, Sep 29, 2012 at 10:01:49AM +0800, jhuang0 wrote:
->>
->>
->> On 9/29/2012 5:00 AM, Koen Kooi wrote:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> Op 28-09-12 05:21, jackie.huang@windriver.com schreef:
->>>> From: Jackie Huang <jackie.huang@windriver.com>
->>>>
->>>> Signed-off-by: Jackie Huang <jackie.huang@windriver.com> ---
->>>> .../ptpd/ptpd-1.0.0/add-limit-h.patch              |   26
->>>> ++++++++++++++++++++ meta-networking/recipes-daemons/ptpd/ptpd_1.0.0.bb |
->>>> 20 +++++++++++++++ .../ptpd/ptpd-1.0.0/add-limit-h.patch              |
->>>> 26 -------------------- meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb
->>>> |   20 ---------------
->>>
->>> Can you resend that with -m?
->>
->> Resent, thanks!
+> iw: update to 3.6
 >
-> And was it really with -M? Looks the same to me..
-
-Sorry, I misunderstood with -m option, resent again with -M.
-
-Thanks,
-Jackie
-
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-oe/recipes-connectivity/iw/iw_3.6.bb |   23 +++++++++++++++++++++++
+>  1 files changed, 23 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/iw/iw_3.6.bb
 >
-> Cheers,
->
->>
->> Thanks,
->> Jackie
->>
->>>
->>> -----BEGIN PGP SIGNATURE-----
->>> Version: GnuPG v1.4.5 (Darwin)
->>> Comment: GPGTools - http://gpgtools.org
->>>
->>> iD8DBQFQZg/jMkyGM64RGpERAmQGAJ9FvNdtkcgp25H/NSAQn0jUH3adAgCeIdTv
->>> OYcMi5OfStUutSiA4pTuEG8=
->>> =TXyy
->>> -----END PGP SIGNATURE-----
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> --
->> Jackie Huang
->> WIND RIVER | China Development Center
->> MSN:jackielily@hotmail.com
->> Tel: +86 8477 8594
->> Mobile: +86 138 1027 4745
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> diff --git a/meta-oe/recipes-connectivity/iw/iw_3.6.bbb/meta-oe/recipes-connectivity/iw/
+> iw_3.6.bb
+> new file mode 100644
+> index 0000000..42a43c3
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
+> +DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
+> +wireless devices. It supports almost all new drivers that have been added
+> \
+> +to the kernel recently. "
+> +HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
+> +SECTION = "base"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
+> +
+> +DEPENDS = "libnl pkgconfig"
+> +
+> +SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
+> +
+> file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
+> +          "
+> +
+> +SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
+> +SRC_URI[sha256sum] =
+> "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
+> +
+> +EXTRA_OEMAKE = ""
+> +
+> +do_install() {
+> +       oe_runmake DESTDIR=${D} install
+> +}
+> --
+> 1.7.4
 >
 >
 > _______________________________________________
@@ -116,12 +101,4 @@ Jackie
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-
--- 
-Jackie Huang
-WIND RIVER | China Development Center
-MSN:jackielily@hotmail.com
-Tel: +86 8477 8594
-Mobile: +86 138 1027 4745
-
 
