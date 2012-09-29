@@ -1,24 +1,25 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1THn6I-0006Nw-CL
+	(envelope-from <Jackie.Huang@windriver.com>) id 1THo2b-0007bu-90
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Sep 2012 04:48:19 +0200
-Received: (qmail 17847 invoked by uid 1003); 29 Sep 2012 02:35:23 -0000
-Received: from unknown (HELO ?192.168.1.105?)
-	(philip@opensdr.com@96.240.160.215)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	29 Sep 2012 02:35:23 -0000
-Message-ID: <50665E6A.8080604@balister.org>
-Date: Fri, 28 Sep 2012 22:35:22 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120911 Thunderbird/15.0.1
+	Sat, 29 Sep 2012 05:48:33 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q8T3ZcWP014571
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Sep 2012 20:35:38 -0700 (PDT)
+Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.309.2; Fri, 28 Sep 2012 20:35:37 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 29 Sep 2012 11:35:36 +0800
+Message-ID: <1348889736-6462-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1348863831-31989-1-git-send-email-otavio@ossystems.com.br>
-In-Reply-To: <1348863831-31989-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH 1/2] uhd: Fix recipe syntax error
+Cc: Zhenfeng.Zhao@windriver.com
+Subject: [meta-oe][PATCH v2] iw: update to 3.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2012 02:48:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Sep 2012 03:48:33 -0000
+Content-Type: text/plain
 
-Acked-by: Philip Balister <philip@balister.org>
+iw: update to 3.6
 
-On 09/28/2012 04:23 PM, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->   meta-oe/recipes-connectivity/uhd/uhd.inc |    4 ++--
->   1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
-> index 5e2e329..27584da 100644
-> --- a/meta-oe/recipes-connectivity/uhd/uhd.inc
-> +++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
-> @@ -7,7 +7,7 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
->   RDEPENDS_${PN} += "uhd-firmware"
->
->   PE = "1"
-> -INC_PR = "r1"
-> +INC_PR = "r2"
->
->   inherit cmake
->
-> @@ -20,7 +20,7 @@ FILES_${PN} += "${libdir}/libuhd.so \
->   FILES_${PN}-tests += "${datadir}/uhd/tests/*"
->   FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
->   FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
-> -"                   ${datadir}/uhd/utils/.debug/* \
-> +                    ${datadir}/uhd/utils/.debug/* \
->                       ${datadir}/uhd/tests/.debug/* \
->                       ${datadir}/uhd/usrp_e_utils/.debug/*"
->   FILES_${PN}-examples = "${datadir}/uhd/examples/*"
->
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-connectivity/iw/iw_3.6.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/iw/iw_3.6.bb
+
+diff --git a/meta-oe/recipes-connectivity/iw/iw_3.6.bb b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
+new file mode 100644
+index 0000000..42a43c3
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
++DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
++wireless devices. It supports almost all new drivers that have been added \
++to the kernel recently. "
++HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
++SECTION = "base"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
++
++DEPENDS = "libnl pkgconfig"
++
++SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
++           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
++          "
++
++SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
++SRC_URI[sha256sum] = "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
++
++EXTRA_OEMAKE = ""
++
++do_install() {
++	oe_runmake DESTDIR=${D} install
++}
+-- 
+1.7.4
+
 
 
