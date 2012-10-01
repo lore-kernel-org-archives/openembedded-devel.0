@@ -1,37 +1,46 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from cluster-j.mailcontrol.com ([85.115.54.190])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jekhor@gmail.com>) id 1TIRFh-000170-Ti
+	(envelope-from <David.Aldrich@EMEA.NEC.COM>) id 1TIeAx-0003M9-GQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Sep 2012 23:40:41 +0200
-Received: by weyt44 with SMTP id t44so2540561wey.6
+	Mon, 01 Oct 2012 13:28:39 +0200
+Received: from mail2.neceur.com (mail2.neceur.com [195.47.207.4])
+	by rly43j.srv.mailcontrol.com (MailControl) with ESMTP id
+	q91AVQLU017642 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Oct 2012 11:31:29 +0100
+Received: from intmail1.neceur.com (intmail1.neceur.com [172.29.14.11])
+	by mail2.neceur.com (8.14.4/8.14.4) with ESMTP id q91AVQAU000454
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Sep 2012 14:27:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=Qn2wT3nO8L1qMHKqmlegomcu1RnZyGpPiBzeteinFyI=;
-	b=lxDxqT+a5yaUVa+VnElojxYmVmkzY1latJ3dGzKMT1KeWxHc5KR3Sim/+URB0rzXwF
-	92RK0oVjFTsPrSpLGKsrhbs7KK6YdZWcBRnjfMuxpsBD/TWHB/1JSY2Ta6B+7tMNZY8s
-	eBXVrfWuvHvMTJSIWeM7sivzK08E+fmIISfjS/kGaCOClUKR9SlGdQfJ/c/t+Aid3/Bg
-	xkx1S3ElpZUBs4sRmpjKC1LanjNF/8IjVnbGucxVB+a4+GEi4Q7tzYamqyN8D+TrDHze
-	WDQ+l4qhNFucJaS9Yf1Qas/7lxI7SMFRcrRQET5YyZYqW/h8/z+QtYKSv+UY/KnxBpY+
-	rOrA==
-Received: by 10.216.145.80 with SMTP id o58mr5720439wej.84.1349040465683;
-	Sun, 30 Sep 2012 14:27:45 -0700 (PDT)
-Received: from localhost.localdomain ([46.53.195.142])
-	by mx.google.com with ESMTPS id dt9sm10653653wib.1.2012.09.30.14.27.44
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 30 Sep 2012 14:27:45 -0700 (PDT)
-Received: from jek by localhost.localdomain with local (Exim 4.80)
-	(envelope-from <jekhor@gmail.com>)
-	id 1TIR38-0006Ne-Ng; Mon, 01 Oct 2012 00:27:42 +0300
-Date: Mon, 1 Oct 2012 00:27:42 +0300
-From: Yauhen Kharuzhy <jekhor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20120930212742.GA24230@jeknote.loshitsa1.net>
+	Mon, 1 Oct 2012 11:31:26 +0100
+Received: from av2.neceur.com (av2.neceur.com [172.29.177.7])
+	by intmail1.neceur.com (8.13.8/8.13.8) with ESMTP id q91AVQKg012179
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Oct 2012 11:31:26 +0100
+Received: from av2.neceur.com (unknown [127.0.0.1])
+	by IMSVA80 (Postfix) with ESMTP id 37932226F0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Oct 2012 11:31:26 +0100 (BST)
+Received: from EX10CAS01.EU.NEC.COM (unknown [172.29.155.132])
+	by av2.neceur.com (Postfix) with ESMTP id 29636226EF4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Oct 2012 11:31:26 +0100 (BST)
+Received: from EX10MBX02.EU.NEC.COM ([169.254.2.52]) by EX10CAS01.EU.NEC.COM
+	([172.29.155.132]) with mapi id 14.02.0309.002; Mon, 1 Oct 2012 11:31:26
+	+0100
+From: David Aldrich <David.Aldrich@EMEA.NEC.COM>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Help needed to build a package
+Thread-Index: Ac2fv+cMTjkBmkeURXC/NxlGASvJ4w==
+Date: Mon, 1 Oct 2012 10:31:25 +0000
+Message-ID: <41302A7145AC054FA7A96CFD03835A0A18B4EC@EX10MBX02.EU.NEC.COM>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.29.68.109]
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Invalid build host architecture detection on multiarch systems
+X-Scanned-By: MailControl 9446.0 (www.mailcontrol.com) on 10.74.0.153
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Help needed to build a package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Sep 2012 21:40:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Oct 2012 11:28:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi.
+Hi
 
-The current OE-Core build system detects a build host arch based on 'uname'
-output. This works good in case of a single-architecture system. But if we
-have, for example, amd64 kernel + i386 userspace, detection fails.
-It can be invalid if we have multiarch-enabled userspace also.
+I am new to openembedded.  I hope it's appropriate to post a user question =
+here. If not, please suggest a more appropriate mailing list for me to use.
 
-Openssl-native is not compiled in such cases due architecture-specific
-assembler sources.
+I am using the arago repository and am trying to build the openssh package.=
+  By build freezes part way through:
 
-My assumption that an build host arch can be defined as a default
-architecture of the main C compiler ('gcc -dumpmachine' or by similar way).
+$ MACHINE=3Dmymachine bitbake -D -D -D openssh
+<snip>
+DEBUG: LOAD /home/<snip>/arago-oe-dev/recipes/simpad-utilities/simpad-utili=
+ties.bb
+DEBUG: update_data()
+DEBUG: update_data()
+DEBUG: update_data()
+NOTE: Handling BitBake files: - (5013/7639) [65 %]
 
--- 
-Yauhen Kharuzhy		JID: jek@jabber.ru
-			skype: jekhor
- 
-A: No
-Q: Should I quote below my post?
+How can I work out why bitbake hangs at this point please?
+
+Best regards
+
+David
 
 
