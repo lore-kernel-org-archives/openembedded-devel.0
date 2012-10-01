@@ -1,37 +1,37 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TIhLy-0008LI-P3
+	(envelope-from <martin.jansa@gmail.com>) id 1TIhM6-0008NP-GB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2012 16:52:14 +0200
-Received: by mail-we0-f175.google.com with SMTP id t44so2963566wey.6
+	Mon, 01 Oct 2012 16:52:22 +0200
+Received: by mail-wi0-f169.google.com with SMTP id hq4so2063381wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2012 07:39:20 -0700 (PDT)
+	Mon, 01 Oct 2012 07:39:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=A+XbC8tlpI95NgJ3jxqSiyktTEC5JHdxwwHNvIE9pk4=;
-	b=Ic/lv8ImB6LQCV+Be9Hzjgf0Jf94h/GB6H5Ql/Qsujf80SKUPpnHzIH93EEZQ4iXto
-	FI8MbvopHz5M1K8cnxV3dKl9emMpEaHd3EiJK1lhj1wdXfow4G6RQXBQyDSY6vWwZMH/
-	q7iy2hT7iuD79Z6bKrpUXWUxtlLZQPoxgGETi/MQZhGqb+7Yz0xu5Rztfl1oK5VGJZOn
-	JwaH2fcVugEahM6cmz/f2AxI73sypo8JtfK55Ksz7NZWm2IC7JYa4bEysHijfu4rs5nc
-	fsOS3AZPA/QmKxDo4XGYBn9eXXvrMj/9CFTthtSp9spsvlz+cdZfwO0Xngqb4hmOhAoJ
-	CEng==
-Received: by 10.180.107.163 with SMTP id hd3mr15115238wib.19.1349102360014;
-	Mon, 01 Oct 2012 07:39:20 -0700 (PDT)
+	bh=XtTn72ZFVR3BkxoGy7kyKvC1Hqj/6xqasjBnsnvutTs=;
+	b=DUK4RiZFFubz4YkIcjWmA2glb+yMmIkFoRHywwrfRdD5bMj9D0pq0A3gVkg3YONW4p
+	4M4h1HV8AKP6WiVNyRFUzKr8xHFd+3WO/YH3LQbZHnwIPnSEoeGn0KNi2u3S92squJw0
+	G8fhDITU8TRb93lOvYw5wooyR+L6yC805vYmihM8GkYQSc+k0FvFABGOzlIN0FvHkVhC
+	HzJlWvr3+8Dg1BXbd636En8kNd+2qTJpR9XGw4IsqH3LKYLNFoVZwJolUEmT1AkWfxAC
+	Bi1dsIYmOGSq4H/a7C8/eFzMeAyqR0JjQ8zgo12omD4GPqCpgLZY8BSJqUKnS3uUNFZm
+	LRDg==
+Received: by 10.180.14.8 with SMTP id l8mr15169930wic.6.1349102367759;
+	Mon, 01 Oct 2012 07:39:27 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q7sm18944613wiy.11.2012.10.01.07.39.18
+	by mx.google.com with ESMTPS id k20sm16735863wiv.11.2012.10.01.07.39.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 01 Oct 2012 07:39:18 -0700 (PDT)
+	Mon, 01 Oct 2012 07:39:26 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Oct 2012 16:38:47 +0200
-Message-Id: <ba6d1aa39be7e2e50dbe05397e817c2070e31c41.1349102278.git.Martin.Jansa@gmail.com>
+Date: Mon,  1 Oct 2012 16:38:48 +0200
+Message-Id: <275273308ebeac252cc5466192a476733ed50a1d.1349102278.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12
 In-Reply-To: <cover.1349102278.git.Martin.Jansa@gmail.com>
 References: <cover.1349102278.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1349102278.git.Martin.Jansa@gmail.com>
 References: <cover.1349102278.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/6] azy: fix do_configure
+Subject: [meta-oe][PATCH 4/6] elmdentica: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2012 14:52:14 -0000
-
-* something changed in override/prepend expansion and azy-native now had do_configure_prepend applied too
+X-List-Received-Date: Mon, 01 Oct 2012 14:52:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/azy_svn.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ meta-efl/recipes-efl/e17/elmdentica_svn.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-efl/recipes-efl/efl/azy_svn.bb b/meta-efl/recipes-efl/efl/azy_svn.bb
-index 0b333ae..a7889d6 100644
---- a/meta-efl/recipes-efl/efl/azy_svn.bb
-+++ b/meta-efl/recipes-efl/efl/azy_svn.bb
-@@ -12,16 +12,17 @@ BBCLASSEXTEND = "native"
- 
- EXTRA_OECONF += " --disable-mysql-tests"
- 
--do_configure_prepend() {
-+do_configure_class-target() {
-   sed -i "s#\./lemon#${STAGING_BINDIR_NATIVE}/lemon#g" ${S}/src/bin/Makefile.am
-   sed -i "s#\$(top_builddir)/src/bin/azy_parser -H -p -o#${STAGING_BINDIR_NATIVE}/azy_parser -H -p -o#g" ${S}/src/tests/Makefile.am
-   sed -i "s#\$(top_builddir)/src/bin/azy_parser -eHn -m#${STAGING_BINDIR_NATIVE}/azy_parser -eHn -m#g" ${S}/src/tests/identi.ca/Makefile.am
-+  efl_do_configure
- }
--do_configure_virtclass-native() {
-+do_configure_class-native() {
-   efl_do_configure
- }
- 
--do_install_append_virtclass-native() {
-+do_install_append_class-native() {
-   install -d ${D}/${bindir}
-   install -m 0755 ${S}/src/bin/lemon ${D}/${bindir}
- }
+diff --git a/meta-efl/recipes-efl/e17/elmdentica_svn.bb b/meta-efl/recipes-efl/e17/elmdentica_svn.bb
+index c965b68..f3bf939 100644
+--- a/meta-efl/recipes-efl/e17/elmdentica_svn.bb
++++ b/meta-efl/recipes-efl/e17/elmdentica_svn.bb
+@@ -1,6 +1,8 @@
+ DESCRIPTION = "A indenti.ca client for E"
+ DEPENDS = "glib-2.0 gconf curl elementary sqlite3-native azy"
+ LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
+ SECTION = "e/apps"
+ HOMEPAGE = "http://elmdentica.googlecode.com"
+ AUTHOR = "seabra"
 -- 
 1.7.12
 
