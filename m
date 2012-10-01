@@ -1,20 +1,24 @@
 Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TIiqe-000383-Ed
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TIiqf-000383-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2012 18:28:00 +0200
+	Mon, 01 Oct 2012 18:28:01 +0200
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 01 Oct 2012 09:15:02 -0700
+	by fmsmga101.fm.intel.com with ESMTP; 01 Oct 2012 09:15:03 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,517,1344236400"; d="scan'208";a="229137523"
+X-IronPort-AV: E=Sophos;i="4.80,517,1344236400"; d="scan'208";a="229137527"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.40])
-	by fmsmga002.fm.intel.com with ESMTP; 01 Oct 2012 09:15:01 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 01 Oct 2012 09:15:02 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Oct 2012 17:14:52 +0100
-Message-Id: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+Date: Mon,  1 Oct 2012 17:14:53 +0100
+Message-Id: <d29b0ca4bcad6cef7d286472ac890cd8ae21b37b.1349107616.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-webserver][PATCH 0/6] Add meta-webserver
+In-Reply-To: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+Subject: [meta-webserver][PATCH 1/6] Add meta-webserver layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,91 +32,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2012 16:28:00 -0000
+X-List-Received-Date: Mon, 01 Oct 2012 16:28:01 -0000
 
-So finally I have got this into a working state; apologies for the
-delay. There were a number of issues affecting cross-compilation as well
-as some problems with the initial configuration; these should now be
-addressed. We may wish to look at a more standard directory layout for
-Apache as the default one doesn't seem to be used by most distributions;
-we can look at this later - for now let's get the recipes out there so
-people can try them out.
+Add a layer for web servers, web-based applications and other related
+software.
 
-I know there are a few people waiting to submit additional recipes for
-this layer and I expect we will also want to look at moving some
-web-server related recipes from meta-oe into here at some point in the
-near future.
-
-
-The following changes since commit 7bfff4b1d6b0067ddabf2474320e3e78795b2b4f:
-
-  uhd,fuse: Fix misplaced quotations (2012-09-28 22:50:42 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/meta-webserver-add
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/meta-webserver-add
-
-Paul Eggleton (6):
-  Add meta-webserver layer
-  apache2: add from OE-Classic
-  modphp: add from OE-Classic
-  apache2: update to version 2.4.2 and fix
-  modphp: update to 5.3.14 and fix
-  xdebug: add new recipe
-
- meta-webserver/COPYING.MIT                         |   17 +
- meta-webserver/README                              |   37 +++
- meta-webserver/conf/layer.conf                     |   13 +
- .../apache2-2.4.2/apache-configure_perlbin.patch   |   37 +++
- .../apache2-2.4.2/apache-ssl-ltmain-rpath.patch    |   76 +++++
- .../apache2/apache2-2.4.2/fix-libtool-name.patch   |   55 +++
- .../apache2-2.4.2/httpd-2.4.1-corelimit.patch      |   37 +++
- .../apache2/apache2-2.4.2/httpd-2.4.1-export.patch |   22 ++
- .../apache2-2.4.2/httpd-2.4.1-selinux.patch        |   63 ++++
- .../apache2-2.4.2/httpd-2.4.2-r1326980+.patch      |   74 +++++
- .../apache2-2.4.2/httpd-2.4.2-r1327036+.patch      |   87 +++++
- .../apache2-2.4.2/httpd-2.4.2-r1332643.patch       |  260 +++++++++++++++
- .../apache2-2.4.2/httpd-2.4.2-r1337344+.patch      |  350 ++++++++++++++++++++
- .../apache2-2.4.2/httpd-2.4.2-restart.patch        |   35 ++
- .../replace-lynx-to-curl-in-apachectl-script.patch |   52 +++
- .../apache2/apache2-2.4.2/server-makefile.patch    |   11 +
- .../recipes-httpd/apache2/apache2-native_2.4.2.bb  |   43 +++
- .../recipes-httpd/apache2/apache2_2.4.2.bb         |  130 ++++++++
- meta-webserver/recipes-httpd/apache2/files/init    |   63 ++++
- .../recipes-php/modphp/files/70_mod_php5.conf      |   12 +
- .../recipes-php/modphp/files/configure.patch       |   11 +
- .../recipes-php/modphp/files/pthread-check.patch   |   64 ++++
- meta-webserver/recipes-php/modphp/modphp5.inc      |   91 +++++
- meta-webserver/recipes-php/modphp/modphp_5.3.14.bb |    5 +
- meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb  |   29 ++
- 25 files changed, 1674 insertions(+)
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-webserver/COPYING.MIT     |   17 +++++++++++++++++
+ meta-webserver/README          |   37 +++++++++++++++++++++++++++++++++++++
+ meta-webserver/conf/layer.conf |   13 +++++++++++++
+ 3 files changed, 67 insertions(+)
  create mode 100644 meta-webserver/COPYING.MIT
  create mode 100644 meta-webserver/README
  create mode 100644 meta-webserver/conf/layer.conf
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/apache-configure_perlbin.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/apache-ssl-ltmain-rpath.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/fix-libtool-name.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-corelimit.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-export.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-selinux.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1326980+.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1327036+.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1332643.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1337344+.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-restart.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/replace-lynx-to-curl-in-apachectl-script.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/server-makefile.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-native_2.4.2.bb
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2_2.4.2.bb
- create mode 100755 meta-webserver/recipes-httpd/apache2/files/init
- create mode 100644 meta-webserver/recipes-php/modphp/files/70_mod_php5.conf
- create mode 100644 meta-webserver/recipes-php/modphp/files/configure.patch
- create mode 100644 meta-webserver/recipes-php/modphp/files/pthread-check.patch
- create mode 100644 meta-webserver/recipes-php/modphp/modphp5.inc
- create mode 100644 meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
- create mode 100644 meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb
 
+diff --git a/meta-webserver/COPYING.MIT b/meta-webserver/COPYING.MIT
+new file mode 100644
+index 0000000..fb950dc
+--- /dev/null
++++ b/meta-webserver/COPYING.MIT
+@@ -0,0 +1,17 @@
++Permission is hereby granted, free of charge, to any person obtaining a copy 
++of this software and associated documentation files (the "Software"), to deal 
++in the Software without restriction, including without limitation the rights 
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
++copies of the Software, and to permit persons to whom the Software is 
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in 
++all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
++THE SOFTWARE.
+diff --git a/meta-webserver/README b/meta-webserver/README
+new file mode 100644
+index 0000000..47136fb
+--- /dev/null
++++ b/meta-webserver/README
+@@ -0,0 +1,37 @@
++meta-webserver
++==============
++
++This layer provides support for building web servers, web-based
++applications and related software.
++
++
++
++Dependencies
++------------
++
++This layer depends on:
++
++URI: git://git.openembedded.org/openembedded-core
++branch: master
++revision: HEAD
++
++
++
++Maintenance
++-----------
++
++Send patches / pull requests to openembedded-devel@lists.openembedded.org
++with '[meta-webserver]' in the subject.
++
++Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
++
++
++License
++-------
++
++All metadata is MIT licensed unless otherwise stated. Source code included
++in tree for individual recipes is under the LICENSE stated in each recipe
++(.bb file) unless otherwise stated.
++
++This README document is Copyright (C) 2012 Intel Corporation.
++
+diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
+new file mode 100644
+index 0000000..6f1855b
+--- /dev/null
++++ b/meta-webserver/conf/layer.conf
+@@ -0,0 +1,13 @@
++# Layer configuration for meta-webserver layer
++# Copyright 2012 Intel Corporation
++
++# We have a conf and classes directory, add to BBPATH
++BBPATH .= ":${LAYERDIR}"
++
++# We have various recipe-* directories, add to BBFILES
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++
++BBFILE_COLLECTIONS += "webserver"
++BBFILE_PATTERN_webserver := "^${LAYERDIR}/"
++BBFILE_PRIORITY_webserver = "6"
++
 -- 
 1.7.9.5
 
