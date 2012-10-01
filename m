@@ -1,37 +1,20 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TIhMO-0000Av-3l
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TIiqe-000383-Ed
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Oct 2012 16:52:40 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hj13so2280088wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2012 07:39:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=VOIwPfRZYW4R5cxJm7+ozScFBh+nLEMZEshU3xkC3GU=;
-	b=x8ewzHlbfeVPKC6GuWvPvmpBJcHd9molS4wI4h74tv5o7UxcAi+zEdSkr88NMo8jVP
-	27fwqjS1gY3iVSZtCagJ6vqYVozWR3ELB38ugO4423G1xVX9YJQU4yl0ydhYItTZ/cTt
-	abevgI/WluZxycY36I4MZJXjcRBCYrjra2f/oheDEXQAT0Uh+cN5GjszLxPIN9hTGhJg
-	oU72z7zoZ69m326vUHbKToheZUUXrwiCqmrp/kD/qlYTjhjA5WYJFMEdlDyi9U7ftYzD
-	r5VeEsK31rexwz/EFl6/gwMKtY9GG2QtN84dApXYjEmENty/aK6jggKguxuKH1isxzg2
-	ulmQ==
-Received: by 10.216.194.38 with SMTP id l38mr7844216wen.80.1349102383275;
-	Mon, 01 Oct 2012 07:39:43 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id gm7sm6361398wib.10.2012.10.01.07.39.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 01 Oct 2012 07:39:42 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 01 Oct 2012 18:28:00 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Oct 2012 09:15:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,517,1344236400"; d="scan'208";a="229137523"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.40])
+	by fmsmga002.fm.intel.com with ESMTP; 01 Oct 2012 09:15:01 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Oct 2012 16:38:50 +0200
-Message-Id: <aa65c68a35c3855ed81c2fae46b0cb7941724a8d.1349102278.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12
-In-Reply-To: <cover.1349102278.git.Martin.Jansa@gmail.com>
-References: <cover.1349102278.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1349102278.git.Martin.Jansa@gmail.com>
-References: <cover.1349102278.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] portaudio: update SRC_URI
+Date: Mon,  1 Oct 2012 17:14:52 +0100
+Message-Id: <cover.1349107616.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-webserver][PATCH 0/6] Add meta-webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +28,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2012 14:52:40 -0000
+X-List-Received-Date: Mon, 01 Oct 2012 16:28:00 -0000
 
-* http://www.portaudio.com/usingsvn.html:
-  Note that we are in the process of migrating from Trac on portaudio.com to Assembla. (1/24/12)
-* old repo seems gone now
+So finally I have got this into a working state; apologies for the
+delay. There were a number of issues affecting cross-compilation as well
+as some problems with the initial configuration; these should now be
+addressed. We may wish to look at a more standard directory layout for
+Apache as the default one doesn't seem to be used by most distributions;
+we can look at this later - for now let's get the recipes out there so
+people can try them out.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I know there are a few people waiting to submit additional recipes for
+this layer and I expect we will also want to look at moving some
+web-server related recipes from meta-oe into here at some point in the
+near future.
 
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-index 312ae60..b35d1d8 100644
---- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-@@ -6,7 +6,7 @@ SRCREV = "1387"
- PV = "v19+svnr${SRCPV}"
- PR = "r0"
- 
--SRC_URI = "svn://www.portaudio.com/repos/portaudio;module=trunk;protocol=http"
-+SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
- S = "${WORKDIR}/trunk"
- 
- inherit autotools
+
+The following changes since commit 7bfff4b1d6b0067ddabf2474320e3e78795b2b4f:
+
+  uhd,fuse: Fix misplaced quotations (2012-09-28 22:50:42 +0200)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/meta-webserver-add
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/meta-webserver-add
+
+Paul Eggleton (6):
+  Add meta-webserver layer
+  apache2: add from OE-Classic
+  modphp: add from OE-Classic
+  apache2: update to version 2.4.2 and fix
+  modphp: update to 5.3.14 and fix
+  xdebug: add new recipe
+
+ meta-webserver/COPYING.MIT                         |   17 +
+ meta-webserver/README                              |   37 +++
+ meta-webserver/conf/layer.conf                     |   13 +
+ .../apache2-2.4.2/apache-configure_perlbin.patch   |   37 +++
+ .../apache2-2.4.2/apache-ssl-ltmain-rpath.patch    |   76 +++++
+ .../apache2/apache2-2.4.2/fix-libtool-name.patch   |   55 +++
+ .../apache2-2.4.2/httpd-2.4.1-corelimit.patch      |   37 +++
+ .../apache2/apache2-2.4.2/httpd-2.4.1-export.patch |   22 ++
+ .../apache2-2.4.2/httpd-2.4.1-selinux.patch        |   63 ++++
+ .../apache2-2.4.2/httpd-2.4.2-r1326980+.patch      |   74 +++++
+ .../apache2-2.4.2/httpd-2.4.2-r1327036+.patch      |   87 +++++
+ .../apache2-2.4.2/httpd-2.4.2-r1332643.patch       |  260 +++++++++++++++
+ .../apache2-2.4.2/httpd-2.4.2-r1337344+.patch      |  350 ++++++++++++++++++++
+ .../apache2-2.4.2/httpd-2.4.2-restart.patch        |   35 ++
+ .../replace-lynx-to-curl-in-apachectl-script.patch |   52 +++
+ .../apache2/apache2-2.4.2/server-makefile.patch    |   11 +
+ .../recipes-httpd/apache2/apache2-native_2.4.2.bb  |   43 +++
+ .../recipes-httpd/apache2/apache2_2.4.2.bb         |  130 ++++++++
+ meta-webserver/recipes-httpd/apache2/files/init    |   63 ++++
+ .../recipes-php/modphp/files/70_mod_php5.conf      |   12 +
+ .../recipes-php/modphp/files/configure.patch       |   11 +
+ .../recipes-php/modphp/files/pthread-check.patch   |   64 ++++
+ meta-webserver/recipes-php/modphp/modphp5.inc      |   91 +++++
+ meta-webserver/recipes-php/modphp/modphp_5.3.14.bb |    5 +
+ meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb  |   29 ++
+ 25 files changed, 1674 insertions(+)
+ create mode 100644 meta-webserver/COPYING.MIT
+ create mode 100644 meta-webserver/README
+ create mode 100644 meta-webserver/conf/layer.conf
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/apache-configure_perlbin.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/apache-ssl-ltmain-rpath.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/fix-libtool-name.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-corelimit.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-export.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.1-selinux.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1326980+.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1327036+.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1332643.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-r1337344+.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/httpd-2.4.2-restart.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/replace-lynx-to-curl-in-apachectl-script.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-2.4.2/server-makefile.patch
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2-native_2.4.2.bb
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2_2.4.2.bb
+ create mode 100755 meta-webserver/recipes-httpd/apache2/files/init
+ create mode 100644 meta-webserver/recipes-php/modphp/files/70_mod_php5.conf
+ create mode 100644 meta-webserver/recipes-php/modphp/files/configure.patch
+ create mode 100644 meta-webserver/recipes-php/modphp/files/pthread-check.patch
+ create mode 100644 meta-webserver/recipes-php/modphp/modphp5.inc
+ create mode 100644 meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
+ create mode 100644 meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb
+
 -- 
-1.7.12
+1.7.9.5
 
 
 
