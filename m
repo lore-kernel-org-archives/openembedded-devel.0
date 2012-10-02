@@ -1,34 +1,23 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from zk223.dresearch-fe.de ([217.92.177.116])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TIy3P-0004b3-Dd
+	(envelope-from <sledz@dresearch.de>) id 1TJ3H0-00031U-7L
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Oct 2012 10:42:11 +0200
-Received: by bkcjk7 with SMTP id jk7so4727021bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Oct 2012 01:29:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=JLhJnJTHfCG/o5VewrwuGArgKwGP0XYYDYm3h9/8xE4=;
-	b=V9gFhBwe+yXgdYTTxknSZ5A6hsOAEWZDNt1vBICpzXvluKczZARZXSPCyAcSFqH2/G
-	R1FPKh7JaOfurFvDDXnsNEZ096NXm5FpEVcySoOyePGujs6DqfUAuR3HsHBhr1WnnKIH
-	xgp5B/OAX/lfLF1zfVxyiR5P0GC8cEvouE9IbTiNGLl3ieX+hvlKEgnYKXjc9IAjDnTA
-	fLuFzr/QR/hHBKTnjpzKn0U7ncnp77q3d6KNvFCBQ/xL7lPNkE2lhHePba7KSX81D7+G
-	Ql22CgVjR0okPQT4LcjmJFG2SygdvDwmdmoPyvU+WfKieKnfZXE59Fqw+LPljERE5/0h
-	VjBw==
-Received: by 10.204.4.149 with SMTP id 21mr6362942bkr.122.1349166553488;
-	Tue, 02 Oct 2012 01:29:13 -0700 (PDT)
-Received: from s-stirtzel-linux.zera.local
-	(ip-95-222-156-96.unitymediagroup.de. [95.222.156.96])
-	by mx.google.com with ESMTPS id hy11sm332609bkc.5.2012.10.02.01.29.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 02 Oct 2012 01:29:12 -0700 (PDT)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Oct 2012 10:28:55 +0200
-Message-Id: <1349166535-14325-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH] Maliit: Add initial recipes
+	Tue, 02 Oct 2012 16:16:34 +0200
+Received: from fsc-480-012-88.intern.dresearch.de
+	(fsc-480-012-88.internal.dresearch-fe.de [172.29.23.5])
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id 3CA4FE02AA;
+	Tue,  2 Oct 2012 13:57:40 +0000 (UTC)
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 1002)
+	id 1B97972031; Tue,  2 Oct 2012 15:53:55 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Henning Heinold <h.heinold@tarent.de>, Tom Rini <tom.rini@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Oct 2012 15:53:50 +0200
+Message-Id: <3cc90251ccf802274a95f736784f532e21166afb.1349185327.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <cover.1349185326.git.sledz@dresearch-fe.de>
+References: <cover.1349185326.git.sledz@dresearch-fe.de>
+Subject: [2011.03-maintenance 1/2] jamvm: reorganize metadata to simplify backport from meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,239 +31,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2012 08:42:11 -0000
+X-List-Received-Date: Tue, 02 Oct 2012 14:16:34 -0000
 
-Maliit is a Qt based virtual keyboard under liberal license (LGPLv2.1 / BSD)
-The inputmethod framework from Qt is used and it supports gtk-immodules.
-It can also be used without dependencies to GTK+ (separate package for GTK+)
-
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 ---
- ...INSTALL_PRF-to-allow-the-build-with-opene.patch |   34 ++++++++
- ...LUGIN_PATH-to-allow-openembedded-to-build.patch |   34 ++++++++
- .../recipes-support/maliit/maliit-framework_git.bb |   86 ++++++++++++++++++++
- .../recipes-support/maliit/maliit-plugins_git.bb   |   34 ++++++++
- 4 files changed, 188 insertions(+)
- create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
- create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
- create mode 100644 meta-oe/recipes-support/maliit/maliit-framework_git.bb
- create mode 100644 meta-oe/recipes-support/maliit/maliit-plugins_git.bb
+ recipes/jamvm/files/jamvm_1.5.0-initial.patch      |   91 --------------------
+ .../jamvm_1.4.5-initial.patch                      |    0
+ recipes/jamvm/{files => jamvm}/debian-jni.patch    |    0
+ .../jamvm-1.3.1-size-defaults.patch                |    0
+ .../jamvm-1.5.3-jni_h-noinst.patch                 |    0
+ 5 files changed, 91 deletions(-)
+ delete mode 100644 recipes/jamvm/files/jamvm_1.5.0-initial.patch
+ rename recipes/jamvm/{files => jamvm-initial}/jamvm_1.4.5-initial.patch (100%)
+ rename recipes/jamvm/{files => jamvm}/debian-jni.patch (100%)
+ rename recipes/jamvm/{files => jamvm}/jamvm-1.3.1-size-defaults.patch (100%)
+ rename recipes/jamvm/{files => jamvm}/jamvm-1.5.3-jni_h-noinst.patch (100%)
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
-new file mode 100644
-index 0000000..acd9a57
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
-@@ -0,0 +1,34 @@
-+From 33554f9b3fd493c7e28617fd01466ffa87251f27 Mon Sep 17 00:00:00 2001
-+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+Date: Wed, 1 Aug 2012 13:21:51 +0200
-+Subject: [PATCH] Fix MALIIT_INSTALL_PRF to allow the build with openembedded
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+---
-+ config.pri |    8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/config.pri b/config.pri
-+index b037b8c..43409f3 100644
-+--- a/config.pri
-++++ b/config.pri
-+@@ -161,9 +161,11 @@ contains(QT_MAJOR_VERSION, 4) {
-+     QT_WIDGETS = gui widgets
-+ }
-+ 
-+-MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
-+-local-install {
-+-    MALIIT_INSTALL_PRF = $$replace(MALIIT_INSTALL_PRF, $$[QT_INSTALL_PREFIX], $$PREFIX)
-++isEmpty(MALIIT_INSTALL_PRF) {
-++    MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
-++    local-install {
-++        MALIIT_INSTALL_PRF = $$replace(MALIIT_INSTALL_PRF, $$[QT_INSTALL_PREFIX], $$PREFIX)
-++    }
-+ }
-+ 
-+ defineTest(outputFile) {
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
-new file mode 100644
-index 0000000..830e6de
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
-@@ -0,0 +1,34 @@
-+From fb6acbd2af9ed288c1c4f4200fc73d8d9955486a Mon Sep 17 00:00:00 2001
-+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+Date: Wed, 1 Aug 2012 13:33:10 +0200
-+Subject: [PATCH] Fix QT_IM_PLUGIN_PATH to allow openembedded to build Maliit
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+---
-+ input-context/input-context.pri |   10 ++++++----
-+ 1 file changed, 6 insertions(+), 4 deletions(-)
-+
-+diff --git a/input-context/input-context.pri b/input-context/input-context.pri
-+index d94e6a3..d460e70 100644
-+--- a/input-context/input-context.pri
-++++ b/input-context/input-context.pri
-+@@ -25,8 +25,10 @@ for(OPTION,$$list($$lower($$COV_OPTION))){
-+ 
-+ QMAKE_CLEAN += $$OBJECTS_DIR/*.gcno $$OBJECTS_DIR/*.gcda
-+ 
-+-QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
-+-QT_PREFIX = $$[QT_INSTALL_PREFIX]
-+-local-install {
-+-    QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
-++isEmpty(QT_IM_PLUGIN_PATH) {
-++    QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
-++    QT_PREFIX = $$[QT_INSTALL_PREFIX]
-++    local-install {
-++        QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
-++    }
-+ }
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-new file mode 100644
-index 0000000..3f50d1b
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-@@ -0,0 +1,86 @@
-+DESCRIPTION = "A virtual keyboard for touch-screen based user interfaces"
-+HOMEPAGE = "https://wiki.maliit.org/Main_Page"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
-+
-+inherit autotools qt4x11
-+
-+
-+SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
-+    file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
-+    file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
-+    "
-+
-+SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
-+PV = "0.92.3+git${SRCPV}"
-+
-+
-+PACKAGES =+ "\
-+    ${PN}-gtk \
-+    "
-+
-+# Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
-+RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
-+
-+RRECOMMENDS_${PN} = "maliit-plugins"
-+
-+
-+FILES_${PN} += "\
-+    ${libdir}/maliit/plugins-*/factories/libmaliit-plugins-quick-factory-*.so \
-+    ${libdir}/qt4/plugins/inputmethods/*.so \
-+    "
-+
-+FILES_${PN}-dbg += "\
-+    ${libdir}/maliit-framework-tests \
-+    ${libdir}/gtk-*/*/immodules/.debug \
-+    ${libdir}/maliit/plugins-*/factories/.debug \
-+    ${libdir}/qt4/plugins/.debug \
-+    ${libdir}/qt4/plugins/inputmethods/.debug \
-+    "
-+
-+FILES_${PN}-dev += "${datadir}/qt4"
-+
-+FILES_${PN}-gtk +="\
-+    ${bindir}/maliit-exampleapp-gtk* \
-+    \
-+    ${libdir}/gtk-*/*/immodules/libim-maliit.so\
-+    "
-+
-+EXTRA_QMAKEVARS_PRE = "\
-+    PREFIX=${prefix} \
-+    LIBDIR=${libdir} \
-+    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
-+    MALIIT_INSTALL_PRF=${datadir}/qt4/mkspecs/features \
-+    SCHEMADIR=${sysconfdir}/gconf/schemas \
-+    CONFIG+=disable-gconf \
-+    CONFIG+=disable-gtk-cache-update \
-+    CONFIG+=local-install \
-+    "
-+
-+do_install() {
-+    cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
-+
-+    #Fix absolute paths
-+    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-framework.prf
-+    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-plugins.prf
-+}
-+
-+
-+
-+# Update the inputmethod modules in gtk
-+pkg_postinst_${PN}-gtk() {
-+if [ "x$D" != "x" ]; then
-+    exit 1
-+fi
-+gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-+}
-+
-+pkg_postrm_${PN}-gtk() {
-+if [ "x$D" != "x" ]; then
-+    exit 1
-+fi
-+gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-+}
-+
-+S= "${WORKDIR}/git"
-diff --git a/meta-oe/recipes-support/maliit/maliit-plugins_git.bb b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
-new file mode 100644
-index 0000000..932c0ae
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION = "Plugins for a virtual keyboard for touch-screen based user interfaces"
-+HOMEPAGE = "https://wiki.maliit.org/Main_Page"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f29b21caa8e460097bfad9c026a33621"
-+
-+inherit autotools qt4x11
-+
-+DEPENDS = "maliit-framework"
-+
-+SRC_URI = "git://gitorious.org/maliit/maliit-plugins.git;branch=master"
-+
-+SRCREV = "0760e585df494b394df1b887e5138ffef19c481f"
-+PV = "0.92.3+git${SRCPV}"
-+
-+EXTRA_QMAKEVARS_PRE = "\
-+    PREFIX=${prefix} \
-+    LIBDIR=${libdir} \
-+    "
-+
-+FILES_${PN} += "\
-+    ${libdir}/maliit \
-+    ${datadir} \
-+    "
-+
-+FILES_${PN}-dbg += "\
-+    ${libdir}/maliit/plugins-*/.debug \
-+    "
-+
-+S= "${WORKDIR}/git"
-+
-+do_install() {
-+  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
-+}
-\ No newline at end of file
+diff --git a/recipes/jamvm/files/jamvm_1.5.0-initial.patch b/recipes/jamvm/files/jamvm_1.5.0-initial.patch
+deleted file mode 100644
+index 1f63dba..0000000
+--- a/recipes/jamvm/files/jamvm_1.5.0-initial.patch
++++ /dev/null
+@@ -1,91 +0,0 @@
+-Index: jamvm-1.5.0/configure.ac
+-===================================================================
+---- jamvm-1.5.0.orig/configure.ac	2007-12-20 00:01:08.000000000 +0100
+-+++ jamvm-1.5.0/configure.ac	2007-12-20 00:03:40.000000000 +0100
+-@@ -22,7 +22,7 @@
+- dnl Process this file with autoconf to produce a configure script.
+- 
+- AC_INIT(src/jam.c)
+--AM_INIT_AUTOMAKE(jamvm, 1.5.0)
+-+AM_INIT_AUTOMAKE(jamvm-initial, 1.5.0)
+- AC_CONFIG_HEADERS([src/config.h])
+- AC_PREFIX_DEFAULT(/usr/local/jamvm)
+- 
+-Index: jamvm-1.5.0/java-initial
+-===================================================================
+---- /dev/null	1970-01-01 00:00:00.000000000 +0000
+-+++ jamvm-1.5.0/java-initial	2007-12-20 00:03:27.000000000 +0100
+-@@ -0,0 +1,14 @@
+-+#!/bin/sh
+-+#
+-+# Wrapper which (almost) silently restarts the VM in case of segfaults.
+-+
+-+redo_from_start=1;
+-+while [ $redo_from_start -eq 1 ]; do
+-+    echo "Running JamVM-initial: ${@}"
+-+    redo_from_start=0;
+-+    jamvm-initial ${1+"$@"}
+-+    if [ $? -eq 139 ]; then
+-+        echo "JamVM-initial crashed - silently trying again"
+-+        redo_from_start=1;
+-+    fi
+-+done
+-Index: jamvm-1.5.0/lib/Makefile.am
+-===================================================================
+---- jamvm-1.5.0.orig/lib/Makefile.am	2007-12-20 00:05:24.000000000 +0100
+-+++ jamvm-1.5.0/lib/Makefile.am	2007-12-20 00:05:28.000000000 +0100
+-@@ -19,7 +19,7 @@
+- ## Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+- ##
+- 
+--CP_LIB_DIR = ${with_classpath_install_dir}/share/classpath
+-+CP_LIB_DIR = ${with_classpath_install_dir}/share/classpath-initial
+- GLIBJ_ZIP  = ${CP_LIB_DIR}/glibj.zip
+- 
+- SUBDIRS = jamvm java gnu sun
+-Index: jamvm-1.5.0/src/class.h
+-===================================================================
+---- jamvm-1.5.0.orig/src/class.h	2007-12-20 00:06:34.000000000 +0100
+-+++ jamvm-1.5.0/src/class.h	2007-12-20 00:16:41.000000000 +0100
+-@@ -39,11 +39,11 @@
+-    separate class files in a directory structure */
+- 
+- #ifdef USE_ZIP
+--#define JAMVM_CLASSES INSTALL_DIR"/share/jamvm/classes.zip"
+--#define CLASSPATH_CLASSES CLASSPATH_INSTALL_DIR"/share/classpath/glibj.zip"
+-+#define JAMVM_CLASSES CLASSPATH_INSTALL_DIR"/share/jamvm-initial/classes.zip"
+-+#define CLASSPATH_CLASSES CLASSPATH_INSTALL_DIR"/share/classpath-initial/glibj.zip"
+- #else
+--#define JAMVM_CLASSES INSTALL_DIR"/share/jamvm/classes"
+--#define CLASSPATH_CLASSES CLASSPATH_INSTALL_DIR"/share/classpath"
+-+#define JAMVM_CLASSES CLASSPATH_INSTALL_DIR"/share/jamvm-initial/classes"
+-+#define CLASSPATH_CLASSES CLASSPATH_INSTALL_DIR"/share/classpath-initial"
+- #endif
+- 
+- #define DFLT_BCP JAMVM_CLASSES":"CLASSPATH_CLASSES
+-Index: jamvm-1.5.0/src/dll.c
+-===================================================================
+---- jamvm-1.5.0.orig/src/dll.c	2007-12-20 00:01:24.000000000 +0100
+-+++ jamvm-1.5.0/src/dll.c	2007-12-20 00:03:27.000000000 +0100
+-@@ -294,7 +294,7 @@
+- }
+- 
+- char *getBootDllPath() {
+--    return CLASSPATH_INSTALL_DIR"/lib/classpath";
+-+    return CLASSPATH_INSTALL_DIR"/lib/classpath-initial";
+- }
+- 
+- char *getDllName(char *name) {
+-Index: jamvm-1.5.0/src/Makefile.am
+-===================================================================
+---- jamvm-1.5.0.orig/src/Makefile.am	2007-12-20 00:21:37.000000000 +0100
+-+++ jamvm-1.5.0/src/Makefile.am	2007-12-20 00:21:46.000000000 +0100
+-@@ -23,7 +23,7 @@
+- DIST_SUBDIRS = os arch interp
+- 
+- bin_PROGRAMS = jamvm
+--include_HEADERS = jni.h
+-+noinst_HEADERS = jni.h
+- 
+- lib_LTLIBRARIES = libjvm.la
+- noinst_LTLIBRARIES = libcore.la
+diff --git a/recipes/jamvm/files/jamvm_1.4.5-initial.patch b/recipes/jamvm/jamvm-initial/jamvm_1.4.5-initial.patch
+similarity index 100%
+rename from recipes/jamvm/files/jamvm_1.4.5-initial.patch
+rename to recipes/jamvm/jamvm-initial/jamvm_1.4.5-initial.patch
+diff --git a/recipes/jamvm/files/debian-jni.patch b/recipes/jamvm/jamvm/debian-jni.patch
+similarity index 100%
+rename from recipes/jamvm/files/debian-jni.patch
+rename to recipes/jamvm/jamvm/debian-jni.patch
+diff --git a/recipes/jamvm/files/jamvm-1.3.1-size-defaults.patch b/recipes/jamvm/jamvm/jamvm-1.3.1-size-defaults.patch
+similarity index 100%
+rename from recipes/jamvm/files/jamvm-1.3.1-size-defaults.patch
+rename to recipes/jamvm/jamvm/jamvm-1.3.1-size-defaults.patch
+diff --git a/recipes/jamvm/files/jamvm-1.5.3-jni_h-noinst.patch b/recipes/jamvm/jamvm/jamvm-1.5.3-jni_h-noinst.patch
+similarity index 100%
+rename from recipes/jamvm/files/jamvm-1.5.3-jni_h-noinst.patch
+rename to recipes/jamvm/jamvm/jamvm-1.5.3-jni_h-noinst.patch
 -- 
-1.7.9.5
+1.7.10.4
 
 
 
