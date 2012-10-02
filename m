@@ -1,26 +1,32 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TJ42s-0004MI-Pv
+	(envelope-from <martin.jansa@gmail.com>) id 1TJ5V1-0006UW-KR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Oct 2012 17:06:02 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 02 Oct 2012 07:52:45 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,523,1344236400"; d="scan'208";a="200632960"
-Received: from unknown (HELO helios.localnet) ([10.252.122.26])
-	by orsmga001.jf.intel.com with ESMTP; 02 Oct 2012 07:53:01 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 02 Oct 2012 15:53 +0100
-Message-ID: <1750245.JB55VjOTAz@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
-In-Reply-To: <k4eudj$5hj$1@ger.gmane.org>
-References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-	<k4eudj$5hj$1@ger.gmane.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 0/6] Add meta-webserver
+	Tue, 02 Oct 2012 18:39:11 +0200
+Received: by mail-wi0-f171.google.com with SMTP id hj13so961543wib.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Oct 2012 09:26:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=SrqDzICkqRhLPePrXI3E0tHEEruwJ0Mq/Gau+oG+Amk=;
+	b=z6TPsdTO7ztNOmlK3nQa/afPuvImk73DYIy5gq5dL/wynlQ/HSsWlzxG14MNLikZUt
+	p1yn1zNTHdxS9f0DqIAqCzmTIWrH3AVe7LsTh86/b1Gdw23WBmQm59wWJyaEsgFzKfrQ
+	aL1EMZTYZO7FDiKZStSDM3OClXmYsOCdnMhIHJw4ySPVA7K0kh8np7wJmXGpLZnx63Xl
+	C6IRiQwSrHC2G0BMvSAB+S+SRtB7/dXe+vtYNgB7oa1O/u2jAdiNE53BWgIrhBFJwczc
+	pOfETvIoNEcFvZ5z2ID97IZ5i8NNPpHSjEnEUIYq1GedtOMkPy35xDM01wsn7FHx9Nma
+	UHDg==
+Received: by 10.216.147.4 with SMTP id s4mr10483271wej.9.1349195173282;
+	Tue, 02 Oct 2012 09:26:13 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id b7sm22248429wiz.3.2012.10.02.09.26.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 02 Oct 2012 09:26:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Oct 2012 18:26:09 +0200
+Message-Id: <1349195169-1813-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12
+Subject: [meta-oe][PATCH] qt4: add bbappends also for 4.8.3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2012 15:06:03 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 02 Oct 2012 16:39:11 -0000
 
-On Tuesday 02 October 2012 16:40:55 Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Op 01-10-12 18:14, Paul Eggleton schreef:
-> > So finally I have got this into a working state; apologies for the delay.
-> > There were a number of issues affecting cross-compilation as well as some
-> > problems with the initial configuration; these should now be addressed.
-> > We may wish to look at a more standard directory layout for Apache as the
-> > default one doesn't seem to be used by most distributions; we can look at
-> > this later - for now let's get the recipes out there so people can try
-> > them out.
-> > 
-> > I know there are a few people waiting to submit additional recipes for
-> > this layer and I expect we will also want to look at moving some
-> > web-server related recipes from meta-oe into here at some point in the
-> > near future.
-> 
-> How does this compare to meta-networking?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend | 6 ++++++
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend | 6 ++++++
+ 2 files changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+ create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
 
-It's separate; this focuses just on web-based items (on the server side). I'm
-not sure how much it will actually grow but you can imagine in the extreme
-case we could end up with a number of web servers, several standalone web
-admin interfaces, a bunch of web frameworks and related recipes for each of
-the latter. All of that would bloat out meta-networking a bit too much,
-hence this separate layer.
-
-I did send an RFC for this a couple of months ago, although the scope has
-been refined a little since then:
-
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg26071.html
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+new file mode 100644
+index 0000000..27cac11
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+@@ -0,0 +1,6 @@
++DEPENDS += "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
++PRINC := "${@int(PRINC) + 1}"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
+new file mode 100644
+index 0000000..27cac11
+--- /dev/null
++++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
+@@ -0,0 +1,6 @@
++DEPENDS += "mysql5 postgresql sqlite"
++QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
++QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
++                    -I${STAGING_INCDIR}/postgresql"
++
++PRINC := "${@int(PRINC) + 1}"
 -- 
+1.7.12
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
