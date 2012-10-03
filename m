@@ -1,42 +1,36 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TJNaD-0006um-9w
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 13:57:45 +0200
-Received: by mail-wg0-f41.google.com with SMTP id ds1so1095276wgb.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TJNeI-0007Nz-AM for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Oct 2012 14:01:58 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TJNRP-0005c0-Lk for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Oct 2012 13:48:39 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Oct 2012 13:48:39 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2012 04:44:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=dImk9ivh7iif5ElLxsTJPoPuRlh+lc+FrZZVcN0d6Fw=;
-	b=J/Cbr4wVSc0FvYjVwyFCOiYLcEdGcLizMCAg8aCI3GTdY67WwIxblLr69ouOFsDo36
-	Bjz1AzuyuPSzwXXCaKZRK1tqwaKR99dfzddPya0Jl5jH8WDpNBN7GGPcLpr4dSKpvrxT
-	1TWpnHOhubqNtjgVM1UWkJIZ/RrfWPUZ66PcYzZ9NQfaotSrl+3Ehn+A2HjM0YhfAFxh
-	PGCz/AxmgLkVT2eQOZSWPMAPiOkFJE6XNTtDbyeNycV0YvXI3p+53kZ1xCJ2ksOak5EC
-	IpgY0REYyOC4fXcC22pVJCPRnJH0ItK6CNUo4y+CBGyPruM+HKkm24iPq3QSZyJlOuXM
-	UlIQ==
-Received: by 10.180.87.42 with SMTP id u10mr4463761wiz.0.1349264685820;
-	Wed, 03 Oct 2012 04:44:45 -0700 (PDT)
-Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id bn7sm8015508wib.8.2012.10.03.04.44.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 03 Oct 2012 04:44:44 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
+	Wed, 03 Oct 2012 13:48:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <9997133.uIUMnIOYLI@helios>
-Date: Wed, 3 Oct 2012 13:44:45 +0200
-Message-Id: <F687ABE0-E04A-4BDC-8D78-DB7AD23E944B@dominion.thruhere.net>
+Date: Wed, 03 Oct 2012 13:47:52 +0200
+Message-ID: <k4h8l4$2d0$1@ger.gmane.org>
 References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-	<f4fa3e7556b5456ed8f9e5450669ab108bd08325.1349107616.git.paul.eggleton@linux.intel.com>
-	<k4h3gv$n4q$2@ger.gmane.org> <9997133.uIUMnIOYLI@helios>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1498)
-X-Gm-Message-State: ALoCoQkRFqmEh0D0Z/Q0IFQjS0hS929DgerJVQdtKE1ksw/f176iiEcl4IkFFfF4worh0/51fkzu
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 3/6] modphp: add from OE-Classic
+	<00be8d19fe238a3ef1df3371ab354b9122b56d2c.1349107616.git.paul.eggleton@linux.intel.com>
+	<k4h3jt$n4q$3@ger.gmane.org> <1913726.eYu8z7U0Ds@helios>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1913726.eYu8z7U0Ds@helios>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-webserver][PATCH 6/6] xdebug: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,19 +44,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2012 11:57:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Oct 2012 12:01:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 03-10-12 13:28, Paul Eggleton schreef:
+> On Wednesday 03 October 2012 12:21:51 Koen Kooi wrote:
+>> Op 01-10-12 18:14, Paul Eggleton schreef:
+>>> Add new recipe for the Xdebug PHP debugger/profiler.
+>>> 
+>>> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> --- 
+>>> meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb |   29 
+>>> +++++++++++++++++++++ 1 file changed, 29 insertions(+) create mode
+>>> 100644 meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb
+>>> 
+>>> diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb 
+>>> b/meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb new file mode
+>>> 100644 index 0000000..5bd374c --- /dev/null +++ 
+>>> b/meta-webserver/recipes-php/xdebug/xdebug_2.2.1.bb @@ -0,0 +1,29 @@ 
+>>> +SUMMARY = "Debugging and profiling extension for PHP"
+>> 
+>> Missing DESCRIPTION
+> 
+> No, this is deliberate - presumably you're aware that the default value
+> of DESCRIPTION is "${SUMMARY}" ? The opposite is not true, which leads to
+>  packages with useless summaries if you set DESCRIPTION and not SUMMARY;
+> so if it's just one line the single variable to set is SUMMARY. I know we
+> have a lot of recipes that have this issue; we should probably address
+> that on a wider basis.
+> 
+>>> +LICENSE = "Xdebug" +LIC_FILES_CHKSUM = 
+>>> "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16" + +DEPENDS = 
+>>> "modphp" + +PR = "r0"
+>> 
+>> default....
+> 
+> See reply to patch 2/6.
+
+Extra work for M1.4, but it's your sandbox to play in...
+
+>>> + +SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz" + 
+>>> +SRC_URI[md5sum] = "5e5c467e920240c20f165687d7ac3709"
+>>> +SRC_URI[sha256sum] =
+>>> "11d340eb7f87909a596bac054cc927df757dc2fc7c90b50a832c30e9bf84c9ad" + 
+>>> +inherit autotools + +EXTRA_OECONF += "--enable-xdebug 
+>>> -with-php-config=${STAGING_BINDIR_CROSS}/php-config" +
+>>> +do_configure() { +	${STAGING_BINDIR_CROSS}/phpize +	oe_runconf +}
+>> 
+>> Why not do autotools_do_configure?
+> 
+> Because AFAICT PHP modules are somewhat unusual when it comes to
+> configure, and totally break if you try to autoreconf. IIRC this was the
+> only way I could get the thing to build.
+
+Can you add a comment saying that? A lot of recipes in OE classic replace
+the configure step, but our autotools support has improved a lot, so a
+comment saying what is going wrong will help people updating the recipe.
 
 
-Op 3 okt. 2012, om 13:28 heeft Paul Eggleton =
-<paul.eggleton@linux.intel.com> het volgende geschreven:
 
-> On Wednesday 03 October 2012 12:20:16 Koen Kooi wrote:
->>=20
->=20
-> Already fixed in the patch following. (Did you look at those patches?)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Not at the time of the email, I went patch-by-patch.=20=
+iD8DBQFQbCXoMkyGM64RGpERAhBMAJ47+3mA0f3FwWl2NvK3h/joP/6FEQCcCH+y
+mt9mrA8R/2QKMkfHH51QG2I=
+=VWa7
+-----END PGP SIGNATURE-----
+
 
 
