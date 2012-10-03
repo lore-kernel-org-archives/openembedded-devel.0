@@ -1,42 +1,44 @@
 Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TJNXC-0006kY-A7
+	(envelope-from <koen@dominion.thruhere.net>) id 1TJNZ0-0006pj-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 13:54:38 +0200
-Received: by wgbdq11 with SMTP id dq11so4854567wgb.24
+	Wed, 03 Oct 2012 13:56:30 +0200
+Received: by wgbdq11 with SMTP id dq11so4855801wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2012 04:41:38 -0700 (PDT)
+	Wed, 03 Oct 2012 04:43:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:cc
 	:content-transfer-encoding:message-id:references:to:x-mailer
 	:x-gm-message-state;
-	bh=obZZhEMdq7zdTfJx0k5+vv3vk2/M5FyY2mKi4YqtVBY=;
-	b=Yo9QCa0qxpz2VZqMjnviYVtUkhk6c+ufo/BoXbOuJc17YhcXvLaL/70gE4mfCMBXuP
-	ZrPxjlgo/czuQP/R8tcffRlHvQzt81N/Jr3yDnDUMbwNRNQGNKcT8zCcQsUPXPry24uR
-	W+Q6N3chFK9BsIeWxYKe/ZmGNBsAPkkOx+/m1l1VtRlKzzs0e8F6RPL7CubgKgQGiS2U
-	KFVzrkNVHHS7NulWwgF3qN2Wk96R0goxLNsv65aD4qcRiiDuRbbJu0IeT7E0TZQwbMTo
-	BdmzbokdKvPDfu1p2iZIf+eMekEc4CychFFYZvNhqYwcjuZhbETUUotm27grr9RL7b9W
-	PA4w==
-Received: by 10.216.214.91 with SMTP id b69mr1066131wep.70.1349264498882;
-	Wed, 03 Oct 2012 04:41:38 -0700 (PDT)
+	bh=kmaUI54PatV5C4H1Xmygev1A4NUnDhLSy8rnCArfVxU=;
+	b=G3jBvrzrQGkH81W7T8o51zXiz/iKcnPv/gQkLR301s3jBOMzplHG9e2+gR8jWofh9S
+	+VBwrHreSga257lI0tPIsuLPgNsZJjhxs310SqBZr82+ExdaX/Shu13ImzQft8VcTVMu
+	L85yKE2Jo0pvH178szgIjvCekd0ay2d73frA3ZvJbVsQtFkaq5dkHDqkSbX8FrS4RFmD
+	fK9qQ6LLlqTJDklM4CZaedALjbn4PLPDFEhNDhu5Bbb1YgkDDvwzjKcJRYwWKC+RZJN8
+	rmxdyl3AN9ytGK1pIaE+fxQ9SN4HQfIVVMic/+JATzO2MSwIzrNPj8PPh9eyXPhr6Fx/
+	ChTQ==
+Received: by 10.216.193.158 with SMTP id k30mr1146866wen.89.1349264611191;
+	Wed, 03 Oct 2012 04:43:31 -0700 (PDT)
 Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id f1sm8968672wiy.2.2012.10.03.04.41.36
+	by mx.google.com with ESMTPS id cn6sm8006391wib.9.2012.10.03.04.43.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 03 Oct 2012 04:41:37 -0700 (PDT)
+	Wed, 03 Oct 2012 04:43:30 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4258940.BqvSfKhsZ3@helios>
-Date: Wed, 3 Oct 2012 13:41:38 +0200
-Message-Id: <8836BA14-373E-4530-8F81-9EE8DA000926@dominion.thruhere.net>
+In-Reply-To: <2386446.3zWsEst4ZG@helios>
+Date: Wed, 3 Oct 2012 13:43:30 +0200
+Message-Id: <DDBB0A17-7234-45BC-9D2E-E9C0ED7C4086@dominion.thruhere.net>
 References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-	<bc45dc7aa0affaab30b86764930897ac81d81bc2.1349107616.git.paul.eggleton@linux.intel.com>
-	<k4h3c4$n4q$1@ger.gmane.org> <4258940.BqvSfKhsZ3@helios>
+	<1403689.8imU91Pjgi@helios>
+	<8B480455-60FE-418C-9A98-DB281B347CE2@dominion.thruhere.net>
+	<2386446.3zWsEst4ZG@helios>
 To: Paul Eggleton <paul.eggleton@linux.intel.com>
 X-Mailer: Apple Mail (2.1498)
-X-Gm-Message-State: ALoCoQl7J3kFfeDuR6d4AfCyIh11QhcchYryN0r+XW9vCnWDy56sSTpMA4pSF8lhXhh3gf/ojH+9
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 2/6] apache2: add from OE-Classic
+X-Gm-Message-State: ALoCoQlDYTW0q5nq8Ve4GKBwJGgMgUeQqRobemNUKTm/xTyu7GEV0zp/oYAa/Q+D5V7mp9ofyPas
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver][PATCH 0/6] Add meta-webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2012 11:54:38 -0000
+X-List-Received-Date: Wed, 03 Oct 2012 11:56:30 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-Op 3 okt. 2012, om 13:28 heeft Paul Eggleton =
+Op 3 okt. 2012, om 13:29 heeft Paul Eggleton =
 <paul.eggleton@linux.intel.com> het volgende geschreven:
->>=20
->>> + +PR =3D "r0"
->>=20
->> that's the default, drop that
->=20
-> I'm sorry, but for reasons I've already stated on several occasions, I =
-won't=20
-> leave this out in any recipe in meta-webserver, nor anywhere else =
-where I'm=20
-> the maintainer.
->=20
-> Given that you often complain about people forgetting to bump PR, why =
-do you=20
-> insist that people should remove PR =3D "r0" when having it there =
-would be at=20
-> least slightly helpful in that regard?
 
-I haven't seen any evidence that having PR =3D r0 helps people with =
-that. Have a look at all the patches that were posted with missing PR =
-bumps, they almost all have PR present.=
+> On Wednesday 03 October 2012 13:27:41 Koen Kooi wrote:
+>> Op 3 okt. 2012 om 12:43 heeft Paul Eggleton =
+<paul.eggleton@linux.intel.com>=20
+> het volgende geschreven:
+>>> On Wednesday 03 October 2012 12:24:19 Koen Kooi wrote:
+>>>> Squash those "import" with the "fix" commits, no sense in having a =
+broken
+>>>> recipe in there.
+>>>=20
+>>> I'd rather not - there is sense in being clear about the changes, =
+because
+>>> there are a large number of them in this case.
+>>=20
+>> The broken recipes are still available in OE classic if people want =
+to
+>> compare them. I still don't get why you want to have broken recipes =
+in the
+>> tree at multiple points in your series.
+>=20
+> Because I want to easily see in "git blame" where particular lines =
+came from -=20
+> did I add them, or have they been around for ages?
+
+Does oe-core have the same flow for new recipes?=
 
 
