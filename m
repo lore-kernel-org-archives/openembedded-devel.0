@@ -1,27 +1,50 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-tx2.bigfish.com ([65.55.88.10]
+	helo=tx2outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TJPR9-0001qN-6o
+	(envelope-from <B29882@freescale.com>) id 1TJPpC-0006KI-GD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 15:56:31 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 03 Oct 2012 06:43:29 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,528,1344236400"; d="scan'208";a="229442231"
-Received: from unknown (HELO helios.localnet) ([10.252.122.52])
-	by fmsmga001.fm.intel.com with ESMTP; 03 Oct 2012 06:43:23 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 03 Oct 2012 14:43:22 +0100
-Message-ID: <5056040.jAUIlqh764@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
-In-Reply-To: <74B58CA1-2332-42D6-9652-4226D9484259@dominion.thruhere.net>
+	Wed, 03 Oct 2012 16:21:22 +0200
+Received: from mail263-tx2-R.bigfish.com (10.9.14.242) by
+	TX2EHSOBE010.bigfish.com (10.9.40.30) with Microsoft SMTP Server id
+	14.1.225.23; Wed, 3 Oct 2012 14:08:22 +0000
+Received: from mail263-tx2 (localhost [127.0.0.1])	by
+	mail263-tx2-R.bigfish.com (Postfix) with ESMTP id 104E2E8008C;
+	Wed,  3 Oct 2012 14:08:22 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -2
+X-BigFish: VS-2(zz98dI9371I1432Izz1202h1d1ah1d2ahzz8275bhz2dh2a8h668h839h8e2h8e3hd25hf0ah107ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441hbe9i1155h)
+Received: from mail263-tx2 (localhost.localdomain [127.0.0.1]) by mail263-tx2
+	(MessageSwitch) id 1349273298913037_11407;
+	Wed,  3 Oct 2012 14:08:18 +0000 (UTC)
+Received: from TX2EHSMHS033.bigfish.com (unknown [10.9.14.253])	by
+	mail263-tx2.bigfish.com (Postfix) with ESMTP id D3DBF700049;
+	Wed,  3 Oct 2012 14:08:18 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS033.bigfish.com
+	(10.9.99.133) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 3 Oct 2012 14:08:16 +0000
+Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.124]) by
+	039-SN1MMR1-004.039d.mgd.msft.net ([::1]) with mapi id 14.02.0309.003;
+	Wed, 3 Oct 2012 09:08:16 -0500
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-webserver][PATCH 0/6] Add meta-webserver
+Thread-Index: AQHNoXCI+KGHC5xNIkuWwpiUJTdGBw==
+Date: Wed, 3 Oct 2012 14:08:16 +0000
+Message-ID: <70CC66F5C30A414DADDA6973E4CA391A6CBF8D@039-SN1MPN1-001.039d.mgd.msft.net>
 References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
 	<1396458.ob1fernpZs@helios>
 	<74B58CA1-2332-42D6-9652-4226D9484259@dominion.thruhere.net>
+	<5056040.jAUIlqh764@helios>
+In-Reply-To: <5056040.jAUIlqh764@helios>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [70.112.201.132]
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+X-OriginatorOrg: freescale.com
+Cc: Koen Kooi <koen@dominion.thruhere.net>
 Subject: Re: [meta-webserver][PATCH 0/6] Add meta-webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,63 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2012 13:56:31 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 03 Oct 2012 14:21:22 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <18999A1B8C960B4EAC8BB41485F7A3B1@mgd.freescale.com>
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 03 October 2012 15:12:55 Koen Kooi wrote:
-> Op 3 okt. 2012, om 14:23 heeft Paul Eggleton <paul.eggleton@linux.intel.com> 
-het volgende geschreven:
-> > On Wednesday 03 October 2012 13:43:30 Koen Kooi wrote:
-> >> Op 3 okt. 2012, om 13:29 heeft Paul Eggleton
-> >> <paul.eggleton@linux.intel.com>> 
-> > het volgende geschreven:
-> >>> On Wednesday 03 October 2012 13:27:41 Koen Kooi wrote:
-> >>>> Op 3 okt. 2012 om 12:43 heeft Paul Eggleton
-> >>>> <paul.eggleton@linux.intel.com>
-> >>> 
-> >>> het volgende geschreven:
-> >>>>> On Wednesday 03 October 2012 12:24:19 Koen Kooi wrote:
-> >>>>>> Squash those "import" with the "fix" commits, no sense in having a
-> >>>>>> broken
-> >>>>>> recipe in there.
-> >>>>> 
-> >>>>> I'd rather not - there is sense in being clear about the changes,
-> >>>>> because
-> >>>>> there are a large number of them in this case.
-> >>>> 
-> >>>> The broken recipes are still available in OE classic if people want to
-> >>>> compare them. I still don't get why you want to have broken recipes in
-> >>>> the
-> >>>> tree at multiple points in your series.
-> >>> 
-> >>> Because I want to easily see in "git blame" where particular lines came
-> >>> from - did I add them, or have they been around for ages?
-> >> 
-> >> Does oe-core have the same flow for new recipes?
-> > 
-> > You already know the answer to this.
-> 
-> No I don't, actually.
+On Wed, Oct 3, 2012 at 8:43 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> The answer is no, it doesn't.
+>
+> I guess on reflection we probably ought to be consistent here though - fo=
+r
+> better or worse, this is not what has been done when pulling in recipes f=
+rom
+> OE-Classic for the rest of meta-openembedded. The commit message does alr=
+eady
+> list the changes from the original, and I'll concede that having just one
+> revision doesn't give a huge amount in the way of insight on previous ori=
+gin;
+> ultimately as you say, OE-Classic is still there as a reference for that.
+>
+> OK, I've squashed those commits out on the branch. Would it be worth me
+> posting a v2 after all these changes?
 
-The answer is no, it doesn't.
+Actually, this is one really annoying thing about OE. When people
+rename the file 'git blame' comes worthless. Is there a way around
+this?
 
-I guess on reflection we probably ought to be consistent here though - for 
-better or worse, this is not what has been done when pulling in recipes from 
-OE-Classic for the rest of meta-openembedded. The commit message does already 
-list the changes from the original, and I'll concede that having just one 
-revision doesn't give a huge amount in the way of insight on previous origin; 
-ultimately as you say, OE-Classic is still there as a reference for that.
+-M=
 
-OK, I've squashed those commits out on the branch. Would it be worth me 
-posting a v2 after all these changes?
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
