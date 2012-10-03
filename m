@@ -1,41 +1,27 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TJNJf-0006BC-Cu
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TJNKA-0006Fs-NJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 13:40:39 +0200
-Received: by eeit10 with SMTP id t10so3343650eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2012 04:27:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=references:mime-version:in-reply-to:content-type
-	:content-transfer-encoding:message-id:cc:x-mailer:from:subject:date
-	:to:x-gm-message-state;
-	bh=MVoj3zCMk4Q8DtUfd/A+f29306yypvPpghq1L2dD16I=;
-	b=WlN0pznIb+6tSiyZMCeLlDPlwlLnRqBpDM1+cZxK9lbQM1mZgMFbkl21Y3VHnHP9Fx
-	+15fI/99ohmUzqMS3yZEml/xILYGHn9j0uKQgZF1KXE6oOH4vzVorHmREwHFx7jA3LfV
-	/bTIzT6AeIG5a2IdOxykejAbq9P7UC/v/Y7iaBQi4OgC8Tbo9LSRuRDCc4Ll1MdgPfG+
-	7LGFCdYK10KMHODgjG6YA4ByvaYa1M5A5raLwzd8WWuO/QVcrTfT9u8z0aP+VfFck9DT
-	HsCNMaiJwUjyMdQnf9CXMdAQtFjhwALAuSMP0zsMEkaFMhxYc9uQAdVoPXYEsp20b/Qt
-	+Ceg==
-Received: by 10.14.4.198 with SMTP id 46mr2241209eej.11.1349263659835;
-	Wed, 03 Oct 2012 04:27:39 -0700 (PDT)
-Received: from [172.20.0.5] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id z3sm9309459eel.15.2012.10.03.04.27.37
-	(version=SSLv3 cipher=OTHER); Wed, 03 Oct 2012 04:27:38 -0700 (PDT)
+	Wed, 03 Oct 2012 13:41:10 +0200
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 03 Oct 2012 04:28:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,527,1344236400"; d="scan'208";a="229397586"
+Received: from unknown (HELO helios.localnet) ([10.252.122.52])
+	by fmsmga001.fm.intel.com with ESMTP; 03 Oct 2012 04:28:09 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 03 Oct 2012 12:28:08 +0100
+Message-ID: <9997133.uIUMnIOYLI@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
+In-Reply-To: <k4h3gv$n4q$2@ger.gmane.org>
 References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-	<k4h3oh$n4q$4@ger.gmane.org> <1403689.8imU91Pjgi@helios>
-Mime-Version: 1.0 (1.0)
-In-Reply-To: <1403689.8imU91Pjgi@helios>
-Message-Id: <8B480455-60FE-418C-9A98-DB281B347CE2@dominion.thruhere.net>
-X-Mailer: iPad Mail (10A403)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 3 Oct 2012 13:27:41 +0200
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Gm-Message-State: ALoCoQl2ATh9NxP59fGRqo8DmNZY3ljMcUNpWT6xLvPNh877KyCXz3vn3L+DbvR0CVepw3qdOpqQ
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver][PATCH 0/6] Add meta-webserver
+	<f4fa3e7556b5456ed8f9e5450669ab108bd08325.1349107616.git.paul.eggleton@linux.intel.com>
+	<k4h3gv$n4q$2@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH 3/6] modphp: add from OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,37 +35,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2012 11:40:39 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Oct 2012 11:41:10 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+On Wednesday 03 October 2012 12:20:16 Koen Kooi wrote:
+> Op 01-10-12 18:14, Paul Eggleton schreef:
+> > No modifications in this commit (apart from not copying some unneeded
+> > files).
 
+Again, this is the OE-Classic version prior to updating/fixing.
 
-Op 3 okt. 2012 om 12:43 heeft Paul Eggleton <paul.eggleton@linux.intel.com> h=
-et volgende geschreven:
+> > +RDEPENDS_${PN} = "apache2"
+> 
+> That one goes below do_installed
 
-> On Wednesday 03 October 2012 12:24:19 Koen Kooi wrote:
->> Squash those "import" with the "fix" commits, no sense in having a broken=
+Fixed in the branch.
 
->> recipe in there.
->=20
-> I'd rather not - there is sense in being clear about the changes, because=20=
+> > +DEPENDS = "apache2-native apache2 zlib" + +#SRC_URI =
+> > "http://de3.php.net/distributions/php-${PV}.tar.bz2 \
+> 
+> remove that one
 
-> there are a large number of them in this case.
+Already removed in the patch following.
+ 
+> > +SRC_URI = "http://museum.php.net/php5/php-${PV}.tar.bz2 \ +
+> > file://configure.patch \ +	  " + +S = "${WORKDIR}/php-${PV}" + +inherit
+> > autotools + +FILES_${PN} = "${libdir}/apache2 /etc"
+> 
+> $sysconfdir
 
-The broken recipes are still available in OE classic if people want to compa=
-re them. I still don't get why you want to have broken recipes in the tree a=
-t multiple points in your series.
+Already fixed in the patch following.
 
+> > +FILES_${PN}-dbg += "${libdir}/apache2/modules/.debug"
+> 
+> and move below do_install
 
->=20
-> Cheers,
-> Paul
->=20
-> --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
+Already fixed in the patch following. 
+
+> > + +CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED
+> > -I${STAGING_INCDIR_NATIVE}/apache2" + +EXTRA_OECONF =
+> > "--with-apxs2=${STAGING_BINDIR_NATIVE}/apxs \ +
+> > --without-mysql \ +		--enable-force-cgi-redirect \ +		--disable-cgi 
+\ +
+> > --disable-cli \ +		--disable-pdo \ +		--without-pear \ +		--
+without-iconv
+> > \ +		--disable-ipv6 \ +		--disable-xml \ +		--disable-xmlreader \ +
+> > --disable-xmlwriter \ +		--disable-simplexml \ +		--disable-libxml 
+\ +
+> > --disable-dom \ +                --with-zlib
+> > --with-zlib-dir=${STAGING_DIR}${layout_exec_prefix}/.. \ +
+> > --with-config-file-path=/etc/php/apache2-php5"
+> 
+> whitespace errors
+
+Already fixed in the patch following. (Did you look at those patches?)
+ 
+> > +#		--with-libxml-dir=${STAGING_DIR_NATIVE}${layout_exec_prefix} \
+> 
+> remove
+
+OK, I'll give you that one. Fixed in the branch.
+
+> > + +# to get postgres support, add it to the DEPENDS above +# and
+> > uncomment this line.  similar for mysql +#EXTRA_OECONF += "
+> > --with-pgsql=${STAGING_DIR_HOST}${layout_exec_prefix}"
+> 
+> That is a PACKAGECONFIG change
+
+We can make that enhancement at a later date, until then the comment is 
+helpful.
+
+> > diff --git a/meta-webserver/recipes-php/modphp/modphp_5.1.6.bb
+> > b/meta-webserver/recipes-php/modphp/modphp_5.1.6.bb new file mode 100644
+> > index 0000000..a75a742 --- /dev/null +++
+> > b/meta-webserver/recipes-php/modphp/modphp_5.1.6.bb @@ -0,0 +1,5 @@
+> > +include modphp5.inc 
+> > +PR ='r3'
+> 
+> Double quotes are preferred, but I'm tempted to just say "drop the PR
+> entirely"
+
+I've already set it to "r0" using double quotes in the patch following.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
