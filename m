@@ -1,33 +1,25 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TJMV7-0004vy-Sp for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 12:48:25 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TJMIG-00033f-0E for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Oct 2012 12:35:08 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2012 12:35:07 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2012 12:35:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 03 Oct 2012 12:24:19 +0200
-Message-ID: <k4h3oh$n4q$4@ger.gmane.org>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TJMcf-00053A-TF
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Oct 2012 12:56:14 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 03 Oct 2012 03:43:13 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,527,1344236400"; d="scan'208";a="229954432"
+Received: from unknown (HELO helios.localnet) ([10.252.122.52])
+	by fmsmga002.fm.intel.com with ESMTP; 03 Oct 2012 03:43:12 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 03 Oct 2012 11:43:11 +0100
+Message-ID: <1403689.8imU91Pjgi@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.1 (Linux/3.2.0-31-generic-pae; KDE/4.9.1; i686; ; )
+In-Reply-To: <k4h3oh$n4q$4@ger.gmane.org>
 References: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <cover.1349107616.git.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.4.4
+	<k4h3oh$n4q$4@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-webserver][PATCH 0/6] Add meta-webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,54 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2012 10:48:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Oct 2012 10:56:14 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wednesday 03 October 2012 12:24:19 Koen Kooi wrote:
+> Squash those "import" with the "fix" commits, no sense in having a broken
+> recipe in there.
 
-Op 01-10-12 18:14, Paul Eggleton schreef:
-> So finally I have got this into a working state; apologies for the delay.
-> There were a number of issues affecting cross-compilation as well as some
-> problems with the initial configuration; these should now be addressed.
-> We may wish to look at a more standard directory layout for Apache as the
-> default one doesn't seem to be used by most distributions; we can look at
-> this later - for now let's get the recipes out there so people can try
-> them out.
-> 
-> I know there are a few people waiting to submit additional recipes for 
-> this layer and I expect we will also want to look at moving some 
-> web-server related recipes from meta-oe into here at some point in the 
-> near future.
-> 
-> 
-> The following changes since commit
-> 7bfff4b1d6b0067ddabf2474320e3e78795b2b4f:
-> 
-> uhd,fuse: Fix misplaced quotations (2012-09-28 22:50:42 +0200)
-> 
-> are available in the git repository at:
-> 
-> git://git.openembedded.org/meta-openembedded-contrib
-> paule/meta-webserver-add 
-> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/meta-webserver-add
->
->  Paul Eggleton (6): Add meta-webserver layer apache2: add from
-> OE-Classic modphp: add from OE-Classic apache2: update to version 2.4.2
-> and fix modphp: update to 5.3.14 and fix xdebug: add new recipe
+I'd rather not - there is sense in being clear about the changes, because 
+there are a large number of them in this case.
 
-Squash those "import" with the "fix" commits, no sense in having a broken
-recipe in there.
+Cheers,
+Paul
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+-- 
 
-iD8DBQFQbBJTMkyGM64RGpERAnW0AKCEqJZSIe3A+BJ7h8VchN/jKfV0BgCeOcM8
-sKPvfhNA7x2tyEhwEj6dw/M=
-=5Lcn
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
