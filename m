@@ -1,32 +1,47 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from tx2ehsobe005.messaging.microsoft.com ([65.55.88.15]
+	helo=tx2outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TJozp-0007aF-DH
+	(envelope-from <B29882@freescale.com>) id 1TJp8r-0007r3-5d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2012 19:14:01 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so562865eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Oct 2012 10:01:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=MjfV9EJWD5L3bWp+cAcOgWdOpV+LiwstRaC4d2gg9sc=;
-	b=FmM3elrJhLXSUJ2p9i3Hvf4aCnADP+xeUeIuz0xtyEjoLar/QP3THtjO3Ku0swymfD
-	zJMJhahg+7NK0hvzev9o1+peEGGoK6Fhf1MO8O/bRr7/05EXZicGwkkEdgDs5t83RVR9
-	/o6tP5ulnMRPpwILCgE/UsrHWXZ6DLVoM4BW3Xu40LASliJIC+Y5++zhPiQAOEe4/OSp
-	GrfOwDb17/RehTC9knTVuuyDY/H+fIaoVnOlh7kfOVPzFUWAvfSBAAlpm/yNxJREZZ4K
-	yNMuONX6atnShHGYClr6M2rtP69Luh7YNoI4i4HTpZvkrh2u+87X01Ijaob21AX90hay
-	9Clw==
-Received: by 10.14.4.201 with SMTP id 49mr9319364eej.0.1349370060530; Thu, 04
-	Oct 2012 10:01:00 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.14.173.69 with HTTP; Thu, 4 Oct 2012 10:00:30 -0700 (PDT)
-In-Reply-To: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
+	Thu, 04 Oct 2012 19:23:21 +0200
+Received: from mail146-tx2-R.bigfish.com (10.9.14.249) by
+	TX2EHSOBE015.bigfish.com (10.9.40.35) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 4 Oct 2012 16:25:00 +0000
+Received: from mail146-tx2 (localhost [127.0.0.1])	by
+	mail146-tx2-R.bigfish.com (Postfix) with ESMTP id 4D70C200F5;
+	Thu,  4 Oct 2012 16:25:00 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -9
+X-BigFish: VS-9(zz98dI9371I1432I11f6N14ffIzz1202h1d1ah1d2ahzz8275bhz2dh2a8h668h839h8e2h8e3hd25hf0ah107ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441hbe9i1155h)
+Received: from mail146-tx2 (localhost.localdomain [127.0.0.1]) by mail146-tx2
+	(MessageSwitch) id 1349367897985169_17065;
+	Thu,  4 Oct 2012 16:24:57 +0000 (UTC)
+Received: from TX2EHSMHS044.bigfish.com (unknown [10.9.14.241])	by
+	mail146-tx2.bigfish.com (Postfix) with ESMTP id EB2844C006B;
+	Thu,  4 Oct 2012 16:24:57 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS044.bigfish.com
+	(10.9.99.144) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Thu, 4 Oct 2012 16:24:56 +0000
+Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.88]) by
+	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
+	14.02.0309.003; Thu, 4 Oct 2012 11:24:56 -0500
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] External toolchain - Helloworld works but help needed
+Thread-Index: AQHNokzKR7miDvj06Uad6ysWd4i61A==
+Date: Thu, 4 Oct 2012 16:24:55 +0000
+Message-ID: <70CC66F5C30A414DADDA6973E4CA391A6D8F92@039-SN1MPN1-002.039d.mgd.msft.net>
 References: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 4 Oct 2012 10:00:30 -0700
-Message-ID: <CAMKF1spYYO-Cufe6xjY10OuhZOjM51cKgAFyhemHd8ppPCGQqw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: guerri.ma@gmail.com
+In-Reply-To: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [70.112.201.132]
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Cc: "guerri.ma@gmail.com" <guerri.ma@gmail.com>
 Subject: Re: External toolchain - Helloworld works but help needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,10 +56,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2012 17:14:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Oct 2012 17:23:22 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <CD7C274809AE3F4BBDD462D036550701@mgd.freescale.com>
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 4, 2012 at 7:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
+On Thu, Oct 4, 2012 at 9:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
 > Hi everybody,
 >
 > I'm having some troubles trying to get a working filesystem for a custom
@@ -55,7 +73,8 @@ On Thu, Oct 4, 2012 at 7:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
 > management process done by OE. I anticipate
 > that I can compile a working helloworld image which runs correctly on the
 > hardware only if it is statically
-> linked aginst the libc. With dynamic linking it does not work (in the case
+> linked aginst the libc. With dynamic linking it does not work (in the cas=
+e
 > of helloworld: Kernel panic no
 > init found) I think the problem is that I cannot find a way to deploy the
 > libc into the filesystem (if I mount the fs
@@ -64,12 +83,13 @@ On Thu, Oct 4, 2012 at 7:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
 >
 > My local.conf reports these TOOLCHAIN related options:
 >
-> TOOLCHAIN_VENDOR = "-none"
-> TOOLCHAIN_TYPE = "external"
-> TOOLCHAIN_BRAND = "mtoolch"
-> TOOLCHAIN_PATH = "/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3"
-> TOOLCHAIN_SYSPATH =
-> "/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3/arm-none-linux-gnueabi"
+> TOOLCHAIN_VENDOR =3D "-none"
+> TOOLCHAIN_TYPE =3D "external"
+> TOOLCHAIN_BRAND =3D "mtoolch"
+> TOOLCHAIN_PATH =3D "/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3"
+> TOOLCHAIN_SYSPATH =3D
+> "/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3/arm-none-linux-gnuea=
+bi"
 >
 > As far as I've understood, the important recipe in this case should be
 > external-toolchain-mtoolch.bb. In particular:
@@ -77,6 +97,11 @@ On Thu, Oct 4, 2012 at 7:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
 >     - do_stage() should copy all the important libraries (libc) in the
 > staging area in order to be able to
 >     link correctly during the build process.
+
+What OE are you using? do_stage seems to be depreciated.
+
+-M
+
 >
 >     - do_install() should copy all the important libraries in the install
 > area so that they can be
@@ -99,39 +124,31 @@ On Thu, Oct 4, 2012 at 7:16 AM, Marco Guerri <gmarco.dev@gmail.com> wrote:
 >         install -d ${D}${includedir}
 >
 >         cp -a
-> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/vfp/lib/*
+> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/v=
+fp/lib/*
 > ${D}${base_libdir}
 >         cp -a
-> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/vfp/usr/lib/*
+> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/v=
+fp/usr/lib/*
 > ${D}${libdir}
 >         cp -a
-> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/usr/include/*
+> ${TOOLCHAIN_PATH}/arm-none-linux-gnueabi/arm-none-linux-gnueabi/sysroot/u=
+sr/include/*
 > ${D}${includedir}
 > }
 >
 > The result is that everything is copied into
-> build/work/i686-armv6-sdk-none-linux-gnueabi/external-toolchain-mtoolch-1.0-r3
-> and not in build/work/armv6-none-linux-gnueabi, where all the stuff that is
+> build/work/i686-armv6-sdk-none-linux-gnueabi/external-toolchain-mtoolch-1=
+.0-r3
+> and not in build/work/armv6-none-linux-gnueabi, where all the stuff that =
+is
 > later deployed in the filesystem is copied. So
 > I do not have a clear understaing of what is going on and if I'm using
 > external-toolchain-mtoolch.bb properly or not.
 >
 > Any suggestion is appreciated, I've ran out of ideas but I do not want to
 > give up at this point.
-> Thank you very much.
->
+> Thank you very much.=
 
-
-I would suggest to start with external-sourcery-toolchain.bb recipe in OE-Core
-and then model a recipe for your toolchain based on that. Although be
-warned that
-gcc 4.1 might be inadequate for the recipes we have currently so you might
-run into more bumps.
-
-> Marco
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
