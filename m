@@ -1,20 +1,22 @@
 Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TJfyj-0006jk-M8
+	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TJfz8-0006kF-Ep
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Oct 2012 09:36:17 +0200
+	Thu, 04 Oct 2012 09:36:42 +0200
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 04 Oct 2012 00:23:16 -0700
+	by fmsmga101.fm.intel.com with ESMTP; 04 Oct 2012 00:23:41 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,533,1344236400"; d="scan'208";a="229779163"
+X-IronPort-AV: E=Sophos;i="4.80,533,1344236400"; d="scan'208";a="229779248"
 Received: from adinu-vostro-460 (HELO localhost.localdomain) ([10.237.105.39])
-	by fmsmga001.fm.intel.com with ESMTP; 04 Oct 2012 00:23:15 -0700
+	by fmsmga001.fm.intel.com with ESMTP; 04 Oct 2012 00:23:39 -0700
 From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Oct 2012 10:23:58 +0300
-Message-Id: <1349335439-31379-1-git-send-email-andrei.adrianx.dinu@intel.com>
+Date: Thu,  4 Oct 2012 10:23:59 +0300
+Message-Id: <1349335439-31379-2-git-send-email-andrei.adrianx.dinu@intel.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH] gypsy: moved to meta-oe/recipes-connectivty
+In-Reply-To: <1349335439-31379-1-git-send-email-andrei.adrianx.dinu@intel.com>
+References: <1349335439-31379-1-git-send-email-andrei.adrianx.dinu@intel.com>
+Subject: [meta-oe][PATCH] gypsy: moved to meta-oe/recipes-connectivty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2012 07:36:17 -0000
+X-List-Received-Date: Thu, 04 Oct 2012 07:36:42 -0000
 
 Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
 ---
