@@ -1,37 +1,35 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TK4Ut-00084L-NZ
+	(envelope-from <koen@dominion.thruhere.net>) id 1TK4wJ-0000a0-SP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2012 11:47:07 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hj13so301722wib.6
+	Fri, 05 Oct 2012 12:15:27 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so759016bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2012 02:34:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=roio9ahnhDW639YzAGqAf9Tj3A5pjbUgr3C9a1yo160=;
-	b=bIlBG3morf+ey28lhlJVcejZPo+DUhX3bM1pxjWZYrD88EiMAtzmY1dNZrqSFTrZRN
-	uOT7+wU6mImFrf7tsXDzF9v8QGVzXWgkdWIenSOtZOnSwe8HTkScbbCCREVXWE7hnmYd
-	qNYeJZ/g5M9WbOpHA8TN0m8cITcqGIxhGiRnaFryqnyuc8ek4puPgZh2c4Z1XRIWWi4K
-	aE718q0UvMHV1rb2KcLS/ivDlTSL/+k2YlohPbzwEZHVd8V9uci5TdienhdJ3Uq2srMO
-	lbwCyEWlLjjqxmJuXWLUN5G5kngkqFBSHhDCsNV36zD6JObln92wmGBvftUdrCmENL4J
-	iYmA==
-Received: by 10.180.79.202 with SMTP id l10mr2081754wix.9.1349429647981;
-	Fri, 05 Oct 2012 02:34:07 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q7sm1613809wiy.11.2012.10.05.02.34.06
+	Fri, 05 Oct 2012 03:02:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=adaAu1frzldMqvtSoO24ptwaf/cde1YyqflC1YW78zk=;
+	b=NYsczYSC+YwD058006j6HYKVwt0Tea8jnOOUdgeCztobQGzo79lh0XJ68fWlYQKcYY
+	RISzSvYSCXMh7amWQdQmL22ic0wTC7nJ3Z6Fibi8RDc57K7uYeJyTjFxNDlZ7D5Vz2HW
+	B87yx95DwkxMWmeSdz275IXMq2oeFKNBJZEa8XaYQNu/uTRyOI5LrfotL95ATuJjKPYZ
+	c24kPgZz46kxfrYhom1u4kYV07JDr9dMHMvtkPeeyYexpuHRNaHFcxjezcjZaNexYnBI
+	rAeqmernkz0crkTMQt7yK1Nd9AH5N81ev6/AwtKp4h98lE34/19iKd7JB/0g4A6YZ0tm
+	AP6g==
+Received: by 10.205.136.2 with SMTP id ii2mr2527643bkc.114.1349431345807;
+	Fri, 05 Oct 2012 03:02:25 -0700 (PDT)
+Received: from localhost (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id g8sm7235960bkv.6.2012.10.05.03.02.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 05 Oct 2012 02:34:07 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 05 Oct 2012 03:02:24 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Oct 2012 11:33:39 +0200
-Message-Id: <33d674ec481219a0662a380ab5547013b894e115.1349429575.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12
-In-Reply-To: <cover.1349429575.git.Martin.Jansa@gmail.com>
-References: <cover.1349429575.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1349429575.git.Martin.Jansa@gmail.com>
-References: <cover.1349429575.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] imagemagick: add fftw to DEPENDS
+Date: Fri,  5 Oct 2012 12:02:20 +0200
+Message-Id: <1349431340-8045-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkdtrxr6fle/Oy9Gy2mwyrrzhvSzlaiLBotT/t/mybAk97OsRXqbIVMNukckWNpbvK4BxDy
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] python-numpy 1.4.1: update hack to find the new location for python-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2012 09:47:07 -0000
+X-List-Received-Date: Fri, 05 Oct 2012 10:15:27 -0000
 
-* it's autodetected and then later when it's not in sysroot it fails:
-| /bin/grep: /OE/shr-core/tmp-eglibc/sysroots/tuna/usr/lib/libfftw3.la: No such file or directory
-| /bin/sed: can't read /OE/shr-core/tmp-eglibc/sysroots/tuna/usr/lib/libfftw3.la: No such file or directory
-| arm-oe-linux-gnueabi-libtool: link: `/OE/shr-core/tmp-eglibc/sysroots/tuna/usr/lib/libfftw3.la' is not a valid libtool archive
-| make[1]: *** [wand/libMagickWand.la] Error 1
-| make[1]: Leaving directory `/OE/shr-core/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/imagemagick-6.7.5-r3/ImageMagick-6.7.5-6'
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-index 625a57e..5e8bc85 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-@@ -3,9 +3,9 @@ SECTION = "console/utils"
- LICENSE = "ImageMagick"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
--DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
-+DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw"
- 
--PR = "r3"
-+PR = "r4"
- 
- PATCHSET = "6"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index c1923f7..bb4e78a 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -24,7 +24,7 @@ inherit distutils
+ # This is a ugly, ugly hack - Koen
+ do_compile_prepend() {
+          BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+-         ${STAGING_BINDIR_NATIVE}/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
++         ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
+          true
+ 	 cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
+ }
 -- 
-1.7.12
+1.7.10
 
 
 
