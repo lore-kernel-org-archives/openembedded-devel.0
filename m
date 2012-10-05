@@ -1,37 +1,36 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TK50H-0000gB-GU
+	(envelope-from <andrei@gherzan.ro>) id 1TK5ED-0000qw-Aq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2012 12:19:33 +0200
-Received: by mail-we0-f175.google.com with SMTP id t44so909146wey.6
+	Fri, 05 Oct 2012 12:33:58 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so3482611ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2012 03:06:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hiWLEUoEieuyGaiqWkQkijTUZZEtpWoq1IcxootIc38=;
-	b=wYJ47bDDTMZQjo4PanA77zAlsh9RIn4H6jEV+HKaIlpw3LJ9jUial253v1HdyHcXaP
-	0z5Tw6zCKFwFKAQhEyWLJCaPSP0n4mHTTtXmtkqnWptFAKhmlwkDLp2kCnVW+YmqAWjo
-	sEsPqa4127tbl3MCo0/nIIwJ6YckIgpMEZ5AEio/OGuaAFk47c+NsWCH1annTcMjgY97
-	Jt3vwibG1HJFpemSgfwfs5Eqs51Vd+/u3fjFgmmAbikCtziZcwMHteabBLUuYUDaQvBg
-	rhYtWgaJ/CxG4WdJsiX1E24zVQolrMA6YA4xfeWFmCmTaQdTY4khwD5V3XFIf6yjLfRX
-	ssag==
-Received: by 10.216.70.13 with SMTP id o13mr5369122wed.184.1349431591495;
-	Fri, 05 Oct 2012 03:06:31 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id j8sm1555370wiy.9.2012.10.05.03.06.29
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 05 Oct 2012 03:06:30 -0700 (PDT)
-Date: Fri, 5 Oct 2012 12:06:34 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121005100634.GA3542@jama.jama.net>
-References: <1349431340-8045-1-git-send-email-koen@dominion.thruhere.net>
+	Fri, 05 Oct 2012 03:20:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=C5D+NIvsw5DLRpooiivsaUAiSjVoHFD1kG9KQ8c+ZE0=;
+	b=j9lU7ZUniGPMkHttivDE45cMhLl+1iMb//BhfH8URjCrRhtKfhO+QtXA7f2ibUHp3l
+	DmNm9KmhsyGObWFqwfhaXZtNhBEUdtf3dcNRfKP+xnxUkWUcjmmMfmmK2r/BRLkgQDtB
+	b1zJzQW6AwJAVTB3Se5Sqywk233KG0XaphDjv2HinF0wk7rdYHCjs9zmfRYbegzHnTEA
+	N6qiFgiA2eu+shMvEIQJtByGHaV+Klsbsmu0r/MWzBnUpCnN8dJOpBFakQHgXSQZMR1Z
+	ZkPBeUJ7enxEyx3w2sYSReFngKG2t4RL+Nic2ZRORtb+JX6gUAuYmtSEVFIws/Ibvtj2
+	Aajw==
+Received: by 10.50.193.170 with SMTP id hp10mr201341igc.63.1349432454566; Fri,
+	05 Oct 2012 03:20:54 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1349431340-8045-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] python-numpy 1.4.1: update hack to find the new location for python-native
+Received: by 10.64.52.8 with HTTP; Fri, 5 Oct 2012 03:20:34 -0700 (PDT)
+X-Originating-IP: [89.121.200.106]
+In-Reply-To: <1349401196-24611-1-git-send-email-jackie.huang@windriver.com>
+References: <1349401196-24611-1-git-send-email-jackie.huang@windriver.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Fri, 5 Oct 2012 13:20:34 +0300
+Message-ID: <CAK18fxHsc8BjjkbS=Xo5zBHO6OEWx9GYUraND1Lv16u-n=r59Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmI0PCXzCB+njo3DCz3AMTiAwOyv7SIIKRnEvnMDW+BTDCAEudJvP+G8GGAOf2hI3vrtehv
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH v3] iw: add iw 3.6 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,67 +44,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2012 10:19:33 -0000
-X-Groupsio-MsgNum: 40930
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="G4iJoqBmSsgzjUCe"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Oct 2012 10:33:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---G4iJoqBmSsgzjUCe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-On Fri, Oct 05, 2012 at 12:02:20PM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+On Fri, Oct 5, 2012 at 4:39 AM, <jackie.huang@windriver.com> wrote:
+
+> iw: add iw 3.6 recipe
+>
+
+Don't copy the subject here.
+
+
+>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta=
--oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> index c1923f7..bb4e78a 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> @@ -24,7 +24,7 @@ inherit distutils
->  # This is a ugly, ugly hack - Koen
->  do_compile_prepend() {
->           BUILD_SYS=3D${BUILD_SYS} HOST_SYS=3D${HOST_SYS} \
-> -         ${STAGING_BINDIR_NATIVE}/python setup.py build ${DISTUTILS_BUIL=
-D_ARGS} || \
-> +         ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${=
-DISTUTILS_BUILD_ARGS} || \
+>  meta-oe/recipes-connectivity/iw/iw_3.6.bb |   23 +++++++++++++++++++++++
+>  1 files changed, 23 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/iw/iw_3.6.bb
+>
+> diff --git a/meta-oe/recipes-connectivity/iw/iw_3.6.bbb/meta-oe/recipes-connectivity/iw/
+> iw_3.6.bb
+> new file mode 100644
+> index 0000000..42a43c3
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
+> +DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
+> +wireless devices. It supports almost all new drivers that have been added
+> \
+> +to the kernel recently. "
+> +HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
+> +SECTION = "base"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
+> +
+> +DEPENDS = "libnl pkgconfig"
+> +
+> +SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
+> +
+> file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
+> +          "
+> +
+> +SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
+> +SRC_URI[sha256sum] =
+> "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
+> +
+> +EXTRA_OEMAKE = ""
+> +
+>
 
-does it work if you inherit pythonnative and call python without path?
+Do you really need this?
 
-Cheers,
++do_install() {
+> +       oe_runmake DESTDIR=${D} install
+>
 
->           true
->  	 cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/c=
-ore/include/numpy/
->  }
-> --=20
-> 1.7.10
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Why don't you add DESTDIR=${D} to EXTRA_OEMAKE and drop the install rule?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+ag
 
---G4iJoqBmSsgzjUCe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlBusSoACgkQN1Ujt2V2gBzDsACcCgHfINXoWyUKe1MTew7VUY1B
-71YAnA0lcmHEGvhAHQlvG43d8G9M4UB3
-=kB/y
------END PGP SIGNATURE-----
-
---G4iJoqBmSsgzjUCe--
