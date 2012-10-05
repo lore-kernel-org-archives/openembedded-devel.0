@@ -1,38 +1,35 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TK5Pi-000137-HQ
+	(envelope-from <koen@dominion.thruhere.net>) id 1TK5j5-0001ez-4V
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2012 12:45:50 +0200
-Received: by mail-ie0-f175.google.com with SMTP id c13so3502857ieb.6
+	Fri, 05 Oct 2012 13:05:51 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so784146bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Oct 2012 03:32:48 -0700 (PDT)
+	Fri, 05 Oct 2012 03:52:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:x-gm-message-state;
-	bh=iFKs9z2mw2ufEIiA4o3T4fVN/TpR7i4B+zTr+7g5Ac8=;
-	b=SKaZiuANwqtvmgk1CPX0eFSA8m31lu8GuLr/9tdHBljdpJNMwUObyZz2yMwxwa0di2
-	PIYyjS99tR5ZUiD8y/KcJzKgP6/CsVwfyX/mPhbDBbC8TYwflh2x8ZTVkmmgXTWoHzKt
-	pd79CoYTyMaWckh6JoSMPQHZkJolRcWh1gdqeEaunaXRaWDhNeO17Tliv0fpC+SfZ8zE
-	VlevqRCJZ/vPqUm+AJOFL4BlQbA9S+dgwaqlRqKd7EoQDLqZPxV3Tv2QulPh6oe3kalG
-	VdU2kdu1EnX4veK+m339r3sczpMkhjb5yC/7VmlJTg/4t22ObARfRGWWFlmwVgSUfzwS
-	xv4g==
-Received: by 10.50.187.194 with SMTP id fu2mr696500igc.63.1349433167878; Fri,
-	05 Oct 2012 03:32:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.64.52.8 with HTTP; Fri, 5 Oct 2012 03:32:27 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <1349271693-6378-3-git-send-email-otavio@ossystems.com.br>
-References: <1349271693-6378-1-git-send-email-otavio@ossystems.com.br>
-	<1349271693-6378-3-git-send-email-otavio@ossystems.com.br>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 5 Oct 2012 13:32:27 +0300
-Message-ID: <CAK18fxGaVR17u_cuyKJWN-zb=9zTSYfyfUXdt9+tSx-B6OWbmA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=bAAclljVooyg1QyrZZfKKf7/tkyjND7cYDAzyjrRvFs=;
+	b=OGZWsE2MOoQO27UMZZVmhb5gcaobPJFRkOgYC22UkXloDtZVQbcm0SelJc5LMTKiGG
+	Y4+XET36bNemn7egb/emjvXgvumaSxn1pjGxYqDsFD8xuUzRgZ0nI0/6ETxDcsdcTI+C
+	iGMZJcbNRkwzHtaC73sb4OSpl0o8a/CtG2qJpeTIgPrD9OWjrPONNTomG1Y9SHcHz6ym
+	z9fD6DOkaajTCjZQ67ECag9RtNYx4H772g5ZzAvlo5eBoib5JqDeZ++uAizkx/eoDq34
+	TsA/gvRGXEEcV+r5vxs/KkIQO3/KtW1S3A2e0UUeT0mqMivATJp25wETCsPWtroxt/jT
+	7deg==
+Received: by 10.204.148.21 with SMTP id n21mr2650369bkv.124.1349434368833;
+	Fri, 05 Oct 2012 03:52:48 -0700 (PDT)
+Received: from localhost (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id t27sm7366779bkv.10.2012.10.05.03.52.46
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 05 Oct 2012 03:52:47 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQm94IDcQgNxr1MaBHoStRJxGwyZb34ZFQPOdOHHd0EJj246N1WZ/5K8ODooWDP6EcnLsc3k
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH 3/4] libcec: Update to 1.9.0 version
+Date: Fri,  5 Oct 2012 12:52:43 +0200
+Message-Id: <1349434363-14335-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQle8avNdRA/K7/PpGLzJJWq4kTRqyLBwYfxVvHs6RIY2kux68910SBnP+hMpvgCVIQpBM9U
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] v4l-utils: fix build breakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +43,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2012 10:45:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 05 Oct 2012 11:05:51 -0000
 
-I think somebody already sent a patch for this. But as i see, it's not
-merged. Maybe it was forgotten.
+Update to a newer SRCREV for fixed and get autotools support as a bonus.
 
-ag
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../v4l-utils/0001-disable-qv4l2-build.patch       |   39 --------------------
+ .../recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb |   27 ++++++--------
+ 2 files changed, 11 insertions(+), 55 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
 
-On Wed, Oct 3, 2012 at 4:41 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
+deleted file mode 100644
+index 4b11038..0000000
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-disable-qv4l2-build.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 1422d4c562660407919fb753dc5f074293b395e5 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 16 Jul 2012 12:00:34 +0200
+-Subject: [PATCH] disable qv4l2 build
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- utils/Makefile |   15 ---------------
+- 1 files changed, 0 insertions(+), 15 deletions(-)
+-
+-diff --git a/utils/Makefile b/utils/Makefile
+-index 014b82d..db74851 100644
+---- a/utils/Makefile
+-+++ b/utils/Makefile
+-@@ -5,21 +5,6 @@ all install:
+- 		$(MAKE) -C $$i $@ || exit 1; \
+- 	done
+- 
+--	# Test whether qmake is installed, and whether it is for qt4.
+--	@if which qmake-qt4 >/dev/null 2>&1; then \
+--		QMAKE=qmake-qt4; \
+--	else \
+--		QMAKE=qmake; \
+--	fi; \
+--	if which $$QMAKE >/dev/null 2>&1; then \
+--		if $$QMAKE --version 2>&1 | grep '4\.[0-9][0-9]*\.[0-9][0-9]*' >/dev/null; then \
+--			if [ ! -f qv4l2/Makefile ]; then \
+--				(cd qv4l2 && $$QMAKE) || exit 1; \
+--			fi; \
+--			$(MAKE) -C qv4l2 -f Makefile.install $@; \
+--		fi \
+--	fi
+--
+- sync-with-kernel:
+- 	$(MAKE) -C keytable $@
+- 	$(MAKE) -C v4l2-dbg $@
+--- 
+-1.7.7.6
+-
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+index e5d1fc2..ce5c5e1 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+@@ -3,39 +3,34 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
+                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ DEPENDS = "jpeg"
+ 
++inherit autotools gettext
++
+ # libv4l was absorbed into this, let OE know that
+ PROVIDES = "libv4l"
+ 
+ SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
+-           file://0001-disable-qv4l2-build.patch \
+           "
+ # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
+-SRCREV = "54f16ca8183dd8ae8bf4ccc07949795aff0301f5"
++SRCREV = "0298efdcd1153b8f719b9164548a3f0546f0cb7c"
+ 
+ S = "${WORKDIR}/git"
+ 
+-EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
+-
+-do_compile() {
+-	# fix up some ASNEEDED things
+-	for i in $(find ${S} -name "Makefile") ; do
+-		sed -i 's:-lrt:-lrt -lpthread:g' $i
+-	done
+-
+-	oe_runmake
+-}
++EXTRA_OECONF = "--disable-qv4l2 --enable-shared" 
+ 
+-do_install() {
+-	oe_runmake install
++do_configure() {
++	# autotools_do_configure fails with:
++	# | configure.ac:139: error: required file 'build-aux/config.rpath' not found
++	autoreconf -vfi 
++	oe_runconf
+ }
+ 
+ PACKAGES =+ "rc-keymaps libv4l libv4l-dbg libv4l-dev"
+ 
+-FILES_rc-keymaps = "${sysconfdir}/rc*"
++FILES_rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
+ FILES_${PN} = "${bindir} ${sbindir} ${base_libdir}/udev/rules.d/70-infrared.rules"
+ FILES_libv4l += "${libdir}/libv4l/* ${libdir}/*.so.*"
+ FILES_libv4l-dbg += "${libdir}/libv4l/.debug"
+-- 
+1.7.10
 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  meta-oe/recipes-extended/libcec/libcec_git.bb |   10 +++++-----
->  1 files changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bbb/meta-oe/recipes-extended/libcec/
-> libcec_git.bb
-> index 142b2e2..8b1f086 100644
-> --- a/meta-oe/recipes-extended/libcec/libcec_git.bb
-> +++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
-> @@ -2,13 +2,13 @@ DESCRIPTION = "USB CEC Adaptor communication Library"
->  HOMEPAGE = "http://libcec.pulse-eight.com/"
->
->  LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=185ead350fec5fc223da0f65f9a802af"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
->
-> -DEPENDS = "udev"
-> +DEPENDS = "udev lockdev"
->
-> -PR = "r1"
-> -PV = "1.4.0"
-> -SRCREV = "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
-> +PV = "1.9.0"
-> +
-> +SRCREV = "9884e9ffc5293de5bb9092db1ed581f213a678df"
->  SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
->
->  S = "${WORKDIR}/git"
-> --
-> 1.7.2.5
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
