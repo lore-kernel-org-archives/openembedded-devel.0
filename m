@@ -1,24 +1,39 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mo3.mail-out.ovh.net ([178.32.228.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TJx65-0002bY-Ka
+	(envelope-from <eric@eukrea.com>) id 1TK4OB-0007fg-By
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Oct 2012 03:53:02 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q951dwZj025209
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 05 Oct 2012 11:40:11 +0200
+Received: from mail637.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id 0077FFFB50B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Oct 2012 18:39:58 -0700 (PDT)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Thu, 4 Oct 2012 18:39:58 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Oct 2012 09:39:56 +0800
-Message-ID: <1349401196-24611-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3] iw: add iw 3.6 recipe
+	Fri,  5 Oct 2012 11:00:00 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Oct 2012 10:51:23 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 5 Oct 2012 10:51:20 +0200
+Date: Fri, 5 Oct 2012 10:51:03 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: Marco Guerri <gmarco.dev@gmail.com>
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20121005105103.162c1a06@eb-e6520>
+In-Reply-To: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
+References: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 11495438050555178313
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehuddrtdekucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehuddrtdekucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: External toolchain - Helloworld works but help needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,48 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2012 01:53:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Oct 2012 09:40:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-iw: add iw 3.6 recipe
+Hi Marco,
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-connectivity/iw/iw_3.6.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/iw/iw_3.6.bb
+Le Thu, 4 Oct 2012 16:16:44 +0200,
+Marco Guerri <gmarco.dev@gmail.com> a =E9crit :
+> I'm having some troubles trying to get a working filesystem for a custom
+> board based on a Freescale iMX35 SOC.
 
-diff --git a/meta-oe/recipes-connectivity/iw/iw_3.6.bb b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
-new file mode 100644
-index 0000000..42a43c3
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
-+DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
-+wireless devices. It supports almost all new drivers that have been added \
-+to the kernel recently. "
-+HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
-+SECTION = "base"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
-+
-+DEPENDS = "libnl pkgconfig"
-+
-+SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
-+           file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
-+          "
-+
-+SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
-+SRC_URI[sha256sum] = "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
-+
-+EXTRA_OEMAKE = ""
-+
-+do_install() {
-+	oe_runmake DESTDIR=${D} install
-+}
--- 
-1.7.4
+you can find our working BSP for an i.MX35 board here :
+https://github.com/eukrea/meta-eukrea
+(use MACHINE=3D"eukrea-cpuimx35")
 
+Best regards
+Eric
 
 
