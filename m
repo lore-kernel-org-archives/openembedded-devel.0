@@ -1,34 +1,20 @@
-Received: from mail-yh0-f47.google.com ([209.85.213.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TKhcj-0003QB-OQ
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TKocT-0007SL-V0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Oct 2012 05:33:49 +0200
-Received: by mail-yh0-f47.google.com with SMTP id g23so705066yhg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Oct 2012 20:20:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=YAs28EEEpnI5nk/y8xcjBxfszRTymoAXEQ4JCvfToWs=;
-	b=FNL3cowjYdBfGq5Ar4wBb1RmF6fCqAXjLOEeTzv+ai2Plk/Qh6X+XWcztl8dAV0OCm
-	06otkUHVpduT0PQ/G/LX4Aww0mRgwhhEKB1eJBWmRvtw1Fix1SdX6pkwLB2h8ejuZtYY
-	T8QfjC0zdAMS7LDO0ajZCGVNcQ5OCxcETcBSzCFaUDQ3qf7whRu6W66u81KkGuJX+0/n
-	O5nIJJdZ1FszFos2UFWPoA+pLsmx7tIdrSQMUfYA3kIaXFHDJS/S31TVZMxysLkB7Jgj
-	K7ZwFZ8tqeOM/5Tqp4OSjKHt7NKudURfh1wdPb13cYVnOQI/yT8QMu6mNQ1EC6qhK8I2
-	c8qw==
-Received: by 10.236.176.234 with SMTP id b70mr12217810yhm.55.1349580044941;
-	Sat, 06 Oct 2012 20:20:44 -0700 (PDT)
-Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id z30sm20623129yhh.6.2012.10.06.20.20.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 06 Oct 2012 20:20:44 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sun, 07 Oct 2012 13:02:02 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 07 Oct 2012 03:48:36 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,547,1344236400"; d="scan'208";a="202618157"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.60])
+	by orsmga001.jf.intel.com with ESMTP; 07 Oct 2012 03:48:31 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Oct 2012 00:20:35 -0300
-Message-Id: <1349580035-28194-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] xbmc: Fix serveral build errors and install missing dependencies
+Date: Sun,  7 Oct 2012 11:47:38 +0100
+Message-Id: <1349606858-7635-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] lcdproc: add recipe from OE-Classic and update/clean up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,136 +28,176 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Oct 2012 03:33:50 -0000
+X-List-Received-Date: Sun, 07 Oct 2012 11:02:02 -0000
 
-This allow the package to build fine. On the test board it didn't show
-anything in display but it seems to be hardware specific issue.
+* Update to latest upstream version 0.5.5
+* Add an Ubuntu patch to fix incompatibility with current automake
+* Use automatic package splitting for drivers
+* Allow specifying drivers to build via LCD_DRIVERS
+* Allow specifying default enabled driver via LCD_DEFAULT_DRIVER
+* Disable g15 driver by default (but allow it to be re-enabled using
+  PACKAGECONFIG, assuming the required recipes are also provided).
+* Fix conf files not going into lcdvc and lcdd packages due to
+  override expansion not happening at the expected time (for
+  CONFFILES_*)
+* Remove some unnecessary cruft
+* Move packaging parts of recipe below do_install
+* Add LIC_FILES_CHKSUM
+* Make LICENSE more accurate
+* Add SUMMARY
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../xbmc/configure.in-Avoid-running-code.patch     |   32 ++++++++++++++++++++
- .../recipes-mediacentre/xbmc/xbmc_git.bb           |   28 +++++++++++------
- 2 files changed, 50 insertions(+), 10 deletions(-)
- create mode 100644 meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
+ .../lcdproc/lcdproc/automake-111-fix.patch         |   21 ++++++
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |   77 ++++++++++++++++++++
+ meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb  |   24 ++++++
+ 3 files changed, 122 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc/automake-111-fix.patch
+ create mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+ create mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb
 
-diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc/automake-111-fix.patch b/meta-oe/recipes-extended/lcdproc/lcdproc/automake-111-fix.patch
 new file mode 100644
-index 0000000..5c14059
+index 0000000..061cc22
 --- /dev/null
-+++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
-@@ -0,0 +1,32 @@
-+From cfd851660a594801a591e80dc820c65cb7bd7836 Mon Sep 17 00:00:00 2001
-+From: Otavio Salvador <otavio@ossystems.com.br>
-+Date: Sat, 6 Oct 2012 06:40:03 -0300
-+Subject: [PATCH] configure.in: Avoid running code or we break cross-compile
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc/automake-111-fix.patch
+@@ -0,0 +1,21 @@
++Description: With automake 1.11.3, pkglib_PROGRAMS is not valid anymore, 
++ so work around this by using my_execbin_PROGRAMS.
++Author: Andreas Moog <amoog@ubuntu.com>
++Bug-Ubuntu: https://bugs.launchpad.net/bugs/934265
 +
-+Upstream-Status: Backport [similar change done for 12.0]
++Upstream-Status: Backport 
 +
-+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-+---
-+ configure.in |    6 +-----
-+ 1 files changed, 1 insertions(+), 5 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index ef94683..d7efcb0 100755
-+--- a/configure.in
-++++ b/configure.in
-+@@ -1246,11 +1246,7 @@ if test "$use_external_ffmpeg" = "yes"; then
-+   AC_DEFINE([USE_EXTERNAL_FFMPEG], [1], [Whether to use external FFmpeg libraries.])
++Index: lcdproc-0.5.5/server/drivers/Makefile.am
++===================================================================
++--- lcdproc-0.5.5.orig/server/drivers/Makefile.am	2012-02-26 14:04:37.000000000 +0100
+++++ lcdproc-0.5.5/server/drivers/Makefile.am	2012-02-26 14:13:17.764467350 +0100
++@@ -20,7 +20,8 @@
 + 
-+   # Disable vdpau support if external libavcodec doesn't have it
-+-  AC_RUN_IFELSE(
-+-    AC_LANG_PROGRAM([[#include <libavcodec/avcodec.h>]],
-+-      [[avcodec_register_all();
-+-        AVCodec *codec = avcodec_find_decoder_by_name("vc1_vdpau");
-+-        return (codec) ? 0 : 1;]]),,
-++  AC_CHECK_LIB([avcodec], [ff_vdpau_vc1_decode_picture],,
-+     [if test "x$use_vdpau" = "xyes"; then
-+       AC_MSG_ERROR($ffmpeg_vdpau_not_supported)
-+     else
-+-- 
-+1.7.2.5
++ ## Keep the lists sorted!
++ 
++-pkglib_PROGRAMS = @DRIVERS@
+++my_execbindir = $(pkglibdir)
+++my_execbin_PROGRAMS = @DRIVERS@
++ EXTRA_PROGRAMS = bayrad CFontz CFontz633 CFontzPacket curses debug CwLnx ea65 EyeboxOne g15 glcdlib glk hd44780 icp_a106 imon imonlcd IOWarrior irman joy lb216 lcdm001 lcterm lirc lis MD8800 mdm166a ms6931 mtc_s16209x MtxOrb mx5000 NoritakeVFD picolcd pyramid sed1330 sed1520 serialPOS serialVFD shuttleVFD stv5730 SureElec svga t6963 text tyan sli ula200 xosd i2500vfd irtrans
++ noinst_LIBRARIES = libLCD.a libbignum.a
++ 
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+new file mode 100644
+index 0000000..50b6b0e
+--- /dev/null
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+@@ -0,0 +1,77 @@
++DESCRIPTION = "LCDproc is a client/server suite to drive all kinds of LCD (-like) devices. The client \
++shipped with this package can be used to acquire various kinds of system stats."
++SUMMARY = "Drivers for character-based LCD displays"
++HOMEPAGE = "http://lcdproc.org"
++SECTION = "utils"
++LICENSE = "GPLv2+"
++DEPENDS = "virtual/libusb0 ncurses"
 +
-diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-index f0ce7cf..baa3dd2 100644
---- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-+++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "XBMC Media Center"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
- 
--DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib"
-+DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
- #require recipes/egl/egl.inc
- 
- SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
-@@ -15,12 +15,17 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
-            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
-            file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \
-            file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \
-+           file://configure.in-Avoid-running-code.patch \
-           "
- 
- inherit autotools gettext python-dir
- 
- S = "${WORKDIR}/git"
- 
-+CACHED_CONFIGUREVARS += " \
-+ ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
-+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
++                    file://README;startline=60;md5=8237b4d4d80a525b15f8162192e07bee"
 +
- EXTRA_OECONF = " \
-  --disable-rpath \
-  --enable-gles \
-@@ -30,6 +35,11 @@ EXTRA_OECONF = " \
-  --enable-external-libraries \
- "
- 
-+FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
-+BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
++SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${P}.tar.gz"
 +
-+EXTRA_OECONF_append_armv7a = "--cpu=cortex-a8"
++inherit autotools update-rc.d
 +
- # for python modules
- export HOST_SYS
- export BUILD_SYS
-@@ -45,19 +55,17 @@ do_configure() {
- PARALLEL_MAKE = ""
- 
- do_compile_prepend() {
--
--	sed -i -e 's:-rpath \$(libdir)::g' lib/libid3tag/libid3tag/Makefile
--
- 	for i in $(find . -name "Makefile") ; do
--		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir):-rpath ${STAGING_LIBDIR}:g' $i
-+		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' $i
- 	done
- 
--	for i in $(find . -name "*.mak*") ; do
--		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir)::g' $i
-+	for i in $(find . -name "*.mak*" -o	-name "Makefile") ; do
-+		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir):-rpath ${libdir}:g' $i
- 	done
--	sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir)::g' ${S}/Makefile	
- }
- 
-+INSANE_SKIP_${PN} = "rpaths"
++LCD_DRIVERS ?= "all"
++LCD_DEFAULT_DRIVER ?= "curses"
 +
- # on ARM architectures xbmc will use GLES which will make the regular wrapper fail, so start it directly
- do_install_append_arm() {
- 	sed -i -e 's:Exec=xbmc:Exec=${libdir}/xbmc/xbmc.bin:g' ${D}${datadir}/applications/xbmc.desktop
-@@ -71,7 +79,7 @@ RRECOMMENDS_${PN}_append = " libcec \
-                              python \
-                              python-lang \
-                              python-re \
-+                             python--netclient \
-+                             libcurl \
-                              "
- RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 glibc-gconv-ibm850"
--
--
++EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS} --enable-libusb"
++
++do_install () {
++	# binaries
++	install -D -m 0755 server/LCDd ${D}${sbindir}/LCDd
++	install -D -m 0755 clients/lcdproc/lcdproc ${D}${bindir}/lcdproc
++
++	# init scripts
++	install -d ${D}${sysconfdir}/init.d
++	# so far, not fixed :-( and now even uglier :-((
++	cat scripts/init-LCDd.debian | sed -e s'/--oknodo//' -e 's/ -s -f / -s 1 -f 1 /' -e 's/force-reload/force-restart/' -e 's/sleep 1/sleep 4/' > ${D}${sysconfdir}/init.d/lcdd
++	chmod 0755 ${D}${sysconfdir}/init.d/lcdd
++	install -m 0755 scripts/init-lcdproc.debian ${D}${sysconfdir}/init.d/lcdproc
++	sed -i s'/--oknodo//' ${D}${sysconfdir}/init.d/lcdproc
++
++	# configuration files
++	install -m 0644 LCDd.conf ${D}${sysconfdir}/LCDd.conf
++	sed -i 's!^DriverPath=.*!DriverPath=${libdir}/lcdproc/!' ${D}${sysconfdir}/LCDd.conf
++	sed -i 's!^Driver=.*!Driver=${LCD_DEFAULT_DRIVER}!' ${D}${sysconfdir}/LCDd.conf
++	install -m 0644 clients/lcdproc/lcdproc.conf ${D}${sysconfdir}/lcdproc.conf
++
++	# driver library files
++	install -d ${D}${libdir}/lcdproc
++	for i in server/drivers/*.so; do
++		install -m 0644 $i ${D}${libdir}/lcdproc/
++	done
++}
++
++PACKAGES =+ "lcdd"
++
++RRECOMMENDS_${PN} = "lcdd"
++
++FILES_lcdd = "${sysconfdir}/LCDd.conf \
++	${sbindir}/LCDd \
++	${sysconfdir}/init.d/lcdd"
++
++CONFFILES_lcdd = "${sysconfdir}/LCDd.conf"
++CONFFILES_${PN} = "${sysconfdir}/lcdproc.conf"
++
++# Driver packages
++
++# USB / no USB trickery
++
++RCONFLICTS_lcdd-driver-hd47780nousb = "lcdd-driver-hd44780"
++RCONFLICTS_lcdd-driver-hd47780 = "lcdd-driver-hd44780nousb"
++
++INITSCRIPT_PACKAGES = "lcdd lcdproc"
++INITSCRIPT_NAME_lcdd = "lcdd"
++INITSCRIPT_NAME_lcdproc = "lcdproc"
++INITSCRIPT_PARAMS_lcdd = "defaults 70 21"
++INITSCRIPT_PARAMS_lcdproc = "defaults 71 20"
++
++python populate_packages_prepend() {
++    plugindir = d.expand('${libdir}/lcdproc')
++    do_split_packages(d, plugindir, '(.*)\.so$', 'lcdd-driver-%s', 'LCDd driver for %s', prepend=True)
++}
++
++PACKAGES_DYNAMIC = "lcdd-driver-*"
++
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb b/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb
+new file mode 100644
+index 0000000..0276c55
+--- /dev/null
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb
+@@ -0,0 +1,24 @@
++require lcdproc5.inc
++
++SRC_URI += "file://automake-111-fix.patch"
++
++SRC_URI[md5sum] = "c92d4529d36eeec6d9d6fd0a4aa3ec82"
++SRC_URI[sha256sum] = "b136b47d7bf585a003334f432d8730a36ef5ed1cd520084b919667d825e48d42"
++
++PACKAGECONFIG ?= ""
++PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
++
++LCD_DRIVERS_append = "${@base_contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
++
++do_install_append () {
++	# binaries
++	install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
++
++	# configuration files
++	install -D -m 0644 clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
++}
++
++PACKAGES =+ "lcdvc"
++CONFFILES_lcdvc = "${sysconfdir}/lcdvc.conf"
++FILES_lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
++
 -- 
-1.7.2.5
+1.7.9.5
 
 
 
