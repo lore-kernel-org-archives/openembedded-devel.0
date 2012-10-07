@@ -1,24 +1,20 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TKp0g-0007mp-Iv
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TKtXK-0005Vi-CD
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Oct 2012 13:27:02 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Oct 2012 04:13:57 -0700
+	Sun, 07 Oct 2012 18:17:02 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 07 Oct 2012 09:03:55 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,547,1344236400"; d="scan'208";a="230911611"
+X-IronPort-AV: E=Sophos;i="4.80,547,1344236400"; d="scan'208";a="201559628"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.60])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Oct 2012 04:13:56 -0700
+	by azsmga001.ch.intel.com with ESMTP; 07 Oct 2012 09:03:54 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Oct 2012 12:13:51 +0100
-Message-Id: <109857779c30f6115771230dddeb87e615053b02.1349608252.git.paul.eggleton@linux.intel.com>
+Date: Sun,  7 Oct 2012 17:03:46 +0100
+Message-Id: <cover.1349625647.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1349608252.git.paul.eggleton@linux.intel.com>
-References: <cover.1349608252.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1349608252.git.paul.eggleton@linux.intel.com>
-References: <cover.1349608252.git.paul.eggleton@linux.intel.com>
-Subject: [meta-webserver][PATCH 3/3] phpmyadmin: add new recipe
+Subject: [meta-oe][PATCH 0/2] Fix mysql_config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,104 +28,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Oct 2012 11:27:03 -0000
+X-List-Received-Date: Sun, 07 Oct 2012 16:17:02 -0000
 
-Add new recipe for phpMyAdmin 3.5.2.2, borrowing the apache.conf file
-from Debian (with the addition of "Require all granted" to enable
-access).
+A fix for mysql_config that I found was needed to build modphp with
+mysql support. I tested building qt4-x11-free and cherokee before and
+after this fix; the former was unaffected whereas the latter ended up
+with mysql support actually enabled, so this was broken previously
+despite having mysql5 in DEPENDS. Hence, also bump PR on cherokee to
+force it to rebuild with mysql support.
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../recipes-php/phpmyadmin/phpmyadmin/apache.conf  |   42 ++++++++++++++++++++
- .../recipes-php/phpmyadmin/phpmyadmin_3.5.2.2.bb   |   30 ++++++++++++++
- 2 files changed, 72 insertions(+)
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/apache.conf
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin_3.5.2.2.bb
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/apache.conf b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/apache.conf
-new file mode 100644
-index 0000000..94cbd86
---- /dev/null
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/apache.conf
-@@ -0,0 +1,42 @@
-+# phpMyAdmin default Apache configuration
-+
-+Alias /phpmyadmin /usr/share/phpmyadmin
-+
-+<Directory /usr/share/phpmyadmin>
-+	Options FollowSymLinks
-+	DirectoryIndex index.php
-+	Require all granted
-+
-+	<IfModule mod_php5.c>
-+		AddType application/x-httpd-php .php
-+
-+		php_flag magic_quotes_gpc Off
-+		php_flag track_vars On
-+		php_flag register_globals Off
-+		php_admin_flag allow_url_fopen Off
-+		php_value include_path .
-+		php_admin_value upload_tmp_dir /var/lib/phpmyadmin/tmp
-+		php_admin_value open_basedir /usr/share/phpmyadmin/:/etc/phpmyadmin/:/var/lib/phpmyadmin/
-+	</IfModule>
-+</Directory>
-+
-+# Authorize for setup
-+<Directory /usr/share/phpmyadmin/setup>
-+    <IfModule mod_authn_file.c>
-+    AuthType Basic
-+    AuthName "phpMyAdmin Setup"
-+    AuthUserFile /etc/phpmyadmin/htpasswd.setup
-+    </IfModule>
-+    Require valid-user
-+</Directory>
-+
-+# Disallow web access to directories that don't need it
-+<Directory /usr/share/phpmyadmin/libraries>
-+    Order Deny,Allow
-+    Deny from All
-+</Directory>
-+<Directory /usr/share/phpmyadmin/setup/lib>
-+    Order Deny,Allow
-+    Deny from All
-+</Directory>
-+
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_3.5.2.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_3.5.2.2.bb
-new file mode 100644
-index 0000000..e3a581c
---- /dev/null
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_3.5.2.2.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Web-based MySQL administration interface"
-+HOMEPAGE = "http://www.phpmyadmin.net"
-+# Main code is GPLv2, libraries/tcpdf is under LGPLv3, js/jquery is under MIT
-+LICENSE = "GPLv2 & LGPLv3 & MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
-+                    file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
-+
-+PR = "r0"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-+           file://apache.conf"
-+
-+SRC_URI[md5sum] = "3f8993fe0f2fee1a022768278c6a270b"
-+SRC_URI[sha256sum] = "d02de081c522d3026f4a8418538f7ff05adf280afa404851a5f7f4ef895b4a7d"
-+
-+S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
-+
-+inherit allarch
-+
-+do_install() {
-+	install -d ${D}${datadir}/${PN}
-+	cp -a * ${D}${datadir}/${PN}
-+
-+	install -d ${D}${sysconfdir}/apache2/conf.d
-+	install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
-+}
-+
-+FILES_${PN} = "${datadir}/${PN} \
-+               ${sysconfdir}/apache2/conf.d"
-+
+The following changes since commit 68f05443333afa527e3b24e4caae6115dfb6b6b6:
+
+  opencv: bump PR due libav update (2012-10-05 11:27:25 +0200)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/mysqlfix
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/mysqlfix
+
+Paul Eggleton (2):
+  mysql: fix include path reported by mysql_config
+  cherokee: bump PR to enable mysql support
+
+ .../cherokee/cherokee_1.2.98.bb                    |    2 +-
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc    |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
 -- 
 1.7.9.5
 
