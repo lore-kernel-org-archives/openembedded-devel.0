@@ -1,34 +1,20 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TKu4r-0006VQ-KD
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TKulX-0007a3-4n
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Oct 2012 18:51:42 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so3043821pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Oct 2012 09:38:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=imSBQFkKe4f1BgW0mamGH5NNi0NTVzJVINSSDi0Vzfo=;
-	b=zUpbs3Hq2fmfiGdi8pxN8EQcLK9s0mouadp+V5thZ0e87ZDAskehopkEkFzVDvl8OM
-	mepYPVTKNM70Z7eN0pUi/cAg1iJzNhQakiXUvi2CBcTWw7RStkAQ3AS8xVxkXIpacNxR
-	ErUZ40oOZ5IqW/IgLr4U+OugarElsSs0AlkjsSjGcP5uZKEXiENE+J6a1Rak7Qghu/qY
-	mKnT/6Abzae+GpMqqkwRZP7INm5LTqYutASb2jRv7ScLbuSzDwgouZ6GXmLuBXeqjb0S
-	SxaqKlN+vDfrKCIOxSa02angaBN89gpyQH15SgYh6xHjDxN7GXKfkRTyAofnx+A4JB+4
-	RzbA==
-MIME-Version: 1.0
-Received: by 10.68.197.70 with SMTP id is6mr34513730pbc.64.1349627915648; Sun,
-	07 Oct 2012 09:38:35 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.36.105 with HTTP; Sun, 7 Oct 2012 09:38:35 -0700 (PDT)
-In-Reply-To: <1349580035-28194-1-git-send-email-otavio@ossystems.com.br>
-References: <1349580035-28194-1-git-send-email-otavio@ossystems.com.br>
-Date: Sun, 7 Oct 2012 13:38:35 -0300
-X-Google-Sender-Auth: jTy1E_Tey6KKZEa9xVP6stsrNKY
-Message-ID: <CAP9ODKp0MX+dKfCThJXEJY8AtkHSSYcyfKgCmi-vHj8F=FbVmw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sun, 07 Oct 2012 19:35:47 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 07 Oct 2012 10:22:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,547,1344236400"; d="scan'208";a="222667683"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.60])
+	by orsmga002.jf.intel.com with ESMTP; 07 Oct 2012 10:22:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] xbmc: Fix serveral build errors and install missing dependencies
+Date: Sun,  7 Oct 2012 18:22:28 +0100
+Message-Id: <1349630548-10790-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] pinpoint: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +28,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Oct 2012 16:51:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 07 Oct 2012 17:35:47 -0000
 
-On Sun, Oct 7, 2012 at 12:20 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> This allow the package to build fine. On the test board it didn't show
-> anything in display but it seems to be hardware specific issue.
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Add new recipe for the latest git version of pinpoint, the
+hacker-friendly presentation tool.
 
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb |   20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
 
-I found an error, will send v2 soon.
-
+diff --git a/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb b/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
+new file mode 100644
+index 0000000..4949570
+--- /dev/null
++++ b/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A simple presentation tool for hackers"
++DESCRIPTION = "Pinpoint is a simple presentation tool that hopes to avoid audience death \
++               by bullet point and instead encourage presentations containing beautiful \
++               images and small amounts of concise text in slides."
++SECTION = "x11/multimedia"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
++                    file://pinpoint.c;beginline=6;endline=17;md5=201d438283607da393fae6aca085454c"
++
++DEPENDS = "gnome-common glib-2.0 gdk-pixbuf clutter-1.8 clutter-gst-1.8"
++
++inherit autotools gettext
++
++SRC_URI = "git://git.gnome.org/browse/pinpoint;protocol=http"
++
++SRCREV = "5b22660f5b247023ca409403f1c2cc834d8ce632"
++PV = "0.1.4+gitr${SRCPV}"
++
++S = "${WORKDIR}/git"
++
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.9.5
+
 
 
