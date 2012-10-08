@@ -1,39 +1,38 @@
 Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gmarco.dev@gmail.com>) id 1TL74f-0003j4-Tr
+	(envelope-from <sledz@dresearch-fe.de>) id 1TL8E5-0005lv-7v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 08:44:22 +0200
-Received: by mail-bk0-f47.google.com with SMTP id jk7so1708285bkc.6
+	Mon, 08 Oct 2012 09:58:09 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so1732634bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Oct 2012 23:31:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=3i0w31Wr2YKZ7rLAJThaBEmawYbvXSFmg4TAo/+i/To=;
-	b=dRK2QYGCeGJ4oBSMp28uCsgSQtyQujBG9XplxMSGrLqTS75J6BYTLaeKZV6xGUvwnI
-	4Fl88RTcfgozAnE5eEX03ZUq9ms2fH/PE/IuUbvpaG/R+7tRkEe0tlrIHoD2p6hNlCfc
-	V9PDaQx9TzhrwiS9fKPERa1RWJ/xjDydSFS+5wfKBhPNgEfogTa4bSk27ZkZTKbyo7ud
-	wd18d7COjLCsQrAcwJQ+b8owCPF+qr9QeV/0FuAl7pt4ajqCDu2YbFB+B08sbl99ofgm
-	Fl5kbjjdfKauBVLa0mlnivyC/uQfHCWPE6rkgvpc2h/vxqOXooHpQSfYj8omvI00Extk
-	xffw==
-Received: by 10.204.136.197 with SMTP id s5mr4975547bkt.88.1349677876242;
-	Sun, 07 Oct 2012 23:31:16 -0700 (PDT)
-Received: from [192.168.1.149] (net-93-70-97-230.cust.dsl.vodafone.it.
-	[93.70.97.230])
-	by mx.google.com with ESMTPS id g8sm11243857bkv.6.2012.10.07.23.31.14
-	(version=SSLv3 cipher=OTHER); Sun, 07 Oct 2012 23:31:15 -0700 (PDT)
-Message-ID: <50727328.10703@gmail.com>
-Date: Mon, 08 Oct 2012 08:31:04 +0200
-From: Marco Guerri <gmarco.dev@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+	Mon, 08 Oct 2012 00:45:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:x-enigmail-version:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=hatvxOnYZ1CUX+zx/JVO236nAuJBt7vzwN88XJCQ1XQ=;
+	b=fCpJUC33GSlQqZZ7mCfGD6BlP6btiyjKBd9LQRkfVA0yoOwCVQYNLoihWEdyjWMIDQ
+	W1A29PTeyNoif72eS573TyXnSBBHIqguOmTpQxqEjgsGDTeYSGZPgZupHX69/ztcQS9S
+	KhpfkTxtElAuwtsdzXBmsvH0svtyYQ7mzjiJgqdiw+IWMxUVuskFi2U9e4bZydP1IQl5
+	LHVRIWfYlyN59vABXlIHNrJoeEAEyR6lhQoLiJI4uc7TlyLXtgxRNB1pGDfPlGTnuQgN
+	uwgPlDrG/G2VdCeHgsB46nZuIEJYpTu8uOkq5yXIGS1rjUyIFROhoX6WmsPOwK2SY0zs
+	5Cuw==
+Received: by 10.204.152.136 with SMTP id g8mr4796666bkw.44.1349682303118;
+	Mon, 08 Oct 2012 00:45:03 -0700 (PDT)
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id fm5sm5642665bkc.5.2012.10.08.00.45.01
+	(version=SSLv3 cipher=OTHER); Mon, 08 Oct 2012 00:45:02 -0700 (PDT)
+Message-ID: <5072847C.7@dresearch-fe.de>
+Date: Mon, 08 Oct 2012 09:45:00 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120825 Thunderbird/15.0
 MIME-Version: 1.0
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-References: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
-	<20121005105103.162c1a06@eb-e6520>
-In-Reply-To: <20121005105103.162c1a06@eb-e6520>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: External toolchain - Helloworld works but help needed
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.4.4
+X-Gm-Message-State: ALoCoQlidMwOQN3POWh9KPPePi0qxkSGZH4V96DkK32YBUlmYZG/9FxRgWGxkB66y6lqlGNKTWoh
+Subject: pango-native build problem (and solution idea)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 06:44:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 08 Oct 2012 07:58:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Thank you to everyone, I've solved my problem following the example of 
-external-sourcery-toolchain.bb. Now all the libraries are deployed 
-correctly into the filesystem and I can boot a minimal-image. Right now 
-I'm using oe classic but I will switch to oe-core asap.
+After upgrading my build host to openSUSE 12.2 i hit a build problem with pango-native (from oe-classic).
 
-Best regards
-Marco
+-------------> snip <-------------
+...
+| x86_64-linux-libtool: link: gcc -isystem/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/include -O2 -g -Wall -Wl,-rpath-link -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib -Wl,-rpath -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib -Wl,-O1 -o .libs/pango-view viewer-render.o viewer-main.o pango-view.o viewer-x.o viewer-pangox.o viewer-pangoft2.o viewer-cairo.o viewer-pangocairo.o -pthread  -L/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib ../pango/.libs/libpango-1.0.so ../pango/.libs/libpangox-1.0.so ../pango/.libs/libpangoft2-1.0.so ../pango/.libs/libpangocairo-1.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/work/x86_64-linux/pango-native-1.24.4-r1.2/pango-1.24.4/pango/.libs/libpangoft2-1.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/work/x86_64-linux/pango-native-1.24.4-r1.2/pango-1.24.4/pango/.libs/libpango-1.0.so
+/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgobject-2.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgthread-2.0.so -lpthread /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgmodule-2.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libglib-2.0.so -lrt /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libcairo.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpixman-1.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libfontconfig.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libfreetype.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libexpat.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpng12.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libX11.so
+/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libxcb.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpthread-stubs.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libXau.so -ldl /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libz.so -lXrender -lm -pthread -Wl,-rpath -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib
+| /usr/lib64/gcc/x86_64-suse-linux/4.7/../../../../lib64/libXrender.so: undefined reference to `_XGetRequest'
+| collect2: error: ld returned 1 exit status
+-------------> snip <-------------
 
-Il 10/05/2012 10:51 AM, Eric BÈnard ha scritto:
-> Hi Marco,
->
-> Le Thu, 4 Oct 2012 16:16:44 +0200,
-> Marco Guerri <gmarco.dev@gmail.com> a Ècrit :
->> I'm having some troubles trying to get a working filesystem for a custom
->> board based on a Freescale iMX35 SOC.
-> you can find our working BSP for an i.MX35 board here :
-> https://github.com/eukrea/meta-eukrea
-> (use MACHINE="eukrea-cpuimx35")
->
-> Best regards
-> Eric
+It seems that the libXrender version at the build host now misses the _XGetRequest symbol.
 
+Would it be an acceptable solution to add libxrender-native to DEPENDS_virtclass-native?
+
+Regards,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Gesch√§ftsf√ºhrer: Dr. Michael Weber, Werner M√∂gle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
