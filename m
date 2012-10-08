@@ -1,28 +1,43 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TL66a-0000bR-1w
+	(envelope-from <sledz@dresearch-fe.de>) id 1TL6kK-0001qW-Si
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 07:42:16 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q985T9BN001837
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 7 Oct 2012 22:29:09 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.309.2;
-	Sun, 7 Oct 2012 22:29:08 -0700
-Message-ID: <507264A2.3090800@windriver.com>
-Date: Mon, 8 Oct 2012 13:29:06 +0800
-From: jhuang0 <jackie.huang@windriver.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+	Mon, 08 Oct 2012 08:23:20 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so1702557bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Oct 2012 23:10:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=3cSuOqp+Sqx+1Pt6vkDujW34AmuIab97H9escEYoVCA=;
+	b=Sf9Gzg5Wqu7zgxSR4D5sWGV241xWkoOA0Pf3Z+zjsAtMxHpkX1VQUUBxYjgHh46tHK
+	87MCcVw2Pgqv90wNAAUuChfBQB0jL5mRyeYeBOdOp0h1STIUTGtoQ2BgCABLaq8N3Rcp
+	9Yds/6G4U/OWn8Ic94qhp1IeANUBZGRz+kMTEQ/KtWqxFlKYbBnWL9G8xWXbOOunuRvO
+	a/GiR3HgOGEvmq2/MYTl6AK4kVZXijSXiuUaVUk/YRKmtBnYye84fUIG7SRAtdumCCMh
+	t5G3Ss9ll+2KaWuxucNpSdJBlr8iIiXSXpDUvzMPlmI3E0IbaS5AxMeeC1HbO3ehfN+X
+	skrA==
+Received: by 10.204.145.85 with SMTP id c21mr5001178bkv.46.1349676614788;
+	Sun, 07 Oct 2012 23:10:14 -0700 (PDT)
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPS id z22sm11209196bkw.2.2012.10.07.23.10.12
+	(version=SSLv3 cipher=OTHER); Sun, 07 Oct 2012 23:10:13 -0700 (PDT)
+Message-ID: <50726E43.4050205@dresearch-fe.de>
+Date: Mon, 08 Oct 2012 08:10:11 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120825 Thunderbird/15.0
 MIME-Version: 1.0
-To: Koen Kooi <koen@dominion.thruhere.net>
-References: <1349401196-24611-1-git-send-email-jackie.huang@windriver.com>
-	<k4p3uf$1rs$1@ger.gmane.org>
-In-Reply-To: <k4p3uf$1rs$1@ger.gmane.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v3] iw: add iw 3.6 recipe
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1349466172.git.sledz@dresearch-fe.de>
+	<366eb039e4231b2285f46a74effced4b4f919d51.1349466172.git.sledz@dresearch-fe.de>
+	<bfb296f1cdd2a326b3754e4d8351203a44bee262.1349466172.git.sledz@dresearch-fe.de>
+	<CAMKF1sqp0aS+Op15TmjM1iWPkzZ_6Cvh4KBFi=-LQrtAXwAsKA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqp0aS+Op15TmjM1iWPkzZ_6Cvh4KBFi=-LQrtAXwAsKA@mail.gmail.com>
+X-Enigmail-Version: 1.4.4
+X-Gm-Message-State: ALoCoQkK94o95tNaNhPVS7vhp/wWXXYi0XVcsyinvUWUFkZ8DsMNQSiKlEl61pW5T+TZkDdRcfbl
+Subject: Re: [meta-java 2/5] icedtea6-native-1.7.10: backport S7103224
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,50 +51,609 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 05:42:16 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Oct 2012 06:23:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
+On 08.10.2012 00:29, Khem Raj wrote:
+> I have posted some patches which covered this as well some weeks ago
+> 
+> see
+> 
+> http://patchwork.openembedded.org/patch/33463/
 
+If i'm right they were for 1.8.11 only.
 
-On 10/6/2012 7:16 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 05-10-12 03:39, jackie.huang@windriver.com schreef:
->> iw: add iw 3.6 recipe
+> On Fri, Oct 5, 2012 at 12:46 PM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+>> Backport the fix for 7103224.
 >>
->> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->
-> Is there a strong reason to keep the old recipe?
-
-No, I will drop the old recipe.
-
-Thanks,
-Jackie
-
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFQcBMRMkyGM64RGpERAjETAKCoJ9Uxn+mkwVmidt0COiXE7cXFGgCgkjaP
-> 3A0vZJwg6gsdyDuP0DYAsS8=
-> =bBXN
-> -----END PGP SIGNATURE-----
->
->
+>> This fix allows icedtea6 to be built with (very) new glibc versions.
+>> It was originally suggested by Omair Majid from RedHat.
+>>
+>> For details see:
+>> <http://permalink.gmane.org/gmane.comp.java.openjdk.distro-packaging.devel/16103>
+>> <http://mail.openjdk.java.net/pipermail/hotspot-dev/2011-October/004589.html>
+>>
+>> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+>> ---
+>>  .../glibc_name_collision.patch                     |  523 ++++++++++++++++++++
+>>  recipes-core/icedtea/icedtea6-native_1.7.10.bb     |    3 +-
+>>  2 files changed, 525 insertions(+), 1 deletion(-)
+>>  create mode 100644 recipes-core/icedtea/icedtea6-native-1.7.10/glibc_name_collision.patch
+>>
+>> diff --git a/recipes-core/icedtea/icedtea6-native-1.7.10/glibc_name_collision.patch b/recipes-core/icedtea/icedtea6-native-1.7.10/glibc_name_collision.patch
+>> new file mode 100644
+>> index 0000000..0702b77
+>> --- /dev/null
+>> +++ b/recipes-core/icedtea/icedtea6-native-1.7.10/glibc_name_collision.patch
+>> @@ -0,0 +1,523 @@
+>> +icedtea6-native-1.7.10: backport S7103224
+>> +
+>> +Backport the fix for 7103224.
+>> +
+>> +This fix allows icedtea6 to be built with (very) new glibc versions.
+>> +It was originally suggested by Omair Majid from RedHat.
+>> +
+>> +For details see:
+>> +<http://permalink.gmane.org/gmane.comp.java.openjdk.distro-packaging.devel/16103>
+>> +<http://mail.openjdk.java.net/pipermail/hotspot-dev/2011-October/004589.html>
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+>> +
+>> +diff -Nurd icedtea6-1.7.10.orig/Makefile.am icedtea6-1.7.10/Makefile.am
+>> +--- icedtea6-1.7.10.orig/Makefile.am   2012-05-03 14:59:31.596076283 +0200
+>> ++++ icedtea6-1.7.10/Makefile.am        2012-05-03 15:03:43.787566714 +0200
+>> +@@ -393,7 +393,8 @@
+>> +       patches/openjdk/6541476-png-iTXt-chunk.patch \
+>> +       patches/openjdk/6782079-png_metadata_oom.patch \
+>> +       patches/rh676659-gcc-export-dynamic.patch \
+>> +-      patches/latent_jaxp_bug.patch
+>> ++      patches/latent_jaxp_bug.patch \
+>> ++      patches/openjdk/7103224-glibc_name_collision.patch
+>> +
+>> + if WITH_ALT_HSBUILD
+>> + ICEDTEA_PATCHES += patches/hotspot/$(HSBUILD)/openjdk-6886353-ignore_deoptimizealot.patch \
+>> +diff -Nurd icedtea6-1.7.10.orig/patches/openjdk/7103224-glibc_name_collision.patch icedtea6-1.7.10/patches/openjdk/7103224-glibc_name_collision.patch
+>> +--- icedtea6-1.7.10.orig/patches/openjdk/7103224-glibc_name_collision.patch    1970-01-01 01:00:00.000000000 +0100
+>> ++++ icedtea6-1.7.10/patches/openjdk/7103224-glibc_name_collision.patch 2012-05-03 15:01:27.817684671 +0200
+>> +@@ -0,0 +1,491 @@
+>> ++# HG changeset patch
+>> ++# User never
+>> ++# Date 1319555835 25200
+>> ++# Node ID a6eef545f1a2ceca6aeadf688a965df600ffef28
+>> ++# Parent  2ec638646e86e455978c31a9d47fc0ec271ed926
+>> ++7103224: collision between __LEAF define in interfaceSupport.hpp and /usr/include/sys/cdefs.h with gcc
+>> ++Reviewed-by: never
+>> ++Contributed-by: Omair Majid <omajid@...>
+>> ++
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/opto/addnode.cpp
+>> ++--- openjdk/hotspot/src/share/vm/opto/addnode.cpp     Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/opto/addnode.cpp     Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -34,8 +34,6 @@
+>> ++
+>> ++ // Portions of code courtesy of Clifford Click
+>> ++
+>> ++-#define MAXFLOAT        ((float)3.40282346638528860e+38)
+>> ++-
+>> ++ // Classic Add functionality.  This covers all the usual 'add' behaviors for
+>> ++ // an algebraic ring.  Add-integer, add-float, add-double, and binary-or are
+>> ++ // all inherited from this class.  The various identity values are supplied
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jniCheck.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jniCheck.cpp   Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jniCheck.cpp   Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -107,7 +107,7 @@
+>> ++     if (env != xenv) {                                                   \
+>> ++       NativeReportJNIFatalError(thr, warn_wrong_jnienv);                 \
+>> ++     }                                                                    \
+>> ++-    __ENTRY(result_type, header, thr)
+>> +++    VM_ENTRY_BASE(result_type, header, thr)
+>> ++
+>> ++
+>> ++ #define UNCHECKED() (unchecked_jni_NativeInterface)
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiEnter.xsl
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiEnter.xsl Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiEnter.xsl Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -426,7 +426,7 @@
+>> ++     <xsl:value-of select="$space"/>
+>> ++     <xsl:text>ThreadInVMfromNative __tiv(current_thread);</xsl:text>
+>> ++     <xsl:value-of select="$space"/>
+>> ++-    <xsl:text>__ENTRY(jvmtiError, </xsl:text>
+>> +++    <xsl:text>VM_ENTRY_BASE(jvmtiError, </xsl:text>
+>> ++     <xsl:apply-templates select="." mode="functionid"/>
+>> ++     <xsl:text> , current_thread)</xsl:text>
+>> ++     <xsl:value-of select="$space"/>
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiEnv.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiEnv.cpp   Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiEnv.cpp   Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -173,7 +173,7 @@
+>> ++     // from native so as to resolve the jthread.
+>> ++
+>> ++     ThreadInVMfromNative __tiv(current_thread);
+>> ++-    __ENTRY(jvmtiError, JvmtiEnv::GetThreadLocalStorage , current_thread)
+>> +++    VM_ENTRY_BASE(jvmtiError, JvmtiEnv::GetThreadLocalStorage , current_thread)
+>> ++     debug_only(VMNativeEntryWrapper __vew;)
+>> ++
+>> ++     oop thread_oop = JNIHandles::resolve_external_guard(thread);
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiExport.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiExport.cpp        Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiExport.cpp        Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -373,7 +373,7 @@
+>> ++     JavaThread* current_thread = (JavaThread*) ThreadLocalStorage::thread();
+>> ++     // transition code: native to VM
+>> ++     ThreadInVMfromNative __tiv(current_thread);
+>> ++-    __ENTRY(jvmtiEnv*, JvmtiExport::get_jvmti_interface, current_thread)
+>> +++    VM_ENTRY_BASE(jvmtiEnv*, JvmtiExport::get_jvmti_interface, current_thread)
+>> ++     debug_only(VMNativeEntryWrapper __vew;)
+>> ++
+>> ++     JvmtiEnv *jvmti_env = JvmtiEnv::create_a_jvmti(version);
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/runtime/interfaceSupport.hpp
+>> ++--- openjdk/hotspot/src/share/vm/runtime/interfaceSupport.hpp Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/runtime/interfaceSupport.hpp Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -72,9 +72,9 @@
+>> ++   }
+>> ++ };
+>> ++
+>> ++-// InterfaceSupport provides functionality used by the __LEAF and __ENTRY
+>> ++-// macros. These macros are used to guard entry points into the VM and
+>> ++-// perform checks upon leave of the VM.
+>> +++// InterfaceSupport provides functionality used by the VM_LEAF_BASE and
+>> +++// VM_ENTRY_BASE macros. These macros are used to guard entry points into
+>> +++// the VM and perform checks upon leave of the VM.
+>> ++
+>> ++
+>> ++ class InterfaceSupport: AllStatic {
+>> ++@@ -433,7 +433,7 @@
+>> ++
+>> ++ // LEAF routines do not lock, GC or throw exceptions
+>> ++
+>> ++-#define __LEAF(result_type, header)                                  \
+>> +++#define VM_LEAF_BASE(result_type, header)                            \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   debug_only(NoHandleMark __hm;)                                     \
+>> ++   /* begin of body */
+>> ++@@ -441,7 +441,7 @@
+>> ++
+>> ++ // ENTRY routines may lock, GC and throw exceptions
+>> ++
+>> ++-#define __ENTRY(result_type, header, thread)                         \
+>> +++#define VM_ENTRY_BASE(result_type, header, thread)                   \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   HandleMarkCleaner __hm(thread);                                    \
+>> ++   Thread* THREAD = thread;                                           \
+>> ++@@ -450,7 +450,7 @@
+>> ++
+>> ++ // QUICK_ENTRY routines behave like ENTRY but without a handle mark
+>> ++
+>> ++-#define __QUICK_ENTRY(result_type, header, thread)                   \
+>> +++#define VM_QUICK_ENTRY_BASE(result_type, header, thread)             \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   debug_only(NoHandleMark __hm;)                                     \
+>> ++   Thread* THREAD = thread;                                           \
+>> ++@@ -463,20 +463,20 @@
+>> ++ #define IRT_ENTRY(result_type, header)                               \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJava __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++
+>> ++ #define IRT_LEAF(result_type, header)                                \
+>> ++   result_type header {                                               \
+>> ++-    __LEAF(result_type, header)                                      \
+>> +++    VM_LEAF_BASE(result_type, header)                                \
+>> ++     debug_only(No_Safepoint_Verifier __nspv(true);)
+>> ++
+>> ++
+>> ++ #define IRT_ENTRY_NO_ASYNC(result_type, header)                      \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++ // Another special case for nmethod_entry_point so the nmethod that the
+>> ++@@ -487,7 +487,7 @@
+>> ++   result_type header {                                               \
+>> ++     nmethodLocker _nmlock(nm);                                       \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++ #define IRT_END }
+>> ++
+>> ++@@ -497,20 +497,20 @@
+>> ++ #define JRT_ENTRY(result_type, header)                               \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJava __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++
+>> ++ #define JRT_LEAF(result_type, header)                                \
+>> ++   result_type header {                                               \
+>> ++-  __LEAF(result_type, header)                                        \
+>> +++  VM_LEAF_BASE(result_type, header)                                  \
+>> ++   debug_only(JRT_Leaf_Verifier __jlv;)
+>> ++
+>> ++
+>> ++ #define JRT_ENTRY_NO_ASYNC(result_type, header)                      \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++ // Same as JRT Entry but allows for return value after the safepoint
+>> ++@@ -543,11 +543,11 @@
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ // Ensure that the VMNativeEntryWrapper constructor, which can cause
+>> ++-// a GC, is called outside the NoHandleMark (set via __QUICK_ENTRY).
+>> +++// a GC, is called outside the NoHandleMark (set via VM_QUICK_ENTRY_BASE).
+>> ++ #define JNI_QUICK_ENTRY(result_type, header)                         \
+>> ++ extern "C" {                                                         \
+>> ++   result_type JNICALL header {                                \
+>> ++@@ -555,7 +555,7 @@
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __QUICK_ENTRY(result_type, header, thread)
+>> +++    VM_QUICK_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JNI_LEAF(result_type, header)                                \
+>> ++@@ -563,7 +563,7 @@
+>> ++   result_type JNICALL header {                                \
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++-    __LEAF(result_type, header)
+>> +++    VM_LEAF_BASE(result_type, header)
+>> ++
+>> ++
+>> ++ // Close the routine and the extern "C"
+>> ++@@ -579,7 +579,7 @@
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_ENTRY_NO_ENV(result_type, header)                        \
+>> ++@@ -588,7 +588,7 @@
+>> ++     JavaThread* thread = (JavaThread*)ThreadLocalStorage::thread();  \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_QUICK_ENTRY(result_type, header)                         \
+>> ++@@ -597,14 +597,14 @@
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __QUICK_ENTRY(result_type, header, thread)
+>> +++    VM_QUICK_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_LEAF(result_type, header)                                \
+>> ++ extern "C" {                                                         \
+>> ++   result_type JNICALL header {                                       \
+>> ++     VM_Exit::block_if_vm_exited();                                   \
+>> ++-    __LEAF(result_type, header)
+>> +++    VM_LEAF_BASE(result_type, header)
+>> ++
+>> ++
+>> ++ #define JVM_END } }
+>> ++
+>> ++iff --git a/Makefile.am b/Makefile.am
+>> ++-- a/Makefile.am
+>> ++++ b/Makefile.am
+>> ++@ -362,7 +362,8 @@
+>> ++      patches/openjdk/7036148-npe-null-jmenu-name.patch \
+>> ++      patches/jtreg-bug7036148-test.patch \
+>> ++      patches/support_linux_3.patch \
+>> ++      patches/openjdk/6826104-npe_on_app_and_toolkit_modal_dialog_click.patch
+>> ++      patches/openjdk/6826104-npe_on_app_and_toolkit_modal_dialog_click.patch \
+>> ++      patches/openjdk/7103224-glibc_name_collision.patch
+>> ++
+>> ++if WITH_ALT_HSBUILD
+>> ++ICEDTEA_PATCHES += \
+>> ++iff --git a/patches/openjdk/7103224-glibc_name_collision.patch b/patches/openjdk/7103224-glibc_name_collision.patch
+>> ++ew file mode 100644
+>> ++-- /dev/null
+>> ++++ b/patches/openjdk/7103224-glibc_name_collision.patch
+>> ++@ -0,0 +1,236 @@
+>> ++# HG changeset patch
+>> ++# User never
+>> ++# Date 1319555835 25200
+>> ++# Node ID a6eef545f1a2ceca6aeadf688a965df600ffef28
+>> ++# Parent  2ec638646e86e455978c31a9d47fc0ec271ed926
+>> ++7103224: collision between __LEAF define in interfaceSupport.hpp and /usr/include/sys/cdefs.h with gcc
+>> ++Reviewed-by: never
+>> ++Contributed-by: Omair Majid <omajid@...>
+>> ++
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/opto/addnode.cpp
+>> ++--- openjdk/hotspot/src/share/vm/opto/addnode.cpp     Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/opto/addnode.cpp     Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -34,8 +34,6 @@
+>> ++
+>> ++ // Portions of code courtesy of Clifford Click
+>> ++
+>> ++-#define MAXFLOAT        ((float)3.40282346638528860e+38)
+>> ++-
+>> ++ // Classic Add functionality.  This covers all the usual 'add' behaviors for
+>> ++ // an algebraic ring.  Add-integer, add-float, add-double, and binary-or are
+>> ++ // all inherited from this class.  The various identity values are supplied
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jniCheck.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jniCheck.cpp   Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jniCheck.cpp   Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -107,7 +107,7 @@
+>> ++     if (env != xenv) {                                                   \
+>> ++       NativeReportJNIFatalError(thr, warn_wrong_jnienv);                 \
+>> ++     }                                                                    \
+>> ++-    __ENTRY(result_type, header, thr)
+>> +++    VM_ENTRY_BASE(result_type, header, thr)
+>> ++
+>> ++
+>> ++ #define UNCHECKED() (unchecked_jni_NativeInterface)
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiEnter.xsl
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiEnter.xsl Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiEnter.xsl Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -426,7 +426,7 @@
+>> ++     <xsl:value-of select="$space"/>
+>> ++     <xsl:text>ThreadInVMfromNative __tiv(current_thread);</xsl:text>
+>> ++     <xsl:value-of select="$space"/>
+>> ++-    <xsl:text>__ENTRY(jvmtiError, </xsl:text>
+>> +++    <xsl:text>VM_ENTRY_BASE(jvmtiError, </xsl:text>
+>> ++     <xsl:apply-templates select="." mode="functionid"/>
+>> ++     <xsl:text> , current_thread)</xsl:text>
+>> ++     <xsl:value-of select="$space"/>
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiEnv.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiEnv.cpp   Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiEnv.cpp   Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -173,7 +173,7 @@
+>> ++     // from native so as to resolve the jthread.
+>> ++
+>> ++     ThreadInVMfromNative __tiv(current_thread);
+>> ++-    __ENTRY(jvmtiError, JvmtiEnv::GetThreadLocalStorage , current_thread)
+>> +++    VM_ENTRY_BASE(jvmtiError, JvmtiEnv::GetThreadLocalStorage , current_thread)
+>> ++     debug_only(VMNativeEntryWrapper __vew;)
+>> ++
+>> ++     oop thread_oop = JNIHandles::resolve_external_guard(thread);
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/prims/jvmtiExport.cpp
+>> ++--- openjdk/hotspot/src/share/vm/prims/jvmtiExport.cpp        Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/prims/jvmtiExport.cpp        Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -373,7 +373,7 @@
+>> ++     JavaThread* current_thread = (JavaThread*) ThreadLocalStorage::thread();
+>> ++     // transition code: native to VM
+>> ++     ThreadInVMfromNative __tiv(current_thread);
+>> ++-    __ENTRY(jvmtiEnv*, JvmtiExport::get_jvmti_interface, current_thread)
+>> +++    VM_ENTRY_BASE(jvmtiEnv*, JvmtiExport::get_jvmti_interface, current_thread)
+>> ++     debug_only(VMNativeEntryWrapper __vew;)
+>> ++
+>> ++     JvmtiEnv *jvmti_env = JvmtiEnv::create_a_jvmti(version);
+>> ++diff -r 2ec638646e86 -r a6eef545f1a2 src/share/vm/runtime/interfaceSupport.hpp
+>> ++--- openjdk/hotspot/src/share/vm/runtime/interfaceSupport.hpp Tue Oct 25 04:07:20 2011 -0700
+>> +++++ openjdk/hotspot/src/share/vm/runtime/interfaceSupport.hpp Tue Oct 25 08:17:15 2011 -0700
+>> ++@@ -72,9 +72,9 @@
+>> ++   }
+>> ++ };
+>> ++
+>> ++-// InterfaceSupport provides functionality used by the __LEAF and __ENTRY
+>> ++-// macros. These macros are used to guard entry points into the VM and
+>> ++-// perform checks upon leave of the VM.
+>> +++// InterfaceSupport provides functionality used by the VM_LEAF_BASE and
+>> +++// VM_ENTRY_BASE macros. These macros are used to guard entry points into
+>> +++// the VM and perform checks upon leave of the VM.
+>> ++
+>> ++
+>> ++ class InterfaceSupport: AllStatic {
+>> ++@@ -433,7 +433,7 @@
+>> ++
+>> ++ // LEAF routines do not lock, GC or throw exceptions
+>> ++
+>> ++-#define __LEAF(result_type, header)                                  \
+>> +++#define VM_LEAF_BASE(result_type, header)                            \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   debug_only(NoHandleMark __hm;)                                     \
+>> ++   /* begin of body */
+>> ++@@ -441,7 +441,7 @@
+>> ++
+>> ++ // ENTRY routines may lock, GC and throw exceptions
+>> ++
+>> ++-#define __ENTRY(result_type, header, thread)                         \
+>> +++#define VM_ENTRY_BASE(result_type, header, thread)                   \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   HandleMarkCleaner __hm(thread);                                    \
+>> ++   Thread* THREAD = thread;                                           \
+>> ++@@ -450,7 +450,7 @@
+>> ++
+>> ++ // QUICK_ENTRY routines behave like ENTRY but without a handle mark
+>> ++
+>> ++-#define __QUICK_ENTRY(result_type, header, thread)                   \
+>> +++#define VM_QUICK_ENTRY_BASE(result_type, header, thread)             \
+>> ++   TRACE_CALL(result_type, header)                                    \
+>> ++   debug_only(NoHandleMark __hm;)                                     \
+>> ++   Thread* THREAD = thread;                                           \
+>> ++@@ -463,20 +463,20 @@
+>> ++ #define IRT_ENTRY(result_type, header)                               \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJava __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++
+>> ++ #define IRT_LEAF(result_type, header)                                \
+>> ++   result_type header {                                               \
+>> ++-    __LEAF(result_type, header)                                      \
+>> +++    VM_LEAF_BASE(result_type, header)                                \
+>> ++     debug_only(No_Safepoint_Verifier __nspv(true);)
+>> ++
+>> ++
+>> ++ #define IRT_ENTRY_NO_ASYNC(result_type, header)                      \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++ // Another special case for nmethod_entry_point so the nmethod that the
+>> ++@@ -487,7 +487,7 @@
+>> ++   result_type header {                                               \
+>> ++     nmethodLocker _nmlock(nm);                                       \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++ #define IRT_END }
+>> ++
+>> ++@@ -497,20 +497,20 @@
+>> ++ #define JRT_ENTRY(result_type, header)                               \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJava __tiv(thread);                                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++
+>> ++ #define JRT_LEAF(result_type, header)                                \
+>> ++   result_type header {                                               \
+>> ++-  __LEAF(result_type, header)                                        \
+>> +++  VM_LEAF_BASE(result_type, header)                                  \
+>> ++   debug_only(JRT_Leaf_Verifier __jlv;)
+>> ++
+>> ++
+>> ++ #define JRT_ENTRY_NO_ASYNC(result_type, header)                      \
+>> ++   result_type header {                                               \
+>> ++     ThreadInVMfromJavaNoAsyncException __tiv(thread);                \
+>> ++-    __ENTRY(result_type, header, thread)                             \
+>> +++    VM_ENTRY_BASE(result_type, header, thread)                       \
+>> ++     debug_only(VMEntryWrapper __vew;)
+>> ++
+>> ++ // Same as JRT Entry but allows for return value after the safepoint
+>> ++@@ -543,11 +543,11 @@
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ // Ensure that the VMNativeEntryWrapper constructor, which can cause
+>> ++-// a GC, is called outside the NoHandleMark (set via __QUICK_ENTRY).
+>> +++// a GC, is called outside the NoHandleMark (set via VM_QUICK_ENTRY_BASE).
+>> ++ #define JNI_QUICK_ENTRY(result_type, header)                         \
+>> ++ extern "C" {                                                         \
+>> ++   result_type JNICALL header {                                \
+>> ++@@ -555,7 +555,7 @@
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __QUICK_ENTRY(result_type, header, thread)
+>> +++    VM_QUICK_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JNI_LEAF(result_type, header)                                \
+>> ++@@ -563,7 +563,7 @@
+>> ++   result_type JNICALL header {                                \
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     assert( !VerifyJNIEnvThread || (thread == Thread::current()), "JNIEnv is only valid in same thread"); \
+>> ++-    __LEAF(result_type, header)
+>> +++    VM_LEAF_BASE(result_type, header)
+>> ++
+>> ++
+>> ++ // Close the routine and the extern "C"
+>> ++@@ -579,7 +579,7 @@
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_ENTRY_NO_ENV(result_type, header)                        \
+>> ++@@ -588,7 +588,7 @@
+>> ++     JavaThread* thread = (JavaThread*)ThreadLocalStorage::thread();  \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __ENTRY(result_type, header, thread)
+>> +++    VM_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_QUICK_ENTRY(result_type, header)                         \
+>> ++@@ -597,14 +597,14 @@
+>> ++     JavaThread* thread=JavaThread::thread_from_jni_environment(env); \
+>> ++     ThreadInVMfromNative __tiv(thread);                              \
+>> ++     debug_only(VMNativeEntryWrapper __vew;)                          \
+>> ++-    __QUICK_ENTRY(result_type, header, thread)
+>> +++    VM_QUICK_ENTRY_BASE(result_type, header, thread)
+>> ++
+>> ++
+>> ++ #define JVM_LEAF(result_type, header)                                \
+>> ++ extern "C" {                                                         \
+>> ++   result_type JNICALL header {                                       \
+>> ++     VM_Exit::block_if_vm_exited();                                   \
+>> ++-    __LEAF(result_type, header)
+>> +++    VM_LEAF_BASE(result_type, header)
+>> ++
+>> ++
+>> ++ #define JVM_END } }
+>> diff --git a/recipes-core/icedtea/icedtea6-native_1.7.10.bb b/recipes-core/icedtea/icedtea6-native_1.7.10.bb
+>> index 54ac87d..a3edb98 100644
+>> --- a/recipes-core/icedtea/icedtea6-native_1.7.10.bb
+>> +++ b/recipes-core/icedtea/icedtea6-native_1.7.10.bb
+>> @@ -2,7 +2,7 @@ require ${PN}.inc
+>>
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>>
+>> -PR = "${INC_PR}.0"
+>> +PR = "${INC_PR}.1"
+>>
+>>  SRC_URI = "\
+>>         http://icedtea.classpath.org/download/source/icedtea6-${PV}.tar.gz;name=iced \
+>> @@ -12,6 +12,7 @@ SRC_URI = "\
+>>         file://build-hacks-native.patch \
+>>         file://icedtea-sane-x86-arch-name.patch \
+>>          file://icedtea-javac-in.patch \
+>> +        file://glibc_name_collision.patch \
+>>         ${ICEDTEA_PATCHES} \
+>>         "
+>>  SRC_URI[ojdk.md5sum] = "078fe0ab744c98694decc77f2456c560"
+>> --
+>> 1.7.10.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> 
+
 
 -- 
-Jackie Huang
-WIND RIVER | China Development Center
-MSN:jackielily@hotmail.com
-Tel: +86 8477 8594
-Mobile: +86 138 1027 4745
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
 
