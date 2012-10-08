@@ -1,38 +1,39 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-la0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1TL8E5-0005lv-7v
+	(envelope-from <sledz@dresearch-fe.de>) id 1TLB0a-0005Xv-N3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 09:58:09 +0200
-Received: by mail-bk0-f47.google.com with SMTP id jk7so1732634bkc.6
+	Mon, 08 Oct 2012 12:56:24 +0200
+Received: by mail-la0-f47.google.com with SMTP id h5so1961163lam.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2012 00:45:03 -0700 (PDT)
+	Mon, 08 Oct 2012 03:43:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:x-enigmail-version:content-type:content-transfer-encoding
 	:x-gm-message-state;
-	bh=hatvxOnYZ1CUX+zx/JVO236nAuJBt7vzwN88XJCQ1XQ=;
-	b=fCpJUC33GSlQqZZ7mCfGD6BlP6btiyjKBd9LQRkfVA0yoOwCVQYNLoihWEdyjWMIDQ
-	W1A29PTeyNoif72eS573TyXnSBBHIqguOmTpQxqEjgsGDTeYSGZPgZupHX69/ztcQS9S
-	KhpfkTxtElAuwtsdzXBmsvH0svtyYQ7mzjiJgqdiw+IWMxUVuskFi2U9e4bZydP1IQl5
-	LHVRIWfYlyN59vABXlIHNrJoeEAEyR6lhQoLiJI4uc7TlyLXtgxRNB1pGDfPlGTnuQgN
-	uwgPlDrG/G2VdCeHgsB46nZuIEJYpTu8uOkq5yXIGS1rjUyIFROhoX6WmsPOwK2SY0zs
-	5Cuw==
-Received: by 10.204.152.136 with SMTP id g8mr4796666bkw.44.1349682303118;
-	Mon, 08 Oct 2012 00:45:03 -0700 (PDT)
+	bh=0e7vOy/CQ0Z5j6lxOFG9UyISP9ztJjYDbjPd8mqxN/I=;
+	b=oQQsRoeMbWqwVROPl3QZm/kwrus46UMGPyYEV0rRBrFYp9EQ3s5b8PgycVQ+HhdyLH
+	qOXSH8LNKq6pIk+9opJc05JN7ldkHWxX3SRaJqJHeYehlV2/lhsq9JJkjRxpme+20dY+
+	gN5ORSCK5DadIC3SJmHVAD+BQ9vpEmcPz6OHfD/x/wGpE74Q7Ppce7ylj2rcYQ2fLPVM
+	NiCGvxwF3gGSo46IAsbYyYbjconI6E5Ouf9q1jJ7Dkh9YOPsOUljViR8iMwrCX04P6F2
+	GBLpGdSAYrFI1edzzc2iwdRPfTLRta56l44YVEhxP00HvZX0IqZMAcfJBw2JRR88FfR3
+	QMfQ==
+Received: by 10.112.42.37 with SMTP id k5mr6449193lbl.110.1349692998604;
+	Mon, 08 Oct 2012 03:43:18 -0700 (PDT)
 Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id fm5sm5642665bkc.5.2012.10.08.00.45.01
-	(version=SSLv3 cipher=OTHER); Mon, 08 Oct 2012 00:45:02 -0700 (PDT)
-Message-ID: <5072847C.7@dresearch-fe.de>
-Date: Mon, 08 Oct 2012 09:45:00 +0200
+	by mx.google.com with ESMTPS id oj5sm5349545lab.8.2012.10.08.03.43.17
+	(version=SSLv3 cipher=OTHER); Mon, 08 Oct 2012 03:43:17 -0700 (PDT)
+Message-ID: <5072AE42.6060201@dresearch-fe.de>
+Date: Mon, 08 Oct 2012 12:43:14 +0200
 From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:15.0) Gecko/20120825 Thunderbird/15.0
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Henning Heinold <heinold@inf.fu-berlin.de>
 X-Enigmail-Version: 1.4.4
-X-Gm-Message-State: ALoCoQlidMwOQN3POWh9KPPePi0qxkSGZH4V96DkK32YBUlmYZG/9FxRgWGxkB66y6lqlGNKTWoh
-Subject: pango-native build problem (and solution idea)
+X-Gm-Message-State: ALoCoQk7Asfe1Kda6vakZDsGXap+HJI/0FF+fyKYPlqxsiXJeUNO1gS/Rs5q/duz7XnMAETpD5KF
+Subject: llvm vs. meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,26 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 07:58:10 -0000
+X-List-Received-Date: Mon, 08 Oct 2012 10:56:24 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-After upgrading my build host to openSUSE 12.2 i hit a build problem with pango-native (from oe-classic).
+Hi meta-java maintainers,
 
--------------> snip <-------------
-...
-| x86_64-linux-libtool: link: gcc -isystem/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/include -O2 -g -Wall -Wl,-rpath-link -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib -Wl,-rpath -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib -Wl,-O1 -o .libs/pango-view viewer-render.o viewer-main.o pango-view.o viewer-x.o viewer-pangox.o viewer-pangoft2.o viewer-cairo.o viewer-pangocairo.o -pthread  -L/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib ../pango/.libs/libpango-1.0.so ../pango/.libs/libpangox-1.0.so ../pango/.libs/libpangoft2-1.0.so ../pango/.libs/libpangocairo-1.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/work/x86_64-linux/pango-native-1.24.4-r1.2/pango-1.24.4/pango/.libs/libpangoft2-1.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/work/x86_64-linux/pango-native-1.24.4-r1.2/pango-1.24.4/pango/.libs/libpango-1.0.so
-/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgobject-2.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgthread-2.0.so -lpthread /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libgmodule-2.0.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libglib-2.0.so -lrt /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libcairo.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpixman-1.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libfontconfig.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libfreetype.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libexpat.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpng12.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libX11.so
-/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libxcb.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libpthread-stubs.so /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libXau.so -ldl /pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib/libz.so -lXrender -lm -pthread -Wl,-rpath -Wl,/pm/sledz/HydraIP/OE/tmp.6-SSZ-fensuse/sysroots/x86_64-linux/usr/lib
-| /usr/lib64/gcc/x86_64-suse-linux/4.7/../../../../lib64/libXrender.so: undefined reference to `_XGetRequest'
-| collect2: error: ld returned 1 exit status
--------------> snip <-------------
+should llvm really be part of meta-java/recipes-core?
 
-It seems that the libXrender version at the build host now misses the _XGetRequest symbol.
+I believe this involves a great danger of conflicts with other layers.
 
-Would it be an acceptable solution to add libxrender-native to DEPENDS_virtclass-native?
-
-Regards,
 Steffen
 
 -- 
