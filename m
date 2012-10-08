@@ -1,32 +1,32 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TLE7G-00047t-0I
+	(envelope-from <raj.khem@gmail.com>) id 1TLE9H-0004r2-BY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 16:15:30 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so2508773eei.6
+	Mon, 08 Oct 2012 16:17:35 +0200
+Received: by mail-ee0-f47.google.com with SMTP id t10so2510607eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2012 07:02:23 -0700 (PDT)
+	Mon, 08 Oct 2012 07:04:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=GP8zx7Z+n1NKhLmTobsaRBk1r6N+A1HPmzqI5iFte2k=;
-	b=JwoetSJCi52ANSI1Q1O42evmO47Qe/5t3sKBHDEqUeQlgqrY02NPF4QK0AceyYyssi
-	j9M8O+/FtS7gao/kKS7KZPgpxREvOl6vY7RQl0pnrDmlZiym82XnF51PEnkEuWOpspBT
-	vPAnCcsgQbeqAWvETtX2D/hZYw/Bn7iTlScHwS6SIQ2J2PRgivIoFbSDK3WD3fLjbQw1
-	IutpKmCXEtxlut9f1lCt0+swAY9FUCj2r4NBkY6PNK2LwxahbWiTWnuM0PhnYpon/fFh
-	mbtoOeMkkqhapsqQIB9E1oymSyrx5ahblXefI9E4wSa+A0owvDVGZJZDNsh+Q2yvYAN6
-	GvzQ==
-Received: by 10.14.221.132 with SMTP id r4mr22460262eep.29.1349704943642; Mon,
-	08 Oct 2012 07:02:23 -0700 (PDT)
+	:cc:content-type:content-transfer-encoding;
+	bh=8wn+nQncedILgFGK8UyT0SxJB6qXnLmbiC8B9NTz3jY=;
+	b=NFk/rtEcmbxutXeYH/iJtNuxbeBUEDCWUiE5Dqr8RNVKG2AfamzGwILbQ3ULC0mUr+
+	1I7EHyVv9hs9tCWCN6nEprKfyeX5e3i87UFGDgyZ35gvcu97EHX20X6/jcatdkoJSdfB
+	V6sOCcDhFCkRTQibEQ8kiU2C+1cqBKRW5wPH/qpa0myxGviIENkSBAPmoBw+StHcAPll
+	Vd0kIJs8R/hJzfCbLONYpK9k/HzFaQcVzfSFW+TKyJsPjF9ec4Bhh+BQsbrqa7Z00Xn1
+	IxB7LFUOdil+DbXytc58ZHRMpt7LXR5Dz3uG41v0NtNbWKhoZ2RMtR8KKBapNMQTxv8z
+	QXDQ==
+Received: by 10.14.221.132 with SMTP id r4mr22473160eep.29.1349705069378; Mon,
+	08 Oct 2012 07:04:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.14.219.66 with HTTP; Mon, 8 Oct 2012 07:01:53 -0700 (PDT)
-In-Reply-To: <5072847C.7@dresearch-fe.de>
-References: <5072847C.7@dresearch-fe.de>
+Received: by 10.14.219.66 with HTTP; Mon, 8 Oct 2012 07:03:59 -0700 (PDT)
+In-Reply-To: <5072AE42.6060201@dresearch-fe.de>
+References: <5072AE42.6060201@dresearch-fe.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Oct 2012 07:01:53 -0700
-Message-ID: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
+Date: Mon, 8 Oct 2012 07:03:59 -0700
+Message-ID: <CAMKF1spAG+CpC_Xza5FF6cF91v9_Du61HdrY2+LhzRb50BXiCw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: pango-native build problem (and solution idea)
+Subject: Re: llvm vs. meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 14:15:30 -0000
+X-List-Received-Date: Mon, 08 Oct 2012 14:17:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 8, 2012 at 12:45 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
-e:
-> After upgrading my build host to openSUSE 12.2 i hit a build problem with=
- pango-native (from oe-classic).
+On Mon, Oct 8, 2012 at 3:43 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote=
+:
+> Hi meta-java maintainers,
+>
+> should llvm really be part of meta-java/recipes-core?
+>
+> I believe this involves a great danger of conflicts with other layers.
 >
 
-heh keeping the build going with newer distros is going to be a
-challange with time.
+so far there has been only meta-java lone consumer of it. we will
+cross that bridge when it happens. we might move it into oe-core then
 
-> It seems that the libXrender version at the build host now misses the _XG=
-etRequest symbol.
->
-> Would it be an acceptable solution to add libxrender-native to DEPENDS_vi=
-rtclass-native?
->
-
-seems ok to me.
-
-> Regards,
 > Steffen
 >
 > --
