@@ -1,24 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TL6vX-00026p-I7
+	(envelope-from <Jackie.Huang@windriver.com>) id 1TL73q-0000px-8H
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 08:34:55 +0200
+	Mon, 08 Oct 2012 08:43:30 +0200
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q986Lnq1002194
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q986UMe5021085
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 7 Oct 2012 23:21:49 -0700 (PDT)
+	Sun, 7 Oct 2012 23:30:22 -0700 (PDT)
 Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Sun, 7 Oct 2012 23:21:48 -0700
+	14.2.309.2; Sun, 7 Oct 2012 23:30:22 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Oct 2012 14:21:47 +0800
-Message-ID: <1349677307-6317-1-git-send-email-jackie.huang@windriver.com>
+Date: Mon, 8 Oct 2012 14:30:20 +0800
+Message-ID: <1349677820-6529-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.4
 MIME-Version: 1.0
-Subject: [PATCH] iw: update to 3.6
+Subject: [meta-oe][PATCH v4] iw: update to 3.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 06:34:56 -0000
+X-List-Received-Date: Mon, 08 Oct 2012 06:43:30 -0000
 Content-Type: text/plain
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
