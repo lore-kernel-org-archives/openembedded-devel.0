@@ -1,24 +1,39 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1TL73q-0000px-8H
+	(envelope-from <gmarco.dev@gmail.com>) id 1TL74f-0003j4-Tr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Oct 2012 08:43:30 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q986UMe5021085
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 08 Oct 2012 08:44:22 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so1708285bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 7 Oct 2012 23:30:22 -0700 (PDT)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Sun, 7 Oct 2012 23:30:22 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Oct 2012 14:30:20 +0800
-Message-ID: <1349677820-6529-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.4
+	Sun, 07 Oct 2012 23:31:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=3i0w31Wr2YKZ7rLAJThaBEmawYbvXSFmg4TAo/+i/To=;
+	b=dRK2QYGCeGJ4oBSMp28uCsgSQtyQujBG9XplxMSGrLqTS75J6BYTLaeKZV6xGUvwnI
+	4Fl88RTcfgozAnE5eEX03ZUq9ms2fH/PE/IuUbvpaG/R+7tRkEe0tlrIHoD2p6hNlCfc
+	V9PDaQx9TzhrwiS9fKPERa1RWJ/xjDydSFS+5wfKBhPNgEfogTa4bSk27ZkZTKbyo7ud
+	wd18d7COjLCsQrAcwJQ+b8owCPF+qr9QeV/0FuAl7pt4ajqCDu2YbFB+B08sbl99ofgm
+	Fl5kbjjdfKauBVLa0mlnivyC/uQfHCWPE6rkgvpc2h/vxqOXooHpQSfYj8omvI00Extk
+	xffw==
+Received: by 10.204.136.197 with SMTP id s5mr4975547bkt.88.1349677876242;
+	Sun, 07 Oct 2012 23:31:16 -0700 (PDT)
+Received: from [192.168.1.149] (net-93-70-97-230.cust.dsl.vodafone.it.
+	[93.70.97.230])
+	by mx.google.com with ESMTPS id g8sm11243857bkv.6.2012.10.07.23.31.14
+	(version=SSLv3 cipher=OTHER); Sun, 07 Oct 2012 23:31:15 -0700 (PDT)
+Message-ID: <50727328.10703@gmail.com>
+Date: Mon, 08 Oct 2012 08:31:04 +0200
+From: Marco Guerri <gmarco.dev@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v4] iw: update to 3.6
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+References: <CA+qOGFeWVKCCaU3VtJ50C9wEEQN9=EgTAUKO3qxBsfabi8QCaQ@mail.gmail.com>
+	<20121005105103.162c1a06@eb-e6520>
+In-Reply-To: <20121005105103.162c1a06@eb-e6520>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: External toolchain - Helloworld works but help needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,53 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 06:43:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Oct 2012 06:44:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../iw/{iw_3.2.bb => iw_3.6.bb}                    |   13 +++++++------
- 1 files changed, 7 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-connectivity/iw/{iw_3.2.bb => iw_3.6.bb} (50%)
+Thank you to everyone, I've solved my problem following the example of 
+external-sourcery-toolchain.bb. Now all the libraries are deployed 
+correctly into the filesystem and I can boot a minimal-image. Right now 
+I'm using oe classic but I will switch to oe-core asap.
 
-diff --git a/meta-oe/recipes-connectivity/iw/iw_3.2.bb b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
-similarity index 50%
-rename from meta-oe/recipes-connectivity/iw/iw_3.2.bb
-rename to meta-oe/recipes-connectivity/iw/iw_3.6.bb
-index 65e7c8f..42a43c3 100644
---- a/meta-oe/recipes-connectivity/iw/iw_3.2.bb
-+++ b/meta-oe/recipes-connectivity/iw/iw_3.6.bb
-@@ -1,21 +1,22 @@
--DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
-+SUMMARY = "nl80211 based CLI configuration utility for wireless devices"
-+DESCRIPTION = "iw is a new nl80211 based CLI configuration utility for \
-+wireless devices. It supports almost all new drivers that have been added \
-+to the kernel recently. "
- HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
- SECTION = "base"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
- 
--PR = "r1"
--
- DEPENDS = "libnl pkgconfig"
- 
- SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
-            file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
-           "
- 
--SRC_URI[md5sum] = "80615c972a287dcd50890735469b0d1c"
--SRC_URI[sha256sum] = "370edabe6f73cc55be77a7502a3a25d23ec2aea900ae4ca3cec19d55bf8bdb12"
-+SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
-+SRC_URI[sha256sum] = "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
- 
--CFLAGS += "-DCONFIG_LIBNL30"
-+EXTRA_OEMAKE = ""
- 
- do_install() {
- 	oe_runmake DESTDIR=${D} install
--- 
-1.7.4
+Best regards
+Marco
+
+Il 10/05/2012 10:51 AM, Eric Bénard ha scritto:
+> Hi Marco,
+>
+> Le Thu, 4 Oct 2012 16:16:44 +0200,
+> Marco Guerri <gmarco.dev@gmail.com> a écrit :
+>> I'm having some troubles trying to get a working filesystem for a custom
+>> board based on a Freescale iMX35 SOC.
+> you can find our working BSP for an i.MX35 board here :
+> https://github.com/eukrea/meta-eukrea
+> (use MACHINE="eukrea-cpuimx35")
+>
+> Best regards
+> Eric
 
 
 
