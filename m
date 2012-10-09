@@ -1,26 +1,23 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TLWHo-0002Vz-RH
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TLXvh-0004jw-PB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 11:39:37 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 09 Oct 2012 02:26:28 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,560,1344236400"; d="scan'208";a="202252190"
-Received: from unknown (HELO helios.localnet) ([10.252.122.38])
-	by azsmga001.ch.intel.com with ESMTP; 09 Oct 2012 02:26:27 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 09 Oct 2012 10:26:26 +0100
-Message-ID: <1349777441.KzOilE1YnY@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-31-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <k50p40$558$2@ger.gmane.org>
-References: <1349606858-7635-1-git-send-email-paul.eggleton@linux.intel.com>
-	<k50p40$558$2@ger.gmane.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] lcdproc: add recipe from OE-Classic and update/clean up
+	Tue, 09 Oct 2012 13:24:53 +0200
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 5B2D5D22BC;
+	Tue,  9 Oct 2012 13:11:51 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Oct 2012 13:11:28 +0200
+Message-Id: <1349781099-25754-3-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1349781099-25754-1-git-send-email-marcin.juszkiewicz@linaro.org>
+References: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
+	<1349781099-25754-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Subject: [meta-oe][PATCH 03/14] lzip: update to 1.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,49 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 09:39:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 09 Oct 2012 11:24:53 -0000
 
-On Tuesday 09 October 2012 11:00:55 Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Op 07-10-12 12:47, Paul Eggleton schreef:
-> > * Update to latest upstream version 0.5.5 * Add an Ubuntu patch to fix
-> > incompatibility with current automake * Use automatic package splitting
-> > for drivers * Allow specifying drivers to build via LCD_DRIVERS * Allow
-> > specifying default enabled driver via LCD_DEFAULT_DRIVER * Disable g15
-> > driver by default (but allow it to be re-enabled using PACKAGECONFIG,
-> > assuming the required recipes are also provided). * Fix conf files not
-> > going into lcdvc and lcdd packages due to override expansion not
-> > happening at the expected time (for CONFFILES_*) * Remove some
-> > unnecessary cruft * Move packaging parts of recipe below do_install * Add
-> > LIC_FILES_CHKSUM * Make LICENSE more accurate * Add SUMMARY
-> > 
-> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> 
-> [..]
-> 
-> > +# Driver packages + +# USB / no USB trickery +
-> > +RCONFLICTS_lcdd-driver-hd47780nousb = "lcdd-driver-hd44780"
-> > +RCONFLICTS_lcdd-driver-hd47780 = "lcdd-driver-hd44780nousb" +
-> > +INITSCRIPT_PACKAGES = "lcdd lcdproc" +INITSCRIPT_NAME_lcdd = "lcdd"
-> > +INITSCRIPT_NAME_lcdproc = "lcdproc" +INITSCRIPT_PARAMS_lcdd = "defaults
-> > 70 21" +INITSCRIPT_PARAMS_lcdproc = "defaults 71 20"
-> 
-> Those the stock initscript have LSB headers? They help a lot when using
-> systemd to work out dependencies in sysv-compat mode.
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} (85%)
 
-Yes they do. I haven't tested them in conjunction with systemd, but they are 
-present.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/lzip/lzip_1.12.bb b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+similarity index 85%
+rename from meta-oe/recipes-support/lzip/lzip_1.12.bb
+rename to meta-oe/recipes-support/lzip/lzip_1.13.bb
+index 68f9d0d..e04b6dc 100644
+--- a/meta-oe/recipes-support/lzip/lzip_1.12.bb
++++ b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+ 
+ SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "69a40172db5ce896b58d862c50fcd517"
+-SRC_URI[sha256sum] = "eabc590d02d404dc1a1cc8e2777ed398370174b68edb22043c8ca0b209dfcd27"
++SRC_URI[md5sum] = "2f401e995c36cca05bd1805aa9c28231"
++SRC_URI[sha256sum] = "c73d36c0a926b71d484eacc192262a1d209674e3f903016f2c74a2bcbc5c28ac"
+ 
+ CONFIGUREOPTS = "\
+     '--srcdir=${S}' \
 -- 
+1.7.10.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
