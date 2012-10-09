@@ -1,33 +1,22 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TLTkr-0004fv-4e
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TLUpF-0006p0-QL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 08:57:25 +0200
-Received: by mail-ia0-f175.google.com with SMTP id b35so602895iac.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2012 23:44:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=lF5bmi2hwPr+M5STPPyz2lHUDIo0mytN9xrzUZ//CjU=;
-	b=1CgrPORvnc4LMH5wVA14vqFpeRTHj2o8orFI9PIA6qxU3Mmjmb9asfnIDQwby05jb/
-	IujZvDZm1vP9XUweMuKtolqk+FdWXhCrSldqrxbyFe6f/ZLcB/bcPQV2k2CAV44fZJiA
-	9b2drNq/aOisj+BkYFJkAw2T4iLr7LzQqelFZuHKIG2mFYKi9o/N9gUziPaQXfKkQBRf
-	AFMHH8HaGEE8czZ1V/Bpsi8i1tYnHMdcCZX3RCpfDsDl3vG7ljqvfYZJxhs+clTjf6yJ
-	Mr2Xq13phCm45PT3vNtoclWw7M16eaz0Qhx6Zf2BaxJInmUhqF4qU3OAbBduhe6J+Yzw
-	EwfQ==
-Received: by 10.50.187.134 with SMTP id fs6mr656095igc.61.1349765057460;
-	Mon, 08 Oct 2012 23:44:17 -0700 (PDT)
-Received: from leo.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id mi10sm9334844igc.16.2012.10.08.23.44.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 08 Oct 2012 23:44:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 09 Oct 2012 10:06:01 +0200
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 62F98D22BD;
+	Tue,  9 Oct 2012 09:52:44 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Oct 2012 23:44:06 -0700
-Message-Id: <1349765046-7315-1-git-send-email-raj.khem@gmail.com>
+Date: Tue,  9 Oct 2012 09:52:24 +0200
+Message-Id: <1349769155-12643-4-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-systemd][PATCH] systemd.bbclass: Dont check for multilib and change for nativesdk renaming
+In-Reply-To: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
+References: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Subject: [PATCH 03/14] lzip: update to 1.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 06:57:25 -0000
+X-List-Received-Date: Tue, 09 Oct 2012 08:06:01 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- meta-systemd/classes/systemd.bbclass |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/lzip/{lzip_1.12.bb => lzip_1.13.bb} (85%)
 
-diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
-index 96d7f8f..d1f7236 100644
---- a/meta-systemd/classes/systemd.bbclass
-+++ b/meta-systemd/classes/systemd.bbclass
-@@ -68,9 +68,11 @@ def systemd_after_parse(d):
+diff --git a/meta-oe/recipes-support/lzip/lzip_1.12.bb b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+similarity index 85%
+rename from meta-oe/recipes-support/lzip/lzip_1.12.bb
+rename to meta-oe/recipes-support/lzip/lzip_1.13.bb
+index 68f9d0d..e04b6dc 100644
+--- a/meta-oe/recipes-support/lzip/lzip_1.12.bb
++++ b/meta-oe/recipes-support/lzip/lzip_1.13.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
  
+ SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
  
-     bpn = d.getVar('BPN', 1)
-+    ml = d.getVar('MLPREFIX', 1)
-     if bpn + "-native" != d.getVar('PN', 1) and \
-             bpn + "-cross" != d.getVar('PN', 1) and \
--            bpn + "-nativesdk" != d.getVar('PN', 1):
-+            ml + bpn != d.getVar('PN', 1) and \
-+            "nativesdk-" + bpn != d.getVar('PN', 1):
-         systemd_check_vars()
-         for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
-             systemd_create_package(pkg_systemd)
+-SRC_URI[md5sum] = "69a40172db5ce896b58d862c50fcd517"
+-SRC_URI[sha256sum] = "eabc590d02d404dc1a1cc8e2777ed398370174b68edb22043c8ca0b209dfcd27"
++SRC_URI[md5sum] = "2f401e995c36cca05bd1805aa9c28231"
++SRC_URI[sha256sum] = "c73d36c0a926b71d484eacc192262a1d209674e3f903016f2c74a2bcbc5c28ac"
+ 
+ CONFIGUREOPTS = "\
+     '--srcdir=${S}' \
 -- 
-1.7.9.5
+1.7.10.4
 
 
 
