@@ -1,38 +1,39 @@
 Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1TLbCF-00064E-HR
+	(envelope-from <tom.rini@gmail.com>) id 1TLbDe-0006GF-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 16:54:11 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so4774213pbb.6
+	Tue, 09 Oct 2012 16:55:39 +0200
+Received: by mail-pb0-f47.google.com with SMTP id ro12so4775885pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 07:41:05 -0700 (PDT)
+	Tue, 09 Oct 2012 07:42:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=ts5ukgA2rSlFbYT/ZSSx30Dw0aS+03xsa9wpE4cNt74=;
-	b=mwByLiT332iJf0NGjgo8j7D/dtmFTBrtDsLJaUmHXccQ7y3eFZxb0LmbRmG9fORG6h
-	qKdf0x9ibou18PsnLp7dSI9pK+Aq21YQ1s3S1Yw9FdP+QOyYZLHc7fai8JR66ha5MB9p
-	orr84ZKSQevLB0CcOLvmj2E3oHuyr+EcwOxil9sz7YS4cSLnZJPRF9D6KutDaI4foesx
-	9ytiDqKQ+34ge7+llmDJPQSCHELPR9sx22qlrz9MGQvYoDA6xLqN3+45jjfiOMsWXTYJ
-	ceyIqx0jcnsa1fLe818+GqOSjyLj5aHv/yEaedfUQ8trzCywdl4Or7ywL3T4MPDPczxw
-	RFMw==
-Received: by 10.68.226.136 with SMTP id rs8mr24001126pbc.153.1349793665806;
-	Tue, 09 Oct 2012 07:41:05 -0700 (PDT)
+	:user-agent; bh=jaE84PM2YrWwX1CSrdWIyr7P9q1BxU1jiD5ArLkS6Zk=;
+	b=0OGo2USDDqEQ3LM0C4jrfKnfkiWKaAHhXzWPtD5nCdRzTjhhZv/IFEgjYyuLG7d7Vz
+	fhXfeTyeDqAgRUghB+QfzAAdj9SA62rHR0N1DGm+ENgYH0D7OnWCGgbZxtlYWxnPhKex
+	TjbmTeoYJaUk1nUq22oun7atyBJglF2TtSSTCEb8Dw7Xk1cOcdrByTAhGzuiUsAxoOuq
+	JQyNBKpUPgUIj3Mol6kv2l2vyVwYdMUL3CsBi0ufKSa/2lYIn+l0MFh2B99wJksNEs72
+	qUZNl4NJn0GFTUMUnWv4Ha/4ORA7WV8hABiB3YThj5gy7k6SXLTz6XdKgbNO1KOrJefv
+	woCg==
+Received: by 10.66.72.197 with SMTP id f5mr53318580pav.20.1349793750769;
+	Tue, 09 Oct 2012 07:42:30 -0700 (PDT)
 Received: from bill-the-cat ([2001:470:d:eba:d921:cb9:5b45:279c])
-	by mx.google.com with ESMTPS id oe5sm12502048pbb.8.2012.10.09.07.41.03
+	by mx.google.com with ESMTPS id po4sm12502367pbb.13.2012.10.09.07.42.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 09 Oct 2012 07:41:04 -0700 (PDT)
-Date: Tue, 9 Oct 2012 07:41:11 -0700
+	Tue, 09 Oct 2012 07:42:29 -0700 (PDT)
+Date: Tue, 9 Oct 2012 07:42:35 -0700
 From: Tom Rini <tom.rini@gmail.com>
 To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20121009144111.GC16530@bill-the-cat>
-References: <cover.1349266768.git.sledz@dresearch-fe.de>
+Message-ID: <20121009144235.GD16530@bill-the-cat>
+References: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
+	<cover.1349772344.git.sledz@dresearch-fe.de>
 MIME-Version: 1.0
-In-Reply-To: <cover.1349266768.git.sledz@dresearch-fe.de>
+In-Reply-To: <cover.1349772344.git.sledz@dresearch-fe.de>
 Organization: Texas Instruments
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/1] pull request 20121003
+Subject: Re: [2011.03-maintenance 0/1] pull request 20121009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 14:54:11 -0000
-X-Groupsio-MsgNum: 41027
+X-List-Received-Date: Tue, 09 Oct 2012 14:55:39 -0000
+X-Groupsio-MsgNum: 41028
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="raC6veAxrt5nqIoY"
+	protocol="application/pgp-signature"; boundary="q9KOos5vDmpwPx9o"
 Content-Disposition: inline
 
---raC6veAxrt5nqIoY
+--q9KOos5vDmpwPx9o
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 03, 2012 at 02:22:29PM +0200, Steffen Sledz wrote:
+On Tue, Oct 09, 2012 at 10:49:06AM +0200, Steffen Sledz wrote:
 
 > Hi Tom,
 >=20
-> please pull this commit which fixes the QA issue
->=20
->  ERROR: This autoconf log indicates errors, it looked at host includes.
->=20
-> for subversion by backporting some build related patches and recipe
-> modifications from oe-core.
+> please pull this commit which fixes a build problem on build hosts
+> with newer libXrender installations.
 >=20
 > Thx,
 > Steffen
@@ -78,35 +75,30 @@ fb:
 >=20
 > are available in the git repository at:
 >=20
->   git://github.com/sledz/oe pull-request-2
->   https://github.com/sledz/oe/tree/pull-request-2
+>   git://github.com/sledz/oe pull-request-3
+>   https://github.com/sledz/oe/tree/pull-request-3
 >=20
 > Steffen Sledz (1):
->   subversion-1.6.5: fix QA issue
+>   pango-native: add libxrender-native to dependencies
 >=20
->  recipes/subversion/files/fix-install-depends.patch |   45 ++++++++++++++=
-++++++
->  recipes/subversion/files/libtool2.patch            |   17 ++++++++
->  recipes/subversion/subversion_1.6.5.bb             |   21 ++++++---
->  3 files changed, 76 insertions(+), 7 deletions(-)
->  create mode 100644 recipes/subversion/files/fix-install-depends.patch
->  create mode 100644 recipes/subversion/files/libtool2.patch
+>  recipes/pango/pango.inc |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Applied to 2011.03-maintenance, thanks and sorry for the delay.
+Applied to 2011.03-maintenance, thanks!
 
 --=20
 Tom
 
---raC6veAxrt5nqIoY
+--q9KOos5vDmpwPx9o
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlB0N4YACgkQdZngf2G4WwPJGgCeIw+Kf6nJxNvc5D3a1TVgMoJu
-lE0An0wM5eKigdynfISTnjLL6Q6tJRA/
-=ZZM6
+iEYEARECAAYFAlB0N9sACgkQdZngf2G4WwOLygCePPAa7cK9sqdAR8wxxY+tWgTW
+h24AoIKrL6J3XIvMy/gk/w71L5DNohN/
+=njMB
 -----END PGP SIGNATURE-----
 
---raC6veAxrt5nqIoY--
+--q9KOos5vDmpwPx9o--
