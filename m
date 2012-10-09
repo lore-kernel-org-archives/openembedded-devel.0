@@ -1,22 +1,23 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from zk223.dresearch-fe.de ([217.92.177.116])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TLUpK-0006oz-5k
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 10:06:06 +0200
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id CF585D22BC;
-	Tue,  9 Oct 2012 09:52:43 +0200 (CEST)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2012 09:52:23 +0200
-Message-Id: <1349769155-12643-3-git-send-email-marcin.juszkiewicz@linaro.org>
+	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
+	id 1TLVhl-00016K-LU for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2012 11:02:21 +0200
+Received: from fensuse.internal.dresearch-fe.de
+	(fensuse.internal.dresearch-fe.de [172.29.23.6])
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id 20040E022C;
+	Tue,  9 Oct 2012 08:49:14 +0000 (UTC)
+Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
+	id 435C27041D5; Tue,  9 Oct 2012 10:49:13 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Tom Rini <tom.rini@gmail.com>, Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Oct 2012 10:49:06 +0200
+Message-Id: <cover.1349772344.git.sledz@dresearch-fe.de>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Subject: [PATCH 02/14] libdivecomputer: added missing AM_PROG_AR
+In-Reply-To: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
+References: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
+Subject: [2011.03-maintenance 0/1] pull request 20121009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,59 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 08:06:06 -0000
+X-List-Received-Date: Tue, 09 Oct 2012 09:02:21 -0000
 
-Change is present upstream for long time. We should consider update of
-recipe.
+Hi Tom,
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- .../libdivecomputer/files/fix-ar.patch               |   18 ++++++++++++++++++
- .../libdivecomputer/libdivecomputer_git.bb           |    5 ++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/libdivecomputer/files/fix-ar.patch
+please pull this commit which fixes a build problem on build hosts
+with newer libXrender installations.
 
-diff --git a/meta-oe/recipes-extended/libdivecomputer/files/fix-ar.patch b/meta-oe/recipes-extended/libdivecomputer/files/fix-ar.patch
-new file mode 100644
-index 0000000..cc3f5d4
---- /dev/null
-+++ b/meta-oe/recipes-extended/libdivecomputer/files/fix-ar.patch
-@@ -0,0 +1,18 @@
-+---
-+ configure.ac |    1 +
-+ 1 file changed, 1 insertion(+)
-+
-+--- git.orig/configure.ac
-++++ git/configure.ac
-+@@ -24,10 +24,11 @@ LT_INIT([win32-dll])
-+ LT_PROG_RC
-+ 
-+ # Checks for programs.
-+ AC_PROG_CC
-+ AC_PROG_CC_C99
-++AM_PROG_AR
-+ 
-+ # Enable automake silent build rules.
-+ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
-+ 
-+ # Checks for native Windows.
-diff --git a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
-index ac609a9..1154dc0 100644
---- a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
-+++ b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
-@@ -9,8 +9,11 @@ DEPENDS = "libusb1"
- inherit autotools pkgconfig
- 
- PV = "0.0.0"
-+PR = "r1"
-+
- SRCREV = "b7a6be15ca58cc8f89fbc8fa1a4c840e13d51092"
--SRC_URI = "git://libdivecomputer.git.sourceforge.net/gitroot/libdivecomputer/libdivecomputer"
-+SRC_URI = "git://libdivecomputer.git.sourceforge.net/gitroot/libdivecomputer/libdivecomputer \
-+file://fix-ar.patch"
- S = "${WORKDIR}/git"
- 
- 
+Thx,
+Steffen
+
+The following changes since commit a35ceaacb2019750dc9f4b4fd5ea927cf2ad47fb:
+
+  gdk-pixbuf: add missing dependencies (2012-09-14 15:07:04 -0700)
+
+are available in the git repository at:
+
+  git://github.com/sledz/oe pull-request-3
+  https://github.com/sledz/oe/tree/pull-request-3
+
+Steffen Sledz (1):
+  pango-native: add libxrender-native to dependencies
+
+ recipes/pango/pango.inc |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
 -- 
 1.7.10.4
 
