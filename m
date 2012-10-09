@@ -1,35 +1,27 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TLZ9R-0008MG-Cr for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 14:43:09 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TLYwl-0003SB-UR for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 14:30:03 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 14:30:03 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 14:30:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 09 Oct 2012 14:27:40 +0200
-Message-ID: <k5157e$he4$2@ger.gmane.org>
-References: <1348594741-21920-1-git-send-email-raj.khem@gmail.com>
-	<CAMKF1srkgtpOhjkY1hb_FTZjD+9e=PF8PbdX=tez_OyCxZwKpQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <CAMKF1srkgtpOhjkY1hb_FTZjD+9e=PF8PbdX=tez_OyCxZwKpQ@mail.gmail.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-systemd][PATCH] systemd: Upgrade past v191
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TLZA7-0008SG-Gi
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2012 14:43:52 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 09 Oct 2012 05:30:20 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,560,1344236400"; d="scan'208";a="203392271"
+Received: from unknown (HELO helios.localnet) ([10.252.122.38])
+	by orsmga001.jf.intel.com with ESMTP; 09 Oct 2012 05:30:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 09 Oct 2012 13:30:38 +0100
+Message-ID: <2982314.ddUisfMeTu@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-31-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <k51502$he4$1@ger.gmane.org>
+References: <cover.1349608252.git.paul.eggleton@linux.intel.com>
+	<438b1be4a4a437a034365729a873964b7e44d0e8.1349608252.git.paul.eggleton@linux.intel.com>
+	<k51502$he4$1@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH 1/3] apache2: fix configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +35,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 12:43:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Oct 2012 12:43:52 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 06-10-12 20:06, Khem Raj schreef:
-> ping
+On Tuesday 09 October 2012 14:23:43 Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> On Tue, Sep 25, 2012 at 10:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> Booted on eglibc/uclibc i586 systems
->> 
+> Op 07-10-12 13:13, Paul Eggleton schreef:
+> > * Include conf files in /etc/apache2/modules.d and conf.d * Add -D PHP5
+> > to options so that PHP is enabled if installed * Fix "reload" action in
+> > initscript
+> > 
+> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> 
+> This is more likely related to your previous patch, but:
+> | /bin/sh:
+> /OE/tentacle/build/tmp-angstrom_next-eglibc/work/armv7a-vfp-neon-angstrom-li
+> nux-gnueabi/apr-1.4.6-r1/apr-1.4.6/arm-angstrom-linux-gnueabi-libtool: No
+> such file or directory
+> 
+> | make[3]: *** [unixd.lo] Error 127
+> | make[3]: Leaving directory
+> 
+> `/OE/tentacle/build/tmp-angstrom_next-eglibc/work/armv7a-vfp-neon-angstrom-l
+> inux-gnueabi/apache2-2.4.2-r1/httpd-2.4.2/os/unix'
+> | make[2]: *** [all-recursive] Error 1
+> | make[2]: Leaving directory
+> 
+> `/OE/tentacle/build/tmp-angstrom_next-eglibc/work/armv7a-vfp-neon-angstrom-l
+> inux-gnueabi/apache2-2.4.2-r1/httpd-2.4.2/os/unix'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory
+> 
+> `/OE/tentacle/build/tmp-angstrom_next-eglibc/work/armv7a-vfp-neon-angstrom-l
+> inux-gnueabi/apache2-2.4.2-r1/httpd-2.4.2/os'
+> | make: *** [all-recursive] Error 1
+> | ERROR: oe_runmake failed
+> | ERROR: Function failed: do_compile (see
+> 
+> /OE/tentacle/build/tmp-angstrom_next-eglibc/work/armv7a-vfp-neon-angstrom-li
+> nux-gnueabi/apache2-2.4.2-r1/temp/log.do_compile.591 for further
+> information)
+> ERROR: Task 6
+> (/OE/tentacle/sources/meta-openembedded/meta-webserver/recipes-httpd/apache2
+> /apache2_2.4.2.bb, do_compile) failed with exit code '1'
 
-Let's update to 011afa76fb7b888a0a29e46665708c404f991e5d so we also get the
-infamous udev firmware fix for people not running 3.7-rc0 or newer.
+I'm guessing you are using rm_work? Obviously it's not supposed to be 
+referring to anything in the WORKDIR for another recipe, but it would at least 
+explain why I did not see that failure here.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Cheers,
+Paul
 
-iD8DBQFQdBg8MkyGM64RGpERAsEEAJ9QxIoa84dpN5u4xbnPich48KI7OQCfcdNr
-NdJbTKPY/EvlF4oKghKsTK8=
-=A6F3
------END PGP SIGNATURE-----
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
