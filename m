@@ -1,23 +1,34 @@
-Received: from zk223.dresearch-fe.de ([217.92.177.116])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
-	id 1TLVhp-00016W-FX for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 11:02:25 +0200
-Received: from fensuse.internal.dresearch-fe.de
-	(fensuse.internal.dresearch-fe.de [172.29.23.6])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id 6A4C3E022C;
-	Tue,  9 Oct 2012 08:49:18 +0000 (UTC)
-Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id 5C8DF7041D5; Tue,  9 Oct 2012 10:49:18 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch-fe.de>
-To: Tom Rini <tom.rini@gmail.com>, Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2012 10:49:16 +0200
-Message-Id: <cd110a86574144e0f9580bbc7cd4b4c3b0240710.1349772345.git.sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1349772344.git.sledz@dresearch-fe.de>
-References: <cover.1349772344.git.sledz@dresearch-fe.de>
-Subject: [2011.03-maintenance 1/1] pango-native: add libxrender-native to dependencies
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TLVrB-0001TE-E1 for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2012 11:12:05 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TLVeZ-0003ga-UP for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2012 10:59:03 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Oct 2012 10:59:03 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Oct 2012 10:59:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 09 Oct 2012 10:58:53 +0200
+Message-ID: <k50p05$558$1@ger.gmane.org>
+References: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Enigmail-Version: 1.4.4
+Subject: Re: Some updates from my world builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,42 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 09:02:25 -0000
+X-List-Received-Date: Tue, 09 Oct 2012 09:12:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-This avoids a link error on build hosts with newer libXrender installation.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-| /usr/lib64/gcc/x86_64-suse-linux/4.7/../../../../lib64/libXrender.so:  undefined reference to `_XGetRequest'
-| collect2: error: ld returned 1 exit status
+Op 09-10-12 09:52, Marcin Juszkiewicz schreef:
+> During AArch64 work I did several 'world' builds to stress cross 
+> toolchain and catch all ICEs and other problems. As there were problems I
+> tried to fix them when possible.
 
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
----
- recipes/pango/pango.inc |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Can you please read the README in meta-oe and submit patches accordingly so
+they get picked up in patchwork:
+http://patches.openembedded.org/project/oe/list/?q=meta-oe ?
 
-diff --git a/recipes/pango/pango.inc b/recipes/pango/pango.inc
-index c54fbad..b5a2649 100644
---- a/recipes/pango/pango.inc
-+++ b/recipes/pango/pango.inc
-@@ -10,7 +10,7 @@ SECTION = "x11/libs"
- 
- DEPENDS = "glib-2.0 fontconfig freetype zlib virtual/libiconv virtual/libx11 libxft gtk-doc cairo"
- 
--DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
-+DEPENDS_virtclass-native = "glib-2.0-native cairo-native libxrender-native"
- BBCLASSEXTEND = "native"
- 
- PACKAGES_DYNAMIC = "pango-module-*"
-@@ -20,7 +20,7 @@ RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc"
- RRECOMMENDS_${PN}_virtclass-native = ""
- 
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- # seems to go wrong with default cflags
- FULL_OPTIMIZATION_arm = "-O2"
--- 
-1.7.10.4
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQc+dMMkyGM64RGpERAktbAJ9/yMbZK3e371YYxL5ODw2Z3kFMpQCeIy18
+0X4TQbCbPyuDGdp3MUGA+5A=
+=Ig4C
+-----END PGP SIGNATURE-----
 
 
 
