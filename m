@@ -1,23 +1,29 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from ams-iport-4.cisco.com ([144.254.224.147])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TLXvr-0004lZ-Ff
+	(envelope-from <mertsas@cisco.com>) id 1TLYkg-000750-TZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 13:25:03 +0200
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 145D9D22BA;
-	Tue,  9 Oct 2012 13:11:55 +0200 (CEST)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Tue, 09 Oct 2012 14:17:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=1114; q=dns/txt; s=iport;
+	t=1349784269; x=1350993869;
+	h=from:to:cc:subject:date:message-id;
+	bh=iIfW/DfCAS8XBQlsV89jhMJB0ymX8boQTddBj9SElnA=;
+	b=U1LWwlH+LNPsQh/sXI8G5VXcSowjqNeidLXtVoAj1zYZX+1HFJOyQ+EY
+	4ALYTsgWtQXJtPk8SuXE7o6hJzZyd00bbZFzL62ZxUK6DEKEPAdNN8M70
+	dq75TvmYolzy+tLpxhca2f+kUuUiaGUJGfb/tSfuuxF+HvWbfPA3DsUs6 M=;
+X-IronPort-AV: E=Sophos;i="4.80,560,1344211200"; 
+   d="scan'208";a="8644968"
+Received: from ams-core-2.cisco.com ([144.254.72.75])
+	by ams-iport-4.cisco.com with ESMTP; 09 Oct 2012 12:04:26 +0000
+Received: from Lan.cisco.com (dhcp-10-54-74-11.cisco.com [10.54.74.11])
+	by ams-core-2.cisco.com (8.14.5/8.14.5) with ESMTP id q99C4QKb024986;
+	Tue, 9 Oct 2012 12:04:26 GMT
+From: Martin Ertsaas <mertsas@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2012 13:11:37 +0200
-Message-Id: <1349781099-25754-12-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1349781099-25754-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <1349769155-12643-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<1349781099-25754-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Subject: [meta-oe][PATCH 12/14] ca-certificates: update to 20120623 version
+Date: Tue,  9 Oct 2012 14:04:25 +0200
+Message-Id: <1349784265-25901-1-git-send-email-mertsas@cisco.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-oe][PATCH] libftdi: Change to use GPLv2 intead of GPLv2-REL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,40 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 11:25:03 -0000
+X-List-Received-Date: Tue, 09 Oct 2012 12:17:35 -0000
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+According to http://www.intra2net.com/en/developer/libftdi/, libftdi itself is licensed under LGPLv2,
+with some parts (eeprom programmer) is licensed under GPLv2. There doesn't seem to be any part licensed
+under a GPLv2-REL variation of GPLv2, and so we should use GPLv2 instead of GPLv2-REL.
+
+Signed-off-by: Martin Ertsaas <mertsas@cisco.com>
 ---
- .../{ca-certificates_20120212.bb => ca-certificates_20120623.bb} |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/ca-certificates/{ca-certificates_20120212.bb => ca-certificates_20120623.bb} (83%)
+ meta-oe/recipes-support/libftdi/libftdi_0.19.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
-similarity index 83%
-rename from meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb
-rename to meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
-index b3d7b9c..66150f0 100644
---- a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120212.bb
-+++ b/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
-@@ -2,13 +2,13 @@ DESCRIPTION = "Common CA certificates"
- HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
- SECTION = "misc"
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=6135800ff6d893c7904d7aad90972eb5"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
+index 2dba3f4..0842aaf 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
+@@ -4,7 +4,7 @@ including the popular bitbang mode."
+ HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
+ SECTION = "libs"
  
- SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
-            file://0001-update-ca-certificates-remove-c-rehash.patch"
- 
--SRC_URI[md5sum] = "391dea8d827db935ca0d0d1e6641bf23"
--SRC_URI[sha256sum] = "95f3eac93dad4433b5731bc9e106a26e2ccf210acace1927e597477b24187dce"
-+SRC_URI[md5sum] = "5105d4cc086f0d4ecf7bf2e4c4667289"
-+SRC_URI[sha256sum] = "878cd1130ba056fe5f96decde7e5fc1b71d35eb8565a1515744912e100731ee9"
- 
- inherit autotools allarch
- 
+-LICENSE = "LGPLv2.1 GPLv2-RLE"
++LICENSE = "LGPLv2.1 GPLv2"
+ LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
+                    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
+                   "
 -- 
-1.7.10.4
+1.7.8.6
 
 
 
