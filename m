@@ -1,39 +1,39 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1TLbDe-0006GF-Vx
+	(envelope-from <raj.khem@gmail.com>) id 1TLdFI-0008IE-2b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 16:55:39 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so4775885pbb.6
+	Tue, 09 Oct 2012 19:05:28 +0200
+Received: by mail-pa0-f47.google.com with SMTP id fa11so4850544pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 07:42:30 -0700 (PDT)
+	Tue, 09 Oct 2012 09:52:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=jaE84PM2YrWwX1CSrdWIyr7P9q1BxU1jiD5ArLkS6Zk=;
-	b=0OGo2USDDqEQ3LM0C4jrfKnfkiWKaAHhXzWPtD5nCdRzTjhhZv/IFEgjYyuLG7d7Vz
-	fhXfeTyeDqAgRUghB+QfzAAdj9SA62rHR0N1DGm+ENgYH0D7OnWCGgbZxtlYWxnPhKex
-	TjbmTeoYJaUk1nUq22oun7atyBJglF2TtSSTCEb8Dw7Xk1cOcdrByTAhGzuiUsAxoOuq
-	JQyNBKpUPgUIj3Mol6kv2l2vyVwYdMUL3CsBi0ufKSa/2lYIn+l0MFh2B99wJksNEs72
-	qUZNl4NJn0GFTUMUnWv4Ha/4ORA7WV8hABiB3YThj5gy7k6SXLTz6XdKgbNO1KOrJefv
-	woCg==
-Received: by 10.66.72.197 with SMTP id f5mr53318580pav.20.1349793750769;
-	Tue, 09 Oct 2012 07:42:30 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:d:eba:d921:cb9:5b45:279c])
-	by mx.google.com with ESMTPS id po4sm12502367pbb.13.2012.10.09.07.42.28
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=SAUjNWyEOGjFkjAwF/KRd0LtSwzT6qSXhCOKVh6muYA=;
+	b=UJ8aW02BVWx4k+OnowEEIPH8h6zIILuL9qpanLalHS/mkjo0esRBWkqw9519w54+du
+	6B4rTtW/DAUxsAwFmEHj5X8X34fRhfVynFA02DCquVScwS0sS8hcJ3tBlWjKo2mg0VEP
+	Zv0WnnKhKmBwGVtqR9wa4is0Pe9LXyK99nVv2YHMZnnl+2pffS5FDlEKd6yfJc2zg0FA
+	jKskZSq1XT6LYIV4Zt+Ubq4W7n/n4q9tBNtjlyfp2iIvAeqPiTyewBamqtxAwINA/sa0
+	O8kbuPsu40QSRXrRcngvShEu9PIXXgVh9I+leyQ5xqD6puArDiMkeNoOQ0z13VpIzfNN
+	lB2A==
+Received: by 10.68.125.226 with SMTP id mt2mr64696242pbb.120.1349801539442;
+	Tue, 09 Oct 2012 09:52:19 -0700 (PDT)
+Received: from kraj-sslvpn-nc.jnpr.net (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPS id
+	it6sm12651491pbc.14.2012.10.09.09.52.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 09 Oct 2012 07:42:29 -0700 (PDT)
-Date: Tue, 9 Oct 2012 07:42:35 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20121009144235.GD16530@bill-the-cat>
-References: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
-	<cover.1349772344.git.sledz@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <cover.1349772344.git.sledz@dresearch-fe.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/1] pull request 20121009
+	Tue, 09 Oct 2012 09:52:13 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <k5157e$he4$2@ger.gmane.org>
+Date: Tue, 9 Oct 2012 09:52:14 -0700
+Message-Id: <246BA823-B7D9-41FF-9C0D-E6F29A35F5CB@gmail.com>
+References: <1348594741-21920-1-git-send-email-raj.khem@gmail.com>
+	<CAMKF1srkgtpOhjkY1hb_FTZjD+9e=PF8PbdX=tez_OyCxZwKpQ@mail.gmail.com>
+	<k5157e$he4$2@ger.gmane.org>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1499)
+Subject: Re: [meta-systemd][PATCH] systemd: Upgrade past v191
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 14:55:39 -0000
-X-Groupsio-MsgNum: 41028
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="q9KOos5vDmpwPx9o"
-Content-Disposition: inline
-
---q9KOos5vDmpwPx9o
+X-List-Received-Date: Tue, 09 Oct 2012 17:05:28 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, Oct 09, 2012 at 10:49:06AM +0200, Steffen Sledz wrote:
 
-> Hi Tom,
->=20
-> please pull this commit which fixes a build problem on build hosts
-> with newer libXrender installations.
->=20
-> Thx,
-> Steffen
->=20
-> The following changes since commit a35ceaacb2019750dc9f4b4fd5ea927cf2ad47=
-fb:
->=20
->   gdk-pixbuf: add missing dependencies (2012-09-14 15:07:04 -0700)
->=20
-> are available in the git repository at:
->=20
->   git://github.com/sledz/oe pull-request-3
->   https://github.com/sledz/oe/tree/pull-request-3
->=20
-> Steffen Sledz (1):
->   pango-native: add libxrender-native to dependencies
->=20
->  recipes/pango/pango.inc |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+On Oct 9, 2012, at 5:27 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-Applied to 2011.03-maintenance, thanks!
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Op 06-10-12 20:06, Khem Raj schreef:
+>> ping
+>> 
+>> On Tue, Sep 25, 2012 at 10:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> Booted on eglibc/uclibc i586 systems
+>>> 
+> 
+> Let's update to 011afa76fb7b888a0a29e46665708c404f991e5d so we also get the
+> infamous udev firmware fix for people not running 3.7-rc0 or newer.
 
---=20
-Tom
 
---q9KOos5vDmpwPx9o
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+OK I will test out and send a V3 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlB0N9sACgkQdZngf2G4WwOLygCePPAa7cK9sqdAR8wxxY+tWgTW
-h24AoIKrL6J3XIvMy/gk/w71L5DNohN/
-=njMB
------END PGP SIGNATURE-----
 
---q9KOos5vDmpwPx9o--
+
