@@ -1,34 +1,33 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TLW6e-00027A-HE for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 11:28:04 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TLVu3-0003Ti-Fz for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 11:15:03 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 11:15:03 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <gizero@gmail.com>) id 1TLW78-0002DT-7S
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Oct 2012 11:28:34 +0200
+Received: by mail-we0-f175.google.com with SMTP id t44so3007323wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 11:15:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 09 Oct 2012 02:15:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=ThdoQLwgyM24qMJ3se8ioOHluexKOkdgMYBA9TVJxBU=;
+	b=uiJf+0HY+yOC3A0aIWsLKzw07UMJ9Vkk7Gfjx63bf5aM3CTLg/NBuKUmZ5Mq98iZiZ
+	JPcfXkpQAK5cjI42kWg/ixtg9Hfsd8VpfHXBuzIqPSiR/8BS/X0fKKHwoALP/8mGDO39
+	5CxoPs/2aI0cX/ikxPNAJhtI6tf9MiHD7ROU6lnzUFiP7xCsey/N/cxxPHMsotZU6KFd
+	WyyTObJiUUBBaAZGd6Jje+XEzcgWr6r9KYd+9FRlDpBVFxTq0u5oVKRdevsIXRauHQAx
+	+W07HN/axC04Z9Bovi8pWFjucGYhJvLHsJnRNjqvj93NurRoxN9J9I+srxEUu651J3hK
+	c4gA==
+Received: by 10.180.79.100 with SMTP id i4mr3078751wix.12.1349774127009;
+	Tue, 09 Oct 2012 02:15:27 -0700 (PDT)
+Received: from gizero-desktop.tw.it
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
+	by mx.google.com with ESMTPS id bn7sm27114770wib.8.2012.10.09.02.15.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 09 Oct 2012 02:15:26 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 09 Oct 2012 11:00:55 +0200
-Message-ID: <k50p40$558$2@ger.gmane.org>
-References: <1349606858-7635-1-git-send-email-paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <1349606858-7635-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-oe][PATCH] lcdproc: add recipe from OE-Classic and update/clean up
+Date: Tue,  9 Oct 2012 11:13:29 +0200
+Message-Id: <1349774009-4537-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] libconfig: port from classic and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 09:28:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Oct 2012 09:28:34 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* based on recipe from oe-classic
+* update to currently available upstream version 1.4.9
 
-Op 07-10-12 12:47, Paul Eggleton schreef:
-> * Update to latest upstream version 0.5.5 * Add an Ubuntu patch to fix
-> incompatibility with current automake * Use automatic package splitting
-> for drivers * Allow specifying drivers to build via LCD_DRIVERS * Allow
-> specifying default enabled driver via LCD_DEFAULT_DRIVER * Disable g15
-> driver by default (but allow it to be re-enabled using PACKAGECONFIG,
-> assuming the required recipes are also provided). * Fix conf files not
-> going into lcdvc and lcdd packages due to override expansion not
-> happening at the expected time (for CONFFILES_*) * Remove some
-> unnecessary cruft * Move packaging parts of recipe below do_install * Add
-> LIC_FILES_CHKSUM * Make LICENSE more accurate * Add SUMMARY
-> 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+---
+ .../recipes-extended/libconfig/libconfig_1.4.9.bb  |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
 
-[..]
-
-> +# Driver packages + +# USB / no USB trickery + 
-> +RCONFLICTS_lcdd-driver-hd47780nousb = "lcdd-driver-hd44780" 
-> +RCONFLICTS_lcdd-driver-hd47780 = "lcdd-driver-hd44780nousb" + 
-> +INITSCRIPT_PACKAGES = "lcdd lcdproc" +INITSCRIPT_NAME_lcdd = "lcdd" 
-> +INITSCRIPT_NAME_lcdproc = "lcdproc" +INITSCRIPT_PARAMS_lcdd = "defaults
-> 70 21" +INITSCRIPT_PARAMS_lcdproc = "defaults 71 20"
-
-Those the stock initscript have LSB headers? They help a lot when using
-systemd to work out dependencies in sysv-compat mode.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQc+fHMkyGM64RGpERAozFAKCwqWsRCkx/3z15MXQsX732u3lBzACgqofA
-wRA86yRkVOrVPS3i7ZQwDsk=
-=3r5B
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
+new file mode 100644
+index 0000000..c7d3cf7
+--- /dev/null
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "C/C++ Configuration File Library"
++DESCRIPTION = "Library for manipulating structured configuration files"
++HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
++
++SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
++
++inherit autotools pkgconfig
++
++SRC_URI[md5sum] = "b6ee0ce2b3ef844bad7cac2803a90634"
++SRC_URI[sha256sum] = "09c8979252e60193e2969e9b0e1cd597f7820087867989b2f0939ad164473041"
+-- 
+1.7.9.5
 
 
 
