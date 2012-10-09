@@ -1,38 +1,33 @@
-Received: from ams-iport-2.cisco.com ([144.254.224.141])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mertsas@cisco.com>) id 1TLSvt-0003dx-KM
+	(envelope-from <raj.khem@gmail.com>) id 1TLTkr-0004fv-4e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Oct 2012 08:04:45 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1167; q=dns/txt; s=iport;
-	t=1349761900; x=1350971500;
-	h=message-id:date:from:mime-version:to:subject:references:
-	in-reply-to:content-transfer-encoding;
-	bh=5buSTbktVSx6IWajmYuNmaHzkkpfo8UtXVpmRbX17mg=;
-	b=h9ZGGOgpzeuQIiyA0hZ1yiqFOqSLwhIV8UbxRTSBhsqZwHeUsc93OicN
-	iTcF+TiCDZc91Q+vZE6Bnh55e7d0vnNL8+mH2gwc2/r2os7kxo6WWPAnm
-	6sGYfkMe0+kCq4oqrLp2Ug/ZiNcujgqdIrU56LZWdKeyW/G2/5i2thjtJ c=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Av8EAHa6c1CQ/khN/2dsb2JhbABFvzOBCIIgAQEBBAEBAQ8BWwoRCxgJFg8JAwIBAgEVAS8TBgIBAR6HYwuaW49WkCiLR4JygyEDkz6CLYEVhE2IY4Fpgm8
-X-IronPort-AV: E=Sophos;i="4.80,558,1344211200"; d="scan'208";a="77286824"
-Received: from ams-core-4.cisco.com ([144.254.72.77])
-	by ams-iport-2.cisco.com with ESMTP; 09 Oct 2012 05:51:38 +0000
-Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
-	by ams-core-4.cisco.com (8.14.5/8.14.5) with ESMTP id q995pbkq024245
+	Tue, 09 Oct 2012 08:57:25 +0200
+Received: by mail-ia0-f175.google.com with SMTP id b35so602895iac.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Oct 2012 05:51:37 GMT
-Message-ID: <5073BB64.3010802@cisco.com>
-Date: Tue, 09 Oct 2012 07:51:32 +0200
-From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.7) Gecko/20120911 Thunderbird/10.0.7
-MIME-Version: 1.0
+	Mon, 08 Oct 2012 23:44:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=lF5bmi2hwPr+M5STPPyz2lHUDIo0mytN9xrzUZ//CjU=;
+	b=1CgrPORvnc4LMH5wVA14vqFpeRTHj2o8orFI9PIA6qxU3Mmjmb9asfnIDQwby05jb/
+	IujZvDZm1vP9XUweMuKtolqk+FdWXhCrSldqrxbyFe6f/ZLcB/bcPQV2k2CAV44fZJiA
+	9b2drNq/aOisj+BkYFJkAw2T4iLr7LzQqelFZuHKIG2mFYKi9o/N9gUziPaQXfKkQBRf
+	AFMHH8HaGEE8czZ1V/Bpsi8i1tYnHMdcCZX3RCpfDsDl3vG7ljqvfYZJxhs+clTjf6yJ
+	Mr2Xq13phCm45PT3vNtoclWw7M16eaz0Qhx6Zf2BaxJInmUhqF4qU3OAbBduhe6J+Yzw
+	EwfQ==
+Received: by 10.50.187.134 with SMTP id fs6mr656095igc.61.1349765057460;
+	Mon, 08 Oct 2012 23:44:17 -0700 (PDT)
+Received: from leo.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id mi10sm9334844igc.16.2012.10.08.23.44.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 08 Oct 2012 23:44:16 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <5072B67D.5040208@nedap.com>
-	<CAMKF1sqMmrBvzqhpPE+NRrgR3hNURB6R0hnNZNECBQpqoZRVvA@mail.gmail.com>
-	<5072E813.4020206@nedap.com>
-In-Reply-To: <5072E813.4020206@nedap.com>
-Subject: Re: jni.h included
+Date: Mon,  8 Oct 2012 23:44:06 -0700
+Message-Id: <1349765046-7315-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-systemd][PATCH] systemd.bbclass: Dont check for multilib and change for nativesdk renaming
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2012 06:04:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Oct 2012 06:57:25 -0000
 
-As you are using icedtea6, I guess DEPENDS += "icedtea6" should do it.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-systemd/classes/systemd.bbclass |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-- Martin
-
-On 10/08/12 16:49, Jaap de Jong wrote:
->
-> On 10/08/2012 04:05 PM, Khem Raj wrote:
->> On Mon, Oct 8, 2012 at 4:18 AM, Jaap de Jong <jaap.dejong@nedap.com>
->> wrote:
->>> Hi All!
->>> probably a stupid question... my apologies!
->>> If a source I'm working on #include jni.h what do I need to add in a
->>> recipe
->>> to get it translated?
->> DEPENDS += "openjdk" or something like that which denotes jdk
->>
-> Tried
->     DEPENDS += "openjdk"
-> unfortunately errors out with
->     ERROR: Nothing PROVIDES 'openjdk'
->
-> Tried with
->     DEPENDS += "openjdk-6"
-> but that errors out with
->     fatal error: jni.h: No such file or directory
->
-> So finally I ended up adding this:
->     CFLAGS += "-I${STAGING_LIBDIR_NATIVE}/jvm/icedtea6-native/include
-> -I${STAGING_LIBDIR_NATIVE}/jvm/icedtea6-native/include/linux"
-> But that just looks so ugly...
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/meta-systemd/classes/systemd.bbclass b/meta-systemd/classes/systemd.bbclass
+index 96d7f8f..d1f7236 100644
+--- a/meta-systemd/classes/systemd.bbclass
++++ b/meta-systemd/classes/systemd.bbclass
+@@ -68,9 +68,11 @@ def systemd_after_parse(d):
+ 
+ 
+     bpn = d.getVar('BPN', 1)
++    ml = d.getVar('MLPREFIX', 1)
+     if bpn + "-native" != d.getVar('PN', 1) and \
+             bpn + "-cross" != d.getVar('PN', 1) and \
+-            bpn + "-nativesdk" != d.getVar('PN', 1):
++            ml + bpn != d.getVar('PN', 1) and \
++            "nativesdk-" + bpn != d.getVar('PN', 1):
+         systemd_check_vars()
+         for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+             systemd_create_package(pkg_systemd)
+-- 
+1.7.9.5
 
 
 
