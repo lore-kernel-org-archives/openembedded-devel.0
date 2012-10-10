@@ -1,32 +1,34 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1TM4ax-00022D-NZ
+	(envelope-from <chase.maupin@ti.com>) id 1TM4l8-0000gN-QK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Oct 2012 00:17:40 +0200
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9ALmEMQ013246;
-	Wed, 10 Oct 2012 16:48:15 -0500
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9ALmD4r005773;
-	Thu, 11 Oct 2012 03:18:13 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 11 Oct 2012 03:18:13 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9ALm9TG018582;
-	Thu, 11 Oct 2012 03:18:11 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Oct 2012 17:18:39 -0500
-Message-ID: <1349907519-17119-2-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1349907519-17119-1-git-send-email-Chase.Maupin@ti.com>
+	Thu, 11 Oct 2012 00:28:11 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9AMBisV019273;
+	Wed, 10 Oct 2012 17:11:44 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9AMBi5l005631;
+	Wed, 10 Oct 2012 17:11:44 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
+	14.01.0323.003; Wed, 10 Oct 2012 17:11:44 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH 0/1][for-denzil] kernel: cherry-pick header fix
+Thread-Index: AQHNpzHPXY+yZvqrnEmk12vzoKeCypezF0xg
+Date: Wed, 10 Oct 2012 22:11:42 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159257C76@DLEE12.ent.ti.com>
 References: <1349907519-17119-1-git-send-email-Chase.Maupin@ti.com>
+	<20121010215408.GH16944@denix.org>
+In-Reply-To: <20121010215408.GH16944@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Cc: Tom Zanussi <tom.zanussi@intel.com>, Darren Hart <dvhart@linux.intel.com>,
-	Bruce Ashfield <bruce.ashfield@windriver.com>,
-	Koen Kooi <koen@dominion.thruhere.net>
-Subject: [PATCH 1/1][for-denzil] kernel: Add kernel headers to kernel-dev package
+Subject: Re: [PATCH 0/1][for-denzil] kernel: cherry-pick header fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,126 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 22:17:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Oct 2012 22:28:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Darren Hart <dvhart@linux.intel.com>
+> -----Original Message-----
+> From: Denys Dmytriyenko [mailto:denis@denix.org]
+> Sent: Wednesday, October 10, 2012 4:54 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Maupin, Chase
+> Subject: Re: [oe] [PATCH 0/1][for-denzil] kernel: cherry-pick
+> header fix
+>=20
+> On Wed, Oct 10, 2012 at 05:18:38PM -0500, Chase Maupin wrote:
+> > All,
+> >
+> > This patch is a cherry-pick of the change made in meta-
+> openembedded
+> > master to fix the kernel header staging location.  Without this
+> > change builds of external modules using the denzil branch will
+> fail
+> > to find the staged headers because they will be looking in the
+> > "kernel" directory instead of the "usr/src/kernel" directory.
+> >
+> > The STAGING_KERNEL_DIR set in bitbake.conf of oe-core in the
+> > denzil branch of the repository has already been updated to use
+> > ${STAGING_DIR_HOST}/usr/src/kernel
+> >
+> > I hope I got this patch formatted right since I just did a
+> > cherry-pick into my denzil branch and created the patch.  If
+> this
+> > is not the correct format please let me know.  The commit I
+> > cherry-picked was 8c724c4ab8e946763c813e5174dbfd5ac8a5ddda
+> >
+> > Darren Hart (1):
+> >   kernel: Add kernel headers to kernel-dev package
+> >
+> >  meta-oe/classes/kernel.bbclass |   27 ++++++++++++------------
+> ---
+> >  1 files changed, 12 insertions(+), 15 deletions(-)
+>=20
+> FYI, it is already in the queue with other related patches. See
+> my earlier
+> email.
 
-[YOCTO #1614]
+OK.  I haven't seen that message come by yet.  I guess it is floating in th=
+e ether :)
 
-Add the kernel headers to the kernel-dev package. This packages what was
-already built and kept in sysroots for building modules with bitbake.
-Making this available on the target requires removing some additional
-host binaries.
-
-Move the location to /usr/src/kernel
-
-Before use on the target, the user will need to:
-
-    # cd /usr/src/kernel
-    # make scripts
-
-This renders the kernel-misc recipe empty, so remove it.
-
-As we use /usr/src/kernel in several places (and I missed one in the
-previous version), add a KERNEL_SRC_DIR variable and use that throughout
-the class to avoid update errors in the future.
-
-Now that we package the kernel headers, drop the
-kernel_package_preprocess function which removed them from PKGD.
-
-All *-sdk image recipes include dev-pkgs, so the kernel-dev package will
-be installed by default on all such images.
-
-Signed-off-by: Darren Hart <dvhart@linux.intel.com>
-CC: Bruce Ashfield <bruce.ashfield@windriver.com>
-CC: Tom Zanussi <tom.zanussi@intel.com>
-CC: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/classes/kernel.bbclass |   27 ++++++++++++---------------
- 1 files changed, 12 insertions(+), 15 deletions(-)
-
-diff --git a/meta-oe/classes/kernel.bbclass b/meta-oe/classes/kernel.bbclass
-index ce82351..1af977e 100644
---- a/meta-oe/classes/kernel.bbclass
-+++ b/meta-oe/classes/kernel.bbclass
-@@ -82,6 +82,10 @@ EXTRA_OEMAKE = ""
- 
- KERNEL_ALT_IMAGETYPE ??= ""
- 
-+# Define where the kernel headers are installed on the target as well as where
-+# they are staged.
-+KERNEL_SRC_PATH = "/usr/src/kernel"
-+
- KERNEL_IMAGETYPE_FOR_MAKE = "${@(lambda s: s[:-3] if s[-3:] == ".gz" else s)(d.getVar('KERNEL_IMAGETYPE', True))}"
- 
- kernel_do_compile() {
-@@ -135,7 +139,7 @@ kernel_do_install() {
- 	# Support for external module building - create a minimal copy of the
- 	# kernel source tree.
- 	#
--	kerneldir=${D}/kernel
-+	kerneldir=${D}${KERNEL_SRC_PATH}
- 	install -d $kerneldir
- 
- 	#
-@@ -188,23 +192,18 @@ kernel_do_install() {
- 		cp arch/powerpc/lib/crtsavres.o $kerneldir/arch/powerpc/lib/crtsavres.o
- 	fi
- 
--	# Remove the following binaries which cause strip errors
-+	# Remove the following binaries which cause strip or arch QA errors
- 	# during do_package for cross-compiled platforms
- 	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
--	           arch/powerpc/boot/mktree"
-+	           arch/powerpc/boot/mktree scripts/kconfig/zconf.tab.o \
-+		   scripts/kconfig/conf.o"
- 	for entry in $bin_files; do
- 		rm -f $kerneldir/$entry
- 	done
- }
- 
--PACKAGE_PREPROCESS_FUNCS += "kernel_package_preprocess"
--
--kernel_package_preprocess () {
--	rm -rf ${PKGD}/kernel
--}
--
- sysroot_stage_all_append() {
--	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}/kernel
-+	sysroot_stage_dir ${D}${KERNEL_SRC_PATH} ${SYSROOT_DESTDIR}${KERNEL_SRC_PATH}
- }
- 
- kernel_do_configure() {
-@@ -252,13 +251,11 @@ EXPORT_FUNCTIONS do_compile do_install do_configure
- 
- # kernel-base becomes kernel-${KERNEL_VERSION}
- # kernel-image becomes kernel-image-${KERNEL_VERISON}
--PACKAGES = "kernel kernel-base kernel-vmlinux kernel-image kernel-dev kernel-misc"
-+PACKAGES = "kernel kernel-base kernel-vmlinux kernel-image kernel-dev"
- FILES = ""
- FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
--FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config*"
-+FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config* ${KERNEL_SRC_PATH}"
- FILES_kernel-vmlinux = "/boot/vmlinux*"
--# misc is a package to contain files we need in staging
--FILES_kernel-misc = "/kernel/include/config /kernel/scripts /kernel/drivers/crypto /kernel/drivers/media"
- RDEPENDS_kernel = "kernel-base"
- # Allow machines to override this dependency if kernel image files are 
- # not wanted in images as standard
-@@ -475,7 +472,7 @@ python populate_packages_prepend () {
- 	metapkg = "kernel-modules"
- 	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
- 	d.setVar('FILES_' + metapkg, "")
--	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
-+	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg' ]
- 	for l in module_deps.values():
- 		for i in l:
- 			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
--- 
-1.7.0.4
-
+>=20
+> --
+> Denys
 
 
