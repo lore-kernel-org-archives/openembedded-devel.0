@@ -1,33 +1,37 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from ams-iport-3.cisco.com ([144.254.224.146])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TLofc-0006K6-Vm
+	(envelope-from <mertsas@cisco.com>) id 1TLpOB-0007mY-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Oct 2012 07:17:25 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so268001pbb.6
+	Wed, 10 Oct 2012 08:03:27 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=5624; q=dns/txt; s=iport;
+	t=1349848221; x=1351057821;
+	h=message-id:date:from:mime-version:to:subject:references:
+	in-reply-to; bh=KnJyiXgCqzoGIFgl2DAVbMsS/1J749dBftUNzByd8sw=;
+	b=EN2/ZxQpNmjWudnIm6EqTeOgmcPX5aYB973VBO2SD/jTSRBRxaSnAAuM
+	TbB1LtyEC9YDl5lHtMTJxyehhxbzWdXk9GfoKQ+rnJoeQ2PbxKUcitHgM
+	bcgZ2g+zhNQjD2RQ6USt2JFGz9yBQ3McyUqfj+zM+0Gkkz391yNQDPphR E=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgwFANEKdVCQ/khR/2dsb2JhbABFi3GzQIEIgiABAQEEAQEBDwFbChELGAkWDwkDAgECARUBLxMGAgEBHodjC5oAoCWLRoYgA5M+gi2BFYRNiGOBa4Jv
+X-IronPort-AV: E=Sophos;i="4.80,563,1344211200"; d="scan'208,217";a="8667611"
+Received: from ams-core-1.cisco.com ([144.254.72.81])
+	by ams-iport-3.cisco.com with ESMTP; 10 Oct 2012 05:50:18 +0000
+Received: from [10.54.74.11] (dhcp-10-54-74-11.cisco.com [10.54.74.11])
+	by ams-core-1.cisco.com (8.14.5/8.14.5) with ESMTP id q9A5oIeY017114
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2012 22:04:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=ul1cFlWyZpcd5JxXbKJrtd76XLJv35l10Xb5BCoufFQ=;
-	b=KpPbkpQXtslpHYQ3HKTmOViT7aYJg78OX4J4xQkGxm5U8KCcYz6Y0wskZPR16R2kQJ
-	9gpJ42xutTlAy3mWVRFyfgqdXWy6CW3qysphN8rj4lVHGpdcAtki5QpHaWm/bfDzBPwt
-	DvcK9xT2Xc+fHchILQLZqqj9KIQrZNW10+TCnINDm5yqRePELHcKJ2rME0UCiXcXGxxe
-	LgN/ojmxV4DFh/VPNh5HBtwIyowNSTGXAvmuwxHqf8UbRJSdXb/mCcFV9utYIZAi8Gt5
-	v1MYrXb6gDsJbyoRdsJ5UTlFDPlPE5FfxDPA1wd+9y/GhFPZVe4p8yp7z4MEdFVJA/Qi
-	RWzg==
-Received: by 10.66.89.138 with SMTP id bo10mr1295783pab.0.1349845455693;
-	Tue, 09 Oct 2012 22:04:15 -0700 (PDT)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id gj9sm434113pbc.16.2012.10.09.22.04.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 09 Oct 2012 22:04:14 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 10 Oct 2012 05:50:18 GMT
+Message-ID: <50750C9A.4000404@cisco.com>
+Date: Wed, 10 Oct 2012 07:50:18 +0200
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <mertsas@cisco.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.7) Gecko/20120911 Thunderbird/10.0.7
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2012 22:03:42 -0700
-Message-Id: <1349845422-28742-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH V3] systemd: Upgrade past v194
+References: <1349784265-25901-1-git-send-email-mertsas@cisco.com>
+	<20121009172718.GE4715@jama.jama.net>
+In-Reply-To: <20121009172718.GE4715@jama.jama.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH] libftdi: Change to use GPLv2 intead of GPLv2-REL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,215 +45,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 05:17:25 -0000
+X-List-Received-Date: Wed, 10 Oct 2012 06:03:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Booted on eglibc i586, arm, ppc qemu  systems
+On 10/09/12 19:27, Martin Jansa wrote:
+> On Tue, Oct 09, 2012 at 02:04:25PM +0200, Martin Ertsaas wrote:
+>> According to http://www.intra2net.com/en/developer/libftdi/, libftdi itself is licensed under LGPLv2,
+>> with some parts (eeprom programmer) is licensed under GPLv2. There doesn't seem to be any part licensed
+>> under a GPLv2-REL variation of GPLv2, and so we should use GPLv2 instead of GPLv2-REL.
+> Is it REL or RLE? Your subject and body says REL while LICENSE says RLE.
+>
+> Cheers,
+Damn, didn't see that typo. I'll push a new one asap.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../systemd/systemd/optional_secure_getenv.patch   |   19 ++++++++++
- .../systemd/systemd/systemd-pam-fix-execvpe.patch  |   39 +++++++++-----------
- .../systemd/systemd/use-rootlibdir.patch           |   31 +++++++++++-----
- meta-systemd/recipes-core/systemd/systemd_git.bb   |    4 +-
- 4 files changed, 61 insertions(+), 32 deletions(-)
- create mode 100644 meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-
-diff --git a/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-new file mode 100644
-index 0000000..35f1467
---- /dev/null
-+++ b/meta-systemd/recipes-core/systemd/systemd/optional_secure_getenv.patch
-@@ -0,0 +1,19 @@
-+on uclibc secure_getenv is not available
-+therefore default to using getenv instead
-+
-+Singed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Pending
-+Index: git/src/shared/missing.h
-+===================================================================
-+--- git.orig/src/shared/missing.h	2012-09-22 18:46:44.141282145 -0700
-++++ git/src/shared/missing.h	2012-09-22 18:48:44.081276570 -0700
-+@@ -233,6 +233,8 @@
-+ #ifndef HAVE_SECURE_GETENV
-+ #  ifdef HAVE___SECURE_GETENV
-+ #    define secure_getenv __secure_getenv
-++#  elif defined __UCLIBC__
-++#    define secure_getenv getenv
-+ #  else
-+ #    error neither secure_getenv nor __secure_getenv are available
-+ #  endif
-diff --git a/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch b/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-index ea8b3ff..449c27f 100644
---- a/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-+++ b/meta-systemd/recipes-core/systemd/systemd/systemd-pam-fix-execvpe.patch
-@@ -1,29 +1,26 @@
----- systemd-pam-185/src/nspawn/nspawn.c.orig	2012-06-21 05:31:24.000000000 -0400
--+++ systemd-pam-185/src/nspawn/nspawn.c	2012-06-21 05:29:50.000000000 -0400
--@@ -61,6 +61,8 @@
-- #include "path-util.h"
-- #include "loopback-setup.h"
-+Index: git/src/nspawn/nspawn.c
-+===================================================================
-+--- git.orig/src/nspawn/nspawn.c	2012-09-22 17:57:05.000000000 -0700
-++++ git/src/nspawn/nspawn.c	2012-09-22 18:01:41.541405768 -0700
-+@@ -63,6 +63,8 @@
-+         LINK_GUEST
-+ } LinkJournal;
-  
- +#include "config.h"
- +
-  static char *arg_directory = NULL;
-  static char *arg_user = NULL;
-  static char **arg_controllers = NULL;
--@@ -1315,9 +1317,14 @@
-- 
--                         a[0] = (char*) "/sbin/init";
--                         execve(a[0], a, (char**) envp);
---                } else if (argc > optind)
---                        execvpe(argv[optind], argv + optind, (char**) envp);
---                else {
--+                } else if (argc > optind) {
-+@@ -1373,7 +1375,12 @@
-+                                 a[0] = (char*) "/sbin/init";
-+                                 execve(a[0], a, (char**) envp);
-+                         } else if (argc > optind)
- +#ifdef HAVE_EXECVPE
--+			execvpe(argv[optind], argv + optind, (char**) envp);
-+                                 execvpe(argv[optind], argv + optind, (char**) envp);
- +#else
--+			environ = (char **)envp;
--+			execvp(argv[optind], argv + optind);
--+#endif	/* HAVE_EXECVPE */
--+		} else {
--                         chdir(home ? home : "/root");
--                         execle("/bin/bash", "-bash", NULL, (char**) envp);
--                 }
-++                                environ = (char **)envp;
-++                                execvp(argv[optind], argv + optind);
-++#endif /* HAVE_EXECVPE */			
-+                         else {
-+                                 chdir(home ? home : "/root");
-+                                 execle("/bin/bash", "-bash", NULL, (char**) envp);
-diff --git a/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch b/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-index 2167216..4c471b6 100644
---- a/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-+++ b/meta-systemd/recipes-core/systemd/systemd/use-rootlibdir.patch
-@@ -11,17 +11,19 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- Index: git/Makefile.am
- ===================================================================
----- git.orig/Makefile.am	2012-07-22 16:20:38.424405916 -0700
--+++ git/Makefile.am	2012-07-22 16:23:21.232406621 -0700
--@@ -61,23 +61,23 @@
-+--- git.orig/Makefile.am	2012-09-22 11:07:58.811981199 -0700
-++++ git/Makefile.am	2012-09-22 11:09:11.267983956 -0700
-+@@ -64,25 +64,25 @@
-  
-  # Our own, non-special dirs
-  pkgsysconfdir=$(sysconfdir)/systemd
- -userunitdir=$(prefix)/lib/systemd/user
-+-userpresetdir=$(prefix)/lib/systemd/user-preset
- -tmpfilesdir=$(prefix)/lib/tmpfiles.d
- -sysctldir=$(prefix)/lib/sysctl.d
- -usergeneratordir=$(prefix)/lib/systemd/user-generators
- +userunitdir=$(prefix)/$(rootlibdir)/systemd/user
-++userpresetdir=$(prefix)/$(rootlibdir)/systemd/user-preset
- +tmpfilesdir=$(prefix)/$(rootlibdir)/tmpfiles.d
- +sysctldir=$(prefix)/$(rootlibdir)/sysctl.d
- +usergeneratordir=$(prefix)/$(rootlibdir)/systemd/user-generators
-@@ -30,8 +32,10 @@ Index: git/Makefile.am
-  systemshutdowndir=$(rootlibexecdir)/system-shutdown
-  systemsleepdir=$(rootlibexecdir)/system-sleep
- -systemunitdir=$(rootprefix)/lib/systemd/system
-+-systempresetdir=$(rootprefix)/lib/systemd/system-preset
- -udevlibexecdir=$(rootprefix)/lib/udev
- +systemunitdir=$(rootprefix)/$(rootlibdir)/systemd/system
-++systempresetdir=$(rootprefix)/$(rootlibdir)/systemd/system-preset
- +udevlibexecdir=$(rootprefix)/$(rootlibdir)/udev
-  udevhomedir = $(udevlibexecdir)
-  udevrulesdir = $(udevlibexecdir)/rules.d
-@@ -42,9 +46,9 @@ Index: git/Makefile.am
- -rootlibexecdir=$(rootprefix)/lib/systemd
- +rootlibexecdir=$(rootprefix)/$(rootlibdir)/systemd
-  
-- CLEANFILES =
-+ CLEANFILES = $(BUILT_SOURCES)
-  EXTRA_DIST =
--@@ -126,7 +126,7 @@
-+@@ -132,7 +132,7 @@
-  	-DSYSTEMD_STDIO_BRIDGE_BINARY_PATH=\"$(bindir)/systemd-stdio-bridge\" \
-  	-DROOTPREFIX=\"$(rootprefix)\" \
-  	-DRUNTIME_DIR=\"/run\" \
-@@ -53,7 +57,7 @@ Index: git/Makefile.am
-  	-DSYSTEMD_CRYPTSETUP_PATH=\"$(rootlibexecdir)/systemd-cryptsetup\" \
-  	-DSYSTEM_GENERATOR_PATH=\"$(systemgeneratordir)\" \
-  	-DUSER_GENERATOR_PATH=\"$(usergeneratordir)\" \
--@@ -2535,7 +2535,7 @@
-+@@ -2692,7 +2692,7 @@
-  
-  binfmt-install-data-hook:
-  	$(MKDIR_P) -m 0755 \
-@@ -62,7 +66,16 @@ Index: git/Makefile.am
-  		$(DESTDIR)$(sysconfdir)/binfmt.d \
-  		$(DESTDIR)$(systemunitdir)/sysinit.target.wants
-  	( cd $(DESTDIR)$(systemunitdir)/sysinit.target.wants && \
--@@ -3165,7 +3165,7 @@
-+@@ -3107,7 +3107,7 @@
-+ 
-+ timedated-install-data-hook:
-+ 	$(MKDIR_P) -m 0755 \
-+-		$(DESTDIR)$(prefix)/lib/systemd/ntp-units.d \
-++		$(DESTDIR)$(prefix)/$(rootlibdir)/systemd/ntp-units.d \
-+ 		$(DESTDIR)$(sysconfdir)/systemd/ntp-units.d
-+ 	( cd $(DESTDIR)$(systemunitdir) && \
-+ 		rm -f dbus-org.freedesktop.timedate1.service  && \
-+@@ -3337,7 +3337,7 @@
-  logind-install-data-hook:
-  	$(MKDIR_P) -m 0755 \
-  		$(DESTDIR)$(systemunitdir)/multi-user.target.wants \
-@@ -71,7 +84,7 @@ Index: git/Makefile.am
-  	( cd $(DESTDIR)$(systemunitdir) && \
-  		rm -f dbus-org.freedesktop.login1.service && \
-  		$(LN_S) systemd-logind.service dbus-org.freedesktop.login1.service)
--@@ -3284,7 +3284,7 @@
-+@@ -3494,7 +3494,7 @@
-  		-e 's,@PACKAGE_VERSION\@,$(PACKAGE_VERSION),g' \
-  		-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
-  		-e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
-@@ -80,7 +93,7 @@ Index: git/Makefile.am
-  		-e 's,@prefix\@,$(prefix),g' \
-  		-e 's,@exec_prefix\@,$(exec_prefix),g' \
-  		-e 's,@libdir\@,$(libdir),g' \
--@@ -3407,9 +3407,9 @@
-+@@ -3619,9 +3619,9 @@
-  	$(MKDIR_P) -m 0755 \
-  		$(DESTDIR)$(tmpfilesdir) \
-  		$(DESTDIR)$(sysconfdir)/tmpfiles.d \
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 337424e..512f5d4 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -23,8 +23,7 @@ PR = "r7"
- 
- inherit useradd pkgconfig autotools perlnative
- 
--SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
--
-+SRCREV = "a3eb665e0c12df35e807611582e7332ebed325b1"
- SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-            file://use-rootlibdir.patch \
-            file://gtk-doc.make \
-@@ -40,6 +39,7 @@ UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
-                              file://systemd-pam-fix-getty-unit.patch \
-                              file://systemd-pam-fix-mkostemp.patch \
-                              file://systemd-pam-fix-msformat.patch \
-+                             file://optional_secure_getenv.patch \
-                             "
- LDFLAGS_libc-uclibc_append = " -lrt"
- 
--- 
-1.7.9.5
-
+- Martin
+>  
+>> Signed-off-by: Martin Ertsaas <mertsas@cisco.com>
+>> ---
+>>  meta-oe/recipes-support/libftdi/libftdi_0.19.bb |    2 +-
+>>  1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
+>> index 2dba3f4..0842aaf 100644
+>> --- a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
+>> +++ b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
+>> @@ -4,7 +4,7 @@ including the popular bitbang mode."
+>>  HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
+>>  SECTION = "libs"
+>>  
+>> -LICENSE = "LGPLv2.1 GPLv2-RLE"
+>> +LICENSE = "LGPLv2.1 GPLv2"
+>>  LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
+>>                     file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
+>>                    "
+>> -- 
+>> 1.7.8.6
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
