@@ -1,29 +1,41 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TLsLA-0003Fi-8U
+	(envelope-from <tom.rini@gmail.com>) id 1TLxuC-0001QF-3V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Oct 2012 11:12:32 +0200
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Wed, 10 Oct 2012
-	10:59:23 +0200
-X-TM-IMSS-Message-ID: <32e3e6660018e75f@nedap.com>
-Received: from [10.17.16.14] ([10.17.16.14]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 32e3e6660018e75f ;
-	Wed, 10 Oct 2012 10:59:26 +0200
-Message-ID: <507538EA.9060200@nedap.com>
-Date: Wed, 10 Oct 2012 10:59:22 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:15.0) Gecko/20120912 Thunderbird/15.0.1
+	Wed, 10 Oct 2012 17:09:04 +0200
+Received: by mail-pa0-f47.google.com with SMTP id fa11so606342pad.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Oct 2012 07:55:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=NzkhB7QOTVydENYarBHrSHwypAO1l0F19PcRyD9z1pQ=;
+	b=XCbvAohkYb+xEf3qjOQ9gV+lPhHytSEX/M4yIrdOmFZBg5i3GBVnJKe9D8rlpaB9eI
+	Zt1SUF6RfDU86ylMVbdxXQT7ZK92A0Nl3PQOdKSo+RaKoJZROCGY6Rupqsg+H1LT2pMr
+	h5gcqYreRq89BvTnJbzJtdZNGWA1fq2/defcfIIawrq3Xs7J1yXnDwyxrflZrY+aIWAG
+	6iipnVWCEaBawmzUExn4qyQhRMfb9+VJrGmbcbOGVouiGwax3hzfnSB3xjD1xgTa4TgU
+	Y4OUIIFjgcvcvk18SO+rMne1j/0LO0KvgSp5TZ0AnJwvhoUrd9K0ZX1crYfvHbywLTMU
+	L2mQ==
+Received: by 10.68.222.231 with SMTP id qp7mr74019255pbc.7.1349880954457;
+	Wed, 10 Oct 2012 07:55:54 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:d:eba:a4bf:d51f:ab5e:2eb6])
+	by mx.google.com with ESMTPS id nd6sm1131124pbc.68.2012.10.10.07.55.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 10 Oct 2012 07:55:52 -0700 (PDT)
+Date: Wed, 10 Oct 2012 07:55:59 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <20121010145559.GM1137@bill-the-cat>
+References: <CAMKF1soS0oBnwSUGVcJ1csgNGFdjPLY9qxW0-sZMr52TB=wOxw@mail.gmail.com>
+	<cover.1349772344.git.sledz@dresearch-fe.de>
+	<20121009144235.GD16530@bill-the-cat>
+	<507518B0.4040504@dresearch-fe.de>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <5072B67D.5040208@nedap.com>
-	<CAMKF1sqMmrBvzqhpPE+NRrgR3hNURB6R0hnNZNECBQpqoZRVvA@mail.gmail.com>
-	<5072E813.4020206@nedap.com> <5073BB64.3010802@cisco.com>
-	<50751849.9070501@nedap.com> <50751ADB.7060007@cisco.com>
-In-Reply-To: <50751ADB.7060007@cisco.com>
-Subject: Re: jni.h included
+In-Reply-To: <507518B0.4040504@dresearch-fe.de>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/1] pull request 20121009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,90 +49,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 09:12:32 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Wed, 10 Oct 2012 15:09:04 -0000
+X-Groupsio-MsgNum: 41042
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="um2V5WpqCyd73IVb"
+Content-Disposition: inline
+
+--um2V5WpqCyd73IVb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
+On Wed, Oct 10, 2012 at 08:41:52AM +0200, Steffen Sledz wrote:
+> On 09.10.2012 16:42, Tom Rini wrote:
+> > On Tue, Oct 09, 2012 at 10:49:06AM +0200, Steffen Sledz wrote:
+> >=20
+> >> Hi Tom,
+> >>=20
+> >> please pull this commit which fixes a build problem on build hosts wit=
+h newer libXrender installations.
+> >>=20
+> >> Thx, Steffen
+> >>=20
+> >> The following changes since commit a35ceaacb2019750dc9f4b4fd5ea927cf2a=
+d47fb:
+> >>=20
+> >> gdk-pixbuf: add missing dependencies (2012-09-14 15:07:04 -0700)
+> >>=20
+> >> are available in the git repository at:
+> >>=20
+> >> git://github.com/sledz/oe pull-request-3 https://github.com/sledz/oe/t=
+ree/pull-request-3
+> >>=20
+> >> Steffen Sledz (1): pango-native: add libxrender-native to dependencies
+> >>=20
+> >> recipes/pango/pango.inc |    4 ++-- 1 file changed, 2 insertions(+), 2=
+ deletions(-)
+> >=20
+> > Applied to 2011.03-maintenance, thanks!
+>=20
+> Something went wrong. The patch isn't in the 2011.03-maintenance branch. =
+:(
 
-On 10/10/2012 08:51 AM, Martin Erts=E5s wrote:
-> Assuming you use meta-java, it seems like what you are looking for is:
->
-> DEPENDS +=3D "openjdk-6-jdk"
->
-> as that at least contains the include, lib and bin directory.
->
-> - Martin
-It just looks so simple... but does not work: jni.h not found
-For now I will stay with changing CFLAGS; ugly, but works!
-Thanks all for the support!
+OK, now it's pushed there too, sorry about that.
 
->
-> On 10/10/12 08:40, Jaap de Jong wrote:
->> On 10/09/2012 07:51 AM, Martin Erts=E5s wrote:
->>> As you are using icedtea6, I guess DEPENDS +=3D "icedtea6" should do it=
-.
->>>
->>> - Martin
->> I thought that might do the trick, but...
->>      ERROR: Nothing PROVIDES 'icedtea6'
->> So I tried
->>      DEPENDS +=3D "icedtea6-native"
->> and that ends with
->>      jni.h: No such file or directory
->>
->> Any other ideas?
->>
->>> On 10/08/12 16:49, Jaap de Jong wrote:
->>>> On 10/08/2012 04:05 PM, Khem Raj wrote:
->>>>> On Mon, Oct 8, 2012 at 4:18 AM, Jaap de Jong <jaap.dejong@nedap.com>
->>>>> wrote:
->>>>>> Hi All!
->>>>>> probably a stupid question... my apologies!
->>>>>> If a source I'm working on #include jni.h what do I need to add in a
->>>>>> recipe
->>>>>> to get it translated?
->>>>> DEPENDS +=3D "openjdk" or something like that which denotes jdk
->>>>>
->>>> Tried
->>>>       DEPENDS +=3D "openjdk"
->>>> unfortunately errors out with
->>>>       ERROR: Nothing PROVIDES 'openjdk'
->>>>
->>>> Tried with
->>>>       DEPENDS +=3D "openjdk-6"
->>>> but that errors out with
->>>>       fatal error: jni.h: No such file or directory
->>>>
->>>> So finally I ended up adding this:
->>>>       CFLAGS +=3D "-I${STAGING_LIBDIR_NATIVE}/jvm/icedtea6-native/incl=
-ude
->>>> -I${STAGING_LIBDIR_NATIVE}/jvm/icedtea6-native/include/linux"
->>>> But that just looks so ugly...
->>>>
->>>>
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+--=20
+Tom
 
+--um2V5WpqCyd73IVb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
+iEYEARECAAYFAlB1jH8ACgkQdZngf2G4WwMj1gCfRT7a9EMa9aKc4mu3olyWbEQM
+KMMAoIgh8IdD4FMZAJuGL9OoCPw1ED4b
+=MCvr
+-----END PGP SIGNATURE-----
+
+--um2V5WpqCyd73IVb--
