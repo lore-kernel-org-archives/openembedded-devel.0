@@ -1,34 +1,26 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1TM4l8-0000gN-QK
+	(envelope-from <denis@denix.org>) id 1TM52x-00013S-Fy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Oct 2012 00:28:11 +0200
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9AMBisV019273;
-	Wed, 10 Oct 2012 17:11:44 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9AMBi5l005631;
-	Wed, 10 Oct 2012 17:11:44 -0500
-Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Wed, 10 Oct 2012 17:11:44 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 0/1][for-denzil] kernel: cherry-pick header fix
-Thread-Index: AQHNpzHPXY+yZvqrnEmk12vzoKeCypezF0xg
-Date: Wed, 10 Oct 2012 22:11:42 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159257C76@DLEE12.ent.ti.com>
-References: <1349907519-17119-1-git-send-email-Chase.Maupin@ti.com>
-	<20121010215408.GH16944@denix.org>
-In-Reply-To: <20121010215408.GH16944@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
-MIME-Version: 1.0
-Subject: Re: [PATCH 0/1][for-denzil] kernel: cherry-pick header fix
+	Thu, 11 Oct 2012 00:46:35 +0200
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MBP003T956AAQ10@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	10 Oct 2012 16:32:49 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A3E07200D7; Wed,
+	10 Oct 2012 17:32:34 -0400 (EDT)
+Date: Wed, 10 Oct 2012 17:32:34 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20121010213234.GG16944@denix.org>
+References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+	<k2a264$d2a$1@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <k2a264$d2a$1@ger.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +34,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 22:28:11 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Oct 2012 22:46:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> -----Original Message-----
-> From: Denys Dmytriyenko [mailto:denis@denix.org]
-> Sent: Wednesday, October 10, 2012 4:54 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: Re: [oe] [PATCH 0/1][for-denzil] kernel: cherry-pick
-> header fix
->=20
-> On Wed, Oct 10, 2012 at 05:18:38PM -0500, Chase Maupin wrote:
-> > All,
-> >
-> > This patch is a cherry-pick of the change made in meta-
-> openembedded
-> > master to fix the kernel header staging location.  Without this
-> > change builds of external modules using the denzil branch will
-> fail
-> > to find the staged headers because they will be looking in the
-> > "kernel" directory instead of the "usr/src/kernel" directory.
-> >
-> > The STAGING_KERNEL_DIR set in bitbake.conf of oe-core in the
-> > denzil branch of the repository has already been updated to use
-> > ${STAGING_DIR_HOST}/usr/src/kernel
-> >
-> > I hope I got this patch formatted right since I just did a
-> > cherry-pick into my denzil branch and created the patch.  If
-> this
-> > is not the correct format please let me know.  The commit I
-> > cherry-picked was 8c724c4ab8e946763c813e5174dbfd5ac8a5ddda
-> >
-> > Darren Hart (1):
-> >   kernel: Add kernel headers to kernel-dev package
-> >
-> >  meta-oe/classes/kernel.bbclass |   27 ++++++++++++------------
-> ---
-> >  1 files changed, 12 insertions(+), 15 deletions(-)
->=20
-> FYI, it is already in the queue with other related patches. See
-> my earlier
-> email.
+On Thu, Sep 06, 2012 at 01:41:57PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> One day I will figure out how to write a cover letter :)
+> 
+> The matching OE-core patchset is in denzil-next for testing and will
+> hopefully get merged soon (provided it passes the testsuite).
+> 
+> My main objective is to support on-target builds of external kernel-modules
+> and initial reports are that it is working as expected.
+> 
+> Since there's a bitbake.conf change needed the matching oe-core set needs to
+> go in first and ideally this goes in right after that (provided this passes
+> the testsuite as well).
+> 
+> As you can imagine, this kind of inter-layer dependency sucks, but I don't
+> see a way around it in this case with the bitbake.conf change.
 
-OK.  I haven't seen that message come by yet.  I guess it is floating in th=
-e ether :)
+So, what happened to this patchset? Can we get it pushed in to meta-oe/denzil 
+now, since corresponding changes to oe-core/denzil finally got in couple 
+weeks ago and it breaks external kernel-modules now? Thanks!
 
->=20
-> --
-> Denys
+-- 
+Denys
+
+
+> Op 06-09-12 13:23, Koen Kooi schreef:
+> > From: Bruce Ashfield <bruce.ashfield@windriver.com>
+> > 
+> > The kernel source tree in the sysroot has all unecessary source code
+> > removed. The existing use case is to support module building out of the
+> > sysroot, but as more toolsa are moved into the kernel tree itself there
+> > are new use cases for the kernel sysroot source.
+> > 
+> > To avoid putting dependencies on the kernel, and to be able to 
+> > individually build and package these tools out of the source tree, we can
+> > save $kerndir/tools and $kernddir/lib from being removed. This enables
+> > tools like perf to be built our of the kernel source in the sysroot,
+> > without significantly increasing the amount of source in the sysroot.
+> > 
+> > Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com> 
+> > Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org> 
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> Signed-off-by: Koen
+> > Kooi <koen@dominion.thruhere.net> --- meta-oe/classes/kernel.bbclass |
+> > 2 +- 1 files changed, 1 insertions(+), 1 deletions(-)
+> > 
+> > diff --git a/meta-oe/classes/kernel.bbclass
+> > b/meta-oe/classes/kernel.bbclass index ce82351..c44a2f5 100644 ---
+> > a/meta-oe/classes/kernel.bbclass +++ b/meta-oe/classes/kernel.bbclass @@
+> > -178,7 +178,7 @@ kernel_do_install() { # oe_runmake -C $kerneldir
+> > CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean make -C $kerneldir
+> > _mrproper_scripts -	find $kerneldir -path $kerneldir/scripts -prune -o
+> > -name "*.[csS]" -exec rm '{}' \; +	find $kerneldir -path $kerneldir/lib
+> > -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts
+> > -prune -o -name "*.[csS]" -exec rm '{}' \; find $kerneldir/Documentation
+> > -name "*.txt" -exec rm '{}' \;
+> > 
+> > # As of Linux kernel version 3.0.1, the clean target removes
+> > 
+> 
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+> 
+> iD8DBQFQSIwFMkyGM64RGpERAjCgAJ9PFqqoYUsY+deeN9gVy89hod+TqACeJFO3
+> hJ8tR0ZLZeookvwClEGnpD8=
+> =CRRt
+> -----END PGP SIGNATURE-----
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
