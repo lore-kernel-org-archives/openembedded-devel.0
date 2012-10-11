@@ -1,25 +1,35 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TMI2b-0005yQ-U7
+	(envelope-from <otavio.salvador@gmail.com>) id 1TMOjV-0007Ic-UQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Oct 2012 14:39:06 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 11 Oct 2012 05:25:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,571,1344236400"; d="scan'208";a="233477177"
-Received: from unknown (HELO helios.localnet) ([10.252.122.70])
-	by fmsmga002.fm.intel.com with ESMTP; 11 Oct 2012 05:25:54 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Oct 2012 13:25:53 +0100
-Message-ID: <75000272.H6JBHGLpGO@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-31-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <1349954891-17044-1-git-send-email-ml@communistcode.co.uk>
-References: <1349954891-17044-1-git-send-email-ml@communistcode.co.uk>
+	Thu, 11 Oct 2012 21:47:50 +0200
+Received: by mail-pa0-f47.google.com with SMTP id fa11so1860036pad.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Oct 2012 12:34:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=Tti2OK1CTwF1AK16wlLBP4q9KNjlsyvV1W/EQlE5A0k=;
+	b=EENkVYZxrvMRpLQ0J7BAIN4V2EBkQxxJ1Ijn8vbI3Ux0IRgLor/L24loWchrwODWiy
+	brsmNYszs4f/Qgt4JdpzCtlmG4TIggm+gTIqcaOSB9bvbPOWcUhXTfTCWlUyYShUlnXd
+	zI+bZNkxsYRmLmxraty9t/vm+pkEcUzFz4Lcfm+Wgjm+4qKTzSxOK504lxeHomFmGSOh
+	NzRaOQZ/v3F9MLcfiNTEXAfr5isflwBOpHwmFCi4s+M9KRpTJOh3JApIp8QWb6Jm3rxA
+	zvkq75D2R+TCeHksg8GxFVqnDslCIBFYYXRGDiBGqS+1kbctZ4POMrzcNiZMQQc9YmX4
+	8+7w==
 MIME-Version: 1.0
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: Re: [meta-webserver][PATCH] hiawatha: add initial 8.5 recipe and associated files
+Received: by 10.66.75.74 with SMTP id a10mr4880687paw.46.1349984075736; Thu,
+	11 Oct 2012 12:34:35 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.40.201 with HTTP; Thu, 11 Oct 2012 12:34:35 -0700 (PDT)
+In-Reply-To: <20121011090133.GA3589@jama.jama.net>
+References: <20121010104253.EB7AB1034A@opal>
+	<20121011090133.GA3589@jama.jama.net>
+Date: Thu, 11 Oct 2012 16:34:35 -0300
+X-Google-Sender-Auth: ixTpfj7C_Am94Q5Fa496_OVBna4
+Message-ID: <CAP9ODKrwSMJNs2T3dW4yQ=QWD9upTm=L+M+AX9jHY=xivPAeTw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Otavio Salvador : libav: Change the PACKAGES_DYNAMIC expression to be more restrict
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,123 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 12:39:06 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 11 Oct 2012 19:47:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 11 October 2012 12:28:11 Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> 
-> ---
->  .../recipes-httpd/hiawatha/files/hiawatha-init     | 34 +++++++++++++++++
->  .../recipes-httpd/hiawatha/hiawatha_8.5.bb         | 44
-> ++++++++++++++++++++++ 2 files changed, 78 insertions(+)
->  create mode 100644
-> meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init create mode
-> 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> 
-> diff --git a/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
-> b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init new file mode
-> 100644
-> index 0000000..c265093
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
-> @@ -0,0 +1,34 @@
-> +#!/bin/sh
-> +
-> +PATH=/sbin:/bin:/usr/sbin:/usr/bin
-> +DAEMON=/usr/sbin/hiawatha
-> +NAME=hiawatha
-> +DESC="Hiawatha Web Server"
-> +OPTS=""
-> +
-> +case "$1" in
-> +  start)
-> +	echo -n "Starting $DESC: "
-> +	start-stop-daemon --start -x "$DAEMON" -- $OPTS
-> +	echo "$NAME."
-> +	;;
-> +  stop)
-> +	echo -n "Stopping $DESC: "
-> +	start-stop-daemon --stop -x "$DAEMON"
-> +	echo "$NAME."
-> +	;;
-> +  restart|force-reload)
-> +	echo -n "Restarting $DESC: "
-> +	start-stop-daemon --stop -x "$DAEMON"
-> +	sleep 1
-> +	start-stop-daemon --start -x "$DAEMON" -- $OPTS
-> +	echo "$NAME."
-> +	;;
-> +  *)
-> +	N=/etc/init.d/$NAME
-> +	echo "Usage: $N {start|stop|restart|force-reload}" >&2
-> +	exit 1
-> +	;;
-> +esac
-> +
-> +exit 0
-> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb new file mode
-> 100644
-> index 0000000..4146d56
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> @@ -0,0 +1,44 @@
-> +DESCRIPTION = "Lightweight secure web server"
-> +HOMEPAGE = "http://www.hiawatha-webserver.org"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
-> +DEPENDS = "libxml2 libxslt"
-> +
-> +SECTION = "net"
-> +
-> +SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
-> +					 file://hiawatha-init"
-> +
-> +SRC_URI[md5sum] = "71d3903657953c93fc930758d158097d"
-> +SRC_URI[sha256sum] =
-> "2567e6b4b4c6666388087b586238e6e91a4afd80e10a879920020a097fcdc946" +
-> +inherit cmake update-rc.d
-> +
-> +INITSCRIPT_NAME = "hiawatha"
-> +INITSCRIPT_PARAMS = "defaults 70"
-> +
-> +EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-> +                  -DENABLE_CACHE=ON \
-> +                  -DENABLE_DEBUG=OFF \
-> +                  -DENABLE_SSL=OFF \
-> +                  -DENABLE_TOOLKIT=OFF \
-> +                  -DENABLE_CHROOT=OFF \
-> +                  -DENABLE_XSLT=ON \
-> +                  -DENABLE_TOMAHAWK=OFF \
-> +                  -DCMAKE_INSTALL_MANDIR=${mandir} \
-> +                  -DCMAKE_INSTALL_BINDIR=${bindir} \
-> +                  -DCMAKE_INSTALL_SBINDIR=${sbindir} \
-> +                  -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
-> +                  -DCMAKE_INSTALL_LIBDIR=${libdir} \
-> +                  -DLOG_DIR=/var/log/hiawatha \
-> +                  -DPID_DIR=/var/run \
-> +                  -DWEBROOT_DIR=/var/www/hiawatha \
-> +                  -DWORK_DIR=/var/lib/hiawatha "
-> +
-> +do_install_append() {
-> +
-> +	# Copy over init script
-> +  mkdir -p ${D}${sysconfdir}/init.d
-> +  install -m 0755 ${WORKDIR}/hiawatha-init
-> ${D}${sysconfdir}/init.d/hiawatha +
-> +}
+On Thu, Oct 11, 2012 at 6:01 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Wed, Oct 10, 2012 at 10:42:52AM +0000, git@git.openembedded.org wrote:
+>> Module: meta-openembedded.git
+>> Branch: master
+>> Commit: 97350f52280ea9b2f3d7b36ef248be5ba3e7c696
+>> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=97350f52280ea9b2f3d7b36ef248be5ba3e7c696
+>>
+>> Author: Otavio Salvador <otavio@ossystems.com.br>
+>> Date:   Sat Oct  6 20:18:30 2012 +0000
+>>
+>> libav: Change the PACKAGES_DYNAMIC expression to be more restrict
+>>
+>> Using 'lib*' we end having problem with every other package that
+>> generate libraries dynamically thus we changed it to match the library
+>> prefixes.
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>
+>> ---
+>>
+>>  meta-oe/recipes-multimedia/libav/libav.inc |    2 +-
+>>  1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes-multimedia/libav/libav.inc
+>> index aa170c5..4a1716f 100644
+>> --- a/meta-oe/recipes-multimedia/libav/libav.inc
+>> +++ b/meta-oe/recipes-multimedia/libav/libav.inc
+>> @@ -119,4 +119,4 @@ python populate_packages_prepend() {
+>>                        allow_links=True)
+>>  }
+>>
+>> -PACKAGES_DYNAMIC = "lib*"
+>> +PACKAGES_DYNAMIC = "lib(av(codec|device|filter|format|util)|postproc)*"
+>
+> Unfortunatelly this does not work, this regexp matches everything starting with 'lib',
+> so it's only a bit more strict then old version which matched everything starting with 'li' :).
+>
+> Please change it to:
+> PACKAGES_DYNAMIC = "^lib(av(codec|device|filter|format|util)|postproc)"
+> or
+> PACKAGES_DYNAMIC = "^lib(av(codec|device|filter|format|util)|postproc).*"
+>
+> ^ isn't used in any PACKAGES_DYNAMIC in oe-core, but it could make matching faster
+> * is used wrong in all PACKAGES_DYNAMIC in oe-core (as in glob, but not regexp), so all those last '-' are optional
 
-Looks good, only thing I would suggest would be LSB headers on the init script 
-as Koen pointed out for Apache.
+PACKAGES_DYNAMIC =
+"^lib(av(codec|device|filter|format|util)|postproc).*" is the right
+one.
 
-Cheers,
-Paul
+Koen, I am traveling but people amend my patch commit it please ... or
+I send a new revision next week.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
