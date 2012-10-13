@@ -1,33 +1,35 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1TN7sI-0003EP-QP
+	(envelope-from <elvis.dowson@gmail.com>) id 1TN7sL-0003ET-Lj
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Oct 2012 21:59:55 +0200
-Received: by mail-pa0-f47.google.com with SMTP id fa11so3301010pad.6
+	Sat, 13 Oct 2012 21:59:58 +0200
+Received: by mail-pb0-f47.google.com with SMTP id ro12so3381027pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Oct 2012 12:46:40 -0700 (PDT)
+	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=Y8VDxHa8RMk+wF3qeiqAzMWyccb2ZN+5hNt5Xopg6EQ=;
-	b=Yveca9QaRkTkQXfR3g8AAYK6BbzHCjvgAsTQpCAGOXR7Uy4rvaVnUeOXwOwCbC2uz7
-	g1VqImJk7fp4fkE7W68yp5IOPUCAQNKtH5fLcvu3NacdOpO7K8WR0t/fAMgMsC5VFlGH
-	BRqZc0AUBGKr0RseYplQUkgHvnrmFILyfmlpLVZ1gyIItAgTkhD0ADjzJY6372gu6Gil
-	lKHkoCScKPSIye5RVL/QwiGC93VDRIXNJSf/sY6tWTlFVEWbZzrXvkkreOdTrw+Elojn
-	D6dQLA4sRkGYyk6jT+YH0rtgkDEpR+fxk3GvNhwVqf+PQwlKY4W27fLcyPKhJzQZI0xx
-	Y1yw==
-Received: by 10.68.216.131 with SMTP id oq3mr23745913pbc.147.1350157600694;
-	Sat, 13 Oct 2012 12:46:40 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=9QTbTgxaPy6WLs4kJoKUfU+0npd1mI58n+UUkxs4mBg=;
+	b=Na8UG5pZJ+Q0G4M9mheoA8T9Vi8jF0ae1oHaP2a6PRklXorYDSX/yjJk0iA0QLeuiy
+	daME7ooZB2lxdVWlx5fhReKmxiL9RobT7Taow5jHKaKrWedfE25XpGcIsq4dWcOwPNTZ
+	JcAEOwdyKDQ6fYL3BT/F1ul23DeVNfsW6Es0jMTIl15ur1Rq6oF1K8Q8A7CBr8nyazcc
+	+MOwvn3spuvQqZxCzZGFpXMmAbZgPVe0Bo20legTFCXZX4lqcbxHfVrtfe18iAqkDBQU
+	jabm7eTyHwTV0IeeWQvmMtlU1hm+1Ntif0oWHg+nN4RTDueBOecLkNXPsftjb3kOcTjX
+	DNvg==
+Received: by 10.68.132.41 with SMTP id or9mr24556709pbb.67.1350157603848;
+	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
 Received: from titan.du.ae ([94.205.106.220])
-	by mx.google.com with ESMTPS id pw2sm6416726pbb.59.2012.10.13.12.46.37
+	by mx.google.com with ESMTPS id pw2sm6416726pbb.59.2012.10.13.12.46.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 13 Oct 2012 12:46:39 -0700 (PDT)
+	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Oct 2012 23:46:29 +0400
-Message-Id: <1350157590-14336-1-git-send-email-elvis.dowson@gmail.com>
+Date: Sat, 13 Oct 2012 23:46:30 +0400
+Message-Id: <1350157590-14336-2-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1350157590-14336-1-git-send-email-elvis.dowson@gmail.com>
+References: <1350157590-14336-1-git-send-email-elvis.dowson@gmail.com>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-zynq-balister 1/2] zc702-proto-image: Replace apps-console-core image feature with splash.
+Subject: [meta-zynq-balister 2/2] zynq-zc702: Refactor machine configuration.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +43,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Oct 2012 19:59:55 -0000
+X-List-Received-Date: Sat, 13 Oct 2012 19:59:58 -0000
 
-This commit fixes a warning related to apps-console-core, since it has been
-removed, and replaces it with the splash image feature.
+This commit
+* refactors the zynq-zc702 machine configuration
+* adds u-boot to the generated rootfs
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- recipes-core/images/zc702-proto-image.bb |   12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ conf/machine/include/zynq-base.inc              |   21 +++++++++++++++++++++
+ conf/machine/include/zynq-default-providers.inc |    4 ++++
+ conf/machine/zynq-zc702.conf                    |   14 +++++---------
+ 3 files changed, 30 insertions(+), 9 deletions(-)
+ create mode 100644 conf/machine/include/zynq-base.inc
+ create mode 100644 conf/machine/include/zynq-default-providers.inc
 
-diff --git a/recipes-core/images/zc702-proto-image.bb b/recipes-core/images/zc702-proto-image.bb
-index a6e4b11..02a6af2 100644
---- a/recipes-core/images/zc702-proto-image.bb
-+++ b/recipes-core/images/zc702-proto-image.bb
-@@ -1,14 +1,12 @@
--DESCRIPTION = "A foundational basic image without support for X that can be \
--reasonably used for customization."
-+DESCRIPTION = "A console-only image with more full-featured Linux system \
-+functionality installed."
- 
--IMAGE_FEATURES += "apps-console-core ssh-server-openssh tools-sdk \
-+IMAGE_FEATURES += "splash ssh-server-openssh tools-sdk \
-                    tools-debug debug-tweaks"
- 
- IMAGE_INSTALL = "\
--    task-core-boot \
--    task-core-basic \
-+    packagegroup-core-boot \
-+    packagegroup-core-basic \
-     "
- 
--#    ${CORE_IMAGE_BASE_INSTALL} 
+diff --git a/conf/machine/include/zynq-base.inc b/conf/machine/include/zynq-base.inc
+new file mode 100644
+index 0000000..1b30a4d
+--- /dev/null
++++ b/conf/machine/include/zynq-base.inc
+@@ -0,0 +1,21 @@
++# Provides the Xilinx Zynq common settings
++
++include conf/machine/include/zynq-default-providers.inc
++
++# Add u-boot image to rootfs
++EXTRA_IMAGEDEPENDS = "u-boot-zynq"
++
++# Specify kernel image type
++KERNEL_IMAGETYPE = "uImage"
++
++# Specify machine features
++MACHINE_FEATURES = "apm vfat ethernet"
++
++# Ship kernel modules
++MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
++
++# Specify rootfs image filesystem types
++IMAGE_FSTYPES += "tar.gz"
++
++# Specify serial console settings
++SERIAL_CONSOLE = "115200 ttyPS0"
+diff --git a/conf/machine/include/zynq-default-providers.inc b/conf/machine/include/zynq-default-providers.inc
+new file mode 100644
+index 0000000..10934c7
+--- /dev/null
++++ b/conf/machine/include/zynq-default-providers.inc
+@@ -0,0 +1,4 @@
++# Xilinx Zynq BSP default providers
++
++PREFERRED_PROVIDER_virtual/kernel ?= "linux-zynq"
++PREFERRED_PROVIDER_u-boot ?= "u-boot-zynq"
+diff --git a/conf/machine/zynq-zc702.conf b/conf/machine/zynq-zc702.conf
+index 74a1271..09ef4a1 100644
+--- a/conf/machine/zynq-zc702.conf
++++ b/conf/machine/zynq-zc702.conf
+@@ -1,14 +1,10 @@
+-include conf/machine/include/tune-cortexa9.inc
 -
- inherit core-image
+-PREFERRED_PROVIDER_virtual/kernel ?= "linux-zynq"
+-
+-MACHINE_FEATURES = "apm vfat ethernet"
++#@TYPE: Machine
++#@Name: Xilinx ZC702 FPGA Development Platform for the Zynq-7020 processor.
++#@DESCRIPTION: Machine configuration for the Xilinx ZC702 FPGA Development Platform.
+ 
+-IMAGE_FSTYPES += "tar.gz"
+-
+-SERIAL_CONSOLE = "115200 ttyPS0"
++include conf/machine/include/zynq-base.inc
++include conf/machine/include/tune-cortexa9.inc
+ 
+ UBOOT_MACHINE = "zynq_zc702_config"
+ #UBOOT_ENTRYPOINT = "0x80008000"
+ #UBOOT_LOADADDRESS = "0x80008000"
+-
 -- 
 1.7.9.5
 
