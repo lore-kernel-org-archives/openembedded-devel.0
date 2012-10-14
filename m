@@ -1,35 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1TN7sL-0003ET-Lj
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1TNQ9n-00032F-TG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Oct 2012 21:59:58 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so3381027pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=9QTbTgxaPy6WLs4kJoKUfU+0npd1mI58n+UUkxs4mBg=;
-	b=Na8UG5pZJ+Q0G4M9mheoA8T9Vi8jF0ae1oHaP2a6PRklXorYDSX/yjJk0iA0QLeuiy
-	daME7ooZB2lxdVWlx5fhReKmxiL9RobT7Taow5jHKaKrWedfE25XpGcIsq4dWcOwPNTZ
-	JcAEOwdyKDQ6fYL3BT/F1ul23DeVNfsW6Es0jMTIl15ur1Rq6oF1K8Q8A7CBr8nyazcc
-	+MOwvn3spuvQqZxCzZGFpXMmAbZgPVe0Bo20legTFCXZX4lqcbxHfVrtfe18iAqkDBQU
-	jabm7eTyHwTV0IeeWQvmMtlU1hm+1Ntif0oWHg+nN4RTDueBOecLkNXPsftjb3kOcTjX
-	DNvg==
-Received: by 10.68.132.41 with SMTP id or9mr24556709pbb.67.1350157603848;
-	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
-Received: from titan.du.ae ([94.205.106.220])
-	by mx.google.com with ESMTPS id pw2sm6416726pbb.59.2012.10.13.12.46.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 13 Oct 2012 12:46:43 -0700 (PDT)
-From: Elvis Dowson <elvis.dowson@gmail.com>
+	Sun, 14 Oct 2012 17:31:11 +0200
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BEBEB2232546;
+	Sun, 14 Oct 2012 17:11:03 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id D160D223202E;
+	Sun, 14 Oct 2012 17:11:02 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+Received: from rhein.familie-heinold.de (f052067125.adsl.alicedsl.de
+	[78.52.67.125]) by mail.familie-heinold.de (Postfix) with ESMTPA;
+	Sun, 14 Oct 2012 17:11:02 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id A58C53C66B; Sun, 14 Oct 2012 17:10:54 +0200 (CEST)
+Date: Sun, 14 Oct 2012 17:10:54 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Oct 2012 23:46:30 +0400
-Message-Id: <1350157590-14336-2-git-send-email-elvis.dowson@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1350157590-14336-1-git-send-email-elvis.dowson@gmail.com>
-References: <1350157590-14336-1-git-send-email-elvis.dowson@gmail.com>
-Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [meta-zynq-balister 2/2] zynq-zc702: Refactor machine configuration.
+Message-ID: <20121014151053.GA6803@rhein.zuhause.netz>
+References: <1350047094-19611-1-git-send-email-jlu@pengutronix.de>
+MIME-Version: 1.0
+In-Reply-To: <1350047094-19611-1-git-send-email-jlu@pengutronix.de>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Jan Luebbe <jlu@pengutronix.de>
+Subject: Re: [meta-java][PATCH] classpath: avoid picking up gmp.h from the host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,84 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Oct 2012 19:59:58 -0000
+X-List-Received-Date: Sun, 14 Oct 2012 15:31:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-This commit
-* refactors the zynq-zc702 machine configuration
-* adds u-boot to the generated rootfs
+On Fri, Oct 12, 2012 at 03:04:54PM +0200, Jan Luebbe wrote:
+> Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+> ---
+>  recipes-core/classpath/classpath.inc |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
+> index 4c3174b..1a8093e 100644
+> --- a/recipes-core/classpath/classpath.inc
+> +++ b/recipes-core/classpath/classpath.inc
+> @@ -21,7 +21,7 @@ RPROVIDES_${PN} = "${PBN}"
+>  RPROVIDES_${PN}-common = "${PBN}-common"
+>  RPROVIDES_${PN}-gtk = "${PBN}-awt"
+>  
+> -PR = "r0"
+> +PR = "r1"
+>  
+>  SRC_URI = "${GNU_MIRROR}/classpath/classpath-${PV}.tar.gz"
+>  
+> @@ -37,6 +37,7 @@ EXTRA_OECONF = "\
+>    --with-vm=java \
+>    --disable-Werror \
+>    --with-antlr-jar=${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar \
+> +  --with-gmp=${STAGING_LIBDIR}/.. \
+>    --disable-alsa \
+>    --disable-dssi \
+>    --disable-qt4-peer \
+> -- 
+> 1.7.10.4
 
-Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
----
- conf/machine/include/zynq-base.inc              |   21 +++++++++++++++++++++
- conf/machine/include/zynq-default-providers.inc |    4 ++++
- conf/machine/zynq-zc702.conf                    |   14 +++++---------
- 3 files changed, 30 insertions(+), 9 deletions(-)
- create mode 100644 conf/machine/include/zynq-base.inc
- create mode 100644 conf/machine/include/zynq-default-providers.inc
+Thanks,
 
-diff --git a/conf/machine/include/zynq-base.inc b/conf/machine/include/zynq-base.inc
-new file mode 100644
-index 0000000..1b30a4d
---- /dev/null
-+++ b/conf/machine/include/zynq-base.inc
-@@ -0,0 +1,21 @@
-+# Provides the Xilinx Zynq common settings
-+
-+include conf/machine/include/zynq-default-providers.inc
-+
-+# Add u-boot image to rootfs
-+EXTRA_IMAGEDEPENDS = "u-boot-zynq"
-+
-+# Specify kernel image type
-+KERNEL_IMAGETYPE = "uImage"
-+
-+# Specify machine features
-+MACHINE_FEATURES = "apm vfat ethernet"
-+
-+# Ship kernel modules
-+MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
-+
-+# Specify rootfs image filesystem types
-+IMAGE_FSTYPES += "tar.gz"
-+
-+# Specify serial console settings
-+SERIAL_CONSOLE = "115200 ttyPS0"
-diff --git a/conf/machine/include/zynq-default-providers.inc b/conf/machine/include/zynq-default-providers.inc
-new file mode 100644
-index 0000000..10934c7
---- /dev/null
-+++ b/conf/machine/include/zynq-default-providers.inc
-@@ -0,0 +1,4 @@
-+# Xilinx Zynq BSP default providers
-+
-+PREFERRED_PROVIDER_virtual/kernel ?= "linux-zynq"
-+PREFERRED_PROVIDER_u-boot ?= "u-boot-zynq"
-diff --git a/conf/machine/zynq-zc702.conf b/conf/machine/zynq-zc702.conf
-index 74a1271..09ef4a1 100644
---- a/conf/machine/zynq-zc702.conf
-+++ b/conf/machine/zynq-zc702.conf
-@@ -1,14 +1,10 @@
--include conf/machine/include/tune-cortexa9.inc
--
--PREFERRED_PROVIDER_virtual/kernel ?= "linux-zynq"
--
--MACHINE_FEATURES = "apm vfat ethernet"
-+#@TYPE: Machine
-+#@Name: Xilinx ZC702 FPGA Development Platform for the Zynq-7020 processor.
-+#@DESCRIPTION: Machine configuration for the Xilinx ZC702 FPGA Development Platform.
- 
--IMAGE_FSTYPES += "tar.gz"
--
--SERIAL_CONSOLE = "115200 ttyPS0"
-+include conf/machine/include/zynq-base.inc
-+include conf/machine/include/tune-cortexa9.inc
- 
- UBOOT_MACHINE = "zynq_zc702_config"
- #UBOOT_ENTRYPOINT = "0x80008000"
- #UBOOT_LOADADDRESS = "0x80008000"
--
--- 
-1.7.9.5
+for the patch. It is applied to meta-java master branch.
 
+Bye Henning
 
 
