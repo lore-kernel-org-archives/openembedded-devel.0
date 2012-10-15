@@ -1,27 +1,29 @@
-Received: from metis.ext.pengutronix.de ([92.198.50.35])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jlu@pengutronix.de>) id 1TNglo-00042R-Ox
+	(envelope-from <jayakumar.lkml@gmail.com>) id 1TNiSf-0006Ij-Gj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Oct 2012 11:15:32 +0200
-Received: from dude.hi.pengutronix.de ([2001:6f8:1178:2:21e:67ff:fe11:9c5c])
-	by metis.ext.pengutronix.de with esmtp (Exim 4.72)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1TNgYz-0003oI-MR; Mon, 15 Oct 2012 11:02:17 +0200
-Received: from jlu by dude.hi.pengutronix.de with local (Exim 4.80)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1TNgYz-0006CU-B1; Mon, 15 Oct 2012 11:02:17 +0200
-From: Jan Luebbe <jlu@pengutronix.de>
+	Mon, 15 Oct 2012 13:03:53 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so7541782ieb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Oct 2012 03:50:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=KtAIrJkFEtxPzbX4KaDET27bfkNgxFvO24U5j15rUKc=;
+	b=Kbh7xp2b04QRxwkSlVhs5BUW8U0NAw/A71qZlecT1iuavpD5X1tQ83x71Jg8aesL+p
+	p+1nGcscKZf7OaDX5tGZOztke5KwCnpTYGgeEjSeK+2aUwPc/x9iXjXpzhl8645W18jU
+	j4pYe5+UwtEQJCGLuzVY5yUfksmmp5QzjkYxr3gzPXmzY6R7khExgnMYlIWHnkvkEU1K
+	s6THK91x8oo+rThVFMHeB68WkW3WCG1KqUcPtpRI14vGOJzFDgScTYSGrrfn4x7pUbSd
+	3x8rlezfwy1TSJ4lODz/CUZ++JpeH8nJfx1hgDY73osE9Fp4rl7ltWWt9N4XEDcuoQcR
+	ZcHA==
+MIME-Version: 1.0
+Received: by 10.50.51.227 with SMTP id n3mr8324853igo.10.1350298237517; Mon,
+	15 Oct 2012 03:50:37 -0700 (PDT)
+Received: by 10.64.52.36 with HTTP; Mon, 15 Oct 2012 03:50:37 -0700 (PDT)
+Date: Mon, 15 Oct 2012 18:50:37 +0800
+Message-ID: <CADqH6Vzy+Rtg1fUjGbHyCFN4Fg1kSGx4z8fuguKBKD4FwJCFpQ@mail.gmail.com>
+From: Jaya Kumar <jayakumar.lkml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Oct 2012 11:02:07 +0200
-Message-Id: <1350291727-23742-1-git-send-email-jlu@pengutronix.de>
-X-Mailer: git-send-email 1.7.10.4
-X-SA-Exim-Connect-IP: 2001:6f8:1178:2:21e:67ff:fe11:9c5c
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
-	SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Cc: Jan Luebbe <jlu@pengutronix.de>
-Subject: [meta-java][PATCH] icedtea6-native: fix build with gcc 4.6
+Subject: smb* tools larger than expected
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,261 +37,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2012 09:15:32 -0000
+X-List-Received-Date: Mon, 15 Oct 2012 11:03:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
----
- ...-booleans-from-methods-returning-pointers.patch |   12 ++
- .../icedtea-remove-mimpure-option-to-gcc.patch     |  187 ++++++++++++++++++++
- recipes-core/icedtea/icedtea6-native_1.8.11.bb     |    6 +-
- 3 files changed, 204 insertions(+), 1 deletion(-)
- create mode 100644 meta-java/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-dont-return-booleans-from-methods-returning-pointers.patch
- create mode 100644 meta-java/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-remove-mimpure-option-to-gcc.patch
+Hi OE friends,
 
-diff --git a/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-dont-return-booleans-from-methods-returning-pointers.patch b/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-dont-return-booleans-from-methods-returning-pointers.patch
-new file mode 100644
-index 0000000..315f074
---- /dev/null
-+++ b/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-dont-return-booleans-from-methods-returning-pointers.patch
-@@ -0,0 +1,12 @@
-+diff -ur openjdk.orig/hotspot/src/share/vm/opto/loopnode.cpp openjdk/hotspot/src/share/vm/opto/loopnode.cpp
-+--- openjdk.orig/hotspot/src/share/vm/opto/loopnode.cpp	2011-11-14 17:07:36.000000000 -0500
-++++ openjdk/hotspot/src/share/vm/opto/loopnode.cpp	2012-01-30 11:25:10.648080484 -0500
-+@@ -546,7 +546,7 @@
-+ Node* CountedLoopNode::match_incr_with_optional_truncation(
-+                       Node* expr, Node** trunc1, Node** trunc2, const TypeInt** trunc_type) {
-+   // Quick cutouts:
-+-  if (expr == NULL || expr->req() != 3)  return false;
-++  if (expr == NULL || expr->req() != 3)  return NULL;
-+ 
-+   Node *t1 = NULL;
-+   Node *t2 = NULL;
-diff --git a/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-remove-mimpure-option-to-gcc.patch b/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-remove-mimpure-option-to-gcc.patch
-new file mode 100644
-index 0000000..b680b31
---- /dev/null
-+++ b/recipes-core/icedtea/icedtea6-native-1.8.11/icedtea-remove-mimpure-option-to-gcc.patch
-@@ -0,0 +1,187 @@
-+diff --git a/corba/make/common/shared/Compiler-gcc.gmk b/corba/make/common/shared/Compiler-gcc.gmk
-+index d1e16da..7ef5dda 100644
-+--- openjdk.orig/corba/make/common/shared/Compiler-gcc.gmk
-++++ openjdk/corba/make/common/shared/Compiler-gcc.gmk
-+@@ -95,7 +95,7 @@ ifeq ($(PLATFORM), linux)
-+   endif
-+   endif
-+   # Option used to create a shared library
-+-  SHARED_LIBRARY_FLAG = -shared -mimpure-text
-++  SHARED_LIBRARY_FLAG = -shared
-+   SUN_COMP_VER := $(shell $(CC) --verbose 2>&1 )
-+ 
-+ endif
-+diff --git a/jdk/make/common/shared/Compiler-gcc.gmk b/jdk/make/common/shared/Compiler-gcc.gmk
-+index dc6f757..6c1922b 100644
-+--- openjdk.orig/jdk/make/common/shared/Compiler-gcc.gmk
-++++ openjdk/jdk/make/common/shared/Compiler-gcc.gmk
-+@@ -132,7 +132,7 @@ ifeq ($(PLATFORM), linux)
-+     REQUIRED_GCC_VER = 4.0.*
-+   endif
-+   # Option used to create a shared library
-+-  SHARED_LIBRARY_FLAG = -shared -mimpure-text
-++  SHARED_LIBRARY_FLAG = -shared
-+   SUN_COMP_VER := $(shell $(CC) --verbose 2>&1 )
-+ 
-+ endif
-+diff --git a/jdk/src/share/demo/jvmti/compiledMethodLoad/sample.makefile.txt b/jdk/src/share/demo/jvmti/compiledMethodLoad/sample.makefile.txt
-+index a759dc7..d9871c2 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/compiledMethodLoad/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/compiledMethodLoad/sample.makefile.txt
-+@@ -90,7 +90,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/gctest/sample.makefile.txt b/jdk/src/share/demo/jvmti/gctest/sample.makefile.txt
-+index 8a8e40a..a0edfbd 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/gctest/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/gctest/sample.makefile.txt
-+@@ -90,7 +90,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/heapTracker/sample.makefile.txt b/jdk/src/share/demo/jvmti/heapTracker/sample.makefile.txt
-+index e102fba..00fb0d2 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/heapTracker/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/heapTracker/sample.makefile.txt
-+@@ -94,7 +94,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-L $(JDK)/jre/lib/$(LIBARCH) -ljava_crw_demo -lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/heapViewer/sample.makefile.txt b/jdk/src/share/demo/jvmti/heapViewer/sample.makefile.txt
-+index 07905e5..c4dc8f4 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/heapViewer/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/heapViewer/sample.makefile.txt
-+@@ -90,7 +90,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/hprof/sample.makefile.txt b/jdk/src/share/demo/jvmti/hprof/sample.makefile.txt
-+index 9ef36a1..9d4506c 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/hprof/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/hprof/sample.makefile.txt
-+@@ -130,7 +130,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES= -lnsl -ldl -lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/index.html b/jdk/src/share/demo/jvmti/index.html
-+index b3efe37..f1e6fa2 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/index.html
-++++ openjdk/jdk/src/share/demo/jvmti/index.html
-+@@ -308,7 +308,7 @@ For X86:
-+ <code><ul>
-+ gcc -O2 -fPIC -pthread -DLINUX -c <i>*.c</i>
-+ <br>
-+-gcc -z defs -static-libgcc -shared -mimpure-text -o <i>libXXX.so *.o</i> -lc
-++gcc -z defs -static-libgcc -shared -o <i>libXXX.so *.o</i> -lc
-+ </code></ul>
-+ <br>
-+ For AMD64:
-+@@ -316,7 +316,7 @@ For AMD64:
-+ <code><ul>
-+ gcc -O2 -fPIC -pthread -DLINUX -D_LP64=1 -c <i>*.c</i>
-+ <br>
-+-gcc -z defs -static-libgcc -shared -mimpure-text -o <i>libXXX.so *.o</i> -lc
-++gcc -z defs -static-libgcc -shared -o <i>libXXX.so *.o</i> -lc
-+ </code></ul>
-+ <br>
-+ </li>
-+@@ -339,7 +339,7 @@ option.
-+ </li>
-+ 
-+ <li>
-+-Library: Use -static-libgcc -mimpure-text.
-++Library: Use -static-libgcc.
-+ <br>
-+ When building the shared library (-shared option), this option
-+ allows for maximum portability of the library between different
-+diff --git a/jdk/src/share/demo/jvmti/java_crw_demo/sample.makefile.txt b/jdk/src/share/demo/jvmti/java_crw_demo/sample.makefile.txt
-+index 84f0c01..b07d2c1 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/java_crw_demo/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/java_crw_demo/sample.makefile.txt
-+@@ -90,7 +90,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/minst/sample.makefile.txt b/jdk/src/share/demo/jvmti/minst/sample.makefile.txt
-+index 86ddeb4..42ae05a 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/minst/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/minst/sample.makefile.txt
-+@@ -94,7 +94,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-L $(JDK)/jre/lib/$(LIBARCH) -ljava_crw_demo -lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/mtrace/sample.makefile.txt b/jdk/src/share/demo/jvmti/mtrace/sample.makefile.txt
-+index b6480e6..dd45185 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/mtrace/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/mtrace/sample.makefile.txt
-+@@ -94,7 +94,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-L $(JDK)/jre/lib/$(LIBARCH) -ljava_crw_demo -lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/versionCheck/sample.makefile.txt b/jdk/src/share/demo/jvmti/versionCheck/sample.makefile.txt
-+index f7775b5..a5b6a5c 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/versionCheck/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/versionCheck/sample.makefile.txt
-+@@ -90,7 +90,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.c=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=-lc
-+     # Building a shared library
-+diff --git a/jdk/src/share/demo/jvmti/waiters/sample.makefile.txt b/jdk/src/share/demo/jvmti/waiters/sample.makefile.txt
-+index b04bd07..46511af 100644
-+--- openjdk.orig/jdk/src/share/demo/jvmti/waiters/sample.makefile.txt
-++++ openjdk/jdk/src/share/demo/jvmti/waiters/sample.makefile.txt
-+@@ -91,7 +91,7 @@ ifeq ($(OSNAME), linux)
-+     OBJECTS=$(SOURCES:%.cpp=%.o)
-+     # Library name and options needed to build it
-+     LIBRARY=lib$(LIBNAME).so
-+-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
-++    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc
-+     # Libraries we are dependent on
-+     LIBRARIES=
-+     # Building a shared library
-diff --git a/recipes-core/icedtea/icedtea6-native_1.8.11.bb b/recipes-core/icedtea/icedtea6-native_1.8.11.bb
-index 7c2e6ea..c663e97 100644
---- a/recipes-core/icedtea/icedtea6-native_1.8.11.bb
-+++ b/recipes-core/icedtea/icedtea6-native_1.8.11.bb
-@@ -4,7 +4,7 @@ require ${PN}.inc
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
- 
- SRC_URI = "\
- 	http://icedtea.classpath.org/download/source/icedtea6-${PV}.tar.gz;name=iced \
-@@ -44,6 +44,8 @@ ICEDTEA_PATCHES = "\
-         file://icedtea-jdk-sane-x86-arch.patch;apply=no \
-         file://icedtea-unbreak-float.patch;apply=no \
-         file://icedtea-jdk-avoid-cdef-collision.patch;apply=no \
-+	file://icedtea-dont-return-booleans-from-methods-returning-pointers.patch;apply=no \
-+	file://icedtea-remove-mimpure-option-to-gcc.patch;apply=no \
- 	"
- 
- export DISTRIBUTION_PATCHES = "\
-@@ -54,6 +56,8 @@ export DISTRIBUTION_PATCHES = "\
-         patches/icedtea-jdk-sane-x86-arch.patch \
- 	patches/icedtea-unbreak-float.patch \
-         patches/icedtea-jdk-avoid-cdef-collision.patch \
-+	patches/icedtea-dont-return-booleans-from-methods-returning-pointers.patch \
-+	patches/icedtea-remove-mimpure-option-to-gcc.patch \
- 	"
- 
- EXTRA_OECONF += " --with-jaxws-drop-zip=${DL_DIR}/jdk6-jaxws-2009_10_27.zip \
--- 
-1.7.10.4
+I noticed my rootfs is filled with large smb* binaries. Investigating further:
 
+~/oe/setup-scripts$ ls -lhs
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/deploy/ipk/armv7a/samba_3.5.6-r1_armv7a.ipk
+31M -rw-r--r-- 1 test test 31M 2012-09-07 13:46
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/deploy/ipk/armv7a/samba_3.5.6-r1_armv7a.ipk
+
+~/oe/setup-scripts$ MACHINE=beagleboard bitbake -c compile samba
+~/oe/setup-scripts$ ls -lhs
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smb*
+5.7M -rwxr-xr-x 2 test test 5.7M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbcacls
+5.8M -rwxr-xr-x 2 test test 5.8M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbclient
+1.4M -rwxr-xr-x 2 test test 1.4M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbcontrol
+5.7M -rwxr-xr-x 2 test test 5.7M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbcquotas
+5.8M -rwxr-xr-x 2 test test 5.8M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbget
+5.7M -rwxr-xr-x 2 test test 5.7M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbpasswd
+2.8M -rwxr-xr-x 2 test test 2.8M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbspool
+1.4M -rwxr-xr-x 2 test test 1.4M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbstatus
+8.0K -rwxr-xr-x 2 test test 4.8K 2012-09-07 13:42
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbtar
+5.7M -rwxr-xr-x 2 test test 5.7M 2012-09-07 13:43
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbtree
+
+At first I thought maybe these binaries were getting statically
+linked, but that doesn't appear to be the case.
+~/oe/setup-scripts$ file
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbpasswd
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbpasswd:
+ELF 32-bit LSB shared object, ARM, version 1 (SYSV), dynamically
+linked (uses shared libs), for GNU/Linux 2.6.16, stripped
+
+~/oe/setup-scripts$ readelf -a
+/home/test/oe/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/work/armv7a-angstrom-linux-gnueabi/samba-3.5.6-r1/package/usr/bin/smbpasswd
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        00000154 000154 000013 00   A  0   0  1
+  [ 2] .note.ABI-tag     NOTE            00000168 000168 000020 00   A  0   0  4
+  [ 3] .gnu.hash         GNU_HASH        00000188 000188 00d080 04   A  4   0  4
+  [ 4] .dynsym           DYNSYM          0000d208 00d208 0213f0 10   A  5   3  4
+  [ 5] .dynstr           STRTAB          0002e5f8 02e5f8 0343c3 00   A  0   0  1
+  [ 6] .gnu.version      VERSYM          000629bc 0629bc 00427e 02   A  4   0  2
+  [ 7] .gnu.version_r    VERNEED         00066c3c 066c3c 0000d0 00   A  5   6  4
+  [ 8] .rel.dyn          REL             00066d0c 066d0c 014c58 08   A  4   0  4
+  [ 9] .rel.plt          REL             0007b964 07b964 0008b0 08   A  4  11  4
+  [10] .init             PROGBITS        0007c214 07c214 00000c 00  AX  0   0  4
+  [11] .plt              PROGBITS        0007c220 07c220 000d1c 04  AX  0   0  4
+  [12] .text             PROGBITS        0007cf40 07cf40 3e6788 00  AX  0   0  8
+  [13] .fini             PROGBITS        004636c8 4636c8 000008 00  AX  0   0  4
+  [14] .rodata           PROGBITS        004636d0 4636d0 12c9e8 00   A  0   0  4
+  [15] .ARM.exidx        ARM_EXIDX       005900b8 5900b8 000008 00  AL 12   0  4
+  [16] .init_array       INIT_ARRAY      00598204 590204 000004 00  WA  0   0  4
+  [17] .fini_array       FINI_ARRAY      00598208 590208 000004 00  WA  0   0  4
+  [18] .jcr              PROGBITS        0059820c 59020c 000004 00  WA  0   0  4
+  [19] .data.rel.ro      PROGBITS        00598210 590210 010cd0 00  WA  0   0  4
+  [20] .dynamic          DYNAMIC         005a8ee0 5a0ee0 000120 08  WA  5   0  4
+  [21] .got              PROGBITS        005a9000 5a1000 00082c 04  WA  0   0  4
+  [22] .data             PROGBITS        005a982c 5a182c 004360 00  WA  0   0  4
+  [23] .bss              NOBITS          005adb90 5a5b8c 002cb8 00  WA  0   0  8
+  [24] .ARM.attributes   ARM_ATTRIBUTES  00000000 5a5b8c 000031 00      0   0  1
+  [25] .gnu_debuglink    PROGBITS        00000000 5a5bbd 000010 00      0   0  1
+  [26] .shstrtab         STRTAB          00000000 5a5bcd 0000f0 00      0   0  1
+
+Looking at that list, it seems .rodata is massive, about 1MB. I don't
+know enough to know why that could be the case. Is there something I
+can do to get the samba package to be much smaller?
+
+Thanks,
+jayakumar
 
 
