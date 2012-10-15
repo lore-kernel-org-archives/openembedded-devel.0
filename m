@@ -1,20 +1,26 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TNknA-0000h1-4J
+	(envelope-from <denis@denix.org>) id 1TNqTP-0005wO-EH
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Oct 2012 15:33:12 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 15 Oct 2012 06:19:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,587,1344236400"; d="scan'208";a="234042968"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.76])
-	by fmsmga001.fm.intel.com with ESMTP; 15 Oct 2012 06:19:53 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Mon, 15 Oct 2012 21:37:11 +0200
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MBY00ECK8ISYGF0@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	15 Oct 2012 14:23:31 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB521201C0; Mon,
+	15 Oct 2012 15:23:15 -0400 (EDT)
+Date: Mon, 15 Oct 2012 15:23:15 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Oct 2012 14:19:48 +0100
-Message-Id: <1350307188-12001-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-webserver][PATCH] modphp: call gnu-configize in do_configure
+Message-id: <20121015192315.GK16944@denix.org>
+References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
+	<k2a264$d2a$1@ger.gmane.org> <20121010213234.GG16944@denix.org>
+MIME-version: 1.0
+In-reply-to: <20121010213234.GG16944@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,44 +34,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2012 13:33:12 -0000
+X-List-Received-Date: Mon, 15 Oct 2012 19:37:11 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Since we override do_configure, gnu-configize doesn't get called and
-using the old gnu-config files distributed with the PHP source can cause
-problems for some people e.g. building for AArch64; so add a call to it
-explicitly here.
+ping! Can we get it pushed to denzil, please? Thanks.
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-webserver/recipes-php/modphp/modphp5.inc      |    1 +
- meta-webserver/recipes-php/modphp/modphp_5.3.14.bb |    2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
-index 55e7c92..1db85bf 100644
---- a/meta-webserver/recipes-php/modphp/modphp5.inc
-+++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-@@ -49,6 +49,7 @@ acpaths = ""
- # which breaks everything...
- #
- do_configure() {
-+	gnu-configize --force
- 	find . -name config.m4 -o -name configure | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
- 	export PHP_LIBXML_DIR=${STAGING_DIR_NATIVE}${layout_exec_prefix} 
- 	oe_runconf
-diff --git a/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb b/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
-index a4011b6..2a264d7 100644
---- a/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
-+++ b/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
-@@ -1,5 +1,5 @@
- include modphp5.inc
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI[md5sum] = "7caac4f71e2f21426c11ac153e538392"
- SRC_URI[sha256sum] = "c8075b6e83c5db0d26cc8426a7456856421089a76c963813b1fcac3ced041cb3"
--- 
-1.7.9.5
-
+On Wed, Oct 10, 2012 at 05:32:34PM -0400, Denys Dmytriyenko wrote:
+> On Thu, Sep 06, 2012 at 01:41:57PM +0200, Koen Kooi wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> > 
+> > One day I will figure out how to write a cover letter :)
+> > 
+> > The matching OE-core patchset is in denzil-next for testing and will
+> > hopefully get merged soon (provided it passes the testsuite).
+> > 
+> > My main objective is to support on-target builds of external kernel-modules
+> > and initial reports are that it is working as expected.
+> > 
+> > Since there's a bitbake.conf change needed the matching oe-core set needs to
+> > go in first and ideally this goes in right after that (provided this passes
+> > the testsuite as well).
+> > 
+> > As you can imagine, this kind of inter-layer dependency sucks, but I don't
+> > see a way around it in this case with the bitbake.conf change.
+> 
+> So, what happened to this patchset? Can we get it pushed in to meta-oe/denzil 
+> now, since corresponding changes to oe-core/denzil finally got in couple 
+> weeks ago and it breaks external kernel-modules now? Thanks!
+> 
+> -- 
+> Denys
+> 
+> 
+> > Op 06-09-12 13:23, Koen Kooi schreef:
+> > > From: Bruce Ashfield <bruce.ashfield@windriver.com>
+> > > 
+> > > The kernel source tree in the sysroot has all unecessary source code
+> > > removed. The existing use case is to support module building out of the
+> > > sysroot, but as more toolsa are moved into the kernel tree itself there
+> > > are new use cases for the kernel sysroot source.
+> > > 
+> > > To avoid putting dependencies on the kernel, and to be able to 
+> > > individually build and package these tools out of the source tree, we can
+> > > save $kerndir/tools and $kernddir/lib from being removed. This enables
+> > > tools like perf to be built our of the kernel source in the sysroot,
+> > > without significantly increasing the amount of source in the sysroot.
+> > > 
+> > > Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com> 
+> > > Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org> 
+> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> Signed-off-by: Koen
+> > > Kooi <koen@dominion.thruhere.net> --- meta-oe/classes/kernel.bbclass |
+> > > 2 +- 1 files changed, 1 insertions(+), 1 deletions(-)
+> > > 
+> > > diff --git a/meta-oe/classes/kernel.bbclass
+> > > b/meta-oe/classes/kernel.bbclass index ce82351..c44a2f5 100644 ---
+> > > a/meta-oe/classes/kernel.bbclass +++ b/meta-oe/classes/kernel.bbclass @@
+> > > -178,7 +178,7 @@ kernel_do_install() { # oe_runmake -C $kerneldir
+> > > CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean make -C $kerneldir
+> > > _mrproper_scripts -	find $kerneldir -path $kerneldir/scripts -prune -o
+> > > -name "*.[csS]" -exec rm '{}' \; +	find $kerneldir -path $kerneldir/lib
+> > > -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts
+> > > -prune -o -name "*.[csS]" -exec rm '{}' \; find $kerneldir/Documentation
+> > > -name "*.txt" -exec rm '{}' \;
+> > > 
+> > > # As of Linux kernel version 3.0.1, the clean target removes
+> > > 
+> > 
+> > -----BEGIN PGP SIGNATURE-----
+> > Version: GnuPG v1.4.5 (Darwin)
+> > Comment: GPGTools - http://gpgtools.org
+> > 
+> > iD8DBQFQSIwFMkyGM64RGpERAjCgAJ9PFqqoYUsY+deeN9gVy89hod+TqACeJFO3
+> > hJ8tR0ZLZeookvwClEGnpD8=
+> > =CRRt
+> > -----END PGP SIGNATURE-----
+> > 
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
