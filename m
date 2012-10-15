@@ -1,26 +1,34 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <denis@denix.org>) id 1TNqTP-0005wO-EH
+	(envelope-from <otavio.salvador@gmail.com>) id 1TNtCP-0003jZ-J1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Oct 2012 21:37:11 +0200
-Received: from gandalf.denix.org ([unknown] [72.66.25.115])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MBY00ECK8ISYGF0@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	15 Oct 2012 14:23:31 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB521201C0; Mon,
-	15 Oct 2012 15:23:15 -0400 (EDT)
-Date: Mon, 15 Oct 2012 15:23:15 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 16 Oct 2012 00:31:49 +0200
+Received: by mail-pa0-f47.google.com with SMTP id fa11so4616312pad.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Oct 2012 15:18:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=38x5FQHdqGdHYBDC/5WgtpKAR4L+XOHRxViTNSOfkLI=;
+	b=GGrQ9IL01qeA7HqhAkYqwza0O1J35hiGAq7J7mZwDaMpmsz994eKjDovRymKggCst6
+	XpMDqdrBWpRLCjJIrRx70UPx2TR1pL0SfVBg0804NlcIE4DkB/18GO97rgNlla/NMB71
+	Jvqa2io4Y8w+Wlbmrqta+UzNUWb+GR16peNz62bCzPNLtDUo2EhZ/48xcDw6xrmKJ3sd
+	HHQdV5ut+SvrGUTPMmbuFxbFKTrN/39ZFb6YCMNL0dp7otTxozumxLD2Z+a2kpz/4Wsc
+	Xk8bHRjIncrP9KrZyT1CEgg/1D8hFVxbIA+a0x1vPnZJJ3yWGEtzAvQfGkX5AVD4j9zl
+	3/Tg==
+MIME-Version: 1.0
+Received: by 10.66.87.133 with SMTP id ay5mr36522943pab.59.1350339512788; Mon,
+	15 Oct 2012 15:18:32 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.40.201 with HTTP; Mon, 15 Oct 2012 15:18:32 -0700 (PDT)
+In-Reply-To: <1349991962-3844-1-git-send-email-otavio@ossystems.com.br>
+References: <1349991962-3844-1-git-send-email-otavio@ossystems.com.br>
+Date: Mon, 15 Oct 2012 19:18:32 -0300
+X-Google-Sender-Auth: KUdYZ6yaFxyVO6iUSM1P-JL0DP0
+Message-ID: <CAP9ODKqsTH89m9X24E3geG4Ox--dhCsG93gz7T70NhJtYpRciw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20121015192315.GK16944@denix.org>
-References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
-	<k2a264$d2a$1@ger.gmane.org> <20121010213234.GG16944@denix.org>
-MIME-version: 1.0
-In-reply-to: <20121010213234.GG16944@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
+Subject: Re: [meta-oe][PATCH] xbmc: Fix serveral build errors and install missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,93 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2012 19:37:11 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 15 Oct 2012 22:31:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-ping! Can we get it pushed to denzil, please? Thanks.
+On Thu, Oct 11, 2012 at 6:46 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> This allow the package to build fine. On the test board it didn't show
+> anything in display but it seems to be hardware specific issue.
+>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
+ping?
 
-On Wed, Oct 10, 2012 at 05:32:34PM -0400, Denys Dmytriyenko wrote:
-> On Thu, Sep 06, 2012 at 01:41:57PM +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > One day I will figure out how to write a cover letter :)
-> > 
-> > The matching OE-core patchset is in denzil-next for testing and will
-> > hopefully get merged soon (provided it passes the testsuite).
-> > 
-> > My main objective is to support on-target builds of external kernel-modules
-> > and initial reports are that it is working as expected.
-> > 
-> > Since there's a bitbake.conf change needed the matching oe-core set needs to
-> > go in first and ideally this goes in right after that (provided this passes
-> > the testsuite as well).
-> > 
-> > As you can imagine, this kind of inter-layer dependency sucks, but I don't
-> > see a way around it in this case with the bitbake.conf change.
-> 
-> So, what happened to this patchset? Can we get it pushed in to meta-oe/denzil 
-> now, since corresponding changes to oe-core/denzil finally got in couple 
-> weeks ago and it breaks external kernel-modules now? Thanks!
-> 
-> -- 
-> Denys
-> 
-> 
-> > Op 06-09-12 13:23, Koen Kooi schreef:
-> > > From: Bruce Ashfield <bruce.ashfield@windriver.com>
-> > > 
-> > > The kernel source tree in the sysroot has all unecessary source code
-> > > removed. The existing use case is to support module building out of the
-> > > sysroot, but as more toolsa are moved into the kernel tree itself there
-> > > are new use cases for the kernel sysroot source.
-> > > 
-> > > To avoid putting dependencies on the kernel, and to be able to 
-> > > individually build and package these tools out of the source tree, we can
-> > > save $kerndir/tools and $kernddir/lib from being removed. This enables
-> > > tools like perf to be built our of the kernel source in the sysroot,
-> > > without significantly increasing the amount of source in the sysroot.
-> > > 
-> > > Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com> 
-> > > Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org> 
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> Signed-off-by: Koen
-> > > Kooi <koen@dominion.thruhere.net> --- meta-oe/classes/kernel.bbclass |
-> > > 2 +- 1 files changed, 1 insertions(+), 1 deletions(-)
-> > > 
-> > > diff --git a/meta-oe/classes/kernel.bbclass
-> > > b/meta-oe/classes/kernel.bbclass index ce82351..c44a2f5 100644 ---
-> > > a/meta-oe/classes/kernel.bbclass +++ b/meta-oe/classes/kernel.bbclass @@
-> > > -178,7 +178,7 @@ kernel_do_install() { # oe_runmake -C $kerneldir
-> > > CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean make -C $kerneldir
-> > > _mrproper_scripts -	find $kerneldir -path $kerneldir/scripts -prune -o
-> > > -name "*.[csS]" -exec rm '{}' \; +	find $kerneldir -path $kerneldir/lib
-> > > -prune -o -path $kerneldir/tools -prune -o -path $kerneldir/scripts
-> > > -prune -o -name "*.[csS]" -exec rm '{}' \; find $kerneldir/Documentation
-> > > -name "*.txt" -exec rm '{}' \;
-> > > 
-> > > # As of Linux kernel version 3.0.1, the clean target removes
-> > > 
-> > 
-> > -----BEGIN PGP SIGNATURE-----
-> > Version: GnuPG v1.4.5 (Darwin)
-> > Comment: GPGTools - http://gpgtools.org
-> > 
-> > iD8DBQFQSIwFMkyGM64RGpERAjCgAJ9PFqqoYUsY+deeN9gVy89hod+TqACeJFO3
-> > hJ8tR0ZLZeookvwClEGnpD8=
-> > =CRRt
-> > -----END PGP SIGNATURE-----
-> > 
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
