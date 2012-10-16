@@ -1,34 +1,36 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TO5EW-0006Xq-0d
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TO5hP-0008Cv-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Oct 2012 13:22:48 +0200
-Received: by mail-da0-f47.google.com with SMTP id s35so2709599dak.6
+	Tue, 16 Oct 2012 13:52:40 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so9545326ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2012 04:09:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=bPAEhlJmMkWUv5ikb5JZx7XXBx1KqYg6E1XZSkYd1Kg=;
-	b=gfgBsGEucYbm3apWeGreCnHBxAhYYtc11OEiXG+NUSF7Ip5k2lk8Zkax19Kgwj7tDs
-	KZMtnvsM4F9zc5j7NmMWvHozTw3J8xEtsW4sLqCU+FyS2P9YkWEyiyCMZnanKIIiXifJ
-	gs7wWzLQj7dfU8b3wCVCrstjUlDfAMnRQpBa6Kb8ErGdcSHshZwZkvm2rH7s+rb443SY
-	xvv/rkKQRNWyKpM+6Ift4UmS4xoskhCR9K/3thgRtzmmCJg4086/aPnz/aJswdTR5z1V
-	2tDMMu8KBN8ZRp82sf8hZXFH+o/xzclJlrcHUgPxMbd5UkXGH5fn6xCV8qxS1XQH0e7/
-	njGg==
+	Tue, 16 Oct 2012 04:39:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=MfcdU1BGk18U/Cs8Ep5gkEgg8hJxx5Kd19iPwOhhigM=;
+	b=OopwHHjR3MBV/CbzWg7mGe9BQHI+QfM1Ke3hcuhMPszcqIMdoGAWFTzsXQKwRpiK1l
+	mIT5XYRQ2u05cuTNju3Czilt7KzHn2MebpwcJ267P8fNlKv1zgSmx663Pu8zKU7XI95t
+	kxoWWDW2Sc1KC53orXcZcvC1oYE8ty5oYJhmnKNhPO2b1sSB/rbXjCwonfoyzFmMzN+a
+	6sBx8twGzL29sCzJblsL4XJ1jpLwWE/pfHRi4cDOnfyvraiDCmz1c/EQ7LsQENcxFxA0
+	sh8+XaXDRk9vypRuD+Pf5j6TC5a1N4cm1Chktpg0hqkW0b15iZOO3AUBn5URM6KNKcp0
+	MHoQ==
 MIME-Version: 1.0
-Received: by 10.66.75.73 with SMTP id a9mr40807053paw.43.1350385770584; Tue,
-	16 Oct 2012 04:09:30 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Tue, 16 Oct 2012 04:09:30 -0700 (PDT)
-In-Reply-To: <1349166535-14325-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1349166535-14325-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Tue, 16 Oct 2012 08:09:30 -0300
-X-Google-Sender-Auth: Cvaz1Qb-2yBfRI-iVqaWvrnqE_E
-Message-ID: <CAP9ODKrNWnk_H0GjfM6sP8KNApRr=bGT0YaSEXp-8qMNq_GfZQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.50.236.6 with SMTP id uq6mr11688296igc.50.1350387561370; Tue,
+	16 Oct 2012 04:39:21 -0700 (PDT)
+Received: by 10.64.20.113 with HTTP; Tue, 16 Oct 2012 04:39:21 -0700 (PDT)
+In-Reply-To: <CALbNGRQ9wfABVz3_2pCZVYMJ+3kAa3rEcxmp-GrmLY1EyYOhUw@mail.gmail.com>
+References: <1348814151-31167-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRQUij-JZdKVW3KoNu+tgatquyA0ZBT6yDgdguJPEgpfEQ@mail.gmail.com>
+	<CALbNGRQvE_qnx7cW0xk1qtYMii3E-dOnRiPxuYk1nz333+1u8A@mail.gmail.com>
+	<CALbNGRQ9wfABVz3_2pCZVYMJ+3kAa3rEcxmp-GrmLY1EyYOhUw@mail.gmail.com>
+Date: Tue, 16 Oct 2012 13:39:21 +0200
+Message-ID: <CALbNGRQwk8Eg+nD5BWfoEKhVThzsXgNKf=WLmxruqqL3fX0y5A@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Maliit: Add initial recipes
+Subject: Re: [meta-oe, meta-xfce 1/3] glade3: initial add 3.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,70 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2012 11:22:48 -0000
+X-List-Received-Date: Tue, 16 Oct 2012 11:52:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 2, 2012 at 5:28 AM, Samuel Stirtzel
-<s.stirtzel@googlemail.com> wrote:
-> Maliit is a Qt based virtual keyboard under liberal license (LGPLv2.1 / BSD)
-> The inputmethod framework from Qt is used and it supports gtk-immodules.
-> It can also be used without dependencies to GTK+ (separate package for GTK+)
+On Fri, Oct 12, 2012 at 10:52 AM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Thu, Oct 4, 2012 at 9:36 AM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+>> On Fri, Sep 28, 2012 at 9:49 AM, Andreas M=FCller
+>> <schnitzeltony@googlemail.com> wrote:
+>>> Patchwork does not like the third of this series. So this series can be=
+ found at
+>>>
+>>> git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git
+>>> branch patches
+>>>
+>>> Andreas
+>> ping
+> Sorry to bug here again but is there something wrong with this series?
+> I have 1+2 in daily use since I am writing an xfce-panel-plugin and
+> the libxfce4ui-glade stuff is not available in my build machine's
+> distro.
 >
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> If there are objections on these patches I will put 1+2 in my
+> meta-devel. So please let me know so I can close this.
+>
+> Andreas
+Don't we share the same README?
 
-Thanks by working on this. Bellow my comments ...
-
-...
-> diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-> new file mode 100644
-> index 0000000..3f50d1b
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-...
-> +
-> +# Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
-> +RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
-
-In this case, maliit is a post 1.2 package.
-
-...
-> +EXTRA_QMAKEVARS_PRE = "\
-> +    PREFIX=${prefix} \
-> +    LIBDIR=${libdir} \
-> +    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
-> +    MALIIT_INSTALL_PRF=${datadir}/qt4/mkspecs/features \
-> +    SCHEMADIR=${sysconfdir}/gconf/schemas \
-> +    CONFIG+=disable-gconf \
-> +    CONFIG+=disable-gtk-cache-update \
-> +    CONFIG+=local-install \
-> +    "
-
-Really need to disable gtk-cache-update? Why?
-
-...
-> +# Update the inputmethod modules in gtk
-> +pkg_postinst_${PN}-gtk() {
-> +if [ "x$D" != "x" ]; then
-> +    exit 1
-> +fi
-> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-> +}
-> +
-> +pkg_postrm_${PN}-gtk() {
-> +if [ "x$D" != "x" ]; then
-> +    exit 1
-> +fi
-> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-> +}
-
-You might add a gtk-immodules.bbclass to allow it to be put out of the recipe.
-
-As said by Martin, please read the README and follow the steps to send
-the patch...
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Andreas
 
 
