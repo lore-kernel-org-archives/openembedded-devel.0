@@ -1,36 +1,35 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TO5hP-0008Cv-Vt
+	(envelope-from <otavio.salvador@gmail.com>) id 1TO6uv-0005V6-MB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Oct 2012 13:52:40 +0200
-Received: by mail-ie0-f175.google.com with SMTP id c13so9545326ieb.6
+	Tue, 16 Oct 2012 15:10:41 +0200
+Received: by mail-da0-f47.google.com with SMTP id s35so2747265dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2012 04:39:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=MfcdU1BGk18U/Cs8Ep5gkEgg8hJxx5Kd19iPwOhhigM=;
-	b=OopwHHjR3MBV/CbzWg7mGe9BQHI+QfM1Ke3hcuhMPszcqIMdoGAWFTzsXQKwRpiK1l
-	mIT5XYRQ2u05cuTNju3Czilt7KzHn2MebpwcJ267P8fNlKv1zgSmx663Pu8zKU7XI95t
-	kxoWWDW2Sc1KC53orXcZcvC1oYE8ty5oYJhmnKNhPO2b1sSB/rbXjCwonfoyzFmMzN+a
-	6sBx8twGzL29sCzJblsL4XJ1jpLwWE/pfHRi4cDOnfyvraiDCmz1c/EQ7LsQENcxFxA0
-	sh8+XaXDRk9vypRuD+Pf5j6TC5a1N4cm1Chktpg0hqkW0b15iZOO3AUBn5URM6KNKcp0
-	MHoQ==
+	Tue, 16 Oct 2012 05:57:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=nRN/u0gmPCJJNYtDsKPVqf0vnnT3PaRXDx0oI4hBcI0=;
+	b=VXPgbfd1ZTaCsxLrbiDFN6+fXx7QrIsBtPcIFm2X3qj3uMHG5NkgbZcsgcjbCnIU3W
+	SmtC7fzuPyxF7pkUTQczgMYHUtDrB05OWd/rQqezxlwLyVrU7q5crfZRUzdtKUwcrfje
+	D7vMTUX2+OehxS5uraud8X3Lnx0OccYpKB+qEPxr1uQJVt9lNElNlD7MQ0s9hJejHFZb
+	3/n7gi78iO/1NBH/E5ySTAzGVa8HH+Xa7MLc16hTAHxrdhDyUADcai/J9HroBFmAH9MX
+	XB8zZkr09YFgSDIRHTSKMHjLbk52jhJxbTXsEdpILvDuQxCGC6KPy56ZyTo8wt+u+8n7
+	+bNQ==
 MIME-Version: 1.0
-Received: by 10.50.236.6 with SMTP id uq6mr11688296igc.50.1350387561370; Tue,
-	16 Oct 2012 04:39:21 -0700 (PDT)
-Received: by 10.64.20.113 with HTTP; Tue, 16 Oct 2012 04:39:21 -0700 (PDT)
-In-Reply-To: <CALbNGRQ9wfABVz3_2pCZVYMJ+3kAa3rEcxmp-GrmLY1EyYOhUw@mail.gmail.com>
-References: <1348814151-31167-1-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRQUij-JZdKVW3KoNu+tgatquyA0ZBT6yDgdguJPEgpfEQ@mail.gmail.com>
-	<CALbNGRQvE_qnx7cW0xk1qtYMii3E-dOnRiPxuYk1nz333+1u8A@mail.gmail.com>
-	<CALbNGRQ9wfABVz3_2pCZVYMJ+3kAa3rEcxmp-GrmLY1EyYOhUw@mail.gmail.com>
-Date: Tue, 16 Oct 2012 13:39:21 +0200
-Message-ID: <CALbNGRQwk8Eg+nD5BWfoEKhVThzsXgNKf=WLmxruqqL3fX0y5A@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+Received: by 10.68.135.168 with SMTP id pt8mr47493725pbb.24.1350392243923;
+	Tue, 16 Oct 2012 05:57:23 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.40.201 with HTTP; Tue, 16 Oct 2012 05:57:23 -0700 (PDT)
+In-Reply-To: <1350376482-10287-2-git-send-email-jackie.huang@windriver.com>
+References: <1350376482-10287-1-git-send-email-jackie.huang@windriver.com>
+	<1350376482-10287-2-git-send-email-jackie.huang@windriver.com>
+Date: Tue, 16 Oct 2012 09:57:23 -0300
+X-Google-Sender-Auth: 6BPaM4ossoGv21rizAWKR9MSvQ4
+Message-ID: <CAP9ODKoFGV53mCHPO9E1H=ALh7UkQLBypSift0eqBN2rcL6RLw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe, meta-xfce 1/3] glade3: initial add 3.8.2
+Subject: Re: [meta-oe][PATCH 2/2] ruby: update to 1.9.3-194
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2012 11:52:43 -0000
+X-List-Received-Date: Tue, 16 Oct 2012 13:10:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 12, 2012 at 10:52 AM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
-> On Thu, Oct 4, 2012 at 9:36 AM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Fri, Sep 28, 2012 at 9:49 AM, Andreas M=FCller
->> <schnitzeltony@googlemail.com> wrote:
->>> Patchwork does not like the third of this series. So this series can be=
- found at
->>>
->>> git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git
->>> branch patches
->>>
->>> Andreas
->> ping
-> Sorry to bug here again but is there something wrong with this series?
-> I have 1+2 in daily use since I am writing an xfce-panel-plugin and
-> the libxfce4ui-glade stuff is not available in my build machine's
-> distro.
+On Tue, Oct 16, 2012 at 5:34 AM,  <jackie.huang@windriver.com> wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
 >
-> If there are objections on these patches I will put 1+2 in my
-> meta-devel. So please let me know so I can close this.
+> I sent this to oe-core but was told that it's not the right place and
+> was suggested to send here.
 >
-> Andreas
-Don't we share the same README?
+> Most of the 1.9.3 patches originate from ruby-1.9.3.194-10.1.fc17.src.rpm
+>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 
-Andreas
+Please add 'Upstream-Status' on the patches.
+
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
