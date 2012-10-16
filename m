@@ -1,37 +1,24 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TO2Vq-0003pV-Cd
+	(envelope-from <Jackie.Huang@windriver.com>) id 1TO2oj-0003DH-FR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Oct 2012 10:28:30 +0200
-Received: by mail-wi0-f169.google.com with SMTP id hq4so498087wib.0
+	Tue, 16 Oct 2012 10:48:01 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id q9G8YirO000757
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Oct 2012 01:15:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rTey7ykdKpONP989VIlfWMI3xw98zFT9Tn2bBCwkM0s=;
-	b=uXsyO/2WleficUG8AfULLOkvEjw1TF1jgAzXazVesKb3chgvcEMiOpC+TDbEvtq8oz
-	8crSIEO1JVBIB4cgbe9BhTCbJv9lBvgw9MDL0XgtQAHAsozorfQkWvJxDvNfgoYlwlIY
-	LQaxA1ni2r51OXTugLcbs6qmPeOPLlImkIwm91Al6XNKvEwa5fIcB53XUIkEUi1L3vA1
-	qcwFiRwDWKPAJb/9OCzuxq6DbOqEsmCMGVfqbq56oaG2L7Ft8cDabhmTqiJZ54jIfUD9
-	PEEKB82zXGw5iEKi2E6MsU8xEbyfb4P3jMF2PFYFXqNhIdwxbOQ4cg8qBI+XDGoPxdRB
-	sokw==
-Received: by 10.216.211.106 with SMTP id v84mr9303333weo.145.1350375313875;
-	Tue, 16 Oct 2012 01:15:13 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ay10sm20513205wib.2.2012.10.16.01.15.11
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 16 Oct 2012 01:15:12 -0700 (PDT)
-Date: Tue, 16 Oct 2012 10:15:18 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121016081518.GA3796@jama.jama.net>
-References: <1349166535-14325-1-git-send-email-s.stirtzel@googlemail.com>
-	<CAGiJk9d6WTiaxG5Y=6MLQ0Wh+C+oXLPFV0h7buB+GtBPhcZfJA@mail.gmail.com>
+	Tue, 16 Oct 2012 01:34:44 -0700 (PDT)
+Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.309.2; Tue, 16 Oct 2012 01:34:43 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 16 Oct 2012 16:34:41 +0800
+Message-ID: <1350376482-10287-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.4
 MIME-Version: 1.0
-In-Reply-To: <CAGiJk9d6WTiaxG5Y=6MLQ0Wh+C+oXLPFV0h7buB+GtBPhcZfJA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] Maliit: Add initial recipes
+Subject: [meta-oe][PATCH 1/2] ruby: Add from OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +32,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Oct 2012 08:28:30 -0000
-X-Groupsio-MsgNum: 41091
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Oct 2012 08:48:02 -0000
+Content-Type: text/plain
 
---OgqxwSJOaUobr8KG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Jackie Huang <jackie.huang@windriver.com>
 
-On Tue, Oct 16, 2012 at 10:10:37AM +0200, Samuel Stirtzel wrote:
-> 2012/10/2 Samuel Stirtzel <s.stirtzel@googlemail.com>:
-> Ping,
->=20
-> anything wrong with this patch, or is it just a general "before
-> release stagnation"?
+No modifications in this commit
 
-It's probably because of general "before submit read README".
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-devtools/ruby/ruby.inc             |   34 ++++++++++++++++++++
+ ...onf-hardcode-wide-getaddr-info-test-outco.patch |   31 ++++++++++++++++++
+ meta-oe/recipes-devtools/ruby/ruby/extmk.patch     |   13 +++++++
+ meta-oe/recipes-devtools/ruby/ruby/extmk_run.patch |   15 +++++++++
+ meta-oe/recipes-devtools/ruby/ruby_1.8.7-p302.bb   |   12 +++++++
+ 5 files changed, 105 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/ruby/ruby.inc
+ create mode 100644 meta-oe/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+ create mode 100644 meta-oe/recipes-devtools/ruby/ruby/extmk.patch
+ create mode 100644 meta-oe/recipes-devtools/ruby/ruby/extmk_run.patch
+ create mode 100644 meta-oe/recipes-devtools/ruby/ruby_1.8.7-p302.bb
 
-Read README and send with right subject prefix.
+diff --git a/meta-oe/recipes-devtools/ruby/ruby.inc b/meta-oe/recipes-devtools/ruby/ruby.inc
+new file mode 100644
+index 0000000..cbae809
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ruby/ruby.inc
+@@ -0,0 +1,34 @@
++DESCRIPTION = "Ruby is an interpreted scripting language \
++for quick and easy object-oriented programming."
++SECTION = "devel/ruby"
++PRIORITY = "optional"
++LICENSE = "GPL"
++DEPENDS = "ruby-native zlib openssl"
++DEPENDS_virtclass-native = ""
++
++INC_PR = "r2"
++
++SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
++SRC_URI = "ftp://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
++           file://extmk_run.patch \
++           file://extmk.patch \
++"
++
++S = "${WORKDIR}/ruby-${PV}"
++
++inherit autotools
++
++# fix building of socket extension
++EXTRA_OECONF = "--enable-wide-getaddrinfo"
++
++# This snippet lets compiled extensions which rely on external libraries,
++# such as zlib, compile properly.  If we don't do this, then when extmk.rb
++# runs, it uses the native libraries instead of the target libraries, and so
++# none of the linking operations succeed -- which makes extconf.rb think
++# that the libraries aren't available and hence that the extension can't be
++# built.
++
++do_configure_prepend() {
++	sed -i "s#%%TARGET_CFLAGS%%#$TARGET_CFLAGS#; s#%%TARGET_LDFLAGS%%#$TARGET_LDFLAGS#" ${S}/common.mk
++	rm -rf ${S}/ruby/
++}
+diff --git a/meta-oe/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch b/meta-oe/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+new file mode 100644
+index 0000000..64f093a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+@@ -0,0 +1,31 @@
++From 9341293e71c03fe606edc9157bf1e13e3dd5b507 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Fri, 17 Dec 2010 11:35:38 +0100
++Subject: [PATCH] socket extconf: hardcode wide-getaddr info test outcome to true
++
++Without this the socket extension doesn't build correctly
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ ext/socket/extconf.rb |    5 +++++
++ 1 files changed, 5 insertions(+), 0 deletions(-)
++
++diff --git a/ext/socket/extconf.rb b/ext/socket/extconf.rb
++index ece6158..5fba46c 100644
++--- a/ext/socket/extconf.rb
+++++ b/ext/socket/extconf.rb
++@@ -222,6 +222,11 @@ main()
++   exit(EXIT_FAILURE);
++ }
++ EOF
+++
+++# Ignore the actual result of the above test and assume that
+++# everything is OK.
+++getaddr_info_ok = true
+++
++ end
++ if ipv6 and not getaddr_info_ok
++   abort <<EOS
++-- 
++1.6.6.1
++
+diff --git a/meta-oe/recipes-devtools/ruby/ruby/extmk.patch b/meta-oe/recipes-devtools/ruby/ruby/extmk.patch
+new file mode 100644
+index 0000000..8b68450
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ruby/ruby/extmk.patch
+@@ -0,0 +1,13 @@
++diff -ru ruby-1.8.7-p248.orig/ext/extmk.rb ruby-1.8.7-p248/ext/extmk.rb
++--- ruby-1.8.7-p248.orig/ext/extmk.rb	2009-12-24 03:01:58.000000000 -0600
+++++ ruby-1.8.7-p248/ext/extmk.rb	2010-02-12 15:55:27.370061558 -0600
++@@ -354,8 +354,8 @@
++   $ruby = '$(topdir)/miniruby' + EXEEXT
++ end
++ $ruby << " -I'$(topdir)'"
+++$ruby << " -I'$(top_srcdir)/lib'"
++ unless CROSS_COMPILING
++-  $ruby << " -I'$(top_srcdir)/lib'"
++   $ruby << " -I'$(extout)/$(arch)' -I'$(extout)/common'" if $extout
++   $ruby << " -I./- -I'$(top_srcdir)/ext' -rpurelib.rb"
++   ENV["RUBYLIB"] = "-"
+diff --git a/meta-oe/recipes-devtools/ruby/ruby/extmk_run.patch b/meta-oe/recipes-devtools/ruby/ruby/extmk_run.patch
+new file mode 100644
+index 0000000..57926f5
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ruby/ruby/extmk_run.patch
+@@ -0,0 +1,15 @@
++============================================================
++--- packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
+++++ packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
++@@ -0,0 +1,11 @@
+++--- ruby-1.8.5/common.mk.orig	2006-12-30 13:07:32.000000000 +1100
++++++ ruby-1.8.5/common.mk	2006-12-30 13:08:32.000000000 +1100
+++@@ -56,7 +56,7 @@
+++ 		--make="$(MAKE)" \
+++ 		--mflags="$(MFLAGS)" \
+++ 		--make-flags="$(MAKEFLAGS)"
+++-EXTMK_ARGS    =	$(SCRIPT_ARGS) --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
++++EXTMK_ARGS    =	$(SCRIPT_ARGS) --with-ldflags="%%TARGET_LDFLAGS%%" --with-cflags="%%TARGET_CFLAGS%%" --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
+++ 
+++ all: $(MKFILES) $(PREP) $(RBCONFIG) $(LIBRUBY)
+++ 	@$(MINIRUBY) $(srcdir)/ext/extmk.rb $(EXTMK_ARGS)
+diff --git a/meta-oe/recipes-devtools/ruby/ruby_1.8.7-p302.bb b/meta-oe/recipes-devtools/ruby/ruby_1.8.7-p302.bb
+new file mode 100644
+index 0000000..a51edd7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ruby/ruby_1.8.7-p302.bb
+@@ -0,0 +1,12 @@
++require ruby.inc
++PR = "${INC_PR}.1"
++
++SRC_URI += "file://0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch"
++
++SRC_URI[md5sum] = "f446550dfde0d8162a6ed8d5a38b3ac2"
++SRC_URI[sha256sum] = "5883df5204de70762602ce885b18c8bf6c856d33298c35df9151031b2ce044a1"
++
++FILES_${PN}-dbg += "${libdir}/ruby/1.8/*/.debug \
++                    ${libdir}/ruby/1.8/*/*/.debug"
++BBCLASSEXTEND = "native"
++
+-- 
+1.7.4
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---OgqxwSJOaUobr8KG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlB9F5YACgkQN1Ujt2V2gByyUACfQ29y4IiYlGCB7iF7FnNt7LRP
-0zwAnjm8Xrtovu1fx4d31vAcvs2H0rag
-=qTgW
------END PGP SIGNATURE-----
-
---OgqxwSJOaUobr8KG--
