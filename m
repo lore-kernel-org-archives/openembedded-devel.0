@@ -1,40 +1,36 @@
-Received: from 16.mo4.mail-out.ovh.net ([188.165.55.104]
-	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TOUae-0006cl-Qe
+Received: from mga09.intel.com ([134.134.136.24])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <ross.burton@intel.com>) id 1TOUil-000273-4t
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Oct 2012 16:27:20 +0200
-Received: from mail34.ha.ovh.net (b7.ovh.net [213.186.33.57])
-	by mo4.mail-out.ovh.net (Postfix) with SMTP id 6D9AE104F658
+	Wed, 17 Oct 2012 16:35:43 +0200
+Received: from mail-we0-f175.google.com ([74.125.82.175])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 17 Oct 2012 07:21:59 -0700
+Received: by mail-we0-f175.google.com with SMTP id t44so4492473wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2012 16:00:50 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 Oct 2012 15:53:27 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 17 Oct 2012 15:53:26 +0200
-Date: Wed, 17 Oct 2012 15:54:08 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Wed, 17 Oct 2012 07:22:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=4y6MMjGFbE5qWRDr7j1kb0qzL7ykNvCle48RXoVBYXY=;
+	b=PvGjPY5Glue7cZYQQq2PWACjsoqoQYjvmKK05Ty7QPNc5LlxShicxEqOCRNKyPBX+A
+	3OlM49Uuc4i9RSYlAVjI1WXTsflqbrN2dcervd7oFHRgsAwrANOviFwkhNJBHpfIXM3c
+	fknQneWArY6pNVWg3Hh9GeOs71G/a2BJwq4m1DadebB3CYhz6OiX0ZmVWUqa4ZLYxSww
+	I/Oqq4qmpLym5mpspzL7U46GX7lfaJestuv/WXLy1X1yMjqgT29bugl/Jc+z9MBwFF2w
+	eRpv84oLE3SLysr7fcGY1GKfTs7klhYazY3EE9ujIZfQwZgALCyDZkwZZOCKffy0+ih3
+	8KzA==
+Received: by 10.180.90.201 with SMTP id by9mr4529112wib.5.1350483742086;
+	Wed, 17 Oct 2012 07:22:22 -0700 (PDT)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id bn7sm27887640wib.8.2012.10.17.07.22.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 17 Oct 2012 07:22:18 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
-Message-ID: <20121017155408.5a362a0a@eb-e6520>
-In-Reply-To: <k5m8ub$p5v$1@ger.gmane.org>
-References: <1346930610-2977-1-git-send-email-koen@dominion.thruhere.net>
-	<k2a264$d2a$1@ger.gmane.org> <20121010213234.GG16944@denix.org>
-	<20121015192315.GK16944@denix.org> <k5m8ub$p5v$1@ger.gmane.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 13282804153034714441
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehvddrtdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehvddrtdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Subject: Re: [meta-oe][for-denzil][PATCH 1/8] kernel: save $kerndir/tools and $kerndir/lib from pruning
+Date: Wed, 17 Oct 2012 15:21:10 +0100
+Message-Id: <1350483671-28179-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQnzUqZEzCUdSjnwuPI6q+YaI+mm4alAEwX3eUWtlFDiOoWaZK9nEZreB6EFqGnYCC4AUpGY
+Subject: [V3] [meta-multimedia] gst123: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +44,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2012 14:27:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Oct 2012 14:35:43 -0000
 
-Hi Koen,
+Hopefully this is the right format this time...
 
-Le Wed, 17 Oct 2012 14:39:44 +0200,
-Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 15-10-12 21:23, Denys Dmytriyenko schreef:
-> > ping! Can we get it pushed to denzil, please? Thanks.
->=20
-> It's in now.
->=20
-oops I missed to merge that sorry I was traveling when I got your
-email asking for the merge.
-
-Eric
 
 
