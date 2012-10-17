@@ -1,32 +1,34 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TOPD3-00082J-GC
+	(envelope-from <s.stirtzel@googlemail.com>) id 1TOPGa-000893-36
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Oct 2012 10:42:37 +0200
-Received: by mail-ie0-f175.google.com with SMTP id c13so11300901ieb.6
+	Wed, 17 Oct 2012 10:46:16 +0200
+Received: by mail-we0-f175.google.com with SMTP id t44so4321903wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2012 01:29:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=V0zfzWt7lPLN/w26UtAqKbJkwgm1nNXJyHjLGAT7V74=;
-	b=ff6El56USSRYLRa1FZ8FqfhcaZBaSLfi+fuOy8Q8HycJePZpc+FwhCIqZaJtSDOSvb
-	+SeWtCnhKtC11vfPMwy0XWp0FCIwz7tKE6JTJOLGuS1jkSEIqJczY4GI8FF185ie+QR/
-	PrDuwHy6H/FhBv0f8LNRjk7vdMhdzjm0OKYfiU4SmyeXszZiULIsYPhq7w1b9BgOubfe
-	ljeUzFMW6yKh711/PS9ugG3QOoFMdNcXaJbNXD4q4rrUhmOqLeH5ikdn6NmYftCv7Uxn
-	MTGpNr2hCrEHqgXX7/2S6pPO6m/ArmyJk1MGoB4CUsyFFB8y07C5D/NFh8Lfm+cgcU6l
-	s8Gw==
-MIME-Version: 1.0
-Received: by 10.50.135.38 with SMTP id pp6mr823790igb.36.1350462556920; Wed,
-	17 Oct 2012 01:29:16 -0700 (PDT)
-Received: by 10.64.24.179 with HTTP; Wed, 17 Oct 2012 01:29:16 -0700 (PDT)
-In-Reply-To: <CAP9ODKrNWnk_H0GjfM6sP8KNApRr=bGT0YaSEXp-8qMNq_GfZQ@mail.gmail.com>
-References: <1349166535-14325-1-git-send-email-s.stirtzel@googlemail.com>
-	<CAP9ODKrNWnk_H0GjfM6sP8KNApRr=bGT0YaSEXp-8qMNq_GfZQ@mail.gmail.com>
-Date: Wed, 17 Oct 2012 10:29:16 +0200
-Message-ID: <CAGiJk9d+OabH=fROOS6Y8w-GNs8STaYgFVCBLZisKv2VDAd7JA@mail.gmail.com>
+	Wed, 17 Oct 2012 01:32:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=JLhJnJTHfCG/o5VewrwuGArgKwGP0XYYDYm3h9/8xE4=;
+	b=TADKfP8VOieWxaQmV5jqzcAGBlH4v/ZVy1l6h5izSyGVjoyoS7Y46m/uhCf10uZP/8
+	4FhSdmgA9WXNLtYxj1sDBYtYTNWc+MxF/lxSXwU/VNO2uQDpuKLjpIBSYmr0a+uOtPpW
+	kqg3oIZsTl7tzPUFDeD258mu0qsOF/CRZ/c4hfvjA828HGg2y/M3nj5GUfgeWqFLb0/l
+	zF+cqIgdC9+PVYj8wVheSHWaWaIvTdvJeCmLAAK74BEC86uLXJUEHhwS/xSCwRdsbQCs
+	b9dZ4kHAQetN7znnlat5dXv2NojPIJ6kHYZAWQREJAN+7MBLaHi45f97YoMn+IdRuC2m
+	gwDg==
+Received: by 10.180.81.37 with SMTP id w5mr2426360wix.10.1350462778285;
+	Wed, 17 Oct 2012 01:32:58 -0700 (PDT)
+Received: from s-stirtzel-linux.zera.local
+	(ip-109-91-251-94.unitymediagroup.de. [109.91.251.94])
+	by mx.google.com with ESMTPS id cl8sm23257960wib.10.2012.10.17.01.32.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 17 Oct 2012 01:32:57 -0700 (PDT)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Maliit: Add initial recipes
+Date: Wed, 17 Oct 2012 10:32:47 +0200
+Message-Id: <1350462767-3772-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH] Maliit: Add initial recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,85 +42,239 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2012 08:42:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Oct 2012 08:46:16 -0000
 
-2012/10/16 Otavio Salvador <otavio@ossystems.com.br>:
-> On Tue, Oct 2, 2012 at 5:28 AM, Samuel Stirtzel
-> <s.stirtzel@googlemail.com> wrote:
->> Maliit is a Qt based virtual keyboard under liberal license (LGPLv2.1 / BSD)
->> The inputmethod framework from Qt is used and it supports gtk-immodules.
->> It can also be used without dependencies to GTK+ (separate package for GTK+)
->>
->> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
->
-> Thanks by working on this. Bellow my comments ...
->
-> ...
->> diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
->> new file mode 100644
->> index 0000000..3f50d1b
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-> ...
->> +
->> +# Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
->> +RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
->
-> In this case, maliit is a post 1.2 package.
->
-> ...
->> +EXTRA_QMAKEVARS_PRE = "\
->> +    PREFIX=${prefix} \
->> +    LIBDIR=${libdir} \
->> +    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
->> +    MALIIT_INSTALL_PRF=${datadir}/qt4/mkspecs/features \
->> +    SCHEMADIR=${sysconfdir}/gconf/schemas \
->> +    CONFIG+=disable-gconf \
->> +    CONFIG+=disable-gtk-cache-update \
->> +    CONFIG+=local-install \
->> +    "
->
-> Really need to disable gtk-cache-update? Why?
+Maliit is a Qt based virtual keyboard under liberal license (LGPLv2.1 / BSD)
+The inputmethod framework from Qt is used and it supports gtk-immodules.
+It can also be used without dependencies to GTK+ (separate package for GTK+)
 
-This option is for packaging, it disables running gtk-query-immodules
-on the build-host
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ ...INSTALL_PRF-to-allow-the-build-with-opene.patch |   34 ++++++++
+ ...LUGIN_PATH-to-allow-openembedded-to-build.patch |   34 ++++++++
+ .../recipes-support/maliit/maliit-framework_git.bb |   86 ++++++++++++++++++++
+ .../recipes-support/maliit/maliit-plugins_git.bb   |   34 ++++++++
+ 4 files changed, 188 insertions(+)
+ create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
+ create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
+ create mode 100644 meta-oe/recipes-support/maliit/maliit-framework_git.bb
+ create mode 100644 meta-oe/recipes-support/maliit/maliit-plugins_git.bb
 
->
-> ...
->> +# Update the inputmethod modules in gtk
->> +pkg_postinst_${PN}-gtk() {
->> +if [ "x$D" != "x" ]; then
->> +    exit 1
->> +fi
->> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
->> +}
->> +
->> +pkg_postrm_${PN}-gtk() {
->> +if [ "x$D" != "x" ]; then
->> +    exit 1
->> +fi
->> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
->> +}
->
-> You might add a gtk-immodules.bbclass to allow it to be put out of the recipe.
-
-FYI: I have a class for this, but the only other recipe using
-gtk-query-immodules is
-openembedded-core/meta/recipes-sato/matchbox-keyboard/matchbox-keyboard_git.bb
-Should I send a patch with the .bbclass to oe-core?
-
->
-> As said by Martin, please read the README and follow the steps to send
-> the patch...
-
-Seems to be a classic case of -ENOCOFFEEYET
-
-Will re-send with the right prefix
-
-
+diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
+new file mode 100644
+index 0000000..acd9a57
+--- /dev/null
++++ b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch
+@@ -0,0 +1,34 @@
++From 33554f9b3fd493c7e28617fd01466ffa87251f27 Mon Sep 17 00:00:00 2001
++From: Samuel Stirtzel <s.stirtzel@googlemail.com>
++Date: Wed, 1 Aug 2012 13:21:51 +0200
++Subject: [PATCH] Fix MALIIT_INSTALL_PRF to allow the build with openembedded
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
++---
++ config.pri |    8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/config.pri b/config.pri
++index b037b8c..43409f3 100644
++--- a/config.pri
+++++ b/config.pri
++@@ -161,9 +161,11 @@ contains(QT_MAJOR_VERSION, 4) {
++     QT_WIDGETS = gui widgets
++ }
++ 
++-MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
++-local-install {
++-    MALIIT_INSTALL_PRF = $$replace(MALIIT_INSTALL_PRF, $$[QT_INSTALL_PREFIX], $$PREFIX)
+++isEmpty(MALIIT_INSTALL_PRF) {
+++    MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
+++    local-install {
+++        MALIIT_INSTALL_PRF = $$replace(MALIIT_INSTALL_PRF, $$[QT_INSTALL_PREFIX], $$PREFIX)
+++    }
++ }
++ 
++ defineTest(outputFile) {
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
+new file mode 100644
+index 0000000..830e6de
+--- /dev/null
++++ b/meta-oe/recipes-support/maliit/maliit-framework/0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch
+@@ -0,0 +1,34 @@
++From fb6acbd2af9ed288c1c4f4200fc73d8d9955486a Mon Sep 17 00:00:00 2001
++From: Samuel Stirtzel <s.stirtzel@googlemail.com>
++Date: Wed, 1 Aug 2012 13:33:10 +0200
++Subject: [PATCH] Fix QT_IM_PLUGIN_PATH to allow openembedded to build Maliit
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
++---
++ input-context/input-context.pri |   10 ++++++----
++ 1 file changed, 6 insertions(+), 4 deletions(-)
++
++diff --git a/input-context/input-context.pri b/input-context/input-context.pri
++index d94e6a3..d460e70 100644
++--- a/input-context/input-context.pri
+++++ b/input-context/input-context.pri
++@@ -25,8 +25,10 @@ for(OPTION,$$list($$lower($$COV_OPTION))){
++ 
++ QMAKE_CLEAN += $$OBJECTS_DIR/*.gcno $$OBJECTS_DIR/*.gcda
++ 
++-QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
++-QT_PREFIX = $$[QT_INSTALL_PREFIX]
++-local-install {
++-    QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
+++isEmpty(QT_IM_PLUGIN_PATH) {
+++    QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
+++    QT_PREFIX = $$[QT_INSTALL_PREFIX]
+++    local-install {
+++        QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
+++    }
++ }
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
+new file mode 100644
+index 0000000..3f50d1b
+--- /dev/null
++++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
+@@ -0,0 +1,86 @@
++DESCRIPTION = "A virtual keyboard for touch-screen based user interfaces"
++HOMEPAGE = "https://wiki.maliit.org/Main_Page"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
++
++inherit autotools qt4x11
++
++
++SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
++    file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
++    file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
++    "
++
++SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
++PV = "0.92.3+git${SRCPV}"
++
++
++PACKAGES =+ "\
++    ${PN}-gtk \
++    "
++
++# Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
++RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
++
++RRECOMMENDS_${PN} = "maliit-plugins"
++
++
++FILES_${PN} += "\
++    ${libdir}/maliit/plugins-*/factories/libmaliit-plugins-quick-factory-*.so \
++    ${libdir}/qt4/plugins/inputmethods/*.so \
++    "
++
++FILES_${PN}-dbg += "\
++    ${libdir}/maliit-framework-tests \
++    ${libdir}/gtk-*/*/immodules/.debug \
++    ${libdir}/maliit/plugins-*/factories/.debug \
++    ${libdir}/qt4/plugins/.debug \
++    ${libdir}/qt4/plugins/inputmethods/.debug \
++    "
++
++FILES_${PN}-dev += "${datadir}/qt4"
++
++FILES_${PN}-gtk +="\
++    ${bindir}/maliit-exampleapp-gtk* \
++    \
++    ${libdir}/gtk-*/*/immodules/libim-maliit.so\
++    "
++
++EXTRA_QMAKEVARS_PRE = "\
++    PREFIX=${prefix} \
++    LIBDIR=${libdir} \
++    QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
++    MALIIT_INSTALL_PRF=${datadir}/qt4/mkspecs/features \
++    SCHEMADIR=${sysconfdir}/gconf/schemas \
++    CONFIG+=disable-gconf \
++    CONFIG+=disable-gtk-cache-update \
++    CONFIG+=local-install \
++    "
++
++do_install() {
++    cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
++
++    #Fix absolute paths
++    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-framework.prf
++    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-plugins.prf
++}
++
++
++
++# Update the inputmethod modules in gtk
++pkg_postinst_${PN}-gtk() {
++if [ "x$D" != "x" ]; then
++    exit 1
++fi
++gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
++}
++
++pkg_postrm_${PN}-gtk() {
++if [ "x$D" != "x" ]; then
++    exit 1
++fi
++gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
++}
++
++S= "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/maliit/maliit-plugins_git.bb b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
+new file mode 100644
+index 0000000..932c0ae
+--- /dev/null
++++ b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
+@@ -0,0 +1,34 @@
++DESCRIPTION = "Plugins for a virtual keyboard for touch-screen based user interfaces"
++HOMEPAGE = "https://wiki.maliit.org/Main_Page"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f29b21caa8e460097bfad9c026a33621"
++
++inherit autotools qt4x11
++
++DEPENDS = "maliit-framework"
++
++SRC_URI = "git://gitorious.org/maliit/maliit-plugins.git;branch=master"
++
++SRCREV = "0760e585df494b394df1b887e5138ffef19c481f"
++PV = "0.92.3+git${SRCPV}"
++
++EXTRA_QMAKEVARS_PRE = "\
++    PREFIX=${prefix} \
++    LIBDIR=${libdir} \
++    "
++
++FILES_${PN} += "\
++    ${libdir}/maliit \
++    ${datadir} \
++    "
++
++FILES_${PN}-dbg += "\
++    ${libdir}/maliit/plugins-*/.debug \
++    "
++
++S= "${WORKDIR}/git"
++
++do_install() {
++  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
++}
+\ No newline at end of file
 -- 
-Regards
-Samuel
+1.7.9.5
+
 
 
