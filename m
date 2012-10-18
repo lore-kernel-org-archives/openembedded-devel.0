@@ -1,37 +1,31 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TOwOD-0004j2-TN
+	(envelope-from <gary@mlbassoc.com>) id 1TOwXd-0005Qz-Pu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 22:08:21 +0200
-Received: by mail-wi0-f171.google.com with SMTP id hj13so2297338wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2012 12:55:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=75bC6RMvTbx/pUkw1m60W+06oWJqULjZ/kqbKLlpMD4=;
-	b=XDWDSauU4dYKMJLVbmTZeO9dh2zTZKo2qx9Wr2kpCerk310vPY83j9vlQJyuYOa/UU
-	3VxP1pYa2TcwX9ibpSDczUkVngHmxakA3Tpo0c9uuU88GJbhr61QHRr9mDi6qPaOK9Wv
-	tjnaFPqBIihGMRCL9PRIIoBps6RKiEYG1DrEpiXZCv4oo4Jcf9lgnLZObl8TzvGc1BYZ
-	RoNgyM5rtfIkkOTx8O1AEHF+wjao8j4anNdiV3OdUf8VqUAH9bA6Ab7EYfNT3O/T8oZk
-	jWaHZgC5O4SsU08dUJ2z4+QL2xCaRif97XC11hM0HX9zYISMY7ORmDe0IbvGSGFLAKXr
-	darg==
-Received: by 10.216.145.88 with SMTP id o66mr14012710wej.169.1350590104380;
-	Thu, 18 Oct 2012 12:55:04 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q7sm35442415wiy.11.2012.10.18.12.55.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Oct 2012 12:55:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 18 Oct 2012 22:18:06 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 838DDF811FA; Thu, 18 Oct 2012 14:04:47 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 09A7BF8119A;
+	Thu, 18 Oct 2012 14:04:46 -0600 (MDT)
+Message-ID: <50806107.7080607@mlbassoc.com>
+Date: Thu, 18 Oct 2012 14:05:27 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Oct 2012 21:54:33 +0200
-Message-Id: <06adf65bf49ad5e358ec6ac70880211741fe1d4b.1350589969.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <cover.1350589969.git.Martin.Jansa@gmail.com>
-References: <cover.1350589969.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1350589969.git.Martin.Jansa@gmail.com>
-References: <cover.1350589969.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] mcnavi: move from meta-oe to meta-efl
+References: <1350579089-23342-1-git-send-email-gary@mlbassoc.com>
+	<20121018174642.GC3087@jama.jama.net>
+	<50804A6C.5020607@mlbassoc.com>
+	<20121018184815.GD3087@jama.jama.net>
+In-Reply-To: <20121018184815.GD3087@jama.jama.net>
+Subject: Re: [PATCH] [meta-oe] libav: Fix git URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +39,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 20:08:22 -0000
+X-List-Received-Date: Thu, 18 Oct 2012 20:18:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* mcnavi depends on ecore, but meta-oe does not depend on meta-efl
-* thanks to kergoth for reporting this!
+On 2012-10-18 12:48, Martin Jansa wrote:
+> On Thu, Oct 18, 2012 at 12:29:00PM -0600, Gary Thomas wrote:
+>> On 2012-10-18 11:46, Martin Jansa wrote:
+>>> On Thu, Oct 18, 2012 at 10:51:29AM -0600, Gary Thomas wrote:
+>>>> Specifying SRCREV and branch in the git SRC_URI confuses the bitbake
+>>>> fetcher.  This ends up with a saved tarball which contains neither
+>>>> the SRCREV nor the branch, which in turn means the git tree needs
+>>>> to be fetched every time even though a saved tarball has been created.
+>>>
+>>> That's fetcher fault.
+>>>
+>>> Branch is part of persistent db key for LOCALCOUNT, so this breaks
+>>> upgrade path.
+>>>
+>>> Also AUTOREV wont work without branch specified in SRC_URI.
+>>
+>> AUTOREV is not being used, so how does your comment apply?
+>
+> yes it's good practise to use it from some .inc even or local.conf,
+> _without_ need to change SRC_URI
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- {meta-oe => meta-efl}/recipes-navigation/mcnavi/mcnavi_0.3.3.bb | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe => meta-efl}/recipes-navigation/mcnavi/mcnavi_0.3.3.bb (100%)
+But the whole point is to have a specific SRCREV, not AUTOREV.  Having
+a recipe which always gets the latest revision is often not advised nor
+even allowed in some circles.
 
-diff --git a/meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
-similarity index 100%
-rename from meta-oe/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
-rename to meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.3.bb
+This particular recipe obviously wanted to use a particular revision,
+not the tip of the "releases/0.8" branch.  Specifying both is contradictory.
+
+>
+>>> Fix bitbake fetcher instead.
+>>>
+>>> Cheers,
+>>>
+>>>
+>>>> Simply removing the branch (which is redundant anyway) from the SRC_URI
+>>>> makes everything happy.
+>>>>
+>>>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+>>>> ---
+>>>>    meta-oe/recipes-multimedia/libav/libav_0.8.3.bb |    4 ++--
+>>>>    1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb b/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
+>>>> index 66a32c9..f9a2e06 100644
+>>>> --- a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
+>>>> +++ b/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
+>>>> @@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>>>>                        file://COPYING.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02"
+>>>>
+>>>>    PV = "0.8.3+git${SRCPV}"
+>>>> -PR = "${INC_PR}.0"
+>>>> +PR = "${INC_PR}.1"
+>>>>
+>>>>    # When bumping SRCREV make sure you bump PR here and in dependant
+>>>>    # recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION
+>>>>    # changes
+>>>>    SRCREV = "2fb4be9a99a2c2a9435339830e3d940171cc0d9b"
+>>>> -SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.8"
+>>>> +SRC_URI = "git://git.libav.org/libav.git;protocol=git"
+>>>>
+>>>>    S = "${WORKDIR}/git"
+>>>>
+>>>> --
+>>>> 1.7.9.5
+>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>>
+>>
+>> --
+>> ------------------------------------------------------------
+>> Gary Thomas                 |  Consulting for the
+>> MLB Associates              |    Embedded world
+>> ------------------------------------------------------------
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 -- 
-1.7.12.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
