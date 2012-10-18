@@ -1,26 +1,36 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TOr9N-0003fo-NT
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 16:32:41 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 18 Oct 2012 07:19:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,607,1344236400"; d="scan'208";a="206085732"
-Received: from unknown (HELO helios.localnet) ([10.252.122.102])
-	by azsmga001.ch.intel.com with ESMTP; 18 Oct 2012 07:19:20 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jack Mitchell <ml@communistcode.co.uk>
-Date: Thu, 18 Oct 2012 15:19:19 +0100
-Message-ID: <2621987.kJZKGLFW6N@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <1350569296-23663-1-git-send-email-ml@communistcode.co.uk>
-References: <1350569296-23663-1-git-send-email-ml@communistcode.co.uk>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1TOrYA-00040u-AT; Thu, 18 Oct 2012 16:58:18 +0200
+Received: by mail-vb0-f47.google.com with SMTP id ez10so8894102vbb.6
+	for <multiple recipients>; Thu, 18 Oct 2012 07:44:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=7MvLChdzWQ04GZxmoWTo2yHNbWNC61orrNTDfXElSsM=;
+	b=yt0gdaQXyDFwiJ36+brgyeCxRI8BiyMu1FxKeLfpt8Y7prGJqiKl+N2nlQ9hu0oaLU
+	isbnZFZNST2nQbox4XaxJkiBcwHJLgclCck1disF9oWgHjWPUKnPP+FmIlgKGRkbaq1W
+	pUUM4y/6bGqe2zbE2IpNKvqSu4CPom+JVeyUO20TL3zO0z31CZyWHpZ0uHMu7QbySaE1
+	6mBHxdrvmudaTnCGFx1Hvr0kdPSulzefihjcAMXWJQTfzLzKG64ESAIty8W/QdRKSYLK
+	Yxog0A/eYXgkJQKVrcmYEgYNIm1FC0HIMW4DpfpfIDu9yfE4v+iD/lN8ayFbN1h68590
+	uywg==
 MIME-Version: 1.0
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH v5] hiawatha: add initial 8.5 recipe and associated files
+Received: by 10.220.142.79 with SMTP id p15mr5649000vcu.71.1350571498140; Thu,
+	18 Oct 2012 07:44:58 -0700 (PDT)
+Received: by 10.58.248.201 with HTTP; Thu, 18 Oct 2012 07:44:57 -0700 (PDT)
+In-Reply-To: <1345239937.27428.23.camel@ted>
+References: <20120817170922.097651032F@opal>
+	<CALbNGRRGxF518Vo933R8tLFU8yTbw8XBfFZQox93kr0m2ACJ_A@mail.gmail.com>
+	<CALbNGRTG3z_p0=wjqhvqy-xcm5F6qdgqa4xPzfVvDqzbPODFCw@mail.gmail.com>
+	<1345239937.27428.23.camel@ted>
+Date: Thu, 18 Oct 2012 16:44:57 +0200
+Message-ID: <CA+chaQdeva39xbD3iY1sAct=Rd-1BBbxaVMqrECi3icDraCOsg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Fwd: [oe-commits] Mark Hatle : prelink: Update to latest upstream prelink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,142 +44,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 14:32:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 18 Oct 2012 14:58:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 18 October 2012 15:08:16 Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> 
-> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> --
-> 
-> v1:
-> - hiawatha: add initial 8.5 recipe and associated files
-> 
-> v2:
-> - update hiawatha init file with LSB headers
-> - use sed to put in correct sbin path
-> ---
->  .../recipes-httpd/hiawatha/files/hiawatha-init     | 44
-> +++++++++++++++++++++ .../recipes-httpd/hiawatha/hiawatha_8.5.bb         |
-> 45 ++++++++++++++++++++++ 2 files changed, 89 insertions(+)
->  create mode 100644
-> meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init create mode
-> 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> 
-> diff --git a/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
-> b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init new file mode
-> 100644
-> index 0000000..47fc087
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
-> @@ -0,0 +1,44 @@
-> +#!/bin/sh
-> +
-> +### BEGIN INIT INFO
-> +# Provides:          hiawatha httpd httpd-cgi
-> +# Required-Start:    $syslog $network $remote_fs
-> +# Required-Stop:     $syslog $network $remote_fs
-> +# Default-Start:     2 3 4 5
-> +# Default-Stop:      0 1 6
-> +# Short-Description: Hiawatha webserver
-> +# Description:       Hiawatha, a secure and advanced webserver.
-> +### END INIT INFO
-> +
-> +PATH=/sbin:/bin:/usr/sbin:/usr/bin
-> +DAEMON=sed_sbin_path/hiawatha
-> +NAME=hiawatha
-> +DESC="Hiawatha Web Server"
-> +OPTS=""
-> +
-> +case "$1" in
-> +  start)
-> +	echo -n "Starting $DESC: "
-> +	start-stop-daemon --start -x "$DAEMON" -- $OPTS
-> +	echo "$NAME."
-> +	;;
-> +  stop)
-> +	echo -n "Stopping $DESC: "
-> +	start-stop-daemon --stop -x "$DAEMON"
-> +	echo "$NAME."
-> +	;;
-> +  restart|force-reload)
-> +	echo -n "Restarting $DESC: "
-> +	start-stop-daemon --stop -x "$DAEMON"
-> +	sleep 1
-> +	start-stop-daemon --start -x "$DAEMON" -- $OPTS
-> +	echo "$NAME."
-> +	;;
-> +  *)
-> +	N=/etc/init.d/$NAME
-> +	echo "Usage: $N {start|stop|restart|force-reload}" >&2
-> +	exit 1
-> +	;;
-> +esac
-> +
-> +exit 0
-> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb new file mode
-> 100644
-> index 0000000..b4462bb
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
-> @@ -0,0 +1,45 @@
-> +DESCRIPTION = "Lightweight secure web server"
-> +HOMEPAGE = "http://www.hiawatha-webserver.org"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
-> +DEPENDS = "libxml2 libxslt"
-> +
-> +SECTION = "net"
-> +
-> +SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
-> +					 file://hiawatha-init"
-> +
-> +SRC_URI[md5sum] = "71d3903657953c93fc930758d158097d"
-> +SRC_URI[sha256sum] =
-> "2567e6b4b4c6666388087b586238e6e91a4afd80e10a879920020a097fcdc946" +
-> +inherit cmake update-rc.d
-> +
-> +INITSCRIPT_NAME = "hiawatha"
-> +INITSCRIPT_PARAMS = "defaults 70"
-> +
-> +EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-> +                  -DENABLE_CACHE=ON \
-> +                  -DENABLE_DEBUG=OFF \
-> +                  -DENABLE_SSL=OFF \
-> +                  -DENABLE_TOOLKIT=OFF \
-> +                  -DENABLE_CHROOT=OFF \
-> +                  -DENABLE_XSLT=ON \
-> +                  -DENABLE_TOMAHAWK=OFF \
-> +                  -DCMAKE_INSTALL_MANDIR=${mandir} \
-> +                  -DCMAKE_INSTALL_BINDIR=${bindir} \
-> +                  -DCMAKE_INSTALL_SBINDIR=${sbindir} \
-> +                  -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
-> +                  -DCMAKE_INSTALL_LIBDIR=${libdir} \
-> +                  -DLOG_DIR=/var/log/hiawatha \
-> +                  -DPID_DIR=/var/run \
-> +                  -DWEBROOT_DIR=/var/www/hiawatha \
-> +                  -DWORK_DIR=/var/lib/hiawatha "
-> +
-> +do_install_append() {
-> +
-> +    # Copy over init script and sed in the correct sbin path
-> +    sed -i 's,sed_sbin_path,${sbindir},' ${WORKDIR}/hiawatha-init
-> +    mkdir -p ${D}${sysconfdir}/init.d
-> +    install -m 0755 ${WORKDIR}/hiawatha-init
-> ${D}${sysconfdir}/init.d/hiawatha +
-> +}
+On Fri, Aug 17, 2012 at 11:45 PM, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> On Fri, 2012-08-17 at 23:21 +0200, Andreas M=C3=BCller wrote:
+>> On Fri, Aug 17, 2012 at 7:09 PM,  <git@git.openembedded.org> wrote:
+>> > Module: openembedded-core.git
+>> > Branch: master
+>> > Commit: 7759c9a2c5dfdc1cae5540a5985632c78abbac89
+>> > URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcom=
+mit;h=3D7759c9a2c5dfdc1cae5540a5985632c78abbac89
+>> >
+>> > Author: Mark Hatle <mark.hatle@windriver.com>
+>> > Date:   Mon Aug 13 14:49:57 2012 -0500
+>> >
+>> > prelink: Update to latest upstream prelink
+>> >
+>> > The latest fixes an obscure problem with prelinking on PowerPC, as wel=
+l
+>> > as general updated.
+>> >
+>> > Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+>> > Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>> >
+>> > ---
+>> >
+>> >  meta/recipes-devtools/prelink/prelink_git.bb |    4 ++--
+>> >  1 files changed, 2 insertions(+), 2 deletions(-)
+>> >
+>> > diff --git a/meta/recipes-devtools/prelink/prelink_git.bb b/meta/recip=
+es-devtools/prelink/prelink_git.bb
+>> > index c94bdf5..610302e 100644
+>> > --- a/meta/recipes-devtools/prelink/prelink_git.bb
+>> > +++ b/meta/recipes-devtools/prelink/prelink_git.bb
+>> > @@ -8,9 +8,9 @@ and executables, so that far fewer relocations need to=
+ be resolved at \
+>> >  runtime and thus programs come up faster."
+>> >  LICENSE =3D "GPLv2"
+>> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc93c0550bd3173f4504b2cbd89=
+91e50b"
+>> > -SRCREV =3D "7b47f2f8a15ed13b7905bc120bb2586f3e164f7d"
+>> > +SRCREV =3D "a2d8e30942bd4bc0a5c852b9d9d12f8684c4bb8d"
+>> >  PV =3D "1.0+git${SRCPV}"
+>> > -PR =3D "r9"
+>> > +PR =3D "r10"
+>> >
+>> >  #
+>> >  # The cron script attempts to re-prelink the system daily -- on
+>> >
+>> I think reloading is caused by this change. Since latest update I get
+>>
+>> WARNING: Failed to fetch URL
+>> git://git.yoctoproject.org/prelink-cross.git;protocol=3Dgit, attempting
+>> MIRRORS if available
+>> ERROR: Fetcher failure: Fetch command export HOME=3D"/home/Superandy";
+>> export SSH_AUTH_SOCK=3D"/tmp/keyring-IAYDEC/ssh"; export
+>> GIT_CONFIG=3D"/home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/e=
+tc/gitconfig";
+>> export PATH=3D"/home/Superandy/data/oe-core/sources/openembedded-core/sc=
+ripts/native-intercept:/home/Superandy/data/oe-core/sources/openembedded-co=
+re/scripts:/home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin=
+/armv7a-vfp-neon-linux:/home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-l=
+inux/usr/bin:/home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/s=
+bin:/home/Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin:/home/=
+Superandy/tmp/oe-core-eglibc/sysroots/x86_64-linux/sbin:/home/Superandy/tmp=
+/oe-core-eglibc/sysroots/x86_64-linux//bin:/home/Superandy/oe-core/sources/=
+openembedded-core/scripts:/home/Superandy/oe-core/sources/bitbake/bin:/usr/=
+lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/=
+sbin:/usr/sbin:/sbin:./:/home/Superandy/bin:/sbin:/usr/sbin";
+>> git remote add --mirror=3Dfetch origin
+>> git://git.yoctoproject.org/prelink-cross.git failed with exit code
+>> 129, output:
+>> STDOUT:
+>> STDERR: error: option `mirror' takes no value
+>> usage: git remote add [<options>] <name> <url>
+>>
+>>     -f, --fetch           fetch the remote branches
+>>     --tags                import all tags and associated objects when fe=
+tching
+>>                           or do not fetch any tag at all (--no-tags)
+>>     -t, --track <branch>  branch(es) to track
+>>     -m, --master <branch>
+>>                           master branch
+>>     --mirror              no separate remotes
+>>
 
-I merged this with a trivial whitespace fix (indenting of SRC_URI). Thanks!
+--mirror option was changed 2y ago here
+https://github.com/git/git/commit/a9f5a3558dcf83440c60ae5a2e2b56c80d65bb0b
 
-Cheers,
-Paul
+get newer git :)
 
--- 
+someone reported the same to me today with Ubuntu 11.04 :/
 
-Paul Eggleton
-Intel Open Source Technology Centre
+>>
+>> ERROR: Function failed: Fetcher failure for URL:
+>> 'git://git.yoctoproject.org/prelink-cross.git;protocol=3Dgit'. Unable to
+>> fetch URL from any source.
+>> ERROR: Logfile of failure stored in:
+>> /home/Superandy/tmp/oe-core-eglibc/work/x86_64-linux/prelink-native-1.0+=
+git1+a2d8e30942bd4bc0a5c852b9d9d12f8684c4bb8d-r10/temp/log.do_fetch.25940
+>> ERROR: Task 103
+>> (virtual:native:/home/Superandy/data/oe-core/sources/openembedded-core/m=
+eta/recipes-devtools/prelink/prelink_git.bb,
+>> do_fetch) failed with exit code '1'
+>> NOTE: Tasks Summary: Attempted 307 tasks of which 262 didn't need to
+>> be rerun and 1 failed.
+>>
+>> Any thoughts?
+>
+> You have an incompatible version of git and git-native is in
+> ASSUME_PROVIDED. We should have detected this and built git-native in
+> this case. What version of git do you have?
+>
+> Cheers,
+>
+> Richard
+>
+>
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
 
 
