@@ -1,38 +1,32 @@
 Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TOvLT-0003Jl-Og
+	(envelope-from <martin.jansa@gmail.com>) id 1TOwNd-0004hW-OW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 21:01:28 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dq11so6595200wgb.24
+	Thu, 18 Oct 2012 22:07:45 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dq11so6634847wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2012 11:48:08 -0700 (PDT)
+	Thu, 18 Oct 2012 12:54:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/CpW3EGmBOJAtL600CqnoDPBHNdT9zIR31ZR0sec7/M=;
-	b=EsGByQDLRJJjKRJ9l8sjRDzcqqaMApgsW2lnAx7tyB1UiMNyw9LHs7W/wFZ8J2xDG0
-	ElmLgwG3JFu3cUhoMlghkyMsyrFoD9N7PBZMYYDltzEQLbzluPYc7V4v93RbklVV8xcM
-	Ty6TznkLGOmyE/ACZKok9z0rffvPYo6gmgQSh2ekWzTgr+uETrSkADu/s6l0SHe5pPf2
-	b8XNRZMVCkn/oKQJW3MMhZUcoPTtHgb9pVCJkj3UGqZRpp5rIZEI+4uQynPswYI4iMOC
-	BMMqZ4PYQp7K8mbtPkfLR8eRNg80BrdA89450XjLBbMLPQZTsO8fhztndvyqNmISeOtC
-	YVNQ==
-Received: by 10.180.100.136 with SMTP id ey8mr13296512wib.1.1350586087962;
-	Thu, 18 Oct 2012 11:48:07 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=FakRo2OgsUAj1Wn61Jsdca87VRbjW4f4weuFpN1z+Ho=;
+	b=MX9F6gPVf+HKFmGShwnr9WmEmicSe9Mr+lu2b7RV4vT6I58lwwMn0exERZ76ZeUMPE
+	PHvh9dyIjZEcFK2QJAMMTyyE2MDCOaZhTo0LX4KiIBIWLAmcCcgIC4FBpJsPQgbYY44H
+	UmOFYdXi6udp1PT2aAbKbsvUZFmICJ+uajs3p9W6Q0bBWndF6+KVFL6IGp6+8GhrOlEn
+	rqdSm1hwIX80eLfUE/NrdX0jpTyGeCnZLAHUfUqmHpvoGyPCB3t0pUqMq07mBUBtDrI0
+	PQnuPibvQ6VSlkMjn0qpne7AfzHtLPl8Wf8mBqrvqIsHZodR4MeUnwyU5Xr0uHSdoOPi
+	UueA==
+Received: by 10.216.195.133 with SMTP id p5mr14260477wen.1.1350590065916;
+	Thu, 18 Oct 2012 12:54:25 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cl8sm30872266wib.10.2012.10.18.11.48.04
+	by mx.google.com with ESMTPS id k20sm31188824wiv.11.2012.10.18.12.54.24
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 18 Oct 2012 11:48:05 -0700 (PDT)
-Date: Thu, 18 Oct 2012 20:48:15 +0200
+	Thu, 18 Oct 2012 12:54:24 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121018184815.GD3087@jama.jama.net>
-References: <1350579089-23342-1-git-send-email-gary@mlbassoc.com>
-	<20121018174642.GC3087@jama.jama.net>
-	<50804A6C.5020607@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <50804A6C.5020607@mlbassoc.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] [meta-oe] libav: Fix git URI
+Date: Thu, 18 Oct 2012 21:54:28 +0200
+Message-Id: <cover.1350589969.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-oe][PATCH 0/5] Small changes #101
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,115 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 19:01:28 -0000
-X-Groupsio-MsgNum: 41143
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DrWhICOqskFTAXiy"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Oct 2012 20:07:45 -0000
 
---DrWhICOqskFTAXiy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 4cd60deb11a8a6f9134d7f6ec39255a35d921426:
 
-On Thu, Oct 18, 2012 at 12:29:00PM -0600, Gary Thomas wrote:
-> On 2012-10-18 11:46, Martin Jansa wrote:
-> > On Thu, Oct 18, 2012 at 10:51:29AM -0600, Gary Thomas wrote:
-> >> Specifying SRCREV and branch in the git SRC_URI confuses the bitbake
-> >> fetcher.  This ends up with a saved tarball which contains neither
-> >> the SRCREV nor the branch, which in turn means the git tree needs
-> >> to be fetched every time even though a saved tarball has been created.
-> >
-> > That's fetcher fault.
-> >
-> > Branch is part of persistent db key for LOCALCOUNT, so this breaks
-> > upgrade path.
-> >
-> > Also AUTOREV wont work without branch specified in SRC_URI.
->=20
-> AUTOREV is not being used, so how does your comment apply?
+  hiawatha: add initial 8.5 recipe and associated files (2012-10-18 15:12:31 +0100)
 
-yes it's good practise to use it from some .inc even or local.conf,
-_without_ need to change SRC_URI
+are available in the git repository at:
 
-> > Fix bitbake fetcher instead.
-> >
-> > Cheers,
-> >
-> >
-> >> Simply removing the branch (which is redundant anyway) from the SRC_URI
-> >> makes everything happy.
-> >>
-> >> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> >> ---
-> >>   meta-oe/recipes-multimedia/libav/libav_0.8.3.bb |    4 ++--
-> >>   1 file changed, 2 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb b/meta-oe=
-/recipes-multimedia/libav/libav_0.8.3.bb
-> >> index 66a32c9..f9a2e06 100644
-> >> --- a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
-> >> +++ b/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
-> >> @@ -6,13 +6,13 @@ LIC_FILES_CHKSUM =3D "file://COPYING.GPLv2;md5=3Db23=
-4ee4d69f5fce4486a80fdaf4a4263 \
-> >>                       file://COPYING.LGPLv3;md5=3De6a600fd5e1d9cbde2d9=
-83680233ad02"
-> >>
-> >>   PV =3D "0.8.3+git${SRCPV}"
-> >> -PR =3D "${INC_PR}.0"
-> >> +PR =3D "${INC_PR}.1"
-> >>
-> >>   # When bumping SRCREV make sure you bump PR here and in dependant
-> >>   # recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION
-> >>   # changes
-> >>   SRCREV =3D "2fb4be9a99a2c2a9435339830e3d940171cc0d9b"
-> >> -SRC_URI =3D "git://git.libav.org/libav.git;protocol=3Dgit;branch=3Dre=
-lease/0.8"
-> >> +SRC_URI =3D "git://git.libav.org/libav.git;protocol=3Dgit"
-> >>
-> >>   S =3D "${WORKDIR}/git"
-> >>
-> >> --
-> >> 1.7.9.5
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->=20
-> --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Martin Jansa (5):
+  PACKAGES_DYNAMIC: use regexp not glob
+  mcnavi: remove myslq_config include path work around
+  ecore: drop libxputil from DEPENDS
+  libxaw: drop libxp and printproto from DEPENDS
+  mcnavi: move from meta-oe to meta-efl
 
---DrWhICOqskFTAXiy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ meta-efl/recipes-efl/efl/ecore.inc                              | 5 +++--
+ meta-efl/recipes-efl/efl/evas-generic-loaders.inc               | 2 +-
+ meta-efl/recipes-efl/efl/evas.inc                               | 2 +-
+ {meta-oe => meta-efl}/recipes-navigation/mcnavi/mcnavi_0.3.3.bb | 7 +------
+ meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb               | 2 +-
+ meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb          | 2 +-
+ meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb                    | 2 +-
+ meta-gnome/recipes-support/goffice/goffice_0.8.17.bb            | 2 +-
+ meta-initramfs/recipes-devtools/klibc/klibc-utils.inc           | 2 +-
+ meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb        | 2 +-
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc                   | 2 +-
+ meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb               | 2 +-
+ meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.10.bb              | 4 ++--
+ meta-oe/recipes-multimedia/libav/libav.inc                      | 2 +-
+ meta-oe/recipes-support/freerdp/freerdp.inc                     | 2 +-
+ meta-oe/recipes-support/openldap/openldap_2.4.23.bb             | 2 +-
+ meta-oe/recipes-support/pidgin/pidgin.inc                       | 2 +-
+ meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb       | 2 +-
+ meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.10.0.bb        | 2 +-
+ meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.0.bb                    | 2 +-
+ 20 files changed, 23 insertions(+), 27 deletions(-)
+ rename {meta-oe => meta-efl}/recipes-navigation/mcnavi/mcnavi_0.3.3.bb (71%)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+-- 
+1.7.12.4
 
-iEYEARECAAYFAlCATu8ACgkQN1Ujt2V2gBytNACfYfuQ4kBxlHvtG9FYpUvSw8dA
-EiMAoJfvZXoS0mPtC4a6LmAmoTXc8unk
-=W6R7
------END PGP SIGNATURE-----
 
---DrWhICOqskFTAXiy--
+
