@@ -1,21 +1,21 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1TOy49-0000TB-Em
-	for openembedded-devel@openembedded.org; Thu, 18 Oct 2012 23:55:46 +0200
-Received: (qmail 24910 invoked by uid 1003); 18 Oct 2012 21:35:43 -0000
-Received: from unknown (HELO oebuild.amer.corp.natinst.com)
-	(philip@balister.org@157.22.28.10)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	18 Oct 2012 21:35:43 -0000
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@openembedded.org
-Date: Thu, 18 Oct 2012 14:36:57 -0700
-Message-Id: <1350596217-26554-2-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.7.7.6
-In-Reply-To: <1350596217-26554-1-git-send-email-philip@balister.org>
-References: <1350596217-26554-1-git-send-email-philip@balister.org>
-Cc: Philip Balister <philip@opensdr.com>
-Subject: [meta-oe][PATCH 2/2] sshfs-fuse : Import recipe from Openembedded Classic.
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <philb@gnu.org>) id 1TOyn8-0002x4-2A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Oct 2012 00:42:14 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.6])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1TOyaG-0003jL-Dp
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Oct 2012 00:28:56 +0200
+Message-ID: <1350599179.4470.180.camel@x121e.pbcl.net>
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2012 23:26:19 +0100
+X-Mailer: Evolution 3.4.3-1 
+Mime-Version: 1.0
+Subject: [PATCH] atk: update to 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,43 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 21:55:46 -0000
+X-List-Received-Date: Thu, 18 Oct 2012 22:42:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Philip Balister <philip@opensdr.com>
-
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Phil Blundell <pb@pbcl.net>
 ---
- .../sshfs-fuse/sshfs-fuse_2.4.bb                   |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/sshfs-fuse/sshfs-fuse_2.4.bb
+ meta/recipes-support/atk/{atk_2.4.0.bb => atk_2.6.0.bb} |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta/recipes-support/atk/{atk_2.4.0.bb => atk_2.6.0.bb} (75%)
 
-diff --git a/meta-oe/recipes-connectivity/sshfs-fuse/sshfs-fuse_2.4.bb b/meta-oe/recipes-connectivity/sshfs-fuse/sshfs-fuse_2.4.bb
-new file mode 100644
-index 0000000..83d5c87
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/sshfs-fuse/sshfs-fuse_2.4.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "This is a filesystem client based on the SSH File Transfer Protocol using FUSE."
-+AUTHOR = "Miklos Szeredi <miklos@szeredi.hu>"
-+HOMEPAGE = "http://fuse.sourceforge.net/sshfs.html"
-+SECTION = "console/network"
-+PRIORITY = "optional"
-+LICENSE = "GPLv2"
-+DEPENDS = "glib-2.0 fuse"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${P}.tar.gz"
-+S = "${WORKDIR}/${P}"
-+
-+inherit autotools
-+
-+FILES_${PN} += "${libdir}/sshnodelay.so"
-+
-+SRC_URI[md5sum] = "3c7c3647c52ce84d09486f1da3a3ce24"
-+SRC_URI[sha256sum] = "3c93ba8522568093c94ff9c5a3763929380dd229365d905769ff82475d774dd1"
-+
+diff --git a/meta/recipes-support/atk/atk_2.4.0.bb b/meta/recipes-support/atk/atk_2.6.0.bb
+similarity index 75%
+rename from meta/recipes-support/atk/atk_2.4.0.bb
+rename to meta/recipes-support/atk/atk_2.6.0.bb
+index 4a2d853..f9cefde 100644
+--- a/meta/recipes-support/atk/atk_2.4.0.bb
++++ b/meta/recipes-support/atk/atk_2.6.0.bb
+@@ -13,9 +13,9 @@ DEPENDS = "glib-2.0"
+ 
+ inherit autotools gtk-doc pkgconfig
+ 
+-SRC_URI = "http://download.gnome.org/sources/atk/2.4/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "2184a140f71d50276669d6eda5cce5db"
+-SRC_URI[sha256sum] = "091e9ce975a9fbbc7cd8fa64c9c389ffb7fa6cdde58b6d5c01b2c267093d888d"
++SRC_URI = "http://download.gnome.org/sources/atk/2.6/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "6b34e2a63dda4429b5692be7ca3aa5bf"
++SRC_URI[sha256sum] = "eff663f90847620bb68c9c2cbaaf7f45e2ff44163b9ab3f10d15be763680491f"
+ 
+ BBCLASSEXTEND = "native"
+ 
 -- 
-1.7.7.6
+1.7.10.4
+
+
 
 
 
