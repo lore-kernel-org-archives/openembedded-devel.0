@@ -1,26 +1,36 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TOnsw-0003ga-53
+	(envelope-from <marc.ferland@gmail.com>) id 1TOpwT-0000xq-3w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 13:03:30 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 18 Oct 2012 03:50:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,606,1344236400"; d="scan'208";a="229171867"
-Received: from unknown (HELO helios.localnet) ([10.252.122.102])
-	by orsmga002.jf.intel.com with ESMTP; 18 Oct 2012 03:50:08 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jack Mitchell <ml@communistcode.co.uk>
-Date: Thu, 18 Oct 2012 11:50:07 +0100
-Message-ID: <2148345.1cljnmljF3@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <1350305104-4418-1-git-send-email-ml@communistcode.co.uk>
-References: <1350305104-4418-1-git-send-email-ml@communistcode.co.uk>
-MIME-Version: 1.0
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH v2] hiawatha: add initial 8.5 recipe and associated files
+	Thu, 18 Oct 2012 15:15:17 +0200
+Received: by mail-vc0-f175.google.com with SMTP id p1so9500031vcq.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Oct 2012 06:01:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=J6iav7iQl7ILh6bVmQk3RhABqUS+XTFiZk6wqaDwS64=;
+	b=xJvrjcCatF+wCYRF18IIXWotL98eiLqu36DDexG4Qx+V2kb2ygS81VoaSy83LgZ+st
+	w8jU8NrGp/0eB5TYniewY0Zbxx2QHVB4CAzauX+1pzuuaHaRFxn1t9C18hoyY7NpSy7X
+	/zKCvkZev8R2qODj4M0kuyWo1Xespopkecw6N0eBb+NtBPCCHgxyrhQ0ux1tmPCudF4o
+	Oh2N2V1KYAKl1UR0IMuZTNAV7oacpW2dwCqflsRL9RN/Mjsb6FdWXnrOK10AVTYCT0X/
+	q+PWjPSB6vSlRp9BaJXTs3NJfrJaKFksS8QuiMOGQznon0QOObDB2Hxr/FIRp5Pwe+Zg
+	jRmw==
+Received: by 10.220.205.198 with SMTP id fr6mr5166154vcb.63.1350565317324;
+	Thu, 18 Oct 2012 06:01:57 -0700 (PDT)
+Received: from ferlandm@sonatest.com
+	(modemcable066.15-37-24.static.videotron.ca. [24.37.15.66])
+	by mx.google.com with ESMTPS id w10sm3537529vef.5.2012.10.18.06.01.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 18 Oct 2012 06:01:55 -0700 (PDT)
+Sender: Marc Ferland <marc.ferland@gmail.com>
+Received: by ferlandm@sonatest.com (sSMTP sendmail emulation);
+	Thu, 18 Oct 2012 09:01:58 -0400
+From: Marc Ferland <ferlandm@sonatest.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2012 09:01:57 -0400
+Message-Id: <1350565318-13026-1-git-send-email-ferlandm@sonatest.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] lmsensors: Initial commit (cover letter).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,40 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 11:03:30 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 18 Oct 2012 13:15:17 -0000
 
-Hi Jack,
+Here's a second version of my patch for adding lmsensors.
 
-On Monday 15 October 2012 13:45:04 Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> 
-> v1:
-> - hiawatha: add initial 8.5 recipe and associated files
-> 
-> v2:
-> - update hiawatha init file with LSB headers
-> - use sed to put in correct sbin path
-> ---
->  .../recipes-httpd/hiawatha/files/hiawatha-init     | 44
-> +++++++++++++++++++++ .../recipes-httpd/hiawatha/hiawatha_8.5.bb         |
-> 45 ++++++++++++++++++++++ 2 files changed, 89 insertions(+)
->  create mode 100644
-> meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init create mode
-> 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
+As suggested by Paul and Martin I've rebased my patch against meta-oe
+and dropped the rrdtool part.
 
-I was all set to apply this and then I noticed the patch is missing signed-off-
-by. Sorry to be a pain but could you resend with Signed-off-by added and also 
-move any revision comments underneath the -- line so they don't show up in the 
-commit message?
+Regards,
 
-Thanks,
-Paul
+Marc
+
+Marc Ferland (1):
+  lmsensors: Initial commit.
+
+ .../recipes-support/lm_sensors/files/fancontrol    |    2 +
+ .../recipes-support/lm_sensors/files/fancontrol.sh |   48 ++++++
+ .../recipes-support/lm_sensors/files/sensord.cgi   |   10 ++
+ .../recipes-support/lm_sensors/files/sensord.conf  |   16 ++
+ .../recipes-support/lm_sensors/files/sensord.sh    |   49 +++++++
+ .../recipes-support/lm_sensors/files/sensors.conf  |    2 +
+ .../recipes-support/lm_sensors/lmsensors_3.3.2.bb  |  150 ++++++++++++++++++++
+ 7 files changed, 277 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/fancontrol
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/fancontrol.sh
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.cgi
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.conf
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.sh
+ create mode 100644 meta-oe/recipes-support/lm_sensors/files/sensors.conf
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors_3.3.2.bb
 
 -- 
+1.7.5.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
