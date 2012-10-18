@@ -1,42 +1,28 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sledz@dresearch-fe.de>) id 1TOqNj-0001Xr-03
+	(envelope-from <ml@communistcode.co.uk>) id 1TOqhp-0002Ke-K5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 15:43:27 +0200
-Received: by mail-bk0-f47.google.com with SMTP id jk7so3715086bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2012 06:30:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=kv4mNfJ8zsRQUZXQNQeckW4zJaxqnMHITztsO1QUnLs=;
-	b=dH005kK4GcjhcCx9X2/fuzOwfTfoAsdWzIZKIhc3kHxgF1ToQ3RJ7dRSbFM4S3l/mp
-	oEksPDz0i02Lsrqdwh+Td0ItbZR+g/gIkj8bNJn7csV/7j2XUkfQAeqVPX+SZbDnRroy
-	04Y59akBtdhanuygqJjBn1J+n7b7sGjqsPWtipZ/LIG0Aqo7roCujM1RcWQlhXwpVssL
-	cNZc5ZNq26WVdiHz4p/s16VyLTIMaMVKDisl6v5kSFtiYzg9H68wqzFnchNjMXJwQopa
-	9TNPqqoe3LIC6PhTTfNSomNjKthttDCLxFsfcu7ultiENIhMjqWrwcxtwT8OcWkWNMiW
-	81og==
-Received: by 10.204.131.75 with SMTP id w11mr6484957bks.111.1350567007453;
-	Thu, 18 Oct 2012 06:30:07 -0700 (PDT)
-Received: from mobil-400-586.intern.dresearch.de
-	(pd95cbf07.dip0.t-ipconnect.de. [217.92.191.7])
-	by mx.google.com with ESMTPS id v14sm14951537bkv.10.2012.10.18.06.30.06
-	(version=SSLv3 cipher=OTHER); Thu, 18 Oct 2012 06:30:06 -0700 (PDT)
-Message-ID: <5080045D.4020105@dresearch-fe.de>
-Date: Thu, 18 Oct 2012 15:30:05 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121010 Thunderbird/16.0.1
-MIME-Version: 1.0
-To: Henning Heinold <heinold@inf.fu-berlin.de>
-References: <cover.1349466172.git.sledz@dresearch-fe.de>
-In-Reply-To: <cover.1349466172.git.sledz@dresearch-fe.de>
-X-Enigmail-Version: 1.4.5
-X-Gm-Message-State: ALoCoQnoNvmhzisrlGUanpZOa9tNki14wYm30A36zFYy1X5ZnzP/Ddi0Th1KfoIwtnhlchiPnioV
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java 0/5] icedtea build fixes
+	Thu, 18 Oct 2012 16:04:14 +0200
+Received: from localhost ([127.0.0.1]:48331 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>)
+	id 1TOqUv-0006iA-QD; Thu, 18 Oct 2012 13:50:53 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=from:to:cc
+	:subject:date:message-id; s=default; bh=E2qN++rvX1a5slqaJ1oLPIdU
+	heQ=; b=EbBbzfTQ4sTpwrw/4f7WtcLiQz+nSewKCCV1W5o+PfEhiJiiPLOKNy9L
+	Den12vPq2a0C5bKwJJKLd+V5q0xFs5PnFHTilZjL9XqxmV53JzB5LLPgpPKT+Njb
+	w6aABJP1yeqttQICVI9uVCTMTqufyrL2bRwNCSl45C3+D2RnqoQ=
+Received: from [195.171.99.130] (port=35039 helo=archHP.dbnet.local)
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>)
+	id 1TOqUv-0006i7-KR; Thu, 18 Oct 2012 13:50:53 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Oct 2012 14:52:32 +0100
+Message-Id: <1350568352-22628-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.7.12.3
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-webserver][PATCH\ v3] hiawatha: add initial 8.5 recipe and associated files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,42 +36,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 13:43:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Oct 2012 14:04:14 -0000
 
-On 05.10.2012 21:45, Steffen Sledz wrote:
-> Hi meta-jav maintainers,
-> 
-> this is a set of patches which make icedtea6-native-1.7.10 and
-> icedtea6-native-1.8.11 buildable for us.
-> 
-> The following changes since commit da13c12203a4ba9020d7083861c0038c8ee67c88:
-> 
->   openjdk-6: update to version 1.11.4 (2012-09-10 20:43:55 +0200)
-> 
-> are available in the git repository at:
-> 
->   git://github.com/sledz/meta-java pull-request-1
->   https://github.com/sledz/meta-java/tree/pull-request-1
-> 
-> Steffen Sledz (5):
->   icedtea6-native-1.7.10: add missing LIC_FILES_CHKSUM
->   icedtea6-native-1.7.10: backport S7103224
->   icedtea6-native: fix problem on build hosts with linux kernel 3.x
->   icedtea6-native: fix compile error
->   icedtea6-native: fix build problem
+From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-Ping!
+---
 
+v1:
+- hiawatha: add initial 8.5 recipe and associated files
+
+v2:
+- update hiawatha init file with LSB headers
+- use sed to put in correct sbin path
+
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+ .../recipes-httpd/hiawatha/files/hiawatha-init     | 44 +++++++++++++++++++++
+ .../recipes-httpd/hiawatha/hiawatha_8.5.bb         | 45 ++++++++++++++++++++++
+ 2 files changed, 89 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
+ create mode 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
+
+diff --git a/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
+new file mode 100644
+index 0000000..47fc087
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init
+@@ -0,0 +1,44 @@
++#!/bin/sh
++
++### BEGIN INIT INFO
++# Provides:          hiawatha httpd httpd-cgi
++# Required-Start:    $syslog $network $remote_fs
++# Required-Stop:     $syslog $network $remote_fs
++# Default-Start:     2 3 4 5
++# Default-Stop:      0 1 6
++# Short-Description: Hiawatha webserver
++# Description:       Hiawatha, a secure and advanced webserver.
++### END INIT INFO
++
++PATH=/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=sed_sbin_path/hiawatha
++NAME=hiawatha
++DESC="Hiawatha Web Server"
++OPTS=""
++
++case "$1" in
++  start)
++	echo -n "Starting $DESC: "
++	start-stop-daemon --start -x "$DAEMON" -- $OPTS
++	echo "$NAME."
++	;;
++  stop)
++	echo -n "Stopping $DESC: "
++	start-stop-daemon --stop -x "$DAEMON"
++	echo "$NAME."
++	;;
++  restart|force-reload)
++	echo -n "Restarting $DESC: "
++	start-stop-daemon --stop -x "$DAEMON"
++	sleep 1
++	start-stop-daemon --start -x "$DAEMON" -- $OPTS
++	echo "$NAME."
++	;;
++  *)
++	N=/etc/init.d/$NAME
++	echo "Usage: $N {start|stop|restart|force-reload}" >&2
++	exit 1
++	;;
++esac
++
++exit 0
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
+new file mode 100644
+index 0000000..a029047
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
+@@ -0,0 +1,45 @@
++DESCRIPTION = "Lightweight secure web server"
++HOMEPAGE = "http://www.hiawatha-webserver.org"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
++DEPENDS = "libxml2 libxslt"
++
++SECTION = "net"
++
++SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
++					 file://hiawatha-init"
++
++SRC_URI[md5sum] = "71d3903657953c93fc930758d158097d"
++SRC_URI[sha256sum] = "2567e6b4b4c6666388087b586238e6e91a4afd80e10a879920020a097fcdc946"
++
++inherit cmake update-rc.d
++
++INITSCRIPT_NAME = "hiawatha"
++INITSCRIPT_PARAMS = "defaults 70"
++
++EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
++                  -DENABLE_CACHE=ON \
++                  -DENABLE_DEBUG=OFF \
++                  -DENABLE_SSL=OFF \
++                  -DENABLE_TOOLKIT=OFF \
++                  -DENABLE_CHROOT=OFF \
++                  -DENABLE_XSLT=ON \
++                  -DENABLE_TOMAHAWK=OFF \
++                  -DCMAKE_INSTALL_MANDIR=${mandir} \
++                  -DCMAKE_INSTALL_BINDIR=${bindir} \
++                  -DCMAKE_INSTALL_SBINDIR=${sbindir} \
++                  -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
++                  -DCMAKE_INSTALL_LIBDIR=${libdir} \ 
++                  -DLOG_DIR=/var/log/hiawatha \
++                  -DPID_DIR=/var/run \
++                  -DWEBROOT_DIR=/var/www/hiawatha \
++                  -DWORK_DIR=/var/lib/hiawatha "
++
++do_install_append() {
++
++	# Copy over init script and sed in the correct sbin path
++  sed -i 's,sed_sbin_path,${sbindir},' ${WORKDIR}/hiawatha-init
++  mkdir -p ${D}${sysconfdir}/init.d
++  install -m 0755 ${WORKDIR}/hiawatha-init ${D}${sysconfdir}/init.d/hiawatha
++
++}
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.7.12.3
 
 
 
