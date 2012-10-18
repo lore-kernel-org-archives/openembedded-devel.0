@@ -1,35 +1,26 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TOkWj-0005Ug-6h for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 09:28:21 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TOkJx-0006i7-IB for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Oct 2012 09:15:09 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2012 09:15:09 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Oct 2012 09:15:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 18 Oct 2012 09:14:56 +0200
-Message-ID: <k5oa9b$nik$1@ger.gmane.org>
-References: <1350483671-28179-1-git-send-email-ross.burton@intel.com>
-	<1350483671-28179-2-git-send-email-ross.burton@intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <1350483671-28179-2-git-send-email-ross.burton@intel.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [PATCH] [meta-multimedia] gst123: add package
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TOnsw-0003ga-53
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Oct 2012 13:03:30 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 18 Oct 2012 03:50:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,606,1344236400"; d="scan'208";a="229171867"
+Received: from unknown (HELO helios.localnet) ([10.252.122.102])
+	by orsmga002.jf.intel.com with ESMTP; 18 Oct 2012 03:50:08 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jack Mitchell <ml@communistcode.co.uk>
+Date: Thu, 18 Oct 2012 11:50:07 +0100
+Message-ID: <2148345.1cljnmljF3@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <1350305104-4418-1-git-send-email-ml@communistcode.co.uk>
+References: <1350305104-4418-1-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH v2] hiawatha: add initial 8.5 recipe and associated files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 07:28:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Oct 2012 11:03:30 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Jack,
 
-Op 17-10-12 16:21, Ross Burton schreef:
-> gst123 is useful for testing as it simply uses PlayBin, but can display
-> the pipeline being used for QA purposes.
+On Monday 15 October 2012 13:45:04 Jack Mitchell wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 > 
-> Signed-off-by: Ross Burton <ross.burton@intel.com> --- 
-> .../recipes-multimedia/gstreamer/gst123_0.3.1.bb    |   19
-> +++++++++++++++++++ 1 file changed, 19 insertions(+) create mode 100644
-> meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> v1:
+> - hiawatha: add initial 8.5 recipe and associated files
 > 
-> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
-> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb new file
-> mode 100644 index 0000000..b543958 --- /dev/null +++
-> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb @@ -0,0
-> +1,19 @@ +SUMMARY = "gst123"
+> v2:
+> - update hiawatha init file with LSB headers
+> - use sed to put in correct sbin path
+> ---
+>  .../recipes-httpd/hiawatha/files/hiawatha-init     | 44
+> +++++++++++++++++++++ .../recipes-httpd/hiawatha/hiawatha_8.5.bb         |
+> 45 ++++++++++++++++++++++ 2 files changed, 89 insertions(+)
+>  create mode 100644
+> meta-webserver/recipes-httpd/hiawatha/files/hiawatha-init create mode
+> 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.5.bb
 
-Can you add a more verbose summary please?
+I was all set to apply this and then I noticed the patch is missing signed-off-
+by. Sorry to be a pain but could you resend with Signed-off-by added and also 
+move any revision comments underneath the -- line so they don't show up in the 
+commit message?
 
-> +DESCRIPTION = "Flexible command line player in the spirit of ogg123 and
-> mpg123, based on GStreamer" +HOMEPAGE =
-> "http://space.twc.de/~stefan/gst123.php" +LICENSE = "LGPLv2.1+" 
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2
-> \ +
-> file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
->
-> 
-+
-> +DEPENDS = "libx11 gstreamer gtk+ ncurses" + +PR = "r0"
+Thanks,
+Paul
 
-And drop that, it's the default value.
+-- 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQf6xwMkyGM64RGpERAljjAJ9aGC2Q5HRMTnFYOlcJb2ywBqIHwwCfRfh5
-Luyj+s0dnDIfr77ziVYK7PE=
-=tMxI
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
