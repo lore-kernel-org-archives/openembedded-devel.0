@@ -1,33 +1,35 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TOUzC-0003jU-TJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Oct 2012 16:52:43 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dq11so5609381wgb.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TOkWj-0005Ug-6h for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Oct 2012 09:28:21 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TOkJx-0006i7-IB for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Oct 2012 09:15:09 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Oct 2012 09:15:09 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Oct 2012 07:39:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=W9erNHLXRVd81N80FnsUvuk7hHvdu6ztac2PkQlzgRo=;
-	b=Mhyy7IkVb39EE/3qhFKYcc5yKzLPZVVr/IRR/X9UFQTdqS6JUHtl9x3BeyPkq9DCha
-	HOB2oGoIWG0+ktVn3yoO5Fa31eYaSaek7hxD0L/9NkeOzjb8mrhCypQa6X5m6CElsAoY
-	BGU1CPja2jO1ASY4Kd2zhLESQfGzdKQjo6xD3S5tQBDFcJhPGjeAgRe/xjiHOaqI8/sW
-	24HGx89vifzRS8BxwVRsdFbcgKdVL0picXcUNoC4qlb2uJ9bVOE/TK5E6aFITHXYxgXG
-	wBk1MdGV6lPal+npDs2jqqpvgWRpwjF0Dv7nrwYw3QrAFSyy9BgbRPLiH5KnKN73gU4b
-	wVWw==
-Received: by 10.180.19.71 with SMTP id c7mr4642278wie.2.1350484764845;
-	Wed, 17 Oct 2012 07:39:24 -0700 (PDT)
-Received: from s-stirtzel-linux.zera.local
-	(ip-109-91-251-94.unitymediagroup.de. [109.91.251.94])
-	by mx.google.com with ESMTPS id b7sm24575128wiz.3.2012.10.17.07.39.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 17 Oct 2012 07:39:23 -0700 (PDT)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Thu, 18 Oct 2012 09:15:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Oct 2012 16:37:52 +0200
-Message-Id: <1350484672-9330-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe] maliit-framework: Clean up recipe and use gtk-immodules-cache.bbclass
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 18 Oct 2012 09:14:56 +0200
+Message-ID: <k5oa9b$nik$1@ger.gmane.org>
+References: <1350483671-28179-1-git-send-email-ross.burton@intel.com>
+	<1350483671-28179-2-git-send-email-ross.burton@intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1350483671-28179-2-git-send-email-ross.burton@intel.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [PATCH] [meta-multimedia] gst123: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,76 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2012 14:52:46 -0000
+X-List-Received-Date: Thu, 18 Oct 2012 07:28:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-To be merged after gtk-immodules-cache.bbclass hits oe-core
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- .../recipes-support/maliit/maliit-framework_git.bb |   32 +++++---------------
- 1 file changed, 7 insertions(+), 25 deletions(-)
+Op 17-10-12 16:21, Ross Burton schreef:
+> gst123 is useful for testing as it simply uses PlayBin, but can display
+> the pipeline being used for QA purposes.
+> 
+> Signed-off-by: Ross Burton <ross.burton@intel.com> --- 
+> .../recipes-multimedia/gstreamer/gst123_0.3.1.bb    |   19
+> +++++++++++++++++++ 1 file changed, 19 insertions(+) create mode 100644
+> meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> 
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb new file
+> mode 100644 index 0000000..b543958 --- /dev/null +++
+> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb @@ -0,0
+> +1,19 @@ +SUMMARY = "gst123"
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-index 3f50d1b..534a3c8 100644
---- a/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-+++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://wiki.maliit.org/Main_Page"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
- 
--inherit autotools qt4x11
-+inherit autotools qt4x11 gtk-immodules-cache
- 
- 
- SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
-@@ -16,9 +16,8 @@ SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
- PV = "0.92.3+git${SRCPV}"
- 
- 
--PACKAGES =+ "\
--    ${PN}-gtk \
--    "
-+PACKAGES =+ "${PN}-gtk"
-+GTKIMMODULES_PACKAGES = "${PN}-gtk"
- 
- # Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
- RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
-@@ -58,29 +57,12 @@ EXTRA_QMAKEVARS_PRE = "\
-     CONFIG+=local-install \
-     "
- 
--do_install() {
--    cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
-+EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
- 
-+do_install_append() {
-     #Fix absolute paths
--    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-framework.prf
--    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-plugins.prf
--}
--
--
--
--# Update the inputmethod modules in gtk
--pkg_postinst_${PN}-gtk() {
--if [ "x$D" != "x" ]; then
--    exit 1
--fi
--gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
--}
--
--pkg_postrm_${PN}-gtk() {
--if [ "x$D" != "x" ]; then
--    exit 1
--fi
--gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-framework.prf
-+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
- }
- 
- S= "${WORKDIR}/git"
--- 
-1.7.9.5
+Can you add a more verbose summary please?
+
+> +DESCRIPTION = "Flexible command line player in the spirit of ogg123 and
+> mpg123, based on GStreamer" +HOMEPAGE =
+> "http://space.twc.de/~stefan/gst123.php" +LICENSE = "LGPLv2.1+" 
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2
+> \ +
+> file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
+>
+> 
++
+> +DEPENDS = "libx11 gstreamer gtk+ ncurses" + +PR = "r0"
+
+And drop that, it's the default value.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQf6xwMkyGM64RGpERAljjAJ9aGC2Q5HRMTnFYOlcJb2ywBqIHwwCfRfh5
+Luyj+s0dnDIfr77ziVYK7PE=
+=tMxI
+-----END PGP SIGNATURE-----
 
 
 
