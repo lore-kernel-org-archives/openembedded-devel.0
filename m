@@ -1,34 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TParR-0004Gi-Mn
+	(envelope-from <chase.maupin@ti.com>) id 1TPdIe-0006g4-E5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 17:21:13 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so947391pbb.6
+	Sat, 20 Oct 2012 19:57:28 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9KHaku4032045
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2012 08:07:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=WXMhZvfICshVmUgfmJwzNLI4EGze+zK54jm4fqoP6TQ=;
-	b=PB2FJmIlxIdNE98uMKD3TcIwaWyBSRrHvxXE/eihIVJ633sIoFrDs/NeuwKAY7StUl
-	L5wsxqbMA9d98CCsXgLj6FA2i5pyylKUxYrgpCXSPt+0eDVpVALlntAKWu0HJtzaxCYh
-	wPa9B4Os0OFozc1/sySSLKBzkGAPG57ayE4BJrfMeqHTdN7bJ7e0y4qd15cwjMlxsSLV
-	h7InSlZiKP4Z2oDFBxDSMfMHxHz2MivnbLENZx81ksxtVA+glmG4VuK8syMVk1tH/GSg
-	Oc+VAzd35DDTXEKtOEc0xr1ntr40956mcATz21CybYa8BnZEFBqcI3Zquz19hqqwGxEZ
-	a2BA==
+	Sat, 20 Oct 2012 12:36:46 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9KHakWw003364
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Oct 2012 12:36:46 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
+	14.01.0323.003; Sat, 20 Oct 2012 12:36:46 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] libjpeg-turbo: Add RPROVIDES to fix
+	errors	when rdepending on jpeg
+Thread-Index: AQHNgeebqrx3uDaXmkKoYYNWJsuYqZfCzr7g
+Date: Sat, 20 Oct 2012 17:36:44 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159272FF7@DLEE12.ent.ti.com>
+References: <1345805787-6819-1-git-send-email-s.stirtzel@googlemail.com>
+	<1345805787-6819-2-git-send-email-s.stirtzel@googlemail.com>
+In-Reply-To: <1345805787-6819-2-git-send-email-s.stirtzel@googlemail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Received: by 10.68.135.168 with SMTP id pt8mr16343975pbb.24.1350745669610;
-	Sat, 20 Oct 2012 08:07:49 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 08:07:49 -0700 (PDT)
-In-Reply-To: <1350665204-7352-1-git-send-email-paul.eggleton@linux.intel.com>
-References: <1350665204-7352-1-git-send-email-paul.eggleton@linux.intel.com>
-Date: Sat, 20 Oct 2012 12:07:49 -0300
-X-Google-Sender-Auth: Nsxf7hgJ8we7CyI7-cwDnBv7pJY
-Message-ID: <CAP9ODKpbLNnHBJN1RMM=xbNUtNeQRmx4DAWxg-h+1LHedKXPCQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] hddtemp: add from OE-Classic and update
+Subject: Re: [meta-oe][PATCH] libjpeg-turbo: Add RPROVIDES to fix errors	when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,91 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 15:21:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 20 Oct 2012 17:57:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 19, 2012 at 1:46 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> hddtemp is unmaintained upstream so we have to do a bit of patching. All
-> patches sourced from Debian/Fedora, except hddtemp-no-nls-support.patch
-> which came from OE-Classic.
->
-> Other improvements:
-> * Install initscript
-> * Make LICENSE more accurate
-> * Add LIC_FILES_CHKSUM
-> * inherit gettext to avoid error during configure
->
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+I did not see any responses to this patch.  I am also seeing this issue and=
+ was wondering if there was a reason this patch was not accepted?
 
-...
-> diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp_0.3-beta15-52.diff b/meta-oe/recipes-support/hddtemp/files/hddtemp_0.3-beta15-52.diff
-> new file mode 100644
-> index 0000000..393b5f4
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/hddtemp/files/hddtemp_0.3-beta15-52.diff
-> @@ -0,0 +1,7545 @@
-> +Megapatch from debian
-> +
-> +Original URL: http://ftp.debian.org/debian/pool/main/h/hddtemp/hddtemp_0.3-beta15-52.diff.gz
-> +
-> +Upstream-Status: unmaintained
-> +
-> +--- hddtemp-0.3-beta15.orig/README
-> ++++ hddtemp-0.3-beta15/README
+If it can be merged can it also be pulled into the denzil branch as well?
 
-Not need; we don't use README
-
-...
-> +--- hddtemp-0.3-beta15.orig/debian/rules
-> ++++ hddtemp-0.3-beta15/debian/rules
-...
-> +--- hddtemp-0.3-beta15.orig/debian/docs
-> ++++ hddtemp-0.3-beta15/debian/docs
-...
-> +--- hddtemp-0.3-beta15.orig/debian/postrm
-> ++++ hddtemp-0.3-beta15/debian/postrm
-...
-> +--- hddtemp-0.3-beta15.orig/debian/changelog
-> ++++ hddtemp-0.3-beta15/debian/changelog
-...
-> +--- hddtemp-0.3-beta15.orig/debian/templates
-> ++++ hddtemp-0.3-beta15/debian/templates
-...
-> +--- hddtemp-0.3-beta15.orig/debian/dirs
-> ++++ hddtemp-0.3-beta15/debian/dirs
-...
-> +--- hddtemp-0.3-beta15.orig/debian/copyright
-> ++++ hddtemp-0.3-beta15/debian/copyright
-...
-> +--- hddtemp-0.3-beta15.orig/debian/config
-> ++++ hddtemp-0.3-beta15/debian/config
-...
-> +--- hddtemp-0.3-beta15.orig/debian/postinst
-> ++++ hddtemp-0.3-beta15/debian/postinst
-...
-> +--- hddtemp-0.3-beta15.orig/debian/control
-> ++++ hddtemp-0.3-beta15/debian/control
-...
-> +--- hddtemp-0.3-beta15.orig/debian/compat
-> ++++ hddtemp-0.3-beta15/debian/compat
-> +@@ -0,0 +1 @@
-> ++5
-> +--- hddtemp-0.3-beta15.orig/debian/README.Debian
-> ++++ hddtemp-0.3-beta15/debian/README.Debian
-...
-> +--- hddtemp-0.3-beta15.orig/debian/po/*
-> ++++ hddtemp-0.3-beta15/debian/po/*
-
-Those are the ones I think is not worth keeping ... those are Debian
-specific (except the po update but doesn't look worth to me).
-
-In my opinion you could filterout all debian/ changes and copy the
-init file (as you use it). This will reduce a lot the change size.
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Samuel Stirtzel
+> Sent: Friday, August 24, 2012 5:56 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] libjpeg-turbo: Add RPROVIDES to
+> fix errors when rdepending on jpeg
+>=20
+> This fixes "ERROR: Multiple .bb files are due to be built which
+> each provide jpeg"
+>=20
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> ---
+>  meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> index dd81606..ec25874 100644
+> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> @@ -15,6 +15,7 @@ S =3D "${WORKDIR}/trunk"
+>=20
+>  # Drop-in replacement for jpeg
+>  PROVIDES =3D "jpeg"
+> +RPROVIDES_${PN} =3D "jpeg"
+>=20
+>  inherit autotools pkgconfig
+>=20
+> --
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-
+> devel
 
 
