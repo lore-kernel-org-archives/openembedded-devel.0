@@ -1,20 +1,24 @@
 Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TPXO7-0007sK-15
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TPXQ4-0007xn-R1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 13:38:43 +0200
+	Sat, 20 Oct 2012 13:40:45 +0200
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 20 Oct 2012 04:25:19 -0700
+	by orsmga101.jf.intel.com with ESMTP; 20 Oct 2012 04:27:22 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,621,1344236400"; d="scan'208";a="230035372"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.100])
-	by orsmga002.jf.intel.com with ESMTP; 20 Oct 2012 04:25:18 -0700
+X-IronPort-AV: E=Sophos;i="4.80,621,1344236400"; d="scan'208";a="230035664"
+Received: from unknown (HELO helios.localnet) ([10.252.122.100])
+	by orsmga002.jf.intel.com with ESMTP; 20 Oct 2012 04:27:21 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Oct 2012 12:25:15 +0100
-Message-Id: <1350732316-5310-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] initial collectd recipe
+Date: Sat, 20 Oct 2012 12:27:20 +0100
+Message-ID: <25488458.TNVJCdpXEJ@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <1350732316-5310-1-git-send-email-paul.eggleton@linux.intel.com>
+References: <1350732316-5310-1-git-send-email-paul.eggleton@linux.intel.com>
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] initial collectd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,53 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 11:38:43 -0000
+X-List-Received-Date: Sat, 20 Oct 2012 11:40:45 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Based on initial version by Koen Kooi <koen@beagleboard.org>
-Currently broken - attempts to rerun configure during do_compile.
----
- .../recipes-extended/collectd/collectd_5.1.0.bb    |   30 ++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd_5.1.0.bb
+On Saturday 20 October 2012 12:25:15 Paul Eggleton wrote:
+> Based on initial version by Koen Kooi <koen@beagleboard.org>
+> Currently broken - attempts to rerun configure during do_compile.
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.1.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.1.0.bb
-new file mode 100644
-index 0000000..e4008c5
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.1.0.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "collectd is a daemon which collects system performance statistics periodically and provides mechanisms to store the values in a variety of ways, for example in RRD files."
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+DEPENDS = "rrdtool curl mysql5 net-snmp libpcap libxml2 yajl libgcrypt libtool"
-+
-+SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "141570150b4608c0c567330f6f146e0f"
-+SRC_URI[sha256sum] = "521d4be7df5bc1124b7b9ea88227e95839a5f7c1b704a5bde0f60f058ec6eecb"
-+
-+inherit autotools pythonnative
-+
-+# Floatingpoint layout, architecture dependent 
-+# 'nothing', 'endianflip' or 'intswap'
-+FPLAYOUT ?= "--with-fp-layout=nothing"
-+
-+EXTRA_OECONF = " \
-+        ${FPLAYOUT} \
-+        --disable-perl \
-+        --with-libgcrypt=${STAGING_BINDIR_CROSS}/libgcrypt-config \
-+"
-+
-+# 'compile' from libtool is missing in sysroots (${datadir}/libtool/config/compile)
-+do_configure() {
-+        aclocal
-+	export GCRYPT_LDFLAGS=" "
-+	oe_runconf
-+}
-+
+This was sent in error (wrong branch and hit enter too soon) - please ignore.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
