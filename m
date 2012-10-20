@@ -1,33 +1,25 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TPXqS-0000hO-2Z
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TPYHB-0000yn-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 14:08:00 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so896825pbb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2012 04:54:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=gyy2/XpyjuU4dgWHf2/FnRc2rzYUoCioyUT3rLdCsB8=;
-	b=bUalAIq2WK185TaffH5qjgd6If54JR+ReI91ubIeprGNlu6ETcpYaMJ4T4QWqUBKe6
-	wS7Pq5MRitY5z7+fum5WxwudKwkbtOD4nRhWT6uAOEJOQTCb7IItdaYuC4X4t/rvW5t2
-	lnhKIUIpi8jrqoxJvrX72vNTi/wYqOnSGiBRFpJ3HA7NC3wk2/8yjzWAaSuiztv14KTU
-	dfaQKytBp2nl2uSaZtjmdjylAnQis3nwAQxIuNw1XqQVn39dhbxAdQGFEH/c1E61CE++
-	2e84C34r8bea0eHHwqkUWItsbe86Z59xDXjJ/O1lQRF4ZLDqJ99IaqpACufc1o6I7eSk
-	Eh4g==
-MIME-Version: 1.0
-Received: by 10.68.135.168 with SMTP id pt8mr15197178pbb.24.1350734077410;
-	Sat, 20 Oct 2012 04:54:37 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 04:54:37 -0700 (PDT)
-In-Reply-To: <1350665204-7352-1-git-send-email-paul.eggleton@linux.intel.com>
+	Sat, 20 Oct 2012 14:35:38 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 20 Oct 2012 05:22:13 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,621,1344236400"; d="scan'208";a="158389429"
+Received: from unknown (HELO helios.localnet) ([10.252.122.100])
+	by AZSMGA002.ch.intel.com with ESMTP; 20 Oct 2012 05:22:13 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Date: Sat, 20 Oct 2012 13:22:12 +0100
+Message-ID: <2065132.7T5jEHvO3o@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <CAP9ODKoZgqVc--zoe4vupRL3QfVtYMv-jFvazUqAXiYWoX1J=A@mail.gmail.com>
 References: <1350665204-7352-1-git-send-email-paul.eggleton@linux.intel.com>
-Date: Sat, 20 Oct 2012 08:54:37 -0300
-X-Google-Sender-Auth: 4N6rOXiUYtzhvS_lj3HtES5UBjM
-Message-ID: <CAP9ODKoZgqVc--zoe4vupRL3QfVtYMv-jFvazUqAXiYWoX1J=A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
+	<CAP9ODKoZgqVc--zoe4vupRL3QfVtYMv-jFvazUqAXiYWoX1J=A@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] hddtemp: add from OE-Classic and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,34 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 12:08:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 20 Oct 2012 12:35:38 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, Oct 19, 2012 at 1:46 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> hddtemp is unmaintained upstream so we have to do a bit of patching. All
-> patches sourced from Debian/Fedora, except hddtemp-no-nls-support.patch
-> which came from OE-Classic.
->
-> Other improvements:
-> * Install initscript
-> * Make LICENSE more accurate
-> * Add LIC_FILES_CHKSUM
-> * inherit gettext to avoid error during configure
->
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+On Saturday 20 October 2012 08:54:37 Otavio Salvador wrote:
+> I think some patches could be cleaned up. Specially the generated
+> files. Debian includes them in the patch and the packaging guide
+> advices to do it (there're reasons for it) but OE regenerated those so
+> I think it could be dropped.
 
-I think some patches could be cleaned up. Specially the generated
-files. Debian includes them in the patch and the packaging guide
-advices to do it (there're reasons for it) but OE regenerated those so
-I think it could be dropped.
+I'd really rather not touch the content of the patches - hddtemp upstream is 
+dead, we're not intending to maintain our own fork and it's easier if we can 
+just pull in any new patches as-is from Debian or Fedora (with source 
+information, which I did add to the top of each patch).
 
-Another thing, I remember to see this patch before on mailing list.
-Did you forget to mark it as v2?
+> Another thing, I remember to see this patch before on mailing list.
+> Did you forget to mark it as v2?
+
+No, all the patches I have sent to the list are the same. Sorry for the noise 
+but none of them are being picked up by patchwork for some reason and Khem was 
+trying to fix that (still doesn't seem to be fixed as I have noted).
+
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
