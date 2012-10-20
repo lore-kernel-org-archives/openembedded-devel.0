@@ -1,25 +1,35 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TPXhN-0008Tb-59
+	(envelope-from <otavio.salvador@gmail.com>) id 1TPXiv-0000Vx-I8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 13:58:37 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 20 Oct 2012 04:45:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,621,1344236400"; d="scan'208";a="230038292"
-Received: from unknown (HELO helios.localnet) ([10.252.122.100])
-	by orsmga002.jf.intel.com with ESMTP; 20 Oct 2012 04:45:13 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 20 Oct 2012 12:45:12 +0100
-Message-ID: <7074844.QapBLE5b39@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
-References: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
+	Sat, 20 Oct 2012 14:00:13 +0200
+Received: by mail-pb0-f47.google.com with SMTP id ro12so894954pbb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Oct 2012 04:46:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=qIXjhlBISEgFGvC8+fFY6O44EKCykEilu7PCjK41MOU=;
+	b=ntOtLTr8w0nPx4YNkelaLjGyAGKgbbiPhYHiZcndbTF1x6mhfxx6XkpulTKScJ8G9O
+	+FsKGx8jj/rPIQ2tBXeCe0MsmIeXazuvCX9rcjZBqK2/EwxDjn7qwe2SYFOu8rgov1pt
+	1lrCycSLke3fvZ3XxJkWisn1gALMh0q10Qsy1y6qajghovF1zlZaybca2Y3ScrqPqBqD
+	dA/HFgVCDBdi7/JaTRSvDEkvGOG7fmDt+UKgEGC75I9jZnWjg9Gtx7XXwPwsL1Odv4h9
+	+V2YzPY6aZJyb4rdINu+5E1lbMK7DBx4H7qIMmAxnOoPXdkBdVCdMemGRIgdOFanb8pr
+	Q9Ug==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: patchwork is up again
+Received: by 10.66.78.195 with SMTP id d3mr12064882pax.17.1350733610943; Sat,
+	20 Oct 2012 04:46:50 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 04:46:50 -0700 (PDT)
+In-Reply-To: <1350679091-5909-3-git-send-email-morgan.little@windriver.com>
+References: <1350679091-5909-1-git-send-email-morgan.little@windriver.com>
+	<1350679091-5909-3-git-send-email-morgan.little@windriver.com>
+Date: Sat, 20 Oct 2012 08:46:50 -0300
+X-Google-Sender-Auth: R6yLjae2RPjf3Mtr2rGo44N_u7k
+Message-ID: <CAP9ODKqJHYfQ6WBvqdQZWKzc1w0VV=PegyP2trTRVjmAdQ4DKQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][meta-networking][PATCH 2/3] ntp: Uprev from 4.2.6p3 to 4.2.6p5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 11:58:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 20 Oct 2012 12:00:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Friday 19 October 2012 16:37:19 Khem Raj wrote:
-> If you dont use patchwork dont bother but if you do then it had some
-> hiccups which now has been fixed hopefully. So if you dont see your
-> latest patch on patchwork resend it.
+On Fri, Oct 19, 2012 at 5:38 PM, Morgan Little
+<morgan.little@windriver.com> wrote:
+> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+> @@ -0,0 +1,47 @@
+> +require ntp.inc
+> +
+> +PR = "r0"
 
-I just sent my hddtemp patch for the third time and it still hasn't been 
-picked up by patchwork, so I'm afraid something is still not working properly.
+Don't use PR for r0.
 
-Cheers,
-Paul
+Noticed it when checking patch 3/3.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
