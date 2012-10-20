@@ -1,35 +1,25 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TPXfx-0008OR-Od
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TPXhN-0008Tb-59
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 13:57:10 +0200
-Received: by mail-pa0-f47.google.com with SMTP id fa11so837171pad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2012 04:43:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=Ex8lPhBQR8k6jfpa7dpx5OBxWlgbwOISnT1/dsTKhT0=;
-	b=FlW1bZAjTBd9Y1w/r/ZCG/bVf45xtSR+QEw0p+w6u1wdJ+Lxw0OreoASzdgX6zkZ4R
-	xyaEBDwCTd4wvPOxaQOSBSrwMyuaiVk7NLX1yA8T4eKwmLPOz2bl7jN0XNPaKEDoWlku
-	m9fA2puJa25FuMiC3RaGl+9ncxV6eDxJ3o6tR6/TzxPeRK7EJjVsSVc95QovkcHLcjgK
-	v5n0TcNk0KH8vHtjMw2rE7gMYlRkCZdIV/ksipOf3LMp8KK7tXGnv+S1c/1MiZ5kqqbe
-	AChS/Z1WC9d2s94f6oZewaq1YBMHpahgkVG3D9errWpzN/CR75M0r8J0xo4fOe8bbn/R
-	4qsw==
+	Sat, 20 Oct 2012 13:58:37 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 20 Oct 2012 04:45:14 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,621,1344236400"; d="scan'208";a="230038292"
+Received: from unknown (HELO helios.localnet) ([10.252.122.100])
+	by orsmga002.jf.intel.com with ESMTP; 20 Oct 2012 04:45:13 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 20 Oct 2012 12:45:12 +0100
+Message-ID: <7074844.QapBLE5b39@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
+References: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.66.87.133 with SMTP id ay5mr11867378pab.59.1350733427085; Sat,
-	20 Oct 2012 04:43:47 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 04:43:47 -0700 (PDT)
-In-Reply-To: <1350679091-5909-3-git-send-email-morgan.little@windriver.com>
-References: <1350679091-5909-1-git-send-email-morgan.little@windriver.com>
-	<1350679091-5909-3-git-send-email-morgan.little@windriver.com>
-Date: Sat, 20 Oct 2012 08:43:47 -0300
-X-Google-Sender-Auth: UJa_dsZjFml-8Z5NuXPkk3vRytk
-Message-ID: <CAP9ODKpiTyivS3ap-WP0qUtzuFiGZ2hHOZ41Y82tqUe9Qv4oxw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-networking][PATCH 2/3] ntp: Uprev from 4.2.6p3 to 4.2.6p5
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: patchwork is up again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +33,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 11:57:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 20 Oct 2012 11:58:37 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, Oct 19, 2012 at 5:38 PM, Morgan Little
-<morgan.little@windriver.com> wrote:
-> Signed-off-by: Morgan Little <morgan.little@windriver.com>
+On Friday 19 October 2012 16:37:19 Khem Raj wrote:
+> If you dont use patchwork dont bother but if you do then it had some
+> hiccups which now has been fixed hopefully. So if you dont see your
+> latest patch on patchwork resend it.
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+I just sent my hddtemp patch for the third time and it still hasn't been 
+picked up by patchwork, so I'm afraid something is still not working properly.
+
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
