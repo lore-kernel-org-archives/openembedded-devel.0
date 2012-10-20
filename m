@@ -1,34 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TPXe7-0008Ea-HF
+	(envelope-from <otavio.salvador@gmail.com>) id 1TPXfd-0008Jq-Ry
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Oct 2012 13:55:15 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so893794pbb.6
+	Sat, 20 Oct 2012 13:56:50 +0200
+Received: by mail-da0-f47.google.com with SMTP id s35so554364dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Oct 2012 04:41:52 -0700 (PDT)
+	Sat, 20 Oct 2012 04:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=s/VDIbpg5E4EY3nf13kuGp9RBx2pWMgoQ+ZcZGC9Wp4=;
-	b=VQOdZa5IWB/JwxPn+7kI/oCv869lfD5wnRtCZQc15kC3RJQaduy/+IpFVnTTIDmd4/
-	aX6/FNw15a+ckbLnp7SUpb2ml782t7bjomD0L5AI7RMC2LJtJ7tFml7B9P+fDQkZ1Kw9
-	NKLE2mJnwXbGE3laG1mIE/2PXb+z2K620qifJ8/GDwHOyY6pibEDB5Qemb2OWFmIdjfT
-	RZ3j7xOi9KQwlD4zeK6u63+yFEtGI//Fy2vTPgWgP03XcyuZsuqWhY+C7/tYu/I879YN
-	Jdiz7a3N8suC+yqZ+8xDIPZiXPK/XU/9lN4jQL/ZpjGQJHDdZmmEwW9RIcTlaLSifcpy
-	p+GQ==
+	bh=Ex8lPhBQR8k6jfpa7dpx5OBxWlgbwOISnT1/dsTKhT0=;
+	b=pHJIYE3/VMVqp64ibmsE+o3QuNbSioOFqkkT57n5lsF44kMj9rex6tVZTrzf0k5z9i
+	CD4DxiLz+PwI2qeNEOu0CYUrfSjw4PaDCuJBzddlgM9qLCo/jhoTxJN7NEjP2hcNZuO5
+	u28rYhQ+3WQ1WniNK6XVJiBC/7qKkqA8FMZixjKb3M0feMD4FnF5DaAAWOlRPfZLe5eE
+	mSKD1+LEs3FFPq7vGCp1Pf3a7KSwlcBnhjRMYyA4fduhJDfxykJGtr5eRWrjayOtsG2z
+	KG488u9LLhPIU1Xdjuj7t+GQTTMWH50dkrrx6Xf2guHe4HRix/s2EXA/OHc+gHT+B1qv
+	dlJQ==
 MIME-Version: 1.0
-Received: by 10.68.218.226 with SMTP id pj2mr14979561pbc.33.1350733312710;
-	Sat, 20 Oct 2012 04:41:52 -0700 (PDT)
+Received: by 10.66.75.73 with SMTP id a9mr11926511paw.43.1350733407163; Sat,
+	20 Oct 2012 04:43:27 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 04:41:52 -0700 (PDT)
-In-Reply-To: <1350732352-5383-1-git-send-email-paul.eggleton@linux.intel.com>
-References: <1350732352-5383-1-git-send-email-paul.eggleton@linux.intel.com>
-Date: Sat, 20 Oct 2012 08:41:52 -0300
-X-Google-Sender-Auth: 01cpSOa94V_miD40PQXoXUSPT20
-Message-ID: <CAP9ODKrExE8s8_X+8JD8spK3XY9n905TzZE4Ete9WGOtUNTjDw@mail.gmail.com>
+Received: by 10.68.40.201 with HTTP; Sat, 20 Oct 2012 04:43:27 -0700 (PDT)
+In-Reply-To: <1350679091-5909-2-git-send-email-morgan.little@windriver.com>
+References: <1350679091-5909-1-git-send-email-morgan.little@windriver.com>
+	<1350679091-5909-2-git-send-email-morgan.little@windriver.com>
+Date: Sat, 20 Oct 2012 08:43:27 -0300
+X-Google-Sender-Auth: tESxjajC_QryC2n87clQVbz9i6o
+Message-ID: <CAP9ODKpDGrupdSS=680GDomMOij0qzRNez3zV+rGst8XTgvvLw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] hddtemp: add from OE-Classic and update
+Subject: Re: [meta-oe][meta-networking][PATCH 1/3] ntp: Move from meta-oe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +43,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Oct 2012 11:55:15 -0000
+X-List-Received-Date: Sat, 20 Oct 2012 11:56:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Oct 20, 2012 at 8:25 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> hddtemp is unmaintained upstream so we have to do a bit of patching. All
-> patches sourced from Debian/Fedora, except hddtemp-no-nls-support.patch
-> which came from OE-Classic.
->
-> Other improvements:
-> * Install initscript
-> * Make LICENSE more accurate
-> * Add LIC_FILES_CHKSUM
-> * inherit gettext to avoid error during configure
->
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+On Fri, Oct 19, 2012 at 5:38 PM, Morgan Little
+<morgan.little@windriver.com> wrote:
+> Signed-off-by: Morgan Little <morgan.little@windriver.com>
 
 Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
 
 -- 
 Otavio Salvador                             O.S. Systems
