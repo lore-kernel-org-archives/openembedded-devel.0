@@ -1,39 +1,35 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1TQFxV-0006XA-Vs; Mon, 22 Oct 2012 13:14:14 +0200
-Received: by mail-ea0-f175.google.com with SMTP id c1so748249eaa.6
-	for <multiple recipients>; Mon, 22 Oct 2012 04:00:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=j590ylth8EfjPLP1wNDygkhVacd0ZK3mq1cQPJxrOUc=;
-	b=KUL7JUEmicRRjW5H1XJeYuXsl4hzoHcjOHgUMwWG1732mftfL3O5VcQcgblLGQqK2Y
-	BivIRHX57UqVPWhmEaM4EXUUqLUGh0tlsZk17hMOhYR4fIjfim+eO9q/wNW5v4eHn7X3
-	2dePl51+q8oKdVmZm+HJA+/jwkkU6Cj5Yx9YmfTUUvYQ0Kk/wNcaN/woxANhYSTIf2vv
-	CdN+OnY0h2hS2TSoP0eOryVg02zahtKvIrh7AIy13tEUoHQkocfF8uvpCwFL1mNWOpBT
-	OhJcY5v3A+RSICnhZZErPZC2o8UrfwLiKchePBLz0hY0nIdL5ScSbimCes2v4yGyOx3G
-	tXkw==
-Received: by 10.14.203.69 with SMTP id e45mr11421842eeo.38.1350903649120;
-	Mon, 22 Oct 2012 04:00:49 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z43sm15421969een.16.2012.10.22.04.00.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Oct 2012 04:00:48 -0700 (PDT)
-Date: Mon, 22 Oct 2012 13:01:03 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Message-ID: <20121022110103.GE3269@jama.jama.net>
-References: <20121019163541.436A0103AB@opal>
-	<20121022083441.GA3269@jama.jama.net>
-	<1350902949.2520.72.camel@ted>
+	(envelope-from <chase.maupin@ti.com>) id 1TQHsS-00015x-Q7
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Oct 2012 15:17:09 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9MD3h1a008347
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2012 08:03:43 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9MD3hbU004265
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2012 08:03:43 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Mon, 22 Oct 2012 08:03:42 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2] libjpeg-turbo: Add RPROVIDES to fix
+	errors	when rdepending on jpeg
+Thread-Index: AQHNsDvwWAFGqNetREKlcx103fY9PZfFSn6Q
+Date: Mon, 22 Oct 2012 13:03:41 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159275020@DLEE12.ent.ti.com>
+References: <1350899940-2274-1-git-send-email-s.stirtzel@googlemail.com>
+In-Reply-To: <1350899940-2274-1-git-send-email-s.stirtzel@googlemail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-In-Reply-To: <1350902949.2520.72.camel@ted>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [oe-commits] Robert Yang : perl: fix dependecies
+Subject: Re: [meta-oe][PATCH v2] libjpeg-turbo: Add RPROVIDES to fix errors	when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,83 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 11:14:14 -0000
-X-Groupsio-MsgNum: 41201
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gMR3gsNFwZpnI/Ts"
-Content-Disposition: inline
-
---gMR3gsNFwZpnI/Ts
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Oct 2012 13:17:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 22, 2012 at 11:49:09AM +0100, Richard Purdie wrote:
-> On Mon, 2012-10-22 at 10:34 +0200, Martin Jansa wrote:
-> > >  # 5.10.1 has Module::Build built-in
-> > >  PROVIDES +=3D "libmodule-build-perl"
-> > > @@ -243,7 +243,13 @@ perl_package_preprocess () {
-> > > =20
-> > >  PACKAGES =3D "perl-dbg perl perl-misc perl-dev perl-pod perl-doc per=
-l-lib \
-> > >              perl-module-cpan perl-module-cpanplus perl-module-unicor=
-e"
-> > > -FILES_${PN} =3D "${bindir}/perl ${bindir}/perl${PV}"
-> > > +FILES_${PN} =3D "${bindir}/perl ${bindir}/perl${PV} \
-> > > +               ${libdir}/perl/${PV}/Config.pm \
-> > > +               ${libdir}/perl/${PV}/strict.pm \
-> > > +               ${libdir}/perl/${PV}/warnings.pm \
-> > > +               ${libdir}/perl/${PV}/warnings \
-> > > +               ${libdir}/perl/${PV}/vars.pm \
-> > > +              "
-> >=20
-> > I think this breaks at least automake, tiobench and libtimedate-perl
-> >=20
-> > OE @ ~/openembedded-core $ git grep perl-module-strict
-> > meta/recipes-devtools/automake/automake_1.12.3.bb:    perl-module-stric=
-t \
-> > meta/recipes-extended/perl/libtimedate-perl_1.20.bb:RDEPENDS_${PN} +=3D=
- "perl-module-carp perl-module-exporter perl-module-strict perl-module-time=
--local"
-> > OE @ ~/meta-openembedded $ git grep perl-module-strict
-> > meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb:    perl-module-st=
-rict \
-> > OE @ ~/openembedded-core $ git grep perl-module-vars
-> > meta/recipes-devtools/automake/automake_1.12.3.bb:    perl-module-vars "
-> >=20
-> > perl-module-strict and perl-module-vars are not created now, probably e=
-mpty.
-> >=20
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Samuel Stirtzel
+> Sent: Monday, October 22, 2012 4:59 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH v2] libjpeg-turbo: Add RPROVIDES to
+> fix errors when rdepending on jpeg
 >=20
-> It does, the autobuilder also noticed this and I pushed in a fix this
-> morning:
+> This fixes "ERROR: Multiple .bb files are due to be built which
+> each provide jpeg"
 >=20
-> http://git.yoctoproject.org/cgit.cgi/poky/commit/?id=3D072a6d352f55bbe481=
-b04db02aa6d9cde7d90057
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> ---
+>  meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> index 2aefe1f..303bbae 100644
+> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> @@ -15,6 +15,9 @@ S =3D "${WORKDIR}/trunk"
+>=20
+>  # Drop-in replacement for jpeg
+>  PROVIDES =3D "jpeg"
+> +RPROVIDES_${PN} +=3D "jpeg"
+> +RREPLACES_${PN} +=3D "jpeg"
+> +RCONFLICTS_${PN} +=3D "jpeg"
 
-What about using something like world-image target? I'm using something
-like that to test that all recipes in my feed are not only buildable,
-but also able to install in do_rootfs. Only problem with this could be
-that more packages need to be excluded because some recipes are can be
-built together, but not installed in same images (packages with RCONFLICTS).
+Does this need a PR bump?  Aside from that this has my ack.
 
-It should help find those issues on autobuilder.
+>=20
+>  inherit autotools pkgconfig
+>=20
+> --
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-
+> devel
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---gMR3gsNFwZpnI/Ts
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCFJ24ACgkQN1Ujt2V2gBxU+wCcCIGszSO0kOtvLwz6fWJDvmpU
-IZQAn2fBHgn0kb8vRH1Lnnxb2UqIqZmU
-=v/Rd
------END PGP SIGNATURE-----
-
---gMR3gsNFwZpnI/Ts--
