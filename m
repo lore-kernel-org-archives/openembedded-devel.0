@@ -1,24 +1,35 @@
-Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philb@gnu.org>)
-	id 1TQNsc-0006z7-HV; Mon, 22 Oct 2012 21:41:43 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.6])
-	by hetzner.pbcl.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <philb@gnu.org>)
-	id 1TQNfc-00013K-TI; Mon, 22 Oct 2012 21:28:16 +0200
-Message-ID: <1350933937.6763.10.camel@x121e.pbcl.net>
-From: Phil Blundell <philb@gnu.org>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Date: Mon, 22 Oct 2012 20:25:37 +0100
-In-Reply-To: <CAP9ODKrMoEJMXWNa0rx0KyQjx3hJhFzPOJCH+eDYqiDm3saMxg@mail.gmail.com>
-References: <CAJTo0LboPRF7Oxnwh8QS6b6ReS-1-P+=r04L54QRptPnHfV5oQ@mail.gmail.com>
-	<CAP9ODKrMoEJMXWNa0rx0KyQjx3hJhFzPOJCH+eDYqiDm3saMxg@mail.gmail.com>
-X-Mailer: Evolution 3.4.3-1 
-Mime-Version: 1.0
-Cc: OE-core <openembedded-core@lists.openembedded.org>,
-	OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] OpenGL packaging/staging policy
+	(envelope-from <chase.maupin@ti.com>) id 1TQO1W-0007HL-Nd
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Oct 2012 21:50:55 +0200
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9MJbS4A028691
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2012 14:37:28 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9MJbS4T003851
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Oct 2012 14:37:28 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
+	14.01.0323.003; Mon, 22 Oct 2012 14:37:28 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to fix
+	errors	when rdepending on jpeg
+Thread-Index: AQHNsGfrQWcoMl9MbUSzaw7gm073AZfFuGHA
+Date: Mon, 22 Oct 2012 19:37:26 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159276891@DLEE12.ent.ti.com>
+References: <1350918808-23478-1-git-send-email-s.stirtzel@googlemail.com>
+In-Reply-To: <1350918808-23478-1-git-send-email-s.stirtzel@googlemail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to fix errors	when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 19:41:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Oct 2012 19:50:55 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2012-10-22 at 15:33 -0200, Otavio Salvador wrote:
-> On Mon, Oct 22, 2012 at 2:35 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> ...
-> > Rule 1.  Unambiguous package naming
-> >
-> > Debian-style renaming and multiple providers of the same API doesn't
-> > work as you'll end up with multiple packages in the same feed called
-> > libgl1, so all GL packages should be named in the style of libgl-foo,
-> > where foo is the source of the package.  I've got a branch where this
-> > is implemented for Mesa as a proof of concept[1], and the Python
-> > fragment could easily be moved into a class and re-used easily.
-> 
-> It would be nice to also have a common SoC arch so the binaries are
-> clear not allarch but not rebuild for every board.
-> 
-> For example in iMX53 and iMX51 case they share same GL package set and
-> we could have a armv7-imx5 or so common to all them so we'd not
-> rebuild it for every board.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Samuel Stirtzel
+> Sent: Monday, October 22, 2012 10:13 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to
+> fix errors when rdepending on jpeg
+>=20
+> This fixes "ERROR: Multiple .bb files are due to be built which
+> each provide jpeg"
+>=20
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
 
-Surely in the case Ross describes, the "imx5" bit would be encoded into
-the package name (i.e. they'd be libgl-imx5) and then PACKAGE_ARCH can
-just be used as normal to represent the ISA and/or ABI.  I can't think
-of any situation where encoding the GPU type into PACKAGE_ARCH would be
-especially useful.
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-p.
-
-
+> ---
+>  meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> index 2aefe1f..d87743b 100644
+> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D
+> "file://cdjpeg.h;endline=3D12;md5=3D78fa8dbac547bb5b2a0e6457a6cfe
+>=20
+> file://djpeg.c;endline=3D13;md5=3De85613b52f2906c5dfc0e21ec902cb33 \
+>  "
+>  PV =3D "8d+1.2.1"
+> -PR =3D "r1"
+> +PR =3D "r2"
+>  SRCREV =3D "837"
+>  SRC_URI =3D "svn://libjpeg-
+> turbo.svn.sourceforge.net/svnroot/libjpeg-
+> turbo;protocol=3Dhttps;module=3Dtrunk"
+>=20
+> @@ -15,6 +15,9 @@ S =3D "${WORKDIR}/trunk"
+>=20
+>  # Drop-in replacement for jpeg
+>  PROVIDES =3D "jpeg"
+> +RPROVIDES_${PN} +=3D "jpeg"
+> +RREPLACES_${PN} +=3D "jpeg"
+> +RCONFLICTS_${PN} +=3D "jpeg"
+>=20
+>  inherit autotools pkgconfig
+>=20
+> --
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-
+> devel
 
 
