@@ -1,37 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TQEij-0004FR-2z
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TQEz2-00050T-F6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2012 11:54:53 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so857941eei.6
+	Mon, 22 Oct 2012 12:11:44 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so3218059ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2012 02:41:28 -0700 (PDT)
+	Mon, 22 Oct 2012 02:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KWC71i9PU+mLX/D/osk1RFgqBR1Ml/1X2XW+ErmdIlo=;
-	b=V+eOLswQLTtAeCcsFSPB5m3hKGvsrs13gd58PzHejU3UadNHV3PLkawuFlHsT9pTEb
-	iQUlg0GoMzfHhKKZcbYznPH/Iwqx9Iqbg06vZe0U6rLztjVyF5g0+IQAzZTnhvatuz2H
-	i06MGgDiqTnEDE6ylhcDJuVk8toAc3RPAbtW6Ed16DdM7pAAoB3+gpbwJikCg6b7Nkj/
-	9h8dwsv6UxOHUhgc/lruhD/YalWcqoWuWYodhr9D1pTA/TcAsVUkEhi1Nk8QpXlAxN5l
-	ecjQ2zN42CN/zux7gAY64R3DgmptAjX1H6UHhtHD9uitYq5Bj7iEG1BuKn0U30zRwf+J
-	z6Yg==
-Received: by 10.14.203.65 with SMTP id e41mr11245472eeo.34.1350898888798;
-	Mon, 22 Oct 2012 02:41:28 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id t7sm15090679eel.14.2012.10.22.02.41.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Oct 2012 02:41:27 -0700 (PDT)
-Date: Mon, 22 Oct 2012 11:41:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121022094143.GC3269@jama.jama.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=aZK6Yemq4ZwspVGZwX6wJ/iksCcpo6go28IHjw2OCZw=;
+	b=AzRu/0nFbineUmBXaCU3Z0Oz1oMQaRyt9P+b5QNPk22OfCtZUrZI3XSlFBhVFIfJJW
+	VCgP6xcM7HuFszmfD6NlhN5jPKQ6bdUh5YtDg0w2LqPoFnmJRBKDPg5XZA80aBXRy2Zn
+	WQPkAX9L+dbKR+4FhuF7SJu4d9HHLuOxTKQPKbmQ/rs4AvkeTpGGezIvzyvXmi1ntWU4
+	OjT/6zYa0iOTOWcITQVKGbPbdrxLfegvlvDkXkjtN4xpKLBYaCXKtBR0CSRp+AFX8pja
+	nU1dvAP0K4Yeq3mn3lD2Ztz8H+9u6gI5prnHSY+Q892sBja3ZySd0OPc+w0HTJ+GYfVE
+	pIOg==
+MIME-Version: 1.0
+Received: by 10.50.214.10 with SMTP id nw10mr8619230igc.31.1350899899429; Mon,
+	22 Oct 2012 02:58:19 -0700 (PDT)
+Received: by 10.64.20.113 with HTTP; Mon, 22 Oct 2012 02:58:19 -0700 (PDT)
+In-Reply-To: <20121022094143.GC3269@jama.jama.net>
 References: <20121019164922.1E2EC103B4@opal>
 	<CALbNGRQkhneW4PXcmXTObg_wkbtjBm3AEWrSr2nwT7MB+otbtg@mail.gmail.com>
 	<CALbNGRTcv1gpbYSc5wCwYi5fwyZ2taWzyTwN3dumUvyTQTagOw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRTcv1gpbYSc5wCwYi5fwyZ2taWzyTwN3dumUvyTQTagOw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20121022094143.GC3269@jama.jama.net>
+Date: Mon, 22 Oct 2012 11:58:19 +0200
+Message-ID: <CALbNGRQy2TsP8-=6W7rGv8s1wW53h5e7RjNjhZSSmRQ35y1LeA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] Richard Purdie : autotools: Use STAGING_DATADIR_NATIVE for config.rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,95 +43,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 09:54:53 -0000
-X-Groupsio-MsgNum: 41197
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="R+My9LyyhiUvIEro"
-Content-Disposition: inline
-
---R+My9LyyhiUvIEro
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Oct 2012 10:11:44 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 22, 2012 at 11:31:57AM +0200, Andreas M=FCller wrote:
-> On Mon, Oct 22, 2012 at 11:29 AM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> > On Fri, Oct 19, 2012 at 6:49 PM,  <git@git.openembedded.org> wrote:
-> >> Module: openembedded-core.git
-> >> Branch: master-next
-> >> Commit: 0ea24447842e6b76ccfee0881f557e1a82e89ef1
-> >> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcom=
-mit;h=3D0ea24447842e6b76ccfee0881f557e1a82e89ef1
-> >>
-> >> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >> Date:   Thu Oct 18 15:58:25 2012 +0000
-> >>
-> >> autotools: Use STAGING_DATADIR_NATIVE for config.rpath
-> >>
-> >> For builds that don't use gettext, config.rpath may not exist in the t=
-arget
-> >> datadir. This change uses the native directory where it will always
-> >> be present due to gettext-minimal-native (which allows us to autoreconf
-> >> recipes using gettext even if we don't have gettext built).
-> >>
-> >> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >>
-> > I think this causes here for shadow-native:
-> >
-> > ERROR: Function failed: do_configure (see
-> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4.=
-3-r8/temp/log.do_configure.19593
-> > for further information)
-> > ERROR: Logfile of failure stored in:
-> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4.=
-3-r8/temp/log.do_configure.19593
-> > Log data follows:
-> > | DEBUG: Executing python function sysroot_cleansstate
-> > | DEBUG: Python function sysroot_cleansstate finished
-> > | DEBUG: Executing shell function autotools_preconfigure
-> > | DEBUG: Shell function autotools_preconfigure finished
-> > | DEBUG: Executing shell function do_configure
-> > | automake (GNU automake) 1.12.3
-> > | Copyright (C) 2012 Free Software Foundation, Inc.
-> > | License GPLv2+: GNU GPL version 2 or later
-> > <http://gnu.org/licenses/gpl-2.0.html>
-> > | This is free software: you are free to change and redistribute it.
-> > | There is NO WARRANTY, to the extent permitted by law.
-> > |
-> > | Written by Tom Tromey <tromey@redhat.com>
-> > |        and Alexandre Duret-Lutz <adl@gnu.org>.
-> > | AUTOV is 1.12
-> > | cp: cannot stat
-> > `/home/andreas/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/share/gette=
-xt/config.rpath':
-> > No such file or directory
-> > | ERROR: Function failed: do_configure (see
-> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4.=
-3-r8/temp/log.do_configure.19593
-> > for further information)
-> >
-> > Maybe some PR bump here and there required?
-> >
-> After forcing rebuild gettext-minimal-native shadow-native builds fine.
+On Mon, Oct 22, 2012 at 11:41 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Mon, Oct 22, 2012 at 11:31:57AM +0200, Andreas M=C3=BCller wrote:
+>> On Mon, Oct 22, 2012 at 11:29 AM, Andreas M=C3=BCller
+>> <schnitzeltony@googlemail.com> wrote:
+>> > On Fri, Oct 19, 2012 at 6:49 PM,  <git@git.openembedded.org> wrote:
+>> >> Module: openembedded-core.git
+>> >> Branch: master-next
+>> >> Commit: 0ea24447842e6b76ccfee0881f557e1a82e89ef1
+>> >> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dco=
+mmit;h=3D0ea24447842e6b76ccfee0881f557e1a82e89ef1
+>> >>
+>> >> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+>> >> Date:   Thu Oct 18 15:58:25 2012 +0000
+>> >>
+>> >> autotools: Use STAGING_DATADIR_NATIVE for config.rpath
+>> >>
+>> >> For builds that don't use gettext, config.rpath may not exist in the =
+target
+>> >> datadir. This change uses the native directory where it will always
+>> >> be present due to gettext-minimal-native (which allows us to autoreco=
+nf
+>> >> recipes using gettext even if we don't have gettext built).
+>> >>
+>> >> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>> >>
+>> > I think this causes here for shadow-native:
+>> >
+>> > ERROR: Function failed: do_configure (see
+>> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4=
+.3-r8/temp/log.do_configure.19593
+>> > for further information)
+>> > ERROR: Logfile of failure stored in:
+>> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4=
+.3-r8/temp/log.do_configure.19593
+>> > Log data follows:
+>> > | DEBUG: Executing python function sysroot_cleansstate
+>> > | DEBUG: Python function sysroot_cleansstate finished
+>> > | DEBUG: Executing shell function autotools_preconfigure
+>> > | DEBUG: Shell function autotools_preconfigure finished
+>> > | DEBUG: Executing shell function do_configure
+>> > | automake (GNU automake) 1.12.3
+>> > | Copyright (C) 2012 Free Software Foundation, Inc.
+>> > | License GPLv2+: GNU GPL version 2 or later
+>> > <http://gnu.org/licenses/gpl-2.0.html>
+>> > | This is free software: you are free to change and redistribute it.
+>> > | There is NO WARRANTY, to the extent permitted by law.
+>> > |
+>> > | Written by Tom Tromey <tromey@redhat.com>
+>> > |        and Alexandre Duret-Lutz <adl@gnu.org>.
+>> > | AUTOV is 1.12
+>> > | cp: cannot stat
+>> > `/home/andreas/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/share/gett=
+ext/config.rpath':
+>> > No such file or directory
+>> > | ERROR: Function failed: do_configure (see
+>> > /home/andreas/tmp/oe-core-eglibc/work/x86_64-linux/shadow-native-4.1.4=
+.3-r8/temp/log.do_configure.19593
+>> > for further information)
+>> >
+>> > Maybe some PR bump here and there required?
+>> >
+>> After forcing rebuild gettext-minimal-native shadow-native builds fine.
+>
+> yes, see
+> http://lists.linuxtogo.org/pipermail/openembedded-core/2012-October/03111=
+9.html
+>
+Thanks for enlightenment
 
-yes, see
-http://lists.linuxtogo.org/pipermail/openembedded-core/2012-October/031119.=
-html
+another victim was [1]. I love undiscussed and breaking patches at
+very central classes before weekend. Long live the community :)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas
 
---R+My9LyyhiUvIEro
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+[1] http://patches.openembedded.org/patch/38379/
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlCFFNcACgkQN1Ujt2V2gBxi6wCfftgrBrXCSNL6lugJrPnFvJSh
-9KYAnju7vYXNYauhoI5PHUB2b4VUTEYE
-=fqJJ
------END PGP SIGNATURE-----
-
---R+My9LyyhiUvIEro--
