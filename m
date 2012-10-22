@@ -1,34 +1,37 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TQL2Y-0008JI-9N
+	(envelope-from <ross.burton@intel.com>) id 1TQLHo-0003ML-11
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2012 18:39:46 +0200
-Received: by mail-ia0-f175.google.com with SMTP id b35so2160790iac.6
+	Mon, 22 Oct 2012 18:55:32 +0200
+Received: from mail-ie0-f197.google.com ([209.85.223.197])
+	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 22 Oct 2012 09:40:53 -0700
+Received: by mail-ie0-f197.google.com with SMTP id 9so7972278iec.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2012 09:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=vlGLGZqRSOXQD2Owtf6q4XA5yRt3PSdtA67yUsXZNjQ=;
-	b=dBS+4ANIUE+9PCRGcnNaOFJYXzlTmRUP69rSPlWPUQiv0zozPNvCBVyaInZ7E68gFB
-	zU4Z7K4XjyRbgmBuKLtk87eKuqh7SX9H5Yof4nMVgSmjWBQVdJyGFq1gfrrkefJwXKYP
-	P1Va9UL+GFoBgax7cG1CDGpPMujmwVQ7CoYfax60tqwgNANVPz8a8k3Bl6uBhSLaRnhS
-	mzmq3zMOmv7ASoer+q1Q0oXOMAAfJloA/2YujixsAddDuLJbIwFbsjI0GDIldnxJuD5C
-	8ZOXAIxbTI7A2cp0R8jRoXt3ha7SVG4t86BWRBOjP88oha27DwIGKEwKXNb77Mz7UbAS
-	ScLw==
-Received: by 10.50.16.172 with SMTP id h12mr9851710igd.41.1350923180879; Mon,
-	22 Oct 2012 09:26:20 -0700 (PDT)
+	Mon, 22 Oct 2012 09:40:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:x-gm-message-state;
+	bh=pdHbpJ86UzxhvPiVyvwSIdHxAloMxsnQ+RV+r3pDxtM=;
+	b=S3wagSliKFu9ivwRxSOcTvO4ib0A0oEd+7wtgOULJJ5XQ0ePs7BOp3efcPHw85OYis
+	Ta1TrFAAW0zSTIjz4DiBxLRuKe9wHemUgJ0lg80XBWW3TCEwn8AjI3FsXKE6J/AhJ8B8
+	L+10p021OaNm22lwz6BqL15ywuRbswlVh/FE16qjfZh1//QmOdIRtfspKn6g9aTxTrdu
+	TbztznPxwjBVemW18kDECG6R1VuHlbl3eCNJHO23rArlbhuGsoirq2UzdWr0cG5CBOoL
+	427taG9Szj3pbGNewqXi0W4e9ZWSeqYbH6ZTzNfUqK6dv/4PovaFJIGVQondgzEOauCg
+	/lWw==
+Received: by 10.182.228.69 with SMTP id sg5mr2276883obc.2.1350923747814;
+	Mon, 22 Oct 2012 09:35:47 -0700 (PDT)
+Received: by 10.182.228.69 with SMTP id sg5mr2276876obc.2.1350923747734; Mon,
+	22 Oct 2012 09:35:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.64.103.104 with HTTP; Mon, 22 Oct 2012 09:25:45 -0700 (PDT)
-In-Reply-To: <7074844.QapBLE5b39@helios>
-References: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
-	<7074844.QapBLE5b39@helios>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Oct 2012 09:25:45 -0700
-Message-ID: <CAMKF1spmOOZXgWTSigq7PKDPYwi7j-273cwEM6ryFM0P1cHe+A@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: patchwork is up again
+Received: by 10.182.46.70 with HTTP; Mon, 22 Oct 2012 09:35:27 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 22 Oct 2012 17:35:27 +0100
+Message-ID: <CAJTo0LboPRF7Oxnwh8QS6b6ReS-1-P+=r04L54QRptPnHfV5oQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQkpkP9T6IqtsfmARp3leAYzjYw8e0vLgOmEYOfMunYUHalIORZQu5PIOiSSe00lBr7ohp6EFJdwZ2NBNjQz/oRNTnDnwxWBnxniYM9jpYEXznhG1F8EPKZ0jFmE5zFH31zFyJnurgYNIp5mgkIDxw198ZZPZkoxmiZdHeJcJlHxWVbs17I2bESNex7yifldUzs/Ri5j
+Subject: [RFC] OpenGL packaging/staging policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 16:39:46 -0000
+X-List-Received-Date: Mon, 22 Oct 2012 16:55:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Oct 20, 2012 at 4:45 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Friday 19 October 2012 16:37:19 Khem Raj wrote:
->> If you dont use patchwork dont bother but if you do then it had some
->> hiccups which now has been fixed hopefully. So if you dont see your
->> latest patch on patchwork resend it.
->
-> I just sent my hddtemp patch for the third time and it still hasn't been
-> picked up by patchwork, so I'm afraid something is still not working properly.
+Hi,
+
+Now that we've almost got 1.3 out of the door we can go back to
+breaking everything. Hooray!  Let's try to (un)break OpenGL again.
+
+First, I should say that I'm not looking at this from an GenX/Intel
+specific perspective where Mesa is all you need.  meta-intel ships two
+different binary GL drivers (cdt-pvr for Cedar Trail, EMGD for
+everything else Atom that doesn't have i945) so I'm perfectly aware of
+the problems.
+
+For example, Cedar Trail's (SGX545-based) GL stack comprises of GLESv1
+GLESv2 and EGL library blobs, and a DRI driver blob.  This DRI driver
+can be used by Mesa's libGL.  This is actually a more complex problem
+than Beagle has where it just doesn't do GL.
+
+This is my attempt at a simple solution that doesn't involve
+complicated packaging tricks.
+
+Rule 1.  Unambiguous package naming
+
+Debian-style renaming and multiple providers of the same API doesn't
+work as you'll end up with multiple packages in the same feed called
+libgl1, so all GL packages should be named in the style of libgl-foo,
+where foo is the source of the package.  I've got a branch where this
+is implemented for Mesa as a proof of concept[1], and the Python
+fragment could easily be moved into a class and re-used easily.
+
+Rule 2. No dependencies on specific GL implementations
+
+Packages currently depend on the exact GL that they were built with,
+although the GL packages are swappable.  Not very interesting for
+systems where there's only one provider, but still a valid problem for
+systems with swappable hardware or alternative GL stacks.  All linkage
+to the GL stack should be intercepted and replaced by something like
+"virtual/libgl | libgl-mesa".
+
+This means changing the shlib dependency detection code to support
+per-library overrides, there's plenty of prior art in existing
+distributions to help here.
+
+Rule 3. Only Mesa stages, nothing else
+
+Whilst there are multiple GL implementations that offer various
+subsets of GL, they are all effectively interchangeable.  It's not a
+massive concern what exact GL is present when building because they've
+all got the same API.  We can take advantage of this and remove the
+problems caused by multiple GL implementations staging by only putting
+Mesa into the sysroot.  Any other GL implementation should explicitly
+stop staging itself to avoid sysroot tainting.  This can be
+implemented by making Mesa build all APIs on all platforms (which
+isn't a problem when it comes to image building or feeds, thanks to
+rule 1), and removing the virtual/libgl PROVIDES from the other GL
+implementations.
+
+For systems which don't use Mesa at all (for example, BeagleBoard)
+then this potentially means that Mesa will be built when it shouldn't.
+ GLX support in the X server may already be pulling it in (I made this
+a packageconfig in 1.3 so distros can turn it off), but in any case I
+think this is an acceptable compromise - Mesa isn't slow to build in
+the scheme of things, and per Rule 2 this is purely in sysroot and not
+in the images.
 
 
-we have always had issue with large patches. I dont know exact size but
-pw did not parse large emails well. I wonder if your patch is large enough
-to cross the bar.
+tl;dr: all packages built against a constant GL, all GL
+implementations interchangable, no package conflicts in the feeds.
 
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
+Any comments before I get my hands dirty with the next incomplete task
+(shlib dependency generation)?
+
+Ross
+
+[1] http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=ross/mesa&id=784fa1372bb38dbc82e53a49b757c3c02593f2b8
 
 
