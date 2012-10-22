@@ -1,35 +1,34 @@
-Received: from mail-la0-f47.google.com ([209.85.215.47])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rangers.av@gmail.com>) id 1TQKsx-0004qm-RB
+	(envelope-from <raj.khem@gmail.com>) id 1TQL2Y-0008JI-9N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2012 18:29:51 +0200
-Received: by mail-la0-f47.google.com with SMTP id h5so1613212lam.6
+	Mon, 22 Oct 2012 18:39:46 +0200
+Received: by mail-ia0-f175.google.com with SMTP id b35so2160790iac.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2012 09:16:27 -0700 (PDT)
+	Mon, 22 Oct 2012 09:26:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=t4XUmyftz8Yq1PJurEkwMo5RBxzBNcnkQIXni905cD8=;
-	b=rLOZcHVgeyrEL/zlnsKwEzS1M+n9ilHt5/pjInMzKJCTTBP5fibqV/GNI5cXeO4jWw
-	MQUQTWFCk0VSu3IRtxBkH1NMfU5OAJcLGK89nT3dssCUlBlx4EbsB6E2ujlSdkhGOiSx
-	tPe0u47vVMMvyMkDKGmynNWtWhldLToRnkOc98etuG7JIQ1/mKjwmbl9mpDs7YrZKvJ4
-	fjPLLqNlJdrCBKIaIrxW8VAEf8n9JunpfJOIwB0H4sle0ZIw/fAKgocxIWpdxa1ZCaDR
-	zjSqrI730RePqm1py2UkGuOCtD2lyt3MYvHJNEAvGduxoHBIPnKNeUTA7UeHHo2Vz7cK
-	Awmw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=vlGLGZqRSOXQD2Owtf6q4XA5yRt3PSdtA67yUsXZNjQ=;
+	b=dBS+4ANIUE+9PCRGcnNaOFJYXzlTmRUP69rSPlWPUQiv0zozPNvCBVyaInZ7E68gFB
+	zU4Z7K4XjyRbgmBuKLtk87eKuqh7SX9H5Yof4nMVgSmjWBQVdJyGFq1gfrrkefJwXKYP
+	P1Va9UL+GFoBgax7cG1CDGpPMujmwVQ7CoYfax60tqwgNANVPz8a8k3Bl6uBhSLaRnhS
+	mzmq3zMOmv7ASoer+q1Q0oXOMAAfJloA/2YujixsAddDuLJbIwFbsjI0GDIldnxJuD5C
+	8ZOXAIxbTI7A2cp0R8jRoXt3ha7SVG4t86BWRBOjP88oha27DwIGKEwKXNb77Mz7UbAS
+	ScLw==
+Received: by 10.50.16.172 with SMTP id h12mr9851710igd.41.1350923180879; Mon,
+	22 Oct 2012 09:26:20 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.152.104.115 with SMTP id gd19mr8799362lab.13.1350922586938;
-	Mon, 22 Oct 2012 09:16:26 -0700 (PDT)
-Received: by 10.112.28.8 with HTTP; Mon, 22 Oct 2012 09:16:26 -0700 (PDT)
-Received: by 10.112.28.8 with HTTP; Mon, 22 Oct 2012 09:16:26 -0700 (PDT)
-In-Reply-To: <CAGiJk9cJq2uQXBw6GtXg8gc=MSdHp7Y_ZVgRP6FiE8gLsLiN+g@mail.gmail.com>
-References: <1350918808-23478-1-git-send-email-s.stirtzel@googlemail.com>
-	<CAMQ5J2bVMpK6+uX4Rbi0spKLduy5of4JX2esXZbOE5k_muvATg@mail.gmail.com>
-	<CAGiJk9cJq2uQXBw6GtXg8gc=MSdHp7Y_ZVgRP6FiE8gLsLiN+g@mail.gmail.com>
-Date: Mon, 22 Oct 2012 21:46:26 +0530
-Message-ID: <CAMQ5J2ZsmYhjG-3Ket0hft1xL7uS2qomyxywQAaZMidoC+Ps5A@mail.gmail.com>
-From: RaNgErS <rangers.av@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg
+Received: by 10.64.103.104 with HTTP; Mon, 22 Oct 2012 09:25:45 -0700 (PDT)
+In-Reply-To: <7074844.QapBLE5b39@helios>
+References: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
+	<7074844.QapBLE5b39@helios>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 22 Oct 2012 09:25:45 -0700
+Message-ID: <CAMKF1spmOOZXgWTSigq7PKDPYwi7j-273cwEM6ryFM0P1cHe+A@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: patchwork is up again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 16:29:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Oct 2012 16:39:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
-I am already sent a mail about this before 3 weeks to admin. And it is not
-posted .
+On Sat, Oct 20, 2012 at 4:45 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Friday 19 October 2012 16:37:19 Khem Raj wrote:
+>> If you dont use patchwork dont bother but if you do then it had some
+>> hiccups which now has been fixed hopefully. So if you dont see your
+>> latest patch on patchwork resend it.
+>
+> I just sent my hddtemp patch for the third time and it still hasn't been
+> picked up by patchwork, so I'm afraid something is still not working properly.
 
-I have posted the same in the following link. Pardon me for providing an
-exterrnal link .
 
-http://stackoverflow.com/questions/12909202/openembedded-do-rootfs-failed
+we have always had issue with large patches. I dont know exact size but
+pw did not parse large emails well. I wonder if your patch is large enough
+to cross the bar.
 
-On Oct 22, 2012 8:55 PM, "Samuel Stirtzel" <s.stirtzel@googlemail.com>
-wrote:
 >
-> 2012/10/22 RaNgErS <rangers.av@gmail.com>:
-> > Hi,
-> >
-> > I had a problem with do_rootfs. Using master branch and 2012. Distro.
->
-> Hi,
->
-> do you have any more specific information, like the error message?
-> Or which package failed the rootfs? / what image did you build?
->
+> Cheers,
+> Paul
 >
 > --
-> Regards
-> Samuel
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Paul Eggleton
+> Intel Open Source Technology Centre
+
 
