@@ -1,22 +1,34 @@
-Received: from 206-248-190-39.dsl.teksavvy.com ([206.248.190.39]
-	helo=yow-jmacdona-d2.wrs.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TQgcE-0005z0-46
+Received: from mail-wi0-f169.google.com ([209.85.212.169])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1TQgoX-0006MJ-N0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2012 17:42:02 +0200
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
-	id 0CA146A7953; Tue, 23 Oct 2012 11:28:36 -0400 (EDT)
-Date: Tue, 23 Oct 2012 11:28:36 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
+	Tue, 23 Oct 2012 17:54:45 +0200
+Received: by mail-wi0-f169.google.com with SMTP id hq4so3153629wib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Oct 2012 08:41:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=G6LAalselpVZj067wuuwMxPchw+zPNLM2UV1D8CE2yo=;
+	b=poOtlP78VUAIqN9pRSYMRWzZxAog+SWMvEzfMSpERXBWtGqFQcN4Od37ldUiyTG0Lx
+	gZ3LbEXX5I5gGDLlTMFaMPq+uj3kOQZy9/UpV0NQy6zmSo1UH4PzDlPkvek+pQb3qtPY
+	w1bk6/meLQPVc2XhaXaxu6s7w458Ta9HdeijatcGkQ96f52Ar4TVOoiFzwhv/eN4FQi2
+	io8uLKfA7NYJA9ijrFOUdTjfC8JJ1aTrOGVvNRcdY5m/J9+6Iqu7KdVoPhRitxlYqxCK
+	hrr5yb7vsNDr3D8nONhvllK4+lV+V7ewXWvA9MRjl4JA/H2HGpFnbUios7OL96fKTl4s
+	DNuQ==
+Received: by 10.216.193.158 with SMTP id k30mr8031270wen.89.1351006879451;
+	Tue, 23 Oct 2012 08:41:19 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id v3sm28524012wiy.5.2012.10.23.08.41.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 23 Oct 2012 08:41:18 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121023152835.GA4871@windriver.com>
-References: <1350679091-5909-1-git-send-email-morgan.little@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1350679091-5909-1-git-send-email-morgan.little@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-networking][PATCH 0/3] ntp updates
+Date: Tue, 23 Oct 2012 17:41:33 +0200
+Message-Id: <1351006893-21274-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+In-Reply-To: <20121023140323.GP3269@jama.jama.net>
+References: <20121023140323.GP3269@jama.jama.net>
+Subject: [meta-oe,meta-systemd][PATCH] systemd: disable python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,97 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2012 15:42:02 -0000
-X-Groupsio-MsgNum: 41235
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Oct 2012 15:54:45 -0000
 
---VS++wcV0S1rZb1Fb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* otherwise configure uses python-config from host and passes wrong CFLAGS
+  see http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-October/042058.html
+  for details
 
-Hey Morgan,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-systemd/recipes-core/systemd/systemd_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Can you send out an updated set of patches based on the feedback you've
-received so far?  I only saw Otavio's suggestions, I think, but if
-you've got anything else, please address them as well.
+diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
+index efc2d95..6deda82 100644
+--- a/meta-systemd/recipes-core/systemd/systemd_git.bb
++++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
+@@ -19,7 +19,7 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r8"
++PR = "r9"
+ 
+ inherit useradd pkgconfig autotools perlnative
+ 
+@@ -67,6 +67,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
+                  --disable-tcpwrap \
+                  --enable-split-usr \
+                  --disable-microhttpd \
++                 --without-python \
+                "
+ 
+ # There's no docbook-xsl-native, so for the xsltproc check to false
+-- 
+1.7.12.4
 
-I'm fine with the patch set with Otavio's suggested changes integrated.
 
--J.
 
-[[oe] [meta-oe][meta-networking][PATCH 0/3] ntp updates] On 12.10.19 (Fri 1=
-6:38) Morgan Little wrote:
-
-> The following changes since commit a660f4a0289884f516ed85a75a25c722e31e88=
-c9:
->   Paul Eggleton (1):
->         modphp: make LICENSE more accurate
->=20
-> are available in the git repository at:
->=20
->   git@github.com:morganlittle/meta-oe.git ntp
->=20
-> Morgan Little (3):
->       ntp: Move from meta-oe to meta-networking
->       ntp: Uprev from 4.2.6p3 to 4.2.6p5
->       ntp: Clean up recipes
->=20
->  .../recipes-support/ntp/files/ntp                  |    0
->  .../ntp/files/ntp-4.2.4_p6-nano.patch              |    0
->  .../recipes-support/ntp/files/ntp.conf             |    0
->  .../recipes-support/ntp/files/ntpd                 |    0
->  .../recipes-support/ntp/files/ntpdate              |    0
->  .../recipes-support/ntp/files/tickadj.c.patch      |    0
->  .../recipes-support/ntp/ntp-ssl_4.2.6p5.bb         |   12 +++
->  meta-networking/recipes-support/ntp/ntp.inc        |   72 ++++++++++++++=
-++++++
->  meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |    6 ++
->  meta-oe/recipes-support/ntp/ntp-ssl_4.2.6p3.bb     |   11 ---
->  meta-oe/recipes-support/ntp/ntp.inc                |   35 ----------
->  meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb         |   47 -------------
->  12 files changed, 90 insertions(+), 93 deletions(-)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/ntp (100=
-%)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/ntp-4.2.=
-4_p6-nano.patch (100%)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/ntp.conf=
- (100%)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/ntpd (10=
-0%)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/ntpdate =
-(100%)
->  rename {meta-oe =3D> meta-networking}/recipes-support/ntp/files/tickadj.=
-c.patch (100%)
->  create mode 100644 meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
->  create mode 100644 meta-networking/recipes-support/ntp/ntp.inc
->  create mode 100644 meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
->  delete mode 100644 meta-oe/recipes-support/ntp/ntp-ssl_4.2.6p3.bb
->  delete mode 100644 meta-oe/recipes-support/ntp/ntp.inc
->  delete mode 100644 meta-oe/recipes-support/ntp/ntp_4.2.6p3.bb
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind Ri=
-ver
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
-
---VS++wcV0S1rZb1Fb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlCGt6MACgkQPN8S4W6ZZneMdwCdH6Ac/z+FkEQ4R4Vw489A7Pzl
-D7gAmwXmr0hs298RbR8mm90Yu3DUOFtF
-=tDLW
------END PGP SIGNATURE-----
-
---VS++wcV0S1rZb1Fb--
