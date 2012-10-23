@@ -1,37 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TQO6b-0007Op-Eu
+	(envelope-from <s.stirtzel@googlemail.com>) id 1TQY7n-0005q2-FI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Oct 2012 21:56:09 +0200
-Received: by mail-we0-f175.google.com with SMTP id t44so1597195wey.6
+	Tue, 23 Oct 2012 08:38:03 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so4774698ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Oct 2012 12:42:44 -0700 (PDT)
+	Mon, 22 Oct 2012 23:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=50KjhtRg6p0XrRW8VP6nr9MqJPi1H++cP6yuCvx0oNg=;
-	b=Jraoej20bG+Tq8ihs4/V1pl1aZ2tUCOwNBgz+gOk1TvcrYQUfJ7wjfOcNyWRRcn4o6
-	WqQJAx3z6sSMdIp/LOH0Lt6q5Uj330FzVgz1PeXVD/yiIAkqsR2NxXc1/0iMOX+PdnEQ
-	3omafqgg1UD99YJhDaLAUkWdg9y4b0moqJUFsFvzGotYzhJBotUoDFMK+k5LhUjbNH2u
-	aO27rZvdFpobMeBEDk++Ja+a3JQfajCK5Z/sXBF/I0/dk2l9VqWnBbAnzyZg/Oi2x9Hq
-	BVFKbHfW7XIoak/9/RsNmtDTD87amq1iUw2yHnTcO+Uqe5sOdE7lWo8UjFwUVZkLznUl
-	hoXA==
-Received: by 10.216.194.97 with SMTP id l75mr5665672wen.67.1350934964314;
-	Mon, 22 Oct 2012 12:42:44 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w8sm52529484wif.4.2012.10.22.12.42.42
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 22 Oct 2012 12:42:43 -0700 (PDT)
-Date: Mon, 22 Oct 2012 21:42:58 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121022194258.GK3269@jama.jama.net>
-References: <1350918808-23478-1-git-send-email-s.stirtzel@googlemail.com>
-	<7D46E86EC0A8354091174257B2FED10159276891@DLEE12.ent.ti.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=pGoGMs0MMuovKMgDxAByeCFWRAbeV5YKJ0CILCKYlsU=;
+	b=y+ln+JjvRfBjSsxXJurAdzWY3qveTRzFX4vmdG9KGg+5VqMPYz7iufmu3eKJRYt83l
+	r3CWYGMoP3VREFzCY7XcxFxn2hLKo/mYCKkx+tgzGzkbxx0znwpuQwY9E516zCf6w3O0
+	0bcndxGFgfknagqYg3mLzyE51LsDsKoHEl1HBkEp4ei1a8x32io5yd3nfMRFZ1LQFiLu
+	fEIWKT8tVFJ/uX6V93u9ISIu3xBRmaBiJtCZY59dnOvtp66NP3OvN+C66uOzQb6UCahJ
+	JUXsPPxAn0//H0c/x5xEPYO9RiZ/794ASk9SkJ+5mu4Kdjr90on5csGuP5oSg0P1X42T
+	hAZQ==
 MIME-Version: 1.0
-In-Reply-To: <7D46E86EC0A8354091174257B2FED10159276891@DLEE12.ent.ti.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to fix errors	when rdepending on jpeg
+Received: by 10.50.135.38 with SMTP id pp6mr19144707igb.36.1350973477060; Mon,
+	22 Oct 2012 23:24:37 -0700 (PDT)
+Received: by 10.64.24.179 with HTTP; Mon, 22 Oct 2012 23:24:36 -0700 (PDT)
+In-Reply-To: <CAMQ5J2ZsmYhjG-3Ket0hft1xL7uS2qomyxywQAaZMidoC+Ps5A@mail.gmail.com>
+References: <1350918808-23478-1-git-send-email-s.stirtzel@googlemail.com>
+	<CAMQ5J2bVMpK6+uX4Rbi0spKLduy5of4JX2esXZbOE5k_muvATg@mail.gmail.com>
+	<CAGiJk9cJq2uQXBw6GtXg8gc=MSdHp7Y_ZVgRP6FiE8gLsLiN+g@mail.gmail.com>
+	<CAMQ5J2ZsmYhjG-3Ket0hft1xL7uS2qomyxywQAaZMidoC+Ps5A@mail.gmail.com>
+Date: Tue, 23 Oct 2012 08:24:36 +0200
+Message-ID: <CAGiJk9cj48mrJ7aNo9nu=SUsLws6rn9hKG8fJZmGRaMGZ548cw@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,103 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Oct 2012 19:56:09 -0000
-X-Groupsio-MsgNum: 41217
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aziWXe2aaRGlkyg3"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Oct 2012 06:38:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
---aziWXe2aaRGlkyg3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2012/10/22 RaNgErS <rangers.av@gmail.com>:
+> Hi,
+> I am already sent a mail about this before 3 weeks to admin. And it is not
+> posted .
+>
+> I have posted the same in the following link. Pardon me for providing an
+> exterrnal link .
+>
+> http://stackoverflow.com/questions/12909202/openembedded-do-rootfs-failed
 
-On Mon, Oct 22, 2012 at 07:37:26PM +0000, Maupin, Chase wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On
-> > Behalf Of Samuel Stirtzel
-> > Sent: Monday, October 22, 2012 10:13 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-oe][PATCH v3] libjpeg-turbo: Add RPROVIDES to
-> > fix errors when rdepending on jpeg
-> >=20
-> > This fixes "ERROR: Multiple .bb files are due to be built which
-> > each provide jpeg"
+Hi,
 
-Btw, when I've first noticed this error it was caused by
-task/packagegroup recipe having jpeg in RDEPENDS. It does not cause
-problems when apps are RDEPENDing on jpeg through shlibs which is imho
-better way then pulling jpeg to image through task/packagegroup.
+this error is unrelated to the patch,
+but this is the right mailing list for your question.
 
-But adding this dont hurt either case, so it's fine.
+Unfortunately I didn't work with OE-classic,
+therefore I can't help you much.
 
-Cheers,
-=20
-> > Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
->=20
-> Acked-by: Chase Maupin <chase.maupin@ti.com>
->=20
-> > ---
-> >  meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb |    5 ++++-
-> >  1 file changed, 4 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> > b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> > index 2aefe1f..d87743b 100644
-> > --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> > +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> > @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D
-> > "file://cdjpeg.h;endline=3D12;md5=3D78fa8dbac547bb5b2a0e6457a6cfe
-> >=20
-> > file://djpeg.c;endline=3D13;md5=3De85613b52f2906c5dfc0e21ec902cb33 \
-> >  "
-> >  PV =3D "8d+1.2.1"
-> > -PR =3D "r1"
-> > +PR =3D "r2"
-> >  SRCREV =3D "837"
-> >  SRC_URI =3D "svn://libjpeg-
-> > turbo.svn.sourceforge.net/svnroot/libjpeg-
-> > turbo;protocol=3Dhttps;module=3Dtrunk"
-> >=20
-> > @@ -15,6 +15,9 @@ S =3D "${WORKDIR}/trunk"
-> >=20
-> >  # Drop-in replacement for jpeg
-> >  PROVIDES =3D "jpeg"
-> > +RPROVIDES_${PN} +=3D "jpeg"
-> > +RREPLACES_${PN} +=3D "jpeg"
-> > +RCONFLICTS_${PN} +=3D "jpeg"
-> >=20
-> >  inherit autotools pkgconfig
-> >=20
-> > --
-> > 1.7.9.5
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-
-> > devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+This patch is related to the new OpenEmbedded (Core),
+see [1] for a short explanation of the differences.
 
---aziWXe2aaRGlkyg3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+There is a good chance that others will help you out,
+you might start a new "topic" to increase the visibility of your request though.
+E.g. post a new mail with the complete problem description not as
+reply but as new thread.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlCFocIACgkQN1Ujt2V2gBw96QCeJpxodKs93S4wcMVK9tBHFAfs
-JM8AoLeVf05qlHdn8UMJ4MciSfI+zGSg
-=KumK
------END PGP SIGNATURE-----
+[1] http://www.openembedded.org/wiki/OpenEmbedded-Core#Differences_to_OE-classic
 
---aziWXe2aaRGlkyg3--
+
+-- 
+Regards
+Samuel
+
+
