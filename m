@@ -1,27 +1,20 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TQaXY-00017z-Ta
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TQapE-0001Xj-Vj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2012 11:12:49 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 23 Oct 2012 01:59:21 -0700
+	Tue, 23 Oct 2012 11:31:05 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 23 Oct 2012 02:17:37 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,634,1344236400"; d="scan'208";a="238916840"
-Received: from unknown (HELO helios.localnet) ([10.252.122.83])
-	by fmsmga002.fm.intel.com with ESMTP; 23 Oct 2012 01:59:20 -0700
+X-IronPort-AV: E=Sophos;i="4.80,634,1344236400"; d="scan'208";a="209391419"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.83])
+	by orsmga001.jf.intel.com with ESMTP; 23 Oct 2012 02:17:36 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Oct 2012 09:59:19 +0100
-Message-ID: <1564404.2akYnFFVx7@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <CAMKF1spmOOZXgWTSigq7PKDPYwi7j-273cwEM6ryFM0P1cHe+A@mail.gmail.com>
-References: <CAMKF1sqkMb8Z5Cda7qDXKYF1npKbJ-2yOAdWA=gNADs5UJAEew@mail.gmail.com>
-	<7074844.QapBLE5b39@helios>
-	<CAMKF1spmOOZXgWTSigq7PKDPYwi7j-273cwEM6ryFM0P1cHe+A@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: patchwork is up again
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Oct 2012 10:17:08 +0100
+Message-Id: <1350983828-5569-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] mysql: always replace paths in mysql_config script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,40 +28,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2012 09:12:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 23 Oct 2012 09:31:05 -0000
 
-On Monday 22 October 2012 09:25:45 Khem Raj wrote:
-> On Sat, Oct 20, 2012 at 4:45 AM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Friday 19 October 2012 16:37:19 Khem Raj wrote:
-> >> If you dont use patchwork dont bother but if you do then it had some
-> >> hiccups which now has been fixed hopefully. So if you dont see your
-> >> latest patch on patchwork resend it.
-> > 
-> > I just sent my hddtemp patch for the third time and it still hasn't been
-> > picked up by patchwork, so I'm afraid something is still not working
-> > properly.
->
-> we have always had issue with large patches. I dont know exact size but
-> pw did not parse large emails well. I wonder if your patch is large enough
-> to cross the bar.
+Path replacement was not happening on some machines if the MySQL build
+scripts set a different path in the produced mysql_config script,
+resulting in host paths being left in.
 
-I've just posted v2 of the patch which is less than half the size, still no 
-dice though.
+Original patch by Joe Slater <jslater@windriver.com>.
 
-However, one unusual thing about this patch (and the previous version) is that 
-git send-email did prompt me for an encoding, I used the default (UTF-8); even 
-the subject line is encoded. Maybe patchwork doesn't understand UTF-8 - could 
-that be the reason it's not being picked up?
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index 72e9ef8..3867a12 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
+ 
+ DEPENDS = "ncurses"
+-PR = "r9"
++PR = "r10"
+ 
+ SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
+            file://configure.in.patch \
+@@ -41,9 +41,13 @@ do_configure_append() {
+ SYSROOT_PREPROCESS_FUNCS += "mysql5_sysroot_preprocess"
+ 
+ # We need to append this so it runs *after* binconfig's preprocess function
++#
++# We really don't care exactly what the directories were set to originally.
++# plugindir is not fixed, but we don't create any plugins.
++#
+ mysql5_sysroot_preprocess () {
+-	sed -i -es,^pkgincludedir=\'/usr/include/mysql\',pkgincludedir=\'${STAGING_INCDIR}/mysql\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
+-	sed -i -es,^pkglibdir=\'/usr/lib/mysql\',pkglibdir=\'${STAGING_LIBDIR}\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
++	sed -i -es,^pkgincludedir=.*,pkgincludedir=\'${STAGING_INCDIR}/mysql\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
++	sed -i -es,^pkglibdir=.*,pkglibdir=\'${STAGING_LIBDIR}\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
+ }
+ 
+ do_install() {
 -- 
+1.7.9.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
