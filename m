@@ -1,26 +1,32 @@
-Received: from 206-248-190-39.dsl.teksavvy.com ([206.248.190.39]
-	helo=yow-jmacdona-d2.wrs.com) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TQf72-0000ml-P3
+Received: from mail-we0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1TQfBq-0000vi-Tk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2012 16:05:44 +0200
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)
-	id 0508D6A3358; Fri, 19 Oct 2012 08:10:35 -0400 (EDT)
-Date: Fri, 19 Oct 2012 08:10:35 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20121019121035.GA5000@windriver.com>
-References: <1347905904-814-1-git-send-email-fcooper@ti.com>
-	<k39bug$tlg$1@ger.gmane.org>
-	<CANBf+V0uVAWNCt_E+MD42MxFjsu5XOkuaaOyx7Fy3xbBcMXFWg@mail.gmail.com>
-	<168838562.YJes5mSNF6@helios>
-MIME-Version: 1.0
-In-Reply-To: <168838562.YJes5mSNF6@helios>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] thttpd: Port thttpd from oe-classic.
+	Tue, 23 Oct 2012 16:10:42 +0200
+Received: by mail-we0-f175.google.com with SMTP id t44so1998699wey.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Oct 2012 06:57:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=e69N4W/W1G8k4isXG94a2sfTwfw2M1CgWyiTwqXxl4c=;
+	b=ccanBM//hRwTaUV5XDqxXSeESj600gHpp9omw8zy1GdXm1o9CLJxxJhckDnlzIPSLV
+	ob8khcCeU0in/XPKyhvV0eUDYHXFyaG8X/FkC0VFTSF/eCMfvxJUROMnpliuwQvUnLEJ
+	R9kZ/O9W+OAaoADMF4p6OImGylp/Ng17OBTfJyVk7L8uSH6D2i/Un775/v2tiOY9+UmS
+	N5uyfo8Tztzga07StH4mheLINYzOmgNeUQeiNmtD3FpZXGcnXq8u4We6IOCk6gZiyMgJ
+	+iA+Jp2mVWsvVYUFHYB4UWf7kQoAWVcge3/vAEapemcdUQFYfB3bFMJoRdwm3kwpH8r7
+	U9LQ==
+Received: by 10.180.94.73 with SMTP id da9mr29406267wib.19.1351000636918;
+	Tue, 23 Oct 2012 06:57:16 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id hv8sm19357798wib.0.2012.10.23.06.57.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 23 Oct 2012 06:57:15 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Oct 2012 15:57:31 +0200
+Message-Id: <1351000651-16335-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-oe,meta-systemd][PATCH] systemd: inherit pythonnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,57 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2012 14:05:45 -0000
-X-Groupsio-MsgNum: 41231
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Oct 2012 14:10:43 -0000
 
---UlVJffcvxoiEqYs2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* otherwise configure uses python-config from host and passes wrong CFLAGS
+  see http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-October/042058.html
+  for details
 
-[Re: [oe] [meta-oe][PATCH] thttpd: Port thttpd from oe-classic.] On 12.10.1=
-9 (Fri 11:44) Paul Eggleton wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-systemd/recipes-core/systemd/systemd_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> On Tuesday 18 September 2012 11:39:24 Joe MacDonald wrote:
-> > On Tue, Sep 18, 2012 at 4:38 AM, Koen Kooi <koen@dominion.thruhere.net>=
-=20
-> wrote:
-> > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > Hash: SHA1
-> > >=20
-> > > Op 17-09-12 20:18, Franklin S. Cooper Jr schreef:
-> > >> * Port thttpd recipe from oe-classic to meta-oe.
-> > >=20
-> > > It should go into meta-networking
-> >=20
-> > Agreed.  Once it's been LSB'd, please put the recipe in
-> > meta-networking/recipes-daemons/
->=20
-> meta-networking or meta-webserver?
+diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
+index efc2d95..b89bd76 100644
+--- a/meta-systemd/recipes-core/systemd/systemd_git.bb
++++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
+@@ -19,9 +19,9 @@ inherit gitpkgv
+ PKGV = "v${GITPKGVTAG}"
+ 
+ PV = "git"
+-PR = "r8"
++PR = "r9"
+ 
+-inherit useradd pkgconfig autotools perlnative
++inherit useradd pkgconfig autotools perlnative pythonnative
+ 
+ SRCREV = "4d92e078e9d7e9a9d346065ea5e4afbafbdadb48"
+ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
+-- 
+1.7.12.4
 
-I'd originally had it on my proposed meta-networking list, but that
-pre-dated the meta-webserver layer.  I'm okay with either location, but
-there does seem to be a natural fit with meta-webserver, now that I
-think about it.
 
---=20
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind Ri=
-ver
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
 
---UlVJffcvxoiEqYs2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlCBQzcACgkQPN8S4W6ZZnfQTACbB4nCwmfK0xjP04Og5eO/6ALD
-12gAn1XJ6ahiUr0P0u3T9KU1Y0RITWxu
-=olTy
------END PGP SIGNATURE-----
-
---UlVJffcvxoiEqYs2--
