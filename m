@@ -1,24 +1,38 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-wg0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Morgan.Little@windriver.com>) id 1TQj3U-0004xy-PJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2012 20:18:21 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id q9NI4oDk006339
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Oct 2012 11:04:53 -0700 (PDT)
-Received: from localhost.localdomain (128.224.147.201) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.309.2; Tue, 23 Oct 2012 11:04:50 -0700
-From: Morgan Little <morgan.little@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Oct 2012 14:04:50 -0400
-Message-ID: <1351015490-14442-1-git-send-email-morgan.little@windriver.com>
-X-Mailer: git-send-email 1.7.0.4
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1TQjpe-0006Fu-IS; Tue, 23 Oct 2012 21:08:06 +0200
+Received: by mail-wg0-f43.google.com with SMTP id dq11so3058664wgb.24
+	for <multiple recipients>; Tue, 23 Oct 2012 11:54:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=HjKbdzNf4AZHTukY3Hc5FOtWxCX2gy67AJHCxOMgNYA=;
+	b=CguvO6z1WtPQ3cH0ePJZs37wA5upbZaYxlssMqWX8qYFSuZtPe7JFat+ZJMMhq7wWb
+	S1v5Tc0eWDuW+MNl8E8SWu+emVw98LrgcFagpoggvR8M0ju4KoMPnHZwEK2WbqC2mDqL
+	H/+KFQzy1/316CTqULckJfuGCFRYVV4Vo1CnHZLW+Lehdat4/n1TLevH1FdC8ptcAFjM
+	2W9itdvaQ1qSkMlLzdLwQw7e1jC4e4D8iiQWwNRXekKYZs8vrZjCM9CX4ZEyq403EeCk
+	r3DTsu6kOxEcas3YMkvp4BzryT4P5czDgFJiXZOnTtyOVbXi7ExkDPyFMABPQaxDoWN1
+	a8Eg==
+Received: by 10.216.197.41 with SMTP id s41mr7518377wen.205.1351018480187;
+	Tue, 23 Oct 2012 11:54:40 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id b7sm149843wiz.3.2012.10.23.11.54.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 23 Oct 2012 11:54:37 -0700 (PDT)
+Date: Tue, 23 Oct 2012 20:54:54 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+Message-ID: <20121023185454.GS3269@jama.jama.net>
+References: <1349345672-803-1-git-send-email-andrei.adrianx.dinu@intel.com>
+	<CA+chaQePjXEa0o6ziqV7rUVgqWOEoyJPMb1iApbv-9MEJzts0Q@mail.gmail.com>
+	<20121018205948.GE3087@jama.jama.net>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] traceroute: Add from OE-Classic, uprev and update
+In-Reply-To: <20121018205948.GE3087@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] [PATCH] gypsy: removed gypsy from meta/recipes-connectivity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,72 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2012 18:18:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Oct 2012 19:08:06 -0000
+X-Groupsio-MsgNum: 41242
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1IOPqZ3f1xe/JZlz"
+Content-Disposition: inline
 
-Uprev traceroute from 2.0.12 in OE-Classic to 2.0.18.
+--1IOPqZ3f1xe/JZlz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Update SUMMERY, DESCRIPTION, LICENSE, LIC_FILES_CHKSUM, update do_install
-to be similar Fedora rpm spec files, and update update alternatives to use
-the update alteratives class.
+On Thu, Oct 18, 2012 at 10:59:48PM +0200, Martin Jansa wrote:
+> On Thu, Oct 18, 2012 at 08:59:19PM +0200, Martin Jansa wrote:
+> > I know you've sent
+> > http://patchwork.openembedded.org/patch/37763/
+> > to add it to meta-oe, but this patch removed also newer gypsy_0.9.bb
+> > and only older gypsy_git.bb was added back.
+> >=20
+> > Please fix that.
+>=20
+> There is also this diff which isn't mentioned in your commit.
+>=20
+> -SRCREV =3D "3652e1f37e82b8e63983e30fda3482cd099a8cf5"
+> +SRCREV =3D "be8c9c382d2d1d37b51d29b0843045121ec90213"
+>  PV =3D "0.8+git${SRCPV}"
+>  PR =3D "r2"
+>=20
+> @@ -15,4 +15,5 @@
+>                      file://gypsy/gypsy-time.h;beginline=3D1;endline=3D24=
+;md5=3D06432ea19a7b6607428d04d9dadc37fd"
+>=20
+>  SRC_URI =3D "git://anongit.freedesktop.org/gypsy;protocol=3Dgit \
+> -           file://fixups.patch"
+> +           file://fixups.patch \
+> +           file://0001-gypsy-m4-directory-missing-from-structure.patch"
 
-Signed-off-by: Morgan Little <morgan.little@windriver.com>
----
- .../traceroute/traceroute_2.0.18.bb                |   43 ++++++++++++++++++++
- 1 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+ping
 
-diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-new file mode 100644
-index 0000000..719d9fb
---- /dev/null
-+++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "A new modern implementation of traceroute(8) utility for Linux systems"
-+DESCRIPTION = "The traceroute utility displays the route used by IP packets on \
-+their way to a specified network (or Internet) host.  Traceroute displays \
-+the IP number and host name (if possible) of the machines along the \
-+route taken by the packets.  Traceroute is used as a network debugging \
-+tool.  If you're having network connectivity problems, traceroute will \
-+show you where the trouble is coming from along the route."
-+SECTION = "console/network"
-+HOMEPAGE = "http://traceroute.sourceforge.net/"
-+LICENSE = "GPL-2.0 LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-+                    file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
-+
-+inherit update-alternatives
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
-+          "
-+
-+SRC_URI[md5sum] = "b7254149b7f081cce07f4b9e065ba5ef"
-+SRC_URI[sha256sum] = "5994a88520927fefe3c9754aaf1e02b4d0f3f8fb1f521a68fa86215c3fcab9ef"
-+
-+do_compile() {
-+    export LDFLAGS="${TARGET_LDFLAGS} -L${S}/libsupp"
-+    oe_runmake "env=yes"
-+}
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m755 ${PN}/${PN} ${D}${bindir}
-+
-+    install -m755 wrappers/tcptraceroute ${D}${bindir}
-+
-+    install -d ${D}${mandir}
-+    install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-+    pushd ${D}${mandir}
-+    ln -s ${PN}.8 ${PN}6.8
-+    ln -s ${PN}.8 tcptraceroute.8
-+    popd
-+
-+}
-+
-+ALTERNATIVE_${PN} = "traceroute6"
-+ALTERNATIVE_LINK_NAME[traceroute6] = "${bindir}/traceroute"
--- 
-1.7.0.4
+meta-oe is still broken because of this
 
+Cheers,
 
+--1IOPqZ3f1xe/JZlz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlCG5/4ACgkQN1Ujt2V2gBzp6ACfSXCSXZ/1mnC/HqPPtZhOwBkB
+rgYAnRjE4DMcqyO/GoExnGx7v20Dhj06
+=yXol
+-----END PGP SIGNATURE-----
+
+--1IOPqZ3f1xe/JZlz--
