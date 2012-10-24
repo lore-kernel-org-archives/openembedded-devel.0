@@ -1,37 +1,37 @@
 Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TRAzE-00057u-Pr
+	(envelope-from <martin.jansa@gmail.com>) id 1TRAzJ-00057u-Qu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 02:07:49 +0200
+	Thu, 25 Oct 2012 02:07:53 +0200
 Received: by mail-we0-f175.google.com with SMTP id t44so558262wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2012 16:54:21 -0700 (PDT)
+	Wed, 24 Oct 2012 16:54:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=wfMum9xZWMnqbADI6q7hBPmZ7hSOCaD4Fk8mHWtLNwE=;
-	b=KqgD20SczQBWNPfq0d6sAG/wCw7jZRmbURdrJ00t7GZoSLMOitK0iWKBkcsH+FJocP
-	R2XHDK3hp5z9UtshngRdDB+1Tud0+iAwiht9Skqj2MM/UDmbipBM0mBUrSXBtlKby5GK
-	7n/hzMVaVzpFlRWsk3LsFt77iOEPkEeYFK5AWaIeYX5TMaLEpzvidaJVkAQmduzPlh2T
-	JzLjHMqz7As838BzXzuAAa6y6tqpT8Ast5NGmCyTMpfBN2boSGdNTOFqnB0+WSYB3g/U
-	1gDX9RjoBBEaLl88u68eoOxb5orrOlOBm8w81LIjS77iWUpb2sfvcF6svGY8emY5tSgH
-	47ew==
-Received: by 10.180.102.131 with SMTP id fo3mr6032076wib.1.1351122861033;
-	Wed, 24 Oct 2012 16:54:21 -0700 (PDT)
+	bh=AlxKHQZQ5XjMZJRjF+x6CAj69d3U8nhwzoo1aefoVXc=;
+	b=X+iOQ+FhlWv09F7DnuU3GiGQJmLrUUxxoLJUvv+yk64jdYwhDoWtKlwmJp5JK4gsrM
+	6j/dtN1A5UZA9t4hTLIcv2cMzvGidImNReyvQriQuB67WKl6cayhtADfDiHj6UElHShD
+	i+oXISq2BywBAgxv9s6GO+aBQ4jmwpfm3YztKcIzklX1o30mkAHKH6GikOlaEG9crgJO
+	x0XJr3WNg6LDkRXqWXHmCZmMSzCdu3nokeO9fBqjpKlZ8QNCsg1A3FCVomCv08agxe5f
+	X4VZewpjIsXytjBaszFe8gOgRO5wWPjEWRSwEz9PbLPpc1ye4Bky6cZkq2CGnq2PLb8o
+	qZaA==
+Received: by 10.180.95.97 with SMTP id dj1mr9428634wib.3.1351122868150;
+	Wed, 24 Oct 2012 16:54:28 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ay10sm7880318wib.2.2012.10.24.16.54.19
+	by mx.google.com with ESMTPS id dq6sm6974720wib.5.2012.10.24.16.54.26
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 24 Oct 2012 16:54:20 -0700 (PDT)
+	Wed, 24 Oct 2012 16:54:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2012 01:54:22 +0200
-Message-Id: <ff91505baff89759e03972de23e5eed6bc841e28.1351122431.git.Martin.Jansa@gmail.com>
+Date: Thu, 25 Oct 2012 01:54:23 +0200
+Message-Id: <ee2be404726bb419d276275c449fdfbd6cc9751e.1351122431.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12.4
 In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
 References: <cover.1351122431.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
 References: <cover.1351122431.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/8] foxtrotgps: inherit gconf
+Subject: [meta-oe][PATCH 2/8] tangogps: inherit gconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 00:07:49 -0000
+X-List-Received-Date: Thu, 25 Oct 2012 00:07:53 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb | 6 +++---
+ meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
-index 0cafdde..62860b8 100644
---- a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
-+++ b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
-@@ -4,15 +4,15 @@ HOMEPAGE = "http://www.foxtrotgps.org/"
+diff --git a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+index 5a4231a..1fb7633 100644
+--- a/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
++++ b/meta-oe/recipes-navigation/tangogps/tangogps_0.99.4.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "http://tangogps.org/"
  SECTION = "x11/applications"
  LICENSE = "GPLv2"
  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--DEPENDS = "curl gtk+ gconf libglade sqlite3 libexif gpsd"
-+DEPENDS = "curl gtk+ libglade sqlite3 libexif gpsd"
+-DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4 bluez4"
+-PR = "r2"
++DEPENDS = "curl gtk+ sqlite3 libexif libsoup-2.4 bluez4"
++PR = "r3"
  
- SRC_URI = "http://www.foxtrotgps.org/releases/${P}.tar.gz"
- SRC_URI[md5sum] = "6777d448ee9d3ba195f9d26ea90e3163"
- SRC_URI[sha256sum] = "ae9706285510554cc0813ac92522e0d1672b0ddb065307bfacfcff3c328f6adb"
+ SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz \
+            file://remove.unused.header.patch \
+@@ -14,6 +14,6 @@ SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz \
+ SRC_URI[md5sum] = "0f07ede94a21eb84f5e017fa88a1fc3d"
+ SRC_URI[sha256sum] = "660fdf89ef3c379f2fc0c2a9d0c9d3bfa5345835786b72bf9f513ba9ec2c812a"
  
--inherit autotools pkgconfig perlnative
-+inherit autotools pkgconfig perlnative gconf
+-inherit autotools pkgconfig
++inherit autotools pkgconfig gconf
  
--PR = "r1"
-+PR = "r2"
- 
- do_configure_prepend() {
-   if [ -f ${S}/configure.in ] ; then
+ RRECOMMENDS_${PN} = "gpsd"
 -- 
 1.7.12.4
 
