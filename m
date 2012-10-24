@@ -1,32 +1,37 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TRAz7-00057g-C2
+	(envelope-from <martin.jansa@gmail.com>) id 1TRAzE-00057u-Pr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 02:07:41 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dq11so770653wgb.24
+	Thu, 25 Oct 2012 02:07:49 +0200
+Received: by mail-we0-f175.google.com with SMTP id t44so558262wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2012 16:54:13 -0700 (PDT)
+	Wed, 24 Oct 2012 16:54:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=qN/E9HpAmlmBKBFUUctrYNSNBcDQrmyv5nUwRITaIvc=;
-	b=EzdKOtssCi38BQz/yK9+k8XgfuD2UaVu6gWblcpaHpSWEHoz67W7hZSFGGpR3xaiEm
-	vckGN41FNhSXcWpoQYp/c5hhJu+pU3rB1FPooasPCkeP08l9kPc8nAl5pZOu7DCJZuMf
-	a8k3P59dqc2xGskwhQoonnspuNcL4o74mbxtI+qlOghjbiCRO7Ur1Z3ddubhlA3+aRVT
-	GphcBAwHfJagNBzIf7d94ibQmh2HTtVV/uDvEbHrG51AsaStkPI13NdeynPyThwxUkiQ
-	kNEtzBoxfVGnRC4PPzF2tBLkHOudAoaFNmp/v9/TkKl+YJaYSad+++mmIID/2UpWEnhM
-	Gf+g==
-Received: by 10.216.204.19 with SMTP id g19mr9606617weo.189.1351122853213;
-	Wed, 24 Oct 2012 16:54:13 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=wfMum9xZWMnqbADI6q7hBPmZ7hSOCaD4Fk8mHWtLNwE=;
+	b=KqgD20SczQBWNPfq0d6sAG/wCw7jZRmbURdrJ00t7GZoSLMOitK0iWKBkcsH+FJocP
+	R2XHDK3hp5z9UtshngRdDB+1Tud0+iAwiht9Skqj2MM/UDmbipBM0mBUrSXBtlKby5GK
+	7n/hzMVaVzpFlRWsk3LsFt77iOEPkEeYFK5AWaIeYX5TMaLEpzvidaJVkAQmduzPlh2T
+	JzLjHMqz7As838BzXzuAAa6y6tqpT8Ast5NGmCyTMpfBN2boSGdNTOFqnB0+WSYB3g/U
+	1gDX9RjoBBEaLl88u68eoOxb5orrOlOBm8w81LIjS77iWUpb2sfvcF6svGY8emY5tSgH
+	47ew==
+Received: by 10.180.102.131 with SMTP id fo3mr6032076wib.1.1351122861033;
+	Wed, 24 Oct 2012 16:54:21 -0700 (PDT)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cn6sm7861871wib.9.2012.10.24.16.54.11
+	by mx.google.com with ESMTPS id ay10sm7880318wib.2.2012.10.24.16.54.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 24 Oct 2012 16:54:12 -0700 (PDT)
+	Wed, 24 Oct 2012 16:54:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2012 01:54:21 +0200
-Message-Id: <cover.1351122431.git.Martin.Jansa@gmail.com>
+Date: Thu, 25 Oct 2012 01:54:22 +0200
+Message-Id: <ff91505baff89759e03972de23e5eed6bc841e28.1351122431.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.12.4
-Subject: [meta-oe][PATCH 0/8] Small changes #102
+In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
+References: <cover.1351122431.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
+References: <cover.1351122431.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/8] foxtrotgps: inherit gconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 00:07:41 -0000
+X-List-Received-Date: Thu, 25 Oct 2012 00:07:49 -0000
 
-The following changes since commit 55855cd569fbff7182974ca08b1de8435bf0f597:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-  pimlico: remove Poky overrides (2012-10-24 19:34:31 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib jansa/pull
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/pull
-
-Martin Jansa (8):
-  foxtrotgps: inherit gconf
-  tangogps: inherit gconf
-  imlib2: inherit binconfig
-  midori: inherit vala
-  vala-terminal: inherit vala
-  loudmouth: depend on libcheck instead of check
-  check: drop from meta-oe, there is libcheck in oe-core
-  python-pyqt: don't bypass sstate with sip files
-
- meta-efl/recipes-efl/efl/imlib2_svn.bb             |  8 ++-----
- .../loudmouth/loudmouth_1.4.3.bb                   |  4 ++--
- .../recipes-connectivity/midori/midori_0.4.6.bb    |  6 ++---
- .../recipes-devtools/python/python-pyqt_4.9.5.bb   | 14 ++++--------
- .../foxtrotgps/foxtrotgps_1.1.1.bb                 |  6 ++---
- .../recipes-navigation/tangogps/tangogps_0.99.4.bb |  6 ++---
- .../check/check-0.9.8/fix.automake-1.12.x.patch    | 26 ----------------------
- meta-oe/recipes-support/check/check_0.9.8.bb       | 15 -------------
- .../vala-terminal/vala-terminal_git.bb             |  5 +++--
- 9 files changed, 20 insertions(+), 70 deletions(-)
- delete mode 100644 meta-oe/recipes-support/check/check-0.9.8/fix.automake-1.12.x.patch
- delete mode 100644 meta-oe/recipes-support/check/check_0.9.8.bb
-
+diff --git a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+index 0cafdde..62860b8 100644
+--- a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
++++ b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+@@ -4,15 +4,15 @@ HOMEPAGE = "http://www.foxtrotgps.org/"
+ SECTION = "x11/applications"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-DEPENDS = "curl gtk+ gconf libglade sqlite3 libexif gpsd"
++DEPENDS = "curl gtk+ libglade sqlite3 libexif gpsd"
+ 
+ SRC_URI = "http://www.foxtrotgps.org/releases/${P}.tar.gz"
+ SRC_URI[md5sum] = "6777d448ee9d3ba195f9d26ea90e3163"
+ SRC_URI[sha256sum] = "ae9706285510554cc0813ac92522e0d1672b0ddb065307bfacfcff3c328f6adb"
+ 
+-inherit autotools pkgconfig perlnative
++inherit autotools pkgconfig perlnative gconf
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ do_configure_prepend() {
+   if [ -f ${S}/configure.in ] ; then
 -- 
 1.7.12.4
 
