@@ -1,20 +1,37 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TQy5S-0007WM-As
+	(envelope-from <martin.jansa@gmail.com>) id 1TQy9S-0007pF-LC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Oct 2012 12:21:22 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 24 Oct 2012 03:07:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,639,1344236400"; d="scan'208";a="209908020"
-Received: from adinu-vostro-460 (HELO localhost.localdomain) ([10.237.105.39])
-	by orsmga001.jf.intel.com with ESMTP; 24 Oct 2012 03:07:52 -0700
-From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Oct 2012 13:08:55 +0300
-Message-Id: <1351073335-28110-1-git-send-email-andrei.adrianx.dinu@intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe] gypsy: added gypsy to meta-oe/recipes-connectivity
+	Wed, 24 Oct 2012 12:25:31 +0200
+Received: by mail-ea0-f175.google.com with SMTP id c1so95627eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Oct 2012 03:12:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=a/t5c1eQeglC9lz5E/prt33tp2JEI62FQlcd4ykzSMA=;
+	b=N4AHV+wFTKvQxO+R2VB23z+ghFjG8NTcA0OOuaeuAslLu13aDC/pO4DLulisPcvglw
+	sXkgsg51kPvEPqY1MpHzggK1QZnlEie7TN+CWLRO5Kpg9wcO8yZe/T8M+W7taMEX9U7Q
+	HqK3vPsjzESviMPccMj4TT4m2Ncw5BkEgjfAiVqa8xi4wrj6gseHRRv3nuivI6Ls1HVB
+	5wKHIMsi1OnE+mk6FwkI/DULx73FZJ+UIIe6KItD+kX+CkUleL+9QmyCiisyWGeolajQ
+	l1E99civ95huxGF55A6FaNsgFESzBUpW4T0E2gL4a5cp1LjQdl44rTclw/xQrRoIu4Vq
+	eH4g==
+Received: by 10.14.215.69 with SMTP id d45mr20635965eep.16.1351073523657;
+	Wed, 24 Oct 2012 03:12:03 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id c6sm24998052eep.17.2012.10.24.03.12.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 24 Oct 2012 03:12:02 -0700 (PDT)
+Date: Wed, 24 Oct 2012 12:12:20 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: andrei.adrianx.dinu@intel.com,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20121024101220.GB3269@jama.jama.net>
+References: <1351073335-28110-1-git-send-email-andrei.adrianx.dinu@intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1351073335-28110-1-git-send-email-andrei.adrianx.dinu@intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe] gypsy: added gypsy to meta-oe/recipes-connectivity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,100 +45,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2012 10:21:23 -0000
+X-List-Received-Date: Wed, 24 Oct 2012 10:25:31 -0000
+X-Groupsio-MsgNum: 41256
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="obAtV4On+KRLREo5"
+Content-Disposition: inline
 
-This patch is related to bug https://bugzilla.yoctoproject.org/show_bug.cgi?id=2797.
+--obAtV4On+KRLREo5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
----
- .../recipes-connectivity/gypsy/files/fixups.patch  |   21 +++++++++++++++++
- meta-oe/recipes-connectivity/gypsy/gypsy.inc       |   15 ++++++++++++
- meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb    |   24 ++++++++++++++++++++
- 3 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/gypsy/files/fixups.patch
- create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy.inc
- create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
+On Wed, Oct 24, 2012 at 01:08:55PM +0300, Andrei Dinu wrote:
+> This patch is related to bug https://bugzilla.yoctoproject.org/show_bug.c=
+gi?id=3D2797.
 
-diff --git a/meta-oe/recipes-connectivity/gypsy/files/fixups.patch b/meta-oe/recipes-connectivity/gypsy/files/fixups.patch
-new file mode 100644
-index 0000000..de4d92e
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gypsy/files/fixups.patch
-@@ -0,0 +1,21 @@
-+Upstream-Status: Inappropriate [configuration]
-+
-+---
-+ docs/reference/Makefile.am |    2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+--- gypsy.orig/docs/reference/Makefile.am
-++++ gypsy/docs/reference/Makefile.am
-+@@ -81,10 +81,12 @@ expand_content_files=
-+ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
-+ 
-+ INCLUDES=-I$(top_srcdir) $(GYPSY_CFLAGS)
-+ GTKDOC_LIBS=$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
-+ 
-++EXTRA_DIST =
-++CLEANFILES =
-+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
-+ include $(top_srcdir)/gtk-doc.make
-+ 
-+ # Other files to distribute
-+ # e.g. EXTRA_DIST += version.xml.in
-diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy.inc b/meta-oe/recipes-connectivity/gypsy/gypsy.inc
-new file mode 100644
-index 0000000..0c1735e
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gypsy/gypsy.inc
-@@ -0,0 +1,15 @@
-+SUMMARY = "GPS Multiplexing Daemon"
-+DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
-+multiple clients to access GPS data from multiple GPS sources \
-+concurrently.  Gypsy also hides the details of parsing NMEA from the \
-+client applications, passing the data as simple values for the clients \
-+to use."
-+LICENSE = "GPLv2.0 & LGPLv2.1"
-+SECTION = "x11"
-+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
-+
-+inherit autotools pkgconfig gtk-doc
-+
-+EXTRA_OECONF += "--with-distro=debian"
-+
-+FILES_${PN} += "/usr/share/dbus-1/services/"
-diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb b/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
-new file mode 100644
-index 0000000..51207c9
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "GPS Multiplexing Daemon"
-+DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
-+multiple clients to access GPS data from multiple GPS sources \
-+concurrently.  Gypsy also hides the details of parsing NMEA from the \
-+client applications, passing the data as simple values for the clients \
-+to use."
-+LICENSE = "GPLv2+ & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
-+                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
-+                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
-+
-+SECTION = "x11"
-+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
-+
-+SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
-+PR = "r1"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN} += "/usr/share/dbus-1/system-services/"
-+
-+SRC_URI[md5sum] = "e2d186df9c2cc3b70a027043e22acf1a"
-+SRC_URI[sha256sum] = "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236ddfb271904f154d6"
--- 
-1.7.9.5
+Ah I forgot to mention that recipes-navigation would be better directory
+for this.
 
+And you can add that updated git recipe too.
 
+Cheers,
 
+>=20
+> Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+> ---
+>  .../recipes-connectivity/gypsy/files/fixups.patch  |   21 ++++++++++++++=
++++
+>  meta-oe/recipes-connectivity/gypsy/gypsy.inc       |   15 ++++++++++++
+>  meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb    |   24 ++++++++++++++=
+++++++
+>  3 files changed, 60 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/gypsy/files/fixups.patch
+>  create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy.inc
+>  create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
+>=20
+> diff --git a/meta-oe/recipes-connectivity/gypsy/files/fixups.patch b/meta=
+-oe/recipes-connectivity/gypsy/files/fixups.patch
+> new file mode 100644
+> index 0000000..de4d92e
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/gypsy/files/fixups.patch
+> @@ -0,0 +1,21 @@
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +---
+> + docs/reference/Makefile.am |    2 ++
+> + 1 file changed, 2 insertions(+)
+> +
+> +--- gypsy.orig/docs/reference/Makefile.am
+> ++++ gypsy/docs/reference/Makefile.am
+> +@@ -81,10 +81,12 @@ expand_content_files=3D
+> + # e.g. GTKDOC_LIBS=3D$(top_builddir)/gtk/$(gtktargetlib)
+> +=20
+> + INCLUDES=3D-I$(top_srcdir) $(GYPSY_CFLAGS)
+> + GTKDOC_LIBS=3D$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
+> +=20
+> ++EXTRA_DIST =3D
+> ++CLEANFILES =3D
+> + # This includes the standard gtk-doc make rules, copied by gtkdocize.
+> + include $(top_srcdir)/gtk-doc.make
+> +=20
+> + # Other files to distribute
+> + # e.g. EXTRA_DIST +=3D version.xml.in
+> diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy.inc b/meta-oe/recip=
+es-connectivity/gypsy/gypsy.inc
+> new file mode 100644
+> index 0000000..0c1735e
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/gypsy/gypsy.inc
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "GPS Multiplexing Daemon"
+> +DESCRIPTION =3D "Gypsy is a GPS multiplexing daemon which allows \
+> +multiple clients to access GPS data from multiple GPS sources \
+> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
+> +client applications, passing the data as simple values for the clients \
+> +to use."
+> +LICENSE =3D "GPLv2.0 & LGPLv2.1"
+> +SECTION =3D "x11"
+> +DEPENDS =3D "glib-2.0 dbus bluez4 dbus-glib"
+> +
+> +inherit autotools pkgconfig gtk-doc
+> +
+> +EXTRA_OECONF +=3D "--with-distro=3Ddebian"
+> +
+> +FILES_${PN} +=3D "/usr/share/dbus-1/services/"
+> diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb b/meta-oe/re=
+cipes-connectivity/gypsy/gypsy_0.9.bb
+> new file mode 100644
+> index 0000000..51207c9
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY =3D "GPS Multiplexing Daemon"
+> +DESCRIPTION =3D "Gypsy is a GPS multiplexing daemon which allows \
+> +multiple clients to access GPS data from multiple GPS sources \
+> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
+> +client applications, passing the data as simple values for the clients \
+> +to use."
+> +LICENSE =3D "GPLv2+ & LGPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe \
+> +                    file://COPYING.lib;md5=3D7fbc338309ac38fefcd64b04bb9=
+03e34 \
+> +                    file://src/main.c;beginline=3D1;endline=3D25;md5=3D3=
+fe64e27e61b289b77383a54a982cbdd \
+> +                    file://gypsy/gypsy-time.h;beginline=3D1;endline=3D24=
+;md5=3D06432ea19a7b6607428d04d9dadc37fd"
+> +
+> +SECTION =3D "x11"
+> +DEPENDS =3D "glib-2.0 dbus bluez4 dbus-glib libxslt"
+> +
+> +SRC_URI =3D "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
+> +PR =3D "r1"
+> +
+> +inherit autotools pkgconfig
+> +
+> +FILES_${PN} +=3D "/usr/share/dbus-1/system-services/"
+> +
+> +SRC_URI[md5sum] =3D "e2d186df9c2cc3b70a027043e22acf1a"
+> +SRC_URI[sha256sum] =3D "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236=
+ddfb271904f154d6"
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--obAtV4On+KRLREo5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlCHvwQACgkQN1Ujt2V2gBwP0ACeKEoqx2cf2lbrERybpEOzk+Pm
+HBkAn17Z6RfAcYLTQ151hKqmzWHIT2W0
+=Hwfj
+-----END PGP SIGNATURE-----
+
+--obAtV4On+KRLREo5--
