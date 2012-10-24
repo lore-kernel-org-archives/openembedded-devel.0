@@ -1,35 +1,20 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TQxt2-00045u-Vd
+	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TQy5S-0007WM-As
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Oct 2012 12:08:33 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so108591eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2012 02:55:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=461HLwCOqqG/TKMkha+ss/4n4CiCOHeCXEPud54yLkA=;
-	b=MuxCcTqnvJjHhevOmGMGWmWHXtZxy0RwCZKwP4DlHrccBc9CIEMePaYZe0wC9ijXQx
-	+8T63tKhPIV+sUmBRT9Izio96y/DCxHsOUFPUU9dhO6QCwCc57pwbRD/eUEHscQGTjP1
-	dQdJYw64hahf38xs19Rp+DnhS7IjaWPOMBQqvKe/C20cQud+bk/a3Z1o6jKMeaoWBeGn
-	usN7Svi5Mkhp3rr9DVewP6Zi2JDwNhtXiOneimvx3jcz1+REpV+85fT5XJKtv1lrAEin
-	s6Uyq9DXr12KwdhkzZaJKvv3yS4hxhngr1hSqdY/+/4FzOCrm+OFfaHsKZe88uMU6THi
-	eaVg==
-Received: by 10.14.194.72 with SMTP id l48mr20870549een.9.1351072505723;
-	Wed, 24 Oct 2012 02:55:05 -0700 (PDT)
-Received: from localhost (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id 42sm24877760eee.0.2012.10.24.02.55.03
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 24 Oct 2012 02:55:04 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Wed, 24 Oct 2012 12:21:22 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 24 Oct 2012 03:07:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,639,1344236400"; d="scan'208";a="209908020"
+Received: from adinu-vostro-460 (HELO localhost.localdomain) ([10.237.105.39])
+	by orsmga001.jf.intel.com with ESMTP; 24 Oct 2012 03:07:52 -0700
+From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Oct 2012 11:55:01 +0200
-Message-Id: <1351072501-23261-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQkEFiMbb2G0SPIKngNF1rd5SrpZSgqQo2vCkv4MgAUm+1K1vFlLHdcQCAA3wEQEoYC3chOO
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] f2fs-tools: add 1.1.0
+Date: Wed, 24 Oct 2012 13:08:55 +0300
+Message-Id: <1351073335-28110-1-git-send-email-andrei.adrianx.dinu@intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe] gypsy: added gypsy to meta-oe/recipes-connectivity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +28,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Oct 2012 10:08:33 -0000
+X-List-Received-Date: Wed, 24 Oct 2012 10:21:23 -0000
 
-These are the tools needed for creating and managing f2fs partitions.
+This patch is related to bug https://bugzilla.yoctoproject.org/show_bug.cgi?id=2797.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
 ---
- meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb |   19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
+ .../recipes-connectivity/gypsy/files/fixups.patch  |   21 +++++++++++++++++
+ meta-oe/recipes-connectivity/gypsy/gypsy.inc       |   15 ++++++++++++
+ meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb    |   24 ++++++++++++++++++++
+ 3 files changed, 60 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/gypsy/files/fixups.patch
+ create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy.inc
+ create mode 100644 meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
 
-diff --git a/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
+diff --git a/meta-oe/recipes-connectivity/gypsy/files/fixups.patch b/meta-oe/recipes-connectivity/gypsy/files/fixups.patch
 new file mode 100644
-index 0000000..cce9af1
+index 0000000..de4d92e
 --- /dev/null
-+++ b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Tools for Flash-Friendly File System (F2FS)"
-+HOMEPAGE = "http://sourceforge.net/projects/f2fs-tools/"
++++ b/meta-oe/recipes-connectivity/gypsy/files/fixups.patch
+@@ -0,0 +1,21 @@
++Upstream-Status: Inappropriate [configuration]
 +
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=15667d9b3cb737b57471c148b7c50734"
++---
++ docs/reference/Makefile.am |    2 ++
++ 1 file changed, 2 insertions(+)
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/f2fs-tools/f2fs-tools-${PV}.tar.gz"
-+SRC_URI[md5sum] = "cf3608ea7475c8f9a03159d7f22e4d07"
-+SRC_URI[sha256sum] = "afd774b80f73721f2c4300c0b4780a24b705b8328df229f3ae37315c8bfbff1d"
++--- gypsy.orig/docs/reference/Makefile.am
+++++ gypsy/docs/reference/Makefile.am
++@@ -81,10 +81,12 @@ expand_content_files=
++ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
++ 
++ INCLUDES=-I$(top_srcdir) $(GYPSY_CFLAGS)
++ GTKDOC_LIBS=$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
++ 
+++EXTRA_DIST =
+++CLEANFILES =
++ # This includes the standard gtk-doc make rules, copied by gtkdocize.
++ include $(top_srcdir)/gtk-doc.make
++ 
++ # Other files to distribute
++ # e.g. EXTRA_DIST += version.xml.in
+diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy.inc b/meta-oe/recipes-connectivity/gypsy/gypsy.inc
+new file mode 100644
+index 0000000..0c1735e
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/gypsy/gypsy.inc
+@@ -0,0 +1,15 @@
++SUMMARY = "GPS Multiplexing Daemon"
++DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
++multiple clients to access GPS data from multiple GPS sources \
++concurrently.  Gypsy also hides the details of parsing NMEA from the \
++client applications, passing the data as simple values for the clients \
++to use."
++LICENSE = "GPLv2.0 & LGPLv2.1"
++SECTION = "x11"
++DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
 +
-+inherit autotools
++inherit autotools pkgconfig gtk-doc
 +
-+BBCLASSEXTEND = "native"
++EXTRA_OECONF += "--with-distro=debian"
 +
-+do_configure_prepend() {
-+	# workaround for endless do_configure loop:
-+	# make: Warning: File `Makefile.am' has modification time 5.3e+04 s in the future
-+	touch ${S}/*
-+}
++FILES_${PN} += "/usr/share/dbus-1/services/"
+diff --git a/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb b/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
+new file mode 100644
+index 0000000..51207c9
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/gypsy/gypsy_0.9.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "GPS Multiplexing Daemon"
++DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
++multiple clients to access GPS data from multiple GPS sources \
++concurrently.  Gypsy also hides the details of parsing NMEA from the \
++client applications, passing the data as simple values for the clients \
++to use."
++LICENSE = "GPLv2+ & LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
++                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
++                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
++                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
++
++SECTION = "x11"
++DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
++
++SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
++PR = "r1"
++
++inherit autotools pkgconfig
++
++FILES_${PN} += "/usr/share/dbus-1/system-services/"
++
++SRC_URI[md5sum] = "e2d186df9c2cc3b70a027043e22acf1a"
++SRC_URI[sha256sum] = "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236ddfb271904f154d6"
 -- 
-1.7.10
+1.7.9.5
 
 
 
