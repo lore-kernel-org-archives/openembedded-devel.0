@@ -1,36 +1,33 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TQkOS-0007Si-9S
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TQvlA-0000gE-NF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Oct 2012 21:44:04 +0200
-Received: by mail-pb0-f47.google.com with SMTP id ro12so610486pbb.6
+	Wed, 24 Oct 2012 09:52:17 +0200
+Received: by mail-ia0-f175.google.com with SMTP id b35so172728iac.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Oct 2012 12:30:37 -0700 (PDT)
+	Wed, 24 Oct 2012 00:38:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=XVhXhtY42zbJ2SVeEsr3XVE5dVz8JChLJolpFyudGds=;
-	b=Kx0gDu+sbZP7hOeIMNK4/a5aYRV0BLsA9O35vZcozb5gWl48a/NA6RiMrurHpQxkm0
-	ggUc684jzdlqJtNi31GngWYS9asP3aap5fiQxTRUWqwLJkxk60FEeOFdJS/HTM6rXUss
-	7TMeAbS2Qu808+9rFjXqZqOYYhWdvGJlNXcLBSWmQQE3TK18MRAx6qzk61paJ1WnTSP7
-	HTWBCd+X9iI0XLiM6ooO9rWZafeEm8uhZ29H4ZcfG6miBY+JcG9bAKmpGHlwD0t9VGPB
-	5/WuR9k7qvDNGo5jn3GnkEOm7j5W1m1pKkTPoelCARtx3vh//WYuAO8Y+ilx6yak318t
-	L/kQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=N4s85v48XKTXrsoTYcj7Hp3U3Zaw9CA6AeTIEM+uz9w=;
+	b=MGVBBNjhy8aSwjM1ExsUH59EiTmxwUeZzB1hlpTsKnDY9gTxo6hbwtS7Yeg+H1rYDn
+	8ZP12UO20U5A0dpovEhstYtMt8clZfSyrEUfPwPmGRNKG056wL6EXxaQqjrMvE4gkEio
+	xsYc6HQikWxS+FpaRCNwz9s4AxVI42OcCMfBX18Koqhf1NPeiuPUxqjYYRMfft5Y0JeD
+	hwZFEIAWwZSu4NbUwfoXtJI9jdVNOz+nMDSVrafNEdg2cbyr3Xjl644A+5fTqKFvz9gP
+	sZx7p5WkqbtC9ZPQRkbvaEm100uGFrEuN314nGXndsClU3QPJJQmMKaMVB1HUmPpUg3S
+	3gGQ==
 MIME-Version: 1.0
-Received: by 10.66.87.133 with SMTP id ay5mr37784759pab.59.1351020637111; Tue,
-	23 Oct 2012 12:30:37 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Tue, 23 Oct 2012 12:30:37 -0700 (PDT)
-In-Reply-To: <20121023192909.GU3269@jama.jama.net>
-References: <1351020123-22871-1-git-send-email-otavio@ossystems.com.br>
-	<20121023192909.GU3269@jama.jama.net>
-Date: Tue, 23 Oct 2012 17:30:37 -0200
-X-Google-Sender-Auth: MVVk90C-x_HDRYA8OVpxzlwL6Os
-Message-ID: <CAP9ODKqzXCGD-W6fpMg1MTcyWCGKigXR5JUykOTwgzOZZjK78w@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/2] epdfview: Sync with Debian 0.1.8-3 patches
+Received: by 10.43.7.132 with SMTP id oo4mr13057666icb.6.1351064329116; Wed,
+	24 Oct 2012 00:38:49 -0700 (PDT)
+Received: by 10.64.20.113 with HTTP; Wed, 24 Oct 2012 00:38:49 -0700 (PDT)
+In-Reply-To: <CALbNGRT1teBLRFakFHUxQ+LM8ACsgk4B-dNeL4yzpkgEgtcgrA@mail.gmail.com>
+References: <1350131492-742-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRT1teBLRFakFHUxQ+LM8ACsgk4B-dNeL4yzpkgEgtcgrA@mail.gmail.com>
+Date: Wed, 24 Oct 2012 09:38:49 +0200
+Message-ID: <CALbNGRTBA0D8EF7690MEk_tMMJwkBy-1YZ3Hk8HEwSvYWikFjA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-gnome] gvfs: fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Oct 2012 19:44:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Oct 2012 07:52:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 23, 2012 at 5:29 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Oct 23, 2012 at 05:22:02PM -0200, Otavio Salvador wrote:
->> This includes the patches in use in Debian package to fix color
->> inversion and other minor issues.
->
-> Looks good, will test it when I have efl 1.7.1 ready.
-
-I built and tested it; In fact I did the checking in the Debian
-package to check for the color fix and found some a small and nice set
-of patches; thus this change.
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+On Sun, Oct 21, 2012 at 8:25 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Sat, Oct 13, 2012 at 2:31 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> error message was for build from scratch and latest heads:
+>>
+>> | ERROR: This autoconf log indicates errors, it looked at host include a=
+nd/or library paths while determining system capabilities.
+>> | Rerun configure task after fixing this. The path was '/home/Superandy/=
+tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/gvfs-1.8.2-r=
+7.0/gvfs-1.8.2'
+>> | ERROR: Function failed: do_qa_configure
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>  meta-gnome/recipes-gnome/gvfs/gvfs.inc |    3 ++-
+>>  1 files changed, 2 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes=
+-gnome/gvfs/gvfs.inc
+>> index 903a8ba..e86c93f 100644
+>> --- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+>> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+>> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D3bf50002aefd0=
+02f49e7bb854063f7e7"
+>>
+>>  inherit gnome
+>>
+>> -INC_PR =3D "r7"
+>> +INC_PR =3D "r8"
+>>
+>>  SRC_URI[archive.md5sum] =3D "402f94b187b197b403d25c85caeb9562"
+>>  SRC_URI[archive.sha256sum] =3D "0895ac8f6d416e1b15433b6b6b68eb119c6e8b0=
+4fdb66db665d684355ef89345"
+>> @@ -14,6 +14,7 @@ EXTRA_OECONF =3D "--disable-samba \
+>>                  --with-samba-includes=3D${STAGING_INCDIR} \
+>>                  --with-samba-libs=3D${STAGING_LIBDIR} \
+>>                  --with-archive-includes=3D${STAGING_INCDIR} \
+>> +                --with-archive-libs=3D${STAGING_LIBDIR} \
+>>                 "
+>>
+>>  FILES_${PN} +=3D "${datadir}/dbus-1/services/*"
+>> --
+>> 1.7.4.4
+>>
+> ping
+please :)
 
 
