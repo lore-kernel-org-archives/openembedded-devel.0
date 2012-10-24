@@ -1,37 +1,24 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TRB00-0005AM-QG
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TRB4h-0005x9-22
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 02:08:36 +0200
-Received: by mail-wi0-f177.google.com with SMTP id hj13so930618wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Oct 2012 16:55:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=K396gmD/9YaUwXAJhwEaxvzapJXXOixe6KxHmEbHuaw=;
-	b=THitXEIm/Yu5iZ7qg6Go2ll1i8gx6ostf7dBgKkYk8iySpU5w1EaiYcqtRMU1lj5Vk
-	OhWdBfHw8EH/AzGxs8V3IRR6VSRB896bMpiJWW+jy2kI/t5BHh4aYLmCjyku8tQOjaSc
-	oCD/nfCbgc7hGOhqQ1woWAlZZxL6hauSHgSrOiiJzPUaHdgv+xnH0KeJB859e9XMORVg
-	qZCumwOZsZd9aZ2eR/5hlg65kmY3WNp1x67KNJ1wHYd+0LGOJXr66IP4HVrckwyS/42T
-	TF2NeYTYAz7x+GOgCxZ2Ps2Ng708yuQd4n4kiBAzeOe0UZ5JhRUKhogk8TtTlJRyehVd
-	+vjA==
-Received: by 10.180.90.201 with SMTP id by9mr6007195wib.5.1351122911128;
-	Wed, 24 Oct 2012 16:55:11 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id az2sm6963537wib.10.2012.10.24.16.55.09
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 24 Oct 2012 16:55:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 25 Oct 2012 02:13:27 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 24 Oct 2012 16:59:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,643,1344236400"; d="scan'208";a="208923548"
+Received: from unknown (HELO helios.localnet) ([10.252.122.104])
+	by azsmga001.ch.intel.com with ESMTP; 24 Oct 2012 16:59:56 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2012 01:54:29 +0200
-Message-Id: <aed8dd11206928592383ac402c2e2bf7e73a2d08.1351122431.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
-References: <cover.1351122431.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1351122431.git.Martin.Jansa@gmail.com>
-References: <cover.1351122431.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 8/8] python-pyqt: don't bypass sstate with sip files
+Date: Thu, 25 Oct 2012 00:59:55 +0100
+Message-ID: <2047014.ZCupCGhGcJ@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <1349814502-1649-1-git-send-email-andrea.adami@gmail.com>
+References: <1349814502-1649-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-handheld] [PATCH] linux-yocto_3.2: move to its specific directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,55 +32,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 00:08:36 -0000
+X-List-Received-Date: Thu, 25 Oct 2012 00:13:27 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* discovered with http://patchwork.openembedded.org/patch/38521/
+On Tuesday 09 October 2012 22:28:22 Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../linux/linux-yocto-3.2/akita/akita-standard.scc |   13 +
+>  .../linux/linux-yocto-3.2/akita/akita.cfg          | 2692
+> +++++++++++++++++++
+> .../linux/linux-yocto-3.2/c7x0/c7x0-standard.scc   |   13 +
+>  recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0.cfg | 2412
+> ++++++++++++++++++ ...xx_sharpsl-retain-ops-structure-on-collie.patch
+> |   34 +
+>  .../linux-yocto-3.2/collie/collie-standard.scc     |   13 +
+>  .../linux/linux-yocto-3.2/collie/collie.cfg        | 2420
+> ++++++++++++++++++
+> .../collie/collie_remove_irq_to_gpio.patch         |   31 +
+>  .../collie/locomo_kbd_tweak-r2.patch               |   80 +
+>  .../poodle/locomo_kbd_tweak-r2.patch               |   80 +
+>  .../linux-yocto-3.2/poodle/poodle-standard.scc     |   13 +
+>  .../linux/linux-yocto-3.2/poodle/poodle.cfg        | 2422
+> ++++++++++++++++++ .../linux/linux-yocto-3.2/spitz/spitz-standard.scc
+> |   13 +
+>  .../linux/linux-yocto-3.2/spitz/spitz.cfg          | 2691
+> +++++++++++++++++++
+> .../linux/linux-yocto-3.2/tosa/tosa-standard.scc   |   13 +
+>  recipes-kernel/linux/linux-yocto-3.2/tosa/tosa.cfg | 2694
+> ++++++++++++++++++++
+> .../linux/linux-yocto/akita/akita-standard.scc     |   13 -
+>  recipes-kernel/linux/linux-yocto/akita/akita.cfg   | 2692
+> -------------------
+> .../linux/linux-yocto/c7x0/c7x0-standard.scc       |   13 -
+>  recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg     | 2412
+> ------------------ ...xx_sharpsl-retain-ops-structure-on-collie.patch
+> |   34 -
+>  .../linux/linux-yocto/collie/collie-standard.scc   |   13 -
+>  recipes-kernel/linux/linux-yocto/collie/collie.cfg | 2420
+> ------------------
+> .../collie/collie_remove_irq_to_gpio.patch         |   31 -
+>  .../linux-yocto/collie/locomo_kbd_tweak-r2.patch   |   80 -
+>  .../linux-yocto/poodle/locomo_kbd_tweak-r2.patch   |   80 -
+>  .../linux/linux-yocto/poodle/poodle-standard.scc   |   13 -
+>  recipes-kernel/linux/linux-yocto/poodle/poodle.cfg | 2422
+> ------------------
+> .../linux/linux-yocto/spitz/spitz-standard.scc     |   13 -
+>  recipes-kernel/linux/linux-yocto/spitz/spitz.cfg   | 2691
+> -------------------
+> .../linux/linux-yocto/tosa/tosa-standard.scc       |   13 -
+>  recipes-kernel/linux/linux-yocto/tosa/tosa.cfg     | 2694
+> --------------------
+> recipes-kernel/linux/linux-yocto_3.2.bbappend      |    2 +-
+>  33 files changed, 15635 insertions(+), 15635 deletions(-)
+>  create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc create mode
+> 100644 recipes-kernel/linux/linux-yocto-3.2/akita/akita.cfg create mode
+> 100644 recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc create
+> mode 100644 recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0.cfg create mode
+> 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/0001-pcmcia-pxa2xx_sharpsl-reta
+> in-ops-structure-on-collie.patch create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc create mode
+> 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg create mode
+> 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/collie_remove_irq_to_gpio.patch
+> create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/locomo_kbd_tweak-r2.patch
+> create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/poodle/locomo_kbd_tweak-r2.patch
+> create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc create mode
+> 100644 recipes-kernel/linux/linux-yocto-3.2/poodle/poodle.cfg create mode
+> 100644 recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc create
+> mode 100644 recipes-kernel/linux/linux-yocto-3.2/spitz/spitz.cfg create
+> mode 100644 recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc
+> create mode 100644 recipes-kernel/linux/linux-yocto-3.2/tosa/tosa.cfg
+> delete mode 100644
+> recipes-kernel/linux/linux-yocto/akita/akita-standard.scc delete mode
+> 100644 recipes-kernel/linux/linux-yocto/akita/akita.cfg delete mode 100644
+> recipes-kernel/linux/linux-yocto/c7x0/c7x0-standard.scc delete mode 100644
+> recipes-kernel/linux/linux-yocto/c7x0/c7x0.cfg delete mode 100644
+> recipes-kernel/linux/linux-yocto/collie/0001-pcmcia-pxa2xx_sharpsl-retain-o
+> ps-structure-on-collie.patch delete mode 100644
+> recipes-kernel/linux/linux-yocto/collie/collie-standard.scc delete mode
+> 100644 recipes-kernel/linux/linux-yocto/collie/collie.cfg delete mode
+> 100644
+> recipes-kernel/linux/linux-yocto/collie/collie_remove_irq_to_gpio.patch
+> delete mode 100644
+> recipes-kernel/linux/linux-yocto/collie/locomo_kbd_tweak-r2.patch delete
+> mode 100644
+> recipes-kernel/linux/linux-yocto/poodle/locomo_kbd_tweak-r2.patch delete
+> mode 100644 recipes-kernel/linux/linux-yocto/poodle/poodle-standard.scc
+> delete mode 100644 recipes-kernel/linux/linux-yocto/poodle/poodle.cfg
+> delete mode 100644
+> recipes-kernel/linux/linux-yocto/spitz/spitz-standard.scc delete mode
+> 100644 recipes-kernel/linux/linux-yocto/spitz/spitz.cfg delete mode 100644
+> recipes-kernel/linux/linux-yocto/tosa/tosa-standard.scc delete mode 100644
+> recipes-kernel/linux/linux-yocto/tosa/tosa.cfg
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+Merged to meta-handheld master, thanks.
 
-diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb b/meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb
-index 5eef4c9..e248fbb 100644
---- a/meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb
-+++ b/meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb
-@@ -15,6 +15,7 @@ DEPENDS = "sip-native python-sip"
- RDEPENDS_${PN} = "python-core"
- 
- PYQT_OE_VERSION = "Qt_4_8_3"
-+PR = "r1"
- 
- SRC_URI = "\
-   ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
-@@ -88,22 +89,15 @@ do_configure_prepend() {
- 
- do_install() {
-     install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4
-+    install -d ${D}${datadir}/sip/qt/
-     for module in ${SIP_MODULES}
-     do
-+        install -m 0644 ${S}/sip/${module}/*.sip ${D}${datadir}/sip/qt/
-         echo "from PyQt4.${module} import *\n" >> ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/Qt.py
-         install -m 0755 ${module}/lib${module}.so ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/${module}.so
-     done
-     cp -pPR elementtree ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
-     cp __init__.py ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
--
--    install -d ${STAGING_SIPDIR}/qt/
--    install -d ${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages
--    for module in ${SIP_MODULES}
--    do
--        install -m 0644 ${S}/sip/${module}/*.sip ${STAGING_SIPDIR}/qt/
--        install -m 0755 ${module}/lib${module}.so ${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/${module}.so
--    done
- }
- 
--FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages"
--
-+FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/qt/"
+Cheers,
+Paul
+
 -- 
-1.7.12.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
