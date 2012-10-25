@@ -1,35 +1,32 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TRNTN-0002zu-Uq
+	(envelope-from <kergoth@gmail.com>) id 1TRRxB-0005RG-M8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 15:27:45 +0200
-Received: by mail-we0-f175.google.com with SMTP id t44so817127wey.6
+	Thu, 25 Oct 2012 20:14:49 +0200
+Received: by mail-bk0-f47.google.com with SMTP id jk7so828008bkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2012 06:14:17 -0700 (PDT)
+	Thu, 25 Oct 2012 11:01:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=8nr0i7QxEYQR97HrYgriZCfl5hqjh3e3Q7nYNTZTOk4=;
-	b=Izhe+VRkS+iXAwMxE2euB4BPDiLnMfLuA6dw7CtVIO93V8Qx/+ptnv/CsTvOyiluyk
-	EVerAYYSd7V+Ti/kwlLtOuhHMaYT8uPe0Vk0sQ2lqElR7UusxqV9RZI/MOfSK3gwISmK
-	LRHoOUpRbipyA3xG4F57at3WLtHn/yxY072M26j0kyZpgOq0gz14FdVWBNsqNg8aOv9K
-	ksErxC0x4CUbhn8DliX9fVPiEYlgUQkauMnid1E6GmwxeP+GumoSanBUEr/fB6yl/qsE
-	9w3wJQqQRmnhA7cVxUwJgEdbh+Urd3oepXrG8gBdO2RpEC8KP4tKgRsnJJg+ccVg790F
-	IatQ==
-Received: by 10.216.140.33 with SMTP id d33mr11325526wej.68.1351170857043;
-	Thu, 25 Oct 2012 06:14:17 -0700 (PDT)
-Received: from localhost.localdomain (ip-109-91-251-94.unitymediagroup.de.
-	[109.91.251.94])
-	by mx.google.com with ESMTPS id f1sm9895911wiy.2.2012.10.25.06.14.15
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 25 Oct 2012 06:14:16 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2012 15:13:05 +0200
-Message-Id: <1351170785-9914-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	h=mime-version:sender:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=g4jtSrdhZC6AV7do5fG3g5wWaAMWQ1osAcCFZ2/aAJs=;
+	b=lJ9gMHJ96B7o+teOhTGR0EpBW0tREc9Ztq2uZDvo8k7qWh8EZErbAhOfBnrQrCdSL/
+	YPf7fymJHsafEBXJ4Y6Dte1vKR+EWKHDFgtP0idg2MpRGV6L7yAjWMf1RYZEBJa0JRuD
+	HZst2zhTAUn+jL16aC/BSRlgKQwp49I5IrOgjgtZB70z2JDeVkKAOwJwdSZcRnzOQUP1
+	AyY4/GfV79hF/MBDZ6UC6jc13bhxqpH8iw2FeziWFz1HQgBHE9WjOfUsQ07ojsW0ivvJ
+	vZ0mjRz8SvFxQ0W2vaH9+BYt//mQnyOzCF48bWeVKDwl0jzmt6rlwY5Bti1SAzniK2Pk
+	KhCg==
+Received: by 10.112.29.9 with SMTP id f9mr8136287lbh.22.1351188080410; Thu, 25
+	Oct 2012 11:01:20 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-gnome] gvfs-gdu-volume-monitor: fix build after oe-core's libexecdir transition
+Sender: kergoth@gmail.com
+Received: by 10.114.1.49 with HTTP; Thu, 25 Oct 2012 11:01:00 -0700 (PDT)
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 25 Oct 2012 11:01:00 -0700
+X-Google-Sender-Auth: SU7Wpl505FBFpvpVR8mZdX-8mGM
+Message-ID: <CABcZANmC_c-fZMBHH4tc7gvJdrs_UPoFhn19X+T1E7beqRbXLQ@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: [meta-browser] Question regarding status of chromium recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 13:27:46 -0000
+X-List-Received-Date: Thu, 25 Oct 2012 18:14:49 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-tests:
-* buildhistory check with libexecdir = /usr/libexec
-* run test with libexecdir = /usr/lib/${BPN}
+Greetings,
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+I'm wondering if the chromium recipes in this layer have ever been
+build tested. As far as I can tell, both 19 and 20 are missing
+dependencies on udev (libudev), gtk+, and gconf, and 20 also wants the
+openssl headers. 19 also fails due to an attempt to build/link a
+native tool requiring libxi, so it seems it can't be built without x11
+headers on the build machine (along with the odd ld.gold requirement).
+ Given these issues, I figured I'd throw out a contact email and try
+to determine if perhaps the OSSystems folks have local changes that
+never made it into the public layer, or if the recipes just didn't get
+a great deal of testing.
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-index 689f455..fe5af46 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-@@ -4,7 +4,7 @@ BPN = "gvfs"
- 
- DEPENDS = "gvfs gnome-disk-utility"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- # we need gdu files only: reduce files to delete in libexecdir
- EXTRA_OECONF += "--disable-gphoto2"
-@@ -13,7 +13,9 @@ do_install_append() {
- 	rm -rf ${D}${sysconfdir}
- 	rm -rf ${D}${bindir}
- 	rm -rf ${D}${includedir}
--	rm -rf ${D}${libdir}
-+	rm -rf ${D}${libdir}/gio
-+	rm -rf ${D}${libdir}/lib*
-+	rmdir --ignore-fail-on-non-empty ${D}${libdir}
- 	rm -rf ${D}${datadir}/gvfs/mounts
- 	rm -rf ${D}${datadir}/glib-2.0
- 	rm -rf ${D}${datadir}/GConf
+Thanks, I'd appreciate any input on their status :)
 -- 
-1.7.6.5
-
+Christopher Larson
+clarson at kergoth dot com
+Senior Software Engineer, Mentor Graphics
 
 
