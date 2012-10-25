@@ -1,36 +1,29 @@
-Received: from mail-wg0-f43.google.com ([74.125.82.43])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TRT17-0006h6-JG
+	(envelope-from <jason.mclaurin@gmail.com>) id 1TRTe3-0007TA-7i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 21:22:57 +0200
-Received: by mail-wg0-f43.google.com with SMTP id dq11so1418559wgb.24
+	Thu, 25 Oct 2012 22:03:11 +0200
+Received: by mail-ie0-f175.google.com with SMTP id c13so2830601ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2012 12:09:28 -0700 (PDT)
+	Thu, 25 Oct 2012 12:49:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=HIjzhjp7dlXNmIu2nEexcuecdxqy1PhcUDBRrsjziio=;
-	b=vlRJxpkQvxnExKWahfSRkphVfR/LC4iij3z3JLmj2bNwdAIyLuglGh2f6GEmXRgJRY
-	PJLErdKiA8abbpHJG/wZGBBLGk7CDnaMjoouSoyCm1t07GPz/qhDaCWcNokYUmAzzSYu
-	PqFX9L6waGtBnMyGREO0CqGPlyIdDgGi7unOoHt54pYVR5u4/vzXT3T1GkSvcEo8X5Xm
-	X5KSb7sxltL4Gfrey6+6JTtJyaAhUiTps7Vyq850gH/Vfew7zuQL0XyfHauIun+oDmnm
-	w2BRPYJB7DXoIC2yawERRG8+51E4GkHTFe78uk6RK8dOkE4E95kuQ23WWtAYGInJNsiJ
-	88WQ==
-Received: by 10.216.202.97 with SMTP id c75mr8512132weo.211.1351192168417;
-	Thu, 25 Oct 2012 12:09:28 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id cu1sm11296242wib.6.2012.10.25.12.09.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 25 Oct 2012 12:09:25 -0700 (PDT)
-Date: Thu, 25 Oct 2012 21:09:44 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121025190944.GQ3269@jama.jama.net>
-References: <k6b5r8$edu$1@ger.gmane.org>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=AqqKkIi7Ay8nhtYljW+cnk75hkJAO7YApQqaGF3c3ac=;
+	b=BXQFPt93C1NV0GptmI0mSvyCxjcDZU7X/nkKTk6R2Hwl1V4uWmSP0t++9WRP028uoK
+	VQglbXToZ1r5XhLUv7jSjvBCTdYqdOBLIh7fANvuloh7J6y9vG4w34sd9dI8QTQsZ4tx
+	UhnNAQqfHrwX+pvquxLMexzBDwSMr4eMkVogBcZYA509WrylbAviMywhzj6I4h4Z3FU6
+	IkCyzQNMxaVk2XoHGdjXr+LD5a2ssGV3jCwaoyWaUC7rk62WWkFVRv9j8j7pzOvHTftC
+	9Y8HGpTSltupSMgIYe8cQ23qbsF28EH0NzcIFw5BLC5HA5gAdZUUjWL/plo49KEJLh07
+	U5tA==
 MIME-Version: 1.0
-In-Reply-To: <k6b5r8$edu$1@ger.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
+Received: by 10.50.171.101 with SMTP id at5mr7134325igc.60.1351194581581; Thu,
+	25 Oct 2012 12:49:41 -0700 (PDT)
+Received: by 10.231.50.149 with HTTP; Thu, 25 Oct 2012 12:49:41 -0700 (PDT)
+Date: Thu, 25 Oct 2012 14:49:41 -0500
+Message-ID: <CAKgF1Sus=VdZb=YPDRHZWDCLQfDQHHBKyv1Y4BmH=MDojjXocw@mail.gmail.com>
+From: Jason McLaurin <jason.mclaurin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Cross compiler including files from /usr/include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,88 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 19:22:57 -0000
-X-Groupsio-MsgNum: 41294
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3LbzE+0aVzOo6fIw"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Oct 2012 20:03:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---3LbzE+0aVzOo6fIw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi everyone,
 
-On Thu, Oct 25, 2012 at 12:55:47PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Hi,
->=20
-> We need a branch to track oe-core 'danny' and I am swamped till ELC-E
-> happens, so I would like to hold off on patches that make meta-oe layers
-> incompatible with oe-core 'danny'.
+I'm having a build failure where it looks like g++ is including a file
+from the regular Linux environment, instead of the cross-compile
+environment.  Look at how pthread.h is coming from /usr/include
+instead of somewhere inside OpenEmbedded.
 
-Agreed, I never used denzil, but I plan to stick official SHR builds to dan=
-ny=20
-branches (because I fear mandatory OEBasicHash in master soon).
+I looked under the sysroot specified in the g++ command
+(/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi),
+and there is a usr/include/pthread.h in that path.  Reading the gcc
+docs makes it seem like the --sysroot= option would make
+-I/usr/include redirect to <sysroot>/usr/include, but that doesn't
+seem to be happening here.
 
-> As for branch maintenance: any volunteers for managing the meta-openembed=
-ded
-> 'danny' branches? There doesn't need to be a single maintainer, but it wo=
-uld
-> be nice to have one person coordinating everything, even if it's just
-> pulling in danny-next branches from the layer maintainers every week or s=
-o.
+Thanks in advance,
 
-I can take care of meta-efl and co-maintain the rest too.=20
+-Jason
 
-Speaking of meta-efl I've upgrade to bugfix release 1.7.1 + EFL_SRCREV=20
-bump ready for master in my branch, but plan to test it more, so not sure=
-=20
-if I should hold it off for longer and then backport it or test it faster :=
-).
+-------------------------------------
 
-Cheers,
+| arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s
+-mthumb-interwork -mno-thumb
+--sysroot=/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi
+-c -pipe -fexpensive-optimizations -fomit-frame-pointer
+-frename-registers -O2 -ggdb2 -fexpensive-optimizations
+-fomit-frame-pointer -frename-registers -O2 -ggdb2 -fpermissive
+-fvisibility-inlines-hidden -g -Wall -W -D_REENTRANT -DQT_XML_LIB
+-DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED
+-I../../../../sysroots/armv5te-angstrom-linux-gnueabi/usr/share/qtopia/mkspecs/linux-g++
+-I. -I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtCore
+-I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtNetwork
+-I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtGui
+-I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtXml
+-I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia
+-I/usr/include -I. -o autoheightlabel.o
+src/common/gui/autoheightlabel.cpp
+| In file included from
+/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/arm-angstrom-linux-gnueabi/bits/gthr-default.h:41:0,
+|                  from
+/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/arm-angstrom-linux-gnueabi/bits/gthr.h:162,
+|                  from
+/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/ext/atomicity.h:34,
+|                  from
+/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/bits/basic_string.h:41,
+|                  from
+/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/string:53,
+|                  from src/common/gui/../app/appconstants.h:5,
+|                  from src/common/gui/../app/appcommon.h:9,
+|                  from src/common/gui/autoheightlabel.h:4,
+|                  from src/common/gui/autoheightlabel.cpp:1:
+| /usr/include/pthread.h:228:31: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:743:6: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:747:6: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:753:20: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:758:6: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:882:6: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:886:3: error: expected initializer before '__THROWNL'
+| /usr/include/pthread.h:892:23: error: expected initializer before '__THROWNL'
 
-> As I said above, I'm swamped for the next 3 weeks, so can people who have
-> used or are using the 'denzil' branch weigh in with feedback/anecdotes/et=
-c?
-> I have such a document for oe-core 'denzil', which I keep failing to send
-> out, but it boils down to "better predictability for merge windows". Plea=
-se
-> share your experience for meta-oe here.
->=20
-> regards,
->=20
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFQiRqzMkyGM64RGpERAschAJ98yscNYLI9qNGRviDm+drBquLttACgoa0X
-> /YhGdFr+iYLy8n99sXb4zKE=3D
-> =3DahtL
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3LbzE+0aVzOo6fIw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCJjngACgkQN1Ujt2V2gByHTwCgsFsbXTLV+JTSgchfXeUgU/HI
-C6wAn036RnEVa1h98C1xY0hosbZNh+uJ
-=n91a
------END PGP SIGNATURE-----
-
---3LbzE+0aVzOo6fIw--
