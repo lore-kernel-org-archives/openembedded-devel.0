@@ -1,32 +1,29 @@
-Received: from mail-la0-f47.google.com ([209.85.215.47])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1TRSr3-0006T7-SI
+	(envelope-from <gary@mlbassoc.com>) id 1TRT0I-0006c5-Eb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 21:12:33 +0200
-Received: by mail-la0-f47.google.com with SMTP id h5so1879814lam.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2012 11:59:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=8rxR3l2DINjVJG2I/vHlACpNTP0Mx27yccdpjMNQMro=;
-	b=UjBPqX7rNp2aeG3pd0R/Ar86RIh0nwNfaIyxSqjnD1wk1kXRaAGk3W3QDBP10anfXr
-	h/EHiXhAr3lBIO69/UoyyS7vtIgtygYgfvYD2QLA7AXPFGFFDdIl8skJ/ygblo6yCh+D
-	tbLpFmwZSOJGyRXAmc/7SjM9Hf4QtR9PVvwevbVau3VCBQYKi/x7HC/j5NCEGEgSqoAD
-	SihKkUlHtLbHeqBNYCEIXd2cF6CWZ8dVqAmFugLYkzGNP8lBD3Rj6D81krBclb4ks9H1
-	gOke8pHOAM0LglbBDRl97/bkBUgJ4tNo4q5847+krwMU6cIqW+GN3/CGUgpbB8/0aEZO
-	wP0w==
-Received: by 10.112.25.168 with SMTP id d8mr8002862lbg.61.1351191544839;
-	Thu, 25 Oct 2012 11:59:04 -0700 (PDT)
-Received: from Perrin.lynet.no ([37.191.128.59])
-	by mx.google.com with ESMTPS id jk8sm6151501lab.7.2012.10.25.11.59.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 25 Oct 2012 11:59:03 -0700 (PDT)
-From: Martin Ertsaas <martiert@gmail.com>
+	Thu, 25 Oct 2012 21:22:06 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 7C4CAF81200; Thu, 25 Oct 2012 13:08:38 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 30B1CF811F2;
+	Thu, 25 Oct 2012 13:08:37 -0600 (MDT)
+Message-ID: <50898E6A.60403@mlbassoc.com>
+Date: Thu, 25 Oct 2012 13:09:30 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Oct 2012 20:58:48 +0200
-Message-Id: <1351191528-13408-1-git-send-email-martiert@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-systemd][PATCH] meta-systemd: ntp: Change version to what is used in meta-networking.
+References: <CABcZANmC_c-fZMBHH4tc7gvJdrs_UPoFhn19X+T1E7beqRbXLQ@mail.gmail.com>
+	<85ip9ywhjw.fsf@cl-t066-141cl.privatedns.com>
+In-Reply-To: <85ip9ywhjw.fsf@cl-t066-141cl.privatedns.com>
+Subject: Re: [meta-browser] Question regarding status of chromium recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,73 +37,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 19:12:34 -0000
+X-List-Received-Date: Thu, 25 Oct 2012 19:22:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Change version of ntp to match that in meta-networking. Also change ntpdate to ntp-date to
-match the names used in meta-networking.
+On 2012-10-25 12:08, Mario Domenech Goulart wrote:
+> Hi Chris,
+>
+> On Thu, 25 Oct 2012 11:01:00 -0700 Chris Larson <clarson@kergoth.com> wrote:
+>
+>> I'm wondering if the chromium recipes in this layer have ever been
+>> build tested. As far as I can tell, both 19 and 20 are missing
+>> dependencies on udev (libudev), gtk+, and gconf, and 20 also wants the
+>> openssl headers. 19 also fails due to an attempt to build/link a
+>> native tool requiring libxi, so it seems it can't be built without x11
+>> headers on the build machine (along with the odd ld.gold requirement).
+>>   Given these issues, I figured I'd throw out a contact email and try
+>> to determine if perhaps the OSSystems folks have local changes that
+>> never made it into the public layer, or if the recipes just didn't get
+>> a great deal of testing.
+>>
+>> Thanks, I'd appreciate any input on their status :)
+>
+> I haven't built chromium on OE.  I've been building firefox only.  Maybe
+> Otavio?
 
-Signed-off-by: Martin Ertsaas <martiert@gmail.com>
----
- .../recipes-support/ntp/ntp_4.2.6p3.bbappend       |   20 --------------------
- .../recipes-support/ntp/ntp_4.2.6p5.bbappend       |   20 ++++++++++++++++++++
- 2 files changed, 20 insertions(+), 20 deletions(-)
- delete mode 100644 meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
- create mode 100644 meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p5.bbappend
+I just gave it a try and it failed pretty early on with an error in one of
+the support packages:
+| arm-amltd-linux-gnueabi-gcc  -march=armv7-a     -mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a8 --sysroot=/home/local/p60_new/tmp/sysroots/cobra3530p60 -o 
+Linux2.6_arm_glibc_PTH_OPT.OBJ/secport.o -c -O2 -pipe -g -feliminate-unused-debug-types -ansi -D_POSIX_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE -fPIC -DLINUX2_1  -Wall 
+-Werror-implicit-function-declaration -Wno-switch -pipe -DLINUX -Dlinux -DHAVE_STRERROR -DXP_UNIX -UDEBUG -DNDEBUG -D_REENTRANT -DNSS_ENABLE_ECC -DUSE_UTIL_DIRECTLY 
+-I/home/local/p60_new/tmp/sysroots/cobra3530p60/usr/include/mozilla/nspr -I../../../../dist/Linux2.6_arm_glibc_PTH_OPT.OBJ/include -I../../../../dist/public/nss 
+-I../../../../dist/private/nss  secport.c
+| secport.c: In function 'PORT_FreeArena_Util':
+| secport.c:347:2: error: implicit declaration of function 'PL_ClearArenaPool' [-Werror=implicit-function-declaration]
+| cc1: some warnings being treated as errors
+| make[2]: *** [Linux2.6_arm_glibc_PTH_OPT.OBJ/secport.o] Error 1
+| make[2]: Leaving directory `/home/local/p60_new/tmp/work/armv7a-vfp-neon-amltd-linux-gnueabi/nss-3.13.3-r1/nss-3.13.3/mozilla/security/nss/lib/util'
+| make[1]: *** [libs] Error 2
+| make[1]: Leaving directory `/home/local/p60_new/tmp/work/armv7a-vfp-neon-amltd-linux-gnueabi/nss-3.13.3-r1/nss-3.13.3/mozilla/security/nss/lib'
+| make: *** [libs] Error 2
+| make: Leaving directory `/home/local/p60_new/tmp/work/armv7a-vfp-neon-amltd-linux-gnueabi/nss-3.13.3-r1/nss-3.13.3/mozilla/security/nss'
+| ERROR: Function failed: do_compile (see /home/local/p60_new/tmp/work/armv7a-vfp-neon-amltd-linux-gnueabi/nss-3.13.3-r1/temp/log.do_compile.2781 for further information)
+ERROR: Task 173 (/home/local/poky-multi/meta-browser/recipes-support/nss/nss_3.13.3.bb, do_compile) failed with exit code '1'
 
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
-deleted file mode 100644
-index c6cd031..0000000
---- a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
-+++ /dev/null
-@@ -1,20 +0,0 @@
--inherit systemd
--
--PRINC := "${@int(PRINC) + 1}"
--
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--
--SYSTEMD_PACKAGES = "${PN}-systemd ntpdate-systemd"
--SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
--SYSTEMD_SERVICE_ntpdate-systemd = "ntpdate.service"
--
--SRC_URI += " \
--	file://ntpdate.service \
--        file://ntpd.service \
--"
--
--do_install_append() {
--	install -d ${D}${systemd_unitdir}/system
--	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
--	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
--}
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p5.bbappend b/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p5.bbappend
-new file mode 100644
-index 0000000..bc2b2dd
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p5.bbappend
-@@ -0,0 +1,20 @@
-+inherit systemd
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd ${PN}-date-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
-+SYSTEMD_SERVICE_${PN}-date-systemd = "ntpdate.service"
-+
-+SRC_URI += " \
-+	file://ntpdate.service \
-+        file://ntpd.service \
-+"
-+
-+do_install_append() {
-+	install -d ${D}${systemd_unitdir}/system
-+	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
-+	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-+}
+Maybe there's a known cure for this?
+
 -- 
-1.7.8.6
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
