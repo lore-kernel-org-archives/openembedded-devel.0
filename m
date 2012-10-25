@@ -1,29 +1,34 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jason.mclaurin@gmail.com>) id 1TRTe3-0007TA-7i
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Oct 2012 22:03:11 +0200
-Received: by mail-ie0-f175.google.com with SMTP id c13so2830601ieb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TRW5c-0001UO-6S for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 00:39:48 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TRVsg-0003aA-DS for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 00:26:26 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2012 00:26:26 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2012 12:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=AqqKkIi7Ay8nhtYljW+cnk75hkJAO7YApQqaGF3c3ac=;
-	b=BXQFPt93C1NV0GptmI0mSvyCxjcDZU7X/nkKTk6R2Hwl1V4uWmSP0t++9WRP028uoK
-	VQglbXToZ1r5XhLUv7jSjvBCTdYqdOBLIh7fANvuloh7J6y9vG4w34sd9dI8QTQsZ4tx
-	UhnNAQqfHrwX+pvquxLMexzBDwSMr4eMkVogBcZYA509WrylbAviMywhzj6I4h4Z3FU6
-	IkCyzQNMxaVk2XoHGdjXr+LD5a2ssGV3jCwaoyWaUC7rk62WWkFVRv9j8j7pzOvHTftC
-	9Y8HGpTSltupSMgIYe8cQ23qbsF28EH0NzcIFw5BLC5HA5gAdZUUjWL/plo49KEJLh07
-	U5tA==
-MIME-Version: 1.0
-Received: by 10.50.171.101 with SMTP id at5mr7134325igc.60.1351194581581; Thu,
-	25 Oct 2012 12:49:41 -0700 (PDT)
-Received: by 10.231.50.149 with HTTP; Thu, 25 Oct 2012 12:49:41 -0700 (PDT)
-Date: Thu, 25 Oct 2012 14:49:41 -0500
-Message-ID: <CAKgF1Sus=VdZb=YPDRHZWDCLQfDQHHBKyv1Y4BmH=MDojjXocw@mail.gmail.com>
-From: Jason McLaurin <jason.mclaurin@gmail.com>
+	Fri, 26 Oct 2012 00:26:26 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Cross compiler including files from /usr/include
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 26 Oct 2012 00:26:04 +0200
+Message-ID: <k6ce9q$6ec$1@ger.gmane.org>
+References: <CABcZANmC_c-fZMBHH4tc7gvJdrs_UPoFhn19X+T1E7beqRbXLQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <CABcZANmC_c-fZMBHH4tc7gvJdrs_UPoFhn19X+T1E7beqRbXLQ@mail.gmail.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-browser] Question regarding status of chromium recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,66 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 20:03:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Oct 2012 22:39:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi everyone,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm having a build failure where it looks like g++ is including a file
-from the regular Linux environment, instead of the cross-compile
-environment.  Look at how pthread.h is coming from /usr/include
-instead of somewhere inside OpenEmbedded.
+Op 25-10-12 20:01, Chris Larson schreef:
+> Greetings,
+> 
+> I'm wondering if the chromium recipes in this layer have ever been build
+> tested. As far as I can tell, both 19 and 20 are missing dependencies on
+> udev (libudev), gtk+, and gconf, and 20 also wants the openssl headers.
+> 19 also fails due to an attempt to build/link a native tool requiring
+> libxi, so it seems it can't be built without x11 headers on the build
+> machine (along with the odd ld.gold requirement). Given these issues, I
+> figured I'd throw out a contact email and try to determine if perhaps the
+> OSSystems folks have local changes that never made it into the public
+> layer, or if the recipes just didn't get a great deal of testing.
+> 
+> Thanks, I'd appreciate any input on their status :)
 
-I looked under the sysroot specified in the g++ command
-(/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi),
-and there is a usr/include/pthread.h in that path.  Reading the gcc
-docs makes it seem like the --sysroot= option would make
--I/usr/include redirect to <sysroot>/usr/include, but that doesn't
-seem to be happening here.
+Nice timing, I just received a request for a working chromium build and I
+ran into similar if not the same issues :)
 
-Thanks in advance,
 
--Jason
 
--------------------------------------
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-| arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s
--mthumb-interwork -mno-thumb
---sysroot=/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi
--c -pipe -fexpensive-optimizations -fomit-frame-pointer
--frename-registers -O2 -ggdb2 -fexpensive-optimizations
--fomit-frame-pointer -frename-registers -O2 -ggdb2 -fpermissive
--fvisibility-inlines-hidden -g -Wall -W -D_REENTRANT -DQT_XML_LIB
--DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_SHARED
--I../../../../sysroots/armv5te-angstrom-linux-gnueabi/usr/share/qtopia/mkspecs/linux-g++
--I. -I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtCore
--I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtNetwork
--I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtGui
--I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia/QtXml
--I/home/linux3ps/src/oe_sd50/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/include/qtopia
--I/usr/include -I. -o autoheightlabel.o
-src/common/gui/autoheightlabel.cpp
-| In file included from
-/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/arm-angstrom-linux-gnueabi/bits/gthr-default.h:41:0,
-|                  from
-/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/arm-angstrom-linux-gnueabi/bits/gthr.h:162,
-|                  from
-/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/ext/atomicity.h:34,
-|                  from
-/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/bits/basic_string.h:41,
-|                  from
-/home/linux3ps/src/oe_sd50/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.5.3/../../../../arm-angstrom-linux-gnueabi/include/c++/4.5.3/string:53,
-|                  from src/common/gui/../app/appconstants.h:5,
-|                  from src/common/gui/../app/appcommon.h:9,
-|                  from src/common/gui/autoheightlabel.h:4,
-|                  from src/common/gui/autoheightlabel.cpp:1:
-| /usr/include/pthread.h:228:31: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:743:6: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:747:6: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:753:20: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:758:6: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:882:6: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:886:3: error: expected initializer before '__THROWNL'
-| /usr/include/pthread.h:892:23: error: expected initializer before '__THROWNL'
+iD8DBQFQibx8MkyGM64RGpERAuWWAJ9ooRxIMeMmyWCAT5gCkfYjrx05NwCgso/G
+hWVMQT8AZkx2MOXqsr+xARc=
+=2i+V
+-----END PGP SIGNATURE-----
+
 
 
