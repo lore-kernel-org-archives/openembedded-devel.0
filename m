@@ -1,29 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jason.mclaurin@gmail.com>) id 1TRWlC-0002ON-8X
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2012 01:22:46 +0200
-Received: by mail-we0-f175.google.com with SMTP id t44so1112321wey.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TReL6-0005VK-G6 for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 09:28:20 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TRe8A-00069E-OS for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 09:14:58 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Oct 2012 09:14:58 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Oct 2012 16:09:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=j7gEaTrpVxr0gPojEnHJwKjm8hRta3bUs7peMRxW3yg=;
-	b=aJ4AKXPm3EFN0PbGt88koaXzvnTzLA7ZB6R5sTBKE0Kl5wmRSv5epSWVUmIRgMZa0k
-	cCNKTEEffHVvL+R09XNYdTsSc6mCl5q9vwNooCOaLeU4TCcl8KdJlyo7dxP/mIZL/b8a
-	S9KPfR3y9L6Ejyr53nCZigzhwV/k7DK+NmMK48FDyK4DDp0hgcVwXvL8SzASi+9/sqED
-	dEirJzzpTi/Owu3SeC4JYejMshHfZxts/1gd/lCbrHOU0EBfM5nxYQ6TAVdSNuO3BJTr
-	V1Pz7JvB2oWfBhLKwiUbeHf06XheZR4qhqqFaA6Z7d3JmAeQ4OIYwMfFcap0mv5ycaMy
-	t4Hg==
-MIME-Version: 1.0
-Received: by 10.216.70.13 with SMTP id o13mr13376633wed.184.1351206556928;
-	Thu, 25 Oct 2012 16:09:16 -0700 (PDT)
-Received: by 10.216.33.70 with HTTP; Thu, 25 Oct 2012 16:09:16 -0700 (PDT)
-Date: Thu, 25 Oct 2012 18:09:16 -0500
-Message-ID: <CAKgF1SuHffULsmTJDWh5SpAY_bqrHaEsp1XT+Z8A-i6=N_k=xg@mail.gmail.com>
-From: Jason McLaurin <jason.mclaurin@gmail.com>
+	Fri, 26 Oct 2012 09:14:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Cross compiler including files from /usr/include
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 26 Oct 2012 09:14:43 +0200
+Message-ID: <k6dd8v$tj0$1@ger.gmane.org>
+References: <1351191528-13408-1-git-send-email-martiert@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1351191528-13408-1-git-send-email-martiert@gmail.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-systemd][PATCH] meta-systemd: ntp: Change version to what is used in meta-networking.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,18 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Oct 2012 23:22:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 26 Oct 2012 07:28:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi folks,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I solved this on my own, and the issue was my fault.  One of my
-sub-projects was adding "/usr/include" to the include path, and that's
-what was pulling in incompatible headers.  Fixing that fixed the
-problem.
+Op 25-10-12 20:58, Martin Ertsaas schreef:
+> Change version of ntp to match that in meta-networking. Also change
+> ntpdate to ntp-date to match the names used in meta-networking.
 
-Sorry for the noise...
+While you are there, can you also disable the autoactivating for the unit?
+It's broken and I'm gettig tired of doing 'systemctl disable' on it for
+every system.
 
--Jason
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQijhjMkyGM64RGpERAkBaAJ97niM1IfjERLUg3dOlFXMKLx/TogCgqXv6
+X63nMniUZKcmw41+u4BEFKE=
+=J9a5
+-----END PGP SIGNATURE-----
+
 
 
