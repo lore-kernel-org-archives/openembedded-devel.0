@@ -1,34 +1,24 @@
-Received: from mail-la0-f47.google.com ([209.85.215.47])
+Received: from service137.mimecast.com ([91.220.42.79])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martiert@gmail.com>) id 1TRfxk-0002cg-8c
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2012 11:12:20 +0200
-Received: by mail-la0-f47.google.com with SMTP id h5so2284492lam.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2012 01:58:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=BckMN4aAnqPZgiTdkauS7rSEtToSBiZ+L9Uwmr6pb1o=;
-	b=kHO0b5gmpaNqm9mawbDI1G3GgbQHeo5GFYI+urOVMFkNVWtoWooUQLq6YMUaJQlorQ
-	h9AzmJoADvPkhpueG6SSxoXkr2FJW67tM5tGEBCrzBoRayanfq77EQCoxdI73upLkKUX
-	SF4vFgoDrYWr1fjwBUJ2Wd8fVTjAW7xqspvZZOfeSfjW27F2eR5UiZTRUWjQQNEXlRSR
-	AwoA4IcJFSE7Gi3dHmHQygjsqZtwnTDqvSOO1eBgSmgHa/sTC88KFBthiKqjoSwRAF0y
-	nU7+maVTvJhVshuFpWEUT3DxSZxOuPmd03RlYNYrBUL3moqsqBdUgNI+YKnwUx7/C6dQ
-	JbsA==
-Received: by 10.152.102.234 with SMTP id fr10mr20113408lab.28.1351241930358;
-	Fri, 26 Oct 2012 01:58:50 -0700 (PDT)
-Received: from Perrin.lynet.no ([37.191.128.59])
-	by mx.google.com with ESMTPS id hu6sm283139lab.13.2012.10.26.01.58.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 26 Oct 2012 01:58:49 -0700 (PDT)
-From: Martin Ertsaas <martiert@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Oct 2012 10:58:40 +0200
-Message-Id: <1351241920-15135-2-git-send-email-martiert@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1351241920-15135-1-git-send-email-martiert@gmail.com>
-References: <1351241920-15135-1-git-send-email-martiert@gmail.com>
-Subject: [meta-systemd][PATCH v2 2/2] meta-systemd: ntp: Fix starting of ntpdate.service
+	(envelope-from <john.stirling@audiopartnership.com>)
+	id 1TRg9t-0002qS-Lb for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 11:24:53 +0200
+Received: from Exchange01.audio.local (89-105-112-30.fluidata.co.uk
+	[89.105.112.30]) by service137.mimecast.com; Fri, 26 Oct 2012 10:09:57
+	+0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 26 Oct 2012 10:12:55 +0100
+Message-ID: <4772E7C9DD9B9D4EB442B23D7FE42EEA01F32E92@Exchange01.audio.local>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: sox-native
+thread-index: Ac2zWhW9KqmaGn1yQvOszGxgl018iw==
+From: "John Stirling" <john.stirling@audiopartnership.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-MC-Unique: 112102610095705301
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: sox-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +32,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2012 09:12:20 -0000
+X-List-Received-Date: Fri, 26 Oct 2012 09:24:53 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
 
-Make ntpdate.service run ntpdate instead of ntpd, as ntpd is not
-necessarily installed. Also make ntpdate require network.target, as
-you can not run ntpdate (or ntpd for that matter), without networking.
+Hi,
 
-Signed-off-by: Martin Ertsaas <martiert@gmail.com>
----
- .../recipes-support/ntp/ntp/ntpdate.service        |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+=20
 
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service b/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
-index b2bc632..a48d11d 100644
---- a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
-+++ b/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
-@@ -1,10 +1,11 @@
- [Unit]
- Description=Network Time Service (one-shot ntpdate mode)
-+Requires=network.target
- Before=ntpd.service
- 
- [Service]
- Type=oneshot
--ExecStart=/usr/bin/ntpd -q -g -x
-+ExecStart=/usr/bin/ntpdate pool.ntp.org
- RemainAfterExit=yes
- 
- [Install]
--- 
-1.7.8.6
+Our OE build is based on angstrom (master) -
 
+=20
 
+https://github.com/Angstrom-distribution/setup-scripts/blob/master/sourc
+es/layers.txt
 
+=20
+
+As part of our build we need to use sox to generate some audio files
+that are present on the image.
+
+=20
+
+I'm getting stuck trying to build sox-native -
+
+=20
+
+NOTE: Resolving any missing task queue dependencies
+
+ERROR: Nothing PROVIDES 'libav-native' (but
+virtual:native:/build/johns/zander/setup-scripts/sources/meta-openembedd
+ed/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb DEPENDS on or
+otherwise requires it)
+
+ERROR: Required build target 'sox-native' has no buildable providers.
+
+Missing or unbuildable dependency chain was: ['sox-native',
+'libav-native']
+
+=20
+
+I'm not sure what I need to do to get libav-native working. I tried
+adding=20
+
+=20
+
+BBCLASSEXTEND =3D "native"
+
+=20
+
+to libav.inc
+
+=20
+
+which changes the error to -=20
+
+=20
+
+NOTE: Resolving any missing task queue dependencies
+
+ERROR: Nothing PROVIDES 'pulseaudio-native' (but
+virtual:native:/build/johns/zander/setup-scripts/sources/meta-openembedd
+ed/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb DEPENDS on or
+otherwise requires it)
+
+ERROR: Required build target 'sox-native' has no buildable providers.
+
+Missing or unbuildable dependency chain was: ['sox-native',
+'pulseaudio-native']
+
+=20
+
+I suspect that going through each error and adding a BBCLASSEXTEND line
+is not going to work ?
+
+=20
+
+Any assistance on this would be much appreciated.
+
+=20
+
+Thanks
+
+John
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+=20
+
+Audio Partnership PLC, Gallery Court, Hankey Place, London SE1 4BB, UK=20
+Reg No. 2953313
+This e-mail is confidential and for the addressee only.=20
+Please refer to <a href=3D"http://www.audiopartnership.com/AP-disclaimer.p=
+hp">Disclaimer</a>  for important notices.
+From sledz@fensuse.internal.dresearch-fe.de Fri Oct 26 11:50:09 2012
+Received: from zk223.dresearch-fe.de ([217.92.177.116])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <sledz@fensuse.internal.dresearch-fe.de>)
+	id 1TRgYL-00039O-Dj for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Oct 2012 11:50:09 +0200
+Received: from fensuse.internal.dresearch-fe.de
+	(fensuse.internal.dresearch-fe.de [172.29.23.6])
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id 6B2CEE0117;
+	Fri, 26 Oct 2012 09:36:39 +0000 (UTC)
+Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
+	id BFFF0706EF5; Fri, 26 Oct 2012 11:36:38 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: Tom Rini <tom.rini@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 26 Oct 2012 11:36:28 +0200
+Message-Id: <cover.1351244110.git.sledz@dresearch-fe.de>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [oe] [2011.03-maintenance 0/1] pull request 20121026
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/open=
+embedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject
