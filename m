@@ -1,32 +1,33 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TRq4O-0006cB-4o
+	(envelope-from <andrea.adami@gmail.com>) id 1TRsPb-0001U5-N7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2012 21:59:52 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so1219925eei.6
+	Sat, 27 Oct 2012 00:29:55 +0200
+Received: by mail-ea0-f175.google.com with SMTP id c1so1014798eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2012 12:46:21 -0700 (PDT)
+	Fri, 26 Oct 2012 15:16:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=3S5vboDMNgOytDtWHSFIttdQlL05XmkVpvAPIZRnPDs=;
-	b=FHpL5x+Wsc63iVZ/HQRruNGNFOm+g2bumKiNpyrcDPV3C97vWb57X9vEQWWUwSVjwL
-	bKB/3qGgdAgwPUikpeiJsVB2U18pZAQ0fUNRQanPe6l6yW7bnWY+TtJ0iL3z6JlyKhXh
-	Ynqb70SnBTYPtbgZTNq9hS566xeG6R3qksOxNgNERCakVvCxS4EcAbfTkR+TaVR6uMmM
-	hxHqCLhO9Nu+vIAjbYHZrAU81iliecR8TrPKiZLpjpE4hazfZutEVDt0w6Rt3Dup1IAG
-	R8XgTihdy00ZiZpzZtVTbucTpa/pjH9LG8ouj8uyoCEoFBcn76saP+NePYWDu1UZG6Qo
-	ujNw==
-Received: by 10.14.194.2 with SMTP id l2mr35878539een.12.1351280781794;
-	Fri, 26 Oct 2012 12:46:21 -0700 (PDT)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id i1sm4645742eeo.8.2012.10.26.12.46.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 26 Oct 2012 12:46:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	bh=uhp+vJ5hI89ZsAjhc1TM3exsgX5vtPY2Qc7Hdtw5cZk=;
+	b=DCo4r/qC/AYC5359L+Vl2dTIfi3SCR8g2kLeHhd8qLfODcJvF6+8izhCSUNNmzBWzD
+	LTYdcrphZg1ic1tm+XG/PR4oThIJ51pSfMQ1YRXMpx+GByCtzoOOKIb0b2k6t7ys+ta0
+	DtCY3kVS+urOaZGeLZO2SloWCkzMn/OQyMQYGRn/rqqkOnsmtL9iaBXJELMAJqK+uNO/
+	5yTm1DqYNzkMhXA9dZawuMdtMJesRi2ajv97c7QwMw27b6JAnReJJ+K1JAPdd7XeebW8
+	AWUhQceLMCbbI+iAsfaJJAcmYSrJC6klPsxA9bq/Eq0OpnuPRxVDiD11mztw4MugpWaR
+	wCog==
+Received: by 10.14.215.69 with SMTP id d45mr36496827eep.16.1351289785239;
+	Fri, 26 Oct 2012 15:16:25 -0700 (PDT)
+Received: from mizar.localdomain
+	(host191-189-dynamic.60-82-r.retail.telecomitalia.it.
+	[82.60.189.191])
+	by mx.google.com with ESMTPS id s1sm5357456eem.9.2012.10.26.15.16.23
+	(version=SSLv3 cipher=OTHER); Fri, 26 Oct 2012 15:16:24 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Oct 2012 21:46:10 +0200
-Message-Id: <1351280770-21814-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-Subject: [PATCH] samba: update waf-as-source.patch to apply
+Date: Sat, 27 Oct 2012 00:16:13 +0200
+Message-Id: <1351289773-25205-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-handheld][PATCH] udev_164: update .bbappend to 182 as in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,61 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2012 19:59:52 -0000
+X-List-Received-Date: Fri, 26 Oct 2012 22:29:55 -0000
 
-* and Applying patch waf-as-source.patch
-  ...
-  File buildtools/bin/waf-svn is not empty after patch; not deleting
-  ...
-  Patch waf-as-source.patch does not apply (enforce with -f)
-  I've dropped this chunk and now it builds
-
-* there is also WARNING about unpackaged but empty base_sbindir
-  WARNING: QA Issue: samba: Files/directories were installed but not
-  shipped
-    /sbin
-  created by do_install in samba.inc but used only when cifs is built,
-  maybe we should remove it from samba.inc now
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- I've forgot to push updated branch with this part in last pull-request, 
- so here it is with another PR bump.
+ recipes-core/udev/udev_164.bbappend |    9 ---------
+ recipes-core/udev/udev_182.bbappend |    9 +++++++++
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ delete mode 100644 recipes-core/udev/udev_164.bbappend
+ create mode 100644 recipes-core/udev/udev_182.bbappend
 
- meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch | 4 ----
- meta-oe/recipes-connectivity/samba/samba_3.6.8.bb                  | 2 +-
- 2 files changed, 1 insertion(+), 5 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-index 3ba7d23..985ed5a 100644
---- a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-+++ b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-@@ -44,10 +44,6 @@ index 9ef8a1f..0000000
- -You can get a svn copy of the upstream source with:
- -
- -  svn checkout http://waf.googlecode.com/svn/trunk/ waf-read-only
--diff --git a/buildtools/bin/waf-svn b/buildtools/bin/waf-svn
--deleted file mode 100755
--index 6d54d5f..0000000
--Binary files a/buildtools/bin/waf-svn and /dev/null differ
- diff --git a/buildtools/update-waf.sh b/buildtools/update-waf.sh
- new file mode 100755
- index 0000000..bb3a4bf
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index cc09a48..7c54dae 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -3,7 +3,7 @@ require samba-basic.inc
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI += "\
-     file://config-h.patch \
+diff --git a/recipes-core/udev/udev_164.bbappend b/recipes-core/udev/udev_164.bbappend
+deleted file mode 100644
+index 4d263b0..0000000
+--- a/recipes-core/udev/udev_164.bbappend
++++ /dev/null
+@@ -1,9 +0,0 @@
+-
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+-
+-PRINC := "${@int(PRINC) + 2}"
+-
+-# check only for ABS_X (0x00) and ABS_Y (0x01), ignore ABS_PRESSURE (0x18)
+-do_configure_append () {
+-        sed -i -e 's/"input:*-e0*,3,*a0,1,*18,*"/"input:*-e0*,3,*a0,1,*"/' ${WORKDIR}/local.rules
+-}
+diff --git a/recipes-core/udev/udev_182.bbappend b/recipes-core/udev/udev_182.bbappend
+new file mode 100644
+index 0000000..4d263b0
+--- /dev/null
++++ b/recipes-core/udev/udev_182.bbappend
+@@ -0,0 +1,9 @@
++
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
++
++PRINC := "${@int(PRINC) + 2}"
++
++# check only for ABS_X (0x00) and ABS_Y (0x01), ignore ABS_PRESSURE (0x18)
++do_configure_append () {
++        sed -i -e 's/"input:*-e0*,3,*a0,1,*18,*"/"input:*-e0*,3,*a0,1,*"/' ${WORKDIR}/local.rules
++}
 -- 
-1.7.12.4
+1.7.8.6
 
 
 
