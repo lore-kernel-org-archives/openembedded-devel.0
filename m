@@ -1,41 +1,32 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TRmF0-0001gK-L8
+	(envelope-from <martin.jansa@gmail.com>) id 1TRq4O-0006cB-4o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2012 17:54:34 +0200
-Received: from mail-ia0-f197.google.com ([209.85.210.197])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 26 Oct 2012 08:41:02 -0700
-Received: by mail-ia0-f197.google.com with SMTP id j5so5090899iaf.0
+	Fri, 26 Oct 2012 21:59:52 +0200
+Received: by mail-ee0-f47.google.com with SMTP id t10so1219925eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2012 08:41:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:x-gm-message-state;
-	bh=9AV5moaJNTNXZy7AFaAxgxxedWNMhHOnlgr9W29L0ag=;
-	b=Ll6a2KPZtFgZQogT0bv7bjk7Mh5o7rvQmyjSzwr53rWVc355cafd4M9CV4qbwWFJ29
-	94fGE0xNX3KlEn9J4tjiv2c3CNHmifeJ5UUx0lIAOV0zXGdgoeOrI/v/Z/3gJ2clsaGu
-	g0FfnlJF88Vur262lfF9ccE8LtmcejV/lfY+a2B9M+dbDUHemK/ykph03EfCLSew3sXG
-	cDFTowZlmnPInt+Xg7Oepdw/3gDNEnR1gmeXM+/llv4kpP6rbjicPbihk+iZOVul+tzD
-	lOn6l6dFXCIK4GnUdc8zbzOg+2c/k1/jh/kxqsAofvvbVvZ1BWLs24WW2XkkBgV26z+T
-	Yh/Q==
-Received: by 10.182.0.1 with SMTP id 1mr18593027oba.18.1351266061940;
-	Fri, 26 Oct 2012 08:41:01 -0700 (PDT)
-Received: by 10.182.0.1 with SMTP id 1mr18593018oba.18.1351266061844; Fri, 26
-	Oct 2012 08:41:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.182.46.70 with HTTP; Fri, 26 Oct 2012 08:40:41 -0700 (PDT)
-In-Reply-To: <CAP9ODKoZXu2dbvrhGDegKsH+vDEisgtf7r2u6TcBwYy2ZEPHDA@mail.gmail.com>
-References: <CAJTo0LYm7bwU0fNYcD8wQ3unJm_ShoW-ej5tZ3FeeogEztJGnQ@mail.gmail.com>
-	<k6e9ht$ra9$1@ger.gmane.org>
-	<CAP9ODKoZXu2dbvrhGDegKsH+vDEisgtf7r2u6TcBwYy2ZEPHDA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 26 Oct 2012 16:40:41 +0100
-Message-ID: <CAJTo0Lb3_R+=uX-QTE_60pQ4N=xNS0fqCZ3jiQLhAZZaEotFgQ@mail.gmail.com>
+	Fri, 26 Oct 2012 12:46:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=3S5vboDMNgOytDtWHSFIttdQlL05XmkVpvAPIZRnPDs=;
+	b=FHpL5x+Wsc63iVZ/HQRruNGNFOm+g2bumKiNpyrcDPV3C97vWb57X9vEQWWUwSVjwL
+	bKB/3qGgdAgwPUikpeiJsVB2U18pZAQ0fUNRQanPe6l6yW7bnWY+TtJ0iL3z6JlyKhXh
+	Ynqb70SnBTYPtbgZTNq9hS566xeG6R3qksOxNgNERCakVvCxS4EcAbfTkR+TaVR6uMmM
+	hxHqCLhO9Nu+vIAjbYHZrAU81iliecR8TrPKiZLpjpE4hazfZutEVDt0w6Rt3Dup1IAG
+	R8XgTihdy00ZiZpzZtVTbucTpa/pjH9LG8ouj8uyoCEoFBcn76saP+NePYWDu1UZG6Qo
+	ujNw==
+Received: by 10.14.194.2 with SMTP id l2mr35878539een.12.1351280781794;
+	Fri, 26 Oct 2012 12:46:21 -0700 (PDT)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id i1sm4645742eeo.8.2012.10.26.12.46.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 26 Oct 2012 12:46:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnZ/XRMiUoLNa9PhoK9VtBn4evSZTaQxpw1eUokXRnWFxSYZvaodpm2rMT457NGf9Hh9ve2GyS8piXgJz6PRGH277wozyesUd5ExEcQNctUHxjiYjW4bEA6N2sL/DCC3V4RaCeKFmNHVHHDjYOISLtCK/lvvhkaUxMAz5xg46+59PBGSDuxnvovNvZrtit7xBUqGNMF
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: Danny stable release branch
+Date: Fri, 26 Oct 2012 21:46:10 +0200
+Message-Id: <1351280770-21814-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [PATCH] samba: update waf-as-source.patch to apply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,19 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2012 15:54:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 26 Oct 2012 19:59:52 -0000
 
-On 26 October 2012 16:35, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> Who's the maintainer for the oe-core danny branch?
->
-> I hope there's no delta between oe-core and poky one so Ross is the
-> maintainer as far as I know.
+* and Applying patch waf-as-source.patch
+  ...
+  File buildtools/bin/waf-svn is not empty after patch; not deleting
+  ...
+  Patch waf-as-source.patch does not apply (enforce with -f)
+  I've dropped this chunk and now it builds
 
-Correct. Poky is literally oe-core+bitbake+yocto-docs glued together,
-no work happens in the poky repository directly, just the "upstream"
-repositories.
+* there is also WARNING about unpackaged but empty base_sbindir
+  WARNING: QA Issue: samba: Files/directories were installed but not
+  shipped
+    /sbin
+  created by do_install in samba.inc but used only when cifs is built,
+  maybe we should remove it from samba.inc now
 
-Ross
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ I've forgot to push updated branch with this part in last pull-request, 
+ so here it is with another PR bump.
+
+ meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch | 4 ----
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb                  | 2 +-
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
+index 3ba7d23..985ed5a 100644
+--- a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
++++ b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
+@@ -44,10 +44,6 @@ index 9ef8a1f..0000000
+ -You can get a svn copy of the upstream source with:
+ -
+ -  svn checkout http://waf.googlecode.com/svn/trunk/ waf-read-only
+-diff --git a/buildtools/bin/waf-svn b/buildtools/bin/waf-svn
+-deleted file mode 100755
+-index 6d54d5f..0000000
+-Binary files a/buildtools/bin/waf-svn and /dev/null differ
+ diff --git a/buildtools/update-waf.sh b/buildtools/update-waf.sh
+ new file mode 100755
+ index 0000000..bb3a4bf
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index cc09a48..7c54dae 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
+-- 
+1.7.12.4
+
 
 
