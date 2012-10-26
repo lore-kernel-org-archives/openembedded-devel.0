@@ -1,31 +1,37 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TRi33-00045S-Gl
+	(envelope-from <ross.burton@intel.com>) id 1TRklW-0007oP-4I
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Oct 2012 13:25:57 +0200
-Received: by mail-ie0-f175.google.com with SMTP id c13so3605206ieb.6
+	Fri, 26 Oct 2012 16:20:02 +0200
+Received: from mail-ob0-f197.google.com ([209.85.214.197])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 26 Oct 2012 07:06:02 -0700
+Received: by mail-ob0-f197.google.com with SMTP id tb18so8514330obb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Oct 2012 04:12:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=4Glclqj8QObgwLsuTXEp4ZdJRYPgXbgGMVdsIQKNBiw=;
-	b=TUZShRu5Rjm4MiX93IDJ+lmF38Ywoujn3HmrSnI+3FdyVkG8jOp/an58gvAJVlmupu
-	qIiujE/QG8EfV1aRlh3KuCkDgATzEQZyuqlbZdDxJiy20Ncz88BJSTfH7LJNwVDO8Wxq
-	PQBmmsu847Da4+qE8BXYI5VqVvRMdTTtYf1OEWleCp4Q2NB0uoMjz8vr/IUXX6sClhYn
-	Rbdq1NrdIt95YarAv0LVIu0b7QMTV/xVEFaHzXMUkGNE7BamSRDF75slAz1c2jAJQy1w
-	10JM1b9QIGbCkBuMg1MNXleg7k5mroiVBnzBdfcFzF9H7FGn9GAGUaQ/xmi8YCBDGr0d
-	eHhQ==
+	Fri, 26 Oct 2012 07:06:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:cc:content-type
+	:x-gm-message-state;
+	bh=+oavJE1/dXPDzkYAmHuycYNGIMCDUFdFPtKOSKH0Jj0=;
+	b=nedmSVMrDv18GjDY11h7NxtcpZFPFcS7ltBiWXEoBcMvtil9On9O0dGvgcyGytTOqX
+	rmipwlZWT8E/ph77FA65lk6d9+hWdju1XiE8KjT0UxXsTOmKh0yNNOWUFp7FasjlNcax
+	FLOzfFzdgzABu1hEJcws1jmkxh4SqO0nl1Q4TVC0yPbvy1ug6DbsIUSdu2lE32ZRavYp
+	obyQ91ok5V8yc+JabRF6Epv1EQT8Au+FYoH30h6HAIqj1ZVKIT40EOaaGvyM9xieQ1wU
+	CM1ChtkclhNufn4VxUiUCcmS/OzMgBAB8/dYUBIQSxr1EnBB4IW+8IJP/gvss76uq+St
+	ewVA==
+Received: by 10.60.170.9 with SMTP id ai9mr18939290oec.36.1351259083364;
+	Fri, 26 Oct 2012 06:44:43 -0700 (PDT)
+Received: by 10.60.170.9 with SMTP id ai9mr18939283oec.36.1351259083274; Fri,
+	26 Oct 2012 06:44:43 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.236.74 with SMTP id us10mr1824823igc.5.1351249946999; Fri,
-	26 Oct 2012 04:12:26 -0700 (PDT)
-Received: by 10.64.24.179 with HTTP; Fri, 26 Oct 2012 04:12:26 -0700 (PDT)
-In-Reply-To: <4772E7C9DD9B9D4EB442B23D7FE42EEA01F32E92@Exchange01.audio.local>
-References: <4772E7C9DD9B9D4EB442B23D7FE42EEA01F32E92@Exchange01.audio.local>
-Date: Fri, 26 Oct 2012 13:12:26 +0200
-Message-ID: <CAGiJk9dmLv549hBTizFHw19xYNtuLnqHgWOh7bh8JMyE+t-b5A@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: sox-native
+Received: by 10.182.46.70 with HTTP; Fri, 26 Oct 2012 06:44:22 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 26 Oct 2012 14:44:22 +0100
+Message-ID: <CAJTo0LYm7bwU0fNYcD8wQ3unJm_ShoW-ej5tZ3FeeogEztJGnQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQkq046CZX5zjEc2z1IAiUsfCgrywtUeXlSthOcluHRX36vhPwf/Q8/xgVFxT9xQRW09sNVO8Ikztrmh6AnImJk5/yF/oJYoiArcXvywZq1dHZq54gDV2d1rrVFNzeapUftWfEtIIkfBeKOrX4D6H9y1+XreSBsXISaEtZaOWZj+rpsoiDPkDn9VZYM159A5X2+RHT30
+Cc: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Danny stable release branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,58 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Oct 2012 11:25:57 -0000
+X-List-Received-Date: Fri, 26 Oct 2012 14:20:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
-2012/10/26 John Stirling <john.stirling@audiopartnership.com>:
-> Hi,
->
->
->
-> Our OE build is based on angstrom (master) -
->
->
->
-> https://github.com/Angstrom-distribution/setup-scripts/blob/master/sourc
-> es/layers.txt
->
->
->
-> As part of our build we need to use sox to generate some audio files
-> that are present on the image.
->
->
->
-> I'm getting stuck trying to build sox-native -
->
->
->
 Hi,
 
-if you need to create the files dynamically for each target (e.g. the
-files change with each build) then there is at least one other
-possibility.
+Now that 1.3 is released[1] I can announce that I'm the Danny stable
+release series maintainer.  This involves pulling any relevant
+security fixes, build fixes and critical bug fixes from master, and
+periodically rolling a 1.3.x release.
 
->
->
->
-> I suspect that going through each error and adding a BBCLASSEXTEND line
-> is not going to work ?
+Obviously there's a lot of activity in master so whilst I intend to
+consider every commit, if anyone submits patches to master that should
+also be in danny, please say so either in a direct mail or with a tag
+in the subject line.
 
+Expect to see a ross/danny-next series in the poky-contrib repository
+fairly soon where I'll be staging the commits.
 
-Basically what you do now is: Add native providers for each dependency
-recursively (yes this could work).
-But maybe it is easier to generate the files on the target? (not native)
+Ross
 
-
-If on target generation isn't an option for you, then all I can do is
-recommend "bitbake -g -u depexp sox".
-With this tool you can view the dependencies and don't have to wait
-for bitbake to resolve them / to see them.
-
-
--- 
-Regards
-Samuel
+[1] http://www.yoctoproject.org/blogs/davest/2012/yocto-project-v1.3-released
+if anyone missed the news
 
 
