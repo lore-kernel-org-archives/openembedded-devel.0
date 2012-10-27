@@ -1,30 +1,42 @@
-Received: from mail-oa0-f47.google.com ([209.85.219.47])
+Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <matteo.fortini@gmail.com>) id 1TS6lu-0004mo-6L
+	(envelope-from <ross.burton@intel.com>) id 1TS9DE-00084R-QI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Oct 2012 15:49:54 +0200
-Received: by mail-oa0-f47.google.com with SMTP id h1so3461667oag.6
+	Sat, 27 Oct 2012 18:26:17 +0200
+Received: from mail-ob0-f197.google.com ([209.85.214.197])
+	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 27 Oct 2012 09:12:32 -0700
+Received: by mail-ob0-f197.google.com with SMTP id tb18so11468695obb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Oct 2012 06:36:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=smzEbepobAuXqTXCNSIX//VzNPJ3AIXspZRd1BYOCew=;
-	b=zLTEYSROI/4bfs3j/h1lf1yYtgLXMIrL4EKbuu/Ol03o0dUGVvmwblNEFFcdrlX5Pa
-	1J9k/6lMezEACm/BtSu0Ti9VTiM6+MgJ+ZNp9KKynwN/HCHW5YRiyk3azNI3L1z9zkDq
-	w+O8hCAiEFGnBcawr04YAgPDn/qF5rdhRC1AiZCiMWAA9E6ITy6Ccmn0aVJJyTTEitlE
-	gkI1HUtJCbWpvL9vgnrL9kv1cauuIXakvR3VraCh56zJItbPfzjwCAhIDS2xt0lKJVUU
-	+XisZsdXWKD4LPnEOMJf2NUy3mdklVL7njOjF7iFcu21fSVppEjqn3LJqTrlp6rnOetX
-	q9EA==
-Received: by 10.60.7.226 with SMTP id m2mr22596654oea.72.1351344982276; Sat,
-	27 Oct 2012 06:36:22 -0700 (PDT)
+	Sat, 27 Oct 2012 09:12:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=nmvKh1OzuoJNu9Xs4eD5290VsKIWbl7eIzzsWxkl7q8=;
+	b=LAXedQWSCntGmcHr3dyj72wBnSZ3V8suyOMPTpA3lqo8qSz/eBIeKtB4BzjkCtaMTy
+	nyPg0XX9D8yP46fILY5aAeWlzKWrJSOj+NKOVfghD3oSBFRDidDV7eLJXo/Xv3X6pzAa
+	ZgzWO25pcfWpEXyWw3SOoamXiY2HvuCkfJV7IvhZQm+cT6baNspzz8mJUH97n5dR0Oqk
+	04I/3bsxaFQSQXJz1ukRD8bjRErYiReWkabeVaja1dZcKkbCkqJz+EuEgoGubLD5EuXy
+	lXaAIeIT5JbNv1cHc3aFKW8Ok+NYRwYPkZW02p3X99JRJ1bwDcGZEjqt0CznAGmQ4C3+
+	qwew==
+Received: by 10.182.177.72 with SMTP id co8mr21295347obc.53.1351353935738;
+	Sat, 27 Oct 2012 09:05:35 -0700 (PDT)
+Received: by 10.182.177.72 with SMTP id co8mr21295343obc.53.1351353935661;
+	Sat, 27 Oct 2012 09:05:35 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.60.95.73 with HTTP; Sat, 27 Oct 2012 06:36:02 -0700 (PDT)
-From: Matteo Fortini <matteo.fortini@gmail.com>
-Date: Sat, 27 Oct 2012 15:36:02 +0200
-Message-ID: <CAC_9p+9kUhDG4dCo0Dvdhu0atZV=YxXQo3BOvMd72RsxQP9HUw@mail.gmail.com>
+Received: by 10.182.46.70 with HTTP; Sat, 27 Oct 2012 09:05:15 -0700 (PDT)
+In-Reply-To: <508AADE4.2010409@gmail.com>
+References: <1351241920-15135-1-git-send-email-martiert@gmail.com>
+	<1351241920-15135-2-git-send-email-martiert@gmail.com>
+	<lybofpuwri.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<CAJTo0LaxgdhkxtWRgpZ2-QY857myw-ZpdrDpi3kyxkfxQWfGvg@mail.gmail.com>
+	<508AADE4.2010409@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Sat, 27 Oct 2012 17:05:15 +0100
+Message-ID: <CAJTo0La_XkU=EaNYWo+275k_58qqmVyvhhN5e1sZh0dMtTemfQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Building for armhf (RaspberryPI on Debian)
+X-Gm-Message-State: ALoCoQnKZSUou4qWfoaBHXfvyuLdjsSRbyEl1wTbhxYaVFppM+mLIcYhB2kNYH/oEDnOqSez5SbRUKPPKgno4AJMKf15iVg25gEUUSdt62rU0Td/69brQ+zAOxfM8rcUMpt55qDbrpUUj7WECJo4VvG0WMijbPWPlinTPnvWj+XJphuTRQo5ktMQnPXFDNfquSQSez4qJIix
+Subject: Re: [meta-systemd][PATCH v2 2/2] meta-systemd: ntp: Fix starting of ntpdate.service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,38 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Oct 2012 13:49:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 27 Oct 2012 16:26:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I'm trying to build some OE deb packages using meta-raspberrypi, but my
-wheezy Raspbian distro is complaining that the OE .deb was built for the
-"arm" architecture and not for the "armhf" one.
+On 26 October 2012 16:36, Martin Erts=C3=A5s <martiert@gmail.com> wrote:
+> Should we leave this until someone registers a pool, or what would be a g=
+ood
+> default pool until someone does it?
 
-To fix this, I tried to use an "armhf" machine, by changing the machine
-definition in the following way. However, this didn't fix it, even if
-bitbake is telling me it's using the hardware accelerated FPU.
+This should be raised with the TSC.  There isn't a good default pool,
+if you use pool.ntp.org as a default you are in breach of their terms.
 
-Could you point me to a way of solving it?
+Ross
 
-Thank you in advance,
-Matteo
-
-diff --git a/conf/machine/include/tune-arm1176jzf-s.inc
-b/conf/machine/include/tune-arm1176jzf-s.inc
-index b52c161..9060f48 100644
---- a/conf/machine/include/tune-arm1176jzf-s.inc
-+++ b/conf/machine/include/tune-arm1176jzf-s.inc
-@@ -6,5 +6,5 @@ TUNEVALID[arm1176jzfs] = "Enable arm1176jzfs specific
-processor optimizations"
- TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "arm1176jzfs",
-"-mtune=arm1176jzf-s", "", d)}"
-
- AVAILTUNES += "arm1176jzfs"
--TUNE_FEATURES_tune-arm1176jzfs = "${TUNE_FEATURES_tune-armv6} arm1176jzfs"
--PACKAGE_EXTRA_ARCHS_tune-arm1176jzfs = "${PACKAGE_EXTRA_ARCHS_tune-armv6}"
-+TUNE_FEATURES_tune-arm1176jzfs = "${TUNE_FEATURES_tune-armv6hf}
-arm1176jzfs"
-+PACKAGE_EXTRA_ARCHS_tune-arm1176jzfs =
-"${PACKAGE_EXTRA_ARCHS_tune-armv6hf}"
 
