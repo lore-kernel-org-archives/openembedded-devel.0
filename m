@@ -1,20 +1,27 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSnOy-0003xl-5Q
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSoBp-00052B-Ux
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 12:21:09 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 29 Oct 2012 04:07:29 -0700
+	Mon, 29 Oct 2012 13:11:34 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 29 Oct 2012 04:57:29 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,670,1344236400"; d="scan'208";a="241425417"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.120])
-	by fmsmga002.fm.intel.com with ESMTP; 29 Oct 2012 02:36:43 -0700
+X-IronPort-AV: E=Sophos;i="4.80,671,1344236400"; d="scan'208";a="212435086"
+Received: from unknown (HELO helios.localnet) ([10.252.122.120])
+	by orsmga001.jf.intel.com with ESMTP; 29 Oct 2012 04:57:57 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2012 09:36:38 +0000
-Message-Id: <cover.1351503373.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH 0/2] Add a couple of recipes
+To: RaNgErS <rangers.av@gmail.com>
+Date: Mon, 29 Oct 2012 11:57:56 +0000
+Message-ID: <8894147.TkBjTbKHcp@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <CAMQ5J2bC+3514kz1sNsqL_zb10P5rdnsCy_Xd2Z9-Gm1-WdTSg@mail.gmail.com>
+References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
+	<1514371.ACA88Gs2zU@helios>
+	<CAMQ5J2bC+3514kz1sNsqL_zb10P5rdnsCy_Xd2Z9-Gm1-WdTSg@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Kernal build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,29 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 11:21:11 -0000
+X-List-Received-Date: Mon, 29 Oct 2012 12:11:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The following changes since commit 1571c2c566c51799eceea2aabe13d1c3116f36b3:
+On Monday 29 October 2012 16:49:59 RaNgErS wrote:
+> could you please explain how should i check the kernel configuration?
 
-  samba: update documentation2.patch to apply (2012-10-26 13:00:24 +0200)
+There will probably be a defconfig for your kernel somewhere, in a directory 
+next to the kernel recipe.
 
-are available in the git repository at:
+> and changing RRECOMMENDS to RDEPENDS
 
-  git://git.openembedded.org/meta-openembedded-contrib paule/add1
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/add1
+Have a look at the recipe (I guess recipes/tasks/task-picop-demo.bb), you will 
+see some lines that use RDEPENDS to bring in the kernel modules.
 
-Paul Eggleton (2):
-  ddrescue: add from OE-Classic, update and tidy up
-  iotop: add from OE-Classic, update and tidy up
+Cheers,
+Paul
 
- meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb |   18 +++++++++++++++
- meta-oe/recipes-extended/iotop/iotop_0.4.4.bb      |   24 ++++++++++++++++++++
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
- create mode 100644 meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
+PS: please CC the mailing list on reply, thanks.
 
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
