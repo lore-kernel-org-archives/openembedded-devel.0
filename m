@@ -1,24 +1,26 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSlzB-0007ZN-3S
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSm5H-0007nD-Pb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 10:50:21 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 29 Oct 2012 02:36:46 -0700
+	Mon, 29 Oct 2012 10:56:39 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 29 Oct 2012 02:43:04 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,670,1344236400"; d="scan'208";a="241425425"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.120])
-	by fmsmga002.fm.intel.com with ESMTP; 29 Oct 2012 02:36:45 -0700
+X-IronPort-AV: E=Sophos;i="4.80,670,1344236400"; d="scan'208";a="161821020"
+Received: from unknown (HELO helios.localnet) ([10.252.122.120])
+	by AZSMGA002.ch.intel.com with ESMTP; 29 Oct 2012 02:43:03 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2012 09:36:40 +0000
-Message-Id: <a08289afb483cab265d1d098eada947c1335bb65.1351503373.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1351503373.git.paul.eggleton@linux.intel.com>
-References: <cover.1351503373.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1351503373.git.paul.eggleton@linux.intel.com>
-References: <cover.1351503373.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH 2/2] iotop: add from OE-Classic, update and tidy up
+To: RaNgErS <rangers.av@gmail.com>
+Date: Mon, 29 Oct 2012 09:43:02 +0000
+Message-ID: <1514371.ACA88Gs2zU@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
+References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
+	<CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Kernal build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 09:50:21 -0000
+X-List-Received-Date: Mon, 29 Oct 2012 09:56:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* Update to 0.4.4, adjusting python module dependencies as appropriate
-* Add SUMMARY and DESCRIPTION
-* Add LIC_FILES_CHKSUM
-* Make LICENSE more accurate
-* Fix unpackaged directory warning
+On Monday 29 October 2012 13:21:50 RaNgErS wrote:
+> I am very new to this stuff, and I tried to build an image i got some
+> errors which are not solved even i tried for a whole week. It is from the
+> kernal side or sth. i am attaching the log file obtained .
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-oe/recipes-extended/iotop/iotop_0.4.4.bb |   24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
+The module packages specified don't exist, which means either the functionality 
+they would have included is compiled into the kernel (option value = "y") or 
+they weren't enabled at all (option value="n"). So you should check your 
+kernel configuration.
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-new file mode 100644
-index 0000000..8be41af
---- /dev/null
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Simple top-like I/O monitor"
-+DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
-+ It watches I/O usage information output by the Linux kernel and displays \
-+ a table of current I/O usage by processes on the system."
-+HOMEPAGE = "http://guichaz.free.fr/iotop/"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
-+
-+SRC_URI = "http://guichaz.free.fr/iotop/files/${PN}-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "cdd38b276cbf238676f5d2bcf098ba9c"
-+SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d686483df0b0"
-+
-+inherit distutils
-+
-+do_install_append() {
-+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo
-+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py
-+	[ -d ${D}${datadir}/share ] && rmdir ${D}${datadir}/share
-+}
-+
-+RDEPENDS_${PN} = "python-distutils python-curses python-textutils \
-+                  python-codecs python-ctypes python-pprint \
-+                  python-shell"
+If they are enabled but you do genuinely want these to be compiled into the 
+kernel rather than as modules, the task-picop-demo recipe needs to be changed 
+to use RRECOMMENDS rather than RDEPENDS to bring in the kernel modules only if 
+they exist; that will fix the error.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
