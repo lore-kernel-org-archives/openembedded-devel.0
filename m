@@ -1,44 +1,38 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TStLA-0004ij-Ph
+	(envelope-from <tom.rini@gmail.com>) id 1TSy8G-0007HW-5t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 18:41:33 +0100
-Received: from mail-ia0-f197.google.com ([209.85.210.197])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 29 Oct 2012 10:27:04 -0700
-Received: by mail-ia0-f197.google.com with SMTP id j5so9357249iaf.0
+	Mon, 29 Oct 2012 23:48:32 +0100
+Received: by mail-pb0-f47.google.com with SMTP id ro12so4102802pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2012 10:26:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=gXYCbhRoDWTW6PKcHBxlqQLoxssW/30IJrwCwN37PUo=;
-	b=ohH79ly0N6C3hdt3mztxGi56lpV6bi7xipIls4N5DvPFxWwh5aOXHqdMwg94ybpCIp
-	R/feO5BbMlZe+dGPCrAmnsAxMVxV/uLyOxNN2YwIety5Zt1Lhi855cNuLgnfbs40sVrp
-	ZUu+0g86oxhe986WQYLb8/UMHdR1q7P5aC/J0cj9umu7a/0azjkZhtQ8ATfVdqvg5d0i
-	vKWpz/QYw6no3S/0+AxEHFulSr5cl87BTGpXZBLg/K8W3b9IjQnXyBUSMo4KQvIr9qMZ
-	djRSmMerKnGP6tfc7Q6XbcRkz+C0MGIyndnSdkNIETY6EJbrsOEO8hRomfJSsPugljyM
-	DyVw==
-Received: by 10.50.178.67 with SMTP id cw3mr10130960igc.53.1351531617659;
-	Mon, 29 Oct 2012 10:26:57 -0700 (PDT)
-Received: by 10.50.178.67 with SMTP id cw3mr10130959igc.53.1351531617604; Mon,
-	29 Oct 2012 10:26:57 -0700 (PDT)
+	Mon, 29 Oct 2012 15:34:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=wC9Gzb+lQgrTl5jSzuTGv6Ro5bHVYMF1UWfUwOPzegA=;
+	b=IlpktVm9vE8x6L4HUlhxtgaSHTdI381qpsI1sOlFvH5vku39ADYSxs2IroNp+1NVws
+	K2TMbGMRK39bD0DMaDcjt768WuLfQf+HUOfd37prIBYrwfgPWXj+iNgnu2RvOiUTT8iJ
+	daZ2r98rHNNvJ8bp2vqtsTtRYGip8kvS6cEmbKrbk0GkobAJhSoDh/FBiF5xag6I0l5H
+	+wnrK+MLpF0KKKcSUZShc/5OdW5yMmodMa4gzmURuemUi9WgkOw5uKtmY60HNbNLldjZ
+	DaYxX4quHcVttYfa2CwfKzwUtpCsvCs8dxnq9w8j+/lzUXUzu/mFB4PFQALO+itKHvzL
+	zm0g==
+Received: by 10.66.85.66 with SMTP id f2mr87111287paz.56.1351550096894;
+	Mon, 29 Oct 2012 15:34:56 -0700 (PDT)
+Received: from bill-the-cat (ip68-230-53-52.ph.ph.cox.net. [68.230.53.52])
+	by mx.google.com with ESMTPS id g1sm5217636pax.21.2012.10.29.15.34.54
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 29 Oct 2012 15:34:55 -0700 (PDT)
+Date: Mon, 29 Oct 2012 15:34:52 -0700
+From: Tom Rini <tom.rini@gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-ID: <20121029223452.GG11581@bill-the-cat>
+References: <cover.1351244110.git.sledz@dresearch-fe.de>
 MIME-Version: 1.0
-Received: by 10.64.68.41 with HTTP; Mon, 29 Oct 2012 10:26:31 -0700 (PDT)
-In-Reply-To: <50866812.10408@r-finger.com>
-References: <CAJTo0LboPRF7Oxnwh8QS6b6ReS-1-P+=r04L54QRptPnHfV5oQ@mail.gmail.com>
-	<5085800A.4060600@r-finger.com>
-	<CAPj87rOXzZ5EwKYCrBnYtYAQo3cUyXtXyyDSh2nKh05Gy=uY9A@mail.gmail.com>
-	<50865733.40007@r-finger.com>
-	<CAPj87rOZokkPT_a7kbaqmai2bWwV5xLL8oV2UNOfoxkARHfwCg@mail.gmail.com>
-	<50866812.10408@r-finger.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 29 Oct 2012 17:26:31 +0000
-Message-ID: <CAJTo0LbCB2K2wfbMF2sb=qosAYheFNc2zncOFfZqoj7c7eBDvw@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQmxwi5Qft60A1CPRBvj1zkHPFqPHFfWx8bX8rxNkm5Cv/Rl0v7v/UsxhFDYD6aPcWdt5ipwfojLTDwmGqLH4HAbZO5D1ID6EsVKCmKcfcHTpJs2+dBk8hrm/aARUaqhvnDRnxs0Jjx9M1X4Le+AjQHRtKn9uNGAuaurfiSKjINHPomf1UOrJe9XiryjBbFPvFTozkMQ
-Subject: Re: [OE-core] [RFC] OpenGL packaging/staging policy
+In-Reply-To: <cover.1351244110.git.sledz@dresearch-fe.de>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance 0/1] pull request 20121026
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +46,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 17:41:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 29 Oct 2012 22:48:32 -0000
+X-Groupsio-MsgNum: 41351
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aYDVKSzuImP48n7V"
+Content-Disposition: inline
 
-Hi,
+--aYDVKSzuImP48n7V
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This was interesting discussion and certainly achieved the goal of
-soliciting comments...  A less aggressive plan:
+On Fri, Oct 26, 2012 at 11:36:28AM +0200, Steffen Sledz wrote:
 
-Rule 1.  Unambiguous package naming
+> Hi Tom,
+>=20
+> please pull this commit which updates opkg-utils to the latest
+> upstream version also used in oe-core.
+>=20
+> Thx,
+> Steffen
+>=20
+> The following changes since commit 0609a1cf10887b5f5d69cc4c7baba35beebb3f=
+16:
+>=20
+>   Merge branch 'pull-request-3' of git://github.com/sledz/oe into 2011.03=
+-maintenance (2012-10-09 07:41:40 -0700)
+>   https://github.com/sledz/oe/tree/pull-request-opkg-utils
+>=20
+> Steffen Sledz (1):
+>   opkg-utils: bump SRCREV to latest
+>=20
+>  recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-I won't repeat this, everyone agreed this was sane.  I've a patch for
-mesa that I'll submit shortly.
+Applied, thanks.
 
-Rule 2.  No whitelisting for GL driver conflicts
+--=20
+Tom
 
-The target GL shall be staged, and situations which result in multiple
-GLs being installed should handle this case and resolve it.
+--aYDVKSzuImP48n7V
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-For atom-pc this means building Mesa.  For Beagle this means staging
-the Beagle binary drivers.  For Tegra as I've discovered this is
-"interesting" as they don't appear to provide any headers in their
-Tegra For Linux tarball...
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-For Cedar Trail and EMGD, the easiest solution is a dedicated Mesa
-building just GL.  As Mesa's DRI driver API isn't stable this is
-practically required anyway: the ABI of the libGL we build and the
-libGL that the binary driver was built against need to match.  This
-mesa-just-gl (mesa-solo?) can be in meta-intel unless other machines
-turn out to have a similar (crazy) requirement.
+iEYEARECAAYFAlCPBIwACgkQdZngf2G4WwN7jgCeNFJUV20I2J+KioTn2Zcjm3ip
+oD0Anj4AAcMWtyQK4k6fStLGVDP5zRfK
+=dlQO
+-----END PGP SIGNATURE-----
 
-Rule 3.  No dependencies on specific GL implementations
-
-Useful so that GL implementations are swappable on systems where that
-can happen, but not essential if there isn't a single blessed GL for
-sysroot.  We'll do this later.
-
-Some things that will also happen whilst I do this:
-1) mesa-dri renamed to mesa.  Let's get this done nice and early!
-2) mesa stops architecture-overriding enabling of EGL and GLES, so all
-architectures that build Mesa get GL/EGL/GLESv1/GLESv2.  If you don't
-want this don't build Mesa, and the namespaced packaging means there
-won't be conflicts.
-
-Any more comments?
-
-Ross
-
-
+--aYDVKSzuImP48n7V--
