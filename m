@@ -1,35 +1,24 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TSlqz-0007Op-Nl
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSlzA-0007ZN-E7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 10:41:53 +0100
-Received: from localhost ([127.0.0.1]:44617 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TSldr-0006rZ-Uq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 09:28:20 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
-	:date:from:reply-to:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding; s=default;
-	bh=s86ij1n39OdHbR7S2tuRYtBKxcs=; b=OgKuu+/T8gWyr/sRXf2jVEJ9ACrB
-	sMBQcRm0l6wlP2uuHrj9OxbNuETbQDAuL+f4g4RVNJfytYAIXZqMOiqk+8ukTsy9
-	qyjkzMEIniNHKwSQqbwjloxrQJ7BS6EOwAta/B9WEnjMEZbUxhCCNFOrtP/5o2in
-	d7dS3i4QOPxKLl8=
-Received: from [195.171.99.130] (port=22063 helo=[192.168.0.60])
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TSldr-0006rV-Rt
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 09:28:19 +0000
-Message-ID: <508E4CAB.8070407@communistcode.co.uk>
-Date: Mon, 29 Oct 2012 09:30:19 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121012 Thunderbird/16.0.1
-MIME-Version: 1.0
+	Mon, 29 Oct 2012 10:50:20 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 29 Oct 2012 02:36:45 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,670,1344236400"; d="scan'208";a="241425420"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.120])
+	by fmsmga002.fm.intel.com with ESMTP; 29 Oct 2012 02:36:44 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1351502894-2303-1-git-send-email-ml@communistcode.co.uk>
-In-Reply-To: <1351502894-2303-1-git-send-email-ml@communistcode.co.uk>
-Subject: Re: [PATCH 0/3] Improve x11 distro_feature checks
+Date: Mon, 29 Oct 2012 09:36:39 +0000
+Message-Id: <419c82c89f32cc115ff801a8e3fb0908c138c5dc.1351503373.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1351503373.git.paul.eggleton@linux.intel.com>
+References: <cover.1351503373.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1351503373.git.paul.eggleton@linux.intel.com>
+References: <cover.1351503373.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH 1/2] ddrescue: add from OE-Classic, update and tidy up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 09:41:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Oct 2012 09:50:20 -0000
 
-On 29/10/12 09:28, Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->
-> Improvement to the detection of the x11 distro_feature in a few recipes
-> with the final achievement being that GTK+ is no longer required in
-> core-image-minimal if dbg-pkgs, tools-profile and tools-debug are enabled
-> when x11 is not in distro_features.
->
-> V2
->
-> Added PR bumps to all recipes
->
-> Jack Mitchell (3):
->    latencytop: disable GTK and remove gtk+ dependacy
->    packagegroup-core-tools-profile: include sysprof only if x11 is
->      distro feature
->    babeltrace: fix depends
->
->   .../packagegroups/packagegroup-core-tools-profile.bb        |  4 +++-
->   .../latencytop/latencytop-0.5/latencytop-makefile.patch     | 13 +++++++------
->   meta/recipes-kernel/latencytop/latencytop_0.5.bb            |  6 ++++--
->   meta/recipes-kernel/lttng-2.0/babeltrace_0.12.bb            |  2 +-
->   4 files changed, 15 insertions(+), 10 deletions(-)
->
+* Update to 1.16
+* Add LIC_FILES_CHKSUM
+* Add SUMMARY and extend DESCRIPTION
+* Drop PRIORITY
+* Drop AUTHOR (generally we don't include this)
 
-Please ignore, sent to wrong list inerror.
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
 
-Need more tea.
-
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+new file mode 100644
+index 0000000..3000dbb
+--- /dev/null
++++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Data recovery tool"
++DESCRIPTION = "GNU ddrescue is a data recovery tool. It copies data \
++ from one file or block device (hard disc, cdrom, etc) to another, \
++ trying hard to rescue data in case of read errors."
++HOMEPAGE = "http://www.gnu.org/software/ddrescue/ddrescue.html"
++SECTION = "console"
++LICENSE = "GPLv3+"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
++                    file://main_common.cc;startline=5;endline=16;md5=0ef2c1bede11c6c9c6c12330d60bc7a7"
++
++SRC_URI = "${GNU_MIRROR}/${PN}/${P}.tar.gz"
++SRC_URI[md5sum] = "57b67407e882c6418531d48a2f20d16b"
++SRC_URI[sha256sum] = "76b3f2e5fb0306d24f2632c3e168cccb73dc0a348e3a7089cd9230748ff23de6"
++
++inherit autotools
++
++EXTRA_OECONF = "'CXX=${CXX}' 'CPPFLAGS=${CPPFLAGS}' 'CXXFLAGS=${CXXFLAGS}' 'LDFLAGS=${LDFLAGS}'"
 -- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
+1.7.9.5
 
 
 
