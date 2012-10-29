@@ -1,26 +1,33 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TSm5H-0007nD-Pb
+	(envelope-from <ap.john.stirling@gmail.com>) id 1TSmAi-0008K1-9y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 10:56:39 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 29 Oct 2012 02:43:04 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,670,1344236400"; d="scan'208";a="161821020"
-Received: from unknown (HELO helios.localnet) ([10.252.122.120])
-	by AZSMGA002.ch.intel.com with ESMTP; 29 Oct 2012 02:43:03 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: RaNgErS <rangers.av@gmail.com>
-Date: Mon, 29 Oct 2012 09:43:02 +0000
-Message-ID: <1514371.ACA88Gs2zU@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
-References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
-	<CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
+	Mon, 29 Oct 2012 11:02:16 +0100
+Received: by mail-bk0-f47.google.com with SMTP id jk7so1569394bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Oct 2012 02:48:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=gL4FAamz7AYvTDMaK09bO6Gm8IUpF4eb72q0qxDEGfA=;
+	b=UCg8+T86esNtg0sYtGz0ysz1wZsMxYJe4TwPY8zLoqsPE2CT8kzdzfeULEZacZg4k2
+	gmhzvG02hmhz2+hZWDxRbcAww6bgw827l/XTJkWWgRwdePO58J1+wM7V1UEfgyE0w7JN
+	6AcD4n9Zxfo5+tjLLwQ/7sGpHSE/xvfPOtSQulmhPq6jvVJA9btIeUAaQCunkNDw3VY8
+	+5N4joSt7hznahJKXLD2PrJu9ZE8gusq6/p1OtOwL9uutdlKwE7x6Dynwt+XkY8EDiwG
+	V2uyl1HqgayJHSfZ9D76x665GVWX7mTQjfVQfubLANKgeSdjKH5E543ALzICWJfw6hxF
+	KPMA==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernal build errors
+Received: by 10.204.128.144 with SMTP id k16mr9178308bks.64.1351504122614;
+	Mon, 29 Oct 2012 02:48:42 -0700 (PDT)
+Received: by 10.205.43.200 with HTTP; Mon, 29 Oct 2012 02:48:42 -0700 (PDT)
+In-Reply-To: <CAGiJk9dmLv549hBTizFHw19xYNtuLnqHgWOh7bh8JMyE+t-b5A@mail.gmail.com>
+References: <4772E7C9DD9B9D4EB442B23D7FE42EEA01F32E92@Exchange01.audio.local>
+	<CAGiJk9dmLv549hBTizFHw19xYNtuLnqHgWOh7bh8JMyE+t-b5A@mail.gmail.com>
+Date: Mon, 29 Oct 2012 09:48:42 +0000
+Message-ID: <CABuzA3P69cVJddp_MskZgb71My6HPkjzAwXZY_cqsyr-m6ymSQ@mail.gmail.com>
+From: John Stirling <ap.john.stirling@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: sox-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 09:56:40 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 29 Oct 2012 10:02:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 29 October 2012 13:21:50 RaNgErS wrote:
-> I am very new to this stuff, and I tried to build an image i got some
-> errors which are not solved even i tried for a whole week. It is from the
-> kernal side or sth. i am attaching the log file obtained .
+>
 
-The module packages specified don't exist, which means either the functionality 
-they would have included is compiled into the kernel (option value = "y") or 
-they weren't enabled at all (option value="n"). So you should check your 
-kernel configuration.
+> > I suspect that going through each error and adding a BBCLASSEXTEND line
+> > is not going to work ?
+>
+>
+> Basically what you do now is: Add native providers for each dependency
+> recursively (yes this could work).
+> But maybe it is easier to generate the files on the target? (not native)
+>
+>
+> If on target generation isn't an option for you, then all I can do is
+> recommend "bitbake -g -u depexp sox".
+> With this tool you can view the dependencies and don't have to wait
+> for bitbake to resolve them / to see them.
+>
 
-If they are enabled but you do genuinely want these to be compiled into the 
-kernel rather than as modules, the task-picop-demo recipe needs to be changed 
-to use RRECOMMENDS rather than RDEPENDS to bring in the kernel modules only if 
-they exist; that will fix the error.
+On target generation isn't what we want.
 
-Cheers,
-Paul
+I attempted to go further down the dependency tree and making everything
+build natively but eventually got stuck with udev-native.
 
--- 
+We could just generate these audio files completely outside of OE and then
+pull them in pre built rather than attempt to get OE to generate them.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+I'd quite like to get the native thing working though, but I'm out of ideas
+now so will park it unless any OE experts out there fancy getting
+sox-native to build..
 
+Thanks for your help in any case.
 
