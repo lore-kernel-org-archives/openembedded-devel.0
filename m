@@ -1,36 +1,44 @@
-Received: from mail-gg0-f175.google.com ([209.85.161.175])
+Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TSogn-0003Dy-4O
+	(envelope-from <ross.burton@intel.com>) id 1TStLA-0004ij-Ph
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 13:43:33 +0100
-Received: by mail-gg0-f175.google.com with SMTP id p1so888928ggn.6
+	Mon, 29 Oct 2012 18:41:33 +0100
+Received: from mail-ia0-f197.google.com ([209.85.210.197])
+	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 29 Oct 2012 10:27:04 -0700
+Received: by mail-ia0-f197.google.com with SMTP id j5so9357249iaf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2012 05:30:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=04WloiERooCSafs5saYmNbAK7Ux3js7jJdGd0rg7zHk=;
-	b=obcSZJ1t4FcyWwu5+DcRnkXxG0xhakYx1i+vWgAXhUZymt0BWCX7zteQkb+5Tk7AhJ
-	rK1eukCoWy4hIeaKeJeAEIRf6QEeZCSOI4GPVlf+EQnIR8XQALNCCj1ybJisuVXzCbwg
-	wzW+THlZpAvmxXceP8beVXoq8wqqhcXVfTHKFXyUG4+XCFxML0AU0q8cj1qlbUlZMoXX
-	HYueCVdivfHyhwNzza9q0omIs1X9OumlusjXodJmHCuX8bxBmEd5rGVqtsXZiKrd5Icf
-	g0ph2V7Xod1NejUi2rgYB/pip6RaDqSz2CsFJkgSPqFBBFgufnNqT/D/+cX6fKqvACJV
-	V6jA==
-Received: by 10.100.233.37 with SMTP id f37mr7671503anh.48.1351513800025;
-	Mon, 29 Oct 2012 05:30:00 -0700 (PDT)
-Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id j8sm8362054ann.3.2012.10.29.05.29.56
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 29 Oct 2012 05:29:57 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Oct 2012 10:29:45 -0200
-Message-Id: <1351513785-15026-3-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1351513785-15026-1-git-send-email-otavio@ossystems.com.br>
-References: <1351513785-15026-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 3/3] freerdp: Update to lastest stable (upcoming 1.0.2)
+	Mon, 29 Oct 2012 10:26:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=gXYCbhRoDWTW6PKcHBxlqQLoxssW/30IJrwCwN37PUo=;
+	b=ohH79ly0N6C3hdt3mztxGi56lpV6bi7xipIls4N5DvPFxWwh5aOXHqdMwg94ybpCIp
+	R/feO5BbMlZe+dGPCrAmnsAxMVxV/uLyOxNN2YwIety5Zt1Lhi855cNuLgnfbs40sVrp
+	ZUu+0g86oxhe986WQYLb8/UMHdR1q7P5aC/J0cj9umu7a/0azjkZhtQ8ATfVdqvg5d0i
+	vKWpz/QYw6no3S/0+AxEHFulSr5cl87BTGpXZBLg/K8W3b9IjQnXyBUSMo4KQvIr9qMZ
+	djRSmMerKnGP6tfc7Q6XbcRkz+C0MGIyndnSdkNIETY6EJbrsOEO8hRomfJSsPugljyM
+	DyVw==
+Received: by 10.50.178.67 with SMTP id cw3mr10130960igc.53.1351531617659;
+	Mon, 29 Oct 2012 10:26:57 -0700 (PDT)
+Received: by 10.50.178.67 with SMTP id cw3mr10130959igc.53.1351531617604; Mon,
+	29 Oct 2012 10:26:57 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.64.68.41 with HTTP; Mon, 29 Oct 2012 10:26:31 -0700 (PDT)
+In-Reply-To: <50866812.10408@r-finger.com>
+References: <CAJTo0LboPRF7Oxnwh8QS6b6ReS-1-P+=r04L54QRptPnHfV5oQ@mail.gmail.com>
+	<5085800A.4060600@r-finger.com>
+	<CAPj87rOXzZ5EwKYCrBnYtYAQo3cUyXtXyyDSh2nKh05Gy=uY9A@mail.gmail.com>
+	<50865733.40007@r-finger.com>
+	<CAPj87rOZokkPT_a7kbaqmai2bWwV5xLL8oV2UNOfoxkARHfwCg@mail.gmail.com>
+	<50866812.10408@r-finger.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 29 Oct 2012 17:26:31 +0000
+Message-ID: <CAJTo0LbCB2K2wfbMF2sb=qosAYheFNc2zncOFfZqoj7c7eBDvw@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQmxwi5Qft60A1CPRBvj1zkHPFqPHFfWx8bX8rxNkm5Cv/Rl0v7v/UsxhFDYD6aPcWdt5ipwfojLTDwmGqLH4HAbZO5D1ID6EsVKCmKcfcHTpJs2+dBk8hrm/aARUaqhvnDRnxs0Jjx9M1X4Le+AjQHRtKn9uNGAuaurfiSKjINHPomf1UOrJe9XiryjBbFPvFTozkMQ
+Subject: Re: [OE-core] [RFC] OpenGL packaging/staging policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,80 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 12:43:33 -0000
+X-List-Received-Date: Mon, 29 Oct 2012 17:41:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This changes the build system from autotools for cmake so we change
-the options to allow it to proper build.
+Hi,
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/freerdp/freerdp.inc    |   19 +++++++++++--------
- meta-oe/recipes-support/freerdp/freerdp_git.bb |    8 ++++----
- 2 files changed, 15 insertions(+), 12 deletions(-)
+This was interesting discussion and certainly achieved the goal of
+soliciting comments...  A less aggressive plan:
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp.inc b/meta-oe/recipes-support/freerdp/freerdp.inc
-index 673b372..3cb4b25 100644
---- a/meta-oe/recipes-support/freerdp/freerdp.inc
-+++ b/meta-oe/recipes-support/freerdp/freerdp.inc
-@@ -1,22 +1,25 @@
--# Copyright (C) 2010, 2011 O.S. Systems Software Ltda. All Rights Reserved
-+# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
- # Released under the MIT license
- 
- DESCRIPTION = "FreeRDP RDP client"
- HOMEPAGE = "http://www.freerdp.com"
--DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite"
-+DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite libxkbfile libxinerama"
- SECTION = "x11/network"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- INC_PR = "r1"
- 
--inherit pkgconfig autotools
-+inherit pkgconfig cmake
- 
--EXTRA_OECONF += "--with-smartcard --with-xvideo"
--
--do_install_append() {
--	rm ${D}${libdir}/freerdp/*.a ${D}${libdir}/freerdp/*.la
--}
-+EXTRA_OECMAKE += "-DWITH_PULSEAUDIO=ON \
-+                  -DWITH_PCSC=ON \
-+                  -DWITH_CUPS=ON \
-+                  -DWITH_FFMPEG=OFF \
-+                  -DWITH_CUNIT=OFF \
-+                  -DWITH_X11=ON \
-+                  -DWITH_XKBFILE=ON \
-+                  -DWITH_XINERAMA=ON"
- 
- PACKAGES =+ "libfreerdp"
- 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-index 2a3affd..01ab390 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-@@ -1,4 +1,4 @@
--# Copyright (C) 2010, 2011, O.S. Systems Software Ltda.
-+# Copyright (C) 2010-2012, O.S. Systems Software Ltda.
- # Released under the MIT license
- 
- include freerdp.inc
-@@ -7,9 +7,9 @@ inherit gitpkgv
- 
- PV = "gitr${SRCPV}"
- PKGV = "${GITPKGVTAG}"
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.0"
- 
--SRCREV = "b3eb650c919c4b3b1e5bc12cea6afb05282a7232"
--SRC_URI = "git://github.com/FreeRDP/FreeRDP-old.git;protocol=git"
-+SRCREV = "19d4a4276869ec40ee1eef066ac460615734c043"
-+SRC_URI = "git://github.com/FreeRDP/FreeRDP.git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.2.5
+Rule 1.  Unambiguous package naming
 
+I won't repeat this, everyone agreed this was sane.  I've a patch for
+mesa that I'll submit shortly.
+
+Rule 2.  No whitelisting for GL driver conflicts
+
+The target GL shall be staged, and situations which result in multiple
+GLs being installed should handle this case and resolve it.
+
+For atom-pc this means building Mesa.  For Beagle this means staging
+the Beagle binary drivers.  For Tegra as I've discovered this is
+"interesting" as they don't appear to provide any headers in their
+Tegra For Linux tarball...
+
+For Cedar Trail and EMGD, the easiest solution is a dedicated Mesa
+building just GL.  As Mesa's DRI driver API isn't stable this is
+practically required anyway: the ABI of the libGL we build and the
+libGL that the binary driver was built against need to match.  This
+mesa-just-gl (mesa-solo?) can be in meta-intel unless other machines
+turn out to have a similar (crazy) requirement.
+
+Rule 3.  No dependencies on specific GL implementations
+
+Useful so that GL implementations are swappable on systems where that
+can happen, but not essential if there isn't a single blessed GL for
+sysroot.  We'll do this later.
+
+Some things that will also happen whilst I do this:
+1) mesa-dri renamed to mesa.  Let's get this done nice and early!
+2) mesa stops architecture-overriding enabling of EGL and GLES, so all
+architectures that build Mesa get GL/EGL/GLESv1/GLESv2.  If you don't
+want this don't build Mesa, and the namespaced packaging means there
+won't be conflicts.
+
+Any more comments?
+
+Ross
 
 
