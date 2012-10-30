@@ -1,34 +1,36 @@
 Received: from mail-yh0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTDBk-0002KZ-PK
+	(envelope-from <otavio.salvador@gmail.com>) id 1TTDBn-0002Ki-0n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 15:53:08 +0100
-Received: by mail-yh0-f47.google.com with SMTP id g23so60625yhg.6
+	Tue, 30 Oct 2012 15:53:11 +0100
+Received: by mail-yh0-f47.google.com with SMTP id g23so60634yhg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 07:39:32 -0700 (PDT)
+	Tue, 30 Oct 2012 07:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=NhCTNDr9zEC2Y3CYrS0eb1GA00B/B/2tznLWNVUoq+A=;
-	b=wrWeMoFGx9myBBN7JqTMQnHflqEsdT0HlNBwbZLFmKo16j4Ofh24oy+wWiQwYP5/QC
-	VxX+YZurqQy5uLb988KGJUC0c3Ym17igFw7np9YIgqa1OOK4X8R6dNPho5NVsLQu/cFs
-	6KGcdorjtu8uHJ7llJe9I4MMxrTfr+ty8MME3yNsoSq+FMIfewHUrx9WtzmPo4Enqwtf
-	weriTIzmRuFYVY88UQ3ZuQa9/u2y78eB8IzgytO0MnwaBRFb5sZWeocf9GBNWNns2hOf
-	P+xJVIIvdZUWFpldp8iRsoTUtPheZ/y0KPYF52KpAai/FipHSONarMczbE4Dg1N3hBrO
-	/m8w==
-Received: by 10.236.9.104 with SMTP id 68mr32701411yhs.89.1351607972666;
-	Tue, 30 Oct 2012 07:39:32 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=zNqwVtewXyflOxFMdUKp8D6urRIkcfr4wyewdYfzZK0=;
+	b=nmvu6g2K99Qcy4EDMiYMPORRf/RgLAb31bbz/UBePvL0dPYTUcVokLekjYWeF9acx7
+	PpMse5tvLI8F1pFe43Dv2Mn5fOwdSl7mA/zocGmsYHxTMfV/+/Vhf8chhIpW1Nbpdrgp
+	PzEC+mgYeDlH4pfL6sxGqhBcOA0WtrDJHR9JmXvdCQmUcSYQlinqFWJH9sprkiMd3PSP
+	ysDRwqxQMoAFrd8AnsoBdwo97XEogxXTNrzZMRADkVtGTnGaDC7jZk8b/WkwbgRUzf3V
+	/xy2Pc9AWT7uuuN4V/yMcHJ/9Cz9uOyq85YSaIGqc88Xpn5gZJUcdemWgv2ZARcgE9Yo
+	DnBg==
+Received: by 10.236.137.112 with SMTP id x76mr32487208yhi.56.1351607975321;
+	Tue, 30 Oct 2012 07:39:35 -0700 (PDT)
 Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id u49sm801500yhd.18.2012.10.30.07.39.30
+	by mx.google.com with ESMTPS id u49sm801500yhd.18.2012.10.30.07.39.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 30 Oct 2012 07:39:31 -0700 (PDT)
+	Tue, 30 Oct 2012 07:39:34 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Oct 2012 12:39:21 -0200
-Message-Id: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 30 Oct 2012 12:39:22 -0200
+Message-Id: <1351607962-13469-2-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
+In-Reply-To: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
+References: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 1/2] meta-systemd: Move ntp recipes to 'meta-networking' sublayer
+Subject: [meta-oe][PATCH 2/2] meta-systemd: meta-networking: ntp: Update bbappend to 4.2.6p6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 14:53:08 -0000
+X-List-Received-Date: Tue, 30 Oct 2012 14:53:11 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../recipes-support/ntp/ntp/ntpd.service           |    0
- .../recipes-support/ntp/ntp/ntpdate.service        |    0
- .../recipes-support/ntp/ntp_4.2.6p3.bbappend       |    0
- 3 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpd.service (100%)
- rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpdate.service (100%)
- rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp_4.2.6p3.bbappend (100%)
+ .../{ntp_4.2.6p3.bbappend => ntp_4.2.6p6.bbappend} |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/meta-networking/recipes-support/ntp/{ntp_4.2.6p3.bbappend => ntp_4.2.6p6.bbappend} (100%)
 
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
+diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p6.bbappend
 similarity index 100%
-rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service
-rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
-rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
-diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
-rename to meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
+rename from meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
+rename to meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p6.bbappend
 -- 
 1.7.2.5
 
