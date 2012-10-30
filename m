@@ -1,33 +1,34 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-yh0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TTCH6-0000q7-Uk
+	(envelope-from <otavio.salvador@gmail.com>) id 1TTDBk-0002KZ-PK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 14:54:36 +0100
-Received: by mail-ea0-f175.google.com with SMTP id c1so116622eaa.6
+	Tue, 30 Oct 2012 15:53:08 +0100
+Received: by mail-yh0-f47.google.com with SMTP id g23so60625yhg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 06:41:01 -0700 (PDT)
+	Tue, 30 Oct 2012 07:39:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=+xWqmWncULhN2G0xUfJUk71q+X61fq1ptU0CmRaij54=;
-	b=KbAN5VCsDayNPN3yxfEV8zFHNpJFGM3s0dfRAuV3JDhVxpCHa4NGTHgfTWuslth9Oz
-	+wEoycIEbFcJM2QzV0HIxgbFUmbfu4E15mJRktNjhuBwu4SIY6wpkbfn7Hrw//39i8uH
-	k5J9+M7EZq9P6uw7B6mYSosGjRH77gNKVOFjMEjKbPjHMH1FxSTLyn8vQmI4tvIVFQAN
-	+3p9C3d8Vrn3yBajXY+hua1PxYMyLAljM0HL9iyh6clcH0L+BYlBbcMCRCk0gtO6oZZu
-	xE/YUUy8q8DhOIJshN2I2Pk0Mo17QR7V6z8snR7lA1KDY6NAL+KWkXuf9iNiAI2cQllY
-	ipSA==
-Received: by 10.14.173.137 with SMTP id v9mr60542357eel.41.1351604461236;
-	Tue, 30 Oct 2012 06:41:01 -0700 (PDT)
-Received: from s-stirtzel-linux.zera.local
-	(ip-109-91-251-94.unitymediagroup.de. [109.91.251.94])
-	by mx.google.com with ESMTPS id k2sm1516267eep.15.2012.10.30.06.40.58
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=NhCTNDr9zEC2Y3CYrS0eb1GA00B/B/2tznLWNVUoq+A=;
+	b=wrWeMoFGx9myBBN7JqTMQnHflqEsdT0HlNBwbZLFmKo16j4Ofh24oy+wWiQwYP5/QC
+	VxX+YZurqQy5uLb988KGJUC0c3Ym17igFw7np9YIgqa1OOK4X8R6dNPho5NVsLQu/cFs
+	6KGcdorjtu8uHJ7llJe9I4MMxrTfr+ty8MME3yNsoSq+FMIfewHUrx9WtzmPo4Enqwtf
+	weriTIzmRuFYVY88UQ3ZuQa9/u2y78eB8IzgytO0MnwaBRFb5sZWeocf9GBNWNns2hOf
+	P+xJVIIvdZUWFpldp8iRsoTUtPheZ/y0KPYF52KpAai/FipHSONarMczbE4Dg1N3hBrO
+	/m8w==
+Received: by 10.236.9.104 with SMTP id 68mr32701411yhs.89.1351607972666;
+	Tue, 30 Oct 2012 07:39:32 -0700 (PDT)
+Received: from localhost.localdomain ([177.100.163.15])
+	by mx.google.com with ESMTPS id u49sm801500yhd.18.2012.10.30.07.39.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 30 Oct 2012 06:40:59 -0700 (PDT)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Tue, 30 Oct 2012 07:39:31 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Oct 2012 14:40:44 +0100
-Message-Id: <1351604444-16246-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] maliit-plugins: Clean up recipe and add missing RDEPENDS
+Date: Tue, 30 Oct 2012 12:39:21 -0200
+Message-Id: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/2] meta-systemd: Move ntp recipes to 'meta-networking' sublayer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 13:54:37 -0000
+X-List-Received-Date: Tue, 30 Oct 2012 14:53:08 -0000
 
-The following errors are only shown when started from console, also there are no visible errors during execution.
-Error fixed: QML Image: Error decoding: file:///usr/share/maliit/plugins/org/nemomobile/icon-m-input-methods-shift-lowercase.svg: Unsupported image format
-
-This is unaffected from whether libqtsvg4 is installed or not.
-
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../recipes-support/maliit/maliit-plugins_git.bb   |   10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ .../recipes-support/ntp/ntp/ntpd.service           |    0
+ .../recipes-support/ntp/ntp/ntpdate.service        |    0
+ .../recipes-support/ntp/ntp_4.2.6p3.bbappend       |    0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpd.service (100%)
+ rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpdate.service (100%)
+ rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp_4.2.6p3.bbappend (100%)
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-plugins_git.bb b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
-index 932c0ae..2fb52c7 100644
---- a/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
-+++ b/meta-oe/recipes-support/maliit/maliit-plugins_git.bb
-@@ -8,6 +8,8 @@ inherit autotools qt4x11
- 
- DEPENDS = "maliit-framework"
- 
-+RDEPENDS_${PN} += "qt4-plugin-iconengine-svgicon qt4-plugin-imageformat-svg"
-+
- SRC_URI = "git://gitorious.org/maliit/maliit-plugins.git;branch=master"
- 
- SRCREV = "0760e585df494b394df1b887e5138ffef19c481f"
-@@ -23,12 +25,8 @@ FILES_${PN} += "\
-     ${datadir} \
-     "
- 
--FILES_${PN}-dbg += "\
--    ${libdir}/maliit/plugins-*/.debug \
--    "
-+FILES_${PN}-dbg += "${libdir}/maliit/plugins-*/.debug"
- 
- S= "${WORKDIR}/git"
- 
--do_install() {
--  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
--}
-\ No newline at end of file
-+EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
+diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
+similarity index 100%
+rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service
+rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
+diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
+similarity index 100%
+rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
+rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
+diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
+similarity index 100%
+rename from meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
+rename to meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
 -- 
-1.7.9.5
+1.7.2.5
 
 
 
