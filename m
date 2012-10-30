@@ -1,36 +1,34 @@
-Received: from mail-yh0-f47.google.com ([209.85.213.47])
+Received: from mail-gg0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTDBn-0002Ki-0n
+	(envelope-from <otavio.salvador@gmail.com>) id 1TTF3E-0007U3-GD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 15:53:11 +0100
-Received: by mail-yh0-f47.google.com with SMTP id g23so60634yhg.6
+	Tue, 30 Oct 2012 17:52:28 +0100
+Received: by mail-gg0-f175.google.com with SMTP id p1so91048ggn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 07:39:35 -0700 (PDT)
+	Tue, 30 Oct 2012 09:38:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=zNqwVtewXyflOxFMdUKp8D6urRIkcfr4wyewdYfzZK0=;
-	b=nmvu6g2K99Qcy4EDMiYMPORRf/RgLAb31bbz/UBePvL0dPYTUcVokLekjYWeF9acx7
-	PpMse5tvLI8F1pFe43Dv2Mn5fOwdSl7mA/zocGmsYHxTMfV/+/Vhf8chhIpW1Nbpdrgp
-	PzEC+mgYeDlH4pfL6sxGqhBcOA0WtrDJHR9JmXvdCQmUcSYQlinqFWJH9sprkiMd3PSP
-	ysDRwqxQMoAFrd8AnsoBdwo97XEogxXTNrzZMRADkVtGTnGaDC7jZk8b/WkwbgRUzf3V
-	/xy2Pc9AWT7uuuN4V/yMcHJ/9Cz9uOyq85YSaIGqc88Xpn5gZJUcdemWgv2ZARcgE9Yo
-	DnBg==
-Received: by 10.236.137.112 with SMTP id x76mr32487208yhi.56.1351607975321;
-	Tue, 30 Oct 2012 07:39:35 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=h/ih47SI9+I6cyeKnUGedEy67KKCaLjmIhXfAQ/5g6w=;
+	b=yz93zwodvxanqtQUKTxQIiigWJhcrehPAfS8r+F6i6HkwrnauPWNoTa9HpmF3d3EFO
+	riS+qpRaeFH7pr7HdWGvOqZoFtA3q2IsB/drMbcHN9LADS5MflgczxO0ymyDwCgH9YRn
+	91LJzkvg0fGWyvf92myR1fywtziiKLIhElXLfxHxNBXApuRsVRxcte6Z9QddB6ZeZB45
+	7osrCa/3GFW2dXZccwAtF4JjZqHTNyGoySyxWyy+1QloeqL2FveFB8awYPTDySj4B2Jn
+	f0cq76NWs5WKODh5mHRlXVrSeKSGOm1/MXPySCGnrQ9b5XjO+lyWnzTpsvkdnJ044run
+	M0lw==
+Received: by 10.236.134.49 with SMTP id r37mr33970437yhi.11.1351615132543;
+	Tue, 30 Oct 2012 09:38:52 -0700 (PDT)
 Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id u49sm801500yhd.18.2012.10.30.07.39.32
+	by mx.google.com with ESMTPS id u13sm1032273anh.9.2012.10.30.09.38.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 30 Oct 2012 07:39:34 -0700 (PDT)
+	Tue, 30 Oct 2012 09:38:51 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Oct 2012 12:39:22 -0200
-Message-Id: <1351607962-13469-2-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 30 Oct 2012 14:38:33 -0200
+Message-Id: <1351615113-32300-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
-References: <1351607962-13469-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] meta-systemd: meta-networking: ntp: Update bbappend to 4.2.6p6
+Subject: [meta-oe][PATCH] freerdp: Bump SRCREV to 1.0.2 snapshot of 2012-10-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,18 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 14:53:11 -0000
+X-List-Received-Date: Tue, 30 Oct 2012 16:52:29 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../{ntp_4.2.6p3.bbappend => ntp_4.2.6p6.bbappend} |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/meta-networking/recipes-support/ntp/{ntp_4.2.6p3.bbappend => ntp_4.2.6p6.bbappend} (100%)
+ meta-oe/recipes-support/freerdp/freerdp_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p6.bbappend
-similarity index 100%
-rename from meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
-rename to meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p6.bbappend
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+index 01ab390..6683d4f 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
+@@ -9,7 +9,7 @@ PV = "gitr${SRCPV}"
+ PKGV = "${GITPKGVTAG}"
+ PR = "${INC_PR}.0"
+ 
+-SRCREV = "19d4a4276869ec40ee1eef066ac460615734c043"
++SRCREV = "1eccaf0d2a4c99e2e70b38344120d3bf1a65ca89"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 1.7.2.5
 
