@@ -1,30 +1,37 @@
 Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rangers.av@gmail.com>) id 1TT3L8-0001Gv-E3
+	(envelope-from <rangers.av@gmail.com>) id 1TT6T8-0000Bu-3f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 05:22:10 +0100
-Received: by mail-lb0-f175.google.com with SMTP id y2so3516514lbk.6
+	Tue, 30 Oct 2012 08:42:38 +0100
+Received: by mail-lb0-f175.google.com with SMTP id y2so3588996lbk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2012 21:08:35 -0700 (PDT)
+	Tue, 30 Oct 2012 00:29:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=hEajiqEVFoyetLykBJqEE5Dz3Xha02nehtWhrDXiJ7g=;
-	b=DfwjB6YI6d/3ntPLijJ+aMqbclDYKWo0y2xUbHbB0dtQHL9nCE1wqiNFNseLnselMb
-	sd2VqQqNGQU9OEojBdT9UPO3ssbrt8Q1XnfRNGmyihOH1K5vwCPjV9R9dE6p2rjg+YXm
-	1x7d32F8Y224764HFm3MoC19VnK6lHoJEaccpoCi780JhoP43Dy0MkuM3AxXfs7DtSqc
-	dreSYUINoTjknnhUxMgOMd/QWiE9ELzelzUceFmZtRrbK0/R4B/tLoKaJcGAoF6k2YWa
-	zDIICV3HZYrrtqapnesCgi2SqiswjTa87kCBKfMgjHAG86AzZwLAKzijj8yo7mSpc+H6
-	2QyQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=D4aJOpCfUMuMP2YeQgeBZS74yw6VnZ0pZ6eJSdsC2lU=;
+	b=w+LRNLTC1Lv6ASQI/RKaUh9U/T7plS/knbWpVSrb9MNn/iEbA164d9SSTVs33aG+Bl
+	9f7Vvp5K7oQRSG8MvgE//B02oGi8CXeIbdow0x8vnKsOxKXHr0KLJ7OtolBrkCW7T10Q
+	jYXI53ZC6oFrVIVzvLByfAy+qC67gMLq87WPHahboupWRsThFOI6ke2TH2KbcK5SAiaw
+	cLVG08qfhkUOMA+UJCz7TMfyCg9ajR2OoGrbwdN6DmvqT048FZ/Apr5kvzfQyzb2jhvY
+	28RQ/ed1xnNRak6FFQ/abURkAk2lOlXE07KXfMv7I8Qb4LD+bSQCY+Q8Y70UQ+LT2K9q
+	xibQ==
 MIME-Version: 1.0
-Received: by 10.112.102.10 with SMTP id fk10mr12805268lbb.40.1351570115385;
-	Mon, 29 Oct 2012 21:08:35 -0700 (PDT)
-Received: by 10.112.28.8 with HTTP; Mon, 29 Oct 2012 21:08:34 -0700 (PDT)
-Date: Tue, 30 Oct 2012 09:38:34 +0530
-Message-ID: <CAMQ5J2abu7O9cDJ3Fmzwuakww=WK+rkf1qjh3fGZXvtWu-yHMg@mail.gmail.com>
+Received: by 10.112.9.199 with SMTP id c7mr1312046lbb.70.1351582142771; Tue,
+	30 Oct 2012 00:29:02 -0700 (PDT)
+Received: by 10.112.28.8 with HTTP; Tue, 30 Oct 2012 00:29:02 -0700 (PDT)
+In-Reply-To: <8894147.TkBjTbKHcp@helios>
+References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
+	<1514371.ACA88Gs2zU@helios>
+	<CAMQ5J2bC+3514kz1sNsqL_zb10P5rdnsCy_Xd2Z9-Gm1-WdTSg@mail.gmail.com>
+	<8894147.TkBjTbKHcp@helios>
+Date: Tue, 30 Oct 2012 12:59:02 +0530
+Message-ID: <CAMQ5J2ZX6ktGvdWRT8K-MPgQdMdYkZqEjSbiTLSMkL8EWDmsUA@mail.gmail.com>
 From: RaNgErS <rangers.av@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Bluetooth library and corresponding errors.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Kernal build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 04:22:10 -0000
+X-List-Received-Date: Tue, 30 Oct 2012 07:42:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+I found  a .config file in the path
 
-I am trying to make a recipie with usb & bluetooth support. I added
+/oe/build/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/kernel
 
-LIBUSB_CC=`pkg-config --cflags libusb-1.0`
-
-for usb. But for bluetooth dont know what to add. so I am getting these
-errors :
-
-undefined reference to `hci_get_route'
-undefined reference to `hci_open_dev'
-undefined reference to `hci_inquiry'
-undefined reference to `ba2str'
-undefined reference to `str2ba'
-undefined reference to `hci_read_remote_name'
+and it is a pre-built item,right?
 
 
-all from my sample code which build with the same recipie. what is the
-equivalent bluetooth library?
+i just done
+
+$bitbake virtual/kernel -c clean
+$bitbake defconfig -c clean
+$bitbake beagleboard-demo-image
+
+
+it results in some more error and descriptions. one of them were
+unsatisfied dependency for qt-x11..... ,libqt.... etc.
 
 Thanks
 RaNgErS
+
+On Mon, Oct 29, 2012 at 5:27 PM, Paul Eggleton <
+paul.eggleton@linux.intel.com> wrote:
+
+> On Monday 29 October 2012 16:49:59 RaNgErS wrote:
+> > could you please explain how should i check the kernel configuration?
+>
+> There will probably be a defconfig for your kernel somewhere, in a
+> directory
+> next to the kernel recipe.
+>
+> > and changing RRECOMMENDS to RDEPENDS
+>
+> Have a look at the recipe (I guess recipes/tasks/task-picop-demo.bb), you
+> will
+> see some lines that use RDEPENDS to bring in the kernel modules.
+>
+> Cheers,
+> Paul
+>
+> PS: please CC the mailing list on reply, thanks.
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
+
+
+
+-- 
+     RaNgErS
+THIS IS STRANGE
 
