@@ -1,36 +1,35 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rangers.av@gmail.com>) id 1TT6T8-0000Bu-3f
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 08:42:38 +0100
-Received: by mail-lb0-f175.google.com with SMTP id y2so3588996lbk.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TT7o5-0002JA-UJ for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Oct 2012 10:08:21 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TT7b6-0003No-Ey for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Oct 2012 09:54:56 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Oct 2012 09:54:56 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 00:29:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=D4aJOpCfUMuMP2YeQgeBZS74yw6VnZ0pZ6eJSdsC2lU=;
-	b=w+LRNLTC1Lv6ASQI/RKaUh9U/T7plS/knbWpVSrb9MNn/iEbA164d9SSTVs33aG+Bl
-	9f7Vvp5K7oQRSG8MvgE//B02oGi8CXeIbdow0x8vnKsOxKXHr0KLJ7OtolBrkCW7T10Q
-	jYXI53ZC6oFrVIVzvLByfAy+qC67gMLq87WPHahboupWRsThFOI6ke2TH2KbcK5SAiaw
-	cLVG08qfhkUOMA+UJCz7TMfyCg9ajR2OoGrbwdN6DmvqT048FZ/Apr5kvzfQyzb2jhvY
-	28RQ/ed1xnNRak6FFQ/abURkAk2lOlXE07KXfMv7I8Qb4LD+bSQCY+Q8Y70UQ+LT2K9q
-	xibQ==
-MIME-Version: 1.0
-Received: by 10.112.9.199 with SMTP id c7mr1312046lbb.70.1351582142771; Tue,
-	30 Oct 2012 00:29:02 -0700 (PDT)
-Received: by 10.112.28.8 with HTTP; Tue, 30 Oct 2012 00:29:02 -0700 (PDT)
-In-Reply-To: <8894147.TkBjTbKHcp@helios>
+	Tue, 30 Oct 2012 09:54:56 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 30 Oct 2012 09:54:39 +0100
+Message-ID: <k6o4kb$vca$1@ger.gmane.org>
 References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
+	<CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
 	<1514371.ACA88Gs2zU@helios>
-	<CAMQ5J2bC+3514kz1sNsqL_zb10P5rdnsCy_Xd2Z9-Gm1-WdTSg@mail.gmail.com>
-	<8894147.TkBjTbKHcp@helios>
-Date: Tue, 30 Oct 2012 12:59:02 +0530
-Message-ID: <CAMQ5J2ZX6ktGvdWRT8K-MPgQdMdYkZqEjSbiTLSMkL8EWDmsUA@mail.gmail.com>
-From: RaNgErS <rangers.av@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1514371.ACA88Gs2zU@helios>
+X-Enigmail-Version: 1.4.4
 Subject: Re: Kernal build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,59 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 07:42:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Oct 2012 09:08:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-I found  a .config file in the path
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-/oe/build/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/kernel
+Op 29-10-12 10:43, Paul Eggleton schreef:
+> On Monday 29 October 2012 13:21:50 RaNgErS wrote:
+>> I am very new to this stuff, and I tried to build an image i got some 
+>> errors which are not solved even i tried for a whole week. It is from
+>> the kernal side or sth. i am attaching the log file obtained .
+> 
+> The module packages specified don't exist, which means either the
+> functionality they would have included is compiled into the kernel
+> (option value = "y") or they weren't enabled at all (option value="n").
+> So you should check your kernel configuration.
+> 
+> If they are enabled but you do genuinely want these to be compiled into
+> the kernel rather than as modules, the task-picop-demo recipe needs to be
+> changed to use RRECOMMENDS rather than RDEPENDS to bring in the kernel
+> modules only if they exist; that will fix the error.
 
-and it is a pre-built item,right?
-
-
-i just done
-
-$bitbake virtual/kernel -c clean
-$bitbake defconfig -c clean
-$bitbake beagleboard-demo-image
-
-
-it results in some more error and descriptions. one of them were
-unsatisfied dependency for qt-x11..... ,libqt.... etc.
-
-Thanks
-RaNgErS
-
-On Mon, Oct 29, 2012 at 5:27 PM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
-
-> On Monday 29 October 2012 16:49:59 RaNgErS wrote:
-> > could you please explain how should i check the kernel configuration?
->
-> There will probably be a defconfig for your kernel somewhere, in a
-> directory
-> next to the kernel recipe.
->
-> > and changing RRECOMMENDS to RDEPENDS
->
-> Have a look at the recipe (I guess recipes/tasks/task-picop-demo.bb), you
-> will
-> see some lines that use RDEPENDS to bring in the kernel modules.
->
-> Cheers,
-> Paul
->
-> PS: please CC the mailing list on reply, thanks.
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
+RDEPENDSing on kernel-modules is not allowed anyway, you should always use
+RRECOMENDS for those.
 
 
 
--- 
-     RaNgErS
-THIS IS STRANGE
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQj5XPMkyGM64RGpERAlrHAJ9aLi10oRaK39QTnitb5+uutMZRLQCgh5Uq
+PMsZo20st543harAPvScJzU=
+=G4PF
+-----END PGP SIGNATURE-----
+
+
 
