@@ -1,38 +1,30 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tom.rini@gmail.com>) id 1TSy8G-0007HW-5t
+	(envelope-from <rangers.av@gmail.com>) id 1TT3L8-0001Gv-E3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Oct 2012 23:48:32 +0100
-Received: by mail-pb0-f47.google.com with SMTP id ro12so4102802pbb.6
+	Tue, 30 Oct 2012 05:22:10 +0100
+Received: by mail-lb0-f175.google.com with SMTP id y2so3516514lbk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Oct 2012 15:34:56 -0700 (PDT)
+	Mon, 29 Oct 2012 21:08:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=wC9Gzb+lQgrTl5jSzuTGv6Ro5bHVYMF1UWfUwOPzegA=;
-	b=IlpktVm9vE8x6L4HUlhxtgaSHTdI381qpsI1sOlFvH5vku39ADYSxs2IroNp+1NVws
-	K2TMbGMRK39bD0DMaDcjt768WuLfQf+HUOfd37prIBYrwfgPWXj+iNgnu2RvOiUTT8iJ
-	daZ2r98rHNNvJ8bp2vqtsTtRYGip8kvS6cEmbKrbk0GkobAJhSoDh/FBiF5xag6I0l5H
-	+wnrK+MLpF0KKKcSUZShc/5OdW5yMmodMa4gzmURuemUi9WgkOw5uKtmY60HNbNLldjZ
-	DaYxX4quHcVttYfa2CwfKzwUtpCsvCs8dxnq9w8j+/lzUXUzu/mFB4PFQALO+itKHvzL
-	zm0g==
-Received: by 10.66.85.66 with SMTP id f2mr87111287paz.56.1351550096894;
-	Mon, 29 Oct 2012 15:34:56 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-53-52.ph.ph.cox.net. [68.230.53.52])
-	by mx.google.com with ESMTPS id g1sm5217636pax.21.2012.10.29.15.34.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 29 Oct 2012 15:34:55 -0700 (PDT)
-Date: Mon, 29 Oct 2012 15:34:52 -0700
-From: Tom Rini <tom.rini@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20121029223452.GG11581@bill-the-cat>
-References: <cover.1351244110.git.sledz@dresearch-fe.de>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=hEajiqEVFoyetLykBJqEE5Dz3Xha02nehtWhrDXiJ7g=;
+	b=DfwjB6YI6d/3ntPLijJ+aMqbclDYKWo0y2xUbHbB0dtQHL9nCE1wqiNFNseLnselMb
+	sd2VqQqNGQU9OEojBdT9UPO3ssbrt8Q1XnfRNGmyihOH1K5vwCPjV9R9dE6p2rjg+YXm
+	1x7d32F8Y224764HFm3MoC19VnK6lHoJEaccpoCi780JhoP43Dy0MkuM3AxXfs7DtSqc
+	dreSYUINoTjknnhUxMgOMd/QWiE9ELzelzUceFmZtRrbK0/R4B/tLoKaJcGAoF6k2YWa
+	zDIICV3HZYrrtqapnesCgi2SqiswjTa87kCBKfMgjHAG86AzZwLAKzijj8yo7mSpc+H6
+	2QyQ==
 MIME-Version: 1.0
-In-Reply-To: <cover.1351244110.git.sledz@dresearch-fe.de>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance 0/1] pull request 20121026
+Received: by 10.112.102.10 with SMTP id fk10mr12805268lbb.40.1351570115385;
+	Mon, 29 Oct 2012 21:08:35 -0700 (PDT)
+Received: by 10.112.28.8 with HTTP; Mon, 29 Oct 2012 21:08:34 -0700 (PDT)
+Date: Tue, 30 Oct 2012 09:38:34 +0530
+Message-ID: <CAMQ5J2abu7O9cDJ3Fmzwuakww=WK+rkf1qjh3fGZXvtWu-yHMg@mail.gmail.com>
+From: RaNgErS <rangers.av@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Bluetooth library and corresponding errors.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,55 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Oct 2012 22:48:32 -0000
-X-Groupsio-MsgNum: 41351
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aYDVKSzuImP48n7V"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 30 Oct 2012 04:22:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---aYDVKSzuImP48n7V
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Fri, Oct 26, 2012 at 11:36:28AM +0200, Steffen Sledz wrote:
+I am trying to make a recipie with usb & bluetooth support. I added
 
-> Hi Tom,
->=20
-> please pull this commit which updates opkg-utils to the latest
-> upstream version also used in oe-core.
->=20
-> Thx,
-> Steffen
->=20
-> The following changes since commit 0609a1cf10887b5f5d69cc4c7baba35beebb3f=
-16:
->=20
->   Merge branch 'pull-request-3' of git://github.com/sledz/oe into 2011.03=
--maintenance (2012-10-09 07:41:40 -0700)
->   https://github.com/sledz/oe/tree/pull-request-opkg-utils
->=20
-> Steffen Sledz (1):
->   opkg-utils: bump SRCREV to latest
->=20
->  recipes/opkg-utils/opkg-utils_git.bb |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+LIBUSB_CC=`pkg-config --cflags libusb-1.0`
 
-Applied, thanks.
+for usb. But for bluetooth dont know what to add. so I am getting these
+errors :
 
---=20
-Tom
+undefined reference to `hci_get_route'
+undefined reference to `hci_open_dev'
+undefined reference to `hci_inquiry'
+undefined reference to `ba2str'
+undefined reference to `str2ba'
+undefined reference to `hci_read_remote_name'
 
---aYDVKSzuImP48n7V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+all from my sample code which build with the same recipie. what is the
+equivalent bluetooth library?
 
-iEYEARECAAYFAlCPBIwACgkQdZngf2G4WwN7jgCeNFJUV20I2J+KioTn2Zcjm3ip
-oD0Anj4AAcMWtyQK4k6fStLGVDP5zRfK
-=dlQO
------END PGP SIGNATURE-----
+Thanks
+RaNgErS
 
---aYDVKSzuImP48n7V--
