@@ -1,36 +1,31 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TT7o5-0002JA-UJ for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 10:08:21 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TT7b6-0003No-Ey for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Oct 2012 09:54:56 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 09:54:56 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Oct 2012 09:54:56 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <s.stirtzel@googlemail.com>)
+	id 1TT8Gc-0002fX-5h; Tue, 30 Oct 2012 10:37:51 +0100
+Received: by mail-ie0-f175.google.com with SMTP id c13so51314ieb.6
+	for <multiple recipients>; Tue, 30 Oct 2012 02:24:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=j/xwMqhH49bmCv1PEU5m6BzwL30RpyCQYhSxJHY2QWo=;
+	b=Mxsl8CfvT+QI2+XAnHTSEBQYLeRtYCFwagXTK3Q+eJaLUR8TkrkaSc7IWOPjlkmojC
+	3pfiQlskIGFrnFZq6ErLQxxmewy0aru+0jsTPGcLeFcvlqat+9QtcZe2kcpNvgSqcX15
+	P/se2W014kFaKcJb91q2D5janX/eUTp/Y4j0cwWKEM5G2nPB2q1VMoxn/s8yXl8upARP
+	x/t5cxKwZZ2xpfKpN4H4kpnyo7Xu/1cSU1UTn7bIs+uF6MpcpCE4eh3/zqA1bO1gdbBy
+	tkYJSQ7jykSBpJOrxctujpgfsp02C9vpRTKAvkLOTCvZZPLblMSuYaedVhHqG/YNDA+O
+	ej5w==
+MIME-Version: 1.0
+Received: by 10.50.183.199 with SMTP id eo7mr857807igc.36.1351589054002; Tue,
+	30 Oct 2012 02:24:14 -0700 (PDT)
+Received: by 10.64.24.179 with HTTP; Tue, 30 Oct 2012 02:24:13 -0700 (PDT)
+In-Reply-To: <20121024064022.C7F781032E@opal>
+References: <20121024064022.C7F781032E@opal>
+Date: Tue, 30 Oct 2012 10:24:13 +0100
+Message-ID: <CAGiJk9fcWHvEdK_bc3ApwExvGM1PKVh6-y9Hj1ifMA0HQG19+w@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Oct 2012 09:54:39 +0100
-Message-ID: <k6o4kb$vca$1@ger.gmane.org>
-References: <CAMQ5J2a8zLVVDPNw6vHhgsQ1pRhz_QdqaJJz7U_aQv2MwEg5zQ@mail.gmail.com>
-	<CAMQ5J2aXaBZg3k3Guj=B+KgdKnf_Px3OmKu8C5oKmyiwdG7AFw@mail.gmail.com>
-	<1514371.ACA88Gs2zU@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <1514371.ACA88Gs2zU@helios>
-X-Enigmail-Version: 1.4.4
-Subject: Re: Kernal build errors
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : Revert "maliit-framework: Clean up recipe and use gtk-immodules-cache.bbclass"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,42 +39,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2012 09:08:22 -0000
+X-List-Received-Date: Tue, 30 Oct 2012 09:37:51 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2012/10/24  <git@git.openembedded.org>:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 80ef3c0aa0f92e93d1581e47ccb77a04022d04cf
+> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=80ef3c0aa0f92e93d1581e47ccb77a04022d04cf
+>
+> Author: Koen Kooi <koen@dominion.thruhere.net>
+> Date:   Wed Oct 24 08:39:12 2012 +0200
+>
+> Revert "maliit-framework: Clean up recipe and use gtk-immodules-cache.bbclass"
+>
+> The class hasn't hit oe-core yet
+>
+> This reverts commit eb66e508e33ccbec8299041265eef183913a3a8c.
+>
+> ---
+>
+>  .../recipes-support/maliit/maliit-framework_git.bb |   32 +++++++++++++++----
+>  1 files changed, 25 insertions(+), 7 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
+> index 534a3c8..3f50d1b 100644
+> --- a/meta-oe/recipes-support/maliit/maliit-framework_git.bb
+> +++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
+> @@ -4,7 +4,7 @@ HOMEPAGE = "https://wiki.maliit.org/Main_Page"
+>  LICENSE = "LGPLv2.1"
+>  LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
+>
+> -inherit autotools qt4x11 gtk-immodules-cache
+> +inherit autotools qt4x11
+>
+>
+>  SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
+> @@ -16,8 +16,9 @@ SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
+>  PV = "0.92.3+git${SRCPV}"
+>
+>
+> -PACKAGES =+ "${PN}-gtk"
+> -GTKIMMODULES_PACKAGES = "${PN}-gtk"
+> +PACKAGES =+ "\
+> +    ${PN}-gtk \
+> +    "
+>
+>  # Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
+>  RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
+> @@ -57,12 +58,29 @@ EXTRA_QMAKEVARS_PRE = "\
+>      CONFIG+=local-install \
+>      "
+>
+> -EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
+> +do_install() {
+> +    cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
+>
+> -do_install_append() {
+>      #Fix absolute paths
+> -    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-framework.prf
+> -    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
+> +    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-framework.prf
+> +    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-plugins.prf
+> +}
+> +
+> +
+> +
+> +# Update the inputmethod modules in gtk
+> +pkg_postinst_${PN}-gtk() {
+> +if [ "x$D" != "x" ]; then
+> +    exit 1
+> +fi
+> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
+> +}
+> +
+> +pkg_postrm_${PN}-gtk() {
+> +if [ "x$D" != "x" ]; then
+> +    exit 1
+> +fi
+> +gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
+>  }
+>
+>  S= "${WORKDIR}/git"
+>
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
-Op 29-10-12 10:43, Paul Eggleton schreef:
-> On Monday 29 October 2012 13:21:50 RaNgErS wrote:
->> I am very new to this stuff, and I tried to build an image i got some 
->> errors which are not solved even i tried for a whole week. It is from
->> the kernal side or sth. i am attaching the log file obtained .
-> 
-> The module packages specified don't exist, which means either the
-> functionality they would have included is compiled into the kernel
-> (option value = "y") or they weren't enabled at all (option value="n").
-> So you should check your kernel configuration.
-> 
-> If they are enabled but you do genuinely want these to be compiled into
-> the kernel rather than as modules, the task-picop-demo recipe needs to be
-> changed to use RRECOMMENDS rather than RDEPENDS to bring in the kernel
-> modules only if they exist; that will fix the error.
+Hi,
+can this be re-applied please?
 
-RDEPENDSing on kernel-modules is not allowed anyway, you should always use
-RRECOMENDS for those.
+The .bbclass was taken in OE-Core with commit: [1]
+
+[1] https://github.com/openembedded/oe-core/commit/c67f64e5846bb2a6774e61a4f3719c5f82fc3bd8
 
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQj5XPMkyGM64RGpERAlrHAJ9aLi10oRaK39QTnitb5+uutMZRLQCgh5Uq
-PMsZo20st543harAPvScJzU=
-=G4PF
------END PGP SIGNATURE-----
-
+-- 
+Regards
+Samuel
 
 
