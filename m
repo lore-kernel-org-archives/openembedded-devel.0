@@ -1,38 +1,39 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTXdq-0000bM-Sf
+	(envelope-from <ross.burton@intel.com>) id 1TTXga-0000iX-QF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2012 13:43:31 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa11so856110pad.6
+	Wed, 31 Oct 2012 13:46:20 +0100
+Received: from mail-ia0-f197.google.com ([209.85.210.197])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 31 Oct 2012 05:32:42 -0700
+Received: by mail-ia0-f197.google.com with SMTP id j5so2352703iaf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2012 05:29:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=bKj//5sc4wMM220cdZ72u8cXmDg5gE5hmafLOsvo+qQ=;
-	b=dnGEleDqnFuEcq7ZzgkTMKm9b4YHyCU7DEVM7LANlXWUALeNmYDircDBE+sfFroysp
-	hYWFGOLk82MfA0yWOthytGX8rPHy1aqpnjKAQ+y2ClEH4rCzZWV98SCsMQxEf7KtWr3a
-	r8R0kwAibgRPuw/WcFVOJHOqp0g/9ahkHOGR6/bvgRM5oXT+lzOdnfQXl9o3pxlYBqxI
-	Ugs7B4myFmlzuOjqZaVQPysAD4lJLEnlMU781enRMvPX451H1P4ueu0kCjl+7ea9GN1J
-	N0SKE1go8RU0CR4BXnnzc5CVde7fenKNavHVV2nwihz0CuwsoszVFaEPIP00kYY0rkxM
-	Ru1A==
+	Wed, 31 Oct 2012 05:32:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=a0I+t73+7P8Jl0AyC+I1/cMmBXPoIW0mMTCWfg6EA+U=;
+	b=LAoWlq3sYvGejHQ0kiQpEmh3qgxtHKjcbjS5HMhKciy2ke4sALuaOmD7p5T0TnYXNt
+	BIgbBsH1m8Sm+2kQvuokug4nNFz4P/Wj7xn82WCsT41RHsxG+0k795qpVsozE+G/1Tsa
+	Rsm7K/0ZB3btR0FEFtRU/G0qD1JYWNCk/Mu5EIK9TIIxtW1RtanvB1JVqGFqBR6FkNrk
+	nzWXWlu9cLSBPaQt7bf9oiKdpR5LJaadSFSxnf5syBtQ4SUZ31/H/oJny8VNjo8+qQWn
+	gq22hj9DU+3FZms4NcqJ2w2oildORqH9qUYJGX6lFl/yOsc9jpgzMsEUCuv2+urZIlwP
+	1fTg==
+Received: by 10.182.5.168 with SMTP id t8mr30359118obt.32.1351686762158;
+	Wed, 31 Oct 2012 05:32:42 -0700 (PDT)
+Received: by 10.182.5.168 with SMTP id t8mr30359115obt.32.1351686762098; Wed,
+	31 Oct 2012 05:32:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.68.213.33 with SMTP id np1mr111678194pbc.64.1351686593580;
-	Wed, 31 Oct 2012 05:29:53 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Wed, 31 Oct 2012 05:29:53 -0700 (PDT)
+Received: by 10.182.68.135 with HTTP; Wed, 31 Oct 2012 05:32:21 -0700 (PDT)
 In-Reply-To: <1351685961.13864.101.camel@phil-desktop>
 References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
-	<50910EFB.7010804@gmail.com>
-	<1351685486.13864.97.camel@phil-desktop>
-	<50911500.6010207@gmail.com>
-	<1351685961.13864.101.camel@phil-desktop>
-Date: Wed, 31 Oct 2012 10:29:53 -0200
-X-Google-Sender-Auth: kOl01quNFgIRLQwYBnN3dqLf_VA
-Message-ID: <CAP9ODKq=8EwPNT3wqGAnVuweEj4wwYNGKLhhzHUaP0H-gRSnQg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<50910EFB.7010804@gmail.com> <1351685486.13864.97.camel@phil-desktop>
+	<50911500.6010207@gmail.com> <1351685961.13864.101.camel@phil-desktop>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 31 Oct 2012 12:32:21 +0000
+Message-ID: <CAJTo0LbM+HTA7T=F4EW7Aca=XJUbyZqemE_KBQ53aPFUopuMcg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQkIsGni8qrVja4++GmJRqYzXnSmK73gXzwUrBr12fVtzou7FKeu1aktSt6UHqApkCPxSqQv7Fu+YVDPSNKZ+qQ5jdv5tcZzuj1qaNj0XzdUsjjK+zme8PC8yuHjUcnAXZpXKRZXrVtr7QOjCsNOk3sGXdITkz9zQu0rrFmWI7N7uTsGte7Fa8F3KHT8MpszvXaVyCWu
 Subject: Re: [meta-oe][PATCH v2 1/3] meta-systemd: Move ntp recipes to 'meta-networking' sublayer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,41 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 12:43:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Oct 2012 12:46:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Oct 31, 2012 at 10:19 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2012-10-31 at 13:09 +0100, Martin Erts=E5s wrote:
->> Should we just leave the .service files broken then, until someone
->> registers a pool? Or are we allowed to use someone else's pool?
->
-> I don't think just using someone else's pool without asking them would
-> be a terribly polite way to proceed.
->
-> It seems like your options are:
->
+On 31 October 2012 12:19, Phil Blundell <philb@gnu.org> wrote:
 > a) Make it be a DISTRO setting, punt this problem to the distribution,
 > and let them figure out what to do about it.
->
-> b) Make the service files take the NTP server from DHCP rather than
-> having it be hard-coded.
->
-> c) Approach ntp.org to get a vendor zone for OE and have it be the
-> default.
->
-> d) Use your own NTP server, or one provided by a Yocto-affiliated
-> organisation.
->
-> e) Leave the files alone.
 
-Well, I cannot ask for a pool zone for OE or Yocto; it'd be good but
-it is not yet done and I prefer to have it merged and changed once it
-happens.
+IMHO, that's the best idea.  Distributions can easily register vendor
+zones, which is fairly trivial (eg Guacamayo has a zone registered[1]
+already).
 
---=20
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+If we created a Yocto-wide zone it would be for non-commercial use
+only, which might get tricky to convey to everyone using Yocto.  By
+punting this to the distributions, the people who created the zone are
+in closer communication with the people who might be using the zone
+commercially.
+
+Ross
+
+[1] https://github.com/Guacamayo/meta-guacamayo/blob/master/meta-guacamayo/recipes-connectivity/connman/guacamayo/settings
 
 
