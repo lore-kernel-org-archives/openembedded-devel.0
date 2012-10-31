@@ -1,36 +1,24 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail.pbcl.net ([88.198.119.4] helo=hetzner.pbcl.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTXPw-00008q-AC
+	(envelope-from <philb@gnu.org>) id 1TTXTb-0000KE-D6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2012 13:29:08 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so560449dak.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2012 05:15:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JOLRBiuigUefBjAKBhDn12AA7VVJVeUHQhde+VuR534=;
-	b=f9KS5A2bk7KdwBsq1Q9cNd8TTEaNs1Dx+dpuEOq5zyTqtEowJDO5y77e+k4HFD/oXW
-	TesUXAhH5W7/DAqsNFpKnf6HQtJ5vc1c8XK5PodQ0F1Y0LDpF+gVBwGqmlJvEbl0Nh3L
-	J2P+93GXySoBgBosKQkcXwzeN8hLU42V5J98yY7qBamZThmHvwXDeiX5L/AofmlkQfi5
-	2hi2765SnM5Mqqf4F9HRXDomq/EJdvnaCO74kbq9ZRVAls3ASoiH0O1sP5Ds2EqnLnUL
-	6CE0shAZEzw80RtrpAcEf4hTILLMLvMTpBrDhIcOBHcKCQ9sCgvQeWPyq5f4hWuw0AGH
-	lFEg==
-MIME-Version: 1.0
-Received: by 10.68.189.8 with SMTP id ge8mr22856704pbc.24.1351685730743; Wed,
-	31 Oct 2012 05:15:30 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Wed, 31 Oct 2012 05:15:30 -0700 (PDT)
-In-Reply-To: <1351685486.13864.97.camel@phil-desktop>
-References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
-	<50910EFB.7010804@gmail.com>
-	<1351685486.13864.97.camel@phil-desktop>
-Date: Wed, 31 Oct 2012 10:15:30 -0200
-X-Google-Sender-Auth: PVPasdq6__AZgQ9NhwSTTeJ_2Vg
-Message-ID: <CAP9ODKqnTYfBa84642qQGzVigVzrsPQuhqvizz1smKmS=Trdww@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 31 Oct 2012 13:32:55 +0100
+Received: from elite.brightsigndigital.co.uk ([81.142.160.137]
+	helo=[172.30.1.145])
+	by hetzner.pbcl.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.72) (envelope-from <philb@gnu.org>) id 1TTXGT-0002oK-01
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Oct 2012 13:19:21 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 31 Oct 2012 12:19:20 +0000
+In-Reply-To: <50911500.6010207@gmail.com>
+References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
+	<50910EFB.7010804@gmail.com> <1351685486.13864.97.camel@phil-desktop>
+	<50911500.6010207@gmail.com>
+X-Mailer: Evolution 3.0.2- 
+Message-ID: <1351685961.13864.101.camel@phil-desktop>
+Mime-Version: 1.0
 Subject: Re: [meta-oe][PATCH v2 1/3] meta-systemd: Move ntp recipes to 'meta-networking' sublayer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,29 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 12:29:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 31 Oct 2012 12:32:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 31, 2012 at 10:11 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2012-10-31 at 12:43 +0100, Martin Erts=E5s wrote:
->
->> for now I guess we can just use pool.ntp.org
->
->
-> I'm not sure that this is a very good idea.  The pool.ntp.org
-> documentation is fairly explicit that they don't want this:
->
->
->         You must absolutely not use the default pool.ntp.org zone names
->         as the default configuration in your application or appliance.
+On Wed, 2012-10-31 at 13:09 +0100, Martin Erts=C3=A5s wrote:
+> Should we just leave the .service files broken then, until someone
+> registers a pool? Or are we allowed to use someone else's pool?
 
-So how we'll fix it? We need to fix it somehow. So give us an alternative t=
-o us.
+I don't think just using someone else's pool without asking them would
+be a terribly polite way to proceed.
 
---=20
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+It seems like your options are:
+
+a) Make it be a DISTRO setting, punt this problem to the distribution,
+and let them figure out what to do about it.
+
+b) Make the service files take the NTP server from DHCP rather than
+having it be hard-coded.
+
+c) Approach ntp.org to get a vendor zone for OE and have it be the
+default.
+
+d) Use your own NTP server, or one provided by a Yocto-affiliated
+organisation.
+
+e) Leave the files alone.
+
+p.
+
+
 
 
