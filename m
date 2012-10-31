@@ -1,36 +1,27 @@
-Received: from mail-ye0-f175.google.com ([209.85.213.175])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTWNE-0002hr-NT
+	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TTWsX-0007Cz-5m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2012 12:22:16 +0100
-Received: by mail-ye0-f175.google.com with SMTP id m2so236193yen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2012 04:08:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=nh4Q/6Bw8fqagecjwPyzX9/CjBS7hTXjkBOktxpqZR8=;
-	b=fdxw8lUpSXP/IaajpOdBQWUUoYnTbh2WNt2o5kowudVRv8Kh+yUWxIdQMOrpLv4kUM
-	yDF6PMLFMEhh7hN3dcSl8nx81Tzaf9U46ebf2wvFUGf9wDbOKxtywybDeFL06V1COQWL
-	43ic8qGPod3RLvJKRDQz8GaJbpGMNcXk/DNFyoRcvinEHAOaoCE+9njRc4SlsOy+8pck
-	SZstj5RL2ycqYrAp5pz9UTOdgpIsGYXYZM+rzd+lsqLXInl8UF3L5qPnxhCVS5ivWYOg
-	R8+a21LhHIbFDs0wVUUhXuRGPct1SF/ewK618DqOEdc0f8CVVQ8tgwajisDbVI7fkCOa
-	laqQ==
-Received: by 10.236.134.49 with SMTP id r37mr36525234yhi.11.1351681719873;
-	Wed, 31 Oct 2012 04:08:39 -0700 (PDT)
-Received: from localhost.localdomain ([177.100.163.15])
-	by mx.google.com with ESMTPS id u49sm3307372yhd.18.2012.10.31.04.08.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 31 Oct 2012 04:08:39 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Oct 2012 09:08:26 -0200
-Message-Id: <1351681706-12778-3-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
-References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v2 3/3] freerdp: Bump SRCREV to 1.0.2 snapshot of 2012-10-30
+	Wed, 31 Oct 2012 12:54:37 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 31 Oct 2012 04:40:59 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,687,1344236400"; d="scan'208";a="240758642"
+Received: from adinu-vostro-460 (HELO [10.237.105.39]) ([10.237.105.39])
+	by fmsmga001.fm.intel.com with ESMTP; 31 Oct 2012 04:40:46 -0700
+Message-ID: <50910E16.5060609@intel.com>
+Date: Wed, 31 Oct 2012 13:40:06 +0200
+From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120714 Thunderbird/14.0
+MIME-Version: 1.0
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1351076498-28950-1-git-send-email-andrei.adrianx.dinu@intel.com>
+	<20121024111051.GD3269@jama.jama.net>
+	<20121031083408.GA3272@jama.jama.net>
+In-Reply-To: <20121031083408.GA3272@jama.jama.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] gypsy: added to meta-oe/recipes-navigation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +35,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 11:22:16 -0000
+X-List-Received-Date: Wed, 31 Oct 2012 11:54:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/freerdp/freerdp_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+That patch was needed because the git version was old ( 0.8+... ) .
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-index 01ab390..35228ad 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_git.bb
-@@ -9,7 +9,7 @@ PV = "gitr${SRCPV}"
- PKGV = "${GITPKGVTAG}"
- PR = "${INC_PR}.0"
- 
--SRCREV = "19d4a4276869ec40ee1eef066ac460615734c043"
-+SRCREV = "e0f2b3ccc986a165d9c289a569b60eab66153792"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git"
- 
- S = "${WORKDIR}/git"
--- 
-1.7.2.5
+As i put in the latest version in the tarball, that patch is no longer 
+needed.
+
+On 10/31/2012 10:34 AM, Martin Jansa wrote:
+> On Wed, Oct 24, 2012 at 01:10:51PM +0200, Martin Jansa wrote:
+>> On Wed, Oct 24, 2012 at 02:01:38PM +0300, Andrei Dinu wrote:
+>>> Added gypsy to meta-oe/recipes-navigation
+>> Looks better, thanks.
+>>
+>> 0001-gypsy-m4-directory-missing-from-structure.patch which you added in
+>> previous version is not needed?
+> ping
+>
+>>> Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+>>> ---
+>>>   .../recipes-navigation/gypsy/files/fixups.patch    |   21 +++++++++++++++++
+>>>   meta-oe/recipes-navigation/gypsy/gypsy.inc         |   15 ++++++++++++
+>>>   meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      |   24 ++++++++++++++++++++
+>>>   meta-oe/recipes-navigation/gypsy/gypsy_git.bb      |   18 +++++++++++++++
+>>>   4 files changed, 78 insertions(+)
+>>>   create mode 100644 meta-oe/recipes-navigation/gypsy/files/fixups.patch
+>>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy.inc
+>>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+>>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_git.bb
+>>>
+>>> diff --git a/meta-oe/recipes-navigation/gypsy/files/fixups.patch b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
+>>> new file mode 100644
+>>> index 0000000..de4d92e
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
+>>> @@ -0,0 +1,21 @@
+>>> +Upstream-Status: Inappropriate [configuration]
+>>> +
+>>> +---
+>>> + docs/reference/Makefile.am |    2 ++
+>>> + 1 file changed, 2 insertions(+)
+>>> +
+>>> +--- gypsy.orig/docs/reference/Makefile.am
+>>> ++++ gypsy/docs/reference/Makefile.am
+>>> +@@ -81,10 +81,12 @@ expand_content_files=
+>>> + # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
+>>> +
+>>> + INCLUDES=-I$(top_srcdir) $(GYPSY_CFLAGS)
+>>> + GTKDOC_LIBS=$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
+>>> +
+>>> ++EXTRA_DIST =
+>>> ++CLEANFILES =
+>>> + # This includes the standard gtk-doc make rules, copied by gtkdocize.
+>>> + include $(top_srcdir)/gtk-doc.make
+>>> +
+>>> + # Other files to distribute
+>>> + # e.g. EXTRA_DIST += version.xml.in
+>>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+>>> new file mode 100644
+>>> index 0000000..0c1735e
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+>>> @@ -0,0 +1,15 @@
+>>> +SUMMARY = "GPS Multiplexing Daemon"
+>>> +DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
+>>> +multiple clients to access GPS data from multiple GPS sources \
+>>> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
+>>> +client applications, passing the data as simple values for the clients \
+>>> +to use."
+>>> +LICENSE = "GPLv2.0 & LGPLv2.1"
+>>> +SECTION = "x11"
+>>> +DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
+>>> +
+>>> +inherit autotools pkgconfig gtk-doc
+>>> +
+>>> +EXTRA_OECONF += "--with-distro=debian"
+>>> +
+>>> +FILES_${PN} += "/usr/share/dbus-1/services/"
+>>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+>>> new file mode 100644
+>>> index 0000000..51207c9
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+>>> @@ -0,0 +1,24 @@
+>>> +SUMMARY = "GPS Multiplexing Daemon"
+>>> +DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
+>>> +multiple clients to access GPS data from multiple GPS sources \
+>>> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
+>>> +client applications, passing the data as simple values for the clients \
+>>> +to use."
+>>> +LICENSE = "GPLv2+ & LGPLv2+"
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+>>> +                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
+>>> +                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
+>>> +                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
+>>> +
+>>> +SECTION = "x11"
+>>> +DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
+>>> +
+>>> +SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
+>>> +PR = "r1"
+>>> +
+>>> +inherit autotools pkgconfig
+>>> +
+>>> +FILES_${PN} += "/usr/share/dbus-1/system-services/"
+>>> +
+>>> +SRC_URI[md5sum] = "e2d186df9c2cc3b70a027043e22acf1a"
+>>> +SRC_URI[sha256sum] = "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236ddfb271904f154d6"
+>>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_git.bb b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
+>>> new file mode 100644
+>>> index 0000000..e5c564f
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
+>>> @@ -0,0 +1,18 @@
+>>> +require gypsy.inc
+>>> +
+>>> +DEFAULT_PREFERENCE = "-1"
+>>> +
+>>> +SRCREV = "be8c9c382d2d1d37b51d29b0843045121ec90213"
+>>> +PV = "0.9+git${SRCPV}"
+>>> +PR = "r1"
+>>> +
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +LICENSE = "GPLv2+ & LGPLv2+"
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+>>> +                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
+>>> +                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
+>>> +                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
+>>> +
+>>> +SRC_URI = "git://anongit.freedesktop.org/gypsy;protocol=git \
+>>> +           file://fixups.patch"
+>>> -- 
+>>> 1.7.9.5
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> -- 
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+>
 
 
 
