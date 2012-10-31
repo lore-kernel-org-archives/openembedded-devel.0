@@ -1,27 +1,36 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-la0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei.adrianx.dinu@intel.com>) id 1TTWsX-0007Cz-5m
+	(envelope-from <martiert@gmail.com>) id 1TTWzc-0007jF-4M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2012 12:54:37 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 31 Oct 2012 04:40:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,687,1344236400"; d="scan'208";a="240758642"
-Received: from adinu-vostro-460 (HELO [10.237.105.39]) ([10.237.105.39])
-	by fmsmga001.fm.intel.com with ESMTP; 31 Oct 2012 04:40:46 -0700
-Message-ID: <50910E16.5060609@intel.com>
-Date: Wed, 31 Oct 2012 13:40:06 +0200
-From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
+	Wed, 31 Oct 2012 13:01:56 +0100
+Received: by mail-la0-f47.google.com with SMTP id h5so907187lam.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Oct 2012 04:48:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=KeADYeMApBNzIMt9Aap9pL4aUT9Ou1pCvJQmjMDIfcU=;
+	b=lQ6+Jgz4R21H9hDvNOZpxkmM6J64Dx9QIVyPyTbNDtpCv2wVyk4jR2ssIn3s/gXP9C
+	TVQnLoxwN5IG8yoYDmQoTrr/GslXOg7NzLv5CiRN/OWF84cDkQ6+8/DX/BwigJBJrl1D
+	5GJClMogXWUl4mlpVy+mmkRzB/wgFpH9Nfax0QN+QcwBmGBfjYXzxmoJtn6/VyrhlX41
+	uwdBmRn0dryCV/nneEUADFzebVZ0UPEsATR0n3UHOCMSnq8MHVGrLD9Zgup0w2KdlLXE
+	3WvtbEecrkTpjFlNtBv1K3NFVRhmxyYt/fQeau3FBV4rzoNNYhmGzt9w4L09vlTTYyJE
+	WSnw==
+Received: by 10.152.105.173 with SMTP id gn13mr33432526lab.41.1351684099402;
+	Wed, 31 Oct 2012 04:48:19 -0700 (PDT)
+Received: from [10.54.74.11] (64-103-25-233.cisco.com. [64.103.25.233])
+	by mx.google.com with ESMTPS id b4sm1342794lbi.0.2012.10.31.04.48.17
+	(version=SSLv3 cipher=OTHER); Wed, 31 Oct 2012 04:48:18 -0700 (PDT)
+Message-ID: <50910EFB.7010804@gmail.com>
+Date: Wed, 31 Oct 2012 12:43:55 +0100
+From: =?ISO-8859-1?Q?Martin_Erts=E5s?= <martiert@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120714 Thunderbird/14.0
+	rv:10.0.9) Gecko/20121025 Thunderbird/10.0.9
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1351076498-28950-1-git-send-email-andrei.adrianx.dinu@intel.com>
-	<20121024111051.GD3269@jama.jama.net>
-	<20121031083408.GA3272@jama.jama.net>
-In-Reply-To: <20121031083408.GA3272@jama.jama.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] gypsy: added to meta-oe/recipes-navigation
+To: openembedded-devel@lists.openembedded.org
+References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH v2 1/3] meta-systemd: Move ntp recipes to 'meta-networking' sublayer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,151 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 11:54:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 31 Oct 2012 12:01:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-That patch was needed because the git version was old ( 0.8+... ) .
+For this you should also have a look at the ntpdate.service and
+ntp.service files. There was a discussion about this earlier:
+http://patches.openembedded.org/patch/38575/
 
-As i put in the latest version in the tarball, that patch is no longer 
-needed.
+Also, what is not on that discussion, is that pool.ntp.org is not really
+the way to do it. What we would like is to register something like
+pool.yocto.ntp.org, but for
+now I guess we can just use pool.ntp.org and then change it when someone
+have registered it. Kind of feel someone officially related to the
+project should register it.
 
-On 10/31/2012 10:34 AM, Martin Jansa wrote:
-> On Wed, Oct 24, 2012 at 01:10:51PM +0200, Martin Jansa wrote:
->> On Wed, Oct 24, 2012 at 02:01:38PM +0300, Andrei Dinu wrote:
->>> Added gypsy to meta-oe/recipes-navigation
->> Looks better, thanks.
->>
->> 0001-gypsy-m4-directory-missing-from-structure.patch which you added in
->> previous version is not needed?
-> ping
+- Martin
+
+
+On 10/31/12 12:08, Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../recipes-support/ntp/ntp/ntpd.service           |    0
+>  .../recipes-support/ntp/ntp/ntpdate.service        |    0
+>  .../recipes-support/ntp/ntp_4.2.6p3.bbappend       |    0
+>  3 files changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpd.service (100%)
+>  rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp/ntpdate.service (100%)
+>  rename meta-systemd/{meta-oe => meta-networking}/recipes-support/ntp/ntp_4.2.6p3.bbappend (100%)
 >
->>> Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
->>> ---
->>>   .../recipes-navigation/gypsy/files/fixups.patch    |   21 +++++++++++++++++
->>>   meta-oe/recipes-navigation/gypsy/gypsy.inc         |   15 ++++++++++++
->>>   meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      |   24 ++++++++++++++++++++
->>>   meta-oe/recipes-navigation/gypsy/gypsy_git.bb      |   18 +++++++++++++++
->>>   4 files changed, 78 insertions(+)
->>>   create mode 100644 meta-oe/recipes-navigation/gypsy/files/fixups.patch
->>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy.inc
->>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
->>>   create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_git.bb
->>>
->>> diff --git a/meta-oe/recipes-navigation/gypsy/files/fixups.patch b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
->>> new file mode 100644
->>> index 0000000..de4d92e
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
->>> @@ -0,0 +1,21 @@
->>> +Upstream-Status: Inappropriate [configuration]
->>> +
->>> +---
->>> + docs/reference/Makefile.am |    2 ++
->>> + 1 file changed, 2 insertions(+)
->>> +
->>> +--- gypsy.orig/docs/reference/Makefile.am
->>> ++++ gypsy/docs/reference/Makefile.am
->>> +@@ -81,10 +81,12 @@ expand_content_files=
->>> + # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
->>> +
->>> + INCLUDES=-I$(top_srcdir) $(GYPSY_CFLAGS)
->>> + GTKDOC_LIBS=$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
->>> +
->>> ++EXTRA_DIST =
->>> ++CLEANFILES =
->>> + # This includes the standard gtk-doc make rules, copied by gtkdocize.
->>> + include $(top_srcdir)/gtk-doc.make
->>> +
->>> + # Other files to distribute
->>> + # e.g. EXTRA_DIST += version.xml.in
->>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
->>> new file mode 100644
->>> index 0000000..0c1735e
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
->>> @@ -0,0 +1,15 @@
->>> +SUMMARY = "GPS Multiplexing Daemon"
->>> +DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
->>> +multiple clients to access GPS data from multiple GPS sources \
->>> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
->>> +client applications, passing the data as simple values for the clients \
->>> +to use."
->>> +LICENSE = "GPLv2.0 & LGPLv2.1"
->>> +SECTION = "x11"
->>> +DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
->>> +
->>> +inherit autotools pkgconfig gtk-doc
->>> +
->>> +EXTRA_OECONF += "--with-distro=debian"
->>> +
->>> +FILES_${PN} += "/usr/share/dbus-1/services/"
->>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
->>> new file mode 100644
->>> index 0000000..51207c9
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
->>> @@ -0,0 +1,24 @@
->>> +SUMMARY = "GPS Multiplexing Daemon"
->>> +DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
->>> +multiple clients to access GPS data from multiple GPS sources \
->>> +concurrently.  Gypsy also hides the details of parsing NMEA from the \
->>> +client applications, passing the data as simple values for the clients \
->>> +to use."
->>> +LICENSE = "GPLv2+ & LGPLv2+"
->>> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
->>> +                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
->>> +                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
->>> +                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
->>> +
->>> +SECTION = "x11"
->>> +DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
->>> +
->>> +SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
->>> +PR = "r1"
->>> +
->>> +inherit autotools pkgconfig
->>> +
->>> +FILES_${PN} += "/usr/share/dbus-1/system-services/"
->>> +
->>> +SRC_URI[md5sum] = "e2d186df9c2cc3b70a027043e22acf1a"
->>> +SRC_URI[sha256sum] = "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236ddfb271904f154d6"
->>> diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_git.bb b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
->>> new file mode 100644
->>> index 0000000..e5c564f
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
->>> @@ -0,0 +1,18 @@
->>> +require gypsy.inc
->>> +
->>> +DEFAULT_PREFERENCE = "-1"
->>> +
->>> +SRCREV = "be8c9c382d2d1d37b51d29b0843045121ec90213"
->>> +PV = "0.9+git${SRCPV}"
->>> +PR = "r1"
->>> +
->>> +S = "${WORKDIR}/git"
->>> +
->>> +LICENSE = "GPLv2+ & LGPLv2+"
->>> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
->>> +                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
->>> +                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
->>> +                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
->>> +
->>> +SRC_URI = "git://anongit.freedesktop.org/gypsy;protocol=git \
->>> +           file://fixups.patch"
->>> -- 
->>> 1.7.9.5
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->> -- 
->> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
->
+> diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
+> similarity index 100%
+> rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpd.service
+> rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpd.service
+> diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
+> similarity index 100%
+> rename from meta-systemd/meta-oe/recipes-support/ntp/ntp/ntpdate.service
+> rename to meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
+> diff --git a/meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
+> similarity index 100%
+> rename from meta-systemd/meta-oe/recipes-support/ntp/ntp_4.2.6p3.bbappend
+> rename to meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p3.bbappend
 
 
 
