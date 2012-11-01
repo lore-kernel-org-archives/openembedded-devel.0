@@ -1,38 +1,34 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TTyqS-0003Tw-Ls
+	(envelope-from <andrea.adami@gmail.com>) id 1TU03a-0005D3-4n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Nov 2012 18:46:21 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qA1HWhXZ004794
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 01 Nov 2012 20:03:58 +0100
+Received: by mail-ea0-f175.google.com with SMTP id c1so1084263eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Nov 2012 10:32:43 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Thu, 1 Nov 2012 10:32:41 -0700
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 405D67FCE;	Thu,  1 Nov 2012 13:32:24 -0400 (EDT)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
-	7DFDE6A86DB; Thu,  1 Nov 2012 13:32:40 -0400 (EDT)
-Date: Thu, 1 Nov 2012 13:32:40 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121101173240.GV4673@windriver.com>
-References: <1351009220-30119-1-git-send-email-morgan.little@windriver.com>
-	<20121101143114.GF4673@windriver.com>
-	<FCBA1E696337B442ADB5A7C30428F0689A9978@ALA-MBB.corp.ad.wrs.com>
-	<1363930.E51Pa0kBDd@helios>
-MIME-Version: 1.0
-In-Reply-To: <1363930.E51Pa0kBDd@helios>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "Little, Morgan" <Morgan.Little@windriver.com>
-Subject: Re: [meta-oe][meta-networking][PATCH V2 3/3] ntp: Clean up recipes
+	Thu, 01 Nov 2012 11:50:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=2epLFdsV55UEx3WghcFKpXELcPexccPhAem0LhLvdCU=;
+	b=E3kqBpk85/UL+rNMZxDwVW06osy53nt6QNu6xbEClvNl0wA5Xp1AiRylxkz5g+oLm+
+	3JHCRmX+JUEUitO82kRbZ07OszdGyn7GQ9Y9Bw96eYDrN7j6FUgeI5plUOqwZGS+NK1R
+	NLWkzujvCXAsXRc+6+o3bQJUZQ7kYDH16cvIL33nLq0zCRVCQyIICH38NqnEF3s4xfkz
+	JaxLzcpWaItslvhVCA/sp+SQCEkxDNDprwhTOhU4zJGGVRlS6224Lj64MrJHOIguX1SB
+	BQG3QqNfu54vSSscWNerK44KtxUl9GuYg7O221geQx+WSsA32G19uBd9ud5WpSG7u8tC
+	AW4Q==
+Received: by 10.14.173.67 with SMTP id u43mr100924252eel.27.1351795819809;
+	Thu, 01 Nov 2012 11:50:19 -0700 (PDT)
+Received: from mizar.localdomain
+	(host69-225-dynamic.58-82-r.retail.telecomitalia.it. [82.58.225.69])
+	by mx.google.com with ESMTPS id o47sm16661386eem.11.2012.11.01.11.50.17
+	(version=SSLv3 cipher=OTHER); Thu, 01 Nov 2012 11:50:18 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Nov 2012 19:50:11 +0100
+Message-Id: <1351795811-9291-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+In-Reply-To: <1351117890-13744-1-git-send-email-andrea.adami@gmail.com>
+References: <1351117890-13744-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH v2] klibc: refactor runtime deps for shared utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,62 +42,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Nov 2012 17:46:21 -0000
-X-Groupsio-MsgNum: 41407
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EjUKZjov3T4fFoFJ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Nov 2012 19:03:58 -0000
 
---EjUKZjov3T4fFoFJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ rebased after d.expand / bb.data.expand change
 
-[Re: [oe] [meta-oe][meta-networking][PATCH V2 3/3] ntp: Clean up recipes] O=
-n 12.11.01 (Thu 17:19) Paul Eggleton wrote:
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../recipes-devtools/klibc/klibc-utils.inc         |   43 ++------------------
+ meta-initramfs/recipes-devtools/klibc/klibc.inc    |    2 +-
+ 2 files changed, 5 insertions(+), 40 deletions(-)
 
-> On Thursday 01 November 2012 17:09:59 Little, Morgan wrote:
-> > My rational behind splitting like that is if it is just ntpdate and you=
- try
-> > to add ntp-ssl and ntpdate it will use ntp to provide ntpdate. It could=
- be
-> > change add RPROVIDES so ntp will provide ntpdate and ntp-ssl provides a
-> > uniquely named version.
->=20
-> The ssl version could be ntpdate-ssl if it needs to be unique. I think=20
-> originally though these recipes weren't intended to be built side-by-side=
- -=20
-> rather they were mutually exclusive and the distro would make a choice as=
- to=20
-> which one was built.
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
+index 16cba89..cdcaafa 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
+@@ -1,8 +1,7 @@
+ KLIBC_UTILS_VARIANT ?= "shared"
+ KLIBC_UTILS_PKGNAME ?= "klibc-utils"
+ 
+-# modprobe and losetup go to ${base_sbindir}
+-# even though debian packages all in /usr/lib/klibc/bin
++# losetup goes in ${base_sbindir}
+ 
+ do_install_append() {
+ 
+@@ -56,49 +55,15 @@ do_install_append() {
+         ln -s gzip ${D}${base_bindir}/zcat
+ }
+ 
+-RDEPENDS_klibc-utils-cat = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-chroot = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-cpio = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-dd = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-dmesg = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-false = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-fstype = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-gzip = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-halt = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-ipconfig = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-kill = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-kinit.shared = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-ln = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-losetup = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-ls = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-minips = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-mkdir = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-mkfifo = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-mknod = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-mount = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-mv = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-nfsmount = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-nuke = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-pivot-root = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-poweroff = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-readlink = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-reboot = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-resume = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-run-init = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-sh.shared = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-sleep = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-sync = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-true = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-umount = "${THIS_LIBKLIBC}"
+-RDEPENDS_klibc-utils-uname = "${THIS_LIBKLIBC}"
++EXTRA_KLIBC_DEPS = '${@base_conditional("KLIBC_UTILS_VARIANT", "shared", "${THIS_LIBKLIBC}", "", d)}'
+ 
+ PACKAGES_DYNAMIC += "^${KLIBC_UTILS_PKGNAME}-.*"
+ 
+ python populate_packages_prepend () {
+ 
+     base_bin_dir = d.expand('${base_bindir}')
+-    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_links=True, allow_dirs=True)
++    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='${EXTRA_KLIBC_DEPS}', allow_links=True, allow_dirs=True)
+ 
+     base_sbin_dir = d.expand('${base_sbindir}')
+-    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_dirs=True)
++    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='${EXTRA_KLIBC_DEPS}', allow_dirs=True)
+ }
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index b1f531a..07b8e1a 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
+ # debugsources.list: No such file or directory:
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ KLIBC_ARCH = '${TARGET_ARCH}'
+ KLIBC_ARCH_armeb = 'arm'
+-- 
+1.7.8.6
 
-Hmm, good point.
 
-Does it make sense to have both on a system?  That is, if you build
-ntp-ssl does that imply it will only use SSL for communications?  If
-that's not the case (which I suspect it isn't, but I haven't checked
-myself) then there's not really a strong reason to install both on the
-same system.  Which then seems fine to provide ntpdate-ssl as the
-alternative.
 
-Now that I think about it a bit more, maybe a RPROVIDES is appropriate
-since ntp and ntpdate are overlapping in a lot of places.
-
---=20
-Joe MacDonald, Sr. Member of Technical Staff, Linux Products Group, Wind Ri=
-ver
-direct 613.270.5750     mobile 613.291.7421     fax 613.592.2283
-
---EjUKZjov3T4fFoFJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlCSsjgACgkQPN8S4W6ZZneM6ACcDA3nbfr5h5vTzPbTh6vo9TqY
-7XgAnjp4UmD9XnivuRZO9fQvjSGEaMyn
-=YcrO
------END PGP SIGNATURE-----
-
---EjUKZjov3T4fFoFJ--
