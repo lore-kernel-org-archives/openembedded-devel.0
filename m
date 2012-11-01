@@ -1,33 +1,26 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TTe8m-0005md-Cb
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TTjUO-0003WH-IZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Oct 2012 20:39:52 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa11so1093952pad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Oct 2012 12:26:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=pWbXpqlLmQXLiOq7CiZdAAop3mW/WEuTWE0mMhcSrBs=;
-	b=ZzARA/WpAESnejd6yFYcKAlEWTQw6CuPyxyYYFiU4x0Qcly+e3EWlHG86X1c5QYVlU
-	tyMdi/U80rs7DjYJWpAoj1kOeht0CXsRbYiTWKFmBZG4iv7pMSuKslCFXzHAuAU6hC0f
-	LYaB1CD6iwWDgxgr59Akb8cp3AwuH2HMOeFEwNidw2agZ3gAjtoeXQ5Adyl/5kX4wl4d
-	ZmS6stJhJd9o0mHkb6W1VSQCY4MKo+IbhfIPnIabs+UNf9GEi6OPy3YXsNmJlWgHM6lx
-	ukzdpp6qT80+pzWtN7uvT60JCr9AM7djOv1tpjmV64uBwhT/7zf9txkEVtfRaUtYP+dZ
-	QJvg==
+	Thu, 01 Nov 2012 02:22:32 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 31 Oct 2012 18:08:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,690,1344236400"; d="scan'208";a="163137591"
+Received: from unknown (HELO helios.localnet) ([10.252.122.137])
+	by AZSMGA002.ch.intel.com with ESMTP; 31 Oct 2012 18:08:52 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Morgan Little <morgan.little@windriver.com>
+Date: Thu, 01 Nov 2012 01:08:51 +0000
+Message-ID: <3989989.S5U52SNN0R@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <1351009220-30119-4-git-send-email-morgan.little@windriver.com>
+References: <1351009220-30119-1-git-send-email-morgan.little@windriver.com>
+	<1351009220-30119-4-git-send-email-morgan.little@windriver.com>
 MIME-Version: 1.0
-Received: by 10.68.213.33 with SMTP id np1mr114996029pbc.64.1351711574718;
-	Wed, 31 Oct 2012 12:26:14 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.40.201 with HTTP; Wed, 31 Oct 2012 12:26:14 -0700 (PDT)
-Date: Wed, 31 Oct 2012 17:26:14 -0200
-X-Google-Sender-Auth: ObFGcXzVAhiodVg6wWHuGwOFDuw
-Message-ID: <CAP9ODKqaFOHjP0RR5xTPi4WP4dX+22uUQW1sdbGS3twD0Bpz=w@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Use of meta-systemd and have images using only udev
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][meta-networking][PATCH V2 3/3] ntp: Clean up recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,19 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 19:39:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Nov 2012 01:22:32 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+On Tuesday 23 October 2012 12:20:20 Morgan Little wrote: 
+> -PACKAGES += "ntpdate ${PN}-bin ${PN}-tickadj ${PN}-utils"
+...
+> +PACKAGES += "${PN}-date ${PN}-bin ${PN}-tickadj ${PN}-utils"
 
-I'd like to share the distro among some images; some will use systemd and
-others only udev.
+I'm not particularly happy with this change. Apart from the fact that it 
+wasn't mentioned in the commit message, it breaks any recipe that depends upon 
+the previous ntpdate package. Could we go back to the old ntpdate name for the 
+package or at the very least provide an RPROVIDES for the old name? I'm happy 
+to submit a patch to do this once there is agreement either way.
 
-I noticed systemd package builds a udev package but it seems not supported
-to run standalone. Did someone try it?
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
