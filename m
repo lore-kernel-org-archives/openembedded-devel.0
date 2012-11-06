@@ -1,32 +1,31 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Xin.Ouyang@windriver.com>) id 1TVedy-0006nB-6O
+	(envelope-from <Xin.Ouyang@windriver.com>) id 1TVegQ-0006u9-BO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Nov 2012 09:36:22 +0100
+	Tue, 06 Nov 2012 09:38:55 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qA68MaOL010858
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qA68P9PP012214
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Nov 2012 00:22:36 -0800 (PST)
+	Tue, 6 Nov 2012 00:25:09 -0800 (PST)
 Received: from [128.224.162.239] (128.224.162.239) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
-	Tue, 6 Nov 2012 00:22:36 -0800
-Message-ID: <5098C8CA.2000103@windriver.com>
-Date: Tue, 6 Nov 2012 16:22:34 +0800
+	Tue, 6 Nov 2012 00:25:07 -0800
+Message-ID: <5098C962.8000504@windriver.com>
+Date: Tue, 6 Nov 2012 16:25:06 +0800
 From: Pascal Ouyang <xin.ouyang@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: <openembedded-devel@lists.openembedded.org>
 References: <1351734166-8711-1-git-send-email-Xin.Ouyang@windriver.com>
-	<1351734166-8711-2-git-send-email-Xin.Ouyang@windriver.com>
-	<96557201.USfTQflqlK@helios>
-In-Reply-To: <96557201.USfTQflqlK@helios>
-X-TagToolbar-Keys: D20121106162234887
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail.windriver.com id
-	qA68MaOL010858
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking 2/2] netperf: uprev to 2.6.0
+	<k708l4$3tt$2@ger.gmane.org>
+In-Reply-To: <k708l4$3tt$2@ger.gmane.org>
+X-TagToolbar-Keys: D20121106162506353
+X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
+	qA68P9PP012214
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [PATCH][meta-networking 1/2] netperf: import recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,66 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2012 08:36:22 -0000
+X-List-Received-Date: Tue, 06 Nov 2012 08:38:55 -0000
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-=E4=BA=8E 2012=E5=B9=B411=E6=9C=8801=E6=97=A5 18:04, Paul Eggleton =E5=86=
-=99=E9=81=93:
-> On Thursday 01 November 2012 09:42:46 Xin Ouyang wrote:
->> Also fix license, summary and patches.
+=E4=BA=8E 2012=E5=B9=B411=E6=9C=8802=E6=97=A5 18:52, Koen Kooi =E5=86=99=E9=
+=81=93:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 01-11-12 02:42, Xin Ouyang schreef:
+>> Git-Url: -
+>> http://git.openembedded.org/openembedded/tree/recipes/netperf/
 >>
->> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
+>> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com> ---
+>> .../recipes-support/netperf/files/cpu_set.patch    |   24 +++++++++
+>> meta-networking/recipes-support/netperf/files/init |   51
+>> ++++++++++++++++++++
 >
-> These two patches should really be squashed into one - this is the conv=
-ention
-> we've established for importing recipes from OE-Classic (as long as "Im=
-port
-> from OE-Classic" or similar is mentioned somewhere in the commit messag=
-e).
->
->> --- a/meta-networking/recipes-support/netperf/netperf_2.4.4.bb
->> +++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
->> @@ -1,14 +1,19 @@
->> -DESCRIPTION=3D"Network performance benchmark including tests for TCP,=
- UDP,
->> sockets, ATM and more."
->> +SUMMARY =3D "A networking benchmarking tool"
->> +DESCRIPTION =3D "Network performance benchmark including tests for TC=
-P, UDP,
->> sockets, ATM and more."
->> SECTION =3D "console/network"
->>   HOMEPAGE =3D "http://www.netperf.org/"
->> -LICENSE =3D "netperf"
->> -PR =3D "r3"
->> +LICENSE =3D "HP"
->
-> There's no standard license known as "HP" so "netperf" for LICENSE is c=
-orrect
-> - it means it's a license specific to the netperf software package.
->
->> +LICENSE_FLAGS =3D "commercial"
->
-> Good point - I think many would miss the non-commercial use only clause=
- in the
-> license otherwise.
->
->> +SRC_URI[md5sum] =3D "9654ffdfd4c4f2c93ce3733cd9ed9236"
->> +SRC_URI[sha256sum] =3D
->> "cd8dac710d4273d29f70e8dbd09353a6362ac58a11926e0822233c0cb230323a"
->
-> I think we prefer to put these next to SRC_URI these days (or at least =
-I do).
+> The initscript is missing LSB headers and hardcodes $sbindir to /usr/sb=
+in.
 
-OK, a V2 will be sent with these fixes.
+The hardcodes would be fixed in V2.
+
+But I think we do not need lsb headers, since no lsb init function used=20
+in the initscript.
 
 Thanks.
 
 - Pascal
 
 >
-> Cheers,
-> Paul
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFQk6XuMkyGM64RGpERApMQAJ0f0YMb53j54pjbXUpl7b6RCjWm7gCgrbd/
+> 8Ainle5y7zDc8tFdcr9gCsQ=3D
+> =3DK3FI
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
 
