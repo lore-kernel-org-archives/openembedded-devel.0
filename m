@@ -1,31 +1,35 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Xin.Ouyang@windriver.com>) id 1TVegQ-0006u9-BO
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TVgqw-0004KP-IJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Nov 2012 09:38:55 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qA68P9PP012214
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Nov 2012 00:25:09 -0800 (PST)
-Received: from [128.224.162.239] (128.224.162.239) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
-	Tue, 6 Nov 2012 00:25:07 -0800
-Message-ID: <5098C962.8000504@windriver.com>
-Date: Tue, 6 Nov 2012 16:25:06 +0800
-From: Pascal Ouyang <xin.ouyang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
+	Tue, 06 Nov 2012 11:57:54 +0100
+Received: by mail-ee0-f47.google.com with SMTP id t10so154931eei.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Nov 2012 02:44:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Ux2MpYEqUfy7iScpxean2mc+1PbR9U0OiOCB3iX9LXU=;
+	b=Mr10QYNBhaU263hV08Vq6bFRYL0asP5ZibsK13SIg47hCKtAAidrjOWN8rc7LiLTcJ
+	ryYk2AV9aN4rClXvL+bgesVHMP1xDODs26mfmbqX+YJVIJAWNGpGycg8y4+Naqt/VupB
+	6/96BvIG3XksGsjQJJ2WGkRGylEJzf8DxSeyg1c0vrA8ui/9ZdKtDx6++ZQlpV7YJBHt
+	weuHdE53/ZZAkA7suFhqwm+jR0YxiSz04WGf3FjTFm379cPyV7niNowgOuCZO4996fpZ
+	zPpIgKrt2XfLDrfyHIFxvHMAlV6mJfla3BbjiSTpmxkS5gNIOadbserlHN0QyIbhnWwq
+	RFOg==
+Received: by 10.14.194.2 with SMTP id l2mr2302245een.12.1352198649974;
+	Tue, 06 Nov 2012 02:44:09 -0800 (PST)
+Received: from localhost.localdomain (ip-109-91-251-94.unitymediagroup.de.
+	[109.91.251.94])
+	by mx.google.com with ESMTPS id g47sm55218922eeo.6.2012.11.06.02.44.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Nov 2012 02:44:09 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Nov 2012 11:42:54 +0100
+Message-Id: <1352198574-15442-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1351734166-8711-1-git-send-email-Xin.Ouyang@windriver.com>
-	<k708l4$3tt$2@ger.gmane.org>
-In-Reply-To: <k708l4$3tt$2@ger.gmane.org>
-X-TagToolbar-Keys: D20121106162506353
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
-	qA68P9PP012214
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [PATCH][meta-networking 1/2] netperf: import recipe
+Subject: [meta-gnome] gnome-desktop: copy omf.make from ${STAGING_DATADIR_NATIVE} instead ${STAGING_DATADIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2012 08:38:55 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Nov 2012 10:57:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-=E4=BA=8E 2012=E5=B9=B411=E6=9C=8802=E6=97=A5 18:52, Koen Kooi =E5=86=99=E9=
-=81=93:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 01-11-12 02:42, Xin Ouyang schreef:
->> Git-Url: -
->> http://git.openembedded.org/openembedded/tree/recipes/netperf/
->>
->> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com> ---
->> .../recipes-support/netperf/files/cpu_set.patch    |   24 +++++++++
->> meta-networking/recipes-support/netperf/files/init |   51
->> ++++++++++++++++++++
->
-> The initscript is missing LSB headers and hardcodes $sbindir to /usr/sb=
-in.
+* omf.make is installed by gnome-common
+* oe-core gnomebase.bbclass adds gnome-common-native to DEPENDS
+* error message was:
+  | DEBUG: Executing shell function do_configure
+  | cp: cannot stat `/home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/share/gnome-common/data/omf.make': No such file or directory
 
-The hardcodes would be fixed in V2.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../gnome-desktop/gnome-desktop_2.32.1.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-But I think we do not need lsb headers, since no lsb init function used=20
-in the initscript.
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+index 44e0171..612e88f 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+ 
+-PR = "r5"
++PR = "r6"
+ 
+ inherit gnome pkgconfig
+ 
+@@ -16,7 +16,7 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils"
+ EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
+ 
+ do_configure_prepend () {
+-	cp ${STAGING_DATADIR}/gnome-common/data/omf.make ${S}
++	cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
+ 	sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
+ }
+ 
+-- 
+1.7.6.5
 
-Thanks.
-
-- Pascal
-
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFQk6XuMkyGM64RGpERApMQAJ0f0YMb53j54pjbXUpl7b6RCjWm7gCgrbd/
-> 8Ainle5y7zDc8tFdcr9gCsQ=3D
-> =3DK3FI
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
---=20
-- Pascal
 
 
