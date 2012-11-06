@@ -1,42 +1,36 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-qc0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TVlHb-0001lF-Bh
+	(envelope-from <marc.ferland@gmail.com>) id 1TVmmi-0005y6-Bf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Nov 2012 16:41:43 +0100
-Received: by mail-wi0-f171.google.com with SMTP id hj13so3773245wib.6
+	Tue, 06 Nov 2012 18:17:56 +0100
+Received: by mail-qc0-f175.google.com with SMTP id j3so403746qcs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Nov 2012 07:27:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=references:mime-version:in-reply-to:content-type
-	:content-transfer-encoding:message-id:cc:x-mailer:from:subject:date
-	:to:x-gm-message-state;
-	bh=xxlHbjnAR8XCDXKEha3kH00xw9cyohSnkn4dTHPIulk=;
-	b=TwZuOBzCLOTuh2E7pGm99jznpnFuOl+fk0aIFngbaxwbBbc26Zbw5NDC1CJt16tlTd
-	7HKKTK5eu1z4bin2PF08lo2KlS0ptYflEqhQNXAvk3rdzsaRx9gKUTPRvlzP7V/q+PM6
-	C1w0s5c1KlFh+4kZLq6eL3ugtf526BdaSioPeYIG7i3tjih83OjAZgyNuRmzzS1n7qjK
-	OnOeVRTRJxqP9BuIWIxbdyYQ3djAHY/om/B/z3FG5DEVigSCmfa02wQ+lENZ4C6no3KZ
-	YifcAR7hSUhv/+3nWkJtQ6BNdsBiOgbXCId1nsDYYup1hCNA+8KsqhPb/PT5MRJKXSPS
-	Qegg==
-Received: by 10.181.11.167 with SMTP id ej7mr2814000wid.11.1352215678519;
-	Tue, 06 Nov 2012 07:27:58 -0800 (PST)
-Received: from [10.14.17.253] (79.Red-88-2-49.staticIP.rima-tde.net.
-	[88.2.49.79])
-	by mx.google.com with ESMTPS id bn7sm17102425wib.8.2012.11.06.07.27.56
-	(version=SSLv3 cipher=OTHER); Tue, 06 Nov 2012 07:27:57 -0800 (PST)
-References: <1351734166-8711-1-git-send-email-Xin.Ouyang@windriver.com>
-	<k708l4$3tt$2@ger.gmane.org> <5098C962.8000504@windriver.com>
-Mime-Version: 1.0 (1.0)
-In-Reply-To: <5098C962.8000504@windriver.com>
-Message-Id: <A6BAA703-2F90-4C24-BC08-C472C3708B50@dominion.thruhere.net>
-X-Mailer: iPhone Mail (10A403)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 6 Nov 2012 16:27:52 +0100
-To: Pascal Ouyang <xin.ouyang@windriver.com>
-X-Gm-Message-State: ALoCoQmDHBB+7PWyssBU4jIv9tMp8GAKAwNfirNO3k/QRGisq5a8KAEtjS/njZVvuhvijcv5NWLP
-Cc: "<openembedded-devel@lists.openembedded.org>"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking 1/2] netperf: import recipe
+	Tue, 06 Nov 2012 09:04:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=V6LQUo+iT+JvCvhn+OEcvtZNWrJ0IEhAHy4wPCwBVko=;
+	b=Qt1ZTqomm9eUITOwlp6Dv02nNAF9DDgSyD9jrnJFPfnUmCGpA+cC9pg/ggP/UEpK/8
+	sLcaLn1+uvMeYcfqKoXRP7YisuuypGhBZ8sufAekPYftSaVe+pJLY6XQckw3FdDqfwUN
+	2yQboP/EaXGtaIoq30lGZBzBiyIfQi39PfFygHi2gyCf9i/dbzPG6Z0uM9R6U2iW7WXv
+	miPdr40Cc7LQ6hhyfiOCB0ydOusCeB8rFieTzFlZJrTVUrsW0kBjzplmgQjDw4KQNEf8
+	3XlgivyG0Lf2eUlTWhdpGXLVtxaoPT7HKdlLJDbfN4v/q6YZh1ZnJn6EsHQ3Y9Se/BeG
+	t7Xg==
+Received: by 10.49.63.97 with SMTP id f1mr2941626qes.4.1352221450929;
+	Tue, 06 Nov 2012 09:04:10 -0800 (PST)
+Received: from ferlandm@sonatest.com
+	(modemcable066.15-37-24.static.videotron.ca. [24.37.15.66])
+	by mx.google.com with ESMTPS id pb2sm10848857qeb.0.2012.11.06.09.04.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Nov 2012 09:04:10 -0800 (PST)
+Sender: Marc Ferland <marc.ferland@gmail.com>
+Received: by ferlandm@sonatest.com (sSMTP sendmail emulation);
+	Tue, 06 Nov 2012 12:04:32 -0500
+From: Marc Ferland <ferlandm@sonatest.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Nov 2012 12:04:32 -0500
+Message-Id: <1352221472-13192-1-git-send-email-ferlandm@sonatest.com>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [meta-oe][PATCH] rrdtool: Remove hard-coded include in configure.ac
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,64 +44,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2012 15:41:43 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Nov 2012 17:17:56 -0000
 
+Got an error building rrdtool because of hard-coded paths in the
+configure.ac file. The extact error message was:
 
+ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+Rerun configure task after fixing this. The path was '/home/marc/yoctomaster/build/crownbay/tmp/work/core2-poky-linux/rrdtool-1.4.7-r2/rrdtool-1.4.7'
+---
+ .../rrdtool/remove_hardcoded_xml_include.patch     |   11 +++++++++++
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb  |    3 ++-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/rrdtool/rrdtool/remove_hardcoded_xml_include.patch
 
-Op 6 nov. 2012 om 09:25 heeft Pascal Ouyang <xin.ouyang@windriver.com> het v=
-olgende geschreven:
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool/remove_hardcoded_xml_include.patch b/meta-oe/recipes-extended/rrdtool/rrdtool/remove_hardcoded_xml_include.patch
+new file mode 100644
+index 0000000..321a842
+--- /dev/null
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool/remove_hardcoded_xml_include.patch
+@@ -0,0 +1,11 @@
++--- a/configure.ac	2012-11-06 11:20:54.099021892 -0500
+++++ b/configure.ac~	2012-11-06 11:19:57.255023857 -0500
++@@ -548,7 +548,7 @@
++ 
++ fi
++ EX_CHECK_ALL(glib-2.0,   glib_check_version,            glib.h,                 glib-2.0,    2.28.7, ftp://ftp.gtk.org/pub/glib/2.28/, "")
++-EX_CHECK_ALL(xml2,       xmlParseFile,                  libxml/parser.h,        libxml-2.0,        2.7.8,  http://xmlsoft.org/downloads.html, /usr/include/libxml2)
+++EX_CHECK_ALL(xml2,       xmlParseFile,                  libxml/parser.h,        libxml-2.0,        2.7.8,  http://xmlsoft.org/downloads.html, "")
++ 
++ if test "$EX_CHECK_ALL_ERR" = "YES"; then
++   AC_MSG_ERROR([Please fix the library issues listed above and try again.])
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+index 73141b4..465ef8a 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
+ 
+ DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
+            file://0001-rrdtool-eradicate-tcl-support.patch \
++           file://remove_hardcoded_xml_include.patch \
+           "
+ SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
+ SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
+-- 
+1.7.5.4
 
-> =E4=BA=8E 2012=E5=B9=B411=E6=9C=8802=E6=97=A5 18:52, Koen Kooi =E5=86=99=E9=
-=81=93:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>=20
->> Op 01-11-12 02:42, Xin Ouyang schreef:
->>> Git-Url: -
->>> http://git.openembedded.org/openembedded/tree/recipes/netperf/
->>>=20
->>> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com> ---
->>> .../recipes-support/netperf/files/cpu_set.patch    |   24 +++++++++
->>> meta-networking/recipes-support/netperf/files/init |   51
->>> ++++++++++++++++++++
->>=20
->> The initscript is missing LSB headers and hardcodes $sbindir to /usr/sbin=
-.
->=20
-> The hardcodes would be fixed in V2.
->=20
-> But I think we do not need lsb headers, since no lsb init function used in=
- the initscript.
-
-You still need them for depency resolving and lsb compliance=20
-
-
->=20
-> Thanks.
->=20
-> - Pascal
->=20
->>=20
->> -----BEGIN PGP SIGNATURE-----
->> Version: GnuPG v1.4.5 (Darwin)
->> Comment: GPGTools - http://gpgtools.org
->>=20
->> iD8DBQFQk6XuMkyGM64RGpERApMQAJ0f0YMb53j54pjbXUpl7b6RCjWm7gCgrbd/
->> 8Ainle5y7zDc8tFdcr9gCsQ=3D
->> =3DK3FI
->> -----END PGP SIGNATURE-----
->>=20
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
-> --=20
-> - Pascal
 
 
