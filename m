@@ -1,21 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joe.macdonald@windriver.com>) id 1TWBJL-0006tX-5E
+	(envelope-from <martin.jansa@gmail.com>) id 1TWCqX-0004Ch-07
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2012 20:29:31 +0100
-Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
-	[128.224.147.66])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qA7JFQ6a019564;
-	Wed, 7 Nov 2012 11:15:27 -0800 (PST)
-From: Joe MacDonald <joe.macdonald@windriver.com>
+	Wed, 07 Nov 2012 22:07:37 +0100
+Received: by mail-ea0-f175.google.com with SMTP id c1so771325eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Nov 2012 12:53:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=II0viPdlC/c6W20dvv9BdSsYARwIBcw6GtkSXg5RabQ=;
+	b=kvqCPE+u61fwVOIyEvg5g4UTSAfG18ePuIzTx+zZa6QVpkWz8DYgLqbyCxpaBJ1X6D
+	AFkWN1AN6/eI4gBRNGpzMEVmN69UputLUsqXYQUf9ca8+Z6Txu80VtjPRCIGPerxzg1m
+	zIdqHHbnTZCKiuchFIdRN+wIMKwQANpIJ4yufXD9rJBJN+d1gtKCuFJ9oqu+DnUskNIp
+	mkzItnXi4Te5gYxk3EDlqiwd2wGY7smWTDU4FZP0fLlAR8cVNX9ZnDfjBQSA7gDYyhuw
+	A+omPC73phftlP/ViJAH5T2UMgfmH54Adi+R8QrRXKsieFeRNbDhUxRs/AyheC8/eZjO
+	I/sA==
+Received: by 10.14.225.71 with SMTP id y47mr19763883eep.0.1352321630509;
+	Wed, 07 Nov 2012 12:53:50 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id g47sm66079155eeo.6.2012.11.07.12.53.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Nov 2012 12:53:49 -0800 (PST)
+Date: Wed, 7 Nov 2012 21:53:49 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Nov 2012 14:15:21 -0500
-Message-Id: <1352315721-7792-2-git-send-email-joe.macdonald@windriver.com>
-X-Mailer: git-send-email 1.7.11.3
-In-Reply-To: <1352315721-7792-1-git-send-email-joe.macdonald@windriver.com>
-References: <1352315721-7792-1-git-send-email-joe.macdonald@windriver.com>
-Cc: dennis.hall@windriver.com
-Subject: [meta-networking][PATCH] aoetools: add a recipe for version 34
+Message-ID: <20121107205349.GB3446@jama.jama.net>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: systemd on armv4t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,55 +42,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2012 19:29:31 -0000
+X-List-Received-Date: Wed, 07 Nov 2012 21:07:37 -0000
+X-Groupsio-MsgNum: 41452
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="SkvwRMAIpAhPCcCJ"
+Content-Disposition: inline
 
-From: dhall <dennis.hall@windriver.com>
+--SkvwRMAIpAhPCcCJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add the aoetools (ATA over Ethernet) package to be
-used along with a kernel module(aoe.ko) and server
-software(vblade) to support ATA over ethernet network
-storage.
+Is there someone else still using armv4t?
 
-Signed-off-by: dhall <dennis.hall@windriver.com>
-Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
----
- .../recipes-support/aoetools/aoetools_34.bb        | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-networking/recipes-support/aoetools/aoetools_34.bb
+After last rebuild from scratch it started to fail with SIGILL.
 
-diff --git a/meta-networking/recipes-support/aoetools/aoetools_34.bb b/meta-networking/recipes-support/aoetools/aoetools_34.bb
-new file mode 100644
-index 0000000..07bfb0f
---- /dev/null
-+++ b/meta-networking/recipes-support/aoetools/aoetools_34.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "ATA over Ethernet Tools"
-+DESCRIPTION = " \
-+The aoetools are programs for users of the ATA over Ethernet (AoE)network \
-+storage protocol, a simple protocol for using storage over anethernet LAN. \
-+The vblade program (storage target) exports a blockdevice using AoE. \
-+"
-+HOMEPAGE = "http://sourceforge.net/projects/${PN}"
-+SECTION = "console/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+RRECOMMENDS_${PN} = "kernel-module-aoe"
-+PR = "r0"
-+
-+
-+SRC_URI = "http://sourceforge.net/projects/${PN}/files/${PN}/${PV}/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "cde7f7cedc7cd9938a5ebfd009dd3ec0"
-+SRC_URI[sha256sum] = "fd6c57244e9458d7cbe7a0171295ddee4d8cdcae291e40d6acbc641df7296d85"
-+
-+# EXTRA_OEMAKE is typically: -e MAKEFLAGS=
-+# the -e causes problems as CFLAGS is modified in the Makefile.
-+EXTRA_OEMAKE = ""
-+
-+do_install() {
-+        oe_runmake DESTDIR=${D} install
-+}
--- 
-1.7.11.3
+Seems to fail only in --system mode, --user mode seems to work=20
+(at least does not end with SIGILL).
 
+The problem is not in systemd itself (I've tried to use older=20
+binaries from working image) and I can reproduce it with
+systemd 189 as well as current 195 and
+binutils default 2.22 as well as 2.23 from khem.
 
+Anyone else seen this?
 
+Core was generated by `/sbin/init splash'.
+Program terminated with signal 4, Illegal instruction.
+#0  0x40110a00 in raise () from /lib/libpthread.so.0
+(gdb)
+(gdb) bt
+#0  0x40110a00 in raise () from /lib/libpthread.so.0
+#1  0x000118de in ?? ()
+#2  0x000118de in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+(gdb) disas=20
+Dump of assembler code for function raise:
+   0x401109d4 <+0>:     push    {r4, r7, lr}
+   0x401109d8 <+4>:     mov     r4, r0
+   0x401109dc <+8>:     bl      0x40112430
+   0x401109e0 <+12>:    mov     r3, r0
+   0x401109e4 <+16>:    ldr     r0, [r0, #-1108]        ; 0x454
+   0x401109e8 <+20>:    ldr     r1, [r3, #-1112]        ; 0x458
+   0x401109ec <+24>:    cmp     r0, #0
+   0x401109f0 <+28>:    rsblt   r0, r0, #0
+   0x401109f4 <+32>:    mov     r2, r4
+   0x401109f8 <+36>:    mov     r7, #268        ; 0x10c
+   0x401109fc <+40>:    svc     0x00000000
+=3D> 0x40110a00 <+44>:    cmn     r0, #4096       ; 0x1000
+   0x40110a04 <+48>:    bhi     0x40110a10 <raise+60>
+   0x40110a08 <+52>:    pop     {r4, r7, lr}
+   0x40110a0c <+56>:    bx      lr
+   0x40110a10 <+60>:    ldr     r1, [pc, #76]   ; 0x40110a64 <raise+144>
+   0x40110a14 <+64>:    rsb     r0, r0, #0
+   0x40110a18 <+68>:    ldr     r1, [pc, r1]
+   0x40110a1c <+72>:    ldr     r2, [pc, #68]   ; 0x40110a68 <raise+148>
+   0x40110a20 <+76>:    str     r0, [r3, r1]
+   0x40110a24 <+80>:    ldr     r2, [pc, r2]
+   0x40110a28 <+84>:    ldr     r2, [r3, r2]
+   0x40110a2c <+88>:    cmp     r2, #38 ; 0x26
+   0x40110a30 <+92>:    mvnne   r0, #0
+
+Also reported on SHR trac
+http://www.shr-project.org/trac/ticket/2080
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--SkvwRMAIpAhPCcCJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlCayl0ACgkQN1Ujt2V2gByTxQCfU+icQvl1eLmTIsUAhA7+13Im
+u/sAoIc9mY5pXTEVf8aH7bekj7NCpwdf
+=f/Y7
+-----END PGP SIGNATURE-----
+
+--SkvwRMAIpAhPCcCJ--
