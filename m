@@ -1,35 +1,19 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1TW8zF-0006NQ-2L
+	(envelope-from <joe.macdonald@windriver.com>) id 1TWBJL-0006tY-47
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Nov 2012 18:00:21 +0100
-Received: by mail-lb0-f175.google.com with SMTP id y2so1360339lbk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Nov 2012 08:46:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=7dG4LreJbjS4mvxDSlORjODmJBZ6Rrn4Jkjn6sRLXTw=;
-	b=lmhzMs6oObCnwTn/J87SRHyU/x+HexFnWPrWtw7D6nA/RJCw7dZr1YiXvCfd+PqANs
-	SdrRugnqg9o2hbQt/yDyybFo+boZtptcCtCRfVyrQOo1aqEX9jZeP0++aIQAKRtnXYiJ
-	FNmcabLKaTghI63tSbOY4X6CPlkpHPM1Gttg2CRZmsiEajzjohjgOfNSLjBf+mY4sE8l
-	+BTffJDqxeLKrMT2E5IhbNPuZYy3Jf85oFoa61NKJAlqkwwLCs9SPWBhxUahMq2rYW4a
-	/H1tx6fRHHGKRGwI6K+7aaJbfr2wxulZ3VTzgVgtuDuLpQhCqXbenqReRhRg3VlzJCmz
-	sLfQ==
-Received: by 10.112.24.6 with SMTP id q6mr2204189lbf.24.1352306792423; Wed, 07
-	Nov 2012 08:46:32 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.114.1.49 with HTTP; Wed, 7 Nov 2012 08:46:12 -0800 (PST)
-In-Reply-To: <1352267865-3534-1-git-send-email-rongqing.li@windriver.com>
-References: <1352267865-3534-1-git-send-email-rongqing.li@windriver.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 7 Nov 2012 09:46:12 -0700
-X-Google-Sender-Auth: NDGhv6Iy9X-7Mq9Hs90UTzRgVTE
-Message-ID: <CABcZANkL_-7p38JMu4wQJBXwmYpYL0FWUKBAn3MyBzmzpg3BhA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] Apache2: Add libselinux dependency and Disable parallel install
+	Wed, 07 Nov 2012 20:29:30 +0100
+Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
+	[128.224.147.66])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qA7JFQ6Z019564;
+	Wed, 7 Nov 2012 11:15:26 -0800 (PST)
+From: Joe MacDonald <joe.macdonald@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Nov 2012 14:15:20 -0500
+Message-Id: <1352315721-7792-1-git-send-email-joe.macdonald@windriver.com>
+X-Mailer: git-send-email 1.7.11.3
+Cc: dennis.hall@windriver.com
+Subject: Adding aoetools to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +27,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Nov 2012 17:00:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Nov 2012 19:29:31 -0000
 
-On Tue, Nov 6, 2012 at 10:57 PM, <rongqing.li@windriver.com> wrote:
+This work was actually done by Dennis Hall (copied here) but since he's not yet
+on the list, I'm forwarding it for him.
 
-> 2. Disable parallel make install
-> apache2 supports parallel make install, before installation,
-> it will firstly call build/mkdir.sh to create needed directories.
-> build/mkdir.sh first checks if a directory exists or not, if not,
-> it will create this directory, when mkdir.sh is called by many
-> instances parallel, it will introduce race, namely the result of
-> checking says one directory does not exist, but when it tries to
-> mkdir, this directory has been created by other instance.
->
+Dennis:  I made a couple of minor changes to your recipe after you sent it to
+me, collecting the SRC_URI values into a single block, removing the PRIROITY
+field which I think is an artifact from the OE-Classic recipe, and moving
+LIC_FILES_CHKSUM to be next to LICENSE.  I think other than those trivial
+changes, this is exactly what you sent me.
 
-How much work would it be to change it to run 'mkdir -p' rather than
-build/mkdir.sh, e.g. via a variable in EXTRA_OEMAKE?
--- 
-Christopher Larson
+--
+-Joe MacDonald.
+:wq
+
+
 
