@@ -1,30 +1,41 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Rongqing.Li@windriver.com>) id 1TWGUS-0001r4-3U
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Nov 2012 02:01:04 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qA80lCIR027961
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 7 Nov 2012 16:47:15 -0800 (PST)
-Received: from [128.224.162.143] (128.224.162.143) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
-	Wed, 7 Nov 2012 16:47:11 -0800
-Message-ID: <509B010D.70900@windriver.com>
-Date: Thu, 8 Nov 2012 08:47:09 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:13.0) Gecko/20120615 Thunderbird/13.0.1
+	(envelope-from <jefro.net@gmail.com>)
+	id 1TWItU-0005Em-PJ; Thu, 08 Nov 2012 04:35:05 +0100
+Received: by mail-ia0-f175.google.com with SMTP id b35so1668862iac.6
+	for <multiple recipients>; Wed, 07 Nov 2012 19:21:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=MoWn2BSZB8hvrbZuCjM2AUWmKmFxbDLXwWwgLIH3afM=;
+	b=qI7gb/2THKVSYuIoe97vMcfNJ0BmC8azKLufijRsXNGrzgUPgcQNwXJobZXFmCuB70
+	sRuKdt0uuIAGuG++gL8WkWpLpPP6zE/ojtyJf5IvpOsVa1k4N06kcs5uTwbJJXGH9xXt
+	Pw/tc9abdoFzpmYqtFMAozpI7qU7d1zZWABi/bHE1rIfdxIj3lOGwFe6kVny20JOhipN
+	lE64OHHcwgw/RFnKuCZEvARzPS4gPcyEWioN34XF4l6XedvR65IRA2UMtv5z59D9GM9r
+	nLM02QuvUEf66OGXnjdOcPRS3ApX+piSaqBBIZYQEIMdPIbFUJqJOeh+jWoOCE+flAua
+	Oj3w==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1352267865-3534-1-git-send-email-rongqing.li@windriver.com>
-	<CABcZANkL_-7p38JMu4wQJBXwmYpYL0FWUKBAn3MyBzmzpg3BhA@mail.gmail.com>
-In-Reply-To: <CABcZANkL_-7p38JMu4wQJBXwmYpYL0FWUKBAn3MyBzmzpg3BhA@mail.gmail.com>
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
-	qA80lCIR027961
-Cc: Chris Larson <clarson@kergoth.com>
-Subject: Re: [PATCH] Apache2: Add libselinux dependency and Disable parallel install
+Received: by 10.50.190.162 with SMTP id gr2mr4205082igc.65.1352344877098; Wed,
+	07 Nov 2012 19:21:17 -0800 (PST)
+Sender: jefro.net@gmail.com
+Received: by 10.64.147.37 with HTTP; Wed, 7 Nov 2012 19:21:17 -0800 (PST)
+In-Reply-To: <509A5F50.70603@balister.org>
+References: <vhf8n7wh7xs9ardk8rr8ltrm.1352293487146@email.android.com>
+	<509A5F50.70603@balister.org>
+Date: Wed, 7 Nov 2012 19:21:17 -0800
+X-Google-Sender-Auth: pyHQW2KHMimc0212px09R5Lm0h4
+Message-ID: <CA+YB3rY9SgvESvhZk-qYzZ=QJqz-n8xJA_zrHcrwwKcoLAnd2w@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+To: Philip Balister <philip@balister.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Anders Darander <anders@chargestorm.se>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+Subject: Re: [yocto] [OE-core] OpenEmbedded eV General Assembly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +49,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2012 01:01:04 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Nov 2012 03:35:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+So how did it go? Were notes taken?
 
 
+On Wed, Nov 7, 2012 at 5:17 AM, Philip Balister <philip@balister.org> wrote:
 
-On 2012=E5=B9=B411=E6=9C=8808=E6=97=A5 00:46, Chris Larson wrote:
-> On Tue, Nov 6, 2012 at 10:57 PM, <rongqing.li@windriver.com> wrote:
+> On 11/07/2012 02:04 PM, Anders Darander wrote:
 >
->> 2. Disable parallel make install
->> apache2 supports parallel make install, before installation,
->> it will firstly call build/mkdir.sh to create needed directories.
->> build/mkdir.sh first checks if a directory exists or not, if not,
->> it will create this directory, when mkdir.sh is called by many
->> instances parallel, it will introduce race, namely the result of
->> checking says one directory does not exist, but when it tries to
->> mkdir, this directory has been created by other instance.
+>> Will the GA start at 17:00, or shouldn't we start it after the closing
+>> session finishes?
 >>
 >
-> How much work would it be to change it to run 'mkdir -p' rather than
-> build/mkdir.sh, e.g. via a variable in EXTRA_OEMAKE?
+> We need to get started at 5. Sometimes the closing session can drag on for
+> quite some time.
+>
+> The weeks schedule is just too full. On a personal note, a little less
+> full schedule for this conference would be nice.  There are eight sessions
+> in parallel at once.
+>
+> Philip
+>
+>
+>
+>> Cheers,
+>> Anders
+>>
+>> Philip Balister <philip@balister.org> wrote:
+>>
+>>
+>> Non-members are welcome to come to the meeting. If you are interested in
+>> becoming a member of the eV
+>> (http://www.openembedded.org/**wiki/Organization<http://www.openembedded.org/wiki/Organization>),
+>> talk to a member and
+>> they can sponsor you for membership.
+>>
+>> I will have the room arrangement for the meeting "soon".
+>>
+>> I'd like to get the meeting started promptly at 5, so we can get the
+>> important business done quickly.
+>>
+>> After the General Assembly, it would be very nice if people could help
+>> unpack and setup hardware for the Yocto dev day. We can work on dinner
+>> arrangements once we get a good feel for how long the setup will take.
+>>
+>> Philip
+>>
+>> ______________________________**_________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.**openembedded.org<Openembedded-core@lists.openembedded.org>
+>> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-core<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core>
+>>
+>>  ______________________________**_________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.**org/listinfo/yocto<https://lists.yoctoproject.org/listinfo/yocto>
 >
 
-"mkdir -p", plus ignoring return result of mkdir should be worked, but
-it can not be passed in by variable in EXTRA_OEMAKE, maybe need a patch.
-
-Since this bug is hard to reproduce, so I simply disable the parallel
-install.
-
---=20
-Best Reagrds,
-Roy | RongQing Li
 
 
-
+-- 
+Jeff Osier-Mixon http://jefro.net/blog
+Yocto Project Community Manager @Intel http://yoctoproject.org
 
