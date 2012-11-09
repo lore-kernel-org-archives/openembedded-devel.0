@@ -1,50 +1,37 @@
-Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
-	helo=va3outboundpool.messaging.microsoft.com)
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B40290@freescale.com>) id 1TWkUT-0005MJ-4I
+	(envelope-from <martin.jansa@gmail.com>) id 1TWmqX-00038U-6x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Nov 2012 10:03:05 +0100
-Received: from mail78-va3-R.bigfish.com (10.7.14.252) by
-	VA3EHSOBE009.bigfish.com (10.7.40.29) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 9 Nov 2012 07:49:01 +0000
-Received: from mail78-va3 (localhost [127.0.0.1])	by mail78-va3-R.bigfish.com
-	(Postfix) with ESMTP id EBDBC2005C	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Nov 2012 07:49:00 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zz98dI9371I936eI1432I4015Izz1de0h1202h1d1ah1d2ah10d2mzz8275bh8275dhz2dh2a8h668h839hd25he5bhf0ah1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh1155h)
-Received: from mail78-va3 (localhost.localdomain [127.0.0.1]) by mail78-va3
-	(MessageSwitch) id 1352447339588711_25004;
-	Fri,  9 Nov 2012 07:48:59 +0000 (UTC)
-Received: from VA3EHSMHS040.bigfish.com (unknown [10.7.14.236])	by
-	mail78-va3.bigfish.com (Postfix) with ESMTP id 8C61B26003F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Nov 2012 07:48:59 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS040.bigfish.com
-	(10.7.99.50) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 9 Nov 2012 07:48:59 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Fri, 9 Nov 2012 07:48:58 +0000
-Received: from [10.192.208.249] (guo-desktop.ap.freescale.net
-	[10.192.208.249])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id qA97msp7031703;	Fri, 9 Nov 2012 00:48:56 -0700
-Message-ID: <509CB65F.6070808@freescale.com>
-Date: Fri, 9 Nov 2012 15:53:03 +0800
-From: chunrongguo <b40290@freescale.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:15.0) Gecko/20120827 Thunderbird/15.0
+	Fri, 09 Nov 2012 12:34:01 +0100
+Received: by mail-ee0-f47.google.com with SMTP id d41so814561eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Nov 2012 03:20:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=+FnAIgZfBhp/rgulOVcDXl4I5Nrwa0dBIowOYIGgND0=;
+	b=OcuidFpkqOKZUEDVlKARVzxNZQs6VgjC80M1og19iMDgcbqX532QQ45/MHCGbGWdoK
+	obn/aykEC29a0tevkz5Wg2+5YGXF5HjyoRBziR7N5/b6SlAgBBnXxhQJK61DycXm8wW5
+	5cXOnweJq9uXpMkmIfRPcYtt2elunZfkx7sAgzlcX/r7y5aKOl5eWvzv4Kpy+QrQT0nj
+	h2TCTC2+tx7HLvhBzOUZTfc+wIbUfM4i74GTBUNgJ+wmybWg146yH2ZrJSo0b8WQ9pnx
+	VQ9DBJuMaLo+NZRU3KiCxsrvzJgxCbsGer08i38qP5U71/08k9diEzwXDpDsq0yVMP63
+	eSqA==
+Received: by 10.14.219.2 with SMTP id l2mr37241902eep.3.1352460012545;
+	Fri, 09 Nov 2012 03:20:12 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id g47sm75925664eeo.6.2012.11.09.03.20.10
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Nov 2012 03:20:11 -0800 (PST)
+Date: Fri, 9 Nov 2012 12:20:14 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121109112014.GE3446@jama.jama.net>
+References: <20121107205349.GB3446@jama.jama.net>
+	<1352323084.6869.26.camel@x121e.pbcl.net>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1351755464-13839-1-git-send-email-b40290@freescale.com>
-In-Reply-To: <1351755464-13839-1-git-send-email-b40290@freescale.com>
-X-OriginatorOrg: freescale.com
-Cc: McClintock Matthew-B29882 <B29882@freescale.com>, Liu,
-	Ting-B28495 <B28495@freescale.com>,
-	Luo Zhenhua-B19537 <B19537@freescale.com>
-Subject: Re: [meta-oe] inetutils: fix configure error under automake 1.12
+In-Reply-To: <1352323084.6869.26.camel@x121e.pbcl.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: systemd on armv4t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,100 +45,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Nov 2012 09:03:05 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Nov 2012 11:34:01 -0000
+X-Groupsio-MsgNum: 41468
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ZRyEpB+iJ+qUx0kp"
+Content-Disposition: inline
 
-Ping!
+--ZRyEpB+iJ+qUx0kp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Nov 07, 2012 at 09:18:04PM +0000, Phil Blundell wrote:
+> On Wed, 2012-11-07 at 21:53 +0100, Martin Jansa wrote:
+> > Core was generated by `/sbin/init splash'.
+> > Program terminated with signal 4, Illegal instruction.
+> > #0  0x40110a00 in raise () from /lib/libpthread.so.0
+> > (gdb)
+> > (gdb) bt
+> > #0  0x40110a00 in raise () from /lib/libpthread.so.0
+> > #1  0x000118de in ?? ()
+> > #2  0x000118de in ?? ()
+>=20
+> That backtrace (and the disassembly) doesn't tell you much about the
+> real location of the fault since it just shows systemd re-throwing a
+> signal that it caught.  If you compile with -fasynchronous-unwind-tables
+> then you might get a better backtrace; otherwise, you can hack main.c to
+> stop it catching SIGILL in the first place.  Or turn on user fault
+> debugging in the kernel.
 
-Thanks,
+Thanks, now I have better backtrace:
+Core was generated by `/sbin/init splash'.
+Program terminated with signal 4, Illegal instruction.
+#0  0x400d3a00 in raise (sig=3Dsig@entry=3D4) at ../nptl/sysdeps/unix/sysv/=
+linux/pt-raise.c:45
+45                                  sig);
+(gdb) bt
+#0  0x400d3a00 in raise (sig=3Dsig@entry=3D4) at ../nptl/sysdeps/unix/sysv/=
+linux/pt-raise.c:45
+#1  0x0001183e in crash (sig=3D4) at src/core/main.c:135
+#2  <signal handler called>
+#3  0x40062d44 in __sync_add_and_fetch_4 (ptr=3D0xbc710, val=3D1)
+    at /OE/shr-core/tmp-eglibc/work-shared/gcc-4.7.2-r13/gcc-4.7.2/libgcc/c=
+onfig/arm/linux-atomic.c:128
+#4  0x4005e8bc in _dbus_atomic_inc (atomic=3Datomic@entry=3D0xbc710) at dbu=
+s-sysdeps-unix.c:2440
+#5  0x40056560 in _dbus_server_init_base (server=3Dserver@entry=3D0xbc710, =
+vtable=3D<optimized out>, address=3Daddress@entry=3D0xbe81a7e0) at dbus-ser=
+ver.c:118
+#6  0x40056fbc in _dbus_server_new_for_socket (fds=3Dfds@entry=3D0xbe81a7dc=
+, n_fds=3Dn_fds@entry=3D1, address=3Daddress@entry=3D0xbe81a7e0,
+    noncefile=3Dnoncefile@entry=3D0x0) at dbus-server-socket.c:320
+#7  0x40057404 in _dbus_server_new_for_domain_socket (path=3Dpath@entry=3D0=
+xbc678 "/run/systemd/private", abstract=3Dabstract@entry=3D0,
+    error=3Derror@entry=3D0xbe81a890) at dbus-server-unix.c:276
+#8  0x400575ea in _dbus_server_listen_platform_specific (entry=3D<optimized=
+ out>, server_p=3D0xbe81a874, error=3D0xbe81a890) at dbus-server-unix.c:134
+#9  0x400568a0 in dbus_server_listen (address=3D0x6d9d4 "unix:path=3D/run/s=
+ystemd/private", error=3D0xbe81a8e8) at dbus-server.c:585
+#10 0x00033ec2 in bus_init_private (m=3D0xbc340) at src/core/dbus.c:1076
+#11 bus_init (m=3Dm@entry=3D0xbc340, try_bus_connect=3Dtry_bus_connect@entr=
+y=3Dfalse) at src/core/dbus.c:1147
+#12 0x00014eb2 in manager_new (running_as=3Drunning_as@entry=3DSYSTEMD_SYST=
+EM, _m=3D_m@entry=3D0xbe81aa54) at src/core/manager.c:305
+#13 0x0000fbb8 in main (argc=3D2, argv=3D0xbe81af04) at src/core/main.c:1612
+(gdb) disass 0x40062d44
+Dump of assembler code for function __sync_add_and_fetch_4:
+   0x40062d2c <+0>:     push    {r4, r5, r6, lr}
+   0x40062d2e <+2>:     adds    r5, r0, #0
+   0x40062d30 <+4>:     adds    r6, r1, #0
+   0x40062d32 <+6>:     ldr     r0, [r5, #0]
+   0x40062d34 <+8>:     adds    r2, r5, #0
+   0x40062d36 <+10>:    adds    r4, r0, r6
+   0x40062d38 <+12>:    adds    r1, r4, #0
+   0x40062d3a <+14>:    ldr     r3, [pc, #16]   ; (0x40062d4c <__sync_add_a=
+nd_fetch_4+32>)
+   0x40062d3c <+16>:    bl      0x40063404
+   0x40062d40 <+20>:    cmp     r0, #0
+   0x40062d42 <+22>:    bne.n   0x40062d32 <__sync_add_and_fetch_4+6>
+   0x40062d44 <+24>:    adds    r0, r4, #0
+   0x40062d46 <+26>:    pop     {r4, r5, r6}
+   0x40062d48 <+28>:    pop     {r1}
+   0x40062d4a <+30>:    bx      r1
+   0x40062d4c <+32>:    lsrs    r0, r0, #31
+   0x40062d4e <+34>:    vsli.32 <illegal reg q13.5>, q8, #31
+End of assembler dump.
 
-Chunrong
+Cheers,
 
-On Thursday, November 01, 2012 03:37 PM, Chunrong Guo wrote:
-> From: chunrong <b40290@freescale.com>
->
->      * fix the following error :
->      configure.ac:572: error: automatic de-ANSI-fication support has been removed
->      | /tmp/sysroots/x86_64-linux/usr/share/aclocal-1.12/protos.m4:10: AM_C_PROTOTYPES is expanded from...
->      | configure.ac:572: the top level
->      | autom4te: m4 failed with exit status: 1
->      | aclocal: error: tmp/sysroots/x86_64-linux/usr/bin/autom4te failed with exit status: 1
->      | autoreconf: aclocal failed with exit status: 1
->      | ERROR: autoreconf execution failed.
->      | ERROR: Function failed: do_configure (see inetutils-1.8-+fsl/temp/log.do_configure.23693 for further information)
->       ERROR: meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb, do_configure) failed with exit code '1'
->      *  automake 1.12 removes support for AM_C_PROTOTYPES.
->
-> Signed-off-by: chunrong <b40290@freescale.com>
-> ---
->   .../inetutils-1.8/disable-pre-ANSI-compilers.patch |   11 +++++++++++
->   .../inetutils/inetutils-1.8/remove_gets.patch      |   13 +++++++++++++
->   .../inetutils/inetutils_1.8.bb                     |    4 ++++
->   3 files changed, 28 insertions(+), 0 deletions(-)
->   create mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/disable-pre-ANSI-compilers.patch
->   create mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/remove_gets.patch
->
-> diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/disable-pre-ANSI-compilers.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/disable-pre-ANSI-compilers.patch
-> new file mode 100644
-> index 0000000..b945f3a
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/disable-pre-ANSI-compilers.patch
-> @@ -0,0 +1,11 @@
-> +--- inetutils-1.8.org/configure.ac	2012-10-23 02:05:20.516386701 -0500
-> ++++ inetutils-1.8/configure.ac	2012-10-25 21:31:10.602591484 -0500
-> +@@ -569,7 +569,7 @@
-> + IU_CHECK_MEMBERS([struct stat.st_blksize])
-> +
-> + ### Checks for compiler characteristics.
-> +-AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
-> ++#AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
-> + AC_C_CONST
-> +
-> + dnl See if `weak refs' are possible; these make it possible (with shared
-> diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/remove_gets.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/remove_gets.patch
-> new file mode 100644
-> index 0000000..f8081a2
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/remove_gets.patch
-> @@ -0,0 +1,13 @@
-> +--- inetutils-1.8.org/lib/stdio.in.h	2010-05-15 06:35:16.000000000 -0500
-> ++++ inetutils-1.8/lib/stdio.in.h	2012-10-25 22:56:43.198607472 -0500
-> +@@ -138,8 +138,10 @@
-> + /* It is very rare that the developer ever has full control of stdin,
-> +    so any use of gets warrants an unconditional warning.  Assume it is
-> +    always declared, since it is required by C89.  */
-> ++#if defined gets
-> + #undef gets
-> + _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
-> ++#endif
-> +
-> + #if @GNULIB_FOPEN@
-> + # if @REPLACE_FOPEN@
-> diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb b/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb
-> index ce0df82..761b2e6 100644
-> --- a/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb
-> +++ b/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb
-> @@ -8,6 +8,8 @@ LICENSE = "GPLv3"
->   
->   LIC_FILES_CHKSUM = "file://COPYING;md5=adefda309052235aa5d1e99ce7557010"
->   
-> +PR = "r1"
-> +
->   SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
->              file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
->              file://inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch \
-> @@ -18,6 +20,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
->              file://inetutils-1.8-1004-detect-fork-support.patch \
->              file://inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch \
->              file://fix-disable-ipv6.patch \
-> +           file://disable-pre-ANSI-compilers.patch \
-> +           file://remove_gets.patch \
->   "
->   SRC_URI[md5sum] = "ad8fdcdf1797b9ca258264a6b04e48fd"
->   SRC_URI[sha256sum] = "c8500baee04b9ea408c9e65e24ad7f5b41e7d96d42fb1d29abf25b52b68311c7"
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--ZRyEpB+iJ+qUx0kp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlCc5u4ACgkQN1Ujt2V2gBx+ggCfZ/yv0WgtfxE//BDnepNCexbN
+j9sAn1PsfOTdn01bfRZV4wcPlBBrQduK
+=vonW
+-----END PGP SIGNATURE-----
 
+--ZRyEpB+iJ+qUx0kp--
