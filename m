@@ -1,24 +1,33 @@
-Received: from new.bec-systems.com ([74.208.70.121] helo=bec-systems.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>)
-	id 1TXy3t-0001fP-Mv; Mon, 12 Nov 2012 18:44:42 +0100
-Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1TXxhn-0004BE-Tu; Mon, 12 Nov 2012 12:21:53 -0500
+	(envelope-from <stefan@datenfreihafen.org>)
+	id 1TXzQt-0003kX-VN; Mon, 12 Nov 2012 20:12:32 +0100
+Received: from host-92-24-38-206.ppp.as43234.net ([92.24.38.206]
+	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.69 #1)
+	id 1TXyiE-0004OQ-4W by authid <stefan@sostec.de> with srv_auth_cram_md5;
+	Mon, 12 Nov 2012 19:26:24 +0100
+Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.80)
+	(envelope-from <stefan@novatech.datenfreihafen.org>)
+	id 1TXyi8-0001mZ-Re; Mon, 12 Nov 2012 18:26:16 +0000
+Date: Mon, 12 Nov 2012 18:26:16 +0000
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20121112182616.GB22235@novatech.datenfreihafen.org>
+References: <12301427.Yf0uchSh3U@helios>
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 12 Nov 2012 17:30:39 GMT
-Message-Id: <1352741439745.dfac8a69@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2012-11-04 until 2012-11-11
+In-Reply-To: <12301427.Yf0uchSh3U@helios>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] OE-Classic recipe migration status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,262 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2012 17:44:42 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Nov 2012 19:12:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Changelog since 2012-11-04 until 2012-11-11.  Projects included in this =
-report:
+Hello.
 
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-opie: git://git.openembedded.org/meta-opie
-openembedded: git://git.openembedded.org/openembedded
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-java: git://github.com/woglinde/meta-java
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-telephony: git://gitorious.org/sysmocom-openembedded/meta-telephony.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+On Sun, 2012-11-11 at 19:11, Paul Eggleton wrote:
+> 
+>    1484 other
+>     218 BSP
+>     211 BugLabs
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
+I now longer work for BugLabs but  during my last months there I split
+up our bunch of recipes according to what we think was sane at that
+time. Think end of last year here.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
+The BSP layer can be found here:
+https://github.com/buglabs/meta-bug
 
-Richard Purdie (1):
-=20=20lib/oe/classextend: Ensure we don't extend expressions more than once
+And BugLabs specific recipes here:
+https://github.com/buglabs/meta-buglabs
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
+All OpenJDK related stuff was going directly into upstream through
+Tarent anyway. This should cover all stuff that was worth bringing
+over.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
+>      11 EFL
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
+I think everything worth working with is in meta-efl in meta-oe.
+Martin is doing a great job catching up with everything we do
+upstream. If something is really missing it might now longer work or
+is just not worth bringing over.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Kishore Bodke (1):
-=20=20romley: Update README Instructions
-
-Ross Burton (4):
-=20=20meta-cedartrail: really fix mesa-dri version (typo'd)
-=20=20xserver-xorg: bump PR to get the new xorg-abi- RPROVIDES
-=20=20cdv-pvr-driver: add xorg-abi-video- dependency
-=20=20emgd-driver-bin: add xorg-abi-video- dependency
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-Paul Eggleton (1):
-=20=20kbdd: add from OE-Classic
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-Paul Eggleton (1):
-=20=20Remove NATIVE_INSTALL_WORKS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-Enric Balletbo i Serra (6):
-=20=20x-loader: Remove this package in favour of u-boot SPL.
-=20=20u-boot: update to 2012.10 version.
-=20=20igep00x0: add SPL support.
-=20=20formfactor: add igep00x0 formfactor file.
-=20=20xserver-xf86-config: add xorg config for IGEP Tech boards.
-=20=20README: update for 8.0 "Danny" release.
-
-Enrico Butera (3):
-=20=20Merge pull request #9 from eballetbo/danny
-=20=20igep00x0: add OneNAND and NAND UBIFS args
-=20=20README: master branch depends on poky master branch
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-Mario Domenech Goulart (1):
-=20=20chicken_4.7.4: add useless-rpaths to INSANE_SKIP for chicken and =
-libchicken
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-Henning Heinold (2):
-=20=20icedtea-native: remove 1.7 version because of version 1.8 works very =
-well
-=20=20openjdk-6: dependcy on libxp was removed with version 1.11.5
-
-Steffen Sledz (2):
-=20=20icedtea6-native: fix compile error
-=20=20icedtea6-native: fix build problem
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-telephony:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Eric Blade (1):
-=20=20Remove unnecessary FILES_${PN} items
-
-Herb Kuta (1):
-=20=20task-webos-extended: Restore packages dropped from webos-image
-
-Martin Jansa (9):
-=20=20distro: webos: set PREFERRED_PROVIDER_jpeg to jpeg
-=20=20qt4-webos: replace python functions with simpler variable
-=20=20qmake-webos-native: remove dependency on target MACHINE in native =
-recipe
-=20=20qt4-webos: move shared parts between qt4-webos.bb and =
-qmake-webos-native.bb=20
-=20=20qt4-webos: don't export wrong STAGING_LIBDIR/STAGING_INCDIR values
-=20=20qt4-webos: fix creating /include directory in build host root
-=20=20qt4-webos: add patch to fix build for qemux86-64
-=20=20qt4-webos: set correct arch and endian like oe-core does
-=20=20qt4-webos, qmake-webos-native: use INC_PR
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Denys Dmytriyenko (9):
-=20=20meta-toolchain-arago: de-bashify...
-=20=20meta-toolchain-arago-qte: use consistent indentation for shell code
-=20=20meta-toolchain-arago-qte: de-bashify...
-=20=20m4: backport remove-gets.patch for eglibc-2.16 from OE-Core
-=20=20bison: backport remove-gets.patch for eglibc-2.16 from OE-Core
-=20=20gettext: backport remove-gets.patch for eglibc-2.16 from OE-Core
-=20=20meta-toolchain-arago: make SDK/devkit relocatable
-=20=20meta-toolchain-arago: move LD_LIBRARY_PATH setting into each shell =
-stub
-=20=20external-arago-toolchain: move C++ headers to the proper location
-
-Franklin S Cooper Jr (1):
-=20=20task-arago-tisdk-connectivity: Create new connectivity tasks
-
-Franklin S. Cooper Jr (7):
-=20=20ti-tisdk-setup: Port ti-tisdk-setup from arago
-=20=20libjpeg-turbo: Mimic RPROVIDES fix from meta-oe master
-=20=20libjpeg-turbo: Fix jpeg-tools error
-=20=20meta-toolchain-arago-qte: Fix Qt library and include files path
-=20=20meta-toolchain-arago-qte: Add qt.conf file
-=20=20meta-toolchain-arago: Pull in additional environmental variables =
-settings
-=20=20meta-toolchain-arago-qte: Add force option to symbolic link command
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-Andreas M=C3=BCller (1):
-=20=20linux-mainline-3.6: update 3.6.6
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-
+regards
+Stefan Schmidt
 
 
