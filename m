@@ -1,28 +1,24 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TXpzr-0007XI-QA
+	(envelope-from <Xin.Ouyang@windriver.com>) id 1TXqis-0008N0-Cd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2012 10:08:05 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 12 Nov 2012 00:53:30 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.80,761,1344236400"; d="scan'208";a="218182674"
-Received: from unknown (HELO helios.localnet) ([10.252.122.159])
-	by orsmga001.jf.intel.com with ESMTP; 12 Nov 2012 00:54:04 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Nov 2012 08:54:03 +0000
-Message-ID: <5245949.8fOfhN9Jo3@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <CAP9ODKoiaAJzAZEcH0doQkNZSXuqaOzM0_rsopLCswR-uHOOAA@mail.gmail.com>
-References: <12301427.Yf0uchSh3U@helios> <4701269.Boc8pSq2zM@helios>
-	<CAP9ODKoiaAJzAZEcH0doQkNZSXuqaOzM0_rsopLCswR-uHOOAA@mail.gmail.com>
+	Mon, 12 Nov 2012 10:54:30 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAC9dm4S023880
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 12 Nov 2012 01:39:49 -0800 (PST)
+Received: from Xouyang-Ubuntu-Desktop.corp.ad.wrs.com (128.224.162.239) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Mon, 12 Nov 2012 01:39:48 -0800
+From: Xin Ouyang <Xin.Ouyang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 12 Nov 2012 17:39:45 +0800
+Message-ID: <1352713186-2637-1-git-send-email-Xin.Ouyang@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Cc: openembedded-core@lists.linuxtogo.org,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [OE-core] OE-Classic recipe migration status
+Cc: koen@dominion.thruhere.net
+Subject: [PATCH V2][meta-networking] netperf: import from oe-classic and upgrade to 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,62 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2012 09:08:05 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 12 Nov 2012 09:54:30 -0000
+Content-Type: text/plain
 
-On Sunday 11 November 2012 21:24:55 Otavio Salvador wrote:
-> On Sun, Nov 11, 2012 at 6:49 PM, Paul Eggleton <
-> paul.eggleton@linux.intel.com> wrote:
-> > On Sunday 11 November 2012 21:16:13 Martin Jansa wrote:
-> > > I've noticed e.g this:
-> > > libfsobasics  [distro]
-> > > libfsoresource        [distro]
-> > > libfsosystem  [distro]
-> > > libfsotransport       [distro]
-> > > but those are now provided by single libfsoframework recipe and I've
-> > > forgot this change
-> > 
-> > https://github.com/shr-distribution/meta-smartphone/commit/0298befc97dc5dc
-> > a2> 
-> > > a3721fb0ff9d4caf8d24f84
-> > > 
-> > > So I'll just update [distro] flag to something like obsoleted by
-> > > libfsoframework.
-> > 
-> > Ah ok, sounds good.
+V2 Updates:
+ * merge two patches into one
+ * bb recipe: LICENSE back to "netperf"
+ * initscript: add LSB headers
+ * initscript: "sed" to replace the hardcodes /usr/sbin to $sbindir.
 
-FYI I've updated these entries now.
+Xin Ouyang (1):
+  netperf: import from oe-classic and upgrade to 2.6.0
 
-> > > The rest is probably also not 1:1 like qfsodbusxml2cpp-native
-> > > ./meta-fso/recipes-freesmartphone/freesmartphone/qfsodbusxml2cpp_git.bb
-> > > 
-> > > Maybe you can try to update scripts to show matches after "-native"
-> > > suffix strip?
-> > 
-> > I'd prefer to handle this manually - there are cases when newer recipes
-> > haven't been BBCLASSEXTENDed to handle -native so I've been checking this
-> > by hand.
-> 
-> You might grep for it and match it properly. So it drops a manual step.
-
-OK, I've added some script code to check for BBCLASSEXTEND and have added 
-notes next to the following items that I had missed:
-
-cup-native
-devio-native
-jamvm-native
-jlex-native
-python-pygobject-native
-qfsodbusxml2cpp-native
-usbpath-native
-
-Cheers,
-Paul
+ .../recipes-support/netperf/files/cpu_set.patch    |   30 ++++++++++
+ meta-networking/recipes-support/netperf/files/init |   62 ++++++++++++++++++++
+ .../recipes-support/netperf/files/vfork.patch      |   58 ++++++++++++++++++
+ .../recipes-support/netperf/netperf_2.6.0.bb       |   57 ++++++++++++++++++
+ 4 files changed, 207 insertions(+)
+ create mode 100644 meta-networking/recipes-support/netperf/files/cpu_set.patch
+ create mode 100644 meta-networking/recipes-support/netperf/files/init
+ create mode 100644 meta-networking/recipes-support/netperf/files/vfork.patch
+ create mode 100644 meta-networking/recipes-support/netperf/netperf_2.6.0.bb
 
 -- 
+1.7.10.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
