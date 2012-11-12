@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TXspm-0002gQ-QY
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TXspl-0002gP-HZ
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 12 Nov 2012 13:09:48 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so476047eei.6
+Received: by mail-ee0-f47.google.com with SMTP id l10so476039eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Nov 2012 03:55:54 -0800 (PST)
+	Mon, 12 Nov 2012 03:55:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=Ux2MpYEqUfy7iScpxean2mc+1PbR9U0OiOCB3iX9LXU=;
-	b=PHDR507qrZ/O/2izQBTxIv/81rkk7ywBk8j+P9M78Dsn9r3mLBLGui29zAaAG5eFrv
-	YOvtL6j4acuW1mWQDmeTD6bkoEBUcO/WHInqL8Z12CrZQ+gRIRztW4PuQ41CDjXATVY3
-	ej5iitRvE0pMmVEqxN229o1+vxhUvnSQjTcXWUTquc4dmHNSXVcIyOIhoTynxirs8nMe
-	OHr69aOJKX3yyEbr8J69J+wJr8ylM6wycgges0qhjLGP7FGg7B41tZohws9AN118TQ74
-	gFQ+1mta+sY9p4svV/G26sNtA/KtnT8f/CCrtU9Zlt6JXPSS6yfn0Vx1zq4uz53WLk3M
-	ZzOA==
-Received: by 10.14.223.199 with SMTP id v47mr62410268eep.45.1352721354377;
-	Mon, 12 Nov 2012 03:55:54 -0800 (PST)
+	bh=8nr0i7QxEYQR97HrYgriZCfl5hqjh3e3Q7nYNTZTOk4=;
+	b=MXA3zag5avmodQL9N5Q0hgjMcrc7MxxE1oYve9MRG7DA1QH7W8wTXkQDljWBlyOoRx
+	MJ+b5HWQvg8AnToAPUX/+teIMgl+/XFrxh75KhwTxMIuBfZWfT4MaVm3Ceonfz3VpkLe
+	SsNudAGDfVHMsuVNkEpcL2rnE/GJw+JCBMaNtoOSITwH5zTpaNFiMpwytazybGhMxHWo
+	M/TcB1c/tBY1WL7mkyzCLiwmPRaQUzme8jRtJJZeF3sKG2YtPxOUgzxKa+qCgRDYA2w0
+	dKUQjDGkjR7SeXrklO9nX6evISVFMlP/6qrVDnqPFpGuMILUWcbOG9Pxx/6lEf30/wXL
+	B9PA==
+Received: by 10.14.182.5 with SMTP id n5mr62275280eem.5.1352721353100;
+	Mon, 12 Nov 2012 03:55:53 -0800 (PST)
 Received: from localhost.localdomain (ip-109-91-251-94.unitymediagroup.de.
 	[109.91.251.94])
-	by mx.google.com with ESMTPS id f2sm15646402eep.2.2012.11.12.03.55.53
+	by mx.google.com with ESMTPS id f2sm15646402eep.2.2012.11.12.03.55.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Nov 2012 03:55:53 -0800 (PST)
+	Mon, 12 Nov 2012 03:55:52 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Nov 2012 12:54:25 +0100
-Message-Id: <1352721267-367-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 12 Nov 2012 12:54:24 +0100
+Message-Id: <1352721267-367-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-gnome/meta-oe/meta-xfce 4/6] gnome-desktop: copy omf.make from ${STAGING_DATADIR_NATIVE} instead ${STAGING_DATADIR}
+Subject: [meta-gnome/meta-oe/meta-xfce 3/6] gvfs-gdu-volume-monitor: fix build after oe-core's libexecdir transition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,39 +49,39 @@ X-List-Received-Date: Mon, 12 Nov 2012 12:10:00 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* omf.make is installed by gnome-common
-* oe-core gnomebase.bbclass adds gnome-common-native to DEPENDS
-* error message was:
-  | DEBUG: Executing shell function do_configure
-  | cp: cannot stat `/home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/share/gnome-common/data/omf.make': No such file or directory
+tests:
+* buildhistory check with libexecdir = /usr/libexec
+* run test with libexecdir = /usr/lib/${BPN}
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../gnome-desktop/gnome-desktop_2.32.1.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index 44e0171..612e88f 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+index 689f455..fe5af46 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+@@ -4,7 +4,7 @@ BPN = "gvfs"
  
--PR = "r5"
-+PR = "r6"
+ DEPENDS = "gvfs gnome-disk-utility"
  
- inherit gnome pkgconfig
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
  
-@@ -16,7 +16,7 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils"
- EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
- 
- do_configure_prepend () {
--	cp ${STAGING_DATADIR}/gnome-common/data/omf.make ${S}
-+	cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
- 	sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
- }
- 
+ # we need gdu files only: reduce files to delete in libexecdir
+ EXTRA_OECONF += "--disable-gphoto2"
+@@ -13,7 +13,9 @@ do_install_append() {
+ 	rm -rf ${D}${sysconfdir}
+ 	rm -rf ${D}${bindir}
+ 	rm -rf ${D}${includedir}
+-	rm -rf ${D}${libdir}
++	rm -rf ${D}${libdir}/gio
++	rm -rf ${D}${libdir}/lib*
++	rmdir --ignore-fail-on-non-empty ${D}${libdir}
+ 	rm -rf ${D}${datadir}/gvfs/mounts
+ 	rm -rf ${D}${datadir}/glib-2.0
+ 	rm -rf ${D}${datadir}/GConf
 -- 
 1.7.6.5
 
