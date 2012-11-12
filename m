@@ -1,37 +1,33 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TXspp-0002gS-D0
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TXt1R-0003Mh-L5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2012 13:09:59 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so476062eei.6
+	Mon, 12 Nov 2012 13:21:49 +0100
+Received: by mail-ie0-f175.google.com with SMTP id c13so8978572ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Nov 2012 03:55:57 -0800 (PST)
+	Mon, 12 Nov 2012 04:07:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=p/UbNe1gRGuOL83uHopPmrzHeocLdK9FmkfRpya5RiY=;
-	b=ACoR9iA1jpMhljnwbk/Yuw6BcN5NMZcsOQ0EWpP0sHni9x0v4sxoproYxOPxMUVkRp
-	P9hI7BnRgV2l3bsWMxoA8Tq5+53UVtQK9fwJNxdbm9Y9BL96v95O4aR80+0G1or/ktRo
-	WGCcCvPdHtW5CIEGjZjLFvhSZCnhmLSzUI3Zv1sFgZj5iLRwavnFB4RtXMg7D4A3Oibw
-	er6tM2yRiNi9MnYJPAcmOOCSJ4vSlDXXKNtapa70hzBNQez6XqFEL8LPZLjHHNW5PQKv
-	ZPsyeXF2OBqVbTL7EZfd+B+L1sBk0/FFbcXl9X9DghEzskjWujo40wWAiCjPPPgDiBat
-	LXug==
-Received: by 10.14.220.71 with SMTP id n47mr62227939eep.26.1352721356964;
-	Mon, 12 Nov 2012 03:55:56 -0800 (PST)
-Received: from localhost.localdomain (ip-109-91-251-94.unitymediagroup.de.
-	[109.91.251.94])
-	by mx.google.com with ESMTPS id f2sm15646402eep.2.2012.11.12.03.55.55
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 12 Nov 2012 03:55:56 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Nov 2012 12:54:27 +0100
-Message-Id: <1352721267-367-7-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=LJ2VbuU6744iNdZkuHXkDf11ScCjob3EHhERA953z4M=;
+	b=r+Law6DvCs/r/ohUe8hx+TqfNq+51B8ajRA0BZBuW4YWBHCXjWSTcL9O0K1l/Xskje
+	qQCFrewDRB3KopvxllkPYRbUSxdpv8y37wts295p5XXnu2Cz1weEAjPBDsvozBM+K6Nn
+	m90NNi4IVASTIvKS4YcurJS85ewfVt53LZN7OxZFzRlbUtS81k8KTczpUInbcSmVmTJr
+	bKRXJ7uLWhrCGo9ZuXyeyV+KIdK6oj3xpEP/liDf3zBtwLVbKCkWzCTIqXr6qSTAtVWS
+	WT0YEGadrbW80+nUes1QGYUB5SfYP2FRt7yoGOrg4UUT7xjt3mked3d+lloYg75RRWj1
+	UMbw==
 MIME-Version: 1.0
-Subject: [meta-gnome/meta-oe/meta-xfce 6/6] thunar: add xfce4-panel to dependencies to ensure trash-plugin (tpa) is build
+Received: by 10.50.169.100 with SMTP id ad4mr7666976igc.50.1352722075952; Mon,
+	12 Nov 2012 04:07:55 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Mon, 12 Nov 2012 04:07:55 -0800 (PST)
+In-Reply-To: <1352721267-367-6-git-send-email-schnitzeltony@googlemail.com>
+References: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
+	<1352721267-367-6-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 12 Nov 2012 13:07:55 +0100
+Message-ID: <CALbNGRSRH+U+vqU4P_CX3oRvJPGWwH1eJQdeC2JrnV-pRhNxOw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-gnome/meta-oe/meta-xfce 5/6] xarchiver: no RDEPENDS on unzip / busybox's unzip is good enough
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2012 12:10:18 -0000
+X-List-Received-Date: Mon, 12 Nov 2012 12:21:49 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Nov 12, 2012 at 12:54 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-x=
+fce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> index f47a3bc..79af6a4 100644
+> --- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "Lightweight, desktop independent GTK+ archive manager"
+>  HOMEPAGE =3D "http://xarchiver.sourceforge.net"
+>  SECTION =3D "x11"
+> -PR =3D "r2"
+> +PR =3D "r3"
+>
+>  LICENSE =3D "GPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> @@ -14,4 +14,4 @@ SRC_URI[sha256sum] =3D "cea932ff9d505969201fd502470bbeb=
+bc5726ab3d6765e142fc8295aa6
+>
+>  inherit gettext pkgconfig autotools gtk-icon-cache
+>
+> -RRECOMMENDS_${PN} =3D "lzop zip tar bzip2 unzip"
+> +RRECOMMENDS_${PN} =3D "lzop zip tar bzip2"
+> --
+> 1.7.6.5
+>
+Damn - this one should not go in !!! Send V2..
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Sorry
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
-index 39b1254..2d5b767 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
-@@ -2,7 +2,8 @@ DESCRIPTION = "File manager for the Xfce Desktop Environment"
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify"
-+DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify xfce4-panel"
-+PR = "r1"
- 
- inherit xfce
- 
--- 
-1.7.6.5
-
+Andreas
 
 
