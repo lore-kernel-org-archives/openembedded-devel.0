@@ -1,33 +1,35 @@
-Received: from mail-ie0-f175.google.com ([209.85.223.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TXt1R-0003Mh-L5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TXthF-0004J1-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Nov 2012 13:21:49 +0100
-Received: by mail-ie0-f175.google.com with SMTP id c13so8978572ieb.6
+	Mon, 12 Nov 2012 14:05:01 +0100
+Received: by mail-ee0-f47.google.com with SMTP id l10so507070eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Nov 2012 04:07:56 -0800 (PST)
+	Mon, 12 Nov 2012 04:51:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=LJ2VbuU6744iNdZkuHXkDf11ScCjob3EHhERA953z4M=;
-	b=r+Law6DvCs/r/ohUe8hx+TqfNq+51B8ajRA0BZBuW4YWBHCXjWSTcL9O0K1l/Xskje
-	qQCFrewDRB3KopvxllkPYRbUSxdpv8y37wts295p5XXnu2Cz1weEAjPBDsvozBM+K6Nn
-	m90NNi4IVASTIvKS4YcurJS85ewfVt53LZN7OxZFzRlbUtS81k8KTczpUInbcSmVmTJr
-	bKRXJ7uLWhrCGo9ZuXyeyV+KIdK6oj3xpEP/liDf3zBtwLVbKCkWzCTIqXr6qSTAtVWS
-	WT0YEGadrbW80+nUes1QGYUB5SfYP2FRt7yoGOrg4UUT7xjt3mked3d+lloYg75RRWj1
-	UMbw==
-MIME-Version: 1.0
-Received: by 10.50.169.100 with SMTP id ad4mr7666976igc.50.1352722075952; Mon,
-	12 Nov 2012 04:07:55 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Mon, 12 Nov 2012 04:07:55 -0800 (PST)
-In-Reply-To: <1352721267-367-6-git-send-email-schnitzeltony@googlemail.com>
-References: <1352721267-367-1-git-send-email-schnitzeltony@googlemail.com>
-	<1352721267-367-6-git-send-email-schnitzeltony@googlemail.com>
-Date: Mon, 12 Nov 2012 13:07:55 +0100
-Message-ID: <CALbNGRSRH+U+vqU4P_CX3oRvJPGWwH1eJQdeC2JrnV-pRhNxOw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=twefsVG2o5mWcqBtCD4FLTrGSzHLRfNfUkEKssXsbNw=;
+	b=awc5E3hf2eVTeZEMTT61mHc3UFrID8KM2ev+/N3RQ+vOAM/WRvHlRWITt8BzpNdoxk
+	i/8DPftX3UYy7rfNvAGKTEJ3rDbGYhWjIUmcRH4Huf58Wzse7bQe6FvqYoRLVEw8PPKq
+	AzISkgubWFcohS7iyodQ+7GBz48qMZWyShyRcRWf3D8OgDSUQ+Dp5X6D9ZgH7ny7hAF4
+	ODRn4YD7gGJkOltMHsF8JPLQG3wV4Qcpr+i2eUfahkDG5hD4sp5EjXhikzSQhuCCc8mw
+	XB/gTJ1SFYpxzm1p8FGouAS0uTGo6ufgBfr/kKNLVQDfC+BaEoUj8ONOZwLz5QG6xLrU
+	6vig==
+Received: by 10.14.220.71 with SMTP id n47mr62672267eep.26.1352724669059;
+	Mon, 12 Nov 2012 04:51:09 -0800 (PST)
+Received: from localhost.localdomain (ip-109-91-251-94.unitymediagroup.de.
+	[109.91.251.94])
+	by mx.google.com with ESMTPS id g47sm15869960eeo.6.2012.11.12.04.51.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 12 Nov 2012 04:51:07 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome/meta-oe/meta-xfce 5/6] xarchiver: no RDEPENDS on unzip / busybox's unzip is good enough
+Date: Mon, 12 Nov 2012 13:49:41 +0100
+Message-Id: <1352724581-17063-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-gnome/meta-oe/meta-systemd/meta-xfce, V2 0/5] bugfix collection - cover-letter only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2012 12:21:49 -0000
+X-List-Received-Date: Mon, 12 Nov 2012 13:05:01 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 12, 2012 at 12:54 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-x=
-fce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
-> index f47a3bc..79af6a4 100644
-> --- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
-> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
-> @@ -1,7 +1,7 @@
->  DESCRIPTION =3D "Lightweight, desktop independent GTK+ archive manager"
->  HOMEPAGE =3D "http://xarchiver.sourceforge.net"
->  SECTION =3D "x11"
-> -PR =3D "r2"
-> +PR =3D "r3"
->
->  LICENSE =3D "GPLv2+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> @@ -14,4 +14,4 @@ SRC_URI[sha256sum] =3D "cea932ff9d505969201fd502470bbeb=
-bc5726ab3d6765e142fc8295aa6
->
->  inherit gettext pkgconfig autotools gtk-icon-cache
->
-> -RRECOMMENDS_${PN} =3D "lzop zip tar bzip2 unzip"
-> +RRECOMMENDS_${PN} =3D "lzop zip tar bzip2"
-> --
-> 1.7.6.5
->
-Damn - this one should not go in !!! Send V2..
+The following changes since commit ae2926ef202541014cde7c91a9ff75ed8b4eb390:
 
-Sorry
+  freerdp: Bump SRCREV to 1.0.2 snapshot of 2012-10-30 (2012-11-02 20:00:15 +0100)
 
-Andreas
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git bugfixes
+
+Andreas Müller (5):
+      lighttpd: move systemd appends since recipe is in oe-core
+      gvfs: fix build
+      gvfs-gdu-volume-monitor: fix build after oe-core's libexecdir transition
+      gnome-desktop: copy omf.make from ${STAGING_DATADIR_NATIVE} instead ${STAGING_DATADIR}
+      thunar: add xfce4-panel to dependencies to ensure trash-plugin (tpa) is build
+
+ .../gnome-desktop/gnome-desktop_2.32.1.bb          |    4 ++--
+ .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    6 ++++--
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |    3 ++-
+ .../lighttpd/lighttpd/lighttpd.service             |    0
+ .../lighttpd/lighttpd_1.4.31.bbappend              |    0
+ meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb      |    3 ++-
+ 6 files changed, 10 insertions(+), 6 deletions(-)
+ rename meta-systemd/{meta-oe => oe-core}/recipes-extended/lighttpd/lighttpd/lighttpd.service (100%)
+ rename meta-systemd/{meta-oe => oe-core}/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend (100%)
+
+-- 
+1.7.6.5
+
 
 
