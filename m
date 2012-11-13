@@ -1,32 +1,26 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@datenfreihafen.org>)
-	id 1TXzQt-0003kX-VN; Mon, 12 Nov 2012 20:12:32 +0100
-Received: from host-92-24-38-206.ppp.as43234.net ([92.24.38.206]
-	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.69 #1)
-	id 1TXyiE-0004OQ-4W by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Mon, 12 Nov 2012 19:26:24 +0100
-Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.80)
-	(envelope-from <stefan@novatech.datenfreihafen.org>)
-	id 1TXyi8-0001mZ-Re; Mon, 12 Nov 2012 18:26:16 +0000
-Date: Mon, 12 Nov 2012 18:26:16 +0000
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20121112182616.GB22235@novatech.datenfreihafen.org>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TYEJh-0004e4-IJ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Nov 2012 12:06:05 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 13 Nov 2012 02:52:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,765,1344236400"; d="scan'208";a="218870808"
+Received: from unknown (HELO helios.localnet) ([10.252.122.166])
+	by orsmga001.jf.intel.com with ESMTP; 13 Nov 2012 02:52:09 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Stefan Schmidt <stefan@datenfreihafen.org>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 13 Nov 2012 10:52:08 +0000
+Message-ID: <1929015.S4sbRGzyuA@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <20121112182616.GB22235@novatech.datenfreihafen.org>
 References: <12301427.Yf0uchSh3U@helios>
+	<20121112182616.GB22235@novatech.datenfreihafen.org>
 MIME-Version: 1.0
-In-Reply-To: <12301427.Yf0uchSh3U@helios>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [OE-core] OE-Classic recipe migration status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,40 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Nov 2012 19:12:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Nov 2012 11:06:05 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello.
-
-On Sun, 2012-11-11 at 19:11, Paul Eggleton wrote:
+On Monday 12 November 2012 18:26:16 Stefan Schmidt wrote:
+> On Sun, 2012-11-11 at 19:11, Paul Eggleton wrote:
+> >    1484 other
+> >     218 BSP
+> >     211 BugLabs
 > 
->    1484 other
->     218 BSP
->     211 BugLabs
+> I now longer work for BugLabs but  during my last months there I split
+> up our bunch of recipes according to what we think was sane at that
+> time. Think end of last year here.
+> 
+> The BSP layer can be found here:
+> https://github.com/buglabs/meta-bug
+> 
+> And BugLabs specific recipes here:
+> https://github.com/buglabs/meta-buglabs
+> 
+> All OpenJDK related stuff was going directly into upstream through
+> Tarent anyway. This should cover all stuff that was worth bringing
+> over.
 
-I now longer work for BugLabs but  during my last months there I split
-up our bunch of recipes according to what we think was sane at that
-time. Think end of last year here.
+OK, I've removed everything that is now in meta-bug/meta-buglabs and marked 
+everything else as obsolete. Thanks!
+ 
+> >      11 EFL
+> 
+> I think everything worth working with is in meta-efl in meta-oe.
+> Martin is doing a great job catching up with everything we do
+> upstream. If something is really missing it might now longer work or
+> is just not worth bringing over.
 
-The BSP layer can be found here:
-https://github.com/buglabs/meta-bug
+Martin, can you look over the EFL marked recipes and confirm this?
 
-And BugLabs specific recipes here:
-https://github.com/buglabs/meta-buglabs
+Thanks,
+Paul
 
-All OpenJDK related stuff was going directly into upstream through
-Tarent anyway. This should cover all stuff that was worth bringing
-over.
+-- 
 
->      11 EFL
-
-I think everything worth working with is in meta-efl in meta-oe.
-Martin is doing a great job catching up with everything we do
-upstream. If something is really missing it might now longer work or
-is just not worth bringing over.
-
-regards
-Stefan Schmidt
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
