@@ -1,24 +1,34 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TYdw6-0004v8-8f
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TYdyl-00056t-I9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Nov 2012 15:27:26 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 14 Nov 2012 06:13:29 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,250,1352102400"; d="scan'208";a="248971361"
-Received: from unknown (HELO helios.localnet) ([10.252.122.165])
-	by fmsmga002.fm.intel.com with ESMTP; 14 Nov 2012 06:13:28 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Date: Wed, 14 Nov 2012 14:13:27 +0000
-Message-ID: <1383108.LZ7QnazmmD@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
-In-Reply-To: <1352896618-26003-3-git-send-email-marcin.juszkiewicz@linaro.org>
+	Wed, 14 Nov 2012 15:30:11 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 8743BD22B8; Wed, 14 Nov 2012 15:16:23 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 561E6D2218;
+	Wed, 14 Nov 2012 15:16:01 +0100 (CET)
+Message-ID: <50A3A79D.1070000@linaro.org>
+Date: Wed, 14 Nov 2012 15:15:57 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121010 Thunderbird/16.0.1
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 References: <1352896618-26003-1-git-send-email-marcin.juszkiewicz@linaro.org>
 	<1352896618-26003-3-git-send-email-marcin.juszkiewicz@linaro.org>
-MIME-Version: 1.0
+	<1383108.LZ7QnazmmD@helios>
+In-Reply-To: <1383108.LZ7QnazmmD@helios>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 10/10] obex: move to meta-gnome due to libical
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -34,70 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2012 14:27:26 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 14 Nov 2012 14:30:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wednesday 14 November 2012 13:36:58 Marcin Juszkiewicz wrote:
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  .../recipes-connectivity/obex/obex-data-server_0.4.6.bb                   |
-> 0 {meta-oe => meta-gnome}/recipes-connectivity/obex/obexd_0.44.bb          
-> | 0 .../recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch    
->   | 0 .../obex/openobex-1.5/libusb_crosscompile_check.patch                
->     | 0 {meta-oe => meta-gnome}/recipes-connectivity/obex/openobex_1.5.bb  
->       | 0 5 files changed, 0 insertions(+), 0 deletions(-)
->  rename {meta-oe =>
-> meta-gnome}/recipes-connectivity/obex/obex-data-server_0.4.6.bb (100%)
-> rename {meta-oe => meta-gnome}/recipes-connectivity/obex/obexd_0.44.bb
-> (100%) rename {meta-oe =>
-> meta-gnome}/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> (100%) rename {meta-oe =>
-> meta-gnome}/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_chec
-> k.patch (100%) rename {meta-oe =>
-> meta-gnome}/recipes-connectivity/obex/openobex_1.5.bb (100%)
-> 
-> diff --git a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> b/meta-gnome/recipes-connectivity/obex/obex-data-server_0.4.6.bb similarity
-> index 100%
-> rename from meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> rename to meta-gnome/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> diff --git a/meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-> b/meta-gnome/recipes-connectivity/obex/obexd_0.44.bb similarity index 100%
-> rename from meta-oe/recipes-connectivity/obex/obexd_0.44.bb
-> rename to meta-gnome/recipes-connectivity/obex/obexd_0.44.bb
-> diff --git
-> a/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> b/meta-gnome/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patc
-> h similarity index 100%
-> rename from
-> meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> rename to
-> meta-gnome/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> diff --git
-> a/meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.
-> patch
-> b/meta-gnome/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_che
-> ck.patch similarity index 100%
-> rename from
-> meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.pa
-> tch rename to
-> meta-gnome/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check
-> .patch diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> b/meta-gnome/recipes-connectivity/obex/openobex_1.5.bb similarity index
-> 100%
-> rename from meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> rename to meta-gnome/recipes-connectivity/obex/openobex_1.5.bb
+W dniu 14.11.2012 15:13, Paul Eggleton pisze:
+> Only obexd actually depends on libical, why doees openobex have to move as 
+> well?
 
-Only obexd actually depends on libical, why doees openobex have to move as 
-well?
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ops, will fix it.
 
 
