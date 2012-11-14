@@ -1,34 +1,20 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TYb6t-0001U1-Aq for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Nov 2012 12:26:24 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TYatV-0005E3-Jj for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Nov 2012 12:12:33 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Nov 2012 12:12:33 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Nov 2012 12:12:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TYcKx-0004Ja-UF
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Nov 2012 13:45:01 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DA40CD2218;
+	Wed, 14 Nov 2012 13:31:11 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 14 Nov 2012 12:12:15 +0100
-Message-ID: <k7vuac$qmu$1@ger.gmane.org>
-References: <1352858852-5484-1-git-send-email-b40290@freescale.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <1352858852-5484-1-git-send-email-b40290@freescale.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-oe v2 ] inetutils : Update to 1.9.1
+Date: Wed, 14 Nov 2012 13:31:06 +0100
+Message-Id: <1352896266-24517-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.0
+Subject: [PATCH] packagegroup-cli-tools: remove mdbus2, mterm2, mkdump, mioctl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +28,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2012 11:26:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Nov 2012 12:45:01 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Missing or unbuildable dependency chain was: ['mdbus2']
+Missing or unbuildable dependency chain was: ['mterm2']
+Missing or unbuildable dependency chain was: ['mkdump']
+Missing or unbuildable dependency chain was: ['mioctl']
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-Op 14-11-12 03:07, Chunrong Guo schreef:
-> Signed-off-by: Chunrong Guo <b40290@freescale.com> --- 
-> .../inetutils/inetutils-1.8/fix-disable-ipv6.patch |   58 ----------- 
-> ...tf-parse-pull-in-features.h-for-__GLIBC__.patch |   27 ----- 
-> ...rgp-fix-program_invocation_name-detection.patch |   51 --------- 
-> .../inetutils-1.8/inetutils-1.8-0003-wchar.patch   |   12 -- 
-> ...me-ruserpass-to-avoid-C-library-collision.patch |   58 ----------- 
-> ...detect-__rcmd_errstr-support-in-the-C-lib.patch |   57 ---------- 
-> ...e-daemon-from-the-C-library-when-possible.patch |   42 -------- 
-> .../inetutils-1.8-1004-detect-fork-support.patch   |   54 ---------- 
-> ...-1.8-1005-ftpd-add-daemon-D-nommu-support.patch |  109
-> -------------------- .../disable-pre-ANSI-compilers.patch               |
-> 11 ++ .../inetutils/inetutils-1.9.1/remove-gets.patch    |   16 +++ 
-> .../inetutils/inetutils-1.9.1/version.patch        |   12 ++ 
-> .../inetutils/inetutils_1.8.bb                     |   65 ------------ 
-> .../inetutils/inetutils_1.9.1.bb                   |   61 +++++++++++
-
-Can you resend it as v3 with -M --find-copies-harder please?
-
-> +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7" + +PR = "r1"
-
-Why does the new recipe start at r1?
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQo3yPMkyGM64RGpERAgQVAJ0ZAlCicMWOILHHcClTMwD2FcEnQQCfdO3s
-eSJvnDDjOmoDL0+KaY1WWB8=
-=6sMi
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+index 07fb056..88b62b8 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+@@ -4,7 +4,7 @@ SECTION = "console"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+ PV = "1.0"
+-PR = "r20"
++PR = "r21"
+ 
+ inherit packagegroup allarch
+ 
+@@ -24,9 +24,7 @@ RDEPENDS_${PN} = "\
+   iptables \
+   lsof \
+   mbuffer \
+-  mdbus2 \
+   mtd-utils \
+-  mterm2 \
+   nano \
+   nfs-utils-client \
+   nmon \
+@@ -41,8 +39,6 @@ RDEPENDS_${PN}-debug = "\
+   devmem2 \
+   i2c-tools \
+   gdb \
+-  mkdump \
+-  mioctl \
+   procps \
+   pxaregs \
+   s3c24xx-gpio \
+-- 
+1.8.0
 
 
 
