@@ -1,25 +1,25 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TZ0Iu-0008Kx-La
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TZ1XI-0003V7-Nz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Nov 2012 15:20:28 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Thu, 15 Nov 2012
-	15:06:31 +0100
-X-TM-IMSS-Message-ID: <ed614887002047be@nedap.com>
-Received: from [10.17.24.8] ([10.17.24.8]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id ed614887002047be ;
-	Thu, 15 Nov 2012 15:06:23 +0100
-Message-ID: <50A4F6E6.9040507@nedap.com>
-Date: Thu, 15 Nov 2012 15:06:30 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Thu, 15 Nov 2012 16:39:24 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 15 Nov 2012 07:25:26 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,258,1352102400"; d="scan'208";a="242712572"
+Received: from unknown (HELO helios.localnet) ([10.252.122.197])
+	by orsmga002.jf.intel.com with ESMTP; 15 Nov 2012 07:25:25 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jaap de Jong <jaap.dejong@nedap.com>
+Date: Thu, 15 Nov 2012 15:25:24 +0000
+Message-ID: <1413640.UNPzzlppx2@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-32-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <50A4F6E6.9040507@nedap.com>
+References: <50A4F6E6.9040507@nedap.com>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: llvm issue
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: llvm issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 14:20:28 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Nov 2012 15:39:25 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi All,
+On Thursday 15 November 2012 15:06:30 Jaap de Jong wrote:
+> when I checkout openjdk-7 on meta-java and bitbake <anything> I get
+> these errors:
+> 
+> ERROR: Unable to parse
+> /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm
+> 2.9_2.9.bb
+> | ETA:  00:00:15
+> 
+> ERROR: Command execution failed: Exited with 1
+> NOTE: Error expanding variable populate_packages
+> NOTE: Error during finalise of
+> /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm
+> 2.8_2.8.bb NOTE: Error expanding variable populate_packages
+> NOTE: Error during finalise of
+> /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm
+> 2.9_2.9.bb
 
-when I checkout openjdk-7 on meta-java and bitbake <anything> I get 
-these errors:
+Are you using the denzil branch of OE-Core perhaps? I suspect meta-java has 
+been updated to use spaces for python function indentation which only works 
+with danny/master. I don't see a denzil branch in meta-java, perhaps it would 
+be worth adding one...?
 
-ERROR: Unable to parse 
-/data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.9_2.9.bb 
-| ETA:  00:00:15
-ERROR: Command execution failed: Exited with 1
-NOTE: Error expanding variable populate_packages
-NOTE: Error during finalise of 
-/data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.8_2.8.bb
-NOTE: Error expanding variable populate_packages
-NOTE: Error during finalise of 
-/data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.9_2.9.bb
+Cheers,
+Paul
 
-Anyone already know what is wrong here?
+-- 
 
-Cheers!
-Jaap
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
