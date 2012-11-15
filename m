@@ -1,32 +1,29 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TYy5X-0001t1-VA
+	(envelope-from <gary@mlbassoc.com>) id 1TYyIl-0002f5-9H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Nov 2012 12:58:37 +0100
-Received: by mail-bk0-f47.google.com with SMTP id jk7so626991bkc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2012 03:44:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=K7wLw7AoTa3BJfEk0vfpxGvd1pK5MDDuKfNKIXx39X4=;
-	b=ML4v9y/cJko7XNdBCKyotGBZ+jT/v+qfstYgqMmpnZ999KdNjBb3Jnz/ov7avOykG0
-	4SHGW/EJA+owXSmOkLQb4g8APqlrPUUy0+5leM6eddcRcDhY1C/8XkN2yYBBS59I93Bv
-	tJjX73Fgc8wXc5vRYC3TTAHWLwJQ3swSmnOSVo+4WboUAKXe7c2LPMtqVGb3Ywcv1mcd
-	6zRQvyAdi73XdT1jclnmG1ksOQ/6aLkGVMq2aD7Ec6BkbWuK0QUzlNbHuLnzYAI3BwzC
-	64nr9GAp8pk3XtgqfOFiiwRGZ0yYwyfgRo1R3Po1lnnTY4pJzyQjTBnQ9a3r8gWi9iCw
-	QJJw==
-Received: by 10.204.145.217 with SMTP id e25mr266407bkv.123.1352979874557;
-	Thu, 15 Nov 2012 03:44:34 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id ia2sm9964081bkc.11.2012.11.15.03.44.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 15 Nov 2012 03:44:33 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 15 Nov 2012 13:12:11 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 0122CF81225; Thu, 15 Nov 2012 04:58:15 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 3669DF81224;
+	Thu, 15 Nov 2012 04:58:14 -0700 (MST)
+Message-ID: <50A4D8E7.1000907@mlbassoc.com>
+Date: Thu, 15 Nov 2012 04:58:31 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Nov 2012 12:44:46 +0100
-Message-Id: <1352979886-24043-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-Subject: [meta-oe][PATCH] omgps: add patch to fix build with latest glib from oe-core
+References: <50A43F5A.7030806@mlbassoc.com>
+	<20121115070531.GP3928@jama.jama.net>
+In-Reply-To: <20121115070531.GP3928@jama.jama.net>
+Subject: Re: Unable to build python-pyqt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,165 +37,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 11:58:37 -0000
+X-List-Received-Date: Thu, 15 Nov 2012 12:12:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../omgps/omgps/fix.build.with.glib.2.34.patch     | 122 +++++++++++++++++++++
- meta-oe/recipes-navigation/omgps/omgps_svn.bb      |   2 +
- 2 files changed, 124 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
+On 2012-11-15 00:05, Martin Jansa wrote:
+> On Wed, Nov 14, 2012 at 06:03:22PM -0700, Gary Thomas wrote:
+>> I'm trying to build python-pyqt using the latest meta-openembedded
+>> alongside Poky/Yocto distribution.  It's failing with a slew of errors:
+>>
+>> | arm-poky-linux-gnueabi-g++  -march=armv7-a     -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9 --sysroot=/local/p82_new/tmp/sysroots/my_target -c -pipe -pipe -pipe
+>> -O2 -pipe -g -feliminate-unused-debug-types -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -fno-strict-aliasing -O2 -O2 -fPIC -fPIC -fPIC
+>> -Wall -W -Wall -W -Wall -W -D_REENTRANT -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/local/p82_new/tmp/sysroots/my_target/usr/share/qtopia/mkspecs/linux-g++ -I.
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtCore -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtGui
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia -I../../QtCore -I../../QtCore -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/Qt
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/python2.7 -I../qpy/QtCore -I../qpy/QtGui -I../qpy/QtDeclarative
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtCore -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtGui
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtDeclarative -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtWebKit
+>> -I/local/p82_new/tmp/sysroots/my_target/usr/include/qtopia/QtNetwork -I. -o qpycore_qabstracteventdispatcher.o qpycore_qabstracteventdispatcher.cpp
+>> | In file included from ../../QtCore/sipAPIQtCore.h:33:0,
+>> |                  from qpycore_sip.h:32,
+>> |                  from qpycore_qabstracteventdispatcher.cpp:30:
+>> | /local/p82_new/tmp/sysroots/my_target/usr/include/sip.h:983:29: error: expected unqualified-id before ';' token
+>> | /local/p82_new/tmp/sysroots/my_target/usr/include/sip.h:1202:52: error: expected ',' or '...' before 'new'
+>> | In file included from qpycore_sip.h:32:0,
+>> |                  from qpycore_qabstracteventdispatcher.cpp:30:
+>> | QtCore/sipAPIQtCore.h:8603:8: error: 'pyqt4ClassTypeDef' does not name a type
+>> | QtCore/sipAPIQtCore.h:8747:8: error: 'pyqt4ClassTypeDef' does not name a type
+>> | QtCore/sipAPIQtCore.h:8752:8: error: 'pyqt4ClassTypeDef' does not name a type
+>>           ...
+>> | qpycore_qabstracteventdispatcher.cpp: In function 'bool event_filter(void*)':
+>> | qpycore_qabstracteventdispatcher.cpp:98:5: error: 'SIP_BLOCK_THREADS' was not declared in this scope
+>> | qpycore_qabstracteventdispatcher.cpp:104:5: error: expected ';' before 'PyObject'
+>> | qpycore_qabstracteventdispatcher.cpp:107:9: error: 'msg_obj' was not declared in this scope
+>> | qpycore_qabstracteventdispatcher.cpp:137:5: error: 'SIP_UNBLOCK_THREADS' was not declared in this scope
+>> | qpycore_qabstracteventdispatcher.cpp:139:5: error: expected ';' before 'return'
+>>
+>> This is using the meta-oe/recipes-devtools/python/python-pyqt_4.9.5.bb
+>> Poky/Yocto master 1fd9a16d2
+>>
+>> I assume that this package built at the time of the last patch:
+>
+> Yes it did and still does here (4 different hosts) for both qt 4.8.1 and 4.8.3.
 
-diff --git a/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
-new file mode 100644
-index 0000000..e953663
---- /dev/null
-+++ b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
-@@ -0,0 +1,122 @@
-+diff -uNr omgps.orig/src/dbus_intf.c omgps/src/dbus_intf.c
-+--- omgps.orig/src/dbus_intf.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/dbus_intf.c	2012-11-14 14:44:45.435381443 +0100
-+@@ -171,7 +171,7 @@
-+ 	gpsdata->svinfo_valid = TRUE;
-+ 
-+ 	int i, j;
-+-	GValueArray *val;
-++	GArray *val;
-+ 	svinfo_channel_t *sv;
-+ 
-+ 	j = 0;
-+@@ -179,16 +179,16 @@
-+ 		val = satellites->pdata[i];
-+ 
-+ 		sv = &gpsdata->sv_channels[j];
-+-		sv->sv_id = g_value_get_uint(g_value_array_get_nth(val, 0));
-++		sv->sv_id = g_array_index(val, guint, 0);
-+ 
-+-		if (g_value_get_boolean(g_value_array_get_nth(val, 1))) {
-++		if (g_array_index(val, gboolean, 1)) {
-+ 			++gpsdata->sv_in_use;
-+ 			sv->flags = 0x01;
-+ 		}
-+ 
-+-		sv->elevation = (int)g_value_get_uint(g_value_array_get_nth(val, 2));
-+-		sv->azimuth = (int)g_value_get_uint(g_value_array_get_nth(val, 3));
-+-		sv->cno = g_value_get_uint(g_value_array_get_nth(val, 4));
-++		sv->elevation = (int)g_array_index(val, guint, 2);
-++		sv->azimuth = (int)g_array_index(val, guint, 3);
-++		sv->cno = g_array_index(val, guint, 4);
-+ 		if (sv->cno > 0)
-+ 			++gpsdata->sv_get_signal;
-+ 
-+diff -uNr omgps.orig/src/main.c omgps/src/main.c
-+--- omgps.orig/src/main.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/main.c	2012-11-14 14:46:00.345402222 +0100
-+@@ -489,9 +489,6 @@
-+ 
-+ 	g_type_init();
-+ 
-+-	if (! g_thread_supported ())
-+-		g_thread_init(NULL);
-+-
-+ 	gdk_threads_init();
-+ 
-+ 	gdk_threads_enter();
-+diff -uNr omgps.orig/src/tab_gpscfg.c omgps/src/tab_gpscfg.c
-+--- omgps.orig/src/tab_gpscfg.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/tab_gpscfg.c	2012-11-14 15:23:47.526925258 +0100
-+@@ -222,7 +222,7 @@
-+ 
-+ static gboolean change_platform_model_cmd(void *model_id)
-+ {
-+-	U1 model = (U1)(int) model_id;
-++	U1 model = (U1)GPOINTER_TO_INT(model_id);
-+ 	int gps_dev_fd = 0;
-+ 
-+ 	/* non ubx means: we need open serial port
-+@@ -269,7 +269,7 @@
-+ static void change_platmodel_button_clicked(GtkWidget *widget, gpointer data)
-+ {
-+ 	int idx = gtk_combo_box_get_active(GTK_COMBO_BOX(platmodel_list));
-+-	char *model_id = (void *)(int)platmodel_values[idx];
-++	void *model_id = (void *)GINT_TO_POINTER(platmodel_values[idx]);
-+ 
-+ 	if (POLL_ENGINE_TEST(UBX)) {
-+ 		gtk_widget_set_sensitive(change_platmodel_button, FALSE);
-+diff -uNr omgps.orig/src/tab_menu.c omgps/src/tab_menu.c
-+--- omgps.orig/src/tab_menu.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/tab_menu.c	2012-11-14 15:25:08.217941513 +0100
-+@@ -65,7 +65,7 @@
-+ 
-+ static void poll_button_clicked(GtkWidget *widget, gpointer data)
-+ {
-+-	gboolean is_start_bt = (gboolean)data;
-++	gboolean is_start_bt = (gboolean) GPOINTER_TO_INT(data);
-+ 
-+ 	if (POLL_STATE_TEST(RUNNING) == is_start_bt)
-+ 		return;
-+diff -uNr omgps.orig/src/tab_tile.c omgps/src/tab_tile.c
-+--- omgps.orig/src/tab_tile.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/tab_tile.c	2012-11-14 15:25:30.392945800 +0100
-+@@ -101,7 +101,7 @@
-+ static gboolean set_bg_map(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
-+ {
-+ 	map_repo_t *repo;
-+-	gboolean clear = (gboolean)data;
-++	gboolean clear = (gboolean)GPOINTER_TO_INT(data);
-+ 
-+ 	int type;
-+ 
-+@@ -240,7 +240,7 @@
-+ 
-+ static void alpha_radio_toggled (GtkWidget *widget, gpointer user_data)
-+ {
-+-	int idx = (int)user_data;
-++	int idx = (int)GPOINTER_TO_INT(user_data);
-+ 
-+ 	if (g_view.bg_alpha_idx == idx)
-+ 		return;
-+@@ -384,7 +384,7 @@
-+ 
-+ 	for (i=0; i<ALPHA_LEVELS; i++) {
-+ 		g_signal_connect (G_OBJECT (alpha_radios[i]), "toggled",
-+-			G_CALLBACK (alpha_radio_toggled), (gpointer)i);
-++			G_CALLBACK (alpha_radio_toggled), GINT_TO_POINTER(i));
-+ 		gtk_container_add(GTK_CONTAINER (alpha_hbox), alpha_radios[i]);
-+ 	}
-+ 
-+diff -uNr omgps.orig/src/tab_view.c omgps/src/tab_view.c
-+--- omgps.orig/src/tab_view.c	2011-12-12 12:22:47.000000000 +0100
-++++ omgps/src/tab_view.c	2012-11-14 15:25:47.018949453 +0100
-+@@ -534,7 +534,7 @@
-+ 
-+ static void* change_zoom_routine(void *args)
-+ {
-+-	gboolean is_zoom_in = (gboolean)args;
-++	gboolean is_zoom_in = (gboolean)GPOINTER_TO_INT(args);
-+ 	stop = FALSE;
-+ 
-+ 	int hi = (is_zoom_in)?
-diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-index 59fd9b0..0d788b6 100644
---- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-+++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- DEPENDS = "gtk+ python-pygobject dbus-glib"
- SRCREV = "109"
- PV = "0.1+svnr${SRCPV}"
-+PR = "r1"
- S = "${WORKDIR}/${PN}"
- 
- do_configure_prepend() {
-@@ -18,6 +19,7 @@ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
-            file://sysfs.node.2.6.32.patch \
-            file://fix.capability.patch \
-            file://use.unused.variable.patch \
-+           file://fix.build.with.glib.2.34.patch \
- "
- 
- inherit autotools
+What distribution layers are you using?
+What's your target?
+What compiler are you using (currently I'm at 4.7.2-r13)?
+
+I had troubles with sip-native:
+   ERROR: Fetcher failure: Fetch command failed with exit code 8, output:
+   http://www.riverbankcomputing.com/static/Downloads/sip4/sip-4.13.3.tar.gz:
+   2012-11-15 04:53:17 ERROR 404: Not Found.
+How do you get around this?
+
+I'd like to duplicate what you've done so I can figure out what's wrong.
+
+>
+>>     commit 00fe75fb5773cf5602a20a50ed299ed287dd6ebd
+>>     Author: Martin Jansa <Martin.Jansa@gmail.com>
+>>     Date:   Thu Oct 25 00:25:53 2012 +0200
+>>
+>>       python-pyqt: don't bypass sstate with sip files
+>>
+>>       * discovered with http://patchwork.openembedded.org/patch/38521/
+>>
+>>       Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>
+>> What might I be doing wrong that's breaking the build?
+>
+> I would check what's on those lines and is missing in your build
+> | /local/p82_new/tmp/sysroots/my_target/usr/include/sip.h:983:29:
+> error: expected unqualified-id before ';' token
+> | /local/p82_new/tmp/sysroots/my_target/usr/include/sip.h:1202:52:
+> error: expected ',' or '...' before 'new'
+
+Thanks
+
 -- 
-1.8.0
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
