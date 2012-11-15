@@ -1,45 +1,32 @@
-Received: from am1ehsobe001.messaging.microsoft.com ([213.199.154.204]
-	helo=am1outboundpool.messaging.microsoft.com)
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B40290@freescale.com>) id 1TYx3X-0007E9-QW
+	(envelope-from <martin.jansa@gmail.com>) id 1TYy5X-0001t1-VA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Nov 2012 11:52:25 +0100
-Received: from mail59-am1-R.bigfish.com (10.3.201.230) by
-	AM1EHSOBE008.bigfish.com (10.3.204.28) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 15 Nov 2012 10:38:26 +0000
-Received: from mail59-am1 (localhost [127.0.0.1])	by mail59-am1-R.bigfish.com
-	(Postfix) with ESMTP id D9E2820266	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2012 10:38:26 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 19
-X-BigFish: VS19(z1091v37d5kcb8kz936eId772hzz1de0h1202h1d1ah1d2ahzz17326ah8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1155h)
-Received: from mail59-am1 (localhost.localdomain [127.0.0.1]) by mail59-am1
-	(MessageSwitch) id 1352975903896202_3205;
-	Thu, 15 Nov 2012 10:38:23 +0000 (UTC)
-Received: from AM1EHSMHS017.bigfish.com (unknown [10.3.201.234])	by
-	mail59-am1.bigfish.com (Postfix) with ESMTP id D89A4240058	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Nov 2012 10:38:23 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS017.bigfish.com
-	(10.3.207.155) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 15 Nov 2012 10:38:19 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Thu, 15 Nov 2012 10:38:17 +0000
-Received: from localhost.localdomain (guo-desktop.ap.freescale.net
-	[10.192.208.249])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id qAFAcESL028347;	Thu, 15 Nov 2012 03:38:15 -0700
-From: Chunrong Guo <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Nov 2012 18:38:16 +0800
-Message-ID: <1352975896-14628-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: B29882@freescale.com, B19537@freescale.com
-Subject: [meta-oe v4 ] inetutils : Update to 1.9.1 * There are difference spaces between inetutils-1.8/COPYING and inetutils-1.9.1/COPYING, so md5sum is changed.6
+	Thu, 15 Nov 2012 12:58:37 +0100
+Received: by mail-bk0-f47.google.com with SMTP id jk7so626991bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Nov 2012 03:44:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=K7wLw7AoTa3BJfEk0vfpxGvd1pK5MDDuKfNKIXx39X4=;
+	b=ML4v9y/cJko7XNdBCKyotGBZ+jT/v+qfstYgqMmpnZ999KdNjBb3Jnz/ov7avOykG0
+	4SHGW/EJA+owXSmOkLQb4g8APqlrPUUy0+5leM6eddcRcDhY1C/8XkN2yYBBS59I93Bv
+	tJjX73Fgc8wXc5vRYC3TTAHWLwJQ3swSmnOSVo+4WboUAKXe7c2LPMtqVGb3Ywcv1mcd
+	6zRQvyAdi73XdT1jclnmG1ksOQ/6aLkGVMq2aD7Ec6BkbWuK0QUzlNbHuLnzYAI3BwzC
+	64nr9GAp8pk3XtgqfOFiiwRGZ0yYwyfgRo1R3Po1lnnTY4pJzyQjTBnQ9a3r8gWi9iCw
+	QJJw==
+Received: by 10.204.145.217 with SMTP id e25mr266407bkv.123.1352979874557;
+	Thu, 15 Nov 2012 03:44:34 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id ia2sm9964081bkc.11.2012.11.15.03.44.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 15 Nov 2012 03:44:33 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Nov 2012 12:44:46 +0100
+Message-Id: <1352979886-24043-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+Subject: [meta-oe][PATCH] omgps: add patch to fix build with latest glib from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,657 +40,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 10:52:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 15 Nov 2012 11:58:37 -0000
 
-Signed-off-by: Chunrong Guo <b40290@freescale.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../disable-pre-ANSI-compilers.patch               |   11 ++
- .../inetutils/inetutils-1.9.1/remove-gets.patch    |   16 +++
- .../inetutils/inetutils-1.9.1/version.patch        |   12 ++
- .../inetutils/inetutils_1.9.1.bb                   |   19 ++--
- .../inetutils/inetutils-1.8/fix-disable-ipv6.patch |   58 -----------
- ...tf-parse-pull-in-features.h-for-__GLIBC__.patch |   27 -----
- ...rgp-fix-program_invocation_name-detection.patch |   51 ---------
- .../inetutils-1.8/inetutils-1.8-0003-wchar.patch   |   12 --
- ...me-ruserpass-to-avoid-C-library-collision.patch |   58 -----------
- ...detect-__rcmd_errstr-support-in-the-C-lib.patch |   57 ----------
- ...e-daemon-from-the-C-library-when-possible.patch |   42 --------
- .../inetutils-1.8-1004-detect-fork-support.patch   |   54 ----------
- ...-1.8-1005-ftpd-add-daemon-D-nommu-support.patch |  109 --------------------
- 13 files changed, 46 insertions(+), 480 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
- create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
- create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch
- rename meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb => meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb (68%)
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/fix-disable-ipv6.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0003-wchar.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1004-detect-fork-support.patch
- delete mode 100644 meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch
+ .../omgps/omgps/fix.build.with.glib.2.34.patch     | 122 +++++++++++++++++++++
+ meta-oe/recipes-navigation/omgps/omgps_svn.bb      |   2 +
+ 2 files changed, 124 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
+diff --git a/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
 new file mode 100644
-index 0000000..b200e58
+index 0000000..e953663
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
-@@ -0,0 +1,11 @@
-+--- inetutils-1.9.1/configure.ac	2012-01-06 22:05:05.000000000 +0800
-++++ inetutils-1.9.1/configure.ac	2012-11-12 14:05:30.756957063 +0800
-+@@ -586,7 +586,7 @@
-+ 		  #include <arpa/tftp.h>])
++++ b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.glib.2.34.patch
+@@ -0,0 +1,122 @@
++diff -uNr omgps.orig/src/dbus_intf.c omgps/src/dbus_intf.c
++--- omgps.orig/src/dbus_intf.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/dbus_intf.c	2012-11-14 14:44:45.435381443 +0100
++@@ -171,7 +171,7 @@
++ 	gpsdata->svinfo_valid = TRUE;
 + 
-+ ### Checks for compiler characteristics.
-+-AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
-++#AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
-+ AC_C_CONST
++ 	int i, j;
++-	GValueArray *val;
+++	GArray *val;
++ 	svinfo_channel_t *sv;
 + 
-+ dnl See if `weak refs' are possible; these make it possible (with shared
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
-new file mode 100644
-index 0000000..92abef1
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
-@@ -0,0 +1,16 @@
-+--- inetutils-1.9.1.org/lib/stdio.in.h	2012-01-06 22:11:13.000000000 +0800
-++++ inetutils-1.9.1/lib/stdio.in.h	2012-11-12 14:30:49.044958001 +0800
-+@@ -715,9 +715,13 @@
-+ /* It is very rare that the developer ever has full control of stdin,
-+    so any use of gets warrants an unconditional warning.  Assume it is
-+    always declared, since it is required by C89.  */
-++#if defined gets
-++#undef gets
-+ _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
-+ #endif
++ 	j = 0;
++@@ -179,16 +179,16 @@
++ 		val = satellites->pdata[i];
 + 
-++#endif
-++
++ 		sv = &gpsdata->sv_channels[j];
++-		sv->sv_id = g_value_get_uint(g_value_array_get_nth(val, 0));
+++		sv->sv_id = g_array_index(val, guint, 0);
 + 
-+ #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
-+ struct obstack;
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch
-new file mode 100644
-index 0000000..6eefcf4
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch
-@@ -0,0 +1,12 @@
-+--- inetutils-1.9.1/configure.ac	2012-01-06 22:05:05.000000000 +0800
-++++ inetutils-1.9.1/configure.ac	2012-11-12 14:01:11.732957019 +0800
-+@@ -20,8 +20,7 @@
++-		if (g_value_get_boolean(g_value_array_get_nth(val, 1))) {
+++		if (g_array_index(val, gboolean, 1)) {
++ 			++gpsdata->sv_in_use;
++ 			sv->flags = 0x01;
++ 		}
 + 
-+ AC_PREREQ(2.59)
++-		sv->elevation = (int)g_value_get_uint(g_value_array_get_nth(val, 2));
++-		sv->azimuth = (int)g_value_get_uint(g_value_array_get_nth(val, 3));
++-		sv->cno = g_value_get_uint(g_value_array_get_nth(val, 4));
+++		sv->elevation = (int)g_array_index(val, guint, 2);
+++		sv->azimuth = (int)g_array_index(val, guint, 3);
+++		sv->cno = g_array_index(val, guint, 4);
++ 		if (sv->cno > 0)
++ 			++gpsdata->sv_get_signal;
 + 
-+-AC_INIT([GNU inetutils],
-+- m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
-++AC_INIT([GNU inetutils],[1.9.1],
-+  [bug-inetutils@gnu.org])
++diff -uNr omgps.orig/src/main.c omgps/src/main.c
++--- omgps.orig/src/main.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/main.c	2012-11-14 14:46:00.345402222 +0100
++@@ -489,9 +489,6 @@
 + 
-+ AC_CONFIG_SRCDIR([src/inetd.c])
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-similarity index 68%
-rename from meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb
-rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-index ce0df82..03b7af1 100644
---- a/meta-oe/recipes-connectivity/inetutils/inetutils_1.8.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-@@ -6,21 +6,16 @@ SECTION = "libs"
- DEPENDS = "ncurses"
- LICENSE = "GPLv3"
++ 	g_type_init();
++ 
++-	if (! g_thread_supported ())
++-		g_thread_init(NULL);
++-
++ 	gdk_threads_init();
++ 
++ 	gdk_threads_enter();
++diff -uNr omgps.orig/src/tab_gpscfg.c omgps/src/tab_gpscfg.c
++--- omgps.orig/src/tab_gpscfg.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/tab_gpscfg.c	2012-11-14 15:23:47.526925258 +0100
++@@ -222,7 +222,7 @@
++ 
++ static gboolean change_platform_model_cmd(void *model_id)
++ {
++-	U1 model = (U1)(int) model_id;
+++	U1 model = (U1)GPOINTER_TO_INT(model_id);
++ 	int gps_dev_fd = 0;
++ 
++ 	/* non ubx means: we need open serial port
++@@ -269,7 +269,7 @@
++ static void change_platmodel_button_clicked(GtkWidget *widget, gpointer data)
++ {
++ 	int idx = gtk_combo_box_get_active(GTK_COMBO_BOX(platmodel_list));
++-	char *model_id = (void *)(int)platmodel_values[idx];
+++	void *model_id = (void *)GINT_TO_POINTER(platmodel_values[idx]);
++ 
++ 	if (POLL_ENGINE_TEST(UBX)) {
++ 		gtk_widget_set_sensitive(change_platmodel_button, FALSE);
++diff -uNr omgps.orig/src/tab_menu.c omgps/src/tab_menu.c
++--- omgps.orig/src/tab_menu.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/tab_menu.c	2012-11-14 15:25:08.217941513 +0100
++@@ -65,7 +65,7 @@
++ 
++ static void poll_button_clicked(GtkWidget *widget, gpointer data)
++ {
++-	gboolean is_start_bt = (gboolean)data;
+++	gboolean is_start_bt = (gboolean) GPOINTER_TO_INT(data);
++ 
++ 	if (POLL_STATE_TEST(RUNNING) == is_start_bt)
++ 		return;
++diff -uNr omgps.orig/src/tab_tile.c omgps/src/tab_tile.c
++--- omgps.orig/src/tab_tile.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/tab_tile.c	2012-11-14 15:25:30.392945800 +0100
++@@ -101,7 +101,7 @@
++ static gboolean set_bg_map(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
++ {
++ 	map_repo_t *repo;
++-	gboolean clear = (gboolean)data;
+++	gboolean clear = (gboolean)GPOINTER_TO_INT(data);
++ 
++ 	int type;
++ 
++@@ -240,7 +240,7 @@
++ 
++ static void alpha_radio_toggled (GtkWidget *widget, gpointer user_data)
++ {
++-	int idx = (int)user_data;
+++	int idx = (int)GPOINTER_TO_INT(user_data);
++ 
++ 	if (g_view.bg_alpha_idx == idx)
++ 		return;
++@@ -384,7 +384,7 @@
++ 
++ 	for (i=0; i<ALPHA_LEVELS; i++) {
++ 		g_signal_connect (G_OBJECT (alpha_radios[i]), "toggled",
++-			G_CALLBACK (alpha_radio_toggled), (gpointer)i);
+++			G_CALLBACK (alpha_radio_toggled), GINT_TO_POINTER(i));
++ 		gtk_container_add(GTK_CONTAINER (alpha_hbox), alpha_radios[i]);
++ 	}
++ 
++diff -uNr omgps.orig/src/tab_view.c omgps/src/tab_view.c
++--- omgps.orig/src/tab_view.c	2011-12-12 12:22:47.000000000 +0100
+++++ omgps/src/tab_view.c	2012-11-14 15:25:47.018949453 +0100
++@@ -534,7 +534,7 @@
++ 
++ static void* change_zoom_routine(void *args)
++ {
++-	gboolean is_zoom_in = (gboolean)args;
+++	gboolean is_zoom_in = (gboolean)GPOINTER_TO_INT(args);
++ 	stop = FALSE;
++ 
++ 	int hi = (is_zoom_in)?
+diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+index 59fd9b0..0d788b6 100644
+--- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
++++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ DEPENDS = "gtk+ python-pygobject dbus-glib"
+ SRCREV = "109"
+ PV = "0.1+svnr${SRCPV}"
++PR = "r1"
+ S = "${WORKDIR}/${PN}"
  
--LIC_FILES_CHKSUM = "file://COPYING;md5=adefda309052235aa5d1e99ce7557010"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
-+
+ do_configure_prepend() {
+@@ -18,6 +19,7 @@ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
+            file://sysfs.node.2.6.32.patch \
+            file://fix.capability.patch \
+            file://use.unused.variable.patch \
++           file://fix.build.with.glib.2.34.patch \
+ "
  
- SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
--           file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
--           file://inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch \
--           file://inetutils-1.8-0003-wchar.patch \
--           file://inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch \
--           file://inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch \
--           file://inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch \
--           file://inetutils-1.8-1004-detect-fork-support.patch \
--           file://inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch \
--           file://fix-disable-ipv6.patch \
-+           file://disable-pre-ANSI-compilers.patch \
-+           file://version.patch \
-+           file://remove-gets.patch \
- " 
--SRC_URI[md5sum] = "ad8fdcdf1797b9ca258264a6b04e48fd"
--SRC_URI[sha256sum] = "c8500baee04b9ea408c9e65e24ad7f5b41e7d96d42fb1d29abf25b52b68311c7"
-+SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
-+SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad79ff2b"
- 
- inherit autotools gettext
- 
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/fix-disable-ipv6.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/fix-disable-ipv6.patch
-deleted file mode 100644
-index 75d51a1..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/fix-disable-ipv6.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--Upstream: http://www.mail-archive.com/bug-inetutils@gnu.org/msg02103.html
--
--diff -ur inetutils-1.8.orig/ping/ping_common.h inetutils-1.8/ping/ping_common.h
----- inetutils-1.8.orig/ping/ping_common.h	2010-05-15 20:55:47.000000000 +0930
--+++ inetutils-1.8/ping/ping_common.h	2010-12-01 12:19:08.000000000 +1030
--@@ -17,10 +17,14 @@
--   You should have received a copy of the GNU General Public License
--   along with this program.  If not, see `http://www.gnu.org/licenses/'. */
-- 
--+#include <config.h>
--+
-- #include <netinet/in_systm.h>
-- #include <netinet/in.h>
-- #include <netinet/ip.h>
--+#ifdef HAVE_IPV6
-- #include <netinet/icmp6.h>
--+#endif
-- #include <icmp.h>
-- #include <error.h>
-- #include <progname.h>
--@@ -66,13 +70,19 @@
--   (t).tv_usec = ((i)%PING_PRECISION)*(1000000/PING_PRECISION) ;\
-- } while (0)
-- 
--+#ifdef HAVE_IPV6
-- /* Not sure about this step*/
-- #define _PING_BUFLEN(p, USE_IPV6) ((USE_IPV6)? ((p)->ping_datalen + sizeof (struct icmp6_hdr)) : \
-- 				   ((p)->ping_datalen + sizeof (icmphdr_t)))
--+#else
--+#define _PING_BUFLEN(p, USE_IPV6) ((p)->ping_datalen + sizeof (icmphdr_t))
--+#endif
-- 
--+#ifdef HAVE_IPV6
-- typedef int (*ping_efp6) (int code, void *closure, struct sockaddr_in6 * dest,
-- 			  struct sockaddr_in6 * from, struct icmp6_hdr * icmp,
-- 			  int datalen);
--+#endif
-- 
-- typedef int (*ping_efp) (int code,
-- 			 void *closure,
--@@ -81,13 +91,17 @@
-- 			 struct ip * ip, icmphdr_t * icmp, int datalen);
-- 
-- union event {
--+#ifdef HAVE_IPV6
--   ping_efp6 handler6;
--+#endif
--   ping_efp handler;
-- };
-- 
-- union ping_address {
--   struct sockaddr_in ping_sockaddr;
--+#ifdef HAVE_IPV6
--   struct sockaddr_in6 ping_sockaddr6;
--+#endif
-- };
-- 
-- typedef struct ping_data PING;
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-deleted file mode 100644
-index d328f13..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From 552a7d64ad4a7188a9b7cd89933ae7caf7ebfe90 Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 16:59:14 -0500
--Subject: [PATCH gnulib] printf-parse: pull in features.h for __GLIBC__
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- lib/printf-parse.h |    3 +++
-- 1 files changed, 3 insertions(+), 0 deletions(-)
--
--diff --git a/lib/printf-parse.h b/lib/printf-parse.h
--index 67a4a2a..3bd6152 100644
----- a/lib/printf-parse.h
--+++ b/lib/printf-parse.h
--@@ -25,6 +25,9 @@
-- 
-- #include "printf-args.h"
-- 
--+#ifdef HAVE_FEATURES_H
--+# include <features.h>	/* for __GLIBC__ */
--+#endif
-- 
-- /* Flags */
-- #define FLAG_GROUP       1      /* ' flag */
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch
-deleted file mode 100644
-index 6861f21..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From 93dbd3319232613ff8f5f3f08bf5f57b21980ef1 Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 17:14:21 -0500
--Subject: [PATCH gnulib] argp: fix program_invocation_name detection
--
--The current program_invocation_name symbol detection fails if the argp.h
--header is missing.  So check for the header first before detecting if the
--symbol exists.
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- m4/argp.m4 |   15 +++++++++++++--
-- 1 files changed, 13 insertions(+), 2 deletions(-)
--
--diff --git a/m4/argp.m4 b/m4/argp.m4
--index d3ca5ba..efa562c 100644
----- a/m4/argp.m4
--+++ b/m4/argp.m4
--@@ -31,8 +31,14 @@ AC_DEFUN([gl_ARGP],
--   # are defined elsewhere. It is improbable that only one of them will
--   # be defined and other not, I prefer to stay on the safe side and to
--   # test each one separately.
--+  AC_CHECK_HEADERS_ONCE([argp.h])
--   AC_MSG_CHECKING([whether program_invocation_name is defined])
---  AC_TRY_LINK([#include <argp.h>],
--+  AC_TRY_LINK([
--+#include <errno.h>
--+#ifdef HAVE_ARGP_H
--+# include <argp.h>
--+#endif
--+],
--               [ program_invocation_name = "test"; ],
--               [ AC_DEFINE([HAVE_PROGRAM_INVOCATION_NAME], [1],
--                  [Define if program_invocation_name is defined])
--@@ -40,7 +46,12 @@ AC_DEFUN([gl_ARGP],
--               [ AC_MSG_RESULT([no])] )
-- 
--   AC_MSG_CHECKING([whether program_invocation_short_name is defined])
---  AC_TRY_LINK([#include <argp.h>],
--+  AC_TRY_LINK([
--+#include <errno.h>
--+#ifdef HAVE_ARGP_H
--+# include <argp.h>
--+#endif
--+],
--               [ program_invocation_short_name = "test"; ],
--               [ AC_DEFINE([HAVE_PROGRAM_INVOCATION_SHORT_NAME], [1],
--                  [Define if program_invocation_short_name is defined])
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0003-wchar.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0003-wchar.patch
-deleted file mode 100644
-index 21635a7..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-0003-wchar.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
----- inetutils-1.8/lib/wchar.in.h
--+++ inetutils-1.8/lib/wchar.in.h
--@@ -70,6 +70,9 @@
-- /* The include_next requires a split double-inclusion guard.  */
-- #if @HAVE_WCHAR_H@
-- # @INCLUDE_NEXT@ @NEXT_WCHAR_H@
--+#else
--+# include <stddef.h>
--+# define MB_CUR_MAX 1
-- #endif
-- 
-- #undef _GL_ALREADY_INCLUDING_WCHAR_H
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch
-deleted file mode 100644
-index a6e366d..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--From 4f890adb39b52bc43c578966071625004988e3b8 Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 22:11:48 -0500
--Subject: [PATCH] ftp: rename ruserpass to avoid C library collision
--
--The C library itself defines a "ruserpass" function.  When linking
--statically, it is possible to hit a symbol collision linker error.
--So rename the local ftp version to "remote_userpass".
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- ftp/extern.h    |    2 +-
-- ftp/ftp.c       |    2 +-
-- ftp/ruserpass.c |    2 +-
-- 3 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/ftp/extern.h b/ftp/extern.h
--index 8cdb8aa..037cb61 100644
----- a/ftp/extern.h
--+++ b/ftp/extern.h
--@@ -119,7 +119,7 @@ void reset (int, char **);
-- void restart (int, char **);
-- void rmthelp (int, char **);
-- void rmtstatus (int, char **);
---int ruserpass (char *, char **, char **, char **);
--+int remote_userpass (char *, char **, char **, char **);
-- void sendrequest (char *, char *, char *, int);
-- void setascii (int, char **);
-- void setbell (int, char **);
--diff --git a/ftp/ftp.c b/ftp/ftp.c
--index c20ba41..95675cc 100644
----- a/ftp/ftp.c
--+++ b/ftp/ftp.c
--@@ -251,7 +251,7 @@ login (char *host)
--   int n, aflag = 0;
-- 
--   user = pass = acct = 0;
---  if (ruserpass (host, &user, &pass, &acct) < 0)
--+  if (remote_userpass (host, &user, &pass, &acct) < 0)
--     {
--       code = -1;
--       return (0);
--diff --git a/ftp/ruserpass.c b/ftp/ruserpass.c
--index 8572b95..c08fbc0 100644
----- a/ftp/ruserpass.c
--+++ b/ftp/ruserpass.c
--@@ -111,7 +111,7 @@ static struct toktab
-- };
-- 
-- int
---ruserpass (char *host, char **aname, char **apass, char **aacct)
--+remote_userpass (char *host, char **aname, char **apass, char **aacct)
-- {
--   char *hdir, buf[BUFSIZ], *tmp;
--   char *myname = 0, *mydomain;
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch
-deleted file mode 100644
-index 7708c40..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch
-+++ /dev/null
-@@ -1,57 +0,0 @@
--From 730015f060fe76eee615f361a65eb719cdf22eef Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 22:20:39 -0500
--Subject: [PATCH] rshd: detect __rcmd_errstr support in the C lib
--
--Not all C libraries support __rcmd_errstr, so add a configure test for it.
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- configure.ac |    2 +-
-- src/rshd.c   |    4 ++++
-- 2 files changed, 5 insertions(+), 1 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index c1ac270..79d655c 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -587,7 +587,7 @@ AC_CHECK_FUNCS(cfsetspeed cgetent dirfd fchdir flock \
--                setsid setregid setreuid setresgid setresuid setutent_r \
--                sigaction sigvec strchr setproctitle tcgetattr tzset utimes \
--                utime uname \
---               updwtmp updwtmpx vhangup wait3 wait4 opendir2)
--+               updwtmp updwtmpx vhangup wait3 wait4 opendir2 __rcmd_errstr)
-- 
-- dnl Functions that we will define if necessary.
-- AC_REPLACE_FUNCS(getpass getusershell memcmp memcpy memmove memset \
--diff --git a/src/rshd.c b/src/rshd.c
--index d49facd..9301ef2 100644
----- a/src/rshd.c
--+++ b/src/rshd.c
--@@ -284,7 +284,9 @@ extern char **environ;
-- void
-- doit (int sockfd, struct sockaddr_in *fromp)
-- {
--+#ifdef HAVE___RCMD_ERRSTR
--   extern char *__rcmd_errstr;	/* syslog hook from libc/net/rcmd.c. */
--+#endif
--   struct hostent *hp;
--   struct passwd *pwd;
--   u_short port;
--@@ -757,11 +759,13 @@ doit (int sockfd, struct sockaddr_in *fromp)
--                      && (iruserok (fromp->sin_addr.s_addr, pwd->pw_uid == 0,
--                                    remuser, locuser)) < 0))
--     {
--+#ifdef HAVE___RCMD_ERRSTR
--       if (__rcmd_errstr)
-- 	syslog (LOG_INFO | LOG_AUTH,
-- 		"%s@%s as %s: permission denied (%s). cmd='%.80s'",
-- 		remuser, hostname, locuser, __rcmd_errstr, cmdbuf);
--       else
--+#endif
-- 	syslog (LOG_INFO | LOG_AUTH,
-- 		"%s@%s as %s: permission denied. cmd='%.80s'",
-- 		remuser, hostname, locuser, cmdbuf);
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch
-deleted file mode 100644
-index 8575c10..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 3b9f64c6a668849b37b884a7826885c70b95787b Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 22:24:06 -0500
--Subject: [PATCH] use daemon from the C library when possible
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- configure.ac          |    2 +-
-- libinetutils/daemon.c |    2 ++
-- 2 files changed, 3 insertions(+), 1 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 79d655c..25cc3db 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -579,7 +579,7 @@ AC_FUNC_MMAP
-- AC_FUNC_MALLOC
-- AC_FUNC_REALLOC
-- 
---AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent dirfd fchdir flock \
--+AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent daemon dirfd fchdir flock \
--                fpathconf ftruncate \
-- 	       getcwd getmsg getspnam initgroups initsetproctitle killpg \
--                mkstemp ptsname \
--diff --git a/libinetutils/daemon.c b/libinetutils/daemon.c
--index 2156af4..9beb255 100644
----- a/libinetutils/daemon.c
--+++ b/libinetutils/daemon.c
--@@ -197,8 +197,10 @@ waitdaemon (int nochdir, int noclose, int maxwait)
--   return ppid;
-- }
-- 
--+#ifndef HAVE_DAEMON
-- int
-- daemon (int nochdir, int noclose)
-- {
--   return (waitdaemon (nochdir, noclose, 0) == -1) ? -1 : 0;
-- }
--+#endif
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1004-detect-fork-support.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1004-detect-fork-support.patch
-deleted file mode 100644
-index fc9d726..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1004-detect-fork-support.patch
-+++ /dev/null
-@@ -1,54 +0,0 @@
--From 0acaed0d4b2bf9495e71ec4c898733bed2a86be0 Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Thu, 18 Nov 2010 22:27:55 -0500
--Subject: [PATCH] detect fork() support
--
--Linux/nommu systems cannot support a fork(), so add a configure test for
--it so apps can pick that or vfork().
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- configure.ac                |    2 +-
-- libinetutils/libinetutils.h |    9 +++++++++
-- 2 files changed, 10 insertions(+), 1 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 25cc3db..98196f4 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -580,7 +580,7 @@ AC_FUNC_MALLOC
-- AC_FUNC_REALLOC
-- 
-- AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent daemon dirfd fchdir flock \
---               fpathconf ftruncate \
--+               fork fpathconf ftruncate \
-- 	       getcwd getmsg getspnam initgroups initsetproctitle killpg \
--                mkstemp ptsname \
--                setegid seteuid setpgid \
--diff --git a/libinetutils/libinetutils.h b/libinetutils/libinetutils.h
--index 19bbde5..86365b0 100644
----- a/libinetutils/libinetutils.h
--+++ b/libinetutils/libinetutils.h
--@@ -17,6 +17,8 @@
--   You should have received a copy of the GNU General Public License
--   along with this program.  If not, see `http://www.gnu.org/licenses/'. */
-- 
--+#include <config.h>
--+
-- #include "argp-version-etc.h"
-- 
-- void utmp_init (char *line, char *user, char *id);
--@@ -32,3 +34,10 @@ extern const char *default_program_authors[];
-- #define iu_argp_init(name, authors)				\
--   argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";		\
--   argp_version_setup (name, authors);
--+
--+#ifdef HAVE_FORK
--+# define fork_exit(s) exit(s)
--+#else
--+# define fork() vfork()
--+# define fork_exit(s) _exit(s)
--+#endif
---- 
--1.7.3.2
--
-diff --git a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch b/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch
-deleted file mode 100644
-index 844905b..0000000
---- a/meta-oe/recipes-connectivity/inetutils/inetutils-1.8/inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch
-+++ /dev/null
-@@ -1,109 +0,0 @@
--From 1dee55b90d2971859377156e6210efdfdf1bac84 Mon Sep 17 00:00:00 2001
--From: Mike Frysinger <vapier at gentoo.org>
--Date: Fri, 19 Nov 2010 20:26:48 -0500
--Subject: [PATCH] ftpd: add daemon (-D) nommu support
--
--The current daemon design of ftpd is to:
--	- loop in server_mode() waiting for a connection
--	- fork a child and return to main() to process like inetd
--	- have parent continue looping in server_mode()
--
--On a nommu system where we can only vfork(), the child returning
--from server_mode() corrupts the stack and messes up the the parent.
--So rather than having the child return, exec a new ftpd process in
--the normal inetd mode.  This also fixes the problem in nommu where
--a vfork-ed child pauses the parent until it either exits or execs
--something.
--
--Signed-off-by: Mike Frysinger <vapier at gentoo.org>
-----
-- ftpd/extern.h      |    3 ++-
-- ftpd/ftpd.c        |   17 ++++++++++++++---
-- ftpd/server_mode.c |    9 ++++++++-
-- 3 files changed, 24 insertions(+), 5 deletions(-)
--
--diff --git a/ftpd/extern.h b/ftpd/extern.h
--index 2483fe6..81182e0 100644
----- a/ftpd/extern.h
--+++ b/ftpd/extern.h
--@@ -110,7 +110,8 @@ extern char tmpline[];
-- extern off_t restart_point;
-- 
-- /* Exported from server_mode.c.  */
---extern int server_mode (const char *pidfile, struct sockaddr_in *phis_addr);
--+extern int server_mode (const char *pidfile, struct sockaddr_in *phis_addr,
--+			char *argv[]);
-- 
-- /* Credential for the request.  */
-- struct credentials
--diff --git a/ftpd/ftpd.c b/ftpd/ftpd.c
--index aed74e6..c5c4c90 100644
----- a/ftpd/ftpd.c
--+++ b/ftpd/ftpd.c
--@@ -424,8 +424,7 @@ main (int argc, char *argv[], char **envp)
--   argp_parse (&argp, argc, argv, 0, &index, NULL);
--   
--   /* Bail out, wrong usage */
---  argc -= index;
---  if (argc != 0)
--+  if (argc - index != 0)
--     error (1, 0, "surplus arguments; try `%s --help' for more info",
-- 	   program_name);
-- 
--@@ -438,7 +437,19 @@ main (int argc, char *argv[], char **envp)
--      fd = accept(). tcpd is check if compile with the support  */
--   if (daemon_mode)
--     {
---      if (server_mode (pid_file, &his_addr) < 0)
--+#ifndef HAVE_FORK
--+      /* Shift out the daemon option in subforks  */
--+      int i;
--+      for (i = 0; i < argc; ++i)
--+	if (strcmp (argv[i], "-D") == 0)
--+	  {
--+	    int j;
--+	    for (j = i; j < argc; ++j)
--+	      argv[j] = argv[j + 1];
--+	    argv[--argc] = NULL;
--+	  }
--+#endif
--+      if (server_mode (pid_file, &his_addr, argv) < 0)
-- 	exit (1);
--     }
--   else
--diff --git a/ftpd/server_mode.c b/ftpd/server_mode.c
--index 3d3a498..605e13e 100644
----- a/ftpd/server_mode.c
--+++ b/ftpd/server_mode.c
--@@ -37,6 +37,8 @@
-- # include <tcpd.h>
-- #endif
-- 
--+#include <libinetutils.h>
--+
-- static void reapchild (int);
-- 
-- #define DEFPORT 21
--@@ -92,7 +94,7 @@ reapchild (int signo ARG_UNUSED)
-- }
-- 
-- int
---server_mode (const char *pidfile, struct sockaddr_in *phis_addr)
--+server_mode (const char *pidfile, struct sockaddr_in *phis_addr, char *argv[])
-- {
--   int ctl_sock, fd;
--   struct servent *sv;
--@@ -176,5 +178,10 @@ server_mode (const char *pidfile, struct sockaddr_in *phis_addr)
--   if (!check_host ((struct sockaddr *) phis_addr))
--     return -1;
-- #endif
--+
--+#ifndef HAVE_FORK
--+  _exit(execvp(argv[0], argv));
--+#endif
--+
--   return fd;
-- }
---- 
--1.7.3.2
--
+ inherit autotools
 -- 
-1.7.0.4
-
+1.8.0
 
 
 
