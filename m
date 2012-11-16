@@ -1,33 +1,37 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1TZQbu-0000wB-Id
+	(envelope-from <otavio.salvador@gmail.com>) id 1TZQzs-0001P4-MG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 19:25:50 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id qAGIBjXH025269
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 16 Nov 2012 19:11:46 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.76) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1TZQOH-0008Ex-1J; Fri, 16 Nov 2012 19:11:45 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Nov 2012 19:11:31 +0100
-Message-Id: <1353089491-31640-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.11.7
-In-Reply-To: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	Fri, 16 Nov 2012 19:50:36 +0100
+Received: by mail-pb0-f47.google.com with SMTP id un1so638642pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Nov 2012 10:36:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=rWX7V4WIaJ68w3dg5VYH7/OlgqQTHsb9N4+Xn2Y7efs=;
+	b=CZBoH956UG/Itvw7QSHHL1EXoQihjNzbMRt9G9wtmW0Vb/I3F2HLVCVbhIP/d4h9Sq
+	dmL9Dt966v2/e+eTWa6+MgB2G5wFQjxF9VHYX5ezsa1hUzV2gH99qt0EX35GDstjJB6l
+	oZ9aZyHlefuDakaC6CiTI01hfhkOinGR28MtSP88rzxaF3QnUESyMN879SD11Ol21DTb
+	0s2RKWKPkVMXVkrhyxH7TOVojoyIztDL0CDwdo54xBEJmFvoyX2YHVR9/bXVQhQhrEJG
+	SrzVYEaYzEoMVRGX3EXeSPHD1hl07UFrBmB2ErCFqfBToctwdWmGh7NTnxf4oYz95cdY
+	QKWg==
+MIME-Version: 1.0
+Received: by 10.66.76.73 with SMTP id i9mr15261842paw.17.1353090997524; Fri,
+	16 Nov 2012 10:36:37 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Fri, 16 Nov 2012 10:36:37 -0800 (PST)
+In-Reply-To: <1353089491-31640-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 References: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Spam-Score: -5.5
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,RP_MATCHES_RCVD,SPF_NEUTRAL,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.73
+	<1353089491-31640-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Date: Fri, 16 Nov 2012 16:36:37 -0200
+X-Google-Sender-Auth: 98Xf_IfWSU9RtmJWHFtJF5Ca91s
+Message-ID: <CAP9ODKqPMf7Ebn2kM-v=W_qxVQr8i94FqkddnRujL+6CowJ3qA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH v2] gitpkgv.bbclass: cache GITPKGV result
+Subject: Re: [PATCH v2] gitpkgv.bbclass: cache GITPKGV result
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,80 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 18:25:50 -0000
+X-List-Received-Date: Fri, 16 Nov 2012 18:50:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-gitpkgv runs the 'git rev-list | wc -l' several times when processing a
-package using GITPKGV.  This takes ages for packages like the linux
-kernel which has a) a large repository and b) lots of subpackages.
+On Fri, Nov 16, 2012 at 4:11 PM, Enrico Scholz <
+enrico.scholz@sigma-chemnitz.de> wrote:
 
-This patch caches the result of 'git rev-list' and uses it on the next
-run.
+> gitpkgv runs the 'git rev-list | wc -l' several times when processing a
+> package using GITPKGV.  This takes ages for packages like the linux
+> kernel which has a) a large repository and b) lots of subpackages.
+>
+> This patch caches the result of 'git rev-list' and uses it on the next
+> run.
+>
+> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+>
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- meta-oe/classes/gitpkgv.bbclass | 30 ++++++++++++++++++++++++------
- 1 file changed, 24 insertions(+), 6 deletions(-)
+I did not test the patch but from reading it seems good.
 
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 165ba1e..7bdc538 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -50,6 +50,7 @@ def gitpkgv_drop_tag_prefix(version):
- def get_git_pkgv(d, use_tags):
-     import os
-     import bb
-+    from pipes import quote
- 
-     src_uri = d.getVar('SRC_URI', 1).split()
-     fetcher = bb.fetch2.Fetch(src_uri, d)
-@@ -71,22 +72,39 @@ def get_git_pkgv(d, use_tags):
- 
-                 found = True
- 
--                cwd = os.getcwd()
--                os.chdir(url.localpath)
-+                vars = { 'repodir' : quote(url.localpath),
-+                         'rev' : quote(rev) }
- 
--                commits = bb.fetch2.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True).strip()
-+                rev = bb.fetch2.get_srcrev(d).split('+')[1]
-+                rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + rev)
-+
-+                if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
-+                    commits = bb.fetch2.runfetchcmd(
-+                        "cd %(repodir)s && "
-+                        "git rev-list %(rev)s -- 2> /dev/null "
-+                        "| wc -l" % vars,
-+                        d, quiet=True).strip().lstrip('0')
-+
-+                    if commits != "":
-+                        oe.path.remove(rev_file, recurse=False)
-+                        open(rev_file, "w").write("%d\n" % int(commits))
-+                    else:
-+                        commits = "0"
-+                else:
-+                    commits = open(rev_file, "r").readline(128).strip()
- 
-                 if use_tags:
-                     try:
--                        output = bb.fetch2.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip()
-+                        output = bb.fetch2.runfetchcmd(
-+                            "cd %(repodir)s && "
-+                            "git describe %(rev)s 2>/dev/null" % vars,
-+                            d, quiet=True).strip()
-                         ver = gitpkgv_drop_tag_prefix(output)
-                     except Exception:
-                         ver = "0.0-%s-g%s" % (commits, rev[:7])
-                 else:
-                     ver = "%s+%s" % (commits, rev[:7])
- 
--                os.chdir(cwd)
--
-                 format = format.replace(name, ver)
- 
-     if found:
 -- 
-1.7.11.7
-
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
