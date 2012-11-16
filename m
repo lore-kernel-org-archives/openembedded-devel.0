@@ -1,26 +1,35 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Yanjun.Zhu@WINDRIVER.COM>) id 1TZKwV-0000tI-HZ
+	(envelope-from <otavio.salvador@gmail.com>) id 1TZL93-00016y-KO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 13:22:45 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAG8rB8E022261
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 16 Nov 2012 13:35:49 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so1041704dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2012 00:54:12 -0800 (PST)
-Received: from localhost.localdomain (128.224.153.31) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.318.4; Fri, 16 Nov 2012 00:53:46 -0800
-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Nov 2012 16:53:42 +0800
-Message-ID: <1353056022-29560-1-git-send-email-yanjun.zhu@windriver.com>
-X-Mailer: git-send-email 1.6.3.1
-In-Reply-To: <yes>
-References: <yes>
+	Fri, 16 Nov 2012 04:21:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=xAof8ccNCwt2fTB7JDVb7p4aBguXNcmf24kL8hLln+8=;
+	b=Bp90ciVTDig3VrZuJEzPp4cj39HbC2/SkPcbl9dVK/079iZ9T/yfekxhQz4talnwkP
+	NbeZn84UYH21QecSPzSDbeHRwbJ6N3DHgqDyJ0QgES1BYlHUVmTUjxFIbVCQvAQGuUV2
+	SmwnK48Kg1MBo6yADzvXl5w7WyCen7mr9BuUpyszKMpsIfHTxIdL9PllY8gdTiMUcfZo
+	zqxWPOXJHasDU7ny9FPx3ch9ZC9JvJcd61nRRo2QAGla5rZq9qXVlq//UlnQEoB9cj7b
+	X99WkDPwwm8LDXXpsMyw5HK8gLkWnKxpHEVs9Jf32WKpr4HEMh5lnW+AOfIwKWLNQJdi
+	mPVQ==
 MIME-Version: 1.0
-Subject: [PATCH] python: fix for Security Advisory - python - CVE-2012-2135
+Received: by 10.66.87.165 with SMTP id az5mr12375197pab.46.1353068502775; Fri,
+	16 Nov 2012 04:21:42 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Fri, 16 Nov 2012 04:21:42 -0800 (PST)
+In-Reply-To: <1353056022-29560-1-git-send-email-yanjun.zhu@windriver.com>
+References: <1353056022-29560-1-git-send-email-yanjun.zhu@windriver.com>
+Date: Fri, 16 Nov 2012 10:21:42 -0200
+X-Google-Sender-Auth: B4T4wMe7FUsscI8_bxJ2JSQemtc
+Message-ID: <CAP9ODKoX3=SV+Dei9s7NYUPtos_JtqewY_hi6ji2gEvYndfYPQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] python: fix for Security Advisory - python - CVE-2012-2135
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,55 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 12:22:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 16 Nov 2012 12:35:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The utf-16 decoder in Python 3.1 through 3.3 does not update the
-aligned_end variable after calling the unicode_decode_call_errorhandler
-function, which allows remote attackers to obtain sensitive information
-(process memory) or cause a denial of service (memory corruption and crash)
-via unspecified vectors.
+On Fri, Nov 16, 2012 at 6:53 AM, yanjun.zhu <yanjun.zhu@windriver.com>wrote:
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-2135
+> The utf-16 decoder in Python 3.1 through 3.3 does not update the
+> aligned_end variable after calling the unicode_decode_call_errorhandler
+> function, which allows remote attackers to obtain sensitive information
+> (process memory) or cause a denial of service (memory corruption and crash)
+> via unspecified vectors.
+>
+> http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-2135
+>
+> Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+>
 
-Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
----
- .../python/python/python-2.7.2-CVE-2012-2135.patch |   12 ++++++++++++
- recipes-devtools/python/python_2.7.2.bbappend      |    1 +
- 2 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes-devtools/python/python/python-2.7.2-CVE-2012-2135.patch
+I think this needs to be backported to previous releases, right?
 
-diff --git a/recipes-devtools/python/python/python-2.7.2-CVE-2012-2135.patch b/recipes-devtools/python/python/python-2.7.2-CVE-2012-2135.patch
-new file mode 100644
-index 0000000..b913097
---- /dev/null
-+++ b/recipes-devtools/python/python/python-2.7.2-CVE-2012-2135.patch
-@@ -0,0 +1,12 @@
-+diff -urpN a/Objects/unicodeobject.c b/Objects/unicodeobject.c
-+--- a/Objects/unicodeobject.c	2012-11-12 16:25:33.000000000 +0800
-++++ b/Objects/unicodeobject.c	2012-11-12 16:26:22.000000000 +0800
-+@@ -2568,7 +2568,7 @@ PyUnicode_DecodeUTF16Stateful(const char
-+         }
-+ 
-+         /* UTF-16 code pair: */
-+-        if (q >= e) {
-++        if (e - q < 2) {
-+             errmsg = "unexpected end of data";
-+             startinpos = (((const char *)q)-2)-starts;
-+             endinpos = ((const char *)e)-starts;
-diff --git a/recipes-devtools/python/python_2.7.2.bbappend b/recipes-devtools/python/python_2.7.2.bbappend
-index 87be410..64ada6c 100644
---- a/recipes-devtools/python/python_2.7.2.bbappend
-+++ b/recipes-devtools/python/python_2.7.2.bbappend
-@@ -5,5 +5,6 @@ SRC_URI += "\
-     file://python-CVE-2010-3492.patch \
-     file://python-2.7.2-CVE-2012-0845.patch \
-     file://python-2.7.2-CVE-2012-1150.patch \
-+    file://python-2.7.2-CVE-2012-2135.patch \
- "
- PRINC = "2"
 -- 
-1.6.3.1
-
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
