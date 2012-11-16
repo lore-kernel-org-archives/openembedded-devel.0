@@ -1,37 +1,36 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TZQ1S-0008RL-PL
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1TZQAg-0000AA-RI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 18:48:11 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa11so1843603pad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2012 09:34:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=mJwjCS9UPH3prEOGcnsiR/SpcmthYohCElLKf183ZQI=;
-	b=rLNiXYuXon+eU54N+5eQ7J5ls60dB3rftOYOr22IPagnJle+zVNgUGuXi4olxoWa84
-	twle7/q31fFQx0WaX6WBE1tFkmlVEixKc3hLmutgHsrqyiD4PuTv4FtysbA/PfTIMS1q
-	nZgQn7p/WADoMYArx5Y+Db6GHl1NzDsaxlrzKR6cCG7YoFzPF9SGfe/8LErnNOwT2iVF
-	H0DLwyYsUPxD7z5i5rF9lCuB+DCLG1hNWbzqA0Spd1Dk1gSN98AkjMsfeZqToCAhr4s/
-	p1QGaqGXyzZ+UTMFkfryAq6MDBWSwhQuUJnPjLsKTkEPQpporrqe8QwOOYIY3bqSMVLe
-	U5Lg==
+	Fri, 16 Nov 2012 18:57:44 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id qAGHhh9h021132
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 16 Nov 2012 18:43:43 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.76) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1TZPx8-0004IU-Pr; Fri, 16 Nov 2012 18:43:42 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: Otavio Salvador <otavio@ossystems.com.br>
+References: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<CAP9ODKqkKu_1zwX+PcA6DcE-yyVsD9VQDjB0Nwe0-sf8huM+Pg@mail.gmail.com>
+Date: Fri, 16 Nov 2012 18:43:42 +0100
+In-Reply-To: <CAP9ODKqkKu_1zwX+PcA6DcE-yyVsD9VQDjB0Nwe0-sf8huM+Pg@mail.gmail.com>
+	(Otavio Salvador's message of "Fri, 16 Nov 2012 15:28:42 -0200")
+Message-ID: <lyhaopjve9.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1 (gnu/linux)
 MIME-Version: 1.0
-Received: by 10.68.189.8 with SMTP id ge8mr17497576pbc.24.1353087251683; Fri,
-	16 Nov 2012 09:34:11 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Fri, 16 Nov 2012 09:34:11 -0800 (PST)
-In-Reply-To: <1353082893-16665-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1353082893-16665-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Date: Fri, 16 Nov 2012 15:34:11 -0200
-X-Google-Sender-Auth: lUK8Q2JrsnN3k4hPP-Uhl4sfOAg
-Message-ID: <CAP9ODKq6+AuC4uROveSbGMPNrOeFE5LWPecqM79fr3fDsgbhgw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: [PATCH] systemd.bbclass: move disable operation into prerm() script
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 0.83
+X-Spam-Score: -5.5
+X-Spam-Level: -----
+X-Spam-Tests: AWL,BAYES_00,RP_MATCHES_RCVD,SPF_NEUTRAL,DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.73
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] gitpkgv.bbclass: cache GITPKGV result
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 17:48:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Nov 2012 17:57:44 -0000
+Content-Type: text/plain
 
-On Fri, Nov 16, 2012 at 2:21 PM, Enrico Scholz <
-enrico.scholz@sigma-chemnitz.de> wrote:
+Otavio Salvador <otavio@ossystems.com.br> writes:
 
-> The 'systemctl disable' operation should not be done in postrm() because
-> the .service file does not exist anymore and the script will fail hence.
->
-> After moving this command into prerm(), postrm() becomes empty and can
-> be removed completely.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
+>> This patch caches the result of 'git rev-list' into the sources cache
+>> directory and uses it on the next run.  Because collisions of the sha1
+>> hash are very unlikely, the git revision is used directly as the key.
+> ...
+> I'd prefer to have the hashes cache in same DL_DIR so we don't have another
+> directory there. It is a file so I see no need for another dir. What do you
+> think?
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+good idea; I will submit an updated patch soon.
 
-Eric, this might be backported to denzil too IMO.
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Enrico
+
 
