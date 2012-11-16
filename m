@@ -1,26 +1,20 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TZJ8D-00042V-Ef
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1TZJXT-0005mK-Sw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 11:26:42 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 16 Nov 2012
-	11:12:42 +0100
-X-TM-IMSS-Message-ID: <f1b1916e0020763f@nedap.com>
-Received: from [10.17.24.8] ([10.17.24.8]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id f1b1916e0020763f ;
-	Fri, 16 Nov 2012 11:12:33 +0100
-Message-ID: <50A61199.3010309@nedap.com>
-Date: Fri, 16 Nov 2012 11:12:41 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
-MIME-Version: 1.0
+	Fri, 16 Nov 2012 11:52:48 +0100
+Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
+	[129.70.144.156])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
+	554528002B; Fri, 16 Nov 2012 11:33:02 +0100 (CET)
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 To: openembedded-devel@lists.openembedded.org
-References: <50A4F6E6.9040507@nedap.com>
-	<20121116092221.GA6265@mi.fu-berlin.de>
-In-Reply-To: <20121116092221.GA6265@mi.fu-berlin.de>
-Subject: Re: llvm issue
+Date: Fri, 16 Nov 2012 11:32:45 +0100
+Message-Id: <1353061965-29168-1-git-send-email-stefan@herbrechtsmeier.net>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [meta-oe][PATCH] python-numpy: Move static libraries to -staticdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,42 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 10:26:42 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Nov 2012 10:52:48 -0000
 
+Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+---
+ .../recipes-devtools/python/python-numpy_1.4.1.bb  |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-On 11/16/2012 10:22 AM, Henning Heinold wrote:
-> On Thu, Nov 15, 2012 at 03:06:30PM +0100, Jaap de Jong wrote:
->> Hi All,
->>
->> when I checkout openjdk-7 on meta-java and bitbake <anything> I get
->> these errors:
->>
->> ERROR: Unable to parse /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.9_2.9.bb
->> | ETA:  00:00:15
->> ERROR: Command execution failed: Exited with 1
->> NOTE: Error expanding variable populate_packages
->> NOTE: Error during finalise of /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.8_2.8.bb
->> NOTE: Error expanding variable populate_packages
->> NOTE: Error during finalise of /data/jenkins/jobs/myTest/workspace/sources/meta-java/recipes-core/llvm/llvm2.9_2.9.bb
->>
->> Anyone already know what is wrong here?
->>
->> Cheers!
->> Jaap
-> Hi Jaap,
->
-> khem posted some patches for the jdk7 branch unfornatly I dont have the much time
-> to integrate them yet. Please look at the oe-dev patchwork or use his github repo.
-So what would be the combination to go?
-1) openembedded-core --> danny
-2) meta-java --> khem: openjdk-7
-Or something different?
-
->
-> Maybee in christmas holiday I will find some time to merge jdk7 branch into master.
-Sitting next to your Christmas tree! :-)
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index bb4e78a..031d1cf 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+            ${CONFIGFILESURI} \
+@@ -32,6 +32,8 @@ do_compile_prepend() {
+ SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
+ SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
+ 
++FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
++
+ RDEPENDS_${PN} = "python-unittest \
+                   python-difflib \
+                   python-pprint \
+-- 
+1.7.0.4
 
 
 
