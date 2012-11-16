@@ -1,33 +1,36 @@
-Received: from mail-bk0-f47.google.com ([209.85.214.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dromede@gmail.com>) id 1TZPeg-0006fG-G6
+	(envelope-from <otavio.salvador@gmail.com>) id 1TZPwA-0008IW-At
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 18:24:40 +0100
-Received: by mail-bk0-f47.google.com with SMTP id jk7so1245622bkc.6
+	Fri, 16 Nov 2012 18:42:42 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa11so1840736pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2012 09:10:33 -0800 (PST)
+	Fri, 16 Nov 2012 09:28:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer;
-	bh=W4yNfssAPU3hFbPXCcLDx43kXtyo/xEMDTfVxYmZ2H8=;
-	b=h5Ka/7mHuY/vLjLpHMSwQCT1++02aD5p6NFfe/qgSa1HtEYQQ5NfFZiVtu/5yXkTUL
-	DNnZ+izaz9V1N6bEmlt44R8TFGOdykCUGpjwDamP2bciT6dn/SwmMWYU7pc26QCsO6W0
-	RuI7MrtrNo4LbleuGqs/FO5UFTfUVPFNHLqSt0O0tyrLnSKIsTxdP38ikC2EItpgQzuz
-	uY84KSJ5CGacejHRADcNnGU5llpQrBN205ZpdXWRbimfWSS/PSU15kj35UWmj0g6U5GZ
-	RNl+ddQvTH5HpOgZFKYauVmEFGqoRarcXc3pKBcGY35UA7TXfEqBKkvyFUoLNAizx2I8
-	6Wuw==
-Received: by 10.204.150.210 with SMTP id z18mr2236276bkv.53.1353085833764;
-	Fri, 16 Nov 2012 09:10:33 -0800 (PST)
-Received: from localhost.localdomain (93-136-14-159.adsl.net.t-com.hr.
-	[93.136.14.159])
-	by mx.google.com with ESMTPS id v14sm1662308bkv.10.2012.11.16.09.10.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 16 Nov 2012 09:10:32 -0800 (PST)
-From: dromede@gmail.com
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=BHu5tnkYajqMfppEwFe7DYcLO8fK34QU15/vVqkTMOE=;
+	b=XCZGmJQubqBLIvttFrnc43efn5VM5gvd6LGH7gKzqi5ff28AaJDzM9lI3V3elkpbuO
+	JRaPZ5FOaYkl0I6rOSGnT8fqat7CHIEu02FowGAdvPPQQ83+NsNV8361DLH0ZpoopCzb
+	eMc8USfg9kgNXoMTGDQ79pKQmzcowPwCPJQwB3J1XYMte1OqtPZ7ZoKULR4zYb0beEce
+	8AMni77771UKW7qIKgh/kCVPjOAt8eUgXAjh7izJD8ChaJox/4kwQfD+wUyCOGV5jZCG
+	PdYCvC7iopk6XccHSOVLLJ+4BQmDy28QqtUlgDHSnOz5+UTWu3EhZ1JBIdwfY9n6V9z3
+	jTkA==
+MIME-Version: 1.0
+Received: by 10.68.213.33 with SMTP id np1mr11140038pbc.64.1353086923053; Fri,
+	16 Nov 2012 09:28:43 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Fri, 16 Nov 2012 09:28:42 -0800 (PST)
+In-Reply-To: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+References: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Date: Fri, 16 Nov 2012 15:28:42 -0200
+X-Google-Sender-Auth: UKPUmR_b50N0JNIXRBI054xxysQ
+Message-ID: <CAP9ODKqkKu_1zwX+PcA6DcE-yyVsD9VQDjB0Nwe0-sf8huM+Pg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Nov 2012 18:10:42 +0100
-Message-Id: <1353085842-4528-1-git-send-email-dromede@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH] [meta-handheld] kexecboot-handhelds.inc: Add explicit support for 16 bit displays.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: Re: [PATCH] gitpkgv.bbclass: cache GITPKGV result
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 17:24:41 -0000
+X-List-Received-Date: Fri, 16 Nov 2012 17:42:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Marko Katic <dromede.gmail.com>
+On Fri, Nov 16, 2012 at 2:19 PM, Enrico Scholz <
+enrico.scholz@sigma-chemnitz.de> wrote:
 
-All machines referenced in kexecboot-handhelds.inc have 16 bit displays.
-Kexecboot will by default enable support for 1,2,4,16,18,24 and 32 bit displays.
+> gitpkgv runs the 'git rev-list | wc -l' several times when processing a
+> package using GITPKGV.  This takes ages for packages like the linux
+> kernel which has a) a large repository and b) lots of subpackages.
+>
+> This patch caches the result of 'git rev-list' into the sources cache
+> directory and uses it on the next run.  Because collisions of the sha1
+> hash are very unlikely, the git revision is used directly as the key.
+>
+> [this is a slightly fixed version of classic OE's
+>  8c61580bc303911cf77a16eefb661414fee637f4]
+>
+> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+>
 
-Add compile time options that only enable 16 bit support for these machines.
-This should slightly reduce the size of the kexecboot binary.
+I'd prefer to have the hashes cache in same DL_DIR so we don't have another
+directory there. It is a file so I see no need for another dir. What do you
+think?
 
-Signed-off-by: Marko Katic <dromede.gmail.com>
----
- recipes-bsp/kexecboot/kexecboot-handhelds.inc |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/recipes-bsp/kexecboot/kexecboot-handhelds.inc b/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-index ab3deca..9030797 100644
---- a/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-+++ b/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-@@ -1,6 +1,6 @@
--EXTRA_OECONF_akita = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480"
--EXTRA_OECONF_c7x0 = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480"
--EXTRA_OECONF_spitz = "--enable-zaurus --enable-delay=3 --enable-evdev-rate=1000,250 --enable-fbui-width=480"
--EXTRA_OECONF_poodle = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250"
--EXTRA_OECONF_tosa = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250"
--EXTRA_OECONF_collie = "--enable-delay=2 --enable-evdev-rate=1000,250"
-+EXTRA_OECONF_akita = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
-+EXTRA_OECONF_c7x0 = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
-+EXTRA_OECONF_spitz = "--enable-zaurus --enable-delay=3 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
-+EXTRA_OECONF_poodle = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 ---enable-bpp=16"
-+EXTRA_OECONF_tosa = "--enable-zaurus --enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16"
-+EXTRA_OECONF_collie = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16"
 -- 
-1.7.9.5
-
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
