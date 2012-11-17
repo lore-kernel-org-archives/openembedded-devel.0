@@ -1,37 +1,39 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TZQzs-0001P4-MG
+	(envelope-from <martin.jansa@gmail.com>) id 1TZeIb-00087a-IQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Nov 2012 19:50:36 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so638642pbc.6
+	Sat, 17 Nov 2012 10:02:53 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1319692eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Nov 2012 10:36:37 -0800 (PST)
+	Sat, 17 Nov 2012 00:48:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=rWX7V4WIaJ68w3dg5VYH7/OlgqQTHsb9N4+Xn2Y7efs=;
-	b=CZBoH956UG/Itvw7QSHHL1EXoQihjNzbMRt9G9wtmW0Vb/I3F2HLVCVbhIP/d4h9Sq
-	dmL9Dt966v2/e+eTWa6+MgB2G5wFQjxF9VHYX5ezsa1hUzV2gH99qt0EX35GDstjJB6l
-	oZ9aZyHlefuDakaC6CiTI01hfhkOinGR28MtSP88rzxaF3QnUESyMN879SD11Ol21DTb
-	0s2RKWKPkVMXVkrhyxH7TOVojoyIztDL0CDwdo54xBEJmFvoyX2YHVR9/bXVQhQhrEJG
-	SrzVYEaYzEoMVRGX3EXeSPHD1hl07UFrBmB2ErCFqfBToctwdWmGh7NTnxf4oYz95cdY
-	QKWg==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=wG7OaOKwtVSk/xPPOUd2ytQaoYp5bZ77z5xIc8OkXkE=;
+	b=HL6DB5SGFejIJuuIbQg02sjdQRC1YCQfDXqPvQJMtZ5Ze6K74jO2PW0rV6Dv2XyTnP
+	IwwCz/VlrylP+zmQQfwbjiSpFDKk134w4pumsJMFjapFofaDYSuWM8LjjrgfrsfvNquP
+	jArYVPmAsMoFmMsR9mP3PJeKAC4cqSi8050LViIkmjix1JYy0VpAExIXbdpAP35lLJDX
+	rJy2+h7yQpm0xSPZplfHKFFSyXvpI3LxXx4HsTuZoqXo7DF8V0PeHI+j1J3RIPevWfq5
+	IBGJexEPVaJZBaVVOCgauIDBOZMEmWKROP8FrUk59krdLT/tKHa94U9qgMDh4+LuKea0
+	3tow==
+Received: by 10.14.194.72 with SMTP id l48mr5409659een.9.1353142130350;
+	Sat, 17 Nov 2012 00:48:50 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id b44sm8944361eep.12.2012.11.17.00.48.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 17 Nov 2012 00:48:49 -0800 (PST)
+Date: Sat, 17 Nov 2012 09:49:05 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20121117084905.GH3411@jama.jama.net>
+References: <12301427.Yf0uchSh3U@helios>
+	<20121112182616.GB22235@novatech.datenfreihafen.org>
+	<1929015.S4sbRGzyuA@helios>
 MIME-Version: 1.0
-Received: by 10.66.76.73 with SMTP id i9mr15261842paw.17.1353090997524; Fri,
-	16 Nov 2012 10:36:37 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Fri, 16 Nov 2012 10:36:37 -0800 (PST)
-In-Reply-To: <1353089491-31640-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1353082752-8187-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<1353089491-31640-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Date: Fri, 16 Nov 2012 16:36:37 -0200
-X-Google-Sender-Auth: 98Xf_IfWSU9RtmJWHFtJF5Ca91s
-Message-ID: <CAP9ODKqPMf7Ebn2kM-v=W_qxVQr8i94FqkddnRujL+6CowJ3qA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH v2] gitpkgv.bbclass: cache GITPKGV result
+In-Reply-To: <1929015.S4sbRGzyuA@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] OE-Classic recipe migration status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +47,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2012 18:50:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 17 Nov 2012 09:02:54 -0000
+X-Groupsio-MsgNum: 41538
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="l0l+eSofNeLXHSnY"
+Content-Disposition: inline
 
-On Fri, Nov 16, 2012 at 4:11 PM, Enrico Scholz <
-enrico.scholz@sigma-chemnitz.de> wrote:
+--l0l+eSofNeLXHSnY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> gitpkgv runs the 'git rev-list | wc -l' several times when processing a
-> package using GITPKGV.  This takes ages for packages like the linux
-> kernel which has a) a large repository and b) lots of subpackages.
->
-> This patch caches the result of 'git rev-list' and uses it on the next
-> run.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
+On Tue, Nov 13, 2012 at 10:52:08AM +0000, Paul Eggleton wrote:
+> On Monday 12 November 2012 18:26:16 Stefan Schmidt wrote:
+> > On Sun, 2012-11-11 at 19:11, Paul Eggleton wrote:
+> > >    1484 other
+> > >     218 BSP
+> > >     211 BugLabs
+> >=20
+> > I now longer work for BugLabs but  during my last months there I split
+> > up our bunch of recipes according to what we think was sane at that
+> > time. Think end of last year here.
+> >=20
+> > The BSP layer can be found here:
+> > https://github.com/buglabs/meta-bug
+> >=20
+> > And BugLabs specific recipes here:
+> > https://github.com/buglabs/meta-buglabs
+> >=20
+> > All OpenJDK related stuff was going directly into upstream through
+> > Tarent anyway. This should cover all stuff that was worth bringing
+> > over.
+>=20
+> OK, I've removed everything that is now in meta-bug/meta-buglabs and mark=
+ed=20
+> everything else as obsolete. Thanks!
+> =20
+> > >      11 EFL
+> >=20
+> > I think everything worth working with is in meta-efl in meta-oe.
+> > Martin is doing a great job catching up with everything we do
+> > upstream. If something is really missing it might now longer work or
+> > is just not worth bringing over.
+>=20
+> Martin, can you look over the EFL marked recipes and confirm this?
 
-I did not test the patch but from reading it seems good.
+Yes, some could be usefull for someone:
+remoko,
+enna,
+enotes,
+euphony
+but all have rather dead upstream and I'm not going to migrate them just
+for migration sake (they would probably need a lot of changes/testing to
+make them compatible with latest EFL).
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--l0l+eSofNeLXHSnY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlCnT4EACgkQN1Ujt2V2gBzYxwCfffc4qGu5+RSCduV9cICwQA7v
+h6IAn3WeqQEb4hu4GGqR3dpUHlXzaHFH
+=WZtL
+-----END PGP SIGNATURE-----
+
+--l0l+eSofNeLXHSnY--
