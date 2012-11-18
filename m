@@ -1,36 +1,35 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TZzk5-0001mj-O6
+	(envelope-from <otavio.salvador@gmail.com>) id 1Ta9pm-00031F-6c
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Nov 2012 08:56:37 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1539244eaa.6
+	Sun, 18 Nov 2012 19:43:10 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa11so2611352pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Nov 2012 23:42:37 -0800 (PST)
+	Sun, 18 Nov 2012 10:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3x39T5WEv7RNTKEyjjE0alSew2y3fAkUmOSHhwRb8cU=;
-	b=b9yjKRjOOuORzgBDfIUHyBBha9dSgkki0a4r3wXLXAkjIdzB7IAlzn2ZKtIzVkEGrH
-	eeIRcfhruBTINT6L9v7C0o/srRf7UOtPBLpAoIOcG5mqPeRDILq4PVARtRdTFhNNr9OC
-	NmrtjUVQQpvhbOb8b7lylINXUrK63lT1rjIHERPTGhRyP2C0eZexKJMns63k9UdLvrMl
-	Zpzat5ZYdpnKf7pUqTjpldOFEB366BX7GnMw3XDQ9nXD6UCaCUcssSGasmFpueXJGEbj
-	A8VbbNF72rHGCMVSm3ufkBN9LD8mIroBoBbh+sGE8czwbsfRSE/nYdZByii+81Hmma33
-	p0Bw==
-Received: by 10.14.200.194 with SMTP id z42mr13124724een.13.1353224556989;
-	Sat, 17 Nov 2012 23:42:36 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id k2sm15658258eep.15.2012.11.17.23.42.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 17 Nov 2012 23:42:35 -0800 (PST)
-Date: Sun, 18 Nov 2012 08:42:53 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121118074253.GN3411@jama.jama.net>
-References: <CAOd_LFyo-7GmLS9AtdO8BXXVxGuqdQvoZqmHHsm+qGSittwVmw@mail.gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=pw6yQnW1RIf4F5Itq4qJng3nIQJzPhGUrfNJ4XcC/B4=;
+	b=gjVaeUnhE1OkkxiybBRY6xh69qgFvQeyZwLSd4Zr+I2B4lX7i50qxmo9C8Xw0Cq22n
+	sAfwfZTfeTrczfzjgTmFovNX/ySOvp8vqPRUwUeA1X5Xq/AQX8Esztg0JlNvF0DNDFMM
+	DaPSNV0aUhwABSNf9mUFTs0Ow0Ayu5Ei9egmgB8UTMoMt8MtQkNHl+qRbc14zLeYaSTx
+	n4B+NFdSgBv+6IeJLGsF1TAIjfK4rXoQVSWTUmCoG/1bq520r2FBapmXDrcMysBqNp61
+	EqAMNoSrqPshLF+3oCD8yAn8g73e1Q6OrfBZNVZLwdzp2Hy61lYaoLsSC8b5Z2R+gP9K
+	FPkg==
 MIME-Version: 1.0
-In-Reply-To: <CAOd_LFyo-7GmLS9AtdO8BXXVxGuqdQvoZqmHHsm+qGSittwVmw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: window managers?
+Received: by 10.68.234.98 with SMTP id ud2mr27146223pbc.136.1353263348266;
+	Sun, 18 Nov 2012 10:29:08 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Sun, 18 Nov 2012 10:29:08 -0800 (PST)
+In-Reply-To: <1353193382-4019-1-git-send-email-andrei@gherzan.ro>
+References: <1353193382-4019-1-git-send-email-andrei@gherzan.ro>
+Date: Sun, 18 Nov 2012 16:29:08 -0200
+X-Google-Sender-Auth: J-EVkgUp63PRpf2xOGaQ99UJNc8
+Message-ID: <CAP9ODKrVEHH0GfbqsP6nZsA5diCYWAGJU3m0kU2GtnTwgk72tg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH] samba: Add rdepends to perl as perl scripts are packaged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,66 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Nov 2012 07:56:37 -0000
-X-Groupsio-MsgNum: 41541
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pvq4FPIYehQuVelz"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 18 Nov 2012 18:43:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---pvq4FPIYehQuVelz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Nov 17, 2012 at 9:03 PM, Andrei Gherzan <andrei@gherzan.ro> wrote:
 
-On Sat, Nov 17, 2012 at 04:57:41PM -0500, Cliff Brake wrote:
-> Hello,
->=20
-> I did some looking into window managers in recent oe/meta-oe/angstrom,
-> and this is what I found:
->=20
-> matchbox
-> - is this still maintained?  Does not seem like a lot of new development.
->=20
-> xfce
-> - looks promising, but xconf did not build
->=20
-> gnome
-> - build problems
->=20
-> enlightenment
-> - builds, but got stuck with enlightenment_start.oe, no profiles
-> listed, so can't get through the initial dialogs on startup
->=20
-> twm
-> -worked, but is very minimalist
->=20
-> Questions:
-> 1) any opinions on WM for embedded Linux systems?  For most projects,
-> we simply run a single full screen app, but a WM would be nice in some
-> cases.
->=20
-> 2) any idea how to get profiles installed so that enlightenment can
-> start?  Is there any way to bypass this for a canned embedded
-> scenario?
+> Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+>
 
-Install e-wm-config-mobile or e-wm-config-standard, you can use packagegrou=
-p-x11-illume.
+What about moving the perl stuff to another package.
 
-Cheers,
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---pvq4FPIYehQuVelz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCokX0ACgkQN1Ujt2V2gBx3+ACfYC1pNAdB3yZdpcLhyyLkMDMO
-fpcAnA+Jt8wHMBSQo4LNeDHY79ytCtH/
-=02oB
------END PGP SIGNATURE-----
-
---pvq4FPIYehQuVelz--
