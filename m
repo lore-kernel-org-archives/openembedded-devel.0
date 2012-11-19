@@ -1,35 +1,27 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TaVr7-0003Zv-DS for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2012 19:14:01 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TaVdc-00085y-0B for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2012 19:00:04 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2012 19:00:03 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2012 19:00:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 19 Nov 2012 18:57:56 +0100
-Message-ID: <k8druu$id4$2@ger.gmane.org>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TaVs3-0003f0-Oh
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Nov 2012 19:15:00 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 19 Nov 2012 10:00:55 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,280,1352102400"; d="scan'208";a="219780065"
+Received: from unknown (HELO helios.localnet) ([10.252.122.190])
+	by azsmga001.ch.intel.com with ESMTP; 19 Nov 2012 10:00:52 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Nov 2012 18:00:50 +0000
+Message-ID: <5887051.MbDNksKi0G@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
+In-Reply-To: <k8drqf$id4$1@ger.gmane.org>
 References: <cover.1353345006.git.paul.eggleton@linux.intel.com>
-	<a2ae9814aaa6ddbc0615516868004f6d62649d38.1353345006.git.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <a2ae9814aaa6ddbc0615516868004f6d62649d38.1353345006.git.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-networking][PATCH 7/8] proftpd: add from meta-baryon
+	<738d5da6dd36ec7c495cb2ed90d969095e99b8fb.1353345006.git.paul.eggleton@linux.intel.com>
+	<k8drqf$id4$1@ger.gmane.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 3/8] quagga: add from OE-Classic, update and tidy-up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,69 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 18:14:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Nov 2012 18:15:00 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Op 19-11-12 18:11, Paul Eggleton schreef:
-> This was originally from OE-Classic. Improvements over the OE-Classic 
-> recipe for reference:
+On Monday 19 November 2012 18:55:33 Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> * Update to 1.3.4b * Add workaround for proftpd host IP resolution * Add
-> initscript, borrowed from Debian with some modifications for 
-> compatibility * Use autotools.bbclass and remove unnecessary configure
-> options * PARALLEL_MAKE = "" is no longer needed, the bug was fixed in
-> 1.3.3c * Set SUMMARY (which sets DESCRIPTION) and base it on the short 
-> description from the website * Use useradd.bbclass to add ftp user/group 
-> * Add HOMEPAGE * Add/fix description in some patches and improve recipe
-> indentation * Make LICENSE more accurate * Add LIC_FILES_CHKSUM
+> Op 19-11-12 18:11, Paul Eggleton schreef:
+> > * Update to 0.99.21 * Fix SRC_URI to point to a working download
+> > location * Make LICENSE more accurate * Add LIC_FILES_CHKSUM * Add old
+> > gentoo patch to fix libcap linking errors * Put binaries in sbindir * Use
+> > useradd.bbclass to create user/groups * Add LSB headers to init script
+> > (borrowed from debian) * Tidy up packaging and directory references * Add
+> > SUMMARY
+> > 
+> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> ---
 > 
-> Some of this work was done by Dexuan Cui <dexuan.cui@intel.com> and Kevin
-> Strasser <kevin.strasser@linux.intel.com>.
+> dd94a
 > 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> ---
+> > --- /dev/null +++
+> > b/meta-networking/recipes-protocols/quagga/files/watchquagga.init @@ -0,0
+> > +1,64 @@ +#!/bin/sh +# +### BEGIN INIT INFO +# Provides: watchquagga +#
+> > Required-Start: $local_fs $network $remote_fs $syslog +# Required-Stop:
+> > $local_fs $network $remote_fs $syslog +# Default-Start:  2 3 4 5 +#
+> > Default-Stop: 0 1 6 +# Short-Description: start and stop the Quagga
+> > watchdog +### END INIT INFO + +PATH=/bin:/usr/bin:/sbin:/usr/sbin + +#
+> > Load configuration +test -f /etc/default/watchquagga && .
+> > /etc/default/watchquagga
+> 
+> hardcoded $sysconfdir
+> 
+> > + +# Check that there are daemons to be monitored. +[ -z "$watch_daemons"
+> > ] && exit 0 + +pidfile="/var/run/quagga/watchquagga.pid"
+> 
+> hardcoded $localstatedir
+> 
+> > + +case "$1" in +    start) +	echo -n "Starting quagga watchdog daemon:
+> > watchquagga" +	start-stop-daemon --start \ +		--pidfile $pidfile \ +
+> > --exec /usr/sbin/watchquagga \
+> 
+> hardcoded $sbindir
+> 
+> [..]
+> 
+> etc.
 
-> diff --git
-> a/meta-networking/recipes-daemons/proftpd/files/proftpd-basic.init
-> b/meta-networking/recipes-daemons/proftpd/files/proftpd-basic.init new
-> file mode 100644 index 0000000..01c998c --- /dev/null +++
-> b/meta-networking/recipes-daemons/proftpd/files/proftpd-basic.init @@
-> -0,0 +1,220 @@ +#!/bin/sh + +### BEGIN INIT INFO +# Provides:
-> proftpd +# Required-Start:    $remote_fs $syslog $local_fs $network +#
-> Required-Stop:     $remote_fs $syslog $local_fs $network +# Should-Start:
-> $named +# Should-Stop:       $named +# Default-Start:     2 3 4 5 +#
-> Default-Stop:      0 1 6 +# Short-Description: Starts ProFTPD daemon +#
-> Description:       This script runs the FTP service offered +#
-> by the ProFTPD daemon +### END INIT INFO + +# Start the proftpd FTP
-> daemon. + +PATH=/bin:/usr/bin:/sbin:/usr/sbin +DAEMON=/usr/sbin/proftpd
+Sure I can fix these, but you're aware there are a ton of these in meta-oe...?
 
-hardcoded $sbindir
+Cheers,
+Paul
 
-> +NAME=proftpd + +# Defaults +RUN="no" +OPTIONS="" 
-> +CONFIG_FILE=/etc/proftpd.conf
+--
 
-hardcoded $sysconfigdur
-
-> + +PIDFILE=`grep -i '^pidfile' $CONFIG_FILE|awk '{ print $2 }'` +if [
-> "x$PIDFILE" = "x" ]; +then +    PIDFILE=/var/run/proftpd.pid
-
-hardcoded $localstatedir
-
-> +fi + +# Read config (will override defaults) +[ -r /etc/default/proftpd
-> ] && . /etc/default/proftpd
-
-hardcoded $sysconfigdir and a lot more in the rest of the file.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQqnMkMkyGM64RGpERAna2AJ0cUe2Knjk1jKzdpYtWmgGH8JHc4ACcDcEw
-kxu7B1yYizf2inquugwLEJw=
-=HsG/
------END PGP SIGNATURE-----
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
