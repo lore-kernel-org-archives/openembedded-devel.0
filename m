@@ -1,35 +1,29 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Ta9pm-00031F-6c
+	(envelope-from <Yanjun.Zhu@windriver.com>) id 1TaHHu-0005Gu-T0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Nov 2012 19:43:10 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa11so2611352pad.6
+	Mon, 19 Nov 2012 03:40:46 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAJ2QdPX016131
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Nov 2012 10:29:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=pw6yQnW1RIf4F5Itq4qJng3nIQJzPhGUrfNJ4XcC/B4=;
-	b=gjVaeUnhE1OkkxiybBRY6xh69qgFvQeyZwLSd4Zr+I2B4lX7i50qxmo9C8Xw0Cq22n
-	sAfwfZTfeTrczfzjgTmFovNX/ySOvp8vqPRUwUeA1X5Xq/AQX8Esztg0JlNvF0DNDFMM
-	DaPSNV0aUhwABSNf9mUFTs0Ow0Ayu5Ei9egmgB8UTMoMt8MtQkNHl+qRbc14zLeYaSTx
-	n4B+NFdSgBv+6IeJLGsF1TAIjfK4rXoQVSWTUmCoG/1bq520r2FBapmXDrcMysBqNp61
-	EqAMNoSrqPshLF+3oCD8yAn8g73e1Q6OrfBZNVZLwdzp2Hy61lYaoLsSC8b5Z2R+gP9K
-	FPkg==
+	Sun, 18 Nov 2012 18:26:39 -0800 (PST)
+Received: from [128.224.162.170] (128.224.162.170) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
+	Sun, 18 Nov 2012 18:26:38 -0800
+Message-ID: <50A998E3.9030103@windriver.com>
+Date: Mon, 19 Nov 2012 10:26:43 +0800
+From: yzhu1 <Yanjun.Zhu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
 MIME-Version: 1.0
-Received: by 10.68.234.98 with SMTP id ud2mr27146223pbc.136.1353263348266;
-	Sun, 18 Nov 2012 10:29:08 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Sun, 18 Nov 2012 10:29:08 -0800 (PST)
-In-Reply-To: <1353193382-4019-1-git-send-email-andrei@gherzan.ro>
-References: <1353193382-4019-1-git-send-email-andrei@gherzan.ro>
-Date: Sun, 18 Nov 2012 16:29:08 -0200
-X-Google-Sender-Auth: J-EVkgUp63PRpf2xOGaQ99UJNc8
-Message-ID: <CAP9ODKrVEHH0GfbqsP6nZsA5diCYWAGJU3m0kU2GtnTwgk72tg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] samba: Add rdepends to perl as perl scripts are packaged
+To: <openembedded-devel@lists.openembedded.org>
+References: <1353056022-29560-1-git-send-email-yanjun.zhu@windriver.com>
+	<CAP9ODKoX3=SV+Dei9s7NYUPtos_JtqewY_hi6ji2gEvYndfYPQ@mail.gmail.com>
+In-Reply-To: <CAP9ODKoX3=SV+Dei9s7NYUPtos_JtqewY_hi6ji2gEvYndfYPQ@mail.gmail.com>
+X-Originating-IP: [128.224.162.170]
+Subject: Re: [PATCH] python: fix for Security Advisory - python - CVE-2012-2135
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Nov 2012 18:43:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 19 Nov 2012 02:40:46 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, Nov 17, 2012 at 9:03 PM, Andrei Gherzan <andrei@gherzan.ro> wrote:
-
-> Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+On 11/16/2012 08:21 PM, Otavio Salvador wrote:
+> On Fri, Nov 16, 2012 at 6:53 AM, yanjun.zhu <yanjun.zhu@windriver.com>wrote:
 >
+>> The utf-16 decoder in Python 3.1 through 3.3 does not update the
+>> aligned_end variable after calling the unicode_decode_call_errorhandler
+>> function, which allows remote attackers to obtain sensitive information
+>> (process memory) or cause a denial of service (memory corruption and crash)
+>> via unspecified vectors.
+>>
+>> http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-2135
+>>
+>> Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+>>
+> I think this needs to be backported to previous releases, right?
+Hi, Otavio
 
-What about moving the perl stuff to another package.
+OK. I will do it.
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Thanks a lot.
+Zhu Yanjun
+
+
+
 
