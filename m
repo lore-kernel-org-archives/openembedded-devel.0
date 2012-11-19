@@ -1,34 +1,35 @@
-Received: from mail-yh0-f47.google.com ([209.85.213.47])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1TaVAe-0000OZ-MF; Mon, 19 Nov 2012 18:30:08 +0100
-Received: by mail-yh0-f47.google.com with SMTP id g23so258126yhg.6
-	for <multiple recipients>; Mon, 19 Nov 2012 09:16:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=OubPatR6rt/j2QCeptS80XNXxLh2FxrjNSvPC/NrJTg=;
-	b=utQXiwsXORBJe7NwsKbKZDdDofsBOqpiA3YSg3iY9AxHHGe4xe0w6xjO67wtDcFH5q
-	XQhlrkn0tS/i+nYF/Q3t8GRKTI029o0xS32IkJVIBfCF+XmxcFvrsK0tgl3qk46dc7aZ
-	MJyHY8nmx7xPBkl4byik9g0P2RT+4oXi+1xCSuyEnNb4x+I3v3rMn0fbB5ALZX/22jeN
-	p9tiD00YanpLlbvgpdOeVc2HQB4tVMEgq/SOOFibs0F2X6qQTtNHurXRmZgcLkGy5hMc
-	tKBsZ0orWIpnB+OcNeBegNRX67lHtJh/eQjbx/3hPizxmGlolLY3bDrxQwctd7B6DC2y
-	dd/A==
-Received: by 10.236.92.6 with SMTP id i6mr12700157yhf.40.1353345365825; Mon,
-	19 Nov 2012 09:16:05 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.147.128.37 with HTTP; Mon, 19 Nov 2012 09:15:35 -0800 (PST)
-In-Reply-To: <12301427.Yf0uchSh3U@helios>
-References: <12301427.Yf0uchSh3U@helios>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 19 Nov 2012 09:15:35 -0800
-Message-ID: <CAMKF1sp0rd5V5dFAX3kmayht9M7iJcEmOQ4QLnurH51q_ZRaaA@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OE-Classic recipe migration status
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TaVmz-0003Rf-Ri for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Nov 2012 19:09:45 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TaVZX-0003sE-FV for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Nov 2012 18:55:51 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Nov 2012 18:55:51 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Nov 2012 18:55:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 19 Nov 2012 18:55:33 +0100
+Message-ID: <k8drqf$id4$1@ger.gmane.org>
+References: <cover.1353345006.git.paul.eggleton@linux.intel.com>
+	<738d5da6dd36ec7c495cb2ed90d969095e99b8fb.1353345006.git.paul.eggleton@linux.intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <738d5da6dd36ec7c495cb2ed90d969095e99b8fb.1353345006.git.paul.eggleton@linux.intel.com>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-networking][PATCH 3/8] quagga: add from OE-Classic, update and tidy-up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 17:30:08 -0000
+X-List-Received-Date: Mon, 19 Nov 2012 18:09:46 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
- good work Paul
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sun, Nov 11, 2012 at 11:11 AM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
+Op 19-11-12 18:11, Paul Eggleton schreef:
+> * Update to 0.99.21 * Fix SRC_URI to point to a working download
+> location * Make LICENSE more accurate * Add LIC_FILES_CHKSUM * Add old
+> gentoo patch to fix libcap linking errors * Put binaries in sbindir * Use
+> useradd.bbclass to create user/groups * Add LSB headers to init script
+> (borrowed from debian) * Tidy up packaging and directory references * Add
+> SUMMARY
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> ---
+dd94a
+> --- /dev/null +++
+> b/meta-networking/recipes-protocols/quagga/files/watchquagga.init @@ -0,0
+> +1,64 @@ +#!/bin/sh +# +### BEGIN INIT INFO +# Provides: watchquagga +#
+> Required-Start: $local_fs $network $remote_fs $syslog +# Required-Stop:
+> $local_fs $network $remote_fs $syslog +# Default-Start:  2 3 4 5 +#
+> Default-Stop: 0 1 6 +# Short-Description: start and stop the Quagga
+> watchdog +### END INIT INFO + +PATH=/bin:/usr/bin:/sbin:/usr/sbin + +#
+> Load configuration +test -f /etc/default/watchquagga && .
+> /etc/default/watchquagga
 
->    1484 other
->     218 BSP
->     211 BugLabs
->     195 libs
->     193 obsolete
->     155 obsolete directory (OE-Classic)
->
+hardcoded $sysconfdir
+
+> + +# Check that there are daemons to be monitored. +[ -z "$watch_daemons"
+> ] && exit 0 + +pidfile="/var/run/quagga/watchquagga.pid"
+
+hardcoded $localstatedir
+
+> + +case "$1" in +    start) +	echo -n "Starting quagga watchdog daemon:
+> watchquagga" +	start-stop-daemon --start \ +		--pidfile $pidfile \ +
+> --exec /usr/sbin/watchquagga \
+
+hardcoded $sbindir
+
+[..]
+
+etc.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQqnKVMkyGM64RGpERAk0CAJ4jE0qiE8nK07yULhEyK1CnQQD/cACeJqF2
+YZ2NT+afhKPlhw+J3brUhe0=
+=GWC7
+-----END PGP SIGNATURE-----
 
 
-I think obsolete can be ignored.
-
-
->      136 PERL
->     119 python
->      92 distro
->      89 tasks
->      84 nonworking directory (OE-Classic)
->
-
-
-non working too.
-
-
->      80 GPE
->      79 X11 drivers
->      59 images
->      59 games
->      41 fonts
->      23 security
->      20 in another layer
->      18 pending
->      11 EFL
->
 
