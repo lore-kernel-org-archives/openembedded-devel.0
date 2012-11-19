@@ -1,36 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from new.bec-systems.com ([74.208.70.121] helo=bec-systems.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TaW5Q-00065Q-7d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2012 19:28:50 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qAJIEjWS021427
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2012 10:14:45 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Mon, 19 Nov 2012 10:14:44 -0800
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 8DEC67FD0	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2012 13:14:06 -0500 (EST)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
-	93CB36A80C0; Mon, 19 Nov 2012 13:14:43 -0500 (EST)
-Date: Mon, 19 Nov 2012 13:14:43 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121119181443.GD13350@windriver.com>
-References: <cover.1353345006.git.paul.eggleton@linux.intel.com>
-	<2f446d9b50fd73f3d8a5b09c8c5b99bec41e16d0.1353345006.git.paul.eggleton@linux.intel.com>
+	(envelope-from <cliff.brake@gmail.com>)
+	id 1TaWcq-0003Zt-Cx; Mon, 19 Nov 2012 20:03:20 +0100
+Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
+	helo=happy.bec-systems.com)
+	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
+	id 1TaWGM-0004a3-W9; Mon, 19 Nov 2012 13:40:09 -0500
 MIME-Version: 1.0
-In-Reply-To: <2f446d9b50fd73f3d8a5b09c8c5b99bec41e16d0.1353345006.git.paul.eggleton@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 1/8] tftp-hpa: add from OE-Classic, update and tidy up
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Date: Mon, 19 Nov 2012 18:49:08 GMT
+Message-Id: <1353350948045.ae4f520b@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+X-Spam_score: -2.9
+X-Spam_score_int: -28
+X-Spam_bar: --
+Subject: OE Changelog since 2012-11-11 until 2012-11-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,732 +32,417 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 18:28:52 -0000
-X-Groupsio-MsgNum: 41574
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8nsIa27JVQLqB7/C"
-Content-Disposition: inline
-
---8nsIa27JVQLqB7/C
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Nov 2012 19:03:21 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-A few of these need clean-up (attribution, up-stream status, etc.) that
-Paul and I were discussing, forgot about, and are now focused on again.
+Changelog since 2012-11-11 until 2012-11-18.  Projects included in this =
+report:
 
-I'm still sorting that part out, so there's an update coming from me for
-the tftp-hpa patches before they get merged.
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-ppc: git://github.com/Freescale/meta-fsl-arm-extra.git[submodule =
+"meta-fsl-ppc"]
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
--J.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
-[[oe] [meta-networking][PATCH 1/8] tftp-hpa: add from OE-Classic, update an=
-d tidy up] On 12.11.19 (Mon 17:11) Paul Eggleton wrote:
+Christopher Larson (1):
+=20=20knotty: kill duplicated import of 'time'
 
-> * Update to 5.2
-> * Add patches
-> * Add DESCRIPTION and better SUMMARY
-> * Make LICENSE more accurate
-> * Add LIC_FILES_CHKSUM
-> * Update ALTERNATIVE_* definitions
->=20
-> Much of this was done by Joe MacDonald <joe.macdonald@windriver.com>.
->=20
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  .../recipes-daemons/tftp-hpa/files/default         |    3 +
->  .../recipes-daemons/tftp-hpa/files/init            |  104 +++++++++++++
->  .../tftp-hpa/files/tftp-0.40-remap.patch           |   19 +++
->  .../tftp-hpa/files/tftp-0.42-tftpboot.patch        |   54 +++++++
->  .../tftp-hpa/files/tftp-0.49-chk_retcodes.patch    |   15 ++
->  .../tftp-hpa/files/tftp-0.49-cmd_arg.patch         |  159 ++++++++++++++=
-++++++
->  .../tftp-hpa/files/tftp-hpa-0.39-tzfix.patch       |   18 +++
->  .../files/tftp-hpa-0.49-fortify-strcpy-crash.patch |   26 ++++
->  .../tftp-hpa/files/tftp-hpa-0.49-stats.patch       |   14 ++
->  .../tftp-hpa/files/tftp-hpa-5.2-pktinfo.patch      |   23 +++
->  .../recipes-daemons/tftp-hpa/files/tftp-xinetd     |   18 +++
->  .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |   66 ++++++++
->  12 files changed, 519 insertions(+)
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/default
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/init
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0=
-=2E40-remap.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0=
-=2E42-tftpboot.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0=
-=2E49-chk_retcodes.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0=
-=2E49-cmd_arg.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-h=
-pa-0.39-tzfix.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-h=
-pa-0.49-fortify-strcpy-crash.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-h=
-pa-0.49-stats.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-h=
-pa-5.2-pktinfo.patch
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-x=
-inetd
->  create mode 100644 meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2=
-=2Ebb
->=20
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/default b/met=
-a-networking/recipes-daemons/tftp-hpa/files/default
-> new file mode 100644
-> index 0000000..de2ed18
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/default
-> @@ -0,0 +1,3 @@
-> +#Defaults for tftpd-hpa
-> +RUN_DAEMON=3D"yes"
-> +OPTIONS=3D"-l -s /srv/tftpboot"
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/init b/meta-n=
-etworking/recipes-daemons/tftp-hpa/files/init
-> new file mode 100644
-> index 0000000..5ad8c52
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/init
-> @@ -0,0 +1,104 @@
-> +#! /bin/sh
-> +#
-> +# Author:	Jaakko Niemi <liiwi@iki.fi>
-> +# Modified from skeleton file in sarge
-> +
-> +### BEGIN INIT INFO
-> +# Provides:          tftp-hpa
-> +# Required-Start:    $local_fs $remote_fs $syslog $network
-> +# Required-Stop:     $local_fs $remote_fs $syslog $network
-> +# Default-Start:     2 3 4 5
-> +# Default-Stop:      1
-> +# Short-Description: HPA's tftp client=20
-> +# Description:       tftp server to allow booting clients which support
-> +#                    the PXE protocol.
-> +### END INIT INFO
-> +
-> +set -e
-> +
-> +PATH=3D/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-> +DESC=3D"HPA's tftpd"
-> +NAME=3Din.tftpd
-> +DAEMON=3D/usr/sbin/$NAME
-> +PIDFILE=3D/var/run/$NAME.pid
-> +SCRIPTNAME=3D/etc/init.d/tftpd-hpa
-> +
-> +# Gracefully exit if the package has been removed.
-> +test -x $DAEMON || exit 0
-> +
-> +# Read config file if it is present.
-> +if [ -r /etc/default/tftpd-hpa ]
-> +then
-> +	. /etc/default/tftpd-hpa
-> +fi
-> +
-> +if [ "$RUN_DAEMON" !=3D "yes" ] ; then
-> +         echo "tftpd-hpa disabled in /etc/default/tftpd-hpa"
-> +	 exit 0
-> +fi
-> +
-> +#
-> +#	Function that starts the daemon/service.
-> +#
-> +d_start() {
-> +	start-stop-daemon --start --quiet --exec $DAEMON -- $OPTIONS
-> +}
-> +
-> +#
-> +#	Function that stops the daemon/service.
-> +#
-> +d_stop() {
-> +	start-stop-daemon --stop --quiet --name $NAME
-> +}
-> +
-> +#
-> +#	Function that sends a SIGHUP to the daemon/service.
-> +#
-> +d_reload() {
-> +	start-stop-daemon --stop --quiet --name $NAME --signal 1
-> +}
-> +
-> +case "$1" in
-> +  start)
-> +	echo  "Starting $DESC: $NAME"
-> +	d_start
-> +	echo "."
-> +	;;
-> +  stop)
-> +	echo  "Stopping $DESC: $NAME"
-> +	d_stop
-> +	echo "."
-> +	;;
-> +  #reload)
-> +	#
-> +	#	If the daemon can reload its configuration without
-> +	#	restarting (for example, when it is sent a SIGHUP),
-> +	#	then implement that here.
-> +	#
-> +	#	If the daemon responds to changes in its config file
-> +	#	directly anyway, make this an "exit 0".
-> +	#
-> +	# echo -n "Reloading $DESC configuration..."
-> +	# d_reload
-> +	# echo "done."
-> +  #;;
-> +  restart|force-reload)
-> +	#
-> +	#	If the "reload" option is implemented, move the "force-reload"
-> +	#	option to the "reload" entry above. If not, "force-reload" is
-> +	#	just the same as "restart".
-> +	#
-> +	echo "Restarting $DESC: $NAME"
-> +	d_stop
-> +	sleep 1
-> +	d_start
-> +	echo "."
-> +	;;
-> +  *)
-> +	# echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
-> +	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
-> +	exit 1
-> +	;;
-> +esac
-> +
-> +exit 0
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.40-rem=
-ap.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.40-remap.p=
-atch
-> new file mode 100644
-> index 0000000..755a307
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.40-remap.patch
-> @@ -0,0 +1,19 @@
-> +diff -up tftp-hpa-0.49/tftpd/remap.c.zero tftp-hpa-0.49/tftpd/remap.c
-> +--- tftp-hpa-0.49/tftpd/remap.c.zero	2008-10-20 18:08:31.000000000 -0400
-> ++++ tftp-hpa-0.49/tftpd/remap.c	2008-11-25 11:41:09.000000000 -0500
-> +@@ -286,6 +286,7 @@ struct rule *parserulefile(FILE * f)
-> +     int lineno =3D 0;
-> +     int err =3D 0;
-> +=20
-> ++    memset(this_rule, '\0', sizeof(struct rule));
-> +     while (lineno++, fgets(line, MAXLINE, f)) {
-> +         rv =3D parseline(line, this_rule, lineno);
-> +         if (rv < 0)
-> +@@ -294,6 +295,7 @@ struct rule *parserulefile(FILE * f)
-> +             *last_rule =3D this_rule;
-> +             last_rule =3D &this_rule->next;
-> +             this_rule =3D tfmalloc(sizeof(struct rule));
-> ++            memset(this_rule, '\0', sizeof(struct rule));
-> +         }
-> +     }
-> +=20
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.42-tft=
-pboot.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.42-tftp=
-boot.patch
-> new file mode 100644
-> index 0000000..a0de58d
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.42-tftpboot.p=
-atch
-> @@ -0,0 +1,54 @@
-> +diff -up tftp-hpa-0.48/tftp-xinetd.tftpboot tftp-hpa-0.48/tftp-xinetd
-> +--- tftp-hpa-0.48/tftp-xinetd.tftpboot	2007-01-31 00:51:05.000000000 +01=
-00
-> ++++ tftp-hpa-0.48/tftp-xinetd	2008-05-20 12:05:53.000000000 +0200
-> +@@ -10,7 +10,7 @@ service tftp
-> + 	wait			=3D yes
-> + 	user			=3D root
-> + 	server			=3D /usr/sbin/in.tftpd
-> +-	server_args		=3D -s /tftpboot
-> ++	server_args		=3D -s /var/lib/tftpboot
-> + 	disable			=3D yes
-> + 	per_source		=3D 11
-> + 	cps			=3D 100 2
-> +diff -up tftp-hpa-0.48/README.security.tftpboot tftp-hpa-0.48/README.sec=
-urity
-> +--- tftp-hpa-0.48/README.security.tftpboot	2008-05-29 17:36:32.000000000=
- +0200
-> ++++ tftp-hpa-0.48/README.security	2008-05-29 17:37:21.000000000 +0200
-> +@@ -17,10 +17,10 @@ probably the following:
-> +=20
-> + 1. Create a separate "tftpd" user and group only used for tftpd;
-> + 2. Have all your boot files in a single directory tree (usually called=
-=20
-> +-   /tftpboot).
-> +-3. Specify "-p -u tftpd -s /tftpboot" on the tftpd command line; if
-> ++   /var/lib/tftpboot).
-> ++3. Specify "-p -u tftpd -s /var/lib/tftpboot" on the tftpd command line=
-; if
-> +    you want clients to be able to create files use
-> +-   "-p -c -U 002 -u tftpd -s /tftpboot" (replace 002 with whatever
-> ++   "-p -c -U 002 -u tftpd -s /var/lib/tftpboot" (replace 002 with whate=
-ver
-> +    umask is appropriate for your setup.)
-> +=20
-> + 	       =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +@@ -40,12 +40,12 @@ directly.  Thus, if your /etc/inetd.conf
-> + line):
-> +=20
-> + tftp	dgram	udp	wait	root	/usr/sbin/tcpd
-> +-/usr/sbin/in.tftpd -s /tftpboot -r blksize
-> ++/usr/sbin/in.tftpd -s /var/lib/tftpboot -r blksize
-> +=20
-> + ... it's better to change to ...
-> +=20
-> + tftp	dgram	udp	wait	root	/usr/sbin/in.tftpd
-> +-in.tftpd -s /tftpboot -r blksize
-> ++in.tftpd -s /var/lib/tftpboot -r blksize
-> +=20
-> + You should make sure that you are using "wait" option in tftpd; you
-> + also need to have tftpd spawned as root in order for chroot (-s) to
-> +diff -up tftp-hpa-0.48/tftpd/sample.rules.tftpboot tftp-hpa-0.48/tftpd/s=
-ample.rules
-> +--- tftp-hpa-0.48/tftpd/sample.rules.tftpboot	2008-05-29 17:38:46.000000=
-000 +0200
-> ++++ tftp-hpa-0.48/tftpd/sample.rules	2008-05-29 17:38:05.000000000 +0200
-> +@@ -30,5 +30,5 @@ rg	\\		/		# Convert backslashes to slash
-> + rg	\#		@		# Convert hash marks to @ signs
-> + rg	/../		/..no../	# Convert /../ to /..no../
-> + e	^ok/				# These are always ok
-> +-r	^[^/]		/tftpboot/\0	# Convert non-absolute files
-> ++r	^[^/]		/var/lib/tftpboot/\0	# Convert non-absolute files
-> + a	\.pvt$				# Reject requests for private files
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-chk=
-_retcodes.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-=
-chk_retcodes.patch
-> new file mode 100644
-> index 0000000..6d63571
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-chk_retcod=
-es.patch
-> @@ -0,0 +1,15 @@
-> +diff -up tftp-hpa-0.49/tftpd/tftpd.c.chk_retcodes tftp-hpa-0.49/tftpd/tf=
-tpd.c
-> +--- tftp-hpa-0.49/tftpd/tftpd.c.chk_retcodes	2009-01-15 15:28:50.0000000=
-00 +0100
-> ++++ tftp-hpa-0.49/tftpd/tftpd.c	2009-01-15 15:31:36.000000000 +0100
-> +@@ -932,7 +932,10 @@ int main(int argc, char **argv)
-> +             exit(EX_OSERR);
-> +         }
-> + #ifdef __CYGWIN__
-> +-        chdir("/");             /* Cygwin chroot() bug workaround */
-> ++				if (chdir("/") < 0) {			/* Cygwin chroot() bug workaround */
-> ++					syslog(LOG_ERR, "chroot: %m");
-> ++					exit(EX_OSERR);
-> ++				}
-> + #endif
-> +     }
-> + #ifdef HAVE_SETREGID
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-cmd=
-_arg.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-cmd_a=
-rg.patch
-> new file mode 100644
-> index 0000000..2b9023a
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-cmd_arg.pa=
-tch
-> @@ -0,0 +1,159 @@
-> +diff -up tftp-hpa-0.49/config.h.cmd_arg tftp-hpa-0.49/config.h
-> +--- tftp-hpa-0.49/config.h.cmd_arg	2010-04-19 15:29:10.567331454 +0200
-> ++++ tftp-hpa-0.49/config.h	2010-04-20 07:33:03.133232772 +0200
-> +@@ -291,6 +291,7 @@ typedef int socklen_t;
-> + /* Prototypes for libxtra functions */
-> +=20
-> + void *xmalloc(size_t);
-> ++void *xrealloc(void *, size_t);
-> + char *xstrdup(const char *);
-> +=20
-> + #ifndef HAVE_BSD_SIGNAL
-> +diff -up tftp-hpa-0.49/configure.in.cmd_arg tftp-hpa-0.49/configure.in
-> +--- tftp-hpa-0.49/configure.in.cmd_arg	2008-10-21 00:08:31.000000000 +02=
-00
-> ++++ tftp-hpa-0.49/configure.in	2010-04-19 11:05:12.387340698 +0200
-> +@@ -152,6 +152,7 @@ OBJROOT=3D`pwd`
-> +=20
-> + XTRA=3Dfalse
-> + PA_SEARCH_LIBS_AND_ADD(xmalloc, iberty)
-> ++PA_SEARCH_LIBS_AND_ADD(xrealloc, iberty)
-> + PA_SEARCH_LIBS_AND_ADD(xstrdup, iberty)
-> + PA_SEARCH_LIBS_AND_ADD(bsd_signal, bsd, bsdsignal)
-> + PA_SEARCH_LIBS_AND_ADD(getopt_long, getopt, getopt_long)
-> +diff -up tftp-hpa-0.49/lib/xrealloc.c.cmd_arg tftp-hpa-0.49/lib/xrealloc=
-=2Ec
-> +--- tftp-hpa-0.49/lib/xrealloc.c.cmd_arg	2010-04-19 11:05:12.387340698 +=
-0200
-> ++++ tftp-hpa-0.49/lib/xrealloc.c	2010-04-19 11:05:12.387340698 +0200
-> +@@ -0,0 +1,20 @@
-> ++/*
-> ++ * xrealloc.c
-> ++ *
-> ++ * Simple error-checking version of realloc()
-> ++ *
-> ++ */
-> ++
-> ++#include "config.h"
-> ++
-> ++void *xrealloc(void *ptr, size_t size)
-> ++{
-> ++    void *p =3D realloc(ptr, size);
-> ++
-> ++    if (!p) {
-> ++        fprintf(stderr, "Out of memory!\n");
-> ++        exit(128);
-> ++    }
-> ++
-> ++    return p;
-> ++}
-> +diff -up tftp-hpa-0.49/tftp/main.c.cmd_arg tftp-hpa-0.49/tftp/main.c
-> +--- tftp-hpa-0.49/tftp/main.c.cmd_arg	2008-10-21 00:08:31.000000000 +0200
-> ++++ tftp-hpa-0.49/tftp/main.c	2010-04-19 11:05:12.389329337 +0200
-> +@@ -89,11 +89,14 @@ int connected;
-> + const struct modes *mode;
-> + #ifdef WITH_READLINE
-> + char *line =3D NULL;
-> ++char *remote_pth =3D NULL;
-> + #else
-> + char line[LBUFLEN];
-> ++char remote_pth[LBUFLEN];
-> + #endif
-> + int margc;
-> +-char *margv[20];
-> ++char **margv;
-> ++int sizeof_margv=3D0;
-> + const char *prompt =3D "tftp> ";
-> + sigjmp_buf toplevel;
-> + void intr(int);
-> +@@ -379,6 +382,10 @@ static void getmoreargs(const char *part
-> +         free(line);
-> +         line =3D NULL;
-> +     }
-> ++    if (remote_pth) {
-> ++        free(remote_pth);
-> ++        remote_pth =3D NULL;
-> ++    }
-> +     line =3D xmalloc(len + elen + 1);
-> +     strcpy(line, partial);
-> +     strcpy(line + len, eline);
-> +@@ -535,6 +542,7 @@ void put(int argc, char *argv[])
-> +     int fd;
-> +     int n, err;
-> +     char *cp, *targ;
-> ++    long dirlen, namelen, lastlen=3D0;
-> +=20
-> +     if (argc < 2) {
-> +         getmoreargs("send ", "(file) ");
-> +@@ -588,9 +596,22 @@ void put(int argc, char *argv[])
-> +     }
-> +     /* this assumes the target is a directory */
-> +     /* on a remote unix system.  hmmmm.  */
-> +-    cp =3D strchr(targ, '\0');
-> +-    *cp++ =3D '/';
-> ++    dirlen =3D strlen(targ)+1;
-> ++#ifdef WITH_READLINE
-> ++    remote_pth =3D xmalloc(dirlen+1);
-> ++#endif
-> ++    strcpy(remote_pth, targ);
-> ++    remote_pth[dirlen-1] =3D '/';
-> ++    cp =3D remote_pth + dirlen;
-> +     for (n =3D 1; n < argc - 1; n++) {
-> ++#ifdef WITH_READLINE
-> ++        namelen =3D strlen(tail(argv[n])) + 1;
-> ++        if (namelen > lastlen) {
-> ++            remote_pth =3D xrealloc(remote_pth, dirlen + namelen + 1);
-> ++            cp =3D remote_pth + dirlen;
-> ++            lastlen =3D namelen;
-> ++        }
-> ++#endif
-> +         strcpy(cp, tail(argv[n]));
-> +         fd =3D open(argv[n], O_RDONLY | mode->m_openflags);
-> +         if (fd < 0) {
-> +@@ -600,9 +621,9 @@ void put(int argc, char *argv[])
-> +         }
-> +         if (verbose)
-> +             printf("putting %s to %s:%s [%s]\n",
-> +-                   argv[n], hostname, targ, mode->m_mode);
-> ++                   argv[n], hostname, remote_pth, mode->m_mode);
-> +         sa_set_port(&peeraddr, port);
-> +-        tftp_sendfile(fd, targ, mode->m_mode);
-> ++        tftp_sendfile(fd, remote_pth, mode->m_mode);
-> +     }
-> + }
-> +=20
-> +@@ -801,6 +822,10 @@ static void command(void)
-> +             free(line);
-> +             line =3D NULL;
-> +         }
-> ++        if (remote_pth) {
-> ++            free(remote_pth);
-> ++            remote_pth =3D NULL;
-> ++        }
-> +         line =3D readline(prompt);
-> +         if (!line)
-> +             exit(0);            /* EOF */
-> +@@ -872,7 +897,13 @@ struct cmd *getcmd(char *name)
-> + static void makeargv(void)
-> + {
-> +     char *cp;
-> +-    char **argp =3D margv;
-> ++    char **argp;
-> ++
-> ++    if (!sizeof_margv) {
-> ++        sizeof_margv =3D 20;
-> ++        margv =3D xmalloc(sizeof_margv * sizeof(char *));
-> ++    }
-> ++    argp =3D margv;
-> +=20
-> +     margc =3D 0;
-> +     for (cp =3D line; *cp;) {
-> +@@ -882,6 +913,11 @@ static void makeargv(void)
-> +             break;
-> +         *argp++ =3D cp;
-> +         margc +=3D 1;
-> ++        if (margc =3D=3D sizeof_margv) {
-> ++            sizeof_margv +=3D 20;
-> ++            margv =3D xrealloc(margv, sizeof_margv * sizeof(char *));
-> ++            argp =3D margv + margc;
-> ++        }
-> +         while (*cp !=3D '\0' && !isspace(*cp))
-> +             cp++;
-> +         if (*cp =3D=3D '\0')
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.39=
--tzfix.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.39=
--tzfix.patch
-> new file mode 100644
-> index 0000000..ded02ef
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.39-tzfix.=
-patch
-> @@ -0,0 +1,18 @@
-> +diff -up tftp-hpa-0.49/tftpd/tftpd.c.tzfix tftp-hpa-0.49/tftpd/tftpd.c
-> +--- tftp-hpa-0.49/tftpd/tftpd.c.tzfix	2008-10-20 18:08:31.000000000 -0400
-> ++++ tftp-hpa-0.49/tftpd/tftpd.c	2008-11-25 11:45:27.000000000 -0500
-> +@@ -350,6 +350,14 @@ int main(int argc, char **argv)
-> +     const char *pidfile =3D NULL;
-> +     u_short tp_opcode;
-> +=20
-> ++    time_t my_time =3D 0;
-> ++    struct tm* p_tm;
-> ++    char envtz[10];
-> ++    my_time =3D time(NULL);
-> ++    p_tm =3D localtime(&my_time);
-> ++    snprintf(envtz, sizeof(envtz) - 1, "UTC%+d", (p_tm->tm_gmtoff * -1)=
-/3600);
-> ++    setenv("TZ", envtz, 0);
-> ++
-> +     /* basename() is way too much of a pain from a portability standpoi=
-nt */
-> +=20
-> +     p =3D strrchr(argv[0], '/');
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49=
--fortify-strcpy-crash.patch b/meta-networking/recipes-daemons/tftp-hpa/file=
-s/tftp-hpa-0.49-fortify-strcpy-crash.patch
-> new file mode 100644
-> index 0000000..e9b70d4
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49-fortif=
-y-strcpy-crash.patch
-> @@ -0,0 +1,26 @@
-> +diff -urN tftp-hpa-0.49.orig/tftp/tftp.c tftp-hpa-0.49/tftp/tftp.c
-> +--- tftp-hpa-0.49.orig/tftp/tftp.c	2008-10-20 18:08:31.000000000 -0400
-> ++++ tftp-hpa-0.49/tftp/tftp.c	2009-08-05 09:47:18.072585848 -0400
-> +@@ -279,15 +279,16 @@
-> +             struct tftphdr *tp, const char *mode)
-> + {
-> +     char *cp;
-> ++    size_t len;
-> +=20
-> +     tp->th_opcode =3D htons((u_short) request);
-> +     cp =3D (char *)&(tp->th_stuff);
-> +-    strcpy(cp, name);
-> +-    cp +=3D strlen(name);
-> +-    *cp++ =3D '\0';
-> +-    strcpy(cp, mode);
-> +-    cp +=3D strlen(mode);
-> +-    *cp++ =3D '\0';
-> ++    len =3D strlen(name) + 1;
-> ++    memcpy(cp, name, len);
-> ++    cp +=3D len;
-> ++    len =3D strlen(mode) + 1;
-> ++    memcpy(cp, mode, len);
-> ++    cp +=3D len;
-> +     return (cp - (char *)tp);
-> + }
-> +=20
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49=
--stats.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49=
--stats.patch
-> new file mode 100644
-> index 0000000..b6c9d05
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49-stats.=
-patch
-> @@ -0,0 +1,14 @@
-> +diff -up tftp-hpa-0.49/tftp/tftp.c.stats tftp-hpa-0.49/tftp/tftp.c
-> +--- tftp-hpa-0.49/tftp/tftp.c.stats	2011-01-03 15:38:34.217918067 +0100
-> ++++ tftp-hpa-0.49/tftp/tftp.c	2011-01-03 15:38:37.498917014 +0100
-> +@@ -400,8 +400,8 @@ static void printstats(const char *direc
-> + {
-> +     double delta;
-> +=20
-> +-    delta =3D (tstop.tv_sec + (tstop.tv_usec / 100000.0)) -
-> +-        (tstart.tv_sec + (tstart.tv_usec / 100000.0));
-> ++    delta =3D (tstop.tv_sec + (tstop.tv_usec / 1000000.0)) -
-> ++        (tstart.tv_sec + (tstart.tv_usec / 1000000.0));
-> +     if (verbose) {
-> +         printf("%s %lu bytes in %.1f seconds", direction, amount, delta=
-);
-> +         printf(" [%.0f bit/s]", (amount * 8.) / delta);
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-5.2-=
-pktinfo.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-5.2=
--pktinfo.patch
-> new file mode 100644
-> index 0000000..d1fa75c
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-5.2-pktinfo=
-=2Epatch
-> @@ -0,0 +1,23 @@
-> +diff -up tftp-hpa-5.2/tftpd/recvfrom.c.test tftp-hpa-5.2/tftpd/recvfrom.c
-> +--- tftp-hpa-5.2/tftpd/recvfrom.c.test	2011-12-11 23:13:52.000000000 +01=
-00
-> ++++ tftp-hpa-5.2/tftpd/recvfrom.c	2012-01-04 10:05:17.852042256 +0100
-> +@@ -149,16 +149,16 @@ myrecvfrom(int s, void *buf, int len, un
-> +=20
-> +     /* Try to enable getting the return address */
-> + #ifdef IP_RECVDSTADDR
-> +-    if (from->sa_family =3D=3D AF_INET)
-> ++    if (from->sa_family =3D=3D AF_INET || !from->sa_family)
-> +         setsockopt(s, IPPROTO_IP, IP_RECVDSTADDR, &on, sizeof(on));
-> + #endif
-> + #ifdef IP_PKTINFO
-> +-    if (from->sa_family =3D=3D AF_INET)
-> ++    if (from->sa_family =3D=3D AF_INET || !from->sa_family)
-> +         setsockopt(s, IPPROTO_IP, IP_PKTINFO, &on, sizeof(on));
-> + #endif
-> + #ifdef HAVE_IPV6
-> + #ifdef IPV6_RECVPKTINFO
-> +-    if (from->sa_family =3D=3D AF_INET6)
-> ++    if (from->sa_family =3D=3D AF_INET6 || !from->sa_family)
-> +         setsockopt(s, IPPROTO_IPV6, IPV6_RECVPKTINFO, &on, sizeof(on));
-> + #endif
-> + #endif
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-xinetd b=
-/meta-networking/recipes-daemons/tftp-hpa/files/tftp-xinetd
-> new file mode 100644
-> index 0000000..fe70163
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-xinetd
-> @@ -0,0 +1,18 @@
-> +# default: off
-> +# description: The tftp server serves files using the trivial file trans=
-fer \
-> +#	protocol.  The tftp protocol is often used to boot diskless \
-> +#	workstations, download configuration files to network-aware printers, \
-> +#	and to start the installation process for some operating systems.
-> +service tftp
-> +{
-> +	socket_type		=3D dgram
-> +	protocol		=3D udp
-> +	wait			=3D yes
-> +	user			=3D root
-> +	server			=3D /usr/sbin/in.tftpd-hpa
-> +	server_args		=3D -s /var/lib/tftpboot
-> +	disable			=3D yes
-> +	per_source		=3D 11
-> +	cps				=3D 100 2
-> +	flags			=3D IPv6
-> +}
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/m=
-eta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> new file mode 100644
-> index 0000000..f09663d
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> @@ -0,0 +1,66 @@
-> +SUMMARY        =3D "Client for the Trivial File Transfer Protocol"
-> +DESCRIPTION    =3D \
-> +"The Trivial File Transfer Protocol (TFTP) is normally used only for \
-> +booting diskless workstations.  The tftp package provides the user   \
-> +interface for TFTP, which allows users to transfer files to and from a \
-> +remote machine.  This program and TFTP provide very little security, \
-> +and should not be enabled unless it is expressly needed."
-> +DEPENDS =3D "tcp-wrappers readline"
-> +SECTION =3D "network"
-> +LICENSE =3D "BSD-4-Clause"
-> +LIC_FILES_CHKSUM =3D "file://MCONFIG.in;startline=3D1;endline=3D9;md5=3D=
-c28ba5adb43041fae4629db05c83cbdd \
-> +                    file://tftp/tftp.c;startline=3D1;endline=3D32;md5=3D=
-988c1cba99d70858a26cd877209857f4"
-> +
-> +PR =3D "r0"
-> +
-> +SRC_URI =3D "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-h=
-pa-${PV}.tar.bz2 \
-> +           file://tftp-0.40-remap.patch \
-> +           file://tftp-0.42-tftpboot.patch \
-> +           file://tftp-0.49-chk_retcodes.patch \
-> +           file://tftp-0.49-cmd_arg.patch \
-> +           file://tftp-hpa-0.39-tzfix.patch \
-> +           file://tftp-hpa-0.49-fortify-strcpy-crash.patch \
-> +           file://tftp-hpa-0.49-stats.patch \
-> +           file://tftp-hpa-5.2-pktinfo.patch \
-> +           file://default \
-> +           file://init"
-> +
-> +SRC_URI[md5sum] =3D "46c9bd20bbffa62f79c958c7b99aac21"
-> +SRC_URI[sha256sum] =3D "0a9f88d4c1c02687b4853b02ab5dd8779d4de4ffdb9b2e5c=
-9332841304d1a269"
-> +
-> +inherit autotools update-rc.d update-alternatives
-> +
-> +EXTRA_OECONF +=3D "--disable-option-checking"
-> +
-> +# configure.in has errors
-> +do_configure() {
-> +	oe_runconf
-> +}
-> +
-> +do_install() {
-> +	oe_runmake install INSTALLROOT=3D${D}
-> +	mv ${D}${bindir}/tftp ${D}${bindir}/tftp-hpa
-> +	mv ${D}${sbindir}/in.tftpd ${D}${sbindir}/in.tftpd-hpa
-> +
-> +	install -m 755 -d ${D}${localstatedir}/lib/tftpboot/
-> +	install -d ${D}${sysconfdir}/init.d
-> +	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
-> +	install -d ${D}${sysconfdir}/default
-> +	install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/tftpd-hpa
-> +}
-> +
-> +FILES_${PN} =3D "${bindir}"
-> +
-> +PACKAGES +=3D "tftp-hpa-server"
-> +SUMMARY_tftp-hpa-server =3D "Server for the Trivial File Transfer Protoc=
-ol"
-> +FILES_tftp-hpa-server =3D "${sbindir} ${sysconfdir} ${localstatedir}"
-> +CONFFILES_tftp-hpa-server =3D "${sysconfdir}/default/tftpd-hpa"
-> +
-> +INITSCRIPT_PACKAGES =3D "tftp-hpa-server"
-> +INITSCRIPT_NAME =3D "tftpd-hpa"
-> +INITSCRIPT_PARAMS =3D "start 20 2 3 4 5 . stop 20 1 ."
-> +
-> +ALTERNATIVE_${PN} =3D "tftp"
-> +ALTERNATIVE_TARGET[tftp] =3D "${bindir}/tftp-hpa"
-> +ALTERNATIVE_PRIORITY =3D "50"
-> +
---=20
--Joe MacDonald.
-:wq
+Cristiana Voicu (1):
+=20=20hob: hob was freezing because it doesn't receives well the log file
 
---8nsIa27JVQLqB7/C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Robert Yang (1):
+=20=20print clear message for "bitbake -e ASSUME_PROVIDED"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
-iEYEARECAAYFAlCqdxMACgkQPN8S4W6ZZncZ7ACfULPHPpyuXIaKytkuhIunRHze
-0eIAn2BKf4At6Wszu/kIKKLxRKcAtSt8
-=4+3D
------END PGP SIGNATURE-----
+Christopher Larson (1):
+=20=20bash: fix mkbuiltins build failure
 
---8nsIa27JVQLqB7/C--
+Constantin Musca (3):
+=20=20puzzles: upgrade to r9660
+=20=20libxslt: upgrade to 1.1.27
+=20=20insane.bbclass: add qa package name check
+
+Denis 'GNUtoo' Carikli (1):
+=20=20boost: Activate zlib and bzip2 because they now work.
+
+Enrico Scholz (2):
+=20=20binutils: fixed --enable-targets option
+=20=20opkg: added alternatives-ln patch
+
+Gilbert Coville (1):
+=20=20pulseaudio: explicitly disable xen, rather than letting it detect
+
+Jessica Zhang (1):
+=20=20Fix the first line typo of adt-installer
+
+Laurentiu Palcu (8):
+=20=20populate_sdk_base.bbclass: use SDK_ARCH instead of SDKMACHINE
+=20=20xf86-video-vesa: upgrade to 2.3.2
+=20=20xf86-video-intel: upgrade to 2.20.12
+=20=20xf86-input-mouse: upgrade to 1.8.1
+=20=20xcb-proto: upgrade to 1.8
+=20=20fontconfig: upgrade to 2.10.1
+=20=20mdadm: upgrade to 3.2.6
+=20=20xf86-input-synaptics: add mtdev dependency
+
+Mark Hatle (4):
+=20=20rpm: Slightly change the way python-rpm is constructed
+=20=20python-smartpm: Add smartpm recipe
+=20=20rpm: Add additional RPMSENSE values to python module
+=20=20python-smartpm: Add basic knowledge of RPMSENSE_MISSINGOK
+
+Martin Jansa (1):
+=20=20qt4: remove -lGLU from QMAKE_LIBS_OPENGL in our linux.conf
+
+Phil Blundell (1):
+=20=20insane: detect and warn about relocations in .text
+
+Richard Purdie (11):
+=20=20libc-common: Ensure sysconfdir exists before installing files to it
+=20=20python.inc: make lsb override more concise
+=20=20sstate: Be consistent about sstate-inputdirs/outputdirs ending with =
+'/'
+=20=20classes: Be consistent about sstate-inputdirs/outputdirs ending with =
+'/'
+=20=20utils.bbclass: Fix documentation of create_cmdline_wrapper
+=20=20sstate: Fix various path manipulation issues
+=20=20sstate: Bump version number to deal with layout fixes
+=20=20make-3.82: Add patch for archive expression expansion issues
+=20=20python: Resolve intermediate staging issues
+=20=20sstate: Drop now unneeded python whitelist entries
+=20=20libcgroup/libxkbcommon: Use BPN in SRC_URI
+
+Ross Burton (11):
+=20=20autotools: set _FOR_BUILD variables here
+=20=20meta: remove redundant _FOR_BUILD variables
+=20=20xorg-driver-common: remove AC_CHECK_FILE workaround
+=20=20glib-2.0: remove zip build dependency
+=20=20glib-2.0: upgrade to latest stable, 2.34.1.
+=20=20mesa: remove python2 detection hack
+=20=20libunique: fix compilation with GLib 2.34
+=20=20initrdscripts: fix udevd in the live boot init scripts
+=20=20mesa-demos: fix --with-glut check
+=20=20default-providers: add default provider for make
+=20=20cmake.bbclass: use DEPENDS_prepend instead of +=3D for cmake-native
+
+Saul Wold (6):
+=20=20pulse: fix Bashism in string test
+=20=20mx: Update to 1.4.7
+=20=20kconfig-frontends: Update to 3.6
+=20=20psmisc: Update to 22.20
+=20=20packagegroup-self-hosted: add sftp server
+=20=20less: Update to 451
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andrea Adami (2):
+=20=20klibc: refactor runtime deps for shared utils
+=20=20klibc: upgrade from 2.0.1 to 2.0.2
+
+Andreas M=C3=BCller (5):
+=20=20lighttpd: move systemd appends since recipe is in oe-core
+=20=20gvfs: fix build
+=20=20gvfs-gdu-volume-monitor: fix build after oe-core's libexecdir =
+transition
+=20=20gnome-desktop: copy omf.make from ${STAGING_DATADIR_NATIVE} instead =
+${STAGIN
+=20=20thunar: add xfce4-panel to dependencies to ensure trash-plugin (tpa) =
+is buil
+
+Bruce Ashfield (1):
+=20=20kernel.bbclass: remove explicit version.h target
+
+Eric BENARD (1):
+=20=20mercurial-native: fix install
+
+Holger Hans Peter Freyther (1):
+=20=20systemd: Make the main systemd files proper CONFFILES
+
+Jack Mitchell (2):
+=20=20hiawatha: update to 8.6
+=20=20hiawatha: disable caching by default
+
+Martin Jansa (1):
+=20=20omgps: add patch to fix build with latest glib from oe-core
+
+Stefan Herbrechtsmeier (1):
+=20=20python-numpy: Move static libraries to -staticdev
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (9):
+=20=20external-arago-sdk-toolchain: package up gdb from the toolchain as =
+well
+=20=20task-arago-cross-canadian: add crosssdk gdb to the devkit
+=20=20meta-toolchain-arago: special case for gdb to be built as part of =
+canadian-c
+=20=20external-arago-sdk-toolchain: provide and package gdb conditionally
+=20=20meta-toolchain-arago: improve shell stubs to atomatically source =
+env-setup s
+=20=20arago.conf: abstract setting external Arago toolchain
+=20=20toolchain-external-linaro: add seetings for selecting Linaro toolchain
+=20=20arago-tisdk-image,task-arago-tisdk-addons: move arago-test out of =
+addons
+=20=20arago-headless-tisdk-image: provide a headless version ot TISDK image
+
+Franklin S. Cooper Jr (12):
+=20=20linux-am335x: Update psp 04.06.00.08 recipe
+=20=20linux-am335x_3.2.0-psp05.06.00.00: Disable CONFIG_LOCALVERSION_AUTO =
+option
+=20=20arago.conf: Setting PREFERRED_VERSIONS
+=20=20gst-ffmpeg: Select a non GPLv3 license
+=20=20qt4-tools-nativesdk: Select LGPLv2.1 license
+=20=20u-boot: Add PSP version 05.06.00.00 of u-boot
+=20=20u-boot_2012.10-psp05.06.00.00: Fix mmc boot environment settings
+=20=20u-boot_2012.10-psp05.06.00.00: Add NAND environment variables
+=20=20u-boot_2012.10-psp05.06.00.00: Add SPI environment variables
+=20=20u-boot_2012.10-psp05.06.00.00: Add NET environment variables
+=20=20arago.conf: Switch to latest PSP u-boot release
+=20=20meta-toolchain-arago-qte: Fix mkspecs location
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+Koen Kooi (1):
+=20=20common-bsp: linux-mainline: add recipe for 3.7.0-rc5
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Otavio Salvador (1):
+=20=20README: Update to point to the newer mailing list
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+Matthew McClintock (1):
+=20=20u-boot_git.bb: use upstream u-boot for e6500 parts for now
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+Ross Burton (1):
+=20=20Move the Poky tag to the 1.3 release
+
+Tomas Frydrych (2):
+=20=20Updated Rygel to 0.16.2
+=20=20Move preferred versions out of our layer.conf into the distro conf
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+Javier Martinez Canillas (1):
+=20=20igep00x0: add u-boot config option to built with NAND support
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Tom Zanussi (1):
+=20=20meta-intel: remove explicit kernel SRCREVs
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+Andrei Gherzan (1):
+=20=20linux-yocto: Fix af bus patch to be usable with poky master version
+
+Florin Sarbu (4):
+=20=20eglibc_2.16_bbappend: Use FILESEXTRAPATHS_prepend so that other =
+bbappends fo
+=20=20README.md: Add reference to meta-openembedded/meta-gnome to be     =
+put into=20
+=20=20keyutils: Added patch to fix CFLAGS when building for     x86 targets.
+=20=20Add opengl to DISTRO_FEATURES through poky-ivi-systemd.conf,     =
+removed ope
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Lukas M=C3=A4rdian (1):
+=20=20meta-openmoko: gta04: add kernel patch to enable hwrouting
+
+Martin Jansa (11):
+=20=20meta-openmoko: u-boot: bump SRCREV for new multiboot support
+=20=20busybox: enable stat applet
+=20=20shr: drop entries for meta-oe blacklist
+=20=20meta-openmoko: update S after SRCREV bump
+=20=20meta-shr: use new name udev-extraconf instead of udev-extra-rules
+=20=20shr-splash-theme: move allarch inherit to recipes which need it
+=20=20shr-splash-theme: use new update-alternatives syntax
+=20=20shr-wizard: bump PR to rebuild against new E17 alpha3
+=20=20chroot-image: remove BUILDNAME from sstate checksum
+=20=20shr-e-gadgets: bump PR to rebuild against new E17 alpha3
+=20=20chroot-image: exclude DATETIME from IMAGE_NAME vardeps
+
+Simon Busch (7):
+=20=20meta-samsung: linux-samsung-tuna: bump SRCREV and disable =
+wakelock/earlysusp
+=20=20meta-samsung: libgles-android: rework installation process to copy =
+relevant=20
+=20=20meta-samsung: chroot-script: setup devtmpfs for mounted rootfs as well
+=20=20meta-samsung: linux-samsung-tuna: bump SRCREV and disable =
+CONFIG_DHD_ENABLE_
+=20=20meta-samsung: chroot-script: execute installation script when =
+available
+=20=20meta-samsung: linux-samsung-tuna: bump SRCREV
+=20=20meta-samsung: base-files: don't mount /var/volatile as tmpfs anymore
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Chase Maupin (1):
+=20=20conf/machine: Update the FSTYPES for AMSDK machines
+
+Franklin S. Cooper Jr (2):
+=20=20libgles-omap3: Adjust for non X11 distros
+=20=20libgles-omap3: Verify pvrsrvkm module was found
+
+Paul Woegerer (1):
+=20=20linux-omap4-3.1.0: Add sched_process_exec tracing
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Keith Derrick (1):
+=20=20webos-image: luna-service2=3D144
+
+Steve Lemke (1):
+=20=20webos-image submission: qt=3D1.02
+
+Teppo Pennanen (1):
+=20=20keyboard-efigs: Add recipe
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Bogdan Marinescu (1):
+=20=20upstream_tracking.inc: update for 1.4 planning
+
+Cristian Iorga (1):
+=20=20upstream_tracking.inc: update according to YP 1.4
+
+Radu Moisan (2):
+=20=20upstream_tracking: update for 1.4 planning
+=20=20upstream_tracking.inc: Update hdparm
+
+Richard Purdie (1):
+=20=20poky.conf: Enable warning on textrel QA check
+
+Saul Wold (2):
+=20=20maintainers: Update file with missing maintainers
+=20=20upstream_tracking: Update for 1.4 Planning
+
+Stefan Stanacar (1):
+=20=20yocto-bsp: update qemu machine.conf template
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+
+
+
