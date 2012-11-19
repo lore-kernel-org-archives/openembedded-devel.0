@@ -1,34 +1,20 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TaUXG-0006xY-EZ
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TaV6g-00081d-QU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2012 17:49:26 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qAJGZNMj019729
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 19 Nov 2012 08:35:23 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Mon, 19 Nov 2012 08:35:22 -0800
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 88E297FD0;	Mon, 19 Nov 2012 11:34:44 -0500 (EST)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
-	8A6226A7C43; Mon, 19 Nov 2012 11:35:21 -0500 (EST)
-Date: Mon, 19 Nov 2012 11:35:21 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121119163521.GQ5534@windriver.com>
-References: <1352713186-2637-1-git-send-email-Xin.Ouyang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1352713186-2637-1-git-send-email-Xin.Ouyang@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: koen@dominion.thruhere.net
-Subject: Re: [PATCH V2][meta-networking] netperf: import from oe-classic and upgrade to 2.6.0
+	Mon, 19 Nov 2012 18:26:06 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 19 Nov 2012 09:11:34 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,280,1352102400"; d="scan'208";a="249506867"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.190])
+	by fmsmga001.fm.intel.com with ESMTP; 19 Nov 2012 09:11:33 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Nov 2012 17:11:22 +0000
+Message-Id: <cover.1353345006.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-networking][PATCH 0/8] Networking recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,61 +28,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 16:49:26 -0000
-X-Groupsio-MsgNum: 41558
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xJjS+Ds6jmpBvWv0"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Nov 2012 17:26:06 -0000
 
---xJjS+Ds6jmpBvWv0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit b69b6e04f12b2fc45a3ebac8c741bda41fea6409:
 
-Merged, thanks.
+  netperf: import from oe-classic and upgrade to 2.6.0 (2012-11-19 11:18:30 -0500)
 
-[[oe] [PATCH V2][meta-networking] netperf: import from oe-classic and upgra=
-de to 2.6.0] On 12.11.12 (Mon 17:39) Xin Ouyang wrote:
+are available in the git repository at:
 
-> V2 Updates:
->  * merge two patches into one
->  * bb recipe: LICENSE back to "netperf"
->  * initscript: add LSB headers
->  * initscript: "sed" to replace the hardcodes /usr/sbin to $sbindir.
->=20
-> Xin Ouyang (1):
->   netperf: import from oe-classic and upgrade to 2.6.0
->=20
->  .../recipes-support/netperf/files/cpu_set.patch    |   30 ++++++++++
->  meta-networking/recipes-support/netperf/files/init |   62 ++++++++++++++=
-++++++
->  .../recipes-support/netperf/files/vfork.patch      |   58 ++++++++++++++=
-++++
->  .../recipes-support/netperf/netperf_2.6.0.bb       |   57 ++++++++++++++=
-++++
->  4 files changed, 207 insertions(+)
->  create mode 100644 meta-networking/recipes-support/netperf/files/cpu_set=
-=2Epatch
->  create mode 100644 meta-networking/recipes-support/netperf/files/init
->  create mode 100644 meta-networking/recipes-support/netperf/files/vfork.p=
-atch
->  create mode 100644 meta-networking/recipes-support/netperf/netperf_2.6.0=
-=2Ebb
->=20
---=20
--Joe MacDonald.
-:wq
+  git://git.openembedded.org/meta-openembedded-contrib paule/networking
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/networking
 
---xJjS+Ds6jmpBvWv0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Paul Eggleton (8):
+  tftp-hpa: add from OE-Classic, update and tidy up
+  tunctl: add from OE-Classic and tweak
+  quagga: add from OE-Classic, update and tidy-up
+  radvd: add from OE-Classic, update and tidy up
+  vblade: add from OE-Classic, update and tidy up
+  xl2tpd: add from OE-Classic, update and tidy up
+  proftpd: add from meta-baryon
+  mtr: add from OE-Classic, update and tidy up
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+ .../recipes-daemons/proftpd/files/basic.conf.patch |   21 ++
+ .../recipes-daemons/proftpd/files/contrib.patch    |   42 ++++
+ .../recipes-daemons/proftpd/files/default          |    9 +
+ .../recipes-daemons/proftpd/files/make.patch       |   66 ++++++
+ .../proftpd/files/proftpd-basic.init               |  220 ++++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |   61 ++++++
+ .../recipes-daemons/radvd/files/radvd.init         |  124 +++++++++++
+ .../recipes-daemons/radvd/files/volatiles.03_radvd |    2 +
+ meta-networking/recipes-daemons/radvd/radvd.inc    |   37 ++++
+ .../recipes-daemons/radvd/radvd_1.9.1.bb           |    6 +
+ .../recipes-daemons/tftp-hpa/files/default         |    3 +
+ .../recipes-daemons/tftp-hpa/files/init            |  104 +++++++++
+ .../tftp-hpa/files/tftp-0.40-remap.patch           |   19 ++
+ .../tftp-hpa/files/tftp-0.42-tftpboot.patch        |   54 +++++
+ .../tftp-hpa/files/tftp-0.49-chk_retcodes.patch    |   15 ++
+ .../tftp-hpa/files/tftp-0.49-cmd_arg.patch         |  159 ++++++++++++++
+ .../tftp-hpa/files/tftp-hpa-0.39-tzfix.patch       |   18 ++
+ .../files/tftp-hpa-0.49-fortify-strcpy-crash.patch |   26 +++
+ .../tftp-hpa/files/tftp-hpa-0.49-stats.patch       |   14 ++
+ .../tftp-hpa/files/tftp-hpa-5.2-pktinfo.patch      |   23 ++
+ .../recipes-daemons/tftp-hpa/files/tftp-xinetd     |   18 ++
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |   66 ++++++
+ .../recipes-daemons/vblade/files/cross.patch       |   16 ++
+ .../recipes-daemons/vblade/vblade_20.bb            |   20 ++
+ .../quagga/files/fix-for-lib-inpath.patch          |   19 ++
+ .../quagga/files/quagga-0.99.17-libcap.patch       |   64 ++++++
+ .../recipes-protocols/quagga/files/quagga.default  |   13 ++
+ .../recipes-protocols/quagga/files/quagga.init     |  200 ++++++++++++++++++
+ .../quagga/files/volatiles.03_quagga               |    3 +
+ .../quagga/files/watchquagga.default               |    7 +
+ .../quagga/files/watchquagga.init                  |   64 ++++++
+ .../recipes-protocols/quagga/quagga.inc            |  146 +++++++++++++
+ .../recipes-protocols/quagga/quagga_0.99.21.bb     |    8 +
+ .../xl2tpd/xl2tpd-1.3.1/cflags.patch               |   58 ++++++
+ .../recipes-protocols/xl2tpd/xl2tpd.inc            |   35 ++++
+ .../recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb       |    8 +
+ .../recipes-support/mtr/files/no-gtk.patch         |   31 +++
+ meta-networking/recipes-support/mtr/mtr_0.82.bb    |   19 ++
+ meta-networking/recipes-support/tunctl/tunctl.inc  |   15 ++
+ .../recipes-support/tunctl/tunctl_1.5.bb           |    4 +
+ 40 files changed, 1837 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/basic.conf.patch
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/contrib.patch
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/default
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/make.patch
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/proftpd-basic.init
+ create mode 100644 meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+ create mode 100755 meta-networking/recipes-daemons/radvd/files/radvd.init
+ create mode 100644 meta-networking/recipes-daemons/radvd/files/volatiles.03_radvd
+ create mode 100644 meta-networking/recipes-daemons/radvd/radvd.inc
+ create mode 100644 meta-networking/recipes-daemons/radvd/radvd_1.9.1.bb
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/default
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/init
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.40-remap.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.42-tftpboot.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-chk_retcodes.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-0.49-cmd_arg.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.39-tzfix.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49-fortify-strcpy-crash.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-0.49-stats.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-5.2-pktinfo.patch
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-xinetd
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/cross.patch
+ create mode 100644 meta-networking/recipes-daemons/vblade/vblade_20.bb
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/fix-for-lib-inpath.patch
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga-0.99.17-libcap.patch
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga.default
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga.init
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/volatiles.03_quagga
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/watchquagga.default
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/watchquagga.init
+ create mode 100644 meta-networking/recipes-protocols/quagga/quagga.inc
+ create mode 100644 meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
+ create mode 100644 meta-networking/recipes-support/mtr/files/no-gtk.patch
+ create mode 100644 meta-networking/recipes-support/mtr/mtr_0.82.bb
+ create mode 100644 meta-networking/recipes-support/tunctl/tunctl.inc
+ create mode 100644 meta-networking/recipes-support/tunctl/tunctl_1.5.bb
 
-iEYEARECAAYFAlCqX8kACgkQPN8S4W6ZZnetuACfZEIeeMaCyi+EJM+uWCek0Iig
-ADcAn2X3cS7eDh4G4jY8wj7QSKP/J5gy
-=/HDG
------END PGP SIGNATURE-----
+-- 
+1.7.9.5
 
---xJjS+Ds6jmpBvWv0--
+
+
