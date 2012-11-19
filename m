@@ -1,38 +1,37 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TaOQv-00036O-Hu
+	(envelope-from <otavio.salvador@gmail.com>) id 1TaOhW-0005eU-Ut
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Nov 2012 11:18:29 +0100
-Received: from mail-ie0-f197.google.com ([209.85.223.197])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 19 Nov 2012 02:04:12 -0800
-Received: by mail-ie0-f197.google.com with SMTP id 9so22200344iec.0
+	Mon, 19 Nov 2012 11:35:39 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so1931883dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Nov 2012 02:04:11 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=elYnGjpmIhbtqBfpvvq267cPASn9qLcITN3z0ju/4tQ=;
-	b=Upr+8K6GNsTqzBKS8Z513j1FBQy2KeFCHJVjmvlbihst91nsGuRMfuAN08Ozr3UPOv
-	fydb/of1ENfPreT2IPlNRZ2pF1xAF2ukwVmZXS+L9Ar1W5SQkGsMHeqxy0MB2HpNTJiW
-	iSu4DJY7uthL5OVg+Wbpasl1xotVO/8TEQf8AjyEeH/LHSa3kWOeOYUIEQwDQBKvg4+J
-	UN88f5j7O3foMXxZ9ZSjsjOAStJ6DmXgBbqzC6rwefyV886jgEU/GjlTSK//ZsTJ3OAM
-	DautQcRZvI3srueW/zv8Uc44Ui12K3jM0bnqcRK6U+GmVkLkIvCKJrna0+jfbqoB96fh
-	BJbw==
-Received: by 10.60.169.243 with SMTP id ah19mr9985157oec.127.1353319450984;
-	Mon, 19 Nov 2012 02:04:10 -0800 (PST)
-Received: by 10.60.169.243 with SMTP id ah19mr9985151oec.127.1353319450787;
-	Mon, 19 Nov 2012 02:04:10 -0800 (PST)
+	Mon, 19 Nov 2012 02:21:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=apvJsJ04w7whf3NR0PCPko35trG3l1pJ5gaDbaviIWA=;
+	b=Vndc8AKEWkVVEpZ2Iw034r8u4wWO4FJK9+80WXCUy8XZT8EkkXSFzi3DpCsqHVNYfc
+	tI+ELDpvKOzpU0CYCzNwe3es4CbiTvyhnqxkOvx8RigNpJqY2RZEcc6cA66IAjJW/HfF
+	VU3X8Abbzma9JwXIxMRK1EdrVrxmT1ZCqdoQzzo6I7HoEKE/O8jTchwSy5F522iO3jKR
+	4MpTQpptCmqPQPJaTkzMJyITuphTm+cI56x3IcinUMprnkzBLOhnFn0LfDyJsmrxiSim
+	SP8aHgR7xELarJsSssZNw7y/B4Q+pRAptMa7CivB2NouxFwhlfPpoxV72n6Ho4ut1IJx
+	65MA==
 MIME-Version: 1.0
-Received: by 10.182.34.138 with HTTP; Mon, 19 Nov 2012 02:03:50 -0800 (PST)
-In-Reply-To: <CAOd_LFyo-7GmLS9AtdO8BXXVxGuqdQvoZqmHHsm+qGSittwVmw@mail.gmail.com>
-References: <CAOd_LFyo-7GmLS9AtdO8BXXVxGuqdQvoZqmHHsm+qGSittwVmw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 19 Nov 2012 10:03:50 +0000
-Message-ID: <CAJTo0LaDC2cx+CfgOgdFan7njJ4mZgJ1VBuo_1KUcgkuQnN+Dw@mail.gmail.com>
+Received: by 10.66.90.101 with SMTP id bv5mr34272894pab.42.1353320496200; Mon,
+	19 Nov 2012 02:21:36 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Mon, 19 Nov 2012 02:21:36 -0800 (PST)
+In-Reply-To: <50A99B43.7000503@windriver.com>
+References: <1353056022-29560-1-git-send-email-yanjun.zhu@windriver.com>
+	<CAP9ODKoX3=SV+Dei9s7NYUPtos_JtqewY_hi6ji2gEvYndfYPQ@mail.gmail.com>
+	<50A998E3.9030103@windriver.com> <50A99B43.7000503@windriver.com>
+Date: Mon, 19 Nov 2012 08:21:36 -0200
+X-Google-Sender-Auth: wJjvte5ukNuLz_L3oQk0QXN2cOA
+Message-ID: <CAP9ODKrVg7de+xk--BkKY7fTXthithhSCVae1FGvcVRZzraMzg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQm6dSxDi+zCsPTw6PXWlJZQdK2KElP9JcKrPh0EO1HCfiwd4W4ESwBrzC250z1z5VK28VAHHhSdgTknT7dtoqPcI9GHILgAbyd2TIfEuiNoDXNEJTt48Mrsw9q/B1meZuMbA5wPfZMfiBIwJOT+ZMNrrlpZiC0DSYtZe06kAsHsHZV62mNctkHQphFqlBmqMpPvVVe1
-Subject: Re: window managers?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] python: fix for Security Advisory - python - CVE-2012-2135
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 10:18:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Nov 2012 10:35:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 17 November 2012 21:57, Cliff Brake <cliff.brake@gmail.com> wrote:
-> I did some looking into window managers in recent oe/meta-oe/angstrom,
-> and this is what I found:
+On Mon, Nov 19, 2012 at 12:36 AM, yzhu1 <Yanjun.Zhu@windriver.com> wrote:
+
+> On 11/19/2012 10:26 AM, yzhu1 wrote:
 >
-> matchbox
-> - is this still maintained?  Does not seem like a lot of new development.
+>> On 11/16/2012 08:21 PM, Otavio Salvador wrote:
+>>
+>>> On Fri, Nov 16, 2012 at 6:53 AM, yanjun.zhu <yanjun.zhu@windriver.com>**
+>>> wrote:
+>>>
+>>>  The utf-16 decoder in Python 3.1 through 3.3 does not update the
+>>>> aligned_end variable after calling the unicode_decode_call_**
+>>>> errorhandler
+>>>> function, which allows remote attackers to obtain sensitive information
+>>>> (process memory) or cause a denial of service (memory corruption and
+>>>> crash)
+>>>> via unspecified vectors.
+>>>>
+>>>> http://web.nvd.nist.gov/view/**vuln/detail?vulnId=CVE-2012-**2135<http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-2135>
+>>>>
+>>>> Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+>>>>
+>>>>  I think this needs to be backported to previous releases, right?
+>>>
+>> Hi, Otavio
+>>
+>> OK. I will do it.
+>>
+>> Thanks a lot.
+>> Zhu Yanjun
+>>
+>>
+>>  Hi, Otavio
 >
-> Questions:
-> 1) any opinions on WM for embedded Linux systems?  For most projects,
-> we simply run a single full screen app, but a WM would be nice in some
-> cases.
+> Sorry. I do not know what is the previous releases. Do you mean denzil
+> branch or others?
+> Would you like to make it clear?
 
-For a single fullscreen application, Matchbox is practically
-"finished".  Nokia deployed it on several devices (770, N800, N810)
-and their QA were ruthless.
 
-At some point I should sweep around the OE derivates, old Maemo and
-collect any outstanding patches, but if it's sufficiently featureful
-then it does work very well.
+Yes, I meant denzil and danny (both released and maintained for now).
 
-Personally if I want a "proper" window manager that's also flexible,
-I'd use Mutter.  Fast compositing and and plugin architecture so you
-can implement any behaviour with it (GNOME Shell and MeeGo
-Netbook/Dawati were both based on Mutter).
-
-Ross
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
