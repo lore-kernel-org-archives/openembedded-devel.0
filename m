@@ -1,25 +1,27 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1TavGw-0003ms-VT
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2012 22:22:23 +0100
-Received: (qmail 28953 invoked by uid 1003); 20 Nov 2012 21:08:18 -0000
-Received: from unknown (HELO ?192.168.1.105?)
-	(philip@opensdr.com@96.240.166.19)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	20 Nov 2012 21:08:18 -0000
-Message-ID: <50ABF140.4040308@balister.org>
-Date: Tue, 20 Nov 2012 16:08:16 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121016 Thunderbird/16.0.1
+Received: from mga02.intel.com ([134.134.136.20])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1TawUH-0005B4-Vv; Tue, 20 Nov 2012 23:40:14 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 20 Nov 2012 14:26:08 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,288,1352102400"; d="scan'208";a="245040489"
+Received: from unknown (HELO helios.localnet) ([10.252.122.180])
+	by orsmga002.jf.intel.com with ESMTP; 20 Nov 2012 14:26:06 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Philip Balister <philip@balister.org>
+Date: Tue, 20 Nov 2012 22:26:05 +0000
+Message-ID: <1684102.id2BTWEj2K@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
+In-Reply-To: <50ABF140.4040308@balister.org>
+References: <50ABF140.4040308@balister.org>
 MIME-Version: 1.0
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, 
+Cc: openembedded-members@lists.openembedded.org,
 	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
+	<openembedded-devel@lists.openembedded.org>,
 	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Stand for FOSDEM
+Subject: Re: Stand for FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,17 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 21:22:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Nov 2012 22:40:14 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Does someone want to take the lead applying for and organizing the stand 
-for FOSDEM this year?
+On Tuesday 20 November 2012 16:08:16 Philip Balister wrote:
+> Does someone want to take the lead applying for and organizing the stand
+> for FOSDEM this year?
+> 
+> https://fosdem.org/2013/call_for_stands/
+> 
+> The application is due next Wednesday.
 
-https://fosdem.org/2013/call_for_stands/
+I volunteered to do this at the GA, so I can do it. I'll definitely need some 
+assistance though (esp. with regard to getting the gear to the venue).
 
-The application is due next Wednesday.
+Cheers,
+Paul
 
-Philip
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
