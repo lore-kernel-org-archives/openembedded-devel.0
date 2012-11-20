@@ -1,24 +1,32 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Taq1R-00047N-Qf
+	(envelope-from <martin.jansa@gmail.com>) id 1Tar2k-0006NV-KY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2012 16:46:02 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 20 Nov 2012 07:30:52 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,286,1352102400"; d="scan'208";a="222183707"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.208])
-	by orsmga001.jf.intel.com with ESMTP; 20 Nov 2012 07:31:04 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 20 Nov 2012 17:51:26 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2401923eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Nov 2012 08:37:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=WX+f12sCG4KeigahgeJozp4lZQ4DAnIB539d5ihFO7Y=;
+	b=VcjqnAoMGGejWat7cFK9421nhO7l62ddEHkNFzPmKLyfL724MnIbQ683yqi7bE+xY/
+	dwPWQHpQ60+uYhTpgp7wBE16rqQ/1PjzcuXB1I+73yBIoNbtorSep6Ox42u+jmC+8g4F
+	nlBmHDDpJIBfFnGvvTIz7WuiCrgfS1WWRFEwMPTYH4D5dftyFPZdjygazcqmEmk2hyf4
+	/lmmnKsoBxV21UkNN/vJ4v12c9wIwqYuaOnKVLotu34cjSvoB6tPuqOQ92uv8MKiL+Gi
+	00181R4U3bwXLLAgRoDFuGyQJpMLYv/sJbaLFAkWUMvmidJLq0OuZ67JugUjSHAes/ne
+	kOXw==
+Received: by 10.14.200.194 with SMTP id z42mr35473684een.13.1353429442939;
+	Tue, 20 Nov 2012 08:37:22 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id k2sm31455982eep.15.2012.11.20.08.37.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 20 Nov 2012 08:37:22 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Nov 2012 15:30:52 +0000
-Message-Id: <e66779106fb8357c184d57be42b2925ef3fe5d2a.1353425302.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1353425302.git.paul.eggleton@linux.intel.com>
-References: <cover.1353425302.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1353425302.git.paul.eggleton@linux.intel.com>
-References: <cover.1353425302.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH v2 8/8] mtr: add from OE-Classic, update and tidy up
+Date: Tue, 20 Nov 2012 17:37:16 +0100
+Message-Id: <1353429436-10389-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+Subject: [meta-oe][PATCH] qt4-x11-free: drop bbappend for 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,86 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 15:46:02 -0000
+X-List-Received-Date: Tue, 20 Nov 2012 16:51:26 -0000
 
-* Update to 0.82
-* Add ncurses to DEPENDS
-* Add patch to fix configure with standard autotools_do_configure
-* Add SUMMARY
-* Add LIC_FILES_CHKSUM
+* 4.8.1 was removed from oe-core
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/mtr/files/no-gtk.patch         |   31 ++++++++++++++++++++
- meta-networking/recipes-support/mtr/mtr_0.82.bb    |   19 ++++++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/mtr/files/no-gtk.patch
- create mode 100644 meta-networking/recipes-support/mtr/mtr_0.82.bb
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend | 6 ------
+ 1 file changed, 6 deletions(-)
+ delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
 
-diff --git a/meta-networking/recipes-support/mtr/files/no-gtk.patch b/meta-networking/recipes-support/mtr/files/no-gtk.patch
-new file mode 100644
-index 0000000..0dbeb7a
---- /dev/null
-+++ b/meta-networking/recipes-support/mtr/files/no-gtk.patch
-@@ -0,0 +1,31 @@
-+Disable gtk check that breaks with current autotools
-+
-+Ideally we would have a proper fix for this and send that upstream instead.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+diff --git a/configure.in b/configure.in
-+index 8474543..5118565 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -48,16 +48,8 @@ AC_ARG_ENABLE(ipv6,
-+ [  --disable-ipv6          Do not enable IPv6],
-+ WANTS_IPV6=$enableval, WANTS_IPV6=yes)
-+    
-+-if test "x$WANTS_GTK" = "xyes"; then
-+-        AM_PATH_GTK_2_0(2.6.0, CFLAGS="$CFLAGS $GTK_CFLAGS"
-+-                           LIBS="$LIBS $GTK_LIBS -lm",
-+-                           AC_MSG_WARN(Building without GTK2 display support)
-+-                   AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
-+-                           GTK_OBJ="")
-+-else
-+-	AC_DEFINE(NO_GTK)
-+-	GTK_OBJ=""
-+-fi
-++AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
-++GTK_OBJ=""
-+ 
-+ AC_CHECK_FUNC(socket, , 
-+   AC_CHECK_LIB(socket, socket, , AC_MSG_ERROR(No socket library found)))
-diff --git a/meta-networking/recipes-support/mtr/mtr_0.82.bb b/meta-networking/recipes-support/mtr/mtr_0.82.bb
-new file mode 100644
-index 0000000..c6d5152
---- /dev/null
-+++ b/meta-networking/recipes-support/mtr/mtr_0.82.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Combined traceroute and ping utility"
-+DESCRIPTION = "mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool."
-+HOMEPAGE = "http://www.bitwizard.nl/mtr/"
-+DEPENDS = "ncurses"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-+                    file://mtr.c;startline=5;endline=16;md5=87105f8fe9675e897e074869afaafa6f"
-+
-+SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
-+           file://no-gtk.patch"
-+
-+SRC_URI[md5sum] = "10601ea543fda3e51545c4bce195b64c"
-+SRC_URI[sha256sum] = "f3b457c9623ae03565688a7ffd49d4843a5e2505ccaf3ba8d9fbd86e3ce9b6a0"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--without-gtk"
-+
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
+deleted file mode 100644
+index 27cac11..0000000
+--- a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.1.bbappend
++++ /dev/null
+@@ -1,6 +0,0 @@
+-DEPENDS += "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
+-
+-PRINC := "${@int(PRINC) + 1}"
 -- 
-1.7.9.5
+1.8.0
 
 
 
