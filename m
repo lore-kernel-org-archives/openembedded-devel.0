@@ -1,32 +1,25 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tas5n-0008EA-NO
+Received: from starfish.geekisp.com ([216.168.135.166])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1TavGw-0003ms-VT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Nov 2012 18:58:39 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa11so3943914pad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Nov 2012 09:44:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=wJSygD6aD+7XhadNzNG1X4jDysEpfD2c+EgfnJZc+z8=;
-	b=FjMs94g1z7s4zMMsUdSyiDk4U5Ldw8kvKvCn1gWN7PcmFhnT8HVwUKhQRnaPOEe22U
-	a7UyDZ8hWQg3e2fqcUTeB+vn2oeO9cJW8hqR2CHDJ/m71HwuSNhq/ydBAF2mHwAN6uI9
-	T5eC5GO4sM++BQ3jBQLWZ9tk4FaDIZI0gby3qavutsEEIva04Tz/kT88eLbId6HO5Vfn
-	FbIlkTAqZPUT2RRTi7RVOig0Rv7v41tI8omieqrIJR+HTmHFHDkxo2SD4wEgXEZM5Ahr
-	3HY649vOMXjePDcLA/cRcCidO51nhytn2fKFqMp6gvqdsvGlK26s40h7LxyLsZDPzeRo
-	LEDQ==
+	Tue, 20 Nov 2012 22:22:23 +0100
+Received: (qmail 28953 invoked by uid 1003); 20 Nov 2012 21:08:18 -0000
+Received: from unknown (HELO ?192.168.1.105?)
+	(philip@opensdr.com@96.240.166.19)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	20 Nov 2012 21:08:18 -0000
+Message-ID: <50ABF140.4040308@balister.org>
+Date: Tue, 20 Nov 2012 16:08:16 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121016 Thunderbird/16.0.1
 MIME-Version: 1.0
-Received: by 10.66.80.194 with SMTP id t2mr9780284pax.43.1353433475256; Tue,
-	20 Nov 2012 09:44:35 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Tue, 20 Nov 2012 09:44:35 -0800 (PST)
-Date: Tue, 20 Nov 2012 15:44:35 -0200
-X-Google-Sender-Auth: 2LzjJJ4sB4pfywAR4h4xRhAuCXY
-Message-ID: <CAP9ODKq2rt8H+LPwz-7KnfiuDmfRoULcEgzHsEsB_qKgR-Ka8A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Danny branch
+To: "openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Stand for FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,18 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 17:58:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Nov 2012 21:22:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Does someone want to take the lead applying for and organizing the stand 
+for FOSDEM this year?
 
-It is time to branch for danny as OE-Core has dropped Qt 4.8.1 thus
-make Meta-OE fail to build from now on. Making this change in master
-makes it work but breaks it in danny based branch.
+https://fosdem.org/2013/call_for_stands/
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+The application is due next Wednesday.
+
+Philip
 
 
