@@ -1,31 +1,34 @@
 Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TbCtK-0003DK-6l
+	(envelope-from <raj.khem@gmail.com>) id 1TbDTm-0003lj-3l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 17:11:10 +0100
-Received: by mail-ie0-f175.google.com with SMTP id qd14so4824882ieb.6
+	Wed, 21 Nov 2012 17:48:50 +0100
+Received: by mail-ie0-f175.google.com with SMTP id qd14so4896320ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 07:57:04 -0800 (PST)
+	Wed, 21 Nov 2012 08:34:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=BdT4d+2Sv31+uEnBjxfZjqQO3luJFg3sRlrPQ0FXIzs=;
-	b=LusipSx79unmhgWWVAol5QkY5HA5aE16jqZ7YjyjiRyDurxc8Ac/yLo7WeGW8sD8XX
-	0KZHF8Cienirg5JqieUui4w7TA/J3Eilx+hPbY2YD3wGsC4AhHxuRbNmk6Le293GDUp4
-	VaAQ3exrQq9iksvDayEWmYOZq8GPxD+YHV2njAe6H5+GcBftw3SRjNnYa3Gj6MVJzuvj
-	l4Z+HmWw3bp8FfbfPcfYxFFzpxZQGPKjJuqCpVHSofoV2tnDsn6+QBjFKpVlPsM6XcSN
-	8fumQZAHlZGzHAAmqSKps1vJdwns4S0374L+9VWgpSIV0TfZSYfblklWmheN2/zVqUZW
-	UB0A==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=FF0ZhPC6VO4jMx++q8aUZ0ZwAz90CEC51OB8x3mGvAk=;
+	b=QVA3zVYjsvORvkl90DCUYst5ges70Pagkk5pITuG9RQFM06H/YRVq0QgNTPsLUki5W
+	pdhXKQT9i8DcsIr+U/CJPy2J16YrklSEO7y66922JySaSMjRrqpaaJ/YxBh6VCj2TX28
+	IXG2oXWFKYQZAvMwAQTlp590gYg3kr2IZaHO9dwH4g/QwaOGTXXtCnzjqtdPaB8FZ06K
+	lTdVmHD1CWr977AxC4SvYgBYItx6U7EEQ+EBXbmYpYBAwMuaHsQvG06WMHkT+Rb1QNM6
+	kz6bWnsmZ6oShDz5RV1R8EAvldcrzpg1gbuu3a77oqi+t5lvuJb3utQfIGjsjCipQyqy
+	LbQw==
+Received: by 10.50.178.67 with SMTP id cw3mr16942igc.53.1353515684543; Wed, 21
+	Nov 2012 08:34:44 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.50.153.229 with SMTP id vj5mr14160336igb.50.1353513424622;
-	Wed, 21 Nov 2012 07:57:04 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Wed, 21 Nov 2012 07:57:04 -0800 (PST)
-In-Reply-To: <1353508922-12820-1-git-send-email-koen@dominion.thruhere.net>
-References: <1353508922-12820-1-git-send-email-koen@dominion.thruhere.net>
-Date: Wed, 21 Nov 2012 16:57:04 +0100
-Message-ID: <CALbNGRRy=E7vVNM0SkJrPi3Pp14bEWJDC6ZS1tk_OLVB1R078Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] gphoto2: fix gettext build error
+Received: by 10.64.127.194 with HTTP; Wed, 21 Nov 2012 08:34:13 -0800 (PST)
+In-Reply-To: <20121121161712.030af137@eb-e6520>
+References: <k6b5r8$edu$1@ger.gmane.org> <20121121161712.030af137@eb-e6520>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 21 Nov 2012 08:34:13 -0800
+Message-ID: <CAMKF1srnGbWDNjKx=6udw8EVLf_CFSaM5u7_TSmBfJx2xzpDSA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 16:11:10 -0000
+X-List-Received-Date: Wed, 21 Nov 2012 16:48:50 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 21, 2012 at 3:42 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-> index d7f6ac0..27f660b 100644
-> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-> +++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-> @@ -3,7 +3,7 @@ SECTION = "libs"
->  LICENSE = "LGPLv2.1"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
->
-> -PR = "r3"
-> +PR = "r4"
->
->  DEPENDS = "libtool jpeg virtual/libusb0 libexif"
->
-> @@ -26,7 +26,6 @@ inherit autotools pkgconfig gettext lib_package
->  EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
->
->  do_configure_append() {
-> -       cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
->         cd ${S}/libgphoto2_port/
->         autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
->         cd ${S}
-> --
-> 1.7.7.6
->
-Could you please add an error log?
+Hi Eric
 
-Andreas
+If you have time thats good please go ahead with danny too. I have been
+away for most of time after ELCE
 
+Thanks
+-Khem
+
+
+On Wed, Nov 21, 2012 at 7:17 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+
+> Hi Koen,
+>
+> Le Thu, 25 Oct 2012 12:55:47 +0200,
+> Koen Kooi <koen@dominion.thruhere.net> a =C3=A9crit :
+> > As for branch maintenance: any volunteers for managing the
+> meta-openembedded
+> > 'danny' branches? There doesn't need to be a single maintainer, but it
+> would
+> > be nice to have one person coordinating everything, even if it's just
+> > pulling in danny-next branches from the layer maintainers every week or
+> so.
+> >
+> > As I said above, I'm swamped for the next 3 weeks, so can people who ha=
+ve
+> > used or are using the 'denzil' branch weigh in with
+> feedback/anecdotes/etc?
+> > I have such a document for oe-core 'denzil', which I keep failing to se=
+nd
+> > out, but it boils down to "better predictability for merge windows".
+> Please
+> > share your experience for meta-oe here.
+> >
+> if wanted I can continue to handle denzil and also danny branches (and
+> should have more time than for denzil).
+>
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
