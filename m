@@ -1,34 +1,39 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TbHAo-0006f0-SM
+Received: from 13.mo3.mail-out.ovh.net ([188.165.33.202]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TbHrH-0007p3-CS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 21:45:31 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa10so273299pad.6
+	Wed, 21 Nov 2012 22:29:23 +0100
+Received: from mail637.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id B94ADFF992E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 12:31:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=CJXburiPtIqpjsb8Xzpef2QjJIKITheT78yC+Buipew=;
-	b=e+OrjP9cL78WGm3yRLX8gv5WEJwt2neHRLjg0uaDOzsJsc2RJkL2otgtiYjnIdD2WP
-	UMUcB9hWvUzeHPk5nHRvBcW+v8C6xK1NpTwUFf9j9Dvebala8BdUVOd5PJgQqeRcWzWV
-	gRE8nWcqqY3ASaWR8fu3x6FnzzWfg6fKIkdCH5I4cS7SRq6e+VlIPKejZ7plEUzF+k/Z
-	0b4xzzWOvgL/VcfW7iEkkWhsxc9/BJbaN6x2tKFm9e+OprDWDNRrvJ9pGJ0etgNtZjvz
-	t6WpF3+oUv5f2TUsrKPW5SIfP9xKP5QyFOdvzLNDHrEYvA/YPgMpmDG5qLQSlvcH+NMv
-	4ARQ==
-MIME-Version: 1.0
-Received: by 10.66.88.41 with SMTP id bd9mr20098554pab.46.1353529884891; Wed,
-	21 Nov 2012 12:31:24 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Wed, 21 Nov 2012 12:31:24 -0800 (PST)
-In-Reply-To: <cover.1353518890.git.paul.eggleton@linux.intel.com>
-References: <cover.1353518890.git.paul.eggleton@linux.intel.com>
-Date: Wed, 21 Nov 2012 18:31:24 -0200
-X-Google-Sender-Auth: eEneyQSlA0G5_P2_T4Fp-CBCRL4
-Message-ID: <CAP9ODKrMGjuWUjvd75tYSr6aNoV6tq5BFjYcm9H3h1nmvWGm3g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 21 Nov 2012 16:31:11 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Nov 2012 17:20:30 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Nov 2012 17:20:30 +0200
+Date: Wed, 21 Nov 2012 16:20:07 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 0/2] ntp fixes
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20121121162007.7f2e7b07@eb-e6520>
+In-Reply-To: <18D1BDE4-CCB3-4105-8C64-BD843CB75FA6@gmail.com>
+References: <k6b5r8$edu$1@ger.gmane.org>
+	<18D1BDE4-CCB3-4105-8C64-BD843CB75FA6@gmail.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 17383331612712611145
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehgedrudejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehgedrudejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 20:45:31 -0000
+X-List-Received-Date: Wed, 21 Nov 2012 21:29:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 21, 2012 at 3:29 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> The following changes since commit 9637cb304f1e9116b037d0afd69014836a2fa512:
->
->   Revert "ntp: Clean up recipes" (2012-11-21 08:32:18 -0500)
->
-> are available in the git repository at:
->
->   git://git.openembedded.org/meta-openembedded-contrib paule/ntp
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/ntp
->
-> Paul Eggleton (2):
->   ntp: cleanup recipes and fix SSL support
->   ntp: make servers configurable and default to none configured
+Hi Khem,
 
-Did you check my previous patches which move it to meta-networking? We
-need to fix it for systemd.
+Le Fri, 26 Oct 2012 08:14:06 -0700,
+Khem Raj <raj.khem@gmail.com> a =E9crit :
+> I can take care of danny=20
+>=20
+fine I can provide some help if needed (and should have read all the
+mail before replying to the previous one ;-)
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Eric
 
 
