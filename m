@@ -1,36 +1,39 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TbBix-0001Lh-A3
+Received: from 10.mo3.mail-out.ovh.net ([87.98.165.232]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TbCYF-0002WL-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 15:56:26 +0100
-Received: by mail-wi0-f169.google.com with SMTP id hq12so2874274wib.0
+	Wed, 21 Nov 2012 16:49:23 +0100
+Received: from mail637.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id E700CFF938C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 06:42:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=LIGyYaO+D3niekC1KeB/eCrEzqnZwxZ6tdA/EQ9APqw=;
-	b=OHt0mhaViqkeJT++CFPlaWdoEodTO+rM3WBBNRm916XMLvcO3xqHl0zOH/Lf7gua+j
-	7ylcwS98nYvL1DGcQZc4YWJCQ7ffUpIqMzwenG7MeUluVl0vxUo/6e2xlbh2J3B0oSml
-	A9hZ9Ltzi11xwFSDZTIBkxCz3v7+eY3C+aKuARqw9FS4GW6BmE4RU6gei3S89Igmwmfy
-	bQBGWo/WSfxjC4osiXloMMOb9kpqiiXsjxK86LER38xoUx45zvbOITm2O7CpUTBFzuS3
-	ufLYIdze0GM6KdPoTU7R5IY3zOu3DV+nSMx8C4lc86xmPD5YO4UtnKnGwTbWwfheyGgM
-	BYXw==
-Received: by 10.216.135.24 with SMTP id t24mr812961wei.147.1353508938370;
-	Wed, 21 Nov 2012 06:42:18 -0800 (PST)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id i6sm22266179wix.5.2012.11.21.06.42.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Nov 2012 06:42:17 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Wed, 21 Nov 2012 16:28:19 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Nov 2012 17:17:38 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Nov 2012 17:17:37 +0200
+Date: Wed, 21 Nov 2012 16:17:12 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Nov 2012 15:42:02 +0100
-Message-Id: <1353508922-12820-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.7.6
-X-Gm-Message-State: ALoCoQkEjkkhdfrU2TeX0PKRdWkbwTObGIAFISzEAKDMNJLG1MsZcDax9zqcgRfXkZFILOe4HVdi
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] gphoto2: fix gettext build error
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20121121161712.030af137@eb-e6520>
+In-Reply-To: <k6b5r8$edu$1@ger.gmane.org>
+References: <k6b5r8$edu$1@ger.gmane.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 17334636441388494153
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehgedrudejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+X-Spam-Check: DONE|U 0.50001/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehgedrudejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Cc: koen@dominion.thruhere.net
+Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,36 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 14:56:27 -0000
+X-List-Received-Date: Wed, 21 Nov 2012 15:49:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |    3 +--
- 1 files changed, 1 insertions(+), 2 deletions(-)
+Hi Koen,
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-index d7f6ac0..27f660b 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
-@@ -3,7 +3,7 @@ SECTION = "libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
- 
--PR = "r3"
-+PR = "r4"
- 
- DEPENDS = "libtool jpeg virtual/libusb0 libexif"
- 
-@@ -26,7 +26,6 @@ inherit autotools pkgconfig gettext lib_package
- EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
- 
- do_configure_append() {
--	cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
- 	cd ${S}/libgphoto2_port/
- 	autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
- 	cd ${S}
--- 
-1.7.7.6
+Le Thu, 25 Oct 2012 12:55:47 +0200,
+Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
+> As for branch maintenance: any volunteers for managing the meta-openembed=
+ded
+> 'danny' branches? There doesn't need to be a single maintainer, but it wo=
+uld
+> be nice to have one person coordinating everything, even if it's just
+> pulling in danny-next branches from the layer maintainers every week or s=
+o.
+>=20
+> As I said above, I'm swamped for the next 3 weeks, so can people who have
+> used or are using the 'denzil' branch weigh in with feedback/anecdotes/et=
+c?
+> I have such a document for oe-core 'denzil', which I keep failing to send
+> out, but it boils down to "better predictability for merge windows". Plea=
+se
+> share your experience for meta-oe here.
+>=20
+if wanted I can continue to handle denzil and also danny branches (and
+should have more time than for denzil).
 
+Eric
 
 
