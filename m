@@ -1,26 +1,34 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Taxnt-0005b6-Qi
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 01:04:34 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 20 Nov 2012 15:49:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,288,1352102400"; d="scan'208";a="245069913"
-Received: from unknown (HELO helios.localnet) ([10.252.122.180])
-	by orsmga002.jf.intel.com with ESMTP; 20 Nov 2012 15:50:27 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Nov 2012 23:50:27 +0000
-Message-ID: <3080919.IugZ16RAXk@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
-In-Reply-To: <CAMKF1sp0rd5V5dFAX3kmayht9M7iJcEmOQ4QLnurH51q_ZRaaA@mail.gmail.com>
-References: <12301427.Yf0uchSh3U@helios>
-	<CAMKF1sp0rd5V5dFAX3kmayht9M7iJcEmOQ4QLnurH51q_ZRaaA@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] OE-Classic recipe migration status
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Tb7v7-0001FL-OS for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Nov 2012 11:52:41 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Tb7hg-0003GH-NN for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Nov 2012 11:38:48 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2012 11:38:48 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Nov 2012 11:38:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 21 Nov 2012 11:38:29 +0100
+Message-ID: <k8iauv$8f3$1@ger.gmane.org>
+References: <1353320857-14067-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
+In-Reply-To: <1353320857-14067-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Enigmail-Version: 1.4.4
+Subject: Re: [meta-oe][PATCH] mysql: make it work after $libexec change - LP: #1068759
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 00:04:34 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 21 Nov 2012 10:52:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Monday 19 November 2012 09:15:35 Khem Raj wrote:
-> On Sun, Nov 11, 2012 at 11:11 AM, Paul Eggleton <
-> paul.eggleton@linux.intel.com> wrote:
-> >     155 obsolete directory (OE-Classic)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Op 19-11-12 11:27, Marcin Juszkiewicz schreef:
+> Mysql start scripts assumed that mysqld is in /usr/libexec/ directory. It
+> was true until 406bd38b4232f9f399ef5ffe0b4fac72ed605a23 landed in 
+> OE-Core.
 > 
-> I think obsolete can be ignored.
+> This changeset fixes mysqld start and initial databases population 
+> scripts.
 
-Almost all of these yes - depends why they were moved there.
+This replaces one hardcode with another, which breaks DISTROs that keep
+/usr/libexec. Can you sed it in do_install_append?
 
-> >      84 nonworking directory (OE-Classic)
-> 
-> non working too.
+regards,
 
-Not sure - if they are just broken someone could presumably come along and fix 
-them if they're interested in doing so.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Cheers,
-Paul
+iD8DBQFQrK8lMkyGM64RGpERAv1kAKCrIxpHbF8yzZMIufZjeZkxxAxipwCfUJtA
+jb1oTnFXIvpqk/IQVYazAe8=
+=tdxb
+-----END PGP SIGNATURE-----
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
