@@ -1,38 +1,25 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TbAXv-0008FM-Ui
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TbAY5-0008Fb-Sr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 14:41:04 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2733013eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 05:26:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NyRGN9h5sXiEEYjee4H43BDmmiBqasAv60rgD0DzsZY=;
-	b=f4isdjD9FBwz0GvPMxVcUblBi9/QAJgi6gAEBlGrCAOKwWyvVYmwm/qQuaujLpzSkr
-	olfjta9mJf3/SJ2/M9nkvdCcEg5icna6Y9aroJT71EyxXJzWOGZdMOjnPrJ0OPU7eOZ5
-	V225vaDI+Eekl5mcpC483QfhR54hoU1FgpXeLxwAK5Qgxku9h9tAmpaWWOMT9hUFs4ob
-	t+FDHMHiHGZpaHcRiHQxfwh9x47PUCP0b04vTjrRk1Z5dMedT1Emn4gOh1FTS3EccsNB
-	bd8CXYAkZGtPi2QpYP1tT58vUoD2BVcU6TV9MMlR1YsCef6KymKtYvXFK/K9XKM29ptU
-	zLXQ==
-Received: by 10.14.176.68 with SMTP id a44mr45783280eem.1.1353504411172;
-	Wed, 21 Nov 2012 05:26:51 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v47sm199692eeo.9.2012.11.21.05.26.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Nov 2012 05:26:50 -0800 (PST)
-Date: Wed, 21 Nov 2012 14:26:46 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121121132646.GJ12637@jama.jama.net>
-References: <k6b5r8$edu$1@ger.gmane.org>
- <50ACD301.9000109@balister.org>
+	Wed, 21 Nov 2012 14:41:12 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 21 Nov 2012 05:26:20 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,293,1352102400"; d="scan'208";a="245328050"
+Received: from unknown (HELO helios.localnet) ([10.252.122.187])
+	by orsmga002.jf.intel.com with ESMTP; 21 Nov 2012 05:26:59 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 21 Nov 2012 13:26:58 +0000
+Message-ID: <2005939.1ecdEfVasM@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
+In-Reply-To: <1353503878-26344-1-git-send-email-koen@dominion.thruhere.net>
+References: <1353503878-26344-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <50ACD301.9000109@balister.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] Revert "ntp: Clean up recipes"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,78 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 13:41:04 -0000
-X-Groupsio-MsgNum: 41602
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XigHxYirkHk2Kxsx"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 21 Nov 2012 13:41:14 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---XigHxYirkHk2Kxsx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 21 November 2012 14:17:58 Koen Kooi wrote:
+> This breaks the upgrade path since 'ntpdate' has been renamed to 'ntp-date'.
+> I don't know why this patch was applied when it was shot down on review.
 
-On Wed, Nov 21, 2012 at 08:11:29AM -0500, Philip Balister wrote:
-> On 10/25/2012 06:55 AM, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Hi,
-> >
-> > We need a branch to track oe-core 'danny' and I am swamped till ELC-E
-> > happens, so I would like to hold off on patches that make meta-oe layers
-> > incompatible with oe-core 'danny'.
-> >
-> > As for branch maintenance: any volunteers for managing the meta-openemb=
-edded
-> > 'danny' branches? There doesn't need to be a single maintainer, but it =
-would
-> > be nice to have one person coordinating everything, even if it's just
-> > pulling in danny-next branches from the layer maintainers every week or=
- so.
-> >
-> > As I said above, I'm swamped for the next 3 weeks, so can people who ha=
-ve
-> > used or are using the 'denzil' branch weigh in with feedback/anecdotes/=
-etc?
-> > I have such a document for oe-core 'denzil', which I keep failing to se=
-nd
-> > out, but it boils down to "better predictability for merge windows". Pl=
-ease
-> > share your experience for meta-oe here.
->=20
-> What is happening on this front? Since oe-core dropp qt-4.8.1, builds=20
-> including meta-oe are now broken.
-
-And meta-oe needs to have
-http://patches.openembedded.org/patch/38519/
-applied also for danny (even with my last question still not answered).
-
-But without it at least navit lost gypsy and some other layers could
-also assume that gypsy is somewhere in oe-core+meta-oe.
-
-> If the branch maintainers are not ready to go, we need to apply patches=
-=20
-> that fix builds, even if thy break compatibility with Danny.
-
-In worst case danny branch can be created from revision before qt4-4.8.1
-bbappends are dropped.
+I'm working on a patch to fix various issues with this recipe including this 
+one, so if this is your only concern I'd rather we either wait until I submit 
+that (soon) or just change the name back alone rather than reverting the 
+entire patch.
 
 Cheers,
+Paul
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
 
---XigHxYirkHk2Kxsx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Paul Eggleton
+Intel Open Source Technology Centre
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlCs1pYACgkQN1Ujt2V2gBzHpQCfUyNrvnv/t4nAtrR9y4TzBfQq
-DNkAn218DdChrk/yABn2wznSeeYBHeY1
-=d0b+
------END PGP SIGNATURE-----
-
---XigHxYirkHk2Kxsx--
