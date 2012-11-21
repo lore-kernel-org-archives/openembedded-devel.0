@@ -1,34 +1,24 @@
-Received: from plane.gmane.org ([80.91.229.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Tb7v7-0001FL-OS for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 11:52:41 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Tb7hg-0003GH-NN for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Nov 2012 11:38:48 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 11:38:48 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 11:38:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from starfish.geekisp.com ([216.168.135.166])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1TbAJ6-0007iD-Cm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Nov 2012 14:25:43 +0100
+Received: (qmail 1905 invoked by uid 1003); 21 Nov 2012 13:11:31 -0000
+Received: from unknown (HELO ?192.168.1.105?)
+	(philip@opensdr.com@96.240.166.19)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	21 Nov 2012 13:11:31 -0000
+Message-ID: <50ACD301.9000109@balister.org>
+Date: Wed, 21 Nov 2012 08:11:29 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121016 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 21 Nov 2012 11:38:29 +0100
-Message-ID: <k8iauv$8f3$1@ger.gmane.org>
-References: <1353320857-14067-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:15.0) Gecko/20120907 Thunderbird/15.0.1
-In-Reply-To: <1353320857-14067-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Enigmail-Version: 1.4.4
-Subject: Re: [meta-oe][PATCH] mysql: make it work after $libexec change - LP: #1068759
+References: <k6b5r8$edu$1@ger.gmane.org>
+In-Reply-To: <k6b5r8$edu$1@ger.gmane.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +32,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 10:52:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 Nov 2012 13:25:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 10/25/2012 06:55 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi,
+>
+> We need a branch to track oe-core 'danny' and I am swamped till ELC-E
+> happens, so I would like to hold off on patches that make meta-oe layers
+> incompatible with oe-core 'danny'.
+>
+> As for branch maintenance: any volunteers for managing the meta-openembedded
+> 'danny' branches? There doesn't need to be a single maintainer, but it would
+> be nice to have one person coordinating everything, even if it's just
+> pulling in danny-next branches from the layer maintainers every week or so.
+>
+> As I said above, I'm swamped for the next 3 weeks, so can people who have
+> used or are using the 'denzil' branch weigh in with feedback/anecdotes/etc?
+> I have such a document for oe-core 'denzil', which I keep failing to send
+> out, but it boils down to "better predictability for merge windows". Please
+> share your experience for meta-oe here.
 
-Op 19-11-12 11:27, Marcin Juszkiewicz schreef:
-> Mysql start scripts assumed that mysqld is in /usr/libexec/ directory. It
-> was true until 406bd38b4232f9f399ef5ffe0b4fac72ed605a23 landed in 
-> OE-Core.
-> 
-> This changeset fixes mysqld start and initial databases population 
-> scripts.
+What is happening on this front? Since oe-core dropp qt-4.8.1, builds 
+including meta-oe are now broken.
 
-This replaces one hardcode with another, which breaks DISTROs that keep
-/usr/libexec. Can you sed it in do_install_append?
+If the branch maintainers are not ready to go, we need to apply patches 
+that fix builds, even if thy break compatibility with Danny.
 
-regards,
+Philip
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQrK8lMkyGM64RGpERAv1kAKCrIxpHbF8yzZMIufZjeZkxxAxipwCfUJtA
-jb1oTnFXIvpqk/IQVYazAe8=
-=tdxb
------END PGP SIGNATURE-----
-
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFQiRqzMkyGM64RGpERAschAJ98yscNYLI9qNGRviDm+drBquLttACgoa0X
+> /YhGdFr+iYLy8n99sXb4zKE=
+> =ahtL
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
