@@ -1,37 +1,39 @@
-Received: from mail-vc0-f175.google.com ([209.85.220.175])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dromede@gmail.com>) id 1Tbc3m-0001oa-Fa
+	(envelope-from <martin.jansa@gmail.com>) id 1TbfVe-0001nc-M2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 20:03:38 +0100
-Received: by mail-vc0-f175.google.com with SMTP id m8so4486502vcd.6
+	Thu, 22 Nov 2012 23:44:38 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so3295833eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 10:49:31 -0800 (PST)
+	Thu, 22 Nov 2012 14:30:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=yTbrKqL/O6+MLLNUgkIMA2MI1jDkQtKspFWzIOPmPi0=;
-	b=A8l8nDZnVKPKDoZ7EGC88jGCDh86fzGpQpThcIeDQPQ/rnLniB5q9RWvl5Hlm0jQHg
-	oDXTT8toFyefNrp7l7reP+kDhDZ5QT3iH4KQ6i/QOBiu7hO7oaLZIIIRxcXnn/LvQgLk
-	5BlDbqKy7sRezx84Vp14YHcCq7p6PzV6EnXm2uiVm+M2Lkcug+KfeiXlv7AkfV5oDaDk
-	OSS7Jcbh1jX2zmFGpT2pCzFZacDTIVYN0GBN2i5X+gx072uS4pvY1HAIbRo72t2Hdbef
-	TYRmwRxL0RJnGzkgMjBAtmQmVYG7NOUeW3tAL2dU8QLIj6Eas+avr34yxQ4WoqIhsbQQ
-	Y5Og==
-MIME-Version: 1.0
-Received: by 10.52.20.238 with SMTP id q14mr1866350vde.120.1353610171487; Thu,
-	22 Nov 2012 10:49:31 -0800 (PST)
-Received: by 10.58.127.225 with HTTP; Thu, 22 Nov 2012 10:49:31 -0800 (PST)
-In-Reply-To: <CAP9ODKpNueNMd0o9gwcn6v8L8dd1XLDOMbyL7_UvWmZREzrcug@mail.gmail.com>
-References: <CAHod+Gc5uO1HsJdaziyEki7vXbPJkEwXe2Zu-OKBhzgXQD47sQ@mail.gmail.com>
-	<20121122105331.GX12637@jama.jama.net>
-	<CALbNGRRus_-OSess+CaMHD++yPr8xrpRryBjnvr9=jw-6gWYgw@mail.gmail.com>
-	<20121122135603.GE12637@jama.jama.net>
-	<CAP9ODKpNueNMd0o9gwcn6v8L8dd1XLDOMbyL7_UvWmZREzrcug@mail.gmail.com>
-Date: Thu, 22 Nov 2012 19:49:31 +0100
-Message-ID: <CAHod+GfC9ZZqJTPA-VwY_WQHkckvc95OHmSMfgbuos86Lp_ekQ@mail.gmail.com>
-From: =?UTF-8?B?TWFya28gS2F0acSH?= <dromede@gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=7uLAvUaQYMs20Rd6EiThdLaJGTfZ3fSXWbaXJDVLzZY=;
+	b=Y/feX4BqN/FeVvhAiB1voSHne0ji/UDcvt5etTrzRUF5V7jmkTFeOUHj92Dv1uAxEu
+	SNTlhl9RIH+JtzqhthWnylPH3LgrJ3SBkBi+Nqn7TlN3dMeKhq0wKSZxGMGmtolpsMnW
+	xj6CTpErt2r/EqyAszQH8KMo0T2vIUdhdmT+6z1ZJKwY1+h7QRXYMKxSqPNrzSGW88Ka
+	U7Dx0yfBbGrETrEU4s+guy/DleDMhotdCO2EeBQyDKQDR7114etQbkiMe2ZhRaaIIPFR
+	fMRovBlvDQwGtAAA5yYRRyImJ1udfsVf/jvpkYwsFoe9H/JtiJHQKVEN8OCZ4m0SfOMn
+	qiyw==
+Received: by 10.14.174.194 with SMTP id x42mr5964456eel.22.1353623431939;
+	Thu, 22 Nov 2012 14:30:31 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 2sm9699485eef.17.2012.11.22.14.30.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Nov 2012 14:30:31 -0800 (PST)
+Date: Thu, 22 Nov 2012 23:30:29 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>
-Subject: Re: [meta-efl] should epdfview really be under meta-efl?
+Message-ID: <20121122223029.GI12637@jama.jama.net>
+References: <20121107205349.GB3446@jama.jama.net>
+	<1352323084.6869.26.camel@x121e.pbcl.net>
+	<20121109112014.GE3446@jama.jama.net>
+	<20121122122033.GA12637@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20121122122033.GA12637@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: systemd on armv4t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +47,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 19:03:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Nov 2012 22:44:38 -0000
+X-Groupsio-MsgNum: 41661
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="R9gO+D7ggLXSSo9w"
+Content-Disposition: inline
+
+--R9gO+D7ggLXSSo9w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 22, 2012 at 2:57 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Thu, Nov 22, 2012 at 11:56 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> On Thu, Nov 22, 2012 at 02:41:34PM +0100, Andreas M=C3=BCller wrote:
->>> On Thu, Nov 22, 2012 at 11:53 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->>> > On Thu, Nov 22, 2012 at 01:33:42AM +0100, Marko Kati=C4=87 wrote:
->>> >> epdfview is a pure gtk app, yet it's under meta-efl/efl. Is this on
->>> >> purpose or did epdfview end up there
->>> >> due to it's name similarity to epdf ?
->>> >
->>> > I think so, CCing Andreas for confirmation.
->>> >
->>> > Cheers,
->>> >
->>> > --
->>> 1. Where should be the new location?
->>> 2. I have no strong opinion on that - I asked here for the location
->>> before creating the recipe :)
->>
->> What about meta-gnome?
->
-> For meta-gnome evince might fit better.
->
-> --
-> Otavio Salvador                             O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Thu, Nov 22, 2012 at 01:20:33PM +0100, Martin Jansa wrote:
+> On Fri, Nov 09, 2012 at 12:20:14PM +0100, Martin Jansa wrote:
+> > On Wed, Nov 07, 2012 at 09:18:04PM +0000, Phil Blundell wrote:
+> > > On Wed, 2012-11-07 at 21:53 +0100, Martin Jansa wrote:
+> > > > Core was generated by `/sbin/init splash'.
+> > > > Program terminated with signal 4, Illegal instruction.
+> > > > #0  0x40110a00 in raise () from /lib/libpthread.so.0
+> > > > (gdb)
+> > > > (gdb) bt
+> > > > #0  0x40110a00 in raise () from /lib/libpthread.so.0
+> > > > #1  0x000118de in ?? ()
+> > > > #2  0x000118de in ?? ()
+> > >=20
+> > > That backtrace (and the disassembly) doesn't tell you much about the
+> > > real location of the fault since it just shows systemd re-throwing a
+> > > signal that it caught.  If you compile with -fasynchronous-unwind-tab=
+les
+> > > then you might get a better backtrace; otherwise, you can hack main.c=
+ to
+> > > stop it catching SIGILL in the first place.  Or turn on user fault
+> > > debugging in the kernel.
+> >=20
+>=20
+> I have more info on this one.
+>=20
 
-well, as it's name suggests, meta-efl should only contain efl libraries and
-apps built with efl. meta-gnome might be good place for epdfview. But
-then again, there's
-a bunch of gtk apps in meta-oe/recipes-support, like gvim, fbreader,
-pidgin xchat, etc.
-To cut the story short, i myself am not sure where it should go.
+I'm sorry, something wasn't cleaned enough between builds and it's
+probably some other commit, bisecting continues now with carefully
+dropped sstate-cache between builds.
+
+Cheers,
+
+> The problem is caused by:
+> commit 9591c93c20af236fdc1a99b548435b6df75af497
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Wed Aug 15 23:09:00 2012 -0700
+>=20
+>     eglibc-2.16: Remove build dependency on libgcc_s and libgcc_eh
+>=20
+>     This patch backports two patches from glibc trunk essentially
+>     dropping the requirements to have libgcc_s and libgcc_eh
+>     this will simplify the toolchain bootstrap sequence.
+>=20
+>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>=20
+> And it happens in runtime when *kernel* is built with toolchain having th=
+is patch included.
+>=20
+> Just booting uImage built with eglibc without this patch makes systemd wo=
+rking fine again.
+>=20
+> Problem is that I cannot revert just this one patch in master=20
+> because it depends on lot of other toolchain changes since then,
+> but uImage built with oe-core just before this patch and with this=20
+> patch makes the difference.
+>=20
+> CCing Khem as he added this patch and I really need some help with this o=
+ne.
+>=20
+> I'll upload workdirs from both builds later, now I'm rebuilding it,=20
+> because it was cleaned between buils.
+>=20
+> Cheers,
+>=20
+> > Thanks, now I have better backtrace:
+> > Core was generated by `/sbin/init splash'.
+> > Program terminated with signal 4, Illegal instruction.
+> > #0  0x400d3a00 in raise (sig=3Dsig@entry=3D4) at ../nptl/sysdeps/unix/s=
+ysv/linux/pt-raise.c:45
+> > 45                                  sig);
+> > (gdb) bt
+> > #0  0x400d3a00 in raise (sig=3Dsig@entry=3D4) at ../nptl/sysdeps/unix/s=
+ysv/linux/pt-raise.c:45
+> > #1  0x0001183e in crash (sig=3D4) at src/core/main.c:135
+> > #2  <signal handler called>
+> > #3  0x40062d44 in __sync_add_and_fetch_4 (ptr=3D0xbc710, val=3D1)
+> >     at /OE/shr-core/tmp-eglibc/work-shared/gcc-4.7.2-r13/gcc-4.7.2/libg=
+cc/config/arm/linux-atomic.c:128
+> > #4  0x4005e8bc in _dbus_atomic_inc (atomic=3Datomic@entry=3D0xbc710) at=
+ dbus-sysdeps-unix.c:2440
+> > #5  0x40056560 in _dbus_server_init_base (server=3Dserver@entry=3D0xbc7=
+10, vtable=3D<optimized out>, address=3Daddress@entry=3D0xbe81a7e0) at dbus=
+-server.c:118
+> > #6  0x40056fbc in _dbus_server_new_for_socket (fds=3Dfds@entry=3D0xbe81=
+a7dc, n_fds=3Dn_fds@entry=3D1, address=3Daddress@entry=3D0xbe81a7e0,
+> >     noncefile=3Dnoncefile@entry=3D0x0) at dbus-server-socket.c:320
+> > #7  0x40057404 in _dbus_server_new_for_domain_socket (path=3Dpath@entry=
+=3D0xbc678 "/run/systemd/private", abstract=3Dabstract@entry=3D0,
+> >     error=3Derror@entry=3D0xbe81a890) at dbus-server-unix.c:276
+> > #8  0x400575ea in _dbus_server_listen_platform_specific (entry=3D<optim=
+ized out>, server_p=3D0xbe81a874, error=3D0xbe81a890) at dbus-server-unix.c=
+:134
+> > #9  0x400568a0 in dbus_server_listen (address=3D0x6d9d4 "unix:path=3D/r=
+un/systemd/private", error=3D0xbe81a8e8) at dbus-server.c:585
+> > #10 0x00033ec2 in bus_init_private (m=3D0xbc340) at src/core/dbus.c:1076
+> > #11 bus_init (m=3Dm@entry=3D0xbc340, try_bus_connect=3Dtry_bus_connect@=
+entry=3Dfalse) at src/core/dbus.c:1147
+> > #12 0x00014eb2 in manager_new (running_as=3Drunning_as@entry=3DSYSTEMD_=
+SYSTEM, _m=3D_m@entry=3D0xbe81aa54) at src/core/manager.c:305
+> > #13 0x0000fbb8 in main (argc=3D2, argv=3D0xbe81af04) at src/core/main.c=
+:1612
+> > (gdb) disass 0x40062d44
+> > Dump of assembler code for function __sync_add_and_fetch_4:
+> >    0x40062d2c <+0>:     push    {r4, r5, r6, lr}
+> >    0x40062d2e <+2>:     adds    r5, r0, #0
+> >    0x40062d30 <+4>:     adds    r6, r1, #0
+> >    0x40062d32 <+6>:     ldr     r0, [r5, #0]
+> >    0x40062d34 <+8>:     adds    r2, r5, #0
+> >    0x40062d36 <+10>:    adds    r4, r0, r6
+> >    0x40062d38 <+12>:    adds    r1, r4, #0
+> >    0x40062d3a <+14>:    ldr     r3, [pc, #16]   ; (0x40062d4c <__sync_a=
+dd_and_fetch_4+32>)
+> >    0x40062d3c <+16>:    bl      0x40063404
+> >    0x40062d40 <+20>:    cmp     r0, #0
+> >    0x40062d42 <+22>:    bne.n   0x40062d32 <__sync_add_and_fetch_4+6>
+> >    0x40062d44 <+24>:    adds    r0, r4, #0
+> >    0x40062d46 <+26>:    pop     {r4, r5, r6}
+> >    0x40062d48 <+28>:    pop     {r1}
+> >    0x40062d4a <+30>:    bx      r1
+> >    0x40062d4c <+32>:    lsrs    r0, r0, #31
+> >    0x40062d4e <+34>:    vsli.32 <illegal reg q13.5>, q8, #31
+> > End of assembler dump.
+> >=20
+> > Cheers,
+> >=20
+> > --=20
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>=20
+>=20
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--R9gO+D7ggLXSSo9w
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlCup4UACgkQN1Ujt2V2gBwYrgCgisRlsMpF375bO+sqQtXJwZ/F
+AicAnjYDhg3CI42IEvYDq5gyFPDYXEP7
+=iv6p
+-----END PGP SIGNATURE-----
+
+--R9gO+D7ggLXSSo9w--
