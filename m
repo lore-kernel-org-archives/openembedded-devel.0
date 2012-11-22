@@ -1,29 +1,28 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from stoexhub03.domain01.net ([83.145.59.144])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dromede@gmail.com>) id 1TbKxI-0002Yb-7J
+	(envelope-from <anders@chargestorm.se>) id 1TbQOv-0002M7-CK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 01:48:02 +0100
-Received: by mail-vb0-f47.google.com with SMTP id e21so5209961vbm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Nov 2012 16:33:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=2GOEn+twbXmEBUWJMXBg/KoUztRg29fgwgAavppQXCQ=;
-	b=DgxsoeMYiX2bcUqeRfQewZu52cpObFhpesfp1O1kYLZ9sLCfZRpz0dC0Yby9sgzK7B
-	ILDtb+Deu6H6sp128QctaN8qOQsa4bs3jCjwQAt/+b5Vkt0S+uNi+Sj3bptZD1NjV7gn
-	3lqGT/4Qn2R3QqlG0ysW8zNgEsKAYeTFftTuuo6smhqUcqEZxy+j4caTiXKulXai7wvK
-	5GfNw6MseyvvfZdmgw9QbakMGJ31D6Bdx6yPK0DBRvpnBvWLHjYsXHHcSioskb5Oavvm
-	V8FsRMBy6bJC08285W/jVWHdmeOU7kY9MEGxz2ynxL7Rg732S4tiLJXiztV5x40suJfp
-	4ZlA==
+	Thu, 22 Nov 2012 07:36:42 +0100
+Received: from ad.chargestorm.se (83.252.253.85) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Thu, 22 Nov 2012 07:21:26 +0100
+Date: Thu, 22 Nov 2012 07:22:25 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20121122062224.GB5468@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
+	<1351681706-12778-2-git-send-email-otavio@ossystems.com.br>
 MIME-Version: 1.0
-Received: by 10.52.20.238 with SMTP id q14mr15670373vde.120.1353544422299;
-	Wed, 21 Nov 2012 16:33:42 -0800 (PST)
-Received: by 10.58.127.225 with HTTP; Wed, 21 Nov 2012 16:33:42 -0800 (PST)
-Date: Thu, 22 Nov 2012 01:33:42 +0100
-Message-ID: <CAHod+Gc5uO1HsJdaziyEki7vXbPJkEwXe2Zu-OKBhzgXQD47sQ@mail.gmail.com>
-From: =?UTF-8?B?TWFya28gS2F0acSH?= <dromede@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-efl] should epdfview really be under meta-efl?
+In-Reply-To: <1351681706-12778-2-git-send-email-otavio@ossystems.com.br>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-GFI-SMTP-Submission: 1
+Subject: Re: [meta-oe][PATCH v2 2/3] meta-systemd: meta-networking: ntp: Update bbappend to 4.2.6p5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,11 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 00:48:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Nov 2012 06:36:45 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-epdfview is a pure gtk app, yet it's under meta-efl/efl. Is this on
-purpose or did epdfview end up there
-due to it's name similarity to epdf ?
+* Otavio Salvador <otavio@ossystems.com.br> [121031 12:08]:
+
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../{ntp_4.2.6p3.bbappend => ntp_4.2.6p5.bbappend} |    0
+>  1 files changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-systemd/meta-networking/recipes-support/ntp/{ntp_4.2.6p3.bbappend => ntp_4.2.6p5.bbappend} (100%)
+
+Ping?
+
+Could we have this patch (and the 1/3, which moved systemd-support to
+meta-systemd/meta-networking/....) applied?
+
+meta-systemd has been unparsable for quite some time now, as
+meta-networking has ntp 4.2.6p5, and the bbappend in meta-systemd is for
+4.2.6p3...
+
+/Anders
+
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
 
 
