@@ -1,36 +1,41 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TbSjA-0005dn-Qv
+	(envelope-from <koen@dominion.thruhere.net>) id 1TbSka-0005jO-9K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 10:05:45 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so4368692eei.6
+	Thu, 22 Nov 2012 10:07:14 +0100
+Received: by mail-we0-f175.google.com with SMTP id z53so1055229wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 00:51:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ck2A0hbrjY9gVHTsAgsCHp/UsFJfQ7InaRz9Mnv72EE=;
-	b=l5UF0mTLTf+zegdRAM4pd3zuH9tE7KubDt16Xjf6pu3/Wv1Bg1jnu5gLNp9cgDoEeB
-	0DlfRdAud0FmlpoKzvcVg1bE5ELGC12sSryTx5R1DB7x34g1GR0lOsZPZ29gjuwOZVXP
-	Jf8XzmDJmXhlmgv+SQJZhO9+ZntKoA2RfyOY1YfqRVBwp86HhHPM0s5ssc/zGzWQpMQL
-	iW/45xiSHsvk32U/XFJwn78XAqFcY1qKeiBtaTbg5eSGqQ7glPu57vTNVR5ZvbHxZOIZ
-	Sf/Io073PbbH+seI+Z9spnEYd5Vf1m4HZkUQ028MxEo5l7l/uK64+jYRzKeIbq4UVsXx
-	hwKg==
-Received: by 10.14.214.2 with SMTP id b2mr55580211eep.32.1353574299056;
-	Thu, 22 Nov 2012 00:51:39 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f2sm5684618eep.2.2012.11.22.00.51.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Nov 2012 00:51:38 -0800 (PST)
-Date: Thu, 22 Nov 2012 09:51:36 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121122085136.GV12637@jama.jama.net>
-References: <20121122084944.2288A10397@opal>
-MIME-Version: 1.0
-In-Reply-To: <20121122084944.2288A10397@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Martin Jansa : qt4-x11-free: drop bbappend for 4.8.1
+	Thu, 22 Nov 2012 00:53:06 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=kfRlqGqhU9IxjPBhi2AlWgsCHSnAIQL9enwDJTsan6Q=;
+	b=o+lnW2SqB0qwAgWfq+1RqNIFMgt3OVXvSR/5gRwRzdJnK+t+yGE9lcNob7DvIffbIh
+	wUHEOM6+6UM7RZuqIIXq4KZY1J95y9Y+Q0h26AZqCHYX9tLOxD/Z/gefNsvm/w4Yg4dU
+	9lwCKuqA1kEmIAVqt+KfEvULc77bFmb0hI1F5haRaM6D8UWGUH3mrqRIFo8G06OPartv
+	DuXbE/BLXk1flLNhY2jzBnOH+tFdSSDWct7GJIq6eekJh60dFHFfdNdaRzA1fmSU3NnP
+	eCb+vlXjDdKkHVjxAjN4l6UcLfjesDaRcpUrZkvwL0/4zWMswvW+riG8yvwreDfIBefU
+	m3Yg==
+Received: by 10.180.106.34 with SMTP id gr2mr3181389wib.18.1353574386189;
+	Thu, 22 Nov 2012 00:53:06 -0800 (PST)
+Received: from [172.20.0.22] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id t17sm2571330wiv.6.2012.11.22.00.53.04
+	(version=SSLv3 cipher=OTHER); Thu, 22 Nov 2012 00:53:05 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAP9ODKrA=aEQhmBQaNvWpFP9-6T_Eq3ej6qFn0mDUoU_yX3s3Q@mail.gmail.com>
+Date: Thu, 22 Nov 2012 09:53:04 +0100
+Message-Id: <B4A87246-6282-45A5-BAD7-3D58CB20A5CB@dominion.thruhere.net>
+References: <k6b5r8$edu$1@ger.gmane.org> <20121121161712.030af137@eb-e6520>
+	<CAMKF1srnGbWDNjKx=6udw8EVLf_CFSaM5u7_TSmBfJx2xzpDSA@mail.gmail.com>
+	<CAP9ODKrA=aEQhmBQaNvWpFP9-6T_Eq3ej6qFn0mDUoU_yX3s3Q@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+X-Mailer: Apple Mail (2.1499)
+X-Gm-Message-State: ALoCoQnOYcEqO78L34KCEB7XT4+9IQYdu2ZkrggeKU0AXBBsZSHR1QyGdOBvfeb0gGJSIgJgRHk+
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +49,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 09:05:45 -0000
-X-Groupsio-MsgNum: 41621
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XDqeUMnLaDfDQgU1"
-Content-Disposition: inline
-
---XDqeUMnLaDfDQgU1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Nov 2012 09:07:14 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 22, 2012 at 08:49:43AM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: danny
-> Commit: bb3d744481c148ef570d9dfe0eb5f6821d02318b
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3Dbb3d744481c148ef570d9dfe0eb5f6821d02318b
 
-This isn't right ^, should be in master only.
+Op 21 nov. 2012, om 21:28 heeft Otavio Salvador =
+<otavio@ossystems.com.br> het volgende geschreven:
 
-Both qt4 bbappends and dhcp bbappend change
+> On Wed, Nov 21, 2012 at 2:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi Eric
+>>=20
+>> If you have time thats good please go ahead with danny too. I have =
+been
+>> away for most of time after ELCE
+>=20
+> I am also fine with Eric being the maintainer.
+>=20
+> I can be a backup if need.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Can you guys cook up a patch to the README changing the requirements =
+from 'master' to 'danny' for oe-core and replace me with the contact =
+info for all the danny maintainters?
 
---XDqeUMnLaDfDQgU1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Koen=
 
-iEYEARECAAYFAlCt55gACgkQN1Ujt2V2gBwG2wCglDrmdyT79RmYFnUgZRucB0D7
-sP0AnR52eOFy1sbqth9ClRyfCghfR/Mk
-=ooBv
------END PGP SIGNATURE-----
 
---XDqeUMnLaDfDQgU1--
