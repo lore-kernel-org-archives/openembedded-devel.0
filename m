@@ -1,34 +1,24 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TbWGr-00049L-Dw
+	(envelope-from <jaap.dejong@nedap.com>) id 1TbWtf-00054o-AA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 13:52:45 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id 3F231D22C1; Thu, 22 Nov 2012 13:38:48 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 35472D224F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 13:38:16 +0100 (CET)
-Message-ID: <50AE1CAB.7060003@linaro.org>
-Date: Thu, 22 Nov 2012 13:38:03 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	Thu, 22 Nov 2012 14:32:51 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Thu, 22 Nov 2012
+	14:18:44 +0100
+X-TM-IMSS-Message-ID: <1141ea370021b003@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 1141ea370021b003 ;
+	Thu, 22 Nov 2012 14:18:36 +0100
+Message-ID: <50AE2633.1030006@nedap.com>
+Date: Thu, 22 Nov 2012 14:18:43 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20121122123447.GB12637@jama.jama.net>
-In-Reply-To: <20121122123447.GB12637@jama.jama.net>
-Subject: Re: evolution-data-server and php-native broken by libxml2 upgrade in oe-core
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: kernel image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +32,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 12:52:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Nov 2012 13:32:51 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-W dniu 22.11.2012 13:34, Martin Jansa pisze:
-> Just FYI:
-> 
-> meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
-> virtual:native:meta-openembedded/meta-oe/recipes-devtools/php/php_5.3.6.bb
-> 
-> are broken after lixml2 upgrade from 2.8.0 to 2.9.0 (oe-core rev
-> a65ea43e26866ddc60051c52b2eb226507fae346)
-> 
-> They are pretty low priority for me right now, so I'm just sending this
-> e-mail instead of patches :). 
-> 
-> Hrw is already working on php.
-
-I was working on php 5.4.8 which builds with this libxml2 version for
-native but fails for my armv8 target.
-
+Hi,
+does anyone know where the + (in 
+kernel-2.6.35.14+_2.6.35-r14.6_mymachine.ipk) is added?
+It is added on my pc (running ubuntu); it is not added on my debian 
+buildserver.
+Thanks!
+Jaap
 
 
