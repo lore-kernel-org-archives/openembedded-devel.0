@@ -1,41 +1,24 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TbSka-0005jO-9K
+	(envelope-from <eric@eukrea.com>) id 1TbTIw-0007FK-4I
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 10:07:14 +0100
-Received: by mail-we0-f175.google.com with SMTP id z53so1055229wey.6
+	Thu, 22 Nov 2012 10:42:42 +0100
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id CB957CA8972
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 00:53:06 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=kfRlqGqhU9IxjPBhi2AlWgsCHSnAIQL9enwDJTsan6Q=;
-	b=o+lnW2SqB0qwAgWfq+1RqNIFMgt3OVXvSR/5gRwRzdJnK+t+yGE9lcNob7DvIffbIh
-	wUHEOM6+6UM7RZuqIIXq4KZY1J95y9Y+Q0h26AZqCHYX9tLOxD/Z/gefNsvm/w4Yg4dU
-	9lwCKuqA1kEmIAVqt+KfEvULc77bFmb0hI1F5haRaM6D8UWGUH3mrqRIFo8G06OPartv
-	DuXbE/BLXk1flLNhY2jzBnOH+tFdSSDWct7GJIq6eekJh60dFHFfdNdaRzA1fmSU3NnP
-	eCb+vlXjDdKkHVjxAjN4l6UcLfjesDaRcpUrZkvwL0/4zWMswvW+riG8yvwreDfIBefU
-	m3Yg==
-Received: by 10.180.106.34 with SMTP id gr2mr3181389wib.18.1353574386189;
-	Thu, 22 Nov 2012 00:53:06 -0800 (PST)
-Received: from [172.20.0.22] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id t17sm2571330wiv.6.2012.11.22.00.53.04
-	(version=SSLv3 cipher=OTHER); Thu, 22 Nov 2012 00:53:05 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAP9ODKrA=aEQhmBQaNvWpFP9-6T_Eq3ej6qFn0mDUoU_yX3s3Q@mail.gmail.com>
-Date: Thu, 22 Nov 2012 09:53:04 +0100
-Message-Id: <B4A87246-6282-45A5-BAD7-3D58CB20A5CB@dominion.thruhere.net>
-References: <k6b5r8$edu$1@ger.gmane.org> <20121121161712.030af137@eb-e6520>
-	<CAMKF1srnGbWDNjKx=6udw8EVLf_CFSaM5u7_TSmBfJx2xzpDSA@mail.gmail.com>
-	<CAP9ODKrA=aEQhmBQaNvWpFP9-6T_Eq3ej6qFn0mDUoU_yX3s3Q@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Mailer: Apple Mail (2.1499)
-X-Gm-Message-State: ALoCoQnOYcEqO78L34KCEB7XT4+9IQYdu2ZkrggeKU0AXBBsZSHR1QyGdOBvfeb0gGJSIgJgRHk+
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: yocto 1.3 branch for meta-openembedded layers, RFC wanted.
+	Thu, 22 Nov 2012 10:19:14 +0100 (CET)
+Received: from eb-e6520.local.eukrea.com (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id ADEF64B0063;
+	Thu, 22 Nov 2012 10:19:09 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Nov 2012 10:19:07 +0100
+Message-Id: <1353575947-8283-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.7.6
+MIME-Version: 1.0
+Cc: koen@dominion.thruhere.net,
+	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe][danny][PATCH] README: update to danny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,31 +32,348 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 09:07:14 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Thu, 22 Nov 2012 09:42:42 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ meta-efl/README        |    8 ++++----
+ meta-gpe/README        |    8 ++++----
+ meta-initramfs/README  |    6 +++---
+ meta-multimedia/README |    8 ++++----
+ meta-networking/README |    5 ++++-
+ meta-oe/README         |    6 +++---
+ meta-systemd/README    |    8 ++++----
+ meta-webserver/README  |    7 +++++--
+ meta-xfce/README       |    8 ++++----
+ toolchain-layer/README |    6 +++---
+ 10 files changed, 38 insertions(+), 32 deletions(-)
 
-Op 21 nov. 2012, om 21:28 heeft Otavio Salvador =
-<otavio@ossystems.com.br> het volgende geschreven:
+diff --git a/meta-efl/README b/meta-efl/README
+index 62daa0a..2e3df9f 100644
+--- a/meta-efl/README
++++ b/meta-efl/README
+@@ -1,15 +1,15 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ URI: git://git.openembedded.org/meta-openembedded
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-efl]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-efl][danny]' in the subject'
+=20
+-When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-efl][PATCH'
++When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-efl][danny][PATCH'
+=20
+ Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+diff --git a/meta-gpe/README b/meta-gpe/README
+index 220f031..f8e8255 100644
+--- a/meta-gpe/README
++++ b/meta-gpe/README
+@@ -1,15 +1,15 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ URI: git://git.openembedded.org/meta-openembedded
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-gpe]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-gpe][danny]' in the subject'
+=20
+-When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-gpe][PATCH'
++When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-gpe][danny][PATCH'
+=20
+ Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+diff --git a/meta-initramfs/README b/meta-initramfs/README
+index 8430555..99702d4 100644
+--- a/meta-initramfs/README
++++ b/meta-initramfs/README
+@@ -12,7 +12,7 @@ Dependencies
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+=20
+@@ -20,9 +20,9 @@ Maintenance
+ -----------
+=20
+ Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g
+-with '[meta-initramfs]' in the subject.
++with '[meta-initramfs][danny]' in the subject.
+=20
+-When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-initramfs][PATCH'
++When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-initramfs][danny][PATCH'
+=20
+ Layer maintainers: Andrea Adami <andrea.adami@gmail.com>
+                    Paul Eggleton <paul.eggleton@linux.intel.com>
+diff --git a/meta-multimedia/README b/meta-multimedia/README
+index 0e85179..f6008ca 100644
+--- a/meta-multimedia/README
++++ b/meta-multimedia/README
+@@ -1,16 +1,16 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ URI: git://git.openembedded.org/meta-openembedded/meta-oe
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-multimedia]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-multimedia][danny]' in the subject'
+=20
+-When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+multimedia][PATCH
++When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+multimedia][danny][PATCH
+=20
+ You are encouraged to fork the mirror on github https://github.com/opene=
+mbedded/meta-oe/ to share your patches, this is preferred for patch sets =
+consisting of more than one patch. Other services like gitorious, repo.or=
+.cz or self hosted setups are of course accepted as well, 'git fetch <rem=
+ote>' works the same on all of them. We recommend github because it is fr=
+ee, easy to use, has been proven to be reliable and has a really good web=
+ GUI.
+=20
+diff --git a/meta-networking/README b/meta-networking/README
+index 438f442..949d0e2 100644
+--- a/meta-networking/README
++++ b/meta-networking/README
+@@ -18,7 +18,7 @@ Dependencies
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ Maintenance
+@@ -26,3 +26,6 @@ Maintenance
+=20
+ Please see the MAINTAINERS file for information on contacting the
+ maintainers of this layer, as well as instructions for submitting patche=
+s.=20
++
++When sending single patches, please using something like
++'git send-email -1 --to openembedded-devel@lists.openembedded.org --subj=
+ect-prefix=3Dmeta-networking][danny][PATCH'
+diff --git a/meta-oe/README b/meta-oe/README
+index 4226c29..08ee07f 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -1,12 +1,12 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe][danny]' in the subject'
+=20
+-When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+oe][PATCH'
++When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+oe][danny][PATCH'
+=20
+ You are encouraged to fork the mirror on github https://github.com/opene=
+mbedded/meta-oe/ to share your patches, this is preferred for patch sets =
+consisting of more than one patch. Other services like gitorious, repo.or=
+.cz or self hosted setups are of course accepted as well, 'git fetch <rem=
+ote>' works the same on all of them. We recommend github because it is fr=
+ee, easy to use, has been proven to be reliable and has a really good web=
+ GUI.
+=20
+diff --git a/meta-systemd/README b/meta-systemd/README
+index 84578b5..ad4fe5f 100644
+--- a/meta-systemd/README
++++ b/meta-systemd/README
+@@ -1,13 +1,13 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ And we're working to break the dependency on this one:
+=20
+ URI: git://git.openembedded.org/meta-openembedded
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ To make BBMASK'ing per layer possible the following directory structure =
+is
+@@ -15,9 +15,9 @@ used:
+=20
+ $[LAYERDIR}/<layer name>/recipes-<group-name>/<recipe-name>/<recipe-name=
+>.bbappend
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe][meta-systemd]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe][meta-systemd][danny]' in the subject'
+=20
+-When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+oe][meta-systemd][PATCH'
++When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+oe][meta-systemd][danny][PATCH'
+=20
+ You are encouraged to fork the mirror on github https://github.com/opene=
+mbedded/meta-oe/ to share your patches, this is preferred for patch sets =
+consisting of more than one patch. Other services like gitorious, repo.or=
+.cz or self hosted setups are of course accepted as well, 'git fetch <rem=
+ote>' works the same on all of them. We recommend github because it is fr=
+ee, easy to use, has been proven to be reliable and has a really good web=
+ GUI.
+=20
+diff --git a/meta-webserver/README b/meta-webserver/README
+index 47136fb..83be7d2 100644
+--- a/meta-webserver/README
++++ b/meta-webserver/README
+@@ -12,7 +12,7 @@ Dependencies
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+=20
+@@ -21,7 +21,10 @@ Maintenance
+ -----------
+=20
+ Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g
+-with '[meta-webserver]' in the subject.
++with '[meta-webserver][danny]' in the subject.
++
++When sending single patches, please using something like
++'git send-email -1 --to openembedded-devel@lists.openembedded.org --subj=
+ect-prefix=3Dmeta-webserver][danny][PATCH'
+=20
+ Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
+=20
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 88f2332..6aafb4b 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -1,11 +1,11 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+ URI: git://git.openembedded.org/meta-openembedded
+-branch: master
++branch: danny
+ revision: HEAD
+ meta-xfce depends on meta-oe and meta-multimedia in this repository.
+=20
+@@ -14,8 +14,8 @@ this to local.conf:
+=20
+ BBMASK =3D "meta-xfce/recipes-multimedia"
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-xfce]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-xfce][danny]' in the subject'
+=20
+-When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-xfce][PATCH'
++When sending single patches, please using something like 'git send-email=
+ -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmet=
+a-xfce][danny][PATCH'
+=20
+ Interim layer maintainer: Andreas M=C3=BCller <schnitzeltony@googlemail.=
+com>
+diff --git a/toolchain-layer/README b/toolchain-layer/README
+index 5996b6c..127983a 100644
+--- a/toolchain-layer/README
++++ b/toolchain-layer/README
+@@ -1,12 +1,12 @@
+ This layer depends on:
+=20
+ URI: git://git.openembedded.org/openembedded-core
+-branch: master
++branch: danny
+ revision: HEAD
+=20
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe][toolchain-layer]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[t=
+oolchain-layer][danny]' in the subject'
+=20
+-When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dmeta-=
+oe][toolchain-layer][PATCH'
++When sending single patches, please use something like 'git send-email -=
+1 --to openembedded-devel@lists.openembedded.org --subject-prefix=3Dtoolc=
+hain-layer][danny][PATCH'
+=20
+ You are encouraged to fork the mirror on github https://github.com/opene=
+mbedded/meta-oe/ to share your patches, this is preferred for patch sets =
+consisting of more than one patch. Other services like gitorious, repo.or=
+.cz or self hosted setups are of course accepted as well, 'git fetch <rem=
+ote>' works the same on all of them. We recommend github because it is fr=
+ee, easy to use, has been proven to be reliable and has a really good web=
+ GUI.
+=20
+--=20
+1.7.7.6
 
-> On Wed, Nov 21, 2012 at 2:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> Hi Eric
->>=20
->> If you have time thats good please go ahead with danny too. I have =
-been
->> away for most of time after ELCE
->=20
-> I am also fine with Eric being the maintainer.
->=20
-> I can be a backup if need.
-
-Can you guys cook up a patch to the README changing the requirements =
-from 'master' to 'danny' for oe-core and replace me with the contact =
-info for all the danny maintainters?
-
-regards,
-
-Koen=
 
 
