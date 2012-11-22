@@ -1,22 +1,22 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TbUUS-0001KN-CK
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TbUW5-0001pH-LK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 11:58:41 +0100
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	Thu, 22 Nov 2012 12:00:21 +0100
+Received: from puchatek.dom (unknown [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 302AED224F;
-	Thu, 22 Nov 2012 11:44:43 +0100 (CET)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 4A817D224F;
+	Thu, 22 Nov 2012 11:46:19 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Nov 2012 11:44:29 +0100
-Message-Id: <1353581069-1809-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Thu, 22 Nov 2012 11:45:55 +0100
+Message-Id: <1353581155-2455-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.0
-In-Reply-To: <k8iauv$8f3$1@ger.gmane.org>
-References: <k8iauv$8f3$1@ger.gmane.org>
-Subject: [PATCH] mysql: make it work after $libexec change - LP: #1068759
+In-Reply-To: <[B[B[Bk8iauv$8f3$1@ger.gmane.org>
+References: <[B[B[Bk8iauv$8f3$1@ger.gmane.org>
+Subject: [meta-oe][PATCH] mysql: make it work after $libexec change - LP: #1068759
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 10:58:42 -0000
+X-List-Received-Date: Thu, 22 Nov 2012 11:00:21 -0000
 
 Mysql start scripts assumed that mysqld is in /usr/libexec/ directory.
 It was true until 406bd38b4232f9f399ef5ffe0b4fac72ed605a23 landed in
