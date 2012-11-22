@@ -1,25 +1,24 @@
-Received: from hub023-nj-1.exch023.serverdata.net ([206.225.165.108])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <scm@majust.dk>) id 1TbYLr-0008Qn-Mi
+	(envelope-from <jaap.dejong@nedap.com>) id 1TbYQE-0000At-0U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 16:06:03 +0100
-Received: from MBX023-E1-NJ-2.exch023.domain.local ([10.240.8.52]) by
-	HUB023-NJ-1.exch023.domain.local ([10.240.8.30]) with mapi id
-	14.02.0318.001; Thu, 22 Nov 2012 06:41:49 -0800
-From: =?iso-8859-1?Q?S=F8ren_Christian_Madsen?= <scm@majust.dk>
+	Thu, 22 Nov 2012 16:10:34 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Thu, 22 Nov 2012
+	15:56:27 +0100
+X-TM-IMSS-Message-ID: <119b5eba0021b5cf@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 119b5eba0021b5cf ;
+	Thu, 22 Nov 2012 15:56:19 +0100
+Message-ID: <50AE3D1A.90106@nedap.com>
+Date: Thu, 22 Nov 2012 15:56:26 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Debugging environment variable assignments
-Thread-Index: Ac3Ivbhd+xDShO0TTXu9clnSlBRhNA==
-Date: Thu, 22 Nov 2012 14:41:48 +0000
-Message-ID: <6D6121C7FCEF004E9D5B6ECBA86B84CB24A460A8@mbx023-e1-nj-2.exch023.domain.local>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [87.51.7.169]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Debugging environment variable assignments
+Subject: sstate-cache
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,39 +32,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 15:06:04 -0000
-Content-Language: da-DK
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Nov 2012 15:10:34 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi All,
+I have a handful of openembedded clones on a single machine and I would 
+like to use as little diskspace as possible, so I'm wondering if it is 
+possible to share the directory build/sstate-cache among these different 
+clones?
+Any idea?
+Thanks!
+Jaap
 
-I'm trying to create an overlay, based on an existing configuration.
-During my build, I get an error which I'm pretty sure is caused by FILESDIR=
- having the wrong value, causing the "do_unpack" step to fail.
-
-As far as I can tell, the FILESDIR variable is assigned using the following=
- expression: FILESDIR=3D${@bb.which(d.getVar('FILESPATH', 1), '.')}, accord=
-ing to comments listed by the "-e" option to bitbake.
-
-I inspected the FILESPATH variable contents for the existing (working) conf=
-iguration, and my own. The only differences detected were 2 paths (correctl=
-y) changed to point elsewhere (I can post full details if that is required)=
-. But anyway the end-result in FILESDIR becomes massively wrong.
-
-I speculate the error might be that FILESPATH is set to the correct value a=
-fter the FILESDIR is being set?
-The logs only contain the same info as shown in the console, which is not h=
-elpfull.
-
-
-Is it possible to "watch" assignments to variables in bitbake? Basically I =
-would like to figure out what lines in what files cause assignments to cert=
-ains variables in what order.
-
-I would be very grateful for any suggestions on how to debug issues such as=
- this, as I'm a complete newbie with openembedded/bitbake.
-
-Regards
-S=F8ren
 
