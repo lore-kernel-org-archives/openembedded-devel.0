@@ -1,28 +1,36 @@
-Received: from stoexhub03.domain01.net ([83.145.59.144])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>) id 1TbQOv-0002M7-CK
+	(envelope-from <martin.jansa@gmail.com>) id 1TbSjA-0005dn-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 07:36:42 +0100
-Received: from ad.chargestorm.se (83.252.253.85) by stoexhub03.domain01.net
-	(10.12.10.3) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Thu, 22 Nov 2012 07:21:26 +0100
-Date: Thu, 22 Nov 2012 07:22:25 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121122062224.GB5468@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1351681706-12778-1-git-send-email-otavio@ossystems.com.br>
-	<1351681706-12778-2-git-send-email-otavio@ossystems.com.br>
+	Thu, 22 Nov 2012 10:05:45 +0100
+Received: by mail-ee0-f47.google.com with SMTP id l10so4368692eei.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Nov 2012 00:51:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ck2A0hbrjY9gVHTsAgsCHp/UsFJfQ7InaRz9Mnv72EE=;
+	b=l5UF0mTLTf+zegdRAM4pd3zuH9tE7KubDt16Xjf6pu3/Wv1Bg1jnu5gLNp9cgDoEeB
+	0DlfRdAud0FmlpoKzvcVg1bE5ELGC12sSryTx5R1DB7x34g1GR0lOsZPZ29gjuwOZVXP
+	Jf8XzmDJmXhlmgv+SQJZhO9+ZntKoA2RfyOY1YfqRVBwp86HhHPM0s5ssc/zGzWQpMQL
+	iW/45xiSHsvk32U/XFJwn78XAqFcY1qKeiBtaTbg5eSGqQ7glPu57vTNVR5ZvbHxZOIZ
+	Sf/Io073PbbH+seI+Z9spnEYd5Vf1m4HZkUQ028MxEo5l7l/uK64+jYRzKeIbq4UVsXx
+	hwKg==
+Received: by 10.14.214.2 with SMTP id b2mr55580211eep.32.1353574299056;
+	Thu, 22 Nov 2012 00:51:39 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id f2sm5684618eep.2.2012.11.22.00.51.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Nov 2012 00:51:38 -0800 (PST)
+Date: Thu, 22 Nov 2012 09:51:36 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121122085136.GV12637@jama.jama.net>
+References: <20121122084944.2288A10397@opal>
 MIME-Version: 1.0
-In-Reply-To: <1351681706-12778-2-git-send-email-otavio@ossystems.com.br>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
+In-Reply-To: <20121122084944.2288A10397@opal>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
-Subject: Re: [meta-oe][PATCH v2 2/3] meta-systemd: meta-networking: ntp: Update bbappend to 4.2.6p5
+Subject: Re: [oe-commits] Martin Jansa : qt4-x11-free: drop bbappend for 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,31 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 06:36:45 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 22 Nov 2012 09:05:45 -0000
+X-Groupsio-MsgNum: 41621
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="XDqeUMnLaDfDQgU1"
 Content-Disposition: inline
 
-* Otavio Salvador <otavio@ossystems.com.br> [121031 12:08]:
+--XDqeUMnLaDfDQgU1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../{ntp_4.2.6p3.bbappend => ntp_4.2.6p5.bbappend} |    0
->  1 files changed, 0 insertions(+), 0 deletions(-)
->  rename meta-systemd/meta-networking/recipes-support/ntp/{ntp_4.2.6p3.bbappend => ntp_4.2.6p5.bbappend} (100%)
+On Thu, Nov 22, 2012 at 08:49:43AM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: danny
+> Commit: bb3d744481c148ef570d9dfe0eb5f6821d02318b
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3Dbb3d744481c148ef570d9dfe0eb5f6821d02318b
 
-Ping?
+This isn't right ^, should be in master only.
 
-Could we have this patch (and the 1/3, which moved systemd-support to
-meta-systemd/meta-networking/....) applied?
+Both qt4 bbappends and dhcp bbappend change
 
-meta-systemd has been unparsable for quite some time now, as
-meta-networking has ntp 4.2.6p5, and the bbappend in meta-systemd is for
-4.2.6p3...
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-/Anders
+--XDqeUMnLaDfDQgU1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlCt55gACgkQN1Ujt2V2gBwG2wCglDrmdyT79RmYFnUgZRucB0D7
+sP0AnR52eOFy1sbqth9ClRyfCghfR/Mk
+=ooBv
+-----END PGP SIGNATURE-----
 
+--XDqeUMnLaDfDQgU1--
