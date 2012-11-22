@@ -1,34 +1,34 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TbWD9-00042c-Sd
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TbWGr-00049L-Dw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 13:48:55 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so3117112eaa.6
+	Thu, 22 Nov 2012 13:52:45 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 3F231D22C1; Thu, 22 Nov 2012 13:38:48 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 35472D224F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 04:34:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=i1lZQoBEts9WpvvV4Hwo5bX4C120DTGZ7PE86pcZmAk=;
-	b=jgP/uXTHeUbCZto9+31K3d4tfIvC6mqiU4f8NHjlLowNLqFZ236PQC8Kwk/cvQY2Z7
-	SV+C6XzcEiLlXAmZlulT65jqAlsZtbl3B/28hSQnTXDwXQT9ZVKPcIimPCUEHvslABm4
-	IKFCokduYmHG3xiaQS63rERZ8KrL5J7YCpl1B3aVk7SCETN/yddV4I12AXAGZQ2uzcgN
-	goxtICGuFpjqrqdJw/3HqO4V4rBrgFkgo8ZGhKi/xZT756SsQKel2QF/4JqXBiW3Cfxp
-	v8vEflE8kITPFWyCt8WU0TbveEu9AQaQUn+zLV4z+I3A0DPyqgdthQXehAKRBCyW76ym
-	Gbpw==
-Received: by 10.14.207.68 with SMTP id m44mr1036279eeo.40.1353587689830;
-	Thu, 22 Nov 2012 04:34:49 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm6730955eep.5.2012.11.22.04.34.49
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Nov 2012 04:34:49 -0800 (PST)
-Date: Thu, 22 Nov 2012 13:34:47 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121122123447.GB12637@jama.jama.net>
+	Thu, 22 Nov 2012 13:38:16 +0100 (CET)
+Message-ID: <50AE1CAB.7060003@linaro.org>
+Date: Thu, 22 Nov 2012 13:38:03 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: evolution-data-server and php-native broken by libxml2 upgrade in oe-core
+To: openembedded-devel@lists.openembedded.org
+References: <20121122123447.GB12637@jama.jama.net>
+In-Reply-To: <20121122123447.GB12637@jama.jama.net>
+Subject: Re: evolution-data-server and php-native broken by libxml2 upgrade in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 12:48:56 -0000
-X-Groupsio-MsgNum: 41634
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VE1+SxTILTm8udN6"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Nov 2012 12:52:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---VE1+SxTILTm8udN6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+W dniu 22.11.2012 13:34, Martin Jansa pisze:
+> Just FYI:
+> 
+> meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+> virtual:native:meta-openembedded/meta-oe/recipes-devtools/php/php_5.3.6.bb
+> 
+> are broken after lixml2 upgrade from 2.8.0 to 2.9.0 (oe-core rev
+> a65ea43e26866ddc60051c52b2eb226507fae346)
+> 
+> They are pretty low priority for me right now, so I'm just sending this
+> e-mail instead of patches :). 
+> 
+> Hrw is already working on php.
 
-Just FYI:
+I was working on php 5.4.8 which builds with this libxml2 version for
+native but fails for my armv8 target.
 
-meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
-virtual:native:meta-openembedded/meta-oe/recipes-devtools/php/php_5.3.6.bb
 
-are broken after lixml2 upgrade from 2.8.0 to 2.9.0 (oe-core rev
-a65ea43e26866ddc60051c52b2eb226507fae346)
 
-They are pretty low priority for me right now, so I'm just sending this
-e-mail instead of patches :).=20
-
-Hrw is already working on php.
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---VE1+SxTILTm8udN6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCuG+cACgkQN1Ujt2V2gByQxgCeMKrOWbbWLxenq+UG3ht9SQ2v
-EisAnRYoGGxgYUOcPglZu2BdNMJqUUVN
-=/yPO
------END PGP SIGNATURE-----
-
---VE1+SxTILTm8udN6--
