@@ -1,22 +1,37 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TbUW5-0001pH-LK
+	(envelope-from <martin.jansa@gmail.com>) id 1TbUdA-00020q-TI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 12:00:21 +0100
-Received: from puchatek.dom (unknown [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 4A817D224F;
-	Thu, 22 Nov 2012 11:46:19 +0100 (CET)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Thu, 22 Nov 2012 12:07:42 +0100
+Received: by mail-ee0-f47.google.com with SMTP id l10so4427940eei.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Nov 2012 02:53:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=D16+Rrlg/rx/yfJrrd+HBMjxF8lGy+O8p0F7Hs5RS+k=;
+	b=hlICzJ19X+0La2o6t63ZMojC6hOUr0XAVAILc6fqrcvJjJJ5h21eyirnME6NFVc2JM
+	i+X1y4GNzMiQh0uBGy8cKWF73Jx4cjpCaaRl/34XbJMjU220XNJyIUORs25Tpg6NHMUs
+	dycUcFgtoppHvow/5vHoIvliqnzvjef9GN/I+S0D6a0htehiOUbVGkfCN/jPxCAFHEpe
+	r3u3RHhj0ICFccYO8rmfBN1BN0zj4UWrk6ItdgRXrWIWuk/KGwMIX2jn3vCMJEtvCqCq
+	t2TBR+GJ2lIgxSjaMUGdm5J9n1OxnxQqbqXUZn5ObJlFGkGoAC3FoCU17PeaiMjDCebL
+	yZEQ==
+Received: by 10.14.203.2 with SMTP id e2mr475974eeo.20.1353581614847;
+	Thu, 22 Nov 2012 02:53:34 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id o49sm6240311eep.5.2012.11.22.02.53.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 22 Nov 2012 02:53:34 -0800 (PST)
+Date: Thu, 22 Nov 2012 11:53:31 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Nov 2012 11:45:55 +0100
-Message-Id: <1353581155-2455-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.0
-In-Reply-To: <[B[B[Bk8iauv$8f3$1@ger.gmane.org>
-References: <[B[B[Bk8iauv$8f3$1@ger.gmane.org>
-Subject: [meta-oe][PATCH] mysql: make it work after $libexec change - LP: #1068759
+Message-ID: <20121122105331.GX12637@jama.jama.net>
+References: <CAHod+Gc5uO1HsJdaziyEki7vXbPJkEwXe2Zu-OKBhzgXQD47sQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAHod+Gc5uO1HsJdaziyEki7vXbPJkEwXe2Zu-OKBhzgXQD47sQ@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Andreas M <C3@jama.jama.net>, BC@jama.jama.net, ller <schnitzeltony@gmx.de>
+Subject: Re: [meta-efl] should epdfview really be under meta-efl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,59 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 11:00:21 -0000
+X-List-Received-Date: Thu, 22 Nov 2012 11:07:42 -0000
+X-Groupsio-MsgNum: 41632
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="i6WX/W6h5xa4jqsd"
+Content-Disposition: inline
 
-Mysql start scripts assumed that mysqld is in /usr/libexec/ directory.
-It was true until 406bd38b4232f9f399ef5ffe0b4fac72ed605a23 landed in
-OE-Core.
+--i6WX/W6h5xa4jqsd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This changeset fixes mysqld start and initial databases population
-scripts.
+On Thu, Nov 22, 2012 at 01:33:42AM +0100, Marko Kati=C4=87 wrote:
+> epdfview is a pure gtk app, yet it's under meta-efl/efl. Is this on
+> purpose or did epdfview end up there
+> due to it's name similarity to epdf ?
 
-More: https://bugs.launchpad.net/linaro-oe/+bug/1068759
+I think so, CCing Andreas for confirmation.
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- meta-oe/recipes-support/mysql/mysql5_5.1.40.inc | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+Cheers,
 
-diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-index 3867a12..af0ddbb 100644
---- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-+++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
- 
- DEPENDS = "ncurses"
--PR = "r10"
-+PR = "r11"
- 
- SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
-            file://configure.in.patch \
-@@ -13,7 +13,7 @@ SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
-            file://misc.m4.patch \
-            file://Makefile.am.patch \
-            file://fix_host_path.patch \
--	   file://configure-ps-cache-check.patch \
-+           file://configure-ps-cache-check.patch \
-            file://fix-abi-check-gcc45.patch \
-            file://my.cnf \
-            file://mysqld.sh"
-@@ -36,6 +36,12 @@ EXTRA_OECONF = " --with-atomic-ops=up --with-embedded-server --prefix=/usr --sys
- 
- do_configure_append() {
-      sed -i /comp_err/d ${S}/sql/share/Makefile
-+
-+     # handle distros with different values of ${libexecdir}
-+     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
-+     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysql_install_db.sh
-+     sed -i -e "s:mysqld libexec:mysqld $libexecdir2:g" ${S}/scripts/mysql_install_db.sh
-+     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysqld_safe.sh
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "mysql5_sysroot_preprocess"
--- 
-1.8.0
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--i6WX/W6h5xa4jqsd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlCuBCsACgkQN1Ujt2V2gBzy4wCgs02EsHxxVw0wuqePiqb2/6dR
+MDwAn1z4L+1v27zR2I0CeIKMKzsIciTh
+=1o6N
+-----END PGP SIGNATURE-----
+
+--i6WX/W6h5xa4jqsd--
