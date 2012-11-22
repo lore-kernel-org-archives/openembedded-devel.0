@@ -1,38 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TbXTn-0006RE-Os
+	(envelope-from <otavio.salvador@gmail.com>) id 1TbXV4-0006Xa-OW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 15:10:11 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so4522653eei.6
+	Thu, 22 Nov 2012 15:11:30 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa10so775675pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 05:56:05 -0800 (PST)
+	Thu, 22 Nov 2012 05:57:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=6rJx8POKkkv0jqcEBeiYf3eGbQHDqCOUWhHh+QclEU8=;
-	b=lvsnRXp6SVmAkgzObjMifHc3ip5BcPU7PeMZn7UPTCeooJD8+ux3IUHHMY+iLZkux3
-	JoJ294uz5nuUQW4vmfzTtv7GUgnvAzH9KBL+w2yjt3HNhk+en2HovYvEJzT7WKOmN7wc
-	J6Oj7tpOKRRK6HszmT7HXOpcEyqq8/PL7qjRZESIKk4t+FDf+Bww7hd2QxmKmPiBa6cA
-	V1ejhTihLoSkdx+jWrAjMXeEnNoJ1CXuT7g43GPHFcHp77G2zPMa+yI4VsN8Z19bv4KC
-	eXALW0pOPhw4tXpy+UXI9Pj5clkm22m79QS8GaIqLOlg3R0+dCfm+tLBBxHOmA+Xnlch
-	z+yg==
-Received: by 10.14.214.2 with SMTP id b2mr1698478eep.32.1353592565718;
-	Thu, 22 Nov 2012 05:56:05 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id u45sm992263eep.0.2012.11.22.05.56.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Nov 2012 05:56:05 -0800 (PST)
-Date: Thu, 22 Nov 2012 14:56:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121122135603.GE12637@jama.jama.net>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=/bj9V/arbt8TwxvXSX6YmyFKS1OyU/QZ44A3CzkZq0g=;
+	b=AdSZ/Q30uZBtYGovUmM3jqeH1eyiLvW+qZ7f8RVkl1rJWDK6QFRUA30RdB5ojxJ4E2
+	iw4d+U0hjGmj7A1Q21iWRiL0pI9CkRYwzoWnEPoGoIrknCic0NfPM7cXVZg4XppNvpfy
+	Gi/0yTo74Lt8fYLry6KSo57Gkfdo9zDEE0BjZjpvCKTEQ3o5sdhEWkmyV2Waso3RpAym
+	ecmnMn56L5oy5mHdVJ5PRxmQQjoXvgKUXHsLZrdXUCJ0gmcwzt9Wr/leUxgOsj9171U4
+	+Jh2lGtsc9dN/allYZ0liI9bdZh+n1Xpgwoh5+pjNcyF6SWWTGo3TapxdYUX/ezP990J
+	i+bA==
+MIME-Version: 1.0
+Received: by 10.68.189.8 with SMTP id ge8mr5289912pbc.24.1353592643806; Thu,
+	22 Nov 2012 05:57:23 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Thu, 22 Nov 2012 05:57:23 -0800 (PST)
+In-Reply-To: <20121122135603.GE12637@jama.jama.net>
 References: <CAHod+Gc5uO1HsJdaziyEki7vXbPJkEwXe2Zu-OKBhzgXQD47sQ@mail.gmail.com>
 	<20121122105331.GX12637@jama.jama.net>
 	<CALbNGRRus_-OSess+CaMHD++yPr8xrpRryBjnvr9=jw-6gWYgw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRRus_-OSess+CaMHD++yPr8xrpRryBjnvr9=jw-6gWYgw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@gmx.de>
+	<20121122135603.GE12637@jama.jama.net>
+Date: Thu, 22 Nov 2012 11:57:23 -0200
+X-Google-Sender-Auth: rh-SKU3qKv1YJX91rWc-9tMvWes
+Message-ID: <CAP9ODKpNueNMd0o9gwcn6v8L8dd1XLDOMbyL7_UvWmZREzrcug@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>
 Subject: Re: [meta-efl] should epdfview really be under meta-efl?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,51 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 14:10:11 -0000
-X-Groupsio-MsgNum: 41642
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eGwqSfc1DN4LzNjY"
-Content-Disposition: inline
-
---eGwqSfc1DN4LzNjY
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Nov 2012 14:11:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 22, 2012 at 02:41:34PM +0100, Andreas M=C3=BCller wrote:
-> On Thu, Nov 22, 2012 at 11:53 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Thu, Nov 22, 2012 at 01:33:42AM +0100, Marko Kati=C4=87 wrote:
-> >> epdfview is a pure gtk app, yet it's under meta-efl/efl. Is this on
-> >> purpose or did epdfview end up there
-> >> due to it's name similarity to epdf ?
-> >
-> > I think so, CCing Andreas for confirmation.
-> >
-> > Cheers,
-> >
-> > --
-> 1. Where should be the new location?
-> 2. I have no strong opinion on that - I asked here for the location
-> before creating the recipe :)
+On Thu, Nov 22, 2012 at 11:56 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Thu, Nov 22, 2012 at 02:41:34PM +0100, Andreas M=C3=BCller wrote:
+>> On Thu, Nov 22, 2012 at 11:53 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>> > On Thu, Nov 22, 2012 at 01:33:42AM +0100, Marko Kati=C4=87 wrote:
+>> >> epdfview is a pure gtk app, yet it's under meta-efl/efl. Is this on
+>> >> purpose or did epdfview end up there
+>> >> due to it's name similarity to epdf ?
+>> >
+>> > I think so, CCing Andreas for confirmation.
+>> >
+>> > Cheers,
+>> >
+>> > --
+>> 1. Where should be the new location?
+>> 2. I have no strong opinion on that - I asked here for the location
+>> before creating the recipe :)
+>
+> What about meta-gnome?
 
-What about meta-gnome?
-
-Cheers,
+For meta-gnome evince might fit better.
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---eGwqSfc1DN4LzNjY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCuLvMACgkQN1Ujt2V2gBwroQCfWR7vxBPSG7Zmozxdf4ESXDEC
-2UMAoK6LG1qsItsV+8NHPR7+DINH0LR8
-=J86Z
------END PGP SIGNATURE-----
-
---eGwqSfc1DN4LzNjY--
