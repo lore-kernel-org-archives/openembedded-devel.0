@@ -1,30 +1,27 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TbZQ8-0003sD-Fj
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TbZUe-0004Nd-EP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Nov 2012 17:14:33 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Thu, 22 Nov 2012
-	17:00:25 +0100
-X-TM-IMSS-Message-ID: <11d5f0520021b9af@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 11d5f0520021b9af ;
-	Thu, 22 Nov 2012 17:00:17 +0100
-Message-ID: <50AE4C18.6060500@nedap.com>
-Date: Thu, 22 Nov 2012 17:00:24 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Thu, 22 Nov 2012 17:19:12 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 22 Nov 2012 08:05:05 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,301,1352102400"; d="scan'208";a="171442983"
+Received: from unknown (HELO helios.localnet) ([10.252.122.201])
+	by AZSMGA002.ch.intel.com with ESMTP; 22 Nov 2012 08:05:04 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: aws.ismail@windriver.com
+Date: Thu, 22 Nov 2012 16:05:03 +0000
+Message-ID: <7737777.Md20e45oyb@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
+In-Reply-To: <50AD258C.1070700@windriver.com>
+References: <cover.1353425302.git.paul.eggleton@linux.intel.com>
+	<d4690b3173005730a4095f921332eb35f9b16e74.1353425302.git.paul.eggleton@linux.intel.com>
+	<50AD258C.1070700@windriver.com>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <50AE2633.1030006@nedap.com>
-	<20121122133125.GC12637@jama.jama.net>	<50AE2A59.4090802@nedap.com>
-	<20121122135442.GD12637@jama.jama.net>	<50AE37B9.3070406@nedap.com>
-	<20121122151725.GG12637@jama.jama.net>
-In-Reply-To: <20121122151725.GG12637@jama.jama.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: kernel image
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH v2 3/8] quagga: add from OE-Classic, update and tidy-up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,40 +35,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 16:14:33 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Nov 2012 16:19:12 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+On Wednesday 21 November 2012 14:03:40 Aws Ismail wrote:
+> On 11/20/2012 10:30 AM, Paul Eggleton wrote:
+> > diff --git a/meta-networking/recipes-protocols/quagga/files/quagga.init
+> > b/meta-networking/recipes-protocols/quagga/files/quagga.init new file
+> > mode 100644
+> > index 0000000..d786a5a
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-protocols/quagga/files/quagga.init
+> > @@ -0,0 +1,200 @@
+> > +#!/bin/sh
+> > +#
+> > +# /etc/init.d/quagga -- start/stop the Quagga routing daemons
+> > +#
+> > +# Based on debian version by Endre Hirling <endre@mail.elte.hu> and
+> > +# Christian Hammers <ch@debian.org>.
+> > +#
+> > +
+> > +### BEGIN INIT INFO
+> > +# Provides: quagga
+> > +# Required-Start: $local_fs $network $remote_fs $syslog
+> > +# Required-Stop: $local_fs $network $remote_fs $syslog
+> > +# Default-Start:  2 3 4 5
+> > +# Default-Stop: 0 1 6
+> > +# Short-Description: start and stop the Quagga routing suite
+> > +# Description: Quagga is a routing suite for IP routing protocols like
+> > +#              BGP, OSPF, RIP and others. This script contols the main
+> > +#              daemon "quagga" as well as the individual protocol
+> > daemons.
+> > +### END INIT INFO
+> > +
+> > +# NOTE: sbin must be before bin so we get the iproute2 ip and not the
+> > +# busybox ip command. The busybox one flushes all routes instead of just
+> > +# the dynamic routes
+> > +PATH=/sbin:/usr/sbin:/bin:/usr/bin:/sbin
+> > +D_PATH=/usr/sbin/quagga
+> 
+> Shouldn't this be /usr/sbin rather than /usr/sbin/quagga.
+> That's where the daemons are being installed, right?
 
-On 11/22/2012 04:17 PM, Martin Jansa wrote:
-> On Thu, Nov 22, 2012 at 03:33:29PM +0100, Jaap de Jong wrote:
->> On 11/22/2012 02:54 PM, Martin Jansa wrote:
->>> On Thu, Nov 22, 2012 at 02:36:25PM +0100, Jaap de Jong wrote:
->>>> On 11/22/2012 02:31 PM, Martin Jansa wrote:
->>>>> On Thu, Nov 22, 2012 at 02:18:43PM +0100, Jaap de Jong wrote:
->>>>>> Hi,
->>>>>> does anyone know where the + (in
->>>>>> kernel-2.6.35.14+_2.6.35-r14.6_mymachine.ipk) is added?
->>>>>> It is added on my pc (running ubuntu); it is not added on my debian
->>>>>> buildserver.
->>>>> Check if you have oe-core 56fe5300
->>>> I'm using oe-classic for this...
->>> Then apply it in oe-classic kernel.bbclass or your recipe.
->>>
->> Stupid question probably.. Where can I find it?
->> And one more: does it make sense that the '+' is added under ubuntu and
->> that is absent on my buildserver?
-> http://git.openembedded.org/openembedded-core/commit/meta/classes/kernel.bbclass?id=56fe5300ab5ab072c20acd03d7fc26e9cae4e652
+Ah yes, looks like it should be. Thanks.
+
+> > diff --git
+> > a/meta-networking/recipes-protocols/quagga/files/watchquagga.default
+> > b/meta-networking/recipes-protocols/quagga/files/watchquagga.default new
+> > file mode 100644
+> > index 0000000..f152032
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-protocols/quagga/files/watchquagga.default
+> > @@ -0,0 +1,7 @@
+> > +# Watchquagga configuration
+> > +#watch_daemons="zebra bgpd ospfd ospf6d ripd ripngd"
+> > +watch_daemons="zebra"
+> > +
+> > +# To enable restarts, uncomment this line (but first be sure to edit
+> > +# the WATCH_DAEMONS line to reflect the daemons you are actually using):
+> > +watch_options="-Az -b_ -r/etc/init.d/quagga_restart_%s
+> > -s/etc/init.d/quagga_start_%s -k/etc/init.d/quagga_stop_%s"
 >
-> Try to compare those 3 commands on both builders.
->
->
-That seems to help.
-I added it to my local linux recipe
+> Paul, these watch_options won't work because -A does not seem to jive
+> when a single daemon (i.e. zebra) is being used.
+> Recommend using something like:
+> 
+> watch_options="-z -b_ -r/etc/init.d/quagga_restart_%s"
 
-    do_configure_prepend() {
-         touch .scmversion
-    }
+OK, this is something that came from the OE-Classic recipe from which this one 
+is derived. If -A is not going to work here I will remove it.
 
-Thanks for your support!
+I'll send out a v2 with these fixes.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
