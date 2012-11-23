@@ -1,24 +1,28 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from stoexhub02.domain01.net ([83.145.59.143])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TbscW-0002vA-Le
+	(envelope-from <anders@chargestorm.se>) id 1TbtHe-0006l8-PK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2012 13:44:47 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 23 Nov 2012
-	13:30:28 +0100
-X-TM-IMSS-Message-ID: <163c10480021e40a@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 163c10480021e40a ;
-	Fri, 23 Nov 2012 13:30:19 +0100
-Message-ID: <50AF6C63.6080208@nedap.com>
-Date: Fri, 23 Nov 2012 13:30:27 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Fri, 23 Nov 2012 14:27:07 +0100
+Received: from localhost (193.41.119.134) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server id 8.3.279.1; Fri, 23 Nov 2012
+	14:12:57 +0100
+Date: Fri, 23 Nov 2012 14:12:57 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20121123131256.GB2808@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <cover.1353603007.git.paul.eggleton@linux.intel.com>
+	<k8nh49$jq6$1@ger.gmane.org>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: openjdk-7-vm-jamvm
+In-Reply-To: <k8nh49$jq6$1@ger.gmane.org>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.20 (2009-12-10)
+X-GFI-SMTP-Submission: 1
+Subject: Re: [meta-systemd][PATCH 0/3] Fix ntp bbappends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,15 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2012 12:44:47 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Nov 2012 13:27:07 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi,
-how can I build openjdk-7-vm-jamvm?
-If I bitbake openjdk-7 it is not added, while openjdk-7-vm-zero is added.
-I'm building for arm.
-Thanks!
-Jaap
+* Koen Kooi <koen@dominion.thruhere.net> [121123 10:54]:
+
+> Op 22-11-12 17:54, Paul Eggleton schreef:
+> > This is the meta-systemd patch series corresponding to the recently sent 
+> > out patches for ntp in meta-networking. 1/3 and 2/3 should be applied 
+> > ASAP even if 3/3 is not applied immediately, as the layer is currently 
+> > broken; 3/3 needs to wait until after the meta-networking patches go in.
+
+> 1/3 and 2/3 have been applied.
+
+Could you, or Eric, apply them to danny also, or should we do a new pull-request?
+
+Cheers,
+/Anders
+
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
 
 
