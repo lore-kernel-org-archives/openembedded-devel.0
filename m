@@ -1,26 +1,33 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1Tbtvv-0004Z6-Or
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1TbuVI-0005JU-PI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2012 15:08:43 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 23 Nov 2012
-	14:54:35 +0100
-X-TM-IMSS-Message-ID: <168910cf0021e904@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 168910cf0021e904 ;
-	Fri, 23 Nov 2012 14:54:25 +0100
-Message-ID: <50AF801A.7000502@nedap.com>
-Date: Fri, 23 Nov 2012 14:54:34 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Fri, 23 Nov 2012 15:45:16 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1TbuHf-001FsL-7J>; Fri, 23 Nov 2012 15:31:11 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1TbuHf-001Xgp-1i>; Fri, 23 Nov 2012 15:31:11 +0100
+Received: from heinold by andorra.imp.fu-berlin.de with local (internal_ws
+	Exim 4.72) id 1TbuHd-0000fS-VI
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2012 15:31:09 +0100
+Date: Fri, 23 Nov 2012 15:31:09 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121123143109.GA31470@mi.fu-berlin.de>
+References: <50AF4E08.7010402@nedap.com>
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <50AE3D1A.90106@nedap.com>
-In-Reply-To: <50AE3D1A.90106@nedap.com>
-Subject: Re: sstate-cache
+In-Reply-To: <50AF4E08.7010402@nedap.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: libftdi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2012 14:08:43 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Nov 2012 14:45:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Fri, Nov 23, 2012 at 11:20:56AM +0100, Jaap de Jong wrote:
+> Hi All,
+> on my buildserver under debian, libftdi does not compile.
+> Looks like some library issue.
+> Anyone an idea how to solve?
+> Thanks in advance!
+> Jaap
+> 
+> 
+> NOTE: package libftdi-0.19-r0: task do_compile: Started
+> ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+> for further information)
+> ERROR: Logfile of failure stored in: /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+> Log data follows:
+> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
+> 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
+> 'common']
+> | ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+> for further information)
+> | NOTE: make -j2
+> | make  all-recursive
+> | make[1]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19'
+> | Making all in src
+> | make[2]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19/src'
+> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=compile
+> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
+> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+> -DHAVE_CONFIG_H -I. -I..     -O2 -pipe -g
+> -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+> -c -o ftdi.lo ftdi.c
+> | arm-angstrom-linux-gnueabi-libtool: compile:
+> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
+> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+> -c ftdi.c  -fPIC -DPIC -o .libs/ftdi.o
+> | arm-angstrom-linux-gnueabi-libtool: compile:
+> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
+> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+> -c ftdi.c -o ftdi.o >/dev/null 2>&1
+> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=link
+> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
+> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+> -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+> -version-info 20:0:19 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+> -o libftdi.la -rpath /usr/lib ftdi.lo  -L/lib -lusb
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On 11/22/2012 03:56 PM, Jaap de Jong wrote:
-> I have a handful of openembedded clones on a single machine and I would
-> like to use as little diskspace as possible, so I'm wondering if it is
-> possible to share the directory build/sstate-cache among these different
-> clones?
->
-To be a bit more precise, these are the variables to work with:
+Fix the Makefile to not use this.
 
-SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
-SSTATE_MIRRORS ?= "\
-file://.* http://someserver.tld/share/sstate/ \n \
-file://.* file:///some/local/dir/sstate/"
-
-Does every clone (which might be translated at the same time) has to 
-have its own local SSTATE_DIR?
-Or is it ok to point every clone to one single directory, like: 
-SSTATE_DIR ?= "${HOME}/sstate-cache"?
-Or should I use SSTATE_MIRRORS for that purpose?
-
-Thanks!
-Jaap
+Bye Henning
 
 
