@@ -1,32 +1,45 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from co9ehsobe003.messaging.microsoft.com ([207.46.163.26]
+	helo=co9outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tbh7L-0003W8-7g
+	(envelope-from <B28495@freescale.com>) id 1TbqAG-0006kZ-0e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2012 01:27:39 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so4765127eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Nov 2012 16:13:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=3arfZfXAleYTawce42Oi5xVm2EbmGm5/OtWp3h4H4Q0=;
-	b=bCcZWQmVt1W/xcu4PbHDl+FaOq+TPlSyIszwf9bK6kXQA40YNJaD5k59Gy3164BMk+
-	zUCb64pxiEB9yx2vWylh3zzKka3Z7LWpcm0Iiotav/LANp5GShfIzQ14UY5XfYHjVbLB
-	QNwfCDWWYktsO4Yhjd+4Lpv6m/ANRh9XjY4Yh6OFiYDRcQALt6dkhY4urcp56PouTOGF
-	UURg0l38Ym7cVjor2gueQ4p4MZtHG1D7hK7y+nlj5oGwylFawDOnafeSGTOSX8FyMUJU
-	SRBbgSM/4Ngl/VHUya1PJMCxyXD9h03Sw/9AAra/lfYuoF1sDrq3Db71+wztsXNiSKDR
-	C5UA==
-Received: by 10.14.193.136 with SMTP id k8mr6714583een.30.1353629612422;
-	Thu, 22 Nov 2012 16:13:32 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f2sm10169287eep.2.2012.11.22.16.13.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Nov 2012 16:13:31 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Nov 2012 01:13:29 +0100
-Message-Id: <1353629609-14055-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-Subject: [meta-oe][PATCH] xf86-video-glamo: adapt to xserver-0.13 video API
+	Fri, 23 Nov 2012 11:07:16 +0100
+Received: from mail55-co9-R.bigfish.com (10.236.132.242) by
+	CO9EHSOBE037.bigfish.com (10.236.130.100) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 23 Nov 2012 09:07:47 +0000
+Received: from mail55-co9 (localhost [127.0.0.1])	by mail55-co9-R.bigfish.com
+	(Postfix) with ESMTP id 31DCF9401AF	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2012 09:07:47 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1de0h1202h1d1ah1d2ahzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1155h)
+Received: from mail55-co9 (localhost.localdomain [127.0.0.1]) by mail55-co9
+	(MessageSwitch) id 1353661664970586_8252;
+	Fri, 23 Nov 2012 09:07:44 +0000 (UTC)
+Received: from CO9EHSMHS013.bigfish.com (unknown [10.236.132.247])	by
+	mail55-co9.bigfish.com (Postfix) with ESMTP id EA688DC004B	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Nov 2012 09:07:44 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS013.bigfish.com
+	(10.236.130.23) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 23 Nov 2012 09:07:44 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server (TLS) id 14.2.318.3; Fri, 23 Nov 2012 09:07:43 +0000
+Received: from fedora1764.ap.freescale.net (fedora1764.ap.freescale.net
+	[10.193.20.36])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id qAN97cDY009637;	Fri, 23 Nov 2012 02:07:40 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 Nov 2012 17:07:32 +0800
+Message-ID: <1353661652-29949-1-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.7.11.7
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Cc: b29882@freescale.com
+Subject: [meta-oe] samba: Fix build on Fedora 17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,320 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2012 00:27:39 -0000
+X-List-Received-Date: Fri, 23 Nov 2012 10:07:16 -0000
+Content-Type: text/plain
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+From: Ting Liu <b28495@freescale.com>
+
+Fedora 17 has /bin/perl, this causes samba build to put perl interpreter
+path as /bin/perl But we set perl location for target as /usr/bin/perl
+
+This mismatch of perl path causes failure of rootfs image creation:
+| error: Failed dependencies:
+| 	/bin/perl is needed by samba-3.6.8-r1.ppce5500
+
+Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- ...mo-driver-adapt-to-xserver-0.13-video-API.patch | 279 +++++++++++++++++++++
- .../xorg-driver/xf86-video-glamo_git.bb            |   3 +-
- 2 files changed, 281 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch
+ meta-oe/recipes-connectivity/samba/samba.inc      | 2 ++
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch
-new file mode 100644
-index 0000000..cbdc6e7
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch
-@@ -0,0 +1,279 @@
-+From 57e8944e3cced03b9526bd075649d74d97c24899 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Tue, 20 Nov 2012 22:18:23 +0100
-+Subject: [PATCH 3/3] glamo-driver: adapt to xserver-0.13 video API
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/compat-api.h   | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ src/glamo-driver.c | 43 ++++++++++++------------
-+ 2 files changed, 118 insertions(+), 21 deletions(-)
-+ create mode 100644 src/compat-api.h
-+
-+diff --git a/src/compat-api.h b/src/compat-api.h
-+new file mode 100644
-+index 0000000..b1591b1
-+--- /dev/null
-++++ b/src/compat-api.h
-+@@ -0,0 +1,96 @@
-++/*
-++ * Copyright 2012 Red Hat, Inc.
-++ *
-++ * Permission is hereby granted, free of charge, to any person obtaining a
-++ * copy of this software and associated documentation files (the "Software"),
-++ * to deal in the Software without restriction, including without limitation
-++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-++ * and/or sell copies of the Software, and to permit persons to whom the
-++ * Software is furnished to do so, subject to the following conditions:
-++ *
-++ * The above copyright notice and this permission notice (including the next
-++ * paragraph) shall be included in all copies or substantial portions of the
-++ * Software.
-++ *
-++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-++ * DEALINGS IN THE SOFTWARE.
-++ *
-++ * Author: Dave Airlie <airlied@redhat.com>
-++ */
-++
-++/* this file provides API compat between server post 1.13 and pre it,
-++   it should be reused inside as many drivers as possible */
-++#ifndef COMPAT_API_H
-++#define COMPAT_API_H
-++
-++#ifndef GLYPH_HAS_GLYPH_PICTURE_ACCESSOR
-++#define GetGlyphPicture(g, s) GlyphPicture((g))[(s)->myNum]
-++#define SetGlyphPicture(g, s, p) GlyphPicture((g))[(s)->myNum] = p
-++#endif
-++
-++#ifndef XF86_HAS_SCRN_CONV
-++#define xf86ScreenToScrn(s) xf86Screens[(s)->myNum]
-++#define xf86ScrnToScreen(s) screenInfo.screens[(s)->scrnIndex]
-++#endif
-++
-++#ifndef XF86_SCRN_INTERFACE
-++
-++#define SCRN_ARG_TYPE int
-++#define SCRN_INFO_PTR(arg1) ScrnInfoPtr pScrn = xf86Screens[(arg1)]
-++
-++#define SCREEN_ARG_TYPE int
-++#define SCREEN_PTR(arg1) ScreenPtr pScreen = screenInfo.screens[(arg1)]
-++
-++#define SCREEN_INIT_ARGS_DECL int index, ScreenPtr pScreen, int argc, char **argv
-++
-++#define BLOCKHANDLER_ARGS_DECL int arg, pointer blockData, pointer pTimeout, pointer pReadmask
-++#define BLOCKHANDLER_ARGS arg, blockData, pTimeout, pReadmask
-++
-++#define CLOSE_SCREEN_ARGS_DECL int scrnIndex, ScreenPtr pScreen
-++#define CLOSE_SCREEN_ARGS scrnIndex, pScreen
-++
-++#define ADJUST_FRAME_ARGS_DECL int arg, int x, int y, int flags
-++
-++#define SWITCH_MODE_ARGS_DECL int arg, DisplayModePtr mode, int flags
-++
-++#define FREE_SCREEN_ARGS_DECL int arg, int flags
-++#define FREE_SCREEN_ARGS(x) (x)->scrnIndex, 0
-++
-++#define VT_FUNC_ARGS_DECL int arg, int flags
-++#define VT_FUNC_ARGS(flags) pScrn->scrnIndex, (flags)
-++
-++#define XF86_ENABLEDISABLEFB_ARG(x) ((x)->scrnIndex)
-++#else
-++#define SCRN_ARG_TYPE ScrnInfoPtr
-++#define SCRN_INFO_PTR(arg1) ScrnInfoPtr pScrn = (arg1)
-++
-++#define SCREEN_ARG_TYPE ScreenPtr
-++#define SCREEN_PTR(arg1) ScreenPtr pScreen = (arg1)
-++
-++#define SCREEN_INIT_ARGS_DECL ScreenPtr pScreen, int argc, char **argv
-++
-++#define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout, pointer pReadmask
-++#define BLOCKHANDLER_ARGS arg, pTimeout, pReadmask
-++
-++#define CLOSE_SCREEN_ARGS_DECL ScreenPtr pScreen
-++#define CLOSE_SCREEN_ARGS pScreen
-++
-++#define ADJUST_FRAME_ARGS_DECL ScrnInfoPtr arg, int x, int y
-++#define SWITCH_MODE_ARGS_DECL ScrnInfoPtr arg, DisplayModePtr mode
-++
-++#define FREE_SCREEN_ARGS_DECL ScrnInfoPtr arg
-++#define FREE_SCREEN_ARGS(x) (x)
-++
-++#define VT_FUNC_ARGS_DECL ScrnInfoPtr arg
-++#define VT_FUNC_ARGS(flags) pScrn
-++
-++#define XF86_ENABLEDISABLEFB_ARG(x) (x)
-++
-++#endif
-++
-++#endif
-+diff --git a/src/glamo-driver.c b/src/glamo-driver.c
-+index b13caae..10b7762 100644
-+--- a/src/glamo-driver.c
-++++ b/src/glamo-driver.c
-+@@ -43,6 +43,7 @@
-+ 
-+ #include <sys/mman.h>
-+ 
-++#include "compat-api.h"
-+ 
-+ static Bool debug = 0;
-+ 
-+@@ -68,10 +69,10 @@ static Bool
-+ GlamoPreInit(ScrnInfoPtr pScrn, int flags);
-+ 
-+ static Bool
-+-GlamoScreenInit(int Index, ScreenPtr pScreen, int argc, char **argv);
-++GlamoScreenInit(SCREEN_INIT_ARGS_DECL);
-+ 
-+ static Bool
-+-GlamoCloseScreen(int scrnIndex, ScreenPtr pScreen);
-++GlamoCloseScreen(CLOSE_SCREEN_ARGS_DECL);
-+ 
-+ static Bool
-+ GlamoCrtcResize(ScrnInfoPtr scrn, int width, int height);
-+@@ -86,10 +87,10 @@ static void
-+ GlamoRestoreHW(ScrnInfoPtr pScren);
-+ 
-+ static Bool
-+-GlamoEnterVT(int scrnIndex, int flags);
-++GlamoEnterVT(VT_FUNC_ARGS_DECL);
-+ 
-+ static void
-+-GlamoLeaveVT(int scrnIndex, int flags);
-++GlamoLeaveVT(VT_FUNC_ARGS_DECL);
-+ 
-+ static void
-+ GlamoLoadColormap(ScrnInfoPtr pScrn, int numColors, int *indices,
-+@@ -248,8 +249,8 @@ GlamoUnmapMMIO(ScrnInfoPtr pScrn) {
-+ }
-+ 
-+ static Bool
-+-GlamoSwitchMode(int scrnIndex, DisplayModePtr mode, int flags) {
-+-    ScrnInfoPtr pScrn = xf86Screens[scrnIndex];
-++GlamoSwitchMode(SWITCH_MODE_ARGS_DECL) {
-++    SCRN_INFO_PTR(arg);
-+     xf86CrtcConfigPtr config = XF86_CRTC_CONFIG_PTR (pScrn);
-+     xf86OutputPtr output = config->output[config->compat_output];
-+     Rotation rotation;
-+@@ -286,7 +287,7 @@ GlamoFbdevProbe(DriverPtr drv, GDevPtr *devSections, int numDevSections)
-+ 
-+ 	for (i = 0; i < numDevSections; i++) {
-+ 
-+-		dev = xf86FindOptionValue(devSections[i]->options, "Device");
-++		dev = (char *) xf86FindOptionValue(devSections[i]->options, "Device");
-+ 		if (fbdevHWProbe(NULL, dev, NULL)) {
-+ 			int entity;
-+ 			pScrn = NULL;
-+@@ -430,7 +431,7 @@ GlamoPreInit(ScrnInfoPtr pScrn, int flags)
-+ 
-+     pGlamo->pEnt = xf86GetEntityInfo(pScrn->entityList[0]);
-+ 
-+-    fb_device = xf86FindOptionValue(pGlamo->pEnt->device->options, "Device");
-++    fb_device = (char *) xf86FindOptionValue(pGlamo->pEnt->device->options, "Device");
-+ 
-+     /* open device */
-+     if (!fbdevHWInit(pScrn, NULL, fb_device))
-+@@ -523,7 +524,7 @@ GlamoPreInit(ScrnInfoPtr pScrn, int flags)
-+ 
-+ 
-+ static Bool
-+-GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-++GlamoScreenInit(SCREEN_INIT_ARGS_DECL)
-+ {
-+     ScrnInfoPtr pScrn = xf86Screens[pScreen->myNum];
-+     GlamoPtr pGlamo = GlamoPTR(pScrn);
-+@@ -545,7 +546,7 @@ GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-+ #endif
-+ 
-+     if (NULL == (pGlamo->fbmem = fbdevHWMapVidmem(pScrn))) {
-+-        xf86DrvMsg(scrnIndex, X_ERROR, "mapping of video memory failed\n");
-++        xf86DrvMsg(pScrn->scrnIndex, X_ERROR, "mapping of video memory failed\n");
-+         return FALSE;
-+     }
-+ 
-+@@ -556,13 +557,13 @@ GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-+     /* mi layer */
-+     miClearVisualTypes();
-+     if (!miSetVisualTypes(pScrn->depth, TrueColorMask, pScrn->rgbBits, TrueColor)) {
-+-        xf86DrvMsg(scrnIndex, X_ERROR,
-++        xf86DrvMsg(pScrn->scrnIndex, X_ERROR,
-+                    "visual type setup failed for %d bits per pixel [1]\n",
-+                    pScrn->bitsPerPixel);
-+         return FALSE;
-+     }
-+     if (!miSetPixmapDepths()) {
-+-      xf86DrvMsg(scrnIndex, X_ERROR, "pixmap depth setup failed\n");
-++      xf86DrvMsg(pScrn->scrnIndex, X_ERROR, "pixmap depth setup failed\n");
-+       return FALSE;
-+     }
-+ 
-+@@ -617,7 +618,7 @@ GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-+     /* software cursor */
-+     miDCInitialize(pScreen, xf86GetPointerScreenFuncs());
-+ 
-+-    GlamoEnterVT(scrnIndex, 0);
-++    GlamoEnterVT(VT_FUNC_ARGS(0));
-+ 
-+     xf86CrtcScreenInit(pScreen);
-+ #if XORG_VERSION_CURRENT >= XORG_VERSION_NUMERIC(1,5,0,0,0)
-+@@ -627,7 +628,7 @@ GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-+     /* colormap */
-+     pGlamo->colormap = NULL;
-+     if (!miCreateDefColormap(pScreen)) {
-+-        xf86DrvMsg(scrnIndex, X_ERROR,
-++        xf86DrvMsg(pScrn->scrnIndex, X_ERROR,
-+                    "internal error: miCreateDefColormap failed "
-+                    "in GlamoScreenInit()\n");
-+         return FALSE;
-+@@ -652,9 +653,9 @@ GlamoScreenInit(int scrnIndex, ScreenPtr pScreen, int argc, char **argv)
-+ }
-+ 
-+ static Bool
-+-GlamoCloseScreen(int scrnIndex, ScreenPtr pScreen)
-++GlamoCloseScreen(CLOSE_SCREEN_ARGS_DECL)
-+ {
-+-    ScrnInfoPtr pScrn = xf86Screens[scrnIndex];
-++    ScrnInfoPtr pScrn = xf86ScreenToScrn(pScreen);
-+     GlamoPtr pGlamo = GlamoPTR(pScrn);
-+ 
-+     if (pGlamo->accel)
-+@@ -675,7 +676,7 @@ GlamoCloseScreen(int scrnIndex, ScreenPtr pScreen)
-+ 
-+     pScreen->CreateScreenResources = pGlamo->CreateScreenResources;
-+     pScreen->CloseScreen = pGlamo->CloseScreen;
-+-    return (*pScreen->CloseScreen)(scrnIndex, pScreen);
-++    return (*pScreen->CloseScreen)(CLOSE_SCREEN_ARGS);
-+ }
-+ 
-+ static Bool
-+@@ -826,8 +827,8 @@ GlamoRestoreHW(ScrnInfoPtr pScrn) {
-+ }
-+ 
-+ static Bool
-+-GlamoEnterVT(int scrnIndex, int flags) {
-+-    ScrnInfoPtr pScrn = xf86Screens[scrnIndex];
-++GlamoEnterVT(VT_FUNC_ARGS_DECL) {
-++    SCRN_INFO_PTR(arg);
-+     GlamoPtr pGlamo = GlamoPTR(pScrn);
-+ 
-+     GlamoSaveHW(pScrn);
-+@@ -842,8 +843,8 @@ GlamoEnterVT(int scrnIndex, int flags) {
-+ }
-+ 
-+ static void
-+-GlamoLeaveVT(int scrnIndex, int flags) {
-+-    ScrnInfoPtr pScrn = xf86Screens[scrnIndex];
-++GlamoLeaveVT(VT_FUNC_ARGS_DECL) {
-++    SCRN_INFO_PTR(arg);
-+     GlamoPtr pGlamo = GlamoPTR(pScrn);
-+ 
-+     if (pGlamo->accel)
-+-- 
-+1.8.0
-+
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-index 10120b1..b56b995 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8cbd99fff773f92e844948f74ef0df8"
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index faa2be0..c4430d1 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -88,6 +88,8 @@ do_install_append() {
+         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
+         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
  
- PE = "2"
- PV = "1.0.0+gitr${SRCPV}"
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
++        sed -i -e '1s,#!.*perl,#! ${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
++
+ }
  
- SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=master \
-            file://0001-glamo-kms-driver-drop-unused-xf86_config.patch \
-            file://0001-fix-build-with-KMS-disabled.patch \
-+           file://0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch \
-           "
  
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index cc09a48..7c54dae 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
 -- 
-1.8.0
+1.7.11.7
+
 
 
 
