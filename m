@@ -1,37 +1,31 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TbvTC-0008Su-T1
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Nov 2012 16:47:11 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so5074012eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Nov 2012 07:33:03 -0800 (PST)
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tbyuz-0000Py-66
+	for openembedded-devel@openembedded.org; Fri, 23 Nov 2012 20:28:05 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa10so1437917pad.6
+	for <openembedded-devel@openembedded.org>;
+	Fri, 23 Nov 2012 11:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=uufoOVZjzK1Aj5L48dSy1BNPlsrp0yRgsJl3b/Gm7wM=;
-	b=D8jumY2w8ZHSTJx5kHB8hloonH3wV17xE1OkfLe6j2DX5u1WT08h7Z84zfqPMNTFTq
-	mYxIY8YNwGAVfaPI3r87uZIkbU6h40KIidaseHf23fgrOlaDMMaW70I9V7lG4M8OFzKz
-	rZgn7X+GUaTEqjo2uKmFF8+28xVueIxlAD0+eop8PQclt+mq7kk+qE29aGXDozeJMrgj
-	K5qg4xcxpQ21nn/FNJisUOmJnr+9fF9AXq+J0guIy6RU7JyX3AIgn/obirjvmnJTcrMZ
-	wfSlYDHA/EyXukrQISsIL1LAQBs74qJovgJzKzBapawem9vQKoCrRgq0Au5ytDT9DgS5
-	PnRQ==
-Received: by 10.14.223.4 with SMTP id u4mr14568593eep.19.1353684783392;
-	Fri, 23 Nov 2012 07:33:03 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b44sm14251389eep.12.2012.11.23.07.33.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 23 Nov 2012 07:33:02 -0800 (PST)
-Date: Fri, 23 Nov 2012 16:33:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121123153303.GR12637@jama.jama.net>
-References: <1353684287-19180-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<1353684287-19180-5-git-send-email-marcin.juszkiewicz@linaro.org>
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=t3lhwom2ws9VIeE0vIB2kNnoUxdAAOITnOUo5qjjMZU=;
+	b=lbCSylq/YqCNybKP/08Wyf8g9FRVIebmAT52dDBblDHpz6fgCRy7wUM9ZMQRuNXJnh
+	ielnWZssxtm02FisIWpr5lfwzZxnWQy7CumPLIi6zY1JFCzBz6UTx9Vx58djuxaviOLu
+	CYePo72xiI/ms1R+UEY55LtEhM7l/52OuEa/rBLqkGxj86ONlFpUPFpRQnByHvGLmstA
+	ttc9WGggdtDelqxy+FTBw2Cfg7zDzkcuqmjBt8qG4LQY4jK16Ns0iURXiFRpuYmUbeux
+	ZIbeGRHm4k5g+KPLvMJW+Ng7qFp9tRzbNFXLGdtEBP7bpzLdCrQE2D6BH9IhtHzK/Qco
+	dGkQ==
 MIME-Version: 1.0
-In-Reply-To: <1353684287-19180-5-git-send-email-marcin.juszkiewicz@linaro.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 4/9] packagegroup-cli-tools: remove mdbus2, mterm2, mkdump, mioctl
+Received: by 10.68.204.103 with SMTP id kx7mr16764847pbc.33.1353698036276;
+	Fri, 23 Nov 2012 11:13:56 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Fri, 23 Nov 2012 11:13:56 -0800 (PST)
+Date: Fri, 23 Nov 2012 17:13:56 -0200
+X-Google-Sender-Auth: vUwVYXNy1G0dnFyYkRW4TOb00jQ
+Message-ID: <CAP9ODKpUkrqyzaN-X74QfrfLS_NWXyLbuguzsa+uAfocHN2-aw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: patchwork support for meta-freescale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,87 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2012 15:47:11 -0000
-X-Groupsio-MsgNum: 41689
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hu4eBwDcaFkzFmlO"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Nov 2012 19:28:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---hu4eBwDcaFkzFmlO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Fri, Nov 23, 2012 at 04:24:42PM +0100, Marcin Juszkiewicz wrote:
-> Missing or unbuildable dependency chain was: ['mdbus2']
-> Missing or unbuildable dependency chain was: ['mterm2']
-> Missing or unbuildable dependency chain was: ['mkdump']
-> Missing or unbuildable dependency chain was: ['mioctl']
+Could patchwork support be added to meta-freescale? It'd allow for
+easy handle of patches.
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Thanks,
 
->=20
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb=
- b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-> index 07fb056..88b62b8 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-> @@ -4,7 +4,7 @@ SECTION =3D "console"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbc=
-b788c80a0384361b4de20420"
->  PV =3D "1.0"
-> -PR =3D "r20"
-> +PR =3D "r21"
-> =20
->  inherit packagegroup allarch
-> =20
-> @@ -24,9 +24,7 @@ RDEPENDS_${PN} =3D "\
->    iptables \
->    lsof \
->    mbuffer \
-> -  mdbus2 \
->    mtd-utils \
-> -  mterm2 \
->    nano \
->    nfs-utils-client \
->    nmon \
-> @@ -41,8 +39,6 @@ RDEPENDS_${PN}-debug =3D "\
->    devmem2 \
->    i2c-tools \
->    gdb \
-> -  mkdump \
-> -  mioctl \
->    procps \
->    pxaregs \
->    s3c24xx-gpio \
-> --=20
-> 1.8.0
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hu4eBwDcaFkzFmlO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCvly8ACgkQN1Ujt2V2gBxUXwCgpw3DuRuwAsUrokmO1vMpVxtE
-s0kAnjBP2+MysiSlElRE3cktbwoyT6Jj
-=ZNu1
------END PGP SIGNATURE-----
-
---hu4eBwDcaFkzFmlO--
