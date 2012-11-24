@@ -1,31 +1,32 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tbyuz-0000Py-66
-	for openembedded-devel@openembedded.org; Fri, 23 Nov 2012 20:28:05 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa10so1437917pad.6
+	(envelope-from <philip.balister@gmail.com>) id 1TcIrz-00028P-B6
+	for openembedded-devel@openembedded.org; Sat, 24 Nov 2012 17:46:19 +0100
+Received: by mail-vc0-f175.google.com with SMTP id m8so5924680vcd.6
 	for <openembedded-devel@openembedded.org>;
-	Fri, 23 Nov 2012 11:13:56 -0800 (PST)
+	Sat, 24 Nov 2012 08:32:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=t3lhwom2ws9VIeE0vIB2kNnoUxdAAOITnOUo5qjjMZU=;
-	b=lbCSylq/YqCNybKP/08Wyf8g9FRVIebmAT52dDBblDHpz6fgCRy7wUM9ZMQRuNXJnh
-	ielnWZssxtm02FisIWpr5lfwzZxnWQy7CumPLIi6zY1JFCzBz6UTx9Vx58djuxaviOLu
-	CYePo72xiI/ms1R+UEY55LtEhM7l/52OuEa/rBLqkGxj86ONlFpUPFpRQnByHvGLmstA
-	ttc9WGggdtDelqxy+FTBw2Cfg7zDzkcuqmjBt8qG4LQY4jK16Ns0iURXiFRpuYmUbeux
-	ZIbeGRHm4k5g+KPLvMJW+Ng7qFp9tRzbNFXLGdtEBP7bpzLdCrQE2D6BH9IhtHzK/Qco
-	dGkQ==
-MIME-Version: 1.0
-Received: by 10.68.204.103 with SMTP id kx7mr16764847pbc.33.1353698036276;
-	Fri, 23 Nov 2012 11:13:56 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Fri, 23 Nov 2012 11:13:56 -0800 (PST)
-Date: Fri, 23 Nov 2012 17:13:56 -0200
-X-Google-Sender-Auth: vUwVYXNy1G0dnFyYkRW4TOb00jQ
-Message-ID: <CAP9ODKpUkrqyzaN-X74QfrfLS_NWXyLbuguzsa+uAfocHN2-aw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: patchwork support for meta-freescale
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=8htxQO54wpVf5/eiAe4ZLOadlwWe5DAWw3R6Wghji94=;
+	b=k7RKfz0JnTuWCawmi+XbtuDGEQ26+BuCkF38qFE8qe+W7OO5zpyhuRNbVj/IawIvCJ
+	/C9zQKEezJX/MV2De0w0rSRkFkJBtMJpf65hYB+eYfJToMmpC71YC9D2wmwinhSirbuX
+	z4ebABCzo4gC9zr/JS1kZPkDMgcFoMa8HaR59olQqsDxWnh9ss08UqfNxrE02v3akQBM
+	FIq6vVNRciGcEnjgUQ27GvKvTyNQddvINzv0IKZQ9wl5Iyi9PwWi/JGLDGi5pLJHkdMl
+	w/RzoplXyOhzK6Nk+PXsrMZBpzYsFbG3WQIoxSzD/khpA6w2qybeQ2qupgxDhsBd/vUS
+	HANA==
+Received: by 10.52.88.14 with SMTP id bc14mr9636697vdb.110.1353774729756;
+	Sat, 24 Nov 2012 08:32:09 -0800 (PST)
+Received: from localhost.localdomain ([96.240.166.19])
+	by mx.google.com with ESMTPS id jx16sm4757773veb.5.2012.11.24.08.32.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 24 Nov 2012 08:32:09 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@openembedded.org
+Date: Sat, 24 Nov 2012 11:32:05 -0500
+Message-Id: <1353774725-26969-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.7.11.7
+Subject: [meta-oe][PATCH] python-cheetah : Drop RDEPENDS from native build.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Nov 2012 19:28:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 24 Nov 2012 16:46:19 -0000
 
-Hi,
+If the native recipe has the RDEPENDS in, the build fails because these
+packages are not provided by python-native.
 
-Could patchwork support be added to meta-freescale? It'd allow for
-easy handle of patches.
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks,
-
+diff --git a/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb b/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
+index 967be31..1dad958 100644
+--- a/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
++++ b/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
+@@ -13,6 +13,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ inherit setuptools
+ 
+ RDEPENDS_${PN} = "python-pickle python-pprint"
++RDEPENDS_${PN}_class-native = ""
+ 
+ BBCLASSEXTEND = "native"
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.11.7
+
 
 
