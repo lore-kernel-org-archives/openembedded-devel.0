@@ -1,23 +1,25 @@
 Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TcvbS-0006GM-6P
+	(envelope-from <eric@eukrea.com>) id 1TcvbT-0006GV-7r
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 11:07:50 +0100
+	Mon, 26 Nov 2012 11:07:52 +0100
 Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 0D28BD1988F
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id B8499CB2CB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2012 00:13:44 +0100 (CET)
+	Sun, 25 Nov 2012 18:25:31 +0100 (CET)
 Received: from localhost.localdomain (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 3CF9BA6185
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 535B5A61DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2012 00:13:39 +0100 (CET)
+	Sun, 25 Nov 2012 18:25:27 +0100 (CET)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2012 00:13:38 +0100
-Message-Id: <1353885218-5623-1-git-send-email-eric@eukrea.com>
+Date: Sun, 25 Nov 2012 18:25:08 +0100
+Message-Id: <1353864310-20097-5-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.11.7
+In-Reply-To: <1353864310-20097-1-git-send-email-eric@eukrea.com>
+References: <1353864310-20097-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ntp: fix checksum
+Subject: [meta-webserver][PATCH 5/7] php: upgrade to 5.3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,37 +33,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 10:07:51 -0000
+X-List-Received-Date: Mon, 26 Nov 2012 10:07:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recipe to
-a newer version but didn't update the checksum so fetch is failing.
-
 Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/php/php.inc         |  4 ++--
+ meta-oe/recipes-devtools/php/php/iconv.patch | 26 +++++++++++++---------=
+----
+ meta-oe/recipes-devtools/php/php_5.3.19.bb   | 19 +++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.3.6.bb    | 19 -------------------
+ 4 files changed, 34 insertions(+), 34 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php_5.3.19.bb
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.3.6.bb
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-ne=
-tworking/recipes-support/ntp/ntp_4.2.6p5.bb
-index f7c5b68..0fce5ce 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-@@ -8,8 +8,8 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp=
-4/ntp-4.2/ntp-${PV}.tar.g
-         file://ntpdate \
- "
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
+ols/php/php.inc
+index 87eb4b1..03b7b40 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -1,13 +1,13 @@
+ DESCRIPTION =3D "A server-side, HTML-embedded scripting language. This p=
+ackage provides the CGI."
+ HOMEPAGE =3D "http://www.php.net"
+ SECTION =3D "console/network"
+-LICENSE =3D "PHP"
++LICENSE =3D "PHP-3.0"
+ BBCLASSEXTEND =3D "native"
+ DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native mysql=
+5 \
+            libc-client openssl"
+ DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
 =20
--SRC_URI[md5sum] =3D "59876a9009b098ff59767ee45a88ebd2"
--SRC_URI[sha256sum] =3D "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8=
-a02e78be85a7c40e"
-+SRC_URI[md5sum] =3D "00df80a84ec9528fcfb09498075525bc"
-+SRC_URI[sha256sum] =3D "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23e=
-a25ac1405432f91c"
+-INC_PR =3D "r2"
++INC_PR =3D "r0"
 =20
- EXTRA_OECONF +=3D " --with-net-snmp-config=3Dno --without-ntpsnmpd"=20
+ SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
 =20
+diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recip=
+es-devtools/php/php/iconv.patch
+index 66b39cc..f3d2a16 100644
+--- a/meta-oe/recipes-devtools/php/php/iconv.patch
++++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+@@ -1,21 +1,21 @@
+-Index: php-5.2.13/acinclude.m4
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- php-5.2.13.orig/acinclude.m4
+-+++ php-5.2.13/acinclude.m4
+-@@ -2430,7 +2430,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+-   dnl
++diff --git a/acinclude.m4 b/acinclude.m4
++index 4c28b80..d6491a1 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+    dnl Check libc first if no path is provided in --with-iconv
+    dnl
++=20
+ -  if test "$PHP_ICONV" =3D "yes"; then
+ +  dnl must check against no, not against yes as PHP_ICONV can also incl=
+ude a path, which implies yes
+ +  if test "$PHP_ICONV" !=3D "no"; then
+-     AC_CHECK_FUNC(iconv, [
+-       found_iconv=3Dyes
+-     ],[
+-Index: php-5.2.13/ext/iconv/config.m4
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- php-5.2.13.orig/ext/iconv/config.m4
+-+++ php-5.2.13/ext/iconv/config.m4
++     dnl Reset LIBS temporarily as it may have already been included
++     dnl -liconv in.
++     LIBS_save=3D"$LIBS"
++diff --git a/ext/iconv/config.m4 b/ext/iconv/config.m4
++index d673b0a..1fbef13 100644
++--- a/ext/iconv/config.m4
+++++ b/ext/iconv/config.m4
+ @@ -15,7 +15,7 @@ if test "$PHP_ICONV" !=3D "no"; then
+ =20
+    if test "$iconv_avail" !=3D "no"; then
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes=
+-devtools/php/php_5.3.19.bb
+new file mode 100644
+index 0000000..e96b760
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php_5.3.19.bb
+@@ -0,0 +1,19 @@
++require php.inc
++
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcb564efdf78cce8ea6e4b5a4f7c05=
+d97"
++
++PR =3D "${INC_PR}.0"
++
++SRC_URI +=3D "file://acinclude-xml2-config.patch \
++            file://php-m4-divert.patch \
++            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
++
++SRC_URI_append_pn-php +=3D "file://iconv.patch \
++            file://imap-fix-autofoo.patch \
++            file://pear-makefile.patch \
++            file://phar-makefile.patch \
++            file://php_exec_native.patch \
++            "
++
++SRC_URI[md5sum] =3D "e1d2a3ec7849d4b3032bd1abf1916aa4"
++SRC_URI[sha256sum] =3D "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db0=
+21020594e2469fd6"
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.6.bb b/meta-oe/recipes-=
+devtools/php/php_5.3.6.bb
+deleted file mode 100644
+index 9524bd9..0000000
+--- a/meta-oe/recipes-devtools/php/php_5.3.6.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-require php.inc
+-
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcb564efdf78cce8ea6e4b5a4f7c05=
+d97"
+-
+-PR =3D "${INC_PR}.0"
+-
+-SRC_URI +=3D "file://acinclude-xml2-config.patch \
+-            file://php-m4-divert.patch \
+-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
+-
+-SRC_URI_append_pn-php +=3D "file://iconv.patch \
+-            file://imap-fix-autofoo.patch \
+-            file://pear-makefile.patch \
+-            file://phar-makefile.patch \
+-            file://php_exec_native.patch \
+-            "
+-
+-SRC_URI[md5sum] =3D "2286f5a82a6e8397955a0025c1c2ad98"
+-SRC_URI[sha256sum] =3D "30ae880f22e3ee93eccc9b80e3c58b0d6364d139bb4366dc=
+c27f2fab658d3198"
 --=20
 1.7.11.7
 
