@@ -1,25 +1,25 @@
 Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TcvbQ-0006Fg-1M
+	(envelope-from <eric@eukrea.com>) id 1TcvbR-0006G2-2X
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 11:07:48 +0100
+	Mon, 26 Nov 2012 11:07:49 +0100
 Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 9919BCB2CB0
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id D2977CB2CAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2012 18:25:38 +0100 (CET)
+	Sun, 25 Nov 2012 18:25:24 +0100 (CET)
 Received: from localhost.localdomain (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 3CA54A62EE
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 70ECAA62D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2012 18:25:34 +0100 (CET)
+	Sun, 25 Nov 2012 18:25:20 +0100 (CET)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Nov 2012 18:25:10 +0100
-Message-Id: <1353864310-20097-7-git-send-email-eric@eukrea.com>
+Date: Sun, 25 Nov 2012 18:25:06 +0100
+Message-Id: <1353864310-20097-3-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.11.7
 In-Reply-To: <1353864310-20097-1-git-send-email-eric@eukrea.com>
 References: <1353864310-20097-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH 7/7] hiawatha: add CONFFILES and a php example
+Subject: [meta-webserver][PATCH 3/7] modphp: upgrade to 5.3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,60 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 10:07:48 -0000
+X-List-Received-Date: Mon, 26 Nov 2012 10:07:49 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-- add CONFFILES so that configuration files don't get overwritten
-during upgrade
-- add an example on how to launch php-cgi using php-fcgi
-
 Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb | 14 +++++++++++++=
--
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ meta-webserver/recipes-php/modphp/modphp_5.3.14.bb | 5 -----
+ meta-webserver/recipes-php/modphp/modphp_5.3.19.bb | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
+ create mode 100644 meta-webserver/recipes-php/modphp/modphp_5.3.19.bb
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb b/meta=
--webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-index 2e6955e..7dcbe9e 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-@@ -4,6 +4,8 @@ LICENSE =3D "GPLv2"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa882=
-bbe"
- DEPENDS =3D "libxml2 libxslt"
-=20
-+PR =3D "r1"
-+
- SECTION =3D "net"
-=20
- SRC_URI =3D "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
-@@ -36,10 +38,20 @@ EXTRA_OECMAKE =3D " -DENABLE_IPV6=3DOFF \
-                   -DWORK_DIR=3D/var/lib/hiawatha "
-=20
- do_install_append() {
+diff --git a/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb b/meta-we=
+bserver/recipes-php/modphp/modphp_5.3.14.bb
+deleted file mode 100644
+index 2a264d7..0000000
+--- a/meta-webserver/recipes-php/modphp/modphp_5.3.14.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-include modphp5.inc
+-PR =3D "r3"
 -
-     # Copy over init script and sed in the correct sbin path
-     sed -i 's,sed_sbin_path,${sbindir},' ${WORKDIR}/hiawatha-init
-     mkdir -p ${D}${sysconfdir}/init.d
-     install -m 0755 ${WORKDIR}/hiawatha-init ${D}${sysconfdir}/init.d/hi=
-awatha
-=20
-+    # configure php-fcgi to have a working configuration
-+    # by default if php is installed
-+    echo "Server =3D ${bindir}/php-cgi ; 2 ; 127.0.0.1:2005 ; nobody:nob=
-ody ; ${sysconfdir}/php/hiawatha-php5/php.ini" >> ${D}${sysconfdir}/hiawa=
-tha/php-fcgi.conf
- }
+-SRC_URI[md5sum] =3D "7caac4f71e2f21426c11ac153e538392"
+-SRC_URI[sha256sum] =3D "c8075b6e83c5db0d26cc8426a7456856421089a76c963813=
+b1fcac3ced041cb3"
+diff --git a/meta-webserver/recipes-php/modphp/modphp_5.3.19.bb b/meta-we=
+bserver/recipes-php/modphp/modphp_5.3.19.bb
+new file mode 100644
+index 0000000..56599d6
+--- /dev/null
++++ b/meta-webserver/recipes-php/modphp/modphp_5.3.19.bb
+@@ -0,0 +1,5 @@
++include modphp5.inc
++PR =3D "r0"
 +
-+CONFFILES_${PN} =3D " \
-+    ${sysconfdir}/hiawatha/cgi-wrapper.conf \
-+    ${sysconfdir}/hiawatha/hiawatha.conf \
-+    ${sysconfdir}/hiawatha/index.xslt \
-+    ${sysconfdir}/hiawatha/mimetype.conf \
-+    ${sysconfdir}/hiawatha/php-fcgi.conf \
-+    "
++SRC_URI[md5sum] =3D "e1d2a3ec7849d4b3032bd1abf1916aa4"
++SRC_URI[sha256sum] =3D "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db0=
+21020594e2469fd6"
 --=20
 1.7.11.7
 
