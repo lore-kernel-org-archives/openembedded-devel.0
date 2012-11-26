@@ -1,38 +1,41 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tcy2u-0003zs-KZ
+	(envelope-from <ross.burton@intel.com>) id 1Tcy2v-0003zz-DV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 13:44:20 +0100
-Received: from mail-wi0-f197.google.com ([209.85.212.197])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 26 Nov 2012 04:29:52 -0800
-Received: by mail-wi0-f197.google.com with SMTP id hm6so3520216wib.0
+	Mon, 26 Nov 2012 13:44:21 +0100
+Received: from mail-bk0-f69.google.com ([209.85.214.69])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 26 Nov 2012 04:29:11 -0800
+Received: by mail-bk0-f69.google.com with SMTP id jg9so5961208bkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2012 04:29:50 -0800 (PST)
+	Mon, 26 Nov 2012 04:29:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=2xkTUZhDTffoNs/dr5DhQ7wEwjaK2xsBycZxGfuPKq4=;
-	b=kXvdsu8f4ABX9Z1aMbecjXPDZ8B6xj3PnX33j/26ojo0Q+mR4WzXC+iUKLFVssZ3JP
-	tJuwA6ikJVOObKL75Yr9ZCfq512fdYNMtQgNoBH7QGrKBpHi1qnNQe5lTja+fEL7DWAS
-	vC1ke7CgpaF0ZfxQfMi5M9nk+mjsnUf/e2NjsnhfontIijb0SVzk+yWDLC7XUeLtHMgP
-	M+kIdbiIFr4g7yngNvMrUPKO0FEua5jzWox8kAGPawP6kbEhB1s037DJacz07m6ALj92
-	AzBV7waj1PlbwVyOCo+iw0Z7D0L574YcInyCdnTv3WY9rXzueKjlCgmIKtakmbTzcl8A
-	AWgg==
-Received: by 10.216.204.32 with SMTP id g32mr4181823weo.79.1353932989986;
-	Mon, 26 Nov 2012 04:29:49 -0800 (PST)
-Received: by 10.216.204.32 with SMTP id g32mr4181819weo.79.1353932989803;
-	Mon, 26 Nov 2012 04:29:49 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=Cy2WNSFPp1NS3HEg2jpF4om1z3pHvxgEM47qrFfT/3Y=;
+	b=QcaPr0VMW88KKps3dNhb/j8UfkUD0wm27PcUrFXOHMAfGTwxqO+Qa9LWmoK6IwA+R1
+	M+6Ttqj+NO+A/OSRXeyK1bEWeXSNN0h9ngsFFKLW7PFtNqg/z0YmLMBfhistzsDeVfS1
+	Vl0+m01T9xip2M08k9Q7Zie7N1YacnQf/lpcMRhow7Fm1lHzHUDiJjWpSRYWbXZCMJw/
+	d1QjivdtqBXe51PTlHWner0iPLjdENtggO+CkSM9CSoEq7LAK1+OjzIEVflMkLLB10DA
+	EOHTXDF/LxZJuo+zUsEyf5F3hyCwx21VHqM8VAiGjRRnvm27WY/u06qEDmtgAkjOIhU9
+	vAMA==
+Received: by 10.216.30.3 with SMTP id j3mr4235862wea.112.1353932991346;
+	Mon, 26 Nov 2012 04:29:51 -0800 (PST)
+Received: by 10.216.30.3 with SMTP id j3mr4235858wea.112.1353932991260;
+	Mon, 26 Nov 2012 04:29:51 -0800 (PST)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id fh10sm23573570wib.3.2012.11.26.04.29.47
+	by mx.google.com with ESMTPS id fh10sm23573570wib.3.2012.11.26.04.29.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Nov 2012 04:29:48 -0800 (PST)
+	Mon, 26 Nov 2012 04:29:50 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2012 12:28:18 +0000
-Message-Id: <1353932899-16796-1-git-send-email-ross.burton@intel.com>
+Date: Mon, 26 Nov 2012 12:28:19 +0000
+Message-Id: <1353932899-16796-2-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQkF5/gipBR1yJHcRmGEfRQRAyBywuK7aD3YgkZHdjobAA0tea8G0KyVG5419uEkpGRHxSyQiXO7mrO9znHJOV53PryAa9OugnCe+twS7LdzB2xqflXArhyM3P/n2Uvzn6njclD1WbVw0WKOsJfPxu5174IAwatACZwx1T/TKSOu4bYJMVzDwSA7KPqPTYP5vfRwSi/F
-Subject: [PATCH 1/2] meta-oe: add python-mako, a templating library
+In-Reply-To: <1353932899-16796-1-git-send-email-ross.burton@intel.com>
+References: <1353932899-16796-1-git-send-email-ross.burton@intel.com>
+X-Gm-Message-State: ALoCoQnA6EMPRQnsj66EoKoKZJnf7fdyKHhL4PVS+9W64CutRqFSDDEDxJ5AGVYMXpXWfS5vCZeO6DkGvPLUcoW7itri9MMtBbfxZi6u8DJzIRW4RxHnpJkpB0G/eH/sCEnNwk/EI2dkImxsDLmPgfWF4BjsZvi4lUVudZkM4uRnm9x1LV9AT50MA2kL0nY4/sAOdTB6PBpb
+Subject: [PATCH 2/2] python-numpy: add missing runtime dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +49,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 12:44:20 -0000
+X-List-Received-Date: Mon, 26 Nov 2012 12:44:21 -0000
 
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../python/python-mako-native_0.7.2.bb              |    6 ++++++
- .../recipes-devtools/python/python-mako_0.7.2.bb    |   19 +++++++++++++++++++
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
- create mode 100644 meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+ meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb |    2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
-new file mode 100644
-index 0000000..0d4c1e4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
-@@ -0,0 +1,6 @@
-+require python-mako_${PV}.bb
-+inherit native pythonnative
-+
-+DEPENDS = "python-native"
-+RDEPENDS_${PN} = ""
-+PR = "r0"
-diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-new file mode 100644
-index 0000000..9113666
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Templating library for Python"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=da8dd26ed9751ee0cfdf9df1a16bbb54"
-+
-+PR = "r0"
-+
-+SRC_URI = "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
-+SRC_URI[md5sum] = "e3c0a677aa4216da9e89ef8fa76cbafb"
-+SRC_URI[sha256sum] = "fe8698e845035586bd711a6748e4e40a208a58de276b9138026164700494b68f"
-+
-+S = "${WORKDIR}/Mako-${PV}"
-+
-+inherit distutils
-+
-+RDEPENDS_${PN} = "python-threading \
-+                  python-netclient \
-+                  python-html \
-+                 "
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+index 031d1cf..e0d9790 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
+@@ -37,4 +37,6 @@ FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
+ RDEPENDS_${PN} = "python-unittest \
+                   python-difflib \
+                   python-pprint \
++                  python-pickle \
++                  python-shell \
+                  "
 -- 
 1.7.10
 
