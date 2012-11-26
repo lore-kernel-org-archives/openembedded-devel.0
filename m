@@ -1,25 +1,22 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Tcvd9-0006kX-HB
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1Tcvem-0006tS-BI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 11:09:38 +0100
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 2D18F2C986
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2012 18:25:34 +0100 (CET)
-Received: from localhost.localdomain (unknown [82.233.81.124])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id C4AA9A621D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Nov 2012 18:25:30 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Mon, 26 Nov 2012 11:11:16 +0100
+Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
+	[129.70.144.156])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
+	965DA8002B; Mon, 26 Nov 2012 10:57:04 +0100 (CET)
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Nov 2012 18:25:09 +0100
-Message-Id: <1353864310-20097-6-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.11.7
-In-Reply-To: <1353864310-20097-1-git-send-email-eric@eukrea.com>
-References: <1353864310-20097-1-git-send-email-eric@eukrea.com>
-MIME-Version: 1.0
-Subject: [meta-webserver][PATCH 6/7] php: enable gettext and sqlite
+Date: Mon, 26 Nov 2012 10:56:38 +0100
+Message-Id: <1353923798-29115-1-git-send-email-stefan@herbrechtsmeier.net>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1353923557-28720-1-git-send-email-stefan@herbrechtsmeier.net>
+References: <1353923557-28720-1-git-send-email-stefan@herbrechtsmeier.net>
+Subject: [meta-oe][PATCH v2] opencv: update to 2.4.3 and fix some issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,69 +30,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 10:09:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 26 Nov 2012 10:11:16 -0000
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+* Update to 2.4.3
+* Use tar instead of no longer available SVN repository
+* Remove numpy detection patch and update related CMAKE variable
+* Fix QA Issues: contains probably-redundant RPATH
+
+Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 ---
- meta-oe/recipes-devtools/php/php.inc | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ .../0001-Fix-CMakeLists.txt-numpy-detection.patch  |   36 --------------------
+ .../opencv/{opencv_2.4.bb => opencv_2.4.3.bb}      |   16 ++++-----
+ 2 files changed, 7 insertions(+), 45 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
+ rename meta-oe/recipes-support/opencv/{opencv_2.4.bb => opencv_2.4.3.bb} (85%)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
-ols/php/php.inc
-index 03b7b40..10dc154 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -4,16 +4,16 @@ SECTION =3D "console/network"
- LICENSE =3D "PHP-3.0"
- BBCLASSEXTEND =3D "native"
- DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native mysql=
-5 \
--           libc-client openssl"
-+           libc-client openssl sqlite3"
- DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
-=20
--INC_PR =3D "r0"
-+INC_PR =3D "r1"
-=20
- SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
-=20
- S =3D "${WORKDIR}/php-${PV}"
-=20
--inherit autotools pkgconfig pythonnative
-+inherit autotools pkgconfig pythonnative gettext
-=20
- SSTATE_SCAN_FILES +=3D "build-defs.h"
-=20
-@@ -22,6 +22,7 @@ COMMON_EXTRA_OECONF =3D "--enable-sockets --enable-pcnt=
-l --enable-shared"
- EXTRA_OECONF =3D "--enable-mbstring --enable-discard-path --enable-wddx =
-\
-                 --enable-magic-quotes --enable-fastcgi \
-                 --with-imap=3D${STAGING_DIR_HOST} \
-+                --with-gettext=3D${STAGING_LIBDIR}/.. \
-                 --with-imap-ssl=3D${STAGING_DIR_HOST} \
-                 --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR}/.. \
-                 --with-iconv=3D${STAGING_LIBDIR}/.. \
-@@ -29,8 +30,9 @@ EXTRA_OECONF =3D "--enable-mbstring --enable-discard-pa=
-th --enable-wddx \
-                 --disable-embedded-mysqli \
-                 --with-mysql=3D"${STAGING_DIR_TARGET}${prefix}" \
-                 --with-mysqli=3D"${STAGING_BINDIR_CROSS}/mysql_config" \
-+		--with-sqlite3=3D${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
-                 --with-pdo-mysql=3D"${STAGING_BINDIR_CROSS}/mysql_config=
-" \
--                --without-pdo-sqlite ${COMMON_EXTRA_OECONF} \
-+                --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. ${COMMON_EXTRA_=
-OECONF} \
-                "
- EXTRA_OECONF_virtclass-native =3D "--with-cgi --without-libpng --without=
--libjpeg \
-                 --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR_NATIVE}/.=
-. \
---=20
-1.7.11.7
+diff --git a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch b/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
+deleted file mode 100644
+index 43f03d3..0000000
+--- a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 965616bdc73247448b8f07572a9a479235dd092d Mon Sep 17 00:00:00 2001
+-From: Connor Abbott <cwabbott0@gmail.com>
+-Date: Wed, 11 Jul 2012 13:55:38 +0200
+-Subject: [PATCH] Fix CMakeLists.txt numpy detection
+-
+-Right now, the code opencv uses to detect where the numpy include files are doesn't work with cross-compiling because it uses the native python to determine the environment. To make this a little better, allow the user to explictly specify the path using -DPYTHON_NUMPY_INCLUDE_DIRS=path/to/numpy/include/dir .
+-
+-Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
+----
+- cmake/OpenCVDetectPython.cmake |    8 ++++++--
+- 1 file changed, 6 insertions(+), 2 deletions(-)
+-
+-diff --git a/cmake/OpenCVDetectPython.cmake b/cmake/OpenCVDetectPython.cmake
+-index 8be94ca..5825a04 100644
+---- a/cmake/OpenCVDetectPython.cmake
+-+++ b/cmake/OpenCVDetectPython.cmake
+-@@ -74,10 +74,14 @@ if(PYTHON_EXECUTABLE)
+- 
+-     if(NOT PYTHON_NUMPY_INCLUDE_DIR)
+-       # Attempt to discover the NumPy include directory. If this succeeds, then build python API with NumPy
+--      execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
+-+      if(NOT DEFINED PYTHON_NUMPY_INCLUDE_DIRS)
+-+          execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
+-                       RESULT_VARIABLE PYTHON_NUMPY_PROCESS
+--                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIR
+-+                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
+-                       OUTPUT_STRIP_TRAILING_WHITESPACE)
+-+      else()
+-+          set(PYTHON_NUMPY_PROCESS 0)
+-+      endif()
+-                       
+-       if(PYTHON_NUMPY_PROCESS EQUAL 0)
+-         file(TO_CMAKE_PATH "${PYTHON_NUMPY_INCLUDE_DIR}" _PYTHON_NUMPY_INCLUDE_DIR)
+--- 
+-1.7.10
+-
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+similarity index 85%
+rename from meta-oe/recipes-support/opencv/opencv_2.4.bb
+rename to meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+index 2877093..0194c2d 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+@@ -9,23 +9,21 @@ ARM_INSTRUCTION_SET = "arm"
+ 
+ DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
+ 
+-SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
+-           file://0001-Fix-CMakeLists.txt-numpy-detection.patch \
+-          "
++SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
++           "
+ 
+-SRCREV = "8988"
++SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
++SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
+ 
+-PV = "2.4.2"
+-PR = "r1"
++S = "${WORKDIR}/OpenCV-${PV}"
+ 
+-S = "${WORKDIR}/opencv"
+-
+-EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
++EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
+                  -DBUILD_PYTHON_SUPPORT=ON \
+                  -DWITH_FFMPEG=ON \
+                  -DWITH_GSTREAMER=OFF \
+                  -DWITH_V4L=ON \
+                  -DWITH_GTK=ON \
++                 -DCMAKE_SKIP_RPATH=ON \
+                 "
+ 
+ inherit distutils-base pkgconfig cmake
+-- 
+1.7.0.4
 
 
 
