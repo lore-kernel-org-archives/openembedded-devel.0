@@ -1,36 +1,19 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Td1lS-0002Yc-1L
+	(envelope-from <eric@eukrea.com>) id 1Td3M7-0005kg-As
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 17:42:34 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so6198921eei.6
+	Mon, 26 Nov 2012 19:24:31 +0100
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 10D41A625E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Nov 2012 08:28:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fBHkukHII3sdkRcKeafatOWgX1RhOcurORSLoZ+kzxE=;
-	b=xEI6mil/Wsq+/ZDlejFAmq8Nvsql2RlE9y9Fh2ehecMjASxyjwFHoOStHGaRrCoR6a
-	ZF3Hv+xApb5xbg6aox4t4qf9iLPKGIuer6PmSkaTUp9XeAM65fJ+Cq3rG5UN+PnZ+oBt
-	JAYKNgfpFsFIfoEEKwUiaJJgaGPdowWH1ah8YeJrx9GbYItN0deDRUejRJiuKk5crREr
-	Wg8VI2iUR55UvZrnp+sa8vGzc19s26EBhFqeruuyf1DxpsxbQeqd+8GORr9+of5JLPxy
-	7214E6w05fHAJexowCE4wfUGQ9QrtdQKFNYNCRk6i6wIN5HchN8wZMi5R1OUQ1FbAWdT
-	u69g==
-Received: by 10.14.184.134 with SMTP id s6mr46984964eem.43.1353947302411;
-	Mon, 26 Nov 2012 08:28:22 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id o49sm35004362eep.5.2012.11.26.08.28.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 26 Nov 2012 08:28:21 -0800 (PST)
-Date: Mon, 26 Nov 2012 17:28:28 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 26 Nov 2012 19:10:17 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121126162828.GD3401@jama.jama.net>
-References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
+Date: Mon, 26 Nov 2012 19:10:14 +0100
+Message-Id: <1353953415-2602-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.11.7
 MIME-Version: 1.0
-In-Reply-To: <cover.1353602922.git.paul.eggleton@linux.intel.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH v2 0/2] ntp fixes
+Subject: [meta-oe][PATCH 1/2] libdbi: import from OE-classic and update to latest 0.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,83 +27,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 16:42:34 -0000
-X-Groupsio-MsgNum: 41721
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6Nae48J/T25AfBN4"
-Content-Disposition: inline
-
---6Nae48J/T25AfBN4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 Nov 2012 18:24:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 22, 2012 at 04:49:33PM +0000, Paul Eggleton wrote:
-> Changes since v1:
-> * Fix hardcoded paths in scripts
-> * Move contents of ntp-bin package to previously empty ntp-utils package
-> * Move the ntp server configuration to runtime (/etc/default/ntpdate)
-> * Specify configuration files using CONFFILES
-> * Remove unused init script path from FILES_ntpdate
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ meta-oe/recipes-support/libdbi/libdbi-drivers.inc  | 51 ++++++++++++++++=
+++++++
+ .../libdbi/libdbi-drivers_0.8.3-1.bb               |  6 +++
+ meta-oe/recipes-support/libdbi/libdbi.inc          | 17 ++++++++
+ meta-oe/recipes-support/libdbi/libdbi_0.8.4.bb     |  6 +++
+ 4 files changed, 80 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libdbi/libdbi-drivers.inc
+ create mode 100644 meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1=
+.bb
+ create mode 100644 meta-oe/recipes-support/libdbi/libdbi.inc
+ create mode 100644 meta-oe/recipes-support/libdbi/libdbi_0.8.4.bb
 
-Finally no need to see failed ntp* in systemd log, Thanks!
-
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-> The following changes since commit d08ee5a51d4e89ae587d170f8b990626898414=
-28:
->=20
->   qt4-embedded: drop bbappend for 4.8.1 (2012-11-22 09:48:36 +0100)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib paule/ntp
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Dpaule/ntp
->=20
-> Paul Eggleton (2):
->   ntp: cleanup recipes and fix SSL support
->   ntp: make servers configurable and default to none configured
->=20
->  meta-networking/recipes-support/ntp/files/ntp      |   31 -------
->  meta-networking/recipes-support/ntp/files/ntp.conf |    2 +-
->  meta-networking/recipes-support/ntp/files/ntpdate  |   11 ++-
->  .../recipes-support/ntp/files/ntpdate.default      |    7 ++
->  .../recipes-support/ntp/files/openssl-check.patch  |   59 ++++++++++++
->  .../recipes-support/ntp/ntp-ssl_4.2.6p5.bb         |   11 ---
->  meta-networking/recipes-support/ntp/ntp.inc        |   94 ++++++++++++++=
-++----
->  meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |   44 +--------
->  8 files changed, 154 insertions(+), 105 deletions(-)
->  delete mode 100755 meta-networking/recipes-support/ntp/files/ntp
->  create mode 100644 meta-networking/recipes-support/ntp/files/ntpdate.def=
-ault
->  create mode 100644 meta-networking/recipes-support/ntp/files/openssl-che=
-ck.patch
->  delete mode 100644 meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
->=20
-> --=20
-> 1.7.9.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-oe/recipes-support/libdbi/libdbi-drivers.inc b/meta-oe/=
+recipes-support/libdbi/libdbi-drivers.inc
+new file mode 100644
+index 0000000..b509532
+--- /dev/null
++++ b/meta-oe/recipes-support/libdbi/libdbi-drivers.inc
+@@ -0,0 +1,51 @@
++# libdbi-drivers OE build file
++# Copyright (C) 2005, Koninklijke Philips Electronics NV.  All Rights Re=
+served
++# Released under the MIT license (see packages/COPYING)
++
++DESCRIPTION =3D "Database Drivers for libdbi"
++HOMEPAGE =3D "http://libdbi-drivers.sourceforge.net/"
++LICENSE =3D "LGPLv2.1"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499"
++SECTION =3D "libs"
++
++PROVIDES =3D "libdbd-sqlite"
++DEPENDS =3D "libdbi sqlite sqlite3 mysql5 postgresql"
++
++SRC_URI =3D "${SOURCEFORGE_MIRROR}/libdbi-drivers/libdbi-drivers-${PV}.t=
+ar.gz"
++
++inherit autotools
++
++PACKAGES +=3D "libdbd-sqlite3 libdbd-sqlite libdbd-pgsql libdbd-mysql"
++
++EXTRA_OECONF =3D "--with-dbi-incdir=3D${STAGING_INCDIR} \
++                --with-dbi-libdir=3D${STAGING_LIBDIR} \
++                --with-sqlite \
++                --with-sqlite3 \
++                --with-pgsql \
++                --with-mysql \
++                --with-sqlite-libdir=3D${STAGING_LIBDIR} \
++                --with-sqlite-incdir=3D${STAGING_INCDIR} \
++                --with-sqlite3-incdir=3D${STAGING_INCDIR} \
++                --with-sqlite3-libdir=3D${STAGING_LIBDIR} \
++                --with-mysql-incdir=3D${STAGING_INCDIR} \
++                --with-mysql-libdir=3D${STAGING_LIBDIR} \
++                --with-pgsql-incdir=3D${STAGING_INCDIR} \
++                --with-pgsql-libdir=3D${STAGING_LIBDIR} \
++                --disable-docs"
++
++FILES_${PN}-dbg +=3D " ${libdir}/dbd/.debug/*.so"
++FILES_${PN}-dev +=3D " ${libdir}/dbd/*.la"
++FILES_${PN}-staticdev +=3D " ${libdir}/dbd/*.a"
++
++DESCRIPTION_libdbd-sqlite =3D "SQLite database driver for libdbi"
++FILES_libdbd-sqlite =3D "${libdir}/dbd/libdbdsqlite.so"
++
++DESCRIPTION_libdbd-sqlite3 =3D  "SQLite3 database driver for libdbi"
++FILES_libdbd-sqlite3 =3D "${libdir}/dbd/libdbdsqlite3.so"
++
++DESCRIPTION_libdbd-mysql =3D "MySQL4 database driver for libdbi"
++FILES_libdbd-mysql =3D "${libdir}/dbd/libdbdmysql.so"
++
++DESCRIPTION_libdbd-psql =3D "Postgres SQL database driver for libdbi"
++FILES_libdbd-pgsql =3D "${libdir}/dbd/libdbdpgsql.so"
++
+diff --git a/meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb b/m=
+eta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb
+new file mode 100644
+index 0000000..97bc3ea
+--- /dev/null
++++ b/meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb
+@@ -0,0 +1,6 @@
++require ${PN}.inc
++
++PR =3D "r0"
++
++SRC_URI[md5sum] =3D "4de79b323162a5a7652b65b608eca6cd"
++SRC_URI[sha256sum] =3D "4ab9944398ce769c0deeb64d2f73555c67bc25ccd2ade1cc=
+f552226c7b2acf72"
+diff --git a/meta-oe/recipes-support/libdbi/libdbi.inc b/meta-oe/recipes-=
+support/libdbi/libdbi.inc
+new file mode 100644
+index 0000000..cea2838
+--- /dev/null
++++ b/meta-oe/recipes-support/libdbi/libdbi.inc
+@@ -0,0 +1,17 @@
++# libdbi OE build file
++# Copyright (C) 2005, Koninklijke Philips Electronics NV.  All Rights Re=
+served
++# Released under the MIT license (see packages/COPYING)
++
++DESCRIPTION =3D "Database Independent Abstraction Layer for C"
++HOMEPAGE =3D "http://libdbi.sourceforge.net/"
++LICENSE =3D "LGPLv2.1"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499"
++SECTION =3D "libs"
++
++INC_PR =3D "r0"
++
++SRC_URI =3D "${SOURCEFORGE_MIRROR}/libdbi/libdbi-${PV}.tar.gz"
++
++inherit autotools
++
++EXTRA_OECONF =3D "--disable-docs"
+diff --git a/meta-oe/recipes-support/libdbi/libdbi_0.8.4.bb b/meta-oe/rec=
+ipes-support/libdbi/libdbi_0.8.4.bb
+new file mode 100644
+index 0000000..aee0099
+--- /dev/null
++++ b/meta-oe/recipes-support/libdbi/libdbi_0.8.4.bb
+@@ -0,0 +1,6 @@
++require ${PN}.inc
++
++PR =3D "${INC_PR}.0"
++
++SRC_URI[md5sum] =3D "c5f15407ef7b07ba854cd8c9b15b88ff"
++SRC_URI[sha256sum] =3D "ef38db616f0752ccb09b8ba2eac471722369b8ded50b153c=
+25e238cac2c8de99"
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.11.7
 
---6Nae48J/T25AfBN4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlCzmKwACgkQN1Ujt2V2gBwPpgCeM2CHrFmQDKVTae23sTGLN3Vf
-ylUAnR+qz2MedmW0IysaO/qG1+SkEHGh
-=x1Xe
------END PGP SIGNATURE-----
-
---6Nae48J/T25AfBN4--
