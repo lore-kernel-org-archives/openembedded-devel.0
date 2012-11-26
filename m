@@ -1,22 +1,29 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1Tcvem-0006tS-BI
+	(envelope-from <cazfi74@gmail.com>) id 1TcvtH-0007ej-MH
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 11:11:16 +0100
-Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
-	[129.70.144.156])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
-	965DA8002B; Mon, 26 Nov 2012 10:57:04 +0100 (CET)
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+	Mon, 26 Nov 2012 11:26:16 +0100
+Received: by mail-ie0-f175.google.com with SMTP id qd14so10075518ieb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Nov 2012 02:12:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=P/DKJfZEknlLKkWNhYp7UDOR3LIG1feGEaQ0YaHR6TI=;
+	b=FqGuALZyIF3iTIpPAGZCCH7lgB3exVG+A3UXSkEro8nnlqpyKGHU0XiLGmCnOif1xn
+	2aumAHftvyZdYVwMaKx+9EpekiJc38pVo0YYco2Bszuy+2nJBkiwJMGPkfAbFFPpeNnb
+	WViNI02Eb7YVh8Q8UHJxfdZbegtdNwjvJl+6htHw0R8xzN8h7FvG3BurvN8csVBeDoUs
+	kLKDdha4N+tclIxY2WXf81AJKWvhv9B3LQV5HTl+mg/SDyFEoDITm764EGqQ4FoY8nu1
+	sgc5XaZrfwXDTIY6CYXSkZ64PHjLtO3G+96nXz0ixYCh9DipWtbyblnZHSexCu3yF3y0
+	3Vkw==
+MIME-Version: 1.0
+Received: by 10.50.208.99 with SMTP id md3mr10318168igc.67.1353924723684; Mon,
+	26 Nov 2012 02:12:03 -0800 (PST)
+Received: by 10.64.24.175 with HTTP; Mon, 26 Nov 2012 02:12:03 -0800 (PST)
+Date: Mon, 26 Nov 2012 12:12:03 +0200
+Message-ID: <CAF6bG8cuyegcR02JTs3Nty=33XxA+oKkTE4ejmLO7BFvuYFTVg@mail.gmail.com>
+From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Nov 2012 10:56:38 +0100
-Message-Id: <1353923798-29115-1-git-send-email-stefan@herbrechtsmeier.net>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1353923557-28720-1-git-send-email-stefan@herbrechtsmeier.net>
-References: <1353923557-28720-1-git-send-email-stefan@herbrechtsmeier.net>
-Subject: [meta-oe][PATCH v2] opencv: update to 2.4.3 and fix some issues
+Subject: Policy on tar.gz -> tar.bz2 -> tar.xz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,103 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 10:11:16 -0000
+X-List-Received-Date: Mon, 26 Nov 2012 10:26:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Update to 2.4.3
-* Use tar instead of no longer available SVN repository
-* Remove numpy detection patch and update related CMAKE variable
-* Fix QA Issues: contains probably-redundant RPATH
+If one changes compressions of the package to be fetched, what about
+old versions of the package:
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
----
- .../0001-Fix-CMakeLists.txt-numpy-detection.patch  |   36 --------------------
- .../opencv/{opencv_2.4.bb => opencv_2.4.3.bb}      |   16 ++++-----
- 2 files changed, 7 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
- rename meta-oe/recipes-support/opencv/{opencv_2.4.bb => opencv_2.4.3.bb} (85%)
+- Never change compression of something people may have already
+downloaded with different compression, even if that means bigger
+download for new downloads
+- Do not change compression of old versions if they live in version
+specific file, but if SRC_URI is in .inc, keep it so even with new
+compression, affecting also old version recipes
+- Always make future downloads with best compression even if that
+means redownload for those who already have downloaded with old
+compression.
 
-diff --git a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch b/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
-deleted file mode 100644
-index 43f03d3..0000000
---- a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 965616bdc73247448b8f07572a9a479235dd092d Mon Sep 17 00:00:00 2001
--From: Connor Abbott <cwabbott0@gmail.com>
--Date: Wed, 11 Jul 2012 13:55:38 +0200
--Subject: [PATCH] Fix CMakeLists.txt numpy detection
--
--Right now, the code opencv uses to detect where the numpy include files are doesn't work with cross-compiling because it uses the native python to determine the environment. To make this a little better, allow the user to explictly specify the path using -DPYTHON_NUMPY_INCLUDE_DIRS=path/to/numpy/include/dir .
--
--Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
-----
-- cmake/OpenCVDetectPython.cmake |    8 ++++++--
-- 1 file changed, 6 insertions(+), 2 deletions(-)
--
--diff --git a/cmake/OpenCVDetectPython.cmake b/cmake/OpenCVDetectPython.cmake
--index 8be94ca..5825a04 100644
----- a/cmake/OpenCVDetectPython.cmake
--+++ b/cmake/OpenCVDetectPython.cmake
--@@ -74,10 +74,14 @@ if(PYTHON_EXECUTABLE)
-- 
--     if(NOT PYTHON_NUMPY_INCLUDE_DIR)
--       # Attempt to discover the NumPy include directory. If this succeeds, then build python API with NumPy
---      execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
--+      if(NOT DEFINED PYTHON_NUMPY_INCLUDE_DIRS)
--+          execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
--                       RESULT_VARIABLE PYTHON_NUMPY_PROCESS
---                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIR
--+                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
--                       OUTPUT_STRIP_TRAILING_WHITESPACE)
--+      else()
--+          set(PYTHON_NUMPY_PROCESS 0)
--+      endif()
--                       
--       if(PYTHON_NUMPY_PROCESS EQUAL 0)
--         file(TO_CMAKE_PATH "${PYTHON_NUMPY_INCLUDE_DIR}" _PYTHON_NUMPY_INCLUDE_DIR)
---- 
--1.7.10
--
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-similarity index 85%
-rename from meta-oe/recipes-support/opencv/opencv_2.4.bb
-rename to meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-index 2877093..0194c2d 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-@@ -9,23 +9,21 @@ ARM_INSTRUCTION_SET = "arm"
- 
- DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
- 
--SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
--           file://0001-Fix-CMakeLists.txt-numpy-detection.patch \
--          "
-+SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
-+           "
- 
--SRCREV = "8988"
-+SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
-+SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
- 
--PV = "2.4.2"
--PR = "r1"
-+S = "${WORKDIR}/OpenCV-${PV}"
- 
--S = "${WORKDIR}/opencv"
--
--EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-+EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-                  -DBUILD_PYTHON_SUPPORT=ON \
-                  -DWITH_FFMPEG=ON \
-                  -DWITH_GSTREAMER=OFF \
-                  -DWITH_V4L=ON \
-                  -DWITH_GTK=ON \
-+                 -DCMAKE_SKIP_RPATH=ON \
-                 "
- 
- inherit distutils-base pkgconfig cmake
--- 
-1.7.0.4
 
+ - ML
 
 
