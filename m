@@ -1,26 +1,38 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TcwRP-0000vW-Hy
+	(envelope-from <ross.burton@intel.com>) id 1Tcy2u-0003zs-KZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Nov 2012 12:01:31 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 26 Nov 2012 02:47:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,319,1352102400"; d="scan'208";a="252517439"
-Received: from unknown (HELO helios.localnet) ([10.252.122.215])
-	by fmsmga001.fm.intel.com with ESMTP; 26 Nov 2012 02:47:17 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Date: Mon, 26 Nov 2012 10:47:16 +0000
-Message-ID: <4687762.mJq0VPosuu@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
-In-Reply-To: <20121126113853.5e09dcff@eb-e6520>
-References: <1353885218-5623-1-git-send-email-eric@eukrea.com>
-	<5889530.MeT4QD1KUF@helios> <20121126113853.5e09dcff@eb-e6520>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] ntp: fix checksum
+	Mon, 26 Nov 2012 13:44:20 +0100
+Received: from mail-wi0-f197.google.com ([209.85.212.197])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 26 Nov 2012 04:29:52 -0800
+Received: by mail-wi0-f197.google.com with SMTP id hm6so3520216wib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Nov 2012 04:29:50 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=2xkTUZhDTffoNs/dr5DhQ7wEwjaK2xsBycZxGfuPKq4=;
+	b=kXvdsu8f4ABX9Z1aMbecjXPDZ8B6xj3PnX33j/26ojo0Q+mR4WzXC+iUKLFVssZ3JP
+	tJuwA6ikJVOObKL75Yr9ZCfq512fdYNMtQgNoBH7QGrKBpHi1qnNQe5lTja+fEL7DWAS
+	vC1ke7CgpaF0ZfxQfMi5M9nk+mjsnUf/e2NjsnhfontIijb0SVzk+yWDLC7XUeLtHMgP
+	M+kIdbiIFr4g7yngNvMrUPKO0FEua5jzWox8kAGPawP6kbEhB1s037DJacz07m6ALj92
+	AzBV7waj1PlbwVyOCo+iw0Z7D0L574YcInyCdnTv3WY9rXzueKjlCgmIKtakmbTzcl8A
+	AWgg==
+Received: by 10.216.204.32 with SMTP id g32mr4181823weo.79.1353932989986;
+	Mon, 26 Nov 2012 04:29:49 -0800 (PST)
+Received: by 10.216.204.32 with SMTP id g32mr4181819weo.79.1353932989803;
+	Mon, 26 Nov 2012 04:29:49 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id fh10sm23573570wib.3.2012.11.26.04.29.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 26 Nov 2012 04:29:48 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Nov 2012 12:28:18 +0000
+Message-Id: <1353932899-16796-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkF5/gipBR1yJHcRmGEfRQRAyBywuK7aD3YgkZHdjobAA0tea8G0KyVG5419uEkpGRHxSyQiXO7mrO9znHJOV53PryAa9OugnCe+twS7LdzB2xqflXArhyM3P/n2Uvzn6njclD1WbVw0WKOsJfPxu5174IAwatACZwx1T/TKSOu4bYJMVzDwSA7KPqPTYP5vfRwSi/F
+Subject: [PATCH 1/2] meta-oe: add python-mako, a templating library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,79 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2012 11:01:31 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 26 Nov 2012 12:44:20 -0000
 
-On Monday 26 November 2012 11:38:53 Eric B=E9nard wrote:
-> Hi Paul,
->=20
-> Le Mon, 26 Nov 2012 10:34:23 +0000,
->=20
-> Paul Eggleton <paul.eggleton@linux.intel.com> a =E9crit :
-> > On Monday 26 November 2012 00:13:38 Eric B=E9nard wrote:
-> > > commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recip=
-e to
-> > > a newer version but didn't update the checksum so fetch is failin=
-g.
-> > >=20
-> > > Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> > > ---
-> > >=20
-> > >  meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >=20
-> > > diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> > > b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb index
-> > > f7c5b68..0fce5ce
-> > > 100644
-> > > --- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> > > +++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> > > @@ -8,8 +8,8 @@ SRC_URI =3D
-> > > "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.=
-tar.g
-> > > file://ntpdate \
-> > >=20
-> > >  "
-> > >=20
-> > > -SRC_URI[md5sum] =3D "59876a9009b098ff59767ee45a88ebd2"
-> > > -SRC_URI[sha256sum] =3D
-> > > "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8a02e78be85a7c40e=
-"
-> > > +SRC_URI[md5sum] =3D "00df80a84ec9528fcfb09498075525bc"
-> > > +SRC_URI[sha256sum] =3D
-> > > "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23ea25ac1405432f91c=
-"
-> > >=20
-> > >  EXTRA_OECONF +=3D " --with-net-snmp-config=3Dno --without-ntpsnm=
-pd"
-> >=20
-> > Hmm, you're right - it did get missed. Strangely though if I do -c
-> > cleanall
-> > ntp then build ntp again I don't get an error with the wrong checks=
-um
-> > (with
-> > danny) :/
->=20
-> I also met this kind of behaviour but didn't look in depth at it : it=
+---
+ .../python/python-mako-native_0.7.2.bb              |    6 ++++++
+ .../recipes-devtools/python/python-mako_0.7.2.bb    |   19 +++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
+ create mode 100644 meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
 
-> seems that once a package is fetched, further builds won't trigger
-> an error if the checksum in the recipe is wrong.
+diff --git a/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
+new file mode 100644
+index 0000000..0d4c1e4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
+@@ -0,0 +1,6 @@
++require python-mako_${PV}.bb
++inherit native pythonnative
++
++DEPENDS = "python-native"
++RDEPENDS_${PN} = ""
++PR = "r0"
+diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+new file mode 100644
+index 0000000..9113666
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Templating library for Python"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=da8dd26ed9751ee0cfdf9df1a16bbb54"
++
++PR = "r0"
++
++SRC_URI = "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
++SRC_URI[md5sum] = "e3c0a677aa4216da9e89ef8fa76cbafb"
++SRC_URI[sha256sum] = "fe8698e845035586bd711a6748e4e40a208a58de276b9138026164700494b68f"
++
++S = "${WORKDIR}/Mako-${PV}"
++
++inherit distutils
++
++RDEPENDS_${PN} = "python-threading \
++                  python-netclient \
++                  python-html \
++                 "
+-- 
+1.7.10
 
-The checksum is not verified if the .done file exists on the assumption=
- that the=20
-fetch completed successfully and has already been verified; however whe=
-n I did=20
--c cleanall I checked - there was no .done file, so this is unexpected=20=
-
-behaviour.
-
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
