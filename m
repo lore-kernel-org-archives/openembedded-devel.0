@@ -1,26 +1,26 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TdILk-0001X0-AQ
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdJ6O-00040A-GR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 11:25:08 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Tue, 27 Nov 2012
-	11:10:54 +0100
-X-TM-IMSS-Message-ID: <2a55a65d0022869f@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 2a55a65d0022869f ;
-	Tue, 27 Nov 2012 11:10:58 +0100
-Message-ID: <50B491AE.2090702@nedap.com>
-Date: Tue, 27 Nov 2012 11:10:54 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Tue, 27 Nov 2012 12:13:20 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 27 Nov 2012 02:58:24 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="247748701"
+Received: from unknown (HELO helios.localnet) ([10.252.122.231])
+	by orsmga002.jf.intel.com with ESMTP; 27 Nov 2012 02:58:37 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Date: Tue, 27 Nov 2012 10:58:36 +0000
+Message-ID: <2370020.Bhc3yRJSZT@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
+In-Reply-To: <1353864310-20097-7-git-send-email-eric@eukrea.com>
+References: <1353864310-20097-1-git-send-email-eric@eukrea.com>
+	<1353864310-20097-7-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <50AF4E08.7010402@nedap.com>
-	<20121123143109.GA31470@mi.fu-berlin.de>
-In-Reply-To: <20121123143109.GA31470@mi.fu-berlin.de>
-Subject: Re: libftdi
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH 7/7] hiawatha: add CONFFILES and a php example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,82 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 10:25:08 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Nov 2012 11:13:20 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
+On Sunday 25 November 2012 18:25:10 Eric B=E9nard wrote:
+> - add CONFFILES so that configuration files don't get overwritten
+> during upgrade
+> - add an example on how to launch php-cgi using php-fcgi
+>=20
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
 
-On 11/23/2012 03:31 PM, Henning Heinold wrote:
-> On Fri, Nov 23, 2012 at 11:20:56AM +0100, Jaap de Jong wrote:
->> Hi All,
->> on my buildserver under debian, libftdi does not compile.
->> Looks like some library issue.
->> Anyone an idea how to solve?
->> Thanks in advance!
->> Jaap
->>
->>
->> NOTE: package libftdi-0.19-r0: task do_compile: Started
->> ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
->> for further information)
->> ERROR: Logfile of failure stored in: /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
->> Log data follows:
->> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
->> 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
->> 'common']
->> | ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
->> for further information)
->> | NOTE: make -j2
->> | make  all-recursive
->> | make[1]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19'
->> | Making all in src
->> | make[2]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19/src'
->> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=compile
->> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
->> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
->> -DHAVE_CONFIG_H -I. -I..     -O2 -pipe -g
->> -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
->> -c -o ftdi.lo ftdi.c
->> | arm-angstrom-linux-gnueabi-libtool: compile:
->> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
->> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
->> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
->> -c ftdi.c  -fPIC -DPIC -o .libs/ftdi.o
->> | arm-angstrom-linux-gnueabi-libtool: compile:
->> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
->> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
->> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
->> -c ftdi.c -o ftdi.o >/dev/null 2>&1
->> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=link
->> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
->> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
->> -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
->> -version-info 20:0:19 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -o libftdi.la -rpath /usr/lib ftdi.lo  -L/lib -lusb
-> ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
-> Fix the Makefile to not use this.
->
-> Bye Henning
->
->
-Fixed it.
-Probably not this best way to do it, but it works.
-Added a patch:
+I've tested building and running phpMyAdmin with these changes and it a=
+ll=20
+works perfectly, thanks.
 
-diff -urN a/configure.in b/configure.in
---- a/configure.in    2012-11-26 14:59:05.084788496 +0100
-+++ b/configure.in    2012-11-26 14:59:21.665316347 +0100
-@@ -19,6 +19,7 @@
-  else
-     AC_MSG_ERROR([*** libusb-config not found. You need a working 
-libusb installation.])
-  fi
-+LIBS=""
+I've merged this, 2/7, 3/7 and 4/7. The rest are against meta-oe (altho=
+ugh I=20
+acknowledge php ought to be moved to meta-webserver and eventually merg=
+ed to a=20
+common .inc with modphp).
 
-  dnl check for version of libusb
-  AC_MSG_CHECKING([if libusb version is >= 0.1.7])
+Cheers,
+Paul
 
+--=20
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
