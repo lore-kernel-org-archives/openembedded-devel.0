@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdS5p-0005cR-W5
+	(envelope-from <martin.jansa@gmail.com>) id 1TdS5w-0005cR-EV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 21:49:22 +0100
+	Tue, 27 Nov 2012 21:49:28 +0100
 Received: by mail-ee0-f47.google.com with SMTP id l10so6973088eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 12:35:10 -0800 (PST)
+	Tue, 27 Nov 2012 12:35:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=D3HNVt+U9rWfjEjBH5KZ4Ofg7FqGzs57asyBsL7fiO8=;
-	b=nNkTWWDep8xV1Pf614Vct8QaLFsy9HgPZ+h6NW11SQeoDxbtKsnjVsOx0oICTfCAdC
-	V7o1M9FN3ck/NfwoD2EXIxvtSEsMbM9KcWTmmP1AAU+QV5K9x3fpcWSqys56t9IQp988
-	7q4VdyxVmoIanwAKc6gWwfZrKdhif5kvshfq8v4p9zLuDPfxIk6n62nB/HN+G5NIwpPi
-	U4YlQEzPLJg4VHoPul1VELhHraAUyiG9xHi6WZZ8enbMmgjE+0vLvlaAl/StCqjvO025
-	ZPC2nS+T2GqcGoM825Wyaj/82kcrO5NqDqKiO7xlxQ6U2xqkyKNTfvVtrLpO967xXW62
-	meyg==
-Received: by 10.14.213.134 with SMTP id a6mr61945917eep.45.1354048510887;
-	Tue, 27 Nov 2012 12:35:10 -0800 (PST)
+	bh=1Umj6SbG+8kUtsau9/eVMxHOKWF2akPH6RMfsYk500I=;
+	b=ftOqrG7P+OkR8bo4tQSLUQqcx17WtPxTJiWrpRnJLOcBpXqwbKqDDb0yi98WH0slrC
+	d8JIW8rhiB0e8UAHEWTxZ+1MpCzaiXDwdAIKhy6xKr4VHSHHwZHsB88t3kB9OzmaYo2i
+	EuhGihOv9UAlGFvJGeZwXkNIzfIIhwDS7yRSBDzntK0ZKxK8qr+8B0W3IUBP1oa9uTM2
+	J24jslVyoOrMTR7Ril6VrtlwH314GW7xQmRuBcw/o78diEh0knUidxwXKDGMwyL7XD1/
+	4QUu2OlnLWJzN1hqwWAysxxccQZd2ljBtRFjHCwnaHGHNSJAigKNihtA4zmjnNNzkr+Q
+	IncQ==
+Received: by 10.14.199.134 with SMTP id x6mr62059163een.31.1354048517336;
+	Tue, 27 Nov 2012 12:35:17 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e1sm42853604eem.3.2012.11.27.12.35.09
+	by mx.google.com with ESMTPS id 46sm42849908eeg.4.2012.11.27.12.35.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 12:35:10 -0800 (PST)
+	Tue, 27 Nov 2012 12:35:16 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 21:33:47 +0100
-Message-Id: <f46be41dba88d0036a9681672c625582fd086115.1354034591.git.Martin.Jansa@gmail.com>
+Date: Tue, 27 Nov 2012 21:33:48 +0100
+Message-Id: <cdd3562bf06dd27549739d3ec193a702d0a8ccc7.1354034591.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 10/21] e-base: bump EFL_SRCREV for E17 alpha3
+Subject: [PATCH 11/21] e-wm: update path to icon_icon_theme.png, add some unpackaged files and xcb to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 20:49:22 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 20:49:28 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/classes/e-base.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-efl/recipes-efl/e17/e-wm_svn.bb | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index 03f673d..3e7499f 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
- SRCVER ?= "${PV}"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
+index a6f56bd..615e0f2 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "The Enlightenment Window Manager Version 17"
+-DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary"
++DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary libxcb xcb-util-keysyms"
+ LICENSE = "MIT BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
+ SRCNAME = "e"
+ PV = "0.16.999.060+svnr${SRCPV}"
+-PR = "r6"
++PR = "r7"
+ SRCREV = "${EFL_SRCREV}"
  
--EFL_SRCREV ?= "78871"
-+EFL_SRCREV ?= "79400"
+ inherit e update-alternatives gettext
+@@ -40,7 +40,7 @@ do_install_append() {
+     echo "Categories=Application;" >> ${D}/${datadir}/applications/efm.desktop
+     echo "StartupNotify=true" >> ${D}/${datadir}/applications/efm.desktop
+     install -d ${D}/${datadir}/icons/
+-    install -m 644 ${S}/data/themes/images/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
++    install -m 644 ${S}/data/themes/img/O/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
  
- ARM_INSTRUCTION_SET = "arm"
+     install -d ${D}/${sysconfdir}/xdg/menus
+     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
+@@ -111,6 +111,7 @@ FILES_${PN} = "\
+   ${libdir}/enlightenment/modules/*/*.* \
+   ${libdir}/enlightenment/modules/*/*/* \
+   ${libdir}/enlightenment/modules/*/*/.order \
++  ${libdir}/enlightenment/modules/keyboards/ignore_built_in_keyboards \
+   ${libdir}/enlightenment/*plugins/*/*/* \
+   ${libdir}/enlightenment/preload/e_precache.so \
+   ${datadir}/enlightenment/data/icons \
+@@ -182,6 +183,7 @@ RRECOMMENDS_${PN}-config-standard = "${PN}-theme-default"
  
+ FILES_${PN}-dbg += "\
+   ${libdir}/enlightenment/modules/*/*/.debug/ \
++  ${libdir}/enlightenment/modules/policies/.debug/ \
+   ${libdir}/enlightenment/preload/.debug/ \
+   ${libdir}/enlightenment/utils/.debug/ \
+   ${libdir}/enlightenment/*plugins/*/*/.debug \
 -- 
 1.8.0
 
