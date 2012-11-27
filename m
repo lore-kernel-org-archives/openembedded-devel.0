@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdS6A-0005dI-39
+	(envelope-from <martin.jansa@gmail.com>) id 1TdS6G-0005cR-Pb
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 21:49:43 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so4908028eaa.6
+	Tue, 27 Nov 2012 21:49:49 +0100
+Received: by mail-ee0-f47.google.com with SMTP id l10so6973088eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 12:35:31 -0800 (PST)
+	Tue, 27 Nov 2012 12:35:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=pLJjXtmE2Kbtf8WwwdUA8LsX8UZ1Qw5oV48bOnCsBjk=;
-	b=YT9K8nL2JjsipA78syD1v+vTUTAgyHveuvyJUD0nX2fFxbJ2QYG/dEsmwud4RDuvJe
-	+/645/ayCx2weazsnYTdMaQApmriNgfSaKg+ibLlMF1w+PiNQjnGPa2p2GvBlyS9oamY
-	w4wDIPo02vLdNy008yQYOhgbVkXXYYLR8hKLhwICnfGMFSj8tABfehqoFhgUy2FEagCX
-	lSFmcDH3hMt7MgzUAp6jEQEpG05xEMaAwlzNqVjJMeV0Jy3VX3PXgjlTjFHjeKVh4Juj
-	Q68Tpd0x9F4pzQPiSpepEXeQFq53QibWT4G8b4vyTHfYqJilAwkJrkln2s310+p2NOU8
-	wb2Q==
-Received: by 10.14.210.200 with SMTP id u48mr61279351eeo.29.1354048530931;
-	Tue, 27 Nov 2012 12:35:30 -0800 (PST)
+	bh=9Q+Zhc/khw7P/Ctx+xMxJxsTkvQwDtzgM6Q6CpLIhpc=;
+	b=nBUY1DEcXDhnLjbfmEUZ5hxpDoqZQEurc2m4O/OQ/Kh2n/80z9xGQFcKv2u1+OERNQ
+	BcFss8ICG5tHrjU++z9HrxuPZnk04zzbmUtb0F+WBEKHz0XGTx9a2mK3++LivzeuCn1a
+	xm4wionxOnKVtyHaweFMYaxCLbx3eSNxxX6+wkFjE3WIByjxQJGYpUBhQfxSfqvqVnz0
+	w7XnNp6tBrgFm9K0DMKSs0xIwfE5UusYOVr6LwuwQLYnBMgYqJ93zKKLumem9h8DRwXU
+	f1xnd4BVxHvs1C9DL79rSwVokC45j5lK/Jgupjbi3ShGbmbFFDNRSMF6ujDPjeIH4y3I
+	myQA==
+Received: by 10.14.209.193 with SMTP id s41mr24523154eeo.9.1354048537656;
+	Tue, 27 Nov 2012 12:35:37 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w3sm22022767eel.17.2012.11.27.12.35.30
+	by mx.google.com with ESMTPS id u45sm36700310eep.0.2012.11.27.12.35.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 12:35:30 -0800 (PST)
+	Tue, 27 Nov 2012 12:35:37 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 21:33:50 +0100
-Message-Id: <370375ec27e1001b9e00cd5ed59da715e994940f.1354034591.git.Martin.Jansa@gmail.com>
+Date: Tue, 27 Nov 2012 21:33:51 +0100
+Message-Id: <869f78facd3194d2986ce81ca3d03c8f6dfc347b.1354034591.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 13/21] e-wm-theme-b-and-w: add recipe for old default theme b_and_w
+Subject: [PATCH 14/21] e-base.bbclass: bump EFL_SRCREV for E17 alpha4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,51 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 20:49:43 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 20:49:49 -0000
+
+* be aware that this rev is slightly newer then alpha4, because we
+  need backported patch to edje-1.7
+  r79484 | raster | 2012-11-21 00:58:03 +0100 (Wed, 21 Nov 2012) | 3 lines
+  backport cedrics fix... not backported when done! :-P
+  and also this works only with conf/distro/include/efl-from-svn-recipes.inc
+  otherwise edje_cc segfaults when building default e-wm theme
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb | 31 ++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
+ meta-efl/classes/e-base.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb b/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
-new file mode 100644
-index 0000000..f826e10
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "b-and-w theme was default E17 theme before alpha3 and some people still prefers it."
-+SECTION = "e/utils"
-+DEPENDS = "edje-native"
-+RDEPENDS_${PN} = "e-wm"
-+LICENSE = "MIT BSD"
-+# upstream was asked to include license infor in THEME dir
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+inherit allarch
-+
-+SRCREV = "${EFL_SRCREV}"
-+PV = "0.0+svnr${SRCPV}"
-+
-+inherit e-base
-+
-+SRCNAME = "b_and_w"
-+SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http"
-+S = "${WORKDIR}/${SRCNAME}/e"
-+
-+do_compile() {
-+	# unfortunately hardcoded edje_cc in Makefile     
-+	sed -i "s#\tedje_cc#\t${STAGING_BINDIR_NATIVE}/edje_cc#g" Makefile
-+	make
-+}
-+
-+do_install() {
-+        install -d ${D}${datadir}/enlightenment/data/themes/
-+        install -m 0644 ${S}/b_and_w.edj ${D}${datadir}/enlightenment/data/themes/
-+}
-+
-+FILES_${PN} = "${datadir}/enlightenment/data/themes/"
+diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
+index 3e7499f..933ad76 100644
+--- a/meta-efl/classes/e-base.bbclass
++++ b/meta-efl/classes/e-base.bbclass
+@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
+ SRCNAME ?= "${BPN}"
+ SRCVER ?= "${PV}"
+ 
+-EFL_SRCREV ?= "79400"
++EFL_SRCREV ?= "79502"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
 -- 
 1.8.0
 
