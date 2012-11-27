@@ -1,34 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TdL6h-0000Gq-BO
+Received: from 1.mo2.mail-out.ovh.net ([46.105.63.121]
+	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TdO6b-0004HC-Sn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 14:21:47 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so6506232pbc.6
+	Tue, 27 Nov 2012 17:33:55 +0100
+Received: from mail190.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo2.mail-out.ovh.net (Postfix) with SMTP id E877CDC765C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 05:07:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=bS8l5WErwDoKrR9SUxXRw8BzkFgeDKoSUMHgsdD+2Cw=;
-	b=qUxkupmdZcgZdTgB3o9fdYeN74paGgFPzRK+sC6AM95pbPtkNhANTvrlburKRPYSNG
-	wTsjV5umK4l/AsLQGePYEiB3lsAABEhIsHl+hBz95lsFhOjr6F0Hd0m6emAebEd8IRU3
-	ZmBflINvzGbBU0KgmZqYJG/lREY6pqkS8+BlUwrcpntF03LeJHMbv9mUlN4SbZdzePI2
-	9uA09bjYnxFePLKMiifzPAFl0aawkMub/1UgvloAtegDrVkNH6LI55ZD19T0DKkxNg64
-	CkI+VhQQmTST7hwV6A6sLho/tEbnKE4UzHqYyRSf7FtSEytz5tPm9suUmGIg/z++dYf7
-	6BTw==
-MIME-Version: 1.0
-Received: by 10.68.204.103 with SMTP id kx7mr48386419pbc.33.1354021653435;
-	Tue, 27 Nov 2012 05:07:33 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Tue, 27 Nov 2012 05:07:33 -0800 (PST)
-In-Reply-To: <cover.1354018185.git.paul.eggleton@linux.intel.com>
-References: <cover.1354018185.git.paul.eggleton@linux.intel.com>
-Date: Tue, 27 Nov 2012 11:07:33 -0200
-X-Google-Sender-Auth: IusNXLxi7u3MgUBYqycz8parDrM
-Message-ID: <CAP9ODKopCC_TE7XFYX-rO8A-4F8ALV09-pJvD6WvbK2gSTPzAA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 27 Nov 2012 17:27:33 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 27 Nov 2012 18:19:34 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	buildor.local.eukrea.com) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 27 Nov 2012 18:19:32 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 0/4] Remove recipes in other layers
+X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
+Date: Tue, 27 Nov 2012 17:19:56 +0100
+Message-Id: <1354033196-32464-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 16722991316776758601
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -10
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecufghrlhcuvffnffculddquddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepuhguvghlrdgvughunecujfgurhephffvufffkffogggtgfesthekredtredtje
+X-Spam-Check: DONE|U 0.500001/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -10
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecufghrlhcuvffnffculddquddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepuhguvghlrdgvughunecujfgurhephffvufffkffogggtgfesthekredtredtje
+Cc: joe.macdonald@windriver.com
+Subject: [meta-networking][PATCH] ntp: fix checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 13:21:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Nov 2012 16:33:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 27, 2012 at 10:11 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> Remove some recipes now maintained in other layers. This is just the
-> low-hanging fruit, there are others that will need a closer look.
-...
+commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recipe to
+a newer version but didn't update the checksum so fetch is failing.
 
-Nice! I love cleanup patches ;-)
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-ne=
+tworking/recipes-support/ntp/ntp_4.2.6p5.bb
+index f7c5b68..0fce5ce 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+@@ -8,8 +8,8 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp=
+4/ntp-4.2/ntp-${PV}.tar.g
+         file://ntpdate \
+ "
+=20
+-SRC_URI[md5sum] =3D "59876a9009b098ff59767ee45a88ebd2"
+-SRC_URI[sha256sum] =3D "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8=
+a02e78be85a7c40e"
++SRC_URI[md5sum] =3D "00df80a84ec9528fcfb09498075525bc"
++SRC_URI[sha256sum] =3D "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23e=
+a25ac1405432f91c"
+=20
+ EXTRA_OECONF +=3D " --with-net-snmp-config=3Dno --without-ntpsnmpd"=20
+=20
+--=20
+1.7.10.4
+
 
 
