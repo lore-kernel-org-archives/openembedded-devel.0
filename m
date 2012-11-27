@@ -1,50 +1,34 @@
-Received: from ch1ehsobe003.messaging.microsoft.com ([216.32.181.183]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1TdPXg-0002Js-El
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TdREq-00047J-Lw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 19:05:56 +0100
-Received: from mail197-ch1-R.bigfish.com (10.43.68.236) by
-	CH1EHSOBE008.bigfish.com (10.43.70.58) with Microsoft SMTP Server id
-	14.1.225.23; Tue, 27 Nov 2012 17:36:35 +0000
-Received: from mail197-ch1 (localhost [127.0.0.1])	by
-	mail197-ch1-R.bigfish.com (Postfix) with ESMTP id 45B9B402B9;
-	Tue, 27 Nov 2012 17:36:35 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 2
-X-BigFish: VS2(zz98dI9371I1432Izz1de0h1202h1d1ah1d2ahzz17326ah8275dhz2dh2a8h668h839h8e2h8e3hd25hf0ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441h1537h153bh162dh1631hbe9i15d0l1155h)
-Received: from mail197-ch1 (localhost.localdomain [127.0.0.1]) by mail197-ch1
-	(MessageSwitch) id 1354037792464398_17199;
-	Tue, 27 Nov 2012 17:36:32 +0000 (UTC)
-Received: from CH1EHSMHS033.bigfish.com (snatpool3.int.messaging.microsoft.com
-	[10.43.68.229])	by mail197-ch1.bigfish.com (Postfix) with ESMTP id
-	6F074180051;	Tue, 27 Nov 2012 17:36:32 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS033.bigfish.com
-	(10.43.70.33) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Tue, 27 Nov 2012 17:36:32 +0000
-Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.124]) by
-	039-SN1MMR1-005.039d.mgd.msft.net ([::1]) with mapi id 14.02.0318.003;
-	Tue, 27 Nov 2012 17:36:31 +0000
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "yocto@yoctoproject.org"
-	<yocto@yoctoproject.org>
-Thread-Topic: [oe] patchwork support for meta-freescale
-Thread-Index: AQHNzMW8Lp0SL1M3b0KzDwpN0i0foA==
-Date: Tue, 27 Nov 2012 17:36:30 +0000
-Message-ID: <70CC66F5C30A414DADDA6973E4CA391A7AD74E@039-SN1MPN1-001.039d.mgd.msft.net>
-References: <CAP9ODKpUkrqyzaN-X74QfrfLS_NWXyLbuguzsa+uAfocHN2-aw@mail.gmail.com>
-	<CAP9ODKpjGdj_iYkpVGb-3X-SAAQkC32HO6UpjAtZJFt_zv31aw@mail.gmail.com>
-In-Reply-To: <CAP9ODKpjGdj_iYkpVGb-3X-SAAQkC32HO6UpjAtZJFt_zv31aw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [70.112.201.132]
+	Tue, 27 Nov 2012 20:54:37 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qARJe9GE025195
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 27 Nov 2012 11:40:09 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Tue, 27 Nov 2012 11:40:09 -0800
+Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
+	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
+	ESMTP id 517697FCE;	Tue, 27 Nov 2012 14:39:22 -0500 (EST)
+Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
+	C26FE6A7E20; Tue, 27 Nov 2012 14:40:08 -0500 (EST)
+Date: Tue, 27 Nov 2012 14:40:08 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Message-ID: <20121127194008.GD18359@windriver.com>
+References: <1354033196-32464-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: Re: patchwork support for meta-freescale
+In-Reply-To: <1354033196-32464-1-git-send-email-eric@eukrea.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] ntp: fix checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 18:05:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <F1BB7F75B4ED1A408B7C72AD9134BD9D@mgd.freescale.com>
+X-List-Received-Date: Tue, 27 Nov 2012 19:54:37 -0000
+X-Groupsio-MsgNum: 41764
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yudcn1FV7Hsu/q59"
+Content-Disposition: inline
+
+--yudcn1FV7Hsu/q59
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 27, 2012 at 5:21 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Fri, Nov 23, 2012 at 5:13 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->> Hi,
->>
->> Could patchwork support be added to meta-freescale? It'd allow for
->> easy handle of patches.
->
-> Ping?
+[[meta-networking][PATCH] ntp: fix checksum] On 12.11.27 (Tue 17:19) Eric B=
+=E9nard wrote:
 
-These are hosted on different organizations...  I don't see any repos
-from git.yoctoproject.org on http://patches.openembedded.org/.
-Although it would be nice to have.
+> commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recipe to
+> a newer version but didn't update the checksum so fetch is failing.
+>=20
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-ne=
+tworking/recipes-support/ntp/ntp_4.2.6p5.bb
+> index f7c5b68..0fce5ce 100644
+> --- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+> @@ -8,8 +8,8 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp=
+4/ntp-4.2/ntp-${PV}.tar.g
+>          file://ntpdate \
+>  "
+> =20
+> -SRC_URI[md5sum] =3D "59876a9009b098ff59767ee45a88ebd2"
+> -SRC_URI[sha256sum] =3D "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8=
+a02e78be85a7c40e"
+> +SRC_URI[md5sum] =3D "00df80a84ec9528fcfb09498075525bc"
+> +SRC_URI[sha256sum] =3D "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23e=
+a25ac1405432f91c"
+> =20
+>  EXTRA_OECONF +=3D " --with-net-snmp-config=3Dno --without-ntpsnmpd"=20
+> =20
 
--M=
+I didn't merge the patch since the change is included in the updates I
+merged from PaulE.
 
+--=20
+-Joe MacDonald.
+:wq
 
+--yudcn1FV7Hsu/q59
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlC1FxgACgkQPN8S4W6ZZne8dgCfX3HaJ0TvZD9+qDvdWgt6S67X
+8/sAniGAi0Asx7SEWkSBNHcWBZ+FcsBl
+=YWse
+-----END PGP SIGNATURE-----
+
+--yudcn1FV7Hsu/q59--
