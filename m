@@ -1,27 +1,32 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1TdFeJ-00053z-5x
+	(envelope-from <martin.jansa@gmail.com>) id 1TdGE2-00060g-2v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 08:32:07 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Tue, 27 Nov 2012
-	08:17:53 +0100
-X-TM-IMSS-Message-ID: <29b73f9500227aac@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 29b73f9500227aac ;
-	Tue, 27 Nov 2012 08:17:57 +0100
-Message-ID: <50B46921.5050602@nedap.com>
-Date: Tue, 27 Nov 2012 08:17:53 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
-MIME-Version: 1.0
+	Tue, 27 Nov 2012 09:09:11 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so4637410eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Nov 2012 23:54:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=mD8WVFCisI/3LnAfc20CT05OQ/Ofv0lsXH24RXlwSus=;
+	b=cC8yqMQ2YPO6SymkxCVG8Ou8guag+byJH2ZGoLk39rkRoRvDot3m6bH1TbutJj2Iwl
+	VJ03uKIKDidSD51Z526/c1/bafzXLm62SKdRkmPCsPshdS7H1HIWpd+KX6kGb1rWO3EX
+	8iBYZBMNccNtXcuS0y0jAV2JXdWwcBMlHgFoYqdO0Rr1IGCOzq40v680WNR9aoNEbKqI
+	HG7sxa9k2O3XBVPRFTXy3jUPMJ9WNez5E4h6CFCAQqmmVJJAA3ZpX7xpxGCiuaDGBdTr
+	DnvN1w8EU9VZkxGcvxSQ1WjO/utYB5OF8PK6jIDNW8s1M3psS/uCifWBrIB4nq1OAqv5
+	YvEw==
+Received: by 10.14.205.198 with SMTP id j46mr55374290eeo.27.1354002889433;
+	Mon, 26 Nov 2012 23:54:49 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e7sm39192426eep.1.2012.11.26.23.54.48
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 26 Nov 2012 23:54:48 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <50AF6C63.6080208@nedap.com>
-	<20121123143224.GB31470@mi.fu-berlin.de>	<50B333B6.8020901@nedap.com>
-	<20121126224236.GA24526@mi.fu-berlin.de>
-In-Reply-To: <20121126224236.GA24526@mi.fu-berlin.de>
-Subject: Re: openjdk-7-vm-jamvm
+Date: Tue, 27 Nov 2012 08:54:40 +0100
+Message-Id: <1354002880-9815-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+Subject: [meta-oe][meta-gnome][PATCH] evolution-data-server: fix build with libxml2-2.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,41 +40,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 07:32:07 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Nov 2012 08:09:12 -0000
 
+* newer eds versions depend on external libgdata
+  http://git.gnome.org/browse/evolution-data-server/commit/servers?h=gnome-2-32&id=28897beab5dcd4aab3586322a96280be92585db6
+  but for this one, we need this patch
 
-On 11/26/2012 11:42 PM, Henning Heinold wrote:
-> On Mon, Nov 26, 2012 at 10:17:42AM +0100, Jaap de Jong wrote:
->> On 11/23/2012 03:32 PM, Henning Heinold wrote:
->>> On Fri, Nov 23, 2012 at 01:30:27PM +0100, Jaap de Jong wrote:
->>>> Hi,
->>>> how can I build openjdk-7-vm-jamvm?
->>>> If I bitbake openjdk-7 it is not added, while openjdk-7-vm-zero is added.
->>>> I'm building for arm.
->>>> Thanks!
->>>> Jaap
->>> Add it to your image.
->>>
->> bitbake openjdk-7-vm-jamvm fails:
->>
->> ERROR: Nothing PROVIDES 'openjdk-7-vm-jamvm'
->>
->> And so fails adding it to my images as well...
->>
->> |  * opkg_install_cmd: Cannot install package openjdk-7-vm-jamvm.
->>
->> Jaap
-> Hi Jaap,
->
-> I found two problems for building openjdk-7 with additional vms.
-> They are now fixed in master.
->
-> Bye Henning
-That's great news!
-Many thanks!
-Jaap
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...-soup-adapt-to-new-libxml2-API-from-2.9.0.patch | 100 +++++++++++++++++++++
+ .../recipes-gnome/eds/evolution-data-server_git.bb |   3 +-
+ 2 files changed, 102 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch
+
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch
+new file mode 100644
+index 0000000..7905801
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch
+@@ -0,0 +1,100 @@
++From 5083b22669f0d2102b72956a2b8afd9432303ce5 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Tue, 27 Nov 2012 08:46:51 +0100
++Subject: [PATCH] soup: adapt to new libxml2 API from 2.9.0
++
++* for more info see
++  https://mail.gnome.org/archives/xml/2012-August/msg00005.html
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ calendar/backends/caldav/e-cal-backend-caldav.c | 21 +++++++++++++++++++++
++ servers/google/libgdata/gdata-entry.c           |  8 ++++++++
++ 2 files changed, 29 insertions(+)
++
++diff --git a/calendar/backends/caldav/e-cal-backend-caldav.c b/calendar/backends/caldav/e-cal-backend-caldav.c
++index 5e7ecc4..b7f4afb 100644
++--- a/calendar/backends/caldav/e-cal-backend-caldav.c
+++++ b/calendar/backends/caldav/e-cal-backend-caldav.c
++@@ -1038,8 +1038,13 @@ check_calendar_changed_on_server (ECalBackendCalDAV *cbdav)
++ 	soup_message_set_request (message,
++ 				  "application/xml",
++ 				  SOUP_MEMORY_COPY,
+++#ifdef LIBXML2_NEW_BUFFER
+++				  (gchar *) xmlOutputBufferGetContent(buf),
+++				  xmlOutputBufferGetSize(buf));
+++#else
++ 				  (gchar *) buf->buffer->content,
++ 				  buf->buffer->use);
+++#endif
++ 
++ 	/* Send the request now */
++ 	send_and_handle_redirection (priv->session, message, NULL);
++@@ -1180,8 +1185,13 @@ caldav_server_list_objects (ECalBackendCalDAV *cbdav, CalDAVObject **objs, gint
++ 	soup_message_set_request (message,
++ 				  "application/xml",
++ 				  SOUP_MEMORY_COPY,
+++#ifdef LIBXML2_NEW_BUFFER
+++				  (gchar *) xmlOutputBufferGetContent(buf),
+++				  xmlOutputBufferGetSize(buf));
+++#else
++ 				  (gchar *) buf->buffer->content,
++ 				  buf->buffer->use);
+++#endif
++ 
++ 	/* Send the request now */
++ 	send_and_handle_redirection (priv->session, message, NULL);
++@@ -1502,8 +1512,14 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
++ 	soup_message_set_request (message,
++ 				  "application/xml",
++ 				  SOUP_MEMORY_COPY,
+++#ifdef LIBXML2_NEW_BUFFER
+++				  (gchar *) xmlOutputBufferGetContent(buf),
+++				  xmlOutputBufferGetSize(buf));
+++#else
++ 				  (gchar *) buf->buffer->content,
++ 				  buf->buffer->use);
+++#endif
+++
++ 
++ 	/* Send the request now */
++ 	send_and_handle_redirection (priv->session, message, NULL);
++@@ -1552,8 +1568,13 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
++ 		soup_message_set_request (message,
++ 				  "application/xml",
++ 				  SOUP_MEMORY_COPY,
+++#ifdef LIBXML2_NEW_BUFFER
+++				  (gchar *) xmlOutputBufferGetContent(buf),
+++				  xmlOutputBufferGetSize(buf));
+++#else
++ 				  (gchar *) buf->buffer->content,
++ 				  buf->buffer->use);
+++#endif
++ 
++ 		/* Send the request now */
++ 		send_and_handle_redirection (priv->session, message, NULL);
++diff --git a/servers/google/libgdata/gdata-entry.c b/servers/google/libgdata/gdata-entry.c
++index ab69eb0..3f05b17 100644
++--- a/servers/google/libgdata/gdata-entry.c
+++++ b/servers/google/libgdata/gdata-entry.c
++@@ -877,9 +877,17 @@ gdata_entry_new_from_xmlptr (xmlDocPtr doc, xmlNodePtr cur)
++ 		xmlOutputBufferFlush (buf);
++ 
++ 		if (buf->conv == NULL)
+++#ifdef LIBXML2_NEW_BUFFER
+++			xmlString = g_strdup ((gchar *) xmlOutputBufferGetContent(buf));
+++#else
++ 			xmlString = g_strdup ((gchar *)buf->buffer->content);
+++#endif
++ 		else
+++#ifdef LIBXML2_NEW_BUFFER
+++			xmlString = g_strdup ((gchar *) xmlBufContent(buf));
+++#else
++ 			xmlString = g_strdup ((gchar *)buf->conv->content);
+++#endif
++ 		xmlOutputBufferClose (buf);
++ 	}
++ 
++-- 
++1.8.0
++
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+index 9064251..958a90c 100644
+--- a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+@@ -13,7 +13,7 @@ DEPENDS = "intltool-native glib-2.0 gtk+ gconf dbus db gnome-common virtual/libi
+ SRCREV = "3ca578d968d09785933ebbb45b66b3bccdbd5832"
+ 
+ PV = "2.30+git${SRCPV}"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "git://git.gnome.org/evolution-data-server;protocol=git \
+            file://oh-contact.patch;striplevel=0 \
+@@ -24,6 +24,7 @@ SRC_URI = "git://git.gnome.org/evolution-data-server;protocol=git \
+            file://depbuildfix.patch \
+            file://fix_for_automake-1.12.x.patch \
+            file://avoid_automake_errors.patch \
++           file://0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
+            file://iconv-detect.h"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.8.0
 
 
 
