@@ -1,37 +1,33 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdJBt-00049o-Df
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 12:19:01 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so4698125eaa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 03:04:48 -0800 (PST)
+	(envelope-from <otavio.salvador@gmail.com>) id 1TdJRy-0004Wa-RP
+	for openembedded-devel@openembedded.org; Tue, 27 Nov 2012 12:35:44 +0100
+Received: by mail-pb0-f47.google.com with SMTP id un1so6453095pbc.6
+	for <openembedded-devel@openembedded.org>;
+	Tue, 27 Nov 2012 03:21:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=psI5XF0yCqSSPnWO5vbypy4u1a/ZSYcUL+DLeoor1eo=;
-	b=Sup1avJnwDW+O6PbFAGz/kSzmyn50PkQJWUf5QvkFTgw1XJiafoY/LIonvK4R2unw3
-	NGgetNYCFMKkTCFwGh6khlhgW9F7BhpWFhyC9SdueqSj1RUxRkSW/7SfUY5Q28RLfbub
-	KSjnpHbNusSFrkYk7TCzv878SHc52lHCBsNcxDsNwnhU1n1uWlnzctQ94X2OHBDgLV2V
-	HbPKfuwO2XgidN60VnOX3s3kkadcYDfDiv9Nj1ux4JWuq94L5Xg+NNEfIBNqdmIaNvax
-	IKk09jq/0e/Kq6RePbPcUEsvxPCmfHmZecYh+3ANLreo9RaB9OfXc+9WSR3R3+ZNLqan
-	WJhg==
-Received: by 10.14.182.70 with SMTP id n46mr56766897eem.5.1354014288589;
-	Tue, 27 Nov 2012 03:04:48 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id d44sm40045026eeo.10.2012.11.27.03.04.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 03:04:47 -0800 (PST)
-Date: Tue, 27 Nov 2012 12:04:42 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121127110442.GA3692@jama.jama.net>
-References: <1353947056-2799-1-git-send-email-andrei.gherzan@windriver.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=A7OO+g42hp6TCqN77Owu6GPOFYe3vuR2+JXIOBUBgPg=;
+	b=biMSNbH04kAycwxMhSc2hzlgDco2lBx9cM1w55BonVIWRM+SclgYe2q4r9RRoXEZVI
+	N2J3V+iJjOCnQFlHGlY+W5mXIBsUVApgnhjUSlFdHrgD8cEEbVp87OEwNHUCOPHMgabu
+	AsP1CifO9zNYngcsw+Awx4fXYj8mCXt97wNd7Csw2bhpAZfCGWc+8MLNdxT3Swy44Mns
+	MpWy8JOnGadusj0cHJoBGTPoCYl4KDPMuSl/duntYsv7djL7KptcE6DhcQJW5eGWy87w
+	xtzADq5/r1j/FuA/nl4gKyHv/MAgX6GqgGMbXyi8VTZ5ZRRjqdVuUObVm4UJhidYMKWH
+	44FQ==
 MIME-Version: 1.0
-In-Reply-To: <1353947056-2799-1-git-send-email-andrei.gherzan@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
-Subject: Re: [meta-oe][meta-systemd][PATCH] dhcp: Sync bbappend version with the one from oe-core
+Received: by 10.68.197.9 with SMTP id iq9mr46611137pbc.130.1354015284957; Tue,
+	27 Nov 2012 03:21:24 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Tue, 27 Nov 2012 03:21:24 -0800 (PST)
+In-Reply-To: <CAP9ODKpUkrqyzaN-X74QfrfLS_NWXyLbuguzsa+uAfocHN2-aw@mail.gmail.com>
+References: <CAP9ODKpUkrqyzaN-X74QfrfLS_NWXyLbuguzsa+uAfocHN2-aw@mail.gmail.com>
+Date: Tue, 27 Nov 2012 09:21:24 -0200
+X-Google-Sender-Auth: A7cXmn8WZeXiZUIgA_A_SJjfLJA
+Message-ID: <CAP9ODKpjGdj_iYkpVGb-3X-SAAQkC32HO6UpjAtZJFt_zv31aw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: patchwork support for meta-freescale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 11:19:01 -0000
-X-Groupsio-MsgNum: 41734
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yrj/dFKFPuw6o+aM"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Nov 2012 11:35:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---yrj/dFKFPuw6o+aM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Nov 23, 2012 at 5:13 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Hi,
+>
+> Could patchwork support be added to meta-freescale? It'd allow for
+> easy handle of patches.
 
-On Mon, Nov 26, 2012 at 06:24:16PM +0200, Andrei Gherzan wrote:
-> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
-> ---
->  .../dhcp/dhcp_4.2.4-P1.bbappend                    |   13 -------------
->  .../dhcp/dhcp_4.2.4-P2.bbappend                    |   13 +++++++++++++
->  2 files changed, 13 insertions(+), 13 deletions(-)
->  delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
-=2E2.4-P1.bbappend
->  create mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
-=2E2.4-P2.bbappend
+Ping?
 
-Looks the same as:
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-November/04244=
-8.html
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-except sent without -M and not moving to oe-core prefix like mine does.
 
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---yrj/dFKFPuw6o+aM
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlC0nkoACgkQN1Ujt2V2gBz/rACfY18g1Rcq5oK8sQ+Qo6YBBEmP
-jx8Ani/O9dfjdE+FhN4NgGf16mPYehLw
-=939w
------END PGP SIGNATURE-----
-
---yrj/dFKFPuw6o+aM--
