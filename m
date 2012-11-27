@@ -1,37 +1,37 @@
 Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdObS-0005KC-D6
+	(envelope-from <martin.jansa@gmail.com>) id 1TdObY-0005KC-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 18:05:46 +0100
+	Tue, 27 Nov 2012 18:05:52 +0100
 Received: by mail-ea0-f175.google.com with SMTP id h11so4828389eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 08:51:35 -0800 (PST)
+	Tue, 27 Nov 2012 08:51:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Oh1d+SdCvemIrbKt78Genv9JBEBc262x/vJ1hdVrTJ4=;
-	b=hfYplMeTFvnTNQ175mXrE8tmnWWgvlcp5uSZ7LodcTOQiWYItybtKZT7ExlnrhY+SH
-	88E+A4DtPFlrN7MYLPHX9ZYNSik01XH+PRZ9twpSGnyX6OUsTEgj07AYvjDbLkenFS2s
-	19/QkzFXRk2XsVUWLAEfXghbEm8l79VXpnoJouXnMQe5zP6Hrg8e3esTZc5g+gPO41iF
-	Ey2zbk94ThkgO5li+08/ZCuITTGe0nWyS8niIdBrvqmLFtE3nwIgNKEupkN4/TUKoAT+
-	fRIrpY85GuTMxtO7Sqh+xb7jfiIJk8fJuho6Gcmh/NsB/F0Hx1Pt3jeCqXtBVje6rDVD
-	rDKw==
-Received: by 10.14.216.70 with SMTP id f46mr60105785eep.12.1354035095449;
-	Tue, 27 Nov 2012 08:51:35 -0800 (PST)
+	bh=0pCKLHxqcTRDqJSlPBCZf4egXsgpemOHP6JuVd3f8r8=;
+	b=NCWjXfKKUXwRUA7ScuZdoYOK6lCEXnRLgvyGSLx08V6NDbRKrtsq2xqabB4h7dr0Ma
+	SlTRaC4J2VBYvZG7nkVEpu9/qH8Q6dkZy4UaiFhyYT/k+QXSpCw0XnxOWAsrrZT9XG6C
+	S251wVhpc+X1Ltjb5KoaFfIEu8Ep4cZNOSBTuReiHr2q6F7VpHKkLjhJ+upi4/FAjlZ6
+	cqRZAVqvozK6q4WezcOGE8aEhOZ5bOrHDEQBX/ZXfBGHHrr0KzikRJyDCzlfm9K80qv4
+	TiT+F/CREJOB/TKX8jqOtA/uRZv3x+iNytxF04Ff4qT9vJ1YZYyn5VcsZrRT7eAuTDEg
+	Itqw==
+Received: by 10.14.199.134 with SMTP id x6mr60000373een.31.1354035101977;
+	Tue, 27 Nov 2012 08:51:41 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q2sm41681706eem.13.2012.11.27.08.51.34
+	by mx.google.com with ESMTPS id a44sm41683050eeo.7.2012.11.27.08.51.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 08:51:34 -0800 (PST)
+	Tue, 27 Nov 2012 08:51:41 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 17:51:12 +0100
-Message-Id: <60bbaa00f9e6a439cb9a180f272543bd73189138.1354034673.git.Martin.Jansa@gmail.com>
+Date: Tue, 27 Nov 2012 17:51:13 +0100
+Message-Id: <62a71128176f2fb43cd33fc58e0818f92b7b15b9.1354034673.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354034673.git.Martin.Jansa@gmail.com>
 References: <cover.1354034673.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354034673.git.Martin.Jansa@gmail.com>
 References: <cover.1354034673.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 2/5] samba: update waf-as-source.patch to apply
+Subject: [PATCH 3/5] xserver-nodm-init: replace 'WantedBy=graphical.target' by 'Alias=display-manager.service'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,56 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 17:05:46 -0000
-
-* and Applying patch waf-as-source.patch
-  ...
-  File buildtools/bin/waf-svn is not empty after patch; not deleting
-  ...
-  Patch waf-as-source.patch does not apply (enforce with -f)
-  I've dropped this chunk and now it builds
-
-* there is also WARNING about unpackaged but empty base_sbindir
-  WARNING: QA Issue: samba: Files/directories were installed but not
-  shipped
-    /sbin
-  created by do_install in samba.inc but used only when cifs is built,
-  maybe we should remove it from samba.inc now
+X-List-Received-Date: Tue, 27 Nov 2012 17:05:53 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch | 4 ----
- meta-oe/recipes-connectivity/samba/samba_3.6.8.bb                  | 2 +-
- 2 files changed, 1 insertion(+), 5 deletions(-)
+ .../xserver-nodm-init/xserver-nodm-init/xserver-nodm.service            | 2 +-
+ .../recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-index 3ba7d23..985ed5a 100644
---- a/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-+++ b/meta-oe/recipes-connectivity/samba/samba-3.6.8/waf-as-source.patch
-@@ -44,10 +44,6 @@ index 9ef8a1f..0000000
- -You can get a svn copy of the upstream source with:
- -
- -  svn checkout http://waf.googlecode.com/svn/trunk/ waf-read-only
--diff --git a/buildtools/bin/waf-svn b/buildtools/bin/waf-svn
--deleted file mode 100755
--index 6d54d5f..0000000
--Binary files a/buildtools/bin/waf-svn and /dev/null differ
- diff --git a/buildtools/update-waf.sh b/buildtools/update-waf.sh
- new file mode 100755
- index 0000000..bb3a4bf
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index cc09a48..7c54dae 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -3,7 +3,7 @@ require samba-basic.inc
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
+index c15a772..53e61d7 100644
+--- a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
++++ b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init/xserver-nodm.service
+@@ -6,4 +6,4 @@ EnvironmentFile=/etc/default/xserver-nodm
+ ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
  
--PR = "r1"
-+PR = "r2"
+ [Install]
+-WantedBy=multi-user.target
++Alias=display-manager.service
+diff --git a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
+index 5538805..b6b77c9 100644
+--- a/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
++++ b/meta-systemd/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bbappend
+@@ -1,6 +1,6 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
  
- SRC_URI += "\
-     file://config-h.patch \
+-PRINC := "${@int(PRINC) + 1}"
++PRINC := "${@int(PRINC) + 2}"
+ 
+ inherit systemd
+ 
 -- 
 1.8.0
 
