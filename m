@@ -1,37 +1,35 @@
-Received: from mail-ee0-f65.google.com ([74.125.83.65])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdObo-0005Ol-JS
+Received: from 7.mo2.mail-out.ovh.net ([188.165.48.182]
+	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TdPHd-0006N0-D5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 18:06:08 +0100
-Received: by mail-ee0-f65.google.com with SMTP id b57so3628475eek.0
+	Tue, 27 Nov 2012 18:49:21 +0100
+Received: from mail190.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo2.mail-out.ovh.net (Postfix) with SMTP id 4DB16DC6EA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 08:51:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=mr6h7gGzziRMOwrYZhmo1xhRkGzNBOvyTNVknisjSgs=;
-	b=XZSvoFQQA5aPHO0suN7eWNMLdnkNfIMfttE6GjH2z4InjEO7N0DtNaIItWGlCOJcXK
-	q+32ACGQJhzY1cU6d3Jznn/w0TK1eQkEGvE2WZru/9nuJLzFKToOfYhUVXvkapac/T0/
-	2MmW4UXPkbrQlpHUeLeXexbG2yNptjU2J2Mxypc8jrtnmtYY1RLpavDcip3Ec90cfSDa
-	30Uf6ndmXoTPB+SS19wgCrdLscbZ1Z/5VqW1wb+Oho3vCa1uxhRHQfNw3Cb/bWG/gcA9
-	XFiyYNTMefHBj8ruVVZUaW7wowDbxveUYGGT66NFmJ1bScFfnA3GdGnT6MwgZZ9TEhx6
-	k6rw==
-Received: by 10.14.216.193 with SMTP id g41mr59950909eep.37.1354035115580;
-	Tue, 27 Nov 2012 08:51:55 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e7sm41700173eep.1.2012.11.27.08.51.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 08:51:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 27 Nov 2012 17:24:21 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 27 Nov 2012 18:16:21 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	buildor.local.eukrea.com) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 27 Nov 2012 18:16:18 +0200
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 17:51:15 +0100
-Message-Id: <4dd0cdea52a681f67dab59b1f1a54802527cf8d0.1354034673.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-In-Reply-To: <cover.1354034673.git.Martin.Jansa@gmail.com>
-References: <cover.1354034673.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1354034673.git.Martin.Jansa@gmail.com>
-References: <cover.1354034673.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 5/5] gypsy: added to meta-oe/recipes-navigation
+X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
+Date: Tue, 27 Nov 2012 17:16:41 +0100
+Message-Id: <1354033003-31657-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 16668385172897967433
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpehphhhprdhnvghtnecujfgurhephffvufffkffogggtgfesthekredtredtje
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpehphhhprdhnvghtnecujfgurhephffvufffkffogggtgfesthekredtredtje
+Subject: [meta-oe][PATCH 1/3] php: upgrade to 5.3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,129 +43,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 17:06:08 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 17:49:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Andrei Dinu <andrei.adrianx.dinu@intel.com>
-
-Added gypsy to meta-oe/recipes-navigation
-
-Signed-off-by: Andrei Dinu <andrei.adrianx.dinu@intel.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- .../recipes-navigation/gypsy/files/fixups.patch    | 21 +++++++++++++++++++
- meta-oe/recipes-navigation/gypsy/gypsy.inc         | 15 ++++++++++++++
- meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      | 24 ++++++++++++++++++++++
- meta-oe/recipes-navigation/gypsy/gypsy_git.bb      | 18 ++++++++++++++++
- 4 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gypsy/files/fixups.patch
- create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy.inc
- create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
- create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_git.bb
+ meta-oe/recipes-devtools/php/php.inc         |    4 ++--
+ meta-oe/recipes-devtools/php/php/iconv.patch |   26 +++++++++++++-------=
+------
+ meta-oe/recipes-devtools/php/php_5.3.19.bb   |   19 +++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.3.6.bb    |   19 -------------------
+ 4 files changed, 34 insertions(+), 34 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php_5.3.19.bb
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.3.6.bb
 
-diff --git a/meta-oe/recipes-navigation/gypsy/files/fixups.patch b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
+ols/php/php.inc
+index 87eb4b1..03b7b40 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -1,13 +1,13 @@
+ DESCRIPTION =3D "A server-side, HTML-embedded scripting language. This p=
+ackage provides the CGI."
+ HOMEPAGE =3D "http://www.php.net"
+ SECTION =3D "console/network"
+-LICENSE =3D "PHP"
++LICENSE =3D "PHP-3.0"
+ BBCLASSEXTEND =3D "native"
+ DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native mysql=
+5 \
+            libc-client openssl"
+ DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
+=20
+-INC_PR =3D "r2"
++INC_PR =3D "r0"
+=20
+ SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
+=20
+diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recip=
+es-devtools/php/php/iconv.patch
+index 66b39cc..f3d2a16 100644
+--- a/meta-oe/recipes-devtools/php/php/iconv.patch
++++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+@@ -1,21 +1,21 @@
+-Index: php-5.2.13/acinclude.m4
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- php-5.2.13.orig/acinclude.m4
+-+++ php-5.2.13/acinclude.m4
+-@@ -2430,7 +2430,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+-   dnl
++diff --git a/acinclude.m4 b/acinclude.m4
++index 4c28b80..d6491a1 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+    dnl Check libc first if no path is provided in --with-iconv
+    dnl
++=20
+ -  if test "$PHP_ICONV" =3D "yes"; then
+ +  dnl must check against no, not against yes as PHP_ICONV can also incl=
+ude a path, which implies yes
+ +  if test "$PHP_ICONV" !=3D "no"; then
+-     AC_CHECK_FUNC(iconv, [
+-       found_iconv=3Dyes
+-     ],[
+-Index: php-5.2.13/ext/iconv/config.m4
+-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- php-5.2.13.orig/ext/iconv/config.m4
+-+++ php-5.2.13/ext/iconv/config.m4
++     dnl Reset LIBS temporarily as it may have already been included
++     dnl -liconv in.
++     LIBS_save=3D"$LIBS"
++diff --git a/ext/iconv/config.m4 b/ext/iconv/config.m4
++index d673b0a..1fbef13 100644
++--- a/ext/iconv/config.m4
+++++ b/ext/iconv/config.m4
+ @@ -15,7 +15,7 @@ if test "$PHP_ICONV" !=3D "no"; then
+ =20
+    if test "$iconv_avail" !=3D "no"; then
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes=
+-devtools/php/php_5.3.19.bb
 new file mode 100644
-index 0000000..de4d92e
+index 0000000..e96b760
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gypsy/files/fixups.patch
-@@ -0,0 +1,21 @@
-+Upstream-Status: Inappropriate [configuration]
++++ b/meta-oe/recipes-devtools/php/php_5.3.19.bb
+@@ -0,0 +1,19 @@
++require php.inc
 +
-+---
-+ docs/reference/Makefile.am |    2 ++
-+ 1 file changed, 2 insertions(+)
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcb564efdf78cce8ea6e4b5a4f7c05=
+d97"
 +
-+--- gypsy.orig/docs/reference/Makefile.am
-++++ gypsy/docs/reference/Makefile.am
-+@@ -81,10 +81,12 @@ expand_content_files=
-+ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
-+ 
-+ INCLUDES=-I$(top_srcdir) $(GYPSY_CFLAGS)
-+ GTKDOC_LIBS=$(top_builddir)/gypsy/libgypsy.la $(GYPSY_LIBS)
-+ 
-++EXTRA_DIST =
-++CLEANFILES =
-+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
-+ include $(top_srcdir)/gtk-doc.make
-+ 
-+ # Other files to distribute
-+ # e.g. EXTRA_DIST += version.xml.in
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-new file mode 100644
-index 0000000..0c1735e
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-@@ -0,0 +1,15 @@
-+SUMMARY = "GPS Multiplexing Daemon"
-+DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
-+multiple clients to access GPS data from multiple GPS sources \
-+concurrently.  Gypsy also hides the details of parsing NMEA from the \
-+client applications, passing the data as simple values for the clients \
-+to use."
-+LICENSE = "GPLv2.0 & LGPLv2.1"
-+SECTION = "x11"
-+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
++PR =3D "${INC_PR}.0"
 +
-+inherit autotools pkgconfig gtk-doc
++SRC_URI +=3D "file://acinclude-xml2-config.patch \
++            file://php-m4-divert.patch \
++            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
 +
-+EXTRA_OECONF += "--with-distro=debian"
++SRC_URI_append_pn-php +=3D "file://iconv.patch \
++            file://imap-fix-autofoo.patch \
++            file://pear-makefile.patch \
++            file://phar-makefile.patch \
++            file://php_exec_native.patch \
++            "
 +
-+FILES_${PN} += "/usr/share/dbus-1/services/"
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
-new file mode 100644
-index 0000000..51207c9
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "GPS Multiplexing Daemon"
-+DESCRIPTION = "Gypsy is a GPS multiplexing daemon which allows \
-+multiple clients to access GPS data from multiple GPS sources \
-+concurrently.  Gypsy also hides the details of parsing NMEA from the \
-+client applications, passing the data as simple values for the clients \
-+to use."
-+LICENSE = "GPLv2+ & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
-+                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
-+                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
-+
-+SECTION = "x11"
-+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
-+
-+SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
-+PR = "r1"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN} += "/usr/share/dbus-1/system-services/"
-+
-+SRC_URI[md5sum] = "e2d186df9c2cc3b70a027043e22acf1a"
-+SRC_URI[sha256sum] = "14e1cbe17351f408538e033ca370b4bf51ccf9c88744e236ddfb271904f154d6"
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_git.bb b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
-new file mode 100644
-index 0000000..e5c564f
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy_git.bb
-@@ -0,0 +1,18 @@
-+require gypsy.inc
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRCREV = "be8c9c382d2d1d37b51d29b0843045121ec90213"
-+PV = "0.9+git${SRCPV}"
-+PR = "r1"
-+
-+S = "${WORKDIR}/git"
-+
-+LICENSE = "GPLv2+ & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://COPYING.lib;md5=7fbc338309ac38fefcd64b04bb903e34 \
-+                    file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
-+                    file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
-+
-+SRC_URI = "git://anongit.freedesktop.org/gypsy;protocol=git \
-+           file://fixups.patch"
--- 
-1.8.0
++SRC_URI[md5sum] =3D "e1d2a3ec7849d4b3032bd1abf1916aa4"
++SRC_URI[sha256sum] =3D "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db0=
+21020594e2469fd6"
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.6.bb b/meta-oe/recipes-=
+devtools/php/php_5.3.6.bb
+deleted file mode 100644
+index 9524bd9..0000000
+--- a/meta-oe/recipes-devtools/php/php_5.3.6.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-require php.inc
+-
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcb564efdf78cce8ea6e4b5a4f7c05=
+d97"
+-
+-PR =3D "${INC_PR}.0"
+-
+-SRC_URI +=3D "file://acinclude-xml2-config.patch \
+-            file://php-m4-divert.patch \
+-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
+-
+-SRC_URI_append_pn-php +=3D "file://iconv.patch \
+-            file://imap-fix-autofoo.patch \
+-            file://pear-makefile.patch \
+-            file://phar-makefile.patch \
+-            file://php_exec_native.patch \
+-            "
+-
+-SRC_URI[md5sum] =3D "2286f5a82a6e8397955a0025c1c2ad98"
+-SRC_URI[sha256sum] =3D "30ae880f22e3ee93eccc9b80e3c58b0d6364d139bb4366dc=
+c27f2fab658d3198"
+--=20
+1.7.10.4
 
 
 
