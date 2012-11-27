@@ -1,37 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdS71-0005cR-0D
+	(envelope-from <Andrei.Gherzan@windriver.com>) id 1TdTS5-0000s7-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 21:50:35 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so6973088eei.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 12:36:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=2RTaKO2jcjdnyHxNuTPjplIgEHCf0Nuwc62jYR/W88c=;
-	b=YqGKLY0yRiEhJn1CcY2JV0HHAuTyQAUYQzI9fvTMAFFsVgat1m+laI1hmcjBwxwy2w
-	QB81sfDRZ/bGOl9O6FHQdiFFaHUFyHBk50PQC0ZaTEYSUZaaRvhTYV2YJeQGWskT/xFV
-	nmkzDZspD8aegV5IMp7NVt9sf4Yjn4wGZ1nD587qyxT6s5epLlf+15Or/gdp04/AbBi6
-	WEP7yuJ2Ev9yl5T6UyUlBlBa/XROklwUwumGJONu1roSAUwEUDI0ZwoHQIITzw1oi1dy
-	DG3nTbk38BHKqwQakY/R/xGBN1rhCYgFaYFy6w69qVWtwbyOJDPGavtgCqCsRpCQ7M9l
-	K/YA==
-Received: by 10.14.214.132 with SMTP id c4mr41031522eep.18.1354048583891;
-	Tue, 27 Nov 2012 12:36:23 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e2sm42848461eeo.8.2012.11.27.12.36.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 12:36:23 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 21:33:58 +0100
-Message-Id: <9ff6421501a6844b087be1fae45f826055b22bf9.1354034591.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
-References: <cover.1354034591.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
-References: <cover.1354034591.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 21/21] e-base.bbclass: bump EFL_SRCREV for E17 alpha5
+	Tue, 27 Nov 2012 23:16:27 +0100
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qARM292R002103
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 27 Nov 2012 14:02:09 -0800 (PST)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.2.156]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.02.0318.004;
+	Tue, 27 Nov 2012 14:02:08 -0800
+From: "Gherzan, Andrei" <Andrei.Gherzan@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][meta-systemd][PATCH] dhcp: Sync bbappend
+	version with the one from oe-core
+Thread-Index: AQHNy/KD8QYYcJsV60evS9eMfkWFQpf+DDcAgAAxRrg=
+Date: Tue, 27 Nov 2012 22:02:08 +0000
+Message-ID: <8A4F3EB72242474193467105FE61962920213F72@ALA-MBB.corp.ad.wrs.com>
+References: <1353947056-2799-1-git-send-email-andrei.gherzan@windriver.com>,
+	<20121127110442.GA3692@jama.jama.net>
+In-Reply-To: <20121127110442.GA3692@jama.jama.net>
+Accept-Language: en-US, ro-RO
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.18.27]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][meta-systemd][PATCH] dhcp: Sync bbappend version with the one from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 20:55:34 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 22:16:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/classes/e-base.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Great. Waiting for merge.
+________________________________________
+From: Martin Jansa [martin.jansa@gmail.com]
+Sent: Tuesday, November 27, 2012 1:04 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Gherzan, Andrei
+Subject: Re: [oe] [meta-oe][meta-systemd][PATCH] dhcp: Sync bbappend versio=
+n with the one from oe-core
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index 933ad76..4099351 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.enlightenment.org"
- SRCNAME ?= "${BPN}"
- SRCVER ?= "${PV}"
- 
--EFL_SRCREV ?= "79502"
-+EFL_SRCREV ?= "79741"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
--- 
-1.8.0
+On Mon, Nov 26, 2012 at 06:24:16PM +0200, Andrei Gherzan wrote:
+> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
+> ---
+>  .../dhcp/dhcp_4.2.4-P1.bbappend                    |   13 -------------
+>  .../dhcp/dhcp_4.2.4-P2.bbappend                    |   13 +++++++++++++
+>  2 files changed, 13 insertions(+), 13 deletions(-)
+>  delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
+.2.4-P1.bbappend
+>  create mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
+.2.4-P2.bbappend
 
+Looks the same as:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-November/04244=
+8.html
+
+except sent without -M and not moving to oe-core prefix like mine does.
+
+Cheers,
+
+--
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
