@@ -1,36 +1,36 @@
-Received: from 1.mo2.mail-out.ovh.net ([46.105.63.121]
-	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TdO6b-0004HC-Sn
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1TdOBP-0004P6-1L
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 17:33:55 +0100
-Received: from mail190.ha.ovh.net (b7.ovh.net [213.186.33.57])
-	by mo2.mail-out.ovh.net (Postfix) with SMTP id E877CDC765C
+	Tue, 27 Nov 2012 17:38:52 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so4817958eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 17:27:33 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 27 Nov 2012 18:19:34 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	buildor.local.eukrea.com) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 27 Nov 2012 18:19:32 +0200
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Tue, 27 Nov 2012 08:24:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=HQbMpOqMA+k8nDdRPDfZyWUVAJOtrg0fd+zClzxTPFM=;
+	b=taxmEOG5QWNoaqe1qY85yEHtDkGjTob/2HjOqzvzJzm7e98ey6PCuAZEXaAQ1HbqK2
+	Mjp12WEEovkP9jnnFplAjgjEJD116mjQehXcVktU29UpwTYHsjiWDeZ4XG4ceVeuaexL
+	cH+GoBxeIrNcvU53fM8bcjVPh+SEiSzdjQfPfhrdZ+oqNbw3y4oZDfGiwOfEG1YR9aru
+	YVj09VB8STMkGrIIo9x3p/y2+SecHVUp8W5zAv62b8kmrEVGdpOc/ctzJLGlVnT3MplW
+	mGm97oMy77YMzUecKGHgKf2o7YHXIveZGjJcwB5TWv8k3l96X8chFof7clKTw8N5K6JM
+	uCBw==
+Received: by 10.14.223.135 with SMTP id v7mr59767598eep.41.1354033477900;
+	Tue, 27 Nov 2012 08:24:37 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e7sm41566795eep.1.2012.11.27.08.24.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 27 Nov 2012 08:24:37 -0800 (PST)
+Date: Tue, 27 Nov 2012 17:24:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
-Date: Tue, 27 Nov 2012 17:19:56 +0100
-Message-Id: <1354033196-32464-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.10.4
+Message-ID: <20121127162432.GD3692@jama.jama.net>
+References: <1353937823-29509-1-git-send-email-ross.burton@intel.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 16722991316776758601
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -10
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecufghrlhcuvffnffculddquddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepuhguvghlrdgvughunecujfgurhephffvufffkffogggtgfesthekredtredtje
-X-Spam-Check: DONE|U 0.500001/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -10
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehhedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecufghrlhcuvffnffculddquddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepuhguvghlrdgvughunecujfgurhephffvufffkffogggtgfesthekredtredtje
-Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH] ntp: fix checksum
+In-Reply-To: <1353937823-29509-1-git-send-email-ross.burton@intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] meta-oe: remove guile, it's in oe-core now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,39 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 16:33:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Nov 2012 16:38:52 -0000
+X-Groupsio-MsgNum: 41752
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ALfTUftag+2gvp1h"
+Content-Disposition: inline
 
-commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recipe to
-a newer version but didn't update the checksum so fetch is failing.
+--ALfTUftag+2gvp1h
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
----
- meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Mon, Nov 26, 2012 at 01:50:23PM +0000, Ross Burton wrote:
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-ne=
-tworking/recipes-support/ntp/ntp_4.2.6p5.bb
-index f7c5b68..0fce5ce 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-@@ -8,8 +8,8 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp=
-4/ntp-4.2/ntp-${PV}.tar.g
-         file://ntpdate \
- "
-=20
--SRC_URI[md5sum] =3D "59876a9009b098ff59767ee45a88ebd2"
--SRC_URI[sha256sum] =3D "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8=
-a02e78be85a7c40e"
-+SRC_URI[md5sum] =3D "00df80a84ec9528fcfb09498075525bc"
-+SRC_URI[sha256sum] =3D "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23e=
-a25ac1405432f91c"
-=20
- EXTRA_OECONF +=3D " --with-net-snmp-config=3Dno --without-ntpsnmpd"=20
-=20
---=20
-1.7.10.4
+Hi,
 
+meta-oe should be [meta-oe] and subject should start with guile:
 
+Cheers,
 
+--ALfTUftag+2gvp1h
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlC06UAACgkQN1Ujt2V2gBy6KwCgsZ4y6uNoWG6DF0flV3MMeHt4
+wWUAn1pmliUc51MSurESArlSa5SODkWe
+=jRbo
+-----END PGP SIGNATURE-----
+
+--ALfTUftag+2gvp1h--
