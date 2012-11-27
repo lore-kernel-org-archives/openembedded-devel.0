@@ -1,24 +1,20 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdJWZ-0004gN-5j
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdKEa-0006oL-Kt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 12:40:23 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 27 Nov 2012 03:25:21 -0800
+	Tue, 27 Nov 2012 13:25:52 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 27 Nov 2012 04:11:38 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="224990831"
+X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="222959999"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.231])
-	by orsmga001.jf.intel.com with ESMTP; 27 Nov 2012 03:26:02 -0800
+	by azsmga001.ch.intel.com with ESMTP; 27 Nov 2012 04:11:37 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 11:25:53 +0000
-Message-Id: <6e6311e8c8052dbe70383671ce1a8959aa42555d.1354015335.git.paul.eggleton@linux.intel.com>
+Date: Tue, 27 Nov 2012 12:11:31 +0000
+Message-Id: <cover.1354018185.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1354015335.git.paul.eggleton@linux.intel.com>
-References: <cover.1354015335.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1354015335.git.paul.eggleton@linux.intel.com>
-References: <cover.1354015335.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH v3 8/8] mtr: add from OE-Classic, update and tidy up
+Subject: [meta-oe][PATCH 0/4] Remove recipes in other layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,84 +28,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 11:40:23 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 12:25:52 -0000
 
-* Update to 0.82
-* Add ncurses to DEPENDS
-* Add patch to fix configure with standard autotools_do_configure
-* Add SUMMARY
-* Add LIC_FILES_CHKSUM
+Remove some recipes now maintained in other layers. This is just the
+low-hanging fruit, there are others that will need a closer look.
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../recipes-support/mtr/files/no-gtk.patch         |   31 ++++++++++++++++++++
- meta-networking/recipes-support/mtr/mtr_0.82.bb    |   19 ++++++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/mtr/files/no-gtk.patch
- create mode 100644 meta-networking/recipes-support/mtr/mtr_0.82.bb
 
-diff --git a/meta-networking/recipes-support/mtr/files/no-gtk.patch b/meta-networking/recipes-support/mtr/files/no-gtk.patch
-new file mode 100644
-index 0000000..0dbeb7a
---- /dev/null
-+++ b/meta-networking/recipes-support/mtr/files/no-gtk.patch
-@@ -0,0 +1,31 @@
-+Disable gtk check that breaks with current autotools
-+
-+Ideally we would have a proper fix for this and send that upstream instead.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+diff --git a/configure.in b/configure.in
-+index 8474543..5118565 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -48,16 +48,8 @@ AC_ARG_ENABLE(ipv6,
-+ [  --disable-ipv6          Do not enable IPv6],
-+ WANTS_IPV6=$enableval, WANTS_IPV6=yes)
-+    
-+-if test "x$WANTS_GTK" = "xyes"; then
-+-        AM_PATH_GTK_2_0(2.6.0, CFLAGS="$CFLAGS $GTK_CFLAGS"
-+-                           LIBS="$LIBS $GTK_LIBS -lm",
-+-                           AC_MSG_WARN(Building without GTK2 display support)
-+-                   AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
-+-                           GTK_OBJ="")
-+-else
-+-	AC_DEFINE(NO_GTK)
-+-	GTK_OBJ=""
-+-fi
-++AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
-++GTK_OBJ=""
-+ 
-+ AC_CHECK_FUNC(socket, , 
-+   AC_CHECK_LIB(socket, socket, , AC_MSG_ERROR(No socket library found)))
-diff --git a/meta-networking/recipes-support/mtr/mtr_0.82.bb b/meta-networking/recipes-support/mtr/mtr_0.82.bb
-new file mode 100644
-index 0000000..c6d5152
---- /dev/null
-+++ b/meta-networking/recipes-support/mtr/mtr_0.82.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Combined traceroute and ping utility"
-+DESCRIPTION = "mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool."
-+HOMEPAGE = "http://www.bitwizard.nl/mtr/"
-+DEPENDS = "ncurses"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-+                    file://mtr.c;startline=5;endline=16;md5=87105f8fe9675e897e074869afaafa6f"
-+
-+SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
-+           file://no-gtk.patch"
-+
-+SRC_URI[md5sum] = "10601ea543fda3e51545c4bce195b64c"
-+SRC_URI[sha256sum] = "f3b457c9623ae03565688a7ffd49d4843a5e2505ccaf3ba8d9fbd86e3ce9b6a0"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--without-gtk"
-+
+The following changes since commit e4236266b7ac6103e4b9400eb51b5cb0037f3ba9:
+
+  hiawatha: add CONFFILES and a php example (2012-11-27 10:48:24 +0000)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/cleanup4
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/cleanup4
+
+Paul Eggleton (4):
+  libcgroup: remove
+  socat: remove
+  ptpd: remove
+  netperf: remove
+
+ .../recipes-benchmark/netperf/files/cpu_set.patch  |   24 -
+ meta-oe/recipes-benchmark/netperf/files/init       |   51 --
+ .../recipes-benchmark/netperf/files/vfork.patch    |   26 -
+ meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb |   56 --
+ .../ptpd/ptpd-1.0.0/add-limit-h.patch              |   26 -
+ meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb    |   20 -
+ meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb |   27 -
+ .../socat/socat-1.7.1.2/compile.patch              |  939 --------------------
+ meta-oe/recipes-support/socat/socat_1.7.1.2.bb     |   21 -
+ 9 files changed, 1190 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/netperf/files/cpu_set.patch
+ delete mode 100644 meta-oe/recipes-benchmark/netperf/files/init
+ delete mode 100644 meta-oe/recipes-benchmark/netperf/files/vfork.patch
+ delete mode 100644 meta-oe/recipes-benchmark/netperf/netperf_2.4.4.bb
+ delete mode 100644 meta-oe/recipes-connectivity/ptpd/ptpd-1.0.0/add-limit-h.patch
+ delete mode 100644 meta-oe/recipes-connectivity/ptpd/ptpd_1.0.0.bb
+ delete mode 100644 meta-oe/recipes-core/libcgroup/libcgroup_0.37.1.bb
+ delete mode 100644 meta-oe/recipes-support/socat/socat-1.7.1.2/compile.patch
+ delete mode 100644 meta-oe/recipes-support/socat/socat_1.7.1.2.bb
+
 -- 
 1.7.9.5
 
