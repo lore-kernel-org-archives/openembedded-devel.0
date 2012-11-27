@@ -1,22 +1,26 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1TdHlw-0000Of-Ik
+	(envelope-from <jaap.dejong@nedap.com>) id 1TdILk-0001X0-AQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 10:48:09 +0100
-Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
-	[129.70.144.156])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
-	0D6268000E; Tue, 27 Nov 2012 10:33:54 +0100 (CET)
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+	Tue, 27 Nov 2012 11:25:08 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Tue, 27 Nov 2012
+	11:10:54 +0100
+X-TM-IMSS-Message-ID: <2a55a65d0022869f@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 2a55a65d0022869f ;
+	Tue, 27 Nov 2012 11:10:58 +0100
+Message-ID: <50B491AE.2090702@nedap.com>
+Date: Tue, 27 Nov 2012 11:10:54 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 10:33:33 +0100
-Message-Id: <1354008813-15667-1-git-send-email-stefan@herbrechtsmeier.net>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1353923798-29115-1-git-send-email-stefan@herbrechtsmeier.net>
-References: <1353923798-29115-1-git-send-email-stefan@herbrechtsmeier.net>
-Subject: [meta-oe][PATCH v3] opencv: update to 2.4.3 and fix some issues
+References: <50AF4E08.7010402@nedap.com>
+	<20121123143109.GA31470@mi.fu-berlin.de>
+In-Reply-To: <20121123143109.GA31470@mi.fu-berlin.de>
+Subject: Re: libftdi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,142 +34,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 09:48:09 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 10:25:08 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* Update opencv and opencv-samples to 2.4.3
-* Use tar instead of no longer available SVN repository
-* Remove numpy detection patch and update related CMAKE variable
-* Fix QA Issues: contains probably-redundant RPATH
-* Add PACKAGES_DYNAMIC for split library packages
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
----
- .../0001-Fix-CMakeLists.txt-numpy-detection.patch  |   36 --------------------
- ...encv-samples_2.4.bb => opencv-samples_2.4.3.bb} |   11 +++---
- .../opencv/{opencv_2.4.bb => opencv_2.4.3.bb}      |   18 +++++-----
- 3 files changed, 14 insertions(+), 51 deletions(-)
- delete mode 100644 meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
- rename meta-oe/recipes-support/opencv/{opencv-samples_2.4.bb => opencv-samples_2.4.3.bb} (81%)
- rename meta-oe/recipes-support/opencv/{opencv_2.4.bb => opencv_2.4.3.bb} (84%)
+On 11/23/2012 03:31 PM, Henning Heinold wrote:
+> On Fri, Nov 23, 2012 at 11:20:56AM +0100, Jaap de Jong wrote:
+>> Hi All,
+>> on my buildserver under debian, libftdi does not compile.
+>> Looks like some library issue.
+>> Anyone an idea how to solve?
+>> Thanks in advance!
+>> Jaap
+>>
+>>
+>> NOTE: package libftdi-0.19-r0: task do_compile: Started
+>> ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+>> for further information)
+>> ERROR: Logfile of failure stored in: /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+>> Log data follows:
+>> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
+>> 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
+>> 'common']
+>> | ERROR: Function failed: do_compile (see /var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/temp/log.do_compile.21748
+>> for further information)
+>> | NOTE: make -j2
+>> | make  all-recursive
+>> | make[1]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19'
+>> | Making all in src
+>> | make[2]: Entering directory `/data/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/libftdi-0.19-r0/libftdi-0.19/src'
+>> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=compile
+>> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
+>> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+>> -DHAVE_CONFIG_H -I. -I..     -O2 -pipe -g
+>> -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+>> -c -o ftdi.lo ftdi.c
+>> | arm-angstrom-linux-gnueabi-libtool: compile:
+>> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
+>> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+>> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+>> -c ftdi.c  -fPIC -DPIC -o .libs/ftdi.o
+>> | arm-angstrom-linux-gnueabi-libtool: compile:
+>> arm-angstrom-linux-gnueabi-gcc -march=armv5te -marm
+>> -mthumb-interwork -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+>> -DHAVE_CONFIG_H -I. -I.. -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+>> -c ftdi.c -o ftdi.o >/dev/null 2>&1
+>> | ../arm-angstrom-linux-gnueabi-libtool --tag=CC   --mode=link
+>> arm-angstrom-linux-gnueabi-gcc  -march=armv5te  -marm
+>> -mthumb-interwork  -mtune=arm926ej-s --sysroot=/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45
+>> -O2 -pipe -g -feliminate-unused-debug-types -I/var/lib/jenkins/jobs/oe-core/develop/build/tmp-angstrom_v2012_05-eglibc/sysroots/nedap9g45/usr/include
+>> -version-info 20:0:19 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>> -o libftdi.la -rpath /usr/lib ftdi.lo  -L/lib -lusb
+> ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>
+> Fix the Makefile to not use this.
+>
+> Bye Henning
+>
+>
+Fixed it.
+Probably not this best way to do it, but it works.
+Added a patch:
 
-diff --git a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch b/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
-deleted file mode 100644
-index 43f03d3..0000000
---- a/meta-oe/recipes-support/opencv/opencv-2.4.2/0001-Fix-CMakeLists.txt-numpy-detection.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 965616bdc73247448b8f07572a9a479235dd092d Mon Sep 17 00:00:00 2001
--From: Connor Abbott <cwabbott0@gmail.com>
--Date: Wed, 11 Jul 2012 13:55:38 +0200
--Subject: [PATCH] Fix CMakeLists.txt numpy detection
--
--Right now, the code opencv uses to detect where the numpy include files are doesn't work with cross-compiling because it uses the native python to determine the environment. To make this a little better, allow the user to explictly specify the path using -DPYTHON_NUMPY_INCLUDE_DIRS=path/to/numpy/include/dir .
--
--Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
-----
-- cmake/OpenCVDetectPython.cmake |    8 ++++++--
-- 1 file changed, 6 insertions(+), 2 deletions(-)
--
--diff --git a/cmake/OpenCVDetectPython.cmake b/cmake/OpenCVDetectPython.cmake
--index 8be94ca..5825a04 100644
----- a/cmake/OpenCVDetectPython.cmake
--+++ b/cmake/OpenCVDetectPython.cmake
--@@ -74,10 +74,14 @@ if(PYTHON_EXECUTABLE)
-- 
--     if(NOT PYTHON_NUMPY_INCLUDE_DIR)
--       # Attempt to discover the NumPy include directory. If this succeeds, then build python API with NumPy
---      execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
--+      if(NOT DEFINED PYTHON_NUMPY_INCLUDE_DIRS)
--+          execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
--                       RESULT_VARIABLE PYTHON_NUMPY_PROCESS
---                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIR
--+                      OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
--                       OUTPUT_STRIP_TRAILING_WHITESPACE)
--+      else()
--+          set(PYTHON_NUMPY_PROCESS 0)
--+      endif()
--                       
--       if(PYTHON_NUMPY_PROCESS EQUAL 0)
--         file(TO_CMAKE_PATH "${PYTHON_NUMPY_INCLUDE_DIR}" _PYTHON_NUMPY_INCLUDE_DIR)
---- 
--1.7.10
--
-diff --git a/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb b/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-similarity index 81%
-rename from meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-rename to meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-index 7ede7c7..3d76226 100644
---- a/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-@@ -8,14 +8,13 @@ DEPENDS = "opencv"
- LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
- "
- 
--SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
--          "
-+SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
-+           "
- 
--SRCREV = "8988"
-+SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
-+SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
- 
--PV = "2.4.2"
--
--S = "${WORKDIR}/opencv"
-+S = "${WORKDIR}/OpenCV-${PV}"
- 
- do_install() {
-     cd samples/c
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-similarity index 84%
-rename from meta-oe/recipes-support/opencv/opencv_2.4.bb
-rename to meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-index 2877093..513e147 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-@@ -9,23 +9,21 @@ ARM_INSTRUCTION_SET = "arm"
- 
- DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
- 
--SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
--           file://0001-Fix-CMakeLists.txt-numpy-detection.patch \
--          "
-+SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
-+           "
- 
--SRCREV = "8988"
-+SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
-+SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
- 
--PV = "2.4.2"
--PR = "r1"
-+S = "${WORKDIR}/OpenCV-${PV}"
- 
--S = "${WORKDIR}/opencv"
--
--EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-+EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-                  -DBUILD_PYTHON_SUPPORT=ON \
-                  -DWITH_FFMPEG=ON \
-                  -DWITH_GSTREAMER=OFF \
-                  -DWITH_V4L=ON \
-                  -DWITH_GTK=ON \
-+                 -DCMAKE_SKIP_RPATH=ON \
-                 "
- 
- inherit distutils-base pkgconfig cmake
-@@ -59,6 +57,8 @@ python populate_packages_prepend () {
-     d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
- }
- 
-+PACKAGES_DYNAMIC += "^libopencv-.*"
-+
- FILES_${PN} = ""
- FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
- FILES_${PN}-dbg += "${libdir}/.debug"
--- 
-1.7.0.4
+diff -urN a/configure.in b/configure.in
+--- a/configure.in    2012-11-26 14:59:05.084788496 +0100
++++ b/configure.in    2012-11-26 14:59:21.665316347 +0100
+@@ -19,6 +19,7 @@
+  else
+     AC_MSG_ERROR([*** libusb-config not found. You need a working 
+libusb installation.])
+  fi
++LIBS=""
+
+  dnl check for version of libusb
+  AC_MSG_CHECKING([if libusb version is >= 0.1.7])
+
 
 
 
