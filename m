@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TdS5H-0005cR-Fm
+	(envelope-from <martin.jansa@gmail.com>) id 1TdS5P-0005dI-9y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 21:48:47 +0100
-Received: by mail-ee0-f47.google.com with SMTP id l10so6973088eei.6
+	Tue, 27 Nov 2012 21:48:55 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so4908028eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 12:34:36 -0800 (PST)
+	Tue, 27 Nov 2012 12:34:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=8N8cqxQACb4laYvEAMq94KdU9+oXAKdKooRDH/ByuJM=;
-	b=XNCZAEFbh6vIQZiLIw9DToOPyGf3Dwy5sYiTOZMnI05/f4jySB6pNkyjOKrkYQ2FNX
-	bbR7BYPD62XgSjyOWWpXkCVELSgEuD8gHMZSeCxrZOgF3zORyRq1hSI/uVnvt4P5CvA0
-	hX5SAtNbN8ops7Wwq8jpAwNiW+XVs6bWPYcYFo9hXKWnbgArF4+dHmG7ayLvGqhSgKUA
-	0Mde7lht/5zNKOVx6Rnssc4Arnra3cMVKLwtwiLXGjS7pJJdP9FaQR5yZ/XhSDioME4A
-	Akry+J9ufIx6Ym5UnT9QB6zqlEzU58hPognz1pDzvRzwTgB7M/NGgLowQWde0ER/VTN4
-	IMZQ==
-Received: by 10.14.221.5 with SMTP id q5mr61740477eep.33.1354048476361;
-	Tue, 27 Nov 2012 12:34:36 -0800 (PST)
+	bh=AwkHyaFUEWvUb+XcuU/Y3JjnzOVWndjKi6TgfU6eufI=;
+	b=ZrMz2AbWKQv0M6z9Za07MeptZWORB0Sn4hKAxPnl67uhTNKrnWEGFqHccf2IZih87p
+	NLZWKMc40jj9OZtsz++Nvz3vx8Scflmo9Z0+s1Ry92f4naWs1U3tZBQbE+kdboi7Tpoa
+	1EBziEhZvw711zhWTJsFPeF82i22tRFVNygUdxW0Hd0HlmUss/tbbCEO2k9JejTKaGpp
+	5iF6cRLyeO4H8MJVgqgoLGfDyM4EZ7eFLxyqGGl5TzKvzT8qDckrzyAp7Ks/YTUzL4Dt
+	4gm1RGRCoDhyrHq4Awu3cuNZ0TsjoLwB7rFrHUhEOJkC3E7uSGQTStm8VmnDCOx4+n6k
+	73ig==
+Received: by 10.14.173.69 with SMTP id u45mr38466711eel.21.1354048482870;
+	Tue, 27 Nov 2012 12:34:42 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q2sm42842240eem.13.2012.11.27.12.34.35
+	by mx.google.com with ESMTPS id a44sm42842027eeo.7.2012.11.27.12.34.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Nov 2012 12:34:35 -0800 (PST)
+	Tue, 27 Nov 2012 12:34:42 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 21:33:41 +0100
-Message-Id: <e19fd3423eb564f2fcca4444cca30fb5f6ee03be.1354034591.git.Martin.Jansa@gmail.com>
+Date: Tue, 27 Nov 2012 21:33:42 +0100
+Message-Id: <51cc06fd915ca5153ba45e39818b568783805154.1354034591.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354034591.git.Martin.Jansa@gmail.com>
 References: <cover.1354034591.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 04/21] elementary-theme-efenniht: update path to shared images
+Subject: [PATCH 05/21] efl-from-svn-recipes.inc: update to match new version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 20:48:47 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 20:48:55 -0000
 
-* moved to images subdirectory in r78304
+* be aware that elocation, efreet and latest eve now depends on edbus2 (edbus directory in svn, e_dbus is edbus1)
+  and we don't have recipe for edbus2 yet
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-efl/conf/distro/include/efl-from-svn-recipes.inc | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
-index 8fb2dab..fa635c0 100644
---- a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
-+++ b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
-@@ -16,6 +16,7 @@ SRCREV_ELM_REV ?= "${EFL_SRCREV}"
+diff --git a/meta-efl/conf/distro/include/efl-from-svn-recipes.inc b/meta-efl/conf/distro/include/efl-from-svn-recipes.inc
+index d3a7e81..52da95f 100644
+--- a/meta-efl/conf/distro/include/efl-from-svn-recipes.inc
++++ b/meta-efl/conf/distro/include/efl-from-svn-recipes.inc
+@@ -1,4 +1,5 @@
+-EFL_PREFERRED_VERSION ?= "1.7.0+svn%"
++EFL_PREFERRED_VERSION ?= "1.7.1+svn%"
++EFL_PREFERRED_PYTHON_VERSION ?= "1.7.0+svn%"
  
- SRCREV_FORMAT = "THM_REV"
- PV = "0.0+svnr${SRCPV}"
-+PR = "r1"
+ PREFERRED_VERSION_ecore ?= "${EFL_PREFERRED_VERSION}"
+ PREFERRED_VERSION_ecore-native ?= "${EFL_PREFERRED_VERSION}"
+@@ -30,11 +31,11 @@ PREFERRED_VERSION_emotion ?= "${EFL_PREFERRED_VERSION}"
+ PREFERRED_VERSION_ethumb ?= "${EFL_PREFERRED_VERSION}"
+ PREFERRED_VERSION_elementary ?= "${EFL_PREFERRED_VERSION}"
  
- inherit e-base allarch
+-PREFERRED_VERSION_python-elementary ?= "${EFL_PREFERRED_VERSION}"
+-PREFERRED_VERSION_python-ecore ?= "${EFL_PREFERRED_VERSION}"
+-PREFERRED_VERSION_python-edbus ?= "${EFL_PREFERRED_VERSION}"
+-PREFERRED_VERSION_python-edje ?= "${EFL_PREFERRED_VERSION}"
+-PREFERRED_VERSION_python-emotion ?= "${EFL_PREFERRED_VERSION}"
+-PREFERRED_VERSION_python-evas ?= "${EFL_PREFERRED_VERSION}"
++PREFERRED_VERSION_python-elementary ?= "${EFL_PREFERRED_PYTHON_VERSION}"
++PREFERRED_VERSION_python-ecore ?= "${EFL_PREFERRED_PYTHON_VERSION}"
++PREFERRED_VERSION_python-edbus ?= "${EFL_PREFERRED_PYTHON_VERSION}"
++PREFERRED_VERSION_python-edje ?= "${EFL_PREFERRED_PYTHON_VERSION}"
++PREFERRED_VERSION_python-emotion ?= "${EFL_PREFERRED_PYTHON_VERSION}"
++PREFERRED_VERSION_python-evas ?= "${EFL_PREFERRED_PYTHON_VERSION}"
  
-@@ -26,7 +27,7 @@ SRC_URI += "file://LICENSE"
- S = "${WORKDIR}/${SRCNAME}"
- 
- do_compile() {
--    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/ ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
-+    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/images ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
- }
- 
- do_install() {
+ PREFERRED_VERSION_terminology ?= "0.1.0+svn%"
 -- 
 1.8.0
 
