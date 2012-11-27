@@ -1,26 +1,37 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdJ6O-00040A-GR
+	(envelope-from <martin.jansa@gmail.com>) id 1TdJBt-00049o-Df
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 12:13:20 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 27 Nov 2012 02:58:24 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="247748701"
-Received: from unknown (HELO helios.localnet) ([10.252.122.231])
-	by orsmga002.jf.intel.com with ESMTP; 27 Nov 2012 02:58:37 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Date: Tue, 27 Nov 2012 10:58:36 +0000
-Message-ID: <2370020.Bhc3yRJSZT@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.2.0-33-generic-pae; KDE/4.9.3; i686; ; )
-In-Reply-To: <1353864310-20097-7-git-send-email-eric@eukrea.com>
-References: <1353864310-20097-1-git-send-email-eric@eukrea.com>
-	<1353864310-20097-7-git-send-email-eric@eukrea.com>
+	Tue, 27 Nov 2012 12:19:01 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so4698125eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2012 03:04:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=psI5XF0yCqSSPnWO5vbypy4u1a/ZSYcUL+DLeoor1eo=;
+	b=Sup1avJnwDW+O6PbFAGz/kSzmyn50PkQJWUf5QvkFTgw1XJiafoY/LIonvK4R2unw3
+	NGgetNYCFMKkTCFwGh6khlhgW9F7BhpWFhyC9SdueqSj1RUxRkSW/7SfUY5Q28RLfbub
+	KSjnpHbNusSFrkYk7TCzv878SHc52lHCBsNcxDsNwnhU1n1uWlnzctQ94X2OHBDgLV2V
+	HbPKfuwO2XgidN60VnOX3s3kkadcYDfDiv9Nj1ux4JWuq94L5Xg+NNEfIBNqdmIaNvax
+	IKk09jq/0e/Kq6RePbPcUEsvxPCmfHmZecYh+3ANLreo9RaB9OfXc+9WSR3R3+ZNLqan
+	WJhg==
+Received: by 10.14.182.70 with SMTP id n46mr56766897eem.5.1354014288589;
+	Tue, 27 Nov 2012 03:04:48 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id d44sm40045026eeo.10.2012.11.27.03.04.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 27 Nov 2012 03:04:47 -0800 (PST)
+Date: Tue, 27 Nov 2012 12:04:42 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121127110442.GA3692@jama.jama.net>
+References: <1353947056-2799-1-git-send-email-andrei.gherzan@windriver.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 7/7] hiawatha: add CONFFILES and a php example
+In-Reply-To: <1353947056-2799-1-git-send-email-andrei.gherzan@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
+Subject: Re: [meta-oe][meta-systemd][PATCH] dhcp: Sync bbappend version with the one from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 11:13:20 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 11:19:01 -0000
+X-Groupsio-MsgNum: 41734
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yrj/dFKFPuw6o+aM"
+Content-Disposition: inline
+
+--yrj/dFKFPuw6o+aM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
 
-On Sunday 25 November 2012 18:25:10 Eric B=E9nard wrote:
-> - add CONFFILES so that configuration files don't get overwritten
-> during upgrade
-> - add an example on how to launch php-cgi using php-fcgi
->=20
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+On Mon, Nov 26, 2012 at 06:24:16PM +0200, Andrei Gherzan wrote:
+> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
 > ---
+>  .../dhcp/dhcp_4.2.4-P1.bbappend                    |   13 -------------
+>  .../dhcp/dhcp_4.2.4-P2.bbappend                    |   13 +++++++++++++
+>  2 files changed, 13 insertions(+), 13 deletions(-)
+>  delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
+=2E2.4-P1.bbappend
+>  create mode 100644 meta-systemd/meta-oe/recipes-connectivity/dhcp/dhcp_4=
+=2E2.4-P2.bbappend
 
-I've tested building and running phpMyAdmin with these changes and it a=
-ll=20
-works perfectly, thanks.
+Looks the same as:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-November/04244=
+8.html
 
-I've merged this, 2/7, 3/7 and 4/7. The rest are against meta-oe (altho=
-ugh I=20
-acknowledge php ought to be moved to meta-webserver and eventually merg=
-ed to a=20
-common .inc with modphp).
+except sent without -M and not moving to oe-core prefix like mine does.
 
 Cheers,
-Paul
 
 --=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--yrj/dFKFPuw6o+aM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlC0nkoACgkQN1Ujt2V2gBz/rACfY18g1Rcq5oK8sQ+Qo6YBBEmP
+jx8Ani/O9dfjdE+FhN4NgGf16mPYehLw
+=939w
+-----END PGP SIGNATURE-----
+
+--yrj/dFKFPuw6o+aM--
