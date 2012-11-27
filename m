@@ -1,24 +1,24 @@
 Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdJWR-0004ez-6T
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TdJWR-0004ex-7k
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 27 Nov 2012 12:40:15 +0100
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 27 Nov 2012 03:26:01 -0800
+	by orsmga101.jf.intel.com with ESMTP; 27 Nov 2012 03:26:02 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="224990816"
+X-IronPort-AV: E=Sophos;i="4.83,328,1352102400"; d="scan'208";a="224990820"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.231])
-	by orsmga001.jf.intel.com with ESMTP; 27 Nov 2012 03:25:59 -0800
+	by orsmga001.jf.intel.com with ESMTP; 27 Nov 2012 03:26:00 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Nov 2012 11:25:50 +0000
-Message-Id: <9226f8dee8dc0fae7bc8c2fe1071515043d15200.1354015335.git.paul.eggleton@linux.intel.com>
+Date: Tue, 27 Nov 2012 11:25:51 +0000
+Message-Id: <bc2eb5cababd66fd17d6efe95c1b4c1319f5fbc7.1354015335.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1354015335.git.paul.eggleton@linux.intel.com>
 References: <cover.1354015335.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1354015335.git.paul.eggleton@linux.intel.com>
 References: <cover.1354015335.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH v3 5/8] vblade: add from OE-Classic, update and tidy up
+Subject: [meta-networking][PATCH v3 6/8] xl2tpd: add from OE-Classic, update and tidy up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,66 +34,149 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 27 Nov 2012 11:40:16 -0000
 
-* Update to version 20
+* Update to version 1.3.1
+* Fetch source from a git tag as upstream apparently no longer publishes
+  release tarballs
+* Add virtual/kernel to DEPENDS since it needs the kernel source
+* Inherit update-rc.d.bbclass
+* Handle hardcoded paths in initscript
 * Add LIC_FILES_CHKSUM
-* Make LICENSE more accurate
 * Set SUMMARY (which sets DESCRIPTION)
+* Remove some unnecessary cruft
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../recipes-daemons/vblade/files/cross.patch       |   16 ++++++++++++++++
- .../recipes-daemons/vblade/vblade_20.bb            |   20 ++++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/vblade/files/cross.patch
- create mode 100644 meta-networking/recipes-daemons/vblade/vblade_20.bb
+ .../xl2tpd/xl2tpd-1.3.1/cflags.patch               |   58 ++++++++++++++++++++
+ .../recipes-protocols/xl2tpd/xl2tpd.inc            |   40 ++++++++++++++
+ .../recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb       |    8 +++
+ 3 files changed, 106 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+ create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
 
-diff --git a/meta-networking/recipes-daemons/vblade/files/cross.patch b/meta-networking/recipes-daemons/vblade/files/cross.patch
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch b/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
 new file mode 100644
-index 0000000..481b6fa
+index 0000000..3550812
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/vblade/files/cross.patch
-@@ -0,0 +1,16 @@
-+Remove CC and CFLAGS values, we set these ourselves
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
+@@ -0,0 +1,58 @@
++From 678d71e3b50f566776dbc29db49a1128be89caf6 Mon Sep 17 00:00:00 2001
++From: Paul Eggleton <paul.eggleton@linux.intel.com>
++Date: Fri, 26 Oct 2012 10:07:31 +0100
++Subject: [PATCH] Adjust CFLAGS for building within OE
 +
-+Upstream-status: Inappropriate [config]
++Updated version of cflags.patch from OE-Classic written by
++Vladimir Sorokin <sorokin@altell.ru>.
 +
-+diff -urN vblade-19.old//makefile vblade-19//makefile
-+--- vblade-19.old//makefile	2008-10-08 22:07:40.000000000 +0100
-++++ vblade-19//makefile	2008-11-18 19:07:51.700365029 +0000
-+@@ -9,8 +9,6 @@
-+ mandir = ${sharedir}/man
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++---
++ Makefile |    8 +++++---
++ 1 files changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 6f6481f..c7602db 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -62,7 +62,7 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
++ # are packages seperately (eg kernel-headers on Fedora)
++ # Note: 2.6.23+ support still needs some changes in the xl2tpd source
++ #
++-#OSFLAGS+= -DUSE_KERNEL
+++OSFLAGS+= -DUSE_KERNEL
++ #
++ #
++ # Uncomment the next line for FreeBSD
++@@ -90,7 +90,6 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
 + 
-+ O=aoe.o bpf.o ${PLATFORM}.o ata.o
-+-CFLAGS += -Wall -g -O2
-+-CC = gcc
++ IPFLAGS?= -DIP_ALLOCATION
 + 
-+ vblade: $O
-+ 	${CC} -o vblade $O
-diff --git a/meta-networking/recipes-daemons/vblade/vblade_20.bb b/meta-networking/recipes-daemons/vblade/vblade_20.bb
++-CFLAGS+= $(DFLAGS) -O2 -fno-builtin -Wall -DSANITY $(OSFLAGS) $(IPFLAGS)
++ HDRS=l2tp.h avp.h misc.h control.h call.h scheduler.h file.h aaa.h md5.h
++ OBJS=xl2tpd.o pty.o misc.o control.o avp.o call.o network.o avpsend.o scheduler.o file.o aaa.o md5.o
++ SRCS=${OBJS:.o=.c} ${HDRS}
++@@ -110,6 +109,9 @@ all: $(EXEC) pfc $(CONTROL_EXEC)
++ clean:
++ 	rm -f $(OBJS) $(EXEC) pfc.o pfc $(CONTROL_EXEC)
++ 
+++%.o: %.c
+++	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -o $@ -c $<
+++
++ $(EXEC): $(OBJS) $(HDRS)
++ 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
++ 
++@@ -117,7 +119,7 @@ $(CONTROL_EXEC): $(CONTROL_SRCS)
++ 	$(CC) $(CONTROL_SRCS) -o $@
++ 
++ pfc:
++-	$(CC) $(CFLAGS) -c contrib/pfc.c
+++	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -c contrib/pfc.c
++ 	$(CC) $(LDFLAGS) -o pfc pfc.o -lpcap $(LDLIBS)
++ 
++ romfs:
++-- 
++1.7.1
++
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
 new file mode 100644
-index 0000000..2cf7e65
+index 0000000..cea5427
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/vblade/vblade_20.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Virtual EtherDrive blade AoE target"
-+SECTION = "console/network"
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+@@ -0,0 +1,40 @@
++SUMMARY = "Xelerance version of the Layer 2 Tunneling Protocol (L2TP) daemon"
++HOMEPAGE = "http://www.xelerance.com/software/xl2tpd/"
++SECTION = "network"
++DEPENDS = "ppp virtual/kernel"
 +
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${PN}-${PV}.tgz \
-+	   file://cross.patch"
++INC_PR = "r0"
 +
-+SRC_URI[md5sum] = "3c80e4a6bc7d66ae0c235b88cb44bd59"
-+SRC_URI[sha256sum] = "c8fe2fc4f2fba8e07e5cfdf17335982584eef2cd5c78bf8b1db93f2b56e7121d"
++SRC_URI = "git://github.com/xelerance/xl2tpd.git"
 +
-+inherit autotools
++S = "${WORKDIR}/git"
 +
-+do_install() {
-+	install -D -m 0755 ${S}/vblade ${D}/${sbindir}/vblade
-+	install -D -m 0755 ${S}/vbladed ${D}/${sbindir}/vbladed
-+	install -D -m 0644 ${S}/vblade.8 ${D}/${mandir}/man8/vblade.8
++inherit update-rc.d
++
++do_compile () {
++	oe_runmake CFLAGS="${CFLAGS} -DLINUX" LDFLAGS="${LDFLAGS}" PREFIX="${prefix}" KERNELSRC=${STAGING_KERNEL_DIR} all
 +}
++
++do_install () {
++	oe_runmake PREFIX="${D}${prefix}" install
++
++	install -d ${D}${sysconfdir}/init.d
++	touch ${D}${sysconfdir}/xl2tpd.conf
++	install -m 0755 debian/xl2tpd.init ${D}${sysconfdir}/init.d/xl2tpd
++	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
++	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
++	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
++	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/xl2tpd
++
++	install -d ${D}${sysconfdir}/default
++	install -m 0644 debian/xl2tpd.default ${D}${sysconfdir}/default/xl2tpd
++}
++
++CONFFILES_${PN} += "${sysconfdir}/xl2tpd.conf ${sysconfdir}/default/xl2tpd"
++
++INITSCRIPT_PACKAGES = "${PN}"
++INITSCRIPT_NAME_${PN} = "xl2tpd"
++
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
+new file mode 100644
+index 0000000..5321d6a
+--- /dev/null
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
+@@ -0,0 +1,8 @@
++require xl2tpd.inc
++PR = "${INC_PR}.0"
++
++# 95445fc9aaeaf709d54c1cd934d4bed4467e910d corresponds to 1.3.1 tag
++SRCREV = "95445fc9aaeaf709d54c1cd934d4bed4467e910d"
++
++SRC_URI += " file://cflags.patch"
 +
 -- 
 1.7.9.5
