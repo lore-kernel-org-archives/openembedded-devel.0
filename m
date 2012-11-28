@@ -1,35 +1,35 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tdnnd-0002rV-DV
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tdnnt-0003Ez-VO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 21:00:01 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa10so4267016pad.6
+	Wed, 28 Nov 2012 21:00:18 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so2623836dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2012 11:45:46 -0800 (PST)
+	Wed, 28 Nov 2012 11:46:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
 	bh=2Y4oc9OGfhe0TlgthhW6c901sSquCFUSz0JmPFoDBcQ=;
-	b=XheDzl844a60/tX+9NdnlUEUJbtHPjr0JNTUkquIlfJ3Z5HvdfZ1lYLFfCWi8P+QWS
-	FQnIb27lb3Xuti01M7ZlZUwkFbiqX11i6hriJqnO2CjYFGfpVMjo6V2nY1KyOoOlshYm
-	/6rGi0dAOVGqDgWPqnVJGtmAnFvswejcCCOoXj880L9ty16sxnPeUdcTjmH9eRNygb5f
-	bSC07enpC6rZzdB1r5uxq8WPM4uo6+WdDbhDW2jdGlwi8g/UVF2TfnLHEJB5fW4hSO2r
-	j974DEopA3n1N2eSiktFArP51P7B1HtIITUXQg9OkEcLdfVXJ+iG3oZ/HId4Ss3QPbnA
-	UIpQ==
+	b=If3REzzo5+McweRrNgBjb6eWbafQXhrUQhxUOBmajQeI3nPQPXSra/1WbHBRGs4d1b
+	5oosd1TwyIKFPxFdlEwZzuG8Zm4aSVG0Zhmojb7IIF4F0PHmfnBimNhb5UrF3x+tsF6x
+	W87ikl7+I/PwiFGFB7/diq6BFKEN1YP/s31WOdQkRA3y4a9O+p7t5Eqae4yMoyIFYOxw
+	/z96UaqzouCWWy6uQUmsfNOFbMcvSseCC1G+HSoMO/horVk6VHIV4gdAZrTL8kYpQkSP
+	JdGW9Mg1B1jHwwVGJcdZMJDO0LJP3jLZw0z1Jjh1KAuO/QjPlsnczeGPXOb8yRhIq6Gs
+	F9YQ==
 MIME-Version: 1.0
-Received: by 10.68.189.8 with SMTP id ge8mr62406477pbc.24.1354131946010; Wed,
-	28 Nov 2012 11:45:46 -0800 (PST)
+Received: by 10.66.90.101 with SMTP id bv5mr54907362pab.42.1354131962430; Wed,
+	28 Nov 2012 11:46:02 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Wed, 28 Nov 2012 11:45:45 -0800 (PST)
-In-Reply-To: <1354131040-9077-4-git-send-email-mario@ossystems.com.br>
+Received: by 10.68.16.225 with HTTP; Wed, 28 Nov 2012 11:46:02 -0800 (PST)
+In-Reply-To: <1354131040-9077-5-git-send-email-mario@ossystems.com.br>
 References: <1354131040-9077-1-git-send-email-mario@ossystems.com.br>
-	<1354131040-9077-4-git-send-email-mario@ossystems.com.br>
-Date: Wed, 28 Nov 2012 17:45:45 -0200
-X-Google-Sender-Auth: DSswJKAe6cUVU7te69bdhrGlbZU
-Message-ID: <CAP9ODKr=sE5uFdM6k4nzVOObu4zX0DhdfzBsO_3jYGXUpxmKSg@mail.gmail.com>
+	<1354131040-9077-5-git-send-email-mario@ossystems.com.br>
+Date: Wed, 28 Nov 2012 17:46:02 -0200
+X-Google-Sender-Auth: hZFnPNUcNwqNGUBuZA7E-5I2gTI
+Message-ID: <CAP9ODKpBctE7twU=ixRkZtfY_gGtdt6TX5z30xvn1mW+tG0W9g@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/6] xinput-calibrator: update to 2012 Aug 2nd's git snapshot
+Subject: Re: [meta-oe][meta-systemd][PATCH 5/6] xinput-calibrator: update meta-systemd's bbappend to 2012 Aug 2nd's git snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 20:00:01 -0000
+X-List-Received-Date: Wed, 28 Nov 2012 20:00:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Wed, Nov 28, 2012 at 5:30 PM, Mario Domenech Goulart
