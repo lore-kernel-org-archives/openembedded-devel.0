@@ -1,39 +1,22 @@
-Received: from mo3.mail-out.ovh.net ([178.32.228.3])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Tdptf-0006R5-7j
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TdqA9-0006iq-ED
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 23:14:23 +0100
-Received: from mail632.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo3.mail-out.ovh.net (Postfix) with SMTP id 00456FFA4C4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2012 19:35:06 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 28 Nov 2012 20:23:46 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 28 Nov 2012 20:23:45 +0200
-Date: Wed, 28 Nov 2012 19:23:44 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Wed, 28 Nov 2012 23:31:25 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 9B5A8D22EB;
+	Wed, 28 Nov 2012 23:17:22 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
-Message-ID: <20121128192344.2ddd9f92@eb-e6520>
-In-Reply-To: <50B61D47.7030904@communistcode.co.uk>
-References: <1354033003-31657-1-git-send-email-eric@eukrea.com>
-	<50B61D47.7030904@communistcode.co.uk>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 6246774159300734281
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Subject: Re: [meta-oe][PATCH 1/3] php: upgrade to 5.3.19
+Date: Wed, 28 Nov 2012 23:17:09 +0100
+Message-Id: <1354141029-8687-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.0
+In-Reply-To: <20121128210948.0f75a586@eb-e6520>
+References: <20121128210948.0f75a586@eb-e6520>
+Subject: [meta-oe][PATCH] php: add apache configuration for php-fpm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +30,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 22:14:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Nov 2012 22:31:25 -0000
 
-Le Wed, 28 Nov 2012 14:18:47 +0000,
-Jack Mitchell <ml@communistcode.co.uk> a =E9crit :
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-devtools/php/php.inc                 | 8 ++++++--
+ meta-oe/recipes-devtools/php/php/php-fpm-apache.conf | 6 ++++++
+ meta-oe/recipes-devtools/php/php_5.3.19.bb           | 1 +
+ 3 files changed, 13 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
 
-> On 27/11/12 16:16, Eric B=E9nard wrote:
-> > [snip]
->=20
-> Was there a patch to bring this over to meta-webserver too?
->=20
-that's WIP based on a previous work by Marcin, I expect to be able to
-test that by the begining of next week.
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 7850c1e..5e5a087 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
+            libc-client openssl sqlite3"
+ DEPENDS_virtclass-native = "zlib-native libxml2-native"
+ 
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
+ 
+@@ -65,6 +65,8 @@ do_install_append_pn-php() {
+     rm -rf ${D}/.[a-z]*
+     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
+     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
++    install -d ${D}/${sysconfdir}/apache2/conf.d
++    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
+     install -d ${D}${sysconfdir}/init.d
+     sed -i 's:=/usr/sbin:=${sbindir}:g' ${S}/sapi/fpm/init.d.php-fpm
+     sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
+@@ -72,7 +74,7 @@ do_install_append_pn-php() {
+     install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+ }
+ 
+-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
++PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+ 
+ RDEPENDS_${PN}-pear = "${PN}"
+ RDEPENDS_${PN}-cli = "${PN}"
+@@ -86,7 +88,9 @@ FILES_${PN}-doc += "${libdir}/php/doc"
+ FILES_${PN}-cli = "${bindir}/php"
+ FILES_${PN}-cgi = "${bindir}/php-cgi"
+ FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
++FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+ CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
++CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+ INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
+ INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
+ FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${libdir}/php/PEAR \
+diff --git a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
+new file mode 100644
+index 0000000..77cdd82
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
+@@ -0,0 +1,6 @@
++# Taken from http://wiki.apache.org/httpd/PHP-FPM
++
++LoadModule proxy_module      lib/apache2/modules/mod_proxy.so
++LoadModule proxy_fcgi_module lib/apache2/modules/mod_proxy_fcgi.so
++
++ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/share/apache2/htdocs/
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes-devtools/php/php_5.3.19.bb
+index 27baa1d..8204104 100644
+--- a/meta-oe/recipes-devtools/php/php_5.3.19.bb
++++ b/meta-oe/recipes-devtools/php/php_5.3.19.bb
+@@ -15,6 +15,7 @@ SRC_URI_append_pn-php += "file://iconv.patch \
+             file://php_exec_native.patch \
+             file://fix-fpm-cross-compile.patch \
+             file://php-fpm.conf \
++            file://php-fpm-apache.conf \
+             "
+ 
+ SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
+-- 
+1.8.0
 
-PHP can be used as php-cli so not in a webserver context so maybe the
-best way to handle that would be to have php in meta-oe to generate
-php-cli and a bbappend in meta-webserver to general php-cgi, php-fpm
-and modphp when meta-webserver is enabled.
-
-Eric
 
 
