@@ -1,35 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tdnli-0002ah-F4
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tdnm5-0002cV-4o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 20:58:02 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so7481290pbc.6
+	Wed, 28 Nov 2012 20:58:29 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa10so4266083pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2012 11:43:47 -0800 (PST)
+	Wed, 28 Nov 2012 11:44:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=hBGqqv5xO79HfbjA0UgyOP/X421CcE3aAPYDAcwhvUI=;
-	b=fxGKGGnvWDtkloOFSFR/hz1u8iC2LpLCasrhcCIiu91tDzHkvmfTsitj5b1i4iLc/N
-	VfYYwvTnXjM//VSjJhYg7RDcKf1g4/uoQrELotJkSx6EvAgmp4/sH0qhMIy5+aqSEoE/
-	Z3FkxrfnHa1DH3019wSKUmF1tW1cu1ZubWxn6vdfx7H/cePCwd1DULwM/ns/nCgdue8+
-	bWZKDpsp8uKo4lHX05sXdRVBuSqLrGhK6ON2r6Ify06yQOltG4rVNsd1XYbCutj+cVRq
-	DXraHla6cqTSd5RVtX/RwTB3ZZkYzFhx2X8EnhOuUmcL7eH3URSdyBPd7wBBCQjq30WH
-	3oMA==
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=2Y4oc9OGfhe0TlgthhW6c901sSquCFUSz0JmPFoDBcQ=;
+	b=U+9VLpFZYpQbaGy3B7o+J1xh6EMFMoQ3qsTRb+4mV5jrJg7r4IINNTuoBcW4OH3vEf
+	Dj+ApzMKoyH07WIUglmp0v+zHG1QAmMexS9ujOg3eJkzotBai6OVRZ/6H78pltb7EIjF
+	zXEo+PZ5LcO0yUkWLHsV4pbY7nIPdIqFcdPazXb4f84kra8SbWP9RruyvbDnWudCXqsX
+	jpNKc31SEd4C3d09Ty0S/j5WW8K5r9cuzxUegOn7BaM8Sr6EFlYZAiZGVcbV2Bky9fZ3
+	Y6+Zi8Nd7eVq9lvOUBHqLSA171O4ol+YuD8a7HH4q3LHWn4fXfK0uhYVhDlF5ZyUdyli
+	Lwqw==
 MIME-Version: 1.0
-Received: by 10.68.234.98 with SMTP id ud2mr61470780pbc.136.1354131826855;
-	Wed, 28 Nov 2012 11:43:46 -0800 (PST)
+Received: by 10.68.204.103 with SMTP id kx7mr61720487pbc.33.1354131849720;
+	Wed, 28 Nov 2012 11:44:09 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.68.16.225 with HTTP; Wed, 28 Nov 2012 11:43:46 -0800 (PST)
-In-Reply-To: <1354131040-9077-1-git-send-email-mario@ossystems.com.br>
+Received: by 10.68.16.225 with HTTP; Wed, 28 Nov 2012 11:44:09 -0800 (PST)
+In-Reply-To: <1354131040-9077-2-git-send-email-mario@ossystems.com.br>
 References: <1354131040-9077-1-git-send-email-mario@ossystems.com.br>
-Date: Wed, 28 Nov 2012 17:43:46 -0200
-X-Google-Sender-Auth: FM_S_rjyc2hBiZw5wW8F64iCSEU
-Message-ID: <CAP9ODKowoJ2onNhd4qO3Oxi+fXrnWAOz+DfSvLJg_zNpJ3Re1w@mail.gmail.com>
+	<1354131040-9077-2-git-send-email-mario@ossystems.com.br>
+Date: Wed, 28 Nov 2012 17:44:09 -0200
+X-Google-Sender-Auth: ZYJrxNOKJLzY2fJ3mbXkaZD8yX8
+Message-ID: <CAP9ODKpJ=CBbTaXUzZJ4WVKKjpG00-+x6v_1pfpnYizopiPR-Q@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH 1/6] freerdp: disable man pages generation
+Subject: Re: [meta-oe][PATCH 2/6] freerdp: update to the latest commit (2012-11-20) in the stable-1.0 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,14 +43,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 19:58:02 -0000
+X-List-Received-Date: Wed, 28 Nov 2012 19:58:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Wed, Nov 28, 2012 at 5:30 PM, Mario Domenech Goulart
 <mario@ossystems.com.br> wrote:
-> Man pages generation uses xmlto, and it seems that it is currently
-> broken on OE.
->
 > Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 
 Acked-by: Otavio Salvador <otavio@ossystems.com.br>
