@@ -1,40 +1,35 @@
-Received: from 18.mo3.mail-out.ovh.net ([87.98.172.162]
-	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TdoPn-000415-9S
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1TdodL-0004O6-S9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 21:39:29 +0100
-Received: from mail637.ha.ovh.net (b7.ovh.net [213.186.33.57])
-	by mo3.mail-out.ovh.net (Postfix) with SMTP id 9419CFFA1F8
+	Wed, 28 Nov 2012 21:53:29 +0100
+Received: by mail-pb0-f47.google.com with SMTP id un1so7510686pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2012 21:21:11 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 28 Nov 2012 22:10:20 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 28 Nov 2012 22:10:19 +0200
-Date: Wed, 28 Nov 2012 21:09:48 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: marcin.juszkiewicz@linaro.org
-X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
-Message-ID: <20121128210948.0f75a586@eb-e6520>
-In-Reply-To: <1354114941-14552-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <50B61115.6000008@linaro.org>
-	<1354114941-14552-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 8046525159692021065
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] php: add apache configuration for php-fpm
+	Wed, 28 Nov 2012 12:39:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=3FmnS7z8ojnoya3EFAYL75SXawcsuDW4uiVB3xfCpHw=;
+	b=xpGPIQfpOh7hIkYPkT2IZtS7Kaj8jzbecqs0b8YMjxECUO7KBZjikOvLZM7MoHRT/c
+	J5vLcbBRNUnHLXHQ/naaFxjGHmuEu9e7f9neyghBP8Myi8tb4dkYnGRdfeRrxmvkcBX1
+	0Qyxl/fkcDmBwONG8Xqn10gBGDNLEHt3knCjM1Ej7tEYAbE4KYKfEqSlAfApyLolb124
+	9aIllJThfSEw33NJszS8Tuk38m6jLMhLNA6j7twcQntf4x3aZNkvEiMKICxGMjKoRiwS
+	qkFeDDJyfk9RMw2gQOHTNg4vlxeJWqt2VpG1IBPe1GMbQUxLlX08yAeorAWRYpHbjDmV
+	FhYA==
+MIME-Version: 1.0
+Received: by 10.68.204.103 with SMTP id kx7mr62117487pbc.33.1354135152222;
+	Wed, 28 Nov 2012 12:39:12 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.16.225 with HTTP; Wed, 28 Nov 2012 12:39:12 -0800 (PST)
+In-Reply-To: <1354134260-19880-1-git-send-email-cazfi74@gmail.com>
+References: <1354134260-19880-1-git-send-email-cazfi74@gmail.com>
+Date: Wed, 28 Nov 2012 18:39:12 -0200
+X-Google-Sender-Auth: 8cza2d5mPLsp8qFpxpOHe1ignJI
+Message-ID: <CAP9ODKo-DdJFiWJttKiC=n8wfja2mYEnr8UPznrBG-yhFZgM5Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] lua: update to upstream version 5.1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 20:39:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Nov 2012 20:53:29 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Marcin,
+On Wed, Nov 28, 2012 at 6:24 PM, Marko Lindqvist <cazfi74@gmail.com> wrote:
+> COPYRI=C7=B4HT: (C) years now up to 2012
+>
+> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 
-Le Wed, 28 Nov 2012 16:02:21 +0100,
-Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org> a =E9crit :
+Just clarify that this is the reason of md5 has been change, in the
+license check.
 
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  meta-oe/recipes-devtools/php/php.inc       | 8 ++++++--
->  meta-oe/recipes-devtools/php/php_5.3.19.bb | 1 +
->  2 files changed, 7 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes=
--devtools/php/php_5.3.19.bb
-> index 27baa1d..8204104 100644
-> --- a/meta-oe/recipes-devtools/php/php_5.3.19.bb
-> +++ b/meta-oe/recipes-devtools/php/php_5.3.19.bb
-> @@ -15,6 +15,7 @@ SRC_URI_append_pn-php +=3D "file://iconv.patch \
->              file://php_exec_native.patch \
->              file://fix-fpm-cross-compile.patch \
->              file://php-fpm.conf \
-> +            file://php-fpm-apache.conf \
->              "
-the conf file is missing from your patch.
-
-Eric
+--=20
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
