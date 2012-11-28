@@ -1,53 +1,26 @@
-Received: from co9ehsobe001.messaging.microsoft.com ([207.46.163.24]
-	helo=co9outboundpool.messaging.microsoft.com)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1TdTir-0001Es-80
+	(envelope-from <Yanjun.Zhu@windriver.com>) id 1TdXpt-0007LL-En
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Nov 2012 23:33:45 +0100
-Received: from mail148-co9-R.bigfish.com (10.236.132.235) by
-	CO9EHSOBE035.bigfish.com (10.236.130.98) with Microsoft SMTP Server id
-	14.1.225.23; Tue, 27 Nov 2012 22:04:24 +0000
-Received: from mail148-co9 (localhost [127.0.0.1])	by
-	mail148-co9-R.bigfish.com (Postfix) with ESMTP id D2599880104	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 22:04:23 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 2
-X-BigFish: VS2(zz98dI9371I1432Izz1de0h1202h1d1ah1d2ahzz8275bhz2dh2a8h668h839h8e2h8e3hd25hf0ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441h1537h153bh162dh1631hbe9i15d0l1155h)
-Received: from mail148-co9 (localhost.localdomain [127.0.0.1]) by mail148-co9
-	(MessageSwitch) id 1354053861452479_8406;
-	Tue, 27 Nov 2012 22:04:21 +0000 (UTC)
-Received: from CO9EHSMHS018.bigfish.com (unknown [10.236.132.249])	by
-	mail148-co9.bigfish.com (Postfix) with ESMTP id 62C5658005A	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 22:04:21 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS018.bigfish.com
-	(10.236.130.28) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Tue, 27 Nov 2012 22:04:17 +0000
-Received: from 039-SN1MPN1-001.039d.mgd.msft.net ([169.254.1.124]) by
-	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
-	14.02.0318.003; Tue, 27 Nov 2012 22:04:16 +0000
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: Liu Ting-B28495 <B28495@freescale.com>
-Thread-Topic: [oe][meta-oe] samba: Fix build on Fedora 17
-Thread-Index: AQHNyVn/Sg+xDfUmS0GJoykdAxQe0Zf+Q3iA
-Date: Tue, 27 Nov 2012 22:04:15 +0000
-Message-ID: <70CC66F5C30A414DADDA6973E4CA391A7AE823@039-SN1MPN1-001.039d.mgd.msft.net>
-References: <1353661652-29949-1-git-send-email-b28495@freescale.com>
-In-Reply-To: <1353661652-29949-1-git-send-email-b28495@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [70.112.201.132]
+	Wed, 28 Nov 2012 03:57:17 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAS2h2AE029469
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Nov 2012 18:43:02 -0800 (PST)
+Received: from pek-lpgbuild4.wrs.com (128.224.153.32) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Tue, 27 Nov 2012 18:43:01 -0800
+From: "yanjun.zhu" <yanjun.zhu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Nov 2012 10:42:58 +0800
+Message-ID: <1354070578-5401-1-git-send-email-yanjun.zhu@windriver.com>
+X-Mailer: git-send-email 1.7.11
+In-Reply-To: <3487>
+References: <3487>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: McClintock Matthew-B29882 <B29882@freescale.com>,
-	Guo Chunrong-B40290 <B40290@freescale.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Zhenhua-B19537 <B19537@freescale.com>, Luo
-Subject: Re: [meta-oe] samba: Fix build on Fedora 17
+Subject: [PATCH] libproxy: Fix for CVE-2012-4504
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,68 +34,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 22:33:45 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <97000571C5A26C4AA3AA750864114A51@mgd.freescale.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Nov 2012 02:57:17 -0000
+Content-Type: text/plain
 
-On Fri, Nov 23, 2012 at 3:07 AM,  <b28495@freescale.com> wrote:
-> From: Ting Liu <b28495@freescale.com>
->
-> Fedora 17 has /bin/perl, this causes samba build to put perl interpreter
-> path as /bin/perl But we set perl location for target as /usr/bin/perl
->
-> This mismatch of perl path causes failure of rootfs image creation:
-> | error: Failed dependencies:
-> |       /bin/perl is needed by samba-3.6.8-r1.ppce5500
->
-> Signed-off-by: Ting Liu <b28495@freescale.com>
-> ---
->  meta-oe/recipes-connectivity/samba/samba.inc      | 2 ++
->  meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 2 +-
->  2 files changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recip=
-es-connectivity/samba/samba.inc
-> index faa2be0..c4430d1 100644
-> --- a/meta-oe/recipes-connectivity/samba/samba.inc
-> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
-> @@ -88,6 +88,8 @@ do_install_append() {
->          install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.s=
-o ${D}${libdir}/libnss_winbind.so.2
->          install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so $=
-{D}${libdir}/libnss_wins.so.2
->
-> +        sed -i -e '1s,#!.*perl,#! ${USRBINPATH}/env perl,' ${D}${bindir}=
-/findsmb
-> +
+From: "yanjun.zhu" <yanjun.zhu@windriver.com>
 
-Extra space?
+Reference:https://code.google.com/p/libproxy/source/detail?r=853
 
--M
+Stack-based buffer overflow in the url::get_pac function in url.cpp
+in libproxy 0.4.x before 0.4.9 allows remote servers to have an
+unspecified impact via a large proxy.pac file.
 
->  }
->
->
-> diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/=
-recipes-connectivity/samba/samba_3.6.8.bb
-> index cc09a48..7c54dae 100644
-> --- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-> +++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-> @@ -3,7 +3,7 @@ require samba-basic.inc
->  LICENSE =3D "GPLv3"
->  LIC_FILES_CHKSUM =3D "file://../COPYING;md5=3Dd32239bcb673463ab874e80d47=
-fae504"
->
-> -PR =3D "r1"
-> +PR =3D "r2"
->
->  SRC_URI +=3D "\
->      file://config-h.patch \
-> --
-> 1.7.11.7
->=
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-4504
+
+Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+---
+ recipes-support/libproxy/libproxy_0.4.7.bbappend          |  5 +++++
+ .../libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch   | 15 +++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
+
+diff --git a/recipes-support/libproxy/libproxy_0.4.7.bbappend b/recipes-support/libproxy/libproxy_0.4.7.bbappend
+index e2d2ea2..55d3332 100644
+--- a/recipes-support/libproxy/libproxy_0.4.7.bbappend
++++ b/recipes-support/libproxy/libproxy_0.4.7.bbappend
+@@ -1,10 +1,15 @@
+ PRINC = "1"
+ 
++FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
++
+ # the libproxy-${PV}.tar.gz had many warning/error messages
+ SRC_URI = "http://libproxy.googlecode.com/files/libproxy-${PV}.zip \
+ 	file://g++-namepace.patch \
+ 	file://libproxy_fix_for_gcc4.7.patch \
+ 	"
+ 
++SRC_URI += "file://libproxy-0.4.7-CVE-2012-4504.patch \
++           "
++
+ SRC_URI[md5sum] = "62585570de17d10f03a5a63b701ffd52"
+ SRC_URI[sha256sum] = "429a19c57d9990349d622beecc805b23051caa62a478066bff5d9a312a8937be"
+diff --git a/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch b/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
+new file mode 100644
+index 0000000..323a571
+--- /dev/null
++++ b/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
+@@ -0,0 +1,15 @@
++diff -urpN a/libproxy/url.cpp b/libproxy/url.cpp
++--- a/libproxy/url.cpp	2012-11-26 10:08:47.000000000 +0800
+++++ b/libproxy/url.cpp	2012-11-26 10:05:54.000000000 +0800
++@@ -472,9 +472,10 @@ char* url::get_pac() {
++ 				// Add this chunk to our content length,
++ 				// ensuring that we aren't over our max size
++ 				content_length += chunk_length;
++-				if (content_length >= PAC_MAX_SIZE) break;
++ 			}
++ 
+++			if (content_length >= PAC_MAX_SIZE) break;
+++
++ 			while (recvd != content_length) {
++ 				int r = recv(sock, buffer + recvd, content_length - recvd, 0);
++ 				if (r < 0) break;
+-- 
+1.7.11
 
 
 
