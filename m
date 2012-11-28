@@ -1,26 +1,32 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Yanjun.Zhu@windriver.com>) id 1TdXpt-0007LL-En
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tdd3N-0002Ae-2e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 03:57:17 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAS2h2AE029469
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 28 Nov 2012 09:31:33 +0100
+Received: by mail-ia0-f175.google.com with SMTP id z3so9283356iad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Nov 2012 18:43:02 -0800 (PST)
-Received: from pek-lpgbuild4.wrs.com (128.224.153.32) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.318.4; Tue, 27 Nov 2012 18:43:01 -0800
-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Nov 2012 10:42:58 +0800
-Message-ID: <1354070578-5401-1-git-send-email-yanjun.zhu@windriver.com>
-X-Mailer: git-send-email 1.7.11
-In-Reply-To: <3487>
-References: <3487>
+	Wed, 28 Nov 2012 00:17:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=Un5CPccIS9jR+gZMPF1WCQceLBYY5wS8mU2+tSC+C9o=;
+	b=k05WY88CNGF4YM/alFEC+nQD0fdrExTGlc94RKajM4hzNdOf55w6RjsyfarpmkdSUL
+	ozirws2T9TbOgQ5LUjGPHCVxR7TnIAZ3W6jfbhPC7TBgfc78bXxSImsx8ER92Lmnj2J/
+	Pm26Ci2JTAbUIFmHYl6WdwqXqvGNEGBO3N9WblLm1E4zFPdIWllGbBt9WLGaaRmsZQll
+	BTyol7SU1RJecdkDu53KVLhMQk5DUMn8G7fpuEFUasv4pFEtV+QURR2IYJDCEUsq351c
+	Vld5osCpyHQMupjli4TKIjBvJB5m3JFS0peiNgyF6gSA6WRPr4u7kShjhA1J6MH7WyGa
+	svdg==
 MIME-Version: 1.0
-Subject: [PATCH] libproxy: Fix for CVE-2012-4504
+Received: by 10.50.104.232 with SMTP id gh8mr21239587igb.45.1354090638453;
+	Wed, 28 Nov 2012 00:17:18 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Wed, 28 Nov 2012 00:17:18 -0800 (PST)
+In-Reply-To: <1353503805-5711-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1353503805-5711-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 28 Nov 2012 09:17:18 +0100
+Message-ID: <CALbNGRSosM5Rh96RTQWAv0L4p-_XF6EkErzMUzdHNOAA++OU=Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe/meta-systemd] lxdm: bugfixes by updating to latest git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,69 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 02:57:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 28 Nov 2012 08:31:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-
-Reference:https://code.google.com/p/libproxy/source/detail?r=853
-
-Stack-based buffer overflow in the url::get_pac function in url.cpp
-in libproxy 0.4.x before 0.4.9 allows remote servers to have an
-unspecified impact via a large proxy.pac file.
-
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-4504
-
-Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
----
- recipes-support/libproxy/libproxy_0.4.7.bbappend          |  5 +++++
- .../libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch   | 15 +++++++++++++++
- 2 files changed, 20 insertions(+)
- create mode 100644 recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
-
-diff --git a/recipes-support/libproxy/libproxy_0.4.7.bbappend b/recipes-support/libproxy/libproxy_0.4.7.bbappend
-index e2d2ea2..55d3332 100644
---- a/recipes-support/libproxy/libproxy_0.4.7.bbappend
-+++ b/recipes-support/libproxy/libproxy_0.4.7.bbappend
-@@ -1,10 +1,15 @@
- PRINC = "1"
- 
-+FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
-+
- # the libproxy-${PV}.tar.gz had many warning/error messages
- SRC_URI = "http://libproxy.googlecode.com/files/libproxy-${PV}.zip \
- 	file://g++-namepace.patch \
- 	file://libproxy_fix_for_gcc4.7.patch \
- 	"
- 
-+SRC_URI += "file://libproxy-0.4.7-CVE-2012-4504.patch \
-+           "
-+
- SRC_URI[md5sum] = "62585570de17d10f03a5a63b701ffd52"
- SRC_URI[sha256sum] = "429a19c57d9990349d622beecc805b23051caa62a478066bff5d9a312a8937be"
-diff --git a/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch b/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
-new file mode 100644
-index 0000000..323a571
---- /dev/null
-+++ b/recipes-support/libproxy/patches/libproxy-0.4.7-CVE-2012-4504.patch
-@@ -0,0 +1,15 @@
-+diff -urpN a/libproxy/url.cpp b/libproxy/url.cpp
-+--- a/libproxy/url.cpp	2012-11-26 10:08:47.000000000 +0800
-++++ b/libproxy/url.cpp	2012-11-26 10:05:54.000000000 +0800
-+@@ -472,9 +472,10 @@ char* url::get_pac() {
-+ 				// Add this chunk to our content length,
-+ 				// ensuring that we aren't over our max size
-+ 				content_length += chunk_length;
-+-				if (content_length >= PAC_MAX_SIZE) break;
-+ 			}
-+ 
-++			if (content_length >= PAC_MAX_SIZE) break;
-++
-+ 			while (recvd != content_length) {
-+ 				int r = recv(sock, buffer + recvd, content_length - recvd, 0);
-+ 				if (r < 0) break;
--- 
-1.7.11
-
+On Wed, Nov 21, 2012 at 2:16 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> * make keyboard layout combobox display languages properly
+> * systemd-support is included mainline
+> * autologin for timeouts < 5s works as expected
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |   10 ++++++++--
+>  .../recipes-graphics/lxdm/lxdm/lxdm.service.in     |   10 ----------
+>  .../recipes-graphics/lxdm/lxdm_git.bbappend        |   10 +---------
+>  3 files changed, 9 insertions(+), 21 deletions(-)
+>  delete mode 100644 meta-systemd/meta-oe/recipes-graphics/lxdm/lxdm/lxdm.=
+service.in
+>
+ping
 
 
