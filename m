@@ -1,35 +1,28 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TdhtR-0000ff-MX
+	(envelope-from <ml@communistcode.co.uk>) id 1Tdif9-0002CC-Q4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 14:41:37 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id 723F8D22C1; Wed, 28 Nov 2012 14:27:29 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 95A06D2218
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Nov 2012 14:26:58 +0100 (CET)
-Message-ID: <50B61115.6000008@linaro.org>
-Date: Wed, 28 Nov 2012 14:26:45 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
+	Wed, 28 Nov 2012 15:30:55 +0100
+Received: from localhost ([127.0.0.1]:60778 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TdiRN-0003r2-47
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Nov 2012 14:16:41 +0000
+Received: from [195.171.99.130] (port=19041 helo=[192.168.0.47])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TdiRN-0003qz-1o
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Nov 2012 14:16:41 +0000
+Message-ID: <50B61D47.7030904@communistcode.co.uk>
+Date: Wed, 28 Nov 2012 14:18:47 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1354033003-31657-1-git-send-email-eric@eukrea.com>
-	<1354033003-31657-3-git-send-email-eric@eukrea.com>
-In-Reply-To: <1354033003-31657-3-git-send-email-eric@eukrea.com>
-Subject: Re: [meta-oe][PATCH 3/3] php: enable php-fpm
+In-Reply-To: <1354033003-31657-1-git-send-email-eric@eukrea.com>
+Subject: Re: [meta-oe][PATCH 1/3] php: upgrade to 5.3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,19 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 13:41:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Nov 2012 14:30:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-W dniu 27.11.2012 17:16, Eric B=C3=A9nard pisze:
-> - php-fpm is an alternative PHP FastCGI implementation which seems to
-> be now prefered to php-fcgi
-> - this patch enable the build of php-fpm and packages it in its own
-> package
-> - it's tested with hiawatha on an armv5te target
+On 27/11/12 16:16, Eric Bénard wrote:
+> [snip]
 
-I tested with Apache 2.4.3 on AArch64 target. Works fine after extra 3
-lines of configuration. I wonder what would be best place for those -
-maybe "php-fpm-apache"?
+Was there a patch to bring this over to meta-webserver too?
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
 
