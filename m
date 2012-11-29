@@ -1,22 +1,20 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TdqA9-0006iq-ED
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1Tdz0o-0006fj-Iu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Nov 2012 23:31:25 +0100
+	Thu, 29 Nov 2012 08:58:24 +0100
 Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 9B5A8D22EB;
-	Wed, 28 Nov 2012 23:17:22 +0100 (CET)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 5F735D2218;
+	Thu, 29 Nov 2012 08:44:18 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Nov 2012 23:17:09 +0100
-Message-Id: <1354141029-8687-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Thu, 29 Nov 2012 08:43:58 +0100
+Message-Id: <1354175038-16001-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.0
-In-Reply-To: <20121128210948.0f75a586@eb-e6520>
-References: <20121128210948.0f75a586@eb-e6520>
-Subject: [meta-oe][PATCH] php: add apache configuration for php-fpm
+Subject: [meta-oe][PATCH] xfsprogs: updated to 3.1.8, added gnu-configize
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,81 +28,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 22:31:25 -0000
+X-List-Received-Date: Thu, 29 Nov 2012 07:58:24 -0000
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- meta-oe/recipes-devtools/php/php.inc                 | 8 ++++++--
- meta-oe/recipes-devtools/php/php/php-fpm-apache.conf | 6 ++++++
- meta-oe/recipes-devtools/php/php_5.3.19.bb           | 1 +
- 3 files changed, 13 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
+ .../remove-install-as-user.patch                                  | 0
+ .../xfsprogs/{xfsprogs_3.1.7.bb => xfsprogs_3.1.8.bb}             | 8 +++++---
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/xfsprogs/{xfsprogs-3.1.7 => xfsprogs-3.1.8}/remove-install-as-user.patch (100%)
+ rename meta-oe/recipes-support/xfsprogs/{xfsprogs_3.1.7.bb => xfsprogs_3.1.8.bb} (86%)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 7850c1e..5e5a087 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-            libc-client openssl sqlite3"
- DEPENDS_virtclass-native = "zlib-native libxml2-native"
+diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/remove-install-as-user.patch
+similarity index 100%
+rename from meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.7/remove-install-as-user.patch
+rename to meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/remove-install-as-user.patch
+diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+similarity index 86%
+rename from meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
+rename to meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+index 3bc4897..f83561d 100644
+--- a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.7.bb
++++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+@@ -5,13 +5,14 @@ LICENSE = "GPLv2"
+ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
+ DEPENDS = "util-linux"
+-PR = "r1"
++PR = "r0"
  
--INC_PR = "r2"
-+INC_PR = "r3"
+ SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
+ 	file://remove-install-as-user.patch \
+ "
+-SRC_URI[md5sum] = "049cf9873794ea49d0bb3f12d45748a4"
+-SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d75c8eaa"
++
++SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
++SRC_URI[sha256sum] = "74409e2e3748074999df25c00f722621659a0bd3607e677f0bcc4373b8c93eab"
  
- SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
+ inherit autotools
  
-@@ -65,6 +65,8 @@ do_install_append_pn-php() {
-     rm -rf ${D}/.[a-z]*
-     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
-     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
-+    install -d ${D}/${sysconfdir}/apache2/conf.d
-+    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
-     install -d ${D}${sysconfdir}/init.d
-     sed -i 's:=/usr/sbin:=${sbindir}:g' ${S}/sapi/fpm/init.d.php-fpm
-     sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
-@@ -72,7 +74,7 @@ do_install_append_pn-php() {
-     install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+@@ -26,6 +27,7 @@ FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
+ EXTRA_OECONF = "--enable-gettext=no"
+ do_configure () {
+ 	export DEBUG="-DNDEBUG"
++	gnu-configize --force
+ 	oe_runconf
  }
  
--PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
-+PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
- 
- RDEPENDS_${PN}-pear = "${PN}"
- RDEPENDS_${PN}-cli = "${PN}"
-@@ -86,7 +88,9 @@ FILES_${PN}-doc += "${libdir}/php/doc"
- FILES_${PN}-cli = "${bindir}/php"
- FILES_${PN}-cgi = "${bindir}/php-cgi"
- FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
-+FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
-+CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
- INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
- FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${libdir}/php/PEAR \
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-new file mode 100644
-index 0000000..77cdd82
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-@@ -0,0 +1,6 @@
-+# Taken from http://wiki.apache.org/httpd/PHP-FPM
-+
-+LoadModule proxy_module      lib/apache2/modules/mod_proxy.so
-+LoadModule proxy_fcgi_module lib/apache2/modules/mod_proxy_fcgi.so
-+
-+ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/share/apache2/htdocs/
-diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes-devtools/php/php_5.3.19.bb
-index 27baa1d..8204104 100644
---- a/meta-oe/recipes-devtools/php/php_5.3.19.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.3.19.bb
-@@ -15,6 +15,7 @@ SRC_URI_append_pn-php += "file://iconv.patch \
-             file://php_exec_native.patch \
-             file://fix-fpm-cross-compile.patch \
-             file://php-fpm.conf \
-+            file://php-fpm-apache.conf \
-             "
- 
- SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
 -- 
 1.8.0
 
