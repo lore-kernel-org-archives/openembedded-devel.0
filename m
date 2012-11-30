@@ -1,34 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TeU4k-0000nu-ID
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TeU5q-0000sM-F0
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2012 18:08:35 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qAUGsEwQ026379
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2012 08:54:14 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Fri, 30 Nov 2012 08:54:12 -0800
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 426567FE2;	Fri, 30 Nov 2012 11:53:21 -0500 (EST)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
-	15A3C6A7EB3; Fri, 30 Nov 2012 11:54:11 -0500 (EST)
-Date: Fri, 30 Nov 2012 11:54:11 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Message-ID: <20121130165410.GQ6912@windriver.com>
+	Fri, 30 Nov 2012 18:09:38 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 30 Nov 2012 08:55:20 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,192,1355126400"; d="scan'208";a="257226851"
+Received: from unknown (HELO helios.localnet) ([10.252.123.9])
+	by fmsmga002.fm.intel.com with ESMTP; 30 Nov 2012 08:55:07 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+Date: Fri, 30 Nov 2012 16:55:06 +0000
+Message-ID: <5531449.L0Ch4936zy@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
+In-Reply-To: <20121130163410.GP6912@windriver.com>
 References: <50B8DC5A.7050203@windriver.com>
 	<20121130163410.GP6912@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20121130163410.GP6912@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: netperf in meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,43 +34,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2012 17:08:39 -0000
-X-Groupsio-MsgNum: 41831
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eBTWNsZZiigckDWV"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Nov 2012 17:09:38 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---eBTWNsZZiigckDWV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-[Re: [oe] netperf in meta-networking] On 12.11.30 (Fri 11:34) Joe MacDonald=
- wrote:
-
+On Friday 30 November 2012 11:34:11 Joe MacDonald wrote:
 > [netperf in meta-networking] On 12.11.30 (Fri 10:18) Mark Hatle wrote:
->=20
+> > I was helping someone with building netperf from meta-networking
+> > last night, and stumbled on what I think is a bug.
+> > 
+> > SUMMARY = "A networking benchmarking tool"
+> > DESCRIPTION = "Network performance benchmark including tests for
+> > TCP, UDP, sockets, ATM and more."
+> > SECTION = "console/network"
+> > HOMEPAGE = "http://www.netperf.org/"
+> > LICENSE = "netperf"
+> > LICENSE_FLAGS = "commercial"
+> > 
+> > In the above, the LICENSE_FLAGS are set to 'commercial'.  I think
+> > this is incorrect.  It should be set to 'non-commercial'.
+> > 
+> > There is a subtle difference between them which is why I think it's a
+> > bug...
+> > 
+> > commercial -- there are some commercial requirements necessary to
+> > use this recipe in a commercial device... you are responsible for
+> > understanding them and doing whatever is necessary... (for
+> > non-commercial devices you can likely use it...)
+> > 
+> > non-commercial -- this item is restricted to non-commercial users
+> > only.  As in the case of netperf, the license says it's only for
+> > non-commercial use.
+> > 
 > > So anyway, my suggestion is to simply change the value of the flag.
-[...]
+> 
+> Ugh.  I had a quick look around and the first thing I found was this:
+> 
+> http://www.netperf.org/svn/netperf4/trunk/include/netperf.h
+
+This is netperf4 though which I gather is distinct from the version of netperf 
+we are building.
+
+> So I had a look at the netperf source tree fetched by bitbake during a
+> build.  The COPYING file says this:
+> 
+>   The enclosed software and documentation includes copyrighted works
+>   of Hewlett-Packard Co. For as long as you comply with the following
+>   limitations, you are hereby authorized to (i) use, reproduce, and
+>   modify the software and documentation, and to (ii) distribute the
+>   software and documentation, including modifications, for
+>   non-commercial purposes only.
+> 
 > So I'm inclined to agree, this sounds like the definition of
 > non-commercial above to me.
 
-Updated.  Thanks for the heads-up.
+It's a subtlety - in either case you can't just go ahead and use it for 
+commercial use. I wouldn't object to changing it to "non-commercial" though if 
+it makes more sense.
 
---=20
--Joe MacDonald.
-:wq
+Would it be practical for us to move to netperf4 which is GPLv2+ licensed? I'm 
+not sure if it is a complete replacement for netperf 2.x and we'd need to 
+confirm that first, but at least the license is more reasonable...
 
---eBTWNsZZiigckDWV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Cheers,
+Paul
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+-- 
 
-iEYEARECAAYFAlC45LIACgkQPN8S4W6ZZncd7ACeNDqR2J9mUmXt04yRPNZS/NdT
-YoQAn07dUXt9MINgQZIZTAt00fPsUWYi
-=uFE8
------END PGP SIGNATURE-----
+Paul Eggleton
+Intel Open Source Technology Centre
 
---eBTWNsZZiigckDWV--
+
