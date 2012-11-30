@@ -1,30 +1,35 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1TeULX-0001Du-44
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TeURD-0001TS-8P
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2012 18:25:54 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAUHBUN6012111
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 30 Nov 2012 09:11:30 -0800 (PST)
-Received: from msp-dhcp46.wrs.com (172.25.34.46) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
-	Fri, 30 Nov 2012 09:11:30 -0800
-Message-ID: <50B8E8C3.20806@windriver.com>
-Date: Fri, 30 Nov 2012 11:11:31 -0600
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:16.0) Gecko/20121026 Thunderbird/16.0.2
+	Fri, 30 Nov 2012 18:31:43 +0100
+Received: by mail-ie0-f175.google.com with SMTP id qd14so954283ieb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Nov 2012 09:17:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=DOWaj4UMMfBYIaCN8fo0eVqoMaGcZYeT7YoboRV3YuM=;
+	b=gE0GmXx+t3I7yKWRkJXssBncNJ9d7MioZ7onf5q6fKMdlfuG0yFBz6h3U/KT9xq2Xj
+	4kb9LZEpvzHGFxOBZi3qjEieaIWvJpr3wfy9/IVZrKYaN8LqL3iwOfpx7SXL3tUiHa2B
+	vhhPoxGaU98ZCVuWPG+591xdcvccC3W+MLg9y7hhdp7mg4JcJwI1A7nWqsBTg/zuNUx6
+	Nqu9Bd6BQuPv9VzWhGP4w6HzFfzKknho4/q/xqN+yGA4F8a8hTl0kC4rKODVqjllrf1I
+	SwVwTMJ/trNnudVsLL9eTElbWZMFq2jlaXNNiuDItWdJXYG5mRZ821gGFp9AIBraegt1
+	xlGA==
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <50B8DC5A.7050203@windriver.com>
-	<20121130163410.GP6912@windriver.com> <5531449.L0Ch4936zy@helios>
-In-Reply-To: <5531449.L0Ch4936zy@helios>
-Cc: openembedded-devel@lists.openembedded.org,
-	Joe MacDonald <Joe.MacDonald@windriver.com>
-Subject: Re: netperf in meta-networking
+Received: by 10.50.11.234 with SMTP id t10mr5584033igb.50.1354295834603; Fri,
+	30 Nov 2012 09:17:14 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Fri, 30 Nov 2012 09:17:14 -0800 (PST)
+In-Reply-To: <CAPOJ94NZvsiBoMemWPFdBUQtqQzH2rrkq9eP5hQGpB8amY4U2g@mail.gmail.com>
+References: <CAPOJ94OVOe=fP-8cgCdDFGFEJskce4G=DMcTR6a-JDM9QHJg0w@mail.gmail.com>
+	<CALbNGRRqj6NvBxqB+EGcLcFd9CcNKKnSNZmJHM8f=BA-biF3dg@mail.gmail.com>
+	<CAPOJ94NZvsiBoMemWPFdBUQtqQzH2rrkq9eP5hQGpB8amY4U2g@mail.gmail.com>
+Date: Fri, 30 Nov 2012 18:17:14 +0100
+Message-ID: <CALbNGRSXeE0UvpsZqijRRg1nRW4XFe+52Zoz6kX6wX_QSuDM+Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Peter Bigot <bigotp@acm.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] gphoto2: fix gettext build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,81 +43,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2012 17:25:54 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Nov 2012 17:31:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 11/30/12 10:55 AM, Paul Eggleton wrote:
-> On Friday 30 November 2012 11:34:11 Joe MacDonald wrote:
->> [netperf in meta-networking] On 12.11.30 (Fri 10:18) Mark Hatle wrote:
->>> I was helping someone with building netperf from meta-networking
->>> last night, and stumbled on what I think is a bug.
->>>
->>> SUMMARY = "A networking benchmarking tool"
->>> DESCRIPTION = "Network performance benchmark including tests for
->>> TCP, UDP, sockets, ATM and more."
->>> SECTION = "console/network"
->>> HOMEPAGE = "http://www.netperf.org/"
->>> LICENSE = "netperf"
->>> LICENSE_FLAGS = "commercial"
->>>
->>> In the above, the LICENSE_FLAGS are set to 'commercial'.  I think
->>> this is incorrect.  It should be set to 'non-commercial'.
->>>
->>> There is a subtle difference between them which is why I think it's a
->>> bug...
->>>
->>> commercial -- there are some commercial requirements necessary to
->>> use this recipe in a commercial device... you are responsible for
->>> understanding them and doing whatever is necessary... (for
->>> non-commercial devices you can likely use it...)
->>>
->>> non-commercial -- this item is restricted to non-commercial users
->>> only.  As in the case of netperf, the license says it's only for
->>> non-commercial use.
->>>
->>> So anyway, my suggestion is to simply change the value of the flag.
+On Fri, Nov 30, 2012 at 5:51 PM, Peter Bigot <bigotp@acm.org> wrote:
+> On Fri, Nov 30, 2012 at 10:35 AM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
 >>
->> Ugh.  I had a quick look around and the first thing I found was this:
+>> On Sun, Nov 25, 2012 at 3:19 PM, Peter Bigot <bigotp@acm.org> wrote:
+>> > Koen Kooi <koen <at> dominion.thruhere.net> writes:
+>> >
+>> >>
+>> >> Signed-off-by: Koen Kooi <koen <at> dominion.thruhere.net>
+>> >
+>> >> ---
+>> >>  .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |    3 +--
+>> >>  1 files changed, 1 insertions(+), 2 deletions(-)
+>> >>
+>> >> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> > b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> >> index d7f6ac0..27f660b 100644
+>> >> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> >> +++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> >> @@ -3,7 +3,7 @@ SECTION =3D "libs"
+>> >>  LICENSE =3D "LGPLv2.1"
+>> >>  LIC_FILES_CHKSUM =3D
+>> >> "file://COPYING;md5=3D0448d3676bc0de00406af227d341a4d1"
+>> >>
+>> >> -PR =3D "r3"
+>> >> +PR =3D "r4"
+>> >>
+>> >>  DEPENDS =3D "libtool jpeg virtual/libusb0 libexif"
+>> >>
+>> >> @@ -26,7 +26,6 @@ inherit autotools pkgconfig gettext lib_package
+>> >>  EXTRA_OECONF =3D " --with-drivers=3Dall udevscriptdir=3D/lib/udev
+>> > ac_cv_lib_ltdl_lt_dlcaller_register=3Dyes"
+>> >>
+>> >>  do_configure_append() {
+>> >> -    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in
+>> >> ${S}/libgphoto2_port/po/
+>> >>      cd ${S}/libgphoto2_port/
+>> >>      autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECON=
+F}
+>> >> $acpaths
+>> >>      cd ${S}
+>> >
+>> > I was about to submit a similar patch reverting the original.  Here's
+>> > what I
+>> > wrote up.
+>> >
+>> > Revert "libgphoto2: fix build"
+>> >
+>> > When using gettext-0.18's Makefile.in.in the elimination of
+>> > AM_PO_SUBDIRS()
+>> > prevented the substitution of @GETTEXT_MACRO_VERSION@.  With the
+>> > original
+>> > patch I get:
+>> >
+>> > | Making all in po
+>> > | make[4]: Entering directory
+>> >
+>> > `/prj/oe/yocto-ang/build/tmp-angstrom_v2012_12-eglibc/work/armv7a-vfp-=
+neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r3/libgphoto2-2.4.11/libgphot=
+o2_port/po'
+>> > | *** error: gettext infrastructure mismatch: using a Makefile.in.in
+>> > from
+>> > gettext version 0.18 but the autoconf macros are from gettext version
+>> > @GETTEXT_MACRO_VERSION@
+>> >
+>> After last update it is again me to fail :-((
 >>
->> http://www.netperf.org/svn/netperf4/trunk/include/netperf.h
+>> One question: Is it possible that you don't have gettext installed on
+>> your build machine? If installed: Which version is it?
 >
-> This is netperf4 though which I gather is distinct from the version of netperf
-> we are building.
 >
->> So I had a look at the netperf source tree fetched by bitbake during a
->> build.  The COPYING file says this:
->>
->>    The enclosed software and documentation includes copyrighted works
->>    of Hewlett-Packard Co. For as long as you comply with the following
->>    limitations, you are hereby authorized to (i) use, reproduce, and
->>    modify the software and documentation, and to (ii) distribute the
->>    software and documentation, including modifications, for
->>    non-commercial purposes only.
->>
->> So I'm inclined to agree, this sounds like the definition of
->> non-commercial above to me.
+> gettext 0.18.1 is installed both on the build machine, and as a native
+> package used when building under bitbake.  If it's at all relevant, I hav=
+e
+> LANG=3Den_US.UTF-8 in the environment in which bitbake is executed.
 >
-> It's a subtlety - in either case you can't just go ahead and use it for
-> commercial use. I wouldn't object to changing it to "non-commercial" though if
-> it makes more sense.
+> Did you try a full reversion of 5febf70?  Can you tell why, in your
+> environment, autotools.bbclass replaces the Makefile.in.in for libgphoto2=
+?
+> It does not do this for me (otherwise I think Koen's patch that only reve=
+rts
+> part of 5febf70 would not work).
 >
-> Would it be practical for us to move to netperf4 which is GPLv2+ licensed? I'm
-> not sure if it is a complete replacement for netperf 2.x and we'd need to
-> confirm that first, but at least the license is more reasonable...
-
-There are things that netperf4 can not do, that netperf 2.x can.  So I would 
-recommend that we add a 'netperf4_<PV>.bb' recipe as well.  This way the user 
-can select either or both of the netperf's depending on their requirements.
-
-According to the netperf home page, if you want something "more open source" 
-they suggest you use netperf4.
-
---Mark
-
-> Cheers,
-> Paul
+> Peter
 >
+It should copy see autotools.bbclass line 195
 
+Andreas
 
 
