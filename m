@@ -1,35 +1,33 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ia0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TeTlO-0008Dv-GJ
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TeTmw-0008Io-KE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Nov 2012 17:48:32 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qAUGYC32005308
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 30 Nov 2012 17:50:07 +0100
+Received: by mail-ia0-f175.google.com with SMTP id z3so465720iad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2012 08:34:12 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Fri, 30 Nov 2012 08:34:12 -0800
-Received: from yow-jmacdona-d2.wrs.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 765FD7FE2;	Fri, 30 Nov 2012 11:33:21 -0500 (EST)
-Received: by yow-jmacdona-d2.wrs.com (Postfix, from userid 1000)	id
-	4590E6A7EA7; Fri, 30 Nov 2012 11:34:11 -0500 (EST)
-Date: Fri, 30 Nov 2012 11:34:11 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Message-ID: <20121130163410.GP6912@windriver.com>
-References: <50B8DC5A.7050203@windriver.com>
+	Fri, 30 Nov 2012 08:35:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=OWAdwshKUlFjk3LTrRZZGqsukMAb7fMJBLOLJsJ6+dA=;
+	b=Vz9koXAyBDBzKQXbnJGpQ0Yz3g7sZlaQJH0/oWUCSb4as3ZZLnjpDamc/4XuTZqWwW
+	BVFG8gB5gt/7fOVv4yjcIL+xlNrh3y450/BeDs9pTUby5Y9qHP9iq7xuqsXoi88UhDkU
+	n+lB6PkKjQr7IVUfjB/gSzq+h51KMvaNbOZq9TlZMmmfv4BA90Qq7VbMkFm8YaQJy7VS
+	yK7Pvg6H4li2FGwLLOIp7Lw5zyMID+cHx5vAZLw/FatupMC1nkpPVcGTCVcHkLg9z6wa
+	3Rd2v7z/TIx8bvPWBIS+BfXa2zDkpvBrZJKPF6TVNbb8T4aGaKRGNFeuu+NBVngCerLg
+	5Udg==
 MIME-Version: 1.0
-In-Reply-To: <50B8DC5A.7050203@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Received: by 10.50.150.235 with SMTP id ul11mr1592711igb.31.1354293348876;
+	Fri, 30 Nov 2012 08:35:48 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Fri, 30 Nov 2012 08:35:48 -0800 (PST)
+In-Reply-To: <CAPOJ94OVOe=fP-8cgCdDFGFEJskce4G=DMcTR6a-JDM9QHJg0w@mail.gmail.com>
+References: <CAPOJ94OVOe=fP-8cgCdDFGFEJskce4G=DMcTR6a-JDM9QHJg0w@mail.gmail.com>
+Date: Fri, 30 Nov 2012 17:35:48 +0100
+Message-ID: <CALbNGRRqj6NvBxqB+EGcLcFd9CcNKKnSNZmJHM8f=BA-biF3dg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Peter Bigot <bigotp@acm.org>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: netperf in meta-networking
+Subject: Re: [meta-oe][PATCH] gphoto2: fix gettext build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,78 +41,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2012 16:48:32 -0000
-X-Groupsio-MsgNum: 41828
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jXoUnAu9pZeaHebo"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Nov 2012 16:50:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
---jXoUnAu9pZeaHebo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, Nov 25, 2012 at 3:19 PM, Peter Bigot <bigotp@acm.org> wrote:
+> Koen Kooi <koen <at> dominion.thruhere.net> writes:
+>
+>>
+>> Signed-off-by: Koen Kooi <koen <at> dominion.thruhere.net>
+>
+>> ---
+>>  .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |    3 +--
+>>  1 files changed, 1 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+> b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> index d7f6ac0..27f660b 100644
+>> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> +++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+>> @@ -3,7 +3,7 @@ SECTION = "libs"
+>>  LICENSE = "LGPLv2.1"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
+>>
+>> -PR = "r3"
+>> +PR = "r4"
+>>
+>>  DEPENDS = "libtool jpeg virtual/libusb0 libexif"
+>>
+>> @@ -26,7 +26,6 @@ inherit autotools pkgconfig gettext lib_package
+>>  EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev
+> ac_cv_lib_ltdl_lt_dlcaller_register=yes"
+>>
+>>  do_configure_append() {
+>> -    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in
+>> ${S}/libgphoto2_port/po/
+>>      cd ${S}/libgphoto2_port/
+>>      autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF}
+>> $acpaths
+>>      cd ${S}
+>
+> I was about to submit a similar patch reverting the original.  Here's what I
+> wrote up.
+>
+> Revert "libgphoto2: fix build"
+>
+> When using gettext-0.18's Makefile.in.in the elimination of AM_PO_SUBDIRS()
+> prevented the substitution of @GETTEXT_MACRO_VERSION@.  With the original
+> patch I get:
+>
+> | Making all in po
+> | make[4]: Entering directory
+> `/prj/oe/yocto-ang/build/tmp-angstrom_v2012_12-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r3/libgphoto2-2.4.11/libgphoto2_port/po'
+> | *** error: gettext infrastructure mismatch: using a Makefile.in.in from
+> gettext version 0.18 but the autoconf macros are from gettext version
+> @GETTEXT_MACRO_VERSION@
+>
+After last update it is again me to fail :-((
 
-[netperf in meta-networking] On 12.11.30 (Fri 10:18) Mark Hatle wrote:
+One question: Is it possible that you don't have gettext installed on
+your build machine? If installed: Which version is it?
 
-> I was helping someone with building netperf from meta-networking
-> last night, and stumbled on what I think is a bug.
->=20
-> SUMMARY =3D "A networking benchmarking tool"
-> DESCRIPTION =3D "Network performance benchmark including tests for
-> TCP, UDP, sockets, ATM and more."
-> SECTION =3D "console/network"
-> HOMEPAGE =3D "http://www.netperf.org/"
-> LICENSE =3D "netperf"
-> LICENSE_FLAGS =3D "commercial"
->=20
-> In the above, the LICENSE_FLAGS are set to 'commercial'.  I think
-> this is incorrect.  It should be set to 'non-commercial'.
->=20
-> There is a subtle difference between them which is why I think it's a bug=
-=2E..
->=20
-> commercial -- there are some commercial requirements necessary to
-> use this recipe in a commercial device... you are responsible for
-> understanding them and doing whatever is necessary... (for
-> non-commercial devices you can likely use it...)
->=20
-> non-commercial -- this item is restricted to non-commercial users
-> only.  As in the case of netperf, the license says it's only for
-> non-commercial use.
->=20
-> So anyway, my suggestion is to simply change the value of the flag.
+Andreas
 
-Ugh.  I had a quick look around and the first thing I found was this:
 
-http://www.netperf.org/svn/netperf4/trunk/include/netperf.h
-
-So I had a look at the netperf source tree fetched by bitbake during a
-build.  The COPYING file says this:
-
-  The enclosed software and documentation includes copyrighted works
-  of Hewlett-Packard Co. For as long as you comply with the following
-  limitations, you are hereby authorized to (i) use, reproduce, and
-  modify the software and documentation, and to (ii) distribute the
-  software and documentation, including modifications, for
-  non-commercial purposes only.
-
-So I'm inclined to agree, this sounds like the definition of
-non-commercial above to me.
-
---=20
--Joe MacDonald.
-:wq
-
---jXoUnAu9pZeaHebo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlC44AIACgkQPN8S4W6ZZncroACfdSUnRgSRGuVWfQRWqLe3tFTj
-GzsAn3t/lokAsMg1RzMR8QOtDIcuE1Ev
-=QV3G
------END PGP SIGNATURE-----
-
---jXoUnAu9pZeaHebo--
