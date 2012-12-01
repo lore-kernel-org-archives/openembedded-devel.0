@@ -1,37 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-lb0-f175.google.com ([209.85.217.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TebWl-0005un-9U
+	(envelope-from <cazfi74@gmail.com>) id 1Tejkr-0006v1-1W
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Dec 2012 02:05:55 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so612694eek.6
+	Sat, 01 Dec 2012 10:53:01 +0100
+Received: by mail-lb0-f175.google.com with SMTP id gg13so1026737lbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Nov 2012 16:51:37 -0800 (PST)
+	Sat, 01 Dec 2012 01:38:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=wZgPj7dAru1Jcj5VdiuZfTOpSlIX4vgQHaHND4GaGzg=;
-	b=vc58P7UY76VDy8b5Z0NebYJtWpy39smXH3EC868pNijlz3mKo1Ky0GRbwLRKYYzAtZ
-	kQQ0hKoZw8KTEfVzRWzmUjJG8GaDAYDKhr2c2gCmRuhNJK6ZCjm9YmjOfzzuxSHy65NS
-	D7apTudjjvRlrkN3suRS/vpC2TolMDTqyhmg6ihzLblh14WzSkLNQahSRvcF8F3lrm6l
-	kqPhj1A2SXzsMJZyq9IY1SfD9ycBx/WsjFQvQ8oSmhaMdXSSTDFJ3EVpDaSmDCrDxvas
-	4XVQbnFdKsqw/kKtoESBqhZ1+knpIRMEiC07R4RkKCwXoa4B6ptwTkScaR4tphtnMklb
-	yO4w==
-Received: by 10.14.175.133 with SMTP id z5mr10346486eel.15.1354323097788;
-	Fri, 30 Nov 2012 16:51:37 -0800 (PST)
-Received: from localhost.localdomain (p5B0A35D2.dip.t-dialin.net.
-	[91.10.53.210])
-	by mx.google.com with ESMTPS id 43sm13899997eed.10.2012.11.30.16.51.36
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=TVVAMOyUkLLuyNyz0oh102usZt/swUC5wriz0K8xj70=;
+	b=hx3LWP0fvKjQ5c3f1HCz5vk2fY+yO9lX0rl/yYrxQJpQTkWtgGbpz5wS3/sRqYYwKF
+	R0VNUqrneFugFJcp1qwtr2leShN/A2ZYgcTpQKXKiN6FF3OSOXk85zXdfOXhp2b3/P1z
+	086KoptnYyUtiet1iRzpqny/Qva14x/WyysnzAMNQ56VOjQtZqt1+C5DPegikNOZOc7v
+	t7tisGFszboq0nK59gqZeub5QtA9rMTM1MjyZanfjxoGZAdHZAY09NPwu/m6yI6Zxvhy
+	IBPXE9HwR/mP8p6K66p4zgi89nkq1MiU202yJl6j4kbkjoQIkS5TZjY4VIiQgn6H57+e
+	xCnA==
+Received: by 10.112.29.229 with SMTP id n5mr1976936lbh.130.1354354722632;
+	Sat, 01 Dec 2012 01:38:42 -0800 (PST)
+Received: from prime (a91-153-8-136.elisa-laajakaista.fi. [91.153.8.136])
+	by mx.google.com with ESMTPS id q2sm2948466lbd.14.2012.12.01.01.38.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Nov 2012 16:51:36 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sat, 01 Dec 2012 01:38:41 -0800 (PST)
+Received: from cazfi by prime with local (Exim 4.80)
+	(envelope-from <cazfi74@gmail.com>)
+	id 1TejWx-00019j-9H; Sat, 01 Dec 2012 11:38:39 +0200
+From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Dec 2012 01:51:21 +0100
-Message-Id: <1354323081-8405-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1354323081-8405-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1354323081-8405-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe 3/3] gimp: update to 2.8.2
+Date: Sat,  1 Dec 2012 11:38:37 +0200
+Message-Id: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH] fakeroot: update to upstream version 1.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,209 +43,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2012 01:05:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 01 Dec 2012 09:53:01 -0000
 
+License is now GPLv3
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 ---
- .../gimp/gimp/gimp-2.6.11-poppler18.patch          |  150 --------------------
- .../gimp/{gimp_2.6.11.bb => gimp_2.8.2.bb}         |   13 +-
- 2 files changed, 5 insertions(+), 158 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/gimp-2.6.11-poppler18.patch
- rename meta-oe/recipes-graphics/gimp/{gimp_2.6.11.bb => gimp_2.8.2.bb} (60%)
+ ...-native_1.12.4.bb => fakeroot-native_1.18.4.bb} |    4 ---
+ .../fakeroot/fakeroot/configure-libtool.patch      |   20 --------------
+ .../fakeroot/fakeroot/fix-prefix.patch             |   15 -----------
+ meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb   |   27 -------------------
+ meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb   |   28 ++++++++++++++++++++
+ 5 files changed, 28 insertions(+), 66 deletions(-)
+ rename meta-oe/recipes-core/fakeroot/{fakeroot-native_1.12.4.bb => fakeroot-native_1.18.4.bb} (67%)
+ delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/configure-libtool.patch
+ delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.patch
+ delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
+ create mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp/gimp-2.6.11-poppler18.patch b/meta-oe/recipes-graphics/gimp/gimp/gimp-2.6.11-poppler18.patch
+diff --git a/meta-oe/recipes-core/fakeroot/fakeroot-native_1.12.4.bb b/meta-oe/recipes-core/fakeroot/fakeroot-native_1.18.4.bb
+similarity index 67%
+rename from meta-oe/recipes-core/fakeroot/fakeroot-native_1.12.4.bb
+rename to meta-oe/recipes-core/fakeroot/fakeroot-native_1.18.4.bb
+index 1e9f15a..a27a60b 100644
+--- a/meta-oe/recipes-core/fakeroot/fakeroot-native_1.12.4.bb
++++ b/meta-oe/recipes-core/fakeroot/fakeroot-native_1.18.4.bb
+@@ -1,6 +1,5 @@
+ require fakeroot_${PV}.bb
+ 
+-SRC_URI += "file://fix-prefix.patch"
+ S = "${WORKDIR}/fakeroot-${PV}"
+ 
+ inherit native
+@@ -14,6 +13,3 @@ python () {
+ }
+ 
+ RDEPENDS_${PN} = "util-linux-native"
+-
+-SRC_URI[md5sum] = "aaefede2405a40c87438e7e833d69b70"
+-SRC_URI[sha256sum] = "dbcab1f495b857e67feff882e018ca59958b8d189ff1f76684d28e35463ec29d"
+diff --git a/meta-oe/recipes-core/fakeroot/fakeroot/configure-libtool.patch b/meta-oe/recipes-core/fakeroot/fakeroot/configure-libtool.patch
 deleted file mode 100644
-index 0ebfd89..0000000
---- a/meta-oe/recipes-graphics/gimp/gimp/gimp-2.6.11-poppler18.patch
+index 46f7df7..0000000
+--- a/meta-oe/recipes-core/fakeroot/fakeroot/configure-libtool.patch
 +++ /dev/null
-@@ -1,150 +0,0 @@
--From 9b3e1c91fd2eac69da6947ec9c7fbf10096ba237 Mon Sep 17 00:00:00 2001
--From: Mukund Sivaraman <muks@banu.com>
--Date: Wed, 20 Apr 2011 13:25:44 +0000
--Subject: file-pdf-load: Don't use deprecated API (bug #646947)
--
--Upstream-Status: Applied
--
-----
--diff --git a/plug-ins/common/file-pdf-load.c b/plug-ins/common/file-pdf-load.c
--index c2d5512..6183403 100644
----- a/plug-ins/common/file-pdf.c
--+++ b/plug-ins/common/file-pdf.c
--@@ -4,6 +4,9 @@
--  *
--  * Copyright (C) 2005 Nathan Summers
--  *
--+ * Some code borrowed from poppler.git/glib/poppler-page.cc
--+ * Copyright (C) 2005, Red Hat, Inc.
--+ *
--  * This program is free software; you can redistribute it and/or modify
--  * it under the terms of the GNU General Public License as published by
--  * the Free Software Foundation; either version 2 of the License, or
--@@ -582,6 +585,84 @@ layer_from_pixbuf (gint32        image,
--   return layer;
+@@ -1,20 +0,0 @@
+-Index: fakeroot-1.12.1/configure.ac
+-===================================================================
+---- fakeroot-1.12.1.orig/configure.ac
+-+++ fakeroot-1.12.1/configure.ac
+-@@ -2,14 +2,12 @@
+- AC_INIT([fakeroot],[FAKEROOT_VERSION],[schizo@debian.org],[fakeroot])
+- AC_PREREQ(2.61)
+- AC_CONFIG_MACRO_DIR([build-aux])
+--LT_PREREQ(2.1a)
+- AC_CANONICAL_TARGET
+- AM_INIT_AUTOMAKE
+- AM_MAINTAINER_MODE
+- AC_CONFIG_HEADERS([config.h])
+- AC_PROG_MAKE_SET
+--LT_INIT
+--LT_LANG(C)
+-+AC_PROG_LIBTOOL
+- 
+- AH_BOTTOM([#if ! HAVE_BUILTIN_EXPECT
+- #define __builtin_expect(x, expected_value) (x)
+diff --git a/meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.patch b/meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.patch
+deleted file mode 100644
+index 3c47bd7..0000000
+--- a/meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-Index: fakeroot-1.12.1/scripts/fakeroot.in
+-===================================================================
+---- fakeroot-1.12.1.orig/scripts/fakeroot.in
+-+++ fakeroot-1.12.1/scripts/fakeroot.in
+-@@ -30,8 +30,8 @@
 - }
 - 
--+static void
--+copy_cairo_surface_to_pixbuf (cairo_surface_t *surface,
--+                              GdkPixbuf       *pixbuf)
--+{
--+  int cairo_width, cairo_height, cairo_rowstride;
--+  unsigned char *pixbuf_data, *dst, *cairo_data;
--+  int pixbuf_rowstride, pixbuf_n_channels;
--+  unsigned int *src;
--+  int x, y;
--+
--+  cairo_width = cairo_image_surface_get_width (surface);
--+  cairo_height = cairo_image_surface_get_height (surface);
--+  cairo_rowstride = cairo_image_surface_get_stride (surface);
--+  cairo_data = cairo_image_surface_get_data (surface);
--+
--+  pixbuf_data = gdk_pixbuf_get_pixels (pixbuf);
--+  pixbuf_rowstride = gdk_pixbuf_get_rowstride (pixbuf);
--+  pixbuf_n_channels = gdk_pixbuf_get_n_channels (pixbuf);
--+
--+  if (cairo_width > gdk_pixbuf_get_width (pixbuf))
--+    cairo_width = gdk_pixbuf_get_width (pixbuf);
--+  if (cairo_height > gdk_pixbuf_get_height (pixbuf))
--+    cairo_height = gdk_pixbuf_get_height (pixbuf);
--+
--+  for (y = 0; y < cairo_height; y++)
--+    {
--+      src = (unsigned int *) (cairo_data + y * cairo_rowstride);
--+      dst = pixbuf_data + y * pixbuf_rowstride;
--+
--+      for (x = 0; x < cairo_width; x++)
--+        {
--+          dst[0] = (*src >> 16) & 0xff;
--+          dst[1] = (*src >> 8) & 0xff;
--+          dst[2] = (*src >> 0) & 0xff;
--+
--+          if (pixbuf_n_channels == 4)
--+            dst[3] = (*src >> 24) & 0xff;
--+
--+          dst += pixbuf_n_channels;
--+          src++;
--+        }
--+    }
--+}
--+
--+static GdkPixbuf *
--+render_page_to_pixbuf (PopplerPage *page,
--+                       int          width,
--+                       int          height,
--+                       double       scale)
--+{
--+  GdkPixbuf *pixbuf;
--+  cairo_surface_t *surface;
--+  cairo_t *cr;
--+
--+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
--+  surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
--+  cr = cairo_create (surface);
--+
--+  cairo_save (cr);
--+  cairo_translate (cr, 0.0, 0.0);
--+
--+  if (scale != 1.0)
--+    cairo_scale (cr, scale, scale);
--+
--+  poppler_page_render (page, cr);
--+  cairo_restore (cr);
--+
--+  cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
--+  cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
--+  cairo_paint (cr);
--+
--+  cairo_destroy (cr);
--+  copy_cairo_surface_to_pixbuf (surface, pixbuf);
--+  cairo_surface_destroy (surface);
--+
--+  return pixbuf;
--+}
--+
-- static gint32
-- load_image (PopplerDocument        *doc,
--             const gchar            *filename,
--@@ -613,7 +694,7 @@ load_image (PopplerDocument        *doc,
--       gdouble      page_width;
--       gdouble      page_height;
+- # strip /bin/fakeroot to find install prefix
+--PREFIX=@prefix@
+--BINDIR=@bindir@
+-+BINDIR=`dirname $0`
+-+PREFIX=`dirname ${BINDIR}`
 - 
---      GdkPixbuf   *buf;
--+      GdkPixbuf   *pixbuf;
--       gint         width;
--       gint         height;
-- 
--@@ -643,15 +724,13 @@ load_image (PopplerDocument        *doc,
--           gimp_image_set_resolution (image_ID, resolution, resolution);
--         }
-- 
---      buf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
---
---      poppler_page_render_to_pixbuf (page, 0, 0, width, height, scale, 0, buf);
--+      pixbuf = render_page_to_pixbuf (page, width, height, scale);
-- 
---      layer_from_pixbuf (image_ID, page_label, i, buf,
--+      layer_from_pixbuf (image_ID, page_label, i, pixbuf,
--                          doc_progress, 1.0 / pages->n_pages);
-- 
--       g_free (page_label);
---      g_object_unref (buf);
--+      g_object_unref (pixbuf);
-- 
--       doc_progress = (double) (i + 1) / pages->n_pages;
--       gimp_progress_update (doc_progress);
--@@ -729,11 +808,7 @@ get_thumbnail (PopplerDocument *doc,
--       width  *= scale;
--       height *= scale;
-- 
---      pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
---                               width, height);
---
---      poppler_page_render_to_pixbuf (page,
---                                     0, 0, width, height, scale, 0, pixbuf);
--+      pixbuf = render_page_to_pixbuf (page, width, height, scale);
--     }
-- 
--   g_object_unref (page);
----
--cgit v0.9.0.2
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb
-similarity index 60%
-rename from meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb
-rename to meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb
-index f952883..44e66ea 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.6.11.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb
-@@ -1,19 +1,16 @@
- DESCRIPTION = "The GIMP is the GNU Image Manipulation Program."
- HOMEPAGE = "http://www.gimp.org"
- SECTION = "x11/graphics"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=878e3965c7b52d85827c75f5a2f3b314"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webkit-gtk lcms gegl poppler"
- 
--PR = "r1"
+- USEABSLIBPATH=@LDPRELOADABS@
+- LIB=lib@fakeroot_transformed@@DLSUFFIX@
+diff --git a/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb b/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
+deleted file mode 100644
+index 1cc5602..0000000
+--- a/meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-DESCRIPTION = "Gives a fake root environment"
+-HOMEPAGE = "http://fakeroot.alioth.debian.org"
+-SECTION = "base"
+-LICENSE = "GPL"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7686b00e9859a1a04043d33452bae823"
+-PR = "r2"
 -
- inherit gnome
- 
--SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.6/gimp-${PV}.tar.bz2 \
--           file://gimp-2.6.11-poppler18.patch"
--SRC_URI[md5sum] = "bb2939fe13e54fc7255cef5d097bb5dd"
--SRC_URI[sha256sum] = "9b6d08d0803b3912ea596d1b77b9c21ee13778c23388a225c004b8c1587cb0a1"
-+SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "b542138820ca3a41cbd63fc331907955"
-+SRC_URI[sha256sum] = "0cd1a7e67e132ead810e16e31ff929394c83fcf841e4a295c45d6f3829601ad9"
- 
- EXTRA_OECONF = "--disable-python \
-                 --without-wmf"
+-SRC_URI = "\
+-  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.tar.gz \
+-  file://configure-libtool.patch \
+-"
+-	    
+-inherit autotools
+-
+-do_install_append() {
+-        install -d ${D}${includedir}/fakeroot
+-        install -m 644 *.h ${D}${includedir}/fakeroot
+-        install -d ${D}${libdir}/libfakeroot/
+-        oe_libinstall -so libfakeroot ${D}${libdir}/libfakeroot/
+-}
+-
+-# fakeroot needs getopt which is provided by the util-linux package
+-RDEPENDS_${PN} = "util-linux"
+-
+-
+-SRC_URI[md5sum] = "aaefede2405a40c87438e7e833d69b70"
+-SRC_URI[sha256sum] = "dbcab1f495b857e67feff882e018ca59958b8d189ff1f76684d28e35463ec29d"
+diff --git a/meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb b/meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb
+new file mode 100644
+index 0000000..a277a69
+--- /dev/null
++++ b/meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Gives a fake root environment"
++HOMEPAGE = "http://fakeroot.alioth.debian.org"
++SECTION = "base"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++PR = "r0"
++
++SRC_URI = "\
++  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
++"
++
++inherit autotools
++
++do_configure_prepend() {
++        mkdir -p ${S}/build-aux
++}
++
++do_install_append() {
++        install -d ${D}${includedir}/fakeroot
++        install -m 644 *.h ${D}${includedir}/fakeroot
++}
++
++# fakeroot needs getopt which is provided by the util-linux package
++RDEPENDS_${PN} = "util-linux"
++
++
++SRC_URI[md5sum] = "706171d8d520b1ca1576ac73f2ceb4f3"
++SRC_URI[sha256sum] = "0a359efa3e9496c33234b3e9c89306a09bb4da9d33de43c261f1d8447e6ebea2"
 -- 
-1.7.4.4
+1.7.10.4
 
 
 
