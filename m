@@ -1,25 +1,21 @@
-Received: from mga01.intel.com ([192.55.52.88])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TemBc-0002Yy-0K
+Received: from p3plsmtpa01-05.prod.phx3.secureserver.net ([72.167.82.85])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <pab@pabigot.com>) id 1Teq29-000151-EH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Dec 2012 13:28:48 +0100
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 01 Dec 2012 04:14:28 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,195,1355126400"; d="scan'208";a="257563611"
-Received: from unknown (HELO helios.localnet) ([10.252.122.241])
-	by fmsmga002.fm.intel.com with ESMTP; 01 Dec 2012 04:14:27 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Marko Lindqvist <cazfi74@gmail.com>
-Date: Sat, 01 Dec 2012 12:14:26 +0000
-Message-ID: <3372743.V6Z4Mr4vuB@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
-References: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
+	Sat, 01 Dec 2012 17:35:17 +0100
+Received: (qmail 28703 invoked from network); 1 Dec 2012 16:14:18 -0000
+Received: from unknown (66.41.60.82)
+	by p3plsmtpa01-05.prod.phx3.secureserver.net (72.167.82.85) with ESMTP;
+	01 Dec 2012 16:14:17 -0000
+Message-ID: <50BA2CD8.3000400@pabigot.com>
+Date: Sat, 01 Dec 2012 10:14:16 -0600
+From: "Peter A. Bigot" <pab@pabigot.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120911 Thunderbird/15.0.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] fakeroot: update to upstream version 1.18.4
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-networking][PATCH] ntp: fix checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,26 +29,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2012 12:28:48 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 01 Dec 2012 16:35:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Saturday 01 December 2012 11:38:37 Marko Lindqvist wrote:
-> License is now GPLv3
-> 
-> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+I don't know how to reply to mail that was sent while I was unsubscribed, so:
+
+http://patches.openembedded.org/patch/39697
+
+was rejected per below, but still needs to be applied to danny.
+
+Peter
+
+[[meta-networking][PATCH]*ntp*:*fix*  *checksum*] On 12.11.27 (Tue 17:19) Eric Bénard wrote:
+> commit e15543f05bb2c321cd649b90de50d1a3d8cd1199 upgrade the recipe to
+> a newer version but didn't update the*checksum*  so fetch is failing.
+>
+> Signed-off-by: Eric Bénard <eric <at> eukrea.com>
 > ---
+>  meta-networking/recipes-support/*ntp*/*ntp*_4.2.6p5.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/*ntp*/*ntp*_4.2.6p5.bb b/meta-networking/recipes-support/*ntp*/*ntp*_4.2.6p5.bb
+> index f7c5b68..0fce5ce 100644
+> --- a/meta-networking/recipes-support/*ntp*/*ntp*_4.2.6p5.bb
+> +++ b/meta-networking/recipes-support/*ntp*/*ntp*_4.2.6p5.bb
+> @@ -8,8 +8,8 @@ SRC_URI = "http://www.eecis.udel.edu/~*ntp*/*ntp*_spool/*ntp*4/*ntp*-4.2/*ntp*-${PV}.tar.g  <http://www.eecis.udel.edu/%7Entp/ntp_spool/ntp4/ntp-4.2/ntp-$%7BPV%7D.tar.g>
+>          file://*ntp*date \
+>  "
+>
+> -SRC_URI[md5sum] = "59876a9009b098ff59767ee45a88ebd2"
+> -SRC_URI[sha256sum] = "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8a02e78be85a7c40e"
+> +SRC_URI[md5sum] = "00df80a84ec9528fcfb09498075525bc"
+> +SRC_URI[sha256sum] = "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23ea25ac1405432f91c"
+>
+>  EXTRA_OECONF += " --with-net-snmp-config=no --without-*ntp*snmpd"
+>
 
-Just out of interest, are you (or is anyone else for that matter) using 
-fakeroot in preference to pseudo which we already build as part of the normal 
-build process?
+I didn't merge the patch since the change is included in the updates I
+merged from PaulE.
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+--
+-Joe MacDonald.
+:wq
 
 
