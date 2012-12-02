@@ -1,33 +1,29 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cazfi74@gmail.com>) id 1TevVs-0000vG-2h
+	(envelope-from <mark.hatle@windriver.com>) id 1Tf4gu-0002CS-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Dec 2012 23:26:20 +0100
-Received: by mail-ia0-f175.google.com with SMTP id z3so1305497iad.6
+	Sun, 02 Dec 2012 09:14:23 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qB258XdI014575
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Dec 2012 14:12:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=R/eBvmeczZ2VzoWmL5GQ6J3Il06tM0+0qBN78NDyHd8=;
-	b=YK8G+rMlw/8H3RWlTSfIy4Ywcmd7NusVOL8LmfrHcpNs/xBzEcDsUF27F/2LiwWW1t
-	EGvJ85u6aLkGcAzis4FVXmGJIm7MUn13Tlu77vQ7xfLOGIpkD4UcOaoAwDcUPYwQusEx
-	IxYB7NT/tap83COVBZ2eMbaNW4PGDUF6sHIoC7f5t8po/RDhx3Kf25uS1O8eg1wAPjEX
-	Dc3HDKQQr9l+DvCKiXDQQW/lj9FR6Woy06Gd5uOMQRUN/K7dqqsKk16s5TZ7kSp9gl6a
-	PShgg4IY21wVGNOZLBaZ9KEAj3ctUWLbpo3pKu7xs/0RUfGTQsPiykJy01VboNqZpQq1
-	JIBw==
+	Sat, 1 Dec 2012 21:08:33 -0800 (PST)
+Received: from Marks-MacBook-Pro.local (172.25.36.226) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Sat, 1 Dec 2012 21:08:32 -0800
+Message-ID: <50BAE251.9050702@windriver.com>
+Date: Sat, 1 Dec 2012 23:08:33 -0600
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:16.0) Gecko/20121026 Thunderbird/16.0.2
 MIME-Version: 1.0
-Received: by 10.43.49.199 with SMTP id vb7mr4424863icb.6.1354399920569; Sat,
-	01 Dec 2012 14:12:00 -0800 (PST)
-Received: by 10.64.24.175 with HTTP; Sat, 1 Dec 2012 14:12:00 -0800 (PST)
-In-Reply-To: <3372743.V6Z4Mr4vuB@helios>
+To: <openembedded-devel@lists.openembedded.org>
 References: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
 	<3372743.V6Z4Mr4vuB@helios>
-Date: Sun, 2 Dec 2012 00:12:00 +0200
-Message-ID: <CAF6bG8fwWSuemoc1kKJVHKUt8KJ5F4WR_WskTyoPJw26C3Qf+w@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
+	<CAF6bG8fwWSuemoc1kKJVHKUt8KJ5F4WR_WskTyoPJw26C3Qf+w@mail.gmail.com>
+In-Reply-To: <CAF6bG8fwWSuemoc1kKJVHKUt8KJ5F4WR_WskTyoPJw26C3Qf+w@mail.gmail.com>
 Subject: Re: [PATCH] fakeroot: update to upstream version 1.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,25 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Dec 2012 22:26:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 02 Dec 2012 08:14:23 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 1 December 2012 14:14, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
-> On Saturday 01 December 2012 11:38:37 Marko Lindqvist wrote:
->> License is now GPLv3
+On 12/1/12 4:12 PM, Marko Lindqvist wrote:
+> On 1 December 2012 14:14, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>> On Saturday 01 December 2012 11:38:37 Marko Lindqvist wrote:
+>>> License is now GPLv3
+>>>
+>>> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+>>> ---
 >>
->> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
->> ---
+>> Just out of interest, are you (or is anyone else for that matter) using
+>> fakeroot in preference to pseudo which we already build as part of the normal
+>> build process?
 >
-> Just out of interest, are you (or is anyone else for that matter) using
-> fakeroot in preference to pseudo which we already build as part of the normal
-> build process?
+>   I'm not at the moment. Later I may bring to OpenEmbedded environment
+> some scripts that use fakeroot, but even then adjusting the scripts is
+> an option.
 
- I'm not at the moment. Later I may bring to OpenEmbedded environment
-some scripts that use fakeroot, but even then adjusting the scripts is
-an option.
+If there is anything that fakeroot is capable of doing that pseudo does not, or 
+another reason why you want to use fakeroot instead, please let us know.
 
+pseudo was developed originally to deal with a number of stability, enhancement 
+and other requirements after using fakeroot, fakechroot and related tooling.
 
- - ML
+(Note, if you are using RPM, fakechroot likely won't work because it doesn't 
+support going in and out of chroot across processes.)
+
+>
+>   - ML
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
 
