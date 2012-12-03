@@ -1,24 +1,24 @@
 Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TfaIC-00028f-NO
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TfaID-00028f-T3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Dec 2012 18:58:57 +0100
+	Mon, 03 Dec 2012 18:58:58 +0100
 Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 03 Dec 2012 09:44:36 -0800
+	by azsmga101.ch.intel.com with ESMTP; 03 Dec 2012 09:44:37 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,208,1355126400"; d="scan'208";a="175528122"
+X-IronPort-AV: E=Sophos;i="4.84,208,1355126400"; d="scan'208";a="175528130"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.191])
-	by AZSMGA002.ch.intel.com with ESMTP; 03 Dec 2012 09:44:35 -0800
+	by AZSMGA002.ch.intel.com with ESMTP; 03 Dec 2012 09:44:36 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Dec 2012 17:44:15 +0000
-Message-Id: <30637ed34a6fc2c11daebb87785a09b5f45af905.1354555874.git.paul.eggleton@linux.intel.com>
+Date: Mon,  3 Dec 2012 17:44:16 +0000
+Message-Id: <16feec23d0ab0a6e2ce79d86528054bd7b92befd.1354555874.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1354555874.git.paul.eggleton@linux.intel.com>
 References: <cover.1354555874.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1354555874.git.paul.eggleton@linux.intel.com>
 References: <cover.1354555874.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH 09/11] ebtables: add from OE-Classic, update and tidy up
+Subject: [meta-networking][PATCH 10/11] pure-ftpd: add new recipe for 1.0.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,384 +32,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2012 17:58:57 -0000
+X-List-Received-Date: Mon, 03 Dec 2012 17:58:58 -0000
 
-* Update to 2.0.10-4
-* Handle hardcoded paths in initscript
-* Add LIC_FILES_CHKSUM
-* Set SUMMARY (which sets DESCRIPTION)
-* Drop PRIORITY
-* Minor formatting/ordering tweaks
-
-Based on a patch by Vladimir Redzhepoff <vladimir.redzhepoff@promwad.com>
+Based on a patch by Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../ebtables-2.0.10-4/01debian_defaultconfig.patch |   50 ++++++
- .../ebtables/ebtables-2.0.10-4/ebtables.init       |  186 ++++++++++++++++++++
- .../ebtables-2.0.10-4/installnonroot.patch         |   43 +++++
- .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   52 ++++++
- 4 files changed, 331 insertions(+)
- create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/01debian_defaultconfig.patch
- create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
- create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/installnonroot.patch
- create mode 100644 meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+ ...coded-usr-local-includes-from-configure.a.patch |   38 ++++++++++++++++++++
+ .../pure-ftpd/pure-ftpd/nostrip.patch              |   30 ++++++++++++++++
+ .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb  |   19 ++++++++++
+ 3 files changed, 87 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+ create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+ create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
 
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/01debian_defaultconfig.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/01debian_defaultconfig.patch
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
 new file mode 100644
-index 0000000..c260403
+index 0000000..54088b0
 --- /dev/null
-+++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/01debian_defaultconfig.patch
-@@ -0,0 +1,50 @@
-+#! /bin/sh /usr/share/dpatch/dpatch-run
-+## debian_defaultconfig.dpatch by  <hesso@pool.math.tu-berlin.de>
-+##
-+## DP: Debian enhancements to the ebtables "sysconfig" default settings.
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+@@ -0,0 +1,38 @@
++From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
++From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
++Date: Tue, 10 Jan 2012 19:15:25 +0300
++Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
 +
-+@DPATCH@
++Upstream-Status: Inappropriate [config]
 +
-+--- ebtables-2.0.8.1.orig/ebtables-config
-++++ ebtables-2.0.8.1/ebtables-config
-+@@ -1,17 +1,3 @@
-+-# Save (and possibly restore) in text format.
-+-#   Value: yes|no,  default: yes
-+-# Save the firewall rules in text format to __SYSCONFIG__/ebtables
-+-# If EBTABLES_BINARY_FORMAT="no" then restoring the firewall rules
-+-# is done using this text format.
-+-EBTABLES_TEXT_FORMAT="yes"
++Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
++---
++ configure.ac |   12 ------------
++ 1 files changed, 0 insertions(+), 12 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index ae00c08..9ba6d8d 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
++ python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
++ AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
++ 
++-if test -d /usr/local/include; then
++-  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
++-fi
 +-
-+-# Save (and restore) in binary format.
-+-#   Value: yes|no,  default: yes
-+-# Save (and restore) the firewall rules in binary format to (and from)
-+-# __SYSCONFIG__/ebtables.<chain>. Enabling this option will make
-+-# firewall initialisation a lot faster.
-+-EBTABLES_BINARY_FORMAT="yes"
++-if test -d /usr/kerberos/include; then
++-  CPPFLAGS="$CPPFLAGS -I/usr/kerberos/include"
++-fi
 +-
-+ # Unload modules on restart and stop
-+ #   Value: yes|no,  default: yes
-+ # This option has to be 'yes' to get to a sane state for a firewall
-+@@ -19,6 +5,12 @@
-+ # modules.
-+ EBTABLES_MODULES_UNLOAD="yes"
-+ 
-++# Load firewall rules on system startup.
-++#   Value: yes|no,  default: no
-++# Restores the ebtables rulesets from the last saved state when the
-++# system boots up.
-++EBTABLES_LOAD_ON_START="no"
-++
-+ # Save current firewall rules on stop.
-+ #   Value: yes|no,  default: no
-+ # Saves all firewall rules if firewall gets stopped
-+@@ -35,3 +27,9 @@
-+ # Save rule counters when saving a kernel table to a file. If the
-+ # rule counters were saved, they will be restored when restoring the table.
-+ EBTABLES_SAVE_COUNTER="no"
-++
-++# Backup suffix for ruleset save files.
-++#   Value: <string>,  default: "~"
-++# Keep one backup level of saved rules.
-++# Set this variable to the empty string to disable backups.
-++EBTABLES_BACKUP_SUFFIX="~"
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
-new file mode 100755
-index 0000000..0044e98
---- /dev/null
-+++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
-@@ -0,0 +1,186 @@
-+#!/bin/sh
-+#
-+# init script for the Ethernet Bridge filter tables
-+#
-+# Written by Dag Wieers <dag@wieers.com>
-+# Modified by Rok Papez <rok.papez@arnes.si>
-+#	     Bart De Schuymer <bdschuym@pandora.be>
-+# Adapted to Debian by Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
-+# Adapted to OpenEmbedded by Roman I Khimov <khimov@altell.ru>
-+#
-+# chkconfig: - 15 85
-+# description: Ethernet Bridge filtering tables
-+#
-+### BEGIN INIT INFO
-+# Provides:		ebtables
-+# Required-Start:	
-+# Required-Stop:	
-+# Should-Start:		$local_fs
-+# Should-Stop:		$local_fs
-+# Default-Start:	S
-+# Default-Stop:		0 6
-+# Short-Description:	ebtables ruleset management
-+# Description:		Saves and restores the state of the ebtables rulesets.
-+### END INIT INFO
++-if test -d /usr/local/lib; then
++-  LDFLAGS="$LDFLAGS -L/usr/local/lib"
++-fi
++-
++ if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
++   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
++ fi
++-- 
++1.7.7.3
 +
-+[ -x /sbin/ebtables ] || exit 1
-+
-+EBTABLES_DUMPFILE_STEM=/etc/ebtables/dump
-+
-+RETVAL=0
-+prog="ebtables"
-+desc="Ethernet bridge filtering"
-+umask 0077
-+
-+#default configuration
-+EBTABLES_MODULES_UNLOAD="yes"
-+EBTABLES_LOAD_ON_START="no"
-+EBTABLES_SAVE_ON_STOP="no"
-+EBTABLES_SAVE_ON_RESTART="no"
-+EBTABLES_SAVE_COUNTER="no"
-+EBTABLES_BACKUP_SUFFIX="~"
-+
-+config=/etc/default/$prog
-+[ -f "$config" ] && . "$config"
-+
-+function get_supported_tables() {
-+	EBTABLES_SUPPORTED_TABLES=
-+	/sbin/ebtables -t filter -L 2>&1 1>/dev/null | grep -q permission
-+	if [ $? -eq 0 ]; then
-+		echo "Error: insufficient privileges to access the ebtables rulesets."
-+		exit 1
-+	fi
-+	for table in filter nat broute; do
-+		/sbin/ebtables -t $table -L &> /dev/null
-+		if [ $? -eq 0 ]; then
-+			EBTABLES_SUPPORTED_TABLES="${EBTABLES_SUPPORTED_TABLES} $table"
-+		fi
-+	done
-+}
-+
-+function load() {
-+	RETVAL=0
-+	get_supported_tables
-+	echo -n "Restoring ebtables rulesets: "
-+	for table in $EBTABLES_SUPPORTED_TABLES; do
-+		echo -n "$table "
-+		if [ -s ${EBTABLES_DUMPFILE_STEM}.$table ]; then
-+			/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-commit
-+			RET=$?
-+			if [ $RET -ne 0 ]; then
-+				echo -n "(failed) "
-+				RETVAL=$RET
-+			fi
-+		else
-+			echo -n "(no saved state) "
-+		fi
-+	done
-+	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
-+		echo -n "no kernel support. "
-+	else
-+		echo -n "done. "
-+	fi
-+	if [ $RETVAL -eq 0 ]; then
-+		echo "ok"
-+	else
-+		echo "fail"
-+	fi
-+}
-+
-+function clear() {
-+	RETVAL=0
-+	get_supported_tables
-+	echo -n "Clearing ebtables rulesets: "
-+	for table in $EBTABLES_SUPPORTED_TABLES; do
-+		echo -n "$table "
-+		/sbin/ebtables -t $table --init-table
-+	done
-+
-+	if [ "$EBTABLES_MODULES_UNLOAD" = "yes" ]; then
-+		for mod in $(grep -E '^(ebt|ebtable)_' /proc/modules | cut -d' ' -f1) ebtables; do
-+			rmmod $mod 2> /dev/null
-+		done
-+	fi
-+	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
-+		echo -n "no kernel support. "
-+	else
-+		echo -n "done. "
-+	fi
-+	if [ $RETVAL -eq 0 ]; then
-+		echo "ok"
-+	else
-+		echo "fail"
-+	fi
-+}
-+
-+function save() {
-+	RETVAL=0
-+	get_supported_tables
-+	echo -n "Saving ebtables rulesets: "
-+	for table in $EBTABLES_SUPPORTED_TABLES; do
-+		echo -n "$table "
-+		[ -n "$EBTABLES_BACKUP_SUFFIX" ] && [ -s ${EBTABLES_DUMPFILE_STEM}.$table ] && \
-+		  mv ${EBTABLES_DUMPFILE_STEM}.$table ${EBTABLES_DUMPFILE_STEM}.$table$EBTABLES_BACKUP_SUFFIX
-+		/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-save
-+		RET=$?
-+		if [ $RET -ne 0 ]; then
-+			echo -n "(failed) "
-+			RETVAL=$RET
-+		else
-+			if [ "$EBTABLES_SAVE_COUNTER" = "no" ]; then
-+				/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table -Z
-+			fi
-+		fi
-+	done
-+	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
-+		echo -n "no kernel support. "
-+	else
-+		echo -n "done. "
-+	fi
-+	if [ $RETVAL -eq 0 ]; then
-+		echo "ok"
-+	else
-+		echo "fail"
-+	fi
-+}
-+
-+case "$1" in
-+  start)
-+	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
-+	;;
-+  stop)
-+	[ "$EBTABLES_SAVE_ON_STOP" = "yes" ] && save
-+	clear
-+	;;
-+  restart|reload|force-reload)
-+	[ "$EBTABLES_SAVE_ON_RESTART" = "yes" ] && save
-+	clear
-+	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
-+	;;
-+  load)
-+	load
-+	;;
-+  save)
-+	save
-+	;;
-+  status)
-+	get_supported_tables
-+	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
-+		echo "No kernel support for ebtables."
-+		RETVAL=1
-+	else
-+		echo -n "Ebtables support available, number of installed rules: "
-+		for table in $EBTABLES_SUPPORTED_TABLES; do
-+			COUNT=$(( $(/sbin/ebtables -t $table -L | sed -e "/^Bridge chain/! d" -e "s/^.*entries: //" -e "s/,.*$/ +/") 0 ))
-+			echo -n "$table($COUNT) "
-+		done
-+		echo ok
-+		RETVAL=0
-+	fi
-+	;;
-+  *)
-+	echo "Usage: $0 {start|stop|restart|reload|force-reload|load|save|status}" >&2
-+	RETVAL=1
-+esac
-+
-+exit $RETVAL
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/installnonroot.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/installnonroot.patch
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
 new file mode 100644
-index 0000000..bcd9bed
+index 0000000..5cbbc5f
 --- /dev/null
-+++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/installnonroot.patch
-@@ -0,0 +1,43 @@
-+diff --git a/Makefile b/Makefile
-+index c1106a4..7ea6b7a 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -157,31 +157,31 @@ tmp3:=$(shell printf $(PIPE) | sed 's/\//\\\//g')
-+ scripts: ebtables-save ebtables.sysv ebtables-config
-+ 	cat ebtables-save | sed 's/__EXEC_PATH__/$(tmp1)/g' > ebtables-save_
-+ 	mkdir -p $(DESTDIR)$(BINDIR)
-+-	install -m 0755 -o root -g root ebtables-save_ $(DESTDIR)$(BINDIR)/ebtables-save
-++	install -m 0755 ebtables-save_ $(DESTDIR)$(BINDIR)/ebtables-save
-+ 	cat ebtables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > ebtables.sysv_
-+ 	if [ "$(DESTDIR)" != "" ]; then mkdir -p $(DESTDIR)$(INITDIR); fi
-+-	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 -o root -g root ebtables.sysv_ $(DESTDIR)$(INITDIR)/ebtables; fi
-++	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 ebtables.sysv_ $(DESTDIR)$(INITDIR)/ebtables; fi
-+ 	cat ebtables-config | sed 's/__SYSCONFIG__/$(tmp2)/g' > ebtables-config_
-+ 	if [ "$(DESTDIR)" != "" ]; then mkdir -p $(DESTDIR)$(SYSCONFIGDIR); fi
-+-	if test -d $(DESTDIR)$(SYSCONFIGDIR); then install -m 0600 -o root -g root ebtables-config_ $(DESTDIR)$(SYSCONFIGDIR)/ebtables-config; fi
-++	if test -d $(DESTDIR)$(SYSCONFIGDIR); then install -m 0600 ebtables-config_ $(DESTDIR)$(SYSCONFIGDIR)/ebtables-config; fi
-+ 	rm -f ebtables-save_ ebtables.sysv_ ebtables-config_
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+@@ -0,0 +1,30 @@
++From 45eb89d1a6fde65caaf2d6e1a5d527f1ae7beb9c Mon Sep 17 00:00:00 2001
++From: Paul Eggleton <paul.eggleton@linux.intel.com>
++Date: Mon, 3 Dec 2012 17:12:11 +0000
++Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is specified
++
++We especially don't want stripping enabled.
++
++Upstream-Status: Inappropriate [config]
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++---
++ configure.ac |    2 --
++ 1 files changed, 0 insertions(+), 2 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 3d59409..6836c0e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -413,8 +413,6 @@ AC_ARG_WITH(minimal,
++     AC_DEFINE(NO_FTP_USERS)
++     AC_DEFINE(WITHOUT_ASCII)    
++     AC_DEFINE(BORING_MODE)
++-    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fgcse -falign-functions=2 -falign-jumps=2 -fno-unroll-loops "
++-    LDFLAGS="$LDFLAGS -s "
++   fi ])
 + 
-+ tmp4:=$(shell printf $(LOCKFILE) | sed 's/\//\\\//g')
-+ $(MANDIR)/man8/ebtables.8: ebtables.8
-+ 	mkdir -p $(DESTDIR)$(@D)
-+ 	sed -e 's/$$(VERSION)/$(PROGVERSION)/' -e 's/$$(DATE)/$(PROGDATE)/' -e 's/$$(LOCKFILE)/$(tmp4)/' ebtables.8 > ebtables.8_
-+-	install -m 0644 -o root -g root ebtables.8_ $(DESTDIR)$@
-++	install -m 0644 ebtables.8_ $(DESTDIR)$@
-+ 	rm -f ebtables.8_
-+ 
-+ $(DESTDIR)$(ETHERTYPESFILE): ethertypes
-+ 	mkdir -p $(@D)
-+-	install -m 0644 -o root -g root $< $@
-++	install -m 0644 $< $@
-+ 
-+ .PHONY: exec
-+ exec: ebtables ebtables-restore
-+ 	mkdir -p $(DESTDIR)$(BINDIR)
-+-	install -m 0755 -o root -g root $(PROGNAME) $(DESTDIR)$(BINDIR)/$(PROGNAME)
-+-	install -m 0755 -o root -g root ebtables-restore $(DESTDIR)$(BINDIR)/ebtables-restore
-++	install -m 0755 $(PROGNAME) $(DESTDIR)$(BINDIR)/$(PROGNAME)
-++	install -m 0755 ebtables-restore $(DESTDIR)$(BINDIR)/ebtables-restore
-+ 
-+ .PHONY: install
-+ install: $(MANDIR)/man8/ebtables.8 $(DESTDIR)$(ETHERTYPESFILE) exec scripts
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++ AC_ARG_WITH(paranoidmsg,
++-- 
++1.7.1
++
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
 new file mode 100644
-index 0000000..e3476da
+index 0000000..871ab6e
 --- /dev/null
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-@@ -0,0 +1,52 @@
-+SUMMARY = "Utility for basic Ethernet frame filtering on a Linux bridge, MAC NAT and brouting."
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
-+SECTION = "console/network"
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Pure-FTPd is a free (BSD), secure, production-quality and standard-conformant FTP server"
++HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ae9e161311a5a0768c333b537a40e332"
++
++DEPENDS = "libcap"
++
 +PR = "r0"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
-+           file://installnonroot.patch \
-+           file://01debian_defaultconfig.patch \
-+           file://ebtables.init \
++SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
++           file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
++	   file://nostrip.patch \
 +           "
++SRC_URI[md5sum] = "bbcb48e8aa6ec1abff9775b89f84af91"
++SRC_URI[sha256sum] = "90fb63b1a9d448076aa9f3e3c74b298965f98e03c824e9a4d241fffe8eb3a130"
 +
-+SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
-+SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9a4455d"
++inherit autotools
 +
-+S = "${WORKDIR}/ebtables-v${PV}"
-+
-+inherit update-rc.d
-+
-+EXTRA_OEMAKE = " \
-+        BINDIR=${base_sbindir} \
-+        MANDIR=${mandir} \
-+        ETHERTYPESPATH=${sysconfdir} \
-+        INITDIR=${sysconfdir}/init.d \
-+        SYSCONFIGDIR=${sysconfdir}/default \
-+        LIBDIR=${base_libdir}/ebtables \
-+        'CC=${CC}' \
-+        'CFLAGS=${CFLAGS}' \
-+        'LDFLAGS=${LDFLAGS} -Wl,--no-as-needed' \
-+        'LD=${LD}' \
-+        "
-+
-+do_install () {
-+	install -d ${D}${sysconfdir}/init.d
-+	install -d ${D}${sysconfdir}/default
-+	install -d ${D}${sysconfdir}/ebtables
-+	oe_runmake DESTDIR='${D}' install
-+	install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
-+	mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
-+
-+	# Fix hardcoded paths in scripts
-+	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
-+	sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
-+}
-+
-+CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
-+
-+INITSCRIPT_NAME = "ebtables"
-+INITSCRIPT_PARAMS = "start 41 S . stop 41 6 ."
-+
-+FILES_${PN}-dbg += "${base_libdir}/ebtables/.debug"
-+FILES_${PN} += "${base_libdir}/ebtables/*.so"
++EXTRA_OECONF = "--with-minimal"
 -- 
 1.7.10.4
 
