@@ -1,26 +1,34 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-oa0-f47.google.com ([209.85.219.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TfZa0-0001QZ-PD
+	(envelope-from <mario.goulart@gmail.com>) id 1TfZfO-0001aL-PZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Dec 2012 18:13:17 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 03 Dec 2012 08:58:38 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,208,1355126400"; d="scan'208";a="175502848"
-Received: from unknown (HELO helios.localnet) ([10.252.122.191])
-	by AZSMGA002.ch.intel.com with ESMTP; 03 Dec 2012 08:58:35 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: ray.danks@se-eng.com
-Date: Mon, 03 Dec 2012 16:58:34 +0000
-Message-ID: <1537679.0VVacUjAeP@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <50BCD5C9.9010903@se-eng.com>
-References: <4FE4DFCA.4090606@se-eng.com> <4127137.5Bm5xUWJxt@helios>
-	<50BCD5C9.9010903@se-eng.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: New meta-xen layer
+	Mon, 03 Dec 2012 18:18:51 +0100
+Received: by mail-oa0-f47.google.com with SMTP id h1so2831102oag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Dec 2012 09:04:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=65Ve+spUPZGdAEw+t8DegkPoukL4Xn1faH6b6Si+0Jw=;
+	b=hohGDLz8JFlgYxxQPr/gmJHZlYOMCHTXyUVDcwNOnVImtHbB+kv4+J91TWWJIc8sbw
+	xRCXSX5AIjtoYeTW5JmD9YCyLiyHkImvTbRhF2DhCW0LExVLZzS7/DoR9ilLMjpUo8/4
+	Zi+enS/+ZgTEs+Erf9B0k+c4YrJFbwXHx9Ebb2zcI4aYAKy3jx/xhCAhtfLjwekEWGB/
+	dUyM9DNO88dr/4RyA5NyrqURi7rWwt43G19h39E9E6XojCtcTh5T1CzHdLKQzf6Yflg+
+	tTfRLAEEpcXQVYvsvuNUtZXttSFPXJTvFsaDhvh8WJSWktowHgcHvr0vOnv+A4cr5Axq
+	M8iA==
+Received: by 10.60.28.74 with SMTP id z10mr3719236oeg.29.1354554268504;
+	Mon, 03 Dec 2012 09:04:28 -0800 (PST)
+Received: from localhost.localdomain ([187.23.153.69])
+	by mx.google.com with ESMTPS id f7sm12213743oef.8.2012.12.03.09.04.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 03 Dec 2012 09:04:27 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Dec 2012 15:04:10 -0200
+Message-Id: <1354554250-12014-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [PATCH] pulseaudio: explicitly set --with-database=simple
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Dec 2012 17:13:18 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 03 Dec 2012 17:18:51 -0000
 
-On Monday 03 December 2012 09:39:37 Raymond Danks wrote:
-> Hey Paul,
-> 
-> Would you mind to make another change to the LayerIndex page?  This
-> layer has moved over to Yocto servers and has been renamed/merged to
-> meta-virtualization:
-> http://comments.gmane.org/gmane.comp.handhelds.openembedded.core/30003
-> 
-> meta-virtualization|Layer enabling hypervisor, virtualization tool
-> stack, and cloud
-> support.||git://git.yoctoproject.org/meta-virtualization|http://git.yoctopro
-> ject.org/cgit/cgit.cgi/meta-virtualization/
+The default value for --with-database is "auto".  So, if some package
+installs a database library and pulseaudio auto detects, that library
+will be added to the dependencies list, causing a dependency error at
+do_rootfs time.  For example, samba installs libtdb, which is one of
+the pulseaudio supported databases.
 
-I've updated the layer index as above with some minor tweaks to fit in with the 
-existing formatting.
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ meta/recipes-multimedia/pulseaudio/pulseaudio.inc  |    1 +
+ .../pulseaudio/pulseaudio_2.1.bb                   |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
 
-Cheers,
-Paul
-
+diff --git a/meta/recipes-multimedia/pulseaudio/pulseaudio.inc b/meta/recipes-multimedia/pulseaudio/pulseaudio.inc
+index d9a1b94..6633e38 100644
+--- a/meta/recipes-multimedia/pulseaudio/pulseaudio.inc
++++ b/meta/recipes-multimedia/pulseaudio/pulseaudio.inc
+@@ -39,6 +39,7 @@ EXTRA_OECONF = "\
+ 		--with-access-group=audio \
+ 		--disable-openssl \
+ 		--disable-xen \
++		--with-database=simple \
+ "
+ 
+ PARALLEL_MAKE = ""
+diff --git a/meta/recipes-multimedia/pulseaudio/pulseaudio_2.1.bb b/meta/recipes-multimedia/pulseaudio/pulseaudio_2.1.bb
+index 811dc0f..a576368 100644
+--- a/meta/recipes-multimedia/pulseaudio/pulseaudio_2.1.bb
++++ b/meta/recipes-multimedia/pulseaudio/pulseaudio_2.1.bb
+@@ -1,6 +1,6 @@
+ require pulseaudio.inc
+ 
+-PR = "r14"
++PR = "r15"
+ 
+ DEPENDS += "libjson gdbm speex libxml-parser-perl-native"
+ 
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
