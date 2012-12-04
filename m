@@ -1,40 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TfrKl-0004dq-C0
+	(envelope-from <martin.jansa@gmail.com>) id 1TfrOM-0004jD-0h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 13:10:43 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2146062eek.6
+	Tue, 04 Dec 2012 13:14:26 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1537087eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 03:56:21 -0800 (PST)
+	Tue, 04 Dec 2012 04:00:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rlaKyz77/VZvE1iNBZKiEQJBKWtt8zshXFHAR65iqT4=;
-	b=DL/w5+NmQ2P4W7bATROw0P53Lgm3/iCQN7EKoz57u6CTVj6JIZI4uCgwQ1j+wyzgEI
-	unXIW3DN0ZlkGXp4Xkmo8q7rhO28C+juRiwehFnwCWbOOv4ZzG+dWKP/zX+asg98gwG5
-	bprVDqC6L4WBdGIvTQ1aNVV4uH+p3GfxK2OH8KShM3+3qMR81hLK61UVM+CVz+9KdZld
-	B81xeuXYpmNqbs+Y14HAt3sbj0fHK1iQXzRAp870AUHzwIcH2MFGs0regcJBzIX7UBUm
-	5vLueTs52Mmqm2yemFbaB1oRnNNH8MV7qRlvPqgSzF7MUpKsubX4UbUpBXmvoEgn++J4
-	hjvQ==
-Received: by 10.14.177.1 with SMTP id c1mr47755972eem.8.1354622180932;
-	Tue, 04 Dec 2012 03:56:20 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=KHV4iOHewRqtEjBsdV4+tzIcqrEsfaRRp720OYEcoZk=;
+	b=cAwMLSvnzpziyg0+rtv9/d2XwIIAhIo90KaEz7LD4VQgESzp5J1ybN3So3UURFtz8L
+	Wh8pWE1uHUhbv9VIqthY987O+KLr6lKUqDNr9WY9TarAsElRBl+PCN7hCFnGQMf+VQ5C
+	ZOS6oYzSgJ7P4+i16sga04PX34wr6gnbkfrvLHQufQGM7h/pdNdADhWgKlKMoCQybCi9
+	jNZFasb7LGuDVSUaKQBnqs9nrNI40s0FuxgUghcvYQ8ewXnPLlYO9AnNPg70OjT+/2qS
+	Xd1debIK4xA5GL/+HrBcSXrF+kYAeGMiKZm8Rsor/0SMonXoTMklT6x5Fop1hbOb3rfd
+	AC+w==
+Received: by 10.14.198.67 with SMTP id u43mr48232401een.7.1354622403773;
+	Tue, 04 Dec 2012 04:00:03 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a44sm2194721eeo.7.2012.12.04.03.56.19
+	by mx.google.com with ESMTPS id r1sm2232858eeo.2.2012.12.04.04.00.02
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 04 Dec 2012 03:56:20 -0800 (PST)
-Date: Tue, 4 Dec 2012 12:56:16 +0100
+	Tue, 04 Dec 2012 04:00:03 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121204115616.GF14870@jama.jama.net>
-References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
-	<ea86ab799567bbf1f2fd02d47f9bdc775ba26f9e.1353602922.git.paul.eggleton@linux.intel.com>
-	<20121204074429.GA6288@ad.chargestorm.se>
-	<11016715.fxrlBBZh8S@helios>
-MIME-Version: 1.0
-In-Reply-To: <11016715.fxrlBBZh8S@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: Re: [danny?] Re: [meta-networking][PATCH v2 1/2] ntp: cleanup recipes and fix SSL support
+Date: Tue,  4 Dec 2012 12:59:51 +0100
+Message-Id: <cover.1354622319.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+Subject: [PATCH 0/5] [meta-oe][danny] Small fixes from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,66 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 12:10:43 -0000
-X-Groupsio-MsgNum: 41961
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SnV5plBeK2Ge1I9g"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 04 Dec 2012 12:14:26 -0000
 
---SnV5plBeK2Ge1I9g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit f8ad0760abf8055bac27036853c56f56b40a36c7:
 
-On Tue, Dec 04, 2012 at 09:21:23AM +0000, Paul Eggleton wrote:
-> On Tuesday 04 December 2012 08:44:30 Anders Darander wrote:
-> > * Paul Eggleton <paul.eggleton@linux.intel.com> [121122 17:50]:
-> > > * Move common definitions to the inc file
-> > > * Drop override of do_configure which doesn't seem to be needed anymo=
-re
-> > > * Fold ntp-ssl into the ntp recipe as a PACKAGECONFIG option for those
-> > >   who want it (default to off) and fix configure-time checks to detect
-> > >   OpenSSL properly so that it gets enabled when selected
-> > > * Remove ntp-bin package and put its contents in currently empty
-> > >   ntp-utils package (with migration path)
-> > > * Fix hardcoded paths in ntpd initscript
-> > > * Specify ntpd.conf as a configuration file for packaging purposes
-> > > * Rearrange so that packaging definitions are towards the end in the
-> > >   expected order
-> > > * Delete unused "ntp" initscript file
-> > > * Add SUMMARY
-> > > * Update HOMEPAGE
-> >=20
-> > Would this patch be acceptable for a push to danny? Or is it to
-> > intrusive?
-> >=20
-> > If it's to intrusive, we need to update the SRC_URI checksums in danny,
-> > as they're currently not matching the downloaded file...
-> >=20
-> > If needed, I can create a SRC_URI-patch for danny, though I'd prefer to
-> > get this one in if possible.
->=20
-> IMO the original recipe was horribly broken, so I'd definitely support ha=
-ving=20
-> this patch applied to danny as well, assuming people have given it a=20
-> reasonable amount of runtime testing and everything's OK.
+  README: update to danny (2012-11-23 15:22:46 +0100)
 
-I agree and I plan to send pull-request for danny with this today.
+are available in the git repository at:
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/for-danny
 
---SnV5plBeK2Ge1I9g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Andrei Dinu (1):
+  gypsy: added to meta-oe/recipes-navigation
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Martin Jansa (1):
+  samba: update waf-as-source.patch to apply
 
-iEYEARECAAYFAlC95OAACgkQN1Ujt2V2gBw9gwCbBU8GYY3Qzp2rcxGrCRsHA43x
-CdIAn20yxSiAg1CPegFtpwRyKcxUaTlE
-=RWuY
------END PGP SIGNATURE-----
+Paul Eggleton (3):
+  ntp: cleanup recipes and fix SSL support
+  ntp: make servers configurable and default to none configured
+  meta-systemd: ntp: update for server config improvements
 
---SnV5plBeK2Ge1I9g--
+ meta-networking/recipes-support/ntp/files/ntp      | 31 -------
+ meta-networking/recipes-support/ntp/files/ntp.conf |  2 +-
+ meta-networking/recipes-support/ntp/files/ntpdate  | 11 ++-
+ .../recipes-support/ntp/files/ntpdate.default      |  7 ++
+ .../recipes-support/ntp/files/openssl-check.patch  | 59 ++++++++++++++
+ .../recipes-support/ntp/ntp-ssl_4.2.6p5.bb         | 11 ---
+ meta-networking/recipes-support/ntp/ntp.inc        | 94 +++++++++++++++++-----
+ meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb | 44 +---------
+ .../samba/samba-3.6.8/waf-as-source.patch          |  4 -
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb  |  2 +-
+ .../recipes-navigation/gypsy/files/fixups.patch    | 21 +++++
+ meta-oe/recipes-navigation/gypsy/gypsy.inc         | 15 ++++
+ meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      | 24 ++++++
+ meta-oe/recipes-navigation/gypsy/gypsy_git.bb      | 18 +++++
+ .../recipes-support/ntp/ntp/ntpdate.service        |  2 +-
+ 15 files changed, 234 insertions(+), 111 deletions(-)
+ delete mode 100755 meta-networking/recipes-support/ntp/files/ntp
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntpdate.default
+ create mode 100644 meta-networking/recipes-support/ntp/files/openssl-check.patch
+ delete mode 100644 meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
+ create mode 100644 meta-oe/recipes-navigation/gypsy/files/fixups.patch
+ create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy.inc
+ create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+ create mode 100644 meta-oe/recipes-navigation/gypsy/gypsy_git.bb
+
+-- 
+1.8.0
+
+
+
