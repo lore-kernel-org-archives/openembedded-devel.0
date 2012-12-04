@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi5X-0002oS-Gz
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi5g-0002l7-P1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:18:23 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1377891eaa.6
+	Tue, 04 Dec 2012 03:18:33 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so1926297eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:04:03 -0800 (PST)
+	Mon, 03 Dec 2012 18:04:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=kvoymjHbHVraFxcQJuB0t875BqOB3mn1hx3IYaP2wnM=;
-	b=OdVZaz6iNlGsWJY1LELCskcCdxU6aNq5QxE4eFmUyF0qqnOYVeU5TNAFuNgCWAWBmk
-	BIfthL791pf7cWtzvJ6R1Fj+tuZWtXfJ64PCWc7RcJDyPMhY50+hkwStkcSA4JrjHICu
-	7P9xlBXKcadh2zYpdNpDiRl0nCQpYvqRF1+9377708UNCGPMarfecxwW2z8LHoF2YPwy
-	2tQrCcJ0qM82xhlg4zK9s7rqCX9LTkfZqydIH3yEpwAv2XftjhqpFwoWveKiz72uSQok
-	YAE0SL+EF0CNLak8oG+j4M8GXjxyDokfKuLAB5yB7aGQQkQ2Rj0HWvZ8Yy5CQ6n/Pz10
-	C0hg==
-Received: by 10.14.207.6 with SMTP id m6mr42829154eeo.10.1354586643927;
-	Mon, 03 Dec 2012 18:04:03 -0800 (PST)
+	bh=dHkjuo2BUFwb3aCIa7iTnd8KcNYiXrvz82k95+WE6c8=;
+	b=ZnXaVThwwPdrt3rdFcWluW4pvTzBYemRxWNWphCkU1/ciEbKc0cHbeZt7kNqEZB9Zl
+	+yEXH7AYpOUNA4sRwxLvpW6NtFS9lrULNY9XpIVhXInEyMtgab+KewQWo8ivPsAfxwK3
+	dY+ZPb08jIER+rVgufOOBifbu1gQCyNNab6Zy2YECzGy+yCOKfTny8FyV7bES3qnJ6I1
+	NiuNMcCWYUDNbdZSDCUHeLXhIC/r2Inzf+fV7DGRcLWMKA5iDb9tVUNrcMq8rkJq3Mzd
+	ZDbq0NgHr+RkP1FeOxyooUej1j+nQLYT4cowyW+TaZm78ytkjxFo5+JHNjm2eSz4WLMN
+	ll3w==
+Received: by 10.14.174.198 with SMTP id x46mr36125226eel.23.1354586651845;
+	Mon, 03 Dec 2012 18:04:11 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a44sm34808246eeo.7.2012.12.03.18.04.03
+	by mx.google.com with ESMTPS id 46sm34813862eeg.4.2012.12.03.18.04.10
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:04:03 -0800 (PST)
+	Mon, 03 Dec 2012 18:04:11 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:05 +0100
-Message-Id: <c1daa099ec2fc074e7e779b083946218c2f582ab.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:06 +0100
+Message-Id: <3879ed931f53e293a53ed6aff5beb1aa3396cea3.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 32/58] notification: remove recipe, notification module is now part of e-wm
+Subject: [PATCH 33/58] waker: remove recipe, source was removed in r70549
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:18:23 -0000
-
-* merged to e in r64475
+X-List-Received-Date: Tue, 04 Dec 2012 02:18:34 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/notification_svn.bb | 13 -------------
- 1 file changed, 13 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/e17/notification_svn.bb
+ meta-efl/recipes-efl/e17/waker_svn.bb | 17 -----------------
+ 1 file changed, 17 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/e17/waker_svn.bb
 
-diff --git a/meta-efl/recipes-efl/e17/notification_svn.bb b/meta-efl/recipes-efl/e17/notification_svn.bb
+diff --git a/meta-efl/recipes-efl/e17/waker_svn.bb b/meta-efl/recipes-efl/e17/waker_svn.bb
 deleted file mode 100644
-index 1f4567a..0000000
---- a/meta-efl/recipes-efl/e17/notification_svn.bb
+index 1d6d846..0000000
+--- a/meta-efl/recipes-efl/e17/waker_svn.bb
 +++ /dev/null
-@@ -1,13 +0,0 @@
--LICENSE = "MIT"
--PV = "0.2.0+svnr${SRCPV}"
--PR = "${INC_PR}.0"
+@@ -1,17 +0,0 @@
+-DESCRIPTION = "An EFL base at/alarm wakeup daemon"
+-LICENSE = "LGPL"
+-DEPENDS = "ecore edbus"
+-SECTION = "console"
+-PV = "0.0.0+svnr${SRCPV}"
+-SRCREV = "${EFL_SRCREV}"
 -
--require e-module.inc
+-inherit efl
 -
--do_configure_prepend() {
--    sed -i -e /po/d configure.ac
--    sed -i -e s:\ po::g Makefile.am
--}
+-SRC_URI = "\
+-  ${E_SVN}/trunk/TMP/st;module=${SRCNAME};protocol=http \
+-  file://0001-waker-remove-old-ecore_string_init-and-ecore_string_.patch \
+-"
+-S = "${WORKDIR}/${SRCNAME}"
 -
--
--
+-FILES_${PN} += "${bindir}/* ${libdir}/lib*.so.*"
+-FILES_${PN} += "/etc/X11/Xsession.d/80x-enlightenment-wakerd"
 -- 
 1.8.0
 
