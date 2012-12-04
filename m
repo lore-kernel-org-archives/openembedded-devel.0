@@ -1,37 +1,25 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TfrOr-0004lN-A5
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TfrS8-0005GG-Ci
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 13:14:57 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2148097eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 04:00:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=FvfD9hkMJlmU/Fk2wPqmmfmtlKjFAYRwsmETusTZXv8=;
-	b=gJKXnqOpU9bX/9s6auq2Wy19+pd5xabMMO2tOJ+TZQwZuxNCbi2DEaJzGL5LLaeaw+
-	VPHfCHlME14B+xTv3dQLcXND0pr255X8h/aualfxpNpL9wgvXF60aXwp4Dw+OFwFOke9
-	Vex2uGnSzjZ4hwIl7TCNKNkXuuX/FOUAMFOlY+AqLP1x2xeirb1ud9JXK7DW1+yGTe+T
-	crUmS3H5SbtIvYnXjN5jWEJUqBYzCVsbi8ma27Iezz2gccuRGd8ex9tpmGlsn0b3a6Je
-	O8q1/MHehClvtlWMEITl6Zw4R1PTfjtm8efZ7LQTZ1Y3EI+uTrpfBiZx04EcFPtAznCf
-	W1Ww==
-Received: by 10.14.3.195 with SMTP id 43mr47778981eeh.36.1354622437160;
-	Tue, 04 Dec 2012 04:00:37 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b2sm2206495eep.9.2012.12.04.04.00.36
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 04 Dec 2012 04:00:36 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 12:59:56 +0100
-Message-Id: <3628afcc5eb78935b7ed8915badc1a0f2b7e9c1f.1354622319.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-In-Reply-To: <cover.1354622319.git.Martin.Jansa@gmail.com>
-References: <cover.1354622319.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1354622319.git.Martin.Jansa@gmail.com>
-References: <cover.1354622319.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 5/5] meta-systemd: ntp: update for server config improvements
+	Tue, 04 Dec 2012 13:18:20 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 04 Dec 2012 04:03:56 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,215,1355126400"; d="scan'208";a="258754115"
+Received: from unknown (HELO helios.localnet) ([10.252.122.195])
+	by fmsmga002.fm.intel.com with ESMTP; 04 Dec 2012 04:03:28 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jack Mitchell <ml@communistcode.co.uk>
+Date: Tue, 04 Dec 2012 12:03:28 +0000
+Message-ID: <5624443.Kl8UZdugLa@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
+In-Reply-To: <1354622018-17958-1-git-send-email-ml@communistcode.co.uk>
+References: <1354622018-17958-1-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH] hiawatha: add new patch to fix xslt implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +33,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 12:14:57 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 12:18:20 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Hi Jack,
 
-This makes the service use the ntpdate-sync command which reads the
-servers set in /etc/default/ntpdate; if nothing is set then no error is
-produced on startup.
+On Tuesday 04 December 2012 11:53:38 Jack Mitchell wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> 
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>  .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71
+> ++++++++++++++++++++++ .../recipes-httpd/hiawatha/hiawatha_8.6.bb         |
+>  3 +-
+>  2 files changed, 73 insertions(+), 1 deletion(-)
+>  create mode 100644
+> meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+> 
+> diff --git a/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+> b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch new file mode
+> 100644
+> index 0000000..41bf4cc
+> --- /dev/null
+> +++ b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+> @@ -0,0 +1,71 @@
+> +Upstream Status: Backport
+> +Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> +---
+> + src/xslt.c | 19 +++++++------------
+> + 1 file changed, 7 insertions(+), 12 deletions(-)
+> +
+> +diff --git a/src/xslt.c b/src/xslt.c
+> +index 9d8d31a..58ca52d 100644
+> +--- a/src/xslt.c
+> ++++ b/src/xslt.c
+> +@@ -23,6 +23,7 @@
+> + #include <libxslt/transform.h>
+> + #include <libxslt/xsltutils.h>
+> + #include "libstr.h"
+> ++#include "liblist.h"
+> + #include "send.h"
+> + #include "log.h"
+> + #ifdef ENABLE_TOMAHAWK
+> +@@ -343,10 +344,10 @@ bool can_transform_with_xslt(t_session *session) {
+> + static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
+> + 	xmlDocPtr style_xml, result_xml;
+> + 	xsltStylesheetPtr xslt;
+> +-	xmlOutputBufferPtr output;
+> ++	xmlChar *raw_xml;
+> + 	char value[VALUE_SIZE + 1];
+> + 	const char **params;
+> +-	int result = 200;
+> ++	int result = 200, raw_size;
+> +
+> + 	/* Read XML data
+> + 	 */
+> +@@ -396,14 +397,8 @@ static int apply_xslt_sheet(t_session *session,
+> xmlDocPtr data_xml) { + 		xsltFreeStylesheet(xslt);
+> + 		return 500;
+> + 	}
+> +-	if ((output = xmlAllocOutputBuffer(NULL)) == NULL) {
+> +-		xmlFreeDoc(result_xml);
+> +-		xsltFreeStylesheet(xslt);
+> +-		return 500;
+> +-	}
+> +-    if (xsltSaveResultTo(output, result_xml, xslt) == -1) {
+> ++	if (xsltSaveResultToString(&raw_xml, &raw_size, result_xml, xslt) == 
+-1)
+> { + 		log_file_error(session, session->file_on_disk, "transformation
+> error"); +-		xmlOutputBufferClose(output);
+> + 		xmlFreeDoc(result_xml);
+> + 		xsltFreeStylesheet(xslt);
+> + 		return 500;
+> +@@ -414,17 +409,17 @@ static int apply_xslt_sheet(t_session *session,
+> xmlDocPtr data_xml) { + 	value[VALUE_SIZE] = '\0';
+> + 	if (send_buffer(session, hs_conlen, 16) == -1) {
+> + 		result = -1;
+> +-	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", output->buffer->use)
+> == -1) { ++	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", raw_size)
+> == -1) { + 		result = -1;
+> + 	} else if (send_buffer(session, value, strlen(value)) == -1) {
+> + 		result = -1;
+> +-	} else if (send_buffer(session, (char*)output->buffer->content,
+> output->buffer->use) == -1) { ++	} else if (send_buffer(session,
+> (char*)raw_xml, raw_size) == -1) { + 		result = -1;
+> + 	}
+> +
+> + 	/* Free buffers
+> + 	 */
+> +-	xmlOutputBufferClose(output);
+> ++	xmlFree(raw_xml);
+> + 	xmlFreeDoc(result_xml);
+> + 	xsltFreeStylesheet(xslt);
+> +
+> +--
+> +1.8.0.1
+> +
+> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb index
+> 7dcbe9e..0a5b303 100644
+> --- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> @@ -9,7 +9,8 @@ PR = "r1"
+>  SECTION = "net"
+> 
+>  SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+> -           file://hiawatha-init"
+> +           file://hiawatha-init \
+> +           file://xslt-fix.patch "
+> 
+>  SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
+>  SRC_URI[sha256sum] =
+> "1a7fa98ce66beb54fc8490cc787461d719a98cb0e4a81caedfa18ac8b5ba3b3b"
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Looks good but you also need to bump PR, can you do this and resend?
 
-diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
-index b2bc632..10cbd70 100644
---- a/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
-+++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/ntpdate.service
-@@ -4,7 +4,7 @@ Before=ntpd.service
- 
- [Service]
- Type=oneshot
--ExecStart=/usr/bin/ntpd -q -g -x
-+ExecStart=/usr/bin/ntpdate-sync silent
- RemainAfterExit=yes
- 
- [Install]
+Thanks,
+Paul
+
 -- 
-1.8.0
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
