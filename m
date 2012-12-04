@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8S-00040y-5E
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8h-0005OA-7J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:21:24 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
+	Tue, 04 Dec 2012 03:21:41 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so1927519eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=pO9r9IvumrZQmAFYeU85Ls2laXz3UureN3AcobGc9xY=;
-	b=nKzi7l9KehRyUPN6eDrVdxvhwAADNl4gjhqOC9kUXie/TTaOolhkOs5K8fSB9350Eb
-	s4urQ71TeNj3/Nr4WqWBv6rtNBeDNyIPt1f8IT6zd4nJ7PXN2FI7vCMH2yFbQ+AnrMjD
-	ce6THFUlZRLL9m4DosJYGvyT1cq7B3XYcffMAka+mj4tpcGsdsT7TvEsgaC6jXgcm6X5
-	Wp0UrVldcDexOvqBtw+22UuynG+Swa5gF4pLoNdBW0lC+G6eIAoGCmEQ4/Dl8vVdPgR+
-	eDYlq7m8xwhWmR58EhTpVttpe/dERAFpQ5dlwFubdRQJPv1CXyALDpVg6R79SX94hEC4
-	vZ8g==
-Received: by 10.14.214.132 with SMTP id c4mr42837682eep.18.1354586824561;
-	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
+	bh=gfm1Pkzn3ee4pDN4+IWERGKEOy/zQLpPKRgNiPdfIcc=;
+	b=Aty4jpI0urWuorp1Pp9RO7NTxU6y13WVD/YRaOzVHRSUyvz7g4q2lxVMWLcO3WwCOD
+	ASukAR60hHkhxYE4CnaIU+m8s0l4k3pCF2fuWKVENGfpP1CsP/RMlfEap7k4LiGyGyzk
+	d+IZykMerxDNNeIxPOXKvTgYRPgwHpkN+mi12dBJ9AewdZzdtg95c5V2FJ1f+VvpbZEi
+	ViwD8/uxO1h9Jr8uahydKrO2bPgwqp6nWXZDKYCie6os73QUIfXcHHeClzoxd7RuOXAQ
+	etcamU0ec1A7hYaJZjrCU2rFhgiI8qI2qAfQHVAVwk8gJUwjtMAAtcqJLLHbSxBXx83p
+	vVbg==
+Received: by 10.14.216.70 with SMTP id f46mr42634745eep.12.1354586837578;
+	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b49sm18593970eem.16.2012.12.03.18.07.03
+	by mx.google.com with ESMTPS id w3sm34847697eel.17.2012.12.03.18.07.16
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:28 +0100
-Message-Id: <f7c5854ae182f409e2a4e1b34d433a89030cae08.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:30 +0100
+Message-Id: <4ce0a4e3663458d2193b7c2ce67cf13d8a4acf70.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 55/58] lua5.1: fix packaging QA warnings
+Subject: [PATCH 57/58] eject: drop 2nd LICENSE field
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,44 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:21:24 -0000
-
-* Fixes:
-  lua5.1-5.1.4: lua5.1: Files/directories were installed but not shipped
-    /usr/share/lua
-    /usr/share/lua/5.1
-    /usr/lib/lua
-    /usr/lib/lua/5.1
+X-List-Received-Date: Tue, 04 Dec 2012 02:21:42 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/eject/eject_2.1.5.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-index eca7755..0dc81db 100644
---- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-+++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=90c3badc6055c699194c4a7cea583296"
- HOMEPAGE = "http://www.lua.org/"
+diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+index 0373d23..3f17fe8 100644
+--- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
++++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+@@ -1,11 +1,8 @@
+ DESCRIPTION = "Eject allows removable media (typically a CD-ROM, floppy disk, tape, or JAZ or ZIP disk) to be ejected under software control."
+ HOMEPAGE = "http://eject.sourceforge.net/"
+ LICENSE = "GPLv2"
+-
+-LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
  
- DEPENDS += "readline"
--PR = "r10"
-+PR = "r11"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
-            file://bitwise_operators.patch \
-            file://lua5.1.pc \
-@@ -38,6 +38,10 @@ do_install () {
- 		install
- 	install -d ${D}${libdir}/pkgconfig
- 	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
-+	rmdir ${D}${libdir}/lua/5.1
-+	rmdir ${D}${libdir}/lua
-+	rmdir ${D}${datadir}/lua/5.1
-+	rmdir ${D}${datadir}/lua
- }
- BBCLASSEXTEND = "native"
+-
+ inherit autotools gettext update-alternatives
  
+ SRC_URI = "http://sources.openembedded.org/${P}.tar.gz"
 -- 
 1.8.0
 
