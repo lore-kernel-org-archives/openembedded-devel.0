@@ -1,41 +1,38 @@
-Received: from mga07.intel.com ([143.182.124.22] helo=azsmga101.ch.intel.com)
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tfqnz-0003dW-Cf
+	(envelope-from <martin.jansa@gmail.com>) id 1TfquX-0003n9-AH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 12:36:51 +0100
-Received: from mail-ob0-f197.google.com ([209.85.214.197])
-	by mga03.intel.com with ESMTP/TLS/RC4-SHA; 04 Dec 2012 03:21:21 -0800
-Received: by mail-ob0-f197.google.com with SMTP id v19so16774694obq.0
+	Tue, 04 Dec 2012 12:43:38 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1526599eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 03:21:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=S/Gcb3NhY4AmcPvQcpie+1KX76KaHafJr1h1rlfBjlM=;
-	b=CZ36RYa5le/8WNdRlrT3PIAUwcyN0B9rxralCeo+ES/kCaE9Y+uk+vK8PDtKJOnO4E
-	uNbtYFBdwJFNigtXaBFBaJtefUz/aR8ScAfolqyTdfKYX9Ok473SQfPI+7b+J0prapk8
-	0MVlFFi7vneJRh+68Qf01bsZbyxhxFa3kEQ/vPGD0FxuqXZ1W+FQaWgdUkzRo26B5d7O
-	mMGI9Fe+n7oN/QJHqJVRYchJNPaldpRziJ0Ld6eZvyKu1KbXWpZBMhLUhBfsKNTS6h2W
-	Efd7DqDbMoyMRXaEuWtJupTK/HDd0J/zCYjmB944l4jpEFNBzWghCs2AAkiMkohMidaf
-	mUkw==
-Received: by 10.60.4.165 with SMTP id l5mr5341539oel.84.1354620080554;
-	Tue, 04 Dec 2012 03:21:20 -0800 (PST)
-Received: by 10.60.4.165 with SMTP id l5mr5341535oel.84.1354620080447; Tue, 04
-	Dec 2012 03:21:20 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.132.198 with HTTP; Tue, 4 Dec 2012 03:21:00 -0800 (PST)
-In-Reply-To: <CAJTo0LZi1z7Enry_9T1VDvaOtmQgasyuwoFq6b2OUgYmf_-i6g@mail.gmail.com>
-References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
-	<ea86ab799567bbf1f2fd02d47f9bdc775ba26f9e.1353602922.git.paul.eggleton@linux.intel.com>
-	<20121204074429.GA6288@ad.chargestorm.se> <11016715.fxrlBBZh8S@helios>
-	<CAJTo0LZi1z7Enry_9T1VDvaOtmQgasyuwoFq6b2OUgYmf_-i6g@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 4 Dec 2012 11:21:00 +0000
-Message-ID: <CAJTo0LYBxpAbu4hZoX4rfdXTnfp6MnpLDgEaYx520TU2hr8qJg@mail.gmail.com>
+	Tue, 04 Dec 2012 03:29:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=FTBLQTPQd3yntM0Sy6itrq+pck4Bkg/qSmg4Oza2BmA=;
+	b=E8V+ZgzOG0i4pHes1DspqPsEA+CPiCSuda0U67a1BcKAalT4Ba9qtee6kpdjb75+6Z
+	VXrW26XkspgIqJURj5RG3jjAQA6TTilc6oACuDHhG1jWn0KMDHtFIkXqXgGHoVv0d4k1
+	CzkKzkmP0scBgmaNRb4mYa7XiGmPq9uOw9LH8lsQ2yg/AnV3n0dzDIYBHcdu7tvS/jqx
+	xDBmmMfiIHI5q13t8Wi0Lk6y+B5QfJWPGRWNxTDePQBgA3v4VjF4ENtTKRHPBkOIJ+/p
+	uRtQmKAc2F10Y4daEFk18ORic6cbXo32Y9ZKryFPbbbiyTcxgbg5uXZ0zemVL6xYxd97
+	MHAw==
+Received: by 10.14.174.198 with SMTP id x46mr40907565eel.23.1354620554927;
+	Tue, 04 Dec 2012 03:29:14 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id b2sm2061039eep.9.2012.12.04.03.29.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 04 Dec 2012 03:29:14 -0800 (PST)
+Date: Tue, 4 Dec 2012 12:29:10 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkKSFgBsyoiI0Ow6SZx2fTDp31sw0KrabVtE1Ut2huj17HKHTzNjgwTy9Zp1AnhKviYSdHwH5WJrxzLf+Fb3vQ489HObwsh5jUIFIfFMZJtGSh1F6v7xwIz9JHSjGBDidxZaXuCvxU4s/UX5eaZcPq1gTAIEPFae/zn3VeCiEP3RjVafnEB8vlZv2eoYMV1QMohcD80
-Subject: Re: [danny?] Re: [meta-networking][PATCH v2 1/2] ntp: cleanup recipes and fix SSL support
+Message-ID: <20121204112910.GC14870@jama.jama.net>
+References: <1353937823-29509-1-git-send-email-ross.burton@intel.com>
+	<20121204101412.GB14870@jama.jama.net>
+	<CAJTo0LbFWM01+1T6yB0WO6VA3bL+=GJe+-nypizr3roAzRNJpw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LbFWM01+1T6yB0WO6VA3bL+=GJe+-nypizr3roAzRNJpw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] meta-oe: remove guile, it's in oe-core now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,20 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 11:36:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Dec 2012 11:43:38 -0000
+X-Groupsio-MsgNum: 41958
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ABTtc+pdwF7KHXCz"
+Content-Disposition: inline
 
-On 4 December 2012 11:20, Burton, Ross <ross.burton@intel.com> wrote:
-> On 4 December 2012 09:21, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
->> IMO the original recipe was horribly broken, so I'd definitely support having
->> this patch applied to danny as well, assuming people have given it a
->> reasonable amount of runtime testing and everything's OK.
->
-> It's horribly intrusive but if ntp wasn't usable before, I'm happy to
-> merge it once it's had some testing.
+--ABTtc+pdwF7KHXCz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Of course ntp isn't in oe-core so ignore my opinion. ;)
+On Tue, Dec 04, 2012 at 11:18:57AM +0000, Burton, Ross wrote:
+> On 4 December 2012 10:14, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > On Mon, Nov 26, 2012 at 01:50:23PM +0000, Ross Burton wrote:
+> >> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> >
+> > Also there is bad charset defined in this patch:
+> > Content-Type: text/plain; charset=3Dy
+> > Content-Transfer-Encoding: 8bit
+> >
+> > $ git am -s patches/cur/1354615270.14870_19.jama\:2\,RS
+> > fatal: cannot convert from y to UTF-8
+> >
+> > I'll apply it manually.
+>=20
+> I had the option of not sending a patch via email, or sending a patch
+> that won't apply cleanly. :/
 
-Ross
+Why? I guess it was because you replied 'y' to:
+Which 8bit encoding should I declare [UTF-8]?=20
 
+Sorry for 2 CCed emails now.. I just tested this :).
 
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--ABTtc+pdwF7KHXCz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlC93oYACgkQN1Ujt2V2gByrEwCdHSoUDfVkFWs2fol7Ic5MAu4w
+nfoAoISL1vY+L4XhdELAkSHY2H+tRVjh
+=oesL
+-----END PGP SIGNATURE-----
+
+--ABTtc+pdwF7KHXCz--
