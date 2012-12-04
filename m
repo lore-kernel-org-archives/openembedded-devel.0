@@ -1,35 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1Tfxx0-0002yj-GA
+	(envelope-from <martin.jansa@gmail.com>) id 1TfyHj-0003Gh-F3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 20:14:38 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qB4J0GtK028266
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 04 Dec 2012 20:36:07 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1700818eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Dec 2012 11:00:16 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Tue, 4 Dec 2012 11:00:14 -0800
-Received: from yow-jmacdona-d2.windriver.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 388147FE2	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2012 13:59:19 -0500 (EST)
-Received: by yow-jmacdona-d2.windriver.com (Postfix, from userid 1000)	id
-	C77036A7EA9; Tue,  4 Dec 2012 14:00:13 -0500 (EST)
-Date: Tue, 4 Dec 2012 14:00:13 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121204190013.GC12977@windriver.com>
-References: <cover.1354555874.git.paul.eggleton@linux.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <cover.1354555874.git.paul.eggleton@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 00/11] More networking recipes
+	Tue, 04 Dec 2012 11:21:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=juoLJiNPZ5hDzY8tBxzoBxElbJhS4zxOIT9mia7aZKQ=;
+	b=s6L0iugJIcjHVuggj9pUguhDUWKmCdyXF4nCZSf+waqrnsYvD19B7wfFzsm09bT52g
+	jZcvTrE75cqDYl5xb9IRgtS8T4Jhs4lgRO0P9f/xKK+J+1Ip81mg+DwkGs253CUaHehJ
+	McVhfbwFijerEOg6wFTeuwyOIDMbToKJD9NSEiePWn6uD5gbN9DWBL1dhDq2+gMSgCI2
+	VK1VfrDPc1fPy/NLJvGcRZ5wJ+W90UXtoHmDqdaqkIxdGvRCsRk5fGnRhLLBA4Yvl6TN
+	u+M63EJSTOd+SwFgXFK8Y9MbYly6X2RUJSeUMoRjqht535ICoN0yfb2GZhnWfT5wplfV
+	292g==
+Received: by 10.14.194.4 with SMTP id l4mr51695895een.42.1354648900646;
+	Tue, 04 Dec 2012 11:21:40 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 44sm4338300eek.0.2012.12.04.11.21.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 04 Dec 2012 11:21:40 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Dec 2012 20:21:28 +0100
+Message-Id: <355794a5881513c8e8ef22d76e9224f3149d4d3c.1354646880.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
+References: <cover.1354586187.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1354646880.git.Martin.Jansa@gmail.com>
+References: <cover.1354646880.git.Martin.Jansa@gmail.com>
+Subject: [PATCH 59/64] libcanberra: skip dev-so QA for PN-gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,134 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 19:14:38 -0000
-X-Groupsio-MsgNum: 41983
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PuGuTyElPB9bOcsM"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 04 Dec 2012 19:36:08 -0000
 
---PuGuTyElPB9bOcsM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* fixes:
+libcanberra-0.26: non -dev/-dbg/-nativesdk package contains symlink .so: libcanberra-gtk path '/work/armv7a-vfp-neon-oe-linux-gnueabi/libcanberra/0.26-r2/packages-split/libcanberra-gtk/usr/lib/gtk-3.0/modules/libcanberra-gtk-module.so'
 
-Taking this out for a spin now, looks reasonable to me, though.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
--J.
+diff --git a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
+index 8a03c99..5cf9a55 100644
+--- a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
++++ b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
+@@ -47,6 +47,9 @@ FILES_${PN}-gtk = "\
+   ${datadir}/gdm \
+ "
+ 
++# /usr/lib/gtk-3.0/modules/libcanberra-gtk-module.so > /usr/lib/gtk-3.0/modules/libcanberra-gtk3-module.so
++INSANE_SKIP_${PN}-gtk = "dev-so"
++
+ FILES_${PN}-dev += "\
+   ${libdir}/gtk-2.0/modules/*.la \
+   ${libdir}/gtk-3.0/modules/*.la \
+-- 
+1.8.0
 
-[[oe] [meta-networking][PATCH 00/11] More networking recipes] On 12.12.03 (=
-Mon 17:44) Paul Eggleton wrote:
 
-> These are updated, rebased and extended versions of patches originally
-> submitted by Vladimir Redzhepoff and Yauhen Kharuzhy, now applied to
-> meta-networking after discussion with them. This series also moves
-> libnfnetlink to meta-networking and adds some additional netfilter
-> library recipes needed for current versions of the netfilter suite.
->=20
-> Note that the original patch for pure-ftpd said that it was an updated
-> version of a recipe from OE-Classic; there was no such recipe in
-> OE-Classic however so I have commented it as a new recipe.
-> The libnetfilter-queue recipe was written from scratch as I did not
-> notice it was in OE-Classic; neither version has anything particularly
-> interesting in it and this version is more up-to-date.
->=20
->=20
-> The following changes since commit 85ab35f4edac91ecc180161e97c6698f1c1092=
-8b:
->=20
->   netperf: Correct license flags (2012-11-30 11:49:56 -0500)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib paule/networking2
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Dpaule/networking2
->=20
-> Paul Eggleton (11):
->   netcat: add from OE-Classic
->   libnfnetlink: move to meta-networking and update to 1.0.1
->   libmnl: add new recipe for version 1.0.3
->   libnetfilter-conntrack: add from OE-Classic and update
->   libnetfilter-cttimeout: add new recipe for version 1.0.0
->   libnetfilter-cthelper: add new recipe for version 1.0.0
->   libnetfilter-queue: add new recipe for version 1.0.2
->   conntrack-tools: add from OE-Classic, update and tidy up
->   ebtables: add from OE-Classic, update and tidy up
->   pure-ftpd: add new recipe for 1.0.36
->   pptp-linux: add from OE-Classic, update and tidy up
->=20
->  ...coded-usr-local-includes-from-configure.a.patch |   38 ++++
->  .../pure-ftpd/pure-ftpd/nostrip.patch              |   30 ++++
->  .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb  |   19 ++
->  .../conntrack-tools/conntrack-tools_1.4.0.bb       |   33 ++++
->  .../conntrack-tools/files/conntrack-failover       |   77 ++++++++
->  .../recipes-filter/conntrack-tools/files/init      |   87 +++++++++
->  .../ebtables-2.0.10-4/01debian_defaultconfig.patch |   50 ++++++
->  .../ebtables/ebtables-2.0.10-4/ebtables.init       |  186 ++++++++++++++=
-++++++
->  .../ebtables-2.0.10-4/installnonroot.patch         |   43 +++++
->  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   52 ++++++
->  .../recipes-filter/libmnl/libmnl_1.0.3.bb          |   12 ++
->  .../libnetfilter/libnetfilter-conntrack_1.0.2.bb   |   14 ++
->  .../libnetfilter/libnetfilter-cthelper_1.0.0.bb    |   14 ++
->  .../libnetfilter/libnetfilter-cttimeout_1.0.0.bb   |   13 ++
->  .../libnetfilter/libnetfilter-queue_1.0.2.bb       |   14 ++
->  .../libnfnetlink/libnfnetlink_1.0.1.bb             |   11 +-
->  .../pptp-linux/pptp-linux-1.7.2/options.pptp       |   30 ++++
->  .../pptp-linux/pptp-linux_1.7.2.bb                 |   29 +++
->  .../recipes-support/netcat/netcat_0.7.1.bb         |   21 +++
->  19 files changed, 768 insertions(+), 5 deletions(-)
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0=
-001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/n=
-ostrip.patch
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1=
-=2E0.36.bb
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/conntr=
-ack-tools_1.4.0.bb
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
-conntrack-failover
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
-init
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/01debian_defaultconfig.patch
->  create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/ebtables.init
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/installnonroot.patch
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables_2.0.=
-10-4.bb
->  create mode 100644 meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-conntrack_1.0.2.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-cthelper_1.0.0.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-cttimeout_1.0.0.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-queue_1.0.2.bb
->  rename meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb =
-=3D> meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb (60%)
->  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
-ux-1.7.2/options.pptp
->  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
-ux_1.7.2.bb
->  create mode 100644 meta-networking/recipes-support/netcat/netcat_0.7.1.bb
->=20
---=20
--Joe MacDonald.
-:wq
 
---PuGuTyElPB9bOcsM
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlC+SD0ACgkQPN8S4W6ZZnfk2QCfWNWuRkgJZJ8W/rF4YYGJekP0
-YVMAn1G4i0JKOQngd4bp3nX6c2lLuAkT
-=zZ2A
------END PGP SIGNATURE-----
-
---PuGuTyElPB9bOcsM--
