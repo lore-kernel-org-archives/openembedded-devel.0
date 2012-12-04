@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8h-0005OA-7J
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8i-0005QU-LY
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 04 Dec 2012 03:21:41 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1927519eek.6
+Received: by mail-ea0-f175.google.com with SMTP id h11so1378899eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=gfm1Pkzn3ee4pDN4+IWERGKEOy/zQLpPKRgNiPdfIcc=;
-	b=Aty4jpI0urWuorp1Pp9RO7NTxU6y13WVD/YRaOzVHRSUyvz7g4q2lxVMWLcO3WwCOD
-	ASukAR60hHkhxYE4CnaIU+m8s0l4k3pCF2fuWKVENGfpP1CsP/RMlfEap7k4LiGyGyzk
-	d+IZykMerxDNNeIxPOXKvTgYRPgwHpkN+mi12dBJ9AewdZzdtg95c5V2FJ1f+VvpbZEi
-	ViwD8/uxO1h9Jr8uahydKrO2bPgwqp6nWXZDKYCie6os73QUIfXcHHeClzoxd7RuOXAQ
-	etcamU0ec1A7hYaJZjrCU2rFhgiI8qI2qAfQHVAVwk8gJUwjtMAAtcqJLLHbSxBXx83p
-	vVbg==
-Received: by 10.14.216.70 with SMTP id f46mr42634745eep.12.1354586837578;
-	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
+	bh=pEAyS58u7QOrSqcM2J6TFCjkgCUra1E1iqCezZTvJwo=;
+	b=dODyTBKivOAggp6SvCWeoaIHCX4Z+7sIXeOCBuI03BhPCr1Qeb9qyj+uEsFcuEActB
+	GXn5bPAZVxLzzWL3lnAYJBo/5vnJKg84+xFUvQ7oaRgO8eWcgjp1cd+qOfKTFnegLCeM
+	LZANemqTB3OGR4KvC2iFB9u9Dvkr3dthf3Qpp/xx5ZU+vnLX/C7GVlwVZIOsAYgr4RzC
+	aaVGC0KQNdPph2roAEHKpW/vl10cbOvjvgJEw9oIl9C2ckkn8pD09TYQCZ0DInzVB7ga
+	ExVc68xybWrQ4h5DcqLf8Td2XBCCdVKg8ydS6pH6nL9ggJ7FBB9OENHn0fyUgxUYZ7Pu
+	au+w==
+Received: by 10.14.184.131 with SMTP id s3mr42634171eem.38.1354586839005;
+	Mon, 03 Dec 2012 18:07:19 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id w3sm34847697eel.17.2012.12.03.18.07.16
+	by mx.google.com with ESMTPS id z8sm34815001eeo.11.2012.12.03.18.07.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:07:17 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:18 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:30 +0100
-Message-Id: <4ce0a4e3663458d2193b7c2ce67cf13d8a4acf70.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:31 +0100
+Message-Id: <c4edc88757afce5fa7416086bcedc3a574200946.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 57/58] eject: drop 2nd LICENSE field
+Subject: [PATCH 58/58] eject: use new update-alternatives and add u-a for eject
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +47,36 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 04 Dec 2012 02:21:42 -0000
 
+* eject conflicts with util-linux now
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/eject/eject_2.1.5.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ meta-oe/recipes-support/eject/eject_2.1.5.bb | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
 diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index 0373d23..3f17fe8 100644
+index 3f17fe8..3f2c90d 100644
 --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
 +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -1,11 +1,8 @@
- DESCRIPTION = "Eject allows removable media (typically a CD-ROM, floppy disk, tape, or JAZ or ZIP disk) to be ejected under software control."
- HOMEPAGE = "http://eject.sourceforge.net/"
- LICENSE = "GPLv2"
--
--LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+@@ -12,12 +12,11 @@ SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e
  
--
- inherit autotools gettext update-alternatives
+ S = "${WORKDIR}/${PN}"
  
- SRC_URI = "http://sources.openembedded.org/${P}.tar.gz"
+-do_install_append() {
+-  mv ${D}/${bindir}/volname ${D}/${bindir}/volname.${PN}
+-}
++PR = "r1"
+ 
+-ALTERNATIVE_NAME = "volname"
+-ALTERNATIVE_LINK = "${bindir}/volname"
+-ALTERNATIVE_PATH = "${bindir}/volname.${PN}"
+-ALTERNATIVE_PRIORITY = "100"
++ALTERNATIVE_${PN} = "volname eject"
++ALTERNATIVE_LINK_NAME[volname] = "${bindir}/volname"
++ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
++ALTERNATIVE_PRIORITY[volname] = "100"
++ALTERNATIVE_PRIORITY[eject] = "100"
+ 
 -- 
 1.8.0
 
