@@ -1,41 +1,23 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tfr41-0003xZ-Uj
+	(envelope-from <ml@communistcode.co.uk>) id 1TfrGM-0004WO-Na
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 12:53:26 +0100
-Received: from mail-ia0-f197.google.com ([209.85.210.197])
-	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 04 Dec 2012 03:38:16 -0800
-Received: by mail-ia0-f197.google.com with SMTP id x26so6603791iak.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 03:39:01 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=EgRUrh5ANg0pQmrn9IJvksI8oDdt4XwJ4sHLy8AQD1U=;
-	b=Iht5WM0hzHHH034O+kwD+dW3BZn5YUT6hmG00/Bhj72Wa8F5PIrjQYxZBX0EG+73nj
-	yHklL+NvNrhIwDmkedNktGLFr4gY2Y1j0jybbCIz8EiYziD3fgG3is2dkaEBQ8lZeuKL
-	PGQoub0iuuxQXPXXbtfzhfNiLqQw/N/jVSzDUJkgETuzO7plK+y/pl4NPbN13KfG83IP
-	MPzDruAnt9lGNZgk8kpmdERGFI7dUJ9+HgdVl2+FJbv3TbHiCqC+uQJMojKE4se6TLWu
-	tMBM4ko1Iux0PdfYmKTl6wZzu6yrRQeeCotAtBulct+XuAxAQfNadhNuu7CMYh+WIZ/r
-	J6qA==
-Received: by 10.182.164.103 with SMTP id yp7mr7277663obb.74.1354621141526;
-	Tue, 04 Dec 2012 03:39:01 -0800 (PST)
-Received: by 10.182.164.103 with SMTP id yp7mr7277662obb.74.1354621141388;
-	Tue, 04 Dec 2012 03:39:01 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.132.198 with HTTP; Tue, 4 Dec 2012 03:38:41 -0800 (PST)
-In-Reply-To: <20121204112910.GC14870@jama.jama.net>
-References: <1353937823-29509-1-git-send-email-ross.burton@intel.com>
-	<20121204101412.GB14870@jama.jama.net>
-	<CAJTo0LbFWM01+1T6yB0WO6VA3bL+=GJe+-nypizr3roAzRNJpw@mail.gmail.com>
-	<20121204112910.GC14870@jama.jama.net>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 4 Dec 2012 11:38:41 +0000
-Message-ID: <CAJTo0LYBCKCoggC3tnfnyG6TS-1-jRgsUJ-PMGjetrTLDC72Pw@mail.gmail.com>
+	Tue, 04 Dec 2012 13:06:11 +0100
+Received: from localhost ([127.0.0.1]:60360 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>)
+	id 1Tfr2R-000783-9E; Tue, 04 Dec 2012 11:51:47 +0000
+Received: from [195.171.99.130] (port=9691 helo=archhp.dbnet.local)
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>)
+	id 1Tfr2R-00077t-4D; Tue, 04 Dec 2012 11:51:47 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkQYnYt8ekBE9lyY3VdPFlcB9Uc/o2mM15rSFis4cnVCuSZkoU2hSjd2HO3DeYFAjJUY+jKnAN1cFsNYzeDAWmolDzGCu63lTWtX+fgK9oN1Q254FryjvNYE6hR3stlc4elW8cc1o1VsVss/InZA5vd7xciKBkfvT36QimQ0dkqoh1DdhGWRVqP/72QERG/lN/HmOKQ
-Subject: Re: [PATCH] meta-oe: remove guile, it's in oe-core now
+Date: Tue,  4 Dec 2012 11:53:38 +0000
+Message-Id: <1354622018-17958-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.0.1
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-webserver][PATCH] hiawatha: add new patch to fix xslt implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,15 +31,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 11:53:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Dec 2012 12:06:11 -0000
 
-On 4 December 2012 11:29, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Why? I guess it was because you replied 'y' to:
-> Which 8bit encoding should I declare [UTF-8]?
+From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-Ha, whoops. :)
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+---
+ .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71 ++++++++++++++++++++++
+ .../recipes-httpd/hiawatha/hiawatha_8.6.bb         |  3 +-
+ 2 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
 
-Ross
+diff --git a/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+new file mode 100644
+index 0000000..41bf4cc
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+@@ -0,0 +1,71 @@
++Upstream Status: Backport
++Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
++---
++ src/xslt.c | 19 +++++++------------
++ 1 file changed, 7 insertions(+), 12 deletions(-)
++
++diff --git a/src/xslt.c b/src/xslt.c
++index 9d8d31a..58ca52d 100644
++--- a/src/xslt.c
+++++ b/src/xslt.c
++@@ -23,6 +23,7 @@
++ #include <libxslt/transform.h>
++ #include <libxslt/xsltutils.h>
++ #include "libstr.h"
+++#include "liblist.h"
++ #include "send.h"
++ #include "log.h"
++ #ifdef ENABLE_TOMAHAWK
++@@ -343,10 +344,10 @@ bool can_transform_with_xslt(t_session *session) {
++ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
++ 	xmlDocPtr style_xml, result_xml;
++ 	xsltStylesheetPtr xslt;
++-	xmlOutputBufferPtr output;
+++	xmlChar *raw_xml;
++ 	char value[VALUE_SIZE + 1];
++ 	const char **params;
++-	int result = 200;
+++	int result = 200, raw_size;
++ 
++ 	/* Read XML data
++ 	 */
++@@ -396,14 +397,8 @@ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
++ 		xsltFreeStylesheet(xslt);
++ 		return 500;
++ 	}
++-	if ((output = xmlAllocOutputBuffer(NULL)) == NULL) {
++-		xmlFreeDoc(result_xml);
++-		xsltFreeStylesheet(xslt);
++-		return 500;
++-	}
++-    if (xsltSaveResultTo(output, result_xml, xslt) == -1) {
+++	if (xsltSaveResultToString(&raw_xml, &raw_size, result_xml, xslt) == -1) {
++ 		log_file_error(session, session->file_on_disk, "transformation error");
++-		xmlOutputBufferClose(output);
++ 		xmlFreeDoc(result_xml);
++ 		xsltFreeStylesheet(xslt);
++ 		return 500;
++@@ -414,17 +409,17 @@ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
++ 	value[VALUE_SIZE] = '\0';
++ 	if (send_buffer(session, hs_conlen, 16) == -1) {
++ 		result = -1;
++-	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", output->buffer->use) == -1) {
+++	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", raw_size) == -1) {
++ 		result = -1;
++ 	} else if (send_buffer(session, value, strlen(value)) == -1) {
++ 		result = -1;
++-	} else if (send_buffer(session, (char*)output->buffer->content, output->buffer->use) == -1) {
+++	} else if (send_buffer(session, (char*)raw_xml, raw_size) == -1) {
++ 		result = -1;
++ 	}
++ 
++ 	/* Free buffers
++ 	 */
++-	xmlOutputBufferClose(output);
+++	xmlFree(raw_xml);
++ 	xmlFreeDoc(result_xml);
++ 	xsltFreeStylesheet(xslt);
++ 
++-- 
++1.8.0.1
++
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+index 7dcbe9e..0a5b303 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+@@ -9,7 +9,8 @@ PR = "r1"
+ SECTION = "net"
+ 
+ SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+-           file://hiawatha-init"
++           file://hiawatha-init \
++           file://xslt-fix.patch "
+ 
+ SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
+ SRC_URI[sha256sum] = "1a7fa98ce66beb54fc8490cc787461d719a98cb0e4a81caedfa18ac8b5ba3b3b"
+-- 
+1.8.0.1
+
 
 
