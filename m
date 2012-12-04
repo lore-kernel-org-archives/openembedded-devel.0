@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi6y-00040y-F1
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi77-00040y-D2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:19:52 +0100
+	Tue, 04 Dec 2012 03:20:01 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:05:32 -0800 (PST)
+	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=ZGHdfcwpUQopmkvKI9ABWKvcV+ByHmjSKvg4z/f3Bcc=;
-	b=KU79WuZSVpBJhl7LjYYcZ9HON8B1KVw4wVliswiY8JAfNPdtBndyKY344cZgLdo5EM
-	RBgtUs9fPDHa3RbJBJwRF3Vf3ckSd8a7pFBAm6ezDvHmq5B0tNgxTxaVHvcyvfa9S8/S
-	YupDX/pxCuRAG8Lh7jwouvophYMBcUAEXpUTGM+ODDLYyVEksVWlQtk+Oh8wonciWjpJ
-	t5VZjvpGSTTTa0CRnk7UKSoa5Ert0XgKFVCcotdEpiJNEjkLvjkgFDVarU+LmRkE7fLA
-	C0H4hvrSKtfZrjfo97M6AiVmUfDKotDvboO8hvveT61IQLnbM1XR2rbR5ZA+FkQ0z8v8
-	eCgg==
-Received: by 10.14.0.3 with SMTP id 3mr42773059eea.16.1354586732777;
-	Mon, 03 Dec 2012 18:05:32 -0800 (PST)
+	bh=tCetdDK2sDayQmje5aSP/wiOAU6UCJpJlTh3d15vyvo=;
+	b=GStRSjXr0Y6DWZMLWyoDLiEiuLKRjfp0340NXWj6RsxktzpQACGOvpHK5F5kbL4o7i
+	RbzRw09BdBgwjKssxk5EzOJPqHNGp7ntkw0iWSDJKMrezv5ko/saehWioz6KKrHJnt7e
+	eyyHwuBXgch/elXVeGXBHN+hL6qfN4QiGdRIYFPGpklAh9wWMMzdjLfLSgXrWgWIKlGv
+	qW4eA1ijy7NWVc8N4bMZo8ZyhHlkBxVPYDtA9kvzxItuZepHfkbWx+JDHUmfkRXTfMNj
+	eQSf+jtdDxkwdDBGDVtUy16isyfnxXYoe9Hx6LOYFd8UhlzA+TWwBHQjAKCOa1WwuQpg
+	8YsA==
+Received: by 10.14.221.5 with SMTP id q5mr42294489eep.33.1354586741813;
+	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b2sm34810653eep.9.2012.12.03.18.05.31
+	by mx.google.com with ESMTPS id 46sm34819334eeg.4.2012.12.03.18.05.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:05:32 -0800 (PST)
+	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:16 +0100
-Message-Id: <6bd81f8a98bd4e3ec30e042ff54ed2964581eb49.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:17 +0100
+Message-Id: <1b238f2dbf90c01922839e02c7eee4daa3132f67.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 43/58] libgnomeui: fix QA warnings from packaging
+Subject: [PATCH 44/58] pcsc-lite: add bbappend in meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,44 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:19:53 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:20:01 -0000
 
-* fixes:
-libgnomeui-2.24.3: non -staticdev package contains static .a library:
-libgnomeui-dev path
-'/work/armv7a-vfp-neon-oe-linux-gnueabi/libgnomeui/2.24.3-r0/packages-split/libgnomeui-dev/usr/lib/libglade/2.0/libgnome.a'
+* fixes packaging QA warning, when systemd is autodetected:
+pcsc-lite-1.8.6: pcsc-lite: Files/directories were installed but not shipped
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/pcscd.service
+  /lib/systemd/system/pcscd.socket
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/libgnome/libgnomeui.inc       | 3 ++-
- meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb | 2 ++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ .../meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend      | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomeui.inc b/meta-gnome/recipes-gnome/libgnome/libgnomeui.inc
-index 5d0053b..bf9ae69 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomeui.inc
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomeui.inc
-@@ -10,7 +10,8 @@ inherit gnome
- FILES_${PN} += "${libdir}/gtk-2.0/*/filesystems/lib*.so \
-                 ${libdir}/libglade/*/lib*.so \
-                 ${datadir}/pixmaps/gnome-about-logo.png"
--FILES_${PN}-dev += "${libdir}/gtk-2.0/*/filesystems/*.la ${libdir}/gtk-2.0/*/filesystems/*.a ${libdir}/libglade/*/*.la ${libdir}/libglade/*/*.a"
-+FILES_${PN}-dev += "${libdir}/gtk-2.0/*/filesystems/*.la ${libdir}/gtk-2.0/*/filesystems/*.a ${libdir}/libglade/*/*.la"
-+FILES_${PN}-staticdev += "${libdir}/libglade/*/*.a"
- FILES_${PN}-dbg += "${libdir}/gtk-2.0/*/filesystems/.debug/ ${libdir}/libglade/*/.debug/"
- 
- SRC_URI += "file://gnome-stock-pixbufs.h file://no-pixbuf-csource.patch"
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-index 56f2840..597c2ff 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-@@ -1,4 +1,6 @@
- require libgnomeui.inc
- 
-+PR = "r1"
+diff --git a/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend b/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+new file mode 100644
+index 0000000..b8150b7
+--- /dev/null
++++ b/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+@@ -0,0 +1,6 @@
++inherit systemd
 +
- SRC_URI[archive.md5sum] = "ceab6f4370581d1a03c09f15cc103099"
- SRC_URI[archive.sha256sum] = "04c81f3bb5a337cdf3ed1230916f82d29857ee95eb884f58dd2f5c6860efe803"
++PRINC := "${@int(PRINC) + 1}"
++
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE = "pcscd.socket"
 -- 
 1.8.0
 
