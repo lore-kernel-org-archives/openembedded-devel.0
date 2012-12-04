@@ -1,39 +1,22 @@
-Received: from 18.mo4.mail-out.ovh.net ([188.165.54.143]
-	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TfwWb-00019d-G4
+Received: from mga14.intel.com ([143.182.124.37])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TfxBj-00027M-KZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 18:43:17 +0100
-Received: from mail643.ha.ovh.net (b7.ovh.net [213.186.33.57])
-	by mo4.mail-out.ovh.net (Postfix) with SMTP id 67618104DDAE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Dec 2012 18:22:09 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 Dec 2012 19:13:39 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 4 Dec 2012 19:13:38 +0200
-Date: Tue, 4 Dec 2012 18:13:55 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Tue, 04 Dec 2012 19:25:48 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 04 Dec 2012 10:11:24 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,215,1355126400"; d="scan'208";a="226498222"
+Received: from unknown (HELO helios.localnet) ([10.252.122.195])
+	by azsmga001.ch.intel.com with ESMTP; 04 Dec 2012 10:11:23 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
-Message-ID: <20121204181355.29f2633f@eb-e6520>
-In-Reply-To: <50BDF27F.2030804@linaro.org>
-References: <50BDECAC.5070805@communistcode.co.uk>
-	<50BDF27F.2030804@linaro.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 3405284268496956745
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedruddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Subject: Re: php-cgi cannot install package
+Date: Tue, 04 Dec 2012 18:11:22 +0000
+Message-ID: <3145293.jEgb7vZ7zI@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
+MIME-Version: 1.0
+Subject: OE-Classic patches in patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 17:43:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 Dec 2012 18:25:54 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Le Tue, 04 Dec 2012 13:54:23 +0100,
-Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org> a =E9crit :
+Hi all,
 
-> W dniu 04.12.2012 13:29, Jack Mitchell pisze:
-> > I tried to build the recently commited PHP changes today and received
-> > this error at do_rootfs, any ideas?
-> >=20
-> > The only package I select is php-cgi through IMAGE_INSTALL.
->=20
-> Good catch. Looks like enabling FPM disabled CGI interface.
->=20
-oops I missed that during the addition of php-fpm.
-I will look if both can be generated at the same time.
+There is a significant volume of patches in the OE patchwork [1] that are 
+intended to apply to OE-Classic. Apart from the 2011.3-maintenance branch, OE-
+Classic is no longer maintained in favour of OE-Core + layers, so the question 
+is what should we do with these patches? At the moment I'm thinking we should 
+just mark them as "archived" so that they disappear from the queue; people can 
+still get access to them if needed.
 
-Eric
+Thoughts?
+
+Cheers,
+Paul
+
+[1] http://patchwork.openembedded.org/project/oe/list/
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
