@@ -1,39 +1,41 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tfqky-0003Rz-GF
+	(envelope-from <ross.burton@intel.com>) id 1TfqmN-0003XC-0N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 12:33:45 +0100
-Received: from mail-oa0-f69.google.com ([209.85.219.69])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 04 Dec 2012 03:19:20 -0800
-Received: by mail-oa0-f69.google.com with SMTP id j6so17667259oag.0
+	Tue, 04 Dec 2012 12:35:11 +0100
+Received: from mail-ie0-f197.google.com ([209.85.223.197])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 04 Dec 2012 03:20:47 -0800
+Received: by mail-ie0-f197.google.com with SMTP id 16so17729428iea.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 03:19:19 -0800 (PST)
+	Tue, 04 Dec 2012 03:20:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=XGoTpu8VThD+J0KtTpDz+E64tXKe3J0QwrAXCCiMDPU=;
-	b=f2YllkksZ4vCiVK/A1NAYcG9cXUj4I9QPPVbtK07xMm1dQEGs34poKzTPrcb+0DU3U
-	PtiQLUoJWRNjcR95smCB2vjHfJqroHpy3GNxmU1IG+N9DfIaVntSSgEJFM24erHIzC8l
-	rkG9OX4rLBNvN+VCZvTACgdPpJCtqoX7nWslhmw0G6pA22E7GEpADPlLjHDBRDwhDL09
-	JVa9l0sonNi5mrgpTrdkE7bYf+9fGV+PBrLE5kkrAYePqpcJ+XoanNeoAZoZ2h9G+uY8
-	JCtGAkyD8tV+c0yiKASwI77X+yre/yiXiq4085+N167RtiZGvbCl23B5ywtwnpuqi7dG
-	TUVg==
-Received: by 10.182.89.103 with SMTP id bn7mr7433421obb.35.1354619959127;
-	Tue, 04 Dec 2012 03:19:19 -0800 (PST)
-Received: by 10.182.89.103 with SMTP id bn7mr7433416obb.35.1354619959009; Tue,
-	04 Dec 2012 03:19:19 -0800 (PST)
+	:cc:content-type:x-gm-message-state;
+	bh=lLcd6qIB/hF5bErewGMeGOflpdUY7wLNLjBSbkHNYVY=;
+	b=E/tvUODXQKb1HHvUAdwTXR9fKz6f0sWq42F90Cli/0kQ4pQcEtfLej6YEWWIlKXoRi
+	m2IMFe+pnRyDWf65hjOjyHJfKlTGTadG6eH9Wt+jdTanykYa0Xh3LCW0btej6IoSDwj5
+	ETQuaWjNL3Yc6lhhZVVP8UWk6DxWslq1UOu7FLh+snB7YSMGeOzGzHq3A06KXHLqRsYe
+	d3tgaotJEtMC1aNvhvzG88FXP50VabHdTAfWKGpQSfqSj2W0ckzMCPsyhcIZYMGSxlI+
+	SlQEhoUh2lha52VMraOq7R5t0pPWvVRoyDx8Z422XBXASec0jOHJG7QumHoXpvZaEaOu
+	8UkA==
+Received: by 10.182.89.103 with SMTP id bn7mr7436797obb.35.1354620046707;
+	Tue, 04 Dec 2012 03:20:46 -0800 (PST)
+Received: by 10.182.89.103 with SMTP id bn7mr7436794obb.35.1354620046640; Tue,
+	04 Dec 2012 03:20:46 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.76.132.198 with HTTP; Tue, 4 Dec 2012 03:18:57 -0800 (PST)
-In-Reply-To: <20121204101412.GB14870@jama.jama.net>
-References: <1353937823-29509-1-git-send-email-ross.burton@intel.com>
-	<20121204101412.GB14870@jama.jama.net>
+Received: by 10.76.132.198 with HTTP; Tue, 4 Dec 2012 03:20:26 -0800 (PST)
+In-Reply-To: <11016715.fxrlBBZh8S@helios>
+References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
+	<ea86ab799567bbf1f2fd02d47f9bdc775ba26f9e.1353602922.git.paul.eggleton@linux.intel.com>
+	<20121204074429.GA6288@ad.chargestorm.se> <11016715.fxrlBBZh8S@helios>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 4 Dec 2012 11:18:57 +0000
-Message-ID: <CAJTo0LbFWM01+1T6yB0WO6VA3bL+=GJe+-nypizr3roAzRNJpw@mail.gmail.com>
+Date: Tue, 4 Dec 2012 11:20:26 +0000
+Message-ID: <CAJTo0LZi1z7Enry_9T1VDvaOtmQgasyuwoFq6b2OUgYmf_-i6g@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmubDjl7RfyMp/2ijBk4vQHFCHnSxLAUG1jKsXFNt1tQeAglUJD7uCYcXtayroP2f1PUCpHoO50Qg9nanYJO1WRN/72X+xu0TJxamp4AGOIMpTvAKtB496innftN283vG+1Z5X7aw23EkTYKZxyYZ+pRD8YvKKtdOpX/vT8XYVJk0SDQe1PL/uJumrmXAtYoKn661ST
-Subject: Re: [PATCH] meta-oe: remove guile, it's in oe-core now
+X-Gm-Message-State: ALoCoQm8aYxEXHWZl7p33Z+7hBzkaWvgWgV2OdFRAaZcMHiXjyLyHU8k+wMrB3+FJanm+ZqHhDlq6jAKP1KjulinJS1XnZitMYD5xAKFEj0RB1A942uD2LFfm+PK/OqmDlDyqBFB7vRJ6LPItSn2Cik5iNmZdDVKJBLouAoy99A3QfJvNgX1VHFNeyzeI75MQ48RQkwYSQlM
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [danny?] Re: [meta-networking][PATCH v2 1/2] ntp: cleanup recipes and fix SSL support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +49,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 11:33:45 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 11:35:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 4 December 2012 10:14, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Nov 26, 2012 at 01:50:23PM +0000, Ross Burton wrote:
->> Signed-off-by: Ross Burton <ross.burton@intel.com>
->
-> Also there is bad charset defined in this patch:
-> Content-Type: text/plain; charset=y
-> Content-Transfer-Encoding: 8bit
->
-> $ git am -s patches/cur/1354615270.14870_19.jama\:2\,RS
-> fatal: cannot convert from y to UTF-8
->
-> I'll apply it manually.
+On 4 December 2012 09:21, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> IMO the original recipe was horribly broken, so I'd definitely support having
+> this patch applied to danny as well, assuming people have given it a
+> reasonable amount of runtime testing and everything's OK.
 
-I had the option of not sending a patch via email, or sending a patch
-that won't apply cleanly. :/
+It's horribly intrusive but if ntp wasn't usable before, I'm happy to
+merge it once it's had some testing.
 
 Ross
 
