@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi77-00040y-D2
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi7X-00040y-HV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:20:01 +0100
+	Tue, 04 Dec 2012 03:20:27 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=tCetdDK2sDayQmje5aSP/wiOAU6UCJpJlTh3d15vyvo=;
-	b=GStRSjXr0Y6DWZMLWyoDLiEiuLKRjfp0340NXWj6RsxktzpQACGOvpHK5F5kbL4o7i
-	RbzRw09BdBgwjKssxk5EzOJPqHNGp7ntkw0iWSDJKMrezv5ko/saehWioz6KKrHJnt7e
-	eyyHwuBXgch/elXVeGXBHN+hL6qfN4QiGdRIYFPGpklAh9wWMMzdjLfLSgXrWgWIKlGv
-	qW4eA1ijy7NWVc8N4bMZo8ZyhHlkBxVPYDtA9kvzxItuZepHfkbWx+JDHUmfkRXTfMNj
-	eQSf+jtdDxkwdDBGDVtUy16isyfnxXYoe9Hx6LOYFd8UhlzA+TWwBHQjAKCOa1WwuQpg
-	8YsA==
-Received: by 10.14.221.5 with SMTP id q5mr42294489eep.33.1354586741813;
-	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
+	bh=Btx2DtQXLfcGqfclhM82u1/uOgegt9WJANPyg91IIL4=;
+	b=HvDvUsfUuHDjeUlU8EyXKTwMDKEwjUD7p/DV28sCrwB8R8V2z8E8ntyniA30N3Dyh+
+	oaNrq9HPRYeNxcLoNzQ+PU7PqwEllOCnCjbmi4rD1Qx1WXUBwirkDTPyCEv2Fdm3R2BL
+	NV3KTXk2kRRIMYIWU7spwgqny6mb1+l3ytRrF2ViQS8Ky4v+Z7mcHgnkcqExrELmo5zq
+	SopHzbXw/E8JI3e3NvJzWfjKlY//6aWFj6L60IY1U1K6eXcgwBp60NSe+lSCct0MfgTN
+	GVe0O6s27tGLG4jHdgjJm7aAvd9TLgyoTmgi0trgzu6xRcplHVCbUIAE1Jtr4SfldH1N
+	lgBw==
+Received: by 10.14.216.70 with SMTP id f46mr42624074eep.12.1354586767944;
+	Mon, 03 Dec 2012 18:06:07 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 46sm34819334eeg.4.2012.12.03.18.05.40
+	by mx.google.com with ESMTPS id 43sm34811978eed.10.2012.12.03.18.06.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:05:41 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:07 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:17 +0100
-Message-Id: <1b238f2dbf90c01922839e02c7eee4daa3132f67.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:20 +0100
+Message-Id: <ddf52d8f47ec2e40fd0bb1e068dd996739cf8594.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 44/58] pcsc-lite: add bbappend in meta-systemd
+Subject: [PATCH 47/58] exalt-client: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:20:01 -0000
-
-* fixes packaging QA warning, when systemd is autodetected:
-pcsc-lite-1.8.6: pcsc-lite: Files/directories were installed but not shipped
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/pcscd.service
-  /lib/systemd/system/pcscd.socket
+X-List-Received-Date: Tue, 04 Dec 2012 02:20:28 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend      | 6 ++++++
- 1 file changed, 6 insertions(+)
- create mode 100644 meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+ meta-efl/recipes-efl/e17/exalt-client_svn.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend b/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
-new file mode 100644
-index 0000000..b8150b7
---- /dev/null
-+++ b/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
-@@ -0,0 +1,6 @@
-+inherit systemd
+diff --git a/meta-efl/recipes-efl/e17/exalt-client_svn.bb b/meta-efl/recipes-efl/e17/exalt-client_svn.bb
+index 4938900..852ed04 100644
+--- a/meta-efl/recipes-efl/e17/exalt-client_svn.bb
++++ b/meta-efl/recipes-efl/e17/exalt-client_svn.bb
+@@ -1,4 +1,6 @@
+-LICENSE = "LGPLv2"
++LICENSE = "LGPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +
-+PRINC := "${@int(PRINC) + 1}"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE = "pcscd.socket"
+ PV = "0.0.1+svnr${SRCPV}"
+ 
+ require e-module.inc
 -- 
 1.8.0
 
