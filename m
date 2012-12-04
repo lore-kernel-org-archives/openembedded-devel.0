@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi4d-0002l7-H4
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi4m-0002oS-EZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:17:27 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1926297eek.6
+	Tue, 04 Dec 2012 03:17:38 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1377891eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:03:07 -0800 (PST)
+	Mon, 03 Dec 2012 18:03:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=20Q4QXAQuR3wO0EvzLNRkr8IP3f2Pby5hJHubZIVTk8=;
-	b=v8m9ES2+HkS8kXtexqKpfte61o43BJyzRklxxJHEa/N/K3sNgfuD9rmT4l7kaxUaLF
-	xRNV0AMxODJPG2g5IZFTt6EcjtzPMZN79xehmaWhJ16rv4IkevgKeMnRPeYjR676qFE3
-	fhkHYaBRVutF+JHwjkcEFOZe3q5LxIdPZ40dicoVNsC5Qlgn86dzCnXRuXnPwSq4WBXW
-	5Z47uUACPosgSkJtxNes5rT66IizjJ8UpRTpaARgVIyqIJP5oeEg7u5HTmNUMRlKy/4h
-	L1eYshEparoBjy9Bva/Snx7S3Kdsl9tQX5Gb0aHhSDC7XDvkTtvMt2qN8iLrjZx7Qb87
-	n+iQ==
-Received: by 10.14.209.193 with SMTP id s41mr43104402eeo.9.1354586587946;
-	Mon, 03 Dec 2012 18:03:07 -0800 (PST)
+	bh=KnksNsyjAN7AaKAPYwRl0QXROidfML4EQZx9tUwcS5Y=;
+	b=ecPGMAMQonOQGRa9P3MaxM31DftOKJvzkPo3waig24Q/wDdrehMVs4xRe4z3kDFSsC
+	rFhZHzbIjX2Z4ReFiOe2amwB+WWz4Rsj7UmCRqDN4VkcbeT8tASIz4eQdFbbQJn4x7eN
+	WN6WolA6IVsXdRKFlYg/CNgtCsEWAsxDtqSBds+yybmNtdl2a2d07d2jIgydVA0Rj5I6
+	1PJXGoxSIKjk6tEmmjRK2IEVm3mcuMNvwnTtB4EUf1EDbxTS3B6gT9XYX2Kyd8I3pZRf
+	L3nw4ubjVff4knk8Z0niWL1bdYaSU9MLKBumjR3Uf7j8SvNWIDmr36PcSWhYuQKS7Y02
+	nAmg==
+Received: by 10.14.213.134 with SMTP id a6mr42733602eep.45.1354586596865;
+	Mon, 03 Dec 2012 18:03:16 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y44sm34804034eel.14.2012.12.03.18.03.06
+	by mx.google.com with ESMTPS id r1sm2416724eeo.2.2012.12.03.18.03.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:03:07 -0800 (PST)
+	Mon, 03 Dec 2012 18:03:16 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:58:58 +0100
-Message-Id: <56b3563877a5a9e67c65edcffdd086cd72fa8ce1.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:58:59 +0100
+Message-Id: <26392eb1909fa61e75a1beb22f850b0452999864.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 25/58] rain: add LIC_FILES_CHKSUM
+Subject: [PATCH 26/58] libeweather: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,26 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:17:27 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:17:39 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/rain_svn.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-efl/recipes-efl/efl/libeweather_svn.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/e17/rain_svn.bb b/meta-efl/recipes-efl/e17/rain_svn.bb
-index 917fe38..d5e6803 100644
---- a/meta-efl/recipes-efl/e17/rain_svn.bb
-+++ b/meta-efl/recipes-efl/e17/rain_svn.bb
-@@ -1,4 +1,8 @@
- LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35 \
+diff --git a/meta-efl/recipes-efl/efl/libeweather_svn.bb b/meta-efl/recipes-efl/efl/libeweather_svn.bb
+index c498278..934efa1 100644
+--- a/meta-efl/recipes-efl/efl/libeweather_svn.bb
++++ b/meta-efl/recipes-efl/efl/libeweather_svn.bb
+@@ -1,5 +1,8 @@
+ DESCRIPTION = "EFL-based weather widget library"
+-LICENSE = "LGPL"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
 +                    file://COPYING-PLAIN;md5=c910b645eda0005ccec46f75203dc96e"
 +
- PV = "0.0.3+svnr${SRCPV}"
- PR = "${INC_PR}.0"
- 
+ DEPENDS = "ecore edje"
+ PV = "0.0.0+svnr${SRCPV}"
+ SRCREV = "${EFL_SRCREV}"
 -- 
 1.8.0
 
