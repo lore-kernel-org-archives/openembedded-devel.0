@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi7v-00040y-Ds
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8F-00040y-3g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:20:51 +0100
+	Tue, 04 Dec 2012 03:21:11 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:06:31 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=pxk3NLZkKvczpT/uEDjlWJ5I+UqGaAFHx+csHCZlxXw=;
-	b=Hq94WgMp3AlYpOFxbhaFiSZnhNS7ijHUhjMldG0zx0ZjTylMaLKwsjAiw/Dce1IsTX
-	h+b3CDWOTxGWzZrfQ+zSQvR57QJdWnVc/bbrsqnoCx0rbWpQx3IIfZO4OP409DqR5KRG
-	G+x19eIXrtAGWFHcPyzmHQEBEpSn6J3Y+NXaNvlHel/M/NwO26xMSUBE+NZG7DhRsJYY
-	vJn+BR71/7laa//g1LGsLPzuGrNi1iP2Xk9KwwBeS3XUAYXvdc5gr2FZt8B0FsP86Gby
-	2x9/49qzGs8yhbuzgdI46YQjz4D6u+xwD9jz7y2rBQumTIZvJ5T2uOpuFSR4rafesLzz
-	L3Zw==
-Received: by 10.14.207.6 with SMTP id m6mr42851243eeo.10.1354586791839;
-	Mon, 03 Dec 2012 18:06:31 -0800 (PST)
+	bh=8A9j7U4fT73e/sRvxMTsQfaLe3gAYrgOXTAvNJrZQ0k=;
+	b=oqs2+YL0xcMxKo08c49CmvIVTQShXL0r90/1aK+vLe15pLHLBOXw+BFY8hEsu5krJe
+	bBj+2zV2Pqo0DiEmbydXdn7F1xk6mRn/sh/nbi3b92jYoryikFVvhLUFJJ3Yxw9285lI
+	NahcaW+c6sD2JSWA7tHl7RB3OsJbguFxP4QdW2rh2bmrclpRQuVdZnAld2q7+KrzMD8n
+	BO5hk2LEbak5PVg+s0L8KpEbuKAwGkdgZSFaxDH5ONwxp0URUcEnTq6URUHGUDP8DXT+
+	sDswIyTGWmMeKsLa8uE3BNVOWBkea66QDDkic50NlIwNsSxFtXVT2K7j7nr36Q7S6ptU
+	E7GA==
+Received: by 10.14.225.4 with SMTP id y4mr13111902eep.6.1354586811536;
+	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q44sm34819924eep.5.2012.12.03.18.06.30
+	by mx.google.com with ESMTPS id f49sm34814371eep.12.2012.12.03.18.06.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:06:31 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:23 +0100
-Message-Id: <bf00f9c9f266101a69263959523a278ef8e69d2a.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:26 +0100
+Message-Id: <fe082532e17009056e49ba394381975019768444.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 50/58] lightmediascaner: move .a files from PN-dev to PN-staticdev
+Subject: [PATCH 53/58] gvim: fix unpackaged files QA warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:20:51 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:21:12 -0000
+
+* there is a lot of stuff installed to /usr/share/vim, but gvim does not have this in FILES_PN
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb    | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/vim/gvim_7.2.446.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-index 905f39e..8fdce18 100644
---- a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-+++ b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-@@ -6,7 +6,7 @@ LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- DEPENDS = "sqlite3 flac virtual/libiconv"
+diff --git a/meta-oe/recipes-support/vim/gvim_7.2.446.bb b/meta-oe/recipes-support/vim/gvim_7.2.446.bb
+index 94215b4..fbc763a 100644
+--- a/meta-oe/recipes-support/vim/gvim_7.2.446.bb
++++ b/meta-oe/recipes-support/vim/gvim_7.2.446.bb
+@@ -3,8 +3,12 @@ VIMX = "--with-x"
  
--PR = "r1"
-+PR = "r2"
+ require vim_${PV}.bb
  
- SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
- "
-@@ -27,6 +27,7 @@ PACKAGES =+ "${PN}-test"
- FILES_${PN}-test = "${bindir}/test-lms"
++PR = "${INC_PR}.4"
++
+ DEPENDS += "gtk+ xt"
  
- FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
-+FILES_${PN}-staticdev += "${libdir}/${PN}/plugins/*.a"
++FILES_${PN} += "${datadir}/vim"
++
+ EXTRA_OECONF += "--enable-gtk2-test"
  
- # otherwise fails with ERROR: could not add conversion charset 'UTF-16BE': Invalid argument
- RDEPENDS_${PN}-test_append_libc-glibc = " glibc-gconv-utf-16"
+ RREPLACES_${PN} = "vim vim-tiny"
 -- 
 1.8.0
 
