@@ -1,27 +1,47 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from co9ehsobe004.messaging.microsoft.com ([207.46.163.27]
+	helo=co9outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Tfov0-0008JE-GU
+	(envelope-from <B19537@freescale.com>) id 1TfpDD-0000HN-AA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 10:36:00 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 04 Dec 2012 01:21:35 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,214,1355126400"; d="scan'208";a="226277554"
-Received: from unknown (HELO helios.localnet) ([10.252.122.195])
-	by azsmga001.ch.intel.com with ESMTP; 04 Dec 2012 01:21:34 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Anders Darander <anders@chargestorm.se>
-Date: Tue, 04 Dec 2012 09:21:23 +0000
-Message-ID: <11016715.fxrlBBZh8S@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <20121204074429.GA6288@ad.chargestorm.se>
-References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
-	<ea86ab799567bbf1f2fd02d47f9bdc775ba26f9e.1353602922.git.paul.eggleton@linux.intel.com>
-	<20121204074429.GA6288@ad.chargestorm.se>
+	Tue, 04 Dec 2012 10:54:47 +0100
+Received: from mail126-co9-R.bigfish.com (10.236.132.239) by
+	CO9EHSOBE038.bigfish.com (10.236.130.101) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 4 Dec 2012 09:25:17 +0000
+Received: from mail126-co9 (localhost [127.0.0.1])	by
+	mail126-co9-R.bigfish.com (Postfix) with ESMTP id 1E6F3B400BE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Dec 2012 09:25:17 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 5
+X-BigFish: VS5(z33fclzd6eahzz1de0h1202h1d1ah1d2ahzz8275chz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631hbe9i1155h)
+Received: from mail126-co9 (localhost.localdomain [127.0.0.1]) by mail126-co9
+	(MessageSwitch) id 1354613114688084_13551;
+	Tue,  4 Dec 2012 09:25:14 +0000 (UTC)
+Received: from CO9EHSMHS017.bigfish.com (unknown [10.236.132.235])	by
+	mail126-co9.bigfish.com (Postfix) with ESMTP id 9CA59C40057	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Dec 2012 09:25:14 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS017.bigfish.com
+	(10.236.130.27) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 4 Dec 2012 09:25:10 +0000
+Received: from 039-SN2MPN1-021.039d.mgd.msft.net ([169.254.1.190]) by
+	039-SN1MMR1-001.039d.mgd.msft.net ([10.84.1.13]) with mapi id
+	14.02.0318.003; Tue, 4 Dec 2012 09:25:09 +0000
+From: Luo Zhenhua-B19537 <B19537@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: cramfs fetch error
+Thread-Index: Ac3SAUC6HiC44CdARemFrFArlItoDA==
+Date: Tue, 4 Dec 2012 09:25:10 +0000
+Message-ID: <CA452391058F6D4E9715FB2C29D9312A01375E18@039-SN2MPN1-021.039d.mgd.msft.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.134]
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [danny?] Re: [meta-networking][PATCH v2 1/2] ntp: cleanup recipes and fix SSL support
+X-OriginatorOrg: freescale.com
+Subject: cramfs fetch error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 09:36:00 -0000
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Tue, 04 Dec 2012 09:54:47 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Tuesday 04 December 2012 08:44:30 Anders Darander wrote:
-> * Paul Eggleton <paul.eggleton@linux.intel.com> [121122 17:50]:
-> > * Move common definitions to the inc file
-> > * Drop override of do_configure which doesn't seem to be needed anymore
-> > * Fold ntp-ssl into the ntp recipe as a PACKAGECONFIG option for those
-> >   who want it (default to off) and fix configure-time checks to detect
-> >   OpenSSL properly so that it gets enabled when selected
-> > * Remove ntp-bin package and put its contents in currently empty
-> >   ntp-utils package (with migration path)
-> > * Fix hardcoded paths in ntpd initscript
-> > * Specify ntpd.conf as a configuration file for packaging purposes
-> > * Rearrange so that packaging definitions are towards the end in the
-> >   expected order
-> > * Delete unused "ntp" initscript file
-> > * Add SUMMARY
-> > * Update HOMEPAGE
-> 
-> Would this patch be acceptable for a push to danny? Or is it to
-> intrusive?
-> 
-> If it's to intrusive, we need to update the SRC_URI checksums in danny,
-> as they're currently not matching the downloaded file...
-> 
-> If needed, I can create a SRC_URI-patch for danny, though I'd prefer to
-> get this one in if possible.
+Following fetch error appears when I build cramfs with master branch of pok=
+y + meta-openembedded, does anyone meet this issue?=20
 
-IMO the original recipe was horribly broken, so I'd definitely support having 
-this patch applied to danny as well, assuming people have given it a 
-reasonable amount of runtime testing and everything's OK.
+Error logs:
+WARNING: Failed to fetch URL cvs://anonymous@cramfs.cvs.sourceforge.net/cvs=
+root/cramfs;module=3Dlinux, attempting MIRRORS if available
+ERROR: Fetcher failure: Fetch command failed with exit code 1, output:
+cvs [checkout aborted]: reading from server: Connection reset by peer
 
-Cheers,
-Paul
+ERROR: Function failed: Fetcher failure for URL: 'cvs://anonymous@cramfs.cv=
+s.sourceforge.net/cvsroot/cramfs;module=3Dlinux'. Unable to fetch URL from =
+any source.
 
--- 
+Standalone command: cvs '-d:pserver:anonymous@cramfs.cvs.sourceforge.net:/c=
+vsroot/cramfs' co -D "20110110 UTC" linux
 
-Paul Eggleton
-Intel Open Source Technology Centre
+
+Best Regards,
+
+Zhenhua
+
 
 
