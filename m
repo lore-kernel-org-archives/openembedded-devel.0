@@ -1,34 +1,39 @@
-Received: from mail-oa0-f47.google.com ([209.85.219.47])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mario.goulart@gmail.com>) id 1TftEy-0000Pc-2v
+Received: from 18.mo4.mail-out.ovh.net ([188.165.54.143]
+	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TfwWb-00019d-G4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 15:12:54 +0100
-Received: by mail-oa0-f47.google.com with SMTP id h1so3856537oag.6
+	Tue, 04 Dec 2012 18:43:17 +0100
+Received: from mail643.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo4.mail-out.ovh.net (Postfix) with SMTP id 67618104DDAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Dec 2012 05:58:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=vsXY3fvluvMWqI0UI7/M7M2/ky6U5Tnfuc6lMC1SL6I=;
-	b=N0CkZ80KmltQps8NQGe9LVTyIOc6t1K0PUNnQyJleOV6hLOgj/MB8whu61wAFnpEke
-	RkipzcKZCsfltaasB1J5T/5Adn5lQhaoakLNScccJHTX5CZIjGYhfB9dZRoVx+2surXW
-	Xih6O7L7OkzIAfSVFdITXk8JaQTCPD1whalrDLgLGnRoXJyoq06IUcnhxNeNp82heY9q
-	giDm6RtdgOsrB5qSfZfRzgASnJlwsDvwXRBhDqebphKR2NkQV7hMeMbfo040Pdi/kvO1
-	rfFsQD89DxDIw3H0MCfWR9rP+iQulvubiSO/iS3SryNaFUsDn4rFulImHjHBt+3C3G8a
-	ayeA==
-Received: by 10.60.169.140 with SMTP id ae12mr11321127oec.52.1354629508982;
-	Tue, 04 Dec 2012 05:58:28 -0800 (PST)
-Received: from localhost.localdomain ([187.23.153.69])
-	by mx.google.com with ESMTPS id n7sm810975obd.16.2012.12.04.05.58.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 04 Dec 2012 05:58:28 -0800 (PST)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
+	Tue,  4 Dec 2012 18:22:09 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Dec 2012 19:13:39 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 Dec 2012 19:13:38 +0200
+Date: Tue, 4 Dec 2012 18:13:55 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 11:58:18 -0200
-Message-Id: <1354629498-4917-1-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCH] xinput-calibrator: remove hardcoded path from xinput_calibrator.desktop
+X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
+Message-ID: <20121204181355.29f2633f@eb-e6520>
+In-Reply-To: <50BDF27F.2030804@linaro.org>
+References: <50BDECAC.5070805@communistcode.co.uk>
+	<50BDF27F.2030804@linaro.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.8.1 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 3405284268496956745
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedruddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Subject: Re: php-cgi cannot install package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 14:12:55 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 17:43:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- .../xinput-calibrator/xinput-calibrator_git.bb     |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Le Tue, 04 Dec 2012 13:54:23 +0100,
+Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org> a =E9crit :
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
-index c16a412..97f9343 100644
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
-+++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=1bcba08f67cdb56f340
- DEPENDS = "virtual/libx11 libxi"
- 
- PV = "0.7.5+git${SRCPV}"
-+PR = "r1"
- 
- inherit autotools
- 
-@@ -21,7 +22,7 @@ do_install_append() {
-         install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
- 
-         install -d ${D}${sysconfdir}/xdg/autostart
--        sed -i -e 's,^Exec=.*,Exec=/usr/bin/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
-+        sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
-         install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
- }
- 
--- 
-1.7.2.5
+> W dniu 04.12.2012 13:29, Jack Mitchell pisze:
+> > I tried to build the recently commited PHP changes today and received
+> > this error at do_rootfs, any ideas?
+> >=20
+> > The only package I select is php-cgi through IMAGE_INSTALL.
+>=20
+> Good catch. Looks like enabling FPM disabled CGI interface.
+>=20
+oops I missed that during the addition of php-fpm.
+I will look if both can be generated at the same time.
 
+Eric
 
 
