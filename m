@@ -1,23 +1,40 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TfrGM-0004WO-Na
+	(envelope-from <martin.jansa@gmail.com>) id 1TfrKl-0004dq-C0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 13:06:11 +0100
-Received: from localhost ([127.0.0.1]:60360 helo=eumx.net)
-	by eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>)
-	id 1Tfr2R-000783-9E; Tue, 04 Dec 2012 11:51:47 +0000
-Received: from [195.171.99.130] (port=9691 helo=archhp.dbnet.local)
-	by eumx.net with esmtpa (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>)
-	id 1Tfr2R-00077t-4D; Tue, 04 Dec 2012 11:51:47 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
+	Tue, 04 Dec 2012 13:10:43 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2146062eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Dec 2012 03:56:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=rlaKyz77/VZvE1iNBZKiEQJBKWtt8zshXFHAR65iqT4=;
+	b=DL/w5+NmQ2P4W7bATROw0P53Lgm3/iCQN7EKoz57u6CTVj6JIZI4uCgwQ1j+wyzgEI
+	unXIW3DN0ZlkGXp4Xkmo8q7rhO28C+juRiwehFnwCWbOOv4ZzG+dWKP/zX+asg98gwG5
+	bprVDqC6L4WBdGIvTQ1aNVV4uH+p3GfxK2OH8KShM3+3qMR81hLK61UVM+CVz+9KdZld
+	B81xeuXYpmNqbs+Y14HAt3sbj0fHK1iQXzRAp870AUHzwIcH2MFGs0regcJBzIX7UBUm
+	5vLueTs52Mmqm2yemFbaB1oRnNNH8MV7qRlvPqgSzF7MUpKsubX4UbUpBXmvoEgn++J4
+	hjvQ==
+Received: by 10.14.177.1 with SMTP id c1mr47755972eem.8.1354622180932;
+	Tue, 04 Dec 2012 03:56:20 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id a44sm2194721eeo.7.2012.12.04.03.56.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 04 Dec 2012 03:56:20 -0800 (PST)
+Date: Tue, 4 Dec 2012 12:56:16 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 11:53:38 +0000
-Message-Id: <1354622018-17958-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.0.1
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [meta-webserver][PATCH] hiawatha: add new patch to fix xslt implementation
+Message-ID: <20121204115616.GF14870@jama.jama.net>
+References: <cover.1353602922.git.paul.eggleton@linux.intel.com>
+	<ea86ab799567bbf1f2fd02d47f9bdc775ba26f9e.1353602922.git.paul.eggleton@linux.intel.com>
+	<20121204074429.GA6288@ad.chargestorm.se>
+	<11016715.fxrlBBZh8S@helios>
+MIME-Version: 1.0
+In-Reply-To: <11016715.fxrlBBZh8S@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [danny?] Re: [meta-networking][PATCH v2 1/2] ntp: cleanup recipes and fix SSL support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,110 +48,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 12:06:11 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 12:10:43 -0000
+X-Groupsio-MsgNum: 41961
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="SnV5plBeK2Ge1I9g"
+Content-Disposition: inline
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+--SnV5plBeK2Ge1I9g
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
- .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71 ++++++++++++++++++++++
- .../recipes-httpd/hiawatha/hiawatha_8.6.bb         |  3 +-
- 2 files changed, 73 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+On Tue, Dec 04, 2012 at 09:21:23AM +0000, Paul Eggleton wrote:
+> On Tuesday 04 December 2012 08:44:30 Anders Darander wrote:
+> > * Paul Eggleton <paul.eggleton@linux.intel.com> [121122 17:50]:
+> > > * Move common definitions to the inc file
+> > > * Drop override of do_configure which doesn't seem to be needed anymo=
+re
+> > > * Fold ntp-ssl into the ntp recipe as a PACKAGECONFIG option for those
+> > >   who want it (default to off) and fix configure-time checks to detect
+> > >   OpenSSL properly so that it gets enabled when selected
+> > > * Remove ntp-bin package and put its contents in currently empty
+> > >   ntp-utils package (with migration path)
+> > > * Fix hardcoded paths in ntpd initscript
+> > > * Specify ntpd.conf as a configuration file for packaging purposes
+> > > * Rearrange so that packaging definitions are towards the end in the
+> > >   expected order
+> > > * Delete unused "ntp" initscript file
+> > > * Add SUMMARY
+> > > * Update HOMEPAGE
+> >=20
+> > Would this patch be acceptable for a push to danny? Or is it to
+> > intrusive?
+> >=20
+> > If it's to intrusive, we need to update the SRC_URI checksums in danny,
+> > as they're currently not matching the downloaded file...
+> >=20
+> > If needed, I can create a SRC_URI-patch for danny, though I'd prefer to
+> > get this one in if possible.
+>=20
+> IMO the original recipe was horribly broken, so I'd definitely support ha=
+ving=20
+> this patch applied to danny as well, assuming people have given it a=20
+> reasonable amount of runtime testing and everything's OK.
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
-new file mode 100644
-index 0000000..41bf4cc
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
-@@ -0,0 +1,71 @@
-+Upstream Status: Backport
-+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-+---
-+ src/xslt.c | 19 +++++++------------
-+ 1 file changed, 7 insertions(+), 12 deletions(-)
-+
-+diff --git a/src/xslt.c b/src/xslt.c
-+index 9d8d31a..58ca52d 100644
-+--- a/src/xslt.c
-++++ b/src/xslt.c
-+@@ -23,6 +23,7 @@
-+ #include <libxslt/transform.h>
-+ #include <libxslt/xsltutils.h>
-+ #include "libstr.h"
-++#include "liblist.h"
-+ #include "send.h"
-+ #include "log.h"
-+ #ifdef ENABLE_TOMAHAWK
-+@@ -343,10 +344,10 @@ bool can_transform_with_xslt(t_session *session) {
-+ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
-+ 	xmlDocPtr style_xml, result_xml;
-+ 	xsltStylesheetPtr xslt;
-+-	xmlOutputBufferPtr output;
-++	xmlChar *raw_xml;
-+ 	char value[VALUE_SIZE + 1];
-+ 	const char **params;
-+-	int result = 200;
-++	int result = 200, raw_size;
-+ 
-+ 	/* Read XML data
-+ 	 */
-+@@ -396,14 +397,8 @@ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
-+ 		xsltFreeStylesheet(xslt);
-+ 		return 500;
-+ 	}
-+-	if ((output = xmlAllocOutputBuffer(NULL)) == NULL) {
-+-		xmlFreeDoc(result_xml);
-+-		xsltFreeStylesheet(xslt);
-+-		return 500;
-+-	}
-+-    if (xsltSaveResultTo(output, result_xml, xslt) == -1) {
-++	if (xsltSaveResultToString(&raw_xml, &raw_size, result_xml, xslt) == -1) {
-+ 		log_file_error(session, session->file_on_disk, "transformation error");
-+-		xmlOutputBufferClose(output);
-+ 		xmlFreeDoc(result_xml);
-+ 		xsltFreeStylesheet(xslt);
-+ 		return 500;
-+@@ -414,17 +409,17 @@ static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
-+ 	value[VALUE_SIZE] = '\0';
-+ 	if (send_buffer(session, hs_conlen, 16) == -1) {
-+ 		result = -1;
-+-	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", output->buffer->use) == -1) {
-++	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", raw_size) == -1) {
-+ 		result = -1;
-+ 	} else if (send_buffer(session, value, strlen(value)) == -1) {
-+ 		result = -1;
-+-	} else if (send_buffer(session, (char*)output->buffer->content, output->buffer->use) == -1) {
-++	} else if (send_buffer(session, (char*)raw_xml, raw_size) == -1) {
-+ 		result = -1;
-+ 	}
-+ 
-+ 	/* Free buffers
-+ 	 */
-+-	xmlOutputBufferClose(output);
-++	xmlFree(raw_xml);
-+ 	xmlFreeDoc(result_xml);
-+ 	xsltFreeStylesheet(xslt);
-+ 
-+-- 
-+1.8.0.1
-+
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-index 7dcbe9e..0a5b303 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
-@@ -9,7 +9,8 @@ PR = "r1"
- SECTION = "net"
- 
- SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
--           file://hiawatha-init"
-+           file://hiawatha-init \
-+           file://xslt-fix.patch "
- 
- SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
- SRC_URI[sha256sum] = "1a7fa98ce66beb54fc8490cc787461d719a98cb0e4a81caedfa18ac8b5ba3b3b"
--- 
-1.8.0.1
+I agree and I plan to send pull-request for danny with this today.
 
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--SnV5plBeK2Ge1I9g
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlC95OAACgkQN1Ujt2V2gBw9gwCbBU8GYY3Qzp2rcxGrCRsHA43x
+CdIAn20yxSiAg1CPegFtpwRyKcxUaTlE
+=RWuY
+-----END PGP SIGNATURE-----
+
+--SnV5plBeK2Ge1I9g--
