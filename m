@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi2Z-00024s-S9
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi2h-0001w5-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:15:19 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1925797eek.6
+	Tue, 04 Dec 2012 03:15:27 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1377424eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:01:00 -0800 (PST)
+	Mon, 03 Dec 2012 18:01:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=+7d/IVNq8aOYQhIAdHL53yDmL7g4VpqHk72GQfGQU3k=;
-	b=Y6lY27wGWzRB7CPB5fKjzxJRUxC21czsyaeG/Ia9c+mQySL6h7p5oG4ObR8PjD4YX6
-	TOdlPtf6RnDl5s06SYGZJ0i7ECoGYyt/AVeftoxOWgpjbT4DVMH/YCpjTWOa+TSj9Zrh
-	rmLTcPqn8nLoNEmECCvXLb56AXohBIbxqexKHEKbx40SfX95m2px9mYum0tS226xu8wb
-	IpcRqW/bNNZRaLAvOHJD65hcPsnIVFU6HYQCjpa41SeJioG56X0fcSOa5sr4Szd3WPMb
-	jisHRq4X4YG7REGVc9IgAJ/s7MM7w+NUrKg5B+M0oNw9N//6Bx6eOM6G6m9wrkYrRdaq
-	RaTQ==
-Received: by 10.14.207.68 with SMTP id m44mr42613474eeo.40.1354586460290;
-	Mon, 03 Dec 2012 18:01:00 -0800 (PST)
+	bh=PXRQSqpIPWs/xUzLkzP6hbg4m+YekC/4qqVPjnVWCiM=;
+	b=0LG0spbtrD0tDsLl01/YdKXZm2MJoG4YQfzRXdQ/4jq2vsnQZjiI7svnsuLqHkUODw
+	aEeJRcnu2N0iHRK2KjKewLg3fdT8ulFQHxWkMD/3jTKBTaQ7Uc/MK2sCVH9fGwwqEQmP
+	/9Ml3pcA5AGQ7r3eBXl3gV0I37hUKZPx+pqKC7dINLaJnMTmORu26t6Pcg0+Q0wKXGML
+	kwkggwvHqlN2ccdbVNuE3NCc46gW3ObUfsRV6WYQRYSp3JlPCpm6KywQU7asfaNmRISX
+	vQvuhfcggN1D0fmBV6HSmJ9qsGw7T4qAyys93cu/1Jb387XS4La9akFKb4NpUTwuXpR8
+	/JiA==
+Received: by 10.14.194.4 with SMTP id l4mr42717967een.42.1354586467570;
+	Mon, 03 Dec 2012 18:01:07 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 43sm34792719eed.10.2012.12.03.18.00.59
+	by mx.google.com with ESMTPS id e2sm34796077eeo.8.2012.12.03.18.01.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:00:59 -0800 (PST)
+	Mon, 03 Dec 2012 18:01:07 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:58:43 +0100
-Message-Id: <5cbfbf6a1eae5268c4f22b4376674d6914973a7c.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:58:44 +0100
+Message-Id: <4c7888233513178793306d6bc7cd3169486bbad8.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 10/58] gnome-terminal: add SRC_URI checksums
+Subject: [PATCH 11/58] libnotify3: add SRC_URI checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:15:20 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:15:28 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome/gnome-terminal_2.26.3.bb | 2 ++
+ meta-gnome/recipes-gnome/libnotify/libnotify3_0.7.3.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.26.3.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.26.3.bb
-index 73f0b99..ac4cc00 100644
---- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.26.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.26.3.bb
-@@ -14,3 +14,5 @@ do_configure_prepend () {
- 	rm -f ${S}/src/terminal-type-builtins.c
- }
+diff --git a/meta-gnome/recipes-gnome/libnotify/libnotify3_0.7.3.bb b/meta-gnome/recipes-gnome/libnotify/libnotify3_0.7.3.bb
+index 2ff6879..4c46ec4 100644
+--- a/meta-gnome/recipes-gnome/libnotify/libnotify3_0.7.3.bb
++++ b/meta-gnome/recipes-gnome/libnotify/libnotify3_0.7.3.bb
+@@ -9,3 +9,5 @@ BPN = "libnotify"
  
-+SRC_URI[archive.md5sum] = "0395af0d444ed4fbfabf65d3583119c8"
-+SRC_URI[archive.sha256sum] = "ecddbf523700820524b2646451c307c5b55078b9cebe5fa464ef626b4b4cbda2"
+ inherit gnome lib_package
+ 
++SRC_URI[archive.md5sum] = "d20676bde7bd2d276508d019dc7276f1"
++SRC_URI[archive.sha256sum] = "322541fdf276eb803686df81763a5186af041b2ee3e9cc5fa1dc86c550388c88"
 -- 
 1.8.0
 
