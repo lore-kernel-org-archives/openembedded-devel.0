@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi6F-00040y-GN
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi6K-00040y-L0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:19:07 +0100
+	Tue, 04 Dec 2012 03:19:12 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:04:45 -0800 (PST)
+	Mon, 03 Dec 2012 18:04:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=LxIIShN4RoJZGPHaku9I0E5z9mFV+7sextayH2bfcCk=;
-	b=ndOd8sNplVn0JeAwSc3JM3jwFiim6VsdlX82ijxm0u/HpS7vDBLfE0u0gkTz6G46+1
-	fkOW1btbhxeI2nVwXFd/PoZWrcLyG2wqrhWXrVtkBpfQHIpJsCndZvX/dwug36ptqMX5
-	FvoohEs3e5vglukrYabCu8/Apy5h4p2GJkrcoE7U11Y7JuaDXwlufUil3mbN8DdaAlPP
-	Ip6RVzuM97b83YCI0mjyJsZIyUNNNihEXfgKd2APui6SYC70KrKMIdCtaxCf3Fr3A0iG
-	+3uR2MHHTX6raZtAiGlLJ9AefVxQLTixi9l7TosrbwrVNEgjkMYuETAvms93IB6ulhAA
-	qlgw==
-Received: by 10.14.214.132 with SMTP id c4mr42816476eep.18.1354586685010;
-	Mon, 03 Dec 2012 18:04:45 -0800 (PST)
+	bh=ABVFnHij3czdUYXyMUaI/2EYH5IAQ+gEBQtRU4TLanw=;
+	b=KMdP40U/lDwuTT2G4SmsMrM709KVNruW7Wj5+S3SMjp5yJ+sfBW5xJGkY12pwu9jhZ
+	EVxbKLb+Qu7IzgF+I2TOpEiFC6XB9CUurYSiLKHV84jFrRYgJs4dC/BB1cl3i8dEMW+c
+	znICArXpvq/VOKFMz39DDOT49AvciW9Bgpcz5KZAoXLYuUnLM5VAzrDYQ/hl9ntHjhOz
+	hiEF+cmTi7biQEPYdUFwoCgnG73iwabFXxtdxTHQdsaw+/a42wmZ8wvbk8aQAFNGx9Wz
+	sgoVbP3LX53oFlRRpVWozAIUQZLV0h21p1yegkxtLBjbKp4KxitQBwRRryBwDDpI4c4c
+	QXLA==
+Received: by 10.14.175.198 with SMTP id z46mr42734793eel.26.1354586693057;
+	Mon, 03 Dec 2012 18:04:53 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z8sm34805218eeo.11.2012.12.03.18.04.43
+	by mx.google.com with ESMTPS id 46sm34816390eeg.4.2012.12.03.18.04.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:04:44 -0800 (PST)
+	Mon, 03 Dec 2012 18:04:52 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:10 +0100
-Message-Id: <3177afc0f637776bfcc84e342eefd3ecdb88759c.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:11 +0100
+Message-Id: <b8dadf89dd3e6c90a9dffd9c44682f2f7ec67a04.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 37/58] fuse: remove /dev/fuse in do_install_append
+Subject: [PATCH 38/58] libbonobo: fix QA warnings in packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:19:07 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:19:12 -0000
 
-* it's not packaged and created on target dynamically
-* fixes QA:
-  fuse-2.9.2: fuse: Files/directories were installed but not shipped
-    /dev
-    /dev/fuse
+* fixes:
+libbonobo-2.24.3: non -staticdev package contains static .a library: libbonobo-dev path '/work/armv7a-vfp-neon-oe-linux-gnueabi/libbonobo/2.24.3-r0/packages-split/libbonobo-dev/usr/lib/orbit-2.0/Bonobo_module.a'
+libbonobo-2.24.3: non -staticdev package contains static .a library: libbonobo-dev path '/work/armv7a-vfp-neon-oe-linux-gnueabi/libbonobo/2.24.3-r0/packages-split/libbonobo-dev/usr/lib/bonobo/monikers/libmoniker_std_2.a'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/fuse/fuse_2.9.2.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-gnome/recipes-gnome/bonobo/libbonobo.inc       | 4 ++--
+ meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb b/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
-index bd0095b..23b9447 100644
---- a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
-+++ b/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
-@@ -5,6 +5,8 @@ LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+index 91ce737..d9a8618 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+@@ -16,8 +16,8 @@ ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
+ FILES_${PN} += "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so"
+ FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug \
+ 	${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
+-FILES_${PN}-dev += "${libdir}/orbit-2.0/* ${libdir}/bonobo/monikers/* \
+-	${libdir}/bonobo-2.0/samples"
++FILES_${PN}-dev += "${libdir}/orbit-2.0/*.la ${libdir}/bonobo/monikers/*.la ${libdir}/bonobo-2.0/samples"
++FILES_${PN}-staticdev += "${libdir}/orbit-2.0/*.a ${libdir}/bonobo/monikers/*.a"
  
+ LEAD_SONAME = "libbonobo-2.so"
+ 
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
+index c878286..253b46a 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
+@@ -1,3 +1,5 @@
+ require libbonobo.inc
 +PR = "r1"
 +
- SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
-            file://gold-unversioned-symbol.patch \
-           "
-@@ -31,3 +33,7 @@ FILES_fuse-utils = "${bindir} ${base_sbindir}"
- FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
- DEBIAN_NOAUTONAME_fuse-utils = "1"
- DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
-+
-+do_install_append() {
-+  rm -rf ${D}${base_prefix}/dev
-+}
+ SRC_URI[archive.md5sum] = "b217cef6a187505290c66c5bf8225d38"
+ SRC_URI[archive.sha256sum] = "5310957fa90691689c0557218b8833f681666cae160bd84e1f2c2705189a4ebe"
 -- 
 1.8.0
 
