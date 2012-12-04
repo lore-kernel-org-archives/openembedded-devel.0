@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8L-00040y-Kx
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8S-00040y-5E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:21:18 +0100
+	Tue, 04 Dec 2012 03:21:24 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:06:58 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=L8hH8nKrH8CXRijNUmZSLy7LAR0v+ifrtSj0D7olb0Y=;
-	b=K1bxJ3CTAfXs/QCcMHRGEx9uy8kEpkgx5XGbIMZVQg8k9U+kUyLxfU9k5Pyt6IYhQ2
-	CBRmrtuzdKjfoS68WQIRPkEQGQYh36kawtNH0I35tm2+rNVZXf2SYZHm4aGgiOwRpqVW
-	FWBSh5NZMZUXeQVBMWoF0rtEtiKR7wkw34PlLLAlX1YgVZTlQiW1JcM6LLy0wt9J9+l1
-	XwufAXHE7+J31wd0tj4E1FS0YwEiS3/N+KFhFTJyV5m3rnsYwkBnXrK5Jqct+3pOQsHM
-	3PbIIzaY2PkHhlCuFzAnhbTN8Q7f2bICT/Up63+IziZa7puAnR9e8gJlv/1A0iTQfjpS
-	IFag==
-Received: by 10.14.172.195 with SMTP id t43mr43042690eel.17.1354586818018;
-	Mon, 03 Dec 2012 18:06:58 -0800 (PST)
+	bh=pO9r9IvumrZQmAFYeU85Ls2laXz3UureN3AcobGc9xY=;
+	b=nKzi7l9KehRyUPN6eDrVdxvhwAADNl4gjhqOC9kUXie/TTaOolhkOs5K8fSB9350Eb
+	s4urQ71TeNj3/Nr4WqWBv6rtNBeDNyIPt1f8IT6zd4nJ7PXN2FI7vCMH2yFbQ+AnrMjD
+	ce6THFUlZRLL9m4DosJYGvyT1cq7B3XYcffMAka+mj4tpcGsdsT7TvEsgaC6jXgcm6X5
+	Wp0UrVldcDexOvqBtw+22UuynG+Swa5gF4pLoNdBW0lC+G6eIAoGCmEQ4/Dl8vVdPgR+
+	eDYlq7m8xwhWmR58EhTpVttpe/dERAFpQ5dlwFubdRQJPv1CXyALDpVg6R79SX94hEC4
+	vZ8g==
+Received: by 10.14.214.132 with SMTP id c4mr42837682eep.18.1354586824561;
+	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 44sm25530203eek.0.2012.12.03.18.06.57
+	by mx.google.com with ESMTPS id b49sm18593970eem.16.2012.12.03.18.07.03
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:06:57 -0800 (PST)
+	Mon, 03 Dec 2012 18:07:04 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:27 +0100
-Message-Id: <e7895d2c34278879fd4744d1b9a89d713004584e.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:28 +0100
+Message-Id: <f7c5854ae182f409e2a4e1b34d433a89030cae08.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 54/58] libcanberra: package also gtk-3.0 if it gets built
+Subject: [PATCH 55/58] lua5.1: fix packaging QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,46 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:21:18 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:21:24 -0000
+
+* Fixes:
+  lua5.1-5.1.4: lua5.1: Files/directories were installed but not shipped
+    /usr/share/lua
+    /usr/share/lua/5.1
+    /usr/lib/lua
+    /usr/lib/lua/5.1
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb | 6 +++++-
+ meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
-index 8b796ac..8a03c99 100644
---- a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
-+++ b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
-@@ -6,7 +6,7 @@ DEPENDS = "alsa-lib gstreamer gtk+ libtool libvorbis gconf"
- SECTION = "libs/multimedia"
- AUTHOR = "Lennart Poettering"
- HOMEPAGE = "http://0pointer.de/lennart/projects/libcanberra"
--PR = "r1"
-+PR = "r2"
+diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+index eca7755..0dc81db 100644
+--- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
++++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=90c3badc6055c699194c4a7cea583296"
+ HOMEPAGE = "http://www.lua.org/"
  
- inherit autotools vala
+ DEPENDS += "readline"
+-PR = "r10"
++PR = "r11"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
+            file://bitwise_operators.patch \
+            file://lua5.1.pc \
+@@ -38,6 +38,10 @@ do_install () {
+ 		install
+ 	install -d ${D}${libdir}/pkgconfig
+ 	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
++	rmdir ${D}${libdir}/lua/5.1
++	rmdir ${D}${libdir}/lua
++	rmdir ${D}${datadir}/lua/5.1
++	rmdir ${D}${datadir}/lua
+ }
+ BBCLASSEXTEND = "native"
  
-@@ -42,15 +42,19 @@ FILES_${PN}-gtk = "\
-   ${bindir}/* \
-   ${libdir}/libcanberra-gtk.so.* \
-   ${libdir}/gtk-2.0/modules/* \
-+  ${libdir}/gtk-3.0/modules/* \
-   ${datadir}/gnome \
-   ${datadir}/gdm \
- "
- 
- FILES_${PN}-dev += "\
-+  ${libdir}/gtk-2.0/modules/*.la \
-+  ${libdir}/gtk-3.0/modules/*.la \
-   ${libdir}/${P}/*.la \
- "
- 
- FILES_${PN}-dbg += "\
-   ${libdir}/gtk-2.0/modules/.debug \
-+  ${libdir}/gtk-3.0/modules/.debug \
-   ${libdir}/${P}/.debug \
- "
 -- 
 1.8.0
 
