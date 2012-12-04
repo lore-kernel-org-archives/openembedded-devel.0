@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi24-00024s-PO
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi29-0001w5-WC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:14:49 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1925797eek.6
+	Tue, 04 Dec 2012 03:15:00 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1377424eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:00:27 -0800 (PST)
+	Mon, 03 Dec 2012 18:00:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=7cit26Y4ixpa2aL5lmbopFkPkinIwuSSmZv/S6d7mek=;
-	b=wwQZkkp3mFpxAloIst4WDQvA+qjd7/jf2OoPJx4w9oGKkizIx1fWPk3w3/CE3CXzjJ
-	YmA/cTwtbYzyKTNviA02H+P2DDJYWCwxOpWiXh9Q0Mijqvv2yUCcsNNZU3KYP68o8jNB
-	fQvAemDVZcCFRoRVjBmv6Dti1cDUz+w0lLZUMVTFmJm1qkuVljOIPVqRRzi2/2rlvt64
-	02RlBxpJIRIt4zsIAwn4PuETWtkicnauqgq184gIYEByamiB3Z8gw/OnEsle1y5JZvbi
-	yUViollwXNhe40h/tNk7fjUBy1+iLXRrjbUkYW/rxXPzL2B6NB1ino5R6POBp0OQyrrj
-	T1WQ==
-Received: by 10.14.214.132 with SMTP id c4mr42778083eep.18.1354586427143;
-	Mon, 03 Dec 2012 18:00:27 -0800 (PST)
+	bh=4EzBGZZyE+Uktd/abobU/DI12FVOnTAY2L9U01wnn6o=;
+	b=G8rNkHsElfWg1sJyQb5TEVrJpp8lF9duic7qWtuJ5gzSXB8itUkBONuqH/xjYkND6m
+	345hi4J5d1g7BLj9MmB0iEZ93jcA96My/lQoMxg5ORhWwyGAnOKeB0thqA8TKPSKQYCO
+	O+4e5jdJnRLm+l+IIOsNdGx45utKGP4z791MnK2I4fPVzPm5rBCiLd5CMDoouK8XnlrJ
+	eQ7wNjPFXkppSV5MAAS/9uaBL3zEqJq8gmQO2GuHYaVQT3LuHhEXQdj2Ql2foyU2CLr9
+	N7OTKdyLaqgmYqIDuLP5oCvo4+Voi3kYDJmluUcrbUZxfOpc7N5KvURPuCL7v8mDYuaw
+	pGNA==
+Received: by 10.14.214.132 with SMTP id c4mr42779275eep.18.1354586434405;
+	Mon, 03 Dec 2012 18:00:34 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z8sm34789174eeo.11.2012.12.03.18.00.26
+	by mx.google.com with ESMTPS id q44sm34797576eep.5.2012.12.03.18.00.33
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:00:26 -0800 (PST)
+	Mon, 03 Dec 2012 18:00:33 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:58:39 +0100
-Message-Id: <d9b4e63046450c38209d8f3a5556db66760200f3.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:58:40 +0100
+Message-Id: <20028a31f7f7032af7d749f5a5700e2a21e1d361.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 06/58] pyrtm: import from OE-Classic
+Subject: [PATCH 07/58] usb-modeswitch-data: upgrade to 20121109
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:14:50 -0000
+X-List-Received-Date: Tue, 04 Dec 2012 02:15:00 -0000
 
-* needed for rtmom
-* add LIC_FILES_CHKSUM
+* older archive no longer available on SRC_URI
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/python/pyrtm_0.2.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/pyrtm_0.2.bb
+ ...sb-modeswitch-data_20120120.bb => usb-modeswitch-data_20121109.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch-data_20120120.bb => usb-modeswitch-data_20121109.bb} (74%)
 
-diff --git a/meta-oe/recipes-devtools/python/pyrtm_0.2.bb b/meta-oe/recipes-devtools/python/pyrtm_0.2.bb
-new file mode 100644
-index 0000000..0cc5e8e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/pyrtm_0.2.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Python interface for Remember The Milk API."
-+AUTHOR = "Sridhar Ratnakumar / srid"
-+HOMEPAGE = "http://pypi.python.org/pypi/pyrtm"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
-+DEPENDS = "python-native"
-+
-+inherit distutils
-+
-+SRC_URI = "http://pypi.python.org/packages/source/p/${PN}/${P}.tar.gz"
-+SRC_URI[md5sum] = "34423f39caf7df8a9db8e243be9cf1a0"
-+SRC_URI[sha256sum] = "d9d46d096a38cb692b55f4ee9f364d54348298e9497b11c1ef057539b5de1567"
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20120120.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20121109.bb
+similarity index 74%
+rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20120120.bb
+rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20121109.bb
+index bf3249f..8a6fc13 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20120120.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20121109.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ inherit allarch
+ 
+ SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "c899cc9c71bb35f3ec600b7cd1455c65"
+-SRC_URI[sha256sum] = "bce6b8cbbf293fe519584b63815fe7f665e8238e6e138151d8cf7cc85a7a7b0f"
++SRC_URI[md5sum] = "a7d23a03157871013a0d708ab2b1b6df"
++SRC_URI[sha256sum] = "a74346a471d540ba9da7d7b332ad35ea05ff7375297c0da87da5be675293d5a5"
+ 
+ do_install() {
+ 	oe_runmake install DESTDIR=${D}
 -- 
 1.8.0
 
