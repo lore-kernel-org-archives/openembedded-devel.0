@@ -1,37 +1,37 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8F-00040y-3g
+	(envelope-from <martin.jansa@gmail.com>) id 1Tfi8L-00040y-Kx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 03:21:11 +0100
+	Tue, 04 Dec 2012 03:21:18 +0100
 Received: by mail-ee0-f47.google.com with SMTP id e51so1926936eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=8A9j7U4fT73e/sRvxMTsQfaLe3gAYrgOXTAvNJrZQ0k=;
-	b=oqs2+YL0xcMxKo08c49CmvIVTQShXL0r90/1aK+vLe15pLHLBOXw+BFY8hEsu5krJe
-	bBj+2zV2Pqo0DiEmbydXdn7F1xk6mRn/sh/nbi3b92jYoryikFVvhLUFJJ3Yxw9285lI
-	NahcaW+c6sD2JSWA7tHl7RB3OsJbguFxP4QdW2rh2bmrclpRQuVdZnAld2q7+KrzMD8n
-	BO5hk2LEbak5PVg+s0L8KpEbuKAwGkdgZSFaxDH5ONwxp0URUcEnTq6URUHGUDP8DXT+
-	sDswIyTGWmMeKsLa8uE3BNVOWBkea66QDDkic50NlIwNsSxFtXVT2K7j7nr36Q7S6ptU
-	E7GA==
-Received: by 10.14.225.4 with SMTP id y4mr13111902eep.6.1354586811536;
-	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
+	bh=L8hH8nKrH8CXRijNUmZSLy7LAR0v+ifrtSj0D7olb0Y=;
+	b=K1bxJ3CTAfXs/QCcMHRGEx9uy8kEpkgx5XGbIMZVQg8k9U+kUyLxfU9k5Pyt6IYhQ2
+	CBRmrtuzdKjfoS68WQIRPkEQGQYh36kawtNH0I35tm2+rNVZXf2SYZHm4aGgiOwRpqVW
+	FWBSh5NZMZUXeQVBMWoF0rtEtiKR7wkw34PlLLAlX1YgVZTlQiW1JcM6LLy0wt9J9+l1
+	XwufAXHE7+J31wd0tj4E1FS0YwEiS3/N+KFhFTJyV5m3rnsYwkBnXrK5Jqct+3pOQsHM
+	3PbIIzaY2PkHhlCuFzAnhbTN8Q7f2bICT/Up63+IziZa7puAnR9e8gJlv/1A0iTQfjpS
+	IFag==
+Received: by 10.14.172.195 with SMTP id t43mr43042690eel.17.1354586818018;
+	Mon, 03 Dec 2012 18:06:58 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id f49sm34814371eep.12.2012.12.03.18.06.50
+	by mx.google.com with ESMTPS id 44sm25530203eek.0.2012.12.03.18.06.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Dec 2012 18:06:51 -0800 (PST)
+	Mon, 03 Dec 2012 18:06:57 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 Dec 2012 02:59:26 +0100
-Message-Id: <fe082532e17009056e49ba394381975019768444.1354586187.git.Martin.Jansa@gmail.com>
+Date: Tue,  4 Dec 2012 02:59:27 +0100
+Message-Id: <e7895d2c34278879fd4744d1b9a89d713004584e.1354586187.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 53/58] gvim: fix unpackaged files QA warning
+Subject: [PATCH 54/58] libcanberra: package also gtk-3.0 if it gets built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 02:21:12 -0000
-
-* there is a lot of stuff installed to /usr/share/vim, but gvim does not have this in FILES_PN
+X-List-Received-Date: Tue, 04 Dec 2012 02:21:18 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/vim/gvim_7.2.446.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/vim/gvim_7.2.446.bb b/meta-oe/recipes-support/vim/gvim_7.2.446.bb
-index 94215b4..fbc763a 100644
---- a/meta-oe/recipes-support/vim/gvim_7.2.446.bb
-+++ b/meta-oe/recipes-support/vim/gvim_7.2.446.bb
-@@ -3,8 +3,12 @@ VIMX = "--with-x"
+diff --git a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
+index 8b796ac..8a03c99 100644
+--- a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
++++ b/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
+@@ -6,7 +6,7 @@ DEPENDS = "alsa-lib gstreamer gtk+ libtool libvorbis gconf"
+ SECTION = "libs/multimedia"
+ AUTHOR = "Lennart Poettering"
+ HOMEPAGE = "http://0pointer.de/lennart/projects/libcanberra"
+-PR = "r1"
++PR = "r2"
  
- require vim_${PV}.bb
+ inherit autotools vala
  
-+PR = "${INC_PR}.4"
-+
- DEPENDS += "gtk+ xt"
+@@ -42,15 +42,19 @@ FILES_${PN}-gtk = "\
+   ${bindir}/* \
+   ${libdir}/libcanberra-gtk.so.* \
+   ${libdir}/gtk-2.0/modules/* \
++  ${libdir}/gtk-3.0/modules/* \
+   ${datadir}/gnome \
+   ${datadir}/gdm \
+ "
  
-+FILES_${PN} += "${datadir}/vim"
-+
- EXTRA_OECONF += "--enable-gtk2-test"
+ FILES_${PN}-dev += "\
++  ${libdir}/gtk-2.0/modules/*.la \
++  ${libdir}/gtk-3.0/modules/*.la \
+   ${libdir}/${P}/*.la \
+ "
  
- RREPLACES_${PN} = "vim vim-tiny"
+ FILES_${PN}-dbg += "\
+   ${libdir}/gtk-2.0/modules/.debug \
++  ${libdir}/gtk-3.0/modules/.debug \
+   ${libdir}/${P}/.debug \
+ "
 -- 
 1.8.0
 
