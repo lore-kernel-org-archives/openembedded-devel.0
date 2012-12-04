@@ -1,24 +1,34 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-oa0-f47.google.com ([209.85.219.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1Tft1M-0006MN-OJ
+	(envelope-from <mario.goulart@gmail.com>) id 1TftEy-0000Pc-2v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Dec 2012 14:58:49 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 04 Dec 2012 05:44:25 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,215,1355126400"; d="scan'208";a="228757073"
-Received: from unknown (HELO helios.localnet) ([10.252.122.195])
-	by orsmga001.jf.intel.com with ESMTP; 04 Dec 2012 05:44:24 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 04 Dec 2012 15:12:54 +0100
+Received: by mail-oa0-f47.google.com with SMTP id h1so3856537oag.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Dec 2012 05:58:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=vsXY3fvluvMWqI0UI7/M7M2/ky6U5Tnfuc6lMC1SL6I=;
+	b=N0CkZ80KmltQps8NQGe9LVTyIOc6t1K0PUNnQyJleOV6hLOgj/MB8whu61wAFnpEke
+	RkipzcKZCsfltaasB1J5T/5Adn5lQhaoakLNScccJHTX5CZIjGYhfB9dZRoVx+2surXW
+	Xih6O7L7OkzIAfSVFdITXk8JaQTCPD1whalrDLgLGnRoXJyoq06IUcnhxNeNp82heY9q
+	giDm6RtdgOsrB5qSfZfRzgASnJlwsDvwXRBhDqebphKR2NkQV7hMeMbfo040Pdi/kvO1
+	rfFsQD89DxDIw3H0MCfWR9rP+iQulvubiSO/iS3SryNaFUsDn4rFulImHjHBt+3C3G8a
+	ayeA==
+Received: by 10.60.169.140 with SMTP id ae12mr11321127oec.52.1354629508982;
+	Tue, 04 Dec 2012 05:58:28 -0800 (PST)
+Received: from localhost.localdomain ([187.23.153.69])
+	by mx.google.com with ESMTPS id n7sm810975obd.16.2012.12.04.05.58.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 04 Dec 2012 05:58:28 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 04 Dec 2012 13:44:23 +0000
-Message-ID: <3825646.aQZl1lGs07@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-18-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <1354318947-12109-1-git-send-email-andrea.adami@gmail.com>
-References: <1354318947-12109-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] linux-yocto_3.4: initial commit for Zaurus
+Date: Tue,  4 Dec 2012 11:58:18 -0200
+Message-Id: <1354629498-4917-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] xinput-calibrator: remove hardcoded path from xinput_calibrator.desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,115 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Dec 2012 13:58:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 04 Dec 2012 14:12:55 -0000
 
-On Saturday 01 December 2012 00:42:27 Andrea Adami wrote:
-> * based on linux-yocto-standard cfg fragments
-> * kernel 3.4 boots though size is too big
-> * put together pending/submitted patches
-> * for the moment DEFAULT_PREFERENCE = "-1"
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  .../linux/linux-yocto-3.4/akita/akita-standard.scc |    7 +
->  .../linux/linux-yocto-3.4/akita/akita.cfg          |   81 ++++
->  .../linux/linux-yocto-3.4/akita/akita.scc          |   10 +
->  .../linux/linux-yocto-3.4/c7x0/c7x0-standard.scc   |    7 +
->  recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg |   70 ++++
->  recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.scc |   10 +
->  ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 ++
->  .../linux-yocto-3.4/collie/collie-standard.scc     |    7 +
->  .../linux/linux-yocto-3.4/collie/collie.cfg        |   84 +++++
->  .../linux/linux-yocto-3.4/collie/collie.scc        |    6 +
->  .../collie/locomo_kbd_tweak-r2.patch               |   80 ++++
->  .../linux/linux-yocto-3.4/feature-top.scc          |    1 +
->  .../poodle/locomo_kbd_tweak-r2.patch               |   80 ++++
->  .../linux-yocto-3.4/poodle/poodle-standard.scc     |    7 +
->  .../linux/linux-yocto-3.4/poodle/poodle.cfg        |   75 ++++
->  .../linux/linux-yocto-3.4/poodle/poodle.scc        |   10 +
->  .../linux/linux-yocto-3.4/pxa25x-gpio-wakeup.patch |   40 ++
->  .../linux/linux-yocto-3.4/pxa25x-sa1100-rtc.patch  |   29 ++
->  .../linux/linux-yocto-3.4/pxa27x-sa1100-rtc.patch  |   29 ++
->  .../linux/linux-yocto-3.4/sharpsl_param.patch      |   24 ++
->  .../linux/linux-yocto-3.4/spi-pxa2xx-fix-mem.patch |   34 ++
->  .../linux/linux-yocto-3.4/spitz/spitz-standard.scc |    7 +
->  .../linux/linux-yocto-3.4/spitz/spitz.cfg          |   80 ++++
->  .../linux/linux-yocto-3.4/spitz/spitz.scc          |   10 +
->  .../linux/linux-yocto-3.4/spitz_pm.patch           |   53 +++
->  .../linux/linux-yocto-3.4/tosa/tosa-standard.scc   |    7 +
->  recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg |   75 ++++
->  recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.scc |   10 +
->  .../linux/linux-yocto-3.4/zaurus-common.scc        |   10 +
->  .../linux/linux-yocto-3.4/zaurus-hardware.cfg      |  255 +++++++++++++
->  .../linux/linux-yocto-3.4/zaurus-non-hardware.cfg  |  394
-> ++++++++++++++++++++
-> .../linux-yocto-3.4/zaurus-pxa-common-non-hw.cfg   |    9 +
->  .../linux/linux-yocto-3.4/zaurus-pxa-common.cfg    |   98 +++++
->  .../linux/linux-yocto-3.4/zaurus-pxa-only.scc      |    2 +
->  .../linux/linux-yocto-3.4/zaurus-usb-host.scc      |    6 +
->  .../linux-yocto-3.4/zaurus-usb-ohci-non-hw.cfg     |    4 +
->  .../linux/linux-yocto-3.4/zaurus-usb-ohci.cfg      |  110 ++++++
->  recipes-kernel/linux/linux-yocto_3.4.bbappend      |   49 +++
->  38 files changed, 1904 insertions(+), 0 deletions(-)
->  create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/akita/akita.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc create
-> mode 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.scc create mode
-> 100644
-> recipes-kernel/linux/linux-yocto-3.4/collie/0001-pcmcia-pxa2xx_sharpsl-reta
-> in-ops-structure-on-collie.patch create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc create mode
-> 100644
-> recipes-kernel/linux/linux-yocto-3.4/collie/locomo_kbd_tweak-r2.patch
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/feature-top.scc
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/poodle/locomo_kbd_tweak-r2.patch
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/pxa25x-gpio-wakeup.patch create
-> mode 100644 recipes-kernel/linux/linux-yocto-3.4/pxa25x-sa1100-rtc.patch
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/pxa27x-sa1100-rtc.patch create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/sharpsl_param.patch create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/spi-pxa2xx-fix-mem.patch create
-> mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.scc
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz_pm.patch
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-common.scc create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg create
-> mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common-non-hw.cfg create
-> mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-only.scc
-> create mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-host.scc
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-ohci-non-hw.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-ohci.cfg create mode
-> 100644 recipes-kernel/linux/linux-yocto_3.4.bbappend
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../xinput-calibrator/xinput-calibrator_git.bb     |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-Merged to meta-handheld master, thanks.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
+index c16a412..97f9343 100644
+--- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
++++ b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=1bcba08f67cdb56f340
+ DEPENDS = "virtual/libx11 libxi"
+ 
+ PV = "0.7.5+git${SRCPV}"
++PR = "r1"
+ 
+ inherit autotools
+ 
+@@ -21,7 +22,7 @@ do_install_append() {
+         install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
+ 
+         install -d ${D}${sysconfdir}/xdg/autostart
+-        sed -i -e 's,^Exec=.*,Exec=/usr/bin/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
++        sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
+         install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
+ }
+ 
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
