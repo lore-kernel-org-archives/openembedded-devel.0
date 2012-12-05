@@ -1,38 +1,38 @@
 Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgN7C-0000Ec-9H
+	(envelope-from <martin.jansa@gmail.com>) id 1TgN7H-0000Ec-0V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 23:06:52 +0100
+	Wed, 05 Dec 2012 23:06:55 +0100
 Received: by mail-ea0-f175.google.com with SMTP id h11so2191970eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 13:52:26 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=aghlfiHQk3LciSU4oXiLJp+0SSum1VZ6+kgmWxzY/s8=;
-	b=h2cJIB54Ne9YG4Bsz9VPK2TEBsT3bnmQEcM/Vhyi/RPIJME/uNP4APJ3E156LRAdql
-	G1nsS99+ouleJ+WMbEl112Me+G0q8Qwq3Aq3d7pw9cHp5enKkkAUYjngFKgzynVKOamu
-	SD/KwHE87Z7riIkyjXYf41QVuaBtT1j/rLlpuaS5nm5nSZAVrzm8jORNncfxR22GX6d7
-	bOnkHEJ4K00/0iXDg41DFcZIKS8G8nKvnztOpzSe4BOgJ0l4S/5TTFHPa7Pwx7YGC9g0
-	h0D8OEXFVKtb1ltb+o55FRJt4X2xdhb3WQ2bVU+B4cERxTCxZVsulY7pAN1ttHw4M5vX
-	I3ZQ==
-Received: by 10.14.178.196 with SMTP id f44mr65281505eem.14.1354744346074;
-	Wed, 05 Dec 2012 13:52:26 -0800 (PST)
+	bh=w/N0VGqaqvfk/429/dZS2qyCSfXm2m/gH2gglLxTEm4=;
+	b=U3efP8J+7an6DBQFd3qgpX7MNaIeGS522XPrF5wZnPaj3CvUid6HgcGcL4ctyDi5ct
+	D14Ln8iwcbuoTcjnp4jY8eiv0N12WROXMKzfimOaG9xeFpXY/65+29l1peRXmryVoEf3
+	0g8AjPYJTM/EgXk9iF4hewgbKr86IsVXAasYpA6+LtHf/bE3PRg0VkI0imoLZuuCam9d
+	AMvWcE6VwMTg6uXXUxfgfwnWwnMOf+Jp7ESvcor4GnOBhJhQcWxCe9DLE8AFy0AZFWZS
+	Brd16kipBxCqojF0fj3PEDdc4V7RTO4uI8D/LwUOobTGz8i28eUJKMdlXgVoGef0D876
+	mkKQ==
+Received: by 10.14.3.195 with SMTP id 43mr64999117eeh.36.1354744352904;
+	Wed, 05 Dec 2012 13:52:32 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 44sm11793556eek.0.2012.12.05.13.52.25
+	by mx.google.com with ESMTPS id 46sm11781120eeg.4.2012.12.05.13.52.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 13:52:25 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:32 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 22:52:00 +0100
-Message-Id: <8ee5d5346f5b17204d40a7a5940141aab4a1fd2a.1354743849.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 22:52:01 +0100
+Message-Id: <bf23f6c33ed71c3e9ad02bc4251309ce1d169990.1354743849.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354743849.git.Martin.Jansa@gmail.com>
-Subject: [PATCHv2 75/85] gdm: disable failing docs generation
+Subject: [PATCH 78/85] cheese: disable help build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,42 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 22:06:53 -0000
-
-* xmlto does not work correctly
-  https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
+X-List-Received-Date: Wed, 05 Dec 2012 22:06:55 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-index bdf249e..863db2e 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+index f447817..1e8a98b 100644
+--- a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
++++ b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+@@ -15,3 +15,7 @@ FILES_${PN} += "${datadir}/dbus-1"
+ RRECOMMENDS_${PN} = "gst-plugins-good-meta gst-plugins-base-meta"
  
- DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
- 
--PR = "r9"
-+PR = "r10"
- 
- inherit gnome update-rc.d
- 
-@@ -25,7 +25,11 @@ SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968a
- EXTRA_OECONF = " --enable-authentication-scheme=shadow \
-                  --enable-debug=yes \
-                  --with-console-kit \
--                 --disable-scrollkeeper "
-+                 --disable-scrollkeeper"
+ EXTRA_OECONF += "--disable-scrollkeeper"
 +
 +do_configure_prepend() {
-+	sed -i -e "s:\bdocs::g" ${S}/Makefile.am
++	sed -i -e "s: help : :g" ${S}/Makefile.am
 +}
- 
- do_install_prepend() {
- 	mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
 -- 
 1.8.0
 
