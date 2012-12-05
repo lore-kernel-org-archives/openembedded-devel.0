@@ -1,38 +1,35 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgJzN-0000Um-ED
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TgKeN-00070M-CR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 19:46:38 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3068080eek.6
+	Wed, 05 Dec 2012 20:29:12 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qB5JERxZ002887
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 10:32:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=GteWVuxPUs8PcZaXWFVh0krPFIK2jftbl7PQSAx5YS8=;
-	b=q5Ek3LTkg7lZdcxW8N6Lvp6ofM0fhMtqzftl5tMfxh+w5lZVLJL8ZP172AAAiQlLLc
-	wEjljukRnmRPlq7AlHLuRxtnHhB9qkxsHy0zU5luoBYmhS1TiMX/3ZIGBBSqEJC1LLUG
-	QnxUAcn+RSo+Rg/ABf6hpsz8lOOxKSGNFTrfxIa7FqkEyB1t00cgJ+NUiGK9cnafNGVj
-	eBSKYttgIaqV8Y462shpGX4x8DHQQ6m9qzHULcQ9lJZGAzoqp5kkB+03abKr0xHW5iat
-	c1b7nZ1dTRc4NAMPWS0ecYr9e5qL7hgpTh2X6hQ5x9CthpbDW2TARktFm4roVHBrR/3e
-	q7Cw==
-Received: by 10.14.215.197 with SMTP id e45mr63729415eep.0.1354732325455;
-	Wed, 05 Dec 2012 10:32:05 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y44sm10672533eel.14.2012.12.05.10.32.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 10:32:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 19:30:35 +0100
-Message-Id: <bf28dc7842b11f2688cd0ad7b9a1dd8410e8274c.1354731625.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-In-Reply-To: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
-References: <cover.1354586187.git.Martin.Jansa@gmail.com>
-	<bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
-References: <cover.1354731625.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 77/77] gnome-themes: fix path to icon-name-mapping
+	Wed, 5 Dec 2012 11:14:29 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Wed, 5 Dec 2012 11:14:27 -0800
+Received: from yow-jmacdona-d2.windriver.com (yow-jmacdona-d2.wrs.com
+	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
+	ESMTP id 35C2A7FE2	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Dec 2012 14:13:31 -0500 (EST)
+Received: by yow-jmacdona-d2.windriver.com (Postfix, from userid 1000)	id
+	E606D6A8119; Wed,  5 Dec 2012 14:14:26 -0500 (EST)
+Date: Wed, 5 Dec 2012 14:14:26 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20121205191426.GL5359@windriver.com>
+References: <1354727024-12231-1-git-send-email-paul.eggleton@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1354727024-12231-1-git-send-email-paul.eggleton@linux.intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH v2] proftpd: fix do_install failure after libexecdir change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +43,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 18:46:43 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 19:29:20 -0000
+X-Groupsio-MsgNum: 42018
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="hdW7zL/qDS6RXdAL"
+Content-Disposition: inline
 
-* it was pointing to
-  UTILS_PATH=/OE/jansa-test/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/lib/gnome-themes
-  after libexecdir change in oe-core
+--hdW7zL/qDS6RXdAL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+[[oe] [meta-networking][PATCH v2] proftpd: fix do_install failure after lib=
+execdir change] On 12.12.05 (Wed 17:03) Paul Eggleton wrote:
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index 9cc091f..8c15754 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME themes"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2b543dc97eb7594d026af39d9b54204b"
- 
--PR = "r2"
-+PR = "r3"
- 
- SECTION = "x11/gnome"
- DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
-@@ -13,7 +13,7 @@ EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
- inherit gnome perlnative
- 
- do_configure_prepend() {
--	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libexecdir}:g' configure.in
-+	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
- }
- 
- PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
--- 
-1.8.0
+> As of OE-Core commit id 406bd38b4232f9f399ef5ffe0b4fac72ed605a23
+> libexecdir has been changed to ${libdir}/${BPN}. As we are already
+> deleting ${libdir}/proftpd which is the same as ${libdir}/${BPN} in this
+> case, introduce a check to see if ${libexecdir} still exists before
+> attempting to remove it possibly a second time. This will handle if
+> libexecdir is set to its original value or a custom value in the distro
+> config.
+>=20
+> Based on a patch by Kevin Strasser <kevin.strasser@linux.intel.com>
+>=20
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/=
+meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> index 8624c16..7279cfb 100644
+> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> @@ -34,7 +34,8 @@ FTPGROUP =3D "ftp"
+> =20
+>  do_install () {
+>  	oe_runmake DESTDIR=3D${D} install
+> -	rmdir ${D}${libexecdir} ${D}${libdir}/proftpd ${D}${datadir}/locale
+> +	rmdir ${D}${libdir}/proftpd ${D}${datadir}/locale
+> +	[ -d ${D}${libexecdir} ] && rmdir ${D}${libexecdir}
+>  	sed -i '/ *User[ \t]*/s/ftp/${FTPUSER}/' ${D}${sysconfdir}/proftpd.conf
+>  	sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.co=
+nf
+>  	install -d ${D}${sysconfdir}/init.d
 
+Seems sensible.  Merged.  Thanks.
 
+--=20
+-Joe MacDonald.
+:wq
 
+--hdW7zL/qDS6RXdAL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlC/nRIACgkQPN8S4W6ZZnfyXACfQBEktsFUrUoH/Wu+w0NGkJOC
+I2oAnjRGXfcUYATOonWvH/T5FaBXk2px
+=0lMR
+-----END PGP SIGNATURE-----
+
+--hdW7zL/qDS6RXdAL--
