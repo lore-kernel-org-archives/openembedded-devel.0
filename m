@@ -1,24 +1,20 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TgIOu-0002rQ-Rh
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TgIbt-00038B-PT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 18:04:50 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 05 Dec 2012 08:50:23 -0800
+	Wed, 05 Dec 2012 18:18:14 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 05 Dec 2012 09:03:48 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,223,1355126400"; d="scan'208";a="176539331"
-Received: from unknown (HELO helios.localnet) ([10.252.122.253])
-	by AZSMGA002.ch.intel.com with ESMTP; 05 Dec 2012 08:50:22 -0800
+X-IronPort-AV: E=Sophos;i="4.84,223,1355126400"; d="scan'208";a="227010581"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.253])
+	by azsmga001.ch.intel.com with ESMTP; 05 Dec 2012 09:03:46 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 05 Dec 2012 16:50:22 +0000
-Message-ID: <2884756.H4dIPRv7bS@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-19-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <1354725450-11856-1-git-send-email-paul.eggleton@linux.intel.com>
-References: <1354725450-11856-1-git-send-email-paul.eggleton@linux.intel.com>
-MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] proftpd: conditionally remove /usr/libexec
+Date: Wed,  5 Dec 2012 17:03:44 +0000
+Message-Id: <1354727024-12231-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-networking][PATCH v2] proftpd: fix do_install failure after libexecdir change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +28,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 17:04:50 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 05 Dec 2012 17:18:14 -0000
 
-On Wednesday 05 December 2012 16:37:30 Paul Eggleton wrote:
-> From: Kevin Strasser <kevin.strasser@linux.intel.com>
-> 
-> As of poky commit id 1d18224b24a515a07170ce36dbd725cb203d3300
-> libexecdir has been changed to ${libdir}/${BPN} which is typically
-> /usr/lib. This change introduces a check to see if /usr/libexec is
-> being used before attempting to remove it.
-> 
-> Fixes [YOCTO #3504]
-> 
-> Signed-off-by: Kevin Strasser <kevin.strasser@linux.intel.com>
-> ---
->  meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb index
-> 8624c16..ec943b7 100644
-> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> @@ -34,7 +34,10 @@ FTPGROUP = "ftp"
-> 
->  do_install () {
->  	oe_runmake DESTDIR=${D} install
-> -	rmdir ${D}${libexecdir} ${D}${libdir}/proftpd ${D}${datadir}/locale
-> +	rmdir ${D}${libdir}/proftpd ${D}${datadir}/locale
-> +	if [ -d ${D}/usr/libexec ] ; then
-> +		rmdir ${D}/usr/libexec
-> +	fi
->  	sed -i '/ *User[ \t]*/s/ftp/${FTPUSER}/' ${D}${sysconfdir}/proftpd.conf
->  	sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.conf
->  	install -d ${D}${sysconfdir}/init.d
+As of OE-Core commit id 406bd38b4232f9f399ef5ffe0b4fac72ed605a23
+libexecdir has been changed to ${libdir}/${BPN}. As we are already
+deleting ${libdir}/proftpd which is the same as ${libdir}/${BPN} in this
+case, introduce a check to see if ${libexecdir} still exists before
+attempting to remove it possibly a second time. This will handle if
+libexecdir is set to its original value or a custom value in the distro
+config.
 
-Hmm, this fixes the build failure with master but I think there is a slightly 
-better fix that handles a custom ${libexecdir}. I will send a v2.
+Based on a patch by Kevin Strasser <kevin.strasser@linux.intel.com>
 
-Cheers,
-Paul
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+index 8624c16..7279cfb 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+@@ -34,7 +34,8 @@ FTPGROUP = "ftp"
+ 
+ do_install () {
+ 	oe_runmake DESTDIR=${D} install
+-	rmdir ${D}${libexecdir} ${D}${libdir}/proftpd ${D}${datadir}/locale
++	rmdir ${D}${libdir}/proftpd ${D}${datadir}/locale
++	[ -d ${D}${libexecdir} ] && rmdir ${D}${libexecdir}
+ 	sed -i '/ *User[ \t]*/s/ftp/${FTPUSER}/' ${D}${sysconfdir}/proftpd.conf
+ 	sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.conf
+ 	install -d ${D}${sysconfdir}/init.d
 -- 
+1.7.10.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
