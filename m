@@ -1,38 +1,38 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgJyR-0000DF-SQ
+	(envelope-from <martin.jansa@gmail.com>) id 1TgJym-0000Q7-6p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 19:45:52 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2122427eaa.6
+	Wed, 05 Dec 2012 19:46:03 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3068013eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 10:31:14 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=lZ9fLfGYXUkOaVVkGTi26mWkPhbnEyBG/uJFtk3GxvE=;
-	b=g5WTGhu8F06YmtcK7pqsSigI2hLEDjjffMEXZW7JsbbudlbZWVoB20isDC63/6AIG7
-	pOQXwd3VB5AJBaG7EbfRdi90Dznth53tfyA5K2bNrkbNTW7UwxvJx45apiNnpwKcxJe7
-	MTVBM8S2z6OVObQbnhxxOvaPllBm3j9oSAe/oBb0cdZVj71BDGF1KEL4LIWyRw8CKV9d
-	wegHO1cO+0SfnqmxO/Xib1hEXdQeuA1u2CSQ/4c6ChdxAoCUqNe4cNgLDliZ+YW/yR1K
-	ssJle4c+oYBnACjmYzR5aikJw/PD4j2VscAdtRxOms6nWXffbdvhmq59OBfLx86CVLDb
-	gCmg==
-Received: by 10.14.178.7 with SMTP id e7mr63577429eem.44.1354732273976;
-	Wed, 05 Dec 2012 10:31:13 -0800 (PST)
+	bh=zNyTFjuxxo4qVHr/kg4Ix1rMMyMj8Mc6aAeGiTIytZA=;
+	b=UVut2tSmr7CNgleVegnoedkFsQwgFoBjPpMvTjcD8Jaf0ef2ctTR270oYGPl6wLChP
+	ogZl6/prtOks7Ok7pLQ2wiL812UkY8fkic1YStbY0MVBK63TCpT3t9kF5y7hBRWcDohJ
+	RtG0cf1QeT/7R4/QcIWvIDsFQHWQMmmOGa9HYxJRhX1HdTFpOELUkHWntsEwpj3fRBvp
+	4Hxt4EIoNx0TUKJiKYZSmztxdqlZumRnnMKazReXVr20L8AvHBQktV2FQagSh0lBcD7w
+	06eqsg/zQ/aHpYq/JdasyoIIyoM2/2HdylqmU/uaC2ARiOyU1d96oJ4N1NaXvDvEemXs
+	tdLQ==
+Received: by 10.14.175.198 with SMTP id z46mr63304847eel.26.1354732292251;
+	Wed, 05 Dec 2012 10:31:32 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b2sm10684640eep.9.2012.12.05.10.31.13
+	by mx.google.com with ESMTPS id 46sm10705806eeg.4.2012.12.05.10.31.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 10:31:13 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:31 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 19:30:28 +0100
-Message-Id: <c8fa84e480b278ff0f1e19e7bf9d9f911e9c95da.1354731625.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 19:30:30 +0100
+Message-Id: <b439f0305d07add742373378d5d98fee2ab098bb.1354731625.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354731625.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 70/77] efl.bbclass: fix FILES for PN-staticdev
+Subject: [PATCH 72/77] gnome-disk-utility: disable failing docs generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,31 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 18:46:03 -0000
-X-List-Received-Date: Wed, 05 Dec 2012 18:46:03 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 18:46:15 -0000
 
-* ${libdir}/${BPN}/*.a is there by default and it's PN-staticdev not PN-static
+* xmlto does not work correctly
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/classes/efl.bbclass | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-efl/classes/efl.bbclass b/meta-efl/classes/efl.bbclass
-index bc2f640..bdb5834 100644
---- a/meta-efl/classes/efl.bbclass
-+++ b/meta-efl/classes/efl.bbclass
-@@ -49,9 +49,7 @@ FILES_${PN}-dev   += "${bindir}/${PN}-config \
-                       ${libdir}/edje/modules/${PN}/*/module.la \
- "
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index dab938f..b7be956 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
  
--FILES_${PN}-static += "${libdir}/${PN}/*.a \
--                       ${libdir}/${PN}/*/*.a \
--"
-+FILES_${PN}-staticdev += "${libdir}/${BPN}/*/*.a"
+ DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart nautilus"
  
- FILES_${PN}-dbg +=   "${libdir}/${PN}/.debug \
-                       ${libdir}/${PN}/*/.debug \
+-PR = "r1"
++PR = "r2"
+ 
+ inherit gnome
+ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
+@@ -17,7 +17,7 @@ SRC_URI += "\
+      file://sysrooted-pkg-config.patch \
+      "
+ 
+-EXTRA_OECONF += "--disable-scrollkeeper"
++EXTRA_OECONF += "--disable-scrollkeeper --disable-docbook-docs"
+ 
+ PACKAGES =+ "${PN}-nautilus-extension"
+ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
 -- 
 1.8.0
 
