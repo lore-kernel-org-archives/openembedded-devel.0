@@ -1,38 +1,38 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgJyx-0000DF-AN
+	(envelope-from <martin.jansa@gmail.com>) id 1TgJys-0000Um-Mu
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 19:46:10 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2122427eaa.6
+	Wed, 05 Dec 2012 19:46:08 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3068080eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 10:31:45 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=z2qlrAsJdy1lctNwifj+VzZFskzDzQUJTNX0sZ1SKZk=;
-	b=F7gyzyxbACcmOQwRBWAO6VqhX8DuZE9G0GYKVQhHzQ2XXqpoHBKcMiwac9SDWB/6H2
-	Tx32G8qgRoOZmbXAfVCp+J+YhNi8VDjE9r7rjJQIQ3UERN+TqNbCh48tgy0h6TaKGDEG
-	xfzYnKTURI1a2mQvpr0pz5N7CzJgLlMhRcXyENTNkIZM74H/t5DgLhWMudUHyR+eQjVX
-	6HNMEJFdv76RIY7czC0hHsb/7fbENSaCK6wuJHTrhgfTEGTW4NN9WALelGIkI2atyk/L
-	hc0IB6cDP+LgJoGj0yvlpMwKZ8WGWPVhidmq4NXjKyp9W3ZZfYNXl6m8BHX50rJdUUth
-	85MA==
-Received: by 10.14.203.2 with SMTP id e2mr63302308eeo.20.1354732305413;
-	Wed, 05 Dec 2012 10:31:45 -0800 (PST)
+	bh=qZ6sOwM/BIxOtMkjtnUslEFzWjpClLqoi8QKRIuyPRA=;
+	b=PVo6/jigaq6V2lpxyQlFtrK00KT7brwPvBtyWXe20foWh9qTg7JUJ/7m8CaV7RHgIk
+	CcBDJ1KswQCZvkBsHmlY1HUKHWyL33MCjNAqZZFDbAgXirpbgWqyBLpkihqnH5IO1DU+
+	K5+wU2SqbyofPcuQJT4xG1DB7WvGaAz3ucdQZ1uzKxBJF9nbByihxOw/NiWosAkjk5CA
+	Btx59us4MXxthUWumxPGqkquJFcH8X5RZGuOKOeAziQtfFwAjIjIPCtXdLC6IygIQx3I
+	GONE45WN5sBoODEbw9X4re9ssYFAzB1UoE/59Dc2y73xcZAvot4Jg+O0uEhqzsCcAiiw
+	C43g==
+Received: by 10.14.176.66 with SMTP id a42mr63426024eem.34.1354732298742;
+	Wed, 05 Dec 2012 10:31:38 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id v46sm10717288eep.1.2012.12.05.10.31.44
+	by mx.google.com with ESMTPS id e2sm10691397eeo.8.2012.12.05.10.31.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 10:31:44 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:38 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 19:30:32 +0100
-Message-Id: <7bd2cf4af810494600e226ae6b88c1d2aa7badcf.1354731625.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 19:30:31 +0100
+Message-Id: <8d5148b9b8a618863466a000fc6abc7f7893e0f6.1354731625.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354731625.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 74/77] gnome-session: disable failing docs generation
+Subject: [PATCH 73/77] gnome-disk-utility: fix unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 18:46:15 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 18:46:18 -0000
 
-* xmlto does not work correctly
-  https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
+* WARNING: QA Issue: gnome-disk-utility: Files/directories were installed but not shipped
+  /usr/lib/nautilus/extensions-2.0/libnautilus-gdu.la
+  /usr/lib/nautilus/extensions-2.0/libnautilus-gdu.a
+  /usr/lib/nautilus/extensions-2.0/.debug
+  /usr/lib/nautilus/extensions-2.0/.debug/libnautilus-gdu.so
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb    | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-index 6c10156..e1fa519 100644
---- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-@@ -2,17 +2,17 @@ DESCRIPTION = "Gnome session manager"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index b7be956..4a3efaf 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
+ 
+ DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart nautilus"
  
 -PR = "r2"
 +PR = "r3"
  
- SECTION = "x11/gnome"
- DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
+ inherit gnome
+ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
+@@ -21,3 +21,6 @@ EXTRA_OECONF += "--disable-scrollkeeper --disable-docbook-docs"
  
--inherit gnome 
-+inherit gnome
- 
- SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
- SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
- 
--EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set "
-+EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set --disable-docbook-docs"
- 
- do_configure_append() {
- 	for i in $(find ${S} -name "Makefile") ; do
+ PACKAGES =+ "${PN}-nautilus-extension"
+ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
++FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
++FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.a"
++FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
 -- 
 1.8.0
 
