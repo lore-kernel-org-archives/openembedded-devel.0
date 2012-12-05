@@ -1,36 +1,36 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgGqm-0006wU-Bb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 16:25:28 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2932745eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 07:11:04 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1TgHtd-0000OF-O8; Wed, 05 Dec 2012 17:32:29 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2071701eaa.6
+	for <multiple recipients>; Wed, 05 Dec 2012 08:18:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=t9QNmlwGG5BL5i/wLKvQ17F0ocRV58CV/DGz9gHkvBo=;
-	b=qa9tlYQFnemZMoEQNimHkI7loIt39PoD6GiYBGR4FNgkTbS6awjKHbNN7YvJc9f5AY
-	G9bE4PhvwEgAJSDiqSOT/pKJ8pKBZS1it8z67l4OcbhwjlnG84ox+0otZbBArZloor6Y
-	qLjXVGpUnJmOitevV+vyxGWQUfi47ZSiEds+3ngAkxzzDpCZTycatCAxo33KEu0BsO/i
-	0L+4pj4GJo26mgvXdaBxcOPuXCeCk3JQcaeWVlux43LXCS5A33qomBxda0uz82lr7N0A
-	y4+tsZggLnjY/tDwwKlyExWkFjea61O6QOQAlmUhJYjwnjexnJ1RKPOgGV2vHPKmSNFK
-	SSpg==
-Received: by 10.14.174.198 with SMTP id x46mr55005611eel.23.1354720264578;
-	Wed, 05 Dec 2012 07:11:04 -0800 (PST)
+	bh=wQwNrZ+5UvtV3iD+6Ix64MTctAHIQaQuHvrGPLVIGLM=;
+	b=LIh5oQHaHqD8qgELBIKN9Wexyabj5aYOJKF7XbqUttYLyFwff2UPgc6aC4Cfj6+t14
+	1wU57Z9isYUA/ShUz/e4sweMFmoX24hYL0tId0NvlAQqENEOCt0X+DbS1fGBLwCKSHtY
+	ZKQA+TH0dNLspSoPBc982fTmXWGBBj94SRHMmiTxH1ZACEdH7ZvB60Kma5qVzwlrouOJ
+	vW/QIzOydT+XU7/en+61p4weUSP1pibLxGZrLtXbzPCWIOoyoRAFhSl0sdWX30eIX6fr
+	fSNLhVMlH4jVNsPPGvsESJwofNs8lrFlox/5XR49hocFHnJ0m3P5HyheJTsfsykjE7BQ
+	vK1w==
+Received: by 10.14.3.8 with SMTP id 8mr12041640eeg.40.1354724285676;
+	Wed, 05 Dec 2012 08:18:05 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 46sm9717897eeg.4.2012.12.05.07.11.03
+	by mx.google.com with ESMTPS id q44sm10032289eep.5.2012.12.05.08.18.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 07:11:03 -0800 (PST)
-Date: Wed, 5 Dec 2012 16:11:01 +0100
+	Wed, 05 Dec 2012 08:18:05 -0800 (PST)
+Date: Wed, 5 Dec 2012 17:18:02 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121205151101.GB3396@jama.jama.net>
-References: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
+To: Mario Domenech Goulart <mario@ossystems.com.br>
+Message-ID: <20121205161802.GD3396@jama.jama.net>
+References: <20121204094959.979C9103B4@opal>
 MIME-Version: 1.0
-In-Reply-To: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
+In-Reply-To: <20121204094959.979C9103B4@opal>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] fakeroot: update to upstream version 1.18.4
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Mario Domenech Goulart : freerdp: update to the latest commit (2012-11-20) in the stable-1.0 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,65 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 15:25:28 -0000
-X-Groupsio-MsgNum: 41999
+X-List-Received-Date: Wed, 05 Dec 2012 16:32:29 -0000
+X-Groupsio-MsgNum: 42000
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="24zk1gE8NUlDmwG9"
+	protocol="application/pgp-signature"; boundary="OaZoDhBhXzo6bW1J"
 Content-Disposition: inline
 
---24zk1gE8NUlDmwG9
+--OaZoDhBhXzo6bW1J
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 01, 2012 at 11:38:37AM +0200, Marko Lindqvist wrote:
-> License is now GPLv3
+On Tue, Dec 04, 2012 at 09:49:57AM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: e7e3fd797b46a85ffc03cc7c4b2267d686476f93
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3De7e3fd797b46a85ffc03cc7c4b2267d686476f93
 >=20
-> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-> ---
->  ...-native_1.12.4.bb =3D> fakeroot-native_1.18.4.bb} |    4 ---
->  .../fakeroot/fakeroot/configure-libtool.patch      |   20 --------------
->  .../fakeroot/fakeroot/fix-prefix.patch             |   15 -----------
->  meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb   |   27 --------------=
------
->  meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb   |   28 ++++++++++++++=
-++++++
->  5 files changed, 28 insertions(+), 66 deletions(-)
->  rename meta-oe/recipes-core/fakeroot/{fakeroot-native_1.12.4.bb =3D> fak=
-eroot-native_1.18.4.bb} (67%)
->  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/configure-libt=
-ool.patch
->  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.pat=
-ch
->  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
->  create mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb
+> Author: Mario Domenech Goulart <mario@ossystems.com.br>
+> Date:   Mon Dec  3 16:03:22 2012 +0000
+>=20
+> freerdp: update to the latest commit (2012-11-20) in the stable-1.0 branch
+>=20
+> Change-Id: I9b872c1aa9a17e6ef9dc0fd4b18dfe9f354f62a6
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Does this patch resolve following QA?
-fakeroot-1.12.4: fakeroot: Files/directories were installed but not
-shipped
-  /usr/lib/libfakeroot
-  /usr/lib/libfakeroot/libfakeroot.a
-  /usr/lib/libfakeroot/libfakeroot.la
-  /usr/lib/libfakeroot/libfakeroot-0.so
-  /usr/lib/libfakeroot/libfakeroot.so
-  /usr/lib/libfakeroot/.debug
-  /usr/lib/libfakeroot/.debug/libfakeroot-0.so
-  /usr/lib/libfakeroot/.debug/libfakeroot.so
+Not sure if it's caused by this patch or was failing before too,=20
+but freerdp-extension-xpunlimited is now failing to build:
 
-If not, can you fix it while upgrading?
+| /OE/jansa-test/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/freerdp-e=
+xtension-xpunlimited/gitr1+e952627ff4c116b4ce8541c91cb96bd5422c4a0d-r0/git/=
+src/xpu.c:29:28: fatal error: freerdp/rdpset.h: No such file or directory
+| compilation terminated.
+| make[2]: *** [src/CMakeFiles/xpu.dir/xpu_main.c.o] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| make[2]: *** [src/CMakeFiles/xpu.dir/xpu.c.o] Error 1
+| make[2]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv4=
+t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627ff4c116b4ce85=
+41c91cb96bd5422c4a0d-r0/git'
+| make[1]: *** [src/CMakeFiles/xpu.dir/all] Error 2
+| make[1]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv4=
+t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627ff4c116b4ce85=
+41c91cb96bd5422c4a0d-r0/git'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| ERROR: Function failed: do_compile (see /OE/jansa-test/shr-core/tmp-eglib=
+c/work/armv4t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627f=
+f4c116b4ce8541c91cb96bd5422c4a0d-r0/temp/log.do_compile.9195 for further in=
+formation)
+NOTE: recipe freerdp-extension-xpunlimited-gitr1+e952627ff4c116b4ce8541c91c=
+b96bd5422c4a0d-r0: task do_compile: Failed
+
+Can you check that?
 
 Cheers,
 
---24zk1gE8NUlDmwG9
+--OaZoDhBhXzo6bW1J
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlC/ZAUACgkQN1Ujt2V2gBwxpACeJnDrRSHdDLz+3S3iSFBQe+nw
-Q/MAn2n66cFe1OubKpbLInuT0sF8YFqN
-=PfWN
+iEYEARECAAYFAlC/c7oACgkQN1Ujt2V2gBy7hQCfduAAhrCkkfD9N7XXoqKKUGpo
+/QcAn3GBi2yx9EYgX1ZrxtOyNMUtb66S
+=Rod2
 -----END PGP SIGNATURE-----
 
---24zk1gE8NUlDmwG9--
+--OaZoDhBhXzo6bW1J--
