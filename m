@@ -1,36 +1,20 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1TgHtd-0000OF-O8; Wed, 05 Dec 2012 17:32:29 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2071701eaa.6
-	for <multiple recipients>; Wed, 05 Dec 2012 08:18:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wQwNrZ+5UvtV3iD+6Ix64MTctAHIQaQuHvrGPLVIGLM=;
-	b=LIh5oQHaHqD8qgELBIKN9Wexyabj5aYOJKF7XbqUttYLyFwff2UPgc6aC4Cfj6+t14
-	1wU57Z9isYUA/ShUz/e4sweMFmoX24hYL0tId0NvlAQqENEOCt0X+DbS1fGBLwCKSHtY
-	ZKQA+TH0dNLspSoPBc982fTmXWGBBj94SRHMmiTxH1ZACEdH7ZvB60Kma5qVzwlrouOJ
-	vW/QIzOydT+XU7/en+61p4weUSP1pibLxGZrLtXbzPCWIOoyoRAFhSl0sdWX30eIX6fr
-	fSNLhVMlH4jVNsPPGvsESJwofNs8lrFlox/5XR49hocFHnJ0m3P5HyheJTsfsykjE7BQ
-	vK1w==
-Received: by 10.14.3.8 with SMTP id 8mr12041640eeg.40.1354724285676;
-	Wed, 05 Dec 2012 08:18:05 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q44sm10032289eep.5.2012.12.05.08.18.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 08:18:05 -0800 (PST)
-Date: Wed, 5 Dec 2012 17:18:02 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Mario Domenech Goulart <mario@ossystems.com.br>
-Message-ID: <20121205161802.GD3396@jama.jama.net>
-References: <20121204094959.979C9103B4@opal>
-MIME-Version: 1.0
-In-Reply-To: <20121204094959.979C9103B4@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Mario Domenech Goulart : freerdp: update to the latest commit (2012-11-20) in the stable-1.0 branch
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TgID4-0000jk-W2
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 Dec 2012 17:52:37 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 05 Dec 2012 08:38:09 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,223,1355126400"; d="scan'208";a="176534555"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.253])
+	by AZSMGA002.ch.intel.com with ESMTP; 05 Dec 2012 08:38:08 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Dec 2012 16:37:30 +0000
+Message-Id: <1354725450-11856-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-networking][PATCH] proftpd: conditionally remove /usr/libexec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 16:32:29 -0000
-X-Groupsio-MsgNum: 42000
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OaZoDhBhXzo6bW1J"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 05 Dec 2012 16:52:37 -0000
 
---OaZoDhBhXzo6bW1J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Kevin Strasser <kevin.strasser@linux.intel.com>
 
-On Tue, Dec 04, 2012 at 09:49:57AM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: e7e3fd797b46a85ffc03cc7c4b2267d686476f93
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3De7e3fd797b46a85ffc03cc7c4b2267d686476f93
->=20
-> Author: Mario Domenech Goulart <mario@ossystems.com.br>
-> Date:   Mon Dec  3 16:03:22 2012 +0000
->=20
-> freerdp: update to the latest commit (2012-11-20) in the stable-1.0 branch
->=20
-> Change-Id: I9b872c1aa9a17e6ef9dc0fd4b18dfe9f354f62a6
-> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+As of poky commit id 1d18224b24a515a07170ce36dbd725cb203d3300
+libexecdir has been changed to ${libdir}/${BPN} which is typically
+/usr/lib. This change introduces a check to see if /usr/libexec is
+being used before attempting to remove it.
 
-Not sure if it's caused by this patch or was failing before too,=20
-but freerdp-extension-xpunlimited is now failing to build:
+Fixes [YOCTO #3504]
 
-| /OE/jansa-test/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/freerdp-e=
-xtension-xpunlimited/gitr1+e952627ff4c116b4ce8541c91cb96bd5422c4a0d-r0/git/=
-src/xpu.c:29:28: fatal error: freerdp/rdpset.h: No such file or directory
-| compilation terminated.
-| make[2]: *** [src/CMakeFiles/xpu.dir/xpu_main.c.o] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[2]: *** [src/CMakeFiles/xpu.dir/xpu.c.o] Error 1
-| make[2]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv4=
-t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627ff4c116b4ce85=
-41c91cb96bd5422c4a0d-r0/git'
-| make[1]: *** [src/CMakeFiles/xpu.dir/all] Error 2
-| make[1]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv4=
-t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627ff4c116b4ce85=
-41c91cb96bd5422c4a0d-r0/git'
-| make: *** [all] Error 2
-| ERROR: oe_runmake failed
-| ERROR: Function failed: do_compile (see /OE/jansa-test/shr-core/tmp-eglib=
-c/work/armv4t-oe-linux-gnueabi/freerdp-extension-xpunlimited/gitr1+e952627f=
-f4c116b4ce8541c91cb96bd5422c4a0d-r0/temp/log.do_compile.9195 for further in=
-formation)
-NOTE: recipe freerdp-extension-xpunlimited-gitr1+e952627ff4c116b4ce8541c91c=
-b96bd5422c4a0d-r0: task do_compile: Failed
+Signed-off-by: Kevin Strasser <kevin.strasser@linux.intel.com>
+---
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Can you check that?
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+index 8624c16..ec943b7 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+@@ -34,7 +34,10 @@ FTPGROUP = "ftp"
+ 
+ do_install () {
+ 	oe_runmake DESTDIR=${D} install
+-	rmdir ${D}${libexecdir} ${D}${libdir}/proftpd ${D}${datadir}/locale
++	rmdir ${D}${libdir}/proftpd ${D}${datadir}/locale
++	if [ -d ${D}/usr/libexec ] ; then
++		rmdir ${D}/usr/libexec
++	fi
+ 	sed -i '/ *User[ \t]*/s/ftp/${FTPUSER}/' ${D}${sysconfdir}/proftpd.conf
+ 	sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.conf
+ 	install -d ${D}${sysconfdir}/init.d
+-- 
+1.7.10.4
 
-Cheers,
 
---OaZoDhBhXzo6bW1J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlC/c7oACgkQN1Ujt2V2gBy7hQCfduAAhrCkkfD9N7XXoqKKUGpo
-/QcAn3GBi2yx9EYgX1ZrxtOyNMUtb66S
-=Rod2
------END PGP SIGNATURE-----
-
---OaZoDhBhXzo6bW1J--
