@@ -1,38 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgJym-0000Q7-6p
+	(envelope-from <martin.jansa@gmail.com>) id 1TgJyx-0000DF-AN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 19:46:03 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3068013eek.6
+	Wed, 05 Dec 2012 19:46:10 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2122427eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 10:31:32 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=zNyTFjuxxo4qVHr/kg4Ix1rMMyMj8Mc6aAeGiTIytZA=;
-	b=UVut2tSmr7CNgleVegnoedkFsQwgFoBjPpMvTjcD8Jaf0ef2ctTR270oYGPl6wLChP
-	ogZl6/prtOks7Ok7pLQ2wiL812UkY8fkic1YStbY0MVBK63TCpT3t9kF5y7hBRWcDohJ
-	RtG0cf1QeT/7R4/QcIWvIDsFQHWQMmmOGa9HYxJRhX1HdTFpOELUkHWntsEwpj3fRBvp
-	4Hxt4EIoNx0TUKJiKYZSmztxdqlZumRnnMKazReXVr20L8AvHBQktV2FQagSh0lBcD7w
-	06eqsg/zQ/aHpYq/JdasyoIIyoM2/2HdylqmU/uaC2ARiOyU1d96oJ4N1NaXvDvEemXs
-	tdLQ==
-Received: by 10.14.175.198 with SMTP id z46mr63304847eel.26.1354732292251;
-	Wed, 05 Dec 2012 10:31:32 -0800 (PST)
+	bh=z2qlrAsJdy1lctNwifj+VzZFskzDzQUJTNX0sZ1SKZk=;
+	b=F7gyzyxbACcmOQwRBWAO6VqhX8DuZE9G0GYKVQhHzQ2XXqpoHBKcMiwac9SDWB/6H2
+	Tx32G8qgRoOZmbXAfVCp+J+YhNi8VDjE9r7rjJQIQ3UERN+TqNbCh48tgy0h6TaKGDEG
+	xfzYnKTURI1a2mQvpr0pz5N7CzJgLlMhRcXyENTNkIZM74H/t5DgLhWMudUHyR+eQjVX
+	6HNMEJFdv76RIY7czC0hHsb/7fbENSaCK6wuJHTrhgfTEGTW4NN9WALelGIkI2atyk/L
+	hc0IB6cDP+LgJoGj0yvlpMwKZ8WGWPVhidmq4NXjKyp9W3ZZfYNXl6m8BHX50rJdUUth
+	85MA==
+Received: by 10.14.203.2 with SMTP id e2mr63302308eeo.20.1354732305413;
+	Wed, 05 Dec 2012 10:31:45 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id 46sm10705806eeg.4.2012.12.05.10.31.31
+	by mx.google.com with ESMTPS id v46sm10717288eep.1.2012.12.05.10.31.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 10:31:31 -0800 (PST)
+	Wed, 05 Dec 2012 10:31:44 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 19:30:30 +0100
-Message-Id: <b439f0305d07add742373378d5d98fee2ab098bb.1354731625.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 19:30:32 +0100
+Message-Id: <7bd2cf4af810494600e226ae6b88c1d2aa7badcf.1354731625.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354731625.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 72/77] gnome-disk-utility: disable failing docs generation
+Subject: [PATCH 74/77] gnome-session: disable failing docs generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,31 +53,34 @@ X-List-Received-Date: Wed, 05 Dec 2012 18:46:15 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-index dab938f..b7be956 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
+diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
+index 6c10156..e1fa519 100644
+--- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
+@@ -2,17 +2,17 @@ DESCRIPTION = "Gnome session manager"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart nautilus"
+-PR = "r2"
++PR = "r3"
  
--PR = "r1"
-+PR = "r2"
+ SECTION = "x11/gnome"
+ DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
  
- inherit gnome
- SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
-@@ -17,7 +17,7 @@ SRC_URI += "\
-      file://sysrooted-pkg-config.patch \
-      "
+-inherit gnome 
++inherit gnome
  
--EXTRA_OECONF += "--disable-scrollkeeper"
-+EXTRA_OECONF += "--disable-scrollkeeper --disable-docbook-docs"
+ SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
+ SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
  
- PACKAGES =+ "${PN}-nautilus-extension"
- FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
+-EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set "
++EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set --disable-docbook-docs"
+ 
+ do_configure_append() {
+ 	for i in $(find ${S} -name "Makefile") ; do
 -- 
 1.8.0
 
