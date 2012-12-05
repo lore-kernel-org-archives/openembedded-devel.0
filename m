@@ -1,38 +1,38 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgN7r-0000Mb-3j
+	(envelope-from <martin.jansa@gmail.com>) id 1TgN7v-0000Dx-DF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 23:07:32 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2192193eaa.6
+	Wed, 05 Dec 2012 23:07:35 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3179783eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 13:53:07 -0800 (PST)
+	Wed, 05 Dec 2012 13:53:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=FrufL1JM2c8pXLaeKv/riwHtNzKNnGYherxNVAM2J84=;
-	b=dBNl042qVwEMbSYutjrBc17ljJ917jpQVpnyIaWSJLnppWx2ZcKTqiwCqJxC3LJJrd
-	zCRsVRxIWvIfivFSiy9hQf2TpDOJohAzfYQeQAyNozIoykN3XDjVlGK7zjMt5koAw9T1
-	fzh5UqvJAp/am6AjTMME5fecdoDikaGVLrRS/Xzd7PjvE7voi9tDtMExQhhLevc6IMNs
-	WPhnChZyKKjT2OwdiikzZGLNwRis9eYvjp8nBiAqeNAviZYxorOuBgyoiG653oLHC/es
-	onSrFGV6H/wDVA29F+r5dueVFzlcZ7/BR/zgj1O1Rhubt6d6MsIsoObWZ9srago/OlmE
-	D8Hw==
-Received: by 10.14.219.3 with SMTP id l3mr50466878eep.5.1354744386786;
-	Wed, 05 Dec 2012 13:53:06 -0800 (PST)
+	bh=YZ1rhTYXVs87Zl/1O6mBy6gscAFPLznytCOAt0jq/Bg=;
+	b=M3AaeCUZRFUGkPu+N4e8YDGSpPLRTKLyTSwFCPFDCynFTTRGH2Dj4CCeaK3uykpcS7
+	xznJKyQFjKDh5SUxTNzIEwGOKQ9S+xhHMw+dzObBUm44QvH6LoQ8X2DKov8DphygNAKz
+	6zxM3HbwmY4bkvdg433oLgoMRmJgNA97tcr0+4QgI0p/RgNYbXeemjxaO8UUKRk9gVg4
+	d5UKbP/Pk6RvmG5LRUcxcfN+Y2eQzjudkA5o0iiAW4aPTfhEt7J3qO7hUW6mrhmFYoIw
+	nVCq6rIEQs9bi5lAMU3q4cYh7qNipjww0aMPzy2prDZBAMqaa4DBiEweE8pkYxg7LWOF
+	u4Yg==
+Received: by 10.14.215.197 with SMTP id e45mr65398655eep.0.1354744393315;
+	Wed, 05 Dec 2012 13:53:13 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id e2sm11769356eeo.8.2012.12.05.13.53.05
+	by mx.google.com with ESMTPS id y44sm11750485eel.14.2012.12.05.13.53.12
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 13:53:06 -0800 (PST)
+	Wed, 05 Dec 2012 13:53:12 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 22:52:06 +0100
-Message-Id: <8ccb358e1bf827e5023eda079e14ee16708b5be5.1354743849.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 22:52:07 +0100
+Message-Id: <213be8edaaa91ac5f295bdb5debc27274f03f6de.1354743849.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354743849.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 83/85] xdotool: fix unpackaged files
+Subject: [PATCH 84/85] libxml++: fix unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 22:07:32 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 22:07:36 -0000
 
 * fixes:
-xdotool-1.20100416.2809: xdotool: Files/directories were installed but not shipped
-  /usr/man
-  /usr/man/man1
-  /usr/man/man1/xdotool.1
+libxml++-2.35.3: libxml++: Files/directories were installed but not shipped
+  /usr/share/devhelp
+  /usr/share/devhelp/books
+  /usr/share/devhelp/books/libxml++-2.6
+  /usr/share/devhelp/books/libxml++-2.6/libxml++-2.6.devhelp2
+  /usr/lib/libxml++-2.6
+  /usr/lib/libxml++-2.6/include
+  /usr/lib/libxml++-2.6/include/libxml++config.h
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-core/libxml/libxml++_2.35.3.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-index cb3f83c..4f13058 100644
---- a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-+++ b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-@@ -5,11 +5,13 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=2f9cbf7e9401cec8a38666a08851ce6b"
- SECTION = "x11"
- DEPENDS = "virtual/libx11 libxtst"
- 
-+PR = "r1"
+diff --git a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb b/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+index 9a33baa..fb9cdd9 100644
+--- a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
++++ b/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+@@ -4,15 +4,19 @@ HOMEPAGE = "http://libxmlplusplus.sourceforge.net"
+ BUGTRACKER = "http://bugzilla.gnome.org/buglist.cgi?product=libxml%2B%2B"
+ SECTION = "libs"
+ LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34 "
 +
- SRC_URI = "http://semicomplete.googlecode.com/files/xdotool-${PV}.tar.gz"
- SRC_URI[md5sum] = "1d5be641e512c343abfe5f78b39e6f19"
- SRC_URI[sha256sum] = "42d7271fbc796e53db71bb221f311b9ff3c51d90a71c9487a9bd3101ca39894f"
++PR = "r1"
  
--EXTRA_OEMAKE = "PREFIX=${prefix}"
-+EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLMAN=${mandir}"
+ SHRT_VER = "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',True).split('.')[1]}"
+ SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
  
- do_install() {
- 	oe_runmake -e install DESTDIR=${D} PREFIX=${prefix}
+ SRC_URI[md5sum] = "196a2dcdc84ab987fe3852b3f29cafd7"
+ SRC_URI[sha256sum] = "715a4214bbff90365cc8406a28e427febd90461006d608fbdcdcea7fc9891eaf"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34 "
+ 
+ DEPENDS = "libxml2 glibmm"
+ 
+ inherit autotools pkgconfig
+ 
++FILES_${PN}-doc += "${datadir}/devhelp"
++FILES_${PN}-dev += "${libdir}/libxml++-2.6/include/libxml++config.h"
 -- 
 1.8.0
 
