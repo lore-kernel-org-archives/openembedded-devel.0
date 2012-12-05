@@ -1,37 +1,38 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgJxv-000058-OG
+	(envelope-from <martin.jansa@gmail.com>) id 1TgJy2-00009O-PC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 19:45:07 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3067419eek.6
+	Wed, 05 Dec 2012 19:45:10 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3067516eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+	Wed, 05 Dec 2012 10:30:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=LiA36UeHQ3rCB9MudlIHP9srHK0dysxkqkSTxnIc7bU=;
-	b=yi3LRvZWUhWYu2/XKhzGf0O/28OXfhy4QYhiy4nsrTriPKmmymR2shm0kwY4+KdpkZ
-	M+XshK4Fv7xDM8dvG3x34O0YrwewYX0xgWq5XeTqcKFJ5fCeL46hhjgqqeeanGrT/TsU
-	0e01M10QEu9TG2slEqdwyay9qqCr221oWECpaFTmCNd4/d58YBxfKRMF/lfN++cVST2l
-	+B7UuXnPBeE+ju/3y3p5GR3zOJyV8+/ldNINt4hyMGAiA11XFwkD27rzYKU77z97iibl
-	zGhEQxTvIJYeuS5H5NXbHEVSITHVnlDrEA2q+ZPVIB7c0uXponqgDiRhgsD0VDoMY7fk
-	LeMA==
-Received: by 10.14.216.70 with SMTP id f46mr63249635eep.12.1354732239748;
-	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+	bh=//h+tcvISPyRAOay65pQQPvFBrfyIZRhME5t6ex3h/s=;
+	b=mmFKhpZqRJK6l9HfyHONfgMKfZHLIvJvsfxYZR+PNJLyJidSO48i1yT9OLdqhFPydQ
+	JcQUA5XEt8Vcn2XWpmyUQol+wcSN0eEHY11yrz9MfjzO7M8CFf9rjwnVxhKRni9CzbXB
+	8YagzcNhlbtukyD7lkodq/DvEhbiDXjq40IQUjhKV3lfvRJYVKP+so/sybPQdSv8vtz0
+	+8dBT1VKvJH0mdX2YtrKVuB3yQb6+7ZlOV/Qg1CUFVwgPeGlBiWxwh499drIcCQ91nTN
+	zkZaCZVdl1af44wsq7nABMaoL48VxzqH/rbbXe/H1Y7SaFuy2CYpXE4aBIiGQnQn53ZO
+	k19w==
+Received: by 10.14.213.134 with SMTP id a6mr63413957eep.45.1354732246825;
+	Wed, 05 Dec 2012 10:30:46 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id z8sm10675116eeo.11.2012.12.05.10.30.38
+	by mx.google.com with ESMTPS id a44sm10689897eeo.7.2012.12.05.10.30.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+	Wed, 05 Dec 2012 10:30:46 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 19:30:23 +0100
-Message-Id: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 19:30:24 +0100
+Message-Id: <66c43de67ed507ac407eee7689a1cc2feb84bb2a.1354731625.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
-In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
+In-Reply-To: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
+	<bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
 References: <cover.1354731625.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 65/77] samba: remove empty /sbin
+Subject: [PATCH 66/77] gpm: include /usr/share/emacs/site-lisp in PN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 18:45:08 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 18:45:14 -0000
 
 * fixes:
-samba-3.6.8: samba: Files/directories were installed but not shipped
-  /sbin
+gpm-1.99.7: gpm: Files/directories were installed but not shipped
+  /usr/share
+  /usr/share/emacs
+  /usr/share/emacs/site-lisp
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba.inc      | 1 +
- meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/gpm/gpm_1.99.7.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index faa2be0..d39a84a 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -88,6 +88,7 @@ do_install_append() {
-         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
-         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
+diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+index bd42de3..38cd2c3 100644
+--- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
++++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+@@ -5,6 +5,8 @@ SECTION = "console/utils"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://gpm2/core/main.c;endline=19;md5=66d3c205c4e7ee5704b2ee351dfed72f"
  
-+	rmdir ${D}${base_sbindir}
- }
++PR = "r1"
++
+ DEPENDS = "ncurses"
  
+ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
+@@ -41,3 +43,4 @@ do_install () {
+ SRC_URI[md5sum] = "9fdddf5f53cb11d40bb2bb671d3ac544"
+ SRC_URI[sha256sum] = "6071378b24494e36ca3ef6377606e7e565040413c86704753a162d2180af32ee"
  
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index 7c54dae..7985199 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -3,7 +3,7 @@ require samba-basic.inc
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI += "\
-     file://config-h.patch \
++FILES_${PN} += "${datadir}/emacs"
 -- 
 1.8.0
 
