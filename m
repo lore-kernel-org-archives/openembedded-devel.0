@@ -1,38 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgN75-0000Dx-FN
+	(envelope-from <martin.jansa@gmail.com>) id 1TgN7C-0000Ec-9H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 23:06:43 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3179783eek.6
+	Wed, 05 Dec 2012 23:06:52 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2191970eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 13:52:19 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Gyux09iUm22tX0Do/jL1J9jSfC5Vv7IjJpQN9O0c29E=;
-	b=Mvg/m0nhcRps4Lu9jJS+Ts/NxYixnpcOfhM/x/MmoQ9Ebx1W8MUtZ50ZPm3FJLnpBX
-	4Kt5Vpc8EPPVR+tUcD3frRvfcZ4ZC2Xl3+4lI0sS+DTh6fFWg1YMs1qXwjYC1Jiq/nAv
-	lotAGVQ5bG1wRzmbCrs4dvDwNIRJGCEiaBVaKxHHMCFEktdzuaoYJIBejeHGAG5ZOKcR
-	6qnxfMiz9z+s+dkfpKCKiR+dSfYwzmBjM552mmJ9N6vARwK+rvK0f3Lfjo2noYWH+OqI
-	hEcJl1DrSkG68bQqKBQqT6wFEqFZfdt5FxOJDJLvvSK4275BuCkVhzvj8VFS+ae+I1CQ
-	D4bg==
-Received: by 10.14.225.72 with SMTP id y48mr64665698eep.46.1354744339339;
-	Wed, 05 Dec 2012 13:52:19 -0800 (PST)
+	bh=aghlfiHQk3LciSU4oXiLJp+0SSum1VZ6+kgmWxzY/s8=;
+	b=h2cJIB54Ne9YG4Bsz9VPK2TEBsT3bnmQEcM/Vhyi/RPIJME/uNP4APJ3E156LRAdql
+	G1nsS99+ouleJ+WMbEl112Me+G0q8Qwq3Aq3d7pw9cHp5enKkkAUYjngFKgzynVKOamu
+	SD/KwHE87Z7riIkyjXYf41QVuaBtT1j/rLlpuaS5nm5nSZAVrzm8jORNncfxR22GX6d7
+	bOnkHEJ4K00/0iXDg41DFcZIKS8G8nKvnztOpzSe4BOgJ0l4S/5TTFHPa7Pwx7YGC9g0
+	h0D8OEXFVKtb1ltb+o55FRJt4X2xdhb3WQ2bVU+B4cERxTCxZVsulY7pAN1ttHw4M5vX
+	I3ZQ==
+Received: by 10.14.178.196 with SMTP id f44mr65281505eem.14.1354744346074;
+	Wed, 05 Dec 2012 13:52:26 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id b49sm11743439eem.16.2012.12.05.13.52.18
+	by mx.google.com with ESMTPS id 44sm11793556eek.0.2012.12.05.13.52.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 13:52:18 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:25 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 22:51:59 +0100
-Message-Id: <3bb453988e23e329b2323e1db82d33a459ef6c70.1354743849.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 22:52:00 +0100
+Message-Id: <8ee5d5346f5b17204d40a7a5940141aab4a1fd2a.1354743849.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354743849.git.Martin.Jansa@gmail.com>
-Subject: [PATCHv2 73/85] gnome-disk-utility: fix unpackaged files
+Subject: [PATCHv2 75/85] gdm: disable failing docs generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,39 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 22:06:44 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 22:06:53 -0000
 
-* WARNING: QA Issue: gnome-disk-utility: Files/directories were installed but not shipped
-  /usr/lib/nautilus/extensions-2.0/libnautilus-gdu.la
-  /usr/lib/nautilus/extensions-2.0/libnautilus-gdu.a
-  /usr/lib/nautilus/extensions-2.0/.debug
-  /usr/lib/nautilus/extensions-2.0/.debug/libnautilus-gdu.so
+* xmlto does not work correctly
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb    | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-index 58bf526..595d9dc 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+index bdf249e..863db2e 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart nautilus"
+ DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
  
--PR = "r2"
-+PR = "r3"
+-PR = "r9"
++PR = "r10"
  
- inherit gnome
- SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
-@@ -25,3 +25,6 @@ do_configure_prepend() {
+ inherit gnome update-rc.d
  
- PACKAGES =+ "${PN}-nautilus-extension"
- FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
-+FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
-+FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
-+FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
+@@ -25,7 +25,11 @@ SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968a
+ EXTRA_OECONF = " --enable-authentication-scheme=shadow \
+                  --enable-debug=yes \
+                  --with-console-kit \
+-                 --disable-scrollkeeper "
++                 --disable-scrollkeeper"
++
++do_configure_prepend() {
++	sed -i -e "s:\bdocs::g" ${S}/Makefile.am
++}
+ 
+ do_install_prepend() {
+ 	mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
 -- 
 1.8.0
 
