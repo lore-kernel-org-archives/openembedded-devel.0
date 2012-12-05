@@ -1,35 +1,36 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TgCzR-0006pv-6u
+	(envelope-from <martin.jansa@gmail.com>) id 1TgGqm-0006wU-Bb
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 12:18:09 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id CC906D22C0; Wed,  5 Dec 2012 12:03:59 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	SUSPICIOUS_RECIPS autolearn=no version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 3D3CCD22B4;
-	Wed,  5 Dec 2012 12:03:17 +0100 (CET)
-Message-ID: <50BF29E7.5080203@linaro.org>
-Date: Wed, 05 Dec 2012 12:03:03 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	Wed, 05 Dec 2012 16:25:28 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2932745eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Dec 2012 07:11:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=t9QNmlwGG5BL5i/wLKvQ17F0ocRV58CV/DGz9gHkvBo=;
+	b=qa9tlYQFnemZMoEQNimHkI7loIt39PoD6GiYBGR4FNgkTbS6awjKHbNN7YvJc9f5AY
+	G9bE4PhvwEgAJSDiqSOT/pKJ8pKBZS1it8z67l4OcbhwjlnG84ox+0otZbBArZloor6Y
+	qLjXVGpUnJmOitevV+vyxGWQUfi47ZSiEds+3ngAkxzzDpCZTycatCAxo33KEu0BsO/i
+	0L+4pj4GJo26mgvXdaBxcOPuXCeCk3JQcaeWVlux43LXCS5A33qomBxda0uz82lr7N0A
+	y4+tsZggLnjY/tDwwKlyExWkFjea61O6QOQAlmUhJYjwnjexnJ1RKPOgGV2vHPKmSNFK
+	SSpg==
+Received: by 10.14.174.198 with SMTP id x46mr55005611eel.23.1354720264578;
+	Wed, 05 Dec 2012 07:11:04 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id 46sm9717897eeg.4.2012.12.05.07.11.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 05 Dec 2012 07:11:03 -0800 (PST)
+Date: Wed, 5 Dec 2012 16:11:01 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121205151101.GB3396@jama.jama.net>
+References: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
 MIME-Version: 1.0
-To: linaro-dev@lists.linaro.org, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Riku Voipio <riku.voipio@linaro.org>,
-	Hope Michael <michael.hope@linaro.org>,
-	Matthew Gretton-Dann <matthew.gretton-dann@linaro.org>
-Subject: New layout for OpenEmbedded layers
+In-Reply-To: <1354354717-1024-1-git-send-email-cazfi74@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] fakeroot: update to upstream version 1.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +44,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 11:18:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 05 Dec 2012 15:25:28 -0000
+X-Groupsio-MsgNum: 41999
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="24zk1gE8NUlDmwG9"
+Content-Disposition: inline
 
-Hello
+--24zk1gE8NUlDmwG9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Now at Linaro we have two layers for our OpenEmbedded work:
+On Sat, Dec 01, 2012 at 11:38:37AM +0200, Marko Lindqvist wrote:
+> License is now GPLv3
+>=20
+> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+> ---
+>  ...-native_1.12.4.bb =3D> fakeroot-native_1.18.4.bb} |    4 ---
+>  .../fakeroot/fakeroot/configure-libtool.patch      |   20 --------------
+>  .../fakeroot/fakeroot/fix-prefix.patch             |   15 -----------
+>  meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb   |   27 --------------=
+-----
+>  meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb   |   28 ++++++++++++++=
+++++++
+>  5 files changed, 28 insertions(+), 66 deletions(-)
+>  rename meta-oe/recipes-core/fakeroot/{fakeroot-native_1.12.4.bb =3D> fak=
+eroot-native_1.18.4.bb} (67%)
+>  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/configure-libt=
+ool.patch
+>  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot/fix-prefix.pat=
+ch
+>  delete mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.12.4.bb
+>  create mode 100644 meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb
 
-- meta-aarch64
-- meta-linaro
+Does this patch resolve following QA?
+fakeroot-1.12.4: fakeroot: Files/directories were installed but not
+shipped
+  /usr/lib/libfakeroot
+  /usr/lib/libfakeroot/libfakeroot.a
+  /usr/lib/libfakeroot/libfakeroot.la
+  /usr/lib/libfakeroot/libfakeroot-0.so
+  /usr/lib/libfakeroot/libfakeroot.so
+  /usr/lib/libfakeroot/.debug
+  /usr/lib/libfakeroot/.debug/libfakeroot-0.so
+  /usr/lib/libfakeroot/.debug/libfakeroot.so
 
-First one contains everything we need to get AArch64 booted in
-fastmodels: toolchain, kernel and few recipes which needed changes to
-build for AArch64. I am working on merging those changes into main
-OpenEmbedded layers.
+If not, can you fix it while upgrading?
 
-Second one is gcc-linaro from Toolchain WG and some recipes and changes
-from Platform team.
+Cheers,
 
-Those who do OE builds with our toolchain have some components changed
-due to our metadata (like Busybox with dpkg-deb) and I decided to fix it.
+--24zk1gE8NUlDmwG9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Today I pushed "new-layout" branch of meta-linaro repository. It
-contains all Linaro layers:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-- meta-aarch64
-- meta-linaro
-- meta-linaro-toolchain
+iEYEARECAAYFAlC/ZAUACgkQN1Ujt2V2gBwxpACeJnDrRSHdDLz+3S3iSFBQe+nw
+Q/MAn2n66cFe1OubKpbLInuT0sF8YFqN
+=PfWN
+-----END PGP SIGNATURE-----
 
-First one was merged from meta-aarch64 repository and moved to own
-directory. Third one contains only toolchain bits. Second one has all
-that left.
-
-I have to do some test builds with this layout and once they will
-confirm that it works I will change all CI builds. This will also
-deprecate meta-aarch64 repository - it will not have any updates and
-will be dropped in ~month.
-
-Opinions?
-
-
+--24zk1gE8NUlDmwG9--
