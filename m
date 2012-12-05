@@ -1,35 +1,37 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cazfi74@gmail.com>) id 1TgLJU-0000tA-Bm
+	(envelope-from <martin.jansa@gmail.com>) id 1TgN6z-0000Dh-0q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 21:11:25 +0100
-Received: by mail-lb0-f175.google.com with SMTP id gg13so4308672lbb.6
+	Wed, 05 Dec 2012 23:06:43 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3179728eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 11:57:00 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=IgbrmW9jfTHu8K+gkoa12RJTzU5iDQJR/fgnx+YhTqE=;
-	b=FlB1td+QWk4FLauPFvs3EQRFV5cRgB+/18pnyYz03wRFnBaSlK7HIxGXKqcrxdpwIL
-	eQc51YgOjrzL2EadRz7voQbgPIcIbEOYZKJXHOe//r8KwdYx5iBIrOg4vH3LwVhS8oOc
-	DrMdiTJ/xpmxLVUUYo3Hjita44qCzxexayfDGxj/N1fxH23kUSbID1Eerzd2jQz65M4g
-	Oj+cVvxcVDysmqx7FLRf5Kmk/CA6nMGWgyB7aEpPN/imLraqYrKNR4g1BstRNIle+LfL
-	7GLbuWCEQ79G/p0t0EOustBm1RWHEQH6zjsuqvSuo52018CRoX+6n/oRS6GUSaVubEr2
-	euQA==
-Received: by 10.152.108.37 with SMTP id hh5mr17954497lab.52.1354737420102;
-	Wed, 05 Dec 2012 11:57:00 -0800 (PST)
-Received: from prime (a91-153-8-136.elisa-laajakaista.fi. [91.153.8.136])
-	by mx.google.com with ESMTPS id ts2sm2541260lab.10.2012.12.05.11.56.57
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=Kqp7hh9dH+H+P8Yfe8ARwdMLclQi1FWmQIIYPdgEpu8=;
+	b=0oXWAG/c1sVcbgDDgRTgT6Fz3AhKv5LCNBJDpAB6Q2Ef5AqHPXOi4tam4ndhhPzKbF
+	XhHn3L9MQ7Clh1tSyb3yGIQGjT6+Jksb9Bwp6wUqDwj0tavHpDHftn67+90AU42+O8p4
+	zBWl1q351FGaXoA8K4pYVhKXFtJe/QJXl4HcuK1VHp3WIEpODw7b7Vd/4rP0slENHfkM
+	xihpn+NHfP1AAi1TsTaDvAtWD5nXPpBPaLcT5V2EylzMJO9C222GTSqzGsneerUpFw51
+	Kh7wjUCr5qAXg206ElbGo/t3KUUjjBKTPB8P0YNH3OYu1RhNLuCtHoOfwdQ+5I9xPA05
+	q3Cw==
+Received: by 10.14.184.131 with SMTP id s3mr64805015eem.38.1354744332688;
+	Wed, 05 Dec 2012 13:52:12 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id e2sm11764613eeo.8.2012.12.05.13.52.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 11:56:58 -0800 (PST)
-Received: from cazfi by prime with local (Exim 4.80)
-	(envelope-from <cazfi74@gmail.com>)
-	id 1TgL5U-0002q9-7w; Wed, 05 Dec 2012 21:56:56 +0200
-From: Marko Lindqvist <cazfi74@gmail.com>
+	Wed, 05 Dec 2012 13:52:11 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 21:56:54 +0200
-Message-Id: <1354737414-8266-1-git-send-email-cazfi74@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] libsdl-image: update to upstream version 1.2.12
+Date: Wed,  5 Dec 2012 22:51:58 +0100
+Message-Id: <1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
+References: <cover.1354586187.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1354743849.git.Martin.Jansa@gmail.com>
+References: <cover.1354743849.git.Martin.Jansa@gmail.com>
+Subject: [PATCHv2 72/85] gnome-disk-utility: disable failing docs generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 20:11:31 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 22:06:44 -0000
 
-SDL_image now has license of its own.
+* xmlto does not work correctly
+  https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
 
-Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../{libsdl-image_1.2.10.bb => libsdl-image_1.2.12.bb}      |   11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-multimedia/libsdl-image/{libsdl-image_1.2.10.bb => libsdl-image_1.2.12.bb} (75%)
+ .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb   | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.10.bb b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-similarity index 75%
-rename from meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.10.bb
-rename to meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-index 12a3abd..fd80d67 100644
---- a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.10.bb
-+++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-@@ -1,16 +1,16 @@
- DESCRIPTION = "Simple DirectMedia Layer image library."
- SECTION = "libs"
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index dab938f..58bf526 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
  
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
-+LICENSE = "SDL_image"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=613734b7586e1580ef944961c6d62227"
+ DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart nautilus"
  
--PR = "r3"
-+PR = "r0"
+-PR = "r1"
++PR = "r2"
  
- DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
+ inherit gnome
+ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
+@@ -19,5 +19,9 @@ SRC_URI += "\
  
- SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz"
--SRC_URI[md5sum] = "6c06584b31559e2b59f2b982d0d1f628"
--SRC_URI[sha256sum] = "75e05d1e95f6277b44797157d9e25a908ba8d08a393216ffb019b0d74de11876"
-+SRC_URI[md5sum] = "a0f9098ebe5400f0bdc9b62e60797ecb"
-+SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
+ EXTRA_OECONF += "--disable-scrollkeeper"
  
- S = "${WORKDIR}/SDL_image-${PV}"
- 
-@@ -31,4 +31,3 @@ do_configure_prepend() {
- 	rm -f acinclude/ltsugar.m4
- 	rm -f acinclude/ltversion.m4
- }
--
++do_configure_prepend() {
++       sed -i -e "s: help : :g" ${S}/Makefile.am
++}
++
+ PACKAGES =+ "${PN}-nautilus-extension"
+ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
 -- 
-1.7.10.4
+1.8.0
 
 
 
