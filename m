@@ -1,22 +1,32 @@
-Received: from p3plsmtpa06-02.prod.phx3.secureserver.net ([173.201.192.103])
+Received: from mail-ia0-f181.google.com ([209.85.210.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pab@pabigot.com>) id 1Tg2wH-0003Rs-LX
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tg9A9-00027l-Mf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 01:34:21 +0100
-Received: from llc.pab ([66.41.60.82])
-	by p3plsmtpa06-02.prod.phx3.secureserver.net with 
-	id XcHC1k0081mTNtu01cHDcC; Tue, 04 Dec 2012 17:17:13 -0700
-Message-ID: <50BE9288.4050407@pabigot.com>
-Date: Tue, 04 Dec 2012 18:17:12 -0600
-From: "Peter A. Bigot" <pab@pabigot.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120911 Thunderbird/15.0.1
+	Wed, 05 Dec 2012 08:12:58 +0100
+Received: by mail-ia0-f181.google.com with SMTP id s32so3075173iak.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Dec 2012 22:58:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=VmTHUjyxw/DXPSTn/C79fyDjl5l6GazjkT7ojKxbbEc=;
+	b=H6KJl/T7nvA3Xh2/p/OV957l1yjZcr6Vp1ue67oDExCAxVI0inY4oNnXtHWaf7og6i
+	wE4o0HngeXcgsftL/pBhpsz8xeMcEVUnfQOl3IladfQtcC0cdgd6cEzamw/bjOOw/GVg
+	47mTNkGhSlGkCVvN3Sv74gANiBhUdLwOqtXKn/ZSZMoRFKpDpECjbWfwIj/xE+pohfmB
+	ZlkKG+TqeWNx+OVmMPJwqjBVRuYn6JASRKwL25nTc8b1jFefpezOnBaP7sormjuqoV4L
+	qH6f48iM2Op1Buo9gHDyjKqJa9mKBg6x9/9ZHjKrNQJxB1goNjlCJsSS3RnSp1d9JYUM
+	0FQw==
 MIME-Version: 1.0
+Received: by 10.50.104.232 with SMTP id gh8mr874363igb.45.1354690713509; Tue,
+	04 Dec 2012 22:58:33 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Tue, 4 Dec 2012 22:58:33 -0800 (PST)
+In-Reply-To: <1354662118-31597-1-git-send-email-pab@pabigot.com>
+References: <1354662118-31597-1-git-send-email-pab@pabigot.com>
+Date: Wed, 5 Dec 2012 07:58:33 +0100
+Message-ID: <CALbNGRT7R_4ZycbG+Fg5dJWBTmiXfbr3p+HK5b0rE=5qE_v6qw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <cover.1354622319.git.Martin.Jansa@gmail.com>
-	<8a6d73cf1bdcb97f82284a220840b1eb281433e9.1354622319.git.Martin.Jansa@gmail.com>
-In-Reply-To: <8a6d73cf1bdcb97f82284a220840b1eb281433e9.1354622319.git.Martin.Jansa@gmail.com>
-Subject: Re: [PATCH 3/5] ntp: cleanup recipes and fix SSL support
+Subject: Re: [meta-oe][danny][PATCH] Revert "libgphoto2: fix build"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,332 +40,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 00:34:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 05 Dec 2012 07:12:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 12/04/2012 05:59 AM, Martin Jansa wrote:
-> From: Paul Eggleton <paul.eggleton@linux.intel.com>
+On Wed, Dec 5, 2012 at 12:01 AM, Peter A. Bigot <pab@pabigot.com> wrote:
+> From: "Peter A. Bigot" <pab@pabigot.com>
 >
-> * Move common definitions to the inc file
-> * Drop override of do_configure which doesn't seem to be needed anymore
-> * Fold ntp-ssl into the ntp recipe as a PACKAGECONFIG option for those
->    who want it (default to off) and fix configure-time checks to detect
->    OpenSSL properly so that it gets enabled when selected
-> * Remove ntp-bin package and put its contents in currently empty
->    ntp-utils package (with migration path)
-> * Fix hardcoded paths in ntpd initscript
-> * Specify ntpd.conf as a configuration file for packaging purposes
-> * Rearrange so that packaging definitions are towards the end in the
->    expected order
-> * Delete unused "ntp" initscript file
-> * Add SUMMARY
-> * Update HOMEPAGE
+> This reverts commit 5febf70d37c7e9cf55fa7de5285531a810312e3a.
 >
-> This reapplies some of the changes from the original patch by
-> Morgan Little <morgan.little@windriver.com>.
+> Patch made in response to oe-core commit 841ea3c1c breaks builds using
+> oe-core danny branch which branched before that commit.
 >
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 > ---
->   meta-networking/recipes-support/ntp/files/ntp      | 31 --------
->   .../recipes-support/ntp/files/openssl-check.patch  | 59 +++++++++++++++
->   .../recipes-support/ntp/ntp-ssl_4.2.6p5.bb         | 11 ---
->   meta-networking/recipes-support/ntp/ntp.inc        | 87 +++++++++++++++++-----
->   meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb | 44 +----------
->   5 files changed, 131 insertions(+), 101 deletions(-)
->   delete mode 100755 meta-networking/recipes-support/ntp/files/ntp
->   create mode 100644 meta-networking/recipes-support/ntp/files/openssl-check.patch
->   delete mode 100644 meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
+>  .../0001-configure.ac-remove-AM_PO_SUBDIRS.patch   |   48 --------------=
+------
+>  .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |    2 -
+>  2 files changed, 0 insertions(+), 50 deletions(-)
+>  delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.4.11/00=
+01-configure.ac-remove-AM_PO_SUBDIRS.patch
 >
-> diff --git a/meta-networking/recipes-support/ntp/files/ntp b/meta-networking/recipes-support/ntp/files/ntp
-> deleted file mode 100755
-> index e91a528..0000000
-> --- a/meta-networking/recipes-support/ntp/files/ntp
-> +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -#! /bin/sh
-> -
-> -FLAGS="defaults 23"
-> -
-> -test -f /usr/bin/ntpd || exit 0
-> -
-> -case "$1" in
-> -	start)
-> -		echo -n "Starting NTP server: ntpd"
-> -  		start-stop-daemon --start --quiet --exec /usr/bin/ntpd
-> -		echo "."
-> -  		;;
-> -	stop)
-> -		echo -n "Stopping NTP server: ntpd"
-> -  		start-stop-daemon --stop --quiet --exec /usr/bin/ntpd
-> -		echo "."
-> -  		;;
-> -	restart|force-reload)
-> -		echo -n "Restarting NTP server: ntpd... "
-> -  		start-stop-daemon --stop --quiet --exec /usr/bin/ntpd
-> -  		sleep 2
-> -  		start-stop-daemon --start --quiet --exec /usr/bin/ntpd
-> -		echo "done."
-> -  		;;
-> -	*)
-> -  		echo "Usage: /etc/init.d/ntp {start|stop|restart|force-reload}"
-> -  		exit 1
-> -		;;
-> -esac
-> -
-> -exit 0
-> diff --git a/meta-networking/recipes-support/ntp/files/openssl-check.patch b/meta-networking/recipes-support/ntp/files/openssl-check.patch
-> new file mode 100644
-> index 0000000..8b4a673
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ntp/files/openssl-check.patch
-> @@ -0,0 +1,59 @@
-> +Hack OpenSSL check to work when libssl and libcrypto aren't in same dir
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> +---
-> + configure         |    4 ++--
-> + m4/ntp_openssl.m4 |    4 ++--
-> + sntp/configure    |    4 ++--
-> + 3 files changed, 6 insertions(+), 6 deletions(-)
-> +
-> +diff --git a/configure b/configure
-> +index aae2c01..6a3c15e 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -22868,8 +22868,8 @@ case "$ans" in
-> + 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-> + 	    ;;
-> + 	 *)
-> +-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
-> +-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
-> ++	    test -f $i/libssl.so && break
-> ++	    test -f $i/libssl.a && break
-> + 	    ;;
-> + 	esac
-> +     done
-> +diff --git a/m4/ntp_openssl.m4 b/m4/ntp_openssl.m4
-> +index 7d9f477..67bdd55 100644
-> +--- a/m4/ntp_openssl.m4
-> ++++ b/m4/ntp_openssl.m4
-> +@@ -41,8 +41,8 @@ case "$ans" in
-> + 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-> + 	    ;;
-> + 	 *)
-> +-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
-> +-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
-> ++	    test -f $i/libssl.so && break
-> ++	    test -f $i/libssl.a && break
-> + 	    ;;
-> + 	esac
-> +     done
-> +diff --git a/sntp/configure b/sntp/configure
-> +index 7782c29..55e82d9 100755
-> +--- a/sntp/configure
-> ++++ b/sntp/configure
-> +@@ -14810,8 +14810,8 @@ case "$ans" in
-> + 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-> + 	    ;;
-> + 	 *)
-> +-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
-> +-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
-> ++	    test -f $i/libssl.so && break
-> ++	    test -f $i/libssl.a && break
-> + 	    ;;
-> + 	esac
-> +     done
-> +--
-> +1.7.1
-> +
-> diff --git a/meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb b/meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
+> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.4.11/0001-conf=
+igure.ac-remove-AM_PO_SUBDIRS.patch b/meta-oe/recipes-graphics/gphoto2/libg=
+photo2-2.4.11/0001-configure.ac-remove-AM_PO_SUBDIRS.patch
 > deleted file mode 100644
-> index a158990..0000000
-> --- a/meta-networking/recipes-support/ntp/ntp-ssl_4.2.6p5.bb
+> index 5e135db..0000000
+> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.4.11/0001-configure.a=
+c-remove-AM_PO_SUBDIRS.patch
 > +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -require ntp_${PV}.bb
-> -DEPENDS = "openssl"
+> @@ -1,48 +0,0 @@
+> -From 31a5d2f7db18737aef08c34e8707b4f69f7e5156 Mon Sep 17 00:00:00 2001
+> -From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+> -Date: Sun, 21 Oct 2012 17:59:20 +0200
+> -Subject: [PATCH] configure.ac: remove AM_PO_SUBDIRS
+> -MIME-Version: 1.0
+> -Content-Type: text/plain; charset=3DUTF-8
+> -Content-Transfer-Encoding: 8bit
 > -
-> -S = "${WORKDIR}/ntp-${PV}"
+> -together with oe autotools.bbclass this is done twice and causes:
 > -
-> -EXTRA_OECONF = "--with-openssl-libdir=${STAGING_LIBDIR} \
-> -	        --with-openssl-incdir=${STAGING_INCDIR}/openssl"
+> -| autoreconf: running: aclocal --system-acdir=3D/home/Superandy/tmp/oe-c=
+ore-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r2=
+/libgphoto2-2.4.11/aclocal-copy/ --automake-acdir=3D/home/Superandy/tmp/oe-=
+core-eglibc/sysroots/x86_64-linux/usr/share/aclocal-1.12 -I /home/Superandy=
+/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-=
+2.4.11-r2/libgphoto2-2.4.11/auto-m4/ -I /home/Superandy/tmp/oe-core-eglibc/=
+work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r2/libgphoto2=
+-2.4.11/m4m/ -I /home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-ang=
+strom-linux-gnueabi/libgphoto2-2.4.11-r2/libgphoto2-2.4.11/auto-m4/ -I /hom=
+e/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/=
+libgphoto2-2.4.11-r2/libgphoto2-2.4.11/m4m/ --force -I auto-m4 -I m4m
+> -| configure.ac:230: error: `po-directories' is already registered with A=
+C_CONFIG_COMMANDS.
 > -
+> -Upstream-Status: Inapropriate [configuration]
 > -
-> -SRC_URI[md5sum] = "98e16c7aa4ecd4c004b51bff18962e95"
-> -SRC_URI[sha256sum] = "9f4a5271a285d390c9225e3ea28f70049ea377d30fc6de4659007cfff278671a"
-> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-> index 1d740f0..a614e3f 100644
-> --- a/meta-networking/recipes-support/ntp/ntp.inc
-> +++ b/meta-networking/recipes-support/ntp/ntp.inc
-> @@ -1,35 +1,86 @@
-> +SUMMARY = "Network Time Protocol daemon and utilities"
->   DESCRIPTION = "The Network Time Protocol (NTP) is used to \
->   synchronize the time of a computer client or server to \
->   another server or reference time source, such as a radio \
->   or satellite receiver or modem."
-> -HOMEPAGE = "http://ntp.isc.org/bin/view/Main/WebHome"
-> +HOMEPAGE = "http://support.ntp.org"
->   SECTION = "console/network"
->   LICENSE = "ntp"
->   LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fea4b50c33b18c2194b4b1c9ca512670"
-> -RSUGGESTS_${PN} = "iana-etc"
->   
-> -SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/${P}.tar.gz \
-> -	file://ipv6only-workaround.patch \
-> -	file://ntpd \
-> -	file://ntp.conf \
-> -	file://ntpdate \
-> -	file://ntpd.service \
-> -"
-> +INC_PR = "r2"
->   
-> -inherit autotools update-rc.d
-> +SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
-> +           file://tickadj.c.patch \
-> +           file://ntp-4.2.4_p6-nano.patch \
-> +           file://openssl-check.patch \
-> +           file://ntpd \
-> +           file://ntp.conf \
-> +           file://ntpdate \
-> +           "
->   
-> -INITSCRIPT_NAME = "ntpd"
-> -# No dependencies, so just go in at the standard level (20)
-> -INITSCRIPT_PARAMS = "defaults"
-> +inherit autotools update-rc.d
->   
->   # The ac_cv_header_readline_history is to stop ntpdc depending on either
->   # readline or curses
-> -EXTRA_OECONF = "--without-openssl --without-crypto ac_cv_header_readline_history_h=no"
-> +EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no"
->   CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
->   
-> -PACKAGES += "ntpdate ${PN}-bin ${PN}-tickadj ${PN}-utils"
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-> +                          --with-openssl-incdir=${STAGING_INCDIR} \
-> +                          --with-crypto, \
-> +                          --without-openssl --without-crypto, \
-> +                          openssl"
-> +
-> +do_install_append() {
-> +	install -d ${D}${sysconfdir}/init.d
-> +	install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
-> +	install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
-> +
-> +	# Fix hardcoded paths in scripts
-> +	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd
-> +	sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd
-> +	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd
-> +	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd
-> +
-> +	install -d ${D}${sysconfdir}/network/if-up.d
-> +	install -m 755 ${WORKDIR}/ntpdate ${D}${sysconfdir}/network/if-up.d
-> +}
-> +
-> +PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
->   # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
-> -# or the ntpdate systemd service
->   
-> -# This should use rc.update
-> -FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/init.d/ntpdate"
-> +# ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-> +# with wonky clocks (e.g. OpenSlug)
-> +RDEPENDS_${PN} = "${PN}-tickadj"
-> +# Handle move from bin to utils package
-> +RPROVIDES_${PN}-utils = "${PN}-bin"
-> +RREPLACES_${PN}-utils = "${PN}-bin"
-> +RCONFLICTS_${PN}-utils = "${PN}-bin"
-> +
-> +RSUGGESTS_${PN} = "iana-etc"
-> +
-> +FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
-> +FILES_${PN}-tickadj = "${bindir}/tickadj"
-> +FILES_${PN}-utils = "${bindir}"
-> +FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate"
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
-> +
-> +INITSCRIPT_NAME = "ntpd"
-> +# No dependencies, so just go in at the standard level (20)
-> +INITSCRIPT_PARAMS = "defaults"
-> +
-> +pkg_postinst_ntpdate() {
-> +if test "x$D" != "x"; then
-> +        exit 1
-> +else
-> +        if ! grep -q -s ntpdate /var/spool/cron/root; then
-> +                echo "adding crontab"
-> +                test -d /var/spool/cron || mkdir -p /var/spool/cron
-> +                echo "30 * * * *    /usr/bin/ntpdate -b -s -u pool.ntp.org" >> /var/spool/cron/root
-> +        fi
-> +fi
-> +}
-> +
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> index f7c5b68..f1e9ecd 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
-> @@ -1,45 +1,7 @@
->   require ntp.inc
->   
-> -SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
-> -        file://tickadj.c.patch \
-> -        file://ntp-4.2.4_p6-nano.patch \
-> -        file://ntpd \
-> -        file://ntp.conf \
-> -        file://ntpdate \
-> -"
-> +PR = "${INC_PR}.0"
->   
-> -SRC_URI[md5sum] = "59876a9009b098ff59767ee45a88ebd2"
-> -SRC_URI[sha256sum] = "6e84d4ddfa14b911c3ed88463af10867e1fa9b287e7b34d8a02e78be85a7c40e"
+> -Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ----
+> - configure.ac                 |    1 -
+> - libgphoto2_port/configure.ac |    1 -
+> - 2 files changed, 0 insertions(+), 2 deletions(-)
 > -
-> -EXTRA_OECONF += " --with-net-snmp-config=no --without-ntpsnmpd"
+> -diff --git a/configure.ac b/configure.ac
+> -index 2f8e1b8..2e90acf 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -227,7 +227,6 @@ ALL_LINGUAS=3D"da de es eu fr hu it ja nl pl ru sv u=
+k vi zh_CN"
+> - GP_GETTEXT_HACK([${PACKAGE}-${LIBGPHOTO2_CURRENT_MIN}],[The gPhoto Team=
+],[${MAIL_GPHOTO_TRANSLATION}])
+> - AM_GNU_GETTEXT_VERSION([0.14.1])
+> - AM_GNU_GETTEXT([external])
+> --AM_PO_SUBDIRS()
+> - AM_ICONV()
+> - GP_GETTEXT_FLAGS()
 > -
-> -do_install_append() {
-> -	install -d ${D}/${sysconfdir}/init.d
-> -	install -m 644 ${WORKDIR}/ntp.conf ${D}/${sysconfdir}
-> -	install -m 755 ${WORKDIR}/ntpd ${D}/${sysconfdir}/init.d
-> -	install -d ${D}/${sysconfdir}/network/if-up.d
-> -	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
-> -}
+> -diff --git a/libgphoto2_port/configure.ac b/libgphoto2_port/configure.ac
+> -index 0b66d58..df47357 100644
+> ---- a/libgphoto2_port/configure.ac
+> -+++ b/libgphoto2_port/configure.ac
+> -@@ -116,7 +116,6 @@ GP_GETTEXT_HACK([${PACKAGE}-${LIBGPHOTO2_PORT_CURREN=
+T_MIN}],[Lutz Mueller and ot
+> - ALL_LINGUAS=3D"cs da de fr es eu it ja nl pl pt_BR ru sk sv uk vi zh_CN=
+ zh_TW"
+> - AM_GNU_GETTEXT_VERSION([0.14.1])
+> - AM_GNU_GETTEXT([external])
+> --AM_PO_SUBDIRS()
+> - AM_ICONV()
+> - GP_GETTEXT_FLAGS()
 > -
-> -FILES_${PN}-bin = "${bindir}/ntp-wait ${bindir}/ntpdc ${bindir}/ntpq ${bindir}/ntptime ${bindir}/ntptrace"
-> -FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd"
-> -FILES_${PN}-tickadj = "${bindir}/tickadj"
-> -FILES_ntp-utils = "${bindir}/*"
-> -FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate"
+> ---
+> -1.7.4.4
 > -
-> -# ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-> -# with wonky clocks (e.g. OpenSlug)
-> -RDEPENDS_${PN} = "${PN}-tickadj"
-> -
-> -pkg_postinst_ntpdate() {
-> -if test "x$D" != "x"; then
-> -        exit 1
-> -else
-> -        if ! grep -q -s ntpdate /var/spool/cron/root; then
-> -                echo "adding crontab"
-> -                test -d /var/spool/cron || mkdir -p /var/spool/cron
-> -                echo "30 * * * *    /usr/bin/ntpdate -b -s -u pool.ntp.org" >> /var/spool/cron/root
-> -        fi
-> -fi
-> -}
-> +SRC_URI[md5sum] = "00df80a84ec9528fcfb09498075525bc"
-> +SRC_URI[sha256sum] = "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23ea25ac1405432f91c"
->   
-I would like to see the checksum correction made as a separate commit on 
-danny ASAP and before applying this more significant set of changes, so 
-there's a working stable point to back up to if something goes wrong. 
-Accepting http://patches.openembedded.org/patch/39697/ onto danny would 
-accomplish this; alternatively I could re-submit that specifically for 
-danny if that's preferable.
-
-Peter
+> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb b/meta=
+-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+> index d7f6ac0..affe571 100644
+> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+> +++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+> @@ -15,7 +15,6 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${=
+PV}.tar.bz2;name=3Dlibgphoto2
+>             file://10-camera-libgphoto2-device.fdi \
+>             file://10-camera-libgphoto2.fdi \
+>             file://40-libgphoto2.rules \
+> -           file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+>  "
+>
+>  SRC_URI[libgphoto2.md5sum] =3D "16a22b9739e45a95980ed62705fe7333"
+> @@ -26,7 +25,6 @@ inherit autotools pkgconfig gettext lib_package
+>  EXTRA_OECONF =3D " --with-drivers=3Dall udevscriptdir=3D/lib/udev ac_cv_=
+lib_ltdl_lt_dlcaller_register=3Dyes"
+>
+>  do_configure_append() {
+> -       cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_p=
+ort/po/
+>         cd ${S}/libgphoto2_port/
+>         autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF=
+} $acpaths
+>         cd ${S}
+> --
+> 1.7.7.6
+>
+Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 
 
