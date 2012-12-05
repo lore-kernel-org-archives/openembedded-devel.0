@@ -1,20 +1,37 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TgIbt-00038B-PT
+	(envelope-from <martin.jansa@gmail.com>) id 1TgJxv-000058-OG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 18:18:14 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 05 Dec 2012 09:03:48 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,223,1355126400"; d="scan'208";a="227010581"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.253])
-	by azsmga001.ch.intel.com with ESMTP; 05 Dec 2012 09:03:46 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Wed, 05 Dec 2012 19:45:07 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3067419eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=LiA36UeHQ3rCB9MudlIHP9srHK0dysxkqkSTxnIc7bU=;
+	b=yi3LRvZWUhWYu2/XKhzGf0O/28OXfhy4QYhiy4nsrTriPKmmymR2shm0kwY4+KdpkZ
+	M+XshK4Fv7xDM8dvG3x34O0YrwewYX0xgWq5XeTqcKFJ5fCeL46hhjgqqeeanGrT/TsU
+	0e01M10QEu9TG2slEqdwyay9qqCr221oWECpaFTmCNd4/d58YBxfKRMF/lfN++cVST2l
+	+B7UuXnPBeE+ju/3y3p5GR3zOJyV8+/ldNINt4hyMGAiA11XFwkD27rzYKU77z97iibl
+	zGhEQxTvIJYeuS5H5NXbHEVSITHVnlDrEA2q+ZPVIB7c0uXponqgDiRhgsD0VDoMY7fk
+	LeMA==
+Received: by 10.14.216.70 with SMTP id f46mr63249635eep.12.1354732239748;
+	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+Received: from localhost ([94.230.152.246])
+	by mx.google.com with ESMTPS id z8sm10675116eeo.11.2012.12.05.10.30.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 05 Dec 2012 10:30:39 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 17:03:44 +0000
-Message-Id: <1354727024-12231-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-networking][PATCH v2] proftpd: fix do_install failure after libexecdir change
+Date: Wed,  5 Dec 2012 19:30:23 +0100
+Message-Id: <bef5b1c61f91ea5f2b28a981c69a9ed35cf27d74.1354731625.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0
+In-Reply-To: <cover.1354586187.git.Martin.Jansa@gmail.com>
+References: <cover.1354586187.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1354731625.git.Martin.Jansa@gmail.com>
+References: <cover.1354731625.git.Martin.Jansa@gmail.com>
+Subject: [PATCH 65/77] samba: remove empty /sbin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,39 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 17:18:14 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 18:45:08 -0000
 
-As of OE-Core commit id 406bd38b4232f9f399ef5ffe0b4fac72ed605a23
-libexecdir has been changed to ${libdir}/${BPN}. As we are already
-deleting ${libdir}/proftpd which is the same as ${libdir}/${BPN} in this
-case, introduce a check to see if ${libexecdir} still exists before
-attempting to remove it possibly a second time. This will handle if
-libexecdir is set to its original value or a custom value in the distro
-config.
+* fixes:
+samba-3.6.8: samba: Files/directories were installed but not shipped
+  /sbin
 
-Based on a patch by Kevin Strasser <kevin.strasser@linux.intel.com>
-
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/samba/samba.inc      | 1 +
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-index 8624c16..7279cfb 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-@@ -34,7 +34,8 @@ FTPGROUP = "ftp"
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index faa2be0..d39a84a 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -88,6 +88,7 @@ do_install_append() {
+         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
+         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
  
- do_install () {
- 	oe_runmake DESTDIR=${D} install
--	rmdir ${D}${libexecdir} ${D}${libdir}/proftpd ${D}${datadir}/locale
-+	rmdir ${D}${libdir}/proftpd ${D}${datadir}/locale
-+	[ -d ${D}${libexecdir} ] && rmdir ${D}${libexecdir}
- 	sed -i '/ *User[ \t]*/s/ftp/${FTPUSER}/' ${D}${sysconfdir}/proftpd.conf
- 	sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.conf
- 	install -d ${D}${sysconfdir}/init.d
++	rmdir ${D}${base_sbindir}
+ }
+ 
+ 
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index 7c54dae..7985199 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
 -- 
-1.7.10.4
+1.8.0
 
 
 
