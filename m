@@ -1,38 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgN7U-0000Dx-MR
+	(envelope-from <martin.jansa@gmail.com>) id 1TgN7b-0000Ec-RH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 23:07:08 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3179783eek.6
+	Wed, 05 Dec 2012 23:07:15 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2191970eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 13:52:46 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=iji/Suu5G/rSbhsSIoCwoPznrQLCw5M/lf0JNufuHzQ=;
-	b=UEWOrO11SZ2K6+3tdbfQpHg824XIlfhpniZYfS7fCq0FCe/FoUoDcdG5bTidzxINHa
-	Xr2OV5cif7P/2FEWPVCItAVtZeL3p/OX/Mql8nyKLJ080rtcWkj6+Q6RzMYqTATAoi0C
-	ilodbSAeFxrk7rsAULm96Ygs6QNopY34lH3ugUdHLTaVoN7pVDROBsICG7TxLZ8JBeOu
-	0riDI6EHVKjMxJNbnceuY0AI2XFX9ZQ4Rx6IrIzscjiba+c2EQDLccqrY4rQZmnjgDln
-	OtrxNqsSUKbds7PKoLuDZ+SwA6gKODep+sqdYGdmMwyAIsIVPuuIeRQDg+H15nCL8NI6
-	I+Ng==
-Received: by 10.14.2.196 with SMTP id 44mr65167457eef.25.1354744366079;
-	Wed, 05 Dec 2012 13:52:46 -0800 (PST)
+	bh=0nA615U5UEZQsNXMQ5tn/2ly0R4k7d8okBuLlWbkdMk=;
+	b=sqOWVOcyATo/W4rs2UmSz573ehHhisgu+BwN8igLzx+gzqwzLQMri3iVXgTNW42Och
+	Fg0PN/bPry1G+UmcvsrmY4rGyCLb2YP11xyhUEbU97H/hge5CexzVnndcgOYdQhgnkUu
+	3CIlJObBb8d63hvjOwJ6E6DBVJpzVO4ymFW9mkaj9oR4LMGC299oMkxWX4sFXNtaNZxA
+	VmX03KgLBiqwJz30eZK4jGg74BbWxq0Xwh1fue0/NmgDYDbef9tLtmJqcFQXa8QUzlPN
+	asyWf32YRPazuNKAzf2RWdtGwhzb9sUnYzVZja5WgL2r40n4Ytfk5f5ruKec1W8tsJbE
+	jAVA==
+Received: by 10.14.184.131 with SMTP id s3mr64810460eem.38.1354744373243;
+	Wed, 05 Dec 2012 13:52:53 -0800 (PST)
 Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id y44sm11748114eel.14.2012.12.05.13.52.45
+	by mx.google.com with ESMTPS id e2sm11768144eeo.8.2012.12.05.13.52.52
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 13:52:45 -0800 (PST)
+	Wed, 05 Dec 2012 13:52:52 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 22:52:03 +0100
-Message-Id: <a5926ffa3f7d8ce9ab2be7b52e8957848c00237e.1354743849.git.Martin.Jansa@gmail.com>
+Date: Wed,  5 Dec 2012 22:52:04 +0100
+Message-Id: <f3f9fac0ed8be5bad9dbafb2a23955dc735858cd.1354743849.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<1c92baa825d740b9c4e053de8b275e3f653395b3.1354743849.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1354743849.git.Martin.Jansa@gmail.com>
 References: <cover.1354743849.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 80/85] libwmf: fix QA warnings
+Subject: [PATCH 81/85] gateone: fix unpackaged files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 22:07:08 -0000
+X-List-Received-Date: Wed, 05 Dec 2012 22:07:15 -0000
 
 * fixes:
-libwmf-0.2.8.4: non -staticdev package contains static .a library: libwmf-dev path '/work/armv4t-oe-linux-gnueabi/libwmf/0.2.8.4-r2/packages-split/libwmf-dev/usr/lib/gtk-2.0/2.10.0/loaders/io-wmf.a'
+gateone-1.1: gateone: Files/directories were installed but not shipped
+  /usr
+  /usr/lib
+  /usr/lib/python2.7
+  /usr/lib/python2.7/site-packages
+  /usr/lib/python2.7/site-packages/gateone-1.1-py2.7.egg-info
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/gateone/gateone_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb b/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-index cedfd3b..c06b906 100644
---- a/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-+++ b/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb
-@@ -5,7 +5,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index f6aa377..f0f727a 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+ LICENSE = "AGPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
  
--PR = "r2"
-+PR = "r3"
+-PR = "r8"
++PR = "r9"
  
- DEPENDS_virtclass-native = "libpng-native jpeg-native"
- DEPENDS = "libpng jpeg expat gtk+"
-@@ -21,6 +21,7 @@ SRC_URI[tarball.md5sum] = "d1177739bf1ceb07f57421f0cee191e0"
- SRC_URI[tarball.sha256sum] = "5b345c69220545d003ad52bfd035d5d6f4f075e65204114a9e875e84895a7cf8"
+ PV = "1.1"
+ SRCREV = "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/liftoff/GateOne.git \
  
- FILES_${PN}-dbg += "${libdir}/gtk-2.0/2.10.0/loaders/.debug"
--FILES_${PN}-dev += "${libdir}/gtk-2.0/2.10.0/loaders/*.la ${libdir}/gtk-2.0/2.10.0/loaders/*.a"
-+FILES_${PN}-dev += "${libdir}/gtk-2.0/2.10.0/loaders/*.la"
-+FILES_${PN}-staticdev += "${libdir}/gtk-2.0/2.10.0/loaders/*.a"
- FILES_${PN} += "${libdir}/gtk-2.0/2.10.0/loaders/*.so"
+ S = "${WORKDIR}/git"
  
+-inherit distutils allarch
++inherit distutils allarch python-dir
+ 
+ export prefix = "${localstatedir}/lib"
+ 
+@@ -26,7 +26,7 @@ do_install_append() {
+ 	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
+ }
+ 
+-FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir}"
++FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
+ RDEPENDS_${PN} = "file \
+                   mime-support \
+                   openssh-ssh \
 -- 
 1.8.0
 
