@@ -1,46 +1,35 @@
-Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
-	helo=va3outboundpool.messaging.microsoft.com)
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1TgCSq-0005vV-1w
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TgCzR-0006pv-6u
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 11:44:28 +0100
-Received: from mail64-va3-R.bigfish.com (10.7.14.235) by
-	VA3EHSOBE009.bigfish.com (10.7.40.29) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 5 Dec 2012 10:30:03 +0000
-Received: from mail64-va3 (localhost [127.0.0.1])	by mail64-va3-R.bigfish.com
-	(Postfix) with ESMTP id 7F251460051	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Dec 2012 10:30:03 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1de0h1202h1d1ah1d2ahzz8275ch177df4h17326ah8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1155h)
-Received: from mail64-va3 (localhost.localdomain [127.0.0.1]) by mail64-va3
-	(MessageSwitch) id 135470340185399_24068;
-	Wed,  5 Dec 2012 10:30:01 +0000 (UTC)
-Received: from VA3EHSMHS009.bigfish.com (unknown [10.7.14.239])	by
-	mail64-va3.bigfish.com (Postfix) with ESMTP id 027553A005B	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Dec 2012 10:30:01 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS009.bigfish.com
-	(10.7.99.19) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 5 Dec 2012 10:30:00 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Wed, 5 Dec 2012 10:30:00 +0000
-Received: from bjsimics-desktop.ap.freescale.net
-	(bjsimics-desktop-010192208197.ap.freescale.net [10.192.208.197])	by
-	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id qB5ATv5d008119;
-	Wed, 5 Dec 2012 03:29:58 -0700
-From: Zhenhua Luo <b19537@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Dec 2012 18:53:33 +0800
-Message-ID: <1354704813-5779-1-git-send-email-b19537@freescale.com>
-X-Mailer: git-send-email 1.7.9.5
+	Wed, 05 Dec 2012 12:18:09 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id CC906D22C0; Wed,  5 Dec 2012 12:03:59 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.4 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	SUSPICIOUS_RECIPS autolearn=no version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 3D3CCD22B4;
+	Wed,  5 Dec 2012 12:03:17 +0100 (CET)
+Message-ID: <50BF29E7.5080203@linaro.org>
+Date: Wed, 05 Dec 2012 12:03:03 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: B29882@freescale.com
-Subject: [meta-oe v2] cramfs: download source tarball from http server instead of cvs server
+To: linaro-dev@lists.linaro.org, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Riku Voipio <riku.voipio@linaro.org>,
+	Hope Michael <michael.hope@linaro.org>,
+	Matthew Gretton-Dann <matthew.gretton-dann@linaro.org>
+Subject: New layout for OpenEmbedded layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,91 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 10:44:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Dec 2012 11:18:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Zhenhua Luo <b19537@freescale.com>
----
- meta-oe/recipes-support/cramfs/cramfs_1.1.bb |   29 +++++++++++++++++++++++++
- meta-oe/recipes-support/cramfs/cramfs_cvs.bb |   30 --------------------------
- 2 files changed, 29 insertions(+), 30 deletions(-)
- create mode 100644 meta-oe/recipes-support/cramfs/cramfs_1.1.bb
- delete mode 100644 meta-oe/recipes-support/cramfs/cramfs_cvs.bb
+Hello
 
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_1.1.bb b/meta-oe/recipes-support/cramfs/cramfs_1.1.bb
-new file mode 100644
-index 0000000..aa397a9
---- /dev/null
-+++ b/meta-oe/recipes-support/cramfs/cramfs_1.1.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "Builds cramfs filesystems for embedded systems"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
-+DEPENDS = "zlib"
-+
-+PE = "1"
-+
-+SRC_URI = "http://sourceforge.net/projects/cramfs/files/cramfs/1.1/${PN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "d3912b9f7bf745fbfea68f6a9b9de30f"
-+SRC_URI[sha256sum] = "133caca2c4e7c64106555154ee0ff693f5cf5beb9421ce2eb86baee997d22368"
-+
-+EXTRA_OEMAKE = "\
-+    'CC=${CC}' \
-+    'CFLAGS=${CFLAGS}' \
-+    'LDFLAGS=${LDFLAGS}' \
-+"
-+
-+do_compile_prepend() {
-+        ln -sf GNUmakefile Makefile
-+}
-+
-+do_install() {
-+	install -d ${D}${bindir}
-+	install mkcramfs ${D}${bindir}
-+	install cramfsck ${D}${bindir}
-+}
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb b/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-deleted file mode 100644
-index d9b6c06..0000000
---- a/meta-oe/recipes-support/cramfs/cramfs_cvs.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "Builds cramfs filesystems for embedded systems"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb07e0038a4"
--DEPENDS = "zlib"
--SRCDATE = "20110110"
--PV = "1.1+cvs${SRCDATE}"
--PR = "r1"
--
--SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
--S = "${WORKDIR}/linux/scripts/cramfs"
--
--EXTRA_OEMAKE = "\
--    'CC=${CC}' \
--    'CFLAGS=${CFLAGS}' \
--    'LDFLAGS=${LDFLAGS}' \
--"
--
--
--do_compile_prepend() {
--        ln -sf GNUmakefile Makefile
--}
--
--do_install() {
--	install -d ${D}${bindir}
--	install mkcramfs ${D}${bindir}
--	install cramfsck ${D}${bindir}
--}
--
--BBCLASSEXTEND = "native"
--
--- 
-1.7.9.5
+Now at Linaro we have two layers for our OpenEmbedded work:
 
+- meta-aarch64
+- meta-linaro
 
+First one contains everything we need to get AArch64 booted in
+fastmodels: toolchain, kernel and few recipes which needed changes to
+build for AArch64. I am working on merging those changes into main
+OpenEmbedded layers.
+
+Second one is gcc-linaro from Toolchain WG and some recipes and changes
+from Platform team.
+
+Those who do OE builds with our toolchain have some components changed
+due to our metadata (like Busybox with dpkg-deb) and I decided to fix it.
+
+Today I pushed "new-layout" branch of meta-linaro repository. It
+contains all Linaro layers:
+
+- meta-aarch64
+- meta-linaro
+- meta-linaro-toolchain
+
+First one was merged from meta-aarch64 repository and moved to own
+directory. Third one contains only toolchain bits. Second one has all
+that left.
+
+I have to do some test builds with this layout and once they will
+confirm that it works I will change all CI builds. This will also
+deprecate meta-aarch64 repository - it will not have any updates and
+will be dropped in ~month.
+
+Opinions?
 
 
