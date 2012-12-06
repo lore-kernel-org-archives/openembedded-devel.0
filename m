@@ -1,32 +1,32 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TgNEt-0001Ff-U2
+	(envelope-from <andrea.adami@gmail.com>) id 1TgPDg-0002GR-5N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Dec 2012 23:14:53 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so3183334eek.6
+	Thu, 06 Dec 2012 01:21:40 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so2228206eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 14:00:23 -0800 (PST)
+	Wed, 05 Dec 2012 16:07:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=JgFQC+8QoLORRU1gQdEkYXqIZ3gCZbVrZsKTh+P2DjE=;
-	b=lDN3CECLfFMObcF48KRrRSMk5w8g13Wm5yCLxygjM/AG2pDoTbdB1jJ7agwYMVxlwF
-	by6tYdCs36/pxo9rnYJXKiD6IiCJlEvoaQcQnehFcGfQECZLKD3n6D0NtYva63hAV7ms
-	36c3PcJcb+XDyyMsYmRvmPx8kUlAikgDmZ8PiO4bZQ6EzIZn4VxIFOTEKdrptRa1V69Q
-	rVUB3iCfXj0vXE5sOlWWgV4zxTPSUiqk5bnkqR+HlExpSq8k+jydla738ma3MNbqx4ym
-	xaLGjKst+OsSiiKZQjip1TDx8z1MbpZ2ASeZaLvCK0tTRZ3JWvuPfuzX0nI0xlR60EWT
-	XORw==
-Received: by 10.14.206.197 with SMTP id l45mr11832550eeo.17.1354744823772;
-	Wed, 05 Dec 2012 14:00:23 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id q44sm11818920eep.5.2012.12.05.14.00.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 05 Dec 2012 14:00:23 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	bh=8FaPAjEMCGsbzgaYt85x8mznhWLnTqivdPifqtuHA8A=;
+	b=POCm+JFP3KQuqEoDKqOBBdmcCTbxHc/iVtZKMfve16QQLIfQUikztsfszkbCMckE1v
+	W41qxq/GRgtnGtR2eQwLJtT9FxXExDRSzB3dn2prnKQcdE7Xvu253YEVmUuM0/ykuNOV
+	DNIUt58twlRuEABhV64DvqSFagOo+lRBrol5u+cpbeOfz+McnJMojvQaEjiYutvHL7Uk
+	aJIp0fMPFfaomm2dsj8ghdFrbVJOZUu31IRrhZb/KyOWSBDJ8LlOC7zE9xpX30tMUtFR
+	wgRhg/WyD8gEKjzQvcF/fb/Sh6vqcO12K39+/eVocXmLI/IoCwnqnGSGLeoNWAfO749d
+	GYNQ==
+Received: by 10.14.203.8 with SMTP id e8mr63583425eeo.2.1354752435675;
+	Wed, 05 Dec 2012 16:07:15 -0800 (PST)
+Received: from mizar.localdomain
+	(host81-51-dynamic.5-87-r.retail.telecomitalia.it. [87.5.51.81])
+	by mx.google.com with ESMTPS id i49sm12406067eem.6.2012.12.05.16.07.13
+	(version=SSLv3 cipher=OTHER); Wed, 05 Dec 2012 16:07:14 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Dec 2012 23:00:13 +0100
-Message-Id: <1354744813-31423-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0
-Subject: [meta-oe][PATCH] qt4: rename bbappends to match new 4.8.4 version from oe-core
+Date: Thu,  6 Dec 2012 01:07:08 +0100
+Message-Id: <1354752430-14139-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-handheld][PATCH 1/3] linux-yocto_3.4: move MTD common options to zaurus-hardware.cfg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,70 +40,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Dec 2012 22:14:53 -0000
+X-List-Received-Date: Thu, 06 Dec 2012 00:21:40 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend | 6 ------
- meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend | 6 ++++++
- meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend | 6 ------
- meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend | 6 ++++++
- 4 files changed, 12 insertions(+), 12 deletions(-)
- delete mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
- create mode 100644 meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
- delete mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
- create mode 100644 meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+ .../linux/linux-yocto-3.4/akita/akita.cfg          |    6 ------
+ recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg |    6 ------
+ .../linux/linux-yocto-3.4/collie/collie.cfg        |    6 ------
+ .../linux/linux-yocto-3.4/poodle/poodle.cfg        |    6 ------
+ .../linux/linux-yocto-3.4/spitz/spitz.cfg          |    6 ------
+ recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg |    6 ------
+ .../linux/linux-yocto-3.4/zaurus-hardware.cfg      |    6 ++++++
+ 7 files changed, 6 insertions(+), 36 deletions(-)
 
-diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
-deleted file mode 100644
-index 27cac11..0000000
---- a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
-+++ /dev/null
-@@ -1,6 +0,0 @@
--DEPENDS += "mysql5 postgresql sqlite"
--QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
--QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
--                    -I${STAGING_INCDIR}/postgresql"
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg b/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
+index 6abee5d..59feb2d 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
+@@ -28,12 +28,6 @@ CONFIG_SHARPSL_PM_MAX1111=y
+ CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
 -
--PRINC := "${@int(PRINC) + 1}"
-diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-new file mode 100644
-index 0000000..27cac11
---- /dev/null
-+++ b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-@@ -0,0 +1,6 @@
-+DEPENDS += "mysql5 postgresql sqlite"
-+QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
-+QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
-+                    -I${STAGING_INCDIR}/postgresql"
-+
-+PRINC := "${@int(PRINC) + 1}"
-diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
-deleted file mode 100644
-index 27cac11..0000000
---- a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
-+++ /dev/null
-@@ -1,6 +0,0 @@
--DEPENDS += "mysql5 postgresql sqlite"
--QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
--QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
--                    -I${STAGING_INCDIR}/postgresql"
+-#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_SHARPSL=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
+index 4898aa3..2d12380 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
+@@ -22,12 +22,6 @@ CONFIG_SHARPSL_PM_MAX1111=y
+ CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 loglevel=3"
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
 -
--PRINC := "${@int(PRINC) + 1}"
-diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-new file mode 100644
-index 0000000..27cac11
---- /dev/null
-+++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-@@ -0,0 +1,6 @@
-+DEPENDS += "mysql5 postgresql sqlite"
-+QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
-+QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
-+                    -I${STAGING_INCDIR}/postgresql"
+-#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_SHARPSL=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+index d223b35..ed3d507 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+@@ -36,12 +36,6 @@ CONFIG_SPARSEMEM_EXTREME=y
+ CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-
+-#
+ # Multimedia Capabilities Port drivers
+ #
+ CONFIG_MCP=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
+index 5b983ef..0da402d 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
+@@ -22,12 +22,6 @@ CONFIG_PXA25x=y
+ CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-
+-#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_SHARPSL=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
+index a7173f0..be1f9a0 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
+@@ -27,12 +27,6 @@ CONFIG_SHARPSL_PM_MAX1111=y
+ CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-
+-#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_SHARPSL=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
+index e339e91..75786b6 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
+@@ -25,12 +25,6 @@ CONFIG_MFD_TMIO=y
+ CONFIG_MFD_TC6393XB=y
+ 
+ #
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-
+-#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_TMIO=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+index 09c900c..554faa8 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+@@ -58,6 +58,12 @@ CONFIG_MTD_BLKDEVS=y
+ CONFIG_MTD_BLOCK=y
+ 
+ #
++# Mapping drivers for chip access
++#
++CONFIG_MTD_COMPLEX_MAPPINGS=y
++CONFIG_MTD_PHYSMAP=y
 +
-+PRINC := "${@int(PRINC) + 1}"
++#
+ # Disk-On-Chip Device Drivers
+ #
+ CONFIG_MTD_NAND_ECC=y
 -- 
-1.8.0
+1.7.8.6
 
 
 
