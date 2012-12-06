@@ -1,34 +1,34 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1TgPDv-0002GR-Nm
+	(envelope-from <andrea.adami@gmail.com>) id 1TgPE4-0002Hy-Nj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Dec 2012 01:21:55 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so2228206eaa.6
+	Thu, 06 Dec 2012 01:22:04 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so3229922eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Dec 2012 16:07:33 -0800 (PST)
+	Wed, 05 Dec 2012 16:07:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=dj+HieGt89TN0H18Ghmm59PT1cl4dAJSJfd/wR5ZACI=;
-	b=N6ynHWoJKXhNw5GdOdQxmX1KnaumG2YGTGhf7B/j5TfVhmU6FWD8xsqFw3BbYDbyr0
-	IRiC+PP1bF20Z/qK16o0LGSdELGPc3Ye/awaepeQHeYvfDI8joRx2v5ypj5WMLX9ByJb
-	I/yNUSiKaAnRZu+n0FHvnyQigJcHKjUHk0WSKG26mkRXz5sfNTx/SnMmZZYUdHql1NuE
-	5IWrYj1nhw8rdJlsxfuDFywx6sXM4ztxIJmWNGMuGZpEiKbMM6cw2Y5nl+Bz1G8OiLaF
-	lb5vOhgrCrOwzBojprkcX2jBoRrtQ68X6NPiSFAPIoD6MaU1LQhtdiF115ntKYXS/A2O
-	W+vQ==
-Received: by 10.14.225.4 with SMTP id y4mr36319381eep.6.1354752453533;
-	Wed, 05 Dec 2012 16:07:33 -0800 (PST)
+	bh=x1Oj88gyoJHWSecJoOUYi/pstmjb6F51KMeCSA9t/OM=;
+	b=FvrJWhJ/EZihcD5xxdFo+/7ycoOwaQExjoI/3/BlAg5hTxtPXTEjPibMD8VmJDKQrI
+	Olk2ypkGSqBVGPtc2rEz3Pbz8BYmS8eLYsvGGzy5khejurmRNXdcK+WYwosmyQz5iMsa
+	n1DK7TGOq8yvK/6aFTr/Q9Pf3+Wm85BQMoAq8ttfWhWQb7p2+vejeKCkW92WDld2EFPu
+	R5vtUILPZmC0/N1BHxoBSOsEUqTALMdkiFS5m0D1Xc2jKkOHLIbryA4gJFPB+0Hqjh0s
+	8WL07ymG+HBQn74ckvIVz8SdMY3Djukq6wY1JlEPwfILD3YbMF6inL4KB15adT0PYBMX
+	UHaA==
+Received: by 10.14.205.198 with SMTP id j46mr66545294eeo.27.1354752459768;
+	Wed, 05 Dec 2012 16:07:39 -0800 (PST)
 Received: from mizar.localdomain
 	(host81-51-dynamic.5-87-r.retail.telecomitalia.it. [87.5.51.81])
-	by mx.google.com with ESMTPS id i49sm12406067eem.6.2012.12.05.16.07.32
-	(version=SSLv3 cipher=OTHER); Wed, 05 Dec 2012 16:07:32 -0800 (PST)
+	by mx.google.com with ESMTPS id i49sm12406067eem.6.2012.12.05.16.07.38
+	(version=SSLv3 cipher=OTHER); Wed, 05 Dec 2012 16:07:39 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Dec 2012 01:07:09 +0100
-Message-Id: <1354752430-14139-2-git-send-email-andrea.adami@gmail.com>
+Date: Thu,  6 Dec 2012 01:07:10 +0100
+Message-Id: <1354752430-14139-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
 In-Reply-To: <1354752430-14139-1-git-send-email-andrea.adami@gmail.com>
 References: <1354752430-14139-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/3] linux-yocto_3.4: remove superseded patch for collie and fix do_patch
+Subject: [meta-handheld][PATCH 3/3] linux-yocto_3.4: use a single copy of the locomo keymap patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +42,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Dec 2012 00:21:55 -0000
+X-List-Received-Date: Thu, 06 Dec 2012 00:22:04 -0000
 
-* there have been two commits fixing drivers/pcmcia/pxa2xx-sharpsl.c
-
-* PCMCIA: pxa: convert PXA socket drivers to use new irq/gpio managemen
-* a9bb5a4bf9f84256499c802fd397d56d55227e4f
-*
-* pcmcia: sharpsl: don't discard sharpsl_pcmcia_ops
-* fdc858a466b738d35d3492bc7cf77b1dac98bf7c
+* shared by collie and poodle
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- ...xx_sharpsl-retain-ops-structure-on-collie.patch |   34 --------------------
- .../linux/linux-yocto-3.4/collie/collie.scc        |    1 -
- 2 files changed, 0 insertions(+), 35 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+ .../{collie => }/locomo_kbd_tweak-r2.patch         |    0
+ .../poodle/locomo_kbd_tweak-r2.patch               |   80 --------------------
+ 2 files changed, 0 insertions(+), 80 deletions(-)
+ rename recipes-kernel/linux/linux-yocto-3.4/{collie => }/locomo_kbd_tweak-r2.patch (100%)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/locomo_kbd_tweak-r2.patch
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch b/recipes-kernel/linux/linux-yocto-3.4/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-yocto-3.4/locomo_kbd_tweak-r2.patch
+similarity index 100%
+rename from recipes-kernel/linux/linux-yocto-3.4/collie/locomo_kbd_tweak-r2.patch
+rename to recipes-kernel/linux/linux-yocto-3.4/locomo_kbd_tweak-r2.patch
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/poodle/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-yocto-3.4/poodle/locomo_kbd_tweak-r2.patch
 deleted file mode 100644
-index d86b47d..0000000
---- a/recipes-kernel/linux/linux-yocto-3.4/collie/0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
+index e6178e2..0000000
+--- a/recipes-kernel/linux/linux-yocto-3.4/poodle/locomo_kbd_tweak-r2.patch
 +++ /dev/null
-@@ -1,34 +0,0 @@
--From 31d99c4c9f14e571ca0e22c5862dd5b6a871e2dd Mon Sep 17 00:00:00 2001
--From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
--Date: Fri, 5 Aug 2011 15:32:23 +0400
--Subject: [PATCH] pcmcia/pxa2xx_sharpsl: retain ops structure on collie
+@@ -1,80 +0,0 @@
+-From e60a4a9a3336a24a8e6ca3ea69587c60cb953881 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 21 Apr 2012 23:48:57 +0200
+-Subject: [PATCH 43/43] locomokbd: apply tweaks for Zaurus
 -
--The pxa2xx_sharpsl driver part is also used on collie, which (as
--a StrongARM board) has different expectations for PCMCIA drivers.
--So, on collie place sharpsl_pcmcia_ops in .data section rather than
--in __initdata.
+-* from http://www.rpsys.net/openzaurus/patches/
 -
--Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Signed-off-by: Richard Purdie <rpurdie@rpsys.net>
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ----
-- drivers/pcmcia/pxa2xx_sharpsl.c |    4 ++++
-- 1 files changed, 4 insertions(+), 0 deletions(-)
+- drivers/input/keyboard/locomokbd.c |   45 ++++++++++++++++++++---------------
+- 1 files changed, 26 insertions(+), 19 deletions(-)
 -
--diff --git a/drivers/pcmcia/pxa2xx_sharpsl.c b/drivers/pcmcia/pxa2xx_sharpsl.c
--index 81af2b3..1b5b749 100644
----- a/drivers/pcmcia/pxa2xx_sharpsl.c
--+++ b/drivers/pcmcia/pxa2xx_sharpsl.c
--@@ -222,7 +222,11 @@ static void sharpsl_pcmcia_socket_suspend(struct soc_pcmcia_socket *skt)
-- 	sharpsl_pcmcia_init_reset(skt);
-- }
+-diff --git a/drivers/input/keyboard/locomokbd.c b/drivers/input/keyboard/locomokbd.c
+-index b1ab298..9bb5bc6 100644
+---- a/drivers/input/keyboard/locomokbd.c
+-+++ b/drivers/input/keyboard/locomokbd.c
+-@@ -41,25 +41,32 @@ MODULE_LICENSE("GPL");
 - 
--+#ifdef CONFIG_SA1100_COLLIE
--+static struct pcmcia_low_level sharpsl_pcmcia_ops = {
--+#else
-- static struct pcmcia_low_level sharpsl_pcmcia_ops __initdata = {
--+#endif
-- 	.owner                  = THIS_MODULE,
-- 	.hw_init                = sharpsl_pcmcia_hw_init,
-- 	.hw_shutdown            = sharpsl_pcmcia_hw_shutdown,
+- #define LOCOMOKBD_NUMKEYS	128
+- 
+--#define KEY_ACTIVITY		KEY_F16
+--#define KEY_CONTACT		KEY_F18
+--#define KEY_CENTER		KEY_F15
+--
+--static const unsigned char
+-+#define LOCOMO_KEY_CALENDER	KEY_LEFTCTRL
+-+#define LOCOMO_KEY_ADDRESS	KEY_LEFTALT	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_HOME		KEY_SYSRQ	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_MENU		KEY_F12
+-+#define LOCOMO_KEY_MAIL		KEY_F10
+-+#define LOCOMO_KEY_OK		KEY_F11		/* Don't hardwire to KEY_RETURN */
+-+#define LOCOMO_KEY_CANCEL	KEY_POWER
+-+#define LOCOMO_KEY_CENTER	KEY_F5		/* Don't hardwire to KEY_RETURN */
+-+
+-+#define LOCOMO_KEY_FN		KEY_F9
+-+
+-+static const unsigned char 
+- locomokbd_keycode[LOCOMOKBD_NUMKEYS] __devinitconst = {
+--	0, KEY_ESC, KEY_ACTIVITY, 0, 0, 0, 0, 0, 0, 0,				/* 0 - 9 */
+--	0, 0, 0, 0, 0, 0, 0, KEY_MENU, KEY_HOME, KEY_CONTACT,			/* 10 - 19 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,						/* 20 - 29 */
+--	0, 0, 0, KEY_CENTER, 0, KEY_MAIL, 0, 0, 0, 0,				/* 30 - 39 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,					/* 40 - 49 */
+--	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,		/* 50 - 59 */
+--	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, KEY_ENTER, 0, 0,			/* 60 - 69 */
+--	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,	/* 70 - 79 */
+--	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,		/* 80 - 89 */
+--	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,				/* 90 - 99 */
+--	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,		/* 100 - 109 */
+--	KEY_LEFTSHIFT, KEY_TAB, KEY_LEFTCTRL, 0, 0, 0, 0, 0, 0, 0,		/* 110 - 119 */
+--	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0		/* 120 - 128 */
+-+	0, LOCOMO_KEY_CANCEL, LOCOMO_KEY_CALENDER, LOCOMO_KEY_HOME, 0, 0, 0, 0, 0, 0,	/* 0 - 9 */
+-+	0, 0, 0, 0, 0, 0, 0, LOCOMO_KEY_MENU, 0, LOCOMO_KEY_ADDRESS,			/* 10 - 19 */
+-+	0, 0, 0, 0, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,					/* 20 - 29 */
+-+	0, 0, 0, LOCOMO_KEY_CENTER, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,			/* 30 - 39 */
+-+	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,						/* 40 - 49 */
+-+	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,			/* 50 - 59 */
+-+	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, LOCOMO_KEY_OK, 0, 0,			/* 60 - 69 */
+-+	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,		/* 70 - 79 */
+-+	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,			/* 80 - 89 */
+-+	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,					/* 90 - 99 */
+-+	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,			/* 100 - 109 */
+-+	KEY_LEFTSHIFT, KEY_TAB, LOCOMO_KEY_FN, 0, 0, 0, 0, 0, 0, 0,			/* 110 - 119 */
+-+	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0			/* 120 - 128 */
+- };
+- 
+- #define KB_ROWS			16
+-@@ -68,7 +75,7 @@ locomokbd_keycode[LOCOMOKBD_NUMKEYS] __devinitconst = {
+- #define SCANCODE(c,r)		( ((c)<<4) + (r) + 1 )
+- 
+- #define KB_DELAY		8
+--#define SCAN_INTERVAL		(HZ/10)
+-+#define SCAN_INTERVAL		(HZ/20)
+- 
+- struct locomokbd {
+- 	unsigned char keycode[LOCOMOKBD_NUMKEYS];
 --- 
--1.7.2.5
+-1.7.3.4
 -
-diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc
-index 45ac852..b7c11fa 100644
---- a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc
-@@ -3,4 +3,3 @@ kconf hardware collie.cfg
- include ../zaurus-common.scc
- 
- patch locomo_kbd_tweak-r2.patch
--patch 0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch
 -- 
 1.7.8.6
 
