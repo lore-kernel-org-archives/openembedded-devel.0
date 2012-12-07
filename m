@@ -1,31 +1,30 @@
-Received: from mail-ie0-f176.google.com ([209.85.223.176])
+Received: from mail-ie0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>)
-	id 1TgfX5-0006Ur-NY; Thu, 06 Dec 2012 18:46:48 +0100
-Received: by mail-ie0-f176.google.com with SMTP id 13so10157010iea.7
-	for <multiple recipients>; Thu, 06 Dec 2012 09:32:21 -0800 (PST)
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tgv3j-0001tl-Eg
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Dec 2012 11:21:37 +0100
+Received: by mail-ie0-f179.google.com with SMTP id k14so631425iea.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Dec 2012 02:07:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Z+giq+N1+55poa1lSioongwcBCLq8n4pqho65ZYereg=;
-	b=u3cDI+7CDlLESOxsfZ6X6W57pR3/zTimKtu/N/vWDuhD4b0/QlZKW8j7hge6wkmbZe
-	qyRAtUIuwjxQhcBOi2b/m0Pm7zOtgTU9XFb2G7qRJCa72Q7UTt8aYPNseqr7+bsxtZ8a
-	4+Fe2BHbHhuAeGTxtMNG3PeDZ44lDIdap3UsLGHiPh9ZRRgL2/x7gA/jhSr+tV2CbJ+m
-	KTDRkJXbvEty96Gl1f5TbELkk+02oNexdVLixTR/sZmEK5deXEbR75ITzIxe7tmGJ/pj
-	UIReGwFtpTHtDPQcTKTtm+Go3Uzw1V5gYeXvQuKjyPDaoYf9T5wEgBU4blFCsysaB118
-	HnJQ==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=vascTqisuE4kIbIs/dbrTxufChniLdCHEDqv8gPIcQ0=;
+	b=CBDqM9s+8yDasJ89GfubpxQTVdcSSDa4kyL+QnDnzUwoqRMA7H1rUpMobaoRs9hy4X
+	tOwgtfmvtZkqpqTwub0dfXRl4H2/WTtPnNHgkhjl9NPPPzdngeM2ZCpyTC/OCIaOU5mU
+	HavpU77l4PE4OJsbWhPuL7x3P/z6/ZITmUDHl3UktvoxIk6oFB6/OFQd2F3xZKlpIS7B
+	scvb6O5ZW+RhDmaSJpkfPAPaj4jSdAEcFcfDbXRKPw9ZeSzxc/g7cXOf+LecYO5SzsVU
+	q8ofvjpNwiu/F5swJgWP46fVMgDfwU/CEjvQb6ELREq/zKLtuGUcQCP7Amft6OroJrZO
+	Xqdw==
 MIME-Version: 1.0
-Received: by 10.50.237.6 with SMTP id uy6mr6686606igc.31.1354815141412; Thu,
-	06 Dec 2012 09:32:21 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Thu, 6 Dec 2012 09:32:21 -0800 (PST)
-In-Reply-To: <20121206123443.D67C9103AA@opal>
-References: <20121206123443.D67C9103AA@opal>
-Date: Thu, 6 Dec 2012 18:32:21 +0100
-Message-ID: <CALbNGRRwKq4s9xBsDhHEqnwFRbGBhMtZTW1yKsvF7Nb7GxSU-w@mail.gmail.com>
+Received: by 10.50.152.240 with SMTP id vb16mr4547069igb.45.1354874824452;
+	Fri, 07 Dec 2012 02:07:04 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Fri, 7 Dec 2012 02:07:04 -0800 (PST)
+Date: Fri, 7 Dec 2012 11:07:04 +0100
+Message-ID: <CALbNGRQLooCy6mSDfKW0Xt4wbXo0uja2FEovZSqVM_U8t_n7LA@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Chen Qi : ICU: add pkgconfig support
+To: angstrom-distro-devel@linuxtogo.org, 
+	openembedded-devel@lists.openembedded.org
+Subject: [meta-angstrom][meta-systemd]: ${sysconfdir}/tmpfiles.d/var-run.conf conflict at do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,74 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Dec 2012 17:46:48 -0000
+X-List-Received-Date: Fri, 07 Dec 2012 10:21:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Dec 6, 2012 at 1:34 PM,  <git@git.openembedded.org> wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: a0b553bf00f819c3f0d6744461189179f578a75e
-> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=a0b553bf00f819c3f0d6744461189179f578a75e
->
-> Author: Chen Qi <Qi.Chen@windriver.com>
-> Date:   Mon Dec  3 18:21:08 2012 +0800
->
-> ICU: add pkgconfig support
->
-> Add pkgconfig support to ICU.
->
-> [YOCTO #2453]
->
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
->
-> ---
-FYI: This breaks webkit-gtk:
+Hi,
 
-./Source/WebCore/dom/EventListenerMap.h:55:56: error:
-'EventListener_3_6' was not declared in this scope
-./Source/WebCore/dom/EventListenerMap.h:55:69: error: template
-argument 1 is invalid
-./Source/WebCore/dom/EventListenerMap.h:56:48: error:
-'EventListener_3_6' has not been declared
-In file included from ./Source/WebCore/dom/EventTarget.h:35:0,
-                 from ./Source/WebCore/dom/Node.h:29,
-                 from ./Source/WebCore/editing/VisiblePosition.h:30,
-                 from ./Source/WebCore/accessibility/AccessibilityObject.h:35,
-                 from ./Source/WebCore/accessibility/AXObjectCache.h:29,
-                 from ./Source/WebCore/page/ChromeClient.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.cpp:26:
-./Source/WebCore/dom/EventListenerMap.h:94:5: error:
-'EventListener_3_6' does not name a type
-In file included from ./Source/WebCore/dom/Node.h:29:0,
-                 from ./Source/WebCore/editing/VisiblePosition.h:30,
-                 from ./Source/WebCore/accessibility/AccessibilityObject.h:35,
-                 from ./Source/WebCore/accessibility/AXObjectCache.h:29,
-                 from ./Source/WebCore/page/ChromeClient.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.cpp:26:
-./Source/WebCore/dom/EventTarget.h: In member function 'void
-WebCore::EventTarget::visitJSEventListeners(JSC::SlotVisitor&)':
-./Source/WebCore/dom/EventTarget.h:190:51: error: 'class
-WebCore::EventListenerIterator' has no member named 'nextListener'
-./Source/WebCore/dom/EventTarget.h:191:21: error: invalid use of
-incomplete type 'class WebCore::EventListener_3_6'
-In file included from ./Source/WebCore/dom/Node.h:29:0,
-                 from ./Source/WebCore/editing/VisiblePosition.h:30,
-                 from ./Source/WebCore/accessibility/AccessibilityObject.h:35,
-                 from ./Source/WebCore/accessibility/AXObjectCache.h:29,
-                 from ./Source/WebCore/page/ChromeClient.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.h:24,
-                 from Source/WebKit/gtk/WebCoreSupport/ChromeClientGtk.cpp:26:
-./Source/WebCore/dom/EventTarget.h:48:11: error: forward declaration
-of 'class WebCore::EventListener_3_6'
+with the latest layers do_rootfs fails with:
 
-It seems that webkit-gtk now gets confused by its own unicode renames
-(urename.h) extending to 3_2 and the icu headers extending to 3_6.
+|  * check_data_file_clashes: Package systemd wants to install file
+/home/andreas/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/etc/tmpfiles.d/var-run.conf
+| 	But that file is already provided by package  * base-files
 
-For now I reverted the patch here to be able to build but it needs to
-be fixed at webkit-gtk I think. Anybody working on this?
+var-run.conf is installed by
+* systemd
+* angstrom base-files.bbappend
+
+There are two possible ways to fix:
+1. Create base-files.bbappend in meta-systemd which removes var-run.conf
+2. removing do_install_append in meta-angstrom / base-files.bbappend
+
+What is the preferred solution?
 
 Andreas
 
