@@ -1,31 +1,26 @@
-Received: from mail-ia0-f179.google.com ([209.85.210.179])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>)
-	id 1TgvKa-0002Pa-C7; Fri, 07 Dec 2012 11:39:05 +0100
-Received: by mail-ia0-f179.google.com with SMTP id o25so298842iad.24
-	for <multiple recipients>; Fri, 07 Dec 2012 02:24:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=sONrqR94qBI5YhWIAMgEk9YAPeYbDw+EEow4EfCLGLo=;
-	b=UAlvQFIjnYtxra7QzUegjQU/D93zm4U0A3wLRZSUpMK2DbPIZT2x36Z4iGabXdY3EX
-	Sli7F19DbBzRaU1IrHCGvHUr9PsHfIapwo+rHth5vYCTYgq2WP8LOTS+y2w780V501PI
-	m5IgH2tTOITT5+Wx8m50z85HyspS4wWw0+t75XV4UkjxfENHgL3gYqTad8q+zguBbfu9
-	U6YGwzm9tIMZm8ZVY3Dnqv3y+/GFErkIR+Ap7J8Iwg29BAgelJJUF1hIw9hl9H1pGhG0
-	wOpAcZ6xquOQKeseFL78HOVePh9o7JPR+2BDe0B8CmKd32qclza03csHoTsBdWk49smJ
-	Xe5Q==
+	(envelope-from <gary@mlbassoc.com>) id 1Th23t-0005CE-SH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Dec 2012 18:50:10 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 6FAF8F811F6; Fri,  7 Dec 2012 10:35:44 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 851C9F811F2;
+	Fri,  7 Dec 2012 10:35:43 -0700 (MST)
+Message-ID: <50C228F8.6060805@mlbassoc.com>
+Date: Fri, 07 Dec 2012 10:35:52 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-Received: by 10.50.104.232 with SMTP id gh8mr8946735igb.45.1354875869126; Fri,
-	07 Dec 2012 02:24:29 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Fri, 7 Dec 2012 02:24:29 -0800 (PST)
-In-Reply-To: <20121207100718.03FD5103F9@opal>
-References: <20121207100718.03FD5103F9@opal>
-Date: Fri, 7 Dec 2012 11:24:29 +0100
-Message-ID: <CALbNGRSXXfTCopBJvf8g0j==zfkrOZGUbKzWt+7cftrkg4uFGg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Martin Jansa : qt4: rename bbappends to match new 4.8. 4 version from oe-core
+Subject: modphp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2012 10:39:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Dec 2012 17:50:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 7, 2012 at 11:07 AM,  <git@git.openembedded.org> wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 421a73c9c3bea13e029cd0505711ef02753949bb
-> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=421a73c9c3bea13e029cd0505711ef02753949bb
->
-> Author: Martin Jansa <martin.jansa@gmail.com>
-> Date:   Wed Dec  5 22:00:13 2012 +0000
->
-> qt4: rename bbappends to match new 4.8.4 version from oe-core
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-Sorry but I don't see the oe-core commit neither on
+I just tried to build modphp_5.3.19.bb for my ARM target.
 
-http://cgit.openembedded.org/openembedded-core/tree/meta/recipes-qt/qt4
-nor
-https://github.com/openembedded/oe-core/tree/master/meta/recipes-qt/qt4
-nor
-did I find commit notification in my emails.
+It seems that the make is using the wrong tools (or libraries),
+as it fails with this error:
+   | /usr/lib/libbz2.so: could not read symbols: File in wrong format
+   | collect2: error: ld returned 1 exit status
+   | make: *** [libphp5.la] Error 1
 
-What happened?
+Any ideas how to make this work?  Has it ever been built/tested
+for a cross target?  I can see that the cross paths for libz and libbz2
+are being passed to the configure step, but they don't seem to be reflected
+in the actual link step when making the modphp.so library.
 
-Andreas
+Thanks
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
