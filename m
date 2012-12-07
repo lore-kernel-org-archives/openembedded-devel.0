@@ -1,29 +1,35 @@
-Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1Th4lE-0000g0-KZ
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1Th5bM-00020L-Aw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Dec 2012 21:43:04 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id A84E1F81214; Fri,  7 Dec 2012 13:28:38 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 2DE20F81211;
-	Fri,  7 Dec 2012 13:28:37 -0700 (MST)
-Message-ID: <50C2517E.5060903@mlbassoc.com>
-Date: Fri, 07 Dec 2012 13:28:46 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	Fri, 07 Dec 2012 22:36:56 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qB7LMS8e008466
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 7 Dec 2012 13:22:28 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Fri, 7 Dec 2012 13:22:28 -0800
+Received: from skynet (unknown [172.25.44.2])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id E88A87FD0	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Dec 2012 16:21:28 -0500 (EST)
+Received: by skynet (Postfix, from userid 1000)	id 6A124600549; Fri,  7 Dec
+	2012 16:22:05 -0500 (EST)
+Date: Fri, 7 Dec 2012 16:22:05 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20121207212201.GA16424@windriver.com>
+References: <cover.1354555874.git.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <50C228F8.6060805@mlbassoc.com> <20121207191516.072c6bf1@eb-e6520>
-	<50C23C92.4020101@mlbassoc.com>
-In-Reply-To: <50C23C92.4020101@mlbassoc.com>
-Subject: Re: modphp
+In-Reply-To: <cover.1354555874.git.paul.eggleton@linux.intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH 00/11] More networking recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,48 +43,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2012 20:43:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 07 Dec 2012 21:36:56 -0000
+X-Groupsio-MsgNum: 42049
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="82I3+IH0IqGh5yIs"
+Content-Disposition: inline
+
+--82I3+IH0IqGh5yIs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On 2012-12-07 11:59, Gary Thomas wrote:
-> On 2012-12-07 11:15, Eric B=E9nard wrote:
->> Hi,
->>
->> Le Fri, 07 Dec 2012 10:35:52 -0700,
->> Gary Thomas <gary@mlbassoc.com> a =E9crit :
->>
->>> I just tried to build modphp_5.3.19.bb for my ARM target.
->>>
->>> It seems that the make is using the wrong tools (or libraries),
->>> as it fails with this error:
->>>     | /usr/lib/libbz2.so: could not read symbols: File in wrong forma=
-t
->>>     | collect2: error: ld returned 1 exit status
->>>     | make: *** [libphp5.la] Error 1
->>>
->>> Any ideas how to make this work?  Has it ever been built/tested
->>> for a cross target?  I can see that the cross paths for libz and libb=
-z2
->>> are being passed to the configure step, but they don't seem to be ref=
-lected
->>> in the actual link step when making the modphp.so library.
->>>
->> it was build and run tested here on an ARM target before sending the
->> patches.
->
-> So why did it not work for me?  What can I do to diagnose this?
+Merged from your contrib tree.  Thanks.
 
-I found that there was a libbz2.la installed in the sysroot/usr/lib
-This is what was causing the problem.  I deleted it manually and reran
-the build and now the modphp package builds.
+-J.
 
-I'll continue to look to see how that libbz2.la file got there..
+[[oe] [meta-networking][PATCH 00/11] More networking recipes] On 12.12.03 (=
+Mon 17:44) Paul Eggleton wrote:
 
+> These are updated, rebased and extended versions of patches originally
+> submitted by Vladimir Redzhepoff and Yauhen Kharuzhy, now applied to
+> meta-networking after discussion with them. This series also moves
+> libnfnetlink to meta-networking and adds some additional netfilter
+> library recipes needed for current versions of the netfilter suite.
+>=20
+> Note that the original patch for pure-ftpd said that it was an updated
+> version of a recipe from OE-Classic; there was no such recipe in
+> OE-Classic however so I have commented it as a new recipe.
+> The libnetfilter-queue recipe was written from scratch as I did not
+> notice it was in OE-Classic; neither version has anything particularly
+> interesting in it and this version is more up-to-date.
+>=20
+>=20
+> The following changes since commit 85ab35f4edac91ecc180161e97c6698f1c1092=
+8b:
+>=20
+>   netperf: Correct license flags (2012-11-30 11:49:56 -0500)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib paule/networking2
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Dpaule/networking2
+>=20
+> Paul Eggleton (11):
+>   netcat: add from OE-Classic
+>   libnfnetlink: move to meta-networking and update to 1.0.1
+>   libmnl: add new recipe for version 1.0.3
+>   libnetfilter-conntrack: add from OE-Classic and update
+>   libnetfilter-cttimeout: add new recipe for version 1.0.0
+>   libnetfilter-cthelper: add new recipe for version 1.0.0
+>   libnetfilter-queue: add new recipe for version 1.0.2
+>   conntrack-tools: add from OE-Classic, update and tidy up
+>   ebtables: add from OE-Classic, update and tidy up
+>   pure-ftpd: add new recipe for 1.0.36
+>   pptp-linux: add from OE-Classic, update and tidy up
+>=20
+>  ...coded-usr-local-includes-from-configure.a.patch |   38 ++++
+>  .../pure-ftpd/pure-ftpd/nostrip.patch              |   30 ++++
+>  .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb  |   19 ++
+>  .../conntrack-tools/conntrack-tools_1.4.0.bb       |   33 ++++
+>  .../conntrack-tools/files/conntrack-failover       |   77 ++++++++
+>  .../recipes-filter/conntrack-tools/files/init      |   87 +++++++++
+>  .../ebtables-2.0.10-4/01debian_defaultconfig.patch |   50 ++++++
+>  .../ebtables/ebtables-2.0.10-4/ebtables.init       |  186 ++++++++++++++=
+++++++
+>  .../ebtables-2.0.10-4/installnonroot.patch         |   43 +++++
+>  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   52 ++++++
+>  .../recipes-filter/libmnl/libmnl_1.0.3.bb          |   12 ++
+>  .../libnetfilter/libnetfilter-conntrack_1.0.2.bb   |   14 ++
+>  .../libnetfilter/libnetfilter-cthelper_1.0.0.bb    |   14 ++
+>  .../libnetfilter/libnetfilter-cttimeout_1.0.0.bb   |   13 ++
+>  .../libnetfilter/libnetfilter-queue_1.0.2.bb       |   14 ++
+>  .../libnfnetlink/libnfnetlink_1.0.1.bb             |   11 +-
+>  .../pptp-linux/pptp-linux-1.7.2/options.pptp       |   30 ++++
+>  .../pptp-linux/pptp-linux_1.7.2.bb                 |   29 +++
+>  .../recipes-support/netcat/netcat_0.7.1.bb         |   21 +++
+>  19 files changed, 768 insertions(+), 5 deletions(-)
+>  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0=
+001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
+>  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/n=
+ostrip.patch
+>  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1=
+=2E0.36.bb
+>  create mode 100644 meta-networking/recipes-filter/conntrack-tools/conntr=
+ack-tools_1.4.0.bb
+>  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
+conntrack-failover
+>  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
+init
+>  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
+10-4/01debian_defaultconfig.patch
+>  create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
+10-4/ebtables.init
+>  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
+10-4/installnonroot.patch
+>  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables_2.0.=
+10-4.bb
+>  create mode 100644 meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb
+>  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
+ter-conntrack_1.0.2.bb
+>  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
+ter-cthelper_1.0.0.bb
+>  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
+ter-cttimeout_1.0.0.bb
+>  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
+ter-queue_1.0.2.bb
+>  rename meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb =
+=3D> meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb (60%)
+>  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
+ux-1.7.2/options.pptp
+>  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
+ux_1.7.2.bb
+>  create mode 100644 meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+>=20
 --=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+-Joe MacDonald.
+:wq
 
+--82I3+IH0IqGh5yIs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlDCXfkACgkQPN8S4W6ZZne/HQCbBOpqJA2W7lrFfZDtvp9y1IYv
+rtIAnjc0+DKOA1QYBTBsSyox+ork4RK6
+=L6Df
+-----END PGP SIGNATURE-----
+
+--82I3+IH0IqGh5yIs--
