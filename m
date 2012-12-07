@@ -1,35 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-wi0-f173.google.com ([209.85.212.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1Th5bM-00020L-Aw
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Dec 2012 22:36:56 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qB7LMS8e008466
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 7 Dec 2012 13:22:28 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Fri, 7 Dec 2012 13:22:28 -0800
-Received: from skynet (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id E88A87FD0	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Dec 2012 16:21:28 -0500 (EST)
-Received: by skynet (Postfix, from userid 1000)	id 6A124600549; Fri,  7 Dec
-	2012 16:22:05 -0500 (EST)
-Date: Fri, 7 Dec 2012 16:22:05 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20121207212201.GA16424@windriver.com>
-References: <cover.1354555874.git.paul.eggleton@linux.intel.com>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1Th5f5-00026n-7d; Fri, 07 Dec 2012 22:40:50 +0100
+Received: by mail-wi0-f173.google.com with SMTP id hn17so1742009wib.6
+	for <multiple recipients>; Fri, 07 Dec 2012 13:26:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=HRebOi88SM1zS9eVBUOFDI8k7/AbFCvWL/rewCoGgLk=;
+	b=LFgyrEpTyl2Nydd8hmtDEpMH1Jfgu1mLSmpIHGUlrcvk7OZnPjrhfbUYmeMEJPCgtM
+	yJEZJ2CxFbdkDbl6loSswPX4tjcX9oQ3AZgnHNPu8S4CXDmhP8lN2v4+aTPy+nrfnckQ
+	WLR1M6CD2kGDpRMEZRQyVUhZMkKuG3RfbFs5DZnOEkyi3zYDZD/cig33vzorgilNzcGK
+	5iZpHy7QAL0tDjGsOJpe7zjjVOSu5ASDM50kNaCm0+IkrQ76T8PcydR25ph7fvVQZ/pK
+	39Sc+jtkkQ/Inr6ESKsnrPegizKfhtgR8IR9WXClgQeDgTEaaFnp1/wdps7OWMQx0Pyz
+	i84A==
 MIME-Version: 1.0
-In-Reply-To: <cover.1354555874.git.paul.eggleton@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 00/11] More networking recipes
+Received: by 10.180.93.40 with SMTP id cr8mr610938wib.15.1354915580032; Fri,
+	07 Dec 2012 13:26:20 -0800 (PST)
+Received: by 10.194.84.103 with HTTP; Fri, 7 Dec 2012 13:26:19 -0800 (PST)
+Received: by 10.194.84.103 with HTTP; Fri, 7 Dec 2012 13:26:19 -0800 (PST)
+In-Reply-To: <CALbNGRSXXfTCopBJvf8g0j==zfkrOZGUbKzWt+7cftrkg4uFGg@mail.gmail.com>
+References: <20121207100718.03FD5103F9@opal>
+	<CALbNGRSXXfTCopBJvf8g0j==zfkrOZGUbKzWt+7cftrkg4uFGg@mail.gmail.com>
+Date: Fri, 7 Dec 2012 22:26:19 +0100
+Message-ID: <CA+chaQe=nnLUXm+6daq4ykBwo28k1n5ZDQLLusqJMX9TxOfu1g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Martin Jansa : qt4: rename bbappends to match new 4.8. 4 version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,134 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2012 21:36:56 -0000
-X-Groupsio-MsgNum: 42049
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="82I3+IH0IqGh5yIs"
-Content-Disposition: inline
-
---82I3+IH0IqGh5yIs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Dec 2012 21:40:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Merged from your contrib tree.  Thanks.
+There is patch to upgrade qt to 4.8.4 on oe-core ML.
+On Dec 7, 2012 11:24 AM, "Andreas M=C3=BCller" <schnitzeltony@googlemail.co=
+m>
+wrote:
 
--J.
+> On Fri, Dec 7, 2012 at 11:07 AM,  <git@git.openembedded.org> wrote:
+> > Module: meta-openembedded.git
+> > Branch: master
+> > Commit: 421a73c9c3bea13e029cd0505711ef02753949bb
+> > URL:
+> http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=3D421=
+a73c9c3bea13e029cd0505711ef02753949bb
+> >
+> > Author: Martin Jansa <martin.jansa@gmail.com>
+> > Date:   Wed Dec  5 22:00:13 2012 +0000
+> >
+> > qt4: rename bbappends to match new 4.8.4 version from oe-core
+> >
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> Sorry but I don't see the oe-core commit neither on
+>
+> http://cgit.openembedded.org/openembedded-core/tree/meta/recipes-qt/qt4
+> nor
+> https://github.com/openembedded/oe-core/tree/master/meta/recipes-qt/qt4
+> nor
+> did I find commit notification in my emails.
+>
+> What happened?
+>
+> Andreas
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
-[[oe] [meta-networking][PATCH 00/11] More networking recipes] On 12.12.03 (=
-Mon 17:44) Paul Eggleton wrote:
-
-> These are updated, rebased and extended versions of patches originally
-> submitted by Vladimir Redzhepoff and Yauhen Kharuzhy, now applied to
-> meta-networking after discussion with them. This series also moves
-> libnfnetlink to meta-networking and adds some additional netfilter
-> library recipes needed for current versions of the netfilter suite.
->=20
-> Note that the original patch for pure-ftpd said that it was an updated
-> version of a recipe from OE-Classic; there was no such recipe in
-> OE-Classic however so I have commented it as a new recipe.
-> The libnetfilter-queue recipe was written from scratch as I did not
-> notice it was in OE-Classic; neither version has anything particularly
-> interesting in it and this version is more up-to-date.
->=20
->=20
-> The following changes since commit 85ab35f4edac91ecc180161e97c6698f1c1092=
-8b:
->=20
->   netperf: Correct license flags (2012-11-30 11:49:56 -0500)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib paule/networking2
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Dpaule/networking2
->=20
-> Paul Eggleton (11):
->   netcat: add from OE-Classic
->   libnfnetlink: move to meta-networking and update to 1.0.1
->   libmnl: add new recipe for version 1.0.3
->   libnetfilter-conntrack: add from OE-Classic and update
->   libnetfilter-cttimeout: add new recipe for version 1.0.0
->   libnetfilter-cthelper: add new recipe for version 1.0.0
->   libnetfilter-queue: add new recipe for version 1.0.2
->   conntrack-tools: add from OE-Classic, update and tidy up
->   ebtables: add from OE-Classic, update and tidy up
->   pure-ftpd: add new recipe for 1.0.36
->   pptp-linux: add from OE-Classic, update and tidy up
->=20
->  ...coded-usr-local-includes-from-configure.a.patch |   38 ++++
->  .../pure-ftpd/pure-ftpd/nostrip.patch              |   30 ++++
->  .../recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb  |   19 ++
->  .../conntrack-tools/conntrack-tools_1.4.0.bb       |   33 ++++
->  .../conntrack-tools/files/conntrack-failover       |   77 ++++++++
->  .../recipes-filter/conntrack-tools/files/init      |   87 +++++++++
->  .../ebtables-2.0.10-4/01debian_defaultconfig.patch |   50 ++++++
->  .../ebtables/ebtables-2.0.10-4/ebtables.init       |  186 ++++++++++++++=
-++++++
->  .../ebtables-2.0.10-4/installnonroot.patch         |   43 +++++
->  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   52 ++++++
->  .../recipes-filter/libmnl/libmnl_1.0.3.bb          |   12 ++
->  .../libnetfilter/libnetfilter-conntrack_1.0.2.bb   |   14 ++
->  .../libnetfilter/libnetfilter-cthelper_1.0.0.bb    |   14 ++
->  .../libnetfilter/libnetfilter-cttimeout_1.0.0.bb   |   13 ++
->  .../libnetfilter/libnetfilter-queue_1.0.2.bb       |   14 ++
->  .../libnfnetlink/libnfnetlink_1.0.1.bb             |   11 +-
->  .../pptp-linux/pptp-linux-1.7.2/options.pptp       |   30 ++++
->  .../pptp-linux/pptp-linux_1.7.2.bb                 |   29 +++
->  .../recipes-support/netcat/netcat_0.7.1.bb         |   21 +++
->  19 files changed, 768 insertions(+), 5 deletions(-)
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/0=
-001-Remove-hardcoded-usr-local-includes-from-configure.a.patch
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/n=
-ostrip.patch
->  create mode 100644 meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1=
-=2E0.36.bb
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/conntr=
-ack-tools_1.4.0.bb
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
-conntrack-failover
->  create mode 100644 meta-networking/recipes-filter/conntrack-tools/files/=
-init
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/01debian_defaultconfig.patch
->  create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/ebtables.init
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.=
-10-4/installnonroot.patch
->  create mode 100644 meta-networking/recipes-filter/ebtables/ebtables_2.0.=
-10-4.bb
->  create mode 100644 meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-conntrack_1.0.2.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-cthelper_1.0.0.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-cttimeout_1.0.0.bb
->  create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfil=
-ter-queue_1.0.2.bb
->  rename meta-oe/recipes-connectivity/libnfnetlink/libnfnetlink_1.0.0.bb =
-=3D> meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb (60%)
->  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
-ux-1.7.2/options.pptp
->  create mode 100644 meta-networking/recipes-protocols/pptp-linux/pptp-lin=
-ux_1.7.2.bb
->  create mode 100644 meta-networking/recipes-support/netcat/netcat_0.7.1.bb
->=20
---=20
--Joe MacDonald.
-:wq
-
---82I3+IH0IqGh5yIs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
-
-iEYEARECAAYFAlDCXfkACgkQPN8S4W6ZZne/HQCbBOpqJA2W7lrFfZDtvp9y1IYv
-rtIAnjc0+DKOA1QYBTBsSyox+ork4RK6
-=L6Df
------END PGP SIGNATURE-----
-
---82I3+IH0IqGh5yIs--
