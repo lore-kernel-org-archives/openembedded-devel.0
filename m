@@ -1,34 +1,32 @@
-Received: from mail-wi0-f173.google.com ([209.85.212.173])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1Th5f5-00026n-7d; Fri, 07 Dec 2012 22:40:50 +0100
-Received: by mail-wi0-f173.google.com with SMTP id hn17so1742009wib.6
-	for <multiple recipients>; Fri, 07 Dec 2012 13:26:20 -0800 (PST)
+	(envelope-from <andrea.adami@gmail.com>) id 1Th8Cz-00056s-UW
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Dec 2012 01:23:58 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so592831eek.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Dec 2012 16:09:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=HRebOi88SM1zS9eVBUOFDI8k7/AbFCvWL/rewCoGgLk=;
-	b=LFgyrEpTyl2Nydd8hmtDEpMH1Jfgu1mLSmpIHGUlrcvk7OZnPjrhfbUYmeMEJPCgtM
-	yJEZJ2CxFbdkDbl6loSswPX4tjcX9oQ3AZgnHNPu8S4CXDmhP8lN2v4+aTPy+nrfnckQ
-	WLR1M6CD2kGDpRMEZRQyVUhZMkKuG3RfbFs5DZnOEkyi3zYDZD/cig33vzorgilNzcGK
-	5iZpHy7QAL0tDjGsOJpe7zjjVOSu5ASDM50kNaCm0+IkrQ76T8PcydR25ph7fvVQZ/pK
-	39Sc+jtkkQ/Inr6ESKsnrPegizKfhtgR8IR9WXClgQeDgTEaaFnp1/wdps7OWMQx0Pyz
-	i84A==
-MIME-Version: 1.0
-Received: by 10.180.93.40 with SMTP id cr8mr610938wib.15.1354915580032; Fri,
-	07 Dec 2012 13:26:20 -0800 (PST)
-Received: by 10.194.84.103 with HTTP; Fri, 7 Dec 2012 13:26:19 -0800 (PST)
-Received: by 10.194.84.103 with HTTP; Fri, 7 Dec 2012 13:26:19 -0800 (PST)
-In-Reply-To: <CALbNGRSXXfTCopBJvf8g0j==zfkrOZGUbKzWt+7cftrkg4uFGg@mail.gmail.com>
-References: <20121207100718.03FD5103F9@opal>
-	<CALbNGRSXXfTCopBJvf8g0j==zfkrOZGUbKzWt+7cftrkg4uFGg@mail.gmail.com>
-Date: Fri, 7 Dec 2012 22:26:19 +0100
-Message-ID: <CA+chaQe=nnLUXm+6daq4ykBwo28k1n5ZDQLLusqJMX9TxOfu1g@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Martin Jansa : qt4: rename bbappends to match new 4.8. 4 version from oe-core
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=cw87ApRuNpLoEq0OUp7h/5Fp7Q97vgaWc+kT/OErN2k=;
+	b=Xcnb8/Xe1FGPpipnGvCrU0gqp60cRYL3AW4DxDuSHu0g1GPn4Nhe71T1r+4Bg8lPi7
+	7bHoRqu7wZAhPUKuWBA5ltkbLjd6S/dkg6AbyHK42tjadpBVeieDQfqjGx+C9pmtmbzd
+	iPqjS68R+9jbeJatqcqo9A7t/HoxpEV9mkC/e0lnY6uWizndwY1I4d5CAI1Wj1JD4JnC
+	zByniB0T7G9DGJC8kTGGcMqjA0L3bMCDXRuEfMyZy4ENzj0Nwtiv6l05hGn5rm8HyDA8
+	BfyaPhvq9BRTMnPACd3B/MwIpCmTupiH85e3bFWHIQ7raY6vPVPTjbZKqvTjTBqNtlAQ
+	rOQA==
+Received: by 10.14.205.198 with SMTP id j46mr22433063eeo.27.1354925370670;
+	Fri, 07 Dec 2012 16:09:30 -0800 (PST)
+Received: from mizar.localdomain
+	(host83-229-dynamic.58-82-r.retail.telecomitalia.it. [82.58.229.83])
+	by mx.google.com with ESMTPS id f49sm25909089eep.12.2012.12.07.16.09.29
+	(version=SSLv3 cipher=OTHER); Fri, 07 Dec 2012 16:09:29 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  8 Dec 2012 01:09:20 +0100
+Message-Id: <1354925363-14602-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-handheld][PATCH 1/4] linux-yocto_3.4: move CONFIG_MMU=y to zaurus-hardware.cfg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +40,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Dec 2012 21:40:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 08 Dec 2012 00:23:58 -0000
 
-There is patch to upgrade qt to 4.8.4 on oe-core ML.
-On Dec 7, 2012 11:24 AM, "Andreas M=C3=BCller" <schnitzeltony@googlemail.co=
-m>
-wrote:
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../linux/linux-yocto-3.4/akita/akita.cfg          |    1 -
+ recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg |    1 -
+ .../linux/linux-yocto-3.4/collie/collie.cfg        |    1 -
+ .../linux/linux-yocto-3.4/poodle/poodle.cfg        |    1 -
+ .../linux/linux-yocto-3.4/spitz/spitz.cfg          |    1 -
+ recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg |    1 -
+ .../linux/linux-yocto-3.4/zaurus-hardware.cfg      |    5 +++++
+ 7 files changed, 5 insertions(+), 6 deletions(-)
 
-> On Fri, Dec 7, 2012 at 11:07 AM,  <git@git.openembedded.org> wrote:
-> > Module: meta-openembedded.git
-> > Branch: master
-> > Commit: 421a73c9c3bea13e029cd0505711ef02753949bb
-> > URL:
-> http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=3D421=
-a73c9c3bea13e029cd0505711ef02753949bb
-> >
-> > Author: Martin Jansa <martin.jansa@gmail.com>
-> > Date:   Wed Dec  5 22:00:13 2012 +0000
-> >
-> > qt4: rename bbappends to match new 4.8.4 version from oe-core
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> Sorry but I don't see the oe-core commit neither on
->
-> http://cgit.openembedded.org/openembedded-core/tree/meta/recipes-qt/qt4
-> nor
-> https://github.com/openembedded/oe-core/tree/master/meta/recipes-qt/qt4
-> nor
-> did I find commit notification in my emails.
->
-> What happened?
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg b/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
+index 59feb2d..a8445d6 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
+@@ -1,7 +1,6 @@
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_PXA=y
+ CONFIG_GPIO_PCA953X=y
+ 
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
+index 2d12380..d421e46 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
+@@ -1,7 +1,6 @@
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_PXA=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+index ed3d507..5c0a7bf 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+@@ -6,7 +6,6 @@ CONFIG_KERNEL_LZMA=y
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_SA1100=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
+index 0da402d..4b14575 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
+@@ -1,7 +1,6 @@
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_PXA=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
+index be1f9a0..50d40da 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
+@@ -1,7 +1,6 @@
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_PXA=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
+index 75786b6..9053a5e 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
+@@ -1,7 +1,6 @@
+ #
+ # System Type
+ #
+-CONFIG_MMU=y
+ CONFIG_ARCH_PXA=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+index 554faa8..1336bf0 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+@@ -31,6 +31,11 @@ CONFIG_HAVE_CLK=y
+ CONFIG_HAVE_DMA_API_DEBUG=y
+ 
+ #
++# System Type
++#
++CONFIG_MMU=y
++
++#
+ # Power management options
+ #
+ CONFIG_SUSPEND=y
+-- 
+1.7.8.6
+
+
 
