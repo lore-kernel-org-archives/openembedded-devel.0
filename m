@@ -1,26 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from p3plsmtpa06-04.prod.phx3.secureserver.net ([173.201.192.105])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Andrei.Gherzan@windriver.com>) id 1Ti1KQ-0003wy-E1
+	(envelope-from <pab@pabigot.com>) id 1Ti2YO-0008Sm-62
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Dec 2012 12:15:18 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qBAB0lTn025534
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2012 03:00:47 -0800 (PST)
-Received: from localhost.localdomain (128.224.171.81) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Mon, 10 Dec 2012 03:00:46 -0800
-From: Andrei Gherzan <andrei.gherzan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 10 Dec 2012 13:00:29 +0200
-Message-ID: <1355137229-16062-1-git-send-email-andrei.gherzan@windriver.com>
-X-Mailer: git-send-email 1.7.5.4
+	Mon, 10 Dec 2012 13:33:49 +0100
+Received: from llc.pab ([66.41.60.82])
+	by p3plsmtpa06-04.prod.phx3.secureserver.net with 
+	id ZoGj1k0041mTNtu01oGj4X; Mon, 10 Dec 2012 05:16:44 -0700
+Message-ID: <50C5D2AA.6080006@pabigot.com>
+Date: Mon, 10 Dec 2012 06:16:42 -0600
+From: "Peter A. Bigot" <pab@pabigot.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:15.0) Gecko/20120911 Thunderbird/15.0.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.171.81]
-Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
-Subject: [meta-oe][meta-systemd][PATCH] lighttpd: Sync bbappend version with the one from oe-core
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+References: <1354662118-31597-1-git-send-email-pab@pabigot.com>
+	<CALbNGRT7R_4ZycbG+Fg5dJWBTmiXfbr3p+HK5b0rE=5qE_v6qw@mail.gmail.com>
+	<20121210124326.5590b0ff@eb-e6520>
+In-Reply-To: <20121210124326.5590b0ff@eb-e6520>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][danny][PATCH] Revert "libgphoto2: fix build"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2012 11:15:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Dec 2012 12:33:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
----
- .../lighttpd/lighttpd_1.4.31.bbappend              |   10 ----------
- .../lighttpd/lighttpd_1.4.32.bbappend              |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
- create mode 100644 meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+On 12/10/2012 05:43 AM, Eric Bénard wrote:
+> Hi Peter and Andreas,
+>
+> Le Wed, 5 Dec 2012 07:58:33 +0100,
+> Andreas Müller <schnitzeltony@googlemail.com> a écrit :
+>
+>> On Wed, Dec 5, 2012 at 12:01 AM, Peter A. Bigot <pab@pabigot.com> wrote:
+>>> From: "Peter A. Bigot" <pab@pabigot.com>
+>>>
+>>> This reverts commit 5febf70d37c7e9cf55fa7de5285531a810312e3a.
+>>>
+>>> Patch made in response to oe-core commit 841ea3c1c breaks builds using
+>>> oe-core danny branch which branched before that commit.
+>>>
+>>> Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+> pushed to danny-next + Andreas' request concerning "gphoto2: fix
+> gettext build error", please check the result is what you expect.
 
-diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-deleted file mode 100644
-index b016bdc..0000000
---- a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-+++ /dev/null
-@@ -1,10 +0,0 @@
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--
--PRINC := "${@int(PRINC) + 2}"
--
--inherit systemd
--
--SRC_URI += "file://lighttpd.service"
--
--SYSTEMD_PACKAGES = "${PN}"
--SYSTEMD_SERVICE_${PN} = "lighttpd.service"
-diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
-new file mode 100644
-index 0000000..b016bdc
---- /dev/null
-+++ b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
-@@ -0,0 +1,10 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-+
-+PRINC := "${@int(PRINC) + 2}"
-+
-+inherit systemd
-+
-+SRC_URI += "file://lighttpd.service"
-+
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "lighttpd.service"
--- 
-1.7.5.4
+By inspection the result is what it should be, correcting the missed PR 
+bump in the patch version I submitted.
 
+Peter
 
 
