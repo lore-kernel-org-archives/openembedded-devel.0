@@ -1,39 +1,40 @@
-Received: from 14.mo5.mail-out.ovh.net ([188.165.51.82]
-	helo=mo5.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Ti2bZ-0000Dg-FY
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <koen@dominion.thruhere.net>) id 1Ti2d0-0000Ny-Tu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Dec 2012 13:37:05 +0100
-Received: from mail188.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo5.mail-out.ovh.net (Postfix) with SMTP id 6ED51100C1CF
+	Mon, 10 Dec 2012 13:38:36 +0100
+Received: by mail-bk0-f47.google.com with SMTP id j4so997834bkw.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2012 12:52:31 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 10 Dec 2012 13:44:01 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 10 Dec 2012 13:43:59 +0200
-Date: Mon, 10 Dec 2012 12:43:59 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.5 (mo5.mail-out.ovh.net)
-Message-ID: <20121210124359.15b4543e@eb-e6520>
-In-Reply-To: <CAP9ODKp6urgcSXNyfzsQhUnEDXoE_R4G0DhWS5iu7fS5OqW9Rw@mail.gmail.com>
-References: <CAP9ODKp6urgcSXNyfzsQhUnEDXoE_R4G0DhWS5iu7fS5OqW9Rw@mail.gmail.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 14627410114909613385
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehjedrtddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
-Cc: otavio@ossystems.com.br, Mario Goulart <mario@ossystems.com.br>
-Subject: Re: [for-danny] Hashes for backporting to danny
+	Mon, 10 Dec 2012 04:24:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=7sLn/qqh+sm1NskUXTNTVF8BsvNB71P20i12QgYPn4c=;
+	b=d6p+haKEMYYdvqzD6piB/2tIjA2x9KgBTNQj7e8sX31Lz2VbFTIldnzngFFoHPm3G3
+	UA/N0yVXdXbAR9BHhdrm57Jsn7D6zJkz5Lms7GhatQLKzAFgwY0N6fLkeK4lVT4VUVnZ
+	CwBFI1IQCiaXx4JS5kkdAjV41smF6vWZ+G6UFBJZx7DQcYX14eH/jK8/dFiTjhe2sKES
+	bMzRc3hwb+FaSK5uRcSSUyIYMLsyaw+sEQgvu+IxaF7I6wqtKOfzRum5ue0HWsS8dp/w
+	chhjyX+Bd/iGvL6bYxl7M62aNtjChNix1GmE9uRqZ1bB5nStlNHnMS7ruvHLXFmruRzn
+	qLSg==
+Received: by 10.204.11.142 with SMTP id t14mr4414168bkt.9.1355142243735;
+	Mon, 10 Dec 2012 04:24:03 -0800 (PST)
+Received: from [172.20.0.100] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id f24sm13821639bkv.7.2012.12.10.04.24.01
+	(version=SSLv3 cipher=OTHER); Mon, 10 Dec 2012 04:24:02 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CALbNGRQLooCy6mSDfKW0Xt4wbXo0uja2FEovZSqVM_U8t_n7LA@mail.gmail.com>
+Date: Mon, 10 Dec 2012 13:24:00 +0100
+Message-Id: <2B0098E7-F516-4691-9DC9-47E9C4DE0AF5@dominion.thruhere.net>
+References: <CALbNGRQLooCy6mSDfKW0Xt4wbXo0uja2FEovZSqVM_U8t_n7LA@mail.gmail.com>
+To: Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+X-Mailer: Apple Mail (2.1499)
+X-Gm-Message-State: ALoCoQkgfVCDrupkYyxqvmfOJqXZiBAx2TH5hqw4gP+3NSnIZJZFdBktHZ1v8y4FbU6p5jChSMDP
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] [meta-angstrom][meta-systemd]: ${sysconfdir}/tmpfiles.d/var-run.conf conflict at do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2012 12:37:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 10 Dec 2012 12:38:40 -0000
+X-List-Received-Date: Mon, 10 Dec 2012 12:38:40 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Otavio and Mario,
 
-Le Tue, 4 Dec 2012 10:11:10 -0200,
-Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
-> Here goes the list of patches we'd like to have backported to danny so we
-> can use danny branch for one product at O.S. Systems:
->=20
->  * freerdp: disable man pages generation
-> (638f02695550bee4f941439cc2d1293c599b4a1f)
->=20
->  * freerdp: update to the latest commit (2012-11-20) in the stable-1.0
-> branch (e7e3fd797b46a85ffc03cc7c4b2267d686476f93)
->=20
->  * openbox: separate package for configuration files (openbox-config)
-> (3becce8504033dfac7c497fa12675f873a5df9e0)
->=20
->  * xinput-calibrator: update to 2012 Aug 2nd's git snapshot
-> (3cd0866c28822d08e5817d4d806b8deaa368c711)
->=20
->  * xinput-calibrator: update meta-systemd's bbappend to 2012 Aug 2nd's git
-> snapshot (23c9e5d6c4f66df8604c42a19e343d952784fc46)
->=20
-pushed to danny-next, please check the result is what you expect.
+Op 7 dec. 2012, om 11:07 heeft Andreas M=FCller =
+<schnitzeltony@googlemail.com> het volgende geschreven:
 
-Thanks,
-Eric
+> Hi,
+>=20
+> with the latest layers do_rootfs fails with:
+>=20
+> |  * check_data_file_clashes: Package systemd wants to install file
+> =
+/home/andreas/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-f=
+ull-image/1.0-r0/rootfs/etc/tmpfiles.d/var-run.conf
+> | 	But that file is already provided by package  * base-files
+>=20
+> var-run.conf is installed by
+> * systemd
+> * angstrom base-files.bbappend
+>=20
+> There are two possible ways to fix:
+> 1. Create base-files.bbappend in meta-systemd which removes =
+var-run.conf
+> 2. removing do_install_append in meta-angstrom / base-files.bbappend
+
+I'd go for option 2, but I don't have a strong opinion on it.
+
+regards,
+
+Koen=
 
 
