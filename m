@@ -1,39 +1,43 @@
-Received: from 12.mo5.mail-out.ovh.net ([46.105.39.65]
-	helo=mo5.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Ti4K3-0004fU-44
+Received: from mail-ie0-f170.google.com ([209.85.223.170])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <mario.goulart@gmail.com>) id 1Ti7kf-0006ML-BM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Dec 2012 15:27:07 +0100
-Received: from mail188.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo5.mail-out.ovh.net (Postfix) with SMTP id 2BE94100C2A1
+	Mon, 10 Dec 2012 19:06:51 +0100
+Received: by mail-ie0-f170.google.com with SMTP id k10so9040562iea.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2012 12:52:01 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 10 Dec 2012 13:43:29 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 10 Dec 2012 13:43:27 +0200
-Date: Mon, 10 Dec 2012 12:43:26 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.5 (mo5.mail-out.ovh.net)
-Message-ID: <20121210124326.5590b0ff@eb-e6520>
-In-Reply-To: <CALbNGRT7R_4ZycbG+Fg5dJWBTmiXfbr3p+HK5b0rE=5qE_v6qw@mail.gmail.com>
-References: <1354662118-31597-1-git-send-email-pab@pabigot.com>
-	<CALbNGRT7R_4ZycbG+Fg5dJWBTmiXfbr3p+HK5b0rE=5qE_v6qw@mail.gmail.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 14618402915600608585
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehiedrtdejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehjedrtddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Subject: Re: [meta-oe][danny][PATCH] Revert "libgphoto2: fix build"
+	Mon, 10 Dec 2012 09:52:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
+	:user-agent:mime-version:content-type:content-transfer-encoding;
+	bh=h8Slp3O31L2vXRFDAuv/8oImKDUiJUivEvBaqhLEmSE=;
+	b=B9wfbbpHDC7s52c+I5W/SQ6rUsN1Zraq69SHRe5bPN1SFtLzj/hoXxJr2q4g+niny1
+	Yq2PpDZYkcvUoGCKF/cTZ+/xHrKhQVJzwrAgU5A63arWzEOYrDEtNhgCsAFCcG/QVwG0
+	eD8Yfm5S2+o3/LlTm+nAhJr1hpqRoVMTqcW8soAlJlmRd5zBTPaotJSGXkBNyOb5Kcny
+	eFcrz/2OB+MBnZUGdzWRA3Gr4acPKzH/zf9a/lXlRrQA7Kb6MZJ2FTAnEB8rMRrtgGIA
+	jTAKpKeDpsbqH7TwP1uuSar+DsLVADkgHlfrkfJcW91Qtln/FoWlqMlIdRJqQ5nh80B6
+	fc8Q==
+Received: by 10.50.152.236 with SMTP id vb12mr7381732igb.15.1355161937755;
+	Mon, 10 Dec 2012 09:52:17 -0800 (PST)
+Received: from cl-t066-141cl.privatedns.com.gmail.com (wkit.com.br.
+	[67.205.85.241])
+	by mx.google.com with ESMTPS id bg10sm6452818igc.6.2012.12.10.09.52.16
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 10 Dec 2012 09:52:16 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: Eric =?utf-8?Q?B=C3=A9nard?= <eric@eukrea.com>
+References: <CAP9ODKp6urgcSXNyfzsQhUnEDXoE_R4G0DhWS5iu7fS5OqW9Rw@mail.gmail.com>
+	<20121210124359.15b4543e@eb-e6520>
+Date: Mon, 10 Dec 2012 12:39:13 -0500
+In-Reply-To: <20121210124359.15b4543e@eb-e6520> ("Eric
+	\=\?utf-8\?Q\?B\=C3\=A9na\?\=
+	\=\?utf-8\?Q\?rd\=22's\?\= message of
+	"Mon, 10 Dec 2012 12:43:59 +0100")
+Message-ID: <85r4mx958e.fsf@cl-t066-141cl.privatedns.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.2 (gnu/linux)
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
+Subject: Re: [for-danny] Hashes for backporting to danny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,29 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2012 14:27:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 10 Dec 2012 18:06:51 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Peter and Andreas,
+Hi Eric,
 
-Le Wed, 5 Dec 2012 07:58:33 +0100,
-Andreas M=FCller <schnitzeltony@googlemail.com> a =E9crit :
+On Mon, 10 Dec 2012 12:43:59 +0100 Eric B=C3=A9nard <eric@eukrea.com> wrote:
 
-> On Wed, Dec 5, 2012 at 12:01 AM, Peter A. Bigot <pab@pabigot.com> wrote:
-> > From: "Peter A. Bigot" <pab@pabigot.com>
-> >
-> > This reverts commit 5febf70d37c7e9cf55fa7de5285531a810312e3a.
-> >
-> > Patch made in response to oe-core commit 841ea3c1c breaks builds using
-> > oe-core danny branch which branched before that commit.
-> >
-> > Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+> Le Tue, 4 Dec 2012 10:11:10 -0200,
+> Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
+>> Here goes the list of patches we'd like to have backported to danny so we
+>> can use danny branch for one product at O.S. Systems:
+>>=20
+>>  * freerdp: disable man pages generation
+>> (638f02695550bee4f941439cc2d1293c599b4a1f)
+>>=20
+>>  * freerdp: update to the latest commit (2012-11-20) in the stable-1.0
+>> branch (e7e3fd797b46a85ffc03cc7c4b2267d686476f93)
+>>=20
+>>  * openbox: separate package for configuration files (openbox-config)
+>> (3becce8504033dfac7c497fa12675f873a5df9e0)
+>>=20
+>>  * xinput-calibrator: update to 2012 Aug 2nd's git snapshot
+>> (3cd0866c28822d08e5817d4d806b8deaa368c711)
+>>=20
+>>  * xinput-calibrator: update meta-systemd's bbappend to 2012 Aug 2nd's g=
+it
+>> snapshot (23c9e5d6c4f66df8604c42a19e343d952784fc46)
+>>=20
+> pushed to danny-next, please check the result is what you expect.
 
-pushed to danny-next + Andreas' request concerning "gphoto2: fix
-gettext build error", please check the result is what you expect.
+Thank you.  I've build those packages out of a freshly-cloned danny-next
+branch and everything went smoothly.
 
-Thanks,
-Eric
+Maybe the patch
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-December/04281=
+1.html
+should be applied too.
+
+Best wishes.
+Mario
 
 
