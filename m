@@ -1,43 +1,36 @@
-Received: from mail-ie0-f170.google.com ([209.85.223.170])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mario.goulart@gmail.com>) id 1Ti7kf-0006ML-BM
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Dec 2012 19:06:51 +0100
-Received: by mail-ie0-f170.google.com with SMTP id k10so9040562iea.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Dec 2012 09:52:17 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1Ti8Lb-0005BP-9f; Mon, 10 Dec 2012 19:44:59 +0100
+Received: by mail-we0-f175.google.com with SMTP id z53so1263995wey.6
+	for <multiple recipients>; Mon, 10 Dec 2012 10:30:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
-	:user-agent:mime-version:content-type:content-transfer-encoding;
-	bh=h8Slp3O31L2vXRFDAuv/8oImKDUiJUivEvBaqhLEmSE=;
-	b=B9wfbbpHDC7s52c+I5W/SQ6rUsN1Zraq69SHRe5bPN1SFtLzj/hoXxJr2q4g+niny1
-	Yq2PpDZYkcvUoGCKF/cTZ+/xHrKhQVJzwrAgU5A63arWzEOYrDEtNhgCsAFCcG/QVwG0
-	eD8Yfm5S2+o3/LlTm+nAhJr1hpqRoVMTqcW8soAlJlmRd5zBTPaotJSGXkBNyOb5Kcny
-	eFcrz/2OB+MBnZUGdzWRA3Gr4acPKzH/zf9a/lXlRrQA7Kb6MZJ2FTAnEB8rMRrtgGIA
-	jTAKpKeDpsbqH7TwP1uuSar+DsLVADkgHlfrkfJcW91Qtln/FoWlqMlIdRJqQ5nh80B6
-	fc8Q==
-Received: by 10.50.152.236 with SMTP id vb12mr7381732igb.15.1355161937755;
-	Mon, 10 Dec 2012 09:52:17 -0800 (PST)
-Received: from cl-t066-141cl.privatedns.com.gmail.com (wkit.com.br.
-	[67.205.85.241])
-	by mx.google.com with ESMTPS id bg10sm6452818igc.6.2012.12.10.09.52.16
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XfZ0/fL/XNLSzzH+wxbIaw40xuf5QUh9EEnTogomVy8=;
+	b=YDxvs3T5Bg/5qntMV2QBzg5ZTd5SCCv7GALUqSD/JvRCVpursTQTjJMjVN1PSryZ8F
+	GKcwmz2xXQHJYJJJuJvz77IcuG3MQBl4R9imovAyIg0Bj6TCZWwDvdaS8pMOotLYCyJc
+	VroelAtTPmJmWv/k8GA+gloZcPl+qWh0KmXHifW/ub9stKKnDI5LngrsRFHQuHtkivw7
+	5OQ13z5zy3uVOkdkvHWgVDv6cqTBf+p8CgMFnj8msO13FJrtdcL7gcOSUNz7rqdkt5t+
+	fd9NcMKCE+GS8mZxnCq5zRQj+uD2+iFoHMg9QsPXv9vidILBZ+aPfmR2Vnx+3afnPlRu
+	AIkw==
+Received: by 10.180.20.109 with SMTP id m13mr12478778wie.16.1355164228020;
+	Mon, 10 Dec 2012 10:30:28 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id y3sm11148804wix.6.2012.12.10.10.30.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 10 Dec 2012 09:52:16 -0800 (PST)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: Eric =?utf-8?Q?B=C3=A9nard?= <eric@eukrea.com>
-References: <CAP9ODKp6urgcSXNyfzsQhUnEDXoE_R4G0DhWS5iu7fS5OqW9Rw@mail.gmail.com>
-	<20121210124359.15b4543e@eb-e6520>
-Date: Mon, 10 Dec 2012 12:39:13 -0500
-In-Reply-To: <20121210124359.15b4543e@eb-e6520> ("Eric
-	\=\?utf-8\?Q\?B\=C3\=A9na\?\=
-	\=\?utf-8\?Q\?rd\=22's\?\= message of
-	"Mon, 10 Dec 2012 12:43:59 +0100")
-Message-ID: <85r4mx958e.fsf@cl-t066-141cl.privatedns.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.2 (gnu/linux)
+	Mon, 10 Dec 2012 10:30:27 -0800 (PST)
+Date: Mon, 10 Dec 2012 19:30:31 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121210183031.GA3331@jama.jama.net>
+References: <20121210105047.B3BC61033D@opal>
+	<CAK18fxE0L2riJGvnK9LkZPF=Q7JUxPkKykKFZXwbsm0mnD_G2Q@mail.gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
-Subject: Re: [for-danny] Hashes for backporting to danny
+In-Reply-To: <CAK18fxE0L2riJGvnK9LkZPF=Q7JUxPkKykKFZXwbsm0mnD_G2Q@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : Revert "qt4: rename bbappends to match new 4.8. 4 version from oe-core"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,46 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Dec 2012 18:06:51 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 10 Dec 2012 18:44:59 -0000
+X-Groupsio-MsgNum: 42064
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="/04w6evG8XlLl3ft"
+Content-Disposition: inline
+
+--/04w6evG8XlLl3ft
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Eric,
+On Mon, Dec 10, 2012 at 12:51:15PM +0200, Andrei Gherzan wrote:
+> Any chance to have this merged soon?
 
-On Mon, 10 Dec 2012 12:43:59 +0100 Eric B=C3=A9nard <eric@eukrea.com> wrote:
+Are you asking about oe-core patch? Because asking about merging
+something on oe-commits ML does not make much sense.
 
-> Le Tue, 4 Dec 2012 10:11:10 -0200,
-> Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
->> Here goes the list of patches we'd like to have backported to danny so we
->> can use danny branch for one product at O.S. Systems:
->>=20
->>  * freerdp: disable man pages generation
->> (638f02695550bee4f941439cc2d1293c599b4a1f)
->>=20
->>  * freerdp: update to the latest commit (2012-11-20) in the stable-1.0
->> branch (e7e3fd797b46a85ffc03cc7c4b2267d686476f93)
->>=20
->>  * openbox: separate package for configuration files (openbox-config)
->> (3becce8504033dfac7c497fa12675f873a5df9e0)
->>=20
->>  * xinput-calibrator: update to 2012 Aug 2nd's git snapshot
->> (3cd0866c28822d08e5817d4d806b8deaa368c711)
->>=20
->>  * xinput-calibrator: update meta-systemd's bbappend to 2012 Aug 2nd's g=
-it
->> snapshot (23c9e5d6c4f66df8604c42a19e343d952784fc46)
->>=20
-> pushed to danny-next, please check the result is what you expect.
+Cheers,
 
-Thank you.  I've build those packages out of a freshly-cloned danny-next
-branch and everything went smoothly.
+> *Andrei Gherzan*
+> mobile +40.744.478.414  fax +40.31.816.28.12
+> Email: andrei@gherzan.ro
+> Email: andrei.gherzan@windriver.com
+> Romania
+>=20
+>=20
+>=20
+> On Mon, Dec 10, 2012 at 12:50 PM, <git@git.openembedded.org> wrote:
+>=20
+> > Module: meta-openembedded.git
+> > Branch: master
+> > Commit: 9c2eee256d52e7ee40163542381d8d2691bd5bfe
+> > URL:
+> > http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=3D9=
+c2eee256d52e7ee40163542381d8d2691bd5bfe
+> >
+> > Author: Koen Kooi <koen@dominion.thruhere.net>
+> > Date:   Mon Dec 10 11:47:42 2012 +0100
+> >
+> > Revert "qt4: rename bbappends to match new 4.8.4 version from oe-core"
+> >
+> > The recipes aren't in OE-core yet
+> >
+> > This reverts commit 421a73c9c3bea13e029cd0505711ef02753949bb.
+> >
+> > ---
+> >
+> >  ..._4.8.4.bbappend =3D> qt4-embedded_4.8.3.bbappend} |    0
+> >  ..._4.8.4.bbappend =3D> qt4-x11-free_4.8.3.bbappend} |    0
+> >  2 files changed, 0 insertions(+), 0 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+> > b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+> > similarity index 100%
+> > rename from meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+> > rename to meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+> > diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+> > b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
+> > similarity index 100%
+> > rename from meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+> > rename to meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
+> >
+> >
+> > _______________________________________________
+> > Openembedded-commits mailing list
+> > Openembedded-commits@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> >
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
-Maybe the patch
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-December/04281=
-1.html
-should be applied too.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Best wishes.
-Mario
+--/04w6evG8XlLl3ft
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlDGKkcACgkQN1Ujt2V2gBwLBACeIN1n5eP0X4yMPTzSWSUrVgSy
+tXwAoI199XzN/wBfSo3NkwgawP/mqbQm
+=qKdS
+-----END PGP SIGNATURE-----
+
+--/04w6evG8XlLl3ft--
