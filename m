@@ -1,32 +1,32 @@
-Received: from mail-ie0-f171.google.com ([209.85.223.171])
+Received: from mail-ie0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TiUJK-0001eb-6Q
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TiUJn-0001hw-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 19:12:06 +0100
-Received: by mail-ie0-f171.google.com with SMTP id 17so16201401iea.16
+	Tue, 11 Dec 2012 19:12:35 +0100
+Received: by mail-ie0-f179.google.com with SMTP id k14so12878109iea.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 09:57:33 -0800 (PST)
+	Tue, 11 Dec 2012 09:58:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=IRGs4fjGlvqLoWeH786FICDowonkYlxq/uCj7CdJdZE=;
-	b=Obdzs/dfVuDPRkbKqFE3J8FUPYi8fTYRwvgHSN63ESjm9Gal2Y3J6hjIAEAwbLI1IH
-	Mk0fCbMVD4cib8o6V2IRYBJIAOsC6CuvgNUvnlbAMijyb0P5UQITyH3uu4Mj18Ezqdha
-	mU2xxyMigfyFqRKmlG2GhnSs545YukgwGIjLZQE5OVRcVh/wHIqEaGqi2sHYZPIEHjpa
-	3AZfTWb2DFAJxpmeI34xawiJ/LrwMd+trUo9DMjGiYiwm5EHtca233lyndlZWPIQo5Rv
-	lmPt9+UFVFk2Rf7hMO/5Kio1DQt+q+ZvWdHqTZPSGQCiXZP5AobGqvOUKOeMp65TWWn4
-	lmag==
+	bh=dtn6IzeCsUvZfEKrRx8OSqc1GgCBhkhJKsR/bn8+1l0=;
+	b=pyATPpNugKLWeTcaSdQfFauAf2Dv0FcXMiBeuXMIH6GGzmLdQIhuHMLXXKHLMCXtkv
+	OtX1zgyIj5urL1kxnmHzWZhA+H0URA8xBzOq/tu6znVWky2uRN1cV5J5YUzDZLotxc9R
+	5hOdsagrWu5Og7ap6nxdLArnMqaWZyXQ2eZ/1FG2YVvjxKjtvNgBic6KCgT/QPIbIytd
+	AkJMpFr6iMPe3Rm48GpS94tSYwN2PwceFuxfWjnSsoJzGNiOYPQgdK4Sj8Z37iqmI/LL
+	uhRn1z/WLW731nlUSd96mEJUCM9alvYgurWYc08c42Q/vNxwT2OsUuk4JxByvProIcHv
+	hCfg==
 MIME-Version: 1.0
-Received: by 10.50.207.70 with SMTP id lu6mr10824120igc.50.1355248653040; Tue,
-	11 Dec 2012 09:57:33 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Tue, 11 Dec 2012 09:57:32 -0800 (PST)
-In-Reply-To: <1355222922-14422-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1355222922-14422-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Tue, 11 Dec 2012 18:57:32 +0100
-Message-ID: <CALbNGRQ78cS6WmooLBav=mYJZsSc34jUKF5CK-sEVCqbW8s53Q@mail.gmail.com>
+Received: by 10.50.152.240 with SMTP id vb16mr11016557igb.45.1355248682653;
+	Tue, 11 Dec 2012 09:58:02 -0800 (PST)
+Received: by 10.64.20.113 with HTTP; Tue, 11 Dec 2012 09:58:02 -0800 (PST)
+In-Reply-To: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
+References: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
+Date: Tue, 11 Dec 2012 18:58:02 +0100
+Message-ID: <CALbNGRT1E9u1Ti8b7yfLVp-zB_S+uqZJBGU30TuP6sGMDPkgSg@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] iceauth: Add native build
+Subject: Re: [meta-xfce] xfce4-session: Add depends to iceauth-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +40,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 18:12:06 -0000
+X-List-Received-Date: Tue, 11 Dec 2012 18:12:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 11, 2012 at 11:48 AM, Samuel Stirtzel
+On Tue, Dec 11, 2012 at 11:49 AM, Samuel Stirtzel
 <s.stirtzel@googlemail.com> wrote:
-> Some recipes require iceauth native (eg. xfce4-session)
-> Without this patch they would use the build-hosts iceauth
+> xfce4-session depends on iceauth for do_configure
+>
+> This fixes:
+> checking for iceauth... /usr/bin/iceauth
+>
+> And it fixes for X-less systems:
+> checking for iceauth... no
+> configure: error: iceauth missing, please check your X11 installation
 >
 > Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
 > ---
->  meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb |    4 +++-
+>  .../xfce4-session/xfce4-session_4.10.0.bb          |    4 +++-
 >  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb b/meta-oe=
-/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-> index d3fbd13..4cb3b26 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-> @@ -2,7 +2,9 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
->  DESCRIPTION =3D "Tool for manipulating ICE protocol authorization record=
-s"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D13f70acf3c27f5f834bbc954df775=
-f8e"
->  DEPENDS +=3D "libice"
-> -PR =3D "r6"
-> +PR =3D "r7"
+> diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb=
+ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> index 4df9894..136e928 100644
+> --- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> +++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> @@ -2,9 +2,11 @@ DESCRIPTION =3D "xfce4-session is a session manager for =
+Xfce 4 Desktop Environment
+>  SECTION =3D "x11"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9ac2e7cff1ddaf48b6eab6028f23e=
+f88"
+> -DEPENDS =3D "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck d=
+bus dbus-glib xfconf gnome-keyring"
+> +DEPENDS =3D "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck d=
+bus dbus-glib xfconf gnome-keyring iceauth-native"
+>  RDEPENDS_${PN} =3D "netbase xinit dbus-x11 iceauth consolekit upower"
 >
->  SRC_URI[md5sum] =3D "bb2e4d2611047f7c5a1a82ec956a9de4"
->  SRC_URI[sha256sum] =3D "0ee6fd4554f0131b1ed526ee00b9cf643e7dc97eb70fb514=
-48848ef2f349938d"
+> +PR =3D "r1"
 > +
-> +BBCLASSEXTEND =3D "native"
-> \ No newline at end of file
+>  inherit xfce
+>
+>  SRC_URI[md5sum] =3D "4768e1a41a0287af6aad18b329a0f230"
 > --
 > 1.7.9.5
->
 Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 
 
