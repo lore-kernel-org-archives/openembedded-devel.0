@@ -1,32 +1,32 @@
-Received: from mail-ie0-f179.google.com ([209.85.223.179])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TiUJn-0001hw-KQ
+	(envelope-from <andrea.adami@gmail.com>) id 1TiXze-0003Pd-MI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 19:12:35 +0100
-Received: by mail-ie0-f179.google.com with SMTP id k14so12878109iea.24
+	Tue, 11 Dec 2012 23:08:06 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2531457eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 09:58:02 -0800 (PST)
+	Tue, 11 Dec 2012 13:53:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=dtn6IzeCsUvZfEKrRx8OSqc1GgCBhkhJKsR/bn8+1l0=;
-	b=pyATPpNugKLWeTcaSdQfFauAf2Dv0FcXMiBeuXMIH6GGzmLdQIhuHMLXXKHLMCXtkv
-	OtX1zgyIj5urL1kxnmHzWZhA+H0URA8xBzOq/tu6znVWky2uRN1cV5J5YUzDZLotxc9R
-	5hOdsagrWu5Og7ap6nxdLArnMqaWZyXQ2eZ/1FG2YVvjxKjtvNgBic6KCgT/QPIbIytd
-	AkJMpFr6iMPe3Rm48GpS94tSYwN2PwceFuxfWjnSsoJzGNiOYPQgdK4Sj8Z37iqmI/LL
-	uhRn1z/WLW731nlUSd96mEJUCM9alvYgurWYc08c42Q/vNxwT2OsUuk4JxByvProIcHv
-	hCfg==
-MIME-Version: 1.0
-Received: by 10.50.152.240 with SMTP id vb16mr11016557igb.45.1355248682653;
-	Tue, 11 Dec 2012 09:58:02 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Tue, 11 Dec 2012 09:58:02 -0800 (PST)
-In-Reply-To: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
-Date: Tue, 11 Dec 2012 18:58:02 +0100
-Message-ID: <CALbNGRT1E9u1Ti8b7yfLVp-zB_S+uqZJBGU30TuP6sGMDPkgSg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=rvW/bhTlfVU9nyj3/StKAzP+nQCOK1e84r5nt2R2NOg=;
+	b=NUQIZ/35vXujmL4aYqoP5PbW44O0JM3UlINV3A20AkUIjPiENfSoSiMKRiU4eMuzW1
+	xz95pxzSfqAMhQ459tt8FBKpVaQ5m3yMWCbsDepZgAtoV+R2/VYQC6unJk//lNnfvWWn
+	QU7Ff8fEyOF6BWc6wk5Z+PWkW43oLQAvecMm2+he2ydisYoBPdTh+8LlbdBxKB9ipj4W
+	2ku4Q6fJlta+qnYvTHN3T+jCy+FfisJFMtjOSKH4Ypp21nb550oijrFXuCm8aIu+ADzY
+	0wcfvg7nwkyyp/MlxedTXbIx8hik7xa5N92DS2xrgAG5N1stAXgYF1NkTZyU89FHYSLZ
+	/CdA==
+Received: by 10.14.204.198 with SMTP id h46mr55814817eeo.1.1355262810155;
+	Tue, 11 Dec 2012 13:53:30 -0800 (PST)
+Received: from mizar.localdomain
+	(host85-229-dynamic.1-79-r.retail.telecomitalia.it. [79.1.229.85])
+	by mx.google.com with ESMTPS id b2sm52258386eep.9.2012.12.11.13.53.28
+	(version=SSLv3 cipher=OTHER); Tue, 11 Dec 2012 13:53:29 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce] xfce4-session: Add depends to iceauth-native
+Date: Tue, 11 Dec 2012 22:53:24 +0100
+Message-Id: <1355262804-2872-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [meta-handheld][PATCH] linux-yocto_3.4.bbappend: restrict DEFAULT_PREFERENCE to Zaurus only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,50 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 18:12:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Dec 2012 22:08:06 -0000
 
-On Tue, Dec 11, 2012 at 11:49 AM, Samuel Stirtzel
-<s.stirtzel@googlemail.com> wrote:
-> xfce4-session depends on iceauth for do_configure
->
-> This fixes:
-> checking for iceauth... /usr/bin/iceauth
->
-> And it fixes for X-less systems:
-> checking for iceauth... no
-> configure: error: iceauth missing, please check your X11 installation
->
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-> ---
->  .../xfce4-session/xfce4-session_4.10.0.bb          |    4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb=
- b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-> index 4df9894..136e928 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-> @@ -2,9 +2,11 @@ DESCRIPTION =3D "xfce4-session is a session manager for =
-Xfce 4 Desktop Environment
->  SECTION =3D "x11"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9ac2e7cff1ddaf48b6eab6028f23e=
-f88"
-> -DEPENDS =3D "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck d=
-bus dbus-glib xfconf gnome-keyring"
-> +DEPENDS =3D "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck d=
-bus dbus-glib xfconf gnome-keyring iceauth-native"
->  RDEPENDS_${PN} =3D "netbase xinit dbus-x11 iceauth consolekit upower"
->
-> +PR =3D "r1"
-> +
->  inherit xfce
->
->  SRC_URI[md5sum] =3D "4768e1a41a0287af6aad18b329a0f230"
-> --
-> 1.7.9.5
-Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-yocto_3.4.bbappend |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-yocto_3.4.bbappend b/recipes-kernel/linux/linux-yocto_3.4.bbappend
+index 59e0fb4..7772dde 100644
+--- a/recipes-kernel/linux/linux-yocto_3.4.bbappend
++++ b/recipes-kernel/linux/linux-yocto_3.4.bbappend
+@@ -2,7 +2,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.4:${THISDIR}/${PN}:${THISDIR}/fil
+ 
+ COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
+ 
+-DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_akita = "-1"
++DEFAULT_PREFERENCE_c7x0 = "-1"
++DEFAULT_PREFERENCE_collie = "-1"
++DEFAULT_PREFERENCE_poodle = "-1"
++DEFAULT_PREFERENCE_spitz = "-1"
++DEFAULT_PREFERENCE_tosa = "-1"
+ 
+ KMACHINE_akita = "akita"
+ KMACHINE_c7x0 = "c7x0"
+-- 
+1.7.8.6
+
 
 
