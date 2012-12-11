@@ -1,32 +1,32 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1TiXze-0003Pd-MI
+	(envelope-from <andrea.adami@gmail.com>) id 1TiZOG-0004pD-5z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 23:08:06 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2531457eek.6
+	Wed, 12 Dec 2012 00:37:32 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so13717eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 13:53:30 -0800 (PST)
+	Tue, 11 Dec 2012 15:22:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=rvW/bhTlfVU9nyj3/StKAzP+nQCOK1e84r5nt2R2NOg=;
-	b=NUQIZ/35vXujmL4aYqoP5PbW44O0JM3UlINV3A20AkUIjPiENfSoSiMKRiU4eMuzW1
-	xz95pxzSfqAMhQ459tt8FBKpVaQ5m3yMWCbsDepZgAtoV+R2/VYQC6unJk//lNnfvWWn
-	QU7Ff8fEyOF6BWc6wk5Z+PWkW43oLQAvecMm2+he2ydisYoBPdTh+8LlbdBxKB9ipj4W
-	2ku4Q6fJlta+qnYvTHN3T+jCy+FfisJFMtjOSKH4Ypp21nb550oijrFXuCm8aIu+ADzY
-	0wcfvg7nwkyyp/MlxedTXbIx8hik7xa5N92DS2xrgAG5N1stAXgYF1NkTZyU89FHYSLZ
-	/CdA==
-Received: by 10.14.204.198 with SMTP id h46mr55814817eeo.1.1355262810155;
-	Tue, 11 Dec 2012 13:53:30 -0800 (PST)
+	bh=ZxAwCcDVETK7J6/LmSOgsdH5nI15CPeWzXfBnfiDXfw=;
+	b=CnJcWSreydsQSAbPw4gX02DMxMWVK0pAvi6tCxBsEO05Qb9zGWWVavBZfwPEeLKPeI
+	5liL9prMQieGXZDQSW3kNi3TQHaj4rly0vwcv+k+vPL8Go0JJPTKh4DpP60pI5yedW1n
+	NSiWIXYXLI5Q8rWJeKOkz3kWkriVSUuyvwCAjXoG0XZ7Prp2tERufMnPyPiFFQv87c5F
+	XA/oyrH/YaHybvdpVZycbb64s/jSOJXXQxDxfUdkCYeuTojWA7fwj/scIj0w07UAgDht
+	4mhZL5zTUYRPHtdWw0JprgSVn8VzBBzvA4HRIg1edHpGsBSYp5RpaJ8nOCK35c6MEyng
+	QqsA==
+Received: by 10.14.206.197 with SMTP id l45mr65036509eeo.17.1355268179569;
+	Tue, 11 Dec 2012 15:22:59 -0800 (PST)
 Received: from mizar.localdomain
 	(host85-229-dynamic.1-79-r.retail.telecomitalia.it. [79.1.229.85])
-	by mx.google.com with ESMTPS id b2sm52258386eep.9.2012.12.11.13.53.28
-	(version=SSLv3 cipher=OTHER); Tue, 11 Dec 2012 13:53:29 -0800 (PST)
+	by mx.google.com with ESMTPS id 6sm40582357eea.3.2012.12.11.15.22.58
+	(version=SSLv3 cipher=OTHER); Tue, 11 Dec 2012 15:22:58 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Dec 2012 22:53:24 +0100
-Message-Id: <1355262804-2872-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 12 Dec 2012 00:22:54 +0100
+Message-Id: <1355268174-17953-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.8.6
-Subject: [meta-handheld][PATCH] linux-yocto_3.4.bbappend: restrict DEFAULT_PREFERENCE to Zaurus only
+Subject: [meta-initramfs][PATCH] kexecboot(-klibc): upgrade to b667914
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 22:08:06 -0000
+X-List-Received-Date: Tue, 11 Dec 2012 23:37:32 -0000
+
+* now including boot from ubifs
+* fixed extra menu redrawing
+* 24bpp fixes
+* first round of big-endian fixes
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-kernel/linux/linux-yocto_3.4.bbappend |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+ .../recipes-bsp/kexecboot/kexecboot-klibc_git.bb   |    4 ++--
+ .../recipes-bsp/kexecboot/kexecboot_git.bb         |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto_3.4.bbappend b/recipes-kernel/linux/linux-yocto_3.4.bbappend
-index 59e0fb4..7772dde 100644
---- a/recipes-kernel/linux/linux-yocto_3.4.bbappend
-+++ b/recipes-kernel/linux/linux-yocto_3.4.bbappend
-@@ -2,7 +2,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.4:${THISDIR}/${PN}:${THISDIR}/fil
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
+index da479c8..f9aee7c 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
+@@ -1,9 +1,9 @@
+ RDEPENDS_${PN} = "kexec-klibc"
+ PV = "0.5.9"
+-PR = "r9+gitr${SRCREV}"
++PR = "r10+gitr${SRCREV}"
  
- COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
+ SRC_URI = "git://github.com/kexecboot/kexecboot.git;protocol=git"
+-SRCREV = "0daa774eac019602cd89048961e95985ea50dadf"
++SRCREV = "b667914bb0cba1c30f9b771abccfe98f1419afeb"
+ S = "${WORKDIR}/git"
  
--DEFAULT_PREFERENCE = "-1"
-+DEFAULT_PREFERENCE_akita = "-1"
-+DEFAULT_PREFERENCE_c7x0 = "-1"
-+DEFAULT_PREFERENCE_collie = "-1"
-+DEFAULT_PREFERENCE_poodle = "-1"
-+DEFAULT_PREFERENCE_spitz = "-1"
-+DEFAULT_PREFERENCE_tosa = "-1"
+ # the binary is statically linked against klibc
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+index a3b4cde..fe1ef36 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+@@ -1,9 +1,9 @@
+ RDEPENDS_${PN} = "kexec"
+ PV = "0.5.9"
+-PR = "r9+gitr${SRCREV}"
++PR = "r10+gitr${SRCREV}"
  
- KMACHINE_akita = "akita"
- KMACHINE_c7x0 = "c7x0"
+ SRC_URI = "git://github.com/kexecboot/kexecboot.git;protocol=git"
+-SRCREV = "0daa774eac019602cd89048961e95985ea50dadf"
++SRCREV = "b667914bb0cba1c30f9b771abccfe98f1419afeb"
+ S = "${WORKDIR}/git"
+ 
+ require kexecboot.inc
 -- 
 1.7.8.6
 
