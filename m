@@ -1,31 +1,38 @@
-Received: from mail-wi0-f173.google.com ([209.85.212.173])
+Received: from mail-vb0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TiNDG-0008VQ-Q0
+	(envelope-from <andrei@gherzan.ro>) id 1TiNM9-0000Gp-8E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 11:37:25 +0100
-Received: by mail-wi0-f173.google.com with SMTP id hn17so1868314wib.6
+	Tue, 11 Dec 2012 11:46:36 +0100
+Received: by mail-vb0-f47.google.com with SMTP id e21so3415255vbm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 02:22:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=o/2qop0xddpr/0otdmZOHbc6ciz8BzPshT+O2Mqn/zI=;
-	b=vIwAF/CZFb7qWqBdxxIuhrB0uLFQbIbqb00GyxcBMTSFwTWXyxUHwexuL9SJQeMm8Q
-	/OtOakPHSdQRS48uqw8nAHBXST27XWfjV17Qca7/GtIa28TWfDXchQsYh7MbH2U21IxJ
-	WlVzk7WKeWzGAL9I9qP+R8uZ70PT09cBQ0ler+s9iaVAgmnGAQbWwx9PrO7yen59nXHq
-	rGcWB92twqd/JBkRnjd8cGDmE+nuput1mbbhx+fzzCzXn3+5GEzZpWrqDwgVLq0eUBb0
-	cIeBfdYC9hIjlfrGjC5UI0btU3qsdSpIcHGmwpRSLHpC5Xqht3SQmE4kxSWSP9KJqhfF
-	Wvkw==
+	Tue, 11 Dec 2012 02:32:01 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:x-gm-message-state;
+	bh=J4ri4K23ySme9lv3zArGbiQmk0SPWaXjBUFfcFdNkdE=;
+	b=oNkFiwwQZBoErQ57oZVnyuGI87/bep20syK7LLIl+O5M1NmUKoEHqUTwZVtxnHjaAM
+	77QaVbis2ez6pBz0zAPOFM6mJCJtrElRmsAJqmFGmjxWYMpeE/+N2UCoRu2ymm2Le/hh
+	PwAcZ5dPzEN5I1MhXCH74OC00/gV7vbU6pMF7CFy6EssbDs02n+TxnSOp9E1mIUVLABP
+	a5v/wP7LHIeqEyfV4ohfxgSJTqO4eFJDswmOm7fd/r3ZACzrd+b4wFBOrMimBUpxkI4D
+	oOsEU4OhhSYIF4fmGWogEx0RhF4QyB330CMZLr5wTSdUIVqQ3B2KJHWqMKSjLsx9z4RB
+	H+rQ==
+Received: by 10.52.26.115 with SMTP id k19mr9413195vdg.67.1355221920770; Tue,
+	11 Dec 2012 02:32:00 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.194.76.99 with SMTP id j3mr462100wjw.47.1355221370795; Tue, 11
-	Dec 2012 02:22:50 -0800 (PST)
-Received: by 10.194.84.103 with HTTP; Tue, 11 Dec 2012 02:22:50 -0800 (PST)
-In-Reply-To: <1354318947-12109-1-git-send-email-andrea.adami@gmail.com>
-References: <1354318947-12109-1-git-send-email-andrea.adami@gmail.com>
-Date: Tue, 11 Dec 2012 11:22:50 +0100
-Message-ID: <CA+chaQfU+Ehchj46abTkNcAnFO5rCCq5xSeY85TSJHigHURQEw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH] linux-yocto_3.4: initial commit for Zaurus
+Received: by 10.58.102.132 with HTTP; Tue, 11 Dec 2012 02:31:40 -0800 (PST)
+X-Originating-IP: [89.121.200.106]
+In-Reply-To: <20121211081930.GA4841@jama.jama.net>
+References: <1355137229-16062-1-git-send-email-andrei.gherzan@windriver.com>
+	<20121211081930.GA4841@jama.jama.net>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Tue, 11 Dec 2012 12:31:40 +0200
+Message-ID: <CAK18fxETshGSdQi2+EeyJ+dyPykVfERdVUKSb-ArepsBKE4khg@mail.gmail.com>
+To: openembedded <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQnhxgDaDZtcuVIeClw/poFAZt7/7n2bfnbVJpSqFjkKfSP0FTfP1b1PE1fCZKb3DJj4QrTV
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
+Subject: Re: [meta-oe][meta-systemd][PATCH] lighttpd: Sync bbappend version with the one from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 10:37:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Dec 2012 10:46:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Dec 1, 2012 at 12:42 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> * based on linux-yocto-standard cfg fragments
-> * kernel 3.4 boots though size is too big
-> * put together pending/submitted patches
-> * for the moment DEFAULT_PREFERENCE = "-1"
+Thank you,
 
-This bbappend is changing D_P for all machines including qemu* where
-it's causing downgrade from 3.4 to 3.2 unless P_V is specified.
+Andrei
 
-Cheers,
 
+
+*Andrei Gherzan*
+mobile +40.744.478.414  fax +40.31.816.28.12
+Email: andrei@gherzan.ro
+Email: andrei.gherzan@windriver.com
+Romania
+
+
+
+On Tue, Dec 11, 2012 at 10:19 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
+
+> On Mon, Dec 10, 2012 at 01:00:29PM +0200, Andrei Gherzan wrote:
+> > Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
+> > ---
+> >  .../lighttpd/lighttpd_1.4.31.bbappend              |   10 ----------
+> >  .../lighttpd/lighttpd_1.4.32.bbappend              |   10 ++++++++++
+> >  2 files changed, 10 insertions(+), 10 deletions(-)
+> >  delete mode 100644
+> meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
+> >  create mode 100644
+> meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+>
+> Looks the same as
+> http://patchwork.openembedded.org/patch/40585/
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
