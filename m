@@ -1,33 +1,38 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-we0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TiNdM-00018o-QF
+	(envelope-from <martin.jansa@gmail.com>) id 1TiNtv-0001RU-KL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 12:04:21 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1466142eaa.6
+	Tue, 11 Dec 2012 12:21:34 +0100
+Received: by mail-we0-f175.google.com with SMTP id z53so1545535wey.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 02:49:46 -0800 (PST)
+	Tue, 11 Dec 2012 03:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=a2v2nAsPPsmxl0+DEJFswcWBu0t2azcHUvhXmByV8Uk=;
-	b=gfa3FGX+H0YISpiXeMdIlMqeakz2Aw3Iw8vC5tZp2od79dd3WmrwaygG48nVPeKww0
-	fjG4b5FPHl8j5lDy3fh3fkO12/4LMQQ/QBhOdgl/KCXyI6TofRK2y+rNEG3PMK+0cXyl
-	d+YSPSaPufkLKBn70uz2BwVIpiV5kjO0wJSQWtYD70/osKq1Y8rixmD5iavaf8091m4i
-	3hefTtgMmdhy5G/iLnauZek5ebM6DyQy92OilUlgLiDv2JfyOlB+ADjlzgmWJwpScXL3
-	Zm/3uE73DpdneSJpJbAdFebSA8G4VjcyUsfoo+YHfNzUJLsE9JqFxNeDrTGPE0Ugfq4i
-	5eZA==
-Received: by 10.14.225.72 with SMTP id y48mr59125325eep.46.1355222986606;
-	Tue, 11 Dec 2012 02:49:46 -0800 (PST)
-Received: from s-stirtzel-linux.zera.local
-	(ip-178-200-247-119.unitymediagroup.de. [178.200.247.119])
-	by mx.google.com with ESMTPS id f6sm27322631eeo.7.2012.12.11.02.49.45
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=EAOjuVzykn3CGyGjb44MrMWu70gXDAoee67+scBtUDs=;
+	b=t9YhUOWDRZ9L8fyir6cdCxu9lBvEQ9k5HFhuH4PzW+8NyTq442T6FjR3RX4G10WPSM
+	ggk56u4VJZh86GJFBol4dM762VdJlb8YtjiLU8KzQnGwvWWx8nKk2arr6DodJhN4LGRO
+	mqrBRV7XYQq4wJ2aUsdrrr4Rfv77Ogdr663nl8GwELRGnKbYDruChiMTleVTCG9Dv1Ox
+	F/9xLwgs2r4P13ooqVr+TWf5MUELoF36u/0v0Fub83cAvfoJs9mMP/0eO2XOfYSY2Fdp
+	VNbXFxeijGtlOsnF8gxBLR7wzXk2e2mdONGuQnOPxeHeKhiC7r2BHzD6f7f37/Qswsun
+	B6gA==
+Received: by 10.181.13.75 with SMTP id ew11mr16101018wid.9.1355224015675;
+	Tue, 11 Dec 2012 03:06:55 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id s10sm1018014wiw.4.2012.12.11.03.06.54
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Dec 2012 02:49:45 -0800 (PST)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Tue, 11 Dec 2012 03:06:55 -0800 (PST)
+Date: Tue, 11 Dec 2012 12:07:09 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Dec 2012 11:49:36 +0100
-Message-Id: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-xfce] xfce4-session: Add depends to iceauth-native
+Message-ID: <20121211110709.GA2035@jama.jama.net>
+References: <1354318947-12109-1-git-send-email-andrea.adami@gmail.com>
+	<CA+chaQfU+Ehchj46abTkNcAnFO5rCCq5xSeY85TSJHigHURQEw@mail.gmail.com>
+	<CAAQYJAsR7PHXN1=TP9emD0eaon+7ZC=4erkZoyzOjK=BVvySuA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAAQYJAsR7PHXN1=TP9emD0eaon+7ZC=4erkZoyzOjK=BVvySuA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-handheld][PATCH] linux-yocto_3.4: initial commit for Zaurus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 11:04:22 -0000
+X-List-Received-Date: Tue, 11 Dec 2012 11:21:34 -0000
+X-Groupsio-MsgNum: 42082
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ikeVEW9yuYc//A+q"
+Content-Disposition: inline
 
-xfce4-session depends on iceauth for do_configure
+--ikeVEW9yuYc//A+q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This fixes:
-checking for iceauth... /usr/bin/iceauth
+On Tue, Dec 11, 2012 at 11:39:37AM +0100, Andrea Adami wrote:
+> On Tue, Dec 11, 2012 at 11:22 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Sat, Dec 1, 2012 at 12:42 AM, Andrea Adami <andrea.adami@gmail.com> =
+wrote:
+> >> * based on linux-yocto-standard cfg fragments
+> >> * kernel 3.4 boots though size is too big
+> >> * put together pending/submitted patches
+> >> * for the moment DEFAULT_PREFERENCE =3D "-1"
+> >
+> > This bbappend is changing D_P for all machines including qemu* where
+> > it's causing downgrade from 3.4 to 3.2 unless P_V is specified.
+>=20
+> My bad.
+> Should I limit it setting specificly DEFAULT_PREFERENCE_spitz =3D "-1"
+> and so on for other machines?
 
-And it fixes for X-less systems:
-checking for iceauth... no
-configure: error: iceauth missing, please check your X11 installation
+Yes that would be better.
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- .../xfce4-session/xfce4-session_4.10.0.bb          |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Cheers,
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-index 4df9894..136e928 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-@@ -2,9 +2,11 @@ DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring"
-+DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring iceauth-native"
- RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
- 
-+PR = "r1"
-+
- inherit xfce
- 
- SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
--- 
-1.7.9.5
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--ikeVEW9yuYc//A+q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlDHE90ACgkQN1Ujt2V2gBx2JQCgqcYsUMO25rDKdOoo1X2EDeyX
+Ml4An1ul7W8cv+yc55nceNOh0J2/INvH
+=itAJ
+-----END PGP SIGNATURE-----
+
+--ikeVEW9yuYc//A+q--
