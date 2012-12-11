@@ -1,33 +1,33 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1TiNcr-00015D-Ix
+	(envelope-from <s.stirtzel@googlemail.com>) id 1TiNdM-00018o-QF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 12:03:49 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2136170eek.6
+	Tue, 11 Dec 2012 12:04:21 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1466142eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Dec 2012 02:49:17 -0800 (PST)
+	Tue, 11 Dec 2012 02:49:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=59HSdsGGcdK1m64rPq0zFHAtNACRGjTGTKnQdxfR5Dg=;
-	b=V9bVwYtmUrpVFm7AgXSbQdFPXhGlBAqbPaWhEYykseeRnmvBPIeHGYM+Cv54k6l17D
-	dHUPXqK6fDs5QhBTPZ3FbMpuCHsMFXwMvIe2VRgEE2LGaHPTQlX8D3WCHZWk19cNYCmw
-	bo5jbo/wg9j44C3ZACijz03PtPacOMJNh04AWMycMTkGG3ExpvlKyHUolapHq6c8Rw3H
-	vJEBWR1Njl5Tkrqk33mLT921y/6WXrt4gRo8PKyDQ4Y2vdhufi5oWCLIKMfItzH+drjt
-	XJEO+DncXk76Z5+gqpJxCUJ7zgKyNl98m612yf2+vE92qQObQSksAGDZd2HfnZSBDSYq
-	T79w==
-Received: by 10.14.221.65 with SMTP id q41mr59373505eep.30.1355222957552;
-	Tue, 11 Dec 2012 02:49:17 -0800 (PST)
+	bh=a2v2nAsPPsmxl0+DEJFswcWBu0t2azcHUvhXmByV8Uk=;
+	b=gfa3FGX+H0YISpiXeMdIlMqeakz2Aw3Iw8vC5tZp2od79dd3WmrwaygG48nVPeKww0
+	fjG4b5FPHl8j5lDy3fh3fkO12/4LMQQ/QBhOdgl/KCXyI6TofRK2y+rNEG3PMK+0cXyl
+	d+YSPSaPufkLKBn70uz2BwVIpiV5kjO0wJSQWtYD70/osKq1Y8rixmD5iavaf8091m4i
+	3hefTtgMmdhy5G/iLnauZek5ebM6DyQy92OilUlgLiDv2JfyOlB+ADjlzgmWJwpScXL3
+	Zm/3uE73DpdneSJpJbAdFebSA8G4VjcyUsfoo+YHfNzUJLsE9JqFxNeDrTGPE0Ugfq4i
+	5eZA==
+Received: by 10.14.225.72 with SMTP id y48mr59125325eep.46.1355222986606;
+	Tue, 11 Dec 2012 02:49:46 -0800 (PST)
 Received: from s-stirtzel-linux.zera.local
 	(ip-178-200-247-119.unitymediagroup.de. [178.200.247.119])
-	by mx.google.com with ESMTPS id k4sm42711894eep.15.2012.12.11.02.49.16
+	by mx.google.com with ESMTPS id f6sm27322631eeo.7.2012.12.11.02.49.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 11 Dec 2012 02:49:16 -0800 (PST)
+	Tue, 11 Dec 2012 02:49:45 -0800 (PST)
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Dec 2012 11:48:42 +0100
-Message-Id: <1355222922-14422-1-git-send-email-s.stirtzel@googlemail.com>
+Date: Tue, 11 Dec 2012 11:49:36 +0100
+Message-Id: <1355222976-14461-1-git-send-email-s.stirtzel@googlemail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe] iceauth: Add native build
+Subject: [meta-xfce] xfce4-session: Add depends to iceauth-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 11:03:50 -0000
+X-List-Received-Date: Tue, 11 Dec 2012 11:04:22 -0000
 
-Some recipes require iceauth native (eg. xfce4-session)
-Without this patch they would use the build-hosts iceauth
+xfce4-session depends on iceauth for do_configure
+
+This fixes:
+checking for iceauth... /usr/bin/iceauth
+
+And it fixes for X-less systems:
+checking for iceauth... no
+configure: error: iceauth missing, please check your X11 installation
 
 Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
 ---
- meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb |    4 +++-
+ .../xfce4-session/xfce4-session_4.10.0.bb          |    4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-index d3fbd13..4cb3b26 100644
---- a/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/iceauth_1.0.4.bb
-@@ -2,7 +2,9 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
- DESCRIPTION = "Tool for manipulating ICE protocol authorization records"
- LIC_FILES_CHKSUM = "file://COPYING;md5=13f70acf3c27f5f834bbc954df775f8e"
- DEPENDS += "libice"
--PR = "r6"
-+PR = "r7"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+index 4df9894..136e928 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+@@ -2,9 +2,11 @@ DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+-DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring"
++DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring iceauth-native"
+ RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
  
- SRC_URI[md5sum] = "bb2e4d2611047f7c5a1a82ec956a9de4"
- SRC_URI[sha256sum] = "0ee6fd4554f0131b1ed526ee00b9cf643e7dc97eb70fb51448848ef2f349938d"
++PR = "r1"
 +
-+BBCLASSEXTEND = "native"
-\ No newline at end of file
+ inherit xfce
+ 
+ SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
 -- 
 1.7.9.5
 
