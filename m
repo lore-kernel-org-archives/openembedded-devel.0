@@ -1,26 +1,39 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1TiQO4-0004mP-91
+	(envelope-from <otavio.salvador@gmail.com>) id 1TiREp-0005ag-Hl
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Dec 2012 15:00:50 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 11 Dec 2012 05:46:11 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,259,1355126400"; d="scan'208";a="179393366"
-Received: from unknown (HELO helios.localnet) ([10.252.122.234])
-	by AZSMGA002.ch.intel.com with ESMTP; 11 Dec 2012 05:46:10 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Dec 2012 13:46:08 +0000
-Message-ID: <7705762.IhEbGrFqxK@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.9.3 (Linux/3.5.0-19-generic; KDE/4.9.3; i686; ; )
-In-Reply-To: <ka794i$apv$1@ger.gmane.org>
+	Tue, 11 Dec 2012 15:55:16 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa10so2580826pad.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Dec 2012 06:40:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=89WTG+WDTNEAdBMdIO365UmP1u5Vi3Dj3MxlygEwzaw=;
+	b=H661uLnlItHUp5EOxAkPzn2aEQSgVmifv7fBa5BfNX8Ttik4jackTfNBty4pSn+Igj
+	nhPhDoEo5jqatjLPJnv5VVrFdSnctpijxEk3HLNQUPbVrzs5OmzHKpvbHBNB9R/7sWpF
+	gcNUKALZzrL9sOowi6rJTPIEznIzHoqVrPdbHV7qNcP3Q2rKg6lxfXkiofAamhnZMyYb
+	gdZJXW+hxFmP9OU53HEn4R1W9RlQGs/0x/r4/LOnapTdWPx8y5C3yuVYSt+TahZ4/o1f
+	R3YN+jHjmtui7ZrUEPEsLacCW0J9//dPTr/oqMZe4PZ4ObcQxVavjlbhZdc5ySVABWla
+	RExQ==
+MIME-Version: 1.0
+Received: by 10.68.213.33 with SMTP id np1mr49036477pbc.64.1355236842549; Tue,
+	11 Dec 2012 06:40:42 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.68.51.193 with HTTP; Tue, 11 Dec 2012 06:40:42 -0800 (PST)
+In-Reply-To: <49c232118052aeef2336aafff464603cf6771eb9.1355187290.git.Martin.Jansa@gmail.com>
 References: <cover.1354586187.git.Martin.Jansa@gmail.com>
 	<cover.1355187290.git.Martin.Jansa@gmail.com>
-	<ka794i$apv$1@ger.gmane.org>
-MIME-Version: 1.0
-Subject: Re: [PATCH 00/90] [meta-oe] Small fixes from bitbake world - updated cover letter
+	<fb4647c716848b803f2fe32036cce38855c93159.1355187290.git.Martin.Jansa@gmail.com>
+	<49c232118052aeef2336aafff464603cf6771eb9.1355187290.git.Martin.Jansa@gmail.com>
+Date: Tue, 11 Dec 2012 12:40:42 -0200
+X-Google-Sender-Auth: AIH6m9zYtUMDa4OlLvtmtmJeRWw
+Message-ID: <CAP9ODKrmXf3FQ4ax=R6qmk7wAGxOrdgvhJwJ=JnT_K1n4kUF-g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 88/90] openbox: fix PR format and use new update-alternatives syntax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 14:00:50 -0000
-X-List-Received-Date: Tue, 11 Dec 2012 14:00:50 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 11 Dec 2012 14:55:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tuesday 11 December 2012 13:32:24 Koen Kooi wrote:
-> Op 11-12-12 02:04, Martin Jansa schreef:
-> > As builder was finishing more recipes in world build, I've added few
-> > more commits to this branch and also sent some v2
-> > 
-> > Here is updated cover letter.
-> > 
-> > I've also forget to set [meta-oe] prefix for individual commits, only
-> > cover letter has it, but I guess that nobody will try to apply 90
-> > commits from patchwork.. and merging this branch should work fine.
-> 
-> Any objections to merging this branch?
+On Mon, Dec 10, 2012 at 11:00 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-The vpnc recipe could do with a bit of cleanup but nothing major, so it can 
-wait until after this is merged. Other than that it all looks good to me, 
-FWIW.
+> * fixes:
+>   NOTE: recipe openbox-3.5.0-1: task do_package: Started
+>   WARNING: openbox: Use of ALTERNATIVE_NAME is deprecated, see
+>   update-alternatives.bbclass for more info.
+> * bump PE if you care about upgrade path from wrong PR, introduced in
+>   commit 3becce8504033dfac7c497fa12675f873a5df9e0
+>   Author: Mario Domenech Goulart <mario@ossystems.com.br>
+>   Date:   Mon Dec 3 16:03:23 2012 +0000
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
 
-Cheers,
-Paul
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Eric, please add it to danny as well. This was not catch by me when
+reviewing Mario's patch. Sorry.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
