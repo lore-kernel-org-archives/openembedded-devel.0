@@ -1,37 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tikdr-0008Nc-E5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tikpd-0000Gg-P3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2012 12:38:30 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so457349pbc.6
+	Wed, 12 Dec 2012 12:50:35 +0100
+Received: by mail-bk0-f47.google.com with SMTP id j4so262289bkw.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2012 03:23:49 -0800 (PST)
+	Wed, 12 Dec 2012 03:36:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=NjYJksdDcQ9XjsDmRYO0hAPKQtUVu5prf5o+ANFZpBg=;
-	b=f5epGhqUZNaMAWgxQXCyxWgwe8DXBIQv472/rQhRK4yvaANH8tnWfY037LKsCHqiUt
-	8Epd7L0M9ZNSf1kv0UFsIgGqARVAf4QC5o2usXc41GLbCJpZLpp7D1C/2EiIG676fCBc
-	PqRYZlI3GdIERIlctaP2eD3aum1DVHHYO971KhVvHhstIQcnyl+iwyVei9RTgK4ggqR9
-	Lm7ugIR/hlc2HMJPYiv8ZOobftwg2s6Qwu10vauUPQ7/oEnfTMlo4BlHfAjMx72Ok0SX
-	ukoP95zcCaoad3KAdUojaqIOgrdj07Rfy3+Bd/J9ji3APcCZnF/PTTywgKAp+WoLalnF
-	kB2Q==
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=6Qd1U6U1dGApf7L3QTwNwL8OWWx1IFsHM2FWKuQCNeI=;
+	b=Te0bYctKr99ClILlIn/xtcJ+DwikwAtFpBDMyUuOuYJ0W7qcYgr7NVphRbpTQUTGmN
+	igsJMqGDpW4EDUTJj9daDtcVu63nFcQbhJ/Ro5AfDbLziPkKmuJtZTENg8ge6SwipC2c
+	LhdXk9a0d8lfKMv38J5HnHsB3vpc9TN5fOo1cKN5SbUAl4Yl6DKMLxt8RSYQrmIVpgKw
+	kZzAouNSG9QgSvfTFFCrJjK+0Do6fNU/1kiGbeyE1PB9AAfB6iq8fYDb0N6gvfKorJze
+	RyfkN0dnVi0uICcZvK5D51J1Np6zJGozMExG/f6uD80WUIshUoCjWhpbGZeSrEARYyQb
+	YSew==
+Received: by 10.204.4.81 with SMTP id 17mr383826bkq.137.1355312160299;
+	Wed, 12 Dec 2012 03:36:00 -0800 (PST)
+Received: from localhost.localdomain (p4FDF1E51.dip.t-dialin.net.
+	[79.223.30.81])
+	by mx.google.com with ESMTPS id e22sm19861411bke.14.2012.12.12.03.35.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 12 Dec 2012 03:35:59 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Dec 2012 12:35:46 +0100
+Message-Id: <1355312146-24370-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-Received: by 10.66.52.79 with SMTP id r15mr1768897pao.46.1355311429178; Wed,
-	12 Dec 2012 03:23:49 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.51.193 with HTTP; Wed, 12 Dec 2012 03:23:49 -0800 (PST)
-In-Reply-To: <CA+chaQfuvaEKQnph6mOpZq=bCCKNe=yXd9g6dPkXjfq7aK_wyA@mail.gmail.com>
-References: <CAP9ODKqQGbR83_sXRzs=ATNLvZu9JF=HHPQcvM0j37cYV=jExw@mail.gmail.com>
-	<CAJTo0LYOB_dJZygwvp9S8BJ7eAxjVkZJk-m4BOzf2nHAa-9Zuw@mail.gmail.com>
-	<CA+chaQfuvaEKQnph6mOpZq=bCCKNe=yXd9g6dPkXjfq7aK_wyA@mail.gmail.com>
-Date: Wed, 12 Dec 2012 09:23:49 -0200
-X-Google-Sender-Auth: ViXe2HS7kIAyHIgX5n7yc1yDTMU
-Message-ID: <CAP9ODKpTHJmnih0McoN4CqXFSaFP5f9q3zYLDNhAzeX8FGMtAA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: udev (master and danny)
+Subject: [meta-gnome] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2012 11:38:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Dec 2012 11:50:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Dec 12, 2012 at 9:14 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
+Fix error for do_rootfs:
+| Collected errors:
+|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-locale-fr
+|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-fr.
+|  * check_data_file_clashes: Package gvfs-locale-en-gb wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-gdu-volume-monitor-locale-en-gb
+|  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
+|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-locale-de
+|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-de.
 
-> On Wed, Dec 12, 2012 at 12:09 PM, Burton, Ross <ross.burton@intel.com>
-> wrote:
-> > results in
-> > meta-oe's udev 182 being used, which fails to boot on atom-pc from a
-> > hddimg, hanging at "waiting for removable media" (nothing is
->
-> There is patch to remove udev from meta-oe, but that merge of udev in
-> oe-core kept significant diff between both 182 version, no idea why it
-> wasn't taken into account when 182 was introduced in oe-core..
->
-> I'm using udev from systemd recipe so I'm not really interested in
-> udev recipe in meta-oe.
->
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-And how did you include the init scripts on it?
-
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+index fe5af46..3754e60 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+@@ -20,6 +20,7 @@ do_install_append() {
+ 	rm -rf ${D}${datadir}/glib-2.0
+ 	rm -rf ${D}${datadir}/GConf
+ 	rm -f ${D}${datadir}/dbus-1/services/gvfs-*
++	rm -rf ${D}${datadir}/locale
+ 	rm -f ${D}${libexecdir}/gvfsd*
+ 	rm -f ${D}${libexecdir}/gvfs-fuse-daemon
+ 	rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.4.4
+
+
 
