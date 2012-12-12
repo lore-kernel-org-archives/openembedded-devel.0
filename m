@@ -1,33 +1,20 @@
-Received: from mail-la0-f47.google.com ([209.85.215.47])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <akini@synapticon.com>) id 1Tinr4-00017m-5h
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TipQ1-00075n-Gt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Dec 2012 16:04:14 +0100
-Received: by mail-la0-f47.google.com with SMTP id u2so654400lag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Dec 2012 06:49:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=GveOaosWgzc0jtFJF4HRpYlNkOGrd7aeRRLZwJJuyxU=;
-	b=ObTCfmXK1c/txAsF/UhaRhg+VRHx2EI7u1YGS0CpQYH+1ETx3p9K4EkelQkFsooAWo
-	8YF3HaTwqepT5tQ2ponZQRx5Fizw+neLz5tf4Pwk0kvYwVjUyiEWHcazlW59whA0GXxT
-	fJAih7mPgLB6o/cT5kXGAlgUzIvly0YSYU0TQJtQzKZuNJBmJ/P16aXZEc3/9KWzxNl7
-	N9OatgKnt8HI9s5HGNHF9bcfPdC/z3yMXVUDXQJw3nu98RLfvOCaWTrgf3lpswS6Xhjz
-	qci5HYMVtIXTd65+RIMbuLgQbnDHQlng57gT+PKEOcmHEdc/KWT+7RysdN0XFULnuxWE
-	ciLw==
-MIME-Version: 1.0
-Received: by 10.152.129.197 with SMTP id ny5mr1305206lab.43.1355323780379;
-	Wed, 12 Dec 2012 06:49:40 -0800 (PST)
-Received: by 10.112.60.36 with HTTP; Wed, 12 Dec 2012 06:49:40 -0800 (PST)
-Date: Wed, 12 Dec 2012 15:49:40 +0100
-Message-ID: <CAKS01o=6cYVARN=nQcMiLCzSSAV+XossK0Zg6-AxzpPOzgUBNg@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
+	Wed, 12 Dec 2012 17:44:25 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 60D6DD22CD;
+	Wed, 12 Dec 2012 17:30:02 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQncuggwCF1B3nsfX039ZHFAdbrv6GnnrgnF7sINp9iuoQ/+YRMqlNUfAG2+RtAgkqkBU2WI
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: building OE with arm-gcc
+Date: Wed, 12 Dec 2012 17:29:38 +0100
+Message-Id: <1355329779-17222-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.0
+Subject: [PATCH 1/2] gcc-cross-canadian 4.6: fix dependencies to be nativesdk-* not *-nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,52 +28,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2012 15:04:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Dec 2012 16:44:25 -0000
 
-Hi All,
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I am trying to build and OE platform for ARM Cortex A9, which is a part of
-Xilinx ZYNQ 702 SoC.
-My application will include the use of Point Cloud Library.
-
-I wanted to know if any one has already tried to integrate an arm gcc for
-the OE platform.
-Any suggestions or pointer on building with arm gcc will be very helpful.
-
+diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
+index e0af4aa..788391a 100644
+--- a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
++++ b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
+@@ -5,8 +5,8 @@ require recipes-devtools/gcc/gcc-cross-canadian.inc
+ require recipes-devtools/gcc/gcc-configure-sdk.inc
+ require recipes-devtools/gcc/gcc-package-sdk.inc
+ 
+-DEPENDS += "gmp-nativesdk mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
+-RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
++DEPENDS += "nativesdk-gmp nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
++RDEPENDS_${PN} += "nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
+ 
+ SYSTEMHEADERS = "/usr/include"
+ SYSTEMLIBS = "/lib/"
 -- 
+1.8.0
 
-*Anup Kini
-*Systems Engineer****
-*
-------------------------------
-*
 
-*Synapticon** * |  Cyber-Physical System Solutions ****
-
-Direct:****
-
-+49 7335 / 186 999 17****
-
-Fax:****
-
-+49 7335 / 186 999 19****
-
- ****
-
- ****
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-****
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127****
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
 
