@@ -1,29 +1,38 @@
-Received: from mail-vc0-f175.google.com ([209.85.220.175])
+Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1Tj8t5-000837-SO
+	(envelope-from <ross.burton@intel.com>) id 1Tj9JH-00005g-EL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 14:31:45 +0100
-Received: by mail-vc0-f175.google.com with SMTP id fy7so2183851vcb.6
+	Thu, 13 Dec 2012 14:58:49 +0100
+Received: from mail-ia0-f197.google.com ([209.85.210.197])
+	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 13 Dec 2012 05:44:09 -0800
+Received: by mail-ia0-f197.google.com with SMTP id x26so4623062iak.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2012 05:17:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=5EYpFeRhYj2D+VQw8v1fpUXza6WucmWMda0P3/PuTos=;
-	b=e+yTDu2hptSlfVgmkCOeFB6yOhQ+nUJRfaPMkxeO1aJh1eqVsT2nEz4ZdiCXqD3hsq
-	0sL1Wr/mNT/vQnbUlLXuusPa5El+GIMUPVThZNWRcAZ76zMpbbK6W2zhcazqAle+Bisk
-	aKK70AWUVurb+nyGOtfjHoFWXW2Lc2in5kElvafofwsbBYBuq0DxHS5ikqvOfdlHahyX
-	UE6+68wPm6gI5Qx3uliju4W5QRWPlCq/ZTqAXFeicwyDzpPyGC0qKLsZm6K0Uc3YDbSK
-	QeIdGHxQflL6Ch++07nwRbatjsZGpTCh9nZ1niaQQS6Bx8akwbbbY1f3IM+prPDw3L/v
-	Q7CQ==
+	Thu, 13 Dec 2012 05:44:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=z1Xhnx0o13PstADr+PJLX0gMqFMXaUwujQ40l0rbE40=;
+	b=dIOA6QQg6ozw6n3FUIj8dq9hpLm5V5n6M8MvxqOXjYdFO6eux0tLuSANPIhNGBe1pm
+	OmUFzo15/MZJjPwBQ8pV+uDayz+TqaaR9lOEp0j3kcnTI7Fc52q/uOHzIWCJYTPXc5xf
+	PkajT+mL9ERZjkFy+TjtdxbStqfpDacCp7KEwRdtEdiRBXjqeYfBXU3EenF6WWPz1HaS
+	/RWH41cH4mWQyiaY3E1+BWCxlShlE9Vk/AWfsRgTx+2LWvAtsKuekZrrHLJSyXZs1hWm
+	JGdkXMt5jPWKhzLJ/9NsDZwh4rk8sMFFfdCJjB6JE7dLD9Sj50mhQyyd0Sfb9zbk19la
+	Jhkg==
+Received: by 10.60.31.49 with SMTP id x17mr1547075oeh.33.1355406248118;
+	Thu, 13 Dec 2012 05:44:08 -0800 (PST)
+Received: by 10.60.31.49 with SMTP id x17mr1547071oeh.33.1355406247992; Thu,
+	13 Dec 2012 05:44:07 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.52.19.20 with SMTP id a20mr2874899vde.26.1355404628631; Thu,
-	13 Dec 2012 05:17:08 -0800 (PST)
-Received: by 10.58.155.199 with HTTP; Thu, 13 Dec 2012 05:17:08 -0800 (PST)
-Date: Thu, 13 Dec 2012 08:17:08 -0500
-Message-ID: <CAOd_LFwmq3uoDBn=i9pPvcoJKHspOsnmENKazWp9cNJ5cOm9rA@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: current bbappend issues
+Received: by 10.76.132.198 with HTTP; Thu, 13 Dec 2012 05:43:47 -0800 (PST)
+In-Reply-To: <CAOd_LFwmq3uoDBn=i9pPvcoJKHspOsnmENKazWp9cNJ5cOm9rA@mail.gmail.com>
+References: <CAOd_LFwmq3uoDBn=i9pPvcoJKHspOsnmENKazWp9cNJ5cOm9rA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 13 Dec 2012 13:43:47 +0000
+Message-ID: <CAJTo0LbRh1p4Q+Eq=O9xkg-0b9XymEP8m+Da3FDBQGLvqf_h7w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQkt4FNZgBmsNLVSIRGlUNofFPLIU42wq+Xtic8Twk+lWYcr7aR0+kYvb+p2vw1FPwP80G2yFo2eGnt62qW5xPDWr+mmo3v14wu/E8o93FZ+lS+EqQf4U9ZP91WkpbIxFRDzDo7lO8+Tzlf29tMwb9QtbpI/yvolOSq2OA/tH5tbwRo6k6500NJ+i0lD4wMb82ZUcdkS
+Subject: Re: current bbappend issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 13:31:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 Dec 2012 13:58:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-ERROR: No recipes available for:
-  /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
-  /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
-  /scratch/oe/oe-build-core-3/sources/meta-ti/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-  /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
-ERROR: Command execution failed: Exited with 1
+On 13 December 2012 13:17, Cliff Brake <cliff.brake@gmail.com> wrote:
+> ERROR: No recipes available for:
+>   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
+>   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
+>   /scratch/oe/oe-build-core-3/sources/meta-ti/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+>   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
+> ERROR: Command execution failed: Exited with 1
 
-I rarely can get the HEADS of meta-oe and oe-core to parse anymore.
-I'm not complaining, as with a little bit of work I can usually back
-up a bit and find something that matches.  But wondering if it help to
-make Martin Jansa a meta-oe maintainer or something simple like that?
+You can fix that locally by reverting the revert of the qt4 fixes...
+(cherry-pick 421a73c9c3bea13e029cd0505711ef02753949bb).
 
-Thanks,
-Cliff
+Agreed - meta-oe master needs more maintainers so that it keeps
+current with oe-core master.
 
--- 
-=================
-http://bec-systems.com
+Ross
 
 
