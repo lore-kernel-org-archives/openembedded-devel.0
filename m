@@ -1,36 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tj6nC-0004WG-1P
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1Tj74I-0004oy-MN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 12:17:32 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so1305898pbc.6
+	Thu, 13 Dec 2012 12:35:12 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id D7680D22E9; Thu, 13 Dec 2012 12:20:50 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 3255FD22CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2012 03:02:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bPUHOUWJDlUOIreFJdEiUinmTOSQaJ7tjfrb6asE/mc=;
-	b=fefN/gv52GW8T2MEgYbWNm3eu68rUFIzaGQ5P6vpcrNK8XrDRw+HcVc4UDV9MmqKob
-	F6NaERIJgF7ggtGfpQK59rUhMV5rUfTgpKgCekYIS1prtG+POIz/LAIwhHF6vEW1WKN4
-	Md51kJTkUu7xFQe0Wtr0puMxTP4q2qgkK3xqZmgGy4QTF1lDH2ckzi51ULL52RZeVAsh
-	E+dc21HlAb5aV+E5a07o+2NDoJwhASTmAi0J30TYTZul5oSkmA0LevHbG21/gMSEI2cr
-	NENLTfdVqU3a+ASEPhqJGKPakJO0gC4NZaPp9xZW1tt/nGrHaAlkwr0ipuZJbc514SWl
-	U8tw==
-Received: by 10.68.129.227 with SMTP id nz3mr4192869pbb.111.1355396574039;
-	Thu, 13 Dec 2012 03:02:54 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id z10sm1070649pax.38.2012.12.13.03.02.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 13 Dec 2012 03:02:52 -0800 (PST)
-Date: Thu, 13 Dec 2012 12:03:05 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 13 Dec 2012 12:20:17 +0100 (CET)
+Message-ID: <50C9B9E0.4010401@linaro.org>
+Date: Thu, 13 Dec 2012 12:20:00 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121213110305.GC3356@jama.jama.net>
 References: <1355394929-25182-1-git-send-email-marcin.juszkiewicz@linaro.org>
 	<1355394929-25182-6-git-send-email-marcin.juszkiewicz@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <1355394929-25182-6-git-send-email-marcin.juszkiewicz@linaro.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20121213110305.GC3356@jama.jama.net>
+In-Reply-To: <20121213110305.GC3356@jama.jama.net>
 Subject: Re: [meta-oe][PATCH 5/7] xorg-sgml-doctools: added LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,65 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 11:17:32 -0000
-X-Groupsio-MsgNum: 42121
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kfjH4zxOES6UT95V"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Dec 2012 11:35:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---kfjH4zxOES6UT95V
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+W dniu 13.12.2012 12:03, Martin Jansa pisze:
+> On Thu, Dec 13, 2012 at 11:35:27AM +0100, Marcin Juszkiewicz wrote:
+>> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> 
+> This was already part of my previous pull request which was merged
+> yesterday, are you using latest meta-openembedded?
 
-On Thu, Dec 13, 2012 at 11:35:27AM +0100, Marcin Juszkiewicz wrote:
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Oops, looks like I used tree before your changes landed. So my patch is
+not needed.
 
-This was already part of my previous pull request which was merged
-yesterday, are you using latest meta-openembedded?
 
-Cheers,
-
-> ---
->  meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb =
-b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-> index 502723c..a75c41d 100644
-> --- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-> +++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-> @@ -1,4 +1,7 @@
->  require xorg-doc-common.inc
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8c6c808cd3c797a07b24e443af1c=
-449"
-> +
->  PE =3D "1"
->  PR =3D "${INC_PR}.0"
-> =20
-> --=20
-> 1.8.0
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---kfjH4zxOES6UT95V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDJtekACgkQN1Ujt2V2gBxF4gCfSU+nQjSM4VFm9Zl9BVWtLdRy
-wkAAoLFN8RlXJXU7pVAelR6q8GnDzZFn
-=XZx1
------END PGP SIGNATURE-----
-
---kfjH4zxOES6UT95V--
