@@ -1,37 +1,39 @@
 Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TjHhz-000711-LW
+	(envelope-from <martin.jansa@gmail.com>) id 1TjHi3-00074M-B8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 23:56:51 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so1522521eek.6
+	Thu, 13 Dec 2012 23:56:55 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so1522532eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2012 14:42:16 -0800 (PST)
+	Thu, 13 Dec 2012 14:42:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=24QwJixT60j99tUGiw5LUvKBVSV2cTBALM8XJgaKaR0=;
-	b=r7gq/YF/W/57mIUFUZwN4+yCWppAIZhxc1aOBC3a3V73mGnNf4z5yiYgr0rgAjtbiZ
-	Bh1WM884vyCLArfrQvNtmItwNIL0f+wQ51Ldnk+O3eSVEqWqcAgM/+ViMhamKGdIXE3z
-	GOwhgIduHOGP7Z9oWolk4CcbX+LQCh1NawivnKxW6QWy+WY4iS3XJM1RFT60IRxlzW1I
-	s4vubHHiILoTzQAye8B87pTLpQnTUIRwpErvSa9YsRywNoANuFmBbdIRmmHEY8w9gBL+
-	TnsvflboXqDIeWSVUa78A0boUUN1TBAqgS74hYEyspp0G75Vdh+FAHyMw0SGR4nBda3l
-	SX2Q==
-Received: by 10.14.223.200 with SMTP id v48mr9231614eep.24.1355438536518;
-	Thu, 13 Dec 2012 14:42:16 -0800 (PST)
+	:in-reply-to:references:mime-version:content-type
+	:content-transfer-encoding;
+	bh=xMlK/XfRWgaCG0MZmW2u9poAL6I8n2aY4brGucIUacY=;
+	b=b/50yipY1wcBwHQ4xBhT/lryQ4OzUDdMK7N2ga5MDYrjbjAM3hwrRH74JxJiBzkInQ
+	CpM08rM0Oe2floioz28RIKbNHcC3CYKwFMvinlx/D1p2KYzxFq++AJSf5TQ/C76zHQ1y
+	rdeNV1o2Z4w3BMXB5MXo1oyVB4oSUlsNRUmQ/O4taQHFiqItpuVUB+yEgIsJmVfFOekI
+	bX41LTZXbP3pfj1a3l9mMZuBy5iAeZ9t5kxyp6yL/iOiinRemdJFQ4Gl4veYtMQ49AXd
+	GSWfQgDI6DTS9eF0A/ZHxoCBDF/ZZ0xGcWJYabSivw7pFABCOtriY8guVk9CF5A9Tg2Z
+	BhqA==
+Received: by 10.14.207.6 with SMTP id m6mr9320010eeo.10.1355438540200;
+	Thu, 13 Dec 2012 14:42:20 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id b2sm5678489eep.9.2012.12.13.14.42.13
+	by mx.google.com with ESMTPS id q44sm5688413eep.5.2012.12.13.14.42.17
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 13 Dec 2012 14:42:15 -0800 (PST)
+	Thu, 13 Dec 2012 14:42:19 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Dec 2012 23:41:50 +0100
-Message-Id: <f52405e70b3fb592693d39bc416051de9180c3b3.1355438402.git.Martin.Jansa@gmail.com>
+Date: Thu, 13 Dec 2012 23:41:51 +0100
+Message-Id: <47f455af8d9800e7cc8bb6190c1a70f16c07acf5.1355438402.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355438401.git.Martin.Jansa@gmail.com>
 References: <cover.1355438401.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355438401.git.Martin.Jansa@gmail.com>
 References: <cover.1355438401.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 10/11] iotop: don't fail when site.py* does not exist
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 11/11] lighttpd: follow oe-core to 1.4.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 22:56:51 -0000
+X-List-Received-Date: Thu, 13 Dec 2012 22:56:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* also remove usr/share/share removal, it's taken care of in distutils.bbclass now
+From: Andreas Müller <schnitzeltony@googlemail.com>
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/iotop/iotop_0.4.4.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ .../lighttpd/{lighttpd_1.4.31.bbappend => lighttpd_1.4.32.bbappend}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.31.bbappend => lighttpd_1.4.32.bbappend} (85%)
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-index 8be41af..3b8150b 100644
---- a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-@@ -4,6 +4,8 @@ DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
-  a table of current I/O usage by processes on the system."
- HOMEPAGE = "http://guichaz.free.fr/iotop/"
+diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+similarity index 85%
+rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
+rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+index b016bdc..0e08358 100644
+--- a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
++++ b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+@@ -1,6 +1,6 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
  
-+PR = "r1"
-+
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+-PRINC := "${@int(PRINC) + 2}"
++PRINC := "${@int(PRINC) + 1}"
  
-@@ -14,9 +16,8 @@ SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d68648
- inherit distutils
+ inherit systemd
  
- do_install_append() {
--	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo
--	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py
--	[ -d ${D}${datadir}/share ] && rmdir ${D}${datadir}/share
-+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
-+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
- }
- 
- RDEPENDS_${PN} = "python-distutils python-curses python-textutils \
 -- 
 1.8.0.2
 
