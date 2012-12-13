@@ -1,38 +1,20 @@
-Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tj9JH-00005g-EL
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TjAOY-0001uU-9f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 14:58:49 +0100
-Received: from mail-ia0-f197.google.com ([209.85.210.197])
-	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 13 Dec 2012 05:44:09 -0800
-Received: by mail-ia0-f197.google.com with SMTP id x26so4623062iak.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2012 05:44:08 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=z1Xhnx0o13PstADr+PJLX0gMqFMXaUwujQ40l0rbE40=;
-	b=dIOA6QQg6ozw6n3FUIj8dq9hpLm5V5n6M8MvxqOXjYdFO6eux0tLuSANPIhNGBe1pm
-	OmUFzo15/MZJjPwBQ8pV+uDayz+TqaaR9lOEp0j3kcnTI7Fc52q/uOHzIWCJYTPXc5xf
-	PkajT+mL9ERZjkFy+TjtdxbStqfpDacCp7KEwRdtEdiRBXjqeYfBXU3EenF6WWPz1HaS
-	/RWH41cH4mWQyiaY3E1+BWCxlShlE9Vk/AWfsRgTx+2LWvAtsKuekZrrHLJSyXZs1hWm
-	JGdkXMt5jPWKhzLJ/9NsDZwh4rk8sMFFfdCJjB6JE7dLD9Sj50mhQyyd0Sfb9zbk19la
-	Jhkg==
-Received: by 10.60.31.49 with SMTP id x17mr1547075oeh.33.1355406248118;
-	Thu, 13 Dec 2012 05:44:08 -0800 (PST)
-Received: by 10.60.31.49 with SMTP id x17mr1547071oeh.33.1355406247992; Thu,
-	13 Dec 2012 05:44:07 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.132.198 with HTTP; Thu, 13 Dec 2012 05:43:47 -0800 (PST)
-In-Reply-To: <CAOd_LFwmq3uoDBn=i9pPvcoJKHspOsnmENKazWp9cNJ5cOm9rA@mail.gmail.com>
-References: <CAOd_LFwmq3uoDBn=i9pPvcoJKHspOsnmENKazWp9cNJ5cOm9rA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 13 Dec 2012 13:43:47 +0000
-Message-ID: <CAJTo0LbRh1p4Q+Eq=O9xkg-0b9XymEP8m+Da3FDBQGLvqf_h7w@mail.gmail.com>
+	Thu, 13 Dec 2012 16:08:46 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 13 Dec 2012 06:53:42 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,274,1355126400"; d="scan'208";a="180451161"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.123.1])
+	by AZSMGA002.ch.intel.com with ESMTP; 13 Dec 2012 06:53:41 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkt4FNZgBmsNLVSIRGlUNofFPLIU42wq+Xtic8Twk+lWYcr7aR0+kYvb+p2vw1FPwP80G2yFo2eGnt62qW5xPDWr+mmo3v14wu/E8o93FZ+lS+EqQf4U9ZP91WkpbIxFRDzDo7lO8+Tzlf29tMwb9QtbpI/yvolOSq2OA/tH5tbwRo6k6500NJ+i0lD4wMb82ZUcdkS
-Subject: Re: current bbappend issues
+Date: Thu, 13 Dec 2012 14:53:34 +0000
+Message-Id: <cover.1355410208.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH 0/3] Cleanups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 13:58:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 13 Dec 2012 15:08:51 -0000
 
-On 13 December 2012 13:17, Cliff Brake <cliff.brake@gmail.com> wrote:
-> ERROR: No recipes available for:
->   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.3.bbappend
->   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.31.bbappend
->   /scratch/oe/oe-build-core-3/sources/meta-ti/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
->   /scratch/oe/oe-build-core-3/sources/meta-openembedded/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.3.bbappend
-> ERROR: Command execution failed: Exited with 1
+"startline" -> "beginline" for LIC_FILES_CHKSUM in meta-oe and
+meta-networking, as well as removing libnl which is now in OE-Core.
 
-You can fix that locally by reverting the revert of the qt4 fixes...
-(cherry-pick 421a73c9c3bea13e029cd0505711ef02753949bb).
 
-Agreed - meta-oe master needs more maintainers so that it keeps
-current with oe-core master.
+The following changes since commit f36e2e2ea4edcd4a0e65ed1c213bce388231214c:
 
-Ross
+  gcalctool: upgrade to 5.32.0 (2012-12-11 01:54:24 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/cleanup5
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/cleanup5
+
+Paul Eggleton (3):
+  Fix erroneous use of "startline" in LIC_FILES_CHKSUM
+  Fix erroneous use of "startline" in LIC_FILES_CHKSUM
+  libnl: remove
+
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |    4 +-
+ meta-networking/recipes-support/mtr/mtr_0.82.bb    |    2 +-
+ meta-networking/recipes-support/tunctl/tunctl.inc  |    2 +-
+ meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb |    2 +-
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |    2 +-
+ .../socketcan/libsocketcan_0.0.8.bb                |    2 +-
+ meta-oe/recipes-extended/tmux/tmux_1.6.bb          |    2 +-
+ meta-oe/recipes-support/libnl/libnl_3.2.9.bb       |   52 --------------------
+ meta-oe/recipes-support/mini-iconv/mini-iconv.bb   |    2 +-
+ 9 files changed, 9 insertions(+), 61 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libnl/libnl_3.2.9.bb
+
+-- 
+1.7.10.4
+
 
 
