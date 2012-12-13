@@ -1,35 +1,37 @@
-Received: from m13-70.163.com ([220.181.13.70])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <huanmateme@163.com>) id 1Tj0B9-0006LL-Sj
+	(envelope-from <martin.jansa@gmail.com>) id 1Tj3jo-0005pC-10
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 05:13:48 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Received:Date:From:To:Subject:In-Reply-To:
-	References:Content-Type:MIME-Version:Message-ID; bh=4UdcFHniAkd4
-	Av88I6uGyve+fThxb+eTQNHpjB6EWqA=; b=V0Lt0ooiGJYEbVuF+Ftp4aeCqm4m
-	5SbB5KCmc8KSvnajV5bFyAF2dYj8st7MKbF2FLC/NV9T1jQQkyhoHILSjnr4HW6P
-	vy+n1NdL9cubno/9kYgdV9/8TyhCuEpOgduaD3uTLxw6FZj4BVfJxHn8Np0tGzsb
-	bgsO6N0zAU0T7WY=
-Received: from huanmateme$163.com ( [61.148.56.138] ) by
-	ajax-webmail-wmsvr70 (Coremail) ; Thu, 13 Dec 2012 11:59:08 +0800 (CST)
-X-Originating-IP: [61.148.56.138]
-Date: Thu, 13 Dec 2012 11:59:08 +0800 (CST)
-From: Biao  <huanmateme@163.com>
-To: openembedded-devel@lists.openembedded.org
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version SP_ntes V3.5 build
-	20121210(21001.5125.5051) Copyright (c) 2002-2012 www.mailtech.cn
-	163com
-In-Reply-To: <CA+chaQe-cksdHDfhfyJu7ZDuN_DqrAr-MgcJgJwNasWk=oU9qw@mail.gmail.com>
-References: <1c1b83a7.14f97.13b8cef7c19.Coremail.huanmateme@163.com>
-	<CA+chaQe-cksdHDfhfyJu7ZDuN_DqrAr-MgcJgJwNasWk=oU9qw@mail.gmail.com>
+	Thu, 13 Dec 2012 09:01:48 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so541729eaa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Dec 2012 23:47:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=99TJC7F2WOxEWP/sLHeMWgSZg25gQ2c6wx+YdomCDu8=;
+	b=KJDLdJ4trZZ7bwdzIdIHJfjiOgAfEm5tKTyKfpGQ4LpjBYVRjVJ4V2/Pbp4QCZoQPY
+	02aUo2hHVONaYiqFbCuVrnZOx+oBPAnMXNtI3anAwPG7UU31+iHvWz+tl5XIO6Fq0Ra8
+	uS9cvv9NpA0B+1Omg8BKMiEqAtU7MJG7230iPDkNNjZW6LMpirPiEd6JNpoMEaTEVGXg
+	u5LZX5koFjYEzuwsnMK6yrVh/bx7GbwQkS5BNM5h4bTQQxlXjh0rTMVZMJaftPWjYjz0
+	RVqONKW1K0I93qbDmP9j04PcsGEw/82b4IUUlj0ZBrggOJNcfTzTKKz4ek7lIj4Afv0z
+	HoUw==
+Received: by 10.14.178.196 with SMTP id f44mr2927222eem.14.1355384833611;
+	Wed, 12 Dec 2012 23:47:13 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id w3sm1371804eel.17.2012.12.12.23.47.12
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 12 Dec 2012 23:47:12 -0800 (PST)
+Date: Thu, 13 Dec 2012 08:47:29 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20121213074729.GB3356@jama.jama.net>
+References: <cover.1354622319.git.Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Message-ID: <491c861e.62ea.13b926a756d.Coremail.huanmateme@163.com>
-X-CM-TRANSID: RsGowEApSECNUslQ6pgJAA--.888W
-X-CM-SenderInfo: xkxd0z5dwhzvi6rwjhhfrp/1tbiNwKDgE9orJo4SgABsU
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [OE users] Got errors when building helloworld
+In-Reply-To: <cover.1354622319.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 0/5] [meta-oe][danny] Small fixes from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 04:13:48 -0000
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Dec 2012 08:01:48 -0000
+X-Groupsio-MsgNum: 42111
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="MfFXiAuoTsnnDAfZ"
+Content-Disposition: inline
 
+--MfFXiAuoTsnnDAfZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-At 2012-12-12 19:11:40,"Martin Jansa" <martin.jansa@gmail.com> wrote:
->On Wed, Dec 12, 2012 at 3:26 AM, Biao <huanmateme@163.com> wrote:
->> Hi All,
->>
->>
->> I got some error when trying to build a simple helloworld, can anyone give a brief instruction on how to debug this?
->> BTW. I am trying hard to be OE player, If any of my email style or behavior is wrong, please give a hint or any reference resource, i will correct myself.
->
->yes start with oe-core and layers instead of oe-classic.
->
->For oe-classic you need older bitbake version than what you're using.
->
-That helps a lot, thank you very much.
->Cheers,
->
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Tue, Dec 04, 2012 at 12:59:51PM +0100, Martin Jansa wrote:
+> The following changes since commit f8ad0760abf8055bac27036853c56f56b40a36=
+c7:
+>=20
+>   README: update to danny (2012-11-23 15:22:46 +0100)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Djansa/for-danny
+>=20
+> Andrei Dinu (1):
+>   gypsy: added to meta-oe/recipes-navigation
+>=20
+> Martin Jansa (1):
+>   samba: update waf-as-source.patch to apply
+>=20
+> Paul Eggleton (3):
+>   ntp: cleanup recipes and fix SSL support
+>   ntp: make servers configurable and default to none configured
+>   meta-systemd: ntp: update for server config improvements
 
+ping?
+
+--MfFXiAuoTsnnDAfZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDJiBEACgkQN1Ujt2V2gBzQogCgjYYxp5bJCj1fU8bdmi99PgIW
+sF4AoIWjQNbjvqMxA/Ce2nREctIwk6tZ
+=4XXX
+-----END PGP SIGNATURE-----
+
+--MfFXiAuoTsnnDAfZ--
