@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TjHhw-00070L-Rt
+	(envelope-from <martin.jansa@gmail.com>) id 1TjHhz-000711-LW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Dec 2012 23:56:48 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so957167eaa.6
+	Thu, 13 Dec 2012 23:56:51 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so1522521eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Dec 2012 14:42:08 -0800 (PST)
+	Thu, 13 Dec 2012 14:42:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=aQD1ycq5yum04rd/5aUouhWVJRBv45uaYfH8Cf27FaA=;
-	b=w63+g6ZYguR1mwsqh2gVvKw+C7uwVi6bqy2QUsbtr/JiDfSa5ysv6zoDPN3oeH2CcR
-	ipd0UweBi/keKr7fSOkBPk7yGR0sV7knT7fhPTsWpeqAlvr2P2qscCbci4osWFtepSnm
-	SI6xercGjP6HfEqsC+Pf3pzjDwe15ouGgl0e+RQ7xnuYCvXd/d68W3y4suxl+2hPcuc4
-	W7HrAeTjDDNh9EYrXVoCXGloSzxvIT4hullTb8HA2rebFyQuHRLWVgX1cGhxmIgIr9wR
-	GKY6XyK4EbHzg1+T4ESUSYt9KEJZC7MtfFQV8/0+AvZVBJMDNXCPL303265GslRQzuWf
-	wCLQ==
-Received: by 10.14.209.193 with SMTP id s41mr9397107eeo.9.1355438528710;
-	Thu, 13 Dec 2012 14:42:08 -0800 (PST)
+	bh=24QwJixT60j99tUGiw5LUvKBVSV2cTBALM8XJgaKaR0=;
+	b=r7gq/YF/W/57mIUFUZwN4+yCWppAIZhxc1aOBC3a3V73mGnNf4z5yiYgr0rgAjtbiZ
+	Bh1WM884vyCLArfrQvNtmItwNIL0f+wQ51Ldnk+O3eSVEqWqcAgM/+ViMhamKGdIXE3z
+	GOwhgIduHOGP7Z9oWolk4CcbX+LQCh1NawivnKxW6QWy+WY4iS3XJM1RFT60IRxlzW1I
+	s4vubHHiILoTzQAye8B87pTLpQnTUIRwpErvSa9YsRywNoANuFmBbdIRmmHEY8w9gBL+
+	TnsvflboXqDIeWSVUa78A0boUUN1TBAqgS74hYEyspp0G75Vdh+FAHyMw0SGR4nBda3l
+	SX2Q==
+Received: by 10.14.223.200 with SMTP id v48mr9231614eep.24.1355438536518;
+	Thu, 13 Dec 2012 14:42:16 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 6sm5693567eea.3.2012.12.13.14.42.05
+	by mx.google.com with ESMTPS id b2sm5678489eep.9.2012.12.13.14.42.13
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 13 Dec 2012 14:42:08 -0800 (PST)
+	Thu, 13 Dec 2012 14:42:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Dec 2012 23:41:48 +0100
-Message-Id: <fdcf7609f2e2ab18185acddf1727c69a537c337d.1355438402.git.Martin.Jansa@gmail.com>
+Date: Thu, 13 Dec 2012 23:41:50 +0100
+Message-Id: <f52405e70b3fb592693d39bc416051de9180c3b3.1355438402.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355438401.git.Martin.Jansa@gmail.com>
 References: <cover.1355438401.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355438401.git.Martin.Jansa@gmail.com>
 References: <cover.1355438401.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/11] gnome-control-center: fix QA issue
+Subject: [meta-oe][PATCH 10/11] iotop: don't fail when site.py* does not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 22:56:49 -0000
+X-List-Received-Date: Thu, 13 Dec 2012 22:56:51 -0000
 
-* fixes:
-gnome-control-center-2.32.1: non -staticdev package contains static .a library: gnome-control-center-dev path '/work/armv5te-oe-linux-gnueabi/gnome-control-center/2.32.1-r0/packages-split/gnome-control-center-dev/usr/lib/window-manager-settings/libmetacity.a'
-l
+* also remove usr/share/share removal, it's taken care of in distutils.bbclass now
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../gnome-control-center/gnome-control-center_2.32.1.bb          | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ meta-oe/recipes-extended/iotop/iotop_0.4.4.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-index 59d81b4..ea4ce4b 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra"
+diff --git a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
+index 8be41af..3b8150b 100644
+--- a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
++++ b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
+@@ -4,6 +4,8 @@ DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
+  a table of current I/O usage by processes on the system."
+ HOMEPAGE = "http://guichaz.free.fr/iotop/"
  
 +PR = "r1"
 +
- inherit gnome
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
  
- SRC_URI[archive.md5sum] = "b4e8ab5c7556ae07addbfcfb4fa2f761"
-@@ -22,8 +24,5 @@ FILES_${PN} += "${datadir}/icon* \
-                 ${datadir}/desktop-directories \
-                "
- FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
--FILES_${PN}-dev += "${libdir}/window-manager-settings/*a"
--
--
--
--
-+FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
-+FILES_${PN}-staticdev += "${libdir}/window-manager-settings/*.a"
+@@ -14,9 +16,8 @@ SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d68648
+ inherit distutils
+ 
+ do_install_append() {
+-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo
+-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py
+-	[ -d ${D}${datadir}/share ] && rmdir ${D}${datadir}/share
++	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
++	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
+ }
+ 
+ RDEPENDS_${PN} = "python-distutils python-curses python-textutils \
 -- 
 1.8.0.2
 
