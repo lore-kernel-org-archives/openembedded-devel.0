@@ -1,31 +1,37 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>)
-	id 1TjDcj-0000pC-ID; Thu, 13 Dec 2012 19:35:09 +0100
-Received: by mail-ia0-f175.google.com with SMTP id z3so2232146iad.6
-	for <multiple recipients>; Thu, 13 Dec 2012 10:20:33 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1TjE2g-0001g4-Tr; Thu, 13 Dec 2012 20:02:00 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so894820dak.6
+	for <multiple recipients>; Thu, 13 Dec 2012 10:47:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=SYMkzgSiVb78douT7L9uuPK9J2FjpjN0dwAiL2QYYKY=;
-	b=dvg76nnLnbioZWLGzaSlgL6nVtCXRJ36f4ZXicWwlUKnEjkz3F0AKQRs9zXSrihq9h
-	PglZYfle/zPFqujDbp/NQn7R1/nah2ytdn0xsW0KO9aqcgfy39wllQJ7vJF1ixiH1vdV
-	3K9pG202tNPsuANbe9Lfj7+SqESBJk2ocRpldFWU/Wu7vuEPJvPkCQZBUvujNC4KTBN/
-	wSGX2cIkrXnyBt5A5Mk4RoRRr/wtr6b2Y0kqlk0XfTqlIYBnI/RaajgMJ7Xh6KGO7CIz
-	jVPvt7XqMB/RqmH0dQHvep7dV3yBQNh5OftwN4d5vrlJhDuMbdHOJIe/rE2ZFJhAcb5J
-	K+qQ==
-MIME-Version: 1.0
-Received: by 10.50.179.33 with SMTP id dd1mr2667409igc.31.1355422833448; Thu,
-	13 Dec 2012 10:20:33 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Thu, 13 Dec 2012 10:20:33 -0800 (PST)
-In-Reply-To: <20121213174202.GE3356@jama.jama.net>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=svYNi4+26nVFyhIHtLbDE5qTQqhsilV7cSTrLV/K3NE=;
+	b=W7Ij2kfXFlE7oX8L86Sgg3kS9sxwbAF8XAyRuvwSIJeJhRd6ReHlY5XEgTlGRFW7y7
+	znwOjoiXJnDldD0f1Ld2gEX5GcdWpnzuq52Xu2QjLbclI3srY33jvfYJu6fKpam9TgUj
+	F0c4Df6ANHEcIWzb/4TAKmtE92SMthmYmTA9Bqz8Bh3M0OjYDjkcTWYzcIe65AXX+44G
+	PhoGcHJPnrHGNM6cNqWJCD5VlVTp3jK+HH3yLNndOAOYVSCCi/ajPVznWv+yZxkE+kEy
+	hBpyWb+RGlDNT64ixrw6Jq1+pUssgeAE14L3+8pptd4MADEx44BkT3QRvNIBdHWkQkY3
+	MQww==
+Received: by 10.66.52.102 with SMTP id s6mr8812095pao.6.1355424442741;
+	Thu, 13 Dec 2012 10:47:22 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id yi9sm1435658pbc.39.2012.12.13.10.47.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 13 Dec 2012 10:47:21 -0800 (PST)
+Date: Thu, 13 Dec 2012 19:47:34 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
+Message-ID: <20121213184734.GG3356@jama.jama.net>
 References: <20121213174202.GE3356@jama.jama.net>
-Date: Thu, 13 Dec 2012 19:20:33 +0100
-Message-ID: <CALbNGRQJCHMxY403ZbzehuurM2jt2UnVbdETqh=PVm73JV4BvA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
+	<CALbNGRQJCHMxY403ZbzehuurM2jt2UnVbdETqh=PVm73JV4BvA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQJCHMxY403ZbzehuurM2jt2UnVbdETqh=PVm73JV4BvA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-core@lists.openembedded.org,
+	Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
 Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,13 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2012 18:35:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 13 Dec 2012 19:02:01 -0000
+X-Groupsio-MsgNum: 42134
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2NLGdgz3UMHa/lqP"
+Content-Disposition: inline
 
-On Thu, Dec 13, 2012 at 6:42 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> ERROR: Task 8067 (/OE/jansa-test/shr-core/meta-openembedded/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb, do_compile) failed with exit code '1'
-Feel a bit responsible for this one. Could you give some details?
+--2NLGdgz3UMHa/lqP
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Andreas
+On Thu, Dec 13, 2012 at 07:20:33PM +0100, Andreas M=FCller wrote:
+> On Thu, Dec 13, 2012 at 6:42 PM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+> > ERROR: Task 8067 (/OE/jansa-test/shr-core/meta-openembedded/meta-oe/rec=
+ipes-devtools/glade/glade3_3.8.2.bb, do_compile) failed with exit code '1'
+> Feel a bit responsible for this one. Could you give some details?
 
+more then:
+  patch on ML
+  | http://www.oasis-open.org/docbook/xml/4.1.2/ent/iso-grk1.ent:1:
+parser error : Content error in the external subset
+  | HTTP/1.1 200 OK
 
+?
+
+I'll send that patch set as soon as I can verify it on the same box
+where it failed before (I've verified it locally already, but as some
+PATCHv2 from last week confirms, sometimes it's not good enough test).
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--2NLGdgz3UMHa/lqP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDKIsYACgkQN1Ujt2V2gBxcBgCgt8M9mo6M5cdq/33ot5Fyax92
+brwAoIofgtsESqoB+wj6Ot4Dp6ue28o6
+=aJti
+-----END PGP SIGNATURE-----
+
+--2NLGdgz3UMHa/lqP--
