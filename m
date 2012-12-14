@@ -1,34 +1,32 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-wg0-f45.google.com ([74.125.82.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TjTn0-0002y4-JQ
+	(envelope-from <martin.jansa@gmail.com>) id 1TjUE9-0004Es-E4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 12:50:52 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so2091431pbc.6
+	Fri, 14 Dec 2012 13:18:53 +0100
+Received: by mail-wg0-f45.google.com with SMTP id dq12so1337347wgb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 03:36:13 -0800 (PST)
+	Fri, 14 Dec 2012 04:04:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=nZ0/a2sPrhUH+9y4ssN6BR88109VxQQWFyBucw1szFU=;
-	b=jkfVyv8EZRKDLJvaNtzHxo8xf0JxwJVuy63XY6sJamVqq8i94SO7XSmBQq0ccpTiaB
-	6Gxznvr0dsplpP21G0+GOfQrKyc52DN9J2vupUassQw2TVxyXVUDaEveQNf4qhcyjQAF
-	4NqOzCGpgHz1rc86rl4j8zU/AOQ0O1HkxRx90d2LBFXTPbLJbZmU+ZKjeeqkNeC3BT+X
-	lUHZU7c6pqH7PExmli7xwIP0LExvbK0424CMA9pTM006yRAk0kFyXqNBpnsXlzhJDQqA
-	g/HkVgFiJwXd8yYRqQUd38YuKCIgAYFgHLF2pGCeMqlrkhgkWMhIvLhJ6AWVXQ04bhqI
-	4X8Q==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=X4kL21TZib3O1jm2AYasIZm8dGZ2ZXeHxHKs1ujjDqw=;
+	b=RO1fFD23Mvqx7zORnqa1Gwl/fOGRnYRSceZtUBQv+hM9Uy/wm8Lq+nGgBQ84ATfYXt
+	+ZY/tL6k/1Ev2h1z24fKmBk1yn0NAk+M+bP+lyzC6XLh1fGwfGJDfrFHq/NHCnzgtghL
+	P41zxXizg/vVQozakEosTWjBqxv0zvhSkB5W/z+IeD67BGv6P6setL5pApyuWdmbYBLp
+	cICXf0HQwfnfeFvvYGcOohZFh0EBXyxupjB39ouHqRsSwRwcGHBT2XIEREwgbeKGvbK5
+	peGX/20mEnGikIoDbQ1Pt3BIA7+NLl09igtcK+/UxbGqU9yXj1joCZmcq7SviILBjBto
+	ry/g==
 MIME-Version: 1.0
-Received: by 10.66.85.101 with SMTP id g5mr15196886paz.17.1355484973580; Fri,
-	14 Dec 2012 03:36:13 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.51.193 with HTTP; Fri, 14 Dec 2012 03:36:13 -0800 (PST)
-In-Reply-To: <CA+chaQd45pxo_RPGWpaU-_XDZRbm7NLO=rYzfDwQvqboyVWNHg@mail.gmail.com>
+Received: by 10.180.81.39 with SMTP id w7mr2173786wix.15.1355486656446; Fri,
+	14 Dec 2012 04:04:16 -0800 (PST)
+Received: by 10.194.84.103 with HTTP; Fri, 14 Dec 2012 04:04:16 -0800 (PST)
+In-Reply-To: <CAP9ODKqOCGj+xGjXaKcU3tG-W1umUpn4dnAuih=6DEWARHGegQ@mail.gmail.com>
 References: <1355482437-30298-1-git-send-email-johan.hovold@lundinova.se>
 	<CA+chaQd45pxo_RPGWpaU-_XDZRbm7NLO=rYzfDwQvqboyVWNHg@mail.gmail.com>
-Date: Fri, 14 Dec 2012 09:36:13 -0200
-X-Google-Sender-Auth: 2iepiR2H6cOznKqIxLy6Tw3hGE8
-Message-ID: <CAP9ODKqOCGj+xGjXaKcU3tG-W1umUpn4dnAuih=6DEWARHGegQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	<CAP9ODKqOCGj+xGjXaKcU3tG-W1umUpn4dnAuih=6DEWARHGegQ@mail.gmail.com>
+Date: Fri, 14 Dec 2012 13:04:16 +0100
+Message-ID: <CA+chaQdAkFUa_7wm2hLCRevcLHJG5cEFdGv52euZUx3D6+U1dw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] udev-173: fix file checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,32 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 11:50:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 Dec 2012 12:18:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Fri, Dec 14, 2012 at 9:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Dec 14, 2012 at 11:53 AM, Johan Hovold
-> <johan.hovold@lundinova.se> wrote:
->> Commit 7895ab08270d9 ("udev-173: Fix SRC_URI to fetch bz2 archive")
->> changed to source file to bz2-compressed tarball but did not update the
->> checksums.
+On Fri, Dec 14, 2012 at 12:36 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Fri, Dec 14, 2012 at 9:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> On Fri, Dec 14, 2012 at 11:53 AM, Johan Hovold
+>> <johan.hovold@lundinova.se> wrote:
+>>> Commit 7895ab08270d9 ("udev-173: Fix SRC_URI to fetch bz2 archive")
+>>> changed to source file to bz2-compressed tarball but did not update the
+>>> checksums.
+>>>
+>>> Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
 >>
->> Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
+>> This change looks correct, but why are you using this older udev version?
+>>
+>> see http://patchwork.openembedded.org/patch/39873/
 >
-> This change looks correct, but why are you using this older udev version?
+> Martin,
 >
-> see http://patchwork.openembedded.org/patch/39873/
+> Please send a v2 without a RFC so I can ack it; I will post them the
+> changes for danny branch (which I have in my tree) to backport 182
+> from oe-core to danny (so we don't have a downgrade if someone is
+> using udev from meta-oe there).
 
-Martin,
-
-Please send a v2 without a RFC so I can ack it; I will post them the
-changes for danny branch (which I have in my tree) to backport 182
-from oe-core to danny (so we don't have a downgrade if someone is
-using udev from meta-oe there).
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+I'll send it together in pull-request with in-test patches from patchwork.
 
 
