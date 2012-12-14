@@ -1,32 +1,37 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from mail-pa0-f47.google.com ([209.85.220.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TjQpL-0002cV-44
+	(envelope-from <martin.jansa@gmail.com>) id 1TjQys-0002sV-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 09:41:07 +0100
-Received: by mail-ia0-f175.google.com with SMTP id z3so2822480iad.6
+	Fri, 14 Dec 2012 09:50:54 +0100
+Received: by mail-pa0-f47.google.com with SMTP id fa10so2029588pad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 00:26:26 -0800 (PST)
+	Fri, 14 Dec 2012 00:36:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=j1xecE4N9ioIDkwLzx3glZrR7LemeKcry9pePMQBuh0=;
-	b=fW0OV4f41WL+F8c9Fpv9GxyCznqIi9xToj1uKvM6f+pb/E+slRF7DydTRu26FZ4PT7
-	G+q0K25zrkM1eAPrOlm+46fzNnU2SoZ8Hoo2dzfuQzqvymhbeTG7fqU7ZRwGKyW/rKv4
-	vnds7P7C3GBqgZeRnfqoV6dpOf2ZkyVdzrlGZpsZzlZw+xMlCF/JLEZJdPzPy02jnR/C
-	pkLK9fn5CHE67ItpHjqCkvjwtTy4UpJ5nBfLKfn2zZxJdQmhnZheEmVKYB7r11GCnXT3
-	g1gRy45CXRVisv6fT0j4rSAHF4o61Z8tIVFARMrcVLcDzSTND26sXQSsxV+AuiDlceDz
-	Q/1w==
-MIME-Version: 1.0
-Received: by 10.50.237.6 with SMTP id uy6mr907252igc.31.1355473586583; Fri, 14
-	Dec 2012 00:26:26 -0800 (PST)
-Received: by 10.64.20.113 with HTTP; Fri, 14 Dec 2012 00:26:26 -0800 (PST)
-In-Reply-To: <438ebe8cfe643f3d82f3a825651693c4c90edb6f.1355438402.git.Martin.Jansa@gmail.com>
-References: <cover.1355438401.git.Martin.Jansa@gmail.com>
-	<438ebe8cfe643f3d82f3a825651693c4c90edb6f.1355438402.git.Martin.Jansa@gmail.com>
-Date: Fri, 14 Dec 2012 09:26:26 +0100
-Message-ID: <CALbNGRSq_81mqhJjNvGKSerOe2-CM+EoFB-UXsfBOL-6nan4vQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=SNBQw3swtW393BqvWN1u0e7f7GrB/aFfsILKXF3jx00=;
+	b=uh0HC2ac7mkLctzt0SaSYP3LtkP9T2RfG0rIquP9Ui7Z3GBVtKbydzUbjyKYCKV9mR
+	F4IZoMj69cT0R7sNLsc63FDjXFq138suj+SDVNDa6tvSLAsxCwuuBKozUhj4rM2QrN96
+	fuc/npFajkqDmQxFhYxwD0WfHJMPW0cveV93J3hyQ3lhXtiD/k8oWrYqmZ7ADm3SMYAU
+	SSP0YXwyaymx6Em7MIqQNM/EIlCF14XTZOCXVSyHgeyMynjTXX4yrIpkZhjzxBc+pg05
+	rAvKeE9fBZxq1Pei1XpLQThQcBWlv7Nizo0+g5DtkO7ykR4eSxow87vXmCONbBSrysJt
+	EYOQ==
+Received: by 10.68.237.167 with SMTP id vd7mr13574252pbc.161.1355474177929;
+	Fri, 14 Dec 2012 00:36:17 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id vx2sm2570018pbc.33.2012.12.14.00.36.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 14 Dec 2012 00:36:15 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 09/11] glade3: disable html doc, fails to build
+Date: Fri, 14 Dec 2012 09:36:27 +0100
+Message-Id: <7210880fb3baf98739bf61f9ab55764d6e76f423.1355474146.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0.2
+In-Reply-To: <438ebe8cfe643f3d82f3a825651693c4c90edb6f.1355438402.git.Martin.Jansa@gmail.com>
+References: <438ebe8cfe643f3d82f3a825651693c4c90edb6f.1355438402.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1355474146.git.Martin.Jansa@gmail.com>
+References: <cover.1355474146.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2 09/11] glade3: disable help, fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 08:41:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Dec 2012 08:50:54 -0000
 
-On Thu, Dec 13, 2012 at 11:41 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-devtools/glade/glade3_3.8.2.bb | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-> index 8cd6a0e..049f7e3 100644
-> --- a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-> +++ b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-> @@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
->                      file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7"
->  DEPENDS = "gtk+ gnome-doc-utils-native"
->
-> +PR = "r1"
-> +
->  inherit autotools pkgconfig pythonnative
->
->  SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
-> @@ -14,6 +16,10 @@ SRC_URI[sha256sum] = "f180a5018eee6e3fe574854cb025af897dd9962b01d17d5752e626876d
->
->  EXTRA_OECONF += "--disable-scrollkeeper"
->
-> +do_configure_prepend() {
-> +  sed -i 's/HAVE_GNOME_DOC_UTILS/HAVE_GNOME_DOC_UTILS_IGNORED/g' ${S}/Makefile.am
-> +}
-> +
->  FILES_${PN} += "${datadir}/icons"
->  FILES_${PN}-dbg += "${libdir}/glade3/modules/.debug"
->  FILES_${PN}-dev += "${libdir}/glade3/modules/*.la"
-> --
-> 1.8.0.2
->
-I am using the documentation from time to time. Don't misunderstand
-me: For now I have no problem disabling it but could you send the
-error information so we know what fails - maybe later there is a
-chance for fixing it.
+* fixes:
+| http://www.oasis-open.org/docbook/xml/4.1.2/ent/iso-grk1.ent:1: validity error : All markup of the conditional section is not in the same entity
+| HTTP/1.1 200 OK
+|    ^
+| http://www.oasis-open.org/docbook/xml/4.1.2/ent/iso-grk1.ent:1: parser error : Content error in the external subset
+| HTTP/1.1 200 OK
+|       ^
+| unable to parse sl/glade3.xml
+| make[2]: *** [glade3-sl.omf] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| make[2]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/glade3/3.8.2-r0/glade3-3.8.2/help'
 
-Andreas
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/glade/glade3_3.8.2.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
+index 8cd6a0e..733b8ed 100644
+--- a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
++++ b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
+                     file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7"
+ DEPENDS = "gtk+ gnome-doc-utils-native"
+ 
++PR = "r1"
++
+ inherit autotools pkgconfig pythonnative
+ 
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
+@@ -14,6 +16,10 @@ SRC_URI[sha256sum] = "f180a5018eee6e3fe574854cb025af897dd9962b01d17d5752e626876d
+ 
+ EXTRA_OECONF += "--disable-scrollkeeper"
+ 
++do_configure_prepend() {
++	sed -i '/^if HAVE_GNOME_DOC_UTILS/,/^endif/d' ${S}/Makefile.am
++}
++
+ FILES_${PN} += "${datadir}/icons"
+ FILES_${PN}-dbg += "${libdir}/glade3/modules/.debug"
+ FILES_${PN}-dev += "${libdir}/glade3/modules/*.la"
+-- 
+1.8.0.2
+
 
 
