@@ -1,30 +1,16 @@
-Received: from mail-ia0-f175.google.com ([209.85.210.175])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=zeus)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TjccB-0000cg-1I
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 22:16:15 +0100
-Received: by mail-ia0-f175.google.com with SMTP id z3so3456396iad.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 13:01:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=6DJNGQ2E5frp9uQoeJc++mKLPNJpNqlXVyKvXuqEdSk=;
-	b=XZOeMGTA5QOI6Fmqt2hf399PeIwZG/MKucOGKVKcm7gjCmsIE6eVLuPjivfMC+AGAH
-	1gqPC/wrcosbpjV6fCwcDAp212keQTGs7cIruYoOeIkzHK92R9xac8WMXV8msx8AelN6
-	SckVm/n+uaXLo6CSXd8ZR9dQJ9255rFZaLLsvn7YvtKyJJr6YUclqxkz0iWwXKNTp8PB
-	sGQIYX1SUWOCq0dSB9CsIFNlwyWDYfXvJ5xumphq25MjcL+qk09q6oO7Bj8NmAHVju1K
-	ckuN5ALtRrfDREHvHUt9IDY8Cx3JDweM+5QRopcmgF1sR0TqlkwHkSkX/tgfLs1XLtK8
-	fdyw==
-Received: by 10.50.187.197 with SMTP id fu5mr2830359igc.70.1355518897872; Fri,
-	14 Dec 2012 13:01:37 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.64.19.8 with HTTP; Fri, 14 Dec 2012 13:01:07 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Dec 2012 13:01:07 -0800
-Message-ID: <CAMKF1srKZWoYAm7+6EO1tXmw+osJ34yNZPDaXw=9wzaY5Se1vQ@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: meta-openembedded maintainers expanded with Martin
+	(envelope-from <gthomas@zeus>) id 1Tjcfo-0000m1-LS
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Dec 2012 22:20:00 +0100
+Received: by zeus (Postfix, from userid 996)
+	id 45AFF520C4C; Fri, 14 Dec 2012 14:05:50 -0700 (MST)
+From: Gary Thomas <gary@mlbassoc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Dec 2012 14:05:48 -0700
+Message-Id: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,16 +24,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 21:16:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Dec 2012 21:20:00 -0000
 
-Hi All
+The current recipe has a few installation errors:
+  * The manipulation of configurable paths drops a '/'
+  * The init script defaults are placed in the wrong file
+  * Finer control over init script start/stop
+  * The default device is non-standard
 
-Martin Jansa will be helping out in maintaining  meta-openembedded layers and
-ease out the ever increasing burden on Koen
+This patch fixes these little nits and makes the package usable again.
 
-Thanks Martin for stepping up and helping out.
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+---
+ meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
+ meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-Thanks
--Khem
+diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/recipes-support/rng-tools/files/default
+index ab7cd93..7aede9b 100644
+--- a/meta-oe/recipes-support/rng-tools/files/default
++++ b/meta-oe/recipes-support/rng-tools/files/default
+@@ -1,2 +1,3 @@
+ # Specify rng device
+-RNG_DEVICE=/dev/hwrng
++#RNG_DEVICE=/dev/hwrng
++RNG_DEVICE=/dev/urandom
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+index ef753cf..b94854a 100644
+--- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
++++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+@@ -15,12 +15,13 @@ inherit autotools update-rc.d
+ do_install_append() {
+         install -d "${D}${sysconfdir}/init.d"
+         install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
+-        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
++        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+             ${D}${sysconfdir}/init.d/rng-tools
+ 
+         install -d "${D}${sysconfdir}/default"
+-        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
++        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
+ }
+ 
+ INITSCRIPT_NAME = "rng-tools"
+ INITSCRIPT_PARAMS = "defaults"
++INITSCRIPT_PARAMS = "start 30 S . stop 30 0 6 1 ."
+-- 
+1.7.9.5
+
+
 
