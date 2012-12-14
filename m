@@ -1,37 +1,45 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from db3ehsobe004.messaging.microsoft.com ([213.199.154.142]
+	helo=db3outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TjRZJ-00009L-VJ
+	(envelope-from <B28495@freescale.com>) id 1TjRfC-0000IP-IE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 10:28:34 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa10so2050612pad.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 01:13:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=yDdDWhYQYF4Dx41S2Hi/B4TBNUWWYB5DsbrA5L+vewA=;
-	b=M7o4/Xu5YznQYBmAUU3BbdlQTyxw9NbCWObU8CLZIvAIsZLtBJ3DiIaihuk6dQlezz
-	cyuSqEcOXMjycJJek/5FSRfGFr21vJ7jXQX31Of0McEMkFc5mz09HQPQsgfb2imaTEQb
-	/luQTHKdD/SlZF/dc6eqj6mNc71qYCNPLBmvfzUHbn370QfSwcP3Cs5dkVDmSWUU9Q5c
-	nscCUdV0PaVi3Akm4JUTWcVF6bNfjDz3g79Wu9HfVVejxuwpNxxPyIbhF/zeIPky8K1v
-	fJGNsiKPBcsio8xQgMmyaLVniPuM16hrjaV4oofcMQ30I9wqEFLuY4MZpWuNNnfXoXm9
-	zuqA==
-Received: by 10.68.135.133 with SMTP id ps5mr13654898pbb.132.1355476437357;
-	Fri, 14 Dec 2012 01:13:57 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id kl5sm2611585pbc.74.2012.12.14.01.13.52
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 14 Dec 2012 01:13:54 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Dec 2012 10:14:04 +0100
-Message-Id: <20451cebde875e580265906d0416c5de7b17f6f9.1355476399.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1355438401.git.Martin.Jansa@gmail.com>
-References: <cover.1355438401.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1355476399.git.Martin.Jansa@gmail.com>
-References: <cover.1355476399.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/12] emotion: disable generic-vlc backend
+	Fri, 14 Dec 2012 10:34:40 +0100
+Received: from mail45-db3-R.bigfish.com (10.3.81.230) by
+	DB3EHSOBE005.bigfish.com (10.3.84.25) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 14 Dec 2012 08:19:48 +0000
+Received: from mail45-db3 (localhost [127.0.0.1])	by mail45-db3-R.bigfish.com
+	(Postfix) with ESMTP id 06AA73C01A4	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2012 08:19:49 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1de0h1202h1e76h1d1ah1d2ahzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1155h)
+Received: from mail45-db3 (localhost.localdomain [127.0.0.1]) by mail45-db3
+	(MessageSwitch) id 1355473187398179_13054;
+	Fri, 14 Dec 2012 08:19:47 +0000 (UTC)
+Received: from DB3EHSMHS002.bigfish.com (unknown [10.3.81.253])	by
+	mail45-db3.bigfish.com (Postfix) with ESMTP id 5B7C83E018C	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Dec 2012 08:19:47 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB3EHSMHS002.bigfish.com
+	(10.3.87.102) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 14 Dec 2012 08:19:46 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
+	Server (TLS) id 14.2.318.3; Fri, 14 Dec 2012 08:19:45 +0000
+Received: from b28495.ap.freescale.net (udp143739uds.ap.freescale.net
+	[10.192.208.202])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id qBE8JfDP017160;	Fri, 14 Dec 2012 01:19:43 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Dec 2012 16:19:41 +0800
+Message-ID: <1355473181-4279-1-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Cc: b29882@freescale.com
+Subject: [meta-oe] samba: Fix build on Fedora 17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 09:28:34 -0000
+X-List-Received-Date: Fri, 14 Dec 2012 09:34:40 -0000
+Content-Type: text/plain
 
-* we don't have vlc in DEPENDS, but when it happens to be built before
-  emotion, it causes undeterministic builds and unpackaged files
-  emotion-1.7.3: emotion: Files/directories were installed but not
-  shipped
-    /usr/lib/emotion/utils/em_generic_vlc
+From: Ting Liu <b28495@freescale.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Fedora 17 has /bin/perl, this causes samba build to put perl interpreter
+path as /bin/perl But we set perl location for target as /usr/bin/perl
+
+This mismatch of perl path causes failure of rootfs image creation:
+| error: Failed dependencies:
+| 	/bin/perl is needed by samba-3.6.8-r3.ppce5500
+
+Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- meta-efl/recipes-efl/efl/emotion.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/samba/samba.inc      |    1 +
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/efl/emotion.inc b/meta-efl/recipes-efl/efl/emotion.inc
-index 134ef40..a4ef02d 100644
---- a/meta-efl/recipes-efl/efl/emotion.inc
-+++ b/meta-efl/recipes-efl/efl/emotion.inc
-@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
- # we no longer build the libxine backend, since the gstreamer backend seems more promising
- DEPENDS = "eet eeze evas ecore edje gstreamer gst-plugins-base eio"
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index d39a84a..28ecc69 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -89,6 +89,7 @@ do_install_append() {
+         install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
  
--INC_PR = "r1"
-+INC_PR = "r2"
+ 	rmdir ${D}${base_sbindir}
++        sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
+ }
  
- inherit efl
  
--EXTRA_OECONF = "--disable-xine --enable-gstreamer --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
-+EXTRA_OECONF = "--disable-xine --disable-generic-vlc --enable-gstreamer --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index 7985199..517160d 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- PACKAGES =+ "emotion-backend-gstreamer"
- FILES_emotion-backend-gstreamer = "${libdir}/emotion/*.so"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
 -- 
-1.8.0.2
+1.7.3.4
+
 
 
 
