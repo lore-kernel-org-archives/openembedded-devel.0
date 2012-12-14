@@ -1,26 +1,33 @@
-Received: from mx.mailsparr.se ([212.112.184.237])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <johan.hovold@lundinova.se>) id 1TjUYo-0002gA-8J
+Received: from mail-ie0-f175.google.com ([209.85.223.175])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cliff.brake@gmail.com>) id 1TjaJJ-00005k-Ao
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 13:40:28 +0100
-Received: from pi (unknown [92.33.14.100])
-	by mx.mailsparr.se (Halon Mail Gateway) with ESMTPSA
+	Fri, 14 Dec 2012 19:48:38 +0100
+Received: by mail-ie0-f175.google.com with SMTP id qd14so6224394ieb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 13:25:26 +0100 (CET)
-Received: from johan by pi with local (Exim 4.80.1) (envelope-from <johan@pi>)
-	id 1TjUKS-0005ba-4w for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 13:25:24 +0100
-Date: Fri, 14 Dec 2012 13:25:24 +0100
-From: Johan Hovold <johan.hovold@lundinova.se>
+	Fri, 14 Dec 2012 10:34:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer;
+	bh=K5O4U8dwWqRyV4CqVXAsVg70kzlhyAcMu/VpUA3ZnO4=;
+	b=Ey+bqdZFqT6KuGe2RbQhSNy2U4Uh0yzlq8Jp7rHwZ7dhYuDqveYVGSTl5oYLnY5eIm
+	EDC8f5fBhBgf8DFqhtFnbz1auO50mPVr8yuJsQF7no6hlj0oM2YJ8TZ6tZvIyY3DT7ZN
+	aBB3IX/yKgHXNVczuh6Ay8qCXZfLmdBgD756p/x6szLq4Jyzdw2q39+5R3C3VOhPU+Zl
+	j1C6NaDxnHO+IUI/7xP8vsUhTdlLWIi+HVn9uyOfv+Z+bV7yQg1jlboyJb3FYiPXbrRb
+	L+CqkKkkbANZD7WyJi/9aov3w06YEkZIR2Ziyu+o6s1z5L+eXXwPE9GAuAEfO0kV5CVe
+	qIkw==
+Received: by 10.43.92.72 with SMTP id bp8mr5367406icc.49.1355510040225;
+	Fri, 14 Dec 2012 10:34:00 -0800 (PST)
+Received: from mars.hq.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net.
+	[69.34.21.229])
+	by mx.google.com with ESMTPS id s3sm4536424igb.14.2012.12.14.10.33.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 14 Dec 2012 10:33:59 -0800 (PST)
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121214122524.GA32653@lundinova.se>
-References: <1355482437-30298-1-git-send-email-johan.hovold@lundinova.se>
-	<CA+chaQd45pxo_RPGWpaU-_XDZRbm7NLO=rYzfDwQvqboyVWNHg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQd45pxo_RPGWpaU-_XDZRbm7NLO=rYzfDwQvqboyVWNHg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Sender: <johan.hovold@lundinova.se>
-Subject: Re: [meta-oe][PATCH] udev-173: fix file checksums
+Date: Fri, 14 Dec 2012 13:33:40 -0500
+Message-Id: <1355510023-17096-1-git-send-email-cliff.brake@gmail.com>
+X-Mailer: git-send-email 1.8.0.2
+Subject: [PATCH 0/3] Camera recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +41,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 12:40:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Dec 2012 18:48:38 -0000
 
-On Fri, Dec 14, 2012 at 12:21:06PM +0100, Martin Jansa wrote:
-> On Fri, Dec 14, 2012 at 11:53 AM, Johan Hovold
-> <johan.hovold@lundinova.se> wrote:
-> > Commit 7895ab08270d9 ("udev-173: Fix SRC_URI to fetch bz2 archive")
-> > changed to source file to bz2-compressed tarball but did not update the
-> > checksums.
-> >
-> > Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
-> 
-> This change looks correct, but why are you using this older udev version?
-> 
-> see http://patchwork.openembedded.org/patch/39873/
+Various patches to add support for firewire and USB industrial cameras
 
-We pinned udev to version 173 because of the meta-oe/udev dependency on
-systemd (e.g. dropped sysvinit scripts):
-
-	bf778b699d313 ("udev 174: add version 174, disabled by default
-		       (see below)")
-
-Look like we can use can switch to 182 now that oe-core's caught up.
-
-Thanks,
-Johan
+[PATCH 1/3] libraw1394: add recipe
+[PATCH 2/3] libdc1394: add recipe
+[PATCH 3/3] coriander: add recipe
 
 
