@@ -1,34 +1,31 @@
-Received: from mail-wg0-f45.google.com ([74.125.82.45])
+Received: from mail-wi0-f179.google.com ([209.85.212.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TjTWe-0002fr-4x
+	(envelope-from <martin.jansa@gmail.com>) id 1TjTYM-0002lW-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Dec 2012 12:33:56 +0100
-Received: by mail-wg0-f45.google.com with SMTP id dq12so1315414wgb.24
+	Fri, 14 Dec 2012 12:35:42 +0100
+Received: by mail-wi0-f179.google.com with SMTP id o1so371970wic.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Dec 2012 03:19:20 -0800 (PST)
+	Fri, 14 Dec 2012 03:21:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=GJhUVLpEiRRWBpa2X6HnMFAAE9utY43u9YkweQTF2cw=;
-	b=hGrGOOsm71whY5vq53Fx4uEUgzc5xVlOSVdDQY6M8o4VZxUgw5PrdSy6aV44XCOy83
-	teADo14QTsozSmCE7rWT0i1SA2GddAe1gi9Xev2nwGGhHzFkEX9rEpXzlA/L9icOnep1
-	Vc8Oe2sGC5p1qlZj2/6BCtD0euw9g39uMA6tVrnuEDwuMc1jfkVVl0MTClvMzpwCZ4lQ
-	Tgt+43r9JJ+Cg4HIqMEhbpbMPJU1qAli7Tsq6NZL4dCMEJvSbjSbcVp2oCVZpvymCn9W
-	g56+Heg8JLxAFdhceEffL75qtFlRBQuxGgPsA6d8kMiiGXdolhM/uMarvnlqGgx/+WAR
-	JVXQ==
+	:content-type; bh=vzh3xbBh6yvJ4NxaCB1XVjGQWPn7M1YwDNoQFVcFyyQ=;
+	b=O8lwaWi3udYM0+rp+CCGafydZxG3Hktj+usFCza9iYs5WZTqKVASftzz51aaEabHcG
+	A08m4fJeJg/saDJZTOUPC7zYZ8G1UXlOWiy23P1ZqmRgm3/4hruMqYXdqAp+MDVJQzUS
+	cXbpcsKYe/BWJax+/OwTeQ9KQSGKz5IjD8mAssJMpcWMMSffeeXmsn52i6klzo3C/950
+	J8NHRG5TWCzu7bUonPqTKc3vGlbKMGf0eCXLPcDn7pVj+UWLik3u6HqGkizCw2oDug5S
+	jrsdOxb3yw2WR9DzufQoCNl1iaYtr+mqEvlAlFvCnr7ghVzOGXfU+FHnjBia4W99nl1u
+	IEyQ==
 MIME-Version: 1.0
-Received: by 10.180.98.8 with SMTP id ee8mr1994170wib.4.1355483960225; Fri, 14
-	Dec 2012 03:19:20 -0800 (PST)
-Received: by 10.194.84.103 with HTTP; Fri, 14 Dec 2012 03:19:20 -0800 (PST)
-In-Reply-To: <CALbNGRSq_81mqhJjNvGKSerOe2-CM+EoFB-UXsfBOL-6nan4vQ@mail.gmail.com>
-References: <cover.1355438401.git.Martin.Jansa@gmail.com>
-	<438ebe8cfe643f3d82f3a825651693c4c90edb6f.1355438402.git.Martin.Jansa@gmail.com>
-	<CALbNGRSq_81mqhJjNvGKSerOe2-CM+EoFB-UXsfBOL-6nan4vQ@mail.gmail.com>
-Date: Fri, 14 Dec 2012 12:19:20 +0100
-Message-ID: <CA+chaQd6fnQ9HkW_zoB9QP_a0CpSHepmaAmQ3Y1WU8dhsM1QvQ@mail.gmail.com>
+Received: by 10.180.78.161 with SMTP id c1mr2003970wix.4.1355484066605; Fri,
+	14 Dec 2012 03:21:06 -0800 (PST)
+Received: by 10.194.84.103 with HTTP; Fri, 14 Dec 2012 03:21:06 -0800 (PST)
+In-Reply-To: <1355482437-30298-1-git-send-email-johan.hovold@lundinova.se>
+References: <1355482437-30298-1-git-send-email-johan.hovold@lundinova.se>
+Date: Fri, 14 Dec 2012 12:21:06 +0100
+Message-ID: <CA+chaQd45pxo_RPGWpaU-_XDZRbm7NLO=rYzfDwQvqboyVWNHg@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 09/11] glade3: disable html doc, fails to build
+Subject: Re: [meta-oe][PATCH] udev-173: fix file checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,58 +39,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2012 11:33:56 -0000
+X-List-Received-Date: Fri, 14 Dec 2012 11:35:42 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 14, 2012 at 9:26 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Thu, Dec 13, 2012 at 11:41 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->>  meta-oe/recipes-devtools/glade/glade3_3.8.2.bb | 6 ++++++
->>  1 file changed, 6 insertions(+)
->>
->> diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb b/meta-oe/re=
-cipes-devtools/glade/glade3_3.8.2.bb
->> index 8cd6a0e..049f7e3 100644
->> --- a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
->> +++ b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
->> @@ -5,6 +5,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Daabe87591cb8a=
-e0f3c68be6977bb5522 \
->>                      file://COPYING.LGPL;md5=3D3bf50002aefd002f49e7bb854=
-063f7e7"
->>  DEPENDS =3D "gtk+ gnome-doc-utils-native"
->>
->> +PR =3D "r1"
->> +
->>  inherit autotools pkgconfig pythonnative
->>
->>  SRC_URI =3D "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-$=
-{PV}.tar.xz \
->> @@ -14,6 +16,10 @@ SRC_URI[sha256sum] =3D "f180a5018eee6e3fe574854cb025a=
-f897dd9962b01d17d5752e626876d
->>
->>  EXTRA_OECONF +=3D "--disable-scrollkeeper"
->>
->> +do_configure_prepend() {
->> +  sed -i 's/HAVE_GNOME_DOC_UTILS/HAVE_GNOME_DOC_UTILS_IGNORED/g' ${S}/M=
-akefile.am
->> +}
->> +
->>  FILES_${PN} +=3D "${datadir}/icons"
->>  FILES_${PN}-dbg +=3D "${libdir}/glade3/modules/.debug"
->>  FILES_${PN}-dev +=3D "${libdir}/glade3/modules/*.la"
->> --
->> 1.8.0.2
->>
-> I am using the documentation from time to time. Don't misunderstand
-> me: For now I have no problem disabling it but could you send the
-> error information so we know what fails - maybe later there is a
-> chance for fixing it.
+On Fri, Dec 14, 2012 at 11:53 AM, Johan Hovold
+<johan.hovold@lundinova.se> wrote:
+> Commit 7895ab08270d9 ("udev-173: Fix SRC_URI to fetch bz2 archive")
+> changed to source file to bz2-compressed tarball but did not update the
+> checksums.
+>
+> Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
 
-Extended description in PATCHv2 and this bug is also related:
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D2416
+This change looks correct, but why are you using this older udev version?
+
+see http://patchwork.openembedded.org/patch/39873/
+
+Cheers,
+
+>
+> Hi,
+>
+> the above mentioned commit breaks udev-173 builds. It also claims that the
+> gz-tarballs are no longer available, but yet they are still available from
+> kernel.org as well as my local mirror. Perhaps a revert is more appropriate?
+>
+> Thanks,
+> Johan
+>
+>
+>  meta-oe/recipes-core/udev/udev_173.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-core/udev/udev_173.bb b/meta-oe/recipes-core/udev/udev_173.bb
+> index 576302c..02c5690 100644
+> --- a/meta-oe/recipes-core/udev/udev_173.bb
+> +++ b/meta-oe/recipes-core/udev/udev_173.bb
+> @@ -32,8 +32,8 @@ SRC_URI += " \
+>         file://cache \
+>  "
+>
+> -SRC_URI[md5sum] = "2afd20ee1c790eac6d7abe0498ebb414"
+> -SRC_URI[sha256sum] = "0f753ad9c3022a074d1c052bcee9139581db825283771ac78c0be0d1de109d0c"
+> +SRC_URI[md5sum] = "91a88a359b60bbd074b024883cc0dbde"
+> +SRC_URI[sha256sum] = "70a18315a12f8fc1131f7da5b4dae3606988b69d5c08f96f443b84b8486caaaf"
+>
+>  # Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
+>
+> --
+> 1.8.0.2
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
