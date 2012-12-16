@@ -1,37 +1,38 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIpR-0007xj-86
+	(envelope-from <martin.jansa@gmail.com>) id 1TkJTL-0000by-IG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 19:20:47 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1966657eaa.6
+	Sun, 16 Dec 2012 20:02:00 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2718868eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 10:06:06 -0800 (PST)
+	Sun, 16 Dec 2012 10:47:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=o9o/UGbVK0kaP87kW9zlaqVdtvOaSbheB9FOwXwg+xE=;
-	b=HXTGJL7Rgvm2ZGYcHf1znixTsV+6//ZrmRXZEl8ww6+TB6uCoxvQBgR04syILRnBxs
-	yo9PKUgxlftNDJoQvrY8Vt4XVTtD7BmoUuyQYLNxQkJhlyGq5sl+6avZzsCXoz6SsTRG
-	EDVfujvmRjzYaxjJX553Jpdv/SHaXNxyccMKMGg2IJsx5UwXqozVB6QlPETgJD509oeR
-	eYsJPUfShb1WI8lynJqbKNuOrVRnb0WBx4Q9zgCN8gEOsfbvzn+lLpHSpjDwGon43ACp
-	WCkoDSCPZ4gWC52WNS94hXjFOSeOZHxZNhKd7c6WiGosQMFomge7IPGWgpl8MfYw+x+D
-	8Evw==
-Received: by 10.14.213.134 with SMTP id a6mr33845152eep.45.1355680721727;
-	Sun, 16 Dec 2012 09:58:41 -0800 (PST)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Qehdwhire4BfKKnqa0TBhgYbVlGswwIx29M8SS4G7H0=;
+	b=naLQeapyAQtWdA+PJdsz/SKJccwGRtheqtvADeaua8Mk/ZAI10v7hyLshT+FenaC/S
+	E/BlRyGoqV7WKomEGZxynoHLII//9NwNSK62DlPxZ+XsJZFZO3u/JCu7UjuYr9IEmham
+	Te+V4D/ay8JOHVCZgd+hD38ilsLc9/Fgy9C5dSXmRZe3LBcEzTBexN2oSpoMTCaibKu8
+	PUEcqKoWb8GnBo4wGVdvB5DJlx3MeBit0THlq5c06+MLIEInZfJtiI0A5HXR9f2yWdyJ
+	FVLmu8PO0pgzdxcHA9rvmjE3GhmO+ESd7Vx6SgF2Ii7/HmtvGgEj56S4Ha4sZSyGJ4JJ
+	Cm7w==
+Received: by 10.14.194.4 with SMTP id l4mr33648069een.42.1355683640258;
+	Sun, 16 Dec 2012 10:47:20 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id e2sm23869638eeo.8.2012.12.16.09.58.41
+	by mx.google.com with ESMTPS id 6sm24136575eea.3.2012.12.16.10.47.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 09:58:41 -0800 (PST)
+	Sun, 16 Dec 2012 10:47:19 -0800 (PST)
+Date: Sun, 16 Dec 2012 19:47:19 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:58:06 +0100
-Message-Id: <401c272be0d6ac2bcced9dedb9e7f9b053ea300f.1355680285.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
-References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
-References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 23/26] lvm2: upgrade to 2.02.97 which is compatible with newer udev
+Message-ID: <20121216184719.GD3448@jama>
+References: <1355510023-17096-1-git-send-email-cliff.brake@gmail.com>
+	<1355510023-17096-3-git-send-email-cliff.brake@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1355510023-17096-3-git-send-email-cliff.brake@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: Re: [PATCH 2/3] libdc1394: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +46,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 18:20:47 -0000
+X-List-Received-Date: Sun, 16 Dec 2012 19:02:01 -0000
+X-Groupsio-MsgNum: 42214
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wLAMOaPNJ0fu1fTG"
+Content-Disposition: inline
 
-* older versions are using symbols removed in newer udev
-  | dmsetup.c:985: error: undefined reference to 'udev_get_dev_path'
-  | collect2: error: ld returned 1 exit status
-  | make[1]: *** [dmsetup] Error 1
-  | make[1]: Leaving directory
-  `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/lvm2/2.02.85-r2.0/LVM2.2.02.85/tools'
+--wLAMOaPNJ0fu1fTG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/lvm2/lvm2_2.02.85.bb | 7 -------
- meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb | 6 ++++++
- 2 files changed, 6 insertions(+), 7 deletions(-)
- delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.85.bb
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
+On Fri, Dec 14, 2012 at 01:33:42PM -0500, Cliff Brake wrote:
+> From: Cliff Brake <cbrake@bec-systems.com>
+>=20
+> Initial recipe created by Khem Raj
+>=20
+> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+> ---
+>  .../libdc1394/files/install_examples.patch             | 14 ++++++++++++=
+++
+>  .../recipes-multimedia/libdc1394/files/libdc1394.png   |  0
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.85.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.85.bb
-deleted file mode 100644
-index b2a4ff3..0000000
---- a/meta-oe/recipes-support/lvm2/lvm2_2.02.85.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require lvm2.inc
--
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "91785ca438e5ce679dd3a386b183d552"
--SRC_URI[sha256sum] = "e5c2b0d76e7b1df7630e211734eb09697d66ab879b17eb19545cb77272813eb7"
--
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
-new file mode 100644
-index 0000000..2de17cf
---- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
-@@ -0,0 +1,6 @@
-+require lvm2.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "d18bd01334309db1c422b9bf6b181057"
-+SRC_URI[sha256sum] = "edda82012e8a9e1f0b00ba5a331468d3e0201992be14c0dbea71bf564a51fc2b"
--- 
-1.8.0.2
+Is this empty libdc1394.png really needed?
 
+Cheers,
 
+>  meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb  | 18 ++++++++++++=
+++++++
+>  3 files changed, 32 insertions(+)
+>  create mode 100755 meta-oe/recipes-multimedia/libdc1394/files/install_ex=
+amples.patch
+>  create mode 100755 meta-oe/recipes-multimedia/libdc1394/files/libdc1394.=
+png
+>  create mode 100755 meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
+>=20
+> diff --git a/meta-oe/recipes-multimedia/libdc1394/files/install_examples.=
+patch b/meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch
+> new file mode 100755
+> index 0000000..89133ad
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch
+> @@ -0,0 +1,14 @@
+> +Index: libdc1394/examples/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- libdc1394.orig/examples/Makefile.am	2012-06-30 17:50:46.000000000 -0=
+700
+> ++++ libdc1394/examples/Makefile.am	2012-06-30 19:02:13.822646430 -0700
+> +@@ -36,8 +36,7 @@
+> + AM_LDFLAGS =3D -framework CoreFoundation -framework Carbon
+> + endif
+> +=20
+> +-noinst_PROGRAMS =3D $(A)
+> +-bin_PROGRAMS =3D $(B)
+> ++bin_PROGRAMS =3D $(A) $(B)
+> +=20
+> + LDADD =3D ../dc1394/libdc1394.la
+> +=20
+> diff --git a/meta-oe/recipes-multimedia/libdc1394/files/libdc1394.png b/m=
+eta-oe/recipes-multimedia/libdc1394/files/libdc1394.png
+> new file mode 100755
+> index 0000000..e69de29
+> diff --git a/meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb b/meta=
+-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
+> new file mode 100755
+> index 0000000..41547d9
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION =3D "Capture and control API for IIDC compliant cameras"
+> +HOMEPAGE =3D "http://sourceforge.net/projects/libdc1394/"
+> +SECTION =3D "libs"
+> +LICENSE =3D "LGPL-2.0"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc848e78d9a4a5cc69906178e4d6fb=
+d64"
+> +DEPENDS +=3D "libxv virtual/libsdl virtual/libx11 libusb1 libraw1394"
+> +SRCREV =3D "fa2b5b5a56e2c306cd3e756e810cceb68ab55b8f"
+> +
+> +SRC_URI =3D "git://libdc1394.git.sourceforge.net/gitroot/libdc1394/libdc=
+1394/;branch=3Dmaster;protocol=3Dgit \
+> +           file://install_examples.patch \
+> +           file://${PN}.png \
+> +          "
+> +
+> +S =3D "${WORKDIR}/git/${PN}"
+> +
+> +inherit autotools pkgconfig sdl
+> +
+> +EXTRA_OECONF +=3D "--disable-doxygen-doc"
+> --=20
+> 1.8.0.2
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--wLAMOaPNJ0fu1fTG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDOFzcACgkQN1Ujt2V2gBzcWQCcCQCN5drQVk8L+taknXaO6bWC
+0+8An1Eyrpj1ALGlICIqtAVdXCoNopaW
+=hxE9
+-----END PGP SIGNATURE-----
+
+--wLAMOaPNJ0fu1fTG--
