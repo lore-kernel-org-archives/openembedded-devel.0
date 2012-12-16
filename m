@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIi1-0005nD-AQ
+	(envelope-from <martin.jansa@gmail.com>) id 1TkIi0-0005nC-4H
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 16 Dec 2012 19:13:10 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1964823eaa.6
+Received: by mail-ee0-f47.google.com with SMTP id e51so2705899eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 09:58:26 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=T+Rxve6GFinUSbvFQ19cbMQ+kVj2pBCeDJVcHWoC6PQ=;
-	b=D24CUWq7CBOGXqyoONZhfVNNBKlaP9QbQCf4PLacKQhoPMs2iYPpCUj/KvWCcPvlMd
-	p3SsPrjeYohNuu3/nXG1RZZSA4pQs0RjSbh3WXzPmm1gaM6dmnUouK3gU1AQi8fz8ZMs
-	dZhkXBPXFLe+xNKAYd6K0YgwlmEMG1e15dA0hivqGdfIFHu+XBUm9CSbzR4C6UxaKipM
-	J/1W0Uhqe+/0drHmHD49twAt3rDmtw2/C2y6L1CSHG1dd1blR7FjRFHnR0p1GgTBM+dc
-	dxrR3aNZjaoYF+tnEmjdIBs35d6UOkk6cMN8W5FK6IsxDQ5KjPzT1J7gvxQWyJcJASLq
-	GzrQ==
-Received: by 10.14.184.131 with SMTP id s3mr33703470eem.38.1355680706356;
-	Sun, 16 Dec 2012 09:58:26 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 44sm23878939eek.0.2012.12.16.09.58.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
+	bh=KWKmQlV8OBzHvlCFVb6BzNmvoNcwRUcQsKANvytjWkQ=;
+	b=mFnQq0qGTmestprLJzKdphbIxir7wqueu6yZ5Ged5xlUCj45miHkGaH2gl8+EGgXKP
+	Yxg7CX0ICeQt9vZEo+XPmMj7m8npY9Z4OSylXl3VMebTcz82GtbmBkTsQWY7a9eKgtqf
+	hGNWYKdoRlisC9PFwGbFqTTmavqPL+ScCKnE3og2DJxUrbJgmrA+aIlmi7YzE9WfPc5O
+	uUaf4/tLhz7Dtl/ulIwdJy2I/Rd4ygZi57FPoS6az229HONw9VRTpTO+mgu/bbQ69g6Q
+	YmH/1W5uCSSetuilkcT0JxYgiqIua7rMuIAxtBZz1G55CYcfcJi6XgKp9vFdgietQO+f
+	msbA==
+Received: by 10.14.173.65 with SMTP id u41mr33815015eel.13.1355680705140;
 	Sun, 16 Dec 2012 09:58:25 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id d3sm23868893eeo.13.2012.12.16.09.58.24
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 16 Dec 2012 09:58:24 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:57:54 +0100
-Message-Id: <1a1ac8512e7548a5b490471155767dbe99bf7514.1355680285.git.Martin.Jansa@gmail.com>
+Date: Sun, 16 Dec 2012 18:57:53 +0100
+Message-Id: <c4586cf82bb2fa701dfcdca967e329f5ed1c49d8.1355680285.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/26] samba: Fix build on Fedora 17
+Subject: [meta-oe][PATCH 10/26] gtk+3: add libxi dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,57 +47,31 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 16 Dec 2012 18:13:11 -0000
 
-From: Ting Liu <b28495@freescale.com>
+From: Marko Lindqvist <cazfi74@gmail.com>
 
-* Fedora 17 has /bin/perl, this causes samba build to put perl interpreter
-  path as /bin/perl But we set perl location for target as /usr/bin/perl
+Without even compile fails:
+| In file included from gdkdevice-xi.c:24:0:
+| gdkdeviceprivate-xi.h:28:35: fatal error: X11/extensions/XInput.h: No such file or directory
 
-* This mismatch of perl path causes failure of rootfs image creation:
-  | error: Failed dependencies:
-  | 	/bin/perl is needed by samba-3.6.8-r3.ppce5500
-
-* MJ: fixed whitespaces
-
-Signed-off-by: Ting Liu <b28495@freescale.com>
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba.inc      | 7 ++++---
- meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 2 +-
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index d39a84a..416334a 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -84,11 +84,12 @@ do_install_append() {
- 	install -d ${D}/var/log/samba
- 	install -d ${D}/var/spool/samba
+diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
+index 854ba41..55397cc 100644
+--- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
++++ b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.2.3.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
  
--        # Install other stuff not installed by "make install"
--        install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
--        install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
-+	# Install other stuff not installed by "make install"
-+	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
-+	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
+ DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
+            gtk-doc-native docbook-utils-native libxrandr libgcrypt \
+-           libxdamage libxrender libxcomposite cairo gdk-pixbuf gtk+-native"
++           libxdamage libxrender libxcomposite libxi cairo gdk-pixbuf gtk+-native"
  
- 	rmdir ${D}${base_sbindir}
-+	sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
- }
+ LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
  
- 
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index 4750ecb..5722cb6 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -3,7 +3,7 @@ require samba-basic.inc
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PR = "r3"
-+PR = "r4"
- 
- SRC_URI += "\
-     file://config-h.patch \
 -- 
 1.8.0.2
 
