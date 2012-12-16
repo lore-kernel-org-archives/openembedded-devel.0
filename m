@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIhv-0005n9-M9
+	(envelope-from <martin.jansa@gmail.com>) id 1TkIhx-0005nA-7F
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 16 Dec 2012 19:13:10 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1964799eaa.6
+Received: by mail-ee0-f47.google.com with SMTP id e51so2705882eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 09:58:20 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=qOVnhkuwXGnsXndDN7EdprzntdYb34uC9yYu6+tskzI=;
-	b=SVbjC2AMcHijo3O1IIaenH5yVSAqhh6gQkX18CG45jaW/xLnUjiUxJrjY0VO1oPN15
-	EPPR5JsVdPn9Mv6hffhGARC9FJ3tN4Rp8UnL++nkDoHak8J2xER+edMfYnCGseGuIDN4
-	vd1ao80GSRVKZOA4fHmKaR+RfPP7sVDCh66xfijVl5XJK7JP3KYNWe2llJX68q2WGC1t
-	wZUZRRLP7hqRBbrhGKPirCEsxh6tPo1KshTCW0BdLVyVNlCVTuJKA3TpM/sJutuOASIj
-	gbyu2tDl5fxgLW+lQJNECHIy5W20iEKVy/6ymevFdzwaJAF3z/DDeH0DuBIGaBJ7ml59
-	j34Q==
-Received: by 10.14.194.4 with SMTP id l4mr33363104een.42.1355680700540;
-	Sun, 16 Dec 2012 09:58:20 -0800 (PST)
+	bh=XysA2ZBBwPiwjm5ndr37J2NzQh/RalhgjLKO7Mx6+6I=;
+	b=KXLsAiT/xINg9V/TVnUM726HN9okjuv55wLQI0PTd3+/3fNrNNT7GtK0xVv/1XjieY
+	x9MCANmw+zxR3YjhS4bJrf+xVv8/1p3ty446hMGsfj79F6Xmz0zUUiXBuIhS0rgUSMi3
+	6Z+NcVaja7tGii+TO75AHK/Kendwpz9M1ODOrS4tR46h5jfVdRNsHaldxJhbaQgtS0Zc
+	7GaNsAb8sTmgtPSgaVYZdQM1cGZiz2soARDVjj0UCuVjz1Ai+SzBjUbUaA9zpsX4Nvk7
+	IgZ+GCxxNrNKSHJokGJzVsuHI4Onhsw7j73T8qtwh2R3s25StGUTEdXbFU8k1x3NVIkO
+	yagg==
+Received: by 10.14.202.3 with SMTP id c3mr34076865eeo.4.1355680702225;
+	Sun, 16 Dec 2012 09:58:22 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id e2sm23867963eeo.8.2012.12.16.09.58.19
+	by mx.google.com with ESMTPS id z8sm23867476eeo.11.2012.12.16.09.58.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 09:58:19 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:21 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:57:50 +0100
-Message-Id: <8e6de6006b1938ae7c28390f4f999a1b7a154b54.1355680285.git.Martin.Jansa@gmail.com>
+Date: Sun, 16 Dec 2012 18:57:51 +0100
+Message-Id: <11dfb4a15516fed633535588dadf559156b6cb7d.1355680285.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 07/26] meta-oe: Fix erroneous use of "startline" in LIC_FILES_CHKSUM
+Subject: [meta-oe][PATCH 08/26] meta-networking: Fix erroneous use of "startline" in LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,78 +56,52 @@ default of 1).
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb       | 2 +-
- meta-oe/recipes-extended/lcdproc/lcdproc5.inc            | 2 +-
- meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb | 2 +-
- meta-oe/recipes-extended/tmux/tmux_1.6.bb                | 2 +-
- meta-oe/recipes-support/mini-iconv/mini-iconv.bb         | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb | 4 ++--
+ meta-networking/recipes-support/mtr/mtr_0.82.bb          | 2 +-
+ meta-networking/recipes-support/tunctl/tunctl.inc        | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
-index 3000dbb..7e0a4fb 100644
---- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
-+++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
-@@ -7,7 +7,7 @@ SECTION = "console"
- LICENSE = "GPLv3+"
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index 40294b0..af48455 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -8,8 +8,8 @@ and should not be enabled unless it is expressly needed."
+ DEPENDS = "tcp-wrappers readline"
+ SECTION = "network"
+ LICENSE = "BSD-4-Clause"
+-LIC_FILES_CHKSUM = "file://MCONFIG.in;startline=1;endline=9;md5=c28ba5adb43041fae4629db05c83cbdd \
+-                    file://tftp/tftp.c;startline=1;endline=32;md5=988c1cba99d70858a26cd877209857f4"
++LIC_FILES_CHKSUM = "file://MCONFIG.in;beginline=1;endline=9;md5=c28ba5adb43041fae4629db05c83cbdd \
++                    file://tftp/tftp.c;beginline=1;endline=32;md5=988c1cba99d70858a26cd877209857f4"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
--                    file://main_common.cc;startline=5;endline=16;md5=0ef2c1bede11c6c9c6c12330d60bc7a7"
-+                    file://main_common.cc;beginline=5;endline=16;md5=b5a59150a33658cc1ffc31b1a4ffb9f2"
- 
- SRC_URI = "${GNU_MIRROR}/${PN}/${P}.tar.gz"
- SRC_URI[md5sum] = "57b67407e882c6418531d48a2f20d16b"
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-index 76669be..4040870 100644
---- a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-+++ b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-@@ -7,7 +7,7 @@ LICENSE = "GPLv2+"
- DEPENDS = "virtual/libusb0 ncurses"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
--                    file://README;startline=60;md5=8237b4d4d80a525b15f8162192e07bee"
-+                    file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${P}.tar.gz"
- 
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb
-index cf6c212..89b4f06 100644
---- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb
-+++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.pengutronix.de"
- SECTION = "libs/network"
- 
- LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://src/libsocketcan.c;startline=3;endline=17;md5=2c5c54d58b42d2216f34759062be3ddb"
-+LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
- 
- SRCREV = "3a2cec63a4e6212cc63d21008453bd799cfe8774"
- 
-diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-index fa58065..6be2355 100644
---- a/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-+++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://tmux.sourceforge.net"
- SECTION = "console/utils"
- 
- LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://tmux.c;startline=3;endline=17;md5=f36d9c9e6c1c24996a88891fdf783d04"
-+LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=8685b4455330a940fab1ff451aa941a0"
- 
- DEPENDS = "ncurses libevent sed-native"
- 
-diff --git a/meta-oe/recipes-support/mini-iconv/mini-iconv.bb b/meta-oe/recipes-support/mini-iconv/mini-iconv.bb
-index 7d5bc68..3150013 100644
---- a/meta-oe/recipes-support/mini-iconv/mini-iconv.bb
-+++ b/meta-oe/recipes-support/mini-iconv/mini-iconv.bb
-@@ -8,7 +8,7 @@ SECTION = "libs"
- DEPENDS = ""
- PROVIDES = "virtual/libiconv"
  PR = "r0"
--LIC_FILES_CHKSUM = "file://iconv.c;startline=1;endline=6;md5=35af9d9924327fe8a0a1fe3a2cb454c8"
-+LIC_FILES_CHKSUM = "file://iconv.c;beginline=1;endline=6;md5=35af9d9924327fe8a0a1fe3a2cb454c8"
- SRC_URI = "http://mirror.meleeweb.net/pub/linux/gentoo/distfiles/mini-iconv.tar.bz2"
- SRC_URI[md5sum] = "84412221e26505a2b3855d4a1cdcd0e0"
- SRC_URI[sha256sum] = "3552262bf1bcf8e859a2a3a7adfb0367af8593383e730c492e981477aac0a0d4"
+ 
+diff --git a/meta-networking/recipes-support/mtr/mtr_0.82.bb b/meta-networking/recipes-support/mtr/mtr_0.82.bb
+index c6d5152..3a93948 100644
+--- a/meta-networking/recipes-support/mtr/mtr_0.82.bb
++++ b/meta-networking/recipes-support/mtr/mtr_0.82.bb
+@@ -5,7 +5,7 @@ DEPENDS = "ncurses"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+-                    file://mtr.c;startline=5;endline=16;md5=87105f8fe9675e897e074869afaafa6f"
++                    file://mtr.c;beginline=5;endline=16;md5=56e390ced194aff352eefab404883057"
+ 
+ SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
+            file://no-gtk.patch"
+diff --git a/meta-networking/recipes-support/tunctl/tunctl.inc b/meta-networking/recipes-support/tunctl/tunctl.inc
+index 952af24..29aed44 100644
+--- a/meta-networking/recipes-support/tunctl/tunctl.inc
++++ b/meta-networking/recipes-support/tunctl/tunctl.inc
+@@ -1,7 +1,7 @@
+ SUMMARY = "Tool for controlling the Linux TUN/TAP driver"
+ SECTION = "net"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://tunctl.c;startline=1;endline=4;md5=ff3a09996bc5fff6bc5d4e0b4c28f999"
++LIC_FILES_CHKSUM = "file://tunctl.c;beginline=1;endline=4;md5=ff3a09996bc5fff6bc5d4e0b4c28f999"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz"
+ 
 -- 
 1.8.0.2
 
