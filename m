@@ -1,37 +1,37 @@
 Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkInm-0007XJ-Ex
+	(envelope-from <martin.jansa@gmail.com>) id 1TkIoB-0007bn-NB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 19:19:02 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1966204eaa.6
+	Sun, 16 Dec 2012 19:19:27 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1966324eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 10:04:23 -0800 (PST)
+	Sun, 16 Dec 2012 10:04:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=vtM9c6b/DQp0g+TWcZtjWgbyj6ujnKXR+DQKkLdIGQg=;
-	b=IXXnA5PYyGGDts5e4YpsBltf1Dngpxb6x6OruLs/NSSv5cwBD1GIa+xIxnPEB2cf+V
-	b55NNhmgkj1IMBefln1yRHXQY0PVemBFgM34yNjEmTSiJmcxCN5b1R2HfKIUccfwVeMV
-	3EtJb1bcp20M1bgoOO8pECzbruFrmLyb8zzAw18c8fW3B//emiV9P/MCZNjC7ONsucUn
-	3Hisups2m0ISRNPE/A5TweHxBLCWBoFGoANvZouoKobL9OR8eqEY0ZLB/kVjqkdYd4M3
-	w2wobnfkTinDtWaJNpF+lMdsKk/OcCrT7n6CcZ9VxpCrqxCp43xP/x7E0MZNR1hmJCNx
-	z7AQ==
-Received: by 10.14.225.194 with SMTP id z42mr34044612eep.22.1355680719243;
-	Sun, 16 Dec 2012 09:58:39 -0800 (PST)
+	bh=W5OefxCZH5SOkYbWPW18S50qhsV4fqAe8w59kYvTIVI=;
+	b=E/K0njrg7LIFjvFwQniVvaZR+lAV0TEQmtLFz4YYQhlt+Uv8zc2nH3Z4TDEQdIqljy
+	hEmFEUTnNCGU9FPtykFRgY4O0uq2Om7+VO6AX8eVHH1BQhaleNjJavRTe0XRE1x6iQpv
+	oBgOJ2VLd2EuE6pkO+GyPU+X2kCVHZKFdHAGYI6b6QULgPTcWu7Xdb4Z0QwttjpUk56K
+	WCrucvfofeOfW0aCyznsynh5wl2EiFXwTXTkzgG0Yv1e211f7bqnttbIuAdqhUPw4kl2
+	nhN9Iu1KpC5kQpBb/lyELjw0IMP/FNCLuRP7xkccDj5d9jcygPRSzBN3aTGTfzmH3oPk
+	vVJw==
+Received: by 10.14.2.196 with SMTP id 44mr33845179eef.25.1355680717994;
+	Sun, 16 Dec 2012 09:58:37 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id l3sm23871372eem.14.2012.12.16.09.58.38
+	by mx.google.com with ESMTPS id 6sm23878820eea.3.2012.12.16.09.58.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 09:58:38 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:37 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:58:04 +0100
-Message-Id: <41fb98b129602a22b034c94f06975325f39040b1.1355680285.git.Martin.Jansa@gmail.com>
+Date: Sun, 16 Dec 2012 18:58:03 +0100
+Message-Id: <bb1398ef35597e8d053165310575f7735970bb59.1355680285.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 21/26] gcc-cross-canadian 4.6: fix dependencies to be nativesdk-* not *-nativesdk
+Subject: [meta-oe][PATCH 20/26] libgcc: s/virtclass/class/ to make it up-to-date
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,31 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 18:19:02 -0000
+X-List-Received-Date: Sun, 16 Dec 2012 18:19:27 -0000
 
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ toolchain-layer/recipes-devtools/gcc/libgcc_4.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-index e0af4aa..788391a 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-@@ -5,8 +5,8 @@ require recipes-devtools/gcc/gcc-cross-canadian.inc
- require recipes-devtools/gcc/gcc-configure-sdk.inc
- require recipes-devtools/gcc/gcc-package-sdk.inc
+diff --git a/toolchain-layer/recipes-devtools/gcc/libgcc_4.6.bb b/toolchain-layer/recipes-devtools/gcc/libgcc_4.6.bb
+index 8529755..4dade08 100644
+--- a/toolchain-layer/recipes-devtools/gcc/libgcc_4.6.bb
++++ b/toolchain-layer/recipes-devtools/gcc/libgcc_4.6.bb
+@@ -5,7 +5,7 @@ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
  
--DEPENDS += "gmp-nativesdk mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
--RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
-+DEPENDS += "nativesdk-gmp nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
-+RDEPENDS_${PN} += "nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
+ PKGSUFFIX = ""
+-PKGSUFFIX_virtclass-nativesdk = "-nativesdk"
++PKGSUFFIX_class-nativesdk = "-nativesdk"
  
- SYSTEMHEADERS = "/usr/include"
- SYSTEMLIBS = "/lib/"
+ PACKAGES = "\
+   ${PN} \
 -- 
 1.8.0.2
 
