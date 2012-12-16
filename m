@@ -1,36 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIju-0006N4-9g
+	(envelope-from <martin.jansa@gmail.com>) id 1TkInB-0007Sl-Tn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 19:15:08 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2706414eek.6
+	Sun, 16 Dec 2012 19:18:25 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1966077eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 10:00:23 -0800 (PST)
+	Sun, 16 Dec 2012 10:03:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yfjBZXn/V581lezBuQuYCBrVce6Bh+fKHJnAvoZ1VUs=;
-	b=CUOv4ccKIkSn9WNVjZEclDyLSbafgsLZQGCe3hlpnm2KmnXZguBwcZTVpiWuv7fqr9
-	Q5iqh3Xn+VfIBguCs/O3oeZDpq2tN/muVexg+fKdoB2M7TqJW2JVV8jlGfKMB2hGve8D
-	5oJvoaExNTS+W5Xo7r8fLoU4sg0HIkgthQYENSKIGkqzVl53Iut4L5mPpuNn+0xamtjz
-	vd7wQr+wCk77c+HSeb0SMyhWeGuutep7/jeyRYPRtGnPrI6t/o5nrVapRlpHSrIr+CwF
-	gw21dWMjwXc2DHXxzzKSp9oeXvQlfvF5YvHS0wFYr/Nd6RoAafG8i7xVT+MbedkgjN3w
-	ieDw==
-Received: by 10.14.3.195 with SMTP id 43mr33746780eeh.36.1355680823300;
-	Sun, 16 Dec 2012 10:00:23 -0800 (PST)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:in-reply-to:references;
+	bh=GIJ18lj1agQIvEvDxoTf6SR+aYlgcFMAfBw+paLDQyw=;
+	b=FKyp6QwZnPzIyYGA2d0e+qM0zi416o8fnaUpU6qfuE58EhbemFho3i7Mu5IMSirnL6
+	XR9tLjlfaq0Z1D2jUYt2AsM9yO0Muqb4PeGQlWtw5AQaXQQnEJjeQLvmO5G1Mss0gQw3
+	vYimvx8Yn/wZdYDbYNkTqdlcA5iTfzXa3iTjrmWN6YEZfxFA9YHblCgxBj24ApitdGqw
+	y7iMrfVoeEOHB+8zuA2z0cdKX9b6uGyS3/PQQTza0R0lOXOBtIPwf/bc8c+VrI2H5GL+
+	/ttwNgMZCIXRr2F9KjdQlJGmjdqZTWQJwAN3VLbAgJOPWK2OONqLaKlL28hwlg9Y4keG
+	UGJw==
+Received: by 10.14.194.4 with SMTP id l4mr33365331een.42.1355680722948;
+	Sun, 16 Dec 2012 09:58:42 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id v46sm23892117eep.1.2012.12.16.10.00.22
+	by mx.google.com with ESMTPS id w3sm23900154eel.17.2012.12.16.09.58.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 10:00:22 -0800 (PST)
-Date: Sun, 16 Dec 2012 19:00:22 +0100
+	Sun, 16 Dec 2012 09:58:42 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121216180022.GC3448@jama>
-References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
+Date: Sun, 16 Dec 2012 18:58:07 +0100
+Message-Id: <6835497c58d86de86f27fb5080981d7d27366bc5.1355680285.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0.2
+In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
+References: <cover.1355680285.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
+References: <cover.1355680285.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 24/26] cryptsetup: import from oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,84 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 18:15:08 -0000
-X-Groupsio-MsgNum: 42206
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xo44VMWPx7vlQ2+2"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 16 Dec 2012 18:18:26 -0000
 
---xo44VMWPx7vlQ2+2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* add LIC_FILES_CHKSUM
+* depend on util-linux (renamed from util-linux-ng)
+* depend on lvm2 instead of device-mapper
+* inherit gettext
 
-On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
-> The current recipe has a few installation errors:
->   * The manipulation of configurable paths drops a '/'
->   * The init script defaults are placed in the wrong file
->   * Finer control over init script start/stop
->   * The default device is non-standard
->=20
-> This patch fixes these little nits and makes the package usable again.
->=20
-> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> ---
->  meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
->  meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
->  2 files changed, 5 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/re=
-cipes-support/rng-tools/files/default
-> index ab7cd93..7aede9b 100644
-> --- a/meta-oe/recipes-support/rng-tools/files/default
-> +++ b/meta-oe/recipes-support/rng-tools/files/default
-> @@ -1,2 +1,3 @@
->  # Specify rng device
-> -RNG_DEVICE=3D/dev/hwrng
-> +#RNG_DEVICE=3D/dev/hwrng
-> +RNG_DEVICE=3D/dev/urandom
-> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/r=
-ecipes-support/rng-tools/rng-tools_2.bb
-> index ef753cf..b94854a 100644
-> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
->  do_install_append() {
->          install -d "${D}${sysconfdir}/init.d"
->          install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-too=
-ls
-> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},=
-' \
-> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/=
-,' \
->              ${D}${sysconfdir}/init.d/rng-tools
-> =20
->          install -d "${D}${sysconfdir}/default"
-> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
-> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
->  }
-> =20
->  INITSCRIPT_NAME =3D "rng-tools"
->  INITSCRIPT_PARAMS =3D "defaults"
-> +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
 
-Why do you add 2nd INITSCRIPT_PARAMS ?
+diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
+new file mode 100644
+index 0000000..254f563
+--- /dev/null
++++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Setup virtual encryption devices under dm-crypt Linux"
++HOMEPAGE = "http://code.google.com/p/cryptsetup/"
++SECTION = "console"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++DEPENDS = "util-linux lvm2 libgcrypt popt"
++RRECOMMENDS_${PN} = "kernel-module-aes \
++                     kernel-module-dm-crypt \
++                     kernel-module-md5 \
++                     kernel-module-cbc \
++                     kernel-module-sha256 \
++                    "
++SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
++SRC_URI[md5sum] = "318a64470861ea5b92a52f2014f1e7c1"
++SRC_URI[sha256sum] = "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e0602bf40208b5e69c0a"
++
++inherit autotools gettext
+-- 
+1.8.0.2
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---xo44VMWPx7vlQ2+2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDODDYACgkQN1Ujt2V2gByhAgCaAwVEXn7VMB7BxnUXjhbkMFG7
-dWQAmgL8JXpz8IUgv0IjaPkOx5PkdFQn
-=QMVu
------END PGP SIGNATURE-----
-
---xo44VMWPx7vlQ2+2--
