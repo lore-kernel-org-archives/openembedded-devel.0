@@ -1,37 +1,36 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIiK-0005p4-Dg
+	(envelope-from <martin.jansa@gmail.com>) id 1TkIju-0006N4-9g
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 19:13:24 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so1964895eaa.6
+	Sun, 16 Dec 2012 19:15:08 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2706414eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 09:58:45 -0800 (PST)
+	Sun, 16 Dec 2012 10:00:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=JQmL2Py/46UtuGWaE/6G9AZ/8fAy1TnjnH0aZPzpgsk=;
-	b=vDX5ZLheX0uKrvNdtZ59ortOAdB+Kero1MCnYFcLVUTF7H4s1n0eWRaxrPHVtSK/i0
-	U0n3EJDGRfiMFROfVAJ/Wmh+WoWSFgzBFoOhoqPgCl9JvOE94tA7aAI6xgMgLvvXo6Cq
-	bsKWaHsTSMQVjSy7nVFd2Jd5nTLWNdNHvGIGG5ss+RbWML10kE+MILY71N60QLJoLsif
-	ZSS4OVcaqNNocHlSJFWpqCQLkDxbbn7p8hvch8dmQs2fV3k8994ntoTeZJjQaOTDv/hI
-	jppctcNbXxHTwSzAj+Kj7wwJM15PohcNwxoqQZfn/EVb/FBvhu3nPS2IB/NyalIwVIv9
-	xvkQ==
-Received: by 10.14.202.3 with SMTP id c3mr34079130eeo.4.1355680725403;
-	Sun, 16 Dec 2012 09:58:45 -0800 (PST)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=yfjBZXn/V581lezBuQuYCBrVce6Bh+fKHJnAvoZ1VUs=;
+	b=CUOv4ccKIkSn9WNVjZEclDyLSbafgsLZQGCe3hlpnm2KmnXZguBwcZTVpiWuv7fqr9
+	Q5iqh3Xn+VfIBguCs/O3oeZDpq2tN/muVexg+fKdoB2M7TqJW2JVV8jlGfKMB2hGve8D
+	5oJvoaExNTS+W5Xo7r8fLoU4sg0HIkgthQYENSKIGkqzVl53Iut4L5mPpuNn+0xamtjz
+	vd7wQr+wCk77c+HSeb0SMyhWeGuutep7/jeyRYPRtGnPrI6t/o5nrVapRlpHSrIr+CwF
+	gw21dWMjwXc2DHXxzzKSp9oeXvQlfvF5YvHS0wFYr/Nd6RoAafG8i7xVT+MbedkgjN3w
+	ieDw==
+Received: by 10.14.3.195 with SMTP id 43mr33746780eeh.36.1355680823300;
+	Sun, 16 Dec 2012 10:00:23 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id l3sm23872087eem.14.2012.12.16.09.58.44
+	by mx.google.com with ESMTPS id v46sm23892117eep.1.2012.12.16.10.00.22
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 09:58:44 -0800 (PST)
+	Sun, 16 Dec 2012 10:00:22 -0800 (PST)
+Date: Sun, 16 Dec 2012 19:00:22 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:58:09 +0100
-Message-Id: <29b800e7ebc299027bdc256e0286537c2b6ce0c8.1355680285.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
-References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
-References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 26/26] libsdl-mixer: update to upstream version 1.2.12
+Message-ID: <20121216180022.GC3448@jama>
+References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+MIME-Version: 1.0
+In-Reply-To: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,108 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 18:13:25 -0000
+X-List-Received-Date: Sun, 16 Dec 2012 18:15:08 -0000
+X-Groupsio-MsgNum: 42206
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xo44VMWPx7vlQ2+2"
+Content-Disposition: inline
 
-From: Marko Lindqvist <cazfi74@gmail.com>
+--xo44VMWPx7vlQ2+2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Now uses zlib license.
-Dropped fix-flac-madness patch as upsream configure check in question
-now uses AC_TRY_COMPILE instead of AC_TRY_RUN.
+On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
+> The current recipe has a few installation errors:
+>   * The manipulation of configurable paths drops a '/'
+>   * The init script defaults are placed in the wrong file
+>   * Finer control over init script start/stop
+>   * The default device is non-standard
+>=20
+> This patch fixes these little nits and makes the package usable again.
+>=20
+> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+> ---
+>  meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
+>  meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/re=
+cipes-support/rng-tools/files/default
+> index ab7cd93..7aede9b 100644
+> --- a/meta-oe/recipes-support/rng-tools/files/default
+> +++ b/meta-oe/recipes-support/rng-tools/files/default
+> @@ -1,2 +1,3 @@
+>  # Specify rng device
+> -RNG_DEVICE=3D/dev/hwrng
+> +#RNG_DEVICE=3D/dev/hwrng
+> +RNG_DEVICE=3D/dev/urandom
+> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/r=
+ecipes-support/rng-tools/rng-tools_2.bb
+> index ef753cf..b94854a 100644
+> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
+>  do_install_append() {
+>          install -d "${D}${sysconfdir}/init.d"
+>          install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-too=
+ls
+> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},=
+' \
+> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/=
+,' \
+>              ${D}${sysconfdir}/init.d/rng-tools
+> =20
+>          install -d "${D}${sysconfdir}/default"
+> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
+>  }
+> =20
+>  INITSCRIPT_NAME =3D "rng-tools"
+>  INITSCRIPT_PARAMS =3D "defaults"
+> +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
 
-Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../libsdl-mixer/libsdl-mixer/configure.patch      |  9 ++++---
- .../libsdl-mixer/fix-flac-madness.diff             | 28 ----------------------
- ...bsdl-mixer_1.2.11.bb => libsdl-mixer_1.2.12.bb} | 10 ++++----
- 3 files changed, 9 insertions(+), 38 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/fix-flac-madness.diff
- rename meta-oe/recipes-multimedia/libsdl-mixer/{libsdl-mixer_1.2.11.bb => libsdl-mixer_1.2.12.bb} (78%)
+Why do you add 2nd INITSCRIPT_PARAMS ?
 
-diff --git a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/configure.patch b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/configure.patch
-index 7cc69e0..4c9e8d0 100644
---- a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/configure.patch
-+++ b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/configure.patch
-@@ -1,11 +1,10 @@
--Index: SDL_mixer-1.2.11/configure.in
--===================================================================
----- SDL_mixer-1.2.11.orig/configure.in	2011-02-15 11:54:23.929086120 +0100
--+++ SDL_mixer-1.2.11/configure.in	2011-02-15 11:56:53.745736645 +0100
-+diff -Nurd SDL_mixer-1.2.12/configure.in SDL_mixer-1.2.12/configure.in
-+--- SDL_mixer-1.2.12/configure.in	2012-01-16 00:01:05.000000000 +0200
-++++ SDL_mixer-1.2.12/configure.in	2012-12-15 04:08:04.627871456 +0200
- @@ -1,6 +1,5 @@
-  dnl Process this file with autoconf to produce a configure script.
-  AC_INIT(README)
---AC_CONFIG_AUX_DIRS($srcdir/build-scripts)
-+-AC_CONFIG_AUX_DIR(build-scripts)
-  
-  dnl Set various version strings - taken gratefully from the GTk sources
-  
-diff --git a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/fix-flac-madness.diff b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/fix-flac-madness.diff
-deleted file mode 100644
-index 48fe88e..0000000
---- a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer/fix-flac-madness.diff
-+++ /dev/null
-@@ -1,28 +0,0 @@
----- /tmp/configure.in	2009-12-02 16:18:33.000000000 +0100
--+++ SDL_mixer-1.2.11/configure.in	2009-12-02 16:20:02.000000000 +0100
--@@ -413,24 +413,7 @@
--               [], [enable_music_flac_shared=yes])
-- if test x$enable_music_flac = xyes; then
--     AC_CHECK_HEADER([FLAC/export.h], [have_flac_export=yes])
---    if test x$have_flac_export = xyes; then
---        LIBS_SAVED="$LIBS"
---        LIBS="-lFLAC"
---        AC_MSG_CHECKING([for libflac so-name version >= $libflac_ver])
---        AC_TRY_RUN([
---#include "FLAC/export.h"
---#include "stdio.h"
---int main( int argc, char *argv[] ) {
---#if defined(FLAC_API_VERSION_CURRENT) && (FLAC_API_VERSION_CURRENT >= $libflac_ver)
---    return 0;
---#else
---    return 1;
---#endif
---}
---], have_flac_ver=yes, have_flac_ver=no)
---        LIBS="$LIBS_SAVED"
---        AC_MSG_RESULT($have_flac_ver)
---    fi
--+	have_flac_ver=yes
-- 
--     if test x$have_flac_ver = xyes; then
--         AC_CHECK_HEADER([FLAC/stream_decoder.h], [have_flac_hdr=yes])
-diff --git a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.11.bb b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-similarity index 78%
-rename from meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.11.bb
-rename to meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-index bccbc50..c8fa6ca 100644
---- a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.11.bb
-+++ b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-@@ -1,15 +1,15 @@
- DESCRIPTION = "Simple DirectMedia Layer mixer library."
- SECTION = "libs"
- DEPENDS = "virtual/libsdl flac libmikmod libvorbis  ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad', d)}"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
-+LICENSE = "zlib"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a37a47a0e579e461474cd03b9e05199d"
- 
- SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-${PV}.tar.gz \
--           file://fix-flac-madness.diff \
-            file://configure.patch \
-           "
--SRC_URI[md5sum] = "65ada3d997fe85109191a5fb083f248c"
--SRC_URI[sha256sum] = "86145ac39cac6d2c6169c226f937648dca5e89dcd828751763dd174fa9af9cf9"
-+
-+SRC_URI[md5sum] = "e03ff73d77a55e3572ad0217131dc4a1"
-+SRC_URI[sha256sum] = "1644308279a975799049e4826af2cfc787cad2abb11aa14562e402521f86992a"
- 
- S = "${WORKDIR}/SDL_mixer-${PV}"
- 
--- 
-1.8.0.2
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--xo44VMWPx7vlQ2+2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDODDYACgkQN1Ujt2V2gByhAgCaAwVEXn7VMB7BxnUXjhbkMFG7
+dWQAmgL8JXpz8IUgv0IjaPkOx5PkdFQn
+=QMVu
+-----END PGP SIGNATURE-----
+
+--xo44VMWPx7vlQ2+2--
