@@ -1,39 +1,38 @@
-Received: from 19.mo1.mail-out.ovh.net ([178.32.97.206]
-	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TkHpi-0004cD-Nh
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1TkHvN-0004ks-Sp
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 18:16:58 +0100
-Received: from mail189.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo1.mail-out.ovh.net (Postfix) with SMTP id 9AD54FF9C19
+	Sun, 16 Dec 2012 18:22:51 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e51so2692470eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 11:08:45 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 16 Dec 2012 11:56:14 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 16 Dec 2012 11:56:12 +0200
-Date: Sun, 16 Dec 2012 10:56:11 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Koen Kooi <koen@dominion.thruhere.net>, Liu Ting-B28495
-	<B28495@freescale.com>
-X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
-Message-ID: <20121216105611.7746c440@eb-e6520>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 11149786778414329109
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehjedrudefucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkohfogggtgfesthejredtredtvd
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehjedrudefucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkohfogggtgfesthejredtredtvd
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Denzil updates
+	Sun, 16 Dec 2012 09:08:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=33UeE64hJJPaSp1pKOrJdaWxyBhWkSbAAqynBp1F/UI=;
+	b=aRjyi+VBma3pZKLiQ63lfyKUsDRN76eimXQbfvUF146WE9kBYoMe3rLPBTz4wMMGX+
+	3kMLLpAH579QutsuB+q4TMWGPPb25Frmrck1xieqc53XkkALuqe7IA2Evn7fETxs2MFf
+	geqaOEeCFlQQ1CjvcUX+RCdfGrbMuF5gRpTOTx8z2hh8ltumPZypwM/wbc1w+qLSEfDh
+	mbh6SjUysfdM7LtB2SqWlS2R1AlrdCWBq+9QKlEq0Qncswp42c5uxKtTX7cV9U1fiSS4
+	1I/xpmS7ZzBoU1DN+JDTv31TKvVBRiBZMJuNquXq3G3RXf5PLQmhfOzeN8IS3LkvPMW1
+	Vm/A==
+Received: by 10.14.215.197 with SMTP id e45mr33981268eep.0.1355677690728;
+	Sun, 16 Dec 2012 09:08:10 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id w3sm23625740eel.17.2012.12.16.09.08.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 16 Dec 2012 09:08:10 -0800 (PST)
+Date: Sun, 16 Dec 2012 18:08:09 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121216170809.GA3448@jama>
+References: <20121216105611.7746c440@eb-e6520>
+MIME-Version: 1.0
+In-Reply-To: <20121216105611.7746c440@eb-e6520>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Liu Ting-B28495 <B28495@freescale.com>
+Subject: Re: Denzil updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 17:16:58 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 16 Dec 2012 17:22:51 -0000
+X-Groupsio-MsgNum: 42183
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jI8keyz6grp/JLjh"
+Content-Disposition: inline
 
-Hi Koen, Hi Liu,
+--jI8keyz6grp/JLjh
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-as per your requests the following patches were applied to
-denzil-next :
-35f92b4 systemd: use system variables instead of hardcoded paths
-6e0ddd4 systemd: update to v189 66e169f gdm: do not rely on
-dev-tty7.device
-0f17a3f meta-systemd: systemd-systemctl-native: Also add support for
-WantedBy=*.service
-d6dd53c systemd-systemctl-native: handle ALIAS tag
-e5b3091 systemd-systemctl-native: extend systemctl wrapper to support
-mask action
-f713db3 systemd-systemctl-native: Add additional messages for better
-debugging
+On Sun, Dec 16, 2012 at 10:56:11AM +0100, Eric B=E9nard wrote:
+> Hi Koen, Hi Liu,
+>=20
+> as per your requests the following patches were applied to
+> denzil-next :
+> 35f92b4 systemd: use system variables instead of hardcoded paths
+> 6e0ddd4 systemd: update to v189 66e169f gdm: do not rely on
+> dev-tty7.device
+> 0f17a3f meta-systemd: systemd-systemctl-native: Also add support for
+> WantedBy=3D*.service
+> d6dd53c systemd-systemctl-native: handle ALIAS tag
+> e5b3091 systemd-systemctl-native: extend systemctl wrapper to support
+> mask action
+> f713db3 systemd-systemctl-native: Add additional messages for better
+> debugging
+>=20
+> patchwork # : 36615 36613 36609 36611 36605 36607 36535 (with manual
+> rework for the last one).
+>=20
+> Please don't forget to cc me for patches for denzil or danny.
 
-patchwork # : 36615 36613 36609 36611 36605 36607 36535 (with manual
-rework for the last one).
+did git push show some errors/warnings when searching for patchwork
+commits to mark as applied? interestingly none was marked by hook
 
-Please don't forget to cc me for patches for denzil or danny.
+http://patches.openembedded.org/bundle/jama/denzil/
 
-Thanks
-Eric
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--jI8keyz6grp/JLjh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDN//kACgkQN1Ujt2V2gBzolQCfS5qYel4NMoC0fGu5IytOcEHw
+tUoAn1nxPF6SNWkom5eZvcROEQfORTYD
+=faTc
+-----END PGP SIGNATURE-----
+
+--jI8keyz6grp/JLjh--
