@@ -1,37 +1,37 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkIi7-0005nK-Im
+	(envelope-from <martin.jansa@gmail.com>) id 1TkIi8-0005nM-Tf
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 19:13:11 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2705935eek.6
+	Sun, 16 Dec 2012 19:13:13 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so1964853eaa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 09:58:32 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=O0xIDr8aTaRAi5GcINHUAHYLY0S1crVujBAviG5iyvE=;
-	b=w6KNCWrGHtL4z6eiMUmt618lNm5CYlh9UM3YNAY/CEoVb/ZKHHFfFkzxGADikK4yyN
-	SaXGN5P23ryKaAqiODkCxH0hUlsjOEBzrAPoQwqXHYfhNifFUWtvcMdevux570DihEzp
-	nNqqJeT173XeJLp3BIHKY3FSl+M3yaYDxQxPpYSaMy4H6GR+uYXg88YSVrYWH4kTFkri
-	5vu1OCiwzEW5qaA3D0qb0hZIi6Vd1SM7fM2b+uCJ60Bs4biHfqeCL3PtacfcXIiO6atG
-	bCs4idEngRhgNwtivxhqKSp74bu+LlfCg9BQZ0bhL9alLGFFnZ4+AceJiJulYRQbKajB
-	PpZQ==
-Received: by 10.14.205.198 with SMTP id j46mr33996415eeo.27.1355680712548;
-	Sun, 16 Dec 2012 09:58:32 -0800 (PST)
+	bh=q1AVDyZQh+a5zeI8AbNI16Efhx0BmoFaQtWxBatnmY8=;
+	b=d2mOvCaoWz/vhekLkz90D+oRWOxjyttVl2C5EMPW3pWpjzTx6/652jz5a3IPTQK5xP
+	U2WEk92ElEs1+yG0cGMOCCqutPLlnWxxo4R0bNNdVySdl3FJ4+yDtou+Nigk0sNIivWc
+	LPY8hUy2W9lWKXKefvfEXPVBZzwUHgA+9CzeYDtTbl0SxHwkN/qOWXQ2Q1gAGhm+qnpo
+	ZhImsF8XCq1g5uQSzRPZhjL7kQEmACLRiGcbG1jbJCFtX/GdfPUbg3gEW/cqllX4oaw6
+	zs031TF0j9GDfan5ljBmOQ4vYjaiCQSvifNL6D0szxPJqfJenHsTD1cLjqzamjZ1RJyl
+	B/qA==
+Received: by 10.14.184.131 with SMTP id s3mr33704305eem.38.1355680713940;
+	Sun, 16 Dec 2012 09:58:33 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 44sm23879850eek.0.2012.12.16.09.58.31
+	by mx.google.com with ESMTPS id r1sm23881197eeo.2.2012.12.16.09.58.33
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 09:58:32 -0800 (PST)
+	Sun, 16 Dec 2012 09:58:33 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 18:57:59 +0100
-Message-Id: <e7350aa4a2be265a70485cf0b7f1ff64a02c5e97.1355680285.git.Martin.Jansa@gmail.com>
+Date: Sun, 16 Dec 2012 18:58:00 +0100
+Message-Id: <14e212ca82763e4250dff73b8d012f188dc1b0f8.1355680285.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355680285.git.Martin.Jansa@gmail.com>
 References: <cover.1355680285.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 16/26] libspatialite: add recipe
+Subject: [meta-oe][PATCH 17/26] wpa-supplicant, gcc-common-4.6, packagegroup-qte-toolchain-target: use correct PRINC form
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,264 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 18:13:12 -0000
+X-List-Received-Date: Sun, 16 Dec 2012 18:13:13 -0000
 
-From: Jan Luebbe <jluebbe@debian.org>
-
-Signed-off-by: Jan Luebbe <jluebbe@debian.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../libspatialite/libspatialite.inc                |  16 ++
- .../fix-the-configure-script-and-freexl.patch      | 200 +++++++++++++++++++++
- .../libspatialite/libspatialite_3.0.1.bb           |   9 +
- 3 files changed, 225 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite.inc
- create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
- create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
+ .../recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend | 2 +-
+ .../recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend     | 2 +-
+ toolchain-layer/recipes-devtools/gcc/gcc-common-4.6.inc                 | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc b/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
-new file mode 100644
-index 0000000..f51b3a5
---- /dev/null
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
-+HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
-+SECTION = "libs"
-+DEPENDS = "proj geos"
-+
-+INC_PR = "r0"
-+
-+LICENSE = "MPLv1.1 GPLv2+ LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
-+
-+SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "--enable-freexl=no"
-+
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
-new file mode 100644
-index 0000000..0cd0c3f
---- /dev/null
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
-@@ -0,0 +1,200 @@
-+From upstream fossil repo, extracted via git, dropping configure.ac for amalgamation
-+
-+From: sandro <sandro>
-+Date: Sat, 21 Jan 2012 16:53:28 +0000
-+Subject: [PATCH] fixing the ./configure script: --enable-geocallbacks=no is
-+ the new default and fixing some flaws for
-+ --enable-freexl=no
-+
-+---
-+ configure                   |   20 ++++++++++----------
-+ configure.ac                |   20 ++++++++++----------
-+ src/shapefiles/shapefiles.c |    2 ++
-+ 4 files changed, 32 insertions(+), 30 deletions(-)
-+
-+diff --git a/configure b/configure
-+index e8cf620..917bfca 100755
-+--- a/configure
-++++ b/configure
-+@@ -1410,7 +1410,7 @@ Optional Features:
-+                           optimize for fast installation [default=yes]
-+   --disable-libtool-lock  avoid locking (might break parallel builds)
-+   --enable-mathsql        enables SQL math functions [default=yes]
-+-  --enable-geocallbacks   enables geometry callbacks [default=yes]
-++  --enable-geocallbacks   enables geometry callbacks [default=no]
-+   --enable-proj           enables PROJ.4 inclusion [default=yes]
-+   --enable-geos           enables GEOS inclusion [default=yes]
-+   --enable-geosadvanced   enables GEOS advanced features [default=yes]
-+@@ -16980,7 +16980,7 @@ ac_config_files="$ac_config_files Makefile src/Makefile src/headers/Makefile src
-+ if test "${enable_mathsql+set}" = set; then :
-+   enableval=$enable_mathsql;
-+ else
-+-  mathsql=yes
-++  enable_mathsql=yes
-+ fi
-+ 
-+ if test x"$enable_mathsql" != "xno"; then
-+@@ -16998,10 +16998,10 @@ fi
-+ if test "${enable_geocallbacks+set}" = set; then :
-+   enableval=$enable_geocallbacks;
-+ else
-+-  geocallbacks=yes
-++  enable_geocallbacks=no
-+ fi
-+ 
-+-if test x"$enable_geocallbacks" != "xno"; then
-++if test x"$enable_geocallbacks" == "xyes"; then
-+   OMIT_GEOCALLBACKS_FLAGS=
-+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for sqlite3_rtree_geometry_callback in -lsqlite3" >&5
-+ $as_echo_n "checking for sqlite3_rtree_geometry_callback in -lsqlite3... " >&6; }
-+@@ -17063,7 +17063,7 @@ fi
-+ if test "${enable_proj+set}" = set; then :
-+   enableval=$enable_proj;
-+ else
-+-  proj=yes
-++  enable_proj=yes
-+ fi
-+ 
-+ if test x"$enable_proj" != "xno"; then
-+@@ -17153,7 +17153,7 @@ fi
-+ if test "${enable_geos+set}" = set; then :
-+   enableval=$enable_geos;
-+ else
-+-  geos=yes
-++  enable_geos=yes
-+ fi
-+ 
-+ if test x"$enable_geos" != "xno"; then
-+@@ -17237,7 +17237,7 @@ fi
-+ if test "${enable_geosadvanced+set}" = set; then :
-+   enableval=$enable_geosadvanced;
-+ else
-+-  geosadvanced=yes
-++  enable_geosadvanced=yes
-+ fi
-+ 
-+   if test x"$enable_geosadvanced" != "xno"; then
-+@@ -17316,7 +17316,7 @@ fi
-+ if test "${enable_iconv+set}" = set; then :
-+   enableval=$enable_iconv;
-+ else
-+-  geos=yes
-++  enable_iconv=yes
-+ fi
-+ 
-+ if test x"$enable_iconv" != "xno"; then
-+@@ -17579,7 +17579,7 @@ fi
-+ if test "${enable_freexl+set}" = set; then :
-+   enableval=$enable_freexl;
-+ else
-+-  proj=yes
-++  enable_freexl=yes
-+ fi
-+ 
-+ if test x"$enable_freexl" != "xno"; then
-+@@ -17669,7 +17669,7 @@ fi
-+ if test "${enable_epsg+set}" = set; then :
-+   enableval=$enable_epsg;
-+ else
-+-  epsg=yes
-++  enable_epsg=yes
-+ fi
-+ 
-+ if test x"$enable_epsg" != "xno"; then
-+diff --git a/configure.ac b/configure.ac
-+index 216cc9f..69cb6c5 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -79,7 +79,7 @@ AC_CONFIG_FILES([Makefile \
-+ #
-+ AC_ARG_ENABLE(mathsql, [AS_HELP_STRING(
-+   [--enable-mathsql], [enables SQL math functions [default=yes]])],
-+-  [], [mathsql=yes])
-++  [], [enable_mathsql=yes])
-+ if test x"$enable_mathsql" != "xno"; then
-+   OMIT_MATHSQL_FLAGS=
-+ else
-+@@ -92,9 +92,9 @@ AC_SUBST(OMIT_MATHSQL_FLAGS)
-+ #   --enable-geocallbacks
-+ #
-+ AC_ARG_ENABLE(geocallbacks, [AS_HELP_STRING(
-+-  [--enable-geocallbacks], [enables geometry callbacks [default=yes]])],
-+-  [], [geocallbacks=yes])
-+-if test x"$enable_geocallbacks" != "xno"; then
-++  [--enable-geocallbacks], [enables geometry callbacks [default=no]])],
-++  [], [enable_geocallbacks=no])
-++if test x"$enable_geocallbacks" == "xyes"; then
-+   OMIT_GEOCALLBACKS_FLAGS=
-+   AC_CHECK_LIB(sqlite3,sqlite3_rtree_geometry_callback,,AC_MSG_ERROR([obsolete 'libsqlite3' (< v.3.7.3). please retry specifying: --disable-geocallbacks]),-lm)
-+ else
-+@@ -108,7 +108,7 @@ AC_SUBST(OMIT_GEOCALLBACKS_FLAGS)
-+ #
-+ AC_ARG_ENABLE(proj, [AS_HELP_STRING(
-+   [--enable-proj], [enables PROJ.4 inclusion [default=yes]])],
-+-  [], [proj=yes])
-++  [], [enable_proj=yes])
-+ if test x"$enable_proj" != "xno"; then
-+   OMIT_PROJ_FLAGS=
-+   AC_CHECK_HEADERS(proj_api.h,, [AC_MSG_ERROR([cannot find proj_api.h, bailing out])])
-+@@ -124,7 +124,7 @@ AC_SUBST(OMIT_PROJ_FLAGS)
-+ #
-+ AC_ARG_ENABLE(geos, [AS_HELP_STRING(
-+   [--enable-geos], [enables GEOS inclusion [default=yes]])],
-+-  [], [geos=yes])
-++  [], [enable_geos=yes])
-+ if test x"$enable_geos" != "xno"; then
-+   OMIT_GEOS_FLAGS=
-+   AC_CHECK_HEADERS(geos_c.h,, [AC_MSG_ERROR([cannot find geos_c.h, bailing out])])
-+@@ -134,7 +134,7 @@ if test x"$enable_geos" != "xno"; then
-+   #
-+   AC_ARG_ENABLE(geosadvanced, [AS_HELP_STRING(
-+ 	  [--enable-geosadvanced], [enables GEOS advanced features [default=yes]])],
-+-	  [], [geosadvanced=yes])
-++	  [], [enable_geosadvanced=yes])
-+   if test x"$enable_geosadvanced" != "xno"; then
-+ 	  GEOSADVANCED_FLAGS=-DGEOS_ADVANCED
-+ 	  AC_SEARCH_LIBS(GEOSCoveredBy,geos_c,,AC_MSG_ERROR([obsolete 'libgeos_c' (< v.3.3.0). please retry specifying: --disable-geosadvanced.]),-lm -lgeos)
-+@@ -152,7 +152,7 @@ AC_SUBST(OMIT_GEOS_FLAGS)
-+ #
-+ AC_ARG_ENABLE(iconv, [AS_HELP_STRING(
-+   [--enable-iconv], [enables ICONV inclusion [default=yes]])],
-+-  [], [geos=yes])
-++  [], [enable_iconv=yes])
-+ if test x"$enable_iconv" != "xno"; then
-+   OMIT_ICONV_FLAGS=
-+   AC_CHECK_HEADERS(iconv.h,, [AC_MSG_ERROR([cannot find iconv.h, bailing out])])
-+@@ -172,7 +172,7 @@ AC_SUBST(OMIT_ICONV_FLAGS)
-+ #
-+ AC_ARG_ENABLE(freexl, [AS_HELP_STRING(
-+   [--enable-freexl], [enables FreeXL inclusion [default=yes]])],
-+-  [], [proj=yes])
-++  [], [enable_freexl=yes])
-+ if test x"$enable_freexl" != "xno"; then
-+   OMIT_FREEXL_FLAGS=
-+   AC_CHECK_HEADERS(freexl.h,, [AC_MSG_ERROR([cannot find freexl.h, bailing out])])
-+@@ -188,7 +188,7 @@ AC_SUBST(OMIT_FREEXL_FLAGS)
-+ #
-+ AC_ARG_ENABLE(epsg, [AS_HELP_STRING(
-+   [--enable-epsg], [enables full EPSG dataset support [default=yes]])],
-+-  [], [epsg=yes])
-++  [], [enable_epsg=yes])
-+ if test x"$enable_epsg" != "xno"; then
-+   OMIT_EPSG_FLAGS=
-+ else
-+diff --git a/src/shapefiles/shapefiles.c b/src/shapefiles/shapefiles.c
-+index 4bf5fd0..09e3cd3 100644
-+--- a/src/shapefiles/shapefiles.c
-++++ b/src/shapefiles/shapefiles.c
-+@@ -62,7 +62,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
-+ #include <spatialite/gaiageo.h>
-+ #include <spatialite.h>
-+ 
-++#ifndef OMIT_FREEXL
-+ #include <freexl.h>
-++#endif
-+ 
-+ #if defined(_WIN32) && !defined(__MINGW32__)
-+ #define strcasecmp	_stricmp
-+-- 
-+1.7.9.1
-+
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
-new file mode 100644
-index 0000000..1cb72e8
---- /dev/null
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
-@@ -0,0 +1,9 @@
-+require libspatialite.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "450d1a0d9da1bd9f770b7db3f2509f69"
-+SRC_URI[sha256sum] = "4983d6584069fd5ff0cfcccccee1015088dab2db177c0dc7050ce8306b68f8e6"
-+
-+SRC_URI =+ "file://fix-the-configure-script-and-freexl.patch"
-+
+diff --git a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+index 7ca6c59..f379101 100644
+--- a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
++++ b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+@@ -1,3 +1,3 @@
+ RDEPENDS_${PN} += "qwt-e-dev"
+ 
+-PRINC = "1"
++PRINC := "${@int(PRINC) + 1}"
+diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+index a4dceb4..609a1f3 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+@@ -1,4 +1,4 @@
+-PRINC = "2"
++PRINC := "${@int(PRINC) + 2}"
+ 
+ inherit systemd
+ 
+diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-common-4.6.inc b/toolchain-layer/recipes-devtools/gcc/gcc-common-4.6.inc
+index cbb90e9..f6b4929 100644
+--- a/toolchain-layer/recipes-devtools/gcc/gcc-common-4.6.inc
++++ b/toolchain-layer/recipes-devtools/gcc/gcc-common-4.6.inc
+@@ -1,4 +1,4 @@
+ # this will prepend this layer to FILESPATH
+ FILESEXTRAPATHS := "${THISDIR}/gcc-4.6"
+-PRINC = "6"
++PRINC := "${@int(PRINC) + 6}"
+ ARM_INSTRUCTION_SET = "arm"
 -- 
 1.8.0.2
 
