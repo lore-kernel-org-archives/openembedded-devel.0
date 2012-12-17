@@ -1,38 +1,36 @@
-Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TkYlp-0006cH-5y
+	(envelope-from <martin.jansa@gmail.com>) id 1TkZGH-0006wd-Qu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Dec 2012 12:22:08 +0100
-Received: from mail-la0-f69.google.com ([209.85.215.69])
-	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 17 Dec 2012 03:07:23 -0800
-Received: by mail-la0-f69.google.com with SMTP id w12so4022374lag.0
+	Mon, 17 Dec 2012 12:53:34 +0100
+Received: by mail-pb0-f47.google.com with SMTP id un1so3447434pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2012 03:07:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=6Lu7/BJQ/5tnKWdufcSebqdl436/jHNf6NBS7he4sUw=;
-	b=ULC5OTY4G6zMxVq2+WGlhG1J5z4FzoJRToQuQvJB0aaehEFe1d7UVhctY1yK4yCbDh
-	Kdsj/TvlUcsHOZd44FNGMdd/D2WSt1l2Q05gzC/z8w1fja16qvLLxsFZAVtY/1p/UfNG
-	in0okHnSKV6YrhHjdpkxFfBjWN+PIi8BbgZSKRlPn9GS6jvDn+JvgLiMLtsBQx+uixhg
-	SBbZpexVQdR533eODb+BvcTLPiI3xQ9NORZ2X/bADHA/k9YpZPK8kt3NVf14xngqoXLa
-	Q0zDXoIEXAjOu69xRuF3TgAV0YypwW2fyfeBIKCd2TPjtvkX8ae+P9+wB9ZpUPgJ0ej+
-	aXQg==
-Received: by 10.180.81.232 with SMTP id d8mr14930139wiy.14.1355742441107;
-	Mon, 17 Dec 2012 03:07:21 -0800 (PST)
-Received: by 10.180.81.232 with SMTP id d8mr14930132wiy.14.1355742441023;
-	Mon, 17 Dec 2012 03:07:21 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id cf6sm11923688wib.3.2012.12.17.03.07.19
+	Mon, 17 Dec 2012 03:38:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ifmD6L8CwHCzb1CjtfivfyB+GC6NOJvOMv/kJMsyfzo=;
+	b=XdACSSpwEwp4w2yP/qqlniaHol07WBtdPWfnFz+TJn3FumAzhxz2KBoVdgCIjmhsL+
+	rtgoXPB/jSJCGPOwJVVwrbwPKtEWLfYCt/2G1XKaYzH/zmf5l2dMDArIQlonyt4QrxC2
+	Bi1sdEZ3rX3aXZR4I4jRbVbdthZPGztptZcn7D6ndt+dSsO8jaKcosG2R1WEph9tm9K9
+	zbX+HDJj1a5PkY0BP1wnRBccwT7LPsYr/nfGF19+hjZ969kAgkO6ae0cbVxT/2R+Ub1a
+	x3/gXQiX6inxdvt13kTsDPYamAfSqmJSCJWtJOL/5qHG6ftc5u+lARMCXu6BglnS/HA0
+	hXKw==
+Received: by 10.68.197.71 with SMTP id is7mr42524822pbc.79.1355744332662;
+	Mon, 17 Dec 2012 03:38:52 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id t1sm8452252paw.11.2012.12.17.03.38.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 17 Dec 2012 03:07:20 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Mon, 17 Dec 2012 03:38:51 -0800 (PST)
+Date: Mon, 17 Dec 2012 12:38:48 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Dec 2012 11:05:39 +0000
-Message-Id: <1355742339-15037-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQkmi5Wq9utm91X837YTU5kSSN9tm2l+o0Ifaxnt9v6HseV0705sZzNxYwzc72m5ndMZADeMI5E4BktM2aIOQ8pBF/QxTCQ+OXJf7H0bNk+/MM+mOubm+rfHdVriWhrd8WI6hKdkDxy259Rbn57bXPk4SBPKxqiSRepCu8maYiZzhTAff7mEFuVb+fLJ9/K7hDDXT9ap
-Subject: [PATCH] python-mako: install standalone, not as an egg
+Message-ID: <20121217113848.GH3448@jama>
+References: <1355741439-13106-1-git-send-email-ross.burton@intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1355741439-13106-1-git-send-email-ross.burton@intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-multimedia PATCH] gst123: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2012 11:22:08 -0000
+X-List-Received-Date: Mon, 17 Dec 2012 11:53:34 -0000
+X-Groupsio-MsgNum: 42220
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="l06SQqiZYCi8rTKz"
+Content-Disposition: inline
 
----
- meta-oe/recipes-devtools/python/python-mako_0.7.2.bb |    6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+--l06SQqiZYCi8rTKz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-index 9113666..d2222d6 100644
---- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-@@ -3,7 +3,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=da8dd26ed9751ee0cfdf9df1a16bbb54"
- 
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
- SRC_URI[md5sum] = "e3c0a677aa4216da9e89ef8fa76cbafb"
-@@ -13,6 +13,10 @@ S = "${WORKDIR}/Mako-${PV}"
- 
- inherit distutils
- 
-+DISTUTILS_INSTALL_ARGS = "--single-version-externally-managed \
-+                          --root=${D} \
-+                          --install-lib=${PYTHON_SITEPACKAGES_DIR}"
-+
- RDEPENDS_${PN} = "python-threading \
-                   python-netclient \
-                   python-html \
--- 
-1.7.10
+On Mon, Dec 17, 2012 at 10:50:39AM +0000, Ross Burton wrote:
+> gst123 is useful for testing as it simply uses PlayBin, but can display t=
+he
+> pipeline being used for QA purposes.
+>=20
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> ---
+>  .../recipes-multimedia/gstreamer/gst123_0.3.1.bb     |   18 ++++++++++++=
+++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst123_0=
+=2E3.1.bb
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb=
+ b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> new file mode 100644
+> index 0000000..ce7d669
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "Flexible CLI player in the spirit of mpg123, based on GStre=
+amer"
+> +HOMEPAGE =3D "http://space.twc.de/~stefan/gst123.php"
+> +LICENSE =3D "LGPLv2.1+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5f30f0716dfdd0d91eb439ebec522=
+ec2 \
+> +                    file://src/gst123.cc;beginline=3D1;endline=3D19;md5=
+=3D05d2f5d54b985b986c26af931d2084f8"
+> +
+> +DEPENDS =3D "libx11 gstreamer gtk+ ncurses"
+> +
+> +PR =3D "r0"
+> +
+> +# This is actually the commit after 0.3.1 which fixes a display bug
+> +SRCREV =3D "3e46d2e501da68d929bb5f26900a292a5fc04a1f"
 
+Why not show it in PV and name recipe gst123_git.bb?
 
+Cheers,
 
+> +SRC_URI =3D "git://space.twc.de/public/git/gst123.git;protocol=3Dhttp"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit autotools
+> --=20
+> 1.7.10
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--l06SQqiZYCi8rTKz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDPBEgACgkQN1Ujt2V2gBzNDwCgpk9jtv/X5HUDZ+krrFzosGc7
+hGAAnjGuZcuN6jU673rmo/xG6S4xotfJ
+=RyF8
+-----END PGP SIGNATURE-----
+
+--l06SQqiZYCi8rTKz--
