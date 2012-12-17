@@ -1,32 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkKjP-0002H2-6U
+	(envelope-from <ross.burton@intel.com>) id 1TkYXM-0006MB-U7
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Dec 2012 21:22:40 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e51so2740134eek.6
+	Mon, 17 Dec 2012 12:07:09 +0100
+Received: from mail-fa0-f69.google.com ([209.85.161.69])
+	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 17 Dec 2012 02:52:26 -0800
+Received: by mail-fa0-f69.google.com with SMTP id v1so4538266fav.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Dec 2012 12:08:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=c9DbRSkGPenTfXaou3kK4r7zLfzRsbpmrG/CXOdQ9qU=;
-	b=C/NxqoDw7x5XVCMpvLrc4jGvy2QhVWyWRbT9egViKG/oQYWfro1LBcVaeMi9JmAtJU
-	75q7snsKwEAGTUdDydm0cC2gKcJLkp0Eq2QUTnP5/cAslxt5jYVCiCSoNtInVkQpecSm
-	4OStIJbNNiO4hTGMYyUxqE48nPStIHxVLWm/wHftNr8D1hsKh01wGe3iFxVkvYcUOrwV
-	GaNj60snBrQpzZZ7F7ftyVr5r8SfMWrn8IPVVNj6CTSYT6wlUQfiACC03zm6zjN8OocE
-	Jy9lJGHDcGssBJ6LQJ1XyqvJhkotPAdIi37tLf1UnGqP7+mnVRp8G9Y7A1du8PIlPcan
-	dy7g==
-Received: by 10.14.223.135 with SMTP id v7mr34650070eep.41.1355688479893;
-	Sun, 16 Dec 2012 12:07:59 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 6sm24557529eea.3.2012.12.16.12.07.58
+	Mon, 17 Dec 2012 02:52:24 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=ehQZsE9psht4A0aztu7foXI+nj0WDbpTd912FZ4QMe4=;
+	b=Sjp/Y5Pf56EE4dzFWYE8ZWxiUedJVseTc3YeJv+MaIpCIH2qyXJVouXanfz8eHu/eP
+	H/omklI/rhl4VHLDIxzaKfiOnzUjv/2PRb1QTGYjgwTHihNpeC/M8Yo8zeJ6xN+RsrZI
+	zX9qSDtmSI179KA8VUqhaX1/FvT1q1RhE2jpgdAtUd3eZqgKN1KiXqWf1wf9P4g8ThXs
+	sVphUOJA7KqApkSuJi8SqGO0E3Tj0sbPdVlzz2cZ2uvRtIgv0Gs6YT0urGyPzFkGTJXZ
+	VyXh5Mb9VZ24phcWIQl7NYHuFjNw7QEqB+1mPbaQ5iW0eaTNmJvqCz0ayjOKlil43p0i
+	tR8Q==
+Received: by 10.194.236.166 with SMTP id uv6mr16118995wjc.34.1355741544885;
+	Mon, 17 Dec 2012 02:52:24 -0800 (PST)
+Received: by 10.194.236.166 with SMTP id uv6mr16118976wjc.34.1355741544729;
+	Mon, 17 Dec 2012 02:52:24 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id h19sm10551095wiv.7.2012.12.17.02.52.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 16 Dec 2012 12:07:59 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 17 Dec 2012 02:52:24 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Dec 2012 21:07:55 +0100
-Message-Id: <1355688475-4783-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-Subject: [meta-handheld][PATCH] linux-handhelds-2.6: remove comment ending with backslash
+Date: Mon, 17 Dec 2012 10:50:39 +0000
+Message-Id: <1355741439-13106-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkK6nm73OC8wq6NLDa9yk/yA3gEVDuBGGTfgjYbCnhTNquKWO5fOG+BD+pwTlZm7/oUReJOAvHDUJK+cvBAEuGo7yvVVfoLHgnoTkozW4Y/DAls8gwHW0/ZPym/nSvC9kV07xk2j0JEo/dM9PhbpnDxzHsKk3tT4oV8AQuDg37L+nUT3AaDHuPKYPnWbS6P7MwPcZcI
+Subject: [meta-multimedia PATCH] gst123: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Dec 2012 20:22:40 -0000
+X-List-Received-Date: Mon, 17 Dec 2012 11:07:09 -0000
 
-* http://lists.linuxtogo.org/pipermail/bitbake-devel/2012-December/003954.html
+gst123 is useful for testing as it simply uses PlayBin, but can display the
+pipeline being used for QA purposes.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- recipes-kernel/linux/linux-handhelds-2.6_2.6.21-hh20.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../recipes-multimedia/gstreamer/gst123_0.3.1.bb     |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
 
-diff --git a/recipes-kernel/linux/linux-handhelds-2.6_2.6.21-hh20.bb b/recipes-kernel/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-index ddaf055..e0fbc72 100644
---- a/recipes-kernel/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-+++ b/recipes-kernel/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-@@ -21,7 +21,6 @@ SRC_URI = "http://sources.openembedded.org/linux.kernel26_anoncvs.handhelds.org_
- 
- require linux-handhelds-2.6.inc
- 
--#           ${RPSRC}/export_atags-r0a.patch;status=pending;name=rppatch35 \
- SRC_URI[rppatch35.md5sum] = "8ab51e8ff728f4155db64b9bb6ea6d71"
- SRC_URI[rppatch35.sha256sum] = "75d4c6ddbfc5e4fff7690a3308e2574f89a0e2709fb91caccb29067a9dad251a"
- SRC_URI[kernelsrc.md5sum] = "1098aed5ccce21d880d98b4ed71b9bcd"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+new file mode 100644
+index 0000000..ce7d669
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Flexible CLI player in the spirit of mpg123, based on GStreamer"
++HOMEPAGE = "http://space.twc.de/~stefan/gst123.php"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
++                    file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
++
++DEPENDS = "libx11 gstreamer gtk+ ncurses"
++
++PR = "r0"
++
++# This is actually the commit after 0.3.1 which fixes a display bug
++SRCREV = "3e46d2e501da68d929bb5f26900a292a5fc04a1f"
++
++SRC_URI = "git://space.twc.de/public/git/gst123.git;protocol=http"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
 -- 
-1.8.0.2
+1.7.10
 
 
 
