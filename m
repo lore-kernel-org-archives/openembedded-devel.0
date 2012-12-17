@@ -1,33 +1,38 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TkaWe-0000Yp-KM for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Dec 2012 14:14:48 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TkaIe-0004eo-1y for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Dec 2012 14:00:04 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2012 14:00:04 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ross.burton@intel.com>) id 1Tkbn5-0001uP-Fi
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Dec 2012 15:35:35 +0100
+Received: from mail-qa0-f69.google.com ([209.85.216.69])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 17 Dec 2012 06:20:02 -0800
+Received: by mail-qa0-f69.google.com with SMTP id o19so5442680qap.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2012 14:00:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Dec 2012 13:55:54 +0100
-Message-ID: <kan4oj$786$2@ger.gmane.org>
+	Mon, 17 Dec 2012 06:20:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=laqaK3fnQncspJ9kNEQNpOLkTbk+J4CYLqO65ciCKVA=;
+	b=pOgFy/RI/KtUodq3suWAMfGGcXaIu+V7/VAIF/9AxkNT+DnJCe3r4gzMbI9RyWV/4a
+	Yt5ecIAqUopubPYIaVL6oZ9hd8FFsjAqxR8XfD4Jj3JScikH2VnE/HWgQWTB2DT0VXMK
+	xhkQmUBDnEJNoqvBi36MGChixk49kOETRScjdno9mIhEEyeYb+Vh6yS9t8JKh/D7WPR4
+	ULFPWyOEMscihzlyKwwgCmnvev4tdKb6//bFfbbwsSlBkkCOgmt/hKViRlysowq78/41
+	zbybtx1bVDWIUIX12EGMn9Ys3qqMcHMMB0QujrNHIvs+ieDNKMvezUaXCj+dX3BpMpAP
+	NfAA==
+Received: by 10.220.115.20 with SMTP id g20mr23533690vcq.31.1355754052786;
+	Mon, 17 Dec 2012 06:20:52 -0800 (PST)
+Received: by 10.220.115.20 with SMTP id g20mr23533677vcq.31.1355754052688;
+	Mon, 17 Dec 2012 06:20:52 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.58.178.244 with HTTP; Mon, 17 Dec 2012 06:20:32 -0800 (PST)
+In-Reply-To: <kan4oj$786$2@ger.gmane.org>
 References: <1355742261-14593-1-git-send-email-ross.burton@intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-In-Reply-To: <1355742261-14593-1-git-send-email-ross.burton@intel.com>
-X-Enigmail-Version: 1.4.6
+	<kan4oj$786$2@ger.gmane.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 17 Dec 2012 14:20:32 +0000
+Message-ID: <CAJTo0LZWt4DwfF6oJ7uTuk2xJTOi0BsLa6mC_JAKYO7-xhJJ3g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmZs7zlpdLz83nYxBx1m+PNbrrAuBipmrSbt6ATZ5sjPRELAcVYbKOn9XAqSY2cyT5Zl7oyBNB+UjYhazyffqpmy7hfqWYlX72p4TDUDFf5aALkXqKR76AVySDNV1O0AIhiu5+i+OaIgvGhzRNjEOl7y8kP5h4nP9Meagx57OPdnbJnZpZBZ4DvMCZjoFpgXof58jKr
 Subject: Re: [PATCH] waffle: new package, a GL deferred resolution library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,41 +47,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2012 13:14:48 -0000
+X-List-Received-Date: Mon, 17 Dec 2012 14:35:35 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 17 December 2012 12:55, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> *insert usual comment about PR=r0 being a nuisance*
 
-Op 17-12-12 12:04, Ross Burton schreef:
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
+I still find removing/adding PR lines more annoying than a redundant
+r0, but we'll have to agree to disagree.  Alternatively meta-oe
+embraces the PR service model as oe-core has, and I can drop them for
+good.
 
-> diff --git a/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb
-> b/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb new file mode 100644 
-> index 0000000..6bdeb1e --- /dev/null +++
-> b/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb @@ -0,0 +1,21 @@ 
-> +SUMMARY = "cross-platform C library to defer selection of GL API and of
-> window system" +LICENSE = "BSD-2-Clause" +LIC_FILES_CHKSUM =
-> "file://LICENSE.txt;md5=4c5154407c2490750dd461c50ad94797 \ +
-> file://include/waffle/waffle.h;endline=24;md5=61dbf8697f61c78645e75a93c585b1bf"
->
-> 
-+
-> +PR = "r0"
-
-*insert usual comment about PR=r0 being a nuisance*
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQzxZaMkyGM64RGpERApjGAJ9UF7l5PcvEcKqHT6RW8JZ2uh5FEACgt1Eu
-DTMV8WOs8cVWE2OCoUGmq/w=
-=gawy
------END PGP SIGNATURE-----
-
+Ross
 
 
