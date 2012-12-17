@@ -1,39 +1,35 @@
-Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tka15-00080T-2F
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Dec 2012 13:41:55 +0100
-Received: from mail-gh0-f197.google.com ([209.85.160.197])
-	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 17 Dec 2012 04:27:13 -0800
-Received: by mail-gh0-f197.google.com with SMTP id f15so8039501ghb.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TkaS6-0000OR-HY for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Dec 2012 14:09:53 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TkaE5-00020T-BB for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Dec 2012 13:55:21 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Dec 2012 13:55:21 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2012 04:27:12 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=7feuQ4GC6wl4wi8/hQrQIluVAcqK6mHoki9T6k79Dfs=;
-	b=Gb45F9Mofl9qCubokZiX6JIzAouGFtvCe8JfeC2uREsLgjJqoGwVdFQViUkGbMYvQG
-	QYSbjzoxma67/9TksfIUDCfYGobmU/AjAbWS3xxXvnzBvYUxPoHx6YxJ4tkSk7QdI8F9
-	2SE9bsKXUdF29w36/bfoSRQQ9wL1fkt2jMXPixMGb3gEPK2wd/8Dn6W1Pw3Q7LC46o9B
-	c4fSIkMkwOqoLDXaEjTDkfzAjqcIGkjsr6GBECf1AcJfV19Ilkg15C1YZOUUhKNxljrw
-	dv3jSppggU2WajQJw7xdXZTcj5Vc50ZQhVQTvrqHMoIg/ipkMoHtNLDyWGVCXYPdKSlq
-	l38g==
-Received: by 10.52.37.9 with SMTP id u9mr19860318vdj.83.1355747232081;
-	Mon, 17 Dec 2012 04:27:12 -0800 (PST)
-Received: by 10.52.37.9 with SMTP id u9mr19860310vdj.83.1355747232012; Mon, 17
-	Dec 2012 04:27:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.178.244 with HTTP; Mon, 17 Dec 2012 04:26:50 -0800 (PST)
-In-Reply-To: <20121217113848.GH3448@jama>
-References: <1355741439-13106-1-git-send-email-ross.burton@intel.com>
-	<20121217113848.GH3448@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 17 Dec 2012 12:26:50 +0000
-Message-ID: <CAJTo0LZu+cWwfLDcx8rbdLTwJAD60-V5V6P-hi3fO=eXy=sr1g@mail.gmail.com>
+	Mon, 17 Dec 2012 13:55:21 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQn1mmQ7k9gwsZC0msGs94tgVaPq+tBz18KUDJeOWYOjhgqeY2AtTFegk6tuvMjZYCzz8tDiZm6aW40qftaXGJdHvhAuAbhHrg3yeSYWwPg0EKXeZD8vVVeWQBUZVVpGwHyHa59zkz6TiBkVNJ9JqKQ9jq3WP5Ml7uoX8V36f3SHo73FTSLXzjF0S2hGdg8nrbHEQohI
-Subject: Re: [meta-multimedia PATCH] gst123: add package
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 17 Dec 2012 13:54:59 +0100
+Message-ID: <kan4ms$786$1@ger.gmane.org>
+References: <1355747077-21644-1-git-send-email-ross.burton@intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
+In-Reply-To: <1355747077-21644-1-git-send-email-ross.burton@intel.com>
+X-Enigmail-Version: 1.4.6
+X-Enigmail-Draft-Status: 513
+Subject: Re: [meta-multimedia PATCH V2] gst123: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,17 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2012 12:41:55 -0000
+X-List-Received-Date: Mon, 17 Dec 2012 13:09:53 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 17 December 2012 11:38, Martin Jansa <martin.jansa@gmail.com> wrote:
->> +# This is actually the commit after 0.3.1 which fixes a display bug
->> +SRCREV = "3e46d2e501da68d929bb5f26900a292a5fc04a1f"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb
+> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb new file
+> mode 100644 index 0000000..7898b08 --- /dev/null +++
+> b/meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb @@ -0,0
+> +1,17 @@ +SUMMARY = "Flexible CLI player in the spirit of mpg123, based
+> on GStreamer" +HOMEPAGE = "http://space.twc.de/~stefan/gst123.php" 
+> +LICENSE = "LGPLv2.1+" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \ +
+> file://src/gst123.cc;beginline=1;endline=19;md5=05d2f5d54b985b986c26af931d2084f8"
 >
-> Why not show it in PV and name recipe gst123_git.bb?
+> 
++
+> +DEPENDS = "libx11 gstreamer gst-plugins-base gtk+ ncurses" + +SRC_URI =
+> "http://space.twc.de/~stefan/gst123/${BPN}-${PV}.tar.bz2 \ +
+> file://display.patch" + +SRC_URI[md5sum] =
+> "1e77767c9d6fecee5641f95804f160fe" +SRC_URI[sha256sum] =
+> "89d1de025eca0466c125dcd6a11b64341bdf98ee4c03c3e5a12321d77cb8b0ce" + +PR
+> = "r0"
 
-In hindsight just using tarball+patch is a lot simpler.  V2 sent.
+Can you please remove PR=r0 from new submissions? It's superfluous and
+doesn't actually make a difference when people add patches.
 
-Ross
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFQzxYjMkyGM64RGpERAn3gAJ4/ggf8mAfnnXcBGhQFr9Q0AGQUrACgtVnO
+v/1KDdk+ay2m/bpSJ5CZw/0=
+=VvlP
+-----END PGP SIGNATURE-----
+
 
 
