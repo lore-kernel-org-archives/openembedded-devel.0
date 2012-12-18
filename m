@@ -1,33 +1,34 @@
-Received: from mail-vb0-f50.google.com ([209.85.212.50])
+Received: from mail-gg0-f177.google.com ([209.85.161.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tl1Gh-0008HD-Px
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tl4kU-00043J-R0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2012 18:47:56 +0100
-Received: by mail-vb0-f50.google.com with SMTP id fr13so1171877vbb.37
+	Tue, 18 Dec 2012 22:30:53 +0100
+Received: by mail-gg0-f177.google.com with SMTP id y3so275066ggc.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 09:33:09 -0800 (PST)
+	Tue, 18 Dec 2012 13:16:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=HtzMBMiiTvQsRxOtrMEmsJtsNtZqLs2TrC7xRH/jqhA=;
-	b=hTSbVa6/k949Wx/ZXtLVc29zeOj9ziuUeWR4QQqWR1UyYfNBnau3MjbTjvjz6j8/m9
-	FefVEug9mVdvVr0k8wZy/L3cib7K88mZYeJCbYmGt/q0IzIsvV9mqPBCnknYBqUtOfL9
-	c+LpbbD9Bx83wvU3nO2SOtNdg+I9psM/hixKFNDHtJvhrQSjrZhUfhVnE3c05Bt6oI1s
-	DC8W28kS/72t7VBWm85JGE0bGM6CUMdF2y2BHVE8vth30o88Ce93htv+0LK5noQLkcOo
-	EXFs751FgyNzHM4R54zPsm8KNVXiM/rSbcSTChIt9TcSeyeOImszS/TGlwHPj7PoDefc
-	gAXA==
-MIME-Version: 1.0
-Received: by 10.58.162.130 with SMTP id ya2mr4547250veb.2.1355851989263; Tue,
-	18 Dec 2012 09:33:09 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Tue, 18 Dec 2012 09:33:09 -0800 (PST)
-In-Reply-To: <ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
-References: <cover.1355849280.git.Martin.Jansa@gmail.com>
-	<ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
-Date: Tue, 18 Dec 2012 18:33:09 +0100
-Message-ID: <CALbNGRSS_HSdmt3g2cSn-yiQexHDFD2pkv+UUdixnrO=OkA3RQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=jBNPQBOuOXK5aEVWkjwQwIZ+QXzrue4Db7D9i391zD8=;
+	b=nHf2J2joyd/fluBb8ao38d7y3av/KoUOZ7+VIcXZZS75xYl/1OPM8tb5rlK8sZ+YZX
+	nO+p9lfxaJ05xTI2EtdPLyk+bAUYQfP5iigEoi0PUabvIYF9/dQR7wB4c4lfhTwJMkxx
+	xVwcl1YTZauBV26W1leyYbUM8CsxLzPs3zer6CcI8CX3RrP8p19d3t/k5UtYOHHVsWyf
+	O7qD/2rQKk3YDJmhbpbGB9vDBCe0VOf8MnF7s4o0WHrhhQMXRDj2JGJMeZxeeoKUpFdh
+	Y6tN3V4ywzCE5++I3641GU4r0slLDLqBzJmv7QAE02RpssYOuhX8ymP9TeFg4f9lFyMa
+	5mZg==
+X-Received: by 10.236.126.102 with SMTP id a66mr3423194yhi.82.1355865367805;
+	Tue, 18 Dec 2012 13:16:07 -0800 (PST)
+Received: from localhost.localdomain ([187.23.144.59])
+	by mx.google.com with ESMTPS id h37sm2441909anm.10.2012.12.18.13.16.05
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 18 Dec 2012 13:16:07 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 08/10] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
+Date: Tue, 18 Dec 2012 19:15:56 -0200
+Message-Id: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 1/3] openmotif: Update SRC_URI and add libxft in depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,76 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2012 17:47:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Dec 2012 21:30:54 -0000
 
-On Tue, Dec 18, 2012 at 5:55 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> From: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->
-> Fix error for do_rootfs:
-> | Collected errors:
-> |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr w=
-ants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom=
--linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESSAG=
-ES/gvfs.mo
-> |       But that file is already provided by package  * gvfs-locale-fr
-> |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-loc=
-ale-fr.
-> |  * check_data_file_clashes: Package gvfs-locale-en-gb wants to install =
-file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/x=
-fce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
-> |       But that file is already provided by package  * gvfs-gdu-volume-m=
-onitor-locale-en-gb
-> |  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
-> |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de w=
-ants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom=
--linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESSAG=
-ES/gvfs.mo
-> |       But that file is already provided by package  * gvfs-locale-de
-> |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-loc=
-ale-de.
->
-> * MJ: added PR bump
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.=
-bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> index fe5af46..1939f09 100644
-> --- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> @@ -4,7 +4,7 @@ BPN =3D "gvfs"
->
->  DEPENDS =3D "gvfs gnome-disk-utility"
->
-> -PR =3D "${INC_PR}.2"
-> +PR =3D "${INC_PR}.3"
->
->  # we need gdu files only: reduce files to delete in libexecdir
->  EXTRA_OECONF +=3D "--disable-gphoto2"
-> @@ -20,6 +20,7 @@ do_install_append() {
->         rm -rf ${D}${datadir}/glib-2.0
->         rm -rf ${D}${datadir}/GConf
->         rm -f ${D}${datadir}/dbus-1/services/gvfs-*
-> +       rm -rf ${D}${datadir}/locale
->         rm -f ${D}${libexecdir}/gvfsd*
->         rm -f ${D}${libexecdir}/gvfs-fuse-daemon
->         rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
-> --
-> 1.8.0.2
->
->
-* Thanks for PR bump - it should go in with this
-* after that I will check for new version
-* off-topic: I wonder why I have it in my xfce-images can't find a
-dependency matching - will check that too
+The file couldn't be found in the official repository and it seems
+unmaintained as it had processing errors when trying to register to be
+able to download the last release. Researching in the web a mirror has
+been found and than we're using now this mirror so fetch works again.
 
-Andreas
+During build test, from a clean tmp directory we found that libxft is
+a hard dependency so we add it to depends list.
+
+Change-Id: If486a40718af688dfad6768d56432afb573cf8d8
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-support/openmotif/openmotif_2.3.3.bb   |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+index 2e9c2de..e7a0220 100644
+--- a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
++++ b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+@@ -1,11 +1,13 @@
+ SECTION = "libs"
+ DESCRIPTION = "OSM/Motif implementation."
+ LICENSE = "OGPL"
+-DEPENDS = "xbitmaps virtual/libx11 libxt libxp"
++DEPENDS = "xbitmaps virtual/libx11 libxt libxp libxft"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=14f692c82491db3d52419929d2f3b343"
+ 
+-SRC_URI = "http://openmotif.com/files/public_downloads/openmotif/2.3/2.3.3/openmotif-2.3.3.tar.gz \
++PR = "r1"
++
++SRC_URI = "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
+            file://configure.patch;patch=1"
+ 
+ SRC_URI[md5sum] = "fd27cd3369d6c7d5ef79eccba524f7be"
+-- 
+1.7.2.5
+
 
 
