@@ -1,39 +1,37 @@
-Received: from mail-la0-f46.google.com ([209.85.215.46])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koansoftware@gmail.com>) id 1Tl0Sh-0007cc-5C
+	(envelope-from <martin.jansa@gmail.com>) id 1Tl0fy-00071m-82
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2012 17:56:33 +0100
-Received: by mail-la0-f46.google.com with SMTP id p5so739899lag.33
+	Tue, 18 Dec 2012 18:09:54 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so367294eaa.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 08:41:29 -0800 (PST)
+	Tue, 18 Dec 2012 08:55:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:message-id:date:from:reply-to:organization:user-agent
-	:mime-version:to:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=ja9ZIalRv3btK/mfHUwIZHwEKXAzAPcJffCbGGIuxKo=;
-	b=fW4JHzKnISGjyZGVU4LZlZ5SBtUClpPZqnshH6eqNpitJzF79U2VG3Bn3ZHueV/0e0
-	1i0MK+CHtaDKjrnv4E3iRf4wZMwoWCXFPs2/Mmdo5vCyJDapRtFUjngVLe//CYI8b9cW
-	jU9+UrQAEiv3uxhAMsIwRyABc9wPNGts7mm8y+BkkXYqf2QZKCbZB0Rr6P2nRmAkBxmh
-	GSH8R9z2mTchV8oQDlq5TG6Q03TmHbhz8IjBBuNGkIPgTjh/bZl2RIIWlxHzvT0eJY+D
-	E7r4lpKcZg1SO2MiSf8OjsLWkNL18ElVVWXY9mlaYHDDoM8FleyPAonWHJPxW03a0Wye
-	bK2Q==
-X-Received: by 10.112.99.195 with SMTP id es3mr1091527lbb.132.1355848889166;
-	Tue, 18 Dec 2012 08:41:29 -0800 (PST)
-Received: from [192.168.0.5]
-	(host56-7-static.30-87-b.business.telecomitalia.it. [87.30.7.56])
-	by mx.google.com with ESMTPS id t3sm1070679lbl.17.2012.12.18.08.41.26
-	(version=SSLv3 cipher=OTHER); Tue, 18 Dec 2012 08:41:28 -0800 (PST)
-Message-ID: <50D09CB2.1000607@gmail.com>
-Date: Tue, 18 Dec 2012 17:41:22 +0100
-From: Marco <koansoftware@gmail.com>
-Organization: MC
-User-Agent: Mozilla/5.0 (X11; Linux i686; rv:17.0) Gecko/17.0 Thunderbird/17.0
-MIME-Version: 1.0
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=7srs81EJ6jiDyUMsXXDFrNaW5Laq/eaIgLCeayIVOU8=;
+	b=t2sMyoNlHYfmPUECY1P1TghaMIqKk7nctWhDwZdxs+b0TWrrU6YwIRu+inm1zGLsil
+	Gw6KOuNlGPzDRz5QhfX/zfXRdXoA2u7sPptAijyhHw3Pa/6D/C0oKMGKdaOzbBmRe63P
+	cEC+j3/fF2CkDDlQzBtXC/lstsEbAazqiMmKAFvceECpgzC6egom9h+T8bsI4ERI8XFP
+	dI0zMiBt53vQ6IRZOUU4cxhXVFQGw/l9Xa4uR6n+1cve29/sRw8CofspzA2SpiSNavBP
+	5Qbu7Jp07gjbtxQdn+O8qA0ZasMKxJr667ywe7W7qzqbYqKZTaxCWvrDeLjMog+YKNjm
+	P5uQ==
+X-Received: by 10.14.194.4 with SMTP id l4mr6962913een.42.1355849712439;
+	Tue, 18 Dec 2012 08:55:12 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id 6sm4241706eea.3.2012.12.18.08.55.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 18 Dec 2012 08:55:11 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <50D0978D.9090805@gmail.com>
-	<1355848700.24487.126.camel@phil-desktop>
-In-Reply-To: <1355848700.24487.126.camel@phil-desktop>
-Subject: Re: oe-core 2.6 kernel support
+Date: Tue, 18 Dec 2012 17:55:00 +0100
+Message-Id: <62b8fad4ebf763652eadc55238362d5ca072401e.1355849280.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.0.2
+In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
+References: <cover.1355849280.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
+References: <cover.1355849280.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 01/10] geos: fix typo in FILES_${PN}-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2012 16:56:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Dec 2012 17:09:55 -0000
 
-Il 18/12/2012 17:38, Phil Blundell ha scritto:
-> On Tue, 2012-12-18 at 17:19 +0100, Marco wrote:
->> Paul had kindly pointed me to the meta-handheld stuff so I tried oe-core
->> + meta-handheld and I built:
->>    akita -> ok (3.2.32-git)
->>    hx4700 -> ok (3.0.1)
->>    h3600 -> fails (2.6.29)
->
-> In what way does it fail?
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-navigation/geos/geos.inc | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-
-Hi Phil,
-
-http://pastebin.com/zYWnj23h
-
+diff --git a/meta-oe/recipes-navigation/geos/geos.inc b/meta-oe/recipes-navigation/geos/geos.inc
+index eda4ad3..e0c82bc 100644
+--- a/meta-oe/recipes-navigation/geos/geos.inc
++++ b/meta-oe/recipes-navigation/geos/geos.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "GEOS - Geometry Engine, Open Source"
+ HOMEPAGE = "http://trac.osgeo.org/geos/"
+ SECTION = "libs"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+@@ -13,7 +13,9 @@ inherit autotools pkgconfig
+ 
+ # libgeos-${PV}.so is needed in PV
+ FILES_SOLIBSDEV = ""
+-FIELS_${PN}-dev = "${libdir}/libgeos.so \
+-                   ${libdir}/libgeos_c.so"
++FILES_${PN}-dev = "${libdir}/*.la \
++                   ${libdir}/libgeos.so \
++                   ${libdir}/libgeos_c.so \
++                   ${includedir}"
+ FILES_${PN} += " ${libdir}/libgeos-${PV}.so"
+ INSANE_SKIP_${PN} = "dev-so"
 -- 
-Marco
+1.8.0.2
+
 
 
