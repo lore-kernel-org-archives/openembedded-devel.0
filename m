@@ -1,37 +1,39 @@
-Received: from mail-ea0-f171.google.com ([209.85.215.171])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tl0g6-00072I-El
+	(envelope-from <martin.jansa@gmail.com>) id 1Tl0g7-00072N-Nf
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 18 Dec 2012 18:10:09 +0100
-Received: by mail-ea0-f171.google.com with SMTP id n10so366123eaa.30
+Received: by mail-ee0-f52.google.com with SMTP id d17so474464eek.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 08:55:20 -0800 (PST)
+	Tue, 18 Dec 2012 08:55:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=48IgIx2ycTr3bYb1cUIPYAevsxhC5ezAh5YicJK+6cM=;
-	b=LVErlqOoOmKeHZVkru7oUYyFna92rfSxMg47hIVjTOjc1svJpwY/udkc+xfjr8GYNN
-	n/FwOXiuSC0EDT4Q6ZJYw3OaSCApb8LrBxO9MP6zktTfDGlBLVN9bNVAKNqtmafevI/3
-	vD4ZtB/0vi6wZgyzdXDNTyKG4soE7slY87bVGiAH3hInw4lpGFnhvkbUVp53JCojsY5d
-	gnuEuGUivEC6tE86Hza9I8aLEuQQCV6MMOfBJCZqa19ycSpYWmjEK2l5oy5qBZ+jqEB0
-	ojmUQ6ICk2k7ItQCs0AQqdYvUPvJ0iz+NXDbB6ShRAtgeBs3CQgJ8LKws5Nq/Yuu4vju
-	CB5A==
-X-Received: by 10.14.3.195 with SMTP id 43mr7004465eeh.36.1355849720757;
-	Tue, 18 Dec 2012 08:55:20 -0800 (PST)
+	:references:in-reply-to:references:mime-version:content-type
+	:content-transfer-encoding;
+	bh=WMFqBHBrJggTESMA5pr3koF0BHcVRphENZLWFGZkVmE=;
+	b=JjvktzWvZT6xi7syHAAg8Iie7ONhumzHwlajn/tqtCezfcCxWmddxG7RBSOUznHUDf
+	5nV+zw/IqwWMlkTe+wTJB8n/LTyUJ2kRVPvcnBknUdRgypA+7zs9gamRK5XCI1x6CsBZ
+	Bg9mIizm1QXCaBgh26oWw4VYa8lPfMRIEkpYcBGhuvlzzhLAoeRQpdTBKqCV84qVsIZE
+	U1TtppkdGeYvi6CmzSROZadsxkxT6apoxRB5XTks3wzK3sLQW/ACZCq6kqVjPl0A/JI3
+	gzgewyU7ipdt4CnrfHyfECobJfhbQrOwRbjqYK77JNGEZgkJEmAFnXtvhI/7fE4d16g1
+	zDOQ==
+X-Received: by 10.14.221.5 with SMTP id q5mr7029562eep.33.1355849722030;
+	Tue, 18 Dec 2012 08:55:22 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id f49sm4215780eep.12.2012.12.18.08.55.19
+	by mx.google.com with ESMTPS id r1sm4245554eeo.2.2012.12.18.08.55.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Dec 2012 08:55:20 -0800 (PST)
+	Tue, 18 Dec 2012 08:55:21 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Dec 2012 17:55:06 +0100
-Message-Id: <e8874ce41f1614ac17607a169ee3370b56811911.1355849280.git.Martin.Jansa@gmail.com>
+Date: Tue, 18 Dec 2012 17:55:07 +0100
+Message-Id: <ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
 References: <cover.1355849280.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
 References: <cover.1355849280.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 07/10] evince: disable help build
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 08/10] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +48,52 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 18 Dec 2012 17:10:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* xsltproc does not work in oe-core correctly:
-  | xsltproc -o evince-it.omf --stringparam db2omf.basename evince --stringparam db2omf.format 'docbook' --stringparam db2omf.dtd "-//OASIS//DTD DocBook XML V4.1.2//EN" --stringparam db2omf.lang it --stringparam db2omf.omf_dir "/usr/share/omf" --stringparam db2omf.help_dir "/usr/share/gnome/help" --stringparam db2omf.omf_in "/OE/jansa-test/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/evince/2.32.0-r2/evince-2.32.0/help/evince.omf.in"  /OE/jansa-test/shr-core/tmp-eglibc/sysroots/qemuarm`/OE/jansa-test/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/pkg-config --variable db2omf gnome-doc-utils` it/evince.xml || { rm -f "evince-it.omf"; exit 1; }
-  | http://www.oasis-open.org/docbook/xml/4.1.2/dbhierx.mod:115: parser warning : PEReference: %list.class; not found
-  |               %local.divcomponent.mix;">
-  |                                        ^
-  ...
-* https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
+From: Andreas Müller <schnitzeltony@googlemail.com>
 
+Fix error for do_rootfs:
+| Collected errors:
+|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-locale-fr
+|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-fr.
+|  * check_data_file_clashes: Package gvfs-locale-en-gb wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-gdu-volume-monitor-locale-en-gb
+|  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
+|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESSAGES/gvfs.mo
+| 	But that file is already provided by package  * gvfs-locale-de
+|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-de.
+
+* MJ: added PR bump
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/evince/evince_2.32.0.bb | 3 ++-
+ meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-index f92a599..74958d8 100644
---- a/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
- SECTION = "x11/office"
- DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+index fe5af46..1939f09 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+@@ -4,7 +4,7 @@ BPN = "gvfs"
  
--PR = "r2"
-+PR = "r3"
+ DEPENDS = "gvfs gnome-disk-utility"
  
- inherit gnome pkgconfig gtk-icon-cache
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
  
-@@ -17,6 +17,7 @@ EXTRA_OECONF = " --enable-thumbnailer \
-                  --enable-nautilus \
-                  --disable-scrollkeeper \
-                  --enable-pixbuf \
-+                 --disable-help \
-                "
- 
- do_install_append() {
+ # we need gdu files only: reduce files to delete in libexecdir
+ EXTRA_OECONF += "--disable-gphoto2"
+@@ -20,6 +20,7 @@ do_install_append() {
+ 	rm -rf ${D}${datadir}/glib-2.0
+ 	rm -rf ${D}${datadir}/GConf
+ 	rm -f ${D}${datadir}/dbus-1/services/gvfs-*
++	rm -rf ${D}${datadir}/locale
+ 	rm -f ${D}${libexecdir}/gvfsd*
+ 	rm -f ${D}${libexecdir}/gvfs-fuse-daemon
+ 	rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
 -- 
 1.8.0.2
 
