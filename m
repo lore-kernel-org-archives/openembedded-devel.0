@@ -1,37 +1,33 @@
-Received: from mail-ea0-f182.google.com ([209.85.215.182])
+Received: from mail-vb0-f50.google.com ([209.85.212.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tl0g9-00072P-0l
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tl1Gh-0008HD-Px
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2012 18:10:09 +0100
-Received: by mail-ea0-f182.google.com with SMTP id a14so381528eaa.13
+	Tue, 18 Dec 2012 18:47:56 +0100
+Received: by mail-vb0-f50.google.com with SMTP id fr13so1171877vbb.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 08:55:23 -0800 (PST)
+	Tue, 18 Dec 2012 09:33:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=AEDetoAZ8t6icYk0RzalRMFNCRD/buV3n2Ta4PRzcVk=;
-	b=MWZRD7Z2vEkcE6kvtf2dIpYAKXfRnfOnQ1DGx7XddPlj9z4/eJxmJNuw1/kDxwE5gF
-	Byus9iWZhm1jDtDYImbX/hqntUOQRuRYJ1toXIoY8Kdv6cXa2b15lxoOZuFSJcv6h2nz
-	6eE09KLVSRITtjc9dkjXAuLOuUnp2mN/aCUy25vL1rWl8Pvh+pN7wsS6ULYRRJ0rBQxT
-	q9ZaGjv7Ccx+WXUil6qTOQhVQhCRsj39bCAYW/itQvgAmAOeMU8/frVbVN4uTjKW47O7
-	RRxYLi8hDLgsh0SeeEyJej7DxkLSCHDPh6ULNgC7pohddOxEZFPUFmz7h0YfdwiuNbGG
-	s24Q==
-X-Received: by 10.14.194.195 with SMTP id m43mr6976026een.44.1355849723313;
-	Tue, 18 Dec 2012 08:55:23 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id b2sm4223651eep.9.2012.12.18.08.55.22
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Dec 2012 08:55:22 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=HtzMBMiiTvQsRxOtrMEmsJtsNtZqLs2TrC7xRH/jqhA=;
+	b=hTSbVa6/k949Wx/ZXtLVc29zeOj9ziuUeWR4QQqWR1UyYfNBnau3MjbTjvjz6j8/m9
+	FefVEug9mVdvVr0k8wZy/L3cib7K88mZYeJCbYmGt/q0IzIsvV9mqPBCnknYBqUtOfL9
+	c+LpbbD9Bx83wvU3nO2SOtNdg+I9psM/hixKFNDHtJvhrQSjrZhUfhVnE3c05Bt6oI1s
+	DC8W28kS/72t7VBWm85JGE0bGM6CUMdF2y2BHVE8vth30o88Ce93htv+0LK5noQLkcOo
+	EXFs751FgyNzHM4R54zPsm8KNVXiM/rSbcSTChIt9TcSeyeOImszS/TGlwHPj7PoDefc
+	gAXA==
+MIME-Version: 1.0
+Received: by 10.58.162.130 with SMTP id ya2mr4547250veb.2.1355851989263; Tue,
+	18 Dec 2012 09:33:09 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Tue, 18 Dec 2012 09:33:09 -0800 (PST)
+In-Reply-To: <ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
+References: <cover.1355849280.git.Martin.Jansa@gmail.com>
+	<ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
+Date: Tue, 18 Dec 2012 18:33:09 +0100
+Message-ID: <CALbNGRSS_HSdmt3g2cSn-yiQexHDFD2pkv+UUdixnrO=OkA3RQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Dec 2012 17:55:08 +0100
-Message-Id: <20ce63275033b54c33c25fa1c60de7c1a0dc816c.1355849280.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
-References: <cover.1355849280.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
-References: <cover.1355849280.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 09/10] update oe-stylize to be Python3 comaptible
+Subject: Re: [meta-oe][PATCH 08/10] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,60 +41,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2012 17:10:20 -0000
+X-List-Received-Date: Tue, 18 Dec 2012 17:47:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Cliff Brake <cbrake@bec-systems.com>
+On Tue, Dec 18, 2012 at 5:55 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> From: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>
+> Fix error for do_rootfs:
+> | Collected errors:
+> |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr w=
+ants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom=
+-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESSAG=
+ES/gvfs.mo
+> |       But that file is already provided by package  * gvfs-locale-fr
+> |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-loc=
+ale-fr.
+> |  * check_data_file_clashes: Package gvfs-locale-en-gb wants to install =
+file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/x=
+fce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
+> |       But that file is already provided by package  * gvfs-gdu-volume-m=
+onitor-locale-en-gb
+> |  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
+> |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de w=
+ants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom=
+-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESSAG=
+ES/gvfs.mo
+> |       But that file is already provided by package  * gvfs-locale-de
+> |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-loc=
+ale-de.
+>
+> * MJ: added PR bump
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.=
+bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+> index fe5af46..1939f09 100644
+> --- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
+> @@ -4,7 +4,7 @@ BPN =3D "gvfs"
+>
+>  DEPENDS =3D "gvfs gnome-disk-utility"
+>
+> -PR =3D "${INC_PR}.2"
+> +PR =3D "${INC_PR}.3"
+>
+>  # we need gdu files only: reduce files to delete in libexecdir
+>  EXTRA_OECONF +=3D "--disable-gphoto2"
+> @@ -20,6 +20,7 @@ do_install_append() {
+>         rm -rf ${D}${datadir}/glib-2.0
+>         rm -rf ${D}${datadir}/GConf
+>         rm -f ${D}${datadir}/dbus-1/services/gvfs-*
+> +       rm -rf ${D}${datadir}/locale
+>         rm -f ${D}${libexecdir}/gvfsd*
+>         rm -f ${D}${libexecdir}/gvfs-fuse-daemon
+>         rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
+> --
+> 1.8.0.2
+>
+>
+* Thanks for PR bump - it should go in with this
+* after that I will check for new version
+* off-topic: I wonder why I have it in my xfce-images can't find a
+dependency matching - will check that too
 
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- contrib/oe-stylize.py | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
-index 07ed4f6..712557d 100755
---- a/contrib/oe-stylize.py
-+++ b/contrib/oe-stylize.py
-@@ -306,10 +306,10 @@ def follow_rule(i, line):
-         # if the line still does not respect the rule
-         if not rules[i][0](line):
-             # this is a rule disgression
--            print "## Disgression: ", rules[i][2], " in:", oldline
-+            print ("## Disgression: ", rules[i][2], " in:", oldline)
-         else:
-             # just remind user about his/her errors
--            print "## Reminder: ", rules[i][2], " in :", oldline
-+            print ("## Reminder: ", rules[i][2], " in :", oldline)
-     return line
- 
- 
-@@ -363,7 +363,7 @@ if __name__ == "__main__":
-             commentBloc.append(line)
-             continue
- 
--        if seen_vars.has_key(var):
-+        if var in seen_vars:
-             for c in commentBloc: seen_vars[var].append(c)
-             commentBloc = []
-             seen_vars[var].append(line)
-@@ -381,7 +381,7 @@ if __name__ == "__main__":
-                 line = follow_rule(5, line)
-             if var == "":
-                 if not in_routine:
--                    print "## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n')
-+                    print ("## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n'))
-                 var = 'others'
-             for c in commentBloc: seen_vars[var].append(c)
-             commentBloc = []
-@@ -402,5 +402,5 @@ if __name__ == "__main__":
-             for l in seen_vars[k]: 
-                 olines.append(l)
-             previourVarPrefix = k.split('_')[0]=='' and "unknown" or k.split('_')[0]
--    for line in olines: print line
-+    for line in olines: print(line)
- 
--- 
-1.8.0.2
-
+Andreas
 
 
