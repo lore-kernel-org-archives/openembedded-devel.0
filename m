@@ -1,37 +1,36 @@
-Received: from mail-pb0-f42.google.com ([209.85.160.42])
+Received: from mail-lb0-f182.google.com ([209.85.217.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TkzOg-00040a-8d
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2012 16:47:59 +0100
-Received: by mail-pb0-f42.google.com with SMTP id rp2so516506pbb.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 07:33:15 -0800 (PST)
+	(envelope-from <koansoftware@gmail.com>) id 1Tl07Q-0006sp-De
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 18 Dec 2012 17:34:16 +0100
+Received: by mail-lb0-f182.google.com with SMTP id go10so851710lbb.27
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Dec 2012 08:19:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8gOOEv/3LFSBj7J1BJRrx8hc86qO6dfILQd6+TB+NoY=;
-	b=B7Fohtvm1dLJVnHqV4qsuAZlUoNIxw4LV5kYLm9YSHuvOwolD0sCisdmAZK1+Bf8gM
-	De+9XNyhIoiKGO6YsLY4cNZ2HVDGXv4Fm7HMGAfNvffGVEqwsKn9ZJICa9DlMhsmayn6
-	00+bX3DMW0FzhblU5ZYQFhaIvmxzTChsacjkBY21pL/TxQ9DGcU+MHblVLyFHnFLBlUB
-	bJp2FYHkoJAthBKhEXxYgC22zIV9qPq4QeHFMn7IhcN65xTWXmoNhT7BXCcir2bvAoEk
-	vH5PxvNNMdCD5xVFmjg94YZtts2IVvbAhfdU5ZImJP7YSb6F36PtYm22qBh0VpM3E19p
-	VJAw==
-X-Received: by 10.66.72.225 with SMTP id g1mr7565062pav.79.1355844795549;
-	Tue, 18 Dec 2012 07:33:15 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id a4sm1611174pax.25.2012.12.18.07.33.13
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Dec 2012 07:33:14 -0800 (PST)
-Date: Tue, 18 Dec 2012 16:33:11 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121218153311.GB3331@jama.palm1.palmone.com>
-References: <1355312146-24370-1-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRT1HUF5RcEwRcCrT_XRJzHE+qA5HgeJO-smuymz90JxzQ@mail.gmail.com>
+	h=x-received:message-id:date:from:reply-to:organization:user-agent
+	:mime-version:to:cc:subject:content-type:content-transfer-encoding;
+	bh=Jb9klvBXOJhJ5QuDJTh6QLzL+B+Yg0pbPwqoJhkfTsk=;
+	b=q6P7UTk7rbEjBjgbrgl/twYoCkY4h7paKGj0lzgCI77OlOU5dA+YQTljw+oVFMEw3o
+	G9LdQyVHQAb5UH0xukFrNPzUrOemO+ZiBQ9f3YqlX341RNSVll57q2Q+PNM8l+FQOV1/
+	xynavTwDO+VlQYPAg93On/JCbZdxVlksryhgb/on3Jf8Bp+dLP2ZO4ZkLr49HoL+UBUY
+	tHdxKOGE/Ah7EP3LVewjdBnLKiVO5AglkH3BATKSkm1c5Y97+FMB2XvJ6h/VW71QKLxy
+	Pz29x6AuQxLyxof0jMIjvpU/dToHUASgIPzlgHsEpTuMHvAPiI4h8vRtzXBQ2XacAo3B
+	SIkg==
+X-Received: by 10.152.125.240 with SMTP id mt16mr2399227lab.17.1355847569963; 
+	Tue, 18 Dec 2012 08:19:29 -0800 (PST)
+Received: from [192.168.0.5]
+	(host56-7-static.30-87-b.business.telecomitalia.it. [87.30.7.56])
+	by mx.google.com with ESMTPS id fv12sm925460lab.12.2012.12.18.08.19.27
+	(version=SSLv3 cipher=OTHER); Tue, 18 Dec 2012 08:19:28 -0800 (PST)
+Message-ID: <50D0978D.9090805@gmail.com>
+Date: Tue, 18 Dec 2012 17:19:25 +0100
+From: Marco <koansoftware@gmail.com>
+Organization: MC
+User-Agent: Mozilla/5.0 (X11; Linux i686; rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRT1HUF5RcEwRcCrT_XRJzHE+qA5HgeJO-smuymz90JxzQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-gnome] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
+To: Openembedded-devel@lists.openembedded.org
+Cc: Marco Cavallini <m.cavallini@koansoftware.com>
+Subject: oe-core 2.6 kernel support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,90 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2012 15:48:03 -0000
-X-Groupsio-MsgNum: 42233
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NDin8bjvE/0mNLFQ"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Dec 2012 16:34:16 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
---NDin8bjvE/0mNLFQ
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
+after a lot of time spent trying to create my own oe-core BSP based on 
+old recipes I have been using in oe-classic, I found that there is any 
+BSP working with oe-core and using old kernels (< 3.0).
 
-On Tue, Dec 18, 2012 at 04:00:04PM +0100, Andreas M=FCller wrote:
-> On Wed, Dec 12, 2012 at 12:35 PM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> > Fix error for do_rootfs:
-> > | Collected errors:
-> > |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr=
- wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstr=
-om-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESS=
-AGES/gvfs.mo
-> > |       But that file is already provided by package  * gvfs-locale-fr
-> > |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-l=
-ocale-fr.
-> > |  * check_data_file_clashes: Package gvfs-locale-en-gb wants to instal=
-l file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi=
-/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
-> > |       But that file is already provided by package  * gvfs-gdu-volume=
--monitor-locale-en-gb
-> > |  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
-> > |  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de=
- wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstr=
-om-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESS=
-AGES/gvfs.mo
-> > |       But that file is already provided by package  * gvfs-locale-de
-> > |  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-l=
-ocale-de.
-> >
-> > Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> > ---
-> >  .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    1 +
-> >  1 files changed, 1 insertions(+), 0 deletions(-)
-> >
-> > diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.=
-2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> > index fe5af46..3754e60 100644
-> > --- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> > +++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-> > @@ -20,6 +20,7 @@ do_install_append() {
-> >         rm -rf ${D}${datadir}/glib-2.0
-> >         rm -rf ${D}${datadir}/GConf
-> >         rm -f ${D}${datadir}/dbus-1/services/gvfs-*
-> > +       rm -rf ${D}${datadir}/locale
-> >         rm -f ${D}${libexecdir}/gvfsd*
-> >         rm -f ${D}${libexecdir}/gvfs-fuse-daemon
-> >         rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
-> > --
-> > 1.7.4.4
-> >
-> ping?
+Probably for most of you this is obsolete and irrelevant topic because 
+everybody is focused on new CPUs (> Armv5)
 
-I've it in my queue and will send consolidated-pull request tomorrow.
+I avoid to discuss what I tried in older to create an oe-core/yocto BSP 
+(using 2.6.30)  and I will focus on an example that anyone can easily 
+verify.
 
-Btw meta-guacamayo is using newer gvfs-1.12.3 and maybe they also
-resolved
-http://patchwork.openembedded.org/patch/16755/
+Paul had kindly pointed me to the meta-handheld stuff so I tried oe-core 
++ meta-handheld and I built:
+  akita -> ok (3.2.32-git)
+  hx4700 -> ok (3.0.1)
+  h3600 -> fails (2.6.29)
 
-Can you check if such upgrade would be usefull for meta-gnome too?=20
-I'm not using gnome..
+I wonder if it could be a gcc (4.7.2) issue with older kernels and 
+moreover if anybody experienced this or has successfully built something 
+with old kernels.
 
-Cheers,
+Any hint would be greatly appreciated.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+TIA
+-- 
+Marco
 
---NDin8bjvE/0mNLFQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDQjLcACgkQN1Ujt2V2gBwycQCgmCpWbtExR1bZPfqahk6KeQlO
-RSMAoLkRZoaHBzaLa62Hs0Kywo8DSZ+f
-=QWgg
------END PGP SIGNATURE-----
-
---NDin8bjvE/0mNLFQ--
