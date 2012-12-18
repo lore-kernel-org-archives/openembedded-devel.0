@@ -1,35 +1,36 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail-vc0-f169.google.com ([209.85.220.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TkiZH-0001fv-Js
+	(envelope-from <andrei@gherzan.ro>) id 1TkuiW-0004Ig-Mv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Dec 2012 22:49:54 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so2651054dak.6
+	Tue, 18 Dec 2012 11:48:09 +0100
+Received: by mail-vc0-f169.google.com with SMTP id gb23so614526vcb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Dec 2012 13:35:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=SlwTJYqB3HbDHoltZ3rii8+9dSrnYOrCHgU3adVFIFY=;
-	b=occXmmma6BnwjchpHGT08eK0sGte5B4++TlcQfcMdD0H9futJW/pqHnP+O2naiCRAY
-	AtCByMsyEViya3StGWmNEQ5Qv/QgHKryWsYnCHWRIUHPrObSOcbdPaYdkJj0BRZdN7n6
-	6zsoc98/Wqf29o3f3u3/zJsqCjYiNoxwJsjHOj31g3zlA/PpGFrrgSPxTejDe/SykAEb
-	+XpVfMkC/YtoegUl3iUYl11HpxKlCUVY0YRxoeHBlwwINnqsCQil/zKyXSFYQ0I1NpF+
-	JyGztp7Kx9hJpN/hiBS3ks1QfVvcDovZmhLPyJCKzsdiuDuYxLHriQrmdJMlFdYqfKOQ
-	mmYw==
+	Tue, 18 Dec 2012 02:33:26 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-originating-ip:in-reply-to:references:from:date
+	:message-id:subject:to:content-type:x-gm-message-state;
+	bh=kT3qv6GrpnDP/WQZV0xYHBDdYMC4niKvU4PZZzEuKm0=;
+	b=LoT+DsGMDSorXFD8utoBDSJFARERGjbAGobBbwdVwv50v3DIalaflMhcwJ/tKnpS/+
+	PndXKq84uGLPDdgEFnSIMx+NAxfLkism4vLQtgMo9uYNBfbKtsjUNbvbQYr81s8IbBnH
+	N88TMnpUqFGyMWgvlfys2iWxTyLpzztZfh+rM7/VzkEBkCMbNFtx2THB9R0/5FTg7dZk
+	/mjoRrW4lBz6jnfkxENTtX/w12pt2bpGrTlIdBaRfkr0MIy0gbQNanTdkTTqjn2NobKJ
+	g1I/FPmyuzeFeYu9lKdqaBfbJmkTwysc0/yCyRA5RwOwOvLECmpajKxBQE/jxlh8z03X
+	R+AQ==
+Received: by 10.220.150.145 with SMTP id y17mr2173103vcv.11.1355826806724;
+	Tue, 18 Dec 2012 02:33:26 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.68.252.4 with SMTP id zo4mr47855227pbc.126.1355780105923; Mon,
-	17 Dec 2012 13:35:05 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.68.51.193 with HTTP; Mon, 17 Dec 2012 13:35:05 -0800 (PST)
+Received: by 10.58.102.132 with HTTP; Tue, 18 Dec 2012 02:33:06 -0800 (PST)
+X-Originating-IP: [89.121.200.106]
 In-Reply-To: <CALbNGRR3HVhkp52Qn57By+SDind_Z5jJPNOfHsKLaC8nrBO9sw@mail.gmail.com>
 References: <CAMKF1srKZWoYAm7+6EO1tXmw+osJ34yNZPDaXw=9wzaY5Se1vQ@mail.gmail.com>
 	<CALbNGRR3HVhkp52Qn57By+SDind_Z5jJPNOfHsKLaC8nrBO9sw@mail.gmail.com>
-Date: Mon, 17 Dec 2012 19:35:05 -0200
-X-Google-Sender-Auth: jVwCw3OYRaWPlqIcm65hX3x4yXQ
-Message-ID: <CAP9ODKqwtnBoPFeVVkPKnOz+UrLj375_BxzEk_w-O=gu6Px5Kw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Tue, 18 Dec 2012 12:33:06 +0200
+Message-ID: <CAK18fxE9U+n3KgesoF30zrcta2V-yA=x_3SEy_TbCqr7GROoHg@mail.gmail.com>
+To: openembedded <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQl0P+MYd1o+m7BJcx3xqQODsRXGQYLomb6Gxh41MNYCqmJ8MDqQed0v9AQLfEgZQMcwjE8Q
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: meta-openembedded maintainers expanded with Martin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,33 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2012 21:49:54 -0000
+X-List-Received-Date: Tue, 18 Dec 2012 10:48:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 17, 2012 at 7:26 PM, Andreas M=FCller
-<schnitzeltony@googlemail.com> wrote:
+On Mon, Dec 17, 2012 at 11:26 PM, Andreas M=FCller <
+schnitzeltony@googlemail.com> wrote:
+
 > On Fri, Dec 14, 2012 at 10:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> Hi All
->>
->> Martin Jansa will be helping out in maintaining  meta-openembedded layer=
-s and
->> ease out the ever increasing burden on Koen
->>
->> Thanks Martin for stepping up and helping out.
->>
->> Thanks
->> -Khem
+> > Hi All
+> >
+> > Martin Jansa will be helping out in maintaining  meta-openembedded
+> layers and
+> > ease out the ever increasing burden on Koen
+> >
+> > Thanks Martin for stepping up and helping out.
+> >
+> > Thanks
+> > -Khem
 > Good news & Thanks
 >
 > * Martin for what you will do
 > * Koen what you have done (and hopefully will continue to do)
+>
 
 +1
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
-
 
