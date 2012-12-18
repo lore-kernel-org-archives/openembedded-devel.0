@@ -1,39 +1,37 @@
 Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tl0g7-00072N-Nf
+	(envelope-from <martin.jansa@gmail.com>) id 1Tl0g0-00071r-Vm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Dec 2012 18:10:09 +0100
-Received: by mail-ee0-f52.google.com with SMTP id d17so474464eek.39
+	Tue, 18 Dec 2012 18:09:59 +0100
+Received: by mail-ee0-f52.google.com with SMTP id d17so474402eek.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Dec 2012 08:55:22 -0800 (PST)
+	Tue, 18 Dec 2012 08:55:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references:mime-version:content-type
-	:content-transfer-encoding;
-	bh=WMFqBHBrJggTESMA5pr3koF0BHcVRphENZLWFGZkVmE=;
-	b=JjvktzWvZT6xi7syHAAg8Iie7ONhumzHwlajn/tqtCezfcCxWmddxG7RBSOUznHUDf
-	5nV+zw/IqwWMlkTe+wTJB8n/LTyUJ2kRVPvcnBknUdRgypA+7zs9gamRK5XCI1x6CsBZ
-	Bg9mIizm1QXCaBgh26oWw4VYa8lPfMRIEkpYcBGhuvlzzhLAoeRQpdTBKqCV84qVsIZE
-	U1TtppkdGeYvi6CmzSROZadsxkxT6apoxRB5XTks3wzK3sLQW/ACZCq6kqVjPl0A/JI3
-	gzgewyU7ipdt4CnrfHyfECobJfhbQrOwRbjqYK77JNGEZgkJEmAFnXtvhI/7fE4d16g1
-	zDOQ==
-X-Received: by 10.14.221.5 with SMTP id q5mr7029562eep.33.1355849722030;
-	Tue, 18 Dec 2012 08:55:22 -0800 (PST)
+	:references:in-reply-to:references;
+	bh=W8bSAexj1S4/15yadVZUqfZU+lPgBk7Rvep8uCrRiMU=;
+	b=MfAYEcXfMi6dafedDRZpQxILmVbjsevQI4gNZoUrWQN24o6dYREq0fyWzHZlH5dSyR
+	czq26V+I6J3X5pTGiIWwstzuxuk5c3ij8pFelAB+LL69yMmvqSkouiE6tf9FgVT31w8o
+	L+EO+X7twK1vQOFh0ABR2awz7A4vp7M5yOQqeKv4uJU8pfnRgDqA4qtXJjy/THMCIoM1
+	CjSvYHIwKY9C8djRW0irMcgZ0OQHdREyKBvODJucwuXfB8Ni7WLBLtJ4RTD9dNF4pP64
+	cF+Vzl20rIpGrnZnx5O+wWb2V9ByJ9CnjpQOkfAQGl7K+Bybs5w9FZrdqoxNtMPnFiIG
+	lR5A==
+X-Received: by 10.14.215.197 with SMTP id e45mr7323244eep.0.1355849715254;
+	Tue, 18 Dec 2012 08:55:15 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id r1sm4245554eeo.2.2012.12.18.08.55.21
+	by mx.google.com with ESMTPS id 44sm4252647eek.0.2012.12.18.08.55.14
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Dec 2012 08:55:21 -0800 (PST)
+	Tue, 18 Dec 2012 08:55:14 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Dec 2012 17:55:07 +0100
-Message-Id: <ee97efeec28cca615eb29b1e8ba73d3ccf29a57e.1355849280.git.Martin.Jansa@gmail.com>
+Date: Tue, 18 Dec 2012 17:55:02 +0100
+Message-Id: <9f7427199a88b1e9ad92780ab44e0499c01c96fd.1355849280.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
 References: <cover.1355849280.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
 References: <cover.1355849280.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 08/10] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
+Subject: [meta-oe][PATCH 03/10] krb5: fix path to recipe and upgrade to 1.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,52 +46,81 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 18 Dec 2012 17:10:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@googlemail.com>
+* drop PR
+* fix FILES_${PN}-doc
+* fix QA warnings:
+  WARNING: QA Issue: krb5: Files/directories were installed but not
+  shipped
+    /usr/share/gnats
+    /usr/share/gnats/mit
+  and RPATH entries
 
-Fix error for do_rootfs:
-| Collected errors:
-|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-fr wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/fr/LC_MESSAGES/gvfs.mo
-| 	But that file is already provided by package  * gvfs-locale-fr
-|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-fr.
-|  * check_data_file_clashes: Package gvfs-locale-en-gb wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/en_GB/LC_MESSAGES/gvfs.mo
-| 	But that file is already provided by package  * gvfs-gdu-volume-monitor-locale-en-gb
-|  * opkg_install_cmd: Cannot install package gvfs-locale-en-gb.
-|  * check_data_file_clashes: Package gvfs-gdu-volume-monitor-locale-de wants to install file /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/xfce4-full-image/1.0-r0/rootfs/usr/share/locale/de/LC_MESSAGES/gvfs.mo
-| 	But that file is already provided by package  * gvfs-locale-de
-|  * opkg_install_cmd: Cannot install package gvfs-gdu-volume-monitor-locale-de.
-
-* MJ: added PR bump
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-connectivity/krb5/krb5_1.11.bb         | 24 +++++++++++-----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+ rename meta/recipes-connectivity/krb5/krb5_1.8.5.bb => meta-oe/recipes-connectivity/krb5/krb5_1.11.bb (48%)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-index fe5af46..1939f09 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-@@ -4,7 +4,7 @@ BPN = "gvfs"
+diff --git a/meta/recipes-connectivity/krb5/krb5_1.8.5.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+similarity index 48%
+rename from meta/recipes-connectivity/krb5/krb5_1.8.5.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+index 2f497a3..b1bb32a 100644
+--- a/meta/recipes-connectivity/krb5/krb5_1.8.5.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+@@ -1,18 +1,19 @@
+ DESCRIPTION = "A network authentication protocol"
+ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+-PR = "r0"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${S}/../README;md5=5595a75ae6fab5f825f579a817baa618"
++LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=e8fad1d174de32f8da0ddc56b67b6941"
+ DEPENDS = "ncurses util-linux e2fsprogs-native"
  
- DEPENDS = "gvfs gnome-disk-utility"
+ inherit autotools binconfig perlnative
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
+-SRC_URI = "http://web.mit.edu/kerberos/dist/krb5/1.8/krb5-1.8.5-signed.tar"
++SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
++SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
++SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
  
- # we need gdu files only: reduce files to delete in libexecdir
- EXTRA_OECONF += "--disable-gphoto2"
-@@ -20,6 +20,7 @@ do_install_append() {
- 	rm -rf ${D}${datadir}/glib-2.0
- 	rm -rf ${D}${datadir}/GConf
- 	rm -f ${D}${datadir}/dbus-1/services/gvfs-*
-+	rm -rf ${D}${datadir}/locale
- 	rm -f ${D}${libexecdir}/gvfsd*
- 	rm -f ${D}${libexecdir}/gvfs-fuse-daemon
- 	rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
+-S = "${WORKDIR}/${PN}-${PV}/src/"
++S = "${WORKDIR}/${P}/src/"
+ 
+-EXTRA_OECONF += " --without-tcl --with-system-et"
++EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
+ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
+                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
+                   ac_cv_file__etc_TIMEZONE=no"
+@@ -20,20 +21,19 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
+ CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+ LDFLAGS_append += "-lpthread"
+ 
+-FILES_${PN}-doc += ${datadir}/examples
++FILES_${PN}-doc += "${datadir}/examples"
++FILES_${PN} += "${datadir}/gnats"
+ 
+ krb5_do_unpack() {
+-	tar xzf ${WORKDIR}/krb5-1.8.5.tar.gz -C ${WORKDIR}/
++    # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
++    tar xzf ${WORKDIR}/${P}.tar.gz -C ${WORKDIR}/
+ }
+ 
+ python do_unpack() {
+-	bb.build.exec_func('base_do_unpack', d)
+-	bb.build.exec_func('krb5_do_unpack', d)
++    bb.build.exec_func('base_do_unpack', d)
++    bb.build.exec_func('krb5_do_unpack', d)
+ }
+ 
+ do_configure() {
+ 	oe_runconf
+ }
+-
+-SRC_URI[md5sum] = "48b17caedf19d07d714a8d7a25422c95"
+-SRC_URI[sha256sum] = "7d6989efaaf0b3330ce5b329edb1d0bf33250ca78b789fdd117e02c49c238812"
 -- 
 1.8.0.2
 
