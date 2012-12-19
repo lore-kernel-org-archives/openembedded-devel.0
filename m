@@ -1,36 +1,36 @@
-Received: from mail-pa0-f50.google.com ([209.85.220.50])
+Received: from mail-oa0-f45.google.com ([209.85.219.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TlK9f-000106-Qf
+	(envelope-from <otavio.salvador@gmail.com>) id 1TlKXQ-0001qK-0U
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2012 14:57:53 +0100
-Received: by mail-pa0-f50.google.com with SMTP id hz10so1323720pad.37
+	Wed, 19 Dec 2012 15:22:25 +0100
+Received: by mail-oa0-f45.google.com with SMTP id i18so2071561oag.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2012 05:43:08 -0800 (PST)
+	Wed, 19 Dec 2012 06:07:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8OIWRVtY8J0LnOR2ZnNtjNLvHeH9DWqzp08a0ZGXQ9A=;
-	b=l+n2TG0JBo4K5Mt73h1C7XmzOUrtUh/p4UwBqqR8bapUEWQ3dwRC1CGkK2jZYJ5IrD
-	DJpnlBtSgw3kR4q9s50hoGHLeiUlLnZwJDf8bvcMKnd+N2oSrdQNokKPecZNxwTGvPxx
-	Eq75BuHre5LBolagnGxDN7isZT92D4uFa014vO1rWwZGXuahP9EVf/kEldnU4yZvAQvN
-	Y36tyJHg4ifTrlZX8ZXqVneRsMcqgzpnLDKu9KRfsDIXHy3Qf+jqSPBbWbnnVn/tbqEd
-	qR7vC0t75TBxnmg840dToirkAO+pZPosUjS029fwjbVOqoqicqx3VW0S18qfNzPnmmRi
-	NmjQ==
-X-Received: by 10.68.132.232 with SMTP id ox8mr18850896pbb.46.1355924588043;
-	Wed, 19 Dec 2012 05:43:08 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id z10sm3456788pax.38.2012.12.19.05.43.05
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Dec 2012 05:43:06 -0800 (PST)
-Date: Wed, 19 Dec 2012 14:43:04 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121219134304.GA14543@jama.palm1.palmone.com>
-References: <1355742339-15037-1-git-send-email-ross.burton@intel.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=d4ArXwY2MsX9w1uonFisYfOiSLWjcu3BeNkVY2eD60c=;
+	b=xJ1szQ763jUpEQYAGkGbisQMkbHvg6RMRt8X+r5WcIgITIaz8ELqXfQZDX9kwnqGBS
+	sXUC0cKuhdzIN7IdFZvcL0p5YuiyxNQMQewB7tvLpCUn09bENz4eSmNQ+xvhHnweMk+/
+	kBSitl01iL5BDnbG/LqjcBzUq7i7pCURzcEHuzbdUJUzTzqOtrZ9Bwt4NVbn5K2ROgmg
+	RRd/xKf/qX/b4Ovzh0EeqOWwHDwnSLWMFXocGq6RD15P7jLXDIvvOX6C/Umv/v96WCbw
+	VmLtWBkp83tkjTogtPwStNvrh8R4y/uIA+rqV0LtzrOrf2yq55d0vkxxtHY1692J2+VW
+	PhEw==
 MIME-Version: 1.0
-In-Reply-To: <1355742339-15037-1-git-send-email-ross.burton@intel.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] python-mako: install standalone, not as an egg
+Received: by 10.60.10.230 with SMTP id l6mr4898474oeb.94.1355926060325; Wed,
+	19 Dec 2012 06:07:40 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Wed, 19 Dec 2012 06:07:40 -0800 (PST)
+In-Reply-To: <20121219134033.GD3525@jama.palm1.palmone.com>
+References: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
+	<20121219134033.GD3525@jama.palm1.palmone.com>
+Date: Wed, 19 Dec 2012 12:07:40 -0200
+X-Google-Sender-Auth: ZqdfxhaTIrMsjINc7hhFI3tDJqs
+Message-ID: <CAP9ODKoSQrBs2iu+dqdCe03Xju=NfB=Xqy0ddN+r3GesZSkvVw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] openmotif: Update SRC_URI and add libxft in depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2012 13:58:03 -0000
-X-Groupsio-MsgNum: 42256
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Dec 2012 14:22:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---2oS5YaxWCcQjTEyO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Dec 19, 2012 at 11:40 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Tue, Dec 18, 2012 at 07:15:56PM -0200, Otavio Salvador wrote:
+>> The file couldn't be found in the official repository and it seems
+>> unmaintained as it had processing errors when trying to register to be
+>> able to download the last release. Researching in the web a mirror has
+>> been found and than we're using now this mirror so fetch works again.
+>>
+>> During build test, from a clean tmp directory we found that libxft is
+>> a hard dependency so we add it to depends list.
+>
+> Does not apply on master, because openmotif was removed:
+> commit 14b68506078a4133e743491d35245775a58a1317
+> Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> Date:   Wed Nov 14 12:31:18 2012 +0100
+>
+>     openmotif: remove due to lack of libxp in repository
+>
+> Can you rebase on master and resubmit if still needed?
 
-On Mon, Dec 17, 2012 at 11:05:39AM +0000, Ross Burton wrote:
-> ---
+Yes I can but wouldn't be better to just revert the removal commit and
+apply it? If you want I can prepare it in my tree.
 
-Missing SOB line
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
->  meta-oe/recipes-devtools/python/python-mako_0.7.2.bb |    6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-=
-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> index 9113666..d2222d6 100644
-> --- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> +++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> @@ -3,7 +3,7 @@ SECTION =3D "devel/python"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dda8dd26ed9751ee0cfdf9df1a16bb=
-b54"
-> =20
-> -PR =3D "r0"
-> +PR =3D "r1"
-> =20
->  SRC_URI =3D "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
->  SRC_URI[md5sum] =3D "e3c0a677aa4216da9e89ef8fa76cbafb"
-> @@ -13,6 +13,10 @@ S =3D "${WORKDIR}/Mako-${PV}"
-> =20
->  inherit distutils
-> =20
-> +DISTUTILS_INSTALL_ARGS =3D "--single-version-externally-managed \
-> +                          --root=3D${D} \
-> +                          --install-lib=3D${PYTHON_SITEPACKAGES_DIR}"
-> +
->  RDEPENDS_${PN} =3D "python-threading \
->                    python-netclient \
->                    python-html \
-> --=20
-> 1.7.10
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---2oS5YaxWCcQjTEyO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDRxGgACgkQN1Ujt2V2gBxMtwCaAuVnDs3s1VwRNL0o/HX6hFoj
-HEsAnjaR2yweoILwLrm70vuOo8qSWAbk
-=J5nk
------END PGP SIGNATURE-----
-
---2oS5YaxWCcQjTEyO--
