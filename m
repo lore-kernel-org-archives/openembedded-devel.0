@@ -1,36 +1,37 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail-da0-f49.google.com ([209.85.210.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TlHo1-0001S3-Ai
+	(envelope-from <martin.jansa@gmail.com>) id 1TlK7F-0000sp-5M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2012 12:27:26 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so866470dak.20
+	Wed, 19 Dec 2012 14:55:32 +0100
+Received: by mail-da0-f49.google.com with SMTP id v40so935461dad.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2012 03:12:37 -0800 (PST)
+	Wed, 19 Dec 2012 05:40:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9KI4Se101KKlxcapqzEFhilRzdqJN6ej2Ls1GCj0Jyk=;
-	b=l9zuTwaEJYH49Q9Cux0mmCJBrebwqUwQMa95vZlhzqpBHsnkJNaYkkiffMaYwurWC0
-	xuCn/NK0SnP3+2Dlr5IKDZ75uiQSlcRmH0ZaLjnrcrNgUw84jkhJbPMySPWW81uHGjRn
-	8gGw8q1XQ6ouP4k9zoPe1GZfiqWHOCUVNPhHT93sAoJZQTsprpreCfQKYAHtOGeMiuXK
-	YpWdXYccdOC/+jT+5Sp9C0+kN88xlFp1lBNBPVxuUtWm22F+W13i9Rhy6VBoQQmveWpE
-	pymNvPStXLLVByTlKlbi7QsZeUumqKOLYXBp8R7evTuXY9AmPKh+y99V70v4KhwZ7HJU
-	fdOg==
-X-Received: by 10.69.0.101 with SMTP id ax5mr17162934pbd.105.1355915557613;
-	Wed, 19 Dec 2012 03:12:37 -0800 (PST)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=tFrW3fXztiwwN/x1PJqKnPlOxcIxk96PN6xwAOcYKdk=;
+	b=qiwcS3NYZ+eaInBiivImtHrGI3vAwg9K4zznvV7ARr0+Mg3BeJY3mrXhrqY9R1QJJq
+	jXjUiNXXEfC4WN7yCeoLzNNYlfubhTKKl3IExD0yA+xe5HdlD2eDbRqSo5MjnRWl0imV
+	s3lOETNABWnfaGi63Tsl58NQX7ddgvUMnRf4aObS5VeVU4sZNuNp01MQaHg/wavqvV4U
+	I4at+SWPlLFrThEwOwwnFyXOTeRq/74xECXDCN63C/lC46Mubm0T7xnkTUwbzsq4BDlD
+	X+CZvfvi9A7m7o1w+kkQAZfSogoKj+GTAa1WD0AIf1gU5ssIkBXk9huAgPH4++O3ttC0
+	IZrg==
+X-Received: by 10.66.89.199 with SMTP id bq7mr17588193pab.26.1355924437110;
+	Wed, 19 Dec 2012 05:40:37 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id oj5sm2946409pbb.47.2012.12.19.03.12.35
+	by mx.google.com with ESMTPS id oz9sm3131460pbb.68.2012.12.19.05.40.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Dec 2012 03:12:36 -0800 (PST)
-Date: Wed, 19 Dec 2012 12:12:34 +0100
+	Wed, 19 Dec 2012 05:40:35 -0800 (PST)
+Date: Wed, 19 Dec 2012 14:40:33 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121219111234.GC3525@jama.palm1.palmone.com>
-References: <cover.1355849280.git.Martin.Jansa@gmail.com>
+Message-ID: <20121219134033.GD3525@jama.palm1.palmone.com>
+References: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
+In-Reply-To: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 00/10] [meta-oe] More pending patches from patchwork and few fixes
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 1/3] openmotif: Update SRC_URI and add libxft in depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,127 +45,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2012 11:27:36 -0000
-X-Groupsio-MsgNum: 42254
+X-List-Received-Date: Wed, 19 Dec 2012 13:55:32 -0000
+X-Groupsio-MsgNum: 42255
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VywGB/WGlW4DM4P8"
+	protocol="application/pgp-signature"; boundary="11Y7aswkeuHtSBEs"
 Content-Disposition: inline
 
---VywGB/WGlW4DM4P8
-Content-Type: text/plain; charset=iso-8859-1
+--11Y7aswkeuHtSBEs
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 18, 2012 at 05:54:59PM +0100, Martin Jansa wrote:
-> bitbake world is still running, but if everything goes well I'll merge th=
-is tomorrow
+On Tue, Dec 18, 2012 at 07:15:56PM -0200, Otavio Salvador wrote:
+> The file couldn't be found in the official repository and it seems
+> unmaintained as it had processing errors when trying to register to be
+> able to download the last release. Researching in the web a mirror has
+> been found and than we're using now this mirror so fetch works again.
 >=20
-> The following changes since commit 4b5d2af979c17c6a2a65a6ea9a4e7f41414c9f=
-eb:
->=20
->   libsdl-mixer: update to upstream version 1.2.12 (2012-12-16 21:11:45 +0=
-100)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib jansa/pull
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/pull
->=20
-> Andreas M=FCller (1):
->   gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
->=20
-> Ben Deering (1):
->   claws-mail: Upgrade from 3.6.1 to 3.9.0
+> During build test, from a clean tmp directory we found that libxft is
+> a hard dependency so we add it to depends list.
 
-Merged without this one as it breaks 2 plugins:                            =
-                                                            =20
-                                                                           =
-                                        =20
-meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.14.bb, do_compile  =
-                                                                           =
-       =20
-| plugin_gtk.c:317:33: error: dereferencing pointer to incomplete type     =
-                                                                           =
-       =20
-                   =20
-meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.18.bb, do_compile
-| feed.c:940:3: error: too few arguments to function 'conv_unmime_header'  =
-                                                                           =
-       =20
+Does not apply on master, because openmotif was removed:
+commit 14b68506078a4133e743491d35245775a58a1317
+Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Date:   Wed Nov 14 12:31:18 2012 +0100
+
+    openmotif: remove due to lack of libxp in repository
+
+Can you rebase on master and resubmit if still needed?
 
 Cheers,
 
 >=20
-> Cliff Brake (1):
->   update oe-stylize to be Python3 comaptible
+> Change-Id: If486a40718af688dfad6768d56432afb573cf8d8
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../recipes-support/openmotif/openmotif_2.3.3.bb   |    6 ++++--
+>  1 files changed, 4 insertions(+), 2 deletions(-)
 >=20
-> Marcin Juszkiewicz (1):
->   florence: move to meta-gnome due to libnotify
->=20
-> Martin Jansa (6):
->   geos: fix typo in FILES_${PN}-dev
->   krb5: fix path to recipe and upgrade to 1.11
->   e-base: bump EFL_SRCREV for E17 release called lucky
->   terminology: upgrade to 0.2.0
->   azy: rename lemon provided by azy-native to azy_lemon
->   evince: disable help build
->=20
->  contrib/oe-stylize.py                              |  10 +-
->  meta-efl/classes/e-base.bbclass                    |   2 +-
->  .../conf/distro/include/efl-from-svn-recipes.inc   |   2 +-
->  .../{terminology_0.1.0.bb =3D> terminology_0.2.0.bb} |   4 +-
->  meta-efl/recipes-efl/e17/terminology_svn.bb        |   2 +-
->  meta-efl/recipes-efl/efl/azy_svn.bb                |   6 +-
->  meta-gnome/recipes-gnome/evince/evince_2.32.0.bb   |   3 +-
->  .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |   3 +-
->  .../florence/files/0001-Fix-glib-includes.patch    |   0
->  .../recipes-support/florence/florence_0.5.1.bb     |   0
->  .../recipes-connectivity/krb5/krb5_1.11.bb         |  24 +-
->  meta-oe/recipes-navigation/geos/geos.inc           |   8 +-
->  .../claws-mail-3.6.1/claws-mail-g_strcmp0.patch    | 575 ---------------=
-------
->  .../claws-mail/claws-mail-3.6.1/desktop.patch      |  19 -
->  .../claws-mail-3.6.1/duplicate-header.patch        |  10 -
->  .../claws-mail/claws-mail-3.6.1/glib-2.32.patch    |  11 -
->  .../{claws-mail_3.6.1.bb =3D> claws-mail_3.9.0.bb}   |  17 +-
->  17 files changed, 38 insertions(+), 658 deletions(-)
->  rename meta-efl/recipes-efl/e17/{terminology_0.1.0.bb =3D> terminology_0=
-=2E2.0.bb} (41%)
->  rename {meta-oe =3D> meta-gnome}/recipes-support/florence/files/0001-Fix=
--glib-includes.patch (100%)
->  rename {meta-oe =3D> meta-gnome}/recipes-support/florence/florence_0.5.1=
-=2Ebb (100%)
->  rename meta/recipes-connectivity/krb5/krb5_1.8.5.bb =3D> meta-oe/recipes=
--connectivity/krb5/krb5_1.11.bb (48%)
->  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/claw=
-s-mail-g_strcmp0.patch
->  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/desk=
-top.patch
->  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/dupl=
-icate-header.patch
->  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/glib=
--2.32.patch
->  rename meta-oe/recipes-sato/claws-mail/{claws-mail_3.6.1.bb =3D> claws-m=
-ail_3.9.0.bb} (72%)
->=20
+> diff --git a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb b/meta-=
+oe/recipes-support/openmotif/openmotif_2.3.3.bb
+> index 2e9c2de..e7a0220 100644
+> --- a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+> +++ b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+> @@ -1,11 +1,13 @@
+>  SECTION =3D "libs"
+>  DESCRIPTION =3D "OSM/Motif implementation."
+>  LICENSE =3D "OGPL"
+> -DEPENDS =3D "xbitmaps virtual/libx11 libxt libxp"
+> +DEPENDS =3D "xbitmaps virtual/libx11 libxt libxp libxft"
+> =20
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D14f692c82491db3d52419929d2f3b=
+343"
+> =20
+> -SRC_URI =3D "http://openmotif.com/files/public_downloads/openmotif/2.3/2=
+=2E3.3/openmotif-2.3.3.tar.gz \
+> +PR =3D "r1"
+> +
+> +SRC_URI =3D "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
+>             file://configure.patch;patch=3D1"
+> =20
+>  SRC_URI[md5sum] =3D "fd27cd3369d6c7d5ef79eccba524f7be"
 > --=20
-> 1.8.0.2
+> 1.7.2.5
 >=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---VywGB/WGlW4DM4P8
+--11Y7aswkeuHtSBEs
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDRoSIACgkQN1Ujt2V2gBzRKACffo5dhD9QC9cPVNyBR2UztV4U
-swEAoKaUcHy0BUUy7B6LgegwbfuNhF7V
-=F4me
+iEYEARECAAYFAlDRw9EACgkQN1Ujt2V2gByy4wCfcqOI60tDOf5SdEp8pn1fTbUl
+lZgAoLOKZzNx4vr+HaqVJmAQgfokuUYG
+=pG4b
 -----END PGP SIGNATURE-----
 
---VywGB/WGlW4DM4P8--
+--11Y7aswkeuHtSBEs--
