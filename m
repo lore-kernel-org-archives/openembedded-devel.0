@@ -1,39 +1,39 @@
-Received: from mail-pa0-f45.google.com ([209.85.220.45])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TlKqK-00029t-Bf
+	(envelope-from <ross.burton@intel.com>) id 1TlL0w-0002SD-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2012 15:42:02 +0100
-Received: by mail-pa0-f45.google.com with SMTP id bg2so1350100pad.4
+	Wed, 19 Dec 2012 15:53:06 +0100
+Received: from mail-wi0-f197.google.com ([209.85.212.197])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 19 Dec 2012 06:38:09 -0800
+Received: by mail-wi0-f197.google.com with SMTP id hm6so1696888wib.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2012 06:27:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=BN878Rtga4rx1n9qIln/Thd1y8e2bL3mYLAWonDy0Bo=;
-	b=cMb8EIuHhZXPkluhTFDFGsIeDwwuxQ3o0dDVUoyQi/kLGpRWbS1r/dLJ02Uw1VD6e4
-	YoTKSPzvW0ClMLUsq2LiFesvX8C6UCq6Jxiv0tQper5iT1dlxtd0ejhtcBLvCDXJKIbf
-	f/zLZikVlE73Ds5dZXY8w1jmL7oF0wbO+rKxLDV+Wx1XRYV6J8r9/57zS5TPREcBb/4w
-	9/zUGXD+gkkoKxM8hC561J7yAf20m7L2NhgQ1ka9NySkJeFxkXBDNeeF2s2kspsbTy1D
-	eAEo/tVeV5973VpnByEz3Kr4iZRqNoDWuImoTBk8yvdbxD+0sCb8Z/4BFax4ppaPZa4I
-	6n/Q==
-X-Received: by 10.68.219.164 with SMTP id pp4mr19160474pbc.72.1355927232422;
-	Wed, 19 Dec 2012 06:27:12 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id pl10sm3192502pbc.60.2012.12.19.06.27.09
+	Wed, 19 Dec 2012 06:38:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=nA7JmpQVoa1aYSvjU2u731mDm0hg716llge/1UG9NI4=;
+	b=dyHgZskQRGKsmZSlIFeNKTB1OMhVXoHZZ37llON3GeKvmmXuQSCbDVPxsh2W1wTWZk
+	RFFLAUlCYPx1N71eqY9d3U7ihgADBgAWnFuUOfRuGLQtYgN7jAH3tEV+7cK3EvwiFdyB
+	9HETGSH6c1FhZiUAtMC6SJVgSmV8LALOOMaGoRottK85nPICTTkcNJIbqwLcs4onJDqN
+	Fqnjz2Af1HMAaNUubwfiRMIoku/bQr/y/CF/FgvV4lBXuuqAFiamVf4FLm4fUI1hsYmr
+	RLDK12bger6Nj0A50dj8OEwFjVcomQQORteh10By6K05ES85C3KtoAQ3t+0YeisZYdSm
+	6klA==
+X-Received: by 10.194.82.168 with SMTP id j8mr12044166wjy.15.1355927888491;
+	Wed, 19 Dec 2012 06:38:08 -0800 (PST)
+X-Received: by 10.194.82.168 with SMTP id j8mr12044147wjy.15.1355927888294;
+	Wed, 19 Dec 2012 06:38:08 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id eo10sm8201274wib.9.2012.12.19.06.38.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Dec 2012 06:27:11 -0800 (PST)
-Date: Wed, 19 Dec 2012 15:27:08 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Message-ID: <20121219142708.GB14543@jama.palm1.palmone.com>
-References: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
-	<20121219134033.GD3525@jama.palm1.palmone.com>
-	<CAP9ODKoSQrBs2iu+dqdCe03Xju=NfB=Xqy0ddN+r3GesZSkvVw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoSQrBs2iu+dqdCe03Xju=NfB=Xqy0ddN+r3GesZSkvVw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/3] openmotif: Update SRC_URI and add libxft in depends
+	Wed, 19 Dec 2012 06:38:07 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Dec 2012 14:36:24 +0000
+Message-Id: <1355927784-13401-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQm4RipFOhBVJP1gE+UP88tbmpqSZv4/90ensdIHGSA54wE6RtYV1wJkZxelSCPvNpncg7qyE9NaQNkoys33oXCrXcD+Hl2rcja2ZBssRMF1Cz+sQvH4Ty5srYiajg47AJIuSaFMOhkb5IJnzJ/kKxtGCNz3XcH7vhvIGnBuUcSvFe2HpNwigRLSpzvmWI+EOaokep02
+Subject: [PATCH V2] python-mako: install standalone, not as an egg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,57 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2012 14:42:02 -0000
-X-Groupsio-MsgNum: 42258
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LpQ9ahxlCli8rRTG"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Dec 2012 14:53:10 -0000
 
---LpQ9ahxlCli8rRTG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-oe/recipes-devtools/python/python-mako_0.7.2.bb |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-On Wed, Dec 19, 2012 at 12:07:40PM -0200, Otavio Salvador wrote:
-> On Wed, Dec 19, 2012 at 11:40 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Tue, Dec 18, 2012 at 07:15:56PM -0200, Otavio Salvador wrote:
-> >> The file couldn't be found in the official repository and it seems
-> >> unmaintained as it had processing errors when trying to register to be
-> >> able to download the last release. Researching in the web a mirror has
-> >> been found and than we're using now this mirror so fetch works again.
-> >>
-> >> During build test, from a clean tmp directory we found that libxft is
-> >> a hard dependency so we add it to depends list.
-> >
-> > Does not apply on master, because openmotif was removed:
-> > commit 14b68506078a4133e743491d35245775a58a1317
-> > Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> > Date:   Wed Nov 14 12:31:18 2012 +0100
-> >
-> >     openmotif: remove due to lack of libxp in repository
-> >
-> > Can you rebase on master and resubmit if still needed?
->=20
-> Yes I can but wouldn't be better to just revert the removal commit and
-> apply it? If you want I can prepare it in my tree.
+diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+index 9113666..d2222d6 100644
+--- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
++++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+@@ -3,7 +3,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=da8dd26ed9751ee0cfdf9df1a16bbb54"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
+ SRC_URI[md5sum] = "e3c0a677aa4216da9e89ef8fa76cbafb"
+@@ -13,6 +13,10 @@ S = "${WORKDIR}/Mako-${PV}"
+ 
+ inherit distutils
+ 
++DISTUTILS_INSTALL_ARGS = "--single-version-externally-managed \
++                          --root=${D} \
++                          --install-lib=${PYTHON_SITEPACKAGES_DIR}"
++
+ RDEPENDS_${PN} = "python-threading \
+                   python-netclient \
+                   python-html \
+-- 
+1.7.10
 
-That does not resolve missing libxp.
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---LpQ9ahxlCli8rRTG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDRzrwACgkQN1Ujt2V2gBwcEwCfa08iT/9IfcPe0hWMtrQdzZ14
-FvAAninhlkNZr4S4WICLaxV79jmbqUxV
-=wVHx
------END PGP SIGNATURE-----
-
---LpQ9ahxlCli8rRTG--
