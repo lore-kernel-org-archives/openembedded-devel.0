@@ -1,37 +1,36 @@
-Received: from mail-da0-f49.google.com ([209.85.210.49])
+Received: from mail-pa0-f50.google.com ([209.85.220.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TlK7F-0000sp-5M
+	(envelope-from <martin.jansa@gmail.com>) id 1TlK9f-000106-Qf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2012 14:55:32 +0100
-Received: by mail-da0-f49.google.com with SMTP id v40so935461dad.36
+	Wed, 19 Dec 2012 14:57:53 +0100
+Received: by mail-pa0-f50.google.com with SMTP id hz10so1323720pad.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2012 05:40:37 -0800 (PST)
+	Wed, 19 Dec 2012 05:43:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=tFrW3fXztiwwN/x1PJqKnPlOxcIxk96PN6xwAOcYKdk=;
-	b=qiwcS3NYZ+eaInBiivImtHrGI3vAwg9K4zznvV7ARr0+Mg3BeJY3mrXhrqY9R1QJJq
-	jXjUiNXXEfC4WN7yCeoLzNNYlfubhTKKl3IExD0yA+xe5HdlD2eDbRqSo5MjnRWl0imV
-	s3lOETNABWnfaGi63Tsl58NQX7ddgvUMnRf4aObS5VeVU4sZNuNp01MQaHg/wavqvV4U
-	I4at+SWPlLFrThEwOwwnFyXOTeRq/74xECXDCN63C/lC46Mubm0T7xnkTUwbzsq4BDlD
-	X+CZvfvi9A7m7o1w+kkQAZfSogoKj+GTAa1WD0AIf1gU5ssIkBXk9huAgPH4++O3ttC0
-	IZrg==
-X-Received: by 10.66.89.199 with SMTP id bq7mr17588193pab.26.1355924437110;
-	Wed, 19 Dec 2012 05:40:37 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=8OIWRVtY8J0LnOR2ZnNtjNLvHeH9DWqzp08a0ZGXQ9A=;
+	b=l+n2TG0JBo4K5Mt73h1C7XmzOUrtUh/p4UwBqqR8bapUEWQ3dwRC1CGkK2jZYJ5IrD
+	DJpnlBtSgw3kR4q9s50hoGHLeiUlLnZwJDf8bvcMKnd+N2oSrdQNokKPecZNxwTGvPxx
+	Eq75BuHre5LBolagnGxDN7isZT92D4uFa014vO1rWwZGXuahP9EVf/kEldnU4yZvAQvN
+	Y36tyJHg4ifTrlZX8ZXqVneRsMcqgzpnLDKu9KRfsDIXHy3Qf+jqSPBbWbnnVn/tbqEd
+	qR7vC0t75TBxnmg840dToirkAO+pZPosUjS029fwjbVOqoqicqx3VW0S18qfNzPnmmRi
+	NmjQ==
+X-Received: by 10.68.132.232 with SMTP id ox8mr18850896pbb.46.1355924588043;
+	Wed, 19 Dec 2012 05:43:08 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id oz9sm3131460pbb.68.2012.12.19.05.40.34
+	by mx.google.com with ESMTPS id z10sm3456788pax.38.2012.12.19.05.43.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 19 Dec 2012 05:40:35 -0800 (PST)
-Date: Wed, 19 Dec 2012 14:40:33 +0100
+	Wed, 19 Dec 2012 05:43:06 -0800 (PST)
+Date: Wed, 19 Dec 2012 14:43:04 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121219134033.GD3525@jama.palm1.palmone.com>
-References: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
+Message-ID: <20121219134304.GA14543@jama.palm1.palmone.com>
+References: <1355742339-15037-1-git-send-email-ross.burton@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1355865358-21642-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1355742339-15037-1-git-send-email-ross.burton@intel.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH 1/3] openmotif: Update SRC_URI and add libxft in depends
+Subject: Re: [PATCH] python-mako: install standalone, not as an egg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,69 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2012 13:55:32 -0000
-X-Groupsio-MsgNum: 42255
+X-List-Received-Date: Wed, 19 Dec 2012 13:58:03 -0000
+X-Groupsio-MsgNum: 42256
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="11Y7aswkeuHtSBEs"
+	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
 Content-Disposition: inline
 
---11Y7aswkeuHtSBEs
+--2oS5YaxWCcQjTEyO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 18, 2012 at 07:15:56PM -0200, Otavio Salvador wrote:
-> The file couldn't be found in the official repository and it seems
-> unmaintained as it had processing errors when trying to register to be
-> able to download the last release. Researching in the web a mirror has
-> been found and than we're using now this mirror so fetch works again.
->=20
-> During build test, from a clean tmp directory we found that libxft is
-> a hard dependency so we add it to depends list.
-
-Does not apply on master, because openmotif was removed:
-commit 14b68506078a4133e743491d35245775a58a1317
-Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Date:   Wed Nov 14 12:31:18 2012 +0100
-
-    openmotif: remove due to lack of libxp in repository
-
-Can you rebase on master and resubmit if still needed?
-
-Cheers,
-
->=20
-> Change-Id: If486a40718af688dfad6768d56432afb573cf8d8
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+On Mon, Dec 17, 2012 at 11:05:39AM +0000, Ross Burton wrote:
 > ---
->  .../recipes-support/openmotif/openmotif_2.3.3.bb   |    6 ++++--
->  1 files changed, 4 insertions(+), 2 deletions(-)
+
+Missing SOB line
+
+>  meta-oe/recipes-devtools/python/python-mako_0.7.2.bb |    6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb b/meta-=
-oe/recipes-support/openmotif/openmotif_2.3.3.bb
-> index 2e9c2de..e7a0220 100644
-> --- a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
-> +++ b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
-> @@ -1,11 +1,13 @@
->  SECTION =3D "libs"
->  DESCRIPTION =3D "OSM/Motif implementation."
->  LICENSE =3D "OGPL"
-> -DEPENDS =3D "xbitmaps virtual/libx11 libxt libxp"
-> +DEPENDS =3D "xbitmaps virtual/libx11 libxt libxp libxft"
+> diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-=
+oe/recipes-devtools/python/python-mako_0.7.2.bb
+> index 9113666..d2222d6 100644
+> --- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+> +++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+> @@ -3,7 +3,7 @@ SECTION =3D "devel/python"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dda8dd26ed9751ee0cfdf9df1a16bb=
+b54"
 > =20
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D14f692c82491db3d52419929d2f3b=
-343"
-> =20
-> -SRC_URI =3D "http://openmotif.com/files/public_downloads/openmotif/2.3/2=
-=2E3.3/openmotif-2.3.3.tar.gz \
+> -PR =3D "r0"
 > +PR =3D "r1"
-> +
-> +SRC_URI =3D "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
->             file://configure.patch;patch=3D1"
 > =20
->  SRC_URI[md5sum] =3D "fd27cd3369d6c7d5ef79eccba524f7be"
+>  SRC_URI =3D "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
+>  SRC_URI[md5sum] =3D "e3c0a677aa4216da9e89ef8fa76cbafb"
+> @@ -13,6 +13,10 @@ S =3D "${WORKDIR}/Mako-${PV}"
+> =20
+>  inherit distutils
+> =20
+> +DISTUTILS_INSTALL_ARGS =3D "--single-version-externally-managed \
+> +                          --root=3D${D} \
+> +                          --install-lib=3D${PYTHON_SITEPACKAGES_DIR}"
+> +
+>  RDEPENDS_${PN} =3D "python-threading \
+>                    python-netclient \
+>                    python-html \
 > --=20
-> 1.7.2.5
+> 1.7.10
 >=20
 >=20
 > _______________________________________________
@@ -118,16 +101,16 @@ oe/recipes-support/openmotif/openmotif_2.3.3.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---11Y7aswkeuHtSBEs
+--2oS5YaxWCcQjTEyO
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDRw9EACgkQN1Ujt2V2gByy4wCfcqOI60tDOf5SdEp8pn1fTbUl
-lZgAoLOKZzNx4vr+HaqVJmAQgfokuUYG
-=pG4b
+iEYEARECAAYFAlDRxGgACgkQN1Ujt2V2gBxMtwCaAuVnDs3s1VwRNL0o/HX6hFoj
+HEsAnjaR2yweoILwLrm70vuOo8qSWAbk
+=J5nk
 -----END PGP SIGNATURE-----
 
---11Y7aswkeuHtSBEs--
+--2oS5YaxWCcQjTEyO--
