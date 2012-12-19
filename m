@@ -1,36 +1,36 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1Tl7Gq-0001A3-5N
+	(envelope-from <martin.jansa@gmail.com>) id 1TlHo1-0001S3-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Dec 2012 01:12:26 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id BD91BD22E9; Wed, 19 Dec 2012 00:57:43 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id BFDD1D22B4
+	Wed, 19 Dec 2012 12:27:26 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so866470dak.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Dec 2012 00:57:21 +0100 (CET)
-Message-ID: <50D102DD.5090608@linaro.org>
-Date: Wed, 19 Dec 2012 00:57:17 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-MIME-Version: 1.0
+	Wed, 19 Dec 2012 03:12:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=9KI4Se101KKlxcapqzEFhilRzdqJN6ej2Ls1GCj0Jyk=;
+	b=l9zuTwaEJYH49Q9Cux0mmCJBrebwqUwQMa95vZlhzqpBHsnkJNaYkkiffMaYwurWC0
+	xuCn/NK0SnP3+2Dlr5IKDZ75uiQSlcRmH0ZaLjnrcrNgUw84jkhJbPMySPWW81uHGjRn
+	8gGw8q1XQ6ouP4k9zoPe1GZfiqWHOCUVNPhHT93sAoJZQTsprpreCfQKYAHtOGeMiuXK
+	YpWdXYccdOC/+jT+5Sp9C0+kN88xlFp1lBNBPVxuUtWm22F+W13i9Rhy6VBoQQmveWpE
+	pymNvPStXLLVByTlKlbi7QsZeUumqKOLYXBp8R7evTuXY9AmPKh+y99V70v4KhwZ7HJU
+	fdOg==
+X-Received: by 10.69.0.101 with SMTP id ax5mr17162934pbd.105.1355915557613;
+	Wed, 19 Dec 2012 03:12:37 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id oj5sm2946409pbb.47.2012.12.19.03.12.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 19 Dec 2012 03:12:36 -0800 (PST)
+Date: Wed, 19 Dec 2012 12:12:34 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <50D0978D.9090805@gmail.com>
-	<1355848700.24487.126.camel@phil-desktop>
-	<50D09CB2.1000607@gmail.com>
-In-Reply-To: <50D09CB2.1000607@gmail.com>
-Subject: Re: oe-core 2.6 kernel support
+Message-ID: <20121219111234.GC3525@jama.palm1.palmone.com>
+References: <cover.1355849280.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <cover.1355849280.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 00/10] [meta-oe] More pending patches from patchwork and few fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +44,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Dec 2012 00:12:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Dec 2012 11:27:36 -0000
+X-Groupsio-MsgNum: 42254
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VywGB/WGlW4DM4P8"
+Content-Disposition: inline
 
-W dniu 18.12.2012 17:41, Marco pisze:
-> Il 18/12/2012 17:38, Phil Blundell ha scritto:
->> On Tue, 2012-12-18 at 17:19 +0100, Marco wrote:
->>> Paul had kindly pointed me to the meta-handheld stuff so I tried oe-core
->>> + meta-handheld and I built:
->>>    akita -> ok (3.2.32-git)
->>>    hx4700 -> ok (3.0.1)
->>>    h3600 -> fails (2.6.29)
->>
->> In what way does it fail?
+--VywGB/WGlW4DM4P8
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Check
-http://git.linaro.org/gitweb?p=kernel/linaro-aarch64.git;a=commit;h=05e926ae805a4ef80a2c27194303a21c9ddaf5f8
-for solution. It's for arm64 but you can adapt it for arm.
+On Tue, Dec 18, 2012 at 05:54:59PM +0100, Martin Jansa wrote:
+> bitbake world is still running, but if everything goes well I'll merge th=
+is tomorrow
+>=20
+> The following changes since commit 4b5d2af979c17c6a2a65a6ea9a4e7f41414c9f=
+eb:
+>=20
+>   libsdl-mixer: update to upstream version 1.2.12 (2012-12-16 21:11:45 +0=
+100)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/pull
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Djansa/pull
+>=20
+> Andreas M=FCller (1):
+>   gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
+>=20
+> Ben Deering (1):
+>   claws-mail: Upgrade from 3.6.1 to 3.9.0
 
+Merged without this one as it breaks 2 plugins:                            =
+                                                            =20
+                                                                           =
+                                        =20
+meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.14.bb, do_compile  =
+                                                                           =
+       =20
+| plugin_gtk.c:317:33: error: dereferencing pointer to incomplete type     =
+                                                                           =
+       =20
+                   =20
+meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.18.bb, do_compile
+| feed.c:940:3: error: too few arguments to function 'conv_unmime_header'  =
+                                                                           =
+       =20
 
+Cheers,
+
+>=20
+> Cliff Brake (1):
+>   update oe-stylize to be Python3 comaptible
+>=20
+> Marcin Juszkiewicz (1):
+>   florence: move to meta-gnome due to libnotify
+>=20
+> Martin Jansa (6):
+>   geos: fix typo in FILES_${PN}-dev
+>   krb5: fix path to recipe and upgrade to 1.11
+>   e-base: bump EFL_SRCREV for E17 release called lucky
+>   terminology: upgrade to 0.2.0
+>   azy: rename lemon provided by azy-native to azy_lemon
+>   evince: disable help build
+>=20
+>  contrib/oe-stylize.py                              |  10 +-
+>  meta-efl/classes/e-base.bbclass                    |   2 +-
+>  .../conf/distro/include/efl-from-svn-recipes.inc   |   2 +-
+>  .../{terminology_0.1.0.bb =3D> terminology_0.2.0.bb} |   4 +-
+>  meta-efl/recipes-efl/e17/terminology_svn.bb        |   2 +-
+>  meta-efl/recipes-efl/efl/azy_svn.bb                |   6 +-
+>  meta-gnome/recipes-gnome/evince/evince_2.32.0.bb   |   3 +-
+>  .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |   3 +-
+>  .../florence/files/0001-Fix-glib-includes.patch    |   0
+>  .../recipes-support/florence/florence_0.5.1.bb     |   0
+>  .../recipes-connectivity/krb5/krb5_1.11.bb         |  24 +-
+>  meta-oe/recipes-navigation/geos/geos.inc           |   8 +-
+>  .../claws-mail-3.6.1/claws-mail-g_strcmp0.patch    | 575 ---------------=
+------
+>  .../claws-mail/claws-mail-3.6.1/desktop.patch      |  19 -
+>  .../claws-mail-3.6.1/duplicate-header.patch        |  10 -
+>  .../claws-mail/claws-mail-3.6.1/glib-2.32.patch    |  11 -
+>  .../{claws-mail_3.6.1.bb =3D> claws-mail_3.9.0.bb}   |  17 +-
+>  17 files changed, 38 insertions(+), 658 deletions(-)
+>  rename meta-efl/recipes-efl/e17/{terminology_0.1.0.bb =3D> terminology_0=
+=2E2.0.bb} (41%)
+>  rename {meta-oe =3D> meta-gnome}/recipes-support/florence/files/0001-Fix=
+-glib-includes.patch (100%)
+>  rename {meta-oe =3D> meta-gnome}/recipes-support/florence/florence_0.5.1=
+=2Ebb (100%)
+>  rename meta/recipes-connectivity/krb5/krb5_1.8.5.bb =3D> meta-oe/recipes=
+-connectivity/krb5/krb5_1.11.bb (48%)
+>  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/claw=
+s-mail-g_strcmp0.patch
+>  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/desk=
+top.patch
+>  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/dupl=
+icate-header.patch
+>  delete mode 100644 meta-oe/recipes-sato/claws-mail/claws-mail-3.6.1/glib=
+-2.32.patch
+>  rename meta-oe/recipes-sato/claws-mail/{claws-mail_3.6.1.bb =3D> claws-m=
+ail_3.9.0.bb} (72%)
+>=20
+> --=20
+> 1.8.0.2
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--VywGB/WGlW4DM4P8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDRoSIACgkQN1Ujt2V2gBzRKACffo5dhD9QC9cPVNyBR2UztV4U
+swEAoKaUcHy0BUUy7B6LgegwbfuNhF7V
+=F4me
+-----END PGP SIGNATURE-----
+
+--VywGB/WGlW4DM4P8--
