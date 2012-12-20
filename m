@@ -1,33 +1,35 @@
-Received: from mail-vb0-f44.google.com ([209.85.212.44])
+Received: from mail-ob0-f181.google.com ([209.85.214.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tlf2C-0000pC-Qd
+	(envelope-from <otavio.salvador@gmail.com>) id 1TlfRx-0003Wg-U5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 13:15:32 +0100
-Received: by mail-vb0-f44.google.com with SMTP id fc26so3606339vbb.31
+	Thu, 20 Dec 2012 13:42:14 +0100
+Received: by mail-ob0-f181.google.com with SMTP id oi10so3129132obb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 04:00:48 -0800 (PST)
+	Thu, 20 Dec 2012 04:27:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=utmL4NxgxjLUED+O7nJSzf1ebWYJvXBWP3fdbs6wEHA=;
-	b=dEuSa8skTiNUsECHtdbOxWHFJSsKKbz4JhnNHAlCYlYlreMBQmb+LglOlV97Cw5Yh2
-	rvZazB/NzCRGvddCTB3SzlkgUevk3ICOYe7i9ok4pY0PT2eOlKUJDUiPa2z326RCMSeV
-	Tc40oFggM+lJwv1GBx2P1fIKWs2dX/aKInVq62hzNn7cyNoLA2oLJBTj0jPaocVqdecU
-	9URKh/84uRdTtSmDXLpojrdQ68VXGnP6kDIKObyBogCmpqY/5SNlDtAT8q//7ofaLy3H
-	RbXX7pYHWxRtIt1nLSmxcLwTD373oIbo/lUXYGoa1NlcQy2gGuIdCdttBsCJPEC1q+DI
-	kJqQ==
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=DBkcuKGCA8PDNbuAv6QyXLjJScspxElQzpSnmZFDJso=;
+	b=NunZaxIjz1pe4bbQJN6HCPgN8UeLx1HxWg6kspmIPLpeslLfy3Ee06T0qxEED6XFrm
+	tLMelEOpJMGNV1IwOvmaZQ4Rl/5HoqOVwWq1dHSP7bfOcQIOprd+Zx+LLH5dV6VDbPw2
+	iBmMD/RwRYoKPfc2Us8t3aURdMgkWjJzI2PPwk6i/+luIGFEHVGn4VT16Wp4wrnGjUj8
+	dyNo478+qxbQPXazQvAk+qScJmVtjHQwBjfVip4qUcTglMdYhjGQuboOQpkjxwancNPk
+	OCENGkiFyROstkcXbn6ivTbKIx99KTHsq5rwVxEWxjUC2WJdnvNsjlA/e7UGsUXBUkzV
+	jX9w==
 MIME-Version: 1.0
-Received: by 10.220.108.142 with SMTP id f14mr13998641vcp.9.1356004848087;
-	Thu, 20 Dec 2012 04:00:48 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Thu, 20 Dec 2012 04:00:47 -0800 (PST)
-In-Reply-To: <20121218153311.GB3331@jama.palm1.palmone.com>
-References: <1355312146-24370-1-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRT1HUF5RcEwRcCrT_XRJzHE+qA5HgeJO-smuymz90JxzQ@mail.gmail.com>
-	<20121218153311.GB3331@jama.palm1.palmone.com>
-Date: Thu, 20 Dec 2012 13:00:47 +0100
-Message-ID: <CALbNGRSpX154UsyMo1G29G1nJ2qwvfyavO20qto5eT22YPEYnA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
+Received: by 10.182.131.3 with SMTP id oi3mr3376263obb.13.1356006444872; Thu,
+	20 Dec 2012 04:27:24 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Thu, 20 Dec 2012 04:27:24 -0800 (PST)
+In-Reply-To: <CA+AhUGxM2KQ3tj+UFu4NVwh3O1R2XSq1o5Lj2fn+A-e9r4=Qrg@mail.gmail.com>
+References: <CA+AhUGxM2KQ3tj+UFu4NVwh3O1R2XSq1o5Lj2fn+A-e9r4=Qrg@mail.gmail.com>
+Date: Thu, 20 Dec 2012 10:27:24 -0200
+X-Google-Sender-Auth: JdPMJOuZPVTEHZAJHjzUPJVeJX8
+Message-ID: <CAP9ODKpe2vkYeyYT32s2csEDH+S0se6b3JKFgGS4p7L=HeKtoQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-qt5 - problems with pkgconfig-0.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,18 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 12:15:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Dec 2012 12:42:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-> Btw meta-guacamayo is using newer gvfs-1.12.3 and maybe they also
-> resolved
-> http://patchwork.openembedded.org/patch/16755/
-This one was fixed in 211c2ba382d921519761bc0d241942f927cf692e
+On Thu, Dec 20, 2012 at 8:27 AM, Erik Bot=F6 <erik.boto@pelagicore.com> wro=
+te:
+> Hi,
 >
-> Can you check if such upgrade would be usefull for meta-gnome too?
-> I'm not using gnome..
-Will do that hopefully before Xmas..
+> When I build qtbase using https://github.com/meta-qt5/meta-qt5 I get cros=
+s
+> compiler badness warnings, it uses some includes from my host machine
+> instead of from sysroot. I have seen this before when cross compiling qt5
+> manually, and then the fix was to upgrade my host pkgconfig from 0.22 to
+> 0.26 (I didn't really try the versions in between, just built a more rece=
+nt
+> version).
+>
+> I did a quick hack by building pkgconfig 0.26 in yocto by simply removing
+> the patches and using upstream vanilla 0.26 and then qtbase builds proper=
+ly
+> without using host includes.
+>
+> But it feels kind of strange that a bug like this hasn't affected any oth=
+er
+> packages? Has anyone else seen something like this and can shed more ligh=
+t
+> on what's happening?
 
-Andreas
+I think this is more suited to oe-core mailing list so people
+maintaining pkgconfig can comment on it as well.
+
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
