@@ -1,34 +1,30 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail-ie0-f172.google.com ([209.85.223.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TlcKD-0008Ia-MY
+	(envelope-from <wayne.tams@gmail.com>) id 1TldRO-0005ST-To
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 10:22:03 +0100
-Received: by mail-ee0-f49.google.com with SMTP id c4so1535767eek.8
+	Thu, 20 Dec 2012 11:33:28 +0100
+Received: by mail-ie0-f172.google.com with SMTP id c13so4318704ieb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 01:07:13 -0800 (PST)
+	Thu, 20 Dec 2012 02:18:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:mime-version
-	:content-type:content-disposition:user-agent;
-	bh=aRCKIrUSxnwysX0IKfzG+SymOfkNW6CHXr943mNH8uw=;
-	b=CAqEOI9qIFSMJdrS9+mcFYBRmc9ld1GarOVWXHvc30BykVbfyfJHy8oZZCMFPbX0YZ
-	dETnexwoE4351VqRjmaDZagWjMRo7KnaJv1Y2iWo1ZKDoVohJlVvzgu/khDLdfaJaCts
-	xm8M+tRwsGtShdwi3yDAvuVJAHtLz7IueJZCn3Yx9BZb/N6UEnXUJ+OuSaXiL0O6Xo48
-	0arrUalcoU3niuSAqv6m6q5wX7CGSF/iujNzm+PeBSYHhKkDBNL1KuoPS1e0c2iaFE6d
-	9+SmZDOjOIMuOCK+IoKkrGo/L/hYxrB66Yi7SFk9rR8mb761nG6KDpC4qEBgWtZBGukZ
-	pPxA==
-X-Received: by 10.14.203.2 with SMTP id e2mr21772384eeo.20.1355994433700;
-	Thu, 20 Dec 2012 01:07:13 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 46sm14200333eeg.4.2012.12.20.01.07.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Dec 2012 01:07:12 -0800 (PST)
-Date: Thu, 20 Dec 2012 10:07:14 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121220090714.GE14543@jama.palm1.palmone.com>
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=qtfIEuiZyZ1zG7QUHLE60ggzGRbeC5wxaCm64enxGIw=;
+	b=I3839n/npb16mCT6vsQCco8T3SMWeRCA4egxnZTkPik+EgWRU9TyftP1v4mZuk/2Fz
+	EEeAob5ZsuWRKYiaGDnqY+3entBQz/tSiIFg6tRMM6pnvf5j41NpID2FyS5IncE0pzjb
+	ziaoXVtd6NtfwWFWmsvwxJBk9QYnlyNHgUh8VjljL/SF9VlG6P54Mt4bsVDAgmv/Cbhg
+	9blz6LfBSkOF/b4oUFUwSYu0VTAnRvxoQL3G7gkiW79ZSVR1BDivkEbhTDp/RtDprCQ4
+	RyxoTHLJCmg58lbETzguiOVn38rKmX96hpLe89XzSrTHNkzqpUN4/ZOjJ/JmIN+u7O+d
+	KR4g==
+Received: by 10.50.88.136 with SMTP id bg8mr5006477igb.96.1355998722051; Thu,
+	20 Dec 2012 02:18:42 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: recipes failing after libpng and cups upgrade
+Received: by 10.64.61.68 with HTTP; Thu, 20 Dec 2012 02:18:21 -0800 (PST)
+From: Wayne Tams <wayne.tams@gmail.com>
+Date: Thu, 20 Dec 2012 10:18:21 +0000
+Message-ID: <CAN=k24nXGFCwd=9zyMR_fyB31oSivKSM2w6EWcRcemjF9FpzWQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: bazaar error when building gst-rtsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +38,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 09:22:03 -0000
-X-List-Received-Date: Thu, 20 Dec 2012 09:22:03 -0000
-X-Groupsio-MsgNum: 42266
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SWTRyWv/ijrBap1m"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Dec 2012 10:33:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---SWTRyWv/ijrBap1m
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-FYI: there are few more failing recipes in world build now:
-due to libpng upgrade:
-meta-oe/recipes-support/links/links-x11_2.0+2.1pre30.bb
-meta-oe/recipes-support/links/links_2.0+2.1pre30.bb
-meta-oe/recipes-multimedia/libass/libass_0.9.11.bb
-meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-meta-oe/recipes-support/emacs/emacs_23.4.bb
-meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
-meta-oe/recipes-navigation/omgps/omgps_svn.bb
+Due to project constraints I am stuck using OE classic and many of the
+recipes, packages and tools are well out of date. I am having trouble
+building gst-rtsp. The error is at the bottom of this mail. I believe this
+error is due to a bug with one of dependencies, as pointed out in this post
+http://lists.linuxtogo.org/pipermail/openembedded-users/2011-February/001233.html
+.
 
-due to cups upgrade:
-meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
+I am having difficulties identifying what the problem was, and where the
+patch is that fixes it. My version of OE is sat
+at 71d25c65bd4e84487534464a4df8a95bdeca5695 on org.openembedded.dev.
 
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Could anyone point me to the commit ids that would fix my problem.
 
---SWTRyWv/ijrBap1m
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+All the best
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Wayne
 
-iEYEARECAAYFAlDS1UIACgkQN1Ujt2V2gBxiIQCfQBdVhVh5HRL/O3LU/x1DST4X
-D9EAoIpyRJ9P46jHuKYQwQ1J189OxVWr
-=q7f/
------END PGP SIGNATURE-----
+ERROR: Logfile of failure stored in:
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/temp/log.do_configure.32540
+Log data follows:
+| Creating po/ subdirectory
+| Copying file mkinstalldirs
+| Copying file po/Makefile.in.in
+|
+| Please add the files
+|   codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
+|   progtest.m4
+| from the
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/share/aclocal
+directory to your autoconf macro directory
+| or directly to your aclocal.m4 file.
+| You will also need config.guess and config.sub, which you can get from
+| ftp://ftp.gnu.org/pub/gnu/config/.
+|
+| automake (GNU automake) 1.11.1
+| Copyright (C) 2009 Free Software Foundation, Inc.
+| License GPLv2+: GNU GPL version 2 or later <
+http://gnu.org/licenses/gpl-2.0.html>
+| This is free software: you are free to change and redistribute it.
+| There is NO WARRANTY, to the extent permitted by law.
+|
+| Written by Tom Tromey <tromey@redhat.com>
+|        and Alexandre Duret-Lutz <adl@gnu.org>.
+| AUTOV is 1.11
+| NOTE: Executing autoreconf --verbose --install --force
+--exclude=autopoint -I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
+-I/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+| autoreconf: Entering directory `.'
+| autoreconf: configure.ac: not using Gettext
+| autoreconf: running: aclocal -I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
+-I
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+--force -I common/m4 -I m4
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+warning: underquoted definition of AC_LBL_C_INIT_BEFORE_CC
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+  run info '(automake)Extending aclocal'
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+  or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
+| autoreconf: configure.ac: tracing
+| autoreconf: running: libtoolize --copy --force
+| libtoolize: putting auxiliary files in `.'.
+| libtoolize: copying file `./ltmain.sh'
+| libtoolize: putting macros in `common/m4'.
+| libtoolize: copying file `common/m4/libtool.m4'
+| libtoolize: copying file `common/m4/ltoptions.m4'
+| libtoolize: copying file `common/m4/ltsugar.m4'
+| libtoolize: copying file `common/m4/ltversion.m4'
+| libtoolize: copying file `common/m4/lt~obsolete.m4'
+| libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.acand
+| libtoolize: rerunning libtoolize, to keep the correct libtool macros
+in-tree.
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+warning: underquoted definition of AC_LBL_C_INIT_BEFORE_CC
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+  run info '(automake)Extending aclocal'
+|
+/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
+  or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
+| autoreconf: running:
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/bin/autoconf
+--include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
+--include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
+--include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+--force --warnings=cross
+| configure.ac:90: error: possibly undefined macro: PKG_CHECK_MODULES
+|       If this token and others are legitimate, please use
+m4_pattern_allow.
+|       See the Autoconf documentation.
+| configure.ac:179: error: possibly undefined macro: AM_PATH_CHECK
+| autoreconf:
+/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/bin/autoconf
+failed with exit status: 1
+| FATAL: autoreconf execution failed.
+| ERROR: Function do_configure failed
+NOTE: package gst-rtsp-0.10.7-r1: task do_configure: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
+gst-rtsp_0.10.7.bb do_configure failed
+ERROR: Task 373
+(/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
+gst-rtsp_0.10.7.bb, do_configure) failed with exit code 1
+ERROR:
+'/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
+gst-rtsp_0.10.7.bb' failed
+ERROR:
+'/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
+gst-rtsp_0.10.7.bb' failed
 
---SWTRyWv/ijrBap1m--
