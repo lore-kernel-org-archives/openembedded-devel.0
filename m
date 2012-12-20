@@ -1,41 +1,39 @@
-Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TlfsH-0004S2-UV
+	(envelope-from <martin.jansa@gmail.com>) id 1Tlg0p-0005C1-GO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 14:09:22 +0100
-Received: from mail-bk0-f70.google.com ([209.85.214.70])
-	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 20 Dec 2012 04:54:36 -0800
-Received: by mail-bk0-f70.google.com with SMTP id jc3so2560305bkc.5
+	Thu, 20 Dec 2012 14:18:13 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so1508858dak.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 04:54:34 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references:x-gm-message-state;
-	bh=WHFnbmNQJgAh1Ha78HI+qpjOwQZi5cpuHQ7RuIRZSnw=;
-	b=og7Xj98nLXfIpAFWhb3NaAvjXGF3YIU7cJY7pkfqf3qXFNr1yAU6V1hYPbStMLtzSI
-	IhpE0dXFCYwuS1HoS5WVGzquJoCxp5lQ22GSUrbZWW0QZayUPQwlzjHZeqXy+qnjE5KE
-	7XPZI+maM/SYWohLj7STQW8E76TPnu//JIvnB9lLeQuT7ftyy9/GeuyZPIsUFsDEw3G4
-	BtKXim2Fy7vHmdA0D46/WAp7v4WU2UK98feUVD6FuKi/pJe67nWTiL0yCSeZQdu6SgnT
-	+CGogQUE9IJxuX2ePaLBFF0zu4A/qwV6O2L41/tvmTK+NfeC5t6kkUqnHG4jFSLHUyF0
-	Q5Xg==
-X-Received: by 10.180.24.9 with SMTP id q9mr17177252wif.14.1356008074552;
-	Thu, 20 Dec 2012 04:54:34 -0800 (PST)
-X-Received: by 10.180.24.9 with SMTP id q9mr17177242wif.14.1356008074477;
-	Thu, 20 Dec 2012 04:54:34 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id bd7sm12973656wib.8.2012.12.20.04.54.33
+	Thu, 20 Dec 2012 05:03:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=40nRXb3qTqPysC3RzbiWoqXVMJvRVhq1aFPBqfN+1k8=;
+	b=y0aRVLc5uUgtsuLMRJN24RsePevMh0g4947NovE7mQpWMBi13GRO45aBqGN7GNjUZ+
+	QuJfIgKljsKuCcCWqLjCffTFf/w2PCH7OVT/kWnWsWvRvJfrwl1coZiQ8LWgWA4sM1+j
+	2gstQjuuq89/8YI3Tqi+m5ZNp2iPy895fbIxEgJED2yCoyDffAh4XR0HNQElKWEYCIlN
+	nzcg8xIqdcs7juE4CRjJ4JXqfwWHRTe7PvUDmTk/7vsR/adzfpb/MWRxvIY+6OoLt23n
+	EkVLU9PgEfsNGfbNw+MusxOj4uV/eK+VuhFS9ytBRLtI+QN3TVZSlux/t5S4aXNRPSlw
+	zy5g==
+X-Received: by 10.68.203.132 with SMTP id kq4mr29262942pbc.3.1356008606001;
+	Thu, 20 Dec 2012 05:03:26 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id nm2sm5023307pbc.43.2012.12.20.05.03.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Dec 2012 04:54:33 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Thu, 20 Dec 2012 05:03:24 -0800 (PST)
+Date: Thu, 20 Dec 2012 14:03:23 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Dec 2012 12:52:41 +0000
-Message-Id: <1356007963-12208-5-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
-References: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQnasN9ZdUVqBxDHs8HtMKdcfsCSJMfxpimt0gulj2UIO5rB7UiPiLTGhDo2VY376yZ/oh+6GddfhUj1kwseTfZHscR4/nRx5i2leK6fYU27W4DW8jQXtaYDU8YrMqvN0dau+5qQF/wNinHU2qYMvM2QLua9GlCUzf8QUrOxw2tKRBTEAUA8y19Xtw0XpNUiAoAQCOUC
-Subject: [meta-multimedia PATCH 4/6] gupnp-dlna: add 0.9.2
+Message-ID: <20121220130323.GH14543@jama.palm1.palmone.com>
+References: <1355312146-24370-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRT1HUF5RcEwRcCrT_XRJzHE+qA5HgeJO-smuymz90JxzQ@mail.gmail.com>
+	<20121218153311.GB3331@jama.palm1.palmone.com>
+	<CALbNGRSpX154UsyMo1G29G1nJ2qwvfyavO20qto5eT22YPEYnA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRSpX154UsyMo1G29G1nJ2qwvfyavO20qto5eT22YPEYnA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-gnome] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +47,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 13:09:26 -0000
+X-List-Received-Date: Thu, 20 Dec 2012 13:18:13 -0000
+X-Groupsio-MsgNum: 42279
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="X1xGqyAVbSpAWs5A"
+Content-Disposition: inline
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- .../recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb   |   18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb
+--X1xGqyAVbSpAWs5A
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb
-new file mode 100644
-index 0000000..1748e35
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Helpers for AV applications using DLNA"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
-+                    file://libgupnp-dlna/gupnp-dlna-profile.h;beginline=1;endline=22;md5=1b85459f65cb1e73a885ca137aab6274"
-+
-+DEPENDS = "libxml2 glib-2.0"
-+
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/0.9/${BPN}-${PV}.tar.xz"
-+SRC_URI[md5sum] = "d972f9b03f0f3793cb895eb034ea314f"
-+SRC_URI[sha256sum] = "c28d5650604c7da4f193e6b85049a4885f3a01f1996df768d55b5cb898a9fc53"
-+
-+inherit autotools pkgconfig
-+
-+# The GStreamer metadata backend requires GStreamer 1.0, so skip this until we
-+# have that packaged.
-+EXTRA_OECONF = "--disable-gstreamer-metadata-backend"
-+
-+FILES_${PN} += "${datadir}/gupnp-dlna-2.0/dlna-profiles"
--- 
-1.7.10
+On Thu, Dec 20, 2012 at 01:00:47PM +0100, Andreas M=FCller wrote:
+> > Btw meta-guacamayo is using newer gvfs-1.12.3 and maybe they also
+> > resolved
+> > http://patchwork.openembedded.org/patch/16755/
+> This one was fixed in 211c2ba382d921519761bc0d241942f927cf692e
 
+OK, thanks, I've updated status on patchwork.
 
+> > Can you check if such upgrade would be usefull for meta-gnome too?
+> > I'm not using gnome..
+> Will do that hopefully before Xmas..
 
+Great, hopefully it will also resolve latest issue with gvfs build:
+| gvfsbackendafc.c: In function '_idevice_event_cb':
+| gvfsbackendafc.c:352:25: error: 'idevice_event_t' has no member named 'uu=
+id'
+| /OE/jansa-test/shr-core/tmp-eglibc/sysroots/x86_64-linux//bin/sed -e "s|\=
+@libexecdir\@|/usr/lib/gvfs|" trash.mount.in > trash.mount
+| gvfsbackendafc.c: In function 'g_vfs_backend_afc_init':
+| gvfsbackendafc.c:2612:3: warning: 'g_mutex_new' is deprecated (declared a=
+t /OE/jansa-test/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/glib-2.0/=
+glib/deprecated/gthread.h:271) [-Wdeprecated-declarations]
+| daemon-main.c: In function 'daemon_init':
+| daemon-main.c:66:3: warning: 'g_thread_init' is deprecated (declared at /=
+OE/jansa-test/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/glib-2.0/gli=
+b/deprecated/gthread.h:259) [-Wdeprecated-declarations]
+| make[4]: *** [gvfsd_afc-gvfsbackendafc.o] Error 1
+| make[4]: *** Waiting for unfinished jobs....
+| daemon-main.c: In function 'daemon_init':
+| daemon-main.c:66:3: warning: 'g_thread_init' is deprecated (declared at /=
+OE/jansa-test/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/glib-2.0/gli=
+b/deprecated/gthread.h:259) [-Wdeprecated-declarations]
+| make[4]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5=
+te-oe-linux-gnueabi/gvfs/1.8.2-r8.0/gvfs-1.8.2/daemon'
+| make[3]: *** [all-recursive] Error 1
+| make[3]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5=
+te-oe-linux-gnueabi/gvfs/1.8.2-r8.0/gvfs-1.8.2/daemon'
+| make[2]: *** [all] Error 2
+| make[2]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5=
+te-oe-linux-gnueabi/gvfs/1.8.2-r8.0/gvfs-1.8.2/daemon'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5=
+te-oe-linux-gnueabi/gvfs/1.8.2-r8.0/gvfs-1.8.2'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| ERROR: Function failed: do_compile (see /OE/jansa-test/shr-core/tmp-eglib=
+c/work/armv5te-oe-linux-gnueabi/gvfs/1.8.2-r8.0/temp/log.do_compile.12803 f=
+or further information)
+NOTE: recipe gvfs-1.8.2-r8.0: task do_compile: Failed
+ERROR: Task 13097 (/OE/jansa-test/shr-core/meta-openembedded/meta-gnome/rec=
+ipes-gnome/gvfs/gvfs_1.8.2.bb, do_compile) failed with exit code '1'
+
+Or we can backport something like:
+http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/gnome-base/gvfs/fil=
+es/gvfs-1.10.1-libimobiledevice-1.1.2.patch
+and enable/disable libimobiledevice support explicitly.
+
+Also as you're doing a lot of changes in meta-gnome and I guess you're
+also using it, can you check meta-gnome issues from "[oe] [OE-core]
+State of bitbake world" thread?
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2012-December/04296=
+4.html
+
+Some are probably caused because building libnotify3 and libnotify
+together doesn't play well with some apps, but some are pretty easy to
+reproduce (like failing do_patch).
+
+Cheers,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--X1xGqyAVbSpAWs5A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDTDJsACgkQN1Ujt2V2gBy/tACdGCpkB4+KRNay5jYi916JTUtm
+IB4AnRuGM41LxDIZwOmMWZ3gdixSMD8D
+=uPcq
+-----END PGP SIGNATURE-----
+
+--X1xGqyAVbSpAWs5A--
