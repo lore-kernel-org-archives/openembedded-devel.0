@@ -1,30 +1,33 @@
-Received: from mail-ie0-f172.google.com ([209.85.223.172])
+Received: from mail-ie0-f169.google.com ([209.85.223.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <wayne.tams@gmail.com>) id 1TldRO-0005ST-To
+	(envelope-from <erik.boto@pelagicore.com>) id 1TldZm-0005jP-OI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 11:33:28 +0100
-Received: by mail-ie0-f172.google.com with SMTP id c13so4318704ieb.31
+	Thu, 20 Dec 2012 11:42:07 +0100
+Received: by mail-ie0-f169.google.com with SMTP id c14so4307642ieb.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 02:18:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=qtfIEuiZyZ1zG7QUHLE60ggzGRbeC5wxaCm64enxGIw=;
-	b=I3839n/npb16mCT6vsQCco8T3SMWeRCA4egxnZTkPik+EgWRU9TyftP1v4mZuk/2Fz
-	EEeAob5ZsuWRKYiaGDnqY+3entBQz/tSiIFg6tRMM6pnvf5j41NpID2FyS5IncE0pzjb
-	ziaoXVtd6NtfwWFWmsvwxJBk9QYnlyNHgUh8VjljL/SF9VlG6P54Mt4bsVDAgmv/Cbhg
-	9blz6LfBSkOF/b4oUFUwSYu0VTAnRvxoQL3G7gkiW79ZSVR1BDivkEbhTDp/RtDprCQ4
-	RyxoTHLJCmg58lbETzguiOVn38rKmX96hpLe89XzSrTHNkzqpUN4/ZOjJ/JmIN+u7O+d
-	KR4g==
-Received: by 10.50.88.136 with SMTP id bg8mr5006477igb.96.1355998722051; Thu,
-	20 Dec 2012 02:18:42 -0800 (PST)
+	Thu, 20 Dec 2012 02:27:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:x-gm-message-state;
+	bh=1TtDhlcI/Bipt5hJhXsoEEvJHJTCf2dzrzrGi9KXmNA=;
+	b=LxE1Bppb5HReriU3c514hf2UKNg4LUoiW0BoTlDG0cJ8X5sJJsQy6fxP2M3UEfrN8b
+	14IeTEqVhtY71axGPH/uC+lxT6tl7oLs4WgQ27BKu7q9/zU/Np2rdsJKrpsgyt8c0f2C
+	DPzf3U9ZJQX2+uYDVIjqrGYv9q1l5RW+RkNup/yigPqWG2iBUnCej676tnVLlh6E/kRd
+	hfQyiqVnnn9BKlC8zzU4Yy6cx/f29Tbdj/u9V3WJGTqQPZ7ovvkZr/o3KHfRD3PJgjlq
+	wWZNMlfMj3SB1t3L6ln9NgetBTSdKm6pKatqJLWO2GVrveD+1UAGr9Bu1lXCmja9XTnR
+	KgsQ==
 MIME-Version: 1.0
-Received: by 10.64.61.68 with HTTP; Thu, 20 Dec 2012 02:18:21 -0800 (PST)
-From: Wayne Tams <wayne.tams@gmail.com>
-Date: Thu, 20 Dec 2012 10:18:21 +0000
-Message-ID: <CAN=k24nXGFCwd=9zyMR_fyB31oSivKSM2w6EWcRcemjF9FpzWQ@mail.gmail.com>
+Received: by 10.50.169.103 with SMTP id ad7mr4939202igc.105.1355999241986;
+	Thu, 20 Dec 2012 02:27:21 -0800 (PST)
+Received: by 10.50.20.39 with HTTP; Thu, 20 Dec 2012 02:27:21 -0800 (PST)
+Date: Thu, 20 Dec 2012 11:27:21 +0100
+Message-ID: <CA+AhUGxM2KQ3tj+UFu4NVwh3O1R2XSq1o5Lj2fn+A-e9r4=Qrg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Erik_Bot=F6?= <erik.boto@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmva7reTexJ63lgFFu7r52J4aCxFiZ4kXQiPAxzVkev9XDo4S95W4R0c06SfFxJRZYxVCn2
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: bazaar error when building gst-rtsp
+Subject: meta-qt5 - problems with pkgconfig-0.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,135 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 10:33:28 -0000
+X-List-Received-Date: Thu, 20 Dec 2012 10:42:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-Due to project constraints I am stuck using OE classic and many of the
-recipes, packages and tools are well out of date. I am having trouble
-building gst-rtsp. The error is at the bottom of this mail. I believe this
-error is due to a bug with one of dependencies, as pointed out in this post
-http://lists.linuxtogo.org/pipermail/openembedded-users/2011-February/001233.html
-.
+When I build qtbase using https://github.com/meta-qt5/meta-qt5 I get cross
+compiler badness warnings, it uses some includes from my host machine
+instead of from sysroot. I have seen this before when cross compiling qt5
+manually, and then the fix was to upgrade my host pkgconfig from 0.22 to
+0.26 (I didn't really try the versions in between, just built a more recent
+version).
 
-I am having difficulties identifying what the problem was, and where the
-patch is that fixes it. My version of OE is sat
-at 71d25c65bd4e84487534464a4df8a95bdeca5695 on org.openembedded.dev.
+I did a quick hack by building pkgconfig 0.26 in yocto by simply removing
+the patches and using upstream vanilla 0.26 and then qtbase builds properly
+without using host includes.
 
-Could anyone point me to the commit ids that would fix my problem.
+But it feels kind of strange that a bug like this hasn't affected any other
+packages? Has anyone else seen something like this and can shed more light
+on what's happening?
 
-All the best
-
-Wayne
-
-ERROR: Logfile of failure stored in:
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/temp/log.do_configure.32540
-Log data follows:
-| Creating po/ subdirectory
-| Copying file mkinstalldirs
-| Copying file po/Makefile.in.in
-|
-| Please add the files
-|   codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
-|   progtest.m4
-| from the
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/share/aclocal
-directory to your autoconf macro directory
-| or directly to your aclocal.m4 file.
-| You will also need config.guess and config.sub, which you can get from
-| ftp://ftp.gnu.org/pub/gnu/config/.
-|
-| automake (GNU automake) 1.11.1
-| Copyright (C) 2009 Free Software Foundation, Inc.
-| License GPLv2+: GNU GPL version 2 or later <
-http://gnu.org/licenses/gpl-2.0.html>
-| This is free software: you are free to change and redistribute it.
-| There is NO WARRANTY, to the extent permitted by law.
-|
-| Written by Tom Tromey <tromey@redhat.com>
-|        and Alexandre Duret-Lutz <adl@gnu.org>.
-| AUTOV is 1.11
-| NOTE: Executing autoreconf --verbose --install --force
---exclude=autopoint -I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
--I/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
-| autoreconf: Entering directory `.'
-| autoreconf: configure.ac: not using Gettext
-| autoreconf: running: aclocal -I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
--I
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
---force -I common/m4 -I m4
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-warning: underquoted definition of AC_LBL_C_INIT_BEFORE_CC
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-  run info '(automake)Extending aclocal'
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-  or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
-| autoreconf: configure.ac: tracing
-| autoreconf: running: libtoolize --copy --force
-| libtoolize: putting auxiliary files in `.'.
-| libtoolize: copying file `./ltmain.sh'
-| libtoolize: putting macros in `common/m4'.
-| libtoolize: copying file `common/m4/libtool.m4'
-| libtoolize: copying file `common/m4/ltoptions.m4'
-| libtoolize: copying file `common/m4/ltsugar.m4'
-| libtoolize: copying file `common/m4/ltversion.m4'
-| libtoolize: copying file `common/m4/lt~obsolete.m4'
-| libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.acand
-| libtoolize: rerunning libtoolize, to keep the correct libtool macros
-in-tree.
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-warning: underquoted definition of AC_LBL_C_INIT_BEFORE_CC
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-  run info '(automake)Extending aclocal'
-|
-/home/wayne/source/o/oe/myproject/tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:40:
-  or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
-| autoreconf: running:
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/bin/autoconf
---include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/work/armv5te-angstrom-linux-gnueabi/gst-rtsp-0.10.7-r1/gst-rtsp-0.10.7/m4/
---include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.11
---include=/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
---force --warnings=cross
-| configure.ac:90: error: possibly undefined macro: PKG_CHECK_MODULES
-|       If this token and others are legitimate, please use
-m4_pattern_allow.
-|       See the Autoconf documentation.
-| configure.ac:179: error: possibly undefined macro: AM_PATH_CHECK
-| autoreconf:
-/home/wayne/source/o/oe/myproject//tmp-angstrom_2008_1/sysroots/i686-linux/usr/bin/autoconf
-failed with exit status: 1
-| FATAL: autoreconf execution failed.
-| ERROR: Function do_configure failed
-NOTE: package gst-rtsp-0.10.7-r1: task do_configure: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
-gst-rtsp_0.10.7.bb do_configure failed
-ERROR: Task 373
-(/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
-gst-rtsp_0.10.7.bb, do_configure) failed with exit code 1
-ERROR:
-'/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
-gst-rtsp_0.10.7.bb' failed
-ERROR:
-'/home/wayne/source/o/oe/myproject//sa-meon/openembedded/recipes/gstreamer/
-gst-rtsp_0.10.7.bb' failed
+Best Regards,
+Erik
 
