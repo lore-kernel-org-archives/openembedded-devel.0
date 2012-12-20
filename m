@@ -1,36 +1,33 @@
-Received: from mail-ob0-f170.google.com ([209.85.214.170])
+Received: from mail-vb0-f44.google.com ([209.85.212.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TleIa-0007BC-Dr
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tlf2C-0000pC-Qd
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 12:28:25 +0100
-Received: by mail-ob0-f170.google.com with SMTP id wp18so3137529obc.15
+	Thu, 20 Dec 2012 13:15:32 +0100
+Received: by mail-vb0-f44.google.com with SMTP id fc26so3606339vbb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 03:13:39 -0800 (PST)
+	Thu, 20 Dec 2012 04:00:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=hRHYsR1EDbyRBzU3Je8I7UWUmEb5Sa0aO4RAdvwhWTc=;
-	b=rt/u4KgDHuL40j7cIdb1LeOr7bbfHClWI8QMZXW5SSxiorsy0Yi2C4FZkjP50El273
-	ne6sFVmYtzAgHZw52S1YQp4iISe+NfJFGP0k6z1gO+ls9zFkCJt28l3B/eCXy77aFNVY
-	7c9dRqrDZpaMZbL+q04ggM8B8DjKv8aBoyJhJul+Z8R6NGFiQjDEeh4Hpp0nUTVLvnUD
-	o28cYVWqpkOFKlpf4Cknj+hUL8UEYZJ+BHwss2BD906oZrQ6LINxJhNeO+I2E9FkrdCq
-	qyzE8j/sZf/kmyPF56EFbCrrP8zGI7Z/a/1dZ55LLUA/mn6v4/BKXE7V8NUJkG14g37k
-	yp6A==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=utmL4NxgxjLUED+O7nJSzf1ebWYJvXBWP3fdbs6wEHA=;
+	b=dEuSa8skTiNUsECHtdbOxWHFJSsKKbz4JhnNHAlCYlYlreMBQmb+LglOlV97Cw5Yh2
+	rvZazB/NzCRGvddCTB3SzlkgUevk3ICOYe7i9ok4pY0PT2eOlKUJDUiPa2z326RCMSeV
+	Tc40oFggM+lJwv1GBx2P1fIKWs2dX/aKInVq62hzNn7cyNoLA2oLJBTj0jPaocVqdecU
+	9URKh/84uRdTtSmDXLpojrdQ68VXGnP6kDIKObyBogCmpqY/5SNlDtAT8q//7ofaLy3H
+	RbXX7pYHWxRtIt1nLSmxcLwTD373oIbo/lUXYGoa1NlcQy2gGuIdCdttBsCJPEC1q+DI
+	kJqQ==
 MIME-Version: 1.0
-Received: by 10.182.54.103 with SMTP id i7mr7517268obp.62.1356002019385; Thu,
-	20 Dec 2012 03:13:39 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.219.130 with HTTP; Thu, 20 Dec 2012 03:13:39 -0800 (PST)
-In-Reply-To: <20121220090157.GA30089@jama>
-References: <1355934731-32281-1-git-send-email-otavio@ossystems.com.br>
-	<20121220090157.GA30089@jama>
-Date: Thu, 20 Dec 2012 09:13:39 -0200
-X-Google-Sender-Auth: WLZrIM_6e2JjA74p_HJ3K-mTJE0
-Message-ID: <CAP9ODKp_34AC6oh-FRUVDb4vGZH95wXxZdescL_bM21owTpg4w@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 1/3] Revert "openmotif: remove due to lack of libxp in repository"
+Received: by 10.220.108.142 with SMTP id f14mr13998641vcp.9.1356004848087;
+	Thu, 20 Dec 2012 04:00:48 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Thu, 20 Dec 2012 04:00:47 -0800 (PST)
+In-Reply-To: <20121218153311.GB3331@jama.palm1.palmone.com>
+References: <1355312146-24370-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRT1HUF5RcEwRcCrT_XRJzHE+qA5HgeJO-smuymz90JxzQ@mail.gmail.com>
+	<20121218153311.GB3331@jama.palm1.palmone.com>
+Date: Thu, 20 Dec 2012 13:00:47 +0100
+Message-ID: <CALbNGRSpX154UsyMo1G29G1nJ2qwvfyavO20qto5eT22YPEYnA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-gnome] gvfs-gdu-volume-monitor: avoid double packaging gvfs locale
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 11:28:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 Dec 2012 12:15:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Dec 20, 2012 at 7:01 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Wed, Dec 19, 2012 at 02:32:09PM -0200, Otavio Salvador wrote:
->> This reverts commit 14b68506078a4133e743491d35245775a58a1317.
->>
->> Change-Id: I3dd4afe60d217e96fef08377c2d32f5c793af992
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> Btw meta-guacamayo is using newer gvfs-1.12.3 and maybe they also
+> resolved
+> http://patchwork.openembedded.org/patch/16755/
+This one was fixed in 211c2ba382d921519761bc0d241942f927cf692e
 >
-> Unfortunately still fails here:
-> | gcc  -DHAVE_CONFIG_H -I. -I../../include -I../../lib/Xm     -O2 -pipe
-> -g -feliminate-unused-debug-types -Wall -g -fno-strict-aliasing
-> -Wno-unused -Wno-comment -fno-tree-ter
-> -I/OE/jansa-test/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/freetype2
-> -c makestrs.c
-> | makestrs.c:51:21: fatal error: X11/Xos.h: No such file or directory
-> | compilation terminated.
-> | make: *** [makestrs.o] Error 1
-> | make: Leaving directory
-> `/OE/jansa-test/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/openmotif/2.3.3-r2/openmotif-2.3.3/config/util'
+> Can you check if such upgrade would be usefull for meta-gnome too?
+> I'm not using gnome..
+Will do that hopefully before Xmas..
 
-I built it here and I did it with a clean tmp and it worked. Please
-check if it is a missing depends on xproto. If it works I can send a
-new patch adding it.
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Andreas
 
 
