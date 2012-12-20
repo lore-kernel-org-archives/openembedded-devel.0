@@ -1,41 +1,41 @@
 Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TlfsE-0004Rt-66
+	(envelope-from <ross.burton@intel.com>) id 1TlfsG-0004Rt-2C
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 14:09:18 +0100
-Received: from mail-we0-f197.google.com ([74.125.82.197])
-	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 20 Dec 2012 04:54:32 -0800
-Received: by mail-we0-f197.google.com with SMTP id t11so2548810wey.8
+	Thu, 20 Dec 2012 14:09:20 +0100
+Received: from mail-fa0-f70.google.com ([209.85.161.70])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 20 Dec 2012 04:54:33 -0800
+Received: by mail-fa0-f70.google.com with SMTP id t1so2769467fae.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 04:54:30 -0800 (PST)
+	Thu, 20 Dec 2012 04:54:31 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
 	:in-reply-to:references:x-gm-message-state;
-	bh=v1odLp+xK8IoWNn2aQuBjVQwHiUfDRIaYrMf9FwPUuE=;
-	b=oCWvIcsmAaB2cTTIGUTZpYdjnslh7chAbjKARZzeSoI3E5aM1GiLELOZNfb4q8sVDy
-	+MvNKde9KRg7b1tbpX8jbfoixAQ46Df4jAZaP2TpHBKnY3rTsfAvx36DlwXKTXqeE3vy
-	joPvqRAbNcsq8qxaG1Sy7T8rNSj7FWyxnGcTvUQU9h85F2E/HQJ7RSwsWwBr/oZp7CyR
-	dSXD3hkFZA7oLlO5XxiZ41NCp4ZDnns4B7w+JLGNSC/vn/MQsJbzQuStWn4NqzRaYOGi
-	fhTniBiv/8aZLBgg44VFQpAMgxQseNCYvvFZvTgWDDmEg2EzVlclfU+m8DcnECRt4j4h
-	GuGA==
-X-Received: by 10.180.93.3 with SMTP id cq3mr17370531wib.1.1356008070578;
-	Thu, 20 Dec 2012 04:54:30 -0800 (PST)
-X-Received: by 10.180.93.3 with SMTP id cq3mr17370527wib.1.1356008070512;
-	Thu, 20 Dec 2012 04:54:30 -0800 (PST)
+	bh=3Q/SFwBQM+Cm5gk+8NlF06KVc82MBf3NF3IHv70llBM=;
+	b=HYt7Pde28UhfrZj/TjzCYi0o+eeEI0lwMcXmXPDqAjS4tv3kICAWH5YdPvg2UZja70
+	+UJNofOScUz+i42PXrT+DfCpmHHiHG8+7xTXoE5JAqsLPMHnzUhl1l1Ly02fJPxCyi7K
+	TxH3cBD6zVcNd8I8iYvjMQACOmGvx/gp5+t+96o0S4KCNKkMcBk7DsiTAgufhZ920N7o
+	iMFm3pOwjw0ATJpFRHE2PxVL4ewHsQRRMkDKAlHpUMZv4lKVZNdSD/fKpScfm9sQsneF
+	//DFolX0LvESaz9E2CjPYcX1xt2z7ZHGjZTEBTeWW+tNxWoySHHiUFaQp+PgVd3YyxkL
+	lN8Q==
+X-Received: by 10.194.57.206 with SMTP id k14mr17395663wjq.26.1356008071812;
+	Thu, 20 Dec 2012 04:54:31 -0800 (PST)
+X-Received: by 10.194.57.206 with SMTP id k14mr17395656wjq.26.1356008071747;
+	Thu, 20 Dec 2012 04:54:31 -0800 (PST)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id bd7sm12973656wib.8.2012.12.20.04.54.29
+	by mx.google.com with ESMTPS id bd7sm12973656wib.8.2012.12.20.04.54.30
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Dec 2012 04:54:29 -0800 (PST)
+	Thu, 20 Dec 2012 04:54:31 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Dec 2012 12:52:38 +0000
-Message-Id: <1356007963-12208-2-git-send-email-ross.burton@intel.com>
+Date: Thu, 20 Dec 2012 12:52:39 +0000
+Message-Id: <1356007963-12208-3-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
 References: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQnW76/gitPs8TcZwyJX7iWMJPihVj6Wx6V6fs8VLTO2BxcVT//FvrvDCWTZYmYWO9DBkbbPQ/ncLlOzlSGX6IbBMgZv4P+osRXgUJIbupAW0AaDe6pqCTiJgJ/dl+S9h6K6GCXxMtISXMuNBquBSETc/MeOQbkbLscIs4KFnEr+VbIG+voaoWONPGgeF/9vSivKVm4Z
-Subject: [meta-multimedia PATCH 1/6] gssdp: add 0.12.2.1 and 0.13.2
+X-Gm-Message-State: ALoCoQlw19hv/vZiBPpbG06UepVZlhQEHXzaZatsYhvaz+AkTEVtYVFogrsXlxWCPFXNVicsc2A1gpbm9DgKdsPVOwY5UwikGV1Xmtk3ht+dZxSA0WPI0eG+flEwn6KQyTpeZMJkLQKBMpMl2L9xJfAie+FSZpVwfUn61W+0BKkUSlFUuKEDpo6VkeDyDXiM/lobZamZ/KdQ
+Subject: [meta-multimedia PATCH 2/6] gupnp: add 0.18.4 and 0.19.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,64 +49,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 13:09:19 -0000
+X-List-Received-Date: Thu, 20 Dec 2012 13:09:22 -0000
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-multimedia/recipes-connectivity/gupnp/gssdp.inc   |   16 ++++++++++++++++
- .../recipes-connectivity/gupnp/gssdp_0.12.2.1.bb       |    5 +++++
- .../recipes-connectivity/gupnp/gssdp_0.13.2.bb         |    8 ++++++++
- 3 files changed, 29 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
+ .../recipes-connectivity/gupnp/gupnp.inc            |   19 +++++++++++++++++++
+ .../recipes-connectivity/gupnp/gupnp_0.18.4.bb      |    8 ++++++++
+ .../recipes-connectivity/gupnp/gupnp_0.19.3.bb      |   10 ++++++++++
+ 3 files changed, 37 insertions(+)
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_0.19.3.bb
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc b/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
 new file mode 100644
-index 0000000..51befd9
+index 0000000..91eae15
 --- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
-@@ -0,0 +1,16 @@
-+SUMMARY = "Resource discovery and announcement over SSDP"
-+DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
-+DEPENDS = "glib-2.0 libsoup-2.4 gobject-introspection-stub vala-stub-native"
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+@@ -0,0 +1,19 @@
++SUMMARY = "UPnP framework"
++DESCRIPTION = "GUPnP is an elegant, object-oriented open source framework for creating UPnP  devices and control points, written in C using GObject and libsoup. The GUPnP API is intended to be easy to use, efficient and flexible. It provides the same set of features as libupnp, but shields the developer from most of UPnP's internals."
++LICENSE = "LGPLv2+"
 +
-+inherit autotools pkgconfig
-+
-+PACKAGES =+ "gssdp-tools"
-+
-+FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
++DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gnome-icon-theme gobject-introspection-stub"
 +
 +EXTRA_OECONF = "--disable-introspection"
 +
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
-+PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
-new file mode 100644
-index 0000000..29cc721
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
-@@ -0,0 +1,5 @@
-+require gssdp.inc
++inherit autotools pkgconfig
 +
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/0.12/${BPN}-${PV}.tar.xz"
-+SRC_URI[md5sum] = "8ac3a544ef0dcf8caaf7c249d2a50dc2"
-+SRC_URI[sha256sum] = "928aa257815d044fdbfc740f5799530d41897947b5d7854173f636b36d728414"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
++FILES_${PN} = "${libdir}/*.so.*"
++FILES_${PN}-dev += "${bindir}/gupnp-binding-tool"
++
++SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
++
++gupnp_sysroot_preprocess () {
++	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++	install -m 755 ${D}${bindir}/gupnp-binding-tool ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++}
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
 new file mode 100644
-index 0000000..c308fa0
+index 0000000..4fb1d05
 --- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
 @@ -0,0 +1,8 @@
-+require gssdp.inc
++require gupnp.inc
 +
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/0.13/${BPN}-${PV}.tar.xz"
-+SRC_URI[md5sum] = "758ed423cdd258a9a22d59c321b535ed"
-+SRC_URI[sha256sum] = "8f663f8a72b66254f5c20a3610ff853ac8d00bf6f253828e37e51579caa34dce"
++SRC_URI = "http://download.gnome.org/sources/${BPN}/0.18/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "0e15fa26be7b1a0255e6dec07c285527"
++SRC_URI[sha256sum] = "6b437d5711b212292c6080626b97480268310da636a6cf937ad6119291af78a1"
 +
-+# This is a development release so don't prefer it
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
++                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=28c49b17d623afc3335efc2e511879e1"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.19.3.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.19.3.bb
+new file mode 100644
+index 0000000..bab74b8
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.19.3.bb
+@@ -0,0 +1,10 @@
++require gupnp.inc
++
++SRC_URI = "http://download.gnome.org/sources/${BPN}/0.19/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "8165c3ad3d16576a0a99250b75df23f8"
++SRC_URI[sha256sum] = "0d3097c419e1f8af0ff8ee91318d75e8896b3b92924cb1a5cf93010795a7118b"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
++                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
++
 +DEFAULT_PREFERENCE = "-1"
 -- 
 1.7.10
