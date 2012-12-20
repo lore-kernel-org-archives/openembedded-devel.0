@@ -1,37 +1,34 @@
-Received: from mail-pb0-f48.google.com ([209.85.160.48])
+Received: from mail-yh0-f43.google.com ([209.85.213.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tlgvi-00021f-Te
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tlivd-0000Ip-JE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Dec 2012 15:16:59 +0100
-Received: by mail-pb0-f48.google.com with SMTP id rq13so2006289pbb.35
+	Thu, 20 Dec 2012 17:25:04 +0100
+Received: by mail-yh0-f43.google.com with SMTP id 3so777558yhp.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Dec 2012 06:02:13 -0800 (PST)
+	Thu, 20 Dec 2012 08:10:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=yc6r/6i1MCXHxN7vH9tEzlM4a/RrB0sbmjqLDBdHHRA=;
-	b=uUI6VGtmo+4P/0M8CC/MvTLGkGgVfjATUkBpJufrVAaoQwoHPy5sQU6D1dtB6t17So
-	Yk4eS7E1IH8UrsDH8irin+i/M9mnzzK8WXs/op3F0w5x5AD2J3wTNwOpEtjgVnNmM6zr
-	PsdlpVtLnuJhImpz30fIH/ovpcMXcyq1ci7QsWd76+OuZuDQCLE0Ej7hgcUpCqkYRMY/
-	j/k8biMORB/jPugdPkxMEMY8+0xEZXJVCUsec18LhBWLtSwEZwe9eVIbZUn65m4M595z
-	13SXIHpSmtNT+hjFeLXOdXKE1mFLn1+UDOH9bIXtRuSSTJLNMANtTGShHsOyT9YRM1XX
-	Sa/w==
-X-Received: by 10.68.135.99 with SMTP id pr3mr29977593pbb.151.1356012133751;
-	Thu, 20 Dec 2012 06:02:13 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id p10sm5458505pax.27.2012.12.20.06.02.11
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=HEIKB2ITggUk2Fw/g0b8YJxuACKuUatcUY++7s+8cQA=;
+	b=fB7BMCHVWvjPNPt5SW1ohCLn+8iBLuAc+QMtg/RfPi6HexnpO3Cf6ydVeTmPHbMXS9
+	gTpZblWwB3syDaWT6dxq+p9UC0UQLE3TbtHRq2zg9Y1qeh2h+iT5d1PwNyydJSnLWIFa
+	54fklU0AYXgKvKnmjK/QQbkZ0EsTuszdZR5HqoPrVLz3MjmvaAi5oZdO7Q/PyttthRft
+	xqaa5qSuHPaPhYQ8pPPvftdb8xEx4Ki32kg+8PlUtgruuKO5vbiiEKTdYluLp28AN4ei
+	dFWxxwhoJNPMOl2EyhXTavI/GVQLy4kWPQtCpKEOAbX/5uwKl5yu5XXn3CW1eAnyJBv+
+	8k/Q==
+X-Received: by 10.236.115.7 with SMTP id d7mr7930887yhh.118.1356019816304;
+	Thu, 20 Dec 2012 08:10:16 -0800 (PST)
+Received: from localhost.localdomain ([187.23.153.170])
+	by mx.google.com with ESMTPS id l35sm7963306yhi.12.2012.12.20.08.10.14
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 20 Dec 2012 06:02:12 -0800 (PST)
-Date: Thu, 20 Dec 2012 15:02:11 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 20 Dec 2012 08:10:15 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121220140211.GO14543@jama.palm1.palmone.com>
-References: <20121220133018.GJ14543@jama.palm1.palmone.com>
-	<20121220133307.GK14543@jama.palm1.palmone.com>
-MIME-Version: 1.0
-In-Reply-To: <20121220133307.GK14543@jama.palm1.palmone.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-webserver] patches on patchwork
+Date: Thu, 20 Dec 2012 14:10:07 -0200
+Message-Id: <1356019807-9397-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH] openmotif: Avoid use os Xos.h from host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Dec 2012 14:16:59 -0000
-X-Groupsio-MsgNum: 42284
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="H83aLI5Lttn3Hg7B"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Dec 2012 16:25:04 -0000
 
---H83aLI5Lttn3Hg7B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Change-Id: I02029212e22cf388cd1a82dd070755779689e2d8
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ .../recipes-support/openmotif/openmotif_2.3.3.bb   |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-On Thu, Dec 20, 2012 at 02:33:07PM +0100, Martin Jansa wrote:
-> Hi, can you check and update patche in meta-webserver bundle?
-> http://patches.openembedded.org/bundle/jama/meta-webserver/?archive=3Dboth
+diff --git a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+index 23142ee..9888246 100644
+--- a/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
++++ b/meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb
+@@ -1,11 +1,11 @@
+ SECTION = "libs"
+ DESCRIPTION = "OSM/Motif implementation."
+ LICENSE = "OGPL"
+-DEPENDS = "xbitmaps virtual/libx11 libxt libxft"
++DEPENDS = "xbitmaps virtual/libx11 libxt libxft xproto"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=14f692c82491db3d52419929d2f3b343"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
+            file://configure.patch;patch=1"
+@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "c85f5545e218fa0c59a3789192132d472fc5a33e914a221a568eee4fc1
+ 
+ inherit autotools
+ 
+-EXTRA_OECONF = "--disable-printing"
++EXTRA_OECONF = "X_CFLAGS=-I${STAGING_INCDIR} --disable-printing"
+ 
+ PACKAGES += "${PN}-bin"
+ 
+-- 
+1.7.2.5
 
-I've forgot to mention there is also one in meta-opie and one in
-meta-handheld
-http://patches.openembedded.org/bundle/jama/meta-handheld/?archive=3Dboth
-http://patches.openembedded.org/bundle/jama/meta-opie/?archive=3Dboth
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---H83aLI5Lttn3Hg7B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDTGmMACgkQN1Ujt2V2gBy3zACfS4038PrOCJMku05TRjU7qU66
-I7UAn2CSuaLFYZ5Yf7vKkMvdIIfAKYGn
-=Krpc
------END PGP SIGNATURE-----
-
---H83aLI5Lttn3Hg7B--
