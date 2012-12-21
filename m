@@ -1,39 +1,39 @@
-Received: from mail-ea0-f172.google.com ([209.85.215.172])
+Received: from mail-ea0-f178.google.com ([209.85.215.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OI-00050e-Pf
+	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OH-00050U-Jj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 15:16:17 +0100
-Received: by mail-ea0-f172.google.com with SMTP id a1so1956999eaa.31
+	Fri, 21 Dec 2012 15:16:16 +0100
+Received: by mail-ea0-f178.google.com with SMTP id k11so1939285eaa.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 06:01:13 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:12 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:x-gm-message-state;
-	bh=GIi4nbBzMqCvf/gZfQjCO3B/WjcYkyAJuIvCymrWUic=;
-	b=Nv2IJo9BuX7PQ1PujKi2FO1HlqVLAORfukj3Zw8skohHgGSc+MkvkQDe9VYagf0GN/
-	jzcTquhwPVkHmowjqi0zR0YxV678c0FXHUulFXR8aaA5oNo7SJKpAqdgIfztzPDbjLE8
-	C3PzUC298Oib3lE7zvffRfNXJfCS6YbNup2w/kgWBrSUyjd45je46+gkQdhEMuzJIvV0
-	kBF6PWDfcnvEJ2n96PMb3sG7qz1DddgkI+ug5sAzFRTU8mT0nJRQ3o64ditrAFwYTDQ9
-	HJIKQXcnoUswd4E4gtL/8g72a3zwE5euktyRwQFkUlbgkT8XMWqnAgb5fzir7eo1w4Kv
-	dN1Q==
-X-Received: by 10.14.174.132 with SMTP id x4mr31633924eel.39.1356098473086;
-	Fri, 21 Dec 2012 06:01:13 -0800 (PST)
+	bh=PVYxCojUqgFbGecUig2tPCsXGS/lEuY5Kt/SIldxk/I=;
+	b=U0YEHM2SPGa/jrAyvjuMFyNmnLyJgI3x+tLx5UQ3rSN39j0d5hAQJftwBBQ2dli4Lp
+	2c+9Mq3wuKTl6Y1TbZMlQRgp6gI3ff+n8XyDOmIogWZUxb0Rthrj5o1iXOXJlq/jAM9z
+	wVGDjV6wAOVRuWQqk1qw8WCy4o0UKq7xNkLzZyvIDwJjZ0HXdFv2Gs4ohl6u5mFAmjva
+	BIx7Vu/FltohAsRrEoKE5iYPTmLMnO2DvaLmUNuJDEiL47YdDhn0WjUA4TdDoSfXL9BY
+	J5+gpdcjgnqncxgXCD+Z3j9ia6Vq4zfvJ2OZAyWhK+4FxJOBKuFrje4xX63n3LXnSu9I
+	gCnw==
+X-Received: by 10.14.205.199 with SMTP id j47mr32081260eeo.26.1356098471897;
+	Fri, 21 Dec 2012 06:01:11 -0800 (PST)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.11
+	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.10
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 21 Dec 2012 06:01:12 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:11 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Dec 2012 15:00:50 +0100
-Message-Id: <1356098450-27475-6-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 21 Dec 2012 15:00:49 +0100
+Message-Id: <1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.7.6
 In-Reply-To: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
 References: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkusZHh9u2yVwiJ5O4XiqpLr9DQcmzX4r852m1w/WT/twqgTHt30ya9wfOwhinLFXRvZC8/
+X-Gm-Message-State: ALoCoQn4KMs5ijU5Q3sm3mRRuoA7Z8WZ3FJkz5jSaxoRzRGkRKaF/nyyueDsH7nT5NZ7A7v78IaZ
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][meta-multimedia][PATCH 6/6] libav: update to 0.8.4
+Subject: [meta-oe][meta-multimedia][PATCH 5/6] wscan: add 20121111
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +51,31 @@ X-List-Received-Date: Fri, 21 Dec 2012 14:16:28 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-multimedia/libav/libav_0.8.3.bb |   19 -------------------
- meta-oe/recipes-multimedia/libav/libav_0.8.4.bb |   19 +++++++++++++++++++
- 2 files changed, 19 insertions(+), 19 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
- create mode 100644 meta-oe/recipes-multimedia/libav/libav_0.8.4.bb
+ .../recipes-dvb/wscan/wscan_20121111.bb            |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
 
-diff --git a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb b/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
-deleted file mode 100644
-index 66a32c9..0000000
---- a/meta-oe/recipes-multimedia/libav/libav_0.8.3.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--require libav.inc
--
--LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
--                    file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
--                    file://COPYING.LGPLv2.1;md5=e344c8fa836c3a41c4cbd79d7bd3a379 \
--                    file://COPYING.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02"
--
--PV = "0.8.3+git${SRCPV}"
--PR = "${INC_PR}.0"
--
--# When bumping SRCREV make sure you bump PR here and in dependant
--# recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION
--# changes
--SRCREV = "2fb4be9a99a2c2a9435339830e3d940171cc0d9b"
--SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.8"
--
--S = "${WORKDIR}/git"
--
--
-diff --git a/meta-oe/recipes-multimedia/libav/libav_0.8.4.bb b/meta-oe/recipes-multimedia/libav/libav_0.8.4.bb
+diff --git a/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
 new file mode 100644
-index 0000000..bed8ba3
+index 0000000..9254c43
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libav/libav_0.8.4.bb
-@@ -0,0 +1,19 @@
-+require libav.inc
++++ b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Wscan is an ATSC/DVB-C/S/T channel scanner that doesn't require an initial frequency table"
++HOMEPAGE = "http://wirbel.htpc-forum.de/w_scan/index2.html"
 +
-+LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.LGPLv2.1;md5=e344c8fa836c3a41c4cbd79d7bd3a379 \
-+                    file://COPYING.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
 +
-+PV = "0.8.4+git${SRCPV}"
-+PR = "${INC_PR}.0"
++SRC_URI = "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
++SRC_URI[md5sum] = "30da05747fed9988e11ebc7745f5e71f"
++SRC_URI[sha256sum] = "5e51e5f1c124a8ed70608b4dbf7376adb2b1bf6a48a65b746076263b2589afe5"
 +
-+# When bumping SRCREV make sure you bump PR here and in dependant
-+# recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION
-+# changes
-+SRCREV = "2c8ce46250ff78191fe6565876ddc4bc03fdf519"
-+SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.8"
++S = "${WORKDIR}/w_scan-${PV}"
 +
-+S = "${WORKDIR}/git"
++inherit autotools
 +
++FILES_${PN} += "${datadir}"
 +
 -- 
 1.7.7.6
