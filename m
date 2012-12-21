@@ -1,32 +1,34 @@
-Received: from mail-ee0-f48.google.com ([74.125.83.48])
+Received: from mail-pb0-f49.google.com ([209.85.160.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gizero@gmail.com>) id 1Tm4wT-00058y-OM
+	(envelope-from <martin.jansa@gmail.com>) id 1Tm6Vz-0007RN-OL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 16:55:32 +0100
-Received: by mail-ee0-f48.google.com with SMTP id b57so2547197eek.21
+	Fri, 21 Dec 2012 18:36:08 +0100
+Received: by mail-pb0-f49.google.com with SMTP id un15so2834232pbc.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 07:40:35 -0800 (PST)
+	Fri, 21 Dec 2012 09:21:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=gCOLktKC5sCk6zwcy1F1RpVFcD54rC7zhG8gGlUB3k8=;
-	b=wFV3va87le4oaDegsDnnttaxpscSGhEHwWhfnOghhl/yxJJs0feMds6+lzVXW/ocT5
-	50kuSsUFTE/OJ07fiufiUM/yYsD8SjPjLxTw1FopooBRUO8Y//KBQv1fysxix71hr6jh
-	eU9411MVcx9twmsh4QzxP4s+NuEJJ5WNvLhrxksG76auhNyXfUTK9j8IAcEtvuTKQZRd
-	jIpWYmHX6iI6gDNHVq9VRktWe5gYCnuVU6IkFRMLqnVZnx6SyIfBYh3bIk2J+4qnJroL
-	aEpyqn0IGMDM3Aoq6KJ/XUBgIq5d/ow8hng9b5YYoD5IP7SQnPnhB/BIdHLwMhQdxNLG
-	pCAg==
-MIME-Version: 1.0
-Received: by 10.14.203.8 with SMTP id e8mr33057761eeo.2.1356104435777; Fri, 21
-	Dec 2012 07:40:35 -0800 (PST)
-Received: by 10.14.53.5 with HTTP; Fri, 21 Dec 2012 07:40:35 -0800 (PST)
-In-Reply-To: <CANmVirjmVO0XS5E4-_E_=cp02MCY-WQKUHnGEMtYfddEFmewZg@mail.gmail.com>
-References: <CANmVirjmVO0XS5E4-_E_=cp02MCY-WQKUHnGEMtYfddEFmewZg@mail.gmail.com>
-Date: Fri, 21 Dec 2012 16:40:35 +0100
-Message-ID: <CAC+thW3qevdRqc6ftctRG8+i85LeOW+Y8EmpZ2VLiKJdU0ABKQ@mail.gmail.com>
-From: Andrea Galbusera <gizero@gmail.com>
+	h=x-received:date:from:to:cc:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=DZc9CpLtuFBJJZX8G+BsOk+Zofj5PrMr7KpZ+cF5c5Q=;
+	b=WFbmp69TxxpL0p07U0PBR0JPyjtlpjC6I0V9CMheU0UPghgDP+3OvfXo9D4YFWbVKP
+	dt5dq6f1MhGKGgz664APvfje7sz7rnAvkGlZzcRCOshnXi/pmEcRtzf8uAZNhvYmH35P
+	eZwB1/pen9QoSTAifMB5TTcuSftUaXBrlMKEim8MVEphUV+tPZMjO24Dl6/R9EMtyFw+
+	H9dT3uIWzO+HrNlQjhZK7WxZCy+THKAEYmAzUIEeXi0jnr3oNbeQh6NtWPd1RJjrWODV
+	sF7Va+GYZm1wwDgUyB/ho8mxuskNE1U5vN+gHZQ6oN8UlOFuCz3GFf3p/D8x4MEdmXvv
+	gALg==
+X-Received: by 10.68.137.234 with SMTP id ql10mr41268265pbb.158.1356110480850; 
+	Fri, 21 Dec 2012 09:21:20 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id pj1sm7289030pbb.71.2012.12.21.09.21.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 21 Dec 2012 09:21:19 -0800 (PST)
+Date: Fri, 21 Dec 2012 18:21:19 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: llvm2.9 install error
+Message-ID: <20121221172119.GA8847@jama.palm1.palmone.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: traceroute: Add from OE-Classic, uprev and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 15:55:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Dec 2012 17:36:09 -0000
+X-Groupsio-MsgNum: 42306
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
+Content-Disposition: inline
+
+--C7zPtVaVf+AK4Oqc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Raul,
+Hi,
 
-On Fri, Dec 21, 2012 at 1:26 PM, Raul Rosetto Munoz
-<munoz0raul@gmail.com> wrote:
-> Hello all,
->
-> I want install openjdk-6-jre in my imx28evk.
->
-> I have this error when I try install llvm2.9 in my core-image-minimal.
->
-> At bitbake core-image-minimal:
->
-> This is the log error:
->
-> NOTE: Checking Package: libllvm-llvmipo
-> NOTE: Checking Package: libllvm-gtest
-> NOTE: Checking Package: libllvm-gtest-main
-> ERROR: QA run found fatal errors. Please consider fixing them.
-> DEBUG: Python function do_package_qa finished
-> DEBUG: Python function do_package finished
-> ERROR: Function failed: do_package_qa
->
-> Some one can help me?
+traceroute_2.0.18.bb added by you in=20
+commit 79811942660877cedf366c542d2ee4025bf54b77
+Author: Morgan Little <morgan.little@windriver.com>
+Date:   Tue Oct 23 18:04:50 2012 +0000
 
-What version of the build system? What's your layers setup?
+    traceroute: Add from OE-Classic, uprev and update
 
+Is using bashisms in do_install:
+    pushd ${D}${mandir}
+    ln -s ${PN}.8 ${PN}6.8
+    ln -s ${PN}.8 tcptraceroute.8
+    popd
 
-> Thanks.
->
-> --
-> *Raul Rosetto Mu=F1oz*
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Can you fix that?
 
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--C7zPtVaVf+AK4Oqc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDUmo8ACgkQN1Ujt2V2gBxH1ACfRP1mcQ6WyWkRPHQk3qbXtGNm
+p5EAoLlRFpk243EdDa6TYLxPBtfNCb0Z
+=4TUr
+-----END PGP SIGNATURE-----
+
+--C7zPtVaVf+AK4Oqc--
