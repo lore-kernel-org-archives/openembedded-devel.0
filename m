@@ -1,33 +1,34 @@
-Received: from mail-ob0-f179.google.com ([209.85.214.179])
+Received: from mail-ie0-f172.google.com ([209.85.223.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Tm7Sk-0003kE-5t
+	(envelope-from <stanhu@gmail.com>) id 1Tm9ua-0002IB-QY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 19:36:50 +0100
-Received: by mail-ob0-f179.google.com with SMTP id x4so4809976obh.24
+	Fri, 21 Dec 2012 22:13:46 +0100
+Received: by mail-ie0-f172.google.com with SMTP id c13so6808495ieb.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 10:22:02 -0800 (PST)
+	Fri, 21 Dec 2012 12:58:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=xTCGX2Ye9S3/PXARWGUkhK1RhI9FSD//OqR04fQAsU8=;
-	b=AEavsB5r6QesRRLOvHg0+v/yDsU7gWhbwk+nU3AfHCe3/1Q5JFjTU83xEczYBWMYnU
-	JgQRz4H8+snRq0OzgEqNhULbjJaaWBPMFQ8f9MUs3EWB+WBjgcZI/WVFHDHfWnsFdTc6
-	3es521l2ljKgX4BA52X23pEeI+1FLRbqFljbJ1ocC7T3p3aJCHYcVlNo3mBV3LsywN/J
-	C34T4Hq1zxbmEJumLF6jVfXRMrnaKiHr6IntzvUKnOBZf/9kgrOnkpkvy796XLyQqzQi
-	c6QnRkPsGKnuBrjtISSD05YWwS60n8+HcDreS6jTcMKv+oK5ZGOTI1SPQ7BOy382f0B3
-	hIsQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=DIS3ZFB8tmDPMYdG6s5UzgRwfMvqVgaWbOgS2Nx8PNE=;
+	b=fSyGML/nJ06yB31nhDA/rDJpCyEEv1mapWI8ObVAplMH2c/Nn2h5dOfzdxp69tbXi9
+	Uqr4wJMg68x591ZVBYr2bDGsf94GD7SSKEami8s2NwrPB9XhQmO3thevzWAvN5716QJ1
+	aeRNECPZreysiq2fcsmKIrlzKs5YUU1C7uhSvJM68Ba6QWa8ZKGLZEIQx6c5lkzNS4uC
+	2RreAyisj9CkTgmCD2LTg1b/dwFhheHnbSoRfcDm/X6WvxdiPNljYOoRGHeoxiSi9I/P
+	GOkO85tPmtgP0ow14M9nzWweQcb4QxrbV9ojPYmmA8BSCeJsVZ7sFIwM/BBQE2A8l8KE
+	gKWQ==
+Received: by 10.50.158.170 with SMTP id wv10mr9918530igb.75.1356123538057;
+	Fri, 21 Dec 2012 12:58:58 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.60.172.178 with SMTP id bd18mr12074051oec.133.1356114122542;
-	Fri, 21 Dec 2012 10:22:02 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.219.130 with HTTP; Fri, 21 Dec 2012 10:22:02 -0800 (PST)
-Date: Fri, 21 Dec 2012 16:22:02 -0200
-X-Google-Sender-Auth: aokMlz0xFrXd5Z5HElXwOogEpok
-Message-ID: <CAP9ODKr_NPX9kgu1jFWkrvhzM=0qFdHv4S9cZs0cGr=7z-iGZg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: [for-danny] Patches for backport
+Received: by 10.50.153.229 with HTTP; Fri, 21 Dec 2012 12:58:37 -0800 (PST)
+In-Reply-To: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+From: Stan Hu <stanhu@gmail.com>
+Date: Fri, 21 Dec 2012 12:58:37 -0800
+Message-ID: <CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
+To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 18:36:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Dec 2012 21:13:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello Eric,
-
-So we did a new set of changes in master, which we'd like to backport.
-The changes are, in order:
-
-2ac0acc2753f9853928a081cbc80c3daacbe7e08 xf86-video-geode: Add
-rdepends on EXA Xorg module
-
-ade2d4d35e1efdd83bb555949bcfb8c7a1970ff0 xinput-calibrator: Fix
-service file to require display-manag
-
-43c2d4d3ca9889e54646e02d110d8155da96772c openmotif: Update SRC_URI and
-add libxft in depends
-
-1db0dbf9a8bf2f09ddbc09a4ccde227fdf9a866a openmotif: Disable printing support
-
-38daf64fb87bbc34caad050e7295b910c9b80e7c openmotif: Avoid use os Xos.h from host
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
-
+> My automated build system updated to the latest master of
+> meta-openembedded, and now I'm getting theis error message:
+>
+> ERROR: Multiple .bb files are due to be built which each provide udev
+> (/var/lib/jenkins/jobs/systemd-image/workspace/setup-scripts/sources/meta-openembedded/meta-oe/recipes-core/udev/
+> udev_182.bb/var/lib/jenkins/jobs/systemd-image/workspace/setup-scripts/sources/meta-openembedded/meta-oe/recipes-core/systemd/
+> systemd_git.bb).
+>
+> I think I have recipes that depend upon libudev, so BitBake pulls in both
+> these recipes.  I'm not quite sure why I didn't get these warnings before I
+> updated.  What's the best way to resolve this?
+>
 
