@@ -1,34 +1,33 @@
-Received: from mail-pb0-f49.google.com ([209.85.160.49])
+Received: from mail-ob0-f179.google.com ([209.85.214.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tm6Vz-0007RN-OL
+	(envelope-from <otavio.salvador@gmail.com>) id 1Tm7Sk-0003kE-5t
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 18:36:08 +0100
-Received: by mail-pb0-f49.google.com with SMTP id un15so2834232pbc.22
+	Fri, 21 Dec 2012 19:36:50 +0100
+Received: by mail-ob0-f179.google.com with SMTP id x4so4809976obh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 09:21:20 -0800 (PST)
+	Fri, 21 Dec 2012 10:22:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:mime-version
-	:content-type:content-disposition:user-agent;
-	bh=DZc9CpLtuFBJJZX8G+BsOk+Zofj5PrMr7KpZ+cF5c5Q=;
-	b=WFbmp69TxxpL0p07U0PBR0JPyjtlpjC6I0V9CMheU0UPghgDP+3OvfXo9D4YFWbVKP
-	dt5dq6f1MhGKGgz664APvfje7sz7rnAvkGlZzcRCOshnXi/pmEcRtzf8uAZNhvYmH35P
-	eZwB1/pen9QoSTAifMB5TTcuSftUaXBrlMKEim8MVEphUV+tPZMjO24Dl6/R9EMtyFw+
-	H9dT3uIWzO+HrNlQjhZK7WxZCy+THKAEYmAzUIEeXi0jnr3oNbeQh6NtWPd1RJjrWODV
-	sF7Va+GYZm1wwDgUyB/ho8mxuskNE1U5vN+gHZQ6oN8UlOFuCz3GFf3p/D8x4MEdmXvv
-	gALg==
-X-Received: by 10.68.137.234 with SMTP id ql10mr41268265pbb.158.1356110480850; 
-	Fri, 21 Dec 2012 09:21:20 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id pj1sm7289030pbb.71.2012.12.21.09.21.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 21 Dec 2012 09:21:19 -0800 (PST)
-Date: Fri, 21 Dec 2012 18:21:19 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121221172119.GA8847@jama.palm1.palmone.com>
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=xTCGX2Ye9S3/PXARWGUkhK1RhI9FSD//OqR04fQAsU8=;
+	b=AEavsB5r6QesRRLOvHg0+v/yDsU7gWhbwk+nU3AfHCe3/1Q5JFjTU83xEczYBWMYnU
+	JgQRz4H8+snRq0OzgEqNhULbjJaaWBPMFQ8f9MUs3EWB+WBjgcZI/WVFHDHfWnsFdTc6
+	3es521l2ljKgX4BA52X23pEeI+1FLRbqFljbJ1ocC7T3p3aJCHYcVlNo3mBV3LsywN/J
+	C34T4Hq1zxbmEJumLF6jVfXRMrnaKiHr6IntzvUKnOBZf/9kgrOnkpkvy796XLyQqzQi
+	c6QnRkPsGKnuBrjtISSD05YWwS60n8+HcDreS6jTcMKv+oK5ZGOTI1SPQ7BOy382f0B3
+	hIsQ==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: traceroute: Add from OE-Classic, uprev and update
+Received: by 10.60.172.178 with SMTP id bd18mr12074051oec.133.1356114122542;
+	Fri, 21 Dec 2012 10:22:02 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Fri, 21 Dec 2012 10:22:02 -0800 (PST)
+Date: Fri, 21 Dec 2012 16:22:02 -0200
+X-Google-Sender-Auth: aokMlz0xFrXd5Z5HElXwOogEpok
+Message-ID: <CAP9ODKr_NPX9kgu1jFWkrvhzM=0qFdHv4S9cZs0cGr=7z-iGZg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: [for-danny] Patches for backport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,49 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 17:36:09 -0000
-X-Groupsio-MsgNum: 42306
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 21 Dec 2012 18:36:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---C7zPtVaVf+AK4Oqc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Eric,
 
-Hi,
+So we did a new set of changes in master, which we'd like to backport.
+The changes are, in order:
 
-traceroute_2.0.18.bb added by you in=20
-commit 79811942660877cedf366c542d2ee4025bf54b77
-Author: Morgan Little <morgan.little@windriver.com>
-Date:   Tue Oct 23 18:04:50 2012 +0000
+2ac0acc2753f9853928a081cbc80c3daacbe7e08 xf86-video-geode: Add
+rdepends on EXA Xorg module
 
-    traceroute: Add from OE-Classic, uprev and update
+ade2d4d35e1efdd83bb555949bcfb8c7a1970ff0 xinput-calibrator: Fix
+service file to require display-manag
 
-Is using bashisms in do_install:
-    pushd ${D}${mandir}
-    ln -s ${PN}.8 ${PN}6.8
-    ln -s ${PN}.8 tcptraceroute.8
-    popd
+43c2d4d3ca9889e54646e02d110d8155da96772c openmotif: Update SRC_URI and
+add libxft in depends
 
-Can you fix that?
+1db0dbf9a8bf2f09ddbc09a4ccde227fdf9a866a openmotif: Disable printing support
 
-Cheers,
+38daf64fb87bbc34caad050e7295b910c9b80e7c openmotif: Avoid use os Xos.h from host
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Regards,
 
---C7zPtVaVf+AK4Oqc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDUmo8ACgkQN1Ujt2V2gBxH1ACfRP1mcQ6WyWkRPHQk3qbXtGNm
-p5EAoLlRFpk243EdDa6TYLxPBtfNCb0Z
-=4TUr
------END PGP SIGNATURE-----
-
---C7zPtVaVf+AK4Oqc--
