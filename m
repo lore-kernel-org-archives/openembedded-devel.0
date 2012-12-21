@@ -1,30 +1,40 @@
-Received: from mail-ie0-f172.google.com ([209.85.223.172])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <munoz0raul@gmail.com>) id 1Tm1ur-0003IS-TP
+	(envelope-from <ross.burton@intel.com>) id 1Tm24g-0003po-LJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 13:41:30 +0100
-Received: by mail-ie0-f172.google.com with SMTP id c13so6047482ieb.17
+	Fri, 21 Dec 2012 13:51:39 +0100
+Received: from mail-qc0-f198.google.com ([209.85.216.198])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 21 Dec 2012 04:36:51 -0800
+Received: by mail-qc0-f198.google.com with SMTP id l35so6451953qco.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 04:26:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=QnAELhGjy23EHFrSRsVHA7YRLjzDmf5DfgR4oo/lVt8=;
-	b=0xBxsbSX/FZrrW6rh0CKOuz6AVFBBm4AwKKDIcqwTARPHV7OB3fmCTePOMc0HFm7JF
-	+APy3Xn3JaDHliLhcC8e900+xrAho7yf4P9BSBoIziBostnO7XGcy04WU3XY2jwpHrp4
-	AceO50fHNDyalS4IEzHa19cEwclZXGqSmt6M15LNIPKPBGrgtNB4nOh5d+3EEta4zgjp
-	TXbzf4bAa8SlBOCyo121/16/8Nu83ubsygp+w5tP8MG/V1b44NdLq2R3H1XEv8Q++icK
-	j008CbfngFT8hq2cYKep10U7/jZ1r9KHQcaP4n6dz84cwc7BLdjYsggVsdx4WQ4iO+pf
-	wRDg==
+	Fri, 21 Dec 2012 04:36:49 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:content-type:x-gm-message-state;
+	bh=JPXnpF2VxDn86Bk+aBZN23h9g+oOAZ5r9XZAcZT+54k=;
+	b=fliVHXNgCawovRoeyH7IljzoNzdTB4R4kjKzYX5AIDFH6v4uUepPsLb35Kv/G8SHgR
+	XVRyT6zKlxUWGbL3SCs402dvx0cCTbklyK7QPHXBHrYrt10JbdNbscMC87SkmvtwCK2z
+	aToQ+n1X16r05Td49LKB+STZxylraVbVI7qg98D3vmzySuXgROrHKIQBD870Rs4YSpYB
+	lSN/Yavb7mix/PWTW3c052/MQmc4k5rHy8ivx8LLbrY2jXgWEXi82U4MInzTF+seZyAF
+	IFYVbcMk7UlfqyQEQSGal/tqME14qfXLFqqoaflV/EDpGAqFGvT8idJAoaSvQLyHbINu
+	ausw==
+X-Received: by 10.221.10.6 with SMTP id oy6mr17783715vcb.65.1356093409551;
+	Fri, 21 Dec 2012 04:36:49 -0800 (PST)
+Received: by 10.221.10.6 with SMTP id oy6mr17783706vcb.65.1356093409450; Fri,
+	21 Dec 2012 04:36:49 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.50.106.199 with SMTP id gw7mr12953864igb.26.1356092803613;
-	Fri, 21 Dec 2012 04:26:43 -0800 (PST)
-Received: by 10.64.147.40 with HTTP; Fri, 21 Dec 2012 04:26:43 -0800 (PST)
-Date: Fri, 21 Dec 2012 10:26:43 -0200
-Message-ID: <CANmVirjmVO0XS5E4-_E_=cp02MCY-WQKUHnGEMtYfddEFmewZg@mail.gmail.com>
-From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+Received: by 10.58.178.244 with HTTP; Fri, 21 Dec 2012 04:36:28 -0800 (PST)
+In-Reply-To: <20121221094318.GQ14543@jama.palm1.palmone.com>
+References: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
+	<1356007963-12208-2-git-send-email-ross.burton@intel.com>
+	<20121221094318.GQ14543@jama.palm1.palmone.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 21 Dec 2012 12:36:28 +0000
+Message-ID: <CAJTo0LadHbaD1iA7TXRS25EZbV4dbH5Q62mbSJEDZvxEqju+LA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: llvm2.9 install error
+X-Gm-Message-State: ALoCoQnvmRZcSW/Wma7vQu4kKVXccjXPDb41mzuE+vQNMTNs4vLM7ArzN9YgmVgj8MO6PJwJcmEq9IJyo4dIpprKrCQuXL2aqbMvBSwNtLcb8DidIwto3MHBC+gWP5auAO63hz8jjN242VEoUvDys8mqoec6oHjrRfosG/hKHx0L1WYUl7cXQP1hz3upW3uoLNgwEt4SUgSL
+Subject: Re: [meta-multimedia PATCH 1/6] gssdp: add 0.12.2.1 and 0.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,32 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 12:41:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Dec 2012 12:51:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello all,
+On 21 December 2012 09:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+> vala-stub-native does not exist afaik, why not use vala-native?
 
-I want install openjdk-6-jre in my imx28evk.
+Whoops, that patch didn't go anywhere did it.
 
-I have this error when I try install llvm2.9 in my core-image-minimal.
+commit 2471e89fe8b535c9fb4a1e15cb910d7d14b463b3
+Author: Ross Burton <ross.burton@intel.com>
+Date:   Thu Dec 20 12:40:17 2012 +0000
 
-At bitbake core-image-minimal:
+    vala-stub: add a stub for vala-native
 
-This is the log error:
+    Some packages have optional support for Vala but require vala.m4 to provide
+    VALA_PROG_VAPIGEN so that autoreconf works.
 
-NOTE: Checking Package: libllvm-llvmipo
-NOTE: Checking Package: libllvm-gtest
-NOTE: Checking Package: libllvm-gtest-main
-ERROR: QA run found fatal errors. Please consider fixing them.
-DEBUG: Python function do_package_qa finished
-DEBUG: Python function do_package finished
-ERROR: Function failed: do_package_qa
+    vala-stub provides a dummy VALA_PROG_VAPIGEN which doesn't do
+anything, so the
+    configure script runs and believes that vala isn't present.
 
-Some one can help me?
+    Signed-off-by: Ross Burton <ross.burton@intel.com>
 
-Thanks.
+(pending for oe-core)
 
---=20
-*Raul Rosetto Mu=F1oz*
+For software that's written in C but has optional Vala bindings you
+need Vala to configure even if you're going to turn it off.  A stub
+macro that lets configure run is all you need if you don't want to
+build all of Vala (for example because you don't want to pull all of
+meta-oe into your project).
+
+I meant to change that to vala-native once I'd added the provides to
+vala-stub, V2 shortly.
+
+Ross
+
 
