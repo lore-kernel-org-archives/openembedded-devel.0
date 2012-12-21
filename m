@@ -1,41 +1,41 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tm39B-0002K9-45
+	(envelope-from <ross.burton@intel.com>) id 1Tm3Ab-0003qq-6O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 15:00:21 +0100
-Received: from mail-la0-f69.google.com ([209.85.215.69])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 21 Dec 2012 05:45:35 -0800
-Received: by mail-la0-f69.google.com with SMTP id w12so3531186lag.4
+	Fri, 21 Dec 2012 15:01:49 +0100
+Received: from mail-yh0-f71.google.com ([209.85.213.71])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 21 Dec 2012 05:47:02 -0800
+Received: by mail-yh0-f71.google.com with SMTP id j63so6535806yhj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 05:45:33 -0800 (PST)
+	Fri, 21 Dec 2012 05:47:01 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references:x-gm-message-state;
-	bh=bwtGfgatVD7h9dZQiutWt60siZpVcSkj2QWF//9QHAU=;
-	b=l4mCcqZErTMApezQE3hEfBtxo2Q+KidxSasgbNgBxswqfElNTsmTo6UF7KtAqFRxf1
-	KE9jOXrj8hmelMSmlOvOBHTga/S8NE6XjMotKaPqnWuofOev4NQd0W9gq9Nan0tp8Tbf
-	lHZezrmcGw3DMxW4JoouBz3d23+P8MhHMHLZP5rtBncwbDnZYHqSdfuuilgKJR10r5/9
-	pVYYn/ydiI6UpzGBvUOGRbXR7i1riKPLd+bg5Op5BXXpepLLbG1rwwMWlXMPhCVYg6nq
-	mYpvy5EY20pNfVTsUBEiub8KR+7Br5SVIIpJE+PNdidT6kY2Nqw+ToPkjGQIdDXOJcLT
-	Zvxg==
-X-Received: by 10.180.73.80 with SMTP id j16mr22994523wiv.5.1356097533604;
-	Fri, 21 Dec 2012 05:45:33 -0800 (PST)
-X-Received: by 10.180.73.80 with SMTP id j16mr22994515wiv.5.1356097533547;
-	Fri, 21 Dec 2012 05:45:33 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id df2sm20701213wib.0.2012.12.21.05.45.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 21 Dec 2012 05:45:32 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:content-type:x-gm-message-state;
+	bh=fXP1EKjirNuda7ThPyoY/8KH6/WxbwTqmQzgaBoGn9Y=;
+	b=dNeNPZ/bjl0MGlwyxmRwpKmb2J7O470TMBBZiLWMutNlk+JfX8myHjg6Rayudpm0FD
+	TZ4ABpaR8oFGpx7eR98ic4T/MUFpTSNuYBKeYXrHyDfxB6BTM6blspAh31BPvsW8MNPn
+	PPCeZIVzxOW+XKUsax9h6wYYfjeKCTRv8qLZeaR6wXL9yOf19ilF9j6k6lWANHvkRV2I
+	/6VIAGZjtCIdlURf4xuc81/ERE2PdvMUYwaEB1I3WqzzwsA7ftg7FGEVJkPEUoas9KEC
+	dBT+X919wIbWwfXdSwuJ0ZSWa5BgfsWO6pdGubJ9bMXjS8rEm7Syngj148c8xkoO/8Mt
+	P7VQ==
+X-Received: by 10.58.127.195 with SMTP id ni3mr20655102veb.30.1356097621733;
+	Fri, 21 Dec 2012 05:47:01 -0800 (PST)
+Received: by 10.58.127.195 with SMTP id ni3mr20655089veb.30.1356097621601;
+	Fri, 21 Dec 2012 05:47:01 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.58.178.244 with HTTP; Fri, 21 Dec 2012 05:46:41 -0800 (PST)
+In-Reply-To: <CAJTo0LadHbaD1iA7TXRS25EZbV4dbH5Q62mbSJEDZvxEqju+LA@mail.gmail.com>
+References: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
+	<1356007963-12208-2-git-send-email-ross.burton@intel.com>
+	<20121221094318.GQ14543@jama.palm1.palmone.com>
+	<CAJTo0LadHbaD1iA7TXRS25EZbV4dbH5Q62mbSJEDZvxEqju+LA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 21 Dec 2012 13:46:41 +0000
+Message-ID: <CAJTo0LYYRbS5waZR7ErhsWodyaamQtn27=GEN1wv+deRV19aCw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Dec 2012 13:43:42 +0000
-Message-Id: <1356097422-11920-6-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1356097422-11920-1-git-send-email-ross.burton@intel.com>
-References: <1356097422-11920-1-git-send-email-ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQnhz91k9+8h7WcCJ6kLHVep2dPkAOV+N94DfATsWr6dr+cDIlLgR7QZ+w1ytxvlm/s96a86SIJ7StzlEceDlr1YSaH+utPuYfw3sBmgk08TZTHZDjtoWRqcQFmQyC38u0strP/hnsv4rVVJrxAJbv+c3zosJUolmQ3FGpORMY849eUOT+HC7qtqDc9hpy2Wzu6rRnP8
-Subject: [meta-multimedia PATCH V2 6/6] gupnp-tools: add 0.8.1
+X-Gm-Message-State: ALoCoQki5DJfAJYbvlG0YGOCrn0tRK5/loTw46in9Q5BcK7LJqyBJi5NhuxxknL/87nD+Xv145Jr2XOkKOgPpwN0dWcdaSZPRZTi/RpvEH0D01O6vjCQmXirxB1E5k+nmDuvv6bdD1VzFrrI6dXoyXIZYxjOWp/xoTO74gvATf58uOkD0zfbBhBweXOKniOwPjkS4ikiC7Sy
+Subject: Re: [meta-multimedia PATCH 1/6] gssdp: add 0.12.2.1 and 0.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +49,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 14:00:23 -0000
+X-List-Received-Date: Fri, 21 Dec 2012 14:01:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- .../recipes-connectivity/gupnp/gupnp-tools_0.8.1.bb         |   11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.1.bb
+On 21 December 2012 12:36, Burton, Ross <ross.burton@intel.com> wrote:
+> On 21 December 2012 09:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> vala-stub-native does not exist afaik, why not use vala-native?
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.1.bb
-new file mode 100644
-index 0000000..7a26453
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.1.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "Tools for GUPnP"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-+                    file://src/network-light/main.c;beginline=1;endline=21;md5=033bf37c030780c5a72165846b3003f6"
-+DEPENDS = "gupnp gupnp-av gtk+ gnome-icon-theme"
-+
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/0.8/${BPN}-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "cafc2a4f2d1a91a8c1228799073d1d7d"
-+SRC_URI[sha256sum] = "57d5ca899f8da7e4ae69e5f98d75d1603aa7f388022f9ccb357f90abb22b75b6"
-+
-+inherit autotools pkgconfig
--- 
-1.7.10
+V2 sent, Vala is a pointless dependency for the GUPnP stack as it
+requires gobject-introspection first, so we'll be building vala just
+to get an autoconf macro that is never used.
 
+Avoid the vala-stub debate now by simply commenting out that macro for now.
+
+Ross
 
 
