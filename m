@@ -1,37 +1,39 @@
-Received: from mail-ea0-f174.google.com ([209.85.215.174])
+Received: from mail-ea0-f182.google.com ([209.85.215.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OC-00050N-TR
+	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OF-00050R-61
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 21 Dec 2012 15:16:16 +0100
-Received: by mail-ea0-f174.google.com with SMTP id e13so1870948eaa.19
+Received: by mail-ea0-f182.google.com with SMTP id a14so1942631eaa.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 06:01:07 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=CgqdT8se1M913Js85F64cwOECfSCz8qQ2higX8WlZ6A=;
-	b=D6VJImKW3aMHVxYgxnynTe4xIBPGtrVjV9AC8GmLqQ63RLKSHKEy/HkMLEpalj5iBW
-	hg7q9Cn0VipiocNQC5ZwoCVVAJvVyRhzyZUlD1UdUgOitezXfw5CflHTUI6VGtky3moa
-	M1jZ0IpcmKplbk0rxRSEDBiZ9yJhGZrezfLe7NK7r7F1EG8uV10zxtRWUcC0T5pe232s
-	fixAUDHo5C5ik/in5TgLe1C4fl8tyfF/IFFrw82tRl/NXwhBNShYXcggAanQDk290YkW
-	qMdP9wVci7isgdF03wocIO8KqDzfVVcBrTXxyhI90zH8Mi8i1SzE7hlsiBx+hW9lJk/o
-	B7oA==
-X-Received: by 10.14.178.196 with SMTP id f44mr32299888eem.14.1356098466851;
-	Fri, 21 Dec 2012 06:01:06 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
+	bh=O7NK6JGJCQDon5X/TCQ79XJf9ZnSsY3tZaWgODay+Bo=;
+	b=HUsPxQF4JoVmWYtGRIID0Zv7gELDgXFYqcQs73ypSU39Qm+UI0RKQAjRchn0vrA3PO
+	/cx9+sVngbtNpKCtkL6NfLvw3qPEUuociUnH920fRBUj4/r0xRCdckpP4rsXNrScnX/G
+	Zy32MO31Lfg6knOitVxOlLVvvbyIEckllROO5At3exz3ry/3ntdcYHh2tH+pRoqh0fjL
+	U3CKDas5TdDLOCwYHCzrjrtD76Qyv9skRTsWy2rep9uOvdWPMS0mMqpaPNdO89WgP5nq
+	+fcIbth0XdmPTf8W3lTTdJa+ChKPDs6C3BWl9XX3veGrQsUKYeesdMaSOzr0rAI2/mYu
+	epAA==
+X-Received: by 10.14.225.72 with SMTP id y48mr31872841eep.46.1356098469466;
+	Fri, 21 Dec 2012 06:01:09 -0800 (PST)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.04
+	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.08
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 21 Dec 2012 06:01:05 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:08 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Dec 2012 15:00:45 +0100
-Message-Id: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 21 Dec 2012 15:00:47 +0100
+Message-Id: <1356098450-27475-3-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.7.6
-X-Gm-Message-State: ALoCoQkzN49id6nEQr0aT9rFaAtPst5X67OzZg28X5QSH5hacp5kpJIJAdS3fGRe66F1N1S0oboy
+In-Reply-To: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
+References: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQklwmQ60aNASzO3C03nfMdpkpXebdOMU7wiqE1Ehjis4LGtWuKNGn5Az1gtNN1B6eS14x3W
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][meta-multimedia][PATCH 1/6] xbmc: first try at making it build for non-GLES platforms
+Subject: [meta-oe][meta-multimedia][PATCH 3/6] oscam: add svn version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,45 +51,34 @@ X-List-Received-Date: Fri, 21 Dec 2012 14:16:28 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../recipes-mediacentre/xbmc/xbmc_git.bb           |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ meta-multimedia/recipes-dvb/oscam/oscam_svn.bb |   18 ++++++++++++++++++
+ 1 files changed, 18 insertions(+), 0 deletions(-)
+ create mode 100644 meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
 
-diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-index 74bf710..6331306 100644
---- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-+++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-@@ -3,13 +3,13 @@ DESCRIPTION = "XBMC Media Center"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
- 
--DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
-+DEPENDS = "libmad libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
- #require recipes/egl/egl.inc
- 
- SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
- 
- PV = "11.0"
--PR = "r14"
-+PR = "r15"
- PR_append = "+gitr${SRCPV}"
- SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
-            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
-@@ -26,13 +26,14 @@ CACHED_CONFIGUREVARS += " \
-  ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
- "
- 
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+new file mode 100644
+index 0000000..f466aff
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "OSCam: Open Source Conditional Access Module"
++HOMEPAGE = "http://www.streamboard.tv/oscam/"
 +
- EXTRA_OECONF = " \
-  --disable-rpath \
-- --enable-gles \
-  --enable-libusb \
-  --enable-airplay \
-  --disable-optical-drive \
-  --enable-external-libraries \
-+ ${@base_contains('DISTRO_FEATURES', 'opengl', '--enable-gl', '--enable-gles', d)} \
- "
- 
- FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++DEPENDS = "libusb1 openssl"
++
++SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
++SRCREV = "7974"
++PV = "1.10+${SRCPV}"
++
++S = "${WORKDIR}/trunk"
++
++inherit cmake
++
++EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}"
++
 -- 
 1.7.7.6
 
