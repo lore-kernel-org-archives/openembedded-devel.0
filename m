@@ -1,40 +1,39 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tm24g-0003po-LJ
+	(envelope-from <ross.burton@intel.com>) id 1Tm396-0002Jx-5p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Dec 2012 13:51:39 +0100
-Received: from mail-qc0-f198.google.com ([209.85.216.198])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 21 Dec 2012 04:36:51 -0800
-Received: by mail-qc0-f198.google.com with SMTP id l35so6451953qco.5
+	Fri, 21 Dec 2012 15:00:16 +0100
+Received: from mail-ea0-f200.google.com ([209.85.215.200])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 21 Dec 2012 05:44:35 -0800
+Received: by mail-ea0-f200.google.com with SMTP id j13so3702446eaa.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 04:36:49 -0800 (PST)
+	Fri, 21 Dec 2012 05:45:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=JPXnpF2VxDn86Bk+aBZN23h9g+oOAZ5r9XZAcZT+54k=;
-	b=fliVHXNgCawovRoeyH7IljzoNzdTB4R4kjKzYX5AIDFH6v4uUepPsLb35Kv/G8SHgR
-	XVRyT6zKlxUWGbL3SCs402dvx0cCTbklyK7QPHXBHrYrt10JbdNbscMC87SkmvtwCK2z
-	aToQ+n1X16r05Td49LKB+STZxylraVbVI7qg98D3vmzySuXgROrHKIQBD870Rs4YSpYB
-	lSN/Yavb7mix/PWTW3c052/MQmc4k5rHy8ivx8LLbrY2jXgWEXi82U4MInzTF+seZyAF
-	IFYVbcMk7UlfqyQEQSGal/tqME14qfXLFqqoaflV/EDpGAqFGvT8idJAoaSvQLyHbINu
-	ausw==
-X-Received: by 10.221.10.6 with SMTP id oy6mr17783715vcb.65.1356093409551;
-	Fri, 21 Dec 2012 04:36:49 -0800 (PST)
-Received: by 10.221.10.6 with SMTP id oy6mr17783706vcb.65.1356093409450; Fri,
-	21 Dec 2012 04:36:49 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.178.244 with HTTP; Fri, 21 Dec 2012 04:36:28 -0800 (PST)
-In-Reply-To: <20121221094318.GQ14543@jama.palm1.palmone.com>
-References: <1356007963-12208-1-git-send-email-ross.burton@intel.com>
-	<1356007963-12208-2-git-send-email-ross.burton@intel.com>
-	<20121221094318.GQ14543@jama.palm1.palmone.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 21 Dec 2012 12:36:28 +0000
-Message-ID: <CAJTo0LadHbaD1iA7TXRS25EZbV4dbH5Q62mbSJEDZvxEqju+LA@mail.gmail.com>
+	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=IrxudzP3oOkDHdBJJueyNLDyuVV1ve03R081+SSuZGw=;
+	b=TC/D/m/kqiJHOGOPM/+kREPXwEuaji/A/ecsbw41u1oWnYMIPdY/YgUkZp5WPsBx+5
+	oWvZElWXYIlUBEv6SgyHatB0TyaeqNtodRkVNYUjEE3PgXTG8G+WuHOp5RjVocggI0zj
+	zu+ziMkdYhb5YzLPrNveMWo2yV5LtxNYWeYpkIxnR1X5ktg9Zikv+PW23wZcTbOoy9KZ
+	7ksSpLfvmespzgRKDpX2XVAPcW7V74n0gMz1Iou443orsg8RN/jcz1LcIUuMtzuJ8JrP
+	oyxQdhIxI9IC3J2ynjwegk9glTpOB7AWaiWSTL25UZtk7/MAtKKiSLsMaIefscALqpmf
+	55Gw==
+X-Received: by 10.180.109.195 with SMTP id hu3mr15655216wib.31.1356097527265; 
+	Fri, 21 Dec 2012 05:45:27 -0800 (PST)
+X-Received: by 10.180.109.195 with SMTP id hu3mr15655206wib.31.1356097527085; 
+	Fri, 21 Dec 2012 05:45:27 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id df2sm20701213wib.0.2012.12.21.05.45.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 21 Dec 2012 05:45:26 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnvmRZcSW/Wma7vQu4kKVXccjXPDb41mzuE+vQNMTNs4vLM7ArzN9YgmVgj8MO6PJwJcmEq9IJyo4dIpprKrCQuXL2aqbMvBSwNtLcb8DidIwto3MHBC+gWP5auAO63hz8jjN242VEoUvDys8mqoec6oHjrRfosG/hKHx0L1WYUl7cXQP1hz3upW3uoLNgwEt4SUgSL
-Subject: Re: [meta-multimedia PATCH 1/6] gssdp: add 0.12.2.1 and 0.13.2
+Date: Fri, 21 Dec 2012 13:43:37 +0000
+Message-Id: <1356097422-11920-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQknkKI7Zz8JBYM12KpD/yspKzehu4iGwYasqi+3RLW1PhoTzQpfLiAXcU8reI5TpLBQd1iA9i7zF59be1BYJmKOaOIVDDjpzM4O1FllQGpd+hA/sx+phVVgdtTGiM8Z5T4PTTcIGNhsYx/shhQu8X6ghaoAISnTs/Kc25cIs1VvUh59vvOV4m1m73BcuFqA5dVfUcmi
+Subject: [meta-multimedia PATCH V2 1/6] gssdp: add 0.12.2.1 and 0.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,40 +47,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2012 12:51:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Dec 2012 14:00:17 -0000
 
-On 21 December 2012 09:43, Martin Jansa <martin.jansa@gmail.com> wrote:
-> vala-stub-native does not exist afaik, why not use vala-native?
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-multimedia/recipes-connectivity/gupnp/gssdp.inc |   18 ++++++++++++++++++
+ .../recipes-connectivity/gupnp/gssdp_0.12.2.1.bb     |    5 +++++
+ .../recipes-connectivity/gupnp/gssdp_0.13.2.bb       |    8 ++++++++
+ .../recipes-connectivity/gupnp/no-vala.inc           |    5 +++++
+ 4 files changed, 36 insertions(+)
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/no-vala.inc
 
-Whoops, that patch didn't go anywhere did it.
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc b/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
+new file mode 100644
+index 0000000..ae965b9
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp.inc
+@@ -0,0 +1,18 @@
++SUMMARY = "Resource discovery and announcement over SSDP"
++DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
++DEPENDS = "glib-2.0 libsoup-2.4 gobject-introspection-stub"
++
++inherit autotools pkgconfig
++
++require no-vala.inc
++
++EXTRA_OECONF = "--disable-introspection"
++
++PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
++PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+"
++
++PACKAGES =+ "gssdp-tools"
++
++FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
+new file mode 100644
+index 0000000..29cc721
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.12.2.1.bb
+@@ -0,0 +1,5 @@
++require gssdp.inc
++
++SRC_URI = "http://download.gnome.org/sources/${BPN}/0.12/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "8ac3a544ef0dcf8caaf7c249d2a50dc2"
++SRC_URI[sha256sum] = "928aa257815d044fdbfc740f5799530d41897947b5d7854173f636b36d728414"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
+new file mode 100644
+index 0000000..c308fa0
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.13.2.bb
+@@ -0,0 +1,8 @@
++require gssdp.inc
++
++SRC_URI = "http://download.gnome.org/sources/${BPN}/0.13/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "758ed423cdd258a9a22d59c321b535ed"
++SRC_URI[sha256sum] = "8f663f8a72b66254f5c20a3610ff853ac8d00bf6f253828e37e51579caa34dce"
++
++# This is a development release so don't prefer it
++DEFAULT_PREFERENCE = "-1"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/no-vala.inc b/meta-multimedia/recipes-connectivity/gupnp/no-vala.inc
+new file mode 100644
+index 0000000..a4f3fb6
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/no-vala.inc
+@@ -0,0 +1,5 @@
++do_configure_prepend () {
++	# Vala needs gobject-introspection so won't work. Instead of depending
++	# on vala-native just to run configure, comment out the Vala macro.
++	sed -i -e 's/\(^[ \t]*VALA_PROG_VAPIGEN\)/dnl \1/g' ${S}/configure.ac
++}
+-- 
+1.7.10
 
-commit 2471e89fe8b535c9fb4a1e15cb910d7d14b463b3
-Author: Ross Burton <ross.burton@intel.com>
-Date:   Thu Dec 20 12:40:17 2012 +0000
-
-    vala-stub: add a stub for vala-native
-
-    Some packages have optional support for Vala but require vala.m4 to provide
-    VALA_PROG_VAPIGEN so that autoreconf works.
-
-    vala-stub provides a dummy VALA_PROG_VAPIGEN which doesn't do
-anything, so the
-    configure script runs and believes that vala isn't present.
-
-    Signed-off-by: Ross Burton <ross.burton@intel.com>
-
-(pending for oe-core)
-
-For software that's written in C but has optional Vala bindings you
-need Vala to configure even if you're going to turn it off.  A stub
-macro that lets configure run is all you need if you don't want to
-build all of Vala (for example because you don't want to pull all of
-meta-oe into your project).
-
-I meant to change that to vala-native once I'd added the provides to
-vala-stub, V2 shortly.
-
-Ross
 
 
