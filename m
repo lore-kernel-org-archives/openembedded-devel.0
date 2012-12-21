@@ -1,39 +1,37 @@
-Received: from mail-ea0-f178.google.com ([209.85.215.178])
+Received: from mail-ea0-f174.google.com ([209.85.215.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OH-00050U-Jj
+	(envelope-from <koen@dominion.thruhere.net>) id 1Tm3OC-00050N-TR
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 21 Dec 2012 15:16:16 +0100
-Received: by mail-ea0-f178.google.com with SMTP id k11so1939285eaa.37
+Received: by mail-ea0-f174.google.com with SMTP id e13so1870948eaa.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Dec 2012 06:01:12 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=PVYxCojUqgFbGecUig2tPCsXGS/lEuY5Kt/SIldxk/I=;
-	b=U0YEHM2SPGa/jrAyvjuMFyNmnLyJgI3x+tLx5UQ3rSN39j0d5hAQJftwBBQ2dli4Lp
-	2c+9Mq3wuKTl6Y1TbZMlQRgp6gI3ff+n8XyDOmIogWZUxb0Rthrj5o1iXOXJlq/jAM9z
-	wVGDjV6wAOVRuWQqk1qw8WCy4o0UKq7xNkLzZyvIDwJjZ0HXdFv2Gs4ohl6u5mFAmjva
-	BIx7Vu/FltohAsRrEoKE5iYPTmLMnO2DvaLmUNuJDEiL47YdDhn0WjUA4TdDoSfXL9BY
-	J5+gpdcjgnqncxgXCD+Z3j9ia6Vq4zfvJ2OZAyWhK+4FxJOBKuFrje4xX63n3LXnSu9I
-	gCnw==
-X-Received: by 10.14.205.199 with SMTP id j47mr32081260eeo.26.1356098471897;
-	Fri, 21 Dec 2012 06:01:11 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=CgqdT8se1M913Js85F64cwOECfSCz8qQ2higX8WlZ6A=;
+	b=D6VJImKW3aMHVxYgxnynTe4xIBPGtrVjV9AC8GmLqQ63RLKSHKEy/HkMLEpalj5iBW
+	hg7q9Cn0VipiocNQC5ZwoCVVAJvVyRhzyZUlD1UdUgOitezXfw5CflHTUI6VGtky3moa
+	M1jZ0IpcmKplbk0rxRSEDBiZ9yJhGZrezfLe7NK7r7F1EG8uV10zxtRWUcC0T5pe232s
+	fixAUDHo5C5ik/in5TgLe1C4fl8tyfF/IFFrw82tRl/NXwhBNShYXcggAanQDk290YkW
+	qMdP9wVci7isgdF03wocIO8KqDzfVVcBrTXxyhI90zH8Mi8i1SzE7hlsiBx+hW9lJk/o
+	B7oA==
+X-Received: by 10.14.178.196 with SMTP id f44mr32299888eem.14.1356098466851;
+	Fri, 21 Dec 2012 06:01:06 -0800 (PST)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.10
+	by mx.google.com with ESMTPS id w44sm21810573eep.6.2012.12.21.06.01.04
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 21 Dec 2012 06:01:11 -0800 (PST)
+	Fri, 21 Dec 2012 06:01:05 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Dec 2012 15:00:49 +0100
-Message-Id: <1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 21 Dec 2012 15:00:45 +0100
+Message-Id: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.7.6
-In-Reply-To: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
-References: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQn4KMs5ijU5Q3sm3mRRuoA7Z8WZ3FJkz5jSaxoRzRGkRKaF/nyyueDsH7nT5NZ7A7v78IaZ
+X-Gm-Message-State: ALoCoQkzN49id6nEQr0aT9rFaAtPst5X67OzZg28X5QSH5hacp5kpJIJAdS3fGRe66F1N1S0oboy
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][meta-multimedia][PATCH 5/6] wscan: add 20121111
+Subject: [meta-oe][meta-multimedia][PATCH 1/6] xbmc: first try at making it build for non-GLES platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +49,45 @@ X-List-Received-Date: Fri, 21 Dec 2012 14:16:28 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../recipes-dvb/wscan/wscan_20121111.bb            |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+ .../recipes-mediacentre/xbmc/xbmc_git.bb           |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
-new file mode 100644
-index 0000000..9254c43
---- /dev/null
-+++ b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Wscan is an ATSC/DVB-C/S/T channel scanner that doesn't require an initial frequency table"
-+HOMEPAGE = "http://wirbel.htpc-forum.de/w_scan/index2.html"
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+index 74bf710..6331306 100644
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+@@ -3,13 +3,13 @@ DESCRIPTION = "XBMC Media Center"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
+ 
+-DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
++DEPENDS = "libmad libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
+ #require recipes/egl/egl.inc
+ 
+ SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
+ 
+ PV = "11.0"
+-PR = "r14"
++PR = "r15"
+ PR_append = "+gitr${SRCPV}"
+ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
+            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
+@@ -26,13 +26,14 @@ CACHED_CONFIGUREVARS += " \
+  ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
+ "
+ 
 +
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
-+
-+SRC_URI = "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "30da05747fed9988e11ebc7745f5e71f"
-+SRC_URI[sha256sum] = "5e51e5f1c124a8ed70608b4dbf7376adb2b1bf6a48a65b746076263b2589afe5"
-+
-+S = "${WORKDIR}/w_scan-${PV}"
-+
-+inherit autotools
-+
-+FILES_${PN} += "${datadir}"
-+
+ EXTRA_OECONF = " \
+  --disable-rpath \
+- --enable-gles \
+  --enable-libusb \
+  --enable-airplay \
+  --disable-optical-drive \
+  --enable-external-libraries \
++ ${@base_contains('DISTRO_FEATURES', 'opengl', '--enable-gl', '--enable-gles', d)} \
+ "
+ 
+ FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
 -- 
 1.7.7.6
 
