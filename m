@@ -1,37 +1,42 @@
-Received: from mail-ea0-f171.google.com ([209.85.215.171])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TmMjr-00029O-6Y
+Received: from 7.mo3.mail-out.ovh.net ([46.105.57.200]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TmNjL-0006Sa-Pi
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 11:55:34 +0100
-Received: by mail-ea0-f171.google.com with SMTP id n10so2299796eaa.2
+	Sat, 22 Dec 2012 12:59:11 +0100
+Received: from mail402.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id 86AE6FF90EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 02:40:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=u0tqTdry/lk+IIjn9yLYEnw93JrY8eZWKCzP++fYR9I=;
-	b=aZUvlsuIZnhGgJlYp5xcmpopim4MGdtFaBzbJK/DTJZl04UIZEsscOJ203o/75SHnw
-	cuPcizmEtrJwiBd1MeWn26iZevKNAeqKOscqx03DmvY+iK0fEDF3SdG9jsBqUC5vg2DX
-	CBtCVh7rB21eM3ebGQahaKxBRTJpALmS+rjOvLcV6pqyT514GhRYbksPh2Fh2VMGzVA2
-	dSsUDCp/XQnfEqyKq/bsZtnGhBDh3bLMX720C1dz03deoYIl2MExoyOcJ7WkMMNHLEj1
-	On6LNUQFLDjESCTWhA2QmncWL38IpXjQhccS9tuY45nj3AVu8ieUpopQIpa9BtA6pouh
-	4GFw==
-X-Received: by 10.14.184.134 with SMTP id s6mr39322855eem.43.1356172844124;
-	Sat, 22 Dec 2012 02:40:44 -0800 (PST)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id f49sm27396371eep.12.2012.12.22.02.40.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 22 Dec 2012 02:40:42 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Sat, 22 Dec 2012 12:18:17 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 22 Dec 2012 13:06:11 +0200
+Received: from unknown (HELO eb-e6520) (eric%eukrea.com@90.84.144.185)
+	by ns0.ovh.net with SMTP; 22 Dec 2012 13:06:10 +0200
+Date: Sat, 22 Dec 2012 12:05:51 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Dec 2012 11:40:25 +0100
-Message-Id: <1356172826-24392-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.7.6
-X-Gm-Message-State: ALoCoQn+jQrk6fd3WyNvhMbMiokFJ8/VunMAHM7H64XdsXozLNOU8fZ7x8FQ5Wp2ymTZOwwlvjvH
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][meta-multimedia][PATCH 1/2] x264: add git version
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20121222120551.6916471a@eb-e6520>
+In-Reply-To: <kb40tq$84p$1@ger.gmane.org>
+References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
+	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
+	<CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
+	<20121222100318.14a48e10@eb-e6520> <kb40tq$84p$1@ger.gmane.org>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 10674094067623177545
+X-Ovh-Remote: 90.84.144.185 ()
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledruddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledruddtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Cc: koen@dominion.thruhere.net
+Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,60 +50,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Dec 2012 10:55:34 -0000
+X-List-Received-Date: Sat, 22 Dec 2012 11:59:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-multimedia/x264/x264_git.bb |   38 +++++++++++++++++++++++++++
- 1 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/x264/x264_git.bb
+Hi Koen,
 
-diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipes-multimedia/x264/x264_git.bb
-new file mode 100644
-index 0000000..79e4988
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "x264 is a free software library and application for encoding video streams into the H.264/MPEG-4 AVC format"
-+HOMEPAGE = "http://www.videolan.org/developers/x264.html"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+DEPENDS = "yasm-native"
-+
-+SRC_URI = "git://git.videolan.org/x264.git"
-+SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
-+
-+PV = "r2230+git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit lib_package pkgconfig
-+
-+EXTRA_OECONF = '--prefix=${prefix} \
-+                --host=${HOST_SYS} \
-+		--cross-prefix=${TARGET_PREFIX} \
-+                --sysroot=${STAGING_DIR_TARGET} \
-+                --enable-shared \
-+                --enable-static \
-+                --disable-lavf \
-+                ${X264_DISABLE_ASM} \
-+               '
-+
-+do_configure() {
-+	./configure ${EXTRA_OECONF}
-+}
-+
-+# Get rid of -e
-+EXTRA_OEMAKE = ""
-+AS = "${TARGET_PREFIX}gcc"
-+
-+do_install() {
-+	oe_runmake install DESTDIR=${D}
-+}
--- 
-1.7.7.6
+Le Sat, 22 Dec 2012 11:10:09 +0100,
+Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
+> Please don't revert it, I really need those updates in denzil. Setting
+> PREFERRED_PROVIDER_udev is easy enough
+>=20
+next time please tell this kind of "detail" in the commit log. IMHO we
+shouldn't ask stable branch users to change their build settings like
+this as they don't expect their build to break.
+In the present case, the patch is not only upgrading systemd : it's
+also changing systemd's recipe to build and provide udev.
+For example with meta-toolchain-qte even setting
+PREFERRED_PROVIDER_udev =3D "udev" does't fix the build as systemd is
+built and udev-182 is superceeded in deploy/ipk by udev-v189 and in the
+end meta-toolchain-qte fails as it is looking for udev-182 ... so only
+PREFERRED_PROVIDER_udev =3D "systemd" works but that means user will get
+a newer version of udev and not the one that had for months in their
+stable release).
 
+Do you have an idea to fix that so that the default stays udev 182 and
+users which need 189 can select it (and not the reverse) ?
+
+Thanks,
+Eric
 
 
