@@ -1,36 +1,37 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TmSvi-0006Er-6S
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 18:32:10 +0100
-Received: by mail-ee0-f49.google.com with SMTP id c4so2900482eek.36
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TmUDd-0008Ja-Pt for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Dec 2012 19:54:48 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TmTzR-0006tL-2Y for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Dec 2012 19:40:05 +0100
+Received: from adsl-ull-84-196.40-151.net24.it ([151.40.196.84])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Dec 2012 19:40:05 +0100
+Received: from christoph.sobotka by adsl-ull-84-196.40-151.net24.it with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 09:17:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=95b9rPVW2bHPCvLmoc7VcuCw+OWi0FDh35NpcQDY9m0=;
-	b=tbhHIuVQXGw+LjIKaQ3ezsFZE9zTdBW7OYxza2hryxarRJf+l+oE1ogrJyrikD+lhl
-	0ZEydgwG2FQD6ZYGfIP0BObQ5GPCD7G83qzt/fcNUG41ddHTkS+daG8BLN1jZRd8PBLs
-	c4asdCyid2W8hG6PY9T04XaKXqUTMhsHWfkVxRPgnkf1wZL4Qmc4HSs6aQpdG1KA6rho
-	QMnEmYehKIAXZZOf/izy7lSYLfvgVFpejXz7AOQz2/XwaXJJI3X7qI/5rzUEycTlQ4uM
-	Q1C7l5a+G7hTyVFMoSVhfveB0ztjx9cvkgmbmCDAj9AiSSjOBJSjmYZP81LnK6OWOitB
-	CZdg==
-X-Received: by 10.14.173.65 with SMTP id u41mr41473352eel.13.1356196642752;
-	Sat, 22 Dec 2012 09:17:22 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 46sm29353929eeg.4.2012.12.22.09.17.21
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 22 Dec 2012 09:17:22 -0800 (PST)
-Date: Sat, 22 Dec 2012 18:17:18 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 22 Dec 2012 19:40:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20121222171718.GC8988@jama.palm1.palmone.com>
-References: <20121220090714.GE14543@jama.palm1.palmone.com>
-MIME-Version: 1.0
-In-Reply-To: <20121220090714.GE14543@jama.palm1.palmone.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: recipes failing after libpng and cups upgrade
+From: Christoph Sobotka <christoph.sobotka@utanet.at>
+Date: Sat, 22 Dec 2012 18:36:32 +0000 (UTC)
+Message-ID: <loom.20121222T192537-634@post.gmane.org>
+References: <1336237032.22405.2.camel@localhost.localdomain>
+	<4FA58128.7030906@gmail.com>
+	<1336248354.26091.4.camel@localhost.localdomain>
+	<CAMKF1so7oUWmrYROtvk-1x9o6cfNJhgNUgibnc+YpwAv+tDm6g@mail.gmail.com>
+	<1336288450.2971.4.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 151.40.196.84 (Opera/9.80 (X11;
+	Linux i686) Presto/2.12.388 Version/12.12)
+Subject: Re: [meta-handheld] Troubles building kernel for h2200
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,52 +45,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Dec 2012 17:32:10 -0000
-X-Groupsio-MsgNum: 42323
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UPT3ojh+0CqEDtpF"
-Content-Disposition: inline
-
---UPT3ojh+0CqEDtpF
+X-List-Received-Date: Sat, 22 Dec 2012 18:54:53 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 20, 2012 at 10:07:14AM +0100, Martin Jansa wrote:
-> FYI: there are few more failing recipes in world build now:
-> due to libpng upgrade:
-> meta-oe/recipes-support/links/links-x11_2.0+2.1pre30.bb
-> meta-oe/recipes-support/links/links_2.0+2.1pre30.bb
-> meta-oe/recipes-multimedia/libass/libass_0.9.11.bb
-> meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-> meta-oe/recipes-support/emacs/emacs_23.4.bb
-> meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
-> meta-oe/recipes-navigation/omgps/omgps_svn.bb
+I tried building for h2200 and had the same error:
 
-I've fixes for above, will send them tomorrow after more tests.
+arch/arm/boot/compressed/head-h2200.o:(.start+0x0): undefined reference to `no 
+symbol'
 
-> due to cups upgrade:
-> meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
->=20
-> Cheers,
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+I ran it on debian squeeze.
+binutils 2.20.1-16
+gcc 4:4.4.5-1
+
+Is there a solution to the problem?
 
 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---UPT3ojh+0CqEDtpF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDV6x4ACgkQN1Ujt2V2gBy2KQCfUoAPUpIuyv4DGtJOUTTzF93J
-gpsAn2NmFc3dkSxIkh3tnsX0T7JHvGjz
-=cS+x
------END PGP SIGNATURE-----
-
---UPT3ojh+0CqEDtpF--
