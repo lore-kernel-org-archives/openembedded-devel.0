@@ -1,32 +1,41 @@
-Received: from plane.gmane.org ([80.91.229.3])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TmDtj-0005He-5b for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 02:29:07 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TmDfe-0001Fv-IY for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 02:14:34 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 02:14:34 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 15.mo4.mail-out.ovh.net ([91.121.62.11]
+	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TmLLu-00084w-6L
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Dec 2012 10:26:42 +0100
+Received: from mail638.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo4.mail-out.ovh.net (Postfix) with SMTP id 8D8A8104E197
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 02:14:34 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 22 Dec 2012 10:12:05 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 22 Dec 2012 11:04:17 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 22 Dec 2012 11:04:16 +0200
+Date: Sat, 22 Dec 2012 10:03:18 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 22 Dec 2012 02:14:07 +0100
-Message-ID: <kb31gs$u4d$1@ger.gmane.org>
+X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
+Message-ID: <20121222100318.14a48e10@eb-e6520>
+In-Reply-To: <CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
+References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
+	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
+	<CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-X-Enigmail-Version: 1.4.6
-Subject: Ruby and meta-oe?
+X-Ovh-Tracer-Id: 8615386088477732169
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrtdelucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrtdelucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +49,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Dec 2012 01:29:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Dec 2012 09:26:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Stan,
 
-Hi,
+Le Fri, 21 Dec 2012 13:18:26 -0800,
+Stan Hu <stanhu@gmail.com> a =E9crit :
 
-What's the status on getting ruby recipes into a meta-ruby or meta-oe? I
-just had to import it into my working branch to build mkvtoolnix which needs
-ruby-native for its buildsystem (don't ask).
+> Thanks.  Oops, I meant the denzil branch.  It was updated today and has
+> this bug you reference.
+>=20
+OK I now also reproduce this (my default images don't have udev so I
+didn't saw that when testing denzil-next) in meta-toolchain-qte.
 
-regards,
+Here setting PREFERRED_PROVIDER_udev =3D "systemd"
+workaround the problem (at least for meta-toolchain-qte but I'm
+not using udev nor systemd so I can't really test if a rootfs using udev
+still works this way) ?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+The problem seems to come from :
+6e0ddd4526f3e0005babe9381c17c06c22a9eda3
+wheere commit log says "systemd: update to v189" but in reallity it also
+adds udev packages in systemd recipe.
 
-iD8DBQFQ1QlfMkyGM64RGpERAhfdAKCjazknzl+A+cxY6sPykmbBrAYxRQCgo/Lh
-6+b1rka7BJlICOQbGHtHUZI=
-=u29k
------END PGP SIGNATURE-----
+At first sight, I think I'll revert this patch as it will break denzil
+builds which is not what we should expect from a stable branch.
 
+Eric
 
 
