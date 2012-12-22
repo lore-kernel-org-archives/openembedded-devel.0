@@ -1,38 +1,39 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ea0-f171.google.com ([209.85.215.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TmMGY-0001Se-UE for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 11:25:16 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1TmM2S-0004Gi-HR for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Dec 2012 11:10:40 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 11:10:40 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <koen@dominion.thruhere.net>) id 1TmMjs-00029R-FB
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Dec 2012 11:55:34 +0100
+Received: by mail-ea0-f171.google.com with SMTP id n10so2299805eaa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Dec 2012 11:10:40 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Sat, 22 Dec 2012 02:40:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
+	bh=NmdLe32zqjNi393l3ybLjIU0hSUVdK/AF0bmg1rUhuM=;
+	b=QJubx4Pk1HzZhiM8TwRUS426tiA+ObjI9JxmfiWAYUCkdGlTFyZsppyPoAKD5TIgg1
+	I//XG+OjXxavi4D22C/i+dU/Yp80A1dCnozdfyU+8wKKXj1geixwl81/PGqMZ0W3LXc2
+	Z48ztBYf/X/3QdSiZfF15UmummiXXbJuEqzL7rzdycrWZYOKD3nHei/ti75DONO1MZPs
+	/N8sBwKVGGTSIVOIjDAtCLUkx/msUkgn7C8OJvNtyumoPP9Gvb874zUWXoKxDqLaP+/T
+	WOmh8rtIdDIA/RcLVIs67ypBlCnd/Z1ZoHUbyui/7z6c0AzW0HsvRsSBcUEc1bhG2+4k
+	ggog==
+X-Received: by 10.14.205.198 with SMTP id j46mr39848183eeo.27.1356172845597;
+	Sat, 22 Dec 2012 02:40:45 -0800 (PST)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id f49sm27396371eep.12.2012.12.22.02.40.44
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 22 Dec 2012 02:40:44 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 22 Dec 2012 11:10:09 +0100
-Message-ID: <kb40tq$84p$1@ger.gmane.org>
-References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
-	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
-	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
-	<CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
-	<20121222100318.14a48e10@eb-e6520>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-In-Reply-To: <20121222100318.14a48e10@eb-e6520>
-X-Enigmail-Version: 1.4.6
-Subject: Re: Multiple .bb files are due to be built which each provide udev
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 22 Dec 2012 11:40:26 +0100
+Message-Id: <1356172826-24392-2-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.7.6
+In-Reply-To: <1356172826-24392-1-git-send-email-koen@dominion.thruhere.net>
+References: <1356172826-24392-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQm1qK4rNZNmRmbrNZXGyWsCF0VHX6A926UfqDyc5yC46uVoekxmdpCuAYphPvK7jTNtem2t
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][meta-multimedia][PATCH 2/2] libav: enable x264 encoder support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Dec 2012 10:25:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 22 Dec 2012 10:55:34 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-multimedia/libav/libav.inc |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-Op 22-12-12 10:03, Eric Bénard schreef:
-> Hi Stan,
-> 
-> Le Fri, 21 Dec 2012 13:18:26 -0800, Stan Hu <stanhu@gmail.com> a écrit :
-> 
->> Thanks.  Oops, I meant the denzil branch.  It was updated today and
->> has this bug you reference.
->> 
-> OK I now also reproduce this (my default images don't have udev so I 
-> didn't saw that when testing denzil-next) in meta-toolchain-qte.
-> 
-> Here setting PREFERRED_PROVIDER_udev = "systemd" workaround the problem
-> (at least for meta-toolchain-qte but I'm not using udev nor systemd so I
-> can't really test if a rootfs using udev still works this way) ?
-> 
-> The problem seems to come from : 
-> 6e0ddd4526f3e0005babe9381c17c06c22a9eda3 wheere commit log says "systemd:
-> update to v189" but in reallity it also adds udev packages in systemd
-> recipe.
-> 
-> At first sight, I think I'll revert this patch as it will break denzil 
-> builds which is not what we should expect from a stable branch.
-
-Please don't revert it, I really need those updates in denzil. Setting
-PREFERRED_PROVIDER_udev is easy enough
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFQ1YcBMkyGM64RGpERArmIAJ9GMjzNj/qB3HQZiT72K3FF8wENggCfZ4Wk
-jMcK4E7b7S/TNJrPRK0llQc=
-=U+7o
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes-multimedia/libav/libav.inc
+index 32fcd61..d5a767e 100644
+--- a/meta-oe/recipes-multimedia/libav/libav.inc
++++ b/meta-oe/recipes-multimedia/libav/libav.inc
+@@ -9,9 +9,9 @@ PROVIDES = "ffmpeg"
+ ARM_INSTRUCTION_SET = "arm"
+ 
+ # faac faad2 lame schroedinger libgsm
+-DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
++DEPENDS = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+ 
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -43,6 +43,7 @@ EXTRA_OECONF = " \
+         --enable-x11grab \
+         --enable-libtheora  \
+         --enable-libvorbis \
++        --enable-libx264 \
+         --arch=${TARGET_ARCH} \
+         --target-os="linux" \
+         --enable-cross-compile \
+-- 
+1.7.7.6
 
 
 
