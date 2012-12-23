@@ -1,39 +1,37 @@
-Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
+Received: from mail-da0-f50.google.com ([209.85.210.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Tmhho-0002ti-3s
+	(envelope-from <martin.jansa@gmail.com>) id 1TmiGD-00054D-B2
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 10:18:48 +0100
-Received: from mail-yh0-f70.google.com ([209.85.213.70])
-	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 23 Dec 2012 01:03:58 -0800
-Received: by mail-yh0-f70.google.com with SMTP id o21so8912886yho.5
+	Sun, 23 Dec 2012 10:54:21 +0100
+Received: by mail-da0-f50.google.com with SMTP id h15so2761432dan.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 01:03:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type:x-gm-message-state;
-	bh=P2QnZ/lN+IXkSxOsQw9WL7tq/pIwa624D5xNk/RCZ48=;
-	b=XpFoBuemX7PAFbpHQqCd+h2aAXuE0fBDlnyANBXZ5IyKm7t+zuFpJ+LWEsVdgAu2j0
-	F6fxyfGC/iEuDdySDgEc2fcxMQV3fRHrB2lEUKt9owT8f7rrr4hgxvdQNFrpX2EQih3j
-	qeAKxc/l6jaxIBmWsa6EJtWbudMPQk7IfIlb5PV0BEQBCCh6MG5igBFhOMZrM+TV7AUD
-	mdsrAah1uuAJdR9q8KOHJWKUQvgtzt92Kzr6lv2nQmCcQDEH5dJhCqH75mM4NNkMZ6+T
-	+UiKaS0jJ3KngN7beh94IDSU74/vQF7w1wAUYqPnlS+HZiOKn4e7w5LTq9c1QuN4uNqR
-	R+2g==
-X-Received: by 10.52.180.200 with SMTP id dq8mr24077349vdc.71.1356253437220;
-	Sun, 23 Dec 2012 01:03:57 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.52.180.200 with SMTP id dq8mr24077340vdc.71.1356253437017;
-	Sun, 23 Dec 2012 01:03:57 -0800 (PST)
-Received: by 10.58.178.244 with HTTP; Sun, 23 Dec 2012 01:03:56 -0800 (PST)
-In-Reply-To: <20121222200925.GD8988@jama.palm1.palmone.com>
+	Sun, 23 Dec 2012 01:39:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=kyz0xEbx1mlvU2hlLLAq9THNVXkv9WZLuyTnAJ7wDGQ=;
+	b=nMjLIGMhPzWl5jsTaxCieUpBB546jYGaa+PrZGtvKdeJWGV3sijtHesKJxO1PYTWZd
+	47KPpAARm86LAlB4MvFrrc+g1tSw00JOasvhho7ptu2YzlvPqIbXdVO0ArDVFikWqSvu
+	kp2kEY+To2xo9RFE79MpNGaZ00PuKy5UqeXn3g2mDlJI6Vw1b9VUVHMQWGns/I+EV4B0
+	OZ/WR0bRRhQdV/p9/bMxQNB7VA1oIx71ZLUrNCcwSKcO/5ScnsXPnE+VnSvo1VtW6hDL
+	w+75lf77UKhRjesHlTGPquBTWR1/Ps9n6mHoNM1fGusvzKLXNxWX1ivrHrwmZ2JhKf2h
+	UTBw==
+X-Received: by 10.66.81.198 with SMTP id c6mr52740087pay.50.1356255572126;
+	Sun, 23 Dec 2012 01:39:32 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id wg3sm10273836pbc.28.2012.12.23.01.39.29
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 23 Dec 2012 01:39:30 -0800 (PST)
+Date: Sun, 23 Dec 2012 10:39:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Message-ID: <20121223093932.GF8988@jama.palm1.palmone.com>
 References: <20121220132241.10D7310354@opal>
 	<20121222200925.GD8988@jama.palm1.palmone.com>
-Date: Sun, 23 Dec 2012 09:03:56 +0000
-Message-ID: <CAJTo0LYQetj+657NjT+BHpg6jCOzUq63Ad2ghesThWvcLiSxcw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Gm-Message-State: ALoCoQlXv9+Z5SP2R1NhDi6lBzNAJai7JyNx6nmUBP52B0WHI71sSmRuFnHXYv/MFcVSF4fwJofo3EViqim1asKV0nzIRYZdEKwPKnUATa5+DTRkmqkzB4hvQIi8tdDuVp3biXk4IQGasYpwhV+BI4TZsShhMpXsyudXSjtXwKZ5Qpq53PyG7dYUrIvvdIxqmnbfCxuA2rxQ
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAJTo0LYQetj+657NjT+BHpg6jCOzUq63Ad2ghesThWvcLiSxcw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LYQetj+657NjT+BHpg6jCOzUq63Ad2ghesThWvcLiSxcw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [oe-commits] Ross Burton : python-mako: install standalone, not as an egg
@@ -50,23 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 09:18:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 23 Dec 2012 09:54:21 -0000
+X-Groupsio-MsgNum: 42327
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GV0iVqYguTV4Q9ER"
+Content-Disposition: inline
 
-On Saturday, 22 December 2012, Martin Jansa wrote:
+--GV0iVqYguTV4Q9ER
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> This is causing new QA issue, please fix that
->
-> python-mako-0.7.2: python-mako: Files/directories were installed but not
-> shipped
->
-> /home/jenkins/shr/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/mako-render
->
-> No idea why I haven't noticed it on first test..
->
+On Sun, Dec 23, 2012 at 09:03:56AM +0000, Burton, Ross wrote:
+> On Saturday, 22 December 2012, Martin Jansa wrote:
+>=20
+> > This is causing new QA issue, please fix that
+> >
+> > python-mako-0.7.2: python-mako: Files/directories were installed but not
+> > shipped
+> >
+> > /home/jenkins/shr/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64=
+-linux/usr/bin/mako-render
+> >
+> > No idea why I haven't noticed it on first test..
+> >
+>=20
+> Or how I'm sure I've never seen that. Maybe interaction with some ther
+> patch. Need to use setup tool.bbclass anyway, will investigate.
 
-Or how I'm sure I've never seen that. Maybe interaction with some ther
-patch. Need to use setup tool.bbclass anyway, will investigate.
+FWIW: python-mako builds without QA warnings after reverting this patch.
 
-Ross
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--GV0iVqYguTV4Q9ER
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDW0VQACgkQN1Ujt2V2gBwtvACfZZAHEehy1nzNp7FlyTzfFCqd
+K6gAnRRcD7RlhPUqL0cprDUZDyyty8rY
+=TPfa
+-----END PGP SIGNATURE-----
+
+--GV0iVqYguTV4Q9ER--
