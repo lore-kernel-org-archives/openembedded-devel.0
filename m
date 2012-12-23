@@ -1,38 +1,48 @@
-Received: from mail-ee0-f53.google.com ([74.125.83.53])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TmsEy-0002rr-9x
+Received: from 7.mo1.mail-out.ovh.net ([87.98.158.110]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TmtTN-0001BG-1Q
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 21:33:57 +0100
-Received: by mail-ee0-f53.google.com with SMTP id c50so3355889eek.40
+	Sun, 23 Dec 2012 22:52:42 +0100
+Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id 0540CFFA263
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 12:18:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=xhWjWCsq512SKPBXJ2ODZBzt6Shv2P5EtcJu56z/cYQ=;
-	b=KAip1vhyPgGvuN2EDzLqysFkzXQ+k63n9Hifv0idD2xqVghe6V54KGXP+Ilp2e5AXj
-	wOM3z93CZ88pX39eCIkvVET+EELRov3uP0umR0drgq8XMQxEe7Hzxs6s/Aj3gF+fd77A
-	D23rGLTpifR/klMkfIamkAK1KP8SjD9/mwSqFhqvysW7ONzGww8upqUgl2QpIqwUqQil
-	YWQ9b6u+XAqkLcJseMGxvEdWmywyExoLBjxWNub7RDL/zDob4aFi5I2shsvndPB+9Cnf
-	CIMUYRlls2wKCuIQBdK7dglL9VTYjObGDlzKvDAlqHYeD9698uMmPPrwiLFTycx7ycqT
-	xKjQ==
-X-Received: by 10.14.225.4 with SMTP id y4mr49692282eep.6.1356293934746;
-	Sun, 23 Dec 2012 12:18:54 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id v46sm36868420eep.1.2012.12.23.12.18.54
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 12:18:54 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 21:18:40 +0100
-Message-Id: <f0528a3f6ccba54d50e50e85f66a18339706d587.1356293852.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <c0cc8c325b1bc9f0010d37a282a11d3bf74f5d69.1356293852.git.Martin.Jansa@gmail.com>
-References: <cover.1356264861.git.Martin.Jansa@gmail.com>
-	<c0cc8c325b1bc9f0010d37a282a11d3bf74f5d69.1356293852.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1356293852.git.Martin.Jansa@gmail.com>
-References: <cover.1356293852.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 32/33] gvfs-gdu-volume-monitor: disable afc to fix build
+	Sun, 23 Dec 2012 22:34:42 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Dec 2012 23:21:49 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 23 Dec 2012 23:21:48 +0200
+Date: Sun, 23 Dec 2012 22:21:45 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Message-ID: <20121223222145.6785dca1@eb-e6520>
+In-Reply-To: <B7FA4357-A7A1-408A-AF1F-89062AAACF8D@dominion.thruhere.net>
+References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
+	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
+	<CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
+	<20121222100318.14a48e10@eb-e6520> <kb40tq$84p$1@ger.gmane.org>
+	<20121222120551.6916471a@eb-e6520>
+	<20121223154736.3c151ef8@eb-e6520>
+	<3DF8EBF7-61B4-4EBB-9C58-D1C63256FEF5@dominion.thruhere.net>
+	<20121223195357.5fc91a73@eb-e6520>
+	<B7FA4357-A7A1-408A-AF1F-89062AAACF8D@dominion.thruhere.net>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 8496885122351344917
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -100
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 20:33:58 -0000
+X-List-Received-Date: Sun, 23 Dec 2012 21:52:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* sometimes it autodetects libimobiledevice and fails to build:
-  | gvfsbackendafc.c: In function '_idevice_event_cb':
-  | gvfsbackendafc.c:352:25: error: 'idevice_event_t' has no member named 'uuid'
+Le Sun, 23 Dec 2012 20:36:29 +0100,
+Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
+> > I'll revert the patch tomorrow (monday)
+>=20
+> So how are you going to fix the upgrade paths? Version downgrades are a s=
+erious regression as well.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+upgrade path is not a problem here as builds are borken if we don't
+change a setting in the conf files so I'll revert it so that users
+don't need to change anything to their settings (and that won't
+even break angstrom as the fix is not yet pushed as you stated in your
+answer).
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-index 1939f09..f52e338 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.8.2.bb
-@@ -4,10 +4,10 @@ BPN = "gvfs"
- 
- DEPENDS = "gvfs gnome-disk-utility"
- 
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
- 
- # we need gdu files only: reduce files to delete in libexecdir
--EXTRA_OECONF += "--disable-gphoto2"
-+EXTRA_OECONF += "--disable-gphoto2 --disable-afc"
- 
- do_install_append() {
- 	rm -rf ${D}${sysconfdir}
--- 
-1.8.0.2
-
+Eric
 
 
