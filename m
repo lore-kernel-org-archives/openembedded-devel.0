@@ -1,37 +1,44 @@
-Received: from mail-ee0-f50.google.com ([74.125.83.50])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TmlRE-0004cW-L9
+Received: from 10.mo3.mail-out.ovh.net ([87.98.165.232]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1Tmn4M-0000b7-Kx
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 14:18:10 +0100
-Received: by mail-ee0-f50.google.com with SMTP id b45so3236987eek.37
+	Sun, 23 Dec 2012 16:02:26 +0100
+Received: from mail176.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id A58FCFF91F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 05:03:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=cbHbBsdZJdwYLGZi8RZ2Ep/VIbNbOJFI3CdFu2jshi8=;
-	b=SnXiAcLncmYBD+FU0oYjswJ/JgsqF5CNKTdEKz+ytP51pjKsSvWrqmZXPwPUQKsrcR
-	9P82JDqgF9vz9buhcZZT7/gWBKC7IV1iWp7oRTHgqrxx0BvO8MtHE764Q6r2f9q+GnV/
-	ZODungjW9wJSWAhQK657wH5Gxg5ohTyYUd6tOtNigezg6+KY0FJUzR5zDTLuDmMu829p
-	QCK58Ac983Czz4rGvtgcK5Opq0SvDeklGPatBLkS+r7jw98vXkz9/EdLmFmI/zCLZrOo
-	tEaLMOAJmhMpdjpc7F4nGM50l+6VMqkRs5dv5RMn+FgZX8qfwEGyz6ZlZ8sdutC+HfeS
-	Vp6w==
-X-Received: by 10.14.194.195 with SMTP id m43mr48266808een.44.1356267788315;
-	Sun, 23 Dec 2012 05:03:08 -0800 (PST)
-Received: from localhost.localdomain (p5B0A1394.dip.t-dialin.net.
-	[91.10.19.148])
-	by mx.google.com with ESMTPS id f49sm34747114eep.12.2012.12.23.05.03.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 05:03:07 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sun, 23 Dec 2012 16:00:06 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Dec 2012 16:47:39 +0200
+Received: from cug31-2-82-228-86-110.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.228.86.110)
+	by ns0.ovh.net with SMTP; 23 Dec 2012 16:47:37 +0200
+Date: Sun, 23 Dec 2012 15:47:36 +0100
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 14:02:37 +0100
-Message-Id: <1356267761-15152-9-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 08/12] xfce4-session: remove gnome-keyring dependency
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20121223154736.3c151ef8@eb-e6520>
+In-Reply-To: <20121222120551.6916471a@eb-e6520>
+References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
+	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
+	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
+	<CAMBWrQ=J8n9tm99UT0QvcU1oB4kUtpH+kguDUYfxWP7_u_TPYQ@mail.gmail.com>
+	<20121222100318.14a48e10@eb-e6520> <kb40tq$84p$1@ger.gmane.org>
+	<20121222120551.6916471a@eb-e6520>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 1840001923099241801
+X-Ovh-Remote: 82.228.86.110 (cug31-2-82-228-86-110.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgesmhdtreerredtvd
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecujfgurhepfffhvffukfgjfhhoofggtgesmhdtreerredtvd
+Cc: koen@dominion.thruhere.net
+Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,130 +52,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 13:18:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 23 Dec 2012 15:02:26 -0000
+X-Groupsio-MsgNum: 42374
+Content-Type: multipart/mixed; boundary="MP_/rm==wTSOn2GfUK//j/9L1ip"
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../files/0002-Remove-gnome-keyring-remains.patch  |   82 ++++++++++++++++++++
- .../xfce4-session/xfce4-session_4.10.0.bb          |    6 +-
- 2 files changed, 86 insertions(+), 2 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch
+--MP_/rm==wTSOn2GfUK//j/9L1ip
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch b/meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch
-new file mode 100644
-index 0000000..6d5e9c8
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch
-@@ -0,0 +1,82 @@
-+From 7a75a8a0f7089b716e702e6bb0cf13fc3194e3db Mon Sep 17 00:00:00 2001
-+From: Nick Schermer <nick@xfce.org>
-+Date: Sun, 29 Apr 2012 13:35:37 +0200
-+Subject: [PATCH] Remove gnome-keyring remains.
-+
-+Not required anymore. gnome_keyring_daemon_prepare_environment_sync
-+is a stub function that does nothing.
-+
-+Upstream-status: backport [1]
-+
-+[1] http://git.xfce.org/xfce/xfce4-session/commit/?id=7a75a8a0f7089b716e702e6bb0cf13fc3194e3db
-+---
-+ configure.in                   |    5 -----
-+ xfce4-session/Makefile.am         |    2 --
-+ xfce4-session/xfsm-compat-gnome.c |    8 --------
-+ 3 files changed, 0 insertions(+), 15 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index f8684b3..9aa4f8f 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -96,11 +96,6 @@ XDT_CHECK_PACKAGE([DBUS], [dbus-1], [1.1.0])
-+ XDT_CHECK_PACKAGE([DBUS_GLIB], [dbus-glib-1], [0.84])
-+ XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.9.0])
-+ 
-+-dnl Check for gnome support
-+-XDT_CHECK_OPTIONAL_PACKAGE([GNOME_KEYRING], [gnome-keyring-1], [2.22],
-+-                           [libgnome-keyring],
-+-                           [Extra gnome-keyring compatibility support], [no])
-+-
-+ dnl Check for debugging support
-+ XDT_FEATURE_DEBUG([xfsm_debug_default])
-+ 
-+diff --git a/xfce4-session/Makefile.am b/xfce4-session/Makefile.am
-+index 5e8343a..c015154 100644
-+--- a/xfce4-session/Makefile.am
-++++ b/xfce4-session/Makefile.am
-+@@ -66,7 +66,6 @@ xfce4_session_SOURCES =							\
-+ 	xfsm-upower.h
-+ 
-+ xfce4_session_CFLAGS =							\
-+-	$(GNOME_KEYRING_CFLAGS)						\
-+ 	$(LIBSM_CFLAGS)							\
-+ 	$(LIBX11_CFLAGS)						\
-+ 	$(LIBXFCE4UI_CFLAGS)						\
-+@@ -93,7 +92,6 @@ xfce4_session_LDADD =							\
-+ 	$(DBUS_GLIB_LIBS)						\
-+ 	$(LIBWNCK_LIBS)							\
-+ 	$(XFCONF_LIBS)							\
-+-	$(GNOME_KEYRING_LIBS)						\
-+ 	-lm
-+ 
-+ xfce4_session_DEPENDENCIES =						\
-+diff --git a/xfce4-session/xfsm-compat-gnome.c b/xfce4-session/xfsm-compat-gnome.c
-+index b5b4a99..e1fa16f 100644
-+--- a/xfce4-session/xfsm-compat-gnome.c
-++++ b/xfce4-session/xfsm-compat-gnome.c
-+@@ -59,10 +59,6 @@
-+ 
-+ #include <libxfce4util/libxfce4util.h>
-+ 
-+-#ifdef HAVE_GNOME_KEYRING
-+-#include <gnome-keyring.h>
-+-#endif
-+-
-+ #include <xfce4-session/xfsm-compat-gnome.h>
-+ 
-+ #define GNOME_KEYRING_DAEMON "gnome-keyring-daemon"
-+@@ -154,10 +150,6 @@ gnome_keyring_daemon_startup (void)
-+             }
-+ 
-+           g_strfreev (lines);
-+-
-+-#ifdef HAVE_GNOME_KEYRING
-+-          gnome_keyring_daemon_prepare_environment_sync ();
-+-#endif
-+         }
-+       else
-+         {
-+-- 
-+1.7.4.4
-+
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-index 4df9894..3bd3743 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-@@ -2,14 +2,16 @@ DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment
- SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring"
-+DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
- RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
-+PR = "r1"
- 
- inherit xfce
- 
- SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
- SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a72c46ce"
--SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch"
-+SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch \
-+            file://0002-Remove-gnome-keyring-remains.patch"
- 
- # protect from frightening message that xfce might not work correctly
- pkg_postinst_${PN} () {
--- 
-1.7.4.4
+Hi Koen,
 
+I need your help concerning denzil if you need to keep systemd 189
+there :
 
+with PREFERRED_PROVIDER_udev = "udev"
+systemd fails to package here
+(extract of systemd-git-r6/temp/log.do_package_write_ipk.20773
+attached : there are references to udev-182 in this log !).
 
+reverting 6e0ddd4526f3e0005babe9381c17c06c22a9eda3
+fix this problem.
+
+OE Build Configuration:
+BB_VERSION        = "1.15.2"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "mx35"
+DISTRO            = "defaultsetup"
+DISTRO_VERSION    = "oe-core.0"
+TUNE_FEATURES     = "armv6 vfp arm1136jfs"
+TARGET_FPU        = "vfp"
+meta-oe           
+toolchain-layer   
+meta-efl          
+meta-gpe          
+meta-gnome        
+meta-xfce         
+meta-initramfs    = "denzil:a6f56d7eabe50dc55198aa8b8b349dbbb40757b1"
+meta-fsl-arm      = "denzil:debea1a3c80227b33a3bbaa21c51435db1b3f5d7"
+meta-eukrea       =
+"denzil-yocto1.2:71ac1e8bfd09e726ed813b62aa5288a21873108a"
+meta              = "denzil:d35560f33f257bd12a07c7c0be770319086d6ad9"
+
+Do you have any idea on how to fix that ?
+
+Thanks,
+Eric
+
+--MP_/rm==wTSOn2GfUK//j/9L1ip
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename=udev_error.txt
+
+Packaged contents of udev-systemd into /scratch/eb/kr/setup-scripts/build/tmp-defaultsetup-eglibc-eglibc/work/arm
+v6-vfp-oe-linux-gnueabi/udev-182-r0/deploy-ipks/armv6-vfp/udev-systemd_182-r0_armv6-vfp.ipk
+ERROR: Error executing a python function in /scratch/eb/kr/setup-scripts/sources/meta-openembedded/meta-oe/recipe
+s-core/systemd/systemd_git.bb:
+OSError: [Errno 2] No such file or directory: '/scratch/eb/kr/setup-scripts/build/tmp-defaultsetup-eglibc-eglibc/
+work/armv6-vfp-oe-linux-gnueabi/udev-182-r0/packages-split/systemd-gui'
+
+ERROR: The stack trace of python calls that resulted in this exception/failure was:
+ERROR:   File "do_package_ipk", line 173, in <module>
+ERROR: 
+ERROR:   File "do_package_ipk", line 44, in do_package_ipk
+ERROR: 
+ERROR: The code that was being executed was:
+ERROR:      0169:               bb.utils.unlockfile(lf)
+ERROR:      0170:
+ERROR:      0171:
+ERROR:      0172:
+ERROR:  *** 0173:do_package_ipk(d)
+ERROR:      0174:
+ERROR: (file: 'do_package_ipk', lineno: 173, function: <module>)
+ERROR:      0040:               basedir = os.path.join(os.path.dirname(root))
+ERROR:      0041:               arch = localdata.getVar('PACKAGE_ARCH', True)
+ERROR:      0042:               pkgoutdir = "%s/%s" % (outdir, arch)
+ERROR:      0043:               bb.mkdirhier(pkgoutdir)
+ERROR:  *** 0044:               os.chdir(root)
+ERROR:      0045:               from glob import glob
+ERROR:      0046:               g = glob('*')
+ERROR:      0047:               try:
+ERROR:      0048:                       del g[g.index('CONTROL')]
+ERROR: (file: 'do_package_ipk', lineno: 44, function: do_package_ipk)
+ERROR: Function failed: do_package_ipk
+
+--MP_/rm==wTSOn2GfUK//j/9L1ip--
