@@ -1,37 +1,37 @@
-Received: from mail-ea0-f182.google.com ([209.85.215.182])
+Received: from mail-ee0-f51.google.com ([74.125.83.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TmkoY-00016i-Fr
+	(envelope-from <martin.jansa@gmail.com>) id 1Tmkoh-00019w-LN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 13:37:59 +0100
-Received: by mail-ea0-f182.google.com with SMTP id a14so2611205eaa.13
+	Sun, 23 Dec 2012 13:38:08 +0100
+Received: by mail-ee0-f51.google.com with SMTP id d4so3104756eek.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 04:23:10 -0800 (PST)
+	Sun, 23 Dec 2012 04:23:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=8upxV2agiDouYkIbrwDpsBJeTnv94F4UfKcq3/p/0RU=;
-	b=IogRUnYoTyJ6v6epzv+QsixWkdSd6DNXSh9XMSkqO1ruRtQtPknrIaoD9646ALJ02v
-	Di1r6NL82g626ixeYkzxzlTyuE7M7J8XZsDpngopxHDy65Zii9ClL+E+fvRCvpBZJDNc
-	G1jtfeUFso+uRg2zrbN4Q0vbB997DMIEHkLyZJV2UbA9AVtBuFxwz1WIGr2WohMOSjIz
-	00GcI1Yg3pAI+BqlGWoU5hngR9O+5oRuPs7vC5NFONwKvwKqJ+HSAsbztW59cvIWPxcC
-	Vox8QBoJ07oZy2MzoFQBSvQSV7wE2mbn3llgG8pBzUhQso9SRTh+7B/1iSlsNJKPVh3j
-	OcMw==
-X-Received: by 10.14.174.132 with SMTP id x4mr47145918eel.39.1356265390163;
-	Sun, 23 Dec 2012 04:23:10 -0800 (PST)
+	bh=NWbeymOO0gUe6RTNq3veB2H34JxB+yummsh8rhqx94A=;
+	b=DhVg2zrYa+PCmpU92CSb2SmXsuvJKUQ1LAlj6mds+OTuVZfx19wneJB9zRk07yVNjb
+	ReI3SWChoccCkHpskOl4aFKFrKOqKxkMXGdsraRSSVHYCtgcNm2Z2kl9L3I7ovlUaNSZ
+	0NKBGC/tv4ubWnpdTlnODPBoecS6QBAI5OY6MEkcsNyD+JpgNMfbIUav79CIp63VV2/K
+	Pdzpxu4aEWmCIhdq0THT9vPmq+2RbGrN0Lw3URwB9889UuxaHoqv84E0bXXs5GuusIsQ
+	Z1/5v85WeW3ejhur18ZF8uEj0+9+pnXgAz83M9w0LGym9j9upwYjI76X7Tkbx8fMJVo2
+	cHhw==
+X-Received: by 10.14.215.6 with SMTP id d6mr47778727eep.40.1356265399351;
+	Sun, 23 Dec 2012 04:23:19 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id k4sm34569263eep.15.2012.12.23.04.23.09
+	by mx.google.com with ESMTPS id f49sm34555355eep.12.2012.12.23.04.23.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 04:23:09 -0800 (PST)
+	Sun, 23 Dec 2012 04:23:18 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 13:21:33 +0100
-Message-Id: <28c25eb268b4f40a2c16a249d7a9fb7d8a94909a.1356264861.git.Martin.Jansa@gmail.com>
+Date: Sun, 23 Dec 2012 13:21:34 +0100
+Message-Id: <f7b703f4af4bbadb48e26ea93e54a91f00cb1a57.1356264861.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/30] abiword: fix build with libpng-1.5 from oe-core
+Subject: [meta-oe][PATCH 09/30] fltk: fix build with libpng-1.5 from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,147 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 12:38:00 -0000
+X-List-Received-Date: Sun, 23 Dec 2012 12:38:08 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/abiword/abiword/libpng15.patch   | 102 +++++++++++++++++++++
- meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb  |   6 +-
- 2 files changed, 106 insertions(+), 2 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/abiword/abiword/libpng15.patch
+ .../fltk/fltk-1.1.10/libpng15.patch                | 61 ++++++++++++++++++++++
+ meta-oe/recipes-support/fltk/fltk_1.1.10.bb        |  3 ++
+ 2 files changed, 64 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fltk/fltk-1.1.10/libpng15.patch
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/libpng15.patch b/meta-gnome/recipes-gnome/abiword/abiword/libpng15.patch
+diff --git a/meta-oe/recipes-support/fltk/fltk-1.1.10/libpng15.patch b/meta-oe/recipes-support/fltk/fltk-1.1.10/libpng15.patch
 new file mode 100644
-index 0000000..0fc93c5
+index 0000000..b2eb8d6
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/abiword/abiword/libpng15.patch
-@@ -0,0 +1,102 @@
++++ b/meta-oe/recipes-support/fltk/fltk-1.1.10/libpng15.patch
+@@ -0,0 +1,61 @@
 +Imported from gentoo
++http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/x11-libs/fltk/files/fltk-1.1.10-libpng15.patch
 +
-+$NetBSD: patch-plugins_bmp_xp_ie__impGraphic__BMP.cpp,v 1.1 2011/02/01 10:48:15 wiz Exp $
-+
-+Fix build with png-1.5.
-+
-+--- a/plugins/bmp/xp/ie_impGraphic_BMP.cpp.orig	2009-06-25 04:02:06.000000000 +0000
-++++ b/plugins/bmp/xp/ie_impGraphic_BMP.cpp
-+@@ -191,7 +191,10 @@ UT_Error IE_ImpGraphic_BMP::_convertGrap
++--- a/src/Fl_PNG_Image.cxx
+++++ b/src/Fl_PNG_Image.cxx
++@@ -66,7 +66,8 @@ Fl_PNG_Image::Fl_PNG_Image(const char *png) // I - File to read
++   png_structp	pp;			// PNG read pointer
++   png_infop	info;			// PNG info pointers
++   png_bytep	*rows;			// PNG row pointers
++-
+++  png_byte     color_type;             // PNG color type
+++  png_byte     bit_depth;              // PNG bit depth
 + 
-+ 	/* Clean Up Memory Used */
-+ 		
-+-	FREEP(m_pPNGInfo->palette);
-++	png_colorp palette;
-++	int num_palette;
-++	png_get_PLTE( m_pPNG, m_pPNGInfo, &palette, &num_palette );
-++	FREEP(palette);
-+ 	DELETEP(pBB);
-+ 	png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+    
-+@@ -313,7 +316,7 @@ UT_Error IE_ImpGraphic_BMP::Initialize_P
-+ 	 * the normal method of doing things with libpng).  REQUIRED unless you
-+ 	 * set up your own error handlers in the png_create_read_struct() earlier.
-+ 	 */
-+-	if (setjmp(m_pPNG->jmpbuf))
-++	if (setjmp(png_jmpbuf(m_pPNG)))
-+ 	{
-+ 		/* Free all of the memory associated with the png_ptr and info_ptr */
-+ 		png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+@@ -332,7 +335,7 @@ UT_Error IE_ImpGraphic_BMP::Initialize_P
-+ 	UT_Error IE_ImpGraphic_BMP::Convert_BMP_Pallet(UT_ByteBuf* pBB)
-+ 	{
-+ 		/* Reset error handling for libpng */
-+-		if (setjmp(m_pPNG->jmpbuf))
-++		if (setjmp(png_jmpbuf(m_pPNG)))
-+ 		{
-+ 			png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+ 			return UT_ERROR;
-+@@ -372,7 +375,7 @@ UT_Error IE_ImpGraphic_BMP::Initialize_P
-+ UT_Error IE_ImpGraphic_BMP::Convert_BMP(UT_ByteBuf* pBB)
-+ {
-+ 	/* Reset error handling for libpng */
-+-	if (setjmp(m_pPNG->jmpbuf))
-++	if (setjmp(png_jmpbuf(m_pPNG)))
-+ 	{
-+ 		png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+ 		return UT_ERROR;
-+
-+$NetBSD: patch-plugins_garble_xp_abiword-garble-png.cpp,v 1.1 2011/02/01 10:48:15 wiz Exp $
-+
-+Fix build with png-1.5.
-+
-+--- a/plugins/garble/xp/abiword-garble-png.cpp.orig	2009-09-05 15:34:44.000000000 +0000
-++++ b/plugins/garble/xp/abiword-garble-png.cpp
-+@@ -79,7 +79,7 @@ bool abiword_document::garble_png( void*
-+ 		png_set_strip_alpha( png_ptr );
-+ 		png_set_interlace_handling( png_ptr );
-+ 		png_set_bgr( png_ptr );
-+-		rowbytes = info_ptr->rowbytes;
-++		rowbytes = png_get_rowbytes( png_ptr, info_ptr );
-+ 		png_destroy_read_struct( &png_ptr, &info_ptr, NULL );
-+ 	}
++   // Open the PNG file...
++   if ((fp = fopen(png, "rb")) == NULL) return;
++@@ -75,7 +76,7 @@ Fl_PNG_Image::Fl_PNG_Image(const char *png) // I - File to read
++   pp   = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
++   info = png_create_info_struct(pp);
 + 
-+$NetBSD: patch-af,v 1.12 2011/01/15 15:07:11 wiz Exp $
++-  if (setjmp(pp->jmpbuf))
+++  if (setjmp(png_jmpbuf(pp)))
++   {
++     Fl::warning("PNG file \"%s\" contains errors!\n", png);
++     return;
++@@ -86,28 +87,24 @@ Fl_PNG_Image::Fl_PNG_Image(const char *png) // I - File to read
++ 
++   // Get the image dimensions and convert to grayscale or RGB...
++   png_read_info(pp, info);
+++  color_type = png_get_color_type(pp, info);
++ 
++-  if (info->color_type == PNG_COLOR_TYPE_PALETTE)
+++  if (color_type == PNG_COLOR_TYPE_PALETTE)
++     png_set_expand(pp);
++ 
++-  if (info->color_type & PNG_COLOR_MASK_COLOR)
++-    channels = 3;
++-  else
++-    channels = 1;
++-
++-  if ((info->color_type & PNG_COLOR_MASK_ALPHA) || info->num_trans)
++-    channels ++;
+++  channels = png_get_channels(pp, info);
++ 
++-  w((int)(info->width));
++-  h((int)(info->height));
+++  w((int)(png_get_image_width(pp, info)));
+++  h((int)(png_get_image_height(pp, info)));
++   d(channels);
++ 
++-  if (info->bit_depth < 8)
+++  bit_depth = png_get_bit_depth(pp, info);
+++  if (bit_depth < 8)
++   {
++     png_set_packing(pp);
++     png_set_expand(pp);
++   }
++-  else if (info->bit_depth == 16)
+++  else if (bit_depth == 16)
++     png_set_strip_16(pp);
++ 
++ #  if defined(HAVE_PNG_GET_VALID) && defined(HAVE_PNG_SET_TRNS_TO_ALPHA)
+diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+index ad8768d..bf218ee 100644
+--- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
++++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+@@ -6,9 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c0b73db66884b6a925e727400315130"
+ 
+ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
+ 
++PR = "r1"
 +
-+Fix build with png-1.5.
-+
-+--- a/src/wp/impexp/gtk/ie_impGraphic_GdkPixbuf.cpp.orig	2009-07-01 04:02:04.000000000 +0000
-++++ b/src/wp/impexp/gtk/ie_impGraphic_GdkPixbuf.cpp
-+@@ -185,7 +185,7 @@ UT_Error IE_ImpGraphic_GdkPixbuf::import
-+ /** needed for the stejmp context */
-+ UT_Error IE_ImpGraphic_GdkPixbuf::_png_write(GdkPixbuf * pixbuf)
-+ {
-+-	if (setjmp(m_pPNG->jmpbuf))
-++	if (setjmp(png_jmpbuf(m_pPNG)))
-+ 	{
-+ 		DELETEP(m_pPngBB);
-+ 		png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+@@ -446,7 +446,7 @@ UT_Error IE_ImpGraphic_GdkPixbuf::Initia
-+ 	 * the normal method of doing things with libpng).  REQUIRED unless you
-+ 	 * set up your own error handlers in the png_create_read_struct() earlier.
-+ 	 */
-+-	if (setjmp(m_pPNG->jmpbuf))
-++	if (setjmp(png_jmpbuf(m_pPNG)))
-+ 	{
-+ 		/* Free all of the memory associated with the png_ptr and info_ptr */
-+ 		png_destroy_write_struct(&m_pPNG, &m_pPNGInfo);
-+$NetBSD: patch-ae,v 1.21 2011/01/15 15:07:11 wiz Exp $
-+
-+Fix build with png-1.5.
-+
-+--- a/src/af/util/xp/ut_png.cpp.orig	2008-02-24 03:33:07.000000000 +0000
-++++ b/src/af/util/xp/ut_png.cpp
-+@@ -71,7 +71,7 @@ bool UT_PNG_getDimensions(const UT_ByteB
-+ 	 * the normal method of doing things with libpng).  REQUIRED unless you
-+ 	 * set up your own error handlers in the png_create_read_struct() earlier.
-+ 	 */
-+-	if (setjmp(png_ptr->jmpbuf))
-++	if (setjmp(png_jmpbuf(png_ptr)))
-+ 	{
-+ 		/* Free all of the memory associated with the png_ptr and info_ptr */
-+ 		png_destroy_read_struct(&png_ptr, &info_ptr, static_cast<png_infopp>(NULL));
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
-index c4bf344..a2cd1cc 100644
---- a/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
-+++ b/meta-gnome/recipes-gnome/abiword/abiword_2.8.6.bb
-@@ -13,7 +13,9 @@ SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
-            file://autogen-common.sh \
-            file://nodolt.patch \
-            file://fix.no.undefined.param.patch \
--           file://abiword.fix.glib-2.32.patch"
-+           file://abiword.fix.glib-2.32.patch \
+ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
+            file://disable_test.patch \
+            file://dso-fix.patch \
 +           file://libpng15.patch \
-+"
+           "
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
- 
-@@ -23,7 +25,7 @@ SRC_URI[sha256sum] = "d99089a63a6cfc1a6a4a026be9278028d47d224088d24b1853acb67e95
- #want 2.x from 2.x.y for the installation directory
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
- 
--PR = "r7"
-+PR = "r8"
- 
- inherit autotools pkgconfig
- 
+ S = "${WORKDIR}/fltk-${PV}"
 -- 
 1.8.0.2
 
