@@ -1,37 +1,37 @@
-Received: from mail-ee0-f50.google.com ([74.125.83.50])
+Received: from mail-ee0-f43.google.com ([74.125.83.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tmkrh-0001yX-MQ
+	(envelope-from <martin.jansa@gmail.com>) id 1TmkrY-0001yI-Eb
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 23 Dec 2012 13:41:28 +0100
-Received: by mail-ee0-f50.google.com with SMTP id b45so3259493eek.9
+Received: by mail-ee0-f43.google.com with SMTP id e49so3235759eek.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 04:26:25 -0800 (PST)
+	Sun, 23 Dec 2012 04:26:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=dCVdhab+HU5PAVV+p8DG691cDFXAh7xz/nJE6QP/w+c=;
-	b=g3I8U/CsuiZSn3sCK7NcFC0TYFtcjQV//hLZxVENjc6m67u7YoXmocF/fQxwKJmJ6j
-	fpOFtfp7HInUu5up8FY1/talb7w1/40g88OCyu40jfQhPXODwo6OTiNQXTIgntJO4j+G
-	9VGQxxg3z+D59sHbjttG8b92f/995/xGCPnWj/t5cj+Nvar3n1980LnLC/AjL6ArSxOQ
-	1x5dY133GjBc5mEUs5SeRMsyfIgLsZ1+/r3v3BJCoratNAa85w8LawIpZuqET6jxC1ue
-	zwvtwCl5ZvM9p24w7/fx+Zz2yJizUoNYAZubkJSh/4vcohOBZmTiaGQz4iH619T3mzX5
-	By0w==
-X-Received: by 10.14.2.196 with SMTP id 44mr47886652eef.25.1356265585381;
-	Sun, 23 Dec 2012 04:26:25 -0800 (PST)
+	bh=YCpCy4YZH8VhfJyYCMaDLTI1tNdDBF24vB3893K6SoE=;
+	b=lc28ZhXJnGn+71jtwnaxlBYiiXyyf4Sk4ZbPx1cOtfqCyQq/UtE6h6uIsI3OaoeatN
+	Ht+4SWP9nM25c3PN+EHj0CN24uRrWUsCRfO6GI62djrH3ZLTKCv966Z0hZRxX3KTXijh
+	xn73ahPvqE1vRIv2KrLhyRhzyI7+9g4995gWPQmrLwCK4cER4fkJ2pYFWwLCm5ZrT4Y+
+	4Syq5TkKGX0Yz7ISZjpjJV5iaDaEsmSiFDstWrSIxjy88Ph8wXWE6pzLMXar97GNbUvF
+	55ppUvkL1+fxj4DhGsZi5AVl2KHgbn3SuIkGlrGQqjQz6J8FR7+GqpDzb1piBBx4ru8/
+	6w6Q==
+X-Received: by 10.14.221.65 with SMTP id q41mr47759445eep.30.1356265576141;
+	Sun, 23 Dec 2012 04:26:16 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 43sm34566295eed.10.2012.12.23.04.26.24
+	by mx.google.com with ESMTPS id v46sm34570559eep.1.2012.12.23.04.26.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 04:26:24 -0800 (PST)
+	Sun, 23 Dec 2012 04:26:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 13:21:55 +0100
-Message-Id: <a211d495558f7d1e9ecb53da457c5e34bc5ee40c.1356264861.git.Martin.Jansa@gmail.com>
+Date: Sun, 23 Dec 2012 13:21:54 +0100
+Message-Id: <e5f7cfd9b5d2cab42111e46b5ae33bcc1d5a9af3.1356264861.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 30/30] nautilus3: fix packaging issue
+Subject: [meta-oe][PATCH 29/30] pavucontrol: upgrade to 1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +47,61 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 23 Dec 2012 12:41:43 -0000
 
-* ERROR: QA Issue: non debug package contains .debug directory: nautilus3 path /work/armv5te-oe-linux-gnueabi/nautilus3/3.2.1-r3/packages-split/nautilus3/usr/lib/nautilus/extensions-3.0/.debug/libnautilus-sendto.so
+* also fixes build without lynx:
+| make[2]: Entering directory `/OE/shr-core/tmp-eglibc/work/x86_64-oe-linux/pavucontrol/0.9.10+git-r1/git/doc'
+| make[2]: *** No rule to make target `README', needed by `all-am'.  Stop.
+| make[2]: Leaving directory `/OE/shr-core/tmp-eglibc/work/x86_64-oe-linux/pavucontrol/0.9.10+git-r1/git/doc'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ .../recipes-multimedia/pulseaudio/pavucontrol_1.0.bb    | 13 +++++++++++++
+ .../recipes-multimedia/pulseaudio/pavucontrol_git.bb    | 17 -----------------
+ 2 files changed, 13 insertions(+), 17 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol_1.0.bb
+ delete mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol_git.bb
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
-index 728e718..488df1c 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb
-@@ -6,7 +6,7 @@ LICENSE="GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426 \
-                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
- 
--PR = "r3"
-+PR = "r4"
- 
- DEPENDS = "libnotify3 gtk+3 libunique gvfs librsvg libexif gnome-desktop3"
- # optional: tracker
-@@ -35,7 +35,8 @@ FILES_${PN} += "${datadir}/icons \
-                 ${datadir}/dbus-1 \
-                 ${libdir}/nautilus/extensions*/*.so \
-                "
--FILES_${PN}-dbg += "/usr/libexec/.debug"
-+FILES_${PN}-dbg += "/usr/libexec/.debug \
-+  ${libdir}/nautilus/extensions*/.debug"
- 
- # Don't make nautils drag us in
- PRIVATE_LIBS = "libnautilus-extension.so.1"
+diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_1.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_1.0.bb
+new file mode 100644
+index 0000000..b648351
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_1.0.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based volume control tool ("mixer") for the PulseAudio sound server."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
++
++DEPENDS = "intltool gtkmm libcanberra pulseaudio"
++
++inherit gnome
++
++SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz"
++SRC_URI[md5sum] = "0ab6b13542af9b4417438527d2524316"
++SRC_URI[sha256sum] = "3dbe2865b6e3a195a8951967d9234f62cd254c30b08bdea1ecf8997b58f68cde"
++
++EXTRA_OECONF = " --disable-gtk3 --disable-lynx "
+diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_git.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_git.bb
+deleted file mode 100644
+index 0975e9b..0000000
+--- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_git.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-DESCRIPTION = "ulseAudio Volume Control (pavucontrol) is a simple GTK based volume control tool ("mixer") for the PulseAudio sound server."
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+-
+-DEPENDS = "intltool gtkmm libcanberra pulseaudio"
+-
+-inherit gnome
+-
+-PV = "0.9.10+git"
+-
+-SRCREV = "50efee1180a785f297ce6dc38b349ee7e28c8129"
+-SRC_URI = "git://anongit.freedesktop.org/pulseaudio/pavucontrol;protocol=git"
+-S = "${WORKDIR}/git"
+-
+-EXTRA_OECONF = " --disable-gtk3 "
+-
+-
 -- 
 1.8.0.2
 
