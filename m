@@ -1,37 +1,38 @@
-Received: from mail-ea0-f169.google.com ([209.85.215.169])
+Received: from mail-ea0-f176.google.com ([209.85.215.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TmsEo-0002rY-82
+	(envelope-from <martin.jansa@gmail.com>) id 1TmsF6-0002u2-Ng
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 21:33:37 +0100
-Received: by mail-ea0-f169.google.com with SMTP id a12so2599458eaa.14
+	Sun, 23 Dec 2012 21:33:57 +0100
+Received: by mail-ea0-f176.google.com with SMTP id d13so2715960eaa.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 12:18:45 -0800 (PST)
+	Sun, 23 Dec 2012 12:19:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=CWk4O7Hc97C9oEWrjim97UCspRcEDny1lzEvNkhq0pU=;
-	b=ipH3PZumuICmwjNJXSQS0s+/N1BdPt/6M+zuUxzl2snXuN+L3AJP/YtHmTelPTc0UZ
-	w5xEmqrKDGP8u19Z5BXC/ey6w2W5JU6TXglO+/eEihHRufai3I93yhBwDRw4eAQb94Mc
-	TqUR1pjUxmDnXK1qBQTnDbuuRYO/dpoXuQ+P/63n85AO5yxKB/7lccBrOoJVPtyI0QAN
-	zjYmvHJKXOgQCx4fMGw9Zu0NXq+swodbz6KpNsMlcxsSJo3FyIBz6YYswaFfEqROZXUs
-	o20KwPDrVRAyfnnuogbM+ml1vV0KHxDyOGI+Gw5U1KoMl9aiC/m+iWsPc0VQ2YdqsXSL
-	Wh+A==
-X-Received: by 10.14.203.2 with SMTP id e2mr50043836eeo.20.1356293925427;
-	Sun, 23 Dec 2012 12:18:45 -0800 (PST)
+	bh=FopXVKR6mwdlwi2hTIqyYJM3KPoskhR57RorSj+Q2aU=;
+	b=JMj/JaMqltgUZNsJuCMPraRieK4pFvdX+gAhdoEytDfGkVHo45eOn6YsxcmOMrbT7w
+	zHophR1TB6Fxh9kM3K5z/TxeEP6/fKnSoLtDvfL4ednmgoOFpoQDbNycqiFAVYHc2od8
+	XbtpUapFp0DKysrzdd1FCJVl3yqYCeK3OSpP7DcpxK4tZQg9pIQvI+pong/pndab/zPy
+	U/O+Ea9agFiI3NarVDoyyw1p1yzP+vTSGdkefynzKjjvzPIcsajaaXqpGanSgQT2PYLT
+	oAooBItPrOfYvV1Hk6TpeUMtJJSnpaSsYOuGmoB48PeSbQOt7JvTMPhPOaSHk6D/ehyr
+	uOpA==
+X-Received: by 10.14.0.71 with SMTP id 47mr49641926eea.19.1356293943992;
+	Sun, 23 Dec 2012 12:19:03 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id b49sm36895085eem.16.2012.12.23.12.18.44
+	by mx.google.com with ESMTPS id 43sm36864561eed.10.2012.12.23.12.19.03
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 12:18:44 -0800 (PST)
+	Sun, 23 Dec 2012 12:19:03 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 21:18:39 +0100
-Message-Id: <c0cc8c325b1bc9f0010d37a282a11d3bf74f5d69.1356293852.git.Martin.Jansa@gmail.com>
+Date: Sun, 23 Dec 2012 21:18:41 +0100
+Message-Id: <375cc13d2a0fcfa8516828fddc8abbb7a1a9c263.1356293852.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
+In-Reply-To: <c0cc8c325b1bc9f0010d37a282a11d3bf74f5d69.1356293852.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
+	<c0cc8c325b1bc9f0010d37a282a11d3bf74f5d69.1356293852.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1356293852.git.Martin.Jansa@gmail.com>
 References: <cover.1356293852.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 31/33] f2fs-tools: change SRC_URI to use git repo on kernel.org
+Subject: [meta-oe][PATCH 33/33] zenity: fix typo in do_configure name and disable scrollkeeper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 20:33:37 -0000
-
-* sf does not provide tarballs anymore:
-  The f2fs-tools is no longer maintained through sf.net.
-  Instead, please access the following url.
-  http://git.kernel.org/?p=linux/kernel/git/jaegeuk/f2fs-tools.git;a=summary
+X-List-Received-Date: Sun, 23 Dec 2012 20:33:58 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-index cce9af1..292a88a 100644
---- a/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-+++ b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-@@ -4,9 +4,9 @@ HOMEPAGE = "http://sourceforge.net/projects/f2fs-tools/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=15667d9b3cb737b57471c148b7c50734"
+diff --git a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
+index b4a9a47..a1fa786 100644
+--- a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
+@@ -2,14 +2,17 @@ DESCRIPTION = "Display dialog boxes from the commandline and shell scripts"
+ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/f2fs-tools/f2fs-tools-${PV}.tar.gz"
--SRC_URI[md5sum] = "cf3608ea7475c8f9a03159d7f22e4d07"
--SRC_URI[sha256sum] = "afd774b80f73721f2c4300c0b4780a24b705b8328df229f3ae37315c8bfbff1d"
-+SRCREV = "da59f6146c37e727bb83ae4922ca56d42958e61c"
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;protocol=git"
-+S = "${WORKDIR}/git"
++PR = "r1"
++
+ DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils"
  
- inherit autotools
+ inherit gnome
+ SRC_URI[archive.md5sum] = "aa66ec35451b16e424519b4973082170"
+ SRC_URI[archive.sha256sum] = "8838be041a07364b62a4281c971392e4a09bb01bb3237a836ec0457ec0ea18ac"
+ 
++EXTRA_OECONF += "--disable-scrollkeeper"
+ # remove -I/usr/include from zenity_CPPFLAGS
+-do_cconfigure_prepend() {
++do_configure_prepend() {
+ 	sed -i -e '/-I$(includedir)/d' src/Makefile.am
+ }
  
 -- 
 1.8.0.2
