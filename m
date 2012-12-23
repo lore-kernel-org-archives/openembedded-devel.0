@@ -1,37 +1,35 @@
-Received: from mail-ea0-f177.google.com ([209.85.215.177])
+Received: from mail-ea0-f170.google.com ([209.85.215.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TmlR1-0004bt-Ou
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TmlQz-0004bn-5p
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 23 Dec 2012 14:17:47 +0100
-Received: by mail-ea0-f177.google.com with SMTP id c10so2505325eaa.36
+Received: by mail-ea0-f170.google.com with SMTP id d11so2512864eaa.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 05:02:55 -0800 (PST)
+	Sun, 23 Dec 2012 05:02:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=WRdP9PeT2wxwk8SGmG3feRBCwPcawQsaaueJ12nGiLE=;
-	b=ueIuyj9gh89zMd4nQAGCYFzfZCSbNQg5SLdaSPc1HElEOFtzqde8EVQv6LFUKOqCjn
-	8a/omlGiVXp4V7O+E/DabepKq089bKvVbfJxXFmFWh/V8hGZcq9a6Yr2kpFIDNABRN20
-	DPchVv1LL3ZxGkzoImSvW4p5F9LtZ2a9IsDFi0qQXBBC4QlOBcbNtN/eW2FPLNC52Xmx
-	SFWL0SrpV4aEzQcIsf4EeUI825ikyNkm91A4R5BML21h6IMzMCApTQl48QdBGg9aHatV
-	w0Mp8+4u/JUF0DUgYC5F0Ins2x7ZI1W+joxuwsVF7w20ekHVZMXjbg6Nwn87EChy1G1m
-	I4SQ==
-X-Received: by 10.14.225.4 with SMTP id y4mr47649448eep.6.1356267775460;
-	Sun, 23 Dec 2012 05:02:55 -0800 (PST)
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=INdSQyaKQH1b3TpVJ9FASjo7QjByLKLKgVF5RCOGL3w=;
+	b=kj+KBUZgRh/VX80A8EZ/yySIL/rO7u8yi5c9uNrAJ9Ap49ZtUY0H84GJDsFsrwpbmg
+	QOrXZMKSTO+6938gpFQ+fbEES2gCgEntnripO+ltSO5JepFcrs4BOB66dthcnEgsuSJ1
+	POPn0w+yIDe8Nw4YvNf3TJWKS3ZFRq7UifEABo+DvtYTLTgSMxkQfVLnofQIr/Y8vvj4
+	UPACuc1Kq3D2bnaHYQqDh1B3DZHtT3hlYfUkAEcbGsiUBPqgmyYS6pGvgkjykUmp4hYU
+	YaLT0T5UXE424ZLGnGNU26fKR4tiQde/SimyYW99WHpbB8b6Y+h+bqhdEPbuPA0t3una
+	lhHA==
+X-Received: by 10.14.184.134 with SMTP id s6mr47712478eem.43.1356267772611;
+	Sun, 23 Dec 2012 05:02:52 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1394.dip.t-dialin.net.
 	[91.10.19.148])
-	by mx.google.com with ESMTPS id f49sm34747114eep.12.2012.12.23.05.02.54
+	by mx.google.com with ESMTPS id f49sm34747114eep.12.2012.12.23.05.02.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 05:02:54 -0800 (PST)
+	Sun, 23 Dec 2012 05:02:51 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 14:02:31 +0100
-Message-Id: <1356267761-15152-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 23 Dec 2012 14:02:29 +0100
+Message-Id: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 02/12] xcursorgen: initial add 1.0.5
+Subject: [meta-xfce/meta-gnome 00/12] meta-xfce updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +44,71 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 23 Dec 2012 13:17:49 -0000
-X-List-Received-Date: Sun, 23 Dec 2012 13:17:49 -0000
-X-List-Received-Date: Sun, 23 Dec 2012 13:17:49 -0000
-X-List-Received-Date: Sun, 23 Dec 2012 13:17:49 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../xcursorgen/xcursorgen_1.0.5.bb                 |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xcursorgen/xcursorgen_1.0.5.bb
+The following changes since commit a623fd942f6561a425278cf9f114d212d06e5982:
 
-diff --git a/meta-oe/recipes-graphics/xcursorgen/xcursorgen_1.0.5.bb b/meta-oe/recipes-graphics/xcursorgen/xcursorgen_1.0.5.bb
-new file mode 100644
-index 0000000..e5ece21
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xcursorgen/xcursorgen_1.0.5.bb
-@@ -0,0 +1,12 @@
-+LICENSE = "ManishSingh"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bd1fb9ee90eead85f7b171807b3ab4f2"
-+
-+DEPENDS = "libpng libxcursor"
-+
-+SRC_URI = "http://xorg.freedesktop.org/archive/individual/app/${BPN}-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "09f56978a62854534deacc8aa8ff3031"
-+SRC_URI[sha256sum] = "bc7171a0fa212da866fca2301241630e2009aea8c4ddb75f21b51a31c2e4c581"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND = "native"
--- 
-1.7.4.4
+  samba: disable avahi and build without acl (2012-12-21 16:45:28 +0100)
+
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
+
+Andreas Müller (12):
+      icon-slicer: initial add 0.3
+      xcursorgen: initial add 1.0.5
+      openzone: Initial add 1.2.3
+      xfce4-settings: add garcon to DEPENDS
+      xfce4-settings: add a 'Touchscreen pointer' option in mouse settings
+      xfce4-settings: Remember the settings manager window size
+      xfce4-settings: update to 4.11.0
+      xfce4-session: remove gnome-keyring dependency
+      xfce4-session: Add shutdown/reboot functionality for systemd
+      lxdm: disable keyboard selection
+      samba: add new package libwbclient to avoid libsmbclient dragging in samba
+      gvfs: reenable gvfs-smb
+
+ .../gvfs/gvfs-gdu-volume-monitor_1.8.2.bb          |    3 +-
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |    5 +-
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb        |    2 +-
+ meta-oe/recipes-connectivity/samba/samba-basic.inc |    3 +-
+ .../files/0001-Makefile.am-no-examples.patch       |   27 +
+ .../icon-slicer/icon-slicer_0.3.bb                 |   13 +
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |    3 +-
+ .../xcursorgen/xcursorgen_1.0.5.bb                 |   12 +
+ ...n-reboot-functionality-for-systemd-bug-87.patch |  482 ++++++++
+ .../xfce4-session/xfce4-session_4.10.0.bbappend    |    8 +
+ .../recipes-art/cursor-themes/openzone_1.2.3.bb    |   29 +
+ .../files/0002-Remove-gnome-keyring-remains.patch  |   82 ++
+ .../xfce4-session/xfce4-session_4.10.0.bb          |    6 +-
+ ...the-settings-manager-window-size-bug-9384.patch |  155 +++
+ .../0001-add-cursor-theme-xfce-invisible.patch     |  248 ++++
+ ...ngs-dialog-add-touchscreen-pointer-option.patch | 1233 ++++++++++++++++++++
+ ...sHelper-gets-a-pointer-to-XfceXSettingsHe.patch |  137 +++
+ ...gsHelper-gets-a-property-touchscreen-poin.patch |  249 ++++
+ ...tect-a-change-of-pointer-device-used-and-.patch |  582 +++++++++
+ .../xfce4-settings/touchscreen/invisible           |  Bin 0 -> 4160 bytes
+ .../xfce4-settings/xfce4-settings/touchscreen/wait |  Bin 0 -> 126096 bytes
+ .../xfce4-settings/xfce4-settings_4.10.0.bb        |   16 -
+ .../xfce4-settings/xfce4-settings_4.11.0.bb        |   31 +
+ 23 files changed, 3300 insertions(+), 26 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/icon-slicer/files/0001-Makefile.am-no-examples.patch
+ create mode 100644 meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
+ create mode 100644 meta-oe/recipes-graphics/xcursorgen/xcursorgen_1.0.5.bb
+ create mode 100644 meta-systemd/meta-xfce/recipes-xfce/xfce4-session/files/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch
+ create mode 100644 meta-systemd/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend
+ create mode 100644 meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/0003-Remember-the-settings-manager-window-size-bug-9384.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/0001-add-cursor-theme-xfce-invisible.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/0002-mouse-settings-dialog-add-touchscreen-pointer-option.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/0003-XfcePointersHelper-gets-a-pointer-to-XfceXSettingsHe.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/0004-XfceXSettingsHelper-gets-a-property-touchscreen-poin.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/0005-pointers-detect-a-change-of-pointer-device-used-and-.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/invisible
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/touchscreen/wait
+ delete mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.10.0.bb
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.11.0.bb
 
 
 
