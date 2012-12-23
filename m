@@ -1,22 +1,22 @@
-Received: from 12.mo5.mail-out.ovh.net ([46.105.39.65]
-	helo=mo5.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Tmunt-0004uw-EM
+Received: from 17.mo1.mail-out.ovh.net ([87.98.179.142]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TmwW4-0002XZ-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Dec 2012 00:18:01 +0100
-Received: from mail188.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo5.mail-out.ovh.net (Postfix) with SMTP id 0097C1054112
+	Mon, 24 Dec 2012 02:07:40 +0100
+Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id 1FA64FFA175
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 19:24:24 +0100 (CET)
+	Sun, 23 Dec 2012 20:06:54 +0100 (CET)
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 23 Dec 2012 20:15:33 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 23 Dec 2012 20:15:31 +0200
-Date: Sun, 23 Dec 2012 19:15:29 +0100
+	by b0.ovh.net with SMTP; 23 Dec 2012 20:54:01 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO eb-e6520)
+	(eric%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 23 Dec 2012 20:54:00 +0200
+Date: Sun, 23 Dec 2012 19:53:57 +0100
 From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-X-Ovh-Mailout: 178.32.228.5 (mo5.mail-out.ovh.net)
-Message-ID: <20121223191529.0ffdfe6a@eb-e6520>
+To: openembedded-devel@lists.openembedded.org
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Message-ID: <20121223195357.5fc91a73@eb-e6520>
 In-Reply-To: <3DF8EBF7-61B4-4EBB-9C58-D1C63256FEF5@dominion.thruhere.net>
 References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
 	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
@@ -29,17 +29,17 @@ References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
 Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
 X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-X-Ovh-Tracer-Id: 5351120782948805909
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Tracer-Id: 6000765028518374729
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
+X-OVH-SPAMSCORE: 49
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecuogfuuhhsphgvtghtffhomhgrihhnucdlgeelmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepghhoohhglhgvrdgtohhmnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
 X-Spam-Check: DONE|U 0.5/N
 X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucfjughrpeffhffvuffkjghfohfogggtgfesthhqredtredtud
-Cc: openembedded-devel@lists.openembedded.org
+X-VR-SPAMSCORE: 49
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecuogfuuhhsphgvtghtffhomhgrihhnucdlgeelmdenucfhrhhomhepgfhrihgtuceurohnrghrugcuoegvrhhitgesvghukhhrvggrrdgtohhmqeenucffohhmrghinhepghhoohhglhgvrdgtohhmnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
+Cc: koen@dominion.thruhere.net
 Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -54,32 +54,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 23:18:01 -0000
+X-List-Received-Date: Mon, 24 Dec 2012 01:07:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Koen,
-
 Le Sun, 23 Dec 2012 19:10:54 +0100,
 Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
-> Op 23 dec. 2012, om 15:47 heeft Eric B=E9nard <eric@eukrea.com> het volge=
-nde geschreven:
-> > I need your help concerning denzil if you need to keep systemd 189
-> > there :
-> >=20
-> > with PREFERRED_PROVIDER_udev =3D "udev"
-> > systemd fails to package here
->=20
 > If you're going to use systemd then you'll need to use the matching udev =
 version. New systemd with old udev won't work.
 >=20
-I'm not trying to use systemd but systemd gets built as a dependency
-of other packages and fails to build as you can see.
+same problem for someone using angstrom + setup-scripts + beaglebone :
+https://groups.google.com/forum/?fromgroups#!topic/beagleboard/DC3nJjdJCMo
 
-If I understand well, the only solution to fix denzil is to revert
-the patch which upgrades systemd else systemd and udev are not in sync
-so builds are failing unless we force DEFAULT_PROVIDER_udev to systemd
-(as setting it to udev doesn't work).
+I'll revert the patch tomorrow (monday)
 
 Eric
 
