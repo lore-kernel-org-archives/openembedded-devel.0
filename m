@@ -1,37 +1,37 @@
-Received: from mail-ee0-f50.google.com ([74.125.83.50])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tmkpa-0001Vd-Lj
+	(envelope-from <martin.jansa@gmail.com>) id 1Tmkpx-0001ir-I8
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Dec 2012 13:39:03 +0100
-Received: by mail-ee0-f50.google.com with SMTP id b45so3227875eek.37
+	Sun, 23 Dec 2012 13:39:58 +0100
+Received: by mail-ee0-f49.google.com with SMTP id c4so3107557eek.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Dec 2012 04:24:12 -0800 (PST)
+	Sun, 23 Dec 2012 04:24:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=ha+7zHwRQ/sGAhr8wWiDOCTKSuamIuFoboXkmB9Gi50=;
-	b=DV+m8Ho8DbbkFgFDzL6lUZjNfvFNgg7gMSCCkkt6gcmOaj/Enl5R3JZqOJjIDxsgOw
-	aL+kdEvMDHOKB18VydKikwsmlp3xbrhOlj7o4k4x6xBz/FaKaKER3lLmSGv3lt3048nO
-	woLdFd38trxXkHRboYLJo4xeBYw634Xti0wIuiuZoBJnAd1n0Rv4RbI94MLxJiLvS217
-	XWjZmvQou5S+CFvw+deqiWnqSqv1nNAyx+hf0S7lgierxNW2+mPw173bKBMOOLd2rVMH
-	w+mdqyUm+WtKXFH5LLAYt0Tpj4a3xDT4YBVQd3+fbYMfUJp68sGHoTJtLv3qNa2/v/8G
-	X8Kg==
-X-Received: by 10.14.215.6 with SMTP id d6mr47783172eep.40.1356265452056;
-	Sun, 23 Dec 2012 04:24:12 -0800 (PST)
+	bh=vHcvIZFZ96HenPVU0Ts+AzRJQTNiA9lD3rD4GuqB5Fw=;
+	b=fkZzb49ub+Zqfhhq3QlrgCfXmtnYMmKjy0G2JOrjqJKtVlKb3dNxEenMz18HmeLpUS
+	bh+8yTEiBN9THBuEy1hXNHGf4JY7w+Hm/D8HZehdybxPkaDcYfw3I4ZX0t+3oI/TRkx7
+	mF3geq2rG0gY8oQmJ7NftQ4b+AnJT2AoS2cMC3+W4V3QZa6BbwE2OeCRCqgyN41gU0iL
+	saDyVzbY3PDyHell+mdnn8E5Rq1PR3SluwbyOgoecjhLjFI2XsEPJVEE7NywyTDcNrbV
+	GsQAeQJyfRofmGqFqVdwxX9TWyDLlnUQbXm7af/E6x7Y42I6Wsg+Xf95ksDShhcpOh30
+	YvzA==
+X-Received: by 10.14.2.66 with SMTP id 42mr48288247eee.7.1356265476955;
+	Sun, 23 Dec 2012 04:24:36 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id k4sm34574400eep.15.2012.12.23.04.24.11
+	by mx.google.com with ESMTPS id q44sm34558879eep.5.2012.12.23.04.24.36
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 23 Dec 2012 04:24:11 -0800 (PST)
+	Sun, 23 Dec 2012 04:24:36 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Dec 2012 13:21:40 +0100
-Message-Id: <ca769afc7918981ac6a66d1b92ea937ddb62b239.1356264861.git.Martin.Jansa@gmail.com>
+Date: Sun, 23 Dec 2012 13:21:43 +0100
+Message-Id: <4a8abf1a45f2fb8b2702e55ba4e9b02989a267e5.1356264861.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1356264861.git.Martin.Jansa@gmail.com>
 References: <cover.1356264861.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 15/30] hddtemp: rename files to hddtemp for faster lookup
+Subject: [meta-oe][PATCH 18/30] nautilus3: add FILESEXTRAPATHS to find correct no-try-run-strftime.diff first
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Dec 2012 12:39:07 -0000
+X-List-Received-Date: Sun, 23 Dec 2012 12:40:04 -0000
+X-List-Received-Date: Sun, 23 Dec 2012 12:40:04 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../hddtemp/{files => hddtemp}/hddtemp-0.3-beta15-autodetect-717479.patch | 0
- meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp-db.patch       | 0
- .../hddtemp/{files => hddtemp}/hddtemp-no-nls-support.patch               | 0
- meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp.db             | 0
- .../recipes-support/hddtemp/{files => hddtemp}/hddtemp_0.3-beta15-52.diff | 0
- meta-oe/recipes-support/hddtemp/{files => hddtemp}/init                   | 0
- 6 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp-0.3-beta15-autodetect-717479.patch (100%)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp-db.patch (100%)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp-no-nls-support.patch (100%)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp.db (100%)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/hddtemp_0.3-beta15-52.diff (100%)
- rename meta-oe/recipes-support/hddtemp/{files => hddtemp}/init (100%)
+ meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp-0.3-beta15-autodetect-717479.patch b/meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-0.3-beta15-autodetect-717479.patch
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/hddtemp-0.3-beta15-autodetect-717479.patch
-rename to meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-0.3-beta15-autodetect-717479.patch
-diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp-db.patch b/meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-db.patch
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/hddtemp-db.patch
-rename to meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-db.patch
-diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp-no-nls-support.patch b/meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-no-nls-support.patch
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/hddtemp-no-nls-support.patch
-rename to meta-oe/recipes-support/hddtemp/hddtemp/hddtemp-no-nls-support.patch
-diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp.db b/meta-oe/recipes-support/hddtemp/hddtemp/hddtemp.db
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/hddtemp.db
-rename to meta-oe/recipes-support/hddtemp/hddtemp/hddtemp.db
-diff --git a/meta-oe/recipes-support/hddtemp/files/hddtemp_0.3-beta15-52.diff b/meta-oe/recipes-support/hddtemp/hddtemp/hddtemp_0.3-beta15-52.diff
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/hddtemp_0.3-beta15-52.diff
-rename to meta-oe/recipes-support/hddtemp/hddtemp/hddtemp_0.3-beta15-52.diff
-diff --git a/meta-oe/recipes-support/hddtemp/files/init b/meta-oe/recipes-support/hddtemp/hddtemp/init
-similarity index 100%
-rename from meta-oe/recipes-support/hddtemp/files/init
-rename to meta-oe/recipes-support/hddtemp/hddtemp/init
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
+index 5dc4451..19de470 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus3_3.0.2.bb
+@@ -6,11 +6,13 @@ LICENSE="GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426 \
+                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ DEPENDS = "libnotify3 gtk+3 libunique gvfs librsvg libexif gnome-desktop3"
+ # optional: tracker
+ 
++# to include nautilus3/no-try-run-strftime.diff before the rest
++FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+ BPN = "nautilus"
+ inherit gnome
+ 
 -- 
 1.8.0.2
 
