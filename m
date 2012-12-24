@@ -1,23 +1,33 @@
-Received: from 2.mo2.mail-out.ovh.net ([188.165.53.149]
-	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1Tn3bM-0003cF-Pf
+Received: from mail-ee0-f53.google.com ([74.125.83.53])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <koen@dominion.thruhere.net>) id 1Tn3ni-00051q-3B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Dec 2012 09:41:38 +0100
-Received: from mail436.ha.ovh.net (b7.ovh.net [213.186.33.57])
-	by mo2.mail-out.ovh.net (Postfix) with SMTP id B3F50DC05D2
+	Mon, 24 Dec 2012 09:54:28 +0100
+Received: by mail-ee0-f53.google.com with SMTP id c50so3321561eek.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Dec 2012 09:15:45 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 24 Dec 2012 10:07:26 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO eb-e6520)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 24 Dec 2012 10:07:25 +0200
-Date: Mon, 24 Dec 2012 09:06:54 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
-Message-ID: <20121224090654.0b16f805@eb-e6520>
-In-Reply-To: <657212B5-E6A0-45F8-AD05-3F99D7DB1B73@dominion.thruhere.net>
+	Mon, 24 Dec 2012 00:39:32 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=hy8AiLRAI6EHSnoB9C/Ueutnmjn4BBKTLuHvP4bNi2c=;
+	b=ONjhWI3XoMzbfXpMoB238c7pAYXn0Un6of4eQiAdtNZw7kYNKTiQZ/sFSP7YaUYj/d
+	MdRF9Wbz5iHxCxaTtOqmZ6CvJJKrkipb+8hJTfO2bKxsnIn4/kfkCyYCm3r9twQt1ysP
+	dY/2OvtiER7GAw/HCA/M9RQE6Ds1QZzXRAABKUO4M6dQxJOKvLP6I6xsDBwgk9ZeHFVc
+	QSW4gUTEdgRoz7YxFn1bpn7yCj/9Z88a9HFdiG0s0VbhfKp3TU6zhTebsnzbZJqsYC1t
+	kV+Sk9d5Q49jGy5tjpvbZ77FxqY0EqDf7836oz5CSLt/D/+1krh+B0NefwDFwYkIlyKQ
+	HoGQ==
+X-Received: by 10.14.223.200 with SMTP id v48mr54134169eep.24.1356338372344;
+	Mon, 24 Dec 2012 00:39:32 -0800 (PST)
+Received: from [172.20.0.100] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id k4sm39921807eep.15.2012.12.24.00.39.29
+	(version=SSLv3 cipher=OTHER); Mon, 24 Dec 2012 00:39:30 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20121224090654.0b16f805@eb-e6520>
+Date: Mon, 24 Dec 2012 09:39:29 +0100
+Message-Id: <73BA3A6B-A072-4816-A0C9-293F6760D4B6@dominion.thruhere.net>
 References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
 	<CAMBWrQm6UbF9t5sAn=oudmhQ2MJdDNMb3ki6o7_sdjErun4SWw@mail.gmail.com>
 	<CA+chaQcvSts25RvERVyOxOcsqaLRfADf8zTq_YpqAB8Bp_O+fg@mail.gmail.com>
@@ -30,20 +40,11 @@ References: <CAMBWrQnMQtEs78=OtkSR1mjctfet8ArQ_XE43wDB6-6NKiDShA@mail.gmail.com>
 	<B7FA4357-A7A1-408A-AF1F-89062AAACF8D@dominion.thruhere.net>
 	<20121223222145.6785dca1@eb-e6520>
 	<657212B5-E6A0-45F8-AD05-3F99D7DB1B73@dominion.thruhere.net>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.8; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 953918697134992713
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpegrnhhgshhtrhhomhdqughishhtrhhisghuthhiohhnrdhorhhgnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrudduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecunecuhfhrohhmpefgrhhitgcuueornhgrrhguuceovghrihgtsegvuhhkrhgvrgdrtghomheqnecuffhomhgrihhnpegrnhhgshhtrhhomhdqughishhtrhhisghuthhiohhnrdhorhhgnecujfgurhepfffhvffukfgjfhhoofggtgfgsehtqhertdertddu
-Cc: koen@dominion.thruhere.net
+	<20121224090654.0b16f805@eb-e6520>
+To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+X-Mailer: Apple Mail (2.1499)
+X-Gm-Message-State: ALoCoQnNvgRIiOz5Rq49DrOXWbKT2J6m/ItkkfzlCh/YNp/qECFJfYJxf2hY1KnEaN5TX4fQs4KO
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Multiple .bb files are due to be built which each provide udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -58,23 +59,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2012 08:41:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Dec 2012 08:54:29 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Koen,
 
-Le Sun, 23 Dec 2012 23:16:31 +0100,
-Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
-> It does break angstrom since the autobuilder does have that change and th=
-e updated systemd was pushed into the feeds already after meta-oe gained th=
-e commit.
+Op 24 dec. 2012, om 09:06 heeft Eric B=E9nard <eric@eukrea.com> het =
+volgende geschreven:
+
+> Hi Koen,
 >=20
-strange, I checked there and systemd is not at v189 :
-http://www.angstrom-distribution.org/feeds/v2012.05/ipk/eglibc/armv5te/base/
-may you please point me to the right feed ?
+> Le Sun, 23 Dec 2012 23:16:31 +0100,
+> Koen Kooi <koen@dominion.thruhere.net> a =E9crit :
+>> It does break angstrom since the autobuilder does have that change =
+and the updated systemd was pushed into the feeds already after meta-oe =
+gained the commit.
+>>=20
+> strange, I checked there and systemd is not at v189 :
+> =
+http://www.angstrom-distribution.org/feeds/v2012.05/ipk/eglibc/armv5te/bas=
+e/
+> may you please point me to the right feed ?
 
-Thanks
-Eric
+=
+eu.feeds.angstrom-distribution.org/feeds/v2012.05/ipk/eglibc/armv7a/base/ =
+would be one=
 
 
