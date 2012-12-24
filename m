@@ -1,31 +1,35 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1Tn8ax-0001Hd-FS
+	(envelope-from <martin.jansa@gmail.com>) id 1Tn9o9-0004Jo-OZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Dec 2012 15:01:33 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id qBODke9t021831
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Dec 2012 05:46:40 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Mon, 24 Dec 2012 05:46:39 -0800
-Received: from yow-jmacdona-d2.windriver.com (yow-jmacdona-d2.wrs.com
-	[128.224.146.166])	by yow-jmacdona-d1.ottawa.wrs.com (Postfix) with
-	ESMTP id 5B4637FE2;	Mon, 24 Dec 2012 08:45:20 -0500 (EST)
-Received: by yow-jmacdona-d2.windriver.com (Postfix, from userid 1000)	id
-	E9C2D6A3850; Mon, 24 Dec 2012 08:46:37 -0500 (EST)
-Date: Mon, 24 Dec 2012 08:46:37 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20121224134637.GJ5270@windriver.com>
+	Mon, 24 Dec 2012 16:19:14 +0100
+Received: by mail-ee0-f49.google.com with SMTP id c4so3521720eek.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Dec 2012 07:04:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=mNrL6tYhaoxyh71V38Cb+baDBzkuyxAAZFEkqqZU40g=;
+	b=0VXBVLrRTMB4IRL55mn26V8Af5dP2RA8njgkuTcvL3iG7RyPn50RSmuGw/vVfWJUQO
+	+l3NsBlD7cMlZmSuLsAIKIMq9OrOk3Gxz5OcNxWe9sq0adwe9GqP7JwSoFZBB8VmnOI9
+	jzreAixuIpaqraug1wFm2RdHnr3hqpD/CJzqZbiaueNeCKOvDy/n1HvyW6GdTO8stRiH
+	ZcwKUQQKi8RtQaPa8wt/Aa5pyp6u+DGc5lOyEdAS6yxtnvtQCskcsdiy3A7jy9yj6MX6
+	wTmd//qTaYXCnr6mSEW4E5MPvSv3+4ew1DfNAa534eyNLaJIn9fPDuXcb8V1kArocNIG
+	d2cw==
+X-Received: by 10.14.221.65 with SMTP id q41mr56016758eep.30.1356361463631;
+	Mon, 24 Dec 2012 07:04:23 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id 43sm41804159eed.10.2012.12.24.07.04.22
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 24 Dec 2012 07:04:23 -0800 (PST)
+Date: Mon, 24 Dec 2012 16:04:22 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+Message-ID: <20121224150422.GT8988@jama.palm1.palmone.com>
 References: <20121220133018.GJ14543@jama.palm1.palmone.com>
+	<20121224134637.GJ5270@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20121220133018.GJ14543@jama.palm1.palmone.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
+In-Reply-To: <20121224134637.GJ5270@windriver.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-networking] patches on patchwork
@@ -42,50 +46,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Dec 2012 14:01:40 -0000
-X-Groupsio-MsgNum: 42406
+X-List-Received-Date: Mon, 24 Dec 2012 15:19:23 -0000
+X-Groupsio-MsgNum: 42407
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GlnCQLZWzqLRJED8"
+	protocol="application/pgp-signature"; boundary="wYXww9TlNKyqAMAe"
 Content-Disposition: inline
 
---GlnCQLZWzqLRJED8
+--wYXww9TlNKyqAMAe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[[meta-networking] patches on patchwork] On 12.12.20 (Thu 14:30) Martin Jan=
-sa wrote:
+On Mon, Dec 24, 2012 at 08:46:37AM -0500, Joe MacDonald wrote:
+> [[meta-networking] patches on patchwork] On 12.12.20 (Thu 14:30) Martin J=
+ansa wrote:
+>=20
+> > Hi, can you check and update patches in meta-networking bundle?
+> > http://patches.openembedded.org/bundle/jama/meta-networking/?archive=3D=
+both
+>=20
+> Hmm.  Seems like I don't have access to do anything with patchworks
+> except download bundles.  All three currently in the meta-networking
+> queue should be rejected.  My old junk from September aren't relevant
 
-> Hi, can you check and update patches in meta-networking bundle?
-> http://patches.openembedded.org/bundle/jama/meta-networking/?archive=3Dbo=
-th
+OK, I've marked them as rejected.
 
-Hmm.  Seems like I don't have access to do anything with patchworks
-except download bundles.  All three currently in the meta-networking
-queue should be rejected.  My old junk from September aren't relevant
-now, there's a better approach coming along, and this:
+> now, there's a better approach coming along, and this:
+>=20
+> http://patches.openembedded.org/patch/38813/
 
-http://patches.openembedded.org/patch/38813/
+I've noticed this and moved it to meta-webservers bundle, but forgot to
+remove it from meta-networking, removed now.
 
-has simply been miscategorized.  Who can clean up the queue for me?  Or
-can help me figure out how to clean up the queue?
+> has simply been miscategorized.  Who can clean up the queue for me?  Or
+> can help me figure out how to clean up the queue?
 
-Thanks.
+Someone should give maintainer status to your account, not show who has
+needed permissions (khem?).
 
+But at least patches which came from the same e-mail as you register
+patchwork account should allow you to change status etc.
+
+Cheers,
 --=20
--Joe MacDonald.
-:wq
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---GlnCQLZWzqLRJED8
+--wYXww9TlNKyqAMAe
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDYXL0ACgkQPN8S4W6ZZndMHwCfdgIf52vQ2HV7lAehOpgZQwmk
-iKEAnA62SVImnnrQEetNBnXfgMEnUMzR
-=QtCU
+iEYEARECAAYFAlDYbvYACgkQN1Ujt2V2gBysRACgiWfrtamjspQasX77gHyKKIsX
+ysYAn16NBYQYVDg5oYL+nV3UplcIHDyZ
+=GnqS
 -----END PGP SIGNATURE-----
 
---GlnCQLZWzqLRJED8--
+--wYXww9TlNKyqAMAe--
