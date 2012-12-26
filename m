@@ -1,36 +1,37 @@
-Received: from mail-vc0-f175.google.com ([209.85.220.175])
+Received: from mail-wg0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tnsuz-0007xM-7c
+	(envelope-from <martin.jansa@gmail.com>) id 1Tnt5R-0008As-Sv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Dec 2012 16:29:21 +0100
-Received: by mail-vc0-f175.google.com with SMTP id fy7so8752880vcb.6
+	Wed, 26 Dec 2012 16:40:06 +0100
+Received: by mail-wg0-f41.google.com with SMTP id ds1so3353045wgb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Dec 2012 07:14:24 -0800 (PST)
+	Wed, 26 Dec 2012 07:25:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=YkyoO3mBOobRyIWfUg80/V4n4mwe7qVAnWz9Gx/k9Nw=;
-	b=o38w8re/DWJc1xHpCZ7D7dAD5WXtWy+VST6egb/DR020WIPBR8J6KSLpQFXZYpiVPR
-	Vq7p2cw43l2WlNetMs5PIcrtiwI5n6mLd3eaON/dcL8KTZu5AjFxS+r9w2pLa8w78lDq
-	7iF+CW2B1GhdEIcz5nYyMWwVkxde8+1ZvJOtHcAtCuKW4G4N2HlMfMCuhvMT9KvCRhWs
-	9fAzHTReWr8FVl5xujWTbiS4XGIH3/wa8kzCj+3UTxcRHZwWMd/piAv2WjGrL4gFGAVX
-	I8t0m8xfMM663Orj5seJumsFJJmUavJXiAn/aYhzEkWMc7idtq6QrPQ0YQb65Yad+bUH
-	/U0g==
+	:cc:content-type;
+	bh=QTamIwQ25FaAozhCBS51Pqco4pwMIBQEN4GImSW+nNg=;
+	b=Eua53Plmus7tHVW1K5lJVpC59Rjr/DUZRDiFuE97LoXnm8yklHp1fm3uODfVvpt1Ia
+	Rw7fTplp2aEnG+j/2eOSqqWjGe/E469Z9cXoXFb8TXq+DhSjw0VROhdMrDH7NnqvwyqE
+	rbUFso9gcAtiSH4ffT1mUm5xRNFVnfXCss/4Xra11o7x/Tq7WfYmS7+EesGgx9gjV+ok
+	CC0eIxs7k4x64KbDpDY+aXxkkBZtT4jn6mKY8dJlWHCmq/7WGOC3PX+vBgzlyWWTsqwS
+	oQGLH5PYiTG9oJ/y8p8t5hzs9nWfXxUOar8HvhHuO/p7KelXypCQCMhbo/xtVelCbfZS
+	Rd8w==
 MIME-Version: 1.0
-Received: by 10.58.33.66 with SMTP id p2mr43544843vei.24.1356534863996; Wed,
-	26 Dec 2012 07:14:23 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Wed, 26 Dec 2012 07:14:23 -0800 (PST)
-In-Reply-To: <20121226151310.GC8988@jama.palm1.palmone.com>
-References: <1356267761-15152-1-git-send-email-schnitzeltony@googlemail.com>
-	<20121226130115.GB8988@jama.palm1.palmone.com>
-	<CALbNGRTvGC6_g9nRWjCuB8t-sLA35PWuPJKb8gT=NC_y2D5kOw@mail.gmail.com>
-	<CALbNGRQwGorTBo7OOAABQVd_0Jmv7sS3W+NcDy2bocnw3eoKHg@mail.gmail.com>
-	<20121226151310.GC8988@jama.palm1.palmone.com>
-Date: Wed, 26 Dec 2012 16:14:23 +0100
-Message-ID: <CALbNGRT9G2UYvRU_CVBJmhK4QzDLT+E-KesmD3rmsoTXXaggWQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce/meta-gnome 00/12] meta-xfce updates
+Received: by 10.194.90.238 with SMTP id bz14mr35655176wjb.9.1356535512299;
+	Wed, 26 Dec 2012 07:25:12 -0800 (PST)
+Received: by 10.194.178.72 with HTTP; Wed, 26 Dec 2012 07:25:12 -0800 (PST)
+In-Reply-To: <0E6348F0-C1BE-4325-818C-8F3CCACBA730@dominion.thruhere.net>
+References: <kb31gs$u4d$1@ger.gmane.org> <3053324.FGHdgGAGGN@helios>
+	<20121223194558.GL8988@jama.palm1.palmone.com>
+	<20121226121055.GA8988@jama.palm1.palmone.com>
+	<0E6348F0-C1BE-4325-818C-8F3CCACBA730@dominion.thruhere.net>
+Date: Wed, 26 Dec 2012 16:25:12 +0100
+Message-ID: <CA+chaQd1JKSiSi4gQDRsUOSWWEk2bMVXCce1D+wWuEnOLA2=fQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Ruby and meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,44 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Dec 2012 15:29:22 -0000
+X-List-Received-Date: Wed, 26 Dec 2012 15:40:06 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 26, 2012 at 4:13 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Wed, Dec 26, 2012 at 03:59:33PM +0100, Andreas M=C3=BCller wrote:
->> On Wed, Dec 26, 2012 at 2:29 PM, Andreas M=C3=BCller
->> <schnitzeltony@googlemail.com> wrote:
->> > On Wed, Dec 26, 2012 at 2:01 PM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->> >> On Sun, Dec 23, 2012 at 02:02:29PM +0100, Andreas M=C3=BCller wrote:
->> >>> The following changes since commit a623fd942f6561a425278cf9f114d212d=
-06e5982:
->> >>>
->> >>>   samba: disable avahi and build without acl (2012-12-21 16:45:28 +0=
-100)
->> >>
->> >> No new issues in world build with this patchset applied.
->> >>
->> > I know - these patches just add some functionality for xfce. I check
->> > for the gnome/libnotify problem next days. My assumption is that
->> > host-headers are dragged in somewhere but I need to check that.
->> >
->> > 'Unfortunately' I got a raspberry-pi for Christmas so I need to take
->> > care first :-)
->> >
->> I just checked: the gvfs patch dos not apply any more since the latest
->> update. I'll rebase the git repo.
+On Wed, Dec 26, 2012 at 4:13 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
 >
-> I already did (and said that in previous reply), see contrib/jansa/pull.
 >
-> Cheers,
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> Op 26 dec. 2012 om 13:10 heeft Martin Jansa <martin.jansa@gmail.com> het volgende geschreven:
 >
-OK thanks.
+>> On Sun, Dec 23, 2012 at 08:45:58PM +0100, Martin Jansa wrote:
+>>> On Sun, Dec 23, 2012 at 07:40:51PM +0000, Paul Eggleton wrote:
+>>>> On Saturday 22 December 2012 02:14:07 Koen Kooi wrote:
+>>>>> What's the status on getting ruby recipes into a meta-ruby or meta-oe? I
+>>>>> just had to import it into my working branch to build mkvtoolnix which needs
+>>>>> ruby-native for its buildsystem (don't ask).
+>>>>
+>>>> The original author never replied to my suggestion about creating a separate
+>>>> layer. Unless there are objections I'd suggest just creating a meta-ruby and
+>>>> using the patches from patchwork to add ruby into it.
+>>>
+>>> Agreed,
+>>
+>> Btw: I'm doing this atm, but that recipe on patchwork didn't even have
+>> LIC_FILES_CHKSUMs.
+>
+> I squashed 1/2 and 2/2 together, that makes ruby-native work
 
-Andreas
+Ah I haven't seen 2/2 on patchwork because I was looking only on
+"action needed" state. I've updated 2/2 to apply and will push it
+later if ruby-native still builds OK.
 
 
