@@ -1,25 +1,33 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from outpost1.zedat.fu-berlin.de ([130.133.4.66])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Rongqing.Li@windriver.com>) id 1TnlNI-0002QQ-Oj
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1Tnopu-0001x6-NZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Dec 2012 08:26:03 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id qBQ7B7kp000852
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 26 Dec 2012 12:07:46 +0100
+Received: from relay1.zedat.fu-berlin.de ([130.133.4.67])
+	by outpost1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1TnobX-003Mms-T8>; Wed, 26 Dec 2012 11:52:55 +0100
+Received: from andorra.imp.fu-berlin.de ([160.45.42.84])
+	by relay1.zedat.fu-berlin.de (Exim 4.69)
+	for openembedded-devel@lists.openembedded.org with esmtp
+	(envelope-from <heinold@mi.fu-berlin.de>)
+	id <1TnobX-003yJ5-Rc>; Wed, 26 Dec 2012 11:52:55 +0100
+Received: from heinold by andorra.imp.fu-berlin.de with local (internal_ws
+	Exim 4.72) id 1TnobW-0005BJ-Om
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Dec 2012 23:11:07 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.143) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.318.4; Tue, 25 Dec 2012 23:11:06 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Liezhi.Yang@windriver.com>
-Date: Wed, 26 Dec 2012 15:11:16 +0800
-Message-ID: <1356505876-32548-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Wed, 26 Dec 2012 11:52:54 +0100
+Date: Wed, 26 Dec 2012 11:52:54 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20121226105254.GA18297@mi.fu-berlin.de>
+References: <20121224185436.GA1230@gmail.com>
 MIME-Version: 1.0
-Cc: Zhenfeng.Zhao@windriver.com, joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH] radvd: change scanner.* file dependency
+In-Reply-To: <20121224185436.GA1230@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-Originating-IP: 160.45.42.84
+Subject: Re: Linker Problem: Unrecognized '-Wl,-O1'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,67 +41,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Dec 2012 07:26:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Dec 2012 11:07:46 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-From: "Roy.Li" <rongqing.li@windriver.com>
+On Mon, Dec 24, 2012 at 08:54:36PM +0200, Eren Türkay wrote:
+> Hello,
+> 
+> I am packaging 'arpx' [0] daemon and I have a problem in linking stage.
+> The linker complains about unrecognized options "-Wl,-O1". It is strange
+> that i586-poky-linux-ld does not have an option for linker hash table
+> optimization, which seems to be around for a long time [1]
+> 
+> "-Wl,-O1" is provided by bitbake by default so I think that it is
+> expected to run but it fails in my configuration. What am I missing
+> here? I would really appreciate a hand for fixing this.
+> 
+> [0]: https://github.com/hambedded-linux
+> [1]: https://lwn.net/Articles/192624/
+> 
+> #### START: Stripped Bitbake Output ####
+> 
+> Build Configuration:
+> BB_VERSION        = "1.16.0"
+> TARGET_ARCH       = "i586"
+> TARGET_OS         = "linux"
+> MACHINE           = "alix3d3"
+> DISTRO            = "poky"
+> DISTRO_VERSION    = "1.3"
+> TUNE_FEATURES     = "m32 i586"
+> TARGET_FPU        = ""
+> meta              
+> meta-yocto        = "danny:09031ac2fc0f30ec577ee823fc61ff0e5d852e21"
+> meta-alix3d3      = "master:02f8693c35789471f4a3296358f0add538a1142a"
+> meta-hamradio     = "master:1e440d60699e1b03c5aec78a64a98bc3f5494e5f"
+> 
+> i586-poky-linux-ld --sysroot=/home/eren/sourcebox/yocto/poky-1.3/build/tmp/sysroots/alix3d3 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -o aprx aprx.o ttyreader.o ax25.o aprsis.o beacon.o config.o netax25.o erlang.o aprxpolls.o telemetry.o igate.o cellmalloc.o historydb.o keyhash.o parse_aprs.o dupecheck.o  kiss.o interface.o pbuf.o digipeater.o valgrind.o filter.o dprsgw.o  crc.o  agwpesocket.o netresolver.o -lpthread  -lutil    -lm
+> i586-poky-linux-ld: unrecognized option '-Wl,-O1'
+> i586-poky-linux-ld: use the --help option for usage information
+> make: *** [aprx] Error 1
+> 
+> #### END: Stripped Bitbake Output ####
 
-generation of scanner.c needs gram.h, not just scanner.o
+Hi,
 
-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
----
- .../radvd/files/change-scanner-dependency.patch    |   24 ++++++++++++++++++++
- recipes-daemons/radvd/radvd_1.9.1.bb               |    5 +++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 recipes-daemons/radvd/files/change-scanner-dependency.patch
+easy to fix edit the buildsystem to usee gcc as linker no ld directly or fix the build system not to use CFLAGS for linking, but LDFLAGS.
 
-diff --git a/recipes-daemons/radvd/files/change-scanner-dependency.patch b/recipes-daemons/radvd/files/change-scanner-dependency.patch
-new file mode 100644
-index 0000000..b190866
---- /dev/null
-+++ b/recipes-daemons/radvd/files/change-scanner-dependency.patch
-@@ -0,0 +1,24 @@
-+scanner.c is generated by flex using scanner.l, scanner.l needs gram.h
-+when produce scanner.c, so redefine the dependency relation
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ Makefile.am |    3 +--
-+ 1 files changed, 1 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 04b834b..2da986c 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -131,5 +131,4 @@ dist-hook:
-+ 	rm -f $(distdir)/gram.h
-+ 	rm -f $(distdir)/scanner.c
-+ 
-+-scanner.o: gram.h
-+-
-++scanner.c: gram.h
-+-- 
-+1.7.4.1
-+
-diff --git a/recipes-daemons/radvd/radvd_1.9.1.bb b/recipes-daemons/radvd/radvd_1.9.1.bb
-index 26d21ce..37c224b 100644
---- a/recipes-daemons/radvd/radvd_1.9.1.bb
-+++ b/recipes-daemons/radvd/radvd_1.9.1.bb
-@@ -1,6 +1,9 @@
--PR = "r0"
-+PR = "r1"
- 
- require radvd.inc
- 
- SRC_URI[md5sum] = "e807ad7e9a76d46b6133df391385cd31"
- SRC_URI[sha256sum] = "54eb5704a2b710ba946fa30d2bca811fa23b1b3bfab322c38cb0c2a9619aa933"
-+
-+SRC_URI += "\
-+	file://change-scanner-dependency.patch"
--- 
-1.7.10.4
-
+Bye Henning
 
 
