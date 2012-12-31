@@ -1,37 +1,37 @@
-Received: from mail-ea0-f177.google.com ([209.85.215.177])
+Received: from mail-ea0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEH-0005xC-3r
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEE-0005wz-BJ
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 31 Dec 2012 18:32:54 +0100
-Received: by mail-ea0-f177.google.com with SMTP id c10so5144957eaa.36
+Received: by mail-ea0-f173.google.com with SMTP id i13so5408688eaa.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Dec 2012 09:17:49 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=oo+g5mjUy0iNEwZ/vlryJXDhwvcp22Wk6r/06dq/esI=;
-	b=XCTl2ZGxZ2vmYGIUvgdSZG5R1YEJuQaEoAY6lsiKiBBr7jjI1UdZikKN6/YPJpdMgR
-	FecxUW389N22z5ZrX/J/GDKeGDfXuFUJqEdkns4aN2JY8NntfVaOl9PWz6aVSoiVHjmP
-	6nJ0AifFekAtlA9Don6osxPlhO8etBeeCq0O/u4xqd7BQCXMCMDaiKicCAJBonIeDxDf
-	LWQvmohXH4yvjxfG2X/ggiiVYl9BcnR6OnmYQv77QVlxgn247qGlZQndtRWPQwKpRG8X
-	mMkJ4ILbrkarCoKakRo/qZugf/173KZgSKGmcT4XYWBpP62CpX9PYZaBASCwBqTgL9rr
-	oP1w==
-X-Received: by 10.14.174.198 with SMTP id x46mr111992778eel.23.1356974269422; 
-	Mon, 31 Dec 2012 09:17:49 -0800 (PST)
+	bh=Yu8RESvRrxZTh0Itv7JnPVUSsGXodQaCaB6Gs5e5cA4=;
+	b=md4ASpDd+gkj304w8G89lA4kCn2MNbDDPgYocGABCoDcWCngPTk+vDj7/5s0UXyVTF
+	wmFxqPPTFkhX+8KujhDa5s8SC0itHpBWBe8S/qGrYQpIbcBMJA1WcFgL79hIoonyW5as
+	2SOidF8j/t4Qn1pyJaMaGcc7nd9/l9+GdTLy6RGY/8NhLO5sm034CvnGUAAXFdwD+byC
+	EBqCUdlQlWWBEaHTkU6I3fSFiht2j/t9r6P4o5UvZrUgDpDgRFcstkJMcoKcM9nAL0/e
+	JP2qCPEf9dRiNLUnSlnEt7gr1QaEV/K/QoB0v6D5TpkzDIB8wQTGN1Qlsc7oyVWHq9Ng
+	mnCQ==
+X-Received: by 10.14.207.6 with SMTP id m6mr111647367eeo.10.1356974266644;
+	Mon, 31 Dec 2012 09:17:46 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1BD4.dip.t-dialin.net.
 	[91.10.27.212])
-	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.48
+	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 31 Dec 2012 09:17:48 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:45 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Dec 2012 18:17:22 +0100
-Message-Id: <1356974245-3497-8-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Dec 2012 18:17:20 +0100
+Message-Id: <1356974245-3497-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 07/10] xfce4-mixer: update to 4.10.0
+Subject: [meta-xfce/meta-gnome 05/10] packagegroup-xfce-base: xfce-terminal -> xfce4-terminal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +51,31 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...{xfce4-mixer_4.8.0.bb => xfce4-mixer_4.10.0.bb} |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-mixer/{xfce4-mixer_4.8.0.bb => xfce4-mixer_4.10.0.bb} (53%)
+ .../packagegroups/packagegroup-xfce-base.bb        |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
-similarity index 53%
-rename from meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
-rename to meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
-index 23a8ba5..1884860 100644
---- a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
-+++ b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
-@@ -6,9 +6,9 @@ inherit xfce-panel-plugin
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+index e42ea3c..3d8b062 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "All packages required for a base installation of XFCE"
+ SECTION = "x11/wm"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+-PR = "r4"
++PR = "r5"
  
- DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf"
+ inherit packagegroup
  
--SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
- 
--SRC_URI[md5sum] = "3fa3a9973e18c04da26709a654e242ff"
--SRC_URI[sha256sum] = "9f9f48fdd0d3f6b1e46694b93a44d15b800db72a96d831b5111d9ac976970fab"
-+SRC_URI[md5sum] = "e47d5b3e873fdee3fa80d309a5f53e9c"
-+SRC_URI[sha256sum] = "a8c589001b438171ea5a6b46ce9895c3ffbc5081ab67805ab9870e540068dade"
- 
- RDEPENDS_${PN} = "gst-meta-audio"
+@@ -33,7 +33,7 @@ RDEPENDS_${PN} = " \
+     xfce4-settings \
+     \
+     xfce4-notifyd \
+-    xfce-terminal \
++    xfce4-terminal \
+     thunar \
+     thunar-volman \
+ "
 -- 
 1.7.4.4
 
