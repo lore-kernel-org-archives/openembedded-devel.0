@@ -1,37 +1,37 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail-ee0-f48.google.com ([74.125.83.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEK-0005xM-1g
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEI-0005xD-DW
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 31 Dec 2012 18:32:54 +0100
-Received: by mail-ee0-f49.google.com with SMTP id c4so6143418eek.36
+Received: by mail-ee0-f48.google.com with SMTP id b57so6424146eek.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Dec 2012 09:17:52 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=ri+4Cm1sFfKAhBFNBgbZaHOAoajFyj/P2wB6efmWN/c=;
-	b=HmWKOxdT518Ai6LH8f5riN6pzGP/HPqvD4S/0wOACDyZ+hN/gp13veWidNmzk7ofWe
-	OuFWFPIRFYxy60pdSZGBzxPx9+UC/vJPRy8zo3FLWaNsGUXb6Pr6IqBQGn3p3G/i9pUE
-	wqiADJIGY2HcxzMT+Ij19De2Plom10yjuLbuNjsYevBZtIU3ymUopNbIKTfrP9huhJfi
-	G8uOSoHnxf14+8+UI4f4CcK96QPbELDykJATji0duPTNM8YmJYyrmDGrIFelxDPQM+p7
-	NXTSQcVHUtn21XoKyBZaQoaB9o2D1R4DmesfI5xBN8sw1E4/RiRl94H6zLnUN0Cwo/Aw
-	K2Ag==
-X-Received: by 10.14.178.196 with SMTP id f44mr112103616eem.14.1356974272353; 
-	Mon, 31 Dec 2012 09:17:52 -0800 (PST)
+	bh=PN2qu0LIoLGHP1nPu/lOCECbn05g9Bjh+AQLwkjgOHo=;
+	b=ssZ/GV9u0FsTKQvky7hvwNJd+hNsvN80o1YRyDXyiduGEySYm0MBaUrQKzCCnIZut4
+	SidQk8qQeb4OLuvKukL5Cs6Cg6EdhjFT5lnPeOtAGwkili0I9+5DXL2Po2vWM7rAKd6+
+	KWrVY7M0Ohx/UBK6+InwX/gqzr7a7KboWdPaWzzmPIZmOMDfsbJhQFJLhGo/W7C+QP6T
+	5P7tRgQOgAZ9pqZRTiy07HIz4yomBCiKV1h2HnZdhxfFL3rDEGyyyugSMn5wSxJhFEX0
+	V8eSFlGfyhF+lR7tPBS/gDhbujP6QGB5qVpddMvVY0lsGxTL5NzwAIt+jVAse0GYEgq8
+	2AnQ==
+X-Received: by 10.14.221.5 with SMTP id q5mr111636360eep.33.1356974270867;
+	Mon, 31 Dec 2012 09:17:50 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1BD4.dip.t-dialin.net.
 	[91.10.27.212])
-	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.50
+	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.49
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 31 Dec 2012 09:17:51 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:50 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Dec 2012 18:17:24 +0100
-Message-Id: <1356974245-3497-10-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Dec 2012 18:17:23 +0100
+Message-Id: <1356974245-3497-9-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 09/10] midori: update to 0.4.7
+Subject: [meta-xfce/meta-gnome 08/10] xfce4-places-plugin: update to 1.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +51,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../midori/{midori_0.4.6.bb => midori_0.4.7.bb}    |    7 ++-----
- 1 files changed, 2 insertions(+), 5 deletions(-)
- rename meta-gnome/recipes-connectivity/midori/{midori_0.4.6.bb => midori_0.4.7.bb} (86%)
+ ...lugin_1.4.0.bb => xfce4-places-plugin_1.5.0.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.4.0.bb => xfce4-places-plugin_1.5.0.bb} (68%)
 
-diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.4.6.bb b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-similarity index 86%
-rename from meta-gnome/recipes-connectivity/midori/midori_0.4.6.bb
-rename to meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-index db2c5e6..5b1a959 100644
---- a/meta-gnome/recipes-connectivity/midori/midori_0.4.6.bb
-+++ b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-@@ -4,12 +4,10 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl python-native python-docutils-native librsvg-native libnotify"
+diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+similarity index 68%
+rename from meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb
+rename to meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+index 1f6c231..2e0b810 100644
+--- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb
++++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
  
--PR = "r2"
--
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--SRC_URI[midori.md5sum] = "3c3f0030611d9126ab90be48d44cab57"
--SRC_URI[midori.sha256sum] = "910f47bd2b5f2998cd4fce45c08f9e282318820b68562d0bade2096b9a17e3ea"
-+SRC_URI[midori.md5sum] = "06db7b88a41e9b2265728960d5e98f35"
-+SRC_URI[midori.sha256sum] = "65bf9976733597c405492ce91aa664fd10547cb7df16e0a70f260c7a3e97ea5d"
+ inherit xfce-panel-plugin
  
- inherit gtk-icon-cache pkgconfig vala
- 
-@@ -33,7 +31,6 @@ do_configure() {
- }
- 
- PARALLEL_MAKE = ""
--LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_install() {
+-SRC_URI[md5sum] = "cdb5c966c7a93ca29f2ce50223782133"
+-SRC_URI[sha256sum] = "d2a451a35096ecb8b6ca96ab0af3ebca3f163a7c8dc08627518940a633cce5e5"
++SRC_URI[md5sum] = "84c39fb123e07e1c7caaf006d9383656"
++SRC_URI[sha256sum] = "6996051669a13d4791a5a453747801dc2f7f6fa5546785622d80b34966283d44"
 -- 
 1.7.4.4
 
