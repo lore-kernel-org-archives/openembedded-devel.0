@@ -1,37 +1,37 @@
-Received: from mail-ee0-f45.google.com ([74.125.83.45])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEC-0005wr-QY
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjE9-0005wo-U8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Dec 2012 18:32:54 +0100
-Received: by mail-ee0-f45.google.com with SMTP id d49so6179095eek.18
+	Mon, 31 Dec 2012 18:32:53 +0100
+Received: by mail-ee0-f49.google.com with SMTP id c4so6143344eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Dec 2012 09:17:45 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=ZFH4kKv/xho40QDYFI2o8S3o28S5IEgLnG30F102B8s=;
-	b=I24wnhzSvyTNFL41fkTkTEcYUV/a065iWFyem5ae4fmYZhR1nEAgBXk4FPnRWfs0KJ
-	W0KZaKcdahM2zFWjZSP1ZsSzNvb2lcswnhvkI13f5gbtNJM6eBcLFcXsNSoD/LpH6ATX
-	h2uvgkVeIIRwR4I4ewUF4n0r51RkALDecWSymUdIhf2gYDFziAjxV8uIbWgzZcYa7Q0j
-	UG51pFs6qRtH8Yc4Hl04fqhPBAPxcOQ/uaDkpeDvevF1YJx+pqHNb0Y2byFLouEnr7sA
-	zAApUaC+TP5EzzvYAIkiFnUlMfXBA0NdxeVWLsrXS144JuqwpRfmve0yDfe7mSoJT50k
-	lNjg==
-X-Received: by 10.14.3.195 with SMTP id 43mr111650759eeh.36.1356974265238;
-	Mon, 31 Dec 2012 09:17:45 -0800 (PST)
+	bh=Zkz1SE4SN35ZbV3AX/M9A6m9b7C6mCVI0L53au5W9LM=;
+	b=E49DHC/r0Q3uatQRmDI1BMpnXG4Lf7Cp0V67eKvkSuoVvThVpplQAF+HPqBzPyJApe
+	KLLLo80zaGoHwv+sm1VbAmJH9MNX1xblMGhGNzcLEi561IpbHqd2a3LnmiyDXYc8Iv2n
+	a5LcEVW63ur7v2zsMgLcDSd9ueVJwu1NIpVPmG15MXY2PEzllV2guNIohYfUe17TNkUK
+	iMxR+4fdU0akgMCSPkAWbYIzOY4Qis1KqY8iYFYRMexaMd1ivhavKfQSM5LkC/0aMRLU
+	PGVunBS5mstALYVgM1P006IsS0ln7t8/iwEG+zkm2u1+J198g18EQCbPPF8zM5hSPOdH
+	37JA==
+X-Received: by 10.14.174.132 with SMTP id x4mr110200769eel.39.1356974262157;
+	Mon, 31 Dec 2012 09:17:42 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1BD4.dip.t-dialin.net.
 	[91.10.27.212])
-	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.43
+	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 31 Dec 2012 09:17:44 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:41 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Dec 2012 18:17:19 +0100
-Message-Id: <1356974245-3497-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Dec 2012 18:17:17 +0100
+Message-Id: <1356974245-3497-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 04/10] xfce4-terminal: update to 0.6.0
+Subject: [meta-xfce/meta-gnome 02/10] tumbler: update to 0.1.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,63 +49,30 @@ X-List-Received-Date: Mon, 31 Dec 2012 17:33:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* renamed upstream Terminal -> xfce4-terminal [1]
-* dependencies changed [1]
-
-[1] http://mail.xfce.org/pipermail/xfce/2012-December/031872.html
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../xfce-terminal/xfce-terminal_0.4.8.bb           |   20 --------------------
- .../xfce4-terminal/xfce4-terminal_0.6.0.bb         |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 20 deletions(-)
- delete mode 100644 meta-xfce/recipes-apps/xfce-terminal/xfce-terminal_0.4.8.bb
- create mode 100644 meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.0.bb
+ .../{tumbler_0.1.25.bb => tumbler_0.1.26.bb}       |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.25.bb => tumbler_0.1.26.bb} (89%)
 
-diff --git a/meta-xfce/recipes-apps/xfce-terminal/xfce-terminal_0.4.8.bb b/meta-xfce/recipes-apps/xfce-terminal/xfce-terminal_0.4.8.bb
-deleted file mode 100644
-index 697c5c6..0000000
---- a/meta-xfce/recipes-apps/xfce-terminal/xfce-terminal_0.4.8.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "Terminal emulator for the Xfce desktop environment"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--DEPENDS = "virtual/libx11 exo gtk+ vte dbus-glib"
--
--PR = "r0"
--
--inherit xfce
--
--# SRC_URI must follow inherited one
--SRC_URI = "http://archive.xfce.org/src/apps/terminal//${@'${PV}'[0:3]}/Terminal-${PV}.tar.bz2 \
--"
--
--S = "${WORKDIR}/Terminal-${PV}"
--
--FILES_${PN} += "${datadir}/Terminal \
--                ${datadir}/gnome-control-center/default-apps/Terminal-default-apps.xml"
--
--SRC_URI[md5sum] = "8dff62234da14e1a5e542fb56560ebe2"
--SRC_URI[sha256sum] = "fe5db0b7127ce87efa1e10f44d8915be88005b6ce4f0bfea6b64533e25cc788d"
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.0.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.0.bb
-new file mode 100644
-index 0000000..56816aa
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.0.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Terminal emulator for the Xfce desktop environment"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
-+DEPENDS = "glib-2.0 gtk+ vte libxfce4ui"
-+
-+inherit xfce-app
-+
-+FILES_${PN} += "${datadir}/xfce4 \
-+                ${datadir}/gnome-control-center"
-+
-+SRC_URI[md5sum] = "afb729d37f0ffa003511a47459ed3baf"
-+SRC_URI[sha256sum] = "5ef54194e69b4f3ada885d73f6950b7cf9d2300a532e71963b9b8ee4a7598edf"
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.25.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.26.bb
+similarity index 89%
+rename from meta-xfce/recipes-xfce/tumbler/tumbler_0.1.25.bb
+rename to meta-xfce/recipes-xfce/tumbler/tumbler_0.1.26.bb
+index 3c2c2b3..a066713 100644
+--- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.25.bb
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.26.bb
+@@ -6,8 +6,8 @@ DEPENDS = "dbus-glib freetype gdk-pixbuf poppler"
+ 
+ inherit xfce
+ 
+-SRC_URI[md5sum] = "d4edc15c172714c7a3eaf3c719b8faf6"
+-SRC_URI[sha256sum] = "02d5de508d8c18692a25a832a9280c2043f6b7c90dd3fcbd87f5955337015546"
++SRC_URI[md5sum] = "874621e7820b3bfe0e8ab66d17f1dc31"
++SRC_URI[sha256sum] = "6602ce700160d09edd88ea0b9bcb16abbc28974f372e646709e0ed8fbacc8a78"
+ 
+ INSANE_SKIP_${PN} = "dev-so"
+ 
 -- 
 1.7.4.4
 
