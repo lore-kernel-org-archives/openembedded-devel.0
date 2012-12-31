@@ -1,37 +1,37 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ea0-f179.google.com ([209.85.215.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjE8-0005wm-9B
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TpjEB-0005wq-7W
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 31 Dec 2012 18:32:53 +0100
-Received: by mail-ea0-f175.google.com with SMTP id h11so5197156eaa.20
+Received: by mail-ea0-f179.google.com with SMTP id i12so5153987eaa.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Dec 2012 09:17:40 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=QlyuMAitibu9auNfl5FShVjYlZ1fDMW2r6lprOvuTvM=;
-	b=VMTodCq4OiF9mLEePbbCAi/BQkX7nKJtUoapPmRL8jEUg8PWdyK23LVKx1fAGO3Gfg
-	5CbyNcFdvJyLblMWAsr0uv/z4Wn41LYbH/Mybd2l9Z9unSLcKTifEsAy5EXaLPEf34rV
-	Q+43LYIsDzGSBdeSUkfdmL17E49tAmSNpa/QZEpPJbDl3a++BDWKY2bJYqDg46VP4arW
-	E4wjb+ZeUuo5T9wTVmBjt4sZ/S695F5azCcMsxWjUmPtwWygbkFYNFTplqlhvVwnVR/M
-	mfRXYNo9YIOdOMV9kfMFSqBFBu/gkBsk36OXe24h47QYeOZyZHXteT6Hbnxo+ZNZ1UJy
-	yN6A==
-X-Received: by 10.14.176.66 with SMTP id a42mr111813037eem.34.1356974260712;
-	Mon, 31 Dec 2012 09:17:40 -0800 (PST)
+	bh=QXDRF/Ehs9ZMLEQkhwbFrN7qctp8wZfI8WDuwPSQWZI=;
+	b=xPA6XatV+2W2oDjUYcPDiY8hKJ5D/15jX6CtD0APGpxAgk8jqiuapuJV74ZVCKVQRj
+	d6TP9l4yV1rrBuzo63nVsmlyIXTFPr+3G7HMUnkUsYtymmasMUE4XAFMMLQgfoqHgKN4
+	MvtzsOT+Qd34lvxqHYxgrOIwT5o+qGOa4rumK4GuhVM4MX2mVDdpTxoS3jwbVKWudat3
+	Nfnx7cWf3C/YLG1B7Z6lMd/oE8fTxJ91i3Hdkymg7X5mV3r7EU+87f/yR1l5S10tHQEe
+	8+Z3cBUQpuUh2DbsWrveMBLQb/VikKocqU4lbyHv5LJQsGc4Asg3AnjC6ItN5I5O3no9
+	UWUA==
+X-Received: by 10.14.214.132 with SMTP id c4mr111674992eep.18.1356974263685;
+	Mon, 31 Dec 2012 09:17:43 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1BD4.dip.t-dialin.net.
 	[91.10.27.212])
-	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.39
+	by mx.google.com with ESMTPS id 46sm86204729eeg.4.2012.12.31.09.17.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 31 Dec 2012 09:17:39 -0800 (PST)
+	Mon, 31 Dec 2012 09:17:42 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Dec 2012 18:17:16 +0100
-Message-Id: <1356974245-3497-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Dec 2012 18:17:18 +0100
+Message-Id: <1356974245-3497-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1356974245-3497-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome 01/10] exo: update to 0.10.1
+Subject: [meta-xfce/meta-gnome 03/10] thunar: update to 1.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +51,32 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/exo/exo/configure.patch     |    4 ++--
- .../exo/{exo_0.8.0.bb => exo_0.10.2.bb}            |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-xfce/exo/{exo_0.8.0.bb => exo_0.10.2.bb} (87%)
+ .../thunar/{thunar_1.4.0.bb => thunar_1.6.2.bb}    |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.4.0.bb => thunar_1.6.2.bb} (84%)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo/configure.patch b/meta-xfce/recipes-xfce/exo/exo/configure.patch
-index 2ccfcfc..ef27e42 100644
---- a/meta-xfce/recipes-xfce/exo/exo/configure.patch
-+++ b/meta-xfce/recipes-xfce/exo/exo/configure.patch
-@@ -1,5 +1,5 @@
----- exo-0.3.4/configure.in~	2007-12-02 10:37:06.000000000 -0200
--+++ exo-0.3.4/configure.in	2008-06-05 17:21:42.000000000 -0300
-+--- a/configure.ac	2007-12-02 10:37:06.000000000 -0200
-++++ b/configure.ac	2008-06-05 17:21:42.000000000 -0300
- @@ -127,22 +127,24 @@
-  dnl ***************************************
-  dnl *** Check for strftime() extensions ***
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.8.0.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
-similarity index 87%
-rename from meta-xfce/recipes-xfce/exo/exo_0.8.0.bb
-rename to meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
-index af9103f..4fdfd48 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.8.0.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
-@@ -13,8 +13,8 @@ SRC_URI += " \
-     file://gnome-mount \
- "
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
+similarity index 84%
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
+index 2d5b767..55b54d4 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.4.0.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
+@@ -3,12 +3,11 @@ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify xfce4-panel"
+-PR = "r1"
  
--SRC_URI[md5sum] = "189bd19210e1d7d8601be1cdf27bf259"
--SRC_URI[sha256sum] = "6e21aa30692affcb45fc8283d034da4a02221d26e3e1facb968d04fed4ba05b0"
-+SRC_URI[md5sum] = "c70f2a217811bfba2e62f938d4b8f748"
-+SRC_URI[sha256sum] = "b385828bf8a38204da3254b57fdfa25a72694495aa189fabd5040f707eec76ce"
+ inherit xfce
  
- # see http://wiki.xfce.org/gnomemount-replacement
- do_install_append () {
+-SRC_URI[md5sum] = "737ad2c36ed36b10fef82e860b9e990a"
+-SRC_URI[sha256sum] = "2c11a19e64cef708a264fb4d5d933389899c3d132fe7b1e313dd6e37bfe4c8ba"
++SRC_URI[md5sum] = "a446103ab90855cc8ba484dfeedb82d8"
++SRC_URI[sha256sum] = "7dbd172ae396e7a2533f47dc1ff703a9ea1a61af3edfdc6f4877b9b9331abd85"
+ SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
+ 
+ S = "${WORKDIR}/Thunar-${PV}/"
 -- 
 1.7.4.4
 
