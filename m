@@ -1,37 +1,37 @@
-Received: from mail-ea0-f176.google.com ([209.85.215.176])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TqQI4-0000Yv-Oc
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TqQI6-0000Yx-1s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jan 2013 16:31:37 +0100
-Received: by mail-ea0-f176.google.com with SMTP id d13so5961057eaa.35
+	Wed, 02 Jan 2013 16:31:38 +0100
+Received: by mail-ea0-f175.google.com with SMTP id h11so5782554eaa.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jan 2013 07:16:34 -0800 (PST)
+	Wed, 02 Jan 2013 07:16:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=gZjNi+JgJlEQTrM6WGE8UlsH1mJE5tnLw1gerg/tE9g=;
-	b=tsB6QfRx6fOAAbWU+IbyeA/FU7oMl8N3zx18TDXPxCRSOkWSf9EOBtQnnNE4YGNucs
-	NKlO1BOXe+M56UUX+ZTvXIzpZs+93luS1mwM/Q28eKCjhpJUtbsQyqaTxq/KSMCp3tFS
-	83ibEci8MG9gAXXRxQY5e3tzTzRJWy9QxhHk9iHt46cY/1GSugEWgEMwIAfQaLPNpQ8Y
-	b82bUh57DUfsVc1oI1E+u+JVhs/SO5UjxPFSWrev6q5Dc70QgxtDG5Dr85asq7eUZD/K
-	/qqKW00jzJPpJJcDD8jnCkmt+y165ro8DlHFbLSE1tvQ1zyMt+0f1xx1J02psTc6hJqy
-	thyw==
-X-Received: by 10.14.204.198 with SMTP id h46mr126682209eeo.1.1357139794552;
-	Wed, 02 Jan 2013 07:16:34 -0800 (PST)
+	bh=oo+g5mjUy0iNEwZ/vlryJXDhwvcp22Wk6r/06dq/esI=;
+	b=gCubZgo0P+x20OXg5aNPQl1IRRh9VmIldVMt+VKcOv1CGzXchH78JYjqHTG537dK4S
+	yRT2WKTvdPKU6nyOpUS2a9fIjrlBQ9t1dw/1jSH5x7mb9fjxgHAU0X6LPKNw7DzXSsEy
+	Vq6O29AGpDPPYum70eSY87qCkinKNlInC/B6cvkRlLgH3Ruu5EbIJyOSWi97uztcMLmR
+	QBqRkDyP4XegHH+GLDWZGq6+ZG8EIRR4AAD/7TkxQHJdjpGRgGl/x2chVSneF6oJbYzK
+	aTHTC7r4k3WqnmI7rd3kxj1C/Bv4JzRn6sdjC27B0PFr34H+7Oo+EA8QMHR4HQHp5ezn
+	ftJQ==
+X-Received: by 10.14.219.72 with SMTP id l48mr126394455eep.37.1357139795877;
+	Wed, 02 Jan 2013 07:16:35 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1C58.dip.t-dialin.net.
 	[79.223.28.88])
-	by mx.google.com with ESMTPS id b2sm98071345eep.9.2013.01.02.07.16.33
+	by mx.google.com with ESMTPS id b2sm98071345eep.9.2013.01.02.07.16.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Jan 2013 07:16:33 -0800 (PST)
+	Wed, 02 Jan 2013 07:16:35 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jan 2013 16:16:10 +0100
-Message-Id: <1357139774-4364-7-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  2 Jan 2013 16:16:11 +0100
+Message-Id: <1357139774-4364-8-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome/V2 06/10] mousepad: initial add 0.3.0
+Subject: [meta-xfce/meta-gnome/V2 07/10] xfce4-mixer: update to 4.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +51,30 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
+ ...{xfce4-mixer_4.8.0.bb => xfce4-mixer_4.10.0.bb} |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-apps/xfce4-mixer/{xfce4-mixer_4.8.0.bb => xfce4-mixer_4.10.0.bb} (53%)
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
-new file mode 100644
-index 0000000..859c90e
---- /dev/null
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "A simple text editor for Xfce"
-+SECTION = "x11/application"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "gtk+ dbus-glib gtksourceview2"
-+
-+inherit xfce-app
-+
-+SRC_URI[md5sum] = "dcfcdfaa8a19c89f35d5f6f64753e6e1"
-+SRC_URI[sha256sum] = "10f27506994d0d0b8f9e02555404a144babedab97517abe3b6be8b2d21ff046d"
+diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
+similarity index 53%
+rename from meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
+rename to meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
+index 23a8ba5..1884860 100644
+--- a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.8.0.bb
++++ b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.10.0.bb
+@@ -6,9 +6,9 @@ inherit xfce-panel-plugin
+ 
+ DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf"
+ 
+-SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "3fa3a9973e18c04da26709a654e242ff"
+-SRC_URI[sha256sum] = "9f9f48fdd0d3f6b1e46694b93a44d15b800db72a96d831b5111d9ac976970fab"
++SRC_URI[md5sum] = "e47d5b3e873fdee3fa80d309a5f53e9c"
++SRC_URI[sha256sum] = "a8c589001b438171ea5a6b46ce9895c3ffbc5081ab67805ab9870e540068dade"
+ 
+ RDEPENDS_${PN} = "gst-meta-audio"
 -- 
 1.7.4.4
 
