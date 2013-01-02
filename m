@@ -1,37 +1,37 @@
-Received: from mail-ea0-f181.google.com ([209.85.215.181])
+Received: from mail-da0-f41.google.com ([209.85.210.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TqPKH-0006nr-Oz
+	(envelope-from <martin.jansa@gmail.com>) id 1TqPk3-0007cD-Sn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jan 2013 15:29:49 +0100
-Received: by mail-ea0-f181.google.com with SMTP id k14so5956269eaa.40
+	Wed, 02 Jan 2013 15:56:28 +0100
+Received: by mail-da0-f41.google.com with SMTP id e20so6541071dak.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jan 2013 06:14:47 -0800 (PST)
+	Wed, 02 Jan 2013 06:41:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=L/uyGxb4rSHRtsuXfU6NX2sNvuNyRqdwIgQQoULbvSs=;
-	b=IcFx80ZE1zMadYxr02i/F/PQY5aJqHBqTcmDNJozfwylMm2kWQlSixkC8jdk9S0rl5
-	y9EC1lZIhSHjW+NSujhYI+ATcZwCkKUSwbNcGOnyB8zVnOKuBYAgTccSkW6k8xnas9RZ
-	2zenk7llnC75kIDMbR+t9mmqmdfj7IpNZDkSKY5TCB8KZZsgPE470JiIAUxcnjpLIOff
-	I91cW17QaluZs46Pn3rZB6+YUNjEVaS96LvnN+kxo9ubN9hdyONV6FJ5kdOELu9/YA2C
-	JUTWnA9v0mENOSxXiy30qsy0VY/Qf8OvC0jQgZ/GAJfGT9SH6veAZUltJAt3ki/MYuAm
-	uy1A==
-X-Received: by 10.14.221.5 with SMTP id q5mr125437565eep.33.1357136087657;
-	Wed, 02 Jan 2013 06:14:47 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=DAonncxA4KDr/KzGILkwP5UvEjRV8RsnQ+c2sXwS19g=;
+	b=w29AR58B/TXs07mnEQcaBVR1M51MVem+2P6tQI7rmqUT4aEg+5m08EQNva+DOxok39
+	vTGbuiedoFTI5LxBRyDYINUFzmevWeiTzu6Rnz1iVqDKkwTg4ECNJG96Wt2I15RvPhyU
+	CZBGcdtHu+0RLkxwXczVievPVkaZkAVaw6NMz56R7ArLRe/9X2/IdDPPz2QzervwUvGr
+	152bcY+msXKNcuZujkSduCIKlkJyp8fQl78Yg5+0ZWncvWBXHCdwQNAgGbX65cDQo5FW
+	pVgATQchaH/xZiO2I2mUxWuJYf6tu7O6I3oK0p4tAP5ITtIKP7p1udV9HW+M57NAplPq
+	nEwg==
+X-Received: by 10.69.1.73 with SMTP id be9mr146367601pbd.116.1357137684054;
+	Wed, 02 Jan 2013 06:41:24 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id f49sm97795739eep.12.2013.01.02.06.14.46
+	by mx.google.com with ESMTPS id o11sm28545989pby.8.2013.01.02.06.41.21
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Jan 2013 06:14:47 -0800 (PST)
+	Wed, 02 Jan 2013 06:41:22 -0800 (PST)
+Date: Wed, 2 Jan 2013 15:41:29 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jan 2013 15:14:47 +0100
-Message-Id: <ea5953df69c35734e4859cb62e345f4767f5b89c.1357135909.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.0.2
-In-Reply-To: <cover.1357135909.git.Martin.Jansa@gmail.com>
+Message-ID: <20130102144129.GC3276@jama>
 References: <cover.1357135909.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1357135909.git.Martin.Jansa@gmail.com>
-References: <cover.1357135909.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 6/6] edbus2: fix segfaults in eve/enjoy
+	<ea5953df69c35734e4859cb62e345f4767f5b89c.1357135909.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ea5953df69c35734e4859cb62e345f4767f5b89c.1357135909.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][meta-efl][PATCH 6/6] edbus2: fix segfaults in eve/enjoy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jan 2013 14:29:50 -0000
+X-List-Received-Date: Wed, 02 Jan 2013 14:56:28 -0000
+X-Groupsio-MsgNum: 42450
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L6iaP+gRLNZHKoI4"
+Content-Disposition: inline
 
-* edbus2 is using AC_TRY_RUN in edbus/m4/ac_valist.m4, it does not
-  work for us cross-compiling, so let's define it directly
-* without this change eve/enjoy segfaults:
-  http://sourceforge.net/mailarchive/message.php?msg_id=30297875
-* remove HAL from DESCRIPTION, it's from e_dbus
+--L6iaP+gRLNZHKoI4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/edbus2.inc    | 2 +-
- meta-efl/recipes-efl/efl/edbus2_svn.bb | 4 +++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+On Wed, Jan 02, 2013 at 03:14:47PM +0100, Martin Jansa wrote:
+> * edbus2 is using AC_TRY_RUN in edbus/m4/ac_valist.m4, it does not
+>   work for us cross-compiling, so let's define it directly
+> * without this change eve/enjoy segfaults:
+>   http://sourceforge.net/mailarchive/message.php?msg_id=3D30297875
+> * remove HAL from DESCRIPTION, it's from e_dbus
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-diff --git a/meta-efl/recipes-efl/efl/edbus2.inc b/meta-efl/recipes-efl/efl/edbus2.inc
-index 00e2a28..9b41d8b 100644
---- a/meta-efl/recipes-efl/efl/edbus2.inc
-+++ b/meta-efl/recipes-efl/efl/edbus2.inc
-@@ -1,4 +1,4 @@
--DESCRIPTION = "DBus and HAL convenience wrappers for EFL"
-+DESCRIPTION = "DBus convenience wrappers for EFL"
- DEPENDS = "dbus ecore eina"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4ed65f801204783f71fedafc082038d9"
-diff --git a/meta-efl/recipes-efl/efl/edbus2_svn.bb b/meta-efl/recipes-efl/efl/edbus2_svn.bb
-index 1461d46..7d58326 100644
---- a/meta-efl/recipes-efl/efl/edbus2_svn.bb
-+++ b/meta-efl/recipes-efl/efl/edbus2_svn.bb
-@@ -2,9 +2,11 @@ require ${BPN}.inc
- 
- SRCREV = "${EFL_SRCREV}"
- PV = "1.7.99+svnr${SRCPV}"
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- DEFAULT_PREFERENCE = "-1"
- 
-+CACHED_CONFIGUREVARS += "ac_cv_valistasarray=yes"
-+
- SRC_URI = "\
-   ${E_SVN}/trunk/IN-EFL;module=${SRCNAME};protocol=http;scmdata=keep \
- "
--- 
-1.8.0.2
+ignore this one, it fixes segfault on x86_64 but fails on arm..
 
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--L6iaP+gRLNZHKoI4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDkRxkACgkQN1Ujt2V2gByoAgCdGITuLeWo8ztEbtaxNQhVcQRO
+MocAn2byhyOLTbP9v0FNXTjiT9jryoEA
+=tqhY
+-----END PGP SIGNATURE-----
+
+--L6iaP+gRLNZHKoI4--
