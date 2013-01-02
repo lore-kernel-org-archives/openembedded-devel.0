@@ -1,37 +1,37 @@
-Received: from mail-ee0-f41.google.com ([74.125.83.41])
+Received: from mail-ee0-f48.google.com ([74.125.83.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TqQIA-0000Zn-72
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TqQIC-0000Yz-FH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jan 2013 16:31:42 +0100
-Received: by mail-ee0-f41.google.com with SMTP id d41so7124898eek.28
+	Wed, 02 Jan 2013 16:31:44 +0100
+Received: by mail-ee0-f48.google.com with SMTP id b57so7085388eek.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jan 2013 07:16:40 -0800 (PST)
+	Wed, 02 Jan 2013 07:16:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=xlYSlmc+TD2PDalHSu0mjeYc8DWm0ltwo0QJcpCt1Zg=;
-	b=KmCZiHunEXQEsZM1xBFhs83peMUSyiRm+c83E685v2AVdJY2vzmfsY12Mhzlm6TpUe
-	8LnrrwA0p9elL4AGVw/8OuzaFGSb63LFt9YOgDvGD7iH2r5hatwoTb8CuG2Xat+khd8a
-	hboiIg6LlMOCYA4UDN3Jf96UtSPprAsiNgMDI5vMicIag1LJMcpervwIPA/O7r9BwdPz
-	Hu0YWWoCnj+zTZtv4VWlQCt9oWoBstRrMaR5esGKHHNtRbJLSRGdCk4NT6YCgGmA2nPb
-	U4aRT7VX28iD0BlUXfIDjpOcruW8WEoTx+UA82UIyeg7I3NhRvXotELO4L6fZPE3ldIf
-	zRmQ==
-X-Received: by 10.14.178.196 with SMTP id f44mr126327151eem.14.1357139800009; 
-	Wed, 02 Jan 2013 07:16:40 -0800 (PST)
+	bh=PN2qu0LIoLGHP1nPu/lOCECbn05g9Bjh+AQLwkjgOHo=;
+	b=J5cPJsxLs0xeGxgHvesCILsXsaQtbK0X6zH8vZRBBFMMwkDQb0u3YefjtoOIJggeF/
+	XoVjTPkBEVaxQlxbqWyxsthJ5eIhKcRYSVT/lWU8Wfi6HZUrfw9ow90BJr5W1Jarp2Tl
+	MnJJ5VnKeb71HlQwxiRzpS90U7Hi9RMeqG+eAWfKj5CAYV3+AfJIX0WxNFT2kBaJi3Q4
+	HTWowwqk0uqtL9XsqC0odSiv4ku+IacWmnBpEdvlo9PmbMp1tyGqEdo+Qt99lyy87XQ7
+	bv5GB62le9lwkQHF3JTlUxJpKwv+vyQ9uGhTlTTmdm6fFRa4Bh69hIIoJut132XH/1Ly
+	gV7g==
+X-Received: by 10.14.204.198 with SMTP id h46mr126682496eeo.1.1357139797277;
+	Wed, 02 Jan 2013 07:16:37 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1C58.dip.t-dialin.net.
 	[79.223.28.88])
-	by mx.google.com with ESMTPS id b2sm98071345eep.9.2013.01.02.07.16.38
+	by mx.google.com with ESMTPS id b2sm98071345eep.9.2013.01.02.07.16.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 Jan 2013 07:16:39 -0800 (PST)
+	Wed, 02 Jan 2013 07:16:36 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jan 2013 16:16:14 +0100
-Message-Id: <1357139774-4364-11-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  2 Jan 2013 16:16:12 +0100
+Message-Id: <1357139774-4364-9-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce/meta-gnome/V2 10/10] xfce4-session: fix build on X11-less hosts
+Subject: [meta-xfce/meta-gnome/V2 08/10] xfce4-places-plugin: update to 1.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,90 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jan 2013 15:31:42 -0000
+X-List-Received-Date: Wed, 02 Jan 2013 15:31:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-error message was:
-| checking for iceauth... no
-| configure: error: iceauth missing, please check your X11 installation
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...03-configure.in-hard-code-path-to-iceauth.patch |   40 ++++++++++++++++++++
- .../xfce4-session/xfce4-session_4.10.0.bb          |    6 ++-
- 2 files changed, 44 insertions(+), 2 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch
+ ...lugin_1.4.0.bb => xfce4-places-plugin_1.5.0.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.4.0.bb => xfce4-places-plugin_1.5.0.bb} (68%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch b/meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch
-new file mode 100644
-index 0000000..41a527c
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch
-@@ -0,0 +1,40 @@
-+From a629b051f4e5462150c77b95574bbc7a33bc9666 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Mon, 31 Dec 2012 16:35:29 +0100
-+Subject: [PATCH] configure.in: hard code path to iceauth
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+workaround AC_PATH_PROG which was meant to find programs required at build-time
-+not at run-time.
-+
-+Upstream-Status: Inappropriate [config]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ configure.in |    8 +-------
-+ 1 files changed, 1 insertions(+), 7 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 3cf3510..505e744 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -111,13 +111,7 @@ XDT_FEATURE_DEBUG([xfsm_debug_default])
-+ dnl Check for linker optimizations
-+ XDT_FEATURE_LINKER_OPTS()
-+ 
-+-dnl Check for iceauth
-+-AC_PATH_PROG([ICEAUTH], [iceauth])
-+-if test x"$ICEAUTH" != x""; then
-+-  AC_DEFINE_UNQUOTED([ICEAUTH_CMD], ["$ICEAUTH"], [path to iceauth])
-+-else
-+-  AC_MSG_ERROR([iceauth missing, please check your X11 installation])
-+-fi
-++AC_DEFINE_UNQUOTED([ICEAUTH_CMD], ["$bindir/iceauth"], [path to iceauth])
-+ 
-+ dnl Find a location for the session desktop file
-+ AC_MSG_CHECKING([what xsession-prefix to use])
-+-- 
-+1.7.4.4
-+
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-index 3bd3743..6ad834d 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-@@ -4,14 +4,16 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
- DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
- RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
--PR = "r1"
-+PR = "r2"
+diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+similarity index 68%
+rename from meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb
+rename to meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+index 1f6c231..2e0b810 100644
+--- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.4.0.bb
++++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
  
- inherit xfce
+ inherit xfce-panel-plugin
  
- SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
- SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a72c46ce"
- SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch \
--            file://0002-Remove-gnome-keyring-remains.patch"
-+            file://0002-Remove-gnome-keyring-remains.patch \
-+            file://0003-configure.in-hard-code-path-to-iceauth.patch \
-+"
- 
- # protect from frightening message that xfce might not work correctly
- pkg_postinst_${PN} () {
+-SRC_URI[md5sum] = "cdb5c966c7a93ca29f2ce50223782133"
+-SRC_URI[sha256sum] = "d2a451a35096ecb8b6ca96ab0af3ebca3f163a7c8dc08627518940a633cce5e5"
++SRC_URI[md5sum] = "84c39fb123e07e1c7caaf006d9383656"
++SRC_URI[sha256sum] = "6996051669a13d4791a5a453747801dc2f7f6fa5546785622d80b34966283d44"
 -- 
 1.7.4.4
 
