@@ -1,21 +1,20 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from afflict.kos.to ([92.243.29.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <damien.rannou@diateam.net>) id 1TqLp5-0002BJ-JG
+	(envelope-from <riku.voipio@linaro.org>) id 1TqNpX-0004j6-Ev
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jan 2013 11:45:23 +0100
-Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id B77CCD1B0EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jan 2013 11:21:59 +0100 (CET)
-Received: from pippin.diateam.local (unknown [78.223.33.15])
-	by smtp4-g21.free.fr (Postfix) with ESMTP id 8604C4C810D;
-	Wed,  2 Jan 2013 11:21:55 +0100 (CET)
-From: Damien RANNOU <damien.rannou@diateam.net>
+	Wed, 02 Jan 2013 13:53:59 +0100
+Received: from aimless.elisa-laajakaista.fi
+	(a91-156-58-157.elisa-laajakaista.fi [91.156.58.157])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by afflict.kos.to (Postfix) with ESMTPSA id A3971264BB;
+	Wed,  2 Jan 2013 13:38:57 +0100 (CET)
+From: Riku Voipio <riku.voipio@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jan 2013 11:21:21 +0100
-Message-Id: <1357122081-20776-1-git-send-email-damien.rannou@diateam.net>
+Date: Wed,  2 Jan 2013 14:38:50 +0200
+Message-Id: <1357130330-2531-1-git-send-email-riku.voipio@linaro.org>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH] HostAP-daemon patch to make it compile with libnl 3.2
+Subject: [meta-oe][PATCH] krb5: reconfigure for aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,39 +28,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jan 2013 10:45:24 -0000
+X-List-Received-Date: Wed, 02 Jan 2013 12:53:59 -0000
 
-Signed-off-by: Damien RANNOU <damien.rannou@diateam.net>
+krb5 needs reconfigure, since the current config.sub included doesn't
+include aarch64.
 ---
- meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig |    2 +-
- meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb        |    1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/krb5/krb5_1.11.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig b/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig
-index 1f3c6f4..2789640 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig
-+++ b/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig
-@@ -24,7 +24,7 @@ CONFIG_DRIVER_PRISM54=y
- 
- # Driver interface for drivers using the nl80211 kernel interface
- CONFIG_DRIVER_NL80211=y
--CONFIG_LIBNL20=y
-+CONFIG_LIBNL32=y
- # driver_nl80211.c requires a rather new libnl (version 1.1) which may not be
- # shipped with your distribution yet. If that is the case, you need to build
- # newer libnl version and point the hostapd build to use it.
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb b/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb
-index 310e8aa..e62531f 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb
-@@ -26,6 +26,7 @@ do_configure() {
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+index b1bb32a..c755862 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+@@ -35,5 +35,6 @@ python do_unpack() {
  }
  
- do_compile() {
-+	export CFLAGS="-MMD -O2 -Wall -g -I${STAGING_INCDIR}/libnl3"
- 	make
+ do_configure() {
+-	oe_runconf
++    gnu-configize --force
++    oe_runconf
  }
- 
 -- 
 1.7.10.4
 
