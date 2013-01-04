@@ -1,35 +1,36 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TrDvT-00042C-7W
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TrDvF-000421-7C
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 04 Jan 2013 21:32:53 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r04KGSjw023343
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r04KGGi8016446
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Jan 2013 12:16:28 -0800 (PST)
+	Fri, 4 Jan 2013 12:16:16 -0800 (PST)
 Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Fri, 4 Jan 2013 12:16:28 -0800
+	(TLS) id 14.2.318.4; Fri, 4 Jan 2013 12:16:13 -0800
 Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 941997FCE;
-	Fri,  4 Jan 2013 15:14:56 -0500 (EST)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 61ACF24173; Fri,
-	4 Jan 2013 15:16:27 -0500 (EST)
-Date: Fri, 4 Jan 2013 15:16:27 -0500
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 605097FCE;
+	Fri,  4 Jan 2013 15:14:42 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 1DE8024172; Fri,
+	4 Jan 2013 15:16:13 -0500 (EST)
+Date: Fri, 4 Jan 2013 15:16:13 -0500
 From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130104201627.GH2874@windriver.com>
-References: <1357299205-21120-1-git-send-email-andrei.gherzan@windriver.com>
+To: <rongqing.li@windriver.com>
+Message-ID: <20130104201612.GG2874@windriver.com>
+References: <1356505876-32548-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1357299205-21120-1-git-send-email-andrei.gherzan@windriver.com>
+In-Reply-To: <1356505876-32548-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
-Subject: Re: [meta-networking][PATCH] layer.conf: Use .= for adding to BBPATH and += to BBFILES
+Cc: openembedded-devel@lists.openembedded.org, Liezhi.Yang@windriver.com,
+	Zhenfeng.Zhao@windriver.com
+Subject: Re: [meta-networking][PATCH] radvd: change scanner.* file dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,70 +45,98 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 04 Jan 2013 20:32:58 -0000
-X-List-Received-Date: Fri, 04 Jan 2013 20:32:58 -0000
-X-Groupsio-MsgNum: 42495
+X-Groupsio-MsgNum: 42496
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zhtSGe8h3+lMyY1M"
+	protocol="application/pgp-signature"; boundary="xjyYRNSh/RebjC6o"
 Content-Disposition: inline
 
---zhtSGe8h3+lMyY1M
+--xjyYRNSh/RebjC6o
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
+(Finally) Merged, thanks.
+
 -J.
 
-[[oe] [meta-networking][PATCH] layer.conf: Use .=3D for adding to BBPATH an=
-d +=3D to BBFILES] On 13.01.04 (Fri 13:33) Andrei Gherzan wrote:
+[[meta-networking][PATCH] radvd: change scanner.* file dependency] On 12.12=
+=2E26 (Wed 15:11) rongqing.li@windriver.com wrote:
 
-> Fixes parsing errors which is appearing after this commit to
-> meta-openembedded
+> From: "Roy.Li" <rongqing.li@windriver.com>
 >=20
-> http://cgit.openembedded.org/meta-openembedded/commit/?id=3D3c21a46020bd0=
-816579648f684c41dbd6333583e
+> generation of scanner.c needs gram.h, not just scanner.o
 >=20
-> This triggers
-> exception NameError: name 'base_contains' is not defined
-> without this change
->=20
-> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
 > ---
->  meta-networking/conf/layer.conf |    6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  .../radvd/files/change-scanner-dependency.patch    |   24 ++++++++++++++=
+++++++
+>  recipes-daemons/radvd/radvd_1.9.1.bb               |    5 +++-
+>  2 files changed, 28 insertions(+), 1 deletion(-)
+>  create mode 100644 recipes-daemons/radvd/files/change-scanner-dependency=
+=2Epatch
 >=20
-> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
-=2Econf
-> index f26a172..1ea2bc2 100644
-> --- a/meta-networking/conf/layer.conf
-> +++ b/meta-networking/conf/layer.conf
-> @@ -1,9 +1,9 @@
->  # We have a conf and classes directory, add to BBPATH
-> -BBPATH :=3D "${BBPATH}:${LAYERDIR}"
-> +BBPATH .=3D ":${LAYERDIR}"
+> diff --git a/recipes-daemons/radvd/files/change-scanner-dependency.patch =
+b/recipes-daemons/radvd/files/change-scanner-dependency.patch
+> new file mode 100644
+> index 0000000..b190866
+> --- /dev/null
+> +++ b/recipes-daemons/radvd/files/change-scanner-dependency.patch
+> @@ -0,0 +1,24 @@
+> +scanner.c is generated by flex using scanner.l, scanner.l needs gram.h
+> +when produce scanner.c, so redefine the dependency relation
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> +---
+> + Makefile.am |    3 +--
+> + 1 files changed, 1 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 04b834b..2da986c 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -131,5 +131,4 @@ dist-hook:
+> + 	rm -f $(distdir)/gram.h
+> + 	rm -f $(distdir)/scanner.c
+> +=20
+> +-scanner.o: gram.h
+> +-
+> ++scanner.c: gram.h
+> +--=20
+> +1.7.4.1
+> +
+> diff --git a/recipes-daemons/radvd/radvd_1.9.1.bb b/recipes-daemons/radvd=
+/radvd_1.9.1.bb
+> index 26d21ce..37c224b 100644
+> --- a/recipes-daemons/radvd/radvd_1.9.1.bb
+> +++ b/recipes-daemons/radvd/radvd_1.9.1.bb
+> @@ -1,6 +1,9 @@
+> -PR =3D "r0"
+> +PR =3D "r1"
 > =20
->  # We have a packages directory, add to BBFILES
-> -BBFILES :=3D "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb \
-> - ${LAYERDIR}/recipes-*/*/*.bbappend"
-> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb \
-> +            ${LAYERDIR}/recipes-*/*/*.bbappend"
+>  require radvd.inc
 > =20
->  BBFILE_COLLECTIONS +=3D "networking"
->  BBFILE_PATTERN_networking :=3D "^${LAYERDIR}/"
+>  SRC_URI[md5sum] =3D "e807ad7e9a76d46b6133df391385cd31"
+>  SRC_URI[sha256sum] =3D "54eb5704a2b710ba946fa30d2bca811fa23b1b3bfab322c3=
+8cb0c2a9619aa933"
+> +
+> +SRC_URI +=3D "\
+> +	file://change-scanner-dependency.patch"
 --=20
 -Joe MacDonald.
 :wq
 
---zhtSGe8h3+lMyY1M
+--xjyYRNSh/RebjC6o
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlDnOJsACgkQPN8S4W6ZZnfEogCeOCYaTAzBYu0PGFUdVNJ+CH2h
-Y50An2j8ycAzKLmQlT3oqCv0SGhQUAsb
-=IMJN
+iEYEARECAAYFAlDnOIwACgkQPN8S4W6ZZnet2ACfTQteOzQpLCUFuFJVVQ2N7yAd
+Dx4An2qK22tj81ZKsaFYQ9egNBYKpQeI
+=1Dcw
 -----END PGP SIGNATURE-----
 
---zhtSGe8h3+lMyY1M--
+--xjyYRNSh/RebjC6o--
