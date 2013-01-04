@@ -1,33 +1,35 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pa0-f45.google.com ([209.85.220.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TqyZU-0001nI-SJ
+	(envelope-from <raj.khem@gmail.com>) id 1Tqygm-0001z4-Hp
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jan 2013 05:08:00 +0100
-Received: by mail-pb0-f47.google.com with SMTP id un1so8892956pbc.6
+	Fri, 04 Jan 2013 05:15:26 +0100
+Received: by mail-pa0-f45.google.com with SMTP id bg2so9004797pad.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jan 2013 19:52:47 -0800 (PST)
+	Thu, 03 Jan 2013 20:00:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=NBG/FjpRgwP3i8bMDSfSSlIOhzliEQvVn3DUSQokekE=;
-	b=UOe+Aq0Iuuvj0sHtK8oETqVFSrIBZxq4oA9jthG++tGW4Uv543DBknAGZbjaB610UJ
-	dpXIgAaogAg/KhmxGNq+uGJpEPVr7s8Inljm90AKss89JLhX04Vxe/K/p3EjlujwsD0c
-	JFSob4lM8dEBKKPbF5GzQxifflaCoIkAntioS9Xwn55YwNQzXbG+UUt+wp8rOyoGKB28
-	XOBQ0kKCAAT4JSrE/AtE+gVW8CO6vI7WwK1wXTBCGaVCcX+fdEJ9sxLOpck55nJzdbUQ
-	TOCk2BjEfBTAZBZVcHRdJ19bgHavsYIv1+sh6Lgv5hXc9UyFV8tv6xtZAlFSH1hT1GlB
-	gPTQ==
-X-Received: by 10.66.89.199 with SMTP id bq7mr151149720pab.26.1357271567529;
-	Thu, 03 Jan 2013 19:52:47 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=/fSWB9LmYHmVC4gzOG4GD7/t0ah9ynsOJ2qCtffg48s=;
+	b=SShLBwiWTBtkvWvx9NWqRuwDWuI/6vORovAoCxchhQnWrqJfvibk8EWxmPk7mE7iMf
+	s+ODp1DOvRb5iyhkjKRNlPCpianUu7my7A2K4aRs1AqZGN2eSo7jj7X3FRwjj79zyLRu
+	aK36aar4yme+B9JGS/oMLI/ZM1LtodVdJ6yPm+iw7zGuMjMTqEOPvTl42tNBNk7j0e4X
+	UB2qZDBlP9I8tPp21bo2XqLR1enUjIpvcnkcyVWz8wx+l14pKhYJL4rlJpKEsEuhmwa5
+	vM+tAh3KsxqecY6PvZXyZoH/R8qtMuThxYAYWWI0m9oHG2CPaLV6RV8vPgp0/ZftAsBP
+	NTVg==
+X-Received: by 10.68.132.34 with SMTP id or2mr159963791pbb.133.1357272019347; 
+	Thu, 03 Jan 2013 20:00:19 -0800 (PST)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id qb3sm31432797pbb.35.2013.01.03.19.52.45
+	by mx.google.com with ESMTPS id oi2sm31436970pbb.62.2013.01.03.20.00.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 Jan 2013 19:52:46 -0800 (PST)
+	Thu, 03 Jan 2013 20:00:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Jan 2013 19:52:02 -0800
-Message-Id: <1357271522-10566-1-git-send-email-raj.khem@gmail.com>
+Date: Thu,  3 Jan 2013 19:59:28 -0800
+Message-Id: <1357271974-3317-6-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-opie][PATCH] layer.conf: Use .= for adding to BBPATH and += to BBFILES
+In-Reply-To: <1357271974-3317-1-git-send-email-raj.khem@gmail.com>
+References: <1357271974-3317-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-systemd][PATCH 07/13] dhclient.service: Rearrange the cmdline for dhclient
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jan 2013 04:08:11 -0000
-X-List-Received-Date: Fri, 04 Jan 2013 04:08:11 -0000
-
-Fixes parsing errors which is appearing after this commit to
-meta-openembedded
-
-http://cgit.openembedded.org/meta-openembedded/commit/?id=3c21a46020bd0816579648f684c41dbd6333583e
-
-This triggers
-exception NameError: name 'base_contains' is not defined
-without this change
+X-List-Received-Date: Fri, 04 Jan 2013 04:15:54 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/layer.conf |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../dhcp/dhcp/dhclient.service                     |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 4d900c9..6950246 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -2,10 +2,10 @@
- # Copyright 2011 Intel Corporation
+diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhclient.service b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhclient.service
+index 76d64d5..c9620cf 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhclient.service
++++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhclient.service
+@@ -6,7 +6,7 @@ After=syslog.target network.target
+ Type=forking
+ PIDFile=/var/run/dhclient.pid
+ EnvironmentFile=-/etc/default/dhcp-client
+-ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q $INTERFACES -lf /var/lib/dhcp/dhclient.leases
++ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases $INTERFACES
  
- # We have a conf and classes directory, prepend to BBPATH to prefer our versions
--BBPATH := "${LAYERDIR}:${BBPATH}"
-+BBPATH .= ":${LAYERDIR}"
- 
- # We have a recipes directory, add to BBFILES
--BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
-+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- 
- BBFILE_COLLECTIONS += "meta-opie"
- BBFILE_PATTERN_meta-opie := "^${LAYERDIR}/"
+ [Install]
+ WantedBy=multi-user.target
 -- 
 1.7.9.5
 
