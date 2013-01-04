@@ -1,38 +1,33 @@
-Received: from mail-la0-f52.google.com ([209.85.215.52])
+Received: from mail-pb0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cazfi74@gmail.com>) id 1TqqAQ-0006Wd-Eh
+	(envelope-from <raj.khem@gmail.com>) id 1TqyZU-0001nI-SJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jan 2013 20:09:49 +0100
-Received: by mail-la0-f52.google.com with SMTP id fq12so8502401lab.11
+	Fri, 04 Jan 2013 05:08:00 +0100
+Received: by mail-pb0-f47.google.com with SMTP id un1so8892956pbc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jan 2013 10:54:22 -0800 (PST)
+	Thu, 03 Jan 2013 19:52:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=+NUvBoLp0j2YYNtZ+iorC7KreWRctfKxuUv5dTzMOMM=;
-	b=fC2Xcy7xwp8AW6kzsIjx1XWHTSvXyYBbjvoFYwuP0pMCwmSRBrIHz1nVZqlQuJTgmw
-	1V1FJfM+JJL2SOEOyjuJW1DAgu9OXXkKeh5tPB8ooNGKerMjNs05NmxhpXhbjenn5UOT
-	cpua+aKTaV1Mlgwt8t2YKfauH1zpyVxvAOrtyia+8P5fg7a1BxdPEPCZJ5WWcUIA1Rrt
-	ULhi5xzBGQi19FMP32HF27spwKnjTNhyDhkh6eq9iHtPzdpz8Q5bcLwoKFqNPFiQ/7ba
-	ue3HdE7vmPnVdBfWtfspx3LzHfIUG92r0EaJVMtUzmzQUHdvPPGT6Hu/IXbzK+IKCZtd
-	HkDQ==
-X-Received: by 10.152.111.41 with SMTP id if9mr47080413lab.23.1357239262468;
-	Thu, 03 Jan 2013 10:54:22 -0800 (PST)
-Received: from prime (a91-153-5-18.elisa-laajakaista.fi. [91.153.5.18])
-	by mx.google.com with ESMTPS id fh4sm17267244lbb.7.2013.01.03.10.54.20
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=NBG/FjpRgwP3i8bMDSfSSlIOhzliEQvVn3DUSQokekE=;
+	b=UOe+Aq0Iuuvj0sHtK8oETqVFSrIBZxq4oA9jthG++tGW4Uv543DBknAGZbjaB610UJ
+	dpXIgAaogAg/KhmxGNq+uGJpEPVr7s8Inljm90AKss89JLhX04Vxe/K/p3EjlujwsD0c
+	JFSob4lM8dEBKKPbF5GzQxifflaCoIkAntioS9Xwn55YwNQzXbG+UUt+wp8rOyoGKB28
+	XOBQ0kKCAAT4JSrE/AtE+gVW8CO6vI7WwK1wXTBCGaVCcX+fdEJ9sxLOpck55nJzdbUQ
+	TOCk2BjEfBTAZBZVcHRdJ19bgHavsYIv1+sh6Lgv5hXc9UyFV8tv6xtZAlFSH1hT1GlB
+	gPTQ==
+X-Received: by 10.66.89.199 with SMTP id bq7mr151149720pab.26.1357271567529;
+	Thu, 03 Jan 2013 19:52:47 -0800 (PST)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id qb3sm31432797pbb.35.2013.01.03.19.52.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 Jan 2013 10:54:21 -0800 (PST)
-Received: from cazfi by prime with local (Exim 4.80)
-	(envelope-from <cazfi74@gmail.com>)
-	id 1Tqpvn-0005WC-4U; Thu, 03 Jan 2013 20:54:19 +0200
-From: Marko Lindqvist <cazfi74@gmail.com>
+	Thu, 03 Jan 2013 19:52:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Jan 2013 20:54:14 +0200
-Message-Id: <1357239255-20959-3-git-send-email-cazfi74@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1357239255-20959-2-git-send-email-cazfi74@gmail.com>
-References: <1357239255-20959-1-git-send-email-cazfi74@gmail.com>
-	<1357239255-20959-2-git-send-email-cazfi74@gmail.com>
-Subject: [meta-oe][PATCH 2/3] libmikmod: replace obsolete automake macros with working ones
+Date: Thu,  3 Jan 2013 19:52:02 -0800
+Message-Id: <1357271522-10566-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-opie][PATCH] layer.conf: Use .= for adding to BBPATH and += to BBFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,53 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jan 2013 19:09:51 -0000
+X-List-Received-Date: Fri, 04 Jan 2013 04:08:11 -0000
+X-List-Received-Date: Fri, 04 Jan 2013 04:08:11 -0000
 
-Add obsolete-automake-macros.patch that replaces automake macros
-no longer supported by automake-1.13 with modern constructs.
+Fixes parsing errors which is appearing after this commit to
+meta-openembedded
 
-Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+http://cgit.openembedded.org/meta-openembedded/commit/?id=3c21a46020bd0816579648f684c41dbd6333583e
+
+This triggers
+exception NameError: name 'base_contains' is not defined
+without this change
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mikmod/libmikmod/obsolete_automake_macros.patch     |   15 +++++++++++++++
- meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb   |    1 +
- 2 files changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch
+ conf/layer.conf |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch b/meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch
-new file mode 100644
-index 0000000..082bb04
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch
-@@ -0,0 +1,15 @@
-+Upstream-Status: Submitted (https://sourceforge.net/tracker/?func=detail&aid=3599281&group_id=40531&atid=428227)
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-+diff -Nurd libmikmod-3.1.12/configure.in libmikmod-3.1.12/configure.in
-+--- libmikmod-3.1.12/configure.in	2007-12-15 11:22:57.000000000 +0200
-++++ libmikmod-3.1.12/configure.in	2013-01-03 07:26:10.662775603 +0200
-+@@ -13,7 +13,7 @@
-+ LIBMIKMOD_VERSION=$LIBMIKMOD_MAJOR_VERSION.$LIBMIKMOD_MINOR_VERSION.$LIBMIKMOD_MICRO_VERSION$BETA
-+
-+ AM_INIT_AUTOMAKE(libmikmod,$LIBMIKMOD_VERSION)
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS(config.h)
-+ AM_MAINTAINER_MODE
-+
-+ # ==============================================================
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
-index cd80a6f..af5b5ff 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
-@@ -11,6 +11,7 @@ SRC_URI = "\
-   file://autofoo.patch \
-   file://ldflags.patch \
-   file://CVE-2010-2971.patch \
-+  file://obsolete_automake_macros.patch \
- "
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 4d900c9..6950246 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -2,10 +2,10 @@
+ # Copyright 2011 Intel Corporation
  
- SRC_URI[md5sum] = "9f3c740298260d5f88981fc0d51f6f16"
+ # We have a conf and classes directory, prepend to BBPATH to prefer our versions
+-BBPATH := "${LAYERDIR}:${BBPATH}"
++BBPATH .= ":${LAYERDIR}"
+ 
+ # We have a recipes directory, add to BBFILES
+-BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
++BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "meta-opie"
+ BBFILE_PATTERN_meta-opie := "^${LAYERDIR}/"
 -- 
-1.7.10.4
+1.7.9.5
 
 
 
