@@ -1,33 +1,38 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-ea0-f169.google.com ([209.85.215.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tr6V3-0008RJ-6H
+	(envelope-from <martin.jansa@gmail.com>) id 1Tr6V8-0008RV-3X
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 04 Jan 2013 13:36:07 +0100
-Received: by mail-ea0-f173.google.com with SMTP id i13so6602742eaa.18
+Received: by mail-ea0-f169.google.com with SMTP id a12so6874140eaa.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jan 2013 04:20:44 -0800 (PST)
+	Fri, 04 Jan 2013 04:20:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=GRbyOI2yLsTPgYr1YAOAFUUBBwo+8yxrMzq0Unlv3mc=;
-	b=NeViHrodLfb2/Q+vQzXWgjjKo8sEar6AcchPixfFQUNr9xzRyT8jT6ZkJnkv47gmry
-	m115VcjboZZ3XyMpJaSmAJj7ITTNxKZiFKSzxPTYkyqLVA7Inz/Hy5CtWMR7GbfBiwbx
-	YRciVwx6seSlRk2Ctn0BC7Ot/qZnpQQXTYAE8I47eQRCcGA+i/AqdJRBL3qNp8EzpHgE
-	i15u6e7+rLrb8twK3KqyAC7EhuiDRhEarPgff54srplcAVm5+unVEh0eGpVku4qry3El
-	3BBpxWyWZA4zbWmUbRyt6NlG+2b5Oo9I9tI7843LFk7sfO9CFTdoLDZP1gkwPnlFTh0j
-	x/Kg==
-X-Received: by 10.14.204.198 with SMTP id h46mr143486967eeo.1.1357302044197;
-	Fri, 04 Jan 2013 04:20:44 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=pGtBWPXACxj3WKNokMs3rEqOEJQbPWbSBtTp/KvWSls=;
+	b=yxkHS1OuGp8VWpOMJYi7iEfGxU5wAH2Q9Fg+q+sWJpeHRk21dsx+7JusLwtd7/PIe/
+	AGDT4RuT+1B9cQITLWw2Lpblh6Hv4mX5iqVF2+ZmqaYbTKKh93CZ+DxY8Xh5ZpR9RHUV
+	n4jz6EiS8RD5We5E6hQXo1sMYWhqOKeiqkzzP3dDENtExlxdG/6huGF7oU50esvsg7iK
+	T93RkyUePNetyeHdBt0v829BEW+ZrPxFDARkKMaNwdv9AUYUv6qjlyS9P+wnK43+AJAy
+	gTyi+aHMK70MRmTutpYGZxawvaHUldJT5qIcRAvz9BfPvU4cYNjOxEWpRS0MvML1YDPB
+	ViDg==
+X-Received: by 10.14.176.66 with SMTP id a42mr142793531eem.34.1357302049337;
+	Fri, 04 Jan 2013 04:20:49 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 6sm110312885eea.3.2013.01.04.04.20.43
+	by mx.google.com with ESMTPS id 44sm110283730eek.0.2013.01.04.04.20.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Jan 2013 04:20:43 -0800 (PST)
+	Fri, 04 Jan 2013 04:20:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Jan 2013 13:20:30 +0100
-Message-Id: <cover.1357301108.git.Martin.Jansa@gmail.com>
+Date: Fri,  4 Jan 2013 13:20:34 +0100
+Message-Id: <5339afed0de9cbc7b6c2ebd78449e722c00f8c74.1357301108.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.0.2
+In-Reply-To: <cover.1357301108.git.Martin.Jansa@gmail.com>
+References: <cover.1357301108.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1357301108.git.Martin.Jansa@gmail.com>
+References: <cover.1357301108.git.Martin.Jansa@gmail.com>
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][danny][PATCH 0/6] fixes for world build
+Subject: [meta-oe][danny][PATCH 4/6] mplayer2: move lame into ENTERPRISE_DISTRO check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +48,28 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 04 Jan 2013 12:36:14 -0000
 
-The following changes since commit f026e96295da101bb715858bc8705de7e4a33992:
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 
-  xinput-calibrator: remove hardcoded path from xinput_calibrator.desktop (2012-12-10 20:43:34 +0100)
+Lame was in two places in build dependencies.
 
-are available in the git repository at:
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny2
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/for-danny2
-
-Marcin Juszkiewicz (6):
-  python-phoneutils: drop due to lack of libphone-utils
-  fbreader: move to meta-gpe due to libgpewidget dependency
-  devilspie2: move to meta-gnome (libwnck is there)
-  mplayer2: move lame into ENTERPRISE_DISTRO check
-  midori: move to meta-gnome due to libnotify
-  packagegroup-cli-tools: remove mdbus2, mterm2, mkdump, mioctl
-
- .../recipes-connectivity/midori/midori_0.4.6.bb           |  0
- .../recipes-gnome}/devilspie/devilspie2_0.24.bb           |  0
- .../recipes-gnome}/devilspie/files/default.lua            |  0
- .../recipes-gnome}/devilspie/files/devilspie2.desktop     |  0
- .../fbreader/fbreader-0.12.10/Makefile.patch              |  0
- .../recipes-support/fbreader/fbreader-0.12.10/gcc45.patch |  0
- .../recipes-support/fbreader/fbreader_0.12.10.bb          |  0
- .../recipes-support/fbreader/fbreader_git.bb              |  0
- ...installation-of-the-icons-when-RESOLUTION-is-set.patch |  0
- .../recipes-core/packagegroups/packagegroup-cli-tools.bb  |  6 +-----
- meta-oe/recipes-devtools/python/python-phoneutils_git.bb  | 15 ---------------
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb        |  2 +-
- 12 files changed, 2 insertions(+), 21 deletions(-)
- rename {meta-oe => meta-gnome}/recipes-connectivity/midori/midori_0.4.6.bb (100%)
- rename {meta-oe/recipes-graphics => meta-gnome/recipes-gnome}/devilspie/devilspie2_0.24.bb (100%)
- rename {meta-oe/recipes-graphics => meta-gnome/recipes-gnome}/devilspie/files/default.lua (100%)
- rename {meta-oe/recipes-graphics => meta-gnome/recipes-gnome}/devilspie/files/devilspie2.desktop (100%)
- rename {meta-oe => meta-gpe}/recipes-support/fbreader/fbreader-0.12.10/Makefile.patch (100%)
- rename {meta-oe => meta-gpe}/recipes-support/fbreader/fbreader-0.12.10/gcc45.patch (100%)
- rename {meta-oe => meta-gpe}/recipes-support/fbreader/fbreader_0.12.10.bb (100%)
- rename {meta-oe => meta-gpe}/recipes-support/fbreader/fbreader_git.bb (100%)
- rename {meta-oe => meta-gpe}/recipes-support/fbreader/files/0001-Fix-installation-of-the-icons-when-RESOLUTION-is-set.patch (100%)
- delete mode 100644 meta-oe/recipes-devtools/python/python-phoneutils_git.bb
-
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+index 4e3c18b..685a0bb 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Open Source multimedia player."
+ SECTION = "multimedia"
+ HOMEPAGE = "http://www.mplayerhq.hu/"
+ DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
+-           libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses lame \
++           libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
+            libxv virtual/libx11 libass speex \
+ 	   ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lame', d)}"
+ 
 -- 
 1.8.0.2
 
