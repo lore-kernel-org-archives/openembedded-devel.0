@@ -1,25 +1,35 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-pb0-f51.google.com ([209.85.160.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Lei.Yang@windriver.com>) id 1TrlhV-0001jP-37
+	(envelope-from <raj.khem@gmail.com>) id 1TrmX6-000360-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2013 09:35:30 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r068KFUH005426
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 6 Jan 2013 00:20:15 -0800 (PST)
-Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.318.4; Sun, 6 Jan 2013 00:20:15 -0800
-From: <lei.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe.MacDonald@windriver.com>,
-	<meta-virtualization@yoctoproject.org>, <bruce.ashfield@gmail.com>,
-	<david.c.nystrom@gmail.com>
-Date: Sun, 6 Jan 2013 16:20:12 +0800
-Message-ID: <1357460412-11889-1-git-send-email-lei.yang@windriver.com>
-X-Mailer: git-send-email 1.7.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] Add netcat-openbsd for virtualization (libvirt virt-test)
+	Sun, 06 Jan 2013 10:28:45 +0100
+Received: by mail-pb0-f51.google.com with SMTP id ro12so10023602pbb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jan 2013 01:13:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=BB5JsbGE6fEItJj71jG2Am2gwrFbdPzhExS3pq2JvCE=;
+	b=1CpZERVnqxFxbcBj6H5kMd0PrWwUbEKY2YYnPLwKeQVPS20EZ28fKo5laSWxqzrFrG
+	+YaRaBSuZF/UWG8YOcvDhpoqnQygWaSVVSuG+eHBS5gY/S5CMSnZw3nm1GOfTbiKmzWt
+	j/cqlIHGhB31Vn6z5GbKWuRSTRhlu8ku8649tqrz85hwaRnAeEtAA2JRldLmyzoCeK5E
+	EFDo3edb90tkHShkRTCN8ORS2UQ7yIGBpdNvCkupxxKwapcH67In/QofDuSC5SU3NpPP
+	uB+9Wctt7HDYXoSUGURyKrMyYSPVLqaUhPxrCHT/lpKQrjeth6QndrIrSXt9IbssNu8W
+	k2YA==
+X-Received: by 10.66.82.162 with SMTP id j2mr168488264pay.13.1357463616235;
+	Sun, 06 Jan 2013 01:13:36 -0800 (PST)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id qw8sm5137145pbc.39.2013.01.06.01.13.35
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 06 Jan 2013 01:13:35 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  6 Jan 2013 01:12:25 -0800
+Message-Id: <1357463568-26241-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
+References: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH V2 02/25] ebtables: Fix segfault by linking with no-as-needed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,107 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2013 08:35:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 06 Jan 2013 09:28:46 -0000
 
-From: Lei Yang <lei.yang@windriver.com>
-
-The netcat-openbsd in meta-virtualization layer has bugs.
-This update version will fix "nc: Protocol no available." error.
-As bruce point, we want to keep netcat in the meta-networking,
-which meta-virtualization will depend on
-
-Lei
-
-Signed-off-by: Lei Yang <lei.yang@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/netcat/netcat-openbsd_1.89.bb  |   29 ++++++++++++++++++++
- meta-networking/recipes-support/netcat/netcat.inc  |    6 ++++
- .../recipes-support/netcat/netcat_0.7.1.bb         |   11 +++----
- 3 files changed, 40 insertions(+), 6 deletions(-)
- create mode 100644 meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
- create mode 100644 meta-networking/recipes-support/netcat/netcat.inc
+ .../ebtables/ebtables-2.0.10-4/no-as-needed.patch  |   25 ++++++++++++++++++++
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    3 ++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/no-as-needed.patch
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/no-as-needed.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/no-as-needed.patch
 new file mode 100644
-index 0000000..9fe406c
+index 0000000..336119d
 --- /dev/null
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-@@ -0,0 +1,29 @@
-+require netcat.inc
-+DESCRIPTION = "OpenBSD Netcat"
-+HOMEPAGE = "http://ftp.debian.org"
-+LICENSE = "BSD-3-Clause"
-+PR = "r0"
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/no-as-needed.patch
+@@ -0,0 +1,25 @@
++link ebtables with --no-as-needed and adjust the link order to fix runtime crash
 +
-+SRC_URI = "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89.orig.tar.gz;name=netcat \
-+           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89-4.diff.gz;name=netcat-patch"
++Program terminated with signal 11, Segmentation fault.
++#0  0x00007ffaa837fb53 in ebt_initialize_entry () from /lib64/ebtables/libebtc.so
++(gdb) bt
++#0  0x00007ffaa837fb53 in ebt_initialize_entry () from /lib64/ebtables/libebtc.so
++#1  0x00007ffaa83824dc in do_command () from /lib64/ebtables/libebtc.so
++#2  0x000000000040065c in ?? ()
++#3  0x00007ffaa7fed755 in __libc_start_main () from /lib64/libc.so.6
++#4  0x0000000000400691 in ?? ()
 +
-+SRC_URI[netcat.md5sum] = "7238ce15aae43069e96ba7faf03f153e"
-+SRC_URI[netcat.sha256sum] = "72e844dde8a2a7cba61971d493758dbea9ef0b164bccef15fd4a36490dc77f2b"
-+SRC_URI[netcat-patch.md5sum] = "00c65aa22243b76998174c733cbb64cc"
-+SRC_URI[netcat-patch.sha256sum] = "d5b6b2bd9788114bdcfbb71acad0263720b4fdc41529e287adf451b8610f84f1"
-+
-+S = "${WORKDIR}/${PN}-${PV}.orig"
-+
-+do_configure[noexec] = "1"
-+
-+do_compile() {
-+	cd ${S}
-+        while read line; do patch -p1 <debian/patches/$line; done <debian/patches/series
-+	pkgrel=4
-+	oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
-+}
-+
-+do_install() {
-+        install -d ${D}${bindir}
-+        install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
-+}
-diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-networking/recipes-support/netcat/netcat.inc
-new file mode 100644
-index 0000000..4098668
---- /dev/null
-+++ b/meta-networking/recipes-support/netcat/netcat.inc
-@@ -0,0 +1,6 @@
-+SECTION = "console/network"
-+inherit update-alternatives gettext
-+
-+ALTERNATIVE_${PN} = "nc"
-+ALTERNATIVE_PRIORITY = "100"
-+
-diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
-index c5ab85d..e09202b 100644
---- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
-+++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
-@@ -1,21 +1,20 @@
-+require netcat.inc
- DESCRIPTION = "GNU Netcat"
- HOMEPAGE = "http://netcat.sourceforge.net"
--SECTION = "console/network"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Index: ebtables-v2.0.10-4/Makefile
++===================================================================
++--- ebtables-v2.0.10-4.orig/Makefile	2011-12-15 12:02:47.000000000 -0800
+++++ ebtables-v2.0.10-4/Makefile	2012-12-17 22:09:45.065973753 -0800
++@@ -90,7 +90,7 @@
++ 	$(CC) -shared $(LDFLAGS) -Wl,-soname,libebtc.so -o libebtc.so -lc $(OBJECTS2)
++ 
++ ebtables: $(OBJECTS) ebtables-standalone.o libebtc.so
++-	$(CC) $(CFLAGS) $(CFLAGS_SH_LIB) $(LDFLAGS) -o $@ ebtables-standalone.o -I$(KERNEL_INCLUDES) -L. -Lextensions -lebtc $(EXT_LIBSI) \
+++	$(CC) $(CFLAGS) $(CFLAGS_SH_LIB) $(LDFLAGS) -o $@ ebtables-standalone.o -I$(KERNEL_INCLUDES) -L. -Lextensions -Wl,--no-as-needed $(EXT_LIBSI) -lebtc \
++ 	-Wl,-rpath,$(LIBDIR)
++ 
++ ebtablesu: ebtablesu.c
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index e3476da..2596d2f 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -2,12 +2,13 @@ SUMMARY = "Utility for basic Ethernet frame filtering on a Linux bridge, MAC NAT
  LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
+ SECTION = "console/network"
 -PR = "r0"
 +PR = "r1"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://installnonroot.patch \
+            file://01debian_defaultconfig.patch \
+            file://ebtables.init \
++           file://no-as-needed.patch \
+            "
  
- SRC_URI[md5sum] = "0a29eff1736ddb5effd0b1ec1f6fe0ef"
- SRC_URI[sha256sum] = "b55af0bbdf5acc02d1eb6ab18da2acd77a400bafd074489003f3df09676332bb"
- 
--inherit autotools update-alternatives gettext
-+inherit autotools
- 
- do_install_append() {
--	mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
-+        install -d ${D}${bindir}
-+        mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
- }
- 
--ALTERNATIVE_${PN} = "nc"
--ALTERNATIVE_PRIORITY = "100"
+ SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
 -- 
-1.7.1
+1.7.9.5
 
 
 
