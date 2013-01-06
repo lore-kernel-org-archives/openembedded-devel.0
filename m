@@ -1,34 +1,34 @@
-Received: from mail-bk0-f42.google.com ([209.85.214.42])
+Received: from mail-gg0-f179.google.com ([209.85.161.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <yanglei.fage@gmail.com>) id 1TrrR8-0006mW-4O
+	(envelope-from <otavio.salvador@gmail.com>) id 1TryhV-0004Wf-PX
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2013 15:42:54 +0100
-Received: by mail-bk0-f42.google.com with SMTP id ji2so7931472bkc.29
+	Sun, 06 Jan 2013 23:28:24 +0100
+Received: by mail-gg0-f179.google.com with SMTP id q1so2915527gge.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2013 06:27:46 -0800 (PST)
+	Sun, 06 Jan 2013 14:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=BTxyHQjwHdwIFI2+zMThKjlKAM8mcnNdz74usfHnwFI=;
-	b=D6aTOBLaCXVE0BnsoPuvoRfXVMNw4iGYDZg+pTXDCytWD04lM+On2chgX8v5ClF4/H
-	RqhQduPZCjMmCw7yZPLm4ICTXo/sFeqj8EHQhvFtjY8Mn7+bYIzYWwLSWv/JcBPo5x3h
-	QxrEgfIzwta++8wdWc2ft94E+sNdfSvQin0EpnxTtgl6wDEK8xSQ5ZgCAS87nkTGsjWB
-	tXKKUmxHzfX0xkNSpEqNmZwRsL6Vhl6XNVtO1nCXds64+2NrXK1Yg/2cVgynKgs9/2FA
-	7oyc3gmXYlldKCkCGY4bAeaWjILaVEZGzYuN9n8Q2HZiGZVJK+5TVOZJDgrStq0bOwDY
-	ixaw==
-MIME-Version: 1.0
-Received: by 10.204.147.141 with SMTP id l13mr28127719bkv.43.1357482466260;
-	Sun, 06 Jan 2013 06:27:46 -0800 (PST)
-Received: by 10.204.11.86 with HTTP; Sun, 6 Jan 2013 06:27:46 -0800 (PST)
-In-Reply-To: <20130106120638.GE3272@jama>
-References: <1357460412-11889-1-git-send-email-lei.yang@windriver.com>
-	<50E966F7.1040909@gmail.com> <20130106120638.GE3272@jama>
-Date: Sun, 6 Jan 2013 06:27:46 -0800
-Message-ID: <CAHsH0E-MucE3frDwTAPfowFueesGVQ0n9KckUuAtt98z6XmccQ@mail.gmail.com>
-From: lei yang <yanglei.fage@gmail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=GyVuvDyXj42Tj/o5j1owNJ/ISu2kyCt0wS8DLPGOVWA=;
+	b=aFNC27GLvY2/+qGw0/1k31I/po3jBcP7nCHlz4JURHsnx39tcpdnKMRtVYTBfjuhHe
+	usbfLhmsSN5xGtD4SJQm4k+IuYfIoRUDMU+enX5/rOLlfgph9jBTY7kYl/5wkIfu0R/0
+	nmNhX+m/Nh6Fa03c6ssPJ9AIlmCK3FZYDM9odmq7mJfMnIGFVUa9FPbNtdHMIoDQVQCp
+	KSjjJSNiDiMVCK7xGZBdq8h25IxbKvr5uW1Hj6oU+aSPlMEDwY+PZ+CQoHGzQ4E8Ixk1
+	T+lz8C1RTxm7yR01oGm98lbJDCfoR9gNUyfvtmTQfyNqgKGP6NXD0QRxDu49cpezpwVR
+	Iirw==
+X-Received: by 10.236.140.65 with SMTP id d41mr6362927yhj.113.1357510389141;
+	Sun, 06 Jan 2013 14:13:09 -0800 (PST)
+Received: from localhost.localdomain ([187.23.158.26])
+	by mx.google.com with ESMTPS id x9sm64284375yhl.17.2013.01.06.14.13.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 06 Jan 2013 14:13:08 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Cc: meta-virtualization@yoctoproject.org, Joe.MacDonald@windriver.com
-Subject: Re: [meta-networking][PATCH] Add netcat-openbsd for virtualization (libvirt virt-test)
+Date: Sun,  6 Jan 2013 20:12:57 -0200
+Message-Id: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-browser][PATCH 1/3] scripts/firefox-gen-l10n-recipes: Update copyright to 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2013 14:42:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 06 Jan 2013 22:28:24 -0000
+X-List-Received-Date: Sun, 06 Jan 2013 22:28:24 -0000
 
-On Sun, Jan 6, 2013 at 4:06 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Sun, Jan 06, 2013 at 12:58:47PM +0100, David Nystr=F6m wrote:
->> On 01/06/2013 09:20 AM, lei.yang@windriver.com wrote:
->> > +SECTION =3D "console/network"
->> > +inherit update-alternatives gettext
->> > +
->> > +ALTERNATIVE_${PN} =3D "nc"
->> > +ALTERNATIVE_PRIORITY =3D "100"
->>
->> This means that both versions of netcat have alt. prio 100. what happens
->> when both are installed on the rootfs at the same time. where does the
->> symlink point ?
->
-> The one installed later (at least for opkg implementation).
-> So it's better to change it to different number.
->
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ scripts/firefox-gen-l10n-recipes |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thanks, I will update this
+diff --git a/scripts/firefox-gen-l10n-recipes b/scripts/firefox-gen-l10n-recipes
+index 65126a2..c1378df 100755
+--- a/scripts/firefox-gen-l10n-recipes
++++ b/scripts/firefox-gen-l10n-recipes
+@@ -21,7 +21,7 @@ for f in $TMPDIR/*.xpi; do
+ 	lang_code=$(echo $f | sed "s,$TMPDIR/\([^\.]*\).xpi,\1,g" | tr '[A-Z]' '[a-z]')
+ 
+ cat > firefox-l10n-${lang_code}_$1.bb <<EOF
+-# Copyright (C) 2009-2012, O.S. Systems Software Ltda. All Rights Reserved
++# Copyright (C) 2009-2013, O.S. Systems Software Ltda. All Rights Reserved
+ # Released under the MIT license (see packages/COPYING)
+ 
+ require firefox-l10n.inc
+-- 
+1.7.2.5
 
-Lei
-
-
-> Cheers,
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
