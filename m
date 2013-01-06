@@ -1,36 +1,36 @@
-Received: from mail-pa0-f49.google.com ([209.85.220.49])
+Received: from mail-pa0-f52.google.com ([209.85.220.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TrpSn-0004Wz-SZ
+	(envelope-from <martin.jansa@gmail.com>) id 1Trpai-00054j-CX
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2013 13:36:47 +0100
-Received: by mail-pa0-f49.google.com with SMTP id bi1so10096449pad.22
+	Sun, 06 Jan 2013 13:44:41 +0100
+Received: by mail-pa0-f52.google.com with SMTP id fb1so10095893pad.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2013 04:21:19 -0800 (PST)
+	Sun, 06 Jan 2013 04:29:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JnX3FutIBG9FfQwXX807dkAPqgE9VhtrvPsjNYAMXQk=;
-	b=WJ2E/JdMk2/ttIq1Mk0pPMLV8LmRjotx+5faLr/csje5s/cdl84gG766lmCo1dBf2o
-	uy2Q1bURIPN+6LZ01fxJAPU7Rl1SbM9K0fsYQEf5gQhAe+GwUMmlDavR2Xa92lWq2yUG
-	J5TSB4pThIy+8SrchAY7L6XJIgizQQ47WkAe87UtglW+poUeH2/3i0cXJ8FNwCY1HlKG
-	Fz3SWbAi1xVwzOKb6+Yo5Jd7MVtuINlKxYUw3DCk2I/q3pZcanKFjpw5tvwGg4H5p0TO
-	/Mj/AYEx3vSBt6e9chhHzj3HVXzrS2PxINTlVScJd2x+JIjRCANjKnPjcwYCgAJJSNwh
-	gxmw==
-X-Received: by 10.66.75.100 with SMTP id b4mr169520933paw.0.1357474879842;
-	Sun, 06 Jan 2013 04:21:19 -0800 (PST)
+	bh=cMKR+klo+/wOA5cgpNUBlaH/inbcYcdl0IQBxQY5xQI=;
+	b=xFk8yDOgIsieEqrv0MwWDRi6uKMMcybU1JnZjK94ByuWKAYZYzMe37LvpZd4Se+9qV
+	0I2NV2pSSoLNHXPpr2aO3cJdoJcTjwzQiBTt/YAhfgIfST7g0OpVv+WHuL+Ro/Uv+ui9
+	GilOxCe6kEfbJOUVzdpuvtlemJq2Z4N/SAOYmFHP4109isfAsIcq/CAvJerNtEnqZtzu
+	LGsQaHUMkkJpDiovdjzESBBJqYr1DSI/5q4/mMI9gVQ8NSsVC912jwfq6ZhtD+gtLcZQ
+	CV16DQVCnUw2o8OlmNQaQ5o7BOXABSrX0PP9TDnW18S53lS8t/Wki7yncgAxGStr5DWF
+	YDDA==
+X-Received: by 10.68.242.3 with SMTP id wm3mr178573878pbc.44.1357475371967;
+	Sun, 06 Jan 2013 04:29:31 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id qn3sm33564099pbb.56.2013.01.06.04.21.17
+	by mx.google.com with ESMTPS id j8sm36771733paz.30.2013.01.06.04.29.29
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 Jan 2013 04:21:18 -0800 (PST)
-Date: Sun, 6 Jan 2013 13:21:18 +0100
+	Sun, 06 Jan 2013 04:29:30 -0800 (PST)
+Date: Sun, 6 Jan 2013 13:29:30 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130106122118.GG3272@jama>
-References: <1357239255-20959-1-git-send-email-cazfi74@gmail.com>
+Message-ID: <20130106122930.GH3272@jama>
+References: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1357239255-20959-1-git-send-email-cazfi74@gmail.com>
+In-Reply-To: <1357139774-4364-1-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Prepare recipes for automake-1.13 (batch 1)
+Subject: Re: [meta-xfce/meta-gnome/V2 00/10] various updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,83 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2013 12:36:48 -0000
-X-Groupsio-MsgNum: 42534
+X-List-Received-Date: Sun, 06 Jan 2013 12:44:48 -0000
+X-Groupsio-MsgNum: 42535
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="f5QefDQHtn8hx44O"
+	protocol="application/pgp-signature"; boundary="h3LYUU6HlUDSAOzy"
 Content-Disposition: inline
 
---f5QefDQHtn8hx44O
-Content-Type: text/plain; charset=us-ascii
+--h3LYUU6HlUDSAOzy
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 03, 2013 at 08:54:12PM +0200, Marko Lindqvist wrote:
-> This batch is just three patches - most likely just drop in the
-> ocean of automake-1.13 problems in meta-openembedded. These are
-> kind side-products of trying to get things to work in
-> openembedded-core side.
+On Wed, Jan 02, 2013 at 04:16:04PM +0100, Andreas M=FCller wrote:
+> V1->V2:
 >=20
-> Below text is about all the work I've done for automake-1.13
-> compatibility so far - not all of it is relevant to this batch.
+> * mousepad: add gtksourceview2 to depends
+> * exo: correct version 0.10.2 in commit message
+> * xfce4-terminal: V1 was 0.6.0 / V2 is 0.6.1
 
-All 3 merged, libmikmod was missing PR bump, but it's not big issue for
-this kind of change.
+Merged, thanks!
 
-Cheers,
 
-> --------------------------------------------------------------------
->=20
-> In practice there is three categories of changes in automake-1.13
-> that cause packages to break. From that follows that virtually all
-> problems fall to three categories, and all packages suffering from
-> problem of the same category get virtually identical fix.
->=20
-> * Long deprecated macros completely removed from automake-1.13,
->   which errors out upon seeing them. For these I add patch,
->   always called obsolete_automake_macros.patch, that replaces
->   obsolete macro with proper one. Most of the patches are just
->   AM_CONFIG_HEADER -> AC_CONFIG_HEADERS change.
->=20
-> * Trying to run help2man via "missing" when it doesn't exist.
->   Old automake versions allowed "missing" to be used that way,
->   1.13 aborts. I'm just removing the attempt to create manpages
->   that way. Note that it never actually worked anyway -
->   old automake just didn't abort when it failed.
->=20
-> * TESTS list cannot have $(srcdir) or $(top_srcdir) as part
->   of the path. When it does, it's usually bug in the package,
->   but unfortunately automake prevents it also when it's not.
->   Solution applied here is to simply remove TESTS.
->=20
-> --------------------------------------------------------------------
->=20
-> [meta-oe][PATCH 1/3] tslib: replace obsolete automake macros with
-> [meta-oe][PATCH 2/3] libmikmod: replace obsolete automake macros
-> [meta-oe][PATCH 3/3] libmad: replace obsolete automake macros with
->=20
->=20
->=20
->  - ML
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---f5QefDQHtn8hx44O
+--h3LYUU6HlUDSAOzy
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDpbD4ACgkQN1Ujt2V2gBzRDwCcDg+0rdCQmEsoPq4J0dRmuujK
-ob8AoJK5/jtUB2298iTQw1edY8tDSNm/
-=tvet
+iEYEARECAAYFAlDpbioACgkQN1Ujt2V2gBzRMwCfa3CN7lC4j6b/bbjLFkRPtp6A
+vwYAni7aHb82TWIRbrY7SQRYdk2hEC1L
+=DT+o
 -----END PGP SIGNATURE-----
 
---f5QefDQHtn8hx44O--
+--h3LYUU6HlUDSAOzy--
