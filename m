@@ -1,35 +1,35 @@
-Received: from mail-pb0-f44.google.com ([209.85.160.44])
+Received: from mail-pa0-f51.google.com ([209.85.220.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TrmXK-00036x-LP
+	(envelope-from <raj.khem@gmail.com>) id 1TrmXI-00036u-He
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2013 10:29:01 +0100
-Received: by mail-pb0-f44.google.com with SMTP id uo1so9962412pbc.31
+	Sun, 06 Jan 2013 10:28:58 +0100
+Received: by mail-pa0-f51.google.com with SMTP id fb11so10095734pad.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2013 01:13:50 -0800 (PST)
+	Sun, 06 Jan 2013 01:13:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=NndTvqHaCba44pYY00SkkfpAxLi8/b8QA+5J8MfmKiw=;
-	b=KOzo3ePpiB52ITZ2r5ck3Vwz4JLbHZRavJ9zbkCmYTYwt5J+zsxLykhm7A/+MmBDyE
-	rdMmfPR5wFvHUSSDnI8LtSGKYBAKmOyQwO+YdIxprpIa7l2ZJ66xzIKIXIjlcg6GHGrk
-	7GS0KktK83RK9mW3GHrxLPGkfZCXp5EDjKnS9GWMJtIZZra8/rAhGt4B2JFUlNBC/T1z
-	RDyDRwN68SXM5Gimb/r1JO24vlI5U8VZCRhRyJiqg1gr4TyrSobcuaAf1h4kx3qY2/ba
-	u0zav90NZnpeak4BVLNB9VNvUl3Vdfr0iwyuvUYpwX0UqC9ciFrSCkJ7LyOY/Jxvkctt
-	wZfQ==
-X-Received: by 10.66.73.230 with SMTP id o6mr168368868pav.57.1357463630249;
-	Sun, 06 Jan 2013 01:13:50 -0800 (PST)
+	:references; bh=EFaDO/OO0IFZHbSng98MQovVLsQ/IVD6iO7iTTkp6Cg=;
+	b=NmqACEisxbSeoObFqhyiHFN68LtgUuhWMIaoTmUGRrPd8OkynXzSrHKlYo2MFaB2W1
+	AyPr/EFiD/JI+k5lzq5sZMS6shKhs740k87z6q5Rk93eosHnNce4spVe9lZC72qvRzrn
+	+6tTKAWeJaGTYJX8h32dreyIzegbAy2mPWNQj9FdBG/nqyRzXh64oaCzl1UFD8OsElCV
+	b4sd5SY/Qyb1p84xul09kC/c4tKn92HbZGj2N0WMLfD9zAHoxgaDP0HfncG6XsP6KR5s
+	GwVJYcGZ1Jd92OwQCy+hbmqiD4wSlfMRv/q0ad6vSAJ5vbHKUbgTlyzkYYKKUOYkznuN
+	3ZJA==
+X-Received: by 10.68.233.201 with SMTP id ty9mr179777704pbc.14.1357463628318; 
+	Sun, 06 Jan 2013 01:13:48 -0800 (PST)
 Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
 	[140.211.169.168])
-	by mx.google.com with ESMTPS id qw8sm5137145pbc.39.2013.01.06.01.13.49
+	by mx.google.com with ESMTPS id qw8sm5137145pbc.39.2013.01.06.01.13.47
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 Jan 2013 01:13:49 -0800 (PST)
+	Sun, 06 Jan 2013 01:13:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Jan 2013 01:12:40 -0800
-Message-Id: <1357463568-26241-17-git-send-email-raj.khem@gmail.com>
+Date: Sun,  6 Jan 2013 01:12:38 -0800
+Message-Id: <1357463568-26241-15-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
 References: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH V2 17/25] uml-utilities: Forward port recipe from OE classic
+Subject: [meta-oe][PATCH V2 15/25] dmidecode: Forward port from OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,162 +45,41 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 06 Jan 2013 09:29:04 -0000
 
-Imported at SHA e12cf65f2fd58135039d73b9290ebee763161416
+at SHA 16f464bd8cff6b6a27d9bfe691f7adc875d01ac2
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../uml-utilities-20040406/fix-ldflags.patch       |   16 ++++
- .../uml-utilities-20040406/unstrip.patch           |   84 ++++++++++++++++++++
- .../uml-utilities/uml-utilities_20040406.bb        |   26 ++++++
- 3 files changed, 126 insertions(+)
- create mode 100644 meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/fix-ldflags.patch
- create mode 100644 meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/unstrip.patch
- create mode 100644 meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+ .../recipes-extended/dmidecode/dmidecode_2.10.bb   |   21 ++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dmidecode/dmidecode_2.10.bb
 
-diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/fix-ldflags.patch b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/fix-ldflags.patch
+diff --git a/meta-oe/recipes-extended/dmidecode/dmidecode_2.10.bb b/meta-oe/recipes-extended/dmidecode/dmidecode_2.10.bb
 new file mode 100644
-index 0000000..05cc537
+index 0000000..ae06de9
 --- /dev/null
-+++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/fix-ldflags.patch
-@@ -0,0 +1,16 @@
-+
-+#
-+# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
-+#
-+
-+--- tools/mconsole/Makefile~fix-ldflags	2003-02-08 05:10:08.000000000 +0100
-++++ tools/mconsole/Makefile	2004-04-01 15:37:37.000000000 +0200
-+@@ -7,7 +7,7 @@
-+ all : $(BIN)
-+ 
-+ $(BIN) : $(OBJS)
-+-	$(CC) $(CFLAGS) -o $(BIN) $(OBJS) -lreadline -lncurses
-++	$(CC) $(CFLAGS) -o $(BIN) $(OBJS) $(LDFLAGS) -lreadline -lncurses
-+ 
-+ clean : 
-+ 	rm -f $(BIN) $(OBJS) *~
-diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/unstrip.patch b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/unstrip.patch
-new file mode 100644
-index 0000000..868001d
---- /dev/null
-+++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/unstrip.patch
-@@ -0,0 +1,84 @@
-+Dont strip during install let the packaging handle it
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: tools/jailtest/Makefile
-+===================================================================
-+--- tools.orig/jailtest/Makefile	2003-02-07 20:10:27.000000000 -0800
-++++ tools/jailtest/Makefile	2012-09-05 12:13:56.061615854 -0700
-+@@ -14,4 +14,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/mconsole/Makefile
-+===================================================================
-+--- tools.orig/mconsole/Makefile	2012-09-05 12:05:09.869607043 -0700
-++++ tools/mconsole/Makefile	2012-09-05 12:14:07.725607469 -0700
-+@@ -14,4 +14,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/moo/Makefile
-+===================================================================
-+--- tools.orig/moo/Makefile	2003-06-26 09:27:00.000000000 -0700
-++++ tools/moo/Makefile	2012-09-05 12:14:20.981604580 -0700
-+@@ -22,4 +22,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/port-helper/Makefile
-+===================================================================
-+--- tools.orig/port-helper/Makefile	2003-02-07 20:05:31.000000000 -0800
-++++ tools/port-helper/Makefile	2012-09-05 12:14:39.429609678 -0700
-+@@ -14,4 +14,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(LIB_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(LIB_DIR)
-++	install $(BIN) $(DESTDIR)$(LIB_DIR)
-+Index: tools/tunctl/Makefile
-+===================================================================
-+--- tools.orig/tunctl/Makefile	2003-02-07 20:05:04.000000000 -0800
-++++ tools/tunctl/Makefile	2012-09-05 12:14:49.985606470 -0700
-+@@ -14,4 +14,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/uml_net/Makefile
-+===================================================================
-+--- tools.orig/uml_net/Makefile	2003-02-07 20:04:55.000000000 -0800
-++++ tools/uml_net/Makefile	2012-09-05 12:15:00.961607290 -0700
-+@@ -21,4 +21,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s -m 04755 $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install -m 04755 $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/uml_router/Makefile
-+===================================================================
-+--- tools.orig/uml_router/Makefile	2003-02-07 20:04:39.000000000 -0800
-++++ tools/uml_router/Makefile	2012-09-05 12:15:10.649607571 -0700
-+@@ -20,4 +20,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-+Index: tools/watchdog/Makefile
-+===================================================================
-+--- tools.orig/watchdog/Makefile	2003-02-07 20:04:25.000000000 -0800
-++++ tools/watchdog/Makefile	2012-09-05 12:15:35.561612203 -0700
-+@@ -14,4 +14,4 @@
-+ 
-+ install : $(BIN)
-+ 	install -d $(DESTDIR)$(BIN_DIR)
-+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
-++	install $(BIN) $(DESTDIR)$(BIN_DIR)
-diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-new file mode 100644
-index 0000000..80b3c9a
---- /dev/null
-+++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-@@ -0,0 +1,26 @@
++++ b/meta-oe/recipes-extended/dmidecode/dmidecode_2.10.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "DMI (Desktop Management Interface) table related utilities"
 +SECTION = "console/utils"
-+DESCRIPTION = "Utilities for User-Mode-Linux"
-+LICENSE = "GPL-2.0"
-+DEPENDS = "zlib ncurses readline"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+SRC_URI = "http://downloads.sourceforge.net/project/user-mode-linux/tools/1/uml_utilities_${PV}.tar.bz2  \
-+           file://fix-ldflags.patch \
-+           file://unstrip.patch \
-+          "
-+SRC_URI[md5sum] = "2c1ccd9efacbfb39e42d482b89b2550a"
-+SRC_URI[sha256sum] = "4f179b1db021ef15ac7e9b2eed57c525db127a754c574f591c367460cded9f41"
++HOMEPAGE = "http://www.nongnu.org/dmidecode/"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
++LICENSE = "GPLv2"
++PR = "r2"
 +
-+PR = "r1"
++SRC_URI = "http://savannah.nongnu.org/download/dmidecode/${P}.tar.bz2"
 +
-+S = "${WORKDIR}/tools"
++COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 +
 +do_compile() {
 +	oe_runmake
 +}
 +
 +do_install() {
-+	oe_runmake install DESTDIR=${D}
++	oe_runmake DESTDIR="${D}" install
 +}
 +
-+FILES_${PN} += "${libdir}"
-+FILES_${PN}-dbg += "${libdir}/uml/.debug"
++SRC_URI[md5sum] = "3c9c4d55a40b78600f3b43bfa64616f9"
++SRC_URI[sha256sum] = "4d74a3e93353320317a424816f9a045df06d9ed4b5b80881e16fdfcc74c9e2c0"
 -- 
 1.7.9.5
 
