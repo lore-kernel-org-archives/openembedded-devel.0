@@ -1,36 +1,34 @@
-Received: from mail-da0-f54.google.com ([209.85.210.54])
+Received: from mail-bk0-f42.google.com ([209.85.214.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Trpbo-0005Do-UE
+	(envelope-from <yanglei.fage@gmail.com>) id 1TrrR8-0006mW-4O
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jan 2013 13:45:51 +0100
-Received: by mail-da0-f54.google.com with SMTP id n2so8285498dad.41
+	Sun, 06 Jan 2013 15:42:54 +0100
+Received: by mail-bk0-f42.google.com with SMTP id ji2so7931472bkc.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2013 04:30:40 -0800 (PST)
+	Sun, 06 Jan 2013 06:27:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Xrzy3Pv4Xyb+3q2j5Fk6Rern47cjCeBNCFakh/LJYZw=;
-	b=YyCdp0h23Z9bNhdEtghE8agg6SpU9rBRRQDzI+hJSKdDoaTkjKh/9DaCZbnIoQK2+m
-	9a267fC3FcucX9gpfGVFHZ34sFfIL0x78dk0bAu5OLAQVOP1BnAfiT5vEbnt+W7sOnUw
-	6MbWul4tA+FhOHbwJYbGxfkOax3Z0ZRjK4hsB93zntAtt7AxbMGyxyS/udefe/yJeE6y
-	nul+7ksphFqJSoI8gV9n20aCn51KDSlVtX+kCoXMBs8otM3MojYLF56K1++O3W1k96zo
-	7R7nRJ3ftbgsgBg3gs0AGNUvKUrvYLp7f/AljtxGFHZdcdeYaNfQsDPLxbTcQBYVwUJb
-	HuLw==
-X-Received: by 10.68.143.100 with SMTP id sd4mr169039775pbb.107.1357475440496; 
-	Sun, 06 Jan 2013 04:30:40 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id c2sm36771276pay.34.2013.01.06.04.30.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 Jan 2013 04:30:39 -0800 (PST)
-Date: Sun, 6 Jan 2013 13:30:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130106123039.GJ3272@jama>
-References: <1357130330-2531-1-git-send-email-riku.voipio@linaro.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=BTxyHQjwHdwIFI2+zMThKjlKAM8mcnNdz74usfHnwFI=;
+	b=D6aTOBLaCXVE0BnsoPuvoRfXVMNw4iGYDZg+pTXDCytWD04lM+On2chgX8v5ClF4/H
+	RqhQduPZCjMmCw7yZPLm4ICTXo/sFeqj8EHQhvFtjY8Mn7+bYIzYWwLSWv/JcBPo5x3h
+	QxrEgfIzwta++8wdWc2ft94E+sNdfSvQin0EpnxTtgl6wDEK8xSQ5ZgCAS87nkTGsjWB
+	tXKKUmxHzfX0xkNSpEqNmZwRsL6Vhl6XNVtO1nCXds64+2NrXK1Yg/2cVgynKgs9/2FA
+	7oyc3gmXYlldKCkCGY4bAeaWjILaVEZGzYuN9n8Q2HZiGZVJK+5TVOZJDgrStq0bOwDY
+	ixaw==
 MIME-Version: 1.0
-In-Reply-To: <1357130330-2531-1-git-send-email-riku.voipio@linaro.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] krb5: reconfigure for aarch64
+Received: by 10.204.147.141 with SMTP id l13mr28127719bkv.43.1357482466260;
+	Sun, 06 Jan 2013 06:27:46 -0800 (PST)
+Received: by 10.204.11.86 with HTTP; Sun, 6 Jan 2013 06:27:46 -0800 (PST)
+In-Reply-To: <20130106120638.GE3272@jama>
+References: <1357460412-11889-1-git-send-email-lei.yang@windriver.com>
+	<50E966F7.1040909@gmail.com> <20130106120638.GE3272@jama>
+Date: Sun, 6 Jan 2013 06:27:46 -0800
+Message-ID: <CAHsH0E-MucE3frDwTAPfowFueesGVQ0n9KckUuAtt98z6XmccQ@mail.gmail.com>
+From: lei yang <yanglei.fage@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: meta-virtualization@yoctoproject.org, Joe.MacDonald@windriver.com
+Subject: Re: [meta-networking][PATCH] Add netcat-openbsd for virtualization (libvirt virt-test)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,39 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2013 12:45:58 -0000
-X-Groupsio-MsgNum: 42537
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mFHiwr52TKrxpkjc"
-Content-Disposition: inline
-
---mFHiwr52TKrxpkjc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 06 Jan 2013 14:42:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 02, 2013 at 02:38:50PM +0200, Riku Voipio wrote:
-> krb5 needs reconfigure, since the current config.sub included doesn't
-> include aarch64.
-> ---
->  meta-oe/recipes-connectivity/krb5/krb5_1.11.bb |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+On Sun, Jan 6, 2013 at 4:06 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> On Sun, Jan 06, 2013 at 12:58:47PM +0100, David Nystr=F6m wrote:
+>> On 01/06/2013 09:20 AM, lei.yang@windriver.com wrote:
+>> > +SECTION =3D "console/network"
+>> > +inherit update-alternatives gettext
+>> > +
+>> > +ALTERNATIVE_${PN} =3D "nc"
+>> > +ALTERNATIVE_PRIORITY =3D "100"
+>>
+>> This means that both versions of netcat have alt. prio 100. what happens
+>> when both are installed on the rootfs at the same time. where does the
+>> symlink point ?
+>
+> The one installed later (at least for opkg implementation).
+> So it's better to change it to different number.
+>
 
-Merged, thanks!
+Thanks, I will update this
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Lei
 
---mFHiwr52TKrxpkjc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+> Cheers,
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-iEYEARECAAYFAlDpbm8ACgkQN1Ujt2V2gBwrXgCgj250sWUaDyRQ9Fhf7fc34f+2
-gKYAoLE7kOX8f229Z8ufXzNfxQSWzeOm
-=SPGD
------END PGP SIGNATURE-----
 
---mFHiwr52TKrxpkjc--
