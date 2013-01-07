@@ -1,33 +1,34 @@
-Received: from mail-la0-f53.google.com ([209.85.215.53])
+Received: from mail-oa0-f45.google.com ([209.85.219.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gopikrishnans@pec.edu>) id 1TsBqe-0001y9-1o
+	(envelope-from <otavio.salvador@gmail.com>) id 1TsBrz-00023V-OW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 13:30:37 +0100
-Received: by mail-la0-f53.google.com with SMTP id fn20so15120378lab.26
+	Mon, 07 Jan 2013 13:32:00 +0100
+Received: by mail-oa0-f45.google.com with SMTP id i18so17780605oag.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jan 2013 04:15:27 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=6XN0mJGQmTzFZ/8l0hE8Z5Wfa3yn+axXni6+//LOq2w=;
-	b=O4AEbieueZFS1VML4Gy73sXhtBu1BGe5WT2koUjtsfP7zsB7lJ9DpunN3ahqSirk8n
-	VLd94oWRRQPDS1MJGydydIblxw50mNSgS7p3rQLBX4Z9y1ExUuqPzPVHkzKV9wlZFnM8
-	Km1yINEdW8AQwESigF5pTPCtcA6y1IRrLetOrZohWCh3y12toJnUVDB2z8LYg3OqdMyT
-	eLVLQU9uCcytf9ZO5vt06Np7/yLvRwMRjdsZ6OhU+Ys1GcEPzKpxeMzKsuB3s2IHiNKO
-	CfllE4EuCXhMQGbCmZNeX4dWI72Lyv+BAQ7UK3E3ssrHX99ZjLjHl8MpSDiV35K1TzHe
-	OrXw==
+	Mon, 07 Jan 2013 04:16:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=qhrssInQWhEE/EraQseDk3SyfNhFHFyH+QYxNyhM1+U=;
+	b=gwCI2WxhsE+mUCSnHD4x4So2t9rR6OHJkABDkaW0nNcC3N/D+G339wcIuzKMt1aUUl
+	qHF2kua9OuHYxdDTySoFzpkp1C+fjE2KPnIcPtl1U4VwMo61kf5IxAqQjbSS17xBhH1c
+	VBuwXFoN94XcoSGitvu+0vIJ6QdkVsIRnQiUBQ+cDhCKlzYLp50iFa3xenhRACC4YCzM
+	GsMYsnJyjQ429aur6KS88mwrJa/FF0emNZR4PU7VOE4tKrrPJnXzzKvJfIjvsXERM01p
+	OxsaFejAdyzZ5PJfYUviWwEzaqXJiLBF1z+joANmU8y4dplvAwyrST2k+PrvZ5WTWqGR
+	W5/w==
 MIME-Version: 1.0
-Received: by 10.112.98.197 with SMTP id ek5mr24304246lbb.80.1357560926848;
-	Mon, 07 Jan 2013 04:15:26 -0800 (PST)
-Received: by 10.112.137.229 with HTTP; Mon, 7 Jan 2013 04:15:26 -0800 (PST)
-Date: Mon, 7 Jan 2013 17:45:26 +0530
-Message-ID: <CAOkC3RaWqjHDNq6mp+Yv6iK-UdS73gyYAPqgG=5CBP7B23KwkA@mail.gmail.com>
-From: GOPIKRISHNAN S <gopikrishnans@pec.edu>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQm0cY+sZPrP8r6OP5FBBBSXfudcZsKNfROLrgiZtsedxFZtn1INSSJvfZqPtGOl++8vKhtF
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Hiawatha error: conflicting types for 'something'
+Received: by 10.60.171.11 with SMTP id aq11mr33476998oec.104.1357561010130;
+	Mon, 07 Jan 2013 04:16:50 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Mon, 7 Jan 2013 04:16:50 -0800 (PST)
+In-Reply-To: <CAOkC3RY4n66f9LgvWczskaDUn0wPOjBDbDAoKCMo8CjnFWzgSA@mail.gmail.com>
+References: <CAOkC3RY4n66f9LgvWczskaDUn0wPOjBDbDAoKCMo8CjnFWzgSA@mail.gmail.com>
+Date: Mon, 7 Jan 2013 10:16:50 -0200
+X-Google-Sender-Auth: Be15KYz-b0LBMT0fISJK2_dLrj4
+Message-ID: <CAP9ODKp4EnstE_iY-4cu2zCTUFP5FFf467NcSWe63K2iFDio-A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Reg: Hiawatha
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 12:30:37 -0000
+X-List-Received-Date: Mon, 07 Jan 2013 12:32:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I am facing strange issue while building Hiawatha for Freescale P2041RDB.
+On Mon, Jan 7, 2013 at 10:13 AM, GOPIKRISHNAN S <gopikrishnans@pec.edu> wrote:
+> I am facing strange issue while building Hiawatha for Freescale P2041RDB.
+>
+> I am getting some errors while building hiawatha(using recipe from
+> openembedded). In investigation I found all return \type and parameter type
+> seems to be same & in all /usr/include/*.h files in declared as extern was
+> added before to make it visible in global. I wonder no problem was
+> not raised while compiling for my host platform (Debian 6 on x86), and
+> getting problem only doing it for my freescale board
+...
 
-I am getting some errors while building hiawatha(using recipe from
-openembedded). In investigation I found all return \type and parameter type
-seems to be same & in all /usr/include/*.h files in declared as extern was
-added before to make it visible in global. I wonder no problem was
-not raised while compiling for my host platform (Debian 6 on x86), and
-getting problem only doing it for my freescale board
+OE has a newer GCC version and GCC has get more strict about those
+checks so those errors do need to be fixed.
 
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/work/ppce500mc-fsl-linux/hiawatha-8.6-r2/hiawatha-8.6/src/alternative.c:39:5:
-error: conflicting types for 'unsetenv'
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/sysroots/p2041rdb/usr/include/stdlib.h:589:12:
-note: previous declaration of 'unsetenv' was here
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/work/ppce500mc-fsl-linux/hiawatha-8.6-r2/hiawatha-8.6/src/alternative.c:49:6:
-error: conflicting types for 'clearenv'
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/sysroots/p2041rdb/usr/include/stdlib.h:596:12:
-note: previous declaration of 'clearenv' was here
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/work/ppce500mc-fsl-linux/hiawatha-8.6-r2/hiawatha-8.6/src/alternative.c:39:5:
-error: conflicting types for 'unsetenv'
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/sysroots/p2041rdb/usr/include/stdlib.h:589:12:
-note: previous declaration of 'unsetenv' was here
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/work/ppce500mc-fsl-linux/hiawatha-8.6-r2/hiawatha-8.6/src/alternative.c:
-In function
-'strcasecmp':/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/work/ppce500mc-fsl-linux/hiawatha-8.6-r2/hiawatha-8.6/src/alternative.c:49:6:
-error: conflicting types for 'clearenv'
-/media/sdk/3.1/QorIQ-SDK-V1.3-20121114-yocto/build_p2041rdb_release/tmp/sysroots/p2041rdb/usr/include/stdlib.h:596:12:
-note: previous declaration of 'clearenv' was here
+If you upgrade your GCC to 4.7 you'll probably find same build errors.
 
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
-Does any have patch to fix this issue?
-
-
-Reg,
-Gopi Krishnan S
 
