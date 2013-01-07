@@ -1,40 +1,35 @@
-Received: from 17.mo1.mail-out.ovh.net ([87.98.179.142]
-	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TsAws-0005wJ-O6
+Received: from mail-la0-f51.google.com ([209.85.215.51])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <cazfi74@gmail.com>) id 1TsB1c-0006Ag-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 12:32:58 +0100
-Received: from mail435.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo1.mail-out.ovh.net (Postfix) with SMTP id EF2C2FF9F44
+	Mon, 07 Jan 2013 12:38:04 +0100
+Received: by mail-la0-f51.google.com with SMTP id fj20so14956840lab.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Jan 2013 12:15:06 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 7 Jan 2013 13:01:40 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO e6520eb)
-	(eric%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 7 Jan 2013 13:01:38 +0200
-Date: Mon, 7 Jan 2013 12:01:29 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
-Message-ID: <20130107120129.352ae897@e6520eb>
-In-Reply-To: <CAP9ODKp=wXUgCTgVVJQ_C9BAa5in+=ufWoyCNq-73aR6CsTcGA@mail.gmail.com>
-References: <CAP9ODKr_NPX9kgu1jFWkrvhzM=0qFdHv4S9cZs0cGr=7z-iGZg@mail.gmail.com>
-	<CAP9ODKp=wXUgCTgVVJQ_C9BAa5in+=ufWoyCNq-73aR6CsTcGA@mail.gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 12326915131231808892
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrfeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrfeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [for-danny] Patches for backport
+	Mon, 07 Jan 2013 03:22:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=pXCxQxUGfLFiA8C/EAN/MfVBKArPHeCbpQjzTY2gKkA=;
+	b=KgadwMIU+CzKUHUnUggQJMSp5aj5WC24LRv8B4LxiQCcYGasaXVPHbfXwA/3TEvvzg
+	/Jm8gr2BruPmaD/utetWIiO7iqjIRcJCUs/HZbImYBOJO01/0awQlBgPKBd5vZ/y5Ldj
+	Ebo3Z903nUox7sSLPUDdj24BqAWpIAIyZurYVHvf4yJQoVt8sGygnsgmbjY/P4mjNCJs
+	xrNzycpezw3VVADE8mVCqf6JBXD7Q2BNg+yCJuabndXG1+2FNbAJW9RxKRZkfrNfQ5iV
+	MwyJ3CuoejC1VL5vYOh2/xukDpcZhGgIhNmBS4dasJcEqocJz2tH+9lwoo+RSsCBamLA
+	E8TQ==
+X-Received: by 10.112.44.161 with SMTP id f1mr24145457lbm.29.1357557763599;
+	Mon, 07 Jan 2013 03:22:43 -0800 (PST)
+Received: from prime (a91-153-5-18.elisa-laajakaista.fi. [91.153.5.18])
+	by mx.google.com with ESMTPS id ml1sm22805743lab.15.2013.01.07.03.22.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 07 Jan 2013 03:22:42 -0800 (PST)
+Received: from cazfi by prime with local (Exim 4.80)
+	(envelope-from <cazfi74@gmail.com>)
+	id 1TsAmu-0006XH-Al; Mon, 07 Jan 2013 13:22:40 +0200
+From: Marko Lindqvist <cazfi74@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  7 Jan 2013 13:22:39 +0200
+Message-Id: <1357557759-25093-1-git-send-email-cazfi74@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] xmlto: replace obsolete automake macros with working ones
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,39 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 11:32:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Jan 2013 11:38:04 -0000
 
-Le Tue, 1 Jan 2013 16:21:51 -0200,
-Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
+Add obsolete_automake_macros.patch that replaces automake macros
+no longer supported by automake-1.13 with modern constructs.
 
-> On Fri, Dec 21, 2012 at 4:22 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
-> > Hello Eric,
-> >
-> > So we did a new set of changes in master, which we'd like to backport.
-> > The changes are, in order:
-> >
-> > 2ac0acc2753f9853928a081cbc80c3daacbe7e08 xf86-video-geode: Add
-> > rdepends on EXA Xorg module
-> >
-> > ade2d4d35e1efdd83bb555949bcfb8c7a1970ff0 xinput-calibrator: Fix
-> > service file to require display-manag
-> >
-> > 43c2d4d3ca9889e54646e02d110d8155da96772c openmotif: Update SRC_URI and
-> > add libxft in depends
-> >
-> > 1db0dbf9a8bf2f09ddbc09a4ccde227fdf9a866a openmotif: Disable printing su=
-pport
-> >
-> > 38daf64fb87bbc34caad050e7295b910c9b80e7c openmotif: Avoid use os Xos.h =
-from host
->=20
-> Ping?
->=20
-merged into danny-next. Test build in progress.
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ .../xmlto/xmlto-0.0.25/obsolete_automake_macros.patch      |   12 ++++++++++++
+ meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb              |    6 +++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
 
-Eric
+diff --git a/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
+new file mode 100644
+index 0000000..faa8acc
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
+@@ -0,0 +1,12 @@
++diff -Nurd xmlto-0.0.25/configure.in xmlto-0.0.25/configure.in
++--- xmlto-0.0.25/configure.in	2011-12-01 17:49:00.000000000 +0200
+++++ xmlto-0.0.25/configure.in	2013-01-07 05:24:16.169953519 +0200
++@@ -1,7 +1,7 @@
++ AC_INIT(xmlto, 0.0.25)
++ AC_CONFIG_SRCDIR(xmlto.spec.in)
++ AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects 1.6])
++-AM_CONFIG_HEADER(config.h)
+++AC_CONFIG_HEADERS(config.h)
++
++ AC_PROG_CC
++ AM_PROG_CC_C_O
+diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
+index 806ea2e..447c791 100644
+--- a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
++++ b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
+@@ -5,7 +5,11 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-SRC_URI = "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar.gz" 
++PR = "r1"
++
++SRC_URI = "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar.gz \
++           file://obsolete_automake_macros.patch \
++"
+ SRC_URI[md5sum] = "a88cd3f08789b4825d1ac89fa065170d"
+ SRC_URI[sha256sum] = "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc352e843147e3e31a"
+ 
+-- 
+1.7.10.4
+
 
 
