@@ -1,37 +1,36 @@
-Received: from mail-pb0-f52.google.com ([209.85.160.52])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TsIgl-00077W-5y
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TsJUb-0000Qt-No
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 20:48:51 +0100
-Received: by mail-pb0-f52.google.com with SMTP id ro2so10859824pbb.39
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jan 2013 11:33:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=BitBvRtHS4Pbs0oRxJ5baqKH2xGPAOD+pdPq7QpDHW0=;
-	b=xzGLl0ZUwDFSsMhtjtMyv5LMz0cGYwCS71jbjy8rsZW+0Akd3xCs4gknda0Z/yfoSZ
-	GRfY9LZa4PiJMCofAe1bcnhT/nYgno+5hP+bmLqn1Bn1BHTdpEGdoWeiXhnT0C2LCP/9
-	nIkrco6+Ey2APklQkYBkNZsKnn4g3fgLwVRS4lJgxpU93Q2VqDc8VAShyTZZFZWrp7+N
-	e4152+FFb6kfxQRbKNE3+lyPuydlmnqw5Zpewhx9CI+DVKZnwOcxokOt11aisGFisiw/
-	7kMaZqGB5WauA/kgpyfqr2KLdg3VPfia649mK3uhBnaoqJm9mxu/P4gGqY7tKfrqSdJK
-	AXsg==
-X-Received: by 10.68.238.39 with SMTP id vh7mr14971873pbc.6.1357587220724;
-	Mon, 07 Jan 2013 11:33:40 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id s5sm39203589pay.31.2013.01.07.11.33.38
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 07 Jan 2013 11:33:39 -0800 (PST)
-Date: Mon, 7 Jan 2013 20:33:40 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130107193340.GH3285@jama>
-References: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
+	Mon, 07 Jan 2013 21:40:43 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r07KPAYo023308
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 7 Jan 2013 12:25:11 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Mon, 7 Jan 2013 12:25:09 -0800
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 721D87FCE;
+	Mon,  7 Jan 2013 15:23:34 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id A35F324151; Mon,
+	7 Jan 2013 15:25:08 -0500 (EST)
+Date: Mon, 7 Jan 2013 15:25:08 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <lei.yang@windriver.com>
+Message-ID: <20130107202508.GN6154@windriver.com>
+References: <1357522704-9608-1-git-send-email-lei.yang@windriver.com>
+	<20130107021523.GF9356@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <20130107021523.GF9356@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-browser][PATCH 1/3] scripts/firefox-gen-l10n-recipes: Update copyright to 2013
+Cc: meta-virtualization@yoctoproject.org,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCHV2] Add netcat-bsd into meta-networking for meta-virutalization libvirt virt-test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,67 +44,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 19:48:51 -0000
-X-Groupsio-MsgNum: 42568
+X-List-Received-Date: Mon, 07 Jan 2013 20:40:43 -0000
+X-Groupsio-MsgNum: 42569
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="l06SQqiZYCi8rTKz"
+	protocol="application/pgp-signature"; boundary="e8/wErwm0bqugfcz"
 Content-Disposition: inline
 
---l06SQqiZYCi8rTKz
+--e8/wErwm0bqugfcz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 06, 2013 at 08:12:57PM -0200, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+[Re: [meta-networking][PATCHV2] Add netcat-bsd into meta-networking for met=
+a-virutalization libvirt virt-test] On 13.01.06 (Sun 21:15) Joe MacDonald w=
+rote:
 
-I've build tested all 3 on jenkins and looks good to me:
-
-Acked-By: Martin Jansa <Martin.Jansa@gmail.com>
-
-> ---
->  scripts/firefox-gen-l10n-recipes |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+> [[meta-networking][PATCHV2] Add netcat-bsd into meta-networking for meta-=
+virutalization libvirt virt-test] On 13.01.07 (Mon 09:38) lei.yang@windrive=
+r.com wrote:
 >=20
-> diff --git a/scripts/firefox-gen-l10n-recipes b/scripts/firefox-gen-l10n-=
-recipes
-> index 65126a2..c1378df 100755
-> --- a/scripts/firefox-gen-l10n-recipes
-> +++ b/scripts/firefox-gen-l10n-recipes
-> @@ -21,7 +21,7 @@ for f in $TMPDIR/*.xpi; do
->  	lang_code=3D$(echo $f | sed "s,$TMPDIR/\([^\.]*\).xpi,\1,g" | tr '[A-Z]=
-' '[a-z]')
-> =20
->  cat > firefox-l10n-${lang_code}_$1.bb <<EOF
-> -# Copyright (C) 2009-2012, O.S. Systems Software Ltda. All Rights Reserv=
-ed
-> +# Copyright (C) 2009-2013, O.S. Systems Software Ltda. All Rights Reserv=
-ed
->  # Released under the MIT license (see packages/COPYING)
-> =20
->  require firefox-l10n.inc
-> --=20
-> 1.7.2.5
+> > From: Lei Yang <lei.yang@windriver.com>
+> >=20
+> > The netcat-openbsd in meta-virtualization layer has bugs.
+> > This update version will fix "nc: Protocol no available." error.
+> > As bruce point, we want to keep netcat in the meta-networking,
+> > which meta-virtualization will depend on,and this patch will let
+> > netcat-openbsd with low priority to install
 >=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Okay, I hadn't seen this version yet.  Looks okay, I think.  I'll
+> merge it anyway soon, unless there's further discussion.
 
+Merged.  Thanks, Lei.
+
+-J.
+
+> The dependency on
+> meta-networking from meta-virtualization is probably out of scope.  Ping
+> me any time if you've got any questions about the relationship between
+> meta-oe/meta-networking and my github meta-networking.
+>=20
+> Thanks, Lei.
+>=20
+> -J.
+>=20
+> >=20
+> > Lei
+> >=20
+> > Signed-off-by: Lei Yang <lei.yang@windriver.com>
+> > ---
+> >  .../recipes-support/netcat/netcat-openbsd_1.89.bb  |   30 ++++++++++++=
+++++++++
+> >  meta-networking/recipes-support/netcat/netcat.inc  |    5 +++
+> >  .../recipes-support/netcat/netcat_0.7.1.bb         |   11 +++----
+> >  3 files changed, 40 insertions(+), 6 deletions(-)
+> >  create mode 100644 meta-networking/recipes-support/netcat/netcat-openb=
+sd_1.89.bb
+> >  create mode 100644 meta-networking/recipes-support/netcat/netcat.inc
+> >=20
+> > diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89=
+=2Ebb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+> > new file mode 100644
+> > index 0000000..f83caee
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+> > @@ -0,0 +1,30 @@
+> > +require netcat.inc
+> > +DESCRIPTION =3D "OpenBSD Netcat"
+> > +HOMEPAGE =3D "http://ftp.debian.org"
+> > +LICENSE =3D "BSD-3-Clause"
+> > +PR =3D "r0"
+> > +
+> > +SRC_URI =3D "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.8=
+9.orig.tar.gz;name=3Dnetcat \
+> > +           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89-=
+4.diff.gz;name=3Dnetcat-patch"
+> > +
+> > +SRC_URI[netcat.md5sum] =3D "7238ce15aae43069e96ba7faf03f153e"
+> > +SRC_URI[netcat.sha256sum] =3D "72e844dde8a2a7cba61971d493758dbea9ef0b1=
+64bccef15fd4a36490dc77f2b"
+> > +SRC_URI[netcat-patch.md5sum] =3D "00c65aa22243b76998174c733cbb64cc"
+> > +SRC_URI[netcat-patch.sha256sum] =3D "d5b6b2bd9788114bdcfbb71acad026372=
+0b4fdc41529e287adf451b8610f84f1"
+> > +
+> > +S =3D "${WORKDIR}/${PN}-${PV}.orig"
+> > +
+> > +do_configure[noexec] =3D "1"
+> > +
+> > +do_compile() {
+> > +	cd ${S}
+> > +        while read line; do patch -p1 <debian/patches/$line; done <deb=
+ian/patches/series
+> > +	pkgrel=3D4
+> > +	oe_runmake CFLAGS=3D"$CFLAGS -DDEBIAN_VERSION=3D\"\\\"${pkgrel}\\\"\""
+> > +}
+> > +
+> > +do_install() {
+> > +        install -d ${D}${bindir}
+> > +        install -m 755 ${S}/nc ${D}${bindir}/nc.${PN}
+> > +}
+> > +ALTERNATIVE_PRIORITY =3D "50"
+> > diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-n=
+etworking/recipes-support/netcat/netcat.inc
+> > new file mode 100644
+> > index 0000000..6c815d9
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/netcat/netcat.inc
+> > @@ -0,0 +1,5 @@
+> > +SECTION =3D "console/network"
+> > +inherit update-alternatives gettext
+> > +
+> > +ALTERNATIVE_${PN} =3D "nc"
+> > +
+> > diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/m=
+eta-networking/recipes-support/netcat/netcat_0.7.1.bb
+> > index c5ab85d..c4f1f33 100644
+> > --- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+> > +++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+> > @@ -1,21 +1,20 @@
+> > +require netcat.inc
+> >  DESCRIPTION =3D "GNU Netcat"
+> >  HOMEPAGE =3D "http://netcat.sourceforge.net"
+> > -SECTION =3D "console/network"
+> >  LICENSE =3D "GPLv2"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079b=
+ae19f"
+> > =20
+> > -PR =3D "r0"
+> > +PR =3D "r1"
+> > =20
+> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2"
+> > =20
+> >  SRC_URI[md5sum] =3D "0a29eff1736ddb5effd0b1ec1f6fe0ef"
+> >  SRC_URI[sha256sum] =3D "b55af0bbdf5acc02d1eb6ab18da2acd77a400bafd07448=
+9003f3df09676332bb"
+> > =20
+> > -inherit autotools update-alternatives gettext
+> > +inherit autotools
+> > =20
+> >  do_install_append() {
+> > -	mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
+> > +        install -d ${D}${bindir}
+> > +        mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
+> >  }
+> > -
+> > -ALTERNATIVE_${PN} =3D "nc"
+> >  ALTERNATIVE_PRIORITY =3D "100"
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Joe MacDonald.
+:wq
 
---l06SQqiZYCi8rTKz
+--e8/wErwm0bqugfcz
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlDrIxQACgkQN1Ujt2V2gBwtPQCggkVy8DbCykkvrCSF3DARzozS
-CqoAn1L3ZS/5lGL8m3HzxVUorgeGbixI
-=Ppr+
+iEYEARECAAYFAlDrLyQACgkQPN8S4W6ZZndEMACffXSLycU0z0YzhyQhYgEumFos
+ox8An3OPdyNL7sILy6rGw86l/mj6310I
+=Gj/v
 -----END PGP SIGNATURE-----
 
---l06SQqiZYCi8rTKz--
+--e8/wErwm0bqugfcz--
