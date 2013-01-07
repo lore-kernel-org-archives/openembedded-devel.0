@@ -1,36 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ia0-f173.google.com ([209.85.210.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TsFKB-0005SW-J2
+	(envelope-from <raj.khem@gmail.com>) id 1TsFN6-0005il-ON
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 17:13:19 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r07FwBlU019365
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 07 Jan 2013 17:16:22 +0100
+Received: by mail-ia0-f173.google.com with SMTP id w21so16569486iac.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 7 Jan 2013 07:58:11 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Mon, 7 Jan 2013 07:58:09 -0800
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 8F54F7FCE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Jan 2013 10:56:34 -0500 (EST)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 8D70A2414F; Mon,
-	7 Jan 2013 10:58:08 -0500 (EST)
-Date: Mon, 7 Jan 2013 10:58:08 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130107155808.GE6154@windriver.com>
-References: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
-	<1357463568-26241-3-git-send-email-raj.khem@gmail.com>
+	Mon, 07 Jan 2013 08:01:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=dE7EIwGRw8ZvytNRB7VJssIEFk1p+kh+LjXNWgXJbz4=;
+	b=OTwKgbTe5AYp6nzgRAU7R43XfuiZwcbzkeLzIwUPP9k9VnW45tr1+Ny2pBbNjP6z4l
+	KZxl2o8VKjXTk34wVxEjj0ouiWkgaENIPS1hCzN6SzlQtF8+0b8soA4Me1vVkn1oQPXR
+	n/6PWt6iX8+/NsS3jYXx3+I+wVg/9tRU8f4JZZD1jT3KJJuUfEdTU7e22qh00Gj8Gg5g
+	cCf7KG9sSjRhTZEiT8r2VHv8SdLAPL+zsDE2mliDFnRfCSveUGjvYqF19ngIGB2Br1b1
+	P/twsYjKS2aXBSZpdCpxhOg63b/BR/nyOwVtcmNpYk1a6wGoaWCNGx+XDlXNUNERrqyU
+	qJwQ==
 MIME-Version: 1.0
-In-Reply-To: <1357463568-26241-3-git-send-email-raj.khem@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH V2 03/25] autofs: Add recipes for 5.0.7
+Received: by 10.43.92.72 with SMTP id bp8mr46204732icc.49.1357574470474; Mon,
+	07 Jan 2013 08:01:10 -0800 (PST)
+Received: by 10.64.19.8 with HTTP; Mon, 7 Jan 2013 08:01:10 -0800 (PST)
+In-Reply-To: <20130107153602.GD6154@windriver.com>
+References: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
+	<1357463568-26241-9-git-send-email-raj.khem@gmail.com>
+	<20130106093635.GB3272@jama>
+	<CAMKF1sqXMaKrkpicDJLgZuWBzwTo3gyw_N3emL858GZfSZnwHw@mail.gmail.com>
+	<20130107153602.GD6154@windriver.com>
+Date: Mon, 7 Jan 2013 08:01:10 -0800
+Message-ID: <CAMKF1srqeYHXwFz+e8C8+RTQMX63Fbgck2DnjYia8XLzTqSN4Q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe][PATCH V2 09/25] atftp: Upgrade to latest from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,175 +45,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 16:13:20 -0000
-X-Groupsio-MsgNum: 42563
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xJK8B5Wah2CMJs8h"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 07 Jan 2013 16:16:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
---xJK8B5Wah2CMJs8h
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Monday, January 7, 2013, Joe MacDonald wrote:
 
-Two simple questions on this.  Therefore, aggressive snipping.
+> Hi Khem,
+>
+> [Re: [oe] [meta-oe][PATCH V2 09/25] atftp: Upgrade to latest from git] On
+> 13.01.06 (Sun 17:23) Khem Raj wrote:
+>
+> > On Sun, Jan 6, 2013 at 1:36 AM, Martin Jansa <martin.jansa@gmail.com<javascript:;>>
+> wrote:
+> > > On Sun, Jan 06, 2013 at 01:12:32AM -0800, Khem Raj wrote:
+> > >> Add patches to let atftp serve huge ramdisks >500M in size
+> > >
+> > > I don't see this patch
+> > > http://patchwork.openembedded.org/patch/41955/
+> > > in V2, can you update status on patchwork to indicate which patches are
+> > > superseeded by V2 and which are still valid?
+> > >
+> >
+> > I would suggest to actually drop all V1 patches since I have
+> > reshuffled them quite a bit and take all V2 fresh
+> > I have also pushed this latest series into contrib repo
+> >
+> >
+> http://git.openembedded.org/meta-openembedded-contrib/log/?h=kraj/updates
+>
+> I'm looking at that now.  The only comment / request I have right now is
+> about atftp.  It was on my list of stuff to update and move into
+> meta-networking.  If there's no objection it that, would you mind moving
+> it there at the same time?  I'd been planning to have it in
+> meta-networking/recipes-daemons.
 
-[[oe] [meta-networking][PATCH V2 03/25] autofs: Add recipes for 5.0.7] On 1=
-3.01.06 (Sun 01:12) Khem Raj wrote:
 
-[...]
+Yes that's ok but I trout of doing the move as a separate step which does
+not have other changes
+For ease of surfing the history in future. It's not only atftpd but there
+are move recipes that need to
+Move into this layer
 
-> diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.0.7/libtirpc=
-=2Epatch b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/libtirpc.pat=
-ch
-> new file mode 100644
-> index 0000000..04f52c6
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/libtirpc.patch
-> @@ -0,0 +1,26 @@
-> +Index: autofs-5.0.7/aclocal.m4
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- autofs-5.0.7.orig/aclocal.m4	2012-10-28 13:17:45.504237027 -0700
-> ++++ autofs-5.0.7/aclocal.m4	2012-10-28 13:20:50.108242739 -0700
-> +@@ -403,7 +403,7 @@
-> + # save current flags
-> + af_check_libtirpc_save_cflags=3D"$CFLAGS"
-> + af_check_libtirpc_save_ldflags=3D"$LDFLAGS"
-> +-CFLAGS=3D"$CFLAGS -I/usr/include/tirpc"
-> ++CFLAGS=3D"$CFLAGS -I=3D/usr/include/tirpc"
-> + LDFLAGS=3D"$LDFLAGS -ltirpc"
-> +=20
-> + AC_TRY_LINK(
-> +Index: autofs-5.0.7/Makefile.rules
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- autofs-5.0.7.orig/Makefile.rules	2012-10-28 13:17:45.308237022 -0700
-> ++++ autofs-5.0.7/Makefile.rules	2012-10-28 13:21:25.720242803 -0700
-> +@@ -48,7 +48,7 @@
-> + LDFLAGS +=3D -lpthread
-> +=20
-> + ifdef TIRPCLIB
-> +-CFLAGS +=3D -I/usr/include/tirpc
-> ++CFLAGS +=3D -I=3D/usr/include/tirpc
-> + LDFLAGS +=3D $(TIRPCLIB)
-> + endif
-> +=20
 
-Are these required?  If they're not, they're probably benign, but I
-thought the -I=3D<path> was an rpmbuildism that wasn't specifically
-required here.
+>
+> Thanks,
+> -J.
+>
+> >
+> >
+> > > Thanks
+> > >
+> > >>
+> > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > >> ---
+> > >>  .../atftp/{atftp_0.7.bb => atftp_git.bb}           |   18 +--
+> > >>  ...tpd-0.7_circumvent_tftp_size_restrictions.patch |  158
+> ++++++++++++++++++++
+> > >>  .../atftpd-0.7_unprotected_assignments_crash.patch |  145
+> ++++++++++++++++++
+> > >>  3 files changed, 311 insertions(+), 10 deletions(-)
+> > >>  rename meta-oe/recipes-extended/atftp/{atftp_0.7.bb => atftp_git.bb}
+> (59%)
+> > >>  create mode 100644
+> meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
+> > >>  create mode 100644
+> meta-oe/recipes-extended/atftp/files/atftpd-0.7_unprotected_assignments_crash.patch
+> > >>
+> > >> diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bbb/meta-oe/recipes-extended/atftp/
+> atftp_git.bb
+> > >> similarity index 59%
+> > >> rename from meta-oe/recipes-extended/atftp/atftp_0.7.bb
+> > >> rename to meta-oe/recipes-extended/atftp/atftp_git.bb
+> > >> index ff1e11d..774dd68 100644
+> > >> --- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
+> > >> +++ b/meta-oe/recipes-extended/atftp/atftp_git.bb
+> > >> @@ -3,13 +3,16 @@ SECTION = "network"
+> > >>  HOMEPAGE = "http://packages.debian.org/atftp"
+> > >>  LICENSE = "GPLv2"
+> > >>  LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+> > >> -PR = "r4"
+> > >> +PV = "0.7.1+git${SRCPV}"
+> > >>
+> > >> -SRC_URI =
+> "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive \
+> > >> -
+> ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \
+> > >> -           file://atftpd.init"
+> > >> +SRCREV = "be3291a18c069ae23a124ffdc56d64a5ff0bbec7"
+> > >>
+> > >> -S = "${WORKDIR}/atftp-${PV}.dfsg"
+> > >> +SRC_URI = "git://
+> atftp.git.sourceforge.net/gitroot/atftp/atftp;protocol=git \
+> > >> +           file://atftpd-0.7_circumvent_tftp_size_restrictions.patch
+> \
+> > >> +           file://atftpd-0.7_unprotected_assignments_crash.patch \
+> > >> +           file://atftpd.init \
+> > >> +          "
+> > >> +S = "${WORKDIR}/git"
+> > >>
+> > >>  inherit autotools update-rc.d useradd
+> > >>
+> > >> @@ -35,8 +38,3 @@ PACKAGES =+ "atftpd"
+> > >>  FILES_${PN} = "${bindir}/*"
+> > >>
+> > >>  FILES_${PN}d = "${sbindir}/* ${sysconfdir}/init.d/* /srv/tftp"
+> > >> -
+> > >> -SRC_URI[archive.md5sum] = "aa269044a6f992eca78fee2f6119643c"
+> > >> -SRC_URI[archive.sha256sum] =
+> "18815f5b67290fac087c6b9da28dfa5e0feb722096f5c5de52e59b46026da559"
+> > >> -SRC_URI[patch.md5sum] = "1636f199bf32c754a7bf34a5c647d138"
+> > >> -SRC_URI[patch.sha256sum] =
+> "0df33f6c09c2b2de58a84d7bb757844fc9538cd4d6c8d9c463da5270ebc2e41d"
+> > >> diff --git
+> a/meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
+> b/meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
+> > >> new file mode 100644
+> > >> index 0000000..9aeb351
+> > >> --- /dev/null
+> -Joe MacDonald.
+> :wq
+>
 
-[...]
-
-> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/met=
-a-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-> new file mode 100644
-> index 0000000..5013e5e
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-> @@ -0,0 +1,71 @@
-> +DESCRIPTION =3D "Kernel based automounter for linux."
-> +SECTION =3D "base"
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
-bb3"
-> +
-> +DEPENDS +=3D "openldap libtirpc flex-native bison-native"
-> +
-> +inherit autotools systemd
-> +
-> +SRC_URI =3D "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.ta=
-r.bz2 \
-> +           file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
-> +           file://autofs-5.0.7-fix-use-cache-entry-after-free-mistake.pa=
-tch \
-> +           file://autofs-5.0.7-fix-ipv6-proximity-calculation.patch \
-> +           file://autofs-5.0.7-fix-parse-buffer-initialization.patch \
-> +           file://autofs-5.0.7-fix-typo-in-automount-8.patch \
-> +           file://autofs-5.0.7-include-usage-in-usage-message.patch \
-> +           file://autofs-5.0.7-dont-wait-forever-to-restart.patch \
-> +           file://autofs-5.0.7-add-timeout-option-description-to-man-pag=
-e.patch \
-> +           file://autofs-5.0.7-fix-null-map-entry-order-handling.patch \
-> +           file://autofs-5.0.7-make-description-of-default-MOUNT_WAIT-se=
-tting-clear.patch \
-> +           file://autofs-5.0.7-configure-in-allow-cross-compilation.patc=
-h \
-> +           file://autofs-5.0.7-README-update-mailing-list-subscription-i=
-nfo.patch \
-> +           file://autofs-5.0.7-allow-non-root-user-to-check-status.patch=
- \
-> +           file://autofs-5.0.7-configure-allow-cross-compilation-update.=
-patch \
-> +           file://autofs-5.0.6-fix-recursive-mount-deadlock.patch \
-> +           file://autofs-5.0.6-increase-file-map-read-buffer-size.patch \
-> +           file://autofs-5.0.7-handle-new-location-of-systemd.patch \
-> +           file://Makefile.rules-cross.patch \
-> +           file://no-bash.patch \
-> +           file://cross.patch \
-> +           file://libtirpc.patch \
-> +           file://libtirpc-name-clash-backout.patch \
-> +          "
-> +
-> +SRC_URI[md5sum] =3D "bc46838dece83c02d800ff144ed9f431"
-> +SRC_URI[sha256sum] =3D "08c4304d8076dc80c14df559bc5fd821b67ef3457b245f61=
-068bd053d8f94ccc"
-> +
-> +inherit update-rc.d
-> +
-> +INITSCRIPT_NAME =3D "autofs"
-> +INITSCRIPT_PARAMS =3D "defaults"
-> +
-> +SYSTEMD_PACKAGES =3D "${PN}-systemd"
-> +SYSTEMD_SERVICE =3D "autofs.service"
-> +
-> +# FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
-> +CFLAGS +=3D "${LDFLAGS}"
-> +
-> +EXTRA_OEMAKE =3D "DONTSTRIP=3D1"
-> +EXTRA_OECONF +=3D "--with-systemd --disable-mount-locking \
-> +                --enable-ignore-busy --with-openldap=3Dno \
-> +                --with-sasl=3Dno --with-libtirpc=3Dyes \
-> +                --with-path=3D${STAGING_BINDIR_NATIVE} \
-> +                "
-> +CACHED_CONFIGUREVARS =3D "ac_cv_path_RANLIB=3D${RANLIB} \
-> +                        ac_cv_path_RPCGEN=3Drpcgen \
-> +                       "
-> +
-> +do_configure_prepend () {
-> +        if [ ! -e acinclude.m4 ]; then
-> +                cp aclocal.m4 acinclude.m4
-> +        fi
-> +}
-> +
-> +#do_install () {
-> +#        install -d ${D}${mandir}/man5 ${D}${mandir}/man8 \
-> +#                   ${D}${sbindir}
-> +#        oe_runmake 'INSTALLROOT=3D${D}' install
-> +#}
-
-If do_install() is dead, any harm in removing it from the recipe
-entirely?
-
-> +
-> +INSANE_SKIP_${PN} =3D "dev-so"
---=20
--Joe MacDonald.
-:wq
-
---xJK8B5Wah2CMJs8h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlDq8JAACgkQPN8S4W6ZZncmPgCfTu/CF9W5+w1aXG56ynfHLw//
-WVYAniFxjqZ47CKefMA7HKYUp9PMzlgn
-=LslG
------END PGP SIGNATURE-----
-
---xJK8B5Wah2CMJs8h--
