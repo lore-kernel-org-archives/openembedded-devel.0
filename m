@@ -1,33 +1,25 @@
-Received: from mail-ie0-f171.google.com ([209.85.223.171])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ts1gf-0000mv-UQ
+	(envelope-from <Lei.Yang@windriver.com>) id 1Ts1uE-0000zu-0M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 02:39:38 +0100
-Received: by mail-ie0-f171.google.com with SMTP id 17so22580059iea.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jan 2013 17:24:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=2jEfY231gNhieKGm2dy8w0MwnEANuVKg5ePoLkdX83g=;
-	b=Ali22uFT34J+vCrMvZx/hcImJMkXuNUmdgLTOkGYzyC4FH6oO1a9n3xpvFxNolWrPq
-	IEpsh0NxKC5lJgKZXDTwIKQhDy2+XKFZAUdsBnvopQX+gz+N4vGhmQzfweAdizerxyaK
-	8ooEpxilb/I3vYfg41EEMhwTzR2TD6466db1FvPTvM1dBkizV9aV6Hj1OEQ1649kUhnw
-	nWfs7woa4ktvAVURU/TTQ1buURAQlrBa4a1J7mXS316IHHxdoCZjb3E0K0CRKkPrN6xX
-	qpV4Qs1RkiNAb0o4P4abx38KzoJcUhpaT8d6Y3HDLdr3/A2NwZE7CdzBICfFivuv2MZq
-	sLkQ==
-Received: by 10.50.150.142 with SMTP id ui14mr4348396igb.93.1357521868372;
-	Sun, 06 Jan 2013 17:24:28 -0800 (PST)
+	Mon, 07 Jan 2013 02:53:38 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r071cQjE001050
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 6 Jan 2013 17:38:26 -0800 (PST)
+Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Sun, 6 Jan 2013 17:38:26 -0800
+From: <lei.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <Joe.MacDonald@windriver.com>,
+	<meta-virtualization@yoctoproject.org>, <bruce.ashfield@gmail.com>,
+	<david.c.nystrom@gmail.com>
+Date: Mon, 7 Jan 2013 09:38:24 +0800
+Message-ID: <1357522704-9608-1-git-send-email-lei.yang@windriver.com>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-Received: by 10.64.19.8 with HTTP; Sun, 6 Jan 2013 17:23:58 -0800 (PST)
-In-Reply-To: <20130106093635.GB3272@jama>
-References: <1357463568-26241-1-git-send-email-raj.khem@gmail.com>
-	<1357463568-26241-9-git-send-email-raj.khem@gmail.com>
-	<20130106093635.GB3272@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 6 Jan 2013 17:23:58 -0800
-Message-ID: <CAMKF1sqXMaKrkpicDJLgZuWBzwTo3gyw_N3emL858GZfSZnwHw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V2 09/25] atftp: Upgrade to latest from git
+Subject: [meta-networking][PATCHV2] Add netcat-bsd into meta-networking for meta-virutalization libvirt virt-test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,408 +33,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 01:39:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 Jan 2013 01:53:38 -0000
+Content-Type: text/plain
 
-On Sun, Jan 6, 2013 at 1:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sun, Jan 06, 2013 at 01:12:32AM -0800, Khem Raj wrote:
->> Add patches to let atftp serve huge ramdisks >500M in size
->
-> I don't see this patch
-> http://patchwork.openembedded.org/patch/41955/
-> in V2, can you update status on patchwork to indicate which patches are
-> superseeded by V2 and which are still valid?
->
+From: Lei Yang <lei.yang@windriver.com>
 
-I would suggest to actually drop all V1 patches since I have
-reshuffled them quite a bit and take all V2 fresh
-I have also pushed this latest series into contrib repo
+The netcat-openbsd in meta-virtualization layer has bugs.
+This update version will fix "nc: Protocol no available." error.
+As bruce point, we want to keep netcat in the meta-networking,
+which meta-virtualization will depend on,and this patch will let
+netcat-openbsd with low priority to install
 
-http://git.openembedded.org/meta-openembedded-contrib/log/?h=kraj/updates
+Lei
 
+Signed-off-by: Lei Yang <lei.yang@windriver.com>
+---
+ .../recipes-support/netcat/netcat-openbsd_1.89.bb  |   30 ++++++++++++++++++++
+ meta-networking/recipes-support/netcat/netcat.inc  |    5 +++
+ .../recipes-support/netcat/netcat_0.7.1.bb         |   11 +++----
+ 3 files changed, 40 insertions(+), 6 deletions(-)
+ create mode 100644 meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+ create mode 100644 meta-networking/recipes-support/netcat/netcat.inc
 
-> Thanks
->
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../atftp/{atftp_0.7.bb => atftp_git.bb}           |   18 +--
->>  ...tpd-0.7_circumvent_tftp_size_restrictions.patch |  158 ++++++++++++++++++++
->>  .../atftpd-0.7_unprotected_assignments_crash.patch |  145 ++++++++++++++++++
->>  3 files changed, 311 insertions(+), 10 deletions(-)
->>  rename meta-oe/recipes-extended/atftp/{atftp_0.7.bb => atftp_git.bb} (59%)
->>  create mode 100644 meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
->>  create mode 100644 meta-oe/recipes-extended/atftp/files/atftpd-0.7_unprotected_assignments_crash.patch
->>
->> diff --git a/meta-oe/recipes-extended/atftp/atftp_0.7.bb b/meta-oe/recipes-extended/atftp/atftp_git.bb
->> similarity index 59%
->> rename from meta-oe/recipes-extended/atftp/atftp_0.7.bb
->> rename to meta-oe/recipes-extended/atftp/atftp_git.bb
->> index ff1e11d..774dd68 100644
->> --- a/meta-oe/recipes-extended/atftp/atftp_0.7.bb
->> +++ b/meta-oe/recipes-extended/atftp/atftp_git.bb
->> @@ -3,13 +3,16 @@ SECTION = "network"
->>  HOMEPAGE = "http://packages.debian.org/atftp"
->>  LICENSE = "GPLv2"
->>  LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
->> -PR = "r4"
->> +PV = "0.7.1+git${SRCPV}"
->>
->> -SRC_URI = "${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg.orig.tar.gz;name=archive \
->> -           ${DEBIAN_MIRROR}/main/a/atftp/atftp_${PV}.dfsg-11.diff.gz;name=patch \
->> -           file://atftpd.init"
->> +SRCREV = "be3291a18c069ae23a124ffdc56d64a5ff0bbec7"
->>
->> -S = "${WORKDIR}/atftp-${PV}.dfsg"
->> +SRC_URI = "git://atftp.git.sourceforge.net/gitroot/atftp/atftp;protocol=git \
->> +           file://atftpd-0.7_circumvent_tftp_size_restrictions.patch \
->> +           file://atftpd-0.7_unprotected_assignments_crash.patch \
->> +           file://atftpd.init \
->> +          "
->> +S = "${WORKDIR}/git"
->>
->>  inherit autotools update-rc.d useradd
->>
->> @@ -35,8 +38,3 @@ PACKAGES =+ "atftpd"
->>  FILES_${PN} = "${bindir}/*"
->>
->>  FILES_${PN}d = "${sbindir}/* ${sysconfdir}/init.d/* /srv/tftp"
->> -
->> -SRC_URI[archive.md5sum] = "aa269044a6f992eca78fee2f6119643c"
->> -SRC_URI[archive.sha256sum] = "18815f5b67290fac087c6b9da28dfa5e0feb722096f5c5de52e59b46026da559"
->> -SRC_URI[patch.md5sum] = "1636f199bf32c754a7bf34a5c647d138"
->> -SRC_URI[patch.sha256sum] = "0df33f6c09c2b2de58a84d7bb757844fc9538cd4d6c8d9c463da5270ebc2e41d"
->> diff --git a/meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch b/meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
->> new file mode 100644
->> index 0000000..9aeb351
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/atftp/files/atftpd-0.7_circumvent_tftp_size_restrictions.patch
->> @@ -0,0 +1,158 @@
->> +Fate #303031: Circumvent TFTP size restrictions in atftpd
->> +The size of a single image file that can be transferred with TFTP is limited to
->> +2^(2*8) *BLOCKSIZE (as per RFC 1350 there are only two bytes for the block
->> +counter). This is problematic for one of our customers who needs to transfer
->> +100+ MB Windows images using a TFTP client (NT bootloader) which has a
->> +hardwared BLOCKSIZE setting of 1432).
->> +
->> +block rollover
->> +http://www.compuphase.com/tftp.htm
->> +
->> +Index: git/tftp_def.h
->> +===================================================================
->> +--- git.orig/tftp_def.h      2012-11-19 16:28:50.221027144 -0800
->> ++++ git/tftp_def.h   2012-11-20 17:40:54.391206979 -0800
->> +@@ -32,6 +32,7 @@
->> + #define TIMEOUT       5         /* Client timeout */
->> + #define S_TIMEOUT     5         /* Server timout. */
->> + #define NB_OF_RETRY   5
->> ++#define MAXBLOCKS   1000000      /* maximum number of blocks in a download */
->> +
->> + /* definition to use tftp_options structure */
->> + #define OPT_FILENAME  0
->> +Index: git/tftp_file.c
->> +===================================================================
->> +--- git.orig/tftp_file.c     2012-11-19 16:28:50.221027144 -0800
->> ++++ git/tftp_file.c  2012-11-19 16:28:51.201027167 -0800
->> +@@ -622,8 +622,8 @@
->> +      int state = S_SEND_REQ;    /* current state in the state machine */
->> +      int timeout_state = state; /* what state should we go on when timeout */
->> +      int result;
->> +-     int block_number = 0;
->> +-     int last_block = -1;
->> ++     long block_number = 0;
->> ++     long last_block = -1;
->> +      int data_size;             /* size of data received */
->> +      int sockfd = data->sockfd; /* just to simplify calls */
->> +      struct sockaddr_storage sa; /* a copy of data.sa_peer */
->> +@@ -637,8 +637,8 @@
->> +      int convert = 0;           /* if true, do netascii convertion */
->> +      char string[MAXLEN];
->> +
->> +-     int prev_block_number = 0; /* needed to support netascii convertion */
->> +-     int prev_file_pos = 0;
->> ++     long prev_block_number = 0; /* needed to support netascii convertion */
->> ++     long prev_file_pos = 0;
->> +      int temp = 0;
->> +
->> +      data->file_size = 0;
->> +@@ -745,7 +745,7 @@
->> +                               data_size, data->data_buffer);
->> +                data->file_size += data_size;
->> +                if (data->trace)
->> +-                    fprintf(stderr, "sent DATA <block: %d, size: %d>\n",
->> ++                    fprintf(stderr, "sent DATA <block: %ld, size: %d>\n",
->> +                             block_number + 1, data_size - 4);
->> +                state = S_WAIT_PACKET;
->> +                break;
->> +@@ -785,7 +785,7 @@
->> +                     }
->> +                     block_number = ntohs(tftphdr->th_block);
->> +                     if (data->trace)
->> +-                         fprintf(stderr, "received ACK <block: %d>\n",
->> ++                         fprintf(stderr, "received ACK <block: %ld>\n",
->> +                                  block_number);
->> +                     if ((last_block != -1) && (block_number > last_block))
->> +                     {
->> +Index: git/tftp_io.c
->> +===================================================================
->> +--- git.orig/tftp_io.c       2012-11-19 16:28:50.221027144 -0800
->> ++++ git/tftp_io.c    2012-11-19 16:28:51.201027167 -0800
->> +@@ -350,8 +350,8 @@
->> + /*
->> +  * Read from file and do netascii conversion if needed
->> +  */
->> +-int tftp_file_read(FILE *fp, char *data_buffer, int data_buffer_size, int block_number,
->> +-                   int convert, int *prev_block_number, int *prev_file_pos, int *temp)
->> ++int tftp_file_read(FILE *fp, char *data_buffer, int data_buffer_size, long block_number,
->> ++                   int convert, long *prev_block_number, long *prev_file_pos, int *temp)
->> + {
->> +      int i;
->> +      int c;
->> +Index: git/tftp_io.h
->> +===================================================================
->> +--- git.orig/tftp_io.h       2012-11-19 16:28:50.221027144 -0800
->> ++++ git/tftp_io.h    2012-11-19 16:28:51.201027167 -0800
->> +@@ -52,8 +52,8 @@
->> + int tftp_get_packet(int sock1, int sock2, int *sock, struct sockaddr_storage *sa,
->> +                     struct sockaddr_storage *from, struct sockaddr_storage *to,
->> +                     int timeout, int *size, char *data);
->> +-int tftp_file_read(FILE *fp, char *buffer, int buffer_size, int block_number, int convert,
->> +-                   int *prev_block_number, int *prev_file_pos, int *temp);
->> ++int tftp_file_read(FILE *fp, char *buffer, int buffer_size, long block_number, int convert,
->> ++                   long *prev_block_number, long *prev_file_pos, int *temp);
->> + int tftp_file_write(FILE *fp, char *data_buffer, int data_buffer_size, int block_number,
->> +                     int data_size, int convert, int *prev_block_number, int *temp);
->> + #endif
->> +Index: git/tftpd_file.c
->> +===================================================================
->> +--- git.orig/tftpd_file.c    2012-11-19 16:28:50.225027144 -0800
->> ++++ git/tftpd_file.c 2012-11-19 16:28:51.201027167 -0800
->> +@@ -407,8 +407,9 @@
->> +      int state = S_BEGIN;
->> +      int timeout_state = state;
->> +      int result;
->> +-     int block_number = 0;
->> +-     int last_block = -1;
->> ++     long block_number = 0;
->> ++     long last_block = -1;
->> ++     int block_loops = 0;
->> +      int data_size;
->> +      struct sockaddr_storage *sa = &data->client_info->client;
->> +      struct sockaddr_storage from;
->> +@@ -431,8 +432,8 @@
->> +      struct client_info *client_old = NULL;
->> +      struct tftp_opt options[OPT_NUMBER];
->> +
->> +-     int prev_block_number = 0; /* needed to support netascii convertion */
->> +-     int prev_file_pos = 0;
->> ++     long prev_block_number = 0; /* needed to support netascii convertion */
->> ++     long prev_file_pos = 0;
->> +      int temp = 0;
->> +
->> +      /* look for mode option */
->> +@@ -565,11 +566,12 @@
->> +           logger(LOG_INFO, "blksize option -> %d", result);
->> +      }
->> +
->> +-     /* Verify that the file can be sent in 2^16 block of BLKSIZE octets */
->> +-     if ((file_stat.st_size / (data->data_buffer_size - 4)) > 65535)
->> ++     /* Verify that the file can be sent in MAXBLOCKS blocks of BLKSIZE octets */
->> ++     if ((file_stat.st_size / (data->data_buffer_size - 4)) > MAXBLOCKS)
->> +      {
->> +           tftp_send_error(sockfd, sa, EUNDEF, data->data_buffer, data->data_buffer_size);
->> +-          logger(LOG_NOTICE, "Requested file to big, increase BLKSIZE");
->> ++          logger(LOG_NOTICE, "Requested file too big, increase BLKSIZE");
->> ++          logger(LOG_NOTICE, "Only %d blocks of %d bytes can be served.", MAXBLOCKS, data->data_buffer_size);
->> +           if (data->trace)
->> +                logger(LOG_DEBUG, "sent ERROR <code: %d, msg: %s>", EUNDEF,
->> +                       tftp_errmsg[EUNDEF]);
->> +@@ -880,10 +882,15 @@
->> +                     }
->> +                     /* The ACK is from the current client */
->> +                     number_of_timeout = 0;
->> +-                    block_number = ntohs(tftphdr->th_block);
->> ++                    block_number = (block_loops * 65536) + ntohs(tftphdr->th_block);
->> +                     if (data->trace)
->> +-                         logger(LOG_DEBUG, "received ACK <block: %d>",
->> +-                                block_number);
->> ++                    {
->> ++                         logger(LOG_DEBUG, "received ACK <block: %d>", block_number);
->> ++                    }
->> ++                    if (ntohs(tftphdr->th_block) == 65535)
->> ++                    {
->> ++                         block_loops++;
->> ++                    };
->> +                     if ((last_block != -1) && (block_number > last_block))
->> +                     {
->> +                          state = S_END;
->> diff --git a/meta-oe/recipes-extended/atftp/files/atftpd-0.7_unprotected_assignments_crash.patch b/meta-oe/recipes-extended/atftp/files/atftpd-0.7_unprotected_assignments_crash.patch
->> new file mode 100644
->> index 0000000..6faf5f9
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/atftp/files/atftpd-0.7_unprotected_assignments_crash.patch
->> @@ -0,0 +1,145 @@
->> +Index: git/tftpd_list.c
->> +===================================================================
->> +--- git.orig/tftpd_list.c    2012-10-24 21:48:47.000000000 -0700
->> ++++ git/tftpd_list.c 2012-10-24 21:52:04.266205076 -0700
->> +@@ -49,11 +49,11 @@
->> +  */
->> + int tftpd_list_add(struct thread_data *new)
->> + {
->> +-     struct thread_data *current = thread_data;
->> ++     struct thread_data *current;
->> +      int ret;
->> +
->> +      pthread_mutex_lock(&thread_list_mutex);
->> +-
->> ++     current = thread_data;
->> +      number_of_thread++;
->> +
->> +      ret = number_of_thread;
->> +@@ -81,11 +81,13 @@
->> +  */
->> + int tftpd_list_remove(struct thread_data *old)
->> + {
->> +-     struct thread_data *current = thread_data;
->> ++     struct thread_data *current;
->> +      int ret;
->> +
->> +      pthread_mutex_lock(&thread_list_mutex);
->> +
->> ++     current = thread_data;
->> ++
->> +      number_of_thread--;
->> +      ret = number_of_thread;
->> +
->> +@@ -137,23 +139,26 @@
->> +                                              struct thread_data *data,
->> +                                              struct client_info *client)
->> + {
->> +-     struct thread_data *current = thread_data; /* head of the list */
->> +-     struct tftp_opt *tftp_options = data->tftp_options;
->> ++     struct thread_data *current; /* head of the list */
->> ++     struct tftp_opt *tftp_options;
->> +      struct client_info *tmp;
->> +      char options[MAXLEN];
->> +      char string[MAXLEN];
->> +      char *index;
->> +      int len;
->> +
->> ++     /* lock the whole list before walking it */
->> ++     pthread_mutex_lock(&thread_list_mutex);
->> ++
->> +      *thread = NULL;
->> +
->> ++     current = thread_data;
->> ++     tftp_options = data->tftp_options;
->> ++
->> +      opt_request_to_string(tftp_options, options, MAXLEN);
->> +      index = strstr(options, "multicast");
->> +      len = (int)index - (int)options;
->> +
->> +-     /* lock the whole list before walking it */
->> +-     pthread_mutex_lock(&thread_list_mutex);
->> +-
->> +      while (current)
->> +      {
->> +           if (current != data)
->> +@@ -214,9 +219,10 @@
->> + void tftpd_clientlist_remove(struct thread_data *thread,
->> +                              struct client_info *client)
->> + {
->> +-     struct client_info *tmp = thread->client_info;
->> ++     struct client_info *tmp;
->> +
->> +      pthread_mutex_lock(&thread->client_mutex);
->> ++     tmp = thread->client_info;
->> +      while ((tmp->next != client) && (tmp->next != NULL))
->> +           tmp = tmp->next;
->> +      if (tmp->next == NULL)
->> +@@ -231,9 +237,11 @@
->> + void tftpd_clientlist_free(struct thread_data *thread)
->> + {
->> +      struct client_info *tmp;
->> +-     struct client_info *head = thread->client_info;
->> ++     struct client_info *head;
->> +
->> +      pthread_mutex_lock(&thread->client_mutex);
->> ++     head = thread->client_info;
->> ++
->> +      while (head)
->> +      {
->> +           tmp = head;
->> +@@ -250,9 +258,10 @@
->> +                           struct client_info *client,
->> +                           struct sockaddr_storage *sock)
->> + {
->> +-     struct client_info *head = thread->client_info;
->> ++     struct client_info *head;
->> +
->> +      pthread_mutex_lock(&thread->client_mutex);
->> ++     head = thread->client_info;
->> +
->> +      if (client)
->> +      {
->> +@@ -334,10 +343,10 @@
->> +
->> + void tftpd_list_kill_threads(void)
->> + {
->> +-     struct thread_data *current = thread_data; /* head of list */
->> ++     struct thread_data *current; /* head of list */
->> +
->> +      pthread_mutex_lock(&thread_list_mutex);
->> +-
->> ++     current = thread_data;
->> +
->> +      while (current != NULL)
->> +      {
->> +Index: git/tftpd_mcast.c
->> +===================================================================
->> +--- git.orig/tftpd_mcast.c   2012-10-24 21:48:47.000000000 -0700
->> ++++ git/tftpd_mcast.c        2012-10-24 21:49:11.570201582 -0700
->> +@@ -51,9 +51,11 @@
->> +  */
->> + int tftpd_mcast_get_tid(char **addr, short *port)
->> + {
->> +-     struct tid *current = tid_list;
->> ++     struct tid *current;
->> +
->> +      pthread_mutex_lock(&mcast_tid_list);
->> ++     current = tid_list;
->> ++
->> +      /* walk the list for a free tid */
->> +      while (current != NULL)
->> +      {
->> +@@ -74,9 +76,11 @@
->> +
->> + int tftpd_mcast_free_tid(char *addr, short port)
->> + {
->> +-     struct tid *current = tid_list;
->> ++     struct tid *current;
->> +
->> +      pthread_mutex_lock(&mcast_tid_list);
->> ++     current = tid_list;
->> ++
->> +      while (current != NULL)
->> +      {
->> +       if ((current->used == 1) && (current->port == port) &&
->> --
->> 1.7.9.5
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+new file mode 100644
+index 0000000..f83caee
+--- /dev/null
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+@@ -0,0 +1,30 @@
++require netcat.inc
++DESCRIPTION = "OpenBSD Netcat"
++HOMEPAGE = "http://ftp.debian.org"
++LICENSE = "BSD-3-Clause"
++PR = "r0"
++
++SRC_URI = "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89.orig.tar.gz;name=netcat \
++           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89-4.diff.gz;name=netcat-patch"
++
++SRC_URI[netcat.md5sum] = "7238ce15aae43069e96ba7faf03f153e"
++SRC_URI[netcat.sha256sum] = "72e844dde8a2a7cba61971d493758dbea9ef0b164bccef15fd4a36490dc77f2b"
++SRC_URI[netcat-patch.md5sum] = "00c65aa22243b76998174c733cbb64cc"
++SRC_URI[netcat-patch.sha256sum] = "d5b6b2bd9788114bdcfbb71acad0263720b4fdc41529e287adf451b8610f84f1"
++
++S = "${WORKDIR}/${PN}-${PV}.orig"
++
++do_configure[noexec] = "1"
++
++do_compile() {
++	cd ${S}
++        while read line; do patch -p1 <debian/patches/$line; done <debian/patches/series
++	pkgrel=4
++	oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
++}
++
++do_install() {
++        install -d ${D}${bindir}
++        install -m 755 ${S}/nc ${D}${bindir}/nc.${PN}
++}
++ALTERNATIVE_PRIORITY = "50"
+diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-networking/recipes-support/netcat/netcat.inc
+new file mode 100644
+index 0000000..6c815d9
+--- /dev/null
++++ b/meta-networking/recipes-support/netcat/netcat.inc
+@@ -0,0 +1,5 @@
++SECTION = "console/network"
++inherit update-alternatives gettext
++
++ALTERNATIVE_${PN} = "nc"
++
+diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+index c5ab85d..c4f1f33 100644
+--- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
++++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+@@ -1,21 +1,20 @@
++require netcat.inc
+ DESCRIPTION = "GNU Netcat"
+ HOMEPAGE = "http://netcat.sourceforge.net"
+-SECTION = "console/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2"
+ 
+ SRC_URI[md5sum] = "0a29eff1736ddb5effd0b1ec1f6fe0ef"
+ SRC_URI[sha256sum] = "b55af0bbdf5acc02d1eb6ab18da2acd77a400bafd074489003f3df09676332bb"
+ 
+-inherit autotools update-alternatives gettext
++inherit autotools
+ 
+ do_install_append() {
+-	mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
++        install -d ${D}${bindir}
++        mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
+ }
+-
+-ALTERNATIVE_${PN} = "nc"
+ ALTERNATIVE_PRIORITY = "100"
+-- 
+1.7.1
+
 
 
