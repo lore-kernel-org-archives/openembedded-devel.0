@@ -1,40 +1,38 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mail-oa0-f51.google.com ([209.85.219.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TsAHI-000490-0t
+	(envelope-from <otavio.salvador@gmail.com>) id 1TsAja-00064q-9K
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 11:50:00 +0100
-Received: from mail-gg0-f197.google.com ([209.85.161.197])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 07 Jan 2013 02:34:49 -0800
-Received: by mail-gg0-f197.google.com with SMTP id i1so29317180ggn.4
+	Mon, 07 Jan 2013 12:19:25 +0100
+Received: by mail-oa0-f51.google.com with SMTP id n12so17395698oag.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jan 2013 02:34:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=pyOl58K3xZ/twnoLKV2C+6L3T1N6lIHn6ZQ/IBeeqeg=;
-	b=IgKV2AIAeKephbPMJ8DSDZPFno8ESM3igQIu7WkqSx8tkpyEkHKshl2eS2KEQTpO+O
-	gnVUpiLApZ7Ib2OOaxyupndWHdv5J7dnq5z/gdjTRyTAjl9MQt+uTk2DITd77OEWVnDS
-	93564tP/nu4dKL4KHBfvm54q7hJSUjd6TCcGFOH2/r7woOspeFEgwUp+/xfsBU2Fgud/
-	HpUj1RsJd1gOpCRnlubkOFITlLpPje4BMWsrWe7JB4yPc2yGwrjnc8DqDsUScFmut0cw
-	UZm4AVDXZryZ+uWEcqcWFl8kbNrepJ2aXg2XmX6k+4IiJr19M0j2gr7pDoTXXIBLt6/V
-	pMnw==
-X-Received: by 10.220.247.136 with SMTP id mc8mr4169151vcb.44.1357554888818;
-	Mon, 07 Jan 2013 02:34:48 -0800 (PST)
-Received: by 10.220.247.136 with SMTP id mc8mr4169146vcb.44.1357554888743;
-	Mon, 07 Jan 2013 02:34:48 -0800 (PST)
+	Mon, 07 Jan 2013 03:04:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=/sik42K3rCVjowz2CZ91GP68A/24rQuR6ixBtD59zI0=;
+	b=c6dk0xAzZougvkVDFaxA4M+DcHqcbIfmpFGOB2r+jleoBc4VvSFYO35gs7HfZC0uJm
+	bh+Gpuny+hytFIkevkMnFCPID10y6ZiPzQBr7wPPg4GELtRY4Ync7faf21Trnhpf2HDI
+	exvgQpNBc+zD6JclHvcCByz8FZs7+pVc5X7Qfj15UjCK48aNJUO7c+dsgcen97JZK3yN
+	WrqNSbLulUg9bsXTO2fg0qDLsZD4FAqassqbTSMwPQO09tSXHlzdziWv8yIzoEM9dITi
+	OfFSacXDPVf+wNG9FISF3oWZj4Rbp+rB3Ur4X4Se2jypOmM43IpPRay9zjciWvyx9+A7
+	n8yA==
 MIME-Version: 1.0
-Received: by 10.58.95.103 with HTTP; Mon, 7 Jan 2013 02:34:28 -0800 (PST)
-In-Reply-To: <1357550432-9072-1-git-send-email-constantinx.musca@intel.com>
-References: <1357550432-9072-1-git-send-email-constantinx.musca@intel.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 7 Jan 2013 10:34:28 +0000
-Message-ID: <CAJTo0LZRPidifkOfXo6PB4ywRbjUg=ze8VEwj9Tjyi29fOnfcQ@mail.gmail.com>
-To: Constantin Musca <constantinx.musca@intel.com>
-X-Gm-Message-State: ALoCoQm1GVWbMvSxnI+Oi4AhL8An5OyG6dANqIn5u7MI5HpGHJgggkXHTohLg51Mus5B89GE1ltBaLuCDAwCvk8o1odpRdYBelYZQHBWnOSLwABMwPVSY8GdZEobJYo8dt07cxF7P9D17abxA/+s6TK4P30MSfL1O9BQ+D3DHA1EkwByWdts1u+SuHV4dT23/97AFc0Dn1s6
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH] libgdata: remove recipe
+Received: by 10.60.171.133 with SMTP id au5mr33408928oec.90.1357556644683;
+	Mon, 07 Jan 2013 03:04:04 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Mon, 7 Jan 2013 03:04:04 -0800 (PST)
+In-Reply-To: <20130107120129.352ae897@e6520eb>
+References: <CAP9ODKr_NPX9kgu1jFWkrvhzM=0qFdHv4S9cZs0cGr=7z-iGZg@mail.gmail.com>
+	<CAP9ODKp=wXUgCTgVVJQ_C9BAa5in+=ufWoyCNq-73aR6CsTcGA@mail.gmail.com>
+	<20130107120129.352ae897@e6520eb>
+Date: Mon, 7 Jan 2013 09:04:04 -0200
+X-Google-Sender-Auth: 3CAcD_E2LPicFP8AS8CIOuf3rR8
+Message-ID: <CAP9ODKr-z4WC6zVOoy0K-TMvXKESOo6vM-n4WxJw_3U9hJ1a_Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [for-danny] Patches for backport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 10:50:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 Jan 2013 11:19:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 7 January 2013 09:20, Constantin Musca <constantinx.musca@intel.com> wrote:
-> Part of the sato trimming process
+On Mon, Jan 7, 2013 at 9:01 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Le Tue, 1 Jan 2013 16:21:51 -0200,
+> Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
 >
-> Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
+>> On Fri, Dec 21, 2012 at 4:22 PM, Otavio Salvador
+>> <otavio@ossystems.com.br> wrote:
+>> > Hello Eric,
+>> >
+>> > So we did a new set of changes in master, which we'd like to backport.
+>> > The changes are, in order:
+>> >
+>> > 2ac0acc2753f9853928a081cbc80c3daacbe7e08 xf86-video-geode: Add
+>> > rdepends on EXA Xorg module
+>> >
+>> > ade2d4d35e1efdd83bb555949bcfb8c7a1970ff0 xinput-calibrator: Fix
+>> > service file to require display-manag
+>> >
+>> > 43c2d4d3ca9889e54646e02d110d8155da96772c openmotif: Update SRC_URI and
+>> > add libxft in depends
+>> >
+>> > 1db0dbf9a8bf2f09ddbc09a4ccde227fdf9a866a openmotif: Disable printing s=
+upport
+>> >
+>> > 38daf64fb87bbc34caad050e7295b910c9b80e7c openmotif: Avoid use os Xos.h=
+ from host
+>>
+>> Ping?
+>>
+> merged into danny-next. Test build in progress.
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Thanks a lot.
 
-Context: nothing in oe-core uses this anymore.  This should be moved
-to meta-oe (meta-gnome, I expect) to stop that breaking.
-
-Ross
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
