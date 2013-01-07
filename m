@@ -1,34 +1,39 @@
-Received: from mail-oa0-f45.google.com ([209.85.219.45])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TsBrz-00023V-OW
+Received: from 14.mo1.mail-out.ovh.net ([178.32.97.215]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TsCyi-0004Vo-4e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jan 2013 13:32:00 +0100
-Received: by mail-oa0-f45.google.com with SMTP id i18so17780605oag.18
+	Mon, 07 Jan 2013 14:43:06 +0100
+Received: from mail435.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id 540CAFF9E8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jan 2013 04:16:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=qhrssInQWhEE/EraQseDk3SyfNhFHFyH+QYxNyhM1+U=;
-	b=gwCI2WxhsE+mUCSnHD4x4So2t9rR6OHJkABDkaW0nNcC3N/D+G339wcIuzKMt1aUUl
-	qHF2kua9OuHYxdDTySoFzpkp1C+fjE2KPnIcPtl1U4VwMo61kf5IxAqQjbSS17xBhH1c
-	VBuwXFoN94XcoSGitvu+0vIJ6QdkVsIRnQiUBQ+cDhCKlzYLp50iFa3xenhRACC4YCzM
-	GsMYsnJyjQ429aur6KS88mwrJa/FF0emNZR4PU7VOE4tKrrPJnXzzKvJfIjvsXERM01p
-	OxsaFejAdyzZ5PJfYUviWwEzaqXJiLBF1z+joANmU8y4dplvAwyrST2k+PrvZ5WTWqGR
-	W5/w==
-MIME-Version: 1.0
-Received: by 10.60.171.11 with SMTP id aq11mr33476998oec.104.1357561010130;
-	Mon, 07 Jan 2013 04:16:50 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.219.130 with HTTP; Mon, 7 Jan 2013 04:16:50 -0800 (PST)
-In-Reply-To: <CAOkC3RY4n66f9LgvWczskaDUn0wPOjBDbDAoKCMo8CjnFWzgSA@mail.gmail.com>
-References: <CAOkC3RY4n66f9LgvWczskaDUn0wPOjBDbDAoKCMo8CjnFWzgSA@mail.gmail.com>
-Date: Mon, 7 Jan 2013 10:16:50 -0200
-X-Google-Sender-Auth: Be15KYz-b0LBMT0fISJK2_dLrj4
-Message-ID: <CAP9ODKp4EnstE_iY-4cu2zCTUFP5FFf467NcSWe63K2iFDio-A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Reg: Hiawatha
+	Mon,  7 Jan 2013 12:15:27 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 7 Jan 2013 13:02:00 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO e6520eb)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 7 Jan 2013 13:01:59 +0200
+Date: Mon, 7 Jan 2013 12:01:49 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Message-ID: <20130107120149.78479591@e6520eb>
+In-Reply-To: <cover.1357301108.git.Martin.Jansa@gmail.com>
+References: <cover.1357301108.git.Martin.Jansa@gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 12332826105804074313
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrfeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrfeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Cc: martin.jansa@gmail.com
+Subject: Re: [meta-oe][danny][PATCH 0/6] fixes for world build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +47,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jan 2013 12:32:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Jan 2013 13:43:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 7, 2013 at 10:13 AM, GOPIKRISHNAN S <gopikrishnans@pec.edu> wrote:
-> I am facing strange issue while building Hiawatha for Freescale P2041RDB.
->
-> I am getting some errors while building hiawatha(using recipe from
-> openembedded). In investigation I found all return \type and parameter type
-> seems to be same & in all /usr/include/*.h files in declared as extern was
-> added before to make it visible in global. I wonder no problem was
-> not raised while compiling for my host platform (Debian 6 on x86), and
-> getting problem only doing it for my freescale board
-...
+Le Fri,  4 Jan 2013 13:20:30 +0100,
+Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
 
-OE has a newer GCC version and GCC has get more strict about those
-checks so those errors do need to be fixed.
+> The following changes since commit f026e96295da101bb715858bc8705de7e4a339=
+92:
+>=20
+>   xinput-calibrator: remove hardcoded path from xinput_calibrator.desktop=
+ (2012-12-10 20:43:34 +0100)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny2
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Djansa/for-danny2
+>=20
+> Marcin Juszkiewicz (6):
+>   python-phoneutils: drop due to lack of libphone-utils
+>   fbreader: move to meta-gpe due to libgpewidget dependency
+>   devilspie2: move to meta-gnome (libwnck is there)
+>   mplayer2: move lame into ENTERPRISE_DISTRO check
+>   midori: move to meta-gnome due to libnotify
+>   packagegroup-cli-tools: remove mdbus2, mterm2, mkdump, mioctl
+>=20
+>  .../recipes-connectivity/midori/midori_0.4.6.bb           |  0
+>  .../recipes-gnome}/devilspie/devilspie2_0.24.bb           |  0
+>  .../recipes-gnome}/devilspie/files/default.lua            |  0
+>  .../recipes-gnome}/devilspie/files/devilspie2.desktop     |  0
+>  .../fbreader/fbreader-0.12.10/Makefile.patch              |  0
+>  .../recipes-support/fbreader/fbreader-0.12.10/gcc45.patch |  0
+>  .../recipes-support/fbreader/fbreader_0.12.10.bb          |  0
+>  .../recipes-support/fbreader/fbreader_git.bb              |  0
+>  ...installation-of-the-icons-when-RESOLUTION-is-set.patch |  0
+>  .../recipes-core/packagegroups/packagegroup-cli-tools.bb  |  6 +-----
+>  meta-oe/recipes-devtools/python/python-phoneutils_git.bb  | 15 ---------=
+------
+>  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb        |  2 +-
+>  12 files changed, 2 insertions(+), 21 deletions(-)
+>  rename {meta-oe =3D> meta-gnome}/recipes-connectivity/midori/midori_0.4.=
+6.bb (100%)
+>  rename {meta-oe/recipes-graphics =3D> meta-gnome/recipes-gnome}/devilspi=
+e/devilspie2_0.24.bb (100%)
+>  rename {meta-oe/recipes-graphics =3D> meta-gnome/recipes-gnome}/devilspi=
+e/files/default.lua (100%)
+>  rename {meta-oe/recipes-graphics =3D> meta-gnome/recipes-gnome}/devilspi=
+e/files/devilspie2.desktop (100%)
+>  rename {meta-oe =3D> meta-gpe}/recipes-support/fbreader/fbreader-0.12.10=
+/Makefile.patch (100%)
+>  rename {meta-oe =3D> meta-gpe}/recipes-support/fbreader/fbreader-0.12.10=
+/gcc45.patch (100%)
+>  rename {meta-oe =3D> meta-gpe}/recipes-support/fbreader/fbreader_0.12.10=
+.bb (100%)
+>  rename {meta-oe =3D> meta-gpe}/recipes-support/fbreader/fbreader_git.bb =
+(100%)
+>  rename {meta-oe =3D> meta-gpe}/recipes-support/fbreader/files/0001-Fix-i=
+nstallation-of-the-icons-when-RESOLUTION-is-set.patch (100%)
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-phoneutils_git=
+.bb
+>=20
 
-If you upgrade your GCC to 4.7 you'll probably find same build errors.
+merged danny-next, test build in progress.
 
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Thanks,
+Eric
 
 
