@@ -1,41 +1,37 @@
-Received: from mail-pa0-f42.google.com ([209.85.220.42])
+Received: from mail-pa0-f45.google.com ([209.85.220.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tswl0-0002Nj-Gu
+	(envelope-from <martin.jansa@gmail.com>) id 1Tswla-0002OI-PY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 15:36:04 +0100
-Received: by mail-pa0-f42.google.com with SMTP id rl6so1068439pac.29
+	Wed, 09 Jan 2013 15:36:33 +0100
+Received: by mail-pa0-f45.google.com with SMTP id bg2so1067196pad.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 06:20:41 -0800 (PST)
+	Wed, 09 Jan 2013 06:21:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=J9LnXiL+26r3SOkEQZf/ZAjKI0Jt++YaFNVwlEo7vMw=;
-	b=Eb7aFJuCyP82eVCjGn2lb4Ux8+uj+AYXNHDV2EIUHSecwEnCr5tLbQ8Xl1mh9gEpYf
-	bWiWjMgxfWcRd4I+OtW4xbaY0s89Yz1SKJgFIAILEMGUAzE6JhviLa3h+CYeqhsep8TC
-	Cbp0iYxA2tZyZyBVU/ilQhz0YOktJXHG96ptf9+zgTmw/quWC5q9YULwL3VU6GwR9LEk
-	VeoKVdBihyCIpODcsrdUSOXr7urRX+4nRtY/zwQnQIFwmDPag/GhlTgKQvSv6DxgAvTV
-	K4jumSemj8TI3zCDPJl709JDfpLMcnJLxdGr6309Q6hAry/tElLititYMwLiXFjvHdLQ
-	gkVA==
-X-Received: by 10.66.80.202 with SMTP id t10mr189641651pax.81.1357741241811;
-	Wed, 09 Jan 2013 06:20:41 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=hUm80LfklB8jqVH02nOFzLH4+Wa3AJKLKtLA5b9CvOQ=;
+	b=nPtp5W/DX4mYvCHBZiZ8NuHKkemsj4FQUBrFxspp7dwbiRCBTxMEuOAZN+Hn0xMtj0
+	c8UQFoMWa2HxG13iUrK5p8q+t4opN6sckPJYtYu6TS0Zjh0neovW583UqETz1y7I7eCo
+	rL+taJWXesQk51Ni9An827XXuqaTcFe8ouoGcwFq4sstKo7k+LQKK4jFvcS7bP5bQqqd
+	621QM0FeqBmvGGWKO8wlLbD0n2j3/c+9NYpFvSK/9wby11Zv67sLWavExhcKklcQ8kzV
+	jHZvXZlRDRxt5C9TUz1uVNUr3wZLka+3RcQbZprCsCoxeNUr7xNOjmthRoxZFfkNPOKO
+	jzvA==
+X-Received: by 10.68.238.8 with SMTP id vg8mr211419792pbc.26.1357741278120;
+	Wed, 09 Jan 2013 06:21:18 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id x6sm42894998pav.29.2013.01.09.06.20.37
+	by mx.google.com with ESMTPS id gv9sm41714090pbc.21.2013.01.09.06.21.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 06:20:39 -0800 (PST)
-Date: Wed, 9 Jan 2013 15:20:43 +0100
+	Wed, 09 Jan 2013 06:21:16 -0800 (PST)
+Date: Wed, 9 Jan 2013 15:21:21 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Message-ID: <20130109142043.GM3722@jama.palm1.palmone.com>
-References: <20121220132241.10D7310354@opal>
-	<20121222200925.GD8988@jama.palm1.palmone.com>
-	<CAJTo0LYQetj+657NjT+BHpg6jCOzUq63Ad2ghesThWvcLiSxcw@mail.gmail.com>
-	<20121223093932.GF8988@jama.palm1.palmone.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130109142121.GN3722@jama.palm1.palmone.com>
+References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+	<20121216180022.GC3448@jama>
 MIME-Version: 1.0
-In-Reply-To: <20121223093932.GF8988@jama.palm1.palmone.com>
+In-Reply-To: <20121216180022.GC3448@jama>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] Ross Burton : python-mako: install standalone, not as an egg
+Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +45,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 14:36:04 -0000
-X-Groupsio-MsgNum: 42596
+X-List-Received-Date: Wed, 09 Jan 2013 14:36:34 -0000
+X-Groupsio-MsgNum: 42597
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="00sTfE/IIAT5d2r5"
+	protocol="application/pgp-signature"; boundary="MSd2ShuMixI0uVaZ"
 Content-Disposition: inline
 
---00sTfE/IIAT5d2r5
+--MSd2ShuMixI0uVaZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 23, 2012 at 10:39:32AM +0100, Martin Jansa wrote:
-> On Sun, Dec 23, 2012 at 09:03:56AM +0000, Burton, Ross wrote:
-> > On Saturday, 22 December 2012, Martin Jansa wrote:
+On Sun, Dec 16, 2012 at 07:00:22PM +0100, Martin Jansa wrote:
+> On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
+> > The current recipe has a few installation errors:
+> >   * The manipulation of configurable paths drops a '/'
+> >   * The init script defaults are placed in the wrong file
+> >   * Finer control over init script start/stop
+> >   * The default device is non-standard
 > >=20
-> > > This is causing new QA issue, please fix that
-> > >
-> > > python-mako-0.7.2: python-mako: Files/directories were installed but =
-not
-> > > shipped
-> > >
-> > > /home/jenkins/shr/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_=
-64-linux/usr/bin/mako-render
-> > >
-> > > No idea why I haven't noticed it on first test..
-> > >
+> > This patch fixes these little nits and makes the package usable again.
 > >=20
-> > Or how I'm sure I've never seen that. Maybe interaction with some ther
-> > patch. Need to use setup tool.bbclass anyway, will investigate.
+> > Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+> > ---
+> >  meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
+> >  meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
+> >  2 files changed, 5 insertions(+), 3 deletions(-)
+> >=20
+> > diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/=
+recipes-support/rng-tools/files/default
+> > index ab7cd93..7aede9b 100644
+> > --- a/meta-oe/recipes-support/rng-tools/files/default
+> > +++ b/meta-oe/recipes-support/rng-tools/files/default
+> > @@ -1,2 +1,3 @@
+> >  # Specify rng device
+> > -RNG_DEVICE=3D/dev/hwrng
+> > +#RNG_DEVICE=3D/dev/hwrng
+> > +RNG_DEVICE=3D/dev/urandom
+> > diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe=
+/recipes-support/rng-tools/rng-tools_2.bb
+> > index ef753cf..b94854a 100644
+> > --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> > +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> > @@ -15,12 +15,13 @@ inherit autotools update-rc.d
+> >  do_install_append() {
+> >          install -d "${D}${sysconfdir}/init.d"
+> >          install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-t=
+ools
+> > -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir=
+},' \
+> > +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir=
+}/,' \
+> >              ${D}${sysconfdir}/init.d/rng-tools
+> > =20
+> >          install -d "${D}${sysconfdir}/default"
+> > -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+> > +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
+> >  }
+> > =20
+> >  INITSCRIPT_NAME =3D "rng-tools"
+> >  INITSCRIPT_PARAMS =3D "defaults"
+> > +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
 >=20
-> FWIW: python-mako builds without QA warnings after reverting this patch.
+> Why do you add 2nd INITSCRIPT_PARAMS ?
 
 ping :)
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---00sTfE/IIAT5d2r5
+--MSd2ShuMixI0uVaZ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDtfLsACgkQN1Ujt2V2gBxAHQCeKG6tXt5i9oam7islCW/12U/9
-zTEAn00IYcEnssaQ9VUuUTnhQTc3fGBT
-=cUpd
+iEYEARECAAYFAlDtfOEACgkQN1Ujt2V2gBzU+QCggmNPTroPyjxubECYu9BPqg3b
+LaMAoIDsi7QeK3QN6ckS1TeAG3ZfCz50
+=IFLu
 -----END PGP SIGNATURE-----
 
---00sTfE/IIAT5d2r5--
+--MSd2ShuMixI0uVaZ--
