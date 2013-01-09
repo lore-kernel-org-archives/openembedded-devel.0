@@ -1,29 +1,46 @@
-Received: from mail-ie0-f182.google.com ([209.85.223.182])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1TsyJX-0006Qg-0l; Wed, 09 Jan 2013 17:15:44 +0100
-Received: by mail-ie0-f182.google.com with SMTP id s9so2282646iec.27
-	for <multiple recipients>; Wed, 09 Jan 2013 08:00:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:from:date:message-id:subject:to
-	:content-type; bh=I7uq/4yUkO7FGXHWyt1rb0kmZ/raVDaE3TEC6/Kmxf0=;
-	b=XYdmwCQ/MDPewNNxXlryp/GUJRl3VOtvDeHF2NjeizaOy7iNoy6RTWWBU2w/DZV2Hl
-	31TcFJ84g97/6aVHvBLndWyYu3so/DtR18poFfYBBaAz06bii8zNjc+2zDJyuITeNfRR
-	M90QmIlJmBfQHOPY9E6PJXzJfETjzf8xs4u/6cICT1TLNHSJ3Daa5qleiz1yXP3vLp8J
-	Uo3q5vSdOBgR+tnD0HtWyHxIujCLxYfuHyqli0Zeuky8SvrS2F9KB/FDb7Mc7NqVZGMO
-	OqEQCY3tHNkAWPaQ1Wi46DWVKPqCp71+yWk5pUB//fDD2G7MxRd4BlQc+g2gOgJ3oVOt
-	iAxw==
-X-Received: by 10.50.13.173 with SMTP id i13mr2063064igc.93.1357747226228;
-	Wed, 09 Jan 2013 08:00:26 -0800 (PST)
+	(envelope-from <ross.burton@intel.com>) id 1TsyiL-0007A3-VL
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jan 2013 17:41:19 +0100
+Received: from mail-vb0-f71.google.com ([209.85.212.71])
+	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 09 Jan 2013 08:25:02 -0800
+Received: by mail-vb0-f71.google.com with SMTP id p1so3226132vbi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=h3IuoSWbD92cD/AuzC6REfMePRW2QZyFjJrQMqVBho4=;
+	b=eWkTIi79hIX+5rbhnftyj1ZPkbq4PGC6aIxR2D7TLZVfnujnvnzXzOvBZq0qBIY0d8
+	pQn+Ys9ZPpPulkpWZumEvFi6fmH1G4l69v0qTZaxCsCBIly/1MPDQSouOENnA3EnCwTG
+	2MTyXaAlO22RBd7DxthkkbFxWtS5FUg/fSmdpdqb77AIb3lz3bZj0LoiUW/CzfOUsrEm
+	iyjdZmxoWhhWD87XQSOWkGsjf417HUoDr/wR1999F6fxI4NBwY56BI5WNxRjeKJ4sqHZ
+	Ng59ysyLhhGKYwff4RK62rEttfJn3LiI+4ZK9Vt47eVdcLmByYhaNHvOSRuLFEv4YOmC
+	Mgbw==
+X-Received: by 10.220.247.136 with SMTP id mc8mr10937463vcb.44.1357748760812; 
+	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
+Received: by 10.220.247.136 with SMTP id mc8mr10937460vcb.44.1357748760724;
+	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.64.19.8 with HTTP; Wed, 9 Jan 2013 07:59:55 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 9 Jan 2013 07:59:55 -0800
-Message-ID: <CAMKF1sqc+JrTwPMwaBQ2p2-v5SoVgWOoJ76TU6MHro6iYvAJXg@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: locking down patchwork and wiki registrations
+Received: by 10.58.95.103 with HTTP; Wed, 9 Jan 2013 08:25:40 -0800 (PST)
+In-Reply-To: <CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20121223201634.GN8988@jama.palm1.palmone.com>
+	<20121224091242.GS8988@jama.palm1.palmone.com>
+	<20130109132813.GJ3722@jama.palm1.palmone.com>
+	<CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 9 Jan 2013 16:25:40 +0000
+Message-ID: <CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Gm-Message-State: ALoCoQl7UaC0nPCRJjriOd2hko1VAiUHrh9gsFaj+SfABF47NAwXibajVjJb3CuEqI+N1RNDLm37NHMr+ONQSSNFdIwIQ/5SUfLvlBugxN6+WjvQQVnepGNzRJGUup9njKgVhfwgZcLC+QsNgSl+QeuP0NH7n4if+a/nUEJB5N7GsdLUIdfPH64IVZAqq6ZYnahVUqg6cYvr
+Cc: openembedded-core@lists.openembedded.org,
+	Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,25 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 16:16:00 -0000
+X-List-Received-Date: Wed, 09 Jan 2013 16:41:20 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi
+On 9 January 2013 15:17, Andreas M=C3=BCller <schnitzeltony@googlemail.com>=
+ wrote:
+> 2. bitbake libnotify3 -> Tons of: 'WARNING: The recipe libnotify3 is
+> trying to install files into a shared area when those files already
+> exist. Those files and their manifest location are:
+>    /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/lib/libnotify.a
+>    Matched in manifest-overo-libnotify
 
-We receive tonne of spam in form of registrations everyday and some of
-bots have become smarted that they even activate their
-profiles. It has to be manually deleted and its tedious. I would
-therefore like to remove the 'register' link from pw front page
-that will stop the spam as I have already experimented with it a bit.
+The current libnotify doesn't actually depend on GTK+ 2 or GTK+ 3
+(well, the tests do, but that's trivially resolved with an
+upstreamable patch to add --disable-tests), so we don't need two
+recipes.
 
-Same is also true for wiki. We should make the registration process to
-be manual since that will put some end to registration spam.
+Speaking of GTK+ 3, I'm about to start pushing a series to add it to oe-cor=
+e.
 
-I am open to other ideas to stop spam without locking registrations.
-
-The registrations will still happen but should be done manually.
-
-Thanks
--Khem
+Ross
 
 
