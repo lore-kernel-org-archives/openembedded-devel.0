@@ -1,38 +1,38 @@
-Received: from mail-pa0-f46.google.com ([209.85.220.46])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TstJQ-00050W-Mm
+	(envelope-from <martin.jansa@gmail.com>) id 1TstVV-0005lb-MX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 11:55:14 +0100
-Received: by mail-pa0-f46.google.com with SMTP id bh2so948960pad.33
+	Wed, 09 Jan 2013 12:07:44 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so690547dak.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 02:40:00 -0800 (PST)
+	Wed, 09 Jan 2013 02:52:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=0XI63YQ40f8heGY2X7egBaoSXNu83bFXeDjpt0E1C6M=;
-	b=MEi1MSWKUcDgafB7taUKDNLmpHYDs1oObzE9cOT4g36naZV5b4p4jlRfYfd9pcofxf
-	iHK4qvMY4I0DyhHjpz2dTyhJAAMjnJfAtC9LumeM0DQ47UnVmAt5SU38dVDFWHPaOU4E
-	hVR4vSVrXscWry6lUyGVZdusrZ12okgTo9tzIwMvX7OqnjMbveJa5dO3LuA5FnwIyPfm
-	/Qa3vCj/mVYAglQexmewN6kw/aStLEEXcgR/GUSR2g4ZKZ1sHfu842uQAmaVCMXCAldp
-	0N/RRjpTlBSQ8gFEtzUAQ3Bt6T4jpC1cgYy650fBEcy2TQzp3oGL+OaC2BA4+Jro+ySj
-	koxA==
-X-Received: by 10.68.230.135 with SMTP id sy7mr209763475pbc.76.1357727999975; 
-	Wed, 09 Jan 2013 02:39:59 -0800 (PST)
+	:user-agent; bh=fwkTRpcX6sogcooLHlU3K+Yvem2tF7GkGTzEmhUyq4k=;
+	b=Y2Gy8Y+au5pZ/jl4RvRMyx9IFava2uRnE3xaFTdEyFaNpwDPQ8JHgEPSUttPfBLbLx
+	24HFhCfhje8/4AGD5bIzUuChaVseAMH9KnvkPeHDn6GkhgrnzDPK9KJd+UV7sGxC8T+j
+	99pB9f+AoXNmY7W2kKeOgn6NMp+tvJJ0/s0NBe00IZShuw4VS81ChsRc7NbW0u5+v3d6
+	pwpFVCJ1ZiIOnr7G32lnC+E+OnYs3s4A7gIo+/zn1+BdIz/dcF3Kekb7PgPNrQXPpqyM
+	ByuHrRtgS2IRow4bITVnFts+/WDhd/Da4cI7dzkbEaqWDLk3hfWg6y0PRSTrn4bPTs9D
+	bJFQ==
+X-Received: by 10.66.79.97 with SMTP id i1mr7197844pax.47.1357728749100;
+	Wed, 09 Jan 2013 02:52:29 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id f5sm42594334pav.22.2013.01.09.02.39.56
+	by mx.google.com with ESMTPS id oi2sm41427690pbb.62.2013.01.09.02.52.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 02:39:59 -0800 (PST)
-Date: Wed, 9 Jan 2013 11:40:03 +0100
+	Wed, 09 Jan 2013 02:52:27 -0800 (PST)
+Date: Wed, 9 Jan 2013 11:52:32 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130109104003.GG3722@jama.palm1.palmone.com>
-References: <1357407870-22272-1-git-send-email-philip@balister.org>
-	<20130106094053.GC3272@jama>
+Message-ID: <20130109105232.GH3722@jama.palm1.palmone.com>
+References: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
+	<1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <20130106094053.GC3272@jama>
+In-Reply-To: <1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [meta-oe][PATCH] fftw : Update to version 3.3.3.
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][meta-multimedia][PATCH 5/6] wscan: add 20121111
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,82 +46,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 10:55:16 -0000
-X-List-Received-Date: Wed, 09 Jan 2013 10:55:16 -0000
-X-Groupsio-MsgNum: 42590
+X-List-Received-Date: Wed, 09 Jan 2013 11:07:44 -0000
+X-Groupsio-MsgNum: 42591
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iAL9S67WQOXgEPD9"
+	protocol="application/pgp-signature"; boundary="k+G3HLlWI7eRTl+h"
 Content-Disposition: inline
 
---iAL9S67WQOXgEPD9
+--k+G3HLlWI7eRTl+h
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 06, 2013 at 10:40:53AM +0100, Martin Jansa wrote:
-> On Sat, Jan 05, 2013 at 12:44:30PM -0500, Philip Balister wrote:
-> >  * Convert --enable-neon selection to use neon tune feature.
-> >  * Drop neon patch since fftw now has direct neon support.
-> >  * Remove SRC_URI from each bb file and use only SRC_URI from fftw.inc =
-file.
-> >=20
-> > The old recipe selected neon for all armv7 machines, which was not
-> > entirely correct.
+On Fri, Dec 21, 2012 at 03:00:49PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  .../recipes-dvb/wscan/wscan_20121111.bb            |   16 ++++++++++++++=
+++
+>  1 files changed, 16 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
 >=20
-> 2013-01-06 10:38:18
-> URL:http://patchwork.openembedded.org/patch/42019/mbox/ [1082569] ->
-> "pw-am-42019.patch" [1]
-> Applying: fftw : Update to version 3.3.3.
-> fatal: corrupt patch at line 23200
-> Patch failed at 0001 fftw : Update to version 3.3.3.
+> diff --git a/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb b/meta-m=
+ultimedia/recipes-dvb/wscan/wscan_20121111.bb
+> new file mode 100644
+> index 0000000..9254c43
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "Wscan is an ATSC/DVB-C/S/T channel scanner that doesn't req=
+uire an initial frequency table"
+> +HOMEPAGE =3D "http://wirbel.htpc-forum.de/w_scan/index2.html"
+> +
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa=
+63a"
+> +
+> +SRC_URI =3D "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
+> +SRC_URI[md5sum] =3D "30da05747fed9988e11ebc7745f5e71f"
+> +SRC_URI[sha256sum] =3D "5e51e5f1c124a8ed70608b4dbf7376adb2b1bf6a48a65b74=
+6076263b2589afe5"
+> +
+> +S =3D "${WORKDIR}/w_scan-${PV}"
+> +
+> +inherit autotools
+> +
+> +FILES_${PN} +=3D "${datadir}"
+
+Some other changes in oe-core/meta-oe broke this wscan version too :/
+| scan.c: In function 'set_frontend':
+| scan.c:1819:44: error: 'DTV_DVBT2_PLP_ID' undeclared (first use in this f=
+unction)
+| scan.c:1819:44: note: each undeclared identifier is reported only once fo=
+r each function it appears in
+| make[1]: *** [scan.o] Error 1
+
+Complete log:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/qemuarm/20130=
+109091926.log
+
+Cheers,
+
+> +
+> --=20
+> 1.7.7.6
 >=20
-> --ac_cr=3D'
-> '
-> -+ac_cr=3D`echo X | tr X '\015'`
-
-Original file had --ac_cr=3D'^M' and ^M got interpreted somewhere between
-Philip's repo and ML/PW, pulled from Philip's repo directly.
-
-Merged, thanks!
-
-> Please fix that.
 >=20
-> >=20
-> > Signed-off-by: Philip Balister <philip@balister.org>
-> > ---
-> >  meta-oe/recipes-support/fftw/fftw_3.2.2.bb         |     8 -
-> >  meta-oe/recipes-support/fftw/fftw_3.3.3.bb         |     7 +
-> >  .../recipes-support/fftw/fftwf/vesperix-neon.patch | 31791 -----------=
---------
-> >  meta-oe/recipes-support/fftw/fftwf_3.2.2.bb        |    15 -
-> >  meta-oe/recipes-support/fftw/fftwf_3.3.3.bb        |    10 +
-> >  meta-oe/recipes-support/fftw/fftwl_3.2.2.bb        |     8 -
-> >  meta-oe/recipes-support/fftw/fftwl_3.3.3.bb        |     7 +
-> >  7 files changed, 24 insertions(+), 31822 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-support/fftw/fftw_3.2.2.bb
-> >  create mode 100644 meta-oe/recipes-support/fftw/fftw_3.3.3.bb
-> >  delete mode 100644 meta-oe/recipes-support/fftw/fftwf/vesperix-neon.pa=
-tch
-> >  delete mode 100644 meta-oe/recipes-support/fftw/fftwf_3.2.2.bb
-> >  create mode 100644 meta-oe/recipes-support/fftw/fftwf_3.3.3.bb
-> >  delete mode 100644 meta-oe/recipes-support/fftw/fftwl_3.2.2.bb
-> >  create mode 100644 meta-oe/recipes-support/fftw/fftwl_3.3.3.bb
-
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---iAL9S67WQOXgEPD9
+--k+G3HLlWI7eRTl+h
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDtSQMACgkQN1Ujt2V2gBzX2QCeJvUdiyKJbXtbY74DyHomZl/Z
-tjMAn2eWvHWyv/6tAh1Rd7BAX9u4/r8y
-=q0vc
+iEYEARECAAYFAlDtS/AACgkQN1Ujt2V2gBwNqQCgk8p71fN1rRWWezv7LyUrqgXk
+HPIAmwaEFnNzwwSn/UcyP5osMpntAUCw
+=QQkm
 -----END PGP SIGNATURE-----
 
---iAL9S67WQOXgEPD9--
+--k+G3HLlWI7eRTl+h--
