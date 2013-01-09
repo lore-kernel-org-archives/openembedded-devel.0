@@ -1,38 +1,30 @@
-Received: from mail-da0-f52.google.com ([209.85.210.52])
+Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tswmb-0002Y0-Ms
+	(envelope-from <gary@mlbassoc.com>) id 1Tswxv-0003Di-Uw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 15:37:36 +0100
-Received: by mail-da0-f52.google.com with SMTP id f10so771187dak.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 06:22:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+t9pTYkE5p6Pdi/V9ddD9nWuUuAikILEmtXprZT/W1M=;
-	b=NGkPirZMWrNcLSbmL7FxM4RxQT0lEc19k725YHqFrof7NcXiRoe5c6b6OaI5WBVxKJ
-	HD68EisTXpdmOp20D9xwhfiJ9qyrePTgxoJq9Tw+PWrDRjWIzAvvxVnRlC6MaSyGUu9T
-	+5XvxvTFVxVtKbUMg3P+kOlCqz9MSnmb7o3RXHqkyHvDxy38h8k0+wfB4HBX74na3zBN
-	zBEZSOruu5D6M7QcdcIeWNeLeWvaCEDdYtwBXU+N814oiDFh0zjavusC9OxkSx4/apZu
-	kOTjGndipKEzX423bZ+KoIFPTmv0xNP8n/nll9lqHbs+5anhjrtPlIP46EWvhkth6S9T
-	nOZA==
-X-Received: by 10.69.1.9 with SMTP id bc9mr209743973pbd.61.1357741340924;
-	Wed, 09 Jan 2013 06:22:20 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id o5sm42895941paz.32.2013.01.09.06.22.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 06:22:19 -0800 (PST)
-Date: Wed, 9 Jan 2013 15:22:24 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130109142224.GP3722@jama.palm1.palmone.com>
-References: <1356124984-19927-1-git-send-email-morgan.little@windriver.com>
-	<CA+chaQc+bcUof-4h9qc=SPUK5eTe4sRiNLXp774U_m-Vv=ozKg@mail.gmail.com>
-	<FCBA1E696337B442ADB5A7C30428F068BD84E8@ALA-MBA.corp.ad.wrs.com>
+	Wed, 09 Jan 2013 15:49:25 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 66BE6F8122A; Wed,  9 Jan 2013 07:34:05 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 3A542F811FD;
+	Wed,  9 Jan 2013 07:34:04 -0700 (MST)
+Message-ID: <50ED7FDD.7060003@mlbassoc.com>
+Date: Wed, 09 Jan 2013 07:34:05 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-In-Reply-To: <FCBA1E696337B442ADB5A7C30428F068BD84E8@ALA-MBA.corp.ad.wrs.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] traceroute: Remove bashisms
+To: openembedded-devel@lists.openembedded.org
+References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+	<20121216180022.GC3448@jama>
+	<20130109142121.GN3722@jama.palm1.palmone.com>
+In-Reply-To: <20130109142121.GN3722@jama.palm1.palmone.com>
+Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,71 +38,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 14:37:43 -0000
-X-Groupsio-MsgNum: 42599
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TRkqPRiqIDKgfg/F"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Jan 2013 14:49:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---TRkqPRiqIDKgfg/F
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2013-01-09 07:21, Martin Jansa wrote:
+> On Sun, Dec 16, 2012 at 07:00:22PM +0100, Martin Jansa wrote:
+>> On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
+>>> The current recipe has a few installation errors:
+>>>    * The manipulation of configurable paths drops a '/'
+>>>    * The init script defaults are placed in the wrong file
+>>>    * Finer control over init script start/stop
+>>>    * The default device is non-standard
+>>>
+>>> This patch fixes these little nits and makes the package usable again.
+>>>
+>>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+>>> ---
+>>>   meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
+>>>   meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
+>>>   2 files changed, 5 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/recipes-support/rng-tools/files/default
+>>> index ab7cd93..7aede9b 100644
+>>> --- a/meta-oe/recipes-support/rng-tools/files/default
+>>> +++ b/meta-oe/recipes-support/rng-tools/files/default
+>>> @@ -1,2 +1,3 @@
+>>>   # Specify rng device
+>>> -RNG_DEVICE=/dev/hwrng
+>>> +#RNG_DEVICE=/dev/hwrng
+>>> +RNG_DEVICE=/dev/urandom
+>>> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+>>> index ef753cf..b94854a 100644
+>>> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+>>> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+>>> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
+>>>   do_install_append() {
+>>>           install -d "${D}${sysconfdir}/init.d"
+>>>           install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
+>>> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
+>>> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+>>>               ${D}${sysconfdir}/init.d/rng-tools
+>>>
+>>>           install -d "${D}${sysconfdir}/default"
+>>> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+>>> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
+>>>   }
+>>>
+>>>   INITSCRIPT_NAME = "rng-tools"
+>>>   INITSCRIPT_PARAMS = "defaults"
+>>> +INITSCRIPT_PARAMS = "start 30 S . stop 30 0 6 1 ."
+>>
+>> Why do you add 2nd INITSCRIPT_PARAMS ?
+>
+> ping :)
 
-On Fri, Dec 21, 2012 at 10:02:28PM +0000, Little, Morgan wrote:
-> On 12/21/2012 04:37 PM, Martin Jansa wrote:
-> > On Fri, Dec 21, 2012 at 10:23 PM, Morgan Little
-> > <morgan.little@windriver.com> wrote:
-> >> Signed-off-by: Morgan Little <morgan.little@windriver.com>
-> >> ---
-> >>  meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb | 6 +=
-+----
-> >>  1 file changed, 2 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0=
-=2E18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >> index 719d9fb..d855c67 100644
-> >> --- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >> @@ -32,10 +32,8 @@ do_install() {
-> >>
-> >>      install -d ${D}${mandir}
-> >>      install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-> >> -    pushd ${D}${mandir}
-> >> -    ln -s ${PN}.8 ${PN}6.8
-> >> -    ln -s ${PN}.8 tcptraceroute.8
-> >> -    popd
-> >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}${PN}6.8
-> >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}tcptraceroute.8
-> >
-> > Thanks for quick reply and fix, but I think this should be:
-> >> +    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
-> >> +    ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
-> >
-> > ${D} path won't be valid on target and missing slash after mandir
-> It looks like it should be. Thank you for noticing that.
-> >
-> > And is there something referencing those man pages with different
-> > name? Or why are those symlinks provided?
-> I provided them because I was basing the do_install step off of the .spec=
- file the Fedora uses in their RPM file. It does a similar symlink step. I =
-believe that is can be removed.
+Sorry, must have missed your query (holidays).
 
-ping :)
+That second line should really replace the first for finer grain
+control over the start/stop choice.  I can fix this and resend the patch.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
---TRkqPRiqIDKgfg/F
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEUEARECAAYFAlDtfSAACgkQN1Ujt2V2gBxswACguMhrP29TO8ckeXIiXR3Or+/x
-k5wAmMTrV/pHpurxsy9u7Fi0RTtkKKc=
-=d9Oy
------END PGP SIGNATURE-----
-
---TRkqPRiqIDKgfg/F--
