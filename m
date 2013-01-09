@@ -1,39 +1,44 @@
 Received: from mga07.intel.com ([143.182.124.22] helo=azsmga101.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TsxsK-0005OU-N2
+	(envelope-from <ross.burton@intel.com>) id 1TsxuF-0005Ur-WB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 16:47:34 +0100
-Received: from mail-we0-f197.google.com ([74.125.82.197])
-	by mga03.intel.com with ESMTP/TLS/RC4-SHA; 09 Jan 2013 07:32:18 -0800
-Received: by mail-we0-f197.google.com with SMTP id t11so1622485wey.0
+	Wed, 09 Jan 2013 16:50:07 +0100
+Received: from mail-vc0-f198.google.com ([209.85.220.198])
+	by mga03.intel.com with ESMTP/TLS/RC4-SHA; 09 Jan 2013 07:34:18 -0800
+Received: by mail-vc0-f198.google.com with SMTP id n11so3242092vch.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 07:32:13 -0800 (PST)
+	Wed, 09 Jan 2013 07:34:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=YfxjXh2h2X10IK75kmY3uN15O7tJa+tOydnlSTQRm2s=;
-	b=od/bG63d4iHX5EOuKLt+ZHvDkhy00t3XCCa54XckebdRLFt+eAMC3Nw72eji8yjel1
-	yAuhgrqqae/TNToCFA8iLrg1MSbS+ijfkS9Ipv5sSskCpf7kom6pdHgEa/3DveYQ3tSI
-	qomhnBBhdMhRUPzc3cLzPjAq5nmZKttPUCKGVSLO0jsSNYpVC8RQG6wreq56IBy7ipGY
-	sMW9lUheITCKLpXysSWR3L9Mu6kAsPgEJe3PuiaCWpwA/M52PJtsGrioJp8sPAW1bsSj
-	J66oaQw/+EnruK4Ppe+wcdvB3TLPvHBDV9mhWlB+39aI3tRwkmRPaYSxf3RfDiSpypzj
-	0mbQ==
-X-Received: by 10.180.109.10 with SMTP id ho10mr4074663wib.9.1357745533096;
-	Wed, 09 Jan 2013 07:32:13 -0800 (PST)
-X-Received: by 10.180.109.10 with SMTP id ho10mr4074641wib.9.1357745532920;
-	Wed, 09 Jan 2013 07:32:12 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id h19sm4344111wiv.7.2013.01.09.07.32.10
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 09 Jan 2013 07:32:12 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jan 2013 15:30:18 +0000
-Message-Id: <1357745418-30724-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-X-Gm-Message-State: ALoCoQm+0x9rf+QSXPRcXu3S4/o9JZZUw+ecE2PJ1wfB3SmVPg4/tk2tjYlVbZetvYYZnX6nDInktruu754J5pOuA5/X3bwhgDaN/Px9Jtgn1slMLP1HaQGvHOMcdLigZJGqIktTO3XKe+NaCheReD8hFW9hFcGDCFi93PetIPsFNIpOtFEzuaIuyftzQeFya7g72seKul/w
-Subject: [PATCH] python-mako: use setuptools.bbclass, fixing install paths
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=I+LztXUiDG1GerkHyZSu3UXvl5+GO7znIpwDi3eGX/s=;
+	b=maV1O7L9oEW+sYwSJ8hZiqDVL2MZHVDmPgliHXigtzv6fwrlmPlgS/FX+IgaNclbwP
+	5uxRWhR6Mhx7ZDowNNd33UNwa4UulTVGjLCLEo0Xsx9h1m4G9W11t6efKuNPRrHJXlYL
+	/uFfCGAj/6lbK7fyZ1rnKTQMYt2cUvlbz9kujyTmfh90m3P/j8I/CCKdH1Un2ybku6Jj
+	fDuBsTYyJhFCSyW/De3EFoKJYDXZ6Yls0PLw/XQFl3O+YvQi7su4H1ZrKIm6YaYjO2NS
+	up0AiLU1mz+/uhJQDFFIm4C3sZcHdYlrCWVxRjAWD9GbiB1uPBSnvfUkC17P7PKfFj4Y
+	mblA==
+X-Received: by 10.52.31.197 with SMTP id c5mr77719018vdi.65.1357745657359;
+	Wed, 09 Jan 2013 07:34:17 -0800 (PST)
+Received: by 10.52.31.197 with SMTP id c5mr77719016vdi.65.1357745657264; Wed,
+	09 Jan 2013 07:34:17 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.58.95.103 with HTTP; Wed, 9 Jan 2013 07:33:57 -0800 (PST)
+In-Reply-To: <20130109142043.GM3722@jama.palm1.palmone.com>
+References: <20121220132241.10D7310354@opal>
+	<20121222200925.GD8988@jama.palm1.palmone.com>
+	<CAJTo0LYQetj+657NjT+BHpg6jCOzUq63Ad2ghesThWvcLiSxcw@mail.gmail.com>
+	<20121223093932.GF8988@jama.palm1.palmone.com>
+	<20130109142043.GM3722@jama.palm1.palmone.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 9 Jan 2013 15:33:57 +0000
+Message-ID: <CAJTo0LY92Zg7BrrCodQEG+=rHs+OZJPDnjotoLNqm7YNVxgoew@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Gm-Message-State: ALoCoQnr5cH6h3bof3TCFEtpdTGA+76CJ6SvXJd8K5Zi+HGdS22Ur9LgevjrTIKXi2As0HylHJRSFyoOiwYAe9jnxl84pJ+AcbgxfxHdNbNgTRSAG3FDHrLqCK7Na07DMMSQ163I0s9bnD7g3qUSQ1UjjxebsD81GM9wQ60m3oc11hrKY8NfJDlWEJgURSM7JbgDHSEqSCFJ
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe-commits] Ross Burton : python-mako: install standalone, not as an egg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +52,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 15:47:34 -0000
+X-List-Received-Date: Wed, 09 Jan 2013 15:50:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-An argument was missed in the manual setuptools configuration which meant that
-the tool was installed into
-/data/poky-master/tmp/sysroots/x86_64-linux/usr/bin/mako-render.  Using the
-setuptools class reduces duplication and puts the tool into /usr/bin where it
-belongs.
+Hi Martin,
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- meta-oe/recipes-devtools/python/python-mako_0.7.2.bb |    6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+On 9 January 2013 14:20, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > Or how I'm sure I've never seen that. Maybe interaction with some ther
+>> > patch. Need to use setup tool.bbclass anyway, will investigate.
+>>
+>> FWIW: python-mako builds without QA warnings after reverting this patch.
+>
+> ping :)
 
-diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-index d2222d6..9547246 100644
---- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-@@ -11,11 +11,7 @@ SRC_URI[sha256sum] = "fe8698e845035586bd711a6748e4e40a208a58de276b91380261647004
- 
- S = "${WORKDIR}/Mako-${PV}"
- 
--inherit distutils
--
--DISTUTILS_INSTALL_ARGS = "--single-version-externally-managed \
--                          --root=${D} \
--                          --install-lib=${PYTHON_SITEPACKAGES_DIR}"
-+inherit setuptools
- 
- RDEPENDS_${PN} = "python-threading \
-                   python-netclient \
--- 
-1.7.10.4
+Fix sent.
 
+Ross
 
 
