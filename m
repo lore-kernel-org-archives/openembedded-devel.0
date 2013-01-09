@@ -1,46 +1,33 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-pa0-f41.google.com ([209.85.220.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TsyiL-0007A3-VL
+	(envelope-from <raj.khem@gmail.com>) id 1Tt2T4-0007Ba-E7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 17:41:19 +0100
-Received: from mail-vb0-f71.google.com ([209.85.212.71])
-	by mga09.intel.com with ESMTP/TLS/RC4-SHA; 09 Jan 2013 08:25:02 -0800
-Received: by mail-vb0-f71.google.com with SMTP id p1so3226132vbi.6
+	Wed, 09 Jan 2013 21:41:48 +0100
+Received: by mail-pa0-f41.google.com with SMTP id bj3so1261491pad.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:content-transfer-encoding
-	:x-gm-message-state;
-	bh=h3IuoSWbD92cD/AuzC6REfMePRW2QZyFjJrQMqVBho4=;
-	b=eWkTIi79hIX+5rbhnftyj1ZPkbq4PGC6aIxR2D7TLZVfnujnvnzXzOvBZq0qBIY0d8
-	pQn+Ys9ZPpPulkpWZumEvFi6fmH1G4l69v0qTZaxCsCBIly/1MPDQSouOENnA3EnCwTG
-	2MTyXaAlO22RBd7DxthkkbFxWtS5FUg/fSmdpdqb77AIb3lz3bZj0LoiUW/CzfOUsrEm
-	iyjdZmxoWhhWD87XQSOWkGsjf417HUoDr/wR1999F6fxI4NBwY56BI5WNxRjeKJ4sqHZ
-	Ng59ysyLhhGKYwff4RK62rEttfJn3LiI+4ZK9Vt47eVdcLmByYhaNHvOSRuLFEv4YOmC
-	Mgbw==
-X-Received: by 10.220.247.136 with SMTP id mc8mr10937463vcb.44.1357748760812; 
-	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
-Received: by 10.220.247.136 with SMTP id mc8mr10937460vcb.44.1357748760724;
-	Wed, 09 Jan 2013 08:26:00 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.95.103 with HTTP; Wed, 9 Jan 2013 08:25:40 -0800 (PST)
-In-Reply-To: <CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20121223201634.GN8988@jama.palm1.palmone.com>
-	<20121224091242.GS8988@jama.palm1.palmone.com>
-	<20130109132813.GJ3722@jama.palm1.palmone.com>
-	<CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 9 Jan 2013 16:25:40 +0000
-Message-ID: <CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Gm-Message-State: ALoCoQl7UaC0nPCRJjriOd2hko1VAiUHrh9gsFaj+SfABF47NAwXibajVjJb3CuEqI+N1RNDLm37NHMr+ONQSSNFdIwIQ/5SUfLvlBugxN6+WjvQQVnepGNzRJGUup9njKgVhfwgZcLC+QsNgSl+QeuP0NH7n4if+a/nUEJB5N7GsdLUIdfPH64IVZAqq6ZYnahVUqg6cYvr
-Cc: openembedded-core@lists.openembedded.org,
-	Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+	Wed, 09 Jan 2013 12:26:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=qnLxafv9Q0WkyyccaCIPAlxsxDlo0lGX+zE2sniHwWc=;
+	b=KJ2TcwBxgvYyDIC288pmEm77k4nMuKxZQi1RWqS6aN0TCb+pDIlCK3BDP4vXzR6ehT
+	d/pLG6UkgQ9II0LiG8qlNoa4AYjswJJCapBXDELUT2w9gWZ3A1VvC1hgekDd/E48pTeF
+	K4/UG3RzTkN9D1ApY/koiXv2B3H1nShgI87PBzrVUkbHW46dgzSl4nTQQ9NBJxvoCfti
+	exAX43jQ1GpoXj4Rl6W24uwZhG2SD8RX7WYoW+wdGmWKalqKpaSOy/ytzC9BOBsQmsIj
+	hbdYtTAxOBT4SAf057Jhga8tNVe1D3RyaOteDU/kQYUseVUnxcRIQKbckL1uqxHbJ8EQ
+	2EbQ==
+X-Received: by 10.66.73.167 with SMTP id m7mr192672470pav.68.1357763193121;
+	Wed, 09 Jan 2013 12:26:33 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id us7sm42168708pbc.40.2013.01.09.12.26.31
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Jan 2013 12:26:32 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Jan 2013 12:26:10 -0800
+Message-Id: <1357763170-15330-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-kde][PATCH] qt4-native, qt4-x11-free: Rename bbappends to match current OE-Core recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,26 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 16:41:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Jan 2013 20:41:52 -0000
 
-On 9 January 2013 15:17, Andreas M=C3=BCller <schnitzeltony@googlemail.com>=
- wrote:
-> 2. bitbake libnotify3 -> Tons of: 'WARNING: The recipe libnotify3 is
-> trying to install files into a shared area when those files already
-> exist. Those files and their manifest location are:
->    /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/lib/libnotify.a
->    Matched in manifest-overo-libnotify
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ README                                             |    3 ++-
+ ...ve_4.8.3.bbappend => qt4-native_4.8.4.bbappend} |    0
+ ..._4.8.3.bbappend => qt4-x11-free_4.8.4.bbappend} |    0
+ 3 files changed, 2 insertions(+), 1 deletion(-)
+ rename recipes-misc-support/{qt4-native_4.8.3.bbappend => qt4-native_4.8.4.bbappend} (100%)
+ rename recipes-misc-support/{qt4-x11-free_4.8.3.bbappend => qt4-x11-free_4.8.4.bbappend} (100%)
 
-The current libnotify doesn't actually depend on GTK+ 2 or GTK+ 3
-(well, the tests do, but that's trivially resolved with an
-upstreamable patch to add --disable-tests), so we don't need two
-recipes.
+diff --git a/README b/README
+index a6164c9..0635e10 100644
+--- a/README
++++ b/README
+@@ -9,6 +9,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
+ 
+ Contributors:
+ Copyright 2012 - Kai Kang
++Copyright 2013 - Khem Raj
+ Copyright 2012 - Koen Kooi
+ Copyright 2012 - Robert Yang
+ Copyright 2011, 2012 - Samuel Stirtzel
+@@ -46,4 +47,4 @@ FAQ / Troubleshooting:
+   Q: How to report bugs / request features?
+   A: Send your bugreports / feature requests to the openembedded-developer mailing list.
+      Include the [meta-kde] tag in the subject for easier readability.
+-     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+\ No newline at end of file
++     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes-misc-support/qt4-native_4.8.3.bbappend b/recipes-misc-support/qt4-native_4.8.4.bbappend
+similarity index 100%
+rename from recipes-misc-support/qt4-native_4.8.3.bbappend
+rename to recipes-misc-support/qt4-native_4.8.4.bbappend
+diff --git a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+similarity index 100%
+rename from recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+rename to recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+-- 
+1.7.9.5
 
-Speaking of GTK+ 3, I'm about to start pushing a series to add it to oe-cor=
-e.
-
-Ross
 
 
