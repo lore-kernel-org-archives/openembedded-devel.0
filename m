@@ -1,37 +1,41 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail-bk0-f44.google.com ([209.85.214.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TstVV-0005lb-MX
+	(envelope-from <koen@dominion.thruhere.net>) id 1TsuQB-000789-NP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 12:07:44 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so690547dak.20
+	Wed, 09 Jan 2013 13:06:18 +0100
+Received: by mail-bk0-f44.google.com with SMTP id w11so856988bku.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 02:52:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=fwkTRpcX6sogcooLHlU3K+Yvem2tF7GkGTzEmhUyq4k=;
-	b=Y2Gy8Y+au5pZ/jl4RvRMyx9IFava2uRnE3xaFTdEyFaNpwDPQ8JHgEPSUttPfBLbLx
-	24HFhCfhje8/4AGD5bIzUuChaVseAMH9KnvkPeHDn6GkhgrnzDPK9KJd+UV7sGxC8T+j
-	99pB9f+AoXNmY7W2kKeOgn6NMp+tvJJ0/s0NBe00IZShuw4VS81ChsRc7NbW0u5+v3d6
-	pwpFVCJ1ZiIOnr7G32lnC+E+OnYs3s4A7gIo+/zn1+BdIz/dcF3Kekb7PgPNrQXPpqyM
-	ByuHrRtgS2IRow4bITVnFts+/WDhd/Da4cI7dzkbEaqWDLk3hfWg6y0PRSTrn4bPTs9D
-	bJFQ==
-X-Received: by 10.66.79.97 with SMTP id i1mr7197844pax.47.1357728749100;
-	Wed, 09 Jan 2013 02:52:29 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id oi2sm41427690pbb.62.2013.01.09.02.52.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 02:52:27 -0800 (PST)
-Date: Wed, 9 Jan 2013 11:52:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130109105232.GH3722@jama.palm1.palmone.com>
+	Wed, 09 Jan 2013 03:51:03 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=SgvHyyarNXtV4gM8nmd01vGuhwtFRHGHZg8uCv4DpQk=;
+	b=GQQs4IVXnEbzI0wzxB8iIS7toRDgs42lKsM7iSX5S2NbfnxxdVbvJeOCDKcIY8DLD/
+	w4M2re77FNKKDjxuxRATNhsnnNFj1/aEVIvktUg1zBZsjrARk8w16lUTurBi7T7sEYOW
+	dBAgVkwcRZT4XyksCsqkMj8LZlYNWKlM42+8UyKHfzKcJ9GL/R3drlGvLpOlkRaRQldd
+	TskH3xSIzssXS+wbSUZ7nae3umGLJsLTr+QeiZpl2ggDKIVEuSFtFWghXnz0RV9OuJFO
+	APXq+pcO3vTn/QSpfvdd8cN27w5NIllgbsoGFD/m8ZLb+3ANdm8447MOsHtfuqfmPq8n
+	5nmw==
+X-Received: by 10.204.149.85 with SMTP id s21mr32727274bkv.37.1357732263585;
+	Wed, 09 Jan 2013 03:51:03 -0800 (PST)
+Received: from ?IPv6:2001:610:612::dc31:ecd3:29e9:cbe2?
+	([2001:610:612:0:dc31:ecd3:29e9:cbe2])
+	by mx.google.com with ESMTPS id hm8sm48328249bkc.10.2013.01.09.03.51.02
+	(version=SSLv3 cipher=OTHER); Wed, 09 Jan 2013 03:51:03 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20130109105232.GH3722@jama.palm1.palmone.com>
+Date: Wed, 9 Jan 2013 12:51:02 +0100
+Message-Id: <1E683BAA-B513-4486-A48E-817660404DA2@dominion.thruhere.net>
 References: <1356098450-27475-1-git-send-email-koen@dominion.thruhere.net>
 	<1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1356098450-27475-5-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
+	<20130109105232.GH3722@jama.palm1.palmone.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1499)
+X-Gm-Message-State: ALoCoQnSXPc6Wp0q1biUUQ2f3lfMalwZnMqF4mMs2ben/SNcF2wr85PVG+4zWke+LWebk8Vj9oP5
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][meta-multimedia][PATCH 5/6] wscan: add 20121111
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,88 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 11:07:44 -0000
-X-Groupsio-MsgNum: 42591
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="k+G3HLlWI7eRTl+h"
-Content-Disposition: inline
-
---k+G3HLlWI7eRTl+h
+X-List-Received-Date: Wed, 09 Jan 2013 12:06:23 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 21, 2012 at 03:00:49PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  .../recipes-dvb/wscan/wscan_20121111.bb            |   16 ++++++++++++++=
-++
->  1 files changed, 16 insertions(+), 0 deletions(-)
->  create mode 100644 meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+
+Op 9 jan. 2013, om 11:52 heeft Martin Jansa <martin.jansa@gmail.com> het =
+volgende geschreven:
+
+> On Fri, Dec 21, 2012 at 03:00:49PM +0100, Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
+>> .../recipes-dvb/wscan/wscan_20121111.bb            |   16 =
+++++++++++++++++
+>> 1 files changed, 16 insertions(+), 0 deletions(-)
+>> create mode 100644 =
+meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+>>=20
+>> diff --git a/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb =
+b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+>> new file mode 100644
+>> index 0000000..9254c43
+>> --- /dev/null
+>> +++ b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
+>> @@ -0,0 +1,16 @@
+>> +SUMMARY =3D "Wscan is an ATSC/DVB-C/S/T channel scanner that doesn't =
+require an initial frequency table"
+>> +HOMEPAGE =3D "http://wirbel.htpc-forum.de/w_scan/index2.html"
+>> +
+>> +LICENSE =3D "GPLv2"
+>> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa63a"
+>> +
+>> +SRC_URI =3D =
+"http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
+>> +SRC_URI[md5sum] =3D "30da05747fed9988e11ebc7745f5e71f"
+>> +SRC_URI[sha256sum] =3D =
+"5e51e5f1c124a8ed70608b4dbf7376adb2b1bf6a48a65b746076263b2589afe5"
+>> +
+>> +S =3D "${WORKDIR}/w_scan-${PV}"
+>> +
+>> +inherit autotools
+>> +
+>> +FILES_${PN} +=3D "${datadir}"
 >=20
-> diff --git a/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb b/meta-m=
-ultimedia/recipes-dvb/wscan/wscan_20121111.bb
-> new file mode 100644
-> index 0000000..9254c43
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-dvb/wscan/wscan_20121111.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY =3D "Wscan is an ATSC/DVB-C/S/T channel scanner that doesn't req=
-uire an initial frequency table"
-> +HOMEPAGE =3D "http://wirbel.htpc-forum.de/w_scan/index2.html"
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa=
-63a"
-> +
-> +SRC_URI =3D "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
-> +SRC_URI[md5sum] =3D "30da05747fed9988e11ebc7745f5e71f"
-> +SRC_URI[sha256sum] =3D "5e51e5f1c124a8ed70608b4dbf7376adb2b1bf6a48a65b74=
-6076263b2589afe5"
-> +
-> +S =3D "${WORKDIR}/w_scan-${PV}"
-> +
-> +inherit autotools
-> +
-> +FILES_${PN} +=3D "${datadir}"
-
-Some other changes in oe-core/meta-oe broke this wscan version too :/
-| scan.c: In function 'set_frontend':
-| scan.c:1819:44: error: 'DTV_DVBT2_PLP_ID' undeclared (first use in this f=
-unction)
-| scan.c:1819:44: note: each undeclared identifier is reported only once fo=
-r each function it appears in
-| make[1]: *** [scan.o] Error 1
-
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/qemuarm/20130=
-109091926.log
-
-Cheers,
-
-> +
-> --=20
-> 1.7.7.6
+> Some other changes in oe-core/meta-oe broke this wscan version too :/
+> | scan.c: In function 'set_frontend':
+> | scan.c:1819:44: error: 'DTV_DVBT2_PLP_ID' undeclared (first use in =
+this function)
+> | scan.c:1819:44: note: each undeclared identifier is reported only =
+once for each function it appears in
+> | make[1]: *** [scan.o] Error 1
 >=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Complete log:
+> =
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/qemuarm/2013=
+0109091926.log
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+It's likely to be a mismatch with the DVB api version from the kernel =
+headers. I hope to have some time to clean up these patches next week :/
 
---k+G3HLlWI7eRTl+h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Koen=
 
-iEYEARECAAYFAlDtS/AACgkQN1Ujt2V2gBwNqQCgk8p71fN1rRWWezv7LyUrqgXk
-HPIAmwaEFnNzwwSn/UcyP5osMpntAUCw
-=QQkm
------END PGP SIGNATURE-----
 
---k+G3HLlWI7eRTl+h--
