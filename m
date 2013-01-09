@@ -1,33 +1,27 @@
-Received: from mail-pa0-f41.google.com ([209.85.220.41])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Tt2T4-0007Ba-E7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jan 2013 21:41:48 +0100
-Received: by mail-pa0-f41.google.com with SMTP id bj3so1261491pad.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 12:26:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=qnLxafv9Q0WkyyccaCIPAlxsxDlo0lGX+zE2sniHwWc=;
-	b=KJ2TcwBxgvYyDIC288pmEm77k4nMuKxZQi1RWqS6aN0TCb+pDIlCK3BDP4vXzR6ehT
-	d/pLG6UkgQ9II0LiG8qlNoa4AYjswJJCapBXDELUT2w9gWZ3A1VvC1hgekDd/E48pTeF
-	K4/UG3RzTkN9D1ApY/koiXv2B3H1nShgI87PBzrVUkbHW46dgzSl4nTQQ9NBJxvoCfti
-	exAX43jQ1GpoXj4Rl6W24uwZhG2SD8RX7WYoW+wdGmWKalqKpaSOy/ytzC9BOBsQmsIj
-	hbdYtTAxOBT4SAf057Jhga8tNVe1D3RyaOteDU/kQYUseVUnxcRIQKbckL1uqxHbJ8EQ
-	2EbQ==
-X-Received: by 10.66.73.167 with SMTP id m7mr192672470pav.68.1357763193121;
-	Wed, 09 Jan 2013 12:26:33 -0800 (PST)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id us7sm42168708pbc.40.2013.01.09.12.26.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 12:26:32 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jan 2013 12:26:10 -0800
-Message-Id: <1357763170-15330-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-kde][PATCH] qt4-native, qt4-x11-free: Rename bbappends to match current OE-Core recipes
+	(envelope-from <mark.hatle@windriver.com>)
+	id 1Tt3qi-0000t7-AC; Wed, 09 Jan 2013 23:10:18 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r09Lt1dk021394
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 9 Jan 2013 13:55:02 -0800 (PST)
+Received: from msp-dhcp16.wrs.com (172.25.34.16) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
+	Wed, 9 Jan 2013 13:55:01 -0800
+Message-ID: <50EDE734.8060703@windriver.com>
+Date: Wed, 9 Jan 2013 15:55:00 -0600
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAMKF1sqc+JrTwPMwaBQ2p2-v5SoVgWOoJ76TU6MHro6iYvAJXg@mail.gmail.com>
+In-Reply-To: <CAMKF1sqc+JrTwPMwaBQ2p2-v5SoVgWOoJ76TU6MHro6iYvAJXg@mail.gmail.com>
+Cc: layer <openembedded-core@lists.openembedded.org>, Patches
+Subject: Re: locking down patchwork and wiki registrations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,46 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 20:41:52 -0000
+X-List-Received-Date: Wed, 09 Jan 2013 22:10:24 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- README                                             |    3 ++-
- ...ve_4.8.3.bbappend => qt4-native_4.8.4.bbappend} |    0
- ..._4.8.3.bbappend => qt4-x11-free_4.8.4.bbappend} |    0
- 3 files changed, 2 insertions(+), 1 deletion(-)
- rename recipes-misc-support/{qt4-native_4.8.3.bbappend => qt4-native_4.8.4.bbappend} (100%)
- rename recipes-misc-support/{qt4-x11-free_4.8.3.bbappend => qt4-x11-free_4.8.4.bbappend} (100%)
+On 1/9/13 9:59 AM, Khem Raj wrote:
+> Hi
+>
+> We receive tonne of spam in form of registrations everyday and some of
+> bots have become smarted that they even activate their
+> profiles. It has to be manually deleted and its tedious. I would
+> therefore like to remove the 'register' link from pw front page
+> that will stop the spam as I have already experimented with it a bit.
+>
+> Same is also true for wiki. We should make the registration process to
+> be manual since that will put some end to registration spam.
+>
+> I am open to other ideas to stop spam without locking registrations.
+>
+> The registrations will still happen but should be done manually.
 
-diff --git a/README b/README
-index a6164c9..0635e10 100644
---- a/README
-+++ b/README
-@@ -9,6 +9,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
- 
- Contributors:
- Copyright 2012 - Kai Kang
-+Copyright 2013 - Khem Raj
- Copyright 2012 - Koen Kooi
- Copyright 2012 - Robert Yang
- Copyright 2011, 2012 - Samuel Stirtzel
-@@ -46,4 +47,4 @@ FAQ / Troubleshooting:
-   Q: How to report bugs / request features?
-   A: Send your bugreports / feature requests to the openembedded-developer mailing list.
-      Include the [meta-kde] tag in the subject for easier readability.
--     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-\ No newline at end of file
-+     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-diff --git a/recipes-misc-support/qt4-native_4.8.3.bbappend b/recipes-misc-support/qt4-native_4.8.4.bbappend
-similarity index 100%
-rename from recipes-misc-support/qt4-native_4.8.3.bbappend
-rename to recipes-misc-support/qt4-native_4.8.4.bbappend
-diff --git a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
-similarity index 100%
-rename from recipes-misc-support/qt4-x11-free_4.8.3.bbappend
-rename to recipes-misc-support/qt4-x11-free_4.8.4.bbappend
--- 
-1.7.9.5
+I don't have any problem w/ manual registration, but I do have a concern. 
+Manual registration often times becomes a black hole for people.  You send off a 
+request to get registered and if the one person, who in their spare time 
+monitors it happens to be on vacation for three weeks it just disappears.
+
+If we do this, we need to come up with a way that a group of people can add to 
+the registered users.  Perhaps even allowing all registered e.V. members to do it?
+
+--Mark
+
+> Thanks
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
 
