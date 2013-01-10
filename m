@@ -1,36 +1,36 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-da0-f42.google.com ([209.85.210.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TtGS4-0002Ki-55
+	(envelope-from <martin.jansa@gmail.com>) id 1TtGUM-0002Sb-Ps
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 12:37:40 +0100
-Received: by mail-pa0-f47.google.com with SMTP id fa10so297664pad.20
+	Thu, 10 Jan 2013 12:40:03 +0100
+Received: by mail-da0-f42.google.com with SMTP id z17so204380dal.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 03:22:26 -0800 (PST)
+	Thu, 10 Jan 2013 03:24:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NMzduIGV2lNLF4Th6opg0gyd2O/Ju5HmlPUTgWGB3T0=;
-	b=VwiQ+8IhFDmwr0AvsUjrIDt9jbvHZ4Tm65jKftCdnyENU/J9sFzybw2AYxwk5oE1B7
-	PwrHpji0Sfsvk1Uzzpk3f82IyEIk2fUPYdpYREu5XpOBF6ag/xXEcB4Wxk8oRP/Sna3X
-	wtuMImoP/BsxNcAMALgtw6KMMhIDY3n70u37u/2bwP4NpqzLxFkkN6PAlfE/4R2AuB2Z
-	Rb+XC9xPP85yzM5wCF53DILKkWbzpNKm+0s1sySN9BP64NlpZhwxJtgbLKsrjOdyiumt
-	JS/W/I2Szj/RSzG1K0szgliR6i+CkjysiA8aNB17admy8Opw1DbOZfKBIcWES19+n9IS
-	szfQ==
-X-Received: by 10.66.79.66 with SMTP id h2mr197353239pax.31.1357816946241;
-	Thu, 10 Jan 2013 03:22:26 -0800 (PST)
+	bh=2kLGvBauryNhok6GWwLC5QOslaCC0i+WIHPH5IUztnc=;
+	b=gemnTsgzWJt64Bm5uChWM99ZxW8liZidf29JIjtArrB9nuv03srStL2G6J4LU76tnZ
+	tOPD/luRrlzswsEsiwt5cB9NG8v+sHl3EKKE9ZENbfbXs7bfHuKTsCL58dhkqOrBkPi8
+	V+JPBT8dHapddVQ9agfHOn/h8sma6mnZ4HWlH8mvZBjovCrJosALi2gU0tBX0orW0fU/
+	3NIZO+YOLhqCJUXhTD+y2oz/Ek5d0F1WiPJcTRvScP9TaqP2Hq9CjzoTawj9VVU2UFxX
+	1ID9Pu6D/pUyh8T1wvcgkWIZ6HeWDqqOHURC3yB3hL3i7WYUb+q2oVM605IDy812eSvK
+	gQSA==
+X-Received: by 10.68.242.225 with SMTP id wt1mr215356300pbc.65.1357817088880; 
+	Thu, 10 Jan 2013 03:24:48 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id zv10sm649694pbc.76.2013.01.10.03.22.23
+	by mx.google.com with ESMTPS id d8sm886291pax.23.2013.01.10.03.24.46
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 10 Jan 2013 03:22:25 -0800 (PST)
-Date: Thu, 10 Jan 2013 12:22:31 +0100
+	Thu, 10 Jan 2013 03:24:47 -0800 (PST)
+Date: Thu, 10 Jan 2013 12:24:53 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130110112231.GZ3722@jama.palm1.palmone.com>
-References: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20130110112453.GA3722@jama.palm1.palmone.com>
+References: <1357557759-25093-1-git-send-email-cazfi74@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1357557759-25093-1-git-send-email-cazfi74@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-multimedia/meta-oe/meta-systemd 0/3] new recipes/appends
+Subject: Re: [meta-oe][PATCH] xmlto: replace obsolete automake macros with working ones
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,52 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 11:37:40 -0000
-X-Groupsio-MsgNum: 42626
+X-List-Received-Date: Thu, 10 Jan 2013 11:40:03 -0000
+X-Groupsio-MsgNum: 42627
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iDgFKLa5Kp4Ejml3"
+	protocol="application/pgp-signature"; boundary="iRomnA/8S0UoJbe2"
 Content-Disposition: inline
 
---iDgFKLa5Kp4Ejml3
-Content-Type: text/plain; charset=iso-8859-1
+--iRomnA/8S0UoJbe2
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 10, 2013 at 12:43:12AM +0100, Andreas M=FCller wrote:
-> 1+2 resend (Patchwork was down)
-> 3. I have this in and working for long time
->=20
-> The following changes since commit 89d5899c38ec94b0560a3496b020e45b40d825=
-1c:
->=20
->   python-distutils-extra: initial add 2.36 (2013-01-09 16:20:22 +0100)
+On Mon, Jan 07, 2013 at 01:22:39PM +0200, Marko Lindqvist wrote:
+> Add obsolete_automake_macros.patch that replaces automake macros
+> no longer supported by automake-1.13 with modern constructs.
 
-This commit is not in master.
-
-First 2 patches applied from previous patches on ML, thanks!
-
+Merged, thanks
 >=20
-> are available in the git repository at:
->   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
->=20
-> Andreas M=FCller (3):
->       openal-soft: initial add 1.15.1
->       physfs: initial add 2.0.3
->       bluez4: add systemd support
->=20
->  .../openal/openal-soft_1.15.1.bb                   |   20 ++++++++++++++=
+> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+> ---
+>  .../xmlto/xmlto-0.0.25/obsolete_automake_macros.patch      |   12 ++++++=
 ++++++
->  meta-oe/recipes-support/physfs/physfs_2.0.3.bb     |   11 +++++++++++
->  .../bluez/bluez4_4.101.bbappend                    |    8 ++++++++
->  3 files changed, 39 insertions(+), 0 deletions(-)
->  create mode 100644 meta-multimedia/recipes-multimedia/openal/openal-soft=
-_1.15.1.bb
->  create mode 100644 meta-oe/recipes-support/physfs/physfs_2.0.3.bb
->  create mode 100644 meta-systemd/oe-core/recipes-connectivity/bluez/bluez=
-4_4.101.bbappend
+>  meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb              |    6 +++++-
+>  2 files changed, 17 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_a=
+utomake_macros.patch
 >=20
+> diff --git a/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake=
+_macros.patch b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automak=
+e_macros.patch
+> new file mode 100644
+> index 0000000..faa8acc
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros=
+=2Epatch
+> @@ -0,0 +1,12 @@
+> +diff -Nurd xmlto-0.0.25/configure.in xmlto-0.0.25/configure.in
+> +--- xmlto-0.0.25/configure.in	2011-12-01 17:49:00.000000000 +0200
+> ++++ xmlto-0.0.25/configure.in	2013-01-07 05:24:16.169953519 +0200
+> +@@ -1,7 +1,7 @@
+> + AC_INIT(xmlto, 0.0.25)
+> + AC_CONFIG_SRCDIR(xmlto.spec.in)
+> + AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects 1.6])
+> +-AM_CONFIG_HEADER(config.h)
+> ++AC_CONFIG_HEADERS(config.h)
+> +
+> + AC_PROG_CC
+> + AM_PROG_CC_C_O
+> diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/reci=
+pes-support/xmlto/xmlto_0.0.25.bb
+> index 806ea2e..447c791 100644
+> --- a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
+> +++ b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
+> @@ -5,7 +5,11 @@ LICENSE =3D "GPLv2"
+> =20
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+> =20
+> -SRC_URI =3D "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar=
+=2Egz"=20
+> +PR =3D "r1"
+> +
+> +SRC_URI =3D "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar=
+=2Egz \
+> +           file://obsolete_automake_macros.patch \
+> +"
+>  SRC_URI[md5sum] =3D "a88cd3f08789b4825d1ac89fa065170d"
+>  SRC_URI[sha256sum] =3D "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc=
+352e843147e3e31a"
+> =20
 > --=20
-> 1.7.4.4
+> 1.7.10.4
 >=20
 >=20
 > _______________________________________________
@@ -100,16 +125,16 @@ _1.15.1.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---iDgFKLa5Kp4Ejml3
+--iRomnA/8S0UoJbe2
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDupHcACgkQN1Ujt2V2gBy7aACbB6rWR3s7qd4mvyHBXD6YEmAp
-rEEAn3a0rkrXf4BYpWOstoe0yQffmTej
-=ztXl
+iEYEARECAAYFAlDupQUACgkQN1Ujt2V2gBzVMACglwjoZGhJqvrSeT9dLHagSuqs
+/6sAn2Xi3+cmNSJQD50mJJYT+wqD/h8+
+=UE8Z
 -----END PGP SIGNATURE-----
 
---iDgFKLa5Kp4Ejml3--
+--iRomnA/8S0UoJbe2--
