@@ -1,34 +1,31 @@
-Received: from mail-vc0-f182.google.com ([209.85.220.182])
+Received: from mail-vb0-f45.google.com ([209.85.212.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TtGsm-0003Wz-95
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TtGvh-0003ec-HG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 13:05:16 +0100
-Received: by mail-vc0-f182.google.com with SMTP id fy27so387635vcb.41
+	Thu, 10 Jan 2013 13:08:19 +0100
+Received: by mail-vb0-f45.google.com with SMTP id p1so385994vbi.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 03:50:01 -0800 (PST)
+	Thu, 10 Jan 2013 03:53:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=yU747mlxiKAHAUelxHxufINJCz1ExfQM2qpyGnoS4oA=;
-	b=eTfiVisW3XLLyNyVFuU8d0kM0Jt5DnthrwZ8Pjk3XvsHnSU9l0jvmeXEqh2qHq1VGE
-	Q+40FqPR0u1bW73yEm6d+209ayPhPDCh3jtm866h4xZ90zfyK+IB+aTSnpS4RkSHru37
-	u7eVQvZcKva70tOa9tMF7TvY2upeXoXESEkjjPjBlzPliwgAfHIX1hs9AkK3mihl8qCI
-	JKWjuzpUm3ZJ4RxNNEH6kK0bwuZrkAsdWaDVgBBanjVUbwvdTrAKU9c/eM429eV+bGxw
-	eORlyMKeetBocs1V1F4diYVcODiKOD2SBubBo1PJBB6wB8co0dhuVdokRXcm9Cyzl+5z
-	z5kQ==
+	:content-type; bh=2CtEmCeoJw2fMaiiS6QLEy4ukQzY1pic4ZFh4TwqRwo=;
+	b=q3rAWkt/ElGnxwjSp8c1HA5OcwFIZBmBHuQgir6w7vYP9qQquPm89EDHQL6HijqVSa
+	OBtPTXzcLb0xtfRwyHanEPbx/O0ONudb8/ZJXZw5VZ09DDdzXZIlrIhplLrhi32nTxoy
+	VV+h5J5R3SpOT85KA3OBPbyO39JGQho2Y6/aTiBHJxmQsEitTyZIxh6fTroafMhCFIXn
+	4NpSq/NXA5qsnj3FBXgEUrpCUO107yyci5Vou8DutXiHBg3YUBTWRhGsOf1josL7dXbd
+	GgmhlvxVmNK0P11/wXzsARvlvn0NiKMGBZ3aj1pvWAEtM0oz1lbj8V3O+Z+HJL6JkTea
+	aQ4g==
 MIME-Version: 1.0
-Received: by 10.58.30.7 with SMTP id o7mr93780024veh.19.1357818601822; Thu, 10
-	Jan 2013 03:50:01 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Thu, 10 Jan 2013 03:50:01 -0800 (PST)
-In-Reply-To: <20130110113445.GC3722@jama.palm1.palmone.com>
-References: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
-	<20130110112231.GZ3722@jama.palm1.palmone.com>
-	<20130110113445.GC3722@jama.palm1.palmone.com>
-Date: Thu, 10 Jan 2013 12:50:01 +0100
-Message-ID: <CALbNGRSoDq0sqrJnur-O7=vT_-qpWZwCPYJUpK46Zc+Yiz5pXA@mail.gmail.com>
+Received: by 10.58.34.229 with SMTP id c5mr15880756vej.24.1357818783954; Thu,
+	10 Jan 2013 03:53:03 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Thu, 10 Jan 2013 03:53:03 -0800 (PST)
+In-Reply-To: <1357814691-1724-1-git-send-email-noor_ahsan@mentor.com>
+References: <1357814691-1724-1-git-send-email-noor_ahsan@mentor.com>
+Date: Thu, 10 Jan 2013 12:53:03 +0100
+Message-ID: <CALbNGRTY2_cAeE8GPKsLxiQE8iJaAVsOfe_9rpBRP0NcQ7LpXA@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-multimedia/meta-oe/meta-systemd 0/3] new recipes/appends
+Subject: Re: [meta-networking][PATCH] autofs: Remove systemd related things.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 12:05:16 -0000
+X-List-Received-Date: Thu, 10 Jan 2013 12:08:19 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 10, 2013 at 12:34 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Thu, Jan 10, 2013 at 12:22:31PM +0100, Martin Jansa wrote:
->> On Thu, Jan 10, 2013 at 12:43:12AM +0100, Andreas M=C3=BCller wrote:
->> > 1+2 resend (Patchwork was down)
->> > 3. I have this in and working for long time
->> >
->> > The following changes since commit 89d5899c38ec94b0560a3496b020e45b40d=
-8251c:
->> >
->> >   python-distutils-extra: initial add 2.36 (2013-01-09 16:20:22 +0100)
->>
->> This commit is not in master.
-I should not send patches late night :)
->>
->> First 2 patches applied from previous patches on ML, thanks!
+On Thu, Jan 10, 2013 at 11:44 AM, Noor, Ahsan <noor_ahsan@mentor.com> wrote:
+> From: Noor Ahsan <noor_ahsan@mentor.com>
 >
-> Grr, SOB lines are missing in repo and I've just refreshed them from
-> repo just before pushing them and checked only with git diff that they
-> are still the same :/.
-Next pull request contains SOB. I don't know how Koen did that but the
-pull requests applied contained SOB
->
->> > Andreas M=C3=BCller (3):
->> >       openal-soft: initial add 1.15.1
->> >       physfs: initial add 2.0.3
->> >       bluez4: add systemd support
-Shall I resend or wait for oe-core systemd?
+> * Autofs was being inherited from systemd. This class is only
+> present in meta-systemd. So bitbake was giving parse error
+> about systemd class. So removed systemd from inherit and
+> removed SYSTEMD_PACKAGES and SYSTEMD_SERVICE.
+Is this still true after auto BBMASKing?
 
 Andreas
 
