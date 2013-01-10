@@ -1,36 +1,39 @@
-Received: from mail-da0-f42.google.com ([209.85.210.42])
+Received: from mail-pb0-f54.google.com ([209.85.160.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TtGUM-0002Sb-Ps
+	(envelope-from <martin.jansa@gmail.com>) id 1TtGXH-0002ZD-Ug
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 12:40:03 +0100
-Received: by mail-da0-f42.google.com with SMTP id z17so204380dal.1
+	Thu, 10 Jan 2013 12:43:07 +0100
+Received: by mail-pb0-f54.google.com with SMTP id wz12so244357pbc.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 03:24:48 -0800 (PST)
+	Thu, 10 Jan 2013 03:27:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2kLGvBauryNhok6GWwLC5QOslaCC0i+WIHPH5IUztnc=;
-	b=gemnTsgzWJt64Bm5uChWM99ZxW8liZidf29JIjtArrB9nuv03srStL2G6J4LU76tnZ
-	tOPD/luRrlzswsEsiwt5cB9NG8v+sHl3EKKE9ZENbfbXs7bfHuKTsCL58dhkqOrBkPi8
-	V+JPBT8dHapddVQ9agfHOn/h8sma6mnZ4HWlH8mvZBjovCrJosALi2gU0tBX0orW0fU/
-	3NIZO+YOLhqCJUXhTD+y2oz/Ek5d0F1WiPJcTRvScP9TaqP2Hq9CjzoTawj9VVU2UFxX
-	1ID9Pu6D/pUyh8T1wvcgkWIZ6HeWDqqOHURC3yB3hL3i7WYUb+q2oVM605IDy812eSvK
-	gQSA==
-X-Received: by 10.68.242.225 with SMTP id wt1mr215356300pbc.65.1357817088880; 
-	Thu, 10 Jan 2013 03:24:48 -0800 (PST)
+	bh=EuaE16dBdHGoxQdXsnwQWEsjuJx8l8x+NQMuVcvbNl0=;
+	b=lO5Stiec0+rqh1wossD2jVxidfVGXm/UCRppbiS4GpSoZqVipsdtAmxuWrJkk2SUiw
+	qOatAhc2fLShFntJzuvDb6ffpdgSqxFif2XDURhdAryjvXqYQ3xpjWNU+gX2ilgUfDCm
+	XPOYmEZT71f+Y5cze0dKpuey4yzf2dafgXe62DFWohZemANqnyn4AUa6s/acjuFMQZlY
+	5JYPTOYlS4YVXeSkN1s9b1yWzyJT07NVtoBw+zBFEdMSdWm2M98f3Mn9F6KOR6rFR1YS
+	l9Aa6ij8Ni7DVEZ10fWpxd6z2TAi0lSFrUOQoo07IBD2Z1XDf7od3JVUTtO5gCvjHcEi
+	XLLA==
+X-Received: by 10.68.220.6 with SMTP id ps6mr217017260pbc.80.1357817270030;
+	Thu, 10 Jan 2013 03:27:50 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d8sm886291pax.23.2013.01.10.03.24.46
+	by mx.google.com with ESMTPS id t7sm893888pax.17.2013.01.10.03.27.47
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 10 Jan 2013 03:24:47 -0800 (PST)
-Date: Thu, 10 Jan 2013 12:24:53 +0100
+	Thu, 10 Jan 2013 03:27:49 -0800 (PST)
+Date: Thu, 10 Jan 2013 12:27:54 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130110112453.GA3722@jama.palm1.palmone.com>
-References: <1357557759-25093-1-git-send-email-cazfi74@gmail.com>
+Message-ID: <20130110112754.GB3722@jama.palm1.palmone.com>
+References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
+	<20121216180022.GC3448@jama>
+	<20130109142121.GN3722@jama.palm1.palmone.com>
+	<50ED7FDD.7060003@mlbassoc.com>
 MIME-Version: 1.0
-In-Reply-To: <1357557759-25093-1-git-send-email-cazfi74@gmail.com>
+In-Reply-To: <50ED7FDD.7060003@mlbassoc.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] xmlto: replace obsolete automake macros with working ones
+Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,97 +47,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 11:40:03 -0000
-X-Groupsio-MsgNum: 42627
+X-List-Received-Date: Thu, 10 Jan 2013 11:43:08 -0000
+X-Groupsio-MsgNum: 42628
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iRomnA/8S0UoJbe2"
+	protocol="application/pgp-signature"; boundary="nuX4E7Vid9I2gnPU"
 Content-Disposition: inline
 
---iRomnA/8S0UoJbe2
+--nuX4E7Vid9I2gnPU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 07, 2013 at 01:22:39PM +0200, Marko Lindqvist wrote:
-> Add obsolete_automake_macros.patch that replaces automake macros
-> no longer supported by automake-1.13 with modern constructs.
+On Wed, Jan 09, 2013 at 07:34:05AM -0700, Gary Thomas wrote:
+> On 2013-01-09 07:21, Martin Jansa wrote:
+> > On Sun, Dec 16, 2012 at 07:00:22PM +0100, Martin Jansa wrote:
+> >> On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
+> >>> The current recipe has a few installation errors:
+> >>>    * The manipulation of configurable paths drops a '/'
+> >>>    * The init script defaults are placed in the wrong file
+> >>>    * Finer control over init script start/stop
+> >>>    * The default device is non-standard
+> >>>
+> >>> This patch fixes these little nits and makes the package usable again.
+> >>>
+> >>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+> >>> ---
+> >>>   meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
+> >>>   meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
+> >>>   2 files changed, 5 insertions(+), 3 deletions(-)
+> >>>
+> >>> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-o=
+e/recipes-support/rng-tools/files/default
+> >>> index ab7cd93..7aede9b 100644
+> >>> --- a/meta-oe/recipes-support/rng-tools/files/default
+> >>> +++ b/meta-oe/recipes-support/rng-tools/files/default
+> >>> @@ -1,2 +1,3 @@
+> >>>   # Specify rng device
+> >>> -RNG_DEVICE=3D/dev/hwrng
+> >>> +#RNG_DEVICE=3D/dev/hwrng
+> >>> +RNG_DEVICE=3D/dev/urandom
+> >>> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-=
+oe/recipes-support/rng-tools/rng-tools_2.bb
+> >>> index ef753cf..b94854a 100644
+> >>> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> >>> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> >>> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
+> >>>   do_install_append() {
+> >>>           install -d "${D}${sysconfdir}/init.d"
+> >>>           install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rn=
+g-tools
+> >>> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbind=
+ir},' \
+> >>> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbind=
+ir}/,' \
+> >>>               ${D}${sysconfdir}/init.d/rng-tools
+> >>>
+> >>>           install -d "${D}${sysconfdir}/default"
+> >>> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+> >>> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-too=
+ls
+> >>>   }
+> >>>
+> >>>   INITSCRIPT_NAME =3D "rng-tools"
+> >>>   INITSCRIPT_PARAMS =3D "defaults"
+> >>> +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
+> >>
+> >> Why do you add 2nd INITSCRIPT_PARAMS ?
+> >
+> > ping :)
+>=20
+> Sorry, must have missed your query (holidays).
+>=20
+> That second line should really replace the first for finer grain
+> control over the start/stop choice.  I can fix this and resend the patch.
 
-Merged, thanks
->=20
-> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-> ---
->  .../xmlto/xmlto-0.0.25/obsolete_automake_macros.patch      |   12 ++++++=
-++++++
->  meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb              |    6 +++++-
->  2 files changed, 17 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_a=
-utomake_macros.patch
->=20
-> diff --git a/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake=
-_macros.patch b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automak=
-e_macros.patch
-> new file mode 100644
-> index 0000000..faa8acc
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros=
-=2Epatch
-> @@ -0,0 +1,12 @@
-> +diff -Nurd xmlto-0.0.25/configure.in xmlto-0.0.25/configure.in
-> +--- xmlto-0.0.25/configure.in	2011-12-01 17:49:00.000000000 +0200
-> ++++ xmlto-0.0.25/configure.in	2013-01-07 05:24:16.169953519 +0200
-> +@@ -1,7 +1,7 @@
-> + AC_INIT(xmlto, 0.0.25)
-> + AC_CONFIG_SRCDIR(xmlto.spec.in)
-> + AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects 1.6])
-> +-AM_CONFIG_HEADER(config.h)
-> ++AC_CONFIG_HEADERS(config.h)
-> +
-> + AC_PROG_CC
-> + AM_PROG_CC_C_O
-> diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/reci=
-pes-support/xmlto/xmlto_0.0.25.bb
-> index 806ea2e..447c791 100644
-> --- a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-> +++ b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-> @@ -5,7 +5,11 @@ LICENSE =3D "GPLv2"
-> =20
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
-552"
-> =20
-> -SRC_URI =3D "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar=
-=2Egz"=20
-> +PR =3D "r1"
-> +
-> +SRC_URI =3D "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar=
-=2Egz \
-> +           file://obsolete_automake_macros.patch \
-> +"
->  SRC_URI[md5sum] =3D "a88cd3f08789b4825d1ac89fa065170d"
->  SRC_URI[sha256sum] =3D "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc=
-352e843147e3e31a"
-> =20
-> --=20
-> 1.7.10.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Yes, please do if you want it applied.
 
+Cheers,
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---iRomnA/8S0UoJbe2
+--nuX4E7Vid9I2gnPU
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDupQUACgkQN1Ujt2V2gBzVMACglwjoZGhJqvrSeT9dLHagSuqs
-/6sAn2Xi3+cmNSJQD50mJJYT+wqD/h8+
-=UE8Z
+iEYEARECAAYFAlDupboACgkQN1Ujt2V2gBy0fwCgqm1E0iRXGQXtSKGKM1X57rzN
++VAAn2+v739p/HidBj6vuiP219K0qU6c
+=ZGb4
 -----END PGP SIGNATURE-----
 
---iRomnA/8S0UoJbe2--
+--nuX4E7Vid9I2gnPU--
