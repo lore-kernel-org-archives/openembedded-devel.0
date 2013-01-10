@@ -1,39 +1,37 @@
-Received: from mail-pb0-f54.google.com ([209.85.160.54])
+Received: from mail-pb0-f42.google.com ([209.85.160.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TtGXH-0002ZD-Ug
+	(envelope-from <martin.jansa@gmail.com>) id 1TtGdu-0002jV-OT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 12:43:07 +0100
-Received: by mail-pb0-f54.google.com with SMTP id wz12so244357pbc.27
+	Thu, 10 Jan 2013 12:50:17 +0100
+Received: by mail-pb0-f42.google.com with SMTP id rp2so248182pbb.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 03:27:50 -0800 (PST)
+	Thu, 10 Jan 2013 03:34:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=EuaE16dBdHGoxQdXsnwQWEsjuJx8l8x+NQMuVcvbNl0=;
-	b=lO5Stiec0+rqh1wossD2jVxidfVGXm/UCRppbiS4GpSoZqVipsdtAmxuWrJkk2SUiw
-	qOatAhc2fLShFntJzuvDb6ffpdgSqxFif2XDURhdAryjvXqYQ3xpjWNU+gX2ilgUfDCm
-	XPOYmEZT71f+Y5cze0dKpuey4yzf2dafgXe62DFWohZemANqnyn4AUa6s/acjuFMQZlY
-	5JYPTOYlS4YVXeSkN1s9b1yWzyJT07NVtoBw+zBFEdMSdWm2M98f3Mn9F6KOR6rFR1YS
-	l9Aa6ij8Ni7DVEZ10fWpxd6z2TAi0lSFrUOQoo07IBD2Z1XDf7od3JVUTtO5gCvjHcEi
-	XLLA==
-X-Received: by 10.68.220.6 with SMTP id ps6mr217017260pbc.80.1357817270030;
-	Thu, 10 Jan 2013 03:27:50 -0800 (PST)
+	bh=uNQ8dEEjSWbeSjAxh8D79sUnZuikdkgqEEU6KBwBSeo=;
+	b=M9iVx57M3hkxOoUFewp95wOZ2iAAQT9h38riJoaWD8tdyyQGJrrtQuazuaOkGMoELC
+	odiOzDT9cFSd+RgkOPmGykJlVkIGYoiUqkIjRqkaznrdDT+ARvchxcKv8XGull5o2FeC
+	9C3Gr5Vzlr/8sBr8VDgX04PbS5c6yoUeicmcDsAD+p/JHiIRWl2RbMKSTmqJC1/0jg4+
+	zubreiEXFxdisEXGChyLyObkw0zoJSli0+shx3RHegeQlclDG8KhjuBoSAxyf/MGsAGo
+	XFc5C/uTfMFiFxGerTNuGZnr4ef1o+3KCDKL3aHyXSSnH/oiCvnXwQtPAL+V4yjz1sdw
+	VeFw==
+X-Received: by 10.68.130.135 with SMTP id oe7mr49962811pbb.38.1357817680740;
+	Thu, 10 Jan 2013 03:34:40 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id t7sm893888pax.17.2013.01.10.03.27.47
+	by mx.google.com with ESMTPS id bc1sm908136pab.3.2013.01.10.03.34.38
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 10 Jan 2013 03:27:49 -0800 (PST)
-Date: Thu, 10 Jan 2013 12:27:54 +0100
+	Thu, 10 Jan 2013 03:34:39 -0800 (PST)
+Date: Thu, 10 Jan 2013 12:34:45 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130110112754.GB3722@jama.palm1.palmone.com>
-References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
-	<20121216180022.GC3448@jama>
-	<20130109142121.GN3722@jama.palm1.palmone.com>
-	<50ED7FDD.7060003@mlbassoc.com>
+Message-ID: <20130110113445.GC3722@jama.palm1.palmone.com>
+References: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
+	<20130110112231.GZ3722@jama.palm1.palmone.com>
 MIME-Version: 1.0
-In-Reply-To: <50ED7FDD.7060003@mlbassoc.com>
+In-Reply-To: <20130110112231.GZ3722@jama.palm1.palmone.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
+Subject: Re: [meta-multimedia/meta-oe/meta-systemd 0/3] new recipes/appends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,96 +45,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 11:43:08 -0000
-X-Groupsio-MsgNum: 42628
+X-List-Received-Date: Thu, 10 Jan 2013 11:50:19 -0000
+X-Groupsio-MsgNum: 42629
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nuX4E7Vid9I2gnPU"
+	protocol="application/pgp-signature"; boundary="XA3zunQti4u0IH5i"
 Content-Disposition: inline
 
---nuX4E7Vid9I2gnPU
-Content-Type: text/plain; charset=us-ascii
+--XA3zunQti4u0IH5i
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 09, 2013 at 07:34:05AM -0700, Gary Thomas wrote:
-> On 2013-01-09 07:21, Martin Jansa wrote:
-> > On Sun, Dec 16, 2012 at 07:00:22PM +0100, Martin Jansa wrote:
-> >> On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
-> >>> The current recipe has a few installation errors:
-> >>>    * The manipulation of configurable paths drops a '/'
-> >>>    * The init script defaults are placed in the wrong file
-> >>>    * Finer control over init script start/stop
-> >>>    * The default device is non-standard
-> >>>
-> >>> This patch fixes these little nits and makes the package usable again.
-> >>>
-> >>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> >>> ---
-> >>>   meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
-> >>>   meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
-> >>>   2 files changed, 5 insertions(+), 3 deletions(-)
-> >>>
-> >>> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-o=
-e/recipes-support/rng-tools/files/default
-> >>> index ab7cd93..7aede9b 100644
-> >>> --- a/meta-oe/recipes-support/rng-tools/files/default
-> >>> +++ b/meta-oe/recipes-support/rng-tools/files/default
-> >>> @@ -1,2 +1,3 @@
-> >>>   # Specify rng device
-> >>> -RNG_DEVICE=3D/dev/hwrng
-> >>> +#RNG_DEVICE=3D/dev/hwrng
-> >>> +RNG_DEVICE=3D/dev/urandom
-> >>> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-=
-oe/recipes-support/rng-tools/rng-tools_2.bb
-> >>> index ef753cf..b94854a 100644
-> >>> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> >>> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> >>> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
-> >>>   do_install_append() {
-> >>>           install -d "${D}${sysconfdir}/init.d"
-> >>>           install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rn=
-g-tools
-> >>> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbind=
-ir},' \
-> >>> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbind=
-ir}/,' \
-> >>>               ${D}${sysconfdir}/init.d/rng-tools
-> >>>
-> >>>           install -d "${D}${sysconfdir}/default"
-> >>> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
-> >>> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-too=
-ls
-> >>>   }
-> >>>
-> >>>   INITSCRIPT_NAME =3D "rng-tools"
-> >>>   INITSCRIPT_PARAMS =3D "defaults"
-> >>> +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
-> >>
-> >> Why do you add 2nd INITSCRIPT_PARAMS ?
-> >
-> > ping :)
+On Thu, Jan 10, 2013 at 12:22:31PM +0100, Martin Jansa wrote:
+> On Thu, Jan 10, 2013 at 12:43:12AM +0100, Andreas M=FCller wrote:
+> > 1+2 resend (Patchwork was down)
+> > 3. I have this in and working for long time
+> >=20
+> > The following changes since commit 89d5899c38ec94b0560a3496b020e45b40d8=
+251c:
+> >=20
+> >   python-distutils-extra: initial add 2.36 (2013-01-09 16:20:22 +0100)
 >=20
-> Sorry, must have missed your query (holidays).
+> This commit is not in master.
 >=20
-> That second line should really replace the first for finer grain
-> control over the start/stop choice.  I can fix this and resend the patch.
+> First 2 patches applied from previous patches on ML, thanks!
 
-Yes, please do if you want it applied.
+Grr, SOB lines are missing in repo and I've just refreshed them from
+repo just before pushing them and checked only with git diff that they=20
+are still the same :/.
 
 Cheers,
+
+>=20
+> >=20
+> > are available in the git repository at:
+> >   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patch=
+es
+> >=20
+> > Andreas M=FCller (3):
+> >       openal-soft: initial add 1.15.1
+> >       physfs: initial add 2.0.3
+> >       bluez4: add systemd support
+> >=20
+> >  .../openal/openal-soft_1.15.1.bb                   |   20 ++++++++++++=
+++++++++
+> >  meta-oe/recipes-support/physfs/physfs_2.0.3.bb     |   11 +++++++++++
+> >  .../bluez/bluez4_4.101.bbappend                    |    8 ++++++++
+> >  3 files changed, 39 insertions(+), 0 deletions(-)
+> >  create mode 100644 meta-multimedia/recipes-multimedia/openal/openal-so=
+ft_1.15.1.bb
+> >  create mode 100644 meta-oe/recipes-support/physfs/physfs_2.0.3.bb
+> >  create mode 100644 meta-systemd/oe-core/recipes-connectivity/bluez/blu=
+ez4_4.101.bbappend
+> >=20
+> > --=20
+> > 1.7.4.4
+> >=20
+> >=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---nuX4E7Vid9I2gnPU
+--XA3zunQti4u0IH5i
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlDupboACgkQN1Ujt2V2gBy0fwCgqm1E0iRXGQXtSKGKM1X57rzN
-+VAAn2+v739p/HidBj6vuiP219K0qU6c
-=ZGb4
+iEYEARECAAYFAlDup1UACgkQN1Ujt2V2gBwZLQCfY3DpuupWg2P+yz52Tw6XjmdX
+9pQAn1bVeaMWWrWVvr2VZVAKCqMY2LSN
+=JREv
 -----END PGP SIGNATURE-----
 
---nuX4E7Vid9I2gnPU--
+--XA3zunQti4u0IH5i--
