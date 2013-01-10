@@ -1,37 +1,49 @@
-Received: from mail-ea0-f181.google.com ([209.85.215.181])
+Received: from co9ehsobe003.messaging.microsoft.com ([207.46.163.26]
+	helo=co9outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tt5Xh-0004vz-0p
+	(envelope-from <B29882@freescale.com>) id 1TtAAt-0005NH-O1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 00:58:45 +0100
-Received: by mail-ea0-f181.google.com with SMTP id k14so885559eaa.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jan 2013 15:43:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=Z/ApN+05D4YuESf7UCySV4Z2bQE0HfRT9s12+oH2Z/c=;
-	b=uIzMPk/+vNVJwRCwTt7W9q8ycd2KJd8rOgGNq7Q6vxmBpUzvk822z/SxLGwWNYiU6Q
-	4+iLxXQQjv0b+SR9HNDzlcrm3FqbL3+mkTdXagR/OE8RDKTvErF0p24ADvM93S7sjE5p
-	3yHKcS9ClLaFfJtJWncL0+KeY8ka9dAaYR0JNVcW997S+uFteiWGJ/JxB3hu4gU1IXCx
-	XNUKd+7voeb+rlgNXXYbDSUwtC/wxItkdUIqUCeDNyCrIn4akaGMYm80/ZFnkd2mMzYj
-	gWoBYVpqaqaiKYO/UYhYCuyY/14ohPUCqjMDLWGb0c5L5FcOdnLw+TRJ7R42FXkV8O1G
-	m8Dg==
-X-Received: by 10.14.221.65 with SMTP id q41mr186165922eep.30.1357775012699;
-	Wed, 09 Jan 2013 15:43:32 -0800 (PST)
-Received: from localhost.localdomain (p5B0A280F.dip.t-dialin.net.
-	[91.10.40.15])
-	by mx.google.com with ESMTPS id e2sm144302197eeo.8.2013.01.09.15.43.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Jan 2013 15:43:32 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Jan 2013 00:43:15 +0100
-Message-Id: <1357774995-1104-4-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1357774995-1104-1-git-send-email-schnitzeltony@googlemail.com>
+	Thu, 10 Jan 2013 05:55:45 +0100
+Received: from mail176-co9-R.bigfish.com (10.236.132.246) by
+	CO9EHSOBE032.bigfish.com (10.236.130.95) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 10 Jan 2013 04:10:02 +0000
+Received: from mail176-co9 (localhost [127.0.0.1])	by
+	mail176-co9-R.bigfish.com (Postfix) with ESMTP id 8B1B170022D	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jan 2013 04:10:02 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -2
+X-BigFish: VS-2(zz98dI9371I1432Izz1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275bh8275dh17326ahz2dh2a8h668h839h8e2h8e3h947hd25hf0ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441h1537h153bh15d0h162dh1631h1758hbe9i1155h)
+Received: from mail176-co9 (localhost.localdomain [127.0.0.1]) by mail176-co9
+	(MessageSwitch) id 1357791000925408_8229;
+	Thu, 10 Jan 2013 04:10:00 +0000 (UTC)
+Received: from CO9EHSMHS002.bigfish.com (unknown [10.236.132.242])	by
+	mail176-co9.bigfish.com (Postfix) with ESMTP id DFDFAA80047	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jan 2013 04:10:00 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS002.bigfish.com
+	(10.236.130.12) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Thu, 10 Jan 2013 04:09:57 +0000
+Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.21]) by
+	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
+	14.02.0318.003; Thu, 10 Jan 2013 04:09:56 +0000
+From: McClintock Matthew-B29882 <B29882@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] libass: add missing dependency on fribidi
+Thread-Index: AQHN7uhZmuyAItAu8U6ZF1tuwVdb2w==
+Date: Thu, 10 Jan 2013 04:09:56 +0000
+Message-ID: <70CC66F5C30A414DADDA6973E4CA391A81CB78@039-SN1MPN1-002.039d.mgd.msft.net>
+References: <1357739154-21256-1-git-send-email-marcin.juszkiewicz@linaro.org>
+In-Reply-To: <1357739154-21256-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [70.112.201.132]
 MIME-Version: 1.0
-Subject: [meta-multimedia/meta-oe/meta-systemd 3/3] bluez4: add systemd support
+X-OriginatorOrg: freescale.com
+Subject: Re: [meta-oe][PATCH] libass: add missing dependency on fribidi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +57,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 23:58:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 10 Jan 2013 04:55:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <DBC340F5B5591345BF4180741A4F50B1@mgd.freescale.com>
+Content-Transfer-Encoding: quoted-printable
 
-makes bluetooth work for me and fixes the following errors:
-Jan 01 20:02:02 overo NetworkManager[158]: <warn> bluez error getting default adapter: Unit dbus-org.bluez.service failed to load: No such file or directory. See system logs and 'systemctl status dbus-org.bluez.service' for details.
-Jan 01 20:02:12 overo NetworkManager[158]: NetworkManager[158]: <warn> bluez error getting default adapter: Unit dbus-org.bluez.service failed to load: No such file or directory. See system logs and 'systemctl status dbus-org.bluez.service' for details.
-Jan 01 20:02:12 overo dbus-daemon[172]: dbus[172]: [system] Activating via systemd: service name='org.bluez' unit='dbus-org.bluez.service'
-Jan 01 20:02:12 overo dbus-daemon[172]: dbus[172]: [system] Activation via systemd failed for unit 'dbus-org.bluez.service': Unit dbus-org.bluez.service failed to load: No such file or directory. See system logs and 'systemctl status dbus-org.bluez.service' for details.
-Jan 01 20:02:52 overo dbus-daemon[172]: dbus[172]: [system] Activating via systemd: service name='org.bluez' unit='dbus-org.bluez.service'
+On Wed, Jan 9, 2013 at 7:45 AM, Marcin Juszkiewicz
+<marcin.juszkiewicz@linaro.org> wrote:
+> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../bluez/bluez4_4.101.bbappend                    |    8 ++++++++
- 1 files changed, 8 insertions(+), 0 deletions(-)
- create mode 100644 meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
+Tested-by: Matthew McClintock <msm@freescale.com>
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-new file mode 100644
-index 0000000..36cc8e0
---- /dev/null
-+++ b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-@@ -0,0 +1,8 @@
-+inherit systemd
-+
-+PRINC := "${@int(PRINC) + 1}"
-+
-+EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
-+
-+SYSTEMD_PACKAGES = "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN}-systemd = "bluetooth.service"
--- 
-1.7.4.4
+-M
+
+> ---
+>  meta-oe/recipes-multimedia/libass/libass.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recip=
+es-multimedia/libass/libass.inc
+> index f398d49..28d6caa 100644
+> --- a/meta-oe/recipes-multimedia/libass/libass.inc
+> +++ b/meta-oe/recipes-multimedia/libass/libass.inc
+> @@ -5,7 +5,7 @@ SECTION =3D "libs/multimedia"
+>  LICENSE =3D "ISC"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ae98663bac55afe5d989919d296f=
+28a"
+>
+> -DEPENDS =3D "enca fontconfig freetype libpng"
+> +DEPENDS =3D "enca fontconfig freetype libpng fribidi"
+>
+>  INC_PR =3D "r1"
+>
+> --
+> 1.8.0
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
 
