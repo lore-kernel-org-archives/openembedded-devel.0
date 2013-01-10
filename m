@@ -1,38 +1,32 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-pa0-f44.google.com ([209.85.220.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TtHYW-0004fd-DX
+	(envelope-from <martin.jansa@gmail.com>) id 1TtHZ0-0004g5-HH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 13:48:48 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0ACXALr015353
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 10 Jan 2013 13:48:58 +0100
+Received: by mail-pa0-f44.google.com with SMTP id hz11so331627pad.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 04:33:10 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Thu, 10 Jan 2013 04:33:10 -0800
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 709F67FCE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 07:31:32 -0500 (EST)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id B26B12414E; Thu,
-	10 Jan 2013 07:33:09 -0500 (EST)
-Date: Thu, 10 Jan 2013 07:33:09 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130110123309.GD3594@windriver.com>
-References: <1357814691-1724-1-git-send-email-noor_ahsan@mentor.com>
-	<CALbNGRTY2_cAeE8GPKsLxiQE8iJaAVsOfe_9rpBRP0NcQ7LpXA@mail.gmail.com>
-	<CALbNGRQYhMrEFDhbBPAcPyEejp9GkhuLwo4uStJCLP64Ap_Bpg@mail.gmail.com>
-	<20130110123006.GC3594@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <20130110123006.GC3594@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] autofs: Remove systemd related things.
+	Thu, 10 Jan 2013 04:33:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=glK79nYvrwlNnG5kFln08xJZoQKKd7QQzvx7Q1qcps0=;
+	b=IlbwkpBRddPSDxu1LdDL4gqvnK5Va2j/u//cYoZy3IE8d2MSAq8F1AOqKDvpyQDNTT
+	Gd0+YsoRN6OScDV/SGgGfj9icSzs9uZ2QSSA+p+lMHyNejEtR7mVdZjb5wIh67sUDwrw
+	0+XLM10ccfMqSSsK339m1EdjHG9JKXGTuw8HTGqUTtddOMEy2T3+cW6mxxr/fGEBEoo1
+	0adJlaH6Zm3vWsG+6GiXakMaF8QY/Mz3BXnMgPv1HxAsWrusdnnOlZLDKB3WXO09yPBv
+	0IhCXIRanYWKMk1x6V8mVblhxFp5BDm6E+z2z2fYS8hqj2n9406OxgoylbgB60wzLgiy
+	OlFw==
+X-Received: by 10.68.202.65 with SMTP id kg1mr39080062pbc.28.1357821220564;
+	Thu, 10 Jan 2013 04:33:40 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id wg3sm746906pbc.28.2013.01.10.04.33.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 10 Jan 2013 04:33:39 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Jan 2013 13:33:41 +0100
+Message-Id: <1357821221-714-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1
+Subject: [PATCH] goffice: add patch to use pcre_fullinfo instead of pcre_info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,58 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 12:48:49 -0000
-X-Groupsio-MsgNum: 42640
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AbQceqfdZEv+FvjW"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Jan 2013 12:49:02 -0000
 
---AbQceqfdZEv+FvjW
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* pcre_info was removed in newer pcre and abiword now fails to build
+  /usr/lib/libgoffice-0.8.so: undefined reference to pcre_info
 
-[Re: [oe] [meta-networking][PATCH] autofs: Remove systemd related things.] =
-On 13.01.10 (Thu 07:30) Joe MacDonald wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-support/goffice/goffice/pcre-8.30.patch   | 19 +++++++++++++++++++
+ meta-gnome/recipes-support/goffice/goffice_0.8.17.bb  |  5 ++++-
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-support/goffice/goffice/pcre-8.30.patch
 
-> [Re: [oe] [meta-networking][PATCH] autofs: Remove systemd related things.=
-] On 13.01.10 (Thu 12:58) Andreas M=FCller wrote:
->=20
-> > On Thu, Jan 10, 2013 at 12:53 PM, Andreas M=FCller
-> > <schnitzeltony@googlemail.com> wrote:
-> > > On Thu, Jan 10, 2013 at 11:44 AM, Noor, Ahsan <noor_ahsan@mentor.com>=
- wrote:
-> > >> From: Noor Ahsan <noor_ahsan@mentor.com>
-> > >>
-> > >> * Autofs was being inherited from systemd. This class is only
-> > >> present in meta-systemd. So bitbake was giving parse error
-> > >> about systemd class. So removed systemd from inherit and
-> > >> removed SYSTEMD_PACKAGES and SYSTEMD_SERVICE.
-> > > Is this still true after auto BBMASKing?
-> > I misread the patch so please forget previous mail. But it would be
-> > nice to have an systemd append.
->=20
-> Yeah, I agree.  I'll merge this patch,
+diff --git a/meta-gnome/recipes-support/goffice/goffice/pcre-8.30.patch b/meta-gnome/recipes-support/goffice/goffice/pcre-8.30.patch
+new file mode 100644
+index 0000000..96efb8d
+--- /dev/null
++++ b/meta-gnome/recipes-support/goffice/goffice/pcre-8.30.patch
+@@ -0,0 +1,19 @@
++Taken from http://trac.macports.org/ticket/34812
++
++Fixes abiword build failing with:
++/usr/lib/libgoffice-0.8.so: undefined reference to `pcre_info'
++
++Upstream-Status: pending
++
++http://www.linuxfromscratch.org/blfs/view/cvs/x/goffice.html
++--- goffice/utils/regutf8.c.orig	2009-09-05 18:52:09.000000000 -0500
+++++ goffice/utils/regutf8.c	2012-06-09 18:04:29.000000000 -0500
++@@ -155,7 +155,7 @@
++ 		default: return GO_REG_BADPAT;
++ 		}
++ 	} else {
++-		gor->re_nsub = pcre_info (r, NULL, NULL);
+++		gor->re_nsub = pcre_fullinfo (r, NULL, 0, NULL);
++ 		gor->nosub = (cflags & GO_REG_NOSUB) != 0;
++ 		return 0;
++ 	}
+diff --git a/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb b/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
+index c5d54ab..637ee18 100644
+--- a/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
++++ b/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
+@@ -7,8 +7,11 @@ DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+ pango cairo libgsf libpcre li
+ 
+ inherit gnome pkgconfig perlnative
+ 
++PR = "r1"
++
+ SRC_URI += " file://c99math.patch \
+-             file://nodolt.patch "
++             file://nodolt.patch \
++             file://pcre-8.30.patch"
+ 
+ SRC_URI[archive.md5sum] = "b4c924457163e02daf8a8d2428f51d10"
+ SRC_URI[archive.sha256sum] = "dd8caef5fefffbc53938fa619de9f58e7c4dc71a1803de134065d42138a68c06"
+-- 
+1.8.1
 
-Unless it's already been merged.  :-)
 
-> but please also consider sending a patch for meta-systemd that has the
-> appropriate bbappends.
 
---=20
--Joe MacDonald.
-:wq
-
---AbQceqfdZEv+FvjW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlDutQUACgkQPN8S4W6ZZncRKACePfWkMjSSgySZqvWc/1xNykr6
-yw4An1w0AOWOk6ZB4mWY37piLEcC01KP
-=Wn1s
------END PGP SIGNATURE-----
-
---AbQceqfdZEv+FvjW--
