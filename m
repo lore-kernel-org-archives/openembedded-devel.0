@@ -1,49 +1,17 @@
-Received: from co9ehsobe003.messaging.microsoft.com ([207.46.163.26]
-	helo=co9outboundpool.messaging.microsoft.com)
+Received: from nat-lmt.mentorg.com ([139.181.28.34] helo=alm.mentorg.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1TtAAt-0005NH-O1
+	(envelope-from <noor_ahsan@mentor.com>) id 1TtFt2-00014M-Hl
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 05:55:45 +0100
-Received: from mail176-co9-R.bigfish.com (10.236.132.246) by
-	CO9EHSOBE032.bigfish.com (10.236.130.95) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 10 Jan 2013 04:10:02 +0000
-Received: from mail176-co9 (localhost [127.0.0.1])	by
-	mail176-co9-R.bigfish.com (Postfix) with ESMTP id 8B1B170022D	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 04:10:02 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -2
-X-BigFish: VS-2(zz98dI9371I1432Izz1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275bh8275dh17326ahz2dh2a8h668h839h8e2h8e3h947hd25hf0ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441h1537h153bh15d0h162dh1631h1758hbe9i1155h)
-Received: from mail176-co9 (localhost.localdomain [127.0.0.1]) by mail176-co9
-	(MessageSwitch) id 1357791000925408_8229;
-	Thu, 10 Jan 2013 04:10:00 +0000 (UTC)
-Received: from CO9EHSMHS002.bigfish.com (unknown [10.236.132.242])	by
-	mail176-co9.bigfish.com (Postfix) with ESMTP id DFDFAA80047	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 04:10:00 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS002.bigfish.com
-	(10.236.130.12) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 10 Jan 2013 04:09:57 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.21]) by
-	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
-	14.02.0318.003; Thu, 10 Jan 2013 04:09:56 +0000
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] libass: add missing dependency on fribidi
-Thread-Index: AQHN7uhZmuyAItAu8U6ZF1tuwVdb2w==
-Date: Thu, 10 Jan 2013 04:09:56 +0000
-Message-ID: <70CC66F5C30A414DADDA6973E4CA391A81CB78@039-SN1MPN1-002.039d.mgd.msft.net>
-References: <1357739154-21256-1-git-send-email-marcin.juszkiewicz@linaro.org>
-In-Reply-To: <1357739154-21256-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [70.112.201.132]
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH] libass: add missing dependency on fribidi
+	Thu, 10 Jan 2013 12:01:30 +0100
+Received: from pkl-ahsann-ubuntu.mgc.mentorg.com ([137.202.157.70])
+	by alm.mentorg.com (8.12.10/8.12.10) with ESMTP id r0AAj3aF018870;
+	Thu, 10 Jan 2013 04:45:04 -0600
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Jan 2013 15:44:51 +0500
+Message-Id: <1357814691-1724-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-networking][PATCH] autofs: Remove systemd related things.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,47 +25,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 04:55:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <DBC340F5B5591345BF4180741A4F50B1@mgd.freescale.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Jan 2013 11:01:37 -0000
 
-On Wed, Jan 9, 2013 at 7:45 AM, Marcin Juszkiewicz
-<marcin.juszkiewicz@linaro.org> wrote:
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-Tested-by: Matthew McClintock <msm@freescale.com>
+* Autofs was being inherited from systemd. This class is only
+present in meta-systemd. So bitbake was giving parse error
+about systemd class. So removed systemd from inherit and
+removed SYSTEMD_PACKAGES and SYSTEMD_SERVICE.
 
--M
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ .../recipes-daemons/autofs/autofs_5.0.7.bb         |    5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-> ---
->  meta-oe/recipes-multimedia/libass/libass.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recip=
-es-multimedia/libass/libass.inc
-> index f398d49..28d6caa 100644
-> --- a/meta-oe/recipes-multimedia/libass/libass.inc
-> +++ b/meta-oe/recipes-multimedia/libass/libass.inc
-> @@ -5,7 +5,7 @@ SECTION =3D "libs/multimedia"
->  LICENSE =3D "ISC"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ae98663bac55afe5d989919d296f=
-28a"
->
-> -DEPENDS =3D "enca fontconfig freetype libpng"
-> +DEPENDS =3D "enca fontconfig freetype libpng fribidi"
->
->  INC_PR =3D "r1"
->
-> --
-> 1.8.0
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+index c1b0b46..ad737e3 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ DEPENDS += "openldap libtirpc flex-native bison-native"
+ 
+-inherit autotools systemd
++inherit autotools
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
+            file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
+@@ -40,9 +40,6 @@ inherit update-rc.d
+ INITSCRIPT_NAME = "autofs"
+ INITSCRIPT_PARAMS = "defaults"
+ 
+-SYSTEMD_PACKAGES = "${PN}-systemd"
+-SYSTEMD_SERVICE = "autofs.service"
+-
+ # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
+ CFLAGS += "${LDFLAGS}"
+ 
+-- 
+1.7.9.5
 
 
 
