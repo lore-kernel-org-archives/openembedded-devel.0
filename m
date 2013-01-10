@@ -1,40 +1,37 @@
-Received: from 7.mo2.mail-out.ovh.net ([188.165.48.182]
-	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1TtLG6-0004jG-5e
+Received: from mail-ob0-f182.google.com ([209.85.214.182])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <otavio.salvador@gmail.com>) id 1TtMPM-0000kR-9f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 17:45:46 +0100
-Received: from mail606.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo2.mail-out.ovh.net (Postfix) with SMTP id 35B10DC65CF
+	Thu, 10 Jan 2013 18:59:16 +0100
+Received: by mail-ob0-f182.google.com with SMTP id 16so836257obc.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 17:39:48 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 10 Jan 2013 18:29:57 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO e6520eb)
-	(eric%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 10 Jan 2013 18:29:55 +0200
-Date: Thu, 10 Jan 2013 17:30:23 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: Fahad Usman <fahad_usman@mentor.com>
-X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
-Message-ID: <20130110173023.7cafe23b@e6520eb>
-In-Reply-To: <1357834959-9937-2-git-send-email-fahad_usman@mentor.com>
+	Thu, 10 Jan 2013 09:44:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=/5DMa8PuAysFY680YyeL51Qh7GbZCQFLxvqRWqjTlSc=;
+	b=G4T6Ct7iGYAQ5Gra46ZLqbngNVB10ONWaXqZpMdyqrAqN8v+B1Yc95wEVJxwjnBOzF
+	77f9vGf5KDnLO6vVrTaWI/dHdpmNDQqOmbef1UvPk4dADZRzj3sZb/hkSOdvNvP6jo5I
+	pOKE7FPjg6TEDle3NVqwbGbfDHMTV4ZHjzqdg2BsEPpLKugeKDVnt3kmxmZagrYCFqQz
+	RSYZzMblG61vZrDPYM1SfF8/a/twR1stqWiHP4NjlOmPpOB4F/2DtP/dqjoPgAnEgW5E
+	TmNM8wHjbCiAz8ITFPEriJOoTivAdH/+JWbeGiCmuOpL0A3dRPQgCrmP50wn7Dbs3ovj
+	bsDA==
+MIME-Version: 1.0
+Received: by 10.60.10.230 with SMTP id l6mr42821164oeb.94.1357839842070; Thu,
+	10 Jan 2013 09:44:02 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.219.130 with HTTP; Thu, 10 Jan 2013 09:44:01 -0800 (PST)
+In-Reply-To: <20130110173023.7cafe23b@e6520eb>
 References: <1357834959-9937-1-git-send-email-fahad_usman@mentor.com>
 	<1357834959-9937-2-git-send-email-fahad_usman@mentor.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 17042465416849829210
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrgeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrgeejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
+	<20130110173023.7cafe23b@e6520eb>
+Date: Thu, 10 Jan 2013 15:44:01 -0200
+X-Google-Sender-Auth: jOyTCRf7lnYQfX9jQRxe7ZmG68g
+Message-ID: <CAP9ODKrdGa5EFy_KddpA3he5ar+sBhVWANWGXAqPgzUqfh3wEQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-browser][PATCH 2/2] chromium: fix dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,26 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 16:45:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 10 Jan 2013 17:59:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi Fahad,
+On Thu, Jan 10, 2013 at 2:30 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Hi Fahad,
+>
+> Le Thu, 10 Jan 2013 21:22:39 +0500,
+> Fahad Usman <fahad_usman@mentor.com> a =E9crit :
+>
+>> * fix dependencies to build chromium package successfully with current s=
+tate
+>>   of OE
+>>
+> OK so we need to create a danny branch and apply this one only on
+> master.
+>
+> May you please tell for which targets you tested chromium with these
+> patches ?
 
-Le Thu, 10 Jan 2013 21:22:39 +0500,
-Fahad Usman <fahad_usman@mentor.com> a =C3=A9crit :
+I have created a branch to fix firefox build with danny.
 
-> * fix dependencies to build chromium package successfully with current st=
-ate
->   of OE
->=20
-OK so we need to create a danny branch and apply this one only on
-master.
-
-May you please tell for which targets you tested chromium with these
-patches ?
-
-Thanks
-Eric
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
