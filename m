@@ -1,37 +1,32 @@
-Received: from mail-ob0-f182.google.com ([209.85.214.182])
+Received: from mail-pa0-f49.google.com ([209.85.220.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TtGlc-0002uE-44
+	(envelope-from <martin.jansa@gmail.com>) id 1TtGnB-0002zV-Tb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 12:57:59 +0100
-Received: by mail-ob0-f182.google.com with SMTP id 16so422824obc.27
+	Thu, 10 Jan 2013 12:59:34 +0100
+Received: by mail-pa0-f49.google.com with SMTP id bi1so304715pad.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 03:42:38 -0800 (PST)
+	Thu, 10 Jan 2013 03:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=722K7yIp8zZyW2/QnfymTc/717eFM6Z9BmvPXgZYeaE=;
-	b=jlsZdsNUDAffpaSdc1Z5eH6Sxj64cOFZxNtg4/nKauztIcKEFIfUROnOI2RhpT9URx
-	sPw76I/OfBEPrxPTelpF4GCsJyaniIx1Xstd9JfFvMIWsqAaf13awM/3jq/oEz7j/cX8
-	FnIiy9A4UEBMkQpSSkzwdExBiyah1Ilxisj7FWPhUnRNc65R9fYQyt2OzkZ9QGxtmIcK
-	N6QNRcH2RUsburfwmgdf/iW3CJ9sRWMVLKf9mKYNq1AHPB1JTvKZ9u9f1YE4rufMjT6H
-	PwDED2WOdwDMB/ZY5PWxQxP3oJeMLWTL1gNdV/Ba9RnBg9iM5hIZcLYswEDhe+q0ywiH
-	IVhw==
-MIME-Version: 1.0
-Received: by 10.182.54.103 with SMTP id i7mr50537003obp.62.1357818158302; Thu,
-	10 Jan 2013 03:42:38 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.219.130 with HTTP; Thu, 10 Jan 2013 03:42:38 -0800 (PST)
-In-Reply-To: <20130110123931.2dbeb03f@no-log.org>
-References: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
-	<20130107193340.GH3285@jama> <20130110123931.2dbeb03f@no-log.org>
-Date: Thu, 10 Jan 2013 09:42:38 -0200
-X-Google-Sender-Auth: rmHbigZ8CCu9n6kIkefa4eekyUU
-Message-ID: <CAP9ODKow8h_AiLnnMtO8esbR=X5CPA5nLiz41PBEFOi_nkVKCw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: "Denis 'GNUtoo' Carikli" <GNUtoo@no-log.org>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-browser][PATCH 1/3] scripts/firefox-gen-l10n-recipes: Update copyright to 2013
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Yu3+bu+5/gDtUJEP7mfAaraSh4HxVr8n36iapBdpPwg=;
+	b=yBkUW1Ojf0R9HvRseZuf+WhFwGbM2tnmfQPwEtAPeJj64n6YDOTqQAsgbJGFFKQEBr
+	7KXJ0XtrRt+qnJsVpNWQNXtv+M7FotP1++hXBlbdpbVGx+wgxMm/WBSjnvgAETESUny9
+	VddoN62O9egPjZ3VVIxhysg6W/RlKqqJzK5IXVX39O/sbQiQ8+px6Bfw255KBjACfj4S
+	OT4Ce50knckd3/Bj/sE1IuJGUniZVS5KVbYmGcX/vpjiPGKCBF5mHtiTGpjbAPVnEQ/M
+	D2+0ui8AoGmleqHXf4F1pW9ITm1rzr/c0ZHA2CZJ2gWyb+2UvKQ0tCl2MoR/LbvisZD+
+	HW2Q==
+X-Received: by 10.68.242.134 with SMTP id wq6mr47464852pbc.146.1357818255968; 
+	Thu, 10 Jan 2013 03:44:15 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id qt3sm681569pbb.32.2013.01.10.03.44.13
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 10 Jan 2013 03:44:14 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Jan 2013 12:44:17 +0100
+Message-Id: <1357818257-18773-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1
+Subject: [PATCH] gpm: fix build with eglibc-2.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 11:58:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Jan 2013 11:59:35 -0000
 
-On Thu, Jan 10, 2013 at 9:39 AM, Denis 'GNUtoo' Carikli
-<GNUtoo@no-log.org> wrote:
-> On Mon, 7 Jan 2013 20:33:40 +0100
-> Martin Jansa <martin.jansa@gmail.com> wrote:
->
->> On Sun, Jan 06, 2013 at 08:12:57PM -0200, Otavio Salvador wrote:
->> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->>
->> I've build tested all 3 on jenkins and looks good to me:
-> It does the same than the previous version of firefox:
-> root@om-gta04:~# firefox
-> Illegal instruction
->
-> om-gta04 is an armv7 machine with NEON.
-> I think it's a toolchain issue.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/gpm/gpm-1.99.7/eglibc-2.17.patch | 12 ++++++++++++
+ meta-oe/recipes-support/gpm/gpm_1.99.7.bb                |  3 ++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/gpm/gpm-1.99.7/eglibc-2.17.patch
 
-What arch is it? Can you check which instruction is it?
+diff --git a/meta-oe/recipes-support/gpm/gpm-1.99.7/eglibc-2.17.patch b/meta-oe/recipes-support/gpm/gpm-1.99.7/eglibc-2.17.patch
+new file mode 100644
+index 0000000..e43bdcb
+--- /dev/null
++++ b/meta-oe/recipes-support/gpm/gpm-1.99.7/eglibc-2.17.patch
+@@ -0,0 +1,12 @@
++Upstream-Status: pending
++
++--- gpm-1.99.7.orig/src/daemon/open_console.c	2008-07-24 12:33:05.000000000 +0200
+++++ gpm-1.99.7/src/daemon/open_console.c	2013-01-10 12:39:47.975461947 +0100
++@@ -23,6 +23,7 @@
++ #include <fcntl.h>              /* open and co.  */
++ #include <sys/stat.h>           /* stat() */
++ #include <sys/ioctl.h>          /* ioctl() */
+++#include <sys/types.h>          /* major() */
++ 
++ /* Linux specific (to be outsourced in gpm2 */
++ #include <linux/serial.h>       /* for serial console check */
+diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+index a8af6ab..e35e50e 100644
+--- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
++++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+@@ -5,13 +5,14 @@ SECTION = "console/utils"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://gpm2/core/main.c;endline=19;md5=66d3c205c4e7ee5704b2ee351dfed72f"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ DEPENDS = "ncurses"
+ 
+ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
+            file://no-docs.patch \
+            file://processcreds.patch \
++           file://eglibc-2.17.patch \
+            file://init"
+ 
+ inherit autotools update-rc.d
+-- 
+1.8.1
 
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
