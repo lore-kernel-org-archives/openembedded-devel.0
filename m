@@ -1,39 +1,38 @@
-Received: from 17.mo4.mail-out.ovh.net ([46.105.41.16]
-	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gnutoo@no-log.org>) id 1TtK6k-0002LG-8J
+Received: from mail-pa0-f42.google.com ([209.85.220.42])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1TtKnQ-0003qa-5f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 16:31:56 +0100
-Received: from mail408.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo4.mail-out.ovh.net (Postfix) with SMTP id B7FEC104FFDD
+	Thu, 10 Jan 2013 17:16:01 +0100
+Received: by mail-pa0-f42.google.com with SMTP id rl6so436459pac.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 12:48:55 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 10 Jan 2013 13:39:36 +0200
-Received: from host3-118-dynamic.54-79-r.retail.telecomitalia.it (HELO
-	localhost.localdomain) (denis%eukrea.com@79.54.118.3)
-	by ns0.ovh.net with SMTP; 10 Jan 2013 13:39:34 +0200
-Date: Thu, 10 Jan 2013 12:39:31 +0100
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Thu, 10 Jan 2013 08:00:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Oakelzhp6kuvXnNucrRkJ/3SSNBE1sQsjz/d9Mf/noc=;
+	b=tn8Ll09XQM5ie5soLAZ+Rrp0yv/mRUqdRDcZLIdRSjMxivkZY5FVwQ8IRYv0CWTV7m
+	HxPLCDS3knQoWy0c8n69Oa0qqXTwdFTYnFB9zrzwCdAD0QnPaixl5hrNuUIUMyK/mmFK
+	PU9RW/j7uy1vYfavoBRjf3fVPbQGAy9WmqE1i3Km4FE0IYZWo6ApLyIKZYCZggDgCkgg
+	ZYPCtonwYBmsB5bJ+ev1PuhVhetH5+dPBTZY0ZCSGu83sDE3HR8bilBWDUmH5RVIe7aI
+	9ynfSSW9KXv9jKZbuvhCJ7Q9eo6jE0mRW49w5DZtntoqXjk8iABRTS44K9SqfjSJMf+K
+	qj+g==
+X-Received: by 10.66.85.70 with SMTP id f6mr190200357paz.76.1357833645555;
+	Thu, 10 Jan 2013 08:00:45 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id gu5sm1019051pbc.10.2013.01.10.08.00.43
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 10 Jan 2013 08:00:44 -0800 (PST)
+Date: Thu, 10 Jan 2013 17:00:50 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
-Message-ID: <20130110123931.2dbeb03f@no-log.org>
-In-Reply-To: <20130107193340.GH3285@jama>
-References: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
-	<20130107193340.GH3285@jama>
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.14; i686-pc-linux-gnu)
-Mime-Version: 1.0
-X-Ovh-Tracer-Id: 12138889845850275401
-X-Ovh-Remote: 79.54.118.3 (host3-118-dynamic.54-79-r.retail.telecomitalia.it)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrgeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-X-Spam-Check: DONE|U 0.5/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrgeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-Cc: martin.jansa@gmail.com, Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-browser][PATCH 1/3] scripts/firefox-gen-l10n-recipes: Update copyright to 2013
+Message-ID: <20130110160050.GH3722@jama.palm1.palmone.com>
+References: <CAGiJk9d25RWg6UB-wO5Eg3M80MWjBhu6Kk=pVKbMzAaS440WKg@mail.gmail.com>
+	<20130110110535.GW3722@jama.palm1.palmone.com>
+	<CAGiJk9c5L=T4eia+bJeZtvr_KDRgpZOCoYKAAgPLxBxqKGb8tA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAGiJk9c5L=T4eia+bJeZtvr_KDRgpZOCoYKAAgPLxBxqKGb8tA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Disabling sstate cache generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 15:31:58 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Jan 2013 16:16:02 -0000
+X-Groupsio-MsgNum: 42646
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Kgh2FNDOY+603hGA"
+Content-Disposition: inline
 
-On Mon, 7 Jan 2013 20:33:40 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
+--Kgh2FNDOY+603hGA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Sun, Jan 06, 2013 at 08:12:57PM -0200, Otavio Salvador wrote:
-> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> 
-> I've build tested all 3 on jenkins and looks good to me:
-It does the same than the previous version of firefox:
-root@om-gta04:~# firefox
-Illegal instruction
+On Thu, Jan 10, 2013 at 03:52:32PM +0100, Samuel Stirtzel wrote:
+> 2013/1/10 Martin Jansa <martin.jansa@gmail.com>:
+> > On Thu, Jan 10, 2013 at 11:59:53AM +0100, Samuel Stirtzel wrote:
+> >> Hi,
+> >>
+> >> what is the preferred way to disable sstate cache generation?
+> >>
+> >> In my use-case the build machine doesn't do incremental builds (e.g.
+> >> it only does builds from scratch)
+> >
+> > http://patchwork.openembedded.org/patch/17039/
+> >
+>=20
+> Thanks,
+>=20
+> this patch works good (saves ~20 minutes per build),
+> may I ask why it was rejected back then?
 
-om-gta04 is an armv7 machine with NEON.
-I think it's a toolchain issue.
+Search oe-core ML archive.
 
-Denis.
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--Kgh2FNDOY+603hGA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDu5bIACgkQN1Ujt2V2gBwOvwCfY+cpkWHASe6UE1uJfdqWzotf
+rLUAn3qCvs5OsDiNOXZ4Q1oA/Oq4X+ix
+=AQXv
+-----END PGP SIGNATURE-----
+
+--Kgh2FNDOY+603hGA--
