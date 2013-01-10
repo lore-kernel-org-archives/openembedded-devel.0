@@ -1,36 +1,29 @@
-Received: from mail-oa0-f49.google.com ([209.85.219.49])
+Received: from mail-ob0-f169.google.com ([209.85.214.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1TtG35-0001Rz-FK
+	(envelope-from <s.stirtzel@googlemail.com>) id 1TtG6F-0001Zc-3A
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jan 2013 12:11:52 +0100
-Received: by mail-oa0-f49.google.com with SMTP id l10so391968oag.22
+	Thu, 10 Jan 2013 12:15:22 +0100
+Received: by mail-ob0-f169.google.com with SMTP id v19so397950obq.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jan 2013 02:56:37 -0800 (PST)
+	Thu, 10 Jan 2013 02:59:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=ecZUGCi0uFlESRLVkxbcQewtp7biy+cv0ifaFEwkALA=;
-	b=p6qV1rftVZ+wwzZUTA7F2+xasDFTCAZ8rUu1hi6AJfQXR/XQHOf15NZwQbKXpjEcz2
-	a3gDJwHDDcfXx2XTswexTRf7HiPZnfqOeRcq66BJm90M4o9umh/aDxITOEEaTY3gVD6U
-	aXyHRIpZaQIMA0CwKtTSzhDp6bRr5N15l7RMjJI1NoLYBWKQvcrEsWbmv2vTdreY8gTZ
-	aDT82Yr0bn7V5bxus8nDNiqh21S6J1WWuAGJGIqYmvWQNv1oOVZjrTE0wjnDCGVQwn0o
-	xoFAC2XZnQywyEF8cvCBN+bc2YzhRj+hdIudRTQC0Ja5vLI5jmdYTx6S/c9AV1GesTXS
-	MtqQ==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Fn2WkgavcEvofu/RQBddtPY5Grqx/8rFS4seLbSMxCs=;
+	b=O89qVLXmqKbCHAKy60Zh0HAxFxhDTxEKH6OCmQX3sMhLNnaLS7h+k4WHqp7gIS1TAn
+	wfVjzraTVfWhE9hMAaBFA+jJDn8R7VDT4Zwfs6h/Pgo9003lHvC4a6DtysscT0PkyVjp
+	7hXOO2cxvXiPDcAAuRrTDj+fCNlWJiVE0tqMset4+VHHBZc7h4UVQia8Z4sxF7xoekSu
+	vtgjSW7fcai1UQ+czjsp+kOKqTbMnxihGDYxA0H4TZXg9+VjJtbT51DKsKxRz21tCVI3
+	IpaSuOPO+9owYQ8ZclOaCR9sDXeo8k25wwBGWWbkgWO6GsmjB22xqlcDiv2s9rT8W54g
+	55aQ==
 MIME-Version: 1.0
-Received: by 10.60.172.178 with SMTP id bd18mr42432141oec.133.1357815397377;
-	Thu, 10 Jan 2013 02:56:37 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.219.130 with HTTP; Thu, 10 Jan 2013 02:56:37 -0800 (PST)
-In-Reply-To: <1357772281-15932-1-git-send-email-raj.khem@gmail.com>
-References: <1357772281-15932-1-git-send-email-raj.khem@gmail.com>
-Date: Thu, 10 Jan 2013 08:56:37 -0200
-X-Google-Sender-Auth: qi8cxx9reuskj0Yjlpk6lUUy1Uw
-Message-ID: <CAP9ODKqcX9hMO0V3KnU=OO8HOWsd4k1QZgTAPUM+0-KqU1F3DQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] nss: Fix build for 64bit targets
+Received: by 10.182.152.4 with SMTP id uu4mr49963910obb.85.1357815593406; Thu,
+	10 Jan 2013 02:59:53 -0800 (PST)
+Received: by 10.60.54.34 with HTTP; Thu, 10 Jan 2013 02:59:53 -0800 (PST)
+Date: Thu, 10 Jan 2013 11:59:53 +0100
+Message-ID: <CAGiJk9d25RWg6UB-wO5Eg3M80MWjBhu6Kk=pVKbMzAaS440WKg@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Disabling sstate cache generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,26 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 11:11:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Jan 2013 11:15:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jan 9, 2013 at 8:58 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> it would fair to compile for x86-64 since native flags
-> would pass 64bit flags but internally it would append
-> 32bit flags to linker cmdline since we did not ask for
-> 64bit build.
->
-> This patch asks for 64bit build on x86_64 and additionally
-> nullifies ARCHFLAG when NATIVE_CC is set, ARCHFLAG is
-> one which sets the 32bit/64bit ness of ABI
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Hi,
 
-Applied.
+what is the preferred way to disable sstate cache generation?
+
+In my use-case the build machine doesn't do incremental builds (e.g.
+it only does builds from scratch)
+
 
 --
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Regards
+Samuel
 
 
