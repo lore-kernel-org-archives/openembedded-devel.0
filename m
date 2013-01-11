@@ -1,37 +1,41 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1Ttdth-00041R-K5
+Received: from 10.mo4.mail-out.ovh.net ([188.165.33.109]
+	helo=mo4.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <gnutoo@no-log.org>) id 1TtedJ-00059L-Td
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2013 13:39:57 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id r0BCOQVp027219
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Fri, 11 Jan 2013 14:26:56 +0100
+Received: from mail413.ha.ovh.net (b7.ovh.net [213.186.33.57])
+	by mo4.mail-out.ovh.net (Postfix) with SMTP id 45AEC105048B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2013 13:24:27 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.76) (envelope-from <ensc@sigma-chemnitz.de>) id 1Ttdes-0002KF-9o
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2013 13:24:26 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <20130109101310.38A4C103A7@opal>
-	<CAGiJk9fX-W=P_5z_e45NwU+Nj3CSc4ozdS3_WyVyVtQyEWc5bw@mail.gmail.com>
-Date: Fri, 11 Jan 2013 13:24:26 +0100
-In-Reply-To: <CAGiJk9fX-W=P_5z_e45NwU+Nj3CSc4ozdS3_WyVyVtQyEWc5bw@mail.gmail.com>
-	(Samuel Stirtzel's message of "Fri, 11 Jan 2013 11:45:47 +0100")
-Message-ID: <lyobgvykjp.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 1
-X-Spam-Score: -5.3
-X-Spam-Level: -----
-X-Spam-Tests: AWL,BAYES_00,RP_MATCHES_RCVD,SPF_NEUTRAL,DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.73
-Subject: Re: Khem Raj : dhcp: Add systemd unit file for dhclient
+	Fri, 11 Jan 2013 13:05:19 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 11 Jan 2013 13:55:55 +0200
+Received: from host3-118-dynamic.54-79-r.retail.telecomitalia.it (HELO
+	localhost.localdomain) (denis%eukrea.com@79.54.118.3)
+	by ns0.ovh.net with SMTP; 11 Jan 2013 13:55:55 +0200
+Date: Fri, 11 Jan 2013 12:55:54 +0100
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+To: Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+X-Ovh-Mailout: 178.32.228.4 (mo4.mail-out.ovh.net)
+Message-ID: <20130111125554.1735848c@no-log.org>
+In-Reply-To: <20130110171202.0bc85da7@e6520eb>
+References: <1357510379-14744-1-git-send-email-otavio@ossystems.com.br>
+	<20130107193340.GH3285@jama> <20130110123931.2dbeb03f@no-log.org>
+	<20130110171202.0bc85da7@e6520eb>
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.14; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 18287429237044051630
+X-Ovh-Remote: 79.54.118.3 (host3-118-dynamic.54-79-r.retail.telecomitalia.it)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -100
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrhedtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrhedtucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+Cc: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio@ossystems.com.br>, martin.jansa@gmail.com
+Subject: Re: [meta-browser][PATCH 1/3] scripts/firefox-gen-l10n-recipes: Update copyright to 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 12:39:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Jan 2013 13:26:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Samuel Stirtzel <s.stirtzel-gM/Ye1E23mwN+BqQ9rBEUg@public.gmane.org>
-writes:
+On Thu, 10 Jan 2013 17:12:02 +0100
+Eric B=C3=A9nard <eric@eukrea.com> wrote:
 
->> +ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q $INTERFACES -lf /var/lib/dhcp/dhclient.leases
-> ...
-> systemd[1]: PID file /var/run/dhclient.pid not readable (yet?) after start.
-> [FAILED] Failed to start Dynamic Host Configuration Protocol (DHCP).
-> See 'systemctl status dhclient.service' for details.
->
->
-> Any idea why it is missing?
+> Hi Denis,
+Hi,
+> Le Thu, 10 Jan 2013 12:39:31 +0100,
+> Denis 'GNUtoo' Carikli <GNUtoo@no-log.org> a =C3=A9crit :
+>=20
+> > On Mon, 7 Jan 2013 20:33:40 +0100
+> > Martin Jansa <martin.jansa@gmail.com> wrote:
+> >=20
+> > > On Sun, Jan 06, 2013 at 08:12:57PM -0200, Otavio Salvador wrote:
+> > > > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> > >=20
+> > > I've build tested all 3 on jenkins and looks good to me:
+> > It does the same than the previous version of firefox:
+> > root@om-gta04:~# firefox
+> > Illegal instruction
+> >=20
+> > om-gta04 is an armv7 machine with NEON.
+> > I think it's a toolchain issue.
+> >=20
+> can you test it on your cpuimx51 please ?
+With which branch? danny? denzil? master?
 
-probably a '--no-pid' option
+Denis.
 
-
-Enrico
 
 
