@@ -1,33 +1,36 @@
-Received: from mail-qa0-f47.google.com ([209.85.216.47])
+Received: from mail-qa0-f51.google.com ([209.85.216.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip.balister@gmail.com>) id 1TtleI-0000tV-D5
+	(envelope-from <philip.balister@gmail.com>) id 1TtleM-0000u0-Vo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2013 21:56:23 +0100
-Received: by mail-qa0-f47.google.com with SMTP id a19so150343qad.6
+	Fri, 11 Jan 2013 21:56:28 +0100
+Received: by mail-qa0-f51.google.com with SMTP id i20so155494qad.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2013 12:41:07 -0800 (PST)
+	Fri, 11 Jan 2013 12:41:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=tLcocc69rU7d3L7290SlO3PfalkjOpoDI+l+vZUGn3c=;
-	b=CqpzSukjOnw7CbdrxyPJi1UbbNV6fMSuXoFVwtwQUuYt50KSpUE+kQofQFtdJPMAD7
-	/Acf6OYFQ1rnidSzQsY9ubW5Jp7IC4rnra52cPvNrCld2mMOMEyC8gHEuugf5QzopoBG
-	arvak4n8yWlSXGYH7CWtO7hehOZHPQNqeZSBB5h1ctG9gAZkFOmDaW52bnoL2xZM2Plm
-	QthFGGzPhvm0AW9ixzA7jgkiG81EGnKJwbZON8jAnEVEI9Wo6K4H40Fm+B76ILrq5xzo
-	DOH3gQAC5j39hhFu8sUG6O8sAH/lx3DDvn9kvDbuV2/+qGqnCmIk4QXWlctbOA3NY9j3
-	35VA==
-X-Received: by 10.224.188.13 with SMTP id cy13mr60262712qab.53.1357936866876; 
-	Fri, 11 Jan 2013 12:41:06 -0800 (PST)
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=TaJFWY6bnHi/A/Cw8+CjiQAlkq/h73VS9DElU0uwacg=;
+	b=fNgZWN0wUS9anQYE5SF6020b+sooejuzQzn5QIyItIBWMGnvLIPezIH0QcXzIG7Mt+
+	VUM8M8fV5v4NmNwEyQczfkbjcqWc3MqKtyVkEUAuMU0rAtdTx5cXIZBweEVayvf+rA2h
+	cjXzMGC54Kp8FYAxcnbnk7EhDWJ9JW4iiK13wuuvARaJjq+FBlpNsIYRN1ZsFqhZ2/M1
+	XP/GkafhtydsD8d0uOF8oPE0oGUZ34ULRdWOCJudH5JG9KlTOQ9NH6e18of4v+7Khqsp
+	nnYdOGM6DDOi4moPkEIPunfMX6Uue3iqjY5DFENESv7irkYBY0gk9hgZv5G40DKTrg3l
+	M75g==
+X-Received: by 10.224.78.82 with SMTP id j18mr50848860qak.69.1357936871534;
+	Fri, 11 Jan 2013 12:41:11 -0800 (PST)
 Received: from localhost.localdomain ([96.240.164.36])
-	by mx.google.com with ESMTPS id hr3sm4424378qab.4.2013.01.11.12.41.05
+	by mx.google.com with ESMTPS id hr3sm4424378qab.4.2013.01.11.12.41.10
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 11 Jan 2013 12:41:06 -0800 (PST)
+	Fri, 11 Jan 2013 12:41:10 -0800 (PST)
 Sender: Philip Balister <philip.balister@gmail.com>
 From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Jan 2013 15:40:59 -0500
-Message-Id: <1357936861-8245-1-git-send-email-philip@balister.org>
+Date: Fri, 11 Jan 2013 15:41:00 -0500
+Message-Id: <1357936861-8245-2-git-send-email-philip@balister.org>
 X-Mailer: git-send-email 1.7.11.7
-Subject: [meta-oe][PATCH 1/3] uhd-firmware : Update to version 3.5.0.
+In-Reply-To: <1357936861-8245-1-git-send-email-philip@balister.org>
+References: <1357936861-8245-1-git-send-email-philip@balister.org>
+Subject: [meta-oe][PATCH 2/3] uhd : Update to version 3.5.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,83 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 20:56:26 -0000
-X-List-Received-Date: Fri, 11 Jan 2013 20:56:26 -0000
+X-List-Received-Date: Fri, 11 Jan 2013 20:56:30 -0000
+
+This version drops the usrp E100 utilities. Also, the recipe depends on
+python-cheetah-native now.
 
 Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../uhd/uhd-firmware_003.004.000.bb                | 27 ----------------------
- .../uhd/uhd-firmware_003.005.000.bb                | 27 ++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 27 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
- create mode 100644 meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
+ meta-oe/recipes-connectivity/uhd/uhd.inc    | 7 +++----
+ meta-oe/recipes-connectivity/uhd/uhd_git.bb | 6 +++---
+ 2 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
-deleted file mode 100644
-index b445307..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Universal Hardware Driver Firmware"
--HOMEPAGE = "http://www.ettus.com"
--
--PE = "1"
--
--LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=d8a4f8958d3b56a11bbb1bb134826b28"
--
--inherit allarch
--
--SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
--SRC_URI[md5sum] = "4269fac82df1fe593ba76206773ce551"
--SRC_URI[sha256sum] = "4b80ebf90079a823212d3b77e5311ef1b467497a4a3585c2cfb4fe65bff71acf"
--
--S = "${WORKDIR}/uhd-images_${PV}-release"
--
--do_install() {
--	install -d ${D}${datadir}/uhd/images
--	install -d ${D}${datadir}/uhd/images/bit
--	install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
--	rm -rf ${S}/share/uhd/images/bit
--	install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
--}
--
--PACKAGES = "${PN}"
--FILES_${PN} = "${datadir}/uhd/images"
--
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
-new file mode 100644
-index 0000000..ee771fb
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Universal Hardware Driver Firmware"
-+HOMEPAGE = "http://www.ettus.com"
-+
-+PE = "1"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=8df143216c46b7c49804f95056c7057a"
-+
-+inherit allarch
-+
-+SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
-+SRC_URI[md5sum] = "dd2373263740d2d48fb39e57846bcd2a"
-+SRC_URI[sha256sum] = "352fbf69fbfff03a02b5d9b3c398771db40e4c5b77f99f0fdbff67c547cc0d18"
-+
-+S = "${WORKDIR}/uhd-images_${PV}-release"
-+
-+do_install() {
-+	install -d ${D}${datadir}/uhd/images
-+	install -d ${D}${datadir}/uhd/images/bit
-+	install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
-+	rm -rf ${S}/share/uhd/images/bit
-+	install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
-+}
-+
-+PACKAGES = "${PN}"
-+FILES_${PN} = "${datadir}/uhd/images"
-+
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
+index c237a96..d3cc4c8 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd.inc
++++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Universal Hardware Driver for Ettus Research products."
+ HOMEPAGE = "http://www.ettus.com"
+-LICENSE = "GPLV3+"
++LICENSE = "GPLv3+"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=51b35d652c070d136bf20244494be2d3"
+ 
+-DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
++DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native"
+ RDEPENDS_${PN} += "uhd-firmware"
+ 
+ PE = "1"
+@@ -18,7 +18,6 @@ INSANE_SKIP_${PN} = "dev-so"
+ FILES_${PN} += "${libdir}/libuhd.so \
+                 ${datadir}/uhd/utils/*"
+ FILES_${PN}-tests += "${datadir}/uhd/tests/*"
+-FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
+ FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
+                     ${datadir}/uhd/utils/.debug/* \
+                     ${datadir}/uhd/tests/.debug/* \
+@@ -28,6 +27,6 @@ FILES_${PN}-examples = "${datadir}/uhd/examples/*"
+ OECMAKE_BUILDPATH = "${S}/build"
+ OECMAKE_SOURCEPATH = "${S}"
+ 
+-EXTRA_OECMAKE = "-DENABLE_E100=TRUE -DENABLE_USRP_E_UTILS=TRUE"
++EXTRA_OECMAKE = "-DENABLE_E100=TRUE"
+ 
+ EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd_git.bb b/meta-oe/recipes-connectivity/uhd/uhd_git.bb
+index e740ccd..721182c 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd_git.bb
++++ b/meta-oe/recipes-connectivity/uhd/uhd_git.bb
+@@ -1,10 +1,10 @@
+ require uhd.inc
+ 
+-PV = "3.4.1"
++PV = "3.5.0"
+ PR = "${INC_PR}.0"
+ 
+-SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;protocol=git \
++SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;branch=maint;protocol=git \
+           "
+ S = "${WORKDIR}/git/host"
+ 
+-SRCREV = "3fb067567b0c799b3c707938491eb8489d85fefa"
++SRCREV = "5cb9779da40491b06157596b06422f704a58c7d0"
 -- 
 1.7.11.7
 
