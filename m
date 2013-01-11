@@ -1,39 +1,36 @@
-Received: from mail-vb0-f41.google.com ([209.85.212.41])
+Received: from mail-da0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TtmDW-00058N-JM
+	(envelope-from <martin.jansa@gmail.com>) id 1TtmdX-0005Xp-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2013 22:32:46 +0100
-Received: by mail-vb0-f41.google.com with SMTP id l22so1925280vbn.0
+	Fri, 11 Jan 2013 22:59:40 +0100
+Received: by mail-da0-f43.google.com with SMTP id u36so953333dak.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2013 13:17:31 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-originating-ip:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:x-gm-message-state;
-	bh=l+OAmDLeCtZeW6kJZJ1x3pY4Kryicnk4JcYhdM9LwzQ=;
-	b=fFXXwFPGesFBdH0i+tUOGaLX8xfNPOq9x7wZqPQD8hjE+wma5DU1dup8b7mZPA9WU6
-	lFcM3hrV7JatbI78nXN18PLyzz/8L2+rTJr2ogn9oSFcugOvWSLaiOpyoYaP7RMiV8PT
-	S8zLemRRFWoD6OGJWAo24JXNjPylEZuJKCi/7HkwZl+AqQ1D5gT8xNYJHd7JUfbJ87rx
-	EwkZoOj7esuupOohCac1RnSs+XQbWZ7uoPkf155QLmAZydcEfY5lY/kWzwRtE8Qm8FHt
-	HnTNKPtA17D2wCy5n1YTlSQcEP9TBPeF8mFy5lxN6vf3RIpGR5MBKNI6H9mJ8FAcSiI+
-	7eWg==
-Received: by 10.220.247.136 with SMTP id mc8mr17037156vcb.44.1357939050974;
-	Fri, 11 Jan 2013 13:17:30 -0800 (PST)
+	Fri, 11 Jan 2013 13:44:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=naL2zHFWVZS8RRnxxMEAt4wlg2rfe9Dvj4OOC3CrGjE=;
+	b=MSxDVfBgnrVGJWBSSgLtZtyZcbSiCETLlRER0mgdF889+P8x9nloHoND0umvyvlpYP
+	46gayA3uqnC76RIX3I47EtPw6Wq2vw6c4Fdf3wH/+LAedmtnpY2BP7i1vVN1Wx9jdnwZ
+	FQSe1mzlqwAElr/AnZIX6mQynOu2jjVWt0zh9md3rwzdbP70Gw98o2U1IFbuaQxmAAK2
+	cWpeuUSrYpo5UBscXNhkZAjea6ysBpfhXIs/PWgBj5tl8OOjGNpyFH+mX7RpsRgNr0Ar
+	q2bHtY9HHN2NAFqqbboGA//x5LZHOuwf11F9RSuJQ+m290HefsFrvsZjrhlrYHqDgh2i
+	M/dw==
+X-Received: by 10.68.138.229 with SMTP id qt5mr229054257pbb.122.1357940663791; 
+	Fri, 11 Jan 2013 13:44:23 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id qt2sm3416314pbb.24.2013.01.11.13.44.20
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 11 Jan 2013 13:44:22 -0800 (PST)
+Date: Fri, 11 Jan 2013 22:44:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130111214432.GE3781@jama.palm1.palmone.com>
+References: <20130109101304.99AC11033F@opal>
 MIME-Version: 1.0
-Received: by 10.58.102.132 with HTTP; Fri, 11 Jan 2013 13:17:10 -0800 (PST)
-X-Originating-IP: [5.13.223.33]
-In-Reply-To: <50F07D19.1010107@balister.org>
-References: <1357936861-8245-1-git-send-email-philip@balister.org>
-	<CAK18fxENpqFbRG9fOdLVB5_o+A+E1zvDjZZCzwXv61wao9KT_A@mail.gmail.com>
-	<50F07D19.1010107@balister.org>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 11 Jan 2013 23:17:10 +0200
-Message-ID: <CAK18fxH3BsAuADgA-rO06ecnic=bA2i_cU+3yhBd8M3Ey_DyOw@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-X-Gm-Message-State: ALoCoQnCPElDL9cJLkV2f8FHtRb36F+O1WHnKdoLeW7MC86h6zQln1nKbbmeg6GAUpY6i4yO7euA
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/3] uhd-firmware : Update to version 3.5.0.
+In-Reply-To: <20130109101304.99AC11033F@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [oe-commits] Khem Raj : autofs: Add recipes for 5.0.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,19 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 21:32:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Jan 2013 21:59:47 -0000
+X-Groupsio-MsgNum: 42670
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="E7i4zwmWs5DOuDSH"
+Content-Disposition: inline
 
-On Fri, Jan 11, 2013 at 10:59 PM, Philip Balister <philip@balister.org>wrote:
+--E7i4zwmWs5DOuDSH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On 01/11/2013 03:49 PM, Andrei Gherzan wrote:
-> > Send emails with -M flag please. Thanks.
->
-> Should always use the -M flag? If so, I'll submit a patch to change the
-> command shown in the README file.
->
->
-Only when renaming files.
+On Wed, Jan 09, 2013 at 10:13:04AM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 4c735f36f64476320c130ffe14a5c831f65b9c42
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D4c735f36f64476320c130ffe14a5c831f65b9c42
+>=20
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Sat Jan  5 19:53:10 2013 -0800
+>=20
+> autofs: Add recipes for 5.0.7
+>=20
+> Forward port from OE classic
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-ag
+There is small QA issue with this patch:
+autofs-5.0.7: autofs: Files/directories were installed but not shipped
+  /run
 
+Can you please fix it?
+
+--E7i4zwmWs5DOuDSH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlDwh8AACgkQN1Ujt2V2gByALACfXgBkN7ukXvDFNCJE3HcxGt1V
+qdkAoI2ACUDUqgTfDrLwZscYzjP5vOuH
+=Qlfn
+-----END PGP SIGNATURE-----
+
+--E7i4zwmWs5DOuDSH--
