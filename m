@@ -1,36 +1,33 @@
-Received: from mail-wi0-f179.google.com ([209.85.212.179])
+Received: from mail-qa0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1TticP-0003S3-Rt
+	(envelope-from <philip.balister@gmail.com>) id 1TtleI-0000tV-D5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jan 2013 18:42:14 +0100
-Received: by mail-wi0-f179.google.com with SMTP id o1so1177495wic.12
+	Fri, 11 Jan 2013 21:56:23 +0100
+Received: by mail-qa0-f47.google.com with SMTP id a19so150343qad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2013 09:26:53 -0800 (PST)
+	Fri, 11 Jan 2013 12:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=/cS0BjUkFgHCHrIQCqrVxQzkf643UFZnLxbbl6u4QiE=;
-	b=zTo8+0nXjwQ3Pmz9nA2czdWdQbuiKnkxWIoXXQ+k024zQEP0ru91exH6SYKDr3mC6b
-	Mqmn25Jkb0+a/RwgcDovBHgLhEUELQjBqjer4SDd3fsUUwIPp6qntoyhPK3pNHtZ0/Eg
-	QjFhHTyQKKmX+CIe3rLa85ot0NiHjMHHJbk2btuXqlLuhRMwAlT1DSvPJnSCA/+087J9
-	JJrRHfw2bZfYBBixmmVj8D5jShq+Q11tMEBoqJ8jb3AB5x77n9kPu8xP0aFajbPNvylg
-	3Lj7Vn5lcv17uAF6NmygKW2kgOrMA4U04aME2yiMcD6ePh9g7GKeSI0CooEqK+OAmzjw
-	eQnQ==
-X-Received: by 10.194.236.166 with SMTP id uv6mr122174767wjc.34.1357925213108; 
-	Fri, 11 Jan 2013 09:26:53 -0800 (PST)
-Received: from mizar.localdomain
-	(host253-249-dynamic.31-79-r.retail.telecomitalia.it.
-	[79.31.249.253])
-	by mx.google.com with ESMTPS id bz12sm8217212wib.5.2013.01.11.09.26.51
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 11 Jan 2013 09:26:51 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=tLcocc69rU7d3L7290SlO3PfalkjOpoDI+l+vZUGn3c=;
+	b=CqpzSukjOnw7CbdrxyPJi1UbbNV6fMSuXoFVwtwQUuYt50KSpUE+kQofQFtdJPMAD7
+	/Acf6OYFQ1rnidSzQsY9ubW5Jp7IC4rnra52cPvNrCld2mMOMEyC8gHEuugf5QzopoBG
+	arvak4n8yWlSXGYH7CWtO7hehOZHPQNqeZSBB5h1ctG9gAZkFOmDaW52bnoL2xZM2Plm
+	QthFGGzPhvm0AW9ixzA7jgkiG81EGnKJwbZON8jAnEVEI9Wo6K4H40Fm+B76ILrq5xzo
+	DOH3gQAC5j39hhFu8sUG6O8sAH/lx3DDvn9kvDbuV2/+qGqnCmIk4QXWlctbOA3NY9j3
+	35VA==
+X-Received: by 10.224.188.13 with SMTP id cy13mr60262712qab.53.1357936866876; 
+	Fri, 11 Jan 2013 12:41:06 -0800 (PST)
+Received: from localhost.localdomain ([96.240.164.36])
+	by mx.google.com with ESMTPS id hr3sm4424378qab.4.2013.01.11.12.41.05
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 11 Jan 2013 12:41:06 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Jan 2013 18:26:40 +0100
-Message-Id: <1357925200-12243-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.8.6
-In-Reply-To: <1357856764-10950-1-git-send-email-andrea.adami@gmail.com>
-References: <1357856764-10950-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-oe][meta-initramfs][PATCH v2] klibc_2.0.2: apply FIX_V4BX patch for armv4 targets only
+Date: Fri, 11 Jan 2013 15:40:59 -0500
+Message-Id: <1357936861-8245-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.7.11.7
+Subject: [meta-oe][PATCH 1/3] uhd-firmware : Update to version 3.5.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,75 +41,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 17:42:16 -0000
+X-List-Received-Date: Fri, 11 Jan 2013 20:56:26 -0000
+X-List-Received-Date: Fri, 11 Jan 2013 20:56:26 -0000
 
- * linker fix is needed to avoid 'bx, lr' instruction on armv4
- * patch is applied only for armv4 for eabi builds
- * http://wiki.debian.org/ArmEabiPort#Choice_of_minimum_CPU
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../klibc/klibc-2.0.2/armv4-fix-v4bx.patch         |   15 +++++++++++++++
- meta-initramfs/recipes-devtools/klibc/klibc.inc    |   12 +++++++++---
- 2 files changed, 24 insertions(+), 3 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
+ .../uhd/uhd-firmware_003.004.000.bb                | 27 ----------------------
+ .../uhd/uhd-firmware_003.005.000.bb                | 27 ++++++++++++++++++++++
+ 2 files changed, 27 insertions(+), 27 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
+ create mode 100644 meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
+deleted file mode 100644
+index b445307..0000000
+--- a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.004.000.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-DESCRIPTION = "Universal Hardware Driver Firmware"
+-HOMEPAGE = "http://www.ettus.com"
+-
+-PE = "1"
+-
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=d8a4f8958d3b56a11bbb1bb134826b28"
+-
+-inherit allarch
+-
+-SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
+-SRC_URI[md5sum] = "4269fac82df1fe593ba76206773ce551"
+-SRC_URI[sha256sum] = "4b80ebf90079a823212d3b77e5311ef1b467497a4a3585c2cfb4fe65bff71acf"
+-
+-S = "${WORKDIR}/uhd-images_${PV}-release"
+-
+-do_install() {
+-	install -d ${D}${datadir}/uhd/images
+-	install -d ${D}${datadir}/uhd/images/bit
+-	install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
+-	rm -rf ${S}/share/uhd/images/bit
+-	install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
+-}
+-
+-PACKAGES = "${PN}"
+-FILES_${PN} = "${datadir}/uhd/images"
+-
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
 new file mode 100644
-index 0000000..6bb384b
+index 0000000..ee771fb
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
-@@ -0,0 +1,15 @@
-+Status: not applicable upstream, in OE/Yocto we use $(FIX_V4BX)
-+which is "" in case of armv5 or thumbs.
++++ b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.000.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "Universal Hardware Driver Firmware"
++HOMEPAGE = "http://www.ettus.com"
 +
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++PE = "1"
 +
-+--- a/usr/klibc/arch/arm/MCONFIG	2013-01-09 01:12:02.000000000 +0100
-++++ b/usr/klibc/arch/arm/MCONFIG	2013-01-08 23:45:59.000000000 +0100
-+@@ -29,6 +29,7 @@
-+ KLIBCSHAREDFLAGS = -Ttext 0x01800200
-+ ifeq ($(CONFIG_AEABI),y)
-+ KLIBCREQFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
-++KLIBCLDFLAGS += $(FIX_ARMV4_EABI_BX)
-+ else
-+ KLIBCREQFLAGS += -mabi=apcs-gnu -mno-thumb-interwork
-+ endif
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index a95706e..fa31f73 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
- # debugsources.list: No such file or directory:
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
- 
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- KLIBC_ARCH = '${TARGET_ARCH}'
- KLIBC_ARCH_armeb = 'arm'
-@@ -21,11 +21,17 @@ KLIBC_ARCH_i586 = 'i386'
- KLIBC_ARCH_i686 = 'i386'
- KLIBC_ARCH_pentium = 'i386'
- 
-+export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=8df143216c46b7c49804f95056c7057a"
 +
- SRCREV = "f05ff116bb9edbbb81d82fa47b78e630ce878470"
- SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
- 
--SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
--SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch"
-+SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
-+                                 file://armv4-fix-v4bx.patch \
-+                               "
-+SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
-+                                    file://armv4-fix-v4bx.patch \
-+                                  "
- 
- SRC_URI += "file://klibc-linux-libc-dev.patch \
-             file://prefix.patch \
++inherit allarch
++
++SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
++SRC_URI[md5sum] = "dd2373263740d2d48fb39e57846bcd2a"
++SRC_URI[sha256sum] = "352fbf69fbfff03a02b5d9b3c398771db40e4c5b77f99f0fdbff67c547cc0d18"
++
++S = "${WORKDIR}/uhd-images_${PV}-release"
++
++do_install() {
++	install -d ${D}${datadir}/uhd/images
++	install -d ${D}${datadir}/uhd/images/bit
++	install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
++	rm -rf ${S}/share/uhd/images/bit
++	install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
++}
++
++PACKAGES = "${PN}"
++FILES_${PN} = "${datadir}/uhd/images"
++
 -- 
-1.7.8.6
+1.7.11.7
 
 
 
