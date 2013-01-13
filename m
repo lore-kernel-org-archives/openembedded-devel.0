@@ -1,40 +1,32 @@
-Received: from mail-wg0-f54.google.com ([74.125.82.54])
+Received: from mail-we0-f170.google.com ([74.125.82.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ttp5X-000197-KB
+	(envelope-from <martin.jansa@gmail.com>) id 1TuLFS-0002jQ-7C
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jan 2013 01:36:46 +0100
-Received: by mail-wg0-f54.google.com with SMTP id fg15so1072015wgb.21
+	Sun, 13 Jan 2013 11:57:08 +0100
+Received: by mail-we0-f170.google.com with SMTP id r1so1643169wey.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jan 2013 16:21:28 -0800 (PST)
+	Sun, 13 Jan 2013 02:41:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=/cvgOUlxRW8tuYMrxpiB0LO58F6l12xu65K6+4JaC3o=;
-	b=sruzUOKk5pk8OTf7g5ffGL1ZmilehQ7b4vJ1ipwDeZJGgH/cmra0GdsMvjPkVrqyVH
-	WcqblUCGLWyQWyp2Ib+tivNlqztvWB/youcrRV7sYteArvhR4vsRrTdRA6NeurxuavwU
-	ARpyvaSNlA356Swa8vQvHqjZ901PuWdrOg1/jBFNSwlixWESSav/P8NLNR8BDfVJztD6
-	KdxnB4/2f+surJo9lfwMrRIqXXOLWxCcZUbjgkNk8v3f62eexFv8O0kSHDfMsecMnhHS
-	1I61SL2C29ZsWiPPPVSOgmx+w9rMz1dWivtBFc32Yl0afugP3moxFoYPIbsd3VqpA/e/
-	c0+Q==
-X-Received: by 10.194.92.180 with SMTP id cn20mr124140218wjb.51.1357950088237; 
-	Fri, 11 Jan 2013 16:21:28 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=kmoKYZM8rdk/ekHOVfznwmyTY5T8sgUEjeyn6/ECFwo=;
+	b=JJ7y4WFMGrJknQDFoIg7I9RcqYjdenzsgVEwKSZOzn7SpdVPnyQcGy0nWO0tOH/IPV
+	Ot1g1gB0FV9DYtZxU0whC6NA0w7CFm3rGdRD5LVC2pR+HUEj25izW0IGGTHjuMuqOC2Y
+	/Hya7bStP41sbKODM2zJnXQn654FpOgndSy53fiQvcJyY//Lx8meNOHbbAlrqcnbr3XJ
+	XpkqngHfQcxsMg5TAflnu5eROzZ3HqOpw6SRMFEyKaBnn0DIEeHlMV2cI5yMxUW8Ia1N
+	s90/To1Z1xSCjX3v+NeS/iIl2KtonkzVX86O1NHmjsvxWHXYJHAoaAGXw0M47iQ0XR/n
+	TuUg==
+X-Received: by 10.194.76.7 with SMTP id g7mr50963379wjw.50.1358073708919;
+	Sun, 13 Jan 2013 02:41:48 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id w5sm1439011wif.11.2013.01.11.16.21.27
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 11 Jan 2013 16:21:27 -0800 (PST)
-Date: Sat, 12 Jan 2013 01:21:26 +0100
+	by mx.google.com with ESMTPS id eo10sm8235197wib.9.2013.01.13.02.41.47
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 13 Jan 2013 02:41:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Philip Balister <philip@balister.org>
-Message-ID: <20130112002126.GA3085@jama>
-References: <1357936861-8245-1-git-send-email-philip@balister.org>
-	<1357936861-8245-3-git-send-email-philip@balister.org>
-	<20130111223053.GB13385@jama.palm1.palmone.com>
-	<50F0A887.3000106@balister.org>
-MIME-Version: 1.0
-In-Reply-To: <50F0A887.3000106@balister.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 3/3] gnuradio : Update to version 3.6.3.
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 13 Jan 2013 11:41:46 +0100
+Message-Id: <1358073706-30876-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1
+Subject: [PATCH][meta-oe] compat-wireless: upgrade and fixup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,155 +40,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jan 2013 00:36:47 -0000
-X-Groupsio-MsgNum: 42673
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="d6Gm4EdcadzBjdND"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 13 Jan 2013 10:57:21 -0000
 
---d6Gm4EdcadzBjdND
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* use INC_PR
+* fix RDEPENDS
+* use normal PV
+* move checksums from .inc to .bb
+* upgrade, because old version fails to build with a lot of errors like this:
+  compat-wireless-3.5-rc5-1/include/linux/compat-3.5.h:102:8: error: redefinition of 'struct tc_fq_codel_xstats'
+* 3.5.4-1, 3.6.8-1 can failed when kernel option is missing:
+  | compat-wireless-all/3.5.4-r1.0/compat-wireless-3.5.4-1/drivers/net/ethernet/broadcom/b44.c:2342:2:
+    error: implicit declaration of function 'ssb_pcihost_register' [-Werror=implicit-function-declaration]
+  | cc1: some warnings being treated as errors
 
-On Fri, Jan 11, 2013 at 07:04:23PM -0500, Philip Balister wrote:
-> You'd have to be crazy to run gnuradio on anything less than armv7a.
-> However, I thought someone gave us a patch to let it build for machine
-> without NEON. I'll look into this again.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...-ath5k-fix-compilation-without-CONFIG_PCI.patch | 33 ++++++++++++++++++++++
+ .../compat-wireless/compat-wireless-all_0.bb       |  1 -
+ .../compat-wireless/compat-wireless-all_3.6.8.bb   |  5 ++++
+ .../compat-wireless/compat-wireless.inc            | 14 ++++-----
+ ...-ath5k-fix-compilation-without-CONFIG_PCI.patch | 33 ----------------------
+ 5 files changed, 43 insertions(+), 43 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/compat-wireless/compat-wireless-all/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
+ delete mode 100644 meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_0.bb
+ create mode 100644 meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_3.6.8.bb
+ delete mode 100644 meta-oe/recipes-kernel/compat-wireless/files/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
 
-I don't want to run it. Just trying to get world build sane.=20
+diff --git a/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch b/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
+new file mode 100644
+index 0000000..3a51266
+--- /dev/null
++++ b/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
+@@ -0,0 +1,33 @@
++From fb323acc0b01bcf1ecafb9330c4fbb41cf942139 Mon Sep 17 00:00:00 2001
++From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
++Date: Wed, 18 Jul 2012 01:01:52 +0200
++Subject: [PATCH] ath5k: fix compilation without CONFIG_PCI
++
++Without that fix we have:
++  [...]/drivers/net/wireless/ath/ath5k/led.c: In function 'ath5k_init_leds':
++  [...]/drivers/net/wireless/ath/ath5k/led.c:179:2: error: implicit declaration of function 'pci_match_id' [-Werror=implicit-function-declaration]
++When CONFIG_PCI is not set.
++
++Upstream-Status: Pending: Not submitted yet.
++
++Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
++---
++ drivers/net/wireless/ath/ath5k/led.c |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/drivers/net/wireless/ath/ath5k/led.c b/drivers/net/wireless/ath/ath5k/led.c
++index c044476..a4de133 100644
++--- a/drivers/net/wireless/ath/ath5k/led.c
+++++ b/drivers/net/wireless/ath/ath5k/led.c
++@@ -173,7 +173,7 @@ int __devinit ath5k_init_leds(struct ath5k_hw *ah)
++ 	if (!ah->pdev)
++ 		return 0;
++ 
++-#ifdef CONFIG_ATHEROS_AR231X
+++#if defined(CONFIG_ATHEROS_AR231X) || !defined(CONFIG_PCI)
++ 	match = NULL;
++ #else
++ 	match = pci_match_id(&ath5k_led_devices[0], pdev);
++-- 
++1.7.4.1
++
+diff --git a/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_0.bb b/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_0.bb
+deleted file mode 100644
+index 1d3395f..0000000
+--- a/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_0.bb
++++ /dev/null
+@@ -1 +0,0 @@
+-include compat-wireless.inc
+diff --git a/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_3.6.8.bb b/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_3.6.8.bb
+new file mode 100644
+index 0000000..0c407de
+--- /dev/null
++++ b/meta-oe/recipes-kernel/compat-wireless/compat-wireless-all_3.6.8.bb
+@@ -0,0 +1,5 @@
++include compat-wireless.inc
++PR = "${INC_PR}.0"
++
++SRC_URI[md5sum] = "f02849a795137438238b4d166609eacc"
++SRC_URI[sha256sum] = "9bbbc72bf0adf73012f377caa38147e90f6d77ef0369b52f9a687bc66bbfbcfa"
+diff --git a/meta-oe/recipes-kernel/compat-wireless/compat-wireless.inc b/meta-oe/recipes-kernel/compat-wireless/compat-wireless.inc
+index faf1aab..30d52cc 100644
+--- a/meta-oe/recipes-kernel/compat-wireless/compat-wireless.inc
++++ b/meta-oe/recipes-kernel/compat-wireless/compat-wireless.inc
+@@ -3,18 +3,17 @@ HOMEPAGE = "http://wireless.kernel.org/en/users/Download"
+ SECTION = "kernel/modules"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-RDEPENDS = "wireless-tools"
+-PR = "r0"
++RDEPENDS_${PN} = "wireless-tools"
++INC_PR = "r1"
+ 
+-COMPAT_WIRELESS_VERSION = "3.5-rc5-1"
++COMPAT_WIRELESS_VERSION = "${PV}-1"
++SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+ 
+ SRC_URI = " \
+-  http://www.orbit-lab.org/kernel/compat-wireless-3-stable/v3.5/compat-wireless-${COMPAT_WIRELESS_VERSION}.tar.bz2 \
++  http://www.orbit-lab.org/kernel/compat-wireless-3-stable/v${SHRT_VER}/compat-wireless-${COMPAT_WIRELESS_VERSION}.tar.bz2 \
+   file://0001-ath5k-fix-compilation-without-CONFIG_PCI.patch \
+ "
+ 
+-PV = "${COMPAT_WIRELESS_VERSION}"
+-
+ S = "${WORKDIR}/compat-wireless-${COMPAT_WIRELESS_VERSION}"
+ 
+ inherit module
+@@ -28,6 +27,3 @@ do_configure_append() {
+ do_install() {
+ 	oe_runmake DEPMOD=echo DESTDIR="${D}" INSTALL_MOD_PATH="${D}" LDFLAGS="" install-modules
+ }
+-
+-SRC_URI[md5sum] = "5d26bb5fd830ba67e920e0e4b2cff284"
+-SRC_URI[sha256sum] = "f77ec3afd7c8fb1d9583cb5c82cdc683816c7fc43cebebc1f0f029d172fcce9a"
+diff --git a/meta-oe/recipes-kernel/compat-wireless/files/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch b/meta-oe/recipes-kernel/compat-wireless/files/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
+deleted file mode 100644
+index 3a51266..0000000
+--- a/meta-oe/recipes-kernel/compat-wireless/files/0001-ath5k-fix-compilation-without-CONFIG_PCI.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From fb323acc0b01bcf1ecafb9330c4fbb41cf942139 Mon Sep 17 00:00:00 2001
+-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+-Date: Wed, 18 Jul 2012 01:01:52 +0200
+-Subject: [PATCH] ath5k: fix compilation without CONFIG_PCI
+-
+-Without that fix we have:
+-  [...]/drivers/net/wireless/ath/ath5k/led.c: In function 'ath5k_init_leds':
+-  [...]/drivers/net/wireless/ath/ath5k/led.c:179:2: error: implicit declaration of function 'pci_match_id' [-Werror=implicit-function-declaration]
+-When CONFIG_PCI is not set.
+-
+-Upstream-Status: Pending: Not submitted yet.
+-
+-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+----
+- drivers/net/wireless/ath/ath5k/led.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/drivers/net/wireless/ath/ath5k/led.c b/drivers/net/wireless/ath/ath5k/led.c
+-index c044476..a4de133 100644
+---- a/drivers/net/wireless/ath/ath5k/led.c
+-+++ b/drivers/net/wireless/ath/ath5k/led.c
+-@@ -173,7 +173,7 @@ int __devinit ath5k_init_leds(struct ath5k_hw *ah)
+- 	if (!ah->pdev)
+- 		return 0;
+- 
+--#ifdef CONFIG_ATHEROS_AR231X
+-+#if defined(CONFIG_ATHEROS_AR231X) || !defined(CONFIG_PCI)
+- 	match = NULL;
+- #else
+- 	match = pci_match_id(&ath5k_led_devices[0], pdev);
+--- 
+-1.7.4.1
+-
+-- 
+1.8.1
 
-Cheers,
 
->=20
-> Philip
->=20
-> On 01/11/2013 05:30 PM, Martin Jansa wrote:
-> > On Fri, Jan 11, 2013 at 03:41:01PM -0500, Philip Balister wrote:
-> >> Also fixes pakcaging issues for the examples package.
-> >>=20
-> >=20
-> > /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
-linux-gnueabi/gnuradio/3.6.3-r0/git/gnuradio-core/src/lib/filter/dotprod_ff=
-f_armv7_a.c:
-> > In function 'dotprod_fff_armv7_a': |
-> > /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
-linux-gnueabi/gnuradio/3.6.3-r0/git/gnuradio-core/src/lib/filter/dotprod_ff=
-f_armv7_a.c:67:5:
-> > error: inconsistent operand constraints in an 'asm' | make[2]: ***
-> > [gnuradio-core/src/lib/CMakeFiles/gnuradio-core.dir/filter/dotprod_fff_=
-armv7_a.c.o]
-> > Error 1 | make[2]: *** Waiting for unfinished jobs.... |
-> > /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-=
-linux/usr/bin/cmake
-> > -E cmake_progress_report
-> > /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
-linux-gnueabi/gnuradio/3.6.3-r0/git/build/CMakeFiles
-> >
-> >=20
-> |
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-li=
-nux/usr/bin/cmake
-> -E cmake_progress_report
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
-nux-gnueabi/gnuradio/3.6.3-r0/git/build/CMakeFiles
-> > | [ 37%] [ 37%] Generating gnuradio_core_general.pyc
-> >=20
-> > For whole log see=20
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130111_140417.log/
-> >
-> >  Cheers,
-> >=20
-> >> Signed-off-by: Philip Balister <philip@balister.org> ---=20
-> >> meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 16
-> >> +++++----------- 1 file changed, 5 insertions(+), 11
-> >> deletions(-)
-> >>=20
-> >> diff --git
-> >> a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> >> b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb index
-> >> aca2f97..f084149 100644 ---
-> >> a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb +++
-> >> b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb @@ -4,8
-> >> +4,6 @@ SECTION =3D  "apps" LICENSE =3D "GPLv3" LIC_FILES_CHKSUM =3D
-> >> "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504"
-> >>=20
-> >> -PR =3D "r0" - DEPENDS =3D "uhd gsl fftwf python alsa-lib boost
-> >> cppunit \ swig-native python-numpy python-pygtk orc qt4-x11-free
-> >> qwt"
-> >>=20
-> >> @@ -23,11 +21,6 @@ RDEPENDS_${PN} =3D "python-core python-audio
-> >> python-threading python-codecs \
-> >>=20
-> >> C_FILES_CHKSUM =3D
-> >> "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504"
-> >>=20
-> >> -#do_configure_append() { -#	find ${S} -name Makefile | xargs sed
-> >> -i s:'-I${STAGING_INCDIR_NATIVE'::g -#	find ${S} -name Makefile |
-> >> xargs sed -i s:'-L${STAGING_LIBDIR_NATIVE'::g -#} -=20
-> >> do_configure_prepend() { ${BUILD_CC}
-> >> ${S}/gr-vocoder/lib/codec2/generate_codebook.c -o
-> >> ${S}/gr-vocoder/lib/generate_codebook -lm echo
-> >> "ADD_EXECUTABLE(generate_codebook IMPORTED)"
-> >> >${S}/gr-vocoder/lib/generate_codebook.txt @@ -39,7 +32,7 @@
-> >> do_compile_prepend() { cp ${S}/gr-vocoder/lib/codec2/defines.h
-> >> ${OECMAKE_BUILDPATH}/gr-vocoder/lib/codec2 }
-> >>=20
-> >> -PACKAGES =3D+ "\ +PACKAGES +=3D " \ ${PN}-examples \ ${PN}-grc \ "=20
-> >> @@ -53,20 +46,21 @@ FILES_${PN} +=3D "${prefix}/etc/gnuradio/*"
-> >>=20
-> >> FILES_${PN}-dbg +=3D "${PYTHON_SITEPACKAGES_DIR}/gnuradio/.debug \=20
-> >> ${PYTHON_SITEPACKAGES_DIR}/gnuradio/*/.debug \ +
-> >> ${datadir}/gnuradio/examples/*/.debug \ " FILES_${PN}-examples =3D
-> >> "${datadir}/gnuradio/examples"
-> >>=20
-> >> -PV =3D "3.5.3" +PV =3D "3.6.3"
-> >>=20
-> >> FILESPATHPKG_prepend =3D "gnuradio-git:"
-> >>=20
-> >> -SRCREV =3D "f621a52f779381cfe550b4278b83e701a747944c" +SRCREV =3D
-> >> "607a6fa3f80e08298ce7b3ee74ffca1590c05164"
-> >>=20
-> >> # Make it easy to test against developer repos and branches=20
-> >> GIT_REPO =3D "gnuradio.git" GIT_BRANCH =3D "master"
-> >>=20
-> >> -SRC_URI =3D
-> >> "git://gnuradio.org/git/${GIT_REPO};branch=3D${GIT_BRANCH};protocol=3D=
-http
-> >> \ +SRC_URI =3D
-> >> "git://gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};protocol=3Dgit
-> >> \ "
-> >>=20
-> >> S=3D"${WORKDIR}/git" -- 1.7.11.7
-> >>=20
-> >>=20
-> >> _______________________________________________=20
-> >> Openembedded-devel mailing list=20
-> >> Openembedded-devel@lists.openembedded.org=20
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> >>=20
-> >=20
-> >=20
-> > _______________________________________________ Openembedded-devel
-> > mailing list Openembedded-devel@lists.openembedded.org=20
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---d6Gm4EdcadzBjdND
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlDwrIYACgkQN1Ujt2V2gBz2owCdEXYNr5xuv6d/FXBENG941VeL
-ke0An0ZTr5R6lHSZF5EEKiON1uT3AT1G
-=R2nU
------END PGP SIGNATURE-----
-
---d6Gm4EdcadzBjdND--
