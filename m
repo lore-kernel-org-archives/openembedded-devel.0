@@ -1,33 +1,34 @@
-Received: from mail-pb0-f41.google.com ([209.85.160.41])
+Received: from mail-vc0-f180.google.com ([209.85.220.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1TusTX-0005u6-Fw
+	(envelope-from <schnitzeltony@googlemail.com>) id 1TutX0-0007KH-Mz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2013 23:26:46 +0100
-Received: by mail-pb0-f41.google.com with SMTP id xa7so2420061pbc.28
+	Tue, 15 Jan 2013 00:33:31 +0100
+Received: by mail-vc0-f180.google.com with SMTP id p16so4049437vcq.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 14:10:31 -0800 (PST)
+	Mon, 14 Jan 2013 15:18:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=w4qe6SzCDme8VJfZy6U4UN8/HWiug6LobxisIreClRU=;
-	b=xZ/SPNKWzGk2f83BbHeqT1j+mfm8wg85wRKnC9OyzlGs/Gt/UPC/vk17x6oO1ndZ0y
-	Z0TbxIAVYT2UHBU+EnNYR6sDavzFxKDhP5BEY7beVfO0k9ln7zEa+ElKeo8BZcfhJrdv
-	eV/TL1n9G6Gvgq04OhOC+U0+i+SIRGZMLaP7kQmutshuACmZkE94UiRxUXwwr8iBjnXu
-	2t48zOrB9d5StKCPktI3LMV3iFOHmqVSbiJObs2OeVhZDMwrFHljohw+CV1Q0ljrWkUe
-	Zy7FanvECRy91kqokqblpv9hd1BTA5ftMQo4pbqkZ159cpC3cOfSId2z7KnlVBvvn9Nj
-	H+xw==
-X-Received: by 10.68.217.104 with SMTP id ox8mr1286305pbc.105.1358201430911;
-	Mon, 14 Jan 2013 14:10:30 -0800 (PST)
-Received: from widex200.islocal (ZC025230.ppp.dion.ne.jp. [221.119.25.230])
-	by mx.google.com with ESMTPS id s5sm9441049pay.31.2013.01.14.14.10.27
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 14 Jan 2013 14:10:28 -0800 (PST)
-Sender: Takeshi Hamasaki <takeshi.ken.hamasaki@gmail.com>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=PkxHSdjcAr6tUms/HjBqkM5XPeevQKhcxwbLofLsmJs=;
+	b=qHiYpSufylq75sJZ2nr4wsc4himXYBUCd8MkCoiOElSM2DGaj3+S1393fRyQ4w493m
+	czIR20Gddx9j866LgVa6HTdEABM7nhCRwCNsmb1JCds6O5TZRaUfa5Cmm9QTManIvWYr
+	LiZapPEB5/2t/4zuTzGf+1mnP4WFSvNHQn1dDFLdTKg4D/DPSYTv3YxM66klfpPf95bI
+	myrXmSmA7N+rOo8Jkb/8uNt0OfbUqZw064DHXrmGYAa3FwL1jwDosmhgeqOtIqiNzSEY
+	TYVTEaP2e3S5Thk0k5NeWNZCq/A0q0IhWTURmJndTIi/pBeLH0ABbbGQNWEAyt648Jn8
+	zkKg==
+MIME-Version: 1.0
+Received: by 10.52.94.113 with SMTP id db17mr91849146vdb.27.1358205490846;
+	Mon, 14 Jan 2013 15:18:10 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Mon, 14 Jan 2013 15:18:10 -0800 (PST)
+In-Reply-To: <1877450.6sZ4HM91lS@helios>
+References: <1357693239-13210-1-git-send-email-schnitzeltony@googlemail.com>
+	<2159085.vty0yDIBH9@helios>
+	<CAF6bG8ewV-MJArsCy799uW55nU7ftwJiYoga95rq5CeqEhY8EA@mail.gmail.com>
+	<1877450.6sZ4HM91lS@helios>
+Date: Tue, 15 Jan 2013 00:18:10 +0100
+Message-ID: <CALbNGRR-UvH9q4jCWC0_VEWtG=OmUYCjuUcJLNmA+TH99GV=1A@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jan 2013 07:10:03 +0900
-Message-Id: <1358201403-22227-2-git-send-email-hmatrjp@users.sourceforge.jp>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-initramfs][PATCH] symbolic link to resource.h is also necessary to build with linux kernel 3.2.
+Subject: Re: [meta-oe/meta-multimedia 0/2] games preparations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 22:26:53 -0000
+X-List-Received-Date: Mon, 14 Jan 2013 23:33:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
----
- meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On Mon, Jan 14, 2013 at 5:49 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Monday 14 January 2013 16:36:05 Marko Lindqvist wrote:
+>> On 14 January 2013 15:34, Paul Eggleton <paul.eggleton@linux.intel.com
+>> wrote:
+>> > There is a meta-games FYI, I think this is possibly where these recipes
+>> > ought to have gone.
+>>
+>>  They actually are there at the moment. But as I have considered them
+>> not games specific, they have been marked as something that lives
+>> there only temporarily until they can be properly introduced to more
+>> general layers. I guess Andreas has been working on that basis. My bad
+>> for not checking from generic layers if they would be accepted.
+>>  So, what's the concensus. Should they be removed from meta-games as
+>> they are in general layer, or should they be moved from staging area
+>> of meta-games to official game libraries area?
+>
+> I would have thought we should consider meta-games to be the canonical place
+> for gaming-related recipes.
+>
+Then send a patch to kick them out.
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-index ae43753..8e096d9 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-@@ -1,4 +1,4 @@
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- 
- export INST = "${D}"
- 
-@@ -11,6 +11,7 @@ do_compile_prepend() {
-         ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/errno.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/errno.h
-         ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/ioctl.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/ioctl.h
-         ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/poll.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/poll.h
-+        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/resource.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/resource.h
-     fi
- 
- }
--- 
-1.7.10.4
-
+Andreas
 
 
