@@ -1,34 +1,32 @@
-Received: from mail-vc0-f182.google.com ([209.85.220.182])
+Received: from mail-oa0-f46.google.com ([209.85.219.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TukbQ-0007b3-UU
+	(envelope-from <s.stirtzel@googlemail.com>) id 1Tukfd-0007o8-GX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2013 15:01:30 +0100
-Received: by mail-vc0-f182.google.com with SMTP id fy27so3542664vcb.27
+	Mon, 14 Jan 2013 15:06:16 +0100
+Received: by mail-oa0-f46.google.com with SMTP id h16so3988943oag.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 05:46:09 -0800 (PST)
+	Mon, 14 Jan 2013 05:50:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=NvbW8guunGAezk2HYY4DkPqXBPrERQolNjnw3ZM9kVA=;
-	b=Oibjka6nU11ygwJhJUP/vlWdiri8KK9h/PWCQqav3/lFFppJxRXrZm8cWfL+BHT+Ym
-	mI3xWQWEvLkfFEjlOZ5PTJkXKpJ7/uL3cm5LRUGuFqUoHyALPFP9SRiiDSrej13QpK+F
-	C588eoy63OjBkY+YWWifivdf5aONX/ejGVDgWObBIbevkbNfScvthgiSC8/5Kl9MOXPP
-	EO+q6zZKkySz53rtNuHQUyknIAoJqbhX9bSyhrwGgHRKv81DZJ41P17jNrIC3fUOd2WH
-	bMhjjueNWpf7t1oa/llJ1BocN21Kk26FabipWS1KsOV1zXJbFjG/TMW7pa+WV6LOGN2J
-	g6ow==
+	:content-type; bh=Josn3ZG71knTN6WAxddL7CvODYZ0YYC0bVOhNzMpv9s=;
+	b=F3mujqfBMoxoa5k97hvWM7NBnffHDB31+3m33VYDAuOg+ghJKceAAoV872jgcK4p6K
+	6B6gkgRfnJ2FxT4odrbYV8BMMi7YsvUcIafwS/ly3u9gZ9DD40WurFUjwzH1U9SmXixf
+	W4NyvYqMjyTXofTkrEKLXh0nhbjCWAEtAyOgoLaSfuDy0o/v46qKRhAoXsqbL4j2itjL
+	0L7TZrL2sKxwHGw4tNKH3Fce8a3S91mf/4LggVvme1MdU5uS/AutvEJlqcuglNC/yd/6
+	kJBALYcdXis2s3lUdiNhyswWok2D4CHokPntgY7Ewvm43KkEW06xg2971PAzAZFBn7uC
+	kr7A==
 MIME-Version: 1.0
-Received: by 10.52.21.107 with SMTP id u11mr88406399vde.101.1358171169655;
-	Mon, 14 Jan 2013 05:46:09 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Mon, 14 Jan 2013 05:46:09 -0800 (PST)
+Received: by 10.182.207.70 with SMTP id lu6mr60008752obc.78.1358171430039;
+	Mon, 14 Jan 2013 05:50:30 -0800 (PST)
+Received: by 10.60.54.34 with HTTP; Mon, 14 Jan 2013 05:50:29 -0800 (PST)
 In-Reply-To: <CAJTo0LZVhAeEKW8vUA4=r1poz80p+w9jTOCDOJHK8tfn52PyXw@mail.gmail.com>
 References: <1357693239-13210-1-git-send-email-schnitzeltony@googlemail.com>
 	<2159085.vty0yDIBH9@helios>
 	<CAJTo0LZVhAeEKW8vUA4=r1poz80p+w9jTOCDOJHK8tfn52PyXw@mail.gmail.com>
-Date: Mon, 14 Jan 2013 14:46:09 +0100
-Message-ID: <CALbNGRRg4yMLrfVeHgAcs_f85QdtzphOVCP6BeBoeRyg8SSjiQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 Jan 2013 14:50:29 +0100
+Message-ID: <CAGiJk9fbMO7T0FDp--XRraQy6A7y=bmY4U7xNjpA8GiEYDQ1cw@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe/meta-multimedia 0/2] games preparations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,20 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 14:01:30 -0000
+X-List-Received-Date: Mon, 14 Jan 2013 14:06:16 -0000
+X-List-Received-Date: Mon, 14 Jan 2013 14:06:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Jan 14, 2013 at 2:38 PM, Burton, Ross <ross.burton@intel.com> wrote:
+2013/1/14 Burton, Ross <ross.burton@intel.com>:
 > On 14 January 2013 13:34, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
 >> There is a meta-games FYI, I think this is possibly where these recipes ought
 >> to have gone.
 >
 > Agreed, these are gaming-specific and not generically "multimedia".
->
-> Ross
-The idea was to give these libraries a wider audience for
-review/testing than meta-games has.
 
-Andreas
+Is this a suggestion that other similar recipes already in meta-oe and
+oe-core should be moved there as well?
+To be specific SDL comes to my mind...
+
+
+--
+Regards
+Samuel
 
 
