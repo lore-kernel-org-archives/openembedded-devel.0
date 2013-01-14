@@ -1,33 +1,39 @@
-Received: from mail-oa0-f46.google.com ([209.85.219.46])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1Tukfd-0007o8-GX
+Received: from 19.mo3.mail-out.ovh.net ([178.32.98.231]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TuknJ-000800-1b
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2013 15:06:16 +0100
-Received: by mail-oa0-f46.google.com with SMTP id h16so3988943oag.33
+	Mon, 14 Jan 2013 15:13:49 +0100
+Received: from mail607.ha.ovh.net (gw6.ovh.net [213.251.189.206])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id EB42CFFA632
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 05:50:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Josn3ZG71knTN6WAxddL7CvODYZ0YYC0bVOhNzMpv9s=;
-	b=F3mujqfBMoxoa5k97hvWM7NBnffHDB31+3m33VYDAuOg+ghJKceAAoV872jgcK4p6K
-	6B6gkgRfnJ2FxT4odrbYV8BMMi7YsvUcIafwS/ly3u9gZ9DD40WurFUjwzH1U9SmXixf
-	W4NyvYqMjyTXofTkrEKLXh0nhbjCWAEtAyOgoLaSfuDy0o/v46qKRhAoXsqbL4j2itjL
-	0L7TZrL2sKxwHGw4tNKH3Fce8a3S91mf/4LggVvme1MdU5uS/AutvEJlqcuglNC/yd/6
-	kJBALYcdXis2s3lUdiNhyswWok2D4CHokPntgY7Ewvm43KkEW06xg2971PAzAZFBn7uC
-	kr7A==
-MIME-Version: 1.0
-Received: by 10.182.207.70 with SMTP id lu6mr60008752obc.78.1358171430039;
-	Mon, 14 Jan 2013 05:50:30 -0800 (PST)
-Received: by 10.60.54.34 with HTTP; Mon, 14 Jan 2013 05:50:29 -0800 (PST)
-In-Reply-To: <CAJTo0LZVhAeEKW8vUA4=r1poz80p+w9jTOCDOJHK8tfn52PyXw@mail.gmail.com>
-References: <1357693239-13210-1-git-send-email-schnitzeltony@googlemail.com>
-	<2159085.vty0yDIBH9@helios>
-	<CAJTo0LZVhAeEKW8vUA4=r1poz80p+w9jTOCDOJHK8tfn52PyXw@mail.gmail.com>
-Date: Mon, 14 Jan 2013 14:50:29 +0100
-Message-ID: <CAGiJk9fbMO7T0FDp--XRraQy6A7y=bmY4U7xNjpA8GiEYDQ1cw@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe/meta-multimedia 0/2] games preparations
+	Mon, 14 Jan 2013 15:06:06 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 14 Jan 2013 15:52:43 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO e6520eb)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 14 Jan 2013 15:52:42 +0200
+Date: Mon, 14 Jan 2013 14:52:39 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Message-ID: <20130114145239.32ca274f@e6520eb>
+In-Reply-To: <1358170889-23714-1-git-send-email-ml@communistcode.co.uk>
+References: <1358170889-23714-1-git-send-email-ml@communistcode.co.uk>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 984599468587461961
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -100
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrheegucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrheegucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: Re: [PATCH] hiawatha: update to 8.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 14:06:16 -0000
-X-List-Received-Date: Mon, 14 Jan 2013 14:06:16 -0000
+X-List-Received-Date: Mon, 14 Jan 2013 14:13:50 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-2013/1/14 Burton, Ross <ross.burton@intel.com>:
-> On 14 January 2013 13:34, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
->> There is a meta-games FYI, I think this is possibly where these recipes ought
->> to have gone.
->
-> Agreed, these are gaming-specific and not generically "multimedia".
+Hi Jack,
 
-Is this a suggestion that other similar recipes already in meta-oe and
-oe-core should be moved there as well?
-To be specific SDL comes to my mind...
+Le Mon, 14 Jan 2013 13:41:29 +0000,
+ml@communistcode.co.uk a =C3=A9crit :
 
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>=20
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>  .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71 ----------------=
+------
+>  .../recipes-httpd/hiawatha/hiawatha_8.7.bb         | 56 +++++++++++++++++
+>  2 files changed, 56 insertions(+), 71 deletions(-)
+>  delete mode 100644 meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.=
+patch
+>  create mode 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
+>=20
+I think you forget to delete hiawatha_8.6.bb=20
 
---
-Regards
-Samuel
+Eric
 
 
