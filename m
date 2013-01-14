@@ -1,21 +1,27 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1Tumha-0002vK-Uw
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TunT6-0004Fb-B4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2013 17:16:00 +0100
-Message-ID: <50F42A14.9010805@communistcode.co.uk>
-Date: Mon, 14 Jan 2013 15:53:56 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130109 Thunderbird/17.0.2
+	Mon, 14 Jan 2013 18:05:11 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 14 Jan 2013 08:48:38 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,468,1355126400"; d="scan'208";a="271818173"
+Received: from unknown (HELO helios.localnet) ([10.252.123.130])
+	by orsmga002.jf.intel.com with ESMTP; 14 Jan 2013 08:49:42 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 14 Jan 2013 16:49:41 +0000
+Message-ID: <1877450.6sZ4HM91lS@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.5.0-21-generic; KDE/4.9.3; i686; ; )
+In-Reply-To: <CAF6bG8ewV-MJArsCy799uW55nU7ftwJiYoga95rq5CeqEhY8EA@mail.gmail.com>
+References: <1357693239-13210-1-git-send-email-schnitzeltony@googlemail.com>
+	<2159085.vty0yDIBH9@helios>
+	<CAF6bG8ewV-MJArsCy799uW55nU7ftwJiYoga95rq5CeqEhY8EA@mail.gmail.com>
 MIME-Version: 1.0
-To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-References: <1358170889-23714-1-git-send-email-ml@communistcode.co.uk>
-	<20130114145239.32ca274f@e6520eb>
-In-Reply-To: <20130114145239.32ca274f@e6520eb>
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] hiawatha: update to 8.7
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe/meta-multimedia 0/2] games preparations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,31 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 16:16:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 14 Jan 2013 17:05:20 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 01/14/13 13:52, Eric Bénard wrote:
-> Hi Jack,
->
-> Le Mon, 14 Jan 2013 13:41:29 +0000,
-> ml@communistcode.co.uk a écrit :
->
->> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->>
->> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->> ---
->>   .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71 ----------------------
->>   .../recipes-httpd/hiawatha/hiawatha_8.7.bb         | 56 +++++++++++++++++
->>   2 files changed, 56 insertions(+), 71 deletions(-)
->>   delete mode 100644 meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
->>   create mode 100644 meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
->>
-> I think you forget to delete hiawatha_8.6.bb
->
-> Eric
+On Monday 14 January 2013 16:36:05 Marko Lindqvist wrote:
+> On 14 January 2013 15:34, Paul Eggleton <paul.eggleton@linux.intel.com
+> wrote:
+> > There is a meta-games FYI, I think this is possibly where these recipes
+> > ought to have gone.
+> 
+>  They actually are there at the moment. But as I have considered them
+> not games specific, they have been marked as something that lives
+> there only temporarily until they can be properly introduced to more
+> general layers. I guess Andreas has been working on that basis. My bad
+> for not checking from generic layers if they would be accepted.
+>  So, what's the concensus. Should they be removed from meta-games as
+> they are in general layer, or should they be moved from staging area
+> of meta-games to official game libraries area?
 
-That I did, I removed it from the directory but not from git. Will send 
-a v2 (also with correct subject tomorrow), snow permitting for us Brits ;)
+I would have thought we should consider meta-games to be the canonical place 
+for gaming-related recipes.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
