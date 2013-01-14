@@ -1,36 +1,26 @@
-Received: from mail-vc0-f179.google.com ([209.85.220.179])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cazfi74@gmail.com>) id 1Tunhm-0004c6-0g
+	(envelope-from <Andrei.Gherzan@windriver.com>) id 1TupF3-0006u2-3W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jan 2013 18:20:29 +0100
-Received: by mail-vc0-f179.google.com with SMTP id p1so3699831vcq.38
+	Mon, 14 Jan 2013 19:58:47 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r0EIhMMX012752
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 09:04:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Bir2s/0PeunHAq+HUhU+k9XILu0pf2d3xvK+qXB2HpE=;
-	b=j9ch1ty2GWoct6RLxc7OZ1dd9kvS9g4o8BeemvLJ0PLZIFTTv94ZXsk1v0lC98csIR
-	V4s++Cfmuqw/gpsx73K1MYZqv+1lDPvacxwW/kfGWuEq8hBfPorAULvxMstFg1oFC96w
-	0lWi3ZILze4eu+YUzcwSPylK0JJZKiYFZKu9Us/fj+uUg7T0upnOeyUNsk+0qbMFcZvv
-	bTeR5pArQIw2ry9zFgr9lGZGpu9D98WCtTjBKeZlFRGvd2pP6N6DT9+RVwfvFX9lgKim
-	ozdBf3dptKV4fILJSZQ34M1LTl4PDTAn0YGpV8+TNgGfrgWosECkNnj3ukvyJhVm6SG8
-	2Reg==
+	Mon, 14 Jan 2013 10:43:22 -0800 (PST)
+Received: from localhost.localdomain (128.224.171.81) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Mon, 14 Jan 2013 10:43:20 -0800
+From: Andrei Gherzan <andrei.gherzan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 14 Jan 2013 20:42:53 +0200
+Message-ID: <1358188976-14581-1-git-send-email-andrei.gherzan@windriver.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
-Received: by 10.58.15.227 with SMTP id a3mr106188846ved.38.1358183094590; Mon,
-	14 Jan 2013 09:04:54 -0800 (PST)
-Received: by 10.58.80.2 with HTTP; Mon, 14 Jan 2013 09:04:54 -0800 (PST)
-In-Reply-To: <1877450.6sZ4HM91lS@helios>
-References: <1357693239-13210-1-git-send-email-schnitzeltony@googlemail.com>
-	<2159085.vty0yDIBH9@helios>
-	<CAF6bG8ewV-MJArsCy799uW55nU7ftwJiYoga95rq5CeqEhY8EA@mail.gmail.com>
-	<1877450.6sZ4HM91lS@helios>
-Date: Mon, 14 Jan 2013 19:04:54 +0200
-Message-ID: <CAF6bG8ft2NSeedD23FHet5izvUpRqT5G+gO6J88tSOGS72DL_w@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe/meta-multimedia 0/2] games preparations
+X-Originating-IP: [128.224.171.81]
+Cc: Andrei Gherzan <andrei.gherzan@windriver.com>
+Subject: [meta-oe][meta-systemd][PATCH 1/4] bluez4: Package systemd service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 17:20:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 14 Jan 2013 18:58:48 -0000
+Content-Type: text/plain
 
-On 14 January 2013 18:49, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
-> On Monday 14 January 2013 16:36:05 Marko Lindqvist wrote:
->> On 14 January 2013 15:34, Paul Eggleton <paul.eggleton@linux.intel.com
->> wrote:
->> > There is a meta-games FYI, I think this is possibly where these recipes
->> > ought to have gone.
->>
->>  They actually are there at the moment. But as I have considered them
->> not games specific, they have been marked as something that lives
->> there only temporarily until they can be properly introduced to more
->> general layers. I guess Andreas has been working on that basis. My bad
->> for not checking from generic layers if they would be accepted.
->>  So, what's the concensus. Should they be removed from meta-games as
->> they are in general layer, or should they be moved from staging area
->> of meta-games to official game libraries area?
->
-> I would have thought we should consider meta-games to be the canonical place
-> for gaming-related recipes.
+Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
+---
+ .../bluez/bluez4_4.101.bbappend                    |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+ create mode 100644 meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
 
- Games and libraries that clearly are for games only (allegro at the
-moment) belong to meta-games, but components that could be used by
-non-game recipes are less clear. Keep them in meta-games until there
-actually is some non-game recipe depending on them forcing their move
-to general layers, or introduce them to general layers from the
-beginning (or as I've done now, quick and dirty addition to meta-games
-with TODO to make proper addition to general layer)?
+diff --git a/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
+new file mode 100644
+index 0000000..8945a6d
+--- /dev/null
++++ b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
+@@ -0,0 +1,9 @@
++PRINC := "${@int(PRINC) + 1}"
++
++inherit systemd
++
++EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
++
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE = "bluetooth.service"
++SYSTEMD_AUTO_ENABLE = "disable"
+-- 
+1.7.5.4
 
-
- - ML
 
 
