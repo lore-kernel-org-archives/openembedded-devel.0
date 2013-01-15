@@ -1,31 +1,36 @@
-Received: from mail-ie0-f180.google.com ([209.85.223.180])
+Received: from mail-pb0-f44.google.com ([209.85.160.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1TuuYd-0000X2-3R
+	(envelope-from <martin.jansa@gmail.com>) id 1Tuzyi-0006WV-4P
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jan 2013 01:39:24 +0100
-Received: by mail-ie0-f180.google.com with SMTP id c10so6101772ieb.39
+	Tue, 15 Jan 2013 07:26:32 +0100
+Received: by mail-pb0-f44.google.com with SMTP id uo1so2647757pbc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 16:23:55 -0800 (PST)
+	Mon, 14 Jan 2013 22:11:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=gNC425r/oRJsBI/8j45Qk8RzwDCvZoxb7Dt3adP86+I=;
-	b=lKUuKBo2sln8GeGFuP7csg2Xqml9Z/IR6IXqExenU41fPqjb5Iqry2TWkBTxJYi6xk
-	c/tki8uoNhUrblJoD7Jbw9s6iyiAkyUZsrlAA0cIVUDo/rVMfob+qBsxZAv7maLffP2J
-	NxxhZTfWzUnxle04gQKrAIT0DWaNaq4cNBTpYm1z6lQey9ITqR4EHOYxNA3dDb5Ipsfq
-	tsyPUF5XgimOn8R8Tr2v3rFlnK5UUM/HeUyJXTJdeIqCGEYmD3qjkXkEEL8JjEbMU4IV
-	OD+eCuvnywDz0z9Xl0pcqPyfCe8Y9kPptBXbgTrd2a5uNb/mg5B67yst+8SCxi8zfff2
-	lPUQ==
-MIME-Version: 1.0
-Received: by 10.50.179.66 with SMTP id de2mr261629igc.59.1358209434926; Mon,
-	14 Jan 2013 16:23:54 -0800 (PST)
-Received: by 10.64.98.163 with HTTP; Mon, 14 Jan 2013 16:23:54 -0800 (PST)
-In-Reply-To: <1358201403-22227-2-git-send-email-hmatrjp@users.sourceforge.jp>
-References: <1358201403-22227-2-git-send-email-hmatrjp@users.sourceforge.jp>
-Date: Tue, 15 Jan 2013 01:23:54 +0100
-Message-ID: <CAAQYJAuoSYreWC6oanAkwW-4Mqv5LsKL+kHr3NhFrKf4t2o7qg@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=tSdYTnQgiZ1N7JjN0yV6zoMST2G78n73XIlWydJYcN4=;
+	b=twSOCG7oyCHEuSMvr5GnI1SG8J9LVVF4F9WTeIK+e6BSyV2VNGNzaOo+fGZVxR/Bw0
+	P9h3qkBsqkW/Q/gBuvWGFCNqpb7FUqyYracdamkh61/KV1XsA3OW1otbII//IxAOAVQZ
+	0GmIMK0Ca6NB4s2PKDWqJgKES4fGsuvG7bx19/KyDYSuVAdnYyxibtxfF9ZLLea6QRKW
+	yQ1j2liyKn3Y+068RxCu9J9VGQG/bC45AwMO3INYEjL+fP+nVKXxTCQw0Y6+qN+AhOuO
+	+TsOkVgFboJt18BKOpRzsw4Gc2T73f3G/XDVwC5C6vyYkqE0MPqHbkbliBqM4ZmX5skC
+	8iqQ==
+X-Received: by 10.68.242.41 with SMTP id wn9mr118000051pbc.142.1358230271405; 
+	Mon, 14 Jan 2013 22:11:11 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id pv8sm9602564pbc.26.2013.01.14.22.11.08
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 14 Jan 2013 22:11:10 -0800 (PST)
+Date: Tue, 15 Jan 2013 07:11:09 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-initramfs][PATCH] symbolic link to resource.h is also necessary to build with linux kernel 3.2.
+Message-ID: <20130115061109.GI2992@jama>
+References: <1358094394-25613-1-git-send-email-andrei@gherzan.ro>
+MIME-Version: 1.0
+In-Reply-To: <1358094394-25613-1-git-send-email-andrei@gherzan.ro>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-multimedia][PATCH] libpostproc: Remove -disable-yasm as this is a nonexistent flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,49 +44,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jan 2013 00:39:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 15 Jan 2013 06:26:32 -0000
+X-Groupsio-MsgNum: 42701
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="QDIl5R72YNOeCxaP"
+Content-Disposition: inline
 
-On Mon, Jan 14, 2013 at 11:10 PM, Takeshi Hamasaki
-<hmatrjp@users.sourceforge.jp> wrote:
+--QDIl5R72YNOeCxaP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Jan 13, 2013 at 06:26:34PM +0200, Andrei Gherzan wrote:
+> Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
 > ---
->  meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-> index ae43753..8e096d9 100644
-> --- a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-> +++ b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
-> @@ -1,4 +1,4 @@
-> -PR = "${INC_PR}.0"
-> +PR = "${INC_PR}.1"
->
->  export INST = "${D}"
->
-> @@ -11,6 +11,7 @@ do_compile_prepend() {
->          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/errno.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/errno.h
->          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/ioctl.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/ioctl.h
->          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/poll.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/poll.h
-> +        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/resource.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/resource.h
->      fi
->
+>  meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb |    5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+
+Looks good, but [meta-multimedia] tag is for meta-multimedia layer not
+recipes-multimedia.
+
+Cheers,
+
+> diff --git a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb b/=
+meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
+> index 3620ff0..1520628 100644
+> --- a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
+> +++ b/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
+> @@ -6,6 +6,7 @@ LICENSE =3D "GPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> =20
+>  PV =3D "0.0.0+git${SRCPV}"
+> +PR =3D "r1"
+> =20
+>  DEFAULT_PREFERENCE =3D "-1"
+> =20
+> @@ -40,10 +41,6 @@ EXTRA_OECONF =3D " \
+>          ${EXTRA_FFCONF} \
+>  "
+> =20
+> -#| yasm not found, use --disable-yasm for a crippled build
+> -EXTRA_OECONF_append_x86-64 =3D " --disable-yasm"
+> -EXTRA_OECONF_append_x86 =3D " --disable-yasm"
+> -
+>  do_configure() {
+>      ./configure ${EXTRA_OECONF}
 >  }
-> --
+> --=20
 > 1.7.10.4
->
->
+>=20
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Hi,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-you are using an outdated recipe, the issue is already fixed.
-Please update your meta-initramfs layer and you'll get klibc_2.0.2.
+--QDIl5R72YNOeCxaP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Regards
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-Andrea
+iEYEARECAAYFAlD08v0ACgkQN1Ujt2V2gBwUpgCgsxVyw95YlSNixJDPpMYr4gO8
+K6gAnA9x8hzNb26iKLkDwH/IbPilnKKp
+=Pj9f
+-----END PGP SIGNATURE-----
 
-
+--QDIl5R72YNOeCxaP--
