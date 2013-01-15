@@ -1,31 +1,31 @@
-Received: from mail-vc0-f179.google.com ([209.85.220.179])
+Received: from mail-ie0-f180.google.com ([209.85.223.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tutrp-0007gO-GQ
+	(envelope-from <andrea.adami@gmail.com>) id 1TuuYd-0000X2-3R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jan 2013 00:55:06 +0100
-Received: by mail-vc0-f179.google.com with SMTP id p1so4210228vcq.10
+	Tue, 15 Jan 2013 01:39:24 +0100
+Received: by mail-ie0-f180.google.com with SMTP id c10so6101772ieb.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jan 2013 15:39:41 -0800 (PST)
+	Mon, 14 Jan 2013 16:23:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Y5DvjNA8tRVtzb/ODR1rEjxS9c6ouPXzPXqFxUFUrrg=;
-	b=t0uhha/NpoKJB9SlJ8f/cjFn5Bh6h2gQ0aLM5tFHpMzl3bHCuCkrzTvfG/4FuPYdr7
-	QrgfHP3Onp9OZ0zG+U0EL9d/yqhLyZtb40aCW8bY6U36oKPUF8bMWSCgxtJQ+hT8Dsm+
-	uoONQGbz19toCnia7YfAmJS+nEvytPK9jSULjIgXk1hZ0NCoEaoWRtig521zyWuKFOom
-	641gh/LWFSLVCNvB/k9MDOgy5P49lCeJOrMAU63WwM1TmQ8I6kJpGE3w3Dcv87ZbqDQ/
-	kaEEguBC9FpOslMQGw5cTp7+LtLhBlyCmXnu2ZLuE5rkHieDAZRmhqNyg54eIdTLZfPz
-	CKXg==
+	:content-type; bh=gNC425r/oRJsBI/8j45Qk8RzwDCvZoxb7Dt3adP86+I=;
+	b=lKUuKBo2sln8GeGFuP7csg2Xqml9Z/IR6IXqExenU41fPqjb5Iqry2TWkBTxJYi6xk
+	c/tki8uoNhUrblJoD7Jbw9s6iyiAkyUZsrlAA0cIVUDo/rVMfob+qBsxZAv7maLffP2J
+	NxxhZTfWzUnxle04gQKrAIT0DWaNaq4cNBTpYm1z6lQey9ITqR4EHOYxNA3dDb5Ipsfq
+	tsyPUF5XgimOn8R8Tr2v3rFlnK5UUM/HeUyJXTJdeIqCGEYmD3qjkXkEEL8JjEbMU4IV
+	OD+eCuvnywDz0z9Xl0pcqPyfCe8Y9kPptBXbgTrd2a5uNb/mg5B67yst+8SCxi8zfff2
+	lPUQ==
 MIME-Version: 1.0
-Received: by 10.220.154.148 with SMTP id o20mr103711967vcw.54.1358206781648;
-	Mon, 14 Jan 2013 15:39:41 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Mon, 14 Jan 2013 15:39:41 -0800 (PST)
-In-Reply-To: <1358188976-14581-1-git-send-email-andrei.gherzan@windriver.com>
-References: <1358188976-14581-1-git-send-email-andrei.gherzan@windriver.com>
-Date: Tue, 15 Jan 2013 00:39:41 +0100
-Message-ID: <CALbNGRS645Gs8Dbb=qHiwxC11LnN5hh404XQ1H9vQ_tQqjzVyA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Received: by 10.50.179.66 with SMTP id de2mr261629igc.59.1358209434926; Mon,
+	14 Jan 2013 16:23:54 -0800 (PST)
+Received: by 10.64.98.163 with HTTP; Mon, 14 Jan 2013 16:23:54 -0800 (PST)
+In-Reply-To: <1358201403-22227-2-git-send-email-hmatrjp@users.sourceforge.jp>
+References: <1358201403-22227-2-git-send-email-hmatrjp@users.sourceforge.jp>
+Date: Tue, 15 Jan 2013 01:23:54 +0100
+Message-ID: <CAAQYJAuoSYreWC6oanAkwW-4Mqv5LsKL+kHr3NhFrKf4t2o7qg@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-systemd][PATCH 1/4] bluez4: Package systemd service
+Subject: Re: [meta-initramfs][PATCH] symbolic link to resource.h is also necessary to build with linux kernel 3.2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2013 23:55:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Jan 2013 00:39:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Jan 14, 2013 at 7:42 PM, Andrei Gherzan
-<andrei.gherzan@windriver.com> wrote:
-> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
+On Mon, Jan 14, 2013 at 11:10 PM, Takeshi Hamasaki
+<hmatrjp@users.sourceforge.jp> wrote:
 > ---
->  .../bluez/bluez4_4.101.bbappend                    |    9 +++++++++
->  1 files changed, 9 insertions(+), 0 deletions(-)
->  create mode 100644 meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
+>  meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
-> new file mode 100644
-> index 0000000..8945a6d
-> --- /dev/null
-> +++ b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
-> @@ -0,0 +1,9 @@
-> +PRINC := "${@int(PRINC) + 1}"
-> +
-> +inherit systemd
-> +
-> +EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
-> +
-> +SYSTEMD_PACKAGES = "${PN}-systemd"
-> +SYSTEMD_SERVICE = "bluetooth.service"
-> +SYSTEMD_AUTO_ENABLE = "disable"
-This is quite interesting: For my first tests I also added the
-'disable' but I could not get bluez start automatically so I decided
-to start it at boot time. Maybe it is related to that I did not yet
-find a way to setup my bluetooth device automatically. It still needs
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
+> index ae43753..8e096d9 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc_1.5.25.bb
+> @@ -1,4 +1,4 @@
+> -PR = "${INC_PR}.0"
+> +PR = "${INC_PR}.1"
+>
+>  export INST = "${D}"
+>
+> @@ -11,6 +11,7 @@ do_compile_prepend() {
+>          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/errno.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/errno.h
+>          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/ioctl.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/ioctl.h
+>          ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/poll.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/poll.h
+> +        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/resource.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/resource.h
+>      fi
+>
+>  }
+> --
+> 1.7.10.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-hciattach ttyO1 csr
+Hi,
 
-Which service starts blues if not enabled?
+you are using an outdated recipe, the issue is already fixed.
+Please update your meta-initramfs layer and you'll get klibc_2.0.2.
 
-Andreas
+Regards
+
+Andrea
 
 
