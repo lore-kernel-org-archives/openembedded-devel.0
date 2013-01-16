@@ -1,38 +1,25 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TvOfk-00068u-0m
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1TvPoD-0008AH-BE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jan 2013 09:49:20 +0100
-Received: by mail-ee0-f49.google.com with SMTP id d4so480880eek.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jan 2013 00:33:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=7AW7iZyOOrNtjbn6ctAFzTbqEkqxifLYNgU9DRBUsYY=;
-	b=hjUBZc7Vc0F47f9We1aM4KfupINF+PnMgGdtKnQrc6w1tU5n8uZoRJVANbmQ3u3yPA
-	00fojNCVOLJ/yvs2wCU1g7JzvLdl3MZmCcWQE25rZqiuecnnYlWenwGfU87jfFVQzL5y
-	s/wOYOON79P6IWkRkJa07AuqEtGk3OuHdecWWq5JYlBYRKV7zuO1YxCJdcuh3Nui9H0J
-	+RMgL3uaukNQbrgN8AQFPsauvExUjLHl4TGmB4uJL6oQvSa0gy63whZvKRpm9/3qaDb1
-	71u6QWITp0GivtGvgDg6CM5lu6WBwkCsRviWAtH7kD1QLAdnvtreZTQ+enHrN1v3s657
-	TDuQ==
-X-Received: by 10.14.206.197 with SMTP id l45mr940958eeo.17.1358325194798;
-	Wed, 16 Jan 2013 00:33:14 -0800 (PST)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id w3sm28613338eel.17.2013.01.16.00.33.13
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 16 Jan 2013 00:33:14 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Jan 2013 09:32:47 +0100
-Message-Id: <1358325167-18862-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1
-In-Reply-To: <1358325167-18862-1-git-send-email-koen@dominion.thruhere.net>
-References: <1358325167-18862-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlxG9wyJJXGWOFZIq3CzxxdFvfr7ZZWZQxHBzMsIWDRQyhzGnxRxx/SNK8n4PSUZ5R1o8ri
-Subject: [meta-oe][meta-gnome][danny][PATCH 3/3] cheese: disable help build
+	Wed, 16 Jan 2013 11:01:26 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 16 Jan 2013 01:46:02 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,478,1355126400"; d="scan'208";a="244542413"
+Received: from unknown (HELO helios.localnet) ([10.252.123.117])
+	by azsmga001.ch.intel.com with ESMTP; 16 Jan 2013 01:46:01 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Date: Wed, 16 Jan 2013 09:46 +0000
+Message-ID: <52248718.Pgypod27o8@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.3 (Linux/3.5.0-21-generic; KDE/4.9.3; i686; ; )
+In-Reply-To: <1358244046-26236-1-git-send-email-ml@communistcode.co.uk>
+References: <1358244046-26236-1-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH v3] hiawatha: update to 8.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +33,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2013 08:49:24 -0000
+X-List-Received-Date: Wed, 16 Jan 2013 10:01:27 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+On Tuesday 15 January 2013 10:00:46 ml@communistcode.co.uk wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> 
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>  .../recipes-httpd/hiawatha/files/xslt-fix.patch    | 71
+> ---------------------- .../hiawatha/{hiawatha_8.6.bb => hiawatha_8.7.bb}  |
+>  9 +--
+>  2 files changed, 3 insertions(+), 77 deletions(-)
+>  delete mode 100644
+> meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch rename
+> meta-webserver/recipes-httpd/hiawatha/{hiawatha_8.6.bb => hiawatha_8.7.bb}
+> (89%)
+> 
+> diff --git a/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+> b/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch deleted file
+> mode 100644
+> index 41bf4cc..0000000
+> --- a/meta-webserver/recipes-httpd/hiawatha/files/xslt-fix.patch
+> +++ /dev/null
+> @@ -1,71 +0,0 @@
+> -Upstream Status: Backport
+> -Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ----
+> - src/xslt.c | 19 +++++++------------
+> - 1 file changed, 7 insertions(+), 12 deletions(-)
+> -
+> -diff --git a/src/xslt.c b/src/xslt.c
+> -index 9d8d31a..58ca52d 100644
+> ---- a/src/xslt.c
+> -+++ b/src/xslt.c
+> -@@ -23,6 +23,7 @@
+> - #include <libxslt/transform.h>
+> - #include <libxslt/xsltutils.h>
+> - #include "libstr.h"
+> -+#include "liblist.h"
+> - #include "send.h"
+> - #include "log.h"
+> - #ifdef ENABLE_TOMAHAWK
+> -@@ -343,10 +344,10 @@ bool can_transform_with_xslt(t_session *session) {
+> - static int apply_xslt_sheet(t_session *session, xmlDocPtr data_xml) {
+> - 	xmlDocPtr style_xml, result_xml;
+> - 	xsltStylesheetPtr xslt;
+> --	xmlOutputBufferPtr output;
+> -+	xmlChar *raw_xml;
+> - 	char value[VALUE_SIZE + 1];
+> - 	const char **params;
+> --	int result = 200;
+> -+	int result = 200, raw_size;
+> -
+> - 	/* Read XML data
+> - 	 */
+> -@@ -396,14 +397,8 @@ static int apply_xslt_sheet(t_session *session,
+> xmlDocPtr data_xml) { - 		xsltFreeStylesheet(xslt);
+> - 		return 500;
+> - 	}
+> --	if ((output = xmlAllocOutputBuffer(NULL)) == NULL) {
+> --		xmlFreeDoc(result_xml);
+> --		xsltFreeStylesheet(xslt);
+> --		return 500;
+> --	}
+> --    if (xsltSaveResultTo(output, result_xml, xslt) == -1) {
+> -+	if (xsltSaveResultToString(&raw_xml, &raw_size, result_xml, xslt) == -1)
+> { - 		log_file_error(session, session->file_on_disk, "transformation
+> error"); --		xmlOutputBufferClose(output);
+> - 		xmlFreeDoc(result_xml);
+> - 		xsltFreeStylesheet(xslt);
+> - 		return 500;
+> -@@ -414,17 +409,17 @@ static int apply_xslt_sheet(t_session *session,
+> xmlDocPtr data_xml) { - 	value[VALUE_SIZE] = '\0';
+> - 	if (send_buffer(session, hs_conlen, 16) == -1) {
+> - 		result = -1;
+> --	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", output->buffer->use)
+> == -1) { -+	} else if (snprintf(value, VALUE_SIZE, "%d\r\n\r\n", raw_size)
+> == -1) { - 		result = -1;
+> - 	} else if (send_buffer(session, value, strlen(value)) == -1) {
+> - 		result = -1;
+> --	} else if (send_buffer(session, (char*)output->buffer->content,
+> output->buffer->use) == -1) { -+	} else if (send_buffer(session,
+> (char*)raw_xml, raw_size) == -1) { - 		result = -1;
+> - 	}
+> -
+> - 	/* Free buffers
+> - 	 */
+> --	xmlOutputBufferClose(output);
+> -+	xmlFree(raw_xml);
+> - 	xmlFreeDoc(result_xml);
+> - 	xsltFreeStylesheet(xslt);
+> -
+> ---
+> -1.8.0.1
+> -
+> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb similarity index
+> 89%
+> rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
+> index d49bcab..d8a0583 100644
+> --- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
+> @@ -4,16 +4,13 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+>  DEPENDS = "libxml2 libxslt"
+> 
+> -PR = "r2"
+> -
+>  SECTION = "net"
+> 
+>  SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+> -           file://hiawatha-init \
+> -           file://xslt-fix.patch "
+> +           file://hiawatha-init "
+> 
+> -SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
+> -SRC_URI[sha256sum] =
+> "1a7fa98ce66beb54fc8490cc787461d719a98cb0e4a81caedfa18ac8b5ba3b3b"
+> +SRC_URI[md5sum] = "712b1822ef525153dc4347417252768d"
+> +SRC_URI[sha256sum] =
+> "c35e1e975962e1105d7914f74901e304ba90681985c94236c113eaca502b5e34"
+> 
+>  inherit cmake update-rc.d
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Merged, thanks. (For some reason I did have to apply the delete of xslt-
+fix.patch by hand though.)
 
-diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-index f447817..1e8a98b 100644
---- a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-+++ b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-@@ -15,3 +15,7 @@ FILES_${PN} += "${datadir}/dbus-1"
- RRECOMMENDS_${PN} = "gst-plugins-good-meta gst-plugins-base-meta"
- 
- EXTRA_OECONF += "--disable-scrollkeeper"
-+
-+do_configure_prepend() {
-+	sed -i -e "s: help : :g" ${S}/Makefile.am
-+}
+Cheers,
+Paul
+
 -- 
-1.8.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
