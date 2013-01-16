@@ -1,32 +1,36 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail-la0-f43.google.com ([209.85.215.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TvSfj-0001VD-3b
+	(envelope-from <gopikrishnans@pec.edu>) id 1TvVRP-0006DY-J0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jan 2013 14:04:54 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so559815dak.6
+	Wed, 16 Jan 2013 17:02:23 +0100
+Received: by mail-la0-f43.google.com with SMTP id eg20so1549294lab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jan 2013 04:49:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=8850P+C5wWO8MWC5V4ZJTmYhCDl/Vqldb2oO6v7QBik=;
-	b=WvJAQGA/YpIRKAGa8C09bJE8J/EdyKcCpKw2Y5ncTuMI627xFrssHmfcsq+YhQma7v
-	ZeqnXApHAnkFjCJju+fCIaE7CSnyH4z18qew4L59Jtsj6TL2tg5lr6x7yVUJepxi+8Sw
-	4lztLPJbXPc6BxIbsXwdmS26Kio1JF58xLLIUltEEOJ81KOE09rskQ24Qq8iGbQkVMcL
-	ZUpje7k1HTPHei78FwlAZfN7nRTb1HlF9Dy+SmsWFCXWs8l0c2VGGzRQY7Qrijkbh3/o
-	TxdhLRovac2GaZukiY4PDv6KYYi9TMBtpnTcwANyxkhRzhCjze6l/M08RnXuZSXt33ai
-	nhGw==
-X-Received: by 10.68.136.132 with SMTP id qa4mr2214580pbb.166.1358340568662;
-	Wed, 16 Jan 2013 04:49:28 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id o5sm12936858paz.32.2013.01.16.04.49.26
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 16 Jan 2013 04:49:27 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 16 Jan 2013 07:46:53 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:x-gm-message-state;
+	bh=OiaOyIG7/6SExPcFd6hCobVy0DvmYFlxIskcps1rho0=;
+	b=iZGTwlVrsmwQfk1bPrIwK2rpHNOEMACwWNcMbxizCGMFMDfMcxbWcBGy4VfFmsGVXG
+	eXWHnkKB3q0vH+w5FfmNqLwN5y6jh9z4klpKttSOmXm9Joe7d0L6kusZSY05ZdNaIL2S
+	7Gvz5Uq4bxBW2TRYfDZbljYWVBBgFuvs/JlNcZuYRpSd6JzlXeWhudkTyoevBJE0RHOE
+	3lenqmhxfss/roK3I7nrj3nEgh0W6z+92aRmVHxKmg4d8h/wKPTRXk7C8jhO/10RPjdi
+	rJCZJRSQCrtMZXyFHpdY0Poiw6mIbr74nz5VEvRUwO2sPC9/J3lsKpzRlpJNddbX3XXm
+	vu9A==
+MIME-Version: 1.0
+X-Received: by 10.112.36.165 with SMTP id r5mr821892lbj.112.1358351213574;
+	Wed, 16 Jan 2013 07:46:53 -0800 (PST)
+Received: by 10.112.89.133 with HTTP; Wed, 16 Jan 2013 07:46:53 -0800 (PST)
+In-Reply-To: <CAP9ODKp4EnstE_iY-4cu2zCTUFP5FFf467NcSWe63K2iFDio-A@mail.gmail.com>
+References: <CAOkC3RY4n66f9LgvWczskaDUn0wPOjBDbDAoKCMo8CjnFWzgSA@mail.gmail.com>
+	<CAP9ODKp4EnstE_iY-4cu2zCTUFP5FFf467NcSWe63K2iFDio-A@mail.gmail.com>
+Date: Wed, 16 Jan 2013 21:16:53 +0530
+Message-ID: <CAOkC3RYXbxd9-Azs+XPEB=MCaXw1Pcz-NXyO1dU-q7UrYmtKeA@mail.gmail.com>
+From: GOPIKRISHNAN S <gopikrishnans@pec.edu>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Jan 2013 13:49:28 +0100
-Message-Id: <1358340568-24870-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.1
-Subject: [PATCH][meta-systemd] meta-systemd: connman: rename bbappend to match 1.10 from oe-core
+X-Gm-Message-State: ALoCoQmQG0lIuRPgPlzlVyAI0BIGmfAQX4J87xuAf1D9I05AAzeeHOzlstEIhQ1HiRl4oKC3lOi6
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Reg: Hiawatha
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,20 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2013 13:04:55 -0000
+X-List-Received-Date: Wed, 16 Jan 2013 16:02:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../connman/{connman_1.4.bbappend => connman_1.10.bbappend}               | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/meta-oe/recipes-connectivity/connman/{connman_1.4.bbappend => connman_1.10.bbappend} (100%)
-
-diff --git a/meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.4.bbappend b/meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.10.bbappend
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.4.bbappend
-rename to meta-systemd/meta-oe/recipes-connectivity/connman/connman_1.10.bbappend
--- 
-1.8.1.1
+Thank you, I am also trying to Identify the problem.
 
 
+On Mon, Jan 7, 2013 at 5:46 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
+
+> On Mon, Jan 7, 2013 at 10:13 AM, GOPIKRISHNAN S <gopikrishnans@pec.edu>
+> wrote:
+> > I am facing strange issue while building Hiawatha for Freescale P2041RDB.
+> >
+> > I am getting some errors while building hiawatha(using recipe from
+> > openembedded). In investigation I found all return \type and parameter
+> type
+> > seems to be same & in all /usr/include/*.h files in declared as extern
+> was
+> > added before to make it visible in global. I wonder no problem was
+> > not raised while compiling for my host platform (Debian 6 on x86), and
+> > getting problem only doing it for my freescale board
+> ...
+>
+> OE has a newer GCC version and GCC has get more strict about those
+> checks so those errors do need to be fixed.
+>
+> If you upgrade your GCC to 4.7 you'll probably find same build errors.
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
