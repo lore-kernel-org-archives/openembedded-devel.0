@@ -1,32 +1,34 @@
-Received: from mail-pb0-f51.google.com ([209.85.160.51])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Tvpci-0004Ob-KI
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TvqJv-0005hn-UN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 14:35:24 +0100
-Received: by mail-pb0-f51.google.com with SMTP id ro12so1393908pbb.38
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2013 05:19:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=7/NjQ1HrtlIL6i9VpSGnbgWgB1yRJc5qEb1/7+/ZVGw=;
-	b=gOIV0Qt0v8zKtK2rkCvCJqBTniK/65K6evAZxcZYEbM0B7mYqL6AWafWTN10TFBHvU
-	cPmxLx6ch0hDrBwDxd0bYA4AZOtwFIQyxaBFwPx0N64AGVgx7uWwmKDndbkPEpQRnPap
-	vb/d1AcAowQOCyUQYbRYgDXgtz711fMEuyNbg3PmnKr3LrpY+au65a0DdsU0UjwnyYTl
-	IoPFLki+rX21XRo0NkiXNFRSJbIcYX453/wFNMR7NwXNsNkIQGfLQDSOuy+d+UfzWv58
-	nyTImf358cOwTOssLedjlMjZCU0eRLd+6Q6ObFVV9Al9dVXg+O1N/dz80fXus7ToeCar
-	pjlA==
-X-Received: by 10.66.90.34 with SMTP id bt2mr10420465pab.29.1358428792850;
-	Thu, 17 Jan 2013 05:19:52 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id wg3sm1075697pbc.28.2013.01.17.05.19.50
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Jan 2013 05:19:51 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Jan 2013 14:19:44 +0100
-Message-Id: <1358428784-30885-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.1
-Subject: [PATCH][meta-gnome] gtk+3: drop recipe, now in oe-core
+	Thu, 17 Jan 2013 15:19:58 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r0HE4W3r007328
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 17 Jan 2013 06:04:32 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Thu, 17 Jan 2013 06:04:31 -0800
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 1315B7FD0;
+	Thu, 17 Jan 2013 09:02:45 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 8339C222A6; Thu,
+	17 Jan 2013 09:04:30 -0500 (EST)
+Date: Thu, 17 Jan 2013 09:04:30 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: yzhu1 <Yanjun.Zhu@windriver.com>
+Message-ID: <20130117140430.GF3921@windriver.com>
+References: <50F76342.80505@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <50F76342.80505@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org, lpd-eng-pull@windriver.com
+Subject: Re: Check in Request for WIND00398740 : autofs_5.0.7 do_compile failed with the msg "#error Failed to locate modprobe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,126 +42,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 13:35:25 -0000
+X-List-Received-Date: Thu, 17 Jan 2013 14:19:58 -0000
+X-Groupsio-MsgNum: 42729
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gdTfX7fkYsEEjebm"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb | 104 ---------------------------
- 1 file changed, 104 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
-
-diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
-deleted file mode 100644
-index ce09615..0000000
---- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
-+++ /dev/null
-@@ -1,104 +0,0 @@
--SUMMARY = "Multi-platform toolkit for creating GUIs"
--DESCRIPTION = "GTK+ is a multi-platform toolkit for creating graphical user interfaces. Offering a complete \
--set of widgets, GTK+ is suitable for projects ranging from small one-off projects to complete application suites."
--HOMEPAGE = "http://www.gtk.org"
--BUGTRACKER = "https://bugzilla.gnome.org/"
--SECTION = "libs"
--
--DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
--           gtk-doc-native docbook-utils-native libxrandr libgcrypt \
--           libxdamage libxrender libxcomposite libxi cairo gdk-pixbuf gtk+-native"
--
--LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
--                    file://gtk/gtk.h;endline=25;md5=1d8dc0fccdbfa26287a271dce88af737 \
--                    file://gdk/gdk.h;endline=25;md5=c920ce39dc88c6f06d3e7c50e08086f2 \
--                    file://tests/testgtk.c;endline=25;md5=cb732daee1d82af7a2bf953cf3cf26f1"
--
--SRC_URI = "http://download.gnome.org/sources/gtk+/3.4/gtk+-${PV}.tar.xz \
--"
--
--SRC_URI[md5sum] = "1b2cf29502a6394e8d4b30f7f5bb9131"
--SRC_URI[sha256sum] = "f154e460075034da4c0ce89c320025dcd459da2a1fdf32d92a09522eaca242c7"
--
--PR = "r0"
--
--inherit autotools pkgconfig
--
--S = "${WORKDIR}/gtk+-${PV}"
--
--# Make it parallel installable with gtk+ 2.x
--# The helper apps like gtk-update-iconcache won't get built here
--EXTRA_OECONF += " \
--                 --enable-gtk2-dependency \
--                 --disable-glibtest \
--                 --enable-modules \
--                 --disable-cups \
--"
--
--# Make a symlink to our libtool
--do_configure_prepend() {
--	ln -s ${TARGET_PREFIX}libtool libtool || true
--}
--
--PACKAGES =+ "${PN}-demo"
--LIBV = "3.0.0"
--
--FILES_${PN}-demo = "${bindir}/gtk3-demo \
--                    ${datadir}/gtk-3.0/demo \
--                    ${bindir}/gtk3-demo-application \
--                    ${bindir}/gtk3-widget-factory \
--"
--
--FILES_${PN} = "${bindir}/gtk-update-icon-cache \
--               ${bindir}/gtk-query-immodules-3.0 \
--               ${libdir}/lib*${SOLIBS} \
--               ${datadir}/themes ${sysconfdir} ${datadir}/glib-2.0/schemas/ \
--               ${datadir}/gtk-3.0/gtkbuilder.rng \
--               ${libdir}/gtk-3.0/${LIBV}/engines/libpixmap.so \
--               ${libdir}/gtk-3.0/modules/*.so"
--
--FILES_${PN}-dev += " \
--                    ${datadir}/gtk-3.0/include \
--                    ${libdir}/gtk-3.0/include \
--                    ${libdir}/gtk-3.0/${LIBV}/loaders/*.la \
--                    ${libdir}/gtk-3.0/${LIBV}/immodules/*.la \
--                    ${libdir}/gtk-3.0/3.0.0/printbackends/*.la \
--                    ${libdir}/gtk-3.0/${LIBV}/engines/*.la \
--                    ${libdir}/gtk-3.0/modules/*.la \
--                    ${bindir}/gtk-builder-convert"
--
--FILES_${PN}-dbg += " \
--                    ${libdir}/gtk-3.0/${LIBV}/loaders/.debug \
--                    ${libdir}/gtk-3.0/${LIBV}/immodules/.debug \
--                    ${libdir}/gtk-3.0/${LIBV}/engines/.debug \
--                    ${libdir}/gtk-3.0/${LIBV}/printbackends/.debug \
--                    ${libdir}/gtk-3.0/modules/.debug"
--
--
--PACKAGES_DYNAMIC += "^gtk3-immodule-.* ^gtk3-printbackend-.*"
--
--python populate_packages_prepend () {
--    import os.path
--
--    prologue = d.getVar("postinst_prologue", 1)
--
--    gtk_libdir = d.expand('${libdir}/gtk-3.0/${LIBV}')
--    immodules_root = os.path.join(gtk_libdir, 'immodules')
--    printmodules_root = os.path.join(gtk_libdir, 'printbackends');
--
--    do_split_packages(d, immodules_root, '^im-(.*)\.so$', 'gtk3-immodule-%s', 'GTK input module for %s', prologue + 'gtk-query-immodules-3.0 > /etc/gtk-3.0/gtk.immodules')
--    do_split_packages(d, printmodules_root, '^libprintbackend-(.*)\.so$', 'gtk3-printbackend-%s', 'GTK printbackend module for %s')
--
--    if (d.getVar('DEBIAN_NAMES', 1)):
--        d.setVar('PKG_${PN}', 'libgtk-3.0')
--}
--
--postinst_prologue() {
--if [ "x$D" != "x" ]; then
--  exit 1
--fi
--
--}
--
--- 
-1.8.1.1
+--gdTfX7fkYsEEjebm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
 
+[Check in Request for WIND00398740 : autofs_5.0.7 do_compile failed with th=
+e msg "#error Failed to locate modprobe] On 13.01.17 (Thu 10:34) yzhu1 wrot=
+e:
 
+> Hi, JoeM
+>=20
+> GK && TK is OK.
+>=20
+> Please check it this patch. The patch is in the attachment. Please check =
+it.
+>=20
+> Thanks a lot.
+> Zhu Yanjun
+
+Hi Yanjun,
+
+There's a few hiccups with this one.
+
+   - the patch appears to be against meta-networking, not
+     meta-openembedded.  I can work with that, but nothing should be
+     committed to meta-networking, that's purely my own side-project and
+     everything going to it needs to come through commits in
+     meta-openembedded.
+
+
+   - the commit log includes a reference to an internal bug tracking
+     ID, that won't mean anything to anyone outside of Wind River (or to
+     most inside :-)).
+
+   - you copied an internal WR mailing list on this, which I think ends
+     up with bounces to anyone who replies and isn't inside WR.
+
+   - you should try to ensure your patches follow the OE guidelines, in
+     particular with an upstream-status line, not all patches in the
+     tree have them, but it's nice if we can stay on top of them.
+
+   - the submission didn't follow the standard guidelines for patches.
+
+There's a recipe in the meta-networking layer (it's basically the same
+as all the other meta-openembedded layers) that describes how to easily
+send patches to the list in a way that ensures the machinery recognizes
+it and that anyone can work with it.  It's here:
+
+   meta-openembedded/
+      meta-networking/
+         MAINTAINERS
+
+Something like this will help next time around:
+
+   git send-email -1 \
+        --to openembedded-devel@lists.openembedded.org \
+        --subject-prefix=3Dmeta-networking][PATCH
+
+Since this is a straight back-port of an upstream patch, I don't expect
+it to be a big deal, so I've updated your commit log and the patch
+header with the information from the link you quoted above.  Mainly just
+FYI for the next time.
+
+Thanks.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--gdTfX7fkYsEEjebm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlD4BO4ACgkQPN8S4W6ZZncENQCeIRlJiL8/OOD2cG1cITqfo4NL
+B/IAmgPbA2wVyg1Oo9GcaUS9Wt87Wuvy
+=ONRv
+-----END PGP SIGNATURE-----
+
+--gdTfX7fkYsEEjebm--
