@@ -1,34 +1,36 @@
-Received: from mail-bk0-f54.google.com ([209.85.214.54])
+Received: from mail-pb0-f50.google.com ([209.85.160.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1TvmNo-0002dk-0P
+	(envelope-from <martin.jansa@gmail.com>) id 1Tvp8u-0003Rc-DR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 11:07:40 +0100
-Received: by mail-bk0-f54.google.com with SMTP id je9so1235743bkc.13
+	Thu, 17 Jan 2013 14:04:33 +0100
+Received: by mail-pb0-f50.google.com with SMTP id wz7so1386041pbc.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2013 01:52:17 -0800 (PST)
+	Thu, 17 Jan 2013 04:49:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=jQTECr0X9ugXfAA7l8NhqFGY6K544dzeY2Vd5JMXwY4=;
-	b=MEw7uhgNWQN62X32jCt5tFLqHmdzR8FKL+Yrla5M/OJFIogZ5v0vUxNCEp9nfuyIJr
-	yjYwGSkZsxTiVbeYbndnskY4I5OdxUOHe0f25iNu4p68TSF04/jEIwP/7V3LXrU7fN+j
-	xOCBYbm6z7f4ZGYLnxy2KsRTzpmEYk7bwR93CXkXXj/L3JpSTXDWop7kviziwXGwagkp
-	v4uwuLu1Y9Z1nLE7g7I47SuwYXynLEhtNOa/O8pI9Tn21DalNJDog8H38Uqnn80x7LSv
-	AGv8XKa9co3BofqYmeOmpG8dbkBj4bwmTZXTkBQK1cjRNTrYNfJkfMr8HeweOokmbzW9
-	WCPQ==
-X-Received: by 10.204.4.145 with SMTP id 17mr1356870bkr.34.1358416337071; Thu,
-	17 Jan 2013 01:52:17 -0800 (PST)
-MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.205.102.72 with HTTP; Thu, 17 Jan 2013 01:51:56 -0800 (PST)
-In-Reply-To: <004501cdf45e$f5c87270$e1595750$@slingshot.co.nz>
-References: <004501cdf45e$f5c87270$e1595750$@slingshot.co.nz>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Thu, 17 Jan 2013 18:51:56 +0900
-X-Google-Sender-Auth: TqFGwTGzKS9c40IG_ykoDYV5SQY
-Message-ID: <CAPESJy6EW3NyWBba=hn7ino2jhnVcA7B-6rLT3NFTGjt3pvekA@mail.gmail.com>
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=wqFMg8KZPAERP+YOvJtk7YMmiMh46dru9mPx0ITGqB0=;
+	b=VfbVglIGJsyxZ6M/B5Px75DaQaShZwnYvgw+G0U5LQr9UFFADNy/91fAlf2UrcV46M
+	gele/nuTdwj3hPFTZPd6qLdW9ZWxzL53Qu9NhFexW51LYiTz+FGCyL97mDmfgc8R4J9X
+	1DHdZvXvvf6wG854KRP1rHNkDRFlQv4Z7DwjPMh6CS2UdAWP2AnoGRhzMrSEXth+r50Z
+	eEAFYVqu9Rxoa7H86Rh7LDFP3KfNSoVqI0AqXAvKBOjBeD7bM3P3TIc2ehWKvCaCwzx+
+	VB8/wHDYOF4eykOFrVXbzS5jtuVk/WiRT72eTJEbD2TS5Jn0In4zPM9EYNaNsZJ4cfsq
+	vwVQ==
+X-Received: by 10.68.228.102 with SMTP id sh6mr13219358pbc.91.1358426944716;
+	Thu, 17 Jan 2013 04:49:04 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id oj1sm1037065pbb.19.2013.01.17.04.49.02
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 17 Jan 2013 04:49:03 -0800 (PST)
+Date: Thu, 17 Jan 2013 13:48:58 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Angstrom build failure
+Message-ID: <20130117124858.GF3067@jama>
+References: <1358377712-18666-1-git-send-email-colin.foeparker@aclimalabs.com>
+MIME-Version: 1.0
+In-Reply-To: <1358377712-18666-1-git-send-email-colin.foeparker@aclimalabs.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] META-OE: DENZIL Branch: SSVB-CPUBURN-A8: MD5SUM and SHA256SUM don't match source.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,91 +44,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 10:07:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Jan 2013 13:04:43 -0000
+X-Groupsio-MsgNum: 42725
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Mjqg7Yu+0hL22rav"
+Content-Disposition: inline
 
-Hi,
+--Mjqg7Yu+0hL22rav
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Do you want systemd and udev to be build same time?
-I'm not sure it is same problem or not,
-I've read some thread about confliction between systemd and udev.
-http://comments.gmane.org/gmane.comp.handhelds.openembedded/55775
+On Wed, Jan 16, 2013 at 03:08:30PM -0800, Colin Foe-Parker wrote:
+> Updated the md5sum and sha256sum for the ssvb-cpuburn-a8.S file
 
-adding a line
-PREFERRED_PROVIDER_udev = "systemd"
-in conf/local.conf helped me to go to next step.
+Please read README how commit subject should look like.
 
-Regards,
--- 
-Takeshi Hamasaki
+Or just see other examples.
 
-2013/1/17 R U Local <roystonvasey@slingshot.co.nz>:
-> Dear All,
-> I'm getting the following failure building an Angstrom image.
->
-> | checking for UDEV... no
-> | configure: error: Package requirements ( libudev >= 172 ) were not met:
-> |
-> | No package 'libudev' found
-> |
-> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> | installed software in a non-standard prefix.
-> |
-> | Alternatively, you may set the environment variables UDEV_CFLAGS
-> | and UDEV_LIBS to avoid the need to call pkg-config.
-> | See the pkg-config man page for more details.
-> | ERROR: oe_runconf failed
-> NOTE: package systemd-git-r28: task do_configure: Failed
-> ERROR: Task 518
-> (/home/service/oe/sources/meta-openembedded/meta-oe/recipes-core/systemd/sys
-> temd_git.bb, do_configure) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 2549 tasks of which 2548 didn't need to be
-> rerun and 1 failed.
->
-> My build environment is:
-> OE Build Configuration:
-> BB_VERSION        = "1.15.2"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "pandaboard"
-> DISTRO            = "angstrom"
-> DISTRO_VERSION    = "v2012.05"
-> TUNE_FEATURES     = "armv7a vfp neon cortexa9"
-> TARGET_FPU        = "vfp-neon"
-> meta-angstrom     =
-> "angstrom-v2012.05-yocto1.2:6a2febed13f179c042c2371b2e86286c80c0df5e"
-> meta-oe
-> toolchain-layer
-> meta-efl
-> meta-gpe
-> meta-gnome
-> meta-xfce
-> meta-initramfs    = "denzil:c0117f5ad7d1fe18d149bda426c7134ff24daae8"
-> meta-opie         = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
-> meta-java         = "master:3386ea6c96096f107f43f282f654e5afa456109e"
-> meta-browser      = "master:c47f59df2e723495679c751cbdf6a8c6adec4b6a"
-> meta-mono         = "master:83f8233b0498aadb18bf7605c3ba6c71d9e13a3a"
-> meta-kde          = "master:5b0882d951cfd71886d423c190faaa7c7f932333"
-> meta-ti           = "denzil:95e9cf6299f5bae6965fe6fc4abe3eeb631df196"
-> meta-efikamx      = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
-> meta-nslu2        = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
-> meta-htc
-> meta-nokia
-> meta-openmoko
-> meta-palm         = "master:2b106be01228f64298d6cb338f93088806594344"
-> meta-handheld     = "master:1f05a15aceb4c3a19fa070463b58125b5658b2a9"
-> meta-raspberrypi  = "denzil:34eef2ea4f5f24630dbb73b386861430167b8431"
-> meta-intel
-> meta-sugarbay
-> meta-crownbay
-> meta-emenlow
-> meta-fishriver
-> meta-fri2
-> meta-jasperforest
-> meta-n450         = "master:f75f9b6f68473eb0efac802409608f8389be0030"
-> meta              = "denzil:0a9e8bf35afd5990c1b586bba5eb68f643458a4b"
->
->
-> Any pointers would be appreciated.
+Change to denzil needs to be in master/danny first (if it isn't already)
 
+Change of checksum should be explained in commit message and also
+include diff between old and new version.
 
+Cheers,
+=20
+> Signed-off-by: Colin Foe-Parker <colin.foeparker@aclimalabs.com>
+> ---
+>  meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb b/meta-oe/=
+recipes-benchmark/cpuburn/cpuburn-neon.bb
+> index bb9ca1c..68833e6 100644
+> --- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
+> +++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
+> @@ -13,8 +13,8 @@ SRC_URI =3D "http://hardwarebug.org/files/burn.S;name=
+=3Dmru \
+>             http://github.com/downloads/ssvb/ssvb.github.com/ssvb-cpuburn=
+-a8.S;name=3Dssvb"
+>  SRC_URI[mru.md5sum] =3D "823abc72c2cd448e87df9bc5355a4456"
+>  SRC_URI[mru.sha256sum] =3D "01d9fc04f83740c513c25401dcc89c11b2a5a6013e70=
+bfca42b7b02129f88cd2"
+> -SRC_URI[ssvb.md5sum] =3D "f1af41dcd56e4f0f7e92b67109dc01ed"
+> -SRC_URI[ssvb.sha256sum] =3D "95e2267a684be0d848dd6f935e769fa3ed810274eba=
+cddc3fe8ddac4b34838c2"
+> +SRC_URI[ssvb.md5sum] =3D "0acc570d943c41c7f8602b9ff6fa111d"
+> +SRC_URI[ssvb.sha256sum] =3D "bfddd3226a499ffdf71bb58c05ccdc6dac5bb2c2c3b=
+db10ac610ee0b60aac087"
+> =20
+>  S =3D "${WORKDIR}"
+> =20
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Mjqg7Yu+0hL22rav
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlD38zoACgkQN1Ujt2V2gBwLAACfSWEUdUalYkNKzarBnprbyFVp
+bqEAoIsdfI7ONdUrhwI3QWKng0fwZjgy
+=SGsB
+-----END PGP SIGNATURE-----
+
+--Mjqg7Yu+0hL22rav--
