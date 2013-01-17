@@ -1,40 +1,40 @@
-Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
+Received: from mail-da0-f44.google.com ([209.85.210.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1TvtuJ-0005yG-IK
+	(envelope-from <martin.jansa@gmail.com>) id 1TvwoG-0002GP-KP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 19:10:14 +0100
-Received: from mail-bk0-f70.google.com ([209.85.214.70])
-	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 17 Jan 2013 09:54:18 -0800
-Received: by mail-bk0-f70.google.com with SMTP id jc3so3119828bkc.5
+	Thu, 17 Jan 2013 22:15:47 +0100
+Received: by mail-da0-f44.google.com with SMTP id z20so1287102dae.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2013 09:54:16 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=6BqOd9rGPY2nG3Oi43GhzS4FdPT3sLCtk+wygkBMU1c=;
-	b=F6Oe3+oG2LtR11awHDvj9V3ldwZ4xw6RsfqIm7VeYIIProIaTnCnEcPOQo9LMwdYTs
-	XFcpwQ6NQE5/jZ1UBfQhE2kGXoDp7e03LZAk4pUaVvxNBNnDogi9AD4VledFrsbbb9M/
-	4R/VQzVMjVUkxCJ8OIlJyi/QuHfliUZkeipi6SXIfSX8XA+MHXoUOyRXfzwE8zaqGFWi
-	E0GOv/bu0xzjN+KLdi97Oofa0eF0e2xcaQuVewpS1lmvAL6IWOR78NC4EeJpQCQHx8mk
-	0K+yT1ixkU1fY31GZrBSgUE2U+fxCys5SwYZp/2iF5FufHf+btmxDbgdpDxM863nC500
-	7noA==
-X-Received: by 10.180.85.165 with SMTP id i5mr9667689wiz.11.1358445256632;
-	Thu, 17 Jan 2013 09:54:16 -0800 (PST)
-X-Received: by 10.180.85.165 with SMTP id i5mr9667592wiz.11.1358445255377;
-	Thu, 17 Jan 2013 09:54:15 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id bd7sm3349462wib.8.2013.01.17.09.54.13
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Jan 2013 09:54:14 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Thu, 17 Jan 2013 13:00:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=1qR8hWRl7gge7MJOGWH00su05U9jdXjGwRjfNf+YN6M=;
+	b=KKYdAvsTo3rQ+aNXRtls1T2nA2TSWkgIGGVUG1rs290oLYIscwioXIQX4oXYadebey
+	ucNe6c7tAZ2Ap7cz4Vo8CXadf9cYq+rXzWVsjUax9nDO+U4BDw5vZX9xPHc1VBDL7UeT
+	8zzWn3RkxOENb3KhqRZg9V0EwPIVhEVPN4XKiNg7Ii76RRvKfzJodVglCc+JKPDv4MtM
+	CU0VLaj+WyOzlYkBvg+nYb7KJ+352Cn8GqmA7UjliL9rfAedoH7tdeqs6jRoxY4mN3My
+	o27rlCGSlwzwkNc1eXhuUd43Ymp5Tuj6Yx4g9xmzmfvYoiKahTjVNjtcQiqt7633aXxG
+	WQ/A==
+X-Received: by 10.66.76.194 with SMTP id m2mr17088809paw.14.1358456416234;
+	Thu, 17 Jan 2013 13:00:16 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id o5sm1957318pay.5.2013.01.17.13.00.13
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 17 Jan 2013 13:00:15 -0800 (PST)
+Date: Thu, 17 Jan 2013 22:00:09 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Jan 2013 17:52:12 +0000
-Message-Id: <1358445132-13498-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-X-Gm-Message-State: ALoCoQnPZn1HpVvNiBCcyK14Hbg6/BW8ibpAJbWSojwiNXqeSKAnMwDUbigLNrC1Bb/iQWV9RtDgKTcV4eiKXjA2OOYkj1+wXPHaY4LjbgxlGLEiHxPOiv9JtIN8EFWQyJW75wTFg8DbZJZ6ojqOLSHae055S5jLKCPy74EZ563yDxMHow1hlPTnH/WUk34KRfjoDU4eMca8
-Cc: Wayne Tams <wayne.tams@simpleaudio.com>
-Subject: [meta-multimedia][PATCH] gst-rtsp: add GStreamer RTSP server/library
+Message-ID: <20130117210009.GM3067@jama>
+References: <1356124984-19927-1-git-send-email-morgan.little@windriver.com>
+	<CA+chaQc+bcUof-4h9qc=SPUK5eTe4sRiNLXp774U_m-Vv=ozKg@mail.gmail.com>
+	<FCBA1E696337B442ADB5A7C30428F068BD84E8@ALA-MBA.corp.ad.wrs.com>
+	<20130109142224.GP3722@jama.palm1.palmone.com>
+	<20130109144237.GB5259@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <20130109144237.GB5259@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] traceroute: Remove bashisms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,82 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 18:10:14 -0000
+X-List-Received-Date: Thu, 17 Jan 2013 21:15:51 -0000
+X-Groupsio-MsgNum: 42733
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+ARLBH93C7pgvpZY"
+Content-Disposition: inline
 
-From: Wayne Tams <wayne.tams@simpleaudio.com>
+--+ARLBH93C7pgvpZY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- ...ecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch |   34 ++++++++++++++++++++
- .../gstreamer/gst-rtsp_0.10.8.bb                   |   16 +++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
+On Wed, Jan 09, 2013 at 09:42:37AM -0500, Joe MacDonald wrote:
+> [Re: [oe] [meta-networking][PATCH] traceroute: Remove bashisms] On 13.01.=
+09 (Wed 15:22) Martin Jansa wrote:
+>=20
+> > On Fri, Dec 21, 2012 at 10:02:28PM +0000, Little, Morgan wrote:
+> > > On 12/21/2012 04:37 PM, Martin Jansa wrote:
+> > > > On Fri, Dec 21, 2012 at 10:23 PM, Morgan Little
+> > > > <morgan.little@windriver.com> wrote:
+> > > >> Signed-off-by: Morgan Little <morgan.little@windriver.com>
+> > > >> ---
+> > > >>  meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb |=
+ 6 ++----
+> > > >>  1 file changed, 2 insertions(+), 4 deletions(-)
+> > > >>
+> > > >> diff --git a/meta-networking/recipes-support/traceroute/traceroute=
+_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+> > > >> index 719d9fb..d855c67 100644
+> > > >> --- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18=
+=2Ebb
+> > > >> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18=
+=2Ebb
+> > > >> @@ -32,10 +32,8 @@ do_install() {
+> > > >>
+> > > >>      install -d ${D}${mandir}
+> > > >>      install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
+> > > >> -    pushd ${D}${mandir}
+> > > >> -    ln -s ${PN}.8 ${PN}6.8
+> > > >> -    ln -s ${PN}.8 tcptraceroute.8
+> > > >> -    popd
+> > > >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}${PN}6.8
+> > > >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}tcptraceroute.8
+> > > >
+> > > > Thanks for quick reply and fix, but I think this should be:
+> > > >> +    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
+> > > >> +    ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
+> > > >
+> > > > ${D} path won't be valid on target and missing slash after mandir
+> > > It looks like it should be. Thank you for noticing that.
+> > > >
+> > > > And is there something referencing those man pages with different
+> > > > name? Or why are those symlinks provided?
+> > > I provided them because I was basing the do_install step off of the .=
+spec file the Fedora uses in their RPM file. It does a similar symlink step=
+=2E I believe that is can be removed.
+> >=20
+> > ping :)
+>=20
+> I think this belongs to me to finish up now.  I plan to remove them.
+> I've kept the thread in my inbox so hopefully I can cover all the
+> comments on it.
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
-new file mode 100644
-index 0000000..3afca4e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
-@@ -0,0 +1,34 @@
-+index gst-rtsp_0.10.8/bindings/python/Makefile.am
-+--- gst-rtsp_0.10.8.orig/bindings/python/Makefile.am
-++++ gst-rtsp_0.10.8/bindings/python/Makefile.am
-+@@ -14,7 +14,7 @@ defs_DATA = $(DEFS)
-+ defsdir = $(pkgdatadir)/$(GST_MAJORMINOR)/defs
-+ OVERRIDES = rtspserver.override
-+
-+-INCLUDES = -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
-+
-+ rtspserver_la_CFLAGS = -I$(top_srcdir)/src \
-+         $(PYGOBJECT_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
-+index gst-rtsp_0.10.8/examples/Makefile.am
-+--- gst-rtsp_0.10.8.orig/examples/Makefile.am
-++++ gst-rtsp_0.10.8/examples/Makefile.am
-+@@ -1,6 +1,6 @@
-+ noinst_PROGRAMS = test-video test-ogg test-mp4 test-readme test-launch test-sdp test-uri test-auth
-+
-+-INCLUDES = -I$(top_srcdir) -I$(srcdir)
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir)
-+
-+ AM_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
-+ AM_LDFLAGS = \
-+index gst-rtsp_0.10.8/tests/Makefile.am
-+--- gst-rtsp_0.10.8.orig/tests/Makefile.am
-++++ gst-rtsp_0.10.8/tests/Makefile.am
-+@@ -1,6 +1,6 @@
-+ noinst_PROGRAMS = test-cleanup
-+
-+-INCLUDES = -I$(top_srcdir) -I$(srcdir)
-++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir)
-+
-+ AM_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
-+ AM_LDFLAGS = \
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
-new file mode 100644
-index 0000000..40872f5
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "GStreamer RTSP server"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
-+
-+SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2 \
-+           file://0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch"
-+SRC_URI[md5sum] = "b511af07000595f63c3a705946221643"
-+SRC_URI[sha256sum] = "9915887cf8515bda87462c69738646afb715b597613edc7340477ccab63a6617"
-+
-+DEPENDS = "gst-plugins-base gstreamer"
-+
-+# Configure always checks for Python so inherit pythonnative. Better solution
-+# would be to disable the checks entirely.
-+inherit autotools pythonnative gettext
-+
-+FILES_${PN}-dev += "${datadir}/vala/vapi/"
--- 
-1.7.10.4
+ping2 :)
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--+ARLBH93C7pgvpZY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlD4ZlkACgkQN1Ujt2V2gBzN2ACghGtyErmOQCzj3UlqTOHTK+cX
+RSoAn0jRf5c57yRY5Oq21WwCm6YjclPe
+=+jWM
+-----END PGP SIGNATURE-----
+
+--+ARLBH93C7pgvpZY--
