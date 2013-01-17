@@ -1,38 +1,32 @@
-Received: from mail-pa0-f50.google.com ([209.85.220.50])
+Received: from mail-pb0-f51.google.com ([209.85.160.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TvpJs-0003xF-S5
+	(envelope-from <martin.jansa@gmail.com>) id 1Tvpci-0004Ob-KI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 14:15:49 +0100
-Received: by mail-pa0-f50.google.com with SMTP id hz10so1461456pad.37
+	Thu, 17 Jan 2013 14:35:24 +0100
+Received: by mail-pb0-f51.google.com with SMTP id ro12so1393908pbb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2013 05:00:25 -0800 (PST)
+	Thu, 17 Jan 2013 05:19:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=MShaYJixiPEGwM7Pg4BtzWJ+p2r4O47+Yrg5oIoPdDs=;
-	b=J2qF+56HLDfvA0yzpX70a96glhaiRJlMrRvr4dXrV0VvImiq9rYlneknzvIJy9rrYl
-	+1VdDxAQrpgTAGuE6V7oux2g0+XT11GdVbFlyV+E31HfSTsYUOWsqI2q0Sy4XQoBqSO6
-	t2kRz4oqQFrpPiGm2yGOlNEsYqU2GU5P1+jFga0jYsKnX04xpMSDIdUDi5AGQ6t5Xvv4
-	NB5jA3ktiyPPRVLb4d9aoBauw/o+11oEAixGKYuEr34V7AxQAtv/fgCqaz8SNmhY/cCn
-	k1DOztgj8rdUbA7Jh+MzjtCGyC4fk1WImcrXGAYIWJTlcKAagWflDP9v/7JZJoPTSHzc
-	tU0g==
-X-Received: by 10.68.231.40 with SMTP id td8mr13169544pbc.48.1358427625195;
-	Thu, 17 Jan 2013 05:00:25 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=7/NjQ1HrtlIL6i9VpSGnbgWgB1yRJc5qEb1/7+/ZVGw=;
+	b=gOIV0Qt0v8zKtK2rkCvCJqBTniK/65K6evAZxcZYEbM0B7mYqL6AWafWTN10TFBHvU
+	cPmxLx6ch0hDrBwDxd0bYA4AZOtwFIQyxaBFwPx0N64AGVgx7uWwmKDndbkPEpQRnPap
+	vb/d1AcAowQOCyUQYbRYgDXgtz711fMEuyNbg3PmnKr3LrpY+au65a0DdsU0UjwnyYTl
+	IoPFLki+rX21XRo0NkiXNFRSJbIcYX453/wFNMR7NwXNsNkIQGfLQDSOuy+d+UfzWv58
+	nyTImf358cOwTOssLedjlMjZCU0eRLd+6Q6ObFVV9Al9dVXg+O1N/dz80fXus7ToeCar
+	pjlA==
+X-Received: by 10.66.90.34 with SMTP id bt2mr10420465pab.29.1358428792850;
+	Thu, 17 Jan 2013 05:19:52 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id is3sm1055883pbc.6.2013.01.17.05.00.22
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 17 Jan 2013 05:00:24 -0800 (PST)
-Date: Thu, 17 Jan 2013 14:00:19 +0100
+	by mx.google.com with ESMTPS id wg3sm1075697pbc.28.2013.01.17.05.19.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 17 Jan 2013 05:19:51 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130117130019.GH3067@jama>
-References: <1358188976-14581-1-git-send-email-andrei.gherzan@windriver.com>
-	<CALbNGRS645Gs8Dbb=qHiwxC11LnN5hh404XQ1H9vQ_tQqjzVyA@mail.gmail.com>
-	<CALbNGRSMqRuuLUioaMbv9zeBAkVD0haCLy17_bFb5iH1R9WT1w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRSMqRuuLUioaMbv9zeBAkVD0haCLy17_bFb5iH1R9WT1w@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-systemd][PATCH 1/4] bluez4: Package systemd service
+Date: Thu, 17 Jan 2013 14:19:44 +0100
+Message-Id: <1358428784-30885-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.1
+Subject: [PATCH][meta-gnome] gtk+3: drop recipe, now in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,62 +40,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 13:15:49 -0000
-X-Groupsio-MsgNum: 42727
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OpLPJvDmhXTZE4Lg"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Jan 2013 13:35:25 -0000
 
---OpLPJvDmhXTZE4Lg
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb | 104 ---------------------------
+ 1 file changed, 104 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
 
-On Wed, Jan 16, 2013 at 05:56:00PM +0100, Andreas M=FCller wrote:
-> On Tue, Jan 15, 2013 at 12:39 AM, Andreas M=FCller
-> <schnitzeltony@googlemail.com> wrote:
-> >> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> > This is quite interesting: For my first tests I also added the
-> > 'disable' but I could not get bluez start automatically so I decided
-> > to start it at boot time. Maybe it is related to that I did not yet
-> > find a way to setup my bluetooth device automatically. It still needs
-> >
-> > hciattach ttyO1 csr
-> >
-> > Which service starts blues if not enabled?
-> >
-> > Andreas
-> I finally have an idea how blues service is started automatically. So
->=20
-> SYSTEMD_AUTO_ENABLE =3D "disable"
->=20
-> is the better default. Therefore
+diff --git a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb b/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
+deleted file mode 100644
+index ce09615..0000000
+--- a/meta-gnome/recipes-gnome/gtk+/gtk+3_3.4.4.bb
++++ /dev/null
+@@ -1,104 +0,0 @@
+-SUMMARY = "Multi-platform toolkit for creating GUIs"
+-DESCRIPTION = "GTK+ is a multi-platform toolkit for creating graphical user interfaces. Offering a complete \
+-set of widgets, GTK+ is suitable for projects ranging from small one-off projects to complete application suites."
+-HOMEPAGE = "http://www.gtk.org"
+-BUGTRACKER = "https://bugzilla.gnome.org/"
+-SECTION = "libs"
+-
+-DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
+-           gtk-doc-native docbook-utils-native libxrandr libgcrypt \
+-           libxdamage libxrender libxcomposite libxi cairo gdk-pixbuf gtk+-native"
+-
+-LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+-                    file://gtk/gtk.h;endline=25;md5=1d8dc0fccdbfa26287a271dce88af737 \
+-                    file://gdk/gdk.h;endline=25;md5=c920ce39dc88c6f06d3e7c50e08086f2 \
+-                    file://tests/testgtk.c;endline=25;md5=cb732daee1d82af7a2bf953cf3cf26f1"
+-
+-SRC_URI = "http://download.gnome.org/sources/gtk+/3.4/gtk+-${PV}.tar.xz \
+-"
+-
+-SRC_URI[md5sum] = "1b2cf29502a6394e8d4b30f7f5bb9131"
+-SRC_URI[sha256sum] = "f154e460075034da4c0ce89c320025dcd459da2a1fdf32d92a09522eaca242c7"
+-
+-PR = "r0"
+-
+-inherit autotools pkgconfig
+-
+-S = "${WORKDIR}/gtk+-${PV}"
+-
+-# Make it parallel installable with gtk+ 2.x
+-# The helper apps like gtk-update-iconcache won't get built here
+-EXTRA_OECONF += " \
+-                 --enable-gtk2-dependency \
+-                 --disable-glibtest \
+-                 --enable-modules \
+-                 --disable-cups \
+-"
+-
+-# Make a symlink to our libtool
+-do_configure_prepend() {
+-	ln -s ${TARGET_PREFIX}libtool libtool || true
+-}
+-
+-PACKAGES =+ "${PN}-demo"
+-LIBV = "3.0.0"
+-
+-FILES_${PN}-demo = "${bindir}/gtk3-demo \
+-                    ${datadir}/gtk-3.0/demo \
+-                    ${bindir}/gtk3-demo-application \
+-                    ${bindir}/gtk3-widget-factory \
+-"
+-
+-FILES_${PN} = "${bindir}/gtk-update-icon-cache \
+-               ${bindir}/gtk-query-immodules-3.0 \
+-               ${libdir}/lib*${SOLIBS} \
+-               ${datadir}/themes ${sysconfdir} ${datadir}/glib-2.0/schemas/ \
+-               ${datadir}/gtk-3.0/gtkbuilder.rng \
+-               ${libdir}/gtk-3.0/${LIBV}/engines/libpixmap.so \
+-               ${libdir}/gtk-3.0/modules/*.so"
+-
+-FILES_${PN}-dev += " \
+-                    ${datadir}/gtk-3.0/include \
+-                    ${libdir}/gtk-3.0/include \
+-                    ${libdir}/gtk-3.0/${LIBV}/loaders/*.la \
+-                    ${libdir}/gtk-3.0/${LIBV}/immodules/*.la \
+-                    ${libdir}/gtk-3.0/3.0.0/printbackends/*.la \
+-                    ${libdir}/gtk-3.0/${LIBV}/engines/*.la \
+-                    ${libdir}/gtk-3.0/modules/*.la \
+-                    ${bindir}/gtk-builder-convert"
+-
+-FILES_${PN}-dbg += " \
+-                    ${libdir}/gtk-3.0/${LIBV}/loaders/.debug \
+-                    ${libdir}/gtk-3.0/${LIBV}/immodules/.debug \
+-                    ${libdir}/gtk-3.0/${LIBV}/engines/.debug \
+-                    ${libdir}/gtk-3.0/${LIBV}/printbackends/.debug \
+-                    ${libdir}/gtk-3.0/modules/.debug"
+-
+-
+-PACKAGES_DYNAMIC += "^gtk3-immodule-.* ^gtk3-printbackend-.*"
+-
+-python populate_packages_prepend () {
+-    import os.path
+-
+-    prologue = d.getVar("postinst_prologue", 1)
+-
+-    gtk_libdir = d.expand('${libdir}/gtk-3.0/${LIBV}')
+-    immodules_root = os.path.join(gtk_libdir, 'immodules')
+-    printmodules_root = os.path.join(gtk_libdir, 'printbackends');
+-
+-    do_split_packages(d, immodules_root, '^im-(.*)\.so$', 'gtk3-immodule-%s', 'GTK input module for %s', prologue + 'gtk-query-immodules-3.0 > /etc/gtk-3.0/gtk.immodules')
+-    do_split_packages(d, printmodules_root, '^libprintbackend-(.*)\.so$', 'gtk3-printbackend-%s', 'GTK printbackend module for %s')
+-
+-    if (d.getVar('DEBIAN_NAMES', 1)):
+-        d.setVar('PKG_${PN}', 'libgtk-3.0')
+-}
+-
+-postinst_prologue() {
+-if [ "x$D" != "x" ]; then
+-  exit 1
+-fi
+-
+-}
+-
+-- 
+1.8.1.1
 
-This patch adds bluez4 bbappend in wrong directory (meta-oe instead of
-oe-core), I'll fix it before merging it.
 
-The same does apply to portmap and ofono bbappend.
 
-> Acked-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OpLPJvDmhXTZE4Lg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlD39eMACgkQN1Ujt2V2gBxzkwCgsHhgnDolaitpoxWT/C18Og9b
-Pl0An3dJzfl41rhoO7PPQibtuSNUwemt
-=kGyq
------END PGP SIGNATURE-----
-
---OpLPJvDmhXTZE4Lg--
