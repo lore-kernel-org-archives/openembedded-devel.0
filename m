@@ -1,41 +1,40 @@
-Received: from mail-ob0-f171.google.com ([209.85.214.171])
+Received: from mga06.intel.com ([134.134.136.21] helo=orsmga101.jf.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <colin.foeparker@aclimalabs.com>) id 1Tvsoo-00040V-Te
+	(envelope-from <ross.burton@intel.com>) id 1TvtuJ-0005yG-IK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 18:00:04 +0100
-Received: by mail-ob0-f171.google.com with SMTP id dn14so2751234obc.2
+	Thu, 17 Jan 2013 19:10:14 +0100
+Received: from mail-bk0-f70.google.com ([209.85.214.70])
+	by mga02.intel.com with ESMTP/TLS/RC4-SHA; 17 Jan 2013 09:54:18 -0800
+Received: by mail-bk0-f70.google.com with SMTP id jc3so3119828bkc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jan 2013 08:44:35 -0800 (PST)
+	Thu, 17 Jan 2013 09:54:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:content-type:message-id:mime-version:subject:date
-	:references:to:in-reply-to:x-mailer:x-gm-message-state;
-	bh=DBCSxFpB8tAn048VnI8X4VL6oLlVU0SmK0H9eEx4W5I=;
-	b=py5ybiNZdGCRditfL4ZI/bSDB4iEDScMb5Xiiu72DMdU6o1fVYGpB2VhV1YMYkcuq0
-	dfcJGKE5nGkog6SHpam5z6fZgP79y4zpNydFeAgRhviNabAIYLUxJsmtn9en01f3Cv6w
-	RR0jb8vPoPSg5H10Uj9AYyDz7mLhDf6uIuAykFAFMK9zmqMfNygYRZa5pwCgRHZ7bVl3
-	HIaSH9Gnm4XyuXpX/GZFPABe8894EKFvCRSVbKwCB6+i9rBCr4ITgOdRgVc/uFAyfpJM
-	alfDHXkDf02ejbcBBxZXxLk+sf/wZkmJF2pHMho7IxHq2/pSL+dmUjcdM1fjywFbeX8o
-	Zf2A==
-X-Received: by 10.182.136.68 with SMTP id py4mr4411300obb.38.1358441075064;
-	Thu, 17 Jan 2013 08:44:35 -0800 (PST)
-Received: from [10.10.0.115] (108-94-24-230.lightspeed.sntcca.sbcglobal.net.
-	[108.94.24.230])
-	by mx.google.com with ESMTPS id g8sm1375714oba.16.2013.01.17.08.44.33
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Jan 2013 08:44:34 -0800 (PST)
-From: Colin Foe-Parker <colin.foeparker@aclimalabs.com>
-Message-Id: <1725C8BF-53EF-400B-983E-9C729EBE8730@aclimalabs.com>
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-Date: Thu, 17 Jan 2013 08:44:34 -0800
-References: <1358377712-18666-1-git-send-email-colin.foeparker@aclimalabs.com>
-	<20130117124858.GF3067@jama>
+	h=x-received:x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=6BqOd9rGPY2nG3Oi43GhzS4FdPT3sLCtk+wygkBMU1c=;
+	b=F6Oe3+oG2LtR11awHDvj9V3ldwZ4xw6RsfqIm7VeYIIProIaTnCnEcPOQo9LMwdYTs
+	XFcpwQ6NQE5/jZ1UBfQhE2kGXoDp7e03LZAk4pUaVvxNBNnDogi9AD4VledFrsbbb9M/
+	4R/VQzVMjVUkxCJ8OIlJyi/QuHfliUZkeipi6SXIfSX8XA+MHXoUOyRXfzwE8zaqGFWi
+	E0GOv/bu0xzjN+KLdi97Oofa0eF0e2xcaQuVewpS1lmvAL6IWOR78NC4EeJpQCQHx8mk
+	0K+yT1ixkU1fY31GZrBSgUE2U+fxCys5SwYZp/2iF5FufHf+btmxDbgdpDxM863nC500
+	7noA==
+X-Received: by 10.180.85.165 with SMTP id i5mr9667689wiz.11.1358445256632;
+	Thu, 17 Jan 2013 09:54:16 -0800 (PST)
+X-Received: by 10.180.85.165 with SMTP id i5mr9667592wiz.11.1358445255377;
+	Thu, 17 Jan 2013 09:54:15 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id bd7sm3349462wib.8.2013.01.17.09.54.13
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 17 Jan 2013 09:54:14 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20130117124858.GF3067@jama>
-X-Mailer: Apple Mail (2.1499)
-X-Gm-Message-State: ALoCoQkuGac2s3rrtvxqSEUKxhRuec2pIBqN5niFBuBJW4lBcH22l/wme4LxAtOXyVrMlNpRuo9y
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] META-OE: DENZIL Branch: SSVB-CPUBURN-A8: MD5SUM and SHA256SUM don't match source.
+Date: Thu, 17 Jan 2013 17:52:12 +0000
+Message-Id: <1358445132-13498-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+X-Gm-Message-State: ALoCoQnPZn1HpVvNiBCcyK14Hbg6/BW8ibpAJbWSojwiNXqeSKAnMwDUbigLNrC1Bb/iQWV9RtDgKTcV4eiKXjA2OOYkj1+wXPHaY4LjbgxlGLEiHxPOiv9JtIN8EFWQyJW75wTFg8DbZJZ6ojqOLSHae055S5jLKCPy74EZ563yDxMHow1hlPTnH/WUk34KRfjoDU4eMca8
+Cc: Wayne Tams <wayne.tams@simpleaudio.com>
+Subject: [meta-multimedia][PATCH] gst-rtsp: add GStreamer RTSP server/library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,93 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 17:00:05 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Jan 2013 18:10:14 -0000
 
-On Jan 17, 2013, at 4:48 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
+From: Wayne Tams <wayne.tams@simpleaudio.com>
 
-> On Wed, Jan 16, 2013 at 03:08:30PM -0800, Colin Foe-Parker wrote:
->> Updated the md5sum and sha256sum for the ssvb-cpuburn-a8.S file
->=20
-> Please read README how commit subject should look like.
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ ...ecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch |   34 ++++++++++++++++++++
+ .../gstreamer/gst-rtsp_0.10.8.bb                   |   16 +++++++++
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
 
-Sorry, I will get it right next time. :)
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+new file mode 100644
+index 0000000..3afca4e
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+@@ -0,0 +1,34 @@
++index gst-rtsp_0.10.8/bindings/python/Makefile.am
++--- gst-rtsp_0.10.8.orig/bindings/python/Makefile.am
+++++ gst-rtsp_0.10.8/bindings/python/Makefile.am
++@@ -14,7 +14,7 @@ defs_DATA = $(DEFS)
++ defsdir = $(pkgdatadir)/$(GST_MAJORMINOR)/defs
++ OVERRIDES = rtspserver.override
++
++-INCLUDES = -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
+++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
++
++ rtspserver_la_CFLAGS = -I$(top_srcdir)/src \
++         $(PYGOBJECT_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
++index gst-rtsp_0.10.8/examples/Makefile.am
++--- gst-rtsp_0.10.8.orig/examples/Makefile.am
+++++ gst-rtsp_0.10.8/examples/Makefile.am
++@@ -1,6 +1,6 @@
++ noinst_PROGRAMS = test-video test-ogg test-mp4 test-readme test-launch test-sdp test-uri test-auth
++
++-INCLUDES = -I$(top_srcdir) -I$(srcdir)
+++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir)
++
++ AM_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
++ AM_LDFLAGS = \
++index gst-rtsp_0.10.8/tests/Makefile.am
++--- gst-rtsp_0.10.8.orig/tests/Makefile.am
+++++ gst-rtsp_0.10.8/tests/Makefile.am
++@@ -1,6 +1,6 @@
++ noinst_PROGRAMS = test-cleanup
++
++-INCLUDES = -I$(top_srcdir) -I$(srcdir)
+++AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir)
++
++ AM_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
++ AM_LDFLAGS = \
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
+new file mode 100644
+index 0000000..40872f5
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "GStreamer RTSP server"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
++
++SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2 \
++           file://0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch"
++SRC_URI[md5sum] = "b511af07000595f63c3a705946221643"
++SRC_URI[sha256sum] = "9915887cf8515bda87462c69738646afb715b597613edc7340477ccab63a6617"
++
++DEPENDS = "gst-plugins-base gstreamer"
++
++# Configure always checks for Python so inherit pythonnative. Better solution
++# would be to disable the checks entirely.
++inherit autotools pythonnative gettext
++
++FILES_${PN}-dev += "${datadir}/vala/vapi/"
+-- 
+1.7.10.4
 
->=20
-> Or just see other examples.
->=20
-> Change to denzil needs to be in master/danny first (if it isn't =
-already)
-Can you point me to a description of the roles of the different OE =
-branches? =20
-
-> Change of checksum should be explained in commit message and also
-> include diff between old and new version
-
-I don't have a copy of the previous version of the cpuburn sources.  I =
-tried to build it from
-the bitbake recipe in denzil and it failed with validation/fetch errors. =
- So I pulled the sources, built, and tested them manually.  After I knew =
-that it worked I updated the recipe with the new md5sum/sha256sum =
-values.=20
-
-So this is patch is truly reactionary, I was just trying to fix the =
-bitbake recipe so that it would build.
-
-That being said, it appears that "Otavio" already fixed this issue in =
-the master branch but it hasn't filtered down to denzil yet.  =
-a17cda6e85f990bd3569df731ec0f223b185ec6b =20
-
--Colin
-
->=20
-> Cheers,
->=20
->> Signed-off-by: Colin Foe-Parker <colin.foeparker@aclimalabs.com>
->> ---
->> meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb |    4 ++--
->> 1 file changed, 2 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb =
-b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
->> index bb9ca1c..68833e6 100644
->> --- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
->> +++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon.bb
->> @@ -13,8 +13,8 @@ SRC_URI =3D =
-"http://hardwarebug.org/files/burn.S;name=3Dmru \
->>            =
-http://github.com/downloads/ssvb/ssvb.github.com/ssvb-cpuburn-a8.S;name=3D=
-ssvb"
->> SRC_URI[mru.md5sum] =3D "823abc72c2cd448e87df9bc5355a4456"
->> SRC_URI[mru.sha256sum] =3D =
-"01d9fc04f83740c513c25401dcc89c11b2a5a6013e70bfca42b7b02129f88cd2"
->> -SRC_URI[ssvb.md5sum] =3D "f1af41dcd56e4f0f7e92b67109dc01ed"
->> -SRC_URI[ssvb.sha256sum] =3D =
-"95e2267a684be0d848dd6f935e769fa3ed810274ebacddc3fe8ddac4b34838c2"
->> +SRC_URI[ssvb.md5sum] =3D "0acc570d943c41c7f8602b9ff6fa111d"
->> +SRC_URI[ssvb.sha256sum] =3D =
-"bfddd3226a499ffdf71bb58c05ccdc6dac5bb2c2c3bdb10ac610ee0b60aac087"
->>=20
->> S =3D "${WORKDIR}"
->>=20
->> --=20
->> 1.7.9.5
->>=20
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> =
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
