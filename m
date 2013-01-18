@@ -1,34 +1,39 @@
-Received: from mail-bk0-f54.google.com ([209.85.214.54])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1TwDfg-00011p-Iu
+Received: from 3.mo2.mail-out.ovh.net ([46.105.58.226]
+	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TwFWX-0005wg-TZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 16:15:58 +0100
-Received: by mail-bk0-f54.google.com with SMTP id je9so2046517bkc.41
+	Fri, 18 Jan 2013 18:14:44 +0100
+Received: from mail240.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo2.mail-out.ovh.net (Postfix) with SMTP id 95B4BDC0474
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2013 07:00:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=TS4V3q9m3qk5BOwpUv/JWenYi+Sm1mhFUxfSzCUVwLM=;
-	b=BkPzDZ7M6S+VRSGW9dWD38N/LSK+DziyBMhyov/JURH4Sv/iUOL6VQzm8DqCu1/+8S
-	FuUb92jTC1oAJ3r3ooVLqTbSbWtqv/Ia8Y3cgJ3ulC0ybxjOFEEnLKhla9fUfR0Vd7je
-	zejyXUgTLcH2nl6Esg+XcsLbPDGO+jtbiIoBB1LhOKE1i8KbetECQvkwAzysykvCO5jQ
-	JqnmqwQYLn/WLz5ezpfWtKHJEhRhde8uhwzNmtvm202XGFY7Ud0m3a+o6IcO+yRBu4kC
-	hCBxU0cUaKthajc3l64rtOgqGI7Cm7LSQLFLgC2E/IPpGWmeAdb6ALMX2lKZ1MgUGWr6
-	rv6g==
-X-Received: by 10.204.133.219 with SMTP id g27mr2618360bkt.65.1358521231287;
-	Fri, 18 Jan 2013 07:00:31 -0800 (PST)
-MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.205.102.72 with HTTP; Fri, 18 Jan 2013 07:00:10 -0800 (PST)
-In-Reply-To: <CAPESJy5XQKweZqj8GAsp3HEtgVDgDc4NgbjTqMQbfQi6n_uG9Q@mail.gmail.com>
-References: <CAPESJy5XQKweZqj8GAsp3HEtgVDgDc4NgbjTqMQbfQi6n_uG9Q@mail.gmail.com>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Sat, 19 Jan 2013 00:00:10 +0900
-X-Google-Sender-Auth: Gk8ts-TxtKVnwTZ5IqdnO3QoWXQ
-Message-ID: <CAPESJy5rag4289ihZMcEyJ=Q+12o1xuCJyFJ82mYYGKgh_g5dA@mail.gmail.com>
+	Fri, 18 Jan 2013 18:03:50 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 18 Jan 2013 18:54:13 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO e6520eb)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 18 Jan 2013 18:54:12 +0200
+Date: Fri, 18 Jan 2013 17:54:11 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [Solved] Re: /etc/init.d/networking from netbase package
+X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
+Message-ID: <20130118175411.002a165f@e6520eb>
+In-Reply-To: <1358325167-18862-1-git-send-email-koen@dominion.thruhere.net>
+References: <1358325167-18862-1-git-send-email-koen@dominion.thruhere.net>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 9093893549162605897
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrieeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrieejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Cc: koen@dominion.thruhere.net
+Subject: Re: [meta-oe][meta-gnome][danny][PATCH 1/3] cheese: rename eds-dbus to evolution-data-server in DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,59 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2013 15:15:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 18 Jan 2013 17:14:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Le Wed, 16 Jan 2013 09:32:45 +0100,
+Koen Kooi <koen@dominion.thruhere.net> a =C3=A9crit :
 
-> After the build, I noticed /etc/init.d/networking is not installed on the
-> rootfs while netbase_4.47-r1.ipk includes this file.
+> From: Martin Jansa <Martin.Jansa@gmail.com>
+>=20
+> * was renamed in oe-core
+>   commit 6189a8a05620974c098d548c26502453f371fe26
+>   Author: Saul Wold <sgw@linux.intel.com>
+>   Date:   Thu Apr 19 17:26:01 2012 -0700
+>=20
+>     evolation-data-server: Rename from eds-dbus
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
 
-this problem has gone after refreshing build directory and
-correction of my conf/local.conf file.
+the 3 patches were pushed to danny-next.
 
-I cleared some files and directories including related sstate-cache,
-work directories in build/tmp-angstrom_v2012_05-eglibc/ ,
-and issued
- $ bitbake -c clean
-for related packages,
-
-corrected the patterns for BBMASK variable,
-
-then retried the build, issuing a command:
- $ bitbake sysvinit-image
-
-where sysvinit-image is my local project, inherits task-boot.
-
-Now /etc/init.d/network file appears in JFFS2 image.
-
-Regards,
--- 
-Takeshi Hamasaki
-
-2013/1/17 Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>:
-> Now I'm trying to build a simple image which includes udev and netbase.
-> (I know that main stream is using systemd, but my C7x0 has too short memory
->  to operate systemd.)
->
-> After the build, I noticed /etc/init.d/networking is not installed on the
-> rootfs while netbase_4.47-r1.ipk includes this file.
->
-> Is there any magic behind that prevents this file installed or removes this
-> file after the package installation?
->
-> According to https://bugzilla.yoctoproject.org/show_bug.cgi?id=2486
-> there is a plan to split /etc/init.d/networking out of netbase package,
-> but this change is not applied yet, for my understanding.
->
-> Now I'm on the denzil branch, angstrom-2012.05.
->
-> Actually I want to make a new bug on yoctobugzilla,
-> due to the mail server problem on my side I can't
-> finish the registration process for few more days.
->
-> Regards,
-> --
-> Takeshi Hamasaki
+Thanks,
+Eric
 
 
