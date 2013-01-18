@@ -1,20 +1,33 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-ia0-f181.google.com ([209.85.210.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1TvyFt-00044N-VL
+	(envelope-from <andrea.adami@gmail.com>) id 1Tw8Gg-0006Dy-J6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jan 2013 23:48:19 +0100
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 6D799D22B4;
-	Thu, 17 Jan 2013 23:32:56 +0100 (CET)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Fri, 18 Jan 2013 10:29:50 +0100
+Received: by mail-ia0-f181.google.com with SMTP id k25so1187081iah.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jan 2013 01:14:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=70JsRH2yxTwqwa7mN8hxtcXk20XcxfdSVOgSS3FDO6s=;
+	b=GPVK95LbLHwV3oCX5wHazKPH1QgVXEiFt9T0CyjjLaaCJGjH6qOiX4fV93c5kM1seO
+	ZjzvVLiGrr0m0CSX7eh0Wgi1Np+IDFbdffV5VB5JJVSP242Zm/EF4rHMm+DiFaOztkp/
+	g3XJ9UDBYi9YxKcKpJawt9u+33JH2LMdGwss0jjujlMl2vwfxxXlFXMPNIXkb7TZCbLq
+	NYFVdZ7oMy65or6ZsJ4LQSdbqWRzHihXXbTPsMivNTvBT5gEQpWicwhLMzbpBB6U2Zch
+	SNxzmoVTPUYWNaXrRbS6hF+pd9hH6xCcJDYEXMbIztF23x3oMbFNOuUCBX8wduLtHlmV
+	11kg==
+MIME-Version: 1.0
+X-Received: by 10.50.179.100 with SMTP id df4mr1503655igc.60.1358500461813;
+	Fri, 18 Jan 2013 01:14:21 -0800 (PST)
+Received: by 10.64.98.163 with HTTP; Fri, 18 Jan 2013 01:14:21 -0800 (PST)
+In-Reply-To: <1357925200-12243-1-git-send-email-andrea.adami@gmail.com>
+References: <1357856764-10950-1-git-send-email-andrea.adami@gmail.com>
+	<1357925200-12243-1-git-send-email-andrea.adami@gmail.com>
+Date: Fri, 18 Jan 2013 10:14:21 +0100
+Message-ID: <CAAQYJAusCkVE1-rS1Bd_F+gitpuWMqx-WG9pFSzfLxmAuUevGQ@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Jan 2013 23:32:41 +0100
-Message-Id: <1358461961-5703-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.0
-Subject: [meta-oe][PATCH] php: cleanup QA warnings
+Subject: Re: [meta-oe][meta-initramfs][PATCH v2] klibc_2.0.2: apply FIX_V4BX patch for armv4 targets only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,104 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jan 2013 22:48:19 -0000
+X-List-Received-Date: Fri, 18 Jan 2013 09:29:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-php-native had:
+On Fri, Jan 11, 2013 at 6:26 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>  * linker fix is needed to avoid 'bx, lr' instruction on armv4
+>  * patch is applied only for armv4 for eabi builds
+>  * http://wiki.debian.org/ArmEabiPort#Choice_of_minimum_CPU
+>
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../klibc/klibc-2.0.2/armv4-fix-v4bx.patch         |   15 +++++++++++++++
+>  meta-initramfs/recipes-devtools/klibc/klibc.inc    |   12 +++++++++---
+>  2 files changed, 24 insertions(+), 3 deletions(-)
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
+>
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
+> new file mode 100644
+> index 0000000..6bb384b
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
+> @@ -0,0 +1,15 @@
+> +Status: not applicable upstream, in OE/Yocto we use $(FIX_V4BX)
+> +which is "" in case of armv5 or thumbs.
+> +
+> +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> +
+> +--- a/usr/klibc/arch/arm/MCONFIG       2013-01-09 01:12:02.000000000 +0100
+> ++++ b/usr/klibc/arch/arm/MCONFIG       2013-01-08 23:45:59.000000000 +0100
+> +@@ -29,6 +29,7 @@
+> + KLIBCSHAREDFLAGS = -Ttext 0x01800200
+> + ifeq ($(CONFIG_AEABI),y)
+> + KLIBCREQFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
+> ++KLIBCLDFLAGS += $(FIX_ARMV4_EABI_BX)
+> + else
+> + KLIBCREQFLAGS += -mabi=apcs-gnu -mno-thumb-interwork
+> + endif
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> index a95706e..fa31f73 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
+>  # debugsources.list: No such file or directory:
+>  INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+>
+> -INC_PR = "r0"
+> +INC_PR = "r1"
+>
+>  KLIBC_ARCH = '${TARGET_ARCH}'
+>  KLIBC_ARCH_armeb = 'arm'
+> @@ -21,11 +21,17 @@ KLIBC_ARCH_i586 = 'i386'
+>  KLIBC_ARCH_i686 = 'i386'
+>  KLIBC_ARCH_pentium = 'i386'
+>
+> +export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
+> +
+>  SRCREV = "f05ff116bb9edbbb81d82fa47b78e630ce878470"
+>  SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
+>
+> -SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
+> -SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch"
+> +SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
+> +                                 file://armv4-fix-v4bx.patch \
+> +                               "
+> +SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
+> +                                    file://armv4-fix-v4bx.patch \
+> +                                  "
+>
+>  SRC_URI += "file://klibc-linux-libc-dev.patch \
+>              file://prefix.patch \
+> --
+> 1.7.8.6
+>
 
-WARNING: The recipe php-native is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.filemap
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.lock
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.depdblock
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.depdb
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/pear.php.net.reg
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/pecl.php.net.reg
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/doc.php.net.reg
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/__uri.reg
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/.alias/pear.txt
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/.alias/pecl.txt
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib/php/.channels/.alias/phpdocs.txt
-Please verify which package should provide the above files.
-
-php had:
-
-WARNING: QA Issue: php: Files/directories were installed but not shipped
-  /.filemap
-  /.lock
-  /.depdblock
-  /.depdb
-  /var
-  /.registry
-  /.channels
-  /home
-  /var/run
-  /var/log
-  /var/volatile
-  /var/volatile/run
-  /var/volatile/log
-  /etc/php-fpm.conf.default
-  /.registry/.channel.pecl.php.net
-  /.registry/.channel.doc.php.net
-  /.registry/.channel.__uri
-  /.channels/pear.php.net.reg
-  /.channels/pecl.php.net.reg
-  /.channels/doc.php.net.reg
-  /.channels/__uri.reg
-  /.channels/.alias
-  /.channels/.alias/pear.txt
-  /.channels/.alias/pecl.txt
-  /.channels/.alias/phpdocs.txt
-  /home/hrw
-  /home/hrw/HDD
-  /home/hrw/HDD/devel
-  /home/hrw/HDD/devel/canonical
-  /home/hrw/HDD/devel/canonical/aarch64
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded
-  /home/hrw/HDD/devel/canonical/aarch64/openembedded/build
-
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- meta-oe/recipes-devtools/php/php.inc | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 5e5a087..928d3d2 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-            libc-client openssl sqlite3"
- DEPENDS_virtclass-native = "zlib-native libxml2-native"
- 
--INC_PR = "r3"
-+INC_PR = "r4"
- 
- SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
- 
-@@ -55,14 +55,22 @@ do_install  () {
-     oe_runmake 'INSTALL_ROOT=${D}' install
- }
- 
-+do_install_append_pn-php-native() {
-+    rm -rf ${D}/${libdir}/php/.registry
-+    rm -rf ${D}/${libdir}/php/.channels
-+    rm -rf ${D}/${libdir}/php/.[a-z]*
-+}
-+
- # fixme
- do_install_append_pn-php() {
-     install -d ${D}/${sysconfdir}/
-     mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
--    rm -rf ${D}/${STAGING_DIR_NATIVE}
-+    rm -rf ${D}/${TMPDIR}
-     rm -rf ${D}/.registry
-     rm -rf ${D}/.channels
-     rm -rf ${D}/.[a-z]*
-+    rm -rf ${D}/var
-+    rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
-     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
-     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
-     install -d ${D}/${sysconfdir}/apache2/conf.d
--- 
-1.8.0
-
+ping
 
 
