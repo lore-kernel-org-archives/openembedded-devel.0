@@ -1,33 +1,33 @@
-Received: from mail-ia0-f181.google.com ([209.85.210.181])
+Received: from mail-pa0-f41.google.com ([209.85.220.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Tw8Gg-0006Dy-J6
+	(envelope-from <raj.khem@gmail.com>) id 1Tw8fH-0006mW-QW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 10:29:50 +0100
-Received: by mail-ia0-f181.google.com with SMTP id k25so1187081iah.26
+	Fri, 18 Jan 2013 10:55:16 +0100
+Received: by mail-pa0-f41.google.com with SMTP id bj3so2022826pad.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2013 01:14:21 -0800 (PST)
+	Fri, 18 Jan 2013 01:39:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=70JsRH2yxTwqwa7mN8hxtcXk20XcxfdSVOgSS3FDO6s=;
-	b=GPVK95LbLHwV3oCX5wHazKPH1QgVXEiFt9T0CyjjLaaCJGjH6qOiX4fV93c5kM1seO
-	ZjzvVLiGrr0m0CSX7eh0Wgi1Np+IDFbdffV5VB5JJVSP242Zm/EF4rHMm+DiFaOztkp/
-	g3XJ9UDBYi9YxKcKpJawt9u+33JH2LMdGwss0jjujlMl2vwfxxXlFXMPNIXkb7TZCbLq
-	NYFVdZ7oMy65or6ZsJ4LQSdbqWRzHihXXbTPsMivNTvBT5gEQpWicwhLMzbpBB6U2Zch
-	SNxzmoVTPUYWNaXrRbS6hF+pd9hH6xCcJDYEXMbIztF23x3oMbFNOuUCBX8wduLtHlmV
-	11kg==
-MIME-Version: 1.0
-X-Received: by 10.50.179.100 with SMTP id df4mr1503655igc.60.1358500461813;
-	Fri, 18 Jan 2013 01:14:21 -0800 (PST)
-Received: by 10.64.98.163 with HTTP; Fri, 18 Jan 2013 01:14:21 -0800 (PST)
-In-Reply-To: <1357925200-12243-1-git-send-email-andrea.adami@gmail.com>
-References: <1357856764-10950-1-git-send-email-andrea.adami@gmail.com>
-	<1357925200-12243-1-git-send-email-andrea.adami@gmail.com>
-Date: Fri, 18 Jan 2013 10:14:21 +0100
-Message-ID: <CAAQYJAusCkVE1-rS1Bd_F+gitpuWMqx-WG9pFSzfLxmAuUevGQ@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=DIHmfwkxu9A/xANpqvdmJUOlVwfL98PZ3B05oOciQd8=;
+	b=1ETFovANcaZIqUuL9fSlPoTwG0f2C6GIjT7S2Tfvxq/dnCPeWh0RqPK0VwGJbiu83V
+	7jQGntMBa8ifHNdjANw/MuSTyzMe8Bx2Pq/2/EzhOL1JqHB23mnHuO1lb7eLNdAdlvjK
+	A6mp8njOPemGBuHpw/yiGcNiM6paZXqJD4qWVHpDcn/yGQMA/C6E2mH0OhUV3OL9cbpd
+	0zjWJigm5xYoG1EOr08TgBfhujPGzvrSUqIfR+Yfp8AaNAdFdWONvN7NiuI+qxkovO2v
+	Ux2pn/EnOlNaFUyviFiUdcS2JAMtj2SHEYyc4izIcjjb8QnKImIQEdYBMcW1aCf5DBuV
+	JfFA==
+X-Received: by 10.66.88.6 with SMTP id bc6mr22309425pab.5.1358501986402;
+	Fri, 18 Jan 2013 01:39:46 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id oi3sm2801145pbb.1.2013.01.18.01.39.45
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 18 Jan 2013 01:39:45 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-initramfs][PATCH v2] klibc_2.0.2: apply FIX_V4BX patch for armv4 targets only
+Date: Fri, 18 Jan 2013 01:39:18 -0800
+Message-Id: <1358501958-3585-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-networking][PATCH] netcat_0.7.1.bb: Fix build with new versions of autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,79 +41,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2013 09:29:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 18 Jan 2013 09:55:17 -0000
 
-On Fri, Jan 11, 2013 at 6:26 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
->  * linker fix is needed to avoid 'bx, lr' instruction on armv4
->  * patch is applied only for armv4 for eabi builds
->  * http://wiki.debian.org/ArmEabiPort#Choice_of_minimum_CPU
->
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  .../klibc/klibc-2.0.2/armv4-fix-v4bx.patch         |   15 +++++++++++++++
->  meta-initramfs/recipes-devtools/klibc/klibc.inc    |   12 +++++++++---
->  2 files changed, 24 insertions(+), 3 deletions(-)
->  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
->
-> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
-> new file mode 100644
-> index 0000000..6bb384b
-> --- /dev/null
-> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.2/armv4-fix-v4bx.patch
-> @@ -0,0 +1,15 @@
-> +Status: not applicable upstream, in OE/Yocto we use $(FIX_V4BX)
-> +which is "" in case of armv5 or thumbs.
-> +
-> +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> +
-> +--- a/usr/klibc/arch/arm/MCONFIG       2013-01-09 01:12:02.000000000 +0100
-> ++++ b/usr/klibc/arch/arm/MCONFIG       2013-01-08 23:45:59.000000000 +0100
-> +@@ -29,6 +29,7 @@
-> + KLIBCSHAREDFLAGS = -Ttext 0x01800200
-> + ifeq ($(CONFIG_AEABI),y)
-> + KLIBCREQFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
-> ++KLIBCLDFLAGS += $(FIX_ARMV4_EABI_BX)
-> + else
-> + KLIBCREQFLAGS += -mabi=apcs-gnu -mno-thumb-interwork
-> + endif
-> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> index a95706e..fa31f73 100644
-> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
->  # debugsources.list: No such file or directory:
->  INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
->
-> -INC_PR = "r0"
-> +INC_PR = "r1"
->
->  KLIBC_ARCH = '${TARGET_ARCH}'
->  KLIBC_ARCH_armeb = 'arm'
-> @@ -21,11 +21,17 @@ KLIBC_ARCH_i586 = 'i386'
->  KLIBC_ARCH_i686 = 'i386'
->  KLIBC_ARCH_pentium = 'i386'
->
-> +export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
-> +
->  SRCREV = "f05ff116bb9edbbb81d82fa47b78e630ce878470"
->  SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
->
-> -SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
-> -SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch"
-> +SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
-> +                                 file://armv4-fix-v4bx.patch \
-> +                               "
-> +SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
-> +                                    file://armv4-fix-v4bx.patch \
-> +                                  "
->
->  SRC_URI += "file://klibc-linux-libc-dev.patch \
->              file://prefix.patch \
-> --
-> 1.7.8.6
->
+autoconf and automake got updates which need these changes
+see patch header for details
 
-ping
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../netcat/netcat/obsolete_autoconf_macros.patch   |   32 ++++++++++++++++++++
+ .../recipes-support/netcat/netcat_0.7.1.bb         |    6 ++--
+ 2 files changed, 36 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/netcat/netcat/obsolete_autoconf_macros.patch
+
+diff --git a/meta-networking/recipes-support/netcat/netcat/obsolete_autoconf_macros.patch b/meta-networking/recipes-support/netcat/netcat/obsolete_autoconf_macros.patch
+new file mode 100644
+index 0000000..9b0ed58
+--- /dev/null
++++ b/meta-networking/recipes-support/netcat/netcat/obsolete_autoconf_macros.patch
+@@ -0,0 +1,32 @@
++Replace obsoleted AM_CONFIG_HEADER flagged by autoconf 2.69
++locale.h check was picked from old gettext macros but with new aclocal
++it picks the right 0.18 gettext.m4 and does not get the check
++therefore we explicitly add it to configure.ac
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: netcat-0.7.1/configure.ac
++===================================================================
++--- netcat-0.7.1.orig/configure.ac	2013-01-18 01:30:01.928069739 -0800
+++++ netcat-0.7.1/configure.ac	2013-01-18 01:32:50.568073009 -0800
++@@ -26,8 +26,7 @@
++ AC_PREREQ(2.53)
++ 
++ dnl without this order in this file, automake will be confused!
++-AM_CONFIG_HEADER(config.h)
++-
+++AC_CONFIG_HEADERS(config.h)
++ dnl check for programs.  first the c compiler.
++ AC_PROG_CC
++ AC_PROG_CPP
++@@ -56,7 +55,7 @@
++ AC_LBL_LIBRARY_NET
++ 
++ dnl Fortunately we have Solaris...
++-AC_CHECK_HEADERS(sys/sockio.h)
+++AC_CHECK_HEADERS(sys/sockio.h locale.h)
++ 
++ AC_CHECK_FUNCS(srandom random)
++ if test $ac_cv_func_srandom = no; then
+diff --git a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+index c4f1f33..8dacdec 100644
+--- a/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
++++ b/meta-networking/recipes-support/netcat/netcat_0.7.1.bb
+@@ -4,9 +4,11 @@ HOMEPAGE = "http://netcat.sourceforge.net"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2"
++SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2 \
++           file://obsolete_autoconf_macros.patch \
++          "
+ 
+ SRC_URI[md5sum] = "0a29eff1736ddb5effd0b1ec1f6fe0ef"
+ SRC_URI[sha256sum] = "b55af0bbdf5acc02d1eb6ab18da2acd77a400bafd074489003f3df09676332bb"
+-- 
+1.7.9.5
+
 
 
