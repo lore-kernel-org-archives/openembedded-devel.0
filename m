@@ -1,39 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-bk0-f54.google.com ([209.85.214.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TwDGX-0007rh-SH
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1TwDfg-00011p-Iu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 15:50:17 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0IEYU9H021093
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 18 Jan 2013 16:15:58 +0100
+Received: by mail-bk0-f54.google.com with SMTP id je9so2046517bkc.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2013 06:34:30 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Fri, 18 Jan 2013 06:34:30 -0800
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 0547D7FD0	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2013 09:32:43 -0500 (EST)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 8A90B20657; Fri,
-	18 Jan 2013 09:34:29 -0500 (EST)
-Date: Fri, 18 Jan 2013 09:34:29 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130118143429.GC5511@windriver.com>
-References: <1356124984-19927-1-git-send-email-morgan.little@windriver.com>
-	<CA+chaQc+bcUof-4h9qc=SPUK5eTe4sRiNLXp774U_m-Vv=ozKg@mail.gmail.com>
-	<FCBA1E696337B442ADB5A7C30428F068BD84E8@ALA-MBA.corp.ad.wrs.com>
-	<20130118135301.GB5511@windriver.com>
-	<20130118141742.GV23233@jama.palm1.palmone.com>
+	Fri, 18 Jan 2013 07:00:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=TS4V3q9m3qk5BOwpUv/JWenYi+Sm1mhFUxfSzCUVwLM=;
+	b=BkPzDZ7M6S+VRSGW9dWD38N/LSK+DziyBMhyov/JURH4Sv/iUOL6VQzm8DqCu1/+8S
+	FuUb92jTC1oAJ3r3ooVLqTbSbWtqv/Ia8Y3cgJ3ulC0ybxjOFEEnLKhla9fUfR0Vd7je
+	zejyXUgTLcH2nl6Esg+XcsLbPDGO+jtbiIoBB1LhOKE1i8KbetECQvkwAzysykvCO5jQ
+	JqnmqwQYLn/WLz5ezpfWtKHJEhRhde8uhwzNmtvm202XGFY7Ud0m3a+o6IcO+yRBu4kC
+	hCBxU0cUaKthajc3l64rtOgqGI7Cm7LSQLFLgC2E/IPpGWmeAdb6ALMX2lKZ1MgUGWr6
+	rv6g==
+X-Received: by 10.204.133.219 with SMTP id g27mr2618360bkt.65.1358521231287;
+	Fri, 18 Jan 2013 07:00:31 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20130118141742.GV23233@jama.palm1.palmone.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] traceroute: Remove bashisms
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.205.102.72 with HTTP; Fri, 18 Jan 2013 07:00:10 -0800 (PST)
+In-Reply-To: <CAPESJy5XQKweZqj8GAsp3HEtgVDgDc4NgbjTqMQbfQi6n_uG9Q@mail.gmail.com>
+References: <CAPESJy5XQKweZqj8GAsp3HEtgVDgDc4NgbjTqMQbfQi6n_uG9Q@mail.gmail.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Sat, 19 Jan 2013 00:00:10 +0900
+X-Google-Sender-Auth: Gk8ts-TxtKVnwTZ5IqdnO3QoWXQ
+Message-ID: <CAPESJy5rag4289ihZMcEyJ=Q+12o1xuCJyFJ82mYYGKgh_g5dA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [Solved] Re: /etc/init.d/networking from netbase package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,127 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2013 14:50:19 -0000
-X-Groupsio-MsgNum: 42740
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WfZ7S8PLGjBY9Voh"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Jan 2013 15:15:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---WfZ7S8PLGjBY9Voh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-[Re: [oe] [meta-networking][PATCH] traceroute: Remove bashisms] On 13.01.18=
- (Fri 15:17) Martin Jansa wrote:
+> After the build, I noticed /etc/init.d/networking is not installed on the
+> rootfs while netbase_4.47-r1.ipk includes this file.
 
-> On Fri, Jan 18, 2013 at 08:53:01AM -0500, Joe MacDonald wrote:
-> > [Re: [oe] [meta-networking][PATCH] traceroute: Remove bashisms] On 12.1=
-2.21 (Fri 22:02) Little, Morgan wrote:
-> >=20
-> > > On 12/21/2012 04:37 PM, Martin Jansa wrote:
-> > > > On Fri, Dec 21, 2012 at 10:23 PM, Morgan Little
-> > > > <morgan.little@windriver.com> wrote:
-> > > >> Signed-off-by: Morgan Little <morgan.little@windriver.com>
-> > > >> ---
-> > > >>  meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb |=
- 6 ++----
-> > > >>  1 file changed, 2 insertions(+), 4 deletions(-)
-> > > >>
-> > > >> diff --git a/meta-networking/recipes-support/traceroute/traceroute=
-_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> > > >> index 719d9fb..d855c67 100644
-> > > >> --- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18=
-=2Ebb
-> > > >> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18=
-=2Ebb
-> > > >> @@ -32,10 +32,8 @@ do_install() {
-> > > >>
-> > > >>      install -d ${D}${mandir}
-> > > >>      install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-> > > >> -    pushd ${D}${mandir}
-> > > >> -    ln -s ${PN}.8 ${PN}6.8
-> > > >> -    ln -s ${PN}.8 tcptraceroute.8
-> > > >> -    popd
-> > > >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}${PN}6.8
-> > > >> +    ln -s ${D}${mandir}${PN}.8 ${D}${mandir}tcptraceroute.8
-> > > >
-> > > > Thanks for quick reply and fix, but I think this should be:
-> > > >> +    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
-> > > >> +    ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
-> > > >
-> > > > ${D} path won't be valid on target and missing slash after mandir
-> > > It looks like it should be. Thank you for noticing that.
-> >=20
-> > Fixed.  That one's easy.
->=20
-> Great, thanks I'll reenable it in world build when it's pushed.
+this problem has gone after refreshing build directory and
+correction of my conf/local.conf file.
 
-Just pushed.  Thanks for the reminder, Martin.
+I cleared some files and directories including related sstate-cache,
+work directories in build/tmp-angstrom_v2012_05-eglibc/ ,
+and issued
+ $ bitbake -c clean
+for related packages,
 
--J.
+corrected the patterns for BBMASK variable,
 
->=20
-> > > >
-> > > > And is there something referencing those man pages with different
-> > > > name? Or why are those symlinks provided?
-> > > I provided them because I was basing the do_install step off of the .=
-spec file the Fedora uses in their RPM file. It does a similar symlink step=
-=2E I believe that is can be removed.
-> >=20
-> > So, as far as I can tell, the links are provided to support
-> > /etc/alternatives/ versions of the manpages in case you've got an
-> > alternative implementation of traceroute/traceroute6/etc. on your
-> > system.  Unless you think the links are adding unnecessary clutter, I'm
-> > inclined to leave them even though I honestly have never installed an
-> > alternative traceroute and never looked into why I might want to.
->=20
-> I don't mind if they stay. (I'm not using traceroute on my targets).
->=20
-> > -J.
-> >=20
-> > >=20
-> > > //Morgan
-> > > >
-> > > > Cheers,
-> > > >
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
-> > >=20
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >=20
-> > --=20
-> > -Joe MacDonald.
-> > :wq
->=20
->=20
->=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
---=20
--Joe MacDonald.
-:wq
+then retried the build, issuing a command:
+ $ bitbake sysvinit-image
 
---WfZ7S8PLGjBY9Voh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+where sysvinit-image is my local project, inherits task-boot.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Now /etc/init.d/network file appears in JFFS2 image.
 
-iEYEARECAAYFAlD5XXUACgkQPN8S4W6ZZnfFOwCfXPonHQ7p2vW/ke3h4Ef3Iqsl
-xVIAniugN87I5Gbvm57GyMqpmp81tlbW
-=Z//J
------END PGP SIGNATURE-----
+Regards,
+-- 
+Takeshi Hamasaki
 
---WfZ7S8PLGjBY9Voh--
+2013/1/17 Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>:
+> Now I'm trying to build a simple image which includes udev and netbase.
+> (I know that main stream is using systemd, but my C7x0 has too short memory
+>  to operate systemd.)
+>
+> After the build, I noticed /etc/init.d/networking is not installed on the
+> rootfs while netbase_4.47-r1.ipk includes this file.
+>
+> Is there any magic behind that prevents this file installed or removes this
+> file after the package installation?
+>
+> According to https://bugzilla.yoctoproject.org/show_bug.cgi?id=2486
+> there is a plan to split /etc/init.d/networking out of netbase package,
+> but this change is not applied yet, for my understanding.
+>
+> Now I'm on the denzil branch, angstrom-2012.05.
+>
+> Actually I want to make a new bug on yoctobugzilla,
+> due to the mail server problem on my side I can't
+> finish the registration process for few more days.
+>
+> Regards,
+> --
+> Takeshi Hamasaki
+
+
