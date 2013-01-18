@@ -1,25 +1,20 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1TwILf-0002a5-Rs
+	(envelope-from <openembedded@emagii.com>) id 1TwJnS-0004yx-LN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 21:15:52 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0IGj5gm011848
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jan 2013 08:45:05 -0800 (PST)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>) id 1TwF3w-00033J-VZ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 11:45:05 -0500
-Date: Fri, 18 Jan 2013 11:45:04 -0500
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130118164504.GA11707@windriver.com>
+	Fri, 18 Jan 2013 22:48:30 +0100
+Received: from [192.168.221.118] (83.227.56.195) by smtp-out21.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 50B624330129FFDE for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jan 2013 22:30:01 +0100
+Message-ID: <50F9BED9.8020504@emagii.com>
+Date: Fri, 18 Jan 2013 22:30:01 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCH] autofs has openldap dependency issues
+To: openembedded-devel@lists.openembedded.org
+Subject: What determines the build location "OE_DIR/tmp/work/*" ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,95 +28,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2013 20:15:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Jan 2013 21:48:31 -0000
+X-List-Received-Date: Fri, 18 Jan 2013 21:48:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Please apply to meta-openembedded/meta-networking...
+I am building a driver which will load firmware at runtime.
+For development purposes, I have defined two machines,
+which will be used to build two different versions of the driver.
+
+Have a separate recipe for the firmware.
+Each machine defines FW_VERSION which is used to select
+a subtree containing the firmware, so the same recipe is used for both 
+machines.
+
+The driver gets built in "$OE_DIR/tmp/work/<machine>-angstrom-linux/gnueabi"
+but the firmware gets built in "$OE_DIR/tmp/work/armv7a-none-linux-gnueabi".
+This means that the same tree is used for both machines,
+which of course does not work.
+
+Is there a way to define that the recipe should be built in
+"$OE_DIR/tmp/work/<machine>-angstrom-linux/gnueabi"?
+
+Otherwise, I guess I have to use two different recipes.
 
 
-commit 09947d772a36e4d2c2dc48356281bd3ce0a04b0c
-Author: Amy Fong <amy.fong@windriver.com>
-Date:   Fri Jan 18 11:10:35 2013 -0500
-
-    autofs: fails to compile with openldap disabled
-    
-    As of 5.0.6, it appears that changes were introduced so that
-    if you compile with openldap disabled and openldap headers are not
-    available, then autofs fails to build.
-    
-    Since autofs no longer depends on openldap, remove the dependency
-    
-    Signed-off-by: Amy Fong <amy.fong@windriver.com>
-
-diff --git a/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-new file mode 100644
-index 0000000..b62f955
---- /dev/null
-+++ b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-@@ -0,0 +1,40 @@
-+autofs: fails to compile with openldap disabled
-+
-+As of 5.0.6, it appears that changes were introduced so that 
-+if you compile with openldap disabled and openldap headers are not
-+available, then autofs fails to build.
-+
-+Signed-off-by: Amy Fong <amy.fong@windriver.com>
-+--
-+ lookup_ldap.h |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+---
-+ include/lookup_ldap.h |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+--- a/include/lookup_ldap.h
-++++ b/include/lookup_ldap.h
-+@@ -1,7 +1,9 @@
-+ #ifndef LOOKUP_LDAP_H
-+ #define LOOKUP_LDAP_H
-+ 
-++#ifdef WITH_LDAP
-+ #include <ldap.h>
-++#endif
-+ 
-+ #ifdef WITH_SASL
-+ #include <openssl/ssl.h>
-+@@ -109,10 +111,12 @@
-+ 
-+ #define LDAP_AUTH_USESIMPLE	0x0008
-+ 
-++#ifdef WITH_LDAP
-+ /* lookup_ldap.c */
-+ LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt);
-+ int unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
-+ int authtype_requires_creds(const char *authtype);
-++#endif
-+ 
-+ #ifdef WITH_SASL
-+ /* cyrus-sasl.c */
-diff --git a/recipes-daemons/autofs/autofs_5.0.7.bb b/recipes-daemons/autofs/autofs_5.0.7.bb
-index c1b0b46..a6683ff 100644
---- a/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -3,7 +3,9 @@ SECTION = "base"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--DEPENDS += "openldap libtirpc flex-native bison-native"
-+PR = "r1"
-+
-+DEPENDS += "libtirpc flex-native bison-native"
- 
- inherit autotools systemd
- 
-@@ -30,6 +32,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
-            file://cross.patch \
-            file://libtirpc.patch \
-            file://libtirpc-name-clash-backout.patch \
-+           file://fix_disable_ldap.patch \
-           "
- 
- SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
+BR
+Ulf Samuelsson
 
 
