@@ -1,23 +1,41 @@
-Received: from mail.windriver.com ([147.11.1.11])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1TwFkR-0006MP-AQ
+Received: from 3.mo2.mail-out.ovh.net ([46.105.58.226]
+	helo=mo2.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <eric@eukrea.com>) id 1TwFl3-0006PG-4i
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jan 2013 18:29:16 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0IHDWVf016557
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
-	Fri, 18 Jan 2013 09:13:33 -0800 (PST)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>)
-	id 1TwFVU-0003Mi-Jy; Fri, 18 Jan 2013 12:13:32 -0500
-Date: Fri, 18 Jan 2013 12:13:32 -0500
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130118171332.GA12933@windriver.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-networking] [PATCH] autofs: fails to compile with openldap disabled
+	Fri, 18 Jan 2013 18:29:50 +0100
+Received: from mail240.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo2.mail-out.ovh.net (Postfix) with SMTP id 8E567DC142B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jan 2013 18:15:03 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 18 Jan 2013 19:05:26 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO e6520eb)
+	(eric%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 18 Jan 2013 19:05:24 +0200
+Date: Fri, 18 Jan 2013 18:05:24 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: colin.foeparker@aclimalabs.com
+X-Ovh-Mailout: 178.32.228.2 (mo2.mail-out.ovh.net)
+Message-ID: <20130118180524.4da50507@e6520eb>
+In-Reply-To: <1725C8BF-53EF-400B-983E-9C729EBE8730@aclimalabs.com>
+References: <1358377712-18666-1-git-send-email-colin.foeparker@aclimalabs.com>
+	<20130117124858.GF3067@jama>
+	<1725C8BF-53EF-400B-983E-9C729EBE8730@aclimalabs.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-Ovh-Tracer-Id: 9283044732433968457
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrieejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeehledrieejucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] META-OE: DENZIL Branch: SSVB-CPUBURN-A8: MD5SUM and SHA256SUM don't match source.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,92 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2013 17:29:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Jan 2013 17:29:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-commit 09947d772a36e4d2c2dc48356281bd3ce0a04b0c
-Author: Amy Fong <amy.fong@windriver.com>
-Date:   Fri Jan 18 11:10:35 2013 -0500
+Le Thu, 17 Jan 2013 08:44:34 -0800,
+Colin Foe-Parker <colin.foeparker@aclimalabs.com> a =C3=A9crit :
+> So this is patch is truly reactionary, I was just trying to fix the bitba=
+ke recipe so that it would build.
+>=20
+> That being said, it appears that "Otavio" already fixed this issue in the=
+ master branch but it hasn't filtered down to denzil yet.  a17cda6e85f990bd=
+3569df731ec0f223b185ec6b =20
+>=20
+a17cda6e85f990bd3569df731ec0f223b185ec6b cherry picked in denzil-next.
 
-    autofs: fails to compile with openldap disabled
-    
-    As of 5.0.6, it appears that changes were introduced so that
-    if you compile with openldap disabled and openldap headers are not
-    available, then autofs fails to build.
-    
-    Since autofs no longer depends on openldap, remove the dependency
-    
-    Signed-off-by: Amy Fong <amy.fong@windriver.com>
-
-diff --git a/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-new file mode 100644
-index 0000000..b62f955
---- /dev/null
-+++ b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-@@ -0,0 +1,40 @@
-+autofs: fails to compile with openldap disabled
-+
-+As of 5.0.6, it appears that changes were introduced so that 
-+if you compile with openldap disabled and openldap headers are not
-+available, then autofs fails to build.
-+
-+Signed-off-by: Amy Fong <amy.fong@windriver.com>
-+--
-+ lookup_ldap.h |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+---
-+ include/lookup_ldap.h |    4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+--- a/include/lookup_ldap.h
-++++ b/include/lookup_ldap.h
-+@@ -1,7 +1,9 @@
-+ #ifndef LOOKUP_LDAP_H
-+ #define LOOKUP_LDAP_H
-+ 
-++#ifdef WITH_LDAP
-+ #include <ldap.h>
-++#endif
-+ 
-+ #ifdef WITH_SASL
-+ #include <openssl/ssl.h>
-+@@ -109,10 +111,12 @@
-+ 
-+ #define LDAP_AUTH_USESIMPLE	0x0008
-+ 
-++#ifdef WITH_LDAP
-+ /* lookup_ldap.c */
-+ LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct lookup_context *ctxt);
-+ int unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_context *ctxt);
-+ int authtype_requires_creds(const char *authtype);
-++#endif
-+ 
-+ #ifdef WITH_SASL
-+ /* cyrus-sasl.c */
-diff --git a/recipes-daemons/autofs/autofs_5.0.7.bb b/recipes-daemons/autofs/autofs_5.0.7.bb
-index c1b0b46..a6683ff 100644
---- a/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -3,7 +3,9 @@ SECTION = "base"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--DEPENDS += "openldap libtirpc flex-native bison-native"
-+PR = "r1"
-+
-+DEPENDS += "libtirpc flex-native bison-native"
- 
- inherit autotools systemd
- 
-@@ -30,6 +32,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
-            file://cross.patch \
-            file://libtirpc.patch \
-            file://libtirpc-name-clash-backout.patch \
-+           file://fix_disable_ldap.patch \
-           "
- 
- SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
+Eric
 
 
