@@ -1,38 +1,38 @@
-Received: from mail-ea0-f177.google.com ([209.85.215.177])
+Received: from mail-ee0-f51.google.com ([74.125.83.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Tx3MA-0003y9-HW
+	(envelope-from <andrea.adami@gmail.com>) id 1Tx3MI-0003yc-Eg
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jan 2013 23:27:32 +0100
-Received: by mail-ea0-f177.google.com with SMTP id n13so2175479eaa.22
+	Sun, 20 Jan 2013 23:27:33 +0100
+Received: by mail-ee0-f51.google.com with SMTP id d17so2534933eek.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jan 2013 14:11:47 -0800 (PST)
+	Sun, 20 Jan 2013 14:11:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=z2bGcUl1Vm8W3K7ZjLt37rSHSRs8EZ7J9b3oaggLxTg=;
-	b=uonQ+OeC6jw+uqkzmecpWNlrLRHxu6vKDRDfC/qRwXC55dLdhG6n5qYqYXoMCg83go
-	tzKbLBNMmDggyUi7Qw+uzYVj7yy8g0OtbDsNBycznnOud1Yz/FN1XlscbJuPl2nr7anS
-	WNuuvAwpdGftrYLEO1MaTQUYWs0zeNmHfsAsHRGjhDd2mw2LOqkaoyjV5wxeX48j/M/m
-	rQIp2GeOJa8Xvfilyt/+EiTCdWg/3Z7kowi/1OUhFZkKcku3o//GfqkvsDRL9J3BP6ot
-	IMRCw0xhtsXKykEEP4LueLTodgBkxO7k9Fwl3dg8CFEXNe5noNi8/7nLBxlwORhbsVqa
-	c86w==
-X-Received: by 10.14.176.66 with SMTP id a42mr53145107eem.34.1358719906943;
-	Sun, 20 Jan 2013 14:11:46 -0800 (PST)
+	bh=VIXC3p899nyG62xrrPg7P6XOAVf6sZzc6zIRXdV0BSM=;
+	b=mMSxaI+Sw2Icomgy059YhHu26xInJkimLH942W/fM0Habx1VcoL70rrdCgkjjsuuYw
+	T91vbn/ghI8jTW1ow/RFXcmM/QMG2jCzwlHe8mPJQ4Gj0vtGBjk7TaBiFDUJltsvs3jw
+	mZGeHYK4JtRey+SJ7t9rMDGxbXZAUQSUCbRXkOQVVUXwj03nG3vVLs0KS9TzB5HHz2vF
+	UjvRU0RalhW/qFVe2zI3fjwTlplwOabnoi1LJqQFxeFJFzYWLEUs2LjSETou22L2HkPx
+	CWQiXZOZg/xTjuqD+qsOcx21D+nM3oezH0Zwpbkb3w9EKu5pJ4IAhg1h3Z9PHV+B7Ind
+	0/cg==
+X-Received: by 10.14.173.69 with SMTP id u45mr53232622eel.21.1358719914921;
+	Sun, 20 Jan 2013 14:11:54 -0800 (PST)
 Received: from mizar.localdomain
 	(host170-248-dynamic.5-87-r.retail.telecomitalia.it. [87.5.248.170])
-	by mx.google.com with ESMTPS id w44sm19450405eep.6.2013.01.20.14.11.45
+	by mx.google.com with ESMTPS id w44sm19450405eep.6.2013.01.20.14.11.53
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 20 Jan 2013 14:11:46 -0800 (PST)
+	Sun, 20 Jan 2013 14:11:54 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jan 2013 23:11:28 +0100
-Message-Id: <703dceb01a7ef01f30dca7c50902acfa6560372b.1358719629.git.andrea.adami@gmail.com>
+Date: Sun, 20 Jan 2013 23:11:31 +0100
+Message-Id: <8cbbf95af74e99d19d1b0b48bd94ff73dc1e6746.1358719629.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.12.4
 In-Reply-To: <cover.1358719629.git.andrea.adami@gmail.com>
 References: <cover.1358719629.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1358719629.git.andrea.adami@gmail.com>
 References: <cover.1358719629.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/5] linux-yocto_3.2: convert ktype/standard to explicit ktypes/standard/standard.scc
+Subject: [meta-handheld][PATCH 5/5] linux-yocto_3.4: minor config cleanings towards 3.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,94 +48,131 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 20 Jan 2013 22:27:43 -0000
 
+* fix lack of some mtd options needed by collie
+* remove union_fs
+* some options are now detected as non-hardware: move them
+* still WIP
+
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc   | 2 +-
- recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc     | 2 +-
- recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc | 2 +-
- recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc | 2 +-
- recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc   | 2 +-
- recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc     | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ .../linux/linux-yocto-3.4/collie/collie.cfg           | 19 ++++++++++++++-----
+ .../linux/linux-yocto-3.4/zaurus-hardware.cfg         |  9 ++++++---
+ .../linux/linux-yocto-3.4/zaurus-non-hardware.cfg     |  9 ++++++++-
+ .../linux/linux-yocto-3.4/zaurus-pxa-common.cfg       | 10 ----------
+ 4 files changed, 28 insertions(+), 19 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc
-index 4cb0a6d..40cd6ca 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/akita/akita-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE akita
- define KTYPE standard
- define KARCH arm
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+index 5c0a7bf..791c966 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+@@ -1,9 +1,4 @@
+ #
+-# General setup
+-#
+-CONFIG_KERNEL_LZMA=y
+-
+-#
+ # System Type
+ #
+ CONFIG_ARCH_SA1100=y
+@@ -35,6 +30,20 @@ CONFIG_SPARSEMEM_EXTREME=y
+ CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
  
--include ktypes/standard
-+include ktypes/standard/standard.scc
+ #
++# RAM/ROM/Flash chip drivers
++#
++CONFIG_MTD_CFI=y
++CONFIG_MTD_JEDECPROBE=y
++CONFIG_MTD_GEN_PROBE=y
++CONFIG_MTD_CFI_INTELEXT=y
++CONFIG_MTD_CFI_UTIL=y
++
++#
++# Mapping drivers for chip access
++#
++CONFIG_MTD_SA1100=y
++
++#
+ # Multimedia Capabilities Port drivers
+ #
+ CONFIG_MCP=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+index 1336bf0..ae3627a 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+@@ -1,14 +1,11 @@
+ CONFIG_ARM=y
+ CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+ CONFIG_GENERIC_GPIO=y
+-CONFIG_KTIME_SCALAR=y
+ CONFIG_HAVE_PROC_CPU=y
+ CONFIG_STACKTRACE_SUPPORT=y
+ CONFIG_HAVE_LATENCYTOP_SUPPORT=y
+ CONFIG_LOCKDEP_SUPPORT=y
+ CONFIG_TRACE_IRQFLAGS_SUPPORT=y
+-CONFIG_HARDIRQS_SW_RESEND=y
+-CONFIG_GENERIC_IRQ_PROBE=y
+ CONFIG_RWSEM_GENERIC_SPINLOCK=y
+ CONFIG_ARCH_HAS_CPUFREQ=y
+ CONFIG_ARCH_HAS_CPU_IDLE_WAIT=y
+@@ -156,6 +153,12 @@ CONFIG_SENSORS_MAX1111=y
+ CONFIG_SSB_POSSIBLE=y
  
- kconf hardware akita.cfg
+ #
++# Multimedia Capabilities Port drivers
++#
++CONFIG_REGULATOR=y
++CONFIG_REGULATOR_DUMMY=y
++
++#
+ # Graphics support
+ #
+ CONFIG_FB=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg b/recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg
+index 1fced91..d76d794 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg
+@@ -1,3 +1,11 @@
++CONFIG_KERNEL_LZMA=y
++CONFIG_HARDIRQS_SW_RESEND=y
++CONFIG_GENERIC_IRQ_PROBE=y
++#
++# General setup
++#
++CONFIG_KTIME_SCALAR=y
++
+ CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
+ CONFIG_HAVE_IRQ_WORK=y
+ CONFIG_IRQ_WORK=y
+@@ -320,7 +328,6 @@ CONFIG_PROC_PAGE_MONITOR=y
+ CONFIG_TMPFS_POSIX_ACL=y
+ CONFIG_TMPFS_XATTR=y
+ CONFIG_MISC_FILESYSTEMS=y
+-CONFIG_UNION_FS=y
+ CONFIG_JFFS2_FS=y
+ CONFIG_JFFS2_FS_DEBUG=0
+ CONFIG_JFFS2_FS_WRITEBUFFER=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg b/recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg
+index 78d0e17..dace6fd 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg
+@@ -62,16 +62,6 @@ CONFIG_AUTO_ZRELADDR=y
+ CONFIG_PXA_FICP=m
  
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc
-index 50e17af..c72f5b5 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/c7x0/c7x0-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE c7x0
- define KTYPE standard
- define KARCH arm
- 
--include ktypes/standard
-+include ktypes/standard/standard.scc
- 
- kconf hardware c7x0.cfg
- 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc
-index b225485..a164a0b 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE collie
- define KTYPE standard
- define KARCH arm
- 
--include ktypes/standard
-+include ktypes/standard/standard.scc
- 
- kconf hardware collie.cfg
- 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc
-index 3ad4d30..d017624 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/poodle/poodle-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE poodle
- define KTYPE standard
- define KARCH arm
- 
--include ktypes/standard
-+include ktypes/standard/standard.scc
- 
- kconf hardware poodle.cfg
- 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc
-index 06daf5d..31d9a0d 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/spitz/spitz-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE spitz
- define KTYPE standard
- define KARCH arm
- 
--include ktypes/standard
-+include ktypes/standard/standard.scc
- 
- kconf hardware spitz.cfg
- 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc b/recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc
-index 066fdce..735ec1d 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.2/tosa/tosa-standard.scc
-@@ -2,7 +2,7 @@ define KMACHINE tosa
- define KTYPE standard
- define KARCH arm
- 
--include ktypes/standard
-+include ktypes/standard/standard.scc
- 
- kconf hardware tosa.cfg
- 
+ #
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_MAP_BANK_WIDTH_1=y
+-CONFIG_MTD_MAP_BANK_WIDTH_2=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-CONFIG_MTD_CFI_I1=y
+-CONFIG_MTD_CFI_I2=y
+-CONFIG_MTD_ROM=y
+-
+-#
+ # PATA SFF controllers with BMDMA
+ #
+ CONFIG_PATA_PXA=y
 -- 
 1.7.12.4
 
