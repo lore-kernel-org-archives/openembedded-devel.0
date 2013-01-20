@@ -1,39 +1,39 @@
-Received: from mail-ee0-f44.google.com ([74.125.83.44])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TwtNO-00078X-NO
+	(envelope-from <koen@dominion.thruhere.net>) id 1TwtNR-00078b-RO
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 20 Jan 2013 12:47:55 +0100
-Received: by mail-ee0-f44.google.com with SMTP id l10so2386743eei.17
+Received: by mail-ee0-f52.google.com with SMTP id b15so2374890eek.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jan 2013 03:32:23 -0800 (PST)
+	Sun, 20 Jan 2013 03:32:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:x-gm-message-state;
-	bh=oHVPzaFdKU1SQ+cZiiJbmASWG8H8T9BnKQHhtXU/6c8=;
-	b=pw4QQymBzDs6Stca4xQQ4nid0ioJxo17sHbLm43ByMQDm7W1xcFakcl0eRazVWdUo5
-	YKQTbyGhhepSVIemVcJQdO+nUPtsohPcUA+kPanQzlQJGf/87WySNhZACmcLqJ7W2H9y
-	qbnOlSfsQcWSw/UG5pWEBQ2OLkWXJWAZvYFpTtn1YC22BcnGXU6amv9ca+hqjlwvoO03
-	7JtAR4q5/+DqAu6DuIte0ZYjpXt4AYO3rh3GrRnw2fVglZYQE4QyFwawQ1w5FZvMYCmk
-	bSshG040hFx9bO9hd92qX6aqzQalkW4byBdgvEyw2Jjhaz109gW9ThqHSvtVpZDXR8Yn
-	xVCg==
-X-Received: by 10.14.223.135 with SMTP id v7mr48181478eep.41.1358681543726;
-	Sun, 20 Jan 2013 03:32:23 -0800 (PST)
+	bh=SntIscoDJANoCUCLs8t+mvIN1JrwXuYEIIsMA2kcOJM=;
+	b=c3w8LdjdDaMwk10gRgPK5G9vyA5wwXBMWpiuSWacJyUEOB3x8BgPD+I0Qv1wvZd4LW
+	/lMCkbO6Qj+enTWypRYFgPL/Po+J591lh7Iug2mn4EFLQQt/rTAGGA3imc0dE+rTGWNp
+	Omb1fh5eKYk7I4wtdBCLwwKhdl0eR5Z6v+sC5nCMVoZXAcQ8OvhOkveWSNtN8eJC/lPx
+	hsI8p/rR48nyOIm4/7ZUdxxe2/ainXyCNxHstQvJC8zAJ+hYjWLOWmYDwPuZXsM+VYSK
+	CP8dIgVlO6KIXM8s65ofm3Am9BJzjL2KJ9K0xJ9TLAV5MPHVa/7zd3MCxEwuUBQjZQCE
+	RcNg==
+X-Received: by 10.14.0.133 with SMTP id 5mr47786181eeb.29.1358681546871;
+	Sun, 20 Jan 2013 03:32:26 -0800 (PST)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id k4sm16888656eep.15.2013.01.20.03.32.22
+	by mx.google.com with ESMTPS id k4sm16888656eep.15.2013.01.20.03.32.25
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 20 Jan 2013 03:32:23 -0800 (PST)
+	Sun, 20 Jan 2013 03:32:26 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jan 2013 12:32:06 +0100
-Message-Id: <1358681528-19761-5-git-send-email-koen@dominion.thruhere.net>
+Date: Sun, 20 Jan 2013 12:32:08 +0100
+Message-Id: <1358681528-19761-7-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.8.1
 In-Reply-To: <1358681528-19761-1-git-send-email-koen@dominion.thruhere.net>
 References: <1358681528-19761-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmmGW5qSJF+kCkC1UfvNNv3ae/IxJEcB8nhIiBZsqrjkl1CAuVkdBou4DdTXElxuvnzQQML
+X-Gm-Message-State: ALoCoQk2CH8IV/V7Ffv6AvrMsKznO5EJhjjxxQR0YhOTYwB18OVMPyoqtq7D4aqvvC7yo6voqWSS
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][meta-multimedia][PATCH v2 5/7] iftop: add 1.0pre2
+Subject: [meta-oe][meta-multimedia][PATCH v2 7/7] znc: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,34 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jan 2013 11:48:00 -0000
+X-List-Received-Date: Sun, 20 Jan 2013 11:47:57 -0000
+X-List-Received-Date: Sun, 20 Jan 2013 11:47:57 -0000
+X-List-Received-Date: Sun, 20 Jan 2013 11:47:57 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-networking/recipes-support/iftop/iftop_1.0pre2.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
+ meta-networking/recipes-irc/znc/znc_git.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-networking/recipes-irc/znc/znc_git.bb
 
-diff --git a/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
+diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
 new file mode 100644
-index 0000000..f1ecf3d
+index 0000000..aea8ed4
 --- /dev/null
-+++ b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "iftop does for network usage what top(1) does for CPU usage."
-+HOMEPAGE = "http://www.ex-parrot.com/pdw/iftop/"
-+
-+DEPENDS = "libpcap ncurses"
-+
++++ b/meta-networking/recipes-irc/znc/znc_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "ZNC, an advanced IRC bouncer"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 +
-+SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
-+SRC_URI[md5sum] = "fef521a49ec0122458d02c64212af3c5"
-+SRC_URI[sha256sum] = "1b193037bb3019afae88cd94c87468aac4b045d81ab816ed8d2f489716b14027"
++DEPENDS = "openssl"
++
++PV = "1.0+git"
++
++SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
++SRC_URI = "git://github.com/znc/znc.git"
++
++S = "${WORKDIR}/git"
 +
 +inherit autotools
 +
++# ZNC has a custom autogen.sh that states that this command is needed *and* expected to fail
++do_configure_prepend() {
++	automake --add-missing || true
++}
 -- 
 1.8.1
 
