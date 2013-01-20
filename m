@@ -1,38 +1,39 @@
-Received: from mail-wi0-f173.google.com ([209.85.212.173])
+Received: from mga10.intel.com ([192.55.52.92] helo=fmsmga102.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TwwWH-0007X3-Ka
+	(envelope-from <ross.burton@intel.com>) id 1Tx1O5-0007cN-CR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jan 2013 16:09:19 +0100
-Received: by mail-wi0-f173.google.com with SMTP id hn17so6462445wib.6
+	Sun, 20 Jan 2013 21:21:14 +0100
+Received: from mail-lb0-f200.google.com ([209.85.217.200])
+	by mga11.intel.com with ESMTP/TLS/RC4-SHA; 20 Jan 2013 12:05:35 -0800
+Received: by mail-lb0-f200.google.com with SMTP id k6so1172058lbo.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jan 2013 06:53:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=NnXjBS84V/hiaErDFLl9Ooa6ENwYLWzKvmm50Hqbq4o=;
-	b=NpMlmZRv+AgKdjGUXPQO8WebZBA310Vr75kIhl3KbH5bNJpdjrxbC9HnE4eDGthwxr
-	emTfX3kJAwdsXt0Ly9ChOjcuekDePZ5nihIVFYvnzU4KDsZHN0BTKxy7tF/NDOJZbQ/f
-	KCI7EBxqXRpIK0bmcYhn8Q66r4THROipv0aoBu5P0Sol6KcLNi6khfeXT1d5FL9FaGTa
-	4yeq9A6dfYxDy62pmSlnxRknErfqybiRn5zU70i1/S6xxc6XYO7u7gTr9aw15UdYG4Qs
-	HC6ijW4RYLdnJokXfy1m6CuuJfOgs01HKNhnnaOPM4zmbCd7a5j1zyltZUj+tE/T8QJP
-	6Tdg==
-X-Received: by 10.180.77.35 with SMTP id p3mr11349669wiw.18.1358693626343;
-	Sun, 20 Jan 2013 06:53:46 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id s16sm16716918wii.0.2013.01.20.06.53.45
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 20 Jan 2013 06:53:45 -0800 (PST)
-Date: Sun, 20 Jan 2013 15:53:47 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 20 Jan 2013 12:05:33 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=BE9PVtA1rJ7zZGIGd/uDVruOKLYMuGOIgJ9nsNrQaTw=;
+	b=JUrTR7IFrzbKHdubUdO0qUXvhaHvL1I9XZFMLzCYr21uvAIHAkmKJBgrL4+tJvlIiZ
+	HDL7Zbn5QEeys9ky8q9EmDfJtUz6gMwr7iIatcsNlJLSllF47TvtXtcNY5X+kHvGLpfp
+	kJ+TnL1qVfydPP43GBSlTns2NQwOItukFjQpkBoaoMO7Bf2cLno0fDNqac09eV74sDf6
+	wOQAWZALz/D1waSfFTkfYxbm9jm1oBxYex2ARoiRhaeK5GE0XwVq1Fsr642d64AGGcmF
+	ZFNcL2/+DOVBfQk5qzCmlGat+idWfC7ArSISiBIaiVyOJh6uqNuU0j1wdWMdm1+VBTbJ
+	loVw==
+X-Received: by 10.194.71.244 with SMTP id y20mr22859047wju.19.1358712333286;
+	Sun, 20 Jan 2013 12:05:33 -0800 (PST)
+X-Received: by 10.194.71.244 with SMTP id y20mr22859044wju.19.1358712333098;
+	Sun, 20 Jan 2013 12:05:33 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id l5sm15224310wia.10.2013.01.20.12.05.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 20 Jan 2013 12:05:32 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130120145347.GH29386@jama.palm1.palmone.com>
-References: <1358461961-5703-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<20130119100356.GG29386@jama.palm1.palmone.com>
-	<50FA7388.7080208@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <50FA7388.7080208@linaro.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] php: cleanup QA warnings
+Date: Sun, 20 Jan 2013 20:03:34 +0000
+Message-Id: <1358712214-21396-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+X-Gm-Message-State: ALoCoQljkD6oE+6oafu8HdRqztZRFhvNgyL8onZaLslG0YNHJlDvMBpLD/1agrPPhggkJ5pNhxV1sumv+35fNosV1BvstrLbVcX5bPe0AkYVx6NS0nWY3/Dlx6AihSTLFoTQKKhYqhU6ktuPOBaKD4eolks40V3tIyGwTJ/Y7ofDvfEwwr/ifUvKBo/Z7bt/IZxP4kbuzeCJ
+Subject: [meta-gnome][PATCH] metacity: add, from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,57 +47,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jan 2013 15:09:22 -0000
-X-Groupsio-MsgNum: 42759
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WRT3RXLOp/bBMgTI"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Jan 2013 20:21:15 -0000
 
---WRT3RXLOp/bBMgTI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Metacity, the GNOME 2 window manager.  Moved from oe-core as it's never used nor
+tested there.
 
-On Sat, Jan 19, 2013 at 11:20:56AM +0100, Marcin Juszkiewicz wrote:
-> W dniu 19.01.2013 11:03, Martin Jansa pisze:
-> > I think this /home is still there:
-> > php-5.3.19: php: Files/directories were installed but not shipped
-> >   /home
-> >   /home/jenkins
-> >   /home/jenkins/oe
-> >   /home/jenkins/oe/shr-core-branches
-> >   /home/jenkins/oe/shr-core-branches/shr-core
->=20
-> It is ${TMPDIR} not /home/ - if you have idea how to find out where it
-> is and how to safely remove it...
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ .../metacity/remove-yelp-help-rules-var.patch      |   28 ++++++++++++++++++
+ .../recipes-gnome/metacity/metacity_2.34.13.bb     |   30 ++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
 
-Ah right. Last time I was touching php I was trying to prevent creating
-this directory structure but failed, maybe something ugly like:
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch b/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+new file mode 100644
+index 0000000..1970e9a
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+@@ -0,0 +1,28 @@
++Remove unused variable (YELP_HELP_RULES)
++
++Upstream-Status: Pending
++Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
++
++Index: metacity-2.34.13/doc/creating_themes/Makefile.am
++===================================================================
++--- metacity-2.34.13.orig/doc/creating_themes/Makefile.am
+++++ metacity-2.34.13/doc/creating_themes/Makefile.am
++@@ -1,6 +1,5 @@
++ ### This part of Makefile.am can be customized by you.
++ 
++-@YELP_HELP_RULES@
++ 
++ # The name of the directory in /usr/share/gnome/help/, 
++ # and the name of the main .xml file:
++Index: metacity-2.34.13/doc/creating_themes/Makefile.in
++===================================================================
++--- metacity-2.34.13.orig/doc/creating_themes/Makefile.in
+++++ metacity-2.34.13/doc/creating_themes/Makefile.in
++@@ -455,7 +455,6 @@ uninstall-am:
++ 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am
++ 
++ 
++-@YELP_HELP_RULES@
++ 
++ # Tell versions [3.59,3.63) of GNU make to not export all variables.
++ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+new file mode 100644
+index 0000000..3605201
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+@@ -0,0 +1,30 @@
++SECTION = "x11/wm"
++DESCRIPTION = "Metacity is the boring window manager for the adult in you."
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://src/include/main.h;endline=24;md5=c2242df552c880280315989bab626b90"
++
++DEPENDS = "gsettings-desktop-schemas startup-notification gtk+ gconf gdk-pixbuf-native libcanberra gnome-doc-utils"
++PR = "r0"
++
++inherit gnome update-alternatives
++
++GNOME_COMPRESS_TYPE = "xz"
++
++SRC_URI += "file://remove-yelp-help-rules-var.patch"
++SRC_URI[archive.md5sum] = "6d89b71672d4fa49fc87f83d610d0ef6"
++SRC_URI[archive.sha256sum] = "8cf4dbf0da0a6f36357ce7db7f829ec685908a7792453c662fb8184572b91075"
++
++ALTERNATIVE_${PN} = "x-window-manager"
++ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/metacity"
++ALTERNATIVE_PRIORITY = "10"
++
++EXTRA_OECONF += "--disable-verbose \
++	         --disable-xinerama"
++
++do_configure_prepend() {
++	sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
++}
++
++FILES_${PN} += "${datadir}/themes ${datadir}/gnome-control-center ${datadir}/gnome"
++
+-- 
+1.7.10.4
 
-TMP=3D/OE/shr-core/tmp-eglibc/work/armv5te/php-5/OE/shr-core/tmp-eglibc/wor=
-k;
-WORKDIR=3D/OE/shr-core/tmp-eglibc/work/armv5te/php-5
 
-while test ${TMP} !=3D ${WORKDIR}; do
-  rmdir ${TMP}
-  TMP=3D`dirname ${TMP}`;
-done
 
-?
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---WRT3RXLOp/bBMgTI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlD8BPsACgkQN1Ujt2V2gByBGQCeIBqkgkiiOMe0NQbX/IJ0hqCx
-gA8AnRTbjy/yhXf9VmJqKAoqSkdwRhTM
-=NXlP
------END PGP SIGNATURE-----
-
---WRT3RXLOp/bBMgTI--
