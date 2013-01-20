@@ -1,38 +1,38 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1Tx3MF-0003yR-UX
+	(envelope-from <andrea.adami@gmail.com>) id 1Tx3MD-0003yE-CI
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 20 Jan 2013 23:27:33 +0100
-Received: by mail-ee0-f49.google.com with SMTP id d4so2538215eek.22
+Received: by mail-ee0-f52.google.com with SMTP id b15so2417989eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jan 2013 14:11:52 -0800 (PST)
+	Sun, 20 Jan 2013 14:11:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=eebGKQg+Gu8RFD5H/NZLDsIk8/KF0O0gSi4F2NiVElY=;
-	b=Tl6R7CONrUI5vMs6k7M4smkIidrh4JR91nirJztQNeXAati8tYGnI1yk+gJvtesLD0
-	wxVKfFNNcPRdXl10ySCggPdZ/nNhmDnIv6khHkf72to13loVzJV3nObl55UN/+JIfE3i
-	WPO/CSVHcqb5jexO7qPUVlfSrn88AcFoHCJ4RucItbzXhcFfS1r4hmaFmUxheKFgP+Jh
-	Bv0NXjXZO6PlmYO1BthLON43bUTUMbUTTkfo72RV5PSzNJA3gXugiVydMxBP9El5tj65
-	24Kyl46pcYnmG98dj0vuIUxZOKZj/2tv4ZOwmgdGyyzggMTtRgcdsZ/7S1PDS4f6YyKQ
-	D2rA==
-X-Received: by 10.14.221.9 with SMTP id q9mr53488366eep.3.1358719912471;
-	Sun, 20 Jan 2013 14:11:52 -0800 (PST)
+	bh=ZWdD5T/P9Vg9TzNzcoKRogkkBiLVEw4it4fwc2srrx4=;
+	b=ng72BWXgoalQy475Sx/0ZKRj2FurcSh43Dv+zxBXgHyNgxqApFbQyDC5KPFph8L0J/
+	xWiB6QXSOriHL7LCPlmtVvc40W6vUV4JZweE3WBfVcP9LB6RaECMm88AWZU8Zb/FLFfq
+	NqD4JDnIx/rtMlGHd5vEuaz12e5je+p407jUwPyCiUiGZhQehX44gqGc+kdm28ZQ8viv
+	Thc31Zm9/pYx+NPf04HZomkBK7aHub3rTtpp8/UfxpzUdsWCKt8541WLmWAdw3BrhoHa
+	7D840ODnhlgH0gntSBlLQMPeuWt4JbBVs31jVYAPdkvZXBTbXOaHwwloe0HGlegYMpz4
+	9LfQ==
+X-Received: by 10.14.194.199 with SMTP id m47mr53332184een.11.1358719909910;
+	Sun, 20 Jan 2013 14:11:49 -0800 (PST)
 Received: from mizar.localdomain
 	(host170-248-dynamic.5-87-r.retail.telecomitalia.it. [87.5.248.170])
-	by mx.google.com with ESMTPS id w44sm19450405eep.6.2013.01.20.14.11.50
+	by mx.google.com with ESMTPS id w44sm19450405eep.6.2013.01.20.14.11.48
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 20 Jan 2013 14:11:51 -0800 (PST)
+	Sun, 20 Jan 2013 14:11:49 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jan 2013 23:11:30 +0100
-Message-Id: <4f361da0244066ce479b6e7f6db4375dc9983f18.1358719629.git.andrea.adami@gmail.com>
+Date: Sun, 20 Jan 2013 23:11:29 +0100
+Message-Id: <15a8b4d0bf0dad54a20c3fc59c2003bc113d97bd.1358719629.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.12.4
 In-Reply-To: <cover.1358719629.git.andrea.adami@gmail.com>
 References: <cover.1358719629.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1358719629.git.andrea.adami@gmail.com>
 References: <cover.1358719629.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 4/5] linux-kexecboot_3.2: convert ktype/tiny to explicit ktypes/tiny/tiny.scc
+Subject: [meta-handheld][PATCH 3/5] linux-yocto_3.4: convert ktype/standard to explicit ktypes/standard/standard.scc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,86 +50,86 @@ X-List-Received-Date: Sun, 20 Jan 2013 22:27:44 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-tiny.scc           | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc  | 2 +-
- .../linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-tiny.scc         | 2 +-
- .../linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-tiny.scc         | 2 +-
- .../linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-tiny.scc           | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc  | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc   | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc     | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc   | 2 +-
+ recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc     | 2 +-
  6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-tiny.scc
-index 5db1834..918de3e 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-tiny.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc
+index bfab7f4..21096d0 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE akita
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware akita-kexecboot.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc
-index 3a55040..2f20731 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc
+ include akita.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc
+index 05fc1c6..325c7c7 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE c7x0
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware c7x0-kexecboot.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-tiny.scc
-index 3142aca..14027f1 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-tiny.scc
+ include c7x0.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc
+index 30b6fba..7283ad9 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE collie
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware collie-kexecboot.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-tiny.scc
-index 9f475e1..995f057 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-tiny.scc
+ include collie.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc
+index b9fa8d6..31ad9df 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE poodle
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware poodle-kexecboot.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-tiny.scc
-index 803e176..588e066 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-tiny.scc
+ include poodle.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc
+index 0bee389..5b8e2c3 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE spitz
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware spitz-kexecboot.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc
-index d74ac0d..95044f8 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc
+ include spitz.scc
+diff --git a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc
+index c91ffef..b2e1324 100644
+--- a/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc
++++ b/recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc
 @@ -2,6 +2,6 @@ define KMACHINE tosa
- define KTYPE tiny
+ define KTYPE standard
  define KARCH arm
  
--include ktypes/tiny
-+include ktypes/tiny/tiny.scc
+-include ktypes/standard
++include ktypes/standard/standard.scc
  
- kconf hardware tosa-kexecboot.cfg
+ include tosa.scc
 -- 
 1.7.12.4
 
