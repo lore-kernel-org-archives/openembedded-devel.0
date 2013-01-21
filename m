@@ -1,38 +1,20 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from afflict.kos.to ([92.243.29.197])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TxEo4-0000P9-2c
+	(envelope-from <riku.voipio@linaro.org>) id 1TxIeU-0003jl-8t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jan 2013 11:41:23 +0100
-Received: by mail-wi0-f175.google.com with SMTP id hm11so6986510wib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2013 02:25:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=aH+qH+6CfFycUHX6o2CUQFdGVAmQRB6J3hwMD2IIaCU=;
-	b=pW2bvaHweCe+yBSsNUQ2ohH0kw6SkgkZNVj9NJ96IrU1UTSB7z+4Vsm7yY94aXjRay
-	1vOvlxdDY6KEmO8duhYoho5dXu4op6ilAiaxiBmT/rkUr4HI5oWJtk+/U4ZMAIi6ACrb
-	QNFEyizhq9+MNZrNCBxryKhCjYyat9Jv+/GWmlzsFVgR2By7LrldDmRYr0ketWKImVIT
-	1ubX9hU8PiZCKqjNSvaehvIu6lfgT0LHUEPnZAQkvujb9NmjyWO6mvv593kQ3AOZkXt0
-	Uy7w2BhspZbVPZncV0yhkYRJKKAJw0DV0u4UgUmpH67IQCDZZ/yIrRt0cjb0+KnwxHMO
-	/idw==
-X-Received: by 10.180.80.230 with SMTP id u6mr14248844wix.20.1358763918211;
-	Mon, 21 Jan 2013 02:25:18 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id l5sm17966206wia.10.2013.01.21.02.25.17
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 21 Jan 2013 02:25:17 -0800 (PST)
-Date: Mon, 21 Jan 2013 11:25:20 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 21 Jan 2013 15:47:11 +0100
+Received: from aimless.elisa-laajakaista.fi
+	(a91-156-58-157.elisa-laajakaista.fi [91.156.58.157])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by afflict.kos.to (Postfix) with ESMTPSA id 67D81264BE;
+	Mon, 21 Jan 2013 15:31:42 +0100 (CET)
+From: Riku Voipio <riku.voipio@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130121102520.GM29386@jama.palm1.palmone.com>
-References: <1358681528-19761-1-git-send-email-koen@dominion.thruhere.net>
-	<1358681528-19761-2-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1358681528-19761-2-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][meta-multimedia][PATCH v2 2/7] x264: add git version
+Date: Mon, 21 Jan 2013 16:31:38 +0200
+Message-Id: <1358778699-30412-1-git-send-email-riku.voipio@linaro.org>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] fuse: add aarch64 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,106 +28,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2013 10:41:33 -0000
-X-Groupsio-MsgNum: 42772
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GoZzJvFfKjxI3RhA"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Jan 2013 14:47:17 -0000
 
---GoZzJvFfKjxI3RhA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+u64/u32 is not defined in sys/types.h, include linux/types.h like
+the kernel version of fuse.h does. Patch sent to upstream mailing list.
 
-On Sun, Jan 20, 2013 at 12:32:03PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-oe/recipes-multimedia/x264/x264_git.bb | 38 +++++++++++++++++++++++=
-++++++
->  1 file changed, 38 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/x264/x264_git.bb
->=20
-> diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipe=
-s-multimedia/x264/x264_git.bb
-> new file mode 100644
-> index 0000000..8199a83
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY =3D "x264 is a free software library and application for encodin=
-g video streams into the H.264/MPEG-4 AVC format"
-> +HOMEPAGE =3D "http://www.videolan.org/developers/x264.html"
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +
-> +DEPENDS =3D "yasm-native"
-> +
-> +SRC_URI =3D "git://git.videolan.org/x264.git"
-> +SRCREV =3D "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
-> +
-> +PV =3D "r2230+git"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit lib_package pkgconfig
-> +
-> +EXTRA_OECONF =3D '--prefix=3D${prefix} \
-> +                --host=3D${HOST_SYS} \
-> +                --cross-prefix=3D${TARGET_PREFIX} \
-> +                --sysroot=3D${STAGING_DIR_TARGET} \
-> +                --enable-shared \
-> +                --enable-static \
-> +                --disable-lavf \
-> +                ${X264_DISABLE_ASM} \
-> +               '
+Upstream-Status: Submitted
 
-Did you forget to initialize X264_DISABLE_ASM?
+Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
+---
+ .../recipes-support/fuse/fuse-2.9.2/aarch64.patch  |   20 ++++++++++++++++++++
+ meta-oe/recipes-support/fuse/fuse_2.9.2.bb         |    1 +
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
 
-| You specified a pre-ARMv6 or Thumb-1 CPU in your CFLAGS.
-| If you really want to run on such a CPU, configure with --disable-asm.
-| ERROR: Function failed: do_configure (see
-/OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/x264/r2230+git-r0/te=
-mp/log.do_configure.369
-for further information)
+diff --git a/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch b/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
+new file mode 100644
+index 0000000..180f544
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
+@@ -0,0 +1,20 @@
++Upstream-Status: Submitted
++
++Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
++
++--- a/include/fuse_kernel.h
+++++ b/include/fuse_kernel.h
++@@ -88,12 +88,7 @@
++ #ifndef _LINUX_FUSE_H
++ #define _LINUX_FUSE_H
++ 
++-#include <sys/types.h>
++-#define __u64 uint64_t
++-#define __s64 int64_t
++-#define __u32 uint32_t
++-#define __s32 int32_t
++-#define __u16 uint16_t
+++#include <linux/types.h>
++ 
++ /*
++  * Version negotiation:
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb b/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
+index 23b9447..b558c4d 100644
+--- a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
++++ b/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
+@@ -9,6 +9,7 @@ PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
+            file://gold-unversioned-symbol.patch \
++           file://aarch64.patch \
+           "
+ SRC_URI[md5sum] = "7d80d0dc9cc2b9199a0c53787c151205"
+ SRC_URI[sha256sum] = "81a728fb3f87da33063068735e2fb7e2cd89df207d32687d3d3278385279cefc"
+-- 
+1.7.10.4
 
-Cheers,
 
-> +
-> +do_configure() {
-> +	./configure ${EXTRA_OECONF}
-> +}
-> +
-> +# Get rid of -e
-> +EXTRA_OEMAKE =3D ""
-> +AS =3D "${TARGET_PREFIX}gcc"
-> +
-> +do_install() {
-> +	oe_runmake install DESTDIR=3D${D}
-> +}
-> --=20
-> 1.8.1
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---GoZzJvFfKjxI3RhA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlD9F5AACgkQN1Ujt2V2gBy7MACeMySfvx9kRGV1MCHpHxmOeGDU
-kNYAnj8h3XBMUdePGl5lI1Pvx+nMQUlU
-=7qn5
------END PGP SIGNATURE-----
-
---GoZzJvFfKjxI3RhA--
