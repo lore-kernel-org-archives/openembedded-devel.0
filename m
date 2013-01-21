@@ -1,33 +1,35 @@
-Received: from mail-pb0-f43.google.com ([209.85.160.43])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TxMST-000568-Gx
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TxNkx-0000Ab-No
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jan 2013 19:51:15 +0100
-Received: by mail-pb0-f43.google.com with SMTP id jt11so2103923pbb.30
+	Mon, 21 Jan 2013 21:14:12 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0LJweHq024176
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2013 10:35:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=gRW4Z5YfkYxL4nj+Sz9qlT008LKT4/JJNIR9zpnA9vU=;
-	b=aR8lZB4RWweAx79MEhkAJwPFv7ZUxCiyQ7DVWCfT6wKiDAw8dIUuWOuC8mKRgusPky
-	syD6Xzlt14NZ+5mru413MhQTe16NV75tsIguXOBGElTB6Rj/Vu9E5nOB7eRVTuqwzLtx
-	qXv4gXfMpxoIC8rjOAx8BsqNk18a83HLic+l8SW590mzmmvoDNKu7EvrYa3NvUnSwttU
-	r0v8WuMwE+CP8A7Jx/inDTOjtfm2jT/KF8Ebm1tYhbNw9fuLSyDXTqhOPIvEAEc1BYSY
-	lyqtli3U07OK40UUU8/eI70+PnrgTDqZz8ftVD2ll5LOjnCTsBNEGq5Y3EItLXf41shb
-	fuiw==
-X-Received: by 10.66.78.1 with SMTP id x1mr49547473paw.2.1358793331879;
-	Mon, 21 Jan 2013 10:35:31 -0800 (PST)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id vq4sm9096196pbc.67.2013.01.21.10.35.30
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 21 Jan 2013 10:35:31 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jan 2013 10:35:20 -0800
-Message-Id: <1358793321-11181-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-kde][PATCH 1/2] qt4-native, qt4-x11-free: Rename bbappends to match current OE-Core recipes
+	Mon, 21 Jan 2013 11:58:40 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Mon, 21 Jan 2013 11:58:39 -0800
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id D1F6F7FD0	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jan 2013 14:56:48 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 228AA20B49; Mon,
+	21 Jan 2013 14:58:39 -0500 (EST)
+Date: Mon, 21 Jan 2013 14:58:39 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130121195838.GA10801@windriver.com>
+References: <20130118171332.GA12933@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <20130118171332.GA12933@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking] [PATCH] autofs: fails to compile with openldap disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,108 +43,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2013 18:51:22 -0000
+X-List-Received-Date: Mon, 21 Jan 2013 20:14:16 -0000
+X-Groupsio-MsgNum: 42778
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dDRMvlgZJXvWKvBx"
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- README                                           |    3 ++-
- recipes-misc-support/qt4-native_4.8.3.bbappend   |    8 --------
- recipes-misc-support/qt4-native_4.8.4.bbappend   |    8 ++++++++
- recipes-misc-support/qt4-x11-free_4.8.3.bbappend |   12 ------------
- recipes-misc-support/qt4-x11-free_4.8.4.bbappend |   12 ++++++++++++
- 5 files changed, 22 insertions(+), 21 deletions(-)
- delete mode 100644 recipes-misc-support/qt4-native_4.8.3.bbappend
- create mode 100644 recipes-misc-support/qt4-native_4.8.4.bbappend
- delete mode 100644 recipes-misc-support/qt4-x11-free_4.8.3.bbappend
- create mode 100644 recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+--dDRMvlgZJXvWKvBx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/README b/README
-index a6164c9..0635e10 100644
---- a/README
-+++ b/README
-@@ -9,6 +9,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
- 
- Contributors:
- Copyright 2012 - Kai Kang
-+Copyright 2013 - Khem Raj
- Copyright 2012 - Koen Kooi
- Copyright 2012 - Robert Yang
- Copyright 2011, 2012 - Samuel Stirtzel
-@@ -46,4 +47,4 @@ FAQ / Troubleshooting:
-   Q: How to report bugs / request features?
-   A: Send your bugreports / feature requests to the openembedded-developer mailing list.
-      Include the [meta-kde] tag in the subject for easier readability.
--     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-\ No newline at end of file
-+     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-diff --git a/recipes-misc-support/qt4-native_4.8.3.bbappend b/recipes-misc-support/qt4-native_4.8.3.bbappend
-deleted file mode 100644
-index 5b04eb4..0000000
---- a/recipes-misc-support/qt4-native_4.8.3.bbappend
-+++ /dev/null
-@@ -1,8 +0,0 @@
--# Needed by kdelibs4-native
--DEPENDS += "openssl-native"
--
--EXTRA_OECONF += "-no-pch -no-sm -openssl"
--
--TOBUILD += "src/phonon"
--
--PRINC := "${@int(PRINC) + 1}"
-\ No newline at end of file
-diff --git a/recipes-misc-support/qt4-native_4.8.4.bbappend b/recipes-misc-support/qt4-native_4.8.4.bbappend
-new file mode 100644
-index 0000000..5b04eb4
---- /dev/null
-+++ b/recipes-misc-support/qt4-native_4.8.4.bbappend
-@@ -0,0 +1,8 @@
-+# Needed by kdelibs4-native
-+DEPENDS += "openssl-native"
-+
-+EXTRA_OECONF += "-no-pch -no-sm -openssl"
-+
-+TOBUILD += "src/phonon"
-+
-+PRINC := "${@int(PRINC) + 1}"
-\ No newline at end of file
-diff --git a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend b/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
-deleted file mode 100644
-index 32a6f27..0000000
---- a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
-+++ /dev/null
-@@ -1,12 +0,0 @@
--#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
--QT_CONFIG_FLAGS_append = " --reduce-exports"
--
--# Build OpenGL/ES support if available
--QT_GLFLAGS_omap3 = "-opengl es2 "
--DEPENDS_append_omap3 = " libgles-omap3"
--DEPENDS_append_ti33x = " libgles-omap3"
--
--# Needed by kdelibs
--QT_DISTRO_FLAGS = "-accessibility -sm"
--
--PRINC := "${@int(PRINC) + 3}"
-diff --git a/recipes-misc-support/qt4-x11-free_4.8.4.bbappend b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
-new file mode 100644
-index 0000000..32a6f27
---- /dev/null
-+++ b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
-@@ -0,0 +1,12 @@
-+#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
-+QT_CONFIG_FLAGS_append = " --reduce-exports"
-+
-+# Build OpenGL/ES support if available
-+QT_GLFLAGS_omap3 = "-opengl es2 "
-+DEPENDS_append_omap3 = " libgles-omap3"
-+DEPENDS_append_ti33x = " libgles-omap3"
-+
-+# Needed by kdelibs
-+QT_DISTRO_FLAGS = "-accessibility -sm"
-+
-+PRINC := "${@int(PRINC) + 3}"
--- 
-1.7.9.5
+Hey Amy,
 
+[[oe] [meta-networking] [PATCH] autofs: fails to compile with openldap disa=
+bled] On 13.01.18 (Fri 12:13) Amy Fong wrote:
 
+> commit 09947d772a36e4d2c2dc48356281bd3ce0a04b0c
+> Author: Amy Fong <amy.fong@windriver.com>
+> Date:   Fri Jan 18 11:10:35 2013 -0500
+>=20
+>     autofs: fails to compile with openldap disabled
+>    =20
+>     As of 5.0.6, it appears that changes were introduced so that
+>     if you compile with openldap disabled and openldap headers are not
+>     available, then autofs fails to build.
+>    =20
+>     Since autofs no longer depends on openldap, remove the dependency
+>    =20
+>     Signed-off-by: Amy Fong <amy.fong@windriver.com>
+>=20
+> diff --git a/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch b=
+/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
+> new file mode 100644
+> index 0000000..b62f955
+> --- /dev/null
+> +++ b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
+> @@ -0,0 +1,40 @@
+> +autofs: fails to compile with openldap disabled
+> +
+> +As of 5.0.6, it appears that changes were introduced so that=20
+> +if you compile with openldap disabled and openldap headers are not
+> +available, then autofs fails to build.
+> +
+> +Signed-off-by: Amy Fong <amy.fong@windriver.com>
 
+Did you say you'd already sent this upstream?  I can put in an
+upstream-status myself, but I'm not sure what it is right now.  :-)
+
+Alternatively, a new version with the upstream-status is good too.
+
+-J.
+
+> +--
+> + lookup_ldap.h |    4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +---
+> + include/lookup_ldap.h |    4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +--- a/include/lookup_ldap.h
+> ++++ b/include/lookup_ldap.h
+> +@@ -1,7 +1,9 @@
+> + #ifndef LOOKUP_LDAP_H
+> + #define LOOKUP_LDAP_H
+> +=20
+> ++#ifdef WITH_LDAP
+> + #include <ldap.h>
+> ++#endif
+> +=20
+> + #ifdef WITH_SASL
+> + #include <openssl/ssl.h>
+> +@@ -109,10 +111,12 @@
+> +=20
+> + #define LDAP_AUTH_USESIMPLE	0x0008
+> +=20
+> ++#ifdef WITH_LDAP
+> + /* lookup_ldap.c */
+> + LDAP *init_ldap_connection(unsigned logopt, const char *uri, struct loo=
+kup_context *ctxt);
+> + int unbind_ldap_connection(unsigned logopt, LDAP *ldap, struct lookup_c=
+ontext *ctxt);
+> + int authtype_requires_creds(const char *authtype);
+> ++#endif
+> +=20
+> + #ifdef WITH_SASL
+> + /* cyrus-sasl.c */
+> diff --git a/recipes-daemons/autofs/autofs_5.0.7.bb b/recipes-daemons/aut=
+ofs/autofs_5.0.7.bb
+> index c1b0b46..a6683ff 100644
+> --- a/recipes-daemons/autofs/autofs_5.0.7.bb
+> +++ b/recipes-daemons/autofs/autofs_5.0.7.bb
+> @@ -3,7 +3,9 @@ SECTION =3D "base"
+>  LICENSE =3D "GPL-2.0"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
+bb3"
+> =20
+> -DEPENDS +=3D "openldap libtirpc flex-native bison-native"
+> +PR =3D "r1"
+> +
+> +DEPENDS +=3D "libtirpc flex-native bison-native"
+> =20
+>  inherit autotools systemd
+> =20
+> @@ -30,6 +32,7 @@ SRC_URI =3D "${KERNELORG_MIRROR}/linux/daemons/autofs/v=
+5/autofs-${PV}.tar.bz2 \
+>             file://cross.patch \
+>             file://libtirpc.patch \
+>             file://libtirpc-name-clash-backout.patch \
+> +           file://fix_disable_ldap.patch \
+>            "
+> =20
+>  SRC_URI[md5sum] =3D "bc46838dece83c02d800ff144ed9f431"
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+-Joe MacDonald.
+:wq
+
+--dDRMvlgZJXvWKvBx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlD9ne4ACgkQPN8S4W6ZZnegnQCffPKKHcF73Q+MRkipTeEmBsDn
+w7EAnRW/+XQDE2yyROz1Z+P/oRPjQJ4V
+=BgMp
+-----END PGP SIGNATURE-----
+
+--dDRMvlgZJXvWKvBx--
