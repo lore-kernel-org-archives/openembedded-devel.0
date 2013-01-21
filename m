@@ -1,32 +1,24 @@
-Received: from mail-wg0-f45.google.com ([74.125.82.45])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TxEDl-00076q-8Z
+	(envelope-from <Lei.Yang@windriver.com>) id 1TxEQ9-0007eX-Rp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jan 2013 11:03:18 +0100
-Received: by mail-wg0-f45.google.com with SMTP id dq12so3533477wgb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jan 2013 01:47:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=3FMrvBATp4gdguqL5AYi4TgG2iTsyD1npyGWuoadrGs=;
-	b=N+VNbmyHs94zjMDncqlW2sVVei6FbUePaa6mm/RixEqK5hHxSxrpFhFvtF0+XoBhdS
-	BnB0/I4TzXjX+yIoJgqfytdifX29JZXkdmUbo/0ddrTw4ccgoQyPYIDv1TIHOL9ihQAr
-	5aQuOuzYQ4vEWbXm/2l2eKS6pljEmVTdQPkI7oMNvv2NUpSKtF2RVn1MbAiMYyZuldv5
-	2h6zchhQauWGk1Og2qCpvvq72SF0ediYeDi3BlrGBLRF/4If77KVI9bP8AIXm1NKbg58
-	FT6Q4XUePvGTo71CV7Ntauz7l6CD2np+hXvkHN+YNHFlpVrLz4m0mWivkd1p8pDM4PXd
-	iSEQ==
-X-Received: by 10.180.82.170 with SMTP id j10mr14276800wiy.2.1358761668618;
-	Mon, 21 Jan 2013 01:47:48 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id l5sm17821654wia.10.2013.01.21.01.47.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 21 Jan 2013 01:47:48 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jan 2013 10:47:48 +0100
-Message-Id: <1358761668-1064-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.1
-Subject: [PATCH][meta-systemd] systemd: remove dbus-systemd from RDEPENDS
+	Mon, 21 Jan 2013 11:16:06 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r0LA0a7V029924
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 21 Jan 2013 02:00:36 -0800 (PST)
+Received: from pek-lpgtest4.wrs.com (128.224.153.84) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Mon, 21 Jan 2013 02:00:35 -0800
+From: <lei.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Jan 2013 18:00:33 +0800
+Message-ID: <1358762433-11853-1-git-send-email-lei.yang@windriver.com>
+X-Mailer: git-send-email 1.7.1
+MIME-Version: 1.0
+Cc: meta-virtualization@yoctoproject.org
+Subject: [meta-oe][PATCH] multipath-tools: Add multipath-tools recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +32,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2013 10:03:19 -0000
+X-List-Received-Date: Mon, 21 Jan 2013 10:16:08 -0000
+Content-Type: text/plain
 
-* dbus-systemd package was removed in oe-core and it's part of PN
-  with systemd in DISTRO_FEATURES
-* fixes parsing after first part of meta-systemd merge to oe-core
+From: Lei Yang <lei.yang@windriver.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+This packages provides:
+- multipath: scans the system for multipathed devices, assembles
+- multipathd: waits for maps events then execs multipath
+- kpartx: maps linear devmaps to device partitions, which makes
+multipath maps partionable
+......
+
+Now,It can be used for kvm disk img partion for me.
+
+Signed-off-by: Lei Yang <lei.yang@windriver.com>
 ---
- meta-systemd/recipes-core/systemd/systemd_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../multipath-tools/multipath-tools_git.bb         |   46 ++++++++++++++++++++
+ 1 files changed, 46 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
 
-diff --git a/meta-systemd/recipes-core/systemd/systemd_git.bb b/meta-systemd/recipes-core/systemd/systemd_git.bb
-index 5722d35..f2e168e 100644
---- a/meta-systemd/recipes-core/systemd/systemd_git.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd_git.bb
-@@ -185,7 +185,7 @@ FILES_${PN} = " ${base_bindir}/* \
- FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/ ${PYTHON_SITEPACKAGES_DIR}/systemd/.debug/"
- FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd ${PYTHON_SITEPACKAGES_DIR}/systemd/*.la"
- 
--RDEPENDS_${PN} += "dbus-systemd udev-systemd"
-+RDEPENDS_${PN} += "udev-systemd"
- 
- # kbd -> loadkeys,setfont
- # systemd calls 'modprobe -sab --', which busybox doesn't support due to lack 
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+new file mode 100644
+index 0000000..e9509d3
+--- /dev/null
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+@@ -0,0 +1,46 @@
++SUMMARY = "Tools to Manage Multipathed Devices with the device-mapper"
++DESCRIPTION = "This package provides the tools to manage multipathed devices by \
++instructing the device-mapper multipath module what to do"
++
++HOMEPAGE = "http://christophe.varoqui.free.fr/"
++DEPENDS = "readline libaio lvm2"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=7be2873b6270e45abacc503abbe2aa3d"
++S="${WORKDIR}/git"
++
++
++SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http"
++
++SRCREV = "d3683ab18b386e9b3b54b59a122c689e9ebdf5cf"
++PV = "0.4.9+gitr${SRCPV}"
++
++inherit autotools
++
++EXTRA_OEMAKE="LIB=${libdir} exec_prefix=${exec_prefix} libdir=${libdir}"
++
++PACKAGES =+ "libmpathpersist mpathpersist kpartx libmultipath multipath multipathd libmultipath-dev libmpathpersist-dev"
++
++
++RDEPENDS_${PN} += "libmpathpersist mpathpersist kpartx libmultipath multipath multipathd"
++
++do_install_append () {
++	ln -sf libmpathpersist.so.0 ${D}${libdir}/libmpathpersist.so
++	ln -sf libmultipath.so.0 ${D}${libdir}/libmultipath.so
++}
++
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}     = ""
++
++FILES_libmpathpersist = "${libdir}/libmpathpersist*.so.0"
++FILES_mpathpersist = "${sbindir}/mpathpersist"
++FILES_kpartx = "${sbindir}/kpartx ${base_libdir}/udev/"
++FILES_libmultipath = "${libdir}/libcheck*.so ${libdir}/libpri*.so ${libdir}/libmultipath*.so.0"
++FILES_multipath = "${sbindir}/multipath ${sysconfdir}"
++FILES_multipathd = "${sbindir}/multipathd ${base_libdir}"
++
++#put the symbol link lib in -dev 
++FILES_libmultipath-dev = "${libdir}/libmultipath*.so"
++FILES_libmpathpersist-dev = "${libdir}/libmpathpersist*.so"
++
++
 -- 
-1.8.1.1
+1.7.1
 
 
 
