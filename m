@@ -1,15 +1,15 @@
 Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TxcCI-0008Eg-Lr
+	(envelope-from <ml@communistcode.co.uk>) id 1TxcEZ-0008Re-AN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 12:39:32 +0100
+	Tue, 22 Jan 2013 12:41:47 +0100
 From: ml@communistcode.co.uk
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2013 11:23:44 +0000
-Message-Id: <1358853824-30022-1-git-send-email-ml@communistcode.co.uk>
+Date: Tue, 22 Jan 2013 11:26:08 +0000
+Message-Id: <1358853968-27516-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.1.1
 Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [PATCH] jansson: update to 2.4 Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-oe][PATCH v2] jansson: update to 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -23,10 +23,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 11:39:32 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 11:41:48 -0000
 
 From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 ---
  meta-oe/recipes-extended/jansson/{jansson_2.3.1.bb => jansson_2.4.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
