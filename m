@@ -1,34 +1,34 @@
-Received: from mail-ie0-f169.google.com ([209.85.223.169])
+Received: from mail-la0-f43.google.com ([209.85.215.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1Txmjw-0004P0-8p
+	(envelope-from <cliff.brake@gmail.com>) id 1TxmmF-0004W2-3A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 23:54:49 +0100
-Received: by mail-ie0-f169.google.com with SMTP id c14so12625649ieb.14
+	Tue, 22 Jan 2013 23:57:11 +0100
+Received: by mail-la0-f43.google.com with SMTP id ek20so2931lab.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 14:39:17 -0800 (PST)
+	Tue, 22 Jan 2013 14:41:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=VzvXPddnL0YwhS0EB5r9mIMyIdcL4GeACDdJ11eiBR8=;
-	b=hD0jVcdPWkKwO9P+FSnnTiRp8qvsmKBEp3kQ+hBN3vZgx8kmFC6guJMaALiZ63Stja
-	jUCxFoPgQfXgqvdAYyOhvdwY9iISdcS131marMhWpAWxkUTokILxZIblzv/EVQoSJHT/
-	mmCnROAHgty95ueF/4cHxM3BRUDPvwykuyWv8xx81q9zgd3r0EfuIHYT/8WHd/1vq3Jr
-	M0dbXmElqYxQW9j9TxdWIoah0nEua8GcczYI+b8uCUTpmTUbcP++r0gscSVmWhaMJTu9
-	peK9PBbStNs19PRbmBAyvTe0D/mFcDCRnD1aU9A7DRPNRacXqvpmYH88oXFCSDZUz2bS
-	/ckQ==
-X-Received: by 10.50.91.168 with SMTP id cf8mr13437883igb.20.1358894357248;
-	Tue, 22 Jan 2013 14:39:17 -0800 (PST)
-Received: from mars.hq.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net.
-	[69.34.21.229])
-	by mx.google.com with ESMTPS id u4sm12994943igw.6.2013.01.22.14.39.14
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 22 Jan 2013 14:39:15 -0800 (PST)
-From: Cliff Brake <cliff.brake@gmail.com>
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=LgGX91EDw4Z3ClHFp9O01V+MYUidemgWPozklJ3V1l4=;
+	b=rWmLUsh2btKSmXClBK02N06n2DfJvpJM8cwSBVWH8pDEB4gAZF1DtVfmTv4VoE8e4b
+	U4jfSi3j3gi0DiC1Y+otjZ2Ifox8NONAGDcjiNMcxlnZfEOZaJF+FcIqxzSXLFGoXksN
+	piA+Ohq/1qJcILN9qgKAQT2ESRMT4zaLbThTt1hx/Hze/UbC8Qy4dpqQ2LrX0pmWh2WA
+	g+hG/Ubn3YP3P9sfzxCgUjGRQEeAVSgFESjV4A39f5sui2XN50vh1f/F7UKl/8qC7J5J
+	Pj1KpwAfIzrbCDz8USpHyx/u0mKG9Be8m7CUjJeDYTQV5+Ilyvf0JqKrFuHbNO8G3fl0
+	mO6Q==
+MIME-Version: 1.0
+X-Received: by 10.152.133.52 with SMTP id oz20mr4322328lab.30.1358894500318;
+	Tue, 22 Jan 2013 14:41:40 -0800 (PST)
+Sender: cliff.brake@gmail.com
+Received: by 10.114.80.4 with HTTP; Tue, 22 Jan 2013 14:41:40 -0800 (PST)
+In-Reply-To: <1358894348-10416-1-git-send-email-cliff.brake@gmail.com>
+References: <1358894348-10416-1-git-send-email-cliff.brake@gmail.com>
+Date: Tue, 22 Jan 2013 17:41:40 -0500
+X-Google-Sender-Auth: dQ0zQ0evfTk-CmKekHNPRo9p6A4
+Message-ID: <CAOd_LFy_n_euw+cniV7CuA+4E2wo0Kc5vCG6CH3XxT_AvBBCgw@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2013 17:39:08 -0500
-Message-Id: <1358894348-10416-1-git-send-email-cliff.brake@gmail.com>
-X-Mailer: git-send-email 1.8.1.1
-Cc: Cliff Brake <cbrake@bec-systems.com>
-Subject: [PATCH] beagleboard.conf: add additional sound modules
+Subject: Re: [PATCH] beagleboard.conf: add additional sound modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 22:54:49 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 22:57:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Cliff Brake <cbrake@bec-systems.com>
+Please ignore, got sent to the wrong list.
 
-require for audio to function
+Thanks,
+Cliff
 
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
----
- conf/machine/beagleboard.conf | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index b3604a5..8f84c6c 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -48,4 +48,5 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
- 
- # For a modularized kernel we want to drag in networking, sound, rtc etc."
--MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl"
-+MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
-+  kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
--- 
-1.8.1.1
-
+On Tue, Jan 22, 2013 at 5:39 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> From: Cliff Brake <cbrake@bec-systems.com>
+>
+> require for audio to function
+>
+> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+> ---
+>  conf/machine/beagleboard.conf | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+> index b3604a5..8f84c6c 100644
+> --- a/conf/machine/beagleboard.conf
+> +++ b/conf/machine/beagleboard.conf
+> @@ -48,4 +48,5 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+>  MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+>
+>  # For a modularized kernel we want to drag in networking, sound, rtc etc."
+> -MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl"
+> +MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
+> +  kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
+> --
+> 1.8.1.1
+>
 
 
