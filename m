@@ -1,18 +1,32 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mail-ob0-f181.google.com ([209.85.214.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1TxcFD-0008Uo-0C
+	(envelope-from <s.stirtzel@googlemail.com>) id 1TxceE-0001UE-8K
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 12:42:24 +0100
-Message-ID: <50FE777C.1070705@communistcode.co.uk>
-Date: Tue, 22 Jan 2013 11:26:52 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130109 Thunderbird/17.0.2
+	Tue, 22 Jan 2013 13:08:18 +0100
+Received: by mail-ob0-f181.google.com with SMTP id wc18so1563580obb.40
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jan 2013 03:52:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=gWageqlkN2beFuBmsSXqv7YDw3/cI56FEnjVgM5gLXc=;
+	b=RZR+7CKgypzGxYYTt6p+MCGcty6L3n++Z5Ni9GeShLK4zMcHHEIJHtx06xWXC/Oyeg
+	tpJdnRVQgCSC9L+zPijjZHK5W8SPo0br+zUmC/4ntYpHLIGYTBD/TgwKlgkZ1csXgR+T
+	hwQszpxaQy+//0fuj/8/yuvu18wkhPboXX01kWmgfMPIKuQ8LTI05M0ijj6XgGkEfLEq
+	PeXlKLR04cOyudDtrT12zxLVEwacxyIQuwMNrD6ArBdqsuN6lCiqKF4YPUUFT46BwgiA
+	IjA8dbWuUeKN1cBE0vpaz0QdkPcFRL4AzXK5k3rsJlMNwR0v4Ju2NpfYcuyJ5ELKSmNQ
+	E8Jg==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1358853824-30022-1-git-send-email-ml@communistcode.co.uk>
-In-Reply-To: <1358853824-30022-1-git-send-email-ml@communistcode.co.uk>
-Subject: Re: [PATCH] jansson: update to 2.4 Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+X-Received: by 10.60.24.161 with SMTP id v1mr16106954oef.115.1358855563790;
+	Tue, 22 Jan 2013 03:52:43 -0800 (PST)
+Received: by 10.60.54.34 with HTTP; Tue, 22 Jan 2013 03:52:43 -0800 (PST)
+In-Reply-To: <1358793321-11181-1-git-send-email-raj.khem@gmail.com>
+References: <1358793321-11181-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 22 Jan 2013 12:52:43 +0100
+Message-ID: <CAGiJk9f-qGrO67xKBxMLpePWUq_cdvzhyH7TrCuad0xxU51GDQ@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-kde][PATCH 1/2] qt4-native, qt4-x11-free: Rename bbappends to match current OE-Core recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,46 +40,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 11:42:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jan 2013 12:08:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 22/01/13 11:23, ml@communistcode.co.uk wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->
+2013/1/21 Khem Raj <raj.khem@gmail.com>:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->   meta-oe/recipes-extended/jansson/{jansson_2.3.1.bb => jansson_2.4.bb} | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-oe/recipes-extended/jansson/{jansson_2.3.1.bb => jansson_2.4.bb} (69%)
+>  README                                           |    3 ++-
+>  recipes-misc-support/qt4-native_4.8.3.bbappend   |    8 --------
+>  recipes-misc-support/qt4-native_4.8.4.bbappend   |    8 ++++++++
+>  recipes-misc-support/qt4-x11-free_4.8.3.bbappend |   12 ------------
+>  recipes-misc-support/qt4-x11-free_4.8.4.bbappend |   12 ++++++++++++
+>  5 files changed, 22 insertions(+), 21 deletions(-)
+>  delete mode 100644 recipes-misc-support/qt4-native_4.8.3.bbappend
+>  create mode 100644 recipes-misc-support/qt4-native_4.8.4.bbappend
+>  delete mode 100644 recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+>  create mode 100644 recipes-misc-support/qt4-x11-free_4.8.4.bbappend
 >
-> diff --git a/meta-oe/recipes-extended/jansson/jansson_2.3.1.bb b/meta-oe/recipes-extended/jansson/jansson_2.4.bb
-> similarity index 69%
-> rename from meta-oe/recipes-extended/jansson/jansson_2.3.1.bb
-> rename to meta-oe/recipes-extended/jansson/jansson_2.4.bb
-> index 8c7a11e..811c830 100644
-> --- a/meta-oe/recipes-extended/jansson/jansson_2.3.1.bb
-> +++ b/meta-oe/recipes-extended/jansson/jansson_2.4.bb
-> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6946b728e700de875e60ebb453cc3a20"
->   
->   SRC_URI = "http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
->   
-> -SRC_URI[md5sum] = "28848fbc02d7657d930f97ce74f80d93"
-> -SRC_URI[sha256sum] = "5f2ebf63580c73cc115634861b5da1c919499dde37d2e73b16e28b0c8ddc3921"
-> +SRC_URI[md5sum] = "c4629b89bf0432f3158c461e88fe0113"
-> +SRC_URI[sha256sum] = "1fcbd1ac3d8b610644acf86a5731d760bb228c9acbace20a2ad0f23baec79b41"
->   
->   inherit autotools pkgconfig
->   
+> diff --git a/README b/README
+> index a6164c9..0635e10 100644
+> --- a/README
+> +++ b/README
+> @@ -9,6 +9,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
+>
+>  Contributors:
+>  Copyright 2012 - Kai Kang
+> +Copyright 2013 - Khem Raj
+>  Copyright 2012 - Koen Kooi
+>  Copyright 2012 - Robert Yang
+>  Copyright 2011, 2012 - Samuel Stirtzel
+> @@ -46,4 +47,4 @@ FAQ / Troubleshooting:
+>    Q: How to report bugs / request features?
+>    A: Send your bugreports / feature requests to the openembedded-developer mailing list.
+>       Include the [meta-kde] tag in the subject for easier readability.
+> -     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> \ No newline at end of file
+> +     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> diff --git a/recipes-misc-support/qt4-native_4.8.3.bbappend b/recipes-misc-support/qt4-native_4.8.3.bbappend
+> deleted file mode 100644
+> index 5b04eb4..0000000
+> --- a/recipes-misc-support/qt4-native_4.8.3.bbappend
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -# Needed by kdelibs4-native
+> -DEPENDS += "openssl-native"
+> -
+> -EXTRA_OECONF += "-no-pch -no-sm -openssl"
+> -
+> -TOBUILD += "src/phonon"
+> -
+> -PRINC := "${@int(PRINC) + 1}"
+> \ No newline at end of file
+> diff --git a/recipes-misc-support/qt4-native_4.8.4.bbappend b/recipes-misc-support/qt4-native_4.8.4.bbappend
+> new file mode 100644
+> index 0000000..5b04eb4
+> --- /dev/null
+> +++ b/recipes-misc-support/qt4-native_4.8.4.bbappend
+> @@ -0,0 +1,8 @@
+> +# Needed by kdelibs4-native
+> +DEPENDS += "openssl-native"
+> +
+> +EXTRA_OECONF += "-no-pch -no-sm -openssl"
+> +
+> +TOBUILD += "src/phonon"
+> +
+> +PRINC := "${@int(PRINC) + 1}"
+> \ No newline at end of file
+> diff --git a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend b/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+> deleted file mode 100644
+> index 32a6f27..0000000
+> --- a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
+> -QT_CONFIG_FLAGS_append = " --reduce-exports"
+> -
+> -# Build OpenGL/ES support if available
+> -QT_GLFLAGS_omap3 = "-opengl es2 "
+> -DEPENDS_append_omap3 = " libgles-omap3"
+> -DEPENDS_append_ti33x = " libgles-omap3"
+> -
+> -# Needed by kdelibs
+> -QT_DISTRO_FLAGS = "-accessibility -sm"
+> -
+> -PRINC := "${@int(PRINC) + 3}"
+> diff --git a/recipes-misc-support/qt4-x11-free_4.8.4.bbappend b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+> new file mode 100644
+> index 0000000..32a6f27
+> --- /dev/null
+> +++ b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+> @@ -0,0 +1,12 @@
+> +#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
+> +QT_CONFIG_FLAGS_append = " --reduce-exports"
+> +
+> +# Build OpenGL/ES support if available
+> +QT_GLFLAGS_omap3 = "-opengl es2 "
+> +DEPENDS_append_omap3 = " libgles-omap3"
+> +DEPENDS_append_ti33x = " libgles-omap3"
+> +
+> +# Needed by kdelibs
+> +QT_DISTRO_FLAGS = "-accessibility -sm"
+> +
+> +PRINC := "${@int(PRINC) + 3}"
+> --
+> 1.7.9.5
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Borked the commit. v2 incoming.
 
--- 
+Applied thanks,
 
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
+the newline Otavio mentioned was added too.
+
+
+FYI: I had the same change in a local update branch (it is not ready yet)
+On this branch I planned the following changes:
+  "Sanitize" the layer with the oe-stylize script
+  Update to latest versions of kdelibs, kde-workspace, kde-runtime and
+libkactivities
+  Enable full Krita support again (it was broken with Qt<4.8.2)
+  Add full packaging imported from rpm .spec files (don't know yet if
+this will work)
+
+After the branch is done the layer will be split to desktop and mobile versions,
+because the kdelibs are built with different configure flags for
+desktop and mobile profiles causing ABI incompatibility.
+
 
 --
-
+Regards
+Samuel
 
 
