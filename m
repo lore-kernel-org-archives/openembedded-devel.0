@@ -1,24 +1,33 @@
-Received: from new.bec-systems.com ([74.208.70.121] helo=bec-systems.com)
+Received: from [23.30.85.2] (helo=mail.breakawaysystems.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>)
-	id 1TxNv4-0000bj-3V; Mon, 21 Jan 2013 21:24:42 +0100
-Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1TxNVB-0000D6-Ve; Mon, 21 Jan 2013 14:57:57 -0500
+	(envelope-from <dave@lambsys.com>) id 1TxTh7-0006BP-1P
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jan 2013 03:34:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.breakawaysystems.com (Postfix) with ESMTP id 5427124A841
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jan 2013 20:11:16 -0600 (CST)
+Received: from mail.breakawaysystems.com ([127.0.0.1])
+	by localhost (mail-breakaway.protnet [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id XclAMTPLw1pg
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jan 2013 20:11:10 -0600 (CST)
+Received: from [192.168.1.100] (unknown [23.30.85.1])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: dlambert@breakawaysystems.com)
+	by mail.breakawaysystems.com (Postfix) with ESMTPSA id 3DE7A24A830
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jan 2013 20:11:09 -0600 (CST)
+Message-ID: <50FDF53C.90001@lambsys.com>
+Date: Mon, 21 Jan 2013 20:11:08 -0600
+From: David Lambert <dave@lambsys.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 21 Jan 2013 20:08:56 GMT
-Message-Id: <1358798936930.e026c45a@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-01-13 until 2013-01-20
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Angstrom Beaglebone broken again?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,567 +41,234 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jan 2013 20:25:12 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 22 Jan 2013 02:34:38 -0000
+X-Groupsio-MsgNum: 42780
+Content-Type: multipart/mixed; boundary="------------020404090009090508070800"
+
+--------------020404090009090508070800
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Changelog since 2013-01-13 until 2013-01-20.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Bogdan Marinescu (1):
-=20=20hig.py: refactor into individual components
-
-Jessica Zhang (1):
-=20=20hob: Fix GTK+ and PyGtk version check error message to be more clear
-
-Jon Szymaniak (1):
-=20=20hg.py: Fixed fetch failure that occurs when SRCREV is a tag.
-
-Peter Seebach (2):
-=20=20bitbake: data_smart.py and friends: Track file inclusions for bitbake =
--e
-=20=20bitbake: data_smart.py and friends: Track variable history
-
-Richard Purdie (2):
-=20=20BBHandler/data: Standardise some setVar access formats
-=20=20base.bbclass: Fix bitbake example class usage
-
-Tyler Hall (1):
-=20=20fetch2: Sort file checksums by value, not path
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Alexandru DAMIAN (2):
-=20=20wayland: add Wayland protocol library
-=20=20mesa-dri: enable the wayland-egl platform
-
-Andrei Dinu (1):
-=20=20Removed undisplayed picture from connman-gnome
-
-Bogdan Marinescu (1):
-=20=20oprofile: set correct kernel path
-
-Bruce Ashfield (9):
-=20=20kernel-yocto: remove unnecessary non-bare warning
-=20=20linux-yocto: normalize repository naming and SRC_URI options
-=20=20kernel-yocto: add KBUILD_OUTPUT to OE_TERMINAL_EXPORTS
-=20=20linux-yocto/meta: update include statements to explicit .scc format
-=20=20linux-yocto/routerstationpro: enable GPIO_SYSFS
-=20=20linux-yocto/3.4: integrate LTSI-3.4
-=20=20guilt: add git 1.8.x support
-=20=20linux-yocto/3.4: update to 3.4.26 and 3.4.25-rt37
-=20=20linux-yocto/3.4: update intel graphics features/configs
-
-Chen Qi (2):
-=20=20initscripts: remove finish.sh
-=20=20runqemu scripts: add support for booting an ISO image
-
-Christopher Larson (7):
-=20=20ptest.bbclass: don't add to PACKAGES if disabled
-=20=20license.bbclass: check LICENSE_pkg, not LICENSE_pn-pkg
-=20=20license: correct re.search/fnmatch indentation
-=20=20license.bbclass: cleanly handle invalid licenses in =
-incompatible_license
-=20=20linux-firmware: use LICENSEs which can actually be parsed
-=20=20base.bbclass: use debug messages for INCOMPATIBLE_LICENSE
-=20=20base.bbclass: improve the incompatible license logic a bit
-
-Constantin Musca (2):
-=20=20gcc: add missing dependency (zlib)
-=20=20pango: use qemu_run_binary instead of pango-native
-
-Cristian Iorga (7):
-=20=20qemu: machine override ability added
-=20=20db: upgrade to 5.3.21
-=20=20iproute2: upgrade to v3.7.0
-=20=20quota: upgrade to 4.01
-=20=20connman-conf: configures connman in qemu machines
-=20=20connman: upgrade to 1.10
-=20=20iptables: upgrade to 1.4.17
-
-Emilia Ciobanu (1):
-=20=20distrodata: Updated checkpkg task
-
-Enrico Scholz (1):
-=20=20package.bbclass: replace AUTOINC directly in PKGV
-
-Eric B=C3=A9nard (2):
-=20=20gitignore: only ignore meta- directories
-=20=20add meta-toolchain-qt
-
-Felipe F. Tonello (1):
-=20=20connman: fixed init script so connman can runs over nfs
-
-Holger Hans Peter Freyther (1):
-=20=20dropbear: Deal with truncated host keys by removing them
-
-Hongxu Jia (2):
-=20=20update-rc.d:fix support postrm at image creation time
-=20=20libnss-mdns:fix support prerm at image creation time
-
-Jason Wessel (1):
-=20=20populate_sdk_base.bbclass: Work around bugs with gnu tar < 1.24
-
-Kang Kai (1):
-=20=20perl: fix installed but not shipped issue
-
-Khem Raj (2):
-=20=20kernel.bbclass, module-base.bbclass: Use CC to form KERNEL_CC
-=20=20consolekit_0.4.5.bb: Package unpackaged systemd files
-
-Koen Kooi (1):
-=20=20libpam: register PAM session with logind
-
-Laurentiu Palcu (8):
-=20=20update-rc.d: check also that symlinks are valid
-=20=20update-rc.d: fix failure on target
-=20=20modutils-initscripts: improve modutils.sh
-=20=20orinoco-conf: remove dependencies of update-modules
-=20=20hostap-conf: remove dependencies of update-modules
-=20=20module.bbclass: do not use update-modules anymore
-=20=20kernel.bbclass: remove references to update-modules
-=20=20bitbake.conf: remove update-modules from DISTRO_FEATURES
-
-Marcin Juszkiewicz (2):
-=20=20oprofile: add AArch64 support
-=20=20libffi: add AArch64 support
-
-Mark Hatle (2):
-=20=20populate_sdk_rpm: Re-add a few system provides to the SDK
-=20=20update-alternatives: Add a build-time dependency
-
-Marko Lindqvist (38):
-=20=20libxdamage: update to upstream version 1.1.4
-=20=20coreutils: fix license segment md5sum boundary
-=20=20help2man: update to upstream version 1.40.13
-=20=20dbus-glib: replace obsolete automake macros with working ones
-=20=20tslib: replace obsolete automake macros with working ones
-=20=20makedepend: replace obsolete automake macros with working ones
-=20=20alsa-lib: replace obsolete automake macros with working ones
-=20=20python: replace obsolete automake macros with working ones
-=20=20libogg: replace obsolete automake macros with working ones
-=20=20libmad: replace obsolete automake macros with working ones
-=20=20libvorbis: replace obsolete automake macros with working ones
-=20=20opensp: replace obsolete automake macros with working ones
-=20=20gconf: replace obsolete automake macros with working ones
-=20=20startup-notification: replace obsolete automake macros with working =
-ones
-=20=20gtk+: replace obsolete automake macros with working ones
-=20=20gmp: replace obsolete automake macros with working ones
-=20=20bluez4: replace obsolete automake macros with working ones
-=20=20polkit: replace obsolete automake macros with working ones
-=20=20pango: replace obsolete automake macros with working ones
-=20=20libxsettings-client: replace obsolete automake macros with working =
-ones
-=20=20rgb: replace obsolete automake macros with working ones
-=20=20sysfsutils: replace obsolete automake macros with working ones
-=20=20vte: replace obsolete automake macros with working ones
-=20=20libtirpc: replace obsolete automake macros with working ones
-=20=20curl: fix build with automake-1.13
-=20=20bluez-hcidump: replace obsolete automake macros with working ones
-=20=20alsa-utils: replace obsolete automake macros with working ones
-=20=20tremor: replace obsolete automake macros with working ones
-=20=20ofono: replace obsolete automake macros with working ones
-=20=20libidn: add checksums to version 0.6.14 recipe
-=20=20gzip: fix license segment md5sum boundary
-=20=20iptables: fix license segment md5sum boundary
-=20=20shadow: fix license segment md5sum boundary
-=20=20ethtool: fix license segment md5sum boundary
-=20=20gperf: fix license segment md5sum boundary
-=20=20libidn: fix license segment md5sum boundary
-=20=20dbus: fix license segment md5sum boundary
-=20=20apmd: fix license segment md5sum boundary
-
-Martin Donnelly (1):
-=20=20base-files: add fstab for systemd based systems
-
-Martin Ertsaas (3):
-=20=20sstate: Do not add the --no-run-if-empty arguement to xargs when on =
-Darwin,=20
-=20=20quilt: Remove non-gnu.patch, and added configure flags for darwin.
-=20=20quilt: Don't use BUILD_ROOT on darwin.
-
-Martin Jansa (1):
-=20=20kernel.bbclass: don't depend on DATETIME
-
-Nitin A Kamble (2):
-=20=20xf86-video-modesetting: new recipe for gma500
-=20=20ia32-base.inc: Add more macros for xf86 drivers
-
-Paul Eggleton (3):
-=20=20classes/rootfs_*: error out if postinstalls exist with read-only =
-rootfs
-=20=20dropbear: allow configuring blank password option at runtime
-=20=20classes/image: improve debug-tweaks ssh server configuration
-
-Radu Moisan (5):
-=20=20default-distrovars: Add DISTRO_FEATURES_INITMAN to DISTRO_FEATURES
-=20=20default-providers: Automatically set PREFERRED_PROVIDER_udev
-=20=20systemd: add systemd recipes
-=20=20default-providers: Add systemd option to PREFERRED_PROVIDER_udev
-=20=20update-rc.d: disable update-rc.d.bbclass when systemd enabled
-
-Richard Purdie (4):
-=20=20package.bbclass: Fix shlibs cross package-arch contamination
-=20=20liburi-perl: Add BBCLASSEXTEND for native version
-=20=20libtool-cross: Add missing libltdl components to install
-=20=20cpan_build: Fix bashism
-
-Riku Voipio (2):
-=20=20nspr: add aarch64 support
-=20=20attr: convert to generic syscall numbers
-
-Robert P. J. Day (1):
-=20=20image_types.bbclass: Add and update comments regarding image types.
-
-Ross Burton (6):
-=20=20x11-common: set XDG_RUNTIME_DIR if it isn't already set
-=20=20weston: add reference Wayland compositor
-=20=20initramfs-live-boot: handle multiple udev locations
-=20=20dbus: respect systemd distro feature
-=20=20packagegroup-core-boot: install systemd-compat-units on systemd images
-=20=20packagegroup-core-boot: only install initscripts if we're using =
-sysvinit
-
-Saul Wold (2):
-=20=20xz: LICENSE field is wrong
-=20=20rpm2cpio: Update to match rpm4 specs for decompression
-
-Tom Zanussi (4):
-=20=20lttng: remove 'legacy' lttng
-=20=20lttng2-ust: rename to lttng-ust
-=20=20recipes-kernel/lttng-2.0: rename to recipes-kernel/lttng
-=20=20lttng-ust: bump PE
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Andrei Gherzan (5):
-=20=20bluez4: Package systemd service
-=20=20ofono: Package systemd service
-=20=20portmap: Add systemd service
-=20=20obexd: Update to v0.48 and remove openobex dependency
-=20=20libpostproc: Remove -disable-yasm as this is a nonexistent flag
-
-Enrico Scholz (2):
-=20=20systemd.bbclass: move disable operation into prerm() script
-=20=20gitpkgv.bbclass: cache GITPKGV result
-
-Jack Mitchell (1):
-=20=20hiawatha: update to 8.7
-
-Khem Raj (1):
-=20=20netcat_0.7.1.bb: Fix build with new versions of autotools
-
-Koen Kooi (4):
-=20=20tvheadend: add git version
-=20=20oscam: add svn version
-=20=20dvb-apps: import 1.1.1+hg from OE classic
-=20=20libav: update to 0.8.4
-
-Marcin Juszkiewicz (2):
-=20=20libav: move --enable-postproc to 0.8.4 recipe
-=20=20libav: add support for AArch64
-
-Martin Jansa (4):
-=20=20meta-systemd: connman: rename bbappend to match 1.10 from oe-core
-=20=20meta-systemd: connman, openssh: move bbappends to oe-core dir
-=20=20compat-wireless: upgrade and fixup
-=20=20gtk+3: drop recipe, now in oe-core
-
-Morgan Little (1):
-=20=20traceroute: Remove bashisms
-
-Philip Balister (3):
-=20=20uhd-firmware : Update to version 3.5.0.
-=20=20uhd : Update to version 3.5.0.
-=20=20gnuradio : Update to version 3.6.3.
-
-yanjun.zhu (1):
-=20=20autofs: do not check for modprobe
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Denys Dmytriyenko (1):
-=20=20curl: explicitly depend on openssl for https support
-
-Franklin S. Cooper Jr (16):
-=20=20m4-native: Remove remote-gets.patch from meta-arago
-=20=20gettext: Remove remote-gets.patch from meta-arago
-=20=20psplash_git: Remove patch
-=20=20arago.conf: Set PREFERRED_PROVIDER for udev
-=20=20busybox: Enable telnetd
-=20=20arago-source-ipk: Remove libgles-omap3
-=20=20shadow-securetty: Allow remote telnet login as root
-=20=20matrix-gui-apps: Add audio capture demo
-=20=20quick-playground: Port quick-playground from Arago
-=20=20arago-source-ipk.conf: Rename qml-playground quick-playground
-=20=20task-arago-tisdk-qte: Add Qt quick-playground application.
-=20=20task-arago-tisdk-matrix: Add quick-playground Matrix application
-=20=20screenshot: Add screenshot application
-=20=20task-arago-tisdk-amsdk: Add screenshot
-=20=20qt-tstat: Update Thermostat sources
-=20=20qt4-embedded-gles: Correct linux.conf
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Fabio Estevam (5):
-=20=20linux-fslc_3.7: udev needs CONFIG_DEVTMPFS_MOUNT
-=20=20linux-imx-2.6.35.3: udev needs CONFIG_DEVTMPFS_MOUNT
-=20=20linux-imx-2.6.35.3: imx23evk: udev needs CONFIG_DEVTMPFS_MOUNT
-=20=20linux-imx_2.6.35.3: Update to top of head
-=20=20linux-fslc_3.7.bb: Add CONFIG_LEGACY_PTYS to avoid warning
-
-Leonardo Sandoval (1):
-=20=20linux-imx_3.0.35: Enables eGalax touchscreen on i.MX6Q Sabre machines
-
-Otavio Salvador (7):
-=20=20mxsldr: Update to newer snapshot
-=20=20nativesdk-packagegroup-sdk-host: Fix inclusion of elftosb and mxsldr
-=20=20u-boot-fslc: Update to 2013.01-rc3
-=20=20imx-base.inc: Set interfaces provided by i.MX6 GPU libraries
-=20=20mxsldr: Fix SRC_URI which pointed to U-Boot instead of mxsldr
-=20=20u-boot: Update to 2013.01 release
-=20=20u-boot-mxsboot: Update to 2013.01
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-Tomas Frydrych (20):
-=20=20task-guacamayo: added pulseaudio-misc to pa packages set
-=20=20raspberrypi: updated bsp layer to upstream
-=20=20guacamayo-image.bbclass: customize RPi config.txt before doing rootfs
-=20=20guacamayo-image-mex: specify memory layout and cpu clocking for RPi
-=20=20gnome-settings-overrides: stop tracker from indexing removable media
-=20=20guacamayo-session-egl: process xdg/autostart even on RPi
-=20=20README.raspberrypi: update info on Mex status.
-=20=20guacamayo-session-common: always cleanup stale dbus info before dbus =
-setup
-=20=20clutter-1.12: work around a brokenness in keysym translation in evdev =
-backen
-=20=20evtest: simple tool for testing evdev input events
-=20=20task-guacamayo-devtools: added evtest tool
-=20=20package gst-omx
-=20=20gst-omx: fix version and RPi config
-=20=20gst-plugins-bad.bbappend: re-enable the default yocto plugins + =
-videoparsers
-=20=20userland.bbappend: fix up RPi userland package to install into /usr
-=20=20gst-omx: changed the RPi runtime dependency to libopenmaxil
-=20=20raspberrypi.conf: change libgles2/egl provider to userland
-=20=20task-guacamayo-core: for RPi include gst-omx
-=20=20task-guacamayo-core: only pull in gst-omx on RPi if DISTRO_FEATURES =
-says so
-=20=20guacamayo-sesion-egl (RPi): allow the user group to execute shutdown
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-Andreas M=C3=BCller (3):
-=20=20linux-omap-3.6: remove
-=20=20linux-versions-overo.inc: location of sakoman linux git has changed
-=20=20linux-mainline-3.8: prepare latest kernel
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Nitin A Kamble (7):
-=20=20gstreamer-vaapi_git: fix a build issue
-=20=20crownbay: specify graphics driver as a kernel feature
-=20=20emenlow: specify graphics driver as a kernel feature
-=20=20fri2: specify graphics driver as a kernel feature
-=20=20sys940x: create a v3.4 kernel recipe
-=20=20emenlow-noemgd: create a new BSP
-=20=20BSP layer READMEs: fix the YP Compliance link
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Andrei Gherzan (2):
-=20=20consolekit: Remove bbappend as gnome-common is not GPLv3
-=20=20busybox: Remove a bunch of configs
-
-Florin Sarbu (3):
-=20=20linux-yocto: Reworked bbappend to work with master poky changes.
-=20=20busybox: Update .bbappend to version 1.10
-=20=20node-startup-controller: Update package to git version 1.0.2
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Andreas M=C3=BCller (1):
-=20=20mesa-dri: update to 9.0.1 to match oe-core
-
-Denys Dmytriyenko (1):
-=20=20netbase: fix file search path for 'interfaces' file
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Martin Jansa (3):
-=20=20luna-sysmgr-common: Add dependency on serviceinstaller
-=20=20luna-sysmgr, webappmanager: Add qmake-webos-native dependency
-=20=20keyboard-efigs: Add missing dependencies
-
-Simon Busch (1):
-=20=20webappmanager: Add dependency on serviceinstaller
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Bogdan Marinescu (1):
-=20=20maintainers.inc: updated package owners
-
-Bruce Ashfield (1):
-=20=20linux-yocto/meta-yocto: update hardware reference BSPs to 3.4.26 and =
-LTSI
-
-Constantin Musca (1):
-=20=20gtk-directfb: rename to directfb
-
-Cristiana Voicu (1):
-=20=20Added DISTRO var to poky-bleeding conf file
-
-Emilia Ciobanu (1):
-=20=20Modified meta-yocto/conf/distro/include/package_regex.inc
-
-Richard Purdie (1):
-=20=20poky-bleeding: Ensure poky overrides are applied
-
-Tom Zanussi (9):
-=20=20yocto-bsp: add basic git connectivity check
-=20=20lttng: update references to legacy lttng recipes
-=20=20scripts/lib/bsp/engine.py: add yocto_layer_create()
-=20=20yocto-layer: new script
-=20=20yocto-layer: add help/usage
-=20=20yocto-layer: add 'layer' template data
-=20=20scripts/lib/bsp/engine.py: refactor bsp-creation code
-=20=20yocto-layer: add optional layer priority param
-=20=20scripts/lib/bsp/engine.py: add handling for JSON strings
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-
-
-
+     Over the past few weeks I have noticed that builds based on the=20
+Angstrom/Beaglebone distribution have been unreliable. Notably=20
+systemd/udev issues. Now I noticed a new issue (log below).
+     I understand that a dynamically update system will have bugs from=20
+time to time, but this appears to be getting worse. Am I the only one=20
+who is noticing this? If so, maybe I am doing something wrong. If not,=20
+is there any hope of the issue stabilizing somewhat?
+
+Regards,
+
+Dave.
+
+
+
+errors
+
+
+dlambert@daves-laptop ~/beaglebone/setup-scripts $ ./oebb.sh update
+Processing bitbake: Fixed to revision b1dbc24ebcc4e5100c32568c2c41fd982fb=
+4bcce, skipping update
+Processing meta-angstrom: Current branch angstrom-v2012.05-yocto1.2 is up=
+ to date.
+Processing meta-openembedded: Current branch denzil is up to date.
+Processing meta-ti: Current branch angstrom-staging-yocto1.2 is up to dat=
+e.
+Processing meta-ettus: Fixed to revision 5a6a642f6707dc42a5210dbbf01d2bdf=
+d869d4b0, skipping update
+Processing meta-efikamx: Fixed to revision 2c09a3a780b23448e8a6ca964256ff=
+7f5ccba65d, skipping update
+Processing meta-nslu2: Fixed to revision 3d9fc951b05b4df476374b6fc3085eba=
+c7f293ee, skipping update
+Processing meta-smartphone: Fixed to revision 2b106be01228f64298d6cb338f9=
+3088806594344, skipping update
+Processing meta-intel: Fixed to revision f75f9b6f68473eb0efac802409608f83=
+89be0030, skipping update
+Processing meta-xilinx: Fixed to revision 5191333565f9913b6175bb19485f732=
+0db82080b, skipping update
+Processing meta-openpandora: Fixed to revision 9221a48cd088707e0b03f27704=
+c5825fb754bc0c, skipping update
+Processing meta-raspberrypi: Current branch denzil is up to date.
+Processing meta-handheld: Fixed to revision 1f05a15aceb4c3a19fa070463b581=
+25b5658b2a9, skipping update
+Processing meta-opie: Fixed to revision efa3892b20a4ef80274e56e5633ebd62c=
+16f9731, skipping update
+Processing meta-java: Fixed to revision 3386ea6c96096f107f43f282f654e5afa=
+456109e, skipping update
+Processing meta-browser: Fixed to revision c47f59df2e723495679c751cbdf6a8=
+c6adec4b6a, skipping update
+Processing meta-mono: Fixed to revision 83f8233b0498aadb18bf7605c3ba6c71d=
+9e13a3a, skipping update
+Processing meta-kde: Fixed to revision 5b0882d951cfd71886d423c190faaa7c7f=
+932333, skipping update
+Processing openembedded-core: remote: Counting objects: 118, done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 86 (delta 73), reused 86 (delta 73)
+Unpacking objects: 100% (86/86), done.
+ From git://github.com/openembedded/oe-core
+    8925501..751c11e  master     -> origin/master
+  + dcc186d...475d8fe master-next -> origin/master-next  (forced update)
+Current branch denzil is up to date.
+dlambert@daves-laptop ~/beaglebone/setup-scripts $ bitbake systemd-image
+Loading cache: 100% |####################################################=
+##############################################| ETA:  00:00:00
+Loaded 2859 entries from dependency cache.
+
+OE Build Configuration:
+BB_VERSION        =3D "1.15.2"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "beaglebone"
+DISTRO            =3D "angstrom"
+DISTRO_VERSION    =3D "v2012.05"
+TUNE_FEATURES     =3D "armv7a vfp neon cortexa8"
+TARGET_FPU        =3D "vfp-neon"
+meta-angstrom     =3D "angstrom-v2012.05-yocto1.2:72de0508b00f2111674e8a5=
+6058c9e1ae7227697"
+meta-oe
+toolchain-layer
+meta-efl
+meta-gpe
+meta-gnome
+meta-xfce
+meta-initramfs    =3D "denzil:c0117f5ad7d1fe18d149bda426c7134ff24daae8"
+meta-opie         =3D "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
+meta-java         =3D "master:3386ea6c96096f107f43f282f654e5afa456109e"
+meta-browser      =3D "master:c47f59df2e723495679c751cbdf6a8c6adec4b6a"
+meta-mono         =3D "master:83f8233b0498aadb18bf7605c3ba6c71d9e13a3a"
+meta-kde          =3D "master:5b0882d951cfd71886d423c190faaa7c7f932333"
+meta-ti           =3D "angstrom-staging-yocto1.2:edfd9649cbd16b2cdb538595=
+4c0441c7bba92f8d"
+meta-efikamx      =3D "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
+meta-nslu2        =3D "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
+meta-htc
+meta-nokia
+meta-openmoko
+meta-palm         =3D "master:2b106be01228f64298d6cb338f93088806594344"
+meta-handheld     =3D "master:1f05a15aceb4c3a19fa070463b58125b5658b2a9"
+meta-raspberrypi  =3D "denzil:34eef2ea4f5f24630dbb73b386861430167b8431"
+meta-intel
+meta-sugarbay
+meta-crownbay
+meta-emenlow
+meta-fishriver
+meta-fri2
+meta-jasperforest
+meta-n450         =3D "master:f75f9b6f68473eb0efac802409608f8389be0030"
+meta              =3D "denzil:0a9e8bf35afd5990c1b586bba5eb68f643458a4b"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+NOTE: Running task 419 of 3256 (ID: 547, /home/dlambert/beaglebone/setup-=
+scripts/sources/meta-openembedded/toolchain-layer/recipes-core/eglibc/egl=
+ibc_2.12.bb, do_compile)
+NOTE: Running task 587 of 3256 (ID: 1465, virtual:native:/home/dlambert/b=
+eaglebone/setup-scripts/sources/openembedded-core/meta/recipes-support/db=
+/db_5.1.19.bb, do_compile)
+NOTE: package eglibc-2.12-r28: task do_compile: Started
+NOTE: package db-native-5.1.19-r4: task do_compile: Started
+ERROR: Function failed: do_compile (see /home/dlambert/beaglebone/setup-s=
+cripts/build/tmp-angstrom_v2012_05-eglibc/work/x86_64-linux/db-native-5.1=
+=2E19-r4/temp/log.do_compile.1471 for further information)
+ERROR: Logfile of failure stored in: /home/dlambert/beaglebone/setup-scri=
+pts/build/tmp-angstrom_v2012_05-eglibc/work/x86_64-linux/db-native-5.1.19=
+-r4/temp/log.do_compile.1471
+Log data follows:
+| ERROR: Function failed: do_compile (see /home/dlambert/beaglebone/setup=
+-scripts/build/tmp-angstrom_v2012_05-eglibc/work/x86_64-linux/db-native-5=
+=2E1.19-r4/temp/log.do_compile.1471 for further information)
+| NOTE: make -j2
+| ./libtool --mode=3Dlink gcc -avoid-version -isystem/home/dlambert/beagl=
+ebone/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-li=
+nux/usr/include -O2 -pipe  -rpath /home/dlambert/beaglebone/setup-scripts=
+/build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/usr/lib -L/home=
+/dlambert/beaglebone/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sys=
+roots/x86_64-linux/usr/lib -L/home/dlambert/beaglebone/setup-scripts/buil=
+d/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/lib -Wl,-rpath-link,=
+/home/dlambert/beaglebone/setup-scripts/build/tmp-angstrom_v2012_05-eglib=
+c/sysroots/x86_64-linux/usr/lib -Wl,-rpath-link,/home/dlambert/beaglebone=
+/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/l=
+ib -Wl,-rpath,/home/dlambert/beaglebone/setup-scripts/build/tmp-angstrom_=
+v2012_05-eglibc/sysroots/x86_64-linux/usr/lib -Wl,-rpath,/home/dlambert/b=
+eaglebone/setup-scripts/build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_6=
+4-linux/lib -Wl,-O1 -o libdb-5.1.la mut_tas.lo mut_pthread.lo  bt_compare=
+=2Elo bt_compress.lo bt_conv.lo bt_curadj.lo bt_cursor.lo bt_delete.lo bt=
+_method.lo bt_open.lo bt_put.lo bt_rec.lo bt_reclaim.lo bt_recno.lo bt_rs=
+earch.lo bt_search.lo bt_split.lo bt_stat.lo bt_compact.lo bt_upgrade.lo =
+btree_auto.lo hash.lo hash_auto.lo hash_compact.lo hash_conv.lo hash_dup.=
+lo hash_meta.lo hash_method.lo hash_open.lo hash_page.lo hash_rec.lo hash=
+_reclaim.lo hash_stat.lo hash_upgrade.lo qam_stub.lo rep_stub.lo repmgr_s=
+tub.lo db_vrfy_stub.lo log_verify_stub.lo lock.lo lock_deadlock.lo lock_f=
+ailchk.lo lock_id.lo lock_list.lo lock_method.lo lock_region.lo lock_stat=
+=2Elo lock_timer.lo lock_util.lo mut_alloc.lo mut_failchk.lo mut_method.l=
+o mut_region.lo mut_stat.lo  crypto_stub.lo clock.lo crdel_auto.lo crdel_=
+rec.lo db.lo db_am.lo db_auto.lo db_byteorder.lo db_cam.lo db_cds.lo db_c=
+ompact.lo db_compint.lo db_conv.lo db_dispatch.lo db_dup.lo db_err.lo db_=
+getlong.lo db_idspace.lo db_iface.lo db_join.lo db_log2.lo db_meta.lo db_=
+method.lo db_open.lo db_overflow.lo db_pr.lo db_rec.lo db_reclaim.lo db_r=
+emove.lo db_rename.lo db_ret.lo db_setid.lo db_setlsn.lo db_shash.lo db_s=
+ort_multiple.lo db_stati.lo db_truncate.lo db_upg.lo db_upg_opd.lo dbreg.=
+lo dbreg_stat.lo dbreg_auto.lo dbreg_rec.lo dbreg_util.lo dbt.lo env_allo=
+c.lo env_config.lo env_failchk.lo env_file.lo env_globals.lo env_open.lo =
+env_method.lo env_name.lo env_recover.lo env_region.lo env_register.lo en=
+v_sig.lo env_stat.lo fileops_auto.lo fop_basic.lo fop_rec.lo fop_util.lo =
+hash_func.lo hmac.lo log.lo log_archive.lo log_compare.lo log_debug.lo lo=
+g_get.lo log_method.lo log_print.lo log_put.lo log_stat.lo mkpath.lo mp_a=
+lloc.lo mp_bh.lo mp_fget.lo mp_fmethod.lo mp_fopen.lo mp_fput.lo mp_fset.=
+lo mp_method.lo mp_mvcc.lo mp_region.lo mp_register.lo mp_resize.lo mp_st=
+at.lo mp_sync.lo mp_trickle.lo openflags.lo os_abort.lo os_abs.lo os_allo=
+c.lo os_clock.lo os_cpu.lo os_ctime.lo os_config.lo os_dir.lo os_errno.lo=
+ os_fid.lo os_flock.lo os_fsync.lo os_getenv.lo os_handle.lo os_map.lo os=
+_method.lo os_mkdir.lo os_open.lo os_pid.lo os_rename.lo os_root.lo os_rp=
+ath.lo os_rw.lo os_seek.lo os_stack.lo os_stat.lo os_tmpdir.lo os_truncat=
+e.lo os_uid.lo os_unlink.lo os_yield.lo partition.lo seq_stat.lo sequence=
+=2Elo sha1.lo snprintf.lo txn.lo txn_auto.lo txn_chkpt.lo txn_failchk.lo =
+txn_method.lo txn_rec.lo txn_recover.lo txn_region.lo txn_stat.lo txn_uti=
+l.lo zerofill.lo  \
+| 		-lpthread
+| libtool: link: `mp_fopen.lo' is not a valid libtool object
+| make: *** [libdb-5.1.la] Error 1
+| ERROR: oe_runmake failed
+NOTE: package db-native-5.1.19-r4: task do_compile: Failed
+ERROR: Task 1465 (virtual:native:/home/dlambert/beaglebone/setup-scripts/=
+sources/openembedded-core/meta/recipes-support/db/db_5.1.19.bb, do_compil=
+e) failed with exit code '1'
+Waiting for 1 running tasks to finish:
+0: eglibc-2.12-r28 do_compile (pid 1470)
+NOTE: package eglibc-2.12-r28: task do_compile: Succeeded
+NOTE: Tasks Summary: Attempted 587 tasks of which 585 didn't need to be r=
+erun and 1 failed.
+
+Summary: 1 task failed:
+   virtual:native:/home/dlambert/beaglebone/setup-scripts/sources/openemb=
+edded-core/meta/recipes-support/db/db_5.1.19.bb, do_compile
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.=
+
+dlambert@daves-laptop ~/beaglebone/setup-scripts $
+
+
+--------------020404090009090508070800
+Content-Type: text/x-vcard; charset=utf-8;
+ name="dave.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="dave.vcf"
+
+begin:vcard
+fn:David Lambert
+n:Lambert;David
+org:Breakaway Systems LLC
+adr:;;24703 Lakebriar Drive;Katy;TX;77494;USA
+email;internet:dave@lambsys.com
+title:President
+tel;work:281 395-3439
+tel;fax:281 395-0796
+tel;cell:281 787-3648
+url:breakawaysystems.com
+version:2.1
+end:vcard
+
+
+--------------020404090009090508070800--
