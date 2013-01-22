@@ -1,39 +1,36 @@
-Received: from mail-pb0-f47.google.com ([209.85.160.47])
+Received: from mail-pb0-f46.google.com ([209.85.160.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TxdDs-0003k9-K6
+	(envelope-from <martin.jansa@gmail.com>) id 1TxdJh-0004LJ-EU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 13:45:05 +0100
-Received: by mail-pb0-f47.google.com with SMTP id wz17so3943671pbc.20
+	Tue, 22 Jan 2013 13:51:08 +0100
+Received: by mail-pb0-f46.google.com with SMTP id wy7so3934193pbc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 04:29:34 -0800 (PST)
+	Tue, 22 Jan 2013 04:35:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=kDZxX9pUvTjYrgbLNvfrPLgPPliZ0E43Cf/T1zkSyJ0=;
-	b=luDx5/427nlmHKbYcnsWMxoCb57FqKzgCK0SrfNw+vJg8dCqtBiHI+3fd8DrEZV4X4
-	gX5ANxAOGhOwPu0uO95oR32arRH8vOxitPUHkcJ41DTkjMM0VcHqNiouUNOCsysALK4o
-	NFv/gw+cpN9ILQ3pNxbPgVhnnHMy25ydlaj9z3BWoCWWp9wRoL738RkWmTPutqiTOAhz
-	/DPAdGBeohD8RhXEqWTtkAVnWhtFLnacVlaF04u4EptcNS8X5YyuuYLcHV2saH4zHMLX
-	CPDwE13ZPKY/NRnCc1EVkOv3M9xx13QxVABbFEBkhWV8LrznjFc8v9r35jNRnloKtqzk
-	cDcw==
-X-Received: by 10.66.84.232 with SMTP id c8mr56004044paz.8.1358857773976;
-	Tue, 22 Jan 2013 04:29:33 -0800 (PST)
+	bh=DFe1frQ5sWZKuMjSPAJlU3tw/+DvUyYUzpu+iHmqGUA=;
+	b=qkEscYd9ZYYvlQRz8mgXKmIP4LKbpJfSgDfsyhquoSPpehPbSOeHlxF7uFWIcNHUqy
+	X27el9a54t+m+QDuhZDawbOUCbUCLnutb/WO2R31q0Di2ZZEEDXFz/LrCFHy/9qCLurh
+	7eld+RXg3DfxqiwDdiBb9cpfrZ9GHb8VzK6drPxEnKgMpSl98OWBI1JHwc2RqrwYs+gU
+	SaUQ5b7eVD93WwJTqxuM08Tk+PAWSyIalx3Tl3e1BXQZXnGiXNgiiY2USAfGBHieeuCN
+	nxarvXKmTaqqzGsd3Eu85+u8ei3SuXB+qsC+1YTLCe0wxl6btDutDvK1BSSCwOXmjG5u
+	sJdw==
+X-Received: by 10.68.238.106 with SMTP id vj10mr39479575pbc.40.1358858134665; 
+	Tue, 22 Jan 2013 04:35:34 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id m3sm11349555pav.4.2013.01.22.04.29.31
+	by mx.google.com with ESMTPS id uh9sm10676979pbc.65.2013.01.22.04.35.32
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 22 Jan 2013 04:29:33 -0800 (PST)
-Date: Tue, 22 Jan 2013 13:29:33 +0100
+	Tue, 22 Jan 2013 04:35:33 -0800 (PST)
+Date: Tue, 22 Jan 2013 13:35:33 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130122122933.GT29386@jama.palm1.palmone.com>
-References: <1358461961-5703-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<20130119100356.GG29386@jama.palm1.palmone.com>
-	<50FA7388.7080208@linaro.org>
-	<20130120145347.GH29386@jama.palm1.palmone.com>
+Message-ID: <20130122123533.GU29386@jama.palm1.palmone.com>
+References: <1358533891-4828-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130120145347.GH29386@jama.palm1.palmone.com>
+In-Reply-To: <1358533891-4828-1-git-send-email-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] php: cleanup QA warnings
+Subject: Re: [meta-oe][PATCH] lua5.1: Fix multilib install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +44,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 12:45:07 -0000
-X-Groupsio-MsgNum: 42799
+X-List-Received-Date: Tue, 22 Jan 2013 12:51:09 -0000
+X-Groupsio-MsgNum: 42800
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+OVWeTxrbAwQuiek"
+	protocol="application/pgp-signature"; boundary="udzYTtuEmHLUHegf"
 Content-Disposition: inline
 
---+OVWeTxrbAwQuiek
+--udzYTtuEmHLUHegf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 20, 2013 at 03:53:47PM +0100, Martin Jansa wrote:
-> On Sat, Jan 19, 2013 at 11:20:56AM +0100, Marcin Juszkiewicz wrote:
-> > W dniu 19.01.2013 11:03, Martin Jansa pisze:
-> > > I think this /home is still there:
-> > > php-5.3.19: php: Files/directories were installed but not shipped
-> > >   /home
-> > >   /home/jenkins
-> > >   /home/jenkins/oe
-> > >   /home/jenkins/oe/shr-core-branches
-> > >   /home/jenkins/oe/shr-core-branches/shr-core
-> >=20
-> > It is ${TMPDIR} not /home/ - if you have idea how to find out where it
-> > is and how to safely remove it...
->=20
-> Ah right. Last time I was touching php I was trying to prevent creating
-> this directory structure but failed, maybe something ugly like:
->=20
-> TMP=3D/OE/shr-core/tmp-eglibc/work/armv5te/php-5/OE/shr-core/tmp-eglibc/w=
-ork;
-> WORKDIR=3D/OE/shr-core/tmp-eglibc/work/armv5te/php-5
->=20
-> while test ${TMP} !=3D ${WORKDIR}; do
->   rmdir ${TMP}
->   TMP=3D`dirname ${TMP}`;
-> done
 
-Merged with that while cycle added, thanks
+On Fri, Jan 18, 2013 at 10:31:31AM -0800, Khem Raj wrote:
+> when we have multilib enabled then there are some hardcoded
+> assumptions in lua code which needs to be fixed some can
+> be fixed by simply passing right variable on cmdline for
+> the one's in sourcecode needs to be edited in place.
+>=20
+
+Both lua patches merged, thanks
+
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb |    5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb b/meta-oe/recip=
+es-devtools/lua/lua5.1_5.1.5.bb
+> index 9da9e95..f303d87 100644
+> --- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
+> +++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
+> @@ -4,6 +4,8 @@ LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D59bdd99bb82238f238cf5c65c21=
+604fd"
+>  HOMEPAGE =3D "http://www.lua.org/"
+> =20
+> +PR =3D "r1"
+> +
+>  DEPENDS +=3D "readline"
+>  SRC_URI =3D "http://www.lua.org/ftp/lua-${PV}.tar.gz \
+>             file://bitwise_operators.patch \
+> @@ -21,6 +23,7 @@ EXTRA_OEMAKE =3D "'CC=3D${CC} -fPIC' 'MYCFLAGS=3D${CFLA=
+GS} -DLUA_USE_LINUX -fPIC' MYLD
+> =20
+>  do_configure_prepend() {
+>  	sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
+> +	sed -i -e s:lib/lua/5.1/:${base_libdir}/lua/5.1/:g src/luaconf.h
+>  }
+> =20
+>  do_compile () {
+> @@ -34,6 +37,8 @@ do_install () {
+>  		'INSTALL_INC=3D${D}${includedir}/' \
+>  		'INSTALL_MAN=3D${D}${mandir}/man1' \
+>  		'INSTALL_SHARE=3D${D}${datadir}/lua' \
+> +		'INSTALL_LIB=3D${D}${libdir}' \
+> +		'INSTALL_CMOD=3D${D}${libdir}/lua/5.1' \
+>  		install
+>  	install -d ${D}${libdir}/pkgconfig
+>  	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---+OVWeTxrbAwQuiek
+--udzYTtuEmHLUHegf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlD+hi0ACgkQN1Ujt2V2gBxFbgCdEB7HB19fnnBZxiEZFCPjqOEL
-GSUAn2BV4Oah6KEXi83UCUuX+o42npMc
-=6DxO
+iEYEARECAAYFAlD+h5UACgkQN1Ujt2V2gBykZQCeIcKlMEjxvOWLss6SHO7FLKEu
+W4gAoLamTkJSYPHQakSacGSCMZWfmWyW
+=Tn4C
 -----END PGP SIGNATURE-----
 
---+OVWeTxrbAwQuiek--
+--udzYTtuEmHLUHegf--
