@@ -1,37 +1,39 @@
-Received: from mail-ee0-f53.google.com ([74.125.83.53])
+Received: from mail-ee0-f44.google.com ([74.125.83.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.c.nystrom@gmail.com>) id 1TxeVQ-0007UY-LL
+	(envelope-from <david.c.nystrom@gmail.com>) id 1Txekc-0007yz-BN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 15:07:24 +0100
-Received: by mail-ee0-f53.google.com with SMTP id e53so3349987eek.26
+	Tue, 22 Jan 2013 15:22:59 +0100
+Received: by mail-ee0-f44.google.com with SMTP id l10so3542290eei.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 05:51:46 -0800 (PST)
+	Tue, 22 Jan 2013 06:07:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=7R9/nLZl5pLPplEv6J8tnKxM0aQAB6ciMpEp5H+sf9Y=;
-	b=PhAQHpEGnZ0l2LpkNgNJd9bwa+9JwKyPi76YiDasyCEavBL0RecZwZOaiYAibZ2Rru
-	70IqCOl0dVlgQk0V0n9vj0hfhG8R+b1WMC1qoGy9dllAH9wl1y0nfCWh9KoEF7T3MRqE
-	8mt6BQDqsuCHrZSk4uipNvQV0zO8gFPtAHpS7p1JnRVateaQ3mpU4G8G4yXsEJ6hNecA
-	P02c3+XsMzG557dikKmHDPdY6mHbEPQYJuKHn4chohArVcPSUCB6Sjd/QvGiPpS3s7nV
-	FNx8VMCKjVdWD0mdKjYhnJQGb69wzf5MthNqCHGUI92518pigWKuc7QRNS2VpNRlqIrP
-	g1qg==
-X-Received: by 10.14.225.72 with SMTP id y48mr72358061eep.46.1358862706793;
-	Tue, 22 Jan 2013 05:51:46 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=EgXFVnTOjuLTMgkFeuT/L+6FO6gfn7gPdKbwGdLsBos=;
+	b=cCykPqyg06Lwgt1S/QMTelDhxrqJJuZN+K2v0QqWN7OPUgxrZLg6cBh4Q9F++j1RZG
+	BbHsfiXpYILqZ9IvDN78Q+MKciWpvT6qJr8UrB2ng9n9CHCpbUGB2oR+RT/4w7KM9JDd
+	nY0tcIicihot2b6UY0gc8XNiSTlrIJel740NCoxdNn8tLfIFEblskRfZExTpWT2J/ucQ
+	h55Gf6QbvKgcleVzOo+lEO5oTIh3huuQmrfB58hCPTqyJtB3qye6cdD5FAyRaHGzwkYY
+	qJazSLU6etOjxEnrzzxmslwHBJDAdV33cZGIesrUVxlQQ7Xd1BFl5NtVIB6BL5IYfw0W
+	28IQ==
+X-Received: by 10.14.223.131 with SMTP id v3mr16154896eep.28.1358863648386;
+	Tue, 22 Jan 2013 06:07:28 -0800 (PST)
 Received: from nysan (sestofw01.enea.se. [192.36.1.252])
-	by mx.google.com with ESMTPS id b2sm27090001eep.9.2013.01.22.05.51.44
+	by mx.google.com with ESMTPS id q44sm27131856eep.5.2013.01.22.06.07.26
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 22 Jan 2013 05:51:45 -0800 (PST)
+	Tue, 22 Jan 2013 06:07:27 -0800 (PST)
 Received: by nysan (Postfix, from userid 1000)
-	id DAA43400AD2; Tue, 22 Jan 2013 14:51:32 +0100 (CET)
+	id 713E240075E; Tue, 22 Jan 2013 15:07:15 +0100 (CET)
 From: david.c.nystrom@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2013 14:51:25 +0100
-Message-Id: <1358862686-31602-1-git-send-email-david.c.nystrom@gmail.com>
+Date: Tue, 22 Jan 2013 15:07:13 +0100
+Message-Id: <1358863633-32066-2-git-send-email-david.c.nystrom@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
+References: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
 MIME-Version: 1.0
 Cc: =?UTF-8?q?David=20Nystr=C3=B6m?= <david.nystrom@enea.com>
-Subject: [meta-oe][PATCH] Fix twisted rootfs generation error.
+Subject: [meta-oe][PATCHv2] meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 14:07:25 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 14:23:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: David Nyström <david.nystrom@enea.com>
 
+Signed-off-by: David Nyström <david.nystrom@enea.com>
+---
+ .../python/python-twisted_10.2.0.bb                |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Fix for below error:
---
-| Configuring packagegroup-core-basic.
-| Configuring openflow.
-| Configuring criu.
-| Collected errors:
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for python-twisted:
-|  * 			       python-twisted-bin *
-|  * opkg_install_cmd: Cannot install package python-twisted.
-| ERROR: Function failed: do_rootfs (see /media/sdb5/eel/build/tmp/work/qemux86_64-poky-linux/cloud-image-controller/1.0-r0/temp/log.do_rootfs.24246 for further information)
-ERROR: Task 9 (/media/sdb5/eel/upstream/meta-v2/recipes-extended/images/cloud-image-controller.bb, do_rootfs) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 4948 tasks of which 4930 didn't need to be rerun and 1 failed.
-No currently running tasks (4948 of 4951)
---
-
-python-twisted-bin was empty since _c_urlarg.so was included in python-twisted-protocols,
-and python-twisted-bin was not ALLOWED_EMPTY.
-
-David Nyström (1):
-  Fixed non-existing twisted-bin package
-
- .../python/python-twisted_10.2.0.bb                |    5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
+diff --git a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+index 5215dd6..5320946 100644
+--- a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
++++ b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+@@ -7,7 +7,7 @@ SECTION = "console/network"
+ #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
+ SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
+@@ -62,7 +62,9 @@ FILES_${PN}-test = " \
+ "
+ 
+ FILES_${PN}-protocols = " \
+-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
+ "
+ 
+ FILES_${PN}-zsh = " \
 -- 
 1.7.9.5
 
