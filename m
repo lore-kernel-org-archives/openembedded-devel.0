@@ -1,39 +1,37 @@
-Received: from mail-ee0-f44.google.com ([74.125.83.44])
+Received: from mail-ea0-f179.google.com ([209.85.215.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <david.c.nystrom@gmail.com>) id 1Txekc-0007yz-BN
+	(envelope-from <david.c.nystrom@gmail.com>) id 1Txekf-0007z2-J6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 15:22:59 +0100
-Received: by mail-ee0-f44.google.com with SMTP id l10so3542290eei.31
+	Tue, 22 Jan 2013 15:23:01 +0100
+Received: by mail-ea0-f179.google.com with SMTP id d12so2106099eaa.24
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 22 Jan 2013 06:07:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=EgXFVnTOjuLTMgkFeuT/L+6FO6gfn7gPdKbwGdLsBos=;
-	b=cCykPqyg06Lwgt1S/QMTelDhxrqJJuZN+K2v0QqWN7OPUgxrZLg6cBh4Q9F++j1RZG
-	BbHsfiXpYILqZ9IvDN78Q+MKciWpvT6qJr8UrB2ng9n9CHCpbUGB2oR+RT/4w7KM9JDd
-	nY0tcIicihot2b6UY0gc8XNiSTlrIJel740NCoxdNn8tLfIFEblskRfZExTpWT2J/ucQ
-	h55Gf6QbvKgcleVzOo+lEO5oTIh3huuQmrfB58hCPTqyJtB3qye6cdD5FAyRaHGzwkYY
-	qJazSLU6etOjxEnrzzxmslwHBJDAdV33cZGIesrUVxlQQ7Xd1BFl5NtVIB6BL5IYfw0W
-	28IQ==
-X-Received: by 10.14.223.131 with SMTP id v3mr16154896eep.28.1358863648386;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=6vszk5cWH79IPXJfQJ/wmXvedTgUMj302LiKvpu7eNo=;
+	b=r0fBHa/RRQBb3PBlEZSdWZbtq06nK9FgPasxXqiFJ51sbv/ICUK9mvN4SIMyxdFjcX
+	95Bv9qE/hTBew7lLHVm4eQushXbVBsC+0ufKZORmJR1hIrtPluQyUs+/+a2iHU5jHpTR
+	2kT8awQmBSO7TqSI4BxGQJ37/3MkuhRSxHV0tjloY7NaKsWVj34JRyJH7H1ITzVUHlgq
+	UojIxOdv9qoRGZJJJv2+SL/mjuF+97MPLm9+UrossHVJ/3Jg3BpXtHq6k1EsgXumMB/3
+	sSkRhIuxU+tdKWraCJp3i+SwtWDFXWcDepk74xQiCQWFFFmM1+eZl6u1WLWKZ7MAcCm7
+	aJ/w==
+X-Received: by 10.14.203.3 with SMTP id e3mr38271040eeo.9.1358863648609;
 	Tue, 22 Jan 2013 06:07:28 -0800 (PST)
 Received: from nysan (sestofw01.enea.se. [192.36.1.252])
-	by mx.google.com with ESMTPS id q44sm27131856eep.5.2013.01.22.06.07.26
+	by mx.google.com with ESMTPS id t4sm8071570eel.0.2013.01.22.06.07.27
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
 	Tue, 22 Jan 2013 06:07:27 -0800 (PST)
 Received: by nysan (Postfix, from userid 1000)
-	id 713E240075E; Tue, 22 Jan 2013 15:07:15 +0100 (CET)
+	id 6D85A400AD2; Tue, 22 Jan 2013 15:07:15 +0100 (CET)
 From: david.c.nystrom@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2013 15:07:13 +0100
-Message-Id: <1358863633-32066-2-git-send-email-david.c.nystrom@gmail.com>
+Date: Tue, 22 Jan 2013 15:07:12 +0100
+Message-Id: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
-References: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
 MIME-Version: 1.0
 Cc: =?UTF-8?q?David=20Nystr=C3=B6m?= <david.nystrom@enea.com>
-Subject: [meta-oe][PATCHv2] meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+Subject: [meta-oe][PATCHv2] Fix twisted rootfs generation error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 14:23:01 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 14:23:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: David Nyström <david.nystrom@enea.com>
 
-Signed-off-by: David Nyström <david.nystrom@enea.com>
----
+Fix for below error:
+--
+| Configuring packagegroup-core-basic.
+| Configuring openflow.
+| Configuring criu.
+| Collected errors:
+|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for python-twisted:
+|  * 			       python-twisted-bin *
+|  * opkg_install_cmd: Cannot install package python-twisted.
+| ERROR: Function failed: do_rootfs (see /media/sdb5/eel/build/tmp/work/qemux86_64-poky-linux/cloud-image-controller/1.0-r0/temp/log.do_rootfs.24246 for further information)
+ERROR: Task 9 (/media/sdb5/eel/upstream/meta-v2/recipes-extended/images/cloud-image-controller.bb, do_rootfs) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 4948 tasks of which 4930 didn't need to be rerun and 1 failed.
+No currently running tasks (4948 of 4951)
+--
+
+python-twisted-bin was empty since _c_urlarg.so was included in python-twisted-protocols,
+and python-twisted-bin was not ALLOWED_EMPTY.
+
+
+David Nyström (1):
+  meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+
  .../python/python-twisted_10.2.0.bb                |    6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-index 5215dd6..5320946 100644
---- a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-@@ -7,7 +7,7 @@ SECTION = "console/network"
- #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
- SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
-@@ -62,7 +62,9 @@ FILES_${PN}-test = " \
- "
- 
- FILES_${PN}-protocols = " \
--  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
- "
- 
- FILES_${PN}-zsh = " \
 -- 
 1.7.9.5
 
