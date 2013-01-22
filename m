@@ -1,34 +1,34 @@
-Received: from mail-wi0-f177.google.com ([209.85.212.177])
+Received: from mail-we0-f176.google.com ([74.125.82.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Txd5n-0002z9-CT
+	(envelope-from <martin.jansa@gmail.com>) id 1Txd5l-0002z6-0a
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 22 Jan 2013 13:37:00 +0100
-Received: by mail-wi0-f177.google.com with SMTP id hm2so5838322wib.16
+Received: by mail-we0-f176.google.com with SMTP id s43so593690wey.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 04:21:13 -0800 (PST)
+	Tue, 22 Jan 2013 04:21:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=WcEnZN9qIxq//fSkuMS+62B4Z5R8MRJodKYTxKQNoXU=;
-	b=DZ5lHTc5wyLIxeytQdPUXOjogk0ITx95dZVYywZmLJWmUUsDpc9c2gxFCRDs5K7lZB
-	XeXfWr2QQN2/SVEomfZhM5rjvpHQ5o0aX1B9fLsR1Ib/mDu4F0Dg45BKijpHRFSnzaVz
-	FH5XJbQ6aq0BQ7oq8Pp1yE2ypmI+4u4vxR6OFGmj5hNOuewqe1WBy1kY27lWBX3jzzpt
-	kL65PI0e63/wNcE/E/JlNNV+uaK+SYzW9uCDDTH836lQRUUs2TppvuJCqF6Pb9aMoosx
-	1wx3UPd9DZx81OeZQkB5j9kJkQZbcHJ41TNuuheKNPqVLbPX7ZGM2y3Ug4oDP0FgSdS5
-	ll2Q==
-X-Received: by 10.194.143.35 with SMTP id sb3mr31911695wjb.30.1358857259697;
-	Tue, 22 Jan 2013 04:20:59 -0800 (PST)
+	:references; bh=FBQnc3PtE3FZFQ/GCESHGnRLcgwaPmK204ZbD0eFoCs=;
+	b=RxQENwdRn30bnHboTVzM7F5rkOfnQBqEYYEzQfaoPtq22ckpWoz/2T1rqWIXDNnHVM
+	RtI0ALClJFWnEKtx5/W9hWTdjPjKy1HdnO5ET7q8KAmPu18fz6LrVbdSNqw4HoB5cDFl
+	am2hN01O/zCYOudywWqBs+wR9VBlQvXAVatH8CHTcDUx6M7xZ5BuCEXYCCA3uDmV84cb
+	x4TKPrlJhGJ8nrX3H4hAVMSnwwYtA2qfzAzLzUO01d+k2MyZGhiGr88UAUp/evRfr4Y3
+	+hPwo/zFR+RWEzWhPTo3qmzmxp2Rp+ym+isND3weArHCl1ie4jjhAImj7ypBzst++nuB
+	aAHQ==
+X-Received: by 10.180.20.109 with SMTP id m13mr20970733wie.16.1358857261083;
+	Tue, 22 Jan 2013 04:21:01 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id dm3sm21294095wib.9.2013.01.22.04.20.58
+	by mx.google.com with ESMTPS id w5sm21298750wif.11.2013.01.22.04.21.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 22 Jan 2013 04:20:59 -0800 (PST)
+	Tue, 22 Jan 2013 04:21:00 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jan 2013 13:20:57 +0100
-Message-Id: <1358857259-11444-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 22 Jan 2013 13:20:58 +0100
+Message-Id: <1358857259-11444-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.1
 In-Reply-To: <1358857259-11444-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1358857259-11444-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe][meta-networking][meta-xfce 2/4] gateone: fix QA warnings
+Subject: [PATCH][meta-oe][meta-networking][meta-xfce 3/4] xfce-icon-theme: fix QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 12:37:33 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 12:37:36 -0000
 
-* gateone-1.1: gateone: Files/directories were installed but not shipped
-  /var/volatile
-  /var/volatile/log
-  /var/volatile/log/gateone
+* xfce4-icon-theme-4.4.3: xfce4-icon-theme: Files/directories were installed but not shipped
+  /usr/share/xfce4
+  /usr/share/xfce4/mime
+  /usr/share/xfce4/mime/Rodent.mime.xml
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/gateone/gateone_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-index f0f727a..652876f 100644
---- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-+++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-@@ -26,7 +26,7 @@ do_install_append() {
- 	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
- }
+diff --git a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
+index bc6229a..37f88af 100644
+--- a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
++++ b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
+@@ -9,6 +9,4 @@ SRC_URI = "http://archive.xfce.org/src/art/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.ta
+ SRC_URI[md5sum] = "73ce2977b84f634a6a6c5d9c27e336db"
+ SRC_URI[sha256sum] = "d4786692d56b8a563f66a5f260f1f13ade11e86c78cbcb25a9f9a5fc47cf66fa"
  
--FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
-+FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
- RDEPENDS_${PN} = "file \
-                   mime-support \
-                   openssh-ssh \
+-#FILES_${PN} += "${datadir}/xfce4"
+-
+-
++FILES_${PN} += "${datadir}/xfce4/mime"
 -- 
 1.8.1.1
 
