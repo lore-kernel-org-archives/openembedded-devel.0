@@ -1,32 +1,34 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ob0-f172.google.com ([209.85.214.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Lei.Yang@windriver.com>) id 1TxbEj-0005Ll-Gp
+	(envelope-from <otavio.salvador@gmail.com>) id 1TxbJU-0005c7-L0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 11:38:13 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r0MAMBkD019897
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 22 Jan 2013 02:22:12 -0800 (PST)
-Received: from [128.224.158.225] (128.224.158.225) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
-	Tue, 22 Jan 2013 02:22:11 -0800
-Message-ID: <50FE684F.3000107@windriver.com>
-Date: Tue, 22 Jan 2013 18:22:07 +0800
-From: lei yang <lei.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
+	Tue, 22 Jan 2013 11:42:47 +0100
+Received: by mail-ob0-f172.google.com with SMTP id ta17so1761835obb.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jan 2013 02:27:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=69T62ZLvRoIhUrLXwmYnwG7AevAeKxDkTx670PDaWHc=;
+	b=xzwaO7tSxkhGy2wtFNE9P/hho7BoeyBDXkQTiA23N/yOkWS7gxfMTxh5/PDVgBrKtI
+	MFFfJERPKecJZo1r4TKQRiKXeh1qt0rhv1ef6vC/BouBGrYn5CH9X4OuO7wnf4GYExef
+	/ByExEz4AS2dkmwIlDhaAxHVgcfJG2HLaq5Wguj12mR7vRLknqdrpSlq9Wk8HSXKkgKW
+	OLA/PpMmJjnwyEvCAUgUGKXr4w60MTZd221WfndDov9T+NXqFasLA/RhkeREwfykPs3o
+	U0svjLauKpSO7ZIoD35pyvSIXg/zGWK8CMR5DyrIPy0FItkP2W/Voymo7HIa/DoQ8B5r
+	sAlA==
 MIME-Version: 1.0
-To: =?UTF-8?B?RGF2aWQgTnlzdHLDtm0=?= <david.nystrom@enea.com>
-References: <1358762433-11853-1-git-send-email-lei.yang@windriver.com>
-	<50FE5110.7090104@enea.com>
-In-Reply-To: <50FE5110.7090104@enea.com>
-X-Originating-IP: [128.224.158.225]
-X-MIME-Autoconverted: from 8bit to quoted-printable by mail1.windriver.com id
-	r0MAMBkD019897
-Cc: meta-virtualization@yoctoproject.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-virtualization] [meta-oe][PATCH] multipath-tools: Add multipath-tools recipe
+X-Received: by 10.182.226.74 with SMTP id rq10mr16412779obc.32.1358850434156; 
+	Tue, 22 Jan 2013 02:27:14 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.2.197 with HTTP; Tue, 22 Jan 2013 02:27:13 -0800 (PST)
+In-Reply-To: <1358793321-11181-1-git-send-email-raj.khem@gmail.com>
+References: <1358793321-11181-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 22 Jan 2013 08:27:13 -0200
+X-Google-Sender-Auth: NB2ObZDi8t6LAxKg6X3T5gHWafI
+Message-ID: <CAP9ODKo5B6jmL5ndibMZ8iTbNMRa6tUYqBCirJaYQVJ_7DH-1w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-kde][PATCH 1/2] qt4-native, qt4-x11-free: Rename bbappends to match current OE-Core recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,139 +42,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 10:38:14 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Jan 2013 10:42:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 01/22/2013 04:42 PM, David Nystr=C3=B6m wrote:
-> On Mon 21 Jan 2013 11:00:33 AM CET, lei.yang@windriver.com wrote:
->> From: Lei Yang <lei.yang@windriver.com>
->>
->> This packages provides:
->> - multipath: scans the system for multipathed devices, assembles
->> - multipathd: waits for maps events then execs multipath
->> - kpartx: maps linear devmaps to device partitions, which makes
->> multipath maps partionable
->> ......
->>
->> Now,It can be used for kvm disk img partion for me.
->>
->> Signed-off-by: Lei Yang <lei.yang@windriver.com>
->> ---
->>   .../multipath-tools/multipath-tools_git.bb         |   46=20
->> ++++++++++++++++++++
->>   1 files changed, 46 insertions(+), 0 deletions(-)
->>   create mode 100644=20
->> meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->>
->> diff --git=20
->> a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb=20
->> b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->> new file mode 100644
->> index 0000000..e9509d3
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->> @@ -0,0 +1,46 @@
->> +SUMMARY =3D "Tools to Manage Multipathed Devices with the device-mapp=
-er"
->> +DESCRIPTION =3D "This package provides the tools to manage multipathe=
-d=20
->> devices by \
->> +instructing the device-mapper multipath module what to do"
->> +
->> +HOMEPAGE =3D "http://christophe.varoqui.free.fr/"
->> +DEPENDS =3D "readline libaio lvm2"
->> +LICENSE =3D "GPLv2"
->> +
->> +LIC_FILES_CHKSUM =3D=20
->> "file://COPYING;md5=3D7be2873b6270e45abacc503abbe2aa3d"
->> +S=3D"${WORKDIR}/git"
->> +
->> +
->> +SRC_URI =3D "git://git.opensvc.com/multipath-tools/.git;protocol=3Dht=
-tp"
->> +
->> +SRCREV =3D "d3683ab18b386e9b3b54b59a122c689e9ebdf5cf"
->> +PV =3D "0.4.9+gitr${SRCPV}"
->> +
->> +inherit autotools
->> +
->> +EXTRA_OEMAKE=3D"LIB=3D${libdir} exec_prefix=3D${exec_prefix}=20
->> libdir=3D${libdir}"
->> +
->> +PACKAGES =3D+ "libmpathpersist mpathpersist kpartx libmultipath=20
->> multipath multipathd libmultipath-dev libmpathpersist-dev"
->> +
->> +
->> +RDEPENDS_${PN} +=3D "libmpathpersist mpathpersist kpartx libmultipath=
-=20
->> multipath multipathd"
->> +
+On Mon, Jan 21, 2013 at 4:35 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  README                                           |    3 ++-
+>  recipes-misc-support/qt4-native_4.8.3.bbappend   |    8 --------
+>  recipes-misc-support/qt4-native_4.8.4.bbappend   |    8 ++++++++
+>  recipes-misc-support/qt4-x11-free_4.8.3.bbappend |   12 ------------
+>  recipes-misc-support/qt4-x11-free_4.8.4.bbappend |   12 ++++++++++++
+>  5 files changed, 22 insertions(+), 21 deletions(-)
+>  delete mode 100644 recipes-misc-support/qt4-native_4.8.3.bbappend
+>  create mode 100644 recipes-misc-support/qt4-native_4.8.4.bbappend
+>  delete mode 100644 recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+>  create mode 100644 recipes-misc-support/qt4-x11-free_4.8.4.bbappend
 >
-> Is RDEPENDS on udev not mandatory ?
+> diff --git a/README b/README
+> index a6164c9..0635e10 100644
+> --- a/README
+> +++ b/README
+> @@ -9,6 +9,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
 >
+>  Contributors:
+>  Copyright 2012 - Kai Kang
+> +Copyright 2013 - Khem Raj
+>  Copyright 2012 - Koen Kooi
+>  Copyright 2012 - Robert Yang
+>  Copyright 2011, 2012 - Samuel Stirtzel
+> @@ -46,4 +47,4 @@ FAQ / Troubleshooting:
+>    Q: How to report bugs / request features?
+>    A: Send your bugreports / feature requests to the openembedded-developer mailing list.
+>       Include the [meta-kde] tag in the subject for easier readability.
+> -     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> \ No newline at end of file
+> +     You can find the mailing list here: http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> diff --git a/recipes-misc-support/qt4-native_4.8.3.bbappend b/recipes-misc-support/qt4-native_4.8.3.bbappend
+> deleted file mode 100644
+> index 5b04eb4..0000000
+> --- a/recipes-misc-support/qt4-native_4.8.3.bbappend
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -# Needed by kdelibs4-native
+> -DEPENDS += "openssl-native"
+> -
+> -EXTRA_OECONF += "-no-pch -no-sm -openssl"
+> -
+> -TOBUILD += "src/phonon"
+> -
+> -PRINC := "${@int(PRINC) + 1}"
+> \ No newline at end of file
+> diff --git a/recipes-misc-support/qt4-native_4.8.4.bbappend b/recipes-misc-support/qt4-native_4.8.4.bbappend
+> new file mode 100644
+> index 0000000..5b04eb4
+> --- /dev/null
+> +++ b/recipes-misc-support/qt4-native_4.8.4.bbappend
+> @@ -0,0 +1,8 @@
+> +# Needed by kdelibs4-native
+> +DEPENDS += "openssl-native"
+> +
+> +EXTRA_OECONF += "-no-pch -no-sm -openssl"
+> +
+> +TOBUILD += "src/phonon"
+> +
+> +PRINC := "${@int(PRINC) + 1}"
+> \ No newline at end of file
 
-good catch, we can add it, it will create /dev/mapper/loop0p1 node, I=20
-give a log for it's kpart usage in my testing,It's pretty easy for image=20
-partition
-because you don't need to know offset for partition
+Please add a new line in the end of the file to avoid future warnings about it.
 
-root@intel_5500_server:/# kpartx -l sdb.img
-loop0p1 : 0 20480 /dev/loop0 2048
-loop0p2 : 0 10240 /dev/loop0 22528
-loop deleted : /dev/loop0
-root@intel_5500_server:/# kpartx -a sdb.img
-root@intel_5500_server:/# ls /dev/mapper/
-control  loop0p1  loop0p2
-root@intel_5500_server:/# ls /dev/mapper/loop0p1
-/dev/mapper/loop0p1
-root@intel_5500_server:/# mkfs.ext3 /dev/mapper/loop0p1
-.....
-
-root@intel_5500_server:/# mount /dev/mapper/loop0p1 /mnt
-root@intel_5500_server:/# ls /mnt
-lost+found
-
-
-
->> +do_install_append () {
->> +    ln -sf libmpathpersist.so.0 ${D}${libdir}/libmpathpersist.so
->> +    ln -sf libmultipath.so.0 ${D}${libdir}/libmultipath.so
->> +}
->> +
->> +ALLOW_EMPTY_${PN} =3D "1"
->> +FILES_${PN}     =3D ""
->> +
->> +FILES_libmpathpersist =3D "${libdir}/libmpathpersist*.so.0"
->> +FILES_mpathpersist =3D "${sbindir}/mpathpersist"
->> +FILES_kpartx =3D "${sbindir}/kpartx ${base_libdir}/udev/"
->> +FILES_libmultipath =3D "${libdir}/libcheck*.so ${libdir}/libpri*.so=20
->> ${libdir}/libmultipath*.so.0"
->> +FILES_multipath =3D "${sbindir}/multipath ${sysconfdir}"
->> +FILES_multipathd =3D "${sbindir}/multipathd ${base_libdir}"
->> +
->> +#put the symbol link lib in -dev
->> +FILES_libmultipath-dev =3D "${libdir}/libmultipath*.so"
->> +FILES_libmpathpersist-dev =3D "${libdir}/libmpathpersist*.so"
->> +
->> +
+> diff --git a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend b/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+> deleted file mode 100644
+> index 32a6f27..0000000
+> --- a/recipes-misc-support/qt4-x11-free_4.8.3.bbappend
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
+> -QT_CONFIG_FLAGS_append = " --reduce-exports"
+> -
+> -# Build OpenGL/ES support if available
+> -QT_GLFLAGS_omap3 = "-opengl es2 "
+> -DEPENDS_append_omap3 = " libgles-omap3"
+> -DEPENDS_append_ti33x = " libgles-omap3"
+> -
+> -# Needed by kdelibs
+> -QT_DISTRO_FLAGS = "-accessibility -sm"
+> -
+> -PRINC := "${@int(PRINC) + 3}"
+> diff --git a/recipes-misc-support/qt4-x11-free_4.8.4.bbappend b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+> new file mode 100644
+> index 0000000..32a6f27
+> --- /dev/null
+> +++ b/recipes-misc-support/qt4-x11-free_4.8.4.bbappend
+> @@ -0,0 +1,12 @@
+> +#This will add reduced visibility to some exports on Qt, otherwise KDE plugins will fail
+> +QT_CONFIG_FLAGS_append = " --reduce-exports"
+> +
+> +# Build OpenGL/ES support if available
+> +QT_GLFLAGS_omap3 = "-opengl es2 "
+> +DEPENDS_append_omap3 = " libgles-omap3"
+> +DEPENDS_append_ti33x = " libgles-omap3"
+> +
+> +# Needed by kdelibs
+> +QT_DISTRO_FLAGS = "-accessibility -sm"
+> +
+> +PRINC := "${@int(PRINC) + 3}"
+> --
+> 1.7.9.5
 >
-> Whats the intended destination for this recipe ?
-
-if meta-oe,  recipes-support
-if meta-virtualization: recipes-extended
-
-
-> If not accepted in meta-oe, We'll be happy to merge it in=20
-> meta-virtualization.
 >
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Glad to add in meta-virt
 
-Lei
 
-> Br,
-> David
-
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
