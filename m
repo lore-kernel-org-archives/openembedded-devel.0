@@ -1,36 +1,39 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1TxdmB-0005xm-8X
+	(envelope-from <david.c.nystrom@gmail.com>) id 1TxeVQ-0007UX-IP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 14:20:33 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r0MD504i023983
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 22 Jan 2013 15:07:24 +0100
+Received: by mail-ee0-f49.google.com with SMTP id d4so3380266eek.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 05:05:00 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Tue, 22 Jan 2013 05:04:58 -0800
-Received: from skynet (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id A71747FD0	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 08:03:06 -0500 (EST)
-Received: by skynet (Postfix, from userid 1000)	id EF2F2601301; Tue, 22 Jan
-	2013 08:04:44 -0500 (EST)
-Date: Tue, 22 Jan 2013 08:04:44 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130122130444.GB14770@windriver.com>
-References: <1358857259-11444-1-git-send-email-Martin.Jansa@gmail.com>
-	<1358857259-11444-4-git-send-email-Martin.Jansa@gmail.com>
+	Tue, 22 Jan 2013 05:51:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=H73A1H3/2a1p0tlW1ZXIvKiabCmlYQnwLiuHI40wc5o=;
+	b=G4y8TLMBWYrUsbw1TDdngC0yQ09twZMj/e1LCOjMg4P04JAQX4wTPVc5/wisuTx93h
+	+rr+Cj2cBsM1M0Tyb5n4e5GP1r65qGiOGA+2FzNOJHAybLzxJirI88XKJ77SmYG/5nvm
+	4CBp3LdUUIoaakHydzPT+He23L8qFjmHeWL23h+/JZQsleDwfn6oRcmZ437SJeDGC9m2
+	hAIa/WY8ViDszJIXp1USad5We7NP1882fkFhLR+6wmsL1CB1CfNB2ehVnr9N9tWWC1ne
+	rqNR4JbmjG+d3fV3H3k7eC7r7o73D5SxVtkzIuiBe2+oy76LlQY4auJCMBCa5Q1TsaXb
+	WfIQ==
+X-Received: by 10.14.203.2 with SMTP id e2mr72533014eeo.20.1358862706456;
+	Tue, 22 Jan 2013 05:51:46 -0800 (PST)
+Received: from nysan (sestofw01.enea.se. [192.36.1.252])
+	by mx.google.com with ESMTPS id 43sm27091907eed.10.2013.01.22.05.51.44
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 22 Jan 2013 05:51:44 -0800 (PST)
+Received: by nysan (Postfix, from userid 1000)
+	id DD80240075E; Tue, 22 Jan 2013 14:51:32 +0100 (CET)
+From: david.c.nystrom@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Jan 2013 14:51:26 +0100
+Message-Id: <1358862686-31602-2-git-send-email-david.c.nystrom@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1358862686-31602-1-git-send-email-david.c.nystrom@gmail.com>
+References: <1358862686-31602-1-git-send-email-david.c.nystrom@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1358857259-11444-4-git-send-email-Martin.Jansa@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH][meta-oe][meta-networking][meta-xfce 4/4] autofs: fix QA warnings
+Cc: =?UTF-8?q?David=20Nystr=C3=B6m?= <david.nystrom@enea.com>
+Subject: [meta-oe][PATCH] Fixed non-existing twisted-bin package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 13:20:33 -0000
-X-Groupsio-MsgNum: 42801
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yEPQxsgoJgBvi8ip"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Jan 2013 14:07:25 -0000
+X-List-Received-Date: Tue, 22 Jan 2013 14:07:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---yEPQxsgoJgBvi8ip
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: David Nyström <david.nystrom@enea.com>
 
-[[oe] [PATCH][meta-oe][meta-networking][meta-xfce 4/4] autofs: fix QA warni=
-ngs] On 13.01.22 (Tue 13:20) Martin Jansa wrote:
+Signed-off-by: David Nyström <david.nystrom@enea.com>
+---
+ .../python/python-twisted_10.2.0.bb                |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-> autofs-5.0.7: autofs: Files/directories were installed but not shipped
->   /run
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
-> ---
->  meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/met=
-a-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-> index bf679b4..2bf03f1 100644
-> --- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-> @@ -60,4 +60,8 @@ do_configure_prepend () {
->          fi
->  }
-> =20
-> +do_install_append () {
-> +	test -d ${D}/run && rmdir ${D}/run
-> +}
-> +
->  INSANE_SKIP_${PN} =3D "dev-so"
+diff --git a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+index 5215dd6..bfd6643 100644
+--- a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
++++ b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+@@ -62,7 +62,10 @@ FILES_${PN}-test = " \
+ "
+ 
+ FILES_${PN}-protocols = " \
+-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
++  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/test/ \
+ "
+ 
+ FILES_${PN}-zsh = " \
+-- 
+1.7.9.5
 
---yEPQxsgoJgBvi8ip
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlD+jmwACgkQPN8S4W6ZZnekXQCdGIgNb+MRqN3oknR+BZFrJ9tv
-aHAAnRruI1viIVTAApMRKHs2sP2mxeuL
-=oXKi
------END PGP SIGNATURE-----
-
---yEPQxsgoJgBvi8ip--
