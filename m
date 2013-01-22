@@ -1,28 +1,25 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1Txfkz-0001sA-UH
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1Txg6C-0002Us-43
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 16:27:30 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0MFBsIt019421
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 07:11:54 -0800 (PST)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>) id 1TxfVx-0006S9-PY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 10:11:53 -0500
-Date: Tue, 22 Jan 2013 10:11:53 -0500
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130122151153.GA24789@windriver.com>
-References: <20130118171332.GA12933@windriver.com>
-	<20130121195838.GA10801@windriver.com>
+	Tue, 22 Jan 2013 16:49:32 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 22 Jan 2013 07:32:41 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,515,1355126400"; d="scan'208";a="250726095"
+Received: from unknown (HELO helios.localnet) ([10.252.123.171])
+	by orsmga001.jf.intel.com with ESMTP; 22 Jan 2013 07:33:48 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Tue, 22 Jan 2013 15:33:47 +0000
+Message-ID: <1428986.60Q97QIsKC@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.4 (Linux/3.5.0-22-generic; KDE/4.9.4; i686; ; )
+In-Reply-To: <cover.1358719629.git.andrea.adami@gmail.com>
+References: <cover.1358719629.git.andrea.adami@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130121195838.GA10801@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking] [PATCH] autofs: fails to compile with openldap disabled
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH 0/5] linux-yocto* recipes refinements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,55 +33,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 15:27:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Jan 2013 15:49:32 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Jan 21, 2013 at 02:58:39PM -0500, Joe MacDonald wrote:
-Hi Joe,
+On Sunday 20 January 2013 23:11:26 Andrea Adami wrote:
+> Apply some minor fixes as seen in oe-core an
+> fix some wrong splitting for mtd fragments.
+> 
+> Andrea Adami (5):
+>   linux-yocto-3.2: remove yaffs2 references from poodle.cfg
+>   linux-yocto_3.2: convert ktype/standard to explicit
+>     ktypes/standard/standard.scc
+>   linux-yocto_3.4: convert ktype/standard to explicit
+>     ktypes/standard/standard.scc
+>   linux-kexecboot_3.2: convert ktype/tiny to explicit
+>     ktypes/tiny/tiny.scc
+>   linux-yocto_3.4: minor config cleanings towards 3.8
+> 
+>  .../linux/linux-yocto-3.2/akita/akita-standard.scc    |  2 +-
+>  .../linux/linux-yocto-3.2/c7x0/c7x0-standard.scc      |  2 +-
+>  .../linux/linux-yocto-3.2/collie/collie-standard.scc  |  2 +-
+>  .../linux/linux-yocto-3.2/poodle/poodle-standard.scc  |  2 +-
+>  .../linux/linux-yocto-3.2/poodle/poodle.cfg           |  1 -
+>  .../linux/linux-yocto-3.2/spitz/spitz-standard.scc    |  2 +-
+>  .../linux/linux-yocto-3.2/tosa/tosa-standard.scc      |  2 +-
+>  .../linux/linux-yocto-3.4/akita/akita-standard.scc    |  2 +-
+>  .../linux/linux-yocto-3.4/c7x0/c7x0-standard.scc      |  2 +-
+>  .../linux/linux-yocto-3.4/collie/collie-standard.scc  |  2 +-
+>  .../linux/linux-yocto-3.4/collie/collie.cfg           | 19
+> ++++++++++++++----- .../linux/linux-yocto-3.4/poodle/poodle-standard.scc  |
+>  2 +-
+>  .../linux/linux-yocto-3.4/spitz/spitz-standard.scc    |  2 +-
+>  .../linux/linux-yocto-3.4/tosa/tosa-standard.scc      |  2 +-
+>  .../linux/linux-yocto-3.4/zaurus-hardware.cfg         |  9 ++++++---
+>  .../linux/linux-yocto-3.4/zaurus-non-hardware.cfg     |  9 ++++++++-
+>  .../linux/linux-yocto-3.4/zaurus-pxa-common.cfg       | 10 ----------
+>  .../akita/akita-tiny.scc                              |  2 +-
+>  .../linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-tiny.scc |  2 +-
+>  .../collie/collie-tiny.scc                            |  2 +-
+>  .../poodle/poodle-tiny.scc                            |  2 +-
+>  .../spitz/spitz-tiny.scc                              |  2 +-
+>  .../linux-yocto-tiny-kexecboot-3.2/tosa/tosa-tiny.scc |  2 +-
+>  23 files changed, 46 insertions(+), 38 deletions(-)
 
-> Hey Amy,
-> 
-> [[oe] [meta-networking] [PATCH] autofs: fails to compile with openldap disabled] On 13.01.18 (Fri 12:13) Amy Fong wrote:
-> 
-> > commit 09947d772a36e4d2c2dc48356281bd3ce0a04b0c
-> > Author: Amy Fong <amy.fong@windriver.com>
-> > Date:   Fri Jan 18 11:10:35 2013 -0500
-> > 
-> >     autofs: fails to compile with openldap disabled
-> >     
-> >     As of 5.0.6, it appears that changes were introduced so that
-> >     if you compile with openldap disabled and openldap headers are not
-> >     available, then autofs fails to build.
-> >     
-> >     Since autofs no longer depends on openldap, remove the dependency
-> >     
-> >     Signed-off-by: Amy Fong <amy.fong@windriver.com>
-> > 
-> > diff --git a/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-> > new file mode 100644
-> > index 0000000..b62f955
-> > --- /dev/null
-> > +++ b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
-> > @@ -0,0 +1,40 @@
-> > +autofs: fails to compile with openldap disabled
-> > +
-> > +As of 5.0.6, it appears that changes were introduced so that 
-> > +if you compile with openldap disabled and openldap headers are not
-> > +available, then autofs fails to build.
-> > +
-> > +Signed-off-by: Amy Fong <amy.fong@windriver.com>
-> 
-> Did you say you'd already sent this upstream?  I can put in an
-> upstream-status myself, but I'm not sure what it is right now.  :-)
-> 
-> Alternatively, a new version with the upstream-status is good too.
-> 
-> -J.
+Merged, thanks.
 
-Nope, it wasn't sent upstream. I'd say that the upstream-status should be pending. :)
+Cheers,
+Paul
 
-Thanks!
-Amy
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
