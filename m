@@ -1,36 +1,37 @@
-Received: from mail-pa0-f50.google.com ([209.85.220.50])
+Received: from mail-da0-f50.google.com ([209.85.210.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TxdCU-0003eS-Us
+	(envelope-from <martin.jansa@gmail.com>) id 1TxdDF-0003iV-FZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 13:43:41 +0100
-Received: by mail-pa0-f50.google.com with SMTP id hz10so4030162pad.37
+	Tue, 22 Jan 2013 13:44:38 +0100
+Received: by mail-da0-f50.google.com with SMTP id h15so3209727dan.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 04:28:08 -0800 (PST)
+	Tue, 22 Jan 2013 04:28:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PFD6jLdI3BEfVqNypm8WrAxRQpu2NKmxUTjhkNAdv1Q=;
-	b=G+124wBZZ6pnF9GF6+IIWW5tJIQIouR0j0uOoATJdabBi7TziRYS0/65RKvqKAVQDC
-	a8SvahD2QkTecpl7I1RbeuEq8LvpHXeJZuxbPyDELrpa0KrOXaj0ih13TkJjfrtCou4Z
-	n8s9lGdCLAaSOOPpqCCG/P/xYVpB8KM4tLZMRzYvoRKh4x4M9FZWCabDA5GhoV2CniHy
-	whCT2RWeLUpcOU0BAMTZSU8C+BGrtfYntcBSfbycDKGSNc/vx8rHRFb1gjEoNzUBdloY
-	99RuZC2zX5JO7WK63EjLfUaWIQxwzPli6oWyk3DzyhTlnvZfOWJKQkXDjBrPbftumhne
-	LY7w==
-X-Received: by 10.68.200.228 with SMTP id jv4mr38344002pbc.139.1358857688263; 
-	Tue, 22 Jan 2013 04:28:08 -0800 (PST)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=KtKvOge9SFLHKJdBP/vxIozeVRS7r60HPQ8lKA3hwVM=;
+	b=TznM9xhK8TIjRXp1jqt08GmM5+ECJ35VudDgRUgJQSMmYmcTfk3gvG/5XvI11OHos7
+	dpakMM/QqY37ET2fVWmqINPM1aR59CyD0WEeL39R0T1IdIeu46P+CleIRat4ZeqP2tz8
+	I98Bu4gqgfDiJU5nto3fffiEXvv6SPX0IfDUz2eT8jqBB2fu49hlfUKdnvK2bug/080/
+	Snc6uKlfmj7EZwN6X8M1LEvQ91jazpq4jASWBW9cbXCFKATT3LeDubH/QG9qmslcBwnw
+	Uqk2JzMFLymTfgXkUI78YPkMtsrxe34yKdHM9pz+kQeN/dl8ViGkX9ydD2qFC7FE+aCS
+	5Q6g==
+X-Received: by 10.68.209.170 with SMTP id mn10mr38938345pbc.11.1358857734836; 
+	Tue, 22 Jan 2013 04:28:54 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id sk1sm10684433pbc.0.2013.01.22.04.28.05
+	by mx.google.com with ESMTPS id nt5sm10669524pbb.59.2013.01.22.04.28.52
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 22 Jan 2013 04:28:07 -0800 (PST)
-Date: Tue, 22 Jan 2013 13:28:07 +0100
+	Tue, 22 Jan 2013 04:28:53 -0800 (PST)
+Date: Tue, 22 Jan 2013 13:28:53 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130122122807.GR29386@jama.palm1.palmone.com>
-References: <1358721879-1549-1-git-send-email-ross.burton@intel.com>
+Message-ID: <20130122122853.GS29386@jama.palm1.palmone.com>
+References: <1358445132-13498-1-git-send-email-ross.burton@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1358721879-1549-1-git-send-email-ross.burton@intel.com>
+In-Reply-To: <1358445132-13498-1-git-send-email-ross.burton@intel.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] libcanberra: upgrade and refresh packaging
+Cc: Wayne Tams <wayne.tams@simpleaudio.com>
+Subject: Re: [meta-multimedia][PATCH] gst-rtsp: add GStreamer RTSP server/library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,24 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 12:43:43 -0000
-X-Groupsio-MsgNum: 42797
+X-List-Received-Date: Tue, 22 Jan 2013 12:44:41 -0000
+X-Groupsio-MsgNum: 42798
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="e7jIye1Ygp5H0AIi"
+	protocol="application/pgp-signature"; boundary="GPT5DIEyVHz5yXBV"
 Content-Disposition: inline
 
---e7jIye1Ygp5H0AIi
+--GPT5DIEyVHz5yXBV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 20, 2013 at 10:44:39PM +0000, Ross Burton wrote:
-> Update to 0.29 (latest, 0.30, needs GStreamer 1.0) and refresh the packag=
-e based
-> on the different recipes in oe-core and meta-oe.
->=20
-> Explicitly depend on GTK+ 2 and GTK+ 3, but split those dependencies into
-> different packages.
+On Thu, Jan 17, 2013 at 05:52:12PM +0000, Ross Burton wrote:
+> From: Wayne Tams <wayne.tams@simpleaudio.com>
 
 Merged, thanks
 
@@ -69,188 +65,88 @@ Merged, thanks
 >=20
 > Signed-off-by: Ross Burton <ross.burton@intel.com>
 > ---
->  .../libcanberra-increase-buffer-size.patch         |   13 ----
->  .../libcanberra/libcanberra_0.26.bb                |   63 --------------=
-------
->  .../libcanberra/libcanberra_0.29.bb                |   55 ++++++++++++++=
-+++
->  3 files changed, 55 insertions(+), 76 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/libcanberra/libcanberra/libc=
-anberra-increase-buffer-size.patch
->  delete mode 100644 meta-oe/recipes-devtools/libcanberra/libcanberra_0.26=
-=2Ebb
->  create mode 100644 meta-oe/recipes-support/libcanberra/libcanberra_0.29.=
-bb
+>  ...ecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch |   34 ++++++++++++++=
+++++++
+>  .../gstreamer/gst-rtsp_0.10.8.bb                   |   16 +++++++++
+>  2 files changed, 50 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp=
+/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp=
+_0.10.8.bb
 >=20
-> diff --git a/meta-oe/recipes-devtools/libcanberra/libcanberra/libcanberra=
--increase-buffer-size.patch b/meta-oe/recipes-devtools/libcanberra/libcanbe=
-rra/libcanberra-increase-buffer-size.patch
-> deleted file mode 100644
-> index 1005d78..0000000
-> --- a/meta-oe/recipes-devtools/libcanberra/libcanberra/libcanberra-increa=
-se-buffer-size.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Index: libcanberra-0.14/src/alsa.c
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> ---- libcanberra-0.14.orig/src/alsa.c
-> -+++ libcanberra-0.14/src/alsa.c
-> -@@ -272,7 +272,7 @@
-> -     return translate_error(ret);
-> - }
-> -=20
-> --#define BUFSIZE (16*1024)
-> -+#define BUFSIZE (128*1024)
-> -=20
-> - static void* thread_func(void *userdata) {
-> -     struct outstanding *out =3D userdata;
-> diff --git a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb b/m=
-eta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
-> deleted file mode 100644
-> index 5cf9a55..0000000
-> --- a/meta-oe/recipes-devtools/libcanberra/libcanberra_0.26.bb
-> +++ /dev/null
-> @@ -1,63 +0,0 @@
-> -DESCRIPTION =3D "Libcanberra is an implementation of the XDG Sound Theme=
- and Name \
-> -Specifications, for generating event sounds on free desktops."
-> -LICENSE =3D "LGPLv2.1+"
-> -LIC_FILES_CHKSUM =3D "file://LGPL;md5=3D2d5025d4aa3495befef8f17206a5b0a1"
-> -DEPENDS =3D "alsa-lib gstreamer gtk+ libtool libvorbis gconf"
-> -SECTION =3D "libs/multimedia"
-> -AUTHOR =3D "Lennart Poettering"
-> -HOMEPAGE =3D "http://0pointer.de/lennart/projects/libcanberra"
-> -PR =3D "r2"
-> -
-> -inherit autotools vala
-> -
-> -SRC_URI =3D "http://0pointer.de/lennart/projects/libcanberra/libcanberra=
--${PV}.tar.gz \
-> -           file://libcanberra-increase-buffer-size.patch"
-> -
-> -SRC_URI[md5sum] =3D "ee2c66ada7c851a4e7b6eb1682285a24"
-> -SRC_URI[sha256sum] =3D "4b5d8d2c2835133620adbc53745dd107b6e58b9a2963059e=
-8f457143fee00982"
-> -
-> -EXTRA_OECONF =3D "\
-> -  --enable-alsa \
-> -  --enable-gstreamer \
-> -  --enable-gtk \
-> -  --enable-multi \
-> -  --enable-null \
-> -  --disable-oss \
-> -  --disable-pulse \
-> -  --disable-tdb \
-> -"
-> -# enable pulse again when pulseaudio >=3D 0.9.11 is the default in OE
-> -
-> -python populate_packages_prepend() {
-> -    plugindir =3D d.expand('${libdir}/${P}/')
-> -    do_split_packages(d, plugindir, '^libcanberra-(.*)\.so$', 'libcanber=
-ra-%s', '%s support library', extra_depends=3D'' )
-> -}
-> -
-> -PACKAGES =3D+ "${PN}-gtk"
-> -
-> -PACKAGES_DYNAMIC +=3D "^libcanberra-.*"
-> -
-> -FILES_${PN}-gtk =3D "\
-> -  ${sysconfdir}/gconf \
-> -  ${bindir}/* \
-> -  ${libdir}/libcanberra-gtk.so.* \
-> -  ${libdir}/gtk-2.0/modules/* \
-> -  ${libdir}/gtk-3.0/modules/* \
-> -  ${datadir}/gnome \
-> -  ${datadir}/gdm \
-> -"
-> -
-> -# /usr/lib/gtk-3.0/modules/libcanberra-gtk-module.so > /usr/lib/gtk-3.0/=
-modules/libcanberra-gtk3-module.so
-> -INSANE_SKIP_${PN}-gtk =3D "dev-so"
-> -
-> -FILES_${PN}-dev +=3D "\
-> -  ${libdir}/gtk-2.0/modules/*.la \
-> -  ${libdir}/gtk-3.0/modules/*.la \
-> -  ${libdir}/${P}/*.la \
-> -"
-> -
-> -FILES_${PN}-dbg +=3D "\
-> -  ${libdir}/gtk-2.0/modules/.debug \
-> -  ${libdir}/gtk-3.0/modules/.debug \
-> -  ${libdir}/${P}/.debug \
-> -"
-> diff --git a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb b/me=
-ta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-c=
+hange-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch b/meta-multimedia=
+/recipes-multimedia/gstreamer/gst-rtsp/0001-change-deprecated-INCLUDES-to-A=
+M_CPPFLAGS-for-automa.patch
 > new file mode 100644
-> index 0000000..a6d68d4
+> index 0000000..3afca4e
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
-> @@ -0,0 +1,55 @@
-> +SUMMARY =3D "Implementation of XDG Sound Theme and Name Specifications"
-> +DESCRIPTION =3D "Libcanberra is an implementation of the XDG Sound Theme=
- and Name Specifications, for generating event sounds on free desktops."
-> +LICENSE =3D "LGPLv2.1+"
-> +LIC_FILES_CHKSUM =3D "file://LGPL;md5=3D2d5025d4aa3495befef8f17206a5b0a1=
- \
-> +                    file://src/canberra.h;beginline=3D7;endline=3D24;md5=
-=3Dc616c687cf8da540a14f917e0d23ab03"
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp/0001-change-d=
+eprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+> @@ -0,0 +1,34 @@
+> +index gst-rtsp_0.10.8/bindings/python/Makefile.am
+> +--- gst-rtsp_0.10.8.orig/bindings/python/Makefile.am
+> ++++ gst-rtsp_0.10.8/bindings/python/Makefile.am
+> +@@ -14,7 +14,7 @@ defs_DATA =3D $(DEFS)
+> + defsdir =3D $(pkgdatadir)/$(GST_MAJORMINOR)/defs
+> + OVERRIDES =3D rtspserver.override
 > +
-> +DEPENDS =3D "alsa-lib gstreamer gtk+ gtk+3 libtool libvorbis pulseaudio"
-> +PR =3D "r0"
+> +-INCLUDES =3D -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
+> ++AM_CPPFLAGS =3D -I$(top_srcdir) -I$(srcdir) $(PYTHON_INCLUDES)
 > +
-> +inherit autotools
+> + rtspserver_la_CFLAGS =3D -I$(top_srcdir)/src \
+> +         $(PYGOBJECT_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
+> +index gst-rtsp_0.10.8/examples/Makefile.am
+> +--- gst-rtsp_0.10.8.orig/examples/Makefile.am
+> ++++ gst-rtsp_0.10.8/examples/Makefile.am
+> +@@ -1,6 +1,6 @@
+> + noinst_PROGRAMS =3D test-video test-ogg test-mp4 test-readme test-launc=
+h test-sdp test-uri test-auth
 > +
-> +SRC_URI =3D "http://0pointer.de/lennart/projects/${BPN}/${BPN}-${PV}.tar=
-=2Exz"
-> +SRC_URI[md5sum] =3D "2594093a5d61047bd9cc87e955f86df8"
-> +SRC_URI[sha256sum] =3D "127a5ef07805856d63758e5180ebfb241d1f80094fd301c2=
-87591a15b8cfcd72"
+> +-INCLUDES =3D -I$(top_srcdir) -I$(srcdir)
+> ++AM_CPPFLAGS =3D -I$(top_srcdir) -I$(srcdir)
 > +
-> +EXTRA_OECONF =3D "\
-> +  --enable-null \
-> +  --enable-alsa \
-> +  --enable-gstreamer \
-> +  --enable-pulse \
-> +  --disable-oss \
-> +  --enable-gtk \
-> +  --enable-gtk3 \
-> +  --disable-tdb \
-> +  --disable-lynx \
-> +"
+> + AM_CFLAGS =3D $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
+> + AM_LDFLAGS =3D \
+> +index gst-rtsp_0.10.8/tests/Makefile.am
+> +--- gst-rtsp_0.10.8.orig/tests/Makefile.am
+> ++++ gst-rtsp_0.10.8/tests/Makefile.am
+> +@@ -1,6 +1,6 @@
+> + noinst_PROGRAMS =3D test-cleanup
 > +
-> +python populate_packages_prepend() {
-> +    plugindir =3D d.expand('${libdir}/${P}/')
-> +    do_split_packages(d, plugindir, '^libcanberra-(.*)\.so$', 'libcanber=
-ra-%s', '%s support library', extra_depends=3D'' )
-> +    do_split_packages(d, plugindir, '^libcanberra-(.*)\.la$', 'libcanber=
-ra-%s', '%s support library', extra_depends=3D'' )
-> +}
+> +-INCLUDES =3D -I$(top_srcdir) -I$(srcdir)
+> ++AM_CPPFLAGS =3D -I$(top_srcdir) -I$(srcdir)
 > +
-> +PACKAGES =3D+ "${PN}-gnome ${PN}-gtk2 ${PN}-gtk3 ${PN}-systemd"
+> + AM_CFLAGS =3D $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS)
+> + AM_LDFLAGS =3D \
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8=
+=2Ebb b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
+> new file mode 100644
+> index 0000000..40872f5
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp_0.10.8.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "GStreamer RTSP server"
+> +LICENSE =3D "LGPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D55ca817ccb7d5b5b66355690e9abc=
+605"
 > +
-> +FILES_${PN} =3D "${bindir}/ ${libdir}/${BPN}.so.*"
+> +SRC_URI =3D "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.ta=
+r.bz2 \
+> +           file://0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-aut=
+oma.patch"
+> +SRC_URI[md5sum] =3D "b511af07000595f63c3a705946221643"
+> +SRC_URI[sha256sum] =3D "9915887cf8515bda87462c69738646afb715b597613edc73=
+40477ccab63a6617"
 > +
-> +FILES_${PN}-dev +=3D "${datadir}/vala/vapi"
+> +DEPENDS =3D "gst-plugins-base gstreamer"
 > +
-> +FILES_${PN}-dbg +=3D "${libdir}/${P}/.debug ${libdir}/gtk-*/modules/.deb=
-ug"
+> +# Configure always checks for Python so inherit pythonnative. Better sol=
+ution
+> +# would be to disable the checks entirely.
+> +inherit autotools pythonnative gettext
 > +
-> +FILES_${PN}-gtk2 =3D "${libdir}/${BPN}-gtk.so.* \
-> +                    ${libdir}/gtk-2.0/modules/*.la \
-> +                    ${libdir}/gtk-2.0/modules/*.so"
-> +
-> +# -gtk3 ships a symlink to a .so
-> +INSANE_SKIP_${PN}-gtk3 =3D "dev-so"
-> +FILES_${PN}-gtk3 =3D "${libdir}/${BPN}-gtk3.so.* \
-> +                    ${libdir}/gtk-3.0/modules/*.la \
-> +                    ${libdir}/gtk-3.0/modules/*.so"
-> +
-> +FILES_${PN}-gnome =3D "${libdir}/gnome-settings-daemon-3.0/ \
-> +                     ${datadir}/gdm/ ${datadir}/gnome/"
-> +
-> +FILES_${PN}-systemd =3D "${base_libdir}/systemd/system/*.service"
+> +FILES_${PN}-dev +=3D "${datadir}/vala/vapi/"
 > --=20
 > 1.7.10.4
 >=20
@@ -263,16 +159,16 @@ ug"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---e7jIye1Ygp5H0AIi
+--GPT5DIEyVHz5yXBV
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlD+hdcACgkQN1Ujt2V2gBziyACdHDr6UbGBfE4BprARwQ8JXIDN
-nucAnRy+5PkXh3urPWwemhhdKgoMPxJ5
-=Imep
+iEYEARECAAYFAlD+hgUACgkQN1Ujt2V2gBzBPACfbbGZwjHVYceynncpUyEzj7Gc
+K+sAoIYXLbD72Z70WS0BpRJl8H6DbV3Y
+=03ug
 -----END PGP SIGNATURE-----
 
---e7jIye1Ygp5H0AIi--
+--GPT5DIEyVHz5yXBV--
