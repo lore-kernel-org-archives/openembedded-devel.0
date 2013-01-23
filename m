@@ -1,34 +1,29 @@
-Received: from mail-la0-f43.google.com ([209.85.215.43])
+Received: from mail-vc0-f173.google.com ([209.85.220.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>) id 1TxmmF-0004W2-3A
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jan 2013 23:57:11 +0100
-Received: by mail-la0-f43.google.com with SMTP id ek20so2931lab.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 14:41:40 -0800 (PST)
+	(envelope-from <schnitzeltony@googlemail.com>)
+	id 1Txoig-0007j1-72; Wed, 23 Jan 2013 02:01:49 +0100
+Received: by mail-vc0-f173.google.com with SMTP id fy7so4044444vcb.18
+	for <multiple recipients>; Tue, 22 Jan 2013 16:46:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=LgGX91EDw4Z3ClHFp9O01V+MYUidemgWPozklJ3V1l4=;
-	b=rWmLUsh2btKSmXClBK02N06n2DfJvpJM8cwSBVWH8pDEB4gAZF1DtVfmTv4VoE8e4b
-	U4jfSi3j3gi0DiC1Y+otjZ2Ifox8NONAGDcjiNMcxlnZfEOZaJF+FcIqxzSXLFGoXksN
-	piA+Ohq/1qJcILN9qgKAQT2ESRMT4zaLbThTt1hx/Hze/UbC8Qy4dpqQ2LrX0pmWh2WA
-	g+hG/Ubn3YP3P9sfzxCgUjGRQEeAVSgFESjV4A39f5sui2XN50vh1f/F7UKl/8qC7J5J
-	Pj1KpwAfIzrbCDz8USpHyx/u0mKG9Be8m7CUjJeDYTQV5+Ilyvf0JqKrFuHbNO8G3fl0
-	mO6Q==
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=VjUx6OmI+DnBGzz/w2EHvTV0L+Kjg/yZ+Xrwsp7ig+g=;
+	b=TEwB9o1Q5AzAkMt0lIiVYskNvKSi9bugQs6h45jCXj/o4POjKbmHUDZMnHwaVxH2K/
+	JMhiqtXm2UlxFU8WA1EhruQ/ug2X4T+W943jCsOW98kGHeBJafo0eTKoemIZOFxVY90d
+	xOqP99tEmPsLHjDTjUBn6b1IvtYo3yYZxX+Cs3Rk09ROo98ODunW9pv1tp4saPw7HV32
+	QpGtDu0I2OLuhSqjiJdGgg6a078YaRfMlAcYxNyokef2TUzhw5t1FSccDbNqu+4xFWLA
+	ZIj2o6sNjRWgd/tQVDoUuvjefQN3O6Z++6jnOKodjTlwJcOkgKjAMEy+zq1kcHOa+x5x
+	rq6A==
 MIME-Version: 1.0
-X-Received: by 10.152.133.52 with SMTP id oz20mr4322328lab.30.1358894500318;
-	Tue, 22 Jan 2013 14:41:40 -0800 (PST)
-Sender: cliff.brake@gmail.com
-Received: by 10.114.80.4 with HTTP; Tue, 22 Jan 2013 14:41:40 -0800 (PST)
-In-Reply-To: <1358894348-10416-1-git-send-email-cliff.brake@gmail.com>
-References: <1358894348-10416-1-git-send-email-cliff.brake@gmail.com>
-Date: Tue, 22 Jan 2013 17:41:40 -0500
-X-Google-Sender-Auth: dQ0zQ0evfTk-CmKekHNPRo9p6A4
-Message-ID: <CAOd_LFy_n_euw+cniV7CuA+4E2wo0Kc5vCG6CH3XxT_AvBBCgw@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] beagleboard.conf: add additional sound modules
+X-Received: by 10.220.149.81 with SMTP id s17mr11513829vcv.31.1358901967115;
+	Tue, 22 Jan 2013 16:46:07 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Tue, 22 Jan 2013 16:46:06 -0800 (PST)
+Date: Wed, 23 Jan 2013 01:46:06 +0100
+Message-ID: <CALbNGRTpOzUnNrOMH9AsTnG320z88iT1pmz2qrj0GBkyrkgLYw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core@lists.openembedded.org
+Subject: future of meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 22:57:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Jan 2013 01:01:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Please ignore, got sent to the wrong list.
+Hi,
 
-Thanks,
-Cliff
+I have followed the systemd migration to oe-core only sporadic without
+having tests / experiences so far because other issues are waiting for
+closure.
+Major difference is that we now get a distro feature for init system
+(for systemd part kind of D=C3=A9j=C3=A0-vu for me..). As I see it, we shou=
+ld
+now merge all appends back into the layers, align some configurations
+depending on systemd and remove meta-systemd.
 
-On Tue, Jan 22, 2013 at 5:39 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> From: Cliff Brake <cbrake@bec-systems.com>
->
-> require for audio to function
->
-> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
-> ---
->  conf/machine/beagleboard.conf | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-> index b3604a5..8f84c6c 100644
-> --- a/conf/machine/beagleboard.conf
-> +++ b/conf/machine/beagleboard.conf
-> @@ -48,4 +48,5 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
->  MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
->
->  # For a modularized kernel we want to drag in networking, sound, rtc etc."
-> -MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl"
-> +MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
-> +  kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
-> --
-> 1.8.1.1
->
+If this is correct: Is anybody out there willing to or already working on t=
+his?
+If not: What is the suggested layout?
+
+Andreas
 
 
