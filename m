@@ -1,41 +1,32 @@
-Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1Txxzx-0005O7-Fy
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1Ty0Ta-0001JE-3l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jan 2013 11:56:18 +0100
-Received: from mail-gh0-f199.google.com ([209.85.160.199])
-	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 23 Jan 2013 02:40:32 -0800
-Received: by mail-gh0-f199.google.com with SMTP id r16so10080777ghr.6
+	Wed, 23 Jan 2013 14:34:51 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 15253D22E9; Wed, 23 Jan 2013 14:19:25 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id F0BBCD22CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jan 2013 02:40:31 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:x-received:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding
-	:x-gm-message-state;
-	bh=rL0LGJ5oBj99REfqBOxqO2GBJSPUOMQFgxEADQgXPkw=;
-	b=UYlAoIvcUzUOnZUBFVg37iqa2QRXGBHJIqd75Ci4yBUlnBg74C25As189sfEk72fYN
-	KTKyYYyfz90qnx3gNP3nOoAkHXCqFwPFT2+oNS7MAJUB8t0trEfckgjUaYQlNNOShdou
-	yMoxiO21/XfGjs4zSpTBOnw09Nt7EdljoJniXgdgn9F3PiftWZrM+wwNX0YUqYFbPqjc
-	SP2QIXUA5PNyxF1rAzokRXbXppgiFeAYQZ6R4jKarNJA31rez84/WPAfVuoeSa0RUwhw
-	lbpmLV4EFf/8Mf9MXiCOyHDxy7NGZz3cZLytnCOpkbdVKj0YorEMCZzrxlVwXfL/MrYr
-	SMQQ==
-X-Received: by 10.52.66.71 with SMTP id d7mr595184vdt.121.1358937631788;
-	Wed, 23 Jan 2013 02:40:31 -0800 (PST)
-X-Received: by 10.52.66.71 with SMTP id d7mr595178vdt.121.1358937631675; Wed,
-	23 Jan 2013 02:40:31 -0800 (PST)
+	Wed, 23 Jan 2013 14:18:52 +0100 (CET)
+Message-ID: <50FFE333.7070201@linaro.org>
+Date: Wed, 23 Jan 2013 14:18:43 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130105 Thunderbird/17.0.2
 MIME-Version: 1.0
-Received: by 10.58.152.232 with HTTP; Wed, 23 Jan 2013 02:40:11 -0800 (PST)
-In-Reply-To: <CALbNGRTpOzUnNrOMH9AsTnG320z88iT1pmz2qrj0GBkyrkgLYw@mail.gmail.com>
-References: <CALbNGRTpOzUnNrOMH9AsTnG320z88iT1pmz2qrj0GBkyrkgLYw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 23 Jan 2013 10:40:11 +0000
-Message-ID: <CAJTo0LayN8m-GCitEb4GU5DSwGzcNfhf0nhQinvY=bWKNiM-LA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Gm-Message-State: ALoCoQmOYnCdMxOCBzEt3Cc4tak+G5J16MCN5H6YoZXO2yPBhcvIYQQTwgO2/uo0gU+fBxVEsdzSKUR7NJSEJ7jrpNmp8wy5ZIwn+hGr2t/Vd4Ltf5tV8EEyHrddXnZHzXn0LCAD5iUgFW4eDHw0B6no/P1MyPGwUccHwfMyHWnZqBQNQ9hT5X+LYXla90QrLMasytgKND6I
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] future of meta-systemd
+To: openembedded-devel@lists.openembedded.org
+Subject: FOSDEM giveaway
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,25 +40,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jan 2013 10:56:19 -0000
+X-List-Received-Date: Wed, 23 Jan 2013 13:35:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 23 January 2013 00:46, Andreas M=C3=BCller <schnitzeltony@googlemail.com=
-> wrote:
-> Major difference is that we now get a distro feature for init system
-> (for systemd part kind of D=C3=A9j=C3=A0-vu for me..). As I see it, we sh=
-ould
-> now merge all appends back into the layers, align some configurations
-> depending on systemd and remove meta-systemd.
->
-> If this is correct: Is anybody out there willing to or already working on=
- this?
-> If not: What is the suggested layout?
+Hello
 
-I do intend on merging all of the changes that should land in oe-core.
- Help is much appreciated once systemd.bbclass lands.
+As there will be many of OE developers at FOSDEM I want to ask does
+someone wants something from list:
 
-Ross
+1. Sim-One r1.3
+2. Atmel AT91SAM9M10-EKES
+3. Koala nanoPC
+4. Nokia Internet Tablet 770
+5. PC Engines Alix.1c
+6. Leather case for Sharp Zaurus c7x0
+7. Docking station for Sharp Zaurus SL-6000
+
+I got them in different moments of time. All should be in working
+condition. I can get them with me to FOSDEM and give to anyone
+interested. No support, no warranty etc.
+
+I will close list on Thursday 31st January at 05:59 CET.
+
+More details:
+
+1. VGA output, FastEthernet, 8MB flash on board, SD slot, 64MB ram. Was
+supported in OE classic as "simone". There are stability problems which
+can be solved by using U-Boot configured for 16bit memory access
+(instead of 32bit one) resulting in halfing memory. I add box and serial
+console kable (DB9 -> RJ45).
+
+I got it in November 2009 due to my work on merging EP93xx toolchain
+improvements into OpenEmbedded. Serial number #0006 ;)
+
+2. Brand new in original box. Never reflashed, still have WinCE and
+=C3=85ngstr=C3=B6m on internal flash. WQVGA screen, FastEthernet, SD slot=
+.
+
+Got it at FOSDEM 2011.
+
+3. Very slow 486sx (no FPU) with 300MHz clock and 128MB ram. Needs
+CompactFlash card to boot. Came with 4GB one but I can not find it. I
+add power supply. No serial ports ;( Has good GPU so can be used for big
+screen static images displays. No audio so no Doom :(
+
+Got it at FOSDEM 2009
+
+4. Nokia 770 - one of first tablets ever. In my opinion total failure
+(but I got it in 2007). Takes Nokia power supply with thin pin iirc.
+
+Got it at FOSDEM 2007.
+
+5. AMD Geode LX 500MHz and 256MB ram. Boots from CompactFlash or 2.5"
+hdd (IDE44 connector on board). Takes one PCI and one miniPCI card. I
+add PCI riser and IDE44 cable (if find). Can add old wifi minipci card
+if requested (prism so 11b only).
+
+Got it in August 2007. Currently board is flashed with Coreboot to get
+fast bootup - but I lost video output during the process ;(
 
 
