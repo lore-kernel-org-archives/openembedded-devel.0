@@ -1,35 +1,41 @@
-Received: from mail-bk0-f41.google.com ([209.85.214.41])
+Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <yanglei.fage@gmail.com>) id 1Txr4P-0003Ml-A3
+	(envelope-from <ross.burton@intel.com>) id 1Txxzx-0005O7-Fy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jan 2013 04:32:15 +0100
-Received: by mail-bk0-f41.google.com with SMTP id jg9so4209949bkc.0
+	Wed, 23 Jan 2013 11:56:18 +0100
+Received: from mail-gh0-f199.google.com ([209.85.160.199])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 23 Jan 2013 02:40:32 -0800
+Received: by mail-gh0-f199.google.com with SMTP id r16so10080777ghr.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jan 2013 19:16:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type:content-transfer-encoding;
-	bh=UHkNBhsYTpnJfi23dSvbKlFyr2LQct03ktcZmZcu8FY=;
-	b=0Ty3Kx1elvMBSRPFthaDdOQ/AZC/ApIqFhHwTsTG/5Hkf8FYpAEWqXfrhsMXAJYtgO
-	IgfKrFVq1wwgX/cmN6MGgEQptaMUCga0uFDLtqnG+CCkHrpuCvnb3N5dagIZ/JevU6IP
-	RrpTLCz0R6+le4Xg+SdnJm2RYXYJFlr6WKMn7jXF/QrYCdReuoHaRbEJTcmHlv6riapQ
-	ByUMtZyMNMX2q5ZusTch/pbmLfg+t1f0mfqxaaGFdJxkGvri3AGo7mYFLiYGjs74bLCP
-	xNHUop2KQN6YpoOXwhHYqmaiVpdoPU9Tt++xCiUljNA4nJ03tqA+4egBmW04121N4oGz
-	pAFw==
+	Wed, 23 Jan 2013 02:40:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:x-received:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=rL0LGJ5oBj99REfqBOxqO2GBJSPUOMQFgxEADQgXPkw=;
+	b=UYlAoIvcUzUOnZUBFVg37iqa2QRXGBHJIqd75Ci4yBUlnBg74C25As189sfEk72fYN
+	KTKyYYyfz90qnx3gNP3nOoAkHXCqFwPFT2+oNS7MAJUB8t0trEfckgjUaYQlNNOShdou
+	yMoxiO21/XfGjs4zSpTBOnw09Nt7EdljoJniXgdgn9F3PiftWZrM+wwNX0YUqYFbPqjc
+	SP2QIXUA5PNyxF1rAzokRXbXppgiFeAYQZ6R4jKarNJA31rez84/WPAfVuoeSa0RUwhw
+	lbpmLV4EFf/8Mf9MXiCOyHDxy7NGZz3cZLytnCOpkbdVKj0YorEMCZzrxlVwXfL/MrYr
+	SMQQ==
+X-Received: by 10.52.66.71 with SMTP id d7mr595184vdt.121.1358937631788;
+	Wed, 23 Jan 2013 02:40:31 -0800 (PST)
+X-Received: by 10.52.66.71 with SMTP id d7mr595178vdt.121.1358937631675; Wed,
+	23 Jan 2013 02:40:31 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.204.5.202 with SMTP id 10mr6209692bkw.135.1358911000019;
-	Tue, 22 Jan 2013 19:16:40 -0800 (PST)
-Received: by 10.204.11.86 with HTTP; Tue, 22 Jan 2013 19:16:39 -0800 (PST)
-In-Reply-To: <50FE5110.7090104@enea.com>
-References: <1358762433-11853-1-git-send-email-lei.yang@windriver.com>
-	<50FE5110.7090104@enea.com>
-Date: Wed, 23 Jan 2013 11:16:39 +0800
-Message-ID: <CAHsH0E_-Fu9m4U4cOTJNWAXpTEhLnF2dX_Qzrwm0-Ki3hGiYCw@mail.gmail.com>
-From: lei yang <yanglei.fage@gmail.com>
-To: =?ISO-8859-1?Q?David_Nystr=F6m?= <david.nystrom@enea.com>
-Cc: meta-virtualization@yoctoproject.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-virtualization] [meta-oe][PATCH] multipath-tools: Add multipath-tools recipe
+Received: by 10.58.152.232 with HTTP; Wed, 23 Jan 2013 02:40:11 -0800 (PST)
+In-Reply-To: <CALbNGRTpOzUnNrOMH9AsTnG320z88iT1pmz2qrj0GBkyrkgLYw@mail.gmail.com>
+References: <CALbNGRTpOzUnNrOMH9AsTnG320z88iT1pmz2qrj0GBkyrkgLYw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 23 Jan 2013 10:40:11 +0000
+Message-ID: <CAJTo0LayN8m-GCitEb4GU5DSwGzcNfhf0nhQinvY=bWKNiM-LA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Gm-Message-State: ALoCoQmOYnCdMxOCBzEt3Cc4tak+G5J16MCN5H6YoZXO2yPBhcvIYQQTwgO2/uo0gU+fBxVEsdzSKUR7NJSEJ7jrpNmp8wy5ZIwn+hGr2t/Vd4Ltf5tV8EEyHrddXnZHzXn0LCAD5iUgFW4eDHw0B6no/P1MyPGwUccHwfMyHWnZqBQNQ9hT5X+LYXla90QrLMasytgKND6I
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] future of meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,120 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jan 2013 03:32:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Jan 2013 10:56:19 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 22, 2013 at 4:42 PM, David Nystr=F6m <david.nystrom@enea.com> w=
-rote:
-> On Mon 21 Jan 2013 11:00:33 AM CET, lei.yang@windriver.com wrote:
->>
->> From: Lei Yang <lei.yang@windriver.com>
->>
->> This packages provides:
->> - multipath: scans the system for multipathed devices, assembles
->> - multipathd: waits for maps events then execs multipath
->> - kpartx: maps linear devmaps to device partitions, which makes
->> multipath maps partionable
->> ......
->>
->> Now,It can be used for kvm disk img partion for me.
->>
->> Signed-off-by: Lei Yang <lei.yang@windriver.com>
->> ---
->>   .../multipath-tools/multipath-tools_git.bb         |   46
->> ++++++++++++++++++++
->>   1 files changed, 46 insertions(+), 0 deletions(-)
->>   create mode 100644
->> meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->>
->> diff --git
->> a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->> b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->> new file mode 100644
->> index 0000000..e9509d3
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
->> @@ -0,0 +1,46 @@
->> +SUMMARY =3D "Tools to Manage Multipathed Devices with the device-mapper=
-"
->> +DESCRIPTION =3D "This package provides the tools to manage multipathed
->> devices by \
->> +instructing the device-mapper multipath module what to do"
->> +
->> +HOMEPAGE =3D "http://christophe.varoqui.free.fr/"
->> +DEPENDS =3D "readline libaio lvm2"
->> +LICENSE =3D "GPLv2"
->> +
->> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7be2873b6270e45abacc503abbe2=
-aa3d"
->> +S=3D"${WORKDIR}/git"
->> +
->> +
->> +SRC_URI =3D "git://git.opensvc.com/multipath-tools/.git;protocol=3Dhttp=
-"
->> +
->> +SRCREV =3D "d3683ab18b386e9b3b54b59a122c689e9ebdf5cf"
->> +PV =3D "0.4.9+gitr${SRCPV}"
->> +
->> +inherit autotools
->> +
->> +EXTRA_OEMAKE=3D"LIB=3D${libdir} exec_prefix=3D${exec_prefix} libdir=3D$=
-{libdir}"
->> +
->> +PACKAGES =3D+ "libmpathpersist mpathpersist kpartx libmultipath multipa=
-th
->> multipathd libmultipath-dev libmpathpersist-dev"
->> +
->> +
->> +RDEPENDS_${PN} +=3D "libmpathpersist mpathpersist kpartx libmultipath
->> multipath multipathd"
->> +
+On 23 January 2013 00:46, Andreas M=C3=BCller <schnitzeltony@googlemail.com=
+> wrote:
+> Major difference is that we now get a distro feature for init system
+> (for systemd part kind of D=C3=A9j=C3=A0-vu for me..). As I see it, we sh=
+ould
+> now merge all appends back into the layers, align some configurations
+> depending on systemd and remove meta-systemd.
 >
->
-> Is RDEPENDS on udev not mandatory ?
->
->
->> +do_install_append () {
->> +       ln -sf libmpathpersist.so.0 ${D}${libdir}/libmpathpersist.so
->> +       ln -sf libmultipath.so.0 ${D}${libdir}/libmultipath.so
->> +}
->> +
->> +ALLOW_EMPTY_${PN} =3D "1"
->> +FILES_${PN}     =3D ""
->> +
->> +FILES_libmpathpersist =3D "${libdir}/libmpathpersist*.so.0"
->> +FILES_mpathpersist =3D "${sbindir}/mpathpersist"
->> +FILES_kpartx =3D "${sbindir}/kpartx ${base_libdir}/udev/"
->> +FILES_libmultipath =3D "${libdir}/libcheck*.so ${libdir}/libpri*.so
->> ${libdir}/libmultipath*.so.0"
->> +FILES_multipath =3D "${sbindir}/multipath ${sysconfdir}"
->> +FILES_multipathd =3D "${sbindir}/multipathd ${base_libdir}"
->> +
->> +#put the symbol link lib in -dev
->> +FILES_libmultipath-dev =3D "${libdir}/libmultipath*.so"
->> +FILES_libmpathpersist-dev =3D "${libdir}/libmpathpersist*.so"
->> +
->> +
->
->
-> Whats the intended destination for this recipe ?
-> If not accepted in meta-oe, We'll be happy to merge it in
-> meta-virtualization.
->
+> If this is correct: Is anybody out there willing to or already working on=
+ this?
+> If not: What is the suggested layout?
 
-sent to meta-virt
+I do intend on merging all of the changes that should land in oe-core.
+ Help is much appreciated once systemd.bbclass lands.
 
-
-Lei
-
-
-
-> Br,
-> David
-> _______________________________________________
-> meta-virtualization mailing list
-> meta-virtualization@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-virtualization
+Ross
 
 
