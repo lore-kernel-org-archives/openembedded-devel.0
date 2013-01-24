@@ -1,23 +1,37 @@
-Received: from p3plsmtpa11-08.prod.phx3.secureserver.net ([68.178.252.109])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pab@pabigot.com>) id 1Ty7Ss-0004Rx-Ns
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1TyPBf-0005Oa-3a
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jan 2013 22:02:36 +0100
-Received: from llc.pab ([66.41.60.82])
-	by p3plsmtpa11-08.prod.phx3.secureserver.net with 
-	id rYkU1k00F1mTNtu01YkUfX; Wed, 23 Jan 2013 13:44:29 -0700
-Message-ID: <51004BAC.6080909@pabigot.com>
-Date: Wed, 23 Jan 2013 14:44:28 -0600
-From: "Peter A. Bigot" <pab@pabigot.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	Thu, 24 Jan 2013 16:57:59 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r0OFgPYu015080
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Jan 2013 07:42:25 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Thu, 24 Jan 2013 07:42:25 -0800
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id A26397FCE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Jan 2013 10:40:30 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 2667A20B47; Thu,
+	24 Jan 2013 10:42:24 -0500 (EST)
+Date: Thu, 24 Jan 2013 10:42:24 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130124154223.GH3496@windriver.com>
+References: <20130118171332.GA12933@windriver.com>
+	<20130121195838.GA10801@windriver.com>
+	<20130122151153.GA24789@windriver.com>
 MIME-Version: 1.0
-To: Holger Hans Peter Freyther <holger@freyther.de>
-References: <1347641974-4993-1-git-send-email-holger+oe@freyther.de>
-	<50FEA9F4.4080508@pabigot.com> <20130123195059.GG2634@xiaoyu.lan>
-In-Reply-To: <20130123195059.GG2634@xiaoyu.lan>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-systemd: Introduce a create-volatile to create tmp directories
+In-Reply-To: <20130122151153.GA24789@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking] [PATCH] autofs: fails to compile with openldap disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,43 +45,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jan 2013 21:02:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Jan 2013 15:58:01 -0000
+X-Groupsio-MsgNum: 42825
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="EemXnrF2ob+xzFeB"
+Content-Disposition: inline
 
-On 01/23/2013 01:50 PM, Holger Hans Peter Freyther wrote:
-> On Tue, Jan 22, 2013 at 09:02:12AM -0600, Peter A. Bigot wrote:
->
->> meta-gumstix has this patch and it caused problems with attempts to
->> use systemd_v189 in denzil since it's hidden inside a bbappend to
->> systemd_git.  So I'm hoping to identify a more forward-looking
->> solution.  Is there a plan to fix this issue globally?  Koen
->> preferred using base_files+fs_perms as in Angstrom, but Holger was
->> concerned this would prevent sharing base_files between sysvinit and
->> systemd builds.
-> My concern is still there but my approach has some downsides as well. The
-> presence of /var/log on tmpfs is fooling the journald to use more memory
-> than is healthy. I solved this by disabling the auto-detect in the journald
-> configuration.
->
-> What is the issue you have with meta-gumstix?
+--EemXnrF2ob+xzFeB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Mostly that I wasn't aware of the patch it added to systemd_git that was 
-responsible for creating such a critical part of a functioning Poky 
-installation.  I'd had things working with systemd_git in the denzil 
-branch as of 21Dec, but when that recipe got reverted around 24Dec I 
-switched to systemd_v189 assuming it was compatible.  But things broke 
-in a very unexpected way because I lost the meta-gumstix systemd_git 
-bbappend that created the volatile hierarchy.
+[Re: [oe] [meta-networking] [PATCH] autofs: fails to compile with openldap =
+disabled] On 13.01.22 (Tue 10:11) Amy Fong wrote:
 
-I now understand that it was natural to copy it into systemd because 
-sysvinit is responsible for this functionality when it's the init 
-manager.  Having to put a bbappend in every variant systemd recipe in 
-every distro/BSP/vendor image layer seems cumbersome.  Since my email 
-I'm seeing discussion on oe-core on how to integrate systemd in 
-Yocto/Poky that touches on managing volatiles, so I'll wait, or 
-follow-up there if necessary.
+> On Mon, Jan 21, 2013 at 02:58:39PM -0500, Joe MacDonald wrote:
+> Hi Joe,
+>=20
+> > Hey Amy,
+> >=20
+> > [[oe] [meta-networking] [PATCH] autofs: fails to compile with openldap =
+disabled] On 13.01.18 (Fri 12:13) Amy Fong wrote:
+> >=20
+> > > commit 09947d772a36e4d2c2dc48356281bd3ce0a04b0c
+> > > Author: Amy Fong <amy.fong@windriver.com>
+> > > Date:   Fri Jan 18 11:10:35 2013 -0500
+> > >=20
+> > >     autofs: fails to compile with openldap disabled
+> > >    =20
+> > >     As of 5.0.6, it appears that changes were introduced so that
+> > >     if you compile with openldap disabled and openldap headers are not
+> > >     available, then autofs fails to build.
+> > >    =20
+> > >     Since autofs no longer depends on openldap, remove the dependency
+> > >    =20
+> > >     Signed-off-by: Amy Fong <amy.fong@windriver.com>
+> > >=20
+> > > diff --git a/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.pat=
+ch b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
+> > > new file mode 100644
+> > > index 0000000..b62f955
+> > > --- /dev/null
+> > > +++ b/recipes-daemons/autofs/autofs-5.0.7/fix_disable_ldap.patch
+> > > @@ -0,0 +1,40 @@
+> > > +autofs: fails to compile with openldap disabled
+> > > +
+> > > +As of 5.0.6, it appears that changes were introduced so that=20
+> > > +if you compile with openldap disabled and openldap headers are not
+> > > +available, then autofs fails to build.
+> > > +
+> > > +Signed-off-by: Amy Fong <amy.fong@windriver.com>
+> >=20
+> > Did you say you'd already sent this upstream?  I can put in an
+> > upstream-status myself, but I'm not sure what it is right now.  :-)
+> >=20
+> > Alternatively, a new version with the upstream-status is good too.
+> >=20
+> > -J.
+>=20
+> Nope, it wasn't sent upstream. I'd say that the upstream-status should be=
+ pending. :)
 
-Peter
+Okay, merged.  Can you ensure it gets sent up-stream since you authored
+it?
 
+Thanks Amy.
 
+--=20
+-Joe MacDonald.
+:wq
+
+--EemXnrF2ob+xzFeB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlEBVl8ACgkQPN8S4W6ZZncPTACfZYdXNdvh7c8ztWuzljxDTRky
+raUAn0vHv8p8RQuYABuDWlOy0iw18f5V
+=zDx1
+-----END PGP SIGNATURE-----
+
+--EemXnrF2ob+xzFeB--
