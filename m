@@ -1,37 +1,24 @@
-Received: from mail-vc0-f171.google.com ([209.85.220.171])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1TySLK-0002HY-TO
+	(envelope-from <jaap.dejong@nedap.com>) id 1TyhYS-0000ch-7d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jan 2013 20:20:13 +0100
-Received: by mail-vc0-f171.google.com with SMTP id p1so3137140vcq.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jan 2013 11:04:37 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:x-originating-ip:in-reply-to:references
-	:from:date:message-id:subject:to:content-type:x-gm-message-state;
-	bh=BbDuB9M5VV5M5hb4BNJnPecSeY4cfkyX/uahxDSZV2Y=;
-	b=XZ4G7xPF69jkFapZ32bqrXNB2rPCJAxvQEZZhZTGGz4nCSwG4sB0s96/1ktM1jeFD0
-	hIkYXzUjB6s+k/+FqvrN+bqtROEQAZwqW2pG2EyoYvaWIhwEONYTFmae8VOHyL8PoARw
-	R+H2zJNT20RHP5zs6j6jHyrZLWi61a9kp4TIMXuUdng+yr9h/n96pRdbnQ/4rd4b6wYM
-	l4MC8pprLAC2HjAMxI3pURv2d5aFc7HEUFcjRFDfRrZuPBAytaNC0/1WNwY99fjdGORD
-	MK0Psh9Q/4k7JaCFz4yRSm7dUDH3wbwDRm2sMblJkOTaOug3pG+CvY5zK3OkOfHiKLeU
-	ZN2A==
-X-Received: by 10.52.76.7 with SMTP id g7mr2732558vdw.95.1359054277316; Thu,
-	24 Jan 2013 11:04:37 -0800 (PST)
+	Fri, 25 Jan 2013 12:34:48 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 25 Jan 2013
+	12:19:09 +0100
+X-TM-IMSS-Message-ID: <20b93b9800022af6@nedap.com>
+Received: from [10.17.16.7] ([10.17.16.7]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 20b93b9800022af6 ;
+	Fri, 25 Jan 2013 12:19:01 +0100
+Message-ID: <51026A2D.1030705@nedap.com>
+Date: Fri, 25 Jan 2013 12:19:09 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-Received: by 10.58.153.163 with HTTP; Thu, 24 Jan 2013 11:04:17 -0800 (PST)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <20130115061109.GI2992@jama>
-References: <1358094394-25613-1-git-send-email-andrei@gherzan.ro>
-	<20130115061109.GI2992@jama>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Thu, 24 Jan 2013 21:04:17 +0200
-Message-ID: <CAK18fxF-RoFnrQBTwq8wVU+cLsLE87X6AQxDfgKzu1JuXXXERg@mail.gmail.com>
-To: openembedded <openembedded-devel@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQkYBAXbY9ys3g6dwT1T3n5vDmmY6WSf9LJdccvP3wft8f0R1kysC8/M8jluBKo+6LvmzXEF
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-multimedia][PATCH] libpostproc: Remove -disable-yasm as this is a nonexistent flag
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: best practice for different projects on the same board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2013 19:20:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 25 Jan 2013 11:34:49 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 15, 2013 at 8:11 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
+Hi All,
+I'm wondering what the best practice would be in the following situation.
+We have a board that is going to be used in several projects.
+The set of basic packages is the same but every project might have some 
+minor and perhaps sometimes major differences in f.i. config files.
+I don't want to make a copy of the base project for every upcoming new 
+project. I would really like to handle with the differences only.
+What is the best approach for this?
+Thanks!
+Jaap
 
-> On Sun, Jan 13, 2013 at 06:26:34PM +0200, Andrei Gherzan wrote:
-> > Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
-> > ---
-> >  meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb |    5 +----
-> >  1 file changed, 1 insertion(+), 4 deletions(-)
->
-> Looks good, but [meta-multimedia] tag is for meta-multimedia layer not
-> recipes-multimedia.
->
-> Sorry for this. Anyway seems merged. Thanks.
 
--- 
-*Andrei Gherzan*
-m: +40.744.478.414 |  f: +40.31.816.28.12
 
