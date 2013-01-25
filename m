@@ -1,47 +1,34 @@
-Received: from tx2ehsobe005.messaging.microsoft.com ([65.55.88.15]
-	helo=tx2outboundpool.messaging.microsoft.com)
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B19537@freescale.com>) id 1Tyhfy-0001GJ-Sv
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1Tyhtf-0001zG-7k
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2013 12:42:33 +0100
-Received: from mail240-tx2-R.bigfish.com (10.9.14.243) by
-	TX2EHSOBE007.bigfish.com (10.9.40.27) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 25 Jan 2013 10:11:00 +0000
-Received: from mail240-tx2 (localhost [127.0.0.1])	by
-	mail240-tx2-R.bigfish.com (Postfix) with ESMTP id 0890D320164	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 10:11:00 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -1
-X-BigFish: VS-1(zz936eIzz1ee6h1de0h1202h1e76h1d1ah1d2ahzz17326ah8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1155h)
-Received: from mail240-tx2 (localhost.localdomain [127.0.0.1]) by mail240-tx2
-	(MessageSwitch) id 1359108657937650_30419;
-	Fri, 25 Jan 2013 10:10:57 +0000 (UTC)
-Received: from TX2EHSMHS025.bigfish.com (unknown [10.9.14.243])	by
-	mail240-tx2.bigfish.com (Postfix) with ESMTP id D8B6642004B	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 10:10:57 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS025.bigfish.com
-	(10.9.99.125) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 25 Jan 2013 10:10:56 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Fri, 25 Jan 2013 10:10:55 +0000
-Received: from b19537-desktop.ap.freescale.net
-	(b19537-desktop.ap.freescale.net [10.192.208.197])	by
-	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id r0PAAprn015229;
-	Fri, 25 Jan 2013 03:10:53 -0700
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Jan 2013 18:10:50 +0800
-Message-ID: <1359108650-32596-1-git-send-email-zhenhua.luo@freescale.com>
-X-Mailer: git-send-email 1.7.9.5
+	Fri, 25 Jan 2013 12:56:39 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 7FE95D22E9; Fri, 25 Jan 2013 12:41:04 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 7D4A7D22CD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jan 2013 12:40:31 +0100 (CET)
+Message-ID: <51026F2D.5000503@linaro.org>
+Date: Fri, 25 Jan 2013 12:40:29 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130105 Thunderbird/17.0.2
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: B29882@freescale.com, b28405@freescale.com,
-	Zhenhua Luo <zhenhua.luo@freescale.com>
-Subject: [meta-oe/meta-webserver] apache2: fix the race issue of parallel installation
+To: openembedded-devel@lists.openembedded.org
+References: <51026A2D.1030705@nedap.com>
+In-Reply-To: <51026A2D.1030705@nedap.com>
+Subject: Re: best practice for different projects on the same board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,74 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2013 11:42:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 25 Jan 2013 11:56:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-fix following race issue when do parallel install
-| mkdir: cannot create directory `/home/mypc/workspace/poky/build_p4080ds_release/tmp/work/ppce500mc-fsl_networking-linux/apache2/2.4.3-r1/image/usr/share/apache2': File exists
-...
-| mkdir: cannot create directory `/home/mypc/workspace/poky/build_p4080ds_release/tmp/work/ppce500mc-fsl_networking-linux/apache2/2.4.3-r1/image/usr/share/apache2': File exists
-| make[1]: *** [install-man] Error 1
-| make[1]: *** Waiting for unfinished jobs....
+W dniu 25.01.2013 12:19, Jaap de Jong pisze:
+> Hi All,
+> I'm wondering what the best practice would be in the following situation.
+> We have a board that is going to be used in several projects.
+> The set of basic packages is the same but every project might have some
+> minor and perhaps sometimes major differences in f.i. config files.
+> I don't want to make a copy of the base project for every upcoming new
+> project. I would really like to handle with the differences only.
+> What is the best approach for this?
 
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
----
- .../recipes-httpd/apache2/apache2_2.4.3.bb         |    3 ++-
- ...httpd-2.4.3-fix-race-issue-of-dir-install.patch |   21 ++++++++++++++++++++
- 2 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-httpd/apache2/files/httpd-2.4.3-fix-race-issue-of-dir-install.patch
+Create conf/machine/board1.conf and describe everything there. Set
+kernel etc. Then create conf/machine/board2.conf which will "require
+conf/machine/board1.conf" and then change what is needed.
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.3.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.3.bb
-index 9179bca..a221e1d 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.3.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.3.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://httpd.apache.org/"
- DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-@@ -16,6 +16,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://apache-configure_perlbin.patch \
-            file://replace-lynx-to-curl-in-apachectl-script.patch \
-            file://apache-ssl-ltmain-rpath.patch \
-+           file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-            file://init"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-diff --git a/meta-webserver/recipes-httpd/apache2/files/httpd-2.4.3-fix-race-issue-of-dir-install.patch b/meta-webserver/recipes-httpd/apache2/files/httpd-2.4.3-fix-race-issue-of-dir-install.patch
-new file mode 100644
-index 0000000..b948753
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/files/httpd-2.4.3-fix-race-issue-of-dir-install.patch
-@@ -0,0 +1,21 @@
-+Upstream-Status: Pending
-+
-+fix following race issue when do parallel install
-+| mkdir: cannot create directory `/home/mypc/workspace/poky/build_p4080ds_release/tmp/work/ppce500mc-fsl_networking-linux/apache2/2.4.3-r1/image/usr/share/apache2': File exists
-+...
-+| mkdir: cannot create directory `/home/mypc/workspace/poky/build_p4080ds_release/tmp/work/ppce500mc-fsl_networking-linux/apache2/2.4.3-r1/image/usr/share/apache2': File exists
-+| make[1]: *** [install-man] Error 1
-+| make[1]: *** Waiting for unfinished jobs....
-+
-+-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
-+--- httpd-2.4.3/build/mkdir.sh.orig	2013-01-25 03:47:21.565255420 -0600
-++++ httpd-2.4.3/build/mkdir.sh	2013-01-25 03:46:17.833051230 -0600
-+@@ -39,7 +39,7 @@
-+         esac
-+         if test ! -d "$pathcomp"; then
-+             echo "mkdir $pathcomp" 1>&2
-+-            mkdir "$pathcomp" || errstatus=$?
-++            mkdir -p "$pathcomp" || errstatus=$?
-+         fi
-+         pathcomp="$pathcomp/"
-+     done
--- 
-1.7.9.7
-
+This way you have two values of MACHINE variable which you can use in
+all recipes you need to modify for boards. And you are able to do builds
+with one TMPDIR so most of builds will be reused.
 
 
 
