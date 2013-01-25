@@ -1,34 +1,34 @@
-Received: from mail-da0-f53.google.com ([209.85.210.53])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TylCt-00038e-AW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2013 16:28:44 +0100
-Received: by mail-da0-f53.google.com with SMTP id x6so211912dac.12
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1TylH9-0003QA-OC for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jan 2013 16:33:13 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Tyl2L-0006Xc-PW for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jan 2013 16:17:49 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jan 2013 16:17:49 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 07:13:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=nP+u5iXBHBoj3u1idrMPXiwrRnpeBkctvrw/w3PxZuA=;
-	b=PambxA1ywPN6+NSbkp0g8q4Di55HMJ9j78YtYtl+V+q+peL/EhnH+ETeeWQVvb94s4
-	hrRYAmGYpok7DkZ8cn8qKOOMbmpyVIzyjI51yfXdRWtacgNz65vHkOmTwfvq10t/Sd9d
-	4zNxn60/14nuaNXtH+X14KfRpm6y3t5EsPSThVyRLgcZ1jj17IK05Mh/ApXmzZnLGVDn
-	WGXiNIKAVOw93T+uRj4sTV1L+OTpiWlwBuZivaA3WbaHf/9syZgjUwgNQge4DfJbIuRU
-	pS1s/5kDFkZjTOizxidu6wgHZBv/SJZ1bdB0ITTPf1A8u3gFHOd1qAdT3a0bAFy9AaU1
-	3JPQ==
-X-Received: by 10.68.132.10 with SMTP id oq10mr15172213pbb.18.1359126788313;
-	Fri, 25 Jan 2013 07:13:08 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id oc8sm823654pbb.39.2013.01.25.07.13.05
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 25 Jan 2013 07:13:07 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 25 Jan 2013 16:17:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jan 2013 16:13:02 +0100
-Message-Id: <1359126782-31113-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.1
-In-Reply-To: <1359126167-30599-1-git-send-email-Martin.Jansa@gmail.com>
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 25 Jan 2013 16:17:23 +0100
+Message-ID: <kdu7lv$778$1@ger.gmane.org>
 References: <1359126167-30599-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCHv2][meta-systemd] meta-systemd: remove wpa-supplicant bbappend
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
+In-Reply-To: <1359126167-30599-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.4.6
+Subject: Re: [PATCH][meta-systemd] meta-systemd: remove wpa-supplicant bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2013 15:28:44 -0000
+X-List-Received-Date: Fri, 25 Jan 2013 15:33:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* oe-core now has wpa-supplicant 2.0, but also installs wpa_supplicant.service to PN
-* feel free to add new bbappend with only systemd inherit and updated SYSTEMD_PACKAGES
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../wpa-supplicant/wpa-supplicant_1.0.bbappend            | 15 ---------------
- 1 file changed, 15 deletions(-)
- delete mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
+Op 25-01-13 16:02, Martin Jansa schreef:
+> * oe-core now has wpa-supplicant 2.0, but also installs
+> wpa_supplicant.service to PN * feel free to add new bbappend with only
+> systemd inherit and updated SYSTEMD_PACKAGES
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
-deleted file mode 100644
-index 609a1f3..0000000
---- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_1.0.bbappend
-+++ /dev/null
-@@ -1,15 +0,0 @@
--PRINC := "${@int(PRINC) + 2}"
--
--inherit systemd
--
--SYSTEMD_PACKAGES = "${PN}-systemd"
--SYSTEMD_SERVICE = "wpa_supplicant.service"
--SYSTEMD_AUTO_ENABLE = "disable"
--
--do_install_append () {
--    install -d ${D}${systemd_unitdir}/system
--    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
--}
--
--# systemd.bbclass does not catch all multiple-instance-service-files
--FILES_${PN}-systemd += "${systemd_unitdir}/system/"
--- 
-1.8.1.1
+FWIW, wpa-supplicant shouldn't be started by init, but by the
+networkmanagement app.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRAqIDMkyGM64RGpERApZWAJ9XaUKTR3ez4xoTcXhu4TpoYo4XJgCfYN9X
+wVAnjGYh7q9HZvHbwsa1EUg=
+=W0Vu
+-----END PGP SIGNATURE-----
 
 
 
