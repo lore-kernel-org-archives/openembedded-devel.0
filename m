@@ -1,35 +1,32 @@
-Received: from mail-vc0-f169.google.com ([209.85.220.169])
+Received: from mail-da0-f46.google.com ([209.85.210.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1TyjHa-0000i4-3O
+	(envelope-from <martin.jansa@gmail.com>) id 1Tyl30-0002cQ-BS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2013 14:25:26 +0100
-Received: by mail-vc0-f169.google.com with SMTP id n10so241750vcn.28
+	Fri, 25 Jan 2013 16:18:31 +0100
+Received: by mail-da0-f46.google.com with SMTP id p5so207443dak.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 05:09:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=HOu7DhU9bjEVs0CFGrlZttx7ZXh7oeLiUrBof4m+/9Y=;
-	b=JjWRVC60OWmTGoTHXn1wWVBwv1T7DQIA/LNfsBr7jl7mJ+aj/5LsVQpufM2KbDCAqM
-	GXphFbDimLt1K4PN2CH/AjNbcqLGzLnBTGNWKMgW7JSLR2ZL0vWleXvdnISdTkC+tUYS
-	F4NN/5tbdiJ2Krir+gVUx58WriUbAC2x5N1qvHtvO2CL1AOr8J+eaP3KefwW5u5td6fr
-	4qtDHUrDHX88q/WJqQxz2EqUJB4FmwNSJGadnUuLXIm/xQtwtMLM/wxC70z5PR/AQTno
-	Y/+28oWom6t8z/gzObvgBuTT9S0ckD7aYrL8bulT8imHM5qiHavBe7SjkUBdNm1m6MJa
-	8/xg==
-MIME-Version: 1.0
-X-Received: by 10.220.149.81 with SMTP id s17mr5871003vcv.31.1359119391534;
-	Fri, 25 Jan 2013 05:09:51 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Fri, 25 Jan 2013 05:09:51 -0800 (PST)
-In-Reply-To: <20130125120236.GE3200@jama>
-References: <1359114536-3823-1-git-send-email-schnitzeltony@googlemail.com>
-	<1359114536-3823-2-git-send-email-schnitzeltony@googlemail.com>
-	<20130125120236.GE3200@jama>
-Date: Fri, 25 Jan 2013 14:09:51 +0100
-Message-ID: <CALbNGRS07haZbBwbx=aNNhkR-kcdX1qHWGCDOJHkU4KcADAoDQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 25 Jan 2013 07:02:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=8xTWL7StcNl2Q7aRoywzbL8t8rVZPGaXGhnjolwjwC0=;
+	b=JH/MQWepAosfbLxlwqeAhEMLLwgdQZUvw+oF87nfkcZvIP/gRdGgYQESQ15CsorjzR
+	oNrinOKbehovxYS8ytHuuahSMieI/k0dqi0AdhAPTzDEkEZhJAC6+37qEfq0Am8is46J
+	vAtjTuaYt/FFe+ob5MhGg9SaQYckxyfNEEs9KDIG837L1B5Hbj3+yEWUjO9jt+bcv1Fp
+	/m2+UTIhgwfVdt0dKB2EOAz4C+d0GOHAxxOml6QaxAYaqpACJ7cuqxqFGrP0RCJDik9p
+	HZeFPlR3s2AEq23iZnSpvhuAEGotV4qCXMDITvGmYa67im70FvqU5h2fp2m0+0yzbPtv
+	AjoA==
+X-Received: by 10.68.219.71 with SMTP id pm7mr14720963pbc.82.1359126175225;
+	Fri, 25 Jan 2013 07:02:55 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ho4sm805123pbc.54.2013.01.25.07.02.52
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 25 Jan 2013 07:02:54 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe/meta-systemd 1/5] thunar: add RRECOMMENDS and RDEPENDS to ensure full functionality
+Date: Fri, 25 Jan 2013 16:02:47 +0100
+Message-Id: <1359126167-30599-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.1
+Subject: [PATCH][meta-systemd] meta-systemd: remove wpa-supplicant bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2013 13:25:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 25 Jan 2013 15:18:32 -0000
 
-On Fri, Jan 25, 2013 at 1:02 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Fri, Jan 25, 2013 at 12:48:52PM +0100, Andreas M=C3=BCller wrote:
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb |    5 +++++
->>  1 files changed, 5 insertions(+), 0 deletions(-)
->>
->> diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb b/meta-xfce/r=
-ecipes-xfce/thunar/thunar_1.6.2.bb
->> index 55b54d4..aec2db1 100644
->> --- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
->> +++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
->> @@ -3,6 +3,7 @@ SECTION =3D "x11"
->>  LICENSE =3D "GPLv2"
->>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079ba=
-e19f"
->>  DEPENDS =3D "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm=
- dbus-glib startup-notification libnotify xfce4-panel"
->> +PR =3D "r1"
->>
->>  inherit xfce
->>
->> @@ -22,3 +23,7 @@ FILES_${PN} +=3D "${libdir}/thunarx-2/* \
->>  FILES_${PN}-dbg +=3D "${libdir}/thunarx-2/.debug/ \
->>                      ${libdir}/xfce4/panel/plugins/.debug/ \
->>                      ${libdir}/Thunar/.debug/"
->> +
->> +# RRECOMMENDS does not drag in charmaps (tested with opkg)
->> +RDEPENDS_${PN} =3D "eglibc-charmaps"
->
-> what about uclibc builds?
-Good point - I forgot to remove it does not fix my password problem in
-win environments anyway. Will send V2 later this evening.
+* oe-core now has wpa-supplicant 2.0, but also installs wpa_supplicant.service to PN
+* feel free to add new bbappend with only systemd inherit and updated SYSTEMD_PACKAGES
 
-Andreas
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../wpa-supplicant/wpa-supplicant_2.0.bbappend            | 15 ---------------
+ 1 file changed, 15 deletions(-)
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+
+diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+deleted file mode 100644
+index 7a3e906..0000000
+--- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
++++ /dev/null
+@@ -1,15 +0,0 @@
+-PRINC := "${@int(PRINC) + 1}"
+-
+-inherit systemd
+-
+-SYSTEMD_PACKAGES = "${PN}-systemd"
+-SYSTEMD_SERVICE = "wpa_supplicant.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+-
+-do_install_append () {
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
+-}
+-
+-# systemd.bbclass does not catch all multiple-instance-service-files
+-FILES_${PN}-systemd += "${systemd_unitdir}/system/"
+-- 
+1.8.1.1
+
 
 
