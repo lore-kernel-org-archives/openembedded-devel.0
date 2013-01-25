@@ -1,38 +1,38 @@
-Received: from mail-ee0-f48.google.com ([74.125.83.48])
+Received: from mail-ee0-f44.google.com ([74.125.83.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Tyi36-00035O-8g
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Tyi37-00035a-H6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jan 2013 13:06:24 +0100
-Received: by mail-ee0-f48.google.com with SMTP id t10so149312eei.21
+	Fri, 25 Jan 2013 13:06:30 +0100
+Received: by mail-ee0-f44.google.com with SMTP id l10so149564eei.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 03:50:50 -0800 (PST)
+	Fri, 25 Jan 2013 03:50:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=+5BlsrxXidBgDOKyemvEBLxNXF3Hl7XsrbmyMq1yzyg=;
-	b=0N0/yldnsY+kcq62Z+a5LrkifDLY0VIX3nmkwbZbv7jHW/0HcJAUCIxpx1ErEWT6ev
-	FnRPE25UQ+LFXBtjPTx0VySVOuDPhJw1RQjcGJpAJX4vc1StydCniKa5fdwFDkmbAShJ
-	+p9MlkBjuc8zFbNnf9tRILFMFNjWCpwULxCz9d4zNb2nmFu6ntkTKN4A7Fq2Z2AGbdWi
-	SCw0oWrrfiBWCPIYQgQUP1qTz3LfDpFh6PKdAtlylulWAnKQmM57ddoocOE+JSP2HmAZ
-	gf7N7RWTtqA3xxCw03ZCmVyL/J5J9Qz/pWB88uQ49XMkbR3Js2FWF/ce9URXVvwGWJPO
-	Avfw==
-X-Received: by 10.14.177.1 with SMTP id c1mr17338109eem.8.1359114650439;
-	Fri, 25 Jan 2013 03:50:50 -0800 (PST)
+	bh=55mg3FEns+WahbYVBDgUvfDyMEVq5smzZovd2OjxRi4=;
+	b=RSlT6BCM0JYnF/8OXdlN7kCxEkXGn5ic1piA5bbcq1eCbPajgYpKr2NOGpPrAL4Z4b
+	l0QzM+8KUdXrVactcKgK1GYVOZhFYlfq4f/fe9sttZPVWrQ3Bog7V7uXgYi+Id+6i52N
+	7+k/VgX/oQzvaehXRP9XL10Af+hu/ANpKakH91czbwhsAIkHlKR5Z/1RxlicQ0NW8SHt
+	aO+oK8TimG7bCsajlqm+Qu5D3s/NqeEsnB1NyUfGa/omDVJE3CAew0I1DxY0L3tGN3iy
+	SAUnA+RtdxnSKk6UnP6Wwvauf0yee+vpG0riLcJ2ENIXeHZdNZ2KGeHAdIxeDva9mmdo
+	SGUg==
+X-Received: by 10.14.2.5 with SMTP id 5mr17192631eee.30.1359114651695;
+	Fri, 25 Jan 2013 03:50:51 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-251-141.unitymediagroup.de.
 	[95.223.251.141])
-	by mx.google.com with ESMTPS id f6sm1244955eeo.7.2013.01.25.03.50.49
+	by mx.google.com with ESMTPS id f6sm1244955eeo.7.2013.01.25.03.50.50
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 25 Jan 2013 03:50:49 -0800 (PST)
+	Fri, 25 Jan 2013 03:50:51 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jan 2013 12:48:55 +0100
-Message-Id: <1359114536-3823-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 25 Jan 2013 12:48:56 +0100
+Message-Id: <1359114536-3823-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1359114536-3823-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1359114536-3823-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-systemd 4/5] geany: initial add 1.22
+Subject: [meta-oe/meta-systemd 5/5] lxdm: disable screensaver by default when starting X
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2013 12:06:26 -0000
+X-List-Received-Date: Fri, 25 Jan 2013 12:06:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-new file mode 100644
-index 0000000..1e56ec8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "A fast and lightweight IDE"
-+HOMEPAGE = "http://www.geany.org/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-+DEPENDS = "gtk+"
-+
-+inherit autotools pkgconfig
-+
-+SRC_URI = "http://download.geany.org/${PN}-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "0672077fe83e2a739aa0eaca426aacf0"
-+SRC_URI[sha256sum] = "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d56388e9521a27877577e"
-+
-+FILES_${PN} += "${datadir}/icons"
+diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+index 3308e26..be83146 100644
+--- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
++++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+@@ -15,7 +15,7 @@ LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam
+ SRCREV = "65e7cc8fdc150c2b925eb348ce82de17dee5eb0b"
+ PV = "0.4.2+git${SRCPV}"
+ PE = "1"
+-PR = "r2"
++PR = "r3"
+ 
+ DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
+ 
+@@ -30,9 +30,10 @@ SYSTEMD_UNITDIR ??= "no"
+ EXTRA_OECONF = "--with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
+ 
+ do_compile_append() {
+-	# default background configured not available / no password field available
++	# default background configured not available / no password field available / no default screensaver
+ 	sed -i 	-e 's,bg=,# bg=,g' \
+ 		-e 's,# skip_password=,skip_password=,g' \
++		-e 's,# arg=.*,arg=${bindir}/X -s 0,g' \
+ 		${S}/data/lxdm.conf.in
+ 	# add default configuration
+ 	oe_runmake -C ${S}/data lxdm.conf
 -- 
 1.7.6.5
 
