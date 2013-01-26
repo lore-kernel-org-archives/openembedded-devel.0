@@ -1,35 +1,35 @@
-Received: from mail-pb0-f49.google.com ([209.85.160.49])
+Received: from mail-da0-f46.google.com ([209.85.210.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1TyzlF-0002kK-2P
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jan 2013 08:01:15 +0100
-Received: by mail-pb0-f49.google.com with SMTP id xa12so604931pbc.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jan 2013 22:45:33 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1Tz4Sb-0002HC-TJ; Sat, 26 Jan 2013 13:02:14 +0100
+Received: by mail-da0-f46.google.com with SMTP id p5so553089dak.5
+	for <multiple recipients>; Sat, 26 Jan 2013 03:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=DN5+uaMq7R/5Dsv7BW2lIRwfDL+gsUgosbulqSYR62w=;
-	b=IVgswPwG/S44C6I5Ktvz4azTvZUz6K9hko/zonu2veAs8Hm0IuKCOlc3VPI40mdTEf
-	6rts9I98SNbjRXjO6g2eQz+bRFcBc3l5JhZy3SdOxczUvmMMvaQFpXO8MjTNwU47cIJI
-	l+pnWWU9Q5pYZJY5pLc4bILjMXjo4HiiiMNUjLGCHys/XpxPIRKttuW5PtVxMywFFbEZ
-	9+nU/K0hRSC8HQg5pFADtSJWln28trtJLkwuUfAqrCVOS3DcPxazdbMgfCD6TOo2jho+
-	7Ac2ffWJoFU1Wr99Dyt4HG/j+jLRnctIqreEkJVg+oSeTuwujC70puIc65YXVIpwX7B2
-	oOzw==
-X-Received: by 10.66.80.65 with SMTP id p1mr19342747pax.20.1359182733250;
-	Fri, 25 Jan 2013 22:45:33 -0800 (PST)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id ux4sm2086673pbc.25.2013.01.25.22.45.32
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 25 Jan 2013 22:45:32 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=ftE7vQrBbPvP7JFm2JJomYXScolFLE1zn/05RrRlmwA=;
+	b=dcMU/+v+2v0eI1YWyNGX3bDvMYea2VeAXMXLBjZJH1Q1Xky5QwiLeog8Ss0a7u0nQZ
+	zmdv4OBxi6xH7UEQVEw+S1ZOzK+COzUggb9Ahje7vnXUMb/GGEJUp7Y98Bkt0xLihoUj
+	d0zpux9W8YAFmKsRSTNFxFTHpzrLlvlL25/fVFtKWtQ0C4RAnivaA4TOTHlqDaOb1MbF
+	ZBx+4OD7Fr7hemQAQuFBiR60lp8D1VZYlBGcX8PJDfmDxTPWNtnXLQr6mbyrVorBl0xp
+	TlWu2sT642CGpoUFfAg9jIRIA1Q8bm4qlNeXKHZuhGKiRYFI+d6bXq+m+ttjJECMI3ct
+	sXrw==
+X-Received: by 10.68.212.167 with SMTP id nl7mr21894180pbc.12.1359200797212;
+	Sat, 26 Jan 2013 03:46:37 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ue7sm2466961pbc.53.2013.01.26.03.46.34
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sat, 26 Jan 2013 03:46:35 -0800 (PST)
+Date: Sat, 26 Jan 2013 12:46:33 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jan 2013 22:45:15 -0800
-Message-Id: <1359182715-3063-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
-References: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] ebtables, arptables: add perl as runtime dependency
+Message-ID: <20130126114633.GG16904@jama.palm1.palmone.com>
+References: <20130122122421.A87761034C@opal>
+MIME-Version: 1.0
+In-Reply-To: <20130122122421.A87761034C@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : apcupsd: add 3.14.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +43,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jan 2013 07:01:20 -0000
+X-List-Received-Date: Sat, 26 Jan 2013 12:02:14 -0000
+X-Groupsio-MsgNum: 42851
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="vJguvTgX93MxBIIe"
+Content-Disposition: inline
 
-Fixes errors like
+--vJguvTgX93MxBIIe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-| Computing transaction...error: Can't install
-arptables-0.0.3+4-r0.0@ppce500v2: no package provides /usr/bin/perl
+On Tue, Jan 22, 2013 at 12:24:21PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: be12fb6c0762fe474a4d7cda94e814c0c622dfb5
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3Dbe12fb6c0762fe474a4d7cda94e814c0c622dfb5
+>=20
+> Author: Koen Kooi <koen@dominion.thruhere.net>
+> Date:   Sun Jan 20 11:32:05 2013 +0000
+>=20
+> apcupsd: add 3.14.10
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    2 ++
- .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 ++
- 2 files changed, 4 insertions(+)
+There is new QA warning, can you fix that?
 
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-index 2596d2f..4e9b0bc 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
- SECTION = "console/network"
- PR = "r1"
- 
-+RDEPENDS += "perl"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
-            file://installnonroot.patch \
-            file://01debian_defaultconfig.patch \
-diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-index 71e2600..8da9bb7 100644
---- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-+++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-@@ -3,6 +3,8 @@ PRIORITY = "optional"
- LICENSE = "GPL-2.0"
- SECTION = "console/network"
- 
-+RDEPENDS += "perl"
-+
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
- SRC_URI = " \
- 	${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=arptables \
--- 
-1.7.9.5
+apcupsd-3.14.10: apcupsd: Files/directories were installed but not shipped
+  /usr/share/hal
+  /usr/share/hal/fdi
+  /usr/share/hal/fdi/policy
+  /usr/share/hal/fdi/policy/20thirdparty
+  /usr/share/hal/fdi/policy/20thirdparty/80-apcupsd-ups-policy.fdi
 
+Thanks
 
+>=20
+> ---
+>=20
+>  meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |   35 ++++++++++++++=
+++++++
+>  1 files changed, 35 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb b/meta-oe=
+/recipes-support/apcupsd/apcupsd_3.14.10.bb
+> new file mode 100644
+> index 0000000..e50d03f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb
+> @@ -0,0 +1,35 @@
+> +SUMMARY =3D "foo"
+> +
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc12853cc7fdf20d17b4fddefd26b7=
+802"
+> +
+> +SRC_URI =3D "http://garr.dl.sourceforge.net/project/apcupsd/apcupsd%20-%=
+20Stable/3.14.10/apcupsd-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "5928822d855c5cf7ac29655e3e0b8c23"
+> +SRC_URI[sha256sum] =3D "0707b5ec9916fbde9e44eb8d18037c8d8f75dfd6aeef51ab=
+a5487e189eef2032"
+> +
+> +inherit autotools
+> +
+> +LD =3D "${CXX}"
+> +
+> +EXTRA_OECONF =3D "--enable-usb \
+> +                --with-distname=3D${DISTRO}"
+> +
+> +do_configure() {
+> +	export topdir=3D${S}
+> +	cp -a ${S}/autoconf/configure.in ${S}
+> +
+> +	if ! [ -d ${S}/platforms/${DISTRO} ] ; then
+> +		cp -a ${S}/platforms/unknown ${S}/platforms/${DISTRO}=20
+> +	fi
+> +
+> +	gnu-configize --force
+> +	# install --help says '-c' is an ignored option, but it turns out that =
+the argument to -c isn't ignored, so drop the complete '-c path/to/strip' l=
+ine
+> +	sed -i -e 's:$(INSTALL_PROGRAM) $(STRIP):$(INSTALL_PROGRAM):g' ${S}/aut=
+oconf/targets.mak
+> +	# Searching in host dirs triggers the QA checks
+> +	sed -i -e 's:-I/usr/local/include::g' -e 's:-L/usr/local/lib64::g' -e '=
+s:-L/usr/local/lib::g' ${S}/configure
+> +
+> +	# m4 macros are missing, using autotools_do_configure leads to linking =
+errors with gethostname_re
+> +	oe_runconf
+> +}
+> +
+> +
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--vJguvTgX93MxBIIe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEDwhkACgkQN1Ujt2V2gBzZjACdHNgbKc97F1NOVCB/srMgsxUd
+wB0AoLG6qNQCbsDDpUWd8ehWyGnawkVj
+=/lHO
+-----END PGP SIGNATURE-----
+
+--vJguvTgX93MxBIIe--
