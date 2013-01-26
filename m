@@ -1,35 +1,37 @@
-Received: from mail-da0-f46.google.com ([209.85.210.46])
+Received: from mail-pa0-f44.google.com ([209.85.220.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1Tz4Sb-0002HC-TJ; Sat, 26 Jan 2013 13:02:14 +0100
-Received: by mail-da0-f46.google.com with SMTP id p5so553089dak.5
-	for <multiple recipients>; Sat, 26 Jan 2013 03:46:37 -0800 (PST)
+	(envelope-from <martin.jansa@gmail.com>) id 1Tz4XZ-0002v9-6S
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Jan 2013 13:07:21 +0100
+Received: by mail-pa0-f44.google.com with SMTP id hz11so720186pad.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Jan 2013 03:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=ftE7vQrBbPvP7JFm2JJomYXScolFLE1zn/05RrRlmwA=;
-	b=dcMU/+v+2v0eI1YWyNGX3bDvMYea2VeAXMXLBjZJH1Q1Xky5QwiLeog8Ss0a7u0nQZ
-	zmdv4OBxi6xH7UEQVEw+S1ZOzK+COzUggb9Ahje7vnXUMb/GGEJUp7Y98Bkt0xLihoUj
-	d0zpux9W8YAFmKsRSTNFxFTHpzrLlvlL25/fVFtKWtQ0C4RAnivaA4TOTHlqDaOb1MbF
-	ZBx+4OD7Fr7hemQAQuFBiR60lp8D1VZYlBGcX8PJDfmDxTPWNtnXLQr6mbyrVorBl0xp
-	TlWu2sT642CGpoUFfAg9jIRIA1Q8bm4qlNeXKHZuhGKiRYFI+d6bXq+m+ttjJECMI3ct
-	sXrw==
-X-Received: by 10.68.212.167 with SMTP id nl7mr21894180pbc.12.1359200797212;
-	Sat, 26 Jan 2013 03:46:37 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=rLVWkvnrouEmAPoC4PsTv0e8xp9OfYFG1oUK6mnqU5Y=;
+	b=IBg/yYRyA2uG7sz9Z8iB1/I77gHio8UHFP4Tx8gP0AEN+P0xrDO3OdzezXwjXtSZpp
+	72ImcKBzQZ7sG5RUKO2uDRiIv2CixnbN/w7fP86RjzXPUHMapx+j9PBPhsL28GjZTtoh
+	9V8J0+bkFdrsoBLTbG8Usftx3VjJzDPZIVUAKccGbifV8s6HKwiEmO+sSJReTFC+Fl1D
+	B6jf83oqmhL8YS37uyCM2w2rDpWm9Q7YzT+o1rcYANq2qJH3Dwm7oPZoePFqDzvY46uU
+	rxlD0IT6DmqMfAem643JWoIr6xLz5BjUXkZxowVMvCQS1r0Qoqu8dh7CN0jzkVKQRq0C
+	B1Yw==
+X-Received: by 10.68.253.137 with SMTP id aa9mr21909367pbd.102.1359201105046; 
+	Sat, 26 Jan 2013 03:51:45 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ue7sm2466961pbc.53.2013.01.26.03.46.34
+	by mx.google.com with ESMTPS id th10sm2465618pbc.76.2013.01.26.03.51.42
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 26 Jan 2013 03:46:35 -0800 (PST)
-Date: Sat, 26 Jan 2013 12:46:33 +0100
+	Sat, 26 Jan 2013 03:51:43 -0800 (PST)
+Date: Sat, 26 Jan 2013 12:51:41 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130126114633.GG16904@jama.palm1.palmone.com>
-References: <20130122122421.A87761034C@opal>
+Message-ID: <20130126115141.GH16904@jama.palm1.palmone.com>
+References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
+	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130122122421.A87761034C@opal>
+In-Reply-To: <1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : apcupsd: add 3.14.10
+Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,120 +45,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jan 2013 12:02:14 -0000
-X-Groupsio-MsgNum: 42851
+X-List-Received-Date: Sat, 26 Jan 2013 12:07:21 -0000
+X-Groupsio-MsgNum: 42852
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vJguvTgX93MxBIIe"
+	protocol="application/pgp-signature"; boundary="xHbokkKX1kTiQeDC"
 Content-Disposition: inline
 
---vJguvTgX93MxBIIe
-Content-Type: text/plain; charset=us-ascii
+--xHbokkKX1kTiQeDC
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 22, 2013 at 12:24:21PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: be12fb6c0762fe474a4d7cda94e814c0c622dfb5
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3Dbe12fb6c0762fe474a4d7cda94e814c0c622dfb5
->=20
-> Author: Koen Kooi <koen@dominion.thruhere.net>
-> Date:   Sun Jan 20 11:32:05 2013 +0000
->=20
-> apcupsd: add 3.14.10
->=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-There is new QA warning, can you fix that?
-
-apcupsd-3.14.10: apcupsd: Files/directories were installed but not shipped
-  /usr/share/hal
-  /usr/share/hal/fdi
-  /usr/share/hal/fdi/policy
-  /usr/share/hal/fdi/policy/20thirdparty
-  /usr/share/hal/fdi/policy/20thirdparty/80-apcupsd-ups-policy.fdi
-
-Thanks
-
->=20
+On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
+>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
+>  1 files changed, 13 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+
+Fails in world build
+
+| configure: error: No C++ compiler found. Please install a C++ compiler.
+| Configure failed. The contents of all config.log files follows to aid deb=
+ugging
+| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
+nux-gnueabi/geany/1.22-r0/geany-1.22/config.log
+| This file contains any messages produced by compilers while
+| running configure, to aid debugging if configure makes a mistake.
+|=20
+| It was created by Geany configure 1.22, which was
+| generated by GNU Autoconf 2.69.  Invocation command line was
+
+Complete log here:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30125_082000.log/
+
+Cheers,
+
 >=20
->  meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |   35 ++++++++++++++=
-++++++
->  1 files changed, 35 insertions(+), 0 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb b/meta-oe=
-/recipes-support/apcupsd/apcupsd_3.14.10.bb
+> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/recip=
+es-devtools/geany/geany_1.22.bb
 > new file mode 100644
-> index 0000000..e50d03f
+> index 0000000..1e56ec8
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb
-> @@ -0,0 +1,35 @@
-> +SUMMARY =3D "foo"
-> +
+> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "A fast and lightweight IDE"
+> +HOMEPAGE =3D "http://www.geany.org/"
 > +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc12853cc7fdf20d17b4fddefd26b7=
-802"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5d4e=
+9c9"
+> +DEPENDS =3D "gtk+"
 > +
-> +SRC_URI =3D "http://garr.dl.sourceforge.net/project/apcupsd/apcupsd%20-%=
-20Stable/3.14.10/apcupsd-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "5928822d855c5cf7ac29655e3e0b8c23"
-> +SRC_URI[sha256sum] =3D "0707b5ec9916fbde9e44eb8d18037c8d8f75dfd6aeef51ab=
-a5487e189eef2032"
+> +inherit autotools pkgconfig
 > +
-> +inherit autotools
+> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5638=
+8e9521a27877577e"
 > +
-> +LD =3D "${CXX}"
-> +
-> +EXTRA_OECONF =3D "--enable-usb \
-> +                --with-distname=3D${DISTRO}"
-> +
-> +do_configure() {
-> +	export topdir=3D${S}
-> +	cp -a ${S}/autoconf/configure.in ${S}
-> +
-> +	if ! [ -d ${S}/platforms/${DISTRO} ] ; then
-> +		cp -a ${S}/platforms/unknown ${S}/platforms/${DISTRO}=20
-> +	fi
-> +
-> +	gnu-configize --force
-> +	# install --help says '-c' is an ignored option, but it turns out that =
-the argument to -c isn't ignored, so drop the complete '-c path/to/strip' l=
-ine
-> +	sed -i -e 's:$(INSTALL_PROGRAM) $(STRIP):$(INSTALL_PROGRAM):g' ${S}/aut=
-oconf/targets.mak
-> +	# Searching in host dirs triggers the QA checks
-> +	sed -i -e 's:-I/usr/local/include::g' -e 's:-L/usr/local/lib64::g' -e '=
-s:-L/usr/local/lib::g' ${S}/configure
-> +
-> +	# m4 macros are missing, using autotools_do_configure leads to linking =
-errors with gethostname_re
-> +	oe_runconf
-> +}
-> +
-> +
+> +FILES_${PN} +=3D "${datadir}/icons"
+> --=20
+> 1.7.4.4
 >=20
 >=20
 > _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---vJguvTgX93MxBIIe
+--xHbokkKX1kTiQeDC
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEDwhkACgkQN1Ujt2V2gBzZjACdHNgbKc97F1NOVCB/srMgsxUd
-wB0AoLG6qNQCbsDDpUWd8ehWyGnawkVj
-=/lHO
+iEYEARECAAYFAlEDw00ACgkQN1Ujt2V2gBwTTwCdGS+W6N8qjg69/YOUlEKp8A+k
+h9sAnjxVg4qi01c8ypd6m2pwQiHBBYr5
+=inQR
 -----END PGP SIGNATURE-----
 
---vJguvTgX93MxBIIe--
+--xHbokkKX1kTiQeDC--
