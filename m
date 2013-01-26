@@ -1,38 +1,39 @@
-Received: from mail-wi0-f175.google.com ([209.85.212.175])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzEA7-0005r7-Ud
+	(envelope-from <martin.jansa@gmail.com>) id 1TzEB9-0005rs-8Q
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jan 2013 23:24:16 +0100
-Received: by mail-wi0-f175.google.com with SMTP id hq12so29787wib.2
+	Sat, 26 Jan 2013 23:24:57 +0100
+Received: by mail-wi0-f171.google.com with SMTP id hn14so503786wib.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jan 2013 14:08:11 -0800 (PST)
+	Sat, 26 Jan 2013 14:09:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=et23A02AKqbPhQ0yWgIeQNtETe77MKeAimINVgdzAjM=;
-	b=rXlGIKpFQeiYMR9HV2Trg1VBqekbXin1t+XUiEAr7rUEyHIaeQ8PcnB8G3blN27dh7
-	CS0iraS2BbHVtpqMfFmL6NB/HFEIz7xW4LDCqJQfAQ9Lxgk61gAWv3ZyQpQl7qO/RuFU
-	UwI5mqtAi8YDKNC0UntJRrLFxFtt47JNylVyznMDN+1BPU3GUEVwhigkX4pSl/vZrKre
-	vY6U8wIn1P3l4JVzde2KiOtmVl3ATd5emRoGMhBZRi03B/NwP4nos20MDasQkdzfysK8
-	miz2uO/prmsFOqmN2csP3gxl7Jy816/ZMlxBVSeumKYQK18EgGrKvfWjFa3l/t5mQNlV
-	2Q5A==
-X-Received: by 10.180.107.130 with SMTP id hc2mr3426186wib.12.1359238091672;
-	Sat, 26 Jan 2013 14:08:11 -0800 (PST)
+	bh=wTsqaiy+NuidMDtrbtaE9WBCyBtoNjx9lOfODGCgUxk=;
+	b=Lpf+Gfxi7G17vjeDvubPhxMFD7foL71AXz0S4rb08gR6hx651x7g1loClf42mI3IJ9
+	nUyD4Fc+6R0XxuKFkMd+noeEBQrsinqH1/1OjyP3xYfn8KKXBxAqCC0qsrh5tln9HzAv
+	gFeJ08ciV3pGgm7PJRyEl3YLkOWuEN9ULnGUWUbXq0gc95YB8U28WH52nhiHhR/szUew
+	4ejWAMSo9VTiqyVsYePB0bHM9LzdTBMWh2Qud0W2GXyJOrUXGxFuQjbiKvv3q8zfYGG4
+	16AFcQ9Ocd2HWYMwh3KttA1NMkCqCB+1BFefzVjbdZoE5bBpAR4ZBwFm2QFw5kWrwUOc
+	f3AA==
+X-Received: by 10.180.80.230 with SMTP id u6mr3381218wix.20.1359238155372;
+	Sat, 26 Jan 2013 14:09:15 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id do1sm5170456wib.7.2013.01.26.14.08.10
+	by mx.google.com with ESMTPS id ew4sm5163070wid.11.2013.01.26.14.09.14
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 26 Jan 2013 14:08:10 -0800 (PST)
-Date: Sat, 26 Jan 2013 23:08:12 +0100
+	Sat, 26 Jan 2013 14:09:14 -0800 (PST)
+Date: Sat, 26 Jan 2013 23:09:16 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130126220812.GI16904@jama.palm1.palmone.com>
-References: <20130122122421.A87761034C@opal>
-	<20130126114633.GG16904@jama.palm1.palmone.com>
-	<ke0uf5$nr5$1@ger.gmane.org>
+Message-ID: <20130126220916.GJ16904@jama.palm1.palmone.com>
+References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
+	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
+	<20130126115141.GH16904@jama.palm1.palmone.com>
+	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <ke0uf5$nr5$1@ger.gmane.org>
+In-Reply-To: <CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Koen Kooi : apcupsd: add 3.14.10
+Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,64 +47,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jan 2013 22:24:19 -0000
-X-Groupsio-MsgNum: 42855
+X-List-Received-Date: Sat, 26 Jan 2013 22:24:59 -0000
+X-Groupsio-MsgNum: 42856
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cf0hFtnykp6aONGL"
+	protocol="application/pgp-signature"; boundary="2VXyA7JGja7B50zs"
 Content-Disposition: inline
 
---cf0hFtnykp6aONGL
-Content-Type: text/plain; charset=us-ascii
+--2VXyA7JGja7B50zs
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 26, 2013 at 04:58:39PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 26-01-13 12:46, Martin Jansa schreef:
-> > On Tue, Jan 22, 2013 at 12:24:21PM +0000, git@git.openembedded.org
-> > wrote:
-> >> Module: meta-openembedded.git Branch: master Commit:
-> >> be12fb6c0762fe474a4d7cda94e814c0c622dfb5 URL:
-> >> http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=3D=
-be12fb6c0762fe474a4d7cda94e814c0c622dfb5
+On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
+> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
+> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> >> ---
+> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
+> >>  1 files changed, 13 insertions(+), 0 deletions(-)
+> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >
+> > Fails in world build
+> >
+> > | configure: error: No C++ compiler found. Please install a C++ compile=
+r.
+> > | Configure failed. The contents of all config.log files follows to aid=
+ debugging
+> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o=
+e-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
+> > | This file contains any messages produced by compilers while
+> > | running configure, to aid debugging if configure makes a mistake.
+> > |
+> > | It was created by Geany configure 1.22, which was
+> > | generated by GNU Autoconf 2.69.  Invocation command line was
+> >
+> > Complete log here:
+> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
+=2E20130125_082000.log/
+> >
+> > Cheers,
+> >
+> >>
+> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/re=
+cipes-devtools/geany/geany_1.22.bb
+> >> new file mode 100644
+> >> index 0000000..1e56ec8
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >> @@ -0,0 +1,13 @@
+> >> +DESCRIPTION =3D "A fast and lightweight IDE"
+> >> +HOMEPAGE =3D "http://www.geany.org/"
+> >> +LICENSE =3D "GPLv2"
+> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5=
+d4e9c9"
+> >> +DEPENDS =3D "gtk+"
+> >> +
+> >> +inherit autotools pkgconfig
+> >> +
+> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5=
+6388e9521a27877577e"
+> >> +
+> >> +FILES_${PN} +=3D "${datadir}/icons"
+> >> --
+> >> 1.7.4.4
 > >>
 > >>
-> >>=20
-> Author: Koen Kooi <koen@dominion.thruhere.net>
-> >> Date:   Sun Jan 20 11:32:05 2013 +0000
-> >>=20
-> >> apcupsd: add 3.14.10
-> >>=20
-> >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> Signed-off-by:
-> >> Martin Jansa <Martin.Jansa@gmail.com>
-> >=20
-> > There is new QA warning, can you fix that?
-> >=20
-> > apcupsd-3.14.10: apcupsd: Files/directories were installed but not
-> > shipped /usr/share/hal /usr/share/hal/fdi /usr/share/hal/fdi/policy=20
-> > /usr/share/hal/fdi/policy/20thirdparty=20
-> > /usr/share/hal/fdi/policy/20thirdparty/80-apcupsd-ups-policy.fdi
->=20
-> Yes, I was planning to just rm it in do_install_append since we don't have
-> HAL in OE anymore. OK?
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >
+> OK I try to find out what goes wrong. What about the others of this serie=
+s?
 
-Sure
+others look good to me (well I've only build tested them).=20
 
+Will merge them in 1-2 days if someone else does not send some comments.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---cf0hFtnykp6aONGL
+--2VXyA7JGja7B50zs
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEEU8wACgkQN1Ujt2V2gBzmVQCcCEmeW1cXBnVfOKU6ZLZqTSHS
-MsMAn0BhnmPqeYvgSFwb1TCszJtvldIK
-=7V1A
+iEYEARECAAYFAlEEVAwACgkQN1Ujt2V2gByArgCgoQa2SL77FissQQiWGdArWj23
+gdYAoIMc+kus2bgySh4gOzmLfEijm5af
+=+7Dy
 -----END PGP SIGNATURE-----
 
---cf0hFtnykp6aONGL--
+--2VXyA7JGja7B50zs--
