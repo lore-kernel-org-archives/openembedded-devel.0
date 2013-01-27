@@ -1,37 +1,38 @@
-Received: from mail-pb0-f46.google.com ([209.85.160.46])
+Received: from mail-da0-f41.google.com ([209.85.210.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzXuX-0001Ws-J1
+	(envelope-from <martin.jansa@gmail.com>) id 1TzY0R-0002AX-Iu
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jan 2013 20:29:02 +0100
-Received: by mail-pb0-f46.google.com with SMTP id mc17so413665pbc.5
+	Sun, 27 Jan 2013 20:35:09 +0100
+Received: by mail-da0-f41.google.com with SMTP id e20so914501dak.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jan 2013 11:13:23 -0800 (PST)
+	Sun, 27 Jan 2013 11:19:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Z7l9BGA/pV3+aZ03ETyIwWWDBzVYclwFsXW9aH38ar8=;
-	b=d6Mn0c1iIdgyP1qSjDZxzLme/dF07YVCkKlkrvC0fY4A+h0pVD6aOhju5pkLlLd5w0
-	GQEU6WAmci2hNTq7A6k4q2JRaalvYljlS4C81H0AyUSTCBJmm1+3X3K86u3sXd1zMiiA
-	jW5w+iXId0B/tbiiBrvnqQaFBelcLX2fPbfmL3TZyOYSXJTMKbgZW8oJzxfgwstmsotz
-	+lllArTctg2Go/rNIxdNX/gdZ3FFdFUhQ6nTF4Qr2u3fBHlyKCLPBW2iUo3+gfXcfrVu
-	Hy/23aQrTc0Y2s5CEe4VkH9zDyjNYkB4dvlUBPuNh3hGaXuGcpSZ0QgC0t6knDqOCmbJ
-	J6TA==
-X-Received: by 10.68.211.42 with SMTP id mz10mr31902790pbc.100.1359314003323; 
-	Sun, 27 Jan 2013 11:13:23 -0800 (PST)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=36F5gujJ7SAXrQl7z+D7peIMIENvN3SOPHFnvvS8GmA=;
+	b=W2DCcQ5UvXREr6pPcwb/WBCfRG3shL6NkJ210BLFOGA4zoJt/06MJBq+8G7t++J0nW
+	/rveLxMC+fJxzqCcWXGkN/x2chSEhHK36oQGnwSnU2ZpwpxRggSRKEvNTFmR42kMl4cu
+	KWdu7dNcKEumrSt+aSZG8x0UX9wsc881niyB9c58TM8FHxKyXK650o8bqwG/UJcuAE93
+	oOA6h2APaRacaIufeheRcAm1bDPux4OkvqICvxY9H1wxO5sysYaLy69s/oHTRWpcCFqW
+	Pj0K0ZO8pz0EN29IGNSiviRB2hPrJRUcLqs2sj5fPIA+tWKWU2piPwPo2KzMLnFNlrwu
+	UxZg==
+X-Received: by 10.68.253.137 with SMTP id aa9mr31817917pbd.102.1359314369600; 
+	Sun, 27 Jan 2013 11:19:29 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id a4sm5162476pax.25.2013.01.27.11.13.20
+	by mx.google.com with ESMTPS id ou8sm2384419pbb.39.2013.01.27.11.19.26
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 27 Jan 2013 11:13:22 -0800 (PST)
-Date: Sun, 27 Jan 2013 20:13:21 +0100
+	Sun, 27 Jan 2013 11:19:28 -0800 (PST)
+Date: Sun, 27 Jan 2013 20:19:27 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130127191320.GL16904@jama.palm1.palmone.com>
-References: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
-	<1359182715-3063-2-git-send-email-raj.khem@gmail.com>
+Message-ID: <20130127191927.GM16904@jama.palm1.palmone.com>
+References: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
+	<1359301282-5470-4-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <1359182715-3063-2-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1359301282-5470-4-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 2/2] ebtables, arptables: add perl as runtime dependency
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH 4/7] x264: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,68 +46,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jan 2013 19:29:03 -0000
-X-Groupsio-MsgNum: 42864
+X-List-Received-Date: Sun, 27 Jan 2013 19:35:09 -0000
+X-Groupsio-MsgNum: 42865
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yQDbd2FCF2Yhw41T"
+	protocol="application/pgp-signature"; boundary="B9BE8dkJ1pIKavwa"
 Content-Disposition: inline
 
---yQDbd2FCF2Yhw41T
+--B9BE8dkJ1pIKavwa
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 25, 2013 at 10:45:15PM -0800, Khem Raj wrote:
-> Fixes errors like
+On Sun, Jan 27, 2013 at 04:41:19PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-multimedia/x264/x264_git.bb | 43 +++++++++++++++++++++++=
+++++++
+>  1 file changed, 43 insertions(+)
+>  create mode 100644 meta-oe/recipes-multimedia/x264/x264_git.bb
+>=20
+> diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipe=
+s-multimedia/x264/x264_git.bb
+> new file mode 100644
+> index 0000000..ba8e979
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
+> @@ -0,0 +1,43 @@
+> +SUMMARY =3D "x264 is a free software library and application for encodin=
+g video streams into the H.264/MPEG-4 AVC format"
+> +HOMEPAGE =3D "http://www.videolan.org/developers/x264.html"
+> +
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> +
+> +DEPENDS =3D "yasm-native"
+> +
+> +SRC_URI =3D "git://git.videolan.org/x264.git"
+> +SRCREV =3D "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
+> +
+> +PV =3D "r2230+git"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit lib_package pkgconfig
+> +
+> +X264_DISABLE_ASM =3D ""
+> +X264_DISABLE_ASM_armv4 =3D "--disable-asm"
+> +X264_DISABLE_ASM_armv4t =3D "--disable-asm"
+> +X264_DISABLE_ASM_armv5te =3D "--disable-asm"
 
-RDEPENDS_${PN}, fixed in jansa/in-test, I'll merge with that fix if Joe
-sends his ack.
+Can we use more generic overrides?
+meta/conf/machine/include/arm/arch-armv5.inc:MACHINEOVERRIDES .=3D "${@bb.u=
+tils.contains("TUNE_FEATURES", "armv5", ":armv5", "" ,d)}"
+meta/conf/machine/include/arm/arch-armv4.inc:MACHINEOVERRIDES .=3D "${@bb.u=
+tils.contains("TUNE_FEATURES", "armv4", ":armv4", "" ,d)}"
+
+I'll update it in jansa/in-test, but send me your ack.
+
+PKG_ARCH is not in default OVERRIDES IIRC and with different distro
+settings for default tune it could be also xscalete or arm926ejste etc.
 
 Cheers,
 
->=20
-> | Computing transaction...error: Can't install
-> arptables-0.0.3+4-r0.0@ppce500v2: no package provides /usr/bin/perl
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    2 ++
->  .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 ++
->  2 files changed, 4 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb=
- b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> index 2596d2f..4e9b0bc 100644
-> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> @@ -4,6 +4,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871=
-a28ab1488fdbd2e73e"
->  SECTION =3D "console/network"
->  PR =3D "r1"
-> =20
-> +RDEPENDS +=3D "perl"
 > +
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
->             file://installnonroot.patch \
->             file://01debian_defaultconfig.patch \
-> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.=
-bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> index 71e2600..8da9bb7 100644
-> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> @@ -3,6 +3,8 @@ PRIORITY =3D "optional"
->  LICENSE =3D "GPL-2.0"
->  SECTION =3D "console/network"
-> =20
-> +RDEPENDS +=3D "perl"
+> +EXTRA_OECONF =3D '--prefix=3D${prefix} \
+> +                --host=3D${HOST_SYS} \
+> +                --cross-prefix=3D${TARGET_PREFIX} \
+> +                --sysroot=3D${STAGING_DIR_TARGET} \
+> +                --enable-shared \
+> +                --enable-static \
+> +                --disable-lavf \
+> +                ${X264_DISABLE_ASM} \
+> +               '
 > +
->  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
-2.0;md5=3D801f80980d171dd6425610833a22dbe6"
->  SRC_URI =3D " \
->  	${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=3Darptables=
- \
+> +do_configure() {
+> +	./configure ${EXTRA_OECONF}
+> +}
+> +
+> +# Get rid of -e
+> +EXTRA_OEMAKE =3D ""
+> +AS =3D "${TARGET_PREFIX}gcc"
+> +
+> +do_install() {
+> +	oe_runmake install DESTDIR=3D${D}
+> +}
 > --=20
-> 1.7.9.5
+> 1.8.1
 >=20
 >=20
 > _______________________________________________
@@ -117,16 +143,16 @@ bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---yQDbd2FCF2Yhw41T
+--B9BE8dkJ1pIKavwa
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEFfFAACgkQN1Ujt2V2gBxsAwCbBmFVMs+msK/IKP9bJORiRaH1
-/NgAn26PBsDsT7gY0uK+2BkPN4RkYyEC
-=zYH3
+iEYEARECAAYFAlEFfb8ACgkQN1Ujt2V2gBznigCgrxxIdnd0nFsA2MWi0Jq4AGv4
+4AQAn2nmTHpwxR/GX6e5XCjyF+96utVw
+=UXSd
 -----END PGP SIGNATURE-----
 
---yQDbd2FCF2Yhw41T--
+--B9BE8dkJ1pIKavwa--
