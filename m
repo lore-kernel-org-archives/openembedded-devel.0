@@ -1,39 +1,39 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzEB9-0005rs-8Q
+	(envelope-from <koen@dominion.thruhere.net>) id 1TzUbj-0005to-S0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jan 2013 23:24:57 +0100
-Received: by mail-wi0-f171.google.com with SMTP id hn14so503786wib.10
+	Sun, 27 Jan 2013 16:57:24 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e52so914273eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jan 2013 14:09:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wTsqaiy+NuidMDtrbtaE9WBCyBtoNjx9lOfODGCgUxk=;
-	b=Lpf+Gfxi7G17vjeDvubPhxMFD7foL71AXz0S4rb08gR6hx651x7g1loClf42mI3IJ9
-	nUyD4Fc+6R0XxuKFkMd+noeEBQrsinqH1/1OjyP3xYfn8KKXBxAqCC0qsrh5tln9HzAv
-	gFeJ08ciV3pGgm7PJRyEl3YLkOWuEN9ULnGUWUbXq0gc95YB8U28WH52nhiHhR/szUew
-	4ejWAMSo9VTiqyVsYePB0bHM9LzdTBMWh2Qud0W2GXyJOrUXGxFuQjbiKvv3q8zfYGG4
-	16AFcQ9Ocd2HWYMwh3KttA1NMkCqCB+1BFefzVjbdZoE5bBpAR4ZBwFm2QFw5kWrwUOc
-	f3AA==
-X-Received: by 10.180.80.230 with SMTP id u6mr3381218wix.20.1359238155372;
-	Sat, 26 Jan 2013 14:09:15 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ew4sm5163070wid.11.2013.01.26.14.09.14
+	Sun, 27 Jan 2013 07:41:47 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
+	bh=trnUaT1gN58pDLc/0bCYkGneu3nnUcj8y1NQAMmyhps=;
+	b=kJ4VjDgMpLR/ZuIpqohG3gJ9Hx+eZgqm7gkYChyXj6twGkgnBLfK8NavrT3eCzHQLo
+	aRdpR1u3FdMZeP1tvSfuhiot0a92+d0+YoP2hCjtCXsappv5IcDrMmpf4dIYsazlJqBk
+	uRpOTvJO/sJO1TJnOrJunKSLEDVGywXR4b4m08t0PUkSmzDutt65UA1aSaMKtWBeB/0p
+	9TY6JCzt+c3TT99mAms3ly+h6k/jXbYpLITlPCYgneqc228Uh1fsm9VY4twViUHj9c9p
+	PDYtAHJkYfgWp1PFV61EB9jU6S64xOqi9xzbhycE4S9sAYZebBKV+HW8LF1hlmUqNWll
+	qjCQ==
+X-Received: by 10.14.194.199 with SMTP id m47mr42138658een.11.1359301306790;
+	Sun, 27 Jan 2013 07:41:46 -0800 (PST)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id q5sm11876147eeo.17.2013.01.27.07.41.45
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 26 Jan 2013 14:09:14 -0800 (PST)
-Date: Sat, 26 Jan 2013 23:09:16 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 27 Jan 2013 07:41:46 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130126220916.GJ16904@jama.palm1.palmone.com>
-References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
-	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
-	<20130126115141.GH16904@jama.palm1.palmone.com>
-	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
+Date: Sun, 27 Jan 2013 16:41:20 +0100
+Message-Id: <1359301282-5470-5-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.1
+In-Reply-To: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
+References: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQl1MTykFocob8Cinx8Fzov3HHVX0O4DFsVa0oT+ofIVBB4Yw4xKnzuqq01wRQtzsNS/3H94
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 5/7] libav: enable x264 encoder support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,101 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jan 2013 22:24:59 -0000
-X-Groupsio-MsgNum: 42856
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2VXyA7JGja7B50zs"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 27 Jan 2013 15:57:37 -0000
 
---2VXyA7JGja7B50zs
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-multimedia/libav/libav.inc | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
-> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
-> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> >> ---
-> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
-> >>  1 files changed, 13 insertions(+), 0 deletions(-)
-> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >
-> > Fails in world build
-> >
-> > | configure: error: No C++ compiler found. Please install a C++ compile=
-r.
-> > | Configure failed. The contents of all config.log files follows to aid=
- debugging
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o=
-e-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
-> > | This file contains any messages produced by compilers while
-> > | running configure, to aid debugging if configure makes a mistake.
-> > |
-> > | It was created by Geany configure 1.22, which was
-> > | generated by GNU Autoconf 2.69.  Invocation command line was
-> >
-> > Complete log here:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130125_082000.log/
-> >
-> > Cheers,
-> >
-> >>
-> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/re=
-cipes-devtools/geany/geany_1.22.bb
-> >> new file mode 100644
-> >> index 0000000..1e56ec8
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >> @@ -0,0 +1,13 @@
-> >> +DESCRIPTION =3D "A fast and lightweight IDE"
-> >> +HOMEPAGE =3D "http://www.geany.org/"
-> >> +LICENSE =3D "GPLv2"
-> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5=
-d4e9c9"
-> >> +DEPENDS =3D "gtk+"
-> >> +
-> >> +inherit autotools pkgconfig
-> >> +
-> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
-> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
-> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5=
-6388e9521a27877577e"
-> >> +
-> >> +FILES_${PN} +=3D "${datadir}/icons"
-> >> --
-> >> 1.7.4.4
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >
-> OK I try to find out what goes wrong. What about the others of this serie=
-s?
+diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes-multimedia/libav/libav.inc
+index e85ae29..388a567 100644
+--- a/meta-oe/recipes-multimedia/libav/libav.inc
++++ b/meta-oe/recipes-multimedia/libav/libav.inc
+@@ -9,9 +9,9 @@ PROVIDES = "ffmpeg"
+ ARM_INSTRUCTION_SET = "arm"
+ 
+ # faac faad2 lame schroedinger libgsm
+-DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
++DEPENDS = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+ 
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -42,6 +42,7 @@ EXTRA_OECONF = " \
+         --enable-x11grab \
+         --enable-libtheora  \
+         --enable-libvorbis \
++        --enable-libx264 \
+         --arch=${TARGET_ARCH} \
+         --target-os="linux" \
+         --enable-cross-compile \
+-- 
+1.8.1
 
-others look good to me (well I've only build tested them).=20
 
-Will merge them in 1-2 days if someone else does not send some comments.
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---2VXyA7JGja7B50zs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEEVAwACgkQN1Ujt2V2gByArgCgoQa2SL77FissQQiWGdArWj23
-gdYAoIMc+kus2bgySh4gOzmLfEijm5af
-=+7Dy
------END PGP SIGNATURE-----
-
---2VXyA7JGja7B50zs--
