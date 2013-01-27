@@ -1,37 +1,37 @@
-Received: from mail-ea0-f176.google.com ([209.85.215.176])
+Received: from mail-pb0-f46.google.com ([209.85.160.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TzUbe-0005te-5z
+	(envelope-from <martin.jansa@gmail.com>) id 1TzXuX-0001Ws-J1
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jan 2013 16:57:24 +0100
-Received: by mail-ea0-f176.google.com with SMTP id a13so838842eaa.35
+	Sun, 27 Jan 2013 20:29:02 +0100
+Received: by mail-pb0-f46.google.com with SMTP id mc17so413665pbc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jan 2013 07:41:41 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=YKmExdHGTLc4r4bITGmsGeo/ZiABw+td1/Px7MCIkLY=;
-	b=gBd75aYcw2jrvawI+lnFR25A+/7wI31noyuDpseR47duYPEp+vMKP2IFTUohPGNACd
-	Wopc8A0Ue4MGIDOZE+5UEyzB7BG4fCYPhLw/xuPGXpYlzolfgmjrjDyD/d8u65yRD2Pb
-	m2t85dwyilRq41wecGcfoH4IYULUTVrYE2SIhvxPivgv1NNfGUhmtGlsnNiN8zoiaeLZ
-	zRWdwh7urXQXo8FOV8CGgKEXlhHblMHUtgWBoeXvfAO01Piq8OCCjYLbrv3nW1xqT5s+
-	uH1gThWosxpkAElrZkXK64TY+93Osq+gRfHV5qfKS8blI34TIssi/WssYNt8x+1sEg+K
-	H1VA==
-X-Received: by 10.14.223.135 with SMTP id v7mr41892860eep.41.1359301300853;
-	Sun, 27 Jan 2013 07:41:40 -0800 (PST)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id q5sm11876147eeo.17.2013.01.27.07.41.39
+	Sun, 27 Jan 2013 11:13:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Z7l9BGA/pV3+aZ03ETyIwWWDBzVYclwFsXW9aH38ar8=;
+	b=d6Mn0c1iIdgyP1qSjDZxzLme/dF07YVCkKlkrvC0fY4A+h0pVD6aOhju5pkLlLd5w0
+	GQEU6WAmci2hNTq7A6k4q2JRaalvYljlS4C81H0AyUSTCBJmm1+3X3K86u3sXd1zMiiA
+	jW5w+iXId0B/tbiiBrvnqQaFBelcLX2fPbfmL3TZyOYSXJTMKbgZW8oJzxfgwstmsotz
+	+lllArTctg2Go/rNIxdNX/gdZ3FFdFUhQ6nTF4Qr2u3fBHlyKCLPBW2iUo3+gfXcfrVu
+	Hy/23aQrTc0Y2s5CEe4VkH9zDyjNYkB4dvlUBPuNh3hGaXuGcpSZ0QgC0t6knDqOCmbJ
+	J6TA==
+X-Received: by 10.68.211.42 with SMTP id mz10mr31902790pbc.100.1359314003323; 
+	Sun, 27 Jan 2013 11:13:23 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id a4sm5162476pax.25.2013.01.27.11.13.20
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 27 Jan 2013 07:41:39 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Sun, 27 Jan 2013 11:13:22 -0800 (PST)
+Date: Sun, 27 Jan 2013 20:13:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Jan 2013 16:41:16 +0100
-Message-Id: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1
-X-Gm-Message-State: ALoCoQnzdt0+gjUi7A8HHSkzzfNzGR4WeSTiTmx0L0N4H8ADDLg+ddu19taS4b+9LzK3TcdDXEvC
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 1/7] libebml: add 1.2.2
+Message-ID: <20130127191320.GL16904@jama.palm1.palmone.com>
+References: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
+	<1359182715-3063-2-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1359182715-3063-2-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH 2/2] ebtables, arptables: add perl as runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,53 +45,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jan 2013 15:57:37 -0000
+X-List-Received-Date: Sun, 27 Jan 2013 19:29:03 -0000
+X-Groupsio-MsgNum: 42864
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yQDbd2FCF2Yhw41T"
+Content-Disposition: inline
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- .../recipes-mkv/libebml/libebml_1.2.2.bb           | 31 ++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
+--yQDbd2FCF2Yhw41T
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
-new file mode 100644
-index 0000000..210a409
---- /dev/null
-+++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "libebml is a C++ libary to parse EBML files."
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
-+
-+SRC_URI = "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "726cc2bd1a525929ff35ff9854c0ebab"
-+SRC_URI[sha256sum] = "476b08c6436a96c024a53e788e7c945ce9b41cd8654165763444aa7e5245b7a5"
-+
-+do_compile() {
-+	cd ${S}/make/linux
-+	oe_runmake CROSS="${TARGET_PREFIX}"
-+}
-+
-+do_install() {
-+	cd ${S}/make/linux
-+
-+	install -d ${D}${libdir}
-+	install -m 0644 libebml.a ${D}${libdir}
-+	install -m 0755 libebml.so.* ${D}${libdir}
-+	cp -a libebml.so ${D}${libdir}
-+
-+	install -d ${D}${includedir}/ebml
-+	for i in ../../ebml/*.h; do
-+		install -m 0644 $i ${D}${includedir}/ebml
-+	done
-+
-+	install -d ${D}${includedir}/ebml/c
-+	for i in ../../ebml/c/*.h; do
-+		install -m 0644 $i ${D}${includedir}/ebml/c
-+	done
-+}
--- 
-1.8.1
+On Fri, Jan 25, 2013 at 10:45:15PM -0800, Khem Raj wrote:
+> Fixes errors like
 
+RDEPENDS_${PN}, fixed in jansa/in-test, I'll merge with that fix if Joe
+sends his ack.
 
+Cheers,
 
+>=20
+> | Computing transaction...error: Can't install
+> arptables-0.0.3+4-r0.0@ppce500v2: no package provides /usr/bin/perl
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    2 ++
+>  .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 ++
+>  2 files changed, 4 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb=
+ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> index 2596d2f..4e9b0bc 100644
+> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> @@ -4,6 +4,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871=
+a28ab1488fdbd2e73e"
+>  SECTION =3D "console/network"
+>  PR =3D "r1"
+> =20
+> +RDEPENDS +=3D "perl"
+> +
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+>             file://installnonroot.patch \
+>             file://01debian_defaultconfig.patch \
+> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.=
+bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> index 71e2600..8da9bb7 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> @@ -3,6 +3,8 @@ PRIORITY =3D "optional"
+>  LICENSE =3D "GPL-2.0"
+>  SECTION =3D "console/network"
+> =20
+> +RDEPENDS +=3D "perl"
+> +
+>  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0;md5=3D801f80980d171dd6425610833a22dbe6"
+>  SRC_URI =3D " \
+>  	${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=3Darptables=
+ \
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--yQDbd2FCF2Yhw41T
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEFfFAACgkQN1Ujt2V2gBxsAwCbBmFVMs+msK/IKP9bJORiRaH1
+/NgAn26PBsDsT7gY0uK+2BkPN4RkYyEC
+=zYH3
+-----END PGP SIGNATURE-----
+
+--yQDbd2FCF2Yhw41T--
