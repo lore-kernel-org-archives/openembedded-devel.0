@@ -1,36 +1,36 @@
-Received: from mail-wg0-f44.google.com ([74.125.82.44])
+Received: from mail-wi0-f173.google.com ([209.85.212.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzmMF-0002pI-RP
+	(envelope-from <martin.jansa@gmail.com>) id 1TzmNH-0002xI-FQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2013 11:54:37 +0100
-Received: by mail-wg0-f44.google.com with SMTP id dr12so963216wgb.23
+	Mon, 28 Jan 2013 11:56:18 +0100
+Received: by mail-wi0-f173.google.com with SMTP id hn17so1266359wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2013 02:38:57 -0800 (PST)
+	Mon, 28 Jan 2013 02:40:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=oChQm0D6BnLX1Fje1YjQdXirUXdo65mDsQundVwWkxw=;
-	b=lMXGKCXFQdiyuyfsOg1TlZprb7FDC/ERV5efF8jF/n9VjZBT0ASG3SSLBpFmYWeUVf
-	4mfqpy/i94p8f0rCBP/6E1HkGaCJNBCoekk0ClqKdxL25UqaremqmoAaPBTeC3sDCKJa
-	bzLdDmdt91zOlscuWqoqp47bPF6v/KIJVCviAMm32d+kOkorPO8dqyvjn7vX3j4qGs9K
-	CbpY+CHy3LiPxbpmI8OZFEFM44yH2qEpWqvQkb/PPFxphER0xHdV3Q86iracUSOiDgK3
-	cDN1Q2RjG+cpKEhBQm1PWuJjxpZrx4HUz6I4qeIDqTuox7e+eEWY8FJnpmI6z49PPiMc
-	73+w==
-X-Received: by 10.194.172.197 with SMTP id be5mr20274553wjc.20.1359369537887; 
-	Mon, 28 Jan 2013 02:38:57 -0800 (PST)
+	bh=Y7XDnVZmbzpjk/Qq5wdEyB0ny6gzQbmRm9BoU9xntBQ=;
+	b=Tb/TknDuZuCNX3HGbDJZ3mNUPGQuEdOCeDO6KRab8Db/29XFSl8mNP4PCsiNfqjlMJ
+	5Dvrr33u1PI5g+KZGnD2Ebvgg+WCJ1srhoZNfomxTnf2EtKSh0CpF8Ms3CXtuDsNg1BZ
+	gbPe9Eyt54VbHiYCl1OFGM4gV8u+vikABZMYYaWBzdchaZUp9+pWmV1gvptvQaJd0uM1
+	QAfjDsZ+2SgZWw1Lc9cbLxkTxT39RedGJRoQPR7imLRz3nbPblRvU4fQoV9S6eNQcmlv
+	V3z9uJhCh86siE/5eHY2bw5Ux824kmuV8sqr8tns5H2+21C/i4nwDPzcTrN0GVK9rr0r
+	jtGA==
+X-Received: by 10.180.88.138 with SMTP id bg10mr8726178wib.13.1359369601366;
+	Mon, 28 Jan 2013 02:40:01 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id s10sm12739868wiw.4.2013.01.28.02.38.56
+	by mx.google.com with ESMTPS id fx5sm2618844wib.11.2013.01.28.02.40.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 28 Jan 2013 02:38:57 -0800 (PST)
-Date: Mon, 28 Jan 2013 11:39:00 +0100
+	Mon, 28 Jan 2013 02:40:00 -0800 (PST)
+Date: Mon, 28 Jan 2013 11:40:04 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130128103900.GR16904@jama.palm1.palmone.com>
-References: <1358953883-23851-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Message-ID: <20130128104004.GT16904@jama.palm1.palmone.com>
+References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1358953883-23851-1-git-send-email-marcin.juszkiewicz@linaro.org>
+In-Reply-To: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] libc-client: create empty libc-client package to satisfy deps of -dev one
+Subject: Re: [meta-oe/meta-systemd/V2 0/5] various patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,43 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 10:54:39 -0000
-X-Groupsio-MsgNum: 42876
+X-List-Received-Date: Mon, 28 Jan 2013 10:56:22 -0000
+X-Groupsio-MsgNum: 42877
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="5xr6Gr0irOxp3+3c"
+	protocol="application/pgp-signature"; boundary="aEcIyhw0mmnxygNd"
 Content-Disposition: inline
 
---5xr6Gr0irOxp3+3c
-Content-Type: text/plain; charset=us-ascii
+--aEcIyhw0mmnxygNd
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 23, 2013 at 04:11:23PM +0100, Marcin Juszkiewicz wrote:
-> Collected errors:
->  * satisfy_dependencies_for: Cannot satisfy the following dependencies fo=
-r packagegroup-core-standalone-hhvm-sdk-target:
->  *      libc-client (=3D 2007e-r1) *
+On Fri, Jan 25, 2013 at 11:26:17PM +0100, Andreas M=FCller wrote:
+> V1->V2: thunar remove RDEPENDS_${PN} =3D "eglibc-charmaps"
 >=20
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb | 1 +
->  1 file changed, 1 insertion(+)
+> The following changes since commit b7ff6ac09affebe72b7587d7e345adaae427ef=
+3d:
 >=20
-> diff --git a/meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb b/=
-meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb
-> index 9faa2f8..1ecbe68 100644
-> --- a/meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb
-> +++ b/meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb
-> @@ -32,3 +32,4 @@ do_install() {
->          install c-client/c-client.a ${D}${libdir}/libc-client.a
->  }
-> =20
-> +ALLOW_EMPTY_${PN} =3D "1"
+>   autofs: fails to compile with openldap disabled (2013-01-24 10:35:49 -0=
+500)
+>=20
+> are available in the git repository at:
+>   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
 
-Applied, thanks.
+Applied, except geany, thanks
 
+>=20
+> Andreas M=FCller (5):
+>       thunar: add RRECOMMENDS and RDEPENDS to ensure full functionality
+>       tumbler: update to 0.1.27
+>       daemonize: initial add 1.73+
+>       geany: initial add 1.22
+>       lxdm: disable screensaver by default when starting X
+>=20
+>  meta-oe/recipes-devtools/geany/geany_1.22.bb       |   13 +++++++++++++
+>  meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |    5 +++--
+>  meta-oe/recipes-support/daemonize/daemonize_git.bb |   12 ++++++++++++
+>  meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb      |    3 +++
+>  .../{tumbler_0.1.26.bb =3D> tumbler_0.1.27.bb}       |    4 ++--
+>  5 files changed, 33 insertions(+), 4 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+>  create mode 100644 meta-oe/recipes-support/daemonize/daemonize_git.bb
+>  rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.26.bb =3D> tumbler_0.=
+1.27.bb} (89%)
+>=20
 > --=20
-> 1.8.0
+> 1.7.4.4
 >=20
 >=20
 > _______________________________________________
@@ -91,16 +100,16 @@ Applied, thanks.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---5xr6Gr0irOxp3+3c
+--aEcIyhw0mmnxygNd
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEGVUQACgkQN1Ujt2V2gBxZUQCfaCzjsfSt++Guof0630haawEH
-McMAoKxeW5//Pc+N7k2QUHWM/Zi1zypI
-=EWte
+iEYEARECAAYFAlEGVYQACgkQN1Ujt2V2gByJogCfdV+JkYWPa+mjz3w0T5Ani4jl
+8iUAni+DH4LotkbFUnv5NSuBXfWSEn/a
+=7wVM
 -----END PGP SIGNATURE-----
 
---5xr6Gr0irOxp3+3c--
+--aEcIyhw0mmnxygNd--
