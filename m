@@ -1,36 +1,37 @@
-Received: from mail-we0-f179.google.com ([74.125.82.179])
+Received: from mail-wi0-f174.google.com ([209.85.212.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzmOO-00039C-Pm
+	(envelope-from <martin.jansa@gmail.com>) id 1TzmOn-0003CG-LX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2013 11:56:50 +0100
-Received: by mail-we0-f179.google.com with SMTP id x43so1403494wey.24
+	Mon, 28 Jan 2013 11:57:16 +0100
+Received: by mail-wi0-f174.google.com with SMTP id hj13so550217wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2013 02:41:10 -0800 (PST)
+	Mon, 28 Jan 2013 02:41:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qRjsCUHO1OnmsOA+lT1Vy4JgnpT3KdMPkLQayx5kJBo=;
-	b=W0RxZNUMWaaKonOS8Fmf4CC/93Pvvqg2+Syj+g6bQCWivyPgYz0bNjBZoT7MM8opGN
-	WWazWk8d1vyU3r//T3z0rqYwbULkbL+AHH9feEvQ8zeQsblGy0xspYGpNA2LtjNvTSri
-	YaahkH/ZWeME9AfrEiB6EsmqRiNiAlvCDHyYcqiHZgrS+X0eisoZKIl9bo773wj1lWq3
-	Rf2bzzEieeS5JJ+qJPZILhy1OS8IBVWH8fOtqqsZkaI6GdP8q63dRSWYnYTFDA5MYPvw
-	7EJ/WtigmUdsa1VVYQk1mhxKhJbUFADkO526UJ3LeepNBB4Y/CgMLgM1HOR7WiwlS2ku
-	GIsQ==
-X-Received: by 10.180.73.116 with SMTP id k20mr6773646wiv.21.1359369670756;
-	Mon, 28 Jan 2013 02:41:10 -0800 (PST)
+	bh=M7amGSoKZvg8/yGjzYoiDYAh8se3DiopXzZIbTQzk5k=;
+	b=iN6Eh/jAiTYWzTHDk+XLpH5NW9IqOr9hT5C2qU/vAWKnFJmfN0yHSPRG3EgfcFV3g9
+	5ctu0+KQ+TBZ6csIx9ojELM0nrNBIzf+9s6IdJk48k+q4eZgQpc6HpgmW6w6fqBwpRQ0
+	ZmW7QCWZgv0O49uTWUpXdgi+WNpLZjjPYcYlIH4n7rvxfwdZQAHH23cb+ti3gUJxaJWj
+	aGn+B2MGCyVi5gmKHjKK47Txo+WOkAG8AOj/GOukYSxSDAgjRMI8My7G5lvTKy/iB2/5
+	l74BJk5yCGdYDcGT3ER/Qp3UnUSnE1STpRrjMPtwuc6Qc7Eec07EV9NMoC9XkndzAhlX
+	jBrw==
+X-Received: by 10.194.108.101 with SMTP id hj5mr20366438wjb.6.1359369693730;
+	Mon, 28 Jan 2013 02:41:33 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id bz12sm12747095wib.5.2013.01.28.02.41.09
+	by mx.google.com with ESMTPS id fx5sm2625043wib.11.2013.01.28.02.41.32
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 28 Jan 2013 02:41:10 -0800 (PST)
-Date: Mon, 28 Jan 2013 11:41:13 +0100
+	Mon, 28 Jan 2013 02:41:33 -0800 (PST)
+Date: Mon, 28 Jan 2013 11:41:36 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130128104113.GU16904@jama.palm1.palmone.com>
+Message-ID: <20130128104136.GV16904@jama.palm1.palmone.com>
 References: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
+	<1359182715-3063-2-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1359182715-3063-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1359182715-3063-2-git-send-email-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 1/2] i2c-tools: Upgrade to 3.0.3 -> 3.1.0
+Subject: Re: [meta-networking][PATCH 2/2] ebtables, arptables: add perl as runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,270 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 10:56:53 -0000
-X-Groupsio-MsgNum: 42879
+X-List-Received-Date: Mon, 28 Jan 2013 10:57:18 -0000
+X-Groupsio-MsgNum: 42880
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pzbqGaOtRNiVr7w4"
+	protocol="application/pgp-signature"; boundary="22hJjvOmZW2O/jbw"
 Content-Disposition: inline
 
---pzbqGaOtRNiVr7w4
+--22hJjvOmZW2O/jbw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 25, 2013 at 10:45:14PM -0800, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../i2c-tools/i2c-tools-3.0.3/Module.mk            |   72 --------------=
-------
->  .../i2c-tools/i2c-tools-3.1.0/Module.mk            |   72 ++++++++++++++=
-++++++
->  .../recipes-support/i2c-tools/i2c-tools_3.0.3.bb   |   24 -------
->  .../recipes-support/i2c-tools/i2c-tools_3.1.0.bb   |   26 +++++++
->  4 files changed, 98 insertions(+), 96 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools-3.0.3/Mod=
-ule.mk
->  create mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Mod=
-ule.mk
->  delete mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools_3.0.3.bb
->  create mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
+On Fri, Jan 25, 2013 at 10:45:15PM -0800, Khem Raj wrote:
+> Fixes errors like
+>=20
+> | Computing transaction...error: Can't install
+> arptables-0.0.3+4-r0.0@ppce500v2: no package provides /usr/bin/perl
 
 Applied, please split those perl scripts in followup patch.
 
-> diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools-3.0.3/Module.mk =
-b/meta-oe/recipes-support/i2c-tools/i2c-tools-3.0.3/Module.mk
-> deleted file mode 100644
-> index fcaf72f..0000000
-> --- a/meta-oe/recipes-support/i2c-tools/i2c-tools-3.0.3/Module.mk
-> +++ /dev/null
-> @@ -1,72 +0,0 @@
-> -# EEPROMER
-> -#
-> -# Licensed under the GNU General Public License.
-> -
-> -EEPROMER_DIR	:=3D eepromer
-> -
-> -EEPROMER_CFLAGS	:=3D -Wstrict-prototypes -Wshadow -Wpointer-arith -Wcast=
--qual \
-> -		   -Wcast-align -Wwrite-strings -Wnested-externs -Winline \
-> -		   -W -Wundef -Wmissing-prototypes -Iinclude
-> -
-> -EEPROMER_TARGETS	:=3D eepromer eeprom eeprog
-> -
-> -#
-> -# Programs
-> -#
-> -
-> -$(EEPROMER_DIR)/eepromer: $(EEPROMER_DIR)/eepromer.o
-> -	$(CC) $(LDFLAGS) -o $@ $^
-> -
-> -$(EEPROMER_DIR)/eeprom: $(EEPROMER_DIR)/eeprom.o
-> -	$(CC) $(LDFLAGS) -o $@ $^
-> -
-> -$(EEPROMER_DIR)/eeprog: $(EEPROMER_DIR)/eeprog.o $(EEPROMER_DIR)/24cXX.o=
-=20
-> -	$(CC) $(LDFLAGS) -o $@ $^
-> -
-> -#
-> -# Objects
-> -#
-> -
-> -$(EEPROMER_DIR)/eepromer.o: $(EEPROMER_DIR)/eepromer.c
-> -	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> -
-> -$(EEPROMER_DIR)/eeprom.o: $(EEPROMER_DIR)/eeprom.c
-> -	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> -
-> -$(EEPROMER_DIR)/eeprog.o: $(EEPROMER_DIR)/eeprog.c
-> -	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> -
-> -$(EEPROMER_DIR)/24cXX.o: $(EEPROMER_DIR)/24cXX.c
-> -	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> -
-> -#
-> -# Commands
-> -#
-> -
-> -all-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> -
-> -strip-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> -	strip $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> -
-> -clean-eepromer:
-> -	$(RM) $(addprefix $(EEPROMER_DIR)/,*.o $(EEPROMER_TARGETS))
-> -
-> -install-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> -	$(INSTALL_DIR) $(DESTDIR)$(sbindir) $(DESTDIR)$(man8dir)
-> -	for program in $(EEPROMER_TARGETS) ; do \
-> -	$(INSTALL_PROGRAM) $(EEPROMER_DIR)/$$program $(DESTDIR)$(sbindir) ; done
-> -
-> -uninstall-eepromer:
-> -	for program in $(EEPROMER_TARGETS) ; do \
-> -	$(RM) $(DESTDIR)$(sbindir)/$$program ; \
-> -	$(RM) $(DESTDIR)$(man8dir)/$$program.8 ; done
-> -
-> -all: all-eepromer
-> -
-> -strip: strip-eepromer
-> -
-> -clean: clean-eepromer
-> -
-> -install: install-eepromer
-> -
-> -uninstall: uninstall-eepromer
-> diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk =
-b/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk
-> new file mode 100644
-> index 0000000..fcaf72f
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk
-> @@ -0,0 +1,72 @@
-> +# EEPROMER
-> +#
-> +# Licensed under the GNU General Public License.
-> +
-> +EEPROMER_DIR	:=3D eepromer
-> +
-> +EEPROMER_CFLAGS	:=3D -Wstrict-prototypes -Wshadow -Wpointer-arith -Wcast=
--qual \
-> +		   -Wcast-align -Wwrite-strings -Wnested-externs -Winline \
-> +		   -W -Wundef -Wmissing-prototypes -Iinclude
-> +
-> +EEPROMER_TARGETS	:=3D eepromer eeprom eeprog
-> +
-> +#
-> +# Programs
-> +#
-> +
-> +$(EEPROMER_DIR)/eepromer: $(EEPROMER_DIR)/eepromer.o
-> +	$(CC) $(LDFLAGS) -o $@ $^
-> +
-> +$(EEPROMER_DIR)/eeprom: $(EEPROMER_DIR)/eeprom.o
-> +	$(CC) $(LDFLAGS) -o $@ $^
-> +
-> +$(EEPROMER_DIR)/eeprog: $(EEPROMER_DIR)/eeprog.o $(EEPROMER_DIR)/24cXX.o=
-=20
-> +	$(CC) $(LDFLAGS) -o $@ $^
-> +
-> +#
-> +# Objects
-> +#
-> +
-> +$(EEPROMER_DIR)/eepromer.o: $(EEPROMER_DIR)/eepromer.c
-> +	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> +
-> +$(EEPROMER_DIR)/eeprom.o: $(EEPROMER_DIR)/eeprom.c
-> +	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> +
-> +$(EEPROMER_DIR)/eeprog.o: $(EEPROMER_DIR)/eeprog.c
-> +	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> +
-> +$(EEPROMER_DIR)/24cXX.o: $(EEPROMER_DIR)/24cXX.c
-> +	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
-> +
-> +#
-> +# Commands
-> +#
-> +
-> +all-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> +
-> +strip-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> +	strip $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> +
-> +clean-eepromer:
-> +	$(RM) $(addprefix $(EEPROMER_DIR)/,*.o $(EEPROMER_TARGETS))
-> +
-> +install-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
-> +	$(INSTALL_DIR) $(DESTDIR)$(sbindir) $(DESTDIR)$(man8dir)
-> +	for program in $(EEPROMER_TARGETS) ; do \
-> +	$(INSTALL_PROGRAM) $(EEPROMER_DIR)/$$program $(DESTDIR)$(sbindir) ; done
-> +
-> +uninstall-eepromer:
-> +	for program in $(EEPROMER_TARGETS) ; do \
-> +	$(RM) $(DESTDIR)$(sbindir)/$$program ; \
-> +	$(RM) $(DESTDIR)$(man8dir)/$$program.8 ; done
-> +
-> +all: all-eepromer
-> +
-> +strip: strip-eepromer
-> +
-> +clean: clean-eepromer
-> +
-> +install: install-eepromer
-> +
-> +uninstall: uninstall-eepromer
-> diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools_3.0.3.bb b/meta-=
-oe/recipes-support/i2c-tools/i2c-tools_3.0.3.bb
-> deleted file mode 100644
-> index 021090c..0000000
-> --- a/meta-oe/recipes-support/i2c-tools/i2c-tools_3.0.3.bb
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -DESCRIPTION =3D "Set of i2c tools for linux"
-> -SECTION =3D "base"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> -
-> -SRC_URI =3D "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}=
-=2Etar.bz2 \
-> -           file://Module.mk \
-> -          "
-> -SRC_URI[md5sum] =3D "511376eed04455cdb277ef19c5f73bb4"
-> -SRC_URI[sha256sum] =3D "23b28e474741834e3f1b35b0686528769a13adc92d2ff560=
-3cbda1d6bd5e5629"
-> -
-> -inherit autotools
-> -
-> -do_compile_prepend() {
-> -        cp ${WORKDIR}/Module.mk ${S}/eepromer/
-> -        sed -i 's#/usr/local#/usr#' Makefile
-> -        echo "include eepromer/Module.mk" >> Makefile
-> -}
-> -
-> -do_install_append() {
-> -        install -d ${D}${includedir}/linux
-> -        install -m 0644 include/linux/i2c-dev.h ${D}${includedir}/linux/=
-i2c-dev-user.h
-> -	rm -f ${D}${includedir}/linux/i2c-dev.h
-> -}
-> diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb b/meta-=
-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
-> new file mode 100644
-> index 0000000..7589537
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION =3D "Set of i2c tools for linux"
-> +SECTION =3D "base"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> +
+Thanks
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    2 ++
+>  .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 ++
+>  2 files changed, 4 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb=
+ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> index 2596d2f..4e9b0bc 100644
+> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> @@ -4,6 +4,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871=
+a28ab1488fdbd2e73e"
+>  SECTION =3D "console/network"
+>  PR =3D "r1"
+> =20
 > +RDEPENDS +=3D "perl"
 > +
-> +SRC_URI =3D "http://pkgs.fedoraproject.org/repo/pkgs/i2c-tools/i2c-tools=
--3.1.0.tar.bz2/f15019e559e378c6e9d5d6299a00df21/i2c-tools-${PV}.tar.bz2 \
-> +           file://Module.mk \
-> +          "
-> +SRC_URI[md5sum] =3D "f15019e559e378c6e9d5d6299a00df21"
-> +SRC_URI[sha256sum] =3D "960023f61de292c6dd757fcedec4bffa7dd036e8594e24b2=
-6a706094ca4c142a"
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+>             file://installnonroot.patch \
+>             file://01debian_defaultconfig.patch \
+> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.=
+bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> index 71e2600..8da9bb7 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> @@ -3,6 +3,8 @@ PRIORITY =3D "optional"
+>  LICENSE =3D "GPL-2.0"
+>  SECTION =3D "console/network"
+> =20
+> +RDEPENDS +=3D "perl"
 > +
-> +inherit autotools
-> +
-> +do_compile_prepend() {
-> +        cp ${WORKDIR}/Module.mk ${S}/eepromer/
-> +        sed -i 's#/usr/local#/usr#' Makefile
-> +        echo "include eepromer/Module.mk" >> Makefile
-> +}
-> +
-> +do_install_append() {
-> +        install -d ${D}${includedir}/linux
-> +        install -m 0644 include/linux/i2c-dev.h ${D}${includedir}/linux/=
-i2c-dev-user.h
-> +	rm -f ${D}${includedir}/linux/i2c-dev.h
-> +}
+>  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/GPL-=
+2.0;md5=3D801f80980d171dd6425610833a22dbe6"
+>  SRC_URI =3D " \
+>  	${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=3Darptables=
+ \
 > --=20
 > 1.7.9.5
 >=20
@@ -320,16 +115,16 @@ i2c-dev-user.h
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---pzbqGaOtRNiVr7w4
+--22hJjvOmZW2O/jbw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEGVckACgkQN1Ujt2V2gBx7xgCeK5oza+69mm4rtfFU0nMR2fQ/
-PbcAn1z9ZXfc/nxr1ZcHdg+ni4v2r0MI
-=D0xG
+iEYEARECAAYFAlEGVeAACgkQN1Ujt2V2gByjEQCglUyk3O0dXUZgK8TUPVRJM5qZ
+v6wAn0A2Y8+pUpKYM/Crjxw3V2Mx0Pu3
+=mgP0
 -----END PGP SIGNATURE-----
 
---pzbqGaOtRNiVr7w4--
+--22hJjvOmZW2O/jbw--
