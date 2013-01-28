@@ -1,37 +1,36 @@
-Received: from mail-wg0-f46.google.com ([74.125.82.46])
+Received: from mail-wi0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzmQE-0003ZV-5n
+	(envelope-from <martin.jansa@gmail.com>) id 1TzmR7-0003eC-1v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2013 11:58:44 +0100
-Received: by mail-wg0-f46.google.com with SMTP id fg15so1579080wgb.25
+	Mon, 28 Jan 2013 11:59:40 +0100
+Received: by mail-wi0-f175.google.com with SMTP id hq12so791935wib.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2013 02:43:04 -0800 (PST)
+	Mon, 28 Jan 2013 02:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=0SUE4r3OayeCwt6Bf+ODJ+1DMml5JOrk6tyF5+6rmhY=;
-	b=jWnpstU+s+f2HhGh6LUh3XR4if+IWMOgqpHIn02e2RzlsOJ44fGw9CdnZpDqylSg7M
-	RXRy11C9+/OmPWJUpw5JSGhUEwPCwhI4nuyDFxrymV0rk9sxJrNIWEer+EfiKDqTwsUg
-	uS+HaDNdQ2C5JOc2ps/XujVTqeY2VL6zC1RW7e9/5r0EOWFv/P1o2/XIfpC9E06LEufx
-	OnfMkkHTVvz+UTadBOeBck+VNB4otdj8pc34MdwwWKhXEnvLKPjif73V9rUNNskuZIg7
-	HWqHSerP3FgO2/5Y9tagfInVkCdcijp+JAyzb6SW4D43q1BTwNjNSBqlYtjTDZbj8X8L
-	Z30A==
-X-Received: by 10.180.77.35 with SMTP id p3mr8804989wiw.18.1359369784176;
-	Mon, 28 Jan 2013 02:43:04 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XBgX/bLieZxmBbdu6DrPuuq2ApeFLANKNyIa5ZzLQzI=;
+	b=inmW61WrP5nTVoIszD8HbBHYFE0OWXuCQk2fTG2C7a7h70vi++Hpyvo90IZyD9fTyq
+	2Ni1lEzKWMWCq/ZFawIKy+f8wte/D9YaQgw9P0um5Ws0gVq1KXXEt9hcI0q3MUS3HUAa
+	+M4yf28e+q1FYuL6LnjFPD/mxj3MinGIfS/RDwr03UY7Jlp9B9zqjSR4rjKLEJ9vT4JD
+	acxUkvUJ0N14NoFgjsICxARMx58tIsOemNwQevYYeZ+mCFOC1dy0YJvEhT32654Cb/0L
+	khKC/BbKBgeUnDKYgDOBO9tZZtIn8+UBsVM0PUQEmRev0GcUY3SnAg3pje4HGmE1tbM2
+	x5zQ==
+X-Received: by 10.194.104.137 with SMTP id ge9mr2271363wjb.59.1359369839076;
+	Mon, 28 Jan 2013 02:43:59 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id m6sm3643918wic.2.2013.01.28.02.43.03
+	by mx.google.com with ESMTPS id bz12sm12758622wib.5.2013.01.28.02.43.58
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 28 Jan 2013 02:43:03 -0800 (PST)
-Date: Mon, 28 Jan 2013 11:43:07 +0100
+	Mon, 28 Jan 2013 02:43:58 -0800 (PST)
+Date: Mon, 28 Jan 2013 11:44:02 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130128104307.GW16904@jama.palm1.palmone.com>
-References: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
+Message-ID: <20130128104402.GX16904@jama.palm1.palmone.com>
+References: <1358778699-30412-1-git-send-email-riku.voipio@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1358778699-30412-1-git-send-email-riku.voipio@linaro.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH 1/7] libebml: add 1.2.2
+Subject: Re: [meta-oe][PATCH] fuse: add aarch64 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,77 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 10:58:58 -0000
-X-List-Received-Date: Mon, 28 Jan 2013 10:58:58 -0000
-X-Groupsio-MsgNum: 42881
+X-List-Received-Date: Mon, 28 Jan 2013 11:00:03 -0000
+X-Groupsio-MsgNum: 42882
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mz5eWKkhz39mMVQV"
+	protocol="application/pgp-signature"; boundary="BtNCO5h84ExDStzY"
 Content-Disposition: inline
 
---mz5eWKkhz39mMVQV
+--BtNCO5h84ExDStzY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 27, 2013 at 04:41:16PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+On Mon, Jan 21, 2013 at 04:31:38PM +0200, Riku Voipio wrote:
+> u64/u32 is not defined in sys/types.h, include linux/types.h like
+> the kernel version of fuse.h does. Patch sent to upstream mailing list.
 
-All applied, Thanks.=20
+Applied thanks
 
-Now I have only:
-3424ca7 wscan: add 20121111
-5c7cfdd xbmc: first try at making it build for non-GLES platforms
-pending from you :).
-
-> ---
->  .../recipes-mkv/libebml/libebml_1.2.2.bb           | 31 ++++++++++++++++=
-++++++
->  1 file changed, 31 insertions(+)
->  create mode 100644 meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
 >=20
-> diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb b/meta-=
-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
+> Upstream-Status: Submitted
+>=20
+> Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
+> ---
+>  .../recipes-support/fuse/fuse-2.9.2/aarch64.patch  |   20 ++++++++++++++=
+++++++
+>  meta-oe/recipes-support/fuse/fuse_2.9.2.bb         |    1 +
+>  2 files changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
+>=20
+> diff --git a/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch b/meta=
+-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
 > new file mode 100644
-> index 0000000..210a409
+> index 0000000..180f544
 > --- /dev/null
-> +++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
-> @@ -0,0 +1,31 @@
-> +SUMMARY =3D "libebml is a C++ libary to parse EBML files."
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL;md5=3Df14599a2f089f6ff8c97e2ba=
-a4e3d575"
+> +++ b/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
+> @@ -0,0 +1,20 @@
+> +Upstream-Status: Submitted
 > +
-> +SRC_URI =3D "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.=
-bz2"
-> +SRC_URI[md5sum] =3D "726cc2bd1a525929ff35ff9854c0ebab"
-> +SRC_URI[sha256sum] =3D "476b08c6436a96c024a53e788e7c945ce9b41cd865416576=
-3444aa7e5245b7a5"
+> +Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
 > +
-> +do_compile() {
-> +	cd ${S}/make/linux
-> +	oe_runmake CROSS=3D"${TARGET_PREFIX}"
-> +}
-> +
-> +do_install() {
-> +	cd ${S}/make/linux
-> +
-> +	install -d ${D}${libdir}
-> +	install -m 0644 libebml.a ${D}${libdir}
-> +	install -m 0755 libebml.so.* ${D}${libdir}
-> +	cp -a libebml.so ${D}${libdir}
-> +
-> +	install -d ${D}${includedir}/ebml
-> +	for i in ../../ebml/*.h; do
-> +		install -m 0644 $i ${D}${includedir}/ebml
-> +	done
-> +
-> +	install -d ${D}${includedir}/ebml/c
-> +	for i in ../../ebml/c/*.h; do
-> +		install -m 0644 $i ${D}${includedir}/ebml/c
-> +	done
-> +}
+> +--- a/include/fuse_kernel.h
+> ++++ b/include/fuse_kernel.h
+> +@@ -88,12 +88,7 @@
+> + #ifndef _LINUX_FUSE_H
+> + #define _LINUX_FUSE_H
+> +=20
+> +-#include <sys/types.h>
+> +-#define __u64 uint64_t
+> +-#define __s64 int64_t
+> +-#define __u32 uint32_t
+> +-#define __s32 int32_t
+> +-#define __u16 uint16_t
+> ++#include <linux/types.h>
+> +=20
+> + /*
+> +  * Version negotiation:
+> diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb b/meta-oe/recipes=
+-support/fuse/fuse_2.9.2.bb
+> index 23b9447..b558c4d 100644
+> --- a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
+> +++ b/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
+> @@ -9,6 +9,7 @@ PR =3D "r1"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
+>             file://gold-unversioned-symbol.patch \
+> +           file://aarch64.patch \
+>            "
+>  SRC_URI[md5sum] =3D "7d80d0dc9cc2b9199a0c53787c151205"
+>  SRC_URI[sha256sum] =3D "81a728fb3f87da33063068735e2fb7e2cd89df207d32687d=
+3d3278385279cefc"
 > --=20
-> 1.8.1
+> 1.7.10.4
 >=20
 >=20
 > _______________________________________________
@@ -126,16 +125,16 @@ bz2"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---mz5eWKkhz39mMVQV
+--BtNCO5h84ExDStzY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEGVjsACgkQN1Ujt2V2gBwVfACfdt2qCpGMg2MeRxyMn2a7xbwL
-zkoAn3wXO/WqOD+/B34MSNY7TIUR0HoP
-=Uxey
+iEYEARECAAYFAlEGVnIACgkQN1Ujt2V2gByVuACfVQKFu6Ph5Fi0nIh5mIIOTXHg
+BbcAoKWRtiLKyxrzYAM44s0CajxXc4ao
+=MA3c
 -----END PGP SIGNATURE-----
 
---mz5eWKkhz39mMVQV--
+--BtNCO5h84ExDStzY--
