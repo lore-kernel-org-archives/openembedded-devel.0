@@ -1,38 +1,37 @@
-Received: from mail-we0-f174.google.com ([74.125.82.174])
+Received: from mail-wi0-f174.google.com ([209.85.212.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1TzmLb-0002it-Tw
+	(envelope-from <martin.jansa@gmail.com>) id 1TzmLt-0002m0-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2013 11:53:56 +0100
-Received: by mail-we0-f174.google.com with SMTP id r6so1391241wey.19
+	Mon, 28 Jan 2013 11:54:15 +0100
+Received: by mail-wi0-f174.google.com with SMTP id hj13so547845wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2013 02:38:17 -0800 (PST)
+	Mon, 28 Jan 2013 02:38:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=sXWQF2MuNBvBaAn1IdNlCUoZcpHnsR78eErAL0c46wA=;
-	b=k/8EmkuaemdlSIVKLIHpcXJMUQs0t+gHvptsx9zzB+6xKFlELzpm08sz2vAS8KrOR7
-	b3YixTfWTogVcMvtTxPQhrDdkMApKi5d5nkpjQXXcl/jhPZt+F/ne8/WzkS6py/mpljl
-	VOii+CG1DXdfuyBlZpZFRUksiNbk7DKNSRdMPc3HP1KyaAe+IYYd8qcgLZNdRoO/Yslf
-	D5sjTJShzcT+MmezeflCZySPLx1HUhqErG9Pjbc21ZWdA+qgsOgP2PrzXsXCjqGebzLG
-	Y7f8W30hHxlrtPl0apfFpho836b53jwZKi9+ZE2iFLrUB1fDc5QQ5Lx6wwO/8IZz2oaB
-	WuGA==
-X-Received: by 10.194.242.69 with SMTP id wo5mr20309672wjc.10.1359369497833;
-	Mon, 28 Jan 2013 02:38:17 -0800 (PST)
+	:user-agent; bh=0+llIlv45tB1jCgo5aHtleE/1tTZzwhZsiPOjnP+l3Q=;
+	b=ev1KILLgGUPXy5vTS34fMxgGM9p2zOjjmq+y+nAlk/MlGSUa79CC2GeM3nHME4FVZa
+	4TcGE2DtkGxrFU/T68itPzwJJrU0xCuAWqceO2X9dJ+kN67L22QjJuZRz0Gj7LLFLUBG
+	CQsWhwb1tlBu/xTzVmSSwWDHrT1VUp8ZnXEwPyP+2qVzM/CR4KJ1BcTGgy8zrJTUj8sA
+	YVgEjvMQuWR/mo+swj5gVbauNY7h3eDQLmYmhNr2x1i6qm0x24NdBzdiatDB1oxRRNd3
+	zmVwHFLHKRvzGPERUWh/w4o8z6M2JejYC7V2yDLg2u5jgijNcpB1XZCNEG7OqXZGaN9g
+	FokA==
+X-Received: by 10.180.84.131 with SMTP id z3mr8765823wiy.25.1359369515949;
+	Mon, 28 Jan 2013 02:38:35 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id bd6sm11456064wib.10.2013.01.28.02.38.16
+	by mx.google.com with ESMTPS id cu7sm11461065wib.8.2013.01.28.02.38.35
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 28 Jan 2013 02:38:17 -0800 (PST)
-Date: Mon, 28 Jan 2013 11:38:20 +0100
+	Mon, 28 Jan 2013 02:38:35 -0800 (PST)
+Date: Mon, 28 Jan 2013 11:38:39 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130128103820.GP16904@jama.palm1.palmone.com>
-References: <1358863633-32066-1-git-send-email-david.c.nystrom@gmail.com>
-	<1358863633-32066-2-git-send-email-david.c.nystrom@gmail.com>
+Message-ID: <20130128103839.GQ16904@jama.palm1.palmone.com>
+References: <1358866841-31063-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 MIME-Version: 1.0
-In-Reply-To: <1358863633-32066-2-git-send-email-david.c.nystrom@gmail.com>
+In-Reply-To: <1358866841-31063-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: David =?iso-8859-1?Q?Nystr=F6m?= <david.nystrom@enea.com>
-Subject: Re: [meta-oe][PATCHv2] meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: Re: [PATCH] [meta-systemd] dropbear: read configuration from /etc/default/dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,58 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 10:53:59 -0000
-X-Groupsio-MsgNum: 42873
+X-List-Received-Date: Mon, 28 Jan 2013 10:54:18 -0000
+X-Groupsio-MsgNum: 42874
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ga5bsqHr1s/xcZEm"
+	protocol="application/pgp-signature"; boundary="7kD9y3RnPUgTZee0"
 Content-Disposition: inline
 
---ga5bsqHr1s/xcZEm
-Content-Type: text/plain; charset=iso-8859-1
+--7kD9y3RnPUgTZee0
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 22, 2013 at 03:07:13PM +0100, david.c.nystrom@gmail.com wrote:
-> From: David Nystr=F6m <david.nystrom@enea.com>
+On Tue, Jan 22, 2013 at 04:00:41PM +0100, Enrico Scholz wrote:
+> Patch allows to specify additional parameters (e.g. '-B') by reading
+> /etc/default/dropbear as a systemd environment file.  It applies
+> $DROPBEAR_EXTRA_ARGS which used already by the oe-core sysv initscript.
 
-Applied with commit message from V1.
+Applied, thanks
 
 >=20
-> Signed-off-by: David Nystr=F6m <david.nystrom@enea.com>
+> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 > ---
->  .../python/python-twisted_10.2.0.bb                |    6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  meta-systemd/meta-oe/recipes-core/dropbear/dropbear/dropbear@.service | =
+3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb b/m=
-eta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-> index 5215dd6..5320946 100644
-> --- a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-> +++ b/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
-> @@ -7,7 +7,7 @@ SECTION =3D "console/network"
->  #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rat=
-her than LGPL.
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc3159ad36d96a939fcd8f2c2c9b9d=
-08a"
-> -PR =3D "r2"
-> +PR =3D "r3"
+> diff --git a/meta-systemd/meta-oe/recipes-core/dropbear/dropbear/dropbear=
+@.service b/meta-systemd/meta-oe/recipes-core/dropbear/dropbear/dropbear@.s=
+ervice
+> index 4fba3f0..813788f 100644
+> --- a/meta-systemd/meta-oe/recipes-core/dropbear/dropbear/dropbear@.servi=
+ce
+> +++ b/meta-systemd/meta-oe/recipes-core/dropbear/dropbear/dropbear@.servi=
+ce
+> @@ -4,6 +4,7 @@ Requires=3Ddropbearkey.service
+>  After=3Dsyslog.target dropbearkey.service
 > =20
->  SRC_URI =3D "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${P=
-V}.tar.bz2 "
->  SRC_URI[md5sum] =3D "73da62c793269eade8121da336b01ba5"
-> @@ -62,7 +62,9 @@ FILES_${PN}-test =3D " \
->  "
-> =20
->  FILES_${PN}-protocols =3D " \
-> -  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
-> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
-> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
-> +  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
->  "
-> =20
->  FILES_${PN}-zsh =3D " \
+>  [Service]
+> -ExecStart=3D-/usr/sbin/dropbear -i -r /etc/dropbear/dropbear_rsa_host_ke=
+y -p 22
+> +EnvironmentFile=3D-/etc/default/dropbear
+> +ExecStart=3D-/usr/sbin/dropbear -i -r /etc/dropbear/dropbear_rsa_host_ke=
+y -p 22 $DROPBEAR_EXTRA_ARGS
+>  ExecReload=3D/bin/kill -HUP $MAINPID
+>  StandardInput=3Dsocket
 > --=20
-> 1.7.9.5
+> 1.7.11.7
 >=20
 >=20
 > _______________________________________________
@@ -108,16 +101,16 @@ V}.tar.bz2 "
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ga5bsqHr1s/xcZEm
+--7kD9y3RnPUgTZee0
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEGVRwACgkQN1Ujt2V2gBwiJwCfR8UeqG1rs2m389uL43dO6cwp
-5dIAnjFasanwN8IJDudYSZ28gN83XWAJ
-=oNB8
+iEYEARECAAYFAlEGVS8ACgkQN1Ujt2V2gBzicgCgl03N76Ktlrmzkukbi4d4D+T9
+ng0AoJasEencA1wVoM7dxhDhrkxJn1TB
+=PR2E
 -----END PGP SIGNATURE-----
 
---ga5bsqHr1s/xcZEm--
+--7kD9y3RnPUgTZee0--
