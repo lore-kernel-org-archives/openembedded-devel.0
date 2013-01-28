@@ -1,42 +1,33 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-wg0-f53.google.com ([74.125.82.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1TznAJ-0008JR-Rr
+	(envelope-from <martin.jansa@gmail.com>) id 1TznwG-00051S-Gg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jan 2013 12:46:47 +0100
-Received: by mail-ea0-f175.google.com with SMTP id d1so1087109eab.34
+	Mon, 28 Jan 2013 13:35:53 +0100
+Received: by mail-wg0-f53.google.com with SMTP id fn15so1633658wgb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jan 2013 03:30:41 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=rzYDcOkoS4qekr7xs440eZWtxG52bsrh2sTYfDWN0Rw=;
-	b=XQnE2wVfiUheOrJyH/vL5T5oxbPyXdo3JKKWnpbFLdnuw9FC+1+0Aq2COcR6uemVWw
-	QvRferI8+TdTfeqXWOZ20/AkAf9Z90y4lYtXCWOutIj7fZ8kqnn6U6nR3pbDXVYjm6wm
-	QX8HvXg5xGYzxyLnhaj8VspTzZyVjZBbGtvjGtddyUXKboju8kOxZB6x4OApI1w9ufwk
-	KTTBy2LaUK1/vdCjx7s9e6Vdfhu49e/m4T9ZqOCVc/29YxdGQDqAKEuCKcBcfzBHks0E
-	Gaj2OvHJ777qP5BH9Wcp5H3gTGsdGKKU3ST+zA2pwv0B64l8JTZ77PneGC/NX+XYoACa
-	pwcA==
-X-Received: by 10.14.219.5 with SMTP id l5mr18004109eep.7.1359372641549;
-	Mon, 28 Jan 2013 03:30:41 -0800 (PST)
-Received: from ?IPv6:2001:610:612::1c07:3abe:32b3:815c?
-	([2001:610:612:0:1c07:3abe:32b3:815c])
-	by mx.google.com with ESMTPS id 6sm15565886eea.3.2013.01.28.03.30.39
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 28 Jan 2013 03:30:40 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20130128104307.GW16904@jama.palm1.palmone.com>
-Date: Mon, 28 Jan 2013 12:30:41 +0100
-Message-Id: <77662C11-494E-42BB-9824-799DFA29F7F8@dominion.thruhere.net>
-References: <1359301282-5470-1-git-send-email-koen@dominion.thruhere.net>
-	<20130128104307.GW16904@jama.palm1.palmone.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1499)
-X-Gm-Message-State: ALoCoQnm0KXRtXxHwuexyLO/7L4eAofSOuOiPZ8PQKYl/SrS/Oe+WRyll3bJEqg9tbuD3Z+Pkb2w
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/7] libebml: add 1.2.2
+	Mon, 28 Jan 2013 04:20:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=PlG0d+nu3Lw2dLMIf7Mx4bEjlF4QpS6AmBy6pXRIIcM=;
+	b=eWExHiRsUDx/MFOAEXcZwa+mRs+n8SKBsLxV64O/fSaBunYT5ung8pJnqgm9afzIO/
+	HPf9aXvw9VB4HlxvnN4ttARC5VuTIJ4J+HUxlGwDh091X3h+T6ohjDkq+akHrOYTqs2K
+	HOvFMmkDMeIFomKpniVHqmPddckuAWof7Zp4xvp6zcgJppCPTgRETnpsDtYU5qIx6KPE
+	JI5ooXPH2sVp1666D9qg9/VZ3KT9UqlbUTZOxXTKdOz1LQXMr5gBzQbfGQhnvaUWESQm
+	jtwXOIJHZVPZqbyr/nqHxicvD2W0Nrj5O7Vx+cXCffffeIkRuw9tefLLAanqMVs1VntO
+	Nnog==
+X-Received: by 10.194.21.70 with SMTP id t6mr20834623wje.42.1359375614293;
+	Mon, 28 Jan 2013 04:20:14 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id s16sm12500498wii.0.2013.01.28.04.20.13
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 28 Jan 2013 04:20:13 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Jan 2013 13:20:12 +0100
+Message-Id: <1359375612-22606-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.1
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH][for-danny] mm-common: inherit gnomebase instead of gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,25 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 11:46:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Jan 2013 12:35:54 -0000
 
+* gnomebase is enough and gnome pulls a lot of extra dependencies
 
-Op 28 jan. 2013, om 11:43 heeft Martin Jansa <martin.jansa@gmail.com> =
-het volgende geschreven:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Sun, Jan 27, 2013 at 04:41:16PM +0100, Koen Kooi wrote:
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->=20
-> All applied, Thanks.=20
->=20
-> Now I have only:
-> 3424ca7 wscan: add 20121111
-> 5c7cfdd xbmc: first try at making it build for non-GLES platforms
-> pending from you :).
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+index 79da497..c49b4c8 100644
+--- a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
++++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+@@ -1,4 +1,4 @@
+-inherit gnome
++inherit gnomebase
+ 
+ SRC_URI[archive.md5sum] = "4a4dad67fc8d7e0c529f3a8c6ba4d8b2"
+ SRC_URI[archive.sha256sum] = "9c602dba89d264a4719db996b9b169716df2d4d10bcd24e56fc3572865a5cb8b"
+-- 
+1.8.1.1
 
-Still haven't had the time to look at fixing wscan and xbmc is a =
-*$(*$(#*$(@ mess when trying to make it build against EMGD libs=
 
 
