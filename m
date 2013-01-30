@@ -1,37 +1,34 @@
-Received: from mail-qe0-f48.google.com ([209.85.128.48])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <geiseri@geiseri.com>) id 1U0Xj6-00052O-La
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2013 14:29:23 +0100
-Received: by mail-qe0-f48.google.com with SMTP id 3so689957qea.35
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1U0YNz-0000vQ-Bd for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jan 2013 15:11:35 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1U0Y96-0001B6-Nh for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jan 2013 14:56:12 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jan 2013 14:56:12 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 05:13:39 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=e+woRAlTvWxH0+xjQ47fWFtTcCG57dSDp0Qx1E1ilws=;
-	b=jrJt/ZJaoBvfCItzOTDMU8xf4bjsTpscAlhlxeh+/nlPuHk5TolvPFgYp8SLK6y7Vx
-	DGsRlkxoNLofXNxfqZHyojav5PooJjBIeVMLItswRJSO7D40DRTn9zXZ6CQbQjcbjfZI
-	FhPRz6nkddfpYZCiSl7NPTjuhuuANNziAbeeIUt298Qz27FLwzDs46dItSOUw2DvKj48
-	8Ia5X0gViehwNgSxcTbP9HudL2YmqSdTlc96AJGwfiFJ4H9jLDqOiJOk1cgdEShgaUmh
-	gC7+r0/AOITWrKJu68SWqQHoXku5b8rnDjTTuGPPXRye65HWnFuyJGI7XCu6ZtySUsjg
-	hz3Q==
-X-Received: by 10.49.14.202 with SMTP id r10mr5718536qec.10.1359551618831;
-	Wed, 30 Jan 2013 05:13:38 -0800 (PST)
-Received: from localhost.localdomain
-	(pool-96-245-43-60.phlapa.fios.verizon.net. [96.245.43.60])
-	by mx.google.com with ESMTPS id z5sm976817qer.8.2013.01.30.05.13.37
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 30 Jan 2013 05:13:38 -0800 (PST)
-Sender: Ian Geiser <geiseri@geiseri.com>
-From: igeiser@devonit.com
+	Wed, 30 Jan 2013 14:56:12 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Jan 2013 08:14:37 -0500
-Message-Id: <1359551677-27049-1-git-send-email-igeiser@devonit.com>
-X-Mailer: git-send-email 1.7.9.5
-X-Gm-Message-State: ALoCoQm4bRIMF2RZGT5O7OdJdA1OkhrpdThhI4zpNsUk26XDP4hw1bGZlJO+bJILSF76mBHSksE+
-Subject: [meta-oe][PATCH] krb5: add e2fsprogs dependency
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 30 Jan 2013 14:55:46 +0100
+Message-ID: <keb8ot$ea4$1@ger.gmane.org>
+References: <1359539418-6925-1-git-send-email-koen@dominion.thruhere.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <1359539418-6925-1-git-send-email-koen@dominion.thruhere.net>
+X-Enigmail-Version: 1.5
+Subject: Re: [meta-oe][[RFC][PATCHv2] nodejs: add 0.8.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2013 13:29:27 -0000
+X-List-Received-Date: Wed, 30 Jan 2013 14:11:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Ian Reinhart Geiser <igeiser@devonit.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Krb5 needs libcom_err from e2fsprogs to be built.  It looks like
-in some cases if e2fsprogs was built before krb5 this would
-silently pass.
+Op 30-01-13 10:50, Koen Kooi schreef:
+> The hardfp patch is a forward port from the 0.6.x version in meta-oe, the
+> upstream version doesn't work. I don't know why __SOFTFP__ isn't getting
+> defined, but checking for the PCS version of VFP is a lot safer and
+> actually works.
+> 
+> Runtime tested on armv7a/angstrom
 
-* add that e2fsprogs dependency explicitly.
-* added back the PR and updated its value to r1.
+Should node also drag in dependencies that npm *might* need for some
+packages? I've come across npm packages that need 'git' and
+'python-compiler', should I add those to RRECOMMENDS_${PN}?
 
-Signed-off-by: Ian Reinhart Geiser <igeiser@devonit.com>
----
- meta-oe/recipes-connectivity/krb5/krb5_1.11.bb |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-index c755862..1edf6bb 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-@@ -3,10 +3,12 @@ HOMEPAGE = "http://web.mit.edu/Kerberos/"
- SECTION = "console/network"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=e8fad1d174de32f8da0ddc56b67b6941"
--DEPENDS = "ncurses util-linux e2fsprogs-native"
-+DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
- 
- inherit autotools binconfig perlnative
- 
-+PR = "r1"
-+
- SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
- SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
- SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
--- 
-1.7.9.5
+iD8DBQFRCSZiMkyGM64RGpERAotmAJ0WeNvsakI9gE4ftDE4sUnumRBzIwCgr6PS
+R/2Uo7V+JOAItM1a9kTaIUc=
+=mMcU
+-----END PGP SIGNATURE-----
 
 
 
