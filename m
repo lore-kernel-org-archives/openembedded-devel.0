@@ -1,34 +1,22 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U0YNz-0000vQ-Bd for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2013 15:11:35 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U0Y96-0001B6-Nh for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2013 14:56:12 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 14:56:12 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 14:56:12 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <openembedded@emagii.com>) id 1U0ZHg-0001YZ-0o
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jan 2013 16:09:11 +0100
+Received: from [10.175.196.242] (83.227.56.195) by smtp-out21.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 50B624330178D496 for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jan 2013 15:53:26 +0100
+Message-ID: <510933E6.2080601@emagii.com>
+Date: Wed, 30 Jan 2013 15:53:26 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 30 Jan 2013 14:55:46 +0100
-Message-ID: <keb8ot$ea4$1@ger.gmane.org>
-References: <1359539418-6925-1-git-send-email-koen@dominion.thruhere.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <1359539418-6925-1-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.5
-Subject: Re: [meta-oe][[RFC][PATCHv2] nodejs: add 0.8.18
+References: <5641515.xznArOJtN8@helios>
+In-Reply-To: <5641515.xznArOJtN8@helios>
+Subject: Re: FOSDEM OE stand - call for volunteers/attendees
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2013 14:11:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Jan 2013 15:09:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 2013-01-22 11:00, Paul Eggleton wrote:
+> Hi folks,
+>
+> OpenEmbedded will have a stand at FOSDEM 2013 (Brussels, Feb 2-3). If you'd
+> like to help out behind the stand we'd really appreciate it! If you're
+> volunteering or even just attending the conference and interested in meeting
+> up with other OE community members, please add your name to the appropriate
+> place in the following wiki page:
+>
+> http://www.openembedded.org/wiki/FOSDEM_2013
+>
+> Thanks!
+> Paul
+Now I have an Atmel board for the raffle to attract people to the stand.
+The product is not yet released so we have "world exclusivity" :-)
 
-Op 30-01-13 10:50, Koen Kooi schreef:
-> The hardfp patch is a forward port from the 0.6.x version in meta-oe, the
-> upstream version doesn't work. I don't know why __SOFTFP__ isn't getting
-> defined, but checking for the PCS version of VFP is a lot safer and
-> actually works.
-> 
-> Runtime tested on armv7a/angstrom
-
-Should node also drag in dependencies that npm *might* need for some
-packages? I've come across npm packages that need 'git' and
-'python-compiler', should I add those to RRECOMMENDS_${PN}?
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRCSZiMkyGM64RGpERAotmAJ0WeNvsakI9gE4ftDE4sUnumRBzIwCgr6PS
-R/2Uo7V+JOAItM1a9kTaIUc=
-=mMcU
------END PGP SIGNATURE-----
+BR
+Ulf Samuelsson
 
 
 
