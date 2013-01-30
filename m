@@ -1,33 +1,26 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U0TXg-0002fh-CH for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2013 10:01:26 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U0TIn-0003Qg-Af for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jan 2013 09:45:53 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 09:45:53 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <eric@eukrea.com>) id 1U0TmI-0004KK-Pu
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jan 2013 10:16:29 +0100
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id B53EF2E305
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 09:45:53 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 30 Jan 2013 09:45:26 +0100
-Message-ID: <keamj1$22j$1@ger.gmane.org>
-References: <1359532955-16954-1-git-send-email-koen@dominion.thruhere.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+	Wed, 30 Jan 2013 09:51:35 +0100 (CET)
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id B2FC74B00F5;
+	Wed, 30 Jan 2013 09:51:28 +0100 (CET)
+Date: Wed, 30 Jan 2013 09:51:27 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: koen@dominion.thruhere.net
+Message-ID: <20130130095127.29acc1c8@e6520eb>
 In-Reply-To: <1359532955-16954-1-git-send-email-koen@dominion.thruhere.net>
-X-Enigmail-Version: 1.5
+References: <1359532955-16954-1-git-send-email-koen@dominion.thruhere.net>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][[RFC][PATCH] nodejs: add 0.8.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,37 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2013 09:01:27 -0000
-X-List-Received-Date: Wed, 30 Jan 2013 09:01:27 -0000
+X-List-Received-Date: Wed, 30 Jan 2013 09:16:38 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Koen,
 
-Op 30-01-13 09:02, Koen Kooi schreef:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> --- 
-> .../nodejs/nodejs/0002-Enable-NEON.patch           | 27 ++++++++++ 
-> ...0003-Resolve-bad-rpath-issue-when-linking.patch | 29 ++++++++++ 
-> meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb   | 61
-> ++++++++++++++++++++++ 3 files changed, 117 insertions(+) create mode
-> 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Enable-NEON.patch 
-> create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0003-Resolve-bad-rpath-issue-when-linking.patch
->
-> 
-create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+Le Wed, 30 Jan 2013 09:02:35 +0100,
+Koen Kooi <koen@dominion.thruhere.net> a =C3=A9crit :
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Enable-NEON.patch
+> @@ -0,0 +1,27 @@
+> +From 8891cb4cae57a6b7db54edb33a43743c4b09c53a Mon Sep 17 00:00:00 2001
+> +From: Jason Kridner <jdk@ti.com>
+> +Date: Wed, 7 Nov 2012 14:43:55 -0500
+> +Subject: [PATCH] Enable NEON
+> +
+> +Read this was necessary on a blog.
+> +
+> +http://www.code-with-passion.com/2012/11/07/cross-compiling-nodejs-and-n=
+ode-modules-for-armbeaglebone/
+> +---
+> + deps/v8/build/common.gypi |    1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/deps/v8/build/common.gypi b/deps/v8/build/common.gypi
+> +index 7a780cc..237f53f 100644
+> +--- a/deps/v8/build/common.gypi
+> ++++ b/deps/v8/build/common.gypi
+> +@@ -29,6 +29,7 @@
+> +=20
+> + {
+> +   'variables': {
+> ++    'arm_neon%': 1,
+> +     'use_system_v8%': 0,
+> +     'msvs_use_common_release': 0,
+> +     'gcc_version%': 'unknown',
+> +--=20
 
-Ignore this one, it fails at runtime.
+How will that behave on CPU without neon (armv5 for example) ?
+Did you test it on qemu for example ?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRCN2mMkyGM64RGpERAk/OAJ4kLEF//o1hXuaWEIPGr05hTiRqMgCbBGdu
-Oe/xAyE11B/LWqRoqvO4s5Y=
-=GPs+
------END PGP SIGNATURE-----
-
+Eric
 
 
