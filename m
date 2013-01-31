@@ -1,43 +1,36 @@
-Received: from mga05.intel.com ([192.55.52.89] helo=fmsmga101.fm.intel.com)
+Received: from mail-da0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U0uYj-0001k2-M2
+	(envelope-from <martin.jansa@gmail.com>) id 1U0uod-0003cF-KN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jan 2013 14:52:10 +0100
-Received: from mail-ea0-f199.google.com ([209.85.215.199])
-	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 31 Jan 2013 05:36:25 -0800
-Received: by mail-ea0-f199.google.com with SMTP id j10so3143193eaa.2
+	Thu, 31 Jan 2013 15:08:39 +0100
+Received: by mail-da0-f51.google.com with SMTP id i30so1297977dad.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2013 05:36:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
-	:in-reply-to:references:in-reply-to:references:x-gm-message-state;
-	bh=iCF8hOuVjQlj7KqEDWTCa+vEhw3DZg3a7I1tLt31C7g=;
-	b=PhaCL9LtV5PMKMO+X0B/vWZuKuQsEVeZJt7NXkCZMPqTeWozcP+t0gBAED0VSLMtD5
-	Zc9wQTpmMO1TKVdDT50svoxPERD1T1oBs/+oHaUXF+hfcuxOnFZ+ogewHt7LY2nBXYh3
-	XMLkyYpJn2J56RPCTpSdO3IXSrOpQRqPgGiWRow5sZMixUl3EtZFYaTau2OEJyDFWnsC
-	lohfaTN+FuspL32qzYRdgWn7gfoOVETpOz2GE/DPdKDQFtsTz51I4v9m1E0VYYCElCQO
-	uPvMbVjKKZYLuZjYrMbgp5oW1yL1C3dVh17QnISnmWMc3M9iztzDjWNO+2ZEN8lrqjgy
-	pLzQ==
-X-Received: by 10.194.76.165 with SMTP id l5mr15501635wjw.14.1359639381511;
-	Thu, 31 Jan 2013 05:36:21 -0800 (PST)
-X-Received: by 10.194.76.165 with SMTP id l5mr15501626wjw.14.1359639381424;
-	Thu, 31 Jan 2013 05:36:21 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id ex6sm9346319wid.3.2013.01.31.05.36.19
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 31 Jan 2013 05:36:20 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Thu, 31 Jan 2013 05:52:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Rdmpw5QFPgzVJ/dkwU2340f31PRGE4BoZdNxWIrdsuI=;
+	b=0Tg1+n8CQRQd0K+uCBeL4kjkvxGquhUtg/y7YD4OikjdoeCcdcpEi0gGgRg/4Z/v3Y
+	znPnhUbTe8k2E4/bTkumBcW+KAThC8Cb5kszoE5dexTKzS7wWOcGSTrHUS8YALjfVQtu
+	NG+ZmSxxUgTOvCltUa/dMhlteWvJD33pflfUpfl9aIFWF9zqtsu+UmH/Augu+xQFqPxJ
+	iVPIu5eCzRVsao4MoFQHh5AaJXWpQOCotNifmbP10YZjjT4vx21MTM8ID7Gg9++VLqhi
+	3oeH6wYE5EOyeHZL5QCuCbBvbPDzc19pewAfPrvNvEMpMZbvHmQytns2btIMqpew2Eli
+	SO7g==
+X-Received: by 10.69.1.73 with SMTP id be9mr22713491pbd.116.1359640372385;
+	Thu, 31 Jan 2013 05:52:52 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id hs2sm5086899pbc.22.2013.01.31.05.52.49
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 31 Jan 2013 05:52:51 -0800 (PST)
+Date: Thu, 31 Jan 2013 14:52:49 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Jan 2013 13:34:14 +0000
-Message-Id: <8368232e3997a3553addd705aacd0d1c56177682.1359639067.git.ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1359639067.git.ross.burton@intel.com>
-References: <cover.1359639067.git.ross.burton@intel.com>
-In-Reply-To: <cover.1359639067.git.ross.burton@intel.com>
-References: <cover.1359639067.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQklMfDJlcYEIkp3LLQiYJ7IvFPV8v1pjQHZPVRfYCA4PRJJ2a8u7wqMKbrAedIR2c7Jognp7mVjNcz8P9Wn4V+bcZTe+K7jxf/BzQfnGmzYCIdbWkLWPrS6uUtH3TZr+Z4a1QBE+ajHNvItZdrYSRTc7RWKwSIWJg1GIFcp9GGOME1WBfDkdlTfD5tbuj1YBELUZYsv
-Subject: [meta-multimedia][PATCH 1/1] libmusicbrainz: add
+Message-ID: <20130131135249.GE2102@jama.dyndns-home.com>
+References: <1359638269-28437-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1359638269-28437-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH][meta-oe][meta-gnome 1/2] mplayer2: add faad2 to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,91 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2013 13:52:14 -0000
+X-List-Received-Date: Thu, 31 Jan 2013 14:08:42 -0000
+X-Groupsio-MsgNum: 42940
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nHwqXXcoX0o6fKCv"
+Content-Disposition: inline
 
-Moved from oe-core.
+--nHwqXXcoX0o6fKCv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- .../musicbrainz/files/allow-libdir-override.patch  |   21 +++++++++++
- .../musicbrainz/libmusicbrainz_git.bb              |   38 ++++++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
- create mode 100644 meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+On Thu, Jan 31, 2013 at 02:17:48PM +0100, Martin Jansa wrote:
+> * it's autodetected from sysroot after faad2 is built
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe=
+/recipes-multimedia/mplayer/mplayer2_git.bb
+> index 685a0bb..e980f55 100644
+> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> @@ -3,7 +3,7 @@ SECTION =3D "multimedia"
+>  HOMEPAGE =3D "http://www.mplayerhq.hu/"
+>  DEPENDS =3D "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg x=
+sp zlib \
+>             libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
+> -           libxv virtual/libx11 libass speex \
+> +           libxv virtual/libx11 libass speex faad22 \
 
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch b/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-new file mode 100644
-index 0000000..d59d12e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-@@ -0,0 +1,21 @@
-+Allow LIB_INSTALL_DIR to be set by the the cmake configure invocation.  We dont
-+easily have a way of determining something that patches ${LIB_SUFFIX} so we'll
-+set LIB_INSTALL_DIR.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
-+
-+Index: libmusicbrainz-3.0.3/CMakeLists.txt
-+===================================================================
-+--- libmusicbrainz-3.0.3.orig/CMakeLists.txt
-++++ libmusicbrainz-3.0.3/CMakeLists.txt
-+@@ -26,7 +26,7 @@ FIND_PACKAGE(DiscId)
-+ SET(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)")
-+ SET(EXEC_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX} CACHE PATH "Installation prefix for executables and object code libraries" FORCE)
-+ SET(BIN_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/bin CACHE PATH "Installation prefix for user executables" FORCE)
-+-SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries" FORCE)
-++SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries")
-+ SET(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Installation prefix for C header files" FORCE)
-+ 
-+ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libmusicbrainz3.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/libmusicbrainz3.pc)
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-new file mode 100644
-index 0000000..051db7b
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "MusicBrainz client library"
-+DESCRIPTION = "The MusicBrainz client is a library which can be built into other programs.  The library allows you to access the data held on the MusicBrainz server."
-+HOMEPAGE = "http://musicbrainz.org"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
-+DEPENDS = "expat neon"
-+
-+PV = "5.0.1+git${SRCPV}"
-+PR = "r0"
-+
-+SRCREV = "0749dd0a35b4a54316da064475863a4ac6e28e7e"
-+SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
-+           file://allow-libdir-override.patch "
-+
-+S = "${WORKDIR}/git"
-+
-+LDFLAGS_prepend_libc-uclibc = " -lpthread "
-+
-+
-+inherit cmake pkgconfig
-+
-+do_configure_prepend() {
-+    # The native build really doesn't like being rebuilt, so delete
-+    # it if it's already present.
-+    rm -rf build-native
-+    mkdir build-native
-+    cd build-native
-+    cmake -DCMAKE_C_FLAGS=${BUILD_CFLAGS} \
-+          -DCMAKE_C_COMPILER=${BUILD_CC} \
-+          -DCMAKE_CXX_FLAGS=${BUILD_CXXFLAGS} \
-+          -DCMAKE_CXX_COMPILER=${BUILD_CXX} \
-+          ..
-+    make make-c-interface
-+    cd ..
-+}
-+
-+EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:PATH=${libdir} \
-+                 -DIMPORT_EXECUTABLES=build-native/ImportExecutables.cmake"
--- 
-1.7.10.4
+Second 2 is removed in branch.. I've sent wrong version.
 
+>  	   ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lam=
+e', d)}"
+> =20
+>  RDEPENDS_${PN} =3D "mplayer-common"
+> --=20
+> 1.8.1.2
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--nHwqXXcoX0o6fKCv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEKdzEACgkQN1Ujt2V2gBxphACgnDPmaXwQjUSGAq2d7rsqavP/
+W64An1iltw/dTMnE9vOMP6BTCBx10eE4
+=4WLt
+-----END PGP SIGNATURE-----
+
+--nHwqXXcoX0o6fKCv--
