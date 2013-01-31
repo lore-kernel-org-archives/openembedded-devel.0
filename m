@@ -1,35 +1,32 @@
-Received: from [8.20.30.154] (helo=mx1.devonhealth.com)
+Received: from mail-pb0-f41.google.com ([209.85.160.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <igeiser@devonit.com>) id 1U0u7k-00080r-63
+	(envelope-from <martin.jansa@gmail.com>) id 1U0uGp-0000OF-85
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jan 2013 14:24:25 +0100
-Received: from emfserver.devonintlgroup.com (10.0.7.48) by mx1.devonhealth.com
-	(10.0.20.154) with Microsoft SMTP Server id 8.3.213.0;
-	Thu, 31 Jan 2013 08:08:14 -0500
-Received: from [10.0.2.240] by emfserver.devonintlgroup.com over TLS secured
-	channel with ESMTP (Devon Health Services, Inc Email Firewall SMTP Relay
-	(Email Firewall v6.5)); Thu, 31 Jan 2013 08:08:07 -0500
-X-Server-Uuid: 6CB55748-6642-4D3C-9211-397BC4E7A815
-Received: from SOUTHSIDE.devonintlgroup.com ([10.0.2.2]) by
-	kingston.devonintlgroup.com ([10.0.2.240]) with mapi; Thu, 31 Jan 2013
-	08:08:08 -0500
-From: Ian Geiser <igeiser@devonit.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Jan 2013 08:08:05 -0500
-Thread-Topic: [oe] MACHINE_KERNEL_PR vs recipe PR
-Thread-Index: Ac3/qT5fHfIRlPvETpW895daUTpcpgACoKZA
-Message-ID: <B57A220D1EE1644685BA9AD5C790D20526BE045E73@SOUTHSIDE.devonintlgroup.com>
-References: <B57A220D1EE1644685BA9AD5C790D20526BE045E71@SOUTHSIDE.devonintlgroup.com>
-	<20130131114949.GB2102@jama.dyndns-home.com>
-In-Reply-To: <20130131114949.GB2102@jama.dyndns-home.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-WSS-ID: 7D14B33D4CW1011502-01-01
-Subject: Re: MACHINE_KERNEL_PR vs recipe PR
+	Thu, 31 Jan 2013 14:33:41 +0100
+Received: by mail-pb0-f41.google.com with SMTP id ro12so1611876pbb.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Jan 2013 05:17:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=S6Iz9km2NiaLdA2Tb2CgVAP+B+HKn8CnIcYm3+8XNaI=;
+	b=odPnhIuyfrYeoqRzFa1nDSrutEAXUwJ5J30qz5YWL7RC2D8DDdsiwRWtf39L1YB2jH
+	w9kv6yoz31qnY9fdT/rbB1KLI+t7eqz+3jPq31O2539hpzAvYvDu1AQB/dILydWhcOw1
+	DysbxL6HFtlTqR6PqoHYrWAyEpLAiqiKw85mMctRJvwD/THOA61qTbiK/MDOJP2GDQv+
+	mltFrfH+TXWdCkBVnvnmn+xbgGyoHFncHZXZl6c2hAwjw0Df+hiSXcU2H6XbNmwe/coX
+	mcoeaUf16/xNS+dRFktRw0AoG5WdVOyWPmTSMiiEZ9aSW9WuA9K6JcvMeFje2ewqguUe
+	MZOA==
+X-Received: by 10.68.213.233 with SMTP id nv9mr21983160pbc.155.1359638275904; 
+	Thu, 31 Jan 2013 05:17:55 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id mz10sm5000043pbc.37.2013.01.31.05.17.53
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 31 Jan 2013 05:17:54 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Jan 2013 14:17:48 +0100
+Message-Id: <1359638269-28437-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH][meta-oe][meta-gnome 1/2] mplayer2: add faad2 to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2013 13:24:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 31 Jan 2013 13:33:41 -0000
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Martin Jansa
-> Sent: Thursday, January 31, 2013 6:50 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] MACHINE_KERNEL_PR vs recipe PR
->=20
-> On Thu, Jan 31, 2013 at 06:20:25AM -0500, Ian Geiser wrote:
-> > I am curious about the machine_kerne_pr class.  What is the
-[...snip...]
->=20
-> OEBasicHash was only rebuilding external modules, but that does not
-> upgrade them on target device.
->=20
-> Now with PR service it's not so important, but still useful because
-> it's more reliable.
-Okay, that makes sense.  For consistency's sake is there a best practices h=
-ere?  Or is it left up to the preference of the kernel recipe maintainer?  =
-Thanks!=20
+* it's autodetected from sysroot after faad2 is built
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+index 685a0bb..e980f55 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+@@ -3,7 +3,7 @@ SECTION = "multimedia"
+ HOMEPAGE = "http://www.mplayerhq.hu/"
+ DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
+            libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
+-           libxv virtual/libx11 libass speex \
++           libxv virtual/libx11 libass speex faad22 \
+ 	   ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lame', d)}"
+ 
+ RDEPENDS_${PN} = "mplayer-common"
+-- 
+1.8.1.2
 
 
 
