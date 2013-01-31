@@ -1,31 +1,32 @@
-Received: from mail-oa0-f46.google.com ([209.85.219.46])
+Received: from [8.20.30.154] (helo=mx1.devonhealth.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>) id 1U0hyT-0007Wq-Nk
+	(envelope-from <igeiser@devonit.com>) id 1U0sSO-00079n-4H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Jan 2013 01:25:53 +0100
-Received: by mail-oa0-f46.google.com with SMTP id k1so2368717oag.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jan 2013 16:10:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to:cc
-	:content-type; bh=lbuNfgzWKpSYnSHeGi9xminicC1rb/ZUcbP9V35wwi0=;
-	b=FqcuDsirwCryL75VPlIWbAPS0qc4RkKcu6R2hHUEgXoRdskKr9vkZ4wEB8E0W20W0l
-	j7aWLFzfZdqOI8gcApcX8+bzokrSTeZS1Aaxi74ID/q6v6S2yYYGo0UF0F0z7GKewVww
-	KBCXR0q2AZOdzr5BZaPbySpvOt4nE6XXif6BP9h+movf+1n6wcggpaoZYiifXGDZX5gt
-	R2aAS9igOcx4v535dFOmz2aC5sF7ol3gOOK5fBA4T6v4s+JFQNzabxfaH2QMaXdVrT5R
-	PMjgQsHjP//tJsDbEDjIvcA0vaAu0YFPE2G2DP+77wy+11czts6wOz8oru7809e2bTZv
-	kexQ==
+	Thu, 31 Jan 2013 12:37:29 +0100
+Received: from emfserver.devonintlgroup.com (10.0.7.48) by mx1.devonhealth.com
+	(10.0.20.154) with Microsoft SMTP Server id 8.3.213.0;
+	Thu, 31 Jan 2013 06:20:38 -0500
+Received: from [10.0.2.7] by emfserver.devonintlgroup.com over TLS secured
+	channel with ESMTP (Devon Health Services, Inc Email Firewall SMTP Relay
+	(Email Firewall v6.5)); Thu, 31 Jan 2013 06:20:27 -0500
+X-Server-Uuid: 6CB55748-6642-4D3C-9211-397BC4E7A815
+Received: from SOUTHSIDE.devonintlgroup.com ([10.0.2.2]) by
+	boddingtons.devonintlgroup.com ([10.0.2.7]) with mapi; Thu, 31 Jan 2013
+	06:20:27 -0500
+From: Ian Geiser <igeiser@devonit.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 31 Jan 2013 06:20:25 -0500
+Thread-Topic: MACHINE_KERNEL_PR vs recipe PR
+Thread-Index: Ac3/pPe8cbBeAo3DTJCvGafNscUXLA==
+Message-ID: <B57A220D1EE1644685BA9AD5C790D20526BE045E71@SOUTHSIDE.devonintlgroup.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-X-Received: by 10.60.171.103 with SMTP id at7mr2254128oec.58.1359591011297;
-	Wed, 30 Jan 2013 16:10:11 -0800 (PST)
-Received: by 10.76.92.42 with HTTP; Wed, 30 Jan 2013 16:10:11 -0800 (PST)
-Date: Wed, 30 Jan 2013 16:10:11 -0800
-Message-ID: <CAHQecY6djOmswVTBn-M70uTU0UT6Z_aNW=9YuUAO84X0VOHYkw@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Michael Halstead <michael@yoctoproject.org>
-Subject: Server Migration window (0100-0400UTC 31Jan2012)
+X-WSS-ID: 7D148CF14CW1011405-01-01
+Subject: MACHINE_KERNEL_PR vs recipe PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2013 00:25:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 31 Jan 2013 11:37:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-We have an opportunity to migrate off of the failing server we are
-currently on for:
+I am curious about the machine_kerne_pr class.  What is the advantage/diffe=
+rence between using MACHINE_KERNEL_PR to change the kernel recipe revision =
+vs using PR in the recipe?  Shouldn't anything that DEPENDS on virtual/kern=
+el get rebuilt if PR changes in the kernel recipe?  From what I can tell al=
+l it does anyway is set the PR value of whatever inherits it to MACHINE_KER=
+NEL_PR. Or is there a use for this beyond just making sure a package gets r=
+ebuilt?
 
-Git
-Wiki
-Patches
-etc.
+Thanks!
 
-expected off-time is 1hr.
 
-Sorry for the short notice,
-
-Tom
 
