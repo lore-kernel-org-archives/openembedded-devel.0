@@ -1,47 +1,47 @@
-Received: from ch1ehsobe005.messaging.microsoft.com ([216.32.181.185]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from tx2ehsobe005.messaging.microsoft.com ([65.55.88.15]
+	helo=tx2outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1U1EPZ-00084e-Hq
+	(envelope-from <B28495@freescale.com>) id 1U1EPf-00084i-G7
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 01 Feb 2013 12:04:08 +0100
-Received: from mail33-ch1-R.bigfish.com (10.43.68.233) by
-	CH1EHSOBE012.bigfish.com (10.43.70.62) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 1 Feb 2013 10:03:03 +0000
-Received: from mail33-ch1 (localhost [127.0.0.1])	by mail33-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 9B8F0C021E	for
+Received: from mail142-tx2-R.bigfish.com (10.9.14.254) by
+	TX2EHSOBE013.bigfish.com (10.9.40.33) with Microsoft SMTP Server id
+	14.1.225.23; Fri, 1 Feb 2013 10:03:06 +0000
+Received: from mail142-tx2 (localhost [127.0.0.1])	by
+	mail142-tx2-R.bigfish.com (Postfix) with ESMTP id F2BC3240074	for
 	<openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 10:03:03 +0000 (UTC)
+	Fri,  1 Feb 2013 10:03:06 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
 X-SpamScore: 0
 X-BigFish: VS0(zzzz1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h1155h)
-Received: from mail33-ch1 (localhost.localdomain [127.0.0.1]) by mail33-ch1
-	(MessageSwitch) id 1359712981748455_4929;
-	Fri,  1 Feb 2013 10:03:01 +0000 (UTC)
-Received: from CH1EHSMHS028.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.242])	by mail33-ch1.bigfish.com (Postfix) with ESMTP id
-	AE4121C0049 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 10:03:01 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS028.bigfish.com
-	(10.43.70.28) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 1 Feb 2013 10:03:01 +0000
+Received: from mail142-tx2 (localhost.localdomain [127.0.0.1]) by mail142-tx2
+	(MessageSwitch) id 1359712984784060_20738;
+	Fri,  1 Feb 2013 10:03:04 +0000 (UTC)
+Received: from TX2EHSMHS027.bigfish.com (unknown [10.9.14.245])	by
+	mail142-tx2.bigfish.com (Postfix) with ESMTP id B15FE44004F	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Feb 2013 10:03:04 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS027.bigfish.com
+	(10.9.99.127) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Fri, 1 Feb 2013 10:03:04 +0000
 Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Fri, 1 Feb 2013 10:03:00 +0000
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.2.318.3; Fri, 1 Feb 2013 10:02:55 +0000
 Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
 	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id r11A2o9b030747;	Fri, 1 Feb 2013 03:02:58 -0700
+	id r11A2o9Z030747;	Fri, 1 Feb 2013 03:02:53 -0700
 From: <b28495@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Feb 2013 18:02:47 +0800
-Message-ID: <1359712968-22554-4-git-send-email-b28495@freescale.com>
+Date: Fri, 1 Feb 2013 18:02:45 +0800
+Message-ID: <1359712968-22554-2-git-send-email-b28495@freescale.com>
 X-Mailer: git-send-email 1.7.5.4
 In-Reply-To: <1359712968-22554-1-git-send-email-b28495@freescale.com>
 References: <1359712968-22554-1-git-send-email-b28495@freescale.com>
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 Cc: b29882@freescale.com
-Subject: [meta-java][for denzil] 3/4] Revert "llvm: use spaces for python functions"
+Subject: [meta-java][for denzil] 1/4] openjdk: not use update-alternatives class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,117 +60,100 @@ Content-Type: text/plain
 
 From: Ting Liu <b28495@freescale.com>
 
-This reverts commit 8e11ccd8a46abcf46fe3854d40ead208b5605b53.
-
-Conflicts:
-
-	recipes-core/llvm/llvm.inc
+Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- recipes-core/llvm/llvm.inc |   65 ++++++++++++++++++++++---------------------
- 1 files changed, 33 insertions(+), 32 deletions(-)
+ recipes-core/openjdk/openjdk-6-common.inc |   19 +++++++++++++++++--
+ recipes-core/openjdk/openjdk-7-common.inc |   19 +++++++++++++++++--
+ recipes-core/openjdk/openjdk-postinst.inc |   11 -----------
+ 3 files changed, 34 insertions(+), 15 deletions(-)
 
-diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-index 65d36c5..b71018e 100644
---- a/recipes-core/llvm/llvm.inc
-+++ b/recipes-core/llvm/llvm.inc
-@@ -86,8 +86,9 @@ PACKAGES_virtclass-native = ""
- PACKAGES_DYNAMIC_virtclass-native = ""
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index 99f0aa9..5990de7 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -10,7 +10,7 @@ ICEDTEA = "icedtea6-${ICEDTEA_VERSION}"
+ S = "${WORKDIR}/${ICEDTEA}"
+ B = "${S}/build"
  
- python populate_packages_prepend () {
--    libllvm_libdir = bb.data.expand('${libdir}/llvm${LLVM_RELEASE}', d)
--    do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm-%s', 'Split package for %s', allow_dirs=True)
-+        libllvm_libdir = bb.data.expand('${libdir}/llvm${LLVM_RELEASE}', d)
+-INC_PR = "r21"
++INC_PR = "r22"
+ 
+ SRC_URI = "\
+   ${ICEDTEA_URI} \
+@@ -461,4 +461,19 @@ FILES_${JDKPN}-doc = "${JDK_HOME}/man"
+ 
+ require openjdk-postinst.inc
+ 
+-ALTERNATIVE_PRIORITY = "20"
++pkg_postinst_${JDKPN}-jre () {
++    update-alternatives --install ${bindir}/java java ${JDK_HOME}/jre/bin/java 15
++}
 +
-+        do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm-%s', 'Split package for %s', allow_dirs=True)
++pkg_prerm_${JDKPN}-jre () {
++    update-alternatives --remove java ${JDK_HOME}/jre/bin/java
++}
++
++pkg_postinst_${JDKPN}-jdk () {
++    update-alternatives --install ${bindir}/javac javac ${JDK_HOME}/bin/javac 15
++}
++
++pkg_prerm_${JDKPN}-jdk () {
++    update-alternatives --remove javac ${JDK_HOME}/bin/javac
++}
++
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index 3246814..1dbfc0e 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
+@@ -10,7 +10,7 @@ ICEDTEA = "NEEDS TO BE SET"
+ S = "${WORKDIR}/${ICEDTEA}"
+ B = "${S}/build"
+ 
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ SRC_URI = " \
+   ${ICEDTEA_URI} \
+@@ -403,4 +403,19 @@ FILES_${JDKPN}-doc = "${JDK_HOME}/man"
+ 
+ require openjdk-postinst.inc
+ 
+-ALTERNATIVE_PRIORITY = "50"
++pkg_postinst_${JDKPN}-jre () {
++    update-alternatives --install ${bindir}/java java ${JDK_HOME}/jre/bin/java 15
++}
++
++pkg_prerm_${JDKPN}-jre () {
++    update-alternatives --remove java ${JDK_HOME}/jre/bin/java
++}
++
++pkg_postinst_${JDKPN}-jdk () {
++    update-alternatives --install ${bindir}/javac javac ${JDK_HOME}/bin/javac 15
++}
++
++pkg_prerm_${JDKPN}-jdk () {
++    update-alternatives --remove javac ${JDK_HOME}/bin/javac
++}
++
+diff --git a/recipes-core/openjdk/openjdk-postinst.inc b/recipes-core/openjdk/openjdk-postinst.inc
+index e63a451..3502b7a 100644
+--- a/recipes-core/openjdk/openjdk-postinst.inc
++++ b/recipes-core/openjdk/openjdk-postinst.inc
+@@ -72,14 +72,3 @@ pkg_prerm_${JDKPN}-vm-zero () {
+         fi
  }
  
- FILES_${PN} = ""
-@@ -104,25 +105,25 @@ FILES_${PN}-dev = " \
-                  "
- 
- do_install() {
--    # Install into a private directory to be able to reorganize the files.
-+	# Install into a private directory to be able to reorganize the files.
- 
--    cd ${OECMAKE_BUILDPATH}
-+        cd ${OECMAKE_BUILDPATH}
- 
--    oe_runmake DESTDIR=${WORKDIR}/llvm-install install
-+        oe_runmake DESTDIR=${WORKDIR}/llvm-install install
- 
--    # Create our custom target directories
--    install -d ${D}${bindir}/llvm${LLVM_RELEASE}
--    install -d ${D}${includedir}/llvm${LLVM_RELEASE}
--    install -d ${D}${libdir}/llvm${LLVM_RELEASE}
-+	# Create our custom target directories
-+	install -d ${D}${bindir}/llvm${LLVM_RELEASE}
-+	install -d ${D}${includedir}/llvm${LLVM_RELEASE}
-+	install -d ${D}${libdir}/llvm${LLVM_RELEASE}
- 
--    #	Move headers into their own directory
--    cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm \
--    ${D}${includedir}/llvm${LLVM_RELEASE}/
--    cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm-c \
--    ${D}${includedir}/llvm${LLVM_RELEASE}/
-+	#	Move headers into their own directory
-+	cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm \
-+	${D}${includedir}/llvm${LLVM_RELEASE}/
-+	cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm-c \
-+	${D}${includedir}/llvm${LLVM_RELEASE}/
- 
--    find ${WORKDIR}/llvm-install/${prefix}/lib -name "*" -maxdepth 1 -exec \
--    install {} ${D}${libdir}/llvm${LLVM_RELEASE} \;
-+	find ${WORKDIR}/llvm-install/${prefix}/lib -name "*" -maxdepth 1 -exec \
-+	install {} ${D}${libdir}/llvm${LLVM_RELEASE} \;
- 
- 	#	I dont know another way out. Binaries are installed into a special subdir
- 	find ${WORKDIR}/llvm-install/${prefix}/bin -name "*" -maxdepth 1 -exec \
-@@ -148,7 +149,7 @@ do_install() {
-         install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
-         install -m 0755 bin/llvm-config${LLVM_RELEASE} ${SYSROOT_DESTDIR}${bindir_crossscripts}
- }
+-inherit update-alternatives
 -
-+ 
- do_install_virtclass-native() {
- 	# Install into a private directory to be able to reorganize the files.
- 
-@@ -194,21 +195,21 @@ do_install_virtclass-native() {
- # Retrieve the target in a way that is compatible to the arch
- # value in llvm (>= 2.5)
- def get_llvm_arch(d):
--    import bb;
+-ALTERNATIVE_${JDKPN}-jre = "java"
+-ALTERNATIVE_TARGET_${JDKPN}-jre = "${JDK_HOME}/jre/bin/java"
 -
--    arch = bb.data.getVar('TARGET_ARCH', d, 1)
--    if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
--        arch = "X86"
--    elif arch == "arm":
--        arch = "ARM"
--    elif arch == "mipsel" or arch == "mips":
--        arch = "mips"
--    elif arch == "powerpc" or arch == "powerpc64":
--        arch = "PowerPC"
--    else:
--        bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+-ALTERNATIVE_${JDKPN}-jdk = "javac"
+-ALTERNATIVE_TARGET_${JDKPN}-jdk = "${JDK_HOME}/bin/javac"
 -
--    return arch
-+  import bb;
-+
-+  arch = bb.data.getVar('TARGET_ARCH', d, 1)
-+  if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
-+    arch = "X86"
-+  elif arch == "arm":
-+    arch = "ARM"
-+  elif arch == "mipsel" or arch == "mips":
-+    arch = "mips"
-+  elif arch == "powerpc" or arch == "powerpc64":
-+    arch = "PowerPC"
-+  else:
-+    bb.error("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
-+
-+  return arch
- 
- BBCLASSEXTEND = "native"
- 
+-ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
+-ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
+-
 -- 
 1.7.5.4
 
