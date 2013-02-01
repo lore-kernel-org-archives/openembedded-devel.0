@@ -1,26 +1,27 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Yanjun.Zhu@windriver.com>) id 1U19iz-0004gk-1N
+	(envelope-from <eric@eukrea.com>) id 1U1CsQ-0008PQ-LI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2013 07:03:45 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r115m0D7006757
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 01 Feb 2013 10:25:48 +0100
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id B418177CBC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jan 2013 21:48:00 -0800 (PST)
-Received: from pek-lpgbuild4.wrs.com (128.224.153.32) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.318.4; Thu, 31 Jan 2013 21:47:59 -0800
-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Feb 2013 13:47:58 +0800
-Message-ID: <1359697678-31822-1-git-send-email-yanjun.zhu@windriver.com>
-X-Mailer: git-send-email 1.7.11
-In-Reply-To: <3825>
-References: <3825>
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] When do_compile, netcat-openbsd needs the dependence of glib-2.0.
+	Fri,  1 Feb 2013 10:09:59 +0100 (CET)
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 03DEE4B0024;
+	Fri,  1 Feb 2013 10:09:52 +0100 (CET)
+Date: Fri, 1 Feb 2013 10:09:50 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20130201100950.4500a26d@e6520eb>
+In-Reply-To: <CAP9ODKpAe50RUTRqXh9-e+Ag6AUgwCMUT+Ayx=tw18h04jD=+Q@mail.gmail.com>
+References: <CAP9ODKpAe50RUTRqXh9-e+Ag6AUgwCMUT+Ayx=tw18h04jD=+Q@mail.gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [for-danny] Backport to Danny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,33 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2013 06:03:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Feb 2013 09:25:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: "yanjun.zhu" <yanjun.zhu@windriver.com>
+Hi Otavio,
 
-Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
----
- meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Le Mon, 28 Jan 2013 09:15:05 -0200,
+Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-index f83caee..25cbfa6 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-@@ -2,7 +2,9 @@ require netcat.inc
- DESCRIPTION = "OpenBSD Netcat"
- HOMEPAGE = "http://ftp.debian.org"
- LICENSE = "BSD-3-Clause"
--PR = "r0"
-+PR = "r1"
-+
-+DEPENDS += "glib-2.0"
- 
- SRC_URI = "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89.orig.tar.gz;name=netcat \
-            ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89-4.diff.gz;name=netcat-patch"
--- 
-1.7.11
+> Hello,
+>=20
+> Please apply the following changes into danny branch:
+>=20
+> - qconnman-e: fix unpackaged files QA warning
+> (dbd823cfbfc9f332aa40c4a55affba71807fcb41)
+>=20
+> - qconnman: update git repo URL (93581aa61c450e24472f1b1d5bd01fd328a30455)
+>=20
+pushed to danny-next, tests are finishing today and it will be pushed
+to danny after
 
+Eric
 
 
