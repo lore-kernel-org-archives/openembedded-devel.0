@@ -1,39 +1,32 @@
-Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
+Received: from mail-pa0-f50.google.com ([209.85.220.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U1FZe-0006IZ-Td
+	(envelope-from <martin.jansa@gmail.com>) id 1U1Hf5-0005eL-RY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2013 13:18:50 +0100
-Received: from mail-we0-f200.google.com ([74.125.82.200])
-	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 01 Feb 2013 04:02:42 -0800
-Received: by mail-we0-f200.google.com with SMTP id d7so4440529wer.11
+	Fri, 01 Feb 2013 15:32:22 +0100
+Received: by mail-pa0-f50.google.com with SMTP id hz10so2294529pad.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Feb 2013 04:02:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=hs8fLk1Hjo6fBogf7qTkmCLqjxn2ous2zssVgGpYOnE=;
-	b=avRESvIu7qP57ql9kaN4W4KHu8PO8bQ6D2qLtADr4Y9pm4JFc8edeB7gitH23AlKnr
-	7KIZ6IoRJdh83B7uOXRT6AcOHWkk4zGB42CrnPah6mikyi4oo197JUYoZFMbphSanffe
-	wR8ItmcR1tZpXrShpr972V4Cvf6pUsSYP00XV1Vw2TrXOM7e5AeQn1r2HkWm53Ayqwzz
-	Iu94VxD5J07f0c6nZjxwC6MWkr2t00bU8n0Uo/gMFLDK0QsdY8eUYzslrfO9PF1HD75k
-	PqrmsmvnlBdRLMewSO8iY030B10MKFntuL40W9bErxUdrSZoqq8F+XjNDMBNKxVbHOTR
-	HLXQ==
-X-Received: by 10.180.93.100 with SMTP id ct4mr2019075wib.32.1359720160038;
-	Fri, 01 Feb 2013 04:02:40 -0800 (PST)
-X-Received: by 10.180.93.100 with SMTP id ct4mr2019053wib.32.1359720159841;
-	Fri, 01 Feb 2013 04:02:39 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id bw9sm2811709wib.5.2013.02.01.04.02.38
+	Fri, 01 Feb 2013 06:16:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=LZX4WUkB/0aD17s9UgmJRcjD0d9Fl4LjqsKmX1EFYBg=;
+	b=SMin085spwubRPhn47nSi2td66muohYW9YBHIJA00nby0jRkXUTOI+EUZl0iI3ADPu
+	nk0jsEcmeHSfu7ElQ7nTqlUXb3CbstplcDGSUCPt3868wynQFs7ueRFqSKFE9WaEmAYo
+	KvHgyeqqzSrvU+ZlXaAsQWyXcr8l4A4yY7L6RbyxJVEqEVKHhatqIr3MgfU4dUTybY4O
+	u5bQ1jRCJrwtmwWZ9PRIzq9j6JklJzlH6TpbR8h9UBMqSif1kQmDnJaoIEcnbh8YPl3K
+	MvDiu68NpOtRkNXbLym1O4Iddu6ytlSiXwBADTpXKj4+fqL9d/5n7b1l91fcdyA3PcmU
+	KNfw==
+X-Received: by 10.66.78.1 with SMTP id x1mr30423930paw.2.1359728190588;
+	Fri, 01 Feb 2013 06:16:30 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id bi2sm9276737pab.18.2013.02.01.06.16.27
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 01 Feb 2013 04:02:38 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Fri, 01 Feb 2013 06:16:29 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Feb 2013 12:00:34 +0000
-Message-Id: <1359720034-16649-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-X-Gm-Message-State: ALoCoQmEz2PHg0zzgWCBKsQ9mlxgZQSRmgvru7OdWlUaWHT3TfORdtCOg9VIVjOGcxoGbVjGRqPBLRqBQ2TvOF80q2vk6J7xd/CdNyqK1tqEjHTfNQcodIz5Y52nmYaRSWmWC2Y5OJYQmNtd9Ohw4ByMuKCvJK8GAjN5mSAoGUR+LBhBZ1dOo+s3Xp5pH5k6BKyhDEr+kvUv
-Subject: [PATCH] midori: remove libsexy dependency
+Date: Fri,  1 Feb 2013 15:16:27 +0100
+Message-Id: <1359728187-19227-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH][meta-oe] xchat: add libsexy to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2013 12:18:52 -0000
+X-List-Received-Date: Fri, 01 Feb 2013 14:32:23 -0000
 
-The use of libsexy was removed in Midori 0.0.19 back in 2008.
-
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/xchat/xchat_2.8.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-index 5b1a959..75249a2 100644
---- a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-+++ b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
- HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl python-native python-docutils-native librsvg-native libnotify"
-+DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native librsvg-native libnotify"
-+
-+PR = "r1"
+diff --git a/meta-oe/recipes-support/xchat/xchat_2.8.8.bb b/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
+index 3346e18..70dc150 100644
+--- a/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
++++ b/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Full-featured IRC chat client with scripting support"
+ LICENSE = "GPLv2+"
+ HOMEPAGE = "http://www.xchat.org"
+ SECTION = "x11/network"
+-DEPENDS = "libgcrypt zlib gtk+"
++DEPENDS = "libgcrypt zlib gtk+ libsexy"
+ DEPENDS += "gdk-pixbuf-native"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
  
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
 -- 
-1.7.10.4
+1.8.1.2
 
 
 
