@@ -1,47 +1,39 @@
-Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
-	helo=va3outboundpool.messaging.microsoft.com)
+Received: from mga12.intel.com ([143.182.124.36] helo=azsmga102.ch.intel.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1U1EeA-0000ba-Lc
+	(envelope-from <ross.burton@intel.com>) id 1U1FZe-0006IZ-Td
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2013 12:19:16 +0100
-Received: from mail132-va3-R.bigfish.com (10.7.14.243) by
-	VA3EHSOBE010.bigfish.com (10.7.40.12) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 1 Feb 2013 10:03:00 +0000
-Received: from mail132-va3 (localhost [127.0.0.1])	by
-	mail132-va3-R.bigfish.com (Postfix) with ESMTP id 906A42C0208	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 10:03:00 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1ee6h1de0h1202h1e76h1d1ah1d2ahzz177df4h17326ah8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h1155h)
-Received: from mail132-va3 (localhost.localdomain [127.0.0.1]) by mail132-va3
-	(MessageSwitch) id 1359712979430510_1975;
-	Fri,  1 Feb 2013 10:02:59 +0000 (UTC)
-Received: from VA3EHSMHS037.bigfish.com (unknown [10.7.14.252])	by
-	mail132-va3.bigfish.com (Postfix) with ESMTP id 657771A0123	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 10:02:59 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS037.bigfish.com
-	(10.7.99.47) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 1 Feb 2013 10:02:59 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.318.3; Fri, 1 Feb 2013 10:02:58 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id r11A2o9a030747;	Fri, 1 Feb 2013 03:02:55 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Feb 2013 18:02:46 +0800
-Message-ID: <1359712968-22554-3-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
-In-Reply-To: <1359712968-22554-1-git-send-email-b28495@freescale.com>
-References: <1359712968-22554-1-git-send-email-b28495@freescale.com>
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: b29882@freescale.com
-Subject: [meta-java][for denzil] 2/4] llvm: not use pythonnative class
+	Fri, 01 Feb 2013 13:18:50 +0100
+Received: from mail-we0-f200.google.com ([74.125.82.200])
+	by mga14.intel.com with ESMTP/TLS/RC4-SHA; 01 Feb 2013 04:02:42 -0800
+Received: by mail-we0-f200.google.com with SMTP id d7so4440529wer.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Feb 2013 04:02:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:x-received:from:to:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=hs8fLk1Hjo6fBogf7qTkmCLqjxn2ous2zssVgGpYOnE=;
+	b=avRESvIu7qP57ql9kaN4W4KHu8PO8bQ6D2qLtADr4Y9pm4JFc8edeB7gitH23AlKnr
+	7KIZ6IoRJdh83B7uOXRT6AcOHWkk4zGB42CrnPah6mikyi4oo197JUYoZFMbphSanffe
+	wR8ItmcR1tZpXrShpr972V4Cvf6pUsSYP00XV1Vw2TrXOM7e5AeQn1r2HkWm53Ayqwzz
+	Iu94VxD5J07f0c6nZjxwC6MWkr2t00bU8n0Uo/gMFLDK0QsdY8eUYzslrfO9PF1HD75k
+	PqrmsmvnlBdRLMewSO8iY030B10MKFntuL40W9bErxUdrSZoqq8F+XjNDMBNKxVbHOTR
+	HLXQ==
+X-Received: by 10.180.93.100 with SMTP id ct4mr2019075wib.32.1359720160038;
+	Fri, 01 Feb 2013 04:02:40 -0800 (PST)
+X-Received: by 10.180.93.100 with SMTP id ct4mr2019053wib.32.1359720159841;
+	Fri, 01 Feb 2013 04:02:39 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id bw9sm2811709wib.5.2013.02.01.04.02.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 01 Feb 2013 04:02:38 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Feb 2013 12:00:34 +0000
+Message-Id: <1359720034-16649-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+X-Gm-Message-State: ALoCoQmEz2PHg0zzgWCBKsQ9mlxgZQSRmgvru7OdWlUaWHT3TfORdtCOg9VIVjOGcxoGbVjGRqPBLRqBQ2TvOF80q2vk6J7xd/CdNyqK1tqEjHTfNQcodIz5Y52nmYaRSWmWC2Y5OJYQmNtd9Ohw4ByMuKCvJK8GAjN5mSAoGUR+LBhBZ1dOo+s3Xp5pH5k6BKyhDEr+kvUv
+Subject: [PATCH] midori: remove libsexy dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,39 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2013 11:19:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Feb 2013 12:18:52 -0000
 
-From: Ting Liu <b28495@freescale.com>
+The use of libsexy was removed in Midori 0.0.19 back in 2008.
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- recipes-core/llvm/llvm.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-index de52443..65d36c5 100644
---- a/recipes-core/llvm/llvm.inc
-+++ b/recipes-core/llvm/llvm.inc
-@@ -26,13 +26,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
- DEPENDS = "llvm${LLVM_RELEASE}-native llvm-common"
- DEPENDS_virtclass-native = "llvm-common-native cmake-native"
+diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
+index 5b1a959..75249a2 100644
+--- a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
++++ b/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
+@@ -2,7 +2,9 @@ DESCRIPTION = "Midori is a lightweight web browser."
+ HOMEPAGE = "http://www.twotoasts.de/index.php?/pages/midori_summary.html"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+-DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl python-native python-docutils-native librsvg-native libnotify"
++DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native librsvg-native libnotify"
++
++PR = "r1"
  
--INC_PR = "r2"
-+INC_PR = "r3"
- 
- SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.tgz"
- 
- S = "${WORKDIR}/llvm-${PV}"
- 
--inherit cmake perlnative pythonnative
-+inherit cmake perlnative
- 
- # Defines the LLVM supported arches. By now we always build either for ${BUILD}
- # (native) or ${TARGET}. In the future it may make sense to enable all backends
+ SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
+           "
 -- 
-1.7.5.4
-
+1.7.10.4
 
 
 
