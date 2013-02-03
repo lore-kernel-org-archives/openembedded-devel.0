@@ -1,53 +1,32 @@
-Received: from va3ehsobe005.messaging.microsoft.com ([216.32.180.31]
-	helo=va3outboundpool.messaging.microsoft.com)
+Received: from mail-we0-f172.google.com ([74.125.82.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B29882@freescale.com>) id 1U1N3g-0000oI-EC
+	(envelope-from <martin.jansa@gmail.com>) id 1U22bJ-0008V0-RN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Feb 2013 21:18:06 +0100
-Received: from mail113-va3-R.bigfish.com (10.7.14.244) by
-	VA3EHSOBE008.bigfish.com (10.7.40.28) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 1 Feb 2013 19:16:52 +0000
-Received: from mail113-va3 (localhost [127.0.0.1])	by
-	mail113-va3-R.bigfish.com (Postfix) with ESMTP id BBEBE24024A	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 19:16:52 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -2
-X-BigFish: VS-2(zz98dI9371I1432Izz1ee6h1de0h1202h1e76h1d1ah1d2ahzz177df4h17326ah8275bh8275dhz2dh2a8h668h839h8e2h8e3h947hd25hf0ah10d2h1288h12a5h12a9h12bdh137ah13b6h1441h1537h153bh15d0h162dh1631h1758h18e1h1946hbe9i1155h)
-Received: from mail113-va3 (localhost.localdomain [127.0.0.1]) by mail113-va3
-	(MessageSwitch) id 1359746211453154_1747;
-	Fri,  1 Feb 2013 19:16:51 +0000 (UTC)
-Received: from VA3EHSMHS003.bigfish.com (unknown [10.7.14.244])	by
-	mail113-va3.bigfish.com (Postfix) with ESMTP id 6B34140226	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Feb 2013 19:16:51 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS003.bigfish.com
-	(10.7.99.13) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 1 Feb 2013 19:16:49 +0000
-Received: from 039-SN1MPN1-002.039d.mgd.msft.net ([169.254.2.50]) by
-	039-SN1MMR1-005.039d.mgd.msft.net ([::1]) with mapi id 14.02.0318.003;
-	Fri, 1 Feb 2013 19:16:48 +0000
-From: McClintock Matthew-B29882 <B29882@freescale.com>
-To: Liu Ting-B28495 <B28495@freescale.com>
-Thread-Topic: [oe][meta-java][for denzil] 2/4] llvm: not use pythonnative class
-Thread-Index: AQHOAGNQz1ejQDaBU0G5B9660MlRGphlYHqA
-Date: Fri, 1 Feb 2013 19:16:46 +0000
-Message-ID: <70CC66F5C30A414DADDA6973E4CA391A868D6C@039-SN1MPN1-002.039d.mgd.msft.net>
-References: <1359712968-22554-1-git-send-email-b28495@freescale.com>
-	<1359712968-22554-3-git-send-email-b28495@freescale.com>
-In-Reply-To: <1359712968-22554-3-git-send-email-b28495@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [70.112.201.132]
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: McClintock Matthew-B29882 <B29882@freescale.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Luo Zhenhua-B19537 <B19537@freescale.com>
-Subject: Re: [meta-java][for denzil] 2/4] llvm: not use pythonnative class
+	Sun, 03 Feb 2013 17:39:37 +0100
+Received: by mail-we0-f172.google.com with SMTP id x10so4323260wey.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Feb 2013 08:23:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Go+Up6sag7L37TFwROzVy02wWP6DFffdR9S8ZT7wLDw=;
+	b=QefuOmbFmhD5h4g9KNbCeAF5L/xZFEnGgkpQ/ifB5w3j417MirxE07Migoi/R2ptH1
+	ZUaTZg3T7FgpG+2JD7N1n1ctJMJKI4qSSoRADGbFfzVDRAptEG9QuQ7dQaUY6iBMy+QG
+	NShf9v9vjcO04n1bsZTRjnCxWgRDgzwS0S6Ir46Jn4qE2/Z1KhDt4xZHoBfvjL3du5t/
+	bf1AJ+AV9UJzpRJR4R9Txgxx1oT7EFjZU62+L5I4NzG3yrq/2/xtsLfSGf0xVmR2q5jY
+	R+SjlEx2c+iJurhoeck9WFOrmbD/MKQV5wp3SQk8QAdFVwdOnYzpqp0kTFUdXjeBpFk4
+	xl6Q==
+X-Received: by 10.194.76.7 with SMTP id g7mr30869064wjw.50.1359908622378;
+	Sun, 03 Feb 2013 08:23:42 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id j9sm8626439wia.5.2013.02.03.08.23.41
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 03 Feb 2013 08:23:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  3 Feb 2013 17:23:49 +0100
+Message-Id: <1359908629-28218-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH][meta-oe] nodejs: export DESTDIR to fix build with dash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,50 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Feb 2013 20:18:23 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <47F1B5C65192204093B51043719865A1@mgd.freescale.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 03 Feb 2013 16:39:42 -0000
 
-On Fri, Feb 1, 2013 at 4:02 AM,  <b28495@freescale.com> wrote:
-> From: Ting Liu <b28495@freescale.com>
+* when building on machine with /bin/sh -> /bin/dash
+  DESTDIR is empty in install and it's trying to write to /usr/include and fails
 
-This patch needs more explanation.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_0.6.21.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
--M
-
-> Signed-off-by: Ting Liu <b28495@freescale.com>
-> ---
->  recipes-core/llvm/llvm.inc |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes-core/llvm/llvm.inc b/recipes-core/llvm/llvm.inc
-> index de52443..65d36c5 100644
-> --- a/recipes-core/llvm/llvm.inc
-> +++ b/recipes-core/llvm/llvm.inc
-> @@ -26,13 +26,13 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D0ac5f7=
-99a2d89477c75b0a378b221855"
->  DEPENDS =3D "llvm${LLVM_RELEASE}-native llvm-common"
->  DEPENDS_virtclass-native =3D "llvm-common-native cmake-native"
->
-> -INC_PR =3D "r2"
-> +INC_PR =3D "r3"
->
->  SRC_URI =3D "http://llvm.org/releases/${PV}/llvm-${PV}.tgz"
->
->  S =3D "${WORKDIR}/llvm-${PV}"
->
-> -inherit cmake perlnative pythonnative
-> +inherit cmake perlnative
->
->  # Defines the LLVM supported arches. By now we always build either for $=
-{BUILD}
->  # (native) or ${TARGET}. In the future it may make sense to enable all b=
-ackends
-> --
-> 1.7.5.4
->=
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.21.bb
+index 588a704..3d034f2 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.6.21.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.6.21.bb
+@@ -54,7 +54,8 @@ do_compile () {
+ }
+ 
+ do_install () {
+-  DESTDIR=${D} oe_runmake install
++  export DESTDIR=${D} 
++  oe_runmake install
+ }
+ 
+ RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
+-- 
+1.8.1.2
 
 
 
