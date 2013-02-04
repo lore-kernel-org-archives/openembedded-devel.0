@@ -1,41 +1,35 @@
-Received: from mail-ie0-f172.google.com ([209.85.223.172])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mario.goulart@gmail.com>) id 1U2Om3-000785-I7
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1U2Osl-0007Q1-Ps
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2013 17:20:05 +0100
-Received: by mail-ie0-f172.google.com with SMTP id c10so5967742ieb.31
+	Mon, 04 Feb 2013 17:27:06 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r14GBAOr020029
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2013 08:04:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:references:date:in-reply-to
-	:message-id:user-agent:mime-version:content-type;
-	bh=YKStVO1livnTyKBAeWZ7Xjke+8vm3qzV+Oh9pzKvTtE=;
-	b=oE0oTo60eUQm8RUdPcdwVo0qI75ZfjqODFGm2iNUsRdofIrLk+bDpwTFtcnho7MTC1
-	fj6pVNumjMd8peAs9k6aN9jce3YVz64XaaCMDedG4y6RV7z4fBq+CFrqCHo/sTq4q0dY
-	o2Brply/YMBZrKnRL/uoCfleoSu4Npt4gzg6QS+XoQFHYGoAHfonUJXSvDD925lvoeMD
-	UI53vhk8ijpMyelcbkIb8X/yPwkqyWE7763NVWrGIAeiFTd+9dXwP0M52kZcO6VLAjNu
-	uGXQWVNtwwqKvT77D6pX70PmUwWv0dps3iBFVhRa9zSJ0GfaCpSjJpzofrhc1wMypr3i
-	kc1w==
-X-Received: by 10.50.196.130 with SMTP id im2mr5983662igc.89.1359993854445;
-	Mon, 04 Feb 2013 08:04:14 -0800 (PST)
-Received: from cl-t066-141cl.privatedns.com.gmail.com (wkit.com.br.
-	[67.205.85.241])
-	by mx.google.com with ESMTPS id ww6sm15504881igb.2.2013.02.04.08.04.11
-	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
-	Mon, 04 Feb 2013 08:04:12 -0800 (PST)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1359982426-9836-1-git-send-email-mario@ossystems.com.br>
-	<20130204120212.GA3271@jama>
-Date: Mon, 04 Feb 2013 10:48:20 -0500
-In-Reply-To: <20130204120212.GA3271@jama> (Martin Jansa's message of "Mon, 4
-	Feb 2013 13:02:12 +0100")
-Message-ID: <85boc0ulkr.fsf@cl-t066-141cl.privatedns.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.2 (gnu/linux)
+	Mon, 4 Feb 2013 08:11:10 -0800 (PST)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Mon, 4 Feb 2013 08:11:09 -0800
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 0B83E7FE2	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Feb 2013 11:09:03 -0500 (EST)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 26D5D20475; Mon,
+	4 Feb 2013 11:11:09 -0500 (EST)
+Date: Mon, 4 Feb 2013 11:11:09 -0500
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130204161108.GO14746@windriver.com>
+References: <3825> <1359697678-31822-1-git-send-email-yanjun.zhu@windriver.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] xinput-calibrator: add --boot-mode comand line option to wrapper script
+In-Reply-To: <1359697678-31822-1-git-send-email-yanjun.zhu@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] When do_compile, netcat-openbsd needs the dependence of glib-2.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2013 16:20:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Feb 2013 16:27:10 -0000
+X-Groupsio-MsgNum: 42981
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uX2tiToO0oGq+LKk"
+Content-Disposition: inline
 
-Hi Martin,
+--uX2tiToO0oGq+LKk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 4 Feb 2013 13:02:12 +0100 Martin Jansa <martin.jansa@gmail.com> wrote:
+[[oe] [meta-networking][PATCH] When do_compile, netcat-openbsd needs the de=
+pendence of glib-2.0.] On 13.02.01 (Fri 13:47) yanjun.zhu wrote:
 
-> On Mon, Feb 04, 2013 at 10:53:46AM -0200, Mario Domenech Goulart wrote:
->> xinput_calibrator_once.sh has been renamed to
->> run-xinput-calibrator.sh, which now also handles the --boot-mode
->> command line option.
->> 
->> When in boot mode (i.e., when --boot-mode is provided on the command
->> line), the script exits if calibration data is found in the
->> calibration data file.  When not in boot mode (i.e., no command line
->> option), the script runs xinput-calibrator and creates/overwrites the
->> calibration data file.
->> 
->> This change allows other applications to use a common wrapper
->> (run-xinput-calibrator.sh) for xinput-calibrator.
->
-> Did you send this upstream?
->
-> Can you provide Upstream-Status?
+> From: "yanjun.zhu" <yanjun.zhu@windriver.com>
+>=20
+> Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+> ---
+>  meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.b=
+b b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+> index f83caee..25cbfa6 100644
+> --- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+> +++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
+> @@ -2,7 +2,9 @@ require netcat.inc
+>  DESCRIPTION =3D "OpenBSD Netcat"
+>  HOMEPAGE =3D "http://ftp.debian.org"
+>  LICENSE =3D "BSD-3-Clause"
+> -PR =3D "r0"
+> +PR =3D "r1"
+> +
+> +DEPENDS +=3D "glib-2.0"
+> =20
+>  SRC_URI =3D "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89.=
+orig.tar.gz;name=3Dnetcat \
+>             ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_1.89-4.=
+diff.gz;name=3Dnetcat-patch"
 
-Sorry, I messed up using git send-email (used a file as argument, which
-made it ignore --subject-prefix).
+Merged.  Thanks.
 
-Since Andreas is working on a better solution, this patch can be
-ignored.
+--=20
+-Joe MacDonald.
+:wq
 
-Sorry for the noise.
+--uX2tiToO0oGq+LKk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Best wishes.
-Mario
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
+iEYEARECAAYFAlEP3ZwACgkQPN8S4W6ZZneErACdGmWEC14Rmgxie+VrCtHDu4iH
+2nAAnj+9rCq0jRHHnwXq0egwOA5qBINi
+=09PQ
+-----END PGP SIGNATURE-----
 
+--uX2tiToO0oGq+LKk--
