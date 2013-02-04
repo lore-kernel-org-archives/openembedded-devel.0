@@ -1,37 +1,37 @@
-Received: from mail-pa0-f47.google.com ([209.85.220.47])
+Received: from mail-vb0-f46.google.com ([209.85.212.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U2OTK-0006Zg-6z
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U2OZ9-0006tY-1g
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2013 17:00:44 +0100
-Received: by mail-pa0-f47.google.com with SMTP id bj3so2223316pad.20
+	Mon, 04 Feb 2013 17:06:43 +0100
+Received: by mail-vb0-f46.google.com with SMTP id b13so3923090vby.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2013 07:44:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=EgPkg10L+g0QrYTLOweHSeZK5HJtS3Lp0NhUrc2bNyU=;
-	b=m3lgxVMgjm17CT0Vw+QSCfBfqnx3Zs+LpHPYQUAK1QEKBys6rVYGg6OlnFs6EO6bVw
-	WZTXm1wHMFM0Gj3FdutoT5hGPetyJC5Evq6kVWA0BS5a8hUtxFpSKj9yp5bHKYAIrPdf
-	yR06b7K6x10cVRmXwUgtSOviWzyfjwuX3ZqP0Qo6FLe1IEsQoII5ZIUn//jMQluOldup
-	vdOB4yWyu7nNmYHkuoMxR1iddlR5svTqXwF+9v8Mx1ildQzegVg5wawDqFPvwagu6aVz
-	/QxwOc/PSwl/dXbHqxAzq60wNCZvQ3J9GWh1h+5yog+yn3gaYy+hmIKHY5g9WAiOzBq4
-	/hXw==
-X-Received: by 10.66.72.225 with SMTP id g1mr53961877pav.79.1359992692741;
-	Mon, 04 Feb 2013 07:44:52 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id z10sm22271421pay.7.2013.02.04.07.44.45
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 04 Feb 2013 07:44:50 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 04 Feb 2013 07:50:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type:content-transfer-encoding;
+	bh=zbA8xbqJGOezVaIupCr3uYuJuze6GFI5H9ULzmFT1FM=;
+	b=fJXjJmP+yAvpVZplRDy8rkm97n+DrqgkazJeJDffg2g3YlB0qNd1Dil/Is21ZCYjKa
+	yoft7aAiuiOK9Z0146HEj3SRkmeYW96i6dTchjyRk7BKVoy5eyBbYk2phFONjNfRU9aO
+	GkfNBVajzqyHcCuAid30w1NAfgUorbDar2ZuNsgtPKeSfdFi9+z5DLUqpyPvHHp4KcmZ
+	gmlTekwCLMCRVf6JxfzpngoD46qR0fburv7kJ6zrq7E3Kz8JXAewMovEJBK9sHEG2L56
+	guUITu/ce9t+DaMU12VTKDFwxasWlgVAKNBgYI/IWInHBRrEEGkpkNCGirOOKu71R9AH
+	0Yag==
+MIME-Version: 1.0
+X-Received: by 10.52.88.237 with SMTP id bj13mr8114292vdb.75.1359993053886;
+	Mon, 04 Feb 2013 07:50:53 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Mon, 4 Feb 2013 07:50:53 -0800 (PST)
+In-Reply-To: <CAP9ODKqaPYLTpwWvo82hhQq3qjzR8Mf7q5OdGqn6gx8JU1CLVw@mail.gmail.com>
+References: <1359982426-9836-1-git-send-email-mario@ossystems.com.br>
+	<20130204120212.GA3271@jama>
+	<CALbNGRRYh06qkphJ-sJx=Qn46cpdh2=vcDNu097e5ACYxhZa5g@mail.gmail.com>
+	<CAP9ODKqaPYLTpwWvo82hhQq3qjzR8Mf7q5OdGqn6gx8JU1CLVw@mail.gmail.com>
+Date: Mon, 4 Feb 2013 16:50:53 +0100
+Message-ID: <CALbNGRTwAJbtFjC+UotFLq2Lfp+em_GACX8x9E-GbOcMaXF6nw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Feb 2013 15:44:10 +0100
-Message-Id: <c1d72ad2480fd09c92ecb8ea1476d02e1836ca1f.1359988981.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1359988981.git.Martin.Jansa@gmail.com>
-References: <cover.1359988981.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1359988981.git.Martin.Jansa@gmail.com>
-References: <cover.1359988981.git.Martin.Jansa@gmail.com>
-Subject: [PATCH][for-danny 2/2] cryptsetup: import from oe-classic
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [PATCH] xinput-calibrator: add --boot-mode comand line option to wrapper script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,46 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2013 16:00:46 -0000
-X-List-Received-Date: Mon, 04 Feb 2013 16:00:46 -0000
+X-List-Received-Date: Mon, 04 Feb 2013 16:06:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* add LIC_FILES_CHKSUM
-* depend on util-linux (renamed from util-linux-ng)
-* depend on lvm2 instead of device-mapper
-* inherit gettext
+On Mon, Feb 4, 2013 at 4:39 PM, Otavio Salvador <otavio@ossystems.com.br> w=
+rote:
+> On Mon, Feb 4, 2013 at 11:49 AM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+> ...
+>> I can't see what this patch fixes. From my point of view we have current=
+ly:
+>
+> This allow us to re-run it from a running system; in our use-case user
+> might want to re-run the colibration and without this patch it does
+> not work.
+>
+>> * two conflicting/racing start types systemd and xdg/autostart
+>> * systemd service fails always - it doesn't know which display to use
+>> (error message something like 'cannot connect to xserver')
+>> * xdg/autostart sometimes fails because the touchscreen devices are
+>> not yet known to xserver (error message something like 'no devices to
+>> calibrate devices found'). This causes calibration being started from
+>> time to time.
+>
+> You need to consider the use of serial touchscreen as well; we have
+> here one which we can test your proposed patch. Bear on mind that user
+> might want to run the calibration *again* so a script to support this
+> needs to be add as well.
+>
+>> I am working on a complete different solution (udev/systemd automatic
+>> start) but need a few days to iron out & test. Can we wait few days
+>> before applying this to give me the chance to send an alternative?
+>> Sorry for this but I spent of efforts till now and wand to avoid
+>> rebasing.
+>
+> If you plan to add support to our use-case too, sure. :-)
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
+Hope I get it done soon (give me till end of week max) - your use-case
+included :)
 
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
-new file mode 100644
-index 0000000..254f563
---- /dev/null
-+++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Setup virtual encryption devices under dm-crypt Linux"
-+HOMEPAGE = "http://code.google.com/p/cryptsetup/"
-+SECTION = "console"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+DEPENDS = "util-linux lvm2 libgcrypt popt"
-+RRECOMMENDS_${PN} = "kernel-module-aes \
-+                     kernel-module-dm-crypt \
-+                     kernel-module-md5 \
-+                     kernel-module-cbc \
-+                     kernel-module-sha256 \
-+                    "
-+SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "318a64470861ea5b92a52f2014f1e7c1"
-+SRC_URI[sha256sum] = "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e0602bf40208b5e69c0a"
-+
-+inherit autotools gettext
--- 
-1.8.1.2
-
+Andreas
 
 
