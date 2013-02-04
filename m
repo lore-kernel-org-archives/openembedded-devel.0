@@ -1,34 +1,23 @@
-Received: from mail-ye0-f172.google.com ([209.85.213.172])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1U2Pwv-0002Jm-KH
+	(envelope-from <eric@eukrea.com>) id 1U2QHr-0002sj-SE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2013 18:35:34 +0100
-Received: by mail-ye0-f172.google.com with SMTP id m10so1592032yen.3
+	Mon, 04 Feb 2013 18:57:13 +0100
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 509A7CABF76
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2013 09:19:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=j8ZntmDHeRWv/91y9H014SvXvT17EBxFVlFzjhH85qM=;
-	b=saLVJmJ6dlO/WVZrnKdqsL5Aflz3OXK1YC9pvqg9aMV4NQv8Qp3Hm5F3kYJq2ux+Gs
-	qoiHHbUnzd8D7UqwHxnyIUFABx/WqAwpfM8+s30mmernbzKDAMp6LMfPpnKGT7nfMQsL
-	NMoes4+MOVyHvfaDFzAcRkB5bX61FC3z42ShcFZGIV1Bw/zeff9SUiABvPVpH+/Tiusz
-	qQg1yd2NtrimNJ2MkBoyCkr67x1GHo+wEUFdt2AvaD59tliOHj7F/1hntbkk1rd/hwW/
-	6Xl7RI5I2/YlIuV77eoNK/C1fqyJB25hn+3vBQbgbvtqesACe7coSIHARJe8heATa6XR
-	pnaQ==
-X-Received: by 10.236.149.162 with SMTP id x22mr26584013yhj.37.1359998372892; 
-	Mon, 04 Feb 2013 09:19:32 -0800 (PST)
-Received: from localhost.localdomain ([187.23.144.59])
-	by mx.google.com with ESMTPS id j13sm16235487ani.19.2013.02.04.09.19.30
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 04 Feb 2013 09:19:32 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon,  4 Feb 2013 18:41:12 +0100 (CET)
+Received: from e6520eb.local.eukrea.com (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id CEE4B4B01DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Feb 2013 18:41:07 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Feb 2013 15:19:24 -0200
-Message-Id: <1359998364-9245-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] samba: Split libnss-winbind package
+Date: Mon,  4 Feb 2013 18:41:06 +0100
+Message-Id: <1359999666-26843-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.11.7
+MIME-Version: 1.0
+Subject: [RFC] php: build both php-cgi and php-fpm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,63 +31,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2013 17:35:34 -0000
+X-List-Received-Date: Mon, 04 Feb 2013 17:57:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This allows for applications to resolv wins without the winbindd and
-sambad.
+- when enabling fpm, CGI is disabled, so build php-cgi first and then
+reconfigure and build fpm
+- php-fpm is run tested after this change
+- php-cgi is only compil tested
+- --enable-discard-path, --enable-fastcgi were removed as these options
+are not recognized by configure :
+    configure: WARNING: unrecognized options: --disable-silent-rules,
+    --disable-dependency-tracking, --enable-discard-path,
+    --enable-fastcgi, --enable-nls
 
-Change-Id: Iaa86154a59e758b37f28796963e6550ed2d30464
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- meta-oe/recipes-connectivity/samba/samba-basic.inc |    7 ++++---
- meta-oe/recipes-connectivity/samba/samba.inc       |    2 +-
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ meta-oe/recipes-devtools/php/php.inc | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-index 0b24879..d6d8d12 100644
---- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-@@ -9,7 +9,7 @@ EXTRA_OECONF += "\
-         --without-ldap \
-         --without-krb5"
- 
--PACKAGES =+ "libwbclient libwinbind libwinbind-dbg winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
-+PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
- 
- FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
-                      ${libdir}/security/.debug/pam_winbind.so \
-@@ -36,13 +36,14 @@ FILES_cifs = "${base_sbindir}/mount.cifs ${base_sbindir}/umount.cifs"
- FILES_cifs-doc = "${mandir}/man8/mount.cifs.8 ${mandir}/man8/umount.cifs.8"
- FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
- FILES_libsmbclient-dev = "${libdir}/libsmbclient.so ${includedir}"
-+FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
-+                        ${libdir}/nss_info"
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
+ols/php/php.inc
+index 29e82fa..e3daaa5 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -7,7 +7,7 @@ DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lem=
+on-native mysql5 \
+            libc-client openssl sqlite3"
+ DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
+=20
+-INC_PR =3D "r4"
++INC_PR =3D "r5"
+=20
+ SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
+=20
+@@ -19,8 +19,8 @@ SSTATE_SCAN_FILES +=3D "build-defs.h"
+=20
+ # Common EXTRA_OECONF
+ COMMON_EXTRA_OECONF =3D "--enable-sockets --enable-pcntl --enable-shared=
+"
+-EXTRA_OECONF =3D "--enable-mbstring --enable-discard-path --enable-wddx =
+\
+-                --enable-magic-quotes --enable-fastcgi --enable-fpm \
++EXTRA_OECONF =3D "--enable-mbstring --enable-wddx \
++                --enable-magic-quotes --enable-cgi \
+                 --with-imap=3D${STAGING_DIR_HOST} \
+                 --with-gettext=3D${STAGING_LIBDIR}/.. \
+                 --with-imap-ssl=3D${STAGING_DIR_HOST} \
+@@ -30,7 +30,7 @@ EXTRA_OECONF =3D "--enable-mbstring --enable-discard-pa=
+th --enable-wddx \
+                 --disable-embedded-mysqli \
+                 --with-mysql=3D"${STAGING_DIR_TARGET}${prefix}" \
+                 --with-mysqli=3D"${STAGING_BINDIR_CROSS}/mysql_config" \
+-		--with-sqlite3=3D${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
++                --with-sqlite3=3D${STAGING_LIBDIR}/.. --enable-sqlite-ut=
+f8 \
+                 --with-pdo-mysql=3D"${STAGING_BINDIR_CROSS}/mysql_config=
+" \
+                 --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. ${COMMON_EXTRA_=
+OECONF} \
+                "
+@@ -63,6 +63,10 @@ do_install_append_pn-php-native() {
+=20
+ # fixme
+ do_install_append_pn-php() {
++    # reconfigure to build php-fpm
++    oe_runconf --enable-fpm
++    oe_runmake 'INSTALL_ROOT=3D${D}' install
 +
- FILES_winbind = "${sysconfdir}/init.d/winbind \
--                 ${libdir}/libnss_*${SOLIBS} \
-                  ${sbindir}/winbindd \
-                  ${bindir}/wbinfo \
-                  ${bindir}/ntlm_auth \
-                  ${libdir}/idmap/*.so \
--                 ${libdir}/nss_info \
-                  ${libdir}/pdb \
-                  ${libdir}/gpext \
-                  ${libdir}/perfcount \
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index a86c8be..3ee43ad 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -96,7 +96,7 @@ do_install_append() {
- 
- 
- 
--pkg_postinst_winbind () {
-+pkg_postinst_libnss-winbind () {
-     # add wins to the list of resolvers
-     ns=$D${sysconfdir}/nsswitch.conf
-     if ! grep "hosts:.*wins" $ns > /dev/null; then
--- 
-1.7.2.5
+     install -d ${D}/${sysconfdir}/
+     mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+     rm -rf ${D}/${TMPDIR}
+--=20
+1.7.11.7
 
 
 
