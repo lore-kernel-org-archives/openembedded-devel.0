@@ -1,36 +1,40 @@
-Received: from mail-vb0-f46.google.com ([209.85.212.46])
+Received: from mail-ie0-f172.google.com ([209.85.223.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U2OZ9-0006tY-1g
+	(envelope-from <mario.goulart@gmail.com>) id 1U2Om3-000785-I7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Feb 2013 17:06:43 +0100
-Received: by mail-vb0-f46.google.com with SMTP id b13so3923090vby.5
+	Mon, 04 Feb 2013 17:20:05 +0100
+Received: by mail-ie0-f172.google.com with SMTP id c10so5967742ieb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2013 07:50:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type:content-transfer-encoding;
-	bh=zbA8xbqJGOezVaIupCr3uYuJuze6GFI5H9ULzmFT1FM=;
-	b=fJXjJmP+yAvpVZplRDy8rkm97n+DrqgkazJeJDffg2g3YlB0qNd1Dil/Is21ZCYjKa
-	yoft7aAiuiOK9Z0146HEj3SRkmeYW96i6dTchjyRk7BKVoy5eyBbYk2phFONjNfRU9aO
-	GkfNBVajzqyHcCuAid30w1NAfgUorbDar2ZuNsgtPKeSfdFi9+z5DLUqpyPvHHp4KcmZ
-	gmlTekwCLMCRVf6JxfzpngoD46qR0fburv7kJ6zrq7E3Kz8JXAewMovEJBK9sHEG2L56
-	guUITu/ce9t+DaMU12VTKDFwxasWlgVAKNBgYI/IWInHBRrEEGkpkNCGirOOKu71R9AH
-	0Yag==
-MIME-Version: 1.0
-X-Received: by 10.52.88.237 with SMTP id bj13mr8114292vdb.75.1359993053886;
-	Mon, 04 Feb 2013 07:50:53 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Mon, 4 Feb 2013 07:50:53 -0800 (PST)
-In-Reply-To: <CAP9ODKqaPYLTpwWvo82hhQq3qjzR8Mf7q5OdGqn6gx8JU1CLVw@mail.gmail.com>
+	Mon, 04 Feb 2013 08:04:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:sender:from:to:cc:subject:references:date:in-reply-to
+	:message-id:user-agent:mime-version:content-type;
+	bh=YKStVO1livnTyKBAeWZ7Xjke+8vm3qzV+Oh9pzKvTtE=;
+	b=oE0oTo60eUQm8RUdPcdwVo0qI75ZfjqODFGm2iNUsRdofIrLk+bDpwTFtcnho7MTC1
+	fj6pVNumjMd8peAs9k6aN9jce3YVz64XaaCMDedG4y6RV7z4fBq+CFrqCHo/sTq4q0dY
+	o2Brply/YMBZrKnRL/uoCfleoSu4Npt4gzg6QS+XoQFHYGoAHfonUJXSvDD925lvoeMD
+	UI53vhk8ijpMyelcbkIb8X/yPwkqyWE7763NVWrGIAeiFTd+9dXwP0M52kZcO6VLAjNu
+	uGXQWVNtwwqKvT77D6pX70PmUwWv0dps3iBFVhRa9zSJ0GfaCpSjJpzofrhc1wMypr3i
+	kc1w==
+X-Received: by 10.50.196.130 with SMTP id im2mr5983662igc.89.1359993854445;
+	Mon, 04 Feb 2013 08:04:14 -0800 (PST)
+Received: from cl-t066-141cl.privatedns.com.gmail.com (wkit.com.br.
+	[67.205.85.241])
+	by mx.google.com with ESMTPS id ww6sm15504881igb.2.2013.02.04.08.04.11
+	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
+	Mon, 04 Feb 2013 08:04:12 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
 References: <1359982426-9836-1-git-send-email-mario@ossystems.com.br>
 	<20130204120212.GA3271@jama>
-	<CALbNGRRYh06qkphJ-sJx=Qn46cpdh2=vcDNu097e5ACYxhZa5g@mail.gmail.com>
-	<CAP9ODKqaPYLTpwWvo82hhQq3qjzR8Mf7q5OdGqn6gx8JU1CLVw@mail.gmail.com>
-Date: Mon, 4 Feb 2013 16:50:53 +0100
-Message-ID: <CALbNGRTwAJbtFjC+UotFLq2Lfp+em_GACX8x9E-GbOcMaXF6nw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Date: Mon, 04 Feb 2013 10:48:20 -0500
+In-Reply-To: <20130204120212.GA3271@jama> (Martin Jansa's message of "Mon, 4
+	Feb 2013 13:02:12 +0100")
+Message-ID: <85boc0ulkr.fsf@cl-t066-141cl.privatedns.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.2 (gnu/linux)
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] xinput-calibrator: add --boot-mode comand line option to wrapper script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,46 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2013 16:06:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Feb 2013 16:20:06 -0000
+Content-Type: text/plain
 
-On Mon, Feb 4, 2013 at 4:39 PM, Otavio Salvador <otavio@ossystems.com.br> w=
-rote:
-> On Mon, Feb 4, 2013 at 11:49 AM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> ...
->> I can't see what this patch fixes. From my point of view we have current=
-ly:
->
-> This allow us to re-run it from a running system; in our use-case user
-> might want to re-run the colibration and without this patch it does
-> not work.
->
->> * two conflicting/racing start types systemd and xdg/autostart
->> * systemd service fails always - it doesn't know which display to use
->> (error message something like 'cannot connect to xserver')
->> * xdg/autostart sometimes fails because the touchscreen devices are
->> not yet known to xserver (error message something like 'no devices to
->> calibrate devices found'). This causes calibration being started from
->> time to time.
->
-> You need to consider the use of serial touchscreen as well; we have
-> here one which we can test your proposed patch. Bear on mind that user
-> might want to run the calibration *again* so a script to support this
-> needs to be add as well.
->
->> I am working on a complete different solution (udev/systemd automatic
->> start) but need a few days to iron out & test. Can we wait few days
->> before applying this to give me the chance to send an alternative?
->> Sorry for this but I spent of efforts till now and wand to avoid
->> rebasing.
->
-> If you plan to add support to our use-case too, sure. :-)
+Hi Martin,
 
-Hope I get it done soon (give me till end of week max) - your use-case
-included :)
+On Mon, 4 Feb 2013 13:02:12 +0100 Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Andreas
+> On Mon, Feb 04, 2013 at 10:53:46AM -0200, Mario Domenech Goulart wrote:
+>> xinput_calibrator_once.sh has been renamed to
+>> run-xinput-calibrator.sh, which now also handles the --boot-mode
+>> command line option.
+>> 
+>> When in boot mode (i.e., when --boot-mode is provided on the command
+>> line), the script exits if calibration data is found in the
+>> calibration data file.  When not in boot mode (i.e., no command line
+>> option), the script runs xinput-calibrator and creates/overwrites the
+>> calibration data file.
+>> 
+>> This change allows other applications to use a common wrapper
+>> (run-xinput-calibrator.sh) for xinput-calibrator.
+>
+> Did you send this upstream?
+>
+> Can you provide Upstream-Status?
+
+Sorry, I messed up using git send-email (used a file as argument, which
+made it ignore --subject-prefix).
+
+Since Andreas is working on a better solution, this patch can be
+ignored.
+
+Sorry for the noise.
+
+Best wishes.
+Mario
 
 
