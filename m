@@ -1,34 +1,30 @@
-Received: from mail-wi0-f174.google.com ([209.85.212.174])
+Received: from mail-ia0-f179.google.com ([209.85.210.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U2VAB-0003t6-9N
+	(envelope-from <thomas.besemer@gmail.com>) id 1U2Wja-0006Z2-Gt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Feb 2013 00:09:23 +0100
-Received: by mail-wi0-f174.google.com with SMTP id hi8so3049332wib.1
+	Tue, 05 Feb 2013 01:50:05 +0100
+Received: by mail-ia0-f179.google.com with SMTP id x24so8705194iak.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Feb 2013 14:53:34 -0800 (PST)
+	Mon, 04 Feb 2013 16:34:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=gDs5WFYEPZDCfa+ntRVxrfd5g43NGSadpf6Fx7/k50s=;
-	b=r710h7OzpYByDzDkIRYpNR29Luz0+pAfg1c9nL/TbysobGWXQbpzRP/XsXPFbKpjbm
-	R1KRcd9WiRqtKWBdQedW6ueKod3XhS+0W9NjakLjKAq8RF6+IWdBEZSVGxy+TT0g8oRS
-	BU4vgtUy5aHIU/qdYhyQ+xNQY4UoEoNncjtgsyfjZH5fV/37pV7H0FUl8norXDAlyF/b
-	erseHeVsaFq0ItnHCCWqjOoSvNdKl1X0f3sS0KnFZV9uP2b9rIMUqFmmJNKtSVUi1+90
-	7p8OaUo29lEjUtSnQl12lq2rYOg9dbewDqNJBILsDJfkcB48CZRYRn+zBbBTBSG09mza
-	F8OQ==
-X-Received: by 10.180.77.35 with SMTP id p3mr13284491wiw.18.1360018414822;
-	Mon, 04 Feb 2013 14:53:34 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ex1sm2845414wib.7.2013.02.04.14.53.33
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 04 Feb 2013 14:53:34 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type; bh=IE8r46aNuW4dEf3rJnzPPH9LhY8vUu4il4u3LTfmQj0=;
+	b=S6KLnl4TWA6j4hdy9vIe/4I1Ci3IF6U48DqPWflNyLKB55XpyoqsF6RuMCuWZxsh4Z
+	LrNMHE3Tv6r8WD+/39/ONlM0CzimGT+G6s3e2HDEBw5stWw1/WwHZztSd2xdGCuBweiM
+	xuEkb553N9tR/9lzcRYqoe3mTThdLlSlmwSOF2yz5kzSgTSj7MOHruz6HOs//6Z3xYpI
+	Xn0/Ijs8VfHMuuCsQ06r0qe4l4vsobvTkxLFi08v7nJ64HDcs+QodgtJ+AnnLd5nmOSw
+	M9mbG1Rg2qqdCjiYHcJilvLLmqkI5ZtExEDo32I4uTGrPrc79nQeLx7OS92YeaI9FJ96
+	VQpw==
+MIME-Version: 1.0
+X-Received: by 10.50.185.229 with SMTP id ff5mr10170406igc.82.1360024453201;
+	Mon, 04 Feb 2013 16:34:13 -0800 (PST)
+Received: by 10.50.87.5 with HTTP; Mon, 4 Feb 2013 16:34:12 -0800 (PST)
+Date: Mon, 4 Feb 2013 16:34:12 -0800
+Message-ID: <CAO7m3AmfONKCwbwrduXVtxQdfxOAduZVG8EnKJQgCa8RN5V7Ww@mail.gmail.com>
+From: Thomas Besemer <thomas.besemer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Feb 2013 23:53:28 +0100
-Message-Id: <1360018408-29809-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1360018408-29809-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1360018408-29809-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-gnome][meta-efl 2/2] enjoy: improve RDEPENDS to set it only on PN
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: User Application with Shared Library - do_rootfs fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +38,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Feb 2013 23:09:23 -0000
+X-List-Received-Date: Tue, 05 Feb 2013 00:50:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+I am generating some source code in the OE/Yocto world.  This work requires
+that a shared library exist.  I am able to to build the shared library, and
+maybe install it, and then build the test code against it.  Both these
+builds work.  Final assembly of Root FS fails.
+
+Below are my two recipes.  Appears that the <libgcpy_gc6016sa.so> does not
+get installed correctly (does build).  The recipe for <gcpytest> does work,
+but it does find the library during build.
+
+If I build each indepdent of the other, it's fine.  But, once I try to
+build <core-image-minimal> it complains that the library is not there.
+
+
+| error: Failed dependencies:
+
+| libgcpy_gc6016.so.1 is needed by gcpytest-1-r0.armv7a_vfp_neon
 
 ---
- meta-efl/recipes-efl/e17/enjoy_svn.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-index 8dff593..5137c4e 100644
---- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
-+++ b/meta-efl/recipes-efl/e17/enjoy_svn.bb
-@@ -12,7 +12,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
- #3d needed for ogg playback
- #4th needed for flac playback
- #5th needed binary to create db
--RDEPENDS += "\
-+RDEPENDS_${PN} += "\
-        gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
-        ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
-        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
--- 
-1.8.1.2
+<gcpy-dev.bb>
 
+DESCRIPTION = "GCPY Server application"
 
+SECTION = "gcsim"
+
+LICENSE = "MIT"
+
+LIC_FILES_CHKSUM =
+"file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+PR = "r0"
+
+SRC_URI = "file://gcpy-dev.tar"
+
+S = "${WORKDIR}"
+
+do_compile() {
+
+oe_runmake
+
+}
+
+do_install() {
+
+oe_libinstall -so libgcpy_gc6016 ${STAGING_LIBDIR}
+
+install -m 0644 ${S}/gcpy_target_lib.h ${STAGING_INCDIR}
+
+oe_libinstall -so libgcpy_gc6016.so ${D}${libdir}
+
+}
+
+ EXTRA_OEMAKE += "V=1 ARCH=${TARGET_ARCH}
+GC5330_TOOL_PREFIX=${TARGET_PREFIX} SKIP_STRIP=y"
+
+FILES_${PN}-dev = "${D}${libdir}/libgcpy_gc6016.so"
+
+---
+
+<gcpytest.bb>
+
+DESCRIPTION = "Simple GCPY Test application"
+
+SECTION = "gcsim"
+
+LICENSE = "MIT"
+
+LIC_FILES_CHKSUM =
+"file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+PR = "r0"
+
+SRC_URI = "file://gcpytest.c"
+
+S = "${WORKDIR}"
+
+do_compile() {
+
+${CC} gcpytest.c -o gcpytest -lgcpy_gc6016 -lrt
+
+}
+
+do_install() {
+
+install -d ${D}${bindir}
+
+install -m 0755 gcpytest ${D}${bindir}
+
+}
+
+REQUIRES = " gcpy-dev"
 
