@@ -1,36 +1,34 @@
-Received: from mail-oa0-f51.google.com ([209.85.219.51])
+Received: from mail-yh0-f41.google.com ([209.85.213.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1U2jmt-0007ib-4R
+	(envelope-from <otavio.salvador@gmail.com>) id 1U2jp5-0007rA-Tp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Feb 2013 15:46:25 +0100
-Received: by mail-oa0-f51.google.com with SMTP id h2so208404oag.38
+	Tue, 05 Feb 2013 15:48:44 +0100
+Received: by mail-yh0-f41.google.com with SMTP id 47so24252yhr.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2013 06:30:29 -0800 (PST)
+	Tue, 05 Feb 2013 06:32:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=Ottxf5vemfYTCHlMx3f8IeVd5E+/CynxxxYuDmCE/Rs=;
-	b=pyuOxjLdFZj5a6oMzKqJpOaBJnmO+0lU8dQaNfdb2OBxtuijMGLypEBEuBeWGesKPi
-	Ke0DGc4yBXbOjH/2Ud0rCWaV5We5XU6/HVFGPA3s7AO4lk6Va/LqyRb1EX2YVqALFitd
-	nUvODjVR5vP6vX0rIZFv2jNBnKQ+AATVsH1KcSXWW4W9LCVMSj4PtdeBA74AxQGNnKlo
-	aLGlPZTWjpLUY8qQzy6asHcOltBbxa+gRgnXoAi0fCJ3sSxx8zIzcaE2FIeUbSNhahYn
-	p8+lzp7xf5QkPRtifkm4GxGP18030PIaXnijFX5a2fhh/6kHd9fyqMY4iNt9M3efvU/d
-	kx4g==
-MIME-Version: 1.0
-X-Received: by 10.182.38.69 with SMTP id e5mr18498776obk.79.1360074629014;
-	Tue, 05 Feb 2013 06:30:29 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.2.197 with HTTP; Tue, 5 Feb 2013 06:30:28 -0800 (PST)
-In-Reply-To: <20130205101312.GG3271@jama>
-References: <1359998364-9245-1-git-send-email-otavio@ossystems.com.br>
-	<20130205101312.GG3271@jama>
-Date: Tue, 5 Feb 2013 12:30:28 -0200
-X-Google-Sender-Auth: n-hzCw-7a9nmFg0wAnAtrl7vgyk
-Message-ID: <CAP9ODKp0-iwtJhuJKUxQ49-YxqtWKgEs+Drcsrge+kD5kNTh4A@mail.gmail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=s8SBaPKp7oyMG7vy4jBEXdUB6rxRo0Nk9h/89Lj3z7s=;
+	b=KDkpfeoQymamkXEK+60rdx0i+hvoAkpY20goOvTJ8sR4Kq4vG3k8SJwxOIcW5LWJYk
+	6XyI4+vSGkAAz5i/NoWvB4HXGdbI9mCpSmBwOlREaZipX4dzHtuP89W4qLXK1dgiNHFy
+	gYucKl3HW8TmT0OYPxDAWDS6o6Y/MZqJzaRh8UYKu9/yIeu60vNH6/Lz3eg2+/v2g9Bp
+	SJcOpGZL4aZzTm+4UWeBV5X2zTZc+S9C2z8KA3Sf26s7bECdO78I9Jt/HraVfQd/lGuz
+	wboWCyPv4HRaG9fQQlk7ASgOkzI07wjX/ePjBrO34+k+J2rRMxbrVX+AURqzI99lUi9o
+	PySQ==
+X-Received: by 10.236.85.76 with SMTP id t52mr31398409yhe.61.1360074765678;
+	Tue, 05 Feb 2013 06:32:45 -0800 (PST)
+Received: from localhost.localdomain ([187.23.144.59])
+	by mx.google.com with ESMTPS id f3sm13213721ani.3.2013.02.05.06.32.43
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Tue, 05 Feb 2013 06:32:45 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] samba: Split libnss-winbind package
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Feb 2013 12:32:38 -0200
+Message-Id: <1360074758-6672-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v3] samba: Split libnss-winbind package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +42,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 14:46:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Feb 2013 14:48:45 -0000
 
-On Tue, Feb 5, 2013 at 8:13 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Feb 04, 2013 at 03:19:24PM -0200, Otavio Salvador wrote:
->> This allows for applications to resolv wins without the winbindd and
->> sambad.
->
-> Is this for master?
->
-> 2013-02-05 11:09:04 URL:http://patchwork.openembedded.org/patch/44029/mbox/ [2894] -> "pw-am-44029.patch" [1]
-> Applying: samba: Split libnss-winbind package
-> error: patch failed: meta-oe/recipes-connectivity/samba/samba-basic.inc:36
-> error: meta-oe/recipes-connectivity/samba/samba-basic.inc: patch does not apply
-> Patch failed at 0001 samba: Split libnss-winbind package
-> The copy of the patch that failed is found in:
->    /OE/meta-openembedded/.git/rebase-apply/patch
-> When you have resolved this problem, run "git am --resolved".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am --abort".
->
-> Looks almost the same as:
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2013-January/043763.html
+This allows for applications to resolv wins without the winbindd and
+sambad.
 
-Sorry; I sent v2 which applies properly in master.
+Change-Id: Iaa86154a59e758b37f28796963e6550ed2d30464
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+Changes for v3:
+-Fixes a parsing error
 
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+ meta-oe/recipes-connectivity/samba/samba-basic.inc |    9 +++++----
+ meta-oe/recipes-connectivity/samba/samba.inc       |    2 +-
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb  |    2 +-
+ 3 files changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+index af4e04e..05a5b3a 100644
+--- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
++++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+@@ -9,7 +9,7 @@ EXTRA_OECONF += "\
+         --without-ldap \
+         --without-krb5"
+ 
+-PACKAGES =+ "libwbclient libwinbind libwinbind-dbg winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
++PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
+ 
+ FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
+                      ${libdir}/security/.debug/pam_winbind.so \
+@@ -41,13 +41,14 @@ FILES_winbind = "${sbindir}/winbindd \
+                  ${bindir}/ntlm_auth \
+                  ${sysconfdir}/init.d/winbind \
+ "
+-FILES_libwinbind = "${libdir}/libnss_*${SOLIBS} \
+-                    ${libdir}/idmap/*.so \
+-                    ${libdir}/nss_info \
++FILES_libwinbind = "${libdir}/idmap/*.so \
+                     ${libdir}/pdb \
+                     ${libdir}/gpext \
+                     ${libdir}/perfcount \
+                     ${libdir}/security/pam_winbind.so \
+ "
+ 
++FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
++                        ${libdir}/nss_info"
++
+ FILES_swat       = "${sbindir}/swat ${datadir}/swat ${libdir}/*.msg"
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index a86c8be..3ee43ad 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -96,7 +96,7 @@ do_install_append() {
+ 
+ 
+ 
+-pkg_postinst_winbind () {
++pkg_postinst_libnss-winbind () {
+     # add wins to the list of resolvers
+     ns=$D${sysconfdir}/nsswitch.conf
+     if ! grep "hosts:.*wins" $ns > /dev/null; then
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index f144de3..35d20c5 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
+-- 
+1.7.2.5
+
 
 
