@@ -1,37 +1,36 @@
-Received: from mail-we0-f173.google.com ([74.125.82.173])
+Received: from mail-wi0-f171.google.com ([209.85.212.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U2fq6-0008Gf-GN
+	(envelope-from <martin.jansa@gmail.com>) id 1U2frY-0008Kc-PG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Feb 2013 11:33:23 +0100
-Received: by mail-we0-f173.google.com with SMTP id r5so5569882wey.18
+	Tue, 05 Feb 2013 11:34:54 +0100
+Received: by mail-wi0-f171.google.com with SMTP id hn17so2681903wib.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2013 02:17:33 -0800 (PST)
+	Tue, 05 Feb 2013 02:19:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8fYub53h9RAZSVKXu8wEj/f1bpMMKPb4PD45BQ5BtH0=;
-	b=H14ZrbET65ma8zGX/COGj4ss3rlaXyBFx4Sh0ljefJR/NNg/FeQhV0xdY7ANgJ7U6F
-	jCLtyE2nwvO5YNRVr2rzbEcAF2zciGZLcCt7vkhtWsfIIbv0eviARHAIKetFgvE667rV
-	owT00bYxc8FkDeSPMsHHd8iUlujdbLEjr2ka84OpDSCgXy6NayHrJctFL4yCLqqKRLPo
-	FBnrYiadDA3cNiDg/9wP4x9VPxZuslKILK6mWf7Srk9GT3V8/N1MnRCUOqklP2rTwBBP
-	RJ/udGrfErTBYy1YcDzeI5x0LyPihWmhk99tVjiYKhLMHCKPE7VOZHs2Am5rgrcI+31R
-	7lwg==
-X-Received: by 10.194.172.228 with SMTP id bf4mr41208066wjc.38.1360059453277; 
-	Tue, 05 Feb 2013 02:17:33 -0800 (PST)
+	bh=UEC2HzoCQJVCPcHu7SaP8/XWm0LDxPKlulO0hFpJASU=;
+	b=Xq7+mvpt/9Pp/EHvMXSmnXPSh8A7uPxdAeBKUJqaIgnAy/DB9nODeBi5QH1uGXhg0j
+	saxoDmHJ13kaG47cr+BRuacJvZdCUCZ3dHju5+oPtPlzAuKWbwhI1cumDP3QsWtSiogF
+	nzwAfDUyF4VNfr1Bx9QnPgTYK8FpB9dwb3o8QX6tJZi13ohUT3GIxBjMGN7tpwi7eHku
+	gNCGGfzDYD3ODQx+VBKK4VLK2eMJMc8aon9STCcdHHyCMo7JTLhWn4NjqXw10Y8fVbuD
+	6/ZMrsuwJM7ft8ghAEH85iLZxo8VJ0J14GktuazxLXjV1CYOwxUiI5isaObYRYzbZKpV
+	KT+g==
+X-Received: by 10.180.97.197 with SMTP id ec5mr15865189wib.1.1360059543609;
+	Tue, 05 Feb 2013 02:19:03 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id n2sm3826831wiy.6.2013.02.05.02.17.32
+	by mx.google.com with ESMTPS id b10sm332971wix.7.2013.02.05.02.19.01
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 05 Feb 2013 02:17:32 -0800 (PST)
-Date: Tue, 5 Feb 2013 11:17:32 +0100
+	Tue, 05 Feb 2013 02:19:02 -0800 (PST)
+Date: Tue, 5 Feb 2013 11:19:00 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130205101732.GH3271@jama>
-References: <20130130104531.GV16904@jama.palm1.palmone.com>
-	<1360054730-11612-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Message-ID: <20130205101900.GI3271@jama>
+References: <1359381032-24881-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1360054730-11612-1-git-send-email-marcin.juszkiewicz@linaro.org>
+In-Reply-To: <1359381032-24881-1-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] python-numpy: add 1.7.0rc1
+Subject: Re: [meta-systemd/V2 0/4] remove systemd core images & update bbappends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,352 +44,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 10:33:23 -0000
-X-Groupsio-MsgNum: 42994
+X-List-Received-Date: Tue, 05 Feb 2013 10:34:55 -0000
+X-Groupsio-MsgNum: 42995
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Qz2CZ664xQdCRdPu"
+	protocol="application/pgp-signature"; boundary="0rSojgWGcpz+ezC3"
 Content-Disposition: inline
 
---Qz2CZ664xQdCRdPu
-Content-Type: text/plain; charset=us-ascii
+--0rSojgWGcpz+ezC3
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 05, 2013 at 09:58:50AM +0100, Marcin Juszkiewicz wrote:
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  .../python/python-numpy/aarch64.patch              |  41 ++++++
->  .../python/python-numpy/aarch64/_numpyconfig.h     |  30 +++++
->  .../python/python-numpy/aarch64/config.h           | 139 +++++++++++++++=
-++++++
->  ...hon-numpy_1.4.1.bb =3D> python-numpy_1.7.0rc1.bb} |  33 +++--
->  4 files changed, 236 insertions(+), 7 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/aarch64.=
-patch
->  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/aarch64/=
-_numpyconfig.h
->  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/aarch64/=
-config.h
->  rename meta-oe/recipes-devtools/python/{python-numpy_1.4.1.bb =3D> pytho=
-n-numpy_1.7.0rc1.bb} (50%)
+On Mon, Jan 28, 2013 at 02:50:28PM +0100, Andreas M=FCller wrote:
+> The following changes since commit 164caa34458ed2c145dfa2e4d2d207f8ce47a0=
+57:
+>=20
+>=20
+> are available in the git repository at:
+>   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
+>=20
+> Andreas M=FCller (4):
+>       systemd: remove core recipes - they migrated to oe-core
+>       systemd-speed-hacks: remove
+>       dhcp: follow oe-core to 4.2.5
+>       util-linux: follow oe-core to 2.22.2
 
-Merged, thanks
+Remaining 2 also merged after PE bump was merged in oe-core.
 
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch b=
-/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch
-> new file mode 100644
-> index 0000000..8d66615
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch
-> @@ -0,0 +1,41 @@
-> +From 7d7a5939dcf5821d9f381d57bfa2012568ef6b82 Mon Sep 17 00:00:00 2001
-> +From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> +Date: Thu, 10 Jan 2013 21:49:01 +0100
-> +Subject: [PATCH] Added support for AArch64 architecture
-> +
-> +Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> +
-> +Upstream-Status: backport
-> +---
-> + numpy/core/include/numpy/npy_cpu.h    | 2 ++
-> + numpy/core/include/numpy/npy_endian.h | 1 +
-> + 2 files changed, 3 insertions(+)
-> +
-> +diff --git a/numpy/core/include/numpy/npy_cpu.h b/numpy/core/include/num=
-py/npy_cpu.h
-> +index 8a29788..9707a7a 100644
-> +--- a/numpy/core/include/numpy/npy_cpu.h
-> ++++ b/numpy/core/include/numpy/npy_cpu.h
-> +@@ -66,6 +66,8 @@
-> +     #define NPY_CPU_MIPSEL
-> + #elif defined(__MIPSEB__)
-> +     #define NPY_CPU_MIPSEB
-> ++#elif defined(__aarch64__)
-> ++    #define NPY_CPU_AARCH64
-> + #else
-> +     #error Unknown CPU, please report this to numpy maintainers with \
-> +     information about your platform (OS, CPU and compiler)
-> +diff --git a/numpy/core/include/numpy/npy_endian.h b/numpy/core/include/=
-numpy/npy_endian.h
-> +index aa5ed8b..4e3349f 100644
-> +--- a/numpy/core/include/numpy/npy_endian.h
-> ++++ b/numpy/core/include/numpy/npy_endian.h
-> +@@ -25,6 +25,7 @@
-> +             || defined(NPY_CPU_IA64)    \
-> +             || defined(NPY_CPU_ALPHA)   \
-> +             || defined(NPY_CPU_ARMEL)   \
-> ++            || defined(NPY_CPU_AARCH64) \
-> +             || defined(NPY_CPU_SH_LE)   \
-> +             || defined(NPY_CPU_MIPSEL)
-> +         #define NPY_BYTE_ORDER NPY_LITTLE_ENDIAN
-> +--=20
-> +1.8.0
-> +
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy/aarch64/_numpyc=
-onfig.h b/meta-oe/recipes-devtools/python/python-numpy/aarch64/_numpyconfig=
-=2Eh
-> new file mode 100644
-> index 0000000..be57ac2
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-numpy/aarch64/_numpyconfig.h
-> @@ -0,0 +1,30 @@
-> +#define NPY_HAVE_ENDIAN_H 1
-> +#define NPY_SIZEOF_SHORT SIZEOF_SHORT
-> +#define NPY_SIZEOF_INT SIZEOF_INT
-> +#define NPY_SIZEOF_LONG SIZEOF_LONG
-> +#define NPY_SIZEOF_FLOAT 4
-> +#define NPY_SIZEOF_COMPLEX_FLOAT 8
-> +#define NPY_SIZEOF_DOUBLE 8
-> +#define NPY_SIZEOF_COMPLEX_DOUBLE 16
-> +#define NPY_SIZEOF_LONGDOUBLE 16
-> +#define NPY_SIZEOF_COMPLEX_LONGDOUBLE 32
-> +#define NPY_SIZEOF_PY_INTPTR_T 8
-> +#define NPY_SIZEOF_PY_LONG_LONG 8
-> +#define NPY_SIZEOF_LONGLONG 8
-> +#define NPY_NO_SMP 0
-> +#define NPY_HAVE_DECL_ISNAN
-> +#define NPY_HAVE_DECL_ISINF
-> +#define NPY_HAVE_DECL_ISFINITE
-> +#define NPY_HAVE_DECL_SIGNBIT
-> +#define NPY_USE_C99_COMPLEX 1
-> +#define NPY_HAVE_COMPLEX_DOUBLE 1
-> +#define NPY_HAVE_COMPLEX_FLOAT 1
-> +#define NPY_HAVE_COMPLEX_LONG_DOUBLE 1
-> +#define NPY_USE_C99_FORMATS 1
-> +#define NPY_VISIBILITY_HIDDEN __attribute__((visibility("hidden")))
-> +#define NPY_ABI_VERSION 0x01000009
-> +#define NPY_API_VERSION 0x00000007
-> +
-> +#ifndef __STDC_FORMAT_MACROS
-> +#define __STDC_FORMAT_MACROS 1
-> +#endif
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy/aarch64/config.=
-h b/meta-oe/recipes-devtools/python/python-numpy/aarch64/config.h
-> new file mode 100644
-> index 0000000..c30b868
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-numpy/aarch64/config.h
-> @@ -0,0 +1,139 @@
-> +#define HAVE_ENDIAN_H 1
-> +#define SIZEOF_PY_INTPTR_T 8
-> +#define SIZEOF_PY_LONG_LONG 8
-> +#define MATHLIB m
-> +#define HAVE_SIN 1
-> +#define HAVE_COS 1
-> +#define HAVE_TAN 1
-> +#define HAVE_SINH 1
-> +#define HAVE_COSH 1
-> +#define HAVE_TANH 1
-> +#define HAVE_FABS 1
-> +#define HAVE_FLOOR 1
-> +#define HAVE_CEIL 1
-> +#define HAVE_SQRT 1
-> +#define HAVE_LOG10 1
-> +#define HAVE_LOG 1
-> +#define HAVE_EXP 1
-> +#define HAVE_ASIN 1
-> +#define HAVE_ACOS 1
-> +#define HAVE_ATAN 1
-> +#define HAVE_FMOD 1
-> +#define HAVE_MODF 1
-> +#define HAVE_FREXP 1
-> +#define HAVE_LDEXP 1
-> +#define HAVE_RINT 1
-> +#define HAVE_TRUNC 1
-> +#define HAVE_EXP2 1
-> +#define HAVE_LOG2 1
-> +#define HAVE_ATAN2 1
-> +#define HAVE_POW 1
-> +#define HAVE_NEXTAFTER 1
-> +#define HAVE_SINF 1
-> +#define HAVE_COSF 1
-> +#define HAVE_TANF 1
-> +#define HAVE_SINHF 1
-> +#define HAVE_COSHF 1
-> +#define HAVE_TANHF 1
-> +#define HAVE_FABSF 1
-> +#define HAVE_FLOORF 1
-> +#define HAVE_CEILF 1
-> +#define HAVE_RINTF 1
-> +#define HAVE_TRUNCF 1
-> +#define HAVE_SQRTF 1
-> +#define HAVE_LOG10F 1
-> +#define HAVE_LOGF 1
-> +#define HAVE_LOG1PF 1
-> +#define HAVE_EXPF 1
-> +#define HAVE_EXPM1F 1
-> +#define HAVE_ASINF 1
-> +#define HAVE_ACOSF 1
-> +#define HAVE_ATANF 1
-> +#define HAVE_ASINHF 1
-> +#define HAVE_ACOSHF 1
-> +#define HAVE_ATANHF 1
-> +#define HAVE_HYPOTF 1
-> +#define HAVE_ATAN2F 1
-> +#define HAVE_POWF 1
-> +#define HAVE_FMODF 1
-> +#define HAVE_MODFF 1
-> +#define HAVE_FREXPF 1
-> +#define HAVE_LDEXPF 1
-> +#define HAVE_EXP2F 1
-> +#define HAVE_LOG2F 1
-> +#define HAVE_COPYSIGNF 1
-> +#define HAVE_NEXTAFTERF 1
-> +#define HAVE_SINL 1
-> +#define HAVE_COSL 1
-> +#define HAVE_TANL 1
-> +#define HAVE_SINHL 1
-> +#define HAVE_COSHL 1
-> +#define HAVE_TANHL 1
-> +#define HAVE_FABSL 1
-> +#define HAVE_FLOORL 1
-> +#define HAVE_CEILL 1
-> +#define HAVE_RINTL 1
-> +#define HAVE_TRUNCL 1
-> +#define HAVE_SQRTL 1
-> +#define HAVE_LOG10L 1
-> +#define HAVE_LOGL 1
-> +#define HAVE_LOG1PL 1
-> +#define HAVE_EXPL 1
-> +#define HAVE_EXPM1L 1
-> +#define HAVE_ASINL 1
-> +#define HAVE_ACOSL 1
-> +#define HAVE_ATANL 1
-> +#define HAVE_ASINHL 1
-> +#define HAVE_ACOSHL 1
-> +#define HAVE_ATANHL 1
-> +#define HAVE_HYPOTL 1
-> +#define HAVE_ATAN2L 1
-> +#define HAVE_POWL 1
-> +#define HAVE_FMODL 1
-> +#define HAVE_MODFL 1
-> +#define HAVE_FREXPL 1
-> +#define HAVE_LDEXPL 1
-> +#define HAVE_EXP2L 1
-> +#define HAVE_LOG2L 1
-> +#define HAVE_COPYSIGNL 1
-> +#define HAVE_NEXTAFTERL 1
-> +#define HAVE_DECL_SIGNBIT
-> +#define HAVE_COMPLEX_H 1
-> +#define HAVE_CREAL 1
-> +#define HAVE_CIMAG 1
-> +#define HAVE_CABS 1
-> +#define HAVE_CARG 1
-> +#define HAVE_CEXP 1
-> +#define HAVE_CSQRT 1
-> +#define HAVE_CLOG 1
-> +#define HAVE_CCOS 1
-> +#define HAVE_CSIN 1
-> +#define HAVE_CPOW 1
-> +#define HAVE_CREALF 1
-> +#define HAVE_CIMAGF 1
-> +#define HAVE_CABSF 1
-> +#define HAVE_CARGF 1
-> +#define HAVE_CEXPF 1
-> +#define HAVE_CSQRTF 1
-> +#define HAVE_CLOGF 1
-> +#define HAVE_CCOSF 1
-> +#define HAVE_CSINF 1
-> +#define HAVE_CPOWF 1
-> +#define HAVE_CREALL 1
-> +#define HAVE_CIMAGL 1
-> +#define HAVE_CABSL 1
-> +#define HAVE_CARGL 1
-> +#define HAVE_CEXPL 1
-> +#define HAVE_CSQRTL 1
-> +#define HAVE_CLOGL 1
-> +#define HAVE_CCOSL 1
-> +#define HAVE_CSINL 1
-> +#define HAVE_CPOWL 1
-> +#define HAVE_LDOUBLE_IEEE_QUAD_LE 1
-> +#ifndef __cplusplus
-> +/* #undef inline */
-> +#endif
-> +
-> +#ifndef _NPY_NPY_CONFIG_H_
-> +#error config.h should never be included directly, include npy_config.h =
-instead
-> +#endif
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb b/meta=
--oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb
-> similarity index 50%
-> rename from meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> rename to meta-oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb
-> index 2bede09..2e4bd6a 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.4.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb
-> @@ -1,14 +1,20 @@
->  DESCRIPTION =3D "A sophisticated Numeric Processing Package for Python"
->  SECTION =3D "devel/python"
->  LICENSE =3D "PSF"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3c42211d73c3faa1026e671dd=
-39883fa"
-> -PR =3D "r5"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Df87832d854acbade6e9f5c601=
-c8b30b1"
-> +PR =3D "r0"
-> +PV =3D "1.6.99+1.7.0rc1"
-> +REALPV =3D "1.7.0rc1"
-> =20
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/numpy/numpy-${REALPV}.tar.gz \
->             ${CONFIGFILESURI} \
-> +           file://aarch64.patch \
->  	  "
->  CONFIGFILESURI ?=3D ""
-> =20
-> +CONFIGFILESURI_aarch64 =3D "file://config.h \
-> +	   file://_numpyconfig.h \
-> +	  "
->  CONFIGFILESURI_arm =3D "file://config.h \
->  	   file://numpyconfig.h \
->  	  "
-> @@ -16,7 +22,7 @@ CONFIGFILESURI_mipsel =3D "file://config.h \
->  	   file://numpyconfig.h \
->  	  "
-> =20
-> -S =3D "${WORKDIR}/numpy-${PV}"
-> +S =3D "${WORKDIR}/numpy-${REALPV}"
-> =20
->  inherit distutils
-> =20
-> @@ -29,14 +35,27 @@ do_compile_prepend() {
->  	 cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/c=
-ore/include/numpy/
->  }
-> =20
-> -SRC_URI[md5sum] =3D "5c7b5349dc3161763f7f366ceb96516b"
-> -SRC_URI[sha256sum] =3D "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b71=
-9e385c2a981d8e06"
-> -
->  FILES_${PN}-staticdev +=3D "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.=
-a"
-> +SRC_URI[md5sum] =3D "a4719f5a1853bc0f8892a5956d5c4229"
-> +SRC_URI[sha256sum] =3D "45ea23622f72d86bc3614446d668ee962c0475ee7b91a93e=
-f85a5e0493962de5"
-> =20
-> +# install what is needed for numpy.test()
->  RDEPENDS_${PN} =3D "python-unittest \
->                    python-difflib \
->                    python-pprint \
->                    python-pickle \
->                    python-shell \
-> +                  python-nose \
-> +                  python-doctest \
-> +                  python-datetime \
-> +                  python-distutils \
-> +                  python-misc \
-> +                  python-mmap \
-> +                  python-netclient \
-> +                  python-numbers \
-> +                  python-pydoc \
-> +                  python-pkgutil \
-> +                  python-email \
-> +                  python-subprocess \
-> +                  python-compression \
->                   "
+Thanks
+
+>=20
+>  ...{dhcp_4.2.4-P2.bbappend =3D> dhcp_4.2.5.bbappend} |    0
+>  ..._2.22.1.bbappend =3D> util-linux_2.22.2.bbappend} |    0
+>  .../recipes-core/systemd/systemd-compat-units.bb   |   59 ----
+>  .../systemd/systemd-compat-units/machineid.service |   16 -
+>  .../systemd-compat-units/run-postinsts.service     |   17 -
+>  .../recipes-core/systemd/systemd-serialgetty.bb    |   46 ---
+>  .../systemd/systemd-serialgetty/LICENSE            |  339 --------------=
+------
+>  .../systemd-serialgetty/serial-getty@.service      |   32 --
+>  .../recipes-core/systemd/systemd-speed-hacks.bb    |   18 -
+>  .../systemd/systemd-systemctl-native.bb            |   18 -
+>  .../systemd/systemd-systemctl-native/systemctl     |  126 --------
+>  ...emd-analyze-use-argparse-instead-of-getop.patch |  103 ------
+>  ...-analyze-use-GDBus-instead-of-dbus-python.patch |   91 ------
+>  .../recipes-core/systemd/systemd/gtk-doc.make      |  230 -------------
+>  .../recipes-core/systemd/systemd/modprobe.rules    |   17 -
+>  .../systemd/systemd/optional_secure_getenv.patch   |   19 --
+>  .../systemd-pam-configure-check-uclibc.patch       |   26 --
+>  .../systemd/systemd/systemd-pam-fix-execvpe.patch  |   26 --
+>  .../systemd/systemd-pam-fix-fallocate.patch        |   82 -----
+>  .../systemd/systemd-pam-fix-getty-unit.patch       |   35 --
+>  .../systemd/systemd/systemd-pam-fix-mkostemp.patch |  166 ----------
+>  .../systemd/systemd/systemd-pam-fix-msformat.patch |  335 --------------=
+-----
+>  .../recipes-core/systemd/systemd/touchscreen.rules |   18 -
+>  .../recipes-core/systemd/systemd/var-run.conf      |    4 -
+>  meta-systemd/recipes-core/systemd/systemd_git.bb   |  263 ---------------
+>  25 files changed, 0 insertions(+), 2086 deletions(-)
+>  rename meta-systemd/oe-core/recipes-connectivity/dhcp/{dhcp_4.2.4-P2.bba=
+ppend =3D> dhcp_4.2.5.bbappend} (100%)
+>  rename meta-systemd/oe-core/recipes-core/util-linux/{util-linux_2.22.1.b=
+bappend =3D> util-linux_2.22.2.bbappend} (100%)
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-compat-unit=
+s.bb
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-compat-unit=
+s/machineid.service
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-compat-unit=
+s/run-postinsts.service
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-serialgetty=
+=2Ebb
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-serialgetty=
+/LICENSE
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-serialgetty=
+/serial-getty@.service
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-speed-hacks=
+=2Ebb
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd-systemctl-n=
+ative.bb
+>  delete mode 100755 meta-systemd/recipes-core/systemd/systemd-systemctl-n=
+ative/systemctl
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/0001-Revert=
+-systemd-analyze-use-argparse-instead-of-getop.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/0002-Revert=
+-analyze-use-GDBus-instead-of-dbus-python.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/gtk-doc.make
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/modprobe.ru=
+les
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/optional_se=
+cure_getenv.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-configure-check-uclibc.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-fix-execvpe.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-fix-fallocate.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-fix-getty-unit.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-fix-mkostemp.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/systemd-pam=
+-fix-msformat.patch
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/touchscreen=
+=2Erules
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd/var-run.conf
+>  delete mode 100644 meta-systemd/recipes-core/systemd/systemd_git.bb
+>=20
 > --=20
-> 1.8.0
+> 1.7.6.5
 >=20
 >=20
 > _______________________________________________
@@ -401,16 +162,16 @@ f85a5e0493962de5"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Qz2CZ664xQdCRdPu
+--0rSojgWGcpz+ezC3
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEQ3DwACgkQN1Ujt2V2gBxgIACfXAu5g2OtvHBsD9+kGJ1yqbQu
-cbIAoIUF5s8gg8wj1boswt1Ge4wM5CF2
-=rpEz
+iEYEARECAAYFAlEQ3JQACgkQN1Ujt2V2gBy6qACfY69ASIHJS3gmq1f1TdtquG/f
+onEAnRg8yHRNee+ZexvKc9I8PbL8Mynl
+=Rqib
 -----END PGP SIGNATURE-----
 
---Qz2CZ664xQdCRdPu--
+--0rSojgWGcpz+ezC3--
