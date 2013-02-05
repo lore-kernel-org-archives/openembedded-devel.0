@@ -1,34 +1,34 @@
 Received: from mail-yh0-f41.google.com ([209.85.213.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1U2jp5-0007rA-Tp
+	(envelope-from <mario.goulart@gmail.com>) id 1U2nzZ-0004R5-M2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Feb 2013 15:48:44 +0100
-Received: by mail-yh0-f41.google.com with SMTP id 47so24252yhr.14
+	Tue, 05 Feb 2013 20:15:42 +0100
+Received: by mail-yh0-f41.google.com with SMTP id 47so63477yhr.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Feb 2013 06:32:46 -0800 (PST)
+	Tue, 05 Feb 2013 10:59:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=s8SBaPKp7oyMG7vy4jBEXdUB6rxRo0Nk9h/89Lj3z7s=;
-	b=KDkpfeoQymamkXEK+60rdx0i+hvoAkpY20goOvTJ8sR4Kq4vG3k8SJwxOIcW5LWJYk
-	6XyI4+vSGkAAz5i/NoWvB4HXGdbI9mCpSmBwOlREaZipX4dzHtuP89W4qLXK1dgiNHFy
-	gYucKl3HW8TmT0OYPxDAWDS6o6Y/MZqJzaRh8UYKu9/yIeu60vNH6/Lz3eg2+/v2g9Bp
-	SJcOpGZL4aZzTm+4UWeBV5X2zTZc+S9C2z8KA3Sf26s7bECdO78I9Jt/HraVfQd/lGuz
-	wboWCyPv4HRaG9fQQlk7ASgOkzI07wjX/ePjBrO34+k+J2rRMxbrVX+AURqzI99lUi9o
-	PySQ==
-X-Received: by 10.236.85.76 with SMTP id t52mr31398409yhe.61.1360074765678;
-	Tue, 05 Feb 2013 06:32:45 -0800 (PST)
+	bh=k2BN4b91aqWL13EIajTkCl71kc/WKbx3lLe7CAAr8n8=;
+	b=z1UqxpQWjo3qKOF7H5DoddKYhBelHFJiK1DojSGXoAit6X8/zrYvY5vsttNBMqcS6t
+	xFxFe3fS1yokZ8HUZ9N2FiJdbAaQsJJ2kFEcB9Al7bYjRxaltoEtt56cicVwATbVcOrK
+	EV8e9tp2xSsEequ/1ZTmfXpFZGLLcUTxEHT0H11VHDSm5p3Qmi/ywgkAJ9OkNa9XvIol
+	9xA/Z+GOUWTeD2IRJc4DTKl+hi8GIoBBOkICKUQ7bv+yqOPm0MXjSc9bPMU40Qxvy1LT
+	pJAdYmi4OxQ2mN3kCSJeZmJ7SNjC98xFAV73DCym/6CxLyZLb5Qf4/6tPAC3nIxfQ+W5
+	2gqw==
+X-Received: by 10.236.79.9 with SMTP id h9mr19282654yhe.83.1360090791404;
+	Tue, 05 Feb 2013 10:59:51 -0800 (PST)
 Received: from localhost.localdomain ([187.23.144.59])
-	by mx.google.com with ESMTPS id f3sm13213721ani.3.2013.02.05.06.32.43
+	by mx.google.com with ESMTPS id f29sm19733609anj.17.2013.02.05.10.59.48
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 05 Feb 2013 06:32:45 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 05 Feb 2013 10:59:50 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Feb 2013 12:32:38 -0200
-Message-Id: <1360074758-6672-1-git-send-email-otavio@ossystems.com.br>
+Date: Tue,  5 Feb 2013 16:59:27 -0200
+Message-Id: <1360090767-15512-1-git-send-email-mario@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3] samba: Split libnss-winbind package
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] mg: add recipe for version 20110905
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,79 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 14:48:45 -0000
+X-List-Received-Date: Tue, 05 Feb 2013 19:15:42 -0000
 
-This allows for applications to resolv wins without the winbindd and
-sambad.
-
-Change-Id: Iaa86154a59e758b37f28796963e6550ed2d30464
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 ---
-Changes for v3:
--Fixes a parsing error
+ meta-oe/recipes-support/mg/mg_20110905.bb |   21 +++++++++++++++++++++
+ 1 files changed, 21 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-support/mg/mg_20110905.bb
 
- meta-oe/recipes-connectivity/samba/samba-basic.inc |    9 +++++----
- meta-oe/recipes-connectivity/samba/samba.inc       |    2 +-
- meta-oe/recipes-connectivity/samba/samba_3.6.8.bb  |    2 +-
- 3 files changed, 7 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-index af4e04e..05a5b3a 100644
---- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-@@ -9,7 +9,7 @@ EXTRA_OECONF += "\
-         --without-ldap \
-         --without-krb5"
- 
--PACKAGES =+ "libwbclient libwinbind libwinbind-dbg winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
-+PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
- 
- FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
-                      ${libdir}/security/.debug/pam_winbind.so \
-@@ -41,13 +41,14 @@ FILES_winbind = "${sbindir}/winbindd \
-                  ${bindir}/ntlm_auth \
-                  ${sysconfdir}/init.d/winbind \
- "
--FILES_libwinbind = "${libdir}/libnss_*${SOLIBS} \
--                    ${libdir}/idmap/*.so \
--                    ${libdir}/nss_info \
-+FILES_libwinbind = "${libdir}/idmap/*.so \
-                     ${libdir}/pdb \
-                     ${libdir}/gpext \
-                     ${libdir}/perfcount \
-                     ${libdir}/security/pam_winbind.so \
- "
- 
-+FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
-+                        ${libdir}/nss_info"
+diff --git a/meta-oe/recipes-support/mg/mg_20110905.bb b/meta-oe/recipes-support/mg/mg_20110905.bb
+new file mode 100644
+index 0000000..8d6907e
+--- /dev/null
++++ b/meta-oe/recipes-support/mg/mg_20110905.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "A portable version of the mg maintained by the OpenBSD team"
++HOMEPAGE = "http://homepage.boetes.org/software/mg/"
++LICENSE = "Public Domain"
++DEPENDS = "ncurses"
++SECTION = "console/editors"
 +
- FILES_swat       = "${sbindir}/swat ${datadir}/swat ${libdir}/*.msg"
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index a86c8be..3ee43ad 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -96,7 +96,7 @@ do_install_append() {
- 
- 
- 
--pkg_postinst_winbind () {
-+pkg_postinst_libnss-winbind () {
-     # add wins to the list of resolvers
-     ns=$D${sysconfdir}/nsswitch.conf
-     if ! grep "hosts:.*wins" $ns > /dev/null; then
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index f144de3..35d20c5 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -3,7 +3,7 @@ require samba-basic.inc
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PR = "r6"
-+PR = "r7"
- 
- SRC_URI += "\
-     file://config-h.patch \
++SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "2de35316fa8ebafe6003efaae70b723e"
++SRC_URI[sha256sum] = "1cd37d7e6a3eecc890a5718c38b8f38495057ba93856762a756ccee2f9618229"
++
++LIC_FILES_CHKSUM = "file://version.c;md5=811e1b67a5cd60c12b218a2b7c1adbf2"
++
++do_configure () {
++    sed -i Makefile.in -e 's,^prefix=.*,prefix=${prefix},'
++    ./configure
++}
++
++do_install () {
++    oe_runmake install DESTDIR=${D}
++}
 -- 
 1.7.2.5
 
