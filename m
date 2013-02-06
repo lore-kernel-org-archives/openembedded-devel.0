@@ -1,34 +1,38 @@
-Received: from mail-vb0-f43.google.com ([209.85.212.43])
+Received: from mail-da0-f46.google.com ([209.85.210.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U36vR-0002ty-OE
+	(envelope-from <martin.jansa@gmail.com>) id 1U377r-0003Ef-3w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Feb 2013 16:28:53 +0100
-Received: by mail-vb0-f43.google.com with SMTP id fs19so905856vbb.30
+	Wed, 06 Feb 2013 16:41:32 +0100
+Received: by mail-da0-f46.google.com with SMTP id p5so717774dak.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Feb 2013 07:12:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=JZQnjrZqi1xjbRFUr6SFNbvUiM6okf+ZNFxZT77e7Ek=;
-	b=ZbeNZaD6QJ9aL0QxV4YT0tVW8YkRHCyh/nETT/+Fa3da54MEXW1VQ4NgWz8QHqE7TP
-	4H97EfB5D3xXq1xMvpnDH1eREeIJOy72budXB0rasOtf8Mqme3xu5Vn6JIOjYeQ9c/OU
-	a4/3vz/WvETtLWMquX+KvGpYshdeeXLhIWf2jHH2RVbFSVrOdF7mMwuMHMxvlbwS3dEN
-	wrOkXjEKIcm1XJ0jtEFCdAhRegL4oybhgkI9fXSoQPVb84ZZ3rNWVw5NK1d4lUu3pG0z
-	H1Y8bbAbvel+IYJVPJKClEGKoL7ZT8n1KiTbPWGqkdGu5GFLLhWJVNloBuCXP6USGdg5
-	NKuA==
-MIME-Version: 1.0
-X-Received: by 10.52.66.168 with SMTP id g8mr3092446vdt.27.1360163570231; Wed,
-	06 Feb 2013 07:12:50 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Wed, 6 Feb 2013 07:12:50 -0800 (PST)
-In-Reply-To: <20130206144840.GZ3271@jama>
+	Wed, 06 Feb 2013 07:25:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=LbdtwjHaT1KEmzi9LLdhU+FsKt2WdCjDUYUzk1l+N3s=;
+	b=vGsmWMly38IcclIneKXc2bVe7INtXrEhECekUlunqrjEhko+PqV8zjVQH4bvkASyL1
+	ObByZDGFd9wXwmN3d/OXRGQeQl0bcZt6jNZsgsvY1iSnGOuGeUf9+snQH0KUxvBRWIGW
+	XzI8wIJE9egzvAc3nCbNn+Q/Tb1ooij4nxKgLnwbgOWcO2Sdu0Cq0zJH5gGaCgiCTn+b
+	VJ9bAC5pgtuNfoyk/ORKKsDHq3/XJH78tEGW96ytaTX0zMn8CtbRkDBQupoVjLfcxrEZ
+	633gwacfXz1TlPm/DQsED7QKnCZN2QX5DFlF53bF5YuCr0q9jSlloJ5CT9EvcRBFyMa0
+	Ejpg==
+X-Received: by 10.66.74.42 with SMTP id q10mr76784610pav.71.1360164338920;
+	Wed, 06 Feb 2013 07:25:38 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id a1sm38513145pav.2.2013.02.06.07.25.36
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 06 Feb 2013 07:25:37 -0800 (PST)
+Date: Wed, 6 Feb 2013 16:25:29 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130206152529.GA3271@jama>
 References: <1360102723-27891-1-git-send-email-schnitzeltony@googlemail.com>
 	<1360102723-27891-5-git-send-email-schnitzeltony@googlemail.com>
 	<20130206144840.GZ3271@jama>
-Date: Wed, 6 Feb 2013 16:12:50 +0100
-Message-ID: <CALbNGRR9isWgLJmRL3thvhkFhirwLR2YqoXfrHPtgMqOHrYQBw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CALbNGRR9isWgLJmRL3thvhkFhirwLR2YqoXfrHPtgMqOHrYQBw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRR9isWgLJmRL3thvhkFhirwLR2YqoXfrHPtgMqOHrYQBw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe-meta-systemd 4/5] pointercal-xinput: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,29 +47,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2013 15:28:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Feb 2013 15:41:34 -0000
+X-Groupsio-MsgNum: 43027
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FYmwbMCTM+aCvPj+"
+Content-Disposition: inline
+
+--FYmwbMCTM+aCvPj+
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 6, 2013 at 3:48 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Tue, Feb 05, 2013 at 11:18:42PM +0100, Andreas M=C3=BCller wrote:
->> Calibration values are stored now in /etc/xorg.conf.d/99-<device>.conf. =
-After
->
-> So the plan to replace pointercal-xinput in BSP layers
-> is to convert pointercal.xinput files to 99-<device>.conf files provided
-> by xserver-xf86-conf bbappend?
-I would have appended it to xinput-calibrator because that's where the
-configuration files are used. I can put them also to xserver-xf86-conf
-bbappend - have no strong opinion here.
->
-> And do you have some script to convert them or do you convert them
-> manually?
->
-I wanted to convert them manually but a script is more reliable - will
-do that next week.
+On Wed, Feb 06, 2013 at 04:12:50PM +0100, Andreas M=FCller wrote:
+> On Wed, Feb 6, 2013 at 3:48 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> > On Tue, Feb 05, 2013 at 11:18:42PM +0100, Andreas M=FCller wrote:
+> >> Calibration values are stored now in /etc/xorg.conf.d/99-<device>.conf=
+=2E After
+> >
+> > So the plan to replace pointercal-xinput in BSP layers
+> > is to convert pointercal.xinput files to 99-<device>.conf files provided
+> > by xserver-xf86-conf bbappend?
+> I would have appended it to xinput-calibrator because that's where the
+> configuration files are used. I can put them also to xserver-xf86-conf
+> bbappend - have no strong opinion here.
 
-Andreas
+xinput-calibrator does not need to be MACHINE_ARCH, that's why they were
+in separate pointercal-xinput before.
 
+xserver-xf86-config on other hand is usually MACHINE_ARCH so it would be
+better to add them there.
 
+Or create new recipe for them and RDEPEND it from xinput-calibrator...
+
+> > And do you have some script to convert them or do you convert them
+> > manually?
+> >
+> I wanted to convert them manually but a script is more reliable - will
+> do that next week.
+>=20
+> Andreas
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--FYmwbMCTM+aCvPj+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlESdekACgkQN1Ujt2V2gBzqrQCfdDk3s7YjAHsbm+AyMP1l4QIs
+SKgAnijM5DUo7GjRpP1wz5ALGPM++g8Z
+=8eiw
+-----END PGP SIGNATURE-----
+
+--FYmwbMCTM+aCvPj+--
