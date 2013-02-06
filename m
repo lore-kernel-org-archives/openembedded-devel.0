@@ -1,34 +1,34 @@
-Received: from mail-yh0-f45.google.com ([209.85.213.45])
+Received: from mail-bk0-f49.google.com ([209.85.214.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mario.goulart@gmail.com>) id 1U32rr-0003g9-0Y
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1U35mP-0000ht-RT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Feb 2013 12:08:47 +0100
-Received: by mail-yh0-f45.google.com with SMTP id 24so127766yhr.32
+	Wed, 06 Feb 2013 15:15:21 +0100
+Received: by mail-bk0-f49.google.com with SMTP id w11so659933bku.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Feb 2013 02:52:51 -0800 (PST)
+	Wed, 06 Feb 2013 05:59:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=rK40yiDKgnJ7IwX/nTYQpfHqXu0gNDadq0uz16kZsL4=;
-	b=lTkEKzm3B+BfYRsgWm4BHZup13Gb4rBB6a//tG0wtnCAWY/6PBxQxxIm4j0NfJC2ir
-	osRAYVZVwcJLQMvSt3rTvzliRyN0/5D5YozgpxhOyfrQL7uCK8zllv+ftTLoorpZ1U2w
-	Qf9hk85yscHjq7WwVWn4/0kD3gl8gUE3GgkB/4iLgOkGzV5WBco69VflNHbdY/V25P3x
-	LgaY1KB8TK0eGC3+IlYUVtS1srX35BHCdUbmQlnjYRE7zNElra0yOKi0RATixlOUrAIQ
-	v1YQhAESwrgs6LTf4IVV8viG0vgTY9rUNu1WnNTGKEN5IRm1EY3H6RCKFMirWNUHY+g7
-	bRDA==
-X-Received: by 10.236.89.107 with SMTP id b71mr34646732yhf.86.1360147971710;
-	Wed, 06 Feb 2013 02:52:51 -0800 (PST)
-Received: from localhost.localdomain ([187.23.144.59])
-	by mx.google.com with ESMTPS id k24sm40125121yhd.5.2013.02.06.02.52.49
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 06 Feb 2013 02:52:50 -0800 (PST)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=UzUNb/YMp8v+TGnlfoKZbzJdjIyV2aZhGwhx3M0NbMU=;
+	b=x/xUupXNoyDoDZbiBV/QqNThNapVhFHkaTP378L5ha4KRYcwl3idz9N+Okfo0blK98
+	4kGFk/QJ9wdtHe08BKqC3XIBlAgUdTQ5+wWCoSoBpSImFk5KY9z4pPWK7fLG13TpfYGK
+	2t/k2XG5j7jwhw43K0JY/ZGm3t5nOcJ9laBGFZhzvSoA31ugpt2tKC/d4Ao4t6tNOSLf
+	/X2s9KvY3mC1hSaV28dn02hT5H4Sdk8u/afq1SiCFFDA5TM+wc4A8hlzpe6gi9McIUG2
+	tbA71TBQh08TLmuRvQICodUIYzUVR/O+GAUbWel41bdUhLXhy7AK/Av0Sf5oXoIme9CF
+	OD4A==
+X-Received: by 10.204.149.140 with SMTP id t12mr2507942bkv.123.1360159166785; 
+	Wed, 06 Feb 2013 05:59:26 -0800 (PST)
+MIME-Version: 1.0
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.204.25.141 with HTTP; Wed, 6 Feb 2013 05:59:05 -0800 (PST)
+In-Reply-To: <CAO7m3AmfONKCwbwrduXVtxQdfxOAduZVG8EnKJQgCa8RN5V7Ww@mail.gmail.com>
+References: <CAO7m3AmfONKCwbwrduXVtxQdfxOAduZVG8EnKJQgCa8RN5V7Ww@mail.gmail.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Wed, 6 Feb 2013 22:59:05 +0900
+X-Google-Sender-Auth: k4N-ptqjK0LK27djxPueBatGxiQ
+Message-ID: <CAPESJy4Z9y_jkA_02=-6dYxLPbQqVKVyxreGseN1tVLy=jFr7g@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Feb 2013 08:52:30 -0200
-Message-Id: <1360147950-19689-1-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCH v2] mg: add recipe for version 20110905
+Subject: Re: User Application with Shared Library - do_rootfs fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +42,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2013 11:08:49 -0000
+X-List-Received-Date: Wed, 06 Feb 2013 14:15:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- meta-oe/recipes-support/mg/mg_20110905.bb |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/mg/mg_20110905.bb
-
-diff --git a/meta-oe/recipes-support/mg/mg_20110905.bb b/meta-oe/recipes-support/mg/mg_20110905.bb
-new file mode 100644
-index 0000000..7a6a1c7
---- /dev/null
-+++ b/meta-oe/recipes-support/mg/mg_20110905.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "A portable version of the mg maintained by the OpenBSD team"
-+HOMEPAGE = "http://homepage.boetes.org/software/mg/"
-+LICENSE = "PD"
-+LIC_FILES_CHKSUM = "file://version.c;md5=811e1b67a5cd60c12b218a2b7c1adbf2"
-+DEPENDS = "ncurses"
-+SECTION = "console/editors"
-+
-+SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "2de35316fa8ebafe6003efaae70b723e"
-+SRC_URI[sha256sum] = "1cd37d7e6a3eecc890a5718c38b8f38495057ba93856762a756ccee2f9618229"
-+
-+do_configure () {
-+    sed -i Makefile.in -e 's,^prefix=.*,prefix=${prefix},'
-+    ./configure
-+}
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D}
-+}
+I can't find DEPENDS keyword and RDEPENDS keyword in your recipes.
+Is it done at will?
 -- 
-1.7.2.5
+Takeshi Hamasaki
 
+2013/2/5 Thomas Besemer <thomas.besemer@gmail.com>:
+> I am generating some source code in the OE/Yocto world.  This work requires
+> that a shared library exist.  I am able to to build the shared library, and
+> maybe install it, and then build the test code against it.  Both these
+> builds work.  Final assembly of Root FS fails.
+>
+> Below are my two recipes.  Appears that the <libgcpy_gc6016sa.so> does not
+> get installed correctly (does build).  The recipe for <gcpytest> does work,
+> but it does find the library during build.
+>
+> If I build each indepdent of the other, it's fine.  But, once I try to
+> build <core-image-minimal> it complains that the library is not there.
+>
+>
+> | error: Failed dependencies:
+>
+> | libgcpy_gc6016.so.1 is needed by gcpytest-1-r0.armv7a_vfp_neon
+>
+> ---
+>
+> <gcpy-dev.bb>
+>
+> DESCRIPTION = "GCPY Server application"
+>
+> SECTION = "gcsim"
+>
+> LICENSE = "MIT"
+>
+> LIC_FILES_CHKSUM =
+> "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+>
+> PR = "r0"
+>
+> SRC_URI = "file://gcpy-dev.tar"
+>
+> S = "${WORKDIR}"
+>
+> do_compile() {
+>
+> oe_runmake
+>
+> }
+>
+> do_install() {
+>
+> oe_libinstall -so libgcpy_gc6016 ${STAGING_LIBDIR}
+>
+> install -m 0644 ${S}/gcpy_target_lib.h ${STAGING_INCDIR}
+>
+> oe_libinstall -so libgcpy_gc6016.so ${D}${libdir}
+>
+> }
+>
+>  EXTRA_OEMAKE += "V=1 ARCH=${TARGET_ARCH}
+> GC5330_TOOL_PREFIX=${TARGET_PREFIX} SKIP_STRIP=y"
+>
+> FILES_${PN}-dev = "${D}${libdir}/libgcpy_gc6016.so"
+>
+> ---
+>
+> <gcpytest.bb>
+>
+> DESCRIPTION = "Simple GCPY Test application"
+>
+> SECTION = "gcsim"
+>
+> LICENSE = "MIT"
+>
+> LIC_FILES_CHKSUM =
+> "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+>
+> PR = "r0"
+>
+> SRC_URI = "file://gcpytest.c"
+>
+> S = "${WORKDIR}"
+>
+> do_compile() {
+>
+> ${CC} gcpytest.c -o gcpytest -lgcpy_gc6016 -lrt
+>
+> }
+>
+> do_install() {
+>
+> install -d ${D}${bindir}
+>
+> install -m 0755 gcpytest ${D}${bindir}
+>
+> }
+>
+> REQUIRES = " gcpy-dev"
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
