@@ -1,22 +1,22 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U3ZJG-0007Ci-EL
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U3ZJG-0007Cj-EP
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 07 Feb 2013 22:47:10 +0100
 Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 1E9D0D22F2;
-	Thu,  7 Feb 2013 11:51:30 +0100 (CET)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 133D5D22F3;
+	Thu,  7 Feb 2013 11:51:34 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Feb 2013 11:51:02 +0100
-Message-Id: <1360234263-18278-8-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Thu,  7 Feb 2013 11:51:03 +0100
+Message-Id: <1360234263-18278-9-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.0
 In-Reply-To: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
 References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Subject: [meta-oe][PATCH 7/8] libmemcrypt: add 2.5.8
+Subject: [meta-oe][PATCH 8/8] google-perftools: add 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +34,27 @@ X-List-Received-Date: Thu, 07 Feb 2013 21:47:10 -0000
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../recipes-support/libmcrypt/libmcrypt_2.5.8.bb   | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+ meta-oe/recipes-support/google-perftools/gperftools_2.0.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
 
-diff --git a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+diff --git a/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
 new file mode 100644
-index 0000000..0cbe189
+index 0000000..1717752
 --- /dev/null
-+++ b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Replacement for the old crypt() package and crypt(1) command, with extensions."
-+HOMEPAGE = "http://mcrypt.sourceforge.net/"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
++++ b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "Fast, multi-threaded malloc() and nifty performance analysis tools"
++HOMEPAGE = "http://code.google.com/p/gperftools/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/mcrypt/Libmcrypt/${PV}/libmcrypt-${PV}.tar.gz"
++SRC_URI = "${DEBIAN_MIRROR}/main/g/google-perftools/google-perftools_${PV}.orig.tar.gz"
 +
-+SRC_URI[md5sum] = "0821830d930a86a5c69110837c55b7da"
-+SRC_URI[sha256sum] = "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18ca9c9ef34d27a373e"
++SRC_URI[md5sum] = "13f6e8961bc6a26749783137995786b6"
++SRC_URI[sha256sum] = "7de3dd91f018825b1e7d332af1edace15c6211f430186febede1835069861080"
 +
-+inherit autotools gettext binconfig
-+
-+do_configure() {
-+	gnu-configize --force
-+#	libtoolize --force --copy
-+	autoconf
-+	oe_runconf
-+}
-+
-+do_install_append() {
-+	rm ${D}${libdir}/libmcrypt -r
-+}
++inherit autotools
 -- 
 1.8.0
 
