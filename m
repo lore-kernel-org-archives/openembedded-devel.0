@@ -1,37 +1,31 @@
-Received: from mail-ve0-f172.google.com ([209.85.128.172])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U37Qn-00048k-Rh
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Feb 2013 17:01:06 +0100
-Received: by mail-ve0-f172.google.com with SMTP id cz11so1296164veb.31
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1U3YuC-0006sd-K4 for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Feb 2013 22:21:42 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1U3YBW-0004PV-2g for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Feb 2013 21:35:06 +0100
+Received: from tfitzsim-lnx.cisco.com ([161.44.225.6])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Feb 2013 21:35:06 +0100
+Received: from fitzsim by tfitzsim-lnx.cisco.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Feb 2013 07:45:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=nQfEr+bFREnx0xTRb7ke6J76DQ+3lSBNPRKZw+arxqA=;
-	b=MF10x2s4HRgC0iVuH/iLROyLUQrAZgwvF1tNY6RCIMIMT1BLDILF/0t7NxG/XLOPNm
-	tdxOuZr6rjBomIBPtSYUdF44uULiAOEOxXKtt/wzZ3Z9YsvwbVpoFx3mzQeIxkmYfMfI
-	Otw0tpl8OiTIhAZDDN3aszMQinBGCWwSdyOXlja5oUJSJ5GI/lzS87glVIO3D5d14XiK
-	EGgtmCMDLa5gVgh+U5BVyn9n2OXEQCXEiwr5vJUIUveGvxCtFFkYEmmIxTnReQEK/wEF
-	NFWWGNixdIC2XTuZhJV84y2u6bpWo3fHUQexkHpxYvD/ZSKOkM5R1MU3Urbmk0eR0J7t
-	lMYQ==
-MIME-Version: 1.0
-X-Received: by 10.52.28.101 with SMTP id a5mr29216344vdh.92.1360165514277;
-	Wed, 06 Feb 2013 07:45:14 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Wed, 6 Feb 2013 07:45:14 -0800 (PST)
-In-Reply-To: <20130206152529.GA3271@jama>
-References: <1360102723-27891-1-git-send-email-schnitzeltony@googlemail.com>
-	<1360102723-27891-5-git-send-email-schnitzeltony@googlemail.com>
-	<20130206144840.GZ3271@jama>
-	<CALbNGRR9isWgLJmRL3thvhkFhirwLR2YqoXfrHPtgMqOHrYQBw@mail.gmail.com>
-	<20130206152529.GA3271@jama>
-Date: Wed, 6 Feb 2013 16:45:14 +0100
-Message-ID: <CALbNGRSxbdOORdEy0LrmmDaGoh53q+=CsU7QjO2YBK+X7bBVFw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 07 Feb 2013 21:35:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe-meta-systemd 4/5] pointercal-xinput: remove
+From: Thomas Fitzsimmons <fitzsim@cisco.com>
+Date: Thu, 07 Feb 2013 15:29:03 -0500
+Message-ID: <cover.1360262057.git.fitzsim@cisco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: tfitzsim-lnx.cisco.com
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1.50 (gnu/linux)
+Cancel-Lock: sha1:T+kWnSTPTh+bYY7hyNu2z2xfbN8=
+Subject: [meta-oe][PATCH 0/2] Refactor lmsensors to allow machine-specific configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2013 16:01:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Feb 2013 21:24:42 -0000
+Content-Type: text/plain
 
-On Wed, Feb 6, 2013 at 4:25 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Wed, Feb 06, 2013 at 04:12:50PM +0100, Andreas M=C3=BCller wrote:
->> On Wed, Feb 6, 2013 at 3:48 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
->> > On Tue, Feb 05, 2013 at 11:18:42PM +0100, Andreas M=C3=BCller wrote:
->> >> Calibration values are stored now in /etc/xorg.conf.d/99-<device>.con=
-f. After
->> >
->> > So the plan to replace pointercal-xinput in BSP layers
->> > is to convert pointercal.xinput files to 99-<device>.conf files provid=
-ed
->> > by xserver-xf86-conf bbappend?
->> I would have appended it to xinput-calibrator because that's where the
->> configuration files are used. I can put them also to xserver-xf86-conf
->> bbappend - have no strong opinion here.
->
-> xinput-calibrator does not need to be MACHINE_ARCH, that's why they were
-> in separate pointercal-xinput before.
->
-> xserver-xf86-config on other hand is usually MACHINE_ARCH so it would be
-> better to add them there.
->
-> Or create new recipe for them and RDEPEND it from xinput-calibrator...
-Or don't remove pointercal-xinput :)
+Hi,
 
-Andreas
+This patchset splits lmsensors configuration files into a separate
+machine-specific "lmsensors-config" recipe.  The main lmsensors recipe
+can remain machine-agnostic while sensor configuration files can be
+customized on a per-machine basis by extending the lmsensors-config
+recipe.
+
+This is useful when targetting multiple machines that share the same CPU
+architecture but differ in the number or type of sensors available on
+each.  The lmsensors packages can be shared among all the machines, and
+configuration packages made available on a per-machine basis.
+
+Thomas
+
+Thomas Fitzsimmons (2):
+  lmsensors-config: Initial commit
+  lmsensors: Add lmsensors-config RRECOMMENDS
+
+ .../recipes-support/lm_sensors/files/fancontrol    |    2 -
+ .../recipes-support/lm_sensors/files/fancontrol.sh |   48 -----------------
+ .../recipes-support/lm_sensors/files/sensord.cgi   |   10 ----
+ .../recipes-support/lm_sensors/files/sensord.conf  |   16 ------
+ .../recipes-support/lm_sensors/files/sensord.sh    |   49 -----------------
+ .../recipes-support/lm_sensors/files/sensors.conf  |    2 -
+ .../lm_sensors/lmsensors-config/fancontrol         |    2 +
+ .../lm_sensors/lmsensors-config/sensord.cgi        |   10 ++++
+ .../lm_sensors/lmsensors-config/sensord.conf       |   16 ++++++
+ .../lm_sensors/lmsensors-config/sensors.conf       |    2 +
+ .../lm_sensors/lmsensors-config_1.0.bb             |   50 +++++++++++++++++
+ .../lm_sensors/lmsensors/fancontrol.init           |   48 +++++++++++++++++
+ .../lm_sensors/lmsensors/sensord.init              |   49 +++++++++++++++++
+ .../recipes-support/lm_sensors/lmsensors_3.3.2.bb  |   56 +++++++-------------
+ 14 files changed, 196 insertions(+), 164 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/fancontrol
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/fancontrol.sh
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.cgi
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.conf
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/sensord.sh
+ delete mode 100644 meta-oe/recipes-support/lm_sensors/files/sensors.conf
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors-config/fancontrol
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.cgi
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.conf
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors-config/sensors.conf
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/fancontrol.init
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/sensord.init
+
+
 
 
