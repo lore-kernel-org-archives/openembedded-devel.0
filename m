@@ -1,35 +1,37 @@
-Received: from mail-vc0-f181.google.com ([209.85.220.181])
+Received: from mail-wi0-f170.google.com ([209.85.212.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U3wPs-0000Y9-9K
+	(envelope-from <ross.burton@intel.com>) id 1U3wwj-0002GY-6r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 23:27:33 +0100
-Received: by mail-vc0-f181.google.com with SMTP id d16so2645619vcd.26
+	Sat, 09 Feb 2013 00:01:29 +0100
+Received: by mail-wi0-f170.google.com with SMTP id hm11so1527472wib.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:11:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=7VAd0nUZ0BWZ1CH5PXlbtRTof3GP85RPwZaDxNhLdOU=;
-	b=QH+nx6EUxLs5G5Ad4y9HEcfSIOlavvDaYSkEDl7fb5KozA5nHsJb0YNYLBhXCahGbN
-	NcZh0qucaii8SxRZF7F8x8SrRQBMtEaU7717yjfsu9FjZzJAU0EDAxb1Em08vUNa5+SX
-	VWhnFlpPvDKcXrsdEtuj4c0ltXF1nE3qA4XEOCTH7KapU1klStKPL6RpF7CS5j3rVJyW
-	ozVhxw9cuAwhxDXFzCRDqLMix/lxj/naOtxi3DLbd3Tz0dUxd4dj2cJOhIuFEikJtV9e
-	6y44sP+NEvhumuckXQB1kGS1+e5Ay15YwKVdrT7GUSHDW2eFdM821CA8oYcfKhUi1VS7
-	IgIQ==
+	Fri, 08 Feb 2013 14:45:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=cAvcq0RPnCbXYnFNsBrueAmu0SSq4UimUqOJ6mfVYMw=;
+	b=jx4ryPrNLgnAZT/M3mdxAfGOwNECJqY7X5bMJxcNNGa6C8arjQTUozUAXnaUG7nTY0
+	rB7c20xq7t4DYbtiWADaQ1FUD7CDRlv4DTHIbY6Vs85Ihr4tE4KF6E6vgMULx/JQuuS2
+	N7oSy4cK+V49O6ICduJP8eMTBF71l6JMty/Z0hWThLzat86+vGKk+Ke67oz8KRw2CUhb
+	JQjwpQhVlEV7IQwbm+CJTSZfQfyyT8/n0JQh/STFUaeU1sJQLYvihjDxh0788Bb+rgGF
+	cI+yc/Gx0YvzuLrPRMeJjExDUGl+2RKl2kd5/0ZcHS18glmJDWG/T27qVm3Uxu3sC/l7
+	f2zw==
+X-Received: by 10.195.13.200 with SMTP id fa8mr12623079wjd.15.1360363534843;
+	Fri, 08 Feb 2013 14:45:34 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.32
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 08 Feb 2013 14:45:33 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-core@lists.openembedded.org
+Date: Fri,  8 Feb 2013 22:43:14 +0000
+Message-Id: <cover.1360360346.git.ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Received: by 10.220.154.148 with SMTP id o20mr8741940vcw.54.1360361497655;
-	Fri, 08 Feb 2013 14:11:37 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Fri, 8 Feb 2013 14:11:37 -0800 (PST)
-In-Reply-To: <kevu1a$phk$1@ger.gmane.org>
-References: <1360102723-27891-1-git-send-email-schnitzeltony@googlemail.com>
-	<1360102723-27891-5-git-send-email-schnitzeltony@googlemail.com>
-	<kevu1a$phk$1@ger.gmane.org>
-Date: Fri, 8 Feb 2013 23:11:37 +0100
-Message-ID: <CALbNGRT5K3UTNYqtR3-R9S3bB5Xo7qxLViT7efMQW4_Wh5Wx2Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe-meta-systemd 4/5] pointercal-xinput: remove
+X-Gm-Message-State: ALoCoQnhkRjNWk4PPVy2gzZqvyY209AaOQcxRPyCH/t3YIzanLVcbP0N5QwlCH2OSPx6Ojd60DiO
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/5] systemd class, and more enabling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +45,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 22:27:33 -0000
+X-List-Received-Date: Fri, 08 Feb 2013 23:01:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Feb 7, 2013 at 11:01 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 05-02-13 23:18, Andreas M=C3=BCller schreef:
->> Calibration values are stored now in /etc/xorg.conf.d/99-<device>.conf.
->> After this is accepted patches to layers appending pointercal-xinput wil=
-l
->> be send.
->
-> How does this work with board where you can plug in different touchscreen
-> (like beaglebone) or difference touchscreen controllers (beagleboard, oli=
-mex
-> allwinner boards, etc)?
->
-Each device gets an conf-file named by the name of the device. An
-example file I took from my gumstix:
+Hi,
 
-Section "InputClass"
-	Identifier	"calibration"
-	MatchProduct	"ADS7846 Touchscreen"
-	Option	"Calibration"	"96 3935 3591 98"
-	Option	"SwapAxes"	"0"
-EndSection
+This series introduces a systemd class (largely based on the work in
+meta-systemd) and changes update-rc.d.bbclass so that it doesn't do anything if
+systemd.bbclass was also inherited *and* systemd is enabled.
 
-For devices with different name it works fine. I have no solution yet
-for connecting multiple touchscreen devices of same device name -
-similar to your use-case connecting different touchscreens on same
-controller. There a manual recalibration has to be started which now
-stores the data persistent (if the operator has the right to write to
-/etc/X11/xorg.conf.d).
+As examples, avahi, connman and wpa-supplicant are updated to use the new class.
 
-Andreas
+Note that the new class does have slightly different semantics to the
+meta-systemd class, so merging the rest of the changes in meta-systemd that are
+relevant to oe-core should happen sooner rather than later.
+
+Ross
+
+The following changes since commit 20b4dcace222d6b1d659a8813b4affad075ec0c6:
+
+  dbus-native: Don't install dbus-launch (2013-02-08 14:50:38 +0000)
+
+are available in the git repository at:
+
+  git://git.yoctoproject.org/poky-contrib ross/systemd
+
+for you to fetch changes up to cba1dc1c04201b8f08fca587a7433238a5ddaa33:
+
+  wpa-supplicant: Enabling with systemd (2013-02-08 21:50:34 +0000)
+
+----------------------------------------------------------------
+Radu Moisan (3):
+      connman: Enabling with systemd
+      avahi: Enabling with systemd
+      wpa-supplicant: Enabling with systemd
+
+Ross Burton (2):
+      systemd.bbclass: helper class for recipes with systemd units
+      update-rc.d: don't do anything if systemd.bbclass is inherited
+
+ meta/classes/systemd.bbclass                       |  158 ++++++++++++++++++++
+ meta/classes/update-rc.d.bbclass                   |   19 ++-
+ meta/recipes-connectivity/avahi/avahi.inc          |   21 ++-
+ meta/recipes-connectivity/connman/connman.inc      |   11 +-
+ .../wpa-supplicant/wpa-supplicant-2.0.inc          |   13 +-
+ 5 files changed, 200 insertions(+), 22 deletions(-)
+ create mode 100644 meta/classes/systemd.bbclass
+
+Radu Moisan (3):
+  connman: Enabling with systemd
+  avahi: Enabling with systemd
+  wpa-supplicant: Enabling with systemd
+
+Ross Burton (2):
+  systemd.bbclass: helper class for recipes with systemd units
+  update-rc.d: don't do anything if systemd.bbclass is inherited
+
+ meta/classes/systemd.bbclass                       |  158 ++++++++++++++++++++
+ meta/classes/update-rc.d.bbclass                   |   19 ++-
+ meta/recipes-connectivity/avahi/avahi.inc          |   21 ++-
+ meta/recipes-connectivity/connman/connman.inc      |   11 +-
+ .../wpa-supplicant/wpa-supplicant-2.0.inc          |   13 +-
+ 5 files changed, 200 insertions(+), 22 deletions(-)
+ create mode 100644 meta/classes/systemd.bbclass
+
+-- 
+1.7.10.4
+
 
 
