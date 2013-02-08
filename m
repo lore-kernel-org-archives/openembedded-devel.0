@@ -1,25 +1,22 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1U3kbd-0002FR-8i
+	(envelope-from <mickey@vanille-media.de>) id 1U3lQX-0003h0-RS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 10:50:55 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 08 Feb 2013 01:34:51 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,628,1355126400"; d="scan'208";a="200038411"
-Received: from unknown (HELO helios.localnet) ([10.252.120.51])
-	by AZSMGA002.ch.intel.com with ESMTP; 08 Feb 2013 01:34:50 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Date: Fri, 08 Feb 2013 09:34:49 +0000
-Message-ID: <1419614.dDVzLBbgHh@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Some recipes from my work on HipHopVM
+	Fri, 08 Feb 2013 11:43:30 +0100
+Received: from granit.localdomain (e182221015.adsl.alicedsl.de [85.182.221.15])
+	by phalanx.drlauer-research.com (Postfix) with ESMTPSA id 5D5F3584013
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Feb 2013 12:40:33 +0100 (CET)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+Date: Fri, 8 Feb 2013 11:21:32 +0100
+References: <m6pgehgr97h4.fsf@cisco.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-Id: <2EFEEFBB-F179-4889-84AE-58FAA4FF2165@vanille-media.de>
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+X-Mailer: Apple Mail (2.1499)
+Subject: Error when attempting to subscribe to openembedded-devel@lists.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,33 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 09:50:56 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 08 Feb 2013 10:43:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 07 February 2013 11:50:55 Marcin Juszkiewicz wrote:
-> Some time ago I started working on porting HipHopVM for AArch64
-> platform. My job was to identify and build all dependencies. Effect of
-> it is in this patchset.
-> 
-> I added them to meta-oe/recipes-support/ just to show them and get
-> suggestions where to move them. Some may be useful for people outside of
-> HHVM (which is 64bit only and (iirc) supports x86-64 now).
-> 
-> For most of them I will have updates during next months.
 
-Thanks. I'm willing to be contradicted, but I would think (lib)memcached might 
-be best placed in meta-webserver.
 
-Also, it would be great if generally people could start including SUMMARY as 
-well as DESCRIPTION in their recipes if they aren't already doing so.
+Anfang der weitergeleiteten Nachricht:
 
-Cheers,
-Paul
+> Von: Thomas Fitzsimmons <fitzsim@cisco.com>
+> Betreff: Error when attempting to subscribe to =
+openembedded-devel@lists.openembedded.org
+> Datum: 7. Februar 2013 21:47:35 MEZ
+> An: mickeyl@linuxtogo.org
+>=20
+> Hi,
+>=20
+> I get a mailman error [1] when I attempt to subscribe to
+> openembedded-devel@lists.openembedded.org.
+>=20
+> I would prefer to post to the gmane newsgroup
+> "gmane.comp.handhelds.openembedded" though; I tried that too but my
+> message hasn't showed up, even after the Gmane confirmation step.  Do =
+I
+> need to be subscribed in order to use the Gmane
+> newsgroup-to-mailing-list bridge?
+>=20
+> Thanks,
+> Thomas
+>=20
+> 1.
+> Bug in Mailman version 2.1.11
+>=20
+> We're sorry, we hit a bug!
+>=20
+> Please inform the webmaster for this site of this problem. Printing of
+> traceback and other system information has been explicitly inhibited,
+> but the webmaster can find this information in the Mailman error logs.
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
