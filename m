@@ -1,35 +1,24 @@
-Received: from mail-ea0-f171.google.com ([209.85.215.171])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <pmiscml@gmail.com>) id 1U3pWb-0007LQ-4Q
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U3qCd-0000ra-Sw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 16:06:49 +0100
-Received: by mail-ea0-f171.google.com with SMTP id c13so1728500eaa.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 06:50:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=vMlq4GFqRxLMMAu4lZaZTyFOVRiSXa5OLCPWQow4HMk=;
-	b=wc06a4v4Y7l2GnLjadH0IsR9I+dabyfC4Ena1oGkiupJzbLy2E3uNQgy+/LPYgl2K/
-	rqItrCE6jUyIinixkUpGi/voG8pbQh8pUcW58yIlKdonX9kFVH/yaMJnYEFlZ7tUcQEq
-	Yu3mdQ9FN/rFnwV5x7R+1v83fwXPkTkMo2ZHxdRIEkkCixHqss5SrmrzJvSeYHO+3O8w
-	DDrpin+PKXVE+rYRVOilN5TO29zsBZX/bGbHTgq3Xbs7CCS0Csem7zWEluTH2zT2YVs5
-	d5B3Zl5dDUNVRPYnNz/H8pzneZujc0Ku1teUuBPBCJ/r6kP+ZIama9EWigNcCnspiLKE
-	exLg==
-X-Received: by 10.14.215.131 with SMTP id e3mr16694969eep.32.1360335007093;
-	Fri, 08 Feb 2013 06:50:07 -0800 (PST)
-Received: from x34f ([95.15.206.176])
-	by mx.google.com with ESMTPS id 44sm47707729eek.5.2013.02.08.06.50.03
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 08 Feb 2013 06:50:05 -0800 (PST)
-Received: by x34f (sSMTP sendmail emulation); Fri, 08 Feb 2013 16:50:01 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
+	Fri, 08 Feb 2013 16:49:28 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 08 Feb 2013 07:33:32 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,630,1355126400"; d="scan'208";a="284541525"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.120.51])
+	by fmsmga001.fm.intel.com with ESMTP; 08 Feb 2013 07:33:20 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Feb 2013 16:49:48 +0200
-Message-Id: <0d914f6415e72c6d9999b0f2f5b3e6c8ec209363.1360332752.git.pfalcon@users.sourceforge.net>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1360332752.git.pfalcon@users.sourceforge.net>
-References: <cover.1360332752.git.pfalcon@users.sourceforge.net>
-Subject: [oe-core] [PATCH 1/1] ccache.bbclass: Allow user to override CCACHE_DIR.
+Date: Fri,  8 Feb 2013 15:33:08 +0000
+Message-Id: <d27fbed307bc6afc4e260622a8c36b32fc2d89ce.1360337212.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH 1/6] python-feedparser: add new recipe for version 5.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 15:06:52 -0000
+X-List-Received-Date: Fri, 08 Feb 2013 15:49:28 -0000
 
-For example, some users may want to use single cache directory (instead
-of per-package) with known max size limit, to better control disk usage.
-
-Signed-off-by: Paul Sokolovsky <pfalcon@users.sourceforge.net>
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- meta/classes/ccache.bbclass |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python-feedparser_5.1.3.bb   |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
 
-diff --git a/meta/classes/ccache.bbclass b/meta/classes/ccache.bbclass
-index cd06a4b..ca3ca43 100644
---- a/meta/classes/ccache.bbclass
-+++ b/meta/classes/ccache.bbclass
-@@ -1,5 +1,5 @@
- CCACHE = "${@bb.which(d.getVar('PATH', True), 'ccache') and 'ccache '}"
--export CCACHE_DIR = "${TMPDIR}/ccache/${MULTIMACH_HOST_SYS}/${PN}"
-+export CCACHE_DIR ?= "${TMPDIR}/ccache/${MULTIMACH_HOST_SYS}/${PN}"
- CCACHE_DISABLE[unexport] = "1"
- 
- do_configure[dirs] =+ "${CCACHE_DIR}"
+diff --git a/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb b/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
+new file mode 100644
+index 0000000..86e4fd6
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Python Atom and RSS feed parser"
++HOMEPAGE = "http://code.google.com/p/feedparser"
++SECTION = "devel/python"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=39082dbc030b4a3ee3e48e162eab408e"
++
++SRC_URI = "http://feedparser.googlecode.com/files/feedparser-${PV}.tar.bz2"
++SRC_URI[md5sum] = "f8790accd379b578261cb5b0047bd20c"
++SRC_URI[sha256sum] = "91a28a76b5cbaf7457a22e47e04347568a1f21fac85c806867ac72d32aabe718"
++
++S = "${WORKDIR}/feedparser-${PV}"
++
++inherit distutils
++
 -- 
-1.7.9.5
+1.7.10.4
 
 
 
