@@ -1,34 +1,35 @@
-Received: from mail-vc0-f180.google.com ([209.85.220.180])
+Received: from mail-vc0-f181.google.com ([209.85.220.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U3wOv-0000Rk-67
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U3wPs-0000Y9-9K
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 23:26:34 +0100
-Received: by mail-vc0-f180.google.com with SMTP id fo13so2626315vcb.39
+	Fri, 08 Feb 2013 23:27:33 +0100
+Received: by mail-vc0-f181.google.com with SMTP id d16so2645619vcd.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:10:38 -0800 (PST)
+	Fri, 08 Feb 2013 14:11:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=mime-version:x-received:in-reply-to:references:date:message-id
 	:subject:from:to:content-type:content-transfer-encoding;
-	bh=Zu80XNXUSPkPU/dKkggoXHcv5fxDeLzEFxm1h9/h1N4=;
-	b=jIIH7ySg9ZjoVKsYKEz6jK3KCtfJ6hSsOfMl0gTGWjd7iK6phkO+bK7MQcrmn2fX+f
-	rnsuKdlbrkoli5HfDlGDvsV+jzA8pr98/yrH+0PbaSwHPdSlGub0jqA0X5ZeWIGQJJsr
-	WjWBMvezzvfWAju+niielm4V25INSfp7I7e70fnMkmJq5KMq6b3fIEDPNJvC1wOd1zf5
-	Fk+2OotdrsPqNkTTnwbZonAcoFLd4WTtzPI9mskh5TKaN3FDmd2liLRtwNgGcyPqMwrL
-	lFkq2yD4G0zVpVVyke1hwcChiNEBc+lLDkTKQKDxGD5daDV567embBrJcNukw/EFGKOo
-	VA6g==
+	bh=7VAd0nUZ0BWZ1CH5PXlbtRTof3GP85RPwZaDxNhLdOU=;
+	b=QH+nx6EUxLs5G5Ad4y9HEcfSIOlavvDaYSkEDl7fb5KozA5nHsJb0YNYLBhXCahGbN
+	NcZh0qucaii8SxRZF7F8x8SrRQBMtEaU7717yjfsu9FjZzJAU0EDAxb1Em08vUNa5+SX
+	VWhnFlpPvDKcXrsdEtuj4c0ltXF1nE3qA4XEOCTH7KapU1klStKPL6RpF7CS5j3rVJyW
+	ozVhxw9cuAwhxDXFzCRDqLMix/lxj/naOtxi3DLbd3Tz0dUxd4dj2cJOhIuFEikJtV9e
+	6y44sP+NEvhumuckXQB1kGS1+e5Ay15YwKVdrT7GUSHDW2eFdM821CA8oYcfKhUi1VS7
+	IgIQ==
 MIME-Version: 1.0
-X-Received: by 10.52.26.17 with SMTP id h17mr7606561vdg.101.1360361438486;
-	Fri, 08 Feb 2013 14:10:38 -0800 (PST)
-Received: by 10.52.95.243 with HTTP; Fri, 8 Feb 2013 14:10:38 -0800 (PST)
-In-Reply-To: <kevubg$t7s$1@ger.gmane.org>
+X-Received: by 10.220.154.148 with SMTP id o20mr8741940vcw.54.1360361497655;
+	Fri, 08 Feb 2013 14:11:37 -0800 (PST)
+Received: by 10.52.95.243 with HTTP; Fri, 8 Feb 2013 14:11:37 -0800 (PST)
+In-Reply-To: <kevu1a$phk$1@ger.gmane.org>
 References: <1360102723-27891-1-git-send-email-schnitzeltony@googlemail.com>
-	<kevubg$t7s$1@ger.gmane.org>
-Date: Fri, 8 Feb 2013 23:10:38 +0100
-Message-ID: <CALbNGRRcVyv3198HCRvCT-tx2bzxRLFV+XZwFtfe_00YJ_rAmg@mail.gmail.com>
+	<1360102723-27891-5-git-send-email-schnitzeltony@googlemail.com>
+	<kevu1a$phk$1@ger.gmane.org>
+Date: Fri, 8 Feb 2013 23:11:37 +0100
+Message-ID: <CALbNGRT5K3UTNYqtR3-R9S3bB5Xo7qxLViT7efMQW4_Wh5Wx2Q@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe-meta-systemd 0/5] xinput-calibrator rework
+Subject: Re: [meta-oe-meta-systemd 4/5] pointercal-xinput: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,60 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 22:26:34 -0000
+X-List-Received-Date: Fri, 08 Feb 2013 22:27:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 7, 2013 at 11:06 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
+On Thu, Feb 7, 2013 at 11:01 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
 te:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 >
 > Op 05-02-13 23:18, Andreas M=C3=BCller schreef:
->> * Implemented are 3 modes of invocation: 1. udev/systemd 2.
->> /etc/xdg/autostart 3. manual 1/2 are selected upon DISTRO_FEATURES
->> containing systemd or not
->>
->> * The calibration is stored in
->> /etc/X11/xorg.conf.d/99-<name-of-touchscreen>.conf Herby support for
->> multiple touchsceen devices is prepared.
->>
->> * The script detects upon parameter information how it was called and
->> waits for xserver to come up / detect connected touchsceen devices. If n=
-o
->> matching calibration file is found, the xinput_calibrator is called for
->> this device. For systemd invocation the default display is choosen.
->>
->> * For manual invocation and multiple touchscreen devices attached, the
->> operator can select which device to calibrate interactively.
->>
->> * Multiple touchscreen support is prepared - the following open issues
->> are known: * Multiple touchscreens with same device name will get same
->> calibration values. An unique device identifier could not be found yet. =
-*
->> systemd startup with multiple device cause multiple instances of
->> xinput_calibrator being started without information for which device the
->> calibration is performed.
->>
->> * Many many tests were performed: 2 automatic invocation types * (1st +
->> 2nd startup) * (0, 1, 2 touchscreens)
->>
->> * Other layers need alignment for pointercal removement. If accepted I
->> can take care (this is NOT an extortion :)
+>> Calibration values are stored now in /etc/xorg.conf.d/99-<device>.conf.
+>> After this is accepted patches to layers appending pointercal-xinput wil=
+l
+>> be send.
 >
-> At FOSDEM I found out that the Tias wearing the FOSDEM organization hoodi=
-e
-> is actually the same Tias who maintains xinput-calibrator. Long story sho=
-rt:
-> we should send all out patches upstream and he'll have a look at them. He=
- is
-> a big fan of the xorg conf snippet that this patchset introduces.
-I will append the script/udev-rule/systemd service to the patchset.
-With the systemd/udev stuff I would like to wait a bit until our users
-have collected experience. After sending this series I saw that on
-some images at first start xinput-calibrator is hidden by the greeter
-application of dm. Up to now I did not yet find a good way to have
-xinput_calibrator 'always on top'.
+> How does this work with board where you can plug in different touchscreen
+> (like beaglebone) or difference touchscreen controllers (beagleboard, oli=
+mex
+> allwinner boards, etc)?
+>
+Each device gets an conf-file named by the name of the device. An
+example file I took from my gumstix:
+
+Section "InputClass"
+	Identifier	"calibration"
+	MatchProduct	"ADS7846 Touchscreen"
+	Option	"Calibration"	"96 3935 3591 98"
+	Option	"SwapAxes"	"0"
+EndSection
+
+For devices with different name it works fine. I have no solution yet
+for connecting multiple touchscreen devices of same device name -
+similar to your use-case connecting different touchscreens on same
+controller. There a manual recalibration has to be started which now
+stores the data persistent (if the operator has the right to write to
+/etc/X11/xorg.conf.d).
 
 Andreas
 
