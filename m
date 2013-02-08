@@ -1,20 +1,24 @@
 Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1U3qCe-0000ra-Hu
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U3qCe-0000rb-PS
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 08 Feb 2013 16:49:28 +0100
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
 	by fmsmga102.fm.intel.com with ESMTP; 08 Feb 2013 07:33:33 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,630,1355126400"; d="scan'208";a="284541515"
+X-IronPort-AV: E=Sophos;i="4.84,630,1355126400"; d="scan'208";a="284541536"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.120.51])
-	by fmsmga001.fm.intel.com with ESMTP; 08 Feb 2013 07:33:19 -0800
+	by fmsmga001.fm.intel.com with ESMTP; 08 Feb 2013 07:33:21 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Feb 2013 15:33:07 +0000
-Message-Id: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+Date: Fri,  8 Feb 2013 15:33:09 +0000
+Message-Id: <13bda4e0ae2442cca21064b23051b81ba947a492.1360337212.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH 0/6] Python library additions/improvements
+In-Reply-To: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH 2/6] python-greenlet: add new recipe for version 0.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,46 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 15:49:28 -0000
+X-List-Received-Date: Fri, 08 Feb 2013 15:49:29 -0000
 
-Some additional recipes and updates for some Python libraries, in
-preparation for supporting an Ajenti recipe (which will be sent
-separately.)
-
-Kevin Strasser <kevin.strasser@linux.intel.com> helped to test and
-improve these.
-
-
-The following changes since commit 61911b23099c2658186179504ded318c987b5276:
-
-  ttf: introduce update-fonts bbclass and change all ttf recipes to use it (2013-02-06 15:16:01 +0100)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/python-bits
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/python-bits
-
-Paul Eggleton (6):
-  python-feedparser: add new recipe for version 5.1.3
-  python-greenlet: add new recipe for version 0.3.4
-  python-gevent: add new recipe for version 0.13.8
-  python-psutil: add new recipe for version 0.6.1
-  python-pyopenssl: tweak recipe
-  python-lxml: update to 3.0.2 and tweak
-
- .../python/python-feedparser_5.1.3.bb               |   14 ++++++++++++++
- .../recipes-devtools/python/python-gevent_0.13.8.bb |   19 +++++++++++++++++++
- .../python/python-greenlet_0.3.4.bb                 |   14 ++++++++++++++
- .../{python-lxml_2.2.8.bb => python-lxml_3.0.2.bb}  |   13 ++++++-------
- .../recipes-devtools/python/python-psutil_0.6.1.bb  |   14 ++++++++++++++
- .../python/python-pyopenssl_0.13.bb                 |    4 ++--
- 6 files changed, 69 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
- create mode 100644 meta-oe/recipes-devtools/python/python-gevent_0.13.8.bb
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb
- rename meta-oe/recipes-devtools/python/{python-lxml_2.2.8.bb => python-lxml_3.0.2.bb} (76%)
- create mode 100644 meta-oe/recipes-devtools/python/python-psutil_0.6.1.bb
 
+diff --git a/meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb b/meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb
+new file mode 100644
+index 0000000..4a240fa
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Python lightweight in-process concurrent programming"
++HOMEPAGE = "http://pypi.python.org/pypi/greenlet"
++SECTION = "devel/python"
++LICENSE = "MIT & PSF"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
++                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
++SRC_URI = "http://pypi.python.org/packages/source/g/greenlet/greenlet-${PV}.zip"
++SRC_URI[md5sum] = "530a69acebbb0d66eb5abd83523d8272"
++SRC_URI[sha256sum] = "259ed0f34de9b0c948f42bdaffe378ea53d210d38377c6dcb0c6b728fccad1b0"
++
++S = "${WORKDIR}/greenlet-${PV}"
++
++inherit distutils
++
 -- 
 1.7.10.4
 
