@@ -1,34 +1,35 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ea0-f171.google.com ([209.85.215.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U3pAP-0006Kj-9b for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 15:43:07 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1U3ovL-0003Ao-24 for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Feb 2013 15:27:31 +0100
-Received: from tfitzsim-lnx.cisco.com ([161.44.225.6])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 15:27:31 +0100
-Received: from fitzsim by tfitzsim-lnx.cisco.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <pmiscml@gmail.com>) id 1U3pWb-0007LQ-4Q
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Feb 2013 16:06:49 +0100
+Received: by mail-ea0-f171.google.com with SMTP id c13so1728500eaa.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 15:27:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 08 Feb 2013 06:50:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=vMlq4GFqRxLMMAu4lZaZTyFOVRiSXa5OLCPWQow4HMk=;
+	b=wc06a4v4Y7l2GnLjadH0IsR9I+dabyfC4Ena1oGkiupJzbLy2E3uNQgy+/LPYgl2K/
+	rqItrCE6jUyIinixkUpGi/voG8pbQh8pUcW58yIlKdonX9kFVH/yaMJnYEFlZ7tUcQEq
+	Yu3mdQ9FN/rFnwV5x7R+1v83fwXPkTkMo2ZHxdRIEkkCixHqss5SrmrzJvSeYHO+3O8w
+	DDrpin+PKXVE+rYRVOilN5TO29zsBZX/bGbHTgq3Xbs7CCS0Csem7zWEluTH2zT2YVs5
+	d5B3Zl5dDUNVRPYnNz/H8pzneZujc0Ku1teUuBPBCJ/r6kP+ZIama9EWigNcCnspiLKE
+	exLg==
+X-Received: by 10.14.215.131 with SMTP id e3mr16694969eep.32.1360335007093;
+	Fri, 08 Feb 2013 06:50:07 -0800 (PST)
+Received: from x34f ([95.15.206.176])
+	by mx.google.com with ESMTPS id 44sm47707729eek.5.2013.02.08.06.50.03
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 08 Feb 2013 06:50:05 -0800 (PST)
+Received: by x34f (sSMTP sendmail emulation); Fri, 08 Feb 2013 16:50:01 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Thomas Fitzsimmons <fitzsim@cisco.com>
-Date: Fri, 08 Feb 2013 09:27:02 -0500
-Message-ID: <m6pgvca27ufd.fsf@cisco.com>
-References: <m6pgehgr97h4.fsf@cisco.com>
-	<2EFEEFBB-F179-4889-84AE-58FAA4FF2165@vanille-media.de>
-	<1902806.s8X17rFk7A@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: tfitzsim-lnx.cisco.com
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1.50 (gnu/linux)
-Cancel-Lock: sha1:i1dITo2dN29aZ+dWHYwPoWDEaBU=
-Subject: Re: Error when attempting to subscribe to openembedded-devel@lists.openembedded.org
+Date: Fri,  8 Feb 2013 16:49:48 +0200
+Message-Id: <0d914f6415e72c6d9999b0f2f5b3e6c8ec209363.1360332752.git.pfalcon@users.sourceforge.net>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1360332752.git.pfalcon@users.sourceforge.net>
+References: <cover.1360332752.git.pfalcon@users.sourceforge.net>
+Subject: [oe-core] [PATCH 1/1] ccache.bbclass: Allow user to override CCACHE_DIR.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,52 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 14:43:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 Feb 2013 15:06:52 -0000
 
-Paul Eggleton <paul.eggleton@linux.intel.com> writes:
+For example, some users may want to use single cache directory (instead
+of per-package) with known max size limit, to better control disk usage.
 
-> On Friday 08 February 2013 11:21:32 Dr. Michael Lauer wrote:
->> Anfang der weitergeleiteten Nachricht:
->> > Von: Thomas Fitzsimmons <fitzsim@cisco.com>
->> > Betreff: Error when attempting to subscribe to
->> > openembedded-devel@lists.openembedded.org Datum: 7. Februar 2013 21:47:35
->> > MEZ
->> > An: mickeyl@linuxtogo.org
->> > 
->> > Hi,
->> > 
->> > I get a mailman error [1] when I attempt to subscribe to
->> > openembedded-devel@lists.openembedded.org.
->> > 
->> > I would prefer to post to the gmane newsgroup
->> > "gmane.comp.handhelds.openembedded" though; I tried that too but my
->> > message hasn't showed up, even after the Gmane confirmation step.  Do I
->> > need to be subscribed in order to use the Gmane
->> > newsgroup-to-mailing-list bridge?
->> > 
->> > Thanks,
->> > Thomas
->> > 
->> > 1.
->> > Bug in Mailman version 2.1.11
->> > 
->> > We're sorry, we hit a bug!
->> > 
->> > Please inform the webmaster for this site of this problem. Printing of
->> > traceback and other system information has been explicitly inhibited,
->> > but the webmaster can find this information in the Mailman error logs.
->
-> The mailing list servers were experiencing problems last night, but have now 
-> been fixed. I see Thomas's messages have now made it through as of this morning 
-> so I guess all is now working as expected, although I'm not sure about the 
-> gmane bridge for sending as I have never tried to use that method.
+Signed-off-by: Paul Sokolovsky <pfalcon@users.sourceforge.net>
+---
+ meta/classes/ccache.bbclass |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes, the gmane bridge works for me and I'm not subscribed to the mailing
-list.  I guess the delay I saw was due to the list server issues.
-
-Thanks,
-Thomas
+diff --git a/meta/classes/ccache.bbclass b/meta/classes/ccache.bbclass
+index cd06a4b..ca3ca43 100644
+--- a/meta/classes/ccache.bbclass
++++ b/meta/classes/ccache.bbclass
+@@ -1,5 +1,5 @@
+ CCACHE = "${@bb.which(d.getVar('PATH', True), 'ccache') and 'ccache '}"
+-export CCACHE_DIR = "${TMPDIR}/ccache/${MULTIMACH_HOST_SYS}/${PN}"
++export CCACHE_DIR ?= "${TMPDIR}/ccache/${MULTIMACH_HOST_SYS}/${PN}"
+ CCACHE_DISABLE[unexport] = "1"
+ 
+ do_configure[dirs] =+ "${CCACHE_DIR}"
+-- 
+1.7.9.5
 
 
 
