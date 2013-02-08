@@ -1,42 +1,40 @@
-Received: from mail-wg0-f51.google.com ([74.125.82.51])
+Received: from mail-we0-f171.google.com ([74.125.82.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U3wwk-0002Gb-La
+	(envelope-from <ross.burton@intel.com>) id 1U3wwo-0002Gx-GK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Feb 2013 00:01:33 +0100
-Received: by mail-wg0-f51.google.com with SMTP id 8so3291458wgl.6
+	Sat, 09 Feb 2013 00:01:34 +0100
+Received: by mail-we0-f171.google.com with SMTP id u54so3505268wey.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:45:36 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:40 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references:mime-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=Ml23i5f/UCZ16HRyHnnAi0qgSBNgIE+++VLeu8IUBig=;
-	b=B6BwiDrgaSvsopufJ2JZO4Ew6CItQAgdJYVs6lnhZtEtEl6en3J6yAQGESer2AmkAU
-	oVt3o3WgdqltByCvywP5c3KUf6JQ7opudKKcUz+eUCw8kGKh348Bim79YYBfPeymri0D
-	6rDiC4LnUDXp8lQzOI7fhx/uoWGMmumYoEVNpPuKbOihvUji2n/I4h2lQq7vHEtAvY8y
-	kz3ni/TWduY6okNgm235zBt3uvQU/HjzfLDLV5R7Jprh4OvpNP02k3Qv7jgbzgGiUXJ5
-	UchSWWVVr8mWpZVR3bu84m9WykTo+va/PdvuhTzELSgz5KTvDYTAN215aPCleQ9BXZcU
-	q8pQ==
-X-Received: by 10.180.84.199 with SMTP id b7mr5235472wiz.22.1360363536350;
-	Fri, 08 Feb 2013 14:45:36 -0800 (PST)
+	:references:in-reply-to:references:x-gm-message-state;
+	bh=kJAJI+gqldItVOecDwrhJD3VL305aq6oeRFou4Qv8mE=;
+	b=HzZyOM8JyWSEPLnMtfgmtf3r6ZwVkaLGKYSVpakYjstoBCDGdp6M18RJQsWnWvP9Uf
+	QRbygsOpkuQLc3fTrdhGZo6xCKI6j+Bgtl+OpeJTJMwmaTmvTSr7mco/ncw7jBEavvLi
+	4un26uw3TistP5H+/D/spxd9zj/u0wEZmXipDl+hCQm/bN/mCkrAPBIrKtFeSeBfzXLb
+	588O8vVbnOZkRUvt7DOLW+9rFWw6zuTtwwNqcZHXIRbHOf6hmS8l9iNO8YMakZtA0kXy
+	TLCqDz0/BIYN3GRHgjVmTfJ9+jFZ5v6G761Fw0ZodziYv8RC69cNfWloBCKtgCEQDIE8
+	7pqA==
+X-Received: by 10.194.78.207 with SMTP id d15mr12512266wjx.52.1360363540439;
+	Fri, 08 Feb 2013 14:45:40 -0800 (PST)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.34
+	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.39
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 08 Feb 2013 14:45:35 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:39 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-core@lists.openembedded.org
-Date: Fri,  8 Feb 2013 22:43:15 +0000
-Message-Id: <a32b33801c899dce34b072ad1d9d9ede30e8b598.1360360346.git.ross.burton@intel.com>
+Date: Fri,  8 Feb 2013 22:43:18 +0000
+Message-Id: <bfbf42a76a2eb023091b5e3f47fbb8a920909175.1360360346.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
 References: <cover.1360360346.git.ross.burton@intel.com>
 In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
 References: <cover.1360360346.git.ross.burton@intel.com>
-MIME-Version: 1.0
-X-Gm-Message-State: ALoCoQkXd77YsMprxlQG6kDXRS3DkN+mVf+aQe/cYWLWZNXRAS2/pZ8YdsPQI7bbKByLRUpTx7hN
+X-Gm-Message-State: ALoCoQm3bF+ojdZexN/LWHWOEJSxJdrAJqJdr5xo2sL1yJu33B0+CtqRBinDfq1l7UoATvWRb+Nk
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/5] systemd.bbclass: helper class for recipes with systemd units
+Subject: [PATCH 4/5] avahi: Enabling with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,192 +48,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 23:01:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Feb 2013 23:01:41 -0000
 
-This class adds postinst/prerm scripts to start/stop/enable/disable the services
-as relevant, and some magic to ensure the service files are installed.
+From: Radu Moisan <radu.moisan@intel.com>
 
-Based on (but not the same as) the systemd.bbclass in meta-systemd, so thanks to
-the following for their work there:
-
-Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Khem Raj <raj.khem@gmail.com>
-Martin Jansa <Martin.Jansa@gmail.com>
-Andreas Müller <schnitzeltony@googlemail.com>
-Koen Kooi <koen@dominion.thruhere.net>
-
+Signed-off-by: Radu Moisan <radu.moisan@intel.com>
+Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta/classes/systemd.bbclass |  158 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 158 insertions(+)
- create mode 100644 meta/classes/systemd.bbclass
+ meta/recipes-connectivity/avahi/avahi.inc |   21 +++++++++++++--------
+ 1 file changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/meta/classes/systemd.bbclass b/meta/classes/systemd.bbclass
-new file mode 100644
-index 0000000..e0ea65c
---- /dev/null
-+++ b/meta/classes/systemd.bbclass
-@@ -0,0 +1,158 @@
-+# The list of packages that should have systemd packaging scripts added.  For
-+# each entry, optionally have a SYSTEMD_SERVICE_[package] that lists the service
-+# files in this package.  If this variable isn't set, [package].service is used.
-+SYSTEMD_PACKAGES ?= "${PN}"
+diff --git a/meta/recipes-connectivity/avahi/avahi.inc b/meta/recipes-connectivity/avahi/avahi.inc
+index 185207b..3a4547c 100644
+--- a/meta/recipes-connectivity/avahi/avahi.inc
++++ b/meta/recipes-connectivity/avahi/avahi.inc
+@@ -37,10 +37,13 @@ USERADD_PARAM_avahi-autoipd = "--system --home /var/run/avahi-autoipd \
+                               -c \"Avahi autoip daemon\" \
+                               avahi-autoipd"
+ 
+-inherit autotools pkgconfig update-rc.d gettext useradd
++inherit autotools pkgconfig update-rc.d gettext systemd useradd
+ 
+-EXTRA_OECONF = "--with-distro=debian \
+-             --disable-introspection \
++SYSTEMD_PACKAGES = "${PN}-daemon ${PN}-dnsconfd"
++SYSTEMD_SERVICE_avahi-daemon = "avahi-daemon.service"
++SYSTEMD_SERVICE_avahi-dnsconfd = "avahi-dnsconfd.service"
 +
-+# Whether to enable or disable the services on installation.
-+SYSTEMD_AUTO_ENABLE ??= "enable"
++EXTRA_OECONF = "--disable-introspection \
+              --with-avahi-priv-access-group=adm \
+              --disable-stack-protector \
+              --disable-gdbm \
+@@ -50,10 +53,15 @@ EXTRA_OECONF = "--with-distro=debian \
+              --disable-qt4 \
+              --disable-python \
+              --disable-doxygen-doc \
+-             --with-systemdsystemunitdir=${systemd_unitdir}/system/ \
++             ${EXTRA_OECONF_SYSVINIT} \
++             ${EXTRA_OECONF_SYSTEMD} \
+              ${AVAHI_GTK} \
+            "
+ 
++# The distro choice determines what init scripts are installed
++EXTRA_OECONF_SYSVINIT = "${@base_contains('DISTRO_FEATURES','sysvinit','--with-distro=debian','--with-distro=none',d)}"
++EXTRA_OECONF_SYSTEMD = "${@base_contains('DISTRO_FEATURES','systemd','--with-systemdsystemunitdir=${systemd_unitdir}/system/','',d)}"
 +
-+# This class will be included in any recipe that supports systemd init scripts,
-+# even if the systemd DISTRO_FEATURE isn't enabled.  As such don't make any
-+# changes directly but check the DISTRO_FEATURES first.
-+python __anonymous() {
-+    if oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
-+        d.appendVar("DEPENDS", " systemd-systemctl-native")
-+        # Set a variable so that update-rcd.bbclass knows we're active and can
-+        # disable itself.
-+        d.setVar("SYSTEMD_BBCLASS_ENABLED", "1")
-+}
-+
-+systemd_postinst() {
-+OPTS=""
-+
-+if [ -n "$D" ]; then
-+    OPTS="--root=$D"
-+fi
-+
-+systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
-+
-+if [ -z "$D" -a "${SYSTEMD_AUTO_ENABLE}" = "enable" ]; then
-+    systemctl start ${SYSTEMD_SERVICE}
-+fi
-+}
-+
-+systemd_prerm() {
-+if [ -z "$D" ]; then
-+    systemctl stop ${SYSTEMD_SERVICE}
-+fi
-+
-+systemctl disable ${SYSTEMD_SERVICE}
-+}
-+
-+def systemd_populate_packages(d):
-+    def get_package_var(d, var, pkg):
-+        val = (d.getVar('%s_%s' % (var, pkg), True) or "").strip()
-+        if val == "":
-+            val = (d.getVar(var, True) or "").strip()
-+        return val
-+
-+
-+    # Add a runtime dependency on systemd to pkg
-+    def systemd_add_rdepends(pkg):
-+        rdepends = d.getVar('RDEPENDS_' + pkg, True) or ""
-+        if not 'systemd' in rdepends.split():
-+            rdepends = '%s %s' % (rdepends, 'systemd')
-+        d.setVar('RDEPENDS_' + pkg, rdepends)
-+
-+
-+    def systemd_generate_package_scripts(pkg):
-+        bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
-+
-+        # Add pkg to the overrides so that it finds the SYSTEMD_SERVICE_pkg
-+        # variable.
-+        localdata = d.createCopy()
-+        localdata.prependVar("OVERRIDES", pkg + ":")
-+        bb.data.update_data(localdata)
-+
-+        postinst = d.getVar('pkg_postinst_%s' % pkg, True)
-+        if not postinst:
-+            postinst = '#!/bin/sh\n'
-+        postinst += localdata.getVar('systemd_postinst', True)
-+        d.setVar('pkg_postinst_%s' % pkg, postinst)
-+
-+        prerm = d.getVar('pkg_prerm_%s' % pkg, True)
-+        if not prerm:
-+            prerm = '#!/bin/sh\n'
-+        prerm += localdata.getVar('systemd_prerm', True)
-+        d.setVar('pkg_prerm_%s' % pkg, prerm)
-+
-+
-+    # Add files to FILES_*-systemd if existent and not already done
-+    def systemd_append_file(pkg_systemd, file_append):
-+        appended = False
-+        if os.path.exists(oe.path.join(d.getVar("D", True), file_append)):
-+            var_name = "FILES_" + pkg_systemd
-+            files = d.getVar(var_name, False) or ""
-+            if file_append not in files.split():
-+                d.appendVar(var_name, " " + file_append)
-+                appended = True
-+        return appended
-+
-+    # Add systemd files to FILES_*-systemd, parse for Also= and follow recursive
-+    def systemd_add_files_and_parse(pkg_systemd, path, service, keys):
-+        # avoid infinite recursion
-+        if systemd_append_file(pkg_systemd, oe.path.join(path, service)):
-+            fullpath = oe.path.join(d.getVar("D", True), path, service)
-+            if service.find('.service') != -1:
-+                # for *.service add *@.service
-+                service_base = service.replace('.service', '')
-+                systemd_add_files_and_parse(pkg_systemd, path, service_base + '@.service', keys)
-+            if service.find('.socket') != -1:
-+                # for *.socket add *.service and *@.service
-+                service_base = service.replace('.socket', '')
-+                systemd_add_files_and_parse(pkg_systemd, path, service_base + '.service', keys)
-+                systemd_add_files_and_parse(pkg_systemd, path, service_base + '@.service', keys)
-+            for key in keys.split():
-+                # recurse all dependencies found in keys ('Also';'Conflicts';..) and add to files
-+                cmd = "grep %s %s | sed 's,%s=,,g' | tr ',' '\\n'" % (key, fullpath, key)
-+                pipe = os.popen(cmd, 'r')
-+                line = pipe.readline()
-+                while line:
-+                    line = line.replace('\n', '')
-+                    systemd_add_files_and_parse(pkg_systemd, path, line, keys)
-+                    line = pipe.readline()
-+                pipe.close()
-+
-+    # Check service-files and call systemd_add_files_and_parse for each entry
-+    def systemd_check_services():
-+        base_libdir = d.getVar('base_libdir', True)
-+        searchpaths = [oe.path.join(d.getVar("sysconfdir", True), "systemd", "system"),]
-+        searchpaths.append(oe.path.join(d.getVar("base_libdir", True), "systemd", "system"))
-+        searchpaths.append(oe.path.join(d.getVar("libdir", True), "systemd", "system"))
-+        searchpaths.append(oe.path.join(d.getVar("libdir", True), "systemd", "user"))
-+        systemd_packages = d.getVar('SYSTEMD_PACKAGES', True)
-+        has_exactly_one_service = len(systemd_packages.split()) == 1
-+        if has_exactly_one_service:
-+            has_exactly_one_service = len(get_package_var(d, 'SYSTEMD_SERVICE', systemd_packages).split()) == 1
-+
-+        keys = 'Also' # Conflicts??
-+        if has_exactly_one_service:
-+            # single service gets also the /dev/null dummies
-+            keys = 'Also Conflicts'
-+        # scan for all in SYSTEMD_SERVICE[]
-+        for pkg_systemd in systemd_packages.split():
-+            for service in get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd).split():
-+                path_found = ''
-+                for path in searchpaths:
-+                    if os.path.exists(oe.path.join(d.getVar("D", True), path, service)):
-+                        path_found = path
-+                        break
-+                if path_found != '':
-+                    systemd_add_files_and_parse(pkg_systemd, path_found, service, keys)
-+                else:
-+                    raise bb.build.FuncFailed, "\n\nSYSTEMD_SERVICE_%s value %s does not exist" % \
-+                        (pkg_systemd, service)
-+
-+    # Run all modifications once when creating package
-+    if os.path.exists(d.getVar("D", True)):
-+        for pkg in d.getVar('SYSTEMD_PACKAGES', True).split():
-+            if d.getVar('SYSTEMD_SERVICE_' + pkg, True):
-+                systemd_generate_package_scripts(pkg)
-+                systemd_add_rdepends(pkg)
-+        systemd_check_services()
-+
-+
-+python populate_packages_prepend () {
-+    if oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
-+        systemd_populate_packages (d)
-+}
+ AVAHI_GTK ?= "--disable-gtk --disable-gtk3"
+ 
+ LDFLAGS_append_libc-uclibc = " -lintl"
+@@ -64,9 +72,8 @@ do_configure_prepend() {
+ }
+ 
+ 
+-PACKAGES =+ "avahi-systemd avahi-daemon libavahi-common libavahi-core libavahi-client avahi-dnsconfd libavahi-glib libavahi-ui avahi-autoipd avahi-utils"
++PACKAGES =+ "avahi-daemon libavahi-common libavahi-core libavahi-client avahi-dnsconfd libavahi-glib libavahi-ui avahi-autoipd avahi-utils"
+ 
+-FILES_avahi-systemd = "${systemd_unitdir}"
+ FILES_avahi-autoipd = "${sbindir}/avahi-autoipd \
+                        ${sysconfdir}/avahi/avahi-autoipd.action \
+                        ${sysconfdir}/dhcp/*/avahi-autoipd \
+@@ -94,8 +101,6 @@ FILES_libavahi-glib = "${libdir}/libavahi-glib.so.*"
+ FILES_libavahi-gobject = "${libdir}/libavahi-gobject.so.*"
+ FILES_avahi-utils = "${bindir}/avahi-*"
+ 
+-RDEPENDS_avahi-systemd = "avahi-daemon"
+-
+ RDEPENDS_avahi-daemon = "sysvinit-pidof"
+ 
+ # uclibc has no nss
 -- 
 1.7.10.4
 
