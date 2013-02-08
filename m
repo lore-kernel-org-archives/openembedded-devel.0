@@ -1,40 +1,40 @@
-Received: from mail-wi0-f172.google.com ([209.85.212.172])
+Received: from mail-we0-f170.google.com ([74.125.82.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U3wwn-0002Gu-5y
+	(envelope-from <ross.burton@intel.com>) id 1U3wwl-0002Gp-Ph
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 09 Feb 2013 00:01:33 +0100
-Received: by mail-wi0-f172.google.com with SMTP id ez12so1434985wid.17
+Received: by mail-we0-f170.google.com with SMTP id z53so3526112wey.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:45:39 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references:x-gm-message-state;
-	bh=86g/M/gq4INz7OlneYLaPuLYbekESEjl8PWBWkWlsU0=;
-	b=BSzpXbTrIKzWR2v2z0lEzQg4xotPCaJRW/1tcS3oBdhi9ac8RWAdBVVgSt3Mfj3hKT
-	gid+npNfZu14esPvX/ax9KNLISByJLYSed1J+ky05r+p8kiPmpZnNIps8d/k/RBVr6nl
-	KK5SerK3OEcyJ8qWGUAFyVNMSHxVbLfOtNuhn8FqWeviL7J4s10ymd6J4nuhYMAySui+
-	4FYnOvhHZuA7RLKNPbly0AWsVdYkrz6bkh5hIOG16zjuTwAl99iGIf07EmqbqMbcfY1p
-	8bITwc1yYVWCqfLJdb8hkPVWxNQQ0E+b5RLkg3uFJBap0Go3YVedyxO2psBkU4zHCDue
-	udiA==
-X-Received: by 10.180.81.164 with SMTP id b4mr5187205wiy.34.1360363539046;
-	Fri, 08 Feb 2013 14:45:39 -0800 (PST)
+	bh=Y11wwo2fTTpNJwxFKgn+KHwmiZ2v5Ol5zNTBEIS523g=;
+	b=OmcqOqlp4NRmJIv/dFzDoy0KmZY1IWrHyI1t+jX4FDBstLQOXc1TtglbjKppCzji2U
+	GCOQxgwq01o+x9lHHzKQFdTAv/C0/blzUrJkovtlJvNpiRKSOwKahA3cubO9z11i3DM0
+	5SN5l52vJc1D1GGDq2AagHMxTSHKTat7riEYDuUslsFExb4eQW3/w6eHJWFEAbjLXNZ6
+	kOIGwptnBvrGC+9tAE0IKNC7Ec517Qa9LsSTI/6ZuUG82D7wdRkky894Qwt/stvPGemU
+	cMauWEvUHTTyFGazj8VzI+HRB78PUnb/RYZb0qVAJwyS8XhNmZVdkBv2ccfVjlBWD9h+
+	Arkw==
+X-Received: by 10.180.106.34 with SMTP id gr2mr5219572wib.18.1360363537703;
+	Fri, 08 Feb 2013 14:45:37 -0800 (PST)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.37
+	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.36
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 08 Feb 2013 14:45:38 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:37 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-core@lists.openembedded.org
-Date: Fri,  8 Feb 2013 22:43:17 +0000
-Message-Id: <b7c38841f2ced94a9a5924916c66f667051e7012.1360360346.git.ross.burton@intel.com>
+Date: Fri,  8 Feb 2013 22:43:16 +0000
+Message-Id: <2f3ac96fb6a599b3c8a62eb68417dd8e26b21676.1360360346.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
 References: <cover.1360360346.git.ross.burton@intel.com>
 In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
 References: <cover.1360360346.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQnG82goTYn1I89R6ReYsrFP41frW9zXksDAFUaYtlvalvKbgdAsybUn9xugVh0z+8qW7U6g
+X-Gm-Message-State: ALoCoQmcFOWiEA8jdw8BwIdRo2JJWxfnrAR0gtTKw+fePCWXfBEfAPfTPeHhDUfBTGbbGrsJDBVc
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/5] connman: Enabling with systemd
+Subject: [PATCH 2/5] update-rc.d: don't do anything if systemd.bbclass is inherited
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,57 +50,46 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 08 Feb 2013 23:01:34 -0000
 
-From: Radu Moisan <radu.moisan@intel.com>
+We need the update-rc.d class to work when systemd is being used so that
+packages that only have SysV init scripts still work.  However if a recipe
+supports both we don't want to install SysV and systemd files under systemd.
 
-Signed-off-by: Radu Moisan <radu.moisan@intel.com>
-Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+To solve this, before doing real work in update-rc.d check if the systemd class
+has been inherited and don't do anything if it has.
+
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta/recipes-connectivity/connman/connman.inc |   11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ meta/classes/update-rc.d.bbclass |   19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/meta/recipes-connectivity/connman/connman.inc b/meta/recipes-connectivity/connman/connman.inc
-index 5c9aa6d..b61e2af 100644
---- a/meta/recipes-connectivity/connman/connman.inc
-+++ b/meta/recipes-connectivity/connman/connman.inc
-@@ -40,11 +40,14 @@ EXTRA_OECONF += "\
-     --disable-polkit \
-     --disable-client \
-     --enable-fake \
-+    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdunitdir=${systemd_unitdir}/system/', '', d)} \
- "
+diff --git a/meta/classes/update-rc.d.bbclass b/meta/classes/update-rc.d.bbclass
+index f9d55fb..51ad8b1 100644
+--- a/meta/classes/update-rc.d.bbclass
++++ b/meta/classes/update-rc.d.bbclass
+@@ -75,12 +75,15 @@ python populate_packages_updatercd () {
+         postrm += d.getVar('updatercd_postrm', True)
+         d.setVar('pkg_postrm_%s' % pkg, postrm)
  
- INITSCRIPT_NAME = "connman"
- INITSCRIPT_PARAMS = "start 05 5 2 3 . stop 22 0 1 6 ."
- 
-+SYSTEMD_SERVICE_${PN} = "connman.service"
-+
- # IMPORTANT: because xuser is shared with rootless X, please make sure the
- # USERADD_PARAM is in sync with the one in xserver-nodm-init.bb
- USERADD_PACKAGES = "${PN}"
-@@ -52,7 +55,7 @@ USERADD_PARAM_${PN} = "--create-home \
-                        --groups video,tty,audio \
-                        --user-group xuser"
- 
--inherit autotools gtk-doc pkgconfig update-rc.d useradd
-+inherit autotools gtk-doc pkgconfig systemd update-rc.d useradd
- 
- # This allows *everyone* to access ConnMan over DBus, without any access
- # control.  Really the at_console flag should work, which would mean that
-@@ -62,8 +65,10 @@ do_compile_append() {
+-    pkgs = d.getVar('INITSCRIPT_PACKAGES', True)
+-    if pkgs == None:
+-        pkgs = d.getVar('UPDATERCPN', True)
+-        packages = (d.getVar('PACKAGES', True) or "").split()
+-        if not pkgs in packages and packages != []:
+-            pkgs = packages[0]
+-    for pkg in pkgs.split():
+-        update_rcd_package(pkg)
++    # If the systemd class has also been inherited, then don't do anything as
++    # the systemd units will override anything created by update-rc.d.
++    if not d.getVar("SYSTEMD_BBCLASS_ENABLED", True):
++        pkgs = d.getVar('INITSCRIPT_PACKAGES', True)
++        if pkgs == None:
++            pkgs = d.getVar('UPDATERCPN', True)
++            packages = (d.getVar('PACKAGES', True) or "").split()
++            if not pkgs in packages and packages != []:
++                pkgs = packages[0]
++        for pkg in pkgs.split():
++            update_rcd_package(pkg)
  }
- 
- do_install_append() {
--	install -d ${D}${sysconfdir}/init.d
--	install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
-+	if ${@base_contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
-+		install -d ${D}${sysconfdir}/init.d
-+		install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
-+	fi
- 
- 	install -d ${D}${bindir}
- 	install -m 0755 ${S}/tools/*-test ${D}${bindir}
 -- 
 1.7.10.4
 
