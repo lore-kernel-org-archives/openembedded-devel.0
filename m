@@ -1,37 +1,40 @@
-Received: from mail-wi0-f170.google.com ([209.85.212.170])
+Received: from mail-wi0-f172.google.com ([209.85.212.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U3wwj-0002GY-6r
+	(envelope-from <ross.burton@intel.com>) id 1U3wwn-0002Gu-5y
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Feb 2013 00:01:29 +0100
-Received: by mail-wi0-f170.google.com with SMTP id hm11so1527472wib.5
+	Sat, 09 Feb 2013 00:01:33 +0100
+Received: by mail-wi0-f172.google.com with SMTP id ez12so1434985wid.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:45:35 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=cAvcq0RPnCbXYnFNsBrueAmu0SSq4UimUqOJ6mfVYMw=;
-	b=jx4ryPrNLgnAZT/M3mdxAfGOwNECJqY7X5bMJxcNNGa6C8arjQTUozUAXnaUG7nTY0
-	rB7c20xq7t4DYbtiWADaQ1FUD7CDRlv4DTHIbY6Vs85Ihr4tE4KF6E6vgMULx/JQuuS2
-	N7oSy4cK+V49O6ICduJP8eMTBF71l6JMty/Z0hWThLzat86+vGKk+Ke67oz8KRw2CUhb
-	JQjwpQhVlEV7IQwbm+CJTSZfQfyyT8/n0JQh/STFUaeU1sJQLYvihjDxh0788Bb+rgGF
-	cI+yc/Gx0YvzuLrPRMeJjExDUGl+2RKl2kd5/0ZcHS18glmJDWG/T27qVm3Uxu3sC/l7
-	f2zw==
-X-Received: by 10.195.13.200 with SMTP id fa8mr12623079wjd.15.1360363534843;
-	Fri, 08 Feb 2013 14:45:34 -0800 (PST)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references:x-gm-message-state;
+	bh=86g/M/gq4INz7OlneYLaPuLYbekESEjl8PWBWkWlsU0=;
+	b=BSzpXbTrIKzWR2v2z0lEzQg4xotPCaJRW/1tcS3oBdhi9ac8RWAdBVVgSt3Mfj3hKT
+	gid+npNfZu14esPvX/ax9KNLISByJLYSed1J+ky05r+p8kiPmpZnNIps8d/k/RBVr6nl
+	KK5SerK3OEcyJ8qWGUAFyVNMSHxVbLfOtNuhn8FqWeviL7J4s10ymd6J4nuhYMAySui+
+	4FYnOvhHZuA7RLKNPbly0AWsVdYkrz6bkh5hIOG16zjuTwAl99iGIf07EmqbqMbcfY1p
+	8bITwc1yYVWCqfLJdb8hkPVWxNQQ0E+b5RLkg3uFJBap0Go3YVedyxO2psBkU4zHCDue
+	udiA==
+X-Received: by 10.180.81.164 with SMTP id b4mr5187205wiy.34.1360363539046;
+	Fri, 08 Feb 2013 14:45:39 -0800 (PST)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.32
+	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.37
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 08 Feb 2013 14:45:33 -0800 (PST)
+	Fri, 08 Feb 2013 14:45:38 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-core@lists.openembedded.org
-Date: Fri,  8 Feb 2013 22:43:14 +0000
-Message-Id: <cover.1360360346.git.ross.burton@intel.com>
+Date: Fri,  8 Feb 2013 22:43:17 +0000
+Message-Id: <b7c38841f2ced94a9a5924916c66f667051e7012.1360360346.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-X-Gm-Message-State: ALoCoQnhkRjNWk4PPVy2gzZqvyY209AaOQcxRPyCH/t3YIzanLVcbP0N5QwlCH2OSPx6Ojd60DiO
+In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
+References: <cover.1360360346.git.ross.burton@intel.com>
+In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
+References: <cover.1360360346.git.ross.burton@intel.com>
+X-Gm-Message-State: ALoCoQnG82goTYn1I89R6ReYsrFP41frW9zXksDAFUaYtlvalvKbgdAsybUn9xugVh0z+8qW7U6g
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 0/5] systemd class, and more enabling
+Subject: [PATCH 3/5] connman: Enabling with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,71 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 23:01:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Feb 2013 23:01:34 -0000
 
-Hi,
+From: Radu Moisan <radu.moisan@intel.com>
 
-This series introduces a systemd class (largely based on the work in
-meta-systemd) and changes update-rc.d.bbclass so that it doesn't do anything if
-systemd.bbclass was also inherited *and* systemd is enabled.
+Signed-off-by: Radu Moisan <radu.moisan@intel.com>
+Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta/recipes-connectivity/connman/connman.inc |   11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-As examples, avahi, connman and wpa-supplicant are updated to use the new class.
-
-Note that the new class does have slightly different semantics to the
-meta-systemd class, so merging the rest of the changes in meta-systemd that are
-relevant to oe-core should happen sooner rather than later.
-
-Ross
-
-The following changes since commit 20b4dcace222d6b1d659a8813b4affad075ec0c6:
-
-  dbus-native: Don't install dbus-launch (2013-02-08 14:50:38 +0000)
-
-are available in the git repository at:
-
-  git://git.yoctoproject.org/poky-contrib ross/systemd
-
-for you to fetch changes up to cba1dc1c04201b8f08fca587a7433238a5ddaa33:
-
-  wpa-supplicant: Enabling with systemd (2013-02-08 21:50:34 +0000)
-
-----------------------------------------------------------------
-Radu Moisan (3):
-      connman: Enabling with systemd
-      avahi: Enabling with systemd
-      wpa-supplicant: Enabling with systemd
-
-Ross Burton (2):
-      systemd.bbclass: helper class for recipes with systemd units
-      update-rc.d: don't do anything if systemd.bbclass is inherited
-
- meta/classes/systemd.bbclass                       |  158 ++++++++++++++++++++
- meta/classes/update-rc.d.bbclass                   |   19 ++-
- meta/recipes-connectivity/avahi/avahi.inc          |   21 ++-
- meta/recipes-connectivity/connman/connman.inc      |   11 +-
- .../wpa-supplicant/wpa-supplicant-2.0.inc          |   13 +-
- 5 files changed, 200 insertions(+), 22 deletions(-)
- create mode 100644 meta/classes/systemd.bbclass
-
-Radu Moisan (3):
-  connman: Enabling with systemd
-  avahi: Enabling with systemd
-  wpa-supplicant: Enabling with systemd
-
-Ross Burton (2):
-  systemd.bbclass: helper class for recipes with systemd units
-  update-rc.d: don't do anything if systemd.bbclass is inherited
-
- meta/classes/systemd.bbclass                       |  158 ++++++++++++++++++++
- meta/classes/update-rc.d.bbclass                   |   19 ++-
- meta/recipes-connectivity/avahi/avahi.inc          |   21 ++-
- meta/recipes-connectivity/connman/connman.inc      |   11 +-
- .../wpa-supplicant/wpa-supplicant-2.0.inc          |   13 +-
- 5 files changed, 200 insertions(+), 22 deletions(-)
- create mode 100644 meta/classes/systemd.bbclass
-
+diff --git a/meta/recipes-connectivity/connman/connman.inc b/meta/recipes-connectivity/connman/connman.inc
+index 5c9aa6d..b61e2af 100644
+--- a/meta/recipes-connectivity/connman/connman.inc
++++ b/meta/recipes-connectivity/connman/connman.inc
+@@ -40,11 +40,14 @@ EXTRA_OECONF += "\
+     --disable-polkit \
+     --disable-client \
+     --enable-fake \
++    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdunitdir=${systemd_unitdir}/system/', '', d)} \
+ "
+ 
+ INITSCRIPT_NAME = "connman"
+ INITSCRIPT_PARAMS = "start 05 5 2 3 . stop 22 0 1 6 ."
+ 
++SYSTEMD_SERVICE_${PN} = "connman.service"
++
+ # IMPORTANT: because xuser is shared with rootless X, please make sure the
+ # USERADD_PARAM is in sync with the one in xserver-nodm-init.bb
+ USERADD_PACKAGES = "${PN}"
+@@ -52,7 +55,7 @@ USERADD_PARAM_${PN} = "--create-home \
+                        --groups video,tty,audio \
+                        --user-group xuser"
+ 
+-inherit autotools gtk-doc pkgconfig update-rc.d useradd
++inherit autotools gtk-doc pkgconfig systemd update-rc.d useradd
+ 
+ # This allows *everyone* to access ConnMan over DBus, without any access
+ # control.  Really the at_console flag should work, which would mean that
+@@ -62,8 +65,10 @@ do_compile_append() {
+ }
+ 
+ do_install_append() {
+-	install -d ${D}${sysconfdir}/init.d
+-	install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
++	if ${@base_contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
++		install -d ${D}${sysconfdir}/init.d
++		install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
++	fi
+ 
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${S}/tools/*-test ${D}${bindir}
 -- 
 1.7.10.4
 
