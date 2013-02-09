@@ -1,40 +1,37 @@
-Received: from mail-we0-f173.google.com ([74.125.82.173])
+Received: from mail-ob0-f171.google.com ([209.85.214.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U3wwq-0002HC-4z
+	(envelope-from <eu@felipetonello.com>) id 1U3zUS-0007Cj-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Feb 2013 00:01:41 +0100
-Received: by mail-we0-f173.google.com with SMTP id r5so3317769wey.4
+	Sat, 09 Feb 2013 02:44:28 +0100
+Received: by mail-ob0-f171.google.com with SMTP id x4so4390661obh.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Feb 2013 14:45:42 -0800 (PST)
+	Fri, 08 Feb 2013 17:28:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references:x-gm-message-state;
-	bh=zhFLVUN0xDliG4TnnT7kLm4CL/VpuJwNDsrUjzwLeiQ=;
-	b=dQWIE74gRRDZhkybv3O4/mTSHlLRNXggZtQjOAkHvS5sDxTU6COzyJRZ95Ga9GAmtr
-	dOdksqvhoSD6N8zwpZJeuyvWJdJEzNEmbaX1cQ+2WOCMfM97Yuuu71XyVeD4kDDcT5nT
-	NVqMwE+a10VAbAt/bjxq+4WcB3rtO3E10yIXgapc0AQb+XLpBX1puFuE8T3jCWSL/RJ0
-	yL8s3yEfmac5hY0Eiand3iquMvtYXAg9ckwPGQwEa8WZ+iotYbBWiVUWfGttq4Of8x8e
-	cGOMpnSEqoQip5uFxDwEGLjP9GLXnItYABHpvqTssTHeXSUm81DQz3H6ZNkS8dgPkujy
-	3uGA==
-X-Received: by 10.180.95.166 with SMTP id dl6mr5290900wib.9.1360363541738;
-	Fri, 08 Feb 2013 14:45:41 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id e6sm18190386wiz.1.2013.02.08.14.45.40
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 08 Feb 2013 14:45:41 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-core@lists.openembedded.org
-Date: Fri,  8 Feb 2013 22:43:19 +0000
-Message-Id: <cba1dc1c04201b8f08fca587a7433238a5ddaa33.1360360346.git.ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
-References: <cover.1360360346.git.ross.burton@intel.com>
-In-Reply-To: <cover.1360360346.git.ross.burton@intel.com>
-References: <cover.1360360346.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQnL0xbpWrrNBLKWORmUskkkMVHvnb1JYzF8HVdjSfgV5Gok4AjfV+VGfFBHayqtwQAvVmgL
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/5] wpa-supplicant: Enabling with systemd
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=gG/IJt35SIrfJso//Arr6UwhWRkYqp0/DPy7QEyzBa0=;
+	b=T5f63WZlqw6NmjSV70Ov+C8MAiss7BsnoxIs/pDDvLAL6UF9mSRSUm2O5YPngz7WMw
+	pRBcQemZvdvsuZ9EsizlmkIPTsYDdOVZ5AIy4MXiBUdmgBW4x3szLQ0zZn5YruhK3ksQ
+	f/ZM+x8Uz6m6DCtZJe5CW7MazPlBlcScaDuJXMAho4nltqlpp+DokoHrMKrWOPp0I24X
+	fwWM6gfT7ruaD78xWX6IMlx9EV+CdqwWybmFi3Ino9e6qq36t5ef4NrDi5PnXlD9fIUe
+	AF9ZYNSUBdtGV8tHygkxvMAbEVHAxTptBjXi4qJ32smEA3FaLvuk1rNQtKYHJxVmeaEJ
+	oCKA==
+X-Received: by 10.182.95.133 with SMTP id dk5mr5877676obb.14.1360373313470;
+	Fri, 08 Feb 2013 17:28:33 -0800 (PST)
+Received: from mlabs-ftonello.masimolabs.com
+	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
+	by mx.google.com with ESMTPS id dl6sm39965871obb.5.2013.02.08.17.28.31
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 08 Feb 2013 17:28:32 -0800 (PST)
+From: eu@felipetonello.com
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  8 Feb 2013 17:29:45 -0800
+Message-Id: <1360373385-27667-1-git-send-email-ftonello@cercacor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQkKAsYh2bOFYu40R9mEJHMKsVKEj5w8hIbuu/BTHSPfu8n/Zdm95/yfsJahYyfsYgbGSizB
+Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: [meta-oe][PATCH] connman: added recipe libconnman-qt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,56 +45,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Feb 2013 23:01:47 -0000
+X-List-Received-Date: Sat, 09 Feb 2013 01:44:29 -0000
 
-From: Radu Moisan <radu.moisan@intel.com>
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-Signed-off-by: Radu Moisan <radu.moisan@intel.com>
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+This recipe provides the Qt library and QML plugins for connman.
+
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
 ---
- .../wpa-supplicant/wpa-supplicant-2.0.inc                 |   13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+ ...-to-disable-qml-plugin-and-test-program-t.patch |   35 ++++++++++
+ .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++++++++++++
+ 2 files changed, 104 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+ create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
 
-diff --git a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-2.0.inc b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-2.0.inc
-index 89910a0..75e85ae 100644
---- a/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-2.0.inc
-+++ b/meta/recipes-connectivity/wpa-supplicant/wpa-supplicant-2.0.inc
-@@ -9,6 +9,11 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e \
- DEPENDS = "gnutls dbus libnl"
- RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
- 
-+inherit systemd
+diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+new file mode 100644
+index 0000000..74c27e4
+--- /dev/null
++++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+@@ -0,0 +1,35 @@
++From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
++From: "Felipe F. Tonello" <ftonello@cercacor.com>
++Date: Mon, 7 Jan 2013 17:13:22 -0800
++Subject: [PATCH] added flags to disable qml plugin and test program to
++ compile
 +
-+SYSTEMD_SERVICE_${PN} = "wpa_supplicant.service wpa_supplicant-nl80211@.service wpa_supplicant-wired@.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
++This is usefull when there is no need to compile test program and qml plugin.
 +
- SRC_URI = "http://hostap.epitest.fi/releases/wpa_supplicant-${PV}.tar.gz \
-            file://defconfig-gnutls \
-            file://wpa-supplicant.sh \
-@@ -21,7 +26,7 @@ S = "${WORKDIR}/wpa_supplicant-${PV}/wpa_supplicant"
- PACKAGES_prepend = "wpa-supplicant-passphrase wpa-supplicant-cli "
- FILES_wpa-supplicant-passphrase = "${bindir}/wpa_passphrase"
- FILES_wpa-supplicant-cli = "${sbindir}/wpa_cli"
--FILES_${PN} += "${datadir}/dbus-1/system-services/* ${systemd_unitdir}/system/*"
-+FILES_${PN} += "${datadir}/dbus-1/system-services/*"
- CONFFILES_${PN} += "${sysconfdir}/wpa_supplicant.conf"
- 
- do_configure () {
-@@ -63,8 +68,10 @@ do_install () {
- 	install -d ${D}/${datadir}/dbus-1/system-services
- 	install -m 644 ${S}/dbus/*.service ${D}/${datadir}/dbus-1/system-services
- 
--	install -d ${D}/${systemd_unitdir}/system
--	install -m 644 ${S}/systemd/wpa_supplicant.service ${D}/${systemd_unitdir}/system
-+	if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+		install -d ${D}/${systemd_unitdir}/system
-+		install -m 644 ${S}/systemd/*.service ${D}/${systemd_unitdir}/system
-+	fi
- 
- 	install -d ${D}/etc/default/volatiles
- 	install -m 0644 ${WORKDIR}/99_wpa_supplicant ${D}/etc/default/volatiles
++Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
++---
++ connman-qt.pro |   11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/connman-qt.pro b/connman-qt.pro
++index 7d9ec99..425c41f 100644
++--- a/connman-qt.pro
+++++ b/connman-qt.pro
++@@ -1,4 +1,13 @@
++ TEMPLATE = subdirs
++-SUBDIRS += libconnman-qt test plugin
+++SUBDIRS += libconnman-qt
++ CONFIG += ordered
++ 
+++# CONFIG flag to disable test program
+++!notest {
+++    SUBDIRS += test
+++}
+++
+++# CONFIG flag to disable qml plugin
+++!noplugin {
+++    SUBDIRS += plugin
+++}
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+new file mode 100644
+index 0000000..2c33b49
+--- /dev/null
++++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+@@ -0,0 +1,69 @@
++DESCRIPTION = "Qt Library for ConnMan"
++HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
++
++SECTION = "qt/lib"
++
++PR = "r0"
++
++inherit qt4x11 pkgconfig
++
++RDEPENDS_${PN} = "connman"
++RDEPENDS_${PN}-plugin = "${PN}"
++
++PROVIDES += "${PN}-plugin"
++
++PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
++RRECOMMENDS_${PN} = "${PN}-plugin"
++
++# this is for users to bbappend this recipe and change it
++BRANCH = "master"
++TAG = "${PV}"
++SRCREV = "${AUTOREV}"
++
++SRC_URI = " \
++  git://github.com/nemomobile/${PN}.git;branch=${BRANCH};tag=${TAG} \
++  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
++"
++
++S = "${WORKDIR}/git"
++
++QT_IMPORTS_DIR = "${libdir}/qt4/imports"
++# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
++PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
++
++FILES_${PN} = " \
++  ${libdir}/libconnman-qt4${SOLIBS} \
++"
++
++FILES_${PN}-dev = " \
++  ${includedir}/connman-qt/* \
++  ${libdir}/libconnman-qt4${SOLIBSDEV} \
++  ${libdir}/libconnman-qt4.prl \
++  ${libdir}/pkgconfig/connman-qt4.pc \
++  ${libdir}/connman-qt4.pc \
++"
++
++FILES_${PN}-plugin = " \
++  ${PLUGINS_TARGET}/qmldir \
++  ${PLUGINS_TARGET}/lib*.so \
++"
++
++FILES_${PN}-plugin-dbg = " \
++  ${PLUGINS_TARGET}/.debug \
++  ${PLUGINS_TARGET}/.debug/* \
++"
++
++EXTRA_QMAKEVARS_PRE = " \
++  CONFIG+=notest \
++"
++
++do_configure_prepend() {
++  # Hack *.pro variables
++  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
++}
++
++do_install() {
++  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
++}
 -- 
-1.7.10.4
+1.7.9.5
 
 
 
