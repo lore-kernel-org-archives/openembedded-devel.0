@@ -1,31 +1,20 @@
-Received: from mail-oa0-f50.google.com ([209.85.219.50])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lloydchang@gmail.com>) id 1U4Ltk-0002Tq-1N
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U4ulZ-0001QF-Iy
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Feb 2013 02:40:17 +0100
-Received: by mail-oa0-f50.google.com with SMTP id l20so5152318oag.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Feb 2013 17:24:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to
-	:content-type; bh=6PQX8CpoJY9YRlr4MM3+3TTt5wExo//Uzx2pmQmAo6I=;
-	b=wyJGcFsvenaxObHbAm+gZqafRLrBjKLzDZap13RUPOTf2Wccofs/fe8KxHNkt1h90v
-	CczTEsqSxGrImq57ZfEAlNDoXBSMplG3eMCEuJm7RSYC6tlpYeLOajYuPz/30UModUdY
-	l/p99dB4PaMawR1A+BgNRwxAxOhYg7YxwWwPzrtaRRq/qOc3/mVyNkvC9EqVVo1kKv9h
-	0cAO+Q2hMQjo9yQatSUVbLSuJ4R5c85uf4kUgBtsLg7fotIn6b3gWpaqAzZzjFGkSENY
-	Z5N1oyTa8pmddkMZAxLAFgRtD1zYra6Jhznp9Ff3/8XNA32vCVLxirYTVQKQXehSdm9J
-	47bw==
-MIME-Version: 1.0
-X-Received: by 10.182.123.78 with SMTP id ly14mr7648231obb.58.1360459447557;
-	Sat, 09 Feb 2013 17:24:07 -0800 (PST)
-Received: by 10.182.218.1 with HTTP; Sat, 9 Feb 2013 17:24:07 -0800 (PST)
-Date: Sat, 9 Feb 2013 17:24:07 -0800
-Message-ID: <CAKbR+sxz=QAFjbf5ftMt0=Xp7bDirgBZbJB4Ku3YhAti1OKLEw@mail.gmail.com>
-From: Lloyd Chang <lloydchang@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	openwebos-general@mailman.openwebosproject.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: ca-certificates 20120623 and DEBIAN_MIRROR
+	Mon, 11 Feb 2013 15:53:58 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 11 Feb 2013 06:37:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,643,1355126400"; d="scan'208";a="285711335"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.120.60])
+	by fmsmga001.fm.intel.com with ESMTP; 11 Feb 2013 06:37:57 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Feb 2013 14:37:53 +0000
+Message-Id: <cover.1360593325.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-webserver][PATCH 0/2] Add recipe for ajenti
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +28,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2013 01:40:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Feb 2013 14:53:59 -0000
 
-Hello, regarding ca-certificates_20120623.bb in OpenEmbedded,
-ca-certificates_20120623.bbappend in Open webOS, and their uses of
-DEBIAN_MIRROR:
+This recipe was originally created for integration with the Baryon NAS
+project, however functionality isn't quite there for that yet. In the
+mean time it may be useful as a generic web admin application.
 
-In case anyone else run into issues fetching
-ftp://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20120623.tar.gz,
-please see my recommendations at
-https://github.com/openwebos/meta-webos/commit/96726cd07c77038efda5dca04eb186379467d1ca#L1R6
+Note that this also requires the meta-oe python library additions series
+I sent recently.
 
-I hope this information helps.
 
-Thank you,
-Lloyd
+
+The following changes since commit 61911b23099c2658186179504ded318c987b5276:
+
+  ttf: introduce update-fonts bbclass and change all ttf recipes to use it (2013-02-06 15:16:01 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/ajenti
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/ajenti
+
+Paul Eggleton (2):
+  ajenti: add new recipe
+  README: extend for meta-webadmin addition
+
+ meta-webserver/README                              |   17 +++
+ .../0001-setup.py-remove-extra-data-files.patch    |   33 ++++++
+ ...stat-fix-disk-usage-check-to-work-with-bu.patch |   29 +++++
+ ...-plugins-sysload-fix-to-work-with-busybox.patch |   47 ++++++++
+ .../ajenti/0005-plugins-power-fix-shutdown.patch   |   31 +++++
+ ...ervices-add-basic-sysvinit-implementation.patch |  119 ++++++++++++++++++++
+ ...vices-replace-s_upstart-with-s_init-in-MO.patch |   23 ++++
+ .../ajenti/distributor-logo-openembedded.png       |  Bin 0 -> 2165 bytes
+ .../ajenti/distro-detection-openembedded.patch     |   42 +++++++
+ .../recipes-webadmin/ajenti/ajenti_git.bb          |   80 +++++++++++++
+ 10 files changed, 421 insertions(+)
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0001-setup.py-remove-extra-data-files.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0002-plugins-hddstat-fix-disk-usage-check-to-work-with-bu.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0003-plugins-sysload-fix-to-work-with-busybox.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0005-plugins-power-fix-shutdown.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0006-plugins-services-add-basic-sysvinit-implementation.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/0007-plugins-services-replace-s_upstart-with-s_init-in-MO.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/distributor-logo-openembedded.png
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti/distro-detection-openembedded.patch
+ create mode 100644 meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
+
+-- 
+1.7.10.4
+
+
 
