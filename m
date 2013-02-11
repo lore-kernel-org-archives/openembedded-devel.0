@@ -1,22 +1,37 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-ob0-f178.google.com ([209.85.214.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1U4x7n-0006eP-UJ; Mon, 11 Feb 2013 18:25:04 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 11 Feb 2013 09:09:04 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,643,1355126400"; d="scan'208";a="261133846"
-Received: from unknown (HELO helios.localnet) ([10.252.120.60])
-	by orsmga001.jf.intel.com with ESMTP; 11 Feb 2013 09:09:02 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Date: Mon, 11 Feb 2013 17:09:01 +0000
-Message-ID: <2760168.9kFd94gL1F@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
-MIME-Version: 1.0
-Subject: RFC: meta-oe appends and overlayed recipes
+	(envelope-from <eu@felipetonello.com>) id 1U4xN8-00071Z-K8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Feb 2013 18:40:54 +0100
+Received: by mail-ob0-f178.google.com with SMTP id wd20so6350122obb.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Feb 2013 09:24:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=0RU0zPWJu/apEPebXAtFC762zAABUosB5QV75PfpV1U=;
+	b=kPuLXMbafJA02KIeEZappwtiAt8NZYWxI2iatxx07ijW/Fno+/V5zTwN+Co9i+ie0+
+	ocfitQzRO/U2v1LsnNoToHQTAT7hXLZH13e42sf4GQFMzvkHzT1B/Mab9s/Tjx8jmGTg
+	m0tADgDHY5BBiQNvFI3wY5aJ88gnKLAU7bW8zL3jB9y/Wgl26kkWcA+1UihFDGi+UvRj
+	3Gpz3RodaVlnWBQdoDHO2jcHoMq+PAejqTwGE0q+Q4jVaN/B0jWI4/WM7yxXvcJabYPM
+	RRHSElUfUOhqjwWjmZ8DLNr3rXay94lhojzOcFnZ4yLlRjgZiC1cKZNfqxWRB2V7N8bC
+	HFXg==
+X-Received: by 10.182.160.106 with SMTP id xj10mr11016503obb.98.1360603495882; 
+	Mon, 11 Feb 2013 09:24:55 -0800 (PST)
+Received: from mlabs-ftonello.masimolabs.com
+	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
+	by mx.google.com with ESMTPS id el2sm49631494obc.9.2013.02.11.09.24.53
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 11 Feb 2013 09:24:54 -0800 (PST)
+From: eu@felipetonello.com
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Feb 2013 09:25:53 -0800
+Message-Id: <1360603554-31515-1-git-send-email-ftonello@cercacor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQn8/HyrjKj94kWGuwCdMDgBAqpcGO2OghNLUV6b9nIgBDH9MsM7CLcHtBdqxvZS//HrcZRJ
+Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: [meta-oe][PATCH] connman: added recipe libconnman-qt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,87 +45,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 17:25:04 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 11 Feb 2013 17:40:54 -0000
 
-Hi all,
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-I'd like to make an attempt to remove all appends and overlayed recipes from 
-the meta-oe layer. As I've said previously, I don't believe meta-oe - as a 
-collection of very useful additional recipes that many wish to be able to use 
-on top of their OE-Core based build configurations - should be making any 
-possibly unexpected changes to those configurations. Any such changes ought to 
-be the province of distro layers alone.
+This recipe provides the Qt library and QML plugins for connman.
 
-We've already removed all of the obvious overlayed recipes and the meta-
-systemd split removed most of the pieces that were there for systemd support; 
-there are just a few remaining recipes and appends that need to be dealt with. 
-I'll catalogue these below with my comments.
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+---
+ ...-to-disable-qml-plugin-and-test-program-t.patch |   37 +++++++++++
+ .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++++++++++++
+ 2 files changed, 106 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+ create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
 
-Currently we have the following overlayed recipes:
-
-* icon-naming-utils: meta-oe has a newer version (0.8.90 vs OE-Core's 0.8.7) 
-and it uses BBCLASSEXTEND rather than OE-Core's native recipe. I would propose 
-to just move the meta-oe version to OE-Core since it appears to be superior.
-
-* libmad: both layers have the same version. The meta-oe version has some 
-slightly different versions of the MIPS compiler flag fix and -fforce-mem removal 
-patches but I think these can be ignored, since the OE-Core versions of these 
-patches have proper headers and are presumably working. The OE-Core version 
-has LICENSE_FLAGS that the meta-oe one doesn't, but is missing an avr32-
-specific optimisation patch that is in the meta-oe version. What would we do 
-with the latter? Is it appropriate to add to the OE-Core recipe?
-
-* tslib: OE-Core has the 1.0 release version, meta-oe has a git recipe that is 
-ahead of 1.0; the OE-Core version has two patches not in the meta-oe version 
-but that both have been merged upstream in the git revision being used in the 
-meta-oe version. There is no newer stable release. What do we do here? Should 
-we ask upstream (Chris) for a new stable release?
-
-* xserver-nodm-init: the two versions are quite distinct. Not sure I 
-understand the full history here but perhaps someone else can fill in the 
-blanks...?
-
-As far as bbappends go we have:
-
-* meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-As far as I can tell this just adds an /etc/busybox-syslog.default file 
-containing OPTIONS="-C64" and seems to have been added for systemd support. 
-I'm not sure why this wasn't moved to meta-systemd, but I assume it needs to 
-be merged into OE-Core now that systemd support is being added there... ?
-
-* meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-Another bbappend apparently for systemd support. Again, this should have been 
-moved to meta-systemd; do we now need to merge it into OE-Core?
-
-* meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
-This is adding qwt to the qte toolchain. As far as I am concerned this is a 
-distro policy decision - Qwt is a third-party library that is not part of Qt. 
-I believe this should be moved to the layers for whichever distros want this.
-
-* meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-* meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I see this 
-as a distro policy decision; these should move to the layers for whichever 
-distros want this. FWIW, this is particularly egregious if you've already 
-built Qt, then add meta-oe and find Qt is being unexpectedly rebuilt.
-
-* meta-oe/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.bbappend
-Builds against external libav instead of using the builtin copy of ffmpeg, 
-apparently for better performance on ARM (and presumably that is not the only 
-benefit). It's less clear to me what should be done with this, but I'd still 
-rather it could be eliminated. OE-Core does not have ffmpeg/libav; one wonders 
-if it should or not.
-
-Thoughts?
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+new file mode 100644
+index 0000000..6ec084d
+--- /dev/null
++++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+@@ -0,0 +1,37 @@
++From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
++From: "Felipe F. Tonello" <ftonello@cercacor.com>
++Date: Mon, 7 Jan 2013 17:13:22 -0800
++Subject: [PATCH] added flags to disable qml plugin and test program to
++ compile
++
++This is usefull when there is no need to compile test program and qml plugin.
++
++Upstream-Status: Accepted
++
++Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
++---
++ connman-qt.pro |   11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/connman-qt.pro b/connman-qt.pro
++index 7d9ec99..425c41f 100644
++--- a/connman-qt.pro
+++++ b/connman-qt.pro
++@@ -1,4 +1,13 @@
++ TEMPLATE = subdirs
++-SUBDIRS += libconnman-qt test plugin
+++SUBDIRS += libconnman-qt
++ CONFIG += ordered
++ 
+++# CONFIG flag to disable test program
+++!notest {
+++    SUBDIRS += test
+++}
+++
+++# CONFIG flag to disable qml plugin
+++!noplugin {
+++    SUBDIRS += plugin
+++}
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+new file mode 100644
+index 0000000..2c33b49
+--- /dev/null
++++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+@@ -0,0 +1,69 @@
++DESCRIPTION = "Qt Library for ConnMan"
++HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
++
++SECTION = "qt/lib"
++
++PR = "r0"
++
++inherit qt4x11 pkgconfig
++
++RDEPENDS_${PN} = "connman"
++RDEPENDS_${PN}-plugin = "${PN}"
++
++PROVIDES += "${PN}-plugin"
++
++PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
++RRECOMMENDS_${PN} = "${PN}-plugin"
++
++# this is for users to bbappend this recipe and change it
++BRANCH = "master"
++TAG = "${PV}"
++SRCREV = "${AUTOREV}"
++
++SRC_URI = " \
++  git://github.com/nemomobile/${PN}.git;branch=${BRANCH};tag=${TAG} \
++  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
++"
++
++S = "${WORKDIR}/git"
++
++QT_IMPORTS_DIR = "${libdir}/qt4/imports"
++# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
++PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
++
++FILES_${PN} = " \
++  ${libdir}/libconnman-qt4${SOLIBS} \
++"
++
++FILES_${PN}-dev = " \
++  ${includedir}/connman-qt/* \
++  ${libdir}/libconnman-qt4${SOLIBSDEV} \
++  ${libdir}/libconnman-qt4.prl \
++  ${libdir}/pkgconfig/connman-qt4.pc \
++  ${libdir}/connman-qt4.pc \
++"
++
++FILES_${PN}-plugin = " \
++  ${PLUGINS_TARGET}/qmldir \
++  ${PLUGINS_TARGET}/lib*.so \
++"
++
++FILES_${PN}-plugin-dbg = " \
++  ${PLUGINS_TARGET}/.debug \
++  ${PLUGINS_TARGET}/.debug/* \
++"
++
++EXTRA_QMAKEVARS_PRE = " \
++  CONFIG+=notest \
++"
++
++do_configure_prepend() {
++  # Hack *.pro variables
++  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
++}
++
++do_install() {
++  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
++}
 -- 
+1.7.9.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
