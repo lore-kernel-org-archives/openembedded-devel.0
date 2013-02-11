@@ -1,27 +1,32 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1U4zwA-0003n5-8m
+	(envelope-from <martin.jansa@gmail.com>) id 1U50AR-0004MS-IE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2013 21:25:15 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1BIMKJw009726
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 11 Feb 2013 21:40:07 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so2854393dak.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2013 10:22:20 -0800 (PST)
-Received: from localhost.localdomain (128.224.147.212) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.318.4; Mon, 11 Feb 2013 10:22:18 -0800
-From: Aws Ismail <aws.ismail@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Feb 2013 13:16:18 -0500
-Message-ID: <1360606580-27697-2-git-send-email-aws.ismail@windriver.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
-References: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
-MIME-Version: 1.0
-Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH 1/3] traceroute: resolve multilib issues
+	Mon, 11 Feb 2013 12:24:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ruOEdBEIRhIV4Q9N+wYYY0abE5h786Q9+NLPwIHqUqw=;
+	b=XkPv7fSbLPi9fNnksiQWoOjntvdhzqk1EgpSW/xUcra/QSlX6UP6hRKUqsQhIdWFAw
+	di86XFVmGQLL0OBGPyfHBV88YHNIoQfJ4qxtaU6IhJZgEGUMghAOCPg8gIqSuDJUdAPZ
+	oP7llpioqWOUBa04GN0K5iO0xVHKoLisn+79G4go1y4j2a114P1i2Q6t5pYTAl5duoGs
+	WL+uAIUckQNZ6MJcbsw39DfQXoikWqtddwcxe26rjGIA2T0aBd3kg331MwhFFLLLeHAn
+	/aoPK0+uh6Jbmi5GShNBevm9tjMuTDnQQiE9Iio00wCfFJ0ZeYLnttopm3ApvcQVEZQW
+	qeuQ==
+X-Received: by 10.66.73.105 with SMTP id k9mr44332017pav.37.1360614240186;
+	Mon, 11 Feb 2013 12:24:00 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id l5sm68983893pax.10.2013.02.11.12.23.57
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 11 Feb 2013 12:23:59 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Feb 2013 21:23:51 +0100
+Message-Id: <1360614231-21036-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH][meta-oe] ca-certificates: upgrade to 20130119
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 20:25:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Feb 2013 20:40:07 -0000
 
-Make recipe changes to enable successfull building
-when multilib is being used.
+* old archive is no longer on upstream URL
 
-Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../traceroute/traceroute_2.0.18.bb                |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+ .../{ca-certificates_20120623.bb => ca-certificates_20130119.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/ca-certificates/{ca-certificates_20120623.bb => ca-certificates_20130119.bb} (89%)
 
-diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-index 6eca731..f5f96b2 100644
---- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-+++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-@@ -11,6 +11,8 @@ LICENSE = "GPL-2.0 LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
+diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+similarity index 89%
+rename from meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
+rename to meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+index 66150f0..5ad4485 100644
+--- a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
++++ b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=6135800ff6d893c7904d7aad90972eb5
+ SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
+            file://0001-update-ca-certificates-remove-c-rehash.patch"
  
-+PR = "r1"
-+
- inherit update-alternatives
+-SRC_URI[md5sum] = "5105d4cc086f0d4ecf7bf2e4c4667289"
+-SRC_URI[sha256sum] = "878cd1130ba056fe5f96decde7e5fc1b71d35eb8565a1515744912e100731ee9"
++SRC_URI[md5sum] = "1fbbec2028a33cf865b79c204aa2e626"
++SRC_URI[sha256sum] = "fb51ec9a2c551838cc1646a0b3c9e6bea5c1bb20ff5d71c542451fac4b191c22"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
-@@ -26,13 +28,13 @@ do_compile() {
+ inherit autotools allarch
  
- do_install() {
-     install -d ${D}${bindir}
--    install -m755 ${PN}/${PN} ${D}${bindir}
-+    install -m755 ${BPN}/${BPN} ${D}${bindir}
- 
-     install -m755 wrappers/tcptraceroute ${D}${bindir}
- 
-     install -d ${D}${mandir}
--    install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
--    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
-+    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
-+    ln -s ${PN}.8 ${D}${mandir}/${BPN}6.8
-     ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
- 
- }
 -- 
-1.7.0.4
+1.8.1.2
 
 
 
