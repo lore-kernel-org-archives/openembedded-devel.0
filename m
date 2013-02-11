@@ -1,36 +1,38 @@
-Received: from mail-ee0-f54.google.com ([74.125.83.54])
+Received: from mail-ee0-f48.google.com ([74.125.83.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U52Dd-0007Zx-TS
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U52Dh-0007a6-EE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2013 23:51:25 +0100
-Received: by mail-ee0-f54.google.com with SMTP id c41so3624088eek.13
+	Mon, 11 Feb 2013 23:51:29 +0100
+Received: by mail-ee0-f48.google.com with SMTP id t10so3360365eei.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2013 14:35:27 -0800 (PST)
+	Mon, 11 Feb 2013 14:35:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=Ah+ALXtAVgfesDp+4t4Y24oiw62mMdoFTP33c+s8DwM=;
-	b=NEfd8B8iZkynB69gWmKHH2oI7Hghmt8BNSyCI+L4lwp427RZOMIco0Jt2Wv0LdeFwT
-	J+Ov7SLDmdMU9ZuaoVI8h5zyokpnDUq/vdZ2uQLNEFTHjEJ+jrtpg3tY6nbkGx7wwT38
-	YLm6z0nYbb/LJ86FieJiSRrjLXTix4tlrbz69SjKVz4kyr9pTv/XyeQNesjYN3RKPub5
-	UcZNLwKNARbGqw5ZO/n4/5manABy47ulN3voF8ACp5N48o/w+XndOMt0QVgW4CW7IE3R
-	HlmYESGGSHZCzMA21/6dmSAo8AJ8hNItZei9nfDfW46dQP/PiJ2/Qg/wQ4j3m58AZQUa
-	M2jg==
-X-Received: by 10.14.199.135 with SMTP id x7mr54802629een.18.1360622127099;
-	Mon, 11 Feb 2013 14:35:27 -0800 (PST)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=/iqOrVtO5tjfqsFmGReT5j+7ES6HcVx9BqHXSIpNAUo=;
+	b=IwmvK/1UsrccSWlMDAfaGUyTdrNwgDvoWNDOkPW2cqEIB78jGV/c4FPRT3nDR6YNIZ
+	OX4IqWpNK5y8DBEzvbY3ooBP+u2oZeyAjNhiLK6usVbhVq5UD/QaU5GvZajBOYk0RVUt
+	KmW8vp0Y5tWsi9pTTQRzwRPbR2/41tBQ01I2keIyqyJohai+Cersg4TsjRuIJ1iUrttR
+	wNoXvmCL/0NglvDna3g4RTT7VW2SrT+1eqlJCBwlxYLT8NrOfAFeidbfGTuuOm0jryke
+	diRhxTxkUy2+MB2mDYdUcFFOq9nNvAmYgFOKTqxXTOwHnhVXuSdU1dTq+vCdGddtwM7i
+	G6sw==
+X-Received: by 10.14.224.137 with SMTP id x9mr55234692eep.11.1360622131181;
+	Mon, 11 Feb 2013 14:35:31 -0800 (PST)
 Received: from localhost.localdomain (p4FDF102E.dip.t-dialin.net.
 	[79.223.16.46])
-	by mx.google.com with ESMTPS id q5sm64887228eep.11.2013.02.11.14.35.19
+	by mx.google.com with ESMTPS id q5sm64887228eep.11.2013.02.11.14.35.29
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 11 Feb 2013 14:35:25 -0800 (PST)
+	Mon, 11 Feb 2013 14:35:30 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Feb 2013 23:35:07 +0100
-Message-Id: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 11 Feb 2013 23:35:09 +0100
+Message-Id: <1360622110-15419-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe 0/3] replace meta-oe's update-fonts.bbclass by oe-core's fontcache.bbclass
+Subject: =?UTF-8?B?W21ldGEtb2UgMi8zXSB1cGRhdGUtZm9udHMuYmJjbGFzczogcmVtb3ZlIC0gd2Ugbm93IHVzZSBvZS1jb3JlJ3MgZm9udGNhY2hlLmJiY2xhc3MgU2lnbmVkLW9mZi1ieTogQW5kcmVhcyBNw7xsbGVyIDxzY2huaXR6ZWx0b255QGdvb2dsZW1haWwuY29tPg==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +46,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 22:51:26 -0000
+X-List-Received-Date: Mon, 11 Feb 2013 22:51:30 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit 61911b23099c2658186179504ded318c987b5276:
-
-  ttf: introduce update-fonts bbclass and change all ttf recipes to use it (2013-02-06 15:16:01 +0100)
-
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git font-cache
-
-Andreas Müller (3):
-      ttf-fonts: inherit oe-core's fontcache.bbclass instead of update-fonts
-      update-fonts.bbclass: remove - we now use oe-core's fontcache.bbclass     Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-      font-update-common: remove
-
- meta-oe/classes/update-fonts.bbclass               |   40 --------------------
- .../font-update-common/update-fonts                |    4 --
- .../font-update-common/font-update-common_0.1.bb   |   18 ---------
- .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    4 +-
- .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    4 +-
- .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    4 +-
- .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    4 +-
- .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    4 +-
- .../ttf-fonts/ttf-liberation_0.2.bb                |    4 +-
- .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    7 +--
- .../ttf-fonts/ttf-sazanami_20040629.bb             |    4 +-
- .../ttf-fonts/ttf-ubuntu-font-family_0.80.bb       |    4 +-
- .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    4 +-
- meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    2 +-
- 14 files changed, 21 insertions(+), 86 deletions(-)
+---
+ meta-oe/classes/update-fonts.bbclass |   40 ----------------------------------
+ 1 files changed, 0 insertions(+), 40 deletions(-)
  delete mode 100644 meta-oe/classes/update-fonts.bbclass
- delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-update-common/update-fonts
- delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-update-common_0.1.bb
 
+diff --git a/meta-oe/classes/update-fonts.bbclass b/meta-oe/classes/update-fonts.bbclass
+deleted file mode 100644
+index db2e814..0000000
+--- a/meta-oe/classes/update-fonts.bbclass
++++ /dev/null
+@@ -1,40 +0,0 @@
+-
+-update_fonts_postinst() {
+-    if [ -z "$D" ]; then
+-        update-fonts
+-    fi
+-}
+-
+-# the same but keep it separate for now
+-update_fonts_postrm() {
+-    if [ -z "$D" ]; then
+-        update-fonts
+-    fi
+-}
+-
+-python populate_packages_append () {
+-    update_fonts_pkgs = d.getVar('UPDATE_FONTS_PACKAGES', True).split()
+-
+-    for pkg in update_fonts_pkgs:
+-        postinst = d.getVar('pkg_postinst_%s' % pkg, True) or d.getVar('pkg_postinst', True)
+-        if not postinst:
+-            postinst = '#!/bin/sh\n'
+-        postinst += d.getVar('update_fonts_postinst', True)
+-        d.setVar('pkg_postinst_%s' % pkg, postinst)
+-
+-        postrm = d.getVar('pkg_postrm_%s' % pkg, True) or d.getVar('pkg_postrm', True)
+-        if not postrm:
+-            postrm = '#!/bin/sh\n'
+-        postrm += d.getVar('update_fonts_postrm', True)
+-        d.setVar('pkg_postrm_%s' % pkg, postrm)
+-
+-        d.appendVar('RDEPENDS_%s' % pkg, ' font-update-common')
+-}
+-
+-python __anonymous() {
+-    if not bb.data.inherits_class('native', d) and not bb.data.inherits_class('cross', d):
+-        updatefonts_check = d.getVar('UPDATE_FONTS_PACKAGES')
+-        if not updatefonts_check:
+-            bb_filename = d.getVar('FILE')
+-            raise bb.build.FuncFailed, "\n\n\nERROR: %s inherits update-fonts but doesn't set UPDATE_FONTS_PACKAGES" % bb_filename
+-}
 -- 
 1.7.4.4
 
