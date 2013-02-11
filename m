@@ -1,38 +1,38 @@
-Received: from mail-ea0-f172.google.com ([209.85.215.172])
+Received: from mail-ee0-f45.google.com ([74.125.83.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrei@gherzan.ro>) id 1U4yob-0001ok-Lv
+	(envelope-from <andrei@gherzan.ro>) id 1U4yoY-0001of-KR
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 11 Feb 2013 20:13:51 +0100
-Received: by mail-ea0-f172.google.com with SMTP id f13so2934735eaa.31
+Received: by mail-ee0-f45.google.com with SMTP id b57so3379875eek.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2013 10:57:23 -0800 (PST)
+	Mon, 11 Feb 2013 10:57:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:x-gm-message-state;
-	bh=CgMF6v8vY5dwSSvHSVe6Fo58V+AkEPn+C9caA22xN3M=;
-	b=ksSsw4KtzALQrQqaB7FahERzhHjV/OVQ3aaqCymR+roWkyZLMMr/Cy0JBpNHzMaMIS
-	RQEEO0GGiGVO4WE2B24KH6wShCsmFDuqUI52H2WlqscVa4PKMuHANMqJowHghGbI7KLO
-	1HCInKoabl1ekG0sz5OZ0o2QbbryQA73Ea4beEr73gKDO4AwiUl+cfYnIShEyUL5S2g9
-	EojaUxGY45UkZasbdx6hsPZucfv8YrTcR/rA4zunxgAPIjZWtpNtn7WdW8Kk2NENHrrt
-	iMgfU18Y5OGbQj9bMgpSfBmYiug+Az2dkcojCMlsJcVinSQRUg8hlJ65u8OS9imVevJA
-	IFOw==
-X-Received: by 10.14.213.131 with SMTP id a3mr53388562eep.24.1360609043295;
-	Mon, 11 Feb 2013 10:57:23 -0800 (PST)
+	bh=w+n9as+acPjp9SDfpX56JbdsYD4R8nTs7nwiTqUxFTQ=;
+	b=IP1ciZm2MzTKlOLr+2nCxvquBd3zHhj+d/Fcl2EocmlIGorvvZurvHZJgjYgvs1Fbp
+	qU2VQsOkK8rqFAKpATzBtDl+UxpjWAfcr6Dkm2SRkRns64iGD+G2uUsmF3HTY+PSRtxZ
+	1Fd0VLSrbaExJ+ot1w752P6/pa1YSnWD9kACNuiy53W8z/bicB0VxqTgwhEv4zFN2AHj
+	nXrFUot8RMCdPu5TCFWFgkmID5UOsryXzH/QqNvNLhJeEBUJ0N5ngSKu/TakFii2tpop
+	to3jQX6hozrUUsZgJQe+KopH5XmOT1AvkHyHWttBJRAUqmQDcEQ5J5NqmcIXAjDsf582
+	zd9A==
+X-Received: by 10.14.194.195 with SMTP id m43mr53141946een.44.1360609040173;
+	Mon, 11 Feb 2013 10:57:20 -0800 (PST)
 Received: from localhost.localdomain (5-13-217-124.residential.rdsnet.ro.
 	[5.13.217.124])
-	by mx.google.com with ESMTPS id q5sm64034955eep.11.2013.02.11.10.57.21
+	by mx.google.com with ESMTPS id q5sm64034955eep.11.2013.02.11.10.57.18
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 11 Feb 2013 10:57:22 -0800 (PST)
+	Mon, 11 Feb 2013 10:57:19 -0800 (PST)
 From: Andrei Gherzan <andrei@gherzan.ro>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Feb 2013 20:57:08 +0200
-Message-Id: <1360609028-8921-4-git-send-email-andrei@gherzan.ro>
+Date: Mon, 11 Feb 2013 20:57:06 +0200
+Message-Id: <1360609028-8921-2-git-send-email-andrei@gherzan.ro>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1360609028-8921-1-git-send-email-andrei@gherzan.ro>
 References: <1360609028-8921-1-git-send-email-andrei@gherzan.ro>
-X-Gm-Message-State: ALoCoQl7GYo9T2J1JG+5Io5q+WSaBztzOBWQSz1TIWJlx3twRQVeOJV4a2H7f20MLdTA00pD8HUH
-Subject: [meta-oe][PATCH 4/4] minidlna: Integrated version 1.0.25
+X-Gm-Message-State: ALoCoQkvUQO94B5WoQ+0+NqaDmmE+G1v/m1W7TCOIJKisapyIyv2cAohbnDL/VbuPtwwFNEzxQkb
+Subject: [meta-oe][PATCH 2/4] libtorrent: Integrated version 0.13.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,141 +48,136 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 11 Feb 2013 19:13:53 -0000
 
-Add two patches to fix build.
+Add patch to avoid running AC_RUN_IFELSE code while configuring package.
 
 Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
 ---
- .../minidlna/minidlna/fix-makefile.patch           |   41 +++++++++++++++++
- .../search-for-headers-in-staging-dir.patch        |   48 ++++++++++++++++++++
- .../recipes-multimedia/minidlna/minidlna_1.0.25.bb |   19 ++++++++
- 3 files changed, 108 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch
- create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch
- create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb
+ .../don-t-run-code-while-configuring-package.patch |   94 ++++++++++++++++++++
+ .../libtorrent/libtorrent_0.13.3.bb                |   17 ++++
+ 2 files changed, 111 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libtorrent/libtorrent/don-t-run-code-while-configuring-package.patch
+ create mode 100644 meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
 
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch b/meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent/don-t-run-code-while-configuring-package.patch b/meta-oe/recipes-connectivity/libtorrent/libtorrent/don-t-run-code-while-configuring-package.patch
 new file mode 100644
-index 0000000..96429fd
+index 0000000..79d4f29
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch
-@@ -0,0 +1,41 @@
-+Fix Makefile:
-+* don't overwrite CFLAGS but append to it
-+* use gcc as CC only if CC is not already defined
-+* use -I= to include paths
-+* fix compile of minidlna binary by removing ${LIBS} dependency
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent/don-t-run-code-while-configuring-package.patch
+@@ -0,0 +1,94 @@
++Using AC_RUN_IFELSE prevent people from configuring package for
++cross-compiling. Don't run code while configuring package.
 +
-+Upstream-status: Pending
++Upstream-Status: Pending
 +Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
 +
-+Index: minidlna-1.0.25/Makefile
++Index: libtorrent-0.13.3/scripts/checks.m4
 +===================================================================
-+--- minidlna-1.0.25.orig/Makefile	2012-01-18 00:49:01.000000000 +0200
-++++ minidlna-1.0.25/Makefile	2013-02-10 17:46:49.000000000 +0200
-+@@ -12,13 +12,13 @@
-+ #
-+ #CFLAGS = -Wall -O -D_GNU_SOURCE -g -DDEBUG
-+ #CFLAGS = -Wall -g -Os -D_GNU_SOURCE
-+-CFLAGS = -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
-+-	 -I/usr/include/ffmpeg \
-+-	 -I/usr/include/libavutil -I/usr/include/libavcodec -I/usr/include/libavformat \
-+-	 -I/usr/include/ffmpeg/libavutil -I/usr/include/ffmpeg/libavcodec -I/usr/include/ffmpeg/libavformat
-++CFLAGS += -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
-++	 -I=/usr/include/ffmpeg \
-++	 -I=/usr/include/libavutil -I=/usr/include/libavcodec -I=/usr/include/libavformat \
-++	 -I=/usr/include/ffmpeg/libavutil -I=/usr/include/ffmpeg/libavcodec -I=/usr/include/ffmpeg/libavformat
-+ #STATIC_LINKING: CFLAGS += -DSTATIC
-+ #STATIC_LINKING: LDFLAGS = -static
-+-CC = gcc
-++CC ?= gcc
-+ RM = rm -f
-+ INSTALL = install
++--- libtorrent-0.13.3.orig/scripts/checks.m4	2012-05-14 14:17:04.000000000 +0300
+++++ libtorrent-0.13.3/scripts/checks.m4	2013-02-10 15:28:37.414445524 +0200
++@@ -95,40 +95,6 @@
 +
-+@@ -64,7 +64,7 @@
-+ 	$(INSTALL) -d $(ETCINSTALLDIR)
-+ 	$(INSTALL) --mode=0644 minidlna.conf $(ETCINSTALLDIR)
++ AC_DEFUN([TORRENT_CHECK_KQUEUE_SOCKET_ONLY], [
++   AC_MSG_CHECKING(whether kqueue supports pipes and ptys)
++-
++-  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-      #include <fcntl.h>
++-      #include <stdlib.h>
++-      #include <unistd.h>
++-      #include <sys/event.h>
++-      #include <sys/time.h>
++-      int main() {
++-        struct kevent ev@<:@2@:>@, ev_out@<:@2@:>@;
++-        struct timespec ts = { 0, 0 };
++-        int pfd@<:@2@:>@, pty@<:@2@:>@, kfd, n;
++-        char buffer@<:@9001@:>@;
++-        if (pipe(pfd) == -1) return 1;
++-        if (fcntl(pfd@<:@1@:>@, F_SETFL, O_NONBLOCK) == -1) return 2;
++-        while ((n = write(pfd@<:@1@:>@, buffer, sizeof(buffer))) == sizeof(buffer));
++-        if ((pty@<:@0@:>@=posix_openpt(O_RDWR | O_NOCTTY)) == -1) return 3;
++-        if ((pty@<:@1@:>@=grantpt(pty@<:@0@:>@)) == -1) return 4;
++-        EV_SET(ev+0, pfd@<:@1@:>@, EVFILT_WRITE, EV_ADD | EV_ENABLE, 0, 0, NULL);
++-        EV_SET(ev+1, pty@<:@1@:>@, EVFILT_READ, EV_ADD | EV_ENABLE, 0, 0, NULL);
++-        if ((kfd = kqueue()) == -1) return 5;
++-        if ((n = kevent(kfd, ev, 2, NULL, 0, NULL)) == -1) return 6;
++-        if (ev_out@<:@0@:>@.flags & EV_ERROR) return 7;
++-        if (ev_out@<:@1@:>@.flags & EV_ERROR) return 8;
++-        read(pfd@<:@0@:>@, buffer, sizeof(buffer));
++-        if ((n = kevent(kfd, NULL, 0, ev_out, 2, &ts)) < 1) return 9;
++-        return 0;
++-      }
++-      ])],
++-    [
++-      AC_MSG_RESULT(yes)
++-    ], [
++-      AC_DEFINE(KQUEUE_SOCKET_ONLY, 1, kqueue only supports sockets.)
++-      AC_MSG_RESULT(no)
++-    ])
++ ])
 +
-+-minidlna:	$(BASEOBJS) $(LNXOBJS) $(LIBS)
-++minidlna:	$(BASEOBJS) $(LNXOBJS)
-+ 	@echo Linking $@
-+ 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(BASEOBJS) $(LNXOBJS) $(LIBS)
-+
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch b/meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch
-new file mode 100644
-index 0000000..573d88c
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch
-@@ -0,0 +1,48 @@
-+Search for headers in STAGING_DIR_GOST.
-+
-+Upstream-status: Pending
-+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
-+
-+Index: minidlna-1.0.25/genconfig.sh
++ AC_DEFUN([TORRENT_WITH_KQUEUE], [
++Index: libtorrent-0.13.3/scripts/common.m4
 +===================================================================
-+--- minidlna-1.0.25.orig/genconfig.sh	2012-01-21 02:34:13.000000000 +0200
-++++ minidlna-1.0.25/genconfig.sh	2013-02-10 17:12:06.000000000 +0200
-+@@ -40,22 +40,22 @@
++--- libtorrent-0.13.3.orig/scripts/common.m4	2012-05-14 14:17:04.000000000 +0300
+++++ libtorrent-0.13.3/scripts/common.m4	2013-02-10 15:27:55.874446741 +0200
++@@ -222,38 +222,10 @@
 +
-+ # Detect if there are missing headers
-+ # NOTE: This check only works with a normal distro
-+-[ ! -e "/usr/include/sqlite3.h" ] && MISSING="libsqlite3 $MISSING"
-+-[ ! -e "/usr/include/jpeglib.h" ] && MISSING="libjpeg $MISSING"
-+-[ ! -e "/usr/include/libexif/exif-loader.h" ] && MISSING="libexif $MISSING"
-+-[ ! -e "/usr/include/id3tag.h" ] && MISSING="libid3tag $MISSING"
-+-[ ! -e "/usr/include/ogg/ogg.h" ] && MISSING="libogg $MISSING"
-+-[ ! -e "/usr/include/vorbis/codec.h" ] && MISSING="libvorbis $MISSING"
-+-[ ! -e "/usr/include/FLAC/metadata.h" ] && MISSING="libflac $MISSING"
-+-[ ! -e "/usr/include/ffmpeg/avutil.h" -a \
-+-  ! -e "/usr/include/libavutil/avutil.h" -a \
-+-  ! -e "/usr/include/ffmpeg/libavutil/avutil.h" ] && MISSING="libavutil $MISSING"
-+-[ ! -e "/usr/include/ffmpeg/avformat.h" -a \
-+-  ! -e "/usr/include/libavformat/avformat.h" -a \
-+-  ! -e "/usr/include/ffmpeg/libavformat/avformat.h" ] && MISSING="libavformat $MISSING"
-+-[ ! -e "/usr/include/ffmpeg/avcodec.h" -a \
-+-  ! -e "/usr/include/libavcodec/avcodec.h" -a \
-+-  ! -e "/usr/include/ffmpeg/libavcodec/avcodec.h" ] && MISSING="libavcodec $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/sqlite3.h" ] && MISSING="libsqlite3 $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/jpeglib.h" ] && MISSING="libjpeg $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/libexif/exif-loader.h" ] && MISSING="libexif $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/id3tag.h" ] && MISSING="libid3tag $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/ogg/ogg.h" ] && MISSING="libogg $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/vorbis/codec.h" ] && MISSING="libvorbis $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/FLAC/metadata.h" ] && MISSING="libflac $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avutil.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/libavutil/avutil.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavutil/avutil.h" ] && MISSING="libavutil $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avformat.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/libavformat/avformat.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavformat/avformat.h" ] && MISSING="libavformat $MISSING"
-++[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avcodec.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/libavcodec/avcodec.h" -a \
-++  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavcodec/avcodec.h" ] && MISSING="libavcodec $MISSING"
-+ if [ -n "$MISSING" ]; then
-+ 	echo -e "\nERROR!  Cannot continue."
-+ 	echo -e "The following required libraries are either missing, or are missing development headers:\n"
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb b/meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb
++ AC_DEFUN([TORRENT_CHECK_EXECINFO], [
++   AC_MSG_CHECKING(for execinfo.h)
++-
++-  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-      #include <execinfo.h>
++-      int main() { backtrace((void**)0, 0); backtrace_symbols((char**)0, 0); return 0;}
++-      ])],
++-    [
++-      AC_MSG_RESULT(yes)
++-      AC_DEFINE(USE_EXECINFO, 1, Use execinfo.h)
++-    ], [
++-      AC_MSG_RESULT(no)
++-  ])
++ ])
++
++ AC_DEFUN([TORRENT_CHECK_ALIGNED], [
++   AC_MSG_CHECKING(the byte alignment)
++-
++-  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-      #include <inttypes.h>
++-      int main() {
++-        char buf@<:@8@:>@ = { 0, 0, 0, 0, 1, 0, 0, 0 };
++-	int i;
++-        for (i = 1; i < 4; ++i)
++-	  if (*(uint32_t*)(buf + i) == 0) return -1;
++-	return 0;
++-	}
++-      ])],
++-    [
++-      AC_MSG_RESULT(none needed)
++-    ], [
++-      AC_DEFINE(USE_ALIGNED, 1, Require byte alignment)
++-      AC_MSG_RESULT(required)
++-  ])
++ ])
++
++
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
 new file mode 100644
-index 0000000..4c17737
+index 0000000..ecc254f
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim of \
-+being fully compliant with DLNA/UPnP-AV clients."
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "libTorrent is a BitTorrent library written in C++ for *nix, \
++with a focus on high performance and good code."
++HOMEPAGE = "http://libtorrent.rakshasa.no/"
 +LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=b1a795ac1a06805cf8fd74920bc46b5c"
++LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 +
-+DEPENDS = "flac libav jpeg sqlite3 libexif libogg libid3tag"
++DEPENDS = "libsigc++-2.0 openssl cppunit"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}_${PV}_src.tar.gz \
-+    file://search-for-headers-in-staging-dir.patch \
-+    file://fix-makefile.patch \
++SRC_URI = "http://libtorrent.rakshasa.no/downloads/${PN}-${PV}.tar.gz \
++    file://don-t-run-code-while-configuring-package.patch \
 +    "
 +
-+SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
-+SRC_URI[sha256sum] = "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
-+
-+export STAGING_DIR_HOST
++SRC_URI[md5sum] = "e94f6c590bb02aaf4d58618f738a85f2"
++SRC_URI[sha256sum] = "34317d6783b7f8d0805274c9467475b5432a246c0de8e28fc16e3b0b43f35677"
 +
 +inherit autotools
 +
