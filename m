@@ -1,27 +1,27 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1U4zvh-0003mO-PW
+	(envelope-from <Aws.Ismail@windriver.com>) id 1U4zvy-0003n5-48
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2013 21:24:46 +0100
+	Mon, 11 Feb 2013 21:25:11 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1BIMKFj003132
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1BIMLVj009729
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2013 10:22:20 -0800 (PST)
+	Mon, 11 Feb 2013 10:22:21 -0800 (PST)
 Received: from localhost.localdomain (128.224.147.212) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.318.4; Mon, 11 Feb 2013 10:22:19 -0800
+	14.2.318.4; Mon, 11 Feb 2013 10:22:20 -0800
 From: Aws Ismail <aws.ismail@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Feb 2013 13:16:19 -0500
-Message-ID: <1360606580-27697-3-git-send-email-aws.ismail@windriver.com>
+Date: Mon, 11 Feb 2013 13:16:20 -0500
+Message-ID: <1360606580-27697-4-git-send-email-aws.ismail@windriver.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
 References: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
 MIME-Version: 1.0
 Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH 2/3] netcat-openbsd: resolve multilib issues.
+Subject: [meta-networking][PATCH 3/3] accel-ppp: resolve QA warnings and satisfy multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,47 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 20:24:47 -0000
+X-List-Received-Date: Mon, 11 Feb 2013 20:25:13 -0000
 Content-Type: text/plain
 
-Make recipe changes to enable successfull building
-when multilib is being used.
+Create -libs and -dbg splits to include .so and .debug
+files, respectively to resolve the QA warning:
+lib64-accel-ppp rdepends on lib64-accel-ppp-dev when
+multilib is being used.
 
 Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
 ---
- .../recipes-support/netcat/netcat-openbsd_1.89.bb  |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-protocols/accel-ppp/accel-ppp_git.bb   |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-index 25cbfa6..00eec3e 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-@@ -2,7 +2,7 @@ require netcat.inc
- DESCRIPTION = "OpenBSD Netcat"
- HOMEPAGE = "http://ftp.debian.org"
- LICENSE = "BSD-3-Clause"
--PR = "r1"
-+PR = "r2"
+diff --git a/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb b/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
+index 9eb9bf8..d17cc78 100644
+--- a/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
++++ b/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
+@@ -8,6 +8,7 @@ DEPENDS = "openssl libpcre"
  
- DEPENDS += "glib-2.0"
+ inherit cmake
  
-@@ -14,7 +14,7 @@ SRC_URI[netcat.sha256sum] = "72e844dde8a2a7cba61971d493758dbea9ef0b164bccef15fd4
- SRC_URI[netcat-patch.md5sum] = "00c65aa22243b76998174c733cbb64cc"
- SRC_URI[netcat-patch.sha256sum] = "d5b6b2bd9788114bdcfbb71acad0263720b4fdc41529e287adf451b8610f84f1"
++PR = "r1"
+ PV = "1.7.3+git"
  
--S = "${WORKDIR}/${PN}-${PV}.orig"
-+S = "${WORKDIR}/${BPN}-${PV}.orig"
- 
- do_configure[noexec] = "1"
- 
-@@ -27,6 +27,6 @@ do_compile() {
- 
- do_install() {
-         install -d ${D}${bindir}
--        install -m 755 ${S}/nc ${D}${bindir}/nc.${PN}
-+        install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
- }
- ALTERNATIVE_PRIORITY = "50"
+ SRCREV = "4acfa46c321a344b9a6ce4128e72d1e02828d8a0"
+@@ -23,3 +24,9 @@ EXTRA_OECMAKE = " \
+                  -DRADIUS=FALSE \
+                  -DNETSNMP=FALSE \
+                 "
++FILES_${PN}-dbg += "/usr/lib/${BPN}/.debug/*"
++
++PACKAGES =+ "${PN}-libs"
++FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
++INSANE_SKIP_${PN}-libs = "dev-so"
++RDEPENDS_${PN} += "${PN}-libs"
 -- 
 1.7.0.4
 
