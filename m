@@ -1,37 +1,36 @@
-Received: from mail-da0-f51.google.com ([209.85.210.51])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U52Hf-00084m-2X
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U52Rh-0000JN-6d
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2013 23:55:43 +0100
-Received: by mail-da0-f51.google.com with SMTP id n15so2904856dad.24
+	Tue, 12 Feb 2013 00:05:57 +0100
+Received: by mail-ee0-f52.google.com with SMTP id b15so3300956eek.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Feb 2013 14:39:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bY96DVaXmfQOx8MqBSmZD620A96WOV0SO55F6+Kayks=;
-	b=deVUz+crF5tOkq+zoM6GhnMLrgJIW82baJJIZOyYNRP9VVMNzFOQZDeAcNBux2NXG4
-	SN1rv6CwqRicIzANMHOBiaqtbzewYSBz9D2ycNZci/cubi7Nrf94ZjO4zE9OO4b7zTj+
-	eMXbR8iMiHqWcyFeAhFjc/hwoYjZni9Of0MKab1vADsc/WHEZa71nDaEPtx0xwj/K9Z/
-	2ML1zaCN4IOzCbSAC2JJPIod9+SZ3MLUaTu3YjWFuWFbzid6T0gz902l5HYGfHKykHOV
-	13qOmu7PuyoqBlT7WpynQFzsZsZ7uctN0/36QuzCK8H+Y0gIWkdzOLYsmKO77JfwwiZv
-	LAVw==
-X-Received: by 10.66.79.135 with SMTP id j7mr45584382pax.0.1360622375456;
-	Mon, 11 Feb 2013 14:39:35 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d8sm69725361pax.23.2013.02.11.14.39.33
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 11 Feb 2013 14:39:34 -0800 (PST)
-Date: Mon, 11 Feb 2013 23:39:28 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 11 Feb 2013 14:49:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=0jdH5LkHP7D/Uf1xMd61KbgfM9NpLnmvFS1Ir4Zj38k=;
+	b=JvOESxrixQJqWi1JCfoTf2idZ4PWEJAVg0EznbsIuPsjD0m/TZBC1kMpNfLuVh+Q1O
+	OaRJhSHYX/BltbZOgaVqxtVo+lIIqF0K/6DwP6KGon/4YujMhit1s5qDHuPI02Q1Hud7
+	KAJFCgWCklT9eCcQZ9bJ2ghwCnny8oYVZbm4t+/RK6GMrjDtNWg7DomwY0T12LBwB60C
+	6nCQKwjyzLvj/BOo0zHrywntu04gnC9TGUToiDozMMwoVafHnje7y+OVB7Yqa/vaXbpG
+	ZwuqnvEZkQOwCZ9trxZEEWUoU80U4SyeqTsIEU+eMmm+BCunV0PyjlV/JNTn0+b/eZZL
+	UNaQ==
+X-Received: by 10.14.220.1 with SMTP id n1mr54758901eep.16.1360622998883;
+	Mon, 11 Feb 2013 14:49:58 -0800 (PST)
+Received: from localhost.localdomain (p4FDF102E.dip.t-dialin.net.
+	[79.223.16.46])
+	by mx.google.com with ESMTPS id l8sm30910395een.10.2013.02.11.14.49.57
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 11 Feb 2013 14:49:57 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130211223928.GC3300@jama>
-References: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
-	<1360622110-15419-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 11 Feb 2013 23:49:36 +0100
+Message-Id: <1360622979-16426-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-In-Reply-To: <1360622110-15419-3-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: =?UTF-8?B?UmU6IFttZXRhLW9lIDIvM10gdXBkYXRlLWZvbnRzLmJiY2xhc3M6IHJlbW92ZSAtIHdlIG5vdyB1c2Ugb2UtY29yZSdzIGZvbnRjYWNoZS5iYmNsYXNzIFNpZ25lZC1vZmYtYnk6IEFuZHJlYXMgTcO8bGxlciA8c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbT4=?=
+Subject: [meta-oe, V2 0/3] replace meta-oe's update-fonts.bbclass by oe-core's fontcache.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,99 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 22:55:43 -0000
-X-Groupsio-MsgNum: 43106
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WplhKdTI2c8ulnbP"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 Feb 2013 23:05:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---WplhKdTI2c8ulnbP
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 61911b23099c2658186179504ded318c987b5276:
 
-Please add newline before SOB line, otherwise looks good.
+  ttf: introduce update-fonts bbclass and change all ttf recipes to use it (2013-02-06 15:16:01 +0100)
 
-On Mon, Feb 11, 2013 at 11:35:09PM +0100, Andreas M=FCller wrote:
-> ---
->  meta-oe/classes/update-fonts.bbclass |   40 ----------------------------=
-------
->  1 files changed, 0 insertions(+), 40 deletions(-)
->  delete mode 100644 meta-oe/classes/update-fonts.bbclass
->=20
-> diff --git a/meta-oe/classes/update-fonts.bbclass b/meta-oe/classes/updat=
-e-fonts.bbclass
-> deleted file mode 100644
-> index db2e814..0000000
-> --- a/meta-oe/classes/update-fonts.bbclass
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -
-> -update_fonts_postinst() {
-> -    if [ -z "$D" ]; then
-> -        update-fonts
-> -    fi
-> -}
-> -
-> -# the same but keep it separate for now
-> -update_fonts_postrm() {
-> -    if [ -z "$D" ]; then
-> -        update-fonts
-> -    fi
-> -}
-> -
-> -python populate_packages_append () {
-> -    update_fonts_pkgs =3D d.getVar('UPDATE_FONTS_PACKAGES', True).split()
-> -
-> -    for pkg in update_fonts_pkgs:
-> -        postinst =3D d.getVar('pkg_postinst_%s' % pkg, True) or d.getVar=
-('pkg_postinst', True)
-> -        if not postinst:
-> -            postinst =3D '#!/bin/sh\n'
-> -        postinst +=3D d.getVar('update_fonts_postinst', True)
-> -        d.setVar('pkg_postinst_%s' % pkg, postinst)
-> -
-> -        postrm =3D d.getVar('pkg_postrm_%s' % pkg, True) or d.getVar('pk=
-g_postrm', True)
-> -        if not postrm:
-> -            postrm =3D '#!/bin/sh\n'
-> -        postrm +=3D d.getVar('update_fonts_postrm', True)
-> -        d.setVar('pkg_postrm_%s' % pkg, postrm)
-> -
-> -        d.appendVar('RDEPENDS_%s' % pkg, ' font-update-common')
-> -}
-> -
-> -python __anonymous() {
-> -    if not bb.data.inherits_class('native', d) and not bb.data.inherits_=
-class('cross', d):
-> -        updatefonts_check =3D d.getVar('UPDATE_FONTS_PACKAGES')
-> -        if not updatefonts_check:
-> -            bb_filename =3D d.getVar('FILE')
-> -            raise bb.build.FuncFailed, "\n\n\nERROR: %s inherits update-=
-fonts but doesn't set UPDATE_FONTS_PACKAGES" % bb_filename
-> -}
-> --=20
-> 1.7.4.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git font-cache
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas Müller (3):
+      ttf-fonts: inherit oe-core's fontcache.bbclass instead of update-fonts
+      update-fonts.bbclass: remove - we now use oe-core's fontcache.bbclass
+      font-update-common: remove
 
---WplhKdTI2c8ulnbP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ meta-oe/classes/update-fonts.bbclass               |   40 --------------------
+ .../font-update-common/update-fonts                |    4 --
+ .../font-update-common/font-update-common_0.1.bb   |   18 ---------
+ .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    4 +-
+ .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    4 +-
+ .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    4 +-
+ .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    4 +-
+ .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    4 +-
+ .../ttf-fonts/ttf-liberation_0.2.bb                |    4 +-
+ .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    7 +--
+ .../ttf-fonts/ttf-sazanami_20040629.bb             |    4 +-
+ .../ttf-fonts/ttf-ubuntu-font-family_0.80.bb       |    4 +-
+ .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    4 +-
+ meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    2 +-
+ 14 files changed, 21 insertions(+), 86 deletions(-)
+ delete mode 100644 meta-oe/classes/update-fonts.bbclass
+ delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-update-common/update-fonts
+ delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-update-common_0.1.bb
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+-- 
+1.7.4.4
 
-iEYEARECAAYFAlEZcyAACgkQN1Ujt2V2gByCNwCZAaSRhHuBT+bzMwNIdthpVa0F
-E3gAnRwOrKd2B4KtvZlKzxsaCpvL8Bbs
-=N9Y3
------END PGP SIGNATURE-----
 
---WplhKdTI2c8ulnbP--
+
