@@ -1,34 +1,22 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1U4uu2-0002Ex-NF for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Feb 2013 16:02:43 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r1BEnB03007299; Mon, 11 Feb 2013 14:49:11 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id aN-DI+dol5yC; Mon, 11 Feb 2013 14:49:11 +0000 (GMT)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r1BEn6HR007296
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Mon, 11 Feb 2013 14:49:09 GMT
-Message-ID: <1360593792.6793.74.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Ross Burton <ross.burton@intel.com>
-Date: Mon, 11 Feb 2013 14:43:12 +0000
-In-Reply-To: <a32b33801c899dce34b072ad1d9d9ede30e8b598.1360360346.git.ross.burton@intel.com>
-References: <cover.1360360346.git.ross.burton@intel.com>
-	<a32b33801c899dce34b072ad1d9d9ede30e8b598.1360360346.git.ross.burton@intel.com>
-X-Mailer: Evolution 3.6.3-1 
-Mime-Version: 1.0
-X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
-	r1BEnB03007299
-Cc: openembedded-devel@lists.openembedded.org,
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1U4x7n-0006eP-UJ; Mon, 11 Feb 2013 18:25:04 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 11 Feb 2013 09:09:04 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,643,1355126400"; d="scan'208";a="261133846"
+Received: from unknown (HELO helios.localnet) ([10.252.120.60])
+	by orsmga001.jf.intel.com with ESMTP; 11 Feb 2013 09:09:02 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org,
 	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH 1/5] systemd.bbclass: helper class for recipes with systemd units
+Date: Mon, 11 Feb 2013 17:09:01 +0000
+Message-ID: <2760168.9kFd94gL1F@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
+MIME-Version: 1.0
+Subject: RFC: meta-oe appends and overlayed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,245 +30,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 15:02:46 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Feb 2013 17:25:04 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, 2013-02-08 at 22:43 +0000, Ross Burton wrote:
-> This class adds postinst/prerm scripts to start/stop/enable/disable the=
- services
-> as relevant, and some magic to ensure the service files are installed.
->=20
-> Based on (but not the same as) the systemd.bbclass in meta-systemd, so =
-thanks to
-> the following for their work there:
->=20
-> Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-> Khem Raj <raj.khem@gmail.com>
-> Martin Jansa <Martin.Jansa@gmail.com>
-> Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> Koen Kooi <koen@dominion.thruhere.net>
->=20
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  meta/classes/systemd.bbclass |  158 ++++++++++++++++++++++++++++++++++=
-++++++++
->  1 file changed, 158 insertions(+)
->  create mode 100644 meta/classes/systemd.bbclass
->=20
-> diff --git a/meta/classes/systemd.bbclass b/meta/classes/systemd.bbclas=
-s
-> new file mode 100644
-> index 0000000..e0ea65c
-> --- /dev/null
-> +++ b/meta/classes/systemd.bbclass
-> @@ -0,0 +1,158 @@
-> +# The list of packages that should have systemd packaging scripts adde=
-d.  For
-> +# each entry, optionally have a SYSTEMD_SERVICE_[package] that lists t=
-he service
-> +# files in this package.  If this variable isn't set, [package].servic=
-e is used.
-> +SYSTEMD_PACKAGES ?=3D "${PN}"
-> +
-> +# Whether to enable or disable the services on installation.
-> +SYSTEMD_AUTO_ENABLE ??=3D "enable"
-> +
-> +# This class will be included in any recipe that supports systemd init=
- scripts,
-> +# even if the systemd DISTRO_FEATURE isn't enabled.  As such don't mak=
-e any
-> +# changes directly but check the DISTRO_FEATURES first.
-> +python __anonymous() {
-> +    if oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d=
-):
-> +        d.appendVar("DEPENDS", " systemd-systemctl-native")
-> +        # Set a variable so that update-rcd.bbclass knows we're active=
- and can
-> +        # disable itself.
-> +        d.setVar("SYSTEMD_BBCLASS_ENABLED", "1")
-> +}
-> +systemd_postinst() {
-> +OPTS=3D""
-> +
-> +if [ -n "$D" ]; then
-> +    OPTS=3D"--root=3D$D"
-> +fi
-> +
-> +systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
-> +
-> +if [ -z "$D" -a "${SYSTEMD_AUTO_ENABLE}" =3D "enable" ]; then
-> +    systemctl start ${SYSTEMD_SERVICE}
-> +fi
-> +}
-> +
-> +systemd_prerm() {
-> +if [ -z "$D" ]; then
-> +    systemctl stop ${SYSTEMD_SERVICE}
-> +fi
-> +
-> +systemctl disable ${SYSTEMD_SERVICE}
-> +}
-> +
-> +def systemd_populate_packages(d):
-> +    def get_package_var(d, var, pkg):
-> +        val =3D (d.getVar('%s_%s' % (var, pkg), True) or "").strip()
-> +        if val =3D=3D "":
-> +            val =3D (d.getVar(var, True) or "").strip()
-> +        return val
-> +
-> +
-> +    # Add a runtime dependency on systemd to pkg
-> +    def systemd_add_rdepends(pkg):
-> +        rdepends =3D d.getVar('RDEPENDS_' + pkg, True) or ""
-> +        if not 'systemd' in rdepends.split():
-> +            rdepends =3D '%s %s' % (rdepends, 'systemd')
-> +        d.setVar('RDEPENDS_' + pkg, rdepends)
-> +
-> +
-> +    def systemd_generate_package_scripts(pkg):
-> +        bb.debug(1, 'adding systemd calls to postinst/postrm for %s' %=
- pkg)
-> +
-> +        # Add pkg to the overrides so that it finds the SYSTEMD_SERVIC=
-E_pkg
-> +        # variable.
-> +        localdata =3D d.createCopy()
-> +        localdata.prependVar("OVERRIDES", pkg + ":")
-> +        bb.data.update_data(localdata)
-> +
-> +        postinst =3D d.getVar('pkg_postinst_%s' % pkg, True)
-> +        if not postinst:
-> +            postinst =3D '#!/bin/sh\n'
-> +        postinst +=3D localdata.getVar('systemd_postinst', True)
-> +        d.setVar('pkg_postinst_%s' % pkg, postinst)
-> +
-> +        prerm =3D d.getVar('pkg_prerm_%s' % pkg, True)
-> +        if not prerm:
-> +            prerm =3D '#!/bin/sh\n'
-> +        prerm +=3D localdata.getVar('systemd_prerm', True)
-> +        d.setVar('pkg_prerm_%s' % pkg, prerm)
-> +
-> +
-> +    # Add files to FILES_*-systemd if existent and not already done
-> +    def systemd_append_file(pkg_systemd, file_append):
-> +        appended =3D False
-> +        if os.path.exists(oe.path.join(d.getVar("D", True), file_appen=
-d)):
-> +            var_name =3D "FILES_" + pkg_systemd
-> +            files =3D d.getVar(var_name, False) or ""
-> +            if file_append not in files.split():
-> +                d.appendVar(var_name, " " + file_append)
-> +                appended =3D True
-> +        return appended
-> +
-> +    # Add systemd files to FILES_*-systemd, parse for Also=3D and foll=
-ow recursive
-> +    def systemd_add_files_and_parse(pkg_systemd, path, service, keys):
-> +        # avoid infinite recursion
-> +        if systemd_append_file(pkg_systemd, oe.path.join(path, service=
-)):
-> +            fullpath =3D oe.path.join(d.getVar("D", True), path, servi=
-ce)
-> +            if service.find('.service') !=3D -1:
-> +                # for *.service add *@.service
-> +                service_base =3D service.replace('.service', '')
-> +                systemd_add_files_and_parse(pkg_systemd, path, service=
-_base + '@.service', keys)
-> +            if service.find('.socket') !=3D -1:
-> +                # for *.socket add *.service and *@.service
-> +                service_base =3D service.replace('.socket', '')
-> +                systemd_add_files_and_parse(pkg_systemd, path, service=
-_base + '.service', keys)
-> +                systemd_add_files_and_parse(pkg_systemd, path, service=
-_base + '@.service', keys)
-> +            for key in keys.split():
-> +                # recurse all dependencies found in keys ('Also';'Conf=
-licts';..) and add to files
-> +                cmd =3D "grep %s %s | sed 's,%s=3D,,g' | tr ',' '\\n'"=
- % (key, fullpath, key)
-> +                pipe =3D os.popen(cmd, 'r')
-> +                line =3D pipe.readline()
-> +                while line:
-> +                    line =3D line.replace('\n', '')
-> +                    systemd_add_files_and_parse(pkg_systemd, path, lin=
-e, keys)
-> +                    line =3D pipe.readline()
-> +                pipe.close()
-> +
-> +    # Check service-files and call systemd_add_files_and_parse for eac=
-h entry
-> +    def systemd_check_services():
-> +        base_libdir =3D d.getVar('base_libdir', True)
-> +        searchpaths =3D [oe.path.join(d.getVar("sysconfdir", True), "s=
-ystemd", "system"),]
-> +        searchpaths.append(oe.path.join(d.getVar("base_libdir", True),=
- "systemd", "system"))
-> +        searchpaths.append(oe.path.join(d.getVar("libdir", True), "sys=
-temd", "system"))
-> +        searchpaths.append(oe.path.join(d.getVar("libdir", True), "sys=
-temd", "user"))
-> +        systemd_packages =3D d.getVar('SYSTEMD_PACKAGES', True)
-> +        has_exactly_one_service =3D len(systemd_packages.split()) =3D=3D=
- 1
-> +        if has_exactly_one_service:
-> +            has_exactly_one_service =3D len(get_package_var(d, 'SYSTEM=
-D_SERVICE', systemd_packages).split()) =3D=3D 1
-> +
-> +        keys =3D 'Also' # Conflicts??
-> +        if has_exactly_one_service:
-> +            # single service gets also the /dev/null dummies
-> +            keys =3D 'Also Conflicts'
-> +        # scan for all in SYSTEMD_SERVICE[]
-> +        for pkg_systemd in systemd_packages.split():
-> +            for service in get_package_var(d, 'SYSTEMD_SERVICE', pkg_s=
-ystemd).split():
-> +                path_found =3D ''
-> +                for path in searchpaths:
-> +                    if os.path.exists(oe.path.join(d.getVar("D", True)=
-, path, service)):
-> +                        path_found =3D path
-> +                        break
-> +                if path_found !=3D '':
-> +                    systemd_add_files_and_parse(pkg_systemd, path_foun=
-d, service, keys)
-> +                else:
-> +                    raise bb.build.FuncFailed, "\n\nSYSTEMD_SERVICE_%s=
- value %s does not exist" % \
-> +                        (pkg_systemd, service)
-> +
-> +    # Run all modifications once when creating package
-> +    if os.path.exists(d.getVar("D", True)):
-> +        for pkg in d.getVar('SYSTEMD_PACKAGES', True).split():
-> +            if d.getVar('SYSTEMD_SERVICE_' + pkg, True):
-> +                systemd_generate_package_scripts(pkg)
-> +                systemd_add_rdepends(pkg)
-> +        systemd_check_services()
-> +
-> +
-> +python populate_packages_prepend () {
-> +    if oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d=
-):
-> +        systemd_populate_packages (d)
-> +}
+Hi all,
 
+I'd like to make an attempt to remove all appends and overlayed recipes from 
+the meta-oe layer. As I've said previously, I don't believe meta-oe - as a 
+collection of very useful additional recipes that many wish to be able to use 
+on top of their OE-Core based build configurations - should be making any 
+possibly unexpected changes to those configurations. Any such changes ought to 
+be the province of distro layers alone.
 
-I know this has been a long time in the works so I'll merge but could
-you follow up with a change:
+We've already removed all of the obvious overlayed recipes and the meta-
+systemd split removed most of the pieces that were there for systemd support; 
+there are just a few remaining recipes and appends that need to be dealt with. 
+I'll catalogue these below with my comments.
 
-PACKAGESPLITFUNCS_prepend =3D "systemd_populate_packages "
+Currently we have the following overlayed recipes:
 
-and just put the=20
+* icon-naming-utils: meta-oe has a newer version (0.8.90 vs OE-Core's 0.8.7) 
+and it uses BBCLASSEXTEND rather than OE-Core's native recipe. I would propose 
+to just move the meta-oe version to OE-Core since it appears to be superior.
 
-oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d) into
-systemd_populate_packages with a return? You'll need to drop the d as a
-parameter and turn it into a python xxxx() { style function. The nice
-thing is this then shows up nicely on the profiles too. I'm aiming to
-stamp out use of populate_packages_prepend entirely.
+* libmad: both layers have the same version. The meta-oe version has some 
+slightly different versions of the MIPS compiler flag fix and -fforce-mem removal 
+patches but I think these can be ignored, since the OE-Core versions of these 
+patches have proper headers and are presumably working. The OE-Core version 
+has LICENSE_FLAGS that the meta-oe one doesn't, but is missing an avr32-
+specific optimisation patch that is in the meta-oe version. What would we do 
+with the latter? Is it appropriate to add to the OE-Core recipe?
+
+* tslib: OE-Core has the 1.0 release version, meta-oe has a git recipe that is 
+ahead of 1.0; the OE-Core version has two patches not in the meta-oe version 
+but that both have been merged upstream in the git revision being used in the 
+meta-oe version. There is no newer stable release. What do we do here? Should 
+we ask upstream (Chris) for a new stable release?
+
+* xserver-nodm-init: the two versions are quite distinct. Not sure I 
+understand the full history here but perhaps someone else can fill in the 
+blanks...?
+
+As far as bbappends go we have:
+
+* meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+As far as I can tell this just adds an /etc/busybox-syslog.default file 
+containing OPTIONS="-C64" and seems to have been added for systemd support. 
+I'm not sure why this wasn't moved to meta-systemd, but I assume it needs to 
+be merged into OE-Core now that systemd support is being added there... ?
+
+* meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+Another bbappend apparently for systemd support. Again, this should have been 
+moved to meta-systemd; do we now need to merge it into OE-Core?
+
+* meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+This is adding qwt to the qte toolchain. As far as I am concerned this is a 
+distro policy decision - Qwt is a third-party library that is not part of Qt. 
+I believe this should be moved to the layers for whichever distros want this.
+
+* meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+* meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I see this 
+as a distro policy decision; these should move to the layers for whichever 
+distros want this. FWIW, this is particularly egregious if you've already 
+built Qt, then add meta-oe and find Qt is being unexpectedly rebuilt.
+
+* meta-oe/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.bbappend
+Builds against external libav instead of using the builtin copy of ffmpeg, 
+apparently for better performance on ARM (and presumably that is not the only 
+benefit). It's less clear to me what should be done with this, but I'd still 
+rather it could be eliminated. OE-Core does not have ffmpeg/libav; one wonders 
+if it should or not.
+
+Thoughts?
 
 Cheers,
+Paul
 
-Richard
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
