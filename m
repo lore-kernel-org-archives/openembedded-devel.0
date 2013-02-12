@@ -1,47 +1,28 @@
-Received: from mail-vb0-f48.google.com ([209.85.212.48])
+Received: from firewall.honig.net ([66.152.121.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U5OBk-0006Lo-2C
+	(envelope-from <jch@honig.net>) id 1U5ObW-00071g-Se
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Feb 2013 23:19:07 +0100
-Received: by mail-vb0-f48.google.com with SMTP id fc21so366064vbb.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Feb 2013 14:02:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:content-transfer-encoding
-	:x-gm-message-state;
-	bh=iR16lmyf9WassoQbIi3Pq6wnmKt0wzk+1wcbz4ZTjCw=;
-	b=NipcSY+U7Fq0a+0bZV+v2j/DLzxwTWydPomgnwiiXY27aJxARBG1DQWcy90X+naNaZ
-	MYY+6OekZhTXBJu70ji8DlehIN3jmwbFGv60UAVj8FHlgoyhbQgXNxv1sMvTtRMsfxI1
-	Hq6JyziCOU5/V853BVTYxNDFxMarjWlLR9Qtmudghx52Q5kwt9qb/3eoZwEF/a5jE3AR
-	83m+sFCai9ayhdfO4VeS4mem/ouWINrIhE0GcsmfPLTdXHG0bwla4/vseH/MmQzyYUP2
-	psTnz62d37qqbmws1TnvpZn0hCPnqFiBOlUTFPL3qNYeGIpJYjQ5wJZq+TPylMteeENo
-	eL1w==
-X-Received: by 10.58.106.161 with SMTP id gv1mr26111267veb.35.1360706575716;
-	Tue, 12 Feb 2013 14:02:55 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.95.131 with HTTP; Tue, 12 Feb 2013 14:02:35 -0800 (PST)
-In-Reply-To: <20130212225303.029a2ac9@e6520eb>
-References: <2760168.9kFd94gL1F@helios>
-	<CAJTo0LaJNDB6XjK0M4rsS9+z7AZ6K_n0TAX8+7KH2GuAADgCZw@mail.gmail.com>
-	<1906630.s5um26QAQj@helios>
-	<CAP9ODKrOM9bh-MnzQvU29iVwYdRvw4m7DMYZUcMV=wKYJ5Q4bg@mail.gmail.com>
-	<CAJTo0LYFcT5P=p62Nn2kBak33LCfBXQ_KFL-oF2bHFKhguk1rg@mail.gmail.com>
-	<20130212212255.GF3300@jama>
-	<CAJTo0LZREeVX7cWLttEvzxSK_VMNPQyZuQqReEMTH-zbHObdLw@mail.gmail.com>
-	<20130212225303.029a2ac9@e6520eb>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 12 Feb 2013 22:02:35 +0000
-Message-ID: <CAJTo0LapvdGaYUu2J9h+=MBJKc7fkfbKc-55oOOgF7+x17sT5g@mail.gmail.com>
-To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-X-Gm-Message-State: ALoCoQnwvj1Qhl8Y9AXyheWqsJCTG1crgPUN+uE4ixCj9Ox3gXExZ/l+Vt7s7qDDA5nRvNsS4o18
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [OE-core] RFC: meta-oe appends and overlayed recipes
+	Tue, 12 Feb 2013 23:45:57 +0100
+Received: from kismet.honig.net (kismet.HONIG.NET [172.25.29.32])
+	by firewall.honig.net (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
+	r1CMMYtW026814
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=OK);
+	Tue, 12 Feb 2013 17:22:35 -0500
+Received: from kismet.honig.net (kismet.honig.net [127.0.0.1])
+	by kismet.honig.net (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
+	r1CMMYnd008182
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 12 Feb 2013 17:22:34 -0500
+Received: (from jch@localhost)
+	by kismet.honig.net (8.14.4/8.14.4/Submit) id r1CMMX2S008181;
+	Tue, 12 Feb 2013 17:22:33 -0500
+From: Jeffrey C Honig <jeffrey.honig@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Feb 2013 17:22:27 -0500
+Message-Id: <1360707747-8128-1-git-send-email-jeffrey.honig@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: jeffrey.honig@windriver.com
+Subject: [PATCH] hiawatha: ennsure C flags are passed to builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,17 +36,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 22:19:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Feb 2013 22:46:01 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 22:46:01 -0000
 
-On 12 February 2013 21:53, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-> if you have a how-to to get Qt/E 4.x working with evdev, please send it
-> before removing tslib so that we can test it on several boards which
-> are actually running with Qt/E+tslib.
+[ CQID: WIND00403568 ]
 
-Totally, not regressing badly is a prerequisite.
+Hiawatha was overriding existing C flags instead of prepending warning flags.
+This caused build failures on multilibs because the C compiler could not find
+the proper sysroot.
 
-Ross
+Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
+---
+ recipes-httpd/hiawatha/files/cmake.patch |   16 ++++++++++++++++
+ recipes-httpd/hiawatha/hiawatha_8.6.bb   |    3 +++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 recipes-httpd/hiawatha/files/cmake.patch
+
+diff --git a/recipes-httpd/hiawatha/files/cmake.patch b/recipes-httpd/hiawatha/files/cmake.patch
+new file mode 100644
+index 0000000..f597781
+--- /dev/null
++++ b/recipes-httpd/hiawatha/files/cmake.patch
+@@ -0,0 +1,16 @@
++It is necessary to include the original CMAKE_C_FLAGS to insure that
++the sysroot is passed to the compiler, instead of just setting warning
++options.  Otherwise we'll get problem croos compiling in some
++circumstances.
++
++--- a/CMakeLists.txt	2012-10-31 14:16:45.000000000 -0400
+++++ b/CMakeLists.txt	2013-02-12 14:07:04.297058345 -0500
++@@ -2,7 +2,7 @@
++ project(Hiawatha C)
++ 
++ # Compiler
++-set(CMAKE_C_FLAGS "-Wall -Wextra")
+++set(CMAKE_C_FLAGS "-Wall -Wextra ${CMAKE_C_FLAGS}")
++ set(CMAKE_BUILD_TYPE "RelWithDebInfo")
++ 
++ # Options
+diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+index 837354b..d46a525 100644
+--- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
++++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+@@ -4,9 +4,12 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "libxml2 libxslt"
+ 
++PR = "r1"
++
+ SECTION = "net"
+ 
+ SRC_URI = "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar.gz \
++           file://cmake.patch \
+            file://hiawatha-init"
+ 
+ SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
+-- 
+1.7.9.5
+
 
 
