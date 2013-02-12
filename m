@@ -1,25 +1,30 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1U5DVo-0007FV-7O; Tue, 12 Feb 2013 11:54:58 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 12 Feb 2013 02:37:37 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,648,1355126400"; d="scan'208";a="261456255"
-Received: from unknown (HELO helios.localnet) ([10.252.120.87])
-	by orsmga001.jf.intel.com with ESMTP; 12 Feb 2013 02:38:53 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org
-Date: Tue, 12 Feb 2013 10:38:52 +0000
-Message-ID: <1906630.s5um26QAQj@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <CAJTo0LaJNDB6XjK0M4rsS9+z7AZ6K_n0TAX8+7KH2GuAADgCZw@mail.gmail.com>
-References: <2760168.9kFd94gL1F@helios>
-	<CAJTo0LaJNDB6XjK0M4rsS9+z7AZ6K_n0TAX8+7KH2GuAADgCZw@mail.gmail.com>
-MIME-Version: 1.0
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-devel@lists.openembedded.org
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1U5FsR-00038s-6y; Tue, 12 Feb 2013 14:26:45 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r1CDG42l022470; Tue, 12 Feb 2013 13:16:13 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id M3rpn0RVxAP0; Tue, 12 Feb 2013 13:16:12 +0000 (GMT)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r1CDG4Zs022435
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT); Tue, 12 Feb 2013 13:16:07 GMT
+Message-ID: <1360674605.30425.9.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Tue, 12 Feb 2013 13:10:05 +0000
+In-Reply-To: <1687588.iZvXQbhphA@helios>
+References: <2760168.9kFd94gL1F@helios> <1360622147.6793.78.camel@ted>
+	<1687588.iZvXQbhphA@helios>
+X-Mailer: Evolution 3.6.3-1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
 Subject: Re: [OE-core] RFC: meta-oe appends and overlayed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,77 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 10:54:59 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 12 Feb 2013 13:26:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 12 February 2013 10:24:50 Burton, Ross wrote:
-> > * tslib: OE-Core has the 1.0 release version, meta-oe has a git recipe
-> > that is ahead of 1.0; the OE-Core version has two patches not in the
-> > meta-oe version but that both have been merged upstream in the git
-> > revision being used in the meta-oe version. There is no newer stable
-> > release. What do we do here? Should we ask upstream (Chris) for a new
-> > stable release?
+On Tue, 2013-02-12 at 09:24 +0000, Paul Eggleton wrote:
+> On Monday 11 February 2013 22:35:47 Richard Purdie wrote:
+> > On Mon, 2013-02-11 at 17:09 +0000, Paul Eggleton wrote:
+> > > *
+> > > meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappe
+> > > nd This is adding qwt to the qte toolchain. As far as I am concerned this
+> > > is a distro policy decision - Qwt is a third-party library that is not
+> > > part of Qt. I believe this should be moved to the layers for whichever
+> > > distros want this.
+> > > 
+> > > * meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+> > > * meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+> > > These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I see
+> > > this as a distro policy decision; these should move to the layers for
+> > > whichever distros want this. FWIW, this is particularly egregious if
+> > > you've already built Qt, then add meta-oe and find Qt is being
+> > > unexpectedly rebuilt.
+> > If these were implemented as PACKAGECONFIG options, then distros would
+> > just need to set the appropriate PACKAGECONFIG for the package in the
+> > distro config and we wouldn't even need the appends...
 > 
-> Is anyone actually using tslib these days?  oe-core dropped kdrive,
-> and we don't package the apparently unmaintained input driver for
-> Xorg.  I guess a new upstream would be good, and then move to meta-oe.
+> The thing is the Qt configure options are a little more complicated - many of 
+> them are three-state switches (enable built-in, enable as a plugin or 
+> disabled). Thus we've opted to split the configuration options into variables 
+> for each type. We don't get PACKAGECONFIG's DEPENDS handling, but if we used 
+> PACKAGECONFIG we'd lose some flexibility.
 
-Qt Embedded as we build it is currently configured to use tslib, as is
-SDL. If the alternative (evdev?) is supported they could presumably be
-switched over though. I don't know how practical that is however.
- 
-> > * xserver-nodm-init: the two versions are quite distinct. Not sure I
-> > understand the full history here but perhaps someone else can fill in the
-> > blanks...?
-> 
-> I don't understand the full history either yet, but this is clearly
-> something that needs to be sorted.
-> 
-> > * meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-> > As far as I can tell this just adds an /etc/busybox-syslog.default file
-> > containing OPTIONS="-C64" and seems to have been added for systemd
-> > support.
-> > I'm not sure why this wasn't moved to meta-systemd, but I assume it needs
-> > to be merged into OE-Core now that systemd support is being added
-> > there... ?
-> When it's understood *what* that does, then we can evaluate it for oe-core.
+Is there a way we can at least have it behave in a similar way to
+PACKAGECONFIG? Can those configuration variables be set from the
+distro? 
 
-The following commit introduced this:
-
-http://cgit.openembedded.org/meta-openembedded/commit/?id=c48a6a605c6d8d38cfbc5df39b3dc310bffc07c1
-
-Otavio can you explain further?
-
-> > * meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-> > Another bbappend apparently for systemd support. Again, this should have
-> > been moved to meta-systemd; do we now need to merge it into OE-Core?
-> 
-> Yes, half of it has been merged to master already. The rest should be
-> in Radu's branch, we can sort that today.
-
-OK, great.
-
-> > * meta-oe/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.bbappend
-> > Builds against external libav instead of using the builtin copy of ffmpeg,
-> > apparently for better performance on ARM (and presumably that is not the
-> > only benefit). It's less clear to me what should be done with this, but
-> > I'd still rather it could be eliminated. OE-Core does not have
-> > ffmpeg/libav; one wonders if it should or not.
-> 
-> libav/gst-ffmpeg/gst-av (as it's called in gst1.0) has interesting
-> legal issues, but I do think it should be in oe-core.
-
-Well, we already have gst-ffmpeg in OE-Core so I can't imagine libav
-would be any worse as long as it is similarly protected with
-LICENSE_FLAGS.
+My main point is that I'd like to not need bbappend files just for
+configuration.
 
 Cheers,
-Paul
 
--- 
+Richard
 
-Paul Eggleton
-Intel Open Source Technology Centre
+
 
 
