@@ -1,28 +1,24 @@
-Received: from stoexhub02.domain01.net ([83.145.59.143])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <anders@chargestorm.se>)
-	id 1U5Bd4-0003KF-9x; Tue, 12 Feb 2013 09:54:30 +0100
-Received: from ad.chargestorm.se (212.181.101.5) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Tue, 12 Feb 2013 09:37:14 +0100
-Date: Tue, 12 Feb 2013 09:38:20 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20130212083820.GA5968@ad.chargestorm.se>
-Mail-Followup-To: openembedded-core@lists.openembedded.org,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <2760168.9kFd94gL1F@helios>
-	<CAP9ODKpa99P4ZKu+JyPXfruLjAV01Oo2G-MTZOc83g0d5JN1uQ@mail.gmail.com>
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1U5CMB-0004pJ-Sr; Tue, 12 Feb 2013 10:41:02 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 12 Feb 2013 01:24:55 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,648,1355126400"; d="scan'208";a="284605214"
+Received: from unknown (HELO helios.localnet) ([10.252.120.87])
+	by orsmga002.jf.intel.com with ESMTP; 12 Feb 2013 01:24:54 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Date: Tue, 12 Feb 2013 09:24:53 +0000
+Message-ID: <1687588.iZvXQbhphA@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <1360622147.6793.78.camel@ted>
+References: <2760168.9kFd94gL1F@helios> <1360622147.6793.78.camel@ted>
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKpa99P4ZKu+JyPXfruLjAV01Oo2G-MTZOc83g0d5JN1uQ@mail.gmail.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
 Subject: Re: [OE-core] RFC: meta-oe appends and overlayed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,36 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 08:54:30 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 09:41:11 -0000
+Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
 
-* Otavio Salvador <otavio@ossystems.com.br> [130211 18:50]:
-
-> On Mon, Feb 11, 2013 at 3:09 PM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
-> ...
+On Monday 11 February 2013 22:35:47 Richard Purdie wrote:
+> On Mon, 2013-02-11 at 17:09 +0000, Paul Eggleton wrote:
+> > *
+> > meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappe
+> > nd This is adding qwt to the qte toolchain. As far as I am concerned this
+> > is a distro policy decision - Qwt is a third-party library that is not
+> > part of Qt. I believe this should be moved to the layers for whichever
+> > distros want this.
+> > 
 > > * meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
 > > * meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-> > These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I see this
-> > as a distro policy decision; these should move to the layers for whichever
-> > distros want this. FWIW, this is particularly egregious if you've already
-> > built Qt, then add meta-oe and find Qt is being unexpectedly rebuilt.
+> > These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I see
+> > this as a distro policy decision; these should move to the layers for
+> > whichever distros want this. FWIW, this is particularly egregious if
+> > you've already built Qt, then add meta-oe and find Qt is being
+> > unexpectedly rebuilt.
+> If these were implemented as PACKAGECONFIG options, then distros would
+> just need to set the appropriate PACKAGECONFIG for the package in the
+> distro config and we wouldn't even need the appends...
 
-> Yes; I think I agree also because *most* people won't use these
-> backends so better to handle this in the specific
-> layers/distros/whatever needs it.
-
-Definitely in favour of this.
-
-That would simplify my own bbappends a lot, by letting me remove quite a
-few oe_filter_out's...
+The thing is the Qt configure options are a little more complicated - many of 
+them are three-state switches (enable built-in, enable as a plugin or 
+disabled). Thus we've opted to split the configuration options into variables 
+for each type. We don't get PACKAGECONFIG's DEPENDS handling, but if we used 
+PACKAGECONFIG we'd lose some flexibility.
 
 Cheers,
-Anders
+Paul
+
 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
