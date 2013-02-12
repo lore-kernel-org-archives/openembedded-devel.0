@@ -1,26 +1,25 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1U5GJp-0004OS-Dz; Tue, 12 Feb 2013 14:54:49 +0100
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U5Gju-0005S0-Oj
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Feb 2013 15:21:42 +0100
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 12 Feb 2013 05:37:27 -0800
+	by orsmga101.jf.intel.com with ESMTP; 12 Feb 2013 06:05:42 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,650,1355126400"; d="scan'208";a="261509804"
+X-IronPort-AV: E=Sophos;i="4.84,650,1355126400"; d="scan'208";a="261519923"
 Received: from unknown (HELO helios.localnet) ([10.252.120.87])
-	by orsmga001.jf.intel.com with ESMTP; 12 Feb 2013 05:38:43 -0800
+	by orsmga001.jf.intel.com with ESMTP; 12 Feb 2013 06:05:41 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Date: Tue, 12 Feb 2013 13:38:42 +0000
-Message-ID: <2504845.PjsIqOo6Oo@helios>
+To: Seth Bollinger <seth.boll@gmail.com>
+Date: Tue, 12 Feb 2013 14:05:40 +0000
+Message-ID: <7914520.L5PIRPJvTF@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1360674605.30425.9.camel@ted>
-References: <2760168.9kFd94gL1F@helios> <1687588.iZvXQbhphA@helios>
-	<1360674605.30425.9.camel@ted>
+In-Reply-To: <CA+JN8xNsJ-74AP6g30Bmt7u4Qg2PWC46E-s3ZS5_mFKgUhyKSg@mail.gmail.com>
+References: <CA+JN8xNsJ-74AP6g30Bmt7u4Qg2PWC46E-s3ZS5_mFKgUhyKSg@mail.gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] RFC: meta-oe appends and overlayed recipes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Recipes for building ruby modules (rake, gems, etc.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 13:54:50 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 14:21:43 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday 12 February 2013 13:10:05 Richard Purdie wrote:
-> On Tue, 2013-02-12 at 09:24 +0000, Paul Eggleton wrote:
-> > On Monday 11 February 2013 22:35:47 Richard Purdie wrote:
-> > > On Mon, 2013-02-11 at 17:09 +0000, Paul Eggleton wrote:
-> > > > *
-> > > > meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bba
-> > > > ppe
-> > > > nd This is adding qwt to the qte toolchain. As far as I am concerned
-> > > > this
-> > > > is a distro policy decision - Qwt is a third-party library that is not
-> > > > part of Qt. I believe this should be moved to the layers for whichever
-> > > > distros want this.
-> > > > 
-> > > > * meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-> > > > * meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-> > > > These two add MySQL and PostgreSQL support to Qt and Qt/Embedded. I
-> > > > see
-> > > > this as a distro policy decision; these should move to the layers for
-> > > > whichever distros want this. FWIW, this is particularly egregious if
-> > > > you've already built Qt, then add meta-oe and find Qt is being
-> > > > unexpectedly rebuilt.
-> > > 
-> > > If these were implemented as PACKAGECONFIG options, then distros would
-> > > just need to set the appropriate PACKAGECONFIG for the package in the
-> > > distro config and we wouldn't even need the appends...
-> > 
-> > The thing is the Qt configure options are a little more complicated - many
-> > of them are three-state switches (enable built-in, enable as a plugin or
-> > disabled). Thus we've opted to split the configuration options into
-> > variables for each type. We don't get PACKAGECONFIG's DEPENDS handling,
-> > but if we used PACKAGECONFIG we'd lose some flexibility.
-> 
-> Is there a way we can at least have it behave in a similar way to
-> PACKAGECONFIG? Can those configuration variables be set from the
-> distro?
+On Saturday 01 September 2012 08:54:11 Seth Bollinger wrote:
+> I have a few ruby modules I need to create recipes for.  Are there any that
+> already exist to run rake and gem building tasks (I need to build C
+> extensions as well)?  I spent some time looking, but didn't find any.  I
+> would like to reuse work before trying to roll my own.
 
-Well, the default values are set using ?= in qt4.inc, so there's nothing 
-stopping them from being set from the distro config.
+Hi, I know this is quite an old post but in case you haven't seen, we now have 
+a meta-ruby layer in the meta-openembedded repository which at least has the 
+beginnings of ruby support. We'd welcome patches to improve this if you have 
+anything beyond what's there.
+
+http://cgit.openembedded.org/meta-openembedded/tree/meta-ruby
 
 Cheers,
 Paul
