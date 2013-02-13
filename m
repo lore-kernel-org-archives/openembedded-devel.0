@@ -1,23 +1,33 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ea0-f169.google.com ([209.85.215.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1U5hw8-00042L-Fw
+	(envelope-from <andrea.adami@gmail.com>) id 1U5mDi-0001iK-T8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Feb 2013 20:24:10 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1DJ85hX026125
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
-	Wed, 13 Feb 2013 11:08:05 -0800 (PST)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>)
-	id 1U5hga-00032b-Qd; Wed, 13 Feb 2013 14:08:04 -0500
-Date: Wed, 13 Feb 2013 14:08:04 -0500
-From: Amy Fong <amy.fong@windriver.com>
+	Thu, 14 Feb 2013 00:58:34 +0100
+Received: by mail-ea0-f169.google.com with SMTP id d13so731825eaa.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Feb 2013 15:42:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=xDUqdLamtygWenknf8C3oiUrpydHY/1LBw69O0OPcrM=;
+	b=feyTgx4RCg4/2UXqCg2wXDVzQnhbTOWen+4L75Zd/sfjon9HKQr/faRk5VBdzpSrds
+	fKmM5PvV2NN+59x1YyrMP7FAsd8Q7WX4YkdiaErquKKOq6ziMqKPoOAaGF/XizbA//9i
+	RvXRtYLO6nUW4tLtAG9t+nt98xhru4LgBGClGpGvnlTMXfx8FXc27fpTJZ3oOxB8J2ZQ
+	FqQlQvkt5MvFEcICVTUlH4EyQQ/tVuWoIQnfBf18OIbZgfyYGBVzMu81hPVcJ/fFjmVt
+	JLJbSLS89BYyOF2SNK3YzKj32uecx+N1pglQZYoyRrsRa1TkDgLC9TB6QYRMjj5mqA8k
+	iXyg==
+X-Received: by 10.14.0.135 with SMTP id 7mr57135545eeb.5.1360798953588;
+	Wed, 13 Feb 2013 15:42:33 -0800 (PST)
+Received: from mizar.localdomain
+	(host124-251-dynamic.0-87-r.retail.telecomitalia.it. [87.0.251.124])
+	by mx.google.com with ESMTPS id s3sm5280415eem.4.2013.02.13.15.42.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 13 Feb 2013 15:42:32 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130213190804.GA11672@windriver.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCH][meta-selinux] policycoreutils dependency issues
+Date: Thu, 14 Feb 2013 00:42:27 +0100
+Message-Id: <1360798947-726-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-oe][meta-initramfs][PATCH] klibc.bbclass: force thumb-interworking for eabi builds on armv4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,43 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2013 19:24:23 -0000
-X-List-Received-Date: Wed, 13 Feb 2013 19:24:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Feb 2013 23:58:35 -0000
 
-policyutilutils: needs some dependencies unconditionally
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/classes/klibc.bbclass | 2 ++
+ 1 file changed, 2 insertions(+)
 
-policycoreutils will fail to compile if selinux isn't in the DISTROFEATURES.
-We move these packages out of @target_selinux.
-
-Signed-off-by: Amy Fong <amy.fong@windriver.com>
---
-
- policycoreutils.inc |    5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-security/selinux/policycoreutils.inc b/recipes-security/selinux/policycoreutils.inc
-index cc54b36..9869a83 100644
---- a/recipes-security/selinux/policycoreutils.inc
-+++ b/recipes-security/selinux/policycoreutils.inc
-@@ -1,4 +1,4 @@
--PRINC = "2"
-+PRINC = "3"
+diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
+index e8cdb6d..ee49879 100644
+--- a/meta-initramfs/classes/klibc.bbclass
++++ b/meta-initramfs/classes/klibc.bbclass
+@@ -2,6 +2,8 @@
+ DEPENDS =+ "klcc-cross"
  
- SUMMARY = "SELinux policy core utilities"
- DESCRIPTION = "policycoreutils contains the policy core utilities that are required \
-@@ -16,9 +16,10 @@ PAM_SRC_URI = "file://pam.d/newrole \
-               "
+ export CC = "${TARGET_PREFIX}klcc"
++export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
++
+ export CPP = "${CC} -E"
  
- DEPENDS += "libsepol libselinux libsemanage"
-+DEPENDS += "libcap-ng libcgroup libpam"
- 
- inherit selinux
--DEPENDS += "${@target_selinux(d, 'libcap-ng libcgroup libpam audit')}"
-+DEPENDS += "${@target_selinux(d, 'audit')}"
- 
- RDEPENDS_${BPN} += "\
- 	libselinux-python \
+ # klcc uses own optimizations by default. See klcc(1) man file.
+-- 
+1.7.12.4
+
 
 
