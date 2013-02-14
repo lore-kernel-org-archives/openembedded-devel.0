@@ -1,27 +1,33 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1U673n-0005Di-Dk
+	(envelope-from <andrea.adami@gmail.com>) id 1U67LU-00060S-Q2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 23:14:01 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1ELvfbh015375
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 14 Feb 2013 23:32:01 +0100
+Received: by mail-ee0-f49.google.com with SMTP id d4so1513297eek.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 13:57:41 -0800 (PST)
-Received: from localhost.localdomain (128.224.147.212) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.318.4; Thu, 14 Feb 2013 13:57:39 -0800
-From: Aws Ismail <aws.ismail@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Feb 2013 16:51:04 -0500
-Message-ID: <1360878665-17503-3-git-send-email-aws.ismail@windriver.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1360878665-17503-1-git-send-email-aws.ismail@windriver.com>
-References: <1360878665-17503-1-git-send-email-aws.ismail@windriver.com>
-MIME-Version: 1.0
-Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH 2/3] netcat-openbsd: resolve multilib issues.
+	Thu, 14 Feb 2013 14:15:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=YNMQ82x2nCf+nDnZllhcoKBm7BAvKo4w1wMvHTRigW8=;
+	b=toZOTw8mjjIstSo2pYfy4JqiuJac9Jc9LV/Vb+adJfPPz79o7DkzI3MWtq5XkQ/QSb
+	clEG8m/r6ppKLTCFbLT3L5ocsCDYHo/8XgGo1iqgcbsGcAbMPY07d9X6xZ4uKPunagNb
+	n7/cq5O9pkVpGwjX/FGMD4G1Zew8vBhk7gZgizRUZz4jWeVo+373R917RZXq90HwRkOD
+	wuiqn4HzEtjCZLHXJwtuaYEorXB4kdau1jV+SdmuB9mi2sCN/ANcGaoR4GkrW3JtItCU
+	NY03M+if8aXXrb6coSkOkYqsKive7UTvamZLbQ2XdAw2Zgruez8v47JRDWrs0Ak2hTFI
+	996Q==
+X-Received: by 10.14.0.73 with SMTP id 49mr886010eea.21.1360880158147;
+	Thu, 14 Feb 2013 14:15:58 -0800 (PST)
+Received: from mizar.localdomain
+	(host124-251-dynamic.0-87-r.retail.telecomitalia.it. [87.0.251.124])
+	by mx.google.com with ESMTPS id d47sm21979974eem.9.2013.02.14.14.15.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 14 Feb 2013 14:15:57 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Feb 2013 23:15:53 +0100
+Message-Id: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: update IMAGE_INSTALL after mtd-utils split
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 22:14:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 Feb 2013 22:32:01 -0000
 
-Make recipe changes to enable successfull building
-when multilib is being used.
-
-Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-support/netcat/netcat-openbsd_1.89.bb  |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-index 25cbfa6..00eec3e 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.89.bb
-@@ -2,7 +2,7 @@ require netcat.inc
- DESCRIPTION = "OpenBSD Netcat"
- HOMEPAGE = "http://ftp.debian.org"
- LICENSE = "BSD-3-Clause"
--PR = "r1"
-+PR = "r2"
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+index 7e617ad..01e5b84 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+@@ -9,9 +9,9 @@ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+ # avoid circular dependencies
+ EXTRA_IMAGEDEPENDS = ""
  
- DEPENDS += "glib-2.0"
+-# for ubiattach we have to install full mtd-utils (>700KiB)
++# for ubiattach we have to install mtd-utils-ubifs
+ # or use ubiattach-klibc instead
+-IMAGE_INSTALL = "kexec kexecboot mtd-utils"
++IMAGE_INSTALL = "kexec kexecboot mtd-utils-ubifs"
  
-@@ -14,7 +14,7 @@ SRC_URI[netcat.sha256sum] = "72e844dde8a2a7cba61971d493758dbea9ef0b164bccef15fd4
- SRC_URI[netcat-patch.md5sum] = "00c65aa22243b76998174c733cbb64cc"
- SRC_URI[netcat-patch.sha256sum] = "d5b6b2bd9788114bdcfbb71acad0263720b4fdc41529e287adf451b8610f84f1"
- 
--S = "${WORKDIR}/${PN}-${PV}.orig"
-+S = "${WORKDIR}/${BPN}-${PV}.orig"
- 
- do_configure[noexec] = "1"
- 
-@@ -27,6 +27,6 @@ do_compile() {
- 
- do_install() {
-         install -d ${D}${bindir}
--        install -m 755 ${S}/nc ${D}${bindir}/nc.${PN}
-+        install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
- }
- ALTERNATIVE_PRIORITY = "50"
+ # Do not pollute the initrd image with rootfs features
+ IMAGE_FEATURES = ""
 -- 
-1.7.0.4
+1.7.12.4
 
 
 
