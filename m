@@ -1,38 +1,20 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1U628x-0005AO-CT
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U62LN-00063O-75
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 17:59:20 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1EGgYUG010372
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 08:42:34 -0800 (PST)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Thu, 14 Feb 2013 08:42:31 -0800
-Received: from yow-jmacdona-l1 (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id BE4D67FCE;
-	Thu, 14 Feb 2013 11:42:29 -0500 (EST)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 2590E20465; Thu,
-	14 Feb 2013 11:42:30 -0500 (EST)
-Date: Thu, 14 Feb 2013 11:42:30 -0500
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Aws Ismail <aws.ismail@windriver.com>
-Message-ID: <20130214164229.GF3156@windriver.com>
-References: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
-	<1360606580-27697-2-git-send-email-aws.ismail@windriver.com>
-	<20130214033444.GD3156@windriver.com>
-	<511D1213.4080905@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <511D1213.4080905@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/3] traceroute: resolve multilib issues
+	Thu, 14 Feb 2013 18:12:23 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 9D4EED22B4;
+	Thu, 14 Feb 2013 17:55:33 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Feb 2013 17:55:28 +0100
+Message-Id: <1360860928-2466-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] python-numpy: update to 1.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,91 +28,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 16:59:28 -0000
-X-Groupsio-MsgNum: 43160
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rWhLK7VZz0iBluhq"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Feb 2013 17:12:27 -0000
 
---rWhLK7VZz0iBluhq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ .../python/python-numpy/aarch64.patch              | 41 ----------------------
+ ...hon-numpy_1.7.0rc1.bb => python-numpy_1.7.0.bb} | 17 ++++-----
+ 2 files changed, 7 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/python/python-numpy/aarch64.patch
+ rename meta-oe/recipes-devtools/python/{python-numpy_1.7.0rc1.bb => python-numpy_1.7.0.bb} (81%)
 
-[Re: [meta-networking][PATCH  1/3] traceroute: resolve multilib issues] On =
-13.02.14 (Thu 11:34) Aws Ismail wrote:
+diff --git a/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch b/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch
+deleted file mode 100644
+index 8d66615..0000000
+--- a/meta-oe/recipes-devtools/python/python-numpy/aarch64.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 7d7a5939dcf5821d9f381d57bfa2012568ef6b82 Mon Sep 17 00:00:00 2001
+-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-Date: Thu, 10 Jan 2013 21:49:01 +0100
+-Subject: [PATCH] Added support for AArch64 architecture
+-
+-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+-
+-Upstream-Status: backport
+----
+- numpy/core/include/numpy/npy_cpu.h    | 2 ++
+- numpy/core/include/numpy/npy_endian.h | 1 +
+- 2 files changed, 3 insertions(+)
+-
+-diff --git a/numpy/core/include/numpy/npy_cpu.h b/numpy/core/include/numpy/npy_cpu.h
+-index 8a29788..9707a7a 100644
+---- a/numpy/core/include/numpy/npy_cpu.h
+-+++ b/numpy/core/include/numpy/npy_cpu.h
+-@@ -66,6 +66,8 @@
+-     #define NPY_CPU_MIPSEL
+- #elif defined(__MIPSEB__)
+-     #define NPY_CPU_MIPSEB
+-+#elif defined(__aarch64__)
+-+    #define NPY_CPU_AARCH64
+- #else
+-     #error Unknown CPU, please report this to numpy maintainers with \
+-     information about your platform (OS, CPU and compiler)
+-diff --git a/numpy/core/include/numpy/npy_endian.h b/numpy/core/include/numpy/npy_endian.h
+-index aa5ed8b..4e3349f 100644
+---- a/numpy/core/include/numpy/npy_endian.h
+-+++ b/numpy/core/include/numpy/npy_endian.h
+-@@ -25,6 +25,7 @@
+-             || defined(NPY_CPU_IA64)    \
+-             || defined(NPY_CPU_ALPHA)   \
+-             || defined(NPY_CPU_ARMEL)   \
+-+            || defined(NPY_CPU_AARCH64) \
+-             || defined(NPY_CPU_SH_LE)   \
+-             || defined(NPY_CPU_MIPSEL)
+-         #define NPY_BYTE_ORDER NPY_LITTLE_ENDIAN
+--- 
+-1.8.0
+-
+diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+similarity index 81%
+rename from meta-oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb
+rename to meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+index 2e4bd6a..bbe4e63 100644
+--- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0rc1.bb
++++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+@@ -2,14 +2,10 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f87832d854acbade6e9f5c601c8b30b1"
+-PR = "r0"
+-PV = "1.6.99+1.7.0rc1"
+-REALPV = "1.7.0rc1"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${REALPV}.tar.gz \
+-           ${CONFIGFILESURI} \
+-           file://aarch64.patch \
+-	  "
++SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
++           ${CONFIGFILESURI} "
++
+ CONFIGFILESURI ?= ""
+ 
+ CONFIGFILESURI_aarch64 = "file://config.h \
+@@ -22,7 +18,7 @@ CONFIGFILESURI_mipsel = "file://config.h \
+ 	   file://numpyconfig.h \
+ 	  "
+ 
+-S = "${WORKDIR}/numpy-${REALPV}"
++S = "${WORKDIR}/numpy-${PV}"
+ 
+ inherit distutils
+ 
+@@ -36,8 +32,9 @@ do_compile_prepend() {
+ }
+ 
+ FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
+-SRC_URI[md5sum] = "a4719f5a1853bc0f8892a5956d5c4229"
+-SRC_URI[sha256sum] = "45ea23622f72d86bc3614446d668ee962c0475ee7b91a93ef85a5e0493962de5"
++
++SRC_URI[md5sum] = "4fa54e40b6a243416f0248123b6ec332"
++SRC_URI[sha256sum] = "f4fa70b7edbab65ee6432eb63743f5489f1919c614632b20b2fb45aa7e682ac6"
+ 
+ # install what is needed for numpy.test()
+ RDEPENDS_${PN} = "python-unittest \
+-- 
+1.8.1.2
 
-> On 02/13/2013 10:34 PM, Joe MacDonald wrote:
-> >[[meta-networking][PATCH  1/3] traceroute: resolve multilib issues] On 1=
-3.02.11 (Mon 13:16) Aws Ismail wrote:
-> >
-> >>Make recipe changes to enable successfull building
-> >>when multilib is being used.
-> >>
-> >>Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
-> >>---
-> >>  .../traceroute/traceroute_2.0.18.bb                |    8 +++++---
-> >>  1 files changed, 5 insertions(+), 3 deletions(-)
-> >>
-> >>diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.=
-18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >>index 6eca731..f5f96b2 100644
-> >>--- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >>+++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-> >>@@ -11,6 +11,8 @@ LICENSE =3D "GPL-2.0 LGPL-2.1"
-> >>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079=
-bae19f \
-> >>                      file://COPYING.LIB;md5=3Dbbb461211a33b134d42ed5ee=
-802b37ff"
-> >>+PR =3D "r1"
-> >>+
-> >>  inherit update-alternatives
-> >>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2=
-=2E0.18/traceroute-2.0.18.tar.gz \
-> >>@@ -26,13 +28,13 @@ do_compile() {
-> >>  do_install() {
-> >>      install -d ${D}${bindir}
-> >>-    install -m755 ${PN}/${PN} ${D}${bindir}
-> >>+    install -m755 ${BPN}/${BPN} ${D}${bindir}
-> >>      install -m755 wrappers/tcptraceroute ${D}${bindir}
-> >>      install -d ${D}${mandir}
-> >>-    install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-> >>-    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
-> >>+    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
-> >>+    ln -s ${PN}.8 ${D}${mandir}/${BPN}6.8
-> >>      ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
-> >Are the targets actually installed as ${PN}.8 and not ${BPN}.8 in a
-> >multilib build scenario?  What I'm asking is should the above be changed
-> >to this instead:
-> >
-> >     ln -s ${BPN}.8 ${D}${mandir}/${BPN}6.8
-> >     ln -s ${BPN}.8 ${D}${mandir}/tcptraceroute.8
-> >
-> I think you're right. It should be like that but the odd
-> thing is that even with ln -s ${PN}.8 no errors were
-> seen.
 
-Weird.  But okay.
 
-So, so long as the BPN version is doing the right thing -- meaning it's
-actually creating a proper link and not a broken link, because ln is
-pretty happy to do whatever you tell it even if it doesn't make sense --
-can you send out a revised patch set?
-
---=20
--Joe MacDonald.
-:wq
-
---rWhLK7VZz0iBluhq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlEdE/UACgkQPN8S4W6ZZndRwACbBxSdalG91MmcuOyvJzqxomtS
-5CQAn1rPpungE39w8/RtrCiXICvL6DmH
-=+uPt
------END PGP SIGNATURE-----
-
---rWhLK7VZz0iBluhq--
