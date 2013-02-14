@@ -1,37 +1,37 @@
-Received: from mail-pa0-f42.google.com ([209.85.220.42])
+Received: from mail-we0-f170.google.com ([74.125.82.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U5vcb-0000Vl-00
+	(envelope-from <sankar.m@hardcube.in>) id 1U5vsi-00011x-6o
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 11:01:08 +0100
-Received: by mail-pa0-f42.google.com with SMTP id kq12so1270900pab.15
+	Thu, 14 Feb 2013 11:18:43 +0100
+Received: by mail-we0-f170.google.com with SMTP id z53so1875263wey.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 01:44:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=YpR3/16Ap3Y6YvIHEKjHO5mDyiGPJfcKsN+R/tJu2Sw=;
-	b=zZ0GmqXiZI3nLgSCg9lJoGA5tYzhj+cK0fIpb69Po3XHamx5/EANyJC0wcx8+mWNzw
-	+g079pe9z45ClPW2Zzq5+B1ZLXkbeokGI4NhywKonylh3SXhJzppMHyu4u+wxRAW5Pve
-	1bqmX0kgknGB60MdnwEqBEJgQfh5Ng8jqaFraxo4QLIAA9eAeF3fdbUPtwMF1AuztXt6
-	cx+RGkgfsCdd2I563EclCY8c+aw6k4jDHejF7kgQgUzwTOh6DYmsLm4ArVddUuvbn86P
-	ASaYr3cjGi3AdVwYLN4/LWMW09cVs3ONBu9qBKcOm0oA9qkk+bQlkGSKN1GbAZvHRW20
-	z86A==
-X-Received: by 10.66.83.6 with SMTP id m6mr2227993pay.52.1360835090207;
-	Thu, 14 Feb 2013 01:44:50 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id vq9sm807733pbc.36.2013.02.14.01.44.47
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 14 Feb 2013 01:44:48 -0800 (PST)
-Date: Thu, 14 Feb 2013 10:44:45 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130214094445.GJ3300@jama>
-References: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
-	<1360834325-22890-2-git-send-email-florin.sarbu@windriver.com>
+	Thu, 14 Feb 2013 02:01:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-received:x-originating-ip:in-reply-to:references
+	:date:message-id:subject:from:to:content-type:x-gm-message-state;
+	bh=nx+URHlo/d0BeoMuDpV5YUyIgCAXmEJ420gV4Rz4+n0=;
+	b=eJhOyeC7ozKWXbodzKrU+UoSBQjEA8j1Ps1ZO6JrpU2JWhJT5STNwTOTkgqYR77kZ8
+	aH5U3PCihtzhlOJ9PLh8bWkQxa5hr+xThLKRRw0wW1hJs4nyjI6YL6CR4gsnkW+1b4W9
+	Muw7jW7l6wPA9t+c/lPWy86XYJx+YHUEgEBinGy2qsr03uxqQS2ErvpLBCdObE6donhu
+	9XtijSw9IymhXiohuMsoETd6JIvFk/5VpCpb5jyFlO1VD16ECN0Q+SI8avlpW8RQ/i2O
+	7pwkzKbU9LSF6KyvbHzKbR3d/NMzZWqcyHA+IE5TbzetQvj63JIJrA9TBHQZziFWkuvc
+	BgHw==
 MIME-Version: 1.0
-In-Reply-To: <1360834325-22890-2-git-send-email-florin.sarbu@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-systemd][] rpcbind: Add ${PN}-systemd to PACKAGES
+X-Received: by 10.194.104.137 with SMTP id ge9mr43899258wjb.59.1360836079273; 
+	Thu, 14 Feb 2013 02:01:19 -0800 (PST)
+Received: by 10.217.3.136 with HTTP; Thu, 14 Feb 2013 02:01:19 -0800 (PST)
+X-Originating-IP: [203.193.158.21]
+In-Reply-To: <511CAFF3.3090004@communistcode.co.uk>
+References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
+	<511CAFF3.3090004@communistcode.co.uk>
+Date: Thu, 14 Feb 2013 15:31:19 +0530
+Message-ID: <CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
+From: Sankar H Malarmani <sankar.m@hardcube.in>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnMV0kCBbWZRMObYeOQS6pJDI7QTfx76MZj9v/0TuoggXNruehLbJBMjcjXyXXRXA8CDQjk
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,80 +45,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 10:01:09 -0000
-X-Groupsio-MsgNum: 43153
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PEkEgRdBLZYkpbX2"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Feb 2013 10:18:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---PEkEgRdBLZYkpbX2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Jack Mitchell,
 
-On Thu, Feb 14, 2013 at 11:32:05AM +0200, Florin Sarbu wrote:
-> The ${PN}-systemd should be added to PACKAGES
-> so that the package gets created.
->=20
-> Added do_install_append to have the systemd.service
-> installed in the proper location.
+Thanks for your reply..
 
-see khem's patch fixing this in many recipes including rpcbind.
+openembedded-core is what you are referring as new openembedded. right?
 
->=20
-> Signed-off-by: Florin Sarbu <florin.sarbu@windriver.com>
-> ---
->  .../meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend    |    8 ++=
-+++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.=
-bbappend b/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbap=
-pend
-> index 0fa7f97..8197550 100644
-> --- a/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-> +++ b/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-> @@ -1,6 +1,8 @@
->  inherit systemd
-> =20
-> -PRINC :=3D "${@int(PRINC) + 1}"
-> +PACKAGES =3D+ "${PN}-systemd"
-> +
-> +PRINC :=3D "${@int(PRINC) + 2}"
-> =20
->  # look for files in the layer first
->  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
-> @@ -10,3 +12,7 @@ SRC_URI +=3D "file://rpcbind.service"
->  SYSTEMD_PACKAGES =3D "${PN}-systemd"
->  SYSTEMD_SERVICE =3D "rpcbind.service"
-> =20
-> +do_install_append() {
-> +        install -d ${D}${systemd_unitdir}/system/
-> +        install -m 0644 ${WORKDIR}/rpcbind.service ${D}${systemd_unitdir=
-}/system
-> +}
-> --=20
-> 1.7.10.4
->=20
->=20
-> _______________________________________________
+I'm trying to build a linux image version which could be done only using
+openembedded-classic.. And these errors i'm stuck on with are dealing with
+gtk+ installation and versions.. I could figure out what I'm doing wrong..
+Can I get your help here please ???
+
+And please refer me how to get started with new oipenembedded.. I'll have a
+go at it..
+
+
+
+On Thu, Feb 14, 2013 at 3:05 PM, Jack Mitchell <ml@communistcode.co.uk>wrote:
+
+> On 14/02/13 05:08, Sankar H Malarmani wrote:
+>
+>> Hi All,
+>>
+>> I'm tryin to build a linux image by using openembedded classic. On giving
+>> the bitbake command I'm getting the following errors.
+>>
+>> failed to load "./apple-red.png": Couldn't recognize the image file format
+>> for file './apple-red.png'
+>>
+>> ERROR: Function 'do_compile' failed (see
+>> /home/hc/oe/output/work/i686-**linux/gtk+-native-2.24.8-r1/**
+>> temp/log.do_compile.11738
+>> for further information)
+>> ERROR: Task 6157 (virtual:native:/home/hc/oe/**
+>> stuff/trdx/recipes/gtk+/gtk+_
+>> 2.24.8.bb, do_compile) failed with exit code '1'
+>> ERROR: '/home/hc/oe/stuff/**openembedded/recipes/eglibc/eg**libc_2.12.bb<http://eglibc_2.12.bb>'
+>> failed
+>> ERROR:
+>> 'virtual:native:/home/hc/oe/**stuff/openembedded/recipes/**
+>> gobject-introspection/
+>> gobject-introspection_1.29.17.**bb<http://gobject-introspection_1.29.17.bb>'
+>> failed
+>> ERROR: 'virtual:native:/home/hc/oe/**stuff/trdx/recipes/gtk+/gtk+_2**
+>> .24.8.bb <http://2.24.8.bb>'
+>> failed
+>>
+>> I'm a newbie to this openembedded stuffs..
+>> Please guide me to solve this issue.
+>>
+>>
+> Is there a reason you are using OE Classic? If not, then transfer to the
+> new OpenEmbedded, OE Classic has been EOL for a long time now.
+>
+> Regards,
+>
+> --
+>
+>   Jack Mitchell (jack@embed.me.uk)
+>   Embedded Systems Engineer
+>   http://www.embed.me.uk
+>
+> --
+>
+>
+> ______________________________**_________________
 > Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
+> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PEkEgRdBLZYkpbX2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+-- 
+Thanks & Regards
+*Sankar*
 
-iEYEARECAAYFAlEcsg0ACgkQN1Ujt2V2gBykwwCfZPbxoY55u9oHNnMbnkXsxcTO
-v9oAnjVHQ249f6tBeKBrd5+Exi4gcEyt
-=rwbt
------END PGP SIGNATURE-----
-
---PEkEgRdBLZYkpbX2--
