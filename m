@@ -1,38 +1,31 @@
-Received: from mail-vc0-f176.google.com ([209.85.220.176])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U60HY-00014j-67
+	(envelope-from <Aws.Ismail@windriver.com>) id 1U627K-00057G-QY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 15:59:29 +0100
-Received: by mail-vc0-f176.google.com with SMTP id fk10so1495824vcb.7
+	Thu, 14 Feb 2013 17:57:25 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1EGewvU011652
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 06:43:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=vjGh8lN4P5/kwFS+H+D+gveth6LQwKmbQ0AVoS7Iowk=;
-	b=JjtUisXwx9jSU3b6aG1Ph+yOKzhMG4ltSNJo0QqQlAidpuXoj1LZVBrTNmIbmmPTgk
-	sSRFyh5/sJoNNijYJuQ66vyVijFmTsQX3ORKlaVembZFt71eUTASJQOIgerC9lcG2w7y
-	dXzOMY90ck4Pv/20bglQnS/b4ZcxYnJy+NeuXA1CD1yWUjNrQseV5WnjvUcP3y8GKc2L
-	NvVqcrjW1VYDpoj2PL+0s1KIVeo285Q53AeruWoLMxoNHya7UlxfQnfNVJwfTBRW4v77
-	NnXv/BTg9+6A1OInr+lBaLHHhE1GZ+bNucRKQ4IMhUp+FJKmvjdwcKl7TX3M7y/z6Nom
-	wicg==
-X-Received: by 10.52.19.65 with SMTP id c1mr30252853vde.36.1360853005529; Thu,
-	14 Feb 2013 06:43:25 -0800 (PST)
+	Thu, 14 Feb 2013 08:40:58 -0800 (PST)
+Received: from [128.224.147.212] (128.224.147.212) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.318.4;
+	Thu, 14 Feb 2013 08:40:58 -0800
+Message-ID: <511D1213.4080905@windriver.com>
+Date: Thu, 14 Feb 2013 11:34:27 -0500
+From: Aws Ismail <aws.ismail@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-Received: by 10.221.10.202 with HTTP; Thu, 14 Feb 2013 06:43:05 -0800 (PST)
-In-Reply-To: <CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
-References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
-	<511CAFF3.3090004@communistcode.co.uk>
-	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
-	<511CB7DD.4080407@communistcode.co.uk>
-	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 14 Feb 2013 14:43:05 +0000
-Message-ID: <CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlFo6S0eT2mdLlJVLBBfdwtb06FPwiYze6JDQw84IMgwx7v1wkAp88dfTkBMeyY/REJoVVZ
-Subject: Re: gtk errors in openembedded classis build
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+References: <1360606580-27697-1-git-send-email-aws.ismail@windriver.com>
+	<1360606580-27697-2-git-send-email-aws.ismail@windriver.com>
+	<20130214033444.GD3156@windriver.com>
+In-Reply-To: <20130214033444.GD3156@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/3] traceroute: resolve multilib issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +39,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 14:59:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Feb 2013 16:57:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 14 February 2013 10:32, Sankar H Malarmani <sankar.m@hardcube.in> wrote:
-> ERROR: There is a confusing multiline, partially commented expression on
-> line 45 of file /home/hc/oe-core/build/../stuff/meta-toradex/recipes/images/
-> angstrom-lxde-image.bb ().
-> Please clarify whether this is all a comment or should be parsed.
+On 02/13/2013 10:34 PM, Joe MacDonald wrote:
+> [[meta-networking][PATCH  1/3] traceroute: resolve multilib issues] On 13.02.11 (Mon 13:16) Aws Ismail wrote:
+>
+>> Make recipe changes to enable successfull building
+>> when multilib is being used.
+>>
+>> Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+>> ---
+>>   .../traceroute/traceroute_2.0.18.bb                |    8 +++++---
+>>   1 files changed, 5 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+>> index 6eca731..f5f96b2 100644
+>> --- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+>> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+>> @@ -11,6 +11,8 @@ LICENSE = "GPL-2.0 LGPL-2.1"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+>>                       file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
+>>   
+>> +PR = "r1"
+>> +
+>>   inherit update-alternatives
+>>   
+>>   SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
+>> @@ -26,13 +28,13 @@ do_compile() {
+>>   
+>>   do_install() {
+>>       install -d ${D}${bindir}
+>> -    install -m755 ${PN}/${PN} ${D}${bindir}
+>> +    install -m755 ${BPN}/${BPN} ${D}${bindir}
+>>   
+>>       install -m755 wrappers/tcptraceroute ${D}${bindir}
+>>   
+>>       install -d ${D}${mandir}
+>> -    install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
+>> -    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
+>> +    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
+>> +    ln -s ${PN}.8 ${D}${mandir}/${BPN}6.8
+>>       ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
+> Are the targets actually installed as ${PN}.8 and not ${BPN}.8 in a
+> multilib build scenario?  What I'm asking is should the above be changed
+> to this instead:
+>
+>      ln -s ${BPN}.8 ${D}${mandir}/${BPN}6.8
+>      ln -s ${BPN}.8 ${D}${mandir}/tcptraceroute.8
+>
+I think you're right. It should be like that but the odd
+thing is that even with ln -s ${PN}.8 no errors were
+seen.
 
-This means that there is a confusing multiline comment on line 45.
-This normally means this:
+Aws\
 
-# this is a comment \
+-- 
 
-The trailing slash is ambiguous, so remove it.
-
-Ross
 
 
