@@ -1,33 +1,24 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1U67LU-00060S-Q2
+	(envelope-from <joe.slater@windriver.com>) id 1U695Q-0000vA-H7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 23:32:01 +0100
-Received: by mail-ee0-f49.google.com with SMTP id d4so1513297eek.22
+	Fri, 15 Feb 2013 01:23:32 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1ELe7gg014864
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 14:15:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=YNMQ82x2nCf+nDnZllhcoKBm7BAvKo4w1wMvHTRigW8=;
-	b=toZOTw8mjjIstSo2pYfy4JqiuJac9Jc9LV/Vb+adJfPPz79o7DkzI3MWtq5XkQ/QSb
-	clEG8m/r6ppKLTCFbLT3L5ocsCDYHo/8XgGo1iqgcbsGcAbMPY07d9X6xZ4uKPunagNb
-	n7/cq5O9pkVpGwjX/FGMD4G1Zew8vBhk7gZgizRUZz4jWeVo+373R917RZXq90HwRkOD
-	wuiqn4HzEtjCZLHXJwtuaYEorXB4kdau1jV+SdmuB9mi2sCN/ANcGaoR4GkrW3JtItCU
-	NY03M+if8aXXrb6coSkOkYqsKive7UTvamZLbQ2XdAw2Zgruez8v47JRDWrs0Ak2hTFI
-	996Q==
-X-Received: by 10.14.0.73 with SMTP id 49mr886010eea.21.1360880158147;
-	Thu, 14 Feb 2013 14:15:58 -0800 (PST)
-Received: from mizar.localdomain
-	(host124-251-dynamic.0-87-r.retail.telecomitalia.it. [87.0.251.124])
-	by mx.google.com with ESMTPS id d47sm21979974eem.9.2013.02.14.14.15.56
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 14 Feb 2013 14:15:57 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Feb 2013 23:15:53 +0100
-Message-Id: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-Subject: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: update IMAGE_INSTALL after mtd-utils split
+	Thu, 14 Feb 2013 13:40:07 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Thu, 14 Feb 2013 13:40:05 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Feb 2013 13:40:04 -0800
+Message-ID: <1360878004-11267-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [PATCH] arptables: defeat multi-job for install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,31 +32,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 22:32:01 -0000
+X-List-Received-Date: Fri, 15 Feb 2013 00:23:33 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+CQID: 399299
+
+The make install target is not parallel job
+safe, but doesn't do all that much, so we
+limit make to one job for that.
+
+The make target is of the form
+
+install: x y z
+
+Unfortunately, z depends on y, so if z is started
+before y (almost) completes, we will fail.
+
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-support/arptables/arptables_0.0.3-4.bb |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
 
-diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-index 7e617ad..01e5b84 100644
---- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-+++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-@@ -9,9 +9,9 @@ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
- # avoid circular dependencies
- EXTRA_IMAGEDEPENDS = ""
+diff --git a/recipes-support/arptables/arptables_0.0.3-4.bb b/recipes-support/arptables/arptables_0.0.3-4.bb
+index 2faccec..de3f62d 100644
+--- a/recipes-support/arptables/arptables_0.0.3-4.bb
++++ b/recipes-support/arptables/arptables_0.0.3-4.bb
+@@ -3,6 +3,8 @@ PRIORITY = "optional"
+ LICENSE = "GPL-2.0"
+ SECTION = "console/network"
  
--# for ubiattach we have to install full mtd-utils (>700KiB)
-+# for ubiattach we have to install mtd-utils-ubifs
- # or use ubiattach-klibc instead
--IMAGE_INSTALL = "kexec kexecboot mtd-utils"
-+IMAGE_INSTALL = "kexec kexecboot mtd-utils-ubifs"
++PR = "r2"
++
+ RDEPENDS_${PN} += "perl"
  
- # Do not pollute the initrd image with rootfs features
- IMAGE_FEATURES = ""
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+@@ -20,6 +22,11 @@ do_compile () {
+ 	oe_runmake
+ }
+ 
++# the install target is not multi-job safe, but it doesn't do much
++# so we just install seriatim
++#
++PARALLEL_MAKEINST = "-j1"
++
+ fakeroot do_install () {
+ 	oe_runmake 'BINDIR=${sbindir}' 'MANDIR=${mandir}/' 'DESTDIR=${D}' install
+ }
 -- 
-1.7.12.4
+1.7.3.4
 
 
 
