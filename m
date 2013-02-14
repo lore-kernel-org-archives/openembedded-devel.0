@@ -1,27 +1,18 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Florin.Sarbu@windriver.com>) id 1U5vQU-0007yu-St
+	(envelope-from <ml@communistcode.co.uk>) id 1U5vTq-0008Ci-Gv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 10:48:24 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1E9WJWm003492
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 01:32:20 -0800 (PST)
-Received: from otp-fsarbu-l1.corp.ad.wrs.com (128.224.168.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Thu, 14 Feb 2013 01:32:19 -0800
-From: Florin Sarbu <florin.sarbu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Feb 2013 11:32:05 +0200
-Message-ID: <1360834325-22890-2-git-send-email-florin.sarbu@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
-References: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
+	Thu, 14 Feb 2013 10:52:00 +0100
+Message-ID: <511CAFF3.3090004@communistcode.co.uk>
+Date: Thu, 14 Feb 2013 09:35:47 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130109 Thunderbird/17.0.2
 MIME-Version: 1.0
-X-Originating-IP: [128.224.168.151]
-Subject: [meta-oe][meta-systemd][] rpcbind: Add ${PN}-systemd to PACKAGES
+To: openembedded-devel@lists.openembedded.org
+References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
+In-Reply-To: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
+Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,44 +26,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 09:48:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 Feb 2013 09:52:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The ${PN}-systemd should be added to PACKAGES
-so that the package gets created.
+On 14/02/13 05:08, Sankar H Malarmani wrote:
+> Hi All,
+>
+> I'm tryin to build a linux image by using openembedded classic. On giving
+> the bitbake command I'm getting the following errors.
+>
+> failed to load "./apple-red.png": Couldn't recognize the image file format
+> for file './apple-red.png'
+>
+> ERROR: Function 'do_compile' failed (see
+> /home/hc/oe/output/work/i686-linux/gtk+-native-2.24.8-r1/temp/log.do_compile.11738
+> for further information)
+> ERROR: Task 6157 (virtual:native:/home/hc/oe/stuff/trdx/recipes/gtk+/gtk+_
+> 2.24.8.bb, do_compile) failed with exit code '1'
+> ERROR: '/home/hc/oe/stuff/openembedded/recipes/eglibc/eglibc_2.12.bb' failed
+> ERROR:
+> 'virtual:native:/home/hc/oe/stuff/openembedded/recipes/gobject-introspection/
+> gobject-introspection_1.29.17.bb' failed
+> ERROR: 'virtual:native:/home/hc/oe/stuff/trdx/recipes/gtk+/gtk+_2.24.8.bb'
+> failed
+>
+> I'm a newbie to this openembedded stuffs..
+> Please guide me to solve this issue.
+>
 
-Added do_install_append to have the systemd.service
-installed in the proper location.
+Is there a reason you are using OE Classic? If not, then transfer to the 
+new OpenEmbedded, OE Classic has been EOL for a long time now.
 
-Signed-off-by: Florin Sarbu <florin.sarbu@windriver.com>
----
- .../meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend    |    8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+Regards,
 
-diff --git a/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend b/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-index 0fa7f97..8197550 100644
---- a/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-+++ b/meta-systemd/meta-oe/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-@@ -1,6 +1,8 @@
- inherit systemd
- 
--PRINC := "${@int(PRINC) + 1}"
-+PACKAGES =+ "${PN}-systemd"
-+
-+PRINC := "${@int(PRINC) + 2}"
- 
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-@@ -10,3 +12,7 @@ SRC_URI += "file://rpcbind.service"
- SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE = "rpcbind.service"
- 
-+do_install_append() {
-+        install -d ${D}${systemd_unitdir}/system/
-+        install -m 0644 ${WORKDIR}/rpcbind.service ${D}${systemd_unitdir}/system
-+}
 -- 
-1.7.10.4
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
 
