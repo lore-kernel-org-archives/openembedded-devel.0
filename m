@@ -1,34 +1,36 @@
-Received: from mail-wg0-f41.google.com ([74.125.82.41])
+Received: from mail-pb0-f43.google.com ([209.85.160.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sankar.m@hardcube.in>) id 1U5rJ7-0004yT-7N
+	(envelope-from <martin.jansa@gmail.com>) id 1U5skv-0002rB-Op
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 06:24:33 +0100
-Received: by mail-wg0-f41.google.com with SMTP id ds1so4820078wgb.0
+	Thu, 14 Feb 2013 07:57:28 +0100
+Received: by mail-pb0-f43.google.com with SMTP id md12so42701pbc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Feb 2013 21:08:27 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-received:x-originating-ip:date:message-id:subject
-	:from:to:content-type:x-gm-message-state;
-	bh=njK45FKiYd5aAcAQrd6Pe3uvprJ7uebfYoL2IPBsdXo=;
-	b=mBwZDB2SbGtdvYS6ah4CzQnsrUnFu3mVq0jsN/UKiK7ru/JW8FMyyy8Zg3rv1NDh4L
-	E1kVKbfKcOU0QtPaLxK78bk8JFrV3544cpfh22dzL+v0ZHv4XI2BpPkXUjZk5/E3UNJt
-	86H8fSDArbf0C6hZ2gWcJ1zmC4vaVMpj6B65YHpGXTTr6x5RojQLp1jNuLepePqQkBSx
-	MP9pAHzSR56mwK8Z3BuoKnU6/ORR0Wr0hSHBNWjo4IWSuzeoSDzk3q3tbPK9mO2fO6w+
-	yOXjwg8Er44F4vNEb/MnjLpTCnzT9ORa1MetJ2o7t3Q0s+Wuf66AHdhnmAnqZHt35ByS
-	BfYg==
-MIME-Version: 1.0
-X-Received: by 10.194.76.237 with SMTP id n13mr42826434wjw.57.1360818507454;
-	Wed, 13 Feb 2013 21:08:27 -0800 (PST)
-Received: by 10.217.3.136 with HTTP; Wed, 13 Feb 2013 21:08:27 -0800 (PST)
-X-Originating-IP: [203.193.158.21]
-Date: Thu, 14 Feb 2013 10:38:27 +0530
-Message-ID: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
-From: Sankar H Malarmani <sankar.m@hardcube.in>
+	Wed, 13 Feb 2013 22:41:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=oJUR6oO7t9Rpm1w2Ry4BDJpfSTpt53er+DMvsw6j6U0=;
+	b=AVj1CnXhjO+408AF9Xqz2nU4fY0cYh6dJ8YM0AN9AkpzQ0OlnGWsbr2TPlrfFAm9ty
+	wrbQnrbvGwUsS+MAF9psm3p4hVNKI3YI+fUjeJGYoJVKkJ4VUvlSvqwiWZjUTu/CKnZL
+	IEor4FByOkKtlQPrFK30/nqrQY3Sh1XNLHVgg56fJl7a0jA/Uad+6/ryH1iI6k0W3sZ3
+	F/1RANps7egXqwJag1+7/wW31uJYcAtum2qjw12CgD45v6PBR10xht8C1LsAk73Q5L8I
+	pvWaC4N+3jmMhcTEVgYZoo19TzF2Hf501xshQZGoFKg6PGd88rUUvg7qwZO+wnqwoUs5
+	UAiA==
+X-Received: by 10.66.79.202 with SMTP id l10mr1091338pax.36.1360824074825;
+	Wed, 13 Feb 2013 22:41:14 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id e6sm89101625paw.16.2013.02.13.22.41.12
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 13 Feb 2013 22:41:13 -0800 (PST)
+Date: Thu, 14 Feb 2013 07:41:10 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmYOZxVsGOZtHlqjoN7RQKNqiWJBr6dzu5FCFfcQ8/kuigT3+YWjDKJlf0YJAx94XWo+gCA
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: gtk errors in openembedded classis build
+Message-ID: <20130214064110.GH3300@jama>
+References: <1360808228-10746-1-git-send-email-jeffrey.honig@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1360808228-10746-1-git-send-email-jeffrey.honig@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] multilib: Fix PN - BPN to make fetch work.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 05:24:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 14 Feb 2013 06:57:28 -0000
+X-Groupsio-MsgNum: 43146
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="K1n7F7fSdjvFAEnM"
+Content-Disposition: inline
 
-Hi All,
+--K1n7F7fSdjvFAEnM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'm tryin to build a linux image by using openembedded classic. On giving
-the bitbake command I'm getting the following errors.
+On Wed, Feb 13, 2013 at 09:17:08PM -0500, Jeffrey C Honig wrote:
+> From: Randy MacLeod <Randy.MacLeod@windriver.com>
+>=20
+> (LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel 20130208
 
-failed to load "./apple-red.png": Couldn't recognize the image file format
-for file './apple-red.png'
+Please indicate for which layer this is intended (read README in target
+layer how to send patches for it).
 
-ERROR: Function 'do_compile' failed (see
-/home/hc/oe/output/work/i686-linux/gtk+-native-2.24.8-r1/temp/log.do_compile.11738
-for further information)
-ERROR: Task 6157 (virtual:native:/home/hc/oe/stuff/trdx/recipes/gtk+/gtk+_
-2.24.8.bb, do_compile) failed with exit code '1'
-ERROR: '/home/hc/oe/stuff/openembedded/recipes/eglibc/eglibc_2.12.bb' failed
-ERROR:
-'virtual:native:/home/hc/oe/stuff/openembedded/recipes/gobject-introspection/
-gobject-introspection_1.29.17.bb' failed
-ERROR: 'virtual:native:/home/hc/oe/stuff/trdx/recipes/gtk+/gtk+_2.24.8.bb'
-failed
+I's not even for meta-webserver, because it has different version:
+=2E/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
 
-I'm a newbie to this openembedded stuffs..
-Please guide me to solve this issue.
+Marking as "Not Applicable" on patchwork..
 
--- 
-Thanks & Regards
-*Shaz*
 
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  recipes-httpd/hiawatha/hiawatha_8.6.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb b/recipes-httpd/hiawa=
+tha/hiawatha_8.6.bb
+> index 2e6955e..837354b 100644
+> --- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> +++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> @@ -6,7 +6,7 @@ DEPENDS =3D "libxml2 libxslt"
+> =20
+>  SECTION =3D "net"
+> =20
+> -SRC_URI =3D "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+> +SRC_URI =3D "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar.gz \
+>             file://hiawatha-init"
+> =20
+>  SRC_URI[md5sum] =3D "372ea9e8329ed36e4fb781fdc1a6734c"
+> --=20
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--K1n7F7fSdjvFAEnM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEchwYACgkQN1Ujt2V2gBzowgCgr72iu1Hcf9XvUOFi1Z+IhWtR
+8MsAn2Z4jgx52gLs7XQG+UlupG9B3+ZE
+=+f9K
+-----END PGP SIGNATURE-----
+
+--K1n7F7fSdjvFAEnM--
