@@ -1,25 +1,27 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Florin.Sarbu@windriver.com>) id 1U5vQQ-0007yY-34
+	(envelope-from <Florin.Sarbu@windriver.com>) id 1U5vQU-0007yu-St
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Feb 2013 10:48:20 +0100
+	Thu, 14 Feb 2013 10:48:24 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1E9WGhr002555
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1E9WJWm003492
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 01:32:16 -0800 (PST)
+	Thu, 14 Feb 2013 01:32:20 -0800 (PST)
 Received: from otp-fsarbu-l1.corp.ad.wrs.com (128.224.168.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.318.4; Thu, 14 Feb 2013 01:32:14 -0800
+	(TLS) id 14.2.318.4; Thu, 14 Feb 2013 01:32:19 -0800
 From: Florin Sarbu <florin.sarbu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Feb 2013 11:32:04 +0200
-Message-ID: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
+Date: Thu, 14 Feb 2013 11:32:05 +0200
+Message-ID: <1360834325-22890-2-git-send-email-florin.sarbu@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
+References: <1360834325-22890-1-git-send-email-florin.sarbu@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.168.151]
-Subject: [PATCH] rpcbind: Add ${PN}-systemd to PACKAGES
+Subject: [meta-oe][meta-systemd][] rpcbind: Add ${PN}-systemd to PACKAGES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,7 +35,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 09:48:22 -0000
+X-List-Received-Date: Thu, 14 Feb 2013 09:48:33 -0000
 Content-Type: text/plain
 
 The ${PN}-systemd should be added to PACKAGES
