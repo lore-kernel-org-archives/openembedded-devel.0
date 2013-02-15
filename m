@@ -1,24 +1,47 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-wi0-f170.google.com ([209.85.212.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1U6LXV-0003gg-Uk
+	(envelope-from <sankar.m@hardcube.in>) id 1U6N0p-0006Tn-K1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 14:41:22 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 15 Feb 2013
-	14:25:17 +0100
-X-TM-IMSS-Message-ID: <0cb2928b00009609@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 0cb2928b00009609 ;
-	Fri, 15 Feb 2013 14:25:15 +0100
-Message-ID: <511E373D.1070109@nedap.com>
-Date: Fri, 15 Feb 2013 14:25:17 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Fri, 15 Feb 2013 16:15:44 +0100
+Received: by mail-wi0-f170.google.com with SMTP id hm11so1452841wib.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Feb 2013 06:59:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-received:x-originating-ip:in-reply-to:references
+	:date:message-id:subject:from:to:content-type:x-gm-message-state;
+	bh=tyNWnI03JS8KmDqEfxY8UPRr+vymhbYjMk+tvt7GbuM=;
+	b=WmAW7Evm54L7vkZP8PqLZWPtIZw8vsc7iq8lmlpe9yFKiO7McYtrU87UhmCNq2YRrc
+	IybAaZrpJZbY0cPs6aZO4hlvmhrp9xbVkJdTLBTIYq+jHXooE9DpAfpPOdYWWcSOiyjt
+	xQNZkvAca5t+erePL4LNeuuPucmvHfSjoq0IEcNxtYrPg1f8rOEG7zxbNyuOSPuNTr/u
+	79VWdd63ecDE73s7tPlCY30ajYhlywGDx3nTC3UeyXPEsJDN78iVy/Vu63fgMB8PGyoM
+	tTvzboqP+GYa2SYBB9H62etYP+RsNs7/Ea5U+KH1kwYBvRxvred2LWc5mkRgIafQDqOv
+	zoCg==
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: opkg-make-index not found
+X-Received: by 10.194.242.69 with SMTP id wo5mr4940001wjc.10.1360940379749;
+	Fri, 15 Feb 2013 06:59:39 -0800 (PST)
+Received: by 10.216.32.133 with HTTP; Fri, 15 Feb 2013 06:59:39 -0800 (PST)
+X-Originating-IP: [203.193.158.21]
+In-Reply-To: <CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
+References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
+	<511CAFF3.3090004@communistcode.co.uk>
+	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
+	<511CB7DD.4080407@communistcode.co.uk>
+	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
+	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
+	<CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
+	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
+	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
+	<CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
+	<511E200D.3000907@communistcode.co.uk>
+	<CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
+Date: Fri, 15 Feb 2013 20:29:39 +0530
+Message-ID: <CAKSKmM3siHyHoNkqE02JQZcLBkkHKQyfpeTG2W1zfi+BVs0Tmg@mail.gmail.com>
+From: Sankar H Malarmani <sankar.m@hardcube.in>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnis5IRhTtH4mJP744jqwe9v9P+Hjc9VwkoC02Vw1TFgU/3ObBlIeiXIeZYoS2T0ZSqWxpK
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +55,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 13:41:22 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Feb 2013 15:15:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
-
-if I do
-
-     bitbake package-index
-
-it crashes with the message
-
-     | /bin/bash: opkg-make-index: command not found
-
-This is on a 64 debian machine, possibly the wrong path is searched?
-(there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
-
-Is this a known problem?
-Thanks!
-
-Jaap
+As I mentioned earlier I'm new this openembedded stuffs.. So, can you
+please guide me to build an image without hitting on any errors. Steps I
+should follow to get it..
+Your help is much appreciated..
 
 
 
+On Fri, Feb 15, 2013 at 5:22 PM, Burton, Ross <ross.burton@intel.com> wrote:
+
+> On 15 February 2013 11:46, Jack Mitchell <ml@communistcode.co.uk> wrote:
+> > Or as I mentioned above, use the git commits that the meta-toradex wiki
+> > pages recommends.
+>
+> Just actually looked at that page.  It's almost like their writing a
+> case study for the reasons to use git submodules...
+>
+> Ross
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Thanks & Regards
+*Sankar*
 
