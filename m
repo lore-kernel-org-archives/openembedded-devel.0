@@ -1,23 +1,33 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-pa0-f46.google.com ([209.85.220.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1U6Qjw-0003SF-Lb
+	(envelope-from <raj.khem@gmail.com>) id 1U6R7F-00050p-AJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 20:14:39 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1FIwRCc003837
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
-	Fri, 15 Feb 2013 10:58:27 -0800 (PST)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>)
-	id 1U6QUM-0000ED-U7; Fri, 15 Feb 2013 13:58:26 -0500
-Date: Fri, 15 Feb 2013 13:58:26 -0500
-From: Amy Fong <amy.fong@windriver.com>
+	Fri, 15 Feb 2013 20:38:38 +0100
+Received: by mail-pa0-f46.google.com with SMTP id kp14so1892594pab.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Feb 2013 11:22:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=L/mvsuh5hwftK7PdQDeaw8VXsEzk92EZINweY56PXbU=;
+	b=KaVwx0JEDtAs+JFnBukOFyZziMoe6KntRAGDndvfGj2oTMCEcl5u1YeuMU1TvVjo0b
+	YUR95v7hzIFI6wiO90WHnfvsTBFnytsqNmcbryfsLOw5cdj74HhCsEK2mUsSK3ceHujp
+	wW5WRHqACRQtHT/dgwnJJZ703QYGNiSPKT37XbNDXwUDmnc49ez6yKeURrc+XpKP67si
+	GBWyaGSpRrA4IoPKeLPHMpgc0XKTXQFnfGPFccy02NwFzQeNbqFgFzsJ8BCtE07ju94o
+	JA7fk6qCD/Jdl2YmDPklchWi85b1/nzaIwkQkhbsMc+JO0X4hmu/fFp9RZooaT1fuFP1
+	jaGg==
+X-Received: by 10.68.213.7 with SMTP id no7mr8568344pbc.48.1360956150799;
+	Fri, 15 Feb 2013 11:22:30 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id iu10sm5549152pbc.13.2013.02.15.11.22.29
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 15 Feb 2013 11:22:30 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130215185826.GA873@windriver.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCH][meta-webserver] apache2 multilib issues
+Date: Fri, 15 Feb 2013 11:22:18 -0800
+Message-Id: <1360956138-30930-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-networking][meta-systemd][PATCH] ntp: Create a separate package for sntp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,89 +41,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 19:14:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 Feb 2013 19:38:38 -0000
 
-apache2: multilib issues
-    
-Building a multilib version of apache2 results in many packages
-being installed but not packaged, resulting in apache2 being
-unable to run.
-    
-We fix this by modifying the FILES*${PN} to specify BPN instead of PN
-where required. (Also make he required change for CONFFILES_${PN})
-    
-Signed-off-by: Amy Fong <amy.fong@windriver.com>
---
- apache2_2.4.2.bb |   26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+sntp provides the functionality of obsoleted ntpdate
+so we have option of using ntpd as well as sntp
+sntp does the immediate one time sync with time
+server and corrects the tme immediately. it
+replaces ntpdate nicely.
 
-diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb b/recipes-httpd/apache2/apache2_2.4.2.bb
-index af8c4ca..1ed189b 100644
---- a/recipes-httpd/apache2/apache2_2.4.2.bb
-+++ b/recipes-httpd/apache2/apache2_2.4.2.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://httpd.apache.org/"
- DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
--PR = "r3"
-+PR = "r4"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-support/ntp/ntp.inc        |    3 ++-
+ .../meta-networking/recipes-support/ntp/ntp/sntp   |    1 +
+ .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
+ .../recipes-support/ntp/ntp_4.2.6p5.bbappend       |    9 ++++++++-
+ 4 files changed, 22 insertions(+), 2 deletions(-)
+ create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
+ create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
+
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index d93f22d..cec0f22 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -54,7 +54,7 @@ do_install_append() {
+ 	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+ }
  
- SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-@@ -105,40 +105,40 @@ LEAD_SONAME = "libapr-1.so.0"
+-PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
++PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+ # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
  
- PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+ # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
+@@ -69,6 +69,7 @@ RSUGGESTS_${PN} = "iana-etc"
  
--CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
--		   ${sysconfdir}/${PN}/magic \
--		   ${sysconfdir}/${PN}/mime.types \
--		   ${sysconfdir}/init.d/${PN} "
-+CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
-+		   ${sysconfdir}/${BPN}/magic \
-+		   ${sysconfdir}/${BPN}/mime.types \
-+		   ${sysconfdir}/init.d/${BPN} "
+ FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
+ FILES_${PN}-tickadj = "${bindir}/tickadj"
++FILES_sntp = "${bindir}/sntp"
+ FILES_${PN}-utils = "${bindir}"
+ FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate-sync ${bindir}/ntpdate-sync ${sysconfdir}/default/ntpdate"
  
- # we override here rather than append so that .so links are
- # included in the runtime package rather than here (-dev)
- # and to get build, icons, error into the -dev package
--FILES_${PN}-dev = "${datadir}/${PN}/build \
--		${datadir}/${PN}/icons \
--		${datadir}/${PN}/error \
-+FILES_${PN}-dev = "${datadir}/${BPN}/build \
-+		${datadir}/${BPN}/icons \
-+		${datadir}/${BPN}/error \
- 		${bindir}/apr-config ${bindir}/apu-config \
- 		${libdir}/apr*.exp \
--		${includedir}/${PN} \
-+		${includedir}/${BPN} \
- 		${libdir}/*.la \
- 		${libdir}/*.a"
+diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
+new file mode 100644
+index 0000000..9529cdf
+--- /dev/null
++++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
+@@ -0,0 +1 @@
++NTPSERVER="pool.ntp.org"
+diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
+new file mode 100644
+index 0000000..0f09e43
+--- /dev/null
++++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Simple Network Time Service Client
++After=network.target
++
++[Service]
++Type=oneshot
++EnvironmentFile=-/etc/default/sntp
++ExecStart=/usr/bin/sntp -s $NTPSERVER
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
+index 4580cf7..d9715bd 100644
+--- a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
++++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
+@@ -4,19 +4,26 @@ PRINC := "${@int(PRINC) + 1}"
  
- # manual to manual
--FILES_${PN}-doc += " ${datadir}/${PN}/manual"
-+FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
  
- #
- # override this too - here is the default, less datadir
- #
- FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.* ${sysconfdir} \
- 		${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
--		${libdir}/${PN}"
-+		${libdir}/${BPN}"
+-SYSTEMD_PACKAGES = "${PN} ntpdate"
++SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
+ SYSTEMD_SERVICE_${PN} = "ntpd.service"
++SYSTEMD_SERVICE_sntp = "sntp.service"
+ SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
  
- # we want htdocs and cgi-bin to go with the binary
--FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"
-+FILES_${PN} += "${datadir}/${BPN}/htdocs ${datadir}/${BPN}/cgi-bin"
+ FILES_ntpdate += "${systemd_unitdir}/system/ntpdate.service"
++FILES_sntp += "${sysconfdir}/default/sntp"
  
- #make sure the lone .so links also get wrapped in the base package
- FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
+ SRC_URI += " \
+ 	file://ntpdate.service \
+         file://ntpd.service \
++        file://sntp.service \
++        file://sntp \
+ "
  
--FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
-+FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
- 
- RDEPENDS_${PN} += "openssl libgcc"
- 
+ do_install_append() {
+ 	install -d ${D}${systemd_unitdir}/system
++	install -d ${D}${sysconfdir}/default
+ 	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+ 	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
++	install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
++	install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
+ }
+-- 
+1.7.9.5
+
 
 
