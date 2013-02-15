@@ -1,29 +1,24 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1U6KXq-0001F1-P4
+	(envelope-from <jaap.dejong@nedap.com>) id 1U6LXV-0003gg-Uk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 13:37:58 +0100
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 0B29DCA9741
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2013 13:21:35 +0100 (CET)
-Received: from e6520eb (unknown [90.84.144.253]) (Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 9E0054B014D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2013 13:21:30 +0100 (CET)
-Date: Fri, 15 Feb 2013 13:21:27 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130215132127.537c5048@e6520eb>
-In-Reply-To: <CAP9ODKoK3Z=YRfmhyS0trzOAOyU=u4mbWfp6QTxx3Wkq9HJOVw@mail.gmail.com>
-References: <CAP9ODKpr-Hg6h5mANx0s-p=TUzfaKhwmrKQMRK1wRpDdEHCXeA@mail.gmail.com>
-	<CAP9ODKoiG+bjZgXZvOkvYTiFqr0HEQWrevdn8PVkP3ZnzXC0zA@mail.gmail.com>
-	<20130209185808.4fe5cfe7@e6520eb>
-	<CAP9ODKoK3Z=YRfmhyS0trzOAOyU=u4mbWfp6QTxx3Wkq9HJOVw@mail.gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [for-danny] Changes for cherry-pick
+	Fri, 15 Feb 2013 14:41:22 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.83.0; Fri, 15 Feb 2013
+	14:25:17 +0100
+X-TM-IMSS-Message-ID: <0cb2928b00009609@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 0cb2928b00009609 ;
+	Fri, 15 Feb 2013 14:25:15 +0100
+Message-ID: <511E373D.1070109@nedap.com>
+Date: Fri, 15 Feb 2013 14:25:17 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,19 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 12:38:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Feb 2013 13:41:22 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Le Sat, 9 Feb 2013 16:01:28 -0200,
-Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
-> Ok; maybe you could send a notice when you picked them for testing? So
-> we know it is being processed.
->=20
-> Anyway, thanks by handling it.
->=20
-pushed to danny and danny-next.
+Hi All,
 
-Eric
+if I do
+
+     bitbake package-index
+
+it crashes with the message
+
+     | /bin/bash: opkg-make-index: command not found
+
+This is on a 64 debian machine, possibly the wrong path is searched?
+(there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
+
+Is this a known problem?
+Thanks!
+
+Jaap
+
+
 
 
