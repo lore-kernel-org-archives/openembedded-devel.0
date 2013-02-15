@@ -1,34 +1,23 @@
-Received: from mail-ie0-f173.google.com ([209.85.223.173])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1U6QRq-0001Id-Vu
+	(envelope-from <amy.fong@windriver.com>) id 1U6Qjw-0003SF-Lb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 19:55:51 +0100
-Received: by mail-ie0-f173.google.com with SMTP id 9so5235339iec.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2013 10:39:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=uI4NCTyX0pTJjW00CAf7oJvgvqRIASx2zmkGIXTc9ns=;
-	b=rSEOaHIgV2x8Xrb4vuMFlPVjou6aPNCFWzw7mkmUWvozuKzeRG9OHOHAGUkt7aHBfp
-	Divf76K9IMyLWM3Gr4zifaDTDAOOl77PpYgFIDVAZ8MhyO/k+oLwQQ+K3WxvQ5HAaaR+
-	fZlZzsOdxSvyPNnbCm5SnniMSUPdtfH1M2hyW85R+uaiw6gzHpsS4yAosdWDC9kOGtQ1
-	gkkE+gJWzfx58ZO5mrR56AlEx8t072m1b729YQ/S6jLUq441AqyleQJd8TLN6db4ZZGP
-	CQ1lk6vrd7q12tlQsSp2FrfDyTJ0Dnwd4U1PVCKuEyukiJu418fX/GFGaNa5T6xrCIwM
-	9EBA==
-X-Received: by 10.50.153.198 with SMTP id vi6mr3299981igb.112.1360953586672;
-	Fri, 15 Feb 2013 10:39:46 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.13.204 with HTTP; Fri, 15 Feb 2013 10:39:15 -0800 (PST)
-In-Reply-To: <20130214074532.GI3300@jama>
-References: <1360776335-21633-1-git-send-email-raj.khem@gmail.com>
-	<1360776335-21633-2-git-send-email-raj.khem@gmail.com>
-	<20130214074532.GI3300@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 15 Feb 2013 10:39:15 -0800
-Message-ID: <CAMKF1sqA=XarFcXewAJ7MjEG=ZtoLNQ6mvTjLHMGUQRVW8ZXig@mail.gmail.com>
+	Fri, 15 Feb 2013 20:14:39 +0100
+Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
+	[128.224.146.164])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1FIwRCc003837
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
+	Fri, 15 Feb 2013 10:58:27 -0800 (PST)
+Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
+	4.80) (envelope-from <amy.fong@windriver.com>)
+	id 1U6QUM-0000ED-U7; Fri, 15 Feb 2013 13:58:26 -0500
+Date: Fri, 15 Feb 2013 13:58:26 -0500
+From: Amy Fong <amy.fong@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-systemd][PATCH 2/2] meta-systemd: Append ${PN} to SYSTEMD_SERVICE
+Message-ID: <20130215185826.GA873@windriver.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCH][meta-webserver] apache2 multilib issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +31,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 18:56:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 15 Feb 2013 19:14:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Feb 13, 2013 at 11:45 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> I'm still getting missing RPROVIDER for openssh-sshd-systemd and bitbake
-> -e shows interesting behavior:
->
-> # $RPROVIDES_openssh-sshd [2 operations]
-> #   append
-> #   /OE/shr-core/meta-openembedded/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.1p1.bbappend:8
-> #     "openssh-sshd-systemd"
-> #   rename from RPROVIDES_${PN}-sshd data.py:161 [expandKeys]
-> #     "sshd"
-> # computed:
-> #   "sshd"
-> RPROVIDES_openssh-sshd="sshd"
->
-> Any idea why?
+apache2: multilib issues
+    
+Building a multilib version of apache2 results in many packages
+being installed but not packaged, resulting in apache2 being
+unable to run.
+    
+We fix this by modifying the FILES*${PN} to specify BPN instead of PN
+where required. (Also make he required change for CONFFILES_${PN})
+    
+Signed-off-by: Amy Fong <amy.fong@windriver.com>
+--
+ apache2_2.4.2.bb |   26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-hmmm I do not get it. Did you do a clean build or incremental ?
+diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb b/recipes-httpd/apache2/apache2_2.4.2.bb
+index af8c4ca..1ed189b 100644
+--- a/recipes-httpd/apache2/apache2_2.4.2.bb
++++ b/recipes-httpd/apache2/apache2_2.4.2.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://httpd.apache.org/"
+ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
+ SECTION = "net"
+ LICENSE = "Apache-2.0"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://server-makefile.patch \
+@@ -105,40 +105,40 @@ LEAD_SONAME = "libapr-1.so.0"
+ 
+ PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+ 
+-CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
+-		   ${sysconfdir}/${PN}/magic \
+-		   ${sysconfdir}/${PN}/mime.types \
+-		   ${sysconfdir}/init.d/${PN} "
++CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
++		   ${sysconfdir}/${BPN}/magic \
++		   ${sysconfdir}/${BPN}/mime.types \
++		   ${sysconfdir}/init.d/${BPN} "
+ 
+ # we override here rather than append so that .so links are
+ # included in the runtime package rather than here (-dev)
+ # and to get build, icons, error into the -dev package
+-FILES_${PN}-dev = "${datadir}/${PN}/build \
+-		${datadir}/${PN}/icons \
+-		${datadir}/${PN}/error \
++FILES_${PN}-dev = "${datadir}/${BPN}/build \
++		${datadir}/${BPN}/icons \
++		${datadir}/${BPN}/error \
+ 		${bindir}/apr-config ${bindir}/apu-config \
+ 		${libdir}/apr*.exp \
+-		${includedir}/${PN} \
++		${includedir}/${BPN} \
+ 		${libdir}/*.la \
+ 		${libdir}/*.a"
+ 
+ # manual to manual
+-FILES_${PN}-doc += " ${datadir}/${PN}/manual"
++FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+ 
+ #
+ # override this too - here is the default, less datadir
+ #
+ FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.* ${sysconfdir} \
+ 		${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
+-		${libdir}/${PN}"
++		${libdir}/${BPN}"
+ 
+ # we want htdocs and cgi-bin to go with the binary
+-FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"
++FILES_${PN} += "${datadir}/${BPN}/htdocs ${datadir}/${BPN}/cgi-bin"
+ 
+ #make sure the lone .so links also get wrapped in the base package
+ FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
+ 
+-FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
++FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+ 
+ RDEPENDS_${PN} += "openssl libgcc"
+ 
 
 
