@@ -1,42 +1,22 @@
-Received: from mail-vb0-f44.google.com ([209.85.212.44])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U6Jln-0007wM-Cp
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U6JzZ-0000B0-Oy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 12:48:04 +0100
-Received: by mail-vb0-f44.google.com with SMTP id fr13so2045683vbb.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2013 03:31:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=QgwLtSfeRihNubvSZpEo2jDW3oS+YAUhv6JBCt9r/x8=;
-	b=oUPZdcMnY+F2K/jVCqTowq/ySZVPo6Pg/HCmIZ9dW5seh+UndMi3/+WX8+g1gg/k81
-	3Lz5xswVove+ZgskbR56qo+KUnU50X+Y7slHvqC3SomSwPFV/6Tp0rRJbocGGa4sB5tH
-	BkUqdouZEhKit2PmcR22tmp+UGcYrMBdQt+azzmBjkybxa7ZpfgVDwlMtgXxy6XZVJAJ
-	Vb7OwqYbFuYIU2NiLdMt+Apz3jlHQgGD8n/owxSsqyfup0R9RFymi9eFxl9W4FUjhedS
-	hd/HFXcdYOviu+PoQBcSEKVC+OmusCe4aW/nH/7T5zjpiTDnO5aEKKo9OE+SGVVKF+S2
-	+Jzw==
-X-Received: by 10.58.252.72 with SMTP id zq8mr2739742vec.20.1360927915374;
-	Fri, 15 Feb 2013 03:31:55 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.221.10.202 with HTTP; Fri, 15 Feb 2013 03:31:35 -0800 (PST)
-In-Reply-To: <CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
-References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
-	<511CAFF3.3090004@communistcode.co.uk>
-	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
-	<511CB7DD.4080407@communistcode.co.uk>
-	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
-	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
-	<CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
-	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
-	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 15 Feb 2013 11:31:35 +0000
-Message-ID: <CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
+	Fri, 15 Feb 2013 13:02:15 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 5DB97D22B4;
+	Fri, 15 Feb 2013 12:46:12 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnxYb4+mfxwikKb9ZJJSKJtEJwbT2TaenGaBQfBx7krXXsgsnb5f7T6CZ+PkjW7KZT8zG8D
-Subject: Re: gtk errors in openembedded classis build
+Date: Fri, 15 Feb 2013 12:46:05 +0100
+Message-Id: <1360928765-24039-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <20130215071140.GO3300@jama>
+References: <20130215071140.GO3300@jama>
+Subject: [meta-oe][PATCH] libmemcached: add 1.0.15 and 1.0.7 versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +30,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 11:48:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 15 Feb 2013 12:02:15 -0000
 
-On 15 February 2013 10:50, Sankar H Malarmani <sankar.m@hardcube.in> wrote:
-> /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity/wpa-supplicant/
-> wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
+1.0.15 is latest
+1.0.7 is required by HipHopVM
 
-That error message describes the problem quite well.  You appear to be
-mixing very recent oe-core with an older meta-systemd, which won't
-work as they are both undergoing heavy systemd changes at the moment.
-If you update both at the same time you might get something that
-works.
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ .../libmemcached/files/crosscompile.patch          | 30 ++++++++++++++++++++++
+ .../recipes-support/libmemcached/libmemcached.inc  | 10 ++++++++
+ .../libmemcached/libmemcached_1.0.15.bb            |  6 +++++
+ .../libmemcached/libmemcached_1.0.7.bb             |  8 ++++++
+ .../recipes-support/libunwind/files/aarch64.patch  |  8 ++++++
+ 5 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/libmemcached/files/crosscompile.patch
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached.inc
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
 
-Welcome to the joy of building against git master of multiple
-repositories - things break.  Unless you're capable of fixing the
-problems as you find them it's recommended to use the stable releases
-instead of git master.
+diff --git a/meta-networking/recipes-support/libmemcached/files/crosscompile.patch b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
+new file mode 100644
+index 0000000..63511bf
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
+@@ -0,0 +1,30 @@
++ libmemcached/backtrace.cc |    3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++--- libmemcached-1.0.15.orig/libmemcached/backtrace.cc
+++++ libmemcached-1.0.15/libmemcached/backtrace.cc
++@@ -75,10 +75,11 @@ void custom_backtrace(void)
++     {
++       for (int x= 0; x < stack_frames; x++) 
++       {
++         bool was_demangled= false;
++ 
+++#if USE_DEMANGLE == 1
++         if (USE_DEMANGLE)
++         {
++ #ifdef HAVE_DLFCN_H
++           Dl_info dlinfo;
++           if (dladdr(backtrace_buffer[x], &dlinfo))
++@@ -107,11 +108,11 @@ void custom_backtrace(void)
++                       dlinfo.dli_fname);
++             }
++           }
++ #endif
++         }
++-
+++#endif
++         if (was_demangled == false)
++         {
++           fprintf(stderr, "?%d  %p in %s\n", x, backtrace_buffer[x], symbollist[x]);
++         }
++       }
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached.inc b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+new file mode 100644
+index 0000000..448a15d
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+@@ -0,0 +1,10 @@
++DESCRIPTION = "open source C/C++ client library and tools for the memcached server"
++DEPENDS = "libevent util-linux"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
++
++SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${PV}.tar.gz"
++
++TARGET_LDFLAGS += "-luuid"
++
++inherit autotools gettext pkgconfig
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+new file mode 100644
+index 0000000..18232b4
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+@@ -0,0 +1,6 @@
++require libmemcached.inc
++
++SRC_URI += "file://crosscompile.patch"
++
++SRC_URI[md5sum] = "616297a1aedefc52b3f6922eda5d559a"
++SRC_URI[sha256sum] = "dd7e9560029835bddf761a5b4c2339d9e5c7374558659b6c11b2c95e7d3a4325"
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
+new file mode 100644
+index 0000000..0aa3050
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
+@@ -0,0 +1,8 @@
++require libmemcached.inc
++
++SRC_URI[md5sum] = "d59a462a92d296f76bff2d9bc72b2516"
++SRC_URI[sha256sum] = "3efa86c9733eaad55d7119cb16769424e2aa6c22b3392e8f973946fce6678d81"
++
++do_configure_prepend_aarch64() {
++    export ac_cv_c_endian=little
++}
+diff --git a/meta-oe/recipes-support/libunwind/files/aarch64.patch b/meta-oe/recipes-support/libunwind/files/aarch64.patch
+index 9ea8d83..bb19747 100644
+--- a/meta-oe/recipes-support/libunwind/files/aarch64.patch
++++ b/meta-oe/recipes-support/libunwind/files/aarch64.patch
+@@ -1,3 +1,11 @@
++Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++Upstream-Status: unsuitable
++
++We need to port it for AArch64 first. This patch just makes it die during
++compilation.
++
++https://bugs.launchpad.net/linaro-aarch64/+bug/1099810
+ ---
+  configure.ac |    2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+-- 
+1.8.1.2
 
-Ross
 
 
