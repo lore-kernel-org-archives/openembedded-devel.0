@@ -1,15 +1,27 @@
-Received: from eumx.net ([91.82.101.43])
+Received: from mail-ve0-f174.google.com ([209.85.128.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1U6Jzm-0000BO-IK
+	(envelope-from <ross.burton@intel.com>) id 1U6K6E-0000Sx-T5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 13:02:33 +0100
-Message-ID: <511E200D.3000907@communistcode.co.uk>
-Date: Fri, 15 Feb 2013 11:46:21 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130109 Thunderbird/17.0.2
+	Fri, 15 Feb 2013 13:09:07 +0100
+Received: by mail-ve0-f174.google.com with SMTP id pb11so2945907veb.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Feb 2013 03:53:03 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:content-type:x-gm-message-state;
+	bh=LO7gHHF/rNYWGavPMB9IN9KSEg88sZIUQRgA5VXAdR8=;
+	b=Z2iWoBSs7bzGk6NE8iykfwqjK/tpITxVcnRkq2s4mzG6cT4BwkQgIDhmTrb2o9M+4o
+	OZHQDwh5XteXOO1mFhy3PWCdne9fwHE4XU2GuqJWLdGTlKi9jhoe5dcV3c7j/jkNv+E3
+	z8MqAHvD2unFyRugV7DMVbzu/vLbDnaCdw/G1yfnJfZgpWNTDB3d4FeZWPUTowYnN0j+
+	I7iLEoIzl5jOWsuctc4t6ai1clb6l3Lv7cn9QmNcIy3QHv/2WSegWT+WBayY8GWMvlNl
+	U6Zr4Jh9NFcI3ZeZXsjehGI4BDQdilQsKiYbZnsAYHzcQRxM/9AhCX7rN/gq+kmkU4e7
+	hALw==
+X-Received: by 10.220.156.68 with SMTP id v4mr2734938vcw.10.1360929182970;
+	Fri, 15 Feb 2013 03:53:02 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.221.10.202 with HTTP; Fri, 15 Feb 2013 03:52:42 -0800 (PST)
+In-Reply-To: <511E200D.3000907@communistcode.co.uk>
 References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
 	<511CAFF3.3090004@communistcode.co.uk>
 	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
@@ -20,7 +32,12 @@ References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
 	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
 	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
 	<CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
-In-Reply-To: <CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
+	<511E200D.3000907@communistcode.co.uk>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 15 Feb 2013 11:52:42 +0000
+Message-ID: <CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQlI5AyRYQQFsmC7Wl1b+Yl708YemjhFsygcvm0Cn8kim7A9N3z7t9uaGv3z8TmgTvcXByal
 Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,35 +52,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 12:02:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Feb 2013 12:09:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 15/02/13 11:31, Burton, Ross wrote:
-> On 15 February 2013 10:50, Sankar H Malarmani <sankar.m@hardcube.in> wrote:
->> /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity/wpa-supplicant/
->> wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
-> That error message describes the problem quite well.  You appear to be
-> mixing very recent oe-core with an older meta-systemd, which won't
-> work as they are both undergoing heavy systemd changes at the moment.
-> If you update both at the same time you might get something that
-> works.
->
-> Welcome to the joy of building against git master of multiple
-> repositories - things break.  Unless you're capable of fixing the
-> problems as you find them it's recommended to use the stable releases
-> instead of git master.
+On 15 February 2013 11:46, Jack Mitchell <ml@communistcode.co.uk> wrote:
+> Or as I mentioned above, use the git commits that the meta-toradex wiki
+> pages recommends.
 
-Or as I mentioned above, use the git commits that the meta-toradex wiki 
-pages recommends.
+Just actually looked at that page.  It's almost like their writing a
+case study for the reasons to use git submodules...
 
--- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
-
+Ross
 
 
