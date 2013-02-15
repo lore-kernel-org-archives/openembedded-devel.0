@@ -1,26 +1,26 @@
-Received: from mail-wi0-f174.google.com ([209.85.212.174])
+Received: from mail-wg0-f53.google.com ([74.125.82.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sankar.m@hardcube.in>) id 1U6E7h-0005IS-Da
+	(envelope-from <sankar.m@hardcube.in>) id 1U6Ey8-00073B-3L
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Feb 2013 06:46:15 +0100
-Received: by mail-wi0-f174.google.com with SMTP id hi8so698670wib.13
+	Fri, 15 Feb 2013 07:40:24 +0100
+Received: by mail-wg0-f53.google.com with SMTP id fn15so2441665wgb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Feb 2013 21:30:10 -0800 (PST)
+	Thu, 14 Feb 2013 22:24:21 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:x-received:x-originating-ip:in-reply-to:references
 	:date:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=wI+ajvpGvMwznS0LK2ocQ/I24OJT7D7R9iXOx6XDkUE=;
-	b=kagUK9Oh4mXy73nuVJqy5WlVZ/Fij9xfnr/0g/7f3mPKoAlrZWr95RonMFdetunexO
-	+CSc0CM8O159WPhZBJ8/TZ4+5Qiwzno423JC08ZxRk0dnzcwWmMZDP08tZAs7uFHpruq
-	qANXiXRKd2U3CWUrfubwwIZFN1sLO9duh5E0HWeFFNtWta4b5jwfvV1FGeHgg1lf7Sym
-	tO+Q4vWIaE7kgaLtHrxNs6ZrrmLQixBzmkHKuxoYRLM1mI+K5bmBsvbvcsqYznfUh0/H
-	5iyCJ5yqPQqaNCCN9Ys2p6ejf1DdLTIw7ExOcB6EQ6nPSqwDRsYpvzAWlcv0fRMYpFN9
-	nhwA==
+	bh=TGfChI1R+kyhZp6jqItAYBKcDd/G3hVY778l/MO+rJo=;
+	b=i+cFj7Zbt6es+4Sp1brCTI3QmNAKvO4NJqgXTXatalCN3Tv5v24MHvUMR87kJYSdLt
+	GkrruBFswuwhlm1AZuy3RJyCOMnYAPlCFTcj04r4Ie2cXBZoIbrCGoXqlAdXtNS3jL0g
+	7+SP1R6f+csSm8X3mwco776Ude19K6kqhnxSemCXuoa2GNk6nwvDxCI8A9pspdV17ZnZ
+	tyuXAprvEEk2tFzOduN+5GklAhJkSN6v2LtuYfTkqMpEUJsbV5v+DUkU1wpJ5S83O5CD
+	+sU3YK+873hYSJkc43aF2/Andgga+R/LiI1mJcl8B95SHpbXabk+K1omu6KTp8WgswtT
+	Id6Q==
 MIME-Version: 1.0
-X-Received: by 10.194.76.237 with SMTP id n13mr1710760wjw.57.1360906210005;
-	Thu, 14 Feb 2013 21:30:10 -0800 (PST)
-Received: by 10.217.3.136 with HTTP; Thu, 14 Feb 2013 21:30:09 -0800 (PST)
+X-Received: by 10.180.83.227 with SMTP id t3mr2049411wiy.2.1360909460900; Thu,
+	14 Feb 2013 22:24:20 -0800 (PST)
+Received: by 10.217.3.136 with HTTP; Thu, 14 Feb 2013 22:24:20 -0800 (PST)
 X-Originating-IP: [203.193.158.21]
 In-Reply-To: <CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
 References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
@@ -29,11 +29,11 @@ References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
 	<511CB7DD.4080407@communistcode.co.uk>
 	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
 	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
-Date: Fri, 15 Feb 2013 11:00:09 +0530
-Message-ID: <CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
+Date: Fri, 15 Feb 2013 11:54:20 +0530
+Message-ID: <CAKSKmM1yU=65LnW_u3vh6N4e65rUW-iwL1K4Lztx8rUbwOGu_g@mail.gmail.com>
 From: Sankar H Malarmani <sankar.m@hardcube.in>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlG0Coteh/mRB32j1GsHc0sTSR081dwrp8ED5LDhSoptmBh58qapI9AQI255KplPKCx4KeC
+X-Gm-Message-State: ALoCoQkCs5HaO493DIOyprWZE+DD1J2b4ixr4qRlHofYmwtrlCKEBnWyXU4Zkqoc4pXd/wbWQl7L
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -49,30 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Feb 2013 05:46:16 -0000
+X-List-Received-Date: Fri, 15 Feb 2013 06:40:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Yes, you are right.. I removed those trailing slashes and now it throws me
-new set of errors.. It was giving errors in RDEPENDS..
-As suggested in wiki I replaced RDEPENDS with RRECOMMENDS in my
-obconf_2.0.3+git.bb. But i'm getting the following list of errors.
+I think I'm getting nearer... I appreciate the support you offered till
+now..
 
+I cleaned the bitbake and rebuilt it. Now RRECOMMENDS error is not there..
 
-ERROR: QA Issue:
-/home/hc/oe-core/build/../stuff/oe-tworaz/meta-lxde/recipes-lxde/obconf/obc=
-onf_2.0.3+
-git.bb: Variable RRECOMMENDS is set as not being package specific, please
-fix this.
+These are the errors I'm dealing with now..
+
 ERROR: Unable to parse
 /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity=
 /wpa-supplicant/
 wpa-supplicant_2.0.bb
 Traceback (most recent call last):
   File "/home/hc/oe-core/stuff/openembedded-core/bitbake/lib/bb/utils.py",
-line 284, in better_exec(code=3D<code object <module> at 0xc07ab60, file
+line 284, in better_exec(code=3D<code object <module> at 0xbf64068, file
 "<code>", line 1>, context=3D{'d': <bb.data_smart.DataSmart object at
-0xc071a0c>},
+0x86d0fec>},
 text=3D'__anon_620__home_hc_oe_core_build____stuff_openembedded_core_meta_c=
 lasses_base_bbclass(d)\n__anon_20__home_hc_oe_core_build____stuff_openembed=
 ded_core_meta_classes_debian_bbclass(d)\n__anon_20__home_hc_oe_core_build__=
@@ -95,17 +91,31 @@ lasses_systemd_bbclass",
 line 2, in
 __anon_83__home_hc_oe_core_build____stuff_meta_openembedded_meta_systemd_cl=
 asses_systemd_bbclass(d=3D<bb.data_smart.DataSmart
-object at 0xc071a0c>)
+object at 0x86d0fec>)
   File "systemd.bbclass", line 42, in
-systemd_after_parse(d=3D<bb.data_smart.DataSmart object at 0xc071a0c>)
+systemd_after_parse(d=3D<bb.data_smart.DataSmart object at 0x86d0fec>)
   File "systemd.bbclass", line 12, in systemd_check_vars
 FuncFailed: Function failed:
 
 /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity=
 /wpa-supplicant/
 wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
-
 ERROR: Command execution failed: Exited with 1
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+
+
+And this is what I have in wpa-supplicant_2.0.bb file.
+
+require wpa-supplicant-2.0.inc
+
+PR =3D "r0"
+
+SRC_URI[md5sum] =3D "3be2ebfdcced52e00eda0afe2889839d"
+SRC_URI[sha256sum] =3D
+"2c115609fbb5223d51381084a5c944455a8afcda81d584173ff55ba233379e09"
+
+Any help would be much appreciated.
 
 On Thu, Feb 14, 2013 at 8:13 PM, Burton, Ross <ross.burton@intel.com> wrote=
 :
@@ -139,27 +149,4 @@ n
 --=20
 Thanks & Regards
 *Sankar*
-*Junior Programmer
-*
-*
-*
-*HardCube IT Consultancy Private Limited*
-*II Floor , STPI - Software Technology Parks of India*
-*5 Rajiv Gandhi Salai*
-*Taramani, Chennai 600 113*
-*Ph: 91 - 44 - 3918 0857*
-*info@hardcube.in*
-*http://www.hardcube.in*
-**************
-*"The contents of this E-mail (including the contents of the enclosure/(s)
-or attachment/(s) if any) are privileged and confidential material of
-HardCube IT Consultancy Private Limited, and should not be disclosed to,
-used by or copied in any manner by anyone other than the intended
-addressee/(s).If this E-mail (including the enclosure/(s) or attachment/(s)
-if any) has been received in error, please advice the sender immediately
-and delete it from your system. The views expressed in this E-mail message
-(including the enclosure/(s) or attachment/(s) if any) are those of the
-individual sender, except where the sender expressly, and with authority,
-states them to be the views of "HardCube"."*
-***************
 
