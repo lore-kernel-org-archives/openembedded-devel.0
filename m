@@ -1,48 +1,27 @@
-Received: from mail-ve0-f170.google.com ([209.85.128.170])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1U6epj-0006ME-ON
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U6kcf-00014B-9X
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Feb 2013 11:17:29 +0100
-Received: by mail-ve0-f170.google.com with SMTP id 14so3715265vea.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2013 02:01:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=gNgJJnTPSw/vpMwvoT1gscnJEFbwDpWhyVBKudAWWko=;
-	b=OqSFm7pVxWwaY0j/YNLL5i3Lz5OA3JUGobCY0gqElLL0D0rT0EBscfTw6OMHNcyS8B
-	zdu08BbhOgX2JqSt0PhZZhoSsOoAK+qfP14djkdvEM/WL9/lkvAuXUOIJD9XIYFopAeR
-	UqxpYDcW7tF+K9I8j3FOMcC9aB53Wi0ZA8wLAl5OT0It/+s2KNDntsYSZDmigjdMs082
-	4Nrh9n6akLbwPcUOVMMyjPq+Fg+tpB4qp/tQ+SotnT//YmArpnZVNjriT0pBLQmHDqxm
-	gMDyFBmo8G2WyGl5/T9s+B985HXl/QBYyz7bX2XweM1EyfOXRBdQirtEYwXDUQGukhw0
-	LBng==
-X-Received: by 10.58.244.38 with SMTP id xd6mr7296945vec.29.1361008882498;
-	Sat, 16 Feb 2013 02:01:22 -0800 (PST)
+	Sat, 16 Feb 2013 17:28:34 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 16 Feb 2013 08:12:15 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,678,1355126400"; d="scan'208";a="286607772"
+Received: from unknown (HELO helios.localnet) ([10.252.120.76])
+	by orsmga002.jf.intel.com with ESMTP; 16 Feb 2013 08:12:13 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 16 Feb 2013 16:12:12 +0000
+Message-ID: <1950016.9PpQygz0Wq@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <20130216045138.GR3300@jama>
+References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+	<d27fbed307bc6afc4e260622a8c36b32fc2d89ce.1360337212.git.paul.eggleton@linux.intel.com>
+	<20130216045138.GR3300@jama>
 MIME-Version: 1.0
-Received: by 10.220.178.8 with HTTP; Sat, 16 Feb 2013 02:01:02 -0800 (PST)
-In-Reply-To: <CAKSKmM061jii+YZzn-uBFuMoGW8eeR0y6OCoDkNxDwpTSr=gDA@mail.gmail.com>
-References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
-	<511CAFF3.3090004@communistcode.co.uk>
-	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
-	<511CB7DD.4080407@communistcode.co.uk>
-	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
-	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
-	<CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
-	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
-	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
-	<CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
-	<511E200D.3000907@communistcode.co.uk>
-	<CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
-	<CAKSKmM3siHyHoNkqE02JQZcLBkkHKQyfpeTG2W1zfi+BVs0Tmg@mail.gmail.com>
-	<CAJTo0LZbQ2YSR5+1vSqChMDq85Rnj+WgMr=U4=rdrePBsp27KA@mail.gmail.com>
-	<CAKSKmM061jii+YZzn-uBFuMoGW8eeR0y6OCoDkNxDwpTSr=gDA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Sat, 16 Feb 2013 10:01:02 +0000
-Message-ID: <CAJTo0LZmEoxWrjBKsHAh1iOsT9_+nWyK0na9WYEngRvjAB199w@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmVbfGWGV8DZiMKNDNLN1kK2ba8/43F5shDfliaN0H+uXZCh4dYeAnBHo+aaNnUS0x+s0o/
-Subject: Re: gtk errors in openembedded classis build
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/6] python-feedparser: add new recipe for version 5.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,21 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2013 10:17:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 16 Feb 2013 16:28:35 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 16 February 2013 05:47, Sankar H Malarmani <sankar.m@hardcube.in> wrote:
-> I just followed the instructions given in that toradex website.. Its what
-> giving me the following error..
->
-> /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity/wpa-supplicant/
-> wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
->
-> What I'm doing wrong here.. What should I do to overcome this.. ?
+On Saturday 16 February 2013 05:51:38 Martin Jansa wrote:
+> On Fri, Feb 08, 2013 at 03:33:08PM +0000, Paul Eggleton wrote:
+> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> > ---
+> > 
+> >  .../recipes-devtools/python/python-feedparser_5.1.3.bb   |   14
+> >  ++++++++++++++ 1 file changed, 14 insertions(+)
+> >  create mode 100644
+> >  meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb> 
+> > diff --git a/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
+> > b/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb new file
+> > mode 100644
+> > index 0000000..86e4fd6
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/python/python-feedparser_5.1.3.bb
+> > @@ -0,0 +1,14 @@
+> > +SUMMARY = "Python Atom and RSS feed parser"
+> > +HOMEPAGE = "http://code.google.com/p/feedparser"
+> > +SECTION = "devel/python"
+> > +LICENSE = "BSD-2-Clause"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=39082dbc030b4a3ee3e48e162eab408e"
+> > +
+> > +SRC_URI =
+> > "http://feedparser.googlecode.com/files/feedparser-${PV}.tar.bz2"
+> > +SRC_URI[md5sum] = "f8790accd379b578261cb5b0047bd20c"
+> > +SRC_URI[sha256sum] =
+> > "91a28a76b5cbaf7457a22e47e04347568a1f21fac85c806867ac72d32aabe718" +
+> > +S = "${WORKDIR}/feedparser-${PV}"
+> > +
+> > +inherit distutils
+> 
+> Can you please check if the checksum was changed?
 
-You're not using the oe-core revision specified on the web site.  You
-need to checkout a specific revision, and not use oe-core master.
+Oops - it appears I never built this version of the recipe as the 
+LIC_FILES_CHKSUM was also changed (copyright date changed). I have build-
+tested all recipes again and pushed a new branch with the python-feedparser 
+recipe fixed.
 
-Ross
+Sorry about that.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
