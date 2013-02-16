@@ -1,36 +1,25 @@
-Received: from mail-ea0-f174.google.com ([209.85.215.174])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U6ntx-0007QC-Lp
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1U6nwC-0007uh-95
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Feb 2013 20:58:25 +0100
-Received: by mail-ea0-f174.google.com with SMTP id 1so1770358eaa.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2013 11:42:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=F1u6/we3TkTeq8t/gM68zWva4yycPzOe3NWVIL9j1c4=;
-	b=yVAzUTnHsTKibGMH00BuaKwTxmVLFALFETExA85VGXpC2OOxw2ae/jpVsHXbW9Nnhg
-	W6uUaL3BKQbK/0zcb9SB2Pg0epVudDON22TjD0Kl2wZsQxSrzfduXFrKMVSet51EWKM8
-	HExPgiX6H4X1i/hjeDfahsI55bOx65asWzHdXvpR+/AUTu5QLuZjiQPm8HOkRR/VVUmu
-	oXX9ClZlbM5y5o+D9BPa8dT8s+nHH4Gen0rAfXjXOum51VrMZi959WNpJD03EdmcDSv5
-	Nc2lYfFVzCxaX3ydCdUz0Rw+h2GAEmTaUmutWFTw0HJqC+Si9OZmO5XbDym5DPAy5qvM
-	rjKA==
-X-Received: by 10.14.183.198 with SMTP id q46mr24147553eem.1.1361043740457;
-	Sat, 16 Feb 2013 11:42:20 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 46sm20692728eea.3.2013.02.16.11.42.19
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 16 Feb 2013 11:42:19 -0800 (PST)
-Date: Sat, 16 Feb 2013 20:42:27 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130216194227.GC3300@jama>
-References: <20130216161007.6DE51502C2@opal>
+	Sat, 16 Feb 2013 21:01:06 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 16 Feb 2013 11:44:37 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,678,1355126400"; d="scan'208";a="288105773"
+Received: from unknown (HELO helios.localnet) ([10.252.120.76])
+	by fmsmga001.fm.intel.com with ESMTP; 16 Feb 2013 11:44:37 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 16 Feb 2013 19:44:35 +0000
+Message-ID: <2516837.HYYY156nkD@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-23-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <1360956138-30930-1-git-send-email-raj.khem@gmail.com>
+References: <1360956138-30930-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130216161007.6DE51502C2@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Paul Eggleton : python-lxml: update to 3.0.2 and tweak
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][meta-systemd][PATCH] ntp: Create a separate package for sntp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,111 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2013 19:58:47 -0000
-X-Groupsio-MsgNum: 43205
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cX4WM3qIY/fHWHDu"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 16 Feb 2013 20:01:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---cX4WM3qIY/fHWHDu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Please delete that branch, that was probably meant for
-meta-openembedded-contrib
-
-
-On Sat, Feb 16, 2013 at 04:10:07PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: paule/python-bits
-> Commit: 478ee32b3b6fe6e98d80737ac8ed37d3e4f04178
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3D478ee32b3b6fe6e98d80737ac8ed37d3e4f04178
->=20
-> Author: Paul Eggleton <paul.eggleton@linux.intel.com>
-> Date:   Fri Feb  8 15:02:59 2013 +0000
->=20
-> python-lxml: update to 3.0.2 and tweak
->=20
-> * Update to version 3.0.2
-> * Update LIC_FILES_CHKSUM - substance of the license did not change, but
->   some copyright/origin notes for specific parts were added.
-> * Add SUMMARY
-> * Move packaging definitions to the end
->=20
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
->=20
+On Friday 15 February 2013 11:22:18 Khem Raj wrote:
+> sntp provides the functionality of obsoleted ntpdate
+> so we have option of using ntpd as well as sntp
+> sntp does the immediate one time sync with time
+> server and corrects the tme immediately. it
+> replaces ntpdate nicely.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->=20
->  .../{python-lxml_2.2.8.bb =3D> python-lxml_3.0.2.bb} |   13 ++++++-------
->  1 files changed, 6 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb b/meta-=
-oe/recipes-devtools/python/python-lxml_3.0.2.bb
-> similarity index 76%
-> rename from meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-> rename to meta-oe/recipes-devtools/python/python-lxml_3.0.2.bb
-> index a175609..5ab7b4a 100644
-> --- a/meta-oe/recipes-devtools/python/python-lxml_2.2.8.bb
-> +++ b/meta-oe/recipes-devtools/python/python-lxml_3.0.2.bb
-> @@ -1,17 +1,16 @@
-> +SUMMARY =3D "Python XML bindings for libxml2 and libxslt"
->  DESCRIPTION =3D "Powerful and Pythonic XML processing library combining \
->  libxml2/libxslt with the ElementTree API."
->  HOMEPAGE =3D "http://codespeak.net/lxml"
->  LICENSE =3D "BSD"
-> -LIC_FILES_CHKSUM =3D "file://LICENSES.txt;md5=3D7de92baeb3b7bfaebe724041=
-55fdb346"
-> +LIC_FILES_CHKSUM =3D "file://LICENSES.txt;md5=3Df9f1dc24f720c143c2240df4=
-1fe5073b"
->  SRCNAME =3D "lxml"
-> -PR =3D "r2"
-> =20
->  DEPENDS =3D "libxml2 libxslt"
-> -RDEPENDS_${PN} +=3D "libxml2 libxslt python-compression"
-> =20
->  SRC_URI =3D "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNA=
-ME}-${PV}.tar.gz;name=3Dlxml"
-> -SRC_URI[lxml.md5sum] =3D "d6c612d63a84d79440912a1b29d3b981"
-> -SRC_URI[lxml.sha256sum] =3D "89b73925b5e3295dcf4675cb948007a20eb029fe35c=
-9a162ae19ec11f1abafe5"
-> +SRC_URI[lxml.md5sum] =3D "38b15b0dd5e9292cf98be800e84a3ce4"
-> +SRC_URI[lxml.sha256sum] =3D "cadba4cf0e235127795f76a6f7092cb035da23a6e9e=
-c4c93f8af43a6784cd101"
-> =20
->  S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> =20
-> @@ -28,7 +27,7 @@ DISTUTILS_INSTALL_ARGS +=3D " \
->  "
-> =20
->  BBCLASSEXTEND =3D "native nativesdk"
-> -RDEPENDS_${PN}_virtclass-native =3D "libxml2-native libxslt-native"
-> -
-> =20
-> +RDEPENDS_${PN} +=3D "libxml2 libxslt python-compression"
-> +RDEPENDS_${PN}_virtclass-native =3D "libxml2-native libxslt-native"
-> =20
->=20
->=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>  meta-networking/recipes-support/ntp/ntp.inc        |    3 ++-
+>  .../meta-networking/recipes-support/ntp/ntp/sntp   |    1 +
+>  .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
+>  .../recipes-support/ntp/ntp_4.2.6p5.bbappend       |    9 ++++++++-
+>  4 files changed, 22 insertions(+), 2 deletions(-)
+>  create mode 100644
+> meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp create mode
+> 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
+> 
+> diff --git a/meta-networking/recipes-support/ntp/ntp.inc
+> b/meta-networking/recipes-support/ntp/ntp.inc index d93f22d..cec0f22 100644
+> --- a/meta-networking/recipes-support/ntp/ntp.inc
+> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+> @@ -54,7 +54,7 @@ do_install_append() {
+>  	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+>  }
+> 
+> -PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
+> +PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+>  # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
+> 
+>  # ntp originally includes tickadj. It's split off for inclusion in small
+> firmware images on platforms @@ -69,6 +69,7 @@ RSUGGESTS_${PN} = "iana-etc"
+> 
+>  FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf
+> ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}" FILES_${PN}-tickadj =
+> "${bindir}/tickadj"
+> +FILES_sntp = "${bindir}/sntp"
+>  FILES_${PN}-utils = "${bindir}"
+>  FILES_ntpdate = "${bindir}/ntpdate
+> ${sysconfdir}/network/if-up.d/ntpdate-sync ${bindir}/ntpdate-sync
+> ${sysconfdir}/default/ntpdate"
+> 
+> diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
+> b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp new file mode
+> 100644
+> index 0000000..9529cdf
+> --- /dev/null
+> +++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
+> @@ -0,0 +1 @@
+> +NTPSERVER="pool.ntp.org"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Argh, no, we cannot use this as a default. We discussed this at length 
+earlier.
 
---cX4WM3qIY/fHWHDu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Cheers,
+Paul
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+-- 
 
-iEYEARECAAYFAlEf4SMACgkQN1Ujt2V2gBwL6ACdHqXqV+9JAS8grHDIqR9zpxPp
-Gl8An1hSBFLOfAm2T0Oeix/VrJCB8rBI
-=z5UV
------END PGP SIGNATURE-----
+Paul Eggleton
+Intel Open Source Technology Centre
 
---cX4WM3qIY/fHWHDu--
+
