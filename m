@@ -1,49 +1,34 @@
-Received: from mail-we0-f175.google.com ([74.125.82.175])
+Received: from mail-bk0-f53.google.com ([209.85.214.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sankar.m@hardcube.in>) id 1U6aru-00073p-LH
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1U6bsd-0000pk-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Feb 2013 07:03:27 +0100
-Received: by mail-we0-f175.google.com with SMTP id x8so3501667wey.34
+	Sat, 16 Feb 2013 08:08:23 +0100
+Received: by mail-bk0-f53.google.com with SMTP id j10so1834033bkw.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Feb 2013 21:47:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:x-received:x-originating-ip:in-reply-to:references
-	:date:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=0GVTCBEOiiW45yrKsw8IbEessniPx5sipvVDd+7K2iI=;
-	b=P2MW1xYNjOltZGCWQu08IrhRKmCXyZh9yPBsRw66642yOTl8jkUX/mzkisT0ChuYFv
-	u8Hf6tJ3yTrrZ13/3U0r/1BWcM850VCwdex4XHQiEzMcF4RdzGa3cfAFVObRnT6AAusi
-	LIKDS336/0sJGsb5yCnL4aGbfT9EON1gSR8hy6pse5kiDv9xNzJCKz9R4nkhAMoxekvK
-	Q9ua2UEgLNOFHvbj6ZfKSGuZ5juPsAFAmQ/kPvXG1abLcZ2dMcSImcGguS6O/EL2tFyZ
-	sOvlhJiRAhntyzoKoRD+Ogh6KowgvcXOSjKvvwjC+o9Y1FhcLSmR7C/pBtABfMziovo+
-	VbWQ==
+	Fri, 15 Feb 2013 22:52:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=ttlpNA/dhwQPl2BQk+LvxVhGSn/qa18bHW2u51bpmG4=;
+	b=RCZpwXv8B9JdX5Mg8NX+u2tHox2ZJ0ZqicrGaMREDv2hZnyown19czL7Xi+VC12NIw
+	Mns9LJ5wh1PvyiPS3wKW/SevNLdVBV46pb4HW5ds65/qw1f9eVO+FtFwpGtK4iDXZNal
+	kfxToTZDey3jLnmILsrdnLGc2nnmNmPSsyLeCkYjLkYJmLP7s9j4f1n+rXgeCl7v1Pqc
+	OgTgjpAgk0aPlh1czQpAx8elejZgB8BOfhLikVapk7ivgor6+tP7OfcZMn3QFfQjoA2p
+	LwS9PfbftfpAQmDJWFYn6u9K8y7uZf9B2Uht6xvZrTNewROL6gCEhJz3WU8K7Wn+nVaU
+	DU0g==
+X-Received: by 10.204.127.6 with SMTP id e6mr1703939bks.13.1360997531094; Fri,
+	15 Feb 2013 22:52:11 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.194.80.2 with SMTP id n2mr8336990wjx.14.1360993641953; Fri,
-	15 Feb 2013 21:47:21 -0800 (PST)
-Received: by 10.216.32.133 with HTTP; Fri, 15 Feb 2013 21:47:21 -0800 (PST)
-X-Originating-IP: [203.193.158.21]
-In-Reply-To: <CAJTo0LZbQ2YSR5+1vSqChMDq85Rnj+WgMr=U4=rdrePBsp27KA@mail.gmail.com>
-References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
-	<511CAFF3.3090004@communistcode.co.uk>
-	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
-	<511CB7DD.4080407@communistcode.co.uk>
-	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
-	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
-	<CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
-	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
-	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
-	<CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
-	<511E200D.3000907@communistcode.co.uk>
-	<CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
-	<CAKSKmM3siHyHoNkqE02JQZcLBkkHKQyfpeTG2W1zfi+BVs0Tmg@mail.gmail.com>
-	<CAJTo0LZbQ2YSR5+1vSqChMDq85Rnj+WgMr=U4=rdrePBsp27KA@mail.gmail.com>
-Date: Sat, 16 Feb 2013 11:17:21 +0530
-Message-ID: <CAKSKmM061jii+YZzn-uBFuMoGW8eeR0y6OCoDkNxDwpTSr=gDA@mail.gmail.com>
-From: Sankar H Malarmani <sankar.m@hardcube.in>
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.204.25.141 with HTTP; Fri, 15 Feb 2013 22:51:49 -0800 (PST)
+In-Reply-To: <511E373D.1070109@nedap.com>
+References: <511E373D.1070109@nedap.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Sat, 16 Feb 2013 15:51:49 +0900
+X-Google-Sender-Auth: ov1_oztEaBAXqX_SFQO93oS1Ojs
+Message-ID: <CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnxRFq94zyxnPyRU/rzNX3q2m2QQ6QjMOSF9XXIX/vl0dEznokdyirhghGwIeHYXPT1uwNZ
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gtk errors in openembedded classis build
+Subject: Re: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,66 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2013 06:03:27 -0000
+X-List-Received-Date: Sat, 16 Feb 2013 07:08:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I just followed the instructions given in that toradex website.. Its what
-giving me the following error..
+Hi,
 
-/home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity/wpa-supplicant/
-wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
+> This is on a 64 debian machine, possibly the wrong path is searched?
 
-What I'm doing wrong here.. What should I do to overcome this.. ?
+If you doubt the PATH setting, you should check the output from:
+$ bitbake -e | grep '^export PATH'
 
-On Fri, Feb 15, 2013 at 8:42 PM, Burton, Ross <ross.burton@intel.com> wrote:
+-- 
+Takeshi Hamasaki
 
-> On 15 February 2013 14:59, Sankar H Malarmani <sankar.m@hardcube.in>
-> wrote:
-> > As I mentioned earlier I'm new this openembedded stuffs.. So, can you
-> > please guide me to build an image without hitting on any errors. Steps I
-> > should follow to get it..
-> > Your help is much appreciated..
+2013/2/15 Jaap de Jong <jaap.dejong@nedap.com>:
+> Hi All,
 >
-> Following the instructions on
+> if I do
 >
-> http://developer.toradex.com/software-resources/arm-family/linux/source-code/linux-%28colibri-t20%29-openembedded
-> will go a long way to helping - at the moment you're building the
-> wrong pieces.
+>     bitbake package-index
 >
-> Ross
+> it crashes with the message
+>
+>     | /bin/bash: opkg-make-index: command not found
+>
+> This is on a 64 debian machine, possibly the wrong path is searched?
+> (there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
+>
+> Is this a known problem?
+> Thanks!
+>
+> Jaap
+>
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
-
-
--- 
-Thanks & Regards
-*Sankar*
-*Junior Programmer
-*
-*
-*
-*HardCube IT Consultancy Private Limited*
-*II Floor , STPI - Software Technology Parks of India*
-*5 Rajiv Gandhi Salai*
-*Taramani, Chennai 600 113*
-*Ph: 91 - 44 - 3918 0857*
-*info@hardcube.in*
-*http://www.hardcube.in*
-**************
-*"The contents of this E-mail (including the contents of the enclosure/(s)
-or attachment/(s) if any) are privileged and confidential material of
-HardCube IT Consultancy Private Limited, and should not be disclosed to,
-used by or copied in any manner by anyone other than the intended
-addressee/(s).If this E-mail (including the enclosure/(s) or attachment/(s)
-if any) has been received in error, please advice the sender immediately
-and delete it from your system. The views expressed in this E-mail message
-(including the enclosure/(s) or attachment/(s) if any) are those of the
-individual sender, except where the sender expressly, and with authority,
-states them to be the views of "HardCube"."*
-***************
 
