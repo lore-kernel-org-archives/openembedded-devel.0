@@ -1,36 +1,36 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail-ea0-f177.google.com ([209.85.215.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U6mp6-0005K4-La
+	(envelope-from <martin.jansa@gmail.com>) id 1U6mqY-0005QQ-Ce
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Feb 2013 19:49:23 +0100
-Received: by mail-ee0-f49.google.com with SMTP id d4so2260657eek.22
+	Sat, 16 Feb 2013 19:51:07 +0100
+Received: by mail-ea0-f177.google.com with SMTP id n13so1823527eaa.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Feb 2013 10:33:15 -0800 (PST)
+	Sat, 16 Feb 2013 10:34:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ki1NyCdA78/X/k0VbvSFsEd/U19RAJXcX06HEdYYbrA=;
-	b=LW1fXcyrXtjWy/5JuHYeKkNwHxF1j5kKRqMTuhvVW1nwVDTy5aVnZq7pmUw3U0wlTM
-	3doiPkTG0m6WcgzKXBCj0sALcAkriyS7wSuiNoRlEnB5BAR0iQlXPrkrRA+T321h1mgK
-	6UHQcXj83ROZuxEejf4EAUB2ETS3kzHMffabd+VIWj71yYaAGJFdg45icyAii8aQimCm
-	k9BptGZm2oA90e/0NXMc1O/mOQbTqub+5cArJs36FGoCj0u0tHOK8hn+7+XhAVrAWbnP
-	1cftLTXDtkf6Qs2RVOuh0iekpvQj44xaPY4uvdpkedBjO2h14bXIJDXibRl8QP5Uvpw4
-	6LpQ==
-X-Received: by 10.14.5.6 with SMTP id 6mr23019066eek.42.1361039595120;
-	Sat, 16 Feb 2013 10:33:15 -0800 (PST)
+	bh=QND23ribp/32VgO1uY9gEnP06SHhQLJEzecnjfAWbmw=;
+	b=Cit9c/OUzBYXlxbHcMJHz5NETBvuLfh0bEiQiuvEd0/4rxf7MPoYeRvLEeeibIfr4y
+	Glgc0sJmrirnQfpNZhlVqmrJa0SZVMSgYB8Q0jCX11+FN3V+PaW1qJzGT21FbyrMUKoQ
+	3hcB6X/rD6gaplsHEvYkhpVkAlJopw+5KQL+6oTL2Zu/hEnfK4gA1ZQG8s0HLqp9pTXu
+	3cPHRf9/m9XhdtV9pCsO1R68LlIcOgPQqhpy+KCc+v+9MXXTU3sHGKvqjH1S+eX3Dllb
+	1GNkHIsq0IRc2aGGg31Ipx4qHlgoWK1ekETXZ669pgGp17q6KBTwgOCedD8xa6LZPNkl
+	RRYw==
+X-Received: by 10.14.205.68 with SMTP id i44mr23149012eeo.25.1361039685294;
+	Sat, 16 Feb 2013 10:34:45 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id q5sm89708590eeo.17.2013.02.16.10.33.14
+	by mx.google.com with ESMTPS id l8sm55664115een.10.2013.02.16.10.34.44
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 16 Feb 2013 10:33:14 -0800 (PST)
-Date: Sat, 16 Feb 2013 19:33:22 +0100
+	Sat, 16 Feb 2013 10:34:44 -0800 (PST)
+Date: Sat, 16 Feb 2013 19:34:52 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130216183322.GY3300@jama>
-References: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20130216183452.GZ3300@jama>
+References: <1360609028-8921-1-git-send-email-andrei@gherzan.ro>
 MIME-Version: 1.0
-In-Reply-To: <1360622110-15419-1-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1360609028-8921-1-git-send-email-andrei@gherzan.ro>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe 0/3] replace meta-oe's update-fonts.bbclass by oe-core's fontcache.bbclass
+Subject: Re: [meta-oe][PATCH 1/4] x264: Add patch to remove default flags -mcpu=cortex-a8 and -mfpu=neon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,63 +44,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Feb 2013 18:49:24 -0000
-X-Groupsio-MsgNum: 43202
+X-List-Received-Date: Sat, 16 Feb 2013 18:51:09 -0000
+X-Groupsio-MsgNum: 43203
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lYVfafuUkPqz/tKz"
+	protocol="application/pgp-signature"; boundary="H7BIH7T1fRJ3RGOi"
 Content-Disposition: inline
 
---lYVfafuUkPqz/tKz
-Content-Type: text/plain; charset=iso-8859-1
+--H7BIH7T1fRJ3RGOi
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 11, 2013 at 11:35:07PM +0100, Andreas M=FCller wrote:
-> The following changes since commit 61911b23099c2658186179504ded318c987b52=
-76:
->=20
->   ttf: introduce update-fonts bbclass and change all ttf recipes to use i=
-t (2013-02-06 15:16:01 +0100)
->=20
-> are available in the git repository at:
->   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git font-ca=
-che
->=20
-> Andreas M=FCller (3):
->       ttf-fonts: inherit oe-core's fontcache.bbclass instead of update-fo=
-nts
->       update-fonts.bbclass: remove - we now use oe-core's fontcache.bbcla=
-ss     Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->       font-update-common: remove
+On Mon, Feb 11, 2013 at 08:57:05PM +0200, Andrei Gherzan wrote:
+> -march flag is not in CFLAGS so this will always default to -mcpu=3Dcorte=
+x-a8
+> -mfpu=3Dneon. Obviously wrong for other machines.
 
-darn, I should have noticed that fontcache has the same functionality
-before introducing update-fonts. Thanks for cleanup, applied.
+All 4 applied
 
 >=20
->  meta-oe/classes/update-fonts.bbclass               |   40 --------------=
-------
->  .../font-update-common/update-fonts                |    4 --
->  .../font-update-common/font-update-common_0.1.bb   |   18 ---------
->  .../ttf-fonts/ttf-arphic-uming_20080216.bb         |    4 +-
->  .../recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb  |    4 +-
->  .../recipes-graphics/ttf-fonts/ttf-droid_git.bb    |    4 +-
->  .../recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb |    4 +-
->  .../ttf-fonts/ttf-hunkyfonts_0.3.0.bb              |    4 +-
->  .../ttf-fonts/ttf-liberation_0.2.bb                |    4 +-
->  .../recipes-graphics/ttf-fonts/ttf-mplus_027.bb    |    7 +--
->  .../ttf-fonts/ttf-sazanami_20040629.bb             |    4 +-
->  .../ttf-fonts/ttf-ubuntu-font-family_0.80.bb       |    4 +-
->  .../ttf-fonts/ttf-wqy-zenhei_0.6.26.bb             |    4 +-
->  meta-oe/recipes-graphics/ttf-fonts/ttf.inc         |    2 +-
->  14 files changed, 21 insertions(+), 86 deletions(-)
->  delete mode 100644 meta-oe/classes/update-fonts.bbclass
->  delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-upda=
-te-common/update-fonts
->  delete mode 100644 meta-oe/recipes-graphics/font-update-common/font-upda=
-te-common_0.1.bb
+> Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> ---
+>  .../don-t-default-to-cortex-a9-with-neon.patch     |   20 ++++++++++++++=
+++++++
+>  meta-oe/recipes-multimedia/x264/x264_git.bb        |    6 +++++-
+>  2 files changed, 25 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-multimedia/x264/x264/don-t-default-to=
+-cortex-a9-with-neon.patch
 >=20
+> diff --git a/meta-oe/recipes-multimedia/x264/x264/don-t-default-to-cortex=
+-a9-with-neon.patch b/meta-oe/recipes-multimedia/x264/x264/don-t-default-to=
+-cortex-a9-with-neon.patch
+> new file mode 100644
+> index 0000000..b844d88
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/x264/x264/don-t-default-to-cortex-a9-wit=
+h-neon.patch
+> @@ -0,0 +1,20 @@
+> +-march flag is not in CFLAGS so this will always default to -mcpu=3Dcort=
+ex-a8
+> +-mfpu=3Dneon.
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> +
+> +Index: git/configure
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- git.orig/configure	2013-02-10 16:26:40.666343682 +0200
+> ++++ git/configure	2013-02-10 16:27:49.198341677 +0200
+> +@@ -703,9 +703,6 @@
+> + fi
+> +
+> + if [ $asm =3D auto -a $ARCH =3D ARM ] ; then
+> +-    # set flags so neon is built by default
+> +-    echo $CFLAGS | grep -Eq '(-mcpu|-march|-mfpu)' || CFLAGS=3D"$CFLAGS=
+ -mcpu=3Dcortex-a8 -mfpu=3Dneon"
+> +-
+> +     if  cc_check '' '' '__asm__("rev ip, ip");' ; then      define HAVE=
+_ARMV6
+> +         cc_check '' '' '__asm__("movt r0, #0");'         && define HAVE=
+_ARMV6T2
+> +         cc_check '' '' '__asm__("vadd.i16 q0, q0, q0");' && define HAVE=
+_NEON
+> diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipe=
+s-multimedia/x264/x264_git.bb
+> index 7d7579f..056c25c 100644
+> --- a/meta-oe/recipes-multimedia/x264/x264_git.bb
+> +++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
+> @@ -4,9 +4,13 @@ HOMEPAGE =3D "http://www.videolan.org/developers/x264.ht=
+ml"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> =20
+> +PR =3D "r1"
+> +
+>  DEPENDS =3D "yasm-native"
+> =20
+> -SRC_URI =3D "git://git.videolan.org/x264.git"
+> +SRC_URI =3D "git://git.videolan.org/x264.git \
+> +    file://don-t-default-to-cortex-a9-with-neon.patch \
+> +    "
+>  SRCREV =3D "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
+> =20
+>  PV =3D "r2230+git"
 > --=20
-> 1.7.4.4
+> 1.7.9.5
 >=20
 >=20
 > _______________________________________________
@@ -111,16 +142,16 @@ te-common_0.1.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---lYVfafuUkPqz/tKz
+--H7BIH7T1fRJ3RGOi
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEf0PIACgkQN1Ujt2V2gBzqfACgsHG2fuCXv4WTniXEPbcoDAqX
-jbwAoKFM5eGFGS0K4MA5YKdog3KarBU/
-=lD3H
+iEYEARECAAYFAlEf0UwACgkQN1Ujt2V2gBxY5ACfTjS0LEnmbMqSlHCxNGBQYzZq
+eNMAn0phahBy3cmJzyy/Y0EukWwkh43P
+=er19
 -----END PGP SIGNATURE-----
 
---lYVfafuUkPqz/tKz--
+--H7BIH7T1fRJ3RGOi--
