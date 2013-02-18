@@ -1,37 +1,39 @@
-Received: from mail-da0-f48.google.com ([209.85.210.48])
+Received: from mail-vb0-f50.google.com ([209.85.212.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7WbJ-0001Tf-MT
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U7XNQ-0002rU-4W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 20:42:17 +0100
-Received: by mail-da0-f48.google.com with SMTP id v40so2568228dad.35
+	Mon, 18 Feb 2013 21:31:52 +0100
+Received: by mail-vb0-f50.google.com with SMTP id ft2so3798269vbb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 11:26:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8hM+EC9yNVHI8hf+x09LMBnFFFh2RS3Sgla4FrPavDY=;
-	b=Mzq0iA3JWEodJI6GagSMcHX6dQyUAOlImZIEbS647TeJjMNnGmXgrQAVOa3KQHJLIC
-	kT9kY3FWQcgKNgemVBdnfwtnDUi91jfzkIQRaj6H8VSdT/afYzepWXhDcHFwmGpNVTpb
-	8c49JhPdfmef9ZTrDnkWMq65fZUR/tHUXpR95TIrF526X2Sx+FkqrOOUEql4WiETLfr8
-	XXCFFYhSGdPfMTsxD6dNMswztFxHOPRG3AHlP5nRymSuMYPSG2R5GEzsWRIfg9tnJceE
-	tOVNpT/1UhjoemEBnhexofONyny6alRqsR3sqArAH1UWzSBg57jR1DM9pxYTVqpxtOqn
-	gvHw==
-X-Received: by 10.66.186.164 with SMTP id fl4mr38379475pac.51.1361215560673;
-	Mon, 18 Feb 2013 11:26:00 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id tm1sm15299207pbc.11.2013.02.18.11.25.57
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 11:25:58 -0800 (PST)
-Date: Mon, 18 Feb 2013 20:25:59 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130218192559.GI3300@jama>
-References: <1360603554-31515-1-git-send-email-ftonello@cercacor.com>
-	<20130216183711.GA3300@jama> <512274F6.4090002@felipetonello.com>
+	Mon, 18 Feb 2013 12:15:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=uEz4JpGKX1K9L9FZG6cMQx9uuWA5WGF97jukvHe/D2o=;
+	b=PeWGQQIcZfs1zAhnxGvfTBf0ZbECiFYmvurWppi73kTcojZ7g9wvz5fEsCgg1SGJtK
+	m97cq3u6wM5FJSNA7AJSMF3LWpvNdRfifmqNMocHU+lGT/QNVhGf6AX2JhndYR0tpGSc
+	OkMO3m9TeKGb9ahqndrooSEBUK8DpYF1bQvYZsq31GQej1aM1QadPrIKA0aJkQyRTCoo
+	R+wRp7dznrkF4fZKK1xSTEtSFze4obVSHrXbKOK5i+45JIfgQ4RIA1Qg8NYTIcB7vy2B
+	ImVWSHghNeMmUa13o+CJZ5HOWHJJS7W1nowCIZZ8cH1RILmPvuya1V61IcE03aulSoZL
+	N0/Q==
 MIME-Version: 1.0
-In-Reply-To: <512274F6.4090002@felipetonello.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] connman: added recipe libconnman-qt
+X-Received: by 10.52.65.147 with SMTP id x19mr15365611vds.27.1361218543504;
+	Mon, 18 Feb 2013 12:15:43 -0800 (PST)
+Received: by 10.52.185.168 with HTTP; Mon, 18 Feb 2013 12:15:43 -0800 (PST)
+In-Reply-To: <20130218185446.19879.81595@hoothoot>
+References: <20130218094145.29630.63354@hoothoot>
+	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
+	<20130218142026.7849.12017@hoothoot>
+	<CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
+	<20130218165351.14989.14162@hoothoot>
+	<CAF6bG8dwjBY-bQnb8oBRXFZqoK9NzA+T2RGd+=qe0ffZhgKkRA@mail.gmail.com>
+	<20130218185446.19879.81595@hoothoot>
+Date: Mon, 18 Feb 2013 21:15:43 +0100
+Message-ID: <CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: build dependency cycles in openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,276 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 19:42:17 -0000
-X-Groupsio-MsgNum: 43225
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Za/SMm3KZ11Dkftj"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Feb 2013 20:31:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Za/SMm3KZ11Dkftj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Feb 18, 2013 at 7:54 PM, Johannes Schauer <j.schauer@email.de> wrote:
+> Hi,
+>
+> Quoting Marko Lindqvist (2013-02-18 18:22:26)
+>> OE has both native build and cross-compile part, and problems can arise in
+>> native part too. One example is that pkg-config version used has not been
+>> updated for a while since build of newer version would depend on glib, which
+>> needs pkg-config to build...
+>
+> Great example! The same loop exists in binary distributions. Though there it is
+> a bit more involved since the notion of binary and source packages exists.
+> Therefor the loop you mention is not between the pkg-config and glib source
+> packages but between the pkg-config source package and the glib development
+> headers binary package libglib2.0-dev. So while the glib source package can be
+> built without pkg-config if ./configure is called with manually supplied
+> arguments like this:
+>
+>     ./configure \
+>         PKG_CONFIG=false \
+>         ZLIB_CFLAGS=-I/usr/include ZLIB_LIBS="-L/usr/lib -lz" \
+>         LIBFFI_CFLAGS=-I/usr/include LIBFFI_LIBS="-L/usr/lib -lffi" \
+>         --disable-libelf \
+>         --with-pcre=internal
+>
+> The dependency loop does still exist because the binary package libglib2.0-dev
+> can only be installed if the pkg-config binary package exists. But the
+> pkg-config binary package can only be built from the pkg-config source package
+> using the uninstallable libglib2.0-dev binary package....
+>
+> So while it is good to hear an example for a dependency cycle in OpenEmbedded,
+> I now wonder why I didnt find more instances where those impact the development
+> and deployment of the OpenEmbedded distribution for new platforms?
+>
+> cheers, josch
+>
+FWIW long time ago in meta-oe commit
+5b8522e3b592c96ec9325aff4bbaa68972e52d5b gvfs-gdu-volume-monitor was
+spitted out into an own recipe to break dependency loop for gvfs.
 
-On Mon, Feb 18, 2013 at 10:37:42AM -0800, Felipe Ferreri Tonello wrote:
-> Hi Martin,
->=20
-> On 02/16/2013 10:37 AM, Martin Jansa wrote:
-> > On Mon, Feb 11, 2013 at 09:25:53AM -0800, eu@felipetonello.com wrote:
-> >> From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> >>
-> >> This recipe provides the Qt library and QML plugins for connman.
-> >
-> > Fails in do_install (possibly issue with dash)
-> >
-> > ERROR: Logfile of failure stored in: /home/jenkins/oe/shr-core-branches=
-/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/t=
-emp/log.do_install.20933
-> > Log data follows:
-> > | DEBUG: Executing shell function do_install
-> > | NOTE: make -j 8 MAKEFLAGS=3D install
-> > | cd libconnman-qt/ && make -f Makefile install
-> > | make[1]: Entering directory `/home/jenkins/oe/shr-core-branches/shr-c=
-ore/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/git/lib=
-connman-qt'
-> > | install -m 755 -p "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.=
-so.0.3.0"
-> > | install: cannot create regular file `/usr/lib/libconnman-qt4.so.0.3.0=
-': Permission denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so"
-> > | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so': Perm=
-ission denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so.0"
-> > | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so.0': Pe=
-rmission denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so.0.3"
-> > | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so.0.3': =
-Permission denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | install -m 644 -p "libconnman-qt4.prl" "/usr/lib/libconnman-qt4.prl"
-> > | install: cannot create regular file `/usr/lib/libconnman-qt4.prl': Pe=
-rmission denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | install -m 644 -p "connman-qt4.pc" "/usr/lib/connman-qt4.pc"
-> > | install: cannot create regular file `/usr/lib/connman-qt4.pc': Permis=
-sion denied
-> > | make[1]: [install_target] Error 1 (ignored)
-> > | mkdir: cannot create directory `/usr/include/connman-qt/': Permission=
- denied
-> > | make[1]: *** [install_headers] Error 1
-> > | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-co=
-re/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/git/libc=
-onnman-qt'
-> > | make: *** [sub-libconnman-qt-install_subtargets-ordered] Error 2
-> > | ERROR: oe_runmake failed
-> > | ERROR: Function failed: do_install (see /home/jenkins/oe/shr-core-bra=
-nches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0=
--r0/temp/log.do_install.20933 for further information)
-> > NOTE: recipe libconnman-qt-0.4.0-r0: task do_install: Failed
-> >
-> > COmplete log:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130215_060633.log/
->=20
-> It seems that the INSTALL_ROOT wasn't set to ${D}.
->=20
-> Can I have the run.do_install log?
+Andreas
 
-I've already removed tmp-eglibc and now new world build is running, but
-I had the same issue with nodejs when build machine is using dash
 
-http://git.openembedded.org/meta-openembedded/commit/?id=3D4128325a4c87bcde=
-6ac6ffe5dbf5d6d057ee4804
-
-If it fails again, I'll use this for test first, and only if it does not
-help I'll send you run.do_install.
-
-Cheers,
-
->=20
-> Felipe
->=20
-> >
-> >>
-> >> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> >> ---
-> >>   ...-to-disable-qml-plugin-and-test-program-t.patch |   37 +++++++++++
-> >>   .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++=
-++++++++++
-> >>   2 files changed, 106 insertions(+)
-> >>   create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/00=
-01-added-flags-to-disable-qml-plugin-and-test-program-t.patch
-> >>   create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.=
-4.0.bb
-> >>
-> >> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added=
--flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/=
-libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test=
--program-t.patch
-> >> new file mode 100644
-> >> index 0000000..6ec084d
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-=
-to-disable-qml-plugin-and-test-program-t.patch
-> >> @@ -0,0 +1,37 @@
-> >> +From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
-> >> +From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> >> +Date: Mon, 7 Jan 2013 17:13:22 -0800
-> >> +Subject: [PATCH] added flags to disable qml plugin and test program to
-> >> + compile
-> >> +
-> >> +This is usefull when there is no need to compile test program and qml=
- plugin.
-> >> +
-> >> +Upstream-Status: Accepted
-> >> +
-> >> +Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> >> +---
-> >> + connman-qt.pro |   11 ++++++++++-
-> >> + 1 file changed, 10 insertions(+), 1 deletion(-)
-> >> +
-> >> +diff --git a/connman-qt.pro b/connman-qt.pro
-> >> +index 7d9ec99..425c41f 100644
-> >> +--- a/connman-qt.pro
-> >> ++++ b/connman-qt.pro
-> >> +@@ -1,4 +1,13 @@
-> >> + TEMPLATE =3D subdirs
-> >> +-SUBDIRS +=3D libconnman-qt test plugin
-> >> ++SUBDIRS +=3D libconnman-qt
-> >> + CONFIG +=3D ordered
-> >> +
-> >> ++# CONFIG flag to disable test program
-> >> ++!notest {
-> >> ++    SUBDIRS +=3D test
-> >> ++}
-> >> ++
-> >> ++# CONFIG flag to disable qml plugin
-> >> ++!noplugin {
-> >> ++    SUBDIRS +=3D plugin
-> >> ++}
-> >> +--
-> >> +1.7.9.5
-> >> +
-> >> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b=
-/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
-> >> new file mode 100644
-> >> index 0000000..2c33b49
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
-> >> @@ -0,0 +1,69 @@
-> >> +DESCRIPTION =3D "Qt Library for ConnMan"
-> >> +HOMEPAGE =3D "https://github.com/nemomobile/libconnman-qt"
-> >> +LICENSE =3D "Apache-2.0"
-> >> +LIC_FILES_CHKSUM =3D "file://libconnman-qt/clockmodel.h;endline=3D8;m=
-d5=3Dea9f724050803f15d2d900ce3c5dac88"
-> >> +
-> >> +SECTION =3D "qt/lib"
-> >> +
-> >> +PR =3D "r0"
-> >> +
-> >> +inherit qt4x11 pkgconfig
-> >> +
-> >> +RDEPENDS_${PN} =3D "connman"
-> >> +RDEPENDS_${PN}-plugin =3D "${PN}"
-> >> +
-> >> +PROVIDES +=3D "${PN}-plugin"
-> >> +
-> >> +PACKAGES =3D+ "${PN}-plugin ${PN}-plugin-dbg"
-> >> +RRECOMMENDS_${PN} =3D "${PN}-plugin"
-> >> +
-> >> +# this is for users to bbappend this recipe and change it
-> >> +BRANCH =3D "master"
-> >> +TAG =3D "${PV}"
-> >> +SRCREV =3D "${AUTOREV}"
-> >> +
-> >> +SRC_URI =3D " \
-> >> +  git://github.com/nemomobile/${PN}.git;branch=3D${BRANCH};tag=3D${TA=
-G} \
-> >> +  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.pa=
-tch \
-> >> +"
-> >> +
-> >> +S =3D "${WORKDIR}/git"
-> >> +
-> >> +QT_IMPORTS_DIR =3D "${libdir}/qt4/imports"
-> >> +# the plugin target needs to be the same as 'target.path' and 'qmldir=
-=2Epath' in ${S}/plugin/plugin.pro
-> >> +PLUGINS_TARGET =3D "${QT_IMPORTS_DIR}/MeeGo/Connman"
-> >> +
-> >> +FILES_${PN} =3D " \
-> >> +  ${libdir}/libconnman-qt4${SOLIBS} \
-> >> +"
-> >> +
-> >> +FILES_${PN}-dev =3D " \
-> >> +  ${includedir}/connman-qt/* \
-> >> +  ${libdir}/libconnman-qt4${SOLIBSDEV} \
-> >> +  ${libdir}/libconnman-qt4.prl \
-> >> +  ${libdir}/pkgconfig/connman-qt4.pc \
-> >> +  ${libdir}/connman-qt4.pc \
-> >> +"
-> >> +
-> >> +FILES_${PN}-plugin =3D " \
-> >> +  ${PLUGINS_TARGET}/qmldir \
-> >> +  ${PLUGINS_TARGET}/lib*.so \
-> >> +"
-> >> +
-> >> +FILES_${PN}-plugin-dbg =3D " \
-> >> +  ${PLUGINS_TARGET}/.debug \
-> >> +  ${PLUGINS_TARGET}/.debug/* \
-> >> +"
-> >> +
-> >> +EXTRA_QMAKEVARS_PRE =3D " \
-> >> +  CONFIG+=3Dnotest \
-> >> +"
-> >> +
-> >> +do_configure_prepend() {
-> >> +  # Hack *.pro variables
-> >> +  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],=
-${QT_IMPORTS_DIR},g' '{}' ';'
-> >> +}
-> >> +
-> >> +do_install() {
-> >> +  cd ${S} && (INSTALL_ROOT=3D${D} oe_runmake install)
-> >> +}
-> >> --
-> >> 1.7.9.5
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Za/SMm3KZ11Dkftj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEigEcACgkQN1Ujt2V2gBydpACfWkWv6EJQVVxOto+r4XAQofEV
-Ka0AnA8pJ3z5SN298CO1wkVZesMdACHo
-=q7AE
------END PGP SIGNATURE-----
-
---Za/SMm3KZ11Dkftj--
