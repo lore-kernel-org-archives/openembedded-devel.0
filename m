@@ -1,33 +1,26 @@
-Received: from mail-bk0-f54.google.com ([209.85.214.54])
+Received: from mout.web.de ([212.227.15.4])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1U7Q3n-0006rY-27
+	(envelope-from <j.schauer@email.de>) id 1U7Rpb-0001iS-W6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 13:43:07 +0100
-Received: by mail-bk0-f54.google.com with SMTP id w5so2506797bku.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 04:26:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=V1YAvSZS8IQr2FcqHLkOBrxiM1wJSYOFiKPBkwJUiNY=;
-	b=HefGkbESCKnpPNUzc9VcbEoFCc4v65jKF5FVUyBBj4jLBjJHofLYmaHU6V3YbfQ5sG
-	6iHECto1VNs+30eUdBi+wnbho52tZYDjb3LjPvL+bA0JBOX6u/FXEm91az12YRRvopQL
-	ArFCpxpFy+6MQSHbvXD1HVGLF9I6ZqbGSDf9c8fPLWQSqNTZZSivUDweQ/ZnR6vG/b95
-	xb6EZ8jsHaErAj0ZDiU0pKJseijV9I2aOqOpRpA6QChLkMpSUQiY8kJ9IA+iOWdppxIX
-	b3W70wz4nXTs4tnSlMRf6VifHE0d7WDiqMU1nSAXzddDKnJtqaa6a7+AGf09/r2THLpz
-	NXOQ==
-X-Received: by 10.204.128.151 with SMTP id k23mr4557977bks.65.1361190419109;
-	Mon, 18 Feb 2013 04:26:59 -0800 (PST)
+	Mon, 18 Feb 2013 15:36:44 +0100
+Received: from localhost ([212.201.44.247]) by smtp.web.de (mrweb101) with
+	ESMTPSA (Nemesis) id 0MKJ7S-1U804r2Bao-001CBu for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Feb 2013 15:20:27 +0100
 MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.204.25.141 with HTTP; Mon, 18 Feb 2013 04:26:38 -0800 (PST)
-In-Reply-To: <20130218094145.29630.63354@hoothoot>
-References: <20130218094145.29630.63354@hoothoot>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Mon, 18 Feb 2013 21:26:38 +0900
-X-Google-Sender-Auth: 3XGdWWUx-9KctiCvNXDr2yWC7mQ
-Message-ID: <CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
+From: Johannes Schauer <j.schauer@email.de>
+User-Agent: alot/0.3.3+
 To: openembedded-devel@lists.openembedded.org
+References: <20130218094145.29630.63354@hoothoot>
+	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
+In-Reply-To: <CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
+Message-ID: <20130218142026.7849.12017@hoothoot>
+Date: Mon, 18 Feb 2013 15:20:26 +0100
+X-Provags-ID: V02:K0:KjMn1oCVNaCrwdr+xSZZ4ksNLt3DDlh4Bon1/or4xsJ
+	uD6Gm9mIcvL/Fja6AocC1PhhrGA1HRqHGVRMGvC0ZHqwit2YwZ
+	WDCXEEFBG9YT/bHVvQI2b6RCyaFVzXpVsZpDj7jZVUx4OrJ0s+
+	5l+ILPgHfauQ0Dwsbp+aabRGtl9Vbx6bk+9zKYX22TmFsGYq41
+	4nPdIsE5+7n5uXiMSGP0Q==
 Subject: Re: build dependency cycles in openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,59 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 12:43:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Feb 2013 14:37:17 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-you can find the line like:
-DEPENDS = "XXXXXX-native"
-in some recipes.
+Quoting Takeshi Hamasaki (2013-02-18 13:26:38)
+> you can find the line like:
+> DEPENDS =3D "XXXXXX-native"
+> in some recipes.
+> =
 
-So, you can describe dependency to native tools from target build if necessary.
-I guess this is the answer for the sentence what I have read the
-second paragraph of [1]:
+> So, you can describe dependency to native tools from target build if nece=
+ssary.
 
-> Since the full distribution for the new architecture is not yet available,
-> dependency cycles have to be broken during cross as well as native compilation.
+Sure, when cross compiling you can satisfy lots of dependencies by native
+binaries but others need the foreign version. In Debian based distribution,
+this distinction for cross build dependency resolution is made using
+Multi-Arch.
 
-I can't answer "how" the dependency to XXXX-native chosen, in which
-recipe and to which native tools.
-When I start to try OpenEmbedded, the dependencies were already well-built.
-Maybe there is someone who can answer for deeper question.
+Since some of the cross build dependencies can be satisfied by (already
+available) native tools, the dependency cycle situation is *much* less seve=
+re
+during cross compilation than it is during native compilation.
 
-Regards,
--- 
-Takeshi Hamasaki
+But still, even when one wants to cross compile a native, minimal Debian bu=
+ild
+system (just containing the init, shell and compiler) one runs into build
+dependency cycles because some dependencies have to be satisfied by foreign
+(not yet built) binaries and thereby creating some dependency cycles.
 
-2013/2/18 Johannes Schauer <j.schauer@email.de>:
-> Dear list,
->
-> I am analyzing build dependency graphs for rpm and deb based binary
-> distributions. I gave a talk about my work on this years FOSDEM [1]. To improve
-> my work I was looking into Gentoo and Openembedded.
->
-> While build dependency cycles in Gentoo are easily taken care of by manually
-> compiling some source packages with different USE flags, how is this topic
-> handled in OpenEmbedded?
->
-> Searching the wiki, mailinglist and internet I was not able to find good
-> sources which explain how serious the problem of build dependency cycles in
-> OpenEmbedded is when bootstrapping a new target from nothing. I also did not
-> find how build dependency cycles are dealt with, should they occur.
->
-> Could you direct me to some resources which document the status and handling of
-> build dependency cycles in OpenEmbedded?
->
-> Thanks!
->
-> cheers, josch
->
-> [1] https://fosdem.org/2013/schedule/event/debian_bootstrap/
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Is it different in OpenEmbedded?
+
+cheers, josch
 
 
