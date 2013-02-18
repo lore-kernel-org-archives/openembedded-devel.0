@@ -1,36 +1,27 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U7Mxp-0001Ln-Hw
+	(envelope-from <jaap.dejong@nedap.com>) id 1U7N8P-0001dY-6H
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 10:24:59 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id F3F32D22E8; Mon, 18 Feb 2013 10:08:41 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 347C4D22B3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 10:08:09 +0100 (CET)
-Message-ID: <5121EF74.1030802@linaro.org>
-Date: Mon, 18 Feb 2013 10:08:04 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130105 Thunderbird/17.0.2
+	Mon, 18 Feb 2013 10:35:43 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Mon, 18 Feb 2013
+	10:19:33 +0100
+X-TM-IMSS-Message-ID: <1b449db800004c9b@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 1b449db800004c9b ;
+	Mon, 18 Feb 2013 10:19:29 +0100
+Message-ID: <5121F224.4080906@nedap.com>
+Date: Mon, 18 Feb 2013 10:19:32 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<1360234263-18278-6-git-send-email-marcin.juszkiewicz@linaro.org>
-	<20130216052110.GV3300@jama>
-In-Reply-To: <20130216052110.GV3300@jama>
-Subject: Re: [meta-oe][PATCH 5/8] libunwind: add 1.1 with preliminary aarch64 patch
+References: <511E373D.1070109@nedap.com>
+	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
+In-Reply-To: <CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 09:25:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Feb 2013 09:35:44 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-W dniu 16.02.2013 06:21, Martin Jansa pisze:
-> On Thu, Feb 07, 2013 at 11:51:00AM +0100, Marcin Juszkiewicz wrote:
->> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
->> ---
->>  meta-oe/recipes-support/libunwind/files/aarch64.patch | 19 +++++++++++++++++++
->>  meta-oe/recipes-support/libunwind/libunwind.inc       | 12 ++++++++++++
->>  meta-oe/recipes-support/libunwind/libunwind_1.1.bb    |  6 ++++++
->>  3 files changed, 37 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/libunwind/files/aarch64.patch
->>  create mode 100644 meta-oe/recipes-support/libunwind/libunwind.inc
->>  create mode 100644 meta-oe/recipes-support/libunwind/libunwind_1.1.bb
-> 
-> Does not build for qemuarm:
 
-10:07 hrw@puchatek:build$ find tmp-eglibc/deploy/ipk/ -name libunwind_1.1*
-tmp-eglibc/deploy/ipk/armv5te/libunwind_1.1-r0_armv5te.ipk
-tmp-eglibc/deploy/ipk/armv7ahf-vfp-neon/libunwind_1.1-r0_armv7ahf-vfp-neon.ipk
+On 02/16/2013 07:51 AM, Takeshi Hamasaki wrote:
 
-Built fine for qemuarm and genericarmv7a here.
+>> if I do
+>>
+>>      bitbake package-index
+>>
+>> it crashes with the message
+>>
+>>      | /bin/bash: opkg-make-index: command not found
+>>
+>> This is on a 64 debian machine, possibly the wrong path is searched?
+>> (there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
+>>
+>>
+
+> If you doubt the PATH setting, you should check the output from:
+> $ bitbake -e | grep '^export PATH'
+>
+
+Well opkg-make-index is in the path.
+
+Something strange is happening here.
+If I edit package-index.bb and add a call to opkg-make-index
+
+    do_package_index() {
+         set -ex
+    opkg-make-index   ### ADDED CODE
+         ${PACKAGEINDEXES}
+         set +ex
+    }
+
+
+it shows an error message when invoking bitbake package-index showing 
+that opkg-make-index is actualy working...
+
+    ///
+    .../build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/usr/bin/opkg-make-index
+    [-h] [-s] [-m] [-l Packages.filelist] [-p Packages] [-r
+    Packages.old] [-L localesdir] [-v] packagesdir
+    NOTE: package package-index-1.0-r0: task do_package_index: Failed
+    ///
+
+Any idea?
+
+
 
 
