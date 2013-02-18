@@ -1,27 +1,24 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mout.web.de ([212.227.15.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1U7N8P-0001dY-6H
+	(envelope-from <j.schauer@email.de>) id 1U7NgA-0002wb-De
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 10:35:43 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Mon, 18 Feb 2013
-	10:19:33 +0100
-X-TM-IMSS-Message-ID: <1b449db800004c9b@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 1b449db800004c9b ;
-	Mon, 18 Feb 2013 10:19:29 +0100
-Message-ID: <5121F224.4080906@nedap.com>
-Date: Mon, 18 Feb 2013 10:19:32 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Mon, 18 Feb 2013 11:10:36 +0100
+Received: from localhost ([212.201.44.247]) by smtp.web.de (mrweb003) with
+	ESMTPSA (Nemesis) id 0Lfipe-1UejuT0iT4-00oc0F for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Feb 2013 10:41:47 +0100
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <511E373D.1070109@nedap.com>
-	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
-In-Reply-To: <CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: opkg-make-index not found
+Message-ID: <20130218094145.29630.63354@hoothoot>
+From: Johannes Schauer <j.schauer@email.de>
+User-Agent: alot/0.3.3+
+Date: Mon, 18 Feb 2013 10:41:45 +0100
+X-Provags-ID: V02:K0:Gh1ovPMMCvGI4Uo1yQXASPACbfKLrK5q8JWshPPpfv3
+	xvJVy1On0e6NhbfgqUoZ2O1uzgQC0R2ck8kfRg/VBoDj5DihSk
+	gF9yc2pRirWGaKteavN8B7+dU09u+s+7zBgWLojdhakoI3X+2T
+	8fvfniilnwIiAmhJ7G+owB5fWfPJSnxV1PevfEMwYdf5PFyLpe
+	2HcccpRWMB1YEGrDEfP1w==
+Subject: build dependency cycles in openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,55 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 09:35:44 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Feb 2013 10:10:41 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
+Dear list,
 
-On 02/16/2013 07:51 AM, Takeshi Hamasaki wrote:
+I am analyzing build dependency graphs for rpm and deb based binary
+distributions. I gave a talk about my work on this years FOSDEM [1]. To imp=
+rove
+my work I was looking into Gentoo and Openembedded.
 
->> if I do
->>
->>      bitbake package-index
->>
->> it crashes with the message
->>
->>      | /bin/bash: opkg-make-index: command not found
->>
->> This is on a 64 debian machine, possibly the wrong path is searched?
->> (there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
->>
->>
+While build dependency cycles in Gentoo are easily taken care of by manually
+compiling some source packages with different USE flags, how is this topic
+handled in OpenEmbedded?
 
-> If you doubt the PATH setting, you should check the output from:
-> $ bitbake -e | grep '^export PATH'
->
+Searching the wiki, mailinglist and internet I was not able to find good
+sources which explain how serious the problem of build dependency cycles in
+OpenEmbedded is when bootstrapping a new target from nothing. I also did not
+find how build dependency cycles are dealt with, should they occur.
 
-Well opkg-make-index is in the path.
+Could you direct me to some resources which document the status and handlin=
+g of
+build dependency cycles in OpenEmbedded?
 
-Something strange is happening here.
-If I edit package-index.bb and add a call to opkg-make-index
+Thanks!
 
-    do_package_index() {
-         set -ex
-    opkg-make-index   ### ADDED CODE
-         ${PACKAGEINDEXES}
-         set +ex
-    }
+cheers, josch
 
-
-it shows an error message when invoking bitbake package-index showing 
-that opkg-make-index is actualy working...
-
-    ///
-    .../build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/usr/bin/opkg-make-index
-    [-h] [-s] [-m] [-l Packages.filelist] [-p Packages] [-r
-    Packages.old] [-L localesdir] [-v] packagesdir
-    NOTE: package package-index-1.0-r0: task do_package_index: Failed
-    ///
-
-Any idea?
-
-
+[1] https://fosdem.org/2013/schedule/event/debian_bootstrap/
 
 
