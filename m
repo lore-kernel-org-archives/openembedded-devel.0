@@ -1,36 +1,42 @@
-Received: from mail-vc0-f178.google.com ([209.85.220.178])
+Received: from mail-qe0-f53.google.com ([209.85.128.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <cazfi74@gmail.com>) id 1U7Ufi-0006z1-ND
+	(envelope-from <eu@felipetonello.com>) id 1U7VqX-0000Do-UZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 18:38:36 +0100
-Received: by mail-vc0-f178.google.com with SMTP id m8so3732787vcd.9
+	Mon, 18 Feb 2013 19:53:50 +0100
+Received: by mail-qe0-f53.google.com with SMTP id 1so2640951qee.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 09:22:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=BQsQxE/vkMald+wUnmEdRXvgMGid5jNKPPXAhgPHWQg=;
-	b=ggVLO6X0uVrTXUWMonkbaiYRshy9cOu3gn9JxMoEEr/mS+dxUfQT8V355+bA1/KIFj
-	Pmhg8/gGjoHUoK64gfokGaAHBMimOKBrZDOSsO4QaP5Nt9/kGBvpd7qXk+v5pjJYbipa
-	jPN0/P4vBu2UILlHWqDYKHuWwbM8+7/WRxqjRRpGVvvbmqjaj51ZoJ/Bey1yAUn1t9Y0
-	GkzZanXI2ovkd6Hngj5Ujf6pdUscSAKYvoi5h3ftPXhYJ8bWev7Q5rIeoePfbSkvQz3W
-	oAwFNQtOFgOSUsRt3o/sxGhp/y581vPPyxUfrlRnBoc1R1BsNoXydmQ7MtrKgMJ7XLCs
-	D9Tg==
+	Mon, 18 Feb 2013 10:37:41 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
+	:references:in-reply-to:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=PSbo7/mM2P1nMsUc1C+nzEqBtRWE/fJRnx2ioahmZFk=;
+	b=DjEvtuY9pg97ktJqHUDgpvidWLMnZY2zP1h17JV2XyfGdjeEvJiMEWBBHe7BR1COSc
+	7a1x+RXv386oxsLoAJYhmUPk6+jkT6xIOvPjKMfazCzKOjHWju9EGaYEVLKkIoyOp7oR
+	WJebO6Svqj2A00V1Jj3xTCXiHz724Qc6WgkVR6OyOXtyjs+k6C9JBgZyVWgg4tBJsYnj
+	NxkZtJ2MCZp+Zm4P8ESdLmOJw3E/XpXKnWpxMGUk4NFHsPwSd5TTYQEhyUFE0oPN/7kI
+	RzS5CMJMz4zmtSKnbN/btcWEsbIKuX4PuUFnXj4cd3Pmh+HVNAKxlA9JWj7fmxphbB4K
+	pBdA==
+X-Received: by 10.224.203.131 with SMTP id fi3mr902907qab.77.1361212661189;
+	Mon, 18 Feb 2013 10:37:41 -0800 (PST)
+Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPS id hn9sm25879391qab.8.2013.02.18.10.37.39
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 18 Feb 2013 10:37:39 -0800 (PST)
+Message-ID: <512274F6.4090002@felipetonello.com>
+Date: Mon, 18 Feb 2013 10:37:42 -0800
+From: Felipe Ferreri Tonello <eu@felipetonello.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-X-Received: by 10.52.89.242 with SMTP id br18mr14528646vdb.22.1361208146366;
-	Mon, 18 Feb 2013 09:22:26 -0800 (PST)
-Received: by 10.58.80.2 with HTTP; Mon, 18 Feb 2013 09:22:26 -0800 (PST)
-In-Reply-To: <20130218165351.14989.14162@hoothoot>
-References: <20130218094145.29630.63354@hoothoot>
-	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
-	<20130218142026.7849.12017@hoothoot>
-	<CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
-	<20130218165351.14989.14162@hoothoot>
-Date: Mon, 18 Feb 2013 19:22:26 +0200
-Message-ID: <CAF6bG8dwjBY-bQnb8oBRXFZqoK9NzA+T2RGd+=qe0ffZhgKkRA@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: build dependency cycles in openembedded
+References: <1360603554-31515-1-git-send-email-ftonello@cercacor.com>
+	<20130216183711.GA3300@jama>
+In-Reply-To: <20130216183711.GA3300@jama>
+X-Gm-Message-State: ALoCoQmbl514hHvVrZbcRX/nsHkSqPSQZAb0hPsCjxT924UgZ0TkZHpPOG9+QmTC81m5jRedNyQ4
+Subject: Re: [meta-oe][PATCH] connman: added recipe libconnman-qt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,61 +50,205 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 17:38:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Feb 2013 18:53:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 18 February 2013 18:53, Johannes Schauer <j.schauer@email.de> wrote:
-> Hi,
->
-> Quoting Takeshi Hamasaki (2013-02-18 16:07:36)
->> Before continuing to write reply,
->> I want to make sure about the usage of the word "native":
->>
->> in OpenEmbedded recipe, let's say, when you work on a x86-64 system to build
->> for target system which has ARM architecture,
->>
->> if you want to borrow a xz tool from x86-64 environment: you can write
->>  DEPENDS = xz-native
->>
->> if you depends on xz tool build on target environment: you just write
->>  DEPENDS = xz
->>
->> Is this the custom you assume?
->>
->> What I had to find was the word "native" is used to point the target environment
->> in [1].
->
-> The terminology can indeed become very confusing. In our setup we use the GNU
-> terminology for cross compilation.
->
->        build machine
->            The machine the package is built on.
->
->        host machine
->            The machine the package is built for.
->
-> In some tools for dependency analysis we develop (dose3) we also use the terms
-> "native" and "target". For cross compilation, native would be the build
-> architecture and target would be the host architecture. By your explanation
-> above, the terms seem to have the same meaning in OpenEmbedded so we seem to be
-> talking about the same things. :)
+Hi Martin,
 
- "Native" indeed means binaries that can be run on build architecture.
-I think term comes from the fact that they are build as native build,
-not cross-compiled. I get more confused when I want to refer something
-that's needed in build system prior to OpenEmbedded build, the OE
-dependencies. I don't know what's the official term in OpenEmbedded
-lingo, but I speak of "build host binaries". Anyway, "native" are
-something that are still built as part of OpenEmbedded build process,
-such as cross-compiler to be later used in producing binaries for the
-target. That might be important for your original question about
-cyclic (/infinite recursion) dependencies. OE has both native build
-and cross-compile part, and problems can arise in native part too. One
-example is that pkg-config version used has not been updated for a
-while since build of newer version would depend on glib, which needs
-pkg-config to build...
+On 02/16/2013 10:37 AM, Martin Jansa wrote:
+> On Mon, Feb 11, 2013 at 09:25:53AM -0800, eu@felipetonello.com wrote:
+>> From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>>
+>> This recipe provides the Qt library and QML plugins for connman.
+>
+> Fails in do_install (possibly issue with dash)
+>
+> ERROR: Logfile of failure stored in: /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/temp/log.do_install.20933
+> Log data follows:
+> | DEBUG: Executing shell function do_install
+> | NOTE: make -j 8 MAKEFLAGS= install
+> | cd libconnman-qt/ && make -f Makefile install
+> | make[1]: Entering directory `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/git/libconnman-qt'
+> | install -m 755 -p "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so.0.3.0"
+> | install: cannot create regular file `/usr/lib/libconnman-qt4.so.0.3.0': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so"
+> | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so.0"
+> | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so.0': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | ln -f -s "libconnman-qt4.so.0.3.0" "/usr/lib/libconnman-qt4.so.0.3"
+> | ln: failed to create symbolic link `/usr/lib/libconnman-qt4.so.0.3': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | install -m 644 -p "libconnman-qt4.prl" "/usr/lib/libconnman-qt4.prl"
+> | install: cannot create regular file `/usr/lib/libconnman-qt4.prl': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | install -m 644 -p "connman-qt4.pc" "/usr/lib/connman-qt4.pc"
+> | install: cannot create regular file `/usr/lib/connman-qt4.pc': Permission denied
+> | make[1]: [install_target] Error 1 (ignored)
+> | mkdir: cannot create directory `/usr/include/connman-qt/': Permission denied
+> | make[1]: *** [install_headers] Error 1
+> | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/git/libconnman-qt'
+> | make: *** [sub-libconnman-qt-install_subtargets-ordered] Error 2
+> | ERROR: oe_runmake failed
+> | ERROR: Function failed: do_install (see /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libconnman-qt/0.4.0-r0/temp/log.do_install.20933 for further information)
+> NOTE: recipe libconnman-qt-0.4.0-r0: task do_install: Failed
+>
+> COmplete log:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20130215_060633.log/
 
+It seems that the INSTALL_ROOT wasn't set to ${D}.
 
- - ML
+Can I have the run.do_install log?
+
+Felipe
+
+>
+>>
+>> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>> ---
+>>   ...-to-disable-qml-plugin-and-test-program-t.patch |   37 +++++++++++
+>>   .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++++++++++++
+>>   2 files changed, 106 insertions(+)
+>>   create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>>   create mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>>
+>> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> new file mode 100644
+>> index 0000000..6ec084d
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> @@ -0,0 +1,37 @@
+>> +From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
+>> +From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>> +Date: Mon, 7 Jan 2013 17:13:22 -0800
+>> +Subject: [PATCH] added flags to disable qml plugin and test program to
+>> + compile
+>> +
+>> +This is usefull when there is no need to compile test program and qml plugin.
+>> +
+>> +Upstream-Status: Accepted
+>> +
+>> +Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>> +---
+>> + connman-qt.pro |   11 ++++++++++-
+>> + 1 file changed, 10 insertions(+), 1 deletion(-)
+>> +
+>> +diff --git a/connman-qt.pro b/connman-qt.pro
+>> +index 7d9ec99..425c41f 100644
+>> +--- a/connman-qt.pro
+>> ++++ b/connman-qt.pro
+>> +@@ -1,4 +1,13 @@
+>> + TEMPLATE = subdirs
+>> +-SUBDIRS += libconnman-qt test plugin
+>> ++SUBDIRS += libconnman-qt
+>> + CONFIG += ordered
+>> +
+>> ++# CONFIG flag to disable test program
+>> ++!notest {
+>> ++    SUBDIRS += test
+>> ++}
+>> ++
+>> ++# CONFIG flag to disable qml plugin
+>> ++!noplugin {
+>> ++    SUBDIRS += plugin
+>> ++}
+>> +--
+>> +1.7.9.5
+>> +
+>> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>> new file mode 100644
+>> index 0000000..2c33b49
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>> @@ -0,0 +1,69 @@
+>> +DESCRIPTION = "Qt Library for ConnMan"
+>> +HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
+>> +
+>> +SECTION = "qt/lib"
+>> +
+>> +PR = "r0"
+>> +
+>> +inherit qt4x11 pkgconfig
+>> +
+>> +RDEPENDS_${PN} = "connman"
+>> +RDEPENDS_${PN}-plugin = "${PN}"
+>> +
+>> +PROVIDES += "${PN}-plugin"
+>> +
+>> +PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
+>> +RRECOMMENDS_${PN} = "${PN}-plugin"
+>> +
+>> +# this is for users to bbappend this recipe and change it
+>> +BRANCH = "master"
+>> +TAG = "${PV}"
+>> +SRCREV = "${AUTOREV}"
+>> +
+>> +SRC_URI = " \
+>> +  git://github.com/nemomobile/${PN}.git;branch=${BRANCH};tag=${TAG} \
+>> +  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
+>> +"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +QT_IMPORTS_DIR = "${libdir}/qt4/imports"
+>> +# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
+>> +PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
+>> +
+>> +FILES_${PN} = " \
+>> +  ${libdir}/libconnman-qt4${SOLIBS} \
+>> +"
+>> +
+>> +FILES_${PN}-dev = " \
+>> +  ${includedir}/connman-qt/* \
+>> +  ${libdir}/libconnman-qt4${SOLIBSDEV} \
+>> +  ${libdir}/libconnman-qt4.prl \
+>> +  ${libdir}/pkgconfig/connman-qt4.pc \
+>> +  ${libdir}/connman-qt4.pc \
+>> +"
+>> +
+>> +FILES_${PN}-plugin = " \
+>> +  ${PLUGINS_TARGET}/qmldir \
+>> +  ${PLUGINS_TARGET}/lib*.so \
+>> +"
+>> +
+>> +FILES_${PN}-plugin-dbg = " \
+>> +  ${PLUGINS_TARGET}/.debug \
+>> +  ${PLUGINS_TARGET}/.debug/* \
+>> +"
+>> +
+>> +EXTRA_QMAKEVARS_PRE = " \
+>> +  CONFIG+=notest \
+>> +"
+>> +
+>> +do_configure_prepend() {
+>> +  # Hack *.pro variables
+>> +  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
+>> +}
+>> +
+>> +do_install() {
+>> +  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
+>> +}
+>> --
+>> 1.7.9.5
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
 
