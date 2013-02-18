@@ -1,39 +1,37 @@
-Received: from mail-vb0-f50.google.com ([209.85.212.50])
+Received: from mail-pa0-f50.google.com ([209.85.220.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U7XNQ-0002rU-4W
+	(envelope-from <martin.jansa@gmail.com>) id 1U7ZpK-0007Gt-Bj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 21:31:52 +0100
-Received: by mail-vb0-f50.google.com with SMTP id ft2so3798269vbb.9
+	Tue, 19 Feb 2013 00:08:59 +0100
+Received: by mail-pa0-f50.google.com with SMTP id fa11so3040404pad.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 12:15:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=uEz4JpGKX1K9L9FZG6cMQx9uuWA5WGF97jukvHe/D2o=;
-	b=PeWGQQIcZfs1zAhnxGvfTBf0ZbECiFYmvurWppi73kTcojZ7g9wvz5fEsCgg1SGJtK
-	m97cq3u6wM5FJSNA7AJSMF3LWpvNdRfifmqNMocHU+lGT/QNVhGf6AX2JhndYR0tpGSc
-	OkMO3m9TeKGb9ahqndrooSEBUK8DpYF1bQvYZsq31GQej1aM1QadPrIKA0aJkQyRTCoo
-	R+wRp7dznrkF4fZKK1xSTEtSFze4obVSHrXbKOK5i+45JIfgQ4RIA1Qg8NYTIcB7vy2B
-	ImVWSHghNeMmUa13o+CJZ5HOWHJJS7W1nowCIZZ8cH1RILmPvuya1V61IcE03aulSoZL
-	N0/Q==
-MIME-Version: 1.0
-X-Received: by 10.52.65.147 with SMTP id x19mr15365611vds.27.1361218543504;
-	Mon, 18 Feb 2013 12:15:43 -0800 (PST)
-Received: by 10.52.185.168 with HTTP; Mon, 18 Feb 2013 12:15:43 -0800 (PST)
-In-Reply-To: <20130218185446.19879.81595@hoothoot>
-References: <20130218094145.29630.63354@hoothoot>
-	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
-	<20130218142026.7849.12017@hoothoot>
-	<CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
-	<20130218165351.14989.14162@hoothoot>
-	<CAF6bG8dwjBY-bQnb8oBRXFZqoK9NzA+T2RGd+=qe0ffZhgKkRA@mail.gmail.com>
-	<20130218185446.19879.81595@hoothoot>
-Date: Mon, 18 Feb 2013 21:15:43 +0100
-Message-ID: <CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 18 Feb 2013 14:52:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=mA2VivWISxYYSwZrswgmgzfZHMextpCZbzmR7VUkNXc=;
+	b=n6rIN52UifmsFiwTU+NXM3aWb2W1miORVaHEyS2ybkMkicl958fetllpAadGSoMDbU
+	gVgRs+NTx/LIRi2+iaoR4X8cgY+tAo1GLq46IVNm4/fZLAE+rPvm7u8KjWkZ9WY+tb5f
+	fRsvb4i7nd2Ake+l9VX22+QtxjSDeWCtekRPkuAQq0dM4ZJJZACa//CXyGjxnAwO30S2
+	TSZg/rMUFncEYFWZq1Bq7T4KOuaeJR2k/3OPjPRU4hrwpN+JkJuHOVjAH08HUpwZTyV8
+	CY9U/2FyJAqr0jUBO2HVjY8WuBLfq2Mj9PdrvhakK4GdwU1RYwmdFeF1RQ8Vt/W6aAxl
+	YodQ==
+X-Received: by 10.66.82.200 with SMTP id k8mr39978811pay.56.1361227961169;
+	Mon, 18 Feb 2013 14:52:41 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id 1sm4200463pba.32.2013.02.18.14.52.38
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 18 Feb 2013 14:52:40 -0800 (PST)
+Date: Mon, 18 Feb 2013 23:52:41 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: build dependency cycles in openembedded
+Message-ID: <20130218225241.GJ3300@jama>
+References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
+	<1360234263-18278-5-git-send-email-marcin.juszkiewicz@linaro.org>
+MIME-Version: 1.0
+In-Reply-To: <1360234263-18278-5-git-send-email-marcin.juszkiewicz@linaro.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 4/8] memcached: add 1.4.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +45,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 20:31:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 18 Feb 2013 23:09:04 -0000
+X-Groupsio-MsgNum: 43227
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="pO/lLFQm5EGc7Efl"
+Content-Disposition: inline
 
-On Mon, Feb 18, 2013 at 7:54 PM, Johannes Schauer <j.schauer@email.de> wrote:
-> Hi,
->
-> Quoting Marko Lindqvist (2013-02-18 18:22:26)
->> OE has both native build and cross-compile part, and problems can arise in
->> native part too. One example is that pkg-config version used has not been
->> updated for a while since build of newer version would depend on glib, which
->> needs pkg-config to build...
->
-> Great example! The same loop exists in binary distributions. Though there it is
-> a bit more involved since the notion of binary and source packages exists.
-> Therefor the loop you mention is not between the pkg-config and glib source
-> packages but between the pkg-config source package and the glib development
-> headers binary package libglib2.0-dev. So while the glib source package can be
-> built without pkg-config if ./configure is called with manually supplied
-> arguments like this:
->
->     ./configure \
->         PKG_CONFIG=false \
->         ZLIB_CFLAGS=-I/usr/include ZLIB_LIBS="-L/usr/lib -lz" \
->         LIBFFI_CFLAGS=-I/usr/include LIBFFI_LIBS="-L/usr/lib -lffi" \
->         --disable-libelf \
->         --with-pcre=internal
->
-> The dependency loop does still exist because the binary package libglib2.0-dev
-> can only be installed if the pkg-config binary package exists. But the
-> pkg-config binary package can only be built from the pkg-config source package
-> using the uninstallable libglib2.0-dev binary package....
->
-> So while it is good to hear an example for a dependency cycle in OpenEmbedded,
-> I now wonder why I didnt find more instances where those impact the development
-> and deployment of the OpenEmbedded distribution for new platforms?
->
-> cheers, josch
->
-FWIW long time ago in meta-oe commit
-5b8522e3b592c96ec9325aff4bbaa68972e52d5b gvfs-gdu-volume-monitor was
-spitted out into an own recipe to break dependency loop for gvfs.
+--pO/lLFQm5EGc7Efl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Andreas
+On Thu, Feb 07, 2013 at 11:50:59AM +0100, Marcin Juszkiewicz wrote:
+> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> ---
+>  meta-oe/recipes-support/memcached/memcached_1.4.15.bb | 19 +++++++++++++=
+++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/memcached/memcached_1.4.15.bb
+>=20
+> diff --git a/meta-oe/recipes-support/memcached/memcached_1.4.15.bb b/meta=
+-oe/recipes-support/memcached/memcached_1.4.15.bb
+> new file mode 100644
+> index 0000000..b6d436e
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/memcached/memcached_1.4.15.bb
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION =3D "Free & open source, high-performance, distributed memor=
+y object \
+> +caching system, generic in nature, but intended for use in speeding up d=
+ynamic \
+> +web applications by alleviating database load."
+> +HOMEPAGE =3D "http://memcached.org/"
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7e5ded7363d335e1bb18013ca0804=
+6ff"
+> +
+> +SRC_URI =3D "http://memcached.googlecode.com/files/memcached-${PV}.tar.g=
+z"
+> +
+> +SRC_URI[md5sum] =3D "36ea966f5a29655be1746bf4949f7f69"
+> +SRC_URI[sha256sum] =3D "169721ab7a7531add6ae9f6b14b6b5641725fe0b1f0bdf5c=
+3a4327725901e2b4"
+> +
+> +DEPENDS =3D "libevent"
+> +
+> +inherit autotools
+> +
+> +do_configure_prepend_aarch64() {
+> +	export ac_cv_c_endian=3Dlittle
 
+we need this for other machines as well
+| checking for endianness... configure: error: in
+`/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-lin=
+ux-gnueabi/memcached/1.4.15-r0/memcached-1.4.15':
+| configure: error: cannot run test program while cross compiling
+| See `config.log' for more details
 
+> +}
+> --=20
+> 1.8.0
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--pO/lLFQm5EGc7Efl
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEisLkACgkQN1Ujt2V2gByEfQCbBCBB2ecpMjFbfxZfhmoxAyYN
+nKYAni9J7KVQ8hIyN2FwjYsKIgr+8H8S
+=C1O+
+-----END PGP SIGNATURE-----
+
+--pO/lLFQm5EGc7Efl--
