@@ -1,36 +1,36 @@
-Received: from mail-bk0-f50.google.com ([209.85.214.50])
+Received: from mail-bk0-f41.google.com ([209.85.214.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1U7SZY-00033B-Id
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1U7Skf-0003KM-M9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Feb 2013 16:24:05 +0100
-Received: by mail-bk0-f50.google.com with SMTP id jg9so2574343bkc.9
+	Mon, 18 Feb 2013 16:35:34 +0100
+Received: by mail-bk0-f41.google.com with SMTP id q16so2582556bkw.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 07:07:56 -0800 (PST)
+	Mon, 18 Feb 2013 07:19:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:mime-version:sender:in-reply-to:references:from:date
 	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=rVLi5fS8mJt60wJ26UGhoWZihfnnfIGh6V9/tjT3gQA=;
-	b=BSNHqe6+b3OYX2MwUm9F5Fjt3fZkg/nJTcXpYMUwBKcoQvqUdeSVNTgSozG2hwRaND
-	0p2n1GVqkAeItdqtkchxhswQ0mU43ErQ1CRndYF47IUQh4k6Zwa2fnggRWmV6PnFSZH5
-	OUNbWlzOqtGkrmlqJqER+V7X9ClnJxgdS31IQ9Jt7a+MEDAF5uWUmPPHdWlpSh9RrJlc
-	vVbU6IKmKAQWGFP4ssfck7w/PO46JW1yTTDZ2PbVfiGR425iKLYbxMwRmFJJDDPni7ui
-	5B5HKLmcbpBmTVQaQk4pJiZW9IW7zuhPwmjbQG3jiC6mDMfDfwCyPCi8O5aM5i5rExXs
-	DTWQ==
-X-Received: by 10.204.156.206 with SMTP id y14mr4824582bkw.34.1361200076543;
-	Mon, 18 Feb 2013 07:07:56 -0800 (PST)
+	bh=1DFLnl3NKusPQl2wwCnOhzGvBD/UkHUnQzeJY7Gxm3I=;
+	b=goSp+lvLIm24M2ZErGdUV2EzR+JutAh5f9SYv2Q9zEvYtx3KSH+zFTqjoN/nsKmoHZ
+	CAtjFGHre0PmzheqI0viBTlNVXSCxsbB2uq4dGGctyy9PfZWPnhhydNidremZNKlgOQv
+	3OiCEusrDWgHrk1cE4U3S9/M4BfuHvGBp/MwXF7zOW4QnajToub/6H2pAlHx5Tf2mggB
+	EUBSUQaWkAPnXWDLY60bVDR0tWOZoqlZSBdy4N81ZC/zD5vQ7UW+rULU883az5Epp+KT
+	46cSeiKiVPvQI4XrtdOOlYR4S3/NsRBd0RAApoWDIS+XmRrUQ7Sf6Nd/uylLl3XT6/EP
+	/q8Q==
+X-Received: by 10.204.128.151 with SMTP id k23mr4818014bks.65.1361200765645;
+	Mon, 18 Feb 2013 07:19:25 -0800 (PST)
 MIME-Version: 1.0
 Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.204.25.141 with HTTP; Mon, 18 Feb 2013 07:07:36 -0800 (PST)
-In-Reply-To: <20130218142026.7849.12017@hoothoot>
-References: <20130218094145.29630.63354@hoothoot>
-	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
-	<20130218142026.7849.12017@hoothoot>
+Received: by 10.204.25.141 with HTTP; Mon, 18 Feb 2013 07:19:04 -0800 (PST)
+In-Reply-To: <5121F224.4080906@nedap.com>
+References: <511E373D.1070109@nedap.com>
+	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
+	<5121F224.4080906@nedap.com>
 From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Tue, 19 Feb 2013 00:07:36 +0900
-X-Google-Sender-Auth: 1iDToPKtv-ScrpVtPau5M9f752Y
-Message-ID: <CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
+Date: Tue, 19 Feb 2013 00:19:04 +0900
+X-Google-Sender-Auth: EHGhPX6NgMCFavF9sPJrpdIRaFg
+Message-ID: <CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: build dependency cycles in openembedded
+Subject: Re: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 15:24:06 -0000
+X-List-Received-Date: Mon, 18 Feb 2013 15:35:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Before continuing to write reply,
-I want to make sure about the usage of the word "native":
+Hi,
 
-in OpenEmbedded recipe, let's say, when you work on a x86-64 system to build
-for target system which has ARM architecture,
+this may or may not help you:
 
-if you want to borrow a xz tool from x86-64 environment: you can write
- DEPENDS = xz-native
+$ bitbake -e package-index > bbenv.package-index
+$ grep PACKAGEINDEXES bbenv.package-index
+(
+ for me, the result was:
 
-if you depends on xz tool build on target environment: you just write
- DEPENDS = xz
+ # PACKAGEINDEXES= package_update_index_ipk;
+ PACKAGEINDEXES="package_update_index_ipk;"
 
-Is this the custom you assume?
+)
 
-What I had to find was the word "native" is used to point the target environment
-in [1].
+Then I tried searching "package_update_index_ipk" in bbenv.package-index
+using a text editor. It is a function, and in it, opkg-make-index
+is called in a line:
+
+ flock $pkgdir/Packages.flock -c "opkg-make-index -r $pkgdir/Packages
+-p $pkgdir/Packages -m $pkgdir/"
+
+What do you find in your box?
+
 -- 
 Takeshi Hamasaki
 
-2013/2/18 Johannes Schauer <j.schauer@email.de>:
-> Hi,
+2013/2/18 Jaap de Jong <jaap.dejong@nedap.com>:
 >
-> Quoting Takeshi Hamasaki (2013-02-18 13:26:38)
->> you can find the line like:
->> DEPENDS = "XXXXXX-native"
->> in some recipes.
+> On 02/16/2013 07:51 AM, Takeshi Hamasaki wrote:
+>
+>>> if I do
+>>>
+>>>      bitbake package-index
+>>>
+>>> it crashes with the message
+>>>
+>>>      | /bin/bash: opkg-make-index: command not found
+>>>
+>>> This is on a 64 debian machine, possibly the wrong path is searched?
+>>> (there is a opkg-make-index under sysroots/x86_64-linux/usr/bin)
+>>>
+>>>
+>
+>> If you doubt the PATH setting, you should check the output from:
+>> $ bitbake -e | grep '^export PATH'
 >>
->> So, you can describe dependency to native tools from target build if necessary.
 >
-> Sure, when cross compiling you can satisfy lots of dependencies by native
-> binaries but others need the foreign version. In Debian based distribution,
-> this distinction for cross build dependency resolution is made using
-> Multi-Arch.
+> Well opkg-make-index is in the path.
 >
-> Since some of the cross build dependencies can be satisfied by (already
-> available) native tools, the dependency cycle situation is *much* less severe
-> during cross compilation than it is during native compilation.
+> Something strange is happening here.
+> If I edit package-index.bb and add a call to opkg-make-index
 >
-> But still, even when one wants to cross compile a native, minimal Debian build
-> system (just containing the init, shell and compiler) one runs into build
-> dependency cycles because some dependencies have to be satisfied by foreign
-> (not yet built) binaries and thereby creating some dependency cycles.
+>    do_package_index() {
+>         set -ex
+>    opkg-make-index   ### ADDED CODE
+>         ${PACKAGEINDEXES}
+>         set +ex
+>    }
 >
-> Is it different in OpenEmbedded?
 >
-> cheers, josch
+> it shows an error message when invoking bitbake package-index showing that
+> opkg-make-index is actualy working...
+>
+>    ///
+>
+> .../build/tmp-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/usr/bin/opkg-make-index
+>    [-h] [-s] [-m] [-l Packages.filelist] [-p Packages] [-r
+>    Packages.old] [-L localesdir] [-v] packagesdir
+>    NOTE: package package-index-1.0-r0: task do_package_index: Failed
+>    ///
+>
+> Any idea?
+>
+>
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
