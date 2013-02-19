@@ -1,36 +1,40 @@
-Received: from mail-ve0-f170.google.com ([209.85.128.170])
+Received: from mail-pb0-f41.google.com ([209.85.160.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U7q3C-00069R-0T
+	(envelope-from <martin.jansa@gmail.com>) id 1U7rVZ-0002gK-AH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 17:28:19 +0100
-Received: by mail-ve0-f170.google.com with SMTP id 14so6066468vea.29
+	Tue, 19 Feb 2013 19:01:37 +0100
+Received: by mail-pb0-f41.google.com with SMTP id um15so2360634pbc.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2013 08:12:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=eQFVisXV/AOKhnORgJZfgUINwsSDMxljItqQ15J7Omc=;
-	b=WyR6xnW3mUQabkQ5axeVM9aLgyEa18H2dl1hNdgrCD0M5ZZ9lv3hgMnI/s52yhySuC
-	tgb7bihjDVEXi8nk8LjoGiMqt+9G6fAInmPLqSlvWbOpBga+eI5+qzSi69EOvIjilnot
-	ClrF+svtkSqw/nB8dwR3xkBwTywlWSiUDUqRhecmFDXHKH/f7Ayp3GZDgeIBf3Y4I6JF
-	rMctPOw2kEgC2urZx8Yy8HWtuN5j70kwBS51bzGoKJxwjYOZQA/SPeVm9OmX4RKD/+hi
-	NOodX+zMb9uCqP9OTd5y94PV2OOK5N9+AVXxaKSzmE/trs4n8Y5GsrYFXVG9Fpi4nFwm
-	LFzw==
-MIME-Version: 1.0
-X-Received: by 10.52.32.230 with SMTP id m6mr18561814vdi.83.1361290323624;
-	Tue, 19 Feb 2013 08:12:03 -0800 (PST)
-Received: by 10.52.185.168 with HTTP; Tue, 19 Feb 2013 08:12:03 -0800 (PST)
-In-Reply-To: <20130219082744.GT3300@jama>
+	Tue, 19 Feb 2013 09:45:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=v7uxIs7WkdqOxqktlH97awJnqwJTwM9daJ7ivg3VUV0=;
+	b=RFvCVJ2gSiWNBxQxdm50Td8znlPp0DkR9PvwxVWO2bDsFCusePmWAjGADFExfZw0De
+	RqNNqFuGITT1iKv7KOxnPTRpU3f04mfEMKOFm5lvLvY5USSrXfnqZrGNJD4loyO9b5jt
+	cUtvpwk/J3alrNjhWYAB5E4PsB11jPJz6WUrXfQmgyadpI1gbXTFYyuilWGOyJYLXtOP
+	BigIk+gl/vU3RNmOOtzdcjcgvoVHD+pB0YbCKYcg94+G+WbgZOuHoiG/SPTXjT3iGo4J
+	Vk+HSCHTbdNYAOnQ6RZkmbGzXmO8kMW13HBOeDI+my3ouJp6eQX9e/q8BjbXOvEu5uHm
+	edhg==
+X-Received: by 10.66.82.35 with SMTP id f3mr47367184pay.49.1361295926837;
+	Tue, 19 Feb 2013 09:45:26 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ax3sm18670733pbd.42.2013.02.19.09.45.23
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 19 Feb 2013 09:45:25 -0800 (PST)
+Date: Tue, 19 Feb 2013 18:45:27 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130219174527.GU3300@jama>
 References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
 	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
 	<20130126115141.GH16904@jama.palm1.palmone.com>
 	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
 	<20130219082744.GT3300@jama>
-Date: Tue, 19 Feb 2013 17:12:03 +0100
-Message-ID: <CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,92 +49,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 16:28:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Feb 2013 18:01:38 -0000
+X-Groupsio-MsgNum: 43247
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="raeF0v9V3uM6lh8B"
+Content-Disposition: inline
+
+--raeF0v9V3uM6lh8B
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 19, 2013 at 9:27 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=C3=BCller wrote:
->> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=C3=BCller wrote:
->> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> >> ---
->> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
->> >>  1 files changed, 13 insertions(+), 0 deletions(-)
->> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
->> >
->> > Fails in world build
->> >
->> > | configure: error: No C++ compiler found. Please install a C++ compil=
-er.
->> > | Configure failed. The contents of all config.log files follows to ai=
-d debugging
->> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-=
-oe-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
->> > | This file contains any messages produced by compilers while
->> > | running configure, to aid debugging if configure makes a mistake.
->> > |
->> > | It was created by Geany configure 1.22, which was
->> > | generated by GNU Autoconf 2.69.  Invocation command line was
->> >
->> > Complete log here:
->> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.worl=
-d.20130125_082000.log/
->> >
->> > Cheers,
->> >
->> >>
->> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/r=
-ecipes-devtools/geany/geany_1.22.bb
->> >> new file mode 100644
->> >> index 0000000..1e56ec8
->> >> --- /dev/null
->> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
->> >> @@ -0,0 +1,13 @@
->> >> +DESCRIPTION =3D "A fast and lightweight IDE"
->> >> +HOMEPAGE =3D "http://www.geany.org/"
->> >> +LICENSE =3D "GPLv2"
->> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a=
-5d4e9c9"
->> >> +DEPENDS =3D "gtk+"
->> >> +
->> >> +inherit autotools pkgconfig
->> >> +
->> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
->> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
->> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d=
-56388e9521a27877577e"
->> >> +
->> >> +FILES_${PN} +=3D "${datadir}/icons"
->> >> --
->> >> 1.7.4.4
->> >>
->> >>
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
-l
->> >
->> > --
->> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->> >
->> OK I try to find out what goes wrong. What about the others of this seri=
-es?
->
-> I've accidentally merged this one today (it was in branch for long time
-> and I haven't seen failure in world build, because it's blacklisted
-> since I've reported this.
->
-> Any news on it?
->
-> --
-No - I tried to reproduce without success and then decided to come
-back later. Suggestion: Let me know if it fails again in world - then
-we can think about removing it again.
+On Tue, Feb 19, 2013 at 05:12:03PM +0100, Andreas M=FCller wrote:
+> On Tue, Feb 19, 2013 at 9:27 AM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+> > On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
+> >> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com=
+> wrote:
+> >> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
+> >> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> >> >> ---
+> >> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
+> >> >>  1 files changed, 13 insertions(+), 0 deletions(-)
+> >> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >> >
+> >> > Fails in world build
+> >> >
+> >> > | configure: error: No C++ compiler found. Please install a C++ comp=
+iler.
+> >> > | Configure failed. The contents of all config.log files follows to =
+aid debugging
+> >> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5t=
+e-oe-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
+> >> > | This file contains any messages produced by compilers while
+> >> > | running configure, to aid debugging if configure makes a mistake.
+> >> > |
+> >> > | It was created by Geany configure 1.22, which was
+> >> > | generated by GNU Autoconf 2.69.  Invocation command line was
+> >> >
+> >> > Complete log here:
+> >> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.wo=
+rld.20130125_082000.log/
+> >> >
+> >> > Cheers,
+> >> >
+> >> >>
+> >> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe=
+/recipes-devtools/geany/geany_1.22.bb
+> >> >> new file mode 100644
+> >> >> index 0000000..1e56ec8
+> >> >> --- /dev/null
+> >> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >> >> @@ -0,0 +1,13 @@
+> >> >> +DESCRIPTION =3D "A fast and lightweight IDE"
+> >> >> +HOMEPAGE =3D "http://www.geany.org/"
+> >> >> +LICENSE =3D "GPLv2"
+> >> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c4298=
+5a5d4e9c9"
+> >> >> +DEPENDS =3D "gtk+"
+> >> >> +
+> >> >> +inherit autotools pkgconfig
+> >> >> +
+> >> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+> >> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+> >> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e8=
+2d56388e9521a27877577e"
+> >> >> +
+> >> >> +FILES_${PN} +=3D "${datadir}/icons"
+> >> >> --
+> >> >> 1.7.4.4
+> >> >>
+> >> >>
+> >> >> _______________________________________________
+> >> >> Openembedded-devel mailing list
+> >> >> Openembedded-devel@lists.openembedded.org
+> >> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
+vel
+> >> >
+> >> > --
+> >> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >> >
+> >> OK I try to find out what goes wrong. What about the others of this se=
+ries?
+> >
+> > I've accidentally merged this one today (it was in branch for long time
+> > and I haven't seen failure in world build, because it's blacklisted
+> > since I've reported this.
+> >
+> > Any news on it?
+> >
+> > --
+> No - I tried to reproduce without success and then decided to come
+> back later. Suggestion: Let me know if it fails again in world - then
+> we can think about removing it again.
 
-Andreas
+Yes it does, here is log from last build
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30219_043012.log/
 
+Cheers,
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--raeF0v9V3uM6lh8B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEjujcACgkQN1Ujt2V2gBxcMACgjGP7OScjzX2KtcLy/dHLmS+k
+LTYAn0N/FwKkQWHE1/axub5Z99FBXCYL
+=mA0W
+-----END PGP SIGNATURE-----
+
+--raeF0v9V3uM6lh8B--
