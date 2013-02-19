@@ -1,30 +1,37 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-ve0-f170.google.com ([209.85.128.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1U7p3H-0003sR-Cv
+	(envelope-from <schnitzeltony@googlemail.com>) id 1U7q3C-00069R-0T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 16:24:20 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Tue, 19 Feb 2013
-	16:08:00 +0100
-X-TM-IMSS-Message-ID: <21a9f8220000a257@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 21a9f8220000a257 ;
-	Tue, 19 Feb 2013 16:07:55 +0100
-Message-ID: <5123954F.1000306@nedap.com>
-Date: Tue, 19 Feb 2013 16:07:59 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Tue, 19 Feb 2013 17:28:19 +0100
+Received: by mail-ve0-f170.google.com with SMTP id 14so6066468vea.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Feb 2013 08:12:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=eQFVisXV/AOKhnORgJZfgUINwsSDMxljItqQ15J7Omc=;
+	b=WyR6xnW3mUQabkQ5axeVM9aLgyEa18H2dl1hNdgrCD0M5ZZ9lv3hgMnI/s52yhySuC
+	tgb7bihjDVEXi8nk8LjoGiMqt+9G6fAInmPLqSlvWbOpBga+eI5+qzSi69EOvIjilnot
+	ClrF+svtkSqw/nB8dwR3xkBwTywlWSiUDUqRhecmFDXHKH/f7Ayp3GZDgeIBf3Y4I6JF
+	rMctPOw2kEgC2urZx8Yy8HWtuN5j70kwBS51bzGoKJxwjYOZQA/SPeVm9OmX4RKD/+hi
+	NOodX+zMb9uCqP9OTd5y94PV2OOK5N9+AVXxaKSzmE/trs4n8Y5GsrYFXVG9Fpi4nFwm
+	LFzw==
 MIME-Version: 1.0
+X-Received: by 10.52.32.230 with SMTP id m6mr18561814vdi.83.1361290323624;
+	Tue, 19 Feb 2013 08:12:03 -0800 (PST)
+Received: by 10.52.185.168 with HTTP; Tue, 19 Feb 2013 08:12:03 -0800 (PST)
+In-Reply-To: <20130219082744.GT3300@jama>
+References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
+	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
+	<20130126115141.GH16904@jama.palm1.palmone.com>
+	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
+	<20130219082744.GT3300@jama>
+Date: Tue, 19 Feb 2013 17:12:03 +0100
+Message-ID: <CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <511E373D.1070109@nedap.com>
-	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
-	<5121F224.4080906@nedap.com>
-	<CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
-	<51238222.40804@nedap.com>
-	<CAPESJy6xoZS3hGLwiFY2d7NRsH438hPDgK+=gJXFZd0Q1Cxd6w@mail.gmail.com>
-In-Reply-To: <CAPESJy6xoZS3hGLwiFY2d7NRsH438hPDgK+=gJXFZd0Q1Cxd6w@mail.gmail.com>
-Subject: Re: opkg-make-index not found
+Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,38 +45,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 15:24:22 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Feb 2013 16:28:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Feb 19, 2013 at 9:27 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=C3=BCller wrote:
+>> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=C3=BCller wrote:
+>> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> >> ---
+>> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
+>> >>  1 files changed, 13 insertions(+), 0 deletions(-)
+>> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+>> >
+>> > Fails in world build
+>> >
+>> > | configure: error: No C++ compiler found. Please install a C++ compil=
+er.
+>> > | Configure failed. The contents of all config.log files follows to ai=
+d debugging
+>> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-=
+oe-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
+>> > | This file contains any messages produced by compilers while
+>> > | running configure, to aid debugging if configure makes a mistake.
+>> > |
+>> > | It was created by Geany configure 1.22, which was
+>> > | generated by GNU Autoconf 2.69.  Invocation command line was
+>> >
+>> > Complete log here:
+>> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.worl=
+d.20130125_082000.log/
+>> >
+>> > Cheers,
+>> >
+>> >>
+>> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/r=
+ecipes-devtools/geany/geany_1.22.bb
+>> >> new file mode 100644
+>> >> index 0000000..1e56ec8
+>> >> --- /dev/null
+>> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+>> >> @@ -0,0 +1,13 @@
+>> >> +DESCRIPTION =3D "A fast and lightweight IDE"
+>> >> +HOMEPAGE =3D "http://www.geany.org/"
+>> >> +LICENSE =3D "GPLv2"
+>> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a=
+5d4e9c9"
+>> >> +DEPENDS =3D "gtk+"
+>> >> +
+>> >> +inherit autotools pkgconfig
+>> >> +
+>> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+>> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+>> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d=
+56388e9521a27877577e"
+>> >> +
+>> >> +FILES_${PN} +=3D "${datadir}/icons"
+>> >> --
+>> >> 1.7.4.4
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
+l
+>> >
+>> > --
+>> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>> >
+>> OK I try to find out what goes wrong. What about the others of this seri=
+es?
+>
+> I've accidentally merged this one today (it was in branch for long time
+> and I haven't seen failure in world build, because it's blacklisted
+> since I've reported this.
+>
+> Any news on it?
+>
+> --
+No - I tried to reproduce without success and then decided to come
+back later. Suggestion: Let me know if it fails again in world - then
+we can think about removing it again.
 
-On 02/19/2013 03:33 PM, Takeshi Hamasaki wrote:
-> Then I recommend to look into log files. For my case, after executing commands:
->
-> $ bitbake package-index -c cleansstate
-> $ bitbake -D -D package-index > bitbake-d-d.package-index 2> errlog
->
-> I have at least four log files.
-> 1. bitbake-d-d.package-index in current dir
-> 2. errlog   in current dir
-> 3. run.do_package_index.* in
-> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
-> 4. log.do_package_index.* in
-> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
->
-> (Actually, I skipped to generate 2., my build succeed.)
-> I guess you can find some clue looking into 4., 3., and maybe 1.
->
-> I attach mine to this mail, and hope they might be some help for you.
-Thanks for all your help!
-I've been comparing the run.do_package_index file from myself and from 
-the buildserver.
-If I look at it the only real difference (besides paths etc) are in the 
-SHELL
- > export SHELL="/usr/local/bin/bash-wrapper"
-< export SHELL="/bin/bash"
-I will ask my administrator to change it and will retry.
-
-
+Andreas
 
 
