@@ -1,36 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-pb0-f52.google.com ([209.85.160.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7dAc-00056U-6O
+	(envelope-from <martin.jansa@gmail.com>) id 1U7emH-00082K-Nf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 03:43:02 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e52so3190458eek.34
+	Tue, 19 Feb 2013 05:26:04 +0100
+Received: by mail-pb0-f52.google.com with SMTP id ma3so1997641pbc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 18:26:53 -0800 (PST)
+	Mon, 18 Feb 2013 20:09:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=BWlo7KTL96xquLQ+VUcwbGkk1b9318mBKIztMw3uCyE=;
-	b=jDpMwbkuzhHcRAiBRoYporXFD9+xkYktOBVaHEhXbaDZLlM0xytoty2YAg8MagoiOr
-	ADLUERMXm6U8+rdQ+SoZEXkwoX4c5LCq+GcEKL7YGWcXKzb+Ry95oXNu9F05G9bQ21Fw
-	5xveaU+5S3VQ1wkWpx15P4vI9HMP/HkemFw0h930GVvKbi4RsFDm0QG0P+2wAvW49mdr
-	GIsH6rzM824DkBT2zGUpjf2LACBc3mFu31I/GMojyQPgXiNlxHJ2COUtNoVUPMKavq3I
-	GWxGRmQP1UCnkxrNKAkls6awCrmNnFzBrsvLiqtrmaoK4IwRkmyPXdUVfIKuVMGKtdaI
-	7slA==
-X-Received: by 10.14.173.67 with SMTP id u43mr51633241eel.22.1361240813458;
-	Mon, 18 Feb 2013 18:26:53 -0800 (PST)
+	bh=C9M5aI1I/12LvpZuNOToxaph00dMs5QM1epIAa/U21M=;
+	b=NGM0pYpinjreqNn/TFR9GZw1d3BwJQzgBEnD9wWOgGrAv8nZ6PpnbfWCuBFiEBIgL6
+	cNk/1STXbTkEcnRt6HKEQ9qANNASIrAY19Rpk+CkGC2QyTXml9QI8Y0+D+NWDnsSGjCl
+	B/uicC/FGW7qjlYHOVNoQ4XvJueMdyA21EH+ho+2N/+8U2c9ozpWWiGtE01SmWZxMqCe
+	nOQW0T5K58KLy0shGX4WbtVCSpTTNUdpdSU6zcpvzlZYk8RNfRRH+xZl40mDasioQG8W
+	teGby3OfHJIpRMea9vpHmHvX2tfUFEe9j6qaEGqkGOlb7f1M8E1mhVytIf6xVR88wm+S
+	4ecw==
+X-Received: by 10.68.31.73 with SMTP id y9mr36524456pbh.102.1361246992051;
+	Mon, 18 Feb 2013 20:09:52 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id t4sm101478172eel.0.2013.02.18.18.26.52
+	by mx.google.com with ESMTPS id y10sm16536560pbf.39.2013.02.18.20.09.49
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 18:26:52 -0800 (PST)
-Date: Tue, 19 Feb 2013 03:27:02 +0100
+	Mon, 18 Feb 2013 20:09:50 -0800 (PST)
+Date: Tue, 19 Feb 2013 05:09:52 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219022702.GQ3300@jama>
-References: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
+Message-ID: <20130219040952.GR3300@jama>
+References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
+	<1360234263-18278-9-git-send-email-marcin.juszkiewicz@linaro.org>
+	<20130216052306.GW3300@jama>
 MIME-Version: 1.0
-In-Reply-To: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <20130216052306.GW3300@jama>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: update IMAGE_INSTALL after mtd-utils split
+Subject: Re: [meta-oe][PATCH 8/8] google-perftools: add 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,65 +46,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 02:43:03 -0000
-X-Groupsio-MsgNum: 43236
+X-List-Received-Date: Tue, 19 Feb 2013 04:26:05 -0000
+X-Groupsio-MsgNum: 43237
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZP7cwq+yCXYhlQRU"
+	protocol="application/pgp-signature"; boundary="JkdIF91f86UUr6LJ"
 Content-Disposition: inline
 
---ZP7cwq+yCXYhlQRU
+--JkdIF91f86UUr6LJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 14, 2013 at 11:15:53PM +0100, Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-
-merged, thanks
-
-> ---
->  meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+On Sat, Feb 16, 2013 at 06:23:06AM +0100, Martin Jansa wrote:
+> On Thu, Feb 07, 2013 at 11:51:03AM +0100, Marcin Juszkiewicz wrote:
+> > Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 >=20
-> diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.=
-bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-> index 7e617ad..01e5b84 100644
-> --- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-> +++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-> @@ -9,9 +9,9 @@ IMAGE_FSTYPES =3D "${INITRAMFS_FSTYPES}"
->  # avoid circular dependencies
->  EXTRA_IMAGEDEPENDS =3D ""
-> =20
-> -# for ubiattach we have to install full mtd-utils (>700KiB)
-> +# for ubiattach we have to install mtd-utils-ubifs
->  # or use ubiattach-klibc instead
-> -IMAGE_INSTALL =3D "kexec kexecboot mtd-utils"
-> +IMAGE_INSTALL =3D "kexec kexecboot mtd-utils-ubifs"
-> =20
->  # Do not pollute the initrd image with rootfs features
->  IMAGE_FEATURES =3D ""
+> Fails to install with newer autotools:
+>=20
+> | /usr/bin/install: will not overwrite just-created
+> `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-l=
+inux-gnueabi/gperftools/2.0-r0/image/usr/include/google/tcmalloc.h'
+> with `src/windows/google/tcmalloc.h'
+> | make[1]: *** [install-googleincludeHEADERS] Error 1
+>=20
+> Complete log:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
+0130215_060633.log/
+
+Also the subject and maybe also the directory should be gperftools not
+google-perftools.
+
+>=20
+> > ---
+> >  meta-oe/recipes-support/google-perftools/gperftools_2.0.bb | 11 ++++++=
++++++
+> >  1 file changed, 11 insertions(+)
+> >  create mode 100644 meta-oe/recipes-support/google-perftools/gperftools=
+_2.0.bb
+> >=20
+> > diff --git a/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb=
+ b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
+> > new file mode 100644
+> > index 0000000..1717752
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
+> > @@ -0,0 +1,11 @@
+> > +DESCRIPTION =3D "Fast, multi-threaded malloc() and nifty performance a=
+nalysis tools"
+> > +HOMEPAGE =3D "http://code.google.com/p/gperftools/"
+> > +LICENSE =3D "BSD"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D762732742c73dc6c7fbe8632f06=
+c059a"
+> > +
+> > +SRC_URI =3D "${DEBIAN_MIRROR}/main/g/google-perftools/google-perftools=
+_${PV}.orig.tar.gz"
+> > +
+> > +SRC_URI[md5sum] =3D "13f6e8961bc6a26749783137995786b6"
+> > +SRC_URI[sha256sum] =3D "7de3dd91f018825b1e7d332af1edace15c6211f430186f=
+ebede1835069861080"
+> > +
+> > +inherit autotools
+> > --=20
+> > 1.8.0
+> >=20
+> >=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 > --=20
-> 1.7.12.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ZP7cwq+yCXYhlQRU
+--JkdIF91f86UUr6LJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEi4vYACgkQN1Ujt2V2gBzOCACcDacnTvhmnRozGb7vmVO4W6/w
-fPUAnRK6JkMeM+aaWiIWpnhQGisyQthU
-=i0sR
+iEYEARECAAYFAlEi+xAACgkQN1Ujt2V2gBwcnwCeMJALpFYGAjgF7SoLwPBT85Vx
+g8sAoIWjPSr3YaftS08vTAC6X1su8izG
+=6aUR
 -----END PGP SIGNATURE-----
 
---ZP7cwq+yCXYhlQRU--
+--JkdIF91f86UUr6LJ--
