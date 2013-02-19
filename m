@@ -1,33 +1,28 @@
-Received: from mout.web.de ([212.227.15.3])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <j.schauer@email.de>) id 1U7kyV-0005Ic-HL
+	(envelope-from <jaap.dejong@nedap.com>) id 1U7nm4-0001g2-O7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 12:03:04 +0100
-Received: from localhost ([212.201.44.247]) by smtp.web.de (mrweb001) with
-	ESMTPSA (Nemesis) id 0MINMF-1UAE5q3hZ1-004BRv for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2013 11:46:53 +0100
+	Tue, 19 Feb 2013 15:02:30 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Tue, 19 Feb 2013
+	14:46:11 +0100
+X-TM-IMSS-Message-ID: <215f11a200009c65@nedap.com>
+Received: from [10.17.16.7] ([10.17.16.7]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 215f11a200009c65 ;
+	Tue, 19 Feb 2013 14:46:06 +0100
+Message-ID: <51238222.40804@nedap.com>
+Date: Tue, 19 Feb 2013 14:46:10 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-From: Johannes Schauer <j.schauer@email.de>
-User-Agent: alot/0.3.3+
 To: openembedded-devel@lists.openembedded.org
-References: <20130218094145.29630.63354@hoothoot>
-	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
-	<20130218142026.7849.12017@hoothoot>
-	<CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
-	<20130218165351.14989.14162@hoothoot>
-	<CAF6bG8dwjBY-bQnb8oBRXFZqoK9NzA+T2RGd+=qe0ffZhgKkRA@mail.gmail.com>
-	<20130218185446.19879.81595@hoothoot>
-	<CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
-In-Reply-To: <CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
-Message-ID: <20130219104653.30650.95226@hoothoot>
-Date: Tue, 19 Feb 2013 11:46:53 +0100
-X-Provags-ID: V02:K0:eVIqfeaE4dnf8FsEjPsMsUcq0e4KGytku07cVuukt4m
-	YderBbBk73JjPapQnIYuDmx4nUe0c/2vsk7pkZxe5jFWej2Ooa
-	r0URlTST23B7SrNaHDlUcYScASSwv1JtxRWbEP+CDvyF7rcu8w
-	9MQL9rxvp/su4ReQWJnJjlMdjdi+e1qXqq/64cPcxmK2IdQaUy
-	NYkbPbi/Bf8caXOVseBQw==
-Subject: Re: build dependency cycles in openembedded
+References: <511E373D.1070109@nedap.com>
+	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
+	<5121F224.4080906@nedap.com>
+	<CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
+In-Reply-To: <CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
+Subject: Re: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 11:03:04 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Feb 2013 14:02:34 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
 
-Quoting Andreas M=C3=BCller (2013-02-18 21:15:43)
-> FWIW long time ago in meta-oe commit 5b8522e3b592c96ec9325aff4bbaa68972e5=
-2d5b
-> gvfs-gdu-volume-monitor was spitted out into an own recipe to break
-> dependency loop for gvfs.
+On 02/18/2013 04:19 PM, Takeshi Hamasaki wrote:
+> Hi,
+>
+> this may or may not help you:
+>
+> $ bitbake -e package-index > bbenv.package-index
+> $ grep PACKAGEINDEXES bbenv.package-index
+> (
+>   for me, the result was:
+>
+>   # PACKAGEINDEXES= package_update_index_ipk;
+>   PACKAGEINDEXES="package_update_index_ipk;"
+>
+> )
+>
+> Then I tried searching "package_update_index_ipk" in bbenv.package-index
+> using a text editor. It is a function, and in it, opkg-make-index
+> is called in a line:
+>
+>   flock $pkgdir/Packages.flock -c "opkg-make-index -r $pkgdir/Packages
+> -p $pkgdir/Packages -m $pkgdir/"
+>
+> What do you find in your box?
+For both I find the same results.
+The funny thing is that on the same machine my buildserver is running 
+and that one is having no problems...
+Jaap
 
-If I read this correctly, then this means that for some software packages,
-multiple bitbake recipes exist for the purpose of breaking dependency cycle=
-s?
-
-How does the generation of build order work? Which algorithm handles the
-selection of recipes such that build dependency cycles are avoided? And onc=
-e a
-recipe which was used to break a dependency cycle was compiled, how is the
-recompilation of the *full* package scheduled?
-
-cheers, josch
 
 
