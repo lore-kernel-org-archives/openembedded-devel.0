@@ -1,38 +1,51 @@
-Received: from mail-pb0-f52.google.com ([209.85.160.52])
+Received: from mail-wi0-f179.google.com ([209.85.212.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7emH-00082K-Nf
+	(envelope-from <sankar.m@hardcube.in>) id 1U7gci-00062f-UT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 05:26:04 +0100
-Received: by mail-pb0-f52.google.com with SMTP id ma3so1997641pbc.11
+	Tue, 19 Feb 2013 07:24:21 +0100
+Received: by mail-wi0-f179.google.com with SMTP id ez12so4376983wid.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 20:09:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=C9M5aI1I/12LvpZuNOToxaph00dMs5QM1epIAa/U21M=;
-	b=NGM0pYpinjreqNn/TFR9GZw1d3BwJQzgBEnD9wWOgGrAv8nZ6PpnbfWCuBFiEBIgL6
-	cNk/1STXbTkEcnRt6HKEQ9qANNASIrAY19Rpk+CkGC2QyTXml9QI8Y0+D+NWDnsSGjCl
-	B/uicC/FGW7qjlYHOVNoQ4XvJueMdyA21EH+ho+2N/+8U2c9ozpWWiGtE01SmWZxMqCe
-	nOQW0T5K58KLy0shGX4WbtVCSpTTNUdpdSU6zcpvzlZYk8RNfRRH+xZl40mDasioQG8W
-	teGby3OfHJIpRMea9vpHmHvX2tfUFEe9j6qaEGqkGOlb7f1M8E1mhVytIf6xVR88wm+S
-	4ecw==
-X-Received: by 10.68.31.73 with SMTP id y9mr36524456pbh.102.1361246992051;
-	Mon, 18 Feb 2013 20:09:52 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id y10sm16536560pbf.39.2013.02.18.20.09.49
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 20:09:50 -0800 (PST)
-Date: Tue, 19 Feb 2013 05:09:52 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219040952.GR3300@jama>
-References: <1360234263-18278-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<1360234263-18278-9-git-send-email-marcin.juszkiewicz@linaro.org>
-	<20130216052306.GW3300@jama>
+	Mon, 18 Feb 2013 22:08:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-received:x-originating-ip:in-reply-to:references
+	:date:message-id:subject:from:to:content-type:x-gm-message-state;
+	bh=hXgEoGnX6EQXASyLt7kYzbmu2sRGmtP44FriXGNZpAo=;
+	b=N9EdIH4CYVFWlGelXxqlv/KpHQBswBTfPPAjaEXIc/P5JZmlBQ7JxyYDH46ZlDx0Sj
+	OqM1LrN2vTzm9wdBIkwUavlR1EYiOyWiwgZVg7J7RJx8WEJGVJ78LczjKwejx8tzuJkc
+	vdnP0BZEJWnoXZKKo+cc927TGOTDx0KlwABLKUv5Nzl1+XdJKrl2cPVEwU1DpnRs4+og
+	TCqjEpwt4Z/Vmbd9A61K8BSy38V43AUzjVDi6IcTUYym95IrIvpX6wop3U+Ndhl1ugjX
+	U6HceCGPynTu6ZliybM6jidCFcqt7GeL077EQNyE4zBXhdrlt+vj11fguoidWLaUOiki
+	ogfw==
 MIME-Version: 1.0
-In-Reply-To: <20130216052306.GW3300@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 8/8] google-perftools: add 2.0
+X-Received: by 10.194.81.40 with SMTP id w8mr12241562wjx.14.1361254088009;
+	Mon, 18 Feb 2013 22:08:08 -0800 (PST)
+Received: by 10.216.32.133 with HTTP; Mon, 18 Feb 2013 22:08:07 -0800 (PST)
+X-Originating-IP: [203.193.158.21]
+In-Reply-To: <CAJTo0LZmEoxWrjBKsHAh1iOsT9_+nWyK0na9WYEngRvjAB199w@mail.gmail.com>
+References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
+	<511CAFF3.3090004@communistcode.co.uk>
+	<CAKSKmM3vHzj_-Jh1MP1SZxxsCYe212NdnWApHvmn6CVJPXOMsA@mail.gmail.com>
+	<511CB7DD.4080407@communistcode.co.uk>
+	<CAKSKmM3keR3GKfvT5_VFvL101RBjbwfS4=ugV=yodWfBRfzs4w@mail.gmail.com>
+	<CAJTo0LbBSzhFyghuTRrbeb5bpL4oB7DO=2i3GMc_CTtpxTzq2g@mail.gmail.com>
+	<CAKSKmM2NNdci6kCtaxnWDgApkFerkTDYFGy78-XddG9N8xqBGw@mail.gmail.com>
+	<CAJTo0LaESjBTOXzxQzQm5KxkQqOi8HnKgJxxjr99mNWTbbeVog@mail.gmail.com>
+	<CAKSKmM2bC1C65ca2RZcKvz3yTEM_9+yHFq95yMD+hJPWpYziCA@mail.gmail.com>
+	<CAJTo0LayOQb60HB--SWiWBYau=ECryZx7Kn_QD21-G8kEMZiog@mail.gmail.com>
+	<511E200D.3000907@communistcode.co.uk>
+	<CAJTo0LbUmwwPs2eRvOBSCzep0OHx3KRn+XPO5xWSpcgbuN0RjQ@mail.gmail.com>
+	<CAKSKmM3siHyHoNkqE02JQZcLBkkHKQyfpeTG2W1zfi+BVs0Tmg@mail.gmail.com>
+	<CAJTo0LZbQ2YSR5+1vSqChMDq85Rnj+WgMr=U4=rdrePBsp27KA@mail.gmail.com>
+	<CAKSKmM061jii+YZzn-uBFuMoGW8eeR0y6OCoDkNxDwpTSr=gDA@mail.gmail.com>
+	<CAJTo0LZmEoxWrjBKsHAh1iOsT9_+nWyK0na9WYEngRvjAB199w@mail.gmail.com>
+Date: Tue, 19 Feb 2013 11:38:07 +0530
+Message-ID: <CAKSKmM3H802XUptfN39vDYsN0EcpdD8GWYftKRnGf5R7AzNHrg@mail.gmail.com>
+From: Sankar H Malarmani <sankar.m@hardcube.in>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQniUSm+hDMpYSDPB34FHBneQEdxqDzIXc9CJiXdnzDS6UcrQbdhHkZjqkDJqboU8sqD1uv3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,93 +59,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 04:26:05 -0000
-X-Groupsio-MsgNum: 43237
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JkdIF91f86UUr6LJ"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Feb 2013 06:24:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---JkdIF91f86UUr6LJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Sat, Feb 16, 2013 at 06:23:06AM +0100, Martin Jansa wrote:
-> On Thu, Feb 07, 2013 at 11:51:03AM +0100, Marcin Juszkiewicz wrote:
-> > Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
->=20
-> Fails to install with newer autotools:
->=20
-> | /usr/bin/install: will not overwrite just-created
-> `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-l=
-inux-gnueabi/gperftools/2.0-r0/image/usr/include/google/tcmalloc.h'
-> with `src/windows/google/tcmalloc.h'
-> | make[1]: *** [install-googleincludeHEADERS] Error 1
->=20
-> Complete log:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130215_060633.log/
+With all your help and support I have built the image successfully and its
+running on my colibri module...
 
-Also the subject and maybe also the directory should be gperftools not
-google-perftools.
+thanks for your help..
 
->=20
-> > ---
-> >  meta-oe/recipes-support/google-perftools/gperftools_2.0.bb | 11 ++++++=
-+++++
-> >  1 file changed, 11 insertions(+)
-> >  create mode 100644 meta-oe/recipes-support/google-perftools/gperftools=
-_2.0.bb
-> >=20
-> > diff --git a/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb=
- b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
-> > new file mode 100644
-> > index 0000000..1717752
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/google-perftools/gperftools_2.0.bb
-> > @@ -0,0 +1,11 @@
-> > +DESCRIPTION =3D "Fast, multi-threaded malloc() and nifty performance a=
-nalysis tools"
-> > +HOMEPAGE =3D "http://code.google.com/p/gperftools/"
-> > +LICENSE =3D "BSD"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D762732742c73dc6c7fbe8632f06=
-c059a"
-> > +
-> > +SRC_URI =3D "${DEBIAN_MIRROR}/main/g/google-perftools/google-perftools=
-_${PV}.orig.tar.gz"
-> > +
-> > +SRC_URI[md5sum] =3D "13f6e8961bc6a26749783137995786b6"
-> > +SRC_URI[sha256sum] =3D "7de3dd91f018825b1e7d332af1edace15c6211f430186f=
-ebede1835069861080"
-> > +
-> > +inherit autotools
-> > --=20
-> > 1.8.0
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+On Sat, Feb 16, 2013 at 3:31 PM, Burton, Ross <ross.burton@intel.com> wrote:
+
+> On 16 February 2013 05:47, Sankar H Malarmani <sankar.m@hardcube.in>
+> wrote:
+> > I just followed the instructions given in that toradex website.. Its what
+> > giving me the following error..
+> >
+> >
+> /home/hc/oe-core/build/../stuff/openembedded-core/meta/recipes-connectivity/wpa-supplicant/
+> > wpa-supplicant_2.0.bb inherits systemd but doesn't set SYSTEMD_PACKAGES
+> >
+> > What I'm doing wrong here.. What should I do to overcome this.. ?
+>
+> You're not using the oe-core revision specified on the web site.  You
+> need to checkout a specific revision, and not use oe-core master.
+>
+> Ross
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Thanks & Regards
+*Sankar*
 
---JkdIF91f86UUr6LJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEi+xAACgkQN1Ujt2V2gBwcnwCeMJALpFYGAjgF7SoLwPBT85Vx
-g8sAoIWjPSr3YaftS08vTAC6X1su8izG
-=6aUR
------END PGP SIGNATURE-----
-
---JkdIF91f86UUr6LJ--
