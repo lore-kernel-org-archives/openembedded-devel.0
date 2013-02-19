@@ -1,39 +1,33 @@
-Received: from mail-da0-f46.google.com ([209.85.210.46])
+Received: from mout.web.de ([212.227.15.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7inp-0001KA-R7
+	(envelope-from <j.schauer@email.de>) id 1U7kyV-0005Ic-HL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 09:44:06 +0100
-Received: by mail-da0-f46.google.com with SMTP id p5so2884195dak.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2013 00:27:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=kUoOecu8hoOWxUITVuYsIlcEULZWsxd2dOh5yHOF8tU=;
-	b=JBsBRyyt6u/xKwDL/+r6nR8yYe8mNIM3MUxTX4mR8Kzum4A+ThCw2Ker0nBtORoG6v
-	SJm3pvumSGYKeEUs61BbF/QJQPGcook6M/KX8jQHeC9ENzkAGUtLsiaH51x4dSuM84mt
-	MUTAjoDfRcjxWknSAS2Ya36a1u8K0tu/Pd9fjMC8G9shIdzuxsOqT75NUtK0eysYooRw
-	e1+hqYM8MO31EyoD9HhMdaSwg70YJlRwlftBixZ2BTXrh+pB8q+BLANjHswmNmvUG8WV
-	vd3lu0WqfUJAqyForEbRz/Xhzxi4KWsjHoh/ybJ4K5nak4B6EjhoeY5+zTd143J0fIn7
-	siag==
-X-Received: by 10.68.216.7 with SMTP id om7mr37639598pbc.149.1361262463863;
-	Tue, 19 Feb 2013 00:27:43 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id gf6sm17289372pbc.24.2013.02.19.00.27.40
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 19 Feb 2013 00:27:42 -0800 (PST)
-Date: Tue, 19 Feb 2013 09:27:44 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219082744.GT3300@jama>
-References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
-	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
-	<20130126115141.GH16904@jama.palm1.palmone.com>
-	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
+	Tue, 19 Feb 2013 12:03:04 +0100
+Received: from localhost ([212.201.44.247]) by smtp.web.de (mrweb001) with
+	ESMTPSA (Nemesis) id 0MINMF-1UAE5q3hZ1-004BRv for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Feb 2013 11:46:53 +0100
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
+From: Johannes Schauer <j.schauer@email.de>
+User-Agent: alot/0.3.3+
+To: openembedded-devel@lists.openembedded.org
+References: <20130218094145.29630.63354@hoothoot>
+	<CAPESJy7YAk9vj56pPkATdJO95xv8gwysyRyA9vyEq5YX-MyD=Q@mail.gmail.com>
+	<20130218142026.7849.12017@hoothoot>
+	<CAPESJy5Rox_qo+g6T1j0dT0uZ_ZaUyHmZSk8hdwZZDRSh0=UzA@mail.gmail.com>
+	<20130218165351.14989.14162@hoothoot>
+	<CAF6bG8dwjBY-bQnb8oBRXFZqoK9NzA+T2RGd+=qe0ffZhgKkRA@mail.gmail.com>
+	<20130218185446.19879.81595@hoothoot>
+	<CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
+In-Reply-To: <CALbNGRRMEer3+UQN4OsO5zm7tsv7U+BQRH8wHY8yYNVKVw_mHg@mail.gmail.com>
+Message-ID: <20130219104653.30650.95226@hoothoot>
+Date: Tue, 19 Feb 2013 11:46:53 +0100
+X-Provags-ID: V02:K0:eVIqfeaE4dnf8FsEjPsMsUcq0e4KGytku07cVuukt4m
+	YderBbBk73JjPapQnIYuDmx4nUe0c/2vsk7pkZxe5jFWej2Ooa
+	r0URlTST23B7SrNaHDlUcYScASSwv1JtxRWbEP+CDvyF7rcu8w
+	9MQL9rxvp/su4ReQWJnJjlMdjdi+e1qXqq/64cPcxmK2IdQaUy
+	NYkbPbi/Bf8caXOVseBQw==
+Subject: Re: build dependency cycles in openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,104 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 08:44:12 -0000
-X-Groupsio-MsgNum: 43241
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="c1z0ojygQhjo93O/"
-Content-Disposition: inline
-
---c1z0ojygQhjo93O/
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Feb 2013 11:03:04 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
-> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
-> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> >> ---
-> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
-> >>  1 files changed, 13 insertions(+), 0 deletions(-)
-> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >
-> > Fails in world build
-> >
-> > | configure: error: No C++ compiler found. Please install a C++ compile=
-r.
-> > | Configure failed. The contents of all config.log files follows to aid=
- debugging
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o=
-e-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
-> > | This file contains any messages produced by compilers while
-> > | running configure, to aid debugging if configure makes a mistake.
-> > |
-> > | It was created by Geany configure 1.22, which was
-> > | generated by GNU Autoconf 2.69.  Invocation command line was
-> >
-> > Complete log here:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130125_082000.log/
-> >
-> > Cheers,
-> >
-> >>
-> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/re=
-cipes-devtools/geany/geany_1.22.bb
-> >> new file mode 100644
-> >> index 0000000..1e56ec8
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >> @@ -0,0 +1,13 @@
-> >> +DESCRIPTION =3D "A fast and lightweight IDE"
-> >> +HOMEPAGE =3D "http://www.geany.org/"
-> >> +LICENSE =3D "GPLv2"
-> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5=
-d4e9c9"
-> >> +DEPENDS =3D "gtk+"
-> >> +
-> >> +inherit autotools pkgconfig
-> >> +
-> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
-> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
-> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5=
-6388e9521a27877577e"
-> >> +
-> >> +FILES_${PN} +=3D "${datadir}/icons"
-> >> --
-> >> 1.7.4.4
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >
-> OK I try to find out what goes wrong. What about the others of this serie=
+Hi,
+
+Quoting Andreas M=C3=BCller (2013-02-18 21:15:43)
+> FWIW long time ago in meta-oe commit 5b8522e3b592c96ec9325aff4bbaa68972e5=
+2d5b
+> gvfs-gdu-volume-monitor was spitted out into an own recipe to break
+> dependency loop for gvfs.
+
+If I read this correctly, then this means that for some software packages,
+multiple bitbake recipes exist for the purpose of breaking dependency cycle=
 s?
 
-I've accidentally merged this one today (it was in branch for long time
-and I haven't seen failure in world build, because it's blacklisted
-since I've reported this.
+How does the generation of build order work? Which algorithm handles the
+selection of recipes such that build dependency cycles are avoided? And onc=
+e a
+recipe which was used to break a dependency cycle was compiled, how is the
+recompilation of the *full* package scheduled?
 
-Any news on it?
+cheers, josch
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---c1z0ojygQhjo93O/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEjN4AACgkQN1Ujt2V2gBzmtACbBCC++FpOn8UUROlcX9CEmWcu
-EMQAn11cO3fKUoea0v8dPMnr3Cdxodgq
-=idbB
------END PGP SIGNATURE-----
-
---c1z0ojygQhjo93O/--
