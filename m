@@ -1,26 +1,26 @@
 Received: from mail-wi0-f179.google.com ([209.85.212.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <sankar.m@hardcube.in>) id 1U7gci-00062f-UT
+	(envelope-from <sankar.m@hardcube.in>) id 1U7gjM-0006De-8h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 07:24:21 +0100
-Received: by mail-wi0-f179.google.com with SMTP id ez12so4376983wid.6
+	Tue, 19 Feb 2013 07:31:11 +0100
+Received: by mail-wi0-f179.google.com with SMTP id ez12so4373379wid.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 22:08:08 -0800 (PST)
+	Mon, 18 Feb 2013 22:14:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:x-received:x-originating-ip:in-reply-to:references
 	:date:message-id:subject:from:to:content-type:x-gm-message-state;
-	bh=hXgEoGnX6EQXASyLt7kYzbmu2sRGmtP44FriXGNZpAo=;
-	b=N9EdIH4CYVFWlGelXxqlv/KpHQBswBTfPPAjaEXIc/P5JZmlBQ7JxyYDH46ZlDx0Sj
-	OqM1LrN2vTzm9wdBIkwUavlR1EYiOyWiwgZVg7J7RJx8WEJGVJ78LczjKwejx8tzuJkc
-	vdnP0BZEJWnoXZKKo+cc927TGOTDx0KlwABLKUv5Nzl1+XdJKrl2cPVEwU1DpnRs4+og
-	TCqjEpwt4Z/Vmbd9A61K8BSy38V43AUzjVDi6IcTUYym95IrIvpX6wop3U+Ndhl1ugjX
-	U6HceCGPynTu6ZliybM6jidCFcqt7GeL077EQNyE4zBXhdrlt+vj11fguoidWLaUOiki
-	ogfw==
+	bh=2pjbTgmLSSKsCjKEspwAsTm+Q5v6Syk4/lbBfUqWYow=;
+	b=V5MKs38bK//NiaZu17ahw6GtfUCVe/ZtuRsp1X3mcgvEwpyXHYDuR1i4i3mgw86XtX
+	8y/NxLNd9uKvyej+VcFdTPNu9cOllQLrmKPp4bESKWuBSYlBaj0chH4WgTTjYtkFc5VB
+	F75Zosnpi9/l19k4U+mhxcCVyFd3yEK7voviLAGYWMGE212He2hTS7dfRC326tKflxg+
+	hxrsOJiSSwyfYZ0spppysUs8dYr3rf2f1DOY/ATY3yX6PGfiIRb68zdtBvZ03J5iDh6e
+	kYCeYuT9j05CfIdsniAvfKXObHID1cpfXNYwwE4TVvAnqb+ChLa8ll1xv4b/EhmjXIBW
+	evmQ==
 MIME-Version: 1.0
-X-Received: by 10.194.81.40 with SMTP id w8mr12241562wjx.14.1361254088009;
-	Mon, 18 Feb 2013 22:08:08 -0800 (PST)
-Received: by 10.216.32.133 with HTTP; Mon, 18 Feb 2013 22:08:07 -0800 (PST)
+X-Received: by 10.180.93.168 with SMTP id cv8mr22983335wib.5.1361254499675;
+	Mon, 18 Feb 2013 22:14:59 -0800 (PST)
+Received: by 10.216.32.133 with HTTP; Mon, 18 Feb 2013 22:14:59 -0800 (PST)
 X-Originating-IP: [203.193.158.21]
 In-Reply-To: <CAJTo0LZmEoxWrjBKsHAh1iOsT9_+nWyK0na9WYEngRvjAB199w@mail.gmail.com>
 References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
@@ -39,11 +39,11 @@ References: <CAKSKmM3AKfssEKaJ6ndb5v9On73Yi6WW9b99h6biHtD=8xS6Aw@mail.gmail.com>
 	<CAJTo0LZbQ2YSR5+1vSqChMDq85Rnj+WgMr=U4=rdrePBsp27KA@mail.gmail.com>
 	<CAKSKmM061jii+YZzn-uBFuMoGW8eeR0y6OCoDkNxDwpTSr=gDA@mail.gmail.com>
 	<CAJTo0LZmEoxWrjBKsHAh1iOsT9_+nWyK0na9WYEngRvjAB199w@mail.gmail.com>
-Date: Tue, 19 Feb 2013 11:38:07 +0530
-Message-ID: <CAKSKmM3H802XUptfN39vDYsN0EcpdD8GWYftKRnGf5R7AzNHrg@mail.gmail.com>
+Date: Tue, 19 Feb 2013 11:44:59 +0530
+Message-ID: <CAKSKmM0KRgsyewoQEcvArS+MDQDpAbUbUw4iMvX-AEMfPJ7-yA@mail.gmail.com>
 From: Sankar H Malarmani <sankar.m@hardcube.in>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQniUSm+hDMpYSDPB34FHBneQEdxqDzIXc9CJiXdnzDS6UcrQbdhHkZjqkDJqboU8sqD1uv3
+X-Gm-Message-State: ALoCoQkdEU8FL3M+cw+PL3Gb0Fhe65MCSHewJ0aQGQD5BpLPewHxSM8jLAUbsxVwogcqvCoLUksG
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: gtk errors in openembedded classis build
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -59,15 +59,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 06:24:22 -0000
+X-List-Received-Date: Tue, 19 Feb 2013 06:31:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-With all your help and support I have built the image successfully and its
-running on my colibri module...
+I need to run my wxwidget application on the colibri module with the linux
+image built using openembedded. For that I need wxwidgets library in the
+colibri module.
+Is it possible ?? If so, how can I do it ??
 
-thanks for your help..
+Please give your suggestions..
+Thanks in advance
 
 On Sat, Feb 16, 2013 at 3:31 PM, Burton, Ross <ross.burton@intel.com> wrote:
 
