@@ -1,36 +1,36 @@
-Received: from mail-pa0-f42.google.com ([209.85.220.42])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7bm9-0002NM-3f
+	(envelope-from <martin.jansa@gmail.com>) id 1U7bnR-0002Xa-FI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 02:13:41 +0100
-Received: by mail-pa0-f42.google.com with SMTP id kq12so3072948pab.1
+	Tue, 19 Feb 2013 02:15:24 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so2738788dak.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 16:57:32 -0800 (PST)
+	Mon, 18 Feb 2013 16:58:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=HR+d2xQoC4CGsQZQOA8f3FsC3psDMhJdmSYolSUxuw0=;
-	b=s1glY4JAhItrLO1eDU1SB9P+0Q+BBgWL45YM7sPaWm8+bKzfZOo52ab++pJ4KauBIW
-	y8zfsmB+mnFVM3sQZdzLb7CI7HF0xl9STUgMLj/UncCziQE6DmfawgCwWHn6i7GztalM
-	D+8Rvua4RM69Yc8OL8ik5FaFzLuB6qyo7zTnnJ9kpeH1BJZ6Ingnj/3Ty9dgp8fW9peC
-	uRqLbakOY8uSurwx/i+i7NDBWQx2+qA+BIL4B13MBE0vCN4h3igXFhPYPAGiNF7G5hwA
-	1klDkOG0xtMPQQGwsZFN6Z99S3BWWsKWzpPblhm1L5Jt/JbDwNrl86qJouoyTigyxmPP
-	k9ew==
-X-Received: by 10.68.143.99 with SMTP id sd3mr35111788pbb.53.1361235451681;
-	Mon, 18 Feb 2013 16:57:31 -0800 (PST)
+	bh=5q+Nujb3emhc2WK9+7ZMiYUuMU4cECCPZEYCfdEQHPI=;
+	b=SS6M65PGjT4cuTIXV42gxNhRVbnYRgA61iPd/fKXEzU4G/YUzjy/tIL5T2eKf+Xs/i
+	8EHrTQSpTG8LxdlTh37IrCMVHE4ZhfH3sREPLzgkM/mIqJMfrD4A17gVqSBhrZQCaR2a
+	VCPTK/fiMtcKa24tiQtMue2mRQSNvwa5rxzrrw/F7myFc4JGwckeS5eAuH8k6bpQLtd4
+	4eeXRioTZIe1rWXEEUEwy2HKrQP3AfWRFoTZcEErLXvNBChOrNBoipVFD3GBfJLHqJbV
+	FaQbTfBdCkTi9trG8GszeOX14H7mb2NOoFiA/BteFSFjgTknCU+mAKMZrChTrsNzZgEt
+	RIFA==
+X-Received: by 10.68.195.70 with SMTP id ic6mr35161226pbc.60.1361235532070;
+	Mon, 18 Feb 2013 16:58:52 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ix6sm16018903pbc.17.2013.02.18.16.57.29
+	by mx.google.com with ESMTPS id km10sm16022287pbc.9.2013.02.18.16.58.48
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 16:57:30 -0800 (PST)
-Date: Tue, 19 Feb 2013 01:57:32 +0100
+	Mon, 18 Feb 2013 16:58:50 -0800 (PST)
+Date: Tue, 19 Feb 2013 01:58:52 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219005732.GN3300@jama>
-References: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+Message-ID: <20130219005852.GO3300@jama>
+References: <1360386167-20689-1-git-send-email-kevinb@ventureresearch.com>
 MIME-Version: 1.0
-In-Reply-To: <cover.1360337212.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <1360386167-20689-1-git-send-email-kevinb@ventureresearch.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 0/6] Python library additions/improvements
+Subject: Re: [meta-oe][PATCH] redis: add new recipe for redis-2.6.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,70 +44,983 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 01:13:43 -0000
-X-Groupsio-MsgNum: 43231
+X-List-Received-Date: Tue, 19 Feb 2013 01:15:25 -0000
+X-Groupsio-MsgNum: 43232
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/Fj8Y87PmZ4bKoDi"
+	protocol="application/pgp-signature"; boundary="K05eYGEa9LVdiTAA"
 Content-Disposition: inline
 
---/Fj8Y87PmZ4bKoDi
+--K05eYGEa9LVdiTAA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 08, 2013 at 03:33:07PM +0000, Paul Eggleton wrote:
-> Some additional recipes and updates for some Python libraries, in
-> preparation for supporting an Ajenti recipe (which will be sent
-> separately.)
+On Fri, Feb 08, 2013 at 11:02:47PM -0600, Kevin Baker wrote:
+> A recipe for Redis 2.6.9, an advanced key-value store.
+> Needed some patching of Makefiles and deps to get it to work with OE.
+>=20
+> OE Specific configuration: This is built to override MALLOC and use
+>     libc's malloc instead of the provided jemalloc or tcmalloc that
+>     weren't building correctly.
+>=20
+>     Also the default savepoint setting was updated in the default
+>     redis.conf to tune for a small embedded system.
+>=20
+> Known Bug: redis-cli eats all the input on a serial port - watch out
+>     when using the serial console with redis-cli.
+>     see https://github.com/antirez/linenoise/issues/38
 
-All merged now, thanks!
+Merged, thanks!
 
 >=20
-> Kevin Strasser <kevin.strasser@linux.intel.com> helped to test and
-> improve these.
+> Tested with Yocto "Danny" / armv7a.
 >=20
->=20
-> The following changes since commit 61911b23099c2658186179504ded318c987b52=
-76:
->=20
->   ttf: introduce update-fonts bbclass and change all ttf recipes to use i=
-t (2013-02-06 15:16:01 +0100)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib paule/python-bits
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Dpaule/python-bits
->=20
-> Paul Eggleton (6):
->   python-feedparser: add new recipe for version 5.1.3
->   python-greenlet: add new recipe for version 0.3.4
->   python-gevent: add new recipe for version 0.13.8
->   python-psutil: add new recipe for version 0.6.1
->   python-pyopenssl: tweak recipe
->   python-lxml: update to 3.0.2 and tweak
->=20
->  .../python/python-feedparser_5.1.3.bb               |   14 ++++++++++++++
->  .../recipes-devtools/python/python-gevent_0.13.8.bb |   19 +++++++++++++=
+> Signed-off-by: Kevin Baker <kevinb@ventureresearch.com>
+> ---
+>  .../hiredis-use-default-CC-if-it-is-set.patch      |  29 ++
+>  .../recipes-extended/redis/redis/init-redis-server |  40 ++
+>  ...Makefile-to-use-environment-build-setting.patch |  54 ++
+>  .../redis/redis/oe-use-libc-malloc.patch           |  33 ++
+>  meta-oe/recipes-extended/redis/redis/redis.conf    | 550 +++++++++++++++=
 ++++++
->  .../python/python-greenlet_0.3.4.bb                 |   14 ++++++++++++++
->  .../{python-lxml_2.2.8.bb =3D> python-lxml_3.0.2.bb}  |   13 ++++++-----=
---
->  .../recipes-devtools/python/python-psutil_0.6.1.bb  |   14 ++++++++++++++
->  .../python/python-pyopenssl_0.13.bb                 |    4 ++--
->  6 files changed, 69 insertions(+), 9 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/python/python-feedparser_5.1=
-=2E3.bb
->  create mode 100644 meta-oe/recipes-devtools/python/python-gevent_0.13.8.=
-bb
->  create mode 100644 meta-oe/recipes-devtools/python/python-greenlet_0.3.4=
-=2Ebb
->  rename meta-oe/recipes-devtools/python/{python-lxml_2.2.8.bb =3D> python=
--lxml_3.0.2.bb} (76%)
->  create mode 100644 meta-oe/recipes-devtools/python/python-psutil_0.6.1.bb
+>  meta-oe/recipes-extended/redis/redis_2.6.9.bb      |  36 ++
+>  6 files changed, 742 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/redis/redis/hiredis-use-defa=
+ult-CC-if-it-is-set.patch
+>  create mode 100755 meta-oe/recipes-extended/redis/redis/init-redis-server
+>  create mode 100644 meta-oe/recipes-extended/redis/redis/lua-update-Makef=
+ile-to-use-environment-build-setting.patch
+>  create mode 100644 meta-oe/recipes-extended/redis/redis/oe-use-libc-mall=
+oc.patch
+>  create mode 100644 meta-oe/recipes-extended/redis/redis/redis.conf
+>  create mode 100644 meta-oe/recipes-extended/redis/redis_2.6.9.bb
 >=20
+> diff --git a/meta-oe/recipes-extended/redis/redis/hiredis-use-default-CC-=
+if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis/hiredis-use-defau=
+lt-CC-if-it-is-set.patch
+> new file mode 100644
+> index 0000000..8135fc2
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis/hiredis-use-default-CC-if-it-i=
+s-set.patch
+> @@ -0,0 +1,29 @@
+> +From dc745a33f3875cc72d41bd34ed490b352e546352 Mon Sep 17 00:00:00 2001
+> +From: Venture Research <tech@ventureresearch.com>
+> +Date: Fri, 8 Feb 2013 17:39:52 -0600
+> +Subject: [PATCH] hiredis: use default CC if it is set
+> +
+> +Instead of trying to automagically figure out CC, which breaks with OE
+> +as CC has spaces in it, just skip it if one was already passed in.
+> +
+> +Signed-off-by: Venture Research <tech@ventureresearch.com>
+> +---
+> + deps/hiredis/Makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
+> +index 16b8767..0b27c82 100644
+> +--- a/deps/hiredis/Makefile
+> ++++ b/deps/hiredis/Makefile
+> +@@ -11,7 +11,7 @@ HIREDIS_MAJOR=3D0
+> + HIREDIS_MINOR=3D10
+> +=20
+> + # Fallback to gcc when $CC is not in $PATH.
+> +-CC:=3D$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) ||=
+ echo gcc')
+> ++CC?=3D$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) ||=
+ echo gcc')
+> + OPTIMIZATION?=3D-O3
+> + WARNINGS=3D-Wall -W -Wstrict-prototypes -Wwrite-strings
+> + DEBUG?=3D -g -ggdb
+> +--=20
+> +1.8.1.2
+> +
+> diff --git a/meta-oe/recipes-extended/redis/redis/init-redis-server b/met=
+a-oe/recipes-extended/redis/redis/init-redis-server
+> new file mode 100755
+> index 0000000..6014d70
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis/init-redis-server
+> @@ -0,0 +1,40 @@
+> +#!/bin/sh
+> +#
+> +### BEGIN INIT INFO
+> +# Provides:          redis-server
+> +# Required-Start:    $network
+> +# Required-Stop:     $network
+> +# Default-Start:     S 2 3 4 5
+> +# Default-Stop:      0 1 6
+> +# Short-Description: Redis, a key-value store
+> +# Description:       Redis is an open source, advanced key-value store.
+> +#                    http://redis.io
+> +### END INIT INFO
+> +
+> +test -f /usr/bin/redis-server || exit 0
+> +
+> +ARGS=3D"/etc/redis/redis.conf"
+> +
+> +case "$1" in
+> +    start)
+> +	echo "Starting redis-server..."
+> +        start-stop-daemon --start --quiet --exec /usr/bin/redis-server -=
+- $ARGS
+> +	;;
+> +    stop)
+> +        echo "Stopping redis-server..."
+> +        start-stop-daemon --stop --quiet --exec /usr/bin/redis-server
+> +	;;
+> +    restart)
+> +        echo "Stopping redis-server..."
+> +        start-stop-daemon --stop --quiet --exec /usr/bin/redis-server
+> +	echo "Starting redis-server..."
+> +        start-stop-daemon --start --quiet --exec /usr/bin/redis-server -=
+- $ARGS
+> +	;;
+> +    *)
+> +	echo "Usage: /etc/init.d/redis-server {start|stop|restart}"
+> +	exit 1
+> +	;;
+> +esac
+> +
+> +exit 0
+> +
+> diff --git a/meta-oe/recipes-extended/redis/redis/lua-update-Makefile-to-=
+use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis/=
+lua-update-Makefile-to-use-environment-build-setting.patch
+> new file mode 100644
+> index 0000000..c4d1bc4
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis/lua-update-Makefile-to-use-env=
+ironment-build-setting.patch
+> @@ -0,0 +1,54 @@
+> +From 394108035d350ae662a431c80131f812b5f72dff Mon Sep 17 00:00:00 2001
+> +From: Venture Research <tech@ventureresearch.com>
+> +Date: Fri, 8 Feb 2013 20:22:19 -0600
+> +Subject: [PATCH] lua: update Makefile to use environment build settings
+> +
+> +OE-specific parameters, instead of overriding all of these simply use
+> +the ones that are already passed in. Also configure for only Linux...
+> +
+> +Signed-off-by: Venture Research <tech@ventureresearch.com>
+> +---
+> + deps/lua/src/Makefile | 18 +++++++-----------
+> + 1 file changed, 7 insertions(+), 11 deletions(-)
+> +
+> +diff --git a/deps/lua/src/Makefile b/deps/lua/src/Makefile
+> +index 77d6a48..888d0da 100644
+> +--- a/deps/lua/src/Makefile
+> ++++ b/deps/lua/src/Makefile
+> +@@ -5,18 +5,14 @@
+> + # =3D=3D CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +=20
+> + # Your platform. See PLATS for possible values.
+> +-PLAT=3D none
+> ++PLAT=3D linux
+> +=20
+> +-CC=3D gcc
+> +-CFLAGS=3D -O2 -Wall $(MYCFLAGS)
+> +-AR=3D ar rcu
+> +-RANLIB=3D ranlib
+> +-RM=3D rm -f
+> +-LIBS=3D -lm $(MYLIBS)
+> +-
+> +-MYCFLAGS=3D
+> ++MYCFLAGS=3D-DLUA_USE_LINUX
+> + MYLDFLAGS=3D
+> +-MYLIBS=3D
+> ++MYLIBS=3D-Wl,-E -ldl -lreadline -lhistory -lncurses
+> ++
+> ++CFLAGS +=3D $(MYCFLAGS)
+> ++LIBS +=3D -lm $(MYLIBS)
+> +=20
+> + # =3D=3D END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LI=
+NE =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +=20
+> +@@ -48,7 +44,7 @@ o:	$(ALL_O)
+> + a:	$(ALL_A)
+> +=20
+> + $(LUA_A): $(CORE_O) $(LIB_O)
+> +-	$(AR) $@ $?
+> ++	$(AR) rcu $@ $?
+> + 	$(RANLIB) $@
+> +=20
+> + $(LUA_T): $(LUA_O) $(LUA_A)
+> +--=20
+> +1.8.1.2
+> +
+> diff --git a/meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patc=
+h b/meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patch
+> new file mode 100644
+> index 0000000..b89c871
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patch
+> @@ -0,0 +1,33 @@
+> +From f8861d2129b9e18bba137705bfa38c6bd9be1790 Mon Sep 17 00:00:00 2001
+> +From: Venture Research <tech@ventureresearch.com>
+> +Date: Wed, 6 Feb 2013 20:51:02 -0600
+> +Subject: [PATCH] hack to force use of libc malloc
+> +
+> +Hack to force libc usage as it seems the option to pass it in has been
+> +removed in favor of magic.
+> +
+> +Note that this of course doesn't allow tcmalloc and jemalloc, however=20
+> +jemalloc wasn't building correctly.
+> +
+> +Signed-off-by: Venture Research <tech@ventureresearch.com>
+> +---
+> + src/Makefile | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/Makefile b/src/Makefile
+> +index 204a271..91b307d 100644
+> +--- a/src/Makefile
+> ++++ b/src/Makefile
+> +@@ -13,7 +13,8 @@
+> + # Just use 'make dep', but this is only needed by developers.
+> +=20
+> + release_hdr :=3D $(shell sh -c './mkreleasehdr.sh')
+> +-uname_S :=3D $(shell sh -c 'uname -s 2>/dev/null || echo not')
+> ++# use fake uname option to force use of generic libc
+> ++uname_S :=3D "USE_LIBC_MALLOC"
+> + OPTIMIZATION?=3D-O2
+> + DEPENDENCY_TARGETS=3Dhiredis linenoise lua
+> +=20
+> +--=20
+> +1.8.1.2
+> +
+> diff --git a/meta-oe/recipes-extended/redis/redis/redis.conf b/meta-oe/re=
+cipes-extended/redis/redis/redis.conf
+> new file mode 100644
+> index 0000000..923b98e
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis/redis.conf
+> @@ -0,0 +1,550 @@
+> +# Redis configuration file example
+> +
+> +# Note on units: when memory size is needed, it is possible to specify
+> +# it in the usual form of 1k 5GB 4M and so forth:
+> +#
+> +# 1k =3D> 1000 bytes
+> +# 1kb =3D> 1024 bytes
+> +# 1m =3D> 1000000 bytes
+> +# 1mb =3D> 1024*1024 bytes
+> +# 1g =3D> 1000000000 bytes
+> +# 1gb =3D> 1024*1024*1024 bytes
+> +#
+> +# units are case insensitive so 1GB 1Gb 1gB are all the same.
+> +
+> +# By default Redis does not run as a daemon. Use 'yes' if you need it.
+> +# Note that Redis will write a pid file in /var/run/redis.pid when daemo=
+nized.
+> +#
+> +# OE: run as a daemon.
+> +#
+> +daemonize yes
+> +
+> +# When running daemonized, Redis writes a pid file in /var/run/redis.pid=
+ by
+> +# default. You can specify a custom pid file location here.
+> +pidfile /var/run/redis.pid
+> +
+> +# Accept connections on the specified port, default is 6379.
+> +# If port 0 is specified Redis will not listen on a TCP socket.
+> +port 6379
+> +
+> +# If you want you can bind a single interface, if the bind option is not
+> +# specified all the interfaces will listen for incoming connections.
+> +#
+> +# bind 127.0.0.1
+> +
+> +# Specify the path for the unix socket that will be used to listen for
+> +# incoming connections. There is no default, so Redis will not listen
+> +# on a unix socket when not specified.
+> +#
+> +# unixsocket /tmp/redis.sock
+> +# unixsocketperm 755
+> +
+> +# Close the connection after a client is idle for N seconds (0 to disabl=
+e)
+> +timeout 0
+> +
+> +# Set server verbosity to 'debug'
+> +# it can be one of:
+> +# debug (a lot of information, useful for development/testing)
+> +# verbose (many rarely useful info, but not a mess like the debug level)
+> +# notice (moderately verbose, what you want in production probably)
+> +# warning (only very important / critical messages are logged)
+> +loglevel notice
+> +
+> +# Specify the log file name. Also 'stdout' can be used to force
+> +# Redis to log on the standard output. Note that if you use standard
+> +# output for logging but daemonize, logs will be sent to /dev/null
+> +logfile /var/log/redis.log
+> +
+> +# To enable logging to the system logger, just set 'syslog-enabled' to y=
+es,
+> +# and optionally update the other syslog parameters to suit your needs.
+> +# syslog-enabled no
+> +
+> +# Specify the syslog identity.
+> +# syslog-ident redis
+> +
+> +# Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.
+> +# syslog-facility local0
+> +
+> +# Set the number of databases. The default database is DB 0, you can sel=
+ect
+> +# a different one on a per-connection basis using SELECT <dbid> where
+> +# dbid is a number between 0 and 'databases'-1
+> +databases 16
+> +
+> +################################ SNAPSHOTTING  #########################=
+########
+> +#
+> +# Save the DB on disk:
+> +#
+> +#   save <seconds> <changes>
+> +#
+> +#   Will save the DB if both the given number of seconds and the given
+> +#   number of write operations against the DB occurred.
+> +#
+> +#   In the example below the behaviour will be to save:
+> +#   after 900 sec (15 min) if at least 1 key changed
+> +#   after 300 sec (5 min) if at least 10 keys changed
+> +#   after 60 sec if at least 10000 keys changed
+> +#
+> +#   Note: you can disable saving at all commenting all the "save" lines.
+> +#
+> +#   It is also possible to remove all the previously configured save
+> +#   points by adding a save directive with a single empty string argument
+> +#   like in the following example:
+> +#
+> +#   save ""
+> +
+> +#save 900 1
+> +#save 300 10
+> +#save 60 10000
+> +
+> +# OE: tune for a small embedded system with a limited # of keys.
+> +save 120 1
+> +save 60 100
+> +save 30 1000
+> +
+> +# By default Redis will stop accepting writes if RDB snapshots are enabl=
+ed
+> +# (at least one save point) and the latest background save failed.
+> +# This will make the user aware (in an hard way) that data is not persis=
+ting
+> +# on disk properly, otherwise chances are that no one will notice and so=
+me
+> +# distater will happen.
+> +#
+> +# If the background saving process will start working again Redis will
+> +# automatically allow writes again.
+> +#
+> +# However if you have setup your proper monitoring of the Redis server
+> +# and persistence, you may want to disable this feature so that Redis wi=
+ll
+> +# continue to work as usually even if there are problems with disk,
+> +# permissions, and so forth.
+> +stop-writes-on-bgsave-error yes
+> +
+> +# Compress string objects using LZF when dump .rdb databases?
+> +# For default that's set to 'yes' as it's almost always a win.
+> +# If you want to save some CPU in the saving child set it to 'no' but
+> +# the dataset will likely be bigger if you have compressible values or k=
+eys.
+> +rdbcompression yes
+> +
+> +# Since verison 5 of RDB a CRC64 checksum is placed at the end of the fi=
+le.
+> +# This makes the format more resistant to corruption but there is a perf=
+ormance
+> +# hit to pay (around 10%) when saving and loading RDB files, so you can =
+disable it
+> +# for maximum performances.
+> +#
+> +# RDB files created with checksum disabled have a checksum of zero that =
+will
+> +# tell the loading code to skip the check.
+> +rdbchecksum yes
+> +
+> +# The filename where to dump the DB
+> +dbfilename dump.rdb
+> +
+> +# The working directory.
+> +#
+> +# The DB will be written inside this directory, with the filename specif=
+ied
+> +# above using the 'dbfilename' configuration directive.
+> +#=20
+> +# Also the Append Only File will be created inside this directory.
+> +#=20
+> +# Note that you must specify a directory here, not a file name.
+> +dir /var/lib/redis/
+> +
+> +################################# REPLICATION ##########################=
+#######
+> +
+> +# Master-Slave replication. Use slaveof to make a Redis instance a copy =
+of
+> +# another Redis server. Note that the configuration is local to the slave
+> +# so for example it is possible to configure the slave to save the DB wi=
+th a
+> +# different interval, or to listen to another port, and so on.
+> +#
+> +# slaveof <masterip> <masterport>
+> +
+> +# If the master is password protected (using the "requirepass" configura=
+tion
+> +# directive below) it is possible to tell the slave to authenticate befo=
+re
+> +# starting the replication synchronization process, otherwise the master=
+ will
+> +# refuse the slave request.
+> +#
+> +# masterauth <master-password>
+> +
+> +# When a slave lost the connection with the master, or when the replicat=
+ion
+> +# is still in progress, the slave can act in two different ways:
+> +#
+> +# 1) if slave-serve-stale-data is set to 'yes' (the default) the slave w=
+ill
+> +#    still reply to client requests, possibly with out of date data, or =
+the
+> +#    data set may just be empty if this is the first synchronization.
+> +#
+> +# 2) if slave-serve-stale data is set to 'no' the slave will reply with
+> +#    an error "SYNC with master in progress" to all the kind of commands
+> +#    but to INFO and SLAVEOF.
+> +#
+> +slave-serve-stale-data yes
+> +
+> +# You can configure a slave instance to accept writes or not. Writing ag=
+ainst
+> +# a slave instance may be useful to store some ephemeral data (because d=
+ata
+> +# written on a slave will be easily deleted after resync with the master=
+) but
+> +# may also cause problems if clients are writing to it because of a
+> +# misconfiguration.
+> +#
+> +# Since Redis 2.6 by default slaves are read-only.
+> +#
+> +# Note: read only slaves are not designed to be exposed to untrusted cli=
+ents
+> +# on the internet. It's just a protection layer against misuse of the in=
+stance.
+> +# Still a read only slave exports by default all the administrative comm=
+ands
+> +# such as CONFIG, DEBUG, and so forth. To a limited extend you can impro=
+ve
+> +# security of read only slaves using 'rename-command' to shadow all the
+> +# administrative / dangerous commands.
+> +slave-read-only yes
+> +
+> +# Slaves send PINGs to server in a predefined interval. It's possible to=
+ change
+> +# this interval with the repl_ping_slave_period option. The default valu=
+e is 10
+> +# seconds.
+> +#
+> +# repl-ping-slave-period 10
+> +
+> +# The following option sets a timeout for both Bulk transfer I/O timeout=
+ and
+> +# master data or ping response timeout. The default value is 60 seconds.
+> +#
+> +# It is important to make sure that this value is greater than the value
+> +# specified for repl-ping-slave-period otherwise a timeout will be detec=
+ted
+> +# every time there is low traffic between the master and the slave.
+> +#
+> +# repl-timeout 60
+> +
+> +# The slave priority is an integer number published by Redis in the INFO=
+ output.
+> +# It is used by Redis Sentinel in order to select a slave to promote int=
+o a
+> +# master if the master is no longer working correctly.
+> +#
+> +# A slave with a low priority number is considered better for promotion,=
+ so
+> +# for instance if there are three slaves with priority 10, 100, 25 Senti=
+nel will
+> +# pick the one wtih priority 10, that is the lowest.
+> +#
+> +# However a special priority of 0 marks the slave as not able to perform=
+ the
+> +# role of master, so a slave with priority of 0 will never be selected by
+> +# Redis Sentinel for promotion.
+> +#
+> +# By default the priority is 100.
+> +slave-priority 100
+> +
+> +################################## SECURITY ############################=
+#######
+> +
+> +# Require clients to issue AUTH <PASSWORD> before processing any other
+> +# commands.  This might be useful in environments in which you do not tr=
+ust
+> +# others with access to the host running redis-server.
+> +#
+> +# This should stay commented out for backward compatibility and because =
+most
+> +# people do not need auth (e.g. they run their own servers).
+> +#=20
+> +# Warning: since Redis is pretty fast an outside user can try up to
+> +# 150k passwords per second against a good box. This means that you shou=
+ld
+> +# use a very strong password otherwise it will be very easy to break.
+> +#
+> +# requirepass foobared
+> +
+> +# Command renaming.
+> +#
+> +# It is possible to change the name of dangerous commands in a shared
+> +# environment. For instance the CONFIG command may be renamed into somet=
+hing
+> +# of hard to guess so that it will be still available for internal-use
+> +# tools but not available for general clients.
+> +#
+> +# Example:
+> +#
+> +# rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52
+> +#
+> +# It is also possible to completely kill a command renaming it into
+> +# an empty string:
+> +#
+> +# rename-command CONFIG ""
+> +
+> +################################### LIMITS #############################=
+#######
+> +
+> +# Set the max number of connected clients at the same time. By default
+> +# this limit is set to 10000 clients, however if the Redis server is not
+> +# able ot configure the process file limit to allow for the specified li=
+mit
+> +# the max number of allowed clients is set to the current file limit
+> +# minus 32 (as Redis reserves a few file descriptors for internal uses).
+> +#
+> +# Once the limit is reached Redis will close all the new connections sen=
+ding
+> +# an error 'max number of clients reached'.
+> +#
+> +# maxclients 10000
+> +
+> +# Don't use more memory than the specified amount of bytes.
+> +# When the memory limit is reached Redis will try to remove keys
+> +# accordingly to the eviction policy selected (see maxmemmory-policy).
+> +#
+> +# If Redis can't remove keys according to the policy, or if the policy is
+> +# set to 'noeviction', Redis will start to reply with errors to commands
+> +# that would use more memory, like SET, LPUSH, and so on, and will conti=
+nue
+> +# to reply to read-only commands like GET.
+> +#
+> +# This option is usually useful when using Redis as an LRU cache, or to =
+set
+> +# an hard memory limit for an instance (using the 'noeviction' policy).
+> +#
+> +# WARNING: If you have slaves attached to an instance with maxmemory on,
+> +# the size of the output buffers needed to feed the slaves are subtracted
+> +# from the used memory count, so that network problems / resyncs will
+> +# not trigger a loop where keys are evicted, and in turn the output
+> +# buffer of slaves is full with DELs of keys evicted triggering the dele=
+tion
+> +# of more keys, and so forth until the database is completely emptied.
+> +#
+> +# In short... if you have slaves attached it is suggested that you set a=
+ lower
+> +# limit for maxmemory so that there is some free RAM on the system for s=
+lave
+> +# output buffers (but this is not needed if the policy is 'noeviction').
+> +#
+> +# maxmemory <bytes>
+> +
+> +# MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
+> +# is reached? You can select among five behavior:
+> +#=20
+> +# volatile-lru -> remove the key with an expire set using an LRU algorit=
+hm
+> +# allkeys-lru -> remove any key accordingly to the LRU algorithm
+> +# volatile-random -> remove a random key with an expire set
+> +# allkeys-random -> remove a random key, any key
+> +# volatile-ttl -> remove the key with the nearest expire time (minor TTL)
+> +# noeviction -> don't expire at all, just return an error on write opera=
+tions
+> +#=20
+> +# Note: with all the kind of policies, Redis will return an error on wri=
+te
+> +#       operations, when there are not suitable keys for eviction.
+> +#
+> +#       At the date of writing this commands are: set setnx setex append
+> +#       incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd
+> +#       sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zinc=
+rby
+> +#       zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby
+> +#       getset mset msetnx exec sort
+> +#
+> +# The default is:
+> +#
+> +# maxmemory-policy volatile-lru
+> +
+> +# LRU and minimal TTL algorithms are not precise algorithms but approxim=
+ated
+> +# algorithms (in order to save memory), so you can select as well the sa=
+mple
+> +# size to check. For instance for default Redis will check three keys and
+> +# pick the one that was used less recently, you can change the sample si=
+ze
+> +# using the following configuration directive.
+> +#
+> +# maxmemory-samples 3
+> +
+> +############################## APPEND ONLY MODE ########################=
+#######
+> +
+> +# By default Redis asynchronously dumps the dataset on disk. This mode is
+> +# good enough in many applications, but an issue with the Redis process =
+or
+> +# a power outage may result into a few minutes of writes lost (depending=
+ on
+> +# the configured save points).
+> +#
+> +# The Append Only File is an alternative persistence mode that provides
+> +# much better durability. For instance using the default data fsync poli=
+cy
+> +# (see later in the config file) Redis can lose just one second of write=
+s in a
+> +# dramatic event like a server power outage, or a single write if someth=
+ing
+> +# wrong with the Redis process itself happens, but the operating system =
+is
+> +# still running correctly.
+> +#
+> +# AOF and RDB persistence can be enabled at the same time without proble=
+ms.
+> +# If the AOF is enabled on startup Redis will load the AOF, that is the =
+file
+> +# with the better durability guarantees.
+> +#
+> +# Please check http://redis.io/topics/persistence for more information.
+> +
+> +#
+> +# OE: changed default to enable this
+> +appendonly yes
+> +
+> +# The name of the append only file (default: "appendonly.aof")
+> +# appendfilename appendonly.aof
+> +
+> +# The fsync() call tells the Operating System to actually write data on =
+disk
+> +# instead to wait for more data in the output buffer. Some OS will reall=
+y flush=20
+> +# data on disk, some other OS will just try to do it ASAP.
+> +#
+> +# Redis supports three different modes:
+> +#
+> +# no: don't fsync, just let the OS flush the data when it wants. Faster.
+> +# always: fsync after every write to the append only log . Slow, Safest.
+> +# everysec: fsync only one time every second. Compromise.
+> +#
+> +# The default is "everysec" that's usually the right compromise between
+> +# speed and data safety. It's up to you to understand if you can relax t=
+his to
+> +# "no" that will let the operating system flush the output buffer when
+> +# it wants, for better performances (but if you can live with the idea of
+> +# some data loss consider the default persistence mode that's snapshotti=
+ng),
+> +# or on the contrary, use "always" that's very slow but a bit safer than
+> +# everysec.
+> +#
+> +# More details please check the following article:
+> +# http://antirez.com/post/redis-persistence-demystified.html
+> +#
+> +# If unsure, use "everysec".
+> +
+> +# appendfsync always
+> +appendfsync everysec
+> +# appendfsync no
+> +
+> +# When the AOF fsync policy is set to always or everysec, and a backgrou=
+nd
+> +# saving process (a background save or AOF log background rewriting) is
+> +# performing a lot of I/O against the disk, in some Linux configurations
+> +# Redis may block too long on the fsync() call. Note that there is no fi=
+x for
+> +# this currently, as even performing fsync in a different thread will bl=
+ock
+> +# our synchronous write(2) call.
+> +#
+> +# In order to mitigate this problem it's possible to use the following o=
+ption
+> +# that will prevent fsync() from being called in the main process while a
+> +# BGSAVE or BGREWRITEAOF is in progress.
+> +#
+> +# This means that while another child is saving the durability of Redis =
+is
+> +# the same as "appendfsync none", that in practical terms means that it =
+is
+> +# possible to lost up to 30 seconds of log in the worst scenario (with t=
+he
+> +# default Linux settings).
+> +#=20
+> +# If you have latency problems turn this to "yes". Otherwise leave it as
+> +# "no" that is the safest pick from the point of view of durability.
+> +no-appendfsync-on-rewrite no
+> +
+> +# Automatic rewrite of the append only file.
+> +# Redis is able to automatically rewrite the log file implicitly calling
+> +# BGREWRITEAOF when the AOF log size will growth by the specified percen=
+tage.
+> +#=20
+> +# This is how it works: Redis remembers the size of the AOF file after t=
+he
+> +# latest rewrite (or if no rewrite happened since the restart, the size =
+of
+> +# the AOF at startup is used).
+> +#
+> +# This base size is compared to the current size. If the current size is
+> +# bigger than the specified percentage, the rewrite is triggered. Also
+> +# you need to specify a minimal size for the AOF file to be rewritten, t=
+his
+> +# is useful to avoid rewriting the AOF file even if the percentage incre=
+ase
+> +# is reached but it is still pretty small.
+> +#
+> +# Specify a percentage of zero in order to disable the automatic AOF
+> +# rewrite feature.
+> +
+> +auto-aof-rewrite-percentage 100
+> +auto-aof-rewrite-min-size 64mb
+> +
+> +################################ LUA SCRIPTING  ########################=
+#######
+> +
+> +# Max execution time of a Lua script in milliseconds.
+> +#
+> +# If the maximum execution time is reached Redis will log that a script =
+is
+> +# still in execution after the maximum allowed time and will start to
+> +# reply to queries with an error.
+> +#
+> +# When a long running script exceed the maximum execution time only the
+> +# SCRIPT KILL and SHUTDOWN NOSAVE commands are available. The first can =
+be
+> +# used to stop a script that did not yet called write commands. The seco=
+nd
+> +# is the only way to shut down the server in the case a write commands w=
+as
+> +# already issue by the script but the user don't want to wait for the na=
+tural
+> +# termination of the script.
+> +#
+> +# Set it to 0 or a negative value for unlimited execution without warnin=
+gs.
+> +lua-time-limit 5000
+> +
+> +################################## SLOW LOG ############################=
+#######
+> +
+> +# The Redis Slow Log is a system to log queries that exceeded a specified
+> +# execution time. The execution time does not include the I/O operations
+> +# like talking with the client, sending the reply and so forth,
+> +# but just the time needed to actually execute the command (this is the =
+only
+> +# stage of command execution where the thread is blocked and can not ser=
+ve
+> +# other requests in the meantime).
+> +#=20
+> +# You can configure the slow log with two parameters: one tells Redis
+> +# what is the execution time, in microseconds, to exceed in order for the
+> +# command to get logged, and the other parameter is the length of the
+> +# slow log. When a new command is logged the oldest one is removed from =
+the
+> +# queue of logged commands.
+> +
+> +# The following time is expressed in microseconds, so 1000000 is equival=
+ent
+> +# to one second. Note that a negative number disables the slow log, while
+> +# a value of zero forces the logging of every command.
+> +slowlog-log-slower-than 10000
+> +
+> +# There is no limit to this length. Just be aware that it will consume m=
+emory.
+> +# You can reclaim memory used by the slow log with SLOWLOG RESET.
+> +slowlog-max-len 128
+> +
+> +############################### ADVANCED CONFIG ########################=
+#######
+> +
+> +# Hashes are encoded using a memory efficient data structure when they h=
+ave a
+> +# small number of entries, and the biggest entry does not exceed a given
+> +# threshold. These thresholds can be configured using the following dire=
+ctives.
+> +hash-max-ziplist-entries 512
+> +hash-max-ziplist-value 64
+> +
+> +# Similarly to hashes, small lists are also encoded in a special way in =
+order
+> +# to save a lot of space. The special representation is only used when
+> +# you are under the following limits:
+> +list-max-ziplist-entries 512
+> +list-max-ziplist-value 64
+> +
+> +# Sets have a special encoding in just one case: when a set is composed
+> +# of just strings that happens to be integers in radix 10 in the range
+> +# of 64 bit signed integers.
+> +# The following configuration setting sets the limit in the size of the
+> +# set in order to use this special memory saving encoding.
+> +set-max-intset-entries 512
+> +
+> +# Similarly to hashes and lists, sorted sets are also specially encoded =
+in
+> +# order to save a lot of space. This encoding is only used when the leng=
+th and
+> +# elements of a sorted set are below the following limits:
+> +zset-max-ziplist-entries 128
+> +zset-max-ziplist-value 64
+> +
+> +# Active rehashing uses 1 millisecond every 100 milliseconds of CPU time=
+ in
+> +# order to help rehashing the main Redis hash table (the one mapping top=
+-level
+> +# keys to values). The hash table implementation Redis uses (see dict.c)
+> +# performs a lazy rehashing: the more operation you run into an hash tab=
+le
+> +# that is rehashing, the more rehashing "steps" are performed, so if the
+> +# server is idle the rehashing is never complete and some more memory is=
+ used
+> +# by the hash table.
+> +#=20
+> +# The default is to use this millisecond 10 times every second in order =
+to
+> +# active rehashing the main dictionaries, freeing memory when possible.
+> +#
+> +# If unsure:
+> +# use "activerehashing no" if you have hard latency requirements and it =
+is
+> +# not a good thing in your environment that Redis can reply form time to=
+ time
+> +# to queries with 2 milliseconds delay.
+> +#
+> +# use "activerehashing yes" if you don't have such hard requirements but
+> +# want to free memory asap when possible.
+> +activerehashing yes
+> +
+> +# The client output buffer limits can be used to force disconnection of =
+clients
+> +# that are not reading data from the server fast enough for some reason =
+(a
+> +# common reason is that a Pub/Sub client can't consume messages as fast =
+as the
+> +# publisher can produce them).
+> +#
+> +# The limit can be set differently for the three different classes of cl=
+ients:
+> +#
+> +# normal -> normal clients
+> +# slave  -> slave clients and MONITOR clients
+> +# pubsub -> clients subcribed to at least one pubsub channel or pattern
+> +#
+> +# The syntax of every client-output-buffer-limit directive is the follow=
+ing:
+> +#
+> +# client-output-buffer-limit <class> <hard limit> <soft limit> <soft sec=
+onds>
+> +#
+> +# A client is immediately disconnected once the hard limit is reached, o=
+r if
+> +# the soft limit is reached and remains reached for the specified number=
+ of
+> +# seconds (continuously).
+> +# So for instance if the hard limit is 32 megabytes and the soft limit is
+> +# 16 megabytes / 10 seconds, the client will get disconnected immediately
+> +# if the size of the output buffers reach 32 megabytes, but will also get
+> +# disconnected if the client reaches 16 megabytes and continuously overc=
+omes
+> +# the limit for 10 seconds.
+> +#
+> +# By default normal clients are not limited because they don't receive d=
+ata
+> +# without asking (in a push way), but just after a request, so only
+> +# asynchronous clients may create a scenario where data is requested fas=
+ter
+> +# than it can read.
+> +#
+> +# Instead there is a default limit for pubsub and slave clients, since
+> +# subscribers and slaves receive data in a push fashion.
+> +#
+> +# Both the hard or the soft limit can be disabled just setting it to zer=
+o.
+> +client-output-buffer-limit normal 0 0 0
+> +client-output-buffer-limit slave 256mb 64mb 60
+> +client-output-buffer-limit pubsub 32mb 8mb 60
+> +
+> +################################## INCLUDES ############################=
+#######
+> +
+> +# Include one or more other config files here.  This is useful if you
+> +# have a standard template that goes to all Redis server but also need
+> +# to customize a few per-server settings.  Include files can include
+> +# other files, so use this wisely.
+> +#
+> +# include /path/to/local.conf
+> +# include /path/to/other.conf
+> diff --git a/meta-oe/recipes-extended/redis/redis_2.6.9.bb b/meta-oe/reci=
+pes-extended/redis/redis_2.6.9.bb
+> new file mode 100644
+> index 0000000..f6818ee
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/redis/redis_2.6.9.bb
+> @@ -0,0 +1,36 @@
+> +SUMMARY =3D "Redis key-value store"
+> +DESCRIPTION =3D "Redis is an open source, advanced key-value store."
+> +HOMEPAGE =3D "http://redis.io"
+> +SECTION =3D "libs"
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM=3D"file://COPYING;md5=3D673e0ac66aac758f8f2140c6fc7947d=
+2"
+> +
+> +SRC_URI =3D "http://redis.googlecode.com/files/redis-${PV}.tar.gz \
+> +           file://hiredis-use-default-CC-if-it-is-set.patch \
+> +           file://lua-update-Makefile-to-use-environment-build-setting.p=
+atch \
+> +           file://oe-use-libc-malloc.patch \
+> +           file://redis.conf \
+> +           file://init-redis-server \
+> +          "
+> +
+> +inherit update-rc.d
+> +
+> +INITSCRIPT_NAME =3D "redis-server"
+> +INITSCRIPT_PARAMS =3D "defaults 87"
+> +
+> +SRC_URI[md5sum] =3D "5093fb7c5f763e828c857daf260665bc"
+> +SRC_URI[sha256sum] =3D "4d967eff2038aebea33875d17e85ed67179df6505df68529=
+a622f7836d1c7489"
+> +
+> +do_install() {
+> +    export PREFIX=3D${D}/${prefix}
+> +    oe_runmake install
+> +
+> +    install -d ${D}/${sysconfdir}/redis
+> +    install -m 0755 ${WORKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis=
+=2Econf
+> +
+> +    install -d ${D}/${sysconfdir}/init.d=20
+> +    install -m 0755 ${WORKDIR}/init-redis-server ${D}/${sysconfdir}/init=
+=2Ed/redis-server
+> +
+> +    install -d ${D}/var/lib/redis/
+> +}
+> +
 > --=20
-> 1.7.10.4
+> 1.8.1.2
 >=20
 >=20
 > _______________________________________________
@@ -118,16 +1031,16 @@ bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---/Fj8Y87PmZ4bKoDi
+--K05eYGEa9LVdiTAA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEizfwACgkQN1Ujt2V2gBy7YQCfQr8SEz0QTlx2GqiMmfJMuNJv
-GTUAnjQM/3mV8eTV/dBR9dhIhPwBXIVj
-=C5MX
+iEYEARECAAYFAlEizkwACgkQN1Ujt2V2gByg5ACgpipG5l25x9k4e/c+kLnGY+kf
+g00An2hc6IPzPzXO/DgyiaYKvkxXufvV
+=EY2X
 -----END PGP SIGNATURE-----
 
---/Fj8Y87PmZ4bKoDi--
+--K05eYGEa9LVdiTAA--
