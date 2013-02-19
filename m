@@ -1,38 +1,36 @@
-Received: from mail-pa0-f43.google.com ([209.85.220.43])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7bxf-0002yu-1N
+	(envelope-from <martin.jansa@gmail.com>) id 1U7dAc-00056U-6O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 02:25:35 +0100
-Received: by mail-pa0-f43.google.com with SMTP id bh2so3061132pad.2
+	Tue, 19 Feb 2013 03:43:02 +0100
+Received: by mail-ee0-f47.google.com with SMTP id e52so3190458eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 17:09:25 -0800 (PST)
+	Mon, 18 Feb 2013 18:26:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=d3DPy+sCrP4nZ2AUtt3gk6Opwo1cwU6J+HeIAtdgbCc=;
-	b=r43ornZucfSnwpoEgHfG6X3k2kKiJsbNeH7tvlV3ZgufqqIBFFUq63Pn4KjHMqV0Bk
-	qSuBXU+avWlEypcsSe62ELa55YAdpFFaQHqt8LHqYjIxUxOXfxE4OWLq/9xtlZs+Seao
-	nJeBJjjH55sREI1yx9kJdayURepzDzMxYLuujcMQnbs9NZZK958zW0wlzKZOu/+Cay2i
-	sw0MeEIA2F4D5ksrTGNKuLFWORdC1Z35pVb8WtiwJ9TU8BJSyCviivLXdXv9Xg0ezqM4
-	psHOLPVx+3R6kn5yTx/oYVKBQwc9Gu4nkD7MwcEdgywNzK0MqJ5fZs9/vhOU0Hvc9uq3
-	J23g==
-X-Received: by 10.68.240.103 with SMTP id vz7mr35069088pbc.112.1361236165838; 
-	Mon, 18 Feb 2013 17:09:25 -0800 (PST)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=BWlo7KTL96xquLQ+VUcwbGkk1b9318mBKIztMw3uCyE=;
+	b=jDpMwbkuzhHcRAiBRoYporXFD9+xkYktOBVaHEhXbaDZLlM0xytoty2YAg8MagoiOr
+	ADLUERMXm6U8+rdQ+SoZEXkwoX4c5LCq+GcEKL7YGWcXKzb+Ry95oXNu9F05G9bQ21Fw
+	5xveaU+5S3VQ1wkWpx15P4vI9HMP/HkemFw0h930GVvKbi4RsFDm0QG0P+2wAvW49mdr
+	GIsH6rzM824DkBT2zGUpjf2LACBc3mFu31I/GMojyQPgXiNlxHJ2COUtNoVUPMKavq3I
+	GWxGRmQP1UCnkxrNKAkls6awCrmNnFzBrsvLiqtrmaoK4IwRkmyPXdUVfIKuVMGKtdaI
+	7slA==
+X-Received: by 10.14.173.67 with SMTP id u43mr51633241eel.22.1361240813458;
+	Mon, 18 Feb 2013 18:26:53 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id iv3sm16045936pbc.40.2013.02.18.17.09.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 17:09:24 -0800 (PST)
+	by mx.google.com with ESMTPS id t4sm101478172eel.0.2013.02.18.18.26.52
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 18 Feb 2013 18:26:52 -0800 (PST)
+Date: Tue, 19 Feb 2013 03:27:02 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Feb 2013 02:08:43 +0100
-Message-Id: <37f4933af3a7b36d9ab7e2356a2c4d3e985a3a4b.1361235235.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1361235235.git.Martin.Jansa@gmail.com>
-References: <cover.1361235235.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1361235235.git.Martin.Jansa@gmail.com>
-References: <cover.1361235235.git.Martin.Jansa@gmail.com>
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [PATCH][for-danny 2/2] ca-certificates: upgrade to 20130119
+Message-ID: <20130219022702.GQ3300@jama>
+References: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1360880153-8526-1-git-send-email-andrea.adami@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][meta-initramfs][PATCH] initramfs-kexecboot-image: update IMAGE_INSTALL after mtd-utils split
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +44,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 01:25:36 -0000
+X-List-Received-Date: Tue, 19 Feb 2013 02:43:03 -0000
+X-Groupsio-MsgNum: 43236
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ZP7cwq+yCXYhlQRU"
+Content-Disposition: inline
 
-From: Martin Jansa <martin.jansa@gmail.com>
+--ZP7cwq+yCXYhlQRU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* old archive is no longer on upstream URL
+On Thu, Feb 14, 2013 at 11:15:53PM +0100, Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../{ca-certificates_20120623.bb => ca-certificates_20130119.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/ca-certificates/{ca-certificates_20120623.bb => ca-certificates_20130119.bb} (89%)
+merged, thanks
 
-diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
-similarity index 89%
-rename from meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
-rename to meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
-index 66150f0..5ad4485 100644
---- a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
-+++ b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=6135800ff6d893c7904d7aad90972eb5
- SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
-            file://0001-update-ca-certificates-remove-c-rehash.patch"
- 
--SRC_URI[md5sum] = "5105d4cc086f0d4ecf7bf2e4c4667289"
--SRC_URI[sha256sum] = "878cd1130ba056fe5f96decde7e5fc1b71d35eb8565a1515744912e100731ee9"
-+SRC_URI[md5sum] = "1fbbec2028a33cf865b79c204aa2e626"
-+SRC_URI[sha256sum] = "fb51ec9a2c551838cc1646a0b3c9e6bea5c1bb20ff5d71c542451fac4b191c22"
- 
- inherit autotools allarch
- 
--- 
-1.8.1.2
+> ---
+>  meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.=
+bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+> index 7e617ad..01e5b84 100644
+> --- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+> +++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+> @@ -9,9 +9,9 @@ IMAGE_FSTYPES =3D "${INITRAMFS_FSTYPES}"
+>  # avoid circular dependencies
+>  EXTRA_IMAGEDEPENDS =3D ""
+> =20
+> -# for ubiattach we have to install full mtd-utils (>700KiB)
+> +# for ubiattach we have to install mtd-utils-ubifs
+>  # or use ubiattach-klibc instead
+> -IMAGE_INSTALL =3D "kexec kexecboot mtd-utils"
+> +IMAGE_INSTALL =3D "kexec kexecboot mtd-utils-ubifs"
+> =20
+>  # Do not pollute the initrd image with rootfs features
+>  IMAGE_FEATURES =3D ""
+> --=20
+> 1.7.12.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--ZP7cwq+yCXYhlQRU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEi4vYACgkQN1Ujt2V2gBzOCACcDacnTvhmnRozGb7vmVO4W6/w
+fPUAnRK6JkMeM+aaWiIWpnhQGisyQthU
+=i0sR
+-----END PGP SIGNATURE-----
+
+--ZP7cwq+yCXYhlQRU--
