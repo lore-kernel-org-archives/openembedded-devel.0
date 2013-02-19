@@ -1,27 +1,39 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from mail-da0-f46.google.com ([209.85.210.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1U7hJV-0007Ks-WF
+	(envelope-from <martin.jansa@gmail.com>) id 1U7inp-0001KA-R7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 08:08:46 +0100
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id DD86A79435D
+	Tue, 19 Feb 2013 09:44:06 +0100
+Received: by mail-da0-f46.google.com with SMTP id p5so2884195dak.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2013 07:52:21 +0100 (CET)
-Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
-	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id E2D02A60E8;
-	Tue, 19 Feb 2013 07:52:14 +0100 (CET)
-Date: Tue, 19 Feb 2013 07:52:13 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Tue, 19 Feb 2013 00:27:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=kUoOecu8hoOWxUITVuYsIlcEULZWsxd2dOh5yHOF8tU=;
+	b=JBsBRyyt6u/xKwDL/+r6nR8yYe8mNIM3MUxTX4mR8Kzum4A+ThCw2Ker0nBtORoG6v
+	SJm3pvumSGYKeEUs61BbF/QJQPGcook6M/KX8jQHeC9ENzkAGUtLsiaH51x4dSuM84mt
+	MUTAjoDfRcjxWknSAS2Ya36a1u8K0tu/Pd9fjMC8G9shIdzuxsOqT75NUtK0eysYooRw
+	e1+hqYM8MO31EyoD9HhMdaSwg70YJlRwlftBixZ2BTXrh+pB8q+BLANjHswmNmvUG8WV
+	vd3lu0WqfUJAqyForEbRz/Xhzxi4KWsjHoh/ybJ4K5nak4B6EjhoeY5+zTd143J0fIn7
+	siag==
+X-Received: by 10.68.216.7 with SMTP id om7mr37639598pbc.149.1361262463863;
+	Tue, 19 Feb 2013 00:27:43 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id gf6sm17289372pbc.24.2013.02.19.00.27.40
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 19 Feb 2013 00:27:42 -0800 (PST)
+Date: Tue, 19 Feb 2013 09:27:44 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219075213.0e2ff123@e6520eb>
-In-Reply-To: <cover.1361235235.git.Martin.Jansa@gmail.com>
-References: <cover.1361235235.git.Martin.Jansa@gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: martin.jansa@gmail.com
-Subject: Re: [PATCH][for-danny 0/2] ca-certificates, e-wm
+Message-ID: <20130219082744.GT3300@jama>
+References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
+	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
+	<20130126115141.GH16904@jama.palm1.palmone.com>
+	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +47,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 07:08:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Feb 2013 08:44:12 -0000
+X-Groupsio-MsgNum: 43241
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="c1z0ojygQhjo93O/"
+Content-Disposition: inline
+
+--c1z0ojygQhjo93O/
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Martin,
+On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
+> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
+> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> >> ---
+> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
+> >>  1 files changed, 13 insertions(+), 0 deletions(-)
+> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >
+> > Fails in world build
+> >
+> > | configure: error: No C++ compiler found. Please install a C++ compile=
+r.
+> > | Configure failed. The contents of all config.log files follows to aid=
+ debugging
+> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o=
+e-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
+> > | This file contains any messages produced by compilers while
+> > | running configure, to aid debugging if configure makes a mistake.
+> > |
+> > | It was created by Geany configure 1.22, which was
+> > | generated by GNU Autoconf 2.69.  Invocation command line was
+> >
+> > Complete log here:
+> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
+=2E20130125_082000.log/
+> >
+> > Cheers,
+> >
+> >>
+> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/re=
+cipes-devtools/geany/geany_1.22.bb
+> >> new file mode 100644
+> >> index 0000000..1e56ec8
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> >> @@ -0,0 +1,13 @@
+> >> +DESCRIPTION =3D "A fast and lightweight IDE"
+> >> +HOMEPAGE =3D "http://www.geany.org/"
+> >> +LICENSE =3D "GPLv2"
+> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5=
+d4e9c9"
+> >> +DEPENDS =3D "gtk+"
+> >> +
+> >> +inherit autotools pkgconfig
+> >> +
+> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5=
+6388e9521a27877577e"
+> >> +
+> >> +FILES_${PN} +=3D "${datadir}/icons"
+> >> --
+> >> 1.7.4.4
+> >>
+> >>
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >
+> OK I try to find out what goes wrong. What about the others of this serie=
+s?
 
-Le Tue, 19 Feb 2013 02:08:41 +0100,
-Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
+I've accidentally merged this one today (it was in branch for long time
+and I haven't seen failure in world build, because it's blacklisted
+since I've reported this.
 
-> e-wm change is not in master, because it was resolved in newer e-wm relea=
-se
->=20
-> ca-certificates is upgraded even with old sources now available on source=
-s.oe.org,=20
-> to remove turktrust certificates:
-> http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D697366
->=20
-> The following changes since commit c02834a7cc5fda525c7ebeec545625233bab4c=
-b5:
->=20
->   xf86-video-geode: Update to 2.11.14 (2013-02-15 12:16:55 +0100)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny2
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/for-danny2
->=20
-> Lukas M=C3=A4rdian (1):
->   meta-efl: include illume home button fix
->=20
-> Martin Jansa (1):
->   ca-certificates: upgrade to 20130119
->=20
->  .../e17/e-wm/Fix-Illume-Home-Button.diff           | 166 +++++++++++++++=
-++++++
->  meta-efl/recipes-efl/e17/e-wm_svn.bb               |   3 +-
->  ...tes_20120623.bb =3D> ca-certificates_20130119.bb} |   4 +-
->  3 files changed, 170 insertions(+), 3 deletions(-)
->  create mode 100644 meta-efl/recipes-efl/e17/e-wm/Fix-Illume-Home-Button.=
-diff
->  rename meta-oe/recipes-support/ca-certificates/{ca-certificates_20120623=
-.bb =3D> ca-certificates_20130119.bb} (89%)
->=20
-pushed to danny-next.
+Any news on it?
 
-Thanks,
-Eric
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--c1z0ojygQhjo93O/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEjN4AACgkQN1Ujt2V2gBzmtACbBCC++FpOn8UUROlcX9CEmWcu
+EMQAn11cO3fKUoea0v8dPMnr3Cdxodgq
+=idbB
+-----END PGP SIGNATURE-----
+
+--c1z0ojygQhjo93O/--
