@@ -1,40 +1,38 @@
-Received: from mail-da0-f42.google.com ([209.85.210.42])
+Received: from mail-pa0-f43.google.com ([209.85.220.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7bxT-0002yG-Ao
+	(envelope-from <martin.jansa@gmail.com>) id 1U7bxf-0002yu-1N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 02:25:23 +0100
-Received: by mail-da0-f42.google.com with SMTP id z17so2690426dal.1
+	Tue, 19 Feb 2013 02:25:35 +0100
+Received: by mail-pa0-f43.google.com with SMTP id bh2so3061132pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Feb 2013 17:09:14 -0800 (PST)
+	Mon, 18 Feb 2013 17:09:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references:mime-version:content-type
-	:content-transfer-encoding;
-	bh=7Sins81sWXc8duGL0AZLLDrZdS1V6O7xLetF5lTIBuU=;
-	b=re2SxdZLaL/MC4ZuJHQLySVuDZLCpvnOJFfkUgkmlZHeAfEpZvX2XeIhJC4OZAaxzh
-	LC7oDKNi7OIf3/L8QEXdJ2BCD8IJQ5h/alOISL0vEG8UYJEBwTMdH1KYEUCzyzRV/0jI
-	BPCgEQLg8G9bWHFNECo3k2pUm4iukQUkzi4GOEDmS89t22wBvuM4bewXi4tW1pwJoTyW
-	rlPVabQf/beUxMNiVuh41IIhzq7C4D1RZ5T5XU5vppjpaknCbbwFrPepVANKmT4s/81j
-	OuqXqM/eOysNmsX6HzYVe9ZOSIz7hygXlrtQDvz3M3rzMqeM8qQmLhKvUpxBRqmf0mo5
-	5zmg==
-X-Received: by 10.68.189.103 with SMTP id gh7mr35679485pbc.92.1361236153992;
-	Mon, 18 Feb 2013 17:09:13 -0800 (PST)
+	:references:in-reply-to:references;
+	bh=d3DPy+sCrP4nZ2AUtt3gk6Opwo1cwU6J+HeIAtdgbCc=;
+	b=r43ornZucfSnwpoEgHfG6X3k2kKiJsbNeH7tvlV3ZgufqqIBFFUq63Pn4KjHMqV0Bk
+	qSuBXU+avWlEypcsSe62ELa55YAdpFFaQHqt8LHqYjIxUxOXfxE4OWLq/9xtlZs+Seao
+	nJeBJjjH55sREI1yx9kJdayURepzDzMxYLuujcMQnbs9NZZK958zW0wlzKZOu/+Cay2i
+	sw0MeEIA2F4D5ksrTGNKuLFWORdC1Z35pVb8WtiwJ9TU8BJSyCviivLXdXv9Xg0ezqM4
+	psHOLPVx+3R6kn5yTx/oYVKBQwc9Gu4nkD7MwcEdgywNzK0MqJ5fZs9/vhOU0Hvc9uq3
+	J23g==
+X-Received: by 10.68.240.103 with SMTP id vz7mr35069088pbc.112.1361236165838; 
+	Mon, 18 Feb 2013 17:09:25 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id o1sm28462792pax.2.2013.02.18.17.09.11
+	by mx.google.com with ESMTPS id iv3sm16045936pbc.40.2013.02.18.17.09.23
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 17:09:13 -0800 (PST)
+	Mon, 18 Feb 2013 17:09:24 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Feb 2013 02:08:42 +0100
-Message-Id: <7de05f853c75132d85ab926b170c5a27b8c8f72f.1361235235.git.Martin.Jansa@gmail.com>
+Date: Tue, 19 Feb 2013 02:08:43 +0100
+Message-Id: <37f4933af3a7b36d9ab7e2356a2c4d3e985a3a4b.1361235235.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.2
 In-Reply-To: <cover.1361235235.git.Martin.Jansa@gmail.com>
 References: <cover.1361235235.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1361235235.git.Martin.Jansa@gmail.com>
 References: <cover.1361235235.git.Martin.Jansa@gmail.com>
-MIME-Version: 1.0
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [PATCH][for-danny 1/2] meta-efl: include illume home button fix
+Subject: [PATCH][for-danny 2/2] ca-certificates: upgrade to 20130119
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,215 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 01:25:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 19 Feb 2013 01:25:36 -0000
 
-From: Lukas Märdian <luk@slyon.de>
+From: Martin Jansa <martin.jansa@gmail.com>
 
- * Include upstream fix for illume home button
- * Upstream fixed it in SVN revision 76646
+* old archive is no longer on upstream URL
 
-Signed-off-by: Lukas Märdian <luk@slyon.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../e17/e-wm/Fix-Illume-Home-Button.diff           | 166 +++++++++++++++++++++
- meta-efl/recipes-efl/e17/e-wm_svn.bb               |   3 +-
- 2 files changed, 168 insertions(+), 1 deletion(-)
- create mode 100644 meta-efl/recipes-efl/e17/e-wm/Fix-Illume-Home-Button.diff
+ .../{ca-certificates_20120623.bb => ca-certificates_20130119.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/ca-certificates/{ca-certificates_20120623.bb => ca-certificates_20130119.bb} (89%)
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm/Fix-Illume-Home-Button.diff b/meta-efl/recipes-efl/e17/e-wm/Fix-Illume-Home-Button.diff
-new file mode 100644
-index 0000000..09b5feb
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/e-wm/Fix-Illume-Home-Button.diff
-@@ -0,0 +1,166 @@
-+Index: e/src/modules/illume2/policies/illume/policy.c
-+===================================================================
-+--- e/src/modules/illume2/policies/illume/policy.c	(revision 67951)
-++++ e/src/modules/illume2/policies/illume/policy.c	(revision 76646)
-+@@ -13,4 +13,5 @@
-+ static void _policy_border_move(E_Border *bd, int x, int y);
-+ static void _policy_border_resize(E_Border *bd, int w, int h);
-++static void _policy_border_hide_above(E_Border *bd);
-+ static void _policy_border_hide_below(E_Border *bd);
-+ static void _policy_border_show_below(E_Border *bd);
-+@@ -124,23 +125,57 @@
-+ 
-+ static void 
-++_policy_border_hide_above(E_Border *bd)
-++{
-++   int pos = 0, layer = 0, i;
-++
-++   if (!bd) return;
-++
-++   /* determine layering position */
-++   layer = bd->layer;
-++   if (layer < 0) layer = 0;
-++   pos = 1 + (layer / 50);
-++   if (pos > 10) pos = 10;
-++
-++   /* Find the windows above this one */
-++   for (i = (pos + 1); i < 11; i++)
-++     {
-++        Eina_List *l;
-++        E_Border *b;
-++
-++        EINA_LIST_REVERSE_FOREACH(bd->zone->container->layers[i].clients, l, b) 
-++          {
-++             /* skip if it's the same border */
-++             if (b == bd) continue;
-++
-++             /* skip if it's not on this zone */
-++             if (b->zone != bd->zone) continue;
-++
-++             /* skip special borders */
-++             if (e_illume_border_is_indicator(b)) continue;
-++             if (e_illume_border_is_softkey(b)) continue;
-++             if (e_illume_border_is_keyboard(b)) continue;
-++             if (e_illume_border_is_quickpanel(b)) continue;
-++             if (e_illume_border_is_home(b)) continue;
-++
-++             e_border_iconify(b);
-++          }
-++     }
-++}
-++
-++static void 
-+ _policy_border_hide_below(E_Border *bd) 
-+ {
-+-   int pos = 0, i;
-+-
-+-//   printf("Hide Borders Below: %s %d %d\n", 
-+-//          bd->client.icccm.name, bd->x, bd->y);
-++   int pos = 0, layer = 0, i;
-+ 
-+    if (!bd) return;
-+ 
-+    /* determine layering position */
-+-   if (bd->layer <= 0) pos = 0;
-+-   else if ((bd->layer > 0) && (bd->layer <= 50)) pos = 1;
-+-   else if ((bd->layer > 50) && (bd->layer <= 100)) pos = 2;
-+-   else if ((bd->layer > 100) && (bd->layer <= 150)) pos = 3;
-+-   else if ((bd->layer > 150) && (bd->layer <= 200)) pos = 4;
-+-   else pos = 5;
-++   layer = bd->layer;
-++   if (layer < 0) layer = 0;
-++   pos = 1 + (layer / 50);
-++   if (pos > 10) pos = 10;
-+ 
-+    /* Find the windows below this one */
-+-   for (i = pos; i >= 2; i--) 
-++   for (i = (pos - 1); i >= 0; i--)
-+      {
-+         Eina_List *l;
-+@@ -184,5 +219,5 @@
-+    Eina_List *l;
-+    E_Border *prev;
-+-   int pos = 0, i;
-++   int pos = 0, layer = 0, i;
-+ 
-+ //   printf("Show Borders Below: %s %d %d\n", 
-+@@ -201,13 +236,11 @@
-+ 
-+    /* determine layering position */
-+-   if (bd->layer <= 0) pos = 0;
-+-   else if ((bd->layer > 0) && (bd->layer <= 50)) pos = 1;
-+-   else if ((bd->layer > 50) && (bd->layer <= 100)) pos = 2;
-+-   else if ((bd->layer > 100) && (bd->layer <= 150)) pos = 3;
-+-   else if ((bd->layer > 150) && (bd->layer <= 200)) pos = 4;
-+-   else pos = 5;
-++   layer = bd->layer;
-++   if (layer < 0) layer = 0;
-++   pos = 1 + (layer / 50);
-++   if (pos > 10) pos = 10;
-+ 
-+    /* Find the windows below this one */
-+-   for (i = pos; i >= 2; i--) 
-++   for (i = (pos + 1); i < 11; i++)
-+      {
-+         E_Border *b;
-+@@ -1039,7 +1072,7 @@
-+ _policy_border_add(E_Border *bd) 
-+ {
-+-//   printf("Border added: %s\n", bd->client.icccm.class);
-+-
-+    if (!bd) return;
-++
-++//   printf("\nBorder added: %s\n", bd->client.icccm.class);
-+ 
-+    /* NB: this call sets an atom on the window that specifices the zone.
-+@@ -1159,5 +1192,5 @@
-+         if ((ind = e_illume_border_indicator_get(bd->zone))) 
-+           {
-+-             /* we have the indicator, show it if needed */
-++             /* we have the indicator, hide it if needed */
-+ 	     if (ind->visible) e_illume_border_hide(ind);
-+           }
-+@@ -1178,7 +1211,7 @@
-+ _policy_border_focus_out(E_Border *bd) 
-+ {
-++   if (!bd) return;
-++
-+ //   printf("Border focus out: %s\n", bd->client.icccm.name);
-+-
-+-   if (!bd) return;
-+ 
-+    /* NB: if we got this focus_out event on a deleted border, we check if 
-+@@ -1202,5 +1235,5 @@
-+    E_Border *sft;
-+ 
-+-//   printf("Border Activate: %s\n", bd->client.icccm.name);
-++   printf("Border Activate: %s\n", bd->client.icccm.name);
-+ 
-+    if (!bd) return;
-+@@ -1707,5 +1740,18 @@
-+    if (!zone) return;
-+    if (!(bd = e_illume_border_home_get(zone))) return;
-+-   _policy_border_set_focus(bd);
-++
-++   /* if the border was hidden due to layout, we need to unhide */
-++   if (!bd->visible) e_illume_border_show(bd);
-++
-++   if ((bd->iconic) && (!bd->lock_user_iconify)) 
-++     e_border_uniconify(bd);
-++
-++   if (!bd->lock_user_stacking) e_border_raise(bd);
-++
-++   /* hide the border(s) above this one */
-++   _policy_border_hide_above(bd);
-++
-++   /* focus the border */
-++   e_border_focus_set(bd, 1, 1);
-+ }
-+ 
-+@@ -1835,5 +1881,5 @@
-+         h = kbd->border->h;
-+ 
-+-        /* adjust Y for keyboard visibility because keyboard uses fx_offset */
-++        /* adjust for keyboard visibility because keyboard uses fx_offset */
-+         y = 0;
-+         if (kbd->border->fx.y <= 0) y = kbd->border->y;
-diff --git a/meta-efl/recipes-efl/e17/e-wm_svn.bb b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-index a6f56bd..af3f9cf 100644
---- a/meta-efl/recipes-efl/e17/e-wm_svn.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_svn.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
- SRCNAME = "e"
- PV = "0.16.999.060+svnr${SRCPV}"
--PR = "r6"
-+PR = "r7"
- SRCREV = "${EFL_SRCREV}"
+diff --git a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+similarity index 89%
+rename from meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
+rename to meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+index 66150f0..5ad4485 100644
+--- a/meta-oe/recipes-support/ca-certificates/ca-certificates_20120623.bb
++++ b/meta-oe/recipes-support/ca-certificates/ca-certificates_20130119.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=6135800ff6d893c7904d7aad90972eb5
+ SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
+            file://0001-update-ca-certificates-remove-c-rehash.patch"
  
- inherit e update-alternatives gettext
-@@ -14,6 +14,7 @@ SRC_URI = "\
-   ${E_SVN}/trunk;module=${SRCNAME};protocol=http \
-   file://enlightenment_start.oe \
-   file://applications.menu \
-+  file://Fix-Illume-Home-Button.diff \
- "
+-SRC_URI[md5sum] = "5105d4cc086f0d4ecf7bf2e4c4667289"
+-SRC_URI[sha256sum] = "878cd1130ba056fe5f96decde7e5fc1b71d35eb8565a1515744912e100731ee9"
++SRC_URI[md5sum] = "1fbbec2028a33cf865b79c204aa2e626"
++SRC_URI[sha256sum] = "fb51ec9a2c551838cc1646a0b3c9e6bea5c1bb20ff5d71c542451fac4b191c22"
  
- EXTRA_OECONF = "\
+ inherit autotools allarch
+ 
 -- 
 1.8.1.2
 
