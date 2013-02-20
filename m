@@ -1,39 +1,50 @@
-Received: from mail-vc0-f181.google.com ([209.85.220.181])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1U8EEG-0001dF-UT
+	(envelope-from <jeffrey.honig@windriver.com>) id 1U8EWF-00029A-24
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 19:17:17 +0100
-Received: by mail-vc0-f181.google.com with SMTP id f13so1983698vcb.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2013 10:01:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=A4WD3wqoMcKPX1ePsI3XnFhUxRmR2fTRQbf70r22Tq4=;
-	b=pwCVjRJHkUmHuGeIE4x7omGtn+OR4jtFLlFGweWPGdtU0yHZBkAUarmwI0LLDxCZyB
-	2GLJh5LrKDdtWc2+WiylN8pUEo5u9C7Nzk2NRHJpBD/CakN5vafFJWeIUtpk4Ybg+Rbw
-	l5pErBnTH9iOSUodoc2qgRE1TnKOeinH7DI529uh4gQyhUfU6kdMoAelZH3pq2YSUNuz
-	fcA6yeUAQXeYT37hBJeCwhxDJ0OxvbEoa9coEdeJ7ZkWkzuHzReqEK/Dqs2O4ENwbyzd
-	h2ybj6luT5YvcC70aM3Davd0P4d+SQMwo3JY+5diztX69AMWhqI6Lkz2iJyiFVZF0war
-	C8qw==
+	Wed, 20 Feb 2013 19:35:51 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1KIJY8A010997
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 20 Feb 2013 10:19:34 -0800 (PST)
+Received: from jch-schlepp.wrs.com (172.25.32.253) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
+	Wed, 20 Feb 2013 10:19:25 -0800
+Received: from schlepp.honig.net (schlepp.honig.net [127.0.0.1])	by
+	jch-schlepp.wrs.com (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
+	r1KIJKUw017068	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
+	verify=NOT);	Wed, 20 Feb 2013 13:19:20 -0500
+Received: from schlepp.honig.net (jch@localhost)	by schlepp.honig.net
+	(8.14.4/8.14.4/Submit) with ESMTP id r1KIJIB0017064;	Wed, 20 Feb 2013
+	13:19:19 -0500
+From: Jeffrey Honig <jeffrey.honig@windriver.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+In-Reply-To: Message from Paul Eggleton <paul.eggleton@linux.intel.com> on
+	Wed, 20 Feb 2013 16:55:49 +0000.<5676087.MgqTuTql2e@helios>
+References: <1360707747-8128-1-git-send-email-jeffrey.honig@windriver.com>
+	<511B6EA1.5020806@communistcode.co.uk>
+	<5124FC05.40403@windriver.com> <5676087.MgqTuTql2e@helios>
+X-Mailer: MH-E 8.4+bzr; nmh 1.3; GNU Emacs 24.3.50
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAGFBMVEXMnHK1jHX257A2GQY+
+	AQD2yp+TalXrsYfLpNnfAAACHUlEQVR4nG3TwYrbMBAG4NFCrKu1UO+1FZhc1zioD+DSc2oY
+	fLUJq16VgDKv31+W5aTtKoFl9WVGM2OZfvy/Ons2hsp/w+kzGPq0CrgHpO1HhBv/gkfIzx2G
+	3nn/OfiaQKchn3gr0LtaJJDfzhledpi1YEEyvG7QO5LIiKkua8zw8nWDRQszRPm1gHL44Gbh
+	0UJCc1mBc8TgSdjalqeg1vPdmKH3Om5AHiFDZ48FtgihBqf4jxX6k1sQkRZANZduGjP0gLRt
+	J8JS/rdFtFrB5FR09zNRMz9AEWlrj/FIwagn6Crv52gnTGtStVp2mCvM9jAKfoyCpXqKaMjc
+	ONRX4jNxNUIyNJWfOQqJAMYmAWVoMEVNMkk8a/a3Au9UaQkIQIdBi99TfQ9BYgBxix7F7fCO
+	fQ5x0jE1Hx7gzjoiPb7IJdcVwgoBgFSoCnB3tkBPAKUpPS+enqFGUUYTmTe2XBUwBsOVatE6
+	qDcM495t4DFBZoVnMlF8BqRyI58rQan8L9xaDoSEuERttezl9v2rZUFl+FhufJINPvCUJM1W
+	J/Bfdug4YD+2ARUAzGivGRxjC90F3Z4BixkLHEKdrrU6MG4poFYZljrgNtg0YswAnS0FFqmj
+	bSfBqyDXBCb3YZb05qQFegKPP7ilyIWDRuWXxuS7q4w5IMK2ggZbkxfhjb0a85Y6TEH2WwG3
+	pNHXSB/TkKwpgHOQymB33f9V4A+X8QoMXFv/KAAAAABJRU5ErkJggg==
+Organization: Wind River Systems, Inc.; Trumansburg, NY  USA
 MIME-Version: 1.0
-X-Received: by 10.58.23.199 with SMTP id o7mr1777192vef.2.1361383258928; Wed,
-	20 Feb 2013 10:00:58 -0800 (PST)
-Received: by 10.52.185.168 with HTTP; Wed, 20 Feb 2013 10:00:58 -0800 (PST)
-In-Reply-To: <20130219174527.GU3300@jama>
-References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
-	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
-	<20130126115141.GH16904@jama.palm1.palmone.com>
-	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
-	<20130219082744.GT3300@jama>
-	<CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
-	<20130219174527.GU3300@jama>
-Date: Wed, 20 Feb 2013 19:00:58 +0100
-Message-ID: <CALbNGRRcTwiPWsi6KUoxB6RnpJkh=TjAD8FadX+LP+So1u7KPA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
+Date: Wed, 20 Feb 2013 13:19:18 -0500
+Message-ID: <17062.1361384358@schlepp.honig.net>
+Sender: <Jeffrey.Honig@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] hiawatha: ennsure C flags are passed to builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +58,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 18:17:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Feb 2013 18:35:52 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 19, 2013 at 6:45 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > Any news on it?
->> >
->> > --
->> No - I tried to reproduce without success and then decided to come
->> back later. Suggestion: Let me know if it fails again in world - then
->> we can think about removing it again.
->
-> Yes it does, here is log from last build
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20130219_043012.log/
->
-I think I found the culprit. As soon as I can build something which is
-close to current master (at the moment I cannot even parse) I'll send
-out a patch.
+Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
 
-Andreas
+> On Wednesday 20 February 2013 10:38:29 Mark Hatle wrote:
+> > On 2/13/13 4:44 AM, Jack Mitchell wrote:
+> > > On 12/02/13 22:22, Jeffrey C Honig wrote:
+> > >> [ CQID: WIND00403568 ]
+> > >>=20
+> > >> Hiawatha was overriding existing C flags instead of prepending warni=
+ng
+> > >> flags. This caused build failures on multilibs because the C compiler
+> > >> could not find the proper sysroot.
+> > >>=20
+> > >> Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
+> > >> ---
+> > >>=20
+> > >>    recipes-httpd/hiawatha/files/cmake.patch |   16 ++++++++++++++++
+> > >>    recipes-httpd/hiawatha/hiawatha_8.6.bb   |    3 +++
+> > >>    2 files changed, 19 insertions(+)
+> > >>    create mode 100644 recipes-httpd/hiawatha/files/cmake.patch
+> > >>=20
+> > >> diff --git a/recipes-httpd/hiawatha/files/cmake.patch
+> > >> b/recipes-httpd/hiawatha/files/cmake.patch new file mode 100644
+> > >> index 0000000..f597781
+> > >> --- /dev/null
+> > >> +++ b/recipes-httpd/hiawatha/files/cmake.patch
+> > >> @@ -0,0 +1,16 @@
+> > >> +It is necessary to include the original CMAKE_C_FLAGS to insure that
+> > >> +the sysroot is passed to the compiler, instead of just setting warn=
+ing
+> > >> +options.  Otherwise we'll get problem croos compiling in some
+> > >> +circumstances.
+> > >> +
+> > >> +--- a/CMakeLists.txt	2012-10-31 14:16:45.000000000 -0400
+> > >> ++++ b/CMakeLists.txt	2013-02-12 14:07:04.297058345 -0500
+> > >> +@@ -2,7 +2,7 @@
+> > >> + project(Hiawatha C)
+> > >> +
+> > >> + # Compiler
+> > >> +-set(CMAKE_C_FLAGS "-Wall -Wextra")
+> > >> ++set(CMAKE_C_FLAGS "-Wall -Wextra ${CMAKE_C_FLAGS}")
+> > >> + set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+> > >> +
+> > >> + # Options
+> > >> diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> > >> b/recipes-httpd/hiawatha/hiawatha_8.6.bb index 837354b..d46a525 1006=
+44
+> > >> --- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> > >> +++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+> > >> @@ -4,9 +4,12 @@ LICENSE =3D "GPLv2"
+> > >>=20
+> > >>    LIC_FILES_CHKSUM =3D
+> > >>    "file://LICENSE;md5=3D751419260aa954499f7abaabaa882bbe"
+> > >>    DEPENDS =3D "libxml2 libxslt"
+> > >>=20
+> > >> +PR =3D "r1"
+> > >> +
+> > >>=20
+> > >>    SECTION =3D "net"
+> > >>=20=20=20=20
+> > >>    SRC_URI =3D "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar=
+.gz \
+> > >>=20
+> > >> +           file://cmake.patch \
+> > >>=20
+> > >>               file://hiawatha-init"
+> > >>=20=20=20=20
+> > >>    SRC_URI[md5sum] =3D "372ea9e8329ed36e4fb781fdc1a6734c"
+> > >=20
+> > > What's the upstream status on this? If you email Hugo (the developer)
+> > > directly he usually responds within a few hours and will pull the
+> > > changes into the next release.
+> >=20
+> > I'm following up for Jeff.  He has contacted Hugo and the above patch h=
+as
+> > been included upstream.
+>=20
+> Great. Should I still apply this to meta-webserver then or do we wait for=
+ a=20
+> new upstream release?
+
+We have a local patch applied, we are good.  It is fine to wait.
+
+Thanks!
+
+Jeff
+
+--=20
+Jeffrey C. Honig
+Manager of Linux Products Division / SDT
+Wind River (=E9=A3=8E=E6=B2=B3)
++1.607.216.8613
+http://www.windriver.com
 
 
