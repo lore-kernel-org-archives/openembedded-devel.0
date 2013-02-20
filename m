@@ -1,29 +1,31 @@
-Received: from mail.mlbassoc.com ([65.100.170.105] helo=mail.chez-thomas.org)
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gary@mlbassoc.com>) id 1U89vg-0003OP-Te
+	(envelope-from <jaap.dejong@nedap.com>) id 1U8B4F-00055t-UC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 14:41:49 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id A393CF8122A; Wed, 20 Feb 2013 06:25:39 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 88D6FF81226;
-	Wed, 20 Feb 2013 06:25:38 -0700 (MST)
-Message-ID: <5124CEDA.2060707@mlbassoc.com>
-Date: Wed, 20 Feb 2013 06:25:46 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
+	Wed, 20 Feb 2013 15:54:45 +0100
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 20 Feb 2013
+	15:38:32 +0100
+X-TM-IMSS-Message-ID: <26b5580d0000e1af@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 26b5580d0000e1af ;
+	Wed, 20 Feb 2013 15:38:26 +0100
+Message-ID: <5124DFE8.9000908@nedap.com>
+Date: Wed, 20 Feb 2013 15:38:32 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1358786627-20844-1-git-send-email-fahad_usman@mentor.com>
-	<51248946.8090005@mentor.com> <20130220093405.48359dc5@e6520eb>
-In-Reply-To: <20130220093405.48359dc5@e6520eb>
-Subject: Re: [meta-browser][PATCH] nss: fix access to https websites
+References: <511E373D.1070109@nedap.com>
+	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
+	<5121F224.4080906@nedap.com>
+	<CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
+	<51238222.40804@nedap.com>
+	<CAPESJy6xoZS3hGLwiFY2d7NRsH438hPDgK+=gJXFZd0Q1Cxd6w@mail.gmail.com>
+	<5123954F.1000306@nedap.com>
+In-Reply-To: <5123954F.1000306@nedap.com>
+Subject: Re: opkg-make-index not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 13:41:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Feb 2013 14:54:45 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 2013-02-20 01:34, Eric B=C3=A9nard wrote:
-> Hi Fahad,
->
-> Le Wed, 20 Feb 2013 13:28:54 +0500,
-> "Usman, Fahad" <Fahad_Usman@mentor.com> a =C3=A9crit :
->
->> On 01/21/2013 09:43 PM, Fahad Usman wrote:
->>> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
->>> ---
->>>    recipes-support/nss/nss_3.13.3.bb |    4 +++-
->>>    1 file changed, 3 insertions(+), 1 deletion(-)
->>>
->> Can someone review this patch.
+
+On 02/19/2013 04:07 PM, Jaap de Jong wrote:
+> On 02/19/2013 03:33 PM, Takeshi Hamasaki wrote:
+>> Then I recommend to look into log files. For my case, after executing commands:
 >>
-> I applied it a few weeks ago :
-> https://github.com/OSSystems/meta-browser/commit/d2061edf243ee12caa1a89=
-439ffb6af8945b8054
+>> $ bitbake package-index -c cleansstate
+>> $ bitbake -D -D package-index > bitbake-d-d.package-index 2> errlog
+>>
+>> I have at least four log files.
+>> 1. bitbake-d-d.package-index in current dir
+>> 2. errlog   in current dir
+>> 3. run.do_package_index.* in
+>> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
+>> 4. log.do_package_index.* in
+>> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
+>>
+>> (Actually, I skipped to generate 2., my build succeed.)
+>> I guess you can find some clue looking into 4., 3., and maybe 1.
+>>
+>> I attach mine to this mail, and hope they might be some help for you.
+> Thanks for all your help!
+> I've been comparing the run.do_package_index file from myself and from
+> the buildserver.
+> If I look at it the only real difference (besides paths etc) are in the
+> SHELL
+>   > export SHELL="/usr/local/bin/bash-wrapper"
+> < export SHELL="/bin/bash"
+> I will ask my administrator to change it and will retry.
+>
+Adding
+     export SHELL=/bin/bash
+to my ~/.bashrc did the trick.
+No problem anymore.
 
-Works great as well - both FireFox and Chromium now work fine with HTTPS
+Thanks for the support!!
 
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
 
