@@ -1,50 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-gg0-f171.google.com ([209.85.161.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jeffrey.honig@windriver.com>) id 1U8EWF-00029A-24
+	(envelope-from <eu@felipetonello.com>) id 1U8Eow-0002UE-I5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 19:35:51 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1KIJY8A010997
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 20 Feb 2013 10:19:34 -0800 (PST)
-Received: from jch-schlepp.wrs.com (172.25.32.253) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
-	Wed, 20 Feb 2013 10:19:25 -0800
-Received: from schlepp.honig.net (schlepp.honig.net [127.0.0.1])	by
-	jch-schlepp.wrs.com (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
-	r1KIJKUw017068	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
-	verify=NOT);	Wed, 20 Feb 2013 13:19:20 -0500
-Received: from schlepp.honig.net (jch@localhost)	by schlepp.honig.net
-	(8.14.4/8.14.4/Submit) with ESMTP id r1KIJIB0017064;	Wed, 20 Feb 2013
-	13:19:19 -0500
-From: Jeffrey Honig <jeffrey.honig@windriver.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-In-Reply-To: Message from Paul Eggleton <paul.eggleton@linux.intel.com> on
-	Wed, 20 Feb 2013 16:55:49 +0000.<5676087.MgqTuTql2e@helios>
-References: <1360707747-8128-1-git-send-email-jeffrey.honig@windriver.com>
-	<511B6EA1.5020806@communistcode.co.uk>
-	<5124FC05.40403@windriver.com> <5676087.MgqTuTql2e@helios>
-X-Mailer: MH-E 8.4+bzr; nmh 1.3; GNU Emacs 24.3.50
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAGFBMVEXMnHK1jHX257A2GQY+
-	AQD2yp+TalXrsYfLpNnfAAACHUlEQVR4nG3TwYrbMBAG4NFCrKu1UO+1FZhc1zioD+DSc2oY
-	fLUJq16VgDKv31+W5aTtKoFl9WVGM2OZfvy/Ons2hsp/w+kzGPq0CrgHpO1HhBv/gkfIzx2G
-	3nn/OfiaQKchn3gr0LtaJJDfzhledpi1YEEyvG7QO5LIiKkua8zw8nWDRQszRPm1gHL44Gbh
-	0UJCc1mBc8TgSdjalqeg1vPdmKH3Om5AHiFDZ48FtgihBqf4jxX6k1sQkRZANZduGjP0gLRt
-	J8JS/rdFtFrB5FR09zNRMz9AEWlrj/FIwagn6Crv52gnTGtStVp2mCvM9jAKfoyCpXqKaMjc
-	ONRX4jNxNUIyNJWfOQqJAMYmAWVoMEVNMkk8a/a3Au9UaQkIQIdBi99TfQ9BYgBxix7F7fCO
-	fQ5x0jE1Hx7gzjoiPb7IJdcVwgoBgFSoCnB3tkBPAKUpPS+enqFGUUYTmTe2XBUwBsOVatE6
-	qDcM495t4DFBZoVnMlF8BqRyI58rQan8L9xaDoSEuERttezl9v2rZUFl+FhufJINPvCUJM1W
-	J/Bfdug4YD+2ARUAzGivGRxjC90F3Z4BixkLHEKdrrU6MG4poFYZljrgNtg0YswAnS0FFqmj
-	bSfBqyDXBCb3YZb05qQFegKPP7ilyIWDRuWXxuS7q4w5IMK2ggZbkxfhjb0a85Y6TEH2WwG3
-	pNHXSB/TkKwpgHOQymB33f9V4A+X8QoMXFv/KAAAAABJRU5ErkJggg==
-Organization: Wind River Systems, Inc.; Trumansburg, NY  USA
-MIME-Version: 1.0
-Date: Wed, 20 Feb 2013 13:19:18 -0500
-Message-ID: <17062.1361384358@schlepp.honig.net>
-Sender: <Jeffrey.Honig@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] hiawatha: ennsure C flags are passed to builds.
+	Wed, 20 Feb 2013 19:55:10 +0100
+Received: by mail-gg0-f171.google.com with SMTP id j1so1437424ggn.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Feb 2013 10:38:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=EzDAnPvo+D4febUfqoIG+/ZQuhpMFGOYBvN1nJtbYG8=;
+	b=RG84J9hvVForBGj8SHndSEnLcL++pTbn9j8G8q4bCCabf5eOnBJM2WyQoz7P3VrsRR
+	nyrCXLdsZT+TqbIg1n9EcmQapxS94metSZFNVmWQsxG3fIFi7BLufmRwm0jYzasMdWaC
+	ftb91vQbejPbFxdpt5tdbYJFK0+XoE+syigEUmXBMbeT7DxnLm11CcOW6sfqCKmwNiQ8
+	1odJMUwhi8swXz6rdr2THqJdsx2cwX4aiu7oK+Iap59SawZ9fwR7tT3KPDIQunXy8CLI
+	GiP22YMHT4eR65iTGCtnkfBB/8Sf8Pf91xjGqqVzMwttv+OEfnYcvAD32ixf5hVXL5a7
+	YWzA==
+X-Received: by 10.101.175.18 with SMTP id c18mr11630534anp.3.1361385539204;
+	Wed, 20 Feb 2013 10:38:59 -0800 (PST)
+Received: from mlabs-ftonello.masimolabs.com
+	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
+	by mx.google.com with ESMTPS id u2sm19584213anm.12.2013.02.20.10.38.57
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 20 Feb 2013 10:38:58 -0800 (PST)
+From: eu@felipetonello.com
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Feb 2013 10:38:50 -0800
+Message-Id: <1361385530-2248-1-git-send-email-ftonello@cercacor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQlfbV6WRUQTYN1e3tlsqe69rIvNkPxQPYaN2znYueJbql8VD4FG1bWGo7c+WWjniiWbL8bW
+Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: [meta-oe][PATCH] gsoap: added gsoap 2.8.12 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,101 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 18:35:52 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Feb 2013 18:55:10 -0000
 
-Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-> On Wednesday 20 February 2013 10:38:29 Mark Hatle wrote:
-> > On 2/13/13 4:44 AM, Jack Mitchell wrote:
-> > > On 12/02/13 22:22, Jeffrey C Honig wrote:
-> > >> [ CQID: WIND00403568 ]
-> > >>=20
-> > >> Hiawatha was overriding existing C flags instead of prepending warni=
-ng
-> > >> flags. This caused build failures on multilibs because the C compiler
-> > >> could not find the proper sysroot.
-> > >>=20
-> > >> Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
-> > >> ---
-> > >>=20
-> > >>    recipes-httpd/hiawatha/files/cmake.patch |   16 ++++++++++++++++
-> > >>    recipes-httpd/hiawatha/hiawatha_8.6.bb   |    3 +++
-> > >>    2 files changed, 19 insertions(+)
-> > >>    create mode 100644 recipes-httpd/hiawatha/files/cmake.patch
-> > >>=20
-> > >> diff --git a/recipes-httpd/hiawatha/files/cmake.patch
-> > >> b/recipes-httpd/hiawatha/files/cmake.patch new file mode 100644
-> > >> index 0000000..f597781
-> > >> --- /dev/null
-> > >> +++ b/recipes-httpd/hiawatha/files/cmake.patch
-> > >> @@ -0,0 +1,16 @@
-> > >> +It is necessary to include the original CMAKE_C_FLAGS to insure that
-> > >> +the sysroot is passed to the compiler, instead of just setting warn=
-ing
-> > >> +options.  Otherwise we'll get problem croos compiling in some
-> > >> +circumstances.
-> > >> +
-> > >> +--- a/CMakeLists.txt	2012-10-31 14:16:45.000000000 -0400
-> > >> ++++ b/CMakeLists.txt	2013-02-12 14:07:04.297058345 -0500
-> > >> +@@ -2,7 +2,7 @@
-> > >> + project(Hiawatha C)
-> > >> +
-> > >> + # Compiler
-> > >> +-set(CMAKE_C_FLAGS "-Wall -Wextra")
-> > >> ++set(CMAKE_C_FLAGS "-Wall -Wextra ${CMAKE_C_FLAGS}")
-> > >> + set(CMAKE_BUILD_TYPE "RelWithDebInfo")
-> > >> +
-> > >> + # Options
-> > >> diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb
-> > >> b/recipes-httpd/hiawatha/hiawatha_8.6.bb index 837354b..d46a525 1006=
-44
-> > >> --- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
-> > >> +++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
-> > >> @@ -4,9 +4,12 @@ LICENSE =3D "GPLv2"
-> > >>=20
-> > >>    LIC_FILES_CHKSUM =3D
-> > >>    "file://LICENSE;md5=3D751419260aa954499f7abaabaa882bbe"
-> > >>    DEPENDS =3D "libxml2 libxslt"
-> > >>=20
-> > >> +PR =3D "r1"
-> > >> +
-> > >>=20
-> > >>    SECTION =3D "net"
-> > >>=20=20=20=20
-> > >>    SRC_URI =3D "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar=
-.gz \
-> > >>=20
-> > >> +           file://cmake.patch \
-> > >>=20
-> > >>               file://hiawatha-init"
-> > >>=20=20=20=20
-> > >>    SRC_URI[md5sum] =3D "372ea9e8329ed36e4fb781fdc1a6734c"
-> > >=20
-> > > What's the upstream status on this? If you email Hugo (the developer)
-> > > directly he usually responds within a few hours and will pull the
-> > > changes into the next release.
-> >=20
-> > I'm following up for Jeff.  He has contacted Hugo and the above patch h=
-as
-> > been included upstream.
->=20
-> Great. Should I still apply this to meta-webserver then or do we wait for=
- a=20
-> new upstream release?
+This recipe was inspired on the gsoap recipe in oe-classic.
 
-We have a local patch applied, we are good.  It is fine to wait.
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+---
+ .../recipes-support/gsoap/gsoap-native_2.8.12.bb   |   17 +++++++++++++++
+ meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb      |   17 +++++++++++++++
+ meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc     |   23 ++++++++++++++++++++
+ 3 files changed, 57 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+ create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+ create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
 
-Thanks!
+diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+new file mode 100644
+index 0000000..a83eb26
+--- /dev/null
++++ b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+@@ -0,0 +1,17 @@
++require gsoap_${PV}.inc
++
++DEPENDS = ""
++
++EXTRA_OEMAKE = ""
++
++inherit native
++
++do_install() {
++    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
++
++    install -m 0755 ${S}/gsoap/src/soapcpp2 ${STAGING_BINDIR_NATIVE}/
++}
++
++
++SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
++SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+new file mode 100644
+index 0000000..5db2e61
+--- /dev/null
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+@@ -0,0 +1,17 @@
++require gsoap_${PV}.inc
++
++DEPENDS = "gsoap-native openssl"
++
++do_install_append() {
++   install -d ${D}${libdir}
++   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++ libgsoapck
++   do
++       oe_libinstall -C gsoap $lib ${D}${libdir}
++   done
++}
++
++FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
++FILES_${PN} += "${datadir}"
++
++SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
++SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+new file mode 100644
+index 0000000..30cf9a6
+--- /dev/null
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+@@ -0,0 +1,23 @@
++DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
++for the development of SOAP Web Services and clients."
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.zip \
++        "
++
++inherit autotools
++
++PR = "r1"
++
++S = "${WORKDIR}/gsoap-2.8"
++
++FILES_${PN}-dev = "${includedir}"
++RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
++
++FILES_${PN}-staticdev = "${libdir}"
++
++PARALLEL_MAKE = ""
++
++EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
+-- 
+1.7.9.5
 
-Jeff
-
---=20
-Jeffrey C. Honig
-Manager of Linux Products Division / SDT
-Wind River (=E9=A3=8E=E6=B2=B3)
-+1.607.216.8613
-http://www.windriver.com
 
 
