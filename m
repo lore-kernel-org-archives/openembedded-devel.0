@@ -1,41 +1,25 @@
-Received: from mail-pb0-f41.google.com ([209.85.160.41])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U7rVZ-0002gK-AH
+	(envelope-from <mark.hatle@windriver.com>) id 1U7zqY-0008Dy-F2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Feb 2013 19:01:37 +0100
-Received: by mail-pb0-f41.google.com with SMTP id um15so2360634pbc.14
+	Wed, 20 Feb 2013 03:55:52 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1K2dco0000743
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Feb 2013 09:45:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=v7uxIs7WkdqOxqktlH97awJnqwJTwM9daJ7ivg3VUV0=;
-	b=RFvCVJ2gSiWNBxQxdm50Td8znlPp0DkR9PvwxVWO2bDsFCusePmWAjGADFExfZw0De
-	RqNNqFuGITT1iKv7KOxnPTRpU3f04mfEMKOFm5lvLvY5USSrXfnqZrGNJD4loyO9b5jt
-	cUtvpwk/J3alrNjhWYAB5E4PsB11jPJz6WUrXfQmgyadpI1gbXTFYyuilWGOyJYLXtOP
-	BigIk+gl/vU3RNmOOtzdcjcgvoVHD+pB0YbCKYcg94+G+WbgZOuHoiG/SPTXjT3iGo4J
-	Vk+HSCHTbdNYAOnQ6RZkmbGzXmO8kMW13HBOeDI+my3ouJp6eQX9e/q8BjbXOvEu5uHm
-	edhg==
-X-Received: by 10.66.82.35 with SMTP id f3mr47367184pay.49.1361295926837;
-	Tue, 19 Feb 2013 09:45:26 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ax3sm18670733pbd.42.2013.02.19.09.45.23
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 19 Feb 2013 09:45:25 -0800 (PST)
-Date: Tue, 19 Feb 2013 18:45:27 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130219174527.GU3300@jama>
-References: <1359152782-23743-1-git-send-email-schnitzeltony@googlemail.com>
-	<1359152782-23743-5-git-send-email-schnitzeltony@googlemail.com>
-	<20130126115141.GH16904@jama.palm1.palmone.com>
-	<CALbNGRQepRvg6+EVXzuSZA4a+JTuknBEHm=PJ0L=0a0hGpoX7w@mail.gmail.com>
-	<20130219082744.GT3300@jama>
-	<CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
+	Tue, 19 Feb 2013 18:39:39 -0800 (PST)
+Received: from msp-mhatle-lx2.wrs.com (172.25.34.61) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.2.318.4; Tue, 19 Feb 2013 18:39:38 -0800
+From: Mark Hatle <mark.hatle@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 19 Feb 2013 21:09:34 -0600
+Message-ID: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
+X-Mailer: git-send-email 1.8.1.2.545.g2f19ada
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRSwt6Sa_hui48k+iMJu4PaespyXcO3kEW4hCgsDL5iP8w@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe/meta-systemd/V2 4/5] geany: initial add 1.22
+X-Originating-IP: [172.25.34.61]
+Subject: [PATCH meta-webserver] apache2: correct header file location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,119 +33,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 18:01:38 -0000
-X-Groupsio-MsgNum: 43247
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="raeF0v9V3uM6lh8B"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Feb 2013 02:55:57 -0000
+Content-Type: text/plain
 
---raeF0v9V3uM6lh8B
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Pradeep Tumati <pradeep.tumati@windriver.com>
 
-On Tue, Feb 19, 2013 at 05:12:03PM +0100, Andreas M=FCller wrote:
-> On Tue, Feb 19, 2013 at 9:27 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > On Sat, Jan 26, 2013 at 01:13:32PM +0100, Andreas M=FCller wrote:
-> >> On Sat, Jan 26, 2013 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com=
-> wrote:
-> >> > On Fri, Jan 25, 2013 at 11:26:21PM +0100, Andreas M=FCller wrote:
-> >> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> >> >> ---
-> >> >>  meta-oe/recipes-devtools/geany/geany_1.22.bb |   13 +++++++++++++
-> >> >>  1 files changed, 13 insertions(+), 0 deletions(-)
-> >> >>  create mode 100644 meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >> >
-> >> > Fails in world build
-> >> >
-> >> > | configure: error: No C++ compiler found. Please install a C++ comp=
-iler.
-> >> > | Configure failed. The contents of all config.log files follows to =
-aid debugging
-> >> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5t=
-e-oe-linux-gnueabi/geany/1.22-r0/geany-1.22/config.log
-> >> > | This file contains any messages produced by compilers while
-> >> > | running configure, to aid debugging if configure makes a mistake.
-> >> > |
-> >> > | It was created by Geany configure 1.22, which was
-> >> > | generated by GNU Autoconf 2.69.  Invocation command line was
-> >> >
-> >> > Complete log here:
-> >> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.wo=
-rld.20130125_082000.log/
-> >> >
-> >> > Cheers,
-> >> >
-> >> >>
-> >> >> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe=
-/recipes-devtools/geany/geany_1.22.bb
-> >> >> new file mode 100644
-> >> >> index 0000000..1e56ec8
-> >> >> --- /dev/null
-> >> >> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-> >> >> @@ -0,0 +1,13 @@
-> >> >> +DESCRIPTION =3D "A fast and lightweight IDE"
-> >> >> +HOMEPAGE =3D "http://www.geany.org/"
-> >> >> +LICENSE =3D "GPLv2"
-> >> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c4298=
-5a5d4e9c9"
-> >> >> +DEPENDS =3D "gtk+"
-> >> >> +
-> >> >> +inherit autotools pkgconfig
-> >> >> +
-> >> >> +SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
-> >> >> +SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
-> >> >> +SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e8=
-2d56388e9521a27877577e"
-> >> >> +
-> >> >> +FILES_${PN} +=3D "${datadir}/icons"
-> >> >> --
-> >> >> 1.7.4.4
-> >> >>
-> >> >>
-> >> >> _______________________________________________
-> >> >> Openembedded-devel mailing list
-> >> >> Openembedded-devel@lists.openembedded.org
-> >> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
-> >> >
-> >> > --
-> >> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >> >
-> >> OK I try to find out what goes wrong. What about the others of this se=
-ries?
-> >
-> > I've accidentally merged this one today (it was in branch for long time
-> > and I haven't seen failure in world build, because it's blacklisted
-> > since I've reported this.
-> >
-> > Any news on it?
-> >
-> > --
-> No - I tried to reproduce without success and then decided to come
-> back later. Suggestion: Let me know if it fails again in world - then
-> we can think about removing it again.
+Apache header files are being placed in ../usr/include/lib32-apache2
+under the sysroot where as lib32-modphp looks for ../usr/include/apache2
+directory. This fix ensures that apache2 header files are placed
+in the ../usr/include/apache2/ directory.
 
-Yes it does, here is log from last build
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30219_043012.log/
+Signed-off-by: Pradeep Tumati <pradeep.tumati@windriver.com>
+Signed-off-by: Jeff Polk <jeff.polk@windriver.com>
+---
+ recipes-httpd/apache2/apache2_2.4.2.bb | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
-Cheers,
+diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb b/recipes-httpd/apache2/apache2_2.4.2.bb
+index af7840d..af8c4ca 100644
+--- a/recipes-httpd/apache2/apache2_2.4.2.bb
++++ b/recipes-httpd/apache2/apache2_2.4.2.bb
+@@ -41,13 +41,13 @@ EXTRA_OECONF = "--enable-ssl \
+ 		--enable-rewrite \
+ 		--with-dbm=sdbm \
+ 		--with-berkeley-db=no \
+-		--localstatedir=/var/${PN} \
++		--localstatedir=/var/${BPN} \
+ 		--with-gdbm=no \
+ 		--with-ndbm=no \
+-		--includedir=${includedir}/${PN} \
+-		--datadir=${datadir}/${PN} \
+-		--sysconfdir=${sysconfdir}/${PN} \
+-                --libexecdir=${libdir}/${PN}/modules \
++		--includedir=${includedir}/${BPN} \
++		--datadir=${datadir}/${BPN} \
++		--sysconfdir=${sysconfdir}/${BPN} \
++                --libexecdir=${libdir}/${BPN}/modules \
+ 		ap_cv_void_ptr_lt_long=no \
+ 		--enable-mpms-shared \
+ 		ac_cv_have_threadsafe_pollset=no"
+@@ -68,19 +68,19 @@ do_install_append() {
+ 		    -e 's,/usr/bin/,${bindir}/,g' \
+ 		    -e 's,/usr/lib,${libdir}/,g' \
+ 		    -e 's,/etc/,${sysconfdir}/,g' \
+-		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
+-	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
++		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${BPN}
++	chmod 755 ${D}/${sysconfdir}/init.d/${BPN}
+ 	# remove the goofy original files...
+-	rm -rf ${D}/${sysconfdir}/${PN}/original
++	rm -rf ${D}/${sysconfdir}/${BPN}/original
+ 	# Expat should be found in the staging area via DEPENDS...
+ 	rm -f ${D}/${libdir}/libexpat.*
+ 
+-	install -d ${D}${sysconfdir}/${PN}/conf.d
+-	install -d ${D}${sysconfdir}/${PN}/modules.d
++	install -d ${D}${sysconfdir}/${BPN}/conf.d
++	install -d ${D}${sysconfdir}/${BPN}/modules.d
+ 
+ 	# Ensure configuration file pulls in conf.d and modules.d
+-	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${PN}/httpd.conf
+-	printf "\nIncludeOptional ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${PN}/httpd.conf
++	printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
++	printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+ }
+ 
+ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+@@ -88,12 +88,12 @@ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+ apache_sysroot_preprocess () {
+ 	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+ 	install -m 755 ${D}${bindir}/apxs ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+-	sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
++	sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+ 	sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+ 
+-	sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
+-	sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
+-	sed -i 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
++	sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
++	sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
++	sed -i 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+ }
+ 
+ #
+-- 
+1.8.1.2.545.g2f19ada
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---raeF0v9V3uM6lh8B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEjujcACgkQN1Ujt2V2gBxcMACgjGP7OScjzX2KtcLy/dHLmS+k
-LTYAn0N/FwKkQWHE1/axub5Z99FBXCYL
-=mA0W
------END PGP SIGNATURE-----
-
---raeF0v9V3uM6lh8B--
