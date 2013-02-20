@@ -1,33 +1,20 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1U85TL-0004ov-Hr
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U86vX-0007Wi-JP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 09:56:16 +0100
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1U852z-0006Vt-Qj from Fahad_Usman@mentor.com ;
-	Wed, 20 Feb 2013 00:29:01 -0800
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 20 Feb 2013 00:29:01 -0800
-Received: from [137.202.156.99] (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server (TLS) id 14.1.289.1; Wed, 20 Feb 2013 08:28:59 +0000
-Message-ID: <51248946.8090005@mentor.com>
-Date: Wed, 20 Feb 2013 13:28:54 +0500
-From: "Usman, Fahad" <Fahad_Usman@mentor.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
-MIME-Version: 1.0
-To: Fahad Usman <fahad_usman@mentor.com>
-References: <1358786627-20844-1-git-send-email-fahad_usman@mentor.com>
-In-Reply-To: <1358786627-20844-1-git-send-email-fahad_usman@mentor.com>
-X-Originating-IP: [137.202.0.76]
-X-OriginalArrivalTime: 20 Feb 2013 08:29:01.0827 (UTC)
-	FILETIME=[562C7530:01CE0F44]
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-devel@lists.openembedded.org, Eric Benard <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] nss: fix access to https websites
+	Wed, 20 Feb 2013 11:29:30 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 4B270D22B3;
+	Wed, 20 Feb 2013 11:13:20 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Feb 2013 11:13:07 +0100
+Message-Id: <1361355187-7426-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] onig: do not use system headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +28,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 08:56:26 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Feb 2013 10:29:30 -0000
 
-On 01/21/2013 09:43 PM, Fahad Usman wrote:
-> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
-> ---
->   recipes-support/nss/nss_3.13.3.bb |    4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/recipes-support/nss/nss_3.13.3.bb b/recipes-support/nss/nss_3.13.3.bb
-> index bb602b1..a841397 100644
-> --- a/recipes-support/nss/nss_3.13.3.bb
-> +++ b/recipes-support/nss/nss_3.13.3.bb
-> @@ -1,7 +1,7 @@
->   DESCRIPTION = "Mozilla's SSL and TLS implementation"
->   HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
->   
-> -PR = "r1"
-> +PR = "r2"
->   
->   LICENSE = "MPL1.1 GPL LGPL"
->   LIC_FILES_CHKSUM = "file://security/nss/manifest.mn;md5=d71978748f23eae3156c38ac2a691924"
-> @@ -66,6 +66,8 @@ do_install() {
->   		NS_USE_GCC=1 \
->   		NSS_USE_SYSTEM_SQLITE=1 \
->   		NSS_ENABLE_ECC=1 \
-> +		FREEBL_CHILD_BUILD=1 \
-> +		CC="${CC}" \
->   		SOURCE_LIB_DIR="${TD}/${libdir}" \
->   		SOURCE_BIN_DIR="${TD}/${bindir}"
->   
-Hi,
-Can someone review this patch.
+When build on host with older eglibc (Ubuntu 12.04) build fails with:
 
-Regards,
-Fahad.
+/tmp/OE/build/tmp-eglibc/sysroots/genericarmv8/usr/include/bits/predefs.h:23:3: error: #error "Never use <bits/predefs.h> directly; include <stdc-predef.h> instead."
+
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ .../onig/files/do-not-use-system-headers.patch     | 44 ++++++++++++++++++++++
+ meta-oe/recipes-support/onig/onig_5.9.3.bb         |  3 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
+
+diff --git a/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch b/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
+new file mode 100644
+index 0000000..859446f
+--- /dev/null
++++ b/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
+@@ -0,0 +1,44 @@
++Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++When build on host with older eglibc (Ubuntu 12.04) build fails with:
++
++/tmp/OE/build/tmp-eglibc/sysroots/genericarmv8/usr/include/bits/predefs.h:23:3: error: #error "Never use <bits/predefs.h> directly; include <stdc-predef.h> instead."
++
++Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++Upstream-Status: not valid (OE specific patch)
++
++---
++ Makefile.am        |    2 +-
++ sample/Makefile.am |    2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++--- onig-5.9.3.orig/Makefile.am
+++++ onig-5.9.3/Makefile.am
++@@ -4,11 +4,11 @@ sampledir = $(top_srcdir)/sample
++ libname = libonig.la
++
++ ACLOCAL_AMFLAGS = -I m4
++ #AM_CFLAGS = -DNOT_RUBY
++ AM_CFLAGS =
++-INCLUDES  = -I$(top_srcdir) -I$(includedir)
+++INCLUDES  = -I$(top_srcdir)
++
++ SUBDIRS = . sample
++
++ include_HEADERS = oniguruma.h oniggnu.h onigposix.h
++ lib_LTLIBRARIES = $(libname)
++--- onig-5.9.3.orig/sample/Makefile.am
+++++ onig-5.9.3/sample/Makefile.am
++@@ -1,10 +1,10 @@
++ noinst_PROGRAMS = encode listcap names posix simple sql syntax crnl
++
++ libname = $(top_builddir)/libonig.la
++ LDADD   = $(libname)
++-INCLUDES  = -I$(top_srcdir) -I$(includedir)
+++INCLUDES  = -I$(top_srcdir)
++
++ encode_SOURCES  = encode.c
++ listcap_SOURCES = listcap.c
++ names_SOURCES   = names.c
++ posix_SOURCES   = posix.c
+diff --git a/meta-oe/recipes-support/onig/onig_5.9.3.bb b/meta-oe/recipes-support/onig/onig_5.9.3.bb
+index 230e585..f67ceed 100644
+--- a/meta-oe/recipes-support/onig/onig_5.9.3.bb
++++ b/meta-oe/recipes-support/onig/onig_5.9.3.bb
+@@ -5,7 +5,8 @@ HOMEPAGE = "http://www.geocities.jp/kosako3/oniguruma/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0d4861b5bc0c392a5aa90d9d76ebd86f"
+ 
+-SRC_URI = "http://www.geocities.jp/kosako3/oniguruma/archive/onig-${PV}.tar.gz"
++SRC_URI = "http://www.geocities.jp/kosako3/oniguruma/archive/onig-${PV}.tar.gz \
++           file://do-not-use-system-headers.patch"
+ 
+ SRC_URI[md5sum] = "0d4eda2066d3c92970842a6790ce897a"
+ SRC_URI[sha256sum] = "c3bba66b2a84760e6582c40881db97c839d94f327870009724bb8b4d0c051f2a"
+-- 
+1.8.1.2
 
 
 
