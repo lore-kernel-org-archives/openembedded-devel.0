@@ -1,28 +1,32 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1U85Ni-0004dn-3P
+	(envelope-from <Fahad_Usman@mentor.com>) id 1U85TL-0004ov-Hr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 09:50:41 +0100
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 78E98D19808
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2013 09:34:16 +0100 (CET)
-Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
-	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 36A29A6294;
-	Wed, 20 Feb 2013 09:34:06 +0100 (CET)
-Date: Wed, 20 Feb 2013 09:34:05 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: "Usman, Fahad" <Fahad_Usman@mentor.com>
-Message-ID: <20130220093405.48359dc5@e6520eb>
-In-Reply-To: <51248946.8090005@mentor.com>
+	Wed, 20 Feb 2013 09:56:16 +0100
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1U852z-0006Vt-Qj from Fahad_Usman@mentor.com ;
+	Wed, 20 Feb 2013 00:29:01 -0800
+Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Wed, 20 Feb 2013 00:29:01 -0800
+Received: from [137.202.156.99] (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server (TLS) id 14.1.289.1; Wed, 20 Feb 2013 08:28:59 +0000
+Message-ID: <51248946.8090005@mentor.com>
+Date: Wed, 20 Feb 2013 13:28:54 +0500
+From: "Usman, Fahad" <Fahad_Usman@mentor.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
+MIME-Version: 1.0
+To: Fahad Usman <fahad_usman@mentor.com>
 References: <1358786627-20844-1-git-send-email-fahad_usman@mentor.com>
-	<51248946.8090005@mentor.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <1358786627-20844-1-git-send-email-fahad_usman@mentor.com>
+X-Originating-IP: [137.202.0.76]
+X-OriginalArrivalTime: 20 Feb 2013 08:29:01.0827 (UTC)
+	FILETIME=[562C7530:01CE0F44]
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	openembedded-devel@lists.openembedded.org, Eric Benard <eric@eukrea.com>
 Subject: Re: [meta-browser][PATCH] nss: fix access to https websites
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,27 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 08:50:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Feb 2013 08:56:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Fahad,
+On 01/21/2013 09:43 PM, Fahad Usman wrote:
+> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+> ---
+>   recipes-support/nss/nss_3.13.3.bb |    4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/recipes-support/nss/nss_3.13.3.bb b/recipes-support/nss/nss_3.13.3.bb
+> index bb602b1..a841397 100644
+> --- a/recipes-support/nss/nss_3.13.3.bb
+> +++ b/recipes-support/nss/nss_3.13.3.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Mozilla's SSL and TLS implementation"
+>   HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
+>   
+> -PR = "r1"
+> +PR = "r2"
+>   
+>   LICENSE = "MPL1.1 GPL LGPL"
+>   LIC_FILES_CHKSUM = "file://security/nss/manifest.mn;md5=d71978748f23eae3156c38ac2a691924"
+> @@ -66,6 +66,8 @@ do_install() {
+>   		NS_USE_GCC=1 \
+>   		NSS_USE_SYSTEM_SQLITE=1 \
+>   		NSS_ENABLE_ECC=1 \
+> +		FREEBL_CHILD_BUILD=1 \
+> +		CC="${CC}" \
+>   		SOURCE_LIB_DIR="${TD}/${libdir}" \
+>   		SOURCE_BIN_DIR="${TD}/${bindir}"
+>   
+Hi,
+Can someone review this patch.
 
-Le Wed, 20 Feb 2013 13:28:54 +0500,
-"Usman, Fahad" <Fahad_Usman@mentor.com> a =C3=A9crit :
+Regards,
+Fahad.
 
-> On 01/21/2013 09:43 PM, Fahad Usman wrote:
-> > Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
-> > ---
-> >   recipes-support/nss/nss_3.13.3.bb |    4 +++-
-> >   1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> Can someone review this patch.
->=20
-I applied it a few weeks ago :
-https://github.com/OSSystems/meta-browser/commit/d2061edf243ee12caa1a89439f=
-fb6af8945b8054
-
-Eric
 
 
