@@ -1,31 +1,30 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1U8B4F-00055t-UC
+	(envelope-from <mark.hatle@windriver.com>) id 1U8Cwm-0007wG-IA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Feb 2013 15:54:45 +0100
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 20 Feb 2013
-	15:38:32 +0100
-X-TM-IMSS-Message-ID: <26b5580d0000e1af@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 26b5580d0000e1af ;
-	Wed, 20 Feb 2013 15:38:26 +0100
-Message-ID: <5124DFE8.9000908@nedap.com>
-Date: Wed, 20 Feb 2013 15:38:32 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Wed, 20 Feb 2013 17:55:09 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r1KGcuga001019
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Feb 2013 08:38:56 -0800 (PST)
+Received: from Marks-MacBook-Pro.local (172.25.36.230) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.318.4; Wed, 20 Feb 2013 08:38:56 -0800
+Message-ID: <5124FC05.40403@windriver.com>
+Date: Wed, 20 Feb 2013 10:38:29 -0600
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <511E373D.1070109@nedap.com>
-	<CAPESJy6N4oTvAz9GBLN29UBZ=i1CgfKJ5DOQv3R6BS18AABe1Q@mail.gmail.com>
-	<5121F224.4080906@nedap.com>
-	<CAPESJy4eKSJq3VMtTKDDsYaR+0s=pAk+4kASqT74WzS2xQrVDg@mail.gmail.com>
-	<51238222.40804@nedap.com>
-	<CAPESJy6xoZS3hGLwiFY2d7NRsH438hPDgK+=gJXFZd0Q1Cxd6w@mail.gmail.com>
-	<5123954F.1000306@nedap.com>
-In-Reply-To: <5123954F.1000306@nedap.com>
-Subject: Re: opkg-make-index not found
+To: <openembedded-devel@lists.openembedded.org>
+References: <1360707747-8128-1-git-send-email-jeffrey.honig@windriver.com>
+	<511B6EA1.5020806@communistcode.co.uk>
+In-Reply-To: <511B6EA1.5020806@communistcode.co.uk>
+Cc: Jeffrey C Honig <Jeffrey.Honig@windriver.com>
+Subject: Re: [PATCH] hiawatha: ennsure C flags are passed to builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,45 +38,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 14:54:45 -0000
+X-List-Received-Date: Wed, 20 Feb 2013 16:55:09 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-
-On 02/19/2013 04:07 PM, Jaap de Jong wrote:
-> On 02/19/2013 03:33 PM, Takeshi Hamasaki wrote:
->> Then I recommend to look into log files. For my case, after executing commands:
+On 2/13/13 4:44 AM, Jack Mitchell wrote:
+> On 12/02/13 22:22, Jeffrey C Honig wrote:
+>> [ CQID: WIND00403568 ]
 >>
->> $ bitbake package-index -c cleansstate
->> $ bitbake -D -D package-index > bitbake-d-d.package-index 2> errlog
+>> Hiawatha was overriding existing C flags instead of prepending warning flags.
+>> This caused build failures on multilibs because the C compiler could not find
+>> the proper sysroot.
 >>
->> I have at least four log files.
->> 1. bitbake-d-d.package-index in current dir
->> 2. errlog   in current dir
->> 3. run.do_package_index.* in
->> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
->> 4. log.do_package_index.* in
->> build/tmp-angstrom_v2012_05-eglibc/work/armv5te-angstrom-linux-gnueabi/package-index-1.0-r0
+>> Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
+>> ---
+>>    recipes-httpd/hiawatha/files/cmake.patch |   16 ++++++++++++++++
+>>    recipes-httpd/hiawatha/hiawatha_8.6.bb   |    3 +++
+>>    2 files changed, 19 insertions(+)
+>>    create mode 100644 recipes-httpd/hiawatha/files/cmake.patch
 >>
->> (Actually, I skipped to generate 2., my build succeed.)
->> I guess you can find some clue looking into 4., 3., and maybe 1.
+>> diff --git a/recipes-httpd/hiawatha/files/cmake.patch b/recipes-httpd/hiawatha/files/cmake.patch
+>> new file mode 100644
+>> index 0000000..f597781
+>> --- /dev/null
+>> +++ b/recipes-httpd/hiawatha/files/cmake.patch
+>> @@ -0,0 +1,16 @@
+>> +It is necessary to include the original CMAKE_C_FLAGS to insure that
+>> +the sysroot is passed to the compiler, instead of just setting warning
+>> +options.  Otherwise we'll get problem croos compiling in some
+>> +circumstances.
+>> +
+>> +--- a/CMakeLists.txt	2012-10-31 14:16:45.000000000 -0400
+>> ++++ b/CMakeLists.txt	2013-02-12 14:07:04.297058345 -0500
+>> +@@ -2,7 +2,7 @@
+>> + project(Hiawatha C)
+>> +
+>> + # Compiler
+>> +-set(CMAKE_C_FLAGS "-Wall -Wextra")
+>> ++set(CMAKE_C_FLAGS "-Wall -Wextra ${CMAKE_C_FLAGS}")
+>> + set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+>> +
+>> + # Options
+>> diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>> index 837354b..d46a525 100644
+>> --- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>> +++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>> @@ -4,9 +4,12 @@ LICENSE = "GPLv2"
+>>    LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+>>    DEPENDS = "libxml2 libxslt"
 >>
->> I attach mine to this mail, and hope they might be some help for you.
-> Thanks for all your help!
-> I've been comparing the run.do_package_index file from myself and from
-> the buildserver.
-> If I look at it the only real difference (besides paths etc) are in the
-> SHELL
->   > export SHELL="/usr/local/bin/bash-wrapper"
-> < export SHELL="/bin/bash"
-> I will ask my administrator to change it and will retry.
+>> +PR = "r1"
+>> +
+>>    SECTION = "net"
+>>
+>>    SRC_URI = "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar.gz \
+>> +           file://cmake.patch \
+>>               file://hiawatha-init"
+>>
+>>    SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
 >
-Adding
-     export SHELL=/bin/bash
-to my ~/.bashrc did the trick.
-No problem anymore.
+> What's the upstream status on this? If you email Hugo (the developer)
+> directly he usually responds within a few hours and will pull the
+> changes into the next release.
 
-Thanks for the support!!
+I'm following up for Jeff.  He has contacted Hugo and the above patch has been 
+included upstream.
+
+--Mark
+
+> Regards,
+> Jack.
+>
 
 
 
