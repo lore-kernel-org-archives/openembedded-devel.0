@@ -1,32 +1,32 @@
 Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jeffrey.honig@windriver.com>) id 1U8av4-0007cs-0e
+	(envelope-from <jeffrey.honig@windriver.com>) id 1U8ayU-0007mN-56
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 19:31:02 +0100
+	Thu, 21 Feb 2013 19:34:32 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1LIElFf005350
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1LIICXX005400
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2013 10:14:47 -0800 (PST)
+	Thu, 21 Feb 2013 10:18:12 -0800 (PST)
 Received: from jch-schlepp.wrs.com (172.25.32.253) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
-	Thu, 21 Feb 2013 10:14:44 -0800
+	Thu, 21 Feb 2013 10:18:11 -0800
 Received: from schlepp.honig.net (schlepp.honig.net [127.0.0.1])	by
 	jch-schlepp.wrs.com (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
-	r1LIEheb015267	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
+	r1LIIAJi016182	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
 	verify=NOT)	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2013 13:14:43 -0500
+	Thu, 21 Feb 2013 13:18:10 -0500
 Received: (from jch@localhost)	by schlepp.honig.net (8.14.4/8.14.4/Submit) id
-	r1LIEhHC015266	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 13:14:43 -0500
+	r1LIIAOq016181	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Feb 2013 13:18:10 -0500
 From: <jeffrey.honig@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Feb 2013 13:14:43 -0500
-Message-ID: <1361470483-15230-1-git-send-email-jeffrey.honig@windriver.com>
+Date: Thu, 21 Feb 2013 13:18:10 -0500
+Message-ID: <1361470690-16147-1-git-send-email-jeffrey.honig@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] Resolve sysvinit and util-linux conflicting man pages.
+Subject: [PATCH] v2: Resolve sysvinit and util-linux conflicting man pages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2013 18:31:04 -0000
+X-List-Received-Date: Thu, 21 Feb 2013 18:34:35 -0000
 Content-Type: text/plain
 
 From: Jeffrey C Honig <jch@honig.net>
@@ -49,6 +49,8 @@ From: Jeffrey C Honig <jch@honig.net>
 
 Use alternatives mechanism to prevent sysvlinux and util-linux
 man pages from causing conflicts.
+
+Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
 ---
  meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb    |   11 ++++++++++-
  meta/recipes-core/util-linux/util-linux.inc       |    9 +++++++++
