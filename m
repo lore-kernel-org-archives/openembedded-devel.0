@@ -1,36 +1,33 @@
-Received: from mail-ie0-f169.google.com ([209.85.223.169])
+Received: from mail-da0-f42.google.com ([209.85.210.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1U8Qhu-0001S4-Bt
+	(envelope-from <raj.khem@gmail.com>) id 1U8QuX-0001jf-4k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 08:36:43 +0100
-Received: by mail-ie0-f169.google.com with SMTP id 13so11186813iea.0
+	Thu, 21 Feb 2013 08:49:45 +0100
+Received: by mail-da0-f42.google.com with SMTP id z17so3995911dal.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2013 23:20:30 -0800 (PST)
+	Wed, 20 Feb 2013 23:33:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=EFqpGXHuBN/uj3g/oJ+G7ToK2MH1rCrVesywnBOp8Ok=;
-	b=FL3x5N2igU+3NhaVudaTNvQGrZARSMOFVOo/cHrv6ud+S3zBy042XhG+gtTKYlsRth
-	dB6aGZEp2pj3RLt6mq6kbf+FHXf29gR0MF9LI3BSasdTJEnYElILeYr/ZoQ/6XpZ996q
-	sAIvN17gc8mI3ntrOumE2PdE8lVDkjABu/wsiojWVoVfEdeKZz9CeJgb35MDwMBMczHv
-	1bFQk6ktF2u88u5nLZog1P8vIXO7CU4VXmOUBdjZOBnI7BNeZRjUHEoMaPPnhJPGtnUx
-	RZrwTNzvR4d3ehSmsyjR1mJJPOGY6UhcuWkJXTo1FD0bBztG2Ap65d8xU6UIZorIHl4e
-	jHWA==
-X-Received: by 10.50.57.232 with SMTP id l8mr12914252igq.49.1361431230089;
-	Wed, 20 Feb 2013 23:20:30 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.192.134 with HTTP; Wed, 20 Feb 2013 23:19:59 -0800 (PST)
-In-Reply-To: <CAGiJk9eRf5edo-5r6YBXKkjzv9bMOnv8tBsuBPBy+UVLCtq5CQ@mail.gmail.com>
-References: <20130109101310.38A4C103A7@opal>
-	<CAGiJk9fX-W=P_5z_e45NwU+Nj3CSc4ozdS3_WyVyVtQyEWc5bw@mail.gmail.com>
-	<lyobgvykjp.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<20130220070843.GB23580@sakrah.homelinux.org>
-	<CAGiJk9eRf5edo-5r6YBXKkjzv9bMOnv8tBsuBPBy+UVLCtq5CQ@mail.gmail.com>
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=bfGFJkhpO9WgGeeuu+dc7etjMfCNx/ZpggHt3oRzXQw=;
+	b=kcLSLikSkgH1PyZzyoGn/wJJ6NAizocmwJmeTrwSHBeX47kuoRZcrbg5noIS5cMOAo
+	+uX2C+/JPymSLEqoTiNGNzGjIqXgYVinIUTg/f+vJY1EZvr6S31K7Tt+46bfuO0yPL6k
+	W0V0SdNv9FOv2l5LSTJArwy+czMrezKc5UoFgCWUK0JCjPoyEUolAmRzPbGY3F9spw4t
+	EKfNxGXKpQkbLA3aT4e1Y+oT6HIg6xcXXlnNHDsjzYkoAuOGiHL9KyrGHKxVo93/P6DZ
+	DfBgrtv1KXhlthVCBaD9m7kWZH/+URczGUcBiM207J8qEA3v3MUOcwd6sibeoEnkqOtH
+	C+2Q==
+X-Received: by 10.66.5.138 with SMTP id s10mr9631502pas.52.1361432011994;
+	Wed, 20 Feb 2013 23:33:31 -0800 (PST)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168]) by mx.google.com with ESMTPS id
+	bi2sm114089782pab.18.2013.02.20.23.33.30
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 20 Feb 2013 23:33:31 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Feb 2013 23:19:59 -0800
-Message-ID: <CAMKF1sqWz2MYeMzYqs2U0eVZR3w4MoX9Ndx95a3Xb1cM-phYnw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Khem Raj : dhcp: Add systemd unit file for dhclient
+Date: Wed, 20 Feb 2013 23:33:20 -0800
+Message-Id: <1361432001-14607-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-kde][PATCH 1/2] packagegroup-kde-apps.bb: Fix multiline comment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,49 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2013 07:36:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Feb 2013 07:49:46 -0000
+X-List-Received-Date: Thu, 21 Feb 2013 07:49:46 -0000
 
-On Tue, Feb 19, 2013 at 11:20 PM, Samuel Stirtzel
-<s.stirtzel@googlemail.com> wrote:
-> 2013/2/20 Khem Raj <raj.khem@gmail.com>:
->> On (11/01/13 13:24), Enrico Scholz wrote:
->>> Samuel Stirtzel <s.stirtzel-gM/Ye1E23mwN+BqQ9rBEUg@public.gmane.org>
->>> writes:
->>>
->>> >> +ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q $INTERFACES -lf /var/lib/dhcp/dhclient.leases
->>> > ...
->>> > systemd[1]: PID file /var/run/dhclient.pid not readable (yet?) after start.
->>> > [FAILED] Failed to start Dynamic Host Configuration Protocol (DHCP).
->>> > See 'systemctl status dhclient.service' for details.
->>> >
->>> >
->>> > Any idea why it is missing?
->>>
->>> probably a '--no-pid' option
->>
->> how is /var/run setup in your case ? may be its not existing for some
->> reason
->>
->
-> Hi,
->
-> /var/run exists, there is just no PID file for dhclient.
-> The service however explicitly states that it wants one
-> "PIDFile=/var/run/dhclient.pid".
->
+bitbake does not parse the recipe otherwise
 
-In my case pid file exists and I dont get this error so wondering what could
-be different in your case.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-packagegroups/packagegroup-kde-apps.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
->
-> --
-> Regards
-> Samuel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes-packagegroups/packagegroup-kde-apps.bb b/recipes-packagegroups/packagegroup-kde-apps.bb
+index 4258c4f..d681754 100644
+--- a/recipes-packagegroups/packagegroup-kde-apps.bb
++++ b/recipes-packagegroups/packagegroup-kde-apps.bb
+@@ -9,6 +9,7 @@
+ #calligra-sheets \
+ #calligra-stage \
+ #calligra-words \
++#
+ DESCRIPTION = "KDE packagegroup for applications"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+-- 
+1.7.9.5
+
 
 
