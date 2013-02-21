@@ -1,31 +1,22 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U8VAJ-0001LH-0c
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U8VZ0-0001yG-NC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 13:22:24 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id ACDE8D22B3; Thu, 21 Feb 2013 13:06:10 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
+	Thu, 21 Feb 2013 13:47:57 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 74700D22B3;
-	Thu, 21 Feb 2013 13:05:39 +0100 (CET)
-Message-ID: <51260D8D.7040702@linaro.org>
-Date: Thu, 21 Feb 2013 13:05:33 +0100
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 2643FD22B3;
+	Thu, 21 Feb 2013 13:31:42 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130105 Thunderbird/17.0.2
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Building with gcc-4.6 is not working
+Date: Thu, 21 Feb 2013 13:31:35 +0100
+Message-Id: <1361449895-30626-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <CAP9ODKoT2KTTWB=DiLXwyjy7K_2wK8Osa2_i9tmbsbQXS8s+4Q@mail.gmail.com>
+References: <CAP9ODKoT2KTTWB=DiLXwyjy7K_2wK8Osa2_i9tmbsbQXS8s+4Q@mail.gmail.com>
+Subject: [meta-oe][PATCH] onig: do not use system headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,113 +30,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2013 12:22:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Feb 2013 12:47:57 -0000
 
-Hi
+When build on host with older eglibc (Ubuntu 12.04) build fails with:
 
-OE moved some time ago to gcc-4.7 as default. But for some
-builds I need to use older version which is now in
-meta-openembedded/toolchain-layer.
-But such builds fail for both gcc-linaro-4.6 and gcc-4.6:
+/tmp/OE/build/tmp-eglibc/sysroots/genericarmv8/usr/include/bits/predefs.h:23:3: error: #error "Never use <bits/predefs.h> directly; include <stdc-predef.h> instead."
 
-NOTE: Executing RunQueue Tasks
-ERROR: Error executing a python function in
-/tmp/del/oe46/meta-linaro/recipes-devtools/gcc/gcc-cross-initial_linaro-4.6.bb:
-CalledProcessError: Command 'tar -cf - -C
-/tmp/del/oe46/build/tmp-eglibc/work/armv7ahf-vfp-neon-oe-linux-gnueabi/gcc-cross-initial/linaro-4.6-r5/pkgdata
--ps . | tar -xf - -C
-/tmp/del/oe46/build/tmp-eglibc/pkgdata/armv7ahf-vfp-neon-oe-linux-gnueabi'
-returned non-zero exit status 2 with output tar:
-/tmp/del/oe46/build/tmp-eglibc/work/armv7ahf-vfp-neon-oe-linux-gnueabi/gcc-cross-initial/linaro-4.6-r5/pkgdata:
-Cannot chdir: No such file or directory
-tar: Error is not recoverable: exiting now
-tar: This does not look like a tar archive
-tar: Exiting with failure status due to previous errors
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ .../onig/files/do-not-use-system-headers.patch     | 44 ++++++++++++++++++++++
+ meta-oe/recipes-support/onig/onig_5.9.3.bb         |  3 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
 
-
-ERROR: The stack trace of python calls that resulted in this
-exception/failure was:
-ERROR:   File "sstate_task_postfunc", line 10, in <module>
-ERROR: ERROR:   File "sstate_task_postfunc", line 4, in sstate_task_postfunc
-ERROR: ERROR:   File "sstate.bbclass", line 76, in sstate_install
-ERROR: ERROR:   File
-"/tmp/del/oe46/openembedded-core/meta/lib/oe/path.py", line 85, in copytree
-ERROR:     check_output(cmd, shell=True, stderr=subprocess.STDOUT)
-ERROR: ERROR:   File
-"/tmp/del/oe46/openembedded-core/meta/lib/oe/path.py", line 155, in
-check_output
-ERROR:     raise CalledProcessError(retcode, cmd, output=output)
-ERROR: ERROR: The code that was being executed was:
-ERROR:      0006:        bb.build.exec_func(intercept, d)
-ERROR:      0007:    sstate_package(shared_state, d)
-ERROR:      0008:
-ERROR:      0009:
-ERROR:  *** 0010:sstate_task_postfunc(d)
-ERROR:      0011:
-ERROR: [From file: 'sstate_task_postfunc', lineno: 10, function: <module>]
-ERROR:      0001:
-ERROR:      0002:def sstate_task_postfunc(d):
-ERROR:      0003:    shared_state = sstate_state_fromvars(d)
-ERROR:  *** 0004:    sstate_install(shared_state, d)
-ERROR:      0005:    for intercept in shared_state['interceptfuncs']:
-ERROR:      0006:        bb.build.exec_func(intercept, d)
-ERROR:      0007:    sstate_package(shared_state, d)
-ERROR:      0008:
-ERROR: [From file: 'sstate_task_postfunc', lineno: 4, function:
-sstate_task_postfunc]
-ERROR:      0072:    f.close()
-ERROR:      0073:
-ERROR:      0074:    # Run the actual file install
-ERROR:      0075:    for state in ss['dirs']:
-ERROR:  *** 0076:        oe.path.copytree(state[1], state[2])
-ERROR:      0077:
-ERROR:      0078:    for postinst in (d.getVar('SSTATEPOSTINSTFUNCS',
-True) or '').split():
-ERROR:      0079:        bb.build.exec_func(postinst, d)
-ERROR:      0080:
-ERROR: [From file: 'sstate.bbclass', lineno: 76, function: sstate_install]
-ERROR: Function failed: sstate_task_postfunc
-ERROR: Logfile of failure stored in:
-/tmp/del/oe46/build/tmp-eglibc/work/armv7ahf-vfp-neon-oe-linux-gnueabi/gcc-cross-initial/linaro-4.6-r5/temp/log.do_packagedata.1989
-ERROR: Task 9
-(/tmp/del/oe46/meta-linaro/recipes-devtools/gcc/gcc-cross-initial_linaro-4.6.bb,
-do_packagedata) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 206 tasks of which 205 didn't need to be
-rerun and 1 failed.
-No currently running tasks (204 of 211)
-
-Summary: 1 task failed:
-
-/tmp/del/oe46/meta-linaro/recipes-devtools/gcc/gcc-cross-initial_linaro-4.6.bb,
-do_packagedata
-
-12:40 hrw@puchatek:build$ cat
-tmp-eglibc/work/armv7ahf-vfp-neon-oe-linux-gnueabi/gcc-cross-initial/linaro-4.6-r5/temp/log.task_order
-do_fetch (29286): log.do_fetch.29286
-do_populate_lic (7366): log.do_populate_lic.7366
-do_configure (8396): log.do_configure.8396
-do_compile (10582): log.do_compile.10582
-do_install (1146): log.do_install.1146
-do_packagedata (1706): log.do_packagedata.1706
-do_populate_sysroot (1707): log.do_populate_sysroot.1707
-do_packagedata (1989): log.do_packagedata.1989
-
-But when I do same build with gcc-linaro-4.7 task order is different:
-
-aarch64-oe-linux/ x86_64-linux/     12:46 hrw@puchatek:build$ cat
-tmp-eglibc/work/aarch64-oe-linux/gcc-cross-initial/linaro-4.7-r9/temp/log.task_order
-do_cleansstate (3000): log.do_cleansstate.3000
-do_fetch (3632): log.do_fetch.3632
-do_configure (4335): log.do_configure.4335
-do_populate_lic (4336): log.do_populate_lic.4336
-do_compile (5923): log.do_compile.5923
-do_install (29169): log.do_install.29169
-do_populate_sysroot (29707): log.do_populate_sysroot.29707
-
-
-How to solve the problem?
+diff --git a/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch b/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
+new file mode 100644
+index 0000000..b93602a
+--- /dev/null
++++ b/meta-oe/recipes-support/onig/files/do-not-use-system-headers.patch
+@@ -0,0 +1,44 @@
++Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++When build on host with older eglibc (Ubuntu 12.04) build fails with:
++
++/tmp/OE/build/tmp-eglibc/sysroots/genericarmv8/usr/include/bits/predefs.h:23:3: error: #error "Never use <bits/predefs.h> directly; include <stdc-predef.h> instead."
++
++Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++Upstream-Status: Inappropriate [embedded specific]
++
++---
++ Makefile.am        |    2 +-
++ sample/Makefile.am |    2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++--- onig-5.9.3.orig/Makefile.am
+++++ onig-5.9.3/Makefile.am
++@@ -4,11 +4,11 @@ sampledir = $(top_srcdir)/sample
++ libname = libonig.la
++
++ ACLOCAL_AMFLAGS = -I m4
++ #AM_CFLAGS = -DNOT_RUBY
++ AM_CFLAGS =
++-INCLUDES  = -I$(top_srcdir) -I$(includedir)
+++INCLUDES  = -I$(top_srcdir)
++
++ SUBDIRS = . sample
++
++ include_HEADERS = oniguruma.h oniggnu.h onigposix.h
++ lib_LTLIBRARIES = $(libname)
++--- onig-5.9.3.orig/sample/Makefile.am
+++++ onig-5.9.3/sample/Makefile.am
++@@ -1,10 +1,10 @@
++ noinst_PROGRAMS = encode listcap names posix simple sql syntax crnl
++
++ libname = $(top_builddir)/libonig.la
++ LDADD   = $(libname)
++-INCLUDES  = -I$(top_srcdir) -I$(includedir)
+++INCLUDES  = -I$(top_srcdir)
++
++ encode_SOURCES  = encode.c
++ listcap_SOURCES = listcap.c
++ names_SOURCES   = names.c
++ posix_SOURCES   = posix.c
+diff --git a/meta-oe/recipes-support/onig/onig_5.9.3.bb b/meta-oe/recipes-support/onig/onig_5.9.3.bb
+index 230e585..f67ceed 100644
+--- a/meta-oe/recipes-support/onig/onig_5.9.3.bb
++++ b/meta-oe/recipes-support/onig/onig_5.9.3.bb
+@@ -5,7 +5,8 @@ HOMEPAGE = "http://www.geocities.jp/kosako3/oniguruma/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0d4861b5bc0c392a5aa90d9d76ebd86f"
+ 
+-SRC_URI = "http://www.geocities.jp/kosako3/oniguruma/archive/onig-${PV}.tar.gz"
++SRC_URI = "http://www.geocities.jp/kosako3/oniguruma/archive/onig-${PV}.tar.gz \
++           file://do-not-use-system-headers.patch"
+ 
+ SRC_URI[md5sum] = "0d4eda2066d3c92970842a6790ce897a"
+ SRC_URI[sha256sum] = "c3bba66b2a84760e6582c40881db97c839d94f327870009724bb8b4d0c051f2a"
+-- 
+1.8.1.2
 
 
 
