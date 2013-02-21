@@ -1,42 +1,32 @@
-Received: from mail-qc0-f180.google.com ([209.85.216.180])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eu@felipetonello.com>) id 1U8aQq-0006B1-SO
+	(envelope-from <jeffrey.honig@windriver.com>) id 1U8av4-0007cs-0e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 18:59:46 +0100
-Received: by mail-qc0-f180.google.com with SMTP id v28so3734258qcm.11
+	Thu, 21 Feb 2013 19:31:02 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1LIElFf005350
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2013 09:43:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding
-	:x-gm-message-state;
-	bh=0AVX8BChLY8Tot8fMZuvaVnnmwnXx/dGBamOiE9m5u0=;
-	b=aoRT8QfSWMIoLBtAKA3aMzLrFBT15tcNHiDOkVB00CWd/d103yqhj9fGtGAYauNo0h
-	k96b6c0+4ZbqlBqNskvG+2LT7Qjp27MkBM5xL3ja2A8+EhxMtMCq6EqTjrz6y2qs0N+Y
-	pu0X7L4qPxFualey5Hr/pBtFwBweAIKCIqci7KyYNRqXvF/VU+PC/6iZj70I4noronsA
-	fWCGVTcl6/xoB+msLUQNY+Rv5bra4TkbLJhlYp0P5hQ3DQBDS+E7zzTTzlfdAACSA8nV
-	0TvUAaQDXcLH/qiMnFpsNT29zX2ARikGsUP3DvohlB0/hD4RmkyOMYl6hgK4BuXHWSyK
-	YhYg==
-X-Received: by 10.224.181.208 with SMTP id bz16mr340435qab.2.1361468611970;
-	Thu, 21 Feb 2013 09:43:31 -0800 (PST)
-Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
-	[70.183.20.162])
-	by mx.google.com with ESMTPS id o5sm33930905qao.12.2013.02.21.09.43.30
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 21 Feb 2013 09:43:30 -0800 (PST)
-Message-ID: <51265CC3.7020805@felipetonello.com>
-Date: Thu, 21 Feb 2013 09:43:31 -0800
-From: Felipe Ferreri Tonello <eu@felipetonello.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	Thu, 21 Feb 2013 10:14:47 -0800 (PST)
+Received: from jch-schlepp.wrs.com (172.25.32.253) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
+	Thu, 21 Feb 2013 10:14:44 -0800
+Received: from schlepp.honig.net (schlepp.honig.net [127.0.0.1])	by
+	jch-schlepp.wrs.com (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
+	r1LIEheb015267	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
+	verify=NOT)	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Feb 2013 13:14:43 -0500
+Received: (from jch@localhost)	by schlepp.honig.net (8.14.4/8.14.4/Submit) id
+	r1LIEhHC015266	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Feb 2013 13:14:43 -0500
+From: <jeffrey.honig@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Feb 2013 13:14:43 -0500
+Message-ID: <1361470483-15230-1-git-send-email-jeffrey.honig@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1361400195-4717-1-git-send-email-ftonello@cercacor.com>
-	<20130221142847.GC3821@windriver.com>
-In-Reply-To: <20130221142847.GC3821@windriver.com>
-X-Gm-Message-State: ALoCoQlTA3ghhLWLJCIWv/cYwbxKs7wPTk7uIXI29tf+NvG+6fsKVb4owDYoWkNKJaTFrrp6x6RE
-Subject: Re: [meta-networking][PATCH] macchanger: added 1.5.0 recipe
+Subject: [PATCH] Resolve sysvinit and util-linux conflicting man pages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,88 +40,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2013 17:59:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Feb 2013 18:31:04 -0000
+Content-Type: text/plain
 
-On 02/21/2013 06:28 AM, Joe MacDonald wrote:
-> Hey Felipe,
->
-> [[oe] [meta-networking][PATCH] macchanger: added 1.5.0 recipe] On 13.02.20 (Wed 14:43) eu@felipetonello.com wrote:
->
->> From: "Felipe F. Tonello" <ftonello@cercacor.com>
->>
->> This is a useful utility to manipulate the mac address of a device.
->
-> I'm unfamiliar with this tool, does it do something more than you can do
-> with ifconfig today?  It looks like maybe it provides a database of MAC
-> addresses and allows the user to decide they want to change their
-> RTL-8139 to look like a Centrino wireless card on the network, but I
-> can't tell from looking at the page.
+From: Jeffrey C Honig <jch@honig.net>
 
-It's a helper tool to manipulate mac addresses. From its help:
+[ CQID: WIND00404316 ]
 
-GNU MAC Changer
-Usage: macchanger [options] device
+Use alternatives mechanism to prevent sysvlinux and util-linux
+man pages from causing conflicts.
+---
+ meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb    |   11 ++++++++++-
+ meta/recipes-core/util-linux/util-linux.inc       |    9 +++++++++
+ meta/recipes-core/util-linux/util-linux_2.22.2.bb |    2 +-
+ 3 files changed, 20 insertions(+), 2 deletions(-)
 
-   -h,  --help                   Print this help
-   -V,  --version                Print version and exit
-   -s,  --show                   Print the MAC address and exit
-   -e,  --endding                Don't change the vendor bytes
-   -a,  --another                Set random vendor MAC of the same kind
-   -A                            Set random vendor MAC of any kind
-   -r,  --random                 Set fully random MAC
-   -l,  --list[=keyword]         Print known vendors
-   -m,  --mac=XX:XX:XX:XX:XX:XX  Set the MAC XX:XX:XX:XX:XX:XX
-
-So it's useful when you want to set random mac addresses, change vendor 
-id, do not change vendor id. Stuff like that.
-
-Felipe
-
->
-> Thanks,
-> -Joe.
->
->>
->> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
->> ---
->>   .../recipes-support/macchanger/macchanger_1.5.0.bb |   25 ++++++++++++++++++++
->>   1 file changed, 25 insertions(+)
->>   create mode 100644 meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
->>
->> diff --git a/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb b/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
->> new file mode 100644
->> index 0000000..0d78c34
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
->> @@ -0,0 +1,25 @@
->> +SUMMARY = "Tool to view/change network interface MAC addresses"
->> +DESCRIPTION = "A GNU/Linux utility for viewing/manipulating the MAC address of network interfaces."
->> +HOMEPAGE = "http://www.alobbs.com/macchanger"
->> +LICENSE  = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
->> +
->> +PR = "r0"
->> +
->> +SRC_URI  = "${GNU_MIRROR}/macchanger/${PN}-${PV}.tar.gz"
->> +
->> +SRC_URI[md5sum] = "79b7cdaeca3d8ebafa764c4b0dd03ab7"
->> +SRC_URI[sha256sum] = "d44bfa27cb29c5a718627cb3ef3aa42eb5130426545eb2031120826cd73fa8fe"
->> +
->> +FILES_${PN} = " \
->> +  ${bindir}/${PN} \
->> +  ${datadir}/${PN}/wireless.list \
->> +  ${datadir}/${PN}/OUI.list \
->> +"
->> +
->> +FILES_${PN}-doc = " \
->> +  ${datadir}/info \
->> +  ${datadir}/man \
->> +"
->> +
->> +inherit autotools
->> \ No newline at end of file
+diff --git a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb b/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
+index 0a11139..e64b67a 100644
+--- a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
++++ b/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
+@@ -5,7 +5,7 @@ SECTION = "base"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+                     file://COPYRIGHT;endline=15;md5=349c872e0066155e1818b786938876a4"
+-PR = "r10"
++PR = "r11"
+ 
+ RDEPENDS_${PN} = "${PN}-inittab"
+ 
+@@ -45,6 +45,15 @@ ALTERNATIVE_LINK_NAME[poweroff] = "${base_sbindir}/poweroff"
+ ALTERNATIVE_${PN}-pidof = "pidof"
+ ALTERNATIVE_LINK_NAME[pidof] = "${base_bindir}/pidof"
+ 
++ALTERNATIVE_${PN}-doc = "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 utmpdump.1"
++
++ALTERNATIVE_LINK_NAME[last.1] = "${mandir}/man1/last.1"
++ALTERNATIVE_LINK_NAME[mesg.1] = "${mandir}/man1/mesg.1"
++ALTERNATIVE_LINK_NAME[mountpoint.1] = "${mandir}/man1/mountpoint.1"
++ALTERNATIVE_LINK_NAME[sulogin.8] = "${mandir}/man8/sulogin.8"
++ALTERNATIVE_LINK_NAME[utmpdump.1] = "${mandir}/man1/utmpdump.1"
++ALTERNATIVE_LINK_NAME[wall.1] = "${mandir}/man1/wall.1"
++
+ PACKAGES =+ "sysvinit-pidof sysvinit-sulogin"
+ FILES_${PN} += "${base_sbindir}/* ${base_bindir}/*"
+ FILES_sysvinit-pidof = "${base_bindir}/pidof.sysvinit ${base_sbindir}/killall5"
+diff --git a/meta/recipes-core/util-linux/util-linux.inc b/meta/recipes-core/util-linux/util-linux.inc
+index 10439c0..c91f4a3 100644
+--- a/meta/recipes-core/util-linux/util-linux.inc
++++ b/meta/recipes-core/util-linux/util-linux.inc
+@@ -154,6 +154,15 @@ ALTERNATIVE_LINK_NAME[pivot_root] = "${base_sbindir}/pivot_root"
+ ALTERNATIVE_LINK_NAME[mkfs.minix] = "${base_sbindir}/mkfs.minix"
+ ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
+ 
++ALTERNATIVE_${PN}-doc = "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 utmpdump.1"
++
++ALTERNATIVE_LINK_NAME[last.1] = "${mandir}/man1/last.1"
++ALTERNATIVE_LINK_NAME[mesg.1] = "${mandir}/man1/mesg.1"
++ALTERNATIVE_LINK_NAME[mountpoint.1] = "${mandir}/man1/mountpoint.1"
++ALTERNATIVE_LINK_NAME[sulogin.8] = "${mandir}/man8/sulogin.8"
++ALTERNATIVE_LINK_NAME[utmpdump.1] = "${mandir}/man1/utmpdump.1"
++ALTERNATIVE_LINK_NAME[wall.1] = "${mandir}/man1/wall.1"
++
+ # There seems to be problem, atleast on nslu2, with these, untill they are
+ # fixed the busybox ones have higher priority
+ ALTERNATIVE_PRIORITY[hwclock] = "10"
+diff --git a/meta/recipes-core/util-linux/util-linux_2.22.2.bb b/meta/recipes-core/util-linux/util-linux_2.22.2.bb
+index dd95573..f91784b 100644
+--- a/meta/recipes-core/util-linux/util-linux_2.22.2.bb
++++ b/meta/recipes-core/util-linux/util-linux_2.22.2.bb
+@@ -1,5 +1,5 @@
+ MAJOR_VERSION = "2.22"
+-PR = "r0"
++PR = "r1"
+ require util-linux.inc
+ 
+ # note that `lscpu' is under GPLv3+
+-- 
+1.7.9.5
 
 
 
