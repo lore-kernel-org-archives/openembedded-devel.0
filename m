@@ -1,36 +1,41 @@
-Received: from mail-da0-f42.google.com ([209.85.210.42])
+Received: from mail-qc0-f181.google.com ([209.85.216.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1U8J4b-0001GC-NK
+	(envelope-from <eu@felipetonello.com>) id 1U8Lxr-0006MZ-KL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 00:27:40 +0100
-Received: by mail-da0-f42.google.com with SMTP id z17so3795642dal.29
+	Thu, 21 Feb 2013 03:32:53 +0100
+Received: by mail-qc0-f181.google.com with SMTP id a22so3402616qcs.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Feb 2013 15:11:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=uZ9nwuayaloGAEt1eIQQ+9J73DSZN0ssXqFy+PawgE0=;
-	b=gHOcGxbToURslzIzBGkoWaLgkX5D+GIsAASp1SUjOKwXRBvJLcpTaJaKjOkOKX5wvd
-	wiD7QyojbXEhuIQAs1mrV5a31aUqBdr1g3pZ7/7SkYhSGIrC0lXSDdf1p50r0pOzowTq
-	noLGQz7xjyj5xdqCA8Xn6m8BB51UE9foIqNyYRnXr3Fb3OEB9wlJT6ABAxNYtACEnMXo
-	foKjXh5TuDHJnxfnAX2vGrjRhHHmQd+dKKjpZwTynL5T1OwVD2E/gJhEuZEB9jeQsrg/
-	IggEHMkNP0vIe47TAfq0js73TIOl+zqBHkaLxZNls7QqkvvIfKkVur3vGLcLIKrwQ3ov
-	dcbA==
-X-Received: by 10.66.7.161 with SMTP id k1mr5045755paa.206.1361401885805;
-	Wed, 20 Feb 2013 15:11:25 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id qf7sm23030245pbb.2.2013.02.20.15.11.22
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 20 Feb 2013 15:11:24 -0800 (PST)
-Date: Thu, 21 Feb 2013 00:11:28 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130220231128.GX3300@jama>
-References: <1361387338-6553-1-git-send-email-ftonello@cercacor.com>
+	Wed, 20 Feb 2013 18:16:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
+	:references:in-reply-to:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=pbru8mgCiiri/YxUygsQDRN0adP+cqcbJ13qZDyC9y0=;
+	b=ggoe++kG0NdjrGIFTkhp5+k0EieCVa1j7v5MVrf6h6+BDb+i510f13QHvIf/0Bccm9
+	LhqWmVkgXaPxxKHHYKG2g8gEw4ldbXRFvuAXa6uVkacRDk+R5uU0+KB9F0i/sgbPf3pi
+	cbNVCb4Z385OR4UgjJRFud5kR3LD5jp7G9JriOEp/NYWm9LyV85pNM7LPl/k5KQAr9lf
+	SNLX7QPWywxxmxLMIhd2BGhTYtz2ZEWfcGbvK1BKkocMQlIIfVJOUMs7wS56kJXYSj5z
+	jJPbbx/n+aFmfrb5vcxWaEudEkC+hZ1PXhX6SZu8pzxOC+2/TNlnDioZ/BfnyrvkTebK
+	sv9g==
+X-Received: by 10.224.200.202 with SMTP id ex10mr7442473qab.97.1361412999674; 
+	Wed, 20 Feb 2013 18:16:39 -0800 (PST)
+Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPS id hr3sm32324511qab.4.2013.02.20.18.16.37
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 20 Feb 2013 18:16:37 -0800 (PST)
+Message-ID: <51258386.7030706@felipetonello.com>
+Date: Wed, 20 Feb 2013 18:16:38 -0800
+From: Felipe Ferreri Tonello <eu@felipetonello.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-In-Reply-To: <1361387338-6553-1-git-send-email-ftonello@cercacor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+To: openembedded-devel@lists.openembedded.org
+References: <1361387338-6553-1-git-send-email-ftonello@cercacor.com>
+	<20130220231128.GX3300@jama>
+In-Reply-To: <20130220231128.GX3300@jama>
+X-Gm-Message-State: ALoCoQkIZ0e+UKi4ZedPDDhTD9CrKKw0jQ4HwuP+kjm6Z8nt/U/PsjbDzJJVekxooEH80/2sCO/v
 Subject: Re: [meta-oe][PATCH] libconnman-qt: fixed directory typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,320 +50,278 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 23:27:41 -0000
-X-Groupsio-MsgNum: 43271
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hN6rOuQnPQpTmK3E"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Feb 2013 02:33:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---hN6rOuQnPQpTmK3E
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Martin,
 
-On Wed, Feb 20, 2013 at 11:08:58AM -0800, eu@felipetonello.com wrote:
-> From: "Felipe F. Tonello" <ftonello@cercacor.com>
->=20
-> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+On 02/20/2013 03:11 PM, Martin Jansa wrote:
+> On Wed, Feb 20, 2013 at 11:08:58AM -0800, eu@felipetonello.com wrote:
+>> From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>>
+>> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>
+> Thanks, I'll apply this later today, but next time please send patches
+> with -M for git to detect renames.
 
-Thanks, I'll apply this later today, but next time please send patches
-with -M for git to detect renames.
+That's wired actually, because git recognized it as rename here. But 
+still. Sorry for the rework.
 
-> ---
->  ...-to-disable-qml-plugin-and-test-program-t.patch |   37 +++++++++++
->  .../libconnman-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++++++=
-++++++
->  ...-to-disable-qml-plugin-and-test-program-t.patch |   37 -----------
->  .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 --------------=
-------
->  4 files changed, 106 insertions(+), 106 deletions(-)
->  create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-a=
-dded-flags-to-disable-qml-plugin-and-test-program-t.patch
->  create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.=
-bb
->  delete mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-a=
-dded-flags-to-disable-qml-plugin-and-test-program-t.patch
->  delete mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.=
-bb
->=20
-> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-fl=
-ags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/lib=
-connman-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-pr=
-ogram-t.patch
-> new file mode 100644
-> index 0000000..6ec084d
-> --- /dev/null
-> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-flags-to-=
-disable-qml-plugin-and-test-program-t.patch
-> @@ -0,0 +1,37 @@
-> +From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
-> +From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> +Date: Mon, 7 Jan 2013 17:13:22 -0800
-> +Subject: [PATCH] added flags to disable qml plugin and test program to
-> + compile
-> +
-> +This is usefull when there is no need to compile test program and qml pl=
-ugin.
-> +
-> +Upstream-Status: Accepted
-> +
-> +Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> +---
-> + connman-qt.pro |   11 ++++++++++-
-> + 1 file changed, 10 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/connman-qt.pro b/connman-qt.pro
-> +index 7d9ec99..425c41f 100644
-> +--- a/connman-qt.pro
-> ++++ b/connman-qt.pro
-> +@@ -1,4 +1,13 @@
-> + TEMPLATE =3D subdirs
-> +-SUBDIRS +=3D libconnman-qt test plugin
-> ++SUBDIRS +=3D libconnman-qt
-> + CONFIG +=3D ordered
-> +=20
-> ++# CONFIG flag to disable test program
-> ++!notest {
-> ++    SUBDIRS +=3D test
-> ++}
-> ++
-> ++# CONFIG flag to disable qml plugin
-> ++!noplugin {
-> ++    SUBDIRS +=3D plugin
-> ++}
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb b/me=
-ta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb
-> new file mode 100644
-> index 0000000..d15d8d7
-> --- /dev/null
-> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb
-> @@ -0,0 +1,69 @@
-> +DESCRIPTION =3D "Qt Library for ConnMan"
-> +HOMEPAGE =3D "https://github.com/nemomobile/libconnman-qt"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://libconnman-qt/clockmodel.h;endline=3D8;md5=
-=3Dea9f724050803f15d2d900ce3c5dac88"
-> +
-> +SECTION =3D "qt/lib"
-> +
-> +PR =3D "r0"
-> +
-> +inherit qt4x11 pkgconfig
-> +
-> +RDEPENDS_${PN} =3D "connman"
-> +RDEPENDS_${PN}-plugin =3D "${PN}"
-> +
-> +PROVIDES +=3D "${PN}-plugin"
-> +
-> +PACKAGES =3D+ "${PN}-plugin ${PN}-plugin-dbg"
-> +RRECOMMENDS_${PN} =3D "${PN}-plugin"
-> +
-> +BRANCH =3D "master"
-> +# this matches 0.4.0 tag
-> +SRCREV =3D "3af5bd38d82255942f582398160a5d3354346ca3"
-> +
-> +SRC_URI =3D " \
-> +  git://github.com/nemomobile/${PN}.git;branch=3D${BRANCH} \
-> +  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch=
- \
-> +"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +QT_IMPORTS_DIR =3D "${libdir}/qt4/imports"
-> +# the plugin target needs to be the same as 'target.path' and 'qmldir.pa=
-th' in ${S}/plugin/plugin.pro
-> +PLUGINS_TARGET =3D "${QT_IMPORTS_DIR}/MeeGo/Connman"
-> +
-> +EXTRA_QMAKEVARS_PRE =3D " \
-> +  CONFIG+=3Dnotest \
-> +"
-> +
-> +do_configure_prepend() {
-> +  # Hack *.pro variables
-> +  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${Q=
-T_IMPORTS_DIR},g' '{}' ';'
-> +}
-> +
-> +do_install() {
-> +  export INSTALL_ROOT=3D${D}
-> +  oe_runmake install
-> +}
-> +
-> +FILES_${PN} =3D " \
-> +  ${libdir}/libconnman-qt4${SOLIBS} \
-> +"
-> +
-> +FILES_${PN}-dev =3D " \
-> +  ${includedir}/connman-qt/* \
-> +  ${libdir}/libconnman-qt4${SOLIBSDEV} \
-> +  ${libdir}/libconnman-qt4.prl \
-> +  ${libdir}/pkgconfig/connman-qt4.pc \
-> +  ${libdir}/connman-qt4.pc \
-> +"
-> +
-> +FILES_${PN}-plugin =3D " \
-> +  ${PLUGINS_TARGET}/qmldir \
-> +  ${PLUGINS_TARGET}/lib*.so \
-> +"
-> +
-> +FILES_${PN}-plugin-dbg =3D " \
-> +  ${PLUGINS_TARGET}/.debug \
-> +  ${PLUGINS_TARGET}/.debug/* \
-> +"
-> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-fl=
-ags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/lib=
-connmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-pr=
-ogram-t.patch
-> deleted file mode 100644
-> index 6ec084d..0000000
-> --- a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-=
-disable-qml-plugin-and-test-program-t.patch
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
-> -From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> -Date: Mon, 7 Jan 2013 17:13:22 -0800
-> -Subject: [PATCH] added flags to disable qml plugin and test program to
-> - compile
-> -
-> -This is usefull when there is no need to compile test program and qml pl=
-ugin.
-> -
-> -Upstream-Status: Accepted
-> -
-> -Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> ----
-> - connman-qt.pro |   11 ++++++++++-
-> - 1 file changed, 10 insertions(+), 1 deletion(-)
-> -
-> -diff --git a/connman-qt.pro b/connman-qt.pro
-> -index 7d9ec99..425c41f 100644
-> ---- a/connman-qt.pro
-> -+++ b/connman-qt.pro
-> -@@ -1,4 +1,13 @@
-> - TEMPLATE =3D subdirs
-> --SUBDIRS +=3D libconnman-qt test plugin
-> -+SUBDIRS +=3D libconnman-qt
-> - CONFIG +=3D ordered
-> -=20
-> -+# CONFIG flag to disable test program
-> -+!notest {
-> -+    SUBDIRS +=3D test
-> -+}
-> -+
-> -+# CONFIG flag to disable qml plugin
-> -+!noplugin {
-> -+    SUBDIRS +=3D plugin
-> -+}
-> ---=20
-> -1.7.9.5
-> -
-> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b/me=
-ta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
-> deleted file mode 100644
-> index d15d8d7..0000000
-> --- a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
-> +++ /dev/null
-> @@ -1,69 +0,0 @@
-> -DESCRIPTION =3D "Qt Library for ConnMan"
-> -HOMEPAGE =3D "https://github.com/nemomobile/libconnman-qt"
-> -LICENSE =3D "Apache-2.0"
-> -LIC_FILES_CHKSUM =3D "file://libconnman-qt/clockmodel.h;endline=3D8;md5=
-=3Dea9f724050803f15d2d900ce3c5dac88"
-> -
-> -SECTION =3D "qt/lib"
-> -
-> -PR =3D "r0"
-> -
-> -inherit qt4x11 pkgconfig
-> -
-> -RDEPENDS_${PN} =3D "connman"
-> -RDEPENDS_${PN}-plugin =3D "${PN}"
-> -
-> -PROVIDES +=3D "${PN}-plugin"
-> -
-> -PACKAGES =3D+ "${PN}-plugin ${PN}-plugin-dbg"
-> -RRECOMMENDS_${PN} =3D "${PN}-plugin"
-> -
-> -BRANCH =3D "master"
-> -# this matches 0.4.0 tag
-> -SRCREV =3D "3af5bd38d82255942f582398160a5d3354346ca3"
-> -
-> -SRC_URI =3D " \
-> -  git://github.com/nemomobile/${PN}.git;branch=3D${BRANCH} \
-> -  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch=
- \
-> -"
-> -
-> -S =3D "${WORKDIR}/git"
-> -
-> -QT_IMPORTS_DIR =3D "${libdir}/qt4/imports"
-> -# the plugin target needs to be the same as 'target.path' and 'qmldir.pa=
-th' in ${S}/plugin/plugin.pro
-> -PLUGINS_TARGET =3D "${QT_IMPORTS_DIR}/MeeGo/Connman"
-> -
-> -EXTRA_QMAKEVARS_PRE =3D " \
-> -  CONFIG+=3Dnotest \
-> -"
-> -
-> -do_configure_prepend() {
-> -  # Hack *.pro variables
-> -  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${Q=
-T_IMPORTS_DIR},g' '{}' ';'
-> -}
-> -
-> -do_install() {
-> -  export INSTALL_ROOT=3D${D}
-> -  oe_runmake install
-> -}
-> -
-> -FILES_${PN} =3D " \
-> -  ${libdir}/libconnman-qt4${SOLIBS} \
-> -"
-> -
-> -FILES_${PN}-dev =3D " \
-> -  ${includedir}/connman-qt/* \
-> -  ${libdir}/libconnman-qt4${SOLIBSDEV} \
-> -  ${libdir}/libconnman-qt4.prl \
-> -  ${libdir}/pkgconfig/connman-qt4.pc \
-> -  ${libdir}/connman-qt4.pc \
-> -"
-> -
-> -FILES_${PN}-plugin =3D " \
-> -  ${PLUGINS_TARGET}/qmldir \
-> -  ${PLUGINS_TARGET}/lib*.so \
-> -"
-> -
-> -FILES_${PN}-plugin-dbg =3D " \
-> -  ${PLUGINS_TARGET}/.debug \
-> -  ${PLUGINS_TARGET}/.debug/* \
-> -"
-> --=20
-> 1.7.9.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,
+Felipe
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hN6rOuQnPQpTmK3E
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+>
+>> ---
+>>   ...-to-disable-qml-plugin-and-test-program-t.patch |   37 +++++++++++
+>>   .../libconnman-qt/libconnman-qt_0.4.0.bb           |   69 ++++++++++++++++++++
+>>   ...-to-disable-qml-plugin-and-test-program-t.patch |   37 -----------
+>>   .../libconnmna-qt/libconnman-qt_0.4.0.bb           |   69 --------------------
+>>   4 files changed, 106 insertions(+), 106 deletions(-)
+>>   create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>>   create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb
+>>   delete mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>>   delete mode 100644 meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>>
+>> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> new file mode 100644
+>> index 0000000..6ec084d
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> @@ -0,0 +1,37 @@
+>> +From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
+>> +From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>> +Date: Mon, 7 Jan 2013 17:13:22 -0800
+>> +Subject: [PATCH] added flags to disable qml plugin and test program to
+>> + compile
+>> +
+>> +This is usefull when there is no need to compile test program and qml plugin.
+>> +
+>> +Upstream-Status: Accepted
+>> +
+>> +Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>> +---
+>> + connman-qt.pro |   11 ++++++++++-
+>> + 1 file changed, 10 insertions(+), 1 deletion(-)
+>> +
+>> +diff --git a/connman-qt.pro b/connman-qt.pro
+>> +index 7d9ec99..425c41f 100644
+>> +--- a/connman-qt.pro
+>> ++++ b/connman-qt.pro
+>> +@@ -1,4 +1,13 @@
+>> + TEMPLATE = subdirs
+>> +-SUBDIRS += libconnman-qt test plugin
+>> ++SUBDIRS += libconnman-qt
+>> + CONFIG += ordered
+>> +
+>> ++# CONFIG flag to disable test program
+>> ++!notest {
+>> ++    SUBDIRS += test
+>> ++}
+>> ++
+>> ++# CONFIG flag to disable qml plugin
+>> ++!noplugin {
+>> ++    SUBDIRS += plugin
+>> ++}
+>> +--
+>> +1.7.9.5
+>> +
+>> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb
+>> new file mode 100644
+>> index 0000000..d15d8d7
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_0.4.0.bb
+>> @@ -0,0 +1,69 @@
+>> +DESCRIPTION = "Qt Library for ConnMan"
+>> +HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
+>> +
+>> +SECTION = "qt/lib"
+>> +
+>> +PR = "r0"
+>> +
+>> +inherit qt4x11 pkgconfig
+>> +
+>> +RDEPENDS_${PN} = "connman"
+>> +RDEPENDS_${PN}-plugin = "${PN}"
+>> +
+>> +PROVIDES += "${PN}-plugin"
+>> +
+>> +PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
+>> +RRECOMMENDS_${PN} = "${PN}-plugin"
+>> +
+>> +BRANCH = "master"
+>> +# this matches 0.4.0 tag
+>> +SRCREV = "3af5bd38d82255942f582398160a5d3354346ca3"
+>> +
+>> +SRC_URI = " \
+>> +  git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
+>> +  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
+>> +"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +QT_IMPORTS_DIR = "${libdir}/qt4/imports"
+>> +# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
+>> +PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
+>> +
+>> +EXTRA_QMAKEVARS_PRE = " \
+>> +  CONFIG+=notest \
+>> +"
+>> +
+>> +do_configure_prepend() {
+>> +  # Hack *.pro variables
+>> +  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
+>> +}
+>> +
+>> +do_install() {
+>> +  export INSTALL_ROOT=${D}
+>> +  oe_runmake install
+>> +}
+>> +
+>> +FILES_${PN} = " \
+>> +  ${libdir}/libconnman-qt4${SOLIBS} \
+>> +"
+>> +
+>> +FILES_${PN}-dev = " \
+>> +  ${includedir}/connman-qt/* \
+>> +  ${libdir}/libconnman-qt4${SOLIBSDEV} \
+>> +  ${libdir}/libconnman-qt4.prl \
+>> +  ${libdir}/pkgconfig/connman-qt4.pc \
+>> +  ${libdir}/connman-qt4.pc \
+>> +"
+>> +
+>> +FILES_${PN}-plugin = " \
+>> +  ${PLUGINS_TARGET}/qmldir \
+>> +  ${PLUGINS_TARGET}/lib*.so \
+>> +"
+>> +
+>> +FILES_${PN}-plugin-dbg = " \
+>> +  ${PLUGINS_TARGET}/.debug \
+>> +  ${PLUGINS_TARGET}/.debug/* \
+>> +"
+>> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> deleted file mode 100644
+>> index 6ec084d..0000000
+>> --- a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt/0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch
+>> +++ /dev/null
+>> @@ -1,37 +0,0 @@
+>> -From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
+>> -From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>> -Date: Mon, 7 Jan 2013 17:13:22 -0800
+>> -Subject: [PATCH] added flags to disable qml plugin and test program to
+>> - compile
+>> -
+>> -This is usefull when there is no need to compile test program and qml plugin.
+>> -
+>> -Upstream-Status: Accepted
+>> -
+>> -Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>> ----
+>> - connman-qt.pro |   11 ++++++++++-
+>> - 1 file changed, 10 insertions(+), 1 deletion(-)
+>> -
+>> -diff --git a/connman-qt.pro b/connman-qt.pro
+>> -index 7d9ec99..425c41f 100644
+>> ---- a/connman-qt.pro
+>> -+++ b/connman-qt.pro
+>> -@@ -1,4 +1,13 @@
+>> - TEMPLATE = subdirs
+>> --SUBDIRS += libconnman-qt test plugin
+>> -+SUBDIRS += libconnman-qt
+>> - CONFIG += ordered
+>> -
+>> -+# CONFIG flag to disable test program
+>> -+!notest {
+>> -+    SUBDIRS += test
+>> -+}
+>> -+
+>> -+# CONFIG flag to disable qml plugin
+>> -+!noplugin {
+>> -+    SUBDIRS += plugin
+>> -+}
+>> ---
+>> -1.7.9.5
+>> -
+>> diff --git a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb b/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>> deleted file mode 100644
+>> index d15d8d7..0000000
+>> --- a/meta-oe/recipes-qt/libconnmna-qt/libconnman-qt_0.4.0.bb
+>> +++ /dev/null
+>> @@ -1,69 +0,0 @@
+>> -DESCRIPTION = "Qt Library for ConnMan"
+>> -HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
+>> -LICENSE = "Apache-2.0"
+>> -LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
+>> -
+>> -SECTION = "qt/lib"
+>> -
+>> -PR = "r0"
+>> -
+>> -inherit qt4x11 pkgconfig
+>> -
+>> -RDEPENDS_${PN} = "connman"
+>> -RDEPENDS_${PN}-plugin = "${PN}"
+>> -
+>> -PROVIDES += "${PN}-plugin"
+>> -
+>> -PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
+>> -RRECOMMENDS_${PN} = "${PN}-plugin"
+>> -
+>> -BRANCH = "master"
+>> -# this matches 0.4.0 tag
+>> -SRCREV = "3af5bd38d82255942f582398160a5d3354346ca3"
+>> -
+>> -SRC_URI = " \
+>> -  git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
+>> -  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
+>> -"
+>> -
+>> -S = "${WORKDIR}/git"
+>> -
+>> -QT_IMPORTS_DIR = "${libdir}/qt4/imports"
+>> -# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
+>> -PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
+>> -
+>> -EXTRA_QMAKEVARS_PRE = " \
+>> -  CONFIG+=notest \
+>> -"
+>> -
+>> -do_configure_prepend() {
+>> -  # Hack *.pro variables
+>> -  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
+>> -}
+>> -
+>> -do_install() {
+>> -  export INSTALL_ROOT=${D}
+>> -  oe_runmake install
+>> -}
+>> -
+>> -FILES_${PN} = " \
+>> -  ${libdir}/libconnman-qt4${SOLIBS} \
+>> -"
+>> -
+>> -FILES_${PN}-dev = " \
+>> -  ${includedir}/connman-qt/* \
+>> -  ${libdir}/libconnman-qt4${SOLIBSDEV} \
+>> -  ${libdir}/libconnman-qt4.prl \
+>> -  ${libdir}/pkgconfig/connman-qt4.pc \
+>> -  ${libdir}/connman-qt4.pc \
+>> -"
+>> -
+>> -FILES_${PN}-plugin = " \
+>> -  ${PLUGINS_TARGET}/qmldir \
+>> -  ${PLUGINS_TARGET}/lib*.so \
+>> -"
+>> -
+>> -FILES_${PN}-plugin-dbg = " \
+>> -  ${PLUGINS_TARGET}/.debug \
+>> -  ${PLUGINS_TARGET}/.debug/* \
+>> -"
+>> --
+>> 1.7.9.5
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlElWCAACgkQN1Ujt2V2gBwgNACeO4+0RYFSoV6L7f7osk+D7L7h
-L5kAnjs+W4eqqdxol+3LPZkJKQhzfT5g
-=X2fg
------END PGP SIGNATURE-----
 
---hN6rOuQnPQpTmK3E--
