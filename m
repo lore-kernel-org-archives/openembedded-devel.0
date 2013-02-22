@@ -1,32 +1,36 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-pa0-f49.google.com ([209.85.220.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jeffrey.honig@windriver.com>) id 1U8ayU-0007mN-56
+	(envelope-from <martin.jansa@gmail.com>) id 1U91Jv-0008UZ-B9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 19:34:32 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1LIICXX005400
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 22 Feb 2013 23:42:23 +0100
+Received: by mail-pa0-f49.google.com with SMTP id kp6so706870pab.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2013 10:18:12 -0800 (PST)
-Received: from jch-schlepp.wrs.com (172.25.32.253) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.318.4;
-	Thu, 21 Feb 2013 10:18:11 -0800
-Received: from schlepp.honig.net (schlepp.honig.net [127.0.0.1])	by
-	jch-schlepp.wrs.com (8.14.4/8.14.4/Debian-2ubuntu2) with ESMTP id
-	r1LIIAJi016182	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
-	verify=NOT)	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Feb 2013 13:18:10 -0500
-Received: (from jch@localhost)	by schlepp.honig.net (8.14.4/8.14.4/Submit) id
-	r1LIIAOq016181	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Feb 2013 13:18:10 -0500
-From: <jeffrey.honig@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Feb 2013 13:18:10 -0500
-Message-ID: <1361470690-16147-1-git-send-email-jeffrey.honig@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Fri, 22 Feb 2013 14:26:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Ds2tHLObWEyeX6K2vzK9MoP0ou+SNMCF4ukH4mypYv4=;
+	b=i8oS6VWtkJDtdR2fyv3I6MC+05kbxZTD9olE7j3vPr55e+KiC7KUCvKwSJylcx+mGV
+	5OjnVdlXWNqMJhXxftXbb4uh6PWmaKeOkSYaO6YiXWe5wP79pkrv7P9BQ0Sj6BKR+1Wd
+	X+1HGyW4Q2gsj3hDFsuDK2OR3GLWmDZ/hhN9vWUk27YOpwSsm9Q/80cWVEV/RWulzdcN
+	NUxjwDS7h71bps4usr64sga8I6/E5cNHcM34Ciw4EcCskP34m74H73LkMiKZnLmAcYXi
+	TM/R5otONqYPWAIATV1jF1DY6vaRuyWQMUwOonbH3sIHX+C+YZ8JxVfW9xy4rmu5VQ3i
+	9VIg==
+X-Received: by 10.66.163.166 with SMTP id yj6mr6457113pab.130.1361571966936;
+	Fri, 22 Feb 2013 14:26:06 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id eh5sm3767557pbc.44.2013.02.22.14.26.04
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 22 Feb 2013 14:26:05 -0800 (PST)
+Date: Fri, 22 Feb 2013 23:26:11 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130222222611.GB3300@jama>
+References: <51262D01.7070601@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH] v2: Resolve sysvinit and util-linux conflicting man pages.
+In-Reply-To: <51262D01.7070601@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,85 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2013 18:34:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Feb 2013 22:42:25 -0000
+X-Groupsio-MsgNum: 43287
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qdlojUNlGboGybTD"
+Content-Disposition: inline
 
-From: Jeffrey C Honig <jch@honig.net>
+--qdlojUNlGboGybTD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[ CQID: WIND00404316 ]
+On Thu, Feb 21, 2013 at 03:19:45PM +0100, Tasslehoff Kjappfot wrote:
+> Is the meta-qt5 layer at https://github.com/meta-qt5 a work in progress,
+> or should it be usable in its current state?
 
-Use alternatives mechanism to prevent sysvlinux and util-linux
-man pages from causing conflicts.
+Not really, but I plan to work on it next week(s).
 
-Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
----
- meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb    |   11 ++++++++++-
- meta/recipes-core/util-linux/util-linux.inc       |    9 +++++++++
- meta/recipes-core/util-linux/util-linux_2.22.2.bb |    2 +-
- 3 files changed, 20 insertions(+), 2 deletions(-)
+> I currently use qt4-embedded and compile and sdk with qt-support, and
+> want to try out qt5. Compiling qtbase gave me some packages I can add to
+> my image, but when I tried to create an SDK I got stuck. The
+> files/recipes in meta-qt5 differ so much from todays qt4-stuff that I'm
+> not sure where to begin, but I suspect at least an SDK-recipe/task and
+> maybe some qt5-embedded recipes will have to be added?
 
-diff --git a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb b/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
-index 0a11139..e64b67a 100644
---- a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
-+++ b/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
-@@ -5,7 +5,7 @@ SECTION = "base"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-                     file://COPYRIGHT;endline=15;md5=349c872e0066155e1818b786938876a4"
--PR = "r10"
-+PR = "r11"
- 
- RDEPENDS_${PN} = "${PN}-inittab"
- 
-@@ -45,6 +45,15 @@ ALTERNATIVE_LINK_NAME[poweroff] = "${base_sbindir}/poweroff"
- ALTERNATIVE_${PN}-pidof = "pidof"
- ALTERNATIVE_LINK_NAME[pidof] = "${base_bindir}/pidof"
- 
-+ALTERNATIVE_${PN}-doc = "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 utmpdump.1"
-+
-+ALTERNATIVE_LINK_NAME[last.1] = "${mandir}/man1/last.1"
-+ALTERNATIVE_LINK_NAME[mesg.1] = "${mandir}/man1/mesg.1"
-+ALTERNATIVE_LINK_NAME[mountpoint.1] = "${mandir}/man1/mountpoint.1"
-+ALTERNATIVE_LINK_NAME[sulogin.8] = "${mandir}/man8/sulogin.8"
-+ALTERNATIVE_LINK_NAME[utmpdump.1] = "${mandir}/man1/utmpdump.1"
-+ALTERNATIVE_LINK_NAME[wall.1] = "${mandir}/man1/wall.1"
-+
- PACKAGES =+ "sysvinit-pidof sysvinit-sulogin"
- FILES_${PN} += "${base_sbindir}/* ${base_bindir}/*"
- FILES_sysvinit-pidof = "${base_bindir}/pidof.sysvinit ${base_sbindir}/killall5"
-diff --git a/meta/recipes-core/util-linux/util-linux.inc b/meta/recipes-core/util-linux/util-linux.inc
-index 10439c0..c91f4a3 100644
---- a/meta/recipes-core/util-linux/util-linux.inc
-+++ b/meta/recipes-core/util-linux/util-linux.inc
-@@ -154,6 +154,15 @@ ALTERNATIVE_LINK_NAME[pivot_root] = "${base_sbindir}/pivot_root"
- ALTERNATIVE_LINK_NAME[mkfs.minix] = "${base_sbindir}/mkfs.minix"
- ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
- 
-+ALTERNATIVE_${PN}-doc = "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 utmpdump.1"
-+
-+ALTERNATIVE_LINK_NAME[last.1] = "${mandir}/man1/last.1"
-+ALTERNATIVE_LINK_NAME[mesg.1] = "${mandir}/man1/mesg.1"
-+ALTERNATIVE_LINK_NAME[mountpoint.1] = "${mandir}/man1/mountpoint.1"
-+ALTERNATIVE_LINK_NAME[sulogin.8] = "${mandir}/man8/sulogin.8"
-+ALTERNATIVE_LINK_NAME[utmpdump.1] = "${mandir}/man1/utmpdump.1"
-+ALTERNATIVE_LINK_NAME[wall.1] = "${mandir}/man1/wall.1"
-+
- # There seems to be problem, atleast on nslu2, with these, untill they are
- # fixed the busybox ones have higher priority
- ALTERNATIVE_PRIORITY[hwclock] = "10"
-diff --git a/meta/recipes-core/util-linux/util-linux_2.22.2.bb b/meta/recipes-core/util-linux/util-linux_2.22.2.bb
-index dd95573..f91784b 100644
---- a/meta/recipes-core/util-linux/util-linux_2.22.2.bb
-+++ b/meta/recipes-core/util-linux/util-linux_2.22.2.bb
-@@ -1,5 +1,5 @@
- MAJOR_VERSION = "2.22"
--PR = "r0"
-+PR = "r1"
- require util-linux.inc
- 
- # note that `lscpu' is under GPLv3+
--- 
-1.7.9.5
+upstream sources also differ a lot, so recipes will stay different to
+reflect that.
 
+> Thought maybe I'd see if I can create these recipes, but I just wanted
+> to check if that is the plan forward.
 
+If you create something useable send it as pull request on github, I
+plan to fix issues in current recipes, but don't plan to work on sdk
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--qdlojUNlGboGybTD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEn8IMACgkQN1Ujt2V2gByexwCfYzm2qnmeQ0sMvghTUypyK/tC
+SqoAniB5oCpfQmyEJiiN3mKhhHk+ouq7
+=WFiB
+-----END PGP SIGNATURE-----
+
+--qdlojUNlGboGybTD--
