@@ -1,26 +1,22 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1U9tEP-0008U2-Iw
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1U9vyK-0005sX-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Feb 2013 09:16:21 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1P5OJhF009408
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Feb 2013 21:24:19 -0800 (PST)
-Received: from pek-usp-11.wrs.com (128.224.163.66) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 24 Feb 2013 21:24:17 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Feb 2013 13:24:11 +0800
-Message-ID: <1361769851-28342-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Cc: Joe.MacDonald@windriver.com, Jackie.Huang@windriver.com,
-	Zhenfeng.Zhao@windriver.com
-Subject: [meta-networking][PATCH] ebtables: move ebtables-save to sbindir to avoid QA issue
+	Mon, 25 Feb 2013 12:12:01 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id D1825D22B4;
+	Mon, 25 Feb 2013 11:55:36 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Feb 2013 11:55:32 +0100
+Message-Id: <1361789732-16406-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <20130219040952.GR3300@jama>
+References: <20130219040952.GR3300@jama>
+Subject: [meta-oe][PATCH] gperftools: add 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2013 08:16:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Feb 2013 11:12:02 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-Fix the QA issue:
-WARNING: QA Issue: ebtables: Found a reference to /usr/ in
-    /path/to/tmp/work/x86_64-wrs-linux/ebtables-2.0.10-4-r1/packages-split/ebtables/sbin/ebtables-save
-WARNING: QA Issue: Shell scripts in base_bindir and base_sbindir should not reference anything in exec_prefix
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+ meta-oe/recipes-support/gperftools/gperftools_2.0.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.0.bb
 
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-index bca34c0..d6d803a 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Utility for basic Ethernet frame filtering on a Linux bridge, MAC NAT
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
- SECTION = "console/network"
--PR = "r1"
-+PR = "r2"
- 
- RDEPENDS_${PN} += "perl"
- 
-@@ -44,6 +44,11 @@ do_install () {
- 	# Fix hardcoded paths in scripts
- 	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
- 	sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.0.bb b/meta-oe/recipes-support/gperftools/gperftools_2.0.bb
+new file mode 100644
+index 0000000..1717752
+--- /dev/null
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.0.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "Fast, multi-threaded malloc() and nifty performance analysis tools"
++HOMEPAGE = "http://code.google.com/p/gperftools/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 +
-+	# The script ebtables-save refernces perl in exec_prefix, so
-+	# move it to sbindir to avoid QA issue
-+	install -d ${D}/${sbindir}
-+	mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
- }
- 
- CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
++SRC_URI = "${DEBIAN_MIRROR}/main/g/google-perftools/google-perftools_${PV}.orig.tar.gz"
++
++SRC_URI[md5sum] = "13f6e8961bc6a26749783137995786b6"
++SRC_URI[sha256sum] = "7de3dd91f018825b1e7d332af1edace15c6211f430186febede1835069861080"
++
++inherit autotools
 -- 
-1.7.4.1
+1.8.1.2
 
 
 
