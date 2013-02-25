@@ -1,40 +1,36 @@
-Received: from mail-da0-f49.google.com ([209.85.210.49])
+Received: from mail-da0-f45.google.com ([209.85.210.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UA3wd-0005P8-0d
+	(envelope-from <martin.jansa@gmail.com>) id 1UA43k-0005bY-I7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Feb 2013 20:42:39 +0100
-Received: by mail-da0-f49.google.com with SMTP id t11so671508daj.22
+	Mon, 25 Feb 2013 20:50:01 +0100
+Received: by mail-da0-f45.google.com with SMTP id v40so1614649dad.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Feb 2013 11:26:20 -0800 (PST)
+	Mon, 25 Feb 2013 11:33:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ovmIZzbydM0kKWVM9pNhmEVLM8y2LUggWAflFNP6nmw=;
-	b=ZqrEQBSbl9KYhX/u0rvS6YzXhnkJZ+ElFe5GyjQq2oessiNBYTeMHAjQmBCmZ62Kzo
-	XQK+5nuqZJh9lzVy3JB0L/r8LwS3OetdLXp5gLsTfYWsFwGDJL0nnLSAwEd9qYR+CJ0y
-	NCReCVGr8F0NeRGiePW2zIKci0xYQQgeIGnZoIvGJQRJOgHk1T+aDma51z+oM6dUqkVL
-	Xbomk8pDB4o8UpmWAxgQiBHYEv8Ho7DVEkX1xms7Z/mOtCxPnS4wGyBzOX4jb5hfKSCM
-	Df+bkrAHpR6lWjnVek/MQIdfnxTrGuojgUS55YJlgdUCYd76JRrRB2FHlnDc1hgWDCjc
-	mmlQ==
-X-Received: by 10.66.118.7 with SMTP id ki7mr18108082pab.184.1361820380219;
-	Mon, 25 Feb 2013 11:26:20 -0800 (PST)
+	bh=akckwJEO/GaS4PSSYxVeslsbQqFElEzSVEjAU0dfvL0=;
+	b=v9Nz5phCZRn2GX/EN+VY1JIqhCyDxIOWiDBWADLQjUWAMxg6bfbWaDtnhlfMgWdlGN
+	swHq1kWUVcauYoXlMEjRhdWwHZPnwq8cWfR8ZGn31C1k5QFdQpRITc1CeV3QP9s2Q1fY
+	4UcIv4VsjeVL9P+/w1geiE7BBOfPZkbg2WYiecUmZxmq9r+3c8u7275gvGLeMujytCV0
+	1kuqq0zfLuGtco0Fh3oSB8WEoE19r84bnFjeXRieAplM6/h63dVDLmOkYPiTQYI3P0d2
+	WnCoV7csPYIMQ7fXt9Xg6JvyAbdQUH9ukWhHy4FimFlI+1KLJKGM1t3HxiOTBCI+df2M
+	5G/g==
+X-Received: by 10.66.11.196 with SMTP id s4mr20411289pab.207.1361820821773;
+	Mon, 25 Feb 2013 11:33:41 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 1sm13615005pba.32.2013.02.25.11.26.18
+	by mx.google.com with ESMTPS id wm3sm13647770pbc.4.2013.02.25.11.33.39
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 25 Feb 2013 11:26:19 -0800 (PST)
-Date: Mon, 25 Feb 2013 20:26:29 +0100
+	Mon, 25 Feb 2013 11:33:40 -0800 (PST)
+Date: Mon, 25 Feb 2013 20:33:50 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130225192629.GD3239@jama>
-References: <1355519149-23005-1-git-send-email-gary@mlbassoc.com>
-	<20121216180022.GC3448@jama>
-	<20130109142121.GN3722@jama.palm1.palmone.com>
-	<50ED7FDD.7060003@mlbassoc.com>
-	<20130110112754.GB3722@jama.palm1.palmone.com>
+Message-ID: <20130225193350.GF3239@jama>
+References: <1361470483-15230-1-git-send-email-jeffrey.honig@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20130110112754.GB3722@jama.palm1.palmone.com>
+In-Reply-To: <1361470483-15230-1-git-send-email-jeffrey.honig@windriver.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] rng-tools: Fixes for latest OE layouts
+Subject: Re: [PATCH] Resolve sysvinit and util-linux conflicting man pages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,109 +44,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2013 19:42:40 -0000
-X-Groupsio-MsgNum: 43300
+X-List-Received-Date: Mon, 25 Feb 2013 19:50:01 -0000
+X-Groupsio-MsgNum: 43301
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EY/WZ/HvNxOox07X"
+	protocol="application/pgp-signature"; boundary="27ZtN5FSuKKSZcBU"
 Content-Disposition: inline
 
---EY/WZ/HvNxOox07X
+--27ZtN5FSuKKSZcBU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 10, 2013 at 12:27:54PM +0100, Martin Jansa wrote:
-> On Wed, Jan 09, 2013 at 07:34:05AM -0700, Gary Thomas wrote:
-> > On 2013-01-09 07:21, Martin Jansa wrote:
-> > > On Sun, Dec 16, 2012 at 07:00:22PM +0100, Martin Jansa wrote:
-> > >> On Fri, Dec 14, 2012 at 02:05:48PM -0700, Gary Thomas wrote:
-> > >>> The current recipe has a few installation errors:
-> > >>>    * The manipulation of configurable paths drops a '/'
-> > >>>    * The init script defaults are placed in the wrong file
-> > >>>    * Finer control over init script start/stop
-> > >>>    * The default device is non-standard
-> > >>>
-> > >>> This patch fixes these little nits and makes the package usable aga=
-in.
-> > >>>
-> > >>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> > >>> ---
-> > >>>   meta-oe/recipes-support/rng-tools/files/default  |    3 ++-
-> > >>>   meta-oe/recipes-support/rng-tools/rng-tools_2.bb |    5 +++--
-> > >>>   2 files changed, 5 insertions(+), 3 deletions(-)
-> > >>>
-> > >>> diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta=
--oe/recipes-support/rng-tools/files/default
-> > >>> index ab7cd93..7aede9b 100644
-> > >>> --- a/meta-oe/recipes-support/rng-tools/files/default
-> > >>> +++ b/meta-oe/recipes-support/rng-tools/files/default
-> > >>> @@ -1,2 +1,3 @@
-> > >>>   # Specify rng device
-> > >>> -RNG_DEVICE=3D/dev/hwrng
-> > >>> +#RNG_DEVICE=3D/dev/hwrng
-> > >>> +RNG_DEVICE=3D/dev/urandom
-> > >>> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/met=
-a-oe/recipes-support/rng-tools/rng-tools_2.bb
-> > >>> index ef753cf..b94854a 100644
-> > >>> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> > >>> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> > >>> @@ -15,12 +15,13 @@ inherit autotools update-rc.d
-> > >>>   do_install_append() {
-> > >>>           install -d "${D}${sysconfdir}/init.d"
-> > >>>           install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/=
-rng-tools
-> > >>> -        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbi=
-ndir},' \
-> > >>> +        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbi=
-ndir}/,' \
-> > >>>               ${D}${sysconfdir}/init.d/rng-tools
-> > >>>
-> > >>>           install -d "${D}${sysconfdir}/default"
-> > >>> -        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/defau=
-lt
-> > >>> +        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-t=
-ools
-> > >>>   }
-> > >>>
-> > >>>   INITSCRIPT_NAME =3D "rng-tools"
-> > >>>   INITSCRIPT_PARAMS =3D "defaults"
-> > >>> +INITSCRIPT_PARAMS =3D "start 30 S . stop 30 0 6 1 ."
-> > >>
-> > >> Why do you add 2nd INITSCRIPT_PARAMS ?
-> > >
-> > > ping :)
-> >=20
-> > Sorry, must have missed your query (holidays).
-> >=20
-> > That second line should really replace the first for finer grain
-> > control over the start/stop choice.  I can fix this and resend the patc=
-h.
+On Thu, Feb 21, 2013 at 01:14:43PM -0500, jeffrey.honig@windriver.com wrote:
+> From: Jeffrey C Honig <jch@honig.net>
 >=20
-> Yes, please do if you want it applied.
+> [ CQID: WIND00404316 ]
 
-Last call for update. Next week I'll remove it from my queue and mark it
-as "Changes requested" on patchwork when not updated.
+This belongs to oe-core ML.
 
 >=20
-> Cheers,
+> Use alternatives mechanism to prevent sysvlinux and util-linux
+> man pages from causing conflicts.
+> ---
+>  meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb    |   11 ++++++++++-
+>  meta/recipes-core/util-linux/util-linux.inc       |    9 +++++++++
+>  meta/recipes-core/util-linux/util-linux_2.22.2.bb |    2 +-
+>  3 files changed, 20 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb b/meta/recipe=
+s-core/sysvinit/sysvinit_2.88dsf.bb
+> index 0a11139..e64b67a 100644
+> --- a/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
+> +++ b/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb
+> @@ -5,7 +5,7 @@ SECTION =3D "base"
+>  LICENSE =3D "GPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe \
+>                      file://COPYRIGHT;endline=3D15;md5=3D349c872e0066155e=
+1818b786938876a4"
+> -PR =3D "r10"
+> +PR =3D "r11"
+> =20
+>  RDEPENDS_${PN} =3D "${PN}-inittab"
+> =20
+> @@ -45,6 +45,15 @@ ALTERNATIVE_LINK_NAME[poweroff] =3D "${base_sbindir}/p=
+oweroff"
+>  ALTERNATIVE_${PN}-pidof =3D "pidof"
+>  ALTERNATIVE_LINK_NAME[pidof] =3D "${base_bindir}/pidof"
+> =20
+> +ALTERNATIVE_${PN}-doc =3D "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 u=
+tmpdump.1"
+> +
+> +ALTERNATIVE_LINK_NAME[last.1] =3D "${mandir}/man1/last.1"
+> +ALTERNATIVE_LINK_NAME[mesg.1] =3D "${mandir}/man1/mesg.1"
+> +ALTERNATIVE_LINK_NAME[mountpoint.1] =3D "${mandir}/man1/mountpoint.1"
+> +ALTERNATIVE_LINK_NAME[sulogin.8] =3D "${mandir}/man8/sulogin.8"
+> +ALTERNATIVE_LINK_NAME[utmpdump.1] =3D "${mandir}/man1/utmpdump.1"
+> +ALTERNATIVE_LINK_NAME[wall.1] =3D "${mandir}/man1/wall.1"
+> +
+>  PACKAGES =3D+ "sysvinit-pidof sysvinit-sulogin"
+>  FILES_${PN} +=3D "${base_sbindir}/* ${base_bindir}/*"
+>  FILES_sysvinit-pidof =3D "${base_bindir}/pidof.sysvinit ${base_sbindir}/=
+killall5"
+> diff --git a/meta/recipes-core/util-linux/util-linux.inc b/meta/recipes-c=
+ore/util-linux/util-linux.inc
+> index 10439c0..c91f4a3 100644
+> --- a/meta/recipes-core/util-linux/util-linux.inc
+> +++ b/meta/recipes-core/util-linux/util-linux.inc
+> @@ -154,6 +154,15 @@ ALTERNATIVE_LINK_NAME[pivot_root] =3D "${base_sbindi=
+r}/pivot_root"
+>  ALTERNATIVE_LINK_NAME[mkfs.minix] =3D "${base_sbindir}/mkfs.minix"
+>  ALTERNATIVE_LINK_NAME[eject] =3D "${bindir}/eject"
+> =20
+> +ALTERNATIVE_${PN}-doc =3D "mountpoint.1 last.1 mesg.1 wall.1 sulogin.8 u=
+tmpdump.1"
+> +
+> +ALTERNATIVE_LINK_NAME[last.1] =3D "${mandir}/man1/last.1"
+> +ALTERNATIVE_LINK_NAME[mesg.1] =3D "${mandir}/man1/mesg.1"
+> +ALTERNATIVE_LINK_NAME[mountpoint.1] =3D "${mandir}/man1/mountpoint.1"
+> +ALTERNATIVE_LINK_NAME[sulogin.8] =3D "${mandir}/man8/sulogin.8"
+> +ALTERNATIVE_LINK_NAME[utmpdump.1] =3D "${mandir}/man1/utmpdump.1"
+> +ALTERNATIVE_LINK_NAME[wall.1] =3D "${mandir}/man1/wall.1"
+> +
+>  # There seems to be problem, atleast on nslu2, with these, untill they a=
+re
+>  # fixed the busybox ones have higher priority
+>  ALTERNATIVE_PRIORITY[hwclock] =3D "10"
+> diff --git a/meta/recipes-core/util-linux/util-linux_2.22.2.bb b/meta/rec=
+ipes-core/util-linux/util-linux_2.22.2.bb
+> index dd95573..f91784b 100644
+> --- a/meta/recipes-core/util-linux/util-linux_2.22.2.bb
+> +++ b/meta/recipes-core/util-linux/util-linux_2.22.2.bb
+> @@ -1,5 +1,5 @@
+>  MAJOR_VERSION =3D "2.22"
+> -PR =3D "r0"
+> +PR =3D "r1"
+>  require util-linux.inc
+> =20
+>  # note that `lscpu' is under GPLv3+
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> 1.7.9.5
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---EY/WZ/HvNxOox07X
+--27ZtN5FSuKKSZcBU
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEruuUACgkQN1Ujt2V2gByK7wCeOxaEYt91Rxy8a7QUcxfAa0hD
-KoYAn2H2UCZoFUOniUhXLyH2jLjt+gT8
-=bXcR
+iEYEARECAAYFAlErvJ4ACgkQN1Ujt2V2gBycmwCghCXWz1Kg5iZNh+Y3yJEnCEQN
+gOMAoKKBmmuQ52szoUEh+Jo6V1Vr3EeU
+=E5R6
 -----END PGP SIGNATURE-----
 
---EY/WZ/HvNxOox07X--
+--27ZtN5FSuKKSZcBU--
