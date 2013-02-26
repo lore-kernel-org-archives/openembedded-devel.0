@@ -1,37 +1,21 @@
-Received: from mail-lb0-f175.google.com ([209.85.217.175])
+Received: from eumx.net ([91.82.101.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <tasskjapp@gmail.com>) id 1UAJ3k-0004cV-4F
+	(envelope-from <ml@communistcode.co.uk>) id 1UANHk-0004Wl-Q0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Feb 2013 12:51:01 +0100
-Received: by mail-lb0-f175.google.com with SMTP id n3so3057638lbo.34
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2013 03:34:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=/AElL3nQPSjDD4N5YrH69+LtuwSf+bOU07l75OADz9g=;
-	b=aL0+/m+6Jhl9UPCWbmbOVE+7lpW3tllJ2NWkTDeL1aFK5XFZEDxiRA6h3DT1mXimb7
-	SkJAi/q1BbXbWrvqXYw5pRBcHjsidiz3qENjID+xyXiL5Rs0uU2PN9TKB/ESNpF3zVzH
-	0PGorFh3PbA0OmX+ykSvA4CUMOhFZdra3ryaID2Wf6aZsGILjYboSJ0uTXe6nDRD4aV4
-	2jO/LCU6V+T4IF6xOtbKpRZL+S6JEZzW8Wqc4+vlSv0JRf0pP8aNtcxa/bEB8XQZhd7N
-	RWRJS8pogwW+XXCmuRnqJPvJHR2n+kszwureUQdUYuOHxikazRrBcXruh0OaEP3o6fvW
-	Qscw==
-X-Received: by 10.112.87.105 with SMTP id w9mr438082lbz.14.1361878480986;
-	Tue, 26 Feb 2013 03:34:40 -0800 (PST)
-Received: from [192.168.0.96] (147.84-49-231.nextgentel.com. [84.49.231.147])
-	by mx.google.com with ESMTPS id t17sm417275lam.9.2013.02.26.03.34.38
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 26 Feb 2013 03:34:39 -0800 (PST)
-Message-ID: <512C9DCC.4050005@gmail.com>
-Date: Tue, 26 Feb 2013 12:34:36 +0100
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:17.0) Gecko/20130106 Thunderbird/17.0.2
+	Tue, 26 Feb 2013 17:21:50 +0100
+Message-ID: <512CDD44.1010002@communistcode.co.uk>
+Date: Tue, 26 Feb 2013 16:05:24 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <51262D01.7070601@gmail.com> <20130222222611.GB3300@jama>
-In-Reply-To: <20130222222611.GB3300@jama>
-Subject: Re: Qt5
+References: <1360707747-8128-1-git-send-email-jeffrey.honig@windriver.com>
+	<511B6EA1.5020806@communistcode.co.uk>
+	<5124FC05.40403@windriver.com> <5676087.MgqTuTql2e@helios>
+	<17062.1361384358@schlepp.honig.net>
+In-Reply-To: <17062.1361384358@schlepp.honig.net>
+Subject: Re: [PATCH] hiawatha: ennsure C flags are passed to builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +29,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 11:51:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 26 Feb 2013 16:21:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/22/2013 11:26 PM, Martin Jansa wrote:
-> On Thu, Feb 21, 2013 at 03:19:45PM +0100, Tasslehoff Kjappfot wrote:
->> Is the meta-qt5 layer at https://github.com/meta-qt5 a work in progress,
->> or should it be usable in its current state?
-> 
-> Not really, but I plan to work on it next week(s).
-> 
->> I currently use qt4-embedded and compile and sdk with qt-support, and
->> want to try out qt5. Compiling qtbase gave me some packages I can add to
->> my image, but when I tried to create an SDK I got stuck. The
->> files/recipes in meta-qt5 differ so much from todays qt4-stuff that I'm
->> not sure where to begin, but I suspect at least an SDK-recipe/task and
->> maybe some qt5-embedded recipes will have to be added?
-> 
-> upstream sources also differ a lot, so recipes will stay different to
-> reflect that.
-> 
->> Thought maybe I'd see if I can create these recipes, but I just wanted
->> to check if that is the plan forward.
-> 
-> If you create something useable send it as pull request on github, I
-> plan to fix issues in current recipes, but don't plan to work on sdk
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+On 20/02/13 18:19, Jeffrey Honig wrote:
+> Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>
+>> On Wednesday 20 February 2013 10:38:29 Mark Hatle wrote:
+>>> On 2/13/13 4:44 AM, Jack Mitchell wrote:
+>>>> On 12/02/13 22:22, Jeffrey C Honig wrote:
+>>>>> [ CQID: WIND00403568 ]
+>>>>>
+>>>>> Hiawatha was overriding existing C flags instead of prepending warning
+>>>>> flags. This caused build failures on multilibs because the C compiler
+>>>>> could not find the proper sysroot.
+>>>>>
+>>>>> Signed-off-by: Jeffrey C Honig <jeffrey.honig@windriver.com>
+>>>>> ---
+>>>>>
+>>>>>     recipes-httpd/hiawatha/files/cmake.patch |   16 ++++++++++++++++
+>>>>>     recipes-httpd/hiawatha/hiawatha_8.6.bb   |    3 +++
+>>>>>     2 files changed, 19 insertions(+)
+>>>>>     create mode 100644 recipes-httpd/hiawatha/files/cmake.patch
+>>>>>
+>>>>> diff --git a/recipes-httpd/hiawatha/files/cmake.patch
+>>>>> b/recipes-httpd/hiawatha/files/cmake.patch new file mode 100644
+>>>>> index 0000000..f597781
+>>>>> --- /dev/null
+>>>>> +++ b/recipes-httpd/hiawatha/files/cmake.patch
+>>>>> @@ -0,0 +1,16 @@
+>>>>> +It is necessary to include the original CMAKE_C_FLAGS to insure that
+>>>>> +the sysroot is passed to the compiler, instead of just setting warning
+>>>>> +options.  Otherwise we'll get problem croos compiling in some
+>>>>> +circumstances.
+>>>>> +
+>>>>> +--- a/CMakeLists.txt	2012-10-31 14:16:45.000000000 -0400
+>>>>> ++++ b/CMakeLists.txt	2013-02-12 14:07:04.297058345 -0500
+>>>>> +@@ -2,7 +2,7 @@
+>>>>> + project(Hiawatha C)
+>>>>> +
+>>>>> + # Compiler
+>>>>> +-set(CMAKE_C_FLAGS "-Wall -Wextra")
+>>>>> ++set(CMAKE_C_FLAGS "-Wall -Wextra ${CMAKE_C_FLAGS}")
+>>>>> + set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+>>>>> +
+>>>>> + # Options
+>>>>> diff --git a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>>>>> b/recipes-httpd/hiawatha/hiawatha_8.6.bb index 837354b..d46a525 100644
+>>>>> --- a/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>>>>> +++ b/recipes-httpd/hiawatha/hiawatha_8.6.bb
+>>>>> @@ -4,9 +4,12 @@ LICENSE = "GPLv2"
+>>>>>
+>>>>>     LIC_FILES_CHKSUM =
+>>>>>     "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+>>>>>     DEPENDS = "libxml2 libxslt"
+>>>>>
+>>>>> +PR = "r1"
+>>>>> +
+>>>>>
+>>>>>     SECTION = "net"
+>>>>>     
+>>>>>     SRC_URI = "http://hiawatha-webserver.org/files/${BPN}-${PV}.tar.gz \
+>>>>>
+>>>>> +           file://cmake.patch \
+>>>>>
+>>>>>                file://hiawatha-init"
+>>>>>     
+>>>>>     SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
+>>>> What's the upstream status on this? If you email Hugo (the developer)
+>>>> directly he usually responds within a few hours and will pull the
+>>>> changes into the next release.
+>>> I'm following up for Jeff.  He has contacted Hugo and the above patch has
+>>> been included upstream.
+>> Great. Should I still apply this to meta-webserver then or do we wait for a
+>> new upstream release?
+> We have a local patch applied, we are good.  It is fine to wait.
+>
+> Thanks!
+>
+> Jeff
+>
 
-Will do, thanks for the info.
+8.8 has been released if someone wants to pick this up. I would myself 
+but I'm currently blocked by a binutils failure.
 
-- Tasslehoff
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
 
