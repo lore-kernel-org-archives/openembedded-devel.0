@@ -1,36 +1,36 @@
-Received: from mail-ie0-f181.google.com ([209.85.223.181])
+Received: from mail-ee0-f42.google.com ([74.125.83.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UAUm4-0008B4-CH
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UAbku-0000V9-VK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Feb 2013 01:21:32 +0100
-Received: by mail-ie0-f181.google.com with SMTP id 17so5144353iea.26
+	Wed, 27 Feb 2013 08:48:49 +0100
+Received: by mail-ee0-f42.google.com with SMTP id b47so173471eek.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Feb 2013 16:05:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=5bA3tv6SYHau/XxurpDrtGbQ9cUY3V3xFsmS0IpZg3Q=;
-	b=ayWzkdXykKVkOO7DhT0HW/d9xSo2auGwU7l00JbvM0lnTQsSJDAr8dwlsejQGtuTvE
-	YhE7DM29WciNKgVQqZEnZ24AAJmtmHL/whwk/8EcTNeBzh/qYBtIEAqI1cLICTJ+6TlE
-	UpvqVMR3WFH14/nkvmNqfI+bZcnE8eFDaaPobrgtf+rvOrNpt+X3dZg5vSDk6JPu3QLR
-	LFGR5s92We9w5snsvySmWsXsGFZ/kjPtjtNLB8jjM4o94AZOQSGn2qrXPXKqAyx14I8V
-	wPwI008JVTPEDGMSxO3wCgHojvJ/4LRW+EAgmAiFT86MP3k+XpRi/tGwdDR1MC75OR/X
-	yfUw==
-X-Received: by 10.50.56.141 with SMTP id a13mr116710igq.24.1361923512183; Tue,
-	26 Feb 2013 16:05:12 -0800 (PST)
+	Tue, 26 Feb 2013 23:32:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=uls/HJUzazELbLX3+r2MAwYRSlnP+Nn4cIaoNMCwHqQ=;
+	b=KCweDV6qyitREldifrifR7SpCot43kc4HZviRwn3019G3+MJHqmJryAoRskfCbkwI/
+	MMTZBGpGZoHRCEdNcrnzC/b5FntjoyxJYT+Zml3bCm39sNh0KOA25vIeZ1hTl13/kny7
+	m9nHb3eGpzRAaPnyG0BAHlTlflpWs+h+2toywoLuyCGK8qMp9oH+MISFnnSMOIbQjaZc
+	gaY52YEVQm7GlrMrEpXvmQgGWaY/+tWCqxTapimupObjHINiqZt6yGdD7qx5G3XtP4a6
+	5JwTPIKn9EU1EcmcszuY3gSD55FZ8qF/hJ0/MWRPSie4Ht547pPD1YfjK1RqugccvKhZ
+	Gphg==
+X-Received: by 10.14.220.135 with SMTP id o7mr3722894eep.3.1361950348692;
+	Tue, 26 Feb 2013 23:32:28 -0800 (PST)
+Received: from localhost.localdomain (ip-95-223-251-141.unitymediagroup.de.
+	[95.223.251.141])
+	by mx.google.com with ESMTPS id f47sm4872129eep.13.2013.02.26.23.32.26
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Tue, 26 Feb 2013 23:32:27 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Feb 2013 08:30:23 +0100
+Message-Id: <1361950224-26188-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-Received: by 10.50.74.163 with HTTP; Tue, 26 Feb 2013 16:04:42 -0800 (PST)
-In-Reply-To: <29610694.jSKIIbYMnE@helios>
-References: <1361432524-26238-1-git-send-email-raj.khem@gmail.com>
-	<10163036.J0OQEGjt9t@helios>
-	<CAMKF1spvgucpsYJs9q16_o7Qz5+WeXmgDFFaF_-uJzx_BLbvdQ@mail.gmail.com>
-	<29610694.jSKIIbYMnE@helios>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Feb 2013 16:04:42 -0800
-Message-ID: <CAMKF1sp2OWjoJMDMH6zx8GfG2HEW6s_dPkN8diJ=Q3Q6uwoWtA@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] kdepimpi: Fix multiline comments
+Subject: [meta-oe] geany-fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,17 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2013 00:21:32 -0000
+X-List-Received-Date: Wed, 27 Feb 2013 07:48:50 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Feb 26, 2013 at 4:03 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
->
-> Ah, oops... I neglected to push to that repo as well, now I have done so.
-> Mirroring is manual for meta-opie / meta-handheld - maybe it shouldn't be.
+Martin,
 
-we have auto updates to meta-oe and other git trees. May be you can
-work with Phil to add meta-opie to OE
-github mirror as well.
+I did not see the mentioned error here so can you please build test in world
+before applying - Thanks.
+
+Andreas
+
+The following changes since commit 84ea5433739ddc2551216902f6053d5c2368e755:
+
+  macchanger: added 1.5.0 recipe (2013-02-25 09:59:56 -0500)
+
+are available in the git repository at:
+  git@gitorious.org:schnitzeltony-oe-meta/meta-openembedded.git geany-fix
+
+Andreas Müller (1):
+      geany: fix compile by removing extra check for c++ compiler
+
+ ...001-configure.ac-remove-additional-c-test.patch |   47 ++++++++++++++++++++
+ meta-oe/recipes-devtools/geany/geany_1.22.bb       |    6 ++-
+ 2 files changed, 52 insertions(+), 1 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/geany/geany/0001-configure.ac-remove-additional-c-test.patch
+
+-- 
+1.7.6.5
+
 
 
