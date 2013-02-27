@@ -1,37 +1,35 @@
-Received: from mail-oa0-f54.google.com ([209.85.219.54])
+Received: from mail-da0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eu@felipetonello.com>) id 1UAl8O-0001Ax-O8
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Feb 2013 18:49:44 +0100
-Received: by mail-oa0-f54.google.com with SMTP id n12so1689903oag.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2013 09:33:19 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=+3lY9oXmiR57JQrRCs6ONhtIZCqaSEUdPfNJ+ewSCLw=;
-	b=cxKK1P9RbUxoxruEe5yKFbAVPsMrup95YsNyT/1DN6n5tf87J13bgBQliifVEd+Jad
-	t0uHZn7nwx9hYgx/eK+Y3UxOnE9i1F5rVpzK8VW5njui0SsOsYP4ytZSMdFR6cMFxLsV
-	QbgonHiBMgdyE3xz4LYPpdmtk23NpfqQShux3T9jONFTIizJVT84bDWpoNiNkhmkFqNF
-	/Fq1jjC1wka3Mcf7IttQNX1ZoyxuuAD+XkCQioa0xU7UUGP2oDoTVaScIdPih8Yrsak/
-	dTkd4V6VpVAFG76EVxKAMQupVjUg/c2iCEfNmhZXoGgzYv3ktMZA9wcDfrrDVe1gxLLm
-	NEaA==
-X-Received: by 10.60.18.136 with SMTP id w8mr3050650oed.84.1361986399163;
-	Wed, 27 Feb 2013 09:33:19 -0800 (PST)
-Received: from mlabs-ftonello.masimolabs.com
-	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
-	by mx.google.com with ESMTPS id j10sm8978196obg.4.2013.02.27.09.33.17
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 27 Feb 2013 09:33:18 -0800 (PST)
-From: eu@felipetonello.com
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1UAln6-0002kw-9J; Wed, 27 Feb 2013 19:31:45 +0100
+Received: by mail-da0-f47.google.com with SMTP id s35so418277dak.20
+	for <multiple recipients>; Wed, 27 Feb 2013 10:15:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=Z3caFw+e3KllvCUSuRbvJwibAV7h3clG9cMvkV45uFg=;
+	b=vV9jyu6Zwv9t2EAi0oLtEETb6eh2LhjiHl8sFRFYd2igBFnpoVD8mWyLAo3NmPQgSK
+	H8ym/Ayz99MuWprtVjWi1kSKK7v/ZxUfiRkapnlzfJPx9SxltBRd8wmZKyXZyxNop7wB
+	/f+g0ccjyBikSElHT9RrKoFQgzvW9CjU8YB6oW08O3wumVeIlf9siRm1vlLUCKY3QF1u
+	Tkuz2uhUqw8SHNOVz6rOVJUFthZsm+/K2ItruFJBzMvK8qvZyJr21hilsf++2tz1PQKC
+	LmEbKu2gRX/nefNDLvpmcqtftWgvbgQi+lnBYbb8bdTSg/4hftaU1+6PVRVUVxWu9Thy
+	OQZQ==
+X-Received: by 10.68.248.74 with SMTP id yk10mr4805474pbc.38.1361988922547;
+	Wed, 27 Feb 2013 10:15:22 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id xr3sm5374988pbc.46.2013.02.27.10.15.18
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 27 Feb 2013 10:15:20 -0800 (PST)
+Date: Wed, 27 Feb 2013 19:15:09 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Feb 2013 09:33:22 -0800
-Message-Id: <1361986402-32739-1-git-send-email-ftonello@cercacor.com>
-X-Mailer: git-send-email 1.7.9.5
-X-Gm-Message-State: ALoCoQklPFxFm7DFMYe5ZX+9fWoV5OEUJHLRYBOwmsbFwJviy/2PZWsbJb5OYpj3EqXbRJdOaF0f
-Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
-Subject: [meta-oe][PATCH] fingerterm: Added 1.0.2 recipe
+Message-ID: <20130227181509.GD8208@jama.dyndns-home.com>
+References: <20130211144549.AE3EE2055@opal>
+MIME-Version: 1.0
+In-Reply-To: <20130211144549.AE3EE2055@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Radu Moisan : avahi: Enabling with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,60 +43,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2013 17:49:46 -0000
+X-List-Received-Date: Wed, 27 Feb 2013 18:31:45 -0000
+X-Groupsio-MsgNum: 43319
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="F8dlzb82+Fcn6AgP"
+Content-Disposition: inline
 
-From: "Felipe F. Tonello" <ftonello@cercacor.com>
+--F8dlzb82+Fcn6AgP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fingerterm is a terminal emulator for Nokia Harmattan, but it works in any Qt4
-environment.
+On Mon, Feb 11, 2013 at 02:45:49PM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: 6d89c6744a98dce1fee6a21f1dad1305f6bf6fb5
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3D6d89c6744a98dce1fee6a21f1dad1305f6bf6fb5
+>=20
+> Author: Radu Moisan <radu.moisan@intel.com>
+> Date:   Fri Feb  8 22:43:18 2013 +0000
+>=20
+> avahi: Enabling with systemd
+>=20
+> Signed-off-by: Radu Moisan <radu.moisan@intel.com>
+> Signed-off-by: Sander van Grieken <sander@outrightsolutions.nl>
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>=20
+> ---
+>=20
+>  meta/recipes-connectivity/avahi/avahi.inc |   21 +++++++++++++--------
+>  1 files changed, 13 insertions(+), 8 deletions(-)
+>=20
+> diff --git a/meta/recipes-connectivity/avahi/avahi.inc b/meta/recipes-con=
+nectivity/avahi/avahi.inc
+> index 185207b..3a4547c 100644
+> --- a/meta/recipes-connectivity/avahi/avahi.inc
+> +++ b/meta/recipes-connectivity/avahi/avahi.inc
+> @@ -37,10 +37,13 @@ USERADD_PARAM_avahi-autoipd =3D "--system --home /var=
+/run/avahi-autoipd \
+>                                -c \"Avahi autoip daemon\" \
+>                                avahi-autoipd"
+> =20
+> -inherit autotools pkgconfig update-rc.d gettext useradd
+> +inherit autotools pkgconfig update-rc.d gettext systemd useradd
+> =20
+> -EXTRA_OECONF =3D "--with-distro=3Ddebian \
+> -             --disable-introspection \
+> +SYSTEMD_PACKAGES =3D "${PN}-daemon ${PN}-dnsconfd"
+> +SYSTEMD_SERVICE_avahi-daemon =3D "avahi-daemon.service"
+> +SYSTEMD_SERVICE_avahi-dnsconfd =3D "avahi-dnsconfd.service"
 
-This recipe can be extended by a .bbappend to add .desktop, icon and others to
-the target device.
+The same avahi.inc is also included in avahi-ui.
 
-Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
----
- meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   29 +++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+meta/recipes-connectivity/avahi/avahi-ui_0.6.31.bb:require avahi.inc
 
-diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
-new file mode 100644
-index 0000000..a900b97
---- /dev/null
-+++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "A terminal emulator for Harmattan (Nokia N9/N950) with a custom \
-+virtual keyboard and usability-enhancing features such as URL grabber, pan \
-+gestures and customizable shortcut menu. Designed especially to be used with \
-+screen and irssi."
-+HOMEPAGE = "http://hqh.unlink.org/harmattan"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+SECTION = "qt/app"
-+
-+PR = "r0"
-+
-+inherit qt4x11 pkgconfig
-+
-+SRC_URI = " \
-+  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
-+"
-+SRC_URI[md5sum] = "d53b0f463c025583cd52accf95715448"
-+SRC_URI[sha256sum] = "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a044b6674dd82d95150"
-+
-+S = "${WORKDIR}/${PN}"
-+
-+FILES_${PN} = " \
-+  ${bindir}/${PN} \
-+"
-+
-+do_install() {
-+  install -d ${D}${bindir}
-+  install -m 0744 ${S}/${PN} ${D}${bindir}
-+}
-\ No newline at end of file
--- 
-1.7.9.5
+where this is not working correctly.
 
+> +
+> +EXTRA_OECONF =3D "--disable-introspection \
+>               --with-avahi-priv-access-group=3Dadm \
+>               --disable-stack-protector \
+>               --disable-gdbm \
+> @@ -50,10 +53,15 @@ EXTRA_OECONF =3D "--with-distro=3Ddebian \
+>               --disable-qt4 \
+>               --disable-python \
+>               --disable-doxygen-doc \
+> -             --with-systemdsystemunitdir=3D${systemd_unitdir}/system/ \
+> +             ${EXTRA_OECONF_SYSVINIT} \
+> +             ${EXTRA_OECONF_SYSTEMD} \
+>               ${AVAHI_GTK} \
+>             "
+> =20
+> +# The distro choice determines what init scripts are installed
+> +EXTRA_OECONF_SYSVINIT =3D "${@base_contains('DISTRO_FEATURES','sysvinit'=
+,'--with-distro=3Ddebian','--with-distro=3Dnone',d)}"
+> +EXTRA_OECONF_SYSTEMD =3D "${@base_contains('DISTRO_FEATURES','systemd','=
+--with-systemdsystemunitdir=3D${systemd_unitdir}/system/','',d)}"
+> +
+>  AVAHI_GTK ?=3D "--disable-gtk --disable-gtk3"
+> =20
+>  LDFLAGS_append_libc-uclibc =3D " -lintl"
+> @@ -64,9 +72,8 @@ do_configure_prepend() {
+>  }
+> =20
+> =20
+> -PACKAGES =3D+ "avahi-systemd avahi-daemon libavahi-common libavahi-core =
+libavahi-client avahi-dnsconfd libavahi-glib libavahi-ui avahi-autoipd avah=
+i-utils"
+> +PACKAGES =3D+ "avahi-daemon libavahi-common libavahi-core libavahi-clien=
+t avahi-dnsconfd libavahi-glib libavahi-ui avahi-autoipd avahi-utils"
+> =20
+> -FILES_avahi-systemd =3D "${systemd_unitdir}"
+>  FILES_avahi-autoipd =3D "${sbindir}/avahi-autoipd \
+>                         ${sysconfdir}/avahi/avahi-autoipd.action \
+>                         ${sysconfdir}/dhcp/*/avahi-autoipd \
+> @@ -94,8 +101,6 @@ FILES_libavahi-glib =3D "${libdir}/libavahi-glib.so.*"
+>  FILES_libavahi-gobject =3D "${libdir}/libavahi-gobject.so.*"
+>  FILES_avahi-utils =3D "${bindir}/avahi-*"
+> =20
+> -RDEPENDS_avahi-systemd =3D "avahi-daemon"
+> -
+>  RDEPENDS_avahi-daemon =3D "sysvinit-pidof"
+> =20
+>  # uclibc has no nss
+>=20
+>=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--F8dlzb82+Fcn6AgP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlEuTS0ACgkQN1Ujt2V2gByEFgCfU5+oxqjO1IvIcUjPDogTEk0R
+h5gAn1570egI9BSw5s/xHlkePB37nyeW
+=Spb1
+-----END PGP SIGNATURE-----
+
+--F8dlzb82+Fcn6AgP--
