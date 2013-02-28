@@ -1,38 +1,37 @@
 Received: from mail-da0-f49.google.com ([209.85.210.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UBDSR-0003j5-Cr
+	(envelope-from <martin.jansa@gmail.com>) id 1UBDVr-0003sN-Bh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 01:04:36 +0100
-Received: by mail-da0-f49.google.com with SMTP id t11so1091521daj.36
+	Fri, 01 Mar 2013 01:07:49 +0100
+Received: by mail-da0-f49.google.com with SMTP id t11so1073976daj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2013 15:47:52 -0800 (PST)
+	Thu, 28 Feb 2013 15:51:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=t8mUOJEF2ZL8uKyxauh/sEYKHWa6BFgIZB7HMablVIM=;
-	b=Kq0OrnaI2U4vNZlvoNfPYnjs9OiNojpPwKdAWksmsixzrlWJj5mRbj6IwGf9hDCI+8
-	v2Kn8MtDMl7baG1igoZEPDHMAM0H9c8l048PDbV0TxalhAhRJrc5869cE2su+MU/WrkC
-	2+2ZPFKlVNHfLF/bsX3DVo/Jb6rBapK37QClwUM/oNnpu473S0JhnGdznQ/qTrEZUHaM
-	3FDObcorZp2AzJFOAZqI5oQlR6KxX4Nytsv+/5kOaZlFlFWUTnRup6UhCp6GkaTxf4Vl
-	TGI9mAYIiJ3mArlcfxfP4HrOvJav2UOjv0liClzRUrlWNIwyBzk3szZnI+TFiWuIfsvL
-	ttFA==
-X-Received: by 10.68.129.73 with SMTP id nu9mr11695439pbb.57.1362095272011;
-	Thu, 28 Feb 2013 15:47:52 -0800 (PST)
+	bh=V4kYY4/qEbJUXKHsfYH+ClYAjuxznx1M0qrfLMJyDvQ=;
+	b=XQNAFqlgnrguYJsD/JlQOFjPBkl3E6e9wxa/6mITCVeowfZbyKyoGmUEhgpFYIsyL9
+	5gBOX/hFbbqj6RqR+MhK6BDv/tjkXKpCZija54fdyHZACjk5FVsvdhjE8utRqN9OXNYq
+	yk9TMIqdUPOSHPdK4rD//lRspV3fVZsOG7Y+8nqFAac0qY1OSVU47YX8Z39AaE/3MldG
+	5ffmnDdEXRsiggor04zwaRAO4PJHSniKumALd7gTsIBphY2y8TLHEAdJiN9KOD9ok6Xg
+	tnAQCdLrkLAF+K+dkL4ri5Cxq9YrB9Rf/njzDCqOCob1bXbyryhVPOYhlej3nypd6ucW
+	wFig==
+X-Received: by 10.68.231.70 with SMTP id te6mr11545745pbc.159.1362095482278;
+	Thu, 28 Feb 2013 15:51:22 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 1sm9820052pba.32.2013.02.28.15.47.49
+	by mx.google.com with ESMTPS id t4sm10807798pax.0.2013.02.28.15.51.19
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 28 Feb 2013 15:47:50 -0800 (PST)
-Date: Fri, 1 Mar 2013 00:47:46 +0100
+	Thu, 28 Feb 2013 15:51:20 -0800 (PST)
+Date: Fri, 1 Mar 2013 00:51:13 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130228234746.GD3279@jama>
-References: <1361995702-28964-1-git-send-email-ftonello@cercacor.com>
-	<20130227203926.GE8208@jama.dyndns-home.com>
-	<512E8A65.5070904@felipetonello.com>
+Message-ID: <20130228235113.GE3279@jama>
+References: <1361950224-26188-1-git-send-email-schnitzeltony@googlemail.com>
+	<1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <512E8A65.5070904@felipetonello.com>
+In-Reply-To: <1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] qextserialport: Added 1.2rc recipe
+Subject: Re: [meta-oe] geany: fix compile by removing extra check for c++ compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,169 +45,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 00:04:41 -0000
-X-Groupsio-MsgNum: 43340
+X-List-Received-Date: Fri, 01 Mar 2013 00:07:49 -0000
+X-Groupsio-MsgNum: 43341
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lteA1dqeVaWQ9QQl"
+	protocol="application/pgp-signature"; boundary="oFbHfjnMgUMsrGjO"
 Content-Disposition: inline
 
---lteA1dqeVaWQ9QQl
-Content-Type: text/plain; charset=us-ascii
+--oFbHfjnMgUMsrGjO
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 27, 2013 at 02:36:21PM -0800, Felipe Ferreri Tonello wrote:
-> Hi Martin,
->=20
-> On 02/27/2013 12:39 PM, Martin Jansa wrote:
-> > On Wed, Feb 27, 2013 at 12:08:21PM -0800, eu@felipetonello.com wrote:
-> >> From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> >>
-> >> QExtSerialPort is a serial port library for Qt4/5.
-> >
-> > Is there good reason to redefine all those FILES_*?
-> >
-> >  From previous mail:
-> > It also has a lot of QA warnings, it's better to use +=3D for FILES_, so
-> > that default values are preserved where possible.
-> >
->=20
-> Ok. Got it. But in this case there is no more QA right. I know that I=20
-> added the /usr/src/..., which is redundant, but still. If you want to me=
-=20
-> to remove, I can do it.
+On Wed, Feb 27, 2013 at 08:30:24AM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 
-QA warnings are still there
-qextserialport-1.1+1.2rc: qextserialport: Files/directories were
-installed but not shipped
-  /usr/src
-  /usr/src/debug
-  /usr/src/debug/qextserialport
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/moc_qexts=
-erialport.cpp
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/moc_qexts=
-erialenumerator.cpp
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialport_unix.cpp
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialport_p.h
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialport.h
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialport.cpp
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialenumerator_p.h
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialenumerator_linux.cpp
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialenumerator.h
-  /usr/src/debug/qextserialport/1.1+1.2rc-r0/qextserialport-1.2rc/src/qexts=
-erialenumerator.cpp
+Thanks, now it fails a bit later:
+| configure:17392: checking for perl >=3D 5.8.1
+| configure:17399: result: 5.14.2
+| configure:17403: checking for XML::Parser
+| configure:17409: error: XML::Parser perl module is required for intltool
 
-You added
-/usr/src/debug/qextserialport-${PV}-${PR}/qextserialport-${REAL_PV}
-but it's in
-/usr/src/debug/qextserialport/${PV}-${PR}/qextserialport-${REAL_PV} \
+Complete log:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30228_192523.log/
 
-But really use default FILES_ values and only add to it with +=3D if
-needed and only in some exceptions you have to overwrite it completely
-(e.g. when foo.so from PN-dev is actually needed in PN).
-
+> ---
+>  ...001-configure.ac-remove-additional-c-test.patch |   47 ++++++++++++++=
+++++++
+>  meta-oe/recipes-devtools/geany/geany_1.22.bb       |    6 ++-
+>  2 files changed, 52 insertions(+), 1 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/geany/geany/0001-configure.a=
+c-remove-additional-c-test.patch
 >=20
-> At least, someone that takes this recipe knows exactly what's been=20
-> installed. IMO the default FILES_ might be obscure to some new contributo=
-rs.
->=20
-> Thanks
->=20
-> Felipe
->=20
-> >>
-> >> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> >> ---
-> >>   .../qextserialport/qextserialport_1.2rc.bb         |   56 ++++++++++=
-++++++++++
-> >>   1 file changed, 56 insertions(+)
-> >>   create mode 100644 meta-oe/recipes-qt/qextserialport/qextserialport_=
-1.2rc.bb
-> >>
-> >> diff --git a/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb=
- b/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
-> >> new file mode 100644
-> >> index 0000000..4cc9d6c
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
-> >> @@ -0,0 +1,56 @@
-> >> +DESCRIPTION =3D "Qt Ext Serial Port Library"
-> >> +HOMEPAGE =3D "http://http://code.google.com/p/qextserialport/"
-> >> +LICENSE =3D "MIT"
-> >> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db866a28cda707ec714878bd933=
-f46251"
-> >> +SECTION =3D "qt/libs"
-> >> +
-> >> +PR =3D "r0"
-> >> +
-> >> +# 1.2rc as version will sort lower then 1.2 when it's released
-> >> +REAL_PV =3D "1.2rc"
-> >> +PV =3D "1.1+${REAL_PV}"
-> >> +
-> >> +inherit qt4x11 pkgconfig
-> >> +
-> >> +DEPENDS =3D "udev"
-> >> +
-> >> +SRC_URI =3D " \
-> >> +  http://qextserialport.googlecode.com/files/qextserialport-${REAL_PV=
-}.zip \
-> >> +"
-> >> +
-> >> +SRC_URI[md5sum] =3D "ffa061edb9f64666468d18402eee6108"
-> >> +SRC_URI[sha256sum] =3D "9cbee267aac9830f9944bb1d13872e51fba400aa9afe1=
-58e64f0fe265a0176bc"
-> >> +
-> >> +S =3D "${WORKDIR}/qextserialport-${REAL_PV}"
-> >> +
-> >> +FILES_${PN} =3D "${libdir}/libqextserialport${SOLIBS}"
-> >> +
-> >> +FILES_${PN}-dev =3D " \
-> >> +  ${libdir}/libqextserialport${SOLIBSDEV} \
-> >> +  ${libdir}/libqextserialport.prl \
-> >> +  ${includedir}/QtExtSerialPort/*.h \
-> >> +  ${datadir}/qt4/mkspecs/features/extserialport.prf \
-> >> +"
-> >> +
-> >> +FILES_${PN}-dbg =3D " \
-> >> +  ${libdir}/.debug/libqextserialport.so* \
-> >> +  /usr/src/debug/qextserialport-${PV}-${PR}/qextserialport-${REAL_PV}=
- \
-> >> +"
-> >> +
-> >> +do_configure_prepend() {
-> >> +  # based on the documentation, this line make sure we use udev in li=
-nux
-> >> +  cd ${S} && echo "linux*:CONFIG +=3D qesp_linux_udev" > .qmake.cache
-> >> +
-> >> +  # Hacking hardcoded qmake variables
-> >> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_HEADERS\],${includedir=
-},g' '{}' ';'
-> >> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_LIBS\],${libdir},g' '{=
-}' ';'
-> >> +  find *.pro -exec sed -i -e 's,$$\[QMAKE_MKSPECS\],${datadir}/qt4/mk=
-specs/,g' '{}' ';'
-> >> +}
-> >> +
-> >> +do_install() {
-> >> +  export INSTALL_ROOT=3D${D}
-> >> +  oe_runmake install
-> >> +
-> >> +  # This is necessary to make it work with the qt based SDK
-> >> +  cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|${STAGING_I=
-NCDIR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
-> >> +}
-> >> --
-> >> 1.7.9.5
+> diff --git a/meta-oe/recipes-devtools/geany/geany/0001-configure.ac-remov=
+e-additional-c-test.patch b/meta-oe/recipes-devtools/geany/geany/0001-confi=
+gure.ac-remove-additional-c-test.patch
+> new file mode 100644
+> index 0000000..5166fec
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/geany/geany/0001-configure.ac-remove-addit=
+ional-c-test.patch
+> @@ -0,0 +1,47 @@
+> +From e62d5b59262ec7ffe07931790712c7e247377795 Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+> +Date: Thu, 21 Feb 2013 09:31:31 +0100
+> +Subject: [PATCH] configure.ac remove additional c++ test
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=3DUTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +For openembedded cross-builds CXX can contain something like:
+> +
+> +arm-oe-linux-gnueabi-g++  -march=3Darmv5te  -marm -mthumb-interwork --sy=
+sroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qem=
+uarm
+> +
+> +This ends up in
+> +
+> +configure:5582: error: No C++ compiler found. Please install a C++ compi=
+ler.
+> +
+> +Anyway if [1] is still valid, the combination of AC_PROG_CC and AC_PROG_=
+CXX
+> +should thow an error message.
+> +
+> +[1] http://lists.gnu.org/archive/html/bug-autoconf/2010-05/msg00001.html
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> +---
+> + configure.ac |    5 -----
+> + 1 files changed, 0 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index c37312a..742bf35 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -26,11 +26,6 @@ AC_USE_SYSTEM_EXTENSIONS
+> + AC_PROG_CC
+> +=20
+> + AC_PROG_CXX
+> +-# check for C++ compiler explicitly and fail if none is found, do this =
+check
+> +-# after AC_PROG_CXX has set the CXX environment variable
+> +-if ! which $CXX >/dev/null 2>&1; then
+> +-	AC_MSG_ERROR([No C++ compiler found. Please install a C++ compiler.])
+> +-fi
+> +=20
+> + AC_PROG_INSTALL
+> + AC_PROG_LN_S
+> +--=20
+> +1.7.6.5
+> +
+> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/recip=
+es-devtools/geany/geany_1.22.bb
+> index 1e56ec8..e0b5df5 100644
+> --- a/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
+> @@ -3,10 +3,14 @@ HOMEPAGE =3D "http://www.geany.org/"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5d4e=
+9c9"
+>  DEPENDS =3D "gtk+"
+> +PR =3D "r1"
+> =20
+>  inherit autotools pkgconfig
+> =20
+> -SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
+> +SRC_URI =3D " \
+> +    http://download.geany.org/${PN}-${PV}.tar.bz2 \
+> +    file://0001-configure.ac-remove-additional-c-test.patch \
+> +"
+>  SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
+>  SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5638=
+8e9521a27877577e"
+> =20
+> --=20
+> 1.7.6.5
 >=20
 >=20
 > _______________________________________________
@@ -219,16 +174,16 @@ NCDIR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---lteA1dqeVaWQ9QQl
+--oFbHfjnMgUMsrGjO
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEv7KIACgkQN1Ujt2V2gBzk9wCfXekz28dKLbV1vh/Cc+6l7hiL
-PPcAoLSFDZnZRv3608hPCqan+n3H6deB
-=xcoZ
+iEYEARECAAYFAlEv7XEACgkQN1Ujt2V2gBzyzQCguJaHTS1m2ikTl+gJ+YXvRMDE
+mdEAn011NL6AJIcemwsa5dE5YXy/9QdA
+=+Tbn
 -----END PGP SIGNATURE-----
 
---lteA1dqeVaWQ9QQl--
+--oFbHfjnMgUMsrGjO--
