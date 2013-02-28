@@ -1,35 +1,33 @@
-Received: from mail-vb0-f52.google.com ([209.85.212.52])
+Received: from mail-pb0-f51.google.com ([209.85.160.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UB2ca-0004pH-St
+	(envelope-from <martin.jansa@gmail.com>) id 1UB2jD-0005CD-Ke
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Feb 2013 13:30:05 +0100
-Received: by mail-vb0-f52.google.com with SMTP id fa15so171220vbb.39
+	Thu, 28 Feb 2013 13:36:52 +0100
+Received: by mail-pb0-f51.google.com with SMTP id un15so1041194pbc.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2013 04:13:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=yLyKyDJp8RgWo/n5Ue78dkn8cqdl1sGUp4qXt+CuDKo=;
-	b=FhJKV0i2efqK5fl1F/jSqh4MSAeLVy04ZXSGojIawOrUYKqEYmuHpt8ZPQMNIRb+QK
-	GJydF9cr1uCXmhpgfzLENvZEtZLp1BsyJ02xsdkZM7i5dxtRraxZlc3Ej4ljyHY3SuqB
-	F/0fBNFi83umY59a6rbMjh1XkrCqo45niRlflavNk3UBegBqkkjHkWI/FXuGG7Wo/5Io
-	67RRuO41Qmz2qKe4821H4yrNoBKnOEo5lPBzl4RIl/cSWZPwPLUv0bNr6pWZ7vGhcbMq
-	BTFq1UOHqFy4/b9318vZfLoqnxOk1JDo8QXpQ4VYlz/h1F7ZFoDIwNZeObZ/Us38QEFn
-	KQFA==
-X-Received: by 10.220.215.73 with SMTP id hd9mr2450514vcb.19.1362053618505;
-	Thu, 28 Feb 2013 04:13:38 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.219.195 with HTTP; Thu, 28 Feb 2013 04:13:18 -0800 (PST)
-In-Reply-To: <CA+YB3raWk13+Yxj3=8c34Lbm3svv6apkp9BeYgjRgBnt_4JbUA@mail.gmail.com>
-References: <CA+YB3raWk13+Yxj3=8c34Lbm3svv6apkp9BeYgjRgBnt_4JbUA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 28 Feb 2013 12:13:18 +0000
-Message-ID: <CAJTo0LaiKyUHD4C6KhdyOjuPLtMb+BvpaRwcEXALY7cPd2tNLw@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQmm8NhMDtTAia3maxwbQKb670Grbji3193a2MGZbObuFRkKr67nakhPbCVwxXvEz3PdDzfE
-Subject: Re: [OE-core] OE TSC minutes 12 February 2013
+	Thu, 28 Feb 2013 04:20:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=DeHxixB8+waTV2sucwUVnSZsXIYLHpFfpaQ8WIGjZmw=;
+	b=IK4UpOrXt+5C9/7gV4ewdIvfgerA8XR56WGqTJ4oWKHKHZ2yUWHWFrQDPRTnmTuvWu
+	ho1k123Nm/lIJABYXdfrVv8e3xdXZzjFzwhiKyZlYGWF1x1YdkCk8Osk3LxvDTNfKxTA
+	jcUpByj0k+jaLEJMZfYra1tTmk0X9nV/v3EDaRLe04Vb1rGk70g3YK8vcmOg+eHbEmQq
+	sT3Ysp5K90AfysFYx8a+o4egwfQf6gXeYyCdlfnvSQ0brANPFu4hjx94wSleO25Ar8nw
+	MTD/qNsgxDw9F6/o7nuW+B0k1u4hgSwB3UjPcD3BykoUipgzfm4oJEEjuAwRUPYlxKmA
+	V3qw==
+X-Received: by 10.66.250.131 with SMTP id zc3mr9291174pac.107.1362054028729;
+	Thu, 28 Feb 2013 04:20:28 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id d1sm9101034pav.6.2013.02.28.04.20.22
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 28 Feb 2013 04:20:27 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Feb 2013 13:20:06 +0100
+Message-Id: <cover.1362053615.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.4
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH][for-danny 0/3] backport meta-ruby
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +41,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2013 12:30:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 Feb 2013 12:37:09 -0000
 
-On 28 February 2013 06:28, Jeff Osier-Mixon <jefro@jefro.net> wrote:
-> (9:51:16 AM) RP: bluelightning: Beat up Ross?
+I know that adding new layer is not typical "backport", but we need ruby 
+in danny and IIRC Koen also needs.
 
-In an attempt to avoid TSC-sanctioned beatings, I've just sent a
-series that adds libgdata, clutter-box2d, and gthumb to meta-oe.
+Also because it's separate layer, there is no danger to users which don't 
+need or use it.
 
-Ross
+The following changes since commit c02834a7cc5fda525c7ebeec545625233bab4cb5:
+
+  xf86-video-geode: Update to 2.11.14 (2013-02-15 12:16:55 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny3
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/for-danny3
+
+Jackie Huang (2):
+  ruby: Add from OE-Classic
+  ruby: update to 1.9.3-194
+
+Martin Jansa (1):
+  meta-ruby: add empty layer
+
+ meta-ruby/COPYING.MIT                              |  17 ++
+ meta-ruby/README                                   |  15 ++
+ meta-ruby/conf/layer.conf                          |   9 +
+ meta-ruby/recipes-devtools/ruby/ruby.inc           |  43 +++
+ ...onf-hardcode-wide-getaddr-info-test-outco.patch |  26 ++
+ meta-ruby/recipes-devtools/ruby/ruby/extmk.patch   |  13 +
+ .../recipes-devtools/ruby/ruby/extmk_run.patch     |  15 ++
+ .../ruby/ruby/ruby-1.9.3-always-use-i386.patch     |  11 +
+ .../ruby/ruby/ruby-1.9.3-bignum-test-fix.patch     |  31 +++
+ .../ruby/ruby-1.9.3-custom-rubygems-location.patch |  86 ++++++
+ .../ruby/ruby-1.9.3-disable-versioned-paths.patch  | 149 +++++++++++
+ .../ruby/ruby/ruby-1.9.3-fix-s390x-build.patch     |  12 +
+ .../ruby/ruby/ruby-1.9.3-install-cross.patch       |  16 ++
+ .../ruby/ruby/ruby-1.9.3-mkmf-verbose.patch        |  11 +
+ .../ruby-1.9.3-rubygems-1.8.11-uninstaller.patch   |  76 ++++++
+ .../ruby/ruby/ruby-1.9.3-webrick-test-fix.patch    |  24 ++
+ .../ruby/rubygems-1.8.11-binary-extensions.patch   | 296 +++++++++++++++++++++
+ meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb |  50 ++++
+ 18 files changed, 900 insertions(+)
+ create mode 100644 meta-ruby/COPYING.MIT
+ create mode 100644 meta-ruby/README
+ create mode 100644 meta-ruby/conf/layer.conf
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby.inc
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/extmk.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-always-use-i386.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-bignum-test-fix.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-custom-rubygems-location.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-disable-versioned-paths.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-fix-s390x-build.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-install-cross.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-mkmf-verbose.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-rubygems-1.8.11-uninstaller.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-webrick-test-fix.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby/rubygems-1.8.11-binary-extensions.patch
+ create mode 100644 meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb
+
+-- 
+1.8.1.4
+
 
 
