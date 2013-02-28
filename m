@@ -1,42 +1,37 @@
 Received: from mail-oa0-f46.google.com ([209.85.219.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eu@felipetonello.com>) id 1UApra-0001ZF-HN
+	(envelope-from <eu@felipetonello.com>) id 1UAvC2-0002R9-86
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Feb 2013 23:52:49 +0100
-Received: by mail-oa0-f46.google.com with SMTP id k1so2373983oag.19
+	Thu, 28 Feb 2013 05:34:34 +0100
+Received: by mail-oa0-f46.google.com with SMTP id k1so2826811oag.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2013 14:36:16 -0800 (PST)
+	Wed, 27 Feb 2013 20:17:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
 	:x-gm-message-state;
-	bh=fPTr4vCSk18k7YjhXwOzm4P6qHrG7A+cMOnUSuttuaE=;
-	b=h2wSyR9Zk1Mv3RK3wWferDqFN00MtwU9En8frvJx8LVFnq+RBtAcTz3Qr5fKcfvB50
-	YvZy9UzBeMyaVtWaOTGbmMJYMMNlRJVIe8eSDC1mYBbcjuQ6mg1D826PIizG/oE2TdVx
-	uhB7XiUMnbuNy1w4DusbZILElH2LUcK6LRnPHPUIzboK1n/35Gz+NYCVhAiuvaFzscaz
-	jt0eJlOPcjVgddHCOWj0PXnCwpsoTk86bka6FRGeklk541dt6vFLF/KMKjWdjqNQdAsf
-	kS8dgEHbn8BdoeeaCFOeYXAb42p1FeTR6PNcwvbnR08CZsAo558OfAiFuXs1BaL2SFRs
-	7ZNQ==
-X-Received: by 10.182.156.44 with SMTP id wb12mr4099261obb.20.1362004576727;
-	Wed, 27 Feb 2013 14:36:16 -0800 (PST)
-Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
-	[70.183.20.162])
-	by mx.google.com with ESMTPS id be1sm10522349obb.11.2013.02.27.14.36.14
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 27 Feb 2013 14:36:15 -0800 (PST)
-Message-ID: <512E8A65.5070904@felipetonello.com>
-Date: Wed, 27 Feb 2013 14:36:21 -0800
-From: Felipe Ferreri Tonello <eu@felipetonello.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-MIME-Version: 1.0
+	bh=VbeIvXoAN+Lkq+nUsS6F2Dop1B37spgmQMgtx22KTNU=;
+	b=f1jwyYJv1IzznHdZ6n504JuTwnaXoqaIzxWE4FlyZkIWdOwy79cMQjdxG7tkG7Eauf
+	wgc+JAOhKDpAlKc8gP/0pojx1VSrPojItoKJ4qTGmaoc2ALLs6DFJdocICSYoXi1rmf5
+	MsrlQMoha0E6vuxt7T2EoL4CL0hJ2S4bDRVqiAUFG2EcbUfweYDMUowmgKmwxE8lddpx
+	4z/T2kySPenxGv/2XAGWW+QY1gJFAmZBvvHRePTILiUKWkCDfHGh/56v2AIXobqAcUbT
+	lbaCjiEoZVTqd6PoC9QtCoUeEOm4Yl26sPKe7sFqaiKRhTpFaGMP/qXHtTAm/coD+7EW
+	MFwQ==
+X-Received: by 10.182.146.13 with SMTP id sy13mr4538761obb.45.1362024586042;
+	Wed, 27 Feb 2013 20:09:46 -0800 (PST)
+Received: from mlabs-ftonello.masimolabs.com
+	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
+	by mx.google.com with ESMTPS id hc8sm4754212obc.8.2013.02.27.20.09.44
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 27 Feb 2013 20:09:44 -0800 (PST)
+From: eu@felipetonello.com
 To: openembedded-devel@lists.openembedded.org
-References: <1361995702-28964-1-git-send-email-ftonello@cercacor.com>
-	<20130227203926.GE8208@jama.dyndns-home.com>
-In-Reply-To: <20130227203926.GE8208@jama.dyndns-home.com>
-X-Gm-Message-State: ALoCoQkzNrSlQV3q5U+C95MD1yZ92JOS1qedyh2sSBUpmwDM8Esj7RkMTrGjo+4LbcpzcLAKf2DX
-Subject: Re: [meta-oe][PATCH] qextserialport: Added 1.2rc recipe
+Date: Wed, 27 Feb 2013 20:09:49 -0800
+Message-Id: <1362024589-13995-1-git-send-email-ftonello@cercacor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQlAbhfC7n0eubEB5BHdBqYGmUJvLsbMqqq05DWv2Ze27xos359xS4A1dyZSaltXycqx+JYV
+Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: [meta-oe][PATCH] fingerterm: Added 1.0.2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,107 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Feb 2013 22:52:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Feb 2013 04:34:35 -0000
 
-Hi Martin,
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-On 02/27/2013 12:39 PM, Martin Jansa wrote:
-> On Wed, Feb 27, 2013 at 12:08:21PM -0800, eu@felipetonello.com wrote:
->> From: "Felipe F. Tonello" <ftonello@cercacor.com>
->>
->> QExtSerialPort is a serial port library for Qt4/5.
->
-> Is there good reason to redefine all those FILES_*?
->
->  From previous mail:
-> It also has a lot of QA warnings, it's better to use += for FILES_, so
-> that default values are preserved where possible.
->
+Fingerterm is a terminal emulator for Nokia Harmattan, but it works in any Qt4
+environment.
 
-Ok. Got it. But in this case there is no more QA right. I know that I 
-added the /usr/src/..., which is redundant, but still. If you want to me 
-to remove, I can do it.
+This recipe can be extended by a .bbappend to add .desktop, icon and others to
+the target device.
 
-At least, someone that takes this recipe knows exactly what's been 
-installed. IMO the default FILES_ might be obscure to some new contributors.
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+---
+ meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   30 +++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 
-Thanks
-
-Felipe
-
->>
->> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
->> ---
->>   .../qextserialport/qextserialport_1.2rc.bb         |   56 ++++++++++++++++++++
->>   1 file changed, 56 insertions(+)
->>   create mode 100644 meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
->>
->> diff --git a/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb b/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
->> new file mode 100644
->> index 0000000..4cc9d6c
->> --- /dev/null
->> +++ b/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
->> @@ -0,0 +1,56 @@
->> +DESCRIPTION = "Qt Ext Serial Port Library"
->> +HOMEPAGE = "http://http://code.google.com/p/qextserialport/"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b866a28cda707ec714878bd933f46251"
->> +SECTION = "qt/libs"
->> +
->> +PR = "r0"
->> +
->> +# 1.2rc as version will sort lower then 1.2 when it's released
->> +REAL_PV = "1.2rc"
->> +PV = "1.1+${REAL_PV}"
->> +
->> +inherit qt4x11 pkgconfig
->> +
->> +DEPENDS = "udev"
->> +
->> +SRC_URI = " \
->> +  http://qextserialport.googlecode.com/files/qextserialport-${REAL_PV}.zip \
->> +"
->> +
->> +SRC_URI[md5sum] = "ffa061edb9f64666468d18402eee6108"
->> +SRC_URI[sha256sum] = "9cbee267aac9830f9944bb1d13872e51fba400aa9afe158e64f0fe265a0176bc"
->> +
->> +S = "${WORKDIR}/qextserialport-${REAL_PV}"
->> +
->> +FILES_${PN} = "${libdir}/libqextserialport${SOLIBS}"
->> +
->> +FILES_${PN}-dev = " \
->> +  ${libdir}/libqextserialport${SOLIBSDEV} \
->> +  ${libdir}/libqextserialport.prl \
->> +  ${includedir}/QtExtSerialPort/*.h \
->> +  ${datadir}/qt4/mkspecs/features/extserialport.prf \
->> +"
->> +
->> +FILES_${PN}-dbg = " \
->> +  ${libdir}/.debug/libqextserialport.so* \
->> +  /usr/src/debug/qextserialport-${PV}-${PR}/qextserialport-${REAL_PV} \
->> +"
->> +
->> +do_configure_prepend() {
->> +  # based on the documentation, this line make sure we use udev in linux
->> +  cd ${S} && echo "linux*:CONFIG += qesp_linux_udev" > .qmake.cache
->> +
->> +  # Hacking hardcoded qmake variables
->> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_HEADERS\],${includedir},g' '{}' ';'
->> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_LIBS\],${libdir},g' '{}' ';'
->> +  find *.pro -exec sed -i -e 's,$$\[QMAKE_MKSPECS\],${datadir}/qt4/mkspecs/,g' '{}' ';'
->> +}
->> +
->> +do_install() {
->> +  export INSTALL_ROOT=${D}
->> +  oe_runmake install
->> +
->> +  # This is necessary to make it work with the qt based SDK
->> +  cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|${STAGING_INCDIR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
->> +}
->> --
->> 1.7.9.5
+diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+new file mode 100644
+index 0000000..7a0d0eb
+--- /dev/null
++++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "A terminal emulator for Harmattan (Nokia N9/N950) with a custom \
++virtual keyboard and usability-enhancing features such as URL grabber, pan \
++gestures and customizable shortcut menu. Designed especially to be used with \
++screen and irssi."
++HOMEPAGE = "http://hqh.unlink.org/harmattan"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++SECTION = "qt/app"
++
++PR = "r0"
++
++inherit qt4x11 pkgconfig
++
++SRC_URI = " \
++  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "d53b0f463c025583cd52accf95715448"
++SRC_URI[sha256sum] = "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a044b6674dd82d95150"
++
++S = "${WORKDIR}/${PN}"
++
++FILES_${PN} = " \
++  ${bindir}/${PN} \
++"
++
++do_install() {
++  install -d ${D}${bindir}
++  install -m 0744 ${S}/${PN} ${D}${bindir}
++}
+\ No newline at end of file
+-- 
+1.7.9.5
 
 
 
