@@ -1,37 +1,34 @@
-Received: from mail-da0-f49.google.com ([209.85.210.49])
+Received: from mail-ee0-f45.google.com ([74.125.83.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UBDVr-0003sN-Bh
+	(envelope-from <andrea.adami@gmail.com>) id 1UBDcC-00043s-Vq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 01:07:49 +0100
-Received: by mail-da0-f49.google.com with SMTP id t11so1073976daj.8
+	Fri, 01 Mar 2013 01:14:21 +0100
+Received: by mail-ee0-f45.google.com with SMTP id b57so1909220eek.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2013 15:51:22 -0800 (PST)
+	Thu, 28 Feb 2013 15:57:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=V4kYY4/qEbJUXKHsfYH+ClYAjuxznx1M0qrfLMJyDvQ=;
-	b=XQNAFqlgnrguYJsD/JlQOFjPBkl3E6e9wxa/6mITCVeowfZbyKyoGmUEhgpFYIsyL9
-	5gBOX/hFbbqj6RqR+MhK6BDv/tjkXKpCZija54fdyHZACjk5FVsvdhjE8utRqN9OXNYq
-	yk9TMIqdUPOSHPdK4rD//lRspV3fVZsOG7Y+8nqFAac0qY1OSVU47YX8Z39AaE/3MldG
-	5ffmnDdEXRsiggor04zwaRAO4PJHSniKumALd7gTsIBphY2y8TLHEAdJiN9KOD9ok6Xg
-	tnAQCdLrkLAF+K+dkL4ri5Cxq9YrB9Rf/njzDCqOCob1bXbyryhVPOYhlej3nypd6ucW
-	wFig==
-X-Received: by 10.68.231.70 with SMTP id te6mr11545745pbc.159.1362095482278;
-	Thu, 28 Feb 2013 15:51:22 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id t4sm10807798pax.0.2013.02.28.15.51.19
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 28 Feb 2013 15:51:20 -0800 (PST)
-Date: Fri, 1 Mar 2013 00:51:13 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=5axkIaneIQdO5zq7fQRnwR6R7kVXLELvjUrF/zKofgo=;
+	b=TGLiDjMReo4qt+JseRYvIACsWXMIkwnJsktxr3ytkrTE2GerwaJ2G1cIS6seny5ZMC
+	g5kIRSQQURTGw86z4B8fuUx3AQQdMZZuTNVK/IjSv5owtSQaILFPNv2yxiDaLvr6tMUP
+	ES9fNXiirauSxogiYnJJf/OGi4/elpujnEphn9JwUuxTKt31U+cC2Ozddby9babvdR7Q
+	AgjlZ6dm4WO7MrWy764s02RErqWuBk5Y4Rm8+7aUPQtLr4DtKu0r5MVBFu+QNdoQBSZQ
+	xCknIfmEe4MgulU/UAIlk2RQSS0/jCGdONBhvH62uYC68TsItwhULs5gLuOAcBJkYlVr
+	v6+w==
+X-Received: by 10.14.210.8 with SMTP id t8mr21719393eeo.35.1362095878006;
+	Thu, 28 Feb 2013 15:57:58 -0800 (PST)
+Received: from mizar.localdomain
+	(host223-35-dynamic.252-95-r.retail.telecomitalia.it.
+	[95.252.35.223])
+	by mx.google.com with ESMTPS id f47sm14308586eep.13.2013.02.28.15.57.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 28 Feb 2013 15:57:57 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130228235113.GE3279@jama>
-References: <1361950224-26188-1-git-send-email-schnitzeltony@googlemail.com>
-	<1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-In-Reply-To: <1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe] geany: fix compile by removing extra check for c++ compiler
+Date: Fri,  1 Mar 2013 00:57:51 +0100
+Message-Id: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-handheld][PATCH] linux-yocto(-tiny-kexecboot)_3.2: Zaurus collie MTD fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,145 +42,235 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 00:07:49 -0000
-X-Groupsio-MsgNum: 43341
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oFbHfjnMgUMsrGjO"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Mar 2013 00:14:23 -0000
 
---oFbHfjnMgUMsrGjO
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* experimental patches to fix mtd partitions detection
+* kexecboot now finds cramfs
+* mount of orig. cramfs partition tested for fun :)
+* collie's NOR is still READ-ONLY on boot
+*
+* while there, add a patch to mcp.h to fix
+* collie_battery.c compilation
 
-On Wed, Feb 27, 2013 at 08:30:24AM +0100, Andreas M=FCller wrote:
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../linux/linux-yocto-3.2/collie/collie-eraseinfo.patch     | 11 +++++++++++
+ .../linux/linux-yocto-3.2/collie/collie-jedec-probe.patch   | 11 +++++++++++
+ .../linux/linux-yocto-3.2/collie/collie-mtd-rw.patch        | 12 ++++++++++++
+ recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg      |  2 +-
+ .../linux/linux-yocto-3.2/collie/mcp-device.patch           | 13 +++++++++++++
+ .../collie/collie-eraseinfo.patch                           | 11 +++++++++++
+ .../collie/collie-jedec-probe.patch                         | 11 +++++++++++
+ .../collie/collie-mtd-rw.patch                              | 12 ++++++++++++
+ .../linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch  | 13 +++++++++++++
+ .../linux/linux-yocto-tiny-kexecboot_3.2.bbappend           |  6 +++++-
+ recipes-kernel/linux/linux-yocto_3.2.bbappend               |  4 ++++
+ 11 files changed, 104 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-probe.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch
 
-Thanks, now it fails a bit later:
-| configure:17392: checking for perl >=3D 5.8.1
-| configure:17399: result: 5.14.2
-| configure:17403: checking for XML::Parser
-| configure:17409: error: XML::Parser perl module is required for intltool
+diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+new file mode 100644
+index 0000000..47e814d
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+@@ -0,0 +1,11 @@
++--- a/drivers/mtd/chips/jedec_probe.c
+++++ b/drivers/mtd/chips/jedec_probe.c
++@@ -1305,7 +1305,7 @@
++ 		.cmd_set	= P_ID_INTEL_STD,
++ 		.nr_regions	= 1,
++ 		.regions	= {
++-			ERASEINFO(0x40000,16),
+++			ERASEINFO(0x08000,128),
++ 		}
++ 	}, {
++ 		.mfr_id		= CFI_MFR_SST,
+diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
+new file mode 100644
+index 0000000..530643e
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
+@@ -0,0 +1,11 @@
++--- a/arch/arm/mach-sa1100/collie.c
+++++ b/arch/arm/mach-sa1100/collie.c
++@@ -289,7 +289,7 @@
++ }
++ 
++ static struct flash_platform_data collie_flash_data = {
++-	.map_name	= "cfi_probe",
+++	.map_name	= "jedec_probe",
++ 	.init		= collie_flash_init,
++ 	.set_vpp	= collie_set_vpp,
++ 	.exit		= collie_flash_exit,
+diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+new file mode 100644
+index 0000000..193004d
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+@@ -0,0 +1,12 @@
++diff --git a/drivers/mtd/maps/sa1100-flash.c b/drivers/mtd/maps/sa1100-flash.c
++index fa9c0a9..bf6b04f 100644
++--- a/drivers/mtd/maps/sa1100-flash.c
+++++ b/drivers/mtd/maps/sa1100-flash.c
++@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info *subdev, struct resource *r
++ 		goto err;
++ 	}
++ 	subdev->mtd->owner = THIS_MODULE;
+++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
++ 
++ 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
++ 		phys, (unsigned)(subdev->mtd->size >> 20),
+diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
+index 2f5ead7..a47461e 100644
+--- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
++++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
+@@ -1473,7 +1473,7 @@ CONFIG_APM_POWER=y
+ # CONFIG_TEST_POWER is not set
+ # CONFIG_BATTERY_DS2780 is not set
+ # CONFIG_BATTERY_DS2782 is not set
+-# CONFIG_BATTERY_COLLIE is not set
++CONFIG_BATTERY_COLLIE=y
+ # CONFIG_BATTERY_BQ20Z75 is not set
+ # CONFIG_BATTERY_BQ27x00 is not set
+ # CONFIG_BATTERY_MAX17040 is not set
+diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
+new file mode 100644
+index 0000000..9a0a8ba
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
+@@ -0,0 +1,13 @@
++--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
+++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
++@@ -10,6 +10,8 @@
++ #ifndef MCP_H
++ #define MCP_H
++ 
+++#include <linux/device.h>
+++
++ struct mcp_ops;
++ 
++ struct mcp {
++
++
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
+new file mode 100644
+index 0000000..47e814d
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
+@@ -0,0 +1,11 @@
++--- a/drivers/mtd/chips/jedec_probe.c
+++++ b/drivers/mtd/chips/jedec_probe.c
++@@ -1305,7 +1305,7 @@
++ 		.cmd_set	= P_ID_INTEL_STD,
++ 		.nr_regions	= 1,
++ 		.regions	= {
++-			ERASEINFO(0x40000,16),
+++			ERASEINFO(0x08000,128),
++ 		}
++ 	}, {
++ 		.mfr_id		= CFI_MFR_SST,
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-probe.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-probe.patch
+new file mode 100644
+index 0000000..530643e
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-probe.patch
+@@ -0,0 +1,11 @@
++--- a/arch/arm/mach-sa1100/collie.c
+++++ b/arch/arm/mach-sa1100/collie.c
++@@ -289,7 +289,7 @@
++ }
++ 
++ static struct flash_platform_data collie_flash_data = {
++-	.map_name	= "cfi_probe",
+++	.map_name	= "jedec_probe",
++ 	.init		= collie_flash_init,
++ 	.set_vpp	= collie_set_vpp,
++ 	.exit		= collie_flash_exit,
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+new file mode 100644
+index 0000000..193004d
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+@@ -0,0 +1,12 @@
++diff --git a/drivers/mtd/maps/sa1100-flash.c b/drivers/mtd/maps/sa1100-flash.c
++index fa9c0a9..bf6b04f 100644
++--- a/drivers/mtd/maps/sa1100-flash.c
+++++ b/drivers/mtd/maps/sa1100-flash.c
++@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info *subdev, struct resource *r
++ 		goto err;
++ 	}
++ 	subdev->mtd->owner = THIS_MODULE;
+++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
++ 
++ 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
++ 		phys, (unsigned)(subdev->mtd->size >> 20),
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch
+new file mode 100644
+index 0000000..9a0a8ba
+--- /dev/null
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch
+@@ -0,0 +1,13 @@
++--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
+++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
++@@ -10,6 +10,8 @@
++ #ifndef MCP_H
++ #define MCP_H
++ 
+++#include <linux/device.h>
+++
++ struct mcp_ops;
++ 
++ struct mcp {
++
++
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+index 6ab9f2f..7f03732 100644
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+@@ -34,12 +34,16 @@ SRC_URI_append_c7x0 = " \
+ SRC_URI_append_collie = " \
+            file://collie-tiny.scc \
+            file://collie-kexecboot.cfg \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+            file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
+            file://locomo_kbd_tweak-r2.patch \
+            file://collie_remove_irq_to_gpio.patch \
++           file://mcp-device.patch \
++           file://collie-jedec-probe.patch \
++           file://collie-eraseinfo.patch \
++           file://qvga/logo_linux_clut224.ppm.bz2 \
+            file://revert-check-on-console-device.patch \
+            "
++#           file://collie-mtd-rw.patch
+ 
+ SRC_URI_append_poodle = " \
+            file://poodle-tiny.scc \
+diff --git a/recipes-kernel/linux/linux-yocto_3.2.bbappend b/recipes-kernel/linux/linux-yocto_3.2.bbappend
+index a4ff596..6b765d5 100644
+--- a/recipes-kernel/linux/linux-yocto_3.2.bbappend
++++ b/recipes-kernel/linux/linux-yocto_3.2.bbappend
+@@ -27,8 +27,12 @@ SRC_URI_append_collie = " \
+            file://qvga/logo_linux_clut224.ppm.bz2 \
+            file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
+            file://collie_remove_irq_to_gpio.patch \
++           file://mcp-device.patch \
++           file://collie-jedec-probe.patch \
++           file://collie-eraseinfo.patch \
+            file://locomo_kbd_tweak-r2.patch \
+            "
++#           file://collie-mtd-rw.patch
+ 
+ SRC_URI_append_poodle = " \
+            file://poodle-standard.scc \
+-- 
+1.7.12.4
 
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30228_192523.log/
 
-> ---
->  ...001-configure.ac-remove-additional-c-test.patch |   47 ++++++++++++++=
-++++++
->  meta-oe/recipes-devtools/geany/geany_1.22.bb       |    6 ++-
->  2 files changed, 52 insertions(+), 1 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/geany/geany/0001-configure.a=
-c-remove-additional-c-test.patch
->=20
-> diff --git a/meta-oe/recipes-devtools/geany/geany/0001-configure.ac-remov=
-e-additional-c-test.patch b/meta-oe/recipes-devtools/geany/geany/0001-confi=
-gure.ac-remove-additional-c-test.patch
-> new file mode 100644
-> index 0000000..5166fec
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/geany/geany/0001-configure.ac-remove-addit=
-ional-c-test.patch
-> @@ -0,0 +1,47 @@
-> +From e62d5b59262ec7ffe07931790712c7e247377795 Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
-ail.com>
-> +Date: Thu, 21 Feb 2013 09:31:31 +0100
-> +Subject: [PATCH] configure.ac remove additional c++ test
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +For openembedded cross-builds CXX can contain something like:
-> +
-> +arm-oe-linux-gnueabi-g++  -march=3Darmv5te  -marm -mthumb-interwork --sy=
-sroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qem=
-uarm
-> +
-> +This ends up in
-> +
-> +configure:5582: error: No C++ compiler found. Please install a C++ compi=
-ler.
-> +
-> +Anyway if [1] is still valid, the combination of AC_PROG_CC and AC_PROG_=
-CXX
-> +should thow an error message.
-> +
-> +[1] http://lists.gnu.org/archive/html/bug-autoconf/2010-05/msg00001.html
-> +
-> +Upstream-Status: Inappropriate [configuration]
-> +
-> +Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> +---
-> + configure.ac |    5 -----
-> + 1 files changed, 0 insertions(+), 5 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index c37312a..742bf35 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -26,11 +26,6 @@ AC_USE_SYSTEM_EXTENSIONS
-> + AC_PROG_CC
-> +=20
-> + AC_PROG_CXX
-> +-# check for C++ compiler explicitly and fail if none is found, do this =
-check
-> +-# after AC_PROG_CXX has set the CXX environment variable
-> +-if ! which $CXX >/dev/null 2>&1; then
-> +-	AC_MSG_ERROR([No C++ compiler found. Please install a C++ compiler.])
-> +-fi
-> +=20
-> + AC_PROG_INSTALL
-> + AC_PROG_LN_S
-> +--=20
-> +1.7.6.5
-> +
-> diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/recip=
-es-devtools/geany/geany_1.22.bb
-> index 1e56ec8..e0b5df5 100644
-> --- a/meta-oe/recipes-devtools/geany/geany_1.22.bb
-> +++ b/meta-oe/recipes-devtools/geany/geany_1.22.bb
-> @@ -3,10 +3,14 @@ HOMEPAGE =3D "http://www.geany.org/"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc107cf754550e65755c42985a5d4e=
-9c9"
->  DEPENDS =3D "gtk+"
-> +PR =3D "r1"
-> =20
->  inherit autotools pkgconfig
-> =20
-> -SRC_URI =3D "http://download.geany.org/${PN}-${PV}.tar.bz2"
-> +SRC_URI =3D " \
-> +    http://download.geany.org/${PN}-${PV}.tar.bz2 \
-> +    file://0001-configure.ac-remove-additional-c-test.patch \
-> +"
->  SRC_URI[md5sum] =3D "0672077fe83e2a739aa0eaca426aacf0"
->  SRC_URI[sha256sum] =3D "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d5638=
-8e9521a27877577e"
-> =20
-> --=20
-> 1.7.6.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oFbHfjnMgUMsrGjO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlEv7XEACgkQN1Ujt2V2gBzyzQCguJaHTS1m2ikTl+gJ+YXvRMDE
-mdEAn011NL6AJIcemwsa5dE5YXy/9QdA
-=+Tbn
------END PGP SIGNATURE-----
-
---oFbHfjnMgUMsrGjO--
