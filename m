@@ -1,24 +1,33 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ia0-f169.google.com ([209.85.210.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Sen.Zhang@windriver.com>) id 1UAvPS-0002ma-Ol
+	(envelope-from <raj.khem@gmail.com>) id 1UAxAY-0001gc-Cu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Feb 2013 05:48:01 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r1S4Vct7024682
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 28 Feb 2013 07:41:02 +0100
+Received: by mail-ia0-f169.google.com with SMTP id j5so1245227iaf.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Feb 2013 20:31:38 -0800 (PST)
-Received: from jesse-wrs-desktop.wrs.com (128.224.162.230) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.328.9; Wed, 27 Feb 2013 20:31:36 -0800
-From: Jesse Zhang <sen.zhang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe.macdonald@windriver.com>
-Date: Thu, 28 Feb 2013 12:31:34 +0800
-Message-ID: <1362025894-15350-1-git-send-email-sen.zhang@windriver.com>
-X-Mailer: git-send-email 1.7.11.7
+	Wed, 27 Feb 2013 22:24:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=DY3jq9PiDEYbR1dzAy9+YtVQTBz7a30OXYnQurF1Rws=;
+	b=j21i0LQ+7v4DWzr9EApZIX9VN8GKCRtoLU3GylLg3/KmMG/7S/ZxrRyc2Xl232C8Zw
+	jN82r+WvBdTP981C6JBxaSlsa0WyazmwVw3p7MerB3kYTBKCJPaf3Wd2TaxnzGzP+2Oy
+	ZqKDA7c/IRQy1secLfn5CM1dm0jHH+kSJ5waCk/Cg4GArqgvtpHwMC8Ve3XtzBv5LYtr
+	xqIUn1lxZcnJO4JbqDfdpePtfH4V0r9lcMHVlZ9sFNCUvNqQ1F/1GFHKB/PknVcxRsXD
+	SyqqNJSwJdHYquqzpBIOQWOrNE96uW0sJBi29Kcvkvu+HVabEmM4K5AnupIz1bhCowuc
+	gB1w==
+X-Received: by 10.50.155.134 with SMTP id vw6mr9210455igb.34.1362032660229;
+	Wed, 27 Feb 2013 22:24:20 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] pptp-linux: Add dependency to fix parallel build
+Received: by 10.50.74.163 with HTTP; Wed, 27 Feb 2013 22:23:49 -0800 (PST)
+In-Reply-To: <1362025894-15350-1-git-send-email-sen.zhang@windriver.com>
+References: <1362025894-15350-1-git-send-email-sen.zhang@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 27 Feb 2013 22:23:49 -0800
+Message-ID: <CAMKF1spjo1JxeZd1yJGi4uq2cTp84R3eFrGWZCgPYM12VqQRWw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: joe.macdonald@windriver.com
+Subject: Re: [meta-networking][PATCH] pptp-linux: Add dependency to fix parallel build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,67 +41,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2013 04:48:03 -0000
-X-List-Received-Date: Thu, 28 Feb 2013 04:48:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 28 Feb 2013 06:41:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-CQID: WIND00405538
+On Wed, Feb 27, 2013 at 8:31 PM, Jesse Zhang <sen.zhang@windriver.com> wrote:
+> CQID: WIND00405538
 
-Add dependency on the generated config.h file for pptp.c and version.c.
-
-Signed-off-by: Jesse Zhang <sen.zhang@windriver.com>
----
- .../pptp-linux-1.7.2/fix-parallel-build.patch         | 19 +++++++++++++++++++
- recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb      |  6 ++++--
- 2 files changed, 23 insertions(+), 2 deletions(-)
- create mode 100644 recipes-protocols/pptp-linux/pptp-linux-1.7.2/fix-parallel-build.patch
-
-diff --git a/recipes-protocols/pptp-linux/pptp-linux-1.7.2/fix-parallel-build.patch b/recipes-protocols/pptp-linux/pptp-linux-1.7.2/fix-parallel-build.patch
-new file mode 100644
-index 0000000..77722b0
---- /dev/null
-+++ b/recipes-protocols/pptp-linux/pptp-linux-1.7.2/fix-parallel-build.patch
-@@ -0,0 +1,19 @@
-+pptp.c and version.c depend on config.h
-+
-+Upstream-Status: Backport
-+
-+Upstream has already similar fixes. Will be available on next release.
-+
-+Signed-off-by: Jesse Zhang <sen.zhang@windriver.com>
-+
-+--- a/Makefile	2013-02-27 17:09:24.431226665 +0800
-++++ b/Makefile	2013-02-27 17:09:03.442075550 +0800
-+@@ -43,6 +43,8 @@
-+ pptpsetup.8: pptpsetup
-+ 	pod2man $? > $@
-+ 
-++pptp.o version.o: config.h
-++
-+ config.h: 
-+ 	echo "/* text added by Makefile target config.h */" > config.h
-+ 	echo "#define PPTP_LINUX_VERSION \"$(VERSION)$(RELEASE)\"" >> config.h
-diff --git a/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb b/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb
-index ac3f8f6..c173af4 100644
---- a/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb
-+++ b/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb
-@@ -9,10 +9,12 @@ SECTION = "network"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
--           file://options.pptp"
-+           file://options.pptp \
-+           file://fix-parallel-build.patch \
-+           "
- 
- SRC_URI[md5sum] = "4c3d19286a37459a632c7128c92a9857"
- SRC_URI[sha256sum] = "e98ae0065d2a39fa3131654ff28cb7070e996f668ed6d0e7d9a445b8d37694bc"
--- 
-1.7.11.7
-
+what is this ?
 
 
