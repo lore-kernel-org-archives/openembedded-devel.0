@@ -1,37 +1,38 @@
-Received: from mail-da0-f51.google.com ([209.85.210.51])
+Received: from mail-pa0-f43.google.com ([209.85.220.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UBNAK-0002nY-I4
+	(envelope-from <martin.jansa@gmail.com>) id 1UBNIR-00035F-86
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 11:26:12 +0100
-Received: by mail-da0-f51.google.com with SMTP id z17so1325912dal.24
+	Fri, 01 Mar 2013 11:34:49 +0100
+Received: by mail-pa0-f43.google.com with SMTP id bh2so1752452pad.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2013 02:09:48 -0800 (PST)
+	Fri, 01 Mar 2013 02:18:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=ldTFyrUiCsxUKW5nSwze4aduutNtbkrF0eKAY09KFBo=;
-	b=gpg0ffxroYELQKYYc8cgLqMrG8H54kUkOvUoKUgH/aUxWeEXP13QHYtBIVcGueBo+V
-	sIQ5lbhJlOBiK1nNz7LJ9cEHL4tnR9vXvIJO0BT7rHJ6mfF7Dd6CvU5iaXs/5D7Wfdrc
-	j3hZH+8xBeMCMw1ua8n4MKE8QMpXvVlQSrjAg+0pitq7ogGMSuxI07uIdoIVAvIavXqf
-	7KV1vWYh9VsNNz7aqKgCwaYf8wdP56NDRzHr287aZYnkXe2CUGph4NrRZ/kKgQ3WSqQK
-	WEh0uRzjsa5qbpY5KCKagd//xiax1/0gvDmcKnhsuDNaDXq6bYjunOEBF8fS3lTvXAq6
-	J9QQ==
-X-Received: by 10.66.102.73 with SMTP id fm9mr17412212pab.195.1362132588552;
-	Fri, 01 Mar 2013 02:09:48 -0800 (PST)
+	:user-agent; bh=MctDQokQf2W09wRX5YZLH8DvnHYtGw2aVZB/Sa9uE88=;
+	b=jxzjH+UVdM6Wk+uXp4+4Ws1Zy+B57CkUzkkVfDnfb1nXf2A3BEFA5vaQwgTUZlxwOr
+	ueqe86iFdHCGVgpd3o7zlPqMCgTkaiCOXL2lkKaKgJU6U5mafNV5OBjeRSoe3h/GBOMI
+	Awo4u9J9m5AN5CVOANBNaEgWLSThDZX/F1ZZV6c5UqVIPuk4U5YmGkRQK375Z7CUxzpU
+	/uc2BVfmd+Y/ktBWkezabq1ciVzFNtU0iTKxG9Zw5piBpHQF8DAjbnpW7syMISFDEarw
+	vLFNa49EIzHzZfZ4rkF+omspdoqiEiVq/ChbZ4lc7YCpx5DbGGQBiLc4+Q5z8+ikxGaK
+	8X7g==
+X-Received: by 10.68.197.70 with SMTP id is6mr13771692pbc.79.1362133091273;
+	Fri, 01 Mar 2013 02:18:11 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d8sm12585118pax.23.2013.03.01.02.09.41
+	by mx.google.com with ESMTPS id e6sm12621706paw.16.2013.03.01.02.18.08
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 01 Mar 2013 02:09:46 -0800 (PST)
-Date: Fri, 1 Mar 2013 11:09:38 +0100
+	Fri, 01 Mar 2013 02:18:10 -0800 (PST)
+Date: Fri, 1 Mar 2013 11:18:05 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130301100938.GI3279@jama>
-References: <1362129599-19779-1-git-send-email-jackie.huang@windriver.com>
+Message-ID: <20130301101805.GJ3279@jama>
+References: <1362131442-26879-1-git-send-email-B40290@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <1362129599-19779-1-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1362131442-26879-1-git-send-email-B40290@freescale.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Jackie.Huang@windriver.com, Zhenfeng.Zhao@windriver.com
-Subject: Re: [meta-webserver][PATCH] modphp5: use ${baselib} instead of hardcoded "lib"
+Cc: B29882@freescale.com, Chunrong Guo <B40290@freescale.com>,
+	B19537@freescale.com
+Subject: Re: [OE-core][PATCH] lmbench: update config script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +46,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 10:26:13 -0000
-X-Groupsio-MsgNum: 43347
+X-List-Received-Date: Fri, 01 Mar 2013 10:34:51 -0000
+X-Groupsio-MsgNum: 43348
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="va4/JQ6j8/8uipEp"
+	protocol="application/pgp-signature"; boundary="fUvfsPTz/SzOZDdw"
 Content-Disposition: inline
 
---va4/JQ6j8/8uipEp
+--fUvfsPTz/SzOZDdw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 01, 2013 at 05:19:59PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+On Fri, Mar 01, 2013 at 05:50:42PM +0800, Chunrong Guo wrote:
+> From: Chunrong Guo <b40290@freescale.com>
 >=20
-> [ CQID: WIND00405358 ]
-
-Drop this ^
-
+>       *fix bug that can not find  CONFIG file
+>       |error: run ./results|./results: line 15: .: CONFIG.p2041rdb: file =
+not found
+>       * update CONFIG file path
 >=20
-> The hardcoded lib path will cause apache2 fail to start on
-> the target with other baselib like lib64.
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
 > ---
->  meta-webserver/recipes-php/modphp/modphp5.inc |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
+>  .../lmbench-3.0-a9/update-config-script.patch      |   12 ++++++++++++
+>  .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |    5 +++--
+>  2 files changed, 15 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/upda=
+te-config-script.patch
 >=20
-> diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserv=
-er/recipes-php/modphp/modphp5.inc
-> index 3302936..c359ff9 100644
-> --- a/meta-webserver/recipes-php/modphp/modphp5.inc
-> +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-> @@ -67,6 +67,7 @@ do_install  () {
->  	install -d ${D}${sysconfdir}/apache2/modules.d
->  	install -d ${D}${sysconfdir}/php/apache2-php5
->  	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
-> +	sed -i s,lib/,${baselib}/, ${WORKDIR}/70_mod_php5.conf
->  	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/m=
-odules.d
->  	cat ${S}/php.ini-production | \
->  		sed -e 's,extension_dir =3D \"\./\",extension_dir =3D \"/usr/lib/exten=
-sions\",' \
+> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-conf=
+ig-script.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-c=
+onfig-script.patch
+> new file mode 100644
+> index 0000000..b46e09a
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/update-config-scri=
+pt.patch
+> @@ -0,0 +1,12 @@
+> +Upstream-Status: Pending
+> +Index: lmbench-3.0-a9/scripts/config
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- lmbench-3.0-a9/scripts/config	2000-01-31 18:29:31.000000000 -0600
+> ++++ lmbench-3.0-a9/scripts/config	2013-03-01 00:19:41.032984315 -0600
+> +@@ -3,5 +3,5 @@
+> + UNAME=3D`uname -n 2>/dev/null`
+> + if [ X$UNAME =3D X ]
+> + then	echo CONFIG
+> +-else	echo CONFIG.$UNAME
+> ++else	echo ../scripts/CONFIG.$UNAME
+> + fi
+> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-o=
+e/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> index 611013e..026b067 100644
+> --- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> @@ -7,14 +7,15 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ca43cbc842c=
+2336e835926c2166c28b \
+> =20
+>  inherit autotools
+> =20
+> -PR =3D "r1"
+> +PR =3D "r2"
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+>  	   file://lmbench-run \
+>  	   file://rename-line-binary.patch \
+>  	   file://update-results-script.patch \
+>  	   file://obey-ranlib.patch \
+> -	   "
+> +	   file://update-config-script.patch \=20
+> +	  "
+
+Please don't mix tabs and spaces. I know it was there before.
+
+>  SRC_URI[md5sum] =3D "b3351a3294db66a72e2864a199d37cbf"
+>  SRC_URI[sha256sum] =3D "cbd5777d15f44eab7666dcac418054c3c09df99826961a39=
+7d9acf43d8a2a551"
+> =20
 > --=20
-> 1.7.4.1
+> 1.7.5.4
+>=20
 >=20
 >=20
 > _______________________________________________
@@ -99,16 +137,16 @@ sions\",' \
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---va4/JQ6j8/8uipEp
+--fUvfsPTz/SzOZDdw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlEwfmIACgkQN1Ujt2V2gBzItwCgpYK2XWgceiCUdoppP2yLGK3Q
-ccAAoKwrqhkjRkwUlo23d0ml1kpDevci
-=sanN
+iEYEARECAAYFAlEwgFwACgkQN1Ujt2V2gBxqoQCgh9I0ZKdnk7KSV1VkGW/uRNGt
+BxUAoIF9oiGnSoMheQ6U0A8kz/nvJlMB
+=YvmJ
 -----END PGP SIGNATURE-----
 
---va4/JQ6j8/8uipEp--
+--fUvfsPTz/SzOZDdw--
