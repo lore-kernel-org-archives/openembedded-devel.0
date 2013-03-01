@@ -1,35 +1,25 @@
-Received: from mail-vc0-f176.google.com ([209.85.220.176])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UBE1q-0004xg-6Z
+	(envelope-from <Jackie.Huang@windriver.com>) id 1UBMOB-0000VA-0M
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 01:41:02 +0100
-Received: by mail-vc0-f176.google.com with SMTP id fk10so1616499vcb.35
+	Fri, 01 Mar 2013 10:36:39 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r219K4pe024778
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2013 16:24:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=PvgHY5zzRPfEwPl8ImbeUQdwGplA0t9EvAKHv4s7kds=;
-	b=jYSY5lwWEemuNt8ZtlxeIEuVuvSM3U8dP8RVOH+9B02gSzw/tllYA4w6Chy/aAxFBr
-	yQdoU/1oRhnBKVBLvjJhsw7PtzsMHUBqIusiGvAhsUO8KUIF3MCJolqMVtLWQPZJVEUs
-	QxK6bjt3OiE+R/QTkL1yjGgZ9nxl+cH5rVPgVHb0dxJEhOVPdH9PVPaueECjvqn01Nx8
-	7agCowtYMxBCgTCdxukOAwNaZb5hX5JjNESjRycWCgsVLElsDCzzWJ8OfH5Z4mkd8XHU
-	vQOLjLPEs6GV8fo5EIz4ENsMFtnIalr45PTL75jW1Go1cQab+uXckhNItsImLH2WQgfX
-	zKAQ==
+	Fri, 1 Mar 2013 01:20:04 -0800 (PST)
+Received: from pek-usp-11.wrs.com (128.224.163.66) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.328.9;
+	Fri, 1 Mar 2013 01:20:03 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 1 Mar 2013 17:19:59 +0800
+Message-ID: <1362129599-19779-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.58.23.199 with SMTP id o7mr3448958vef.2.1362097467106; Thu,
-	28 Feb 2013 16:24:27 -0800 (PST)
-Received: by 10.52.185.168 with HTTP; Thu, 28 Feb 2013 16:24:26 -0800 (PST)
-In-Reply-To: <20130228235113.GE3279@jama>
-References: <1361950224-26188-1-git-send-email-schnitzeltony@googlemail.com>
-	<1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
-	<20130228235113.GE3279@jama>
-Date: Fri, 1 Mar 2013 01:24:26 +0100
-Message-ID: <CALbNGRQ3jzM=L7SD=gK=8=-HMxE7rJpbrwoCm4mShv4DXo2bLQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] geany: fix compile by removing extra check for c++ compiler
+Cc: Jackie.Huang@windriver.com, Zhenfeng.Zhao@windriver.com
+Subject: [meta-webserver][PATCH] modphp5: use ${baselib} instead of hardcoded "lib"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 00:41:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 Mar 2013 09:36:39 -0000
+Content-Type: text/plain
 
-On Fri, Mar 1, 2013 at 12:51 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Wed, Feb 27, 2013 at 08:30:24AM +0100, Andreas M=C3=BCller wrote:
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->
-> Thanks, now it fails a bit later:
-> | configure:17392: checking for perl >=3D 5.8.1
-> | configure:17399: result: 5.14.2
-> | configure:17403: checking for XML::Parser
-> | configure:17409: error: XML::Parser perl module is required for intltoo=
-l
->
-> Complete log:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130228_192523.log/
->
-Another chapter of success-stroies :)
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Will check that next week
+[ CQID: WIND00405358 ]
 
-Andreas
+The hardcoded lib path will cause apache2 fail to start on
+the target with other baselib like lib64.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-webserver/recipes-php/modphp/modphp5.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
+index 3302936..c359ff9 100644
+--- a/meta-webserver/recipes-php/modphp/modphp5.inc
++++ b/meta-webserver/recipes-php/modphp/modphp5.inc
+@@ -67,6 +67,7 @@ do_install  () {
+ 	install -d ${D}${sysconfdir}/apache2/modules.d
+ 	install -d ${D}${sysconfdir}/php/apache2-php5
+ 	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
++	sed -i s,lib/,${baselib}/, ${WORKDIR}/70_mod_php5.conf
+ 	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
+ 	cat ${S}/php.ini-production | \
+ 		sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+-- 
+1.7.4.1
+
 
 
