@@ -1,37 +1,37 @@
-Received: from mail-oa0-f51.google.com ([209.85.219.51])
+Received: from mail-oa0-f43.google.com ([209.85.219.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eu@felipetonello.com>) id 1UBUuO-0007Gi-5u
+	(envelope-from <eu@felipetonello.com>) id 1UBV5x-0007lC-3K
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 19:42:17 +0100
-Received: by mail-oa0-f51.google.com with SMTP id h2so6163989oag.38
+	Fri, 01 Mar 2013 19:54:19 +0100
+Received: by mail-oa0-f43.google.com with SMTP id l10so6194067oag.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Mar 2013 10:25:52 -0800 (PST)
+	Fri, 01 Mar 2013 10:37:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer
 	:x-gm-message-state;
-	bh=s14XtPe25xl14BaZKApFWu7hmH1H2755mTHrlRmmfeY=;
-	b=bAbC2GRckIyTo3mDT/SAJFcXeaBW2uAc042KW+O0NMGqBCSfYimQfRskfkl/lguyCI
-	RYjiTdMqiu+YaRX92phwcZpmMqkv/pBMhq9TmKKQfXwyNMdCrai7wzUMK1fxJpVmb3u1
-	/Sguu90HjjEpg+5nR2/M2MMi5JkFx6jg6u7azbx5+CmeOtr4w+AnJ+DKjQAPHqqyJ8tx
-	QgDcfF39CnaO6vquvUG4ark0muMd0zB2IXv7CKbYbIF2hD/mL9YJIQ8G0Ndj4tlAwFtQ
-	sQGpL+9KU5uDOtGepAy+SrG1k0oodJKplauDkohZG2rIx6hfR7vNxaBubichhkCiS+da
-	+xng==
-X-Received: by 10.182.40.71 with SMTP id v7mr9005138obk.85.1362162351949;
-	Fri, 01 Mar 2013 10:25:51 -0800 (PST)
+	bh=QBZmuDzw/PUumj7uQ2JK56qn5wZrHn34DyYc25vTq1A=;
+	b=jfaUUHLZDnV/bu/fqA+tM3L8hk9CDWnEncmLOnNXHIqeDacd0oLjFJuhfitgmmiSSA
+	lCgmajrD7dV82U1l5rFXn39Gh33LIZGVrzMtQ0bzVJhrVnjK17oI6/OtULFe06ThdUh9
+	thU80WVtno0Uv3yTTuyFcRBw61NbQn2N1iRnbpup6wluIhH27UwQu4KyDQ3o62zRRyrJ
+	GoBYdrCwQjCyY3lCgovh9H2NSDNBRf0Q1uo6CzFNPa1e/JStMjb19qqxhSjM64aY8lUG
+	93ObmPjs5pF0wR06EB3QFUk7FdxOKyVHyoPpNmZC3h9tg2We9Hm9OTubbt+lUnLnbFTK
+	Pw3g==
+X-Received: by 10.182.185.37 with SMTP id ez5mr9384596obc.73.1362163068843;
+	Fri, 01 Mar 2013 10:37:48 -0800 (PST)
 Received: from mlabs-ftonello.masimolabs.com
 	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
-	by mx.google.com with ESMTPS id v8sm18754506oea.4.2013.03.01.10.25.50
+	by mx.google.com with ESMTPS id v3sm18796162oev.5.2013.03.01.10.37.47
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 01 Mar 2013 10:25:51 -0800 (PST)
+	Fri, 01 Mar 2013 10:37:48 -0800 (PST)
 From: eu@felipetonello.com
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Mar 2013 10:25:56 -0800
-Message-Id: <1362162356-25168-1-git-send-email-ftonello@cercacor.com>
+Date: Fri,  1 Mar 2013 10:37:46 -0800
+Message-Id: <1362163066-376-1-git-send-email-ftonello@cercacor.com>
 X-Mailer: git-send-email 1.7.9.5
-X-Gm-Message-State: ALoCoQlWPva3SRtSWUILbcy1CN4d6Fgd3OsE2dVJqUJstspvrfHspRVkuO/ZjlVtJehwo2cjKrkV
+X-Gm-Message-State: ALoCoQmEeX3Hd1UsP9ruwst0T1YBmtslHGvva5N3rB/8cJgb8xtU0CLb7dAmjs0W7X5rzCQ21MYL
 Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
-Subject: [meta-oe][PATCH] gsoap: added gsoap 2.8.12 recipe
+Subject: [meta-oe][PATCH v2] fingerterm: Added 1.0.2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,94 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 18:42:17 -0000
+X-List-Received-Date: Fri, 01 Mar 2013 18:54:26 -0000
 
 From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-This recipe was inspired on the gsoap recipe in oe-classic.
+Fingerterm is a terminal emulator for Nokia Harmattan, but it works in any Qt4
+environment.
+
+This recipe can be extended by a .bbappend to add .desktop, icon and others to
+the target device.
 
 Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
 ---
- .../recipes-support/gsoap/gsoap-native_2.8.12.bb   |   14 ++++++++++++
- meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb      |   17 +++++++++++++++
- meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc     |   23 ++++++++++++++++++++
- 3 files changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
- create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
- create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+ meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   30 +++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 new file mode 100644
-index 0000000..46fabbb
+index 0000000..e828672
 --- /dev/null
-+++ b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-@@ -0,0 +1,14 @@
-+require gsoap_${PV}.inc
++++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "A terminal emulator for Harmattan (Nokia N9/N950) with a custom \
++virtual keyboard and usability-enhancing features such as URL grabber, pan \
++gestures and customizable shortcut menu. Designed especially to be used with \
++screen and irssi."
++HOMEPAGE = "http://hqh.unlink.org/harmattan"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++SECTION = "qt/app"
 +
-+DEPENDS = ""
-+EXTRA_OEMAKE = ""
++PR = "r0"
 +
-+inherit native
++inherit qt4x11 pkgconfig
++
++SRC_URI = " \
++  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "d53b0f463c025583cd52accf95715448"
++SRC_URI[sha256sum] = "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a044b6674dd82d95150"
++
++S = "${WORKDIR}/${PN}"
++
++FILES_${PN} = " \
++  ${bindir}/${PN} \
++"
 +
 +do_install() {
-+    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
++  install -d ${D}${bindir}
++  install -m 0744 ${S}/${PN} ${D}${bindir}
 +}
-+
-+
-+SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
-+SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
-new file mode 100644
-index 0000000..5db2e61
---- /dev/null
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
-@@ -0,0 +1,17 @@
-+require gsoap_${PV}.inc
-+
-+DEPENDS = "gsoap-native openssl"
-+
-+do_install_append() {
-+   install -d ${D}${libdir}
-+   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++ libgsoapck
-+   do
-+       oe_libinstall -C gsoap $lib ${D}${libdir}
-+   done
-+}
-+
-+FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
-+FILES_${PN} += "${datadir}"
-+
-+SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
-+SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
-new file mode 100644
-index 0000000..30cf9a6
---- /dev/null
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
-+for the development of SOAP Web Services and clients."
-+SECTION = "devel"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.zip \
-+        "
-+
-+inherit autotools
-+
-+PR = "r1"
-+
-+S = "${WORKDIR}/gsoap-2.8"
-+
-+FILES_${PN}-dev = "${includedir}"
-+RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
-+
-+FILES_${PN}-staticdev = "${libdir}"
-+
-+PARALLEL_MAKE = ""
-+
-+EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
+\ No newline at end of file
 -- 
 1.7.9.5
 
