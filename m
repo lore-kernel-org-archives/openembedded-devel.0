@@ -1,36 +1,35 @@
-Received: from mail-ee0-f52.google.com ([74.125.83.52])
+Received: from mail-vc0-f176.google.com ([209.85.220.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1UBDcN-00044D-Ak
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UBE1q-0004xg-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Mar 2013 01:14:39 +0100
-Received: by mail-ee0-f52.google.com with SMTP id b15so1909894eek.39
+	Fri, 01 Mar 2013 01:41:02 +0100
+Received: by mail-vc0-f176.google.com with SMTP id fk10so1616499vcb.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Feb 2013 15:58:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=ybM0zr3vZ3j4ayezcJhnGfkVFB4+Rh6UC+xnCWcuC9s=;
-	b=Z2NsV9qObSqTBvfermqN3qiRPq6Ma59DNjNBFXbZlQ5frJEMEOQaAjneRbdsCwmSI3
-	Q8xkVlAezbay/tL3JrWetwGGuCU1x5OhN9Yt3HF6eY4YVXB0zZYH6VScyXoAkLUlL0V1
-	+r5jFzZXbeqW4G+cBkrCu/2qJb8mMCL44jkJ8LbvS7/aXnCQ0zMuv+qHu6NssJG/QC2G
-	Uf2okycmBSOVLHa6fFWweZ+WlmSI0ve05PhHBUpZjIKzGFEtFgfjT1oOlWY7jHxpmwoC
-	9cn9v21IoYBR+6s+ASOeJ9p9oELWxx+OZLuHj5Hilp6RncSaYl4zPlgiRr9l6SBqfGbD
-	rCkA==
-X-Received: by 10.14.4.69 with SMTP id 45mr22024008eei.0.1362095888951;
-	Thu, 28 Feb 2013 15:58:08 -0800 (PST)
-Received: from mizar.localdomain
-	(host223-35-dynamic.252-95-r.retail.telecomitalia.it.
-	[95.252.35.223])
-	by mx.google.com with ESMTPS id f47sm14308586eep.13.2013.02.28.15.58.07
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 28 Feb 2013 15:58:08 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 28 Feb 2013 16:24:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=PvgHY5zzRPfEwPl8ImbeUQdwGplA0t9EvAKHv4s7kds=;
+	b=jYSY5lwWEemuNt8ZtlxeIEuVuvSM3U8dP8RVOH+9B02gSzw/tllYA4w6Chy/aAxFBr
+	yQdoU/1oRhnBKVBLvjJhsw7PtzsMHUBqIusiGvAhsUO8KUIF3MCJolqMVtLWQPZJVEUs
+	QxK6bjt3OiE+R/QTkL1yjGgZ9nxl+cH5rVPgVHb0dxJEhOVPdH9PVPaueECjvqn01Nx8
+	7agCowtYMxBCgTCdxukOAwNaZb5hX5JjNESjRycWCgsVLElsDCzzWJ8OfH5Z4mkd8XHU
+	vQOLjLPEs6GV8fo5EIz4ENsMFtnIalr45PTL75jW1Go1cQab+uXckhNItsImLH2WQgfX
+	zKAQ==
+MIME-Version: 1.0
+X-Received: by 10.58.23.199 with SMTP id o7mr3448958vef.2.1362097467106; Thu,
+	28 Feb 2013 16:24:27 -0800 (PST)
+Received: by 10.52.185.168 with HTTP; Thu, 28 Feb 2013 16:24:26 -0800 (PST)
+In-Reply-To: <20130228235113.GE3279@jama>
+References: <1361950224-26188-1-git-send-email-schnitzeltony@googlemail.com>
+	<1361950224-26188-2-git-send-email-schnitzeltony@googlemail.com>
+	<20130228235113.GE3279@jama>
+Date: Fri, 1 Mar 2013 01:24:26 +0100
+Message-ID: <CALbNGRQ3jzM=L7SD=gK=8=-HMxE7rJpbrwoCm4mShv4DXo2bLQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Mar 2013 00:57:52 +0100
-Message-Id: <1362095872-4586-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
-References: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH] zaurus.inc: reflect packaging changes of mtd-utils
+Subject: Re: [meta-oe] geany: fix compile by removing extra check for c++ compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2013 00:14:41 -0000
+X-List-Received-Date: Fri, 01 Mar 2013 00:41:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* and add the mtd tools for collie as well
-* (mtd2 is atm not writeable, locked at boot)
+On Fri, Mar 1, 2013 at 12:51 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, Feb 27, 2013 at 08:30:24AM +0100, Andreas M=C3=BCller wrote:
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>
+> Thanks, now it fails a bit later:
+> | configure:17392: checking for perl >=3D 5.8.1
+> | configure:17399: result: 5.14.2
+> | configure:17403: checking for XML::Parser
+> | configure:17409: error: XML::Parser perl module is required for intltoo=
+l
+>
+> Complete log:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
+0130228_192523.log/
+>
+Another chapter of success-stroies :)
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- conf/machine/include/zaurus.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Will check that next week
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 09d6066..a4fec21 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -100,8 +100,8 @@ MACHINE_FEATURES_append_akita = " usbhost"
- MACHINE_FEATURES_append_spitz = " usbhost"
- MACHINE_FEATURES_append_tosa  = " usbhost wifi "
- 
--MACHINE_EXTRA_RDEPENDS = "zaurusd mtd-utils nandlogical"
--MACHINE_EXTRA_RDEPENDS_collie = "zaurusd"
-+MACHINE_EXTRA_RDEPENDS = "zaurusd mtd-utils mtd-utils-jffs2 mtd-utils-ubifs nandlogical"
-+MACHINE_EXTRA_RDEPENDS_collie = "zaurusd mtd-utils mtd-utils-jffs2 mtd-utils-ubifs"
- 
- ##################################
- # Zaurus rootfs are booted by
--- 
-1.7.12.4
-
+Andreas
 
 
