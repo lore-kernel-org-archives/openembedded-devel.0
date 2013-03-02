@@ -1,28 +1,18 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from mail.fh-wedel.de ([213.39.232.198])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UBqGR-0001qI-Pu
+	(envelope-from <di@fh-wedel.de>) id 1UBqrK-0003XI-MY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Mar 2013 18:30:32 +0100
-Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 4BD4AEA042;
-	Sat,  2 Mar 2013 18:32:17 +0100 (CET)
-Received: by localhost (Postfix, from userid 1000)
-	id C85EB6041F; Sat,  2 Mar 2013 18:13:55 +0100 (CET)
-Date: Sat, 2 Mar 2013 18:13:55 +0100
-From: Apelete Seketeli <apelete@seketeli.net>
+	Sat, 02 Mar 2013 19:08:43 +0100
+Received: by mail.fh-wedel.de (Postfix, from userid 959)
+	id 341A45412E; Sat,  2 Mar 2013 18:46:24 +0100 (CET)
+Date: Sat, 2 Mar 2013 18:46:24 +0100
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130302171355.GE5249@hermes>
-References: <cover.1362223895.git.apelete@seketeli.net>
-	<79357068d009b46c93485c118c12886a394a78f7.1362223895.git.apelete@seketeli.net>
-	<20130302131749.GZ3279@jama> <20130302153227.GD5249@hermes>
-	<20130302154609.GA3279@jama>
+Message-ID: <20130302174624.GH21221@fh-wedel.de>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-In-Reply-To: <20130302154609.GA3279@jama>
-X-Operating-System: Debian GNU/Linux 7.0
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Tom King <ka6sox@gmail.com>
-Subject: Re: [2011.03-maintenance][PATCH 2/7] git: update SRC_URI
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Nylon liveth (but on in OE?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,67 +26,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Mar 2013 17:30:38 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Sat, 02 Mar 2013 18:08:44 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hello Tom,
+Nylon is the distribution with which the 4G Meshcube/AccessCube
+was shipped. As a former 4G employee I took over maintainership
+and started re-integrating Nylon into org.openembedded.dev in
+2009. However Nylon was and still is based on an old toolchain
+and a 2.4 kernel. This lead to increasing problems keeping the
+code buildable, as more and more code would no longer work on
+a basis that old. Thus Nylon is now obsoleted in OE (and I'd 
+say rightly so).
 
-Le 02-Mar-13, Martin Jansa a =E9crit:
-> On Sat, Mar 02, 2013 at 04:32:27PM +0100, Apelete Seketeli wrote:
-> > Le 02-Mar-13, Martin Jansa a =E9crit:
-> > > On Sat, Mar 02, 2013 at 12:57:03PM +0100, Apelete Seketeli wrote:
-> > > > Update SRC_URI to build.shr-project.org since git source packages=
- are
-> > > > no longer available from kernel.org.
-> > > > ---
-> > > >  recipes/git/git.inc |    2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >=20
-> > > > diff --git a/recipes/git/git.inc b/recipes/git/git.inc
-> > > > index eb59a2c..ae656e1 100644
-> > > > --- a/recipes/git/git.inc
-> > > > +++ b/recipes/git/git.inc
-> > > > @@ -2,7 +2,7 @@ DESCRIPTION =3D "The git revision control system =
-used by the Linux kernel develope
-> > > >  SECTION =3D "console/utils"
-> > > >  LICENSE =3D "GPLv2"
-> > > > =20
-> > > > -SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/software/scm/git/git-=
-${PV}.tar.bz2;name=3Dsrc"
-> > > > +SRC_URI =3D "http://build.shr-project.org/sources/git-${PV}.tar.=
-bz2;name=3Dsrc"
-> > >=20
-> > > I don't know how long I'll keep "old" PREMIRROR there, it would be
-> > > better to send missing archives to Tom King to add them to
-> > > sources.oe.org which is more official source (and probably already
-> > > listed in default MIRRORS)
-> >=20
-> > How do I send Tom King the missing archives ?
-> > I'll reformat the patches into a v2 as soon as this is fixed.
->=20
-> You can send him URLs to needed archives on yocto and shr premirrors=20
-> and he will wget it from there.
+Not having had the time to work on this in the last years I've
+now decided to go the easy way and simply fork at some time in
+2009 when the code was still more or less working and continue
+from there. The main benefit from using my work rather than the
+original 4G toolchain (which was itself a fork from a much older
+OE snapshot) I see in having a larger set of recipes to add
+components from if needed and also some updated components in
+the base system
 
-Could you please add the following archives to
-sources.openembedded.org ? I need them to fix non-working SRC_URIs in
-many recipes:
+This work has now been done, and I wonder where the code should
+live from now on. I would thus like to ask if keeping my branch
+in the OE repo would be an acceptable option to the project
+maintainers. Doing this we could probably just remove all the
+remaining mtx-[12] artifacts from the .dev branch (I am not sure
+if mtx-3 is maintained by anyone any longer, at least it is not
+by me).
 
-http://downloads.yoctoproject.org/mirror/sources/libcap-2.20.tar.bz2
-http://downloads.yoctoproject.org/mirror/sources/Linux-PAM-1.1.1.tar.bz2
-http://downloads.yoctoproject.org/mirror/sources/netbase_4.21.tar.gz
-http://build.shr-project.org/sources/udev-151.tar.gz
-http://build.shr-project.org/sources/udev-162.tar.gz
-http://build.shr-project.org/sources/udev-165.tar.gz
-http://build.shr-project.org/sources/git-1.7.3.5.tar.bz2
+I know that there's possibly only very few people interested in
+this, but I'd really like to avoid forking completely, also 
+the idea of still being able to grab some recipes from the .dev
+branch if needed would be nice, and it would simplify contributing
+for others. If this idea is not an acceptable option for you, of
+course, I can still push my fork to github.
 
-Please let me know when the archives are available at
-sources.openembedded.org, I'll reformat this patchset into v2 and
-resend the pull request then.
+What do you think about it?
 
-Thanks.
---=20
-        Apelete
+M'bert
+
+-- 
+----------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Wie verhindert man, dass einem die Geige gestohlen wird?
+Man legt sie in einen Bratschenkasten...
 
 
