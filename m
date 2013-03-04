@@ -1,27 +1,23 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1UCAP6-0002cN-9H
+	(envelope-from <Randy.MacLeod@windriver.com>) id 1UCKUI-0007zP-Dv
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Mar 2013 16:00:46 +0100
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 8D484D19944
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Mar 2013 15:44:16 +0100 (CET)
-Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
-	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 14BECA6248;
-	Sun,  3 Mar 2013 15:44:06 +0100 (CET)
-Date: Sun, 3 Mar 2013 15:44:05 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20130303154405.3f877ded@e6520eb>
-In-Reply-To: <cover.1362053615.git.Martin.Jansa@gmail.com>
-References: <cover.1362053615.git.Martin.Jansa@gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][for-danny 0/3] backport meta-ruby
+	Mon, 04 Mar 2013 02:46:57 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r241UHHM026894
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 3 Mar 2013 17:30:17 -0800 (PST)
+Received: from fidler.wrs.com (128.224.21.195) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 3 Mar 2013 17:30:17 -0800
+From: <randy.macleod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 3 Mar 2013 20:30:14 -0500
+Message-ID: <1362360614-12109-1-git-send-email-randy.macleod@windriver.com>
+X-Mailer: git-send-email 1.8.1
+MIME-Version: 1.0
+Subject: [PATCH] apr: add libtool to SSTATE_SCAN_FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,35 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Mar 2013 15:00:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Mar 2013 01:47:06 -0000
+Content-Type: text/plain
 
-Le Thu, 28 Feb 2013 13:20:06 +0100,
-Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
+From: Jackie Huang <jackie.huang@windriver.com>
 
-> I know that adding new layer is not typical "backport", but we need ruby=
-=20
-> in danny and IIRC Koen also needs.
->=20
-> Also because it's separate layer, there is no danger to users which don't=
-=20
-> need or use it.
->=20
-> The following changes since commit c02834a7cc5fda525c7ebeec545625233bab4c=
-b5:
->=20
->   xf86-video-geode: Update to 2.11.14 (2013-02-15 12:16:55 +0100)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib jansa/for-danny3
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/for-danny3
->=20
-pushed to danny-next.
+The hardcoded paths in libtool will cause apache2 compile fail at
+link stage when the package apr is installed from sstate cache, so
+add libtool to SSTATE_SCAN_FILES.
 
-Thanks
-Eric
+[ CQID: WIND00405372 ]
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ meta/recipes-support/apr/apr_1.4.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta/recipes-support/apr/apr_1.4.6.bb b/meta/recipes-support/apr/apr_1.4.6.bb
+index b7220e0..77dffee 100644
+--- a/meta/recipes-support/apr/apr_1.4.6.bb
++++ b/meta/recipes-support/apr/apr_1.4.6.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c35ff3c4c83b89d2f076e315caac28b \
+ 
+ BBCLASSEXTEND = "native"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "${APACHE_MIRROR}/apr/${BPN}-${PV}.tar.bz2 \
+            file://configure_fixes.patch \
+@@ -43,7 +43,7 @@ do_install_append() {
+ 	cp ${S}/${HOST_SYS}-libtool ${D}${datadir}/build-1/libtool
+ }
+ 
+-SSTATE_SCAN_FILES += "apr_rules.mk"
++SSTATE_SCAN_FILES += "apr_rules.mk libtool"
+ 
+ SYSROOT_PREPROCESS_FUNCS += "apr_sysroot_preprocess"
+ 
+-- 
+1.8.1
+
 
 
