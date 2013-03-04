@@ -1,28 +1,32 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-da0-f44.google.com ([209.85.210.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Randy.MacLeod@windriver.com>) id 1UCMwP-0005yA-R9
+	(envelope-from <martin.jansa@gmail.com>) id 1UCVif-00007j-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Mar 2013 05:23:58 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r241bWPZ012428
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 04 Mar 2013 14:46:26 +0100
+Received: by mail-da0-f44.google.com with SMTP id z20so2548699dae.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 3 Mar 2013 17:37:32 -0800 (PST)
-Received: from [128.224.21.195] (128.224.21.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 3 Mar 2013 17:37:32 -0800
-Message-ID: <5133FADA.9040408@windriver.com>
-Date: Sun, 3 Mar 2013 20:37:30 -0500
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1362360614-12109-1-git-send-email-randy.macleod@windriver.com>
-In-Reply-To: <1362360614-12109-1-git-send-email-randy.macleod@windriver.com>
-X-Originating-IP: [128.224.21.195]
-Subject: Re: [PATCH] apr: add libtool to SSTATE_SCAN_FILES
+	Mon, 04 Mar 2013 05:29:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=RTeWurYi7kzrJOFmwLKWxCP4twOgGDTGQ/vMxLNfyIs=;
+	b=vwJQ6KIRAhHRT6qxiLG6RVOLfgjC/qKQ8YGuYQ9j/dTXhcsAP4pQ9w5gxuqo+5uIQw
+	Ke/8XN629b3tm3Xr75U2yP4IqpKKbtOAuJhnLIsidC3mt5W0qTIqkl0mcvHALExQ7S+8
+	OA4fZ7zwEEmXy2MYZVirSMyH1ApNyqrhNb/pwKXm7bLqHjHbg8BgImr21xjkXWov3K7s
+	PDJXPZ6zzLnm16o9jL1coKFKujjejtt6OTfQnCnw4Ulij1c46oUzlXM7h8oAqq2fa7ME
+	dS/jDfHfrJsdP/eQHqj72V7U7aJ99Isy6lawqot55o/PDgdcO5L9F70hdSrdJgG1Jhyu
+	kSRQ==
+X-Received: by 10.66.120.200 with SMTP id le8mr32470124pab.23.1362403792885;
+	Mon, 04 Mar 2013 05:29:52 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id hp7sm22350001pbc.8.2013.03.04.05.29.48
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 04 Mar 2013 05:29:51 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Mar 2013 14:29:39 +0100
+Message-Id: <1362403779-1653-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [PATCH] meta-systemd: restore wpa-supplicant bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,18 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 04:23:58 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Mar 2013 13:46:27 -0000
 
+* systemd support in oe-core does not work for everybody
+---
+ .../wpa-supplicant/wpa-supplicant_2.0.bbappend            | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
 
-Sorry for sending again to the wrong list.
-I only read Martin's reply after sending a second time.
-
-I have sent this fix to: openembedded-core@lists.openembedded.org
-
+diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+new file mode 100644
+index 0000000..609a1f3
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+@@ -0,0 +1,15 @@
++PRINC := "${@int(PRINC) + 2}"
++
++inherit systemd
++
++SYSTEMD_PACKAGES = "${PN}-systemd"
++SYSTEMD_SERVICE = "wpa_supplicant.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++do_install_append () {
++    install -d ${D}${systemd_unitdir}/system
++    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
++}
++
++# systemd.bbclass does not catch all multiple-instance-service-files
++FILES_${PN}-systemd += "${systemd_unitdir}/system/"
 -- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350
+1.8.1.5
+
 
 
