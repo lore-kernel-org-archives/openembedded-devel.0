@@ -1,25 +1,33 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-pb0-f54.google.com ([209.85.160.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UCqwg-0005Af-EC
+	(envelope-from <martin.jansa@gmail.com>) id 1UD0EX-0004p1-1I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Mar 2013 13:26:14 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 05 Mar 2013 04:08:16 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,787,1355126400"; d="scan'208";a="293812239"
-Received: from unknown (HELO helios.localnet) ([10.255.12.96])
-	by orsmga002.jf.intel.com with ESMTP; 05 Mar 2013 04:09:43 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Dietze <di@fh-wedel.de>
-Date: Tue, 05 Mar 2013 12:09:42 +0000
-Message-ID: <6717637.hIAbfv92vg@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <20130302174624.GH21221@fh-wedel.de>
-References: <20130302174624.GH21221@fh-wedel.de>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Nylon liveth (but on in OE?)
+	Tue, 05 Mar 2013 23:21:19 +0100
+Received: by mail-pb0-f54.google.com with SMTP id rr4so5030545pbb.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Mar 2013 14:04:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=wum14juGzg72cu1cJp6SXx0AWbNZAPT0q1SEZi3Of3w=;
+	b=gXjZhfySpy9GY9g1Di4T571FCkLxll/ovOZl6NhkbaLoSnvoiGjnxeYYqvbjyljFjO
+	zS44SkJzDYlikHLcuBtGT3zV2t77JmYOalF8MzA0teDHsuSbItbwTpKMDSy/QXGPZPhM
+	v57WBgZPmXuyhtR0/rvSN9K/x7r9i4/5L/0lIbdgY+rryxHZnvozxyaR9zv0BxoyfkJp
+	RLd7Tec6BKIdrI50gb80cN/hwlNtQcpkvS2FQqqazLHawK+JI46JyT6LH3t56P/7VTk/
+	EZZlXda7vXJ8CBYNmwxvVDQ2Pme4CpVMoMMLYb1nQMYu/MYDHy+cOzM5RZdGpC1a0leJ
+	JeBw==
+X-Received: by 10.68.252.2 with SMTP id zo2mr40264403pbc.97.1362521086153;
+	Tue, 05 Mar 2013 14:04:46 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id
+	qb10sm28329226pbb.43.2013.03.05.14.04.42
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 05 Mar 2013 14:04:44 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Mar 2013 23:04:29 +0100
+Message-Id: <1362521069-17041-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-oe][PATCH] poppler: ugprade to 0.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,62 +41,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2013 12:26:15 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 05 Mar 2013 22:21:19 -0000
 
-On Saturday 02 March 2013 18:46:24 Martin Dietze wrote:
-> Nylon is the distribution with which the 4G Meshcube/AccessCube
-> was shipped. As a former 4G employee I took over maintainership
-> and started re-integrating Nylon into org.openembedded.dev in
-> 2009. However Nylon was and still is based on an old toolchain
-> and a 2.4 kernel. This lead to increasing problems keeping the
-> code buildable, as more and more code would no longer work on
-> a basis that old. Thus Nylon is now obsoleted in OE (and I'd
-> say rightly so).
-> 
-> Not having had the time to work on this in the last years I've
-> now decided to go the easy way and simply fork at some time in
-> 2009 when the code was still more or less working and continue
-> from there. The main benefit from using my work rather than the
-> original 4G toolchain (which was itself a fork from a much older
-> OE snapshot) I see in having a larger set of recipes to add
-> components from if needed and also some updated components in
-> the base system
-> 
-> This work has now been done, and I wonder where the code should
-> live from now on. I would thus like to ask if keeping my branch
-> in the OE repo would be an acceptable option to the project
-> maintainers. Doing this we could probably just remove all the
-> remaining mtx-[12] artifacts from the .dev branch (I am not sure
-> if mtx-3 is maintained by anyone any longer, at least it is not
-> by me).
-> 
-> I know that there's possibly only very few people interested in
-> this, but I'd really like to avoid forking completely, also
-> the idea of still being able to grab some recipes from the .dev
-> branch if needed would be nice, and it would simplify contributing
-> for others. If this idea is not an acceptable option for you, of
-> course, I can still push my fork to github.
-> 
-> What do you think about it?
+* 0.18.0 was failing to build after libpng was upgraded to 1.6 in oe-core
 
-I don't have a personal interest in this particular distro/hardare, but if the 
-fork you have made is working then I can't see a compelling reason not to host 
-a branch for it in the OE-Classic repository; at least that keeps things more 
-or less in one place.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/poppler/poppler_0.18.0.bb | 12 ------------
+ meta-oe/recipes-support/poppler/poppler_0.18.4.bb | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+ create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.4.bb
 
-However, is there any chance you'd be able to look at moving up to be based on 
-top of OE-Core which is where OE is at currently? Obviously toolchain and 
-kernel would be the first hurdles. For bringing any needed metadata up-to-date 
-though the community can provide help where needed.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.18.0.bb b/meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+deleted file mode 100644
+index 1217d6c..0000000
+--- a/meta-oe/recipes-support/poppler/poppler_0.18.0.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require poppler.inc
+-
+-PR = "r4"
+-
+-DEPENDS += "lcms"
+-
+-EXTRA_OECONF_append = " --disable-abiword-output "
+-
+-RDEPENDS_${PN} = "poppler-data"
+-
+-SRC_URI[md5sum] = "4cd3bf2a0a13fa8eaf00d31368915f77"
+-SRC_URI[sha256sum] = "9019b15ef10a878e607e4088a27fb4967f61cdfada7806d0fee97954f76648e8"
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.18.4.bb b/meta-oe/recipes-support/poppler/poppler_0.18.4.bb
+new file mode 100644
+index 0000000..2f4927b
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler_0.18.4.bb
+@@ -0,0 +1,10 @@
++require poppler.inc
++
++DEPENDS += "lcms"
++
++EXTRA_OECONF_append = " --disable-abiword-output "
++
++RDEPENDS_${PN} = "poppler-data"
++
++SRC_URI[md5sum] = "12658f3308597e57f3faff538cc73baf"
++SRC_URI[sha256sum] = "33421148cdc8e043da291dece2cce1cea6220d49a50c00c56d56d6435501d42e"
 -- 
+1.8.1.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
