@@ -1,33 +1,32 @@
-Received: from mail-pb0-f54.google.com ([209.85.160.54])
+Received: from mail-pb0-f41.google.com ([209.85.160.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UD0EX-0004p1-1I
+	(envelope-from <martin.jansa@gmail.com>) id 1UD0Ou-00055h-0Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Mar 2013 23:21:19 +0100
-Received: by mail-pb0-f54.google.com with SMTP id rr4so5030545pbb.41
+	Tue, 05 Mar 2013 23:32:10 +0100
+Received: by mail-pb0-f41.google.com with SMTP id um15so5088027pbc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Mar 2013 14:04:46 -0800 (PST)
+	Tue, 05 Mar 2013 14:15:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
 	bh=wum14juGzg72cu1cJp6SXx0AWbNZAPT0q1SEZi3Of3w=;
-	b=gXjZhfySpy9GY9g1Di4T571FCkLxll/ovOZl6NhkbaLoSnvoiGjnxeYYqvbjyljFjO
-	zS44SkJzDYlikHLcuBtGT3zV2t77JmYOalF8MzA0teDHsuSbItbwTpKMDSy/QXGPZPhM
-	v57WBgZPmXuyhtR0/rvSN9K/x7r9i4/5L/0lIbdgY+rryxHZnvozxyaR9zv0BxoyfkJp
-	RLd7Tec6BKIdrI50gb80cN/hwlNtQcpkvS2FQqqazLHawK+JI46JyT6LH3t56P/7VTk/
-	EZZlXda7vXJ8CBYNmwxvVDQ2Pme4CpVMoMMLYb1nQMYu/MYDHy+cOzM5RZdGpC1a0leJ
-	JeBw==
-X-Received: by 10.68.252.2 with SMTP id zo2mr40264403pbc.97.1362521086153;
-	Tue, 05 Mar 2013 14:04:46 -0800 (PST)
+	b=KKtxnyPldvthGBV0L57lL1JNOOZ7VtZakag/MEfoY9r00VR+wiG/kfbbZnCPa27Leh
+	g6B1eg9TW3eomPink6l3fApG8Naiw0LKrJCFA7F0z47NAA8OPPPjs482VhMY5u7K2imm
+	VCCe6kFERhND98Xzv1oiPZcpMYpyNGus7iygfAjIWkgneKukQ8HnFP4qgbxXUmwmLIrV
+	8tr4x46etuAs92RkRptuzYMWmqRgE3DtkouMzruQHs0lLbhLdebMn8RbFjr8Yt6ow5Pf
+	ody4Mcgte8wnsI7OHiCV17rhmnxqH6XAEaR0P2tsAEwfeU921Wkq6C/29iPP6gE6yTc0
+	AqMA==
+X-Received: by 10.68.198.34 with SMTP id iz2mr38196070pbc.148.1362521729396;
+	Tue, 05 Mar 2013 14:15:29 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id
-	qb10sm28329226pbb.43.2013.03.05.14.04.42
+	by mx.google.com with ESMTPS id ip8sm2725425pbc.39.2013.03.05.14.15.24
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 05 Mar 2013 14:04:44 -0800 (PST)
+	Tue, 05 Mar 2013 14:15:28 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Mar 2013 23:04:29 +0100
-Message-Id: <1362521069-17041-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  5 Mar 2013 23:15:04 +0100
+Message-Id: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-oe][PATCH] poppler: ugprade to 0.18.4
+Subject: [meta-oe][PATCHv2] poppler: upgrade to 0.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Mar 2013 22:21:19 -0000
+X-List-Received-Date: Tue, 05 Mar 2013 22:32:50 -0000
 
 * 0.18.0 was failing to build after libpng was upgraded to 1.6 in oe-core
 
