@@ -1,14 +1,14 @@
 Received: from mail.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1UDLfI-0003NV-0e
+	(envelope-from <obi@opendreambox.org>) id 1UDM5w-0003uc-Lh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Mar 2013 22:14:23 +0100
+	Wed, 06 Mar 2013 22:41:55 +0100
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Mar 2013 21:47:59 +0100
-Message-Id: <1362602879-10443-1-git-send-email-obi@opendreambox.org>
+Date: Wed,  6 Mar 2013 22:25:11 +0100
+Message-Id: <1362605111-17641-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] swig: avoid host contamination, make build deterministic
+Subject: [meta-oe][PATCH v2] swig: avoid host contamination, make build deterministic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -22,7 +22,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Mar 2013 21:14:24 -0000
+X-List-Received-Date: Wed, 06 Mar 2013 21:41:56 -0000
 
 * Explicitly disable all other languages than python, which was the
   only language listed in DEPENDS.
@@ -33,6 +33,8 @@ X-List-Received-Date: Wed, 06 Mar 2013 21:14:24 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
+Sorry, forgot to add [meta-oe] to the Subject line.
+
  meta-oe/recipes-devtools/swig/swig.inc |   34 +++++++++++++++++++++++++++-----
  1 file changed, 29 insertions(+), 5 deletions(-)
 
