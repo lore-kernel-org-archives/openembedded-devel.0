@@ -1,36 +1,43 @@
-Received: from mail-pb0-f41.google.com ([209.85.160.41])
+Received: from mail-ea0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UDbRV-0005d9-CK
+	(envelope-from <koen@dominion.thruhere.net>) id 1UDbfj-00065W-Kz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 15:05:12 +0100
-Received: by mail-pb0-f41.google.com with SMTP id um15so392746pbc.0
+	Thu, 07 Mar 2013 15:19:53 +0100
+Received: by mail-ea0-f173.google.com with SMTP id i1so1593900eaa.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 05:48:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=dKEMh/FekZVHmG2yPDjcbttMHlw3yKb9dQWYNdN2cYA=;
-	b=KvX6WuCH8r0+DRKL9AakzPyfYI50KgUbAU3h0tEf+qe8gdFlNQW/fc/tX9Spei60bD
-	H1yGQgVjAzELLgajoHzCZqYh957fGKnoXC0NgPMNnuApuPzR6suIhBBwopykJ9cf+Qj2
-	JGed8UvuAQ+NX/iDQeOKv4/aqrsqe6Ze7m+l8esaMIy+wxazDQz3Xaz45Ph9RtggZFjo
-	VcsCTxkiqwOCLfErYClbD9r8d0IilFOqzBKEH2KY41zY94rBar3trB1sfmIKE+z8/itq
-	5mCY99Vmcg0JF55aIyW19kDFX97n29vivyxylnyz+gdZX/VUFtTjnFQR8d09oU/aQyJJ
-	4RaA==
-X-Received: by 10.66.157.200 with SMTP id wo8mr2973240pab.37.1362664116610;
-	Thu, 07 Mar 2013 05:48:36 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id eh5sm1751708pbc.44.2013.03.07.05.48.34
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 05:48:35 -0800 (PST)
-Date: Thu, 7 Mar 2013 14:48:31 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130307134831.GL32228@jama.dyndns-home.com>
-References: <1362662097-13544-1-git-send-email-obi@opendreambox.org>
-MIME-Version: 1.0
-In-Reply-To: <1362662097-13544-1-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] samba: fix install for older samba versions
+	Thu, 07 Mar 2013 06:03:19 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=Fhm3faMB8lEhjYBHQOIeyI3AW0cnSBhSAraURAXk9Bg=;
+	b=QL+jo8iAHJS5wgqeqYQ3xg8dRgocOjNESCECRLpp5j5pQJVvIbYpOgp7GJByxbOULH
+	r5VDW5FM2TVhTv9J+SbS6zX4KfurOAUxJclfByyPl9dvg8xja7kg7Yw7xir5h41skeno
+	WxfM6C+5eTd5wchHEqwbqIofasSvJzHcJoAHLH8CGsn4Htbu/aFDMGnJywkxMN2id2h0
+	C+B+b+KRpLzhiggfeDzGKuBtex3o1nqIMkorqex5SncukF0sGMdnPbIZEQhjoTGJVo7A
+	ZwMqr16JR2IUmbVAXBCvG5hHhhlh01684CVjA8Am3XR1U7NaWbQqwP+zp2YJ0CNqdr89
+	9l2Q==
+X-Received: by 10.14.206.132 with SMTP id l4mr93108209eeo.38.1362664999432;
+	Thu, 07 Mar 2013 06:03:19 -0800 (PST)
+Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id f47sm2361199eep.13.2013.03.07.06.03.17
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 06:03:18 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20130307130435.GI32228@jama.dyndns-home.com>
+Date: Thu, 7 Mar 2013 15:03:17 +0100
+Message-Id: <E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
+	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
+	<20130307130435.GI32228@jama.dyndns-home.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1499)
+X-Gm-Message-State: ALoCoQmTU6/Bj9FFfote+7YFqQgRe23oyhwO7G3J21Jv93nfh8VbHoL3coJivoYnhmXMB+c5OOMB
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,84 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 14:05:15 -0000
-X-Groupsio-MsgNum: 43420
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wA9WyeW1yVBM2Q32"
-Content-Disposition: inline
-
---wA9WyeW1yVBM2Q32
+X-List-Received-Date: Thu, 07 Mar 2013 14:19:53 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 07, 2013 at 02:14:56PM +0100, Andreas Oberritter wrote:
-> * Samba 3.0 doesn't build libbss_*.so
 
-libnss_*.so
+Op 7 mrt. 2013, om 14:04 heeft Martin Jansa <martin.jansa@gmail.com> het =
+volgende geschreven:
 
-> * base_sbindir may contain mount.cifs
+> On Thu, Mar 07, 2013 at 01:09:38PM +0100, Samuel Stirtzel wrote:
+>> 2013/3/7 Koen Kooi <koen@dominion.thruhere.net>:
+>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>> ---
+>>> README | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>=20
+>>> diff --git a/README b/README
+>>> index 0635e10..cab1e21 100644
+>>> --- a/README
+>>> +++ b/README
+>>> @@ -10,7 +10,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
+>>> Contributors:
+>>> Copyright 2012 - Kai Kang
+>>> Copyright 2013 - Khem Raj
+>>> -Copyright 2012 - Koen Kooi
+>>> +Copyright 2012, 2013 - Koen Kooi
+>>> Copyright 2012 - Robert Yang
+>>> Copyright 2011, 2012 - Samuel Stirtzel
+>>>=20
+>>> --
+>>> 1.8.1.4
+>>>=20
+>>=20
+>> Thanks for your patches,
+>> I applied them all.
+>>=20
+>>=20
+>> Unrelated to your patches:
+>> There are some upcoming changes, but they don't fit into yocto 1.4
+>> (assumed that yocto is the orientation point for third-party OE-layer
+>> releases).
+>> So there will be a yocto-1.4 branch in advance and the development
+>> will continue on master.
 >=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  meta-oe/recipes-connectivity/samba/samba.inc |    8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recip=
-es-connectivity/samba/samba.inc
-> index 3ee43ad..a151b16 100644
-> --- a/meta-oe/recipes-connectivity/samba/samba.inc
-> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
-> @@ -87,10 +87,12 @@ do_install_append() {
->  	install -d ${D}/var/spool/samba
-> =20
->  	# Install other stuff not installed by "make install"
-> -	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}$=
-{libdir}/libnss_winbind.so.2
-> -	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${li=
-bdir}/libnss_wins.so.2
-> +	if [ -d ${WORKDIR}/${PN}-${PV}/nsswitch ]; then
-> +		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}=
-${libdir}/libnss_winbind.so.2
-> +		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${l=
-ibdir}/libnss_wins.so.2
-> +	fi
+> It would be nice to know yocto-1.4 release name in advance and name it
+> the same as branch in oe-core/meta-oe will be (denzil, danny, ...), =
+but
+> I guess it can be renamed later.
 
-It looks weird, but ${S}/../nsswitch won't be much better I guess.
+For angstrom I'm going to use 'yocto-1.4' in the branch name, I have =
+trouble remembering which names maps to which release. And the Yocto =
+compliance program talks about 1.3, .14 etc, not about codenames.
 
-> -	rmdir ${D}${base_sbindir}
-> +	rmdir ${D}${base_sbindir} || true
 
-Maybe use
-              --ignore-fail-on-non-empty
 
-instead of || true.
 
->  	sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
->  }
-> =20
-> --=20
-> 1.7.10.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---wA9WyeW1yVBM2Q32
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlE4mq8ACgkQN1Ujt2V2gBxhvgCePRUAJ6z8g2c4rZbM9qjkuUpu
-1L8An2p9lcG+fNdOu/n6u9iUy4NgJr5k
-=tjZs
------END PGP SIGNATURE-----
-
---wA9WyeW1yVBM2Q32--
