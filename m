@@ -1,34 +1,32 @@
-Received: from mail-oa0-f46.google.com ([209.85.219.46])
+Received: from mail-pb0-f54.google.com ([209.85.160.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1UDcx2-0001LF-QT
+	(envelope-from <martin.jansa@gmail.com>) id 1UDcxi-0001PX-Ne
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:41:52 +0100
-Received: by mail-oa0-f46.google.com with SMTP id k1so710108oag.19
+	Thu, 07 Mar 2013 16:42:35 +0100
+Received: by mail-pb0-f54.google.com with SMTP id rr4so446317pbb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 07:25:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=EYrF+1dSPR75GP3ilAMKI1zGPjO6zKcyX980eGnJAkc=;
-	b=IAhau2F2hCrfUkXbFTlBkehJW0ApMoZmkEocOxstlUZm3+WzoDkW524+7OJnAlcdUE
-	Q3HU1F44LWZv9CMA4ctOnscujd5yJf8pEuseCurDnuxzxbVNdQd8wVYbMRJ7+D0dBIz6
-	HNMiq9QzX45Y/csDYUU15wHQ685N2p9sHKAaQIpWR+w74Zl61gyalRimaAEdp10gm+XT
-	JAgF7zdgPo2YnvjA19BTkmruPgNSxGBrF30rKA6CQWAk72S7Brv1nb2POHY8WUyWbY5a
-	FMQ9VqikwcUSxiBqYfeb47v+jG9wRbOZ71Yjrenbhody0fGzmTpSS8+pc5PrxfxzBk+d
-	yGvQ==
-MIME-Version: 1.0
-X-Received: by 10.60.169.212 with SMTP id ag20mr25775090oec.102.1362669916191; 
-	Thu, 07 Mar 2013 07:25:16 -0800 (PST)
-Received: by 10.60.76.199 with HTTP; Thu, 7 Mar 2013 07:25:16 -0800 (PST)
-In-Reply-To: <20130307152058.GO32228@jama.dyndns-home.com>
-References: <1362668200-16189-1-git-send-email-s.stirtzel@googlemail.com>
-	<20130307152058.GO32228@jama.dyndns-home.com>
-Date: Thu, 7 Mar 2013 16:25:16 +0100
-Message-ID: <CAGiJk9eUFuV_rMBPDwNLg2F2CN1VxAUAmiAF0BOmXHtxM+8mQQ@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] maliit-framework: fix for Qt based applications
+	Thu, 07 Mar 2013 07:25:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Ha23vtZzXipAMI+BIYWlbKt+6VknP5gyi5t07GTv30Y=;
+	b=z+t9NhOKcWYMIFRiurx3Lx2v2kHKKO5t9csw9RtcUsrrBmi7NtxfxNR3HBZjZEVcFe
+	mITPcpe1cVTSY3wG2AkiPKZ8G7hn7ez5CHdkkJjSuLjt7z0YIOT5C3j20fl3MvOrMfqf
+	ZtFxZQRzTKqX8qae8Gt9tGUldjk20MRxmx/mnCr7P4KdcOTuPupAKQOnHB/FZGR7kebo
+	07djnG6fo9CAUhuM9ap/0IpNhQqilmVq6+NxCQuD+ZCSW5jfXqM9HA7yywNiV0ndNh08
+	Ztw9zX7R6+QvlXJzhtR1XmK+z757O6E7RbpTnkx6yGorDQqCpgg542Vmg5CITj0CrX2X
+	dpXA==
+X-Received: by 10.68.234.100 with SMTP id ud4mr53213871pbc.8.1362669957849;
+	Thu, 07 Mar 2013 07:25:57 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ag10sm2578299pac.4.2013.03.07.07.25.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 07:25:56 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2013 16:25:51 +0100
+Message-Id: <1362669951-22508-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-oe][PATCH] krb5: Fix .debug packaging warning after debug striping was fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:41:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Mar 2013 15:42:42 -0000
 
-2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Mar 07, 2013 at 03:56:39PM +0100, Samuel Stirtzel wrote:
->> +pkg_postinst_${PN} () {
->> +#!/bin/sh
->> +#can run online and offline
->> +echo "EXPORT QT_IM_MODULE=Maliit" >> ${D}/etc/profile
->
-> IIRC this needs to be $D
-> otherwise it's expanded by bitbake and you get path to your ${D} on
-> target.
->
-> Same for postrm
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-connectivity/krb5/krb5_1.11.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Yes you are right, V2 is coming.
-
-
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+index 1edf6bb..d71339a 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+@@ -7,7 +7,7 @@ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+ 
+ inherit autotools binconfig perlnative
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
+ SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
+@@ -25,6 +25,7 @@ LDFLAGS_append += "-lpthread"
+ 
+ FILES_${PN}-doc += "${datadir}/examples"
+ FILES_${PN} += "${datadir}/gnats"
++FILES_${PN}-dbg += "${libdir}/krb/plugins/*/.debug"
+ 
+ krb5_do_unpack() {
+     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
 -- 
-Regards
-Samuel
+1.8.1.5
+
 
 
