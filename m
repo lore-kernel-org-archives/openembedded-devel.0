@@ -1,16 +1,42 @@
-Received: from mail.saftware.de ([83.141.3.46])
+Received: from mail-ve0-f177.google.com ([209.85.128.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1UDccd-00006O-HE
+	(envelope-from <ross.burton@intel.com>) id 1UDce1-0000Cr-GX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:20:59 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
+	Thu, 07 Mar 2013 16:22:14 +0100
+Received: by mail-ve0-f177.google.com with SMTP id m1so436597ves.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2013 07:05:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=DzAwr8k+aTcSxTZzjhDm1vm+OgBCARmueneM0zTeMz8=;
+	b=dinh6imtj6WvWcGXdfUhMv+7GyoWMge2v9yAJtjxIDDEk1TG4Y7S+D993LvrYC2lpj
+	pRDF5jPSCj93VxeadSeIIe07EuCY6Sk2AEe48yRJnMuW1CK7qMstv9WVqocUprngMvs7
+	o6G2uAuuaV8xQ+3Bb0foBN6Yto8kEMtEHoaQL3pj19ATsZAR9/WCog8xMfBmN4SV/y6T
+	AIRZ8C/570Dnjse3TMrwGTx8RLIHvTu6a9fTvWbx7HwUbsg857bwKdRa++oivTKYXdQq
+	E7eE12Q39w+ZlwRR3a8iyGgsFNMdaYO9nqjBp4P2AV4DO4XsSz0JQaJm3WtDTYmSsuDS
+	0pPw==
+X-Received: by 10.58.94.234 with SMTP id df10mr13204844veb.4.1362668737013;
+	Thu, 07 Mar 2013 07:05:37 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.58.219.195 with HTTP; Thu, 7 Mar 2013 07:05:16 -0800 (PST)
+In-Reply-To: <5138A92D.5030809@balister.org>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<20130307130435.GI32228@jama.dyndns-home.com>
+	<E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
+	<9088096.rvOOlWx1VE@helios>
+	<CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
+	<5138A92D.5030809@balister.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 7 Mar 2013 15:05:16 +0000
+Message-ID: <CAJTo0LbnE7DjdJL=9=LDA3kpxhAADJONAu-4Xdwohcno__xXcA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 16:04:10 +0100
-Message-Id: <1362668650-19705-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <5138A514.3080303@opendreambox.org>
-References: <5138A514.3080303@opendreambox.org>
-Subject: [meta-oe][PATCH v2] samba: fix install for older samba versions
+X-Gm-Message-State: ALoCoQkKmFiZHUA1ippOEsc1lXDMGwHFE3GchhyaBtzw67Xp2LQ4vWTvQ/JWRb/w7jjFZiHBWTZi
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,38 +50,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:21:03 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 15:22:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Samba 3.0 doesn't build libnss_*.so
-* base_sbindir may contain mount.cifs
+On 7 March 2013 14:50, Philip Balister <philip@balister.org> wrote:
+>> For me, codenames work fine but for users it is sometimes confusing as
+>> the website and marketing people talk about Yocto 1.3 or 1.4 while the
+>> involved people talk about codenames. So I find myself explaining it
+>> over and over again.
+>
+> Add me to the list of people that find codenames confusing. I can't
+> reliably list releases in order by name.
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- meta-oe/recipes-connectivity/samba/samba.inc |    8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+We really need a table on the wiki page listing all of them - I can
+easily remember the current/previous/next names but after that I don't
+remember them.
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index 3ee43ad..42ddce5 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -87,10 +87,12 @@ do_install_append() {
- 	install -d ${D}/var/spool/samba
- 
- 	# Install other stuff not installed by "make install"
--	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
--	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
-+	if [ -d ${WORKDIR}/${PN}-${PV}/nsswitch ]; then
-+		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
-+		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
-+	fi
- 
--	rmdir ${D}${base_sbindir}
-+	rmdir --ignore-fail-on-non-empty ${D}${base_sbindir}
- 	sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
- }
- 
--- 
-1.7.10.4
-
+Ross
 
 
