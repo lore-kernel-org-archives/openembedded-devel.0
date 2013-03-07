@@ -1,32 +1,40 @@
-Received: from mail-pa0-f52.google.com ([209.85.220.52])
+Received: from mail-pa0-f50.google.com ([209.85.220.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UDdOD-00033a-7Q
+	(envelope-from <martin.jansa@gmail.com>) id 1UDdRl-0003I1-Be
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 17:09:57 +0100
-Received: by mail-pa0-f52.google.com with SMTP id fb1so558363pad.11
+	Thu, 07 Mar 2013 17:13:37 +0100
+Received: by mail-pa0-f50.google.com with SMTP id fa11so552662pad.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 07:53:20 -0800 (PST)
+	Thu, 07 Mar 2013 07:57:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=pzynfz0u0Usx6F+hcvUhIiQaDWmllUv+QzuvC568SZY=;
-	b=kH37jR3vIib70V8Pfboelas3GqYouhZcHE/UQAmTaIAR7OuIqLeM3AsaquR7m9mZhR
-	4af2dEUrJQAa1OD49ZmjSW/NagMYJsDW0ELijqcnVjK7nGgNBUpPbOBRWg+hlNx5f5PE
-	waDi2g0R8hkv6tCVcBuOURt+zZfzsfqXCxpU+bH3oI360tf9eaylfh6IN/uXMgqGJ94P
-	cULSRsFZurckE8POdpKgpnXTytw2JnDxUeTiFrGcXo6yZ6XOxKBQOJ8B/CxV0Dmb2Kxx
-	2ihvUz/ag84ijFv6W8rfR8hV2Z8FHgblVU1TBH3rlo4rO/NN7JxYoj4VFv2CcFvTrXEC
-	64xg==
-X-Received: by 10.68.186.132 with SMTP id fk4mr36111101pbc.18.1362671600349;
-	Thu, 07 Mar 2013 07:53:20 -0800 (PST)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=q3iuAJey2aJa1aqFNDfyhU6UIKM37WnAvRfNrk5o7ME=;
+	b=SlEZwYcITa2Baywfh+Y82JjE21E/An5/KDoKN4yh0+ogd/kXaq6RPMKsaaY4vvTC5T
+	vep8zbxPkR8Fo18HYrJY7U26Q+yxfuTvc53+CV5ZGIPuqA3zGuHteJ/qMp+DG6RFUwof
+	QPxezkNrcvejQuaCgDIsKwaf1akn6ovnyiyDvJP6QtuEppPnqAOUPTcy21dnGTZPOWhQ
+	sJhL093lged4SAH4VBZ7qMbRxAGdZHSSfDUhaaZ5lBVxVU7MThGsiZm2YjnG48wOS7In
+	2OSegvBoR3mFVZSkJUZgaDuHgnIs/yBAq5WnmziDwVewzW0LaFbx6JcgQ6hwxTaX5GnK
+	R0yA==
+X-Received: by 10.68.211.37 with SMTP id mz5mr55480233pbc.83.1362671820463;
+	Thu, 07 Mar 2013 07:57:00 -0800 (PST)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id vq9sm2085975pbc.36.2013.03.07.07.53.17
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 07:53:19 -0800 (PST)
+	by mx.google.com with ESMTPS id iv3sm2091591pbc.40.2013.03.07.07.56.57
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 07:56:59 -0800 (PST)
+Date: Thu, 7 Mar 2013 16:56:54 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 16:53:12 +0100
-Message-Id: <1362671592-30014-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-systemd][PATCH] connman: rename .bbappend to match new version from oe-core
+Message-ID: <20130307155654.GQ32228@jama.dyndns-home.com>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
+	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
+	<20130307150552.GN32228@jama.dyndns-home.com>
+	<CAGiJk9cS8WG5pyJ7Op1XTqxTXk_xRhcAUGXq4hie01FL3vi5SA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAGiJk9cS8WG5pyJ7Op1XTqxTXk_xRhcAUGXq4hie01FL3vi5SA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +48,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 16:09:58 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 16:13:38 -0000
+X-Groupsio-MsgNum: 43444
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="YzdYn+D7cUqe+VA3"
+Content-Disposition: inline
 
-* drop settings already set in connman.inc
+--YzdYn+D7cUqe+VA3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../connman/{connman_1.10.bbappend => connman_1.12.bbappend}          | 4 ----
- 1 file changed, 4 deletions(-)
- rename meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.10.bbappend => connman_1.12.bbappend} (57%)
+On Thu, Mar 07, 2013 at 04:20:42PM +0100, Samuel Stirtzel wrote:
+> 2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
+> > On Thu, Mar 07, 2013 at 01:09:38PM +0100, Samuel Stirtzel wrote:
+> >> 2013/3/7 Koen Kooi <koen@dominion.thruhere.net>:
+> >> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> >> > ---
+> >> >  README | 2 +-
+> >> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >> >
+> >> > diff --git a/README b/README
+> >> > index 0635e10..cab1e21 100644
+> >> > --- a/README
+> >> > +++ b/README
+> >> > @@ -10,7 +10,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
+> >> >  Contributors:
+> >> >  Copyright 2012 - Kai Kang
+> >> >  Copyright 2013 - Khem Raj
+> >> > -Copyright 2012 - Koen Kooi
+> >> > +Copyright 2012, 2013 - Koen Kooi
+> >> >  Copyright 2012 - Robert Yang
+> >> >  Copyright 2011, 2012 - Samuel Stirtzel
+> >> >
+> >> > --
+> >> > 1.8.1.4
+> >> >
+> >>
+> >> Thanks for your patches,
+> >> I applied them all.
+> >
+> > Can you update status on:
+> > http://patches.openembedded.org/bundle/jama/meta-kde/?archive=3Dboth
+> >
+> > To keep patchwork clean?
+> >
+>=20
+> I would, but unfortunately I have no Patchwork account.
+> Also there seems to be no possibility to register a new account.
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
-similarity index 57%
-rename from meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend
-rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
-index a9d13e6..b94f84b 100644
---- a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
-@@ -1,8 +1,4 @@
--inherit systemd
--
- PRINC := "${@int(PRINC) + 1}"
- 
--EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
--
- SYSTEMD_PACKAGES = "${PN}-systemd"
- SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
--- 
-1.8.1.5
+Adding khem to CC: I guess he can arrange account for you.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--YzdYn+D7cUqe+VA3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlE4uMYACgkQN1Ujt2V2gBxeKgCggOCHJDzs9jawR4oVuKq6EcwG
+Ab8AoJWKAEp617dNHMVwyALuK2iGF69Z
+=IsDT
+-----END PGP SIGNATURE-----
+
+--YzdYn+D7cUqe+VA3--
