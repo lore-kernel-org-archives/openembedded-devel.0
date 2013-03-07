@@ -1,35 +1,39 @@
-Received: from mail.dream-property.net ([82.149.226.172])
+Received: from mail-oa0-f44.google.com ([209.85.219.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1UDcEn-00077H-IS
+	(envelope-from <otavio.salvador@gmail.com>) id 1UDcGK-0007Cy-LA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 15:56:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 3871031E42B0
+	Thu, 07 Mar 2013 15:57:41 +0100
+Received: by mail-oa0-f44.google.com with SMTP id h1so647598oag.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2013 15:33:05 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id lZsx-uE07fzP
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2013 15:32:55 +0100 (CET)
-Received: from [172.22.22.61] (unknown [212.255.16.199])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id DBB2F31E42AF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Mar 2013 15:32:54 +0100 (CET)
-Message-ID: <5138A514.3080303@opendreambox.org>
-Date: Thu, 07 Mar 2013 15:32:52 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
+	Thu, 07 Mar 2013 06:41:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=w+pOc/+/kbz45gb5kyBhKuaUhCDb699rMtae5jVULts=;
+	b=c15yK13xwOcZwWcfnbRAInNUYf/vK/YqAaPgmhZkJiYshHY96mL36Q+UZyHVQk0L2X
+	ykzA2fU65kd8P6qahdCdHwqU6ukO+Pm23NcD9KBrG/pdHfaFytbigKS6FBlcmgDkhRE+
+	VsfW1UfBSrJgf4/SABUwQ30DylMZuHZJxlo2k00cmknACSRzr4kmePADgqn6dUG+nzuU
+	epBNoevAXarbiCbfpDvbwN3HkoT/YoLmnFisnCgR9ywTwUuYJet1gdcAX7STAyvi/xPg
+	NvfRtwDy9kt5ZPWThRkvJd97O7Z5WnV3M0RIVLS81UY558uMuBF/Odm4zKy57Qmiv/2z
+	7o8g==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1362662097-13544-1-git-send-email-obi@opendreambox.org>
-	<20130307134831.GL32228@jama.dyndns-home.com>
-In-Reply-To: <20130307134831.GL32228@jama.dyndns-home.com>
-Subject: Re: [meta-oe][PATCH] samba: fix install for older samba versions
+X-Received: by 10.60.8.197 with SMTP id t5mr26911057oea.4.1362667267937; Thu,
+	07 Mar 2013 06:41:07 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.80.198 with HTTP; Thu, 7 Mar 2013 06:41:07 -0800 (PST)
+In-Reply-To: <9088096.rvOOlWx1VE@helios>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<20130307130435.GI32228@jama.dyndns-home.com>
+	<E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
+	<9088096.rvOOlWx1VE@helios>
+Date: Thu, 7 Mar 2013 11:41:07 -0300
+X-Google-Sender-Auth: j4CBzVxegJ-u1IouTdhkP6i5_EE
+Message-ID: <CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 14:56:17 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 14:57:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 07.03.2013 14:48, Martin Jansa wrote:
-> On Thu, Mar 07, 2013 at 02:14:56PM +0100, Andreas Oberritter wrote:
->> * Samba 3.0 doesn't build libbss_*.so
-> 
-> libnss_*.so
-> 
->> * base_sbindir may contain mount.cifs
+On Thu, Mar 7, 2013 at 11:35 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Thursday 07 March 2013 15:03:17 Koen Kooi wrote:
+>> Op 7 mrt. 2013, om 14:04 heeft Martin Jansa <martin.jansa@gmail.com> het
+>> volgende geschreven:
+>> > It would be nice to know yocto-1.4 release name in advance and name it
+>> > the same as branch in oe-core/meta-oe will be (denzil, danny, ...), but
+>> > I guess it can be renamed later.
 >>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  meta-oe/recipes-connectivity/samba/samba.inc |    8 +++++---
->>  1 file changed, 5 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
->> index 3ee43ad..a151b16 100644
->> --- a/meta-oe/recipes-connectivity/samba/samba.inc
->> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
->> @@ -87,10 +87,12 @@ do_install_append() {
->>  	install -d ${D}/var/spool/samba
->>  
->>  	# Install other stuff not installed by "make install"
->> -	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
->> -	install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
->> +	if [ -d ${WORKDIR}/${PN}-${PV}/nsswitch ]; then
->> +		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_winbind.so ${D}${libdir}/libnss_winbind.so.2
->> +		install -m 0644 ${WORKDIR}/${PN}-${PV}/nsswitch/libnss_wins.so ${D}${libdir}/libnss_wins.so.2
->> +	fi
-> 
-> It looks weird, but ${S}/../nsswitch won't be much better I guess.
+>> For angstrom I'm going to use 'yocto-1.4' in the branch name, I have trouble
+>> remembering which names maps to which release. And the Yocto compliance
+>> program talks about 1.3, .14 etc, not about codenames.
+>
+> Wouldn't it be worth us trying to standardise rather than all doing our own
+> thing and users having to figure out what matches up between different layers?
+> If others feel the same as you, then maybe we should all be using that schema.
 
-Yes, that's what I thought, so I chose to keep it unchanged.
+Or we use a codename or we don't.
 
->> -	rmdir ${D}${base_sbindir}
->> +	rmdir ${D}${base_sbindir} || true
-> 
-> Maybe use
->               --ignore-fail-on-non-empty
-> 
-> instead of || true.
+For me, codenames work fine but for users it is sometimes confusing as
+the website and marketing people talk about Yocto 1.3 or 1.4 while the
+involved people talk about codenames. So I find myself explaining it
+over and over again.
 
-Thanks, I will send v2 shortly.
-
-Regards,
-Andreas
-
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
