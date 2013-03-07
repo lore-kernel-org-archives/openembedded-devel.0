@@ -1,34 +1,29 @@
-Received: from mail-ee0-f50.google.com ([74.125.83.50])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1UDd41-0001rd-2r
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDdCe-0002Ci-DV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:49:01 +0100
-Received: by mail-ee0-f50.google.com with SMTP id e51so437458eek.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 07:32:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=DKtDLz/zmeuabzpAZ0YeGdZ8vHuwGMpJJTLEYecu7YE=;
-	b=JcyldQYWayWddEp3a3YXR6HnBfyTKRGbDZ/drhAmBSFHv4owpxikokQALaTr3BkKZU
-	4Pc2MWO7zChGSjes32mmrMofRwvBAQUUNOO2Vhh55GFKJsmQ+QGCagXbOEcJZde0+FIg
-	9xxFjkPU9efMMxGkF7aUTuh5F6xiA0Ojs4vSk+HUui9cAHZGfboXuMB1HCfFSgmk8BKZ
-	FucF1ez0Ihcnx+uQ6sJ1nbQyJFXsoAA+9RvrNDrlQG9XBOpuj6a1Zk/sp+baSKEGsZn2
-	bAaL4EH1ToOz8NpV1geyve1MpQXumpFTvwELN9udgKT3whIRCfTuEuGZksmYvrFXIqXW
-	ncsg==
-X-Received: by 10.14.111.72 with SMTP id v48mr64975002eeg.11.1362670349016;
-	Thu, 07 Mar 2013 07:32:29 -0800 (PST)
-Received: from s-stirtzel-linux.zera.local
-	(ip-95-223-251-141.unitymediagroup.de. [95.223.251.141])
-	by mx.google.com with ESMTPS id u44sm2753373eel.7.2013.03.07.07.32.27
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 07:32:28 -0800 (PST)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+	Thu, 07 Mar 2013 16:57:57 +0100
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 07 Mar 2013 07:39:54 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="295869570"
+Received: from unknown (HELO helios.localnet) ([10.255.12.181])
+	by orsmga002.jf.intel.com with ESMTP; 07 Mar 2013 07:41:09 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 16:32:08 +0100
-Message-Id: <1362670329-16891-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH v2] maliit-framework: fix for Qt based applications
+Date: Thu, 07 Mar 2013 15:41:08 +0000
+Message-ID: <1820544.NMbf1lmvlI@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <5138A92D.5030809@balister.org>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
+	<5138A92D.5030809@balister.org>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,79 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:49:02 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 15:58:09 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Previously Qt based applications did not trigger the Maliit virtual keyboard
-The Qt inputmethod plugin could not be loaded because it did not link to libmaliit-1.0.so
-It is also necessary to set the Qt default input method to "Maliit"
+On Thursday 07 March 2013 09:50:21 Philip Balister wrote:
+> On 03/07/2013 09:41 AM, Otavio Salvador wrote:
+> > On Thu, Mar 7, 2013 at 11:35 AM, Paul Eggleton
+> > 
+> > <paul.eggleton@linux.intel.com> wrote:
+> >> On Thursday 07 March 2013 15:03:17 Koen Kooi wrote:
+> >>> Op 7 mrt. 2013, om 14:04 heeft Martin Jansa <martin.jansa@gmail.com> het
+> >>> 
+> >>> volgende geschreven:
+> >>>> It would be nice to know yocto-1.4 release name in advance and name it
+> >>>> the same as branch in oe-core/meta-oe will be (denzil, danny, ...), but
+> >>>> I guess it can be renamed later.
+> >>> 
+> >>> For angstrom I'm going to use 'yocto-1.4' in the branch name, I have
+> >>> trouble remembering which names maps to which release. And the Yocto
+> >>> compliance program talks about 1.3, .14 etc, not about codenames.
+> >> 
+> >> Wouldn't it be worth us trying to standardise rather than all doing our
+> >> own
+> >> thing and users having to figure out what matches up between different
+> >> layers? If others feel the same as you, then maybe we should all be
+> >> using that schema.> 
+> > Or we use a codename or we don't.
+> > 
+> > For me, codenames work fine but for users it is sometimes confusing as
+> > the website and marketing people talk about Yocto 1.3 or 1.4 while the
+> > involved people talk about codenames. So I find myself explaining it
+> > over and over again.
+> 
+> Add me to the list of people that find codenames confusing. I can't
+> reliably list releases in order by name.
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- ...k-to-libmaliit-1-0-in-inputcontext-plugin.patch |   23 ++++++++++++++++++++
- .../recipes-support/maliit/maliit-framework_git.bb |   13 +++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch
+FWIW, in the layer index web app against each branch I have a field for a short 
+description (e.g. denzil could have something like "old stable" or whatever is 
+helpful to explain it to people) and a sort order so that they can be sorted 
+correctly where listed. 
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch b/meta-oe/recipes-support/maliit/maliit-framework/0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch
-new file mode 100644
-index 0000000..749ddbe
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-framework/0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch
-@@ -0,0 +1,23 @@
-+From cc33efdedbec9e9a55e9a0c6756516fd84d42e53 Mon Sep 17 00:00:00 2001
-+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+Date: Fri, 1 Mar 2013 11:31:41 +0100
-+Subject: [PATCH] Link to libmaliit-1,0 in inputcontext plugin
-+
-+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-+---
-+ .../input-context-plugin/input-context-plugin.pro  |    2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/input-context/input-context-plugin/input-context-plugin.pro b/input-context/input-context-plugin/input-context-plugin.pro
-+index eefbe93..296e2fa 100644
-+--- a/input-context/input-context-plugin/input-context-plugin.pro
-++++ b/input-context/input-context-plugin/input-context-plugin.pro
-+@@ -15,3 +15,5 @@ CONFIG += plugin
-+ 
-+ INSTALLS    += target
-+ target.path += $$QT_IM_PLUGIN_PATH
-++
-++LIBS += -L../../lib -l"maliit-1.0"
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-index a164e78..11d06aa 100644
---- a/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-+++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-@@ -10,6 +10,7 @@ inherit autotools qt4x11 gtk-immodules-cache
- SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
-     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
-     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
-+    file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
-     "
- 
- SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
-@@ -65,4 +66,16 @@ do_install_append() {
-     sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
- }
- 
-+pkg_postinst_${PN} () {
-+#!/bin/sh
-+#can run online and offline
-+echo "EXPORT QT_IM_MODULE=Maliit" >> $D/etc/profile
-+}
-+
-+pkg_postrm_${PN} () {
-+#!/bin/sh
-+#can run online and offline
-+sed -i "/EXPORT QT_IM_MODULE=Maliit/d" $D/etc/profile
-+}
-+
- S= "${WORKDIR}/git"
+That doesn't take away the need to resolve this issue of branch names across 
+layers, but it may help users to understand what these codenames mean if they 
+continue to be used, at least when they see them in the layer index at least.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
