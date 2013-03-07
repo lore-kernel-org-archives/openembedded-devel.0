@@ -1,38 +1,42 @@
-Received: from mail-pa0-f41.google.com ([209.85.220.41])
+Received: from mail-vc0-f170.google.com ([209.85.220.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UDceN-0000F6-HD
+	(envelope-from <ross.burton@intel.com>) id 1UDco4-0000jf-BK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:22:33 +0100
-Received: by mail-pa0-f41.google.com with SMTP id fb11so531557pad.28
+	Thu, 07 Mar 2013 16:32:34 +0100
+Received: by mail-vc0-f170.google.com with SMTP id p16so327823vcq.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 07:05:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=0QeWLq5HOHxpsfn8ZqiomiDmNWoRsjVm4OvrHZkaWpI=;
-	b=f/kWyf5/R/cg6iwRPL60tuiJI6ngnf2o9/WIiCsedxdiflujKrjCiCGiIcsI4Zholt
-	7VwDlKSclBotfWBgcTirjIcZtN4mWOO0VEbbSctDaR1GiAqk0RzsN9O+bfGuQh/ZZPAG
-	CDptfpOsB/HJqC78yAnHkRvfrPsrKxgWnJSk54etPG02ynf5UU/36y+KiibL2SeteXHQ
-	xA5j18Wuy824ta/3qAz6YOe01VY5FTe/vROIrLd5oV+6D8ZHNzFzm/cnlbVrl7rz3PnQ
-	l2vxA5Yc21GvRt5OKYZ5Rfx2gR5Nt6OvVNOQ3YwkHTa50sM9HADrxAjj7ZAmVwDD/Zl6
-	XShA==
-X-Received: by 10.68.234.100 with SMTP id ud4mr53114479pbc.8.1362668758664;
-	Thu, 07 Mar 2013 07:05:58 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id is1sm1977286pbc.15.2013.03.07.07.05.55
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 07:05:57 -0800 (PST)
-Date: Thu, 7 Mar 2013 16:05:52 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130307150552.GN32228@jama.dyndns-home.com>
-References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
-	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
-	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
+	Thu, 07 Mar 2013 07:15:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=DCt1weWZlpSnaM0RsRBke70erShHLlkpghsIk2EljVk=;
+	b=n1I5Wc3IRkDPF1YZSlba4URC/SOFCoToK0e4AxqWQM4UdLlbes3dwp26n7lWth12Um
+	vsXjnGU+JEChg1fU5VdN3tsT7aHNorjXVt5qATVYl5vzY5himOn8Qpclm7roiHd62sGm
+	PLlN83QNTmLc8oyTx+IKsqObqKCBMX4tkQDVCgbu65xMPJxvZACNjAY0/0hRMe8XPpsK
+	6ptVBJ9qp8ukW3GKAcRdeZzGcgrhuctBCwKXL95VlFGPuBn/FwA4qqEPfBInIZjFn+wE
+	ZkK/RqQ1BOnKkw/AFtIn6sbPMfEBkR5kyLzS5LBN1rb5tIi7AJ0jXs01oiOfI9Vz7YyO
+	+ZEA==
+X-Received: by 10.52.69.74 with SMTP id c10mr11466767vdu.3.1362669359841; Thu,
+	07 Mar 2013 07:15:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
+Received: by 10.58.219.195 with HTTP; Thu, 7 Mar 2013 07:15:39 -0800 (PST)
+In-Reply-To: <CAJTo0LbnE7DjdJL=9=LDA3kpxhAADJONAu-4Xdwohcno__xXcA@mail.gmail.com>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<20130307130435.GI32228@jama.dyndns-home.com>
+	<E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
+	<9088096.rvOOlWx1VE@helios>
+	<CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
+	<5138A92D.5030809@balister.org>
+	<CAJTo0LbnE7DjdJL=9=LDA3kpxhAADJONAu-4Xdwohcno__xXcA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 7 Mar 2013 15:15:39 +0000
+Message-ID: <CAJTo0LbAF+Fm8HTRFQbSCh0YVXYR_rkvwA1oP-4z9QdLo_ayJg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmTOWAKqfmTfvYCxTt9KAGXoEsB4hayp1agpsFl3o7Gc7FIJqIIQBtqKTbuG33EIgzu/oFu
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,62 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:22:48 -0000
-X-Groupsio-MsgNum: 43431
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XLsjFikA86nwwlhe"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Mar 2013 15:32:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
---XLsjFikA86nwwlhe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 7 March 2013 15:05, Burton, Ross <ross.burton@intel.com> wrote:
+> We really need a table on the wiki page listing all of them - I can
+> easily remember the current/previous/next names but after that I don't
+> remember them.
 
-On Thu, Mar 07, 2013 at 01:09:38PM +0100, Samuel Stirtzel wrote:
-> 2013/3/7 Koen Kooi <koen@dominion.thruhere.net>:
-> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> > ---
-> >  README | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/README b/README
-> > index 0635e10..cab1e21 100644
-> > --- a/README
-> > +++ b/README
-> > @@ -10,7 +10,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
-> >  Contributors:
-> >  Copyright 2012 - Kai Kang
-> >  Copyright 2013 - Khem Raj
-> > -Copyright 2012 - Koen Kooi
-> > +Copyright 2012, 2013 - Koen Kooi
-> >  Copyright 2012 - Robert Yang
-> >  Copyright 2011, 2012 - Samuel Stirtzel
-> >
-> > --
-> > 1.8.1.4
-> >
->=20
-> Thanks for your patches,
-> I applied them all.
+JFDI.
 
-Can you update status on:
-http://patches.openembedded.org/bundle/jama/meta-kde/?archive=3Dboth
+https://wiki.yoctoproject.org/wiki/Releases
 
-To keep patchwork clean?
+Only goes back to Poky 4/oe-core 0.9 at the moment, I'll fill in the
+pre-Yocto names later.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Ross
 
---XLsjFikA86nwwlhe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlE4rNAACgkQN1Ujt2V2gBz25ACgs8z39NQSOTGvOtGgno9vWHTq
-MC8AoJD0HgMnJEReCoc+OFaHBugwzjSA
-=u8jl
------END PGP SIGNATURE-----
-
---XLsjFikA86nwwlhe--
