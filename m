@@ -1,37 +1,25 @@
-Received: from mail-pb0-f46.google.com ([209.85.160.46])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UDdaH-0003d5-E9
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDfhy-0008BJ-KH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 17:22:22 +0100
-Received: by mail-pb0-f46.google.com with SMTP id uo15so469347pbc.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 08:05:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yedkDGSZGh61Y3ctV8M35OUFxXVk0STA/2g1SX2pSdY=;
-	b=G/HFSmwHco62EK+iGVRIZOdqo3MoJ9asULnYoz91ch8TzIvwgUaSPLQOfVoJmzj6Jt
-	ymZByZWvODurB5XWg2CcMqaaE9SJLFdChkv/iFKRTGPIECxVjwMf3u74pEV6jr2zIeDF
-	U14fbfPgU+tg9ElMcUIslutcB7HC/mbSwyCcf+1x+zgyd+4i0WVkYqTPKA/m/S4II0A8
-	lEzSKZv1X+QlgtTDryIezAah7jc0Ypufeb41YRHoUitspYBd4jZvyJz3MqN+w9aI2g/K
-	IER+ufF62Qr1AMLSZoy03j3yx0+xMjp1fDZ9hiP74SqFlQ3ZbmrZ/n4LLPvDwG+A3pkP
-	Uzyg==
-X-Received: by 10.68.136.138 with SMTP id qa10mr26219865pbb.20.1362672348363; 
-	Thu, 07 Mar 2013 08:05:48 -0800 (PST)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id in5sm2132768pbc.20.2013.03.07.08.05.45
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 08:05:46 -0800 (PST)
-Date: Thu, 7 Mar 2013 17:05:42 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Amy Fong <amy.fong@windriver.com>
-Message-ID: <20130307160542.GR32228@jama.dyndns-home.com>
-References: <20130213190804.GA11672@windriver.com>
+	Thu, 07 Mar 2013 19:38:28 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Mar 2013 10:21:53 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="296997561"
+Received: from unknown (HELO helios.localnet) ([10.255.12.181])
+	by fmsmga001.fm.intel.com with ESMTP; 07 Mar 2013 10:21:52 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Thu, 07 Mar 2013 18:21:51 +0000
+Message-ID: <7880415.lJ2VTqbKKs@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <1362251176-26068-1-git-send-email-andrea.adami@gmail.com>
+References: <1362251176-26068-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130213190804.GA11672@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH][meta-selinux] policycoreutils dependency issues
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] linux-yocto-tiny-kexecboot_3.2: set CONFIG_CRAMFS=y for Zaurus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,88 +33,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 16:22:23 -0000
-X-Groupsio-MsgNum: 43445
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3gk1bTGVZuaU9V5/"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Mar 2013 18:38:30 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---3gk1bTGVZuaU9V5/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Saturday 02 March 2013 20:06:16 Andrea Adami wrote:
+> * note: only collie is using cramfs as factory default
+> 
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot.cfg      | 2
+> +- .../linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.cfg       
+> | 2 +- .../linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg
+>    | 2 +-
+> .../linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecboot.cfg    | 2
+> +- .../linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot.cfg     
+> | 2 +- .../linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.cfg    
+>    | 2 +- 6 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
+> .cfg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
+> .cfg index 82bb479..84523d7 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
+> .cfg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
+> .cfg @@ -1417,7 +1417,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
+> fg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
+> fg index 0ef169b..0265150 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
+> fg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
+> fg @@ -1411,7 +1411,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
+> ot.cfg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
+> ot.cfg index e01ceae..ba5334d 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
+> ot.cfg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
+> ot.cfg @@ -1315,7 +1315,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
+> ot.cfg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
+> ot.cfg index 04e53bd..5acf22c 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
+> ot.cfg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
+> ot.cfg @@ -1319,7 +1319,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
+> .cfg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
+> .cfg index 338209d..2e864c0 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
+> .cfg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
+> .cfg @@ -1416,7 +1416,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
+> fg
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
+> fg index 855d70b..e055f5b 100644
+> ---
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
+> fg +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
+> fg @@ -1320,7 +1320,7 @@ CONFIG_UBIFS_FS_LZO=y
+>  CONFIG_UBIFS_FS_ZLIB=y
+>  # CONFIG_UBIFS_FS_DEBUG is not set
+>  # CONFIG_LOGFS is not set
+> -# CONFIG_CRAMFS is not set
+> +CONFIG_CRAMFS=y
+>  # CONFIG_SQUASHFS is not set
+>  # CONFIG_VXFS_FS is not set
+>  # CONFIG_MINIX_FS is not set
 
-On Wed, Feb 13, 2013 at 02:08:04PM -0500, Amy Fong wrote:
-> policyutilutils: needs some dependencies unconditionally
->=20
-> policycoreutils will fail to compile if selinux isn't in the DISTROFEATUR=
-ES.
-> We move these packages out of @target_selinux.
->=20
-> Signed-off-by: Amy Fong <amy.fong@windriver.com>
+Applied, thanks.
 
-Where is this meta-selinux layer?
+Cheers,
+Paul
 
-I don't see it on
-http://www.openembedded.org/wiki/LayerIndex
+-- 
 
-or policycoreutils.inc file in meta-oe repo or any layer I've checkouted
-here.
-
-Was this meant for openembedded-devel@lists.openembedded.org?
-
-And BTW: use better syntax for PRINC to allow multiple .bbappends.. hmm
-well you're having PRINC in .inc.. interesting.
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
-> --
->=20
->  policycoreutils.inc |    5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-security/selinux/policycoreutils.inc b/recipes-secur=
-ity/selinux/policycoreutils.inc
-> index cc54b36..9869a83 100644
-> --- a/recipes-security/selinux/policycoreutils.inc
-> +++ b/recipes-security/selinux/policycoreutils.inc
-> @@ -1,4 +1,4 @@
-> -PRINC =3D "2"
-> +PRINC =3D "3"
-> =20
->  SUMMARY =3D "SELinux policy core utilities"
->  DESCRIPTION =3D "policycoreutils contains the policy core utilities that=
- are required \
-> @@ -16,9 +16,10 @@ PAM_SRC_URI =3D "file://pam.d/newrole \
->                "
-> =20
->  DEPENDS +=3D "libsepol libselinux libsemanage"
-> +DEPENDS +=3D "libcap-ng libcgroup libpam"
-> =20
->  inherit selinux
-> -DEPENDS +=3D "${@target_selinux(d, 'libcap-ng libcgroup libpam audit')}"
-> +DEPENDS +=3D "${@target_selinux(d, 'audit')}"
-> =20
->  RDEPENDS_${BPN} +=3D "\
->  	libselinux-python \
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3gk1bTGVZuaU9V5/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlE4utYACgkQN1Ujt2V2gBx3mwCffyMN+niNqQciy278IXYwmqXy
-b9UAn14gk7OnSXX9K110iiBz3m84qgk9
-=JwOW
------END PGP SIGNATURE-----
-
---3gk1bTGVZuaU9V5/--
