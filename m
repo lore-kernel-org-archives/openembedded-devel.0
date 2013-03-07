@@ -1,36 +1,38 @@
-Received: from mail-ee0-f54.google.com ([74.125.83.54])
+Received: from mail-ea0-f182.google.com ([209.85.215.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UDZWS-00019t-9J
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UDZWT-00019v-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 13:02:08 +0100
-Received: by mail-ee0-f54.google.com with SMTP id c41so228026eek.13
+	Thu, 07 Mar 2013 13:02:10 +0100
+Received: by mail-ea0-f182.google.com with SMTP id a12so1466859eaa.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 03:45:36 -0800 (PST)
+	Thu, 07 Mar 2013 03:45:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=qxxIRNlE5qIuiVgXYy7SFwiVsTb7sXdQF0Vi1LtsRsw=;
-	b=ZGA/56cClHj3Ce4cJJtDvSuEPqb3QFLKJyi1jAnAaMIQXJH04oT/btcEpV9i2bBBji
-	0bjOWqxCteDSwdPikX5x53Mn1LRzAd8sYdbWS4Nr6WTxPLsGH+D266m2CKuaVJXKr7Y6
-	k4D+Foi8d/qi+ymrPsWcxIP7uzdKefj7sK7ba9+4S321Bbr8ccCvejDLu2ugCLb6YDKm
-	Lh6FOnMR4Bm8DOz1vJtZDwfzKrxhVsjxANwtj7+aGuwH0zTveU/RTkNYVIJpftvhuv7E
-	HaCm9WWTlrvUwngI3M0HrJTfKZ5HafK3k/kV+RjiP5JoaLlnpS58vumw9EJcY93xq4pq
-	hPMg==
-X-Received: by 10.14.193.134 with SMTP id k6mr3180702een.37.1362656736330;
-	Thu, 07 Mar 2013 03:45:36 -0800 (PST)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=ivFor3FLkxWhkl1aoPD44Iep1ei1oNCAqM+ATWv6AsI=;
+	b=FicjcTMNfzPT4lk+A7T8U01X7h/m8vxENxmr9gsXAJdlgyxany7McPutDnDUh1Ss7k
+	wqwe950C/KbVQOp8ZGuhA7sDa++sFeDMkxd22PXavjUd6gLO5souYQnWsToztNvG/CpC
+	PmdKiHe9k0Dk9FT0G7kUgZiNMoUhZf+8FhnWrOF1/+5R7PfdKlawx4iUWvQwK3DuP9H/
+	Jc1cEEZ6zyyZ/zoug7lYur4gy/Ar+VVXGcJCWBissADY/lf0CZYysokAmcIhbbzfYgH4
+	/ULN1qMkQED7GCK28zLoXgTxr5jVXyEKxTjAnheBeU1WQNBQ43VbZDfrwiXnL9f84+Vn
+	t1jg==
+X-Received: by 10.14.173.196 with SMTP id v44mr92134282eel.29.1362656737638;
+	Thu, 07 Mar 2013 03:45:37 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-251-141.unitymediagroup.de.
 	[95.223.251.141])
-	by mx.google.com with ESMTPS id q42sm1778870eem.14.2013.03.07.03.45.34
+	by mx.google.com with ESMTPS id q42sm1778870eem.14.2013.03.07.03.45.36
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 03:45:35 -0800 (PST)
+	Thu, 07 Mar 2013 03:45:36 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 12:43:29 +0100
-Message-Id: <1362656613-10357-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  7 Mar 2013 12:43:30 +0100
+Message-Id: <1362656613-10357-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1362656613-10357-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1362656613-10357-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-xfce/meta-gnome 0/4] updates/bugfix-world
+Subject: [meta-oe/meta-xfce/meta-gnome 1/4] midori: update to 0.4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,38 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 12:02:08 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 12:02:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit 230e2171d07815f51d5b6d044627afa0ff13c5d4:
+the following issues caused similarity index decreasing:
 
-  gpsd: fix udev rules file (2013-03-06 06:05:35 +0100)
+| waf: error: no such option: --disable-hildon
 
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
+| Checking for Python			:  /usr/bin/python2
 
-Andreas Müller (4):
-      midori: update to 0.4.8
-      geany: fix build on perl-less machines
-      xfce4-eyes-plugin: update to 4.4.2
-      xfce4-vala: initial add 4.10.2
+| Checking for zeitgeist-1.0 >= 0.3.14        : Package zeitgeist-1.0 was not found in the pkg-config search path.
+| Perhaps you should add the directory containing `zeitgeist-1.0.pc'
 
- .../midori/{midori_0.4.7.bb => midori_0.4.8.bb}    |    8 +-
- meta-oe/recipes-devtools/geany/geany_1.22.bb       |    4 +-
- .../vala/files/0001-align-vapi-dir.patch           |   39 +++++++++++
- .../recipes-bindings/vala/xfce4-vala_4.10.2.bb     |   17 +++++
- .../eyes/files/port-to-libxfce4ui.patch            |   68 --------------------
- .../eyes/xfce4-eyes-plugin_4.4.1.bb                |   13 ----
- .../eyes/xfce4-eyes-plugin_4.4.2.bb                |   11 +++
- 7 files changed, 73 insertions(+), 87 deletions(-)
+Run tests showed artifacts with google maps. Theses showed up with previous
+version of midori and current version of firefox too. So they seem
+independent of this update.
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../midori/{midori_0.4.7.bb => midori_0.4.8.bb}    |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
  rename meta-gnome/recipes-connectivity/midori/{midori_0.4.7.bb => midori_0.4.8.bb} (84%)
- create mode 100644 meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch
- create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb
- delete mode 100644 meta-xfce/recipes-panel-plugins/eyes/files/port-to-libxfce4ui.patch
- delete mode 100644 meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.1.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.2.bb
 
+diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb b/meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
+similarity index 84%
+rename from meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
+rename to meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
+index 8521e47..266df4f 100644
+--- a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
++++ b/meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
+@@ -6,10 +6,10 @@ DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native l
+ 
+ SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
+           "
+-SRC_URI[midori.md5sum] = "06db7b88a41e9b2265728960d5e98f35"
+-SRC_URI[midori.sha256sum] = "65bf9976733597c405492ce91aa664fd10547cb7df16e0a70f260c7a3e97ea5d"
++SRC_URI[midori.md5sum] = "ce1b01fa5aa33d2ee50196df0c71e96f"
++SRC_URI[midori.sha256sum] = "40bf23f84a3537f54d7eb45df1da40ebef54c321b1b34d0d0c8e45bb0cce5e9f"
+ 
+-inherit gtk-icon-cache pkgconfig vala
++inherit gtk-icon-cache pkgconfig vala pythonnative
+ 
+ do_configure() {
+     sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
+@@ -26,8 +26,8 @@ do_configure() {
+             --includedir=${includedir} \
+             --infodir=${infodir} \
+             --mandir=${mandir} \
+-            --disable-hildon \
+             --disable-gtk3 \
++            --disable-zeitgeist \
+ }
+ 
+ PARALLEL_MAKE = ""
 -- 
 1.7.6.5
 
