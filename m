@@ -1,39 +1,34 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-oa0-f46.google.com ([209.85.219.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1UDcwU-0001JM-Ce for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:41:19 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r27FWY9n030038; Thu, 7 Mar 2013 15:32:35 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 9NG3aHuWAeeS; Thu,  7 Mar 2013 15:32:34 +0000 (GMT)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r27FWQe3030027
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Thu, 7 Mar 2013 15:32:29 GMT
-Message-ID: <1362669856.9443.93.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 07 Mar 2013 15:24:16 +0000
-In-Reply-To: <634E44A3-E471-472A-8DAD-AF8BAA316CC4@dominion.thruhere.net>
-References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
-	<20130307130435.GI32228@jama.dyndns-home.com>
-	<E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
-	<9088096.rvOOlWx1VE@helios>
-	<CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
-	<5138A92D.5030809@balister.org>
-	<CAJTo0LbnE7DjdJL=9=LDA3kpxhAADJONAu-4Xdwohcno__xXcA@mail.gmail.com>
-	<CAJTo0LbAF+Fm8HTRFQbSCh0YVXYR_rkvwA1oP-4z9QdLo_ayJg@mail.gmail.com>
-	<634E44A3-E471-472A-8DAD-AF8BAA316CC4@dominion.thruhere.net>
-X-Mailer: Evolution 3.6.3-1 
-Mime-Version: 1.0
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
+	(envelope-from <s.stirtzel@googlemail.com>) id 1UDcx2-0001LF-QT
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Mar 2013 16:41:52 +0100
+Received: by mail-oa0-f46.google.com with SMTP id k1so710108oag.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2013 07:25:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=EYrF+1dSPR75GP3ilAMKI1zGPjO6zKcyX980eGnJAkc=;
+	b=IAhau2F2hCrfUkXbFTlBkehJW0ApMoZmkEocOxstlUZm3+WzoDkW524+7OJnAlcdUE
+	Q3HU1F44LWZv9CMA4ctOnscujd5yJf8pEuseCurDnuxzxbVNdQd8wVYbMRJ7+D0dBIz6
+	HNMiq9QzX45Y/csDYUU15wHQ685N2p9sHKAaQIpWR+w74Zl61gyalRimaAEdp10gm+XT
+	JAgF7zdgPo2YnvjA19BTkmruPgNSxGBrF30rKA6CQWAk72S7Brv1nb2POHY8WUyWbY5a
+	FMQ9VqikwcUSxiBqYfeb47v+jG9wRbOZ71Yjrenbhody0fGzmTpSS8+pc5PrxfxzBk+d
+	yGvQ==
+MIME-Version: 1.0
+X-Received: by 10.60.169.212 with SMTP id ag20mr25775090oec.102.1362669916191; 
+	Thu, 07 Mar 2013 07:25:16 -0800 (PST)
+Received: by 10.60.76.199 with HTTP; Thu, 7 Mar 2013 07:25:16 -0800 (PST)
+In-Reply-To: <20130307152058.GO32228@jama.dyndns-home.com>
+References: <1362668200-16189-1-git-send-email-s.stirtzel@googlemail.com>
+	<20130307152058.GO32228@jama.dyndns-home.com>
+Date: Thu, 7 Mar 2013 16:25:16 +0100
+Message-ID: <CAGiJk9eUFuV_rMBPDwNLg2F2CN1VxAUAmiAF0BOmXHtxM+8mQQ@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] maliit-framework: fix for Qt based applications
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:41:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Mar 2013 15:41:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 2013-03-07 at 16:18 +0100, Koen Kooi wrote:
-> Op 7 mrt. 2013, om 16:15 heeft "Burton, Ross" <ross.burton@intel.com> het volgende geschreven:
-> 
-> > On 7 March 2013 15:05, Burton, Ross <ross.burton@intel.com> wrote:
-> >> We really need a table on the wiki page listing all of them - I can
-> >> easily remember the current/previous/next names but after that I don't
-> >> remember them.
-> > 
-> > JFDI.
-> > 
-> > https://wiki.yoctoproject.org/wiki/Releases
-> > 
-> > Only goes back to Poky 4/oe-core 0.9 at the moment, I'll fill in the
-> > pre-Yocto names later.
-> 
-> I asked this earlier in jest, but it requires a real response in this day and age:
-> 
-> 	Are those yocto project releases or poky releases?
-> 
-> I get the feeling the codenames are only for poky releases, so I
-> strongly prefer using the numbers releases in branch names.
+2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
+> On Thu, Mar 07, 2013 at 03:56:39PM +0100, Samuel Stirtzel wrote:
+>> +pkg_postinst_${PN} () {
+>> +#!/bin/sh
+>> +#can run online and offline
+>> +echo "EXPORT QT_IM_MODULE=Maliit" >> ${D}/etc/profile
+>
+> IIRC this needs to be $D
+> otherwise it's expanded by bitbake and you get path to your ${D} on
+> target.
+>
+> Same for postrm
+>
 
-They're stable release series codenames use by the Yocto Project,
-OpenEmbedded Core, Poky and anyone else who wishes to.
+Yes you are right, V2 is coming.
 
-Cheers,
 
-Richard
-
+-- 
+Regards
+Samuel
 
 
