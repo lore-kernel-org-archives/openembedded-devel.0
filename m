@@ -1,38 +1,38 @@
 Received: from mail-ea0-f182.google.com ([209.85.215.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UDZWT-00019v-Gs
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UDZWX-0001AL-AF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 13:02:10 +0100
-Received: by mail-ea0-f182.google.com with SMTP id a12so1466859eaa.27
+	Thu, 07 Mar 2013 13:02:15 +0100
+Received: by mail-ea0-f182.google.com with SMTP id a12so1466880eaa.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 03:45:37 -0800 (PST)
+	Thu, 07 Mar 2013 03:45:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=ivFor3FLkxWhkl1aoPD44Iep1ei1oNCAqM+ATWv6AsI=;
-	b=FicjcTMNfzPT4lk+A7T8U01X7h/m8vxENxmr9gsXAJdlgyxany7McPutDnDUh1Ss7k
-	wqwe950C/KbVQOp8ZGuhA7sDa++sFeDMkxd22PXavjUd6gLO5souYQnWsToztNvG/CpC
-	PmdKiHe9k0Dk9FT0G7kUgZiNMoUhZf+8FhnWrOF1/+5R7PfdKlawx4iUWvQwK3DuP9H/
-	Jc1cEEZ6zyyZ/zoug7lYur4gy/Ar+VVXGcJCWBissADY/lf0CZYysokAmcIhbbzfYgH4
-	/ULN1qMkQED7GCK28zLoXgTxr5jVXyEKxTjAnheBeU1WQNBQ43VbZDfrwiXnL9f84+Vn
-	t1jg==
-X-Received: by 10.14.173.196 with SMTP id v44mr92134282eel.29.1362656737638;
-	Thu, 07 Mar 2013 03:45:37 -0800 (PST)
+	bh=1NHy4E9dNoZiBjXJ4F0WZhh5f3RNL0tKExKA7a2Qew4=;
+	b=QFRgpY7r/eoWmedtUsJ0U4b7QJKNdUFmnoN0XbeBomL7KS7H+royh+WjDfcWlP4D5m
+	9QviyIEIr4R6z5C9PiDQP7xkKRb6OWTx3aIkiBcNQUpwvZb7UD4GKMj/zryRG3elVkgJ
+	JoAbyZhB0GRLDqWeDRnCR5m1Iowq/6SadK4cVyW4vQSfZbXlVugW14QGFgBXs+Siq+/t
+	ISumQzTYMxZOY0IKTR4qRioWiIRAaWuexpgEykN2ZuMoqgqaR9LivbCNtSUshK44xjLP
+	/1wTRb2Ad9CSt3HMixd64NVI4aD9Rc0PofI0N7qB0iYtKS2JwCLRYWcDsbmGEFQ+wf27
+	P6Zw==
+X-Received: by 10.14.210.8 with SMTP id t8mr5719094eeo.35.1362656741554;
+	Thu, 07 Mar 2013 03:45:41 -0800 (PST)
 Received: from localhost.localdomain (ip-95-223-251-141.unitymediagroup.de.
 	[95.223.251.141])
-	by mx.google.com with ESMTPS id q42sm1778870eem.14.2013.03.07.03.45.36
+	by mx.google.com with ESMTPS id q42sm1778870eem.14.2013.03.07.03.45.40
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 03:45:36 -0800 (PST)
+	Thu, 07 Mar 2013 03:45:40 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 12:43:30 +0100
-Message-Id: <1362656613-10357-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  7 Mar 2013 12:43:33 +0100
+Message-Id: <1362656613-10357-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1362656613-10357-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1362656613-10357-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-xfce/meta-gnome 1/4] midori: update to 0.4.8
+Subject: [meta-oe/meta-xfce/meta-gnome 4/4] xfce4-vala: initial add 4.10.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,60 +46,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 12:02:10 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 12:02:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-the following issues caused similarity index decreasing:
-
-| waf: error: no such option: --disable-hildon
-
-| Checking for Python			:  /usr/bin/python2
-
-| Checking for zeitgeist-1.0 >= 0.3.14        : Package zeitgeist-1.0 was not found in the pkg-config search path.
-| Perhaps you should add the directory containing `zeitgeist-1.0.pc'
-
-Run tests showed artifacts with google maps. Theses showed up with previous
-version of midori and current version of firefox too. So they seem
-independent of this update.
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../midori/{midori_0.4.7.bb => midori_0.4.8.bb}    |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-connectivity/midori/{midori_0.4.7.bb => midori_0.4.8.bb} (84%)
+ .../vala/files/0001-align-vapi-dir.patch           |   39 ++++++++++++++++++++
+ .../recipes-bindings/vala/xfce4-vala_4.10.2.bb     |   17 +++++++++
+ 2 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch
+ create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb
 
-diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb b/meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
-similarity index 84%
-rename from meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-rename to meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
-index 8521e47..266df4f 100644
---- a/meta-gnome/recipes-connectivity/midori/midori_0.4.7.bb
-+++ b/meta-gnome/recipes-connectivity/midori/midori_0.4.8.bb
-@@ -6,10 +6,10 @@ DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native l
- 
- SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
-           "
--SRC_URI[midori.md5sum] = "06db7b88a41e9b2265728960d5e98f35"
--SRC_URI[midori.sha256sum] = "65bf9976733597c405492ce91aa664fd10547cb7df16e0a70f260c7a3e97ea5d"
-+SRC_URI[midori.md5sum] = "ce1b01fa5aa33d2ee50196df0c71e96f"
-+SRC_URI[midori.sha256sum] = "40bf23f84a3537f54d7eb45df1da40ebef54c321b1b34d0d0c8e45bb0cce5e9f"
- 
--inherit gtk-icon-cache pkgconfig vala
-+inherit gtk-icon-cache pkgconfig vala pythonnative
- 
- do_configure() {
-     sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
-@@ -26,8 +26,8 @@ do_configure() {
-             --includedir=${includedir} \
-             --infodir=${infodir} \
-             --mandir=${mandir} \
--            --disable-hildon \
-             --disable-gtk3 \
-+            --disable-zeitgeist \
- }
- 
- PARALLEL_MAKE = ""
+diff --git a/meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch b/meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch
+new file mode 100644
+index 0000000..33c6ed3
+--- /dev/null
++++ b/meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch
+@@ -0,0 +1,39 @@
++From 9ac15a092c50bb95973d1d81200af031109ad377 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Sun, 3 Feb 2013 23:31:50 +0100
++Subject: [PATCH 1/2] align vapi dir
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++
++Upstream-Status: : Inappropriate [configuration]
++---
++ configure.ac |   10 ++--------
++ 1 files changed, 2 insertions(+), 8 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 1692ce9..f43f904 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -35,14 +35,8 @@ M8T_CHECK_PACKAGE([EXO], [exo-1], [0.8.0])
++ 
++ dnl Check for Vala
++ M8T_CHECK_VALA([0.16.0])
++-AC_ARG_WITH([default-vapidir],
++-		AC_HELP_STRING([--with-default-vapidir],
++-				[Use default VAPI prefix from Vala installation]),
++-		[],
++-		[with_default_vapidir=no])
++-if test x"$with_default_vapidir" == xno ; then
++-	AC_SUBST([vapidir], [${datarootdir}/vala-0.16/vapi])
++-fi
+++
+++AC_SUBST([vapidir], [${datarootdir}/vala/vapi])
++ 
++ dnl Makefile outputs
++ AC_OUTPUT([
++-- 
++1.7.4.4
++
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb
+new file mode 100644
+index 0000000..152335a
+--- /dev/null
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Xfce4 Vala provides bindings for the Xfce framework"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
++DEPENDS = "libxfce4util garcon xfconf libxfce4ui xfce4-panel exo vala xfce4-dev-tools-native"
++
++inherit xfce
++
++SRC_URI = " \
++    http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
++    file://0001-align-vapi-dir.patch \
++"
++SRC_URI[md5sum] = "afcca7cb5ae84b9a9a621a352eaf59c4"
++SRC_URI[sha256sum] = "7d9ee9f7f4ce88f3ebc1bd465bad1cd813fa5d268be62fc8d313cbec5345a978"
++
++FILES_${PN} += "${datadir}/vala"
++
++RDEPENDS_${PN} = "vala"
 -- 
 1.7.6.5
 
