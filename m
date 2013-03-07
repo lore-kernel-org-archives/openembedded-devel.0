@@ -1,29 +1,26 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDdCe-0002Ci-DV
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDdLg-0002uq-Ro
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 16:57:57 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 07 Mar 2013 07:39:54 -0800
+	Thu, 07 Mar 2013 17:07:19 +0100
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 07 Mar 2013 07:50:41 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="295869570"
+X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="210522131"
 Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by orsmga002.jf.intel.com with ESMTP; 07 Mar 2013 07:41:09 -0800
+	by AZSMGA002.ch.intel.com with ESMTP; 07 Mar 2013 07:50:40 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 07 Mar 2013 15:41:08 +0000
-Message-ID: <1820544.NMbf1lmvlI@helios>
+To: Mark Hatle <mark.hatle@windriver.com>
+Date: Thu, 07 Mar 2013 15:50:39 +0000
+Message-ID: <2953155.d53ADznyZ4@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <5138A92D.5030809@balister.org>
-References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
-	<CAP9ODKp1bpin38S3QHaR1s47B9gSxmoMUckWY=NpS_FtB0rVYg@mail.gmail.com>
-	<5138A92D.5030809@balister.org>
+In-Reply-To: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
+References: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
 MIME-Version: 1.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
+Cc: openembedded-devel@lists.openembedded.org,
+	Pradeep Tumati <pradeep.tumati@windriver.com>
+Subject: Re: [PATCH meta-webserver] apache2: correct header file location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +34,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 15:58:09 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 16:07:21 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Thursday 07 March 2013 09:50:21 Philip Balister wrote:
-> On 03/07/2013 09:41 AM, Otavio Salvador wrote:
-> > On Thu, Mar 7, 2013 at 11:35 AM, Paul Eggleton
-> > 
-> > <paul.eggleton@linux.intel.com> wrote:
-> >> On Thursday 07 March 2013 15:03:17 Koen Kooi wrote:
-> >>> Op 7 mrt. 2013, om 14:04 heeft Martin Jansa <martin.jansa@gmail.com> het
-> >>> 
-> >>> volgende geschreven:
-> >>>> It would be nice to know yocto-1.4 release name in advance and name it
-> >>>> the same as branch in oe-core/meta-oe will be (denzil, danny, ...), but
-> >>>> I guess it can be renamed later.
-> >>> 
-> >>> For angstrom I'm going to use 'yocto-1.4' in the branch name, I have
-> >>> trouble remembering which names maps to which release. And the Yocto
-> >>> compliance program talks about 1.3, .14 etc, not about codenames.
-> >> 
-> >> Wouldn't it be worth us trying to standardise rather than all doing our
-> >> own
-> >> thing and users having to figure out what matches up between different
-> >> layers? If others feel the same as you, then maybe we should all be
-> >> using that schema.> 
-> > Or we use a codename or we don't.
-> > 
-> > For me, codenames work fine but for users it is sometimes confusing as
-> > the website and marketing people talk about Yocto 1.3 or 1.4 while the
-> > involved people talk about codenames. So I find myself explaining it
-> > over and over again.
+On Tuesday 19 February 2013 21:09:34 Mark Hatle wrote:
+> From: Pradeep Tumati <pradeep.tumati@windriver.com>
 > 
-> Add me to the list of people that find codenames confusing. I can't
-> reliably list releases in order by name.
+> Apache header files are being placed in ../usr/include/lib32-apache2
+> under the sysroot where as lib32-modphp looks for ../usr/include/apache2
+> directory. This fix ensures that apache2 header files are placed
+> in the ../usr/include/apache2/ directory.
+> 
+> Signed-off-by: Pradeep Tumati <pradeep.tumati@windriver.com>
+> Signed-off-by: Jeff Polk <jeff.polk@windriver.com>
+> ---
+>  recipes-httpd/apache2/apache2_2.4.2.bb | 32
+> ++++++++++++++++---------------- 1 file changed, 16 insertions(+), 16
+> deletions(-)
+> 
+> diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb
+> b/recipes-httpd/apache2/apache2_2.4.2.bb index af7840d..af8c4ca 100644
+> --- a/recipes-httpd/apache2/apache2_2.4.2.bb
+> +++ b/recipes-httpd/apache2/apache2_2.4.2.bb
+> @@ -41,13 +41,13 @@ EXTRA_OECONF = "--enable-ssl \
+>  		--enable-rewrite \
+>  		--with-dbm=sdbm \
+>  		--with-berkeley-db=no \
+> -		--localstatedir=/var/${PN} \
+> +		--localstatedir=/var/${BPN} \
+>  		--with-gdbm=no \
+>  		--with-ndbm=no \
+> -		--includedir=${includedir}/${PN} \
+> -		--datadir=${datadir}/${PN} \
+> -		--sysconfdir=${sysconfdir}/${PN} \
+> -                --libexecdir=${libdir}/${PN}/modules \
+> +		--includedir=${includedir}/${BPN} \
+> +		--datadir=${datadir}/${BPN} \
+> +		--sysconfdir=${sysconfdir}/${BPN} \
+> +                --libexecdir=${libdir}/${BPN}/modules \
+>  		ap_cv_void_ptr_lt_long=no \
+>  		--enable-mpms-shared \
+>  		ac_cv_have_threadsafe_pollset=no"
+> @@ -68,19 +68,19 @@ do_install_append() {
+>  		    -e 's,/usr/bin/,${bindir}/,g' \
+>  		    -e 's,/usr/lib,${libdir}/,g' \
+>  		    -e 's,/etc/,${sysconfdir}/,g' \
+> -		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
+> -	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
+> +		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${BPN}
+> +	chmod 755 ${D}/${sysconfdir}/init.d/${BPN}
+>  	# remove the goofy original files...
+> -	rm -rf ${D}/${sysconfdir}/${PN}/original
+> +	rm -rf ${D}/${sysconfdir}/${BPN}/original
+>  	# Expat should be found in the staging area via DEPENDS...
+>  	rm -f ${D}/${libdir}/libexpat.*
+> 
+> -	install -d ${D}${sysconfdir}/${PN}/conf.d
+> -	install -d ${D}${sysconfdir}/${PN}/modules.d
+> +	install -d ${D}${sysconfdir}/${BPN}/conf.d
+> +	install -d ${D}${sysconfdir}/${BPN}/modules.d
+> 
+>  	# Ensure configuration file pulls in conf.d and modules.d
+> -	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >>
+> ${D}/${sysconfdir}/${PN}/httpd.conf -	printf "\nIncludeOptional
+> ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >>
+> ${D}/${sysconfdir}/${PN}/httpd.conf +	printf "\nIncludeOptional
+> ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+> +	printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >>
+> ${D}/${sysconfdir}/${BPN}/httpd.conf }
+> 
+>  SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+> @@ -88,12 +88,12 @@ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+>  apache_sysroot_preprocess () {
+>  	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+>  	install -m 755 ${D}${bindir}/apxs
+> ${SYSROOT_DESTDIR}${bindir_crossscripts}/ -	sed -i 's!my $installbuilddir 
+=
+> .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!'
+> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs +	sed -i 's!my
+> $installbuilddir = .*!my $installbuilddir =
+> "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!'
+> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs sed -i 's!my $libtool = .*!my
+> $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!'
+> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+> 
+> -	sed -i 's!^APR_CONFIG = .*!APR_CONFIG =
+> ${STAGING_BINDIR_CROSS}/apr-1-config!'
+> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
+> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!'
+> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
+> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
+> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk +	sed -i
+> 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!'
+> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
+> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!'
+> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
+> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
+> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk }
+> 
+>  #
 
-FWIW, in the layer index web app against each branch I have a field for a short 
-description (e.g. denzil could have something like "old stable" or whatever is 
-helpful to explain it to people) and a sort order so that they can be sorted 
-correctly where listed. 
+Like the last patch this is not actually against meta-webserver master, and 
+like the last patch I was about to rebase and apply it on top, and again I 
+notice that there are ${PN} references that haven't been changed but appear to 
+need to be - the ones I can see are in the FILES_ values e.g.
 
-That doesn't take away the need to resolve this issue of branch names across 
-layers, but it may help users to understand what these codenames mean if they 
-continue to be used, at least when they see them in the layer index at least.
+FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
+
+To match up with the paths we're specifying in EXTRA_OECONF this would need to 
+be changed to:
+
+FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+
+Surely this sort of thing should be showing up in testing?
 
 Cheers,
 Paul
