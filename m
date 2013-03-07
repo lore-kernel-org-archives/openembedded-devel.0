@@ -1,25 +1,34 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-ye0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDfig-0008Ex-E2
+	(envelope-from <mario.goulart@gmail.com>) id 1UDfve-0000Ez-E4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 19:39:12 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 07 Mar 2013 10:21:08 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="273341091"
-Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by orsmga001.jf.intel.com with ESMTP; 07 Mar 2013 10:22:35 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andrea Adami <andrea.adami@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Thu, 07 Mar 2013 18:22:34 +0000
-Message-ID: <2100081.jDaUQoK5uN@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
-References: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-handheld][PATCH] linux-yocto(-tiny-kexecboot)_3.2: Zaurus collie MTD fixes
+	Thu, 07 Mar 2013 19:52:37 +0100
+Received: by mail-ye0-f175.google.com with SMTP id j12so117201yeg.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2013 10:36:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=UKwQs2rrsJ8qfeW+JJpLWFldpxaelBjvyOV3UScozTw=;
+	b=UyQHly66iTdjq9ekp1W108ljAgfxD4Kp8sNtIfoX2taGtQRNNDmddVvUiQwZhDx2DL
+	+cu64z+iJt/tzu3mei/QSc2eKMAs35kDrlZGsQvvU4xVCI4Ln6t0QcXKd9UW/W49BHnm
+	iCQJWBetgkeweWDlHfGNuPbFN32Q8ZvSLdlIzQ+ahFQJfjpIpp2bjRC66UasRdLZunrO
+	RrUY7SB+1KtiZF8H+B0D7tDeadEQQBVbYjZZd/SKv6NuVfhEAeHdjevjNqV6qeitnXes
+	bijJrgMwKHJgLvZAPR4FegBOBdn0TVvaHZnigD6y0Ok0SPR96Yl2tirE4aZKAhQUpMxV
+	TtoQ==
+X-Received: by 10.236.179.37 with SMTP id g25mr25035303yhm.47.1362681361605;
+	Thu, 07 Mar 2013 10:36:01 -0800 (PST)
+Received: from localhost.localdomain ([187.23.144.59])
+	by mx.google.com with ESMTPS id v43sm3351276yhm.11.2013.03.07.10.35.58
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 10:36:00 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2013 15:35:43 -0300
+Message-Id: <1362681343-430-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] libdvdread: update to version 4.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,280 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 18:39:12 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 07 Mar 2013 18:52:40 -0000
 
-On Friday 01 March 2013 00:57:51 Andrea Adami wrote:
-> * experimental patches to fix mtd partitions detection
-> * kexecboot now finds cramfs
-> * mount of orig. cramfs partition tested for fun :)
-> * collie's NOR is still READ-ONLY on boot
-> *
-> * while there, add a patch to mcp.h to fix
-> * collie_battery.c compilation
-> 
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  .../linux/linux-yocto-3.2/collie/collie-eraseinfo.patch     | 11
-> +++++++++++ .../linux/linux-yocto-3.2/collie/collie-jedec-probe.patch   |
-> 11 +++++++++++ .../linux/linux-yocto-3.2/collie/collie-mtd-rw.patch       
-> | 12 ++++++++++++ recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg   
->   |  2 +- .../linux/linux-yocto-3.2/collie/mcp-device.patch           | 13
-> +++++++++++++ .../collie/collie-eraseinfo.patch                           |
-> 11 +++++++++++ .../collie/collie-jedec-probe.patch                        
-> | 11 +++++++++++ .../collie/collie-mtd-rw.patch                            
->  | 12 ++++++++++++
-> .../linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch  | 13
-> +++++++++++++ .../linux/linux-yocto-tiny-kexecboot_3.2.bbappend           |
->  6 +++++- recipes-kernel/linux/linux-yocto_3.2.bbappend               |  4
-> ++++ 11 files changed, 104 insertions(+), 2 deletions(-)
->  create mode 100644
-> recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch create
-> mode 100644
-> recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch create
-> mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
-> create mode 100644
-> recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch create mode
-> 100644
-> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo
-> .patch create mode 100644
-> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-pro
-> be.patch create mode 100644
-> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.pa
-> tch create mode 100644
-> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch
-> 
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
-> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch new
-> file mode 100644
-> index 0000000..47e814d
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
-> @@ -0,0 +1,11 @@
-> +--- a/drivers/mtd/chips/jedec_probe.c
-> ++++ b/drivers/mtd/chips/jedec_probe.c
-> +@@ -1305,7 +1305,7 @@
-> + 		.cmd_set	= P_ID_INTEL_STD,
-> + 		.nr_regions	= 1,
-> + 		.regions	= {
-> +-			ERASEINFO(0x40000,16),
-> ++			ERASEINFO(0x08000,128),
-> + 		}
-> + 	}, {
-> + 		.mfr_id		= CFI_MFR_SST,
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
-> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch new
-> file mode 100644
-> index 0000000..530643e
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
-> @@ -0,0 +1,11 @@
-> +--- a/arch/arm/mach-sa1100/collie.c
-> ++++ b/arch/arm/mach-sa1100/collie.c
-> +@@ -289,7 +289,7 @@
-> + }
-> +
-> + static struct flash_platform_data collie_flash_data = {
-> +-	.map_name	= "cfi_probe",
-> ++	.map_name	= "jedec_probe",
-> + 	.init		= collie_flash_init,
-> + 	.set_vpp	= collie_set_vpp,
-> + 	.exit		= collie_flash_exit,
-> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
-> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch new file
-> mode 100644
-> index 0000000..193004d
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
-> @@ -0,0 +1,12 @@
-> +diff --git a/drivers/mtd/maps/sa1100-flash.c
-> b/drivers/mtd/maps/sa1100-flash.c +index fa9c0a9..bf6b04f 100644
-> +--- a/drivers/mtd/maps/sa1100-flash.c
-> ++++ b/drivers/mtd/maps/sa1100-flash.c
-> +@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info
-> *subdev, struct resource *r + 		goto err;
-> + 	}
-> + 	subdev->mtd->owner = THIS_MODULE;
-> ++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
-> +
-> + 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
-> + 		phys, (unsigned)(subdev->mtd->size >> 20),
-> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg index
-> 2f5ead7..a47461e 100644
-> --- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-> @@ -1473,7 +1473,7 @@ CONFIG_APM_POWER=y
->  # CONFIG_TEST_POWER is not set
->  # CONFIG_BATTERY_DS2780 is not set
->  # CONFIG_BATTERY_DS2782 is not set
-> -# CONFIG_BATTERY_COLLIE is not set
-> +CONFIG_BATTERY_COLLIE=y
->  # CONFIG_BATTERY_BQ20Z75 is not set
->  # CONFIG_BATTERY_BQ27x00 is not set
->  # CONFIG_BATTERY_MAX17040 is not set
-> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
-> b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch new file
-> mode 100644
-> index 0000000..9a0a8ba
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
-> @@ -0,0 +1,13 @@
-> +--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
-> ++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
-> +@@ -10,6 +10,8 @@
-> + #ifndef MCP_H
-> + #define MCP_H
-> +
-> ++#include <linux/device.h>
-> ++
-> + struct mcp_ops;
-> +
-> + struct mcp {
-> +
-> +
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
-> fo.patch
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
-> fo.patch new file mode 100644
-> index 0000000..47e814d
-> --- /dev/null
-> +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
-> fo.patch @@ -0,0 +1,11 @@
-> +--- a/drivers/mtd/chips/jedec_probe.c
-> ++++ b/drivers/mtd/chips/jedec_probe.c
-> +@@ -1305,7 +1305,7 @@
-> + 		.cmd_set	= P_ID_INTEL_STD,
-> + 		.nr_regions	= 1,
-> + 		.regions	= {
-> +-			ERASEINFO(0x40000,16),
-> ++			ERASEINFO(0x08000,128),
-> + 		}
-> + 	}, {
-> + 		.mfr_id		= CFI_MFR_SST,
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
-> robe.patch
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
-> robe.patch new file mode 100644
-> index 0000000..530643e
-> --- /dev/null
-> +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
-> robe.patch @@ -0,0 +1,11 @@
-> +--- a/arch/arm/mach-sa1100/collie.c
-> ++++ b/arch/arm/mach-sa1100/collie.c
-> +@@ -289,7 +289,7 @@
-> + }
-> +
-> + static struct flash_platform_data collie_flash_data = {
-> +-	.map_name	= "cfi_probe",
-> ++	.map_name	= "jedec_probe",
-> + 	.init		= collie_flash_init,
-> + 	.set_vpp	= collie_set_vpp,
-> + 	.exit		= collie_flash_exit,
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
-> patch
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
-> patch new file mode 100644
-> index 0000000..193004d
-> --- /dev/null
-> +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
-> patch @@ -0,0 +1,12 @@
-> +diff --git a/drivers/mtd/maps/sa1100-flash.c
-> b/drivers/mtd/maps/sa1100-flash.c +index fa9c0a9..bf6b04f 100644
-> +--- a/drivers/mtd/maps/sa1100-flash.c
-> ++++ b/drivers/mtd/maps/sa1100-flash.c
-> +@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info
-> *subdev, struct resource *r + 		goto err;
-> + 	}
-> + 	subdev->mtd->owner = THIS_MODULE;
-> ++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
-> +
-> + 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
-> + 		phys, (unsigned)(subdev->mtd->size >> 20),
-> diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
-> ch
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
-> ch new file mode 100644
-> index 0000000..9a0a8ba
-> --- /dev/null
-> +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
-> ch @@ -0,0 +1,13 @@
-> +--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
-> ++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
-> +@@ -10,6 +10,8 @@
-> + #ifndef MCP_H
-> + #define MCP_H
-> +
-> ++#include <linux/device.h>
-> ++
-> + struct mcp_ops;
-> +
-> + struct mcp {
-> +
-> +
-> diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend index
-> 6ab9f2f..7f03732 100644
-> --- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-> +++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-> @@ -34,12 +34,16 @@ SRC_URI_append_c7x0 = " \
->  SRC_URI_append_collie = " \
->             file://collie-tiny.scc \
->             file://collie-kexecboot.cfg \
-> -           file://qvga/logo_linux_clut224.ppm.bz2 \
->            
-> file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
-> file://locomo_kbd_tweak-r2.patch \
->             file://collie_remove_irq_to_gpio.patch \
-> +           file://mcp-device.patch \
-> +           file://collie-jedec-probe.patch \
-> +           file://collie-eraseinfo.patch \
-> +           file://qvga/logo_linux_clut224.ppm.bz2 \
->             file://revert-check-on-console-device.patch \
->             "
-> +#           file://collie-mtd-rw.patch
-> 
->  SRC_URI_append_poodle = " \
->             file://poodle-tiny.scc \
-> diff --git a/recipes-kernel/linux/linux-yocto_3.2.bbappend
-> b/recipes-kernel/linux/linux-yocto_3.2.bbappend index a4ff596..6b765d5
-> 100644
-> --- a/recipes-kernel/linux/linux-yocto_3.2.bbappend
-> +++ b/recipes-kernel/linux/linux-yocto_3.2.bbappend
-> @@ -27,8 +27,12 @@ SRC_URI_append_collie = " \
->             file://qvga/logo_linux_clut224.ppm.bz2 \
->            
-> file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
-> file://collie_remove_irq_to_gpio.patch \
-> +           file://mcp-device.patch \
-> +           file://collie-jedec-probe.patch \
-> +           file://collie-eraseinfo.patch \
->             file://locomo_kbd_tweak-r2.patch \
->             "
-> +#           file://collie-mtd-rw.patch
-> 
->  SRC_URI_append_poodle = " \
->             file://poodle-standard.scc \
+The previous version (4.1.3-10) was unbuildable due to this issue:
 
-This two have been applied, thanks.
+WARNING: Failed to fetch URL git://git.debian-maintainers.org/git/daniel/libdvdread.git;protocol=git;branch=debian,
+   attempting MIRRORS if available
+ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+Cloning into bare repository <snip>/downloads//git2/git.debian-maintainers.org.git.daniel.libdvdread.git...
 
-Cheers,
-Paul
+fatal: Unable to look up git.debian-maintainers.org (port 9418) (Name or service not known)
 
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../libdvdread/libdvdread_4.1.3-10.bb              |   16 ----------------
+ .../libdvdread/libdvdread_4.2.0.bb                 |   17 +++++++++++++++++
+ 2 files changed, 17 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_4.1.3-10.bb
+ create mode 100644 meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
+
+diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.1.3-10.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.1.3-10.bb
+deleted file mode 100644
+index f17043b..0000000
+--- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.1.3-10.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "DVD access multimeda library"
+-SECTION = "libs/multimedia"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-SRC_URI = "git://git.debian-maintainers.org/git/daniel/${PN}.git;protocol=git;branch=debian"
+-
+-SRCREV = "e465b500c12be5b4c0b6918a9b98038611f66c57"
+-S = "${WORKDIR}/git"
+-
+-inherit autotools lib_package binconfig pkgconfig
+-
+-do_unpackpost() {
+-        QUILT_PATCHES=debian/patches quilt push -a
+-}
+-
+-addtask unpackpost after do_unpack before do_patch
+diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
+new file mode 100644
+index 0000000..d5695ca
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_4.2.0.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "DVD access multimeda library"
++SECTION = "libs/multimedia"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
++SRC_URI = "http://dvdnav.mplayerhq.hu/releases/libdvdread-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "ab7a19d3ab1a437ae754ef477d6231a4"
++SRC_URI[sha256sum] = "0bea15da842a4b04a482b009d72dcc6d9c9524ccc1bf67e5748319ec5ada8097"
++
++inherit autotools lib_package binconfig pkgconfig
++
++CONFIGUREOPTS := "${@d.getVar('CONFIGUREOPTS', True).replace('--disable-silent-rules', ' ')}"
++
++do_configure_prepend() {
++    # For some weird reason, libdvdread only provides a `configure2' script...
++    cp ${S}/configure2 ${S}/configure
++}
 -- 
+1.7.2.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
