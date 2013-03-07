@@ -1,25 +1,25 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mga09.intel.com ([134.134.136.24])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDfhy-0008BJ-KH
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDfig-0008Ex-E2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 19:38:28 +0100
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Mar 2013 10:21:53 -0800
+	Thu, 07 Mar 2013 19:39:12 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 07 Mar 2013 10:21:08 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="296997561"
+X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="273341091"
 Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Mar 2013 10:21:52 -0800
+	by orsmga001.jf.intel.com with ESMTP; 07 Mar 2013 10:22:35 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andrea Adami <andrea.adami@gmail.com>
-Date: Thu, 07 Mar 2013 18:21:51 +0000
-Message-ID: <7880415.lJ2VTqbKKs@helios>
+To: Andrea Adami <andrea.adami@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 07 Mar 2013 18:22:34 +0000
+Message-ID: <2100081.jDaUQoK5uN@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1362251176-26068-1-git-send-email-andrea.adami@gmail.com>
-References: <1362251176-26068-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
+References: <1362095872-4586-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH] linux-yocto-tiny-kexecboot_3.2: set CONFIG_CRAMFS=y for Zaurus
+Subject: Re: [meta-handheld][PATCH] linux-yocto(-tiny-kexecboot)_3.2: Zaurus collie MTD fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,134 +33,273 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 18:38:30 -0000
+X-List-Received-Date: Thu, 07 Mar 2013 18:39:12 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Saturday 02 March 2013 20:06:16 Andrea Adami wrote:
-> * note: only collie is using cramfs as factory default
+On Friday 01 March 2013 00:57:51 Andrea Adami wrote:
+> * experimental patches to fix mtd partitions detection
+> * kexecboot now finds cramfs
+> * mount of orig. cramfs partition tested for fun :)
+> * collie's NOR is still READ-ONLY on boot
+> *
+> * while there, add a patch to mcp.h to fix
+> * collie_battery.c compilation
 > 
 > Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 > ---
->  .../linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot.cfg      | 2
-> +- .../linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.cfg       
-> | 2 +- .../linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg
->    | 2 +-
-> .../linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecboot.cfg    | 2
-> +- .../linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot.cfg     
-> | 2 +- .../linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.cfg    
->    | 2 +- 6 files changed, 6 insertions(+), 6 deletions(-)
+>  .../linux/linux-yocto-3.2/collie/collie-eraseinfo.patch     | 11
+> +++++++++++ .../linux/linux-yocto-3.2/collie/collie-jedec-probe.patch   |
+> 11 +++++++++++ .../linux/linux-yocto-3.2/collie/collie-mtd-rw.patch       
+> | 12 ++++++++++++ recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg   
+>   |  2 +- .../linux/linux-yocto-3.2/collie/mcp-device.patch           | 13
+> +++++++++++++ .../collie/collie-eraseinfo.patch                           |
+> 11 +++++++++++ .../collie/collie-jedec-probe.patch                        
+> | 11 +++++++++++ .../collie/collie-mtd-rw.patch                            
+>  | 12 ++++++++++++
+> .../linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch  | 13
+> +++++++++++++ .../linux/linux-yocto-tiny-kexecboot_3.2.bbappend           |
+>  6 +++++- recipes-kernel/linux/linux-yocto_3.2.bbappend               |  4
+> ++++ 11 files changed, 104 insertions(+), 2 deletions(-)
+>  create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch create
+> mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch create
+> mode 100644 recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+> create mode 100644
+> recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch create mode
+> 100644
+> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo
+> .patch create mode 100644
+> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-pro
+> be.patch create mode 100644
+> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.pa
+> tch create mode 100644
+> recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.patch
 > 
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
-> .cfg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
-> .cfg index 82bb479..84523d7 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
-> .cfg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/akita/akita-kexecboot
-> .cfg @@ -1417,7 +1417,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch new
+> file mode 100644
+> index 0000000..47e814d
+> --- /dev/null
+> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+> @@ -0,0 +1,11 @@
+> +--- a/drivers/mtd/chips/jedec_probe.c
+> ++++ b/drivers/mtd/chips/jedec_probe.c
+> +@@ -1305,7 +1305,7 @@
+> + 		.cmd_set	= P_ID_INTEL_STD,
+> + 		.nr_regions	= 1,
+> + 		.regions	= {
+> +-			ERASEINFO(0x40000,16),
+> ++			ERASEINFO(0x08000,128),
+> + 		}
+> + 	}, {
+> + 		.mfr_id		= CFI_MFR_SST,
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
-> fg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
-> fg index 0ef169b..0265150 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
-> fg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/c7x0/c7x0-kexecboot.c
-> fg @@ -1411,7 +1411,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
+> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch new
+> file mode 100644
+> index 0000000..530643e
+> --- /dev/null
+> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-jedec-probe.patch
+> @@ -0,0 +1,11 @@
+> +--- a/arch/arm/mach-sa1100/collie.c
+> ++++ b/arch/arm/mach-sa1100/collie.c
+> +@@ -289,7 +289,7 @@
+> + }
+> +
+> + static struct flash_platform_data collie_flash_data = {
+> +-	.map_name	= "cfi_probe",
+> ++	.map_name	= "jedec_probe",
+> + 	.init		= collie_flash_init,
+> + 	.set_vpp	= collie_set_vpp,
+> + 	.exit		= collie_flash_exit,
+> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch new file
+> mode 100644
+> index 0000000..193004d
+> --- /dev/null
+> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-mtd-rw.patch
+> @@ -0,0 +1,12 @@
+> +diff --git a/drivers/mtd/maps/sa1100-flash.c
+> b/drivers/mtd/maps/sa1100-flash.c +index fa9c0a9..bf6b04f 100644
+> +--- a/drivers/mtd/maps/sa1100-flash.c
+> ++++ b/drivers/mtd/maps/sa1100-flash.c
+> +@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info
+> *subdev, struct resource *r + 		goto err;
+> + 	}
+> + 	subdev->mtd->owner = THIS_MODULE;
+> ++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
+> +
+> + 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
+> + 		phys, (unsigned)(subdev->mtd->size >> 20),
+> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
+> b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg index
+> 2f5ead7..a47461e 100644
+> --- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
+> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
+> @@ -1473,7 +1473,7 @@ CONFIG_APM_POWER=y
+>  # CONFIG_TEST_POWER is not set
+>  # CONFIG_BATTERY_DS2780 is not set
+>  # CONFIG_BATTERY_DS2782 is not set
+> -# CONFIG_BATTERY_COLLIE is not set
+> +CONFIG_BATTERY_COLLIE=y
+>  # CONFIG_BATTERY_BQ20Z75 is not set
+>  # CONFIG_BATTERY_BQ27x00 is not set
+>  # CONFIG_BATTERY_MAX17040 is not set
+> diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
+> b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch new file
+> mode 100644
+> index 0000000..9a0a8ba
+> --- /dev/null
+> +++ b/recipes-kernel/linux/linux-yocto-3.2/collie/mcp-device.patch
+> @@ -0,0 +1,13 @@
+> +--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
+> ++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
+> +@@ -10,6 +10,8 @@
+> + #ifndef MCP_H
+> + #define MCP_H
+> +
+> ++#include <linux/device.h>
+> ++
+> + struct mcp_ops;
+> +
+> + struct mcp {
+> +
+> +
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
-> ot.cfg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
-> ot.cfg index e01ceae..ba5334d 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
-> ot.cfg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecbo
-> ot.cfg @@ -1315,7 +1315,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
+> fo.patch
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
+> fo.patch new file mode 100644
+> index 0000000..47e814d
+> --- /dev/null
+> +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-erasein
+> fo.patch @@ -0,0 +1,11 @@
+> +--- a/drivers/mtd/chips/jedec_probe.c
+> ++++ b/drivers/mtd/chips/jedec_probe.c
+> +@@ -1305,7 +1305,7 @@
+> + 		.cmd_set	= P_ID_INTEL_STD,
+> + 		.nr_regions	= 1,
+> + 		.regions	= {
+> +-			ERASEINFO(0x40000,16),
+> ++			ERASEINFO(0x08000,128),
+> + 		}
+> + 	}, {
+> + 		.mfr_id		= CFI_MFR_SST,
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
-> ot.cfg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
-> ot.cfg index 04e53bd..5acf22c 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
-> ot.cfg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/poodle/poodle-kexecbo
-> ot.cfg @@ -1319,7 +1319,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
+> robe.patch
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
+> robe.patch new file mode 100644
+> index 0000000..530643e
+> --- /dev/null
+> +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-jedec-p
+> robe.patch @@ -0,0 +1,11 @@
+> +--- a/arch/arm/mach-sa1100/collie.c
+> ++++ b/arch/arm/mach-sa1100/collie.c
+> +@@ -289,7 +289,7 @@
+> + }
+> +
+> + static struct flash_platform_data collie_flash_data = {
+> +-	.map_name	= "cfi_probe",
+> ++	.map_name	= "jedec_probe",
+> + 	.init		= collie_flash_init,
+> + 	.set_vpp	= collie_set_vpp,
+> + 	.exit		= collie_flash_exit,
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
-> .cfg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
-> .cfg index 338209d..2e864c0 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
-> .cfg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/spitz-kexecboot
-> .cfg @@ -1416,7 +1416,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
+> patch
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
+> patch new file mode 100644
+> index 0000000..193004d
+> --- /dev/null
+> +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.
+> patch @@ -0,0 +1,12 @@
+> +diff --git a/drivers/mtd/maps/sa1100-flash.c
+> b/drivers/mtd/maps/sa1100-flash.c +index fa9c0a9..bf6b04f 100644
+> +--- a/drivers/mtd/maps/sa1100-flash.c
+> ++++ b/drivers/mtd/maps/sa1100-flash.c
+> +@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info
+> *subdev, struct resource *r + 		goto err;
+> + 	}
+> + 	subdev->mtd->owner = THIS_MODULE;
+> ++	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
+> +
+> + 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
+> + 		phys, (unsigned)(subdev->mtd->size >> 20),
 > diff --git
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
-> fg
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
-> fg index 855d70b..e055f5b 100644
-> ---
-> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
-> fg +++
-> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/tosa/tosa-kexecboot.c
-> fg @@ -1320,7 +1320,7 @@ CONFIG_UBIFS_FS_LZO=y
->  CONFIG_UBIFS_FS_ZLIB=y
->  # CONFIG_UBIFS_FS_DEBUG is not set
->  # CONFIG_LOGFS is not set
-> -# CONFIG_CRAMFS is not set
-> +CONFIG_CRAMFS=y
->  # CONFIG_SQUASHFS is not set
->  # CONFIG_VXFS_FS is not set
->  # CONFIG_MINIX_FS is not set
+> a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
+> ch
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
+> ch new file mode 100644
+> index 0000000..9a0a8ba
+> --- /dev/null
+> +++
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/mcp-device.pat
+> ch @@ -0,0 +1,13 @@
+> +--- a/include/linux/mfd/mcp.h	2013-02-18 00:14:09.000000000 +0100
+> ++++ b/include/linux/mfd/mcp.h	2013-02-17 23:55:52.000000000 +0100
+> +@@ -10,6 +10,8 @@
+> + #ifndef MCP_H
+> + #define MCP_H
+> +
+> ++#include <linux/device.h>
+> ++
+> + struct mcp_ops;
+> +
+> + struct mcp {
+> +
+> +
+> diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+> b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend index
+> 6ab9f2f..7f03732 100644
+> --- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+> +++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
+> @@ -34,12 +34,16 @@ SRC_URI_append_c7x0 = " \
+>  SRC_URI_append_collie = " \
+>             file://collie-tiny.scc \
+>             file://collie-kexecboot.cfg \
+> -           file://qvga/logo_linux_clut224.ppm.bz2 \
+>            
+> file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
+> file://locomo_kbd_tweak-r2.patch \
+>             file://collie_remove_irq_to_gpio.patch \
+> +           file://mcp-device.patch \
+> +           file://collie-jedec-probe.patch \
+> +           file://collie-eraseinfo.patch \
+> +           file://qvga/logo_linux_clut224.ppm.bz2 \
+>             file://revert-check-on-console-device.patch \
+>             "
+> +#           file://collie-mtd-rw.patch
+> 
+>  SRC_URI_append_poodle = " \
+>             file://poodle-tiny.scc \
+> diff --git a/recipes-kernel/linux/linux-yocto_3.2.bbappend
+> b/recipes-kernel/linux/linux-yocto_3.2.bbappend index a4ff596..6b765d5
+> 100644
+> --- a/recipes-kernel/linux/linux-yocto_3.2.bbappend
+> +++ b/recipes-kernel/linux/linux-yocto_3.2.bbappend
+> @@ -27,8 +27,12 @@ SRC_URI_append_collie = " \
+>             file://qvga/logo_linux_clut224.ppm.bz2 \
+>            
+> file://0001-pcmcia-pxa2xx_sharpsl-retain-ops-structure-on-collie.patch \
+> file://collie_remove_irq_to_gpio.patch \
+> +           file://mcp-device.patch \
+> +           file://collie-jedec-probe.patch \
+> +           file://collie-eraseinfo.patch \
+>             file://locomo_kbd_tweak-r2.patch \
+>             "
+> +#           file://collie-mtd-rw.patch
+> 
+>  SRC_URI_append_poodle = " \
+>             file://poodle-standard.scc \
 
-Applied, thanks.
+This two have been applied, thanks.
 
 Cheers,
 Paul
