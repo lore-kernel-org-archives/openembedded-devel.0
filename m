@@ -1,36 +1,27 @@
-Received: from mail-ob0-f176.google.com ([209.85.214.176])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1UDbgY-00069H-GM
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDcAb-0006wz-D1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 15:20:43 +0100
-Received: by mail-ob0-f176.google.com with SMTP id v19so357740obq.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 06:04:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=4M7J+xSNFoJvYC867oE+jJGWtJwD7bHt1R0iqMv6STM=;
-	b=IdOe8wBiNFfPjnvw86nGO/jESj9g4eQ7gPSgBsOopOkWkLH23jHB6LuGE8W8rGxQqY
-	bDmw7oUgc9bGIZc1wASM2Ap7J5nO8eSnu1Sik/6/RTsXC9g+Pesjk6S3WGuB0XwMy6Je
-	MLQ3OrzmrQ8nbA8p7lxiuxgaJNfuNV/v1pJOMpsrvLMStz2TZdql7kNteYLRsDBW18pj
-	DHwJQypZzUhuwNh6CUSsC4LX8l9XzKBTxvYonSG0713cfeNroWLzAHoVztRKG0a1AdV1
-	L0RXW8kdwQbLzzkCQe0TaxTP+tTXJUkgH5e7jCkHcE5rTIdi+nVdThHxcLOXIUZaAmcI
-	5yrg==
-MIME-Version: 1.0
-X-Received: by 10.60.172.108 with SMTP id bb12mr26795285oec.110.1362665049891; 
-	Thu, 07 Mar 2013 06:04:09 -0800 (PST)
-Received: by 10.60.76.199 with HTTP; Thu, 7 Mar 2013 06:04:09 -0800 (PST)
-In-Reply-To: <1623937.LnU3QZzoXA@helios>
+	Thu, 07 Mar 2013 15:51:53 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Mar 2013 06:35:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="296819833"
+Received: from unknown (HELO helios.localnet) ([10.255.12.181])
+	by fmsmga001.fm.intel.com with ESMTP; 07 Mar 2013 06:35:07 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 07 Mar 2013 14:35:06 +0000
+Message-ID: <9088096.rvOOlWx1VE@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
+In-Reply-To: <E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
 References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
-	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
-	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
-	<1623937.LnU3QZzoXA@helios>
-Date: Thu, 7 Mar 2013 15:04:09 +0100
-Message-ID: <CAGiJk9ccLrFrRqE24onbmLJROVogmpSRUCRtQdr5JaDGqc71Aw@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	<20130307130435.GI32228@jama.dyndns-home.com>
+	<E780D109-3D15-488F-8CC9-F6829BEE90F1@dominion.thruhere.net>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	Martin Jansa <martin.jansa@gmail.com>
 Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,43 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 14:20:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Mar 2013 14:51:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-2013/3/7 Paul Eggleton <paul.eggleton@linux.intel.com>:
-> On Thursday 07 March 2013 13:09:38 Samuel Stirtzel wrote:
->> Unrelated to your patches:
->> There are some upcoming changes, but they don't fit into yocto 1.4
->> (assumed that yocto is the orientation point for third-party OE-layer
->> releases).
->> So there will be a yocto-1.4 branch in advance and the development
->> will continue on master.
->
-> FYI, the layer index web interface I'm putting together [1] will understand
-> certain branch names across all layers, and the convention so far has been to
-> use the release names i.e. denzil, danny, etc. If you are able to follow this
-> as well once the 1.4 codename has been announced then your branch will show up
-> correctly in the new interface.
->
-> Cheers,
-> Paul
->
-> [1] https://bugzilla.yoctoproject.org/show_bug.cgi?id=3272
->
+On Thursday 07 March 2013 15:03:17 Koen Kooi wrote:
+> Op 7 mrt. 2013, om 14:04 heeft Martin Jansa <martin.jansa@gmail.com> het
+> volgende geschreven:
+> > It would be nice to know yocto-1.4 release name in advance and name it
+> > the same as branch in oe-core/meta-oe will be (denzil, danny, ...), but
+> > I guess it can be renamed later.
+> 
+> For angstrom I'm going to use 'yocto-1.4' in the branch name, I have trouble
+> remembering which names maps to which release. And the Yocto compliance
+> program talks about 1.3, .14 etc, not about codenames.
 
-Good to know,
-so layers like meta-qt5 [1] for example will be found more easily.
+Wouldn't it be worth us trying to standardise rather than all doing our own 
+thing and users having to figure out what matches up between different layers? 
+If others feel the same as you, then maybe we should all be using that schema.
 
-I will rename the branch after the codename has been announced,
-but yes it would be easier if the name could get announced long before
-the release.
+Cheers,
+Paul
 
+-- 
 
-[1] https://github.com/meta-qt5/meta-qt5
-
-
---
-Regards
-Samuel
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
