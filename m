@@ -1,26 +1,32 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-pa0-f52.google.com ([209.85.220.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDdLg-0002uq-Ro
+	(envelope-from <martin.jansa@gmail.com>) id 1UDdOD-00033a-7Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Mar 2013 17:07:19 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 07 Mar 2013 07:50:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,803,1355126400"; d="scan'208";a="210522131"
-Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by AZSMGA002.ch.intel.com with ESMTP; 07 Mar 2013 07:50:40 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Date: Thu, 07 Mar 2013 15:50:39 +0000
-Message-ID: <2953155.d53ADznyZ4@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
-References: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Pradeep Tumati <pradeep.tumati@windriver.com>
-Subject: Re: [PATCH meta-webserver] apache2: correct header file location
+	Thu, 07 Mar 2013 17:09:57 +0100
+Received: by mail-pa0-f52.google.com with SMTP id fb1so558363pad.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2013 07:53:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=pzynfz0u0Usx6F+hcvUhIiQaDWmllUv+QzuvC568SZY=;
+	b=kH37jR3vIib70V8Pfboelas3GqYouhZcHE/UQAmTaIAR7OuIqLeM3AsaquR7m9mZhR
+	4af2dEUrJQAa1OD49ZmjSW/NagMYJsDW0ELijqcnVjK7nGgNBUpPbOBRWg+hlNx5f5PE
+	waDi2g0R8hkv6tCVcBuOURt+zZfzsfqXCxpU+bH3oI360tf9eaylfh6IN/uXMgqGJ94P
+	cULSRsFZurckE8POdpKgpnXTytw2JnDxUeTiFrGcXo6yZ6XOxKBQOJ8B/CxV0Dmb2Kxx
+	2ihvUz/ag84ijFv6W8rfR8hV2Z8FHgblVU1TBH3rlo4rO/NN7JxYoj4VFv2CcFvTrXEC
+	64xg==
+X-Received: by 10.68.186.132 with SMTP id fk4mr36111101pbc.18.1362671600349;
+	Thu, 07 Mar 2013 07:53:20 -0800 (PST)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id vq9sm2085975pbc.36.2013.03.07.07.53.17
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 07:53:19 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2013 16:53:12 +0100
+Message-Id: <1362671592-30014-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-systemd][PATCH] connman: rename .bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,127 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Mar 2013 16:07:21 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 07 Mar 2013 16:09:58 -0000
 
-On Tuesday 19 February 2013 21:09:34 Mark Hatle wrote:
-> From: Pradeep Tumati <pradeep.tumati@windriver.com>
-> 
-> Apache header files are being placed in ../usr/include/lib32-apache2
-> under the sysroot where as lib32-modphp looks for ../usr/include/apache2
-> directory. This fix ensures that apache2 header files are placed
-> in the ../usr/include/apache2/ directory.
-> 
-> Signed-off-by: Pradeep Tumati <pradeep.tumati@windriver.com>
-> Signed-off-by: Jeff Polk <jeff.polk@windriver.com>
-> ---
->  recipes-httpd/apache2/apache2_2.4.2.bb | 32
-> ++++++++++++++++---------------- 1 file changed, 16 insertions(+), 16
-> deletions(-)
-> 
-> diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb
-> b/recipes-httpd/apache2/apache2_2.4.2.bb index af7840d..af8c4ca 100644
-> --- a/recipes-httpd/apache2/apache2_2.4.2.bb
-> +++ b/recipes-httpd/apache2/apache2_2.4.2.bb
-> @@ -41,13 +41,13 @@ EXTRA_OECONF = "--enable-ssl \
->  		--enable-rewrite \
->  		--with-dbm=sdbm \
->  		--with-berkeley-db=no \
-> -		--localstatedir=/var/${PN} \
-> +		--localstatedir=/var/${BPN} \
->  		--with-gdbm=no \
->  		--with-ndbm=no \
-> -		--includedir=${includedir}/${PN} \
-> -		--datadir=${datadir}/${PN} \
-> -		--sysconfdir=${sysconfdir}/${PN} \
-> -                --libexecdir=${libdir}/${PN}/modules \
-> +		--includedir=${includedir}/${BPN} \
-> +		--datadir=${datadir}/${BPN} \
-> +		--sysconfdir=${sysconfdir}/${BPN} \
-> +                --libexecdir=${libdir}/${BPN}/modules \
->  		ap_cv_void_ptr_lt_long=no \
->  		--enable-mpms-shared \
->  		ac_cv_have_threadsafe_pollset=no"
-> @@ -68,19 +68,19 @@ do_install_append() {
->  		    -e 's,/usr/bin/,${bindir}/,g' \
->  		    -e 's,/usr/lib,${libdir}/,g' \
->  		    -e 's,/etc/,${sysconfdir}/,g' \
-> -		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
-> -	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
-> +		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${BPN}
-> +	chmod 755 ${D}/${sysconfdir}/init.d/${BPN}
->  	# remove the goofy original files...
-> -	rm -rf ${D}/${sysconfdir}/${PN}/original
-> +	rm -rf ${D}/${sysconfdir}/${BPN}/original
->  	# Expat should be found in the staging area via DEPENDS...
->  	rm -f ${D}/${libdir}/libexpat.*
-> 
-> -	install -d ${D}${sysconfdir}/${PN}/conf.d
-> -	install -d ${D}${sysconfdir}/${PN}/modules.d
-> +	install -d ${D}${sysconfdir}/${BPN}/conf.d
-> +	install -d ${D}${sysconfdir}/${BPN}/modules.d
-> 
->  	# Ensure configuration file pulls in conf.d and modules.d
-> -	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >>
-> ${D}/${sysconfdir}/${PN}/httpd.conf -	printf "\nIncludeOptional
-> ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >>
-> ${D}/${sysconfdir}/${PN}/httpd.conf +	printf "\nIncludeOptional
-> ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
-> +	printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >>
-> ${D}/${sysconfdir}/${BPN}/httpd.conf }
-> 
->  SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
-> @@ -88,12 +88,12 @@ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
->  apache_sysroot_preprocess () {
->  	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
->  	install -m 755 ${D}${bindir}/apxs
-> ${SYSROOT_DESTDIR}${bindir_crossscripts}/ -	sed -i 's!my $installbuilddir 
-=
-> .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!'
-> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs +	sed -i 's!my
-> $installbuilddir = .*!my $installbuilddir =
-> "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!'
-> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs sed -i 's!my $libtool = .*!my
-> $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!'
-> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
-> 
-> -	sed -i 's!^APR_CONFIG = .*!APR_CONFIG =
-> ${STAGING_BINDIR_CROSS}/apr-1-config!'
-> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
-> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!'
-> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
-> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
-> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk +	sed -i
-> 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!'
-> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
-> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!'
-> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
-> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
-> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk }
-> 
->  #
+* drop settings already set in connman.inc
 
-Like the last patch this is not actually against meta-webserver master, and 
-like the last patch I was about to rebase and apply it on top, and again I 
-notice that there are ${PN} references that haven't been changed but appear to 
-need to be - the ones I can see are in the FILES_ values e.g.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../connman/{connman_1.10.bbappend => connman_1.12.bbappend}          | 4 ----
+ 1 file changed, 4 deletions(-)
+ rename meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.10.bbappend => connman_1.12.bbappend} (57%)
 
-FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
-
-To match up with the paths we're specifying in EXTRA_OECONF this would need to 
-be changed to:
-
-FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
-
-Surely this sort of thing should be showing up in testing?
-
-Cheers,
-Paul
-
+diff --git a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
+similarity index 57%
+rename from meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend
+rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
+index a9d13e6..b94f84b 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.10.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.12.bbappend
+@@ -1,8 +1,4 @@
+-inherit systemd
+-
+ PRINC := "${@int(PRINC) + 1}"
+ 
+-EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
+-
+ SYSTEMD_PACKAGES = "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
 -- 
+1.8.1.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
