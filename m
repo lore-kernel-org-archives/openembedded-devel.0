@@ -1,33 +1,33 @@
-Received: from mail-pb0-f50.google.com ([209.85.160.50])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UDrty-0003DG-8f
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UDvgA-00032t-9a
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 08:39:40 +0100
-Received: by mail-pb0-f50.google.com with SMTP id up1so991531pbc.9
+	Fri, 08 Mar 2013 12:41:42 +0100
+Received: by mail-vc0-f175.google.com with SMTP id p1so838822vcq.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 23:23:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=p9dgaSAP0PJgevnLgUoJrjW1sJM+hWBO4pY/6yKhnBs=;
-	b=tZPbQ5PuMWUNf6iIxWv6MYasvgjbxQGyzmptFM2x9bw8hCbdo4vpdIXfvqZ/s1BD60
-	3tKoymFFC7Np9HbIS0mtrlq2Rscqdv9TFFw866OKQp7oI+ntYPzM3KO9NEl1g2ukizc6
-	EU2mVahynhiRD+6+jReamIeTB+2coxfHmqPcKFEqTPki2bw5x1md9tgcvULjgVdhfPat
-	ATBQoMddAIwvfsvuUQLKpZG+VIxfPSDlyvtXdR3xN12JAlCqmWHPO7TgKoLWbb4QSJA9
-	dAIyG70PNL4C5iDaru7tgEPHV0XIQS6I724ZjfwuXUqcp4Z2CkNALM2284wg2AVmWJvo
-	+qFw==
-X-Received: by 10.68.217.202 with SMTP id pa10mr1911845pbc.11.1362727382074;
-	Thu, 07 Mar 2013 23:23:02 -0800 (PST)
-Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
-	[140.211.169.168])
-	by mx.google.com with ESMTPS id qd8sm4610792pbc.29.2013.03.07.23.23.01
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 07 Mar 2013 23:23:01 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 08 Mar 2013 03:25:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=vaTcJqt8JaJ7kP0p/M4GEmH+OlcFDfOjnpvlWU/V1tk=;
+	b=rd1vMCzET5vZvMMTD+QOJy5JvAFJHwnxJMPNENbL780e1WTmcHiNZ4v0H2pqPR32ZM
+	wMFHBrBDqPIab3a2+QbSj5BngCyaIwnpUxDqOCY1G9kwbMZVDw6kRcTvzASlHgpfQh0r
+	WUGjrQ5LSCcz8pn/iGehcpVkzbGM0ljgp+ufimsMovucAJCSp8ScfT/JZolfmDWPxdfs
+	SqhQOCndkTMUJ7dfrsI9ljiHK0lc0ppwzdsUVkung+pScubDf4M7kP4n/I850w4/Oam3
+	uYMu7SuF08VBNjzRqcoZxOstRTX2NbYzv3W47RcpPxfvEW8YE7DE5hr8f6xlNz5o6nG0
+	4mFA==
+MIME-Version: 1.0
+X-Received: by 10.220.150.11 with SMTP id w11mr720565vcv.63.1362741904409;
+	Fri, 08 Mar 2013 03:25:04 -0800 (PST)
+Received: by 10.52.185.168 with HTTP; Fri, 8 Mar 2013 03:25:04 -0800 (PST)
+In-Reply-To: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 8 Mar 2013 12:25:04 +0100
+Message-ID: <CALbNGRT+RDine-AZQx+K8oaf25mncrHvvbYq5FMNS7TnXQU0Pw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Mar 2013 23:22:35 -0800
-Message-Id: <1362727355-12872-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-kde][PATCH] angstrom-kde-active-image.bb: Fix typo in IMAGE_BASENAME
+Subject: Re: [meta-oe][PATCHv2] poppler: upgrade to 0.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2013 07:39:47 -0000
+X-List-Received-Date: Fri, 08 Mar 2013 11:41:42 -0000
+X-List-Received-Date: Fri, 08 Mar 2013 11:41:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-images/angstrom-kde-active-image.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Mar 5, 2013 at 11:15 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * 0.18.0 was failing to build after libpng was upgraded to 1.6 in oe-core
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-support/poppler/poppler_0.18.0.bb | 12 ------------
+>  meta-oe/recipes-support/poppler/poppler_0.18.4.bb | 10 ++++++++++
+>  2 files changed, 10 insertions(+), 12 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+>  create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.4.bb
+>
+Maybe it is a temporary problem but I get
 
-diff --git a/recipes-images/angstrom-kde-active-image.bb b/recipes-images/angstrom-kde-active-image.bb
-index 10fb819..8743231 100644
---- a/recipes-images/angstrom-kde-active-image.bb
-+++ b/recipes-images/angstrom-kde-active-image.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- 
- include recipes-images/angstrom/systemd-image.bb
- 
--export IMAGE_BASENAME = "ansgstrom-kde-active-image"
-+export IMAGE_BASENAME = "angstrom-kde-active-image"
- 
- IMAGE_FEATURES += "package-management"
- IMAGE_INSTALL += "\
--- 
-1.7.9.5
+ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
+ERROR: Function failed: Fetcher failure for URL:
+'http://poppler.freedesktop.org/poppler-0.18.4.tar.gz'. Unable to
+fetch URL from any source.
+ERROR: Logfile of failure stored in:
+/home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/poppler/0.18.4-r0/temp/log.do_fetch.20883
+ERROR: Task 4 (/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes-support/poppler/poppler_0.18.4.bb,
+do_fetch) failed with exit code '1'
 
+Andreas
 
 
