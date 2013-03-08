@@ -1,30 +1,33 @@
-Received: from mail-oa0-f48.google.com ([209.85.219.48])
+Received: from mail-pb0-f50.google.com ([209.85.160.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ka6sox@gmail.com>) id 1UDq9I-0007vz-ME
+	(envelope-from <raj.khem@gmail.com>) id 1UDrty-0003DG-8f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 06:47:22 +0100
-Received: by mail-oa0-f48.google.com with SMTP id j1so1545037oag.7
+	Fri, 08 Mar 2013 08:39:40 +0100
+Received: by mail-pb0-f50.google.com with SMTP id up1so991531pbc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Mar 2013 21:30:47 -0800 (PST)
+	Thu, 07 Mar 2013 23:23:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to
-	:content-type; bh=kRzQYDy1P+pGXvp0aNtR6p+DVHFzMLwGLuVflnq4FqU=;
-	b=Yx9aXQv2mcgyLS9JPV+Y5qp9FSFDtkedEckfiE/FfZjPyI6DgLpx5e9WUadDNojDOP
-	kiiOu9GFLwUd7RC52TQAa28zxMX5qd7BA+Okvk8cEM7qBobc1+nzjQiZOSNh6Drl/Uw+
-	AdQp6C/JivMlbOhtVGo0h3vZ1phTCAlreFslxVrhXdKy9f1+1oa9OCEQC52BI4oINpq5
-	3aEvuysOAOuuUcB41Tw6frG96RwCWhWlbTVFAdQYzj28J3/SuUBnuXB5QytUaGMVpR2p
-	wk9GhDNGhCBDaCb7fc+RIxBwIfaAFZWj++kcFJX1YPOSf6p6DZKEJXVCGFamZPs8BU6T
-	9XLQ==
-MIME-Version: 1.0
-X-Received: by 10.182.144.42 with SMTP id sj10mr595645obb.66.1362720646744;
-	Thu, 07 Mar 2013 21:30:46 -0800 (PST)
-Received: by 10.76.142.66 with HTTP; Thu, 7 Mar 2013 21:30:46 -0800 (PST)
-Date: Thu, 7 Mar 2013 21:30:46 -0800
-Message-ID: <CAHQecY7V9WRQ0u0wnuXM4W4255v0mwiyt+_EqmihExuo0c4jyQ@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: openembedded-devel@lists.openembedded.org, apelete@seketeli.net
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [2011.03-maintenance][PATCH 2/7] git: update SRC_URI
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=p9dgaSAP0PJgevnLgUoJrjW1sJM+hWBO4pY/6yKhnBs=;
+	b=tZPbQ5PuMWUNf6iIxWv6MYasvgjbxQGyzmptFM2x9bw8hCbdo4vpdIXfvqZ/s1BD60
+	3tKoymFFC7Np9HbIS0mtrlq2Rscqdv9TFFw866OKQp7oI+ntYPzM3KO9NEl1g2ukizc6
+	EU2mVahynhiRD+6+jReamIeTB+2coxfHmqPcKFEqTPki2bw5x1md9tgcvULjgVdhfPat
+	ATBQoMddAIwvfsvuUQLKpZG+VIxfPSDlyvtXdR3xN12JAlCqmWHPO7TgKoLWbb4QSJA9
+	dAIyG70PNL4C5iDaru7tgEPHV0XIQS6I724ZjfwuXUqcp4Z2CkNALM2284wg2AVmWJvo
+	+qFw==
+X-Received: by 10.68.217.202 with SMTP id pa10mr1911845pbc.11.1362727382074;
+	Thu, 07 Mar 2013 23:23:02 -0800 (PST)
+Received: from agate.agate.openembedded.org (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id qd8sm4610792pbc.29.2013.03.07.23.23.01
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Mar 2013 23:23:01 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Mar 2013 23:22:35 -0800
+Message-Id: <1362727355-12872-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-kde][PATCH] angstrom-kde-active-image.bb: Fix typo in IMAGE_BASENAME
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,83 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2013 05:47:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Mar 2013 07:39:47 -0000
 
-I have added these to the OE Sourcemirror and you are good to go for
-updating the recipies.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-images/angstrom-kde-active-image.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers
+diff --git a/recipes-images/angstrom-kde-active-image.bb b/recipes-images/angstrom-kde-active-image.bb
+index 10fb819..8743231 100644
+--- a/recipes-images/angstrom-kde-active-image.bb
++++ b/recipes-images/angstrom-kde-active-image.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ 
+ include recipes-images/angstrom/systemd-image.bb
+ 
+-export IMAGE_BASENAME = "ansgstrom-kde-active-image"
++export IMAGE_BASENAME = "angstrom-kde-active-image"
+ 
+ IMAGE_FEATURES += "package-management"
+ IMAGE_INSTALL += "\
+-- 
+1.7.9.5
 
-Tom
 
-From: Apelete Seketeli <apelete@seketeli.net>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom King <ka6sox@gmail.com>
-Date: Tue, 5 Mar 2013 10:23:45 +0100
-Subject: Re: [oe] [2011.03-maintenance][PATCH 2/7] git: update SRC_URI
-Le 02-Mar-13, Apelete Seketeli a =E9crit:
-> Hello Tom,
->
-> Le 02-Mar-13, Martin Jansa a =E9crit:
-> > On Sat, Mar 02, 2013 at 04:32:27PM +0100, Apelete Seketeli wrote:
-> > > Le 02-Mar-13, Martin Jansa a =E9crit:
-> > > > On Sat, Mar 02, 2013 at 12:57:03PM +0100, Apelete Seketeli wrote:
-> > > > > Update SRC_URI to build.shr-project.org since git source packages
-are
-> > > > > no longer available from kernel.org.
-> > > > > ---
-> > > > >  recipes/git/git.inc |    2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/recipes/git/git.inc b/recipes/git/git.inc
-> > > > > index eb59a2c..ae656e1 100644
-> > > > > --- a/recipes/git/git.inc
-> > > > > +++ b/recipes/git/git.inc
-> > > > > @@ -2,7 +2,7 @@ DESCRIPTION =3D "The git revision control system
-used by the Linux kernel develope
-> > > > >  SECTION =3D "console/utils"
-> > > > >  LICENSE =3D "GPLv2"
-> > > > >
-> > > > > -SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/software/scm/git/git-=
-${
-PV}.tar.bz2;name=3Dsrc"
-> > > > > +SRC_URI =3D "
-http://build.shr-project.org/sources/git-${PV}.tar.bz2;name=3Dsrc"
-> > > >
-> > > > I don't know how long I'll keep "old" PREMIRROR there, it would be
-> > > > better to send missing archives to Tom King to add them to
-> > > > sources.oe.org which is more official source (and probably already
-> > > > listed in default MIRRORS)
-> > >
-> > > How do I send Tom King the missing archives ?
-> > > I'll reformat the patches into a v2 as soon as this is fixed.
-> >
-> > You can send him URLs to needed archives on yocto and shr premirrors
-> > and he will wget it from there.
->
-> Could you please add the following archives to
-> sources.openembedded.org ? I need them to fix non-working SRC_URIs in
-> many recipes:
->
-> http://downloads.yoctoproject.org/mirror/sources/libcap-2.20.tar.bz2
-> http://downloads.yoctoproject.org/mirror/sources/Linux-PAM-1.1.1.tar.bz2
-> http://downloads.yoctoproject.org/mirror/sources/netbase_4.21.tar.gz
-> http://build.shr-project.org/sources/udev-151.tar.gz
-> http://build.shr-project.org/sources/udev-162.tar.gz
-> http://build.shr-project.org/sources/udev-165.tar.gz
-> http://build.shr-project.org/sources/git-1.7.3.5.tar.bz2
->
-> Please let me know when the archives are available at
-> sources.openembedded.org, I'll reformat this patchset into v2 and
-> resend the pull request then.
-
-I'm replying to myself here as a reminder request to feedback: still
-need the above mentioned archives to be added to
-sources.openembedded.org. Is Tom King currently around ?
-
-Cheers.
---
-        Apelete
 
