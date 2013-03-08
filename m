@@ -1,33 +1,30 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-oa0-f48.google.com ([209.85.219.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Randy.MacLeod@windriver.com>) id 1UDntP-0007qI-0R
+	(envelope-from <ka6sox@gmail.com>) id 1UDq9I-0007vz-ME
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 04:23:02 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2836CpI025409
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 7 Mar 2013 19:06:12 -0800 (PST)
-Received: from [128.224.22.4] (128.224.22.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 7 Mar 2013 19:06:12 -0800
-Message-ID: <513955A0.9010506@windriver.com>
-Date: Thu, 7 Mar 2013 22:06:08 -0500
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
+	Fri, 08 Mar 2013 06:47:22 +0100
+Received: by mail-oa0-f48.google.com with SMTP id j1so1545037oag.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Mar 2013 21:30:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type; bh=kRzQYDy1P+pGXvp0aNtR6p+DVHFzMLwGLuVflnq4FqU=;
+	b=Yx9aXQv2mcgyLS9JPV+Y5qp9FSFDtkedEckfiE/FfZjPyI6DgLpx5e9WUadDNojDOP
+	kiiOu9GFLwUd7RC52TQAa28zxMX5qd7BA+Okvk8cEM7qBobc1+nzjQiZOSNh6Drl/Uw+
+	AdQp6C/JivMlbOhtVGo0h3vZ1phTCAlreFslxVrhXdKy9f1+1oa9OCEQC52BI4oINpq5
+	3aEvuysOAOuuUcB41Tw6frG96RwCWhWlbTVFAdQYzj28J3/SuUBnuXB5QytUaGMVpR2p
+	wk9GhDNGhCBDaCb7fc+RIxBwIfaAFZWj++kcFJX1YPOSf6p6DZKEJXVCGFamZPs8BU6T
+	9XLQ==
 MIME-Version: 1.0
-To: "Tumati, Pradeep" <Pradeep.Tumati@windriver.com>
-References: <1361329774-27984-1-git-send-email-mark.hatle@windriver.com>
-	<2953155.d53ADznyZ4@helios>
-	<2B1E7B07AA49B047AD9561EB6E00F61436C8659F@ALA-MBB.corp.ad.wrs.com>
-In-Reply-To: <2B1E7B07AA49B047AD9561EB6E00F61436C8659F@ALA-MBB.corp.ad.wrs.com>
-X-Originating-IP: [128.224.22.4]
-Cc: "Honig, Jeffrey" <jeffrey.honig@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Song Li <song.li@windriver.com>
-Subject: Re: [PATCH meta-webserver] apache2: correct header file location
+X-Received: by 10.182.144.42 with SMTP id sj10mr595645obb.66.1362720646744;
+	Thu, 07 Mar 2013 21:30:46 -0800 (PST)
+Received: by 10.76.142.66 with HTTP; Thu, 7 Mar 2013 21:30:46 -0800 (PST)
+Date: Thu, 7 Mar 2013 21:30:46 -0800
+Message-ID: <CAHQecY7V9WRQ0u0wnuXM4W4255v0mwiyt+_EqmihExuo0c4jyQ@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org, apelete@seketeli.net
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [2011.03-maintenance][PATCH 2/7] git: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,190 +38,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2013 03:23:05 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Mar 2013 05:47:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 13-03-07 03:05 PM, Tumati, Pradeep wrote:
-> Randy,
+I have added these to the OE Sourcemirror and you are good to go for
+updating the recipies.
+
+Cheers
+
+Tom
+
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tom King <ka6sox@gmail.com>
+Date: Tue, 5 Mar 2013 10:23:45 +0100
+Subject: Re: [oe] [2011.03-maintenance][PATCH 2/7] git: update SRC_URI
+Le 02-Mar-13, Apelete Seketeli a =E9crit:
+> Hello Tom,
 >
-> Just wanted to forward you this email since Mark Hatle is on vacation...
-
-Thanks.
-
+> Le 02-Mar-13, Martin Jansa a =E9crit:
+> > On Sat, Mar 02, 2013 at 04:32:27PM +0100, Apelete Seketeli wrote:
+> > > Le 02-Mar-13, Martin Jansa a =E9crit:
+> > > > On Sat, Mar 02, 2013 at 12:57:03PM +0100, Apelete Seketeli wrote:
+> > > > > Update SRC_URI to build.shr-project.org since git source packages
+are
+> > > > > no longer available from kernel.org.
+> > > > > ---
+> > > > >  recipes/git/git.inc |    2 +-
+> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/recipes/git/git.inc b/recipes/git/git.inc
+> > > > > index eb59a2c..ae656e1 100644
+> > > > > --- a/recipes/git/git.inc
+> > > > > +++ b/recipes/git/git.inc
+> > > > > @@ -2,7 +2,7 @@ DESCRIPTION =3D "The git revision control system
+used by the Linux kernel develope
+> > > > >  SECTION =3D "console/utils"
+> > > > >  LICENSE =3D "GPLv2"
+> > > > >
+> > > > > -SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/software/scm/git/git-=
+${
+PV}.tar.bz2;name=3Dsrc"
+> > > > > +SRC_URI =3D "
+http://build.shr-project.org/sources/git-${PV}.tar.bz2;name=3Dsrc"
+> > > >
+> > > > I don't know how long I'll keep "old" PREMIRROR there, it would be
+> > > > better to send missing archives to Tom King to add them to
+> > > > sources.oe.org which is more official source (and probably already
+> > > > listed in default MIRRORS)
+> > >
+> > > How do I send Tom King the missing archives ?
+> > > I'll reformat the patches into a v2 as soon as this is fixed.
+> >
+> > You can send him URLs to needed archives on yocto and shr premirrors
+> > and he will wget it from there.
 >
-> See my comments below
+> Could you please add the following archives to
+> sources.openembedded.org ? I need them to fix non-working SRC_URIs in
+> many recipes:
 >
->> -----Original Message-----
->> From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]
->> Sent: Thursday, March 07, 2013 7:51 AM
->> To: Hatle, Mark
->> Cc: Tumati, Pradeep; openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [PATCH meta-webserver] apache2: correct header file
->> location
->>
->> On Tuesday 19 February 2013 21:09:34 Mark Hatle wrote:
->>> From: Pradeep Tumati <pradeep.tumati@windriver.com>
->>>
->>> Apache header files are being placed in ../usr/include/lib32-apache2
->>> under the sysroot where as lib32-modphp looks for
->>> ../usr/include/apache2 directory. This fix ensures that apache2 header
->>> files are placed in the ../usr/include/apache2/ directory.
->>>
->>> Signed-off-by: Pradeep Tumati <pradeep.tumati@windriver.com>
->>> Signed-off-by: Jeff Polk <jeff.polk@windriver.com>
->>> ---
->>>   recipes-httpd/apache2/apache2_2.4.2.bb | 32
->>> ++++++++++++++++---------------- 1 file changed, 16 insertions(+), 16
->>> deletions(-)
->>>
->>> diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb
->>> b/recipes-httpd/apache2/apache2_2.4.2.bb index af7840d..af8c4ca 100644
->>> --- a/recipes-httpd/apache2/apache2_2.4.2.bb
->>> +++ b/recipes-httpd/apache2/apache2_2.4.2.bb
->>> @@ -41,13 +41,13 @@ EXTRA_OECONF = "--enable-ssl \
->>>   		--enable-rewrite \
->>>   		--with-dbm=sdbm \
->>>   		--with-berkeley-db=no \
->>> -		--localstatedir=/var/${PN} \
->>> +		--localstatedir=/var/${BPN} \
->>>   		--with-gdbm=no \
->>>   		--with-ndbm=no \
->>> -		--includedir=${includedir}/${PN} \
->>> -		--datadir=${datadir}/${PN} \
->>> -		--sysconfdir=${sysconfdir}/${PN} \
->>> -                --libexecdir=${libdir}/${PN}/modules \
->>> +		--includedir=${includedir}/${BPN} \
->>> +		--datadir=${datadir}/${BPN} \
->>> +		--sysconfdir=${sysconfdir}/${BPN} \
->>> +                --libexecdir=${libdir}/${BPN}/modules \
->>>   		ap_cv_void_ptr_lt_long=no \
->>>   		--enable-mpms-shared \
->>>   		ac_cv_have_threadsafe_pollset=no"
->>> @@ -68,19 +68,19 @@ do_install_append() {
->>>   		    -e 's,/usr/bin/,${bindir}/,g' \
->>>   		    -e 's,/usr/lib,${libdir}/,g' \
->>>   		    -e 's,/etc/,${sysconfdir}/,g' \
->>> -		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
->>> -	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
->>> +		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${BPN}
->>> +	chmod 755 ${D}/${sysconfdir}/init.d/${BPN}
->>>   	# remove the goofy original files...
->>> -	rm -rf ${D}/${sysconfdir}/${PN}/original
->>> +	rm -rf ${D}/${sysconfdir}/${BPN}/original
->>>   	# Expat should be found in the staging area via DEPENDS...
->>>   	rm -f ${D}/${libdir}/libexpat.*
->>>
->>> -	install -d ${D}${sysconfdir}/${PN}/conf.d
->>> -	install -d ${D}${sysconfdir}/${PN}/modules.d
->>> +	install -d ${D}${sysconfdir}/${BPN}/conf.d
->>> +	install -d ${D}${sysconfdir}/${BPN}/modules.d
->>>
->>>   	# Ensure configuration file pulls in conf.d and modules.d
->>> -	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >>
->>> ${D}/${sysconfdir}/${PN}/httpd.conf -	printf "\nIncludeOptional
->>> ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >>
->>> ${D}/${sysconfdir}/${PN}/httpd.conf +	printf "\nIncludeOptional
->>> ${sysconfdir}/${BPN}/conf.d/*.conf" >>
->>> ${D}/${sysconfdir}/${BPN}/httpd.conf
->>> +	printf "\nIncludeOptional
->> ${sysconfdir}/${BPN}/modules.d/*.conf\n\n"
->>> +>>
->>> ${D}/${sysconfdir}/${BPN}/httpd.conf }
->>>
->>>   SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
->>> @@ -88,12 +88,12 @@ SYSROOT_PREPROCESS_FUNCS +=
->> "apache_sysroot_preprocess"
->>>   apache_sysroot_preprocess () {
->>>   	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
->>>   	install -m 755 ${D}${bindir}/apxs
->>> ${SYSROOT_DESTDIR}${bindir_crossscripts}/ -	sed -i 's!my
->> $installbuilddir
->> =
->>> .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!'
->>> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs +	sed -i 's!my
->>> $installbuilddir = .*!my $installbuilddir =
->>> "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!'
->>> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs sed -i 's!my $libtool =
->>> .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!'
->>> ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
->>>
->>> -	sed -i 's!^APR_CONFIG = .*!APR_CONFIG =
->>> ${STAGING_BINDIR_CROSS}/apr-1-config!'
->>> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
->>> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-
->> config!'
->>> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk -	sed -i
->>> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
->>> ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk +	sed -i
->>> 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-
->> config!'
->>> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
->>> 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-
->> config!'
->>> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk +	sed -i
->>> 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!'
->>> ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk }
->>>
->>>   #
->>
->> Like the last patch this is not actually against meta-webserver master, and
->> like the last patch I was about to rebase and apply it on top, and again I notice
->> that there are ${PN} references that haven't been changed but appear to
->> need to be - the ones I can see are in the FILES_ values e.g.
->>
->> FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
->>
->> To match up with the paths we're specifying in EXTRA_OECONF this would
->> need to be changed to:
->>
->> FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
->>
->> Surely this sort of thing should be showing up in testing?
+> http://downloads.yoctoproject.org/mirror/sources/libcap-2.20.tar.bz2
+> http://downloads.yoctoproject.org/mirror/sources/Linux-PAM-1.1.1.tar.bz2
+> http://downloads.yoctoproject.org/mirror/sources/netbase_4.21.tar.gz
+> http://build.shr-project.org/sources/udev-151.tar.gz
+> http://build.shr-project.org/sources/udev-162.tar.gz
+> http://build.shr-project.org/sources/udev-165.tar.gz
+> http://build.shr-project.org/sources/git-1.7.3.5.tar.bz2
 >
->
-> This is Paul's response to the apache2 multilib defect that I have
-> worked on earlier. Paul points out that a few more ${PN}s have to
-> be changed to ${BPN}s and so I was wondering if you can guide us
-> how to proceed from here.
+> Please let me know when the archives are available at
+> sources.openembedded.org, I'll reformat this patchset into v2 and
+> resend the pull request then.
 
-We're a bit behind the upstream meta-openembedded/meta-webserver repo:
+I'm replying to myself here as a reminder request to feedback: still
+need the above mentioned archives to be added to
+sources.openembedded.org. Is Tom King currently around ?
 
-we have      : apache2_2.4.2.bb
-upstream has : apache2_2.4.3.bb
-
-Not a big deal and we'll get caught up soon, I expect.
-
-Anyway, we do in fact have this error in the meta-webserver layer's
-apache2_2.4.2 recipe but there isn't a warning generated when
-the multilib dbg rpm is packaged...Ah, that's because we have a
-local bbappend that needs to be sent upstream. Song can you do that
-that in the next day or so.
-
-Pradeep, because we're a version behind upstream, it's best if
-we adjust our patches before sending upstream.
-
-Hope that helps,
-
-// Randy
-
-
->
-> Thanks,
-> Pradeep
->
->>
->> Cheers,
->> Paul
->>
->> --
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
-
-
--- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350
-
+Cheers.
+--
+        Apelete
 
