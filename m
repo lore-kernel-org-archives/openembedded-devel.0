@@ -1,24 +1,26 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UDzd3-0002pm-ER
+	(envelope-from <eric@eukrea.com>) id 1UE013-00042O-F6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 16:54:41 +0100
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 08 Mar 2013 07:38:06 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,809,1355126400"; d="scan'208";a="211235038"
-Received: from unknown (HELO helios.localnet) ([10.255.12.228])
-	by AZSMGA002.ch.intel.com with ESMTP; 08 Mar 2013 07:38:05 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Fri, 08 Mar 2013 17:19:31 +0100
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 46AE3CA9324
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Mar 2013 17:02:56 +0100 (CET)
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 839B54B019C;
+	Fri,  8 Mar 2013 17:02:49 +0100 (CET)
+Date: Fri, 8 Mar 2013 17:02:47 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 08 Mar 2013 15:38:04 +0000
-Message-ID: <1410016.OfJ0gICJPg@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10 (Linux/3.5.0-24-generic; KDE/4.10.0; i686; ; )
-In-Reply-To: <1362753870-23009-1-git-send-email-ml@communistcode.co.uk>
-References: <1362753870-23009-1-git-send-email-ml@communistcode.co.uk>
-MIME-Version: 1.0
-Subject: Re: [meta-webserver][PATCH] hiawatha: update to 8.8.1
+Message-ID: <20130308170247.30dfa092@e6520eb>
+In-Reply-To: <1362746826-22762-1-git-send-email-laurentiu.palcu@intel.com>
+References: <1362746826-22762-1-git-send-email-laurentiu.palcu@intel.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [meta-browser][PATCH 0/1] chromium: add support for x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2013 15:54:43 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 08 Mar 2013 16:19:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Friday 08 March 2013 14:44:30 Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> 
-> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> ---
->  .../recipes-httpd/hiawatha/{hiawatha_8.7.bb => hiawatha_8.8.1.bb}     | 4
-> ++-- 1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_8.7.bb =>
-> hiawatha_8.8.1.bb} (93%)
-> 
-> diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
-> b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb similarity index
-> 93%
-> rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
-> rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
-> index d8a0583..9e4f119 100644
-> --- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.7.bb
-> +++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
-> @@ -9,8 +9,8 @@ SECTION = "net"
->  SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
->             file://hiawatha-init "
-> 
-> -SRC_URI[md5sum] = "712b1822ef525153dc4347417252768d"
-> -SRC_URI[sha256sum] =
-> "c35e1e975962e1105d7914f74901e304ba90681985c94236c113eaca502b5e34"
-> +SRC_URI[md5sum] = "5def93779bbc10a021796abd3609caf7"
-> +SRC_URI[sha256sum] =
-> "2583d8e7f48ddc6cdedc27bb51d3e130679fc2f4411622bae9ddce3ef965d063"
-> 
->  inherit cmake update-rc.d
+Hi Laurentiu,
 
-Merged, thanks.
+Le Fri,  8 Mar 2013 14:47:05 +0200,
+Laurentiu Palcu <laurentiu.palcu@intel.com> a =C3=A9crit :
+> I gave chromium a test on x86 architecture and, apparently, there was no
+> support for x86-64. So, I added it (didn't do much actually, just copied
+> the i586 gypi files and changed the target_arch to x64), built
+> core-image-sato for qemux86-64, and ran chrome. It worked just fine.
+>=20
+> I also removed gtk+-native from the dependencies (there's no need for
+> the native gtk) and added gtk+ instead (this one is needed).
+>=20
+thanks I splitted the change in 2 patches and pushed it.
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Eric
 
 
