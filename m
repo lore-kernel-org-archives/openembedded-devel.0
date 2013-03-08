@@ -1,35 +1,20 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UDwdp-0004sB-4T for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 13:43:20 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UDwOA-0006Jj-2A for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Mar 2013 13:27:06 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2013 13:27:06 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Mar 2013 13:27:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <laurentiu.palcu@intel.com>) id 1UDwyd-0005os-Ll
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Mar 2013 14:04:52 +0100
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 08 Mar 2013 04:47:09 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,807,1355126400"; d="scan'208";a="297697065"
+Received: from lpalcu-linux (HELO localhost.localdomain) ([10.237.105.165])
+	by fmsmga001.fm.intel.com with ESMTP; 08 Mar 2013 04:47:08 -0800
+From: Laurentiu Palcu <laurentiu.palcu@intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 08 Mar 2013 13:26:31 +0100
-Message-ID: <khcldh$htt$1@ger.gmane.org>
-References: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
-	<CALbNGRT+RDine-AZQx+K8oaf25mncrHvvbYq5FMNS7TnXQU0Pw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <CALbNGRT+RDine-AZQx+K8oaf25mncrHvvbYq5FMNS7TnXQU0Pw@mail.gmail.com>
-X-Enigmail-Version: 1.5
-Subject: Re: [meta-oe][PATCHv2] poppler: upgrade to 0.18.4
+Date: Fri,  8 Mar 2013 14:47:05 +0200
+Message-Id: <1362746826-22762-1-git-send-email-laurentiu.palcu@intel.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-browser][PATCH 0/1] chromium: add support for x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,50 +28,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Mar 2013 12:43:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Mar 2013 13:04:53 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Op 08-03-13 12:25, Andreas Müller schreef:
-> On Tue, Mar 5, 2013 at 11:15 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->> * 0.18.0 was failing to build after libpng was upgraded to 1.6 in
->> oe-core
->> 
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
->> meta-oe/recipes-support/poppler/poppler_0.18.0.bb | 12 ------------ 
->> meta-oe/recipes-support/poppler/poppler_0.18.4.bb | 10 ++++++++++ 2
->> files changed, 10 insertions(+), 12 deletions(-) delete mode 100644
->> meta-oe/recipes-support/poppler/poppler_0.18.0.bb create mode 100644
->> meta-oe/recipes-support/poppler/poppler_0.18.4.bb
->> 
-> Maybe it is a temporary problem but I get
-> 
-> ERROR: Fetcher failure: Fetch command failed with exit code 4, no output 
-> ERROR: Function failed: Fetcher failure for URL: 
-> 'http://poppler.freedesktop.org/poppler-0.18.4.tar.gz'. Unable to fetch
-> URL from any source. ERROR: Logfile of failure stored in: 
-> /home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/poppler/0.18.4-r0/temp/log.do_fetch.20883
->
-> 
-ERROR: Task 4
-(/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes-support/poppler/poppler_0.18.4.bb,
-> do_fetch) failed with exit code '1'
+I gave chromium a test on x86 architecture and, apparently, there was no
+support for x86-64. So, I added it (didn't do much actually, just copied
+the i586 gypi files and changed the target_arch to x64), built
+core-image-sato for qemux86-64, and ran chrome. It worked just fine.
 
-FDO is flakey this week. Rumour has it's being slashdotted due to the new
-systemd release.
+I also removed gtk+-native from the dependencies (there's no need for
+the native gtk) and added gtk+ instead (this one is needed).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Please, review it and/or give it a test.
 
-iD8DBQFROdj3MkyGM64RGpERAguqAJ9Tb8xRLeFzdZ1+LBqE3tVVIxxW8wCeIPQ0
-Hjqlkm2gjhzS4Y2yegVym8s=
-=8w7W
------END PGP SIGNATURE-----
+Thanks,
+Laurentiu
+
+Laurentiu Palcu (1):
+  chromium: add support for x86-64
+
+ .../chromium-24.0.1312.52/x86-64/include.gypi      |    5 +++++
+ .../chromium-24.0.1312.52/x86-64/oe-defaults.gypi  |   15 +++++++++++++++
+ recipes-browser/chromium/chromium_24.0.1312.52.bb  |    3 ++-
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/x86-64/include.gypi
+ create mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/x86-64/oe-defaults.gypi
+
+-- 
+1.7.9.5
 
 
 
