@@ -1,23 +1,19 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UEQQx-0004yp-07
+	(envelope-from <apelete@seketeli.net>) id 1UEQQx-0004yo-04
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 09 Mar 2013 21:32:00 +0100
 Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 99AE1EA042;
+	by ms.seketeli.net (Postfix) with ESMTP id 97634EA040;
 	Sat,  9 Mar 2013 21:31:34 +0100 (CET)
 Received: by localhost (Postfix, from userid 1000)
-	id 03C8FA42DCF; Sat,  9 Mar 2013 21:15:36 +0100 (CET)
+	id 005F4A42DD0; Sat,  9 Mar 2013 21:15:35 +0100 (CET)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Mar 2013 21:15:20 +0100
-Message-Id: <4905bcbfc2a9e0e7b04d64106cc0365d22cfe511.1362859975.git.apelete@seketeli.net>
+Date: Sat,  9 Mar 2013 21:15:19 +0100
+Message-Id: <cover.1362859975.git.apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1362859975.git.apelete@seketeli.net>
-References: <cover.1362859975.git.apelete@seketeli.net>
-In-Reply-To: <cover.1362859975.git.apelete@seketeli.net>
-References: <cover.1362859975.git.apelete@seketeli.net>
-Subject: [2011.03-maintenance][PATCH v3 1/2] gnutls: update SRC_URI
+Subject: [2011.03-maintenance][PATCH v3 0/2] Pull request 20130309
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,44 +29,39 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 09 Mar 2013 20:32:10 -0000
 
-Update SRC_URI since the gnutls source packages were moved into a
-different directory on ftp.gnutls.org.
----
+Hello,
+
+The patches that come as a follow-up of this message fix an issue
+found while building muffinman-image on top of the 2011.03-maintenance
+branch, and also add the capability to build a ubi image for the
+ben-nanonote machine. This work is intended to be used as a basis for
+porting the JLime distribution to oe-core.
+
+These modifications were tested by successfully building
+muffinman-image from scratch on a Debian Wheezy host.
+
+Please pull into 2011.03-maintenance branch.
+
+The following changes since commit ff679935b073a89c4e407d259bcc2eea9148fb91:
+
+  opkg-utils: bump SRCREV to latest (2012-10-26 11:11:59 +0200)
+
+are available in the git repository at:
+
+  git://seketeli.fr/~apelete/oe.git muffinman-image-fix
+
+Apelete Seketeli (2):
+  gnutls: update SRC_URI
+  jlime-2010.1: add capability to build ubi image for ben-nanonote
+    machine
+
+ conf/bitbake.conf               |    2 +-
+ conf/distro/jlime-2010.1.conf   |    3 ++-
+ conf/machine/ben-nanonote.conf  |   12 ++++++++++++
  recipes/gnutls/gnutls.inc       |    2 --
  recipes/gnutls/gnutls_2.10.4.bb |    7 ++++---
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ 5 files changed, 19 insertions(+), 7 deletions(-)
 
-diff --git a/recipes/gnutls/gnutls.inc b/recipes/gnutls/gnutls.inc
-index a8e1e0d..146a0c8 100644
---- a/recipes/gnutls/gnutls.inc
-+++ b/recipes/gnutls/gnutls.inc
-@@ -8,8 +8,6 @@ LICENSE_${PN}-bin = "GPLv3+"
- LICENSE_${PN}-extra = "GPLv3+"
- LICENSE_${PN}-openssl = "GPLv3+"
- 
--SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz2;name=gnutls"
--
- inherit autotools binconfig pkgconfig gettext
- 
- INC_PR = "r12"
-diff --git a/recipes/gnutls/gnutls_2.10.4.bb b/recipes/gnutls/gnutls_2.10.4.bb
-index 9f40684..c5619b2 100644
---- a/recipes/gnutls/gnutls_2.10.4.bb
-+++ b/recipes/gnutls/gnutls_2.10.4.bb
-@@ -4,9 +4,10 @@ PR = "${INC_PR}.0"
- 
- EXTRA_OECONF += " --without-libgcrypt-prefix "
- 
--SRC_URI += "file://gettextize-with-gettext-0.18.patch \
--            file://gnutls-openssl.patch \
--            file://gnutls-replace-siginterrupt.patch \
-+SRC_URI = "ftp://ftp.gnutls.org/gcrypt/gnutls/v2.10/gnutls-${PV}.tar.bz2;name=gnutls \
-+	   file://gettextize-with-gettext-0.18.patch \
-+           file://gnutls-openssl.patch \
-+           file://gnutls-replace-siginterrupt.patch \
-            "
- 
- do_configure_prepend() {
 -- 
 1.7.10.4
 
