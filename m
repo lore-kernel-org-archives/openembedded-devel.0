@@ -1,38 +1,23 @@
-Received: from mail-ee0-f45.google.com ([74.125.83.45])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UEQBX-0004Ni-1P
+	(envelope-from <apelete@seketeli.net>) id 1UEQQx-0004ys-1w
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Mar 2013 21:16:06 +0100
-Received: by mail-ee0-f45.google.com with SMTP id b57so1557363eek.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Mar 2013 11:59:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=8ooU1tUjX5evO1ccOU/swPrFx23+jRPhGDmLcl96PU8=;
-	b=m+FyrOpVw3kLIlUFHq6F75FXDwn9/661mvWCbbsmG6RoZ5YVHYp6qm4Jw7CXcxfUbP
-	TCpP3d9dvFZ6V9/88K9cSzoqphNLsbD6ezWeyA5b5DeGCi9pIRgGJam07FjuWuCG+aiR
-	K0Qz31oELhjRal48CiTwic33rpwQQpZqP+3oQmrbun0jLT7sT5o2N2nbZUofsp58sDjM
-	SmhW/LR48B8Whhn71XngQ+bkWuv3zyQkDEwnT9srXfuzMg4xeCoONocDx1KYeSkUycQB
-	ZSOWsqodvIK3Lzz5TwPB+5JR3Bs5RipwlrYgIIevXi/1NzWn+gAn5crs3vfakKgd87QC
-	OFaA==
-X-Received: by 10.14.193.134 with SMTP id k6mr19056647een.37.1362859158706;
-	Sat, 09 Mar 2013 11:59:18 -0800 (PST)
-Received: from localhost.localdomain (p5B0A1B31.dip.t-dialin.net.
-	[91.10.27.49])
-	by mx.google.com with ESMTPS id m46sm14583955eeo.16.2013.03.09.11.59.17
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sat, 09 Mar 2013 11:59:18 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sat, 09 Mar 2013 21:32:00 +0100
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id A0F67EA048;
+	Sat,  9 Mar 2013 21:31:34 +0100 (CET)
+Received: by localhost (Postfix, from userid 1000)
+	id 09165A42DD2; Sat,  9 Mar 2013 21:15:36 +0100 (CET)
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Mar 2013 20:59:04 +0100
-Message-Id: <1362859144-336-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1362859144-336-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1362859144-336-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe] gedit: fix compile
+Date: Sat,  9 Mar 2013 21:15:21 +0100
+Message-Id: <2031e9b19fc0963e869a9d5595db0eea128c26f9.1362859975.git.apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <cover.1362859975.git.apelete@seketeli.net>
+References: <cover.1362859975.git.apelete@seketeli.net>
+In-Reply-To: <cover.1362859975.git.apelete@seketeli.net>
+References: <cover.1362859975.git.apelete@seketeli.net>
+Subject: [2011.03-maintenance][PATCH v3 2/2] jlime-2010.1: add capability to build ubi image for ben-nanonote machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,102 +31,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Mar 2013 20:16:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 09 Mar 2013 20:32:10 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Add capability to build a ubi image for the ben-nanonote machine when
+using the jlime-2010.1 distro. The resulting image is ready to use and
+fully functionnal.
 ---
- .../0001-workaround-void-pointer-arithmetic.patch  |   57 ++++++++++++++++++++
- meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb     |    3 +-
- 2 files changed, 59 insertions(+), 1 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gedit/files/0001-workaround-void-pointer-arithmetic.patch
+ conf/bitbake.conf              |    2 +-
+ conf/distro/jlime-2010.1.conf  |    3 ++-
+ conf/machine/ben-nanonote.conf |   12 ++++++++++++
+ 3 files changed, 15 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/files/0001-workaround-void-pointer-arithmetic.patch b/meta-gnome/recipes-gnome/gedit/files/0001-workaround-void-pointer-arithmetic.patch
-new file mode 100644
-index 0000000..a28808b
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gedit/files/0001-workaround-void-pointer-arithmetic.patch
-@@ -0,0 +1,57 @@
-+From 8e0cbfac142d38320dd02416601e14c65585cd17 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Sat, 9 Mar 2013 12:47:06 +0100
-+Subject: [PATCH] workaround void pointer arithmetic
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+fixes errors like:
-+error: pointer of type 'void *' used in arithmetic [-Werror=pointer-arith]
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ gedit/gedit-document-input-stream.c   |    4 ++--
-+ gedit/gedit-smart-charset-converter.c |    2 +-
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/gedit/gedit-document-input-stream.c b/gedit/gedit-document-input-stream.c
-+index 5a1f961..38316e7 100644
-+--- a/gedit/gedit-document-input-stream.c
-++++ b/gedit/gedit-document-input-stream.c
-+@@ -426,7 +426,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
-+ 
-+ 	do
-+ 	{
-+-		n = read_line (dstream, buffer + read, space_left);
-++		n = read_line (dstream, ((char*)buffer) + read, space_left);
-+ 		read += n;
-+ 		space_left -= n;
-+ 	} while (space_left > 0 && n != 0 && dstream->priv->bytes_partial == 0);
-+@@ -451,7 +451,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
-+ 
-+ 			newline = get_new_line (dstream);
-+ 
-+-			memcpy (buffer + read, newline, newline_size);
-++			memcpy (((char*)buffer) + read, newline, newline_size);
-+ 
-+ 			read += newline_size;
-+ 			dstream->priv->newline_added = TRUE;
-+diff --git a/gedit/gedit-smart-charset-converter.c b/gedit/gedit-smart-charset-converter.c
-+index e32b0b1..6745ce3 100644
-+--- a/gedit/gedit-smart-charset-converter.c
-++++ b/gedit/gedit-smart-charset-converter.c
-+@@ -153,7 +153,7 @@ try_convert (GCharsetConverter *converter,
-+ 	do
-+ 	{
-+ 		res = g_converter_convert (G_CONVERTER (converter),
-+-		                           inbuf + nread,
-++		                           ((const char*)inbuf) + nread,
-+ 		                           inbuf_size - nread,
-+ 		                           out + nwritten,
-+ 		                           out_size - nwritten,
-+-- 
-+1.7.4.4
-+
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-index 24ce245..11e0945 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-@@ -1,13 +1,14 @@
- DESCRIPTION = "GNOME editor"
- SECTION = "x11/gnome"
- LICENSE = "GPLv2+"
--PR = "r1"
-+PR = "r2"
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 01b9321..527127e 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -399,7 +399,7 @@ IMAGE_CMD_cpio.gz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio
+ IMAGE_CMD_cpio.xz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz -c ${XZ_COMPRESSION_LEVEL} > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.xz) ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
+ IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | lzma -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
+-IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
++IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg ${EXTRA_IMAGECMD} ; mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
+ IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
  
- DEPENDS = "gvfs enchant gconf gnome-doc-utils gnome-doc-utils-native glib-2.0 gtk+ gtksourceview2 iso-codes"
+ EXTRA_IMAGECMD = ""
+diff --git a/conf/distro/jlime-2010.1.conf b/conf/distro/jlime-2010.1.conf
+index a3ec20e..d6a92cf 100644
+--- a/conf/distro/jlime-2010.1.conf
++++ b/conf/distro/jlime-2010.1.conf
+@@ -30,13 +30,14 @@ DISTRO_EXTRA_RDEPENDS = "nano keymaps console-tools"
+ #
+ IMAGE_NAME = "${DISTRO_NAME}-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
+ SPLASH = "psplash"
++UBI_VOLNAME = "rootfs"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ #
+ # Naming schemes + packages
+ #
+ INHERIT += "debian package_tar package_ipk src_distribute_local"
+ SRC_DIST_LOCAL ?= "symlink"
+-IMAGE_FSTYPES = "tar.gz tar.bz2 jffs2"
++IMAGE_FSTYPES = "tar.gz tar.bz2 jffs2 ubi"
+ PREFERRED_PROVIDER_virtual/update-alternatives = "opkg"
  
- inherit gnome gettext pythonnative
-+SRC_URI+= "file://0001-workaround-void-pointer-arithmetic.patch"
- SRC_URI[archive.md5sum] = "e1eecb0a92a1a363b3d375ec5ac0fb3b"
- SRC_URI[archive.sha256sum] = "a561fe3dd1d199baede1bd07c4ee65f06fc7c494dd4d3327117f04149a608e3c"
+ #
+diff --git a/conf/machine/ben-nanonote.conf b/conf/machine/ben-nanonote.conf
+index fd4aba4..e92992d 100644
+--- a/conf/machine/ben-nanonote.conf
++++ b/conf/machine/ben-nanonote.conf
+@@ -13,6 +13,18 @@ KERNEL_IMAGETYPE = "vmlinux.bin"
+ 
+ IMAGE_FSTYPES ?= "jffs2"
+ 
++# do ubiattach /dev/ubi_ctrl -m 2
++# From dmesg:
++# UBI: physical eraseblock size:   524288 bytes (512 KiB)
++# UBI: logical eraseblock size:    516096 bytes
++# UBI: smallest flash I/O unit:    4096
++# UBI: VID header offset:          4096 (aligned 4096)
++# UBI: data offset:                8192
++MKUBIFS_ARGS = "-m 4096 -e 516096 -c 4095"
++UBINIZE_ARGS = "-m 4096 -p 512KiB"
++
++EXTRA_IMAGECMD_ubi = "; echo vol_alignment=1 >> ubinize.cfg"
++
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+ PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
  
 -- 
-1.7.4.4
+1.7.10.4
 
 
 
