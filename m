@@ -1,29 +1,23 @@
 Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UEQTs-0005Ex-8g
+	(envelope-from <apelete@seketeli.net>) id 1UEQmu-0005oK-HT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Mar 2013 21:35:01 +0100
+	Sat, 09 Mar 2013 21:54:40 +0100
 Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 0A4ECEA040
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Mar 2013 21:34:16 +0100 (CET)
+	by ms.seketeli.net (Postfix) with ESMTP id C71A0EA040;
+	Sat,  9 Mar 2013 21:54:15 +0100 (CET)
 Received: by localhost (Postfix, from userid 1000)
-	id D54F0601DB; Sat,  9 Mar 2013 21:18:05 +0100 (CET)
-Date: Sat, 9 Mar 2013 21:18:05 +0100
+	id 760A6A42DCF; Sat,  9 Mar 2013 21:38:17 +0100 (CET)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130309201805.GB6272@hermes>
-References: <cover.1362831936.git.apelete@seketeli.net>
-	<73f5d1d2501d60fb20e3290d758e35aaf6b91e4c.1362831936.git.apelete@seketeli.net>
-	<3C660C3C-34A4-4805-B6C0-E49AC8EEED55@gmail.com>
-	<20130309195424.GA6272@hermes>
-	<B07109A7-1245-46FD-A060-01AC1731337F@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <B07109A7-1245-46FD-A060-01AC1731337F@gmail.com>
-X-Operating-System: Debian GNU/Linux 7.0
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [2011.03-maintenance][PATCH v2 1/2] gnutls: update SRC_URI
+Date: Sat,  9 Mar 2013 21:38:04 +0100
+Message-Id: <ba5084a1d73111f3b2549492d55e1196e71d9fac.1362861075.git.apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <cover.1362861075.git.apelete@seketeli.net>
+References: <cover.1362861075.git.apelete@seketeli.net>
+In-Reply-To: <cover.1362861075.git.apelete@seketeli.net>
+References: <cover.1362861075.git.apelete@seketeli.net>
+Subject: [2011.03-maintenance][PATCH v4 1/2] gnutls: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,41 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Mar 2013 20:35:02 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 09 Mar 2013 20:54:45 -0000
+X-List-Received-Date: Sat, 09 Mar 2013 20:54:45 -0000
 
-Le 09-Mar-13, Khem Raj a =E9crit:
->=20
-> On Mar 9, 2013, at 11:54 AM, Apelete Seketeli <apelete@seketeli.net> wr=
-ote:
->=20
-> > Le 09-Mar-13, Khem Raj a =E9crit:
-> >>=20
-> >> On Mar 9, 2013, at 4:38 AM, Apelete Seketeli <apelete@seketeli.net> =
-wrote:
-> >>=20
-> >>> -SRC_URI =3D "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz2;=
-name=3Dgnutls"
-> >>> +SRC_URI =3D "ftp://ftp.gnutls.org/gcrypt/gnutls/v2.10/gnutls-${PV}=
-.tar.bz2;name=3Dgnutls"
-> >>=20
-> >> can we use PV instead of 2.10 ? if not then move SRC_URI out of .inc=
- into .bb
-> >=20
-> > PV is actually 2.10.4 here, it can't be used instead of 2.10 it seems=
-.
-> > I'll move SRC_URI into .bb then.
->=20
-> now that I looked into oe.classic tree there is only 1 recipe for gnutl=
-s
-> so its ok to have it in .inc=20
+Update SRC_URI since the gnutls source packages were moved into a
+different directory on ftp.gnutls.org.
 
-Patch v3 already sent, I hope it's ok anyway :).
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+---
+ recipes/gnutls/gnutls.inc       |    2 --
+ recipes/gnutls/gnutls_2.10.4.bb |    7 ++++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-Cheers.
---=20
-        Apelete
+diff --git a/recipes/gnutls/gnutls.inc b/recipes/gnutls/gnutls.inc
+index a8e1e0d..146a0c8 100644
+--- a/recipes/gnutls/gnutls.inc
++++ b/recipes/gnutls/gnutls.inc
+@@ -8,8 +8,6 @@ LICENSE_${PN}-bin = "GPLv3+"
+ LICENSE_${PN}-extra = "GPLv3+"
+ LICENSE_${PN}-openssl = "GPLv3+"
+ 
+-SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz2;name=gnutls"
+-
+ inherit autotools binconfig pkgconfig gettext
+ 
+ INC_PR = "r12"
+diff --git a/recipes/gnutls/gnutls_2.10.4.bb b/recipes/gnutls/gnutls_2.10.4.bb
+index 9f40684..c5619b2 100644
+--- a/recipes/gnutls/gnutls_2.10.4.bb
++++ b/recipes/gnutls/gnutls_2.10.4.bb
+@@ -4,9 +4,10 @@ PR = "${INC_PR}.0"
+ 
+ EXTRA_OECONF += " --without-libgcrypt-prefix "
+ 
+-SRC_URI += "file://gettextize-with-gettext-0.18.patch \
+-            file://gnutls-openssl.patch \
+-            file://gnutls-replace-siginterrupt.patch \
++SRC_URI = "ftp://ftp.gnutls.org/gcrypt/gnutls/v2.10/gnutls-${PV}.tar.bz2;name=gnutls \
++	   file://gettextize-with-gettext-0.18.patch \
++           file://gnutls-openssl.patch \
++           file://gnutls-replace-siginterrupt.patch \
+            "
+ 
+ do_configure_prepend() {
+-- 
+1.7.10.4
+
 
 
