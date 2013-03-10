@@ -1,23 +1,33 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from mail-da0-f42.google.com ([209.85.210.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UEQzm-0006fh-6L
+	(envelope-from <raj.khem@gmail.com>) id 1UEcRL-0000sS-5H
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Mar 2013 22:08:00 +0100
-Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 4BF8FEA040;
-	Sat,  9 Mar 2013 22:07:33 +0100 (CET)
-Received: by localhost (Postfix, from userid 1000)
-	id 79FF2A42DD2; Sat,  9 Mar 2013 21:38:17 +0100 (CET)
-From: Apelete Seketeli <apelete@seketeli.net>
+	Sun, 10 Mar 2013 10:21:36 +0100
+Received: by mail-da0-f42.google.com with SMTP id n15so496498dad.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Mar 2013 01:04:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=c0HzF72E9LVfNMNfDwYAAXap8TtxUcT+qXKAWCUHv0k=;
+	b=YwOhNF2g+ho1VgaFT6u7AfqtLykyq54lpor0RMr1oAiSDgWLSaxMT/Xelja4Upl4pI
+	FxD7I29ktxb5lgg54Q9vaJTCA2wYIpZosz7jcjow4NrjvUj3ebllPn4SQGTbGXQnNfqi
+	zBeJ3E82Jsfp/ujUERslmT0h0jXnt/5QGW0tAtVGAqD4dePE3KX9cbB5DyZDYAtClduW
+	cNPGSQU35wyiseCqKflWq5Qzs9orcZSUiNkWdo/TVXGAk8NNOyxjvyi+vk9ZvsAT6d79
+	Dh0LGoCtvcgOxkZUAfk/AxyZTOcZS2YYW4+EajuEPneJs2FXBjRkXzRFPAMkSlkycjoL
+	/9Vg==
+X-Received: by 10.68.26.234 with SMTP id o10mr18009910pbg.211.1362906273835;
+	Sun, 10 Mar 2013 01:04:33 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id kb3sm14495558pbc.21.2013.03.10.01.04.31
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 10 Mar 2013 01:04:32 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Mar 2013 21:38:05 +0100
-Message-Id: <acc0d13a43469b4a2cfd90142012cb4ac71e4dc7.1362861075.git.apelete@seketeli.net>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1362861075.git.apelete@seketeli.net>
-References: <cover.1362861075.git.apelete@seketeli.net>
-In-Reply-To: <cover.1362861075.git.apelete@seketeli.net>
-References: <cover.1362861075.git.apelete@seketeli.net>
-Subject: [2011.03-maintenance][PATCH v4 2/2] jlime-2010.1: build ubi image for ben-nanonote machine
+Date: Sun, 10 Mar 2013 01:04:03 -0800
+Message-Id: <1362906243-13223-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] tcsh: Depend on ncurses.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,77 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Mar 2013 21:08:57 -0000
+X-List-Received-Date: Sun, 10 Mar 2013 09:21:37 -0000
 
-Build a ubi image for the ben-nanonote machine when using the
-jlime-2010.1 distro. The resulting image is ready to use and fully
-functionnal.
+This fixes the compile errors seen when building
+tcsh from scratch. Its not seen with image builds
+normally since ncurses is already built due to
+other image dependencies
 
-Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/bitbake.conf              |    2 +-
- conf/distro/jlime-2010.1.conf  |    3 ++-
- conf/machine/ben-nanonote.conf |   12 ++++++++++++
- 3 files changed, 15 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 01b9321..527127e 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -399,7 +399,7 @@ IMAGE_CMD_cpio.gz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio
- IMAGE_CMD_cpio.xz = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | xz -c ${XZ_COMPRESSION_LEVEL} > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.xz) ${EXTRA_IMAGECMD}"
- IMAGE_CMD_cpio.gz.u-boot = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
- IMAGE_CMD_cpio.lzma = "type cpio >/dev/null; cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | lzma -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
--IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
-+IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg ${EXTRA_IMAGECMD} ; mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
- IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
- 
- EXTRA_IMAGECMD = ""
-diff --git a/conf/distro/jlime-2010.1.conf b/conf/distro/jlime-2010.1.conf
-index a3ec20e..d6a92cf 100644
---- a/conf/distro/jlime-2010.1.conf
-+++ b/conf/distro/jlime-2010.1.conf
-@@ -30,13 +30,14 @@ DISTRO_EXTRA_RDEPENDS = "nano keymaps console-tools"
- #
- IMAGE_NAME = "${DISTRO_NAME}-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
- SPLASH = "psplash"
-+UBI_VOLNAME = "rootfs"
- 
- #
- # Naming schemes + packages
- #
- INHERIT += "debian package_tar package_ipk src_distribute_local"
- SRC_DIST_LOCAL ?= "symlink"
--IMAGE_FSTYPES = "tar.gz tar.bz2 jffs2"
-+IMAGE_FSTYPES = "tar.gz tar.bz2 jffs2 ubi"
- PREFERRED_PROVIDER_virtual/update-alternatives = "opkg"
- 
- #
-diff --git a/conf/machine/ben-nanonote.conf b/conf/machine/ben-nanonote.conf
-index fd4aba4..e92992d 100644
---- a/conf/machine/ben-nanonote.conf
-+++ b/conf/machine/ben-nanonote.conf
-@@ -13,6 +13,18 @@ KERNEL_IMAGETYPE = "vmlinux.bin"
- 
- IMAGE_FSTYPES ?= "jffs2"
- 
-+# do ubiattach /dev/ubi_ctrl -m 2
-+# From dmesg:
-+# UBI: physical eraseblock size:   524288 bytes (512 KiB)
-+# UBI: logical eraseblock size:    516096 bytes
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: VID header offset:          4096 (aligned 4096)
-+# UBI: data offset:                8192
-+MKUBIFS_ARGS = "-m 4096 -e 516096 -c 4095"
-+UBINIZE_ARGS = "-m 4096 -p 512KiB"
-+
-+EXTRA_IMAGECMD_ubi = "; echo vol_alignment=1 >> ubinize.cfg"
-+
- PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
- PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
- 
+diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
+index d85fba8..bba89bf 100644
+--- a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
++++ b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.tcsh.org/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://Copyright;md5=1cf29be62df2be1a3763118b25b4c780"
+ SECTION = "base"
+-
++DEPENDS = "ncurses"
+ SRC_URI = " \
+ 	${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}.orig.tar.gz;name=tarball \
+ 	${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs \
 -- 
-1.7.10.4
+1.7.9.5
 
 
 
