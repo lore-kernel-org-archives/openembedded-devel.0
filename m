@@ -1,33 +1,28 @@
-Received: from mail-da0-f42.google.com ([209.85.210.42])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UEcRL-0000sS-5H
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UEnKi-0007WY-Dd
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Mar 2013 10:21:36 +0100
-Received: by mail-da0-f42.google.com with SMTP id n15so496498dad.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Mar 2013 01:04:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=c0HzF72E9LVfNMNfDwYAAXap8TtxUcT+qXKAWCUHv0k=;
-	b=YwOhNF2g+ho1VgaFT6u7AfqtLykyq54lpor0RMr1oAiSDgWLSaxMT/Xelja4Upl4pI
-	FxD7I29ktxb5lgg54Q9vaJTCA2wYIpZosz7jcjow4NrjvUj3ebllPn4SQGTbGXQnNfqi
-	zBeJ3E82Jsfp/ujUERslmT0h0jXnt/5QGW0tAtVGAqD4dePE3KX9cbB5DyZDYAtClduW
-	cNPGSQU35wyiseCqKflWq5Qzs9orcZSUiNkWdo/TVXGAk8NNOyxjvyi+vk9ZvsAT6d79
-	Dh0LGoCtvcgOxkZUAfk/AxyZTOcZS2YYW4+EajuEPneJs2FXBjRkXzRFPAMkSlkycjoL
-	/9Vg==
-X-Received: by 10.68.26.234 with SMTP id o10mr18009910pbg.211.1362906273835;
-	Sun, 10 Mar 2013 01:04:33 -0800 (PST)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id kb3sm14495558pbc.21.2013.03.10.01.04.31
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 10 Mar 2013 01:04:32 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Mar 2013 01:04:03 -0800
-Message-Id: <1362906243-13223-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] tcsh: Depend on ncurses.
+	Sun, 10 Mar 2013 21:59:09 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 10 Mar 2013 13:42:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,819,1355126400"; d="scan'208";a="268103461"
+Received: from unknown (HELO helios.localnet) ([10.255.13.12])
+	by azsmga001.ch.intel.com with ESMTP; 10 Mar 2013 13:42:26 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 10 Mar 2013 20:42:25 +0000
+Message-ID: <3813608.lTKvSajpAY@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-25-generic; KDE/4.10.1; i686; ; )
+In-Reply-To: <20130309063059.GA9724@jama.dyndns-home.com>
+References: <1362768637-29343-1-git-send-email-otavio@ossystems.com.br>
+	<1500617.PjPkZjIiXc@helios>
+	<20130309063059.GA9724@jama.dyndns-home.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] polkit: Remove authentication override as it is handled in OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +36,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Mar 2013 09:21:37 -0000
+X-List-Received-Date: Sun, 10 Mar 2013 20:59:16 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-This fixes the compile errors seen when building
-tcsh from scratch. Its not seen with image builds
-normally since ncurses is already built due to
-other image dependencies
+On Saturday 09 March 2013 07:30:59 Martin Jansa wrote:
+> On Fri, Mar 08, 2013 at 10:48:17PM +0000, Paul Eggleton wrote:
+> > On Friday 08 March 2013 15:50:37 Otavio Salvador wrote:
+> > > OE-Core now handles the detection of authentication so we don't need
+> > > to do it here. The bbappend file is kept to provide the upgrade path
+> > > only, or the revision would go backwards.
+> > > 
+> > > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> > > ---
+> > > 
+> > >  meta-oe/recipes-extended/polkit/polkit_0.104.bbappend | 9 +--------
+> > >  1 file changed, 1 insertion(+), 8 deletions(-)
+> > > 
+> > > diff --git a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+> > > b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend index
+> > > ea82e37..ceb2b6b 100644
+> > > --- a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+> > > +++ b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
+> > > @@ -1,8 +1 @@
+> > > -PRINC := "${@int(PRINC) + 4}"
+> > > -
+> > > -POLKITAUTH ??= "consolekit"
+> > > -
+> > > -PACKAGECONFIG += "${POLKITAUTH}"
+> > > -PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+> > > -# there is no --enable/--disable option for consolekit and it's not
+> > > picked
+> > > by shlibs, so add it to RDEPENDS -PACKAGECONFIG[consolekit] =
+> > > ",,,consolekit"
+> > > +PRINC := "${@int(PRINC) + 5}"
+> > 
+> > Can't we just bump PR in OE-Core?
+> 
+> we dont know which oe-core and meta-oe revisions are used together and
+> this needs to be applied in both at the same time.. so no, we need to
+> wait for PE/PV change in oe-core.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I guess you're probably right. Yet another reason to never add any more 
+bbappends to meta-oe.
 
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-index d85fba8..bba89bf 100644
---- a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-+++ b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.tcsh.org/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://Copyright;md5=1cf29be62df2be1a3763118b25b4c780"
- SECTION = "base"
--
-+DEPENDS = "ncurses"
- SRC_URI = " \
- 	${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}.orig.tar.gz;name=tarball \
- 	${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs \
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
