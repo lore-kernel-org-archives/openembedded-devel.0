@@ -1,38 +1,37 @@
-Received: from mail-pb0-f44.google.com ([209.85.160.44])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UF6WS-00067h-Fn
+	(envelope-from <martin.jansa@gmail.com>) id 1UFAYU-0000my-UX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Mar 2013 18:28:28 +0100
-Received: by mail-pb0-f44.google.com with SMTP id wz12so3983766pbc.17
+	Mon, 11 Mar 2013 22:46:52 +0100
+Received: by mail-ee0-f52.google.com with SMTP id b15so2273720eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Mar 2013 10:11:49 -0700 (PDT)
+	Mon, 11 Mar 2013 14:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=720z+2tFNIc5mv2wWi2EdvFGIx89Sczd9l2lBArqDKg=;
-	b=Z4RBkJ4rOEj4FurwX2NOlzcPjKP6Pba2ekAqJojy00k1/YGzSdneDPbEM0ArngdJkO
-	YE3UO4Pv8+DfXF4Y0efhDt8KHHJrAS4ivwMqfwLschH+o91LP4sFS9fZg746THUt/g5I
-	EqsjYmfTQjG8nrNNT0AB9FzP8aqIYGJbCg/MG8ZFk7r2qwKfSzS6IfwN5kGQw+pn0kKX
-	JQa0Vc0SfZXm4t8KJzbCr4uodyyFLp24tdUucOctVx1EoRccrcE/0IwQRIBZkApl1WyI
-	YAUIDakn0Y5zc5qC2Kn654Uj6Xq0P4JTKhRei+TqCWbPAJz+KrtPelHQ5Y4YYMUhEmKF
-	crVg==
-X-Received: by 10.68.189.199 with SMTP id gk7mr22840377pbc.164.1363021909510; 
-	Mon, 11 Mar 2013 10:11:49 -0700 (PDT)
-Received: from [172.23.7.5] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id in5sm12528025pbc.20.2013.03.11.10.11.47
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 11 Mar 2013 10:11:48 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1362998354-7195-2-git-send-email-koen@dominion.thruhere.net>
-Date: Mon, 11 Mar 2013 10:11:46 -0700
-Message-Id: <DF8EE363-1CB9-4E9F-B0B0-A496977C7689@gmail.com>
-References: <1362998354-7195-1-git-send-email-koen@dominion.thruhere.net>
-	<1362998354-7195-2-git-send-email-koen@dominion.thruhere.net>
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=kPXJh21EGySz3CMyDaP2mN5fW6qKed0U+tk06S3mlUM=;
+	b=hDLbYnHdoNDnlPHHDSNkNymyXn3c+KSdB7CF7z7Uv7H8oVHbQzZ31uRRM161szpEJC
+	Jq/XqJb4FstjuMw121Km711Oj0QZacbRqjgfkRh6d9Z/Vyh5NdC7ebJUfplqApIRFXm+
+	XZlf3bW7cIPCqeuMh6QpRFgbYzn2AvwiilUVDYB3vSRwzW0o41iSjzLwr4UM6dRiMQ7l
+	V7DNUyQuitBwCuz/tWCr/mdTiCPFhZ+eXPsgaHZPezo3NB0J0wf0UodebC9m4HeTzzgj
+	gXlEQsNpPKM/WGGEqN9YKq0PKwbNIwNZMbiSeGEcAmsY/eLYdTcPlIFMsUq3wKCoEXG9
+	xhaA==
+X-Received: by 10.14.193.134 with SMTP id k6mr40635752een.37.1363037412623;
+	Mon, 11 Mar 2013 14:30:12 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id q5sm25867559eeo.17.2013.03.11.14.30.11
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 11 Mar 2013 14:30:11 -0700 (PDT)
+Date: Mon, 11 Mar 2013 22:30:20 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1499)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-multimedia][PATCH 2/2] xbmc: add patch to make 'ld-is-gold' work with configure
+Message-ID: <20130311213020.GB9724@jama.dyndns-home.com>
+References: <1362994782-12371-1-git-send-email-wenzong.fan@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1362994782-12371-1-git-send-email-wenzong.fan@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: wfan@windriver.com
+Subject: Re: [PATCH] meta-selinux: Add LAYERVERSION and LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +45,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2013 17:28:29 -0000
+X-List-Received-Date: Mon, 11 Mar 2013 21:46:56 -0000
+X-Groupsio-MsgNum: 43495
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eAbsdosE1cNLO4uF"
+Content-Disposition: inline
+
+--eAbsdosE1cNLO4uF
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
+On Mon, Mar 11, 2013 at 05:39:42PM +0800, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+>=20
+> Add LAYERVERSION and LAYERDEPENDS to layer.conf
 
-On Mar 11, 2013, at 3:39 AM, Koen Kooi <koen@dominion.thruhere.net> =
-wrote:
+meta-selinux patches don't belong to this ML, please mark them as "Not
+applicable" on patchwork.
 
-> ++  #set -x
-> +   if [[ "$host_vendor" !=3D "apple" ]]; then
-> +     AC_MSG_CHECKING([for lib$2 soname])
-> +     $1_FILENAME=3D$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 -Wl,-M =
-2>/dev/null | grep "^LOAD.*$2" | awk '{V=3D2; print $V}')
-> ++    if [[ -z $$1_FILENAME ]]; then
-> ++      #try gold linker syntax
-> ++      $1_FILENAME=3D$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 =
--Wl,-t 3>&1 1>&2 2>&3 | grep "$2")
-> ++    fi
-> +     if [[ ! -z $$1_FILENAME ]]; then
-> +       $1_SONAME=3D$(objdump -p $$1_FILENAME | grep "SONAME.*$2" | =
-awk '{V=3D2; print $V}')
-> +     fi
-> +@@ -55,6 +60,7 @@ AC_DEFUN([XB_FIND_SONAME],
-> +     AC_MSG_RESULT([$$1_SONAME])
-> +     AC_SUBST($1_SONAME)
-> +   fi
-> ++  #set +x
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> ---
+>  conf/layer.conf |    5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index ca0aefa..ca1bb46 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -9,3 +9,8 @@ BBFILE_COLLECTIONS +=3D "selinux"
+>  BBFILE_PATTERN_selinux :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_selinux =3D "5"
+> =20
+> +# This should only be incremented on significant changes that will
+> +# cause compatibility issues with other layers
+> +LAYERVERSION_selinux =3D "1"
+> +
+> +LAYERDEPENDS_selinux =3D "core"
+> --=20
+> 1.7.10.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-these set -x can be removed but if its upstream like that then fine.=20
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--eAbsdosE1cNLO4uF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlE+TOwACgkQN1Ujt2V2gBz4LQCguhVVey2Qf8nz7e7WIa7Ecr/b
+oNAAnRDRKb43181jmU26u+lCmnWfZc/t
+=0skw
+-----END PGP SIGNATURE-----
+
+--eAbsdosE1cNLO4uF--
