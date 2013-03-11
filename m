@@ -1,26 +1,37 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-vb0-f42.google.com ([209.85.212.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UEnKi-0007WY-Dd
+	(envelope-from <ross.burton@intel.com>) id 1UEtOD-000547-5M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Mar 2013 21:59:09 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 10 Mar 2013 13:42:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,819,1355126400"; d="scan'208";a="268103461"
-Received: from unknown (HELO helios.localnet) ([10.255.13.12])
-	by azsmga001.ch.intel.com with ESMTP; 10 Mar 2013 13:42:26 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 10 Mar 2013 20:42:25 +0000
-Message-ID: <3813608.lTKvSajpAY@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.1 (Linux/3.5.0-25-generic; KDE/4.10.1; i686; ; )
-In-Reply-To: <20130309063059.GA9724@jama.dyndns-home.com>
+	Mon, 11 Mar 2013 04:27:08 +0100
+Received: by mail-vb0-f42.google.com with SMTP id ff1so1432122vbb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Mar 2013 20:10:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=EDtR7NplRuy9g73CtPTHJfMySb21LP1T0xgZKDox5zI=;
+	b=Ol2X8N3uzgpIOwQPS3DYWBbuMgWxvKhFVAkJCYTyAbzx5pT4PiZ3ySVT9h4MQNjtcq
+	s8QJlV8RZUsXVvgzCPcUyltgF0YXnfe1oMawM8h0iH2QoMvsB1AkuVAwpL9BAqrvg88J
+	JU8X8fwSxecmCYjKad+7Iwut9pQ0M5lHdaawnWMC6fhpps3pty6nXNho06UEWrT4sNeI
+	rCTH88XK9FGyBa3U4VCr5e1cEXs4wdygSiNPV/J2zYH+8Y9moUdwy3ieCjhrCzdbdIkh
+	sPspZZ6OnWt+OitsJ1WZWA6XK3mLW4JC9naLHe4dFPf6L6WSf13R6Mf36dJ1I+cq20ne
+	USzg==
+X-Received: by 10.58.220.229 with SMTP id pz5mr4367871vec.30.1362971426708;
+	Sun, 10 Mar 2013 20:10:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.213.2 with HTTP; Sun, 10 Mar 2013 20:10:05 -0700 (PDT)
+In-Reply-To: <3813608.lTKvSajpAY@helios>
 References: <1362768637-29343-1-git-send-email-otavio@ossystems.com.br>
 	<1500617.PjPkZjIiXc@helios>
 	<20130309063059.GA9724@jama.dyndns-home.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
+	<3813608.lTKvSajpAY@helios>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Sun, 10 Mar 2013 20:10:05 -0700
+Message-ID: <CAJTo0LbL+t-ECOy_feVBDPw1f7aUJ7GrkA6JqjAdpB+F8fh6+A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQm4nGo9W6JAZjPDctoPx7jKSvNQxuxq20w0OmhV7/eFwRFPKb4aW5yxu1IHKE+B/DLP8H+V
+Cc: Martin Jansa <martin.jansa@gmail.com>,
 	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: [meta-oe][PATCH] polkit: Remove authentication override as it is handled in OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,56 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Mar 2013 20:59:16 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 11 Mar 2013 03:27:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Saturday 09 March 2013 07:30:59 Martin Jansa wrote:
-> On Fri, Mar 08, 2013 at 10:48:17PM +0000, Paul Eggleton wrote:
-> > On Friday 08 March 2013 15:50:37 Otavio Salvador wrote:
-> > > OE-Core now handles the detection of authentication so we don't need
-> > > to do it here. The bbappend file is kept to provide the upgrade path
-> > > only, or the revision would go backwards.
-> > > 
-> > > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> > > ---
-> > > 
-> > >  meta-oe/recipes-extended/polkit/polkit_0.104.bbappend | 9 +--------
-> > >  1 file changed, 1 insertion(+), 8 deletions(-)
-> > > 
-> > > diff --git a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-> > > b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend index
-> > > ea82e37..ceb2b6b 100644
-> > > --- a/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-> > > +++ b/meta-oe/recipes-extended/polkit/polkit_0.104.bbappend
-> > > @@ -1,8 +1 @@
-> > > -PRINC := "${@int(PRINC) + 4}"
-> > > -
-> > > -POLKITAUTH ??= "consolekit"
-> > > -
-> > > -PACKAGECONFIG += "${POLKITAUTH}"
-> > > -PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-> > > -# there is no --enable/--disable option for consolekit and it's not
-> > > picked
-> > > by shlibs, so add it to RDEPENDS -PACKAGECONFIG[consolekit] =
-> > > ",,,consolekit"
-> > > +PRINC := "${@int(PRINC) + 5}"
-> > 
-> > Can't we just bump PR in OE-Core?
-> 
-> we dont know which oe-core and meta-oe revisions are used together and
-> this needs to be applied in both at the same time.. so no, we need to
-> wait for PE/PV change in oe-core.
+On 10 March 2013 13:42, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>> we dont know which oe-core and meta-oe revisions are used together and
+>> this needs to be applied in both at the same time.. so no, we need to
+>> wait for PE/PV change in oe-core.
+>
+> I guess you're probably right. Yet another reason to never add any more
+> bbappends to meta-oe.
 
-I guess you're probably right. Yet another reason to never add any more 
-bbappends to meta-oe.
+For what it's worth I've got a series I'm about to submit to
+oe-core/meta-oe that removes polkit from oe-core and moves it to
+meta-oe, so this problem will just disappear then as we can bump PR in
+meta-oe.
 
-Cheers,
-Paul
+(the background being that polkit is entirely optional, and new
+upstreams require a JS interpretter)
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
 
