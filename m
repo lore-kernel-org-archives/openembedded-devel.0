@@ -1,25 +1,14 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1UFWrt-0002MN-77
+	(envelope-from <obi@opendreambox.org>) id 1UFXdx-00046I-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Mar 2013 22:36:22 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2CLJd5v022592
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2013 14:19:39 -0700 (PDT)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>) id 1UFWbi-0002zZ-NQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Mar 2013 17:19:38 -0400
-Date: Tue, 12 Mar 2013 17:19:38 -0400
-From: Amy Fong <amy.fong@windriver.com>
+	Tue, 12 Mar 2013 23:26:02 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130312211938.GA11498@windriver.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: question on App bitsize - need the same as the kernel (multilib situation)
+Date: Tue, 12 Mar 2013 23:09:21 +0100
+Message-Id: <1363126161-9828-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] libav: library packages shouldn't rdepend on libav package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,15 +22,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2013 21:36:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Mar 2013 22:26:16 -0000
 
-I need to build an application that has the same bitsize as the kernel. But in
-my multilib configuration, the default usersapce bitsize is not the same as 
-the kernel's bitsize. How do you do this?
+Otherwise the libav executables (avplay, ffmpeg etc.) get dragged
+into the image, along with all their dependencies (e.g. SDL).
 
-Thanks!
-Amy
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ meta-oe/recipes-multimedia/libav/libav.inc |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes-multimedia/libav/libav.inc
+index 388a567..54307af 100644
+--- a/meta-oe/recipes-multimedia/libav/libav.inc
++++ b/meta-oe/recipes-multimedia/libav/libav.inc
+@@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET = "arm"
+ # faac faad2 lame schroedinger libgsm
+ DEPENDS = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+ 
+-INC_PR = "r7"
++INC_PR = "r8"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -96,6 +96,7 @@ python populate_packages_prepend() {
+     do_split_packages(d, av_libdir, '^lib(.*)\.so\..*',
+                       output_pattern='lib%s',
+                       description='libav %s library',
++                      extra_depends='',
+                       prepend=True,
+                       allow_links=True)
+ 
+-- 
+1.7.10.4
+
 
 
