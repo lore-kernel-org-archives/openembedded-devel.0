@@ -1,37 +1,30 @@
-Received: from mail-da0-f47.google.com ([209.85.210.47])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UFkGy-0006u1-4S
+	(envelope-from <amy.fong@windriver.com>) id 1UFmKq-0002m3-Bs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 12:55:10 +0100
-Received: by mail-da0-f47.google.com with SMTP id s35so379714dak.20
+	Wed, 13 Mar 2013 15:07:27 +0100
+Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
+	[128.224.146.164])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2DDoX5s027467
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 04:38:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TGW/M2BKTg5Am0S+nrgd8khmxvv3v8DYJuba25cIV0Q=;
-	b=jKogziBw0tfYMHluNh3T/y3bcliuu+Fsm26bSLxM2tBGMd3rXcTDLI6F27Re1LGz4T
-	zkM58Nd6+KXExwPOk05npd5F9Kxt2atv+TMtsy2Y5/zceRlyz6IoDAtmhiRzqkYuaF09
-	NAyGzQm8eTLXmWgaTTTJtwVqazEfnyJIKXL1fLHZcaTMND9Y/o8B+VhBdcfLWZxF/4qn
-	4z+gvBu4vPBbyBd2oSOGVYxNbIk00GzuUad8YhZBJKslpMwYFgY7YNdLzn4ZR0UTh30C
-	MLCyqLk8hchMtc/H3mIpCpaBUQusT3c3/qbSDbU3unU0WSZsFB6a2G/ka8NGoEQEe56y
-	pmcg==
-X-Received: by 10.68.12.103 with SMTP id x7mr44920312pbb.37.1363174706687;
-	Wed, 13 Mar 2013 04:38:26 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id in5sm20587906pbc.20.2013.03.13.04.38.24
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 13 Mar 2013 04:38:25 -0700 (PDT)
-Date: Wed, 13 Mar 2013 12:38:17 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 13 Mar 2013 06:50:34 -0700 (PDT)
+Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
+	4.80) (envelope-from <amy.fong@windriver.com>) id 1UFm4f-0008En-EQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Mar 2013 09:50:33 -0400
+Date: Wed, 13 Mar 2013 09:50:33 -0400
+From: Amy Fong <amy.fong@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130313113817.GG3260@jama>
-References: <1363101364-9498-1-git-send-email-obi@opendreambox.org>
-	<khnima$5nr$1@ger.gmane.org>
+Message-ID: <20130313135033.GA31648@windriver.com>
+References: <20130312211938.GA11498@windriver.com>
+	<4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
+	<20130313031343.GA18570@windriver.com>
+	<CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <khnima$5nr$1@ger.gmane.org>
+In-Reply-To: <CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] layer.conf: add distro-feed-configs to SIGGEN_EXCLUDERECIPES_ABISAFE
+Subject: Re: question on App bitsize - need the same as the kernel (multilib situation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,64 +38,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 11:55:12 -0000
-X-Groupsio-MsgNum: 43518
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MiFvc8Vo6wRSORdP"
-Content-Disposition: inline
-
---MiFvc8Vo6wRSORdP
+X-List-Received-Date: Wed, 13 Mar 2013 14:07:32 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 12, 2013 at 04:47:28PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 12-03-13 16:16, Andreas Oberritter schreef:
-> > Signed-off-by: Andreas Oberritter <obi@opendreambox.org> --- This patch
-> > was sent for the first time about a year ago. Back then, Koen didn't
-> > apply it, because "distro-feed-configs does the wrong thing". in his
-> > opinion. However, distro-feed-configs persists today and is still getti=
-ng
-> > used.
->=20
-> I vote to delete it and have distros put it in their distro layer.
+On Tue, Mar 12, 2013 at 08:25:55PM -0700, Khem Raj wrote:
+> 
+> On Mar 12, 2013, at 8:13 PM, Amy Fong <amy.fong@windriver.com> wrote:
+> 
+> > It may be a combination of kernel ppc64 + userspace ppc (32);
+> > or kernel x86-64 + userspace x86-32.
+> 
+> 
+> I think you to ship ppc64 C runtime at least and same is true for x86_64
+> and by bit size you mean machine word length right ? like sizeof(long)
 
-I vote to apply this patch and later we can delete it (and people moving
-it to distro layer won't forget to add it in their layer.conf's
-SIGGEN_EXCLUDERECIPES_ABISAFE).
+Uhhhh no, what I mean is, 
 
->=20
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFRP04QMkyGM64RGpERApbpAKCWnDZc1FHev5kXNTeTnmLZjUJddQCgi5TF
-> 7094ThlWvhgK2tSqncmc5cM=3D
-> =3D+in0
-> -----END PGP SIGNATURE-----
->=20
->=20
+e.g.
+
+For userspace, if 32bit:
+root@localhost:~# file /bin/bash
+/bin/bash: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.34, stripped
+
+For kernel, if 64bit:
+(in kernel config)
+CONFIG_64BIT=y
+# CONFIG_X86_32 is not set
+CONFIG_X86_64=y
+CONFIG_X86=y
+
+Take for example, I want to run crash to do some kernel debugging, in this case,
+I would want crash to be 64bits.
+
+> > On Tue, Mar 12, 2013 at 03:41:29PM -0700, Khem Raj wrote:
+> >> 
+> >> On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
+> >> 
+> >>> I need to build an application that has the same bitsize as the kernel. But in
+> >>> my multilib configuration, the default usersapce bitsize is not the same as 
+> >>> the kernel's bitsize. How do you do this?
+> >> 
+> >> which arch is this ?
+> >> since generally we have one in multilib combo that matches kernel bit size
+> >> but you might have left it out. 
+> >> 
+> >>> 
+> >>> Thanks!
+> >>> Amy
+> >>> 
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >> 
+> >> 
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MiFvc8Vo6wRSORdP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlFAZSkACgkQN1Ujt2V2gBw5OACgnjSQvvW5CrRNuwkBFFKg6iCJ
-h/gAoLpbx6fML+kGmDJgv3AOQkETTQQ2
-=jdOx
------END PGP SIGNATURE-----
-
---MiFvc8Vo6wRSORdP--
