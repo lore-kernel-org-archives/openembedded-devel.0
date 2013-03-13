@@ -1,44 +1,34 @@
-Received: from tx2ehsobe005.messaging.microsoft.com ([65.55.88.15]
-	helo=tx2outboundpool.messaging.microsoft.com)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1UFgwI-0001ME-VQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 09:21:46 +0100
-Received: from mail34-tx2-R.bigfish.com (10.9.14.243) by
-	TX2EHSOBE008.bigfish.com (10.9.40.28) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 13 Mar 2013 07:49:49 +0000
-Received: from mail34-tx2 (localhost [127.0.0.1])	by mail34-tx2-R.bigfish.com
-	(Postfix) with ESMTP id 4984C2C012E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 07:49:49 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h1ee6h1de0h1202h1e76h1d1ah1d2ahzz17326ah8275dh19a27bh8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1155h)
-Received: from mail34-tx2 (localhost.localdomain [127.0.0.1]) by mail34-tx2
-	(MessageSwitch) id 1363160987123622_13193;
-	Wed, 13 Mar 2013 07:49:47 +0000 (UTC)
-Received: from TX2EHSMHS008.bigfish.com (unknown [10.9.14.249])	by
-	mail34-tx2.bigfish.com (Postfix) with ESMTP id 1798B3A0049	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 07:49:47 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS008.bigfish.com
-	(10.9.99.108) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 13 Mar 2013 07:49:46 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Wed, 13 Mar 2013 07:49:45 +0000
-Received: from b28495.ap.freescale.net (udp143739uds.ap.freescale.net
-	[10.192.208.202])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r2D7nhew018802;	Wed, 13 Mar 2013 00:49:44 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Mar 2013 15:49:42 +0800
-Message-ID: <1363160982-31939-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe][PATCH] lio-utils: initial add 4.1
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UFi3J-0003Zc-9h for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Mar 2013 10:32:53 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UFhnW-00050i-A8 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Mar 2013 10:16:34 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2013 10:16:34 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2013 10:16:34 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 13 Mar 2013 10:15:59 +0100
+Message-ID: <khpg4b$cvv$1@ger.gmane.org>
+References: <1363126161-9828-1-git-send-email-obi@opendreambox.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <1363126161-9828-1-git-send-email-obi@opendreambox.org>
+X-Enigmail-Version: 1.5
+Subject: Re: [meta-oe][PATCH] libav: library packages shouldn't rdepend on libav package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,92 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 08:21:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Mar 2013 09:32:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Ting Liu <b28495@freescale.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-lio-utils (lio-utils.git) provide a simple low-level configuration tool
-set for the Target+iSCSI (LIO).
+Op 12-03-13 23:09, Andreas Oberritter schreef:
+> Otherwise the libav executables (avplay, ffmpeg etc.) get dragged into
+> the image, along with all their dependencies (e.g. SDL).
+> 
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org> --- 
+> meta-oe/recipes-multimedia/libav/libav.inc |    3 ++- 1 file changed, 2
+> insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-multimedia/libav/libav.inc
+> b/meta-oe/recipes-multimedia/libav/libav.inc index 388a567..54307af
+> 100644 --- a/meta-oe/recipes-multimedia/libav/libav.inc +++
+> b/meta-oe/recipes-multimedia/libav/libav.inc @@ -11,7 +11,7 @@
+> ARM_INSTRUCTION_SET = "arm" # faac faad2 lame schroedinger libgsm DEPENDS
+> = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora
+> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+> 
+> -INC_PR = "r7" +INC_PR = "r8"
+> 
+> inherit autotools pkgconfig
+> 
+> @@ -96,6 +96,7 @@ python populate_packages_prepend() { 
+> do_split_packages(d, av_libdir, '^lib(.*)\.so\..*', 
+> output_pattern='lib%s', description='libav %s library', +
+> extra_depends='', prepend=True, allow_links=True)
 
-lio-utils use the configFS kernel API that is available with LIO, which
-provides a clean interface for controlling the kernel level Target
-engine and its fabric module subsystems.
+Ah, so that's why that happens!
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |   59 ++++++++++++++++++++
- 1 files changed, 59 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 
-diff --git a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-new file mode 100644
-index 0000000..bbedb78
---- /dev/null
-+++ b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-@@ -0,0 +1,59 @@
-+SUMMARY = "lio-utils"
-+DESCRIPTION = "a simple low-level configuration tool set for the Target+iSCSI (LIO)"
-+HOMEPAGE = "http://linux-iscsi.org/index.php/Lio-utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=c3ea231a32635cbb5debedf3e88aa3df"
-+
-+PV = "4.1+git${SRCPV}"
-+
-+SRC_URI = "git://risingtidesystems.com/lio-utils.git"
-+SRCREV = "28bd928655bdc7bd3cf380f0196630690c51e05f"
-+S = "${WORKDIR}/git"
-+
-+inherit distutils
-+
-+EXTRA_OEMAKE += "DESTDIR=${D}"
-+
-+do_compile() {
-+    cd ${S}/tcm-py
-+    distutils_do_compile
-+
-+    cd ${S}/lio-py
-+    distutils_do_compile
-+
-+    if test -d ${S}/tools; then
-+        oe_runmake -C ${S}/tools
-+    fi
-+}
-+
-+do_install() {
-+    cd ${S}/tcm-py
-+    distutils_do_install
-+
-+    cd ${S}/lio-py
-+    distutils_do_install
-+
-+    SITE_PACKAGES=${D}/${PYTHON_SITEPACKAGES_DIR}
-+    install -d ${D}/${sbindir}
-+    for var in tcm_node tcm_dump tcm_loop tcm_fabric lio_dump lio_node; do
-+        if [ ! -h ${D}/${sbindir}/${var} ];then
-+            chmod a+x ${SITE_PACKAGES}/${var}.py
-+            ln -s ${PYTHON_SITEPACKAGES_DIR}/${var}.py ${D}/${sbindir}/${var}
-+        fi
-+    done
-+
-+    if test -d ${S}/tools; then
-+        oe_runmake -C ${S}/tools install
-+    fi
-+
-+    install -d ${D}/etc/target/
-+    install -d ${D}/etc/init.d/
-+    install -m 755 ${S}/scripts/rc.target ${D}/etc/init.d/
-+    install -m 755 ${S}/conf/tcm_start.default ${D}/etc/target/tcm_start.sh
-+    install -m 755 ${S}/conf/lio_start.default ${D}/etc/target/lio_start.sh
-+}
-+
-+RDEPENDS_${PN} += "python-stringold python-subprocess python-shell \
-+    python-datetime python-textutils python-crypt python-netclient python-email"
-+
-+FILES_${PN} += "${sbindir}/* /etc/init.d/* /etc/target/*"
--- 
-1.7.3.4
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
+iD8DBQFRQEPPMkyGM64RGpERAoWvAKCPmD5imlxQhkUotQftxW094mTzsgCbBMeG
+FhxvbTNmnXhaKhfrgaeVigE=
+=Jmzk
+-----END PGP SIGNATURE-----
 
 
 
