@@ -1,36 +1,36 @@
-Received: from mail-ye0-f178.google.com ([209.85.213.178])
+Received: from mail-gh0-f174.google.com ([209.85.160.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UFosp-0007eq-MD
+	(envelope-from <martin.jansa@gmail.com>) id 1UFosV-0007dZ-JC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 17:50:35 +0100
-Received: by mail-ye0-f178.google.com with SMTP id q7so206073yen.23
+	Wed, 13 Mar 2013 17:50:33 +0100
+Received: by mail-gh0-f174.google.com with SMTP id g15so206210ghb.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 09:33:50 -0700 (PDT)
+	Wed, 13 Mar 2013 09:33:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rTvUZRoyeL1L6nUWIO4BHYpUJEs44cahX+H+zV0QZLU=;
-	b=pVn6xRiSl2Qrlkjj0KoqRGKH2Z13z4xQ8i8iiEGlqi6/L+pFzZ7eLw9izruJRt+Nd+
-	wWJBlP+ASlkWlG8CN8zgp74gviHh8QMBEVb+f6Jkubp11HhOW20KEUm6WAWkXaW2JsjC
-	fQiJi7IRmZ81Wbvl3sodcXocCdmwzF5hfC6BDyFOEnRzy1fNEQl54WXfFyh2cP1BfxsX
-	wYD0S1liBG/pv5CFBdrbL78XH92WPO88G7oyW32LOWtKyTFaPCbw86KMsCPrOLj1nl9K
-	j0WD6qu5Z/C5DJq7HmkmXUfYp5Dp3zQRgJoClGi/+5un37FL5JActVPnpQ76VKi7dipQ
-	QauQ==
-X-Received: by 10.236.161.7 with SMTP id v7mr15848974yhk.201.1363192430408;
-	Wed, 13 Mar 2013 09:33:50 -0700 (PDT)
+	bh=YKrAF6RLgFsYw2DUIu2j6q8LV7jxCIjsGiq3ABdFjvg=;
+	b=QPTqX7ZkfKVojiXunbTHSWU/trN7OwX21CxqK6VUoKZzmmLADJwdS4aybxAeSn/Yw9
+	qrE+C+9HNl5dAwI0PXolVXaPJLSovmxMeBbqZT+3YdewENl1RY5V7OptYibU+kkEXVVw
+	glFb5YF9XB0aAr/EJG181fu+Il3+adf3EOOQ0XbgaqrxHUzXVsLbDPVmHK0Qudk4KLD5
+	jjBausWWmY1lOwJ7bMcQdoM3d6eqoirMJ/itdgyhn8gbF6Ld+E631sSVUY+3TghjlaWd
+	gu64iDTIGMzXB60sm352eEDEwEX/pVJl+aE3htkNSq60VMePuGeRFO5S+YTzgc4GKD2Q
+	FyZA==
+X-Received: by 10.236.132.65 with SMTP id n41mr15980718yhi.6.1363192410153;
+	Wed, 13 Mar 2013 09:33:30 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id r43sm36289478yhl.19.2013.03.13.09.33.48
+	by mx.google.com with ESMTPS id k2sm36306710yhn.26.2013.03.13.09.33.28
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 13 Mar 2013 09:33:49 -0700 (PDT)
-Date: Wed, 13 Mar 2013 17:33:42 +0100
+	Wed, 13 Mar 2013 09:33:29 -0700 (PDT)
+Date: Wed, 13 Mar 2013 17:33:22 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130313163342.GO3260@jama>
-References: <1363070578-8438-1-git-send-email-raj.khem@gmail.com>
+Message-ID: <20130313163322.GN3260@jama>
+References: <1363126161-9828-1-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <1363070578-8438-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1363126161-9828-1-git-send-email-obi@opendreambox.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] lmsensors: Upgrade 3.3.2 -> lmsensors_3.3.3
+Subject: Re: [meta-oe][PATCH] libav: library packages shouldn't rdepend on libav package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,70 +45,53 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 13 Mar 2013 16:50:57 -0000
-X-List-Received-Date: Wed, 13 Mar 2013 16:50:57 -0000
-X-Groupsio-MsgNum: 43526
+X-Groupsio-MsgNum: 43527
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+nG9yj4eE4W6Oba0"
+	protocol="application/pgp-signature"; boundary="20XocjIeMTCm4X0r"
 Content-Disposition: inline
 
---+nG9yj4eE4W6Oba0
+--20XocjIeMTCm4X0r
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 11, 2013 at 11:42:58PM -0700, Khem Raj wrote:
-> Fix build with mutlilib enabled architectures
-> when we have libdir !=3D /usr/lib it always would
-> not package libsensors.* since they will get
-> installed into /usr/lib and ignored. So define
-> LIBDIR properly
+On Tue, Mar 12, 2013 at 11:09:21PM +0100, Andreas Oberritter wrote:
+> Otherwise the libav executables (avplay, ffmpeg etc.) get dragged
+> into the image, along with all their dependencies (e.g. SDL).
 
 Applied, thanks!
 
 >=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 > ---
->  .../{lmsensors_3.3.2.bb =3D> lmsensors_3.3.3.bb}     |    8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
->  rename meta-oe/recipes-support/lm_sensors/{lmsensors_3.3.2.bb =3D> lmsen=
-sors_3.3.3.bb} (96%)
+>  meta-oe/recipes-multimedia/libav/libav.inc |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.2.bb b/meta=
--oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
-> similarity index 96%
-> rename from meta-oe/recipes-support/lm_sensors/lmsensors_3.3.2.bb
-> rename to meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
-> index 1a1ef2d..4f15535 100644
-> --- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.2.bb
-> +++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
-> @@ -11,11 +11,8 @@ SRC_URI =3D "http://dl.lm-sensors.org/lm-sensors/relea=
-ses/lm_sensors-${PV}.tar.bz2
->             file://fancontrol.init \
->             file://sensord.init \
->  "
-> -
-> -SRC_URI[md5sum] =3D "f357ba00b080ab102a170f7bf8bb2578"
-> -SRC_URI[sha256sum] =3D "f13dd885406841a7352ccfb8b9ccb23c4c057abe3de4258d=
-a5444c149a9e3ae1"
-> -
-> -PR =3D "r1"
-> +SRC_URI[md5sum] =3D "73c2fcccdab6049d289c5e0c596192a1"
-> +SRC_URI[sha256sum] =3D "ecc91ba3d918e96fb7d5eb9acce978af803b130e0b33b08d=
-5ea05b2bfca84955"
+> diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes=
+-multimedia/libav/libav.inc
+> index 388a567..54307af 100644
+> --- a/meta-oe/recipes-multimedia/libav/libav.inc
+> +++ b/meta-oe/recipes-multimedia/libav/libav.inc
+> @@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET =3D "arm"
+>  # faac faad2 lame schroedinger libgsm
+>  DEPENDS =3D "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora =
+${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 > =20
->  inherit update-rc.d
+> -INC_PR =3D "r7"
+> +INC_PR =3D "r8"
 > =20
-> @@ -29,6 +26,7 @@ S =3D "${WORKDIR}/lm_sensors-${PV}"
+>  inherit autotools pkgconfig
 > =20
->  EXTRA_OEMAKE =3D 'LINUX=3D${STAGING_KERNEL_DIR} EXLDFLAGS=3D"${LDFLAGS}"=
- \
->  		MACHINE=3D${TARGET_ARCH} PREFIX=3D${prefix} MANDIR=3D${mandir} \
-> +	        LIBDIR=3D${libdir} \
->  		CC=3D"${CC}" AR=3D"${AR}"'
+> @@ -96,6 +96,7 @@ python populate_packages_prepend() {
+>      do_split_packages(d, av_libdir, '^lib(.*)\.so\..*',
+>                        output_pattern=3D'lib%s',
+>                        description=3D'libav %s library',
+> +                      extra_depends=3D'',
+>                        prepend=3DTrue,
+>                        allow_links=3DTrue)
 > =20
->  do_compile() {
 > --=20
-> 1.7.9.5
+> 1.7.10.4
 >=20
 >=20
 > _______________________________________________
@@ -119,16 +102,16 @@ a5444c149a9e3ae1"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---+nG9yj4eE4W6Oba0
+--20XocjIeMTCm4X0r
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFAqmYACgkQN1Ujt2V2gBwMCQCcDm5ifHdpWjWJG0s9CJAlmjsl
-5wYAmgOufaH2oFIJ4uNYNMoRu/TgA8Cz
-=wHQ2
+iEYEARECAAYFAlFAqlIACgkQN1Ujt2V2gBwsaQCgscF2frXlRL4mfq0wWWL3JPnV
+kywAoIYcVWpwv1huuKV0IKk7oPuAqIT0
+=EWbB
 -----END PGP SIGNATURE-----
 
---+nG9yj4eE4W6Oba0--
+--20XocjIeMTCm4X0r--
