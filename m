@@ -1,34 +1,35 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-yh0-f51.google.com ([209.85.213.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>)
-	id 1UFnCb-0004Qx-Hl; Wed, 13 Mar 2013 16:03:05 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id 0A289D22CD; Wed, 13 Mar 2013 15:46:10 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 34B1CD22B2;
-	Wed, 13 Mar 2013 15:45:48 +0100 (CET)
-Message-ID: <5140911A.90604@linaro.org>
-Date: Wed, 13 Mar 2013 15:45:46 +0100
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+	(envelope-from <martin.jansa@gmail.com>) id 1UFode-0006on-JH
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Mar 2013 17:34:53 +0100
+Received: by mail-yh0-f51.google.com with SMTP id q1so198056yhf.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2013 09:18:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=69MYdPwtiELFQevVOrdhRlxxily9PkyxrtoFON4nGg4=;
+	b=apf3NEypwW4IRhFpVaMdbpxqGE43eHz/hkw7z6c8AO/sC8DBpQu68nN4DNQUYu1ndl
+	LyiSQ49i8//QCFOicEs8OouUOGeCz6xUeUQ/iDLg9T4F0GSoQ7zmt98c8yG7BR051te0
+	8zRfR2YxAfiiG+53Lbqpt7iCmL2ElRmyEjnKJUdVPjHYjbRSJ0L+MAAgmctIrk0bg8qv
+	ZmMmpbERfIg0MgVJvY4Acw/EUs0lyaT1b7+mdi1M7qnkfSKfsg25izTtfhAIqybBE9xN
+	dBErWczfY1aoLFUa40DltB/5I7hUe0S1r8975v2UMykUZhxLIcRsAZ5RXvGZRsbw9jOA
+	aX6g==
+X-Received: by 10.236.82.174 with SMTP id o34mr16186885yhe.107.1363191489325; 
+	Wed, 13 Mar 2013 09:18:09 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id g27sm36210666yhm.21.2013.03.13.09.18.06
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 13 Mar 2013 09:18:08 -0700 (PDT)
+Date: Wed, 13 Mar 2013 17:18:00 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130313161800.GK3260@jama>
 MIME-Version: 1.0
-To: linaro-dev@lists.linaro.org, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.4.6
-Subject: ATTENTION: OpenEmbedded layers from Linaro have new structure
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Andrei Gherzan <andrei@gherzan.ro>
+Subject: minidlna missing some DEPENDS?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,64 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 15:03:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Mar 2013 16:34:58 -0000
+X-Groupsio-MsgNum: 43521
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DozTQjXnjm3C9Xhk"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--DozTQjXnjm3C9Xhk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hello
+Hi,=20
 
-Today I made several changes to OpenEmbedded layers hosted on
-git.linaro.org:
+minidlna build for qemuarm fails with:
 
-- - meta-aarch64
-- - meta-linaro
+| Linking minidlna
+| arm-oe-linux-gnueabi-gcc: error: getifaddr.o: No such file or directory
+| arm-oe-linux-gnueabi-gcc: error: sql.o: No such file or directory
+| arm-oe-linux-gnueabi-gcc: error: inotify.o: No such file or directory
+| make: *** [minidlna] Error 1
+| ERROR: oe_runmake failed
+| ERROR: Function failed: do_compile (see /home/jenkins/oe/shr-core-branche=
+s/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/minidlna/1.0.25-r0/temp=
+/log.do_compile.21922 for further information)
+NOTE: recipe minidlna-1.0.25-r0: task do_compile: Failed
 
-Meta-aarch64 is now empty and is obsolete. Probably will be removed from
-server in about month or two.
-Meta-linaro repository got new structure based on meta-openembedded one
-and contains three layers:
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-- - meta-aarch64
-- - meta-linaro
-- - meta-linaro-toolchain
+--DozTQjXnjm3C9Xhk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Today meta-aarch64 is just a copy of old one but everything not related
-to ARMv8 will be moved from it to meta-linaro.
-
-Meta-linaro-toolchain contains just gcc-linaro and support for external
-Linaro cross toolchains (armv7a and armv8 ones).
-
-I considered creation of meta-aarch64-arm-toolchain one with ARM Ltd.
-version of gcc but it is not often used option so can stay where it is
-now (meta-aarch64).
-
-Instructions how to start building for ARMv8 (with OE) are in wiki:
-https://wiki.linaro.org/HowTo/ARMv8/OpenEmbedded
-
-Note that any scripts present in 'meta-aarch64' got dropped. If you want
-easy way then use 'jenkins-setup' scripts like it is described in wiki.
-They are written to be as easy to use as possible.
-
-If you have any problems/questions: reply to this email.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iQIcBAEBAgAGBQJRQJERAAoJECbKqQEReiUeKFgQAMUYDB1ymQs8ZspWVynJVJMQ
-InFsFQUd/QZCgNB9GcG6IepzmViHeMlIxNQ7u+KFABGV8uAz8gwdgcPtWwa/dc1b
-wu8u84mmwy77WBIMuX087AiXdg8WhJDJz5sztBoK2PL8Ljn1TFB/R17Ew90eN3zn
-o1DpPnbgMGs67phNiTy8GiQxyaaLZub0ZZZ5v00tWdt7x4vazw6n2r8/o+wzGLj2
-536KI13Sepso2dg2mrpqzrwVH8KFP7S/rRiDdKI4Gw9FlTPiaiEEadX7OPKx8YC5
-j1WIR0u66LCSe+F3NsfNfEgTOXPGVUNgqvemwGYXQuOLUKz7nnnkEdVRUegSuEVj
-+bZsgzFunghOsvEgX4ynxLVXgOrkiH4PPMhD+OWcB1pso9+ZdVFTVO2oGOnDg9pK
-ov7lidEoUDDIZqHxjy5cV36jDnXt8BTI9uEIjVo9gH/0g/67QImXHVONcppg2MfM
-GDfhYorkah3VTo9zgHZKCDEIstT1OsCSg+PNeKCAN6fDUdmnzGxCJNEj2CaRAzaI
-vJekxAK0+ptscJ9c+bUmAtcBK+XRvJ9K3naN+apUm13Y6INwKuS68knWzOJc0xhd
-rpPQ2EcYd8FP1gspjNJPyQKWr2pAUGQkOGkhHrsrb4nj6mkMDDgZ2ET1x8uxI056
-vMRn7PKF7x3bItUP9NzA
-=GNf7
+iEYEARECAAYFAlFAprgACgkQN1Ujt2V2gBxheACeKZIPomvOiglZM++RGt4KXZz1
+0QgAoJRJzzA2z01LF29g+SbGDQzVTRDB
+=KKVu
 -----END PGP SIGNATURE-----
 
-
+--DozTQjXnjm3C9Xhk--
