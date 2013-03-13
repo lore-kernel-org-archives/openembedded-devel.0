@@ -1,32 +1,42 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mark.hatle@windriver.com>) id 1UFomW-0007GE-TH
+	(envelope-from <eu@felipetonello.com>) id 1UFoq8-0007Vi-D6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 17:44:07 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2DGRGhW027573
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 13 Mar 2013 17:47:55 +0100
+Received: by mail-ob0-f175.google.com with SMTP id uz6so1239191obc.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 09:27:16 -0700 (PDT)
-Received: from Marks-MacBook-Pro.local (172.25.36.234) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.342.3; Wed, 13 Mar 2013 09:27:16 -0700
-Message-ID: <5140A8E1.6070700@windriver.com>
-Date: Wed, 13 Mar 2013 11:27:13 -0500
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+	Wed, 13 Mar 2013 09:31:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
+	:references:in-reply-to:content-type:content-transfer-encoding
+	:x-gm-message-state;
+	bh=U+21WtUfn6YUB45fjZ3oUiXk7rID2eXXkQB83MQTPcg=;
+	b=Yfpo+3Y0kXH5iIHoghijM41eodWodj4SXgVTDKFoUXJG6yzUUQ3aQaOVMTT8/6khQX
+	xmXg4zoPc8rGNMfAdVGphQ73TpnxtY566zVs2XtuT7qlbGSw0c8qPDan+DMdZNivk1j9
+	g82r+rUIznoe+DsaSz99J1WlrVUd+FEbsD89J1xfwa+Ksu1Qh3ITXs1ehGXqT1skomci
+	4BvvQFUkxL6wsqtI7Eznx37lLBasB6OZOnN+gUB2ADZVD86P9pYwJcoPiSwpmnm8790Z
+	WbND62SzsrDXdra+r0Pch+F1Kbt+O7c09fp28omZmeKwDTBiXoRO3v7Safu3f6l3L6vm
+	222g==
+X-Received: by 10.182.161.39 with SMTP id xp7mr16512352obb.71.1363192262923;
+	Wed, 13 Mar 2013 09:31:02 -0700 (PDT)
+Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPS id v3sm27033791oev.5.2013.03.13.09.31.01
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 13 Mar 2013 09:31:02 -0700 (PDT)
+Message-ID: <5140A9D7.7080506@felipetonello.com>
+Date: Wed, 13 Mar 2013 09:31:19 -0700
+From: Felipe Ferreri Tonello <eu@felipetonello.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <20130312211938.GA11498@windriver.com>
-	<4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
-	<20130313031343.GA18570@windriver.com>
-	<CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
-	<20130313135033.GA31648@windriver.com>
-In-Reply-To: <20130313135033.GA31648@windriver.com>
-Subject: Re: question on App bitsize - need the same as the kernel (multilib situation)
+To: openembedded-devel@lists.openembedded.org
+References: <1362163066-376-1-git-send-email-ftonello@cercacor.com>
+	<20130313110926.GA3260@jama>
+In-Reply-To: <20130313110926.GA3260@jama>
+X-Gm-Message-State: ALoCoQk561qTA/OJ1IcJ+mIs/y9YJEPqYG2d+FjbGr4fTTatLG1zNN9vd3AvpYGneEIUwI/zlt5U
+Subject: Re: [meta-oe][PATCH v2] fingerterm: Added 1.0.2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,93 +50,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 16:44:18 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Wed, 13 Mar 2013 16:47:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 3/13/13 8:50 AM, Amy Fong wrote:
-> On Tue, Mar 12, 2013 at 08:25:55PM -0700, Khem Raj wrote:
+Hi Martin,
+
+On 03/13/2013 04:09 AM, Martin Jansa wrote:
+> On Fri, Mar 01, 2013 at 10:37:46AM -0800, eu@felipetonello.com wrote:
+>> From: "Felipe F. Tonello" <ftonello@cercacor.com>
 >>
->> On Mar 12, 2013, at 8:13 PM, Amy Fong <amy.fong@windriver.com> wrote:
+>> Fingerterm is a terminal emulator for Nokia Harmattan, but it works in any Qt4
+>> environment.
 >>
->>> It may be a combination of kernel ppc64 + userspace ppc (32);
->>> or kernel x86-64 + userspace x86-32.
+>> This recipe can be extended by a .bbappend to add .desktop, icon and others to
+>> the target device.
 >>
+>> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+>> ---
+>>   meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   30 +++++++++++++++++++++
+>>   1 file changed, 30 insertions(+)
+>>   create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 >>
->> I think you to ship ppc64 C runtime at least and same is true for x86_64
->> and by bit size you mean machine word length right ? like sizeof(long)
+>> diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+>> new file mode 100644
+>> index 0000000..e828672
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+>> @@ -0,0 +1,30 @@
+>> +DESCRIPTION = "A terminal emulator for Harmattan (Nokia N9/N950) with a custom \
+>> +virtual keyboard and usability-enhancing features such as URL grabber, pan \
+>> +gestures and customizable shortcut menu. Designed especially to be used with \
+>> +screen and irssi."
+>> +HOMEPAGE = "http://hqh.unlink.org/harmattan"
+>> +LICENSE = "GPLv3"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 >
-> Uhhhh no, what I mean is,
+> Hi,
 >
-> e.g.
+> in v2 you have changed LIC_FILES_CHKSUM, old one was correct, new one is
+> not:
 >
-> For userspace, if 32bit:
-> root@localhost:~# file /bin/bash
-> /bin/bash: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.34, stripped
+> NOTE: recipe fingerterm-1.0.2-r0: task do_configure: Started
+> ERROR: fingerterm: md5 data is not matching for file://COPYING;md5=d32239bcb673463ab874e80d47fae504
+> ERROR: fingerterm: The new md5 checksum is b234ee4d69f5fce4486a80fdaf4a4263
+> ERROR: fingerterm: Check if the license information has changed in
+> ERROR: Licensing Error: LIC_FILES_CHKSUM does not match, please fix
+> ERROR: Function failed: do_qa_configure
 >
-> For kernel, if 64bit:
-> (in kernel config)
-> CONFIG_64BIT=y
-> # CONFIG_X86_32 is not set
-> CONFIG_X86_64=y
-> CONFIG_X86=y
+> Please send tested v3.
+
+Yes, I don't know why they changed the COPYING file.
+
+I had the v3 here but forgot to send.
+
+Sorry about that.
+
+Felipe
 >
-> Take for example, I want to run crash to do some kernel debugging, in this case,
-> I would want crash to be 64bits.
-
-...and with the userspace defaulting to a 32-bit userspace..  Doing something like:
-
-INSTALL_IMAGE_append = "crash" will result in a executable that doesn't work. 
-So the user has to know they have to add "lib64-crash".  (Easy when it's 
-INSTALL_IMAGE_append.. not so easy when you have a custom rootfs that simply 
-add's "crash"...  How does it know it needs to add a multilib variant?)
-
-Which is why the question comes down to, how do I tell the system that a 
-specific package needs to be the same bitsize as the kernel, and then how do I 
-get the system to select the "right" version of that package?
-
- From my experience that are not a lot of things in the system that have this 
-requirements.. but kexec and related do.
-
---Mark
-
->>> On Tue, Mar 12, 2013 at 03:41:29PM -0700, Khem Raj wrote:
->>>>
->>>> On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
->>>>
->>>>> I need to build an application that has the same bitsize as the kernel. But in
->>>>> my multilib configuration, the default usersapce bitsize is not the same as
->>>>> the kernel's bitsize. How do you do this?
->>>>
->>>> which arch is this ?
->>>> since generally we have one in multilib combo that matches kernel bit size
->>>> but you might have left it out.
->>>>
->>>>>
->>>>> Thanks!
->>>>> Amy
->>>>>
->>>>> _______________________________________________
->>>>> Openembedded-devel mailing list
->>>>> Openembedded-devel@lists.openembedded.org
->>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>>
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> +SECTION = "qt/app"
+>> +
+>> +PR = "r0"
+>> +
+>> +inherit qt4x11 pkgconfig
+>> +
+>> +SRC_URI = " \
+>> +  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
+>> +"
+>> +
+>> +SRC_URI[md5sum] = "d53b0f463c025583cd52accf95715448"
+>> +SRC_URI[sha256sum] = "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a044b6674dd82d95150"
+>> +
+>> +S = "${WORKDIR}/${PN}"
+>> +
+>> +FILES_${PN} = " \
+>> +  ${bindir}/${PN} \
+>> +"
+>> +
+>> +do_install() {
+>> +  install -d ${D}${bindir}
+>> +  install -m 0744 ${S}/${PN} ${D}${bindir}
+>> +}
+>> \ No newline at end of file
+>> --
+>> 1.7.9.5
 >>
 >>
 >> _______________________________________________
 >> Openembedded-devel mailing list
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
