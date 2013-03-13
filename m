@@ -1,14 +1,14 @@
 Received: from mail.saftware.de ([83.141.3.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <obi@opendreambox.org>) id 1UFtPY-00015J-PS
+	(envelope-from <obi@opendreambox.org>) id 1UFtPZ-00015L-Ft
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 13 Mar 2013 22:40:37 +0100
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Mar 2013 22:23:39 +0100
-Message-Id: <1363209819-5886-1-git-send-email-obi@opendreambox.org>
+Date: Wed, 13 Mar 2013 22:23:46 +0100
+Message-Id: <1363209826-5929-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-networking][PATCH] autofs: fix compile with uclibc
+Subject: [meta-oe][PATCH] xfsprogs: fix compile with uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,229 +24,152 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 13 Mar 2013 21:40:38 -0000
 
-* Backport patch to make yp optional, which uclibc doesn't provide.
-* Create patch to include linux/nfs.h instead of nfs/nfs.h.
+Uclibc doesn't have aio.h, which xfsprogs checks for.
+However, xfsprogs doesn't use aio.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- ...7-include-linux-nfs.h-directly-in-rpc_sub.patch |   32 +++++
- ...-5.0.7-make-yellow-pages-support-optional.patch |  145 ++++++++++++++++++++
- .../recipes-daemons/autofs/autofs_5.0.7.bb         |    4 +-
- 3 files changed, 180 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-make-yellow-pages-support-optional.patch
+ .../drop-configure-check-for-aio.patch             |   99 ++++++++++++++++++++
+ meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb |   10 +-
+ 2 files changed, 108 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configure-check-for-aio.patch
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
+diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configure-check-for-aio.patch b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configure-check-for-aio.patch
 new file mode 100644
-index 0000000..3a87898
+index 0000000..a1c6042
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch
-@@ -0,0 +1,32 @@
++++ b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configure-check-for-aio.patch
+@@ -0,0 +1,99 @@
 +Upstream-Status: Pending
 +
-+From 44bdce8c6ed9b30c1643e5981172a4f9025f013c Mon Sep 17 00:00:00 2001
++From a38bf800a655ea32cbddd6504e15c2f18597fd13 Mon Sep 17 00:00:00 2001
 +From: Andreas Oberritter <obi@opendreambox.org>
-+Date: Wed, 13 Mar 2013 16:17:08 +0100
-+Subject: [PATCH] autofs-5.0.7: include linux/nfs.h directly in rpc_subs.h
++Date: Wed, 13 Mar 2013 14:40:13 +0100
++Subject: [PATCH] xfsprogs: drop configure check for aio
 +
-+Fixes compile error with uclibc. Glibc's nfs/nfs.h contains
-+nothing but "#include linux/nfs.h". rpc_subs.h already includes
-+other linux/nfs*.h files directly.
++It's unused and breaks compilation with uclibc.
 +
 +Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 +---
-+ include/rpc_subs.h |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ configure.in         |    6 +++---
++ m4/Makefile          |    1 -
++ m4/package_aiodev.m4 |   37 -------------------------------------
++ 3 files changed, 3 insertions(+), 41 deletions(-)
++ delete mode 100644 m4/package_aiodev.m4
 +
-+diff --git a/include/rpc_subs.h b/include/rpc_subs.h
-+index b6d59f9..a2d9648 100644
-+--- a/include/rpc_subs.h
-++++ b/include/rpc_subs.h
-+@@ -18,7 +18,7 @@
++diff --git a/configure.in b/configure.in
++index 664c0e9..f7d35f1 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -46,6 +46,9 @@ AC_ARG_ENABLE(lib64,
++ 	enable_lib64=yes)
++ AC_SUBST(enable_lib64)
 + 
-+ #include <rpc/rpc.h>
-+ #include <rpc/pmap_prot.h>
-+-#include <nfs/nfs.h>
-++#include <linux/nfs.h>
-+ #include <linux/nfs2.h>
-+ #include <linux/nfs3.h>
+++librt="-lrt"
+++AC_SUBST(librt)
+++
++ #
++ # If the user specified a libdir ending in lib64 do not append another
++ # 64 to the library names.
++@@ -91,9 +94,6 @@ AC_PACKAGE_GLOBALS(xfsprogs)
++ AC_PACKAGE_UTILITIES(xfsprogs)
++ AC_MULTILIB($enable_lib64)
 + 
++-AC_PACKAGE_NEED_AIO_H
++-AC_PACKAGE_NEED_LIO_LISTIO
++-
++ AC_PACKAGE_NEED_UUID_H
++ AC_PACKAGE_NEED_UUIDCOMPARE
++ 
++diff --git a/m4/Makefile b/m4/Makefile
++index 654a4fb..d282f0a 100644
++--- a/m4/Makefile
+++++ b/m4/Makefile
++@@ -14,7 +14,6 @@ CONFIGURE = \
++ 
++ LSRCFILES = \
++ 	manual_format.m4 \
++-	package_aiodev.m4 \
++ 	package_blkid.m4 \
++ 	package_globals.m4 \
++ 	package_libcdev.m4 \
++diff --git a/m4/package_aiodev.m4 b/m4/package_aiodev.m4
++deleted file mode 100644
++index 490d9c8..0000000
++--- a/m4/package_aiodev.m4
+++++ /dev/null
++@@ -1,37 +0,0 @@
++-#
++-# Check if we have a libaio.h installed
++-#
++-AC_DEFUN([AC_PACKAGE_WANT_AIO],
++-  [ AC_CHECK_HEADERS(libaio.h, [ have_aio=true ], [ have_aio=false ])
++-    AC_SUBST(have_aio)
++-  ])
++-
++-#
++-# Check if we have an aio.h installed
++-#
++-AC_DEFUN([AC_PACKAGE_NEED_AIO_H],
++-  [ AC_CHECK_HEADERS(aio.h)
++-    if test $ac_cv_header_aio_h = no; then
++-	echo
++-	echo 'FATAL ERROR: could not find a valid <aio.h> header.'
++-	exit 1
++-    fi
++-  ])
++-
++-#
++-# Check if we have the lio_listio routine in either libc/librt
++-#
++-AC_DEFUN([AC_PACKAGE_NEED_LIO_LISTIO],
++-  [ AC_CHECK_FUNCS(lio_listio)
++-    if test $ac_cv_func_lio_listio = yes; then
++-	librt=""
++-    else
++-	AC_CHECK_LIB(rt, lio_listio,, [
++-	    echo
++-	    echo 'FATAL ERROR: could not find a library with lio_listio.'
++-	    exit 1],[-lpthread])
++-	librt="-lrt"
++-    fi
++-    AC_SUBST(librt)
++-  ])
++-
 +-- 
 +1.7.10.4
 +
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-make-yellow-pages-support-optional.patch b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-make-yellow-pages-support-optional.patch
-new file mode 100644
-index 0000000..9504d8e
---- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-make-yellow-pages-support-optional.patch
-@@ -0,0 +1,145 @@
-+Upstream-Status: Backport
-+
-+autofs-5.0.7 - make yellow pages support optional
-+
-+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
-+
-+If rpcsvc/ypclnt.h is not available don't compile in Yellow Pages
-+support.
-+---
-+
-+ Makefile.conf.in    |    3 +++
-+ configure           |   16 ++++++++++++++++
-+ configure.in        |    9 +++++++++
-+ include/config.h.in |    3 +++
-+ lib/rpc_subs.c      |    1 -
-+ modules/Makefile    |    9 +++++++--
-+ 7 files changed, 39 insertions(+), 3 deletions(-)
-+
-+
-+diff --git a/Makefile.conf.in b/Makefile.conf.in
-+index 802318b..3766d45 100644
-+--- a/Makefile.conf.in
-++++ b/Makefile.conf.in
-+@@ -43,6 +43,9 @@ NISPLUS = @HAVE_NISPLUS@
-+ # SMBFS support: yes (1) no (0)
-+ SMBFS = @HAVE_SMBMOUNT@
-+ 
-++# YellowPages support: yes (1) no (0)
-++YPCLNT = @HAVE_YPCLNT@
-++
-+ # Support for calling e2fsck when mounting ext2 filesystems
-+ EXT2FS = @HAVE_E2FSCK@
-+ 
-+diff --git a/configure b/configure
-+index 3722a46..cf6428c 100755
-+--- a/configure
-++++ b/configure
-+@@ -614,6 +614,7 @@ XML_FLAGS
-+ LIBLDAP
-+ HAVE_LDAP
-+ LDAP_FLAGS
-++HAVE_YPCLNT
-+ HAVE_NISPLUS
-+ EGREP
-+ GREP
-+@@ -4575,6 +4576,21 @@ fi
-+ 
-+ 
-+ 
-++# YellowPages support?
-++HAVE_YPCLNT=0
-++ac_fn_c_check_header_mongrel "$LINENO" "rpcsvc/ypclnt.h" "ac_cv_header_rpcsvc_ypclnt_h" "$ac_includes_default"
-++if test "x$ac_cv_header_rpcsvc_ypclnt_h" = xyes; then :
-++  HAVE_YPCLNT=1
-++fi
-++
-++
-++
-++if test "$HAVE_YPCLNT" = "1"; then
-++
-++$as_echo "#define HAVE_YPCLNT 1" >>confdefs.h
-++
-++fi
-++
-+ #
-+ # OpenLDAP support?  Expect that this may have a special directory...
-+ #
-+diff --git a/configure.in b/configure.in
-+index 90bda62..363c376 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -213,6 +213,15 @@ HAVE_NISPLUS=0
-+ AC_CHECK_HEADER(rpcsvc/nis.h, HAVE_NISPLUS=1)
-+ AC_SUBST(HAVE_NISPLUS)
-+ 
-++# YellowPages support?
-++HAVE_YPCLNT=0
-++AC_CHECK_HEADER([rpcsvc/ypclnt.h], HAVE_YPCLNT=1)
-++AC_SUBST(HAVE_YPCLNT)
-++if test "$HAVE_YPCLNT" = "1"; then
-++	AC_DEFINE(HAVE_YPCLNT, 1,
-++		[Define if using YellowPages])
-++fi
-++
-+ #
-+ # OpenLDAP support?  Expect that this may have a special directory...
-+ #
-+diff --git a/include/config.h.in b/include/config.h.in
-+index 9bdf98a..7f1c5b5 100644
-+--- a/include/config.h.in
-++++ b/include/config.h.in
-+@@ -72,6 +72,9 @@
-+ /* Define to 1 if you have the <unistd.h> header file. */
-+ #undef HAVE_UNISTD_H
-+ 
-++/* Define if using YellowPages */
-++#undef HAVE_YPCLNT
-++
-+ /* Use libxml2 tsd usage workaround */
-+ #undef LIBXML2_WORKAROUND
-+ 
-+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
-+index ad1d557..718caf9 100644
-+--- a/lib/rpc_subs.c
-++++ b/lib/rpc_subs.c
-+@@ -27,7 +27,6 @@
-+ #include <net/if.h>
-+ #include <netinet/in.h>
-+ #include <arpa/inet.h>
-+-#include <rpcsvc/ypclnt.h>
-+ #include <errno.h>
-+ #include <sys/ioctl.h>
-+ #include <ctype.h>
-+diff --git a/modules/Makefile b/modules/Makefile
-+index 939da7c..c5deb24 100644
-+--- a/modules/Makefile
-++++ b/modules/Makefile
-+@@ -5,13 +5,13 @@
-+ -include ../Makefile.conf
-+ include ../Makefile.rules
-+ 
-+-SRCS :=	lookup_yp.c  lookup_file.c lookup_program.c  lookup_userhome.c \
-++SRCS :=	lookup_file.c lookup_program.c  lookup_userhome.c \
-+ 	lookup_multi.c lookup_hosts.c lookup_dir.c \
-+ 	parse_sun.c    \
-+ 	mount_generic.c  mount_nfs.c  mount_afs.c  mount_autofs.c \
-+ 	mount_changer.c  mount_bind.c
-+ 
-+-MODS :=	lookup_yp.so lookup_file.so lookup_program.so lookup_userhome.so \
-++MODS :=	lookup_file.so lookup_program.so lookup_userhome.so \
-+ 	lookup_multi.so lookup_hosts.so lookup_dir.so \
-+ 	parse_sun.so \
-+ 	mount_generic.so mount_nfs.so mount_afs.so mount_autofs.so \
-+@@ -37,6 +37,11 @@ ifeq ($(NISPLUS), 1)
-+   MODS += lookup_nisplus.so
-+ endif
-+ 
-++ifeq ($(YPCLNT), 1)
-++  SRCS += lookup_yp.c
-++  MODS += lookup_yp.so
-++endif
-++
-+ ifeq ($(LDAP), 1)
-+   SRCS += lookup_ldap.c
-+   MODS += lookup_ldap.so
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-index 215d293..44985b2 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -3,7 +3,7 @@ SECTION = "base"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+index f83561d..ef5224b 100644
+--- a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
++++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+@@ -5,10 +5,11 @@ LICENSE = "GPLv2"
+ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
+ DEPENDS = "util-linux"
+-PR = "r0"
++PR = "r1"
  
--PR = "r1"
-+PR = "r2"
+ SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
+ 	file://remove-install-as-user.patch \
++	file://drop-configure-check-for-aio.patch \
+ "
  
- DEPENDS += "libtirpc flex-native bison-native"
+ SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
+@@ -26,6 +27,13 @@ FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
  
-@@ -27,6 +27,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
-            file://autofs-5.0.6-fix-recursive-mount-deadlock.patch \
-            file://autofs-5.0.6-increase-file-map-read-buffer-size.patch \
-            file://autofs-5.0.7-handle-new-location-of-systemd.patch \
-+           file://autofs-5.0.7-make-yellow-pages-support-optional.patch \
-+           file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
-            file://Makefile.rules-cross.patch \
-            file://no-bash.patch \
-            file://cross.patch \
+ EXTRA_OECONF = "--enable-gettext=no"
+ do_configure () {
++	# Prevent Makefile from calling configure without arguments,
++	# when do_configure gets called for a second time.
++	rm -f include/builddefs include/platform_defs.h
++	# Recreate configure script.
++	rm -f configure
++	oe_runmake configure
++	# Configure.
+ 	export DEBUG="-DNDEBUG"
+ 	gnu-configize --force
+ 	oe_runconf
 -- 
 1.7.10.4
 
