@@ -1,38 +1,44 @@
-Received: from mail-da0-f45.google.com ([209.85.210.45])
+Received: from db3ehsobe004.messaging.microsoft.com ([213.199.154.142]
+	helo=db3outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UFcaN-0004zY-S2
+	(envelope-from <B28495@freescale.com>) id 1UFdRn-0006zJ-Li
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 04:42:41 +0100
-Received: by mail-da0-f45.google.com with SMTP id v40so213723dad.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2013 20:25:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=tobdbmId0oXiSE7eKaepkxVgAoID4j7pCT0RFK6RMbs=;
-	b=wiyW7w2IfUoBHbjWkU+cYttkq77c+A7cdriZINgKEeA/fD/lvBjgBflwIrGVIVVPA8
-	8TjQ9pqLf/qAs0zMWIUS6sd6SW99PXO5gcbkRINhKoGpFAyviUbePpu22EobHjEZV28z
-	pxDiD31RL4tXzOwC3YHxFmA7km4SCAD1AQvve0rt6EQlzXJa6FoULDiyR/xxnl4tXns1
-	NCA40lms4j5nEBmFNsoL7l9NrzBZ5MQOF08rZlkQAFZetaLP2+HEdt+rSmCxFY4oKpLx
-	n8Isb9kePJNcUXZhWahkUi8N/RJKMc8RfoLTTcHUZBEBdCs52wuiHRN0YcDpmQLHihjm
-	zieg==
-X-Received: by 10.68.211.37 with SMTP id mz5mr36497232pbc.83.1363145158549;
-	Tue, 12 Mar 2013 20:25:58 -0700 (PDT)
-Received: from [172.23.7.5] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id xr3sm27603411pbc.46.2013.03.12.20.25.57
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 12 Mar 2013 20:25:57 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130313031343.GA18570@windriver.com>
-Date: Tue, 12 Mar 2013 20:25:55 -0700
-Message-Id: <CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
-References: <20130312211938.GA11498@windriver.com>
-	<4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
-	<20130313031343.GA18570@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1499)
-Subject: Re: question on App bitsize - need the same as the kernel (multilib situation)
+	Wed, 13 Mar 2013 05:37:51 +0100
+Received: from mail30-db3-R.bigfish.com (10.3.81.235) by
+	DB3EHSOBE002.bigfish.com (10.3.84.22) with Microsoft SMTP Server id
+	14.1.225.23; Wed, 13 Mar 2013 03:50:51 +0000
+Received: from mail30-db3 (localhost [127.0.0.1])	by mail30-db3-R.bigfish.com
+	(Postfix) with ESMTP id 218DA2E0273	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2013 03:50:51 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275ch17326ah8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1155h)
+Received: from mail30-db3 (localhost.localdomain [127.0.0.1]) by mail30-db3
+	(MessageSwitch) id 1363146648603441_9609;
+	Wed, 13 Mar 2013 03:50:48 +0000 (UTC)
+Received: from DB3EHSMHS006.bigfish.com (unknown [10.3.81.245])	by
+	mail30-db3.bigfish.com (Postfix) with ESMTP id 8A8C94004C	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Mar 2013 03:50:48 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB3EHSMHS006.bigfish.com
+	(10.3.87.106) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 13 Mar 2013 03:50:48 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server (TLS) id 14.2.328.11; Wed, 13 Mar 2013 03:50:46 +0000
+Received: from b28495.ap.freescale.net (udp143739uds.ap.freescale.net
+	[10.192.208.202])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
+	id r2D3oh3n022374;	Tue, 12 Mar 2013 20:50:44 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 Mar 2013 11:50:43 +0800
+Message-ID: <1363146643-30820-1-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Subject: [meta-oe][PATCH] tclap: initial add 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,57 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 03:42:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Mar 2013 04:37:52 -0000
+Content-Type: text/plain
 
+From: Ting Liu <b28495@freescale.com>
 
-On Mar 12, 2013, at 8:13 PM, Amy Fong <amy.fong@windriver.com> wrote:
+TCLAP (Templatized C++ Command Line Parser Library ) is a small,
+flexible library that provides a simple interface for defining
+and accessing command line arguments. Templatized C++ Command
+Line Parser Library.
 
-> It may be a combination of kernel ppc64 + userspace ppc (32);
-> or kernel x86-64 + userspace x86-32.
+Use the commit of tag tclap-1-2-1-release-final.
 
+Signed-off-by: Ting Liu <b28495@freescale.com>
+---
+ meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
 
-I think you to ship ppc64 C runtime at least and same is true for x86_64
-and by bit size you mean machine word length right ? like sizeof(long)
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+new file mode 100644
+index 0000000..c2b03a4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "Templatized C++ Command Line Parser" 
++HOMEPAGE = "http://tclap.sourceforge.net/" 
++SECTION = "tclap" 
++LICENSE = "MIT" 
++LIC_FILES_CHKSUM = "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"
++
++SRCREV = "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
++SRC_URI = "git://tclap.git.sourceforge.net/gitroot/tclap/tclap" 
++
++S = "${WORKDIR}/git"
++inherit autotools
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.7.3.4
 
->=20
-> On Tue, Mar 12, 2013 at 03:41:29PM -0700, Khem Raj wrote:
->>=20
->> On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
->>=20
->>> I need to build an application that has the same bitsize as the =
-kernel. But in
->>> my multilib configuration, the default usersapce bitsize is not the =
-same as=20
->>> the kernel's bitsize. How do you do this?
->>=20
->> which arch is this ?
->> since generally we have one in multilib combo that matches kernel bit =
-size
->> but you might have left it out.=20
->>=20
->>>=20
->>> Thanks!
->>> Amy
->>>=20
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> =
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>=20
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> =
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
