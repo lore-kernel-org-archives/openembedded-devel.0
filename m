@@ -1,30 +1,34 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <amy.fong@windriver.com>) id 1UFmKq-0002m3-Bs
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 15:07:27 +0100
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2DDoX5s027467
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 06:50:34 -0700 (PDT)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>) id 1UFm4f-0008En-EQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 09:50:33 -0400
-Date: Wed, 13 Mar 2013 09:50:33 -0400
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130313135033.GA31648@windriver.com>
-References: <20130312211938.GA11498@windriver.com>
-	<4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
-	<20130313031343.GA18570@windriver.com>
-	<CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
+	(envelope-from <marcin.juszkiewicz@linaro.org>)
+	id 1UFnCb-0004Qx-Hl; Wed, 13 Mar 2013 16:03:05 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 0A289D22CD; Wed, 13 Mar 2013 15:46:10 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 34B1CD22B2;
+	Wed, 13 Mar 2013 15:45:48 +0100 (CET)
+Message-ID: <5140911A.90604@linaro.org>
+Date: Wed, 13 Mar 2013 15:45:46 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
 MIME-Version: 1.0
-In-Reply-To: <CF5E1B15-C4C2-454C-82E1-A5214320C4CA@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: question on App bitsize - need the same as the kernel (multilib situation)
+To: linaro-dev@lists.linaro.org, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.4.6
+Subject: ATTENTION: OpenEmbedded layers from Linaro have new structure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,75 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 14:07:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Mar 2013 15:03:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 12, 2013 at 08:25:55PM -0700, Khem Raj wrote:
-> 
-> On Mar 12, 2013, at 8:13 PM, Amy Fong <amy.fong@windriver.com> wrote:
-> 
-> > It may be a combination of kernel ppc64 + userspace ppc (32);
-> > or kernel x86-64 + userspace x86-32.
-> 
-> 
-> I think you to ship ppc64 C runtime at least and same is true for x86_64
-> and by bit size you mean machine word length right ? like sizeof(long)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Uhhhh no, what I mean is, 
+Hello
 
-e.g.
+Today I made several changes to OpenEmbedded layers hosted on
+git.linaro.org:
 
-For userspace, if 32bit:
-root@localhost:~# file /bin/bash
-/bin/bash: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.34, stripped
+- - meta-aarch64
+- - meta-linaro
 
-For kernel, if 64bit:
-(in kernel config)
-CONFIG_64BIT=y
-# CONFIG_X86_32 is not set
-CONFIG_X86_64=y
-CONFIG_X86=y
+Meta-aarch64 is now empty and is obsolete. Probably will be removed from
+server in about month or two.
+Meta-linaro repository got new structure based on meta-openembedded one
+and contains three layers:
 
-Take for example, I want to run crash to do some kernel debugging, in this case,
-I would want crash to be 64bits.
+- - meta-aarch64
+- - meta-linaro
+- - meta-linaro-toolchain
 
-> > On Tue, Mar 12, 2013 at 03:41:29PM -0700, Khem Raj wrote:
-> >> 
-> >> On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
-> >> 
-> >>> I need to build an application that has the same bitsize as the kernel. But in
-> >>> my multilib configuration, the default usersapce bitsize is not the same as 
-> >>> the kernel's bitsize. How do you do this?
-> >> 
-> >> which arch is this ?
-> >> since generally we have one in multilib combo that matches kernel bit size
-> >> but you might have left it out. 
-> >> 
-> >>> 
-> >>> Thanks!
-> >>> Amy
-> >>> 
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >> 
-> >> 
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Today meta-aarch64 is just a copy of old one but everything not related
+to ARMv8 will be moved from it to meta-linaro.
+
+Meta-linaro-toolchain contains just gcc-linaro and support for external
+Linaro cross toolchains (armv7a and armv8 ones).
+
+I considered creation of meta-aarch64-arm-toolchain one with ARM Ltd.
+version of gcc but it is not often used option so can stay where it is
+now (meta-aarch64).
+
+Instructions how to start building for ARMv8 (with OE) are in wiki:
+https://wiki.linaro.org/HowTo/ARMv8/OpenEmbedded
+
+Note that any scripts present in 'meta-aarch64' got dropped. If you want
+easy way then use 'jenkins-setup' scripts like it is described in wiki.
+They are written to be as easy to use as possible.
+
+If you have any problems/questions: reply to this email.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQIcBAEBAgAGBQJRQJERAAoJECbKqQEReiUeKFgQAMUYDB1ymQs8ZspWVynJVJMQ
+InFsFQUd/QZCgNB9GcG6IepzmViHeMlIxNQ7u+KFABGV8uAz8gwdgcPtWwa/dc1b
+wu8u84mmwy77WBIMuX087AiXdg8WhJDJz5sztBoK2PL8Ljn1TFB/R17Ew90eN3zn
+o1DpPnbgMGs67phNiTy8GiQxyaaLZub0ZZZ5v00tWdt7x4vazw6n2r8/o+wzGLj2
+536KI13Sepso2dg2mrpqzrwVH8KFP7S/rRiDdKI4Gw9FlTPiaiEEadX7OPKx8YC5
+j1WIR0u66LCSe+F3NsfNfEgTOXPGVUNgqvemwGYXQuOLUKz7nnnkEdVRUegSuEVj
++bZsgzFunghOsvEgX4ynxLVXgOrkiH4PPMhD+OWcB1pso9+ZdVFTVO2oGOnDg9pK
+ov7lidEoUDDIZqHxjy5cV36jDnXt8BTI9uEIjVo9gH/0g/67QImXHVONcppg2MfM
+GDfhYorkah3VTo9zgHZKCDEIstT1OsCSg+PNeKCAN6fDUdmnzGxCJNEj2CaRAzaI
+vJekxAK0+ptscJ9c+bUmAtcBK+XRvJ9K3naN+apUm13Y6INwKuS68knWzOJc0xhd
+rpPQ2EcYd8FP1gspjNJPyQKWr2pAUGQkOGkhHrsrb4nj6mkMDDgZ2ET1x8uxI056
+vMRn7PKF7x3bItUP9NzA
+=GNf7
+-----END PGP SIGNATURE-----
 
 
