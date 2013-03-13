@@ -1,35 +1,27 @@
-Received: from mail-pb0-f52.google.com ([209.85.160.52])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UFY93-00053o-Ut
+	(envelope-from <amy.fong@windriver.com>) id 1UFcOW-0004aB-Ri
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Mar 2013 23:58:11 +0100
-Received: by mail-pb0-f52.google.com with SMTP id ma3so345648pbc.11
+	Wed, 13 Mar 2013 04:30:30 +0100
+Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
+	[128.224.146.164])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2D3DhpH003051
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Mar 2013 15:41:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=v7e6odxnueum13r+zATCBeVEkrtsUfElvQlvOz1Pzw8=;
-	b=LUfybzbYHD9QOmmQuIFqAh1xx3ltoFRu7Xyyr0EbEJrqCSUpJoeBSMZOrym7VvdeoS
-	/+dPBrkTKLWUG3J2fc6Sxueq5hfC01gZ9AVogMDCe2FBUM4EOOQTI52GV8jMzj+pOakN
-	8TKBgfF/Guj4VX6Ddpp+x3sNdBUFeyCfxUoWePiaoUS1ClMUbnphwr6muSskztqiUbHR
-	CeaOaw4AjvieWAYuM8SZaoCxyzGGxSOa++eix3ebv/LWFlAdfTSGqQlPFpc5wlm9CqAj
-	0Jgf7CrsnQqs9luSscW3mUfEYTFtIu1qUGTh2RJxR11vaX7OHPMT1GXYDN6s+waPRzm3
-	50Ow==
-X-Received: by 10.68.189.199 with SMTP id gk7mr33506846pbc.164.1363128089129; 
-	Tue, 12 Mar 2013 15:41:29 -0700 (PDT)
-Received: from [172.23.7.5] (natint3.juniper.net. [66.129.224.36])
-	by mx.google.com with ESMTPS id pn9sm26776581pbb.22.2013.03.12.15.41.27
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 12 Mar 2013 15:41:28 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.2 \(1499\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130312211938.GA11498@windriver.com>
-Date: Tue, 12 Mar 2013 15:41:29 -0700
-Message-Id: <4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
-References: <20130312211938.GA11498@windriver.com>
+	Tue, 12 Mar 2013 20:13:44 -0700 (PDT)
+Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
+	4.80) (envelope-from <amy.fong@windriver.com>) id 1UFc8N-0004po-9d
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Mar 2013 23:13:43 -0400
+Date: Tue, 12 Mar 2013 23:13:43 -0400
+From: Amy Fong <amy.fong@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1499)
+Message-ID: <20130313031343.GA18570@windriver.com>
+References: <20130312211938.GA11498@windriver.com>
+	<4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4C920E00-4E5F-47FF-9DB5-FCE7AE02E08B@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: question on App bitsize - need the same as the kernel (multilib situation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,32 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2013 22:58:11 -0000
+X-List-Received-Date: Wed, 13 Mar 2013 03:30:32 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
+It may be a combination of kernel ppc64 + userspace ppc (32);
+or kernel x86-64 + userspace x86-32.
 
-On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
-
-> I need to build an application that has the same bitsize as the =
-kernel. But in
-> my multilib configuration, the default usersapce bitsize is not the =
-same as=20
-> the kernel's bitsize. How do you do this?
-
-which arch is this ?
-since generally we have one in multilib combo that matches kernel bit =
-size
-but you might have left it out.=20
-
->=20
-> Thanks!
-> Amy
->=20
+On Tue, Mar 12, 2013 at 03:41:29PM -0700, Khem Raj wrote:
+> 
+> On Mar 12, 2013, at 2:19 PM, Amy Fong <amy.fong@windriver.com> wrote:
+> 
+> > I need to build an application that has the same bitsize as the kernel. But in
+> > my multilib configuration, the default usersapce bitsize is not the same as 
+> > the kernel's bitsize. How do you do this?
+> 
+> which arch is this ?
+> since generally we have one in multilib combo that matches kernel bit size
+> but you might have left it out. 
+> 
+> > 
+> > Thanks!
+> > Amy
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
 
 
