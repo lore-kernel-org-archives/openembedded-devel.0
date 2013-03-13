@@ -1,37 +1,37 @@
-Received: from mail-gh0-f180.google.com ([209.85.160.180])
+Received: from mail-ye0-f181.google.com ([209.85.213.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UFoxp-0007ym-NN
+	(envelope-from <martin.jansa@gmail.com>) id 1UFoyM-00083W-4Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Mar 2013 17:55:53 +0100
-Received: by mail-gh0-f180.google.com with SMTP id f13so210947ghb.11
+	Wed, 13 Mar 2013 17:56:20 +0100
+Received: by mail-ye0-f181.google.com with SMTP id l2so202134yen.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 09:38:58 -0700 (PDT)
+	Wed, 13 Mar 2013 09:39:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=aJeenK9rbHeaYn9zxuOZlTn+3MEkUjytGzpeYS5NQ9g=;
-	b=jVLDZFJ5bs9jI0CQ6ZYbPOhAfUwgGwkzzT8aAJZl1EXcsY+O8baSHdoTIeOxNwAns2
-	XOPaX7hQ/9b2S3Rb3BGbI0dVBfSoMMDAPjV+ibVm23G+Dqh8LSfHSagVgWjAGKifXQ4D
-	AsuJklm74aweOSZk5RapiJJkP/VK/aelDEtYDSsybDp4hfZMcLm194Bw0VQIwDUyZgkH
-	46O1RLacEJhhBcPM0MspupKe8ZNQSeydfUFeUW9ZcLSFPTf9WTw9TJ4mduJ1t3i4NHkp
-	5dQP+GRhEkhamP0kgxQIxzkLt1C+PdnxwEWKhaJAYYFnSg4xQ9bcVgmTi84e6FsFZou4
-	KLMQ==
-X-Received: by 10.236.134.163 with SMTP id s23mr15952320yhi.54.1363192738668; 
-	Wed, 13 Mar 2013 09:38:58 -0700 (PDT)
+	:user-agent; bh=rfLB+69def3FsUv1/AUOOmLpAnPBXG2CfrzNFa7cKyg=;
+	b=btCDb7+LbaUIMPYnr92J+OWpLIPlRrZ5fXPX8pXM9qGRzQFFTSVBFLZggWrTsqvyZM
+	NRR1NXX2eQ0nUmBOWdP3EbglUXF57E1Fs9187AeigtvnDmEeUlJO/cRnRN1owqfuDpgo
+	M1h0y8SplhJOuCVD7zL9H1UxYN8xeDWYST70jeUidMH5QXcInMceejnYRo+9HNgMoGyO
+	GRcTELqIILM1K97VSjvATnGw8sAqD95EhDXPWGKfslHxS2s5AlhLniI8wk330kFiPMyg
+	XBg4QajD8IIPrsDPHIahzaWsSXsZeLAXdyAHI2HYwAHbmNgoE48fnv9iigmCZ+IiDeQJ
+	UU3Q==
+X-Received: by 10.236.149.74 with SMTP id w50mr16290948yhj.129.1363192772931; 
+	Wed, 13 Mar 2013 09:39:32 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id g69sm36315941yhh.17.2013.03.13.09.38.56
+	by mx.google.com with ESMTPS id w2sm36319379yhh.7.2013.03.13.09.39.31
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 13 Mar 2013 09:38:57 -0700 (PDT)
-Date: Wed, 13 Mar 2013 17:38:50 +0100
+	Wed, 13 Mar 2013 09:39:32 -0700 (PDT)
+Date: Wed, 13 Mar 2013 17:39:25 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130313163850.GW3260@jama>
-References: <1362162226-24924-1-git-send-email-ftonello@cercacor.com>
+Message-ID: <20130313163925.GX3260@jama>
+References: <1362162356-25168-1-git-send-email-ftonello@cercacor.com>
 MIME-Version: 1.0
-In-Reply-To: <1362162226-24924-1-git-send-email-ftonello@cercacor.com>
+In-Reply-To: <1362162356-25168-1-git-send-email-ftonello@cercacor.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
-Subject: Re: [meta-oe][PATCH] qextserialport: Added 1.2rc recipe
+Subject: Re: [meta-oe][PATCH] gsoap: added gsoap 2.8.12 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,102 +45,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 16:55:54 -0000
-X-Groupsio-MsgNum: 43536
+X-List-Received-Date: Wed, 13 Mar 2013 16:56:22 -0000
+X-Groupsio-MsgNum: 43537
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DMefDzZywwCHZelG"
+	protocol="application/pgp-signature"; boundary="eGyD7iWN192kf2IJ"
 Content-Disposition: inline
 
---DMefDzZywwCHZelG
+--eGyD7iWN192kf2IJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 01, 2013 at 10:23:46AM -0800, eu@felipetonello.com wrote:
+On Fri, Mar 01, 2013 at 10:25:56AM -0800, eu@felipetonello.com wrote:
 > From: "Felipe F. Tonello" <ftonello@cercacor.com>
 >=20
-> QExtSerialPort is a serial port library for Qt4/5.
+> This recipe was inspired on the gsoap recipe in oe-classic.
 
 Applied, thanks!
 
 >=20
 > Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
 > ---
->  .../qextserialport/qextserialport_1.2rc.bb         |   55 ++++++++++++++=
+>  .../recipes-support/gsoap/gsoap-native_2.8.12.bb   |   14 ++++++++++++
+>  meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb      |   17 +++++++++++++++
+>  meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc     |   23 ++++++++++++++=
 ++++++
->  1 file changed, 55 insertions(+)
->  create mode 100644 meta-oe/recipes-qt/qextserialport/qextserialport_1.2r=
-c.bb
+>  3 files changed, 54 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+>  create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+>  create mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
 >=20
-> diff --git a/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb b/=
-meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
+> diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-=
+oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
 > new file mode 100644
-> index 0000000..da65215
+> index 0000000..46fabbb
 > --- /dev/null
-> +++ b/meta-oe/recipes-qt/qextserialport/qextserialport_1.2rc.bb
-> @@ -0,0 +1,55 @@
-> +DESCRIPTION =3D "Qt Ext Serial Port Library"
-> +HOMEPAGE =3D "http://http://code.google.com/p/qextserialport/"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db866a28cda707ec714878bd933f46=
-251"
-> +SECTION =3D "qt/libs"
+> +++ b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+> @@ -0,0 +1,14 @@
+> +require gsoap_${PV}.inc
 > +
-> +PR =3D "r0"
+> +DEPENDS =3D ""
+> +EXTRA_OEMAKE =3D ""
 > +
-> +# 1.2rc as version will sort lower then 1.2 when it's released
-> +REAL_PV =3D "1.2rc"
-> +PV =3D "1.1+${REAL_PV}"
-> +
-> +inherit qt4x11 pkgconfig
-> +
-> +DEPENDS =3D "udev"
-> +
-> +SRC_URI =3D " \
-> +  http://qextserialport.googlecode.com/files/qextserialport-${REAL_PV}.z=
-ip \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "ffa061edb9f64666468d18402eee6108"
-> +SRC_URI[sha256sum] =3D "9cbee267aac9830f9944bb1d13872e51fba400aa9afe158e=
-64f0fe265a0176bc"
-> +
-> +S =3D "${WORKDIR}/qextserialport-${REAL_PV}"
-> +
-> +FILES_${PN} =3D "${libdir}/libqextserialport${SOLIBS}"
-> +
-> +FILES_${PN}-dev =3D " \
-> +  ${libdir}/libqextserialport${SOLIBSDEV} \
-> +  ${libdir}/libqextserialport.prl \
-> +  ${includedir}/QtExtSerialPort/*.h \
-> +  ${datadir}/qt4/mkspecs/features/extserialport.prf \
-> +"
-> +
-> +FILES_${PN}-dbg +=3D " \
-> +  ${libdir}/.debug/libqextserialport.so* \
-> +"
-> +
-> +do_configure_prepend() {
-> +  # based on the documentation, this line make sure we use udev in linux
-> +  cd ${S} && echo "linux*:CONFIG +=3D qesp_linux_udev" > .qmake.cache
-> +
-> +  # Hacking hardcoded qmake variables
-> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_HEADERS\],${includedir},g=
-' '{}' ';'
-> +  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_LIBS\],${libdir},g' '{}' =
-';'
-> +  find *.pro -exec sed -i -e 's,$$\[QMAKE_MKSPECS\],${datadir}/qt4/mkspe=
-cs/,g' '{}' ';'
-> +}
+> +inherit native
 > +
 > +do_install() {
-> +  export INSTALL_ROOT=3D${D}
-> +  oe_runmake install
-> +
-> +  # This is necessary to make it work with the qt based SDK
-> +  cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|${STAGING_INCD=
-IR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
+> +    oe_runmake DESTDIR=3D${D} BINDIR=3D${D}${bindir} install
 > +}
+> +
+> +
+> +SRC_URI[md5sum] =3D "5700d26fc6fe3073d038349e19c3640d"
+> +SRC_URI[sha256sum] =3D "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee=
+3dcff783f4015a00"
+> diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb b/meta-oe/reci=
+pes-support/gsoap/gsoap_2.8.12.bb
+> new file mode 100644
+> index 0000000..5db2e61
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+> @@ -0,0 +1,17 @@
+> +require gsoap_${PV}.inc
+> +
+> +DEPENDS =3D "gsoap-native openssl"
+> +
+> +do_install_append() {
+> +   install -d ${D}${libdir}
+> +   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++=
+ libgsoapck
+> +   do
+> +       oe_libinstall -C gsoap $lib ${D}${libdir}
+> +   done
+> +}
+> +
+> +FILES_${PN} =3D "${bindir}/wsdl2h ${bindir}/soapcpp2"
+> +FILES_${PN} +=3D "${datadir}"
+> +
+> +SRC_URI[md5sum] =3D "5700d26fc6fe3073d038349e19c3640d"
+> +SRC_URI[sha256sum] =3D "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee=
+3dcff783f4015a00"
+> diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc b/meta-oe/rec=
+ipes-support/gsoap/gsoap_2.8.12.inc
+> new file mode 100644
+> index 0000000..30cf9a6
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION =3D "The gSOAP toolkit provides a unique SOAP-to-C/C++ langu=
+age binding \
+> +for the development of SOAP Web Services and clients."
+> +SECTION =3D "devel"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Db338b08b1b61e028e0f399a4d=
+e25e58f"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.zip \
+> +        "
+> +
+> +inherit autotools
+> +
+> +PR =3D "r1"
+> +
+> +S =3D "${WORKDIR}/gsoap-2.8"
+> +
+> +FILES_${PN}-dev =3D "${includedir}"
+> +RRECOMMENDS_${PN}-dev =3D "${PN}-staticdev"
+> +
+> +FILES_${PN}-staticdev =3D "${libdir}"
+> +
+> +PARALLEL_MAKE =3D ""
+> +
+> +EXTRA_OEMAKE =3D "SOAP=3D${STAGING_BINDIR_NATIVE}/soapcpp2"
 > --=20
 > 1.7.9.5
 >=20
@@ -153,16 +167,16 @@ IR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---DMefDzZywwCHZelG
+--eGyD7iWN192kf2IJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFAq5oACgkQN1Ujt2V2gBwn6QCeM8aZNR0wPPzkAaW2nd6JiUcR
-DOYAoJA7g+hpZViRBVXlt1Jr8Sn2h654
-=ArGP
+iEYEARECAAYFAlFAq70ACgkQN1Ujt2V2gByr2QCgtqImdHcfX9T4y/GyZ7BxIFuu
+e2kAnRWPy8XUsXJ6e1NegJGCPv3bjwNm
+=yVM3
 -----END PGP SIGNATURE-----
 
---DMefDzZywwCHZelG--
+--eGyD7iWN192kf2IJ--
