@@ -1,20 +1,33 @@
-Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
+Received: from mail-pb0-f46.google.com ([209.85.160.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1UGBhU-00088P-HA
+	(envelope-from <raj.khem@gmail.com>) id 1UGFc1-0001Tc-Av
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 18:12:22 +0100
-Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
-	[129.70.144.156])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: sherbrec)
-	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
-	6FB4F80028; Thu, 14 Mar 2013 17:46:07 +0100 (CET)
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+	Thu, 14 Mar 2013 22:23:00 +0100
+Received: by mail-pb0-f46.google.com with SMTP id uo15so2788345pbc.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Mar 2013 14:06:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=9O4RDDmD9LP+r09bwp3LlaTx5dS6zb7kyF1rUPEEq/g=;
+	b=dcacjLkUrcKZEjnx9uCN6YMpHJsr18WHf8KiiSTYHL+cWLX5P2uJ0hmpekZdG5T0Uz
+	N051y6z6bfXQFUiR6R+DopdSrghLedmHTRjaZq5rwWKCCO93jaRQ0IhXSS8VqsoR6BIf
+	/Z0KK1G5rfFhaT5lonuuI2mP162zYUQ5VfCLQJZftR4mgG7EDoi9wzA3raAsaUMibREt
+	2beBqZml7cRFxG0BDQ45J4K+u38aGbO5slKOr60YQVoOZgc/dvPlgRoHxmqsg1b5h8rd
+	Nk1MTHruWOCPA7Zssk4ror6udQ/56nk+oxHRyFMY10u06qiwGmn35jGPwF4X19axkgLI
+	tRog==
+X-Received: by 10.68.88.67 with SMTP id be3mr9092828pbb.187.1363295173668;
+	Thu, 14 Mar 2013 14:06:13 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id ti8sm4927246pbc.12.2013.03.14.14.06.12
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 14 Mar 2013 14:06:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Mar 2013 17:45:57 +0100
-Message-Id: <1363279557-5861-1-git-send-email-stefan@herbrechtsmeier.net>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [meta-oe][PATCH] libtinyxml: Add native support and use relative paths
+Date: Thu, 14 Mar 2013 14:05:58 -0700
+Message-Id: <1363295158-21771-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] luajit: Fix build with SSTATE enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,57 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2013 17:12:23 -0000
+X-List-Received-Date: Thu, 14 Mar 2013 21:23:05 -0000
 
-Replace CXXFLAGS += "-fPIC" with EXTRA_CXXFLAGS to allow native
-build and use relative paths to simplify recipe.
+luajit does not honor standard CC variables
+so when its built from shared state it does
+not compile because --sysroot is wrong.
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+This patch fixes the problem by passing
+the TOOLCHAIN_OPTONS to appropriate flags
+so that it gets the correct sysroot value
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/libtinyxml/libtinyxml_2.6.2.bb |   18 ++++++++++--------
- 1 files changed, 10 insertions(+), 8 deletions(-)
+ meta-oe/recipes-devtools/luajit/luajit_2.0.0.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-index fdadebd..8670fac 100644
---- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-@@ -16,20 +16,21 @@ SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.0.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.0.bb
+index 70cefa8..a7f96f8 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.0.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.0.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9511885992e4900014e3b13ca6372b7d"
+ HOMEPAGE = "http://luajit.org"
  
- S = "${WORKDIR}/tinyxml"
- 
--CXXFLAGS += "-fPIC"
-+EXTRA_CXXFLAGS = "-I. -fPIC"
- 
- do_compile() {
--    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxml.o ${S}/tinyxml.cpp
--    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlerror.o ${S}/tinyxmlerror.cpp
--    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlparser.o ${S}/tinyxmlparser.cpp
-+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml.o tinyxml.cpp
-+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlerror.o tinyxmlerror.cpp
-+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlparser.o tinyxmlparser.cpp
-     ${CXX} ${CXXFLAGS} \
-             -shared \
-             -Wl,-soname,libtinyxml.so.${PV} \
--            -o ${S}/libtinyxml.so.${PV} \
-+            -o libtinyxml.so.${PV} \
-             ${LDFLAGS} \
--            ${S}/tinyxml.o \
--            ${S}/tinyxmlparser.o \
--            ${S}/tinyxmlerror.o
-+            tinyxml.o \
-+            tinyxmlparser.o \
-+            tinyxmlerror.o
-+
+ DEPENDS += "lua5.1"
+-PR = "r1"
++PR = "r2"
+ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+            file://disable_lj_vm_foldarith_for_spe.patch \
+           "
+@@ -20,7 +20,7 @@ do_configure_prepend() {
+ 	sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
  }
  
- do_install() {
-@@ -41,3 +42,4 @@ do_install() {
-     install -m 0644 ${S}/tinyxml.h ${D}${includedir}
- }
- 
-+BBCLASSEXTEND += "native"
+-EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX}'
++EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} TARGET_CFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}"'
+ EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
+ EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
+ EXTRA_OEMAKE_append_i586 = ' HOST_CC="${BUILD_CC} -m32"'
 -- 
-1.7.0.4
+1.7.9.5
 
 
 
