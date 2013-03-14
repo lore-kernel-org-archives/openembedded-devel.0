@@ -1,34 +1,20 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UG9WL-0001cs-J4 for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 15:52:42 +0100
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UG9GY-0007q8-Ty for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 15:36:22 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 15:36:22 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 15:36:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1UGBhU-00088P-HA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Mar 2013 18:12:22 +0100
+Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
+	[129.70.144.156])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
+	6FB4F80028; Thu, 14 Mar 2013 17:46:07 +0100 (CET)
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 14 Mar 2013 15:35:50 +0100
-Message-ID: <khsn7t$31g$1@ger.gmane.org>
-References: <1363192654-5856-1-git-send-email-ftonello@cercacor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <1363192654-5856-1-git-send-email-ftonello@cercacor.com>
-X-Enigmail-Version: 1.5
-Subject: Re: [meta-oe][PATCH v3] fingerterm: Added 1.0.2 recipe
+Date: Thu, 14 Mar 2013 17:45:57 +0100
+Message-Id: <1363279557-5861-1-git-send-email-stefan@herbrechtsmeier.net>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [meta-oe][PATCH] libtinyxml: Add native support and use relative paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +28,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2013 14:52:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Mar 2013 17:12:23 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Replace CXXFLAGS += "-fPIC" with EXTRA_CXXFLAGS to allow native
+build and use relative paths to simplify recipe.
 
-Op 13-03-13 17:37, eu@felipetonello.com schreef:
-> From: "Felipe F. Tonello" <ftonello@cercacor.com>
-> 
-> Fingerterm is a terminal emulator for Nokia Harmattan, but it works in
-> any Qt4 environment.
-> 
-> This recipe can be extended by a .bbappend to add .desktop, icon and
-> others to the target device.
+Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+---
+ .../recipes-support/libtinyxml/libtinyxml_2.6.2.bb |   18 ++++++++++--------
+ 1 files changed, 10 insertions(+), 8 deletions(-)
 
-Why not include a default .desktop in the recipe so it actually works out of
-the box?
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRQeBGMkyGM64RGpERAgyPAJ0USSaBvvUFaBFIJe2TU5g809CDhgCffXxy
-p6KfZb9GJ6BgF049Lhzs8bI=
-=7rVm
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+index fdadebd..8670fac 100644
+--- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
++++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+@@ -16,20 +16,21 @@ SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062
+ 
+ S = "${WORKDIR}/tinyxml"
+ 
+-CXXFLAGS += "-fPIC"
++EXTRA_CXXFLAGS = "-I. -fPIC"
+ 
+ do_compile() {
+-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxml.o ${S}/tinyxml.cpp
+-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlerror.o ${S}/tinyxmlerror.cpp
+-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlparser.o ${S}/tinyxmlparser.cpp
++    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml.o tinyxml.cpp
++    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlerror.o tinyxmlerror.cpp
++    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlparser.o tinyxmlparser.cpp
+     ${CXX} ${CXXFLAGS} \
+             -shared \
+             -Wl,-soname,libtinyxml.so.${PV} \
+-            -o ${S}/libtinyxml.so.${PV} \
++            -o libtinyxml.so.${PV} \
+             ${LDFLAGS} \
+-            ${S}/tinyxml.o \
+-            ${S}/tinyxmlparser.o \
+-            ${S}/tinyxmlerror.o
++            tinyxml.o \
++            tinyxmlparser.o \
++            tinyxmlerror.o
++
+ }
+ 
+ do_install() {
+@@ -41,3 +42,4 @@ do_install() {
+     install -m 0644 ${S}/tinyxml.h ${D}${includedir}
+ }
+ 
++BBCLASSEXTEND += "native"
+-- 
+1.7.0.4
 
 
 
