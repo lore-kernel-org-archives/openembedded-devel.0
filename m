@@ -1,35 +1,35 @@
-Received: from mail-we0-f182.google.com ([74.125.82.182])
+Received: from mail-vb0-f51.google.com ([209.85.212.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UG25n-0003Cn-E5
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UG3Xx-000638-4B
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 07:57:24 +0100
-Received: by mail-we0-f182.google.com with SMTP id t57so1809591wey.27
+	Thu, 14 Mar 2013 09:30:02 +0100
+Received: by mail-vb0-f51.google.com with SMTP id fq11so1046321vbb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Mar 2013 23:40:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Thu, 14 Mar 2013 01:13:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
 	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=6syAZUetIamE25ZHPMuuPHaAWgyfHc4HzPHjvRdCxho=;
-	b=J5wFnQZK9gW5yUjhhCL5Iv+TE3TJEcshWby289f7cj30M3kyhViWgB4KZnwujAmfgI
-	k3AvPeTl8lCYJE4JAWUIBDiSG1WEYCRRUaFDfGCS9BYcl4fZNTv8tgZ0lby4X7+dy5gG
-	+Yeo17MQY/MmC8uJNvNsUOswEUMM1O7sJGyLgh4ULRp9S+s8hW0KB0SqQqzBS2kH9cRi
-	h6NQS4mZlci0N4sQgLonF4v9mo4WOfv9LmctiKmfjtvkmWPkBvm61uEpVr1EKkGT7Tuj
-	xeSVs8ROGhltq7hdHohkN/avcIJPSmrU2Nz5A2glvq1MfAd0G0NMIraCymb3CqphTllS
-	2vkw==
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=xV8YgjSzZlldk4ib5oRvinkXQRdOdLVc0Byb1HDTLCk=;
+	b=JBgrsfYifxQp7X0YjABMGhjenbd5kjLpCgjRbwmMeMDzhRtoACT/3h12YU9gErJrNe
+	1HPdrynT+7H8nt7kiOxEo+aSmouzdSRPwWw8m1Pzp4wJqFEsq/g1wUwFT/xNhTZD0/UY
+	yL7gHw9nUvI8HNcLfDdxOQHPjSq/1RL0KFJL9GH4lb4j5PpsAnCW4+IM3DVHCwnLa/6o
+	Rvi2owgz5Jwm0LL4dZ+adu32jC+3AMDeqXGTViEbC2xyrJeE1wxKSfargLWkOgkDooHJ
+	ax+mQ8aOHqTS9lkO5hBDMbY9mrVwAaDP8a44jEn1IWoRTKP7sAAoe+vevrnU0zKCKNWt
+	89ww==
 MIME-Version: 1.0
-X-Received: by 10.194.157.42 with SMTP id wj10mr1768727wjb.12.1363243205437;
-	Wed, 13 Mar 2013 23:40:05 -0700 (PDT)
-Received: by 10.194.89.106 with HTTP; Wed, 13 Mar 2013 23:40:05 -0700 (PDT)
-In-Reply-To: <AF604684617F454390621992F367F169012C4AD0@039-SN2MPN1-022.039d.mgd.msft.net>
-References: <1363146643-30820-1-git-send-email-b28495@freescale.com>
-	<20130313162013.GM3260@jama>
-	<AF604684617F454390621992F367F169012C4AD0@039-SN2MPN1-022.039d.mgd.msft.net>
-Date: Thu, 14 Mar 2013 07:40:05 +0100
-Message-ID: <CA+chaQeC26Any2ZHPuct90Ta8PxgYsijGT7gMDjCL0UhOK2qBA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] tclap: initial add 1.2.1
+X-Received: by 10.220.176.73 with SMTP id bd9mr637068vcb.63.1363248794913;
+	Thu, 14 Mar 2013 01:13:14 -0700 (PDT)
+Received: by 10.52.185.168 with HTTP; Thu, 14 Mar 2013 01:13:14 -0700 (PDT)
+In-Reply-To: <20130313163811.GV3260@jama>
+References: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
+	<CALbNGRT+RDine-AZQx+K8oaf25mncrHvvbYq5FMNS7TnXQU0Pw@mail.gmail.com>
+	<20130313163811.GV3260@jama>
+Date: Thu, 14 Mar 2013 09:13:14 +0100
+Message-ID: <CALbNGRQS_gSEKuQgKS_sV7V1VsbGeYULTHDb8hHRtF+8LO8hMg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv2] poppler: upgrade to 0.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,124 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2013 06:57:30 -0000
+X-List-Received-Date: Thu, 14 Mar 2013 08:30:07 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-If it generates doc/html on your host, then it's probably autodetecting
-some doc generating tool from host which isn't on my. It would be better to
-disable docs completely (I'll let you know if it builds and doc is empty).
+On Wed, Mar 13, 2013 at 5:38 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Fri, Mar 08, 2013 at 12:25:04PM +0100, Andreas M=C3=BCller wrote:
+>> On Tue, Mar 5, 2013 at 11:15 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > * 0.18.0 was failing to build after libpng was upgraded to 1.6 in oe-c=
+ore
+>> >
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> > ---
+>> >  meta-oe/recipes-support/poppler/poppler_0.18.0.bb | 12 ------------
+>> >  meta-oe/recipes-support/poppler/poppler_0.18.4.bb | 10 ++++++++++
+>> >  2 files changed, 10 insertions(+), 12 deletions(-)
+>> >  delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
+>> >  create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.4.bb
+>> >
+>> Maybe it is a temporary problem but I get
+>>
+>> ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
+>> ERROR: Function failed: Fetcher failure for URL:
+>> 'http://poppler.freedesktop.org/poppler-0.18.4.tar.gz'. Unable to
+>> fetch URL from any source.
+>> ERROR: Logfile of failure stored in:
+>> /home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-g=
+nueabi/poppler/0.18.4-r0/temp/log.do_fetch.20883
+>> ERROR: Task 4 (/home/Superandy/data/oe-core/sources/meta-openembedded/me=
+ta-oe/recipes-support/poppler/poppler_0.18.4.bb,
+>> do_fetch) failed with exit code '1'
+>
+> It still downloads here, so I assume it was really temporary, applied
+> now (because old was failing anyway).
+>
+>>
+>> Andreas
+Same here - server seems up and it fixes the build error - thanks
 
+Andreas
 
-On Thu, Mar 14, 2013 at 3:38 AM, Liu Ting-B28495 <B28495@freescale.com>wrote:
-
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: Thursday, March 14, 2013 12:20 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH] tclap: initial add 1.2.1
-> >
-> > On Wed, Mar 13, 2013 at 11:50:43AM +0800, b28495@freescale.com wrote:
-> > > From: Ting Liu <b28495@freescale.com>
-> > >
-> > > TCLAP (Templatized C++ Command Line Parser Library ) is a small,
-> > > flexible library that provides a simple interface for defining and
-> > > accessing command line arguments. Templatized C++ Command Line Parser
-> > > Library.
-> > >
-> > > Use the commit of tag tclap-1-2-1-release-final.
-> > >
-> >
-> > fails in do_install:
-> >
-> > | /bin/mkdir -p
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
-> > | -linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap
-> > | cp -R
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
-> > | -linux-gnueabi/tclap/1.2.1-r0/git/docs/html
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
-> > | -linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap
-> > |  /bin/mkdir -p '/home/jenkins/oe/shr-core-branches/shr-core/tmp-
-> > eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-
-> > r0/image/usr/share/doc/tclap'
-> > | cp: cannot stat
-> > | `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o
-> > | e-linux-gnueabi/tclap/1.2.1-r0/git/docs/html': No such file or
-> > | directory
-> > | make[2]: *** [install-data-local] Error 1
-> > | make[2]: *** Waiting for unfinished jobs....
-> > |  /usr/bin/install -c -m 644 index.html manual.html style.css
-> > '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-
-> > linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap'
-> > | make[2]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-
-> > core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-r0/git/docs'
-> > | make[1]: *** [install-am] Error 2
-> > | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-
-> > core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-r0/git/docs'
-> > | make: *** [install-recursive] Error 1
-> > | ERROR: oe_runmake failed
-> > | ERROR: Function failed: do_install (see
-> > | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
-> > | -linux-gnueabi/tclap/1.2.1-r0/temp/log.do_install.29945 for further
-> > | information)
-> > NOTE: recipe tclap-1.2.1-r0: task do_install: Failed
-> >
-> > Whole log in:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-
-> > branches/log.world.20130313_114357.log/
-> >
->
-> I did tests before sending the patch :-(
-> Patch v3 has been sent. Please review. Thanks.
->
-> -Ting
->
-> > > Signed-off-by: Ting Liu <b28495@freescale.com>
-> > > ---
-> > >  meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb |   13 +++++++++++++
-> > >  1 files changed, 13 insertions(+), 0 deletions(-)  create mode 100644
-> > > meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-> > >
-> > > diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-> > > b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-> > > new file mode 100644
-> > > index 0000000..c2b03a4
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-> > > @@ -0,0 +1,13 @@
-> > > +DESCRIPTION = "Templatized C++ Command Line Parser"
-> > > +HOMEPAGE = "http://tclap.sourceforge.net/"
-> > > +SECTION = "tclap"
-> > > +LICENSE = "MIT"
-> > > +LIC_FILES_CHKSUM =
-> > "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"
-> > > +
-> > > +SRCREV = "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
-> > > +SRC_URI = "git://tclap.git.sourceforge.net/gitroot/tclap/tclap"
-> > > +
-> > > +S = "${WORKDIR}/git"
-> > > +inherit autotools
-> > > +
-> > > +BBCLASSEXTEND = "native nativesdk"
-> > > --
-> > > 1.7.3.4
-> > >
-> > >
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
