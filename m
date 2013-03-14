@@ -1,44 +1,50 @@
-Received: from co1ehsobe005.messaging.microsoft.com ([216.32.180.188]
-	helo=co1outboundpool.messaging.microsoft.com)
+Received: from va3ehsobe003.messaging.microsoft.com ([216.32.180.13]
+	helo=va3outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1UFyIi-0001CQ-Br
+	(envelope-from <B28495@freescale.com>) id 1UFyYw-00023P-A8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 03:54:18 +0100
-Received: from mail62-co1-R.bigfish.com (10.243.78.225) by
-	CO1EHSOBE038.bigfish.com (10.243.66.103) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 14 Mar 2013 02:37:09 +0000
-Received: from mail62-co1 (localhost [127.0.0.1])	by mail62-co1-R.bigfish.com
-	(Postfix) with ESMTP id B5ABC840109	for
+	Thu, 14 Mar 2013 04:10:39 +0100
+Received: from mail175-va3-R.bigfish.com (10.7.14.244) by
+	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 14 Mar 2013 02:38:43 +0000
+Received: from mail175-va3 (localhost [127.0.0.1])	by
+	mail175-va3-R.bigfish.com (Postfix) with ESMTP id 85B4DA00C6	for
 	<openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 02:37:09 +0000 (UTC)
+	Thu, 14 Mar 2013 02:38:43 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275ch17326ah8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1155h)
-Received: from mail62-co1 (localhost.localdomain [127.0.0.1]) by mail62-co1
-	(MessageSwitch) id 1363228627921100_6181;
-	Thu, 14 Mar 2013 02:37:07 +0000 (UTC)
-Received: from CO1EHSMHS028.bigfish.com (unknown [10.243.78.232])	by
-	mail62-co1.bigfish.com (Postfix) with ESMTP id DE20474004F	for
+X-SpamScore: -3
+X-BigFish: VS-3(zz98dI9371I542I1432Izz1f42h1ee6h1de0h1202h1e76h1d1ah1d2ahzz8275ch17326ah8275dh8275bhz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ahbe9i1155h)
+Received: from mail175-va3 (localhost.localdomain [127.0.0.1]) by mail175-va3
+	(MessageSwitch) id 1363228721674662_2243;
+	Thu, 14 Mar 2013 02:38:41 +0000 (UTC)
+Received: from VA3EHSMHS003.bigfish.com (unknown [10.7.14.231])	by
+	mail175-va3.bigfish.com (Postfix) with ESMTP id A10882A0082	for
 	<openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 02:37:07 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS028.bigfish.com
-	(10.243.66.38) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 14 Mar 2013 02:37:07 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Thu, 14 Mar 2013 02:37:07 +0000
-Received: from b28495.ap.freescale.net (udp143739uds.ap.freescale.net
-	[10.192.208.202])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r2E2b36E011742;	Wed, 13 Mar 2013 19:37:05 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Mar 2013 10:37:03 +0800
-Message-ID: <1363228623-2182-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu, 14 Mar 2013 02:38:41 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS003.bigfish.com
+	(10.7.99.13) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Thu, 14 Mar 2013 02:38:37 +0000
+Received: from 039-SN2MPN1-022.039d.mgd.msft.net ([169.254.2.152]) by
+	039-SN1MMR1-004.039d.mgd.msft.net ([::1]) with mapi id 14.02.0328.011;
+	Thu, 14 Mar 2013 02:38:36 +0000
+From: Liu Ting-B28495 <B28495@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] tclap: initial add 1.2.1
+Thread-Index: AQHOIAbusCkWCll5OUC6pnGBCK+6R5ikdUQA
+Date: Thu, 14 Mar 2013 02:38:35 +0000
+Message-ID: <AF604684617F454390621992F367F169012C4AD0@039-SN2MPN1-022.039d.mgd.msft.net>
+References: <1363146643-30820-1-git-send-email-b28495@freescale.com>
+	<20130313162013.GM3260@jama>
+In-Reply-To: <20130313162013.GM3260@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.85]
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
-Subject: [meta-oe][PATCH v3] tclap: initial add 1.2.1
+Subject: Re: [meta-oe][PATCH] tclap: initial add 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,48 +58,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2013 02:54:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 Mar 2013 03:10:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Ting Liu <b28495@freescale.com>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Thursday, March 14, 2013 12:20 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] tclap: initial add 1.2.1
+>=20
+> On Wed, Mar 13, 2013 at 11:50:43AM +0800, b28495@freescale.com wrote:
+> > From: Ting Liu <b28495@freescale.com>
+> >
+> > TCLAP (Templatized C++ Command Line Parser Library ) is a small,
+> > flexible library that provides a simple interface for defining and
+> > accessing command line arguments. Templatized C++ Command Line Parser
+> > Library.
+> >
+> > Use the commit of tag tclap-1-2-1-release-final.
+> >
+>=20
+> fails in do_install:
+>=20
+> | /bin/mkdir -p
+> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
+> | -linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap
+> | cp -R
+> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
+> | -linux-gnueabi/tclap/1.2.1-r0/git/docs/html
+> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
+> | -linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap
+> |  /bin/mkdir -p '/home/jenkins/oe/shr-core-branches/shr-core/tmp-
+> eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-
+> r0/image/usr/share/doc/tclap'
+> | cp: cannot stat
+> | `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o
+> | e-linux-gnueabi/tclap/1.2.1-r0/git/docs/html': No such file or
+> | directory
+> | make[2]: *** [install-data-local] Error 1
+> | make[2]: *** Waiting for unfinished jobs....
+> |  /usr/bin/install -c -m 644 index.html manual.html style.css
+> '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-
+> linux-gnueabi/tclap/1.2.1-r0/image/usr/share/doc/tclap'
+> | make[2]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-
+> core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-r0/git/docs'
+> | make[1]: *** [install-am] Error 2
+> | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-
+> core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/tclap/1.2.1-r0/git/docs'
+> | make: *** [install-recursive] Error 1
+> | ERROR: oe_runmake failed
+> | ERROR: Function failed: do_install (see
+> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe
+> | -linux-gnueabi/tclap/1.2.1-r0/temp/log.do_install.29945 for further
+> | information)
+> NOTE: recipe tclap-1.2.1-r0: task do_install: Failed
+>=20
+> Whole log in:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-
+> branches/log.world.20130313_114357.log/
+>=20
 
-TCLAP (Templatized C++ Command Line Parser Library ) is a small,
-flexible library that provides a simple interface for defining
-and accessing command line arguments.
+I did tests before sending the patch :-(
+Patch v3 has been sent. Please review. Thanks.
 
-Use the commit of tag tclap-1-2-1-release-final.
+-Ting
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-new file mode 100644
-index 0000000..311287a
---- /dev/null
-+++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Templatized C++ Command Line Parser"
-+HOMEPAGE = "http://tclap.sourceforge.net/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"
-+
-+SRCREV = "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
-+SRC_URI = "git://tclap.git.sourceforge.net/gitroot/tclap/tclap"
-+
-+S = "${WORKDIR}/git"
-+inherit autotools
-+
-+do_install_prepend() {
-+    install -d ${S}/docs/html
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-1.7.3.4
-
+> > Signed-off-by: Ting Liu <b28495@freescale.com>
+> > ---
+> >  meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb |   13 +++++++++++++
+> >  1 files changed, 13 insertions(+), 0 deletions(-)  create mode 100644
+> > meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+> >
+> > diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+> > b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+> > new file mode 100644
+> > index 0000000..c2b03a4
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+> > @@ -0,0 +1,13 @@
+> > +DESCRIPTION =3D "Templatized C++ Command Line Parser"
+> > +HOMEPAGE =3D "http://tclap.sourceforge.net/"
+> > +SECTION =3D "tclap"
+> > +LICENSE =3D "MIT"
+> > +LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3Dc8ab0ff134bcc584d0e6b5b9f8732453"
+> > +
+> > +SRCREV =3D "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
+> > +SRC_URI =3D "git://tclap.git.sourceforge.net/gitroot/tclap/tclap"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +inherit autotools
+> > +
+> > +BBCLASSEXTEND =3D "native nativesdk"
+> > --
+> > 1.7.3.4
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
 
