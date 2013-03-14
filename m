@@ -1,35 +1,28 @@
-Received: from mail-vb0-f51.google.com ([209.85.212.51])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UG3Xx-000638-4B
+	(envelope-from <apelete@seketeli.net>) id 1UG4xj-0001No-EF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Mar 2013 09:30:02 +0100
-Received: by mail-vb0-f51.google.com with SMTP id fq11so1046321vbb.10
+	Thu, 14 Mar 2013 11:00:40 +0100
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 10BB9EA040
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 01:13:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=xV8YgjSzZlldk4ib5oRvinkXQRdOdLVc0Byb1HDTLCk=;
-	b=JBgrsfYifxQp7X0YjABMGhjenbd5kjLpCgjRbwmMeMDzhRtoACT/3h12YU9gErJrNe
-	1HPdrynT+7H8nt7kiOxEo+aSmouzdSRPwWw8m1Pzp4wJqFEsq/g1wUwFT/xNhTZD0/UY
-	yL7gHw9nUvI8HNcLfDdxOQHPjSq/1RL0KFJL9GH4lb4j5PpsAnCW4+IM3DVHCwnLa/6o
-	Rvi2owgz5Jwm0LL4dZ+adu32jC+3AMDeqXGTViEbC2xyrJeE1wxKSfargLWkOgkDooHJ
-	ax+mQ8aOHqTS9lkO5hBDMbY9mrVwAaDP8a44jEn1IWoRTKP7sAAoe+vevrnU0zKCKNWt
-	89ww==
-MIME-Version: 1.0
-X-Received: by 10.220.176.73 with SMTP id bd9mr637068vcb.63.1363248794913;
-	Thu, 14 Mar 2013 01:13:14 -0700 (PDT)
-Received: by 10.52.185.168 with HTTP; Thu, 14 Mar 2013 01:13:14 -0700 (PDT)
-In-Reply-To: <20130313163811.GV3260@jama>
-References: <1362521704-25965-1-git-send-email-Martin.Jansa@gmail.com>
-	<CALbNGRT+RDine-AZQx+K8oaf25mncrHvvbYq5FMNS7TnXQU0Pw@mail.gmail.com>
-	<20130313163811.GV3260@jama>
-Date: Thu, 14 Mar 2013 09:13:14 +0100
-Message-ID: <CALbNGRQS_gSEKuQgKS_sV7V1VsbGeYULTHDb8hHRtF+8LO8hMg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 14 Mar 2013 10:58:49 +0100 (CET)
+Received: by localhost (Postfix, from userid 1000)
+	id 2532B61ACE; Thu, 14 Mar 2013 10:43:58 +0100 (CET)
+Date: Thu, 14 Mar 2013 10:43:58 +0100
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCHv2] poppler: upgrade to 0.18.4
+Message-ID: <20130314094357.GF6272@hermes>
+References: <cover.1362831936.git.apelete@seketeli.net>
+	<73f5d1d2501d60fb20e3290d758e35aaf6b91e4c.1362831936.git.apelete@seketeli.net>
+	<3C660C3C-34A4-4805-B6C0-E49AC8EEED55@gmail.com>
+	<20130309195424.GA6272@hermes> <20130313170447.GE3260@jama>
+MIME-Version: 1.0
+In-Reply-To: <20130313170447.GE3260@jama>
+X-Operating-System: Debian GNU/Linux 7.0
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [2011.03-maintenance][PATCH v2 1/2] gnutls: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2013 08:30:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Mar 2013 10:00:58 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 13, 2013 at 5:38 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Fri, Mar 08, 2013 at 12:25:04PM +0100, Andreas M=C3=BCller wrote:
->> On Tue, Mar 5, 2013 at 11:15 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> > * 0.18.0 was failing to build after libpng was upgraded to 1.6 in oe-c=
-ore
->> >
->> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> > ---
->> >  meta-oe/recipes-support/poppler/poppler_0.18.0.bb | 12 ------------
->> >  meta-oe/recipes-support/poppler/poppler_0.18.4.bb | 10 ++++++++++
->> >  2 files changed, 10 insertions(+), 12 deletions(-)
->> >  delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.0.bb
->> >  create mode 100644 meta-oe/recipes-support/poppler/poppler_0.18.4.bb
->> >
->> Maybe it is a temporary problem but I get
->>
->> ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
->> ERROR: Function failed: Fetcher failure for URL:
->> 'http://poppler.freedesktop.org/poppler-0.18.4.tar.gz'. Unable to
->> fetch URL from any source.
->> ERROR: Logfile of failure stored in:
->> /home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-g=
-nueabi/poppler/0.18.4-r0/temp/log.do_fetch.20883
->> ERROR: Task 4 (/home/Superandy/data/oe-core/sources/meta-openembedded/me=
-ta-oe/recipes-support/poppler/poppler_0.18.4.bb,
->> do_fetch) failed with exit code '1'
->
-> It still downloads here, so I assume it was really temporary, applied
-> now (because old was failing anyway).
->
->>
->> Andreas
-Same here - server seems up and it fixes the build error - thanks
+Le 13-Mar-13, Martin Jansa a =E9crit:
+> On Sat, Mar 09, 2013 at 08:54:24PM +0100, Apelete Seketeli wrote:
+> > Le 09-Mar-13, Khem Raj a =E9crit:
+> > >=20
+> > > On Mar 9, 2013, at 4:38 AM, Apelete Seketeli <apelete@seketeli.net>=
+ wrote:
+> > >=20
+> > > > -SRC_URI =3D "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz=
+2;name=3Dgnutls"
+> > > > +SRC_URI =3D "ftp://ftp.gnutls.org/gcrypt/gnutls/v2.10/gnutls-${P=
+V}.tar.bz2;name=3Dgnutls"
+> > >=20
+> > > can we use PV instead of 2.10 ? if not then move SRC_URI out of .in=
+c into .bb
+> >=20
+> > PV is actually 2.10.4 here, it can't be used instead of 2.10 it seems=
+.
+> > I'll move SRC_URI into .bb then.
+>=20
+> In couple of recipes we're using:
+> SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).sp=
+lit('.')[1]}"
+> SRC_URI =3D "http://download.gnome.org/sources/${PN}/${SHRT_VER}/${PN}-=
+${PV}.tar.gz"
+>=20
+> This could be applied here too.
 
-Andreas
+When I updated this SRC_URI I actually wondered if there was a way to
+filter the version in a generic fashion, but couldn't come up with
+any. This is it, thanks for the tip. I will fix SRC_URI in .inc then,
+instead of moving it into .bb like I did.
+
+Cheers.
+--=20
+        Apelete
 
 
