@@ -1,25 +1,20 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mga14.intel.com ([143.182.124.37])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1UGOsr-0007zN-7l
+	(envelope-from <jukka.rissanen@linux.intel.com>) id 1UGPJn-0000FL-Oh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Mar 2013 08:16:58 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2F6fwZQ017815
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Mar 2013 23:41:58 -0700 (PDT)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 14 Mar 2013 23:41:58 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Mar 2013 14:41:54 +0800
-Message-ID: <1363329716-14169-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.4.1
-MIME-Version: 1.0
-Cc: Jackie.Huang@windriver.com
-Subject: [meta-networking][PATCH 1/3] inetutils: fix PN -> BPN in do_install for multilibs
+	Fri, 15 Mar 2013 08:44:49 +0100
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 15 Mar 2013 00:26:58 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,849,1355126400"; d="scan'208";a="271196164"
+Received: from unknown (HELO localhost.localdomain) ([10.237.72.58])
+	by azsmga001.ch.intel.com with ESMTP; 15 Mar 2013 00:26:57 -0700
+From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 15 Mar 2013 09:26:54 +0200
+Message-Id: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
+X-Mailer: git-send-email 1.7.11.4
+Subject: [PATCH] wpa_supplicant: Location of systemd services files changed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,75 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Mar 2013 07:16:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Mar 2013 07:45:01 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
 ---
- .../inetutils/inetutils_1.9.1.bb                   |   35 ++++++++++---------
- 1 files changed, 18 insertions(+), 17 deletions(-)
+ .../recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-index 81457d7..155befe 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-@@ -8,6 +8,7 @@ LICENSE = "GPLv3"
+diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+index 23dcc82..91ee4ad 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
+@@ -8,7 +8,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
- 
-+PR = "r1"
- 
- SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
-            file://disable-pre-ANSI-compilers.patch \
-@@ -37,27 +38,27 @@ do_configure_prepend () {
- do_install () {
- 	autotools_do_install
- 	install -d ${D}${base_sbindir} ${D}${base_bindir}
--	mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${PN}
--	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${PN}
--	mv ${D}${bindir}/logger ${D}${bindir}/logger.${PN}
--	mv ${D}${bindir}/traceroute ${D}${bindir}/traceroute.${PN}
--	mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${PN}
--	mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/ifconfig.${PN}
-+	mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${BPN}
-+	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${BPN}
-+	mv ${D}${bindir}/logger ${D}${bindir}/logger.${BPN}
-+	mv ${D}${bindir}/traceroute ${D}${bindir}/traceroute.${BPN}
-+	mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${BPN}
-+	mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/ifconfig.${BPN}
+ do_install_append () {
+     install -d ${D}${systemd_unitdir}/system
+-    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
++    install -m 644 ${S}/wpa_supplicant/systemd/*.service ${D}${systemd_unitdir}/system
  }
  
- pkg_postinst_${PN} () {
--	update-alternatives --install ${bindir}/tftp tftp tftp.${PN} 100
--	update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
--	update-alternatives --install ${bindir}/logger logger logger.${PN} 100
--	update-alternatives --install ${bindir}/traceroute traceroute traceroute.${PN} 100
--	update-alternatives --install ${base_bindir}/hostname hostname hostname.${PN} 100
--	update-alternatives --install ${base_sbindir}/ifconfig ifconfig ifconfig.${PN} 100
-+	update-alternatives --install ${bindir}/tftp tftp tftp.${BPN} 100
-+	update-alternatives --install ${bindir}/telnet telnet telnet.${BPN} 100
-+	update-alternatives --install ${bindir}/logger logger logger.${BPN} 100
-+	update-alternatives --install ${bindir}/traceroute traceroute traceroute.${BPN} 100
-+	update-alternatives --install ${base_bindir}/hostname hostname hostname.${BPN} 100
-+	update-alternatives --install ${base_sbindir}/ifconfig ifconfig ifconfig.${BPN} 100
- }
- 
- pkg_prerm_${PN} () {
--	update-alternatives --remove tftp tftp.${PN}
--	update-alternatives --remove telnet telnet.${PN}
--	update-alternatives --remove logger logger.${PN}
--	update-alternatives --remove traceroute traceroute.${PN}
--	update-alternatives --remove ifconfig ifconfig.${PN}
-+	update-alternatives --remove tftp tftp.${BPN}
-+	update-alternatives --remove telnet telnet.${BPN}
-+	update-alternatives --remove logger logger.${BPN}
-+	update-alternatives --remove traceroute traceroute.${BPN}
-+	update-alternatives --remove ifconfig ifconfig.${BPN}
- }
+ # systemd.bbclass does not catch all multiple-instance-service-files
 -- 
-1.7.4.1
+1.7.11.4
 
 
 
