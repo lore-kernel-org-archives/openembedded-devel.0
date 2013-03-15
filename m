@@ -1,20 +1,35 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jukka.rissanen@linux.intel.com>) id 1UGPJn-0000FL-Oh
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Mar 2013 08:44:49 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 15 Mar 2013 00:26:58 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,849,1355126400"; d="scan'208";a="271196164"
-Received: from unknown (HELO localhost.localdomain) ([10.237.72.58])
-	by azsmga001.ch.intel.com with ESMTP; 15 Mar 2013 00:26:57 -0700
-From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UGRAV-0003tG-Gy for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Mar 2013 10:43:20 +0100
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UGQuf-0008Cl-TO for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Mar 2013 10:26:57 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Mar 2013 10:26:57 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Mar 2013 10:26:57 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Mar 2013 09:26:54 +0200
-Message-Id: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-Mailer: git-send-email 1.7.11.4
-Subject: [PATCH] wpa_supplicant: Location of systemd services files changed
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 15 Mar 2013 10:26:24 +0100
+Message-ID: <khupfr$e4v$1@ger.gmane.org>
+References: <1363192654-5856-1-git-send-email-ftonello@cercacor.com>
+	<khsn7t$31g$1@ger.gmane.org> <51426724.4050607@felipetonello.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <51426724.4050607@felipetonello.com>
+X-Enigmail-Version: 1.5
+Subject: Re: [meta-oe][PATCH v3] fingerterm: Added 1.0.2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,29 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Mar 2013 07:45:01 -0000
+X-List-Received-Date: Fri, 15 Mar 2013 09:43:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
----
- .../recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Op 15-03-13 01:11, Felipe Ferreri Tonello schreef:
+> Hi Koen,
+> 
+> On 03/14/2013 07:35 AM, Koen Kooi wrote: Op 13-03-13 17:37,
+> eu@felipetonello.com schreef:
+>>>> From: "Felipe F. Tonello" <ftonello@cercacor.com>
+>>>> 
+>>>> Fingerterm is a terminal emulator for Nokia Harmattan, but it works
+>>>> in any Qt4 environment.
+>>>> 
+>>>> This recipe can be extended by a .bbappend to add .desktop, icon
+>>>> and others to the target device.
+> 
+> Why not include a default .desktop in the recipe so it actually works out
+> of the box?
+> 
+>> The binary is been installed. So it will work out of the box.
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-index 23dcc82..91ee4ad 100644
---- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-@@ -8,7 +8,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
- 
- do_install_append () {
-     install -d ${D}${systemd_unitdir}/system
--    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
-+    install -m 644 ${S}/wpa_supplicant/systemd/*.service ${D}${systemd_unitdir}/system
- }
- 
- # systemd.bbclass does not catch all multiple-instance-service-files
--- 
-1.7.11.4
+Eh, no. You need a .desktop to launch it properly.
+
+> 
+>> Regarding the .desktop file, it is not installed by default because  it
+>> was done for MeeGo only. It needs some hack to work for generic
+>> desktops that follow desktop-entry spec[1].
+
+Then add a .desktop that adheres to the spec, I see no reason why this
+recipe has to be so 'special' that it needs a .bbappend to work as intended.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRQulAMkyGM64RGpERAmgSAJ4ig6vvXAYDa6Z/YAKH+p7YNetshACgj/Xm
+nt4iz6waFF9QQjtytfRo/2Q=
+=wmfE
+-----END PGP SIGNATURE-----
 
 
 
