@@ -1,32 +1,37 @@
-Received: from mail-wi0-f169.google.com ([209.85.212.169])
+Received: from mail-ee0-f45.google.com ([74.125.83.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UGuep-0006Hd-Di
+	(envelope-from <koen@dominion.thruhere.net>) id 1UHBAl-0001n1-KS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Mar 2013 18:12:39 +0100
-Received: by mail-wi0-f169.google.com with SMTP id l13so1630337wie.0
+	Sun, 17 Mar 2013 11:50:52 +0100
+Received: by mail-ee0-f45.google.com with SMTP id b57so2147588eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Mar 2013 09:55:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=k/Ze87wda1T3naZCg90xrZWu5L0172P95W+cLO4NPXQ=;
-	b=rna52YLNMphpUBkyJhw05XdeXeKZkNu/SpCsSvgoD+aXLdCR112vOTEYwM2SeWD7Lh
-	A4nQrwbhCBaRPFr+kvMbnzNcFVRGANavpPbngrsJy3Z2EaiX2M9ut6kFieQ4OWYm0npE
-	qZuLzNbXHg5qi9ya8M2bfPzGaQ7YupssENpMlI3mtvT5g3WdQraE+yZOZQHqSAotOd3r
-	9I7L03Y6jXredPaDINL/lGDdZahfrnj3q6lh+nPbsVD6zUUafY3iiL4IrhBeKV7rDPOf
-	hPjh6qrU+W0Q+SiH4pPHhXWSVhVbbR+m9FgJ7zSnguiEqUPx6mDYVGhCmojPoXsN2HXl
-	e2BQ==
-X-Received: by 10.180.72.148 with SMTP id d20mr8223076wiv.31.1363452949006;
-	Sat, 16 Mar 2013 09:55:49 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id dm9sm4181975wib.3.2013.03.16.09.55.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 16 Mar 2013 09:55:48 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 17 Mar 2013 03:33:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=r/ag4FIbwmpvK12Qxhxgdh8dN2M5xh/w5sSgSsPrk18=;
+	b=VCj1HogATY/kWCm5YBvzuCWg4YfRJUPFxNxdgpeISdST1ZA3BRDrhYVitODjKeTntu
+	ARv3hzQOfBpuUthxEmtHvBEWItMrnRHXqL63OqyDUc8okbQz+urLW6+1TGr3FmjN14W1
+	wfeQvlExat7O7F0TCQreIZDIPZ6eToxiTBVyD1dOfjUPf15D96iEBql4rcDctdD5alWy
+	Ts9c+tU2TZ+rgL+61DThDvHKNK5QSM5pOu3d00BlKXEw1kSeyUE0nPOc5o+o8psX/rk6
+	NG7nNbup5kcJTGhOVyalFlZ2i1d11OpT46by+KYaISPgy0By4/8ovGyFAR+YMYCYTmi+
+	qGTQ==
+X-Received: by 10.14.219.129 with SMTP id m1mr36906219eep.16.1363516433067;
+	Sun, 17 Mar 2013 03:33:53 -0700 (PDT)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id 3sm20702150eej.6.2013.03.17.03.33.51
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sun, 17 Mar 2013 03:33:51 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Mar 2013 17:55:50 +0100
-Message-Id: <1363452950-20010-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-oe][PATCH] xf86-video-glamo: adapt to xserver 1.14 API
+Date: Sun, 17 Mar 2013 11:33:32 +0100
+Message-Id: <1363516413-32548-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.1.4
+X-Gm-Message-State: ALoCoQkytIueM3QpCFwsTD886mUBQX7fsgkI+gk+OUlNoBMGGAdkbSp/YLSFeQIZMWX4Luzinn8B
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 1/2] opencv: enable SSE1/2/3 and SSSE3 when finding '-msse3' in TARGET_CC_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,89 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Mar 2013 17:12:49 -0000
+X-List-Received-Date: Sun, 17 Mar 2013 10:50:53 -0000
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- ...lamo-driver-remove-references-to-mibstore.patch | 48 ++++++++++++++++++++++
- .../xorg-driver/xf86-video-glamo_git.bb            |  3 +-
- 2 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-driver-remove-references-to-mibstore.patch
+ meta-oe/recipes-support/opencv/opencv_2.4.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-driver-remove-references-to-mibstore.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-driver-remove-references-to-mibstore.patch
-new file mode 100644
-index 0000000..fab0b23
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0001-glamo-driver-remove-references-to-mibstore.patch
-@@ -0,0 +1,48 @@
-+From 040ade8bb86a771fa4e71b41d2080254830ca9f3 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sat, 16 Mar 2013 17:44:37 +0100
-+Subject: [PATCH] glamo*driver: remove references to mibstore
-+
-+* fix build with xserver-1.14
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ src/glamo-driver.c     | 2 --
-+ src/glamo-kms-driver.c | 1 -
-+ 2 files changed, 3 deletions(-)
-+
-+diff --git a/src/glamo-driver.c b/src/glamo-driver.c
-+index 10b7762..22f57d7 100644
-+--- a/src/glamo-driver.c
-++++ b/src/glamo-driver.c
-+@@ -14,7 +14,6 @@
-+ #include "xf86_OSproc.h"
-+ 
-+ #include "mipointer.h"
-+-#include "mibstore.h"
-+ #include "micmap.h"
-+ #include "colormapst.h"
-+ #include "xf86cmap.h"
-+@@ -612,7 +611,6 @@ GlamoScreenInit(SCREEN_INIT_ARGS_DECL)
-+     }
-+ 
-+     xf86SetBlackWhitePixels(pScreen);
-+-    miInitializeBackingStore(pScreen);
-+     xf86SetBackingStore(pScreen);
-+ 
-+     /* software cursor */
-+diff --git a/src/glamo-kms-driver.c b/src/glamo-kms-driver.c
-+index c5c7a00..f192398 100644
-+--- a/src/glamo-kms-driver.c
-++++ b/src/glamo-kms-driver.c
-+@@ -415,7 +415,6 @@ Bool GlamoKMSScreenInit(int scrnIndex, ScreenPtr pScreen, int argc,
-+ 
-+ 	GlamoKMSExaInit(pScrn);
-+ 
-+-	miInitializeBackingStore(pScreen);
-+ 	xf86SetBackingStore(pScreen);
-+ 	xf86SetSilkenMouse(pScreen);
-+ 	miDCInitialize(pScreen, xf86GetPointerScreenFuncs());
-+-- 
-+1.8.1.5
-+
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-index b56b995..f9eb3ce 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8cbd99fff773f92e844948f74ef0df8"
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+index 77d75da..2114e77 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.ta
+ SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
+ SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
  
- PE = "2"
- PV = "1.0.0+gitr${SRCPV}"
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
+-PR = "r1"
++PR = "r2"
  
- SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=master \
-            file://0001-glamo-kms-driver-drop-unused-xf86_config.patch \
-            file://0001-fix-build-with-KMS-disabled.patch \
-            file://0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch \
-+           file://0001-glamo-driver-remove-references-to-mibstore.patch \   
-           "
+ S = "${WORKDIR}/OpenCV-${PV}"
  
- S = "${WORKDIR}/git"
+@@ -27,6 +27,7 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
+                  -DWITH_V4L=ON \
+                  -DWITH_GTK=ON \
+                  -DCMAKE_SKIP_RPATH=ON \
++                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
+                 "
+ 
+ inherit distutils-base pkgconfig cmake
 -- 
-1.8.1.5
+1.8.1.4
 
 
 
