@@ -1,39 +1,33 @@
-Received: from mail-ea0-f169.google.com ([209.85.215.169])
+Received: from mail-ea0-f180.google.com ([209.85.215.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UHBAm-0001nG-Qa
+	(envelope-from <andrea.adami@gmail.com>) id 1UHN5j-0000zl-6d
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Mar 2013 11:50:52 +0100
-Received: by mail-ea0-f169.google.com with SMTP id z7so2182953eaf.0
+	Mon, 18 Mar 2013 00:34:15 +0100
+Received: by mail-ea0-f180.google.com with SMTP id j14so2130800eak.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Mar 2013 03:33:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=CyM6Y3tpbMYSb4bGg44sv6Io95N/DIsEVs0zhHMFIIs=;
-	b=nhFBFL8BNw6qo6mMZTnmeCJuSDIgPAB5ly/akiOZFf7iZq+duRCpu0/KANxF3oSqhI
-	NxVzCb1CVtqEoW/oT8HcNI2BPNYtV49XvUPc4ic70kpsfZ6GDnvQw+uEW+pdoUt5lEQX
-	plx/+nSU6H0VLma2FHOmW2H5HDi6BwsOlhpg6p8SSTQfcpR+y0UuYzFeTlIzNFpMwhCZ
-	NfReVh4Ng2I0btzzGia1hUwpqPjRLWgovOlayxP4hKdzJUBDVM11Rbugb5gviugliJy9
-	Q2tu3ktXr6hnuCMsCsEvrsMbH7vpeOdJ29Tb7sfvc0jEgv4C3ULfBt+zorg0iuQL3RTd
-	4wnw==
-X-Received: by 10.14.0.73 with SMTP id 49mr37215859eea.21.1363516434472;
-	Sun, 17 Mar 2013 03:33:54 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id 3sm20702150eej.6.2013.03.17.03.33.53
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 17 Mar 2013 03:33:53 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Sun, 17 Mar 2013 16:17:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=2bg/WDKkUqp9QEIiLyHySrsjLCmEfkl8m4hwXzJ+4Mk=;
+	b=ySIk/5dPvudVgMS9sJN2unFmN2ACTMgzCIOGDcoxgl3Gbx+yYaCDtgmf0z+CdsppTf
+	f4LHjFCZz18d0yAS5lh2yUK61N8RudbMhTrHma8J8zOJ6PIUz65itp/PaGj3qBxIiE/I
+	afzUI12z6DBeJHxLadoPkk6hc6nn9UTXaR8/DSKODWZ/KSFIfIL2dJ2ANOyHxnJNH3Q6
+	VqEZD3ujrPVlNV2AlaCOY35VI2Xovhg34Ymc8V5j1CiKSN2zkmNzbyZhplcugtybSpOA
+	3AmPTipUJ/k2xgd/w03IgEdNrNrhGQQr8X43DqQ8/jkrKhXjbvOJOYGCbgJ4IuE8D9EU
+	bshA==
+X-Received: by 10.14.194.198 with SMTP id m46mr28002249een.8.1363562247937;
+	Sun, 17 Mar 2013 16:17:27 -0700 (PDT)
+Received: from mizar.localdomain
+	(host195-251-dynamic.8-87-r.retail.telecomitalia.it. [87.8.251.195])
+	by mx.google.com with ESMTPS id z45sm23918077eeu.10.2013.03.17.16.17.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 17 Mar 2013 16:17:26 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Mar 2013 11:33:33 +0100
-Message-Id: <1363516413-32548-2-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1.4
-In-Reply-To: <1363516413-32548-1-git-send-email-koen@dominion.thruhere.net>
-References: <1363516413-32548-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQl7OhgcMHSwnPWB7hdn/XzmM9cJhSRSCOxcUwRqNynv9PiBrkj1qmsSTUe3z5ZQGa3Tfk0J
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 2/2] opencv: switch to out-of-tree builds
+Date: Mon, 18 Mar 2013 00:17:13 +0100
+Message-Id: <cover.1363561878.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-handheld][PATCH 0/5] Zaurus kernel updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +41,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Mar 2013 10:50:53 -0000
+X-List-Received-Date: Sun, 17 Mar 2013 23:34:17 -0000
 
-This eliminates a few warnings from the configure step and makes sense in general.
+* hack again around collie flash, Read-Only until proper CFI detection
+* introduce kernel 3.8 for all Zaurus, with DEFAULT_PREFERENCE -1
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-support/opencv/opencv_2.4.3.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Andrea Adami (5):
+  linux-yocto-tiny-kexecboot: add patch fixing mtd on SL-C3200
+  linux-yocto_3.2: match the exact NOR on collie
+  linux-yocto-tiny-kexecboot_3.2: match the exact NOR on collie
+  linux-yocto-3.4: remove temporary version. Replace with 3.8
+  linux-yocto_3.8: initial commit for Zaurus devices
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-index 2114e77..916c8c5 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-@@ -20,6 +20,10 @@ PR = "r2"
- 
- S = "${WORKDIR}/OpenCV-${PV}"
- 
-+# Do an out-of-tree build
-+OECMAKE_SOURCEPATH = "${S}"
-+OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
-+
- EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-                  -DBUILD_PYTHON_SUPPORT=ON \
-                  -DWITH_FFMPEG=ON \
+ .../linux-yocto-3.2/collie/collie-eraseinfo.patch  |  28 +-
+ .../linux/linux-yocto-3.2/collie/collie.cfg        |   4 +-
+ .../linux/linux-yocto-3.4/akita/akita-standard.scc |   7 -
+ .../linux/linux-yocto-3.4/akita/akita.cfg          |   4 -
+ .../linux/linux-yocto-3.4/akita/akita.scc          |  11 -
+ .../linux/linux-yocto-3.4/c7x0/c7x0-standard.scc   |   7 -
+ recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg |  57 ---
+ recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.scc |  10 -
+ .../linux-yocto-3.4/collie/collie-standard.scc     |   7 -
+ .../linux/linux-yocto-3.4/collie/collie.cfg        |  86 -----
+ .../linux/linux-yocto-3.4/collie/collie.scc        |   5 -
+ .../linux/linux-yocto-3.4/feature-top.scc          |   1 -
+ .../linux-yocto-3.4/locomo_kbd_tweak-r2.patch      |  80 ----
+ .../linux-yocto-3.4/poodle/poodle-standard.scc     |   7 -
+ .../linux/linux-yocto-3.4/poodle/poodle.cfg        |  62 ----
+ .../linux/linux-yocto-3.4/poodle/poodle.scc        |  10 -
+ .../linux/linux-yocto-3.4/pxa25x-gpio-wakeup.patch |  40 --
+ .../linux/linux-yocto-3.4/pxa25x-sa1100-rtc.patch  |  29 --
+ .../linux/linux-yocto-3.4/pxa27x-sa1100-rtc.patch  |  29 --
+ .../linux/linux-yocto-3.4/sharpsl_param.patch      |  24 --
+ .../linux/linux-yocto-3.4/spi-pxa2xx-fix-mem.patch |  34 --
+ .../linux/linux-yocto-3.4/spitz/spitz-standard.scc |   7 -
+ .../linux/linux-yocto-3.4/spitz/spitz.cfg          |  67 ----
+ .../linux/linux-yocto-3.4/spitz/spitz.scc          |  10 -
+ .../linux/linux-yocto-3.4/spitz_pm.patch           |  53 ---
+ .../linux/linux-yocto-3.4/tosa/tosa-standard.scc   |   7 -
+ recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg |  62 ----
+ recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.scc |  10 -
+ .../linux/linux-yocto-3.4/zaurus-common.scc        |  10 -
+ .../linux/linux-yocto-3.4/zaurus-hardware.cfg      | 279 --------------
+ .../linux/linux-yocto-3.4/zaurus-non-hardware.cfg  | 401 ---------------------
+ .../linux-yocto-3.4/zaurus-pxa-common-non-hw.cfg   |   9 -
+ .../linux/linux-yocto-3.4/zaurus-pxa-common.cfg    |  98 -----
+ .../linux/linux-yocto-3.4/zaurus-pxa-only.scc      |   2 -
+ .../linux/linux-yocto-3.4/zaurus-usb-host.scc      |   6 -
+ .../linux-yocto-3.4/zaurus-usb-ohci-non-hw.cfg     |   4 -
+ .../linux/linux-yocto-3.4/zaurus-usb-ohci.cfg      | 110 ------
+ .../linux/linux-yocto-3.8/akita/akita-standard.scc |   7 +
+ .../linux/linux-yocto-3.8/akita/akita.cfg          |   4 +
+ .../linux/linux-yocto-3.8/akita/akita.scc          |  11 +
+ .../linux/linux-yocto-3.8/c7x0/c7x0-standard.scc   |   7 +
+ recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0.cfg |  52 +++
+ recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0.scc |   8 +
+ .../linux/linux-yocto-3.8/collie-eraseinfo.patch   |  31 ++
+ .../linux/linux-yocto-3.8/collie-jedec-probe.patch |  11 +
+ .../linux-yocto-3.8/collie/collie-standard.scc     |   7 +
+ .../linux/linux-yocto-3.8/collie/collie.cfg        | 118 ++++++
+ .../linux/linux-yocto-3.8/collie/collie.scc        |   8 +
+ .../linux/linux-yocto-3.8/feature-top.scc          |   1 +
+ .../linux-yocto-3.8/locomo_kbd_tweak-r2.patch      |  75 ++++
+ .../linux/linux-yocto-3.8/mcp-device.patch         |  13 +
+ .../linux-yocto-3.8/poodle/poodle-standard.scc     |   7 +
+ .../linux/linux-yocto-3.8/poodle/poodle.cfg        |  57 +++
+ .../linux/linux-yocto-3.8/poodle/poodle.scc        |   8 +
+ .../linux/linux-yocto-3.8/pxa27x-sa1100-rtc.patch  |  34 ++
+ .../linux/linux-yocto-3.8/sharpsl_param.patch      |  24 ++
+ .../linux/linux-yocto-3.8/spi-pxa2xx-fix-mem.patch |  34 ++
+ .../linux/linux-yocto-3.8/spitz/spitz-standard.scc |   7 +
+ .../linux/linux-yocto-3.8/spitz/spitz.cfg          |  61 ++++
+ .../linux/linux-yocto-3.8/spitz/spitz.scc          |  10 +
+ .../linux/linux-yocto-3.8/spitz_pm.patch           |  53 +++
+ .../linux/linux-yocto-3.8/tosa/tosa-standard.scc   |   7 +
+ recipes-kernel/linux/linux-yocto-3.8/tosa/tosa.cfg |  57 +++
+ recipes-kernel/linux/linux-yocto-3.8/tosa/tosa.scc |   8 +
+ .../linux/linux-yocto-3.8/zaurus-common.scc        |  10 +
+ .../linux/linux-yocto-3.8/zaurus-hardware.cfg      | 279 ++++++++++++++
+ .../linux/linux-yocto-3.8/zaurus-non-hardware.cfg  | 400 ++++++++++++++++++++
+ .../linux-yocto-3.8/zaurus-pxa-common-non-hw.cfg   |   9 +
+ .../linux/linux-yocto-3.8/zaurus-pxa-common.cfg    | 111 ++++++
+ .../linux/linux-yocto-3.8/zaurus-pxa-only.scc      |   2 +
+ .../linux/linux-yocto-3.8/zaurus-usb-host.scc      |   6 +
+ .../linux-yocto-3.8/zaurus-usb-ohci-non-hw.cfg     |   4 +
+ .../linux/linux-yocto-3.8/zaurus-usb-ohci.cfg      | 110 ++++++
+ .../collie/collie-eraseinfo.patch                  |  28 +-
+ .../collie/collie-kexecboot.cfg                    |   4 +-
+ .../spitz/3200-mtd.patch                           |  13 +
+ recipes-kernel/linux/linux-yocto_3.4.bbappend      |  54 ---
+ recipes-kernel/linux/linux-yocto_3.8.bbappend      |  54 +++
+ 78 files changed, 1770 insertions(+), 1711 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/akita/akita-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/akita/akita.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/akita/akita.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/c7x0/c7x0.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/collie/collie-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/collie/collie.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/collie/collie.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/feature-top.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/locomo_kbd_tweak-r2.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/poodle-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/poodle/poodle.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/pxa25x-gpio-wakeup.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/pxa25x-sa1100-rtc.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/pxa27x-sa1100-rtc.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/sharpsl_param.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/spi-pxa2xx-fix-mem.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz/spitz.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/spitz_pm.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/tosa/tosa-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/tosa/tosa.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-common.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-hardware.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-non-hardware.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common-non-hw.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-common.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-pxa-only.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-host.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-ohci-non-hw.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.4/zaurus-usb-ohci.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/REGULATORS
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/akita/akita-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/akita/akita.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie-eraseinfo.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie-jedec-probe.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie/collie-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie/collie.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie/collie.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/feature-top.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/locomo_kbd_tweak-r2.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/mcp-device.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/poodle/poodle-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/poodle/poodle.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/poodle/poodle.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/pxa27x-sa1100-rtc.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/sharpsl_param.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/spi-pxa2xx-fix-mem.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz/spitz-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/tosa/tosa-standard.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/tosa/tosa.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/tosa/tosa.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-common.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-hardware.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-non-hardware.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-pxa-common-non-hw.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-pxa-common.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-pxa-only.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-usb-host.scc
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-usb-ohci-non-hw.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.8/zaurus-usb-ohci.cfg
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/spitz/3200-mtd.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto_3.4.bbappend
+ create mode 100644 recipes-kernel/linux/linux-yocto_3.8.bbappend
+
 -- 
-1.8.1.4
+1.7.12.4
 
 
 
