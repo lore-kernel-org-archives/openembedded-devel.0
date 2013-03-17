@@ -1,38 +1,38 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1UHN5s-0000zy-SY
+	(envelope-from <andrea.adami@gmail.com>) id 1UHN5w-000106-5A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Mar 2013 00:34:26 +0100
-Received: by mail-ee0-f47.google.com with SMTP id e52so2304614eek.6
+	Mon, 18 Mar 2013 00:34:47 +0100
+Received: by mail-ee0-f52.google.com with SMTP id b15so2305568eek.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Mar 2013 16:17:38 -0700 (PDT)
+	Sun, 17 Mar 2013 16:17:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=bpN5Y01M37lAEOLX1w1Mf9QWBjJQ/3Uh3lr9TRaVOIg=;
-	b=bJu+HTZ8SD1Mt1v9hcUK6omiIk4m5eQe5m7bU0i3nQQIWihSd1bobqyF+sSjjtW68n
-	XqO4sMGxE3eo0qh4H5kHXT37dQzcf4er1AcO/sYjBeR5xlaDSOqXqoz8AUwaqZYys2f/
-	V3aKkXU9BefRT5WpstRBFHUX5KAv4EuZgBoY9U6kx1j+3gSfjXQGsoB7SWhK+6U5ojjQ
-	ulzqwH3gucs1v914JuEnJZM/87/wxoERXBDLqPec5kkugEM9SSwNuMwNcIQiggKtFYrP
-	M6vEdIL0lyE4TDutcPe5P668+2OBPfOdAZJmYGBy4ac06Kdmbbd8kvJKKkchU8Jb1PcT
-	0vUQ==
-X-Received: by 10.14.210.132 with SMTP id u4mr42798613eeo.19.1363562257983;
-	Sun, 17 Mar 2013 16:17:37 -0700 (PDT)
+	bh=NO9gXid6iOgpH5fjcc1EiArnWnXxo2fXT61khCsS0QY=;
+	b=XX1AWCVtJn5CLOsyiJABidXtG4INqVwMvDZodLh6q0XPHHPzKZyqGrjytxwZsA2N1R
+	hgBj5pE12/UoDcKkAAVERtfWlStURB2eWT4iVx+zoKxrNZ1MnfNSH3/XQKFPZDuoVauw
+	lII79HC3RAzLrytsmI5IKUDOJEHgZ+oMGl0gfJL/xlzmSewD0Py0M8MFooS49LK9DuaN
+	0kEykel9FnyhDpRcJZ9xqj1uq9Z0voThNB2dDaNN8qIBxLfPrSZKsXHoAycbQf3h521M
+	VQ5jdZJ5WUfejLV3bc5EcpQQnZKcIybRLQGrryt1jpj3Om9q8T4tSoJu1G7pooCA094D
+	bUug==
+X-Received: by 10.14.206.132 with SMTP id l4mr16890438eeo.38.1363562261273;
+	Sun, 17 Mar 2013 16:17:41 -0700 (PDT)
 Received: from mizar.localdomain
 	(host195-251-dynamic.8-87-r.retail.telecomitalia.it. [87.8.251.195])
-	by mx.google.com with ESMTPS id z45sm23918077eeu.10.2013.03.17.16.17.36
+	by mx.google.com with ESMTPS id z45sm23918077eeu.10.2013.03.17.16.17.40
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 17 Mar 2013 16:17:37 -0700 (PDT)
+	Sun, 17 Mar 2013 16:17:40 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Mar 2013 00:17:15 +0100
-Message-Id: <89d36bb154774d675e4ffc65e2064ac9cd0c31f6.1363561878.git.andrea.adami@gmail.com>
+Date: Mon, 18 Mar 2013 00:17:16 +0100
+Message-Id: <5cce5b4cb94887fd4fe8bdbf77013b6e3b7039ea.1363561878.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.7.12.4
 In-Reply-To: <cover.1363561878.git.andrea.adami@gmail.com>
 References: <cover.1363561878.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1363561878.git.andrea.adami@gmail.com>
 References: <cover.1363561878.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/5] linux-yocto_3.2: match the exact NOR on collie
+Subject: [meta-handheld][PATCH 3/5] linux-yocto-tiny-kexecboot_3.2: match the exact NOR on collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,7 +46,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Mar 2013 23:34:26 -0000
+X-List-Received-Date: Sun, 17 Mar 2013 23:34:53 -0000
+X-List-Received-Date: Sun, 17 Mar 2013 23:34:53 -0000
+X-List-Received-Date: Sun, 17 Mar 2013 23:34:53 -0000
 
 * Zaurus 5500 contains 2 LH28F640BFHE-PTTL90 (64M 4Mx16)
 * as seen  at http://www.tekprosystems.com/zaurus/internals.htm
@@ -58,14 +60,14 @@ X-List-Received-Date: Sun, 17 Mar 2013 23:34:26 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../linux-yocto-3.2/collie/collie-eraseinfo.patch  | 28 ++++++++++++++++++----
- .../linux/linux-yocto-3.2/collie/collie.cfg        |  4 ++--
+ .../collie/collie-eraseinfo.patch                  | 28 ++++++++++++++++++----
+ .../collie/collie-kexecboot.cfg                    |  4 ++--
  2 files changed, 26 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
 index 47e814d..6aba29e 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
-+++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie-eraseinfo.patch
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-eraseinfo.patch
 @@ -1,11 +1,31 @@
  --- a/drivers/mtd/chips/jedec_probe.c
  +++ b/drivers/mtd/chips/jedec_probe.c
@@ -102,11 +104,11 @@ index 47e814d..6aba29e 100644
   		}
   	}, {
   		.mfr_id		= CFI_MFR_SST,
-diff --git a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-index a47461e..9d484bd 100644
---- a/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-+++ b/recipes-kernel/linux/linux-yocto-3.2/collie/collie.cfg
-@@ -840,8 +840,8 @@ CONFIG_MTD_MAP_BANK_WIDTH_4=y
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg
+index ba5334d..6945207 100644
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-kexecboot.cfg
+@@ -483,8 +483,8 @@ CONFIG_MTD_MAP_BANK_WIDTH_4=y
  # CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
  # CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
  # CONFIG_MTD_CFI_I1 is not set
