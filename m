@@ -1,35 +1,26 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UHcQC-0000Mw-Ah
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UHe2r-0003bD-8t
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Mar 2013 16:56:30 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2IFdZ7N009765
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Mar 2013 08:39:35 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 18 Mar 2013 08:39:35 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 6069C7FE2;
-	Mon, 18 Mar 2013 11:38:56 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 20F4922507; Mon,
-	18 Mar 2013 11:39:34 -0400 (EDT)
-Date: Mon, 18 Mar 2013 11:39:34 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20130318153933.GB9185@windriver.com>
-References: <1362445249-12669-1-git-send-email-rongqing.li@windriver.com>
+	Mon, 18 Mar 2013 18:40:33 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 18 Mar 2013 10:23:35 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,865,1355126400"; d="scan'208";a="308284212"
+Received: from unknown (HELO helios.localnet) ([10.255.13.178])
+	by fmsmga002.fm.intel.com with ESMTP; 18 Mar 2013 10:23:34 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Song.Li@windriver.com
+Date: Mon, 18 Mar 2013 17:23:33 +0000
+Message-ID: <2450571.LuEge4Cxcy@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-25-generic; KDE/4.10.1; i686; ; )
+In-Reply-To: <1362817572-14365-1-git-send-email-Song.Li@windriver.com>
+References: <1362817572-14365-1-git-send-email-Song.Li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1362445249-12669-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] tftp-hpa: make init script work
+Cc: qingtao.cao@windriver.com, openembedded-devel@lists.openembedded.org,
+	Pradeep.Tumati@windriver.com
+Subject: Re: [meta-webserver][PATCH] apache2:fix PN to BPN to avoid do_package warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,116 +34,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 15:56:30 -0000
-X-Groupsio-MsgNum: 43581
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wq9mPyueHGvFACwf"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Mar 2013 17:40:54 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---wq9mPyueHGvFACwf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey Roy,
-
-[[meta-networking][PATCH] tftp-hpa: make init script work] On 13.03.05 (Tue=
- 09:00) rongqing.li@windriver.com wrote:
-
-> From: "Roy.Li" <rongqing.li@windriver.com>
->=20
-> 1. fix the daemon name, it should be in.tftpd-hpa
-> 2. root directory should be /var/lib/tftpboot, since /var/lib/tftpboot ha=
-s been
-> installed, but /srv/tftpboot not
-
-Hmm.  This is a bit problematic for me.  I wouldn't normally bat an eye
-at such a change, but because the original recipe specifically pointed
-the tftp server at /srv and when I looked at my own tftp server, that's
-where it was set.  It's been so long since I did anything with it I'd
-forgotten why I put the contents there, so I thought I'd have a quick
-look-see as to why.  Turns out that's actually the FHS-recommended
-location:
-
-   http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDB=
-YSYSTEM
-
-And this has been identified and fixed in at least Ubuntu:
-
-   https://bugs.launchpad.net/ubuntu/+source/tftp-hpa/+bug/84615
-
-Unless there's a strong objection, I'd prefer to see a fix for this that
-updates the recipe to install into /svc/tftpboot, rather than changing
-the daemon options to look in /var/lib/tftpboot.
-
-Changing the name is fine with me (will this cause pain for the systemd
-folks?).
-
--J.
-
->=20
-> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+On Saturday 09 March 2013 16:26:12 Song.Li@windriver.com wrote:
+> From: Song.Li <Song.Li@windriver.com>
+> 
+> Some files weren't shipped in package when do
+> a multilib build.This is caused by PN various.
+> change them to BPN.
+> 
+> Signed-off-by: Song.Li <Song.Li@windriver.com>
 > ---
->  meta-networking/recipes-daemons/tftp-hpa/files/default   |    2 +-
->  meta-networking/recipes-daemons/tftp-hpa/files/init      |    2 +-
->  meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb |    2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/default b/met=
-a-networking/recipes-daemons/tftp-hpa/files/default
-> index de2ed18..1dce7fd 100644
-> --- a/meta-networking/recipes-daemons/tftp-hpa/files/default
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/default
-> @@ -1,3 +1,3 @@
->  #Defaults for tftpd-hpa
->  RUN_DAEMON=3D"yes"
-> -OPTIONS=3D"-l -s /srv/tftpboot"
-> +OPTIONS=3D"-l -s /var/lib/tftpboot"
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/init b/meta-n=
-etworking/recipes-daemons/tftp-hpa/files/init
-> index 5ad8c52..0561ff6 100644
-> --- a/meta-networking/recipes-daemons/tftp-hpa/files/init
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/init
-> @@ -18,7 +18,7 @@ set -e
-> =20
->  PATH=3D/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
->  DESC=3D"HPA's tftpd"
-> -NAME=3Din.tftpd
-> +NAME=3Din.tftpd-hpa
->  DAEMON=3D/usr/sbin/$NAME
->  PIDFILE=3D/var/run/$NAME.pid
->  SCRIPTNAME=3D/etc/init.d/tftpd-hpa
-> diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/m=
-eta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> index af48455..c116121 100644
-> --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> @@ -11,7 +11,7 @@ LICENSE =3D "BSD-4-Clause"
->  LIC_FILES_CHKSUM =3D "file://MCONFIG.in;beginline=3D1;endline=3D9;md5=3D=
-c28ba5adb43041fae4629db05c83cbdd \
->                      file://tftp/tftp.c;beginline=3D1;endline=3D32;md5=3D=
-988c1cba99d70858a26cd877209857f4"
-> =20
-> -PR =3D "r0"
-> +PR =3D "r1"
-> =20
->  SRC_URI =3D "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-h=
-pa-${PV}.tar.bz2 \
->             file://tftp-0.40-remap.patch \
---=20
--Joe MacDonald.
-:wq
+>  recipes-httpd/apache2/apache2_2.4.2.bb |   27 +++++++++++++--------------
+>  1 files changed, 13 insertions(+), 14 deletions(-)
+> 
+> diff --git a/recipes-httpd/apache2/apache2_2.4.2.bb
+> b/recipes-httpd/apache2/apache2_2.4.2.bb index af8c4ca..af285d6 100644
+> --- a/recipes-httpd/apache2/apache2_2.4.2.bb
+> +++ b/recipes-httpd/apache2/apache2_2.4.2.bb
+> @@ -5,7 +5,7 @@ HOMEPAGE = "http://httpd.apache.org/"
+>  DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
+>  SECTION = "net"
+>  LICENSE = "Apache-2.0"
+> -PR = "r3"
+> +PR = "r4"
+> 
+>  SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+>             file://server-makefile.patch \
+> @@ -105,40 +105,39 @@ LEAD_SONAME = "libapr-1.so.0"
+> 
+>  PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+> 
+> -CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
+> -		   ${sysconfdir}/${PN}/magic \
+> -		   ${sysconfdir}/${PN}/mime.types \
+> -		   ${sysconfdir}/init.d/${PN} "
+> +CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
+> +		   ${sysconfdir}/${BPN}/magic \
+> +		   ${sysconfdir}/${BPN}/mime.types \
+> +		   ${sysconfdir}/init.d/${BPN} "
+> 
+>  # we override here rather than append so that .so links are
+>  # included in the runtime package rather than here (-dev)
+>  # and to get build, icons, error into the -dev package
+> -FILES_${PN}-dev = "${datadir}/${PN}/build \
+> -		${datadir}/${PN}/icons \
+> -		${datadir}/${PN}/error \
+> +FILES_${PN}-dev = "${datadir}/${BPN}/build \
+> +		${datadir}/${BPN}/icons \
+> +		${datadir}/${BPN}/error \
+>  		${bindir}/apr-config ${bindir}/apu-config \
+>  		${libdir}/apr*.exp \
+> -		${includedir}/${PN} \
+> +		${includedir}/${BPN} \
+>  		${libdir}/*.la \
+>  		${libdir}/*.a"
+> 
+>  # manual to manual
+> -FILES_${PN}-doc += " ${datadir}/${PN}/manual"
+> +FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+> 
+>  #
+>  # override this too - here is the default, less datadir
+>  #
+>  FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.*
+> ${sysconfdir} \ ${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
+> -		${libdir}/${PN}"
+> +		${libdir}/${BPN}"
+> 
+>  # we want htdocs and cgi-bin to go with the binary
+> -FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"
+> +FILES_${PN} += "${datadir}/${BPN}/htdocs ${datadir}/${BPN}/cgi-bin"
+> 
+>  #make sure the lone .so links also get wrapped in the base package
+>  FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
+> 
+> -FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
+> +FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+> 
+>  RDEPENDS_${PN} += "openssl libgcc"
+> -
 
---wq9mPyueHGvFACwf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+I'm afraid this is still not correct - there are still references to PN that 
+should be changed to BPN in EXTRA_OECONF and do_install_append.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Cheers,
+Paul
 
-iEYEARECAAYFAlFHNTUACgkQPN8S4W6ZZncX9QCcDdSHlx69LIUNIwozENqlcU7w
-kAoAn277JseeXEMad8EORPWYPr2Jh/tD
-=tukx
------END PGP SIGNATURE-----
+-- 
 
---wq9mPyueHGvFACwf--
+Paul Eggleton
+Intel Open Source Technology Centre
+
+
