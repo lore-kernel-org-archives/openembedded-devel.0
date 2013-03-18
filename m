@@ -1,33 +1,37 @@
-Received: from mail-qc0-f182.google.com ([209.85.216.182])
+Received: from mail-ee0-f43.google.com ([74.125.83.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <rangers.av@gmail.com>) id 1UHSK5-0004LU-8m
+	(envelope-from <koen@dominion.thruhere.net>) id 1UHUwK-0005Xb-IN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Mar 2013 06:10:21 +0100
-Received: by mail-qc0-f182.google.com with SMTP id k19so2606474qcs.27
+	Mon, 18 Mar 2013 08:57:04 +0100
+Received: by mail-ee0-f43.google.com with SMTP id c50so2493627eek.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Mar 2013 21:52:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=QPdaaqjUtFHPz+TWtmgAfNp50wrRqeQy9P2RdiRVUAg=;
-	b=vUvQKrOqLTh1wWr/rTEtJvjG0q3ZDgAxUeAPvxDX3TPPZGhAMRwG9sEI8X1AsN83dW
-	WHptvZma+zLs4iWWvVsBmB0WrQ5Dowi3rCu+3ZUOdQs1yUr2r/DUK51jFa7q1RoXsoWg
-	NSFzHzc71W6lG9v27OfjbAr76fwnbmxqZZCMWlCtRbfSDJFNceowQNemr3FM2XV/9OOc
-	gXLMq3yyh+d9CuhzA0BwvVwZtlC7zpzEJEF4S4MYlr2ECF2jSv/cEVrIY1+6xNUZb0Mh
-	j4Q5iT/Fs92CwC+3cPpUAGdS2n8NbwsGWNYcKKQxUn3aRo/LZ09Zd6tLplENBXjPPz+Y
-	qDVw==
-MIME-Version: 1.0
-X-Received: by 10.49.59.67 with SMTP id x3mr20474986qeq.5.1363582357410; Sun,
-	17 Mar 2013 21:52:37 -0700 (PDT)
-Received: by 10.49.73.136 with HTTP; Sun, 17 Mar 2013 21:52:37 -0700 (PDT)
-In-Reply-To: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
-References: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
-Date: Mon, 18 Mar 2013 10:22:37 +0530
-Message-ID: <CAMQ5J2b5S7XgfJGb-tGr4xFMm69tX=n0iCwa1JeF7TmMaMO2cA@mail.gmail.com>
-From: RaNgErS <rangers.av@gmail.com>
+	Mon, 18 Mar 2013 00:40:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=fBUAEAuDXBrqfDjwzthoNdOyjoiYVPnOKuQm7cqwZcU=;
+	b=OIa2bFx++tGiw5dYp1hngS0sdPzO+FQpHdjWIYku74X5LCmVswQZrX5aXYx34mNz6F
+	6lnoy2Tg15lQIggCD1n5FHnvrqIxWTlQ79nIb0BThltQs7pdRIb7Ar2BkGCI0nUeDeIw
+	Kw1ubRcK8kTpPoMu8r1pTZVvBfI2vq80GxliebAyzmnNj161hlG4W4ln0P4ww+iO0yDM
+	HRVI9Wp9HpYPJGPF6hrtL8wMuoiW9i5pGYRH2Ofp+YZet4YNdxzbI1A9ZDOeYFwWRfTK
+	VLOc5QgeDHP6hiUIu5zeIekHw0z8ojtlyXND5vMmeYvjLPs/ovxQaWWzbBfxB0vAowKs
+	jukA==
+X-Received: by 10.14.211.65 with SMTP id v41mr46012577eeo.33.1363592416833;
+	Mon, 18 Mar 2013 00:40:16 -0700 (PDT)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id m46sm25421436eeo.16.2013.03.18.00.40.14
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 18 Mar 2013 00:40:15 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] wpa_supplicant: Location of systemd services files changed
+Date: Mon, 18 Mar 2013 08:40:06 +0100
+Message-Id: <1363592406-27335-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.1.4
+X-Gm-Message-State: ALoCoQk/z9aejsdjuYoAhcnVU1+GbGrJWMiPYbi8GvLIgoyWbg5Da+r1reE4IwQsuZ6MZalT6l0R
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-networking][PATCH] cifs-utils: add 5.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,53 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 05:10:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 Mar 2013 07:57:04 -0000
 
-Please delete my name from this list.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-networking/recipes-support/cifs/cifs-utils_git.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-networking/recipes-support/cifs/cifs-utils_git.bb
 
-
-On Fri, Mar 15, 2013 at 12:56 PM, Jukka Rissanen <
-jukka.rissanen@linux.intel.com> wrote:
-
->
-> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-> ---
->  .../recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend     |
-> 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git
-> a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-> b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-> index 23dcc82..91ee4ad 100644
-> ---
-> a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-> +++
-> b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend
-> @@ -8,7 +8,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
->
->  do_install_append () {
->      install -d ${D}${systemd_unitdir}/system
-> -    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
-> +    install -m 644 ${S}/wpa_supplicant/systemd/*.service
-> ${D}${systemd_unitdir}/system
->  }
->
->  # systemd.bbclass does not catch all multiple-instance-service-files
-> --
-> 1.7.11.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+new file mode 100644
+index 0000000..c78527e
+--- /dev/null
++++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "A a package of utilities for doing and managing mounts of the Linux CIFS filesystem."
++HOMEPAGE = "http://wiki.samba.org/index.php/LinuxCIFS_utils"
++
++LICENSE = "GPLv3 && LGPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++PV = "5.9"
++
++SRCREV = "353d491dcb5d69d31434abeb962c8e9a49c36867"
++SRC_URI = "git://git.samba.org/cifs-utils.git"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
 -- 
-     RaNgErS
-THIS IS STRANGE
+1.8.1.4
+
+
 
