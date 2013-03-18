@@ -1,35 +1,35 @@
 Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UHc63-000856-78
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UHcQC-0000Mw-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Mar 2013 16:35:42 +0100
+	Mon, 18 Mar 2013 16:56:30 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2IFIjDB003890
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Mar 2013 08:18:45 -0700 (PDT)
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2IFdZ7N009765
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Mar 2013 08:39:35 -0700 (PDT)
 Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 18 Mar 2013 08:18:45 -0700
+	(TLS) id 14.2.342.3; Mon, 18 Mar 2013 08:39:35 -0700
 Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id BF0937FE2;
-	Mon, 18 Mar 2013 11:18:06 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 788CD224FF; Mon,
-	18 Mar 2013 11:18:44 -0400 (EDT)
-Date: Mon, 18 Mar 2013 11:18:44 -0400
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 6069C7FE2;
+	Mon, 18 Mar 2013 11:38:56 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 20F4922507; Mon,
+	18 Mar 2013 11:39:34 -0400 (EDT)
+Date: Mon, 18 Mar 2013 11:39:34 -0400
 From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130318151844.GA9185@windriver.com>
-References: <1362994719-12276-1-git-send-email-wenzong.fan@windriver.com>
-	<1599644.gZKTPRS2fY@helios>
+To: <rongqing.li@windriver.com>
+Message-ID: <20130318153933.GB9185@windriver.com>
+References: <1362445249-12669-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1599644.gZKTPRS2fY@helios>
+In-Reply-To: <1362445249-12669-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: wfan@windriver.com
-Subject: Re: [PATCH] meta-networking: Add LAYERVERSION and LAYERDEPENDS
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] tftp-hpa: make init script work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,77 +43,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 15:35:44 -0000
-X-Groupsio-MsgNum: 43580
+X-List-Received-Date: Mon, 18 Mar 2013 15:56:30 -0000
+X-Groupsio-MsgNum: 43581
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bp/iNruPH9dso1Pn"
+	protocol="application/pgp-signature"; boundary="wq9mPyueHGvFACwf"
 Content-Disposition: inline
 
---bp/iNruPH9dso1Pn
+--wq9mPyueHGvFACwf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Getting caught up ...
+Hey Roy,
 
-[Re: [oe] [PATCH] meta-networking: Add LAYERVERSION and LAYERDEPENDS] On 13=
-=2E03.11 (Mon 15:38) Paul Eggleton wrote:
+[[meta-networking][PATCH] tftp-hpa: make init script work] On 13.03.05 (Tue=
+ 09:00) rongqing.li@windriver.com wrote:
 
-> On Monday 11 March 2013 17:38:39 wenzong.fan@windriver.com wrote:
-> > From: Wenzong Fan <wenzong.fan@windriver.com>
-> >=20
-> > Add LAYERVERSION and LAYERDEPENDS to layer.conf
-> >=20
-> > Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> > ---
-> >  meta-networking/conf/layer.conf |    5 +++++
-> >  1 file changed, 5 insertions(+)
-> >=20
-> > diff --git a/meta-networking/conf/layer.conf
-> > b/meta-networking/conf/layer.conf index 1ea2bc2..f75080a 100644
-> > --- a/meta-networking/conf/layer.conf
-> > +++ b/meta-networking/conf/layer.conf
-> > @@ -9,3 +9,8 @@ BBFILE_COLLECTIONS +=3D "networking"
-> >  BBFILE_PATTERN_networking :=3D "^${LAYERDIR}/"
-> >  BBFILE_PRIORITY_networking =3D "5"
-> >=20
-> > +# This should only be incremented on significant changes that will
-> > +# cause compatibility issues with other layers
-> > +LAYERVERSION_networking =3D "1"
-> > +
-> > +LAYERDEPENDS_networking =3D "core"
+> From: "Roy.Li" <rongqing.li@windriver.com>
 >=20
-> This is good, but it might be useful to also set a versioned dependency o=
-n the=20
-> core - that way if you attempt to use the denzil branch of OE-Core with m=
-aster=20
-> of one of these layers, instead of an error about incorrect indentation i=
-n=20
-> python functions you get one specifically about the version being incorre=
-ct.
+> 1. fix the daemon name, it should be in.tftpd-hpa
+> 2. root directory should be /var/lib/tftpboot, since /var/lib/tftpboot ha=
+s been
+> installed, but /srv/tftpboot not
 
-I agree.  This seems to have caused at least one person some headache
-recently and I know I've had a few head-scratching moments when I was
-burned by different trees being on incompatible branches.
+Hmm.  This is a bit problematic for me.  I wouldn't normally bat an eye
+at such a change, but because the original recipe specifically pointed
+the tftp server at /srv and when I looked at my own tftp server, that's
+where it was set.  It's been so long since I did anything with it I'd
+forgotten why I put the contents there, so I thought I'd have a quick
+look-see as to why.  Turns out that's actually the FHS-recommended
+location:
 
-Was there an update on this that I didn't see yet?  Or are you planning
-one, Wenzong?  I can merge this now, but Paul's got a very good point, I
-think.
+   http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDB=
+YSYSTEM
 
+And this has been identified and fixed in at least Ubuntu:
+
+   https://bugs.launchpad.net/ubuntu/+source/tftp-hpa/+bug/84615
+
+Unless there's a strong objection, I'd prefer to see a fix for this that
+updates the recipe to install into /svc/tftpboot, rather than changing
+the daemon options to look in /var/lib/tftpboot.
+
+Changing the name is fine with me (will this cause pain for the systemd
+folks?).
+
+-J.
+
+>=20
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> ---
+>  meta-networking/recipes-daemons/tftp-hpa/files/default   |    2 +-
+>  meta-networking/recipes-daemons/tftp-hpa/files/init      |    2 +-
+>  meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb |    2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/default b/met=
+a-networking/recipes-daemons/tftp-hpa/files/default
+> index de2ed18..1dce7fd 100644
+> --- a/meta-networking/recipes-daemons/tftp-hpa/files/default
+> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/default
+> @@ -1,3 +1,3 @@
+>  #Defaults for tftpd-hpa
+>  RUN_DAEMON=3D"yes"
+> -OPTIONS=3D"-l -s /srv/tftpboot"
+> +OPTIONS=3D"-l -s /var/lib/tftpboot"
+> diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/init b/meta-n=
+etworking/recipes-daemons/tftp-hpa/files/init
+> index 5ad8c52..0561ff6 100644
+> --- a/meta-networking/recipes-daemons/tftp-hpa/files/init
+> +++ b/meta-networking/recipes-daemons/tftp-hpa/files/init
+> @@ -18,7 +18,7 @@ set -e
+> =20
+>  PATH=3D/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+>  DESC=3D"HPA's tftpd"
+> -NAME=3Din.tftpd
+> +NAME=3Din.tftpd-hpa
+>  DAEMON=3D/usr/sbin/$NAME
+>  PIDFILE=3D/var/run/$NAME.pid
+>  SCRIPTNAME=3D/etc/init.d/tftpd-hpa
+> diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/m=
+eta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> index af48455..c116121 100644
+> --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> @@ -11,7 +11,7 @@ LICENSE =3D "BSD-4-Clause"
+>  LIC_FILES_CHKSUM =3D "file://MCONFIG.in;beginline=3D1;endline=3D9;md5=3D=
+c28ba5adb43041fae4629db05c83cbdd \
+>                      file://tftp/tftp.c;beginline=3D1;endline=3D32;md5=3D=
+988c1cba99d70858a26cd877209857f4"
+> =20
+> -PR =3D "r0"
+> +PR =3D "r1"
+> =20
+>  SRC_URI =3D "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-h=
+pa-${PV}.tar.bz2 \
+>             file://tftp-0.40-remap.patch \
 --=20
 -Joe MacDonald.
 :wq
 
---bp/iNruPH9dso1Pn
+--wq9mPyueHGvFACwf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEUEARECAAYFAlFHMFQACgkQPN8S4W6ZZneu9gCUDgeyI9Oa+Tbb+eJMF+NRjiSz
-/wCdElrciWa2N7p8d8LY1KWgRYalR6o=
-=J6E9
+iEYEARECAAYFAlFHNTUACgkQPN8S4W6ZZncX9QCcDdSHlx69LIUNIwozENqlcU7w
+kAoAn277JseeXEMad8EORPWYPr2Jh/tD
+=tukx
 -----END PGP SIGNATURE-----
 
---bp/iNruPH9dso1Pn--
+--wq9mPyueHGvFACwf--
