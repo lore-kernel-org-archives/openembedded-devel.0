@@ -1,21 +1,37 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail-ob0-f172.google.com ([209.85.214.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <joe.macdonald@windriver.com>) id 1UI3Zm-0008Ht-1y
+	(envelope-from <eu@felipetonello.com>) id 1UI4qV-0002Xr-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Mar 2013 21:56:06 +0100
-Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
-	[128.224.147.66])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2JKdES7028235
+	Tue, 19 Mar 2013 23:17:31 +0100
+Received: by mail-ob0-f172.google.com with SMTP id tb18so1004731obb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2013 13:39:15 -0700 (PDT)
-From: Joe MacDonald <joe.macdonald@windriver.com>
+	Tue, 19 Mar 2013 15:00:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=rXCP7gd69qPYQmLpLBCt4cu2hDnlSuhpbWZzSw8T7iY=;
+	b=lcKP5FYkf7brUEv78lsFCIlDiCRAkqceCiD8LBh3ElVuOoS+Km7bGp5er1NUM7m///
+	e7EkPfWlro4bR3zCXo23OMl53fxTt4Y5WoMuQa/Itqhs2jqf+RJmEMc07lTo54a+rpm+
+	FIWMlEqmsDMVyJkrgmexyn8evbLcVZbupqsr5Wytn7pv52pkROBBWGvnzG0aQv9KptuM
+	KnRyzL4s9+bp6Es47cLARwYy6w75jvdtswZE9Tn1JrTypeigtNhGaF8d+dYwiNE1x9Ly
+	fH5UZtXRztzprNtXiIvY+uygbWzjzClmOjhU0xq3gs1zlSWiQqDe5cuMSOJ6N0XDNhv3
+	5Uxg==
+X-Received: by 10.182.156.103 with SMTP id wd7mr2622118obb.33.1363730436838;
+	Tue, 19 Mar 2013 15:00:36 -0700 (PDT)
+Received: from mlabs-ftonello.masimolabs.com
+	(wsip-70-183-20-162.oc.oc.cox.net. [70.183.20.162])
+	by mx.google.com with ESMTPS id bq8sm13451676obc.9.2013.03.19.15.00.35
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 19 Mar 2013 15:00:35 -0700 (PDT)
+From: eu@felipetonello.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Mar 2013 16:39:12 -0400
-Message-Id: <1363725552-11114-2-git-send-email-joe.macdonald@windriver.com>
-X-Mailer: git-send-email 1.7.11.3
-In-Reply-To: <1363725552-11114-1-git-send-email-joe.macdonald@windriver.com>
-References: <1363725552-11114-1-git-send-email-joe.macdonald@windriver.com>
-Subject: [meta-networking][PATCH] xl2tpd: dump 1.3.1 in favour of git version
+Date: Tue, 19 Mar 2013 15:00:33 -0700
+Message-Id: <1363730433-8555-1-git-send-email-ftonello@cercacor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-Gm-Message-State: ALoCoQmKMZAiIOxQ3WvtyP9pw5Bl/mT0YKec8xpX0Dv1SCdF3bFlhtUqWpz1A0t5lc+/a9o/b50B
+Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: [meta-oe][PATCH v4] fingerterm: Added 1.0.2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,113 +45,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 20:56:07 -0000
+X-List-Received-Date: Tue, 19 Mar 2013 22:17:33 -0000
 
-When the yocto kernel updated to 3.8.x, it exposed some breakage in the
-xl2tpd 1.3.1 release that has been since fixed in tree.  Rather than
-cherry pick patches, we'll migrate to the current HEAD.
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
 
-Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
+Fingerterm is a terminal emulator for Nokia Harmattan, but it works in any Qt4
+environment.
+
+This recipe can be extended by a .bbappend to add .desktop, icon and others to
+the target device.
+
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
 ---
- .../xl2tpd/xl2tpd-1.3.1/cflags.patch               | 58 ----------------------
- .../recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb       |  8 ---
- .../recipes-protocols/xl2tpd/xl2tpd_git.bb         |  5 ++
- 3 files changed, 5 insertions(+), 66 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
- delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
- create mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+ meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   44 +++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch b/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
-deleted file mode 100644
-index 3550812..0000000
---- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd-1.3.1/cflags.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--From 678d71e3b50f566776dbc29db49a1128be89caf6 Mon Sep 17 00:00:00 2001
--From: Paul Eggleton <paul.eggleton@linux.intel.com>
--Date: Fri, 26 Oct 2012 10:07:31 +0100
--Subject: [PATCH] Adjust CFLAGS for building within OE
--
--Updated version of cflags.patch from OE-Classic written by
--Vladimir Sorokin <sorokin@altell.ru>.
--
--Upstream-Status: Inappropriate [configuration]
--
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-----
-- Makefile |    8 +++++---
-- 1 files changed, 5 insertions(+), 3 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index 6f6481f..c7602db 100644
----- a/Makefile
--+++ b/Makefile
--@@ -62,7 +62,7 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
-- # are packages seperately (eg kernel-headers on Fedora)
-- # Note: 2.6.23+ support still needs some changes in the xl2tpd source
-- #
---#OSFLAGS+= -DUSE_KERNEL
--+OSFLAGS+= -DUSE_KERNEL
-- #
-- #
-- # Uncomment the next line for FreeBSD
--@@ -90,7 +90,6 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
-- 
-- IPFLAGS?= -DIP_ALLOCATION
-- 
---CFLAGS+= $(DFLAGS) -O2 -fno-builtin -Wall -DSANITY $(OSFLAGS) $(IPFLAGS)
-- HDRS=l2tp.h avp.h misc.h control.h call.h scheduler.h file.h aaa.h md5.h
-- OBJS=xl2tpd.o pty.o misc.o control.o avp.o call.o network.o avpsend.o scheduler.o file.o aaa.o md5.o
-- SRCS=${OBJS:.o=.c} ${HDRS}
--@@ -110,6 +109,9 @@ all: $(EXEC) pfc $(CONTROL_EXEC)
-- clean:
-- 	rm -f $(OBJS) $(EXEC) pfc.o pfc $(CONTROL_EXEC)
-- 
--+%.o: %.c
--+	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -o $@ -c $<
--+
-- $(EXEC): $(OBJS) $(HDRS)
-- 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
-- 
--@@ -117,7 +119,7 @@ $(CONTROL_EXEC): $(CONTROL_SRCS)
-- 	$(CC) $(CONTROL_SRCS) -o $@
-- 
-- pfc:
---	$(CC) $(CFLAGS) -c contrib/pfc.c
--+	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -c contrib/pfc.c
-- 	$(CC) $(LDFLAGS) -o pfc pfc.o -lpcap $(LDLIBS)
-- 
-- romfs:
---- 
--1.7.1
--
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
-deleted file mode 100644
-index 5321d6a..0000000
---- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.1.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require xl2tpd.inc
--PR = "${INC_PR}.0"
--
--# 95445fc9aaeaf709d54c1cd934d4bed4467e910d corresponds to 1.3.1 tag
--SRCREV = "95445fc9aaeaf709d54c1cd934d4bed4467e910d"
--
--SRC_URI += " file://cflags.patch"
--
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
 new file mode 100644
-index 0000000..bd084aa
+index 0000000..59533a4
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
-@@ -0,0 +1,5 @@
-+require xl2tpd.inc
-+PR = "${INC_PR}.0"
++++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+@@ -0,0 +1,44 @@
++DESCRIPTION = "A terminal emulator for Harmattan (Nokia N9/N950) with a custom \
++virtual keyboard and usability-enhancing features such as URL grabber, pan \
++gestures and customizable shortcut menu. Designed especially to be used with \
++screen and irssi."
++HOMEPAGE = "http://hqh.unlink.org/harmattan"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++SECTION = "qt/app"
 +
-+SRCREV = "df7e30eb199fc5710faa83866381aea18b66e60c"
++PR = "r0"
 +
++inherit qt4x11 pkgconfig
++
++SRC_URI = " \
++  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "d53b0f463c025583cd52accf95715448"
++SRC_URI[sha256sum] = "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a044b6674dd82d95150"
++
++S = "${WORKDIR}/${PN}"
++
++FILES_${PN} = " \
++  ${bindir}/${PN} \
++  ${datadir}/applications/${PN}.desktop \
++  ${datadir}/pixmaps/${PN}.png \
++"
++
++do_install() {
++  install -d ${D}${bindir}
++  install -m 0744 ${S}/${PN} ${D}${bindir}
++
++  sed -i -e '/Exec.*/d' fingerterm.desktop
++  sed -i -e '/Icon.*/d' fingerterm.desktop
++
++  echo 'Exec=${bindir}/${PN}' >> fingerterm.desktop
++  echo 'Icon=${PN}' >> fingerterm.desktop
++
++  install -d ${D}${datadir}/applications
++  install -m 0644 ${S}/${PN}.desktop ${D}${datadir}/applications
++
++  install -d ${D}${datadir}/pixmaps
++  install -m 0644 ${S}/${PN}.png ${D}${datadir}/pixmaps
++}
+\ No newline at end of file
 -- 
-1.7.11.3
+1.7.9.5
 
 
 
