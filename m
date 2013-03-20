@@ -1,33 +1,33 @@
-Received: from mail-pb0-f46.google.com ([209.85.160.46])
+Received: from mail-da0-f45.google.com ([209.85.210.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UIF0T-0000ss-5B
+	(envelope-from <raj.khem@gmail.com>) id 1UIF90-00018r-1d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 10:08:34 +0100
-Received: by mail-pb0-f46.google.com with SMTP id uo15so1177917pbc.19
+	Wed, 20 Mar 2013 10:17:15 +0100
+Received: by mail-da0-f45.google.com with SMTP id v40so868708dad.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2013 01:51:33 -0700 (PDT)
+	Wed, 20 Mar 2013 02:00:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=ExMV1CJb+imgQ/IUsNJFuTEi+j5N1/bRmsGgdj0C5oY=;
-	b=SSQE3HKHCihltn++jXl3U9uH+xLNAfux93sJiAARGMrQykeLBUiiP//1Z8ijxXLWQX
-	p1ZlYN6zVjbghjLRrR6wXJ6gJs9MIdOSyZjekVw1y0OoJ5Zr7IeZck3t8ZHtfUlIhczn
-	p4l5u54qWMkYJsCaAtzOv3+R7T6axt+9lmuVQMJoGx7SK8ErN0y2IfVz77eHpq1uO4Cr
-	hwuKJ0wyYEo5rz+Cadukjr4IZKiGaBogiHAaJOd37ZIq/lIOO5n+fGCvaSjEZHhHl0st
-	/gMZVKMkO6DPVieA3Fvo19dJSNrOWgcLnvmc/3eqb3fDP5ETb0vS1U+VQtXeyHPeD0Di
-	kX+A==
-X-Received: by 10.66.146.202 with SMTP id te10mr7922209pab.64.1363769493429;
-	Wed, 20 Mar 2013 01:51:33 -0700 (PDT)
+	bh=fKkJeRt8kpxjrfbQ7+Wf4dMTSeywXXo1DIWtIaaEbGw=;
+	b=gmn7P+jU7JSiKARotu3huWQXYSz0m9XI1rVERXK6mLPKUdzLYajPnjizqH/vePXoLG
+	FAqltpRXARRe17DscMhnnbqM7HY8BlTCc+WMsfiI7R47vYvVEt9BRG/UNwpDbwYfev/M
+	8f911aPUgYhg9ibK2aaBWUKFOvAnQCWfy+2yzGRstZ/kSXUqYEBb5NOo5LwN2ySABb91
+	eZGjE4xlt4jC84RiMJGVR7m7cIGRCMgXhtFcyvo+w82IKKBanbm/E0YgVggZKcOktww0
+	wIaA/KGx+9THSn6f34dtMGG/4Nva8h4uLij0p0RyZ6Hpb38fix1Mn15/D+RKvr5T/jBq
+	QQFA==
+X-Received: by 10.66.49.229 with SMTP id x5mr7976367pan.185.1363770017541;
+	Wed, 20 Mar 2013 02:00:17 -0700 (PDT)
 Received: from isis.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id ol7sm1369443pbb.14.2013.03.20.01.51.32
+	by mx.google.com with ESMTPS id t1sm1476139pab.12.2013.03.20.02.00.16
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 20 Mar 2013 01:51:32 -0700 (PDT)
+	Wed, 20 Mar 2013 02:00:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Mar 2013 01:51:08 -0700
-Message-Id: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 20 Mar 2013 01:59:56 -0700
+Message-Id: <1363769996-20782-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
+Subject: [meta-opie][PATCH] recipes: Turn ALLOW_EMPTY to be package specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 09:08:35 -0000
+X-List-Received-Date: Wed, 20 Mar 2013 09:17:16 -0000
 
-Fixes QA errors:
+Fixes QA warnings during parse
 
 ERROR: QA Issue:
-/b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
-Variable pkg_postinst is set as not being package specific, please fix
+/b/kraj/angstrom/sources/meta-opie/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb:
+Variable ALLOW_EMPTY is set as not being package specific, please fix
+this.
+ERROR: QA Issue:
+/b/kraj/angstrom/sources/meta-opie/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb:
+Variable ALLOW_EMPTY is set as not being package specific, please fix
+this.
+ERROR: QA Issue:
+/b/kraj/angstrom/sources/meta-opie/recipes-opie/opie-mediaplayer1/opie-mediaplayer1_git.bb:
+Variable ALLOW_EMPTY is set as not being package specific, please fix
+this.
+ERROR: QA Issue:
+/b/kraj/angstrom/sources/meta-opie/recipes-opie/opie-mediaplayer1/opie-mediaplayer1_1.2.5.bb:
+Variable ALLOW_EMPTY is set as not being package specific, please fix
 this.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-misc-support/cyrus-sasl_2.1.19.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-opie/opie-help-en/opie-help-en.inc         |    2 +-
+ .../opie-mediaplayer1/opie-mediaplayer1.inc        |    2 +-
+ .../nativesdk-packagegroup-opie-toolchain-host.bb  |    2 +-
+ .../packagegroup-opie-toolchain-target.bb          |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-misc-support/cyrus-sasl_2.1.19.bb b/recipes-misc-support/cyrus-sasl_2.1.19.bb
-index 2c9d359..da9a709 100644
---- a/recipes-misc-support/cyrus-sasl_2.1.19.bb
-+++ b/recipes-misc-support/cyrus-sasl_2.1.19.bb
-@@ -47,7 +47,7 @@ do_install () {
- FILES_${PN} += "${prefix}/lib/sasl2/*.so*"
- FILES_${PN}-dev += "${libdir}/sasl2/*.la ${libdir}/sasl2/*.a"
+diff --git a/recipes-opie/opie-help-en/opie-help-en.inc b/recipes-opie/opie-help-en/opie-help-en.inc
+index 30295f3..6c0ae6c 100644
+--- a/recipes-opie/opie-help-en/opie-help-en.inc
++++ b/recipes-opie/opie-help-en/opie-help-en.inc
+@@ -3,7 +3,7 @@ SECTION = "opie/help"
+ LICENSE = "GPLv2"
+ # FIXME stopgap until split archives have license files included
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+-ALLOW_EMPTY = "1"
++ALLOW_EMPTY_${PN} = "1"
+ PACKAGE_ARCH = "all"
  
--pkg_postinst () {
-+pkg_postinst_${PN} () {
-         grep cyrus /etc/passwd || adduser --disabled-password --home=/var/spool/mail --ingroup mail -g "Cyrus sasl" cyrus
-     echo "cyrus" | saslpasswd2 -p -c cyrus
-     chgrp mail /etc/sasldb2
+ PACKAGES += "${PN}"
+diff --git a/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc b/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
+index 22b1069..df35e37 100644
+--- a/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
++++ b/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "The classic Opie media player (core+plugins)."
+ LICENSE = "GPLv2"
+ # FIXME stopgap until split archives have license files included
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+-ALLOW_EMPTY = "1"
++ALLOW_EMPTY_${PN} = "1"
+ PACKAGE_ARCH = "all"
+ RDEPENDS_${PN} = "opie-mediaplayer1-core"
+ RRECOMMENDS_${PN} = "opie-mediaplayer1-libmadplugin opie-mediaplayer1-libwavplugin \
+diff --git a/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb b/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
+index 52693ba..c97f84a 100644
+--- a/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
++++ b/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
+@@ -3,6 +3,6 @@ require recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bb
+ DESCRIPTION = "Host packages for Opie SDK"
+ PR = "r3"
+ LICENSE = "MIT"
+-ALLOW_EMPTY = "1"
++ALLOW_EMPTY_${PN} = "1"
+ 
+ RDEPENDS_${PN} += "nativesdk-qmake nativesdk-uicmoc"
+diff --git a/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb b/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
+index ca42e0d..04fa21d 100644
+--- a/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
++++ b/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Target packages for Opie SDK"
+ PR = "r7"
+ LICENSE = "MIT"
+-ALLOW_EMPTY = "1"
++ALLOW_EMPTY_${PN} = "1"
+ 
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
+                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 -- 
 1.7.9.5
 
