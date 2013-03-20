@@ -1,25 +1,34 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-oa0-f48.google.com ([209.85.219.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UIFXF-0001yC-H6
+	(envelope-from <s.stirtzel@googlemail.com>) id 1UIFdd-0002F8-KY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 10:42:19 +0100
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 20 Mar 2013 02:23:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,876,1355126400"; d="scan'208";a="305006069"
-Received: from unknown (HELO helios.localnet) ([10.255.13.114])
-	by orsmga002.jf.intel.com with ESMTP; 20 Mar 2013 02:25:25 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Mar 2013 09:25:24 +0000
-Message-ID: <2143718.Cd3otbWQK5@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
-In-Reply-To: <1363769996-20782-1-git-send-email-raj.khem@gmail.com>
-References: <1363769996-20782-1-git-send-email-raj.khem@gmail.com>
+	Wed, 20 Mar 2013 10:49:01 +0100
+Received: by mail-oa0-f48.google.com with SMTP id j1so1493188oag.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Mar 2013 02:32:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=czX3cQNS3etBbxzhAS3kTA1lwYJDERi7KZSUHJXZLxY=;
+	b=p2rE/xqHjFnKUCKqQaEKoSz62BZPs5oeH3hiZIYc5PC+U7hsBCnGtMElxVTd7MPxYL
+	SCDSclf+4GcH5sFirRy5P8aWoZ9DFp8yWJhx93zaXf0kuwwoApsJSf7YADFX3La3wXNt
+	p2ONf23lyHA9dDwdZ6YZPppdGg6GZ2S6jpC50SyQI23FL6LSFIFqZ3gs5KT44LqScJYJ
+	uLWmAftZD0YP+pLIrntsl3ikyZ4TGDbuyGbkZ9Jf6PrsopF19VWmuAGUvPL5TDQgr6G/
+	Zn847ghLldIWJ7akx5Q3TRa2ln5I4OjGblctmqhGVHFlZIymzoGbZsXLksPGoKLvQGBv
+	zWgw==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-opie][PATCH] recipes: Turn ALLOW_EMPTY to be package specific
+X-Received: by 10.182.40.71 with SMTP id v7mr3462474obk.85.1363771922451; Wed,
+	20 Mar 2013 02:32:02 -0700 (PDT)
+Received: by 10.60.76.199 with HTTP; Wed, 20 Mar 2013 02:32:02 -0700 (PDT)
+In-Reply-To: <51497DC8.5090006@linaro.org>
+References: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+	<51497DC8.5090006@linaro.org>
+Date: Wed, 20 Mar 2013 10:32:02 +0100
+Message-ID: <CAGiJk9ejLAdb3LWpTDpbVaPaDMsGNsX26yB3gHOExA46XW5L1g@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,109 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 09:42:26 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 20 Mar 2013 09:49:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wednesday 20 March 2013 01:59:56 Khem Raj wrote:
-> Fixes QA warnings during parse
-> 
-> ERROR: QA Issue:
-> /b/kraj/angstrom/sources/meta-opie/recipes-opie/packagegroups/nativesdk-pack
-> agegroup-opie-toolchain-host.bb: Variable ALLOW_EMPTY is set as not being
-> package specific, please fix this.
-> ERROR: QA Issue:
-> /b/kraj/angstrom/sources/meta-opie/recipes-opie/packagegroups/packagegroup-o
-> pie-toolchain-target.bb: Variable ALLOW_EMPTY is set as not being package
-> specific, please fix this.
-> ERROR: QA Issue:
-> /b/kraj/angstrom/sources/meta-opie/recipes-opie/opie-mediaplayer1/opie-media
-> player1_git.bb: Variable ALLOW_EMPTY is set as not being package specific,
-> please fix this.
-> ERROR: QA Issue:
-> /b/kraj/angstrom/sources/meta-opie/recipes-opie/opie-mediaplayer1/opie-media
-> player1_1.2.5.bb: Variable ALLOW_EMPTY is set as not being package specific,
-> please fix this.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes-opie/opie-help-en/opie-help-en.inc         |    2 +-
->  .../opie-mediaplayer1/opie-mediaplayer1.inc        |    2 +-
->  .../nativesdk-packagegroup-opie-toolchain-host.bb  |    2 +-
->  .../packagegroup-opie-toolchain-target.bb          |    2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-opie/opie-help-en/opie-help-en.inc
-> b/recipes-opie/opie-help-en/opie-help-en.inc index 30295f3..6c0ae6c 100644
-> --- a/recipes-opie/opie-help-en/opie-help-en.inc
-> +++ b/recipes-opie/opie-help-en/opie-help-en.inc
-> @@ -3,7 +3,7 @@ SECTION = "opie/help"
->  LICENSE = "GPLv2"
->  # FIXME stopgap until split archives have license files included
->  LIC_FILES_CHKSUM =
-> "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> -ALLOW_EMPTY = "1"
-> +ALLOW_EMPTY_${PN} = "1"
->  PACKAGE_ARCH = "all"
-> 
->  PACKAGES += "${PN}"
-> diff --git a/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
-> b/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc index
-> 22b1069..df35e37 100644
-> --- a/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
-> +++ b/recipes-opie/opie-mediaplayer1/opie-mediaplayer1.inc
-> @@ -2,7 +2,7 @@ DESCRIPTION = "The classic Opie media player
-> (core+plugins)." LICENSE = "GPLv2"
->  # FIXME stopgap until split archives have license files included
->  LIC_FILES_CHKSUM =
-> "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> -ALLOW_EMPTY = "1"
-> +ALLOW_EMPTY_${PN} = "1"
->  PACKAGE_ARCH = "all"
->  RDEPENDS_${PN} = "opie-mediaplayer1-core"
->  RRECOMMENDS_${PN} = "opie-mediaplayer1-libmadplugin
-> opie-mediaplayer1-libwavplugin \ diff --git
-> a/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
-> b/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
-> index 52693ba..c97f84a 100644
-> ---
-> a/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
-> +++
-> b/recipes-opie/packagegroups/nativesdk-packagegroup-opie-toolchain-host.bb
-> @@ -3,6 +3,6 @@ require
-> recipes-core/packagegroups/nativesdk-packagegroup-sdk-host.bb DESCRIPTION =
-> "Host packages for Opie SDK"
->  PR = "r3"
->  LICENSE = "MIT"
-> -ALLOW_EMPTY = "1"
-> +ALLOW_EMPTY_${PN} = "1"
-> 
->  RDEPENDS_${PN} += "nativesdk-qmake nativesdk-uicmoc"
-> diff --git
-> a/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
-> b/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb index
-> ca42e0d..04fa21d 100644
-> --- a/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
-> +++ b/recipes-opie/packagegroups/packagegroup-opie-toolchain-target.bb
-> @@ -1,7 +1,7 @@
->  DESCRIPTION = "Target packages for Opie SDK"
->  PR = "r7"
->  LICENSE = "MIT"
-> -ALLOW_EMPTY = "1"
-> +ALLOW_EMPTY_${PN} = "1"
-> 
->  LIC_FILES_CHKSUM =
-> "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-> file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+2013/3/20 Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>:
+> W dniu 20.03.2013 09:51, Khem Raj pisze:
+>> ERROR: QA Issue:
+>> /b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
+>> Variable pkg_postinst is set as not being package specific, please fix
+>> this.
+>
+> meta-openembedded has 2.1.26 in meta-networking so meta-kde copy should
+> be removed.
+>
 
-Merged, thanks!
+Hi, it seems there are some differences in the recipes, maybe we can
+work through them.
 
-Cheers,
-Paul
+Is BDB 5 working correctly with this version, without the patch [1]?
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+[1] https://gitorious.org/openembedded-core-layers/meta-kde/blobs/c9bac7d55796e0f88e6950dfff2adbb186b0df7a/recipes-misc-support/cyrus-sasl/Fix-for-berkeley-db-5.patch
+
+
+--
+Regards
+Samuel
 
 
