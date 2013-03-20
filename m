@@ -1,33 +1,35 @@
-Received: from mail-pb0-f49.google.com ([209.85.160.49])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UIFKj-0001Xc-3R
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UIFMQ-0001eH-D4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 10:29:21 +0100
-Received: by mail-pb0-f49.google.com with SMTP id xa12so1170200pbc.8
+	Wed, 20 Mar 2013 10:31:08 +0100
+Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
+	id 60C83D22E8; Wed, 20 Mar 2013 10:14:20 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	tygrysek.juszkiewicz.com.pl
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
+	[87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 47FE6D22CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2013 02:12:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=BQcpgoWXeyQi1QOS8P2LCIJIT1zEtp/9Lm4zfUhYiaU=;
-	b=SXGN1nbs3+XYc9YtDhtthU3RZGDHEijgVFM0TX1BDPQL48gpJI/TuO87ubassnkNBd
-	970pqXQTsOU7ewaf2hkEDzgQ4Wlc7wxifBHC5TiZFEFTUQ3Lzb1eZjVjP1w6XEBYMCn9
-	vS8e7dgdwgyuhMRhNefvCM7zl9xwkEx/j0a1nx6fHhSs2+Rh5lHQ55pU57pH3Xj4vwR5
-	A4X89l8QY0/TAxJpjdps79GoBFfMEHa5N4C/k/LxYi2U+QD/Y6VOt7tHtMLm0EI4OH7v
-	+ngB2UIGto9W05jbiRMFlQanujs3CA8YNvyCoyluPzUQu6pqRYPZhdvMGAsrwJ2w+gxw
-	5l5Q==
-X-Received: by 10.66.49.130 with SMTP id u2mr7806387pan.191.1363770749867;
-	Wed, 20 Mar 2013 02:12:29 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id xc4sm1410309pbc.41.2013.03.20.02.12.28
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 20 Mar 2013 02:12:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 20 Mar 2013 10:13:49 +0100 (CET)
+Message-ID: <51497DC8.5090006@linaro.org>
+Date: Wed, 20 Mar 2013 10:13:44 +0100
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Mar 2013 02:12:08 -0700
-Message-Id: <1363770728-21218-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-browser][PATCH] libxi: Rename bbappend to match oe-core
+References: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.4.6
+Subject: Re: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +43,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 09:29:23 -0000
+X-List-Received-Date: Wed, 20 Mar 2013 09:31:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../{libxi_1.6.1.bbappend => libxi_1.7.bbappend}   |    0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename recipes-graphics/libxi/{libxi_1.6.1.bbappend => libxi_1.7.bbappend} (100%)
+W dniu 20.03.2013 09:51, Khem Raj pisze:
+> ERROR: QA Issue:
+> /b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
+> Variable pkg_postinst is set as not being package specific, please fix
+> this.
 
-diff --git a/recipes-graphics/libxi/libxi_1.6.1.bbappend b/recipes-graphics/libxi/libxi_1.7.bbappend
-similarity index 100%
-rename from recipes-graphics/libxi/libxi_1.6.1.bbappend
-rename to recipes-graphics/libxi/libxi_1.7.bbappend
--- 
-1.7.9.5
-
+meta-openembedded has 2.1.26 in meta-networking so meta-kde copy should
+be removed.
 
 
