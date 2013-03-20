@@ -1,39 +1,38 @@
-Received: from mail-oa0-f43.google.com ([209.85.219.43])
+Received: from mail-pd0-f169.google.com ([209.85.192.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1UIIAU-0008RV-OT
+	(envelope-from <raj.khem@gmail.com>) id 1UIJqE-0003Ef-FK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 13:31:00 +0100
-Received: by mail-oa0-f43.google.com with SMTP id l10so1654139oag.30
+	Wed, 20 Mar 2013 15:18:13 +0100
+Received: by mail-pd0-f169.google.com with SMTP id 3so630431pdj.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=cSr6ZbmZfSlRwxwk4WXtWVI+QaC2MzChTCtJcK7T0Kk=;
-	b=bPHGieXdDFe/6YldgZeRLKF/CVUrmf5Z/j6TPRCglOly85f6G0aYuqOPgKXF/byfW7
-	Q6m8/QFSCdbyj+DXk1XRfrRVPR2a9rA0WenXvXRU5OCz5PBYofO8LiSik8JexWFKqIGl
-	gw2JthWh408Zx9iz3w9i+LJWsvYc9dDOoGN3n6ecQHo/MlRUPsneCDFHrqYeH2yCROVs
-	z5UO/kGwsd7NLWOB9i/yfDJLg+co+XaJGZ7uJ/SZRmFGZNm7Uefay4CHhg40tQ8cET9S
-	b/yke4WTaMf8N0Fl0ENdJuyJ48wU371Hc6vYZkMVs/fLepkBICRFj1fPKNwm3KVbRBGA
-	DunA==
-MIME-Version: 1.0
-X-Received: by 10.182.127.115 with SMTP id nf19mr3858991obb.49.1363781647450; 
-	Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
-Received: by 10.60.76.199 with HTTP; Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
-In-Reply-To: <20130307155654.GQ32228@jama.dyndns-home.com>
-References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
-	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
-	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
-	<20130307150552.GN32228@jama.dyndns-home.com>
-	<CAGiJk9cS8WG5pyJ7Op1XTqxTXk_xRhcAUGXq4hie01FL3vi5SA@mail.gmail.com>
-	<20130307155654.GQ32228@jama.dyndns-home.com>
-Date: Wed, 20 Mar 2013 13:14:07 +0100
-Message-ID: <CAGiJk9cgNv2JCxwKu4OauRGY9zUBAcn71=JGZmw5wT_fOsuHNQ@mail.gmail.com>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	martin.jansa@gmail.com, raj.khem@gmail.com
-Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
+	Wed, 20 Mar 2013 07:01:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=vtYdhFC0WPTX8MFC6lempCePnBh9lF3SFXMGrUS319Y=;
+	b=m2oka9QNvXaHUK5mr1iaGezYda6HeSmQ6O1KFnfuy9YexM+Pi8rzUrqICjJhI/IDo/
+	zwFcFZ2s5BnN0d7kANULXPuqsJaQkljXih5uCN5TXtl3qQL+nT5E0DwLaI2gSA0MZ5Mv
+	HMGUUzpr8fHbEJSU8XU5yS0aH5W9e7ayi+w+tl+rZytxiw9ZtR32wEmAyzmnE3fH+dJE
+	24guJZxCtSsihKLpPj1/1oRL4X4PmzB474bO4lKElruBVfSt5hRwBA2oFxNPUE8+eUrc
+	j23bZZ63xlftLDkjQnVnBEiGkDEuXUeAH+Q4yCk7qKDUzeTuhnwySCiNL5zxniCKj3pv
+	PdaA==
+X-Received: by 10.68.220.68 with SMTP id pu4mr9162542pbc.26.1363788078842;
+	Wed, 20 Mar 2013 07:01:18 -0700 (PDT)
+Received: from sa-nc-ipg-172-23-0-104.static.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id 1sm2224841pba.32.2013.03.20.07.01.17
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 20 Mar 2013 07:01:17 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <51497DC8.5090006@linaro.org>
+Date: Wed, 20 Mar 2013 07:01:16 -0700
+Message-Id: <67231472-D70C-4E30-B790-44F6755B507B@gmail.com>
+References: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+	<51497DC8.5090006@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1503)
+Subject: Re: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 12:31:01 -0000
-Content-Type: text/plain; charset=UTF-8
-
-2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Mar 07, 2013 at 04:20:42PM +0100, Samuel Stirtzel wrote:
->> 2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
->> > On Thu, Mar 07, 2013 at 01:09:38PM +0100, Samuel Stirtzel wrote:
->> >> 2013/3/7 Koen Kooi <koen@dominion.thruhere.net>:
->> >> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> >> > ---
->> >> >  README | 2 +-
->> >> >  1 file changed, 1 insertion(+), 1 deletion(-)
->> >> >
->> >> > diff --git a/README b/README
->> >> > index 0635e10..cab1e21 100644
->> >> > --- a/README
->> >> > +++ b/README
->> >> > @@ -10,7 +10,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
->> >> >  Contributors:
->> >> >  Copyright 2012 - Kai Kang
->> >> >  Copyright 2013 - Khem Raj
->> >> > -Copyright 2012 - Koen Kooi
->> >> > +Copyright 2012, 2013 - Koen Kooi
->> >> >  Copyright 2012 - Robert Yang
->> >> >  Copyright 2011, 2012 - Samuel Stirtzel
->> >> >
->> >> > --
->> >> > 1.8.1.4
->> >> >
->> >>
->> >> Thanks for your patches,
->> >> I applied them all.
->> >
->> > Can you update status on:
->> > http://patches.openembedded.org/bundle/jama/meta-kde/?archive=both
->> >
->> > To keep patchwork clean?
->> >
->>
->> I would, but unfortunately I have no Patchwork account.
->> Also there seems to be no possibility to register a new account.
->
-> Adding khem to CC: I guess he can arrange account for you.
->
-
-Hi, so far I did not receive any info on how to create / access a
-patchwork account.
-Maybe something went wrong / got lost in transmission?
+X-List-Received-Date: Wed, 20 Mar 2013 14:18:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
---
-Regards
-Samuel
+On Mar 20, 2013, at 2:13 AM, Marcin Juszkiewicz =
+<marcin.juszkiewicz@linaro.org> wrote:
+
+> W dniu 20.03.2013 09:51, Khem Raj pisze:
+>> ERROR: QA Issue:
+>> =
+/b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.b=
+b:
+>> Variable pkg_postinst is set as not being package specific, please =
+fix
+>> this.
+>=20
+> meta-openembedded has 2.1.26 in meta-networking so meta-kde copy =
+should
+> be removed.
+
+
+earlier there was a case when meta-kde aimed to build without meta-oe or =
+meta-networking. I will leave it to meta-kde maintainer
+weather to depend  on meta-oe or not.
+
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
