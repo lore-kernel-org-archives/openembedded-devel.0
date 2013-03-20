@@ -1,36 +1,39 @@
-Received: from mail-ob0-f180.google.com ([209.85.214.180])
+Received: from mail-oa0-f43.google.com ([209.85.219.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <s.stirtzel@googlemail.com>) id 1UIGff-0004fG-3h
+	(envelope-from <s.stirtzel@googlemail.com>) id 1UIIAU-0008RV-OT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 11:55:05 +0100
-Received: by mail-ob0-f180.google.com with SMTP id ef5so1396756obb.25
+	Wed, 20 Mar 2013 13:31:00 +0100
+Received: by mail-oa0-f43.google.com with SMTP id l10so1654139oag.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
+	Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=mime-version:x-received:in-reply-to:references:date:message-id
 	:subject:from:to:content-type;
-	bh=F1cdAl1QsNYb0JeQOZ0pzCJ4/KIvV6/lgyLLRvlAja8=;
-	b=YP5sWFjirAtfDl6Uj5xd5kgqpKAIknr+3IkQ30tw9jcJJvjeHbD+0t23lpI3MNQYun
-	+eSYIH3xV4ju1ntrn2RvnNKFENDlA5Vzs6/6RaXZaDYlvxsHkL59kdMYkVj0XbyXaBbE
-	9mY9I6xI9kGdREHwrfL5Q9V5kDd5NdzgvL25Z6IjUHbnqs2hIXdLT+TDDCqFQ3qEqpo6
-	59V7m1lZov7ZxUtRLwGDxqM7hWPxFZ3nDwS4PPVHupQyGpO6RO5dMAzpFE/EX1pRGHSU
-	57+V2uwcUPrAcYy1ShybpM39qsfQDjSjKhY8cXyZ+ISVenhtMHKqXA1jKWYBIGTkfwf6
-	FdSg==
+	bh=cSr6ZbmZfSlRwxwk4WXtWVI+QaC2MzChTCtJcK7T0Kk=;
+	b=bPHGieXdDFe/6YldgZeRLKF/CVUrmf5Z/j6TPRCglOly85f6G0aYuqOPgKXF/byfW7
+	Q6m8/QFSCdbyj+DXk1XRfrRVPR2a9rA0WenXvXRU5OCz5PBYofO8LiSik8JexWFKqIGl
+	gw2JthWh408Zx9iz3w9i+LJWsvYc9dDOoGN3n6ecQHo/MlRUPsneCDFHrqYeH2yCROVs
+	z5UO/kGwsd7NLWOB9i/yfDJLg+co+XaJGZ7uJ/SZRmFGZNm7Uefay4CHhg40tQ8cET9S
+	b/yke4WTaMf8N0Fl0ENdJuyJ48wU371Hc6vYZkMVs/fLepkBICRFj1fPKNwm3KVbRBGA
+	DunA==
 MIME-Version: 1.0
-X-Received: by 10.182.127.115 with SMTP id nf19mr3671426obb.49.1363775891866; 
-	Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
-Received: by 10.60.76.199 with HTTP; Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
-In-Reply-To: <5149872D.7090803@linaro.org>
-References: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
-	<51497DC8.5090006@linaro.org>
-	<CAGiJk9ejLAdb3LWpTDpbVaPaDMsGNsX26yB3gHOExA46XW5L1g@mail.gmail.com>
-	<5149872D.7090803@linaro.org>
-Date: Wed, 20 Mar 2013 11:38:11 +0100
-Message-ID: <CAGiJk9euivOqJU1_LR0cRVgwe9WtYDwbCAwq9WFiPuSd9ZOaZA@mail.gmail.com>
+X-Received: by 10.182.127.115 with SMTP id nf19mr3858991obb.49.1363781647450; 
+	Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
+Received: by 10.60.76.199 with HTTP; Wed, 20 Mar 2013 05:14:07 -0700 (PDT)
+In-Reply-To: <20130307155654.GQ32228@jama.dyndns-home.com>
+References: <1362649839-9160-1-git-send-email-koen@dominion.thruhere.net>
+	<1362649839-9160-3-git-send-email-koen@dominion.thruhere.net>
+	<CAGiJk9fvW_5jNScu23YvC81i-R481ykNMRaj8aHM92etym8m1g@mail.gmail.com>
+	<20130307150552.GN32228@jama.dyndns-home.com>
+	<CAGiJk9cS8WG5pyJ7Op1XTqxTXk_xRhcAUGXq4hie01FL3vi5SA@mail.gmail.com>
+	<20130307155654.GQ32228@jama.dyndns-home.com>
+Date: Wed, 20 Mar 2013 13:14:07 +0100
+Message-ID: <CAGiJk9cgNv2JCxwKu4OauRGY9zUBAcn71=JGZmw5wT_fOsuHNQ@mail.gmail.com>
 From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	martin.jansa@gmail.com, raj.khem@gmail.com
+Subject: Re: [meta-kde][PATCH 3/3] README: update contributor list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,32 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 10:55:06 -0000
+X-List-Received-Date: Wed, 20 Mar 2013 12:31:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
-2013/3/20 Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>:
-> W dniu 20.03.2013 10:32, Samuel Stirtzel pisze:
->> 2013/3/20 Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>:
->>> W dniu 20.03.2013 09:51, Khem Raj pisze:
->>>> ERROR: QA Issue:
->>>> /b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
->>>> Variable pkg_postinst is set as not being package specific, please fix
->>>> this.
->>>
->>> meta-openembedded has 2.1.26 in meta-networking so meta-kde copy should
->>> be removed.
->>>
+2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
+> On Thu, Mar 07, 2013 at 04:20:42PM +0100, Samuel Stirtzel wrote:
+>> 2013/3/7 Martin Jansa <martin.jansa@gmail.com>:
+>> > On Thu, Mar 07, 2013 at 01:09:38PM +0100, Samuel Stirtzel wrote:
+>> >> 2013/3/7 Koen Kooi <koen@dominion.thruhere.net>:
+>> >> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> >> > ---
+>> >> >  README | 2 +-
+>> >> >  1 file changed, 1 insertion(+), 1 deletion(-)
+>> >> >
+>> >> > diff --git a/README b/README
+>> >> > index 0635e10..cab1e21 100644
+>> >> > --- a/README
+>> >> > +++ b/README
+>> >> > @@ -10,7 +10,7 @@ Samuel Stirtzel <s.stirtzel@googlemail.com>
+>> >> >  Contributors:
+>> >> >  Copyright 2012 - Kai Kang
+>> >> >  Copyright 2013 - Khem Raj
+>> >> > -Copyright 2012 - Koen Kooi
+>> >> > +Copyright 2012, 2013 - Koen Kooi
+>> >> >  Copyright 2012 - Robert Yang
+>> >> >  Copyright 2011, 2012 - Samuel Stirtzel
+>> >> >
+>> >> > --
+>> >> > 1.8.1.4
+>> >> >
+>> >>
+>> >> Thanks for your patches,
+>> >> I applied them all.
+>> >
+>> > Can you update status on:
+>> > http://patches.openembedded.org/bundle/jama/meta-kde/?archive=both
+>> >
+>> > To keep patchwork clean?
+>> >
 >>
->> Hi, it seems there are some differences in the recipes, maybe we can
->> work through them.
->>
->> Is BDB 5 working correctly with this version, without the patch [1]?
+>> I would, but unfortunately I have no Patchwork account.
+>> Also there seems to be no possibility to register a new account.
 >
-> It built properly against db 5.3.21 - support was added upsteam.
+> Adding khem to CC: I guess he can arrange account for you.
 >
 
-Done
-
+Hi, so far I did not receive any info on how to create / access a
+patchwork account.
+Maybe something went wrong / got lost in transmission?
 
 
 --
