@@ -1,40 +1,33 @@
-Received: from mail-ob0-f174.google.com ([209.85.214.174])
+Received: from mail-pb0-f46.google.com ([209.85.160.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eu@felipetonello.com>) id 1UI5ZC-0004Km-R2
+	(envelope-from <raj.khem@gmail.com>) id 1UIF0T-0000ss-5B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 00:04:13 +0100
-Received: by mail-ob0-f174.google.com with SMTP id 16so1031028obc.5
+	Wed, 20 Mar 2013 10:08:34 +0100
+Received: by mail-pb0-f46.google.com with SMTP id uo15so1177917pbc.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Mar 2013 15:46:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=KBRR7WXeIOLMuyuIdHgguU9/W88kQZl/bCAhJX1jOps=;
-	b=heKMrjvjXWpHIshnywmHwJxgRp8ss7aO7Oa1xhenXI/IjyoNmXFLB+aY/dqxG1Kv2H
-	ODKewAPk0PxpIotontCDIoBdFrKUF3+XfBjfz9qvzJ6N8NKIRzM4pN1kP8OSzUJaEGw4
-	r9isHufE3n9txeGEtPkBZXGneMN9V/7AjE5JmV08MaJiIIwGr5LHstPSXGsG5hGWO02+
-	EmiX60h/CF+2835KTksBtAJ1/PnsrkMVfw1T9WXXTfgbUpkL21bOXpCvxf2/ssvLx+Nw
-	rxBrrcLaSl2DoiL7psq8Cv58Xsw8rN0NMxWkmH0XzFM0rGUICdMQ3JNOZ5suW36MrP2b
-	SJZg==
-X-Received: by 10.182.185.37 with SMTP id ez5mr2730474obc.73.1363733202242;
-	Tue, 19 Mar 2013 15:46:42 -0700 (PDT)
-Received: from [192.168.48.44] (wsip-70-183-20-162.oc.oc.cox.net.
-	[70.183.20.162])
-	by mx.google.com with ESMTPS id qk4sm13606492obc.5.2013.03.19.15.46.39
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 19 Mar 2013 15:46:41 -0700 (PDT)
-Message-ID: <5148EAD2.9060304@felipetonello.com>
-Date: Tue, 19 Mar 2013 15:46:42 -0700
-From: Felipe Ferreri Tonello <eu@felipetonello.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQkfwMVj798A+QHRiWcvD2a6+eKdnqZn5dZ1bLCvdu08yQhuziQxEC2MHUu/YU6iOwsHMQXN
-Subject: [JOB] Full-time position in California
+	Wed, 20 Mar 2013 01:51:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=ExMV1CJb+imgQ/IUsNJFuTEi+j5N1/bRmsGgdj0C5oY=;
+	b=SSQE3HKHCihltn++jXl3U9uH+xLNAfux93sJiAARGMrQykeLBUiiP//1Z8ijxXLWQX
+	p1ZlYN6zVjbghjLRrR6wXJ6gJs9MIdOSyZjekVw1y0OoJ5Zr7IeZck3t8ZHtfUlIhczn
+	p4l5u54qWMkYJsCaAtzOv3+R7T6axt+9lmuVQMJoGx7SK8ErN0y2IfVz77eHpq1uO4Cr
+	hwuKJ0wyYEo5rz+Cadukjr4IZKiGaBogiHAaJOd37ZIq/lIOO5n+fGCvaSjEZHhHl0st
+	/gMZVKMkO6DPVieA3Fvo19dJSNrOWgcLnvmc/3eqb3fDP5ETb0vS1U+VQtXeyHPeD0Di
+	kX+A==
+X-Received: by 10.66.146.202 with SMTP id te10mr7922209pab.64.1363769493429;
+	Wed, 20 Mar 2013 01:51:33 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id ol7sm1369443pbb.14.2013.03.20.01.51.32
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 20 Mar 2013 01:51:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Mar 2013 01:51:08 -0700
+Message-Id: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 23:04:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Mar 2013 09:08:35 -0000
 
-Hi,
+Fixes QA errors:
 
-I'm sorry for this off-topic. But I think it's a good thing for oe 
-developers in general.
+ERROR: QA Issue:
+/b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
+Variable pkg_postinst is set as not being package specific, please fix
+this.
 
-I work for Cercacor Labs, and we are looking for a full-time yocto/oe 
-Linux Engineer.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-misc-support/cyrus-sasl_2.1.19.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-About the company: We were medical device R&D company for Masimo. Now we 
-are developing out own medical device based on Linux. Here we develop 
-everything, since hardware, Linux kernel, middleware to multi-touch 
-applications.
+diff --git a/recipes-misc-support/cyrus-sasl_2.1.19.bb b/recipes-misc-support/cyrus-sasl_2.1.19.bb
+index 2c9d359..da9a709 100644
+--- a/recipes-misc-support/cyrus-sasl_2.1.19.bb
++++ b/recipes-misc-support/cyrus-sasl_2.1.19.bb
+@@ -47,7 +47,7 @@ do_install () {
+ FILES_${PN} += "${prefix}/lib/sasl2/*.so*"
+ FILES_${PN}-dev += "${libdir}/sasl2/*.la ${libdir}/sasl2/*.a"
+ 
+-pkg_postinst () {
++pkg_postinst_${PN} () {
+         grep cyrus /etc/passwd || adduser --disabled-password --home=/var/spool/mail --ingroup mail -g "Cyrus sasl" cyrus
+     echo "cyrus" | saslpasswd2 -p -c cyrus
+     chgrp mail /etc/sasldb2
+-- 
+1.7.9.5
 
-Well.. The only issue is that due the time frame here we can't hire 
-anyone that requires H1B. So this person needs to be an American Citizen 
-or H1B holder.
-
-I'm glad to provide you more information. Please contact me at 
-ftonello@cercacor.com.
-
-BR,
-
-Felipe
 
 
