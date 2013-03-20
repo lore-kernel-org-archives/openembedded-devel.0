@@ -1,37 +1,36 @@
-Received: from mail-pb0-f43.google.com ([209.85.160.43])
+Received: from mail-ob0-f180.google.com ([209.85.214.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UIG9h-0003oC-4j
+	(envelope-from <s.stirtzel@googlemail.com>) id 1UIGff-0004fG-3h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Mar 2013 11:22:02 +0100
-Received: by mail-pb0-f43.google.com with SMTP id md12so1227274pbc.2
+	Wed, 20 Mar 2013 11:55:05 +0100
+Received: by mail-ob0-f180.google.com with SMTP id ef5so1396756obb.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Mar 2013 03:05:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=pidMxyxoj/3z4UUoMzkuK/MkcCUWSMLK5M7ZeU8UO9w=;
-	b=PpuURKpd4/PxHvRmUBX3QsHUSdfeR1It1sRVQOG2m1RlR5WKCFFdxdPqiyvOSyUYN6
-	hFWT+8I9iWxLgd3Sm77PgkBEQ7YjNgiKaU/4oskiQ7/cX7abSc7VZOuUq6SXLdYJXiso
-	qInzvifXsvqzcdOsQ/pbDCOWa5dwMUj9sITRjkXLVOagu03oZ8phWad4bYL9OKFyhkQS
-	ZEZzDlfChvBP92B9scI/oSxCDRTX1juA/wCHFj1CRt/i/2tncayKLs+tNYc+MLywxffF
-	w8+eI6VFfEQasGQeppvUbgJO5KP0CGh3jE04fz8l18GA42+lzNSROgvWFVevXb8gLWOj
-	XmiA==
-X-Received: by 10.68.252.193 with SMTP id zu1mr4573344pbc.175.1363773909599;
-	Wed, 20 Mar 2013 03:05:09 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id kb3sm1573904pbc.21.2013.03.20.03.05.06
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 20 Mar 2013 03:05:08 -0700 (PDT)
-Date: Wed, 20 Mar 2013 11:05:03 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130320100503.GA3220@jama>
-References: <1363730433-8555-1-git-send-email-ftonello@cercacor.com>
+	Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=F1cdAl1QsNYb0JeQOZ0pzCJ4/KIvV6/lgyLLRvlAja8=;
+	b=YP5sWFjirAtfDl6Uj5xd5kgqpKAIknr+3IkQ30tw9jcJJvjeHbD+0t23lpI3MNQYun
+	+eSYIH3xV4ju1ntrn2RvnNKFENDlA5Vzs6/6RaXZaDYlvxsHkL59kdMYkVj0XbyXaBbE
+	9mY9I6xI9kGdREHwrfL5Q9V5kDd5NdzgvL25Z6IjUHbnqs2hIXdLT+TDDCqFQ3qEqpo6
+	59V7m1lZov7ZxUtRLwGDxqM7hWPxFZ3nDwS4PPVHupQyGpO6RO5dMAzpFE/EX1pRGHSU
+	57+V2uwcUPrAcYy1ShybpM39qsfQDjSjKhY8cXyZ+ISVenhtMHKqXA1jKWYBIGTkfwf6
+	FdSg==
 MIME-Version: 1.0
-In-Reply-To: <1363730433-8555-1-git-send-email-ftonello@cercacor.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "Felipe F. Tonello" <ftonello@cercacor.com>
-Subject: Re: [meta-oe][PATCH v4] fingerterm: Added 1.0.2 recipe
+X-Received: by 10.182.127.115 with SMTP id nf19mr3671426obb.49.1363775891866; 
+	Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
+Received: by 10.60.76.199 with HTTP; Wed, 20 Mar 2013 03:38:11 -0700 (PDT)
+In-Reply-To: <5149872D.7090803@linaro.org>
+References: <1363769468-20321-1-git-send-email-raj.khem@gmail.com>
+	<51497DC8.5090006@linaro.org>
+	<CAGiJk9ejLAdb3LWpTDpbVaPaDMsGNsX26yB3gHOExA46XW5L1g@mail.gmail.com>
+	<5149872D.7090803@linaro.org>
+Date: Wed, 20 Mar 2013 11:38:11 +0100
+Message-ID: <CAGiJk9euivOqJU1_LR0cRVgwe9WtYDwbCAwq9WFiPuSd9ZOaZA@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-kde][PATCH] cyrus-sasl: Make pkg_postinst/rm package specfic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,119 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2013 10:22:02 -0000
-X-Groupsio-MsgNum: 43617
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HcAYCG3uE/tztfnV"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Mar 2013 10:55:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
---HcAYCG3uE/tztfnV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2013/3/20 Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>:
+> W dniu 20.03.2013 10:32, Samuel Stirtzel pisze:
+>> 2013/3/20 Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>:
+>>> W dniu 20.03.2013 09:51, Khem Raj pisze:
+>>>> ERROR: QA Issue:
+>>>> /b/kraj/angstrom/sources/meta-kde/recipes-misc-support/cyrus-sasl_2.1.19.bb:
+>>>> Variable pkg_postinst is set as not being package specific, please fix
+>>>> this.
+>>>
+>>> meta-openembedded has 2.1.26 in meta-networking so meta-kde copy should
+>>> be removed.
+>>>
+>>
+>> Hi, it seems there are some differences in the recipes, maybe we can
+>> work through them.
+>>
+>> Is BDB 5 working correctly with this version, without the patch [1]?
+>
+> It built properly against db 5.3.21 - support was added upsteam.
+>
 
-On Tue, Mar 19, 2013 at 03:00:33PM -0700, eu@felipetonello.com wrote:
-> From: "Felipe F. Tonello" <ftonello@cercacor.com>
->=20
-> Fingerterm is a terminal emulator for Nokia Harmattan, but it works in an=
-y Qt4
-> environment.
->=20
-> This recipe can be extended by a .bbappend to add .desktop, icon and othe=
-rs to
-> the target device.
+Done
 
-This part of commit message can be dropped now right?
 
-I'll drop it before pushing it (if it builds OK on jenkins) no need for
-v5 if nobody sends more comments.
 
-> Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
-> ---
->  meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb |   44 +++++++++++++++=
-++++++
->  1 file changed, 44 insertions(+)
->  create mode 100644 meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
->=20
-> diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/=
-recipes-qt/fingerterm/fingerterm_1.0.2.bb
-> new file mode 100644
-> index 0000000..59533a4
-> --- /dev/null
-> +++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
-> @@ -0,0 +1,44 @@
-> +DESCRIPTION =3D "A terminal emulator for Harmattan (Nokia N9/N950) with =
-a custom \
-> +virtual keyboard and usability-enhancing features such as URL grabber, p=
-an \
-> +gestures and customizable shortcut menu. Designed especially to be used =
-with \
-> +screen and irssi."
-> +HOMEPAGE =3D "http://hqh.unlink.org/harmattan"
-> +LICENSE =3D "GPLv3"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +SECTION =3D "qt/app"
-> +
-> +PR =3D "r0"
-> +
-> +inherit qt4x11 pkgconfig
-> +
-> +SRC_URI =3D " \
-> +  http://hqh.unlink.org/harmattan/fingerterm-${PV}.tar.gz \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "d53b0f463c025583cd52accf95715448"
-> +SRC_URI[sha256sum] =3D "c21a07cc411d09739bd7fa248eba2bf96427b3f032382a04=
-4b6674dd82d95150"
-> +
-> +S =3D "${WORKDIR}/${PN}"
-> +
-> +FILES_${PN} =3D " \
-> +  ${bindir}/${PN} \
-> +  ${datadir}/applications/${PN}.desktop \
-> +  ${datadir}/pixmaps/${PN}.png \
-> +"
-> +
-> +do_install() {
-> +  install -d ${D}${bindir}
-> +  install -m 0744 ${S}/${PN} ${D}${bindir}
-> +
-> +  sed -i -e '/Exec.*/d' fingerterm.desktop
-> +  sed -i -e '/Icon.*/d' fingerterm.desktop
-> +
-> +  echo 'Exec=3D${bindir}/${PN}' >> fingerterm.desktop
-> +  echo 'Icon=3D${PN}' >> fingerterm.desktop
-> +
-> +  install -d ${D}${datadir}/applications
-> +  install -m 0644 ${S}/${PN}.desktop ${D}${datadir}/applications
-> +
-> +  install -d ${D}${datadir}/pixmaps
-> +  install -m 0644 ${S}/${PN}.png ${D}${datadir}/pixmaps
-> +}
-> \ No newline at end of file
-> --=20
-> 1.7.9.5
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--
+Regards
+Samuel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---HcAYCG3uE/tztfnV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlFJic8ACgkQN1Ujt2V2gBxZOwCfTyCdPx1MMThhF10v0bdcE3ng
-ydEAnA+1aezTLaxgRixKWh70wjMFh6p2
-=/MpN
------END PGP SIGNATURE-----
-
---HcAYCG3uE/tztfnV--
