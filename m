@@ -1,24 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1UIktk-0005lG-1n
+	(envelope-from <Aws.Ismail@windriver.com>) id 1UIl43-0006La-Ug
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Mar 2013 20:11:36 +0100
+	Thu, 21 Mar 2013 20:22:37 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2LIsfqg017571
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2LJ5MQ5026344
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2013 11:54:41 -0700 (PDT)
+	Thu, 21 Mar 2013 12:05:22 -0700 (PDT)
 Received: from localhost.localdomain (128.224.147.212) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 21 Mar 2013 11:54:42 -0700
+	14.2.342.3; Thu, 21 Mar 2013 12:05:22 -0700
 From: Aws Ismail <aws.ismail@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Mar 2013 14:54:41 -0400
-Message-ID: <1363892081-14280-2-git-send-email-aws.ismail@windriver.com>
+Date: Thu, 21 Mar 2013 15:05:21 -0400
+Message-ID: <1363892721-25929-2-git-send-email-aws.ismail@windriver.com>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1363892081-14280-1-git-send-email-aws.ismail@windriver.com>
-References: <1363892081-14280-1-git-send-email-aws.ismail@windriver.com>
+In-Reply-To: <1363892721-25929-1-git-send-email-aws.ismail@windriver.com>
+References: <1363892721-25929-1-git-send-email-aws.ismail@windriver.com>
 MIME-Version: 1.0
 Cc: joe.macdonald@windriver.com
 Subject: [meta-networking][PATCH 1/1] Quagga has no snmp support, unrecognized options --enable-tcp-md5
@@ -35,7 +35,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2013 19:11:49 -0000
+X-List-Received-Date: Thu, 21 Mar 2013 19:22:41 -0000
 Content-Type: text/plain
 
 1. Quagga's tcp-md5 has been renamed to linux24-tcp-md5
@@ -56,7 +56,7 @@ Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
  1 files changed, 19 insertions(+), 4 deletions(-)
 
 diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 6ee2455..13c7729 100644
+index 6ee2455..9a70d18 100644
 --- a/meta-networking/recipes-protocols/quagga/quagga.inc
 +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
 @@ -9,11 +9,13 @@ HOMEPAGE = "http://www.quagga.net/"
@@ -64,7 +64,7 @@ index 6ee2455..13c7729 100644
  LICENSE = "GPL-2.0 & LGPL-2.0"
  DEPENDS = "readline ncurses perl-native"
 +DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
-+NMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
++SNMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
  
  LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
                      file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
