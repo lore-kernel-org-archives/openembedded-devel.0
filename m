@@ -1,11 +1,11 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1UIktj-0005lF-NR
+	(envelope-from <Aws.Ismail@windriver.com>) id 1UIktk-0005lG-1n
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 21 Mar 2013 20:11:36 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2LIsfnW024228
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2LIsfqg017571
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 21 Mar 2013 11:54:41 -0700 (PDT)
@@ -14,12 +14,14 @@ Received: from localhost.localdomain (128.224.147.212) by
 	14.2.342.3; Thu, 21 Mar 2013 11:54:42 -0700
 From: Aws Ismail <aws.ismail@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Mar 2013 14:54:40 -0400
-Message-ID: <1363892081-14280-1-git-send-email-aws.ismail@windriver.com>
+Date: Thu, 21 Mar 2013 14:54:41 -0400
+Message-ID: <1363892081-14280-2-git-send-email-aws.ismail@windriver.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1363892081-14280-1-git-send-email-aws.ismail@windriver.com>
+References: <1363892081-14280-1-git-send-email-aws.ismail@windriver.com>
 MIME-Version: 1.0
 Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH 0/1] Quagga has no snmp support, unrecognized options --enable-tcp-md5
+Subject: [meta-networking][PATCH 1/1] Quagga has no snmp support, unrecognized options --enable-tcp-md5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,21 +36,95 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 Mar 2013 19:11:49 -0000
-X-List-Received-Date: Thu, 21 Mar 2013 19:11:49 -0000
 Content-Type: text/plain
 
-This commit introduces a set of changes to do the following:
+1. Quagga's tcp-md5 has been renamed to linux24-tcp-md5
 
-1. Update the configure option for quagga to replace the old --enable-tcp-md5
-2. Add snmp support based on DISTRO_FEATURES availability.
-3. Install sample runtime configuration files for quagga and its daemons.
-4. Make sure the post install script is executed at the right stage.
+2. net-snmp needs to have mib-modules=smux enabled to enable
+quagga to support snmp. Make the net-snmp option dependent
+on the DISTRO_FEATURE snmp.
 
-Aws Ismail (1):
-  Quagga has no snmp support, unrecognized options --enable-tcp-md5
+3. Misc: install the sample conf files for quagga. Also,
+Make sure that the post install script is being run
+on the target rather than during the rootfs creation
+stage.
 
+Signed-off-by: Amy Fong <amy.fong@windriver.com>
+Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+---
  .../recipes-protocols/quagga/quagga.inc            |   23 ++++++++++++++++---
  1 files changed, 19 insertions(+), 4 deletions(-)
+
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 6ee2455..13c7729 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -9,11 +9,13 @@ HOMEPAGE = "http://www.quagga.net/"
+ SECTION = "network"
+ LICENSE = "GPL-2.0 & LGPL-2.0"
+ DEPENDS = "readline ncurses perl-native"
++DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
++NMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ QUAGGASUBDIR = ""
+ # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
+@@ -46,7 +48,8 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
+                 --enable-configfile-mask=0640 \
+                 --enable-logfile-mask=0640 \
+                 --enable-rtadv \
+-                --enable-tcp-md5"
++                --enable-linux24-tcp-md5 \
++                ${SNMP_CONF}"
+ 
+ do_install () {
+         # Install init script and default settings
+@@ -57,6 +60,12 @@ do_install () {
+         install -m 0755 ${WORKDIR}/quagga.init ${D}${sysconfdir}/init.d/quagga
+         install -m 0755 ${WORKDIR}/watchquagga.init ${D}${sysconfdir}/init.d/watchquagga
+         install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
++
++        # Install sample configurations for the daemons
++        for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
++            install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
++        done
++
+         # Install quagga
+         oe_runmake install DESTDIR=${D} prefix=${prefix} \
+                 sbindir=${sbindir} \
+@@ -106,17 +115,23 @@ INITSCRIPT_PARAMS_${PN}                 = "defaults 15 85"
+ INITSCRIPT_NAME_${PN}-watchquagga       = "watchquagga"
+ INITSCRIPT_PARAMS_${PN}-watchquagga     = "defaults 90 10"
+ 
++# Add quagga's user and group
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
+ USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga quagga"
+ 
+ pkg_postinst_${PN} () {
+-	for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
++    if [ "x$D" != "x" ] ; then
++        exit 1
++    fi
++    for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
+ 	chown quagga:quaggavty ${sysconfdir}/quagga
+ 	chown quagga:quagga ${sysconfdir}/quagga/*.conf
+ 	chmod 750 ${sysconfdir}/quagga
+ 	chown 640 ${sysconfdir}/quagga/*.conf
+-	${sysconfdir}/init.d/populate-volatile.sh update
++    if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
++        ${sysconfdir}/init.d/populate-volatile.sh update
++    fi
+ }
+ 
+ # Stop apps before uninstall
+-- 
+1.7.0.4
 
 
 
