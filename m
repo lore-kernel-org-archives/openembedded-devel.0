@@ -1,25 +1,18 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Aws.Ismail@windriver.com>) id 1UIl43-0006LY-7V
+	(envelope-from <joe.macdonald@windriver.com>) id 1UImCh-00051S-9w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Mar 2013 20:22:37 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2LJ5LiA017809
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2013 12:05:21 -0700 (PDT)
-Received: from localhost.localdomain (128.224.147.212) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 21 Mar 2013 12:05:22 -0700
-From: Aws Ismail <aws.ismail@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Mar 2013 15:05:20 -0400
-Message-ID: <1363892721-25929-1-git-send-email-aws.ismail@windriver.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH 0/1][V2] Quagga has no snmp support, unrecognized options --enable-tcp-md5
+	Thu, 21 Mar 2013 21:35:16 +0100
+Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
+	[128.224.147.66])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2LKIKu3006936;
+	Thu, 21 Mar 2013 13:18:20 -0700 (PDT)
+From: Joe MacDonald <joe.macdonald@windriver.com>
+To: openembedded-devel@lists.openembedded.org, marcin.juszkiewicz@linaro.org
+Date: Thu, 21 Mar 2013 16:18:17 -0400
+Message-Id: <1363897098-26498-1-git-send-email-joe.macdonald@windriver.com>
+X-Mailer: git-send-email 1.8.2
+Subject: cyrus-sasl2: Clean up QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,26 +26,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2013 19:22:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Mar 2013 20:35:17 -0000
 
-*** V2 ***
-Fix typo in the SNMP CONF line
-*** V2 ***
+This resolves the situation for my builds and is based on a fix we did in a
+previous tree I worked on.
 
-This commit introduces a set of changes to do the following:
+Marcin:  Would you be able to confirm for me that this doesn't break anything
+of yours?  I'm using this for building cyrus-sasl to support building OpenLDAP
+myself, but I'd like to know it doesn't break anything of yours, since you
+indicated you were using the current, RPATH-messy, version as a build
+dependency.
 
-1. Update the configure option for quagga to replace the old --enable-tcp-md5
-2. Add snmp support based on DISTRO_FEATURES availability.
-3. Install sample runtime configuration files for quagga and its daemons.
-4. Make sure the post install script is executed at the right stage.
-
-
-Aws Ismail (1):
-  Quagga has no snmp support, unrecognized options --enable-tcp-md5
-
- .../recipes-protocols/quagga/quagga.inc            |   23 ++++++++++++++++---
- 1 files changed, 19 insertions(+), 4 deletions(-)
+-- 
+-Joe.
+:wq
 
 
 
