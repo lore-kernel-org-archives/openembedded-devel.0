@@ -1,40 +1,40 @@
-Received: from mail-wi0-f170.google.com ([209.85.212.170])
+Received: from mail-wi0-f177.google.com ([209.85.212.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UJ6EP-0007fK-HJ
+	(envelope-from <ross.burton@intel.com>) id 1UJ6ET-0007ft-Gq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 18:58:21 +0100
-Received: by mail-wi0-f170.google.com with SMTP id hm11so8911114wib.3
+	Fri, 22 Mar 2013 18:58:27 +0100
+Received: by mail-wi0-f177.google.com with SMTP id hm14so4662949wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 10:41:27 -0700 (PDT)
+	Fri, 22 Mar 2013 10:41:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references:x-gm-message-state;
-	bh=wq1aJGYJ1uedtWsJBjKqPKTFA75oShzJUPHkPnIT998=;
-	b=d2HvyfHYspxSGUS89hsBqfsm4tvpiYT4nOQI3Lh1N7nLM+QC/3BXD+NJZ5rMbdEdUH
-	V9SWg/3eqLl/MxjI7DhFcfo5iLh5mXeDyenoOVbu7QkVGSClWn2zwETI+zr03mzjY5UM
-	OKjuCMZ8je9LjpIDSRlA//SW2tgDG4+VBMf7jWmIYnAyFAHFYEHjETdV9qFhM17yyB6r
-	UV4vIsl0oz+0uJZ43NceH27GDVBBLmA80BTlxEpkuKJO/AKYNGWDry6fHCs+ExEmywnB
-	GM8lQe0gOTWFQSvBq8YWIa8T+LERNlE9KUg64KNXxZuXZWceENkGenGAxe3l1+fwvS3W
-	qjjg==
-X-Received: by 10.180.81.193 with SMTP id c1mr4611154wiy.19.1363974087678;
-	Fri, 22 Mar 2013 10:41:27 -0700 (PDT)
+	bh=SgfdDX4Q7LQZUxidWPESHVcmWite6DutaZ6N72gfAEI=;
+	b=HTH1IQTu7dI0G/cCVFwERRBbUl0lTtzVUzGqa+/vh378HrT4W51FdI9NXlyMw3ZHQO
+	5cNmHzFvO08grxFM1Mv+0dgQbuiKWEP9d9jEwGyMhBk4cmRuIpuD4OlLRPjsDBu7Hcn+
+	A5tVvCKuHqZ1dHuyqip7/Pw1WbITKcXHAyiDg5dAqslS0gEJN7nk0T9rqG+2Bo3HF16C
+	RoFe4t4eRPHeVXlcH2e0bPwN12dQBM794h9uULL3ME/tqbI33R8h/ofZuQWHw1xPzPub
+	ttf9aizI5K8eb1nJkLg9xy3xtZ8FNBcL2H6Cenkr4nuMZdApX0/5mg9oKGc1Yr9YTChk
+	lJ9g==
+X-Received: by 10.194.81.40 with SMTP id w8mr4770122wjx.14.1363974091307;
+	Fri, 22 Mar 2013 10:41:31 -0700 (PDT)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id dm9sm12260880wib.3.2013.03.22.10.41.26
+	by mx.google.com with ESMTPS id dm9sm12260880wib.3.2013.03.22.10.41.29
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 10:41:27 -0700 (PDT)
+	Fri, 22 Mar 2013 10:41:30 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-core@lists.openembedded.org
-Date: Fri, 22 Mar 2013 17:38:22 +0000
-Message-Id: <59f306671ae2b52bec53ecb16847ca7998e11e28.1363973088.git.ross.burton@intel.com>
+Date: Fri, 22 Mar 2013 17:38:24 +0000
+Message-Id: <e2f22f9f6827dec810d23e8dc9b41606feb2a79a.1363973088.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
 References: <cover.1363973088.git.ross.burton@intel.com>
 In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
 References: <cover.1363973088.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQntNjcrhZ3rd5RKLhmQkDvwqKj6ljD1P6lRow3S/SDoM1hHaBfVasmHqVSEWtMJmzo2WcyC
+X-Gm-Message-State: ALoCoQmE1g/vQkcUuWJIwYqj3xGk3MkOobQvPK18GqAyPi46N6oNEqGRuPrvnYk1T7r4SJIu3jTv
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/22] busybox: add strictatime support to mount
+Subject: [PATCH 04/22] systemd: merge udev-systemd into udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,87 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 17:58:25 -0000
+X-List-Received-Date: Fri, 22 Mar 2013 17:58:35 -0000
 
-systemd uses strictatime when mounting tmpfs.  Luckily this is already supported
-upstream, so backport the patch from git.
+Merge the contents of udev-systemd, which is just the service files, into udev
+itself.  This split wasn't intended to ever happen in oe-core.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../busybox/busybox-1.20.2/strict-atime.patch      |   49 ++++++++++++++++++++
- meta/recipes-core/busybox/busybox_1.20.2.bb        |    3 +-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta/recipes-core/busybox/busybox-1.20.2/strict-atime.patch
+ meta/recipes-core/systemd/systemd_197.bb |    9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta/recipes-core/busybox/busybox-1.20.2/strict-atime.patch b/meta/recipes-core/busybox/busybox-1.20.2/strict-atime.patch
-new file mode 100644
-index 0000000..8696427
---- /dev/null
-+++ b/meta/recipes-core/busybox/busybox-1.20.2/strict-atime.patch
-@@ -0,0 +1,49 @@
-+Add support for the "strictatime" mount option.
-+
-+Upstream-Status: Backport [9ad8979ff15e1b894ee1f4bb6a2535a1a2c20d65]
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+
-+Index: busybox-1.20.2/util-linux/mount.c
-+===================================================================
-+--- busybox-1.20.2.orig/util-linux/mount.c	2012-07-02 15:08:25.000000000 +0100
-++++ busybox-1.20.2/util-linux/mount.c	2013-03-22 15:37:31.340277463 +0000
-+@@ -113,6 +113,12 @@
-+ #ifndef MS_RELATIME
-+ # define MS_RELATIME    (1 << 21)
-+ #endif
-++#ifndef MS_STRICTATIME
-++# define MS_STRICTATIME (1 << 24)
-++#endif
-++
-++/* Any ~MS_FOO value has this bit set: */
-++#define BB_MS_INVERTED_VALUE (1u << 31)
-+ 
-+ #include "libbb.h"
-+ #if ENABLE_FEATURE_MOUNT_LABEL
-+@@ -239,6 +245,7 @@
-+ 		/* "nomand"      */ ~MS_MANDLOCK,
-+ 		/* "relatime"    */ MS_RELATIME,
-+ 		/* "norelatime"  */ ~MS_RELATIME,
-++		/* "strictatime" */ MS_STRICTATIME,
-+ 		/* "loud"        */ ~MS_SILENT,
-+ 		/* "rbind"       */ MS_BIND|MS_RECURSIVE,
-+ 
-+@@ -295,6 +302,7 @@
-+ 		"nomand\0"
-+ 		"relatime\0"
-+ 		"norelatime\0"
-++		"strictatime\0"
-+ 		"loud\0"
-+ 		"rbind\0"
-+ 
-+@@ -466,8 +474,8 @@
-+ 		// Find this option in mount_options
-+ 		for (i = 0; i < ARRAY_SIZE(mount_options); i++) {
-+ 			if (strcasecmp(option_str, options) == 0) {
-+-				long fl = mount_options[i];
-+-				if (fl < 0)
-++				unsigned long fl = mount_options[i];
-++				if (fl & BB_MS_INVERTED_VALUE)
-+ 					flags &= fl;
-+ 				else
-+ 					flags |= fl;
-diff --git a/meta/recipes-core/busybox/busybox_1.20.2.bb b/meta/recipes-core/busybox/busybox_1.20.2.bb
-index a02cd38..c09a492 100644
---- a/meta/recipes-core/busybox/busybox_1.20.2.bb
-+++ b/meta/recipes-core/busybox/busybox_1.20.2.bb
-@@ -30,7 +30,8 @@ SRC_URI = "http://www.busybox.net/downloads/busybox-${PV}.tar.bz2;name=tarball \
-            file://stat-usr-bin.patch \
-            file://busybox-syslog.service.in \
-            file://busybox-klogd.service.in \
--           file://testsuite-du-du-k-works-fix-false-positive.patch"
-+           file://testsuite-du-du-k-works-fix-false-positive.patch \
-+           file://strict-atime.patch"
+diff --git a/meta/recipes-core/systemd/systemd_197.bb b/meta/recipes-core/systemd/systemd_197.bb
+index dc54f36..9a66a4e 100644
+--- a/meta/recipes-core/systemd/systemd_197.bb
++++ b/meta/recipes-core/systemd/systemd_197.bb
+@@ -173,7 +173,7 @@ FILES_${PN} = " ${base_bindir}/* \
+ FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
+ FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd"
  
- SRC_URI[tarball.md5sum] = "e025414bc6cd79579cc7a32a45d3ae1c"
- SRC_URI[tarball.sha256sum] = "eb13ff01dae5618ead2ef6f92ba879e9e0390f9583bd545d8789d27cf39b6882"
+-RDEPENDS_${PN} += "dbus udev-systemd"
++RDEPENDS_${PN} += "dbus"
+ 
+ RRECOMMENDS_${PN} += "systemd-serialgetty \
+                       util-linux-agetty \
+@@ -181,7 +181,7 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
+                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
+ "
+ 
+-PACKAGES =+ "udev-dbg udev udev-consolekit udev-utils udev-systemd"
++PACKAGES =+ "udev-dbg udev udev-consolekit udev-utils"
+ 
+ FILES_udev-dbg += "/lib/udev/.debug"
+ 
+@@ -212,6 +212,8 @@ FILES_udev += "${base_sbindir}/udevd \
+                /lib/udev/rules.d/95*.rules \
+                ${base_libdir}/udev/hwdb.d \
+                ${sysconfdir}/udev \
++               ${systemd_unitdir}/system/*udev* \
++               ${systemd_unitdir}/system/*.wants/*udev* \
+               "
+ 
+ FILES_udev-consolekit += "/lib/ConsoleKit"
+@@ -219,9 +221,6 @@ RDEPENDS_udev-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'console
+ 
+ FILES_udev-utils = "${bindir}/udevadm"
+ 
+-FILES_udev-systemd = "${systemd_unitdir}/system/*udev* ${systemd_unitdir}/system/*.wants/*udev*"
+-RDEPENDS_udev-systemd = "udev"
+-
+ # TODO:
+ # u-a for runlevel and telinit
+ 
 -- 
 1.7.10.4
 
