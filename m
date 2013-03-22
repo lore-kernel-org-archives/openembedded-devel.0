@@ -1,36 +1,38 @@
-Received: from mail-la0-f48.google.com ([209.85.215.48])
+Received: from mail-da0-f48.google.com ([209.85.210.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <kergoth@gmail.com>) id 1UIo9Q-0003ci-57
+	(envelope-from <martin.jansa@gmail.com>) id 1UIyMw-00079s-6j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Mar 2013 23:40:00 +0100
-Received: by mail-la0-f48.google.com with SMTP id fq13so6178409lab.35
+	Fri, 22 Mar 2013 10:34:38 +0100
+Received: by mail-da0-f48.google.com with SMTP id p8so2150595dan.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Mar 2013 15:23:07 -0700 (PDT)
+	Fri, 22 Mar 2013 02:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=8cNA5Hc/efJIoXNmnqqw7HVGTzeulWbr2lUR7EF4Nig=;
-	b=xJENFPFhZ3dEBdUF4VZ2mREe3lMlD4bt9X6gUGP6Al5IUAIo/p39LbvuCQzxOKYYcm
-	pAHKsHWF2bwynmdcE5ALqgjNXkno4/emCACnMLxEze5AwCey4hdNhdubQFPF4XUz44TJ
-	JVl1Buu7P6iyAQN1Qm83ZWmiVqmI1P1rrEEg74034B3odlgdI23lY9PCv6h2kYWi+IFC
-	rLzq2H/pAn2RPd6MiIyl1YqPJryYTlVK0R1/djh42opX3alybKxRUMIGoqeqiWBEK/IV
-	nMt69su8X7G/qQP2cG2hlqqIibfB5n8BgX68BagH2lXjq9iyoIPCBSRusjbzP9BsL0Hg
-	PBoQ==
-X-Received: by 10.112.49.201 with SMTP id w9mr12172406lbn.2.1363904586801;
-	Thu, 21 Mar 2013 15:23:06 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=ltadCXSkOxnFI/hI4FKm8RjaNJsa5CTHxQDFS6+yw/c=;
+	b=RKueQeZAZXYMAkGCeKFxY/aDH7KZf+aAk5tZ49U6VGzMc6sV31i9XN/g1Ve5ihgV4k
+	3wBPL7ozXHA8M8ds6O5E3Suc9vtC559rMd788fVcKDq2Tn9vSA6Z/pbV3aBYinTbC9Ho
+	VBXkDxb3bbE5HyXicXPqtxhn1cca/j63tLWy40SpxbDpc1We+Cq3Ky5AbgyWiyHozwRW
+	0iqpKrzdy9y3PcWdcix5mrWmiG6pKP/T+l0Hhcllvms0XmNLYte5bfv7OAslqgqQHhwX
+	24MSxRaW/h6Fg7l9EG2bGyFuGf3f7vN9hJFS5nGvous4joPiQrz3sKTEhUbXeXAKZ6A4
+	m8Qw==
+X-Received: by 10.66.72.105 with SMTP id c9mr2047129pav.177.1363943863875;
+	Fri, 22 Mar 2013 02:17:43 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id 1sm1721861pbg.18.2013.03.22.02.17.41
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 22 Mar 2013 02:17:42 -0700 (PDT)
+Date: Fri, 22 Mar 2013 10:17:40 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130322091740.GD3219@jama>
+References: <1363516413-32548-1-git-send-email-koen@dominion.thruhere.net>
+	<1363516413-32548-2-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.25.195 with HTTP; Thu, 21 Mar 2013 15:22:46 -0700 (PDT)
-In-Reply-To: <514B857F.2000400@windriver.com>
-References: <1363902391-29945-1-git-send-email-kergoth@gmail.com>
-	<514B857F.2000400@windriver.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 21 Mar 2013 15:22:46 -0700
-X-Google-Sender-Auth: 3d8J6DmJ67ixycg1OMFAppcR3Kw
-Message-ID: <CABcZANnt7WB5P2t--wO5q+U2_z0PzNwLZHx-Pn3CSx2B4daKVg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-networking][danny][PATCH] layer.conf: Use .= for adding to BBPATH and += to BBFILES
+In-Reply-To: <1363516413-32548-2-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH 2/2] opencv: switch to out-of-tree builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,59 +46,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2013 22:40:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Mar 2013 09:34:39 -0000
+X-Groupsio-MsgNum: 43645
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Ycz6tD7Th1CMF4v7"
+Content-Disposition: inline
 
-On Thu, Mar 21, 2013 at 3:11 PM, Mark Hatle <mark.hatle@windriver.com>wrote:
+--Ycz6tD7Th1CMF4v7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On 3/21/13 4:46 PM, Christopher Larson wrote:
->
->> From: Andrei Gherzan <andrei.gherzan@windriver.com>
->>
->> Fixes parsing errors which is appearing after this commit to
->> meta-openembedded
->>
->> http://cgit.openembedded.org/**meta-openembedded/commit/?id=**
->> 3c21a46020bd0816579648f684c41d**bd6333583e<http://cgit.openembedded.org/meta-openembedded/commit/?id=3c21a46020bd0816579648f684c41dbd6333583e>
->>
->> This triggers
->> exception NameError: name 'base_contains' is not defined
->> without this change
->>
->> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
->> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
->> ---
->>   meta-networking/conf/layer.**conf | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-networking/conf/layer.**conf
->> b/meta-networking/conf/layer.**conf
->> index f26a172..1ea2bc2 100644
->> --- a/meta-networking/conf/layer.**conf
->> +++ b/meta-networking/conf/layer.**conf
->> @@ -1,9 +1,9 @@
->>   # We have a conf and classes directory, add to BBPATH
->> -BBPATH := "${BBPATH}:${LAYERDIR}"
->> +BBPATH .= ":${LAYERDIR}"
->>
->>   # We have a packages directory, add to BBFILES
->> -BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb \
->> - ${LAYERDIR}/recipes-*/*/*.**bbappend"
->> +BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
->> +            ${LAYERDIR}/recipes-*/*/*.**bbappend"
->>
->>   BBFILE_COLLECTIONS += "networking"
->>   BBFILE_PATTERN_networking := "^${LAYERDIR}/"
->>
->>
-> Don't those two have to be ":=" so that 'LAYERDIR' is immediately
-> evaluated? LAYERDIR changes depending on which layer is currently being
-> processed
+On Sun, Mar 17, 2013 at 11:33:33AM +0100, Koen Kooi wrote:
+> This eliminates a few warnings from the configure step and makes sense in=
+ general.
 
+Both applied, thanks!
 
-Nope, bitbake has handled LAYERDIR specially since Wed Apr 14 14:30:09
-2010. See commits 849dbd63244cbc4eaca0f1beedbb67baca024629 and
-40778a6e9e82c7ea4673a74fc19574430fa63e8d in bitbake.
--- 
-Christopher Larson
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_2.4.3.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/rec=
+ipes-support/opencv/opencv_2.4.3.bb
+> index 2114e77..916c8c5 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+> @@ -20,6 +20,10 @@ PR =3D "r2"
+> =20
+>  S =3D "${WORKDIR}/OpenCV-${PV}"
+> =20
+> +# Do an out-of-tree build
+> +OECMAKE_SOURCEPATH =3D "${S}"
+> +OECMAKE_BUILDPATH =3D "${WORKDIR}/build-${TARGET_ARCH}"
+> +
+>  EXTRA_OECMAKE =3D "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=3D${STAGING_LIBDIR}/$=
+{PYTHON_DIR}/site-packages/numpy/core/include \
+>                   -DBUILD_PYTHON_SUPPORT=3DON \
+>                   -DWITH_FFMPEG=3DON \
+> --=20
+> 1.8.1.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Ycz6tD7Th1CMF4v7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFMIbQACgkQN1Ujt2V2gBwNdgCdGetbDNkAoH5GdMy8tEm0boqk
+O8oAnjZ2o9UgrbfZXjAE0jjbI+nDiYiq
+=4PGg
+-----END PGP SIGNATURE-----
+
+--Ycz6tD7Th1CMF4v7--
