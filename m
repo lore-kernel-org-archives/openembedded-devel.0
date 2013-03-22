@@ -1,35 +1,24 @@
-Received: from mail-pd0-f182.google.com ([209.85.192.182])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1UJAHG-0003Oy-Qb; Fri, 22 Mar 2013 23:17:49 +0100
-Received: by mail-pd0-f182.google.com with SMTP id y10so1801193pdj.13
-	for <multiple recipients>; Fri, 22 Mar 2013 15:00:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=4RTEuUqxyGNnTYrQPCxiMdD7TGZzGple2AD7iGSkN8g=;
-	b=m+DnMA/jVNW1Z2mgBdhWtRg3sMVj6Fac1zezSuSpawOqD5wCfyz8Vpu6NEXGOzFeOS
-	0gKuzrXZRU9YNKtaruLoG5CpxgKloK5y377Hl4t0CUUX+mdR/It3ti0/hJqPitSp/rI+
-	WNafQ0YZAzpsplNFhtfYOydWKh87X1mUf6U8dfFmPS6g1df2Kqlg+RJzjaf0x96JNZaP
-	jbIXeDhW/nlo6lYu79q5Vzdl6yS8g9d5NLhrzSwlwPmHzRqvsKHhjbMc11egUenuW56z
-	IvhxA828LnL5327nJdzOAedCMhgFLFMhOC/elHUDi2sfQgLO0z+0Mm6y+tab7pHEMyuh
-	Q7qQ==
-X-Received: by 10.68.135.234 with SMTP id pv10mr5055842pbb.168.1363989639613; 
-	Fri, 22 Mar 2013 15:00:39 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ef3sm4383773pad.20.2013.03.22.15.00.36
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 15:00:38 -0700 (PDT)
-Date: Fri, 22 Mar 2013 23:00:37 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <apelete@seketeli.net>) id 1UJAUO-00040i-7o
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Mar 2013 23:31:22 +0100
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id D5D7BEA040;
+	Fri, 22 Mar 2013 23:26:37 +0100 (CET)
+Received: by localhost (Postfix, from userid 1000)
+	id 0A87D61ACE; Fri, 22 Mar 2013 23:14:14 +0100 (CET)
+Date: Fri, 22 Mar 2013 23:14:14 +0100
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130322220037.GW3219@jama>
-References: <cover.1363973088.git.ross.burton@intel.com>
+Message-ID: <20130322221414.GB6454@hermes>
+References: <cover.1363255209.git.apelete@seketeli.net>
 MIME-Version: 1.0
-In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
+In-Reply-To: <cover.1363255209.git.apelete@seketeli.net>
+X-Operating-System: Debian GNU/Linux 7.0
+X-URL: http://www.seketeli.net/~apelete
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [PATCH 00/22] hybrid systemd/sysvinit, and systemd fixes
+Subject: Re: [2011.03-maintenance][PATCH v5 0/2] Pull request 20130314
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 22:17:52 -0000
-X-Groupsio-MsgNum: 43700
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="csgZZokDzjk698W/"
-Content-Disposition: inline
-
---csgZZokDzjk698W/
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 22 Mar 2013 22:31:26 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 22, 2013 at 05:38:20PM +0000, Ross Burton wrote:
-> Hi,
+Hi Tom,
+
+Le 14-Mar-13, Apelete Seketeli a =E9crit:
+> Hello,
 >=20
-> The following changes since commit 6211a2bdd32f7b2c8de7a5d75353c0522c8d42=
-30:
+> The patches that come as a follow-up of this message fix an issue
+> found while building muffinman-image on top of the 2011.03-maintenance
+> branch, and also build a ubi image for the ben-nanonote machine.
+> This work is intended to be used as a basis for porting the JLime
+> distribution to oe-core.
 >=20
->   scripts/qemu-testlib: Add more debugging information (2013-03-21 17:05:=
-15 +0000)
+> These modifications were tested by successfully building
+> muffinman-image from scratch on a Debian Wheezy host.
+> Please pull into 2011.03-maintenance branch.
+>=20
+> The following changes since commit ff679935b073a89c4e407d259bcc2eea9148=
+fb91:
+>=20
+>   opkg-utils: bump SRCREV to latest (2012-10-26 11:11:59 +0200)
 >=20
 > are available in the git repository at:
 >=20
->   git://git.yoctoproject.org/poky-contrib ross/systemd
+>   git://seketeli.fr/~apelete/oe.git muffinman-image-fix
 >=20
-> for you to fetch changes up to 0e1da1e227c8e52087f7a52f8501a81cd28e76c7:
+> Apelete Seketeli (2):
+>   gnutls: update SRC_URI
+>   jlime-2010.1: build ubi image for ben-nanonote machine
 >=20
->   systemd: recommend systemd-compat-units (2013-03-22 17:24:21 +0000)
+>  conf/bitbake.conf              |    2 +-
+>  conf/distro/jlime-2010.1.conf  |    3 ++-
+>  conf/machine/ben-nanonote.conf |   12 ++++++++++++
+>  recipes/gnutls/gnutls.inc      |    3 ++-
+>  4 files changed, 17 insertions(+), 3 deletions(-)
 
-Do you have one for oe-core?
+It's been a week and no more reviews, could you please take a look at
+it and see if it's good to be pulled ?
 
---csgZZokDzjk698W/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Cheers.
+--=20
+        Apelete
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFM1IUACgkQN1Ujt2V2gBwfnQCgi5R5tf+Gf0SttVL+foxfXYDg
-ruYAn2YqZOErw/9EjXWVB+BuRjSTh46P
-=BFFQ
------END PGP SIGNATURE-----
-
---csgZZokDzjk698W/--
