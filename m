@@ -1,37 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-vc0-f174.google.com ([209.85.220.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UJ45X-0001ji-Nm
+	(envelope-from <hirst689@gmail.com>) id 1UJ64n-0007Cc-NQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 16:41:11 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2MFO5ho008101
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 22 Mar 2013 18:49:51 +0100
+Received: by mail-vc0-f174.google.com with SMTP id hx10so3238104vcb.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 08:24:05 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Fri, 22 Mar 2013 08:24:06 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id E57997FD0	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 11:23:22 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 4E34A2000B; Fri,
-	22 Mar 2013 11:24:05 -0400 (EDT)
-Date: Fri, 22 Mar 2013 11:24:05 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130322152405.GC10961@windriver.com>
-References: <1363902391-29945-1-git-send-email-kergoth@gmail.com>
-	<514B857F.2000400@windriver.com>
-	<CABcZANnt7WB5P2t--wO5q+U2_z0PzNwLZHx-Pn3CSx2B4daKVg@mail.gmail.com>
+	Fri, 22 Mar 2013 10:31:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=meHX3Ehmvir9Wm2TTBDMctKGVU2Fca9rmafSkmWw/9k=;
+	b=fI1ysct8yOB5X6q6KCQZ/K5p0EVKJjMSAJ4Pi8PW9bXXhwU2wRfusUGinf+4JK8fBR
+	MmKNa3xgnOpYnKNqkqH3Y/km13WY7Otcw0SoxfUM/pHFQlikCCdQFzMOX8oByHKV0uU2
+	8M8VOXzEomQMP+kjTii9yPy8OF5TjWg8pl0N0buQC3izVZkJoFkUJa9EOJ94xyyfMKxH
+	JEA+otu8tCCUIrMyP6QsR1yKOXri33b8SFW/t+LWLUfB5+phCC5DNst7ftzcCTrCQWd2
+	lmzuI4iKlCE4+MQoxt73LUk8fdUm0hJ3mkv6iLBgxHtY9RL2E2L26rlTgQ9sWPwcdb0U
+	wSDQ==
 MIME-Version: 1.0
-In-Reply-To: <CABcZANnt7WB5P2t--wO5q+U2_z0PzNwLZHx-Pn3CSx2B4daKVg@mail.gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][danny][PATCH] layer.conf: Use .= for adding to BBPATH and += to BBFILES
+X-Received: by 10.220.8.4 with SMTP id f4mr3371628vcf.20.1363973491285; Fri,
+	22 Mar 2013 10:31:31 -0700 (PDT)
+Received: by 10.59.11.37 with HTTP; Fri, 22 Mar 2013 10:31:31 -0700 (PDT)
+In-Reply-To: <CAHu+ux07zRGozTjykPzaDfN9Rnf2jL01XiBQoceXyxe6SOOp1w@mail.gmail.com>
+References: <CAHu+ux18fZzDuBjYj_d8r9P=y=khrCSjuRjKPKG9RzxEAO2vXw@mail.gmail.com>
+	<514C6AFC.1050405@mlbassoc.com>
+	<CAHu+ux0PVbRQh0vY9VOzv78Ey2kAKPBNsfU1v0ptT06zHYKabw@mail.gmail.com>
+	<514C700C.6010707@mlbassoc.com>
+	<CAHu+ux07zRGozTjykPzaDfN9Rnf2jL01XiBQoceXyxe6SOOp1w@mail.gmail.com>
+Date: Fri, 22 Mar 2013 13:31:31 -0400
+Message-ID: <CAHu+ux1GEMztMO78WKsBHErhCP_FAV8378dT0sAVDtpDvfLsQQ@mail.gmail.com>
+From: David Hirst <hirst689@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Adding a recipe to oe bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,91 +45,266 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 15:41:12 -0000
-X-List-Received-Date: Fri, 22 Mar 2013 15:41:12 -0000
-X-Groupsio-MsgNum: 43668
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aT9PWwzfKXlsBJM1"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Mar 2013 17:50:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---aT9PWwzfKXlsBJM1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Here are the results, the same as before, in the build directories all
+seems fine but the final output only has the /usr/share/man/man8/files
 
-[Re: [oe] [meta-networking][danny][PATCH] layer.conf: Use .=3D for adding t=
-o BBPATH and +=3D to BBFILES] On 13.03.21 (Thu 15:22) Chris Larson wrote:
+in
+oe-layersetup/build/arago-tmp-external-arago-toolchain/work/armv7a-vfp-neon-oe-linux-gnueabi/pure-ftpd-1.0.29-r0/image/usr/sbin
+are the following files:
 
-> On Thu, Mar 21, 2013 at 3:11 PM, Mark Hatle <mark.hatle@windriver.com>wro=
-te:
->=20
-> > On 3/21/13 4:46 PM, Christopher Larson wrote:
-> >
-> >> From: Andrei Gherzan <andrei.gherzan@windriver.com>
-> >>
-> >> Fixes parsing errors which is appearing after this commit to
-> >> meta-openembedded
-> >>
-> >> http://cgit.openembedded.org/**meta-openembedded/commit/?id=3D**
-> >> 3c21a46020bd0816579648f684c41d**bd6333583e<http://cgit.openembedded.or=
-g/meta-openembedded/commit/?id=3D3c21a46020bd0816579648f684c41dbd6333583e>
-> >>
-> >> This triggers
-> >> exception NameError: name 'base_contains' is not defined
-> >> without this change
-> >>
-> >> Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
-> >> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> >> ---
-> >>   meta-networking/conf/layer.**conf | 6 +++---
-> >>   1 file changed, 3 insertions(+), 3 deletions(-)
-> >>
-> >> diff --git a/meta-networking/conf/layer.**conf
-> >> b/meta-networking/conf/layer.**conf
-> >> index f26a172..1ea2bc2 100644
-> >> --- a/meta-networking/conf/layer.**conf
-> >> +++ b/meta-networking/conf/layer.**conf
-> >> @@ -1,9 +1,9 @@
-> >>   # We have a conf and classes directory, add to BBPATH
-> >> -BBPATH :=3D "${BBPATH}:${LAYERDIR}"
-> >> +BBPATH .=3D ":${LAYERDIR}"
-> >>
-> >>   # We have a packages directory, add to BBFILES
-> >> -BBFILES :=3D "${BBFILES} ${LAYERDIR}/recipes-*/*/*.bb \
-> >> - ${LAYERDIR}/recipes-*/*/*.**bbappend"
-> >> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb \
-> >> +            ${LAYERDIR}/recipes-*/*/*.**bbappend"
-> >>
-> >>   BBFILE_COLLECTIONS +=3D "networking"
-> >>   BBFILE_PATTERN_networking :=3D "^${LAYERDIR}/"
-> >>
-> >>
-> > Don't those two have to be ":=3D" so that 'LAYERDIR' is immediately
-> > evaluated? LAYERDIR changes depending on which layer is currently being
-> > processed
->=20
->=20
-> Nope, bitbake has handled LAYERDIR specially since Wed Apr 14 14:30:09
-> 2010. See commits 849dbd63244cbc4eaca0f1beedbb67baca024629 and
-> 40778a6e9e82c7ea4673a74fc19574430fa63e8d in bitbake.
+pure-authd  pure-ftpd  pure-ftpwho  pure-mrtginfo  pure-quotacheck
+pure-uploadscript
 
-Okay, I had a quick look through bitbake to confirm the presence of
-these on the danny branch, them merged the patch.  Thanks.
+in
+oe-layersetup/build/arago-tmp-external-arago-toolchain/work/armv7a-vfp-neon-oe-linux-gnueabi/pure-ftpd-1.0.29-r0/image/usr/bin
+are the following files:
 
---=20
--Joe MacDonald.
-:wq
+pure-pw  pure-pwconvert  pure-statsdecode
 
---aT9PWwzfKXlsBJM1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+in
+oe-layersetup/build/arago-tmp-external-arago-toolchain/work/armv7a-vfp-neon-oe-linux-gnueabi/pure-ftpd-1.0.29-r0/image/usr/share/man/man8
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+pure-authd.8  pure-ftpd.8  pure-ftpwho.8  pure-mrtginfo.8  pure-pw.8
+pure-pwconvert.8  pure-quotacheck.8  pure-statsdecode.8  pure-uploadscript.8
 
-iEYEARECAAYFAlFMd5UACgkQPN8S4W6ZZnfN/gCbB5ND5FCDvrYK0lE9n/HIFs2v
-J/UAnRmSQgL5hAiy8H229awElflsnqzY
-=+xY9
------END PGP SIGNATURE-----
 
---aT9PWwzfKXlsBJM1--
+hirst689@hirst689-HP-Z210-Workstation:~/oe-layersetup/build/arago-tmp-external-arago-toolchain/deploy/images$
+tar tvf tisdk-rootfs-image-am335x-evm.tar.gz | grep pure*
+
+-rw-r--r-- root/root      4151 2013-03-22 12:36
+./usr/share/man/man8/pure-uploadscript.8
+-rw-r--r-- root/root      3187 2013-03-22 12:36
+./usr/share/man/man8/pure-pw.8
+-rw-r--r-- root/root      2169 2013-03-22 12:36
+./usr/share/man/man8/pure-quotacheck.8
+-rw-r--r-- root/root      1123 2013-03-22 12:36
+./usr/share/man/man8/pure-statsdecode.8
+-rw-r--r-- root/root       764 2013-03-22 12:36
+./usr/share/man/man8/pure-pwconvert.8
+-rw-r--r-- root/root      4160 2013-03-22 12:36
+./usr/share/man/man8/pure-authd.8
+-rw-r--r-- root/root      2119 2013-03-22 12:36
+./usr/share/man/man8/pure-mrtginfo.8
+-rw-r--r-- root/root     28755 2013-03-22 12:36
+./usr/share/man/man8/pure-ftpd.8
+-rw-r--r-- root/root      2449 2013-03-22 12:36
+./usr/share/man/man8/pure-ftpwho.8
+
+
+
+On Fri, Mar 22, 2013 at 11:02 AM, David Hirst <hirst689@gmail.com> wrote:
+
+> I did a bitbake tisdk-rootfs-image -c clean
+> I will try the cleanstate
+> It seems really difficult to get started from an absolutely clean slate,
+> some where status is held that gets in the way
+> I will let you know
+>
+> Thanks so far
+>
+>
+>
+>
+> On Fri, Mar 22, 2013 at 10:51 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>
+>> On 2013-03-22 08:42, David Hirst wrote:
+>>
+>>> OK,
+>>>      Sorry for the carpet bombing! I added this to tisdk-rootfs-image
+>>> "task-arago-xyz \" to look for the new task file
+>>> I have included the task and pure-ftpd bb files also. I would love to
+>>> understand why this does not work.
+>>>
+>>
+>> What steps did you run after making this change?
+>> What version of bitbake are you using?
+>>
+>> Most likely, bitbake did not [fully] realize that you made a change.
+>> I'd try something like this:
+>>   % bitbake tisdk-rootfs-image -c cleansstate
+>>   % bitbake tisdk-rootfs-image
+>> and see what happens.
+>>
+>> BTW, top-posting is evil :-(
+>>
+>>
+>>> ==========================tisd**k-rootfs-image.bb<http://tisdk-rootfs-image.bb>
+>>> =============**===============
+>>> # Arago TI SDK filesystem image
+>>> COMPATIBLE_MACHINE = "omap3|omapl138|ti33x"
+>>>
+>>> require arago-base-tisdk-image.bb
+>>>
+>>> IMAGE_INSTALL += "\
+>>>      task-arago-test \
+>>>      task-arago-tisdk-graphics \
+>>>      task-arago-tisdk-qte \
+>>>      task-arago-tisdk-addons \
+>>>      task-arago-tisdk-connectivity \
+>>>      task-arago-tisdk-crypto \
+>>>      task-arago-tisdk-matrix \
+>>>      task-arago-tisdk-multimedia \
+>>>      task-arago-tisdk-amsdk \
+>>>      task-arago-xyz \
+>>> "
+>>>
+>>> export IMAGE_BASENAME = "tisdk-rootfs-image"
+>>>
+>>> =================task-arago.**xyz.bb <http://task-arago.xyz.bb>
+>>> ================
+>>>
+>>> DESCRIPTION = "Extended task to get extras"
+>>> LICENSE = "MIT"
+>>> LIC_FILES_CHKSUM =
+>>> "file://${COREBASE}/meta/**COPYING.MIT;md5=**
+>>> 3da9cfbcb788c80a0384361b4de204**20"
+>>> PR = "r0"
+>>>
+>>> inherit task
+>>>
+>>> ARAGO_XYZ = " \
+>>>      pure-ftpd \
+>>>      "
+>>>
+>>> ARAGO_XYZ_INT = "\
+>>>      ${ARAGO_XYZ} \
+>>>      "
+>>> RDEPENDS_${PN} = "\
+>>>      ${ARAGO_XYZ_INT} \
+>>>      "
+>>> ===============pure-ftpd_1.0.**29.bb <http://pure-ftpd_1.0.29.bb>
+>>> ====================
+>>>
+>>> DESCRIPTION = "Sample program"
+>>> LICENSE = "GPLv2"
+>>> LIC_FILES_CHKSUM = "file://COPYING;md5=**d7b47170f564f6a314b82b3ea67a40*
+>>> *bd"
+>>> PR = "r0"
+>>> PV = "1.0.29"
+>>> DEPENDS = ""
+>>> RPROVIDES = "pure-ftpd"
+>>> PROVIDES = "pure-ftpd"
+>>> ARM_INSTRUCTION_SET = "arm"
+>>>
+>>> PARALLEL_MAKE = ""
+>>>
+>>> inherit autotools pkgconfig
+>>>
+>>> EXTRA_OECONF = "--enable-cross-compile --host=arm-arago-linux-**gnueabi"
+>>>
+>>> SRC_URI = "
+>>> http://iweb.dl.sourceforge.**net/project/pureftpd/Pure-**
+>>> FTPd/1.0.29/pure-ftpd-${PV}.**tar.gz<http://iweb.dl.sourceforge.net/project/pureftpd/Pure-FTPd/1.0.29/pure-ftpd-$%7BPV%7D.tar.gz>
+>>> "
+>>> SRC_URI[md5sum] = "**e0132a51357d419f8b66e8997d9dc5**fa"
+>>> SRC_URI[sha256sum] =
+>>> "**55bfb84fa63a37e5b56906afb4444f**da7285d0f8b5ed24798f59c978ddea**2749"
+>>> S = "${WORKDIR}/pure-ftpd-${PV}"
+>>>
+>>> EXTRA_OECONF_append_armv6 = " --enable-armv6"
+>>> EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
+>>>
+>>> FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer
+>>> -frename-registers -O4 -ffast-math"
+>>> BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+>>>
+>>> do_configure(){
+>>>    oe_runconf ${EXTRE_OECONF}
+>>> }
+>>>
+>>> do_compile () {
+>>>    oe_runmake
+>>> }
+>>>
+>>> do_install () {
+>>>    oe_runmake install DESTDIR=${D}
+>>> }
+>>>
+>>>
+>>> ARM_INSTRUCTION_SET = "arm"
+>>>
+>>> BBCLASSEXTEND = "native"
+>>>
+>>> ============================ END===========================
+>>>
+>>> On Fri, Mar 22, 2013 at 10:30 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>>>
+>>>  On 2013-03-22 08:24, David Hirst wrote:
+>>>>
+>>>>  Hi,
+>>>>>       I have been struggling with a oe/bitbake issue. I wanted to add
+>>>>> an
+>>>>> other .bb to the image file.
+>>>>> I have tried multiple ways but always end up at the same spot. I have
+>>>>> created a new task-XXX.bb file which includes my bb
+>>>>> I edited the XXXX-rootfs-image.bb to include the task-XXX.bb.
+>>>>> Once built I find that everything built fine and the new recipe was
+>>>>> built
+>>>>> but was not loaded into the XXXX-rootfs-image.tar,gz.
+>>>>> If I look into the image directory for the bb file I see the compiled
+>>>>> application in usr/sbin.
+>>>>> I have tried this with my own .bb file and net-snmp bb file which comes
+>>>>> with the default oe-layersetup installation with the same result.
+>>>>> Did I not edit a file or miss some other required step?
+>>>>>
+>>>>>
+>>>>>  Wow, the same question on three mailing lists (that I read, there
+>>>> may be more...) and no cross-posting!
+>>>>
+>>>> This list is perhaps the most appropriate one for your question.
+>>>>
+>>>> More details will help.  Exactly what did you change in the
+>>>> "XXXX-rootfs-image.bb"
+>>>> recipe?
+>>>>
+>>>> --
+>>>> ------------------------------****----------------------------**--
+>>>>
+>>>> Gary Thomas                 |  Consulting for the
+>>>> MLB Associates              |    Embedded world
+>>>> ------------------------------****----------------------------**--
+>>>>
+>>>> ______________________________****_________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.**ope**nembedded.org <http://openembedded.org>
+>>>> <Openembedded-**devel@lists.openembedded.org<Openembedded-devel@lists.openembedded.org>
+>>>> >
+>>>> http://lists.linuxtogo.org/****cgi-bin/mailman/listinfo/****
+>>>> openembedded-devel<http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel>
+>>>> <http://**lists.linuxtogo.org/cgi-bin/**mailman/listinfo/openembedded-*
+>>>> *devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>>>> >
+>>>>
+>>>>
+>>>
+>>>
+>>>
+>> --
+>> ------------------------------**------------------------------
+>> Gary Thomas                 |  Consulting for the
+>> MLB Associates              |    Embedded world
+>> ------------------------------**------------------------------
+>>
+>> ______________________________**_________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
+>> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**
+>> openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>>
+>
+>
+>
+> --
+> David Hirst
+> hirst689@gmail.com
+>
+>
+
+
+-- 
+David Hirst
+hirst689@gmail.com
+
