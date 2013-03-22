@@ -1,38 +1,35 @@
-Received: from mail-la0-f42.google.com ([209.85.215.42])
+Received: from mail-pd0-f182.google.com ([209.85.192.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UJ7dP-0005iY-Vm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 20:28:25 +0100
-Received: by mail-la0-f42.google.com with SMTP id fe20so8001200lab.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 12:11:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=l/ELmFN1zWP1P/Y0qM+wuj0xBf8lfnhArduSPbe59jo=;
-	b=pFHpStcyWSDnCcULP1gVq3sE0+8xe4NaVzHMjXRFec7atln2UUH42SHkF+6BkfEhGr
-	Mp/WuNTgUk+lwo20SZhD7Q8WBgS0esmDuaJUPClVMyWcDm4lD7WPaOke680CeGJ8nncA
-	JoMGYh4cGRyIFCZ+rlmP141HIcCI0WCWUmKGe5Le9y3jq66KzQRAoFdsg6QUBtX+kWLX
-	DNgVC65bHNTSDwz27GqU8hoj66Dr02sbKK83WcicMfPi11EiEovoqld2+6Hj+XRRjZ/x
-	L4Wl7/aN/W7IiUzMW9VrR2T90J04FJhhouxkesr5p30o9xYCL78Rc91meph4ECmDm9ep
-	iI6w==
-X-Received: by 10.152.115.196 with SMTP id jq4mr1215171lab.53.1363979481399;
-	Fri, 22 Mar 2013 12:11:21 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.114.81.231 with HTTP; Fri, 22 Mar 2013 12:11:00 -0700 (PDT)
-In-Reply-To: <20130322190434.GV3219@jama>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1UJAHG-0003Oy-Qb; Fri, 22 Mar 2013 23:17:49 +0100
+Received: by mail-pd0-f182.google.com with SMTP id y10so1801193pdj.13
+	for <multiple recipients>; Fri, 22 Mar 2013 15:00:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=4RTEuUqxyGNnTYrQPCxiMdD7TGZzGple2AD7iGSkN8g=;
+	b=m+DnMA/jVNW1Z2mgBdhWtRg3sMVj6Fac1zezSuSpawOqD5wCfyz8Vpu6NEXGOzFeOS
+	0gKuzrXZRU9YNKtaruLoG5CpxgKloK5y377Hl4t0CUUX+mdR/It3ti0/hJqPitSp/rI+
+	WNafQ0YZAzpsplNFhtfYOydWKh87X1mUf6U8dfFmPS6g1df2Kqlg+RJzjaf0x96JNZaP
+	jbIXeDhW/nlo6lYu79q5Vzdl6yS8g9d5NLhrzSwlwPmHzRqvsKHhjbMc11egUenuW56z
+	IvhxA828LnL5327nJdzOAedCMhgFLFMhOC/elHUDi2sfQgLO0z+0Mm6y+tab7pHEMyuh
+	Q7qQ==
+X-Received: by 10.68.135.234 with SMTP id pv10mr5055842pbb.168.1363989639613; 
+	Fri, 22 Mar 2013 15:00:39 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ef3sm4383773pad.20.2013.03.22.15.00.36
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 22 Mar 2013 15:00:38 -0700 (PDT)
+Date: Fri, 22 Mar 2013 23:00:37 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130322220037.GW3219@jama>
 References: <cover.1363973088.git.ross.burton@intel.com>
-	<876b70b30d4ed72bed465147dc6ecf28f331e2f7.1363973088.git.ross.burton@intel.com>
-	<20130322190434.GV3219@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 22 Mar 2013 19:11:00 +0000
-Message-ID: <CAJTo0LZka2bbRHc5anCA8MFiW33cR76TgCZx_MVX1mf_xQwdfA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Gm-Message-State: ALoCoQnch/gWoA/w/s8BDGiaF1DdlH2oAdsuxx1KFHRiyG5vUIDxiqe6n936CfT2iaUCkCoUoSyY
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH 09/22] update-rcd.bbclass: handle both sysvinit and systemd features being present
+MIME-Version: 1.0
+In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: [PATCH 00/22] hybrid systemd/sysvinit, and systemd fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 19:28:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 Mar 2013 22:17:52 -0000
+X-Groupsio-MsgNum: 43700
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="csgZZokDzjk698W/"
+Content-Disposition: inline
 
-On 22 March 2013 19:04, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Isn't DISTRO_FEATURES_INITMAN removed later in this series?
+--csgZZokDzjk698W/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes.  I reviewed this series entirely twice and still this slipped
-through.  Consider the chunks mentioning INITMAN gone.
+On Fri, Mar 22, 2013 at 05:38:20PM +0000, Ross Burton wrote:
+> Hi,
+>=20
+> The following changes since commit 6211a2bdd32f7b2c8de7a5d75353c0522c8d42=
+30:
+>=20
+>   scripts/qemu-testlib: Add more debugging information (2013-03-21 17:05:=
+15 +0000)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.yoctoproject.org/poky-contrib ross/systemd
+>=20
+> for you to fetch changes up to 0e1da1e227c8e52087f7a52f8501a81cd28e76c7:
+>=20
+>   systemd: recommend systemd-compat-units (2013-03-22 17:24:21 +0000)
 
-Ross
+Do you have one for oe-core?
 
+--csgZZokDzjk698W/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFM1IUACgkQN1Ujt2V2gBwfnQCgi5R5tf+Gf0SttVL+foxfXYDg
+ruYAn2YqZOErw/9EjXWVB+BuRjSTh46P
+=BFFQ
+-----END PGP SIGNATURE-----
+
+--csgZZokDzjk698W/--
