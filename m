@@ -1,25 +1,25 @@
-Received: from mail-vc0-f171.google.com ([209.85.220.171])
+Received: from mail-vb0-f44.google.com ([209.85.212.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <hirst689@gmail.com>) id 1UJ6tw-0003Zl-0W
+	(envelope-from <hirst689@gmail.com>) id 1UJ79e-0004AF-NF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 19:42:18 +0100
-Received: by mail-vc0-f171.google.com with SMTP id ha11so3312547vcb.16
+	Fri, 22 Mar 2013 19:57:34 +0100
+Received: by mail-vb0-f44.google.com with SMTP id fr13so2815261vbb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 11:24:21 -0700 (PDT)
+	Fri, 22 Mar 2013 11:40:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:x-received:in-reply-to:references:date:message-id
 	:subject:from:to:content-type;
-	bh=7cHg4Y32mqRgnMNgsoVLly9ppvECDW2cQNdZNPK9P44=;
-	b=UmGzIm+/X2HOrLHMn0GAWPTrpva6tmMMfUzWEC0LtADWJDcj4cK1dj+39KN/9KE6T8
-	r6SqGMnVC3PxM2RwnpeynmxhgP9Ml8frTIeswZIOtlMp24XlBkENunptrLik2btcZqoL
-	AO7S1TqUQWxQFrfz+3VM7q32XQCqii9WCmCLJXmWCQpnU2JaD+MM8s14kmYq4YKRACCb
-	SbrwvXeNzEW77WTpgB4Eg+B+0uaDg+7WNEy0r5tkrFBxHxc+R5RR7IkP1Vt7YasixOuT
-	7L8OH0/ZeNlY/qJHA08QxuBFp2BVOHkyqZ3u27SObYZ2agBL05fZicg6JfMJhL/HkDKM
-	l83A==
+	bh=uwTNfK00m1yj8bepZSGMOypeF3gbtNDDByOZ7n8X/cs=;
+	b=Or5a5Xy2ECX2PRjvmMYL7qn9tFI8pAIL52wFN6ivar+Bvl+0v+dQTYyIEd8NCG7HZz
+	6/g19SlaqKBGks+8ZVlOU3cP1d08hTmv1WmDwkyqP0E+i1UtJcr3Wr3rImAaLpxrGdJW
+	EpCXZxtCR+aDc0oO/VspoxKdwzqzGQP1JTvsSTCOvShH/maOtB4HHXkn0PlOtgVLlQah
+	QohVBaYqoDqcm3vTzZMOWe1kAUuHteC520lcuwQcBVBoHlvGjqfUqHA3bWZ5pD4OxAAN
+	twZrYxeUZnh5WVMINqNLKo8p5aYDplAft+Vm4qV16RP+/lHfgFPEHr7A+3MbnY0DIKY1
+	povA==
 MIME-Version: 1.0
-X-Received: by 10.220.8.4 with SMTP id f4mr3611597vcf.20.1363976661488; Fri,
-	22 Mar 2013 11:24:21 -0700 (PDT)
-Received: by 10.59.11.37 with HTTP; Fri, 22 Mar 2013 11:24:21 -0700 (PDT)
+X-Received: by 10.220.221.210 with SMTP id id18mr3584134vcb.74.1363977636150; 
+	Fri, 22 Mar 2013 11:40:36 -0700 (PDT)
+Received: by 10.59.11.37 with HTTP; Fri, 22 Mar 2013 11:40:36 -0700 (PDT)
 In-Reply-To: <514C9AA9.7010302@mlbassoc.com>
 References: <CAHu+ux18fZzDuBjYj_d8r9P=y=khrCSjuRjKPKG9RzxEAO2vXw@mail.gmail.com>
 	<514C6AFC.1050405@mlbassoc.com>
@@ -28,8 +28,8 @@ References: <CAHu+ux18fZzDuBjYj_d8r9P=y=khrCSjuRjKPKG9RzxEAO2vXw@mail.gmail.com>
 	<CAHu+ux07zRGozTjykPzaDfN9Rnf2jL01XiBQoceXyxe6SOOp1w@mail.gmail.com>
 	<CAHu+ux1GEMztMO78WKsBHErhCP_FAV8378dT0sAVDtpDvfLsQQ@mail.gmail.com>
 	<514C9AA9.7010302@mlbassoc.com>
-Date: Fri, 22 Mar 2013 14:24:21 -0400
-Message-ID: <CAHu+ux0BdGsGcyJ9ywM-MkCugKoi7Fw5Tbho=e+MH7P6rM7T-A@mail.gmail.com>
+Date: Fri, 22 Mar 2013 14:40:36 -0400
+Message-ID: <CAHu+ux2ub2pF_24NivUbOZCiLQdJdy_J1sfEER0zJyahDa1f=g@mail.gmail.com>
 From: David Hirst <hirst689@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
@@ -47,33 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 18:42:20 -0000
-X-List-Received-Date: Fri, 22 Mar 2013 18:42:20 -0000
+X-List-Received-Date: Fri, 22 Mar 2013 18:57:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-BitBake Build Tool Core version 1.15.2, bitbake version 1.15.2
+I added the line with no effect,
 
-gst-meta-base
-:0.10-r10
-meta-environment-arm
-:1.0-r8
-meta-ide-support
-:1.0-r2
-meta-toolchain
-:1.0-r7
-meta-toolchain-arago
-:1.0-r13
-meta-toolchain-arago-qte
-:1.0-r9
-meta-toolchain-arago-tisdk
-:1.0-r0
-meta-toolchain-gmae
-:1.0-r7
-meta-toolchain-qte
-:1.0-r7
-metacity
-:2.30.3-r3
-metacity-native                                    :2.30.3-r3
+here are the last lines of the build I notice that there are "noexec" on
+several lines, not sure if this has any effect
+
+NOTE: Running task 3804 of 3809 (ID: 2113,
+/home/hirst689/oe-layersetup/sources/meta-arago/meta-arago-distro/recipes-netbotz/pure-ftpd/
+pure-ftpd_1.0.29.bb, do_package_write_ipk)
+NOTE: Running noexec task 3806 of 3809 (ID: 342,
+/home/hirst689/oe-layersetup/sources/meta-arago/meta-arago-distro/recipes-core/tasks/
+task-arago-netbotz.bb, do_package_write)
+NOTE: package pure-ftpd-1.0.29-r0: task do_package_write_ipk: Started
+NOTE: package pure-ftpd-1.0.29-r0: task do_package_write_ipk: Succeeded
+NOTE: Running noexec task 3807 of 3809 (ID: 2110,
+/home/hirst689/oe-layersetup/sources/meta-arago/meta-arago-distro/recipes-netbotz/pure-ftpd/
+pure-ftpd_1.0.29.bb, do_package_write)
+NOTE: Running task 3808 of 3809 (ID: 9,
+/home/hirst689/oe-layersetup/sources/meta-arago/meta-arago-distro/recipes-core/images/
+tisdk-rootfs-image.bb, do_rootfs)
+NOTE: package tisdk-rootfs-image-1.0-r0: task do_rootfs: Started
+NOTE: package tisdk-rootfs-image-1.0-r0: task do_rootfs: Succeeded
+NOTE: Running noexec task 3809 of 3809 (ID: 5,
+/home/hirst689/oe-layersetup/sources/meta-arago/meta-arago-distro/recipes-core/images/
+tisdk-rootfs-image.bb, do_build)
+NOTE: Tasks Summary: Attempted 3809 tasks of which 3795 didn't need to be
+rerun and all succeeded.
 
 
 On Fri, Mar 22, 2013 at 1:53 PM, Gary Thomas <gary@mlbassoc.com> wrote:
