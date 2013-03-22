@@ -1,40 +1,40 @@
-Received: from mail-wi0-f172.google.com ([209.85.212.172])
+Received: from mail-wi0-f176.google.com ([209.85.212.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UJ6Eg-0007hS-03
+	(envelope-from <ross.burton@intel.com>) id 1UJ6Eh-0007hY-7E
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 22 Mar 2013 18:58:44 +0100
-Received: by mail-wi0-f172.google.com with SMTP id hr17so964991wib.11
+Received: by mail-wi0-f176.google.com with SMTP id hm14so8141540wib.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 10:41:44 -0700 (PDT)
+	Fri, 22 Mar 2013 10:41:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references:x-gm-message-state;
-	bh=kQi1tSMCjpDbqM2zdkMZhLdYPoYtYECiuZEKIP1y0hA=;
-	b=J5ho0p0jI9qfjFQclqXg4//0aki2+QUNY8dmbem0X5+i2ES6ZwnNtBCrxe3M6yWOM9
-	4rr7Nb1oelTiyCWSWJW+o4Bk1eqEPeOtaa7ywmrHl4pSe6CByd/I5EHSbjJ5hh496OMv
-	ngwJOVEoEQ/YDj43OWhNptXxtgyZpIgY9khnjBzC99nxphfcTHENDjTUxt9TW8Zin5Vv
-	fPmJXgA/Q9E+Y3hwqqd0BD9uRbPCfQHGKzdcYQkhASfh7psccpfLTQCaBnTKJ//aejOV
-	gLNX4t0npz93ibHuFl/aHzVPeuj8bfVD1viVdZDeX2RTQbO9hkIKZ0nR5oeC7vNFNyfs
-	Cp2g==
-X-Received: by 10.194.119.33 with SMTP id kr1mr4713790wjb.36.1363974104186;
-	Fri, 22 Mar 2013 10:41:44 -0700 (PDT)
+	bh=3TcpnVljUIlsSwgzo7kVk1BBwRNQYV5370rWOrlUH2Y=;
+	b=BjvPl21a4CQmp2LZtee4riWNoHFD00Om1EVTNtwdXD9wc8wOCsjlIO0VgmhgHofJ16
+	Jlzn97O8kcj2AMqL2shpCp2gt47PxTSNMtE9H6nRoOUGuntYSzAl3gemzWmPSqXIX/3z
+	hZGvi0QV2TUv/RQRAM2d51USyrHysK61ko3tm0DOR9HfDaN6gzpmb2sNLt99EIZRrQYf
+	g6Tz1rf1UNrLzw3eLg7ZAYWlleTf/gFMD2R2w3oaoUruxISYfMlIl7UeLsDKWABpQFlI
+	hOAwbt11osw87eb7OsYfeUlFN/pdf3LRvopZmMJmHNrAVCdF7gTN3rMLBx5Oy+iAsvU5
+	qmDg==
+X-Received: by 10.180.24.229 with SMTP id x5mr4640562wif.17.1363974105406;
+	Fri, 22 Mar 2013 10:41:45 -0700 (PDT)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPS id dm9sm12260880wib.3.2013.03.22.10.41.43
+	by mx.google.com with ESMTPS id dm9sm12260880wib.3.2013.03.22.10.41.44
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 10:41:43 -0700 (PDT)
+	Fri, 22 Mar 2013 10:41:44 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-core@lists.openembedded.org
-Date: Fri, 22 Mar 2013 17:38:30 +0000
-Message-Id: <aee32f66f2b04b1b1d08659cd6d7d9c16ee3e7f1.1363973088.git.ross.burton@intel.com>
+Date: Fri, 22 Mar 2013 17:38:31 +0000
+Message-Id: <ff6603ee188d9eee99d68d59535abe4c26f781d0.1363973088.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
 References: <cover.1363973088.git.ross.burton@intel.com>
 In-Reply-To: <cover.1363973088.git.ross.burton@intel.com>
 References: <cover.1363973088.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQl2bUgm2BCsBRhkoC7ukOXxZBt+zvs5XfMOBnOXwZVPumNCg2dme5W/RXxxXIbv9bxCI8Mx
+X-Gm-Message-State: ALoCoQko5OBlc4nNoQqzdlROO6dfijfY4fXPgbBFWrVPNGqDsrKF1s7sc+fTjO+5OmkGzp3D9KLe
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 10/22] util-linux: split uuidd into it's own package, and enable for systemd
+Subject: [PATCH 11/22] update-rcd: drop depends to recommends, check for update-rcd in scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,63 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 17:59:32 -0000
+X-List-Received-Date: Fri, 22 Mar 2013 17:59:34 -0000
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta/recipes-core/util-linux/util-linux.inc |   11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ meta/classes/update-rc.d.bbclass |   15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/meta/recipes-core/util-linux/util-linux.inc b/meta/recipes-core/util-linux/util-linux.inc
-index 41a5471..46daab7 100644
---- a/meta/recipes-core/util-linux/util-linux.inc
-+++ b/meta/recipes-core/util-linux/util-linux.inc
-@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://README.licensing;md5=679af3e410ee112a5ec94de6501bf5c3
-                     file://libmount/COPYING;md5=152f98bc301a5ea649769ede7203ac82 \
-                     file://libblkid/COPYING;md5=152f98bc301a5ea649769ede7203ac82"
+diff --git a/meta/classes/update-rc.d.bbclass b/meta/classes/update-rc.d.bbclass
+index 06b91c1..0997702 100644
+--- a/meta/classes/update-rc.d.bbclass
++++ b/meta/classes/update-rc.d.bbclass
+@@ -6,7 +6,7 @@ UPDATERCD_virtclass-cross = ""
+ UPDATERCD_class-native = ""
+ UPDATERCD_class-nativesdk = ""
  
--inherit autotools gettext pkgconfig
-+inherit autotools gettext pkgconfig systemd
- DEPENDS = "zlib ncurses"
- DEPENDS_append_class-native = " lzo-native"
+-RDEPENDS_${UPDATERCPN}_append = " ${UPDATERCD}"
++RRECOMMENDS_${UPDATERCPN}_append = " ${UPDATERCD}"
  
-@@ -34,7 +34,7 @@ PACKAGES =+ "util-linux-agetty util-linux-fdisk util-linux-cfdisk util-linux-sfd
-              util-linux-libmount util-linux-libmount-dev \
-              util-linux-libblkid-dev util-linux-libuuid util-linux-libuuid-dev \
-              util-linux-uuidgen util-linux-lscpu util-linux-fsck util-linux-blkid \
--             util-linux-mkfs util-linux-mcookie util-linux-reset"
-+             util-linux-mkfs util-linux-mcookie util-linux-reset util-linux-uuidd"
+ INITSCRIPT_PARAMS ?= "defaults"
  
- EXTRA_OECONF = "--libdir=${base_libdir} --disable-use-tty-group \
-                 --disable-makeinstall-chown --enable-elvtune --enable-init \
-@@ -46,6 +46,10 @@ EXTRA_OECONF = "--libdir=${base_libdir} --disable-use-tty-group \
- 		usrsbin_execdir='${sbindir}' \
- "
+@@ -18,7 +18,9 @@ if test "x$D" != "x"; then
+ else
+ 	OPT="-s"
+ fi
+-update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
++if type update-rc.d >/dev/null; then
++	update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
++fi
+ }
  
-+# Respect the systemd feature for uuidd
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--enable-socket-activation', '--disable-socket-activation', d)}"
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
-+
- EXTRA_OECONF_append_class-native = " --disable-login --disable-su"
+ updatercd_prerm() {
+@@ -28,10 +30,13 @@ fi
+ }
  
- FILES_${PN}-doc += "${datadir}/getopt/getopt-*.*"
-@@ -61,6 +65,7 @@ FILES_util-linux-mcookie = "${bindir}/mcookie"
- FILES_util-linux-umount = "${base_bindir}/umount.${BPN}"
- FILES_util-linux-readprofile = "${base_sbindir}/readprofile.${BPN}"
- FILES_util-linux-uuidgen = "${bindir}/uuidgen"
-+FILES_util-linux-uuidd = "${sbindir}/uuidd"
- FILES_util-linux-reset = "${base_bindir}/reset"
+ updatercd_postrm() {
+-if [ "$D" != "" ]; then
+-	update-rc.d -f -r $D ${INITSCRIPT_NAME} remove
++if test "$D" != ""; then
++	OPT="-f -r $D"
+ else
+-	update-rc.d ${INITSCRIPT_NAME} remove
++	OPT=""
++fi
++if type update-rc.d >/dev/null; then
++	update-rc.d $OPT ${INITSCRIPT_NAME} remove
+ fi
+ }
  
- FILES_util-linux-libblkid = "${base_libdir}/libblkid.so.*"
-@@ -88,6 +93,8 @@ RRECOMMENDS_${PN} = "util-linux-fdisk util-linux-cfdisk util-linux-sfdisk util-l
- RRECOMMENDS_${PN}_class-native = ""
- RDEPENDS_${PN}_class-native = ""
- 
-+SYSTEMD_PACKAGES = "util-linux-uuidd"
-+SYSTEMD_SERVICE_util-linux-uuidd = "uuidd.service"
- 
- do_compile () {
- 	set -e
 -- 
 1.7.10.4
 
