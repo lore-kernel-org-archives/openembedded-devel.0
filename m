@@ -1,36 +1,39 @@
-Received: from mail.windriver.com ([147.11.1.11])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UJ21S-0005Kc-4q
+	(envelope-from <chase.maupin@ti.com>) id 1UJ2E5-0005km-9X
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 14:28:46 +0100
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2MDBle0015180
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 22 Mar 2013 14:41:46 +0100
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2MDNmao019425
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 06:11:47 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Fri, 22 Mar 2013 06:11:47 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id A517E7FD0;
-	Fri, 22 Mar 2013 09:11:03 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id E9E1920007; Fri,
-	22 Mar 2013 09:11:45 -0400 (EDT)
-Date: Fri, 22 Mar 2013 09:11:45 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20130322131145.GF5049@windriver.com>
-References: <1362445249-12669-1-git-send-email-rongqing.li@windriver.com>
-	<20130318153933.GB9185@windriver.com>
+	Fri, 22 Mar 2013 08:23:48 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2MDNm7c022427
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Mar 2013 08:23:48 -0500
+Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server (TLS) id 14.2.342.3;
+	Fri, 22 Mar 2013 08:23:47 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Fri, 22 Mar 2013 08:23:48 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe][meta-oe][PATCH][for-danny] kernel bbclass: return to
+	original directory in do_deploy
+Thread-Index: AQHOJAEX/S6brAnqy0ybqt9akN2IRpixuNDQ
+Date: Fri, 22 Mar 2013 13:23:46 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159492B24@DLEE11.ent.ti.com>
+References: <1363629028-6920-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1363629028-6920-1-git-send-email-Chase.Maupin@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <20130318153933.GB9185@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] tftp-hpa: make init script work
+Subject: Re: [meta-oe][PATCH][for-danny] kernel bbclass: return to original directory in do_deploy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,124 +47,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 13:28:49 -0000
-X-Groupsio-MsgNum: 43661
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VuQYccsttdhdIfIP"
-Content-Disposition: inline
-
---VuQYccsttdhdIfIP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Mar 2013 13:41:48 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [meta-networking][PATCH] tftp-hpa: make init script work] On 13.03.18 =
-(Mon 11:39) Joe MacDonald wrote:
+Ping on this patch.  I did not submit for master since the master branch ha=
+s already removed the kernel.bbclass.
 
-> Hey Roy,
->=20
-> [[meta-networking][PATCH] tftp-hpa: make init script work] On 13.03.05 (T=
-ue 09:00) rongqing.li@windriver.com wrote:
->=20
-> > From: "Roy.Li" <rongqing.li@windriver.com>
-> >=20
-> > 1. fix the daemon name, it should be in.tftpd-hpa
-> > 2. root directory should be /var/lib/tftpboot, since /var/lib/tftpboot =
-has been
-> > installed, but /srv/tftpboot not
->=20
-> Hmm.  This is a bit problematic for me.  I wouldn't normally bat an eye
-> at such a change, but because the original recipe specifically pointed
-> the tftp server at /srv and when I looked at my own tftp server, that's
-> where it was set.  It's been so long since I did anything with it I'd
-> forgotten why I put the contents there, so I thought I'd have a quick
-> look-see as to why.  Turns out that's actually the FHS-recommended
-> location:
->=20
->    http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDE=
-DBYSYSTEM
->=20
-> And this has been identified and fixed in at least Ubuntu:
->=20
->    https://bugs.launchpad.net/ubuntu/+source/tftp-hpa/+bug/84615
->=20
-> Unless there's a strong objection, I'd prefer to see a fix for this that
-> updates the recipe to install into /svc/tftpboot, rather than changing
-> the daemon options to look in /var/lib/tftpboot.
 
-Roy?  Just a ping.
-
--J.
-
+> -----Original Message-----
+> From: Maupin, Chase
+> Sent: Monday, March 18, 2013 12:50 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Maupin, Chase
+> Subject: [oe][meta-oe][PATCH][for-danny] kernel bbclass: return
+> to original directory in do_deploy
 >=20
-> Changing the name is fine with me (will this cause pain for the systemd
-> folks?).
+> * During the base kernel_do_deploy function the directory is
+>   changed to DEPLOYDIR in order to do some cleanup and
+> symlinking.
+>   However, the directory is not changed back to the original
+>   starting directory ${S} at the end.  For append functions this
+>   means that the starting directory is not ${S} as expected but
+>   instead ${DEPLOYDIR}.
 >=20
-> -J.
+>   For functions like the do_deploy_append in
+>   recipes-kernel/linux/linux-dtb.inc there is an assumption that
+>   you are still in the source directory and not the DEPLOYDIR.
+>   Without this change the .dtb files are not copied because the
+>   check for the existence of ${DTS_FILE} which is a relative
+>   path from the ${S} directory fails.  This means that the .dtb
+>   files are not copied into the deploy directory and subsequently
+>   the deploy/images directory.
 >=20
-> >=20
-> > Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> > ---
-> >  meta-networking/recipes-daemons/tftp-hpa/files/default   |    2 +-
-> >  meta-networking/recipes-daemons/tftp-hpa/files/init      |    2 +-
-> >  meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb |    2 +-
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/default b/m=
-eta-networking/recipes-daemons/tftp-hpa/files/default
-> > index de2ed18..1dce7fd 100644
-> > --- a/meta-networking/recipes-daemons/tftp-hpa/files/default
-> > +++ b/meta-networking/recipes-daemons/tftp-hpa/files/default
-> > @@ -1,3 +1,3 @@
-> >  #Defaults for tftpd-hpa
-> >  RUN_DAEMON=3D"yes"
-> > -OPTIONS=3D"-l -s /srv/tftpboot"
-> > +OPTIONS=3D"-l -s /var/lib/tftpboot"
-> > diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/init b/meta=
--networking/recipes-daemons/tftp-hpa/files/init
-> > index 5ad8c52..0561ff6 100644
-> > --- a/meta-networking/recipes-daemons/tftp-hpa/files/init
-> > +++ b/meta-networking/recipes-daemons/tftp-hpa/files/init
-> > @@ -18,7 +18,7 @@ set -e
-> > =20
-> >  PATH=3D/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-> >  DESC=3D"HPA's tftpd"
-> > -NAME=3Din.tftpd
-> > +NAME=3Din.tftpd-hpa
-> >  DAEMON=3D/usr/sbin/$NAME
-> >  PIDFILE=3D/var/run/$NAME.pid
-> >  SCRIPTNAME=3D/etc/init.d/tftpd-hpa
-> > diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b=
-/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > index af48455..c116121 100644
-> > --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > @@ -11,7 +11,7 @@ LICENSE =3D "BSD-4-Clause"
-> >  LIC_FILES_CHKSUM =3D "file://MCONFIG.in;beginline=3D1;endline=3D9;md5=
-=3Dc28ba5adb43041fae4629db05c83cbdd \
-> >                      file://tftp/tftp.c;beginline=3D1;endline=3D32;md5=
-=3D988c1cba99d70858a26cd877209857f4"
-> > =20
-> > -PR =3D "r0"
-> > +PR =3D "r1"
-> > =20
-> >  SRC_URI =3D "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp=
--hpa-${PV}.tar.bz2 \
-> >             file://tftp-0.40-remap.patch \
---=20
--Joe MacDonald.
-:wq
+>   In the log.do_deploy file you will see lines like:
+>=20
+>     Warning: arch/arm/boot/dts/xxxxx.dts is not available!
+>=20
+>   This fix has also been picked up in the oe-core kernel.bbclass:
+>=20
+>   http://cgit.openembedded.org/openembedded-
+> core/commit/?id=3Dfd5d80ab1a405cb4ef94f2cde25f8c251da490f0
+>=20
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+>  meta-oe/classes/kernel.bbclass |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/meta-oe/classes/kernel.bbclass b/meta-
+> oe/classes/kernel.bbclass
+> index 25c5f64..a0f67f9 100644
+> --- a/meta-oe/classes/kernel.bbclass
+> +++ b/meta-oe/classes/kernel.bbclass
+> @@ -546,6 +546,7 @@ kernel_do_deploy() {
+>  	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGETYPE}
+>=20
+>  	cp ${COREBASE}/meta/files/deploydir_readme.txt
+> ${DEPLOYDIR}/README_-_DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
+> +	cd -
+>  }
+>  do_deploy[dirs] =3D "${DEPLOYDIR} ${B}"
+>=20
+> --
+> 1.7.0.4
 
---VuQYccsttdhdIfIP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlFMWJEACgkQPN8S4W6ZZnd0EwCfd2lOW1q4r2f5cal2Jb+QUX2F
-WsAAnAhGx1VTCg1pY2PP0VXdddWNXM0O
-=4eKZ
------END PGP SIGNATURE-----
-
---VuQYccsttdhdIfIP--
