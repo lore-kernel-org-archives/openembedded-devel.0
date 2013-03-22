@@ -1,36 +1,36 @@
-Received: from mail-pd0-f181.google.com ([209.85.192.181])
+Received: from mail-da0-f48.google.com ([209.85.210.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UIyQH-0007fu-VB
+	(envelope-from <martin.jansa@gmail.com>) id 1UIyRV-0007or-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 10:38:36 +0100
-Received: by mail-pd0-f181.google.com with SMTP id q10so1504688pdj.40
+	Fri, 22 Mar 2013 10:39:22 +0100
+Received: by mail-da0-f48.google.com with SMTP id p8so2151878dan.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 02:21:11 -0700 (PDT)
+	Fri, 22 Mar 2013 02:22:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2NngwY0ujIkIZ2ktAf0TtuI8bPZz50BYDEI+03SQW3k=;
-	b=PmR/O6MuXk5Wm9YOJqhpESBtjw2ao7MX5tiEUTydNlC/vUv9Fcf8QoRxmbFv15PVJv
-	BzKY4AFhJ6IC0ZxtYdfIEk5OJSPc0fMfSwH9G4Q5lHyO/jnaldEeiOaLYXn8GxwuIRCh
-	dhR/agkLfu/VSKZX7tRtNCi3wQShmnizUpfUcDK/YuUiRgTXZhap7USV6Z8udXIxJtwv
-	xv/I/pNeiblYyfMy1zRfBJIQbySVO2vn89mvMeBJJm+5U/v+lD9NtTxMD1CzBBP9dtcK
-	0g3sTrYd39oRsqCQkpJPlUkxPURzqfNkBLUhDqCrlKUnPzvPyybgChoiUgwltwMryy1r
-	zZ4g==
-X-Received: by 10.66.163.69 with SMTP id yg5mr2132021pab.109.1363944071676;
-	Fri, 22 Mar 2013 02:21:11 -0700 (PDT)
+	bh=WP4plzNvHoLn9K0wklhps2as2VBrTH6E6x6ExthNRUk=;
+	b=aOsgE/x6GQz0u0B0DYcBgGKVmpJ9/ArxInghdPvIjYBGOM0Zz20/fQtaGynLtUxS4a
+	fjkN38teXQx5FvNPyvkEK48ZcDwlQBj3yCicwu9C7BCLWtZpy657A4GNhfWnPOB9/mII
+	XgxAs4G2XJBh0QUrhXTJ6k+8pPPk2bdhXcSg5wIasoUSYIn99mJ2jOkvN4CC3Fw/+Qvr
+	PaRFxfIm8+6+sXlUgaPe7Hav1Hs/PMna2k3X8nk3qQMLm+8bwxfi8SVLRq5oRltKeV8F
+	8O4B2GhC+Qk+J3ELXxStP9REXOf6Qr5yk3SpgpGfG3eolCRwamZet7ANI7sjEvWYb7hA
+	P3vw==
+X-Received: by 10.68.134.227 with SMTP id pn3mr1543596pbb.90.1363944146994;
+	Fri, 22 Mar 2013 02:22:26 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ij15sm2295138pac.4.2013.03.22.02.21.09
+	by mx.google.com with ESMTPS id lb8sm2274924pab.13.2013.03.22.02.22.18
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 02:21:10 -0700 (PDT)
-Date: Fri, 22 Mar 2013 10:21:09 +0100
+	Fri, 22 Mar 2013 02:22:25 -0700 (PDT)
+Date: Fri, 22 Mar 2013 10:22:18 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130322092109.GK3219@jama>
-References: <1363873108-2848-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Message-ID: <20130322092218.GL3219@jama>
+References: <1363279557-5861-1-git-send-email-stefan@herbrechtsmeier.net>
 MIME-Version: 1.0
-In-Reply-To: <1363873108-2848-1-git-send-email-marcin.juszkiewicz@linaro.org>
+In-Reply-To: <1363279557-5861-1-git-send-email-stefan@herbrechtsmeier.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] openldap: do not strip during install
+Subject: Re: [meta-oe][PATCH] libtinyxml: Add native support and use relative paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,84 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 09:38:39 -0000
-X-Groupsio-MsgNum: 43652
+X-List-Received-Date: Fri, 22 Mar 2013 09:39:22 -0000
+X-Groupsio-MsgNum: 43653
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BOhpupldhMlYbdva"
+	protocol="application/pgp-signature"; boundary="NPWyolIJAVLYbHY6"
 Content-Disposition: inline
 
---BOhpupldhMlYbdva
+--NPWyolIJAVLYbHY6
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 21, 2013 at 02:38:28PM +0100, Marcin Juszkiewicz wrote:
-> Before:
-> WARNING: File '/usr/lib/openldap/slapd' from openldap was already strippe=
-d, this will prevent future debugging!
-> WARNING: File '/usr/bin/ldapsearch' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldapmodify' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldapdelete' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldapmodrdn' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldappasswd' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldapwhoami' from openldap was already stripped, t=
-his will prevent future debugging!
-> WARNING: File '/usr/bin/ldapcompare' from openldap was already stripped, =
-this will prevent future debugging!
-> WARNING: File '/usr/bin/ldapexop' from openldap was already stripped, thi=
-s will prevent future debugging!
-> WARNING: File '/usr/bin/ldapurl' from openldap was already stripped, this=
- will prevent future debugging!
+On Thu, Mar 14, 2013 at 05:45:57PM +0100, Stefan Herbrechtsmeier wrote:
+> Replace CXXFLAGS +=3D "-fPIC" with EXTRA_CXXFLAGS to allow native
+> build and use relative paths to simplify recipe.
 
 Applied, thanks!
 
 >=20
-> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 > ---
->  meta-oe/recipes-support/openldap/openldap-2.4.23/install-strip.patch | 2=
- +-
->  meta-oe/recipes-support/openldap/openldap_2.4.23.bb                  | 1=
- +
->  2 files changed, 2 insertions(+), 1 deletion(-)
+>  .../recipes-support/libtinyxml/libtinyxml_2.6.2.bb |   18 ++++++++++----=
+----
+>  1 files changed, 10 insertions(+), 8 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-support/openldap/openldap-2.4.23/install-str=
-ip.patch b/meta-oe/recipes-support/openldap/openldap-2.4.23/install-strip.p=
-atch
-> index 9d7640c..2992b70 100644
-> --- a/meta-oe/recipes-support/openldap/openldap-2.4.23/install-strip.patch
-> +++ b/meta-oe/recipes-support/openldap/openldap-2.4.23/install-strip.patch
-> @@ -8,7 +8,7 @@
->   	$(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
->  =20
->  -LTINSTALL =3D $(LIBTOOL) --mode=3Dinstall $(INSTALL)=20
-> -+LTINSTALL =3D STRIPPROG=3D"@STRIP@" $(LIBTOOL) --mode=3Dinstall $(top_s=
-rcdir)/contrib/ldapc++/install-sh -c
-> ++LTINSTALL =3D STRIPPROG=3D"" $(LIBTOOL) --mode=3Dinstall $(top_srcdir)/=
-contrib/ldapc++/install-sh -c
->   LTFINISH =3D $(LIBTOOL) --mode=3Dfinish
->  =20
->   # Misc UNIX commands used in build environment
-> diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-o=
-e/recipes-support/openldap/openldap_2.4.23.bb
-> index 319c50d..1c6c32f 100644
-> --- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-> +++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-> @@ -19,6 +19,7 @@ SRC_URI +=3D "file://initscript"
->  SRC_URI[md5sum] =3D "90150b8c0d0192e10b30157e68844ddf"
->  SRC_URI[sha256sum] =3D "5a5ede91d5e8ab3c7f637620aa29a3b96eb34318a8b26c8e=
-ef2d2c789fc055e3"
+> diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/met=
+a-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+> index fdadebd..8670fac 100644
+> --- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+> +++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+> @@ -16,20 +16,21 @@ SRC_URI[sha256sum] =3D "15bdfdcec58a7da30adc87ac2b078=
+e4417dbe5392f3afb719f9ba6d062
 > =20
-> +PR =3D "r1"
->  # The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
->  # installing .so and executables, this fails in cross compilation
->  # environments
+>  S =3D "${WORKDIR}/tinyxml"
+> =20
+> -CXXFLAGS +=3D "-fPIC"
+> +EXTRA_CXXFLAGS =3D "-I. -fPIC"
+> =20
+>  do_compile() {
+> -    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxml.o ${S}/tinyxml.cpp
+> -    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlerror.o ${S}/tinyxmlerro=
+r.cpp
+> -    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlparser.o ${S}/tinyxmlpar=
+ser.cpp
+> +    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml.o tinyxml.cpp
+> +    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlerror.o tinyxmlerr=
+or.cpp
+> +    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlparser.o tinyxmlpa=
+rser.cpp
+>      ${CXX} ${CXXFLAGS} \
+>              -shared \
+>              -Wl,-soname,libtinyxml.so.${PV} \
+> -            -o ${S}/libtinyxml.so.${PV} \
+> +            -o libtinyxml.so.${PV} \
+>              ${LDFLAGS} \
+> -            ${S}/tinyxml.o \
+> -            ${S}/tinyxmlparser.o \
+> -            ${S}/tinyxmlerror.o
+> +            tinyxml.o \
+> +            tinyxmlparser.o \
+> +            tinyxmlerror.o
+> +
+>  }
+> =20
+>  do_install() {
+> @@ -41,3 +42,4 @@ do_install() {
+>      install -m 0644 ${S}/tinyxml.h ${D}${includedir}
+>  }
+> =20
+> +BBCLASSEXTEND +=3D "native"
 > --=20
-> 1.8.1.2
+> 1.7.0.4
 >=20
 >=20
 > _______________________________________________
@@ -132,16 +125,16 @@ ef2d2c789fc055e3"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---BOhpupldhMlYbdva
+--NPWyolIJAVLYbHY6
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFMIoUACgkQN1Ujt2V2gByp6wCeMYhSyqWR3ALpqncP9RLaNoNW
-VXIAniMdq6y3EqwTsO8WG4lb+RWsFo9s
-=k7fl
+iEYEARECAAYFAlFMIsoACgkQN1Ujt2V2gBxmSgCePZ3LNj3svLbontDZHwiQ26OL
+I7QAoK2FwT3vEZIBZk1WP5iVcioQdeTo
+=LZFs
 -----END PGP SIGNATURE-----
 
---BOhpupldhMlYbdva--
+--NPWyolIJAVLYbHY6--
