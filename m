@@ -1,36 +1,37 @@
-Received: from mail-pb0-f42.google.com ([209.85.160.42])
+Received: from mail-pb0-f45.google.com ([209.85.160.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UIySA-0007wj-Sz
+	(envelope-from <martin.jansa@gmail.com>) id 1UIySX-0007ze-Ji
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 10:40:05 +0100
-Received: by mail-pb0-f42.google.com with SMTP id xb4so2939711pbc.1
+	Fri, 22 Mar 2013 10:40:34 +0100
+Received: by mail-pb0-f45.google.com with SMTP id ro8so2942432pbb.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 02:23:08 -0700 (PDT)
+	Fri, 22 Mar 2013 02:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=O7nzYDAlSP2B3ZTzwPESq73iQ6FJ0/3zOtEH94/CePw=;
-	b=cza0qOkivt+CCLNb8tu5BBUndZB+3DdSx/7oYJd1U+tQRglkbXuHSQvBOHWQsy7pzw
-	H5ChMU10rZJYJ3UdhNAdPWzsNU1u5K9JAv6XDPvHVTceGV+1ZfwGZkE59QWFrWJajvZN
-	w147deYXrLfvQrVz0DQCHaemZnRJ1xojitWukua1WHyC9NYQf6/7Ne9n8YWH2GUP5mRd
-	eyyPkfE+ogm+P3YiptAxfSwZuy9xQjpX8+IblFNQ+RHXQSbZUhziNkU9BpQXHwnlgp8j
-	JGaS4bgPypCpmSiuNSRFKwiumc2SJ+Hr8f7JO4nzeTMVaAvaz0b2Vjgn46MB9Z4ozHjU
-	AN3w==
-X-Received: by 10.66.220.10 with SMTP id ps10mr2169698pac.117.1363944188731;
-	Fri, 22 Mar 2013 02:23:08 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=0NOZN7fGmSwgagia4K0zRChnHV0Og32BoPHStQzQr1o=;
+	b=ZJMlbo4JrC5FUuM+n+6SXBH0S0RLj/5WiExKo80hd7rjTaSF981j6kojgpijkip6p9
+	E4QAaQ4hRrwXIiz4l4+kgROHUi9fBIro/QCPoqsEGxMPDasiEgDRob8OM4simoWgSChW
+	xNpsf21rF9NmnKphRWQmE5H0C8m7/imijMVxykY0JucIKSFsDIXHzQTsnQJh8QRLeWSy
+	+Ws6wZLdFXt4NC6rnlovS9g114Ea6AUH1qlAD9l+VRasP/+TjlimtsSZVvI+HM4A2Tp4
+	+5SI6BHL1t4AtH9B1RLXbfcLwroJI7PVA0Kv+26tN/kYXG5jLGplROk2conUBzsc2r54
+	XkeA==
+X-Received: by 10.66.165.34 with SMTP id yv2mr2269120pab.35.1363944211427;
+	Fri, 22 Mar 2013 02:23:31 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id pb3sm1748861pbc.7.2013.03.22.02.23.06
+	by mx.google.com with ESMTPS id na4sm1750005pbc.8.2013.03.22.02.23.28
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 02:23:07 -0700 (PDT)
-Date: Fri, 22 Mar 2013 10:23:06 +0100
+	Fri, 22 Mar 2013 02:23:30 -0700 (PDT)
+Date: Fri, 22 Mar 2013 10:23:29 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130322092306.GN3219@jama>
-References: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
+Message-ID: <20130322092328.GO3219@jama>
+References: <1363439755-13680-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <1363332414-10484-1-git-send-email-jukka.rissanen@linux.intel.com>
+In-Reply-To: <1363439755-13680-1-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] wpa_supplicant: Location of systemd services files changed
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] python-numpy: add i586 *config.h files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,48 +45,201 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 09:40:19 -0000
-X-Groupsio-MsgNum: 43655
+X-List-Received-Date: Fri, 22 Mar 2013 09:40:38 -0000
+X-Groupsio-MsgNum: 43656
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0aF+6pWUK5w8WdCh"
+	protocol="application/pgp-signature"; boundary="8N0TQpGUCeEQshoq"
 Content-Disposition: inline
 
---0aF+6pWUK5w8WdCh
+--8N0TQpGUCeEQshoq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 15, 2013 at 09:26:54AM +0200, Jukka Rissanen wrote:
->=20
-> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-> ---
->  .../recipes-connectivity/wpa-supplicant/wpa-supplicant_2.0.bbappend     =
-| 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa=
--supplicant_2.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/wpa-su=
-pplicant/wpa-supplicant_2.0.bbappend
-> index 23dcc82..91ee4ad 100644
-> --- a/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-suppli=
-cant_2.0.bbappend
-> +++ b/meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-suppli=
-cant_2.0.bbappend
-> @@ -8,7 +8,7 @@ SYSTEMD_AUTO_ENABLE =3D "disable"
-> =20
->  do_install_append () {
->      install -d ${D}${systemd_unitdir}/system
-> -    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
-> +    install -m 644 ${S}/wpa_supplicant/systemd/*.service ${D}${systemd_u=
-nitdir}/system
->  }
-> =20
->  # systemd.bbclass does not catch all multiple-instance-service-files
+On Sat, Mar 16, 2013 at 02:15:55PM +0100, Koen Kooi wrote:
+> Generated using native compile on FRI2/angstrom
 
 Applied, thanks!
 
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  .../python/python-numpy/i586/config.h              | 108 +++++++++++++++=
+++++++
+>  .../python/python-numpy/i586/numpyconfig.h         |  24 +++++
+>  .../recipes-devtools/python/python-numpy_1.7.0.bb  |   4 +
+>  3 files changed, 136 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/i586/con=
+fig.h
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/i586/num=
+pyconfig.h
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/i586/config.h b=
+/meta-oe/recipes-devtools/python/python-numpy/i586/config.h
+> new file mode 100644
+> index 0000000..08e41e3
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/i586/config.h
+> @@ -0,0 +1,108 @@
+> +#define SIZEOF_PY_INTPTR_T 4
+> +#define SIZEOF_PY_LONG_LONG 8
+> +#define MATHLIB m
+> +#define HAVE_SIN
+> +#define HAVE_COS
+> +#define HAVE_TAN
+> +#define HAVE_SINH
+> +#define HAVE_COSH
+> +#define HAVE_TANH
+> +#define HAVE_FABS
+> +#define HAVE_FLOOR
+> +#define HAVE_CEIL
+> +#define HAVE_SQRT
+> +#define HAVE_LOG10
+> +#define HAVE_LOG
+> +#define HAVE_EXP
+> +#define HAVE_ASIN
+> +#define HAVE_ACOS
+> +#define HAVE_ATAN
+> +#define HAVE_FMOD
+> +#define HAVE_MODF
+> +#define HAVE_FREXP
+> +#define HAVE_LDEXP
+> +#define HAVE_RINT
+> +#define HAVE_TRUNC
+> +#define HAVE_EXP2
+> +#define HAVE_LOG2
+> +#define HAVE_ATAN2
+> +#define HAVE_POW
+> +#define HAVE_NEXTAFTER
+> +#define HAVE_SINF
+> +#define HAVE_COSF
+> +#define HAVE_TANF
+> +#define HAVE_SINHF
+> +#define HAVE_COSHF
+> +#define HAVE_TANHF
+> +#define HAVE_FABSF
+> +#define HAVE_FLOORF
+> +#define HAVE_CEILF
+> +#define HAVE_RINTF
+> +#define HAVE_TRUNCF
+> +#define HAVE_SQRTF
+> +#define HAVE_LOG10F
+> +#define HAVE_LOGF
+> +#define HAVE_LOG1PF
+> +#define HAVE_EXPF
+> +#define HAVE_EXPM1F
+> +#define HAVE_ASINF
+> +#define HAVE_ACOSF
+> +#define HAVE_ATANF
+> +#define HAVE_ASINHF
+> +#define HAVE_ACOSHF
+> +#define HAVE_ATANHF
+> +#define HAVE_HYPOTF
+> +#define HAVE_ATAN2F
+> +#define HAVE_POWF
+> +#define HAVE_FMODF
+> +#define HAVE_MODFF
+> +#define HAVE_FREXPF
+> +#define HAVE_LDEXPF
+> +#define HAVE_EXP2F
+> +#define HAVE_LOG2F
+> +#define HAVE_COPYSIGNF
+> +#define HAVE_NEXTAFTERF
+> +#define HAVE_SINL
+> +#define HAVE_COSL
+> +#define HAVE_TANL
+> +#define HAVE_SINHL
+> +#define HAVE_COSHL
+> +#define HAVE_TANHL
+> +#define HAVE_FABSL
+> +#define HAVE_FLOORL
+> +#define HAVE_CEILL
+> +#define HAVE_RINTL
+> +#define HAVE_TRUNCL
+> +#define HAVE_SQRTL
+> +#define HAVE_LOG10L
+> +#define HAVE_LOGL
+> +#define HAVE_LOG1PL
+> +#define HAVE_EXPL
+> +#define HAVE_EXPM1L
+> +#define HAVE_ASINL
+> +#define HAVE_ACOSL
+> +#define HAVE_ATANL
+> +#define HAVE_ASINHL
+> +#define HAVE_ACOSHL
+> +#define HAVE_ATANHL
+> +#define HAVE_HYPOTL
+> +#define HAVE_ATAN2L
+> +#define HAVE_POWL
+> +#define HAVE_FMODL
+> +#define HAVE_MODFL
+> +#define HAVE_FREXPL
+> +#define HAVE_LDEXPL
+> +#define HAVE_EXP2L
+> +#define HAVE_LOG2L
+> +#define HAVE_COPYSIGNL
+> +#define HAVE_NEXTAFTERL
+> +#define HAVE_DECL_SIGNBIT
+> +#define HAVE_COMPLEX_H
+> +#define HAVE_LDOUBLE_INTEL_EXTENDED_12_BYTES_LE 1
+> +#ifndef __cplusplus
+> +/* #undef inline */
+> +#endif
+> +
+> +#ifndef _NPY_NPY_CONFIG_H_
+> +#error config.h should never be included directly, include npy_config.h =
+instead
+> +#endif
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfi=
+g.h b/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfig.h
+> new file mode 100644
+> index 0000000..ff7938c
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfig.h
+> @@ -0,0 +1,24 @@
+> +#ifndef _NPY_NUMPYCONFIG_H_
+> +#define _NPY_NUMPYCONFIG_H_
+> +
+> +#include "_numpyconfig.h"
+> +
+> +/*=20
+> + * On Mac OS X, because there is only one configuration stage for all th=
+e archs
+> + * in universal builds, any macro which depends on the arch needs to be
+> + * harcoded
+> + */
+> +#ifdef __APPLE__
+> +	#undef NPY_SIZEOF_LONG
+> +	#undef NPY_SIZEOF_PY_INTPTR_T
+> +
+> +	#ifdef __LP64__
+> +		#define NPY_SIZEOF_LONG 		8
+> +		#define NPY_SIZEOF_PY_INTPTR_T 	8
+> +	#else
+> +		#define NPY_SIZEOF_LONG 		4
+> +		#define NPY_SIZEOF_PY_INTPTR_T 	4
+> +	#endif
+> +#endif
+> +
+> +#endif
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb b/meta=
+-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> index bbe4e63..23bec15 100644
+> --- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> @@ -18,6 +18,10 @@ CONFIGFILESURI_mipsel =3D "file://config.h \
+>  	   file://numpyconfig.h \
+>  	  "
+> =20
+> +CONFIGFILESURI_i586 =3D "file://config.h \
+> +                       file://numpyconfig.h \
+> +                      "
+> +
+>  S =3D "${WORKDIR}/numpy-${PV}"
+> =20
+>  inherit distutils
 > --=20
-> 1.7.11.4
+> 1.8.1.4
 >=20
 >=20
 > _______________________________________________
@@ -96,16 +250,16 @@ Applied, thanks!
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0aF+6pWUK5w8WdCh
+--8N0TQpGUCeEQshoq
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFMIvoACgkQN1Ujt2V2gBzqegCeJ58P7ROvo+EmpCo4+Cfui2N+
-+KcAn3Fj0nCpkB1AidP3X/Xfrqc7ZNrv
-=bfTk
+iEYEARECAAYFAlFMIxAACgkQN1Ujt2V2gBzktwCfbtI+AGF1pq/XA2a0M9/Koo9E
+EtMAn0+E71gx3+ZmH7lqAwN0cR+9NdYc
+=5nfT
 -----END PGP SIGNATURE-----
 
---0aF+6pWUK5w8WdCh--
+--8N0TQpGUCeEQshoq--
