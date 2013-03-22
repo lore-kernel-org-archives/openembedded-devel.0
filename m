@@ -1,37 +1,36 @@
-Received: from mail-pb0-f45.google.com ([209.85.160.45])
+Received: from mail-pd0-f177.google.com ([209.85.192.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UIySX-0007ze-Ji
+	(envelope-from <martin.jansa@gmail.com>) id 1UIyTB-00084D-L4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Mar 2013 10:40:34 +0100
-Received: by mail-pb0-f45.google.com with SMTP id ro8so2942432pbb.18
+	Fri, 22 Mar 2013 10:41:06 +0100
+Received: by mail-pd0-f177.google.com with SMTP id y14so1491076pdi.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Mar 2013 02:23:31 -0700 (PDT)
+	Fri, 22 Mar 2013 02:24:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=0NOZN7fGmSwgagia4K0zRChnHV0Og32BoPHStQzQr1o=;
-	b=ZJMlbo4JrC5FUuM+n+6SXBH0S0RLj/5WiExKo80hd7rjTaSF981j6kojgpijkip6p9
-	E4QAaQ4hRrwXIiz4l4+kgROHUi9fBIro/QCPoqsEGxMPDasiEgDRob8OM4simoWgSChW
-	xNpsf21rF9NmnKphRWQmE5H0C8m7/imijMVxykY0JucIKSFsDIXHzQTsnQJh8QRLeWSy
-	+Ws6wZLdFXt4NC6rnlovS9g114Ea6AUH1qlAD9l+VRasP/+TjlimtsSZVvI+HM4A2Tp4
-	+5SI6BHL1t4AtH9B1RLXbfcLwroJI7PVA0Kv+26tN/kYXG5jLGplROk2conUBzsc2r54
-	XkeA==
-X-Received: by 10.66.165.34 with SMTP id yv2mr2269120pab.35.1363944211427;
-	Fri, 22 Mar 2013 02:23:31 -0700 (PDT)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=tjIxTDmQXD7AQvKZM0b8vJwNzJTJZiIRfmcHLgHg4L0=;
+	b=pXCs1MQ5YBPk4RXzo4WMPS5Af+VRj8a5HUfQFGOEXoE8sBY+2NsBPPmLRq9iSMkZJS
+	kgF0KfuiwA4nqqVA8t2xdbincWtpbXpfQtZ+L57FpXpObu07/FbUTfGU3hQ1TwECNG41
+	YP7Gw+V2LXgVa6H+wkx3GMPibsdUX1u0pj31OIjmRIBDxXjPB3t+IvSxGZ8U5bIcGGeH
+	QxkGTeWarT10xaxncVQPM/0JsJLrB3BcJKFT0BAxV8etrCz0wa0AUY+0uNb5f8AFqJq0
+	NpftnjFOkxsCzK4mTXsizmfRN/yb7S0Mi3SxsEkkxtfm2d1uJ7GkaMkrSoLt5YX0sXev
+	Rppg==
+X-Received: by 10.66.232.230 with SMTP id tr6mr2197297pac.83.1363944251289;
+	Fri, 22 Mar 2013 02:24:11 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id na4sm1750005pbc.8.2013.03.22.02.23.28
+	by mx.google.com with ESMTPS id iv3sm1708211pbc.40.2013.03.22.02.24.08
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 22 Mar 2013 02:23:30 -0700 (PDT)
-Date: Fri, 22 Mar 2013 10:23:29 +0100
+	Fri, 22 Mar 2013 02:24:10 -0700 (PDT)
+Date: Fri, 22 Mar 2013 10:24:09 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130322092328.GO3219@jama>
-References: <1363439755-13680-1-git-send-email-koen@dominion.thruhere.net>
+Message-ID: <20130322092409.GP3219@jama>
+References: <1363209826-5929-1-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <1363439755-13680-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1363209826-5929-1-git-send-email-obi@opendreambox.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] python-numpy: add i586 *config.h files
+Subject: Re: [meta-oe][PATCH] xfsprogs: fix compile with uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,201 +44,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 09:40:38 -0000
-X-Groupsio-MsgNum: 43656
+X-List-Received-Date: Fri, 22 Mar 2013 09:41:08 -0000
+X-Groupsio-MsgNum: 43657
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8N0TQpGUCeEQshoq"
+	protocol="application/pgp-signature"; boundary="7ZMy3ZKywLyoHonN"
 Content-Disposition: inline
 
---8N0TQpGUCeEQshoq
+--7ZMy3ZKywLyoHonN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 16, 2013 at 02:15:55PM +0100, Koen Kooi wrote:
-> Generated using native compile on FRI2/angstrom
+On Wed, Mar 13, 2013 at 10:23:46PM +0100, Andreas Oberritter wrote:
+> Uclibc doesn't have aio.h, which xfsprogs checks for.
+> However, xfsprogs doesn't use aio.
 
 Applied, thanks!
 
 >=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 > ---
->  .../python/python-numpy/i586/config.h              | 108 +++++++++++++++=
+>  .../drop-configure-check-for-aio.patch             |   99 ++++++++++++++=
 ++++++
->  .../python/python-numpy/i586/numpyconfig.h         |  24 +++++
->  .../recipes-devtools/python/python-numpy_1.7.0.bb  |   4 +
->  3 files changed, 136 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/i586/con=
-fig.h
->  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/i586/num=
-pyconfig.h
+>  meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb |   10 +-
+>  2 files changed, 108 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-=
+configure-check-for-aio.patch
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy/i586/config.h b=
-/meta-oe/recipes-devtools/python/python-numpy/i586/config.h
+> diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configu=
+re-check-for-aio.patch b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/dr=
+op-configure-check-for-aio.patch
 > new file mode 100644
-> index 0000000..08e41e3
+> index 0000000..a1c6042
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-numpy/i586/config.h
-> @@ -0,0 +1,108 @@
-> +#define SIZEOF_PY_INTPTR_T 4
-> +#define SIZEOF_PY_LONG_LONG 8
-> +#define MATHLIB m
-> +#define HAVE_SIN
-> +#define HAVE_COS
-> +#define HAVE_TAN
-> +#define HAVE_SINH
-> +#define HAVE_COSH
-> +#define HAVE_TANH
-> +#define HAVE_FABS
-> +#define HAVE_FLOOR
-> +#define HAVE_CEIL
-> +#define HAVE_SQRT
-> +#define HAVE_LOG10
-> +#define HAVE_LOG
-> +#define HAVE_EXP
-> +#define HAVE_ASIN
-> +#define HAVE_ACOS
-> +#define HAVE_ATAN
-> +#define HAVE_FMOD
-> +#define HAVE_MODF
-> +#define HAVE_FREXP
-> +#define HAVE_LDEXP
-> +#define HAVE_RINT
-> +#define HAVE_TRUNC
-> +#define HAVE_EXP2
-> +#define HAVE_LOG2
-> +#define HAVE_ATAN2
-> +#define HAVE_POW
-> +#define HAVE_NEXTAFTER
-> +#define HAVE_SINF
-> +#define HAVE_COSF
-> +#define HAVE_TANF
-> +#define HAVE_SINHF
-> +#define HAVE_COSHF
-> +#define HAVE_TANHF
-> +#define HAVE_FABSF
-> +#define HAVE_FLOORF
-> +#define HAVE_CEILF
-> +#define HAVE_RINTF
-> +#define HAVE_TRUNCF
-> +#define HAVE_SQRTF
-> +#define HAVE_LOG10F
-> +#define HAVE_LOGF
-> +#define HAVE_LOG1PF
-> +#define HAVE_EXPF
-> +#define HAVE_EXPM1F
-> +#define HAVE_ASINF
-> +#define HAVE_ACOSF
-> +#define HAVE_ATANF
-> +#define HAVE_ASINHF
-> +#define HAVE_ACOSHF
-> +#define HAVE_ATANHF
-> +#define HAVE_HYPOTF
-> +#define HAVE_ATAN2F
-> +#define HAVE_POWF
-> +#define HAVE_FMODF
-> +#define HAVE_MODFF
-> +#define HAVE_FREXPF
-> +#define HAVE_LDEXPF
-> +#define HAVE_EXP2F
-> +#define HAVE_LOG2F
-> +#define HAVE_COPYSIGNF
-> +#define HAVE_NEXTAFTERF
-> +#define HAVE_SINL
-> +#define HAVE_COSL
-> +#define HAVE_TANL
-> +#define HAVE_SINHL
-> +#define HAVE_COSHL
-> +#define HAVE_TANHL
-> +#define HAVE_FABSL
-> +#define HAVE_FLOORL
-> +#define HAVE_CEILL
-> +#define HAVE_RINTL
-> +#define HAVE_TRUNCL
-> +#define HAVE_SQRTL
-> +#define HAVE_LOG10L
-> +#define HAVE_LOGL
-> +#define HAVE_LOG1PL
-> +#define HAVE_EXPL
-> +#define HAVE_EXPM1L
-> +#define HAVE_ASINL
-> +#define HAVE_ACOSL
-> +#define HAVE_ATANL
-> +#define HAVE_ASINHL
-> +#define HAVE_ACOSHL
-> +#define HAVE_ATANHL
-> +#define HAVE_HYPOTL
-> +#define HAVE_ATAN2L
-> +#define HAVE_POWL
-> +#define HAVE_FMODL
-> +#define HAVE_MODFL
-> +#define HAVE_FREXPL
-> +#define HAVE_LDEXPL
-> +#define HAVE_EXP2L
-> +#define HAVE_LOG2L
-> +#define HAVE_COPYSIGNL
-> +#define HAVE_NEXTAFTERL
-> +#define HAVE_DECL_SIGNBIT
-> +#define HAVE_COMPLEX_H
-> +#define HAVE_LDOUBLE_INTEL_EXTENDED_12_BYTES_LE 1
-> +#ifndef __cplusplus
-> +/* #undef inline */
-> +#endif
+> +++ b/meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8/drop-configure-chec=
+k-for-aio.patch
+> @@ -0,0 +1,99 @@
+> +Upstream-Status: Pending
 > +
-> +#ifndef _NPY_NPY_CONFIG_H_
-> +#error config.h should never be included directly, include npy_config.h =
-instead
-> +#endif
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfi=
-g.h b/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfig.h
-> new file mode 100644
-> index 0000000..ff7938c
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-numpy/i586/numpyconfig.h
-> @@ -0,0 +1,24 @@
-> +#ifndef _NPY_NUMPYCONFIG_H_
-> +#define _NPY_NUMPYCONFIG_H_
+> +From a38bf800a655ea32cbddd6504e15c2f18597fd13 Mon Sep 17 00:00:00 2001
+> +From: Andreas Oberritter <obi@opendreambox.org>
+> +Date: Wed, 13 Mar 2013 14:40:13 +0100
+> +Subject: [PATCH] xfsprogs: drop configure check for aio
 > +
-> +#include "_numpyconfig.h"
+> +It's unused and breaks compilation with uclibc.
 > +
-> +/*=20
-> + * On Mac OS X, because there is only one configuration stage for all th=
-e archs
-> + * in universal builds, any macro which depends on the arch needs to be
-> + * harcoded
-> + */
-> +#ifdef __APPLE__
-> +	#undef NPY_SIZEOF_LONG
-> +	#undef NPY_SIZEOF_PY_INTPTR_T
+> +Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> +---
+> + configure.in         |    6 +++---
+> + m4/Makefile          |    1 -
+> + m4/package_aiodev.m4 |   37 -------------------------------------
+> + 3 files changed, 3 insertions(+), 41 deletions(-)
+> + delete mode 100644 m4/package_aiodev.m4
 > +
-> +	#ifdef __LP64__
-> +		#define NPY_SIZEOF_LONG 		8
-> +		#define NPY_SIZEOF_PY_INTPTR_T 	8
-> +	#else
-> +		#define NPY_SIZEOF_LONG 		4
-> +		#define NPY_SIZEOF_PY_INTPTR_T 	4
-> +	#endif
-> +#endif
+> +diff --git a/configure.in b/configure.in
+> +index 664c0e9..f7d35f1 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -46,6 +46,9 @@ AC_ARG_ENABLE(lib64,
+> + 	enable_lib64=3Dyes)
+> + AC_SUBST(enable_lib64)
+> +=20
+> ++librt=3D"-lrt"
+> ++AC_SUBST(librt)
+> ++
+> + #
+> + # If the user specified a libdir ending in lib64 do not append another
+> + # 64 to the library names.
+> +@@ -91,9 +94,6 @@ AC_PACKAGE_GLOBALS(xfsprogs)
+> + AC_PACKAGE_UTILITIES(xfsprogs)
+> + AC_MULTILIB($enable_lib64)
+> +=20
+> +-AC_PACKAGE_NEED_AIO_H
+> +-AC_PACKAGE_NEED_LIO_LISTIO
+> +-
+> + AC_PACKAGE_NEED_UUID_H
+> + AC_PACKAGE_NEED_UUIDCOMPARE
+> +=20
+> +diff --git a/m4/Makefile b/m4/Makefile
+> +index 654a4fb..d282f0a 100644
+> +--- a/m4/Makefile
+> ++++ b/m4/Makefile
+> +@@ -14,7 +14,6 @@ CONFIGURE =3D \
+> +=20
+> + LSRCFILES =3D \
+> + 	manual_format.m4 \
+> +-	package_aiodev.m4 \
+> + 	package_blkid.m4 \
+> + 	package_globals.m4 \
+> + 	package_libcdev.m4 \
+> +diff --git a/m4/package_aiodev.m4 b/m4/package_aiodev.m4
+> +deleted file mode 100644
+> +index 490d9c8..0000000
+> +--- a/m4/package_aiodev.m4
+> ++++ /dev/null
+> +@@ -1,37 +0,0 @@
+> +-#
+> +-# Check if we have a libaio.h installed
+> +-#
+> +-AC_DEFUN([AC_PACKAGE_WANT_AIO],
+> +-  [ AC_CHECK_HEADERS(libaio.h, [ have_aio=3Dtrue ], [ have_aio=3Dfalse =
+])
+> +-    AC_SUBST(have_aio)
+> +-  ])
+> +-
+> +-#
+> +-# Check if we have an aio.h installed
+> +-#
+> +-AC_DEFUN([AC_PACKAGE_NEED_AIO_H],
+> +-  [ AC_CHECK_HEADERS(aio.h)
+> +-    if test $ac_cv_header_aio_h =3D no; then
+> +-	echo
+> +-	echo 'FATAL ERROR: could not find a valid <aio.h> header.'
+> +-	exit 1
+> +-    fi
+> +-  ])
+> +-
+> +-#
+> +-# Check if we have the lio_listio routine in either libc/librt
+> +-#
+> +-AC_DEFUN([AC_PACKAGE_NEED_LIO_LISTIO],
+> +-  [ AC_CHECK_FUNCS(lio_listio)
+> +-    if test $ac_cv_func_lio_listio =3D yes; then
+> +-	librt=3D""
+> +-    else
+> +-	AC_CHECK_LIB(rt, lio_listio,, [
+> +-	    echo
+> +-	    echo 'FATAL ERROR: could not find a library with lio_listio.'
+> +-	    exit 1],[-lpthread])
+> +-	librt=3D"-lrt"
+> +-    fi
+> +-    AC_SUBST(librt)
+> +-  ])
+> +-
+> +--=20
+> +1.7.10.4
 > +
-> +#endif
-> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb b/meta=
--oe/recipes-devtools/python/python-numpy_1.7.0.bb
-> index bbe4e63..23bec15 100644
-> --- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-> @@ -18,6 +18,10 @@ CONFIGFILESURI_mipsel =3D "file://config.h \
->  	   file://numpyconfig.h \
->  	  "
+> diff --git a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb b/meta-oe=
+/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+> index f83561d..ef5224b 100644
+> --- a/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+> +++ b/meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb
+> @@ -5,10 +5,11 @@ LICENSE =3D "GPLv2"
+>  LICENSE_libhandle =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://doc/COPYING;md5=3Ddbdb5f4329b7e7145de650e9e=
+cd4ac2a"
+>  DEPENDS =3D "util-linux"
+> -PR =3D "r0"
+> +PR =3D "r1"
 > =20
-> +CONFIGFILESURI_i586 =3D "file://config.h \
-> +                       file://numpyconfig.h \
-> +                      "
-> +
->  S =3D "${WORKDIR}/numpy-${PV}"
+>  SRC_URI =3D "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
+>  	file://remove-install-as-user.patch \
+> +	file://drop-configure-check-for-aio.patch \
+>  "
 > =20
->  inherit distutils
+>  SRC_URI[md5sum] =3D "f70b2e7200d4c29f0af1cf70e7be1db6"
+> @@ -26,6 +27,13 @@ FILES_libhandle =3D "${base_libdir}/libhandle${SOLIBS}"
+> =20
+>  EXTRA_OECONF =3D "--enable-gettext=3Dno"
+>  do_configure () {
+> +	# Prevent Makefile from calling configure without arguments,
+> +	# when do_configure gets called for a second time.
+> +	rm -f include/builddefs include/platform_defs.h
+> +	# Recreate configure script.
+> +	rm -f configure
+> +	oe_runmake configure
+> +	# Configure.
+>  	export DEBUG=3D"-DNDEBUG"
+>  	gnu-configize --force
+>  	oe_runconf
 > --=20
-> 1.8.1.4
+> 1.7.10.4
 >=20
 >=20
 > _______________________________________________
@@ -250,16 +225,16 @@ e archs
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---8N0TQpGUCeEQshoq
+--7ZMy3ZKywLyoHonN
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFMIxAACgkQN1Ujt2V2gBzktwCfbtI+AGF1pq/XA2a0M9/Koo9E
-EtMAn0+E71gx3+ZmH7lqAwN0cR+9NdYc
-=5nfT
+iEYEARECAAYFAlFMIzkACgkQN1Ujt2V2gBz05ACfRk5g+gKjqI6W2EH2o7uAcKEq
+MQcAoII9KiDD3z69IaRQkv79XyFC1LHI
+=a9vj
 -----END PGP SIGNATURE-----
 
---8N0TQpGUCeEQshoq--
+--7ZMy3ZKywLyoHonN--
