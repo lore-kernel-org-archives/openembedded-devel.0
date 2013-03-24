@@ -1,20 +1,26 @@
-Received: from numa004.numadns.com ([50.57.168.93])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jms@bughunter.ca>) id 1UJqI6-0000Qg-O1
+	(envelope-from <apelete@seketeli.net>) id 1UJs4D-0003uj-4p
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Mar 2013 20:09:17 +0100
-Received: from numa004.numadns.com-new (localhost [127.0.0.1])
-	by numa004.numadns.com (Postfix) with SMTP id 48FD5183C3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Mar 2013 13:42:38 -0500 (CDT)
-From: "Justin Seitz" <jms@bughunter.ca>
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <1364150558.389@bughunter.ca>
-X-Originating-IP: 71.17.133.11
-X-Mailer: Usermin 1.540
-Date: Sun, 24 Mar 2013 13:42:38 -0500 (CDT)
+	Sun, 24 Mar 2013 22:03:05 +0100
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 7397BEA040;
+	Sun, 24 Mar 2013 21:57:54 +0100 (CET)
+Received: by localhost (Postfix, from userid 1000)
+	id CEE1E61ACE; Sun, 24 Mar 2013 21:46:03 +0100 (CET)
+Date: Sun, 24 Mar 2013 21:46:03 +0100
+From: Apelete Seketeli <apelete@seketeli.net>
+To: Tom Rini <tom.rini@gmail.com>
+Message-ID: <20130324204603.GC6454@hermes>
+References: <cover.1363255209.git.apelete@seketeli.net>
+	<20130322221414.GB6454@hermes> <20130324132149.GA9388@bill-the-cat>
 MIME-Version: 1.0
-Subject: ATNGW100
+In-Reply-To: <20130324132149.GA9388@bill-the-cat>
+X-Operating-System: Debian GNU/Linux 7.0
+X-URL: http://www.seketeli.net/~apelete
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [2011.03-maintenance][PATCH v5 0/2] Pull request 20130314
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,26 +34,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Mar 2013 19:09:24 -0000
-Content-Type: multipart/mixed; boundary="bound1364150558"
-
---bound1364150558
+X-List-Received-Date: Sun, 24 Mar 2013 21:03:05 -0000
 Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+Le 24-Mar-13, Tom Rini a =E9crit:
+> On Fri, Mar 22, 2013 at 11:14:14PM +0100, Apelete Seketeli wrote:
+> > Hi Tom,
+> >=20
+> > Le 14-Mar-13, Apelete Seketeli a ?crit:
+> > > Hello,
+> > >=20
+> > > The patches that come as a follow-up of this message fix an issue
+> > > found while building muffinman-image on top of the 2011.03-maintena=
+nce
+> > > branch, and also build a ubi image for the ben-nanonote machine.
+> > > This work is intended to be used as a basis for porting the JLime
+> > > distribution to oe-core.
+> > >=20
+> > > These modifications were tested by successfully building
+> > > muffinman-image from scratch on a Debian Wheezy host.
+> > > Please pull into 2011.03-maintenance branch.
+> > >=20
+> > > The following changes since commit ff679935b073a89c4e407d259bcc2eea=
+9148fb91:
+> > >=20
+> > >   opkg-utils: bump SRCREV to latest (2012-10-26 11:11:59 +0200)
+> > >=20
+> > > are available in the git repository at:
+> > >=20
+> > >   git://seketeli.fr/~apelete/oe.git muffinman-image-fix
+> > >=20
+> > > Apelete Seketeli (2):
+> > >   gnutls: update SRC_URI
+> > >   jlime-2010.1: build ubi image for ben-nanonote machine
+> > >=20
+> > >  conf/bitbake.conf              |    2 +-
+> > >  conf/distro/jlime-2010.1.conf  |    3 ++-
+> > >  conf/machine/ben-nanonote.conf |   12 ++++++++++++
+> > >  recipes/gnutls/gnutls.inc      |    3 ++-
+> > >  4 files changed, 17 insertions(+), 3 deletions(-)
+> >=20
+> > It's been a week and no more reviews, could you please take a look at
+> > it and see if it's good to be pulled ?
+>=20
+> Applied to 2011.03-maintenance, thanks for your patience!
 
-I am pretty new to OE, and having followed some scattered instructions on building the ATNGW100 I have been unsuccessful with the new OE core. My local.conf includes the directives:
+Thanks for applying it, and thanks to everyone who helped me fix the
+patches.
 
-TARGET_OS =3D =93linux-uclibc=94
-MACHINE =3D =93atngw100&#8243;
-DISTRO =3D =93angstrom-2008.1&#8243;
-ANGSTROMLIBC =3D =93uclibc=94
+Cheers.
+--=20
+        Apelete
 
-Which it complains that angstrom-2008.1 cannot be found as a distro. Is this a case that I can just pull the configs from the OE-classic repo over or is there a guide somewhere that I can't find in YOCTO that describes how I can move the ATNGW100 build over to the new OE-core?
 
-Thanks in advance,
-
-JMS
-
---bound1364150558--
