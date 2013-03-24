@@ -1,50 +1,41 @@
-Received: from co9ehsobe005.messaging.microsoft.com ([207.46.163.28]
-	helo=co9outboundpool.messaging.microsoft.com)
+Received: from mail-bk0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1UJfNZ-00029H-A4
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UJfRM-0002MQ-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Mar 2013 08:30:45 +0100
-Received: from mail106-co9-R.bigfish.com (10.236.132.228) by
-	CO9EHSOBE007.bigfish.com (10.236.130.70) with Microsoft SMTP Server id
-	14.1.225.23; Sun, 24 Mar 2013 06:12:43 +0000
-Received: from mail106-co9 (localhost [127.0.0.1])	by
-	mail106-co9-R.bigfish.com (Postfix) with ESMTP id 9D6443C01A9	for
-	<openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Mar 2013 06:12:43 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -6
-X-BigFish: VS-6(zz98dI9371I103dK542I1432Izz1f42h1ee6h1de0h1202h1e76h1d1ah1d2ahzz17326ah8275dh19a27bh8275bhz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ahbe9i1155h)
-Received: from mail106-co9 (localhost.localdomain [127.0.0.1]) by mail106-co9
-	(MessageSwitch) id 1364105561930191_20265;
-	Sun, 24 Mar 2013 06:12:41 +0000 (UTC)
-Received: from CO9EHSMHS010.bigfish.com (unknown [10.236.132.237])	by
-	mail106-co9.bigfish.com (Postfix) with ESMTP id E0CC83202E5	for
-	<openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Mar 2013 06:12:41 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS010.bigfish.com
-	(10.236.130.20) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Sun, 24 Mar 2013 06:12:41 +0000
-Received: from 039-SN2MPN1-013.039d.mgd.msft.net ([169.254.3.50]) by
-	039-SN1MMR1-004.039d.mgd.msft.net ([::1]) with mapi id 14.02.0328.011;
-	Sun, 24 Mar 2013 06:12:40 +0000
-From: Liu Ting-B28495 <B28495@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] lio-utils: initial add 4.1
-Thread-Index: AQHOJt8/Czk+RU7tukWD34R4Gnlhr5i0X0AQ
-Date: Sun, 24 Mar 2013 06:12:39 +0000
-Message-ID: <AF604684617F454390621992F367F16901C6D024@039-SN2MPN1-013.039d.mgd.msft.net>
-References: <1363160982-31939-1-git-send-email-b28495@freescale.com>
-	<20130322092456.GQ3219@jama>
-In-Reply-To: <20130322092456.GQ3219@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.192.185.78]
+	Sun, 24 Mar 2013 08:34:08 +0100
+Received: by mail-bk0-f47.google.com with SMTP id ik5so187340bkc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Mar 2013 00:17:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=+M3md5vnlWBAjUkbgh63xiKSbjoy1rn29AOZcdkSdBw=;
+	b=HOuQ5AC6qPdP5Ybr7Af6dlYDZDUZtYjR9Qm+AvyJAnEw6Nd+mUU0R+CSZcaT2vXEvJ
+	7yzjrZTsavhfuqAyda6tsJ03S9i+83LUh5/TYXLIZx2aHf/MKIiDbAPeWlL9ilptQu4R
+	7MidyoFGoCkupAMh/GaTExb8xXnV94f0sgPruyW8CbwREpaM/3m2ZKPYg4Qcbcq0RyTx
+	G1wIUk5NfEdib9l3dqZ96vY/UC2eZAxhvFMyCzg8RAlzZPV4kVB+igLNvCXQ8I6nFUnJ
+	9uv0tcZpFY9S+vbuu2nvs/GkKw7jX0LDgIZD2qgA7XOH7jXsCsZQtIRfcDX3ySDyvOeB
+	Uvrw==
+X-Received: by 10.204.170.77 with SMTP id c13mr3590667bkz.51.1364109427711;
+	Sun, 24 Mar 2013 00:17:07 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH] lio-utils: initial add 4.1
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.204.25.141 with HTTP; Sun, 24 Mar 2013 00:16:47 -0700 (PDT)
+In-Reply-To: <CAHu+ux3Mz5GucMqDt82Q5Qxy_Q2CGL4ZbAPNnF2TfdRSEd98Cw@mail.gmail.com>
+References: <CAHu+ux18fZzDuBjYj_d8r9P=y=khrCSjuRjKPKG9RzxEAO2vXw@mail.gmail.com>
+	<514C6AFC.1050405@mlbassoc.com>
+	<CAHu+ux0PVbRQh0vY9VOzv78Ey2kAKPBNsfU1v0ptT06zHYKabw@mail.gmail.com>
+	<514C700C.6010707@mlbassoc.com>
+	<CAHu+ux07zRGozTjykPzaDfN9Rnf2jL01XiBQoceXyxe6SOOp1w@mail.gmail.com>
+	<CAHu+ux1GEMztMO78WKsBHErhCP_FAV8378dT0sAVDtpDvfLsQQ@mail.gmail.com>
+	<514C9AA9.7010302@mlbassoc.com>
+	<CAHu+ux3Mz5GucMqDt82Q5Qxy_Q2CGL4ZbAPNnF2TfdRSEd98Cw@mail.gmail.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Sun, 24 Mar 2013 16:16:47 +0900
+X-Google-Sender-Auth: _bTXcyJfbejslNJLU-esJxaiXZ0
+Message-ID: <CAPESJy7-a8UGDMz5GBABSfuzMX8ArHV89QZVWAeoCWivqfb4CQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Adding a recipe to oe bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,127 +49,386 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Mar 2013 07:30:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 24 Mar 2013 07:34:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Martin Jansa
-> Sent: Friday, March 22, 2013 5:25 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] lio-utils: initial add 4.1
->=20
-> On Wed, Mar 13, 2013 at 03:49:42PM +0800, b28495@freescale.com wrote:
-> > From: Ting Liu <b28495@freescale.com>
-> >
-> > lio-utils (lio-utils.git) provide a simple low-level configuration
-> > tool set for the Target+iSCSI (LIO).
->=20
-> Applied, thanks!
->=20
+Hi David,
 
-Not see it on the git tree yet :-)
+do you use the file name task-arago.xyz.bb
+for the task called      task-arago-xyz    ?
 
-> >
-> > lio-utils use the configFS kernel API that is available with LIO,
-> > which provides a clean interface for controlling the kernel level
-> > Target engine and its fabric module subsystems.
-> >
-> > Signed-off-by: Ting Liu <b28495@freescale.com>
-> > ---
-> >  meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |   59
-> ++++++++++++++++++++
-> >  1 files changed, 59 insertions(+), 0 deletions(-)  create mode 100644
-> > meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-> >
-> > diff --git a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-> > b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-> > new file mode 100644
-> > index 0000000..bbedb78
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-> > @@ -0,0 +1,59 @@
-> > +SUMMARY =3D "lio-utils"
-> > +DESCRIPTION =3D "a simple low-level configuration tool set for the
-> Target+iSCSI (LIO)"
-> > +HOMEPAGE =3D "http://linux-iscsi.org/index.php/Lio-utils"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D
-> "file://debian/copyright;md5=3Dc3ea231a32635cbb5debedf3e88aa3df"
-> > +
-> > +PV =3D "4.1+git${SRCPV}"
-> > +
-> > +SRC_URI =3D "git://risingtidesystems.com/lio-utils.git"
-> > +SRCREV =3D "28bd928655bdc7bd3cf380f0196630690c51e05f"
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +inherit distutils
-> > +
-> > +EXTRA_OEMAKE +=3D "DESTDIR=3D${D}"
-> > +
-> > +do_compile() {
-> > +    cd ${S}/tcm-py
-> > +    distutils_do_compile
-> > +
-> > +    cd ${S}/lio-py
-> > +    distutils_do_compile
-> > +
-> > +    if test -d ${S}/tools; then
-> > +        oe_runmake -C ${S}/tools
-> > +    fi
-> > +}
-> > +
-> > +do_install() {
-> > +    cd ${S}/tcm-py
-> > +    distutils_do_install
-> > +
-> > +    cd ${S}/lio-py
-> > +    distutils_do_install
-> > +
-> > +    SITE_PACKAGES=3D${D}/${PYTHON_SITEPACKAGES_DIR}
-> > +    install -d ${D}/${sbindir}
-> > +    for var in tcm_node tcm_dump tcm_loop tcm_fabric lio_dump lio_node=
-;
-> do
-> > +        if [ ! -h ${D}/${sbindir}/${var} ];then
-> > +            chmod a+x ${SITE_PACKAGES}/${var}.py
-> > +            ln -s ${PYTHON_SITEPACKAGES_DIR}/${var}.py
-> ${D}/${sbindir}/${var}
-> > +        fi
-> > +    done
-> > +
-> > +    if test -d ${S}/tools; then
-> > +        oe_runmake -C ${S}/tools install
-> > +    fi
-> > +
-> > +    install -d ${D}/etc/target/
-> > +    install -d ${D}/etc/init.d/
-> > +    install -m 755 ${S}/scripts/rc.target ${D}/etc/init.d/
-> > +    install -m 755 ${S}/conf/tcm_start.default
-> ${D}/etc/target/tcm_start.sh
-> > +    install -m 755 ${S}/conf/lio_start.default
-> > +${D}/etc/target/lio_start.sh }
-> > +
-> > +RDEPENDS_${PN} +=3D "python-stringold python-subprocess python-shell \
-> > +    python-datetime python-textutils python-crypt python-netclient
-> python-email"
-> > +
-> > +FILES_${PN} +=3D "${sbindir}/* /etc/init.d/* /etc/target/*"
-> > --
-> > 1.7.3.4
-> >
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+They don't match, just curious for me, and it explains your progress:
+
+2013/3/23 David Hirst <hirst689@gmail.com>:
+> OK, now I have some progress, what I have done is to drop the task and call
+> pure-ftpd directly from tisdk-rootfs-image
+
+Regards,
+-- 
+Takeshi Hamasaki
+
+
+
+2013/3/23 David Hirst <hirst689@gmail.com>:
+> OK, now I have some progress, what I have done is to drop the task and call
+> pure-ftpd directly from tisdk-rootfs-image
+>
+> and I get the following in the image. Somehow this just seems wrong but it
+> works
+>
+> hirst689@hirst689-HP-Z210-Workstation:~/oe-layersetup/build/arago-tmp-external-arago-toolchain/deploy/images$
+> tar tvf tisdk-rootfs-image-am335x-evm.tar.gz | grep pure
+> -rwxr-xr-x root/root      9744 2013-03-22 14:28 ./usr/sbin/pure-mrtginfo
+> -rwxr-xr-x root/root      5196 2013-03-22 14:28 ./usr/sbin/pure-uploadscript
+> -rwxr-xr-x root/root      5184 2013-03-22 14:28 ./usr/sbin/pure-authd
+> -rwxr-xr-x root/root    112184 2013-03-22 14:28 ./usr/sbin/pure-ftpd
+> -rwxr-xr-x root/root     12360 2013-03-22 14:28 ./usr/sbin/pure-quotacheck
+> -rwxr-xr-x root/root      5248 2013-03-22 14:28 ./usr/sbin/pure-ftpwho
+> -rwxr-xr-x root/root         6964 2013-03-22 14:28
+> ./usr/bin/pure-statsdecode
+> -rwxr-xr-x root/root        28972 2013-03-22 14:28 ./usr/bin/pure-pw
+> -rwxr-xr-x root/root         6568 2013-03-22 14:28 ./usr/bin/pure-pwconvert
+> -rw-r--r-- root/root           208 2013-03-22 14:44
+> ./var/lib/opkg/info/pure-ftpd.list
+> -rw-r--r-- root/root           442 2013-03-22 14:28
+> ./var/lib/opkg/info/pure-ftpd.control
+> hirst689@hirst689-HP-Z210-Workstation:~/oe-layersetup/build/arago-tmp-external-arago-toolchain/deploy/images$
+>
+>
+>
+> On Fri, Mar 22, 2013 at 1:53 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+>
+>> On 2013-03-22 11:31, David Hirst wrote:
+>>
+>>> Here are the results, the same as before, in the build directories all
+>>> seems fine but the final output only has the /usr/share/man/man8/files
+>>>
+>>> in
+>>> oe-layersetup/build/arago-tmp-**external-arago-toolchain/work/**
+>>> armv7a-vfp-neon-oe-linux-**gnueabi/pure-ftpd-1.0.29-r0/**image/usr/sbin
+>>> are the following files:
+>>>
+>>> pure-authd  pure-ftpd  pure-ftpwho  pure-mrtginfo  pure-quotacheck
+>>> pure-uploadscript
+>>>
+>>> in
+>>> oe-layersetup/build/arago-tmp-**external-arago-toolchain/work/**
+>>> armv7a-vfp-neon-oe-linux-**gnueabi/pure-ftpd-1.0.29-r0/**image/usr/bin
+>>> are the following files:
+>>>
+>>> pure-pw  pure-pwconvert  pure-statsdecode
+>>>
+>>> in
+>>> oe-layersetup/build/arago-tmp-**external-arago-toolchain/work/**
+>>> armv7a-vfp-neon-oe-linux-**gnueabi/pure-ftpd-1.0.29-r0/**
+>>> image/usr/share/man/man8
+>>>
+>>> pure-authd.8  pure-ftpd.8  pure-ftpwho.8  pure-mrtginfo.8  pure-pw.8
+>>> pure-pwconvert.8  pure-quotacheck.8  pure-statsdecode.8
+>>>  pure-uploadscript.8
+>>>
+>>
+>> You still didn't answer the question about the version of bitbake, the OE
+>> metadata, etc.
+>> which does make a difference...
+>>
+>> Try adding this line in your pure-ftpd recipe:
+>>   FILES_${PN} += "/usr/sbin"
+>>
+>>
+>>>
+>>> hirst689@hirst689-HP-Z210-**Workstation:~/oe-layersetup/**
+>>> build/arago-tmp-external-**arago-toolchain/deploy/images$
+>>> tar tvf tisdk-rootfs-image-am335x-evm.**tar.gz | grep pure*
+>>>
+>>> -rw-r--r-- root/root      4151 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**uploadscript.8
+>>> -rw-r--r-- root/root      3187 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-pw.8
+>>> -rw-r--r-- root/root      2169 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**quotacheck.8
+>>> -rw-r--r-- root/root      1123 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**statsdecode.8
+>>> -rw-r--r-- root/root       764 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**pwconvert.8
+>>> -rw-r--r-- root/root      4160 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**authd.8
+>>> -rw-r--r-- root/root      2119 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**mrtginfo.8
+>>> -rw-r--r-- root/root     28755 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**ftpd.8
+>>> -rw-r--r-- root/root      2449 2013-03-22 12:36
+>>> ./usr/share/man/man8/pure-**ftpwho.8
+>>>
+>>>
+>>>
+>>> On Fri, Mar 22, 2013 at 11:02 AM, David Hirst <hirst689@gmail.com> wrote:
+>>>
+>>>  I did a bitbake tisdk-rootfs-image -c clean
+>>>> I will try the cleanstate
+>>>> It seems really difficult to get started from an absolutely clean slate,
+>>>> some where status is held that gets in the way
+>>>> I will let you know
+>>>>
+>>>> Thanks so far
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> On Fri, Mar 22, 2013 at 10:51 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>>>>
+>>>>  On 2013-03-22 08:42, David Hirst wrote:
+>>>>>
+>>>>>  OK,
+>>>>>>       Sorry for the carpet bombing! I added this to tisdk-rootfs-image
+>>>>>> "task-arago-xyz \" to look for the new task file
+>>>>>> I have included the task and pure-ftpd bb files also. I would love to
+>>>>>> understand why this does not work.
+>>>>>>
+>>>>>>
+>>>>> What steps did you run after making this change?
+>>>>> What version of bitbake are you using?
+>>>>>
+>>>>> Most likely, bitbake did not [fully] realize that you made a change.
+>>>>> I'd try something like this:
+>>>>>    % bitbake tisdk-rootfs-image -c cleansstate
+>>>>>    % bitbake tisdk-rootfs-image
+>>>>> and see what happens.
+>>>>>
+>>>>> BTW, top-posting is evil :-(
+>>>>>
+>>>>>
+>>>>>  ==========================**tisd**k-rootfs-image.bb<http:/**
+>>>>>> /tisdk-rootfs-image.bb <http://tisdk-rootfs-image.bb>>
+>>>>>> =============**===============
+>>>>>>
+>>>>>> # Arago TI SDK filesystem image
+>>>>>> COMPATIBLE_MACHINE = "omap3|omapl138|ti33x"
+>>>>>>
+>>>>>> require arago-base-tisdk-image.bb
+>>>>>>
+>>>>>> IMAGE_INSTALL += "\
+>>>>>>       task-arago-test \
+>>>>>>       task-arago-tisdk-graphics \
+>>>>>>       task-arago-tisdk-qte \
+>>>>>>       task-arago-tisdk-addons \
+>>>>>>       task-arago-tisdk-connectivity \
+>>>>>>       task-arago-tisdk-crypto \
+>>>>>>       task-arago-tisdk-matrix \
+>>>>>>       task-arago-tisdk-multimedia \
+>>>>>>       task-arago-tisdk-amsdk \
+>>>>>>       task-arago-xyz \
+>>>>>> "
+>>>>>>
+>>>>>> export IMAGE_BASENAME = "tisdk-rootfs-image"
+>>>>>>
+>>>>>> =================task-arago.****xyz.bb <http://xyz.bb> <
+>>>>>> http://task-arago.xyz.bb>
+>>>>>>
+>>>>>> ================
+>>>>>>
+>>>>>> DESCRIPTION = "Extended task to get extras"
+>>>>>> LICENSE = "MIT"
+>>>>>> LIC_FILES_CHKSUM =
+>>>>>> "file://${COREBASE}/meta/****COPYING.MIT;md5=**
+>>>>>> 3da9cfbcb788c80a0384361b4de204****20"
+>>>>>>
+>>>>>> PR = "r0"
+>>>>>>
+>>>>>> inherit task
+>>>>>>
+>>>>>> ARAGO_XYZ = " \
+>>>>>>       pure-ftpd \
+>>>>>>       "
+>>>>>>
+>>>>>> ARAGO_XYZ_INT = "\
+>>>>>>       ${ARAGO_XYZ} \
+>>>>>>       "
+>>>>>> RDEPENDS_${PN} = "\
+>>>>>>       ${ARAGO_XYZ_INT} \
+>>>>>>       "
+>>>>>> ===============pure-ftpd_1.0.****29.bb <http://pure-ftpd_1.0.29.bb>
+>>>>>>
+>>>>>> ====================
+>>>>>>
+>>>>>> DESCRIPTION = "Sample program"
+>>>>>> LICENSE = "GPLv2"
+>>>>>> LIC_FILES_CHKSUM = "file://COPYING;md5=****
+>>>>>> d7b47170f564f6a314b82b3ea67a40***
+>>>>>>
+>>>>>> *bd"
+>>>>>> PR = "r0"
+>>>>>> PV = "1.0.29"
+>>>>>> DEPENDS = ""
+>>>>>> RPROVIDES = "pure-ftpd"
+>>>>>> PROVIDES = "pure-ftpd"
+>>>>>> ARM_INSTRUCTION_SET = "arm"
+>>>>>>
+>>>>>> PARALLEL_MAKE = ""
+>>>>>>
+>>>>>> inherit autotools pkgconfig
+>>>>>>
+>>>>>> EXTRA_OECONF = "--enable-cross-compile --host=arm-arago-linux-****
+>>>>>> gnueabi"
+>>>>>>
+>>>>>> SRC_URI = "
+>>>>>> http://iweb.dl.sourceforge.****net/project/pureftpd/Pure-**
+>>>>>> FTPd/1.0.29/pure-ftpd-${PV}.****tar.gz<http://iweb.dl.**
+>>>>>> sourceforge.net/project/**pureftpd/Pure-FTPd/1.0.29/**
+>>>>>> pure-ftpd-$%7BPV%7D.tar.gz<http://iweb.dl.sourceforge.net/project/pureftpd/Pure-FTPd/1.0.29/pure-ftpd-$%7BPV%7D.tar.gz>
+>>>>>> >
+>>>>>> "
+>>>>>> SRC_URI[md5sum] = "****e0132a51357d419f8b66e8997d9dc5****fa"
+>>>>>> SRC_URI[sha256sum] =
+>>>>>> "****55bfb84fa63a37e5b56906afb4444f******
+>>>>>> da7285d0f8b5ed24798f59c978ddea****2749"
+>>>>>>
+>>>>>> S = "${WORKDIR}/pure-ftpd-${PV}"
+>>>>>>
+>>>>>> EXTRA_OECONF_append_armv6 = " --enable-armv6"
+>>>>>> EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
+>>>>>>
+>>>>>> FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer
+>>>>>> -frename-registers -O4 -ffast-math"
+>>>>>> BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+>>>>>>
+>>>>>> do_configure(){
+>>>>>>     oe_runconf ${EXTRE_OECONF}
+>>>>>> }
+>>>>>>
+>>>>>> do_compile () {
+>>>>>>     oe_runmake
+>>>>>> }
+>>>>>>
+>>>>>> do_install () {
+>>>>>>     oe_runmake install DESTDIR=${D}
+>>>>>> }
+>>>>>>
+>>>>>>
+>>>>>> ARM_INSTRUCTION_SET = "arm"
+>>>>>>
+>>>>>> BBCLASSEXTEND = "native"
+>>>>>>
+>>>>>> ============================ END===========================
+>>>>>>
+>>>>>> On Fri, Mar 22, 2013 at 10:30 AM, Gary Thomas <gary@mlbassoc.com>
+>>>>>> wrote:
+>>>>>>
+>>>>>>   On 2013-03-22 08:24, David Hirst wrote:
+>>>>>>
+>>>>>>>
+>>>>>>>   Hi,
+>>>>>>>
+>>>>>>>>        I have been struggling with a oe/bitbake issue. I wanted to
+>>>>>>>> add
+>>>>>>>> an
+>>>>>>>> other .bb to the image file.
+>>>>>>>> I have tried multiple ways but always end up at the same spot. I have
+>>>>>>>> created a new task-XXX.bb file which includes my bb
+>>>>>>>> I edited the XXXX-rootfs-image.bb to include the task-XXX.bb.
+>>>>>>>> Once built I find that everything built fine and the new recipe was
+>>>>>>>> built
+>>>>>>>> but was not loaded into the XXXX-rootfs-image.tar,gz.
+>>>>>>>> If I look into the image directory for the bb file I see the compiled
+>>>>>>>> application in usr/sbin.
+>>>>>>>> I have tried this with my own .bb file and net-snmp bb file which
+>>>>>>>> comes
+>>>>>>>> with the default oe-layersetup installation with the same result.
+>>>>>>>> Did I not edit a file or miss some other required step?
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>   Wow, the same question on three mailing lists (that I read, there
+>>>>>>>>
+>>>>>>> may be more...) and no cross-posting!
+>>>>>>>
+>>>>>>> This list is perhaps the most appropriate one for your question.
+>>>>>>>
+>>>>>>> More details will help.  Exactly what did you change in the
+>>>>>>> "XXXX-rootfs-image.bb"
+>>>>>>> recipe?
+>>>>>>>
+>>>>>>> --
+>>>>>>> ------------------------------******--------------------------**
+>>>>>>> --**--
+>>>>>>>
+>>>>>>>
+>>>>>>> Gary Thomas                 |  Consulting for the
+>>>>>>> MLB Associates              |    Embedded world
+>>>>>>> ------------------------------******--------------------------**
+>>>>>>> --**--
+>>>>>>>
+>>>>>>> ______________________________******_________________
+>>>>>>> Openembedded-devel mailing list
+>>>>>>> Openembedded-devel@lists.****ope**nembedded.org <
+>>>>>>> http://openembedded.org>
+>>>>>>> <Openembedded-**devel@lists.**openembedded.org<devel@lists.openembedded.org>
+>>>>>>> <Openembedded-**devel@lists.openembedded.org<Openembedded-devel@lists.openembedded.org>
+>>>>>>> >
+>>>>>>>
+>>>>>>>>
+>>>>>>>>  http://lists.linuxtogo.org/******cgi-bin/mailman/listinfo/****<http://lists.linuxtogo.org/****cgi-bin/mailman/listinfo/****>
+>>>>>>> openembedded-devel<http://**lists.linuxtogo.org/**cgi-bin/**
+>>>>>>> mailman/listinfo/****openembedded-devel<http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel>
+>>>>>>> >
+>>>>>>> <http://**lists.linuxtogo.org/**cgi-bin/**mailman/listinfo/**
+>>>>>>> openembedded-*<http://lists.linuxtogo.org/cgi-bin/**mailman/listinfo/openembedded-*>
+>>>>>>> *devel<http://lists.linuxtogo.**org/cgi-bin/mailman/listinfo/**
+>>>>>>> openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>>>>>>> >
+>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>  --
+>>>>> ------------------------------****----------------------------**--
+>>>>> Gary Thomas                 |  Consulting for the
+>>>>> MLB Associates              |    Embedded world
+>>>>> ------------------------------****----------------------------**--
+>>>>>
+>>>>> ______________________________****_________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.**ope**nembedded.org <http://openembedded.org>
+>>>>> <Openembedded-**devel@lists.openembedded.org<Openembedded-devel@lists.openembedded.org>
+>>>>> >
+>>>>> http://lists.linuxtogo.org/****cgi-bin/mailman/listinfo/**<http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**>
+>>>>> openembedded-devel<http://**lists.linuxtogo.org/cgi-bin/**
+>>>>> mailman/listinfo/openembedded-**devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>>>>> >
+>>>>>
+>>>>>
+>>>>
+>>>>
+>>>> --
+>>>> David Hirst
+>>>> hirst689@gmail.com
+>>>>
+>>>>
+>>>>
+>>>
+>>>
+>> --
+>> ------------------------------**------------------------------
+>> Gary Thomas                 |  Consulting for the
+>> MLB Associates              |    Embedded world
+>> ------------------------------**------------------------------
+>>
+>> ______________________________**_________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
+>> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+>>
+>
+>
+>
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
+> David Hirst
+> hirst689@gmail.com
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
