@@ -1,26 +1,35 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from mail-bk0-f44.google.com ([209.85.214.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UJs4D-0003uj-4p
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UJwkQ-00050B-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Mar 2013 22:03:05 +0100
-Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 7397BEA040;
-	Sun, 24 Mar 2013 21:57:54 +0100 (CET)
-Received: by localhost (Postfix, from userid 1000)
-	id CEE1E61ACE; Sun, 24 Mar 2013 21:46:03 +0100 (CET)
-Date: Sun, 24 Mar 2013 21:46:03 +0100
-From: Apelete Seketeli <apelete@seketeli.net>
-To: Tom Rini <tom.rini@gmail.com>
-Message-ID: <20130324204603.GC6454@hermes>
-References: <cover.1363255209.git.apelete@seketeli.net>
-	<20130322221414.GB6454@hermes> <20130324132149.GA9388@bill-the-cat>
+	Mon, 25 Mar 2013 03:03:50 +0100
+Received: by mail-bk0-f44.google.com with SMTP id j4so2609399bkw.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Mar 2013 18:45:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=DGJfG1LxCHGLSAx7GvjMLiy7c4aaP5eaDJVj9na65Q8=;
+	b=Ab4eUwmrczsFy/ETaJyZq4DHpFN6hSGpXbgSEHPdxXCIiptD/edWbvq7QQYIFlOPW0
+	ebqQmuaYH6TGOwANlmajWlA0ARRFYNwsX0ZrCisa0TOPI6Al0a5A5ks5pl35bcxpzoPE
+	ypFlknXAaKDCeZ6cAGHJZBbg2mi07yKUwgn/e4mAZ4OaAWFe9tw8IwTZWc+knbbEu0kc
+	bSK6zNFLpUN4DJ005ywGaVNuxc1NFR0fOk3ELJpzORC8Qw7s3OKjIVHTyynvKmPtErF1
+	RCNC4Q1RZgGkFHyxAevhLhGSy/wxs34oCOiuk0abK7QVbFt9JxbW7HT72nGC+VJxrGwp
+	/1Ng==
+X-Received: by 10.205.7.72 with SMTP id on8mr4442401bkb.122.1364175957087;
+	Sun, 24 Mar 2013 18:45:57 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20130324132149.GA9388@bill-the-cat>
-X-Operating-System: Debian GNU/Linux 7.0
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [2011.03-maintenance][PATCH v5 0/2] Pull request 20130314
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.204.25.141 with HTTP; Sun, 24 Mar 2013 18:45:37 -0700 (PDT)
+In-Reply-To: <1364150558.389@bughunter.ca>
+References: <1364150558.389@bughunter.ca>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Mon, 25 Mar 2013 10:45:37 +0900
+X-Google-Sender-Auth: lzW2-ooLaU7thuRbGM35dMcGmr8
+Message-ID: <CAPESJy7JcSJXQE6vCEKxxPhZcVi69jW7EOr+t=LS=n+evoS_mw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: ATNGW100
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,58 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Mar 2013 21:03:05 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Mon, 25 Mar 2013 02:03:56 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Le 24-Mar-13, Tom Rini a =E9crit:
-> On Fri, Mar 22, 2013 at 11:14:14PM +0100, Apelete Seketeli wrote:
-> > Hi Tom,
-> >=20
-> > Le 14-Mar-13, Apelete Seketeli a ?crit:
-> > > Hello,
-> > >=20
-> > > The patches that come as a follow-up of this message fix an issue
-> > > found while building muffinman-image on top of the 2011.03-maintena=
-nce
-> > > branch, and also build a ubi image for the ben-nanonote machine.
-> > > This work is intended to be used as a basis for porting the JLime
-> > > distribution to oe-core.
-> > >=20
-> > > These modifications were tested by successfully building
-> > > muffinman-image from scratch on a Debian Wheezy host.
-> > > Please pull into 2011.03-maintenance branch.
-> > >=20
-> > > The following changes since commit ff679935b073a89c4e407d259bcc2eea=
-9148fb91:
-> > >=20
-> > >   opkg-utils: bump SRCREV to latest (2012-10-26 11:11:59 +0200)
-> > >=20
-> > > are available in the git repository at:
-> > >=20
-> > >   git://seketeli.fr/~apelete/oe.git muffinman-image-fix
-> > >=20
-> > > Apelete Seketeli (2):
-> > >   gnutls: update SRC_URI
-> > >   jlime-2010.1: build ubi image for ben-nanonote machine
-> > >=20
-> > >  conf/bitbake.conf              |    2 +-
-> > >  conf/distro/jlime-2010.1.conf  |    3 ++-
-> > >  conf/machine/ben-nanonote.conf |   12 ++++++++++++
-> > >  recipes/gnutls/gnutls.inc      |    3 ++-
-> > >  4 files changed, 17 insertions(+), 3 deletions(-)
-> >=20
-> > It's been a week and no more reviews, could you please take a look at
-> > it and see if it's good to be pulled ?
->=20
-> Applied to 2011.03-maintenance, thanks for your patience!
+Hi Justin,
 
-Thanks for applying it, and thanks to everyone who helped me fix the
-patches.
+according to the DISTRO name,
+you have to specify something exists in
+source/meta-angstrom/conf/distro/ directory.
 
-Cheers.
+I guess you can find angstrom-v2012.05.conf or something there.
+Thus
+DISTRO=3D"angstrom-v2012.05"
+helps you to walk one step forward.
 --=20
-        Apelete
+Takeshi Hamasaki
+
+2013/3/25 Justin Seitz <jms@bughunter.ca>:
+> Hey all,
+>
+> I am pretty new to OE, and having followed some scattered instructions on=
+ building the ATNGW100 I have been unsuccessful with the new OE core. My lo=
+cal.conf includes the directives:
+>
+> TARGET_OS =3D =93linux-uclibc=94
+> MACHINE =3D =93atngw100&#8243;
+> DISTRO =3D =93angstrom-2008.1&#8243;
+> ANGSTROMLIBC =3D =93uclibc=94
+>
+> Which it complains that angstrom-2008.1 cannot be found as a distro. Is t=
+his a case that I can just pull the configs from the OE-classic repo over o=
+r is there a guide somewhere that I can't find in YOCTO that describes how =
+I can move the ATNGW100 build over to the new OE-core?
+>
+> Thanks in advance,
+>
+> JMS
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
