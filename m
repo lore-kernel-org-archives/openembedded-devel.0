@@ -1,36 +1,21 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK42W-0007ZQ-GO
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK48E-0007oc-4P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 10:50:07 +0100
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id 9EDDFD22E8; Mon, 25 Mar 2013 10:33:12 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
+	Mon, 25 Mar 2013 10:56:07 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 9492BD22B2
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 337EED22B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2013 10:32:42 +0100 (CET)
-Message-ID: <515019B5.4040400@linaro.org>
-Date: Mon, 25 Mar 2013 10:32:37 +0100
+	Mon, 25 Mar 2013 10:39:05 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1364203559-24240-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<50528808.YOdRBQeq7Q@helios>
-In-Reply-To: <50528808.YOdRBQeq7Q@helios>
-X-Enigmail-Version: 1.4.6
-Subject: Re: [PATCH] powertop: add 2.3
+Date: Mon, 25 Mar 2013 10:38:59 +0100
+Message-Id: <1364204339-16695-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] libunwind: add 1.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,21 +29,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 09:50:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Mar 2013 09:56:12 -0000
 
-W dniu 25.03.2013 10:30, Paul Eggleton pisze:
-> On Monday 25 March 2013 10:25:59 Marcin Juszkiewicz wrote:
->> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
->> ---
->>  meta-oe/recipes-support/powertop/powertop_2.3.bb | 12 ++++++++++++
->>  1 file changed, 12 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/powertop/powertop_2.3.bb
-> 
-> powertop is in OE-Core, if you want to update it please update it there.
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-support/libunwind/libunwind.inc    | 12 ++++++++++++
+ meta-oe/recipes-support/libunwind/libunwind_1.1.bb |  4 ++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libunwind/libunwind.inc
+ create mode 100644 meta-oe/recipes-support/libunwind/libunwind_1.1.bb
 
-Thanks, sent.
+diff --git a/meta-oe/recipes-support/libunwind/libunwind.inc b/meta-oe/recipes-support/libunwind/libunwind.inc
+new file mode 100644
+index 0000000..f028766
+--- /dev/null
++++ b/meta-oe/recipes-support/libunwind/libunwind.inc
+@@ -0,0 +1,12 @@
++DESCRIPTION = "a portable and efficient C programming interface (API) to determine the call-chain of a program"
++HOMEPAGE = "http://www.nongnu.org/libunwind"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3fced11d6df719b47505837a51c16ae5"
++
++SRC_URI = "http://download.savannah.nongnu.org/releases/${BPN}/${BPN}-${PV}.tar.gz"
++
++inherit autotools
++
++EXTRA_OECONF_arm = "--enable-debug-frame"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/libunwind/libunwind_1.1.bb b/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+new file mode 100644
+index 0000000..bc38e36
+--- /dev/null
++++ b/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+@@ -0,0 +1,4 @@
++require libunwind.inc
++
++SRC_URI[md5sum] = "fb4ea2f6fbbe45bf032cd36e586883ce"
++SRC_URI[sha256sum] = "9dfe0fcae2a866de9d3942c66995e4b460230446887dbdab302d41a8aee8d09a"
+-- 
+1.8.1.2
 
 
 
