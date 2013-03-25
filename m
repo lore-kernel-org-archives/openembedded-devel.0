@@ -1,22 +1,21 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK3qS-00070C-Hk
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK3vg-0007C5-BC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 10:38:10 +0100
+	Mon, 25 Mar 2013 10:43:12 +0100
 Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 5E2A0D22B2
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 38E2AD22B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2013 10:20:44 +0100 (CET)
+	Mon, 25 Mar 2013 10:26:07 +0100 (CET)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Mar 2013 10:20:35 +0100
-Message-Id: <1364203235-2737-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Mon, 25 Mar 2013 10:25:59 +0100
+Message-Id: <1364203559-24240-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.1.2
-MIME-Version: 1.0
-Subject: [PATCH] tbb: add 4.1 20130116 version (4.1 update 2)
+Subject: [PATCH] powertop: add 2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,125 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 09:38:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Intel=C2=AE Threading Building Blocks (Intel=C2=AE TBB) lets you easily w=
-rite
-parallel C++ programs that take full advantage of multicore performance,
-that are portable and composable, and that have future-proof
-scalability.
-
-Natively supports only x86(-64) targets with fallbacks for non-supported
-architectures. There is a work at Linaro to add AArch64 and ARMv7a
-support.
+X-List-Received-Date: Mon, 25 Mar 2013 09:43:37 -0000
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../recipes-support/tbb/tbb/cross-compile.patch    | 25 ++++++++++++++++=
-+
- meta-oe/recipes-support/tbb/tbb/tbb.pc             | 11 ++++++++
- meta-oe/recipes-support/tbb/tbb_4.1.bb             | 31 ++++++++++++++++=
-++++++
- 3 files changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-support/tbb/tbb/cross-compile.patch
- create mode 100644 meta-oe/recipes-support/tbb/tbb/tbb.pc
- create mode 100644 meta-oe/recipes-support/tbb/tbb_4.1.bb
+ meta-oe/recipes-support/powertop/powertop_2.3.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-support/powertop/powertop_2.3.bb
 
-diff --git a/meta-oe/recipes-support/tbb/tbb/cross-compile.patch b/meta-o=
-e/recipes-support/tbb/tbb/cross-compile.patch
+diff --git a/meta-oe/recipes-support/powertop/powertop_2.3.bb b/meta-oe/recipes-support/powertop/powertop_2.3.bb
 new file mode 100644
-index 0000000..930a861
+index 0000000..c289ac6
 --- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb/cross-compile.patch
-@@ -0,0 +1,25 @@
-+Author: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++++ b/meta-oe/recipes-support/powertop/powertop_2.3.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Linux tool to diagnose issues with power consumption and power management."
++HOMEPAGE = "http://01.org/powertop/"
++DEPENDS = "ncurses virtual/gettext libnl pciutils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 +
-+Upstream-Status: Inappropriate [embedded specific]
-+---
-+ build/linux.gcc.inc |    5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
++SRC_URI = "http://01.org/powertop/sites/default/files/downloads/powertop-${PV}.tar.gz"
 +
-+--- tbb41_20121003oss.orig/build/linux.gcc.inc
-++++ tbb41_20121003oss/build/linux.gcc.inc
-+@@ -40,12 +40,13 @@ DYLIB_KEY =3D -shared
-+ EXPORT_KEY =3D -Wl,--version-script,
-+ LIBDL =3D -ldl
-+=20
-+ TBB_NOSTRICT =3D 1
-+=20
-+-CPLUS =3D g++
-+-CONLY =3D gcc
-++CPLUS =3D $(CXX)
-++CONLY =3D $(CC)
-++CPLUS_FLAGS =3D $(CXXFLAGS)
-+ LIB_LINK_FLAGS =3D $(DYLIB_KEY) -Wl,-soname=3D$(BUILDING_LIBRARY)
-+ LIBS +=3D -lpthread -lrt
-+ LINK_FLAGS =3D -Wl,-rpath-link=3D.
-+ C_FLAGS =3D $(CPLUS_FLAGS)
-+ # gcc 4.4 and higher support -std=3Dc++0x
-diff --git a/meta-oe/recipes-support/tbb/tbb/tbb.pc b/meta-oe/recipes-sup=
-port/tbb/tbb/tbb.pc
-new file mode 100644
-index 0000000..644b64f
---- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb/tbb.pc
-@@ -0,0 +1,11 @@
-+prefix=3D/usr
-+exec_prefix=3D${prefix}
-+libdir=3D${exec_prefix}/lib
-+includedir=3D${prefix}/include
++SRC_URI[md5sum] = "dc03608f20e56cdc99d121a6191556f6"
++SRC_URI[sha256sum] = "b8c1add69afee28c77dca56fdcedb4a46820f3a71c86aae7891b0c5c595cd744"
 +
-+Name: Threading Building Blocks
-+Description: Intel's parallelism library for C++
-+URL: http://www.threadingbuildingblocks.org/
-+Version: 3.0+r018
-+Libs: -L${libdir} -ltbb
-+Cflags: -I${includedir}=20
-diff --git a/meta-oe/recipes-support/tbb/tbb_4.1.bb b/meta-oe/recipes-sup=
-port/tbb/tbb_4.1.bb
-new file mode 100644
-index 0000000..5f7c8a5
---- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb_4.1.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION =3D "Parallelism library for C++ - runtime files \
-+ TBB is a library that helps you leverage multi-core processor \
-+ performance without having to be a threading expert. It represents a \
-+ higher-level, task-based parallelism that abstracts platform details \
-+ and threading mechanism for performance and scalability."
-+HOMEPAGE =3D "http://threadingbuildingblocks.org/"
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2c7f2caf277a3933e3acdf7f89d54=
-cc1"
-+PRDATE =3D "20130116"
-+PR =3D "r${PRDATE}"
-+
-+SRC_URI =3D "http://threadingbuildingblocks.org/sites/default/files/soft=
-ware_releases/source/tbb41_${PRDATE}oss_src.tgz \
-+           file://cross-compile.patch \
-+           file://tbb.pc"
-+
-+S =3D "${WORKDIR}/tbb41_${PRDATE}oss/"
-+
-+SRC_URI[md5sum] =3D "3809790e1001a1b32d59c9fee590ee85"
-+SRC_URI[sha256sum] =3D "4ae2c10899e3b6ef2f686013ec5901fc658444ca90178efa=
-ca6014b0665c34b6"
-+
-+do_compile() {
-+    oe_runmake compiler=3Dgcc arch=3D${HOST_ARCH} runtime=3Dcc4.7_libc2.=
-17_kernel3.8 tbb tbbmalloc
-+}
-+
-+do_install() {
-+    install -d ${D}${includedir} ${D}${libdir}/pkgconfig
-+    rm ${S}/include/tbb/index.html -f
-+    cp -a ${S}/include/tbb ${D}${includedir}
-+    install -m 0755 ${B}/build/linux_*_release/lib*.so* ${D}${libdir}
-+    install -m 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig
-+}
---=20
++inherit autotools
+-- 
 1.8.1.2
 
 
