@@ -1,21 +1,25 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK7zc-0007ih-JI
+	(envelope-from <Aws.Ismail@windriver.com>) id 1UK9c2-0002iT-3R
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 15:03:25 +0100
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 8BFD5D22B2
+	Mon, 25 Mar 2013 16:47:11 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2PFU7MT012776
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2013 14:46:17 +0100 (CET)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Mar 2013 14:46:08 +0100
-Message-Id: <1364219168-27880-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH] libmcrypt: add 2.5.8
+	Mon, 25 Mar 2013 08:30:07 -0700 (PDT)
+Received: from localhost.localdomain (128.224.147.212) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.342.3; Mon, 25 Mar 2013 08:30:06 -0700
+From: Aws Ismail <aws.ismail@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Mar 2013 11:30:05 -0400
+Message-ID: <1364225407-13263-1-git-send-email-aws.ismail@windriver.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: joe.macdonald@windriver.com
+Subject: [meta-networking][PATCH 0/2][V3] Quagga: deal with snmp support, and some cleanup.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,44 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 14:03:26 -0000
+X-List-Received-Date: Mon, 25 Mar 2013 15:47:23 -0000
+X-List-Received-Date: Mon, 25 Mar 2013 15:47:23 -0000
+Content-Type: text/plain
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- .../recipes-support/libmcrypt/libmcrypt_2.5.8.bb   | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
 
-diff --git a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-new file mode 100644
-index 0000000..0cbe189
---- /dev/null
-+++ b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Replacement for the old crypt() package and crypt(1) command, with extensions."
-+HOMEPAGE = "http://mcrypt.sourceforge.net/"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/mcrypt/Libmcrypt/${PV}/libmcrypt-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "0821830d930a86a5c69110837c55b7da"
-+SRC_URI[sha256sum] = "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18ca9c9ef34d27a373e"
-+
-+inherit autotools gettext binconfig
-+
-+do_configure() {
-+	gnu-configize --force
-+#	libtoolize --force --copy
-+	autoconf
-+	oe_runconf
-+}
-+
-+do_install_append() {
-+	rm ${D}${libdir}/libmcrypt -r
-+}
--- 
-1.8.1.2
+*** V3 ***
+Cleanup whitespaces and hardtabs
+This is made a separate new commit
+*** V3 ***
+
+Overall, this commit introduces a set of changes to do the following:
+
+1. Update the configure option for quagga to replace the old --enable-tcp-md5
+2. Add snmp support based on DISTRO_FEATURES availability.
+3. Install sample runtime configuration files for quagga and its daemons.
+4. Make sure the post install script is executed at the right stage.
+
+Aws Ismail (2):
+  Quagga has no snmp support, unrecognized options --enable-tcp-md5
+  Quagga: clean up whitespaces/hardtabs in recipe
+
+ .../recipes-protocols/quagga/quagga.inc            |   71 ++++++++++++--------
+ 1 files changed, 43 insertions(+), 28 deletions(-)
 
 
 
