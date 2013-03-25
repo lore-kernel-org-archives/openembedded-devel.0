@@ -1,36 +1,21 @@
-Received: from mail-vc0-f181.google.com ([209.85.220.181])
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UK7FJ-0005p8-L9
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK7zc-0007ih-JI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 14:15:30 +0100
-Received: by mail-vc0-f181.google.com with SMTP id hv10so4747540vcb.12
+	Mon, 25 Mar 2013 15:03:25 +0100
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 8BFD5D22B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2013 05:58:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=mVrIIAJ2t6UIKTHz/QIOmlcW0l+SEZW2udHne/0nEzI=;
-	b=pGkpBCD+OwUrkqSDGdeuxsZ+KKWbGTb8B4VtnT1RuPbty3Ll9VSao8X4/Dvtobqpj3
-	5HfoKRVI9JMQeKCCmdUy5d7DTcgf99gQ0g1FuyLjfNlrMYxIgQkuy+Mbggnbac7GXeND
-	N0EvYVc69lRxRDzdnzXcbY98+MJCnb79GsTi7aU0730Rpsx0aL0W79WKDjj/q9QtBk0D
-	D2aCoVdEqWQICkd5t/Uz/SPiYXfYTN2jxzH2vzcPMwhmI+w3ZRrqq793uILaq/zgmcOk
-	jN5nLxp3Ln8hJ6k+uIeByC0ofU7pFbR8I0hZnckAdc8QDoWrjJACJc93HLo9DRHIdsuy
-	hEOA==
-MIME-Version: 1.0
-X-Received: by 10.220.151.203 with SMTP id d11mr15503153vcw.9.1364216311185;
-	Mon, 25 Mar 2013 05:58:31 -0700 (PDT)
-Received: by 10.52.185.168 with HTTP; Mon, 25 Mar 2013 05:58:31 -0700 (PDT)
-In-Reply-To: <CAJTo0LZ9+bq9_SZAWziKoDeRw0kJMCjwR=-m7FTCOqT3wuaUSA@mail.gmail.com>
-References: <cover.1363973088.git.ross.burton@intel.com>
-	<9ef1ee1552757f3cf5cb979a9df7cf45f38b2f7a.1363973088.git.ross.burton@intel.com>
-	<CALbNGRQ7B6x55wvuwSkZy6TwMV73VLAMbKJFS+f1D-dr6Rkfpg@mail.gmail.com>
-	<CAJTo0LZ9+bq9_SZAWziKoDeRw0kJMCjwR=-m7FTCOqT3wuaUSA@mail.gmail.com>
-Date: Mon, 25 Mar 2013 13:58:31 +0100
-Message-ID: <CALbNGRTGfROZL79sL31JRiOhLbS_+wYVe=g-x+m8J-7_ouwgwQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 25 Mar 2013 14:46:17 +0100 (CET)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 01/22] busybox: enable systemd integration for syslogd
+Date: Mon, 25 Mar 2013 14:46:08 +0100
+Message-Id: <1364219168-27880-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] libmcrypt: add 2.5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 13:15:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 Mar 2013 14:03:26 -0000
 
-On Mon, Mar 25, 2013 at 1:53 PM, Burton, Ross <ross.burton@intel.com> wrote=
-:
-> Hi Andreas,
->
-> On 25 March 2013 12:47, Andreas M=C3=BCller <schnitzeltony@googlemail.com=
-> wrote:
->> Wanted to give patches 01 & 02 a test - to fix tmp.mount issue. patch
->> 01 does not appear in patchwork and in gmail 'Show original' I see
->> only binary data garbage. Did something go wrong on transmission?
->
-> The patch has UTF-8 content (your name, ironically) which must be
-> setting patchwork.
-Yes - I need to get another one :)
->
-> There's a branch in poky-contrib, ross/systemd.
-Will get that one - thanks
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ .../recipes-support/libmcrypt/libmcrypt_2.5.8.bb   | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
 
-Andreas
+diff --git a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+new file mode 100644
+index 0000000..0cbe189
+--- /dev/null
++++ b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Replacement for the old crypt() package and crypt(1) command, with extensions."
++HOMEPAGE = "http://mcrypt.sourceforge.net/"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/mcrypt/Libmcrypt/${PV}/libmcrypt-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "0821830d930a86a5c69110837c55b7da"
++SRC_URI[sha256sum] = "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18ca9c9ef34d27a373e"
++
++inherit autotools gettext binconfig
++
++do_configure() {
++	gnu-configize --force
++#	libtoolize --force --copy
++	autoconf
++	oe_runconf
++}
++
++do_install_append() {
++	rm ${D}${libdir}/libmcrypt -r
++}
+-- 
+1.8.1.2
+
 
 
