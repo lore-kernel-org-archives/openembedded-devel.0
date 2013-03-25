@@ -1,34 +1,36 @@
-Received: from mail-bk0-f44.google.com ([209.85.214.44])
+Received: from mail-pa0-f43.google.com ([209.85.220.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UJwkQ-00050B-Ob
+	(envelope-from <raj.khem@gmail.com>) id 1UK0Vs-0008Dh-Iz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 03:03:50 +0100
-Received: by mail-bk0-f44.google.com with SMTP id j4so2609399bkw.31
+	Mon, 25 Mar 2013 07:04:11 +0100
+Received: by mail-pa0-f43.google.com with SMTP id rl6so846150pac.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Mar 2013 18:45:57 -0700 (PDT)
+	Sun, 24 Mar 2013 22:47:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=DGJfG1LxCHGLSAx7GvjMLiy7c4aaP5eaDJVj9na65Q8=;
-	b=Ab4eUwmrczsFy/ETaJyZq4DHpFN6hSGpXbgSEHPdxXCIiptD/edWbvq7QQYIFlOPW0
-	ebqQmuaYH6TGOwANlmajWlA0ARRFYNwsX0ZrCisa0TOPI6Al0a5A5ks5pl35bcxpzoPE
-	ypFlknXAaKDCeZ6cAGHJZBbg2mi07yKUwgn/e4mAZ4OaAWFe9tw8IwTZWc+knbbEu0kc
-	bSK6zNFLpUN4DJ005ywGaVNuxc1NFR0fOk3ELJpzORC8Qw7s3OKjIVHTyynvKmPtErF1
-	RCNC4Q1RZgGkFHyxAevhLhGSy/wxs34oCOiuk0abK7QVbFt9JxbW7HT72nGC+VJxrGwp
-	/1Ng==
-X-Received: by 10.205.7.72 with SMTP id on8mr4442401bkb.122.1364175957087;
-	Sun, 24 Mar 2013 18:45:57 -0700 (PDT)
-MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.204.25.141 with HTTP; Sun, 24 Mar 2013 18:45:37 -0700 (PDT)
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=63iwPVxYaZqMvqDJKBRiLdYa1vmCUFZ2tvJag3lEU4E=;
+	b=Fgby1X2UBIubzERWI3pUovbr1ozxR+Ubmobc/p929z+5wq5sJf1hXYw7oLKZQ2/ySq
+	6hE9IA7duyS+b1T0+OfVDyseYDpT8ek08A1MVBAbJsILG8xq8S/nyOA2q+iVej1rh1DC
+	chCf3WAlM5YUuSiF6JefSKv5TZ2b1Jdx3dnQQiFwkBpJokOj6EiN3mx/8uKo2UkfJmGT
+	hp4uHWfbsqdKlaktweMrB475URe+fs/46KVBltoZ9KQPZr9Wsb1Y8SOn6bAy+i9cWhn1
+	UOKkQYkSy5Sa7SaupwkxuYTCCicAl/uF31043iUNqmgNv7NzBCJdEHf2/hnp+0HVpPm7
+	x2Yw==
+X-Received: by 10.66.175.73 with SMTP id by9mr15976484pac.191.1364190430018;
+	Sun, 24 Mar 2013 22:47:10 -0700 (PDT)
+Received: from vspringer-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id zm1sm12085329pbc.26.2013.03.24.22.47.08
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 24 Mar 2013 22:47:09 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
 In-Reply-To: <1364150558.389@bughunter.ca>
+Date: Sun, 24 Mar 2013 22:47:11 -0700
+Message-Id: <BA0ECF04-A8DA-41AE-904C-8D04EE418DC3@gmail.com>
 References: <1364150558.389@bughunter.ca>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Mon, 25 Mar 2013 10:45:37 +0900
-X-Google-Sender-Auth: lzW2-ooLaU7thuRbGM35dMcGmr8
-Message-ID: <CAPESJy7JcSJXQE6vCEKxxPhZcVi69jW7EOr+t=LS=n+evoS_mw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1503)
 Subject: Re: ATNGW100
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,48 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 02:03:56 -0000
+X-List-Received-Date: Mon, 25 Mar 2013 06:04:13 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Hi Justin,
 
-according to the DISTRO name,
-you have to specify something exists in
-source/meta-angstrom/conf/distro/ directory.
+On Mar 24, 2013, at 11:42 AM, Justin Seitz <jms@bughunter.ca> wrote:
 
-I guess you can find angstrom-v2012.05.conf or something there.
-Thus
-DISTRO=3D"angstrom-v2012.05"
-helps you to walk one step forward.
---=20
-Takeshi Hamasaki
-
-2013/3/25 Justin Seitz <jms@bughunter.ca>:
 > Hey all,
->
-> I am pretty new to OE, and having followed some scattered instructions on=
- building the ATNGW100 I have been unsuccessful with the new OE core. My lo=
-cal.conf includes the directives:
->
+>=20
+> I am pretty new to OE, and having followed some scattered instructions =
+on building the ATNGW100 I have been unsuccessful with the new OE core. =
+My local.conf includes the directives:
+>=20
 > TARGET_OS =3D =93linux-uclibc=94
 > MACHINE =3D =93atngw100&#8243;
 > DISTRO =3D =93angstrom-2008.1&#8243;
 > ANGSTROMLIBC =3D =93uclibc=94
->
-> Which it complains that angstrom-2008.1 cannot be found as a distro. Is t=
-his a case that I can just pull the configs from the OE-classic repo over o=
-r is there a guide somewhere that I can't find in YOCTO that describes how =
-I can move the ATNGW100 build over to the new OE-core?
->
+>=20
+> Which it complains that angstrom-2008.1 cannot be found as a distro. =
+Is this a case that I can just pull the configs from the OE-classic repo =
+over or is there a guide somewhere that I can't find in YOCTO that =
+describes how I can move the ATNGW100 build over to the new OE-core?
+
+this question belongs to angstrom distro ml. I will answer is here =
+however. You should be able to checkout
+2011.03 maintenance branch of oe.classic and use that one for the above =
+machine and distro policies. No
+one has yet forward ported the avr32 support into latest angstrom.
+
+>=20
 > Thanks in advance,
->
+>=20
 > JMS
->
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
 
