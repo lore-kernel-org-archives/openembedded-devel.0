@@ -1,21 +1,25 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mga11.intel.com ([192.55.52.93])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UK3vg-0007C5-BC
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UK407-0007PD-Fe
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Mar 2013 10:43:12 +0100
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 38E2AD22B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Mar 2013 10:26:07 +0100 (CET)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Mar 2013 10:25:59 +0100
-Message-Id: <1364203559-24240-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [PATCH] powertop: add 2.3
+	Mon, 25 Mar 2013 10:47:36 +0100
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 25 Mar 2013 02:30:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.84,904,1355126400"; d="scan'208";a="311472546"
+Received: from unknown (HELO helios.localnet) ([10.255.13.190])
+	by fmsmga002.fm.intel.com with ESMTP; 25 Mar 2013 02:30:32 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Date: Mon, 25 Mar 2013 09:30:31 +0000
+Message-ID: <50528808.YOdRBQeq7Q@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
+In-Reply-To: <1364203559-24240-1-git-send-email-marcin.juszkiewicz@linaro.org>
+References: <1364203559-24240-1-git-send-email-marcin.juszkiewicz@linaro.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] powertop: add 2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,34 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 09:43:37 -0000
+X-List-Received-Date: Mon, 25 Mar 2013 09:47:48 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- meta-oe/recipes-support/powertop/powertop_2.3.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-support/powertop/powertop_2.3.bb
+On Monday 25 March 2013 10:25:59 Marcin Juszkiewicz wrote:
+> Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+> ---
+>  meta-oe/recipes-support/powertop/powertop_2.3.bb | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/powertop/powertop_2.3.bb
 
-diff --git a/meta-oe/recipes-support/powertop/powertop_2.3.bb b/meta-oe/recipes-support/powertop/powertop_2.3.bb
-new file mode 100644
-index 0000000..c289ac6
---- /dev/null
-+++ b/meta-oe/recipes-support/powertop/powertop_2.3.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Linux tool to diagnose issues with power consumption and power management."
-+HOMEPAGE = "http://01.org/powertop/"
-+DEPENDS = "ncurses virtual/gettext libnl pciutils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-+
-+SRC_URI = "http://01.org/powertop/sites/default/files/downloads/powertop-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "dc03608f20e56cdc99d121a6191556f6"
-+SRC_URI[sha256sum] = "b8c1add69afee28c77dca56fdcedb4a46820f3a71c86aae7891b0c5c595cd744"
-+
-+inherit autotools
+powertop is in OE-Core, if you want to update it please update it there.
+
+Cheers,
+Paul
+
 -- 
-1.8.1.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
