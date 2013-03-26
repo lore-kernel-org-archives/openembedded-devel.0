@@ -1,25 +1,34 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from mail-pb0-f49.google.com ([209.85.160.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UKUph-0001JE-0G
+	(envelope-from <martin.jansa@gmail.com>) id 1UKWFi-0003xV-Dg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Mar 2013 15:26:40 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 26 Mar 2013 07:07:40 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.84,911,1355126400"; d="scan'208";a="284744649"
-Received: from unknown (HELO helios.localnet) ([10.255.13.191])
-	by orsmga001.jf.intel.com with ESMTP; 26 Mar 2013 07:09:02 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: d r <1337ch1770r@googlemail.com>
-Date: Tue, 26 Mar 2013 14:09:01 +0000
-Message-ID: <227388184.xnyZDIDxok@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
-In-Reply-To: <CACCbTUkq760C8oN1o5NycCJ6T+JLs5eobd28JAW6m388w___tQ@mail.gmail.com>
-References: <CACCbTUkq760C8oN1o5NycCJ6T+JLs5eobd28JAW6m388w___tQ@mail.gmail.com>
+	Tue, 26 Mar 2013 16:57:38 +0100
+Received: by mail-pb0-f49.google.com with SMTP id um15so1065303pbc.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Mar 2013 08:40:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=nWCsOPqeaqdnLxwuLlSUgJrKbWW4KMiMzO9iolhEhd4=;
+	b=BivMQsGZwVfuMTpdqWukvi/dbEoeMDVdc0ZH2yjYgaw55o9NRPoCIVM7o6fMvRTtC2
+	21MKf9QrVqOhhXj8+KttzXmTo9CU5b7O4x/VcnuFMKNbEMHCbSvI7jXls2gblnkq+TDw
+	3amoLaFFsyeHsEAUApcR9yBNZP9BSSDSO5CKmdLbl+vs+vnLRNmIYbq3emry9KRRm7fi
+	yMw+hSEP9iqIKTfcIeaz5C+xPHHWe4thupOlKfWNpBmkdsTw8FShZY64v5D4XM+1iqxe
+	FJ8Mj2bxQvjm1tptyqXKkLxfXKgmeIvPGlxyAuSLfVi4R285YFt6skKrnAVGgo3chGQg
+	qI0g==
+X-Received: by 10.66.171.232 with SMTP id ax8mr24894439pac.67.1364312433699;
+	Tue, 26 Mar 2013 08:40:33 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id in5sm17913111pbc.20.2013.03.26.08.40.30
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 26 Mar 2013 08:40:32 -0700 (PDT)
+Date: Tue, 26 Mar 2013 16:40:20 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130326154020.GG7539@jama>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: "No recipes available"
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: origin/danny branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,32 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 14:26:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 26 Mar 2013 15:57:47 -0000
+X-Groupsio-MsgNum: 43739
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gvF4niNJ+uBMJnEh"
+Content-Disposition: inline
 
-On Tuesday 26 March 2013 14:52:39 d r wrote:
-> "No recipes available for:
-> /media/sda1/meta-fsl-arm-master/meta-fsl-arm-master/recipes-qt/qt4/qt4-embed
-> ded_4.8.4.bbappend
-> /media/sda1/meta-fsl-arm-master/meta-fsl-arm-master/recipes-multimedia/gstr
-> eamer/gst-plugins-gl_0.10.3.bbappend
-> 
-> /media/sda1/meta-fsl-arm-master/meta-fsl-arm-master/recipes-qt/qt4/qt4-x11-f
-> ree_4.8.4.bbappend
-> /media/sda1/meta-fsl-arm-master/meta-fsl-arm-master/recipes-graphics/mesa/m
-> esa_9.0.2.bbappend "
-> Does anyone know what to do now?
+--gvF4niNJ+uBMJnEh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Are you perhaps trying to use the master branch of meta-fsl-arm with an older 
-branch/version of meta (OE-Core)?
+Hi Eric,
 
-Cheers,
-Paul
+I've noticed that there is new origin/danny branch, did you push it or
+someone else?
 
--- 
+[new branch]      origin/danny -> origin/origin/danny
+not sure if you have permissions to remove it.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--gvF4niNJ+uBMJnEh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFRwWQACgkQN1Ujt2V2gByFuwCgg5V9ELG03kRU0i9YJPiXbVkb
+BwYAoKs+bvY4PWEnkQnD3aNEnNknzDVk
+=Nzbc
+-----END PGP SIGNATURE-----
+
+--gvF4niNJ+uBMJnEh--
