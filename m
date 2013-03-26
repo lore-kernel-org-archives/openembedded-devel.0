@@ -1,35 +1,37 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UKaF5-000668-CK
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UKaFM-000683-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Mar 2013 21:13:12 +0100
+	Tue, 26 Mar 2013 21:13:29 +0100
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2QJuBIe012027
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r2QJuQcp020471
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2013 12:56:11 -0700 (PDT)
+	Tue, 26 Mar 2013 12:56:27 -0700 (PDT)
 Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Tue, 26 Mar 2013 12:56:10 -0700
+	(TLS) id 14.2.342.3; Tue, 26 Mar 2013 12:56:26 -0700
 Received: from skynet (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 411057FD0;
-	Tue, 26 Mar 2013 15:55:22 -0400 (EDT)
-Received: by skynet (Postfix, from userid 1000)	id 5DE06600A71; Tue, 26 Mar
-	2013 15:56:08 -0400 (EDT)
-Date: Tue, 26 Mar 2013 15:56:08 -0400
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 8CDB67FD0	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Mar 2013 15:55:38 -0400 (EDT)
+Received: by skynet (Postfix, from userid 1000)	id 13D2F600A71; Tue, 26 Mar
+	2013 15:56:24 -0400 (EDT)
+Date: Tue, 26 Mar 2013 15:56:24 -0400
 From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Aws Ismail <aws.ismail@windriver.com>
-Message-ID: <20130326195604.GA3692@windriver.com>
-References: <1364225407-13263-1-git-send-email-aws.ismail@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130326195624.GB3692@windriver.com>
+References: <1363897098-26498-1-git-send-email-joe.macdonald@windriver.com>
+	<1363897098-26498-2-git-send-email-joe.macdonald@windriver.com>
+	<20130321204237.GA3219@jama> <20130322130920.GE5049@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1364225407-13263-1-git-send-email-aws.ismail@windriver.com>
+In-Reply-To: <20130322130920.GE5049@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 0/2][V3] Quagga: deal with snmp support, and some cleanup.
+Subject: Re: [meta-networking][PATCH] cyrus-sasl2: clean up rpath QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,58 +45,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 20:13:14 -0000
-X-Groupsio-MsgNum: 43743
+X-List-Received-Date: Tue, 26 Mar 2013 20:13:31 -0000
+X-Groupsio-MsgNum: 43744
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CE+1k2dSO48ffgeK"
+	protocol="application/pgp-signature"; boundary="XF85m9dhOBO43t/C"
 Content-Disposition: inline
 
---CE+1k2dSO48ffgeK
+--XF85m9dhOBO43t/C
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[[meta-networking][PATCH  0/2][V3] Quagga: deal with snmp support, and some=
- cleanup.] On 13.03.25 (Mon 11:30) Aws Ismail wrote:
+[Re: [oe] [meta-networking][PATCH] cyrus-sasl2: clean up rpath QA errors] O=
+n 13.03.22 (Fri 09:09) Joe MacDonald wrote:
 
+> [Re: [oe] [meta-networking][PATCH] cyrus-sasl2: clean up rpath QA errors]=
+ On 13.03.21 (Thu 21:42) Martin Jansa wrote:
 >=20
-> *** V3 ***
-> Cleanup whitespaces and hardtabs
-> This is made a separate new commit
-> *** V3 ***
+> > On Thu, Mar 21, 2013 at 04:18:18PM -0400, Joe MacDonald wrote:
+> > > Cleaning QA errors from commit 770b14191143fd89fa18daa4048af1f618debd=
+ee
+> > >=20
+> > > Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
+> > > ---
+> > >  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 3 =
+++-
+> > >  1 file changed, 2 insertions(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.=
+1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> > > index 44336f0..7b3e674 100644
+> > > --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> > > +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> > > @@ -11,7 +11,8 @@ inherit autotools pkgconfig
+> > >  EXTRA_OECONF +=3D "--with-dblib=3Dberkeley \
+> > >                   --with-bdb-libdir=3D${STAGING_LIBDIR} \
+> > >                   --with-bdb-incdir=3D${STAGING_INCDIR} \
+> > > -                 --without-pam --without-opie --without-des"
+> > > +                 --without-pam --without-opie --without-des \
+> > > +		 andrew_cv_runpath_switch=3Dnone"
+> >=20
+> > Please don't mix tabs and spaces for indentation.
 >=20
-> Overall, this commit introduces a set of changes to do the following:
->=20
-> 1. Update the configure option for quagga to replace the old --enable-tcp=
--md5
-> 2. Add snmp support based on DISTRO_FEATURES availability.
-> 3. Install sample runtime configuration files for quagga and its daemons.
-> 4. Make sure the post install script is executed at the right stage.
->=20
-> Aws Ismail (2):
->   Quagga has no snmp support, unrecognized options --enable-tcp-md5
->   Quagga: clean up whitespaces/hardtabs in recipe
->=20
->  .../recipes-protocols/quagga/quagga.inc            |   71 ++++++++++++--=
-------
->  1 files changed, 43 insertions(+), 28 deletions(-)
+> Good catch, I didn't even notice that expandtab was off here.  Time to
+> update the vimrc.
 
-Merged, thanks.
+Merged with this fix.
 
 --=20
 -Joe MacDonald.
 :wq
 
---CE+1k2dSO48ffgeK
+--XF85m9dhOBO43t/C
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlFR/VEACgkQPN8S4W6ZZnfwPQCfUd54pSe5neTzvGFoK5B+Kx45
-lDMAn3sLqjhzLj0BUcfULC9cdTrCU1vu
-=MKN+
+iEYEARECAAYFAlFR/WgACgkQPN8S4W6ZZnc0AACeM734SOUI6rEueb7Rgk1xpUoh
+PYkAniEv92YXKdbWe9hYQye7xN/fPb1I
+=7hrg
 -----END PGP SIGNATURE-----
 
---CE+1k2dSO48ffgeK--
+--XF85m9dhOBO43t/C--
