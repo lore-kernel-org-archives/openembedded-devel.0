@@ -1,34 +1,35 @@
-Received: from mail-pb0-f49.google.com ([209.85.160.49])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UKWFi-0003xV-Dg
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UKWaL-00059b-Dw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Mar 2013 16:57:38 +0100
-Received: by mail-pb0-f49.google.com with SMTP id um15so1065303pbc.36
+	Tue, 26 Mar 2013 17:18:57 +0100
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r2QG1rw5007510
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Mar 2013 08:40:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:mime-version
-	:content-type:content-disposition:user-agent;
-	bh=nWCsOPqeaqdnLxwuLlSUgJrKbWW4KMiMzO9iolhEhd4=;
-	b=BivMQsGZwVfuMTpdqWukvi/dbEoeMDVdc0ZH2yjYgaw55o9NRPoCIVM7o6fMvRTtC2
-	21MKf9QrVqOhhXj8+KttzXmTo9CU5b7O4x/VcnuFMKNbEMHCbSvI7jXls2gblnkq+TDw
-	3amoLaFFsyeHsEAUApcR9yBNZP9BSSDSO5CKmdLbl+vs+vnLRNmIYbq3emry9KRRm7fi
-	yMw+hSEP9iqIKTfcIeaz5C+xPHHWe4thupOlKfWNpBmkdsTw8FShZY64v5D4XM+1iqxe
-	FJ8Mj2bxQvjm1tptyqXKkLxfXKgmeIvPGlxyAuSLfVi4R285YFt6skKrnAVGgo3chGQg
-	qI0g==
-X-Received: by 10.66.171.232 with SMTP id ax8mr24894439pac.67.1364312433699;
-	Tue, 26 Mar 2013 08:40:33 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id in5sm17913111pbc.20.2013.03.26.08.40.30
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 26 Mar 2013 08:40:32 -0700 (PDT)
-Date: Tue, 26 Mar 2013 16:40:20 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130326154020.GG7539@jama>
+	Tue, 26 Mar 2013 09:01:53 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 26 Mar 2013 09:01:53 -0700
+Received: from skynet (unknown [172.25.44.2])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id D2F947FD0	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Mar 2013 12:01:04 -0400 (EDT)
+Received: by skynet (Postfix, from userid 1000)	id 874006005D9; Tue, 26 Mar
+	2013 12:01:50 -0400 (EDT)
+Date: Tue, 26 Mar 2013 12:01:50 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130326160149.GG7727@windriver.com>
+References: <20130326154020.GG7539@jama>
 MIME-Version: 1.0
+In-Reply-To: <20130326154020.GG7539@jama>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: origin/danny branch
+Subject: Re: origin/danny branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 15:57:47 -0000
-X-Groupsio-MsgNum: 43739
+X-List-Received-Date: Tue, 26 Mar 2013 16:18:59 -0000
+X-Groupsio-MsgNum: 43740
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gvF4niNJ+uBMJnEh"
+	protocol="application/pgp-signature"; boundary="eMnpOGXCMazMAbfp"
 Content-Disposition: inline
 
---gvF4niNJ+uBMJnEh
+--eMnpOGXCMazMAbfp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Eric,
+[[oe] origin/danny branch] On 13.03.26 (Tue 16:40) Martin Jansa wrote:
 
-I've noticed that there is new origin/danny branch, did you push it or
-someone else?
+> Hi Eric,
+>=20
+> I've noticed that there is new origin/danny branch, did you push it or
+> someone else?
+>=20
+> [new branch]      origin/danny -> origin/origin/danny
+> not sure if you have permissions to remove it.
 
-[new branch]      origin/danny -> origin/origin/danny
-not sure if you have permissions to remove it.
+I think that was me last week when I merged an update for danny.
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Joe MacDonald.
+:wq
 
---gvF4niNJ+uBMJnEh
+--eMnpOGXCMazMAbfp
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAlFRwWQACgkQN1Ujt2V2gByFuwCgg5V9ELG03kRU0i9YJPiXbVkb
-BwYAoKs+bvY4PWEnkQnD3aNEnNknzDVk
-=Nzbc
+iEYEARECAAYFAlFRxm0ACgkQPN8S4W6ZZncf5QCggVou9fH7T8FeczNKd0rYmtvu
+TkgAn2fj47H4IOuvn2Y5vWH7W31IiMjL
+=Gk9M
 -----END PGP SIGNATURE-----
 
---gvF4niNJ+uBMJnEh--
+--eMnpOGXCMazMAbfp--
