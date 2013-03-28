@@ -1,37 +1,34 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <chase.maupin@ti.com>) id 1ULKi8-0001YG-JS
+	(envelope-from <stefan@datenfreihafen.org>) id 1ULLSu-00032L-AN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Mar 2013 22:50:18 +0100
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2SLX2rR021150;
-	Thu, 28 Mar 2013 16:33:02 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2SLX2tM004519;
-	Thu, 28 Mar 2013 16:33:02 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Thu, 28 Mar 2013 16:33:01 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: =?utf-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH][for-danny] kernel bbclass: return to
-	original directory in do_deploy
-Thread-Index: AQHOK/XztC59HWwAzkeapqNn+3IT9Zi7n6wg
-Date: Thu, 28 Mar 2013 21:33:01 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101594ADC25@DLEE11.ent.ti.com>
-References: <1363629028-6920-1-git-send-email-Chase.Maupin@ti.com>
-	<7D46E86EC0A8354091174257B2FED10159492B24@DLEE11.ent.ti.com>
-	<7D46E86EC0A8354091174257B2FED101594AD5A1@DLEE11.ent.ti.com>
-	<20130328215047.4a978362@e6520eb>
-In-Reply-To: <20130328215047.4a978362@e6520eb>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	Thu, 28 Mar 2013 23:38:36 +0100
+Received: from host-92-24-36-84.ppp.as43234.net ([92.24.36.84]
+	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.69 #1)
+	id 1ULKrc-0008K2-FX by authid <stefan@sostec.de> with srv_auth_cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Mar 2013 23:00:06 +0100
+Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.80)
+	(envelope-from <stefan@novatech.datenfreihafen.org>)
+	id 1ULKrU-0001ot-Ah for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Mar 2013 22:00:00 +0000
+Date: Thu, 28 Mar 2013 21:59:51 +0000
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130328215943.GA6608@novatech.datenfreihafen.org>
+References: <1364484753-22122-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH][for-danny] kernel bbclass: return to original directory in do_deploy
+In-Reply-To: <1364484753-22122-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-20.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Subject: Re: [meta-networking][PATCH] 6lowpan-tools: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 21:50:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 28 Mar 2013 22:38:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEVyaWMgQsOpbmFyZCBbbWFp
-bHRvOmVyaWNAZXVrcmVhLmNvbV0NCj4gU2VudDogVGh1cnNkYXksIE1hcmNoIDI4LCAyMDEzIDM6
-NTEgUE0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IENjOiBNYXVwaW4sIENoYXNlDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSF1b
-Zm9yLWRhbm55XSBrZXJuZWwgYmJjbGFzczoNCj4gcmV0dXJuIHRvIG9yaWdpbmFsIGRpcmVjdG9y
-eSBpbiBkb19kZXBsb3kNCj4gDQo+IExlIFRodSwgMjggTWFyIDIwMTMgMTk6MTg6NTIgKzAwMDAs
-DQo+ICJNYXVwaW4sIENoYXNlIiA8Y2hhc2UubWF1cGluQHRpLmNvbT4gYSDDqWNyaXQgOg0KPiAN
-Cj4gPiBQaW5nIGFnYWluLiAgSXMgdGhpcyBwYXRjaCBPSyBmb3IgZGFubnk/DQo+ID4NCj4gcHVz
-aGVkIHRvIGRhbm55LW5leHQuDQoNClRoYW5rcyBFcmljDQoNCj4gDQo+IEVyaWMNCg==
+Hello.
+
+On Thu, 2013-03-28 at 16:32, Koen Kooi wrote:
+> The 0.3 release was 6 months ago and git HEAD contains fixes to make it work with contiki, so build from git instead of backporting all the patches.
+
+Sounds like a good idea. And not only because one of the patches is
+from me ;)
+
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  .../recipes-support/6lowpan/6lowpan-tools_git.bb     | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/6lowpan/6lowpan-tools_git.bb
+
+Any special reason why this is named 6lowpan here?
+
+6lowpan normally refers to IPv6 over LoWPAN while the lowpan-tools
+do not configure anything regarding IPv6 but the plain LoWPAN which is
+the protocol layer below. I would suggest renaming it to lowpan-tools.
+
+regards
+Stefan Schmidt
 
 
