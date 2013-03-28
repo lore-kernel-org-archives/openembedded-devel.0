@@ -1,28 +1,27 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1ULK3B-0000WB-Jy
+	(envelope-from <eric@eukrea.com>) id 1ULK4A-0000Zw-OL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Mar 2013 22:07:58 +0100
+	Thu, 28 Mar 2013 22:09:02 +0100
 Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 78EB02DA2B
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id C1B68CA8A1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Mar 2013 21:50:55 +0100 (CET)
+	Thu, 28 Mar 2013 21:51:55 +0100 (CET)
 Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
 	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 9DB5CA629E;
-	Thu, 28 Mar 2013 21:50:48 +0100 (CET)
-Date: Thu, 28 Mar 2013 21:50:47 +0100
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 5BC59A625A;
+	Thu, 28 Mar 2013 21:51:48 +0100 (CET)
+Date: Thu, 28 Mar 2013 21:51:46 +0100
 From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130328215047.4a978362@e6520eb>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED101594AD5A1@DLEE11.ent.ti.com>
-References: <1363629028-6920-1-git-send-email-Chase.Maupin@ti.com>
-	<7D46E86EC0A8354091174257B2FED10159492B24@DLEE11.ent.ti.com>
-	<7D46E86EC0A8354091174257B2FED101594AD5A1@DLEE11.ent.ti.com>
+Message-ID: <20130328215146.49283aed@e6520eb>
+In-Reply-To: <1363957816-11928-1-git-send-email-otavio@ossystems.com.br>
+References: <1363957816-11928-1-git-send-email-otavio@ossystems.com.br>
 Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
 X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH][for-danny] kernel bbclass: return to original directory in do_deploy
+Cc: otavio@ossystems.com.br
+Subject: Re: [meta-oe][for-danny][PATCH] libdvdread: Update to newer GIT server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,17 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 21:07:58 -0000
+X-List-Received-Date: Thu, 28 Mar 2013 21:09:02 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Le Thu, 28 Mar 2013 19:18:52 +0000,
-"Maupin, Chase" <chase.maupin@ti.com> a =C3=A9crit :
+Le Fri, 22 Mar 2013 10:10:16 -0300,
+Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
 
-> Ping again.  Is this patch OK for danny?
+> Daniel has moved to newer GIT server and also imported the Debian
+> packages on it so the previously used hash is not available. Update
+> accordingly.
 >=20
-pushed to danny-next.
+> Change-Id: I0b42d76031175b85bd1711ba5ef01f5a2a34dc46
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
+pushed to danny-next without the Change-Id which doesn't corresponds to
+anything in meta-oe
+
+Thanks,
 Eric
 
 
