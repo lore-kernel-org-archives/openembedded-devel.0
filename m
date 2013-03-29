@@ -1,37 +1,37 @@
-Received: from mail-ee0-f43.google.com ([74.125.83.43])
+Received: from mail-ee0-f53.google.com ([74.125.83.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1ULYZR-0006RW-Mb
+	(envelope-from <martin.jansa@gmail.com>) id 1ULYZh-0006WT-E9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Mar 2013 13:38:13 +0100
-Received: by mail-ee0-f43.google.com with SMTP id e50so205410eek.16
+	Fri, 29 Mar 2013 13:38:29 +0100
+Received: by mail-ee0-f53.google.com with SMTP id c13so204685eek.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2013 05:21:10 -0700 (PDT)
+	Fri, 29 Mar 2013 05:21:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=QaCOaBED1TfLjXln6QisCZ4LipmzOCbc1YNIMlvK7pg=;
-	b=I/UMGMEBS4xQ/POMYa0onu0KVXVE/etcWDBCdoRmqVi9c+YVtBngiz2va3ZF+G+K2z
-	rb+CacvW7assKvVGv3AoesAQp7EJYQzrAFD+/quNSv7ac7uqYXz132SmtmKFcKAFYyVJ
-	ksbpfDZtnfpXvDv0hEa8w9Js/E/ZpCxjhY5l2zq/Hk8MDU19aELeLkPpBtdblsjEIo9J
-	kXDVIQcCcdgjYezy8SOmLQJTcCeEFYD30/DnSxbiPiDDF3mdeh38ypV3FxxJOsgq7O0H
-	3AzB4YbURU/B+7DnYALtp0HOxlNilvUwyVFhnoB/CtFdVi3T3Q3jJYT3/RfX693tEBRc
-	rskg==
-X-Received: by 10.15.36.135 with SMTP id i7mr7292474eev.34.1364559669710;
-	Fri, 29 Mar 2013 05:21:09 -0700 (PDT)
+	bh=sLpLiad50jG9W9mpQwpGaP780cXBHOz8A0d+kMJGGnU=;
+	b=t+9dnpvdQ4aWp0ms3q5zQLiWbRyXzYy53LmSC4NTjByFXVn8u3PqqJBCqiODyv9X16
+	5oYSJLYt5W/oGlGSxrvVdJjGKG2NiOoMVj3G5UWBFMFxDICHeES7rIF6a/3tHpOlH0cg
+	Hb3PrVTzXNkBSKlzPHVwMsF8/uxYh10riC52OkPqOU1y+GEF2YMx76KW34EIbqxtFUYZ
+	n/DwXy+bIyAPJospx9N91Ai4d4BacouUFvBR4wkkyWCwDsY1/5+LaibA8kzVsSX2tMlr
+	h2KQ+bC1GcQbJ7MdIEGfICF395xPAMzSDRCMzpIXxf4tTelf5xMzxxmlRPglU+epmUCU
+	BWPA==
+X-Received: by 10.15.34.198 with SMTP id e46mr7364714eev.27.1364559685753;
+	Fri, 29 Mar 2013 05:21:25 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id bc1sm3697323eeb.11.2013.03.29.05.21.08
+	by mx.google.com with ESMTPS id 3sm3751737eej.6.2013.03.29.05.21.24
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 29 Mar 2013 05:21:09 -0700 (PDT)
-Date: Fri, 29 Mar 2013 13:21:12 +0100
+	Fri, 29 Mar 2013 05:21:25 -0700 (PDT)
+Date: Fri, 29 Mar 2013 13:21:29 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130329122112.GB11120@jama>
-References: <1364298555-27203-1-git-send-email-marcin.juszkiewicz@linaro.org>
-	<1364418982-14665-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Message-ID: <20130329122129.GC11120@jama>
+References: <F7146556-015E-4D6A-9F58-38284AFCF988@gmail.com>
+	<1364283126-22715-1-git-send-email-marcin.juszkiewicz@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <1364418982-14665-1-git-send-email-marcin.juszkiewicz@linaro.org>
+In-Reply-To: <1364283126-22715-1-git-send-email-marcin.juszkiewicz@linaro.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] gperftools: add 2.0
+Subject: Re: [meta-oe][PATCH] libmcrypt: add 2.5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 12:38:13 -0000
-X-Groupsio-MsgNum: 43783
+X-List-Received-Date: Fri, 29 Mar 2013 12:38:29 -0000
+X-Groupsio-MsgNum: 43784
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="H+4ONPRPur6+Ovig"
+	protocol="application/pgp-signature"; boundary="f+W+jCU1fRNres8c"
 Content-Disposition: inline
 
---H+4ONPRPur6+Ovig
+--f+W+jCU1fRNres8c
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 27, 2013 at 10:16:22PM +0100, Marcin Juszkiewicz wrote:
+On Tue, Mar 26, 2013 at 08:32:06AM +0100, Marcin Juszkiewicz wrote:
 > Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-> ---
->  ...ix-for-make-install-error-regarding-src-w.patch | 580 +++++++++++++++=
-++++++
->  .../recipes-support/gperftools/gperftools_2.0.bb   |  13 +
->  2 files changed, 593 insertions(+)
->  create mode 100644 meta-oe/recipes-support/gperftools/gperftools-2.0/000=
-1-issue-473-Fix-for-make-install-error-regarding-src-w.patch
->  create mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.0.bb
 
 Applied, thanks!
 
@@ -74,767 +66,37 @@ Hopefully in right (last) revision.
 Would be great if you can update patchwork status and use PATCHvN for
 next patches.
 
-memcached/libmemcached are still pending (unresolved review comments
+memcached/libmemcached are still pending (unresolved review comments=20
 afaik).
 
-> diff --git a/meta-oe/recipes-support/gperftools/gperftools-2.0/0001-issue=
--473-Fix-for-make-install-error-regarding-src-w.patch b/meta-oe/recipes-sup=
-port/gperftools/gperftools-2.0/0001-issue-473-Fix-for-make-install-error-re=
-garding-src-w.patch
+> ---
+>  meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+>=20
+> diff --git a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb b/meta-=
+oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
 > new file mode 100644
-> index 0000000..cbd4a08
+> index 0000000..a169390
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/gperftools/gperftools-2.0/0001-issue-473-Fi=
-x-for-make-install-error-regarding-src-w.patch
-> @@ -0,0 +1,580 @@
-> +Upstream-Status: backport
+> +++ b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION =3D "Replacement for the old crypt() package and crypt(1) co=
+mmand, with extensions."
+> +HOMEPAGE =3D "http://mcrypt.sourceforge.net/"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3Dbbb461211a33b134d42ed5ee8=
+02b37ff"
+> +DEPENDS =3D "libtool"
 > +
-> +From baaf0188295582ca68df03f70baa13d96a88e2eb Mon Sep 17 00:00:00 2001
-> +From: "chappedm@gmail.com" <chappedm@gmail.com>
-> +Date: Sun, 4 Nov 2012 17:41:47 +0000
-> +Subject: [PATCH] issue-473: Fix for make install error regarding src/win=
-dows/google/tcmalloc.h
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/mcrypt/Libmcrypt/${PV}/libmcr=
+ypt-${PV}.tar.gz"
 > +
-> +git-svn-id: http://gperftools.googlecode.com/svn/trunk@174 6b5cf1ce-ec42=
--a296-1ba9-69fdba395a50
-> +---
-> + Makefile.am |  20 +++----
-> + Makefile.in | 194 ++++++++++++++++++++++++++++++-----------------------=
--------
-> + 2 files changed, 106 insertions(+), 108 deletions(-)
+> +SRC_URI[md5sum] =3D "0821830d930a86a5c69110837c55b7da"
+> +SRC_URI[sha256sum] =3D "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18c=
+a9c9ef34d27a373e"
 > +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index d1cc29d..f932e8d 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -126,8 +126,7 @@ googleinclude_HEADERS =3D				\
-> +    src/google/malloc_hook_c.h			\
-> +    src/google/profiler.h			\
-> +    src/google/stacktrace.h			\
-> +-   src/google/tcmalloc.h                        \
-> +-   src/windows/google/tcmalloc.h
-> ++   src/google/tcmalloc.h
-> +=20
-> + docdir =3D $(prefix)/share/doc/$(PACKAGE)-$(VERSION)
-> + # This is for HTML and other documentation you want to install.
-> +@@ -437,9 +436,8 @@ S_TCMALLOC_MINIMAL_INCLUDES =3D src/common.h \
-> + SG_TCMALLOC_MINIMAL_INCLUDES =3D src/gperftools/malloc_hook.h \
-> +                                src/gperftools/malloc_hook_c.h \
-> +                                src/gperftools/malloc_extension.h \
-> +-                               src/gperftools/malloc_extension_c.h \
-> +-                               src/gperftools/stacktrace.h
-> +-TCMALLOC_MINIMAL_INCLUDES =3D $(S_TCMALLOC_MINIMAL_INCLUDES) $(SG_TCMAL=
-LOC_MINIMAL_INCLUDES)
-> ++                               src/gperftools/malloc_extension_c.h
-> ++TCMALLOC_MINIMAL_INCLUDES =3D $(S_TCMALLOC_MINIMAL_INCLUDES) $(SG_TCMAL=
-LOC_MINIMAL_INCLUDES) $(SG_STACKTRACE_INCLUDES)
-> + perftoolsinclude_HEADERS +=3D $(SG_TCMALLOC_MINIMAL_INCLUDES)
-> +=20
-> + ### Making the library
-> +@@ -847,10 +845,10 @@ S_TCMALLOC_INCLUDES =3D $(S_TCMALLOC_MINIMAL_INCLU=
-DES) \
-> +                       src/base/sysinfo.h \
-> +                       src/base/thread_lister.h \
-> +                       src/heap-profile-table.h
-> +-SG_TCMALLOC_INCLUDES =3D $(SG_TCMALLOC_MINIMAL_INCLUDES) \
-> +-                       src/gperftools/heap-profiler.h \
-> ++SG_TCMALLOC_INCLUDES =3D src/gperftools/heap-profiler.h \
-> +                        src/gperftools/heap-checker.h
-> +-TCMALLOC_INCLUDES =3D $(S_TCMALLOC_INCLUDES) $(SG_TCMALLOC_INCLUDES)
-> ++TCMALLOC_INCLUDES =3D $(S_TCMALLOC_INCLUDES) $(SG_TCMALLOC_MINIMAL_INCL=
-UDES) \
-> ++		    $(SG_TCMALLOC_INCLUDES) $(SG_STACKTRACE_INCLUDES)
-> + perftoolsinclude_HEADERS +=3D $(SG_TCMALLOC_INCLUDES)
-> +=20
-> + ### Making the library
-> +@@ -1191,9 +1189,9 @@ S_CPU_PROFILER_INCLUDES =3D src/profiledata.h \
-> +                           src/base/sysinfo.h \
-> +                           $(SPINLOCK_INCLUDES) \
-> +                           $(LOGGING_INCLUDES)
-> +-SG_CPU_PROFILER_INCLUDES =3D src/gperftools/profiler.h \
-> +-                           src/gperftools/stacktrace.h
-> +-CPU_PROFILER_INCLUDES =3D $(S_CPU_PROFILER_INCLUDES) $(SG_CPU_PROFILER_=
-INCLUDES)
-> ++SG_CPU_PROFILER_INCLUDES =3D src/gperftools/profiler.h
-> ++CPU_PROFILER_INCLUDES =3D $(S_CPU_PROFILER_INCLUDES) $(SG_CPU_PROFILER_=
-INCLUDES) \
-> ++			$(SG_STACKTRACE_INCLUDES)
-> + perftoolsinclude_HEADERS +=3D $(SG_CPU_PROFILER_INCLUDES)
-> +=20
-> + ### Making the library
-> +diff --git a/Makefile.in b/Makefile.in
-> +index 191754d..9550535 100644
-> +--- a/Makefile.in
-> ++++ b/Makefile.in
-> +@@ -349,7 +349,7 @@ am__libprofiler_la_SOURCES_DIST =3D src/profiler.cc \
-> + @WITH_CPU_PROFILER_TRUE@am__objects_2 =3D $(am__objects_1) \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am__objects_3 =3D $(am__objects_2) \
-> +-@WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> ++@WITH_CPU_PROFILER_TRUE@	$(am__objects_1) $(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am_libprofiler_la_OBJECTS =3D profiler.lo \
-> + @WITH_CPU_PROFILER_TRUE@	profile-handler.lo profiledata.lo \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_3)
-> +@@ -439,26 +439,27 @@ am__libtcmalloc_la_SOURCES_DIST =3D src/tcmalloc.c=
-c src/common.h \
-> + 	src/gperftools/malloc_hook.h src/gperftools/malloc_hook_c.h \
-> + 	src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h \
-> +-	src/gperftools/stacktrace.h src/gperftools/heap-profiler.h \
-> +-	src/gperftools/heap-checker.h src/base/thread_lister.c \
-> ++	src/gperftools/heap-profiler.h src/gperftools/heap-checker.h \
-> ++	src/gperftools/stacktrace.h src/base/thread_lister.c \
-> + 	src/base/linuxthreads.cc src/heap-checker.cc \
-> + 	src/heap-checker-bcad.cc
-> + @MINGW_FALSE@am__objects_5 =3D libtcmalloc_la-tcmalloc.lo
-> + am__objects_6 =3D $(am__objects_1)
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_7 =3D $(am__objects_6) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_8 =3D $(am__objects_1)
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_9 =3D $(am__objects_7) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_8)
-> +-@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_10 =3D thread_lister.lo \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_8 =3D $(am__objects_7) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> ++@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_9 =3D thread_lister.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_la-linuxthreads.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_la-heap-checker.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_la-heap-checker-bcad.lo
-> +-@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_11 =3D $(am__objects_10)
-> ++@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_10 =3D $(am__objects_9)
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_libtcmalloc_la_OBJECTS =3D  \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_5) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_9) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_11)
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_8) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_10)
-> + libtcmalloc_la_OBJECTS =3D $(am_libtcmalloc_la_OBJECTS)
-> + libtcmalloc_la_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAGS) \
-> + 	$(LIBTOOLFLAGS) --mode=3Dlink $(CXXLD) \
-> +@@ -502,29 +503,29 @@ am__libtcmalloc_and_profiler_la_SOURCES_DIST =3D s=
-rc/tcmalloc.cc \
-> + 	src/gperftools/malloc_hook.h src/gperftools/malloc_hook_c.h \
-> + 	src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h \
-> +-	src/gperftools/stacktrace.h src/gperftools/heap-profiler.h \
-> +-	src/gperftools/heap-checker.h src/base/thread_lister.c \
-> ++	src/gperftools/heap-profiler.h src/gperftools/heap-checker.h \
-> ++	src/gperftools/stacktrace.h src/base/thread_lister.c \
-> + 	src/base/linuxthreads.cc src/heap-checker.cc \
-> + 	src/heap-checker-bcad.cc src/profiler.cc \
-> + 	src/profile-handler.cc src/profiledata.cc src/profiledata.h \
-> + 	src/profile-handler.h src/getpc.h src/base/simple_mutex.h \
-> + 	src/gperftools/profiler.h
-> +-@MINGW_FALSE@am__objects_12 =3D libtcmalloc_and_profiler_la-tcmalloc.lo
-> +-@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_13 =3D thread_lister.lo \
-> ++@MINGW_FALSE@am__objects_11 =3D libtcmalloc_and_profiler_la-tcmalloc.lo
-> ++@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_12 =3D thread_lister.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_and_profiler_la-linuxthreads.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_and_profiler_la-heap-checker.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_and_profiler_la-heap-checker-bcad.lo
-> +-@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_14 =3D $(am__objects_13)
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_15 =3D  \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_12) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_9) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_14)
-> +-@WITH_CPU_PROFILER_TRUE@am__objects_16 =3D libtcmalloc_and_profiler_la-=
-profiler.lo \
-> ++@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_13 =3D $(am__objects_12)
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_14 =3D  \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_11) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_8) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_13)
-> ++@WITH_CPU_PROFILER_TRUE@am__objects_15 =3D libtcmalloc_and_profiler_la-=
-profiler.lo \
-> + @WITH_CPU_PROFILER_TRUE@	libtcmalloc_and_profiler_la-profile-handler.lo=
- \
-> + @WITH_CPU_PROFILER_TRUE@	libtcmalloc_and_profiler_la-profiledata.lo \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_3)
-> +-@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_libtcmal=
-loc_and_profiler_la_OBJECTS =3D $(am__objects_15) \
-> +-@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__obje=
-cts_16)
-> ++@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_libtcmal=
-loc_and_profiler_la_OBJECTS =3D $(am__objects_14) \
-> ++@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__obje=
-cts_15)
-> + libtcmalloc_and_profiler_la_OBJECTS =3D  \
-> + 	$(am_libtcmalloc_and_profiler_la_OBJECTS)
-> + libtcmalloc_and_profiler_la_LINK =3D $(LIBTOOL) --tag=3DCXX \
-> +@@ -568,15 +569,15 @@ am__libtcmalloc_debug_la_SOURCES_DIST =3D src/debu=
-gallocation.cc \
-> + 	src/gperftools/malloc_hook.h src/gperftools/malloc_hook_c.h \
-> + 	src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h \
-> +-	src/gperftools/stacktrace.h src/gperftools/heap-profiler.h \
-> +-	src/gperftools/heap-checker.h
-> +-@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_17 =3D thread_lister.lo \
-> ++	src/gperftools/heap-profiler.h src/gperftools/heap-checker.h \
-> ++	src/gperftools/stacktrace.h
-> ++@WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects=
-_16 =3D thread_lister.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_debug_la-linuxthreads.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_debug_la-heap-checker.lo \
-> + @WITH_HEAP_CHECKER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmallo=
-c_debug_la-heap-checker-bcad.lo
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_libtcmallo=
-c_debug_la_OBJECTS =3D libtcmalloc_debug_la-debugallocation.lo \
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__object=
-s_17) \
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__object=
-s_9)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__object=
-s_16) \
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__object=
-s_8)
-> + libtcmalloc_debug_la_OBJECTS =3D $(am_libtcmalloc_debug_la_OBJECTS)
-> + libtcmalloc_debug_la_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAGS)=
- \
-> + 	$(LIBTOOLFLAGS) --mode=3Dlink $(CXXLD) \
-> +@@ -628,12 +629,12 @@ am__libtcmalloc_internal_la_SOURCES_DIST =3D src/c=
-ommon.cc \
-> + 	src/gperftools/heap-checker.h src/base/low_level_alloc.cc \
-> + 	src/heap-profile-table.cc src/heap-profiler.cc \
-> + 	src/raw_printer.cc src/memory_region_map.cc
-> +-@MINGW_FALSE@am__objects_18 =3D libtcmalloc_internal_la-system-alloc.lo
-> +-@MINGW_FALSE@am__objects_19 =3D  \
-> ++@MINGW_FALSE@am__objects_17 =3D libtcmalloc_internal_la-system-alloc.lo
-> ++@MINGW_FALSE@am__objects_18 =3D  \
-> + @MINGW_FALSE@	libtcmalloc_internal_la-maybe_threads.lo
-> +-am__objects_20 =3D $(am__objects_6) $(am__objects_1)
-> +-am__objects_21 =3D libtcmalloc_internal_la-common.lo \
-> +-	libtcmalloc_internal_la-internal_logging.lo $(am__objects_18) \
-> ++am__objects_19 =3D $(am__objects_6) $(am__objects_1) $(am__objects_1)
-> ++am__objects_20 =3D libtcmalloc_internal_la-common.lo \
-> ++	libtcmalloc_internal_la-internal_logging.lo $(am__objects_17) \
-> + 	libtcmalloc_internal_la-memfs_malloc.lo \
-> + 	libtcmalloc_internal_la-central_freelist.lo \
-> + 	libtcmalloc_internal_la-page_heap.lo \
-> +@@ -644,11 +645,11 @@ am__objects_21 =3D libtcmalloc_internal_la-common.=
-lo \
-> + 	libtcmalloc_internal_la-symbolize.lo \
-> + 	libtcmalloc_internal_la-thread_cache.lo \
-> + 	libtcmalloc_internal_la-malloc_hook.lo \
-> +-	libtcmalloc_internal_la-malloc_extension.lo $(am__objects_19) \
-> +-	$(am__objects_20)
-> ++	libtcmalloc_internal_la-malloc_extension.lo $(am__objects_18) \
-> ++	$(am__objects_19)
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_libtcmalloc_internal_la_OBJECTS =
-=3D  \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_21) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_9) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_20) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_8) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmalloc_internal_la-low_level_=
-alloc.lo \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmalloc_internal_la-heap-profi=
-le-table.lo \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	libtcmalloc_internal_la-heap-profi=
-ler.lo \
-> +@@ -690,9 +691,9 @@ am__libtcmalloc_minimal_la_SOURCES_DIST =3D src/tcma=
-lloc.cc src/common.h \
-> + 	src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h \
-> + 	src/gperftools/stacktrace.h
-> +-@MINGW_FALSE@am__objects_22 =3D libtcmalloc_minimal_la-tcmalloc.lo
-> +-am_libtcmalloc_minimal_la_OBJECTS =3D $(am__objects_22) \
-> +-	$(am__objects_20)
-> ++@MINGW_FALSE@am__objects_21 =3D libtcmalloc_minimal_la-tcmalloc.lo
-> ++am_libtcmalloc_minimal_la_OBJECTS =3D $(am__objects_21) \
-> ++	$(am__objects_19)
-> + libtcmalloc_minimal_la_OBJECTS =3D $(am_libtcmalloc_minimal_la_OBJECTS)
-> + libtcmalloc_minimal_la_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAG=
-S) \
-> + 	$(LIBTOOLFLAGS) --mode=3Dlink $(CXXLD) \
-> +@@ -730,7 +731,7 @@ am__libtcmalloc_minimal_debug_la_SOURCES_DIST =3D  \
-> + 	src/gperftools/malloc_extension_c.h \
-> + 	src/gperftools/stacktrace.h
-> + @WITH_DEBUGALLOC_TRUE@am_libtcmalloc_minimal_debug_la_OBJECTS =3D libtc=
-malloc_minimal_debug_la-debugallocation.lo \
-> +-@WITH_DEBUGALLOC_TRUE@	$(am__objects_20)
-> ++@WITH_DEBUGALLOC_TRUE@	$(am__objects_19)
-> + libtcmalloc_minimal_debug_la_OBJECTS =3D  \
-> + 	$(am_libtcmalloc_minimal_debug_la_OBJECTS)
-> + libtcmalloc_minimal_debug_la_LINK =3D $(LIBTOOL) --tag=3DCXX \
-> +@@ -773,14 +774,14 @@ am__libtcmalloc_minimal_internal_la_SOURCES_DIST =
-=3D src/common.cc \
-> + 	src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h \
-> + 	src/gperftools/stacktrace.h
-> +-@MINGW_FALSE@am__objects_23 =3D  \
-> ++@MINGW_FALSE@am__objects_22 =3D  \
-> + @MINGW_FALSE@	libtcmalloc_minimal_internal_la-system-alloc.lo
-> +-@MINGW_FALSE@am__objects_24 =3D  \
-> ++@MINGW_FALSE@am__objects_23 =3D  \
-> + @MINGW_FALSE@	libtcmalloc_minimal_internal_la-maybe_threads.lo
-> + am_libtcmalloc_minimal_internal_la_OBJECTS =3D  \
-> + 	libtcmalloc_minimal_internal_la-common.lo \
-> + 	libtcmalloc_minimal_internal_la-internal_logging.lo \
-> +-	$(am__objects_23) \
-> ++	$(am__objects_22) \
-> + 	libtcmalloc_minimal_internal_la-memfs_malloc.lo \
-> + 	libtcmalloc_minimal_internal_la-central_freelist.lo \
-> + 	libtcmalloc_minimal_internal_la-page_heap.lo \
-> +@@ -792,7 +793,7 @@ am_libtcmalloc_minimal_internal_la_OBJECTS =3D  \
-> + 	libtcmalloc_minimal_internal_la-thread_cache.lo \
-> + 	libtcmalloc_minimal_internal_la-malloc_hook.lo \
-> + 	libtcmalloc_minimal_internal_la-malloc_extension.lo \
-> +-	$(am__objects_24) $(am__objects_20)
-> ++	$(am__objects_23) $(am__objects_19)
-> + libtcmalloc_minimal_internal_la_OBJECTS =3D  \
-> + 	$(am_libtcmalloc_minimal_internal_la_OBJECTS)
-> + libtcmalloc_minimal_internal_la_LINK =3D $(LIBTOOL) --tag=3DCXX \
-> +@@ -878,10 +879,10 @@ am__addressmap_unittest_SOURCES_DIST =3D  \
-> + 	src/base/basictypes.h src/base/dynamic_annotations.h \
-> + 	src/third_party/valgrind.h src/windows/port.h \
-> + 	src/windows/port.cc
-> +-@MINGW_TRUE@am__objects_25 =3D addressmap_unittest-port.$(OBJEXT)
-> ++@MINGW_TRUE@am__objects_24 =3D addressmap_unittest-port.$(OBJEXT)
-> + am_addressmap_unittest_OBJECTS =3D  \
-> + 	addressmap_unittest-addressmap_unittest.$(OBJEXT) \
-> +-	$(am__objects_6) $(am__objects_25)
-> ++	$(am__objects_6) $(am__objects_24)
-> + addressmap_unittest_OBJECTS =3D $(am_addressmap_unittest_OBJECTS)
-> + addressmap_unittest_DEPENDENCIES =3D liblogging.la
-> + addressmap_unittest_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAGS) \
-> +@@ -940,10 +941,10 @@ am__heap_checker_debug_unittest_SOURCES_DIST =3D  \
-> + 	src/base/googleinit.h src/gperftools/heap-checker.h \
-> + 	src/base/logging.h src/base/basictypes.h \
-> + 	src/base/dynamic_annotations.h src/third_party/valgrind.h
-> +-@WITH_HEAP_CHECKER_TRUE@am__objects_26 =3D $(am__objects_1)
-> +-@WITH_HEAP_CHECKER_TRUE@am__objects_27 =3D heap_checker_debug_unittest-=
-heap-checker_unittest.$(OBJEXT) \
-> +-@WITH_HEAP_CHECKER_TRUE@	$(am__objects_26)
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_CHECKER_TRUE@am_heap_checker_debug_uni=
-ttest_OBJECTS =3D $(am__objects_27)
-> ++@WITH_HEAP_CHECKER_TRUE@am__objects_25 =3D $(am__objects_1)
-> ++@WITH_HEAP_CHECKER_TRUE@am__objects_26 =3D heap_checker_debug_unittest-=
-heap-checker_unittest.$(OBJEXT) \
-> ++@WITH_HEAP_CHECKER_TRUE@	$(am__objects_25)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_CHECKER_TRUE@am_heap_checker_debug_uni=
-ttest_OBJECTS =3D $(am__objects_26)
-> + heap_checker_debug_unittest_OBJECTS =3D  \
-> + 	$(am_heap_checker_debug_unittest_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_CHECKER_TRUE@heap_checker_debug_unitte=
-st_DEPENDENCIES =3D libtcmalloc_debug.la \
-> +@@ -966,7 +967,7 @@ am__heap_checker_unittest_SOURCES_DIST =3D  \
-> + 	src/base/logging.h src/base/basictypes.h \
-> + 	src/base/dynamic_annotations.h src/third_party/valgrind.h
-> + @WITH_HEAP_CHECKER_TRUE@am_heap_checker_unittest_OBJECTS =3D heap_check=
-er_unittest-heap-checker_unittest.$(OBJEXT) \
-> +-@WITH_HEAP_CHECKER_TRUE@	$(am__objects_26)
-> ++@WITH_HEAP_CHECKER_TRUE@	$(am__objects_25)
-> + heap_checker_unittest_OBJECTS =3D $(am_heap_checker_unittest_OBJECTS)
-> + @WITH_HEAP_CHECKER_TRUE@heap_checker_unittest_DEPENDENCIES =3D  \
-> + @WITH_HEAP_CHECKER_TRUE@	$(LIBTCMALLOC) liblogging.la \
-> +@@ -984,9 +985,9 @@ heap_checker_unittest_sh_LDADD =3D $(LDADD)
-> + am__heap_profiler_debug_unittest_SOURCES_DIST =3D  \
-> + 	src/tests/heap-profiler_unittest.cc src/config_for_unittests.h \
-> + 	src/gperftools/heap-profiler.h
-> +-@WITH_HEAP_PROFILER_TRUE@am__objects_28 =3D heap_profiler_debug_unittes=
-t-heap-profiler_unittest.$(OBJEXT) \
-> ++@WITH_HEAP_PROFILER_TRUE@am__objects_27 =3D heap_profiler_debug_unittes=
-t-heap-profiler_unittest.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_TRUE@	$(am__objects_1)
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_TRUE@am_heap_profiler_debug_u=
-nittest_OBJECTS =3D $(am__objects_28)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_TRUE@am_heap_profiler_debug_u=
-nittest_OBJECTS =3D $(am__objects_27)
-> + heap_profiler_debug_unittest_OBJECTS =3D  \
-> + 	$(am_heap_profiler_debug_unittest_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_TRUE@heap_profiler_debug_unit=
-test_DEPENDENCIES =3D libtcmalloc_debug.la \
-> +@@ -1038,15 +1039,15 @@ am__low_level_alloc_unittest_SOURCES_DIST =3D  \
-> + 	src/base/atomicops-internals-arm-v6plus.h src/base/logging.h \
-> + 	src/base/commandlineflags.h src/base/dynamic_annotations.h \
-> + 	src/third_party/valgrind.h
-> +-@MINGW_FALSE@am__objects_29 =3D  \
-> ++@MINGW_FALSE@am__objects_28 =3D  \
-> + @MINGW_FALSE@	low_level_alloc_unittest-maybe_threads.$(OBJEXT)
-> +-am__objects_30 =3D $(am__objects_1) $(am__objects_1)
-> ++am__objects_29 =3D $(am__objects_1) $(am__objects_1)
-> + am_low_level_alloc_unittest_OBJECTS =3D  \
-> + 	low_level_alloc_unittest-low_level_alloc.$(OBJEXT) \
-> + 	low_level_alloc_unittest-malloc_hook.$(OBJEXT) \
-> +-	$(am__objects_29) \
-> ++	$(am__objects_28) \
-> + 	low_level_alloc_unittest-low_level_alloc_unittest.$(OBJEXT) \
-> +-	$(am__objects_30)
-> ++	$(am__objects_29)
-> + low_level_alloc_unittest_OBJECTS =3D  \
-> + 	$(am_low_level_alloc_unittest_OBJECTS)
-> + low_level_alloc_unittest_DEPENDENCIES =3D $(LIBSPINLOCK)
-> +@@ -1072,10 +1073,10 @@ am__malloc_extension_debug_test_SOURCES_DIST =3D=
-  \
-> + 	src/tests/malloc_extension_test.cc src/config_for_unittests.h \
-> + 	src/base/logging.h src/gperftools/malloc_extension.h \
-> + 	src/gperftools/malloc_extension_c.h
-> +-am__objects_31 =3D  \
-> ++am__objects_30 =3D  \
-> + 	malloc_extension_debug_test-malloc_extension_test.$(OBJEXT)
-> + @WITH_DEBUGALLOC_TRUE@am_malloc_extension_debug_test_OBJECTS =3D  \
-> +-@WITH_DEBUGALLOC_TRUE@	$(am__objects_31)
-> ++@WITH_DEBUGALLOC_TRUE@	$(am__objects_30)
-> + malloc_extension_debug_test_OBJECTS =3D  \
-> + 	$(am_malloc_extension_debug_test_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@malloc_extension_debug_test_DEPENDENCIES =3D  \
-> +@@ -1124,9 +1125,9 @@ am__memalign_debug_unittest_SOURCES_DIST =3D  \
-> + 	src/tests/memalign_unittest.cc src/tcmalloc.h \
-> + 	src/config_for_unittests.h src/tests/testutil.h \
-> + 	src/tests/testutil.cc
-> +-@MINGW_FALSE@@OSX_FALSE@am__objects_32 =3D memalign_debug_unittest-mema=
-lign_unittest.$(OBJEXT) \
-> ++@MINGW_FALSE@@OSX_FALSE@am__objects_31 =3D memalign_debug_unittest-mema=
-lign_unittest.$(OBJEXT) \
-> + @MINGW_FALSE@@OSX_FALSE@	memalign_debug_unittest-testutil.$(OBJEXT)
-> +-@MINGW_FALSE@@OSX_FALSE@@WITH_DEBUGALLOC_TRUE@am_memalign_debug_unittes=
-t_OBJECTS =3D $(am__objects_32)
-> ++@MINGW_FALSE@@OSX_FALSE@@WITH_DEBUGALLOC_TRUE@am_memalign_debug_unittes=
-t_OBJECTS =3D $(am__objects_31)
-> + memalign_debug_unittest_OBJECTS =3D  \
-> + 	$(am_memalign_debug_unittest_OBJECTS)
-> + @MINGW_FALSE@@OSX_FALSE@@WITH_DEBUGALLOC_TRUE@memalign_debug_unittest_D=
-EPENDENCIES =3D libtcmalloc_minimal_debug.la \
-> +@@ -1197,11 +1198,11 @@ profiledata_unittest_OBJECTS =3D $(am_profiledat=
-a_unittest_OBJECTS)
-> + am__profiler1_unittest_SOURCES_DIST =3D src/tests/profiler_unittest.cc \
-> + 	src/tests/testutil.h src/tests/testutil.cc \
-> + 	src/config_for_unittests.h src/gperftools/profiler.h
-> +-@WITH_CPU_PROFILER_TRUE@am__objects_33 =3D profiler1_unittest-profiler_=
-unittest.$(OBJEXT) \
-> ++@WITH_CPU_PROFILER_TRUE@am__objects_32 =3D profiler1_unittest-profiler_=
-unittest.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	profiler1_unittest-testutil.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am_profiler1_unittest_OBJECTS =3D  \
-> +-@WITH_CPU_PROFILER_TRUE@	$(am__objects_33)
-> ++@WITH_CPU_PROFILER_TRUE@	$(am__objects_32)
-> + profiler1_unittest_OBJECTS =3D $(am_profiler1_unittest_OBJECTS)
-> + @WITH_CPU_PROFILER_TRUE@profiler1_unittest_DEPENDENCIES =3D  \
-> + @WITH_CPU_PROFILER_TRUE@	$(LIBPROFILER)
-> +@@ -1212,11 +1213,11 @@ profiler1_unittest_LINK =3D $(LIBTOOL) --tag=3DC=
-XX $(AM_LIBTOOLFLAGS) \
-> + am__profiler2_unittest_SOURCES_DIST =3D src/tests/profiler_unittest.cc \
-> + 	src/tests/testutil.h src/tests/testutil.cc \
-> + 	src/config_for_unittests.h src/gperftools/profiler.h
-> +-@WITH_CPU_PROFILER_TRUE@am__objects_34 =3D profiler2_unittest-profiler_=
-unittest.$(OBJEXT) \
-> ++@WITH_CPU_PROFILER_TRUE@am__objects_33 =3D profiler2_unittest-profiler_=
-unittest.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	profiler2_unittest-testutil.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am_profiler2_unittest_OBJECTS =3D  \
-> +-@WITH_CPU_PROFILER_TRUE@	$(am__objects_34)
-> ++@WITH_CPU_PROFILER_TRUE@	$(am__objects_33)
-> + profiler2_unittest_OBJECTS =3D $(am_profiler2_unittest_OBJECTS)
-> + profiler2_unittest_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAGS) \
-> + 	$(LIBTOOLFLAGS) --mode=3Dlink $(CXXLD) \
-> +@@ -1225,11 +1226,11 @@ profiler2_unittest_LINK =3D $(LIBTOOL) --tag=3DC=
-XX $(AM_LIBTOOLFLAGS) \
-> + am__profiler3_unittest_SOURCES_DIST =3D src/tests/profiler_unittest.cc \
-> + 	src/tests/testutil.h src/tests/testutil.cc \
-> + 	src/config_for_unittests.h src/gperftools/profiler.h
-> +-@WITH_CPU_PROFILER_TRUE@am__objects_35 =3D profiler3_unittest-profiler_=
-unittest.$(OBJEXT) \
-> ++@WITH_CPU_PROFILER_TRUE@am__objects_34 =3D profiler3_unittest-profiler_=
-unittest.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	profiler3_unittest-testutil.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am_profiler3_unittest_OBJECTS =3D  \
-> +-@WITH_CPU_PROFILER_TRUE@	$(am__objects_35)
-> ++@WITH_CPU_PROFILER_TRUE@	$(am__objects_34)
-> + profiler3_unittest_OBJECTS =3D $(am_profiler3_unittest_OBJECTS)
-> + @WITH_CPU_PROFILER_TRUE@profiler3_unittest_DEPENDENCIES =3D  \
-> + @WITH_CPU_PROFILER_TRUE@	$(LIBPROFILER) $(am__DEPENDENCIES_1)
-> +@@ -1240,11 +1241,11 @@ profiler3_unittest_LINK =3D $(LIBTOOL) --tag=3DC=
-XX $(AM_LIBTOOLFLAGS) \
-> + am__profiler4_unittest_SOURCES_DIST =3D src/tests/profiler_unittest.cc \
-> + 	src/tests/testutil.h src/tests/testutil.cc \
-> + 	src/config_for_unittests.h src/gperftools/profiler.h
-> +-@WITH_CPU_PROFILER_TRUE@am__objects_36 =3D profiler4_unittest-profiler_=
-unittest.$(OBJEXT) \
-> ++@WITH_CPU_PROFILER_TRUE@am__objects_35 =3D profiler4_unittest-profiler_=
-unittest.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	profiler4_unittest-testutil.$(OBJEXT) \
-> + @WITH_CPU_PROFILER_TRUE@	$(am__objects_1)
-> + @WITH_CPU_PROFILER_TRUE@am_profiler4_unittest_OBJECTS =3D  \
-> +-@WITH_CPU_PROFILER_TRUE@	$(am__objects_36)
-> ++@WITH_CPU_PROFILER_TRUE@	$(am__objects_35)
-> + profiler4_unittest_OBJECTS =3D $(am_profiler4_unittest_OBJECTS)
-> + profiler4_unittest_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_LIBTOOLFLAGS) \
-> + 	$(LIBTOOLFLAGS) --mode=3Dlink $(CXXLD) \
-> +@@ -1268,9 +1269,9 @@ raw_printer_test_LINK =3D $(LIBTOOL) --tag=3DCXX $=
-(AM_LIBTOOLFLAGS) \
-> + am__realloc_debug_unittest_SOURCES_DIST =3D  \
-> + 	src/tests/realloc_unittest.cc src/config_for_unittests.h \
-> + 	src/base/logging.h
-> +-am__objects_37 =3D realloc_debug_unittest-realloc_unittest.$(OBJEXT)
-> ++am__objects_36 =3D realloc_debug_unittest-realloc_unittest.$(OBJEXT)
-> + @WITH_DEBUGALLOC_TRUE@am_realloc_debug_unittest_OBJECTS =3D  \
-> +-@WITH_DEBUGALLOC_TRUE@	$(am__objects_37)
-> ++@WITH_DEBUGALLOC_TRUE@	$(am__objects_36)
-> + realloc_debug_unittest_OBJECTS =3D $(am_realloc_debug_unittest_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@realloc_debug_unittest_DEPENDENCIES =3D  \
-> + @WITH_DEBUGALLOC_TRUE@	libtcmalloc_minimal_debug.la \
-> +@@ -1290,8 +1291,8 @@ realloc_unittest_LINK =3D $(LIBTOOL) --tag=3DCXX $=
-(AM_LIBTOOLFLAGS) \
-> + 	$(realloc_unittest_LDFLAGS) $(LDFLAGS) -o $@
-> + am__sampler_debug_test_SOURCES_DIST =3D src/tests/sampler_test.cc \
-> + 	src/config_for_unittests.h
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_38 =3D sampler_debug_te=
-st-sampler_test.$(OBJEXT)
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_sampler_de=
-bug_test_OBJECTS =3D $(am__objects_38)
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_37 =3D sampler_debug_te=
-st-sampler_test.$(OBJEXT)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_sampler_de=
-bug_test_OBJECTS =3D $(am__objects_37)
-> + sampler_debug_test_OBJECTS =3D $(am_sampler_debug_test_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@sampler_debug=
-_test_DEPENDENCIES =3D libtcmalloc_debug.la \
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__DEPEND=
-ENCIES_1)
-> +@@ -1312,9 +1313,9 @@ sampler_test_LINK =3D $(LIBTOOL) --tag=3DCXX $(AM_=
-LIBTOOLFLAGS) \
-> + am__sampling_debug_test_SOURCES_DIST =3D src/tests/sampling_test.cc \
-> + 	src/config_for_unittests.h src/base/logging.h \
-> + 	src/gperftools/malloc_extension.h
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_39 =3D sampling_debug_t=
-est-sampling_test.$(OBJEXT) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_38 =3D sampling_debug_t=
-est-sampling_test.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_sampling_d=
-ebug_test_OBJECTS =3D $(am__objects_39)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_sampling_d=
-ebug_test_OBJECTS =3D $(am__objects_38)
-> + sampling_debug_test_OBJECTS =3D $(am_sampling_debug_test_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@sampling_debu=
-g_test_DEPENDENCIES =3D libtcmalloc_debug.la \
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__DEPEND=
-ENCIES_1)
-> +@@ -1347,7 +1348,7 @@ am__simple_compat_test_SOURCES_DIST =3D src/tests/=
-simple_compat_test.cc \
-> + 	src/google/malloc_extension.h src/google/malloc_extension_c.h \
-> + 	src/google/malloc_hook.h src/google/malloc_hook_c.h \
-> + 	src/google/profiler.h src/google/stacktrace.h \
-> +-	src/google/tcmalloc.h src/windows/google/tcmalloc.h
-> ++	src/google/tcmalloc.h
-> + @WITH_HEAP_PROFILER_TRUE@am_simple_compat_test_OBJECTS =3D  \
-> + @WITH_HEAP_PROFILER_TRUE@	simple_compat_test.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_TRUE@	$(am__objects_1)
-> +@@ -1376,11 +1377,11 @@ am__stacktrace_unittest_SOURCES_DIST =3D  \
-> + 	src/gperftools/stacktrace.h src/base/logging.h \
-> + 	src/base/basictypes.h src/base/dynamic_annotations.h \
-> + 	src/third_party/valgrind.h
-> +-@WITH_STACK_TRACE_TRUE@am__objects_40 =3D $(am__objects_4) \
-> ++@WITH_STACK_TRACE_TRUE@am__objects_39 =3D $(am__objects_4) \
-> + @WITH_STACK_TRACE_TRUE@	$(am__objects_1)
-> + @WITH_STACK_TRACE_TRUE@am_stacktrace_unittest_OBJECTS =3D  \
-> + @WITH_STACK_TRACE_TRUE@	stacktrace_unittest.$(OBJEXT) \
-> +-@WITH_STACK_TRACE_TRUE@	$(am__objects_40)
-> ++@WITH_STACK_TRACE_TRUE@	$(am__objects_39)
-> + stacktrace_unittest_OBJECTS =3D $(am_stacktrace_unittest_OBJECTS)
-> + @WITH_STACK_TRACE_TRUE@stacktrace_unittest_DEPENDENCIES =3D  \
-> + @WITH_STACK_TRACE_TRUE@	libstacktrace.la liblogging.la
-> +@@ -1398,10 +1399,10 @@ am__tcmalloc_and_profiler_unittest_SOURCES_DIST =
-=3D  \
-> + 	src/tests/tcmalloc_unittest.cc src/tests/testutil.h \
-> + 	src/tests/testutil.cc src/config_for_unittests.h \
-> + 	src/gperftools/malloc_extension.h
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_41 =3D tcmalloc_and_pro=
-filer_unittest-tcmalloc_unittest.$(OBJEXT) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_40 =3D tcmalloc_and_pro=
-filer_unittest-tcmalloc_unittest.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	tcmalloc_and_profiler_unittest-tes=
-tutil.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> +-@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc=
-_and_profiler_unittest_OBJECTS =3D $(am__objects_41)
-> ++@WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc=
-_and_profiler_unittest_OBJECTS =3D $(am__objects_40)
-> + tcmalloc_and_profiler_unittest_OBJECTS =3D  \
-> + 	$(am_tcmalloc_and_profiler_unittest_OBJECTS)
-> + @WITH_CPU_PROFILER_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@tcmalloc_an=
-d_profiler_unittest_DEPENDENCIES =3D libtcmalloc_and_profiler.la
-> +@@ -1413,10 +1414,10 @@ am__tcmalloc_both_unittest_SOURCES_DIST =3D  \
-> + 	src/tests/tcmalloc_unittest.cc src/tests/testutil.h \
-> + 	src/tests/testutil.cc src/config_for_unittests.h \
-> + 	src/gperftools/malloc_extension.h
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_42 =3D tcmalloc_both_un=
-ittest-tcmalloc_unittest.$(OBJEXT) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_41 =3D tcmalloc_both_un=
-ittest-tcmalloc_unittest.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	tcmalloc_both_unittest-testutil.$(=
-OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> +-@OSX_FALSE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc_both_unittes=
-t_OBJECTS =3D $(am__objects_42)
-> ++@OSX_FALSE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc_both_unittes=
-t_OBJECTS =3D $(am__objects_41)
-> + tcmalloc_both_unittest_OBJECTS =3D $(am_tcmalloc_both_unittest_OBJECTS)
-> + @WITH_CPU_PROFILER_FALSE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__DEPEND=
-ENCIES_4 =3D $(LIBTCMALLOC) \
-> + @WITH_CPU_PROFILER_FALSE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(LIBTCMA=
-LLOC_MINIMAL) \
-> +@@ -1436,10 +1437,10 @@ am__tcmalloc_debug_unittest_SOURCES_DIST =3D  \
-> + 	src/tests/tcmalloc_unittest.cc src/tcmalloc.h \
-> + 	src/tests/testutil.h src/tests/testutil.cc \
-> + 	src/config_for_unittests.h src/gperftools/malloc_extension.h
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_43 =3D tcmalloc_debug_u=
-nittest-tcmalloc_unittest.$(OBJEXT) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am__objects_42 =3D tcmalloc_debug_u=
-nittest-tcmalloc_unittest.$(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	tcmalloc_debug_unittest-testutil.$=
-(OBJEXT) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@	$(am__objects_1)
-> +-@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc_d=
-ebug_unittest_OBJECTS =3D $(am__objects_43)
-> ++@WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@am_tcmalloc_d=
-ebug_unittest_OBJECTS =3D $(am__objects_42)
-> + tcmalloc_debug_unittest_OBJECTS =3D  \
-> + 	$(am_tcmalloc_debug_unittest_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@tcmalloc_debu=
-g_unittest_DEPENDENCIES =3D libtcmalloc_debug.la \
-> +@@ -1464,12 +1465,12 @@ am__tcmalloc_minimal_debug_unittest_SOURCES_DIST=
- =3D  \
-> + 	src/tests/tcmalloc_unittest.cc src/tests/testutil.h \
-> + 	src/tests/testutil.cc src/config_for_unittests.h \
-> + 	src/gperftools/malloc_extension.h
-> +-am__objects_44 =3D  \
-> ++am__objects_43 =3D  \
-> + 	tcmalloc_minimal_debug_unittest-tcmalloc_unittest.$(OBJEXT) \
-> + 	tcmalloc_minimal_debug_unittest-testutil.$(OBJEXT) \
-> + 	$(am__objects_1)
-> + @WITH_DEBUGALLOC_TRUE@am_tcmalloc_minimal_debug_unittest_OBJECTS =3D  \
-> +-@WITH_DEBUGALLOC_TRUE@	$(am__objects_44)
-> ++@WITH_DEBUGALLOC_TRUE@	$(am__objects_43)
-> + tcmalloc_minimal_debug_unittest_OBJECTS =3D  \
-> + 	$(am_tcmalloc_minimal_debug_unittest_OBJECTS)
-> + @WITH_DEBUGALLOC_TRUE@tcmalloc_minimal_debug_unittest_DEPENDENCIES =3D =
- \
-> +@@ -1937,8 +1938,7 @@ googleinclude_HEADERS =3D \
-> +    src/google/malloc_hook_c.h			\
-> +    src/google/profiler.h			\
-> +    src/google/stacktrace.h			\
-> +-   src/google/tcmalloc.h                        \
-> +-   src/windows/google/tcmalloc.h
-> ++   src/google/tcmalloc.h
-> +=20
-> + # This is for HTML and other documentation you want to install.
-> + # Add your documentation files (in doc/) in addition to these
-> +@@ -2241,10 +2241,9 @@ S_TCMALLOC_MINIMAL_INCLUDES =3D src/common.h \
-> + SG_TCMALLOC_MINIMAL_INCLUDES =3D src/gperftools/malloc_hook.h \
-> +                                src/gperftools/malloc_hook_c.h \
-> +                                src/gperftools/malloc_extension.h \
-> +-                               src/gperftools/malloc_extension_c.h \
-> +-                               src/gperftools/stacktrace.h
-> ++                               src/gperftools/malloc_extension_c.h
-> +=20
-> +-TCMALLOC_MINIMAL_INCLUDES =3D $(S_TCMALLOC_MINIMAL_INCLUDES) $(SG_TCMAL=
-LOC_MINIMAL_INCLUDES)
-> ++TCMALLOC_MINIMAL_INCLUDES =3D $(S_TCMALLOC_MINIMAL_INCLUDES) $(SG_TCMAL=
-LOC_MINIMAL_INCLUDES) $(SG_STACKTRACE_INCLUDES)
-> + libtcmalloc_minimal_internal_la_SOURCES =3D src/common.cc \
-> +                                           src/internal_logging.cc \
-> +                                           $(SYSTEM_ALLOC_CC) \
-> +@@ -2464,11 +2463,12 @@ thread_dealloc_unittest_LDADD =3D $(LIBTCMALLOC_=
-MINIMAL) $(PTHREAD_LIBS)
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                      src/base/thre=
-ad_lister.h \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                      src/heap-prof=
-ile-table.h
-> +=20
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@SG_TCMALLOC_INCLUDES =3D $(SG_TCMAL=
-LOC_MINIMAL_INCLUDES) \
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                       src/gperftoo=
-ls/heap-profiler.h \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@SG_TCMALLOC_INCLUDES =3D src/gperft=
-ools/heap-profiler.h \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                       src/gperftoo=
-ls/heap-checker.h
-> +=20
-> +-@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@TCMALLOC_INCLUDES =3D $(S_TCMALLOC_=
-INCLUDES) $(SG_TCMALLOC_INCLUDES)
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@TCMALLOC_INCLUDES =3D $(S_TCMALLOC_=
-INCLUDES) $(SG_TCMALLOC_MINIMAL_INCLUDES) \
-> ++@WITH_HEAP_PROFILER_OR_CHECKER_TRUE@		    $(SG_TCMALLOC_INCLUDES) $(SG_=
-STACKTRACE_INCLUDES)
-> ++
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@libtcmalloc_internal_la_SOURCES =3D=
- $(libtcmalloc_minimal_internal_la_SOURCES) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                                  $=
-(TCMALLOC_INCLUDES) \
-> + @WITH_HEAP_PROFILER_OR_CHECKER_TRUE@                                  s=
-rc/base/low_level_alloc.cc \
-> +@@ -2674,10 +2674,10 @@ thread_dealloc_unittest_LDADD =3D $(LIBTCMALLOC_=
-MINIMAL) $(PTHREAD_LIBS)
-> + @WITH_CPU_PROFILER_TRUE@                          $(SPINLOCK_INCLUDES) \
-> + @WITH_CPU_PROFILER_TRUE@                          $(LOGGING_INCLUDES)
-> +=20
-> +-@WITH_CPU_PROFILER_TRUE@SG_CPU_PROFILER_INCLUDES =3D src/gperftools/pro=
-filer.h \
-> +-@WITH_CPU_PROFILER_TRUE@                           src/gperftools/stack=
-trace.h
-> ++@WITH_CPU_PROFILER_TRUE@SG_CPU_PROFILER_INCLUDES =3D src/gperftools/pro=
-filer.h
-> ++@WITH_CPU_PROFILER_TRUE@CPU_PROFILER_INCLUDES =3D $(S_CPU_PROFILER_INCL=
-UDES) $(SG_CPU_PROFILER_INCLUDES) \
-> ++@WITH_CPU_PROFILER_TRUE@			$(SG_STACKTRACE_INCLUDES)
-> +=20
-> +-@WITH_CPU_PROFILER_TRUE@CPU_PROFILER_INCLUDES =3D $(S_CPU_PROFILER_INCL=
-UDES) $(SG_CPU_PROFILER_INCLUDES)
-> + @WITH_CPU_PROFILER_TRUE@libprofiler_la_SOURCES =3D src/profiler.cc \
-> + @WITH_CPU_PROFILER_TRUE@                         src/profile-handler.cc=
- \
-> + @WITH_CPU_PROFILER_TRUE@                         src/profiledata.cc \
-> +--=20
-> +1.8.1.2
-> +
-> diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.0.bb b/meta-=
-oe/recipes-support/gperftools/gperftools_2.0.bb
-> new file mode 100644
-> index 0000000..2522ef8
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/gperftools/gperftools_2.0.bb
-> @@ -0,0 +1,13 @@
-> +DESCRIPTION =3D "Fast, multi-threaded malloc() and nifty performance ana=
-lysis tools"
-> +HOMEPAGE =3D "http://code.google.com/p/gperftools/"
-> +LICENSE =3D "BSD"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D762732742c73dc6c7fbe8632f06c0=
-59a"
-> +DEPENDS =3D "libunwind"
-> +
-> +SRC_URI =3D "${DEBIAN_MIRROR}/main/g/google-perftools/google-perftools_$=
-{PV}.orig.tar.gz \
-> +           file://0001-issue-473-Fix-for-make-install-error-regarding-sr=
-c-w.patch"
-> +
-> +SRC_URI[md5sum] =3D "13f6e8961bc6a26749783137995786b6"
-> +SRC_URI[sha256sum] =3D "7de3dd91f018825b1e7d332af1edace15c6211f430186feb=
-ede1835069861080"
-> +
-> +inherit autotools
+> +inherit autotools gettext binconfig
 > --=20
 > 1.8.1.2
 >=20
@@ -847,16 +109,16 @@ ede1835069861080"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---H+4ONPRPur6+Ovig
+--f+W+jCU1fRNres8c
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFVhzgACgkQN1Ujt2V2gBxjnwCgr/MFodnDyEeNOW4AjIqhKuUH
-TWgAniYkU64exDhbXGMFOwpX6ijGeahu
-=9YcM
+iEYEARECAAYFAlFVh0kACgkQN1Ujt2V2gByyGACfQimmi5ex+rgImHGYFDFT0ZE1
+fHYAn2ltGkkp0I5Ip0sckkxUreAvGAA4
+=aOpy
 -----END PGP SIGNATURE-----
 
---H+4ONPRPur6+Ovig--
+--f+W+jCU1fRNres8c--
