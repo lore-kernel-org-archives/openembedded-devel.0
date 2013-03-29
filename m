@@ -1,38 +1,32 @@
-Received: from mail-da0-f44.google.com ([209.85.210.44])
+Received: from mail-pd0-f176.google.com ([209.85.192.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1ULUsy-0000WD-M4
+	(envelope-from <elvis.dowson@gmail.com>) id 1ULV4N-0000vL-B2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Mar 2013 09:42:09 +0100
-Received: by mail-da0-f44.google.com with SMTP id z20so151518dae.3
+	Fri, 29 Mar 2013 09:54:20 +0100
+Received: by mail-pd0-f176.google.com with SMTP id r11so173889pdi.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2013 01:25:04 -0700 (PDT)
+	Fri, 29 Mar 2013 01:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=mfReJ5LoM4BNbvkkOMoZ5VQlC9tjCqhi1JwS2Ul2gqY=;
-	b=HWdrRsoNXve9iIKeYLjrDYwVW0Ss0RTf2DwaOaLJZ22RCPAZgNbLzAOG8C2YiXmIhG
-	/jQqSEFJPvR9NLNIS/7YAV7ML0VaW2egQTfgcDh+GILbrBedvbWx4Wp7iZ5C3zFecJOj
-	aTxbhkXazXue4SY0bql8o8eRH2G0XjmLAqVYrNtMGV8NaftpnpWknLnVCGF9AbHG6upq
-	OV231nJ6v3RPskOZOoB/5y7XCtjfwiyahPtjpl2AuiYWwnGK+TAOd+MRjKyzNega2pZ1
-	jnh6qbAgCctBSjxEQgr9q4UfOHVlwIemqddFJGc+qB5lj65cv2ekbnm6+EMqEKIH4P6G
-	UMqQ==
-X-Received: by 10.66.248.227 with SMTP id yp3mr3146388pac.158.1364545504342;
-	Fri, 29 Mar 2013 01:25:04 -0700 (PDT)
-Received: from [192.168.1.100] ([94.205.105.6])
-	by mx.google.com with ESMTPS id f4sm2065721pbc.6.2013.03.29.01.25.01
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 29 Mar 2013 01:25:03 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=txL3CNmL4S8aIpjNWDEMTmT7HxZErEfRfFCqx1AGl+Q=;
+	b=D5cKilaS25pI5jBZqRyT18FygjS6icHpga1Azj7QxuebKiOOKCsxJ2GrOLw3VHyoGO
+	NeLjOGZ5kCZaYqOCXqbdElUDC9Z/+iZjQLrR8RkB3QNNtnDGr6xVZrR9JsrkesCrNR5Q
+	y0eb8fAkGf3pFTtssVfOQsen+SxIYGt1NdaSZTLdSBW1Mo1FiW8wusyJmGvZeuX1GoSM
+	JudCzOolZKnXE/LmKsdKsGY1vdDccfMVtZTRUZCToUee2krABW4ceZQAwBut5v5j2Fw1
+	NfYC9Kc7Uz++MGEV3dtHyjF03EobTZUHo+EmoQcNeAMdmLuB0lHIMdINAGQ/o1oW7ydh
+	+QLg==
+X-Received: by 10.68.171.99 with SMTP id at3mr2494918pbc.136.1364546211014;
+	Fri, 29 Mar 2013 01:36:51 -0700 (PDT)
+Received: from titan.du.ae ([94.205.105.6])
+	by mx.google.com with ESMTPS id u9sm2595184paf.22.2013.03.29.01.36.48
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 29 Mar 2013 01:36:50 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <EEAF4EC9-48F2-494E-8738-288B1786D9B2@gmail.com>
-Date: Fri, 29 Mar 2013 12:24:57 +0400
-Message-Id: <70527E10-EB04-4D30-931C-ADD8D7F237A4@gmail.com>
-References: <y> <1364543252-18751-1-git-send-email-elvis.dowson@gmail.com>
-	<EEAF4EC9-48F2-494E-8738-288B1786D9B2@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Mailer: Apple Mail (2.1503)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [openembedded-core-contrib] gcc-4.8: Refactor gcc-4.8.0 patch files.
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 Mar 2013 12:36:37 +0400
+Message-Id: <1364546198-20792-1-git-send-email-elvis.dowson@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [oe-core] [v2] gcc-4.7: Refactor gcc-4.7.2 patch files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +40,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 08:42:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 Mar 2013 08:54:21 -0000
+X-List-Received-Date: Fri, 29 Mar 2013 08:54:21 -0000
 
-Hi Khem,
 
-On Mar 29, 2013, at 11:55 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> You did not mention whats refactored. One thing I notice they are git =
-am'able now
-> however you are signed up as author of all the patches if you send =
-that email via git send-email
-> and if you send patches upstream like that you will be frowned upon. =
-So if you were adamant to gitify them
-> you should have done --autho=3Dblah while committing them
-
-I've manually changed each patch files From: to your name and address, =
-and appended to the last commit
-in my local tree. I've just sent across the modified files.
-
-Best regards,
-
-Elvis Dowson=
+This commit renames and re-orders the gcc-4.7.2 recipe patch
+files. The patch files are now git am'able, so that you can
+directly apply these patches to a local copy of the gcc
+git repository, to develop futher patches for the gcc-4.7
+recipe.
 
 
