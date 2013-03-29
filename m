@@ -1,33 +1,35 @@
-Received: from mail-pa0-f46.google.com ([209.85.220.46])
+Received: from mail-pd0-f179.google.com ([209.85.192.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1ULTar-0005oi-1v
+	(envelope-from <elvis.dowson@gmail.com>) id 1ULUJ0-0007Qy-22
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Mar 2013 08:19:24 +0100
-Received: by mail-pa0-f46.google.com with SMTP id rl6so237860pac.5
+	Fri, 29 Mar 2013 09:05:10 +0100
+Received: by mail-pd0-f179.google.com with SMTP id x11so159576pdj.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2013 00:02:16 -0700 (PDT)
+	Fri, 29 Mar 2013 00:47:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=KMkjavYt58JVPBvmbExo8OkXeKAteHxjvIBa/9Y4eS0=;
-	b=h5B4Y6jw/ivxRxOWr1GozSgTQmnkjNsMKvyVQIRGvcIaOuQbvZ3xEbiRGfjtdAaUYe
-	OcUoYZBYzKxyvwLxGLenlTrViQ4sf7yHHF6iESstpLbt5/ZDb6l6j6+UszivRJZJy92y
-	U3B7xngs/af9IwUZMcqDZ3CR0OUPVHo8nXWjUutw91yMbtHEXZvNJwuTOmSitLGTZOB1
-	+XD5zwcYQLjSIGHBJkB4sXGKZmKoXb82pPGUABetS5CaP7NytkYPgDez79PVeK1wRSKS
-	Lw+yTUxg0ibrl+VIY0dj7wuGKb7/88aiIp+ylyVybRT5x7WF76rGsyIBUNQsCMp6+aTA
-	YG/Q==
-X-Received: by 10.68.12.103 with SMTP id x7mr2252693pbb.37.1364540536224;
-	Fri, 29 Mar 2013 00:02:16 -0700 (PDT)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=/xGIUEH6oBGAh6LRMFfcQYYG3A6c7gOJM2tVM/1WJDA=;
+	b=jlh/FCOTVvQwxul04P8gTFtWPKqtzc2O5bSY2olx4ABPh/c0fBSUUe/wCrC8V5Ublu
+	NxuNxhJs5GOHTn8zswSZKqYDVxvt4OiqP7aYA5uEjWrJ3NMIXNvbkMtdT+ODA+ruk3N8
+	pJ/eIxGe+Nv/PF7ttbnawU5U72WO9S78RoWKXo3ycM3KDnYg6PRvsmHUxaXC/cMJh2kM
+	gqocVUNPjPdOuh4CYGOypSVtkWWsWEktyW8XGAvgtwavq9umT/oEzsYfH3XTjUUKFxTp
+	Y6sA58Kca2ZbgZfF2l8XEl77/OXzPPSoQp3unF+3oD/NSWYtOhDXf3vy+IzhjXO9O4Qq
+	fUuQ==
+X-Received: by 10.66.20.36 with SMTP id k4mr3007656pae.176.1364543271479;
+	Fri, 29 Mar 2013 00:47:51 -0700 (PDT)
 Received: from titan.du.ae ([94.205.105.6])
-	by mx.google.com with ESMTPS id tm1sm1821050pbc.11.2013.03.29.00.02.04
+	by mx.google.com with ESMTPS id ri1sm1946033pbc.16.2013.03.29.00.47.36
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 29 Mar 2013 00:02:13 -0700 (PDT)
+	Fri, 29 Mar 2013 00:47:49 -0700 (PDT)
 From: Elvis Dowson <elvis.dowson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Mar 2013 11:01:55 +0400
-Message-Id: <1364540515-21190-1-git-send-email-elvis.dowson@gmail.com>
+Date: Fri, 29 Mar 2013 11:47:32 +0400
+Message-Id: <1364543252-18751-1-git-send-email-elvis.dowson@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <y>
+References: <y>
 Cc: Elvis Dowson <elvis.dowson@gmail.com>
-Subject: [oe-core] gcc-4.7: Refactor gcc-4.7.2 patch files.
+Subject: [openembedded-core-contrib] gcc-4.8: Refactor gcc-4.8.0 patch files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,194 +43,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 07:19:28 -0000
+X-List-Received-Date: Fri, 29 Mar 2013 08:05:10 -0000
 
 Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 ---
- meta/recipes-devtools/gcc/gcc-4.7.inc              |   88 +-
- ...-vis_hide-gen-hide-list-Do-not-make-defin.patch |   93 -
- ...USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch |   49 -
+ meta/recipes-devtools/gcc/gcc-4.8.inc              |   70 +-
  .../0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch     |   42 +
- .../gcc/gcc-4.7/0002-uclibc-conf.patch             |   53 +
+ .../gcc/gcc-4.8/0002-uclibc-conf.patch             |   53 +
  .../0003-gcc-uclibc-locale-ctype_touplow_t.patch   |   87 +
- .../gcc/gcc-4.7/0004-uclibc-locale.patch           | 2862 ++++++++++++++++++++
- .../gcc/gcc-4.7/0005-uclibc-locale-no__x.patch     |  257 ++
- .../gcc/gcc-4.7/0006-uclibc-locale-wchar_fix.patch |   68 +
- .../gcc/gcc-4.7/0007-uclibc-locale-update.patch    |  542 ++++
- .../gcc/gcc-4.7/0008-missing-execinfo_h.patch      |   28 +
- .../gcc/gcc-4.7/0009-c99-snprintf.patch            |   28 +
- .../gcc/gcc-4.7/0010-c99-complex-ugly-hack.patch   |   29 +
- .../gcc/gcc-4.7/0011-index_macro.patch             |   44 +
- .../gcc/gcc-4.7/0012-libmudflap-susv3-legacy.patch |   64 +
- .../gcc/gcc-4.7/0013-libstdc-namespace.patch       |   54 +
- .../gcc/gcc-4.7/0014-sh-pr24836.patch              |   45 +
- .../gcc/gcc-4.7/0015-arm-bigendian.patch           |   50 +
- .../0016-gcc-poison-system-directories.patch       |  216 ++
- .../gcc/gcc-4.7/0017-gcc-poison-dir-extend.patch   |   39 +
+ .../gcc/gcc-4.8/0004-uclibc-locale.patch           | 2862 ++++++++++++++++++++
+ .../gcc/gcc-4.8/0005-uclibc-locale-no__x.patch     |  257 ++
+ .../gcc/gcc-4.8/0006-uclibc-locale-wchar_fix.patch |   68 +
+ .../gcc/gcc-4.8/0007-uclibc-locale-update.patch    |  542 ++++
+ .../gcc/gcc-4.8/0008-missing-execinfo_h.patch      |   28 +
+ .../gcc/gcc-4.8/0009-c99-snprintf.patch            |   28 +
+ .../gcc/gcc-4.8/0010-c99-complex-ugly-hack.patch   |   29 +
+ .../gcc/gcc-4.8/0011-index_macro.patch             |   44 +
+ .../gcc/gcc-4.8/0012-libmudflap-susv3-legacy.patch |   64 +
+ .../gcc/gcc-4.8/0013-libstdc-namespace.patch       |   54 +
+ .../gcc/gcc-4.8/0014-sh-pr24836.patch              |   45 +
+ ...GET_ENDIAN_OPTION-for-determining-MULTILI.patch |   29 +
+ .../0016-gcc-poison-system-directories.patch       |  224 ++
+ .../gcc/gcc-4.8/0017-gcc-poison-dir-extend.patch   |   39 +
  .../0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch |   73 +
- .../gcc/gcc-4.7/0019-64-bit-multilib-hack.patch    |   78 +
- .../gcc/gcc-4.7/0020-optional-libstdc.patch        |  102 +
- ...0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch |   59 +
- .../gcc/gcc-4.7/0022-COLLECT_GCC_OPTIONS.patch     |   38 +
+ .../gcc/gcc-4.8/0019-64-bit-multilib-hack.patch    |   82 +
+ .../gcc/gcc-4.8/0020-optional-libstdc.patch        |  102 +
+ ...0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch |   59 +
+ .../gcc/gcc-4.8/0022-COLLECT_GCC_OPTIONS.patch     |   38 +
  ...efaults.h-in-B-instead-of-S-and-t-oe-in-B.patch |   88 +
- ...00-rs6000-opts.h-enum-processor_type-Add-.patch |  753 +++++
- .../gcc-4.7/0025-Add-ppc-e5500-e6500-support.patch |  716 +++++
- ...nfig-rs6000-rs6000-tables.opt-Regenerated.patch |  135 +
- .../gcc/gcc-4.7/0027-define_insn_reservation.patch |  120 +
- .../gcc/gcc-4.7/0028-PR-target-32219.patch         |   67 +
- .../gcc-4.7/0029-fortran-cross-compile-hack.patch  |   46 +
- .../gcc/gcc-4.7/0030-libgcc-sjlj-check.patch       |   74 +
- .../gcc/gcc-4.7/0031-cpp-honor-sysroot.patch       |   54 +
- .../gcc-4.7/0032-MIPS64-Default-to-N64-ABI.patch   |   31 +
- ...C_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch |  313 +++
- .../gcc/gcc-4.7/0034-arm-hard-float-loader.patch   |   59 +
- ...0035-gcc-Fix-argument-list-too-long-error.patch |   40 +
- .../gcc/gcc-4.7/0036-Fix-g-sysroot.patch           |  439 +++
- .../gcc/gcc-4.7/0037-Disable-sdt.patch             |   45 +
- .../gcc/gcc-4.7/0038-libtool.patch                 |   42 +
+ .../gcc/gcc-4.8/0024-PR-target-32219.patch         |   67 +
+ .../gcc-4.8/0025-fortran-cross-compile-hack.patch  |   46 +
+ .../gcc/gcc-4.8/0026-libgcc-sjlj-check.patch       |   74 +
+ .../gcc/gcc-4.8/0027-cpp-honor-sysroot.patch       |   54 +
+ .../gcc-4.8/0028-MIPS64-Default-to-N64-ABI.patch   |   31 +
+ ...C_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch |  190 ++
+ ...0030-gcc-Fix-argument-list-too-long-error.patch |   40 +
+ .../gcc/gcc-4.8/0031-Disable-sdt.patch             |   45 +
+ .../gcc/gcc-4.8/0032-libtool.patch                 |   42 +
  ...4-pass-fix-v4bx-to-linker-to-support-EABI.patch |   43 +
- ...c-ppc-out-of-line-save-restore-conditions.patch |   74 +
- ...USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch |   52 +
- ...-vis_hide-gen-hide-list-Do-not-make-defin.patch |   93 +
  ...tilib-config-files-from-B-instead-of-usin.patch |  102 +
- .../gcc/gcc-4.7/0044-wcast-qual-PR-55383.patch     |   55 +
- .../gcc/gcc-4.7/100-uclibc-conf.patch              |   39 -
- .../gcc/gcc-4.7/200-uclibc-locale.patch            | 2810 -------------------
- .../gcc/gcc-4.7/203-uclibc-locale-no__x.patch      |  235 --
- .../gcc/gcc-4.7/204-uclibc-locale-wchar_fix.patch  |   54 -
- .../gcc/gcc-4.7/205-uclibc-locale-update.patch     |  521 ----
- .../gcc/gcc-4.7/301-missing-execinfo_h.patch       |   15 -
- .../gcc/gcc-4.7/302-c99-snprintf.patch             |   15 -
- .../gcc/gcc-4.7/303-c99-complex-ugly-hack.patch    |   16 -
- .../gcc/gcc-4.7/304-index_macro.patch              |   30 -
- .../gcc/gcc-4.7/305-libmudflap-susv3-legacy.patch  |   51 -
- .../gcc/gcc-4.7/306-libstdc++-namespace.patch      |   40 -
- meta/recipes-devtools/gcc/gcc-4.7/64bithack.patch  |   63 -
- .../gcc/gcc-4.7/740-sh-pr24836.patch               |   31 -
- .../gcc/gcc-4.7/800-arm-bigendian.patch            |   36 -
- .../gcc/gcc-4.7/COLLECT_GCC_OPTIONS.patch          |   25 -
- .../gcc/gcc-4.7/GLIBC_DYNAMIC_LINKER.patch         |  165 --
- .../gcc/gcc-4.7/arm-hard-float-loader.patch        |   48 -
- .../gcc/gcc-4.7/cpp-honor-sysroot.patch            |   40 -
- .../gcc/gcc-4.7/define_insn_reservation.patch      |  118 -
- .../gcc/gcc-4.7/disable_relax_pic_calls_flag.patch |   48 -
- meta/recipes-devtools/gcc/gcc-4.7/disablesdt.patch |   32 -
- .../gcc/gcc-4.7/fix-g++-sysroot.patch              |  428 ---
- .../gcc/gcc-4.7/fortran-cross-compile-hack.patch   |   32 -
- .../gcc-4.7/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch  |   33 -
+ .../gcc/gcc-4.8/0035-wcast-qual-PR-55383.patch     |   55 +
+ .../gcc/gcc-4.8/100-uclibc-conf.patch              |   39 -
+ .../gcc/gcc-4.8/200-uclibc-locale.patch            | 2810 -------------------
+ .../gcc/gcc-4.8/203-uclibc-locale-no__x.patch      |  235 --
+ .../gcc/gcc-4.8/204-uclibc-locale-wchar_fix.patch  |   54 -
+ .../gcc/gcc-4.8/205-uclibc-locale-update.patch     |  521 ----
+ .../gcc/gcc-4.8/301-missing-execinfo_h.patch       |   15 -
+ .../gcc/gcc-4.8/302-c99-snprintf.patch             |   15 -
+ .../gcc/gcc-4.8/303-c99-complex-ugly-hack.patch    |   16 -
+ .../gcc/gcc-4.8/304-index_macro.patch              |   30 -
+ .../gcc/gcc-4.8/305-libmudflap-susv3-legacy.patch  |   51 -
+ .../gcc/gcc-4.8/306-libstdc++-namespace.patch      |   40 -
+ meta/recipes-devtools/gcc/gcc-4.8/64bithack.patch  |   66 -
+ .../gcc/gcc-4.8/740-sh-pr24836.patch               |   31 -
+ .../gcc/gcc-4.8/800-arm-bigendian.patch            |   20 -
+ .../gcc/gcc-4.8/COLLECT_GCC_OPTIONS.patch          |   25 -
+ .../gcc/gcc-4.8/GLIBC_DYNAMIC_LINKER.patch         |  167 --
+ .../gcc/gcc-4.8/cpp-honor-sysroot.patch            |   40 -
+ .../gcc/gcc-4.8/disable_relax_pic_calls_flag.patch |   48 -
+ meta/recipes-devtools/gcc/gcc-4.8/disablesdt.patch |   32 -
+ .../gcc/gcc-4.8/fortran-cross-compile-hack.patch   |   32 -
+ .../gcc-4.8/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch  |   33 -
  .../gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch      |  116 -
- .../gcc/gcc-4.7/gcc-argument-list-too-long.patch   |   33 -
- .../gcc-4.7/gcc-armv4-pass-fix-v4bx-to-ld.patch    |   31 -
- .../gcc/gcc-4.7/gcc-poison-dir-extend.patch        |   27 -
- .../gcc-4.7/gcc-poison-system-directories.patch    |  223 --
+ .../gcc/gcc-4.8/gcc-argument-list-too-long.patch   |   33 -
+ .../gcc-4.8/gcc-armv4-pass-fix-v4bx-to-ld.patch    |   31 -
+ .../gcc/gcc-4.8/gcc-poison-dir-extend.patch        |   27 -
+ .../gcc-4.8/gcc-poison-system-directories.patch    |  231 --
  .../gcc-uclibc-locale-ctype_touplow_t.patch        |   72 -
- .../gcc/gcc-4.7/libgcc-sjlj-check.patch            |   61 -
- meta/recipes-devtools/gcc/gcc-4.7/libtool.patch    |   29 -
- .../gcc/gcc-4.7/mips64-default-n64.patch           |   19 -
- .../gcc/gcc-4.7/optional_libstdc.patch             |   86 -
- .../gcc/gcc-4.7/ppc_no_crtsavres.patch             |   72 -
- .../gcc/gcc-4.7/ppc_with_cpu.patch                 |  752 -----
- .../gcc/gcc-4.7/ppce5500-e6500-support.patch       |  713 -----
- meta/recipes-devtools/gcc/gcc-4.7/pr32219.patch    |   72 -
- .../gcc/gcc-4.7/rs6000-tables.patch                |  135 -
- .../gcc/gcc-4.7/use-defaults.h-and-t-oe-in-B.patch |   77 -
- .../gcc/gcc-4.7/use-ml-conf-files-from-B.patch     |   87 -
- .../gcc/gcc-4.7/wcast-qual-PR55383.patch           |   43 -
- 89 files changed, 8343 insertions(+), 7759 deletions(-)
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0001-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0001-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0002-uclibc-conf.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0003-gcc-uclibc-locale-ctype_touplow_t.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0004-uclibc-locale.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0005-uclibc-locale-no__x.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0006-uclibc-locale-wchar_fix.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0007-uclibc-locale-update.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0008-missing-execinfo_h.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0009-c99-snprintf.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0010-c99-complex-ugly-hack.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0011-index_macro.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0012-libmudflap-susv3-legacy.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0013-libstdc-namespace.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0014-sh-pr24836.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0015-arm-bigendian.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0016-gcc-poison-system-directories.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0017-gcc-poison-dir-extend.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0019-64-bit-multilib-hack.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0020-optional-libstdc.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0022-COLLECT_GCC_OPTIONS.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0024-config-rs6000-rs6000-opts.h-enum-processor_type-Add-.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0025-Add-ppc-e5500-e6500-support.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0026-config-rs6000-rs6000-tables.opt-Regenerated.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0027-define_insn_reservation.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0028-PR-target-32219.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0029-fortran-cross-compile-hack.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0030-libgcc-sjlj-check.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0031-cpp-honor-sysroot.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0032-MIPS64-Default-to-N64-ABI.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0033-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0034-arm-hard-float-loader.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0035-gcc-Fix-argument-list-too-long-error.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0036-Fix-g-sysroot.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0037-Disable-sdt.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0038-libtool.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0039-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0040-gcc-ppc-out-of-line-save-restore-conditions.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0041-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0042-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0043-Use-the-multilib-config-files-from-B-instead-of-usin.patch
- create mode 100644 meta/recipes-devtools/gcc/gcc-4.7/0044-wcast-qual-PR-55383.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/100-uclibc-conf.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/200-uclibc-locale.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/203-uclibc-locale-no__x.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/204-uclibc-locale-wchar_fix.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/205-uclibc-locale-update.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/301-missing-execinfo_h.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/302-c99-snprintf.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/303-c99-complex-ugly-hack.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/304-index_macro.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/305-libmudflap-susv3-legacy.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/306-libstdc++-namespace.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/64bithack.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/740-sh-pr24836.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/800-arm-bigendian.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/COLLECT_GCC_OPTIONS.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/GLIBC_DYNAMIC_LINKER.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/arm-hard-float-loader.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/cpp-honor-sysroot.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/define_insn_reservation.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/disable_relax_pic_calls_flag.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/disablesdt.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/fix-g++-sysroot.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/fortran-cross-compile-hack.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-argument-list-too-long.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-armv4-pass-fix-v4bx-to-ld.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-dir-extend.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-system-directories.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/gcc-uclibc-locale-ctype_touplow_t.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/libgcc-sjlj-check.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/libtool.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/mips64-default-n64.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/optional_libstdc.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/ppc_no_crtsavres.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/ppc_with_cpu.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/ppce5500-e6500-support.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/pr32219.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/rs6000-tables.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/use-defaults.h-and-t-oe-in-B.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/use-ml-conf-files-from-B.patch
- delete mode 100644 meta/recipes-devtools/gcc/gcc-4.7/wcast-qual-PR55383.patch
+ .../gcc/gcc-4.8/libgcc-sjlj-check.patch            |   61 -
+ meta/recipes-devtools/gcc/gcc-4.8/libtool.patch    |   29 -
+ .../gcc/gcc-4.8/mips64-default-n64.patch           |   19 -
+ .../gcc/gcc-4.8/optional_libstdc.patch             |   86 -
+ meta/recipes-devtools/gcc/gcc-4.8/pr32219.patch    |   72 -
+ .../gcc/gcc-4.8/use-defaults.h-and-t-oe-in-B.patch |   77 -
+ .../gcc/gcc-4.8/use-ml-conf-files-from-B.patch     |   87 -
+ .../gcc/gcc-4.8/wcast-qual-PR55383.patch           |   43 -
+ 71 files changed, 5761 insertions(+), 5339 deletions(-)
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0002-uclibc-conf.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0003-gcc-uclibc-locale-ctype_touplow_t.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0004-uclibc-locale.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0005-uclibc-locale-no__x.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0006-uclibc-locale-wchar_fix.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0007-uclibc-locale-update.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0008-missing-execinfo_h.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0009-c99-snprintf.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0010-c99-complex-ugly-hack.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0011-index_macro.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0012-libmudflap-susv3-legacy.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0013-libstdc-namespace.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0014-sh-pr24836.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0015-arm-Use-TARGET_ENDIAN_OPTION-for-determining-MULTILI.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0016-gcc-poison-system-directories.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0017-gcc-poison-dir-extend.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0019-64-bit-multilib-hack.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0020-optional-libstdc.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0022-COLLECT_GCC_OPTIONS.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0024-PR-target-32219.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0025-fortran-cross-compile-hack.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0026-libgcc-sjlj-check.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0027-cpp-honor-sysroot.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0028-MIPS64-Default-to-N64-ABI.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0029-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0030-gcc-Fix-argument-list-too-long-error.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0031-Disable-sdt.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0032-libtool.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0033-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0034-Use-the-multilib-config-files-from-B-instead-of-usin.patch
+ create mode 100644 meta/recipes-devtools/gcc/gcc-4.8/0035-wcast-qual-PR-55383.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/100-uclibc-conf.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/200-uclibc-locale.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/203-uclibc-locale-no__x.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/204-uclibc-locale-wchar_fix.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/205-uclibc-locale-update.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/301-missing-execinfo_h.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/302-c99-snprintf.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/303-c99-complex-ugly-hack.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/304-index_macro.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/305-libmudflap-susv3-legacy.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/306-libstdc++-namespace.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/64bithack.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/740-sh-pr24836.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/800-arm-bigendian.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/COLLECT_GCC_OPTIONS.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/GLIBC_DYNAMIC_LINKER.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/cpp-honor-sysroot.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/disable_relax_pic_calls_flag.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/disablesdt.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/fortran-cross-compile-hack.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-argument-list-too-long.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-armv4-pass-fix-v4bx-to-ld.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-dir-extend.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-system-directories.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/gcc-uclibc-locale-ctype_touplow_t.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/libgcc-sjlj-check.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/libtool.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/mips64-default-n64.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/optional_libstdc.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/pr32219.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/use-defaults.h-and-t-oe-in-B.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/use-ml-conf-files-from-B.patch
+ delete mode 100644 meta/recipes-devtools/gcc/gcc-4.8/wcast-qual-PR55383.patch
 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7.inc b/meta/recipes-devtools/gcc/gcc-4.7.inc
-index 49f4010..07f58d2 100644
---- a/meta/recipes-devtools/gcc/gcc-4.7.inc
-+++ b/meta/recipes-devtools/gcc/gcc-4.7.inc
-@@ -32,50 +32,50 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8.inc b/meta/recipes-devtools/gcc/gcc-4.8.inc
+index 25b5f2c..87af783 100644
+--- a/meta/recipes-devtools/gcc/gcc-4.8.inc
++++ b/meta/recipes-devtools/gcc/gcc-4.8.inc
+@@ -30,41 +30,41 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
  		   file://COPYING.RUNTIME;md5=fe60d87048567d4fe8c8a0ed2448bcc8"
  
  SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
@@ -255,25 +221,16 @@ index 49f4010..07f58d2 100644
 -	   file://disable_relax_pic_calls_flag.patch \
 -	   file://COLLECT_GCC_OPTIONS.patch \
 -           file://use-defaults.h-and-t-oe-in-B.patch \
--	   file://ppc_with_cpu.patch \
--	   file://ppce5500-e6500-support.patch \
--	   file://rs6000-tables.patch \
--	   file://define_insn_reservation.patch \
 -	   file://pr32219.patch \
 -	   file://fortran-cross-compile-hack.patch \
 -	   file://libgcc-sjlj-check.patch \
 -	   file://cpp-honor-sysroot.patch \
 -	   file://mips64-default-n64.patch \
 -	   file://GLIBC_DYNAMIC_LINKER.patch \
--	   file://arm-hard-float-loader.patch \
 -	   file://gcc-argument-list-too-long.patch \
--	   file://fix-g++-sysroot.patch \
 -	   file://disablesdt.patch \
 -	   file://libtool.patch \
 -	   file://gcc-armv4-pass-fix-v4bx-to-ld.patch \
--	   file://ppc_no_crtsavres.patch \
--	   file://0001-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch \
--	   file://0001-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch \
 -	   file://use-ml-conf-files-from-B.patch \
 -	   file://wcast-qual-PR55383.patch \
 +	   file://0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
@@ -290,203 +247,40 @@ index 49f4010..07f58d2 100644
 +	   file://0012-libmudflap-susv3-legacy.patch \
 +	   file://0013-libstdc-namespace.patch \
 +	   file://0014-sh-pr24836.patch \
-+	   file://0015-arm-bigendian.patch \
++	   file://0015-arm-Use-TARGET_ENDIAN_OPTION-for-determining-MULTILI.patch \
 +	   file://0016-gcc-poison-system-directories.patch \
 +	   file://0017-gcc-poison-dir-extend.patch \
 +	   file://0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch \
 +	   file://0019-64-bit-multilib-hack.patch \
 +	   file://0020-optional-libstdc.patch \
-+	   file://0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch \
++	   file://0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch \
 +	   file://0022-COLLECT_GCC_OPTIONS.patch \
 +	   file://0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch \
-+	   file://0024-config-rs6000-rs6000-opts.h-enum-processor_type-Add-.patch \
-+	   file://0025-Add-ppc-e5500-e6500-support.patch \
-+	   file://0026-config-rs6000-rs6000-tables.opt-Regenerated.patch \
-+	   file://0027-define_insn_reservation.patch \
-+	   file://0028-PR-target-32219.patch \
-+	   file://0029-fortran-cross-compile-hack.patch \
-+	   file://0030-libgcc-sjlj-check.patch \
-+	   file://0031-cpp-honor-sysroot.patch \
-+	   file://0032-MIPS64-Default-to-N64-ABI.patch \
-+	   file://0033-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch \
-+	   file://0034-arm-hard-float-loader.patch \
-+	   file://0035-gcc-Fix-argument-list-too-long-error.patch \
-+	   file://0036-Fix-g-sysroot.patch \
-+	   file://0037-Disable-sdt.patch \
-+	   file://0038-libtool.patch \
-+	   file://0039-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch \
-+	   file://0040-gcc-ppc-out-of-line-save-restore-conditions.patch \
-+	   file://0041-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch \
-+	   file://0042-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch \
-+	   file://0043-Use-the-multilib-config-files-from-B-instead-of-usin.patch \
-+	   file://0044-wcast-qual-PR-55383.patch \
++	   file://0024-PR-target-32219.patch \
++	   file://0025-fortran-cross-compile-hack.patch \
++	   file://0026-libgcc-sjlj-check.patch \
++	   file://0027-cpp-honor-sysroot.patch \
++	   file://0028-MIPS64-Default-to-N64-ABI.patch \
++	   file://0029-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch \
++	   file://0030-gcc-Fix-argument-list-too-long-error.patch \
++	   file://0031-Disable-sdt.patch \
++	   file://0032-libtool.patch \
++	   file://0033-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch \
++	   file://0034-Use-the-multilib-config-files-from-B-instead-of-usin.patch \
++	   file://0035-wcast-qual-PR-55383.patch \
  	  "
- SRC_URI[md5sum] = "cc308a0891e778cfda7a151ab8a6e762"
- SRC_URI[sha256sum] = "8a9283d7010fb9fe5ece3ca507e0af5c19412626384f8a5e9434251ae100b084"
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0001-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch b/meta/recipes-devtools/gcc/gcc-4.7/0001-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
-deleted file mode 100644
-index b6f8f94..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/0001-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
-+++ /dev/null
-@@ -1,93 +0,0 @@
--From b78f422ee83d279a83c62491b252cfec5b94e92a Mon Sep 17 00:00:00 2001
--From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Wed, 22 Aug 2012 08:36:23 +0000
--Subject: [PATCH] 	* Makefile.in (vis_hide, gen-hide-list): Do not make
-- definitions 	depend on --enable-shared. 
-- ($(lib1asmfuncs-o)): Use %.vis files independent of 
-- --enable-shared. 	* static-object.mk
-- ($(base)$(objext), $(base).vis) 
-- ($(base)_s$(objext)): Use same rules for visibility
-- handling as in 	shared-object.mk.
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@190588 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- libgcc/ChangeLog        |   10 ++++++++++
-- libgcc/Makefile.in      |   16 ++++------------
-- libgcc/static-object.mk |   10 ++++++++--
-- 3 files changed, 22 insertions(+), 14 deletions(-)
--
--Upstream-Status: Backport
--
---Khem 
--05-Sep-2012
--
--Index: gcc-4_7-branch/libgcc/Makefile.in
--===================================================================
----- gcc-4_7-branch.orig/libgcc/Makefile.in	2012-08-21 22:33:20.000000000 -0700
--+++ gcc-4_7-branch/libgcc/Makefile.in	2012-09-05 17:30:28.572998745 -0700
--@@ -362,6 +362,7 @@
--   ifneq ($(LIBUNWIND),)
--     install-libunwind = install-libunwind
--   endif
--+endif
-- 
-- # For -fvisibility=hidden.  We need both a -fvisibility=hidden on
-- # the command line, and a #define to prevent libgcc2.h etc from
--@@ -385,11 +386,8 @@
-- gen-hide-list = echo > $@
-- endif
-- 
---else
---# Not enable_shared.
--+ifneq ($(enable_shared),yes)
-- iterator = $(srcdir)/empty.mk $(patsubst %,$(srcdir)/static-object.mk,$(iter-items))
---vis_hide =
---gen-hide-list = echo > \$@
-- endif
-- 
-- LIB2ADD += enable-execute-stack.c
--@@ -438,7 +436,6 @@
-- 		       $(LIB2_DIVMOD_FUNCS))
-- 
-- # Build "libgcc1" (assembly) components.
---ifeq ($(enable_shared),yes)
-- 
-- lib1asmfuncs-o = $(patsubst %,%$(objext),$(LIB1ASMFUNCS))
-- $(lib1asmfuncs-o): %$(objext): $(srcdir)/config/$(LIB1ASMSRC) %.vis
--@@ -450,14 +447,9 @@
-- lib1asmfuncs-s-o = $(patsubst %,%_s$(objext),$(LIB1ASMFUNCS))
-- $(lib1asmfuncs-s-o): %_s$(objext): $(srcdir)/config/$(LIB1ASMSRC)
-- 	$(gcc_s_compile) -DL$* -xassembler-with-cpp -c $<
---libgcc-s-objects += $(lib1asmfuncs-s-o)
---
---else
--+ifeq ($(enable_shared),yes)
-- 
---lib1asmfuncs-o = $(patsubst %,%$(objext),$(LIB1ASMFUNCS))
---$(lib1asmfuncs-o): %$(objext): $(srcdir)/config/$(LIB1ASMSRC)
---	$(gcc_compile) -DL$* -xassembler-with-cpp -c $<
---libgcc-objects += $(lib1asmfuncs-o)
--+libgcc-s-objects += $(lib1asmfuncs-s-o)
-- 
-- endif
-- 
--Index: gcc-4_7-branch/libgcc/static-object.mk
--===================================================================
----- gcc-4_7-branch.orig/libgcc/static-object.mk	2012-08-21 22:33:20.000000000 -0700
--+++ gcc-4_7-branch/libgcc/static-object.mk	2012-09-05 17:30:28.572998745 -0700
--@@ -24,7 +24,13 @@
-- endif
-- endif
-- 
---$(base)$(objext): $o
---	$(gcc_compile) -c -xassembler-with-cpp $<
--+$(base)$(objext): $o $(base).vis
--+	$(gcc_compile) -c -xassembler-with-cpp -include $*.vis $<
--+
--+$(base).vis: $(base)_s$(objext)
--+	$(gen-hide-list)
--+
--+$(base)_s$(objext): $o
--+	$(gcc_s_compile) -c -xassembler-with-cpp $<
-- 
-- endif
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0001-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch b/meta/recipes-devtools/gcc/gcc-4.7/0001-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
-deleted file mode 100644
-index 15034f7..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/0001-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 935475158f45b9c55a54647543c0402b4b3043ae Mon Sep 17 00:00:00 2001
--From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Sun, 19 Aug 2012 15:11:40 +0000
--Subject: [PATCH] 	* crtstuff.c (USE_PT_GNU_EH_FRAME): Define for
-- systems using glibc 	even if inhibit_libc.
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@190517 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- libgcc/ChangeLog  |    5 +++++
-- libgcc/crtstuff.c |   16 +++++++++++++++-
-- 2 files changed, 20 insertions(+), 1 deletion(-)
--
--Upstream-Status: Backport
--
---Khem 05-Sep-2012
--Index: gcc-4_7-branch/libgcc/crtstuff.c
--===================================================================
----- gcc-4_7-branch.orig/libgcc/crtstuff.c	2012-08-21 22:33:20.000000000 -0700
--+++ gcc-4_7-branch/libgcc/crtstuff.c	2012-09-05 17:28:49.248994968 -0700
--@@ -1,7 +1,7 @@
-- /* Specialized bits of code needed to support construction and
--    destruction of file-scope objects in C++ code.
--    Copyright (C) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
---   2002, 2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011
--+   2002, 2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012
--    Free Software Foundation, Inc.
--    Contributed by Ron Guilmette (rfg@monkeys.com).
-- 
--@@ -113,6 +113,20 @@
-- #  define USE_PT_GNU_EH_FRAME
-- # endif
-- #endif
--+
--+#if defined(OBJECT_FORMAT_ELF) \
--+    && !defined(OBJECT_FORMAT_FLAT) \
--+    && defined(HAVE_LD_EH_FRAME_HDR) \
--+    && !defined(CRTSTUFFT_O) \
--+    && defined(inhibit_libc) \
--+    && (defined(__GLIBC__) || defined(__gnu_linux__) || defined(__GNU__))
--+/* On systems using glibc, an inhibit_libc build of libgcc is only
--+   part of a bootstrap process.  Build the same crt*.o as would be
--+   built with headers present, so that it is not necessary to build
--+   glibc more than once for the bootstrap to converge.  */
--+# define USE_PT_GNU_EH_FRAME
--+#endif
--+
-- #if defined(EH_FRAME_SECTION_NAME) && !defined(USE_PT_GNU_EH_FRAME)
-- # define USE_EH_FRAME_REGISTRY
-- #endif
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.7/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
+ SRC_URI[md5sum] = "e6040024eb9e761c3bea348d1fa5abb0"
+ SRC_URI[sha256sum] = "b037fe5132b71ecad2ea7141ec92292b5d32427bf90fd90cde432b1d5abacc2c"
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.8/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
 new file mode 100644
-index 0000000..8453345
+index 0000000..8698a1c
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0001-gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
 @@ -0,0 +1,42 @@
-+From 65c74c42e1905e2da83524fb2e972bff498d18dd Mon Sep 17 00:00:00 2001
++From bf3d96ae58fa180b8b468d25dc2e0209daca2751 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:38:11 +0400
-+Subject: [PATCH 01/44] gcc-4.3.1: ARCH_FLAGS_FOR_TARGET
++Date: Fri, 29 Mar 2013 08:37:11 +0400
++Subject: [PATCH 01/35] gcc-4.3.1: ARCH_FLAGS_FOR_TARGET
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -497,10 +291,10 @@ index 0000000..8453345
 + 2 files changed, 2 insertions(+), 2 deletions(-)
 +
 +diff --git a/configure b/configure
-+index 9113516..9b88994 100755
++index d809535..1b76c90 100755
 +--- a/configure
 ++++ b/configure
-+@@ -7375,7 +7375,7 @@ fi
++@@ -7439,7 +7439,7 @@ fi
 + # for target_alias and gcc doesn't manage it consistently.
 + target_configargs="--cache-file=./config.cache ${target_configargs}"
 + 
@@ -510,10 +304,10 @@ index 0000000..8453345
 +  *" newlib "*)
 +   case " $target_configargs " in
 +diff --git a/configure.ac b/configure.ac
-+index 40aeeee..aba1038 100644
++index 48ec1aa..89d1d3f 100644
 +--- a/configure.ac
 ++++ b/configure.ac
-+@@ -2832,7 +2832,7 @@ fi
++@@ -2873,7 +2873,7 @@ fi
 + # for target_alias and gcc doesn't manage it consistently.
 + target_configargs="--cache-file=./config.cache ${target_configargs}"
 + 
@@ -525,16 +319,16 @@ index 0000000..8453345
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0002-uclibc-conf.patch b/meta/recipes-devtools/gcc/gcc-4.7/0002-uclibc-conf.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0002-uclibc-conf.patch b/meta/recipes-devtools/gcc/gcc-4.8/0002-uclibc-conf.patch
 new file mode 100644
-index 0000000..740da7e
+index 0000000..87c242e
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0002-uclibc-conf.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0002-uclibc-conf.patch
 @@ -0,0 +1,53 @@
-+From e9bdf70fbba9e51cabf130796215be0f05050315 Mon Sep 17 00:00:00 2001
++From d030973c872c00d916921d84deee0af2c0d38081 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:41:01 +0400
-+Subject: [PATCH 02/44] uclibc-conf
++Date: Fri, 29 Mar 2013 08:38:25 +0400
++Subject: [PATCH 02/35] uclibc-conf
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -584,16 +378,16 @@ index 0000000..740da7e
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0003-gcc-uclibc-locale-ctype_touplow_t.patch b/meta/recipes-devtools/gcc/gcc-4.7/0003-gcc-uclibc-locale-ctype_touplow_t.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0003-gcc-uclibc-locale-ctype_touplow_t.patch b/meta/recipes-devtools/gcc/gcc-4.8/0003-gcc-uclibc-locale-ctype_touplow_t.patch
 new file mode 100644
-index 0000000..64cec64
+index 0000000..1aa94ca
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0003-gcc-uclibc-locale-ctype_touplow_t.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0003-gcc-uclibc-locale-ctype_touplow_t.patch
 @@ -0,0 +1,87 @@
-+From 384ea06b1b88cfef7e9265fcb95b10d573bf6fc2 Mon Sep 17 00:00:00 2001
++From d2d9dd756c4356d14dd7ae003856344cb4f37985 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:43:15 +0400
-+Subject: [PATCH 03/44] gcc-uclibc-locale-ctype_touplow_t
++Date: Fri, 29 Mar 2013 08:40:12 +0400
++Subject: [PATCH 03/35] gcc-uclibc-locale-ctype_touplow_t
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -605,10 +399,10 @@ index 0000000..64cec64
 + 3 files changed, 23 insertions(+)
 +
 +diff --git a/libstdc++-v3/config/locale/generic/c_locale.cc b/libstdc++-v3/config/locale/generic/c_locale.cc
-+index fb9b425..f95bf09 100644
++index 0d309a5..f2f1e1f 100644
 +--- a/libstdc++-v3/config/locale/generic/c_locale.cc
 ++++ b/libstdc++-v3/config/locale/generic/c_locale.cc
-+@@ -264,5 +264,10 @@ _GLIBCXX_END_NAMESPACE_VERSION
++@@ -263,5 +263,10 @@ _GLIBCXX_END_NAMESPACE_VERSION
 + #ifdef _GLIBCXX_LONG_DOUBLE_COMPAT
 + #define _GLIBCXX_LDBL_COMPAT(dbl, ldbl) \
 +   extern "C" void ldbl (void) __attribute__ ((alias (#dbl)))
@@ -620,10 +414,10 @@ index 0000000..64cec64
 ++#endif
 + #endif // _GLIBCXX_LONG_DOUBLE_COMPAT
 +diff --git a/libstdc++-v3/config/locale/generic/c_locale.h b/libstdc++-v3/config/locale/generic/c_locale.h
-+index 2c76000..e33e230 100644
++index b5fd989..3da9a5d 100644
 +--- a/libstdc++-v3/config/locale/generic/c_locale.h
 ++++ b/libstdc++-v3/config/locale/generic/c_locale.h
-+@@ -41,13 +41,22 @@
++@@ -40,13 +40,22 @@
 + 
 + #include <clocale>
 + 
@@ -647,10 +441,10 @@ index 0000000..64cec64
 +   // Convert numeric value of type double and long double to string and
 +   // return length of string.  If vsnprintf is available use it, otherwise
 +diff --git a/libstdc++-v3/config/os/gnu-linux/ctype_base.h b/libstdc++-v3/config/os/gnu-linux/ctype_base.h
-+index eb2b14c..4817059 100644
++index 2d8e978..14eb08f 100644
 +--- a/libstdc++-v3/config/os/gnu-linux/ctype_base.h
 ++++ b/libstdc++-v3/config/os/gnu-linux/ctype_base.h
-+@@ -34,6 +34,11 @@
++@@ -33,6 +33,11 @@
 + 
 + // Information as gleaned from /usr/include/ctype.h
 + 
@@ -662,7 +456,7 @@ index 0000000..64cec64
 + namespace std _GLIBCXX_VISIBILITY(default)
 + {
 + _GLIBCXX_BEGIN_NAMESPACE_VERSION
-+@@ -42,7 +47,11 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
++@@ -41,7 +46,11 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 +   struct ctype_base
 +   {
 +     // Non-standard typedefs.
@@ -677,16 +471,16 @@ index 0000000..64cec64
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0004-uclibc-locale.patch b/meta/recipes-devtools/gcc/gcc-4.7/0004-uclibc-locale.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0004-uclibc-locale.patch b/meta/recipes-devtools/gcc/gcc-4.8/0004-uclibc-locale.patch
 new file mode 100644
-index 0000000..120a566
+index 0000000..34cc164
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0004-uclibc-locale.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0004-uclibc-locale.patch
 @@ -0,0 +1,2862 @@
-+From d64a07014959919a91d8471474655e4f8e1184c6 Mon Sep 17 00:00:00 2001
++From a55c751a449c2cbf0b3fcc07aab1b86bf9661510 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:45:35 +0400
-+Subject: [PATCH 04/44] uclibc-locale
++Date: Fri, 29 Mar 2013 08:41:39 +0400
++Subject: [PATCH 04/35] uclibc-locale
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -723,10 +517,10 @@ index 0000000..120a566
 + create mode 100644 libstdc++-v3/config/locale/uclibc/time_members.h
 +
 +diff --git a/libstdc++-v3/acinclude.m4 b/libstdc++-v3/acinclude.m4
-+index 319e327..550ea83 100644
++index 0871a6a..326d7ef 100644
 +--- a/libstdc++-v3/acinclude.m4
 ++++ b/libstdc++-v3/acinclude.m4
-+@@ -1924,6 +1924,9 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
++@@ -1905,6 +1905,9 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
 +   # Default to "generic".
 +   if test $enable_clocale_flag = auto; then
 +     case ${target_os} in
@@ -736,7 +530,7 @@ index 0000000..120a566
 +       linux* | gnu* | kfreebsd*-gnu | knetbsd*-gnu)
 + 	enable_clocale_flag=gnu
 + 	;;
-+@@ -2085,6 +2088,40 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
++@@ -2069,6 +2072,40 @@ AC_DEFUN([GLIBCXX_ENABLE_CLOCALE], [
 +       CTIME_CC=config/locale/generic/time_members.cc
 +       CLOCALE_INTERNAL_H=config/locale/generic/c++locale_internal.h
 +       ;;
@@ -3422,10 +3216,10 @@ index 0000000..120a566
 ++      _S_destroy_c_locale(_M_c_locale_timepunct);
 ++    }
 +diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
-+index 0e9e28a..9fcf6f0 100755
++index f40ddcf..c57a751 100755
 +--- a/libstdc++-v3/configure
 ++++ b/libstdc++-v3/configure
-+@@ -15736,6 +15736,9 @@ fi
++@@ -15822,6 +15822,9 @@ fi
 +   # Default to "generic".
 +   if test $enable_clocale_flag = auto; then
 +     case ${target_os} in
@@ -3435,7 +3229,7 @@ index 0000000..120a566
 +       linux* | gnu* | kfreebsd*-gnu | knetbsd*-gnu)
 + 	enable_clocale_flag=gnu
 + 	;;
-+@@ -15990,6 +15993,78 @@ $as_echo "newlib" >&6; }
++@@ -16079,6 +16082,78 @@ $as_echo "newlib" >&6; }
 +       CTIME_CC=config/locale/generic/time_members.cc
 +       CLOCALE_INTERNAL_H=config/locale/generic/c++locale_internal.h
 +       ;;
@@ -3515,7 +3309,7 @@ index 0000000..120a566
 + 
 +   # This is where the testsuite looks for locale catalogs, using the
 +diff --git a/libstdc++-v3/include/c_compatibility/wchar.h b/libstdc++-v3/include/c_compatibility/wchar.h
-+index c4c05a1..302d70e 100644
++index 580d725..3fe61b8 100644
 +--- a/libstdc++-v3/include/c_compatibility/wchar.h
 ++++ b/libstdc++-v3/include/c_compatibility/wchar.h
 +@@ -101,7 +101,9 @@ using std::wmemcmp;
@@ -3529,10 +3323,10 @@ index 0000000..120a566
 + #if _GLIBCXX_USE_C99
 + using std::wcstold;
 +diff --git a/libstdc++-v3/include/c_std/cwchar b/libstdc++-v3/include/c_std/cwchar
-+index 8480dac..49e6187 100644
++index 0e6b1fc..405aee2 100644
 +--- a/libstdc++-v3/include/c_std/cwchar
 ++++ b/libstdc++-v3/include/c_std/cwchar
-+@@ -177,7 +177,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
++@@ -175,7 +175,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 +   using ::wcscoll;
 +   using ::wcscpy;
 +   using ::wcscspn;
@@ -3545,16 +3339,16 @@ index 0000000..120a566
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0005-uclibc-locale-no__x.patch b/meta/recipes-devtools/gcc/gcc-4.7/0005-uclibc-locale-no__x.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0005-uclibc-locale-no__x.patch b/meta/recipes-devtools/gcc/gcc-4.8/0005-uclibc-locale-no__x.patch
 new file mode 100644
-index 0000000..17fed22
+index 0000000..1a26d39
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0005-uclibc-locale-no__x.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0005-uclibc-locale-no__x.patch
 @@ -0,0 +1,257 @@
-+From 6dd6ff449f4c5f32c5b83a77704d1244ba365767 Mon Sep 17 00:00:00 2001
++From 6a3e8506a12c12728d8b29901defd738be43757f Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:46:26 +0400
-+Subject: [PATCH 05/44] uclibc-locale-no__x
++Date: Fri, 29 Mar 2013 08:42:36 +0400
++Subject: [PATCH 05/35] uclibc-locale-no__x
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -3808,16 +3602,16 @@ index 0000000..17fed22
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0006-uclibc-locale-wchar_fix.patch b/meta/recipes-devtools/gcc/gcc-4.7/0006-uclibc-locale-wchar_fix.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0006-uclibc-locale-wchar_fix.patch b/meta/recipes-devtools/gcc/gcc-4.8/0006-uclibc-locale-wchar_fix.patch
 new file mode 100644
-index 0000000..72a9330
+index 0000000..6ca697f
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0006-uclibc-locale-wchar_fix.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0006-uclibc-locale-wchar_fix.patch
 @@ -0,0 +1,68 @@
-+From acd8713c59e21676afbdb7a1c508a16f097fbd88 Mon Sep 17 00:00:00 2001
++From 225511a3aeb193a916b3999f0b640a392caa67cd Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:47:23 +0400
-+Subject: [PATCH 06/44] uclibc-locale-wchar_fix
++Date: Fri, 29 Mar 2013 08:45:57 +0400
++Subject: [PATCH 06/35] uclibc-locale-wchar_fix
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -3882,16 +3676,16 @@ index 0000000..72a9330
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0007-uclibc-locale-update.patch b/meta/recipes-devtools/gcc/gcc-4.7/0007-uclibc-locale-update.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0007-uclibc-locale-update.patch b/meta/recipes-devtools/gcc/gcc-4.8/0007-uclibc-locale-update.patch
 new file mode 100644
-index 0000000..13e2721
+index 0000000..ba915c4
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0007-uclibc-locale-update.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0007-uclibc-locale-update.patch
 @@ -0,0 +1,542 @@
-+From 68702efa375ae0c534f310eb2c9b97b24fe743fe Mon Sep 17 00:00:00 2001
++From 6ffe7c46f52d27864c3df3663e16ec9ddee71e8f Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:48:14 +0400
-+Subject: [PATCH 07/44] uclibc-locale-update
++Date: Fri, 29 Mar 2013 08:46:58 +0400
++Subject: [PATCH 07/35] uclibc-locale-update
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4430,16 +4224,16 @@ index 0000000..13e2721
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0008-missing-execinfo_h.patch b/meta/recipes-devtools/gcc/gcc-4.7/0008-missing-execinfo_h.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0008-missing-execinfo_h.patch b/meta/recipes-devtools/gcc/gcc-4.8/0008-missing-execinfo_h.patch
 new file mode 100644
-index 0000000..fddd060
+index 0000000..b84492c
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0008-missing-execinfo_h.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0008-missing-execinfo_h.patch
 @@ -0,0 +1,28 @@
-+From c61fabb85fd980dc5723f514084a5b859d693932 Mon Sep 17 00:00:00 2001
++From 9f2158451981cf0a80cfabdc79ae31bb6976a801 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:49:03 +0400
-+Subject: [PATCH 08/44] missing-execinfo_h
++Date: Fri, 29 Mar 2013 08:48:10 +0400
++Subject: [PATCH 08/35] missing-execinfo_h
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4464,16 +4258,16 @@ index 0000000..fddd060
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0009-c99-snprintf.patch b/meta/recipes-devtools/gcc/gcc-4.7/0009-c99-snprintf.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0009-c99-snprintf.patch b/meta/recipes-devtools/gcc/gcc-4.8/0009-c99-snprintf.patch
 new file mode 100644
-index 0000000..3313ae7
+index 0000000..228e1a7
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0009-c99-snprintf.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0009-c99-snprintf.patch
 @@ -0,0 +1,28 @@
-+From eb485ed178a9d5da0adaf6048e592efb870b9b74 Mon Sep 17 00:00:00 2001
++From e393e076f1ab82d25e1aa04d6edea27b41d3eb06 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:49:52 +0400
-+Subject: [PATCH 09/44] c99-snprintf
++Date: Fri, 29 Mar 2013 08:49:03 +0400
++Subject: [PATCH 09/35] c99-snprintf
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4483,10 +4277,10 @@ index 0000000..3313ae7
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/libstdc++-v3/include/c_std/cstdio b/libstdc++-v3/include/c_std/cstdio
-+index d4f4732..d0ab9f8 100644
++index e85bd83..6af839a 100644
 +--- a/libstdc++-v3/include/c_std/cstdio
 ++++ b/libstdc++-v3/include/c_std/cstdio
-+@@ -140,7 +140,7 @@ namespace std
++@@ -139,7 +139,7 @@ namespace std
 +   using ::vsprintf;
 + } // namespace std
 + 
@@ -4498,16 +4292,16 @@ index 0000000..3313ae7
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0010-c99-complex-ugly-hack.patch b/meta/recipes-devtools/gcc/gcc-4.7/0010-c99-complex-ugly-hack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0010-c99-complex-ugly-hack.patch b/meta/recipes-devtools/gcc/gcc-4.8/0010-c99-complex-ugly-hack.patch
 new file mode 100644
-index 0000000..28fe5da
+index 0000000..a933770
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0010-c99-complex-ugly-hack.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0010-c99-complex-ugly-hack.patch
 @@ -0,0 +1,29 @@
-+From 2fbff732f8f0dbbb6707c385770ae44624d28d57 Mon Sep 17 00:00:00 2001
++From 73f69d806e2c9561a54995223431a1076cfd6164 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:50:41 +0400
-+Subject: [PATCH 10/44] c99-complex-ugly-hack
++Date: Fri, 29 Mar 2013 08:49:57 +0400
++Subject: [PATCH 10/35] c99-complex-ugly-hack
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4517,10 +4311,10 @@ index 0000000..28fe5da
 + 1 file changed, 3 insertions(+)
 +
 +diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
-+index 9fcf6f0..15f0ff9 100755
++index c57a751..a1333e2 100755
 +--- a/libstdc++-v3/configure
 ++++ b/libstdc++-v3/configure
-+@@ -18767,6 +18767,9 @@ $as_echo_n "checking for ISO C99 support to TR1 in <complex.h>... " >&6; }
++@@ -18734,6 +18734,9 @@ $as_echo_n "checking for ISO C99 support to TR1 in <complex.h>... " >&6; }
 +     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 + /* end confdefs.h.  */
 + #include <complex.h>
@@ -4533,16 +4327,16 @@ index 0000000..28fe5da
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0011-index_macro.patch b/meta/recipes-devtools/gcc/gcc-4.7/0011-index_macro.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0011-index_macro.patch b/meta/recipes-devtools/gcc/gcc-4.8/0011-index_macro.patch
 new file mode 100644
-index 0000000..32cf14b
+index 0000000..f44b3d2
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0011-index_macro.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0011-index_macro.patch
 @@ -0,0 +1,44 @@
-+From 88b7f4fd84b55657dd54bd7a2a4a7afb5f306793 Mon Sep 17 00:00:00 2001
++From b037953e40312b45ab84ed0a3ad882bb5e413101 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:51:50 +0400
-+Subject: [PATCH 11/44] index_macro
++Date: Fri, 29 Mar 2013 08:51:02 +0400
++Subject: [PATCH 11/35] index_macro
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4553,10 +4347,10 @@ index 0000000..32cf14b
 + 2 files changed, 6 insertions(+)
 +
 +diff --git a/libstdc++-v3/include/ext/rope b/libstdc++-v3/include/ext/rope
-+index d5b76ef..4eec5a1 100644
++index 38eb1e8..158d21a 100644
 +--- a/libstdc++-v3/include/ext/rope
 ++++ b/libstdc++-v3/include/ext/rope
-+@@ -56,6 +56,9 @@
++@@ -55,6 +55,9 @@
 + #include <bits/gthr.h>
 + #include <tr1/functional>
 + 
@@ -4567,10 +4361,10 @@ index 0000000..32cf14b
 + #   define __GC_CONST const
 + # else
 +diff --git a/libstdc++-v3/include/ext/ropeimpl.h b/libstdc++-v3/include/ext/ropeimpl.h
-+index 3ee0610..2064cd3 100644
++index d7b5cbd..b9b3acb 100644
 +--- a/libstdc++-v3/include/ext/ropeimpl.h
 ++++ b/libstdc++-v3/include/ext/ropeimpl.h
-+@@ -49,6 +49,9 @@
++@@ -48,6 +48,9 @@
 + #include <ext/memory> // For uninitialized_copy_n
 + #include <ext/numeric> // For power
 + 
@@ -4583,16 +4377,16 @@ index 0000000..32cf14b
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0012-libmudflap-susv3-legacy.patch b/meta/recipes-devtools/gcc/gcc-4.7/0012-libmudflap-susv3-legacy.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0012-libmudflap-susv3-legacy.patch b/meta/recipes-devtools/gcc/gcc-4.8/0012-libmudflap-susv3-legacy.patch
 new file mode 100644
-index 0000000..6d5f74e
+index 0000000..5ef0e5d
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0012-libmudflap-susv3-legacy.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0012-libmudflap-susv3-legacy.patch
 @@ -0,0 +1,64 @@
-+From 538702c35170b2b0dc8b7eef0649551ce89c72f8 Mon Sep 17 00:00:00 2001
++From a0cb13bdd98a941b81fdafe4cd96e4c569feb651 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:53:17 +0400
-+Subject: [PATCH 12/44] libmudflap-susv3-legacy
++Date: Fri, 29 Mar 2013 08:52:36 +0400
++Subject: [PATCH 12/35] libmudflap-susv3-legacy
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4602,7 +4396,7 @@ index 0000000..6d5f74e
 + 1 file changed, 5 insertions(+), 5 deletions(-)
 +
 +diff --git a/libmudflap/mf-hooks2.c b/libmudflap/mf-hooks2.c
-+index c030e69..a5be804 100644
++index 4af17df..a3c6b2f 100644
 +--- a/libmudflap/mf-hooks2.c
 ++++ b/libmudflap/mf-hooks2.c
 +@@ -424,7 +424,7 @@ WRAPPER2(void, bzero, void *s, size_t n)
@@ -4653,16 +4447,16 @@ index 0000000..6d5f74e
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0013-libstdc-namespace.patch b/meta/recipes-devtools/gcc/gcc-4.7/0013-libstdc-namespace.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0013-libstdc-namespace.patch b/meta/recipes-devtools/gcc/gcc-4.8/0013-libstdc-namespace.patch
 new file mode 100644
-index 0000000..8ec50a7
+index 0000000..2b79076
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0013-libstdc-namespace.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0013-libstdc-namespace.patch
 @@ -0,0 +1,54 @@
-+From 286584e6fe6e2477f167acf8ee94e3c2a1ba8a5c Mon Sep 17 00:00:00 2001
++From 104e4d66208f2726b14d2f5eebce90700cbc83c8 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:54:07 +0400
-+Subject: [PATCH 13/44] libstdc++-namespace
++Date: Fri, 29 Mar 2013 08:54:02 +0400
++Subject: [PATCH 13/35] libstdc++-namespace
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4713,16 +4507,16 @@ index 0000000..8ec50a7
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0014-sh-pr24836.patch b/meta/recipes-devtools/gcc/gcc-4.7/0014-sh-pr24836.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0014-sh-pr24836.patch b/meta/recipes-devtools/gcc/gcc-4.8/0014-sh-pr24836.patch
 new file mode 100644
-index 0000000..d7b53e5
+index 0000000..f7d6e1e
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0014-sh-pr24836.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0014-sh-pr24836.patch
 @@ -0,0 +1,45 @@
-+From 4c22b66fa0db68a9680480068bab160f15036610 Mon Sep 17 00:00:00 2001
++From edc9acb181810f234b6b9f7d2820b0e4f6a1eeaf Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:55:28 +0400
-+Subject: [PATCH 14/44] sh-pr24836
++Date: Fri, 29 Mar 2013 08:54:48 +0400
++Subject: [PATCH 14/35] sh-pr24836
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4736,10 +4530,10 @@ index 0000000..d7b53e5
 + 2 files changed, 2 insertions(+), 2 deletions(-)
 +
 +diff --git a/gcc/configure b/gcc/configure
-+index 52cc6b6..b02e117 100755
++index e12a180..135bbf5 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -23518,7 +23518,7 @@ foo:	.long	25
++@@ -23378,7 +23378,7 @@ foo:	.long	25
 + 	tls_first_minor=14
 + 	tls_as_opt="-m64 -Aesame --fatal-warnings"
 + 	;;
@@ -4749,10 +4543,10 @@ index 0000000..d7b53e5
 + 	.section ".tdata","awT",@progbits
 + foo:	.long	25
 +diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index 2d1876f..e648782 100644
++index eba3577..6363a21 100644
 +--- a/gcc/configure.ac
 ++++ b/gcc/configure.ac
-+@@ -3079,7 +3079,7 @@ foo:	.long	25
++@@ -3141,7 +3141,7 @@ foo:	.long	25
 + 	tls_first_minor=14
 + 	tls_as_opt="-m64 -Aesame --fatal-warnings"
 + 	;;
@@ -4764,51 +4558,30 @@ index 0000000..d7b53e5
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0015-arm-bigendian.patch b/meta/recipes-devtools/gcc/gcc-4.7/0015-arm-bigendian.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0015-arm-Use-TARGET_ENDIAN_OPTION-for-determining-MULTILI.patch b/meta/recipes-devtools/gcc/gcc-4.8/0015-arm-Use-TARGET_ENDIAN_OPTION-for-determining-MULTILI.patch
 new file mode 100644
-index 0000000..d0d6580
+index 0000000..eda7b99
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0015-arm-bigendian.patch
-@@ -0,0 +1,50 @@
-+From 7cd38a8bcf180e4c7ba7e5526e274b64869772be Mon Sep 17 00:00:00 2001
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0015-arm-Use-TARGET_ENDIAN_OPTION-for-determining-MULTILI.patch
+@@ -0,0 +1,29 @@
++From 50e5366005b0f6af27378e2a5c3cb9f9936a7e62 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:56:28 +0400
-+Subject: [PATCH 15/44] arm-bigendian
++Date: Fri, 29 Mar 2013 08:58:36 +0400
++Subject: [PATCH 15/35] arm: Use TARGET_ENDIAN_OPTION for determining
++ MULTILIB_DEFAULTS
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
 +Upstream-Status: Pending
-+
-+By Lennert Buytenhek <buytenh@wantstofly.org>
-+Adds support for arm*b-linux* big-endian ARM targets
-+
-+See http://gcc.gnu.org/PR16350
 +---
-+ gcc/config.gcc             |    5 +++++
 + gcc/config/arm/linux-elf.h |    2 +-
-+ 2 files changed, 6 insertions(+), 1 deletion(-)
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/gcc/config.gcc b/gcc/config.gcc
-+index 5fcd192..8b038a5 100644
-+--- a/gcc/config.gcc
-++++ b/gcc/config.gcc
-+@@ -850,6 +850,11 @@ arm*-*-linux*)			# ARM GNU/Linux with ELF
-+ 	esac
-+ 	tmake_file="${tmake_file} arm/t-arm"
-+ 	case ${target} in
-++	arm*b-*)
-++		tm_defines="${tm_defines} TARGET_BIG_ENDIAN_DEFAULT=1"
-++		;;
-++	esac
-++	case ${target} in
-+ 	arm*-*-linux-*eabi)
-+ 	    tm_file="$tm_file arm/bpabi.h arm/linux-eabi.h"
-+ 	    tmake_file="$tmake_file arm/t-arm-elf arm/t-bpabi arm/t-linux-eabi"
 +diff --git a/gcc/config/arm/linux-elf.h b/gcc/config/arm/linux-elf.h
-+index 270e12b..418e688 100644
++index 488efa4..753dc3a 100644
 +--- a/gcc/config/arm/linux-elf.h
 ++++ b/gcc/config/arm/linux-elf.h
-+@@ -48,7 +48,7 @@
++@@ -46,7 +46,7 @@
 + 
 + #undef  MULTILIB_DEFAULTS
 + #define MULTILIB_DEFAULTS \
@@ -4820,16 +4593,16 @@ index 0000000..d0d6580
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0016-gcc-poison-system-directories.patch b/meta/recipes-devtools/gcc/gcc-4.7/0016-gcc-poison-system-directories.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0016-gcc-poison-system-directories.patch b/meta/recipes-devtools/gcc/gcc-4.8/0016-gcc-poison-system-directories.patch
 new file mode 100644
-index 0000000..a9304c4
+index 0000000..c389154
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0016-gcc-poison-system-directories.patch
-@@ -0,0 +1,216 @@
-+From d9e75504be3ae87f5820613b2b185653efd3bd5a Mon Sep 17 00:00:00 2001
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0016-gcc-poison-system-directories.patch
+@@ -0,0 +1,224 @@
++From 160397ef3c3331099af028f1b8d3e085b07d88ad Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:57:51 +0400
-+Subject: [PATCH 16/44] gcc-poison-system-directories
++Date: Fri, 29 Mar 2013 08:59:00 +0400
++Subject: [PATCH 16/35] gcc: poison-system-directories
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
@@ -4842,14 +4615,14 @@ index 0000000..a9304c4
 + gcc/configure.ac    |   10 ++++++++++
 + gcc/doc/invoke.texi |    9 +++++++++
 + gcc/gcc.c           |    2 ++
-+ gcc/incpath.c       |   18 ++++++++++++++++++
-+ 8 files changed, 68 insertions(+), 3 deletions(-)
++ gcc/incpath.c       |   19 +++++++++++++++++++
++ 8 files changed, 69 insertions(+), 3 deletions(-)
 +
 +diff --git a/gcc/Makefile.in b/gcc/Makefile.in
-+index 5c3514d..d048162 100644
++index 54ea04f..90a2bba 100644
 +--- a/gcc/Makefile.in
 ++++ b/gcc/Makefile.in
-+@@ -2065,7 +2065,7 @@ attribs.o : attribs.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
++@@ -2018,7 +2018,7 @@ attribs.o : attribs.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
 + 
 + incpath.o: incpath.c incpath.h $(CONFIG_H) $(SYSTEM_H) $(CPPLIB_H) \
 + 		intl.h prefix.h coretypes.h $(TM_H) cppdefault.h $(TARGET_H) \
@@ -4859,12 +4632,12 @@ index 0000000..a9304c4
 + CFLAGS-prefix.o += -DPREFIX=\"$(prefix)\" -DBASEVER=$(BASEVER_s)
 + prefix.o: prefix.c $(CONFIG_H) $(SYSTEM_H) coretypes.h prefix.h \
 +diff --git a/gcc/common.opt b/gcc/common.opt
-+index 033fbe0..8622bf6 100644
++index bdbd3b6..ab86b00 100644
 +--- a/gcc/common.opt
 ++++ b/gcc/common.opt
-+@@ -582,6 +582,10 @@ Wpadded
-+ Common Var(warn_padded) Warning
-+ Warn when padding is required to align structure members
++@@ -595,6 +595,10 @@ Wpedantic
++ Common Var(pedantic) Warning
++ Issue warnings needed for strict compliance to the standard
 + 
 ++Wpoison-system-directories
 ++Common Var(flag_poison_system_directories) Init(1) Warning
@@ -4874,10 +4647,10 @@ index 0000000..a9304c4
 + Common Var(warn_shadow) Warning
 + Warn when one local variable shadows another
 +diff --git a/gcc/config.in b/gcc/config.in
-+index 2e632b2..f66f0fb 100644
++index d80fb9f..0524af7 100644
 +--- a/gcc/config.in
 ++++ b/gcc/config.in
-+@@ -144,6 +144,12 @@
++@@ -138,6 +138,12 @@
 + #endif
 + 
 + 
@@ -4891,10 +4664,10 @@ index 0000000..a9304c4
 +    optimizer and back end) to be checked for dynamic type safety at runtime.
 +    This is quite expensive. */
 +diff --git a/gcc/configure b/gcc/configure
-+index b02e117..5898961 100755
++index 135bbf5..b65d21d 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -914,6 +914,7 @@ with_gc
++@@ -917,6 +917,7 @@ with_gc
 + with_system_zlib
 + enable_maintainer_mode
 + enable_version_specific_runtime_libs
@@ -4902,7 +4675,7 @@ index 0000000..a9304c4
 + enable_plugin
 + enable_libquadmath_support
 + with_linker_hash_style
-+@@ -1627,6 +1628,8 @@ Optional Features:
++@@ -1630,6 +1631,8 @@ Optional Features:
 +   --enable-version-specific-runtime-libs
 +                           specify that runtime libraries should be installed
 +                           in a compiler-specific directory
@@ -4911,25 +4684,25 @@ index 0000000..a9304c4
 +   --enable-plugin         enable plugin support
 +   --disable-libquadmath-support
 +                           disable libquadmath support for Fortran
-+@@ -18010,7 +18013,7 @@ else
++@@ -17828,7 +17831,7 @@ else
 +   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
 +   lt_status=$lt_dlunknown
 +   cat > conftest.$ac_ext <<_LT_EOF
-+-#line 18013 "configure"
-++#line 18016 "configure"
++-#line 17831 "configure"
+++#line 17834 "configure"
 + #include "confdefs.h"
 + 
 + #if HAVE_DLFCN_H
-+@@ -18116,7 +18119,7 @@ else
++@@ -17934,7 +17937,7 @@ else
 +   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
 +   lt_status=$lt_dlunknown
 +   cat > conftest.$ac_ext <<_LT_EOF
-+-#line 18119 "configure"
-++#line 18122 "configure"
++-#line 17937 "configure"
+++#line 17940 "configure"
 + #include "confdefs.h"
 + 
 + #if HAVE_DLFCN_H
-+@@ -27129,6 +27132,19 @@ if test "${enable_version_specific_runtime_libs+set}" = set; then :
++@@ -27103,6 +27106,19 @@ if test "${enable_version_specific_runtime_libs+set}" = set; then :
 + fi
 + 
 + 
@@ -4950,10 +4723,10 @@ index 0000000..a9304c4
 + 
 + 
 +diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index e648782..47741fc 100644
++index 6363a21..e226b85 100644
 +--- a/gcc/configure.ac
 ++++ b/gcc/configure.ac
-+@@ -4989,6 +4989,16 @@ AC_ARG_ENABLE(version-specific-runtime-libs,
++@@ -5063,6 +5063,16 @@ AC_ARG_ENABLE(version-specific-runtime-libs,
 +                 [specify that runtime libraries should be
 +                  installed in a compiler-specific directory])])
 + 
@@ -4971,18 +4744,18 @@ index 0000000..a9304c4
 + AC_SUBST(subdirs)
 + AC_SUBST(srcdir)
 +diff --git a/gcc/doc/invoke.texi b/gcc/doc/invoke.texi
-+index 8fcebf3..4b917c8 100644
++index 9273d7d..a022622 100644
 +--- a/gcc/doc/invoke.texi
 ++++ b/gcc/doc/invoke.texi
-+@@ -260,6 +260,7 @@ Objective-C and Objective-C++ Dialects}.
++@@ -258,6 +258,7 @@ Objective-C and Objective-C++ Dialects}.
 + -Woverlength-strings  -Wpacked  -Wpacked-bitfield-compat  -Wpadded @gol
 + -Wparentheses  -Wpedantic-ms-format -Wno-pedantic-ms-format @gol
 + -Wpointer-arith  -Wno-pointer-to-int-cast @gol
 ++-Wno-poison-system-directories @gol
-+ -Wredundant-decls @gol
++ -Wredundant-decls  -Wno-return-local-addr @gol
 + -Wreturn-type  -Wsequence-point  -Wshadow @gol
-+ -Wsign-compare  -Wsign-conversion  -Wstack-protector @gol
-+@@ -3879,6 +3880,14 @@ headers---for that, @option{-Wunknown-pragmas} must also be used.
++ -Wsign-compare  -Wsign-conversion  -Wsizeof-pointer-memaccess @gol
++@@ -4007,6 +4008,14 @@ headers---for that, @option{-Wunknown-pragmas} must also be used.
 +  for most targets, it is made up of code and thus requires the stack
 +  to be made executable in order for the program to work properly.
 + 
@@ -4998,23 +4771,31 @@ index 0000000..a9304c4
 + @opindex Wfloat-equal
 + @opindex Wno-float-equal
 +diff --git a/gcc/gcc.c b/gcc/gcc.c
-+index cc6a08e..f130a18 100644
++index 86077f8..efdb625 100644
 +--- a/gcc/gcc.c
 ++++ b/gcc/gcc.c
-+@@ -673,6 +673,8 @@ proper position among the other output files.  */
-+     %{flto} %{flto=*} %l " LINK_PIE_SPEC \
-+    "%X %{o*} %{e*} %{N} %{n} %{r}\
++@@ -740,6 +740,8 @@ proper position among the other output files.  */
++    "%{fuse-ld=*:-fuse-ld=%*}\
++     %X %{o*} %{e*} %{N} %{n} %{r}\
 +     %{s} %{t} %{u*} %{z} %{Z} %{!nostdlib:%{!nostartfiles:%S}}\
 ++    %{Wno-poison-system-directories:--no-poison-system-directories}\
 ++    %{Werror=poison-system-directories:--error-poison-system-directories}\
-+     %{static:} %{L*} %(mfwrap) %(link_libgcc) %o\
++     %{static:} %{L*} %(mfwrap) %(link_libgcc) " SANITIZER_EARLY_SPEC " %o\
 +     %{fopenmp|ftree-parallelize-loops=*:%:include(libgomp.spec)%(link_gomp)}\
 +     %{fgnu-tm:%:include(libitm.spec)%(link_itm)}\
 +diff --git a/gcc/incpath.c b/gcc/incpath.c
-+index 6693bf5..5241220 100644
++index 018da98..cd41c78 100644
 +--- a/gcc/incpath.c
 ++++ b/gcc/incpath.c
-+@@ -361,6 +361,24 @@ merge_include_chains (const char *sysroot, cpp_reader *pfile, int verbose)
++@@ -28,6 +28,7 @@
++ #include "intl.h"
++ #include "incpath.h"
++ #include "cppdefault.h"
+++#include "diagnostic-core.h"
++ 
++ /* Microsoft Windows does not natively support inodes.
++    VMS has non-numeric inodes.  */
++@@ -382,6 +383,24 @@ merge_include_chains (const char *sysroot, cpp_reader *pfile, int verbose)
 + 	}
 +       fprintf (stderr, _("End of search list.\n"));
 +     }
@@ -5042,16 +4823,16 @@ index 0000000..a9304c4
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0017-gcc-poison-dir-extend.patch b/meta/recipes-devtools/gcc/gcc-4.7/0017-gcc-poison-dir-extend.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0017-gcc-poison-dir-extend.patch b/meta/recipes-devtools/gcc/gcc-4.8/0017-gcc-poison-dir-extend.patch
 new file mode 100644
-index 0000000..e0c6c47
+index 0000000..7f3d000
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0017-gcc-poison-dir-extend.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0017-gcc-poison-dir-extend.patch
 @@ -0,0 +1,39 @@
-+From 5e2824657133b862ef644bb76ca14cf35347d2a2 Mon Sep 17 00:00:00 2001
++From e99c9c97266d6d3e8cac798aa91408250c4d60cf Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 06:59:24 +0400
-+Subject: [PATCH 17/44] gcc-poison-dir-extend
++Date: Fri, 29 Mar 2013 09:00:34 +0400
++Subject: [PATCH 17/35] gcc-poison-dir-extend
 +
 +Add /sw/include and /opt/include based on the original
 +zecke-no-host-includes.patch patch.  The original patch checked for
@@ -5070,10 +4851,10 @@ index 0000000..e0c6c47
 + 1 file changed, 3 insertions(+), 1 deletion(-)
 +
 +diff --git a/gcc/incpath.c b/gcc/incpath.c
-+index 5241220..76044fd 100644
++index cd41c78..eac4a92 100644
 +--- a/gcc/incpath.c
 ++++ b/gcc/incpath.c
-+@@ -371,7 +371,9 @@ merge_include_chains (const char *sysroot, cpp_reader *pfile, int verbose)
++@@ -393,7 +393,9 @@ merge_include_chains (const char *sysroot, cpp_reader *pfile, int verbose)
 +          {
 +           if ((!strncmp (p->name, "/usr/include", 12))
 +               || (!strncmp (p->name, "/usr/local/include", 18))
@@ -5087,16 +4868,16 @@ index 0000000..e0c6c47
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.7/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.8/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
 new file mode 100644
-index 0000000..717df53
+index 0000000..b2d657e
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0018-gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
 @@ -0,0 +1,73 @@
-+From ad55919ce6f7ce510290f964ee611abb973106b7 Mon Sep 17 00:00:00 2001
++From 56207fa2923e8edf774e98ffac82666091076be3 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:02:52 +0400
-+Subject: [PATCH 18/44] gcc-4.3.3: SYSROOT_CFLAGS_FOR_TARGET
++Date: Fri, 29 Mar 2013 09:08:31 +0400
++Subject: [PATCH 18/35] gcc-4.3.3: SYSROOT_CFLAGS_FOR_TARGET
 +
 +Before committing, I noticed that PR/32161 was marked as a dup of PR/32009, but my previous patch did not fix it.
 +
@@ -5121,10 +4902,10 @@ index 0000000..717df53
 + 1 file changed, 32 insertions(+)
 +
 +diff --git a/configure b/configure
-+index 9b88994..49a1bb9 100755
++index 1b76c90..e4dce7c 100755
 +--- a/configure
 ++++ b/configure
-+@@ -6701,6 +6701,38 @@ fi
++@@ -6772,6 +6772,38 @@ fi
 + 
 + 
 + 
@@ -5166,16 +4947,16 @@ index 0000000..717df53
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0019-64-bit-multilib-hack.patch b/meta/recipes-devtools/gcc/gcc-4.7/0019-64-bit-multilib-hack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0019-64-bit-multilib-hack.patch b/meta/recipes-devtools/gcc/gcc-4.8/0019-64-bit-multilib-hack.patch
 new file mode 100644
-index 0000000..49c92ce
+index 0000000..dddda41
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0019-64-bit-multilib-hack.patch
-@@ -0,0 +1,78 @@
-+From fc0bd23ec861b00bef76d59bde442e3d9630f03a Mon Sep 17 00:00:00 2001
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0019-64-bit-multilib-hack.patch
+@@ -0,0 +1,82 @@
++From 18fde5740b09324dfb9cf41e9849672573ff5fa0 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:04:48 +0400
-+Subject: [PATCH 19/44] 64-bit multilib hack.
++Date: Fri, 29 Mar 2013 09:10:06 +0400
++Subject: [PATCH 19/35] 64-bit multilib hack.
 +
 +GCC has internal multilib handling code but it assumes a very specific rigid directory
 +layout. The build system implementation of multilib layout is very generic and allows
@@ -5196,70 +4977,74 @@ index 0000000..49c92ce
 +RP 15/8/11
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
 +
 +Upstream-Status: Pending
 +---
-+ gcc/config/i386/t-linux64   |    7 +++----
-+ gcc/config/mips/t-linux64   |    4 ++--
-+ gcc/config/rs6000/t-linux64 |    4 ++--
-+ 3 files changed, 7 insertions(+), 8 deletions(-)
++ gcc/config/i386/t-linux64   |    6 ++----
++ gcc/config/mips/t-linux64   |   10 +++-------
++ gcc/config/rs6000/t-linux64 |    5 ++---
++ 3 files changed, 7 insertions(+), 14 deletions(-)
 +
 +diff --git a/gcc/config/i386/t-linux64 b/gcc/config/i386/t-linux64
-+index b5d3985..beb0ffa 100644
++index bcea0c6..eb004d7 100644
 +--- a/gcc/config/i386/t-linux64
 ++++ b/gcc/config/i386/t-linux64
-+@@ -33,7 +33,6 @@
++@@ -32,7 +32,5 @@
 + #
 + comma=,
 + MULTILIB_OPTIONS    = $(subst $(comma),/,$(TM_MULTILIB_CONFIG))
 +-MULTILIB_DIRNAMES   = $(patsubst m%, %, $(subst /, ,$(MULTILIB_OPTIONS)))
-+-MULTILIB_OSDIRNAMES = m64=../lib64
-+-MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
-+-MULTILIB_OSDIRNAMES+= mx32=../libx32
++-MULTILIB_OSDIRNAMES = m64=../lib64$(call if_multiarch,:x86_64-linux-gnu)
++-MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)$(call if_multiarch,:i386-linux-gnu)
++-MULTILIB_OSDIRNAMES+= mx32=../libx32$(call if_multiarch,:x86_64-linux-gnux32)
 ++MULTILIB_DIRNAMES = . .
 ++MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-++
 +diff --git a/gcc/config/mips/t-linux64 b/gcc/config/mips/t-linux64
-+index 5197e5e..0d4f35f 100644
++index bdbbd4f..16a6366 100644
 +--- a/gcc/config/mips/t-linux64
 ++++ b/gcc/config/mips/t-linux64
-+@@ -17,5 +17,5 @@
++@@ -17,10 +17,6 @@
 + # <http://www.gnu.org/licenses/>.
 + 
 + MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
 +-MULTILIB_DIRNAMES = n32 32 64
-+-MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64
++-MIPS_EL = $(if $(filter %el, $(firstword $(subst -, ,$(target)))),el)
++-MIPS_SOFT = $(if $(strip $(filter MASK_SOFT_FLOAT_ABI, $(target_cpu_default)) $(filter soft, $(with_float))),soft)
++-MULTILIB_OSDIRNAMES = \
++-	../lib32$(call if_multiarch,:mips64$(MIPS_EL)-linux-gnuabin32$(MIPS_SOFT)) \
++-	../lib$(call if_multiarch,:mips$(MIPS_EL)-linux-gnu$(MIPS_SOFT)) \
++-	../lib64$(call if_multiarch,:mips64$(MIPS_EL)-linux-gnuabi64$(MIPS_SOFT))
 ++MULTILIB_DIRNAMES = . . .
 ++MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
+++
 +diff --git a/gcc/config/rs6000/t-linux64 b/gcc/config/rs6000/t-linux64
-+index 6420431..781c8f5 100644
++index 9175de2..3971019 100644
 +--- a/gcc/config/rs6000/t-linux64
 ++++ b/gcc/config/rs6000/t-linux64
-+@@ -27,9 +27,9 @@
++@@ -26,7 +26,6 @@
 + # MULTILIB_OSDIRNAMES according to what is found on the target.
 + 
-+ MULTILIB_OPTIONS        = m64/m32 msoft-float
-+-MULTILIB_DIRNAMES       = 64 32 nof
-++MULTILIB_DIRNAMES       = . . .
-+ MULTILIB_EXTRA_OPTS     = fPIC mstrict-align
-+ MULTILIB_EXCEPTIONS     = m64/msoft-float
-+ MULTILIB_EXCLUSIONS     = m64/!m32/msoft-float
-+-MULTILIB_OSDIRNAMES	= ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib) nof
-++MULTILIB_OSDIRNAMES	= ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-+ MULTILIB_MATCHES        = $(MULTILIB_MATCHES_FLOAT)
++ MULTILIB_OPTIONS        = m64/m32
++-MULTILIB_DIRNAMES       = 64 32
+++MULTILIB_DIRNAMES       = . .
++ MULTILIB_EXTRA_OPTS     = fPIC
++-MULTILIB_OSDIRNAMES	= ../lib64$(call if_multiarch,:powerpc64-linux-gnu)
++-MULTILIB_OSDIRNAMES    += $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)$(call if_multiarch,:powerpc-linux-gnu)
+++MULTILIB_OSDIRNAMES    = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0020-optional-libstdc.patch b/meta/recipes-devtools/gcc/gcc-4.7/0020-optional-libstdc.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0020-optional-libstdc.patch b/meta/recipes-devtools/gcc/gcc-4.8/0020-optional-libstdc.patch
 new file mode 100644
-index 0000000..5ab4482
+index 0000000..a7a9f0d
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0020-optional-libstdc.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0020-optional-libstdc.patch
 @@ -0,0 +1,102 @@
-+From 7e1f43c590510570432f917c64dd0763f8a12b56 Mon Sep 17 00:00:00 2001
++From 307c8ff3ef666b7bd5ac733863f2fbb27a9d521e Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:11:54 +0400
-+Subject: [PATCH 20/44] optional libstdc
++Date: Fri, 29 Mar 2013 09:12:56 +0400
++Subject: [PATCH 20/35] optional libstdc
 +
 +gcc-runtime builds libstdc++ separately from gcc-cross-*. Its configure tests using g++
 +will not run correctly since by default the linker will try to link against libstdc++
@@ -5283,10 +5068,10 @@ index 0000000..5ab4482
 + 4 files changed, 13 insertions(+), 2 deletions(-)
 +
 +diff --git a/gcc/c-family/c.opt b/gcc/c-family/c.opt
-+index 40ff96c..959548a 100644
++index 10ae84d..dc3ffdf 100644
 +--- a/gcc/c-family/c.opt
 ++++ b/gcc/c-family/c.opt
-+@@ -1171,6 +1171,10 @@ nostdinc++
++@@ -1299,6 +1299,10 @@ nostdinc++
 + C++ ObjC++
 + Do not search standard system include directories for C++
 + 
@@ -5298,10 +5083,10 @@ index 0000000..5ab4482
 + C ObjC C++ ObjC++ Joined Separate
 + ; Documented in common.opt
 +diff --git a/gcc/cp/g++spec.c b/gcc/cp/g++spec.c
-+index 3a9faa9..55a73bb 100644
++index b896eea..f55216b 100644
 +--- a/gcc/cp/g++spec.c
 ++++ b/gcc/cp/g++spec.c
-+@@ -127,6 +127,7 @@ lang_specific_driver (struct cl_decoded_option **in_decoded_options,
++@@ -126,6 +126,7 @@ lang_specific_driver (struct cl_decoded_option **in_decoded_options,
 +       switch (decoded_options[i].opt_index)
 + 	{
 + 	case OPT_nostdlib:
@@ -5310,28 +5095,28 @@ index 0000000..5ab4482
 + 	  library = -1;
 + 	  break;
 +diff --git a/gcc/doc/invoke.texi b/gcc/doc/invoke.texi
-+index 4b917c8..d0a892a 100644
++index a022622..f15c991 100644
 +--- a/gcc/doc/invoke.texi
 ++++ b/gcc/doc/invoke.texi
-+@@ -194,7 +194,7 @@ in the following sections.
-+ -fno-pretty-templates @gol
-+ -frepo  -fno-rtti  -fstats  -ftemplate-depth=@var{n} @gol
++@@ -190,7 +190,7 @@ in the following sections.
++ -frepo  -fno-rtti  -fstats  -ftemplate-backtrace-limit=@var{n} @gol
++ -ftemplate-depth=@var{n} @gol
 + -fno-threadsafe-statics -fuse-cxa-atexit  -fno-weak  -nostdinc++ @gol
 +--fno-default-inline  -fvisibility-inlines-hidden @gol
 ++-nostdlib++ -fno-default-inline  -fvisibility-inlines-hidden @gol
 + -fvisibility-ms-compat @gol
++ -fext-numeric-literals @gol
 + -Wabi  -Wconversion-null  -Wctor-dtor-privacy @gol
-+ -Wdelete-non-virtual-dtor -Wnarrowing -Wnoexcept @gol
-+@@ -445,7 +445,7 @@ Objective-C and Objective-C++ Dialects}.
-+ @gccoptlist{@var{object-file-name}  -l@var{library} @gol
++@@ -453,7 +453,7 @@ Objective-C and Objective-C++ Dialects}.
 + -nostartfiles  -nodefaultlibs  -nostdlib -pie -rdynamic @gol
-+ -s  -static  -static-libgcc  -static-libstdc++ -shared  @gol
-+--shared-libgcc  -symbolic @gol
-++-shared-libgcc  -symbolic -nostdlib++ @gol
++ -s  -static -static-libgcc -static-libstdc++ @gol
++ -static-libasan -static-libtsan @gol
++--shared -shared-libgcc  -symbolic @gol
+++-shared -shared-libgcc  -symbolic -nostdlib++ @gol
 + -T @var{script}  -Wl,@var{option}  -Xlinker @var{option} @gol
 + -u @var{symbol}}
 + 
-+@@ -9437,6 +9437,11 @@ These entries are usually resolved by entries in
++@@ -9886,6 +9886,11 @@ These entries are usually resolved by entries in
 + libc.  These entry points should be supplied through some other
 + mechanism when this option is specified.
 + 
@@ -5344,12 +5129,12 @@ index 0000000..5ab4482
 + @cindex @option{-nostdlib} and unresolved references
 + @cindex unresolved references and @option{-nostdlib}
 +diff --git a/gcc/gcc.c b/gcc/gcc.c
-+index f130a18..d4f8dc7 100644
++index efdb625..477752f 100644
 +--- a/gcc/gcc.c
 ++++ b/gcc/gcc.c
-+@@ -681,6 +681,7 @@ proper position among the other output files.  */
++@@ -748,6 +748,7 @@ proper position among the other output files.  */
 +     %(mflib) " STACK_SPLIT_SPEC "\
-+     %{fprofile-arcs|fprofile-generate*|coverage:-lgcov}\
++     %{fprofile-arcs|fprofile-generate*|coverage:-lgcov} " SANITIZER_SPEC " \
 +     %{!nostdlib:%{!nodefaultlibs:%(link_ssp) %(link_gcc_c_sequence)}}\
 ++    %{!nostdlib++:}\
 +     %{!nostdlib:%{!nostartfiles:%E}} %{T*} }}}}}}"
@@ -5358,16 +5143,16 @@ index 0000000..5ab4482
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch b/meta/recipes-devtools/gcc/gcc-4.7/0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch b/meta/recipes-devtools/gcc/gcc-4.8/0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch
 new file mode 100644
-index 0000000..7630632
+index 0000000..26c0647
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0021-GCC-disable-MASK_RELAX_PIC_CALLS-bit.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0021-gcc-disable-MASK_RELAX_PIC_CALLS-bit.patch
 @@ -0,0 +1,59 @@
-+From f0107a725042251ab7c6f5a52308fb2d5adb553b Mon Sep 17 00:00:00 2001
++From 004696e054ae9dc71d512cc755ccc4074fc62b2d Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:13:39 +0400
-+Subject: [PATCH 21/44] GCC: disable MASK_RELAX_PIC_CALLS bit
++Date: Fri, 29 Mar 2013 09:14:20 +0400
++Subject: [PATCH 21/35] gcc: disable MASK_RELAX_PIC_CALLS bit
 +
 +The new feature added after 4.3.3
 +"http://www.pubbs.net/200909/gcc/94048-patch-add-support-for-rmipsjalr.html"
@@ -5385,10 +5170,10 @@ index 0000000..7630632
 + 2 files changed, 14 deletions(-)
 +
 +diff --git a/gcc/configure b/gcc/configure
-+index 5898961..b38e691 100755
++index b65d21d..bdab45a 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -25874,13 +25874,6 @@ $as_echo_n "checking assembler and linker for explicit JALR relocation... " >&6;
++@@ -25829,13 +25829,6 @@ $as_echo_n "checking assembler and linker for explicit JALR relocation... " >&6;
 +         rm -f conftest.*
 +       fi
 +     fi
@@ -5403,10 +5188,10 @@ index 0000000..7630632
 + $as_echo "$gcc_cv_as_ld_jalr_reloc" >&6; }
 + 
 +diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index 47741fc..ed6f5c3 100644
++index e226b85..5f5c909 100644
 +--- a/gcc/configure.ac
 ++++ b/gcc/configure.ac
-+@@ -4041,13 +4041,6 @@ x:
++@@ -4099,13 +4099,6 @@ x:
 +         rm -f conftest.*
 +       fi
 +     fi
@@ -5423,16 +5208,16 @@ index 0000000..7630632
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0022-COLLECT_GCC_OPTIONS.patch b/meta/recipes-devtools/gcc/gcc-4.7/0022-COLLECT_GCC_OPTIONS.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0022-COLLECT_GCC_OPTIONS.patch b/meta/recipes-devtools/gcc/gcc-4.8/0022-COLLECT_GCC_OPTIONS.patch
 new file mode 100644
-index 0000000..4ada88b
+index 0000000..e8fa5db
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0022-COLLECT_GCC_OPTIONS.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0022-COLLECT_GCC_OPTIONS.patch
 @@ -0,0 +1,38 @@
-+From 0be8da2a2ec3c6ebdae95db89be90261c273bb05 Mon Sep 17 00:00:00 2001
++From 7f5c9dcc71c8b83a0b5596266cc4bdf0936e8e00 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:15:41 +0400
-+Subject: [PATCH 22/44] COLLECT_GCC_OPTIONS
++Date: Fri, 29 Mar 2013 09:16:28 +0400
++Subject: [PATCH 22/35] COLLECT_GCC_OPTIONS
 +
 +This patch adds --sysroot into COLLECT_GCC_OPTIONS which is used to
 +invoke collect2.
@@ -5445,10 +5230,10 @@ index 0000000..4ada88b
 + 1 file changed, 9 insertions(+)
 +
 +diff --git a/gcc/gcc.c b/gcc/gcc.c
-+index d4f8dc7..56beb2f 100644
++index 477752f..51062aa 100644
 +--- a/gcc/gcc.c
 ++++ b/gcc/gcc.c
-+@@ -3995,6 +3995,15 @@ set_collect_gcc_options (void)
++@@ -4098,6 +4098,15 @@ set_collect_gcc_options (void)
 + 		sizeof ("COLLECT_GCC_OPTIONS=") - 1);
 + 
 +   first_time = TRUE;
@@ -5467,16 +5252,16 @@ index 0000000..4ada88b
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch b/meta/recipes-devtools/gcc/gcc-4.7/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch b/meta/recipes-devtools/gcc/gcc-4.8/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
 new file mode 100644
-index 0000000..565943a
+index 0000000..a6d6fcd
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0023-Use-the-defaults.h-in-B-instead-of-S-and-t-oe-in-B.patch
 @@ -0,0 +1,88 @@
-+From 3204ae9eadfa3af6d27367c673de05a2d8cbc648 Mon Sep 17 00:00:00 2001
++From 46d52439052f0876a92dcf8a0ab9c60d75c8030b Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:17:39 +0400
-+Subject: [PATCH 23/44] Use the defaults.h in ${B} instead of ${S}, and t-oe
++Date: Fri, 29 Mar 2013 09:17:25 +0400
++Subject: [PATCH 23/35] Use the defaults.h in ${B} instead of ${S}, and t-oe
 + in ${B}
 +
 +Use the defaults.h in ${B} instead of ${S}, and t-oe in ${B}, so that
@@ -5494,11 +5279,11 @@ index 0000000..565943a
 + 4 files changed, 7 insertions(+), 7 deletions(-)
 +
 +diff --git a/gcc/Makefile.in b/gcc/Makefile.in
-+index d048162..2d81f96 100644
++index 90a2bba..2320497 100644
 +--- a/gcc/Makefile.in
 ++++ b/gcc/Makefile.in
-+@@ -481,7 +481,7 @@ LIMITS_H_TEST = [ -f $(SYSTEM_HEADER_DIR)/limits.h ]
-+ TARGET_SYSTEM_ROOT = @TARGET_SYSTEM_ROOT@
++@@ -469,7 +469,7 @@ TARGET_SYSTEM_ROOT = @TARGET_SYSTEM_ROOT@
++ TARGET_SYSTEM_ROOT_DEFINE = @TARGET_SYSTEM_ROOT_DEFINE@
 + 
 + xmake_file=@xmake_file@
 +-tmake_file=@tmake_file@
@@ -5507,10 +5292,10 @@ index 0000000..565943a
 + TM_MULTILIB_CONFIG=@TM_MULTILIB_CONFIG@
 + TM_MULTILIB_EXCEPTIONS_CONFIG=@TM_MULTILIB_EXCEPTIONS_CONFIG@
 +diff --git a/gcc/configure b/gcc/configure
-+index b38e691..3d43e48 100755
++index bdab45a..d587993 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -11731,8 +11731,8 @@ for f in $tm_file; do
++@@ -11539,8 +11539,8 @@ for f in $tm_file; do
 +        tm_include_list="${tm_include_list} $f"
 +        ;;
 +     defaults.h )
@@ -5522,10 +5307,10 @@ index 0000000..565943a
 +     * )
 +        tm_file_list="${tm_file_list} \$(srcdir)/config/$f"
 +diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index ed6f5c3..b437a7e 100644
++index 5f5c909..5e5e84f 100644
 +--- a/gcc/configure.ac
 ++++ b/gcc/configure.ac
-+@@ -1715,8 +1715,8 @@ for f in $tm_file; do
++@@ -1720,8 +1720,8 @@ for f in $tm_file; do
 +        tm_include_list="${tm_include_list} $f"
 +        ;;
 +     defaults.h )
@@ -5537,10 +5322,10 @@ index 0000000..565943a
 +     * )
 +        tm_file_list="${tm_file_list} \$(srcdir)/config/$f"
 +diff --git a/gcc/mkconfig.sh b/gcc/mkconfig.sh
-+index e93d45f..96d952e 100644
++index 29fdfc7..e048dce 100644
 +--- a/gcc/mkconfig.sh
 ++++ b/gcc/mkconfig.sh
-+@@ -78,7 +78,7 @@ if [ -n "$HEADERS" ]; then
++@@ -77,7 +77,7 @@ if [ -n "$HEADERS" ]; then
 +     if [ $# -ge 1 ]; then
 + 	echo '#ifdef IN_GCC' >> ${output}T
 + 	for file in "$@"; do
@@ -5549,7 +5334,7 @@ index 0000000..565943a
 + 		postpone_defaults_h="yes"
 + 	    else
 + 		echo "# include \"$file\"" >> ${output}T
-+@@ -104,7 +104,7 @@ esac
++@@ -103,7 +103,7 @@ esac
 + 
 + # If we postponed including defaults.h, add the #include now.
 + if test x"$postpone_defaults_h" = x"yes"; then
@@ -5561,1764 +5346,16 @@ index 0000000..565943a
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0024-config-rs6000-rs6000-opts.h-enum-processor_type-Add-.patch b/meta/recipes-devtools/gcc/gcc-4.7/0024-config-rs6000-rs6000-opts.h-enum-processor_type-Add-.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0024-PR-target-32219.patch b/meta/recipes-devtools/gcc/gcc-4.8/0024-PR-target-32219.patch
 new file mode 100644
-index 0000000..0bf5882
+index 0000000..5f2274f
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0024-config-rs6000-rs6000-opts.h-enum-processor_type-Add-.patch
-@@ -0,0 +1,753 @@
-+From c2474d0656cca47281b106b3087aba63dfb7dd2d Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:24:09 +0400
-+Subject: [PATCH 24/44] config/rs6000/rs6000-opts.h (enum processor_type): Add
-+ PROCESSOR_PPC8548.
-+
-+* config/rs6000/rs6000-cpus.def: Reference it for cpu="8548".
-+* config/rs6000/rs6000.md (cpu attribute definition): Add ppc8548.         * config/rs6000/8540.md:
-+indicate that the units/patterns apply to ppc8548 as well.
-+* config/rs6000/rs6000.c (rs6000_option_override_internal): Rename
-+default_cpu into implicit_cpu, conveying what --with-cpu was passed at
-+configure time. Treat implicit_cpu as have_CPU. Pick defaults for SPE
-+related flags,  check that what is queried is supported by the selected
-+configuration. Rework the single/double_float and MASK_STRING resets to
-+hit for all the E500 cores (854x + E500MC variants). Select the ppc8540
-+costs for PROCESSOR_PPC8548 as well.
-+(rs6000_issue_rate): case CPU_PPC8548 together with CPU_PPC8540.
-+(rs6000_use_sched_lookahead): Likewise, rewriting function as a case
-+statement instead of a sequence of ifs.
-+
-+* config/rs6000/rs6000.h (TARGET_E500): Remove.
-+  (TARGET_NO_LWSYNC): Adjust accordingly.
-+* config/rs6000/e500.h (TARGET_E500): Remove.
-+  (CHECK_E500_OPTIONS): Adjust accordingly.
-+* config/rs6000/eabispe.h (SUBSUBTARGET_OVERRIDE_OPTIONS): Remove.
-+  (TARGET_DEFAULT): Reformat definition to match the one in linuxspe.h.
-+* config/rs6000/linuxspe.h: Likewise.
-+* config/rs6000/vxworks.h: Remove bogus TARGET_E500 overrides and
-+  superfluous comments.
-+* config/rs6000/e500-double.h: Remove.
-+
-+* config.gcc (pick a default with_cpu): For powerpc*-*-*spe*,
-+default to with_cpu=8548 if --enable-e500-double, and to 8540
-+otherwise.
-+(set misc flags section): For powerpc*|rs6000*, remove inclusion
-+of e500-double.h for --enable-e500-double.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@187581 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: hainque <hainque@138bc75d-0d04-0410-961f-82ee72b054a4>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ gcc/config.gcc                    |   12 +--
-+ gcc/config/rs6000/8540.md         |   50 ++++++------
-+ gcc/config/rs6000/e500-double.h   |   24 ------
-+ gcc/config/rs6000/e500.h          |   10 +--
-+ gcc/config/rs6000/eabispe.h       |   17 +---
-+ gcc/config/rs6000/linuxspe.h      |   16 +---
-+ gcc/config/rs6000/rs6000-cpus.def |    3 +-
-+ gcc/config/rs6000/rs6000-opts.h   |    1 +
-+ gcc/config/rs6000/rs6000.c        |  155 +++++++++++++++++++++++--------------
-+ gcc/config/rs6000/rs6000.h        |    7 +-
-+ gcc/config/rs6000/rs6000.md       |    2 +-
-+ gcc/config/rs6000/rtems.h         |   14 ----
-+ gcc/config/rs6000/vxworks.h       |   11 ---
-+ 13 files changed, 141 insertions(+), 181 deletions(-)
-+ delete mode 100644 gcc/config/rs6000/e500-double.h
-+
-+diff --git a/gcc/config.gcc b/gcc/config.gcc
-+index 8b038a5..9c46c20 100644
-+--- a/gcc/config.gcc
-++++ b/gcc/config.gcc
-+@@ -2900,6 +2900,13 @@ if test x$with_cpu = x ; then
-+     mips*-*-vxworks)
-+       with_arch=mips2
-+       ;;
-++    powerpc*-*-*spe*)
-++      if test x$enable_e500_double = xyes; then
-++         with_cpu=8548
-++      else
-++         with_cpu=8540
-++      fi       
-++      ;;
-+     sparc-leon*-*)
-+       with_cpu=v8;
-+       ;;
-+@@ -3588,11 +3595,6 @@ case ${target} in
-+ 		c_target_objs="${c_target_objs} rs6000-c.o"
-+ 		cxx_target_objs="${cxx_target_objs} rs6000-c.o"
-+ 		tmake_file="rs6000/t-rs6000 ${tmake_file}"
-+-
-+-                if test x$enable_e500_double = xyes
-+-                then
-+-                        tm_file="$tm_file rs6000/e500-double.h"
-+-                fi
-+ 		;;
-+ 
-+ 	sh[123456ble]*-*-* | sh-*-*)
-+diff --git a/gcc/config/rs6000/8540.md b/gcc/config/rs6000/8540.md
-+index 4096dff..c767c0d 100644
-+--- a/gcc/config/rs6000/8540.md
-++++ b/gcc/config/rs6000/8540.md
-+@@ -87,18 +87,18 @@
-+   (and (eq_attr "type" "integer,insert_word,insert_dword,cmp,compare,\
-+                         delayed_compare,var_delayed_compare,fast_compare,\
-+                         shift,trap,var_shift_rotate,cntlz,exts,isel")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ (define_insn_reservation "ppc8540_two" 1
-+   (and (eq_attr "type" "two")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
-+    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ (define_insn_reservation "ppc8540_three" 1
-+   (and (eq_attr "type" "three")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
-+    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
-+    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+@@ -106,13 +106,13 @@
-+ ;; Branch.  Actually this latency time is not used by the scheduler.
-+ (define_insn_reservation "ppc8540_branch" 1
-+   (and (eq_attr "type" "jmpreg,branch,isync")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_bu,ppc8540_retire")
-+ 
-+ ;; Multiply
-+ (define_insn_reservation "ppc8540_multiply" 4
-+   (and (eq_attr "type" "imul,imul2,imul3,imul_compare")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
-+    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-+ 
-+@@ -122,57 +122,57 @@
-+ ;; time.
-+ (define_insn_reservation "ppc8540_divide" 14
-+   (and (eq_attr "type" "idiv")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
-+    ppc8540_mu_div*13")
-+ 
-+ ;; CR logical
-+ (define_insn_reservation "ppc8540_cr_logical" 1
-+   (and (eq_attr "type" "cr_logical,delayed_cr")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_bu,ppc8540_retire")
-+ 
-+ ;; Mfcr
-+ (define_insn_reservation "ppc8540_mfcr" 1
-+   (and (eq_attr "type" "mfcr")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-+ 
-+ ;; Mtcrf
-+ (define_insn_reservation "ppc8540_mtcrf" 1
-+   (and (eq_attr "type" "mtcr")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-+ 
-+ ;; Mtjmpr
-+ (define_insn_reservation "ppc8540_mtjmpr" 1
-+   (and (eq_attr "type" "mtjmpr,mfjmpr")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ ;; Loads
-+ (define_insn_reservation "ppc8540_load" 3
-+   (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
-+ 			load_l,sync")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-+ 
-+ ;; Stores.
-+ (define_insn_reservation "ppc8540_store" 3
-+   (and (eq_attr "type" "store,store_ux,store_u,store_c")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-+ 
-+ ;; Simple FP
-+ (define_insn_reservation "ppc8540_simple_float" 1
-+   (and (eq_attr "type" "fpsimple")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ ;; FP
-+ (define_insn_reservation "ppc8540_float" 4
-+   (and (eq_attr "type" "fp")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
-+    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-+ 
-+@@ -180,44 +180,44 @@
-+ ;; because of the result automata will be huge.
-+ (define_insn_reservation "ppc8540_float_vector_divide" 29
-+   (and (eq_attr "type" "vecfdiv")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
-+    ppc8540_mu_div*28")
-+ 
-+ ;; Brinc
-+ (define_insn_reservation "ppc8540_brinc" 1
-+   (and (eq_attr "type" "brinc")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ ;; Simple vector
-+ (define_insn_reservation "ppc8540_simple_vector" 1
-+   (and (eq_attr "type" "vecsimple")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-+ 
-+ ;; Simple vector compare
-+ (define_insn_reservation "ppc8540_simple_vector_compare" 1
-+   (and (eq_attr "type" "veccmpsimple")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-+ 
-+ ;; Vector compare
-+ (define_insn_reservation "ppc8540_vector_compare" 1
-+   (and (eq_attr "type" "veccmp")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-+ 
-+ ;; evsplatfi evsplati
-+ (define_insn_reservation "ppc8540_vector_perm" 1
-+   (and (eq_attr "type" "vecperm")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-+ 
-+ ;; Vector float
-+ (define_insn_reservation "ppc8540_float_vector" 4
-+   (and (eq_attr "type" "vecfloat")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
-+    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-+ 
-+@@ -226,25 +226,25 @@
-+ ;; of miu_stage3 here because we use the average latency time.
-+ (define_insn_reservation "ppc8540_vector_divide" 14
-+   (and (eq_attr "type" "vecdiv")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
-+    ppc8540_mu_div*13")
-+ 
-+ ;; Complex vector.
-+ (define_insn_reservation "ppc8540_complex_vector" 4
-+   (and (eq_attr "type" "veccomplex")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
-+    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-+ 
-+ ;; Vector load
-+ (define_insn_reservation "ppc8540_vector_load" 3
-+   (and (eq_attr "type" "vecload")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-+ 
-+ ;; Vector store
-+ (define_insn_reservation "ppc8540_vector_store" 3
-+   (and (eq_attr "type" "vecstore")
-+-       (eq_attr "cpu" "ppc8540"))
-++       (eq_attr "cpu" "ppc8540,ppc8548"))
-+   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-+diff --git a/gcc/config/rs6000/e500-double.h b/gcc/config/rs6000/e500-double.h
-+deleted file mode 100644
-+index 2e73dd9..0000000
-+--- a/gcc/config/rs6000/e500-double.h
-++++ /dev/null
-+@@ -1,24 +0,0 @@
-+-/* Target definitions for E500 with double precision FP.
-+-   Copyright (C) 2004, 2006, 2007, 2011 Free Software Foundation, Inc.
-+-   Contributed by Aldy Hernandez (aldyh@redhat.com).
-+-
-+-   This file is part of GCC.
-+-
-+-   GCC is free software; you can redistribute it and/or modify it
-+-   under the terms of the GNU General Public License as published
-+-   by the Free Software Foundation; either version 3, or (at your
-+-   option) any later version.
-+-
-+-   GCC is distributed in the hope that it will be useful, but WITHOUT
-+-   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-+-   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-+-   License for more details.
-+-
-+-   You should have received a copy of the GNU General Public License
-+-   along with GCC; see the file COPYING3.  If not see
-+-   <http://www.gnu.org/licenses/>.  */
-+-
-+-#undef  SUB3TARGET_OVERRIDE_OPTIONS
-+-#define SUB3TARGET_OVERRIDE_OPTIONS \
-+-  if (!global_options_set.x_rs6000_float_gprs) \
-+-    rs6000_float_gprs = 2;
-+diff --git a/gcc/config/rs6000/e500.h b/gcc/config/rs6000/e500.h
-+index 807df09..53a849a 100644
-+--- a/gcc/config/rs6000/e500.h
-++++ b/gcc/config/rs6000/e500.h
-+@@ -19,7 +19,6 @@
-+ 
-+ #undef TARGET_SPE_ABI
-+ #undef TARGET_SPE
-+-#undef TARGET_E500
-+ #undef TARGET_FPRS
-+ #undef TARGET_E500_SINGLE
-+ #undef TARGET_E500_DOUBLE
-+@@ -27,21 +26,20 @@
-+ 
-+ #define TARGET_SPE_ABI rs6000_spe_abi
-+ #define TARGET_SPE rs6000_spe
-+-#define TARGET_E500 (rs6000_cpu == PROCESSOR_PPC8540)
-+ #define TARGET_FPRS (rs6000_float_gprs == 0)
-+ #define TARGET_E500_SINGLE (TARGET_HARD_FLOAT && rs6000_float_gprs == 1)
-+ #define TARGET_E500_DOUBLE (TARGET_HARD_FLOAT && rs6000_float_gprs == 2)
-+ #define CHECK_E500_OPTIONS						\
-+   do {									\
-+-    if (TARGET_E500 || TARGET_SPE || TARGET_SPE_ABI			\
-++    if (TARGET_SPE || TARGET_SPE_ABI					\
-+ 	|| TARGET_E500_SINGLE || TARGET_E500_DOUBLE)			\
-+       {									\
-+ 	if (TARGET_ALTIVEC)						\
-+-	  error ("AltiVec and E500 instructions cannot coexist");	\
-++	  error ("AltiVec and SPE instructions cannot coexist");	\
-+ 	if (TARGET_VSX)							\
-+-	  error ("VSX and E500 instructions cannot coexist");		\
-++	  error ("VSX and SPE instructions cannot coexist");		\
-+ 	if (TARGET_64BIT)						\
-+-	  error ("64-bit E500 not supported");				\
-++	  error ("64-bit SPE not supported");				\
-+ 	if (TARGET_HARD_FLOAT && TARGET_FPRS)				\
-+ 	  error ("E500 and FPRs not supported");			\
-+       }									\
-+diff --git a/gcc/config/rs6000/eabispe.h b/gcc/config/rs6000/eabispe.h
-+index 19f2472..e7ffbe3 100644
-+--- a/gcc/config/rs6000/eabispe.h
-++++ b/gcc/config/rs6000/eabispe.h
-+@@ -21,21 +21,8 @@
-+    <http://www.gnu.org/licenses/>.  */
-+ 
-+ #undef  TARGET_DEFAULT
-+-#define TARGET_DEFAULT (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_EABI	\
-+-  | MASK_STRICT_ALIGN)
-+-
-+-#undef  SUBSUBTARGET_OVERRIDE_OPTIONS
-+-#define SUBSUBTARGET_OVERRIDE_OPTIONS \
-+-  if (!global_options_set.x_rs6000_cpu_index) \
-+-    rs6000_cpu = PROCESSOR_PPC8540; \
-+-  if (!global_options_set.x_rs6000_spe_abi) \
-+-    rs6000_spe_abi = 1; \
-+-  if (!global_options_set.x_rs6000_float_gprs) \
-+-    rs6000_float_gprs = 1; \
-+-  if (!global_options_set.x_rs6000_spe) \
-+-    rs6000_spe = 1; \
-+-  if (target_flags & MASK_64BIT) \
-+-    error ("-m64 not supported in this configuration")
-++#define TARGET_DEFAULT \
-++  (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN | MASK_EABI)
-+ 
-+ #undef  ASM_DEFAULT_SPEC
-+ #define	ASM_DEFAULT_SPEC "-mppc -mspe -me500"
-+diff --git a/gcc/config/rs6000/linuxspe.h b/gcc/config/rs6000/linuxspe.h
-+index 8b95d25..74f7b06 100644
-+--- a/gcc/config/rs6000/linuxspe.h
-++++ b/gcc/config/rs6000/linuxspe.h
-+@@ -22,20 +22,8 @@
-+ 
-+ /* Override rs6000.h and sysv4.h definition.  */
-+ #undef	TARGET_DEFAULT
-+-#define	TARGET_DEFAULT (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN)
-+-
-+-#undef  SUBSUBTARGET_OVERRIDE_OPTIONS
-+-#define SUBSUBTARGET_OVERRIDE_OPTIONS \
-+-  if (!global_options_set.x_rs6000_cpu_index) \
-+-    rs6000_cpu = PROCESSOR_PPC8540; \
-+-  if (!global_options_set.x_rs6000_spe_abi) \
-+-    rs6000_spe_abi = 1; \
-+-  if (!global_options_set.x_rs6000_float_gprs) \
-+-    rs6000_float_gprs = 1; \
-+-  if (!global_options_set.x_rs6000_spe) \
-+-    rs6000_spe = 1; \
-+-  if (target_flags & MASK_64BIT) \
-+-    error ("-m64 not supported in this configuration")
-++#define TARGET_DEFAULT \
-++  (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN)
-+ 
-+ #undef  ASM_DEFAULT_SPEC
-+ #define	ASM_DEFAULT_SPEC "-mppc -mspe -me500"
-+diff --git a/gcc/config/rs6000/rs6000-cpus.def b/gcc/config/rs6000/rs6000-cpus.def
-+index 5da8917..6974b15 100644
-+--- a/gcc/config/rs6000/rs6000-cpus.def
-++++ b/gcc/config/rs6000/rs6000-cpus.def
-+@@ -76,8 +76,7 @@ RS6000_CPU ("821", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT)
-+ RS6000_CPU ("823", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT)
-+ RS6000_CPU ("8540", PROCESSOR_PPC8540, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
-+ 	    | MASK_ISEL)
-+-/* 8548 has a dummy entry for now.  */
-+-RS6000_CPU ("8548", PROCESSOR_PPC8540, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
-++RS6000_CPU ("8548", PROCESSOR_PPC8548, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
-+ 	    | MASK_ISEL)
-+ RS6000_CPU ("a2", PROCESSOR_PPCA2,
-+ 	    POWERPC_BASE_MASK | MASK_PPC_GFXOPT | MASK_POWERPC64 | MASK_POPCNTB
-+diff --git a/gcc/config/rs6000/rs6000-opts.h b/gcc/config/rs6000/rs6000-opts.h
-+index ea7e7c7..41c16f2 100644
-+--- a/gcc/config/rs6000/rs6000-opts.h
-++++ b/gcc/config/rs6000/rs6000-opts.h
-+@@ -49,6 +49,7 @@ enum processor_type
-+    PROCESSOR_PPC7400,
-+    PROCESSOR_PPC7450,
-+    PROCESSOR_PPC8540,
-++   PROCESSOR_PPC8548,
-+    PROCESSOR_PPCE300C2,
-+    PROCESSOR_PPCE300C3,
-+    PROCESSOR_PPCE500MC,
-+diff --git a/gcc/config/rs6000/rs6000.c b/gcc/config/rs6000/rs6000.c
-+index 50f7e84..eb3dbd4 100644
-+--- a/gcc/config/rs6000/rs6000.c
-++++ b/gcc/config/rs6000/rs6000.c
-+@@ -2596,7 +2596,10 @@ rs6000_option_override_internal (bool global_init_p)
-+ {
-+   bool ret = true;
-+   bool have_cpu = false;
-+-  const char *default_cpu = OPTION_TARGET_CPU_DEFAULT;
-++
-++  /* The default cpu requested at configure time, if any.  */
-++  const char *implicit_cpu = OPTION_TARGET_CPU_DEFAULT;
-++
-+   int set_masks;
-+   int cpu_index;
-+   int tune_index;
-+@@ -2615,11 +2618,6 @@ rs6000_option_override_internal (bool global_init_p)
-+     warning (0, "-malign-power is not supported for 64-bit Darwin;"
-+ 	     " it is incompatible with the installed C and C++ libraries");
-+ 
-+-  if (global_options_set.x_rs6000_spe_abi
-+-      && rs6000_spe_abi
-+-      && !TARGET_SPE_ABI)
-+-    error ("not configured for SPE ABI");
-+-
-+   /* Numerous experiment shows that IRA based loop pressure
-+      calculation works better for RTL loop invariant motion on targets
-+      with enough (>= 32) registers.  It is an expensive optimization.
-+@@ -2655,7 +2653,8 @@ rs6000_option_override_internal (bool global_init_p)
-+   /* Process the -mcpu=<xxx> and -mtune=<xxx> argument.  If the user changed
-+      the cpu in a target attribute or pragma, but did not specify a tuning
-+      option, use the cpu for the tuning option rather than the option specified
-+-     with -mtune on the command line.  */
-++     with -mtune on the command line.  Process a '--with-cpu' configuration
-++     request as an implicit --cpu.  */
-+   if (rs6000_cpu_index >= 0)
-+     {
-+       cpu_index = rs6000_cpu_index;
-+@@ -2668,10 +2667,12 @@ rs6000_option_override_internal (bool global_init_p)
-+     }
-+   else
-+     {
-+-      if (!default_cpu)
-+-	default_cpu = (TARGET_POWERPC64 ? "powerpc64" : "powerpc");
-++      const char *default_cpu =
-++        (implicit_cpu ? implicit_cpu
-++         : (TARGET_POWERPC64 ? "powerpc64" : "powerpc"));
-+ 
-+       rs6000_cpu_index = cpu_index = rs6000_cpu_name_lookup (default_cpu);
-++      have_cpu = implicit_cpu != 0;
-+     }
-+ 
-+   gcc_assert (cpu_index >= 0);
-+@@ -2702,6 +2703,42 @@ rs6000_option_override_internal (bool global_init_p)
-+   gcc_assert (tune_index >= 0);
-+   rs6000_cpu = processor_target_table[tune_index].processor;
-+ 
-++  /* Pick defaults for SPE related control flags.  Do this early to make sure
-++     that the TARGET_ macros are representative ASAP.  */
-++  {
-++    int spe_capable_cpu =
-++      (rs6000_cpu == PROCESSOR_PPC8540
-++       || rs6000_cpu == PROCESSOR_PPC8548);
-++
-++    if (!global_options_set.x_rs6000_spe_abi)
-++      rs6000_spe_abi = spe_capable_cpu;
-++
-++    if (!global_options_set.x_rs6000_spe)
-++      rs6000_spe = spe_capable_cpu;
-++
-++    if (!global_options_set.x_rs6000_float_gprs)
-++      rs6000_float_gprs =
-++        (rs6000_cpu == PROCESSOR_PPC8540 ? 1
-++         : rs6000_cpu == PROCESSOR_PPC8548 ? 2
-++         : 0);
-++  }
-++
-++  if (global_options_set.x_rs6000_spe_abi
-++      && rs6000_spe_abi
-++      && !TARGET_SPE_ABI)
-++    error ("not configured for SPE ABI");
-++
-++  if (global_options_set.x_rs6000_spe
-++      && rs6000_spe
-++      && !TARGET_SPE)
-++    error ("not configured for SPE instruction set");
-++
-++  if (main_target_opt != NULL
-++      && ((main_target_opt->x_rs6000_spe_abi != rs6000_spe_abi)
-++          || (main_target_opt->x_rs6000_spe != rs6000_spe)
-++          || (main_target_opt->x_rs6000_float_gprs != rs6000_float_gprs)))
-++    error ("target attribute or pragma changes SPE ABI");
-++
-+   if (rs6000_cpu == PROCESSOR_PPCE300C2 || rs6000_cpu == PROCESSOR_PPCE300C3
-+       || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64)
-+     {
-+@@ -2937,35 +2974,44 @@ rs6000_option_override_internal (bool global_init_p)
-+   SUB3TARGET_OVERRIDE_OPTIONS;
-+ #endif
-+ 
-+-  if (TARGET_E500 || rs6000_cpu == PROCESSOR_PPCE500MC
-+-      || rs6000_cpu == PROCESSOR_PPCE500MC64)
-++  /* For the E500 family of cores, reset the single/double FP flags to let us
-++     check that they remain constant across attributes or pragmas.  Also,
-++     clear a possible request for string instructions, not supported and which
-++     we might have silently queried above for -Os. 
-++
-++     For other families, clear ISEL in case it was set implicitly.
-++  */
-++
-++  switch (rs6000_cpu)
-+     {
-+-      /* The e500 and e500mc do not have string instructions, and we set
-+-	 MASK_STRING above when optimizing for size.  */
-+-      if ((target_flags & MASK_STRING) != 0)
-+-	target_flags = target_flags & ~MASK_STRING;
-++    case PROCESSOR_PPC8540:
-++    case PROCESSOR_PPC8548:
-++    case PROCESSOR_PPCE500MC:
-++    case PROCESSOR_PPCE500MC64:
-++
-++      rs6000_single_float = TARGET_E500_SINGLE || TARGET_E500_DOUBLE;
-++      rs6000_double_float = TARGET_E500_DOUBLE;
-++
-++      target_flags &= ~MASK_STRING;
-++
-++      break;
-++
-++    default:
-++
-++      if (have_cpu && !(target_flags_explicit & MASK_ISEL))
-++	target_flags &= ~MASK_ISEL;
-++
-++      break;
-+     }
-+-  else if (global_options_set.x_rs6000_cpu_index)
-++
-++  if (main_target_opt)
-+     {
-+-      /* For the powerpc-eabispe configuration, we set all these by
-+-	 default, so let's unset them if we manually set another
-+-	 CPU that is not the E500.  */
-+-      if (main_target_opt != NULL
-+-	  && ((main_target_opt->x_rs6000_spe_abi != rs6000_spe_abi)
-+-	      || (main_target_opt->x_rs6000_spe != rs6000_spe)
-+-	      || (main_target_opt->x_rs6000_float_gprs != rs6000_float_gprs)))
-+-	error ("target attribute or pragma changes SPE ABI");
-+-      else
-+-	{
-+-	  if (!global_options_set.x_rs6000_spe_abi)
-+-	    rs6000_spe_abi = 0;
-+-	  if (!global_options_set.x_rs6000_spe)
-+-	    rs6000_spe = 0;
-+-	  if (!global_options_set.x_rs6000_float_gprs)
-+-	    rs6000_float_gprs = 0;
-+-	}
-+-      if (!(target_flags_explicit & MASK_ISEL))
-+-	target_flags &= ~MASK_ISEL;
-++      if (main_target_opt->x_rs6000_single_float != rs6000_single_float)
-++	error ("target attribute or pragma changes single precision floating "
-++	       "point");
-++      if (main_target_opt->x_rs6000_double_float != rs6000_double_float)
-++	error ("target attribute or pragma changes double precision floating "
-++	       "point");
-+     }
-+ 
-+   /* Detect invalid option combinations with E500.  */
-+@@ -3192,6 +3238,7 @@ rs6000_option_override_internal (bool global_init_p)
-+ 	break;
-+ 
-+       case PROCESSOR_PPC8540:
-++      case PROCESSOR_PPC8548:
-+ 	rs6000_cost = &ppc8540_cost;
-+ 	break;
-+ 
-+@@ -3264,26 +3311,6 @@ rs6000_option_override_internal (bool global_init_p)
-+       && rs6000_single_float == 0 && rs6000_double_float == 0)
-+     rs6000_single_float = rs6000_double_float = 1;
-+ 
-+-  /* Reset single and double FP flags if target is E500. */
-+-  if (TARGET_E500) 
-+-  {
-+-    rs6000_single_float = rs6000_double_float = 0;
-+-    if (TARGET_E500_SINGLE)
-+-      rs6000_single_float = 1; 
-+-    if (TARGET_E500_DOUBLE)
-+-      rs6000_single_float = rs6000_double_float = 1;
-+-  }
-+-
-+-  if (main_target_opt)
-+-    {
-+-      if (main_target_opt->x_rs6000_single_float != rs6000_single_float)
-+-	error ("target attribute or pragma changes single precision floating "
-+-	       "point");
-+-      if (main_target_opt->x_rs6000_double_float != rs6000_double_float)
-+-	error ("target attribute or pragma changes double precision floating "
-+-	       "point");
-+-    }
-+-
-+   /* If not explicitly specified via option, decide whether to generate indexed
-+      load/store instructions.  */
-+   if (TARGET_AVOID_XFORM == -1)
-+@@ -22845,6 +22872,7 @@ rs6000_issue_rate (void)
-+   case CPU_PPC750:
-+   case CPU_PPC7400:
-+   case CPU_PPC8540:
-++  case CPU_PPC8548:
-+   case CPU_CELL:
-+   case CPU_PPCE300C2:
-+   case CPU_PPCE300C3:
-+@@ -22875,11 +22903,18 @@ rs6000_issue_rate (void)
-+ static int
-+ rs6000_use_sched_lookahead (void)
-+ {
-+-  if (rs6000_cpu_attr == CPU_PPC8540)
-+-    return 4;
-+-  if (rs6000_cpu_attr == CPU_CELL)
-+-    return (reload_completed ? 8 : 0);
-+-  return 0;
-++  switch (rs6000_cpu_attr)
-++    {
-++    case CPU_PPC8540:
-++    case CPU_PPC8548:
-++      return 4;
-++
-++    case CPU_CELL:
-++      return (reload_completed ? 8 : 0);
-++
-++    default:
-++      return 0;
-++    }
-+ }
-+ 
-+ /* We are choosing insn from the ready queue.  Return nonzero if INSN can be chosen.  */
-+diff --git a/gcc/config/rs6000/rs6000.h b/gcc/config/rs6000/rs6000.h
-+index 63cbdc8..af3a850 100644
-+--- a/gcc/config/rs6000/rs6000.h
-++++ b/gcc/config/rs6000/rs6000.h
-+@@ -457,7 +457,6 @@ extern int rs6000_vector_align[];
-+ 
-+ #define TARGET_SPE_ABI 0
-+ #define TARGET_SPE 0
-+-#define TARGET_E500 0
-+ #define TARGET_ISEL64 (TARGET_ISEL && TARGET_POWERPC64)
-+ #define TARGET_FPRS 1
-+ #define TARGET_E500_SINGLE 0
-+@@ -500,11 +499,11 @@ extern int rs6000_vector_align[];
-+ 				      || TARGET_ALTIVEC			 \
-+ 				      || TARGET_VSX)))
-+ 
-++/* E500 cores only support plain "sync", not lwsync.  */
-++#define TARGET_NO_LWSYNC (rs6000_cpu == PROCESSOR_PPC8540 \
-++			  || rs6000_cpu == PROCESSOR_PPC8548)
-+ 
-+ 
-+-/* E500 processors only support plain "sync", not lwsync.  */
-+-#define TARGET_NO_LWSYNC TARGET_E500
-+-
-+ /* Which machine supports the various reciprocal estimate instructions.  */
-+ #define TARGET_FRES	(TARGET_HARD_FLOAT && TARGET_PPC_GFXOPT \
-+ 			 && TARGET_FPRS && TARGET_SINGLE_FLOAT)
-+diff --git a/gcc/config/rs6000/rs6000.md b/gcc/config/rs6000/rs6000.md
-+index f0780c6..1d45325 100644
-+--- a/gcc/config/rs6000/rs6000.md
-++++ b/gcc/config/rs6000/rs6000.md
-+@@ -167,7 +167,7 @@
-+ ;; Processor type -- this attribute must exactly match the processor_type
-+ ;; enumeration in rs6000.h.
-+ 
-+-(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
-++(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
-+   (const (symbol_ref "rs6000_cpu_attr")))
-+ 
-+ 
-+diff --git a/gcc/config/rs6000/rtems.h b/gcc/config/rs6000/rtems.h
-+index 5641162..60398df 100644
-+--- a/gcc/config/rs6000/rtems.h
-++++ b/gcc/config/rs6000/rtems.h
-+@@ -55,17 +55,3 @@
-+ #undef  SUBSUBTARGET_EXTRA_SPECS
-+ #define SUBSUBTARGET_EXTRA_SPECS \
-+   { "cpp_os_rtems",		CPP_OS_RTEMS_SPEC }
-+-
-+-#undef SUBSUBTARGET_OVERRIDE_OPTIONS
-+-#define SUBSUBTARGET_OVERRIDE_OPTIONS                                     \
-+-  do {                                                                    \
-+-   if (TARGET_E500)                                                       \
-+-      {                                                                   \
-+-        if (TARGET_HARD_FLOAT && !global_options_set.x_rs6000_float_gprs) \
-+-          rs6000_float_gprs = 1;                                          \
-+-        if (rs6000_float_gprs != 0 && !global_options_set.x_rs6000_spe)   \
-+-          rs6000_spe = 1;                                                 \
-+-        if (rs6000_spe && !global_options_set.x_rs6000_spe_abi)           \
-+-          rs6000_spe_abi = 1;                                             \
-+-      }                                                                   \
-+-  } while(0)
-+diff --git a/gcc/config/rs6000/vxworks.h b/gcc/config/rs6000/vxworks.h
-+index bef041c..dc311d2 100644
-+--- a/gcc/config/rs6000/vxworks.h
-++++ b/gcc/config/rs6000/vxworks.h
-+@@ -122,19 +122,8 @@ VXWORKS_ADDITIONAL_CPP_SPEC
-+ 
-+ #undef  ABI_STACK_BOUNDARY
-+ 
-+-/* Make -mcpu=8540 imply SPE.  ISEL is automatically enabled, the
-+-   others must be done by hand.  Handle -mrtp.  Disable -fPIC
-+-   for -mrtp - the VxWorks PIC model is not compatible with it.  */
-+ #undef SUBSUBTARGET_OVERRIDE_OPTIONS
-+ #define SUBSUBTARGET_OVERRIDE_OPTIONS		\
-+-  do {						\
-+-    if (TARGET_E500)				\
-+-      {						\
-+-	rs6000_spe = 1;				\
-+-	rs6000_spe_abi = 1;			\
-+-	rs6000_float_gprs = 1;			\
-+-      }						\
-+-						\
-+   if (!global_options_set.x_g_switch_value)	\
-+     g_switch_value = SDATA_DEFAULT_SIZE;	\
-+   VXWORKS_OVERRIDE_OPTIONS;			\
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0025-Add-ppc-e5500-e6500-support.patch b/meta/recipes-devtools/gcc/gcc-4.7/0025-Add-ppc-e5500-e6500-support.patch
-new file mode 100644
-index 0000000..7f842e4
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0025-Add-ppc-e5500-e6500-support.patch
-@@ -0,0 +1,716 @@
-+From 5fbfd4729c77e474190b9371da9d1855d250b01f Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 07:27:41 +0400
-+Subject: [PATCH 25/44] Add ppc e5500 e6500 support.
-+
-+* config/rs6000/e5500.md: New file.
-+* config/rs6000/e6500.md: New file.
-+* config/rs6000/rs6000.c (processor_costs): Add new costs for
-+e5500 and e6500.
-+(rs6000_option_override_internal): Altivec and Spe options not
-+allowed with e5500. Spe options not allowed with e6500. Increase
-+move inline limit for e5500 and e6500. Disable string instructions
-+for e5500 and e6500. Enable branch targets alignment for e5500 and
-+e6500. Initialize rs6000_cost for e5500 and e6500.
-+(rs6000_adjust_cost): Add extra scheduling cycles between compare
-+and brnach for e5500 and e6500.
-+(rs6000_issue_rate): Set issue rate for e5500 and e6500.
-+* config/rs6000/rs6000-cpus.def: Add cpu definitions for e5500 and
-+e6500.
-+* config/rs6000/rs6000.h (ASM_CPU_SPEC): Add e5500 and e6500.
-+* config/rs6000/rs6000.md (define_attr "cpu"): Add ppce5500 and
-+ppce6500.
-+Include e5500.md and e6500.md.
-+* config/rs6000/rs6000-opt.h (processor_type): Add
-+PROCESSOR_PPCE5500 and PROCESSOR_PPCE6500.
-+* config.gcc (cpu_is_64bit): Add new cores e5500, e6500.
-+(powerpc*-*-*): Add new cores e5500, e6500.
-+* doc/invoke.texi: (item -mcpu): Add e5500 and e6500 to list of cpus.
-+
-+gcc/testsuite
-+2012-06-01  Edmar Wienskoski  <edmar@freescale.com>
-+
-+* gcc.dg/tree-ssa/vector-3.c: Adjust regular expression.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188244 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: Edmar Wienskoski  <edmar@freescale.com>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ gcc/config.gcc                           |    6 +-
-+ gcc/config/rs6000/e5500.md               |  176 ++++++++++++++++++++++++
-+ gcc/config/rs6000/e6500.md               |  213 ++++++++++++++++++++++++++++++
-+ gcc/config/rs6000/rs6000-cpus.def        |    4 +
-+ gcc/config/rs6000/rs6000-opts.h          |    2 +
-+ gcc/config/rs6000/rs6000.c               |   68 +++++++++-
-+ gcc/config/rs6000/rs6000.h               |    2 +
-+ gcc/config/rs6000/rs6000.md              |    4 +-
-+ gcc/doc/invoke.texi                      |   12 +-
-+ gcc/testsuite/gcc.dg/tree-ssa/vector-3.c |    2 +-
-+ 10 files changed, 476 insertions(+), 13 deletions(-)
-+ create mode 100644 gcc/config/rs6000/e5500.md
-+ create mode 100644 gcc/config/rs6000/e6500.md
-+
-+diff --git a/gcc/config.gcc b/gcc/config.gcc
-+index 9c46c20..3146054 100644
-+--- a/gcc/config.gcc
-++++ b/gcc/config.gcc
-+@@ -421,7 +421,7 @@ powerpc*-*-*)
-+ 	extra_headers="ppc-asm.h altivec.h spe.h ppu_intrinsics.h paired.h spu2vmx.h vec_types.h si2vmx.h"
-+ 	need_64bit_hwint=yes
-+ 	case x$with_cpu in
-+-	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64)
-++	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64|xe5500|Xe6500)
-+ 		cpu_is_64bit=yes
-+ 		;;
-+ 	esac
-+@@ -3385,8 +3385,8 @@ case "${target}" in
-+ 			| 401 | 403 | 405 | 405fp | 440 | 440fp | 464 | 464fp \
-+ 			| 476 | 476fp | 505 | 601 | 602 | 603 | 603e | ec603e \
-+ 			| 604 | 604e | 620 | 630 | 740 | 750 | 7400 | 7450 \
-+-			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | titan\
-+-			| 801 | 821 | 823 | 860 | 970 | G3 | G4 | G5 | cell)
-++			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | e5500 | e6500 \
-++			| titan | 801 | 821 | 823 | 860 | 970 | G3 | G4 | G5 | cell)
-+ 				# OK
-+ 				;;
-+ 			*)
-+diff --git a/gcc/config/rs6000/e5500.md b/gcc/config/rs6000/e5500.md
-+new file mode 100644
-+index 0000000..4c1c8b3
-+--- /dev/null
-++++ b/gcc/config/rs6000/e5500.md
-+@@ -0,0 +1,176 @@
-++;; Pipeline description for Freescale PowerPC e5500 core.
-++;;   Copyright (C) 2012 Free Software Foundation, Inc.
-++;;   Contributed by Edmar Wienskoski (edmar@freescale.com)
-++;;
-++;; This file is part of GCC.
-++;;
-++;; GCC is free software; you can redistribute it and/or modify it
-++;; under the terms of the GNU General Public License as published
-++;; by the Free Software Foundation; either version 3, or (at your
-++;; option) any later version.
-++;;
-++;; GCC is distributed in the hope that it will be useful, but WITHOUT
-++;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-++;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-++;; License for more details.
-++;;
-++;; You should have received a copy of the GNU General Public License
-++;; along with GCC; see the file COPYING3.  If not see
-++;; <http://www.gnu.org/licenses/>.
-++;;
-++;; e5500 64-bit SFX(2), CFX, LSU, FPU, BU
-++;; Max issue 3 insns/clock cycle (includes 1 branch)
-++
-++(define_automaton "e5500_most,e5500_long")
-++(define_cpu_unit "e5500_decode_0,e5500_decode_1" "e5500_most")
-++
-++;; SFX.
-++(define_cpu_unit "e5500_sfx_0,e5500_sfx_1" "e5500_most")
-++
-++;; CFX.
-++(define_cpu_unit "e5500_cfx_stage0,e5500_cfx_stage1" "e5500_most")
-++
-++;; Non-pipelined division.
-++(define_cpu_unit "e5500_cfx_div" "e5500_long")
-++
-++;; LSU.
-++(define_cpu_unit "e5500_lsu" "e5500_most")
-++
-++;; FPU.
-++(define_cpu_unit "e5500_fpu" "e5500_long")
-++
-++;; BU.
-++(define_cpu_unit "e5500_bu" "e5500_most")
-++
-++;; The following units are used to make the automata deterministic.
-++(define_cpu_unit "present_e5500_decode_0" "e5500_most")
-++(define_cpu_unit "present_e5500_sfx_0" "e5500_most")
-++(presence_set "present_e5500_decode_0" "e5500_decode_0")
-++(presence_set "present_e5500_sfx_0" "e5500_sfx_0")
-++
-++;; Some useful abbreviations.
-++(define_reservation "e5500_decode"
-++    "e5500_decode_0|e5500_decode_1+present_e5500_decode_0")
-++(define_reservation "e5500_sfx"
-++   "e5500_sfx_0|e5500_sfx_1+present_e5500_sfx_0")
-++
-++;; SFX.
-++(define_insn_reservation "e5500_sfx" 1
-++  (and (eq_attr "type" "integer,insert_word,insert_dword,delayed_compare,\
-++	shift,cntlz,exts")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx")
-++
-++(define_insn_reservation "e5500_sfx2" 2
-++  (and (eq_attr "type" "cmp,compare,fast_compare,trap")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx")
-++
-++(define_insn_reservation "e5500_delayed" 2
-++  (and (eq_attr "type" "var_shift_rotate,var_delayed_compare")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx*2")
-++
-++(define_insn_reservation "e5500_two" 2
-++  (and (eq_attr "type" "two")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_decode+e5500_sfx,e5500_sfx")
-++
-++(define_insn_reservation "e5500_three" 3
-++  (and (eq_attr "type" "three")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,(e5500_decode+e5500_sfx)*2,e5500_sfx")
-++
-++;; SFX - Mfcr.
-++(define_insn_reservation "e5500_mfcr" 4
-++  (and (eq_attr "type" "mfcr")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx_0*4")
-++
-++;; SFX - Mtcrf.
-++(define_insn_reservation "e5500_mtcrf" 1
-++  (and (eq_attr "type" "mtcr")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx_0")
-++
-++;; SFX - Mtjmpr.
-++(define_insn_reservation "e5500_mtjmpr" 1
-++  (and (eq_attr "type" "mtjmpr,mfjmpr")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_sfx")
-++
-++;; CFX - Multiply.
-++(define_insn_reservation "e5500_multiply" 4
-++  (and (eq_attr "type" "imul")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_cfx_stage0,e5500_cfx_stage1")
-++
-++(define_insn_reservation "e5500_multiply_i" 5
-++  (and (eq_attr "type" "imul2,imul3,imul_compare")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_cfx_stage0,\
-++   e5500_cfx_stage0+e5500_cfx_stage1,e5500_cfx_stage1")
-++
-++;; CFX - Divide.
-++(define_insn_reservation "e5500_divide" 16
-++  (and (eq_attr "type" "idiv")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
-++   e5500_cfx_div*15")
-++
-++(define_insn_reservation "e5500_divide_d" 26
-++  (and (eq_attr "type" "ldiv")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
-++   e5500_cfx_div*25")
-++
-++;; LSU - Loads.
-++(define_insn_reservation "e5500_load" 3
-++  (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
-++			load_l,sync")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_lsu")
-++
-++(define_insn_reservation "e5500_fpload" 4
-++  (and (eq_attr "type" "fpload,fpload_ux,fpload_u")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_lsu")
-++
-++;; LSU - Stores.
-++(define_insn_reservation "e5500_store" 3
-++  (and (eq_attr "type" "store,store_ux,store_u,store_c")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_lsu")
-++
-++(define_insn_reservation "e5500_fpstore" 3
-++  (and (eq_attr "type" "fpstore,fpstore_ux,fpstore_u")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_lsu")
-++
-++;; FP.
-++(define_insn_reservation "e5500_float" 7
-++  (and (eq_attr "type" "fpsimple,fp,fpcompare,dmul")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_fpu")
-++
-++(define_insn_reservation "e5500_sdiv" 20
-++  (and (eq_attr "type" "sdiv")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_fpu*20")
-++
-++(define_insn_reservation "e5500_ddiv" 35
-++  (and (eq_attr "type" "ddiv")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_fpu*35")
-++
-++;; BU.
-++(define_insn_reservation "e5500_branch" 1
-++  (and (eq_attr "type" "jmpreg,branch,isync")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_bu")
-++
-++;; BU - CR logical.
-++(define_insn_reservation "e5500_cr_logical" 1
-++  (and (eq_attr "type" "cr_logical,delayed_cr")
-++       (eq_attr "cpu" "ppce5500"))
-++  "e5500_decode,e5500_bu")
-+diff --git a/gcc/config/rs6000/e6500.md b/gcc/config/rs6000/e6500.md
-+new file mode 100644
-+index 0000000..c6476e5
-+--- /dev/null
-++++ b/gcc/config/rs6000/e6500.md
-+@@ -0,0 +1,213 @@
-++;; Pipeline description for Freescale PowerPC e6500 core.
-++;;   Copyright (C) 2012 Free Software Foundation, Inc.
-++;;   Contributed by Edmar Wienskoski (edmar@freescale.com)
-++;;
-++;; This file is part of GCC.
-++;;
-++;; GCC is free software; you can redistribute it and/or modify it
-++;; under the terms of the GNU General Public License as published
-++;; by the Free Software Foundation; either version 3, or (at your
-++;; option) any later version.
-++;;
-++;; GCC is distributed in the hope that it will be useful, but WITHOUT
-++;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-++;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-++;; License for more details.
-++;;
-++;; You should have received a copy of the GNU General Public License
-++;; along with GCC; see the file COPYING3.  If not see
-++;; <http://www.gnu.org/licenses/>.
-++;;
-++;; e6500 64-bit SFX(2), CFX, LSU, FPU, BU, VSFX, VCFX, VFPU, VPERM
-++;; Max issue 3 insns/clock cycle (includes 1 branch)
-++
-++(define_automaton "e6500_most,e6500_long,e6500_vec")
-++(define_cpu_unit "e6500_decode_0,e6500_decode_1" "e6500_most")
-++
-++;; SFX.
-++(define_cpu_unit "e6500_sfx_0,e6500_sfx_1" "e6500_most")
-++
-++;; CFX.
-++(define_cpu_unit "e6500_cfx_stage0,e6500_cfx_stage1" "e6500_most")
-++
-++;; Non-pipelined division.
-++(define_cpu_unit "e6500_cfx_div" "e6500_long")
-++
-++;; LSU.
-++(define_cpu_unit "e6500_lsu" "e6500_most")
-++
-++;; FPU.
-++(define_cpu_unit "e6500_fpu" "e6500_long")
-++
-++;; BU.
-++(define_cpu_unit "e6500_bu" "e6500_most")
-++
-++;; Altivec unit
-++(define_cpu_unit "e6500_vec,e6500_vecperm" "e6500_vec")
-++
-++;; The following units are used to make the automata deterministic.
-++(define_cpu_unit "present_e6500_decode_0" "e6500_most")
-++(define_cpu_unit "present_e6500_sfx_0" "e6500_most")
-++(presence_set "present_e6500_decode_0" "e6500_decode_0")
-++(presence_set "present_e6500_sfx_0" "e6500_sfx_0")
-++
-++;; Some useful abbreviations.
-++(define_reservation "e6500_decode"
-++    "e6500_decode_0|e6500_decode_1+present_e6500_decode_0")
-++(define_reservation "e6500_sfx"
-++   "e6500_sfx_0|e6500_sfx_1+present_e6500_sfx_0")
-++
-++;; SFX.
-++(define_insn_reservation "e6500_sfx" 1
-++  (and (eq_attr "type" "integer,insert_word,insert_dword,delayed_compare,\
-++	shift,cntlz,exts")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx")
-++
-++(define_insn_reservation "e6500_sfx2" 2
-++  (and (eq_attr "type" "cmp,compare,fast_compare,trap")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx")
-++
-++(define_insn_reservation "e6500_delayed" 2
-++  (and (eq_attr "type" "var_shift_rotate,var_delayed_compare")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx*2")
-++
-++(define_insn_reservation "e6500_two" 2
-++  (and (eq_attr "type" "two")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_decode+e6500_sfx,e6500_sfx")
-++
-++(define_insn_reservation "e6500_three" 3
-++  (and (eq_attr "type" "three")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,(e6500_decode+e6500_sfx)*2,e6500_sfx")
-++
-++;; SFX - Mfcr.
-++(define_insn_reservation "e6500_mfcr" 4
-++  (and (eq_attr "type" "mfcr")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx_0*4")
-++
-++;; SFX - Mtcrf.
-++(define_insn_reservation "e6500_mtcrf" 1
-++  (and (eq_attr "type" "mtcr")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx_0")
-++
-++;; SFX - Mtjmpr.
-++(define_insn_reservation "e6500_mtjmpr" 1
-++  (and (eq_attr "type" "mtjmpr,mfjmpr")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_sfx")
-++
-++;; CFX - Multiply.
-++(define_insn_reservation "e6500_multiply" 4
-++  (and (eq_attr "type" "imul")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_cfx_stage0,e6500_cfx_stage1")
-++
-++(define_insn_reservation "e6500_multiply_i" 5
-++  (and (eq_attr "type" "imul2,imul3,imul_compare")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_cfx_stage0,\
-++   e6500_cfx_stage0+e6500_cfx_stage1,e6500_cfx_stage1")
-++
-++;; CFX - Divide.
-++(define_insn_reservation "e6500_divide" 16
-++  (and (eq_attr "type" "idiv")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_cfx_stage0+e6500_cfx_div,\
-++   e6500_cfx_div*15")
-++
-++(define_insn_reservation "e6500_divide_d" 26
-++  (and (eq_attr "type" "ldiv")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_cfx_stage0+e6500_cfx_div,\
-++   e6500_cfx_div*25")
-++
-++;; LSU - Loads.
-++(define_insn_reservation "e6500_load" 3
-++  (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
-++			load_l,sync")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++(define_insn_reservation "e6500_fpload" 4
-++  (and (eq_attr "type" "fpload,fpload_ux,fpload_u")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++(define_insn_reservation "e6500_vecload" 4
-++  (and (eq_attr "type" "vecload")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++;; LSU - Stores.
-++(define_insn_reservation "e6500_store" 3
-++  (and (eq_attr "type" "store,store_ux,store_u,store_c")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++(define_insn_reservation "e6500_fpstore" 3
-++  (and (eq_attr "type" "fpstore,fpstore_ux,fpstore_u")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++(define_insn_reservation "e6500_vecstore" 4
-++  (and (eq_attr "type" "vecstore")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_lsu")
-++
-++;; FP.
-++(define_insn_reservation "e6500_float" 7
-++  (and (eq_attr "type" "fpsimple,fp,fpcompare,dmul")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_fpu")
-++
-++(define_insn_reservation "e6500_sdiv" 20
-++  (and (eq_attr "type" "sdiv")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_fpu*20")
-++
-++(define_insn_reservation "e6500_ddiv" 35
-++  (and (eq_attr "type" "ddiv")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_fpu*35")
-++
-++;; BU.
-++(define_insn_reservation "e6500_branch" 1
-++  (and (eq_attr "type" "jmpreg,branch,isync")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_bu")
-++
-++;; BU - CR logical.
-++(define_insn_reservation "e6500_cr_logical" 1
-++  (and (eq_attr "type" "cr_logical,delayed_cr")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_bu")
-++
-++;; VSFX.
-++(define_insn_reservation "e6500_vecsimple" 1
-++  (and (eq_attr "type" "vecsimple,veccmp")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_vec")
-++
-++;; VCFX.
-++(define_insn_reservation "e6500_veccomplex" 4
-++  (and (eq_attr "type" "veccomplex")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_vec")
-++
-++;; VFPU.
-++(define_insn_reservation "e6500_vecfloat" 6
-++  (and (eq_attr "type" "vecfloat")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_vec")
-++
-++;; VPERM.
-++(define_insn_reservation "e6500_vecperm" 2
-++  (and (eq_attr "type" "vecperm")
-++       (eq_attr "cpu" "ppce6500"))
-++  "e6500_decode,e6500_vecperm")
-+diff --git a/gcc/config/rs6000/rs6000-cpus.def b/gcc/config/rs6000/rs6000-cpus.def
-+index 6974b15..6f4e055 100644
-+--- a/gcc/config/rs6000/rs6000-cpus.def
-++++ b/gcc/config/rs6000/rs6000-cpus.def
-+@@ -87,6 +87,10 @@ RS6000_CPU ("e500mc", PROCESSOR_PPCE500MC, POWERPC_BASE_MASK | MASK_PPC_GFXOPT
-+ 	    | MASK_ISEL)
-+ RS6000_CPU ("e500mc64", PROCESSOR_PPCE500MC64,
-+ 	    POWERPC_BASE_MASK | MASK_POWERPC64 | MASK_PPC_GFXOPT | MASK_ISEL)
-++RS6000_CPU ("e5500", PROCESSOR_PPCE5500, POWERPC_BASE_MASK | MASK_POWERPC64
-++	    | MASK_PPC_GFXOPT | MASK_ISEL)
-++RS6000_CPU ("e6500", PROCESSOR_PPCE6500, POWERPC_7400_MASK | MASK_POWERPC64
-++	    | MASK_MFCRF | MASK_ISEL)
-+ RS6000_CPU ("860", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT)
-+ RS6000_CPU ("970", PROCESSOR_POWER4,
-+ 	    POWERPC_7400_MASK | MASK_PPC_GPOPT | MASK_MFCRF | MASK_POWERPC64)
-+diff --git a/gcc/config/rs6000/rs6000-opts.h b/gcc/config/rs6000/rs6000-opts.h
-+index 41c16f2..604fe17 100644
-+--- a/gcc/config/rs6000/rs6000-opts.h
-++++ b/gcc/config/rs6000/rs6000-opts.h
-+@@ -54,6 +54,8 @@ enum processor_type
-+    PROCESSOR_PPCE300C3,
-+    PROCESSOR_PPCE500MC,
-+    PROCESSOR_PPCE500MC64,
-++   PROCESSOR_PPCE5500,
-++   PROCESSOR_PPCE6500,
-+    PROCESSOR_POWER4,
-+    PROCESSOR_POWER5,
-+    PROCESSOR_POWER6,
-+diff --git a/gcc/config/rs6000/rs6000.c b/gcc/config/rs6000/rs6000.c
-+index eb3dbd4..3424089 100644
-+--- a/gcc/config/rs6000/rs6000.c
-++++ b/gcc/config/rs6000/rs6000.c
-+@@ -755,6 +755,44 @@ struct processor_costs ppce500mc64_cost = {
-+   1,			/* prefetch streams /*/
-+ };
-+ 
-++/* Instruction costs on PPCE5500 processors.  */
-++static const
-++struct processor_costs ppce5500_cost = {
-++  COSTS_N_INSNS (5),    /* mulsi */
-++  COSTS_N_INSNS (5),    /* mulsi_const */
-++  COSTS_N_INSNS (4),    /* mulsi_const9 */
-++  COSTS_N_INSNS (5),    /* muldi */
-++  COSTS_N_INSNS (14),   /* divsi */
-++  COSTS_N_INSNS (14),   /* divdi */
-++  COSTS_N_INSNS (7),    /* fp */
-++  COSTS_N_INSNS (10),   /* dmul */
-++  COSTS_N_INSNS (36),   /* sdiv */
-++  COSTS_N_INSNS (66),   /* ddiv */
-++  64,			/* cache line size */
-++  32,			/* l1 cache */
-++  128,			/* l2 cache */
-++  1,			/* prefetch streams /*/
-++};
-++
-++/* Instruction costs on PPCE6500 processors.  */
-++static const
-++struct processor_costs ppce6500_cost = {
-++  COSTS_N_INSNS (5),    /* mulsi */
-++  COSTS_N_INSNS (5),    /* mulsi_const */
-++  COSTS_N_INSNS (4),    /* mulsi_const9 */
-++  COSTS_N_INSNS (5),    /* muldi */
-++  COSTS_N_INSNS (14),   /* divsi */
-++  COSTS_N_INSNS (14),   /* divdi */
-++  COSTS_N_INSNS (7),    /* fp */
-++  COSTS_N_INSNS (10),   /* dmul */
-++  COSTS_N_INSNS (36),   /* sdiv */
-++  COSTS_N_INSNS (66),   /* ddiv */
-++  64,			/* cache line size */
-++  32,			/* l1 cache */
-++  128,			/* l2 cache */
-++  1,			/* prefetch streams /*/
-++};
-++
-+ /* Instruction costs on AppliedMicro Titan processors.  */
-+ static const
-+ struct processor_costs titan_cost = {
-+@@ -2740,13 +2778,19 @@ rs6000_option_override_internal (bool global_init_p)
-+     error ("target attribute or pragma changes SPE ABI");
-+ 
-+   if (rs6000_cpu == PROCESSOR_PPCE300C2 || rs6000_cpu == PROCESSOR_PPCE300C3
-+-      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64)
-++      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64
-++      || rs6000_cpu == PROCESSOR_PPCE5500)
-+     {
-+       if (TARGET_ALTIVEC)
-+ 	error ("AltiVec not supported in this target");
-+       if (TARGET_SPE)
-+ 	error ("SPE not supported in this target");
-+     }
-++  if (rs6000_cpu == PROCESSOR_PPCE6500)
-++    {
-++      if (TARGET_SPE)
-++	error ("SPE not supported in this target");
-++    }
-+ 
-+   /* Disable Cell microcode if we are optimizing for the Cell
-+      and not optimizing for size.  */
-+@@ -2841,7 +2885,9 @@ rs6000_option_override_internal (bool global_init_p)
-+      user's opinion, though.  */
-+   if (rs6000_block_move_inline_limit == 0
-+       && (rs6000_cpu == PROCESSOR_PPCE500MC
-+-	  || rs6000_cpu == PROCESSOR_PPCE500MC64))
-++	  || rs6000_cpu == PROCESSOR_PPCE500MC64
-++	  || rs6000_cpu == PROCESSOR_PPCE5500
-++	  || rs6000_cpu == PROCESSOR_PPCE6500))
-+     rs6000_block_move_inline_limit = 128;
-+ 
-+   /* store_one_arg depends on expand_block_move to handle at least the
-+@@ -2988,6 +3034,8 @@ rs6000_option_override_internal (bool global_init_p)
-+     case PROCESSOR_PPC8548:
-+     case PROCESSOR_PPCE500MC:
-+     case PROCESSOR_PPCE500MC64:
-++    case PROCESSOR_PPCE5500:
-++    case PROCESSOR_PPCE6500:
-+ 
-+       rs6000_single_float = TARGET_E500_SINGLE || TARGET_E500_DOUBLE;
-+       rs6000_double_float = TARGET_E500_DOUBLE;
-+@@ -3032,7 +3080,9 @@ rs6000_option_override_internal (bool global_init_p)
-+ 				 || rs6000_cpu == PROCESSOR_POWER6
-+ 				 || rs6000_cpu == PROCESSOR_POWER7
-+ 				 || rs6000_cpu == PROCESSOR_PPCE500MC
-+-				 || rs6000_cpu == PROCESSOR_PPCE500MC64);
-++				 || rs6000_cpu == PROCESSOR_PPCE500MC64
-++				 || rs6000_cpu == PROCESSOR_PPCE5500
-++				 || rs6000_cpu == PROCESSOR_PPCE6500);
-+ 
-+   /* Allow debug switches to override the above settings.  These are set to -1
-+      in rs6000.opt to indicate the user hasn't directly set the switch.  */
-+@@ -3255,6 +3305,14 @@ rs6000_option_override_internal (bool global_init_p)
-+ 	rs6000_cost = &ppce500mc64_cost;
-+ 	break;
-+ 
-++      case PROCESSOR_PPCE5500:
-++	rs6000_cost = &ppce5500_cost;
-++	break;
-++
-++      case PROCESSOR_PPCE6500:
-++	rs6000_cost = &ppce6500_cost;
-++	break;
-++
-+       case PROCESSOR_TITAN:
-+ 	rs6000_cost = &titan_cost;
-+ 	break;
-+@@ -22303,6 +22361,8 @@ rs6000_adjust_cost (rtx insn, rtx link, rtx dep_insn, int cost)
-+                  || rs6000_cpu_attr == CPU_PPC750
-+                  || rs6000_cpu_attr == CPU_PPC7400
-+                  || rs6000_cpu_attr == CPU_PPC7450
-++                 || rs6000_cpu_attr == CPU_PPCE5500
-++                 || rs6000_cpu_attr == CPU_PPCE6500
-+                  || rs6000_cpu_attr == CPU_POWER4
-+                  || rs6000_cpu_attr == CPU_POWER5
-+ 		 || rs6000_cpu_attr == CPU_POWER7
-+@@ -22878,6 +22938,8 @@ rs6000_issue_rate (void)
-+   case CPU_PPCE300C3:
-+   case CPU_PPCE500MC:
-+   case CPU_PPCE500MC64:
-++  case CPU_PPCE5500:
-++  case CPU_PPCE6500:
-+   case CPU_TITAN:
-+     return 2;
-+   case CPU_RIOS2:
-+diff --git a/gcc/config/rs6000/rs6000.h b/gcc/config/rs6000/rs6000.h
-+index af3a850..cc4f919 100644
-+--- a/gcc/config/rs6000/rs6000.h
-++++ b/gcc/config/rs6000/rs6000.h
-+@@ -168,6 +168,8 @@
-+ %{mcpu=e300c3: -me300} \
-+ %{mcpu=e500mc: -me500mc} \
-+ %{mcpu=e500mc64: -me500mc64} \
-++%{mcpu=e5500: -me5500} \
-++%{mcpu=e6500: -me6500} \
-+ %{maltivec: -maltivec} \
-+ %{mvsx: -mvsx %{!maltivec: -maltivec} %{!mcpu*: %(asm_cpu_power7)}} \
-+ -many"
-+diff --git a/gcc/config/rs6000/rs6000.md b/gcc/config/rs6000/rs6000.md
-+index 1d45325..aefb4cb 100644
-+--- a/gcc/config/rs6000/rs6000.md
-++++ b/gcc/config/rs6000/rs6000.md
-+@@ -167,7 +167,7 @@
-+ ;; Processor type -- this attribute must exactly match the processor_type
-+ ;; enumeration in rs6000.h.
-+ 
-+-(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
-++(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,ppce5500,ppce6500,power4,power5,power6,power7,cell,ppca2,titan"
-+   (const (symbol_ref "rs6000_cpu_attr")))
-+ 
-+ 
-+@@ -195,6 +195,8 @@
-+ (include "e300c2c3.md")
-+ (include "e500mc.md")
-+ (include "e500mc64.md")
-++(include "e5500.md")
-++(include "e6500.md")
-+ (include "power4.md")
-+ (include "power5.md")
-+ (include "power6.md")
-+diff --git a/gcc/doc/invoke.texi b/gcc/doc/invoke.texi
-+index d0a892a..2f749916 100644
-+--- a/gcc/doc/invoke.texi
-++++ b/gcc/doc/invoke.texi
-+@@ -16584,11 +16584,13 @@ Supported values for @var{cpu_type} are @samp{401}, @samp{403},
-+ @samp{603e}, @samp{604}, @samp{604e}, @samp{620}, @samp{630}, @samp{740},
-+ @samp{7400}, @samp{7450}, @samp{750}, @samp{801}, @samp{821}, @samp{823},
-+ @samp{860}, @samp{970}, @samp{8540}, @samp{a2}, @samp{e300c2},
-+-@samp{e300c3}, @samp{e500mc}, @samp{e500mc64}, @samp{ec603e}, @samp{G3},
-+-@samp{G4}, @samp{G5}, @samp{titan}, @samp{power}, @samp{power2}, @samp{power3},
-+-@samp{power4}, @samp{power5}, @samp{power5+}, @samp{power6}, @samp{power6x},
-+-@samp{power7}, @samp{common}, @samp{powerpc}, @samp{powerpc64}, @samp{rios},
-+-@samp{rios1}, @samp{rios2}, @samp{rsc}, and @samp{rs64}.
-++@samp{e300c3}, @samp{e500mc}, @samp{e500mc64}, @samp{e5500},
-++@samp{e6500}, @samp{ec603e}, @samp{G3}, @samp{G4}, @samp{G5},
-++@samp{titan}, @samp{power}, @samp{power2}, @samp{power3},
-++@samp{power4}, @samp{power5}, @samp{power5+}, @samp{power6},
-++@samp{power6x}, @samp{power7}, @samp{common}, @samp{powerpc},
-++@samp{powerpc64}, @samp{rios}, @samp{rios1}, @samp{rios2}, @samp{rsc},
-++and @samp{rs64}.
-+ 
-+ @option{-mcpu=common} selects a completely generic processor.  Code
-+ generated under this option will run on any POWER or PowerPC processor.
-+diff --git a/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c b/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c
-+index 15a700c..f5e337f 100644
-+--- a/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c
-++++ b/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c
-+@@ -14,7 +14,7 @@ float f(float b)
-+ 
-+ /* We should be able to optimize this to just "return 0.0;" */
-+ /* { dg-final { scan-tree-dump-times "BIT_FIELD_REF" 0 "optimized"} } */
-+-/* { dg-final { scan-tree-dump-times "0.0" 1 "optimized"} } */
-++/* { dg-final { scan-tree-dump-times "0\\\.0" 1 "optimized"} } */
-+ 
-+ /* { dg-final { cleanup-tree-dump "optimized" } } */
-+ 
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0026-config-rs6000-rs6000-tables.opt-Regenerated.patch b/meta/recipes-devtools/gcc/gcc-4.7/0026-config-rs6000-rs6000-tables.opt-Regenerated.patch
-new file mode 100644
-index 0000000..3a7a120
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0026-config-rs6000-rs6000-tables.opt-Regenerated.patch
-@@ -0,0 +1,135 @@
-+From 1ebaec98325cddf938ca7679fe867863e0d72f73 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:13:17 +0400
-+Subject: [PATCH 26/44] config/rs6000/rs6000-tables.opt: Regenerated.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188274 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: Edmar Wienskoski  <edmar@freescale.com>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ gcc/config/rs6000/rs6000-tables.opt |   58 +++++++++++++++++++----------------
-+ 1 file changed, 32 insertions(+), 26 deletions(-)
-+
-+diff --git a/gcc/config/rs6000/rs6000-tables.opt b/gcc/config/rs6000/rs6000-tables.opt
-+index 91341e6..ccf2b85 100644
-+--- a/gcc/config/rs6000/rs6000-tables.opt
-++++ b/gcc/config/rs6000/rs6000-tables.opt
-+@@ -126,80 +126,86 @@ EnumValue
-+ Enum(rs6000_cpu_opt_value) String(e500mc64) Value(32)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(860) Value(33)
-++Enum(rs6000_cpu_opt_value) String(e5500) Value(33)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(970) Value(34)
-++Enum(rs6000_cpu_opt_value) String(e6500) Value(34)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(cell) Value(35)
-++Enum(rs6000_cpu_opt_value) String(860) Value(35)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(common) Value(36)
-++Enum(rs6000_cpu_opt_value) String(970) Value(36)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(ec603e) Value(37)
-++Enum(rs6000_cpu_opt_value) String(cell) Value(37)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(G3) Value(38)
-++Enum(rs6000_cpu_opt_value) String(common) Value(38)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(G4) Value(39)
-++Enum(rs6000_cpu_opt_value) String(ec603e) Value(39)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(G5) Value(40)
-++Enum(rs6000_cpu_opt_value) String(G3) Value(40)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(titan) Value(41)
-++Enum(rs6000_cpu_opt_value) String(G4) Value(41)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power) Value(42)
-++Enum(rs6000_cpu_opt_value) String(G5) Value(42)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power2) Value(43)
-++Enum(rs6000_cpu_opt_value) String(titan) Value(43)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power3) Value(44)
-++Enum(rs6000_cpu_opt_value) String(power) Value(44)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power4) Value(45)
-++Enum(rs6000_cpu_opt_value) String(power2) Value(45)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power5) Value(46)
-++Enum(rs6000_cpu_opt_value) String(power3) Value(46)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power5+) Value(47)
-++Enum(rs6000_cpu_opt_value) String(power4) Value(47)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power6) Value(48)
-++Enum(rs6000_cpu_opt_value) String(power5) Value(48)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power6x) Value(49)
-++Enum(rs6000_cpu_opt_value) String(power5+) Value(49)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(power7) Value(50)
-++Enum(rs6000_cpu_opt_value) String(power6) Value(50)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(powerpc) Value(51)
-++Enum(rs6000_cpu_opt_value) String(power6x) Value(51)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(powerpc64) Value(52)
-++Enum(rs6000_cpu_opt_value) String(power7) Value(52)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rios) Value(53)
-++Enum(rs6000_cpu_opt_value) String(powerpc) Value(53)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rios1) Value(54)
-++Enum(rs6000_cpu_opt_value) String(powerpc64) Value(54)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rios2) Value(55)
-++Enum(rs6000_cpu_opt_value) String(rios) Value(55)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rsc) Value(56)
-++Enum(rs6000_cpu_opt_value) String(rios1) Value(56)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rsc1) Value(57)
-++Enum(rs6000_cpu_opt_value) String(rios2) Value(57)
-+ 
-+ EnumValue
-+-Enum(rs6000_cpu_opt_value) String(rs64) Value(58)
-++Enum(rs6000_cpu_opt_value) String(rsc) Value(58)
-++
-++EnumValue
-++Enum(rs6000_cpu_opt_value) String(rsc1) Value(59)
-++
-++EnumValue
-++Enum(rs6000_cpu_opt_value) String(rs64) Value(60)
-+ 
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0027-define_insn_reservation.patch b/meta/recipes-devtools/gcc/gcc-4.7/0027-define_insn_reservation.patch
-new file mode 100644
-index 0000000..051df95
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0027-define_insn_reservation.patch
-@@ -0,0 +1,120 @@
-+From 14d576ff37c8af782ade590e26756bc784600d0a Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:17:38 +0400
-+Subject: [PATCH 27/44] define_insn_reservation
-+
-+* config/rs6000/rs6000.md (define_attr "type"): New type popcnt.
-+(popcntb<mode>2): Add attribute type popcnt.
-+(popcntd<mode>2): Ditto.
-+* config/rs6000/power4.md (define_insn_reservation): Add type popcnt.
-+* config/rs6000/power5.md (define_insn_reservation): Ditto.
-+* config/rs6000/power7.md (define_insn_reservation): Ditto.
-+* config/rs6000/476.md (define_insn_reservation): Ditto.
-+* config/rs6000/power6.md (define_insn_reservation): New
-+reservation for popcnt instructions.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188901 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: Edmar Wienskoski  <edmar@freescale.com>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ gcc/config/rs6000/476.md    |    2 +-
-+ gcc/config/rs6000/power5.md |    2 +-
-+ gcc/config/rs6000/power6.md |    5 +++++
-+ gcc/config/rs6000/power7.md |    2 +-
-+ gcc/config/rs6000/rs6000.md |   10 +++++++---
-+ 5 files changed, 15 insertions(+), 6 deletions(-)
-+
-+diff --git a/gcc/config/rs6000/476.md b/gcc/config/rs6000/476.md
-+index 3f50baf..ad0acc3 100644
-+--- a/gcc/config/rs6000/476.md
-++++ b/gcc/config/rs6000/476.md
-+@@ -71,7 +71,7 @@
-+    ppc476_i_pipe|ppc476_lj_pipe")
-+ 
-+ (define_insn_reservation "ppc476-complex-integer" 1
-+-  (and (eq_attr "type" "cmp,cr_logical,delayed_cr,cntlz,isel,isync,sync,trap")
-++  (and (eq_attr "type" "cmp,cr_logical,delayed_cr,cntlz,isel,isync,sync,trap,popcnt")
-+        (eq_attr "cpu" "ppc476"))
-+   "ppc476_issue,\
-+    ppc476_i_pipe")
-+diff --git a/gcc/config/rs6000/power5.md b/gcc/config/rs6000/power5.md
-+index b6db093..c667a54 100644
-+--- a/gcc/config/rs6000/power5.md
-++++ b/gcc/config/rs6000/power5.md
-+@@ -142,7 +142,7 @@
-+ ; Integer latency is 2 cycles
-+ (define_insn_reservation "power5-integer" 2
-+   (and (eq_attr "type" "integer,insert_dword,shift,trap,\
-+-                        var_shift_rotate,cntlz,exts,isel")
-++                        var_shift_rotate,cntlz,exts,isel,popcnt")
-+        (eq_attr "cpu" "power5"))
-+   "iq_power5")
-+ 
-+diff --git a/gcc/config/rs6000/power6.md b/gcc/config/rs6000/power6.md
-+index 8d54c81..39f19b8 100644
-+--- a/gcc/config/rs6000/power6.md
-++++ b/gcc/config/rs6000/power6.md
-+@@ -216,6 +216,11 @@
-+        (eq_attr "cpu" "power6"))
-+   "FXU_power6")
-+ 
-++(define_insn_reservation "power6-popcnt" 1
-++  (and (eq_attr "type" "popcnt")
-++       (eq_attr "cpu" "power6"))
-++  "FXU_power6")
-++
-+ (define_insn_reservation "power6-insert" 1
-+   (and (eq_attr "type" "insert_word")
-+        (eq_attr "cpu" "power6"))
-+diff --git a/gcc/config/rs6000/power7.md b/gcc/config/rs6000/power7.md
-+index 9071bd5..cf7fd37 100644
-+--- a/gcc/config/rs6000/power7.md
-++++ b/gcc/config/rs6000/power7.md
-+@@ -150,7 +150,7 @@
-+ ; FX Unit
-+ (define_insn_reservation "power7-integer" 1
-+   (and (eq_attr "type" "integer,insert_word,insert_dword,shift,trap,\
-+-                        var_shift_rotate,exts,isel")
-++                        var_shift_rotate,exts,isel,popcnt")
-+        (eq_attr "cpu" "power7"))
-+   "DU_power7,FXU_power7")
-+ 
-+diff --git a/gcc/config/rs6000/rs6000.md b/gcc/config/rs6000/rs6000.md
-+index aefb4cb..ec889c9 100644
-+--- a/gcc/config/rs6000/rs6000.md
-++++ b/gcc/config/rs6000/rs6000.md
-+@@ -145,7 +145,7 @@
-+ 
-+ ;; Define an insn type attribute.  This is used in function unit delay
-+ ;; computations.
-+-(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,vecdouble,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel"
-++(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,vecdouble,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel,popcnt"
-+   (const_string "integer"))
-+ 
-+ ;; Define floating point instruction sub-types for use with Xfpu.md
-+@@ -2332,13 +2332,17 @@
-+         (unspec:GPR [(match_operand:GPR 1 "gpc_reg_operand" "r")]
-+                      UNSPEC_POPCNTB))]
-+   "TARGET_POPCNTB"
-+-  "popcntb %0,%1")
-++  "popcntb %0,%1"
-++  [(set_attr "length" "4")
-++   (set_attr "type" "popcnt")])
-+ 
-+ (define_insn "popcntd<mode>2"
-+   [(set (match_operand:GPR 0 "gpc_reg_operand" "=r")
-+ 	(popcount:GPR (match_operand:GPR 1 "gpc_reg_operand" "r")))]
-+   "TARGET_POPCNTD"
-+-  "popcnt<wd> %0,%1")
-++  "popcnt<wd> %0,%1"
-++  [(set_attr "length" "4")
-++   (set_attr "type" "popcnt")])
-+ 
-+ (define_expand "popcount<mode>2"
-+   [(set (match_operand:GPR 0 "gpc_reg_operand" "")
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0028-PR-target-32219.patch b/meta/recipes-devtools/gcc/gcc-4.7/0028-PR-target-32219.patch
-new file mode 100644
-index 0000000..c07b97e
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0028-PR-target-32219.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0024-PR-target-32219.patch
 @@ -0,0 +1,67 @@
-+From 9186a0dc1b0728dd8774bd9210459ec3fc762c35 Mon Sep 17 00:00:00 2001
++From e0d15f4f8bf28c351b9215ca37f1caa24df0e1fd Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:19:28 +0400
-+Subject: [PATCH 28/44] PR target/32219
++Date: Fri, 29 Mar 2013 09:18:54 +0400
++Subject: [PATCH 24/35] PR target/32219
 +
 +* varasm.c (default_binds_local_p_1): Weak data is not local.
 +
@@ -7353,10 +5390,10 @@ index 0000000..c07b97e
 ++}
 ++
 +diff --git a/gcc/varasm.c b/gcc/varasm.c
-+index bb835bc..2f92382 100644
++index 6648103..fadba78 100644
 +--- a/gcc/varasm.c
 ++++ b/gcc/varasm.c
-+@@ -6964,6 +6964,10 @@ default_binds_local_p_1 (const_tree exp, int shlib)
++@@ -6675,6 +6675,10 @@ default_binds_local_p_1 (const_tree exp, int shlib)
 +   /* Static variables are always local.  */
 +   else if (! TREE_PUBLIC (exp))
 +     local_p = true;
@@ -7367,7 +5404,7 @@ index 0000000..c07b97e
 +   /* A variable is local if the user has said explicitly that it will
 +      be.  */
 +   else if ((DECL_VISIBILITY_SPECIFIED (exp)
-+@@ -6977,11 +6981,6 @@ default_binds_local_p_1 (const_tree exp, int shlib)
++@@ -6688,11 +6692,6 @@ default_binds_local_p_1 (const_tree exp, int shlib)
 +      local.  */
 +   else if (DECL_VISIBILITY (exp) != VISIBILITY_DEFAULT)
 +     local_p = true;
@@ -7382,16 +5419,16 @@ index 0000000..c07b97e
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0029-fortran-cross-compile-hack.patch b/meta/recipes-devtools/gcc/gcc-4.7/0029-fortran-cross-compile-hack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0025-fortran-cross-compile-hack.patch b/meta/recipes-devtools/gcc/gcc-4.8/0025-fortran-cross-compile-hack.patch
 new file mode 100644
-index 0000000..6fe5846
+index 0000000..34af5fc
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0029-fortran-cross-compile-hack.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0025-fortran-cross-compile-hack.patch
 @@ -0,0 +1,46 @@
-+From 75278343eb276a2861fbd8d29b8cfa55ff6d9502 Mon Sep 17 00:00:00 2001
++From af8a56ea4e17b2909eff2c57704ab43ef24f28d3 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:21:49 +0400
-+Subject: [PATCH 29/44] fortran cross-compile hack.
++Date: Fri, 29 Mar 2013 09:20:01 +0400
++Subject: [PATCH 25/35] fortran cross-compile hack.
 +
 +* Fortran would have searched for arm-angstrom-gnueabi-gfortran but would have used
 +used gfortan. For gcc_4.2.2.bb we want to use the gfortran compiler from our cross
@@ -7406,10 +5443,10 @@ index 0000000..6fe5846
 + 2 files changed, 2 insertions(+), 2 deletions(-)
 +
 +diff --git a/libgfortran/configure b/libgfortran/configure
-+index 227f556..c7883bd 100755
++index 8385e96..b8f7a92 100755
 +--- a/libgfortran/configure
 ++++ b/libgfortran/configure
-+@@ -12689,7 +12689,7 @@ esac
++@@ -12704,7 +12704,7 @@ esac
 + 
 + # We need gfortran to compile parts of the library
 + #AC_PROG_FC(gfortran)
@@ -7419,7 +5456,7 @@ index 0000000..6fe5846
 + ac_compile='$FC -c $FCFLAGS $ac_fcflags_srcext conftest.$ac_ext >&5'
 + ac_link='$FC -o conftest$ac_exeext $FCFLAGS $LDFLAGS $ac_fcflags_srcext conftest.$ac_ext $LIBS >&5'
 +diff --git a/libgfortran/configure.ac b/libgfortran/configure.ac
-+index 387ece2..3830b1b 100644
++index 7d97fed..3f9f484 100644
 +--- a/libgfortran/configure.ac
 ++++ b/libgfortran/configure.ac
 +@@ -227,7 +227,7 @@ AC_SUBST(enable_static)
@@ -7434,16 +5471,16 @@ index 0000000..6fe5846
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0030-libgcc-sjlj-check.patch b/meta/recipes-devtools/gcc/gcc-4.7/0030-libgcc-sjlj-check.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0026-libgcc-sjlj-check.patch b/meta/recipes-devtools/gcc/gcc-4.8/0026-libgcc-sjlj-check.patch
 new file mode 100644
-index 0000000..0fd9977
+index 0000000..fbc6e75
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0030-libgcc-sjlj-check.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0026-libgcc-sjlj-check.patch
 @@ -0,0 +1,74 @@
-+From 876290baec75564204918a35cbfc2c9ee0c91947 Mon Sep 17 00:00:00 2001
++From 08c2398445e6cac282488f64ae6bf29cbcd8db23 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:24:15 +0400
-+Subject: [PATCH 30/44] libgcc-sjlj-check
++Date: Fri, 29 Mar 2013 09:20:50 +0400
++Subject: [PATCH 26/35] libgcc-sjlj-check
 +
 +ac_fn_c_try_compile doesnt seem to keep the intermediate files
 +which are needed for sjlj test to pass since it greps into the
@@ -7459,10 +5496,10 @@ index 0000000..0fd9977
 + 2 files changed, 10 insertions(+), 10 deletions(-)
 +
 +diff --git a/libgcc/configure b/libgcc/configure
-+index d01dbbf..e3643ea 100644
++index 1425df6..d18e3cb 100644
 +--- a/libgcc/configure
 ++++ b/libgcc/configure
-+@@ -4204,17 +4204,19 @@ void foo ()
++@@ -4208,17 +4208,19 @@ void foo ()
 + }
 + 
 + _ACEOF
@@ -7487,10 +5524,10 @@ index 0000000..0fd9977
 + 
 + fi
 +diff --git a/libgcc/configure.ac b/libgcc/configure.ac
-+index f547bff..47a8794 100644
++index 8b7aba5..c7c9644 100644
 +--- a/libgcc/configure.ac
 ++++ b/libgcc/configure.ac
-+@@ -214,16 +214,14 @@ void foo ()
++@@ -216,16 +216,14 @@ void foo ()
 +   bar();
 + }
 + ])])
@@ -7514,16 +5551,16 @@ index 0000000..0fd9977
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0031-cpp-honor-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.7/0031-cpp-honor-sysroot.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0027-cpp-honor-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.8/0027-cpp-honor-sysroot.patch
 new file mode 100644
-index 0000000..abaa2a7
+index 0000000..dd06f9b
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0031-cpp-honor-sysroot.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0027-cpp-honor-sysroot.patch
 @@ -0,0 +1,54 @@
-+From 64d229d9069b90f63635088b0b6689748b34ab81 Mon Sep 17 00:00:00 2001
++From a0f9bd09c816ad29ecf7c29d6c27f7df97710364 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:26:06 +0400
-+Subject: [PATCH 31/44] cpp: honor sysroot.
++Date: Fri, 29 Mar 2013 09:22:00 +0400
++Subject: [PATCH 27/35] cpp: honor sysroot.
 +
 +Currently, if the gcc toolchain is relocated and installed from sstate, then you try and compile
 +preprocessed source (.i or .ii files), the compiler will try and access the builtin sysroot location
@@ -7548,10 +5585,10 @@ index 0000000..abaa2a7
 + 2 files changed, 2 insertions(+), 2 deletions(-)
 +
 +diff --git a/gcc/cp/lang-specs.h b/gcc/cp/lang-specs.h
-+index a73aba3..873609a 100644
++index a001c3e..1aae1e4 100644
 +--- a/gcc/cp/lang-specs.h
 ++++ b/gcc/cp/lang-specs.h
-+@@ -64,5 +64,5 @@ along with GCC; see the file COPYING3.  If not see
++@@ -63,5 +63,5 @@ along with GCC; see the file COPYING3.  If not see
 +   {".ii", "@c++-cpp-output", 0, 0, 0},
 +   {"@c++-cpp-output",
 +    "%{!M:%{!MM:%{!E:\
@@ -7559,10 +5596,10 @@ index 0000000..abaa2a7
 ++    cc1plus -fpreprocessed %i %I %(cc1_options) %2\
 +     %{!fsyntax-only:%(invoke_as)}}}}", 0, 0, 0},
 +diff --git a/gcc/gcc.c b/gcc/gcc.c
-+index 56beb2f..788ef01 100644
++index 51062aa..cf6b99e 100644
 +--- a/gcc/gcc.c
 ++++ b/gcc/gcc.c
-+@@ -974,7 +974,7 @@ static const struct compiler default_compilers[] =
++@@ -1042,7 +1042,7 @@ static const struct compiler default_compilers[] =
 +                     %W{o*:--output-pch=%*}}%V}}}}}}", 0, 0, 0},
 +   {".i", "@cpp-output", 0, 0, 0},
 +   {"@cpp-output",
@@ -7574,16 +5611,16 @@ index 0000000..abaa2a7
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0032-MIPS64-Default-to-N64-ABI.patch b/meta/recipes-devtools/gcc/gcc-4.7/0032-MIPS64-Default-to-N64-ABI.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0028-MIPS64-Default-to-N64-ABI.patch b/meta/recipes-devtools/gcc/gcc-4.8/0028-MIPS64-Default-to-N64-ABI.patch
 new file mode 100644
-index 0000000..a90d6a4
+index 0000000..26166ce
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0032-MIPS64-Default-to-N64-ABI.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0028-MIPS64-Default-to-N64-ABI.patch
 @@ -0,0 +1,31 @@
-+From a79e746c11e217183cdf38b084100b532b4e07ff Mon Sep 17 00:00:00 2001
++From 301e18d4711db5925e767fad08dffa9cfe0a2f1f Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:27:54 +0400
-+Subject: [PATCH 32/44] MIPS64: Default to N64 ABI
++Date: Fri, 29 Mar 2013 09:23:08 +0400
++Subject: [PATCH 28/35] MIPS64: Default to N64 ABI
 +
 +MIPS64 defaults to n32 ABI, this patch makes it
 +so that it defaults to N64 ABI
@@ -7596,12 +5633,12 @@ index 0000000..a90d6a4
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/gcc/config.gcc b/gcc/config.gcc
-+index 3146054..1793879 100644
++index 1a0be50..989c2fb 100644
 +--- a/gcc/config.gcc
 ++++ b/gcc/config.gcc
-+@@ -1764,7 +1764,7 @@ mips*-*-netbsd*)			# NetBSD/mips, either endian.
++@@ -1797,7 +1797,7 @@ mips*-mti-linux*)
 + mips64*-*-linux* | mipsisa64*-*-linux*)
-+ 	tm_file="dbxelf.h elfos.h gnu-user.h linux.h glibc-stdint.h ${tm_file} mips/gnu-user.h mips/gnu-user64.h mips/linux64.h"
++ 	tm_file="dbxelf.h elfos.h gnu-user.h linux.h glibc-stdint.h ${tm_file} mips/gnu-user.h mips/gnu-user64.h mips/linux64.h mips/linux-common.h"
 + 	tmake_file="${tmake_file} mips/t-linux64"
 +-	tm_defines="${tm_defines} MIPS_ABI_DEFAULT=ABI_N32"
 ++	tm_defines="${tm_defines} MIPS_ABI_DEFAULT=ABI_64"
@@ -7611,23 +5648,23 @@ index 0000000..a90d6a4
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0033-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch b/meta/recipes-devtools/gcc/gcc-4.7/0033-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0029-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch b/meta/recipes-devtools/gcc/gcc-4.8/0029-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
 new file mode 100644
-index 0000000..c620ece
+index 0000000..2e757a2
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0033-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
-@@ -0,0 +1,313 @@
-+From 7f004562465df3fdf6c907a6ba1773f268f21c6f Mon Sep 17 00:00:00 2001
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0029-Define-GLIBC_DYNAMIC_LINKER-and-UCLIBC_DYNAMIC_LINKE.patch
+@@ -0,0 +1,190 @@
++From 29d12344fb682a053de53eb08b95704cf3b67af2 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:35:39 +0400
-+Subject: [PATCH 33/44] Define GLIBC_DYNAMIC_LINKER and UCLIBC_DYNAMIC_LINKER
++Date: Fri, 29 Mar 2013 09:24:50 +0400
++Subject: [PATCH 29/35] Define GLIBC_DYNAMIC_LINKER and UCLIBC_DYNAMIC_LINKER
 + relative to SYSTEMLIBS_DIR
 +
 +This patch defines GLIBC_DYNAMIC_LINKER and UCLIBC_DYNAMIC_LINKER
 +relative to SYSTEMLIBS_DIR which can be set in generated headers
 +This breaks the assumption of hardcoded multilib in gcc
 +Change is only for the supported architectures in OE including
-+SH, spart, alpha for possible future support (if any)
++SH, sparc, alpha for possible future support (if any)
 +
 +Removes the do_headerfix task in metadata
 +
@@ -7635,26 +5672,24 @@ index 0000000..c620ece
 +
 +Upstream-Status: Inappropriate [OE configuration]
 +---
-+ gcc/config/alpha/linux-elf.h    |    4 +-
-+ gcc/config/arm/linux-eabi.h     |    2 +-
-+ gcc/config/arm/linux-elf.h      |    2 +-
-+ gcc/config/arm/linux-elf.h.orig |  117 +++++++++++++++++++++++++++++++++++++++
-+ gcc/config/i386/linux.h         |    2 +-
-+ gcc/config/i386/linux64.h       |    6 +-
-+ gcc/config/mips/linux.h         |    2 +-
-+ gcc/config/mips/linux64.h       |    8 +--
-+ gcc/config/rs6000/linux64.h     |    8 +--
-+ gcc/config/sh/linux.h           |    2 +-
-+ gcc/config/sparc/linux.h        |    2 +-
-+ gcc/config/sparc/linux64.h      |    4 +-
-+ 12 files changed, 138 insertions(+), 21 deletions(-)
-+ create mode 100644 gcc/config/arm/linux-elf.h.orig
++ gcc/config/alpha/linux-elf.h |    4 ++--
++ gcc/config/arm/linux-eabi.h  |    4 ++--
++ gcc/config/arm/linux-elf.h   |    2 +-
++ gcc/config/i386/linux.h      |    2 +-
++ gcc/config/i386/linux64.h    |    6 +++---
++ gcc/config/mips/linux.h      |    2 +-
++ gcc/config/mips/linux64.h    |    8 ++++----
++ gcc/config/rs6000/linux64.h  |    8 ++++----
++ gcc/config/sh/linux.h        |    2 +-
++ gcc/config/sparc/linux.h     |    2 +-
++ gcc/config/sparc/linux64.h   |    4 ++--
++ 11 files changed, 22 insertions(+), 22 deletions(-)
 +
 +diff --git a/gcc/config/alpha/linux-elf.h b/gcc/config/alpha/linux-elf.h
-+index f578ecb..136c9bd 100644
++index 84e0596..3a59d71 100644
 +--- a/gcc/config/alpha/linux-elf.h
 ++++ b/gcc/config/alpha/linux-elf.h
-+@@ -24,8 +24,8 @@ along with GCC; see the file COPYING3.  If not see
++@@ -23,8 +23,8 @@ along with GCC; see the file COPYING3.  If not see
 + #define EXTRA_SPECS \
 + { "elf_dynamic_linker", ELF_DYNAMIC_LINKER },
 + 
@@ -7666,23 +5701,25 @@ index 0000000..c620ece
 + #define CHOOSE_DYNAMIC_LINKER(G, U) "%{mglibc:" G ";:" U "}"
 + #elif DEFAULT_LIBC == LIBC_GLIBC
 +diff --git a/gcc/config/arm/linux-eabi.h b/gcc/config/arm/linux-eabi.h
-+index 80bd825..2954d47 100644
++index 4a425c8..80f454d 100644
 +--- a/gcc/config/arm/linux-eabi.h
 ++++ b/gcc/config/arm/linux-eabi.h
-+@@ -62,7 +62,7 @@
-+ /* Use ld-linux.so.3 so that it will be possible to run "classic"
-+    GNU/Linux binaries on an EABI system.  */
-+ #undef  GLIBC_DYNAMIC_LINKER
-+-#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.3"
-++#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.3"
++@@ -68,8 +68,8 @@
++    GLIBC_DYNAMIC_LINKER_DEFAULT and TARGET_DEFAULT_FLOAT_ABI.  */
 + 
-+ /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
-+    use the GNU/Linux version, not the generic BPABI version.  */
++ #undef  GLIBC_DYNAMIC_LINKER
++-#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "/lib/ld-linux.so.3"
++-#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT "/lib/ld-linux-armhf.so.3"
+++#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT SYSTEMLIBS_DIR "ld-linux.so.3"
+++#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT SYSTEMLIBS_DIR "ld-linux-armhf.so.3"
++ #define GLIBC_DYNAMIC_LINKER_DEFAULT GLIBC_DYNAMIC_LINKER_SOFT_FLOAT
++ 
++ #define GLIBC_DYNAMIC_LINKER \
 +diff --git a/gcc/config/arm/linux-elf.h b/gcc/config/arm/linux-elf.h
-+index 418e688..2ce073a 100644
++index 753dc3a..d593967 100644
 +--- a/gcc/config/arm/linux-elf.h
 ++++ b/gcc/config/arm/linux-elf.h
-+@@ -59,7 +59,7 @@
++@@ -57,7 +57,7 @@
 + 
 + #define LIBGCC_SPEC "%{mfloat-abi=soft*:-lfloat} -lgcc"
 + 
@@ -7691,144 +5728,21 @@ index 0000000..c620ece
 + 
 + #define LINUX_TARGET_LINK_SPEC  "%{h*} \
 +    %{static:-Bstatic} \
-+diff --git a/gcc/config/arm/linux-elf.h.orig b/gcc/config/arm/linux-elf.h.orig
-+new file mode 100644
-+index 0000000..418e688
-+--- /dev/null
-++++ b/gcc/config/arm/linux-elf.h.orig
-+@@ -0,0 +1,117 @@
-++/* Definitions for ARM running Linux-based GNU systems using ELF
-++   Copyright (C) 1993, 1994, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-++   2005, 2006, 2007, 2008, 2009, 2010, 2011
-++   Free Software Foundation, Inc.
-++   Contributed by Philip Blundell <philb@gnu.org>
-++
-++   This file is part of GCC.
-++
-++   GCC is free software; you can redistribute it and/or modify it
-++   under the terms of the GNU General Public License as published
-++   by the Free Software Foundation; either version 3, or (at your
-++   option) any later version.
-++
-++   GCC is distributed in the hope that it will be useful, but WITHOUT
-++   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-++   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-++   License for more details.
-++
-++   You should have received a copy of the GNU General Public License
-++   along with GCC; see the file COPYING3.  If not see
-++   <http://www.gnu.org/licenses/>.  */
-++
-++/* elfos.h should have already been included.  Now just override
-++   any conflicting definitions and add any extras.  */
-++
-++/* Run-time Target Specification.  */
-++#undef  TARGET_DEFAULT_FLOAT_ABI
-++#define TARGET_DEFAULT_FLOAT_ABI ARM_FLOAT_ABI_HARD
-++
-++/* TARGET_BIG_ENDIAN_DEFAULT is set in
-++   config.gcc for big endian configurations.  */
-++#if TARGET_BIG_ENDIAN_DEFAULT
-++#define TARGET_ENDIAN_DEFAULT    MASK_BIG_END
-++#define TARGET_ENDIAN_OPTION     "mbig-endian"
-++#define TARGET_LINKER_EMULATION  "armelfb_linux"
-++#else
-++#define TARGET_ENDIAN_DEFAULT    0
-++#define TARGET_ENDIAN_OPTION     "mlittle-endian"
-++#define TARGET_LINKER_EMULATION  "armelf_linux"
-++#endif
-++
-++#undef  TARGET_DEFAULT
-++#define TARGET_DEFAULT (TARGET_ENDIAN_DEFAULT)
-++
-++#define SUBTARGET_CPU_DEFAULT TARGET_CPU_arm6
-++
-++#define SUBTARGET_EXTRA_LINK_SPEC " -m " TARGET_LINKER_EMULATION " -p"
-++
-++#undef  MULTILIB_DEFAULTS
-++#define MULTILIB_DEFAULTS \
-++	{ "marm", TARGET_ENDIAN_OPTION, "mfloat-abi=hard", "mno-thumb-interwork" }
-++
-++/* Now we define the strings used to build the spec file.  */
-++#undef  LIB_SPEC
-++#define LIB_SPEC \
-++  "%{pthread:-lpthread} \
-++   %{shared:-lc} \
-++   %{!shared:%{profile:-lc_p}%{!profile:-lc}}"
-++
-++#define LIBGCC_SPEC "%{mfloat-abi=soft*:-lfloat} -lgcc"
-++
-++#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.2"
-++
-++#define LINUX_TARGET_LINK_SPEC  "%{h*} \
-++   %{static:-Bstatic} \
-++   %{shared:-shared} \
-++   %{symbolic:-Bsymbolic} \
-++   %{rdynamic:-export-dynamic} \
-++   -dynamic-linker " GNU_USER_DYNAMIC_LINKER " \
-++   -X \
-++   %{mbig-endian:-EB} %{mlittle-endian:-EL}" \
-++   SUBTARGET_EXTRA_LINK_SPEC
-++
-++#undef  LINK_SPEC
-++#define LINK_SPEC LINUX_TARGET_LINK_SPEC
-++
-++#define TARGET_OS_CPP_BUILTINS()		\
-++  do						\
-++    {						\
-++	GNU_USER_TARGET_OS_CPP_BUILTINS();	\
-++    }						\
-++  while (0)
-++
-++/* This is how we tell the assembler that two symbols have the same value.  */
-++#define ASM_OUTPUT_DEF(FILE, NAME1, NAME2) \
-++  do					   \
-++    {					   \
-++      assemble_name (FILE, NAME1); 	   \
-++      fputs (" = ", FILE);		   \
-++      assemble_name (FILE, NAME2);	   \
-++      fputc ('\n', FILE);		   \
-++    }					   \
-++  while (0)
-++
-++/* NWFPE always understands FPA instructions.  */
-++#undef  FPUTYPE_DEFAULT
-++#define FPUTYPE_DEFAULT "fpe3"
-++
-++/* Call the function profiler with a given profile label.  */
-++#undef  ARM_FUNCTION_PROFILER
-++#define ARM_FUNCTION_PROFILER(STREAM, LABELNO)  			\
-++{									\
-++  fprintf (STREAM, "\tbl\tmcount%s\n",					\
-++	   (TARGET_ARM && NEED_PLT_RELOC) ? "(PLT)" : "");		\
-++}
-++
-++/* The GNU/Linux profiler clobbers the link register.  Make sure the
-++   prologue knows to save it.  */
-++#define PROFILE_HOOK(X)						\
-++  emit_clobber (gen_rtx_REG (SImode, LR_REGNUM))
-++
-++/* The GNU/Linux profiler needs a frame pointer.  */
-++#define SUBTARGET_FRAME_POINTER_REQUIRED crtl->profile
-++
-++/* Add .note.GNU-stack.  */
-++#undef NEED_INDICATE_EXEC_STACK
-++#define NEED_INDICATE_EXEC_STACK	1
 +diff --git a/gcc/config/i386/linux.h b/gcc/config/i386/linux.h
-+index 73681fe..c933a86 100644
++index 3c95ee0..33b8acd 100644
 +--- a/gcc/config/i386/linux.h
 ++++ b/gcc/config/i386/linux.h
-+@@ -21,4 +21,4 @@ along with GCC; see the file COPYING3.  If not see
++@@ -20,4 +20,4 @@ along with GCC; see the file COPYING3.  If not see
 + <http://www.gnu.org/licenses/>.  */
 + 
 + #define GNU_USER_LINK_EMULATION "elf_i386"
 +-#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.2"
 ++#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.2"
 +diff --git a/gcc/config/i386/linux64.h b/gcc/config/i386/linux64.h
-+index 5b0a212..d8b7ebf 100644
++index b793e08..da788b8 100644
 +--- a/gcc/config/i386/linux64.h
 ++++ b/gcc/config/i386/linux64.h
-+@@ -28,6 +28,6 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
++@@ -27,6 +27,6 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 + #define GNU_USER_LINK_EMULATION64 "elf_x86_64"
 + #define GNU_USER_LINK_EMULATIONX32 "elf32_x86_64"
 + 
@@ -7839,20 +5753,20 @@ index 0000000..c620ece
 ++#define GLIBC_DYNAMIC_LINKER64 SYSTEMLIBS_DIR "ld-linux-x86-64.so.2"
 ++#define GLIBC_DYNAMIC_LINKERX32 SYSTEMLIBS_DIR "ld-linux-x32.so.2"
 +diff --git a/gcc/config/mips/linux.h b/gcc/config/mips/linux.h
-+index bce9c17..9e7eb95 100644
++index 9b4c68d..7ee5ba8 100644
 +--- a/gcc/config/mips/linux.h
 ++++ b/gcc/config/mips/linux.h
-+@@ -18,4 +18,4 @@ You should have received a copy of the GNU General Public License
++@@ -17,4 +17,4 @@ You should have received a copy of the GNU General Public License
 + along with GCC; see the file COPYING3.  If not see
 + <http://www.gnu.org/licenses/>.  */
 + 
 +-#define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
 ++#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld.so.1"
 +diff --git a/gcc/config/mips/linux64.h b/gcc/config/mips/linux64.h
-+index 6e92719..a4e1e98 100644
++index dbba47a..c7ed573 100644
 +--- a/gcc/config/mips/linux64.h
 ++++ b/gcc/config/mips/linux64.h
-+@@ -23,10 +23,10 @@ along with GCC; see the file COPYING3.  If not see
++@@ -22,10 +22,10 @@ along with GCC; see the file COPYING3.  If not see
 + #define GNU_USER_LINK_EMULATION64 "elf64%{EB:b}%{EL:l}tsmip"
 + #define GNU_USER_LINK_EMULATIONN32 "elf32%{EB:b}%{EL:l}tsmipn32"
 + 
@@ -7868,10 +5782,10 @@ index 0000000..c620ece
 + #define GNU_USER_DYNAMIC_LINKERN32 \
 +   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32, \
 +diff --git a/gcc/config/rs6000/linux64.h b/gcc/config/rs6000/linux64.h
-+index 7c516eb..728d37c 100644
++index dc6f67f..bc60769 100644
 +--- a/gcc/config/rs6000/linux64.h
 ++++ b/gcc/config/rs6000/linux64.h
-+@@ -358,10 +358,10 @@ extern int dot_symbols;
++@@ -360,10 +360,10 @@ extern int dot_symbols;
 + #undef	LINK_OS_DEFAULT_SPEC
 + #define LINK_OS_DEFAULT_SPEC "%(link_os_linux)"
 + 
@@ -7887,10 +5801,10 @@ index 0000000..c620ece
 + #define CHOOSE_DYNAMIC_LINKER(G, U) "%{mglibc:" G ";:" U "}"
 + #elif DEFAULT_LIBC == LIBC_GLIBC
 +diff --git a/gcc/config/sh/linux.h b/gcc/config/sh/linux.h
-+index a5c2734..6d690c2 100644
++index 9e8f32d..86bf81e 100644
 +--- a/gcc/config/sh/linux.h
 ++++ b/gcc/config/sh/linux.h
-+@@ -45,7 +45,7 @@ along with GCC; see the file COPYING3.  If not see
++@@ -43,7 +43,7 @@ along with GCC; see the file COPYING3.  If not see
 + 
 + #define TARGET_ASM_FILE_END file_end_indicate_exec_stack
 + 
@@ -7900,10 +5814,10 @@ index 0000000..c620ece
 + #undef SUBTARGET_LINK_EMUL_SUFFIX
 + #define SUBTARGET_LINK_EMUL_SUFFIX "_linux"
 +diff --git a/gcc/config/sparc/linux.h b/gcc/config/sparc/linux.h
-+index 60dc869..4ae0cdb 100644
++index 49283d3..6f0b03a 100644
 +--- a/gcc/config/sparc/linux.h
 ++++ b/gcc/config/sparc/linux.h
-+@@ -84,7 +84,7 @@ extern const char *host_detect_local_cpu (int argc, const char **argv);
++@@ -83,7 +83,7 @@ extern const char *host_detect_local_cpu (int argc, const char **argv);
 +    When the -shared link option is used a final link is not being
 +    done.  */
 + 
@@ -7911,12 +5825,12 @@ index 0000000..c620ece
 ++#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.2"
 + 
 + #undef  LINK_SPEC
-+ #define LINK_SPEC "-m elf32_sparc -Y P,/usr/lib %{shared:-shared} \
++ #define LINK_SPEC "-m elf32_sparc %{shared:-shared} \
 +diff --git a/gcc/config/sparc/linux64.h b/gcc/config/sparc/linux64.h
-+index 14966b9..a41b6fe 100644
++index 7d48e96..b01993f 100644
 +--- a/gcc/config/sparc/linux64.h
 ++++ b/gcc/config/sparc/linux64.h
-+@@ -93,8 +93,8 @@ along with GCC; see the file COPYING3.  If not see
++@@ -92,8 +92,8 @@ along with GCC; see the file COPYING3.  If not see
 +    When the -shared link option is used a final link is not being
 +    done.  */
 + 
@@ -7930,81 +5844,16 @@ index 0000000..c620ece
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0034-arm-hard-float-loader.patch b/meta/recipes-devtools/gcc/gcc-4.7/0034-arm-hard-float-loader.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0030-gcc-Fix-argument-list-too-long-error.patch b/meta/recipes-devtools/gcc/gcc-4.8/0030-gcc-Fix-argument-list-too-long-error.patch
 new file mode 100644
-index 0000000..fd9cab2
+index 0000000..118db00
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0034-arm-hard-float-loader.patch
-@@ -0,0 +1,59 @@
-+From 32ca027efa3d1b1e50a5868f0e9c74e15638d589 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:41:18 +0400
-+Subject: [PATCH 34/44] arm hard-float loader
-+
-+This patch is still being discussed by probably is almost
-+final version. We add the OE notion of multilib on top.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport [ adapted ]
-+---
-+ gcc/config/arm/linux-eabi.h |   22 ++++++++++++++++++----
-+ 1 file changed, 18 insertions(+), 4 deletions(-)
-+
-+diff --git a/gcc/config/arm/linux-eabi.h b/gcc/config/arm/linux-eabi.h
-+index 2954d47..b542ddf 100644
-+--- a/gcc/config/arm/linux-eabi.h
-++++ b/gcc/config/arm/linux-eabi.h
-+@@ -32,7 +32,8 @@
-+   while (false)
-+ 
-+ /* We default to a soft-float ABI so that binaries can run on all
-+-   target hardware.  */
-++   target hardware.  If you override this to use the hard-float ABI then
-++   change the setting of GLIBC_DYNAMIC_LINKER_DEFAULT as well.  */
-+ #undef  TARGET_DEFAULT_FLOAT_ABI
-+ #define TARGET_DEFAULT_FLOAT_ABI ARM_FLOAT_ABI_SOFT
-+ 
-+@@ -59,10 +60,23 @@
-+ #undef  SUBTARGET_EXTRA_LINK_SPEC
-+ #define SUBTARGET_EXTRA_LINK_SPEC " -m " TARGET_LINKER_EMULATION
-+ 
-+-/* Use ld-linux.so.3 so that it will be possible to run "classic"
-+-   GNU/Linux binaries on an EABI system.  */
-++/* GNU/Linux on ARM currently supports three dynamic linkers:
-++   - ld-linux.so.2 - for the legacy ABI
-++   - ld-linux.so.3 - for the EABI-derived soft-float ABI
-++   - ld-linux-armhf.so.3 - for the EABI-derived hard-float ABI.
-++   All the dynamic linkers live in /lib.
-++   We default to soft-float, but this can be overridden by changing both
-++   GLIBC_DYNAMIC_LINKER_DEFAULT and TARGET_DEFAULT_FLOAT_ABI.  */
-++
-+ #undef  GLIBC_DYNAMIC_LINKER
-+-#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.3"
-++#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT SYSTEMLIBS_DIR "ld-linux.so.3"
-++#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT SYSTEMLIBS_DIR "ld-linux-armhf.so.3"
-++#define GLIBC_DYNAMIC_LINKER_DEFAULT GLIBC_DYNAMIC_LINKER_SOFT_FLOAT
-++
-++ #define GLIBC_DYNAMIC_LINKER \
-++    "%{mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_HARD_FLOAT "} \
-++     %{mfloat-abi=soft*:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "} \
-++     %{!mfloat-abi=*:" GLIBC_DYNAMIC_LINKER_DEFAULT "}"
-+ 
-+ /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
-+    use the GNU/Linux version, not the generic BPABI version.  */
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0035-gcc-Fix-argument-list-too-long-error.patch b/meta/recipes-devtools/gcc/gcc-4.7/0035-gcc-Fix-argument-list-too-long-error.patch
-new file mode 100644
-index 0000000..3a153fb
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0035-gcc-Fix-argument-list-too-long-error.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0030-gcc-Fix-argument-list-too-long-error.patch
 @@ -0,0 +1,40 @@
-+From 0cfed27995d536e86888e4e259f3c3981c4a4f84 Mon Sep 17 00:00:00 2001
++From c1816c160156f99c34e6a0a0311bb0219326804e Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:43:15 +0400
-+Subject: [PATCH 35/44] gcc: Fix argument list too long error.
++Date: Fri, 29 Mar 2013 09:26:37 +0400
++Subject: [PATCH 30/35] gcc: Fix argument list too long error.
 +
 +There would be an "Argument list too long" error when the
 +build directory is longer than 200, this is caused by:
@@ -8026,10 +5875,10 @@ index 0000000..3a153fb
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/gcc/Makefile.in b/gcc/Makefile.in
-+index 2d81f96..3209ba7 100644
++index 2320497..8562a62 100644
 +--- a/gcc/Makefile.in
 ++++ b/gcc/Makefile.in
-+@@ -4597,7 +4597,7 @@ install-plugin: installdirs lang.install-plugin s-header-vars install-gengtype
++@@ -4627,7 +4627,7 @@ install-plugin: installdirs lang.install-plugin s-header-vars install-gengtype
 + # We keep the directory structure for files in config or c-family and .def
 + # files. All other files are flattened to a single directory.
 + 	$(mkinstalldirs) $(DESTDIR)$(plugin_includedir)
@@ -8041,461 +5890,16 @@ index 0000000..3a153fb
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0036-Fix-g-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.7/0036-Fix-g-sysroot.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0031-Disable-sdt.patch b/meta/recipes-devtools/gcc/gcc-4.8/0031-Disable-sdt.patch
 new file mode 100644
-index 0000000..81ad895
+index 0000000..f259a60
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0036-Fix-g-sysroot.patch
-@@ -0,0 +1,439 @@
-+From 4941693c205bb4b6a290a9d45da879c7cbf96083 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:45:59 +0400
-+Subject: [PATCH 36/44] Fix g++ sysroot
-+
-+backport, refer
-+http://www.mail-archive.com/gcc-patches@gcc.gnu.org/msg26013.html
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Pending
-+---
-+ gcc/configure    |  182 ++++++++++++++++++++++++++++--------------------------
-+ gcc/configure.ac |  132 ++++++++++++++++++++-------------------
-+ 2 files changed, 163 insertions(+), 151 deletions(-)
-+
-+diff --git a/gcc/configure b/gcc/configure
-+index 3d43e48..af3f783 100755
-+--- a/gcc/configure
-++++ b/gcc/configure
-+@@ -757,10 +757,6 @@ REPORT_BUGS_TEXI
-+ REPORT_BUGS_TO
-+ PKGVERSION
-+ CONFIGURE_SPECS
-+-CROSS_SYSTEM_HEADER_DIR
-+-TARGET_SYSTEM_ROOT_DEFINE
-+-TARGET_SYSTEM_ROOT
-+-SYSROOT_CFLAGS_FOR_TARGET
-+ enable_shared
-+ enable_fixed_point
-+ enable_decimal_float
-+@@ -798,6 +794,10 @@ LDFLAGS
-+ CFLAGS
-+ CC
-+ GENINSRC
-++CROSS_SYSTEM_HEADER_DIR
-++TARGET_SYSTEM_ROOT_DEFINE
-++TARGET_SYSTEM_ROOT
-++SYSROOT_CFLAGS_FOR_TARGET
-+ target_subdir
-+ host_subdir
-+ build_subdir
-+@@ -859,6 +859,9 @@ ac_user_opts='
-+ enable_option_checking
-+ with_build_libsubdir
-+ with_local_prefix
-++with_native_system_header_dir
-++with_build_sysroot
-++with_sysroot
-+ with_gxx_include_dir
-+ with_cpp_install_dir
-+ enable_generated_files_in_srcdir
-+@@ -883,9 +886,6 @@ enable_tls
-+ enable_objc_gc
-+ with_dwarf2
-+ enable_shared
-+-with_native_system_header_dir
-+-with_build_sysroot
-+-with_sysroot
-+ with_specs
-+ with_pkgversion
-+ with_bugurl
-+@@ -1639,6 +1639,12 @@ Optional Packages:
-+   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-+   --with-build-libsubdir=DIR  Directory where to find libraries for build system
-+   --with-local-prefix=DIR specifies directory to put local include
-++  --with-native-system-header-dir=dir
-++                          use dir as the directory to look for standard
-++                          system header files in.  Defaults to /usr/include.
-++  --with-build-sysroot=sysroot
-++                          use sysroot as the system root during the build
-++  --with-sysroot[=DIR]    search for usr/lib, usr/include, et al, within DIR
-+   --with-gxx-include-dir=DIR
-+                           specifies directory to put g++ header files
-+   --with-cpp-install-dir=DIR
-+@@ -1651,12 +1657,6 @@ Optional Packages:
-+   --with-as               arrange to use the specified as (full pathname)
-+   --with-stabs            arrange to use stabs instead of host debug format
-+   --with-dwarf2           force the default debug format to be DWARF 2
-+-  --with-native-system-header-dir=dir
-+-                          use dir as the directory to look for standard
-+-                          system header files in.  Defaults to /usr/include.
-+-  --with-build-sysroot=sysroot
-+-                          use sysroot as the system root during the build
-+-  --with-sysroot[=DIR]    search for usr/lib, usr/include, et al, within DIR
-+   --with-specs=SPECS      add SPECS to driver command-line processing
-+   --with-pkgversion=PKG   Use PKG in the version string in place of "GCC"
-+   --with-bugurl=URL       Direct users to URL to report a bug
-+@@ -3288,6 +3288,82 @@ if test x$local_prefix = x; then
-+ 	local_prefix=/usr/local
-+ fi
-+ 
-++
-++# Check whether --with-native-system-header-dir was given.
-++if test "${with_native_system_header_dir+set}" = set; then :
-++  withval=$with_native_system_header_dir;
-++ case ${with_native_system_header_dir} in
-++ yes|no) as_fn_error "bad value ${withval} given for --with-native-system-header-dir" "$LINENO" 5 ;;
-++ /* | [A-Za-z]:[\\/]*) ;;
-++ *) as_fn_error "--with-native-system-header-dir argument ${withval} must be an absolute directory" "$LINENO" 5 ;;
-++ esac
-++ configured_native_system_header_dir="${withval}"
-++
-++else
-++  configured_native_system_header_dir=
-++fi
-++
-++
-++
-++# Check whether --with-build-sysroot was given.
-++if test "${with_build_sysroot+set}" = set; then :
-++  withval=$with_build_sysroot; if test x"$withval" != x ; then
-++     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
-++   fi
-++else
-++  SYSROOT_CFLAGS_FOR_TARGET=
-++fi
-++
-++
-++
-++
-++# Check whether --with-sysroot was given.
-++if test "${with_sysroot+set}" = set; then :
-++  withval=$with_sysroot;
-++ case ${with_sysroot} in
-++ /) ;;
-++ */) with_sysroot=`echo $with_sysroot | sed 's,/$,,'` ;;
-++ esac
-++ case ${with_sysroot} in
-++ yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
-++ *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
-++ esac
-++
-++ TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
-++ CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
-++
-++ if test "x$prefix" = xNONE; then
-++  test_prefix=/usr/local
-++ else
-++  test_prefix=$prefix
-++ fi
-++ if test "x$exec_prefix" = xNONE; then
-++  test_exec_prefix=$test_prefix
-++ else
-++  test_exec_prefix=$exec_prefix
-++ fi
-++ case ${TARGET_SYSTEM_ROOT} in
-++ "${test_prefix}"|"${test_prefix}/"*|\
-++ "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
-++ '${prefix}'|'${prefix}/'*|\
-++ '${exec_prefix}'|'${exec_prefix}/'*)
-++   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
-++   TARGET_SYSTEM_ROOT_DEFINE="$t"
-++   ;;
-++ esac
-++
-++else
-++
-++ TARGET_SYSTEM_ROOT=
-++ TARGET_SYSTEM_ROOT_DEFINE=
-++ CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
-++
-++fi
-++
-++
-++
-++
-++
-+ # Don't set gcc_gxx_include_dir to gxx_include_dir since that's only
-+ # passed in by the toplevel make and thus we'd get different behavior
-+ # depending on where we built the sources.
-+@@ -3321,7 +3397,9 @@ gcc_gxx_include_dir_add_sysroot=0
-+ if test "${with_sysroot+set}" = set; then
-+   gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
-+   if test "${gcc_gxx_without_sysroot}"; then
-+-    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
-++    if test x${with_sysroot} != x/; then
-++      gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
-++    fi
-+     gcc_gxx_include_dir_add_sysroot=1
-+   fi
-+ fi
-+@@ -7220,78 +7298,6 @@ fi
-+ 
-+ 
-+ 
-+-# Check whether --with-native-system-header-dir was given.
-+-if test "${with_native_system_header_dir+set}" = set; then :
-+-  withval=$with_native_system_header_dir;
-+- case ${with_native_system_header_dir} in
-+- yes|no) as_fn_error "bad value ${withval} given for --with-native-system-header-dir" "$LINENO" 5 ;;
-+- /* | [A-Za-z]:[\\/]*) ;;
-+- *) as_fn_error "--with-native-system-header-dir argument ${withval} must be an absolute directory" "$LINENO" 5 ;;
-+- esac
-+- configured_native_system_header_dir="${withval}"
-+-
-+-else
-+-  configured_native_system_header_dir=
-+-fi
-+-
-+-
-+-
-+-# Check whether --with-build-sysroot was given.
-+-if test "${with_build_sysroot+set}" = set; then :
-+-  withval=$with_build_sysroot; if test x"$withval" != x ; then
-+-     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
-+-   fi
-+-else
-+-  SYSROOT_CFLAGS_FOR_TARGET=
-+-fi
-+-
-+-
-+-
-+-
-+-# Check whether --with-sysroot was given.
-+-if test "${with_sysroot+set}" = set; then :
-+-  withval=$with_sysroot;
-+- case ${with_sysroot} in
-+- yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
-+- *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
-+- esac
-+-
-+- TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
-+- CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
-+-
-+- if test "x$prefix" = xNONE; then
-+-  test_prefix=/usr/local
-+- else
-+-  test_prefix=$prefix
-+- fi
-+- if test "x$exec_prefix" = xNONE; then
-+-  test_exec_prefix=$test_prefix
-+- else
-+-  test_exec_prefix=$exec_prefix
-+- fi
-+- case ${TARGET_SYSTEM_ROOT} in
-+- "${test_prefix}"|"${test_prefix}/"*|\
-+- "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
-+- '${prefix}'|'${prefix}/'*|\
-+- '${exec_prefix}'|'${exec_prefix}/'*)
-+-   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
-+-   TARGET_SYSTEM_ROOT_DEFINE="$t"
-+-   ;;
-+- esac
-+-
-+-else
-+-
-+- TARGET_SYSTEM_ROOT=
-+- TARGET_SYSTEM_ROOT_DEFINE=
-+- CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
-+-
-+-fi
-+-
-+-
-+-
-+-
-+-
-+-
-+ # Check whether --with-specs was given.
-+ if test "${with_specs+set}" = set; then :
-+   withval=$with_specs; CONFIGURE_SPECS=$withval
-+@@ -18013,7 +18019,7 @@ else
-+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
-+   lt_status=$lt_dlunknown
-+   cat > conftest.$ac_ext <<_LT_EOF
-+-#line 18016 "configure"
-++#line 18022 "configure"
-+ #include "confdefs.h"
-+ 
-+ #if HAVE_DLFCN_H
-+@@ -18119,7 +18125,7 @@ else
-+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
-+   lt_status=$lt_dlunknown
-+   cat > conftest.$ac_ext <<_LT_EOF
-+-#line 18122 "configure"
-++#line 18128 "configure"
-+ #include "confdefs.h"
-+ 
-+ #if HAVE_DLFCN_H
-+diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index b437a7e..67b5cd7 100644
-+--- a/gcc/configure.ac
-++++ b/gcc/configure.ac
-+@@ -118,6 +118,72 @@ if test x$local_prefix = x; then
-+ 	local_prefix=/usr/local
-+ fi
-+ 
-++AC_ARG_WITH([native-system-header-dir],
-++  [  --with-native-system-header-dir=dir
-++                          use dir as the directory to look for standard
-++                          system header files in.  Defaults to /usr/include.],
-++[
-++ case ${with_native_system_header_dir} in
-++ yes|no) AC_MSG_ERROR([bad value ${withval} given for --with-native-system-header-dir]) ;;
-++ /* | [[A-Za-z]]:[[\\/]]*) ;;
-++ *) AC_MSG_ERROR([--with-native-system-header-dir argument ${withval} must be an absolute directory]) ;;
-++ esac
-++ configured_native_system_header_dir="${withval}"
-++], [configured_native_system_header_dir=])
-++
-++AC_ARG_WITH(build-sysroot,
-++  [AS_HELP_STRING([--with-build-sysroot=sysroot],
-++                  [use sysroot as the system root during the build])],
-++  [if test x"$withval" != x ; then
-++     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
-++   fi],
-++  [SYSROOT_CFLAGS_FOR_TARGET=])
-++AC_SUBST(SYSROOT_CFLAGS_FOR_TARGET)
-++
-++AC_ARG_WITH(sysroot,
-++[AS_HELP_STRING([[--with-sysroot[=DIR]]],
-++ [search for usr/lib, usr/include, et al, within DIR])],
-++[
-++ case ${with_sysroot} in
-++ /) ;;
-++ */) with_sysroot=`echo $with_sysroot | sed 's,/$,,'` ;;
-++ esac
-++ case ${with_sysroot} in
-++ yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
-++ *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
-++ esac
-++
-++ TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
-++ CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
-++
-++ if test "x$prefix" = xNONE; then
-++  test_prefix=/usr/local
-++ else
-++  test_prefix=$prefix
-++ fi
-++ if test "x$exec_prefix" = xNONE; then
-++  test_exec_prefix=$test_prefix
-++ else
-++  test_exec_prefix=$exec_prefix
-++ fi
-++ case ${TARGET_SYSTEM_ROOT} in
-++ "${test_prefix}"|"${test_prefix}/"*|\
-++ "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
-++ '${prefix}'|'${prefix}/'*|\
-++ '${exec_prefix}'|'${exec_prefix}/'*)
-++   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
-++   TARGET_SYSTEM_ROOT_DEFINE="$t"
-++   ;;
-++ esac
-++], [
-++ TARGET_SYSTEM_ROOT=
-++ TARGET_SYSTEM_ROOT_DEFINE=
-++ CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
-++])
-++AC_SUBST(TARGET_SYSTEM_ROOT)
-++AC_SUBST(TARGET_SYSTEM_ROOT_DEFINE)
-++AC_SUBST(CROSS_SYSTEM_HEADER_DIR)
-++
-+ # Don't set gcc_gxx_include_dir to gxx_include_dir since that's only
-+ # passed in by the toplevel make and thus we'd get different behavior
-+ # depending on where we built the sources.
-+@@ -149,7 +215,9 @@ gcc_gxx_include_dir_add_sysroot=0
-+ if test "${with_sysroot+set}" = set; then
-+   gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
-+   if test "${gcc_gxx_without_sysroot}"; then
-+-    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
-++    if test x${with_sysroot} != x/; then
-++      gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
-++    fi
-+     gcc_gxx_include_dir_add_sysroot=1
-+   fi
-+ fi
-+@@ -733,68 +801,6 @@ AC_ARG_ENABLE(shared,
-+ ], [enable_shared=yes])
-+ AC_SUBST(enable_shared)
-+ 
-+-AC_ARG_WITH([native-system-header-dir],
-+-  [  --with-native-system-header-dir=dir
-+-                          use dir as the directory to look for standard
-+-                          system header files in.  Defaults to /usr/include.],
-+-[
-+- case ${with_native_system_header_dir} in
-+- yes|no) AC_MSG_ERROR([bad value ${withval} given for --with-native-system-header-dir]) ;;
-+- /* | [[A-Za-z]]:[[\\/]]*) ;;
-+- *) AC_MSG_ERROR([--with-native-system-header-dir argument ${withval} must be an absolute directory]) ;;
-+- esac
-+- configured_native_system_header_dir="${withval}"
-+-], [configured_native_system_header_dir=])
-+-
-+-AC_ARG_WITH(build-sysroot, 
-+-  [AS_HELP_STRING([--with-build-sysroot=sysroot],
-+-                  [use sysroot as the system root during the build])],
-+-  [if test x"$withval" != x ; then
-+-     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
-+-   fi],
-+-  [SYSROOT_CFLAGS_FOR_TARGET=])
-+-AC_SUBST(SYSROOT_CFLAGS_FOR_TARGET)
-+-
-+-AC_ARG_WITH(sysroot,
-+-[AS_HELP_STRING([[--with-sysroot[=DIR]]],
-+-		[search for usr/lib, usr/include, et al, within DIR])],
-+-[
-+- case ${with_sysroot} in
-+- yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
-+- *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
-+- esac
-+-   
-+- TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
-+- CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
-+-	
-+- if test "x$prefix" = xNONE; then
-+-  test_prefix=/usr/local
-+- else
-+-  test_prefix=$prefix
-+- fi
-+- if test "x$exec_prefix" = xNONE; then
-+-  test_exec_prefix=$test_prefix
-+- else
-+-  test_exec_prefix=$exec_prefix
-+- fi
-+- case ${TARGET_SYSTEM_ROOT} in
-+- "${test_prefix}"|"${test_prefix}/"*|\
-+- "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
-+- '${prefix}'|'${prefix}/'*|\
-+- '${exec_prefix}'|'${exec_prefix}/'*)
-+-   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
-+-   TARGET_SYSTEM_ROOT_DEFINE="$t"
-+-   ;;
-+- esac
-+-], [
-+- TARGET_SYSTEM_ROOT=
-+- TARGET_SYSTEM_ROOT_DEFINE=
-+- CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
-+-])
-+-AC_SUBST(TARGET_SYSTEM_ROOT)
-+-AC_SUBST(TARGET_SYSTEM_ROOT_DEFINE)
-+-AC_SUBST(CROSS_SYSTEM_HEADER_DIR)
-+-
-+ AC_ARG_WITH(specs,
-+   [AS_HELP_STRING([--with-specs=SPECS],
-+                   [add SPECS to driver command-line processing])],
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0037-Disable-sdt.patch b/meta/recipes-devtools/gcc/gcc-4.7/0037-Disable-sdt.patch
-new file mode 100644
-index 0000000..229200c
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0037-Disable-sdt.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0031-Disable-sdt.patch
 @@ -0,0 +1,45 @@
-+From aa5ebf3103b0313beb9ac7162a85ed4b6b263192 Mon Sep 17 00:00:00 2001
++From eb70cb2785af7171897f363298bbfcd83de5ec57 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:47:34 +0400
-+Subject: [PATCH 37/44] Disable sdt.
++Date: Fri, 29 Mar 2013 09:28:10 +0400
++Subject: [PATCH 31/35] Disable sdt.
 +
 +We don't list dtrace in DEPENDS so we shouldn't be depending on this header.
 +It may or may not exist from preivous builds though. To be determinstic, disable
@@ -8512,10 +5916,10 @@ index 0000000..229200c
 + 1 file changed, 6 insertions(+), 6 deletions(-)
 +
 +diff --git a/gcc/configure b/gcc/configure
-+index af3f783..a965cc6 100755
++index d587993..8bc0c98 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -26803,12 +26803,12 @@ fi
++@@ -26792,12 +26792,12 @@ fi
 + { $as_echo "$as_me:${as_lineno-$LINENO}: checking sys/sdt.h in the target C library" >&5
 + $as_echo_n "checking sys/sdt.h in the target C library... " >&6; }
 + have_sys_sdt_h=no
@@ -8537,16 +5941,16 @@ index 0000000..229200c
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0038-libtool.patch b/meta/recipes-devtools/gcc/gcc-4.7/0038-libtool.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0032-libtool.patch b/meta/recipes-devtools/gcc/gcc-4.8/0032-libtool.patch
 new file mode 100644
-index 0000000..6ce3c72
+index 0000000..54bb29b
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0038-libtool.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0032-libtool.patch
 @@ -0,0 +1,42 @@
-+From 81a1550fb2e44435ecbd93d3a064865c9fe6f184 Mon Sep 17 00:00:00 2001
++From 6c715fcfa262adadca81c68a1f3f69aa3187a501 Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:49:13 +0400
-+Subject: [PATCH 38/44] libtool
++Date: Fri, 29 Mar 2013 09:29:11 +0400
++Subject: [PATCH 32/35] libtool
 +
 +libstdc++ from gcc-runtime gets created with -rpath=/usr/lib/../lib for qemux86-64
 +when running on am x86_64 build host.
@@ -8585,16 +5989,16 @@ index 0000000..6ce3c72
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0039-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch b/meta/recipes-devtools/gcc/gcc-4.7/0039-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0033-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch b/meta/recipes-devtools/gcc/gcc-4.8/0033-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
 new file mode 100644
-index 0000000..37d0e90
+index 0000000..7c2c19a
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0039-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0033-gcc-armv4-pass-fix-v4bx-to-linker-to-support-EABI.patch
 @@ -0,0 +1,43 @@
-+From fee5ce651e5887ff962661325d59e483ce5ed48c Mon Sep 17 00:00:00 2001
++From 97e4591c20310425e7aca0e6712a8d9480e7744c Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:51:00 +0400
-+Subject: [PATCH 39/44] gcc: armv4: pass fix-v4bx to linker to support EABI.
++Date: Fri, 29 Mar 2013 09:30:32 +0400
++Subject: [PATCH 33/35] gcc: armv4: pass fix-v4bx to linker to support EABI.
 +
 +The LINK_SPEC for linux gets overwritten by linux-eabi.h which
 +means the value of TARGET_FIX_V4BX_SPEC gets lost and as a result
@@ -8612,12 +6016,12 @@ index 0000000..37d0e90
 + 1 file changed, 5 insertions(+), 1 deletion(-)
 +
 +diff --git a/gcc/config/arm/linux-eabi.h b/gcc/config/arm/linux-eabi.h
-+index b542ddf..edc528c 100644
++index 80f454d..4db3eb9 100644
 +--- a/gcc/config/arm/linux-eabi.h
 ++++ b/gcc/config/arm/linux-eabi.h
-+@@ -78,10 +78,14 @@
-+      %{mfloat-abi=soft*:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "} \
-+      %{!mfloat-abi=*:" GLIBC_DYNAMIC_LINKER_DEFAULT "}"
++@@ -77,10 +77,14 @@
++     %{mfloat-abi=soft*:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "} \
++     %{!mfloat-abi=*:" GLIBC_DYNAMIC_LINKER_DEFAULT "}"
 + 
 ++/* For armv4 we pass --fix-v4bx to linker to support EABI */
 ++#undef TARGET_FIX_V4BX_SPEC
@@ -8634,253 +6038,16 @@ index 0000000..37d0e90
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0040-gcc-ppc-out-of-line-save-restore-conditions.patch b/meta/recipes-devtools/gcc/gcc-4.7/0040-gcc-ppc-out-of-line-save-restore-conditions.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0034-Use-the-multilib-config-files-from-B-instead-of-usin.patch b/meta/recipes-devtools/gcc/gcc-4.8/0034-Use-the-multilib-config-files-from-B-instead-of-usin.patch
 new file mode 100644
-index 0000000..c4a313b
+index 0000000..c531d36
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0040-gcc-ppc-out-of-line-save-restore-conditions.patch
-@@ -0,0 +1,74 @@
-+From 45955872394c6ce4c7fb196941782db836b33ca5 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:56:54 +0400
-+Subject: [PATCH 40/44] gcc: ppc: out-of-line save/restore conditions.
-+
-+Source-url: http://gcc.gnu.org/ml/gcc-patches/2012-05/msg01362.html
-+
-+Currently, powerpc-linux gcc -Os -mno-multiple uses out-of-linux gpr
-+save and restore functions when saving/restoring just one gpr.  That's
-+quite silly since the function call requires more instructions and is
-+slower than an inline save/restore.  The only case where it might win
-+is when no fprs are restored and the restore function can tear down
-+the frame and exit (also loading up lr on ppc64).  I guess that's how
-+GP_SAVE_INLINE came to be like it is, ie. it's optimised for the
-+common case using ldm in the prologue and no fprs.  Still, it isn't
-+difficult to choose the best combination in all cases, but it does
-+mean different logic is needed for restores.  I could have implemented
-+GP_RESTORE_INLINE and FP_RESORE_INLINE macros but it seemed simpler to
-+just move everything into the one place the macros are invoked.  AIX
-+and Darwin register cutoff doesn't change with this patch.
-+
-+This patch also enables out-of-line restores in cases that were
-+previously disabled due to using inline saves.
-+
-+Bootstrapped and regression tested powerpc-linux.  OK to apply?
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ gcc/config/rs6000/aix.h    |    5 -----
-+ gcc/config/rs6000/darwin.h |   10 ----------
-+ 2 files changed, 15 deletions(-)
-+
-+diff --git a/gcc/config/rs6000/aix.h b/gcc/config/rs6000/aix.h
-+index 29eabbb..dcd792b 100644
-+--- a/gcc/config/rs6000/aix.h
-++++ b/gcc/config/rs6000/aix.h
-+@@ -207,11 +207,6 @@
-+   { "link_syscalls",            LINK_SYSCALLS_SPEC },			\
-+   { "link_libg",                LINK_LIBG_SPEC }
-+ 
-+-/* Define cutoff for using external functions to save floating point.  */
-+-#define FP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) == 62 || (FIRST_REG) == 63)
-+-/* And similarly for general purpose registers.  */
-+-#define GP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) < 32)
-+-
-+ #define PROFILE_HOOK(LABEL)   output_profile_hook (LABEL)
-+ 
-+ /* No version of AIX fully supports AltiVec or 64-bit instructions in
-+diff --git a/gcc/config/rs6000/darwin.h b/gcc/config/rs6000/darwin.h
-+index 425111e..5a482d9 100644
-+--- a/gcc/config/rs6000/darwin.h
-++++ b/gcc/config/rs6000/darwin.h
-+@@ -173,16 +173,6 @@ extern int darwin_emit_branch_islands;
-+   (RS6000_ALIGN (crtl->outgoing_args_size, 16)		\
-+    + (STACK_POINTER_OFFSET))
-+ 
-+-/* Define cutoff for using out-of-line functions to save registers.
-+-   Currently on Darwin, we implement FP and GPR out-of-line-saves plus the
-+-   special routine for 'save everything'.  */
-+-
-+-#undef FP_SAVE_INLINE
-+-#define FP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) > 60 && (FIRST_REG) < 64)
-+-
-+-#undef GP_SAVE_INLINE
-+-#define GP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) > 29 && (FIRST_REG) < 32)
-+-
-+ /* Darwin uses a function call if everything needs to be saved/restored.  */
-+ 
-+ #undef WORLD_SAVE_P
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0041-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch b/meta/recipes-devtools/gcc/gcc-4.7/0041-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
-new file mode 100644
-index 0000000..c2d2aa4
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0041-crtstuff.c-USE_PT_GNU_EH_FRAME-Define-for-systems-us.patch
-@@ -0,0 +1,52 @@
-+From 9e0705f9995b9e739fad8a5973fe5d699019f0d6 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 22:59:33 +0400
-+Subject: [PATCH 41/44] crtstuff.c (USE_PT_GNU_EH_FRAME): Define for systems
-+ using glibc 	even if inhibit_libc.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@190517 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ libgcc/crtstuff.c |   16 +++++++++++++++-
-+ 1 file changed, 15 insertions(+), 1 deletion(-)
-+
-+diff --git a/libgcc/crtstuff.c b/libgcc/crtstuff.c
-+index 5d820fa..973956a 100644
-+--- a/libgcc/crtstuff.c
-++++ b/libgcc/crtstuff.c
-+@@ -1,7 +1,7 @@
-+ /* Specialized bits of code needed to support construction and
-+    destruction of file-scope objects in C++ code.
-+    Copyright (C) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
-+-   2002, 2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011
-++   2002, 2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012
-+    Free Software Foundation, Inc.
-+    Contributed by Ron Guilmette (rfg@monkeys.com).
-+ 
-+@@ -113,6 +113,20 @@ call_ ## FUNC (void)					\
-+ #  define USE_PT_GNU_EH_FRAME
-+ # endif
-+ #endif
-++
-++#if defined(OBJECT_FORMAT_ELF) \
-++    && !defined(OBJECT_FORMAT_FLAT) \
-++    && defined(HAVE_LD_EH_FRAME_HDR) \
-++    && !defined(CRTSTUFFT_O) \
-++    && defined(inhibit_libc) \
-++    && (defined(__GLIBC__) || defined(__gnu_linux__) || defined(__GNU__))
-++/* On systems using glibc, an inhibit_libc build of libgcc is only
-++   part of a bootstrap process.  Build the same crt*.o as would be
-++   built with headers present, so that it is not necessary to build
-++   glibc more than once for the bootstrap to converge.  */
-++# define USE_PT_GNU_EH_FRAME
-++#endif
-++
-+ #if defined(EH_FRAME_SECTION_NAME) && !defined(USE_PT_GNU_EH_FRAME)
-+ # define USE_EH_FRAME_REGISTRY
-+ #endif
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0042-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch b/meta/recipes-devtools/gcc/gcc-4.7/0042-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
-new file mode 100644
-index 0000000..823609e
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0042-Makefile.in-vis_hide-gen-hide-list-Do-not-make-defin.patch
-@@ -0,0 +1,93 @@
-+From a395d000f21becf3aac99d1b132504ca2f6afcf0 Mon Sep 17 00:00:00 2001
-+From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 23:01:58 +0400
-+Subject: [PATCH 42/44] Makefile.in (vis_hide, gen-hide-list): Do not make
-+ definitions depend on --enable-shared.
-+
-+($(lib1asmfuncs-o)): Use %.vis files independent of --enable-shared. 	* static-object.mk
-+($(base)$(objext), $(base).vis)
-+($(base)_s$(objext)): Use same rules for visibility handling as in 	shared-object.mk.
-+
-+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@190588 138bc75d-0d04-0410-961f-82ee72b054a4
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Backport
-+---
-+ libgcc/Makefile.in      |   16 ++++------------
-+ libgcc/static-object.mk |   10 ++++++++--
-+ 2 files changed, 12 insertions(+), 14 deletions(-)
-+
-+diff --git a/libgcc/Makefile.in b/libgcc/Makefile.in
-+index f38d5b4..ec48543 100644
-+--- a/libgcc/Makefile.in
-++++ b/libgcc/Makefile.in
-+@@ -362,6 +362,7 @@ ifeq ($(enable_shared),yes)
-+   ifneq ($(LIBUNWIND),)
-+     install-libunwind = install-libunwind
-+   endif
-++endif
-+ 
-+ # For -fvisibility=hidden.  We need both a -fvisibility=hidden on
-+ # the command line, and a #define to prevent libgcc2.h etc from
-+@@ -385,11 +386,8 @@ else
-+ gen-hide-list = echo > $@
-+ endif
-+ 
-+-else
-+-# Not enable_shared.
-++ifneq ($(enable_shared),yes)
-+ iterator = $(srcdir)/empty.mk $(patsubst %,$(srcdir)/static-object.mk,$(iter-items))
-+-vis_hide =
-+-gen-hide-list = echo > \$@
-+ endif
-+ 
-+ LIB2ADD += enable-execute-stack.c
-+@@ -438,7 +436,6 @@ LIB2_DIVMOD_FUNCS := $(filter-out $(LIB2FUNCS_EXCLUDE) $(LIB1ASMFUNCS), \
-+ 		       $(LIB2_DIVMOD_FUNCS))
-+ 
-+ # Build "libgcc1" (assembly) components.
-+-ifeq ($(enable_shared),yes)
-+ 
-+ lib1asmfuncs-o = $(patsubst %,%$(objext),$(LIB1ASMFUNCS))
-+ $(lib1asmfuncs-o): %$(objext): $(srcdir)/config/$(LIB1ASMSRC) %.vis
-+@@ -450,14 +447,9 @@ libgcc-objects += $(lib1asmfuncs-o)
-+ lib1asmfuncs-s-o = $(patsubst %,%_s$(objext),$(LIB1ASMFUNCS))
-+ $(lib1asmfuncs-s-o): %_s$(objext): $(srcdir)/config/$(LIB1ASMSRC)
-+ 	$(gcc_s_compile) -DL$* -xassembler-with-cpp -c $<
-+-libgcc-s-objects += $(lib1asmfuncs-s-o)
-+-
-+-else
-++ifeq ($(enable_shared),yes)
-+ 
-+-lib1asmfuncs-o = $(patsubst %,%$(objext),$(LIB1ASMFUNCS))
-+-$(lib1asmfuncs-o): %$(objext): $(srcdir)/config/$(LIB1ASMSRC)
-+-	$(gcc_compile) -DL$* -xassembler-with-cpp -c $<
-+-libgcc-objects += $(lib1asmfuncs-o)
-++libgcc-s-objects += $(lib1asmfuncs-s-o)
-+ 
-+ endif
-+ 
-+diff --git a/libgcc/static-object.mk b/libgcc/static-object.mk
-+index 930f009..4f53636 100644
-+--- a/libgcc/static-object.mk
-++++ b/libgcc/static-object.mk
-+@@ -24,7 +24,13 @@ $(error Unsupported file type: $o)
-+ endif
-+ endif
-+ 
-+-$(base)$(objext): $o
-+-	$(gcc_compile) -c -xassembler-with-cpp $<
-++$(base)$(objext): $o $(base).vis
-++	$(gcc_compile) -c -xassembler-with-cpp -include $*.vis $<
-++
-++$(base).vis: $(base)_s$(objext)
-++	$(gen-hide-list)
-++
-++$(base)_s$(objext): $o
-++	$(gcc_s_compile) -c -xassembler-with-cpp $<
-+ 
-+ endif
-+-- 
-+1.7.10.4
-+
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0043-Use-the-multilib-config-files-from-B-instead-of-usin.patch b/meta/recipes-devtools/gcc/gcc-4.7/0043-Use-the-multilib-config-files-from-B-instead-of-usin.patch
-new file mode 100644
-index 0000000..c876769
---- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0043-Use-the-multilib-config-files-from-B-instead-of-usin.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0034-Use-the-multilib-config-files-from-B-instead-of-usin.patch
 @@ -0,0 +1,102 @@
-+From 714744a7a2ca2942d0c603283bacd5ab1520f3bd Mon Sep 17 00:00:00 2001
++From fc5e4beaea856a2b486c770ad3addc0f5bb3100e Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Wed, 6 Mar 2013 23:04:36 +0400
-+Subject: [PATCH 43/44] Use the multilib config files from ${B} instead of
++Date: Fri, 29 Mar 2013 09:33:04 +0400
++Subject: [PATCH 34/35] Use the multilib config files from ${B} instead of
 + using the ones from ${S}
 +
 +Use the multilib config files from ${B} instead of using the ones from ${S}
@@ -8897,10 +6064,10 @@ index 0000000..c876769
 + 2 files changed, 36 insertions(+), 8 deletions(-)
 +
 +diff --git a/gcc/configure b/gcc/configure
-+index a965cc6..1e6aa32 100755
++index 8bc0c98..3cd0817 100755
 +--- a/gcc/configure
 ++++ b/gcc/configure
-+@@ -11717,10 +11717,20 @@ done
++@@ -11519,10 +11519,20 @@ done
 + tmake_file_=
 + for f in ${tmake_file}
 + do
@@ -8925,7 +6092,7 @@ index 0000000..c876769
 + done
 + tmake_file="${tmake_file_}"
 + 
-+@@ -11731,6 +11741,10 @@ tm_file_list="options.h"
++@@ -11533,6 +11543,10 @@ tm_file_list="options.h"
 + tm_include_list="options.h insn-constants.h"
 + for f in $tm_file; do
 +   case $f in
@@ -8937,10 +6104,10 @@ index 0000000..c876769
 +        f=`echo $f | sed 's/^..//'`
 +        tm_file_list="${tm_file_list} $f"
 +diff --git a/gcc/configure.ac b/gcc/configure.ac
-+index 67b5cd7..ec9a7b7 100644
++index 5e5e84f..415a6df 100644
 +--- a/gcc/configure.ac
 ++++ b/gcc/configure.ac
-+@@ -1701,10 +1701,20 @@ done
++@@ -1700,10 +1700,20 @@ done
 + tmake_file_=
 + for f in ${tmake_file}
 + do
@@ -8965,7 +6132,7 @@ index 0000000..c876769
 + done
 + tmake_file="${tmake_file_}"
 + 
-+@@ -1715,6 +1725,10 @@ tm_file_list="options.h"
++@@ -1714,6 +1724,10 @@ tm_file_list="options.h"
 + tm_include_list="options.h insn-constants.h"
 + for f in $tm_file; do
 +   case $f in
@@ -8979,16 +6146,16 @@ index 0000000..c876769
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/0044-wcast-qual-PR-55383.patch b/meta/recipes-devtools/gcc/gcc-4.7/0044-wcast-qual-PR-55383.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/0035-wcast-qual-PR-55383.patch b/meta/recipes-devtools/gcc/gcc-4.8/0035-wcast-qual-PR-55383.patch
 new file mode 100644
-index 0000000..a2a6c10
+index 0000000..94e285d
 --- /dev/null
-+++ b/meta/recipes-devtools/gcc/gcc-4.7/0044-wcast-qual-PR-55383.patch
++++ b/meta/recipes-devtools/gcc/gcc-4.8/0035-wcast-qual-PR-55383.patch
 @@ -0,0 +1,55 @@
-+From 373abf6be31300022ba3b2c595410c1fb0dc4d7a Mon Sep 17 00:00:00 2001
++From deffdb0b2497a106061d3ea2c6a3fef4fba3445e Mon Sep 17 00:00:00 2001
 +From: Elvis Dowson <elvis.dowson@gmail.com>
-+Date: Fri, 29 Mar 2013 10:04:05 +0400
-+Subject: [PATCH 44/44] wcast-qual PR/55383
++Date: Fri, 29 Mar 2013 09:39:51 +0400
++Subject: [PATCH 35/35] wcast-qual PR/55383
 +
 +This is a backport from gcc bugzilla
 +
@@ -9001,15 +6168,15 @@ index 0000000..a2a6c10
 +
 +Upstream-Status: Backport
 +---
-+ gcc/c-typeck.c                            |    2 +-
++ gcc/c/c-typeck.c                          |    2 +-
 + gcc/testsuite/c-c++-common/Wcast-qual-1.c |    6 +++---
 + 2 files changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/gcc/c-typeck.c b/gcc/c-typeck.c
-+index bd82d42..bc27f6c 100644
-+--- a/gcc/c-typeck.c
-++++ b/gcc/c-typeck.c
-+@@ -4557,7 +4557,7 @@ handle_warn_cast_qual (location_t loc, tree type, tree otype)
++diff --git a/gcc/c/c-typeck.c b/gcc/c/c-typeck.c
++index ddb6d39..c624120 100644
++--- a/gcc/c/c-typeck.c
+++++ b/gcc/c/c-typeck.c
++@@ -4464,7 +4464,7 @@ handle_warn_cast_qual (location_t loc, tree type, tree otype)
 +     /* There are qualifiers present in IN_OTYPE that are not present
 +        in IN_TYPE.  */
 +     warning_at (loc, OPT_Wcast_qual,
@@ -9040,10 +6207,10 @@ index 0000000..a2a6c10
 +-- 
 +1.7.10.4
 +
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/100-uclibc-conf.patch b/meta/recipes-devtools/gcc/gcc-4.7/100-uclibc-conf.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/100-uclibc-conf.patch b/meta/recipes-devtools/gcc/gcc-4.8/100-uclibc-conf.patch
 deleted file mode 100644
 index b2981e0..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/100-uclibc-conf.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/100-uclibc-conf.patch
 +++ /dev/null
 @@ -1,39 +0,0 @@
 -Upstream-Status: Pending
@@ -9085,10 +6252,10 @@ index b2981e0..0000000
 -   version_type=linux
 -   need_lib_prefix=no
 -   need_version=no
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/200-uclibc-locale.patch b/meta/recipes-devtools/gcc/gcc-4.7/200-uclibc-locale.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/200-uclibc-locale.patch b/meta/recipes-devtools/gcc/gcc-4.8/200-uclibc-locale.patch
 deleted file mode 100644
 index df22c54..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/200-uclibc-locale.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/200-uclibc-locale.patch
 +++ /dev/null
 @@ -1,2810 +0,0 @@
 -Upstream-Status: Pending
@@ -11901,10 +9068,10 @@ index df22c54..0000000
 -   using ::wcslen;
 -   using ::wcsncat;
 -   using ::wcsncmp;
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/203-uclibc-locale-no__x.patch b/meta/recipes-devtools/gcc/gcc-4.7/203-uclibc-locale-no__x.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/203-uclibc-locale-no__x.patch b/meta/recipes-devtools/gcc/gcc-4.8/203-uclibc-locale-no__x.patch
 deleted file mode 100644
 index c602e91..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/203-uclibc-locale-no__x.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/203-uclibc-locale-no__x.patch
 +++ /dev/null
 @@ -1,235 +0,0 @@
 -Upstream-Status: Pending
@@ -12142,10 +9309,10 @@ index c602e91..0000000
 - #endif
 - 
 - namespace std
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/204-uclibc-locale-wchar_fix.patch b/meta/recipes-devtools/gcc/gcc-4.7/204-uclibc-locale-wchar_fix.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/204-uclibc-locale-wchar_fix.patch b/meta/recipes-devtools/gcc/gcc-4.8/204-uclibc-locale-wchar_fix.patch
 deleted file mode 100644
 index 896d2a5..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/204-uclibc-locale-wchar_fix.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/204-uclibc-locale-wchar_fix.patch
 +++ /dev/null
 @@ -1,54 +0,0 @@
 -Upstream-Status: Pending
@@ -12202,10 +9369,10 @@ index 896d2a5..0000000
 - 
 - 	  if (_M_data->_M_thousands_sep == L'\0')
 - 	    _M_data->_M_grouping = "";
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/205-uclibc-locale-update.patch b/meta/recipes-devtools/gcc/gcc-4.7/205-uclibc-locale-update.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/205-uclibc-locale-update.patch b/meta/recipes-devtools/gcc/gcc-4.8/205-uclibc-locale-update.patch
 deleted file mode 100644
 index 743017b..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/205-uclibc-locale-update.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/205-uclibc-locale-update.patch
 +++ /dev/null
 @@ -1,521 +0,0 @@
 -Upstream-Status: Pending
@@ -12729,10 +9896,10 @@ index 743017b..0000000
 - 
 - #ifdef __UCLIBC_MJN3_ONLY__
 - #warning clean this up
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/301-missing-execinfo_h.patch b/meta/recipes-devtools/gcc/gcc-4.7/301-missing-execinfo_h.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/301-missing-execinfo_h.patch b/meta/recipes-devtools/gcc/gcc-4.8/301-missing-execinfo_h.patch
 deleted file mode 100644
 index 9589822..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/301-missing-execinfo_h.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/301-missing-execinfo_h.patch
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -Upstream-Status: Pending
@@ -12750,10 +9917,10 @@ index 9589822..0000000
 - #   ifndef GC_HAVE_BUILTIN_BACKTRACE
 - #     define GC_HAVE_BUILTIN_BACKTRACE
 - #   endif
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/302-c99-snprintf.patch b/meta/recipes-devtools/gcc/gcc-4.7/302-c99-snprintf.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/302-c99-snprintf.patch b/meta/recipes-devtools/gcc/gcc-4.8/302-c99-snprintf.patch
 deleted file mode 100644
 index 9becc15..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/302-c99-snprintf.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/302-c99-snprintf.patch
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -Upstream-Status: Pending
@@ -12771,10 +9938,10 @@ index 9becc15..0000000
 - 
 - #undef snprintf
 - #undef vfscanf
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/303-c99-complex-ugly-hack.patch b/meta/recipes-devtools/gcc/gcc-4.7/303-c99-complex-ugly-hack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/303-c99-complex-ugly-hack.patch b/meta/recipes-devtools/gcc/gcc-4.8/303-c99-complex-ugly-hack.patch
 deleted file mode 100644
 index d69c546..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/303-c99-complex-ugly-hack.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/303-c99-complex-ugly-hack.patch
 +++ /dev/null
 @@ -1,16 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
@@ -12793,10 +9960,10 @@ index d69c546..0000000
 - int
 - main ()
 - {
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/304-index_macro.patch b/meta/recipes-devtools/gcc/gcc-4.7/304-index_macro.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/304-index_macro.patch b/meta/recipes-devtools/gcc/gcc-4.8/304-index_macro.patch
 deleted file mode 100644
 index f103765..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/304-index_macro.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/304-index_macro.patch
 +++ /dev/null
 @@ -1,30 +0,0 @@
 -Upstream-Status: Pending
@@ -12829,10 +9996,10 @@ index f103765..0000000
 - namespace __gnu_cxx _GLIBCXX_VISIBILITY(default)
 - {
 - _GLIBCXX_BEGIN_NAMESPACE_VERSION
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/305-libmudflap-susv3-legacy.patch b/meta/recipes-devtools/gcc/gcc-4.7/305-libmudflap-susv3-legacy.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/305-libmudflap-susv3-legacy.patch b/meta/recipes-devtools/gcc/gcc-4.8/305-libmudflap-susv3-legacy.patch
 deleted file mode 100644
 index 10d09a7..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/305-libmudflap-susv3-legacy.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/305-libmudflap-susv3-legacy.patch
 +++ /dev/null
 @@ -1,51 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
@@ -12886,10 +10053,10 @@ index 10d09a7..0000000
 - }
 - 
 - /* XXX:  stpcpy, memccpy */
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/306-libstdc++-namespace.patch b/meta/recipes-devtools/gcc/gcc-4.7/306-libstdc++-namespace.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/306-libstdc++-namespace.patch b/meta/recipes-devtools/gcc/gcc-4.8/306-libstdc++-namespace.patch
 deleted file mode 100644
 index e99bf96..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/306-libstdc++-namespace.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/306-libstdc++-namespace.patch
 +++ /dev/null
 @@ -1,40 +0,0 @@
 -Upstream-Status: Pending
@@ -12932,12 +10099,12 @@ index e99bf96..0000000
 -       _S_destroy_c_locale(_M_c_locale_timepunct);
 -     }
 -+}
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/64bithack.patch b/meta/recipes-devtools/gcc/gcc-4.7/64bithack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/64bithack.patch b/meta/recipes-devtools/gcc/gcc-4.8/64bithack.patch
 deleted file mode 100644
-index f475669..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/64bithack.patch
+index f10df4a..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/64bithack.patch
 +++ /dev/null
-@@ -1,63 +0,0 @@
+@@ -1,66 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
 -
 -GCC has internal multilib handling code but it assumes a very specific rigid directory
@@ -12958,53 +10125,56 @@ index f475669..0000000
 -
 -RP 15/8/11
 -
--Index: trunk/gcc/config/i386/t-linux64
+-Index: gcc-4.8.0/gcc/config/i386/t-linux64
 -===================================================================
----- trunk.orig/gcc/config/i386/t-linux64	2012-02-22 09:44:48.000000000 -0800
--+++ trunk/gcc/config/i386/t-linux64	2012-02-22 12:31:01.836462957 -0800
--@@ -33,7 +33,6 @@
+---- gcc-4.8.0.orig/gcc/config/i386/t-linux64	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/i386/t-linux64	2013-03-26 11:59:28.381766975 -0700
+-@@ -32,7 +32,5 @@
 - #
 - comma=,
 - MULTILIB_OPTIONS    = $(subst $(comma),/,$(TM_MULTILIB_CONFIG))
 --MULTILIB_DIRNAMES   = $(patsubst m%, %, $(subst /, ,$(MULTILIB_OPTIONS)))
---MULTILIB_OSDIRNAMES = m64=../lib64
---MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
---MULTILIB_OSDIRNAMES+= mx32=../libx32
+--MULTILIB_OSDIRNAMES = m64=../lib64$(call if_multiarch,:x86_64-linux-gnu)
+--MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)$(call if_multiarch,:i386-linux-gnu)
+--MULTILIB_OSDIRNAMES+= mx32=../libx32$(call if_multiarch,:x86_64-linux-gnux32)
 -+MULTILIB_DIRNAMES = . .
 -+MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
--+
--Index: trunk/gcc/config/mips/t-linux64
+-Index: gcc-4.8.0/gcc/config/mips/t-linux64
 -===================================================================
----- trunk.orig/gcc/config/mips/t-linux64	2012-02-22 09:44:58.000000000 -0800
--+++ trunk/gcc/config/mips/t-linux64	2012-02-22 12:32:01.132465823 -0800
--@@ -17,5 +17,5 @@
+---- gcc-4.8.0.orig/gcc/config/mips/t-linux64	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/mips/t-linux64	2013-03-26 12:00:56.973768645 -0700
+-@@ -17,10 +17,6 @@
 - # <http://www.gnu.org/licenses/>.
 - 
 - MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
 --MULTILIB_DIRNAMES = n32 32 64
---MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64
+--MIPS_EL = $(if $(filter %el, $(firstword $(subst -, ,$(target)))),el)
+--MIPS_SOFT = $(if $(strip $(filter MASK_SOFT_FLOAT_ABI, $(target_cpu_default)) $(filter soft, $(with_float))),soft)
+--MULTILIB_OSDIRNAMES = \
+--	../lib32$(call if_multiarch,:mips64$(MIPS_EL)-linux-gnuabin32$(MIPS_SOFT)) \
+--	../lib$(call if_multiarch,:mips$(MIPS_EL)-linux-gnu$(MIPS_SOFT)) \
+--	../lib64$(call if_multiarch,:mips64$(MIPS_EL)-linux-gnuabi64$(MIPS_SOFT))
 -+MULTILIB_DIRNAMES = . . .
 -+MULTILIB_OSDIRNAMES = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
--Index: trunk/gcc/config/rs6000/t-linux64
+-+
+-Index: gcc-4.8.0/gcc/config/rs6000/t-linux64
 -===================================================================
----- trunk.orig/gcc/config/rs6000/t-linux64	2012-02-22 09:44:54.000000000 -0800
--+++ trunk/gcc/config/rs6000/t-linux64	2012-02-22 12:28:17.960454968 -0800
--@@ -27,9 +27,9 @@
+---- gcc-4.8.0.orig/gcc/config/rs6000/t-linux64	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/rs6000/t-linux64	2013-03-26 12:04:10.885772283 -0700
+-@@ -26,7 +26,6 @@
 - # MULTILIB_OSDIRNAMES according to what is found on the target.
 - 
-- MULTILIB_OPTIONS        = m64/m32 msoft-float
---MULTILIB_DIRNAMES       = 64 32 nof
--+MULTILIB_DIRNAMES       = . . .
-- MULTILIB_EXTRA_OPTS     = fPIC mstrict-align
-- MULTILIB_EXCEPTIONS     = m64/msoft-float
-- MULTILIB_EXCLUSIONS     = m64/!m32/msoft-float
---MULTILIB_OSDIRNAMES	= ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib) nof
--+MULTILIB_OSDIRNAMES	= ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
-- MULTILIB_MATCHES        = $(MULTILIB_MATCHES_FLOAT)
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/740-sh-pr24836.patch b/meta/recipes-devtools/gcc/gcc-4.7/740-sh-pr24836.patch
+- MULTILIB_OPTIONS        = m64/m32
+--MULTILIB_DIRNAMES       = 64 32
+-+MULTILIB_DIRNAMES       = . .
+- MULTILIB_EXTRA_OPTS     = fPIC
+--MULTILIB_OSDIRNAMES	= ../lib64$(call if_multiarch,:powerpc64-linux-gnu)
+--MULTILIB_OSDIRNAMES    += $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)$(call if_multiarch,:powerpc-linux-gnu)
+-+MULTILIB_OSDIRNAMES    = ../$(shell basename $(base_libdir)) ../$(shell basename $(base_libdir))
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/740-sh-pr24836.patch b/meta/recipes-devtools/gcc/gcc-4.8/740-sh-pr24836.patch
 deleted file mode 100644
 index 1406f87..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/740-sh-pr24836.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/740-sh-pr24836.patch
 +++ /dev/null
 @@ -1,31 +0,0 @@
 -Upstream-Status: Pending
@@ -13038,12 +10208,12 @@ index 1406f87..0000000
 -     conftest_s='
 - 	.section ".tdata","awT",@progbits
 - foo:	.long	25
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/800-arm-bigendian.patch b/meta/recipes-devtools/gcc/gcc-4.7/800-arm-bigendian.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/800-arm-bigendian.patch b/meta/recipes-devtools/gcc/gcc-4.8/800-arm-bigendian.patch
 deleted file mode 100644
-index ac301bd..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/800-arm-bigendian.patch
+index 16b2307..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/800-arm-bigendian.patch
 +++ /dev/null
-@@ -1,36 +0,0 @@
+@@ -1,20 +0,0 @@
 -Upstream-Status: Pending
 -
 -By Lennert Buytenhek <buytenh@wantstofly.org>
@@ -13051,11 +10221,11 @@ index ac301bd..0000000
 -
 -See http://gcc.gnu.org/PR16350
 -
--Index: gcc-4_7-branch/gcc/config/arm/linux-elf.h
+-Index: gcc-4.8.0/gcc/config/arm/linux-elf.h
 -===================================================================
----- gcc-4_7-branch.orig/gcc/config/arm/linux-elf.h	2012-04-10 10:19:49.171337068 -0700
--+++ gcc-4_7-branch/gcc/config/arm/linux-elf.h	2012-04-10 10:32:36.819374226 -0700
--@@ -48,7 +48,7 @@
+---- gcc-4.8.0.orig/gcc/config/arm/linux-elf.h	2013-03-26 11:38:59.000000000 -0700
+-+++ gcc-4.8.0/gcc/config/arm/linux-elf.h	2013-03-26 11:40:03.277745106 -0700
+-@@ -46,7 +46,7 @@
 - 
 - #undef  MULTILIB_DEFAULTS
 - #define MULTILIB_DEFAULTS \
@@ -13064,26 +10234,10 @@ index ac301bd..0000000
 - 
 - /* Now we define the strings used to build the spec file.  */
 - #undef  LIB_SPEC
--Index: gcc-4_7-branch/gcc/config.gcc
--===================================================================
----- gcc-4_7-branch.orig/gcc/config.gcc	2012-04-10 10:19:49.159337069 -0700
--+++ gcc-4_7-branch/gcc/config.gcc	2012-04-10 10:32:36.823374222 -0700
--@@ -842,6 +842,11 @@
-- 	esac
-- 	tmake_file="${tmake_file} arm/t-arm"
-- 	case ${target} in
--+	arm*b-*)
--+		tm_defines="${tm_defines} TARGET_BIG_ENDIAN_DEFAULT=1"
--+		;;
--+	esac
--+	case ${target} in
-- 	arm*-*-linux-*eabi)
-- 	    tm_file="$tm_file arm/bpabi.h arm/linux-eabi.h"
-- 	    tmake_file="$tmake_file arm/t-arm-elf arm/t-bpabi arm/t-linux-eabi"
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/COLLECT_GCC_OPTIONS.patch b/meta/recipes-devtools/gcc/gcc-4.7/COLLECT_GCC_OPTIONS.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/COLLECT_GCC_OPTIONS.patch b/meta/recipes-devtools/gcc/gcc-4.8/COLLECT_GCC_OPTIONS.patch
 deleted file mode 100644
 index f598298..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/COLLECT_GCC_OPTIONS.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/COLLECT_GCC_OPTIONS.patch
 +++ /dev/null
 @@ -1,25 +0,0 @@
 -Upstream-Status: Pending
@@ -13111,12 +10265,12 @@ index f598298..0000000
 -   for (i = 0; (int) i < n_switches; i++)
 -     {
 -       const char *const *args;
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/GLIBC_DYNAMIC_LINKER.patch b/meta/recipes-devtools/gcc/gcc-4.7/GLIBC_DYNAMIC_LINKER.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/GLIBC_DYNAMIC_LINKER.patch b/meta/recipes-devtools/gcc/gcc-4.8/GLIBC_DYNAMIC_LINKER.patch
 deleted file mode 100644
-index 38c361e..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/GLIBC_DYNAMIC_LINKER.patch
+index 180b239..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/GLIBC_DYNAMIC_LINKER.patch
 +++ /dev/null
-@@ -1,165 +0,0 @@
+@@ -1,167 +0,0 @@
 -This patch defines GLIBC_DYNAMIC_LINKER and UCLIBC_DYNAMIC_LINKER
 -relative to SYSTEMLIBS_DIR which can be set in generated headers
 -This breaks the assumption of hardcoded multilib in gcc
@@ -13128,11 +10282,11 @@ index 38c361e..0000000
 -Signed-off-by: Khem Raj
 -Upstream-Status: Inappropriate [OE configuration]
 -
--Index: git/gcc/config/alpha/linux-elf.h
+-Index: gcc-4.8.0/gcc/config/alpha/linux-elf.h
 -===================================================================
----- git.orig/gcc/config/alpha/linux-elf.h	2012-07-08 11:16:26.199320624 -0700
--+++ git/gcc/config/alpha/linux-elf.h	2012-07-08 11:19:51.059330624 -0700
--@@ -24,8 +24,8 @@
+---- gcc-4.8.0.orig/gcc/config/alpha/linux-elf.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/alpha/linux-elf.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -23,8 +23,8 @@
 - #define EXTRA_SPECS \
 - { "elf_dynamic_linker", ELF_DYNAMIC_LINKER },
 - 
@@ -13143,47 +10297,49 @@ index 38c361e..0000000
 - #if DEFAULT_LIBC == LIBC_UCLIBC
 - #define CHOOSE_DYNAMIC_LINKER(G, U) "%{mglibc:" G ";:" U "}"
 - #elif DEFAULT_LIBC == LIBC_GLIBC
--Index: git/gcc/config/arm/linux-eabi.h
+-Index: gcc-4.8.0/gcc/config/arm/linux-eabi.h
 -===================================================================
----- git.orig/gcc/config/arm/linux-eabi.h	2012-07-08 11:16:26.000000000 -0700
--+++ git/gcc/config/arm/linux-eabi.h	2012-07-08 11:20:40.947333288 -0700
--@@ -62,7 +62,7 @@
-- /* Use ld-linux.so.3 so that it will be possible to run "classic"
--    GNU/Linux binaries on an EABI system.  */
+---- gcc-4.8.0.orig/gcc/config/arm/linux-eabi.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/arm/linux-eabi.h	2013-03-26 13:56:14.901898372 -0700
+-@@ -68,8 +68,8 @@
+-    GLIBC_DYNAMIC_LINKER_DEFAULT and TARGET_DEFAULT_FLOAT_ABI.  */
+- 
 - #undef  GLIBC_DYNAMIC_LINKER
---#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.3"
--+#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.3"
+--#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "/lib/ld-linux.so.3"
+--#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT "/lib/ld-linux-armhf.so.3"
+-+#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT SYSTEMLIBS_DIR "ld-linux.so.3"
+-+#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT SYSTEMLIBS_DIR "ld-linux-armhf.so.3"
+- #define GLIBC_DYNAMIC_LINKER_DEFAULT GLIBC_DYNAMIC_LINKER_SOFT_FLOAT
 - 
-- /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
--    use the GNU/Linux version, not the generic BPABI version.  */
--Index: git/gcc/config/arm/linux-elf.h
+- #define GLIBC_DYNAMIC_LINKER \
+-Index: gcc-4.8.0/gcc/config/arm/linux-elf.h
 -===================================================================
----- git.orig/gcc/config/arm/linux-elf.h	2012-07-08 11:16:31.903320900 -0700
--+++ git/gcc/config/arm/linux-elf.h	2012-07-08 11:21:37.619335646 -0700
--@@ -59,7 +59,7 @@
+---- gcc-4.8.0.orig/gcc/config/arm/linux-elf.h	2013-03-26 13:54:13.000000000 -0700
+-+++ gcc-4.8.0/gcc/config/arm/linux-elf.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -57,7 +57,7 @@
 - 
-- #define LIBGCC_SPEC "-lgcc"
+- #define LIBGCC_SPEC "%{mfloat-abi=soft*:-lfloat} -lgcc"
 - 
 --#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.2"
 -+#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.2"
 - 
 - #define LINUX_TARGET_LINK_SPEC  "%{h*} \
 -    %{static:-Bstatic} \
--Index: git/gcc/config/i386/linux.h
+-Index: gcc-4.8.0/gcc/config/i386/linux.h
 -===================================================================
----- git.orig/gcc/config/i386/linux.h	2012-07-08 11:16:26.267320627 -0700
--+++ git/gcc/config/i386/linux.h	2012-07-08 11:23:26.727340361 -0700
--@@ -21,4 +21,4 @@
+---- gcc-4.8.0.orig/gcc/config/i386/linux.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/i386/linux.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -20,4 +20,4 @@
 - <http://www.gnu.org/licenses/>.  */
 - 
 - #define GNU_USER_LINK_EMULATION "elf_i386"
 --#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.2"
 -+#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.2"
--Index: git/gcc/config/i386/linux64.h
+-Index: gcc-4.8.0/gcc/config/i386/linux64.h
 -===================================================================
----- git.orig/gcc/config/i386/linux64.h	2012-07-08 11:16:26.267320627 -0700
--+++ git/gcc/config/i386/linux64.h	2012-07-08 11:23:13.255340316 -0700
--@@ -28,6 +28,6 @@
+---- gcc-4.8.0.orig/gcc/config/i386/linux64.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/i386/linux64.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -27,6 +27,6 @@
 - #define GNU_USER_LINK_EMULATION64 "elf_x86_64"
 - #define GNU_USER_LINK_EMULATIONX32 "elf32_x86_64"
 - 
@@ -13193,21 +10349,21 @@ index 38c361e..0000000
 -+#define GLIBC_DYNAMIC_LINKER32 SYSTEMLIBS_DIR "ld-linux.so.2"
 -+#define GLIBC_DYNAMIC_LINKER64 SYSTEMLIBS_DIR "ld-linux-x86-64.so.2"
 -+#define GLIBC_DYNAMIC_LINKERX32 SYSTEMLIBS_DIR "ld-linux-x32.so.2"
--Index: git/gcc/config/mips/linux.h
+-Index: gcc-4.8.0/gcc/config/mips/linux.h
 -===================================================================
----- git.orig/gcc/config/mips/linux.h	2012-07-08 11:16:26.307320629 -0700
--+++ git/gcc/config/mips/linux.h	2012-07-08 11:23:56.063342214 -0700
--@@ -18,4 +18,4 @@
+---- gcc-4.8.0.orig/gcc/config/mips/linux.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/mips/linux.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -17,4 +17,4 @@
 - along with GCC; see the file COPYING3.  If not see
 - <http://www.gnu.org/licenses/>.  */
 - 
 --#define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
 -+#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld.so.1"
--Index: git/gcc/config/mips/linux64.h
+-Index: gcc-4.8.0/gcc/config/mips/linux64.h
 -===================================================================
----- git.orig/gcc/config/mips/linux64.h	2012-07-08 11:16:26.307320629 -0700
--+++ git/gcc/config/mips/linux64.h	2012-07-08 11:24:52.207345073 -0700
--@@ -23,10 +23,10 @@
+---- gcc-4.8.0.orig/gcc/config/mips/linux64.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/mips/linux64.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -22,10 +22,10 @@
 - #define GNU_USER_LINK_EMULATION64 "elf64%{EB:b}%{EL:l}tsmip"
 - #define GNU_USER_LINK_EMULATIONN32 "elf32%{EB:b}%{EL:l}tsmipn32"
 - 
@@ -13222,11 +10378,11 @@ index 38c361e..0000000
 - #define BIONIC_DYNAMIC_LINKERN32 "/system/bin/linker32"
 - #define GNU_USER_DYNAMIC_LINKERN32 \
 -   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32, \
--Index: git/gcc/config/rs6000/linux64.h
+-Index: gcc-4.8.0/gcc/config/rs6000/linux64.h
 -===================================================================
----- git.orig/gcc/config/rs6000/linux64.h	2012-07-08 11:16:26.335320630 -0700
--+++ git/gcc/config/rs6000/linux64.h	2012-07-08 11:26:05.867348369 -0700
--@@ -358,10 +358,10 @@
+---- gcc-4.8.0.orig/gcc/config/rs6000/linux64.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/rs6000/linux64.h	2013-03-26 13:55:08.825897207 -0700
+-@@ -360,10 +360,10 @@
 - #undef	LINK_OS_DEFAULT_SPEC
 - #define LINK_OS_DEFAULT_SPEC "%(link_os_linux)"
 - 
@@ -13241,11 +10397,11 @@ index 38c361e..0000000
 - #if DEFAULT_LIBC == LIBC_UCLIBC
 - #define CHOOSE_DYNAMIC_LINKER(G, U) "%{mglibc:" G ";:" U "}"
 - #elif DEFAULT_LIBC == LIBC_GLIBC
--Index: git/gcc/config/sh/linux.h
+-Index: gcc-4.8.0/gcc/config/sh/linux.h
 -===================================================================
----- git.orig/gcc/config/sh/linux.h	2012-07-08 11:16:26.363320632 -0700
--+++ git/gcc/config/sh/linux.h	2012-07-08 11:26:29.375350165 -0700
--@@ -45,7 +45,7 @@
+---- gcc-4.8.0.orig/gcc/config/sh/linux.h	2013-03-13 20:01:53.000000000 -0700
+-+++ gcc-4.8.0/gcc/config/sh/linux.h	2013-03-26 13:55:08.829897236 -0700
+-@@ -43,7 +43,7 @@
 - 
 - #define TARGET_ASM_FILE_END file_end_indicate_exec_stack
 - 
@@ -13254,11 +10410,11 @@ index 38c361e..0000000
 - 
 - #undef SUBTARGET_LINK_EMUL_SUFFIX
 - #define SUBTARGET_LINK_EMUL_SUFFIX "_linux"
--Index: git/gcc/config/sparc/linux.h
+-Index: gcc-4.8.0/gcc/config/sparc/linux.h
 -===================================================================
----- git.orig/gcc/config/sparc/linux.h	2012-07-08 11:16:26.371320632 -0700
--+++ git/gcc/config/sparc/linux.h	2012-07-08 11:27:00.439351163 -0700
--@@ -84,7 +84,7 @@
+---- gcc-4.8.0.orig/gcc/config/sparc/linux.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/sparc/linux.h	2013-03-26 13:55:08.829897236 -0700
+-@@ -83,7 +83,7 @@
 -    When the -shared link option is used a final link is not being
 -    done.  */
 - 
@@ -13266,12 +10422,12 @@ index 38c361e..0000000
 -+#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.2"
 - 
 - #undef  LINK_SPEC
-- #define LINK_SPEC "-m elf32_sparc -Y P,/usr/lib %{shared:-shared} \
--Index: git/gcc/config/sparc/linux64.h
+- #define LINK_SPEC "-m elf32_sparc %{shared:-shared} \
+-Index: gcc-4.8.0/gcc/config/sparc/linux64.h
 -===================================================================
----- git.orig/gcc/config/sparc/linux64.h	2012-07-08 11:16:26.371320632 -0700
--+++ git/gcc/config/sparc/linux64.h	2012-07-08 11:27:23.571352396 -0700
--@@ -93,8 +93,8 @@
+---- gcc-4.8.0.orig/gcc/config/sparc/linux64.h	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/config/sparc/linux64.h	2013-03-26 13:55:08.829897236 -0700
+-@@ -92,8 +92,8 @@
 -    When the -shared link option is used a final link is not being
 -    done.  */
 - 
@@ -13282,64 +10438,10 @@ index 38c361e..0000000
 - 
 - #ifdef SPARC_BI_ARCH
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/arm-hard-float-loader.patch b/meta/recipes-devtools/gcc/gcc-4.7/arm-hard-float-loader.patch
-deleted file mode 100644
-index dfa0d19..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/arm-hard-float-loader.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--This patch is still being discussed by probably is almost
--final version. We add the OE notion of multilib on top
--
--Upstream-Status: Backport [ adapted ]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: gcc-4_7-branch/gcc/config/arm/linux-eabi.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/arm/linux-eabi.h	2012-04-30 15:28:31.891863845 -0700
--+++ gcc-4_7-branch/gcc/config/arm/linux-eabi.h	2012-04-30 15:37:11.531888994 -0700
--@@ -32,7 +32,8 @@
--   while (false)
-- 
-- /* We default to a soft-float ABI so that binaries can run on all
---   target hardware.  */
--+   target hardware.  If you override this to use the hard-float ABI then
--+   change the setting of GLIBC_DYNAMIC_LINKER_DEFAULT as well.  */
-- #undef  TARGET_DEFAULT_FLOAT_ABI
-- #define TARGET_DEFAULT_FLOAT_ABI ARM_FLOAT_ABI_SOFT
-- 
--@@ -59,10 +60,23 @@
-- #undef  SUBTARGET_EXTRA_LINK_SPEC
-- #define SUBTARGET_EXTRA_LINK_SPEC " -m " TARGET_LINKER_EMULATION
-- 
---/* Use ld-linux.so.3 so that it will be possible to run "classic"
---   GNU/Linux binaries on an EABI system.  */
--+/* GNU/Linux on ARM currently supports three dynamic linkers:
--+   - ld-linux.so.2 - for the legacy ABI
--+   - ld-linux.so.3 - for the EABI-derived soft-float ABI
--+   - ld-linux-armhf.so.3 - for the EABI-derived hard-float ABI.
--+   All the dynamic linkers live in /lib.
--+   We default to soft-float, but this can be overridden by changing both
--+   GLIBC_DYNAMIC_LINKER_DEFAULT and TARGET_DEFAULT_FLOAT_ABI.  */
--+
-- #undef  GLIBC_DYNAMIC_LINKER
---#define GLIBC_DYNAMIC_LINKER SYSTEMLIBS_DIR "ld-linux.so.3"
--+#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT SYSTEMLIBS_DIR "ld-linux.so.3"
--+#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT SYSTEMLIBS_DIR "ld-linux-armhf.so.3"
--+#define GLIBC_DYNAMIC_LINKER_DEFAULT GLIBC_DYNAMIC_LINKER_SOFT_FLOAT
--+
--+ #define GLIBC_DYNAMIC_LINKER \
--+    "%{mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_HARD_FLOAT "} \
--+     %{mfloat-abi=soft*:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "} \
--+     %{!mfloat-abi=*:" GLIBC_DYNAMIC_LINKER_DEFAULT "}"
-- 
-- /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
--    use the GNU/Linux version, not the generic BPABI version.  */
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/cpp-honor-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.7/cpp-honor-sysroot.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/cpp-honor-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.8/cpp-honor-sysroot.patch
 deleted file mode 100644
 index 7310677..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/cpp-honor-sysroot.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/cpp-honor-sysroot.patch
 +++ /dev/null
 @@ -1,40 +0,0 @@
 -Currently, if the gcc toolchain is relocated and installed from sstate, then you try and compile
@@ -13382,134 +10484,10 @@ index 7310677..0000000
 --    cc1plus -fpreprocessed %i %(cc1_options) %2\
 -+    cc1plus -fpreprocessed %i %I %(cc1_options) %2\
 -     %{!fsyntax-only:%(invoke_as)}}}}", 0, 0, 0},
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/define_insn_reservation.patch b/meta/recipes-devtools/gcc/gcc-4.7/define_insn_reservation.patch
-deleted file mode 100644
-index 2b0ff67..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/define_insn_reservation.patch
-+++ /dev/null
-@@ -1,118 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--From aab806a131efe9706396692ecc67d324371e39bc Mon Sep 17 00:00:00 2001
--From: edmarwjr <edmarwjr@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Fri, 22 Jun 2012 20:13:23 +0000
--Subject: [PATCH] 2012-06-22  Edmar Wienskoski  <edmar@freescale.com>
--
--	* config/rs6000/rs6000.md (define_attr "type"): New type popcnt.
--	(popcntb<mode>2): Add attribute type popcnt.
--	(popcntd<mode>2): Ditto.
--	* config/rs6000/power4.md (define_insn_reservation): Add type popcnt.
--	* config/rs6000/power5.md (define_insn_reservation): Ditto.
--	* config/rs6000/power7.md (define_insn_reservation): Ditto.
--	* config/rs6000/476.md (define_insn_reservation): Ditto.
--	* config/rs6000/power6.md (define_insn_reservation): New
--	reservation for popcnt instructions.
--
--
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188901 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- gcc/ChangeLog               |   12 ++++++++++++
-- gcc/config/rs6000/476.md    |    2 +-
-- gcc/config/rs6000/power5.md |    2 +-
-- gcc/config/rs6000/power6.md |    5 +++++
-- gcc/config/rs6000/power7.md |    2 +-
-- gcc/config/rs6000/rs6000.md |   10 +++++++---
-- 6 files changed, 27 insertions(+), 6 deletions(-)
--
--Index: gcc-4_7-branch/gcc/config/rs6000/476.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/476.md	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/476.md	2012-07-06 19:50:30.078779999 -0700
--@@ -71,7 +71,7 @@
--    ppc476_i_pipe|ppc476_lj_pipe")
-- 
-- (define_insn_reservation "ppc476-complex-integer" 1
---  (and (eq_attr "type" "cmp,cr_logical,delayed_cr,cntlz,isel,isync,sync,trap")
--+  (and (eq_attr "type" "cmp,cr_logical,delayed_cr,cntlz,isel,isync,sync,trap,popcnt")
--        (eq_attr "cpu" "ppc476"))
--   "ppc476_issue,\
--    ppc476_i_pipe")
--Index: gcc-4_7-branch/gcc/config/rs6000/power5.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/power5.md	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/power5.md	2012-07-06 19:50:30.078779999 -0700
--@@ -142,7 +142,7 @@
-- ; Integer latency is 2 cycles
-- (define_insn_reservation "power5-integer" 2
--   (and (eq_attr "type" "integer,insert_dword,shift,trap,\
---                        var_shift_rotate,cntlz,exts,isel")
--+                        var_shift_rotate,cntlz,exts,isel,popcnt")
--        (eq_attr "cpu" "power5"))
--   "iq_power5")
-- 
--Index: gcc-4_7-branch/gcc/config/rs6000/power6.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/power6.md	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/power6.md	2012-07-06 19:50:30.078779999 -0700
--@@ -216,6 +216,11 @@
--        (eq_attr "cpu" "power6"))
--   "FXU_power6")
-- 
--+(define_insn_reservation "power6-popcnt" 1
--+  (and (eq_attr "type" "popcnt")
--+       (eq_attr "cpu" "power6"))
--+  "FXU_power6")
--+
-- (define_insn_reservation "power6-insert" 1
--   (and (eq_attr "type" "insert_word")
--        (eq_attr "cpu" "power6"))
--Index: gcc-4_7-branch/gcc/config/rs6000/power7.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/power7.md	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/power7.md	2012-07-06 19:50:30.078779999 -0700
--@@ -150,7 +150,7 @@
-- ; FX Unit
-- (define_insn_reservation "power7-integer" 1
--   (and (eq_attr "type" "integer,insert_word,insert_dword,shift,trap,\
---                        var_shift_rotate,exts,isel")
--+                        var_shift_rotate,exts,isel,popcnt")
--        (eq_attr "cpu" "power7"))
--   "DU_power7,FXU_power7")
-- 
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.md	2012-07-06 19:44:38.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.md	2012-07-06 19:50:30.078779999 -0700
--@@ -144,7 +144,7 @@
-- 
-- ;; Define an insn type attribute.  This is used in function unit delay
-- ;; computations.
---(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,vecdouble,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel"
--+(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,vecdouble,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel,popcnt"
--   (const_string "integer"))
-- 
-- ;; Define floating point instruction sub-types for use with Xfpu.md
--@@ -2329,13 +2329,17 @@
--         (unspec:GPR [(match_operand:GPR 1 "gpc_reg_operand" "r")]
--                      UNSPEC_POPCNTB))]
--   "TARGET_POPCNTB"
---  "popcntb %0,%1")
--+  "popcntb %0,%1"
--+  [(set_attr "length" "4")
--+   (set_attr "type" "popcnt")])
-- 
-- (define_insn "popcntd<mode>2"
--   [(set (match_operand:GPR 0 "gpc_reg_operand" "=r")
-- 	(popcount:GPR (match_operand:GPR 1 "gpc_reg_operand" "r")))]
--   "TARGET_POPCNTD"
---  "popcnt<wd> %0,%1")
--+  "popcnt<wd> %0,%1"
--+  [(set_attr "length" "4")
--+   (set_attr "type" "popcnt")])
-- 
-- (define_expand "popcount<mode>2"
--   [(set (match_operand:GPR 0 "gpc_reg_operand" "")
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/disable_relax_pic_calls_flag.patch b/meta/recipes-devtools/gcc/gcc-4.7/disable_relax_pic_calls_flag.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/disable_relax_pic_calls_flag.patch b/meta/recipes-devtools/gcc/gcc-4.8/disable_relax_pic_calls_flag.patch
 deleted file mode 100644
 index bc01cd9..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/disable_relax_pic_calls_flag.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/disable_relax_pic_calls_flag.patch
 +++ /dev/null
 @@ -1,48 +0,0 @@
 -Upstream-Status: Inappropriate [configuration]
@@ -13560,10 +10538,10 @@ index bc01cd9..0000000
 -     AC_MSG_RESULT($gcc_cv_as_ld_jalr_reloc)
 - 
 -     AC_CACHE_CHECK([linker for .eh_frame personality relaxation],
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/disablesdt.patch b/meta/recipes-devtools/gcc/gcc-4.7/disablesdt.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/disablesdt.patch b/meta/recipes-devtools/gcc/gcc-4.8/disablesdt.patch
 deleted file mode 100644
 index 8946afc..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/disablesdt.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/disablesdt.patch
 +++ /dev/null
 @@ -1,32 +0,0 @@
 -We don't list dtrace in DEPENDS so we shouldn't be depending on this header. 
@@ -13598,444 +10576,10 @@ index 8946afc..0000000
 - { $as_echo "$as_me:${as_lineno-$LINENO}: result: $have_sys_sdt_h" >&5
 - $as_echo "$have_sys_sdt_h" >&6; }
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/fix-g++-sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.7/fix-g++-sysroot.patch
-deleted file mode 100644
-index aad234c..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/fix-g++-sysroot.patch
-+++ /dev/null
-@@ -1,428 +0,0 @@
--backport
--
--http://www.mail-archive.com/gcc-patches@gcc.gnu.org/msg26013.html
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: gcc-4.7.2/gcc/configure.ac
--===================================================================
----- gcc-4.7.2.orig/gcc/configure.ac	2012-09-20 07:42:30.284941174 -0700
--+++ gcc-4.7.2/gcc/configure.ac	2012-09-20 07:55:23.148970564 -0700
--@@ -118,6 +118,72 @@
-- 	local_prefix=/usr/local
-- fi
-- 
--+AC_ARG_WITH([native-system-header-dir],
--+  [  --with-native-system-header-dir=dir
--+                          use dir as the directory to look for standard
--+                          system header files in.  Defaults to /usr/include.],
--+[
--+ case ${with_native_system_header_dir} in
--+ yes|no) AC_MSG_ERROR([bad value ${withval} given for --with-native-system-header-dir]) ;;
--+ /* | [[A-Za-z]]:[[\\/]]*) ;;
--+ *) AC_MSG_ERROR([--with-native-system-header-dir argument ${withval} must be an absolute directory]) ;;
--+ esac
--+ configured_native_system_header_dir="${withval}"
--+], [configured_native_system_header_dir=])
--+
--+AC_ARG_WITH(build-sysroot,
--+  [AS_HELP_STRING([--with-build-sysroot=sysroot],
--+                  [use sysroot as the system root during the build])],
--+  [if test x"$withval" != x ; then
--+     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
--+   fi],
--+  [SYSROOT_CFLAGS_FOR_TARGET=])
--+AC_SUBST(SYSROOT_CFLAGS_FOR_TARGET)
--+
--+AC_ARG_WITH(sysroot,
--+[AS_HELP_STRING([[--with-sysroot[=DIR]]],
--+ [search for usr/lib, usr/include, et al, within DIR])],
--+[
--+ case ${with_sysroot} in
--+ /) ;;
--+ */) with_sysroot=`echo $with_sysroot | sed 's,/$,,'` ;;
--+ esac
--+ case ${with_sysroot} in
--+ yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
--+ *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
--+ esac
--+
--+ TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
--+ CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
--+
--+ if test "x$prefix" = xNONE; then
--+  test_prefix=/usr/local
--+ else
--+  test_prefix=$prefix
--+ fi
--+ if test "x$exec_prefix" = xNONE; then
--+  test_exec_prefix=$test_prefix
--+ else
--+  test_exec_prefix=$exec_prefix
--+ fi
--+ case ${TARGET_SYSTEM_ROOT} in
--+ "${test_prefix}"|"${test_prefix}/"*|\
--+ "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
--+ '${prefix}'|'${prefix}/'*|\
--+ '${exec_prefix}'|'${exec_prefix}/'*)
--+   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
--+   TARGET_SYSTEM_ROOT_DEFINE="$t"
--+   ;;
--+ esac
--+], [
--+ TARGET_SYSTEM_ROOT=
--+ TARGET_SYSTEM_ROOT_DEFINE=
--+ CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
--+])
--+AC_SUBST(TARGET_SYSTEM_ROOT)
--+AC_SUBST(TARGET_SYSTEM_ROOT_DEFINE)
--+AC_SUBST(CROSS_SYSTEM_HEADER_DIR)
--+
-- # Don't set gcc_gxx_include_dir to gxx_include_dir since that's only
-- # passed in by the toplevel make and thus we'd get different behavior
-- # depending on where we built the sources.
--@@ -149,7 +215,9 @@
-- if test "${with_sysroot+set}" = set; then
--   gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
--   if test "${gcc_gxx_without_sysroot}"; then
---    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
--+    if test x${with_sysroot} != x/; then
--+      gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
--+    fi
--     gcc_gxx_include_dir_add_sysroot=1
--   fi
-- fi
--@@ -733,68 +801,6 @@
-- ], [enable_shared=yes])
-- AC_SUBST(enable_shared)
-- 
---AC_ARG_WITH([native-system-header-dir],
---  [  --with-native-system-header-dir=dir
---                          use dir as the directory to look for standard
---                          system header files in.  Defaults to /usr/include.],
---[
--- case ${with_native_system_header_dir} in
--- yes|no) AC_MSG_ERROR([bad value ${withval} given for --with-native-system-header-dir]) ;;
--- /* | [[A-Za-z]]:[[\\/]]*) ;;
--- *) AC_MSG_ERROR([--with-native-system-header-dir argument ${withval} must be an absolute directory]) ;;
--- esac
--- configured_native_system_header_dir="${withval}"
---], [configured_native_system_header_dir=])
---
---AC_ARG_WITH(build-sysroot, 
---  [AS_HELP_STRING([--with-build-sysroot=sysroot],
---                  [use sysroot as the system root during the build])],
---  [if test x"$withval" != x ; then
---     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
---   fi],
---  [SYSROOT_CFLAGS_FOR_TARGET=])
---AC_SUBST(SYSROOT_CFLAGS_FOR_TARGET)
---
---AC_ARG_WITH(sysroot,
---[AS_HELP_STRING([[--with-sysroot[=DIR]]],
---		[search for usr/lib, usr/include, et al, within DIR])],
---[
--- case ${with_sysroot} in
--- yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
--- *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
--- esac
---   
--- TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
--- CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
---	
--- if test "x$prefix" = xNONE; then
---  test_prefix=/usr/local
--- else
---  test_prefix=$prefix
--- fi
--- if test "x$exec_prefix" = xNONE; then
---  test_exec_prefix=$test_prefix
--- else
---  test_exec_prefix=$exec_prefix
--- fi
--- case ${TARGET_SYSTEM_ROOT} in
--- "${test_prefix}"|"${test_prefix}/"*|\
--- "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
--- '${prefix}'|'${prefix}/'*|\
--- '${exec_prefix}'|'${exec_prefix}/'*)
---   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
---   TARGET_SYSTEM_ROOT_DEFINE="$t"
---   ;;
--- esac
---], [
--- TARGET_SYSTEM_ROOT=
--- TARGET_SYSTEM_ROOT_DEFINE=
--- CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
---])
---AC_SUBST(TARGET_SYSTEM_ROOT)
---AC_SUBST(TARGET_SYSTEM_ROOT_DEFINE)
---AC_SUBST(CROSS_SYSTEM_HEADER_DIR)
---
-- AC_ARG_WITH(specs,
--   [AS_HELP_STRING([--with-specs=SPECS],
--                   [add SPECS to driver command-line processing])],
--Index: gcc-4.7.2/gcc/configure
--===================================================================
----- gcc-4.7.2.orig/gcc/configure	2012-09-20 07:42:30.284941174 -0700
--+++ gcc-4.7.2/gcc/configure	2012-09-20 07:55:31.788970893 -0700
--@@ -757,10 +757,6 @@
-- REPORT_BUGS_TO
-- PKGVERSION
-- CONFIGURE_SPECS
---CROSS_SYSTEM_HEADER_DIR
---TARGET_SYSTEM_ROOT_DEFINE
---TARGET_SYSTEM_ROOT
---SYSROOT_CFLAGS_FOR_TARGET
-- enable_shared
-- enable_fixed_point
-- enable_decimal_float
--@@ -798,6 +794,10 @@
-- CFLAGS
-- CC
-- GENINSRC
--+CROSS_SYSTEM_HEADER_DIR
--+TARGET_SYSTEM_ROOT_DEFINE
--+TARGET_SYSTEM_ROOT
--+SYSROOT_CFLAGS_FOR_TARGET
-- target_subdir
-- host_subdir
-- build_subdir
--@@ -859,6 +859,9 @@
-- enable_option_checking
-- with_build_libsubdir
-- with_local_prefix
--+with_native_system_header_dir
--+with_build_sysroot
--+with_sysroot
-- with_gxx_include_dir
-- with_cpp_install_dir
-- enable_generated_files_in_srcdir
--@@ -883,9 +886,6 @@
-- enable_objc_gc
-- with_dwarf2
-- enable_shared
---with_native_system_header_dir
---with_build_sysroot
---with_sysroot
-- with_specs
-- with_pkgversion
-- with_bugurl
--@@ -1639,6 +1639,12 @@
--   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
--   --with-build-libsubdir=DIR  Directory where to find libraries for build system
--   --with-local-prefix=DIR specifies directory to put local include
--+  --with-native-system-header-dir=dir
--+                          use dir as the directory to look for standard
--+                          system header files in.  Defaults to /usr/include.
--+  --with-build-sysroot=sysroot
--+                          use sysroot as the system root during the build
--+  --with-sysroot[=DIR]    search for usr/lib, usr/include, et al, within DIR
--   --with-gxx-include-dir=DIR
--                           specifies directory to put g++ header files
--   --with-cpp-install-dir=DIR
--@@ -1651,12 +1657,6 @@
--   --with-as               arrange to use the specified as (full pathname)
--   --with-stabs            arrange to use stabs instead of host debug format
--   --with-dwarf2           force the default debug format to be DWARF 2
---  --with-native-system-header-dir=dir
---                          use dir as the directory to look for standard
---                          system header files in.  Defaults to /usr/include.
---  --with-build-sysroot=sysroot
---                          use sysroot as the system root during the build
---  --with-sysroot[=DIR]    search for usr/lib, usr/include, et al, within DIR
--   --with-specs=SPECS      add SPECS to driver command-line processing
--   --with-pkgversion=PKG   Use PKG in the version string in place of "GCC"
--   --with-bugurl=URL       Direct users to URL to report a bug
--@@ -3288,6 +3288,82 @@
-- 	local_prefix=/usr/local
-- fi
-- 
--+
--+# Check whether --with-native-system-header-dir was given.
--+if test "${with_native_system_header_dir+set}" = set; then :
--+  withval=$with_native_system_header_dir;
--+ case ${with_native_system_header_dir} in
--+ yes|no) as_fn_error "bad value ${withval} given for --with-native-system-header-dir" "$LINENO" 5 ;;
--+ /* | [A-Za-z]:[\\/]*) ;;
--+ *) as_fn_error "--with-native-system-header-dir argument ${withval} must be an absolute directory" "$LINENO" 5 ;;
--+ esac
--+ configured_native_system_header_dir="${withval}"
--+
--+else
--+  configured_native_system_header_dir=
--+fi
--+
--+
--+
--+# Check whether --with-build-sysroot was given.
--+if test "${with_build_sysroot+set}" = set; then :
--+  withval=$with_build_sysroot; if test x"$withval" != x ; then
--+     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
--+   fi
--+else
--+  SYSROOT_CFLAGS_FOR_TARGET=
--+fi
--+
--+
--+
--+
--+# Check whether --with-sysroot was given.
--+if test "${with_sysroot+set}" = set; then :
--+  withval=$with_sysroot;
--+ case ${with_sysroot} in
--+ /) ;;
--+ */) with_sysroot=`echo $with_sysroot | sed 's,/$,,'` ;;
--+ esac
--+ case ${with_sysroot} in
--+ yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
--+ *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
--+ esac
--+
--+ TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
--+ CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
--+
--+ if test "x$prefix" = xNONE; then
--+  test_prefix=/usr/local
--+ else
--+  test_prefix=$prefix
--+ fi
--+ if test "x$exec_prefix" = xNONE; then
--+  test_exec_prefix=$test_prefix
--+ else
--+  test_exec_prefix=$exec_prefix
--+ fi
--+ case ${TARGET_SYSTEM_ROOT} in
--+ "${test_prefix}"|"${test_prefix}/"*|\
--+ "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
--+ '${prefix}'|'${prefix}/'*|\
--+ '${exec_prefix}'|'${exec_prefix}/'*)
--+   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
--+   TARGET_SYSTEM_ROOT_DEFINE="$t"
--+   ;;
--+ esac
--+
--+else
--+
--+ TARGET_SYSTEM_ROOT=
--+ TARGET_SYSTEM_ROOT_DEFINE=
--+ CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
--+
--+fi
--+
--+
--+
--+
--+
-- # Don't set gcc_gxx_include_dir to gxx_include_dir since that's only
-- # passed in by the toplevel make and thus we'd get different behavior
-- # depending on where we built the sources.
--@@ -3321,7 +3397,9 @@
-- if test "${with_sysroot+set}" = set; then
--   gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
--   if test "${gcc_gxx_without_sysroot}"; then
---    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
--+    if test x${with_sysroot} != x/; then
--+      gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
--+    fi
--     gcc_gxx_include_dir_add_sysroot=1
--   fi
-- fi
--@@ -7220,78 +7298,6 @@
-- 
-- 
-- 
---# Check whether --with-native-system-header-dir was given.
---if test "${with_native_system_header_dir+set}" = set; then :
---  withval=$with_native_system_header_dir;
--- case ${with_native_system_header_dir} in
--- yes|no) as_fn_error "bad value ${withval} given for --with-native-system-header-dir" "$LINENO" 5 ;;
--- /* | [A-Za-z]:[\\/]*) ;;
--- *) as_fn_error "--with-native-system-header-dir argument ${withval} must be an absolute directory" "$LINENO" 5 ;;
--- esac
--- configured_native_system_header_dir="${withval}"
---
---else
---  configured_native_system_header_dir=
---fi
---
---
---
---# Check whether --with-build-sysroot was given.
---if test "${with_build_sysroot+set}" = set; then :
---  withval=$with_build_sysroot; if test x"$withval" != x ; then
---     SYSROOT_CFLAGS_FOR_TARGET="--sysroot=$withval"
---   fi
---else
---  SYSROOT_CFLAGS_FOR_TARGET=
---fi
---
---
---
---
---# Check whether --with-sysroot was given.
---if test "${with_sysroot+set}" = set; then :
---  withval=$with_sysroot;
--- case ${with_sysroot} in
--- yes) TARGET_SYSTEM_ROOT='${exec_prefix}/${target_noncanonical}/sys-root' ;;
--- *) TARGET_SYSTEM_ROOT=$with_sysroot ;;
--- esac
---
--- TARGET_SYSTEM_ROOT_DEFINE='-DTARGET_SYSTEM_ROOT=\"$(TARGET_SYSTEM_ROOT)\"'
--- CROSS_SYSTEM_HEADER_DIR='$(TARGET_SYSTEM_ROOT)$${sysroot_headers_suffix}$(NATIVE_SYSTEM_HEADER_DIR)'
---
--- if test "x$prefix" = xNONE; then
---  test_prefix=/usr/local
--- else
---  test_prefix=$prefix
--- fi
--- if test "x$exec_prefix" = xNONE; then
---  test_exec_prefix=$test_prefix
--- else
---  test_exec_prefix=$exec_prefix
--- fi
--- case ${TARGET_SYSTEM_ROOT} in
--- "${test_prefix}"|"${test_prefix}/"*|\
--- "${test_exec_prefix}"|"${test_exec_prefix}/"*|\
--- '${prefix}'|'${prefix}/'*|\
--- '${exec_prefix}'|'${exec_prefix}/'*)
---   t="$TARGET_SYSTEM_ROOT_DEFINE -DTARGET_SYSTEM_ROOT_RELOCATABLE"
---   TARGET_SYSTEM_ROOT_DEFINE="$t"
---   ;;
--- esac
---
---else
---
--- TARGET_SYSTEM_ROOT=
--- TARGET_SYSTEM_ROOT_DEFINE=
--- CROSS_SYSTEM_HEADER_DIR='$(gcc_tooldir)/sys-include'
---
---fi
---
---
---
---
---
---
-- # Check whether --with-specs was given.
-- if test "${with_specs+set}" = set; then :
--   withval=$with_specs; CONFIGURE_SPECS=$withval
--@@ -18013,7 +18019,7 @@
--   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
--   lt_status=$lt_dlunknown
--   cat > conftest.$ac_ext <<_LT_EOF
---#line 18016 "configure"
--+#line 18022 "configure"
-- #include "confdefs.h"
-- 
-- #if HAVE_DLFCN_H
--@@ -18119,7 +18125,7 @@
--   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
--   lt_status=$lt_dlunknown
--   cat > conftest.$ac_ext <<_LT_EOF
---#line 18122 "configure"
--+#line 18128 "configure"
-- #include "confdefs.h"
-- 
-- #if HAVE_DLFCN_H
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/fortran-cross-compile-hack.patch b/meta/recipes-devtools/gcc/gcc-4.7/fortran-cross-compile-hack.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/fortran-cross-compile-hack.patch b/meta/recipes-devtools/gcc/gcc-4.8/fortran-cross-compile-hack.patch
 deleted file mode 100644
 index 2773b42..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/fortran-cross-compile-hack.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/fortran-cross-compile-hack.patch
 +++ /dev/null
 @@ -1,32 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
@@ -14070,10 +10614,10 @@ index 2773b42..0000000
 - AC_PROG_FC(gfortran)
 - 
 - # extra LD Flags which are required for targets
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
 deleted file mode 100644
 index 964c4bb..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch
 +++ /dev/null
 @@ -1,33 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
@@ -14109,10 +10653,10 @@ index 964c4bb..0000000
 - case " $target_configdirs " in
 -  *" newlib "*)
 -   case " $target_configargs " in
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
 deleted file mode 100644
 index ff136e1..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch
 +++ /dev/null
 @@ -1,116 +0,0 @@
 -Upstream-Status: Pending
@@ -14231,10 +10775,10 @@ index ff136e1..0000000
 - # Handle --with-headers=XXX.  If the value is not "yes", the contents of
 - # the named directory are copied to $(tooldir)/sys-include.
 - if test x"${with_headers}" != x && test x"${with_headers}" != xno ; then
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-argument-list-too-long.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-argument-list-too-long.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-argument-list-too-long.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-argument-list-too-long.patch
 deleted file mode 100644
 index 70d3c53..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-argument-list-too-long.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-argument-list-too-long.patch
 +++ /dev/null
 @@ -1,33 +0,0 @@
 -There would be an "Argument list too long" error when the
@@ -14270,10 +10814,10 @@ index 70d3c53..0000000
 --- 
 -1.7.10.2
 -
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-armv4-pass-fix-v4bx-to-ld.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-armv4-pass-fix-v4bx-to-ld.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-armv4-pass-fix-v4bx-to-ld.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-armv4-pass-fix-v4bx-to-ld.patch
 deleted file mode 100644
 index 7e03a3a..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-armv4-pass-fix-v4bx-to-ld.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-armv4-pass-fix-v4bx-to-ld.patch
 +++ /dev/null
 @@ -1,31 +0,0 @@
 -The LINK_SPEC for linux gets overwritten by linux-eabi.h which
@@ -14307,10 +10851,10 @@ index 7e03a3a..0000000
 -   LINUX_OR_ANDROID_LD (LINUX_TARGET_LINK_SPEC,				\
 - 		       LINUX_TARGET_LINK_SPEC " " ANDROID_LINK_SPEC)
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-dir-extend.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-dir-extend.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-dir-extend.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-dir-extend.patch
 deleted file mode 100644
 index 607129a..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-dir-extend.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-dir-extend.patch
 +++ /dev/null
 @@ -1,27 +0,0 @@
 -Upstream-Status: Pending
@@ -14340,12 +10884,12 @@ index 607129a..0000000
 -             warning (OPT_Wpoison_system_directories,
 -                      "include location \"%s\" is unsafe for "
 -                      "cross-compilation",
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-system-directories.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-system-directories.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-system-directories.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-system-directories.patch
 deleted file mode 100644
-index 82a55c9..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-poison-system-directories.patch
+index afb98d7..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-poison-system-directories.patch
 +++ /dev/null
-@@ -1,223 +0,0 @@
+@@ -1,231 +0,0 @@
 -Upstream-Status: Inappropriate [distribution: codesourcery]
 -
 -       gcc/
@@ -14375,13 +10919,13 @@ index 82a55c9..0000000
 -       ENABLE_POISON_SYSTEM_DIRECTORIES defined, warn for use of
 -       /usr/include, /usr/local/include or /usr/X11R6/include.
 -
--Index: gcc-4.7.2/gcc/common.opt
+-Index: gcc-4.8.0/gcc/common.opt
 -===================================================================
----- gcc-4.7.2.orig/gcc/common.opt	2012-08-06 07:34:27.000000000 -0700
--+++ gcc-4.7.2/gcc/common.opt	2012-09-20 07:40:54.708937540 -0700
--@@ -582,6 +582,10 @@
-- Common Var(warn_padded) Warning
-- Warn when padding is required to align structure members
+---- gcc-4.8.0.orig/gcc/common.opt	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/common.opt	2013-03-26 14:11:01.893915049 -0700
+-@@ -595,6 +595,10 @@
+- Common Var(pedantic) Warning
+- Issue warnings needed for strict compliance to the standard
 - 
 -+Wpoison-system-directories
 -+Common Var(flag_poison_system_directories) Init(1) Warning
@@ -14390,11 +10934,11 @@ index 82a55c9..0000000
 - Wshadow
 - Common Var(warn_shadow) Warning
 - Warn when one local variable shadows another
--Index: gcc-4.7.2/gcc/config.in
+-Index: gcc-4.8.0/gcc/config.in
 -===================================================================
----- gcc-4.7.2.orig/gcc/config.in	2012-09-20 00:23:55.000000000 -0700
--+++ gcc-4.7.2/gcc/config.in	2012-09-20 07:40:54.708937540 -0700
--@@ -144,6 +144,12 @@
+---- gcc-4.8.0.orig/gcc/config.in	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/config.in	2013-03-26 14:11:01.893915049 -0700
+-@@ -138,6 +138,12 @@
 - #endif
 - 
 - 
@@ -14407,11 +10951,11 @@ index 82a55c9..0000000
 - /* Define if you want all operations on RTL (the basic data structure of the
 -    optimizer and back end) to be checked for dynamic type safety at runtime.
 -    This is quite expensive. */
--Index: gcc-4.7.2/gcc/configure.ac
+-Index: gcc-4.8.0/gcc/configure.ac
 -===================================================================
----- gcc-4.7.2.orig/gcc/configure.ac	2012-09-20 07:30:27.000000000 -0700
--+++ gcc-4.7.2/gcc/configure.ac	2012-09-20 07:40:54.708937540 -0700
--@@ -4989,6 +4989,16 @@
+---- gcc-4.8.0.orig/gcc/configure.ac	2013-03-26 14:11:01.553915046 -0700
+-+++ gcc-4.8.0/gcc/configure.ac	2013-03-26 14:19:57.317925096 -0700
+-@@ -5063,6 +5063,16 @@
 -                 [specify that runtime libraries should be
 -                  installed in a compiler-specific directory])])
 - 
@@ -14428,19 +10972,19 @@ index 82a55c9..0000000
 - # Substitute configuration variables
 - AC_SUBST(subdirs)
 - AC_SUBST(srcdir)
--Index: gcc-4.7.2/gcc/doc/invoke.texi
+-Index: gcc-4.8.0/gcc/doc/invoke.texi
 -===================================================================
----- gcc-4.7.2.orig/gcc/doc/invoke.texi	2012-09-14 13:45:27.000000000 -0700
--+++ gcc-4.7.2/gcc/doc/invoke.texi	2012-09-20 07:40:54.712937541 -0700
--@@ -260,6 +260,7 @@
+---- gcc-4.8.0.orig/gcc/doc/invoke.texi	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/doc/invoke.texi	2013-03-26 14:19:57.437925099 -0700
+-@@ -258,6 +258,7 @@
 - -Woverlength-strings  -Wpacked  -Wpacked-bitfield-compat  -Wpadded @gol
 - -Wparentheses  -Wpedantic-ms-format -Wno-pedantic-ms-format @gol
 - -Wpointer-arith  -Wno-pointer-to-int-cast @gol
 -+-Wno-poison-system-directories @gol
-- -Wredundant-decls @gol
+- -Wredundant-decls  -Wno-return-local-addr @gol
 - -Wreturn-type  -Wsequence-point  -Wshadow @gol
-- -Wsign-compare  -Wsign-conversion  -Wstack-protector @gol
--@@ -3879,6 +3880,14 @@
+- -Wsign-compare  -Wsign-conversion  -Wsizeof-pointer-memaccess @gol
+-@@ -4007,6 +4008,14 @@
 -  for most targets, it is made up of code and thus requires the stack
 -  to be made executable in order for the program to work properly.
 - 
@@ -14455,24 +10999,32 @@ index 82a55c9..0000000
 - @item -Wfloat-equal
 - @opindex Wfloat-equal
 - @opindex Wno-float-equal
--Index: gcc-4.7.2/gcc/gcc.c
+-Index: gcc-4.8.0/gcc/gcc.c
 -===================================================================
----- gcc-4.7.2.orig/gcc/gcc.c	2012-08-06 07:34:27.000000000 -0700
--+++ gcc-4.7.2/gcc/gcc.c	2012-09-20 07:40:54.716937541 -0700
--@@ -673,6 +673,8 @@
--     %{flto} %{flto=*} %l " LINK_PIE_SPEC \
--    "%X %{o*} %{e*} %{N} %{n} %{r}\
+---- gcc-4.8.0.orig/gcc/gcc.c	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/gcc.c	2013-03-26 14:19:57.425925095 -0700
+-@@ -740,6 +740,8 @@
+-    "%{fuse-ld=*:-fuse-ld=%*}\
+-     %X %{o*} %{e*} %{N} %{n} %{r}\
 -     %{s} %{t} %{u*} %{z} %{Z} %{!nostdlib:%{!nostartfiles:%S}}\
 -+    %{Wno-poison-system-directories:--no-poison-system-directories}\
 -+    %{Werror=poison-system-directories:--error-poison-system-directories}\
--     %{static:} %{L*} %(mfwrap) %(link_libgcc) %o\
+-     %{static:} %{L*} %(mfwrap) %(link_libgcc) " SANITIZER_EARLY_SPEC " %o\
 -     %{fopenmp|ftree-parallelize-loops=*:%:include(libgomp.spec)%(link_gomp)}\
 -     %{fgnu-tm:%:include(libitm.spec)%(link_itm)}\
--Index: gcc-4.7.2/gcc/incpath.c
+-Index: gcc-4.8.0/gcc/incpath.c
 -===================================================================
----- gcc-4.7.2.orig/gcc/incpath.c	2012-01-26 15:34:58.000000000 -0800
--+++ gcc-4.7.2/gcc/incpath.c	2012-09-20 07:40:54.716937541 -0700
--@@ -361,6 +361,24 @@
+---- gcc-4.8.0.orig/gcc/incpath.c	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/incpath.c	2013-03-26 14:43:10.397951230 -0700
+-@@ -28,6 +28,7 @@
+- #include "intl.h"
+- #include "incpath.h"
+- #include "cppdefault.h"
+-+#include "diagnostic-core.h"
+- 
+- /* Microsoft Windows does not natively support inodes.
+-    VMS has non-numeric inodes.  */
+-@@ -382,6 +383,24 @@
 - 	}
 -       fprintf (stderr, _("End of search list.\n"));
 -     }
@@ -14497,11 +11049,11 @@ index 82a55c9..0000000
 - }
 - 
 - /* Use given -I paths for #include "..." but not #include <...>, and
--Index: gcc-4.7.2/gcc/Makefile.in
+-Index: gcc-4.8.0/gcc/Makefile.in
 -===================================================================
----- gcc-4.7.2.orig/gcc/Makefile.in	2012-08-06 07:34:27.000000000 -0700
--+++ gcc-4.7.2/gcc/Makefile.in	2012-09-20 07:40:54.716937541 -0700
--@@ -2065,7 +2065,7 @@
+---- gcc-4.8.0.orig/gcc/Makefile.in	2013-03-26 14:10:58.485914988 -0700
+-+++ gcc-4.8.0/gcc/Makefile.in	2013-03-26 14:19:57.165925091 -0700
+-@@ -2018,7 +2018,7 @@
 - 
 - incpath.o: incpath.c incpath.h $(CONFIG_H) $(SYSTEM_H) $(CPPLIB_H) \
 - 		intl.h prefix.h coretypes.h $(TM_H) cppdefault.h $(TARGET_H) \
@@ -14510,11 +11062,11 @@ index 82a55c9..0000000
 - 
 - CFLAGS-prefix.o += -DPREFIX=\"$(prefix)\" -DBASEVER=$(BASEVER_s)
 - prefix.o: prefix.c $(CONFIG_H) $(SYSTEM_H) coretypes.h prefix.h \
--Index: gcc-4.7.2/gcc/configure
+-Index: gcc-4.8.0/gcc/configure
 -===================================================================
----- gcc-4.7.2.orig/gcc/configure	2012-09-20 07:30:27.000000000 -0700
--+++ gcc-4.7.2/gcc/configure	2012-09-20 07:41:08.548938066 -0700
--@@ -914,6 +914,7 @@
+---- gcc-4.8.0.orig/gcc/configure	2013-03-26 14:11:01.561915044 -0700
+-+++ gcc-4.8.0/gcc/configure	2013-03-26 14:19:57.301925093 -0700
+-@@ -917,6 +917,7 @@
 - with_system_zlib
 - enable_maintainer_mode
 - enable_version_specific_runtime_libs
@@ -14522,7 +11074,7 @@ index 82a55c9..0000000
 - enable_plugin
 - enable_libquadmath_support
 - with_linker_hash_style
--@@ -1627,6 +1628,8 @@
+-@@ -1630,6 +1631,8 @@
 -   --enable-version-specific-runtime-libs
 -                           specify that runtime libraries should be installed
 -                           in a compiler-specific directory
@@ -14531,25 +11083,25 @@ index 82a55c9..0000000
 -   --enable-plugin         enable plugin support
 -   --disable-libquadmath-support
 -                           disable libquadmath support for Fortran
--@@ -18010,7 +18013,7 @@
+-@@ -17828,7 +17831,7 @@
 -   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
 -   lt_status=$lt_dlunknown
 -   cat > conftest.$ac_ext <<_LT_EOF
---#line 18013 "configure"
--+#line 18016 "configure"
+--#line 17831 "configure"
+-+#line 17834 "configure"
 - #include "confdefs.h"
 - 
 - #if HAVE_DLFCN_H
--@@ -18116,7 +18119,7 @@
+-@@ -17934,7 +17937,7 @@
 -   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
 -   lt_status=$lt_dlunknown
 -   cat > conftest.$ac_ext <<_LT_EOF
---#line 18119 "configure"
--+#line 18122 "configure"
+--#line 17937 "configure"
+-+#line 17940 "configure"
 - #include "confdefs.h"
 - 
 - #if HAVE_DLFCN_H
--@@ -27129,6 +27132,19 @@
+-@@ -27103,6 +27106,19 @@
 - fi
 - 
 - 
@@ -14569,10 +11121,10 @@ index 82a55c9..0000000
 - # Substitute configuration variables
 - 
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/gcc-uclibc-locale-ctype_touplow_t.patch b/meta/recipes-devtools/gcc/gcc-4.7/gcc-uclibc-locale-ctype_touplow_t.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/gcc-uclibc-locale-ctype_touplow_t.patch b/meta/recipes-devtools/gcc/gcc-4.8/gcc-uclibc-locale-ctype_touplow_t.patch
 deleted file mode 100644
 index 1648b3b..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/gcc-uclibc-locale-ctype_touplow_t.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/gcc-uclibc-locale-ctype_touplow_t.patch
 +++ /dev/null
 @@ -1,72 +0,0 @@
 -Upstream-Status: Pending
@@ -14647,10 +11199,10 @@ index 1648b3b..0000000
 - _GLIBCXX_LDBL_COMPAT(_ZSt14__convert_to_vIdEvPKcRT_RSt12_Ios_IostateRKPi, _ZSt14__convert_to_vIeEvPKcRT_RSt12_Ios_IostateRKPi);
 -+#endif
 - #endif // _GLIBCXX_LONG_DOUBLE_COMPAT
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/libgcc-sjlj-check.patch b/meta/recipes-devtools/gcc/gcc-4.7/libgcc-sjlj-check.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/libgcc-sjlj-check.patch b/meta/recipes-devtools/gcc/gcc-4.8/libgcc-sjlj-check.patch
 deleted file mode 100644
 index c2fe792..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/libgcc-sjlj-check.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/libgcc-sjlj-check.patch
 +++ /dev/null
 @@ -1,61 +0,0 @@
 -ac_fn_c_try_compile doesnt seem to keep the intermediate files
@@ -14714,10 +11266,10 @@ index c2fe792..0000000
 - rm -f conftest*
 - ])
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/libtool.patch b/meta/recipes-devtools/gcc/gcc-4.7/libtool.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/libtool.patch b/meta/recipes-devtools/gcc/gcc-4.8/libtool.patch
 deleted file mode 100644
 index 9580b23..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/libtool.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/libtool.patch
 +++ /dev/null
 @@ -1,29 +0,0 @@
 -libstdc++ from gcc-runtime gets created with -rpath=/usr/lib/../lib for qemux86-64
@@ -14749,10 +11301,10 @@ index 9580b23..0000000
 - 
 -       oldlibs=
 -       if test -z "$rpath"; then
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/mips64-default-n64.patch b/meta/recipes-devtools/gcc/gcc-4.7/mips64-default-n64.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/mips64-default-n64.patch b/meta/recipes-devtools/gcc/gcc-4.8/mips64-default-n64.patch
 deleted file mode 100644
 index a42569e..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/mips64-default-n64.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/mips64-default-n64.patch
 +++ /dev/null
 @@ -1,19 +0,0 @@
 -MIPS64 defaults to n32 ABI, this patch makes it
@@ -14774,10 +11326,10 @@ index a42569e..0000000
 - 	case ${target} in
 - 		mips64el-st-linux-gnu)
 - 			tm_file="${tm_file} mips/st.h"
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/optional_libstdc.patch b/meta/recipes-devtools/gcc/gcc-4.7/optional_libstdc.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/optional_libstdc.patch b/meta/recipes-devtools/gcc/gcc-4.8/optional_libstdc.patch
 deleted file mode 100644
-index 6e7536b..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/optional_libstdc.patch
+index 2ea23e8..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/optional_libstdc.patch
 +++ /dev/null
 @@ -1,86 +0,0 @@
 -Upstream-Status: Inappropriate [embedded specific]
@@ -14793,11 +11345,11 @@ index 6e7536b..0000000
 -
 -RP 29/6/10
 -
--Index: gcc-4_7-branch/gcc/cp/g++spec.c
+-Index: gcc-4.8.0/gcc/cp/g++spec.c
 -===================================================================
----- gcc-4_7-branch.orig/gcc/cp/g++spec.c	2012-04-10 10:17:24.647330074 -0700
--+++ gcc-4_7-branch/gcc/cp/g++spec.c	2012-04-10 10:37:49.479389235 -0700
--@@ -127,6 +127,7 @@
+---- gcc-4.8.0.orig/gcc/cp/g++spec.c	2013-01-10 12:38:27.000000000 -0800
+-+++ gcc-4.8.0/gcc/cp/g++spec.c	2013-03-26 12:06:42.305775104 -0700
+-@@ -126,6 +126,7 @@
 -       switch (decoded_options[i].opt_index)
 - 	{
 - 	case OPT_nostdlib:
@@ -14805,29 +11357,29 @@ index 6e7536b..0000000
 - 	case OPT_nodefaultlibs:
 - 	  library = -1;
 - 	  break;
--Index: gcc-4_7-branch/gcc/doc/invoke.texi
+-Index: gcc-4.8.0/gcc/doc/invoke.texi
 -===================================================================
----- gcc-4_7-branch.orig/gcc/doc/invoke.texi	2012-04-10 10:37:09.343387385 -0700
--+++ gcc-4_7-branch/gcc/doc/invoke.texi	2012-04-10 10:37:49.483389340 -0700
--@@ -194,7 +194,7 @@
-- -fno-pretty-templates @gol
-- -frepo  -fno-rtti  -fstats  -ftemplate-depth=@var{n} @gol
+---- gcc-4.8.0.orig/gcc/doc/invoke.texi	2013-03-26 12:05:41.000000000 -0700
+-+++ gcc-4.8.0/gcc/doc/invoke.texi	2013-03-26 12:07:56.905776503 -0700
+-@@ -190,7 +190,7 @@
+- -frepo  -fno-rtti  -fstats  -ftemplate-backtrace-limit=@var{n} @gol
+- -ftemplate-depth=@var{n} @gol
 - -fno-threadsafe-statics -fuse-cxa-atexit  -fno-weak  -nostdinc++ @gol
 ---fno-default-inline  -fvisibility-inlines-hidden @gol
 -+-nostdlib++ -fno-default-inline  -fvisibility-inlines-hidden @gol
 - -fvisibility-ms-compat @gol
+- -fext-numeric-literals @gol
 - -Wabi  -Wconversion-null  -Wctor-dtor-privacy @gol
-- -Wdelete-non-virtual-dtor -Wnarrowing -Wnoexcept @gol
--@@ -445,7 +445,7 @@
-- @gccoptlist{@var{object-file-name}  -l@var{library} @gol
+-@@ -453,7 +453,7 @@
 - -nostartfiles  -nodefaultlibs  -nostdlib -pie -rdynamic @gol
-- -s  -static  -static-libgcc  -static-libstdc++ -shared  @gol
----shared-libgcc  -symbolic @gol
--+-shared-libgcc  -symbolic -nostdlib++ @gol
+- -s  -static -static-libgcc -static-libstdc++ @gol
+- -static-libasan -static-libtsan @gol
+---shared -shared-libgcc  -symbolic @gol
+-+-shared -shared-libgcc  -symbolic -nostdlib++ @gol
 - -T @var{script}  -Wl,@var{option}  -Xlinker @var{option} @gol
 - -u @var{symbol}}
 - 
--@@ -9438,6 +9438,11 @@
+-@@ -9886,6 +9886,11 @@
 - libc.  These entry points should be supplied through some other
 - mechanism when this option is specified.
 - 
@@ -14839,11 +11391,11 @@ index 6e7536b..0000000
 - @cindex @option{-lgcc}, use with @option{-nostdlib}
 - @cindex @option{-nostdlib} and unresolved references
 - @cindex unresolved references and @option{-nostdlib}
--Index: gcc-4_7-branch/gcc/c-family/c.opt
+-Index: gcc-4.8.0/gcc/c-family/c.opt
 -===================================================================
----- gcc-4_7-branch.orig/gcc/c-family/c.opt	2012-04-10 10:17:24.667330076 -0700
--+++ gcc-4_7-branch/gcc/c-family/c.opt	2012-04-10 10:37:49.483389340 -0700
--@@ -1171,6 +1171,10 @@
+---- gcc-4.8.0.orig/gcc/c-family/c.opt	2013-01-18 21:25:25.000000000 -0800
+-+++ gcc-4.8.0/gcc/c-family/c.opt	2013-03-26 12:06:42.321775104 -0700
+-@@ -1299,6 +1299,10 @@
 - C++ ObjC++
 - Do not search standard system include directories for C++
 - 
@@ -14854,1577 +11406,22 @@ index 6e7536b..0000000
 - o
 - C ObjC C++ ObjC++ Joined Separate
 - ; Documented in common.opt
--Index: gcc-4_7-branch/gcc/gcc.c
+-Index: gcc-4.8.0/gcc/gcc.c
 -===================================================================
----- gcc-4_7-branch.orig/gcc/gcc.c	2012-04-10 10:37:09.343387385 -0700
--+++ gcc-4_7-branch/gcc/gcc.c	2012-04-10 10:37:49.487389409 -0700
--@@ -681,6 +681,7 @@
+---- gcc-4.8.0.orig/gcc/gcc.c	2013-03-26 12:05:41.000000000 -0700
+-+++ gcc-4.8.0/gcc/gcc.c	2013-03-26 12:06:42.325775102 -0700
+-@@ -748,6 +748,7 @@
 -     %(mflib) " STACK_SPLIT_SPEC "\
--     %{fprofile-arcs|fprofile-generate*|coverage:-lgcov}\
+-     %{fprofile-arcs|fprofile-generate*|coverage:-lgcov} " SANITIZER_SPEC " \
 -     %{!nostdlib:%{!nodefaultlibs:%(link_ssp) %(link_gcc_c_sequence)}}\
 -+    %{!nostdlib++:}\
 -     %{!nostdlib:%{!nostartfiles:%E}} %{T*} }}}}}}"
 - #endif
 - 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/ppc_no_crtsavres.patch b/meta/recipes-devtools/gcc/gcc-4.7/ppc_no_crtsavres.patch
-deleted file mode 100644
-index 92a5d9e..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/ppc_no_crtsavres.patch
-+++ /dev/null
-@@ -1,72 +0,0 @@
--Upstream-Status: Backport
--
--Signed-off-by: Khem Raj
--
--Source-url: http://gcc.gnu.org/ml/gcc-patches/2012-05/msg01362.html
--
--Currently, powerpc-linux gcc -Os -mno-multiple uses out-of-linux gpr
--save and restore functions when saving/restoring just one gpr.  That's
--quite silly since the function call requires more instructions and is
--slower than an inline save/restore.  The only case where it might win
--is when no fprs are restored and the restore function can tear down
--the frame and exit (also loading up lr on ppc64).  I guess that's how
--GP_SAVE_INLINE came to be like it is, ie. it's optimised for the
--common case using ldm in the prologue and no fprs.  Still, it isn't
--difficult to choose the best combination in all cases, but it does
--mean different logic is needed for restores.  I could have implemented
--GP_RESTORE_INLINE and FP_RESORE_INLINE macros but it seemed simpler to
--just move everything into the one place the macros are invoked.  AIX
--and Darwin register cutoff doesn't change with this patch.
--
--This patch also enables out-of-line restores in cases that were
--previously disabled due to using inline saves.
--
--Bootstrapped and regression tested powerpc-linux.  OK to apply?
--
--	* aix.h (FP_SAVE_INLINE, GP_SAVE_INLINE): Delete.
--	* darwin.h (FP_SAVE_INLINE, GP_SAVE_INLINE): Delete.
--	* sysv4.h (FP_SAVE_INLINE, GP_SAVE_INLINE, V_SAVE_INLINE): Delete.
--	* config/rs6000/rs6000.c (V_SAVE_INLINE): Delete.
--	(rs6000_savres_strategy): Reimplement GP/FP/V_SAVE_INLINE logic.
--	For ELF targets, use out-of-line restores for -Os and any number
--	of regs if the restore exits, and out-of-line gp save for two or
--	more regs.  Use save_reg_p to test for holes in reg restore set.
--	Replace "#if" with "if".
--
--Index: gcc-4_7-branch/gcc/config/rs6000/aix.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/aix.h	2012-09-07 12:35:35.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/aix.h	2012-09-07 15:27:55.215290315 -0700
--@@ -207,11 +207,6 @@
--   { "link_syscalls",            LINK_SYSCALLS_SPEC },			\
--   { "link_libg",                LINK_LIBG_SPEC }
-- 
---/* Define cutoff for using external functions to save floating point.  */
---#define FP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) == 62 || (FIRST_REG) == 63)
---/* And similarly for general purpose registers.  */
---#define GP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) < 32)
---
-- #define PROFILE_HOOK(LABEL)   output_profile_hook (LABEL)
-- 
-- /* No version of AIX fully supports AltiVec or 64-bit instructions in
--Index: gcc-4_7-branch/gcc/config/rs6000/darwin.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/darwin.h	2012-09-07 12:35:35.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/darwin.h	2012-09-07 15:27:55.223290316 -0700
--@@ -173,16 +173,6 @@
--   (RS6000_ALIGN (crtl->outgoing_args_size, 16)		\
--    + (STACK_POINTER_OFFSET))
-- 
---/* Define cutoff for using out-of-line functions to save registers.
---   Currently on Darwin, we implement FP and GPR out-of-line-saves plus the
---   special routine for 'save everything'.  */
---
---#undef FP_SAVE_INLINE
---#define FP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) > 60 && (FIRST_REG) < 64)
---
---#undef GP_SAVE_INLINE
---#define GP_SAVE_INLINE(FIRST_REG) ((FIRST_REG) > 29 && (FIRST_REG) < 32)
---
-- /* Darwin uses a function call if everything needs to be saved/restored.  */
-- 
-- #undef WORLD_SAVE_P
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/ppc_with_cpu.patch b/meta/recipes-devtools/gcc/gcc-4.7/ppc_with_cpu.patch
-deleted file mode 100644
-index 5ca12a6..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/ppc_with_cpu.patch
-+++ /dev/null
-@@ -1,752 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--From 7630308303ea21c318bd57c35590fc4f249a30d8 Mon Sep 17 00:00:00 2001
--From: hainque <hainque@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Wed, 16 May 2012 08:43:41 +0000
--Subject: [PATCH]         * config/rs6000/rs6000-opts.h (enum processor_type):
-- Add         PROCESSOR_PPC8548.         *
-- config/rs6000/rs6000-cpus.def: Reference it for cpu="8548".
--         * config/rs6000/rs6000.md (cpu attribute
-- definition): Add ppc8548.         * config/rs6000/8540.md:
-- indicate that the units/patterns apply to         ppc8548
-- as well.
--
--        * config/rs6000/rs6000.c (rs6000_option_override_internal): Rename
--        default_cpu into implicit_cpu, conveying what --with-cpu was passed at
--        configure time. Treat implicit_cpu as have_CPU. Pick defaults for SPE
--        related flags,  check that what is queried is supported by the selected
--        configuration. Rework the single/double_float and MASK_STRING resets to
--        hit for all the E500 cores (854x + E500MC variants). Select the ppc8540
--        costs for PROCESSOR_PPC8548 as well.
--        (rs6000_issue_rate): case CPU_PPC8548 together with CPU_PPC8540.
--        (rs6000_use_sched_lookahead): Likewise, rewriting function as a case
--        statement instead of a sequence of ifs.
--
--        * config/rs6000/rs6000.h (TARGET_E500): Remove.
--        (TARGET_NO_LWSYNC): Adjust accordingly.
--        * config/rs6000/e500.h (TARGET_E500): Remove.
--        (CHECK_E500_OPTIONS): Adjust accordingly.
--        * config/rs6000/eabispe.h (SUBSUBTARGET_OVERRIDE_OPTIONS): Remove.
--        (TARGET_DEFAULT): Reformat definition to match the one in linuxspe.h.
--        * config/rs6000/linuxspe.h: Likewise.
--        * config/rs6000/vxworks.h: Remove bogus TARGET_E500 overrides and
--        superfluous comments.
--        * config/rs6000/e500-double.h: Remove.
--
--        * config.gcc (pick a default with_cpu): For powerpc*-*-*spe*,
--        default to with_cpu=8548 if --enable-e500-double, and to 8540
--        otherwise.
--        (set misc flags section): For powerpc*|rs6000*, remove inclusion
--        of e500-double.h for --enable-e500-double.
--
--
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@187581 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- gcc/ChangeLog                     |   37 +++++++++
-- gcc/config.gcc                    |   12 +--
-- gcc/config/rs6000/8540.md         |   50 ++++++------
-- gcc/config/rs6000/e500-double.h   |   24 ------
-- gcc/config/rs6000/e500.h          |   10 +--
-- gcc/config/rs6000/eabispe.h       |   17 +---
-- gcc/config/rs6000/linuxspe.h      |   16 +---
-- gcc/config/rs6000/rs6000-cpus.def |    3 +-
-- gcc/config/rs6000/rs6000-opts.h   |    1 +
-- gcc/config/rs6000/rs6000.c        |  155 +++++++++++++++++++++++--------------
-- gcc/config/rs6000/rs6000.h        |    7 +-
-- gcc/config/rs6000/rs6000.md       |    2 +-
-- gcc/config/rs6000/rtems.h         |   14 ----
-- gcc/config/rs6000/vxworks.h       |   11 ---
-- 14 files changed, 178 insertions(+), 181 deletions(-)
--
--Index: gcc-4_7-branch/gcc/config.gcc
--===================================================================
----- gcc-4_7-branch.orig/gcc/config.gcc	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/config.gcc	2012-07-06 19:44:38.000000000 -0700
--@@ -2876,6 +2876,13 @@
--     mips*-*-vxworks)
--       with_arch=mips2
--       ;;
--+    powerpc*-*-*spe*)
--+      if test x$enable_e500_double = xyes; then
--+         with_cpu=8548
--+      else
--+         with_cpu=8540
--+      fi       
--+      ;;
--     sparc-leon*-*)
--       with_cpu=v8;
--       ;;
--@@ -3564,11 +3571,6 @@
-- 		c_target_objs="${c_target_objs} rs6000-c.o"
-- 		cxx_target_objs="${cxx_target_objs} rs6000-c.o"
-- 		tmake_file="rs6000/t-rs6000 ${tmake_file}"
---
---                if test x$enable_e500_double = xyes
---                then
---                        tm_file="$tm_file rs6000/e500-double.h"
---                fi
-- 		;;
-- 
-- 	sh[123456ble]*-*-* | sh-*-*)
--Index: gcc-4_7-branch/gcc/config/rs6000/8540.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/8540.md	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/8540.md	2012-07-06 19:44:38.466780001 -0700
--@@ -87,18 +87,18 @@
--   (and (eq_attr "type" "integer,insert_word,insert_dword,cmp,compare,\
--                         delayed_compare,var_delayed_compare,fast_compare,\
--                         shift,trap,var_shift_rotate,cntlz,exts,isel")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- (define_insn_reservation "ppc8540_two" 1
--   (and (eq_attr "type" "two")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
--    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- (define_insn_reservation "ppc8540_three" 1
--   (and (eq_attr "type" "three")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
--    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire,\
--    ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
--@@ -106,13 +106,13 @@
-- ;; Branch.  Actually this latency time is not used by the scheduler.
-- (define_insn_reservation "ppc8540_branch" 1
--   (and (eq_attr "type" "jmpreg,branch,isync")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_bu,ppc8540_retire")
-- 
-- ;; Multiply
-- (define_insn_reservation "ppc8540_multiply" 4
--   (and (eq_attr "type" "imul,imul2,imul3,imul_compare")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
--    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-- 
--@@ -122,57 +122,57 @@
-- ;; time.
-- (define_insn_reservation "ppc8540_divide" 14
--   (and (eq_attr "type" "idiv")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
--    ppc8540_mu_div*13")
-- 
-- ;; CR logical
-- (define_insn_reservation "ppc8540_cr_logical" 1
--   (and (eq_attr "type" "cr_logical,delayed_cr")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_bu,ppc8540_retire")
-- 
-- ;; Mfcr
-- (define_insn_reservation "ppc8540_mfcr" 1
--   (and (eq_attr "type" "mfcr")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-- 
-- ;; Mtcrf
-- (define_insn_reservation "ppc8540_mtcrf" 1
--   (and (eq_attr "type" "mtcr")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-- 
-- ;; Mtjmpr
-- (define_insn_reservation "ppc8540_mtjmpr" 1
--   (and (eq_attr "type" "mtjmpr,mfjmpr")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- ;; Loads
-- (define_insn_reservation "ppc8540_load" 3
--   (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
-- 			load_l,sync")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-- 
-- ;; Stores.
-- (define_insn_reservation "ppc8540_store" 3
--   (and (eq_attr "type" "store,store_ux,store_u,store_c")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-- 
-- ;; Simple FP
-- (define_insn_reservation "ppc8540_simple_float" 1
--   (and (eq_attr "type" "fpsimple")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- ;; FP
-- (define_insn_reservation "ppc8540_float" 4
--   (and (eq_attr "type" "fp")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
--    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-- 
--@@ -180,44 +180,44 @@
-- ;; because of the result automata will be huge.
-- (define_insn_reservation "ppc8540_float_vector_divide" 29
--   (and (eq_attr "type" "vecfdiv")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
--    ppc8540_mu_div*28")
-- 
-- ;; Brinc
-- (define_insn_reservation "ppc8540_brinc" 1
--   (and (eq_attr "type" "brinc")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- ;; Simple vector
-- (define_insn_reservation "ppc8540_simple_vector" 1
--   (and (eq_attr "type" "vecsimple")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-- 
-- ;; Simple vector compare
-- (define_insn_reservation "ppc8540_simple_vector_compare" 1
--   (and (eq_attr "type" "veccmpsimple")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su_stage0+ppc8540_retire")
-- 
-- ;; Vector compare
-- (define_insn_reservation "ppc8540_vector_compare" 1
--   (and (eq_attr "type" "veccmp")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-- 
-- ;; evsplatfi evsplati
-- (define_insn_reservation "ppc8540_vector_perm" 1
--   (and (eq_attr "type" "vecperm")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_su1_stage0+ppc8540_retire")
-- 
-- ;; Vector float
-- (define_insn_reservation "ppc8540_float_vector" 4
--   (and (eq_attr "type" "vecfloat")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
--    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-- 
--@@ -226,25 +226,25 @@
-- ;; of miu_stage3 here because we use the average latency time.
-- (define_insn_reservation "ppc8540_vector_divide" 14
--   (and (eq_attr "type" "vecdiv")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0+ppc8540_mu_div,\
--    ppc8540_mu_div*13")
-- 
-- ;; Complex vector.
-- (define_insn_reservation "ppc8540_complex_vector" 4
--   (and (eq_attr "type" "veccomplex")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_mu_stage0,ppc8540_mu_stage1,\
--    ppc8540_mu_stage2,ppc8540_mu_stage3+ppc8540_retire")
-- 
-- ;; Vector load
-- (define_insn_reservation "ppc8540_vector_load" 3
--   (and (eq_attr "type" "vecload")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
-- 
-- ;; Vector store
-- (define_insn_reservation "ppc8540_vector_store" 3
--   (and (eq_attr "type" "vecstore")
---       (eq_attr "cpu" "ppc8540"))
--+       (eq_attr "cpu" "ppc8540,ppc8548"))
--   "ppc8540_decode,ppc8540_issue+ppc8540_lsu,nothing,ppc8540_retire")
--Index: gcc-4_7-branch/gcc/config/rs6000/e500-double.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/e500-double.h	2012-07-05 23:49:07.000000000 -0700
--+++ /dev/null	1970-01-01 00:00:00.000000000 +0000
--@@ -1,24 +0,0 @@
---/* Target definitions for E500 with double precision FP.
---   Copyright (C) 2004, 2006, 2007, 2011 Free Software Foundation, Inc.
---   Contributed by Aldy Hernandez (aldyh@redhat.com).
---
---   This file is part of GCC.
---
---   GCC is free software; you can redistribute it and/or modify it
---   under the terms of the GNU General Public License as published
---   by the Free Software Foundation; either version 3, or (at your
---   option) any later version.
---
---   GCC is distributed in the hope that it will be useful, but WITHOUT
---   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
---   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
---   License for more details.
---
---   You should have received a copy of the GNU General Public License
---   along with GCC; see the file COPYING3.  If not see
---   <http://www.gnu.org/licenses/>.  */
---
---#undef  SUB3TARGET_OVERRIDE_OPTIONS
---#define SUB3TARGET_OVERRIDE_OPTIONS \
---  if (!global_options_set.x_rs6000_float_gprs) \
---    rs6000_float_gprs = 2;
--Index: gcc-4_7-branch/gcc/config/rs6000/e500.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/e500.h	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/e500.h	2012-07-06 19:44:38.466780001 -0700
--@@ -19,7 +19,6 @@
-- 
-- #undef TARGET_SPE_ABI
-- #undef TARGET_SPE
---#undef TARGET_E500
-- #undef TARGET_FPRS
-- #undef TARGET_E500_SINGLE
-- #undef TARGET_E500_DOUBLE
--@@ -27,21 +26,20 @@
-- 
-- #define TARGET_SPE_ABI rs6000_spe_abi
-- #define TARGET_SPE rs6000_spe
---#define TARGET_E500 (rs6000_cpu == PROCESSOR_PPC8540)
-- #define TARGET_FPRS (rs6000_float_gprs == 0)
-- #define TARGET_E500_SINGLE (TARGET_HARD_FLOAT && rs6000_float_gprs == 1)
-- #define TARGET_E500_DOUBLE (TARGET_HARD_FLOAT && rs6000_float_gprs == 2)
-- #define CHECK_E500_OPTIONS						\
--   do {									\
---    if (TARGET_E500 || TARGET_SPE || TARGET_SPE_ABI			\
--+    if (TARGET_SPE || TARGET_SPE_ABI					\
-- 	|| TARGET_E500_SINGLE || TARGET_E500_DOUBLE)			\
--       {									\
-- 	if (TARGET_ALTIVEC)						\
---	  error ("AltiVec and E500 instructions cannot coexist");	\
--+	  error ("AltiVec and SPE instructions cannot coexist");	\
-- 	if (TARGET_VSX)							\
---	  error ("VSX and E500 instructions cannot coexist");		\
--+	  error ("VSX and SPE instructions cannot coexist");		\
-- 	if (TARGET_64BIT)						\
---	  error ("64-bit E500 not supported");				\
--+	  error ("64-bit SPE not supported");				\
-- 	if (TARGET_HARD_FLOAT && TARGET_FPRS)				\
-- 	  error ("E500 and FPRs not supported");			\
--       }									\
--Index: gcc-4_7-branch/gcc/config/rs6000/eabispe.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/eabispe.h	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/eabispe.h	2012-07-06 19:44:38.466780001 -0700
--@@ -21,21 +21,8 @@
--    <http://www.gnu.org/licenses/>.  */
-- 
-- #undef  TARGET_DEFAULT
---#define TARGET_DEFAULT (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_EABI	\
---  | MASK_STRICT_ALIGN)
---
---#undef  SUBSUBTARGET_OVERRIDE_OPTIONS
---#define SUBSUBTARGET_OVERRIDE_OPTIONS \
---  if (!global_options_set.x_rs6000_cpu_index) \
---    rs6000_cpu = PROCESSOR_PPC8540; \
---  if (!global_options_set.x_rs6000_spe_abi) \
---    rs6000_spe_abi = 1; \
---  if (!global_options_set.x_rs6000_float_gprs) \
---    rs6000_float_gprs = 1; \
---  if (!global_options_set.x_rs6000_spe) \
---    rs6000_spe = 1; \
---  if (target_flags & MASK_64BIT) \
---    error ("-m64 not supported in this configuration")
--+#define TARGET_DEFAULT \
--+  (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN | MASK_EABI)
-- 
-- #undef  ASM_DEFAULT_SPEC
-- #define	ASM_DEFAULT_SPEC "-mppc -mspe -me500"
--Index: gcc-4_7-branch/gcc/config/rs6000/linuxspe.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/linuxspe.h	2012-07-05 23:52:14.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/linuxspe.h	2012-07-06 19:44:38.466780001 -0700
--@@ -22,20 +22,8 @@
-- 
-- /* Override rs6000.h and sysv4.h definition.  */
-- #undef	TARGET_DEFAULT
---#define	TARGET_DEFAULT (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN)
---
---#undef  SUBSUBTARGET_OVERRIDE_OPTIONS
---#define SUBSUBTARGET_OVERRIDE_OPTIONS \
---  if (!global_options_set.x_rs6000_cpu_index) \
---    rs6000_cpu = PROCESSOR_PPC8540; \
---  if (!global_options_set.x_rs6000_spe_abi) \
---    rs6000_spe_abi = 1; \
---  if (!global_options_set.x_rs6000_float_gprs) \
---    rs6000_float_gprs = 1; \
---  if (!global_options_set.x_rs6000_spe) \
---    rs6000_spe = 1; \
---  if (target_flags & MASK_64BIT) \
---    error ("-m64 not supported in this configuration")
--+#define TARGET_DEFAULT \
--+  (MASK_POWERPC | MASK_NEW_MNEMONICS | MASK_STRICT_ALIGN)
-- 
-- #undef  ASM_DEFAULT_SPEC
-- #define	ASM_DEFAULT_SPEC "-mppc -mspe -me500"
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000-cpus.def
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000-cpus.def	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000-cpus.def	2012-07-06 19:44:38.000000000 -0700
--@@ -76,8 +76,7 @@
-- RS6000_CPU ("823", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT)
-- RS6000_CPU ("8540", PROCESSOR_PPC8540, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
-- 	    | MASK_ISEL)
---/* 8548 has a dummy entry for now.  */
---RS6000_CPU ("8548", PROCESSOR_PPC8540, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
--+RS6000_CPU ("8548", PROCESSOR_PPC8548, POWERPC_BASE_MASK | MASK_STRICT_ALIGN
-- 	    | MASK_ISEL)
-- RS6000_CPU ("a2", PROCESSOR_PPCA2,
-- 	    POWERPC_BASE_MASK | MASK_PPC_GFXOPT | MASK_POWERPC64 | MASK_POPCNTB
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000-opts.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000-opts.h	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000-opts.h	2012-07-06 19:44:38.000000000 -0700
--@@ -49,6 +49,7 @@
--    PROCESSOR_PPC7400,
--    PROCESSOR_PPC7450,
--    PROCESSOR_PPC8540,
--+   PROCESSOR_PPC8548,
--    PROCESSOR_PPCE300C2,
--    PROCESSOR_PPCE300C3,
--    PROCESSOR_PPCE500MC,
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.c
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.c	2012-07-06 19:43:53.194780001 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.c	2012-07-06 19:44:38.000000000 -0700
--@@ -2597,7 +2597,10 @@
-- {
--   bool ret = true;
--   bool have_cpu = false;
---  const char *default_cpu = OPTION_TARGET_CPU_DEFAULT;
--+
--+  /* The default cpu requested at configure time, if any.  */
--+  const char *implicit_cpu = OPTION_TARGET_CPU_DEFAULT;
--+
--   int set_masks;
--   int cpu_index;
--   int tune_index;
--@@ -2616,11 +2619,6 @@
--     warning (0, "-malign-power is not supported for 64-bit Darwin;"
-- 	     " it is incompatible with the installed C and C++ libraries");
-- 
---  if (global_options_set.x_rs6000_spe_abi
---      && rs6000_spe_abi
---      && !TARGET_SPE_ABI)
---    error ("not configured for SPE ABI");
---
--   /* Numerous experiment shows that IRA based loop pressure
--      calculation works better for RTL loop invariant motion on targets
--      with enough (>= 32) registers.  It is an expensive optimization.
--@@ -2656,7 +2654,8 @@
--   /* Process the -mcpu=<xxx> and -mtune=<xxx> argument.  If the user changed
--      the cpu in a target attribute or pragma, but did not specify a tuning
--      option, use the cpu for the tuning option rather than the option specified
---     with -mtune on the command line.  */
--+     with -mtune on the command line.  Process a '--with-cpu' configuration
--+     request as an implicit --cpu.  */
--   if (rs6000_cpu_index >= 0)
--     {
--       cpu_index = rs6000_cpu_index;
--@@ -2669,10 +2668,12 @@
--     }
--   else
--     {
---      if (!default_cpu)
---	default_cpu = (TARGET_POWERPC64 ? "powerpc64" : "powerpc");
--+      const char *default_cpu =
--+        (implicit_cpu ? implicit_cpu
--+         : (TARGET_POWERPC64 ? "powerpc64" : "powerpc"));
-- 
--       rs6000_cpu_index = cpu_index = rs6000_cpu_name_lookup (default_cpu);
--+      have_cpu = implicit_cpu != 0;
--     }
-- 
--   gcc_assert (cpu_index >= 0);
--@@ -2703,6 +2704,42 @@
--   gcc_assert (tune_index >= 0);
--   rs6000_cpu = processor_target_table[tune_index].processor;
-- 
--+  /* Pick defaults for SPE related control flags.  Do this early to make sure
--+     that the TARGET_ macros are representative ASAP.  */
--+  {
--+    int spe_capable_cpu =
--+      (rs6000_cpu == PROCESSOR_PPC8540
--+       || rs6000_cpu == PROCESSOR_PPC8548);
--+
--+    if (!global_options_set.x_rs6000_spe_abi)
--+      rs6000_spe_abi = spe_capable_cpu;
--+
--+    if (!global_options_set.x_rs6000_spe)
--+      rs6000_spe = spe_capable_cpu;
--+
--+    if (!global_options_set.x_rs6000_float_gprs)
--+      rs6000_float_gprs =
--+        (rs6000_cpu == PROCESSOR_PPC8540 ? 1
--+         : rs6000_cpu == PROCESSOR_PPC8548 ? 2
--+         : 0);
--+  }
--+
--+  if (global_options_set.x_rs6000_spe_abi
--+      && rs6000_spe_abi
--+      && !TARGET_SPE_ABI)
--+    error ("not configured for SPE ABI");
--+
--+  if (global_options_set.x_rs6000_spe
--+      && rs6000_spe
--+      && !TARGET_SPE)
--+    error ("not configured for SPE instruction set");
--+
--+  if (main_target_opt != NULL
--+      && ((main_target_opt->x_rs6000_spe_abi != rs6000_spe_abi)
--+          || (main_target_opt->x_rs6000_spe != rs6000_spe)
--+          || (main_target_opt->x_rs6000_float_gprs != rs6000_float_gprs)))
--+    error ("target attribute or pragma changes SPE ABI");
--+
--   if (rs6000_cpu == PROCESSOR_PPCE300C2 || rs6000_cpu == PROCESSOR_PPCE300C3
--       || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64)
--     {
--@@ -2938,35 +2975,44 @@
--   SUB3TARGET_OVERRIDE_OPTIONS;
-- #endif
-- 
---  if (TARGET_E500 || rs6000_cpu == PROCESSOR_PPCE500MC
---      || rs6000_cpu == PROCESSOR_PPCE500MC64)
--+  /* For the E500 family of cores, reset the single/double FP flags to let us
--+     check that they remain constant across attributes or pragmas.  Also,
--+     clear a possible request for string instructions, not supported and which
--+     we might have silently queried above for -Os. 
--+
--+     For other families, clear ISEL in case it was set implicitly.
--+  */
--+
--+  switch (rs6000_cpu)
--     {
---      /* The e500 and e500mc do not have string instructions, and we set
---	 MASK_STRING above when optimizing for size.  */
---      if ((target_flags & MASK_STRING) != 0)
---	target_flags = target_flags & ~MASK_STRING;
---    }
---  else if (global_options_set.x_rs6000_cpu_index)
---    {
---      /* For the powerpc-eabispe configuration, we set all these by
---	 default, so let's unset them if we manually set another
---	 CPU that is not the E500.  */
---      if (main_target_opt != NULL
---	  && ((main_target_opt->x_rs6000_spe_abi != rs6000_spe_abi)
---	      || (main_target_opt->x_rs6000_spe != rs6000_spe)
---	      || (main_target_opt->x_rs6000_float_gprs != rs6000_float_gprs)))
---	error ("target attribute or pragma changes SPE ABI");
---      else
---	{
---	  if (!global_options_set.x_rs6000_spe_abi)
---	    rs6000_spe_abi = 0;
---	  if (!global_options_set.x_rs6000_spe)
---	    rs6000_spe = 0;
---	  if (!global_options_set.x_rs6000_float_gprs)
---	    rs6000_float_gprs = 0;
---	}
---      if (!(target_flags_explicit & MASK_ISEL))
--+    case PROCESSOR_PPC8540:
--+    case PROCESSOR_PPC8548:
--+    case PROCESSOR_PPCE500MC:
--+    case PROCESSOR_PPCE500MC64:
--+
--+      rs6000_single_float = TARGET_E500_SINGLE || TARGET_E500_DOUBLE;
--+      rs6000_double_float = TARGET_E500_DOUBLE;
--+
--+      target_flags &= ~MASK_STRING;
--+
--+      break;
--+
--+    default:
--+
--+      if (have_cpu && !(target_flags_explicit & MASK_ISEL))
-- 	target_flags &= ~MASK_ISEL;
--+
--+      break;
--+    }
--+
--+  if (main_target_opt)
--+    {
--+      if (main_target_opt->x_rs6000_single_float != rs6000_single_float)
--+	error ("target attribute or pragma changes single precision floating "
--+	       "point");
--+      if (main_target_opt->x_rs6000_double_float != rs6000_double_float)
--+	error ("target attribute or pragma changes double precision floating "
--+	       "point");
--     }
-- 
--   /* Detect invalid option combinations with E500.  */
--@@ -3193,6 +3239,7 @@
-- 	break;
-- 
--       case PROCESSOR_PPC8540:
--+      case PROCESSOR_PPC8548:
-- 	rs6000_cost = &ppc8540_cost;
-- 	break;
-- 
--@@ -3265,26 +3312,6 @@
--       && rs6000_single_float == 0 && rs6000_double_float == 0)
--     rs6000_single_float = rs6000_double_float = 1;
-- 
---  /* Reset single and double FP flags if target is E500. */
---  if (TARGET_E500) 
---  {
---    rs6000_single_float = rs6000_double_float = 0;
---    if (TARGET_E500_SINGLE)
---      rs6000_single_float = 1; 
---    if (TARGET_E500_DOUBLE)
---      rs6000_single_float = rs6000_double_float = 1;
---  }
---
---  if (main_target_opt)
---    {
---      if (main_target_opt->x_rs6000_single_float != rs6000_single_float)
---	error ("target attribute or pragma changes single precision floating "
---	       "point");
---      if (main_target_opt->x_rs6000_double_float != rs6000_double_float)
---	error ("target attribute or pragma changes double precision floating "
---	       "point");
---    }
---
--   /* If not explicitly specified via option, decide whether to generate indexed
--      load/store instructions.  */
--   if (TARGET_AVOID_XFORM == -1)
--@@ -22816,6 +22843,7 @@
--   case CPU_PPC750:
--   case CPU_PPC7400:
--   case CPU_PPC8540:
--+  case CPU_PPC8548:
--   case CPU_CELL:
--   case CPU_PPCE300C2:
--   case CPU_PPCE300C3:
--@@ -22846,11 +22874,18 @@
-- static int
-- rs6000_use_sched_lookahead (void)
-- {
---  if (rs6000_cpu_attr == CPU_PPC8540)
---    return 4;
---  if (rs6000_cpu_attr == CPU_CELL)
---    return (reload_completed ? 8 : 0);
---  return 0;
--+  switch (rs6000_cpu_attr)
--+    {
--+    case CPU_PPC8540:
--+    case CPU_PPC8548:
--+      return 4;
--+
--+    case CPU_CELL:
--+      return (reload_completed ? 8 : 0);
--+
--+    default:
--+      return 0;
--+    }
-- }
-- 
-- /* We are choosing insn from the ready queue.  Return nonzero if INSN can be chosen.  */
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.h	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.h	2012-07-06 19:44:38.000000000 -0700
--@@ -457,7 +457,6 @@
-- 
-- #define TARGET_SPE_ABI 0
-- #define TARGET_SPE 0
---#define TARGET_E500 0
-- #define TARGET_ISEL64 (TARGET_ISEL && TARGET_POWERPC64)
-- #define TARGET_FPRS 1
-- #define TARGET_E500_SINGLE 0
--@@ -500,11 +499,11 @@
-- 				      || TARGET_ALTIVEC			 \
-- 				      || TARGET_VSX)))
-- 
--+/* E500 cores only support plain "sync", not lwsync.  */
--+#define TARGET_NO_LWSYNC (rs6000_cpu == PROCESSOR_PPC8540 \
--+			  || rs6000_cpu == PROCESSOR_PPC8548)
-- 
-- 
---/* E500 processors only support plain "sync", not lwsync.  */
---#define TARGET_NO_LWSYNC TARGET_E500
---
-- /* Which machine supports the various reciprocal estimate instructions.  */
-- #define TARGET_FRES	(TARGET_HARD_FLOAT && TARGET_PPC_GFXOPT \
-- 			 && TARGET_FPRS && TARGET_SINGLE_FLOAT)
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.md	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.md	2012-07-06 19:44:38.000000000 -0700
--@@ -166,7 +166,7 @@
-- ;; Processor type -- this attribute must exactly match the processor_type
-- ;; enumeration in rs6000.h.
-- 
---(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
--+(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
--   (const (symbol_ref "rs6000_cpu_attr")))
-- 
-- 
--Index: gcc-4_7-branch/gcc/config/rs6000/rtems.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rtems.h	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rtems.h	2012-07-06 19:44:38.470780001 -0700
--@@ -55,17 +55,3 @@
-- #undef  SUBSUBTARGET_EXTRA_SPECS
-- #define SUBSUBTARGET_EXTRA_SPECS \
--   { "cpp_os_rtems",		CPP_OS_RTEMS_SPEC }
---
---#undef SUBSUBTARGET_OVERRIDE_OPTIONS
---#define SUBSUBTARGET_OVERRIDE_OPTIONS                                     \
---  do {                                                                    \
---   if (TARGET_E500)                                                       \
---      {                                                                   \
---        if (TARGET_HARD_FLOAT && !global_options_set.x_rs6000_float_gprs) \
---          rs6000_float_gprs = 1;                                          \
---        if (rs6000_float_gprs != 0 && !global_options_set.x_rs6000_spe)   \
---          rs6000_spe = 1;                                                 \
---        if (rs6000_spe && !global_options_set.x_rs6000_spe_abi)           \
---          rs6000_spe_abi = 1;                                             \
---      }                                                                   \
---  } while(0)
--Index: gcc-4_7-branch/gcc/config/rs6000/vxworks.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/vxworks.h	2012-07-05 23:49:07.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/vxworks.h	2012-07-06 19:44:38.470780001 -0700
--@@ -122,19 +122,8 @@
-- 
-- #undef  ABI_STACK_BOUNDARY
-- 
---/* Make -mcpu=8540 imply SPE.  ISEL is automatically enabled, the
---   others must be done by hand.  Handle -mrtp.  Disable -fPIC
---   for -mrtp - the VxWorks PIC model is not compatible with it.  */
-- #undef SUBSUBTARGET_OVERRIDE_OPTIONS
-- #define SUBSUBTARGET_OVERRIDE_OPTIONS		\
---  do {						\
---    if (TARGET_E500)				\
---      {						\
---	rs6000_spe = 1;				\
---	rs6000_spe_abi = 1;			\
---	rs6000_float_gprs = 1;			\
---      }						\
---						\
--   if (!global_options_set.x_g_switch_value)	\
--     g_switch_value = SDATA_DEFAULT_SIZE;	\
--   VXWORKS_OVERRIDE_OPTIONS;			\
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/ppce5500-e6500-support.patch b/meta/recipes-devtools/gcc/gcc-4.7/ppce5500-e6500-support.patch
-deleted file mode 100644
-index e3341fc..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/ppce5500-e6500-support.patch
-+++ /dev/null
-@@ -1,713 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--From b770074cee13445eba1bf4e99649c5ceac9a4b5a Mon Sep 17 00:00:00 2001
--From: edmarwjr <edmarwjr@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Tue, 5 Jun 2012 16:05:16 +0000
--Subject: [PATCH] 2012-06-01  Edmar Wienskoski  <edmar@freescale.com>
--
--	* config/rs6000/e5500.md: New file.
--	* config/rs6000/e6500.md: New file.
--	* config/rs6000/rs6000.c (processor_costs): Add new costs for
--	e5500 and e6500.
--	(rs6000_option_override_internal): Altivec and Spe options not
--	allowed with e5500. Spe options not allowed with e6500. Increase
--	move inline limit for e5500 and e6500. Disable string instructions
--	for e5500 and e6500. Enable branch targets alignment for e5500 and
--	e6500. Initialize rs6000_cost for e5500 and e6500.
--	(rs6000_adjust_cost): Add extra scheduling cycles between compare
--	and brnach for e5500 and e6500.
--	(rs6000_issue_rate): Set issue rate for e5500 and e6500.
--	* config/rs6000/rs6000-cpus.def: Add cpu definitions for e5500 and
--	e6500.
--	* config/rs6000/rs6000.h (ASM_CPU_SPEC): Add e5500 and e6500.
--	* config/rs6000/rs6000.md (define_attr "cpu"): Add ppce5500 and
--	ppce6500.
--	Include e5500.md and e6500.md.
--	* config/rs6000/rs6000-opt.h (processor_type): Add
--	PROCESSOR_PPCE5500 and PROCESSOR_PPCE6500.
--	* config.gcc (cpu_is_64bit): Add new cores e5500, e6500.
--	(powerpc*-*-*): Add new cores e5500, e6500.
--	* doc/invoke.texi: (item -mcpu): Add e5500 and e6500 to list of cpus.
--
--gcc/testsuite
--2012-06-01  Edmar Wienskoski  <edmar@freescale.com>
--
--	* gcc.dg/tree-ssa/vector-3.c: Adjust regular expression.
--
--
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188244 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- gcc/ChangeLog                            |   26 ++++
-- gcc/config.gcc                           |    6 +-
-- gcc/config/rs6000/e5500.md               |  176 ++++++++++++++++++++++++
-- gcc/config/rs6000/e6500.md               |  213 ++++++++++++++++++++++++++++++
-- gcc/config/rs6000/rs6000-cpus.def        |    4 +
-- gcc/config/rs6000/rs6000-opts.h          |    2 +
-- gcc/config/rs6000/rs6000.c               |   68 +++++++++-
-- gcc/config/rs6000/rs6000.h               |    2 +
-- gcc/config/rs6000/rs6000.md              |    4 +-
-- gcc/doc/invoke.texi                      |   12 +-
-- gcc/testsuite/ChangeLog                  |    4 +
-- gcc/testsuite/gcc.dg/tree-ssa/vector-3.c |    2 +-
-- 12 files changed, 506 insertions(+), 13 deletions(-)
-- create mode 100644 gcc/config/rs6000/e5500.md
-- create mode 100644 gcc/config/rs6000/e6500.md
--
--Index: gcc-4_7-branch/gcc/config.gcc
--===================================================================
----- gcc-4_7-branch.orig/gcc/config.gcc	2012-07-06 19:52:30.000000000 -0700
--+++ gcc-4_7-branch/gcc/config.gcc	2012-07-06 19:53:26.350779999 -0700
--@@ -413,7 +413,7 @@
-- 	extra_headers="ppc-asm.h altivec.h spe.h ppu_intrinsics.h paired.h spu2vmx.h vec_types.h si2vmx.h"
-- 	need_64bit_hwint=yes
-- 	case x$with_cpu in
---	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64)
--+	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64|xe5500|Xe6500)
-- 		cpu_is_64bit=yes
-- 		;;
-- 	esac
--@@ -3361,8 +3361,8 @@
-- 			| 401 | 403 | 405 | 405fp | 440 | 440fp | 464 | 464fp \
-- 			| 476 | 476fp | 505 | 601 | 602 | 603 | 603e | ec603e \
-- 			| 604 | 604e | 620 | 630 | 740 | 750 | 7400 | 7450 \
---			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | titan\
---			| 801 | 821 | 823 | 860 | 970 | G3 | G4 | G5 | cell)
--+			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | e5500 | e6500 \
--+			| titan | 801 | 821 | 823 | 860 | 970 | G3 | G4 | G5 | cell)
-- 				# OK
-- 				;;
-- 			*)
--Index: gcc-4_7-branch/gcc/config/rs6000/e5500.md
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ gcc-4_7-branch/gcc/config/rs6000/e5500.md	2012-07-06 19:53:26.350779999 -0700
--@@ -0,0 +1,176 @@
--+;; Pipeline description for Freescale PowerPC e5500 core.
--+;;   Copyright (C) 2012 Free Software Foundation, Inc.
--+;;   Contributed by Edmar Wienskoski (edmar@freescale.com)
--+;;
--+;; This file is part of GCC.
--+;;
--+;; GCC is free software; you can redistribute it and/or modify it
--+;; under the terms of the GNU General Public License as published
--+;; by the Free Software Foundation; either version 3, or (at your
--+;; option) any later version.
--+;;
--+;; GCC is distributed in the hope that it will be useful, but WITHOUT
--+;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
--+;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
--+;; License for more details.
--+;;
--+;; You should have received a copy of the GNU General Public License
--+;; along with GCC; see the file COPYING3.  If not see
--+;; <http://www.gnu.org/licenses/>.
--+;;
--+;; e5500 64-bit SFX(2), CFX, LSU, FPU, BU
--+;; Max issue 3 insns/clock cycle (includes 1 branch)
--+
--+(define_automaton "e5500_most,e5500_long")
--+(define_cpu_unit "e5500_decode_0,e5500_decode_1" "e5500_most")
--+
--+;; SFX.
--+(define_cpu_unit "e5500_sfx_0,e5500_sfx_1" "e5500_most")
--+
--+;; CFX.
--+(define_cpu_unit "e5500_cfx_stage0,e5500_cfx_stage1" "e5500_most")
--+
--+;; Non-pipelined division.
--+(define_cpu_unit "e5500_cfx_div" "e5500_long")
--+
--+;; LSU.
--+(define_cpu_unit "e5500_lsu" "e5500_most")
--+
--+;; FPU.
--+(define_cpu_unit "e5500_fpu" "e5500_long")
--+
--+;; BU.
--+(define_cpu_unit "e5500_bu" "e5500_most")
--+
--+;; The following units are used to make the automata deterministic.
--+(define_cpu_unit "present_e5500_decode_0" "e5500_most")
--+(define_cpu_unit "present_e5500_sfx_0" "e5500_most")
--+(presence_set "present_e5500_decode_0" "e5500_decode_0")
--+(presence_set "present_e5500_sfx_0" "e5500_sfx_0")
--+
--+;; Some useful abbreviations.
--+(define_reservation "e5500_decode"
--+    "e5500_decode_0|e5500_decode_1+present_e5500_decode_0")
--+(define_reservation "e5500_sfx"
--+   "e5500_sfx_0|e5500_sfx_1+present_e5500_sfx_0")
--+
--+;; SFX.
--+(define_insn_reservation "e5500_sfx" 1
--+  (and (eq_attr "type" "integer,insert_word,insert_dword,delayed_compare,\
--+	shift,cntlz,exts")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx")
--+
--+(define_insn_reservation "e5500_sfx2" 2
--+  (and (eq_attr "type" "cmp,compare,fast_compare,trap")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx")
--+
--+(define_insn_reservation "e5500_delayed" 2
--+  (and (eq_attr "type" "var_shift_rotate,var_delayed_compare")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx*2")
--+
--+(define_insn_reservation "e5500_two" 2
--+  (and (eq_attr "type" "two")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_decode+e5500_sfx,e5500_sfx")
--+
--+(define_insn_reservation "e5500_three" 3
--+  (and (eq_attr "type" "three")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,(e5500_decode+e5500_sfx)*2,e5500_sfx")
--+
--+;; SFX - Mfcr.
--+(define_insn_reservation "e5500_mfcr" 4
--+  (and (eq_attr "type" "mfcr")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx_0*4")
--+
--+;; SFX - Mtcrf.
--+(define_insn_reservation "e5500_mtcrf" 1
--+  (and (eq_attr "type" "mtcr")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx_0")
--+
--+;; SFX - Mtjmpr.
--+(define_insn_reservation "e5500_mtjmpr" 1
--+  (and (eq_attr "type" "mtjmpr,mfjmpr")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_sfx")
--+
--+;; CFX - Multiply.
--+(define_insn_reservation "e5500_multiply" 4
--+  (and (eq_attr "type" "imul")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_cfx_stage0,e5500_cfx_stage1")
--+
--+(define_insn_reservation "e5500_multiply_i" 5
--+  (and (eq_attr "type" "imul2,imul3,imul_compare")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_cfx_stage0,\
--+   e5500_cfx_stage0+e5500_cfx_stage1,e5500_cfx_stage1")
--+
--+;; CFX - Divide.
--+(define_insn_reservation "e5500_divide" 16
--+  (and (eq_attr "type" "idiv")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
--+   e5500_cfx_div*15")
--+
--+(define_insn_reservation "e5500_divide_d" 26
--+  (and (eq_attr "type" "ldiv")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
--+   e5500_cfx_div*25")
--+
--+;; LSU - Loads.
--+(define_insn_reservation "e5500_load" 3
--+  (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
--+			load_l,sync")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_lsu")
--+
--+(define_insn_reservation "e5500_fpload" 4
--+  (and (eq_attr "type" "fpload,fpload_ux,fpload_u")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_lsu")
--+
--+;; LSU - Stores.
--+(define_insn_reservation "e5500_store" 3
--+  (and (eq_attr "type" "store,store_ux,store_u,store_c")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_lsu")
--+
--+(define_insn_reservation "e5500_fpstore" 3
--+  (and (eq_attr "type" "fpstore,fpstore_ux,fpstore_u")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_lsu")
--+
--+;; FP.
--+(define_insn_reservation "e5500_float" 7
--+  (and (eq_attr "type" "fpsimple,fp,fpcompare,dmul")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_fpu")
--+
--+(define_insn_reservation "e5500_sdiv" 20
--+  (and (eq_attr "type" "sdiv")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_fpu*20")
--+
--+(define_insn_reservation "e5500_ddiv" 35
--+  (and (eq_attr "type" "ddiv")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_fpu*35")
--+
--+;; BU.
--+(define_insn_reservation "e5500_branch" 1
--+  (and (eq_attr "type" "jmpreg,branch,isync")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_bu")
--+
--+;; BU - CR logical.
--+(define_insn_reservation "e5500_cr_logical" 1
--+  (and (eq_attr "type" "cr_logical,delayed_cr")
--+       (eq_attr "cpu" "ppce5500"))
--+  "e5500_decode,e5500_bu")
--Index: gcc-4_7-branch/gcc/config/rs6000/e6500.md
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ gcc-4_7-branch/gcc/config/rs6000/e6500.md	2012-07-06 19:53:26.354779999 -0700
--@@ -0,0 +1,213 @@
--+;; Pipeline description for Freescale PowerPC e6500 core.
--+;;   Copyright (C) 2012 Free Software Foundation, Inc.
--+;;   Contributed by Edmar Wienskoski (edmar@freescale.com)
--+;;
--+;; This file is part of GCC.
--+;;
--+;; GCC is free software; you can redistribute it and/or modify it
--+;; under the terms of the GNU General Public License as published
--+;; by the Free Software Foundation; either version 3, or (at your
--+;; option) any later version.
--+;;
--+;; GCC is distributed in the hope that it will be useful, but WITHOUT
--+;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
--+;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
--+;; License for more details.
--+;;
--+;; You should have received a copy of the GNU General Public License
--+;; along with GCC; see the file COPYING3.  If not see
--+;; <http://www.gnu.org/licenses/>.
--+;;
--+;; e6500 64-bit SFX(2), CFX, LSU, FPU, BU, VSFX, VCFX, VFPU, VPERM
--+;; Max issue 3 insns/clock cycle (includes 1 branch)
--+
--+(define_automaton "e6500_most,e6500_long,e6500_vec")
--+(define_cpu_unit "e6500_decode_0,e6500_decode_1" "e6500_most")
--+
--+;; SFX.
--+(define_cpu_unit "e6500_sfx_0,e6500_sfx_1" "e6500_most")
--+
--+;; CFX.
--+(define_cpu_unit "e6500_cfx_stage0,e6500_cfx_stage1" "e6500_most")
--+
--+;; Non-pipelined division.
--+(define_cpu_unit "e6500_cfx_div" "e6500_long")
--+
--+;; LSU.
--+(define_cpu_unit "e6500_lsu" "e6500_most")
--+
--+;; FPU.
--+(define_cpu_unit "e6500_fpu" "e6500_long")
--+
--+;; BU.
--+(define_cpu_unit "e6500_bu" "e6500_most")
--+
--+;; Altivec unit
--+(define_cpu_unit "e6500_vec,e6500_vecperm" "e6500_vec")
--+
--+;; The following units are used to make the automata deterministic.
--+(define_cpu_unit "present_e6500_decode_0" "e6500_most")
--+(define_cpu_unit "present_e6500_sfx_0" "e6500_most")
--+(presence_set "present_e6500_decode_0" "e6500_decode_0")
--+(presence_set "present_e6500_sfx_0" "e6500_sfx_0")
--+
--+;; Some useful abbreviations.
--+(define_reservation "e6500_decode"
--+    "e6500_decode_0|e6500_decode_1+present_e6500_decode_0")
--+(define_reservation "e6500_sfx"
--+   "e6500_sfx_0|e6500_sfx_1+present_e6500_sfx_0")
--+
--+;; SFX.
--+(define_insn_reservation "e6500_sfx" 1
--+  (and (eq_attr "type" "integer,insert_word,insert_dword,delayed_compare,\
--+	shift,cntlz,exts")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx")
--+
--+(define_insn_reservation "e6500_sfx2" 2
--+  (and (eq_attr "type" "cmp,compare,fast_compare,trap")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx")
--+
--+(define_insn_reservation "e6500_delayed" 2
--+  (and (eq_attr "type" "var_shift_rotate,var_delayed_compare")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx*2")
--+
--+(define_insn_reservation "e6500_two" 2
--+  (and (eq_attr "type" "two")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_decode+e6500_sfx,e6500_sfx")
--+
--+(define_insn_reservation "e6500_three" 3
--+  (and (eq_attr "type" "three")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,(e6500_decode+e6500_sfx)*2,e6500_sfx")
--+
--+;; SFX - Mfcr.
--+(define_insn_reservation "e6500_mfcr" 4
--+  (and (eq_attr "type" "mfcr")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx_0*4")
--+
--+;; SFX - Mtcrf.
--+(define_insn_reservation "e6500_mtcrf" 1
--+  (and (eq_attr "type" "mtcr")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx_0")
--+
--+;; SFX - Mtjmpr.
--+(define_insn_reservation "e6500_mtjmpr" 1
--+  (and (eq_attr "type" "mtjmpr,mfjmpr")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_sfx")
--+
--+;; CFX - Multiply.
--+(define_insn_reservation "e6500_multiply" 4
--+  (and (eq_attr "type" "imul")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_cfx_stage0,e6500_cfx_stage1")
--+
--+(define_insn_reservation "e6500_multiply_i" 5
--+  (and (eq_attr "type" "imul2,imul3,imul_compare")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_cfx_stage0,\
--+   e6500_cfx_stage0+e6500_cfx_stage1,e6500_cfx_stage1")
--+
--+;; CFX - Divide.
--+(define_insn_reservation "e6500_divide" 16
--+  (and (eq_attr "type" "idiv")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_cfx_stage0+e6500_cfx_div,\
--+   e6500_cfx_div*15")
--+
--+(define_insn_reservation "e6500_divide_d" 26
--+  (and (eq_attr "type" "ldiv")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_cfx_stage0+e6500_cfx_div,\
--+   e6500_cfx_div*25")
--+
--+;; LSU - Loads.
--+(define_insn_reservation "e6500_load" 3
--+  (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
--+			load_l,sync")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+(define_insn_reservation "e6500_fpload" 4
--+  (and (eq_attr "type" "fpload,fpload_ux,fpload_u")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+(define_insn_reservation "e6500_vecload" 4
--+  (and (eq_attr "type" "vecload")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+;; LSU - Stores.
--+(define_insn_reservation "e6500_store" 3
--+  (and (eq_attr "type" "store,store_ux,store_u,store_c")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+(define_insn_reservation "e6500_fpstore" 3
--+  (and (eq_attr "type" "fpstore,fpstore_ux,fpstore_u")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+(define_insn_reservation "e6500_vecstore" 4
--+  (and (eq_attr "type" "vecstore")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_lsu")
--+
--+;; FP.
--+(define_insn_reservation "e6500_float" 7
--+  (and (eq_attr "type" "fpsimple,fp,fpcompare,dmul")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_fpu")
--+
--+(define_insn_reservation "e6500_sdiv" 20
--+  (and (eq_attr "type" "sdiv")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_fpu*20")
--+
--+(define_insn_reservation "e6500_ddiv" 35
--+  (and (eq_attr "type" "ddiv")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_fpu*35")
--+
--+;; BU.
--+(define_insn_reservation "e6500_branch" 1
--+  (and (eq_attr "type" "jmpreg,branch,isync")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_bu")
--+
--+;; BU - CR logical.
--+(define_insn_reservation "e6500_cr_logical" 1
--+  (and (eq_attr "type" "cr_logical,delayed_cr")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_bu")
--+
--+;; VSFX.
--+(define_insn_reservation "e6500_vecsimple" 1
--+  (and (eq_attr "type" "vecsimple,veccmp")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_vec")
--+
--+;; VCFX.
--+(define_insn_reservation "e6500_veccomplex" 4
--+  (and (eq_attr "type" "veccomplex")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_vec")
--+
--+;; VFPU.
--+(define_insn_reservation "e6500_vecfloat" 6
--+  (and (eq_attr "type" "vecfloat")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_vec")
--+
--+;; VPERM.
--+(define_insn_reservation "e6500_vecperm" 2
--+  (and (eq_attr "type" "vecperm")
--+       (eq_attr "cpu" "ppce6500"))
--+  "e6500_decode,e6500_vecperm")
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000-cpus.def
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000-cpus.def	2012-07-06 19:52:30.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000-cpus.def	2012-07-06 19:53:26.354779999 -0700
--@@ -87,6 +87,10 @@
-- 	    | MASK_ISEL)
-- RS6000_CPU ("e500mc64", PROCESSOR_PPCE500MC64,
-- 	    POWERPC_BASE_MASK | MASK_POWERPC64 | MASK_PPC_GFXOPT | MASK_ISEL)
--+RS6000_CPU ("e5500", PROCESSOR_PPCE5500, POWERPC_BASE_MASK | MASK_POWERPC64
--+	    | MASK_PPC_GFXOPT | MASK_ISEL)
--+RS6000_CPU ("e6500", PROCESSOR_PPCE6500, POWERPC_7400_MASK | MASK_POWERPC64
--+	    | MASK_MFCRF | MASK_ISEL)
-- RS6000_CPU ("860", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT)
-- RS6000_CPU ("970", PROCESSOR_POWER4,
-- 	    POWERPC_7400_MASK | MASK_PPC_GPOPT | MASK_MFCRF | MASK_POWERPC64)
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000-opts.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000-opts.h	2012-07-06 19:52:30.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000-opts.h	2012-07-06 19:53:26.354779999 -0700
--@@ -54,6 +54,8 @@
--    PROCESSOR_PPCE300C3,
--    PROCESSOR_PPCE500MC,
--    PROCESSOR_PPCE500MC64,
--+   PROCESSOR_PPCE5500,
--+   PROCESSOR_PPCE6500,
--    PROCESSOR_POWER4,
--    PROCESSOR_POWER5,
--    PROCESSOR_POWER6,
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.c
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.c	2012-07-06 19:52:30.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.c	2012-07-06 19:53:26.354779999 -0700
--@@ -755,6 +755,44 @@
--   1,			/* prefetch streams /*/
-- };
-- 
--+/* Instruction costs on PPCE5500 processors.  */
--+static const
--+struct processor_costs ppce5500_cost = {
--+  COSTS_N_INSNS (5),    /* mulsi */
--+  COSTS_N_INSNS (5),    /* mulsi_const */
--+  COSTS_N_INSNS (4),    /* mulsi_const9 */
--+  COSTS_N_INSNS (5),    /* muldi */
--+  COSTS_N_INSNS (14),   /* divsi */
--+  COSTS_N_INSNS (14),   /* divdi */
--+  COSTS_N_INSNS (7),    /* fp */
--+  COSTS_N_INSNS (10),   /* dmul */
--+  COSTS_N_INSNS (36),   /* sdiv */
--+  COSTS_N_INSNS (66),   /* ddiv */
--+  64,			/* cache line size */
--+  32,			/* l1 cache */
--+  128,			/* l2 cache */
--+  1,			/* prefetch streams /*/
--+};
--+
--+/* Instruction costs on PPCE6500 processors.  */
--+static const
--+struct processor_costs ppce6500_cost = {
--+  COSTS_N_INSNS (5),    /* mulsi */
--+  COSTS_N_INSNS (5),    /* mulsi_const */
--+  COSTS_N_INSNS (4),    /* mulsi_const9 */
--+  COSTS_N_INSNS (5),    /* muldi */
--+  COSTS_N_INSNS (14),   /* divsi */
--+  COSTS_N_INSNS (14),   /* divdi */
--+  COSTS_N_INSNS (7),    /* fp */
--+  COSTS_N_INSNS (10),   /* dmul */
--+  COSTS_N_INSNS (36),   /* sdiv */
--+  COSTS_N_INSNS (66),   /* ddiv */
--+  64,			/* cache line size */
--+  32,			/* l1 cache */
--+  128,			/* l2 cache */
--+  1,			/* prefetch streams /*/
--+};
--+
-- /* Instruction costs on AppliedMicro Titan processors.  */
-- static const
-- struct processor_costs titan_cost = {
--@@ -2741,13 +2779,19 @@
--     error ("target attribute or pragma changes SPE ABI");
-- 
--   if (rs6000_cpu == PROCESSOR_PPCE300C2 || rs6000_cpu == PROCESSOR_PPCE300C3
---      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64)
--+      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64
--+      || rs6000_cpu == PROCESSOR_PPCE5500)
--     {
--       if (TARGET_ALTIVEC)
-- 	error ("AltiVec not supported in this target");
--       if (TARGET_SPE)
-- 	error ("SPE not supported in this target");
--     }
--+  if (rs6000_cpu == PROCESSOR_PPCE6500)
--+    {
--+      if (TARGET_SPE)
--+	error ("SPE not supported in this target");
--+    }
-- 
--   /* Disable Cell microcode if we are optimizing for the Cell
--      and not optimizing for size.  */
--@@ -2842,7 +2886,9 @@
--      user's opinion, though.  */
--   if (rs6000_block_move_inline_limit == 0
--       && (rs6000_cpu == PROCESSOR_PPCE500MC
---	  || rs6000_cpu == PROCESSOR_PPCE500MC64))
--+	  || rs6000_cpu == PROCESSOR_PPCE500MC64
--+	  || rs6000_cpu == PROCESSOR_PPCE5500
--+	  || rs6000_cpu == PROCESSOR_PPCE6500))
--     rs6000_block_move_inline_limit = 128;
-- 
--   /* store_one_arg depends on expand_block_move to handle at least the
--@@ -2989,6 +3035,8 @@
--     case PROCESSOR_PPC8548:
--     case PROCESSOR_PPCE500MC:
--     case PROCESSOR_PPCE500MC64:
--+    case PROCESSOR_PPCE5500:
--+    case PROCESSOR_PPCE6500:
-- 
--       rs6000_single_float = TARGET_E500_SINGLE || TARGET_E500_DOUBLE;
--       rs6000_double_float = TARGET_E500_DOUBLE;
--@@ -3033,7 +3081,9 @@
-- 				 || rs6000_cpu == PROCESSOR_POWER6
-- 				 || rs6000_cpu == PROCESSOR_POWER7
-- 				 || rs6000_cpu == PROCESSOR_PPCE500MC
---				 || rs6000_cpu == PROCESSOR_PPCE500MC64);
--+				 || rs6000_cpu == PROCESSOR_PPCE500MC64
--+				 || rs6000_cpu == PROCESSOR_PPCE5500
--+				 || rs6000_cpu == PROCESSOR_PPCE6500);
-- 
--   /* Allow debug switches to override the above settings.  These are set to -1
--      in rs6000.opt to indicate the user hasn't directly set the switch.  */
--@@ -3256,6 +3306,14 @@
-- 	rs6000_cost = &ppce500mc64_cost;
-- 	break;
-- 
--+      case PROCESSOR_PPCE5500:
--+	rs6000_cost = &ppce5500_cost;
--+	break;
--+
--+      case PROCESSOR_PPCE6500:
--+	rs6000_cost = &ppce6500_cost;
--+	break;
--+
--       case PROCESSOR_TITAN:
-- 	rs6000_cost = &titan_cost;
-- 	break;
--@@ -22304,6 +22362,8 @@
--                  || rs6000_cpu_attr == CPU_PPC750
--                  || rs6000_cpu_attr == CPU_PPC7400
--                  || rs6000_cpu_attr == CPU_PPC7450
--+                 || rs6000_cpu_attr == CPU_PPCE5500
--+                 || rs6000_cpu_attr == CPU_PPCE6500
--                  || rs6000_cpu_attr == CPU_POWER4
--                  || rs6000_cpu_attr == CPU_POWER5
-- 		 || rs6000_cpu_attr == CPU_POWER7
--@@ -22849,6 +22909,8 @@
--   case CPU_PPCE300C3:
--   case CPU_PPCE500MC:
--   case CPU_PPCE500MC64:
--+  case CPU_PPCE5500:
--+  case CPU_PPCE6500:
--   case CPU_TITAN:
--     return 2;
--   case CPU_RIOS2:
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.h
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.h	2012-07-06 19:52:30.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.h	2012-07-06 19:53:26.358779999 -0700
--@@ -168,6 +168,8 @@
-- %{mcpu=e300c3: -me300} \
-- %{mcpu=e500mc: -me500mc} \
-- %{mcpu=e500mc64: -me500mc64} \
--+%{mcpu=e5500: -me5500} \
--+%{mcpu=e6500: -me6500} \
-- %{maltivec: -maltivec} \
-- %{mvsx: -mvsx %{!maltivec: -maltivec} %{!mcpu*: %(asm_cpu_power7)}} \
-- -many"
--Index: gcc-4_7-branch/gcc/config/rs6000/rs6000.md
--===================================================================
----- gcc-4_7-branch.orig/gcc/config/rs6000/rs6000.md	2012-07-06 19:52:32.000000000 -0700
--+++ gcc-4_7-branch/gcc/config/rs6000/rs6000.md	2012-07-06 19:53:26.358779999 -0700
--@@ -166,7 +166,7 @@
-- ;; Processor type -- this attribute must exactly match the processor_type
-- ;; enumeration in rs6000.h.
-- 
---(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
--+(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppc8548,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,ppce5500,ppce6500,power4,power5,power6,power7,cell,ppca2,titan"
--   (const (symbol_ref "rs6000_cpu_attr")))
-- 
-- 
--@@ -194,6 +194,8 @@
-- (include "e300c2c3.md")
-- (include "e500mc.md")
-- (include "e500mc64.md")
--+(include "e5500.md")
--+(include "e6500.md")
-- (include "power4.md")
-- (include "power5.md")
-- (include "power6.md")
--Index: gcc-4_7-branch/gcc/doc/invoke.texi
--===================================================================
----- gcc-4_7-branch.orig/gcc/doc/invoke.texi	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/doc/invoke.texi	2012-07-06 19:53:26.362779999 -0700
--@@ -16565,11 +16565,13 @@
-- @samp{603e}, @samp{604}, @samp{604e}, @samp{620}, @samp{630}, @samp{740},
-- @samp{7400}, @samp{7450}, @samp{750}, @samp{801}, @samp{821}, @samp{823},
-- @samp{860}, @samp{970}, @samp{8540}, @samp{a2}, @samp{e300c2},
---@samp{e300c3}, @samp{e500mc}, @samp{e500mc64}, @samp{ec603e}, @samp{G3},
---@samp{G4}, @samp{G5}, @samp{titan}, @samp{power}, @samp{power2}, @samp{power3},
---@samp{power4}, @samp{power5}, @samp{power5+}, @samp{power6}, @samp{power6x},
---@samp{power7}, @samp{common}, @samp{powerpc}, @samp{powerpc64}, @samp{rios},
---@samp{rios1}, @samp{rios2}, @samp{rsc}, and @samp{rs64}.
--+@samp{e300c3}, @samp{e500mc}, @samp{e500mc64}, @samp{e5500},
--+@samp{e6500}, @samp{ec603e}, @samp{G3}, @samp{G4}, @samp{G5},
--+@samp{titan}, @samp{power}, @samp{power2}, @samp{power3},
--+@samp{power4}, @samp{power5}, @samp{power5+}, @samp{power6},
--+@samp{power6x}, @samp{power7}, @samp{common}, @samp{powerpc},
--+@samp{powerpc64}, @samp{rios}, @samp{rios1}, @samp{rios2}, @samp{rsc},
--+and @samp{rs64}.
-- 
-- @option{-mcpu=common} selects a completely generic processor.  Code
-- generated under this option will run on any POWER or PowerPC processor.
--Index: gcc-4_7-branch/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c
--===================================================================
----- gcc-4_7-branch.orig/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c	2012-07-06 19:43:53.000000000 -0700
--+++ gcc-4_7-branch/gcc/testsuite/gcc.dg/tree-ssa/vector-3.c	2012-07-06 19:53:26.362779999 -0700
--@@ -14,7 +14,7 @@
-- 
-- /* We should be able to optimize this to just "return 0.0;" */
-- /* { dg-final { scan-tree-dump-times "BIT_FIELD_REF" 0 "optimized"} } */
---/* { dg-final { scan-tree-dump-times "0.0" 1 "optimized"} } */
--+/* { dg-final { scan-tree-dump-times "0\\\.0" 1 "optimized"} } */
-- 
-- /* { dg-final { cleanup-tree-dump "optimized" } } */
-- 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/pr32219.patch b/meta/recipes-devtools/gcc/gcc-4.7/pr32219.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/pr32219.patch b/meta/recipes-devtools/gcc/gcc-4.8/pr32219.patch
 deleted file mode 100644
 index bea2063..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/pr32219.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/pr32219.patch
 +++ /dev/null
 @@ -1,72 +0,0 @@
 -Upstream-Status:Backport
@@ -16499,151 +11496,10 @@ index bea2063..0000000
 -   /* If PIC, then assume that any global name can be overridden by
 -      symbols resolved from other modules.  */
 -   else if (shlib)
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/rs6000-tables.patch b/meta/recipes-devtools/gcc/gcc-4.7/rs6000-tables.patch
-deleted file mode 100644
-index 5b8064b..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/rs6000-tables.patch
-+++ /dev/null
-@@ -1,135 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--From 98da658b6944d0bf54beb10001e567d8b8922666 Mon Sep 17 00:00:00 2001
--From: edmarwjr <edmarwjr@138bc75d-0d04-0410-961f-82ee72b054a4>
--Date: Wed, 6 Jun 2012 18:09:18 +0000
--Subject: [PATCH] 2012-06-06  Edmar Wienskoski  <edmar@freescale.com>
--
--	* config/rs6000/rs6000-tables.opt: Regenerated.
--
--
--
--git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@188274 138bc75d-0d04-0410-961f-82ee72b054a4
-----
-- gcc/ChangeLog                       |    4 +++
-- gcc/config/rs6000/rs6000-tables.opt |   58 +++++++++++++++++++----------------
-- 2 files changed, 36 insertions(+), 26 deletions(-)
--
--Index: git/gcc/config/rs6000/rs6000-tables.opt
--===================================================================
----- git.orig/gcc/config/rs6000/rs6000-tables.opt	2012-07-06 20:54:29.000000000 -0700
--+++ git/gcc/config/rs6000/rs6000-tables.opt	2012-07-06 20:58:12.436646819 -0700
--@@ -126,80 +126,86 @@
-- Enum(rs6000_cpu_opt_value) String(e500mc64) Value(32)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(860) Value(33)
--+Enum(rs6000_cpu_opt_value) String(e5500) Value(33)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(970) Value(34)
--+Enum(rs6000_cpu_opt_value) String(e6500) Value(34)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(cell) Value(35)
--+Enum(rs6000_cpu_opt_value) String(860) Value(35)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(common) Value(36)
--+Enum(rs6000_cpu_opt_value) String(970) Value(36)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(ec603e) Value(37)
--+Enum(rs6000_cpu_opt_value) String(cell) Value(37)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(G3) Value(38)
--+Enum(rs6000_cpu_opt_value) String(common) Value(38)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(G4) Value(39)
--+Enum(rs6000_cpu_opt_value) String(ec603e) Value(39)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(G5) Value(40)
--+Enum(rs6000_cpu_opt_value) String(G3) Value(40)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(titan) Value(41)
--+Enum(rs6000_cpu_opt_value) String(G4) Value(41)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power) Value(42)
--+Enum(rs6000_cpu_opt_value) String(G5) Value(42)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power2) Value(43)
--+Enum(rs6000_cpu_opt_value) String(titan) Value(43)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power3) Value(44)
--+Enum(rs6000_cpu_opt_value) String(power) Value(44)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power4) Value(45)
--+Enum(rs6000_cpu_opt_value) String(power2) Value(45)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power5) Value(46)
--+Enum(rs6000_cpu_opt_value) String(power3) Value(46)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power5+) Value(47)
--+Enum(rs6000_cpu_opt_value) String(power4) Value(47)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power6) Value(48)
--+Enum(rs6000_cpu_opt_value) String(power5) Value(48)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power6x) Value(49)
--+Enum(rs6000_cpu_opt_value) String(power5+) Value(49)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(power7) Value(50)
--+Enum(rs6000_cpu_opt_value) String(power6) Value(50)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(powerpc) Value(51)
--+Enum(rs6000_cpu_opt_value) String(power6x) Value(51)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(powerpc64) Value(52)
--+Enum(rs6000_cpu_opt_value) String(power7) Value(52)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rios) Value(53)
--+Enum(rs6000_cpu_opt_value) String(powerpc) Value(53)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rios1) Value(54)
--+Enum(rs6000_cpu_opt_value) String(powerpc64) Value(54)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rios2) Value(55)
--+Enum(rs6000_cpu_opt_value) String(rios) Value(55)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rsc) Value(56)
--+Enum(rs6000_cpu_opt_value) String(rios1) Value(56)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rsc1) Value(57)
--+Enum(rs6000_cpu_opt_value) String(rios2) Value(57)
-- 
-- EnumValue
---Enum(rs6000_cpu_opt_value) String(rs64) Value(58)
--+Enum(rs6000_cpu_opt_value) String(rsc) Value(58)
--+
--+EnumValue
--+Enum(rs6000_cpu_opt_value) String(rsc1) Value(59)
--+
--+EnumValue
--+Enum(rs6000_cpu_opt_value) String(rs64) Value(60)
-- 
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/use-defaults.h-and-t-oe-in-B.patch b/meta/recipes-devtools/gcc/gcc-4.7/use-defaults.h-and-t-oe-in-B.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/use-defaults.h-and-t-oe-in-B.patch b/meta/recipes-devtools/gcc/gcc-4.8/use-defaults.h-and-t-oe-in-B.patch
 deleted file mode 100644
 index 212c263..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/use-defaults.h-and-t-oe-in-B.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/use-defaults.h-and-t-oe-in-B.patch
 +++ /dev/null
 @@ -1,77 +0,0 @@
 -Upstream-Status: Pending
@@ -16723,10 +11579,10 @@ index 212c263..0000000
 - fi
 - 
 - # Add multiple inclusion protection guard, part two.
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/use-ml-conf-files-from-B.patch b/meta/recipes-devtools/gcc/gcc-4.7/use-ml-conf-files-from-B.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/use-ml-conf-files-from-B.patch b/meta/recipes-devtools/gcc/gcc-4.8/use-ml-conf-files-from-B.patch
 deleted file mode 100644
 index 4d22924..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/use-ml-conf-files-from-B.patch
+--- a/meta/recipes-devtools/gcc/gcc-4.8/use-ml-conf-files-from-B.patch
 +++ /dev/null
 @@ -1,87 +0,0 @@
 -Use the multilib config files from ${B} instead of using the ones from ${S}
@@ -16816,10 +11672,10 @@ index 4d22924..0000000
 -     ./* )
 -        f=`echo $f | sed 's/^..//'`
 -        tm_file_list="${tm_file_list} $f"
-diff --git a/meta/recipes-devtools/gcc/gcc-4.7/wcast-qual-PR55383.patch b/meta/recipes-devtools/gcc/gcc-4.7/wcast-qual-PR55383.patch
+diff --git a/meta/recipes-devtools/gcc/gcc-4.8/wcast-qual-PR55383.patch b/meta/recipes-devtools/gcc/gcc-4.8/wcast-qual-PR55383.patch
 deleted file mode 100644
-index 7c5bbe7..0000000
---- a/meta/recipes-devtools/gcc/gcc-4.7/wcast-qual-PR55383.patch
+index 1c22bd8..0000000
+--- a/meta/recipes-devtools/gcc/gcc-4.8/wcast-qual-PR55383.patch
 +++ /dev/null
 @@ -1,43 +0,0 @@
 -This is a backport from gcc bugzilla
@@ -16833,11 +11689,11 @@ index 7c5bbe7..0000000
 -
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 -
--Index: gcc-4.7.2/gcc/c-typeck.c
+-Index: gcc-4.8.0/gcc/c/c-typeck.c
 -===================================================================
----- gcc-4.7.2.orig/gcc/c-typeck.c	2012-09-13 10:04:44.000000000 -0700
--+++ gcc-4.7.2/gcc/c-typeck.c	2013-03-10 23:09:17.610899536 -0700
--@@ -4557,7 +4557,7 @@
+---- gcc-4.8.0.orig/gcc/c/c-typeck.c	2013-01-24 08:59:44.000000000 -0800
+-+++ gcc-4.8.0/gcc/c/c-typeck.c	2013-03-26 17:28:30.286137332 -0700
+-@@ -4464,7 +4464,7 @@
 -     /* There are qualifiers present in IN_OTYPE that are not present
 -        in IN_TYPE.  */
 -     warning_at (loc, OPT_Wcast_qual,
@@ -16846,10 +11702,10 @@ index 7c5bbe7..0000000
 - 		discarded);
 - 
 -   if (added || discarded)
--Index: gcc-4.7.2/gcc/testsuite/c-c++-common/Wcast-qual-1.c
+-Index: gcc-4.8.0/gcc/testsuite/c-c++-common/Wcast-qual-1.c
 -===================================================================
----- gcc-4.7.2.orig/gcc/testsuite/c-c++-common/Wcast-qual-1.c	2011-04-07 14:47:38.000000000 -0700
--+++ gcc-4.7.2/gcc/testsuite/c-c++-common/Wcast-qual-1.c	2013-03-10 23:15:45.610894589 -0700
+---- gcc-4.8.0.orig/gcc/testsuite/c-c++-common/Wcast-qual-1.c	2011-04-07 14:47:38.000000000 -0700
+-+++ gcc-4.8.0/gcc/testsuite/c-c++-common/Wcast-qual-1.c	2013-03-26 17:31:56.454141202 -0700
 -@@ -85,11 +85,11 @@
 - void
 - f4 (void * const **bar)
