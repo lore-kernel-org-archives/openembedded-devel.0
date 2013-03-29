@@ -1,37 +1,39 @@
-Received: from mail-ee0-f43.google.com ([74.125.83.43])
+Received: from mail-ea0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1ULaVR-0001Cw-AE
+	(envelope-from <koen@dominion.thruhere.net>) id 1ULaVS-0001Cx-Dj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Mar 2013 15:42:13 +0100
-Received: by mail-ee0-f43.google.com with SMTP id e50so250516eek.2
+	Fri, 29 Mar 2013 15:42:14 +0100
+Received: by mail-ea0-f173.google.com with SMTP id k11so248514eaj.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2013 07:25:09 -0700 (PDT)
+	Fri, 29 Mar 2013 07:25:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=vy39pvJ1nT32mvwntlBhMw9tEbJYtAHUYbY7pMpCOzs=;
-	b=dnA2MIX0f+M+IO2WChmJsNRRkHYQ0pL3JKthPZYN8pUoFy16ek7/l/r6ckQP7uo3vD
-	V9HMrtf+mINVjuD4wOyyAmhtH03P8ivcdkRRhMpGiRjt0Fe5PHrAIvRSIAi6qg9oYbuW
-	G3FQvDKituC+I1gjs8d70rtqaAT237ihVk2ovEKPLNEIrCt9vdUJ2ldzR4TEhrVLuRXG
-	BcgebHAx4jZCPAd9cJkDFn9hnx2h8kYDRbq5We401lPvKWTGJxxQ7hrwzxG1G4aIu9YX
-	wNH9JltvEagoBVcb7GqRBIS/FgoxS5tu9T62kQ0cc+UCZSwKrTo1aLPYND2XqmN+u2vo
-	Z0HA==
-X-Received: by 10.14.175.71 with SMTP id y47mr8420636eel.18.1364567108966;
-	Fri, 29 Mar 2013 07:25:08 -0700 (PDT)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
+	bh=ofCjOOJ2v6gWA37nMtx392bWJnveBkzoi9wHUwRyccI=;
+	b=mV2gbRYRBOzE9jlU/ZedXoufUG7aUzy0RZQnq8CaZ9PSwdGhD2tocNOi7KdfrxZPZj
+	gI1EzHZDwQc/QV2TD/ggd3u3w1XLwSYIBTS79Zf5KLyP2EaxtibLhPh7cRwb8vUQqLgw
+	5lAijuCR1bLXT6VsRPJW8vhWm5orzs3FoIaH85pwH31l0W9xMn7iNYx06B1CDJk+OlB8
+	eWrEOwqQ3n5V67c+lqZbGL1npSAqwX3vVWzBy1/HD4hJ2+nfoMtOdD8iJgel5PzINkpX
+	JRAZ0lKv7VSSQUcox2CBiVKGijstXH3qPtq3ZLpKxwUckoSXUmZnyoWmEdKgKJNYqlSP
+	n0KA==
+X-Received: by 10.15.23.193 with SMTP id h41mr8501852eeu.17.1364567110407;
+	Fri, 29 Mar 2013 07:25:10 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id m46sm4277855eeo.16.2013.03.29.07.25.07
+	by mx.google.com with ESMTPS id m46sm4277855eeo.16.2013.03.29.07.25.09
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 29 Mar 2013 07:25:07 -0700 (PDT)
+	Fri, 29 Mar 2013 07:25:09 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Mar 2013 15:25:01 +0100
-Message-Id: <1364567102-6409-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 29 Mar 2013 15:25:02 +0100
+Message-Id: <1364567102-6409-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.8.1.4
-X-Gm-Message-State: ALoCoQlVRi/Q2O2y5SKosDo6i6Rxr0E/4xQHHxT+6/bVObp0DiwbRieMlLD5JjJind3T3rAnZgws
+In-Reply-To: <1364567102-6409-1-git-send-email-koen@dominion.thruhere.net>
+References: <1364567102-6409-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQmAhjd6GyqmRoPGzw+1eK/X3R7Hw+tIGT9/VlVlEdn0QOZd2IjQhBdNbwfOIwyBAzHpy6eJ
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-networking][meta-oe][PATCH 1/2] python-m2crypto: add 0.21.1
+Subject: [meta-networking][meta-oe][PATCH 2/2] crda: add 1.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,86 +47,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 14:42:13 -0000
+X-List-Received-Date: Fri, 29 Mar 2013 14:42:14 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- ...y-link-in-sysroot-not-in-host-directories.patch | 39 ++++++++++++++++++++++
- .../python/python-m2crypto_0.21.1.bb               | 19 +++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
- create mode 100644 meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
+ .../recipes-connectivity/crda/crda_1.1.3.bb        | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 
-diff --git a/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch b/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 new file mode 100644
-index 0000000..bcbdf24
+index 0000000..d736c7a
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-@@ -0,0 +1,39 @@
-+From f11b9c71080513f9b867ba8f40613ba2ebc6e960 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Fri, 29 Mar 2013 15:17:17 +0100
-+Subject: [PATCH] setup.py: link in sysroot, not in host directories
++++ b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "Wireless Central Regulatory Domain Agent"
++HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
 +
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
 +
-+Upstream-status: Unknown
-+---
-+ setup.py | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/setup.py b/setup.py
-+index e7c49eb..8deaa34 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -40,7 +40,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
-+             self.openssl = 'c:\\pkg'
-+         else:
-+             self.libraries = ['ssl', 'crypto']
-+-            self.openssl = '/usr'
-++            self.openssl = os.environ.get( "STAGING_DIR" )
-+        
-+     
-+     def finalize_options(self):
-+@@ -49,8 +49,8 @@ class _M2CryptoBuildExt(build_ext.build_ext):
-+ 
-+         build_ext.build_ext.finalize_options(self)
-+ 
-+-        opensslIncludeDir = os.path.join(self.openssl, 'include')
-+-        opensslLibraryDir = os.path.join(self.openssl, 'lib')
-++        opensslIncludeDir = os.environ.get( "STAGING_INCDIR" )
-++        opensslLibraryDir = os.environ.get( "STAGING_LIBDIR" )
-+         
-+         self.swig_opts = ['-I%s' % i for i in self.include_dirs + \
-+                           [opensslIncludeDir]]
-+-- 
-+1.8.1.4
++DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
 +
-diff --git a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-new file mode 100644
-index 0000000..9babc04
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "A Python crypto and SSL toolkit"
-+HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
++SRC_URI = "http://wireless.kernel.org/download/crda/${P}.tar.bz2;name=crda \
++           http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin;name=bin \
++          "
++SRC_URI[crda.md5sum] = "29579185e06a75675507527243d28e5c"
++SRC_URI[crda.sha256sum] = "aa8a7fe92f0765986c421a5b6768a185375ac210393df0605ee132f6754825f0"
++SRC_URI[bin.md5sum] = "e0c8a5ca63fb8bf803213f9a0c90b50b"
++SRC_URI[bin.sha256sum] = "b1ee0b20c123c612dfdb6851ab42c01666f66fb583e0e590942f19bb54cf84be"
 +
-+DEPENDS = "openssl swig-native"
++inherit python-dir pythonnative
++# Recursive make problem
++EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D}"
 +
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
++do_compile() {
++	oe_runmake all_noverify
++}
 +
-+SRC_URI = "http://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-${PV}.tar.gz \
-+           file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch"
++do_install() {
++	oe_runmake install
 +
-+SRC_URI[md5sum] = "f93d8462ff7646397a9f77a2fe602d17"
-+SRC_URI[sha256sum] = "25b94498505c2d800ee465db0cc1aff097b1615adc3ac042a1c85ceca264fc0a"
++	install -d ${D}${libdir}/crda/
 +
-+S = "${WORKDIR}/M2Crypto-${PV}"
++	install -m 0644 ${WORKDIR}/2013.01.11-regulatory.bin ${D}${libdir}/crda/regulatory.bin
++}
 +
-+inherit setuptools
 +
-+BBCLASSEXTEND = "native"
++RDEPENDS_${PN} = "udev"
++FILES_${PN} += "${libdir}crda/regulatory.bin \
++                ${base_libdir}/udev/rules.d/85-regulatory.rules \
++               "
 -- 
 1.8.1.4
 
