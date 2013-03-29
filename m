@@ -1,38 +1,38 @@
-Received: from mail-da0-f52.google.com ([209.85.210.52])
+Received: from mail-pa0-f54.google.com ([209.85.220.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <elvis.dowson@gmail.com>) id 1ULUZo-00082K-Tu
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Mar 2013 09:22:21 +0100
-Received: by mail-da0-f52.google.com with SMTP id f10so144597dak.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Mar 2013 01:05:16 -0700 (PDT)
+	(envelope-from <elvis.dowson@gmail.com>)
+	id 1ULUhq-0008MD-TZ; Fri, 29 Mar 2013 09:30:39 +0100
+Received: by mail-pa0-f54.google.com with SMTP id fa10so257581pad.41
+	for <multiple recipients>; Fri, 29 Mar 2013 01:13:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
 	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=gZV1Mxzh9xrg46FIzf5TI/lgMg9fLDmwL7PcGQe+Dyo=;
-	b=D6QeTrizlwLMT7PEcN4kDHscLHm7ZLx64dlI8ZuCtWQmPjJ/2dj2wi45fNg93XydSD
-	yCPDmA4602F3PD/oUkU8pMC/3X1PrIIQ0aGRbVdVvlLnTn7Ux/m1XxrOutnejVmfI49o
-	AXWM0Ba/o1rsEvbg5OzwRjf667sbG9+rsjwkfuY/UhnB3cqjIPhOWupgT1At14LZMJXt
-	hYyhGpzPE7ECkpJ8oFmBSEXUmqad2kOJy4vpWXkiRfIFTFdQeJ8QsjCPTcPQdvQVFOt/
-	1Ei/C6Qjc8K+WvjGGcvmUbze1Sy8ydotbGeBpOEqm+c8JnS5Is/MtJOW68ynlSty+xvP
-	s+0Q==
-X-Received: by 10.68.102.165 with SMTP id fp5mr2380777pbb.82.1364544316538;
-	Fri, 29 Mar 2013 01:05:16 -0700 (PDT)
+	bh=4FxG/uyBrzS15A/+zBTwfCpPe6DrJiT0zCHGtge1qHE=;
+	b=S3jlP8dmNHeRPamKv+QOwsaOz1mofkrYOiuMosQK/gXtivcC/fWE36jSMVw8zpt5Pi
+	8l5VZczIby5xlzV4IV00GWHC8PPmPhqZ7TxWi1T0hpfS8EcA9f6l1lBpCLXXO82YNUSO
+	nG4MUhZ7cxuLNa6vfC57vTmoTIp7ktXTBQGMsPQffIQcqzs/OssZMVIzImqKs+3byNGv
+	ZS8eciep/12b/l6Wcwilqq6qXBiY8dU6krnJLRKXM6IBWPmlFrMjfMG7CtdOgXZ5Gw66
+	ou/VVe8OxyuyPHQNvNt3MLp/XYpwv0cyck+wUp1Cm45VxTbFHwWRHMqWZXm50wZrhEsy
+	dT3A==
+X-Received: by 10.68.197.133 with SMTP id iu5mr2289432pbc.195.1364544814420;
+	Fri, 29 Mar 2013 01:13:34 -0700 (PDT)
 Received: from [192.168.1.100] ([94.205.105.6])
-	by mx.google.com with ESMTPS id da4sm1971387pbb.34.2013.03.29.01.05.14
+	by mx.google.com with ESMTPS id qb10sm1983766pbb.43.2013.03.29.01.13.31
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 29 Mar 2013 01:05:15 -0700 (PDT)
+	Fri, 29 Mar 2013 01:13:33 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
 From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <EEAF4EC9-48F2-494E-8738-288B1786D9B2@gmail.com>
-Date: Fri, 29 Mar 2013 12:05:10 +0400
-Message-Id: <E61D67A4-3E32-412A-A532-8295B7E64727@gmail.com>
-References: <y> <1364543252-18751-1-git-send-email-elvis.dowson@gmail.com>
-	<EEAF4EC9-48F2-494E-8738-288B1786D9B2@gmail.com>
+In-Reply-To: <6B577862-4C24-49DB-80F2-3A1408AF8337@gmail.com>
+Date: Fri, 29 Mar 2013 12:13:27 +0400
+Message-Id: <44FDC966-90E8-43EC-9ED4-860384A085E6@gmail.com>
+References: <6B577862-4C24-49DB-80F2-3A1408AF8337@gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 X-Mailer: Apple Mail (2.1503)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [openembedded-core-contrib] gcc-4.8: Refactor gcc-4.8.0 patch files.
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-core@lists.openembedded.org oe-core layer"
+	<Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] GCC 4.8 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +46,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 08:22:25 -0000
+X-List-Received-Date: Fri, 29 Mar 2013 08:30:42 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 Hi Khem,
 
-On Mar 29, 2013, at 11:55 AM, Khem Raj <raj.khem@gmail.com> wrote:
+On Mar 28, 2013, at 9:51 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> You did not mention whats refactored. One thing I notice they are git =
-am'able now
-> however you are signed up as author of all the patches if you send =
-that email via git send-email
-> and if you send patches upstream like that you will be frowned upon. =
-So if you were adamant to gitify them
-> you should have done --autho=3Dblah while committing them
+> All,
 >=20
-> besides this is there anything else=20
+> I have added gcc 4.8 recipes and the branch is here=20
+>=20
+> git://git.openembedded.org/openembedded-core-contrib kraj/gcc-4.8
+>=20
+> cgit
+>=20
+> =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-4.=
+8
+>=20
+> Please test it out on your respective environments if you can.
+>=20
+> To enable gcc 4.8 with OE-Core you would
+>=20
+> in local.conf set
+>=20
+> GCCVERSION =3D "4.8%"
+>=20
+> and if you use angstrom. Please checkout 'next' branch of =
+setup-scripts
+> and then in conf/local.conf
+>=20
+> set
+>=20
+> ANGSTROM_GCC_VERSION =3D "4.8%"
+>=20
+> My testing so far has been building systems-image for all qemu =
+machines and they
+> seem to boot as good as 4.7 did. But I am hoping for wider testing and =
+finding issues
+> or very least improve the existing recipes for now and once the 1.4 =
+release is done
+> we can then propose it for inclusion in OE-Core
+>=20
+> Thanks for your time
 
-I just refactored and re-ordered the patches, with the correct sequence =
-number as it appears
-in the git-4.8.inc recipe.
-
-All the sign off attributions are still listed with your name and email =
-address, I haven't signed up as
-the author of all the patches.
-
-I wasn't aware of the -autho option in git, if you want I can re-create =
-and re-send it again.
-
-I did  a similar clean up for the gcc-4.7 recipe patches.
+I've built and tested the new gcc-4.8.0 recipe for the Xilinx ZC702 =
+Zynq-7020 platform
+(dual ARM Cortex A9). The kernel (3.6) and corresponding rootfilesystem =
+boots fine.
 
 Best regards,
 
