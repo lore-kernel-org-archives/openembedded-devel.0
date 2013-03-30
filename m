@@ -1,23 +1,20 @@
-Received: from smtp-out21.han.skanova.net ([195.67.226.208])
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <openembedded@emagii.com>) id 1ULx9o-00047V-7X
+	(envelope-from <dv@pseudoterminal.org>) id 1ULxWw-0004n3-9W
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 15:53:24 +0100
-Received: from [10.175.196.242] (83.227.56.237) by smtp-out21.han.skanova.net
-	(8.5.133) (authenticated as u82406562)
-	id 5124CA9E00F8D55C for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 15:36:18 +0100
-Message-ID: <5156F862.6080005@emagii.com>
-Date: Sat, 30 Mar 2013 15:36:18 +0100
-From: Ulf Samuelsson <openembedded@emagii.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Sat, 30 Mar 2013 16:17:18 +0100
+Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id DAEBF20C6A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Mar 2013 16:00:14 +0100 (CET)
+Message-ID: <5156FDFD.1030606@pseudoterminal.org>
+Date: Sat, 30 Mar 2013 16:00:13 +0100
+From: dv <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <5156DB73.4040507@emagii.com>
-	<CAPESJy7cfZvAePoLrVnvqoxaYRRxz1=U5L5ROP5MHbiWZEEBCA@mail.gmail.com>
-In-Reply-To: <CAPESJy7cfZvAePoLrVnvqoxaYRRxz1=U5L5ROP5MHbiWZEEBCA@mail.gmail.com>
-Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
+Subject: gst-ffmpeg configure-fix patch and yasm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,44 +28,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Mar 2013 14:53:24 -0000
+X-List-Received-Date: Sat, 30 Mar 2013 15:17:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2013-03-30 14:04, Takeshi Hamasaki wrote:
-> Hi Ulf,
->
-> $ MACHINE=beagleboard  bitbake -e some-image
->
-> shows all variables including $IMAGE_BASENAME without actually
-> building the image.
-> Using grep you can take the value of IMAGE_BASENAME, like as:
+Hello,
 
-Thanks,
+I noticed this part of the configure-fix.patch file for gst-ffmpeg 0.10.13:
 
-bitbake is already running to build my recipe.
-Not sure that running "bitbake -e" is OK while bitbake is already running.
++  if test "x$disable_yasm" != "xyes"; then
++    embffmpeg_configure_args="$embffmpeg_configure_args --disable-yasm"
++  fi
 
-IMAGE_BASENAME is set to my recipe, so I cannot use this directly.
+Shouldn't the test be:  if test "x$disable_yasm" = "xyes"  ?
+To me, it seems as if this code adds --disable-yasm if disable_yasm is 
+not set to "yes", which is the complete opposite of the intended behavior.
 
-> $ MACHINE=beagleboard  bitbake -e some-image | grep ^IMAGE_BASENAME
->
-> Does it help you?
->
-> If possible, consider to use hooks, for example, IMAGE_POSTPROCESS_COMMAND .
-> Refer image.bbclass for details. It might make things straiter.
->
-> Regards,
-
-I know I can do it inside the "some-image.bb" recipe, but I would like
-to do it inside my recipe. Otherwise all images must be customized
-for my recipe, which is not a good idea.
-
-If I could do an IMAGE_POSTPROCESS_COMMAND in my recipe, then
-that would be OK, but I then still need to find out what the image name is.
-
-BR
-Ulf Samuelsson
-
+Or am I missing some detail about shell script code here?
 
 
