@@ -1,24 +1,22 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from smtp-out21.han.skanova.net ([195.67.226.208])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1ULwo5-0003vR-2L
+	(envelope-from <openembedded@emagii.com>) id 1ULx9o-00047V-7X
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 15:30:57 +0100
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 30 Mar 2013 07:13:50 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,378,1363158000"; d="scan'208";a="286629413"
-Received: from unknown (HELO helios.localnet) ([10.255.13.86])
-	by orsmga001.jf.intel.com with ESMTP; 30 Mar 2013 07:13:49 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Ulf Samuelsson <openembedded@emagii.com>
-Date: Sat, 30 Mar 2013 14:13:48 +0000
-Message-ID: <7185981.fYmuEdii30@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
-In-Reply-To: <5156DB73.4040507@emagii.com>
-References: <5156DB73.4040507@emagii.com>
+	Sat, 30 Mar 2013 15:53:24 +0100
+Received: from [10.175.196.242] (83.227.56.237) by smtp-out21.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 5124CA9E00F8D55C for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Mar 2013 15:36:18 +0100
+Message-ID: <5156F862.6080005@emagii.com>
+Date: Sat, 30 Mar 2013 15:36:18 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org
+References: <5156DB73.4040507@emagii.com>
+	<CAPESJy7cfZvAePoLrVnvqoxaYRRxz1=U5L5ROP5MHbiWZEEBCA@mail.gmail.com>
+In-Reply-To: <CAPESJy7cfZvAePoLrVnvqoxaYRRxz1=U5L5ROP5MHbiWZEEBCA@mail.gmail.com>
 Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,40 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Mar 2013 14:30:57 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 30 Mar 2013 14:53:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Saturday 30 March 2013 13:32:51 Ulf Samuelsson wrote:
-> Trying create a programming script recipe and need to find out the
-> IMAGE_BASENAME of the bitbake target
-> so I can get the filename of the image
-> 
-> ${MACHINE}-${IMAGE_BASENAME}.ubi
-> 
-> I.E: if I do
-> 
-> $ MACHINE=beagleboard  bitbake some-image
-> 
-> and "some-image_1.0.bb" contains
-> 
-> IMAGE_BASENAME = "renamed-image"
-> 
-> Then the resulting image will be
-> 
->      "beagleboard-renamed-image.ubi"
-> 
-> How get this info from another recipe?
+On 2013-03-30 14:04, Takeshi Hamasaki wrote:
+> Hi Ulf,
+>
+> $ MACHINE=beagleboard  bitbake -e some-image
+>
+> shows all variables including $IMAGE_BASENAME without actually
+> building the image.
+> Using grep you can take the value of IMAGE_BASENAME, like as:
 
-You can't. The way to handle this is as part of do_rootfs itself (e.g. from a 
-script called from ROOTFS_POSTPROCESS_COMMAND or IMAGE_POSTPROCESS_COMMAND).
+Thanks,
 
-Cheers,
-Paul
+bitbake is already running to build my recipe.
+Not sure that running "bitbake -e" is OK while bitbake is already running.
 
--- 
+IMAGE_BASENAME is set to my recipe, so I cannot use this directly.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+> $ MACHINE=beagleboard  bitbake -e some-image | grep ^IMAGE_BASENAME
+>
+> Does it help you?
+>
+> If possible, consider to use hooks, for example, IMAGE_POSTPROCESS_COMMAND .
+> Refer image.bbclass for details. It might make things straiter.
+>
+> Regards,
+
+I know I can do it inside the "some-image.bb" recipe, but I would like
+to do it inside my recipe. Otherwise all images must be customized
+for my recipe, which is not a good idea.
+
+If I could do an IMAGE_POSTPROCESS_COMMAND in my recipe, then
+that would be OK, but I then still need to find out what the image name is.
+
+BR
+Ulf Samuelsson
+
 
 
