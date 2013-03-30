@@ -1,23 +1,22 @@
-Received: from ptmx.org ([178.63.28.110])
+Received: from smtp-out12.han.skanova.net ([195.67.226.212])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@pseudoterminal.org>) id 1UM2gu-0000tY-KI
+	(envelope-from <openembedded@emagii.com>) id 1UM3AX-0001cy-Hx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 21:47:56 +0100
-Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id C036920C6A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Mar 2013 21:30:52 +0100 (CET)
-Message-ID: <51574B7B.1030204@pseudoterminal.org>
-Date: Sat, 30 Mar 2013 21:30:51 +0100
-From: dv <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+	Sat, 30 Mar 2013 22:18:33 +0100
+Received: from [10.175.196.242] (83.227.56.237) by smtp-out12.han.skanova.net
+	(8.5.133) (authenticated as u82406562)
+	id 5140710C0048B039; Sat, 30 Mar 2013 22:01:24 +0100
+Message-ID: <515752A4.3040107@emagii.com>
+Date: Sat, 30 Mar 2013 22:01:24 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <5156FDFD.1030606@pseudoterminal.org>
-	<CAP9ODKr2wE7ZCr-2U=HWZ5KD0ywrmkGJtA_8f_PLsUghe_SEHw@mail.gmail.com>
-In-Reply-To: <CAP9ODKr2wE7ZCr-2U=HWZ5KD0ywrmkGJtA_8f_PLsUghe_SEHw@mail.gmail.com>
-Subject: Re: gst-ffmpeg configure-fix patch and yasm
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <5156DB73.4040507@emagii.com> <7185981.fYmuEdii30@helios>
+In-Reply-To: <7185981.fYmuEdii30@helios>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,74 +30,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Mar 2013 20:47:56 -0000
-X-Groupsio-MsgNum: 43816
-Content-Type: multipart/mixed; boundary="------------050909080503000509050505"
-
---------------050909080503000509050505
+X-List-Received-Date: Sat, 30 Mar 2013 21:18:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/30/13 17:40, Otavio Salvador wrote:
-> On Sat, Mar 30, 2013 at 12:00 PM, dv <dv@pseudoterminal.org> wrote:
->> Hello,
+On 2013-03-30 15:13, Paul Eggleton wrote:
+> On Saturday 30 March 2013 13:32:51 Ulf Samuelsson wrote:
+>> Trying create a programming script recipe and need to find out the
+>> IMAGE_BASENAME of the bitbake target
+>> so I can get the filename of the image
 >>
->> I noticed this part of the configure-fix.patch file for gst-ffmpeg 0.10.13:
+>> ${MACHINE}-${IMAGE_BASENAME}.ubi
 >>
->> +  if test "x$disable_yasm" != "xyes"; then
->> +    embffmpeg_configure_args="$embffmpeg_configure_args --disable-yasm"
->> +  fi
+>> I.E: if I do
 >>
->> Shouldn't the test be:  if test "x$disable_yasm" = "xyes"  ?
->> To me, it seems as if this code adds --disable-yasm if disable_yasm is not
->> set to "yes", which is the complete opposite of the intended behavior.
+>> $ MACHINE=beagleboard  bitbake some-image
 >>
->> Or am I missing some detail about shell script code here?
-> I think you are right here. Maybe you could provide a fix for it?
-> --
-> Otavio Salvador                             O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+>> and "some-image_1.0.bb" contains
+>>
+>> IMAGE_BASENAME = "renamed-image"
+>>
+>> Then the resulting image will be
+>>
+>>       "beagleboard-renamed-image.ubi"
+>>
+>> How get this info from another recipe?
+> You can't. The way to handle this is as part of do_rootfs itself (e.g. from a
+> script called from ROOTFS_POSTPROCESS_COMMAND or IMAGE_POSTPROCESS_COMMAND).
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Cheers,
+> Paul
+>
+OK, thanks
 
-No problem. Patch for the patch attached :)
+I tried to define  "configure-sam-ba.bbclass" which is inherited by my 
+image.
 
---------------050909080503000509050505
-Content-Type: text/x-patch;
- name="0001-gst-ffmpeg-configure-fix-patch-used-wrong-test.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-gst-ffmpeg-configure-fix-patch-used-wrong-test.patch"
+configure-sam-ba.bbclass:
+----------------------------------------------------------------------------------------------------------
 
-From 4624e30adb13ad361f886eeda4272a7235bedd61 Mon Sep 17 00:00:00 2001
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-Date: Sat, 30 Mar 2013 21:29:22 +0100
-Subject: [PATCH] gst-ffmpeg: configure-fix patch used wrong test
+SCRIPTFILE_TEMPLATE    = "${DEPLOY_DIR_IMAGE}/scripts/${MACHINE}.tcl"
+SCRIPTFILE                      = 
+"${DEPLOY_DIR_IMAGE}/scripts/${IMAGE_LINK_NAME}-${MACHINE}.tcl"
+PROGFILE_TEMPLATE      = "${DEPLOY_DIR_IMAGE}/scripts/prog.sh"
+PROGFILE                        = 
+"${DEPLOY_DIR_IMAGE}/scripts/prog-${IMAGE_LINK_NAME}-${MACHINE}.sh"
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- .../recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/configure-fix.patch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+sam-ba_setup () {
 
-diff --git a/meta/recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/configure-fix.patch b/meta/recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/configure-fix.patch
-index 81029ca..2bb124b 100644
---- a/meta/recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/configure-fix.patch
-+++ b/meta/recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/configure-fix.patch
-@@ -11,7 +11,7 @@ diff -r f2f8f74c6e30 configure.ac
-          --enable-gpl"
-    fi
-  
--+  if test "x$disable_yasm" != "xyes"; then
-++  if test "x$disable_yasm" = "xyes"; then
- +    embffmpeg_configure_args="$embffmpeg_configure_args --disable-yasm"
- +  fi
- +
--- 
-1.8.2
+     if [ -e  ${PROGFILE_TEMPLATE} ] ; then
+         sed    -i    s/#MACHINE#/${MACHINE}/ ${PROGFILE_TEMPLATE}
+         sed    -i    s/#IMAGE#/${IMAGE_LINK_NAME}/ ${PROGFILE_TEMPLATE}
+     fi
+     cp    ${PROGFILE_TEMPLATE}    ${PROGFILE}
+
+     if [ -e  ${SCRIPTFILE_TEMPLATE} ] ; then
+         sed    -i    s/rootfs.ubi/${IMAGE_LINK_NAME}-${MACHINE}/ 
+${SCRIPTFILE_TEMPLATE}
+     fi
+     cp    ${SCRIPTFILE_TEMPLATE}    ${SCRIPTFILE}
+}
+
+EXPORT_FUNCTIONS sam-ba_setup
+
+EXTRA_IMAGEDEPENDS_append_mymachine = ' sam-ba'
+IMAGE_POSTPROCESS_COMMAND_append_mymachine = " sam-ba_setup; "
+----------------------------------------------------------------------------------------------------------
+myimage.bb: contains.
+
+inherit configure-sam-ba
+----------------------------
+It appears that the "configure-sam-ba.bbclass" file is found.
+If I change the filename in the inherit statement I get an error message.
+
+inherit configure-sam-ba-x
+I get an error message.
+
+Another indication is that the call to "sam-ba_setup;"  is inserted in 
+the "run.do_rootfs.*" script,
+but the script does not contain the "sam-ba_setup" subroutine.
+
+In some places IMAGE_POSTPROCESS_COMMAND contains " 
+rootfs_update_timestamp ",
+from image.bbclass which *is* included in the "run.do_rootfs.*" script.
+
+Should you not be able to use commands from a bbclass as 
+PRE/POSTPROCESS_COMMAND?
+
+A standard shell command will work, but since I need a number of 
+commands, it seems
+cleaner to implement it in a bbclass file.
+This is my first bbclass file, so there may be things, I don't understand...
 
 
---------------050909080503000509050505--
+BR
+Ulf Samuelsson
+
+
+
+
+
