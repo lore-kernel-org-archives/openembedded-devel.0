@@ -1,33 +1,24 @@
-Received: from mail-bk0-f46.google.com ([209.85.214.46])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1ULvjj-00033n-0w
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1ULwo5-0003vR-2L
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 14:22:23 +0100
-Received: by mail-bk0-f46.google.com with SMTP id je9so454904bkc.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Mar 2013 06:05:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=FHTktV1d8bCOYNQOhvR3XZ+u4Si06vSgCanvJnl0H1Y=;
-	b=FLW96puTGdBVPSmyUhc0cFerMsqMV0pZUOpjTj8xslDGPv0oXP2UmuPmHq4ZthNzjt
-	yGKZk5qyhDFmgjQ2CL5oHNVIQ4Xvk9aYEgv17qNLSU/FyFWTjQxkv79Kk1lQt/H9mKac
-	m1uftvRyv4HHv4JlH2zmezmJQnOth4ihgtjFsVjOHWIDXP1sZ1+ulayNAIXx5qsFwOv6
-	2yd74Jtpf+WzH0x1gyqlZszGhv95BiW7elyQy0XLgU2PfFPcCjtMzxCL1wO0YvuVlNV/
-	axm2ie4LVCifwnrN3/LXgI920FFip76bmY90euFwYitw0Bb5vvHDUvqdoODRZGfYkRR6
-	HlsA==
-X-Received: by 10.204.172.80 with SMTP id k16mr2442581bkz.123.1364648717211;
-	Sat, 30 Mar 2013 06:05:17 -0700 (PDT)
-MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.204.25.141 with HTTP; Sat, 30 Mar 2013 06:04:57 -0700 (PDT)
+	Sat, 30 Mar 2013 15:30:57 +0100
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 30 Mar 2013 07:13:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,378,1363158000"; d="scan'208";a="286629413"
+Received: from unknown (HELO helios.localnet) ([10.255.13.86])
+	by orsmga001.jf.intel.com with ESMTP; 30 Mar 2013 07:13:49 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Ulf Samuelsson <openembedded@emagii.com>
+Date: Sat, 30 Mar 2013 14:13:48 +0000
+Message-ID: <7185981.fYmuEdii30@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
 In-Reply-To: <5156DB73.4040507@emagii.com>
 References: <5156DB73.4040507@emagii.com>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Sat, 30 Mar 2013 22:04:57 +0900
-X-Google-Sender-Auth: YO7X2gZmuTQGCuYHS7AOFmTMNeE
-Message-ID: <CAPESJy7cfZvAePoLrVnvqoxaYRRxz1=U5L5ROP5MHbiWZEEBCA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,56 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Mar 2013 13:22:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 30 Mar 2013 14:30:57 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi Ulf,
-
-$ MACHINE=beagleboard  bitbake -e some-image
-
-shows all variables including $IMAGE_BASENAME without actually
-building the image.
-Using grep you can take the value of IMAGE_BASENAME, like as:
-
-$ MACHINE=beagleboard  bitbake -e some-image | grep ^IMAGE_BASENAME
-
-Does it help you?
-
-If possible, consider to use hooks, for example, IMAGE_POSTPROCESS_COMMAND .
-Refer image.bbclass for details. It might make things straiter.
-
-Regards,
--- 
-Takeshi Hamasaki
-
-2013/3/30 Ulf Samuelsson <openembedded@emagii.com>:
+On Saturday 30 March 2013 13:32:51 Ulf Samuelsson wrote:
 > Trying create a programming script recipe and need to find out the
 > IMAGE_BASENAME of the bitbake target
 > so I can get the filename of the image
->
+> 
 > ${MACHINE}-${IMAGE_BASENAME}.ubi
->
+> 
 > I.E: if I do
->
+> 
 > $ MACHINE=beagleboard  bitbake some-image
->
+> 
 > and "some-image_1.0.bb" contains
->
+> 
 > IMAGE_BASENAME = "renamed-image"
->
+> 
 > Then the resulting image will be
->
->     "beagleboard-renamed-image.ubi"
->
+> 
+>      "beagleboard-renamed-image.ubi"
+> 
 > How get this info from another recipe?
->
-> BR
-> Ulf Samuelsson
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+You can't. The way to handle this is as part of do_rootfs itself (e.g. from a 
+script called from ROOTFS_POSTPROCESS_COMMAND or IMAGE_POSTPROCESS_COMMAND).
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
