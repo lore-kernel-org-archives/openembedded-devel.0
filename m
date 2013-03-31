@@ -1,37 +1,33 @@
-Received: from mail-oa0-f42.google.com ([209.85.219.42])
+Received: from mail-pd0-f174.google.com ([209.85.192.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UM4Fb-0004GP-DT
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UM9Iw-0002LO-2z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Mar 2013 23:27:51 +0100
-Received: by mail-oa0-f42.google.com with SMTP id i18so1191258oag.29
+	Sun, 31 Mar 2013 05:51:41 +0200
+Received: by mail-pd0-f174.google.com with SMTP id p12so745672pdj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Mar 2013 15:10:45 -0700 (PDT)
+	Sat, 30 Mar 2013 20:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=lZMVr4mip/9S65IVEZujEyhAD3T7CALMR7tKa5s+YDk=;
-	b=xQlqjjqFiT3MgXog/1O86Wx1qV0F9fDJqh/zPvkBRbAS7pz8g5CG6mhX0B7WEPRugK
-	X2ontU29umGeWcn4qt/f/MIkEsXI+u/cj9f1t3jhOmXOHHOZU+rckpVxcbx14IeJ/j7h
-	w5e6MjP22QrapssCzOWJMafZGKg5wfai6Ol4FfeDCY1WINdDo+COKmsXLV4DCC1xNl5X
-	cDEMoYPaC+1Jg9eSPqjK+qzVNeGn9WZVapW+BEYjL4ZXbQf5ciUIVoKI7l9aYEzAnEHA
-	i+Q3RSVBnKTVi26Qmu2FmGIuEHyjX47GAo4mbdgVMRTF8ZNlS3EG8rU3uFjRd9XRsY2B
-	MuAg==
-MIME-Version: 1.0
-X-Received: by 10.182.39.69 with SMTP id n5mr2430738obk.72.1364681444377; Sat,
-	30 Mar 2013 15:10:44 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.80.198 with HTTP; Sat, 30 Mar 2013 15:10:44 -0700 (PDT)
-In-Reply-To: <51574B7B.1030204@pseudoterminal.org>
-References: <5156FDFD.1030606@pseudoterminal.org>
-	<CAP9ODKr2wE7ZCr-2U=HWZ5KD0ywrmkGJtA_8f_PLsUghe_SEHw@mail.gmail.com>
-	<51574B7B.1030204@pseudoterminal.org>
-Date: Sat, 30 Mar 2013 19:10:44 -0300
-X-Google-Sender-Auth: NBpJngmdIyQzDD-ROmrPeO209M8
-Message-ID: <CAP9ODKoPjaB2bbWV1MX+8N234w-tzJLNJSX1fXxJQ0nc42H7Vg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: gst-ffmpeg configure-fix patch and yasm
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=pIj4wfjNNSv0HjKfAKCaPbY7wCd1cXT6ISXGm/ygRKM=;
+	b=r7RZYy2vxEQW/BgGrtiQLveOssfuWfpQL/gS0gl8VVNjryBVlJx9lSJySFzSEnh0+4
+	KE60Rk8EzJHHET/Sk4KtZntT/nZEqWCw03ipSx9eoUdm+ZYsKq5+brhiGwtbJGBhnNr/
+	hahJjUrmrDFfhSk5QpWzqaGCmLGvloSoaNWmhnjdjNu4gnVVk3gTrSlFc3m/ZR8BZZ5V
+	2yTTMfGXcriUpR7VoUOi6or7BzW8PEhGQP36CBJ/A3l4Inps8c9sDRPF7L5rCgupcJgd
+	xu0k65WKOAbtKx193KCS5zanE5t4DJjAxTR/5X4NNtAK4BM4QtVc445V8X8du0KVuiQO
+	lyFA==
+X-Received: by 10.68.102.165 with SMTP id fp5mr11342958pbb.82.1364700870917;
+	Sat, 30 Mar 2013 20:34:30 -0700 (PDT)
+Received: from widex200.islocal (ZC025230.ppp.dion.ne.jp. [221.119.25.230])
+	by mx.google.com with ESMTPS id ti8sm8565629pbc.12.2013.03.30.20.34.27
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 30 Mar 2013 20:34:28 -0700 (PDT)
+Sender: Takeshi Hamasaki <takeshi.ken.hamasaki@gmail.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 31 Mar 2013 12:32:53 +0900
+Message-Id: <1364700773-32662-1-git-send-email-hmatrjp@users.sourceforge.jp>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [oe-core][PATCH] pcmciautils: Correct definition of PCMCIAUTILS_VERSION to avoid segmentation fault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,45 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Mar 2013 22:27:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 31 Mar 2013 03:51:48 -0000
 
-Hello,
+This is to fix segmentation fault from pccardctl command.
+-DPCMCIAUTILS_VERSION=\'${PV}\' passes PCMCIAUILTS_VERSION to compiler as a 
+multi-character constant, not a string.
 
-On Sat, Mar 30, 2013 at 5:30 PM, dv <dv@pseudoterminal.org> wrote:
-> On 03/30/13 17:40, Otavio Salvador wrote:
->>
->> On Sat, Mar 30, 2013 at 12:00 PM, dv <dv@pseudoterminal.org> wrote:
->>>
->>> Hello,
->>>
->>> I noticed this part of the configure-fix.patch file for gst-ffmpeg
->>> 0.10.13:
->>>
->>> +  if test "x$disable_yasm" != "xyes"; then
->>> +    embffmpeg_configure_args="$embffmpeg_configure_args --disable-yasm"
->>> +  fi
->>>
->>> Shouldn't the test be:  if test "x$disable_yasm" = "xyes"  ?
->>> To me, it seems as if this code adds --disable-yasm if disable_yasm is
->>> not
->>> set to "yes", which is the complete opposite of the intended behavior.
->>>
->>> Or am I missing some detail about shell script code here?
->>
->> I think you are right here. Maybe you could provide a fix for it?
-...
-> No problem. Patch for the patch attached :)
+---
+ meta/recipes-bsp/pcmciautils/pcmciautils.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please Martin,
+diff --git a/meta/recipes-bsp/pcmciautils/pcmciautils.inc b/meta/recipes-bsp/pcmciautils/pcmciautils.inc
+index 80271d6..0651236 100644
+--- a/meta/recipes-bsp/pcmciautils/pcmciautils.inc
++++ b/meta/recipes-bsp/pcmciautils/pcmciautils.inc
+@@ -21,7 +21,7 @@ export udevrulesdir = "${nonarch_base_libdir}/udev/rules.d"
+ export UDEV = "1"
+ LD = "${CC}"
+ CFLAGS =+ "-I${S}/src"
+-CFLAGS =+ "-DPCMCIAUTILS_VERSION=\'${PV}\'"
++CFLAGS =+ "-DPCMCIAUTILS_VERSION=\\"${PV}\\""
+ 
+ PARALLEL_MAKE = ""
+ EXTRA_OEMAKE = "-e 'STRIP=echo' 'LIB_OBJS=-lc -lsysfs' 'LEX=flex'"
+-- 
+1.7.10.4
 
-Can you review the patch in this thread?
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
