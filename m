@@ -1,37 +1,36 @@
-Received: from mail-qa0-f42.google.com ([209.85.216.42])
+Received: from mail.windriver.com ([147.11.1.11])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <philip.balister@gmail.com>) id 1UMfy2-0003wN-LW
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UMgyV-0004v9-TA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Apr 2013 16:44:15 +0200
-Received: by mail-qa0-f42.google.com with SMTP id bv4so873409qab.15
+	Mon, 01 Apr 2013 17:48:48 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r31FVbBM028604
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2013 07:27:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references;
-	bh=WINJ+XOMryJgIwHFPgiHXvmVdBcs0mIyBW1bqXo/mBc=;
-	b=uMMxXgoG93hjysJU/U7FdjBNc1hIN74GWeE+sOyPlxXeYn12Pb/x33YReawGerL4ef
-	WlIa54MyfiHOFUdUJ30ZB5cID6fUhDgJRxARvppwZEQnh7wOZIG//gNmwuomYLnbrfb1
-	AP9D9ytO2EPaFhSnx+YjoFU6Zma+763gWcEibSvCGBIn1r1C/NE8werz3FiWeOuvIaw4
-	NPaDQaYNIbUzxlfAh9nLed6vED1YSxi8Eh519hEuZyl5fH9QzOC+SvPF8hAANieaGCrm
-	HDH64x8WI3bzjRyoy/ijWlLOpYjxKaQecpWwCIbjsGKFK5hpz30pPB0uAzx7TFvQvKSE
-	obzQ==
-X-Received: by 10.224.96.4 with SMTP id f4mr12675326qan.79.1364826426023;
-	Mon, 01 Apr 2013 07:27:06 -0700 (PDT)
-Received: from localhost.localdomain
-	(pool-96-240-165-43.ronkva.east.verizon.net. [96.240.165.43])
-	by mx.google.com with ESMTPS id h5sm22110057qai.9.2013.04.01.07.27.05
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 01 Apr 2013 07:27:05 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: philip@balister.org
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Apr 2013 10:27:00 -0400
-Message-Id: <51599939.4541e00a.7e3d.0ddd@mx.google.com>
-X-Mailer: git-send-email 1.7.11.7
-In-Reply-To: <1364826420-23737-1-git-send-email-y>
-References: <1364826420-23737-1-git-send-email-y>
-Subject: [meta-oe][PATCH 2/2] python-cheetah : Add support for sdk generation.
+	Mon, 1 Apr 2013 08:31:37 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Mon, 1 Apr 2013 08:31:37 -0700
+Received: from yow-jmacdona-l1 (unknown [172.25.44.2])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 1C0347FCE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Apr 2013 11:30:42 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 8622B22BED; Mon,
+	1 Apr 2013 11:31:35 -0400 (EDT)
+Date: Mon, 1 Apr 2013 11:31:35 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130401153135.GJ10672@windriver.com>
+References: <1364484753-22122-1-git-send-email-koen@dominion.thruhere.net>
+	<20130328215943.GA6608@novatech.datenfreihafen.org>
+MIME-Version: 1.0
+In-Reply-To: <20130328215943.GA6608@novatech.datenfreihafen.org>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] 6lowpan-tools: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +44,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 14:44:15 -0000
+X-List-Received-Date: Mon, 01 Apr 2013 15:48:48 -0000
+X-Groupsio-MsgNum: 43836
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="bWEb1MG/o7IKOlQF"
+Content-Disposition: inline
 
-From: Philip Balister <philip@balister.org>
+--bWEb1MG/o7IKOlQF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We need to run cheetah on the host.
+[Re: [oe] [meta-networking][PATCH] 6lowpan-tools: add git version] On 13.03=
+=2E28 (Thu 21:59) Stefan Schmidt wrote:
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Hello.
+>=20
+> On Thu, 2013-03-28 at 16:32, Koen Kooi wrote:
+> > The 0.3 release was 6 months ago and git HEAD contains fixes to make it=
+ work with contiki, so build from git instead of backporting all the patche=
+s.
+>=20
+> Sounds like a good idea. And not only because one of the patches is
+> from me ;)
+>=20
+> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> > ---
+> >  .../recipes-support/6lowpan/6lowpan-tools_git.bb     | 20 ++++++++++++=
+++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 meta-networking/recipes-support/6lowpan/6lowpan-too=
+ls_git.bb
+>=20
+> Any special reason why this is named 6lowpan here?
+>=20
+> 6lowpan normally refers to IPv6 over LoWPAN while the lowpan-tools
+> do not configure anything regarding IPv6 but the plain LoWPAN which is
+> the protocol layer below. I would suggest renaming it to lowpan-tools.
 
-diff --git a/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb b/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
-index 1dad958..9dc4aaa 100644
---- a/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
-+++ b/meta-oe/recipes-devtools/python/python-cheetah_2.4.4.bb
-@@ -15,7 +15,7 @@ inherit setuptools
- RDEPENDS_${PN} = "python-pickle python-pprint"
- RDEPENDS_${PN}_class-native = ""
- 
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
- 
- SRC_URI[md5sum] = "853917116e731afbc8c8a43c37e6ddba"
- SRC_URI[sha256sum] = "be308229f0c1e5e5af4f27d7ee06d90bb19e6af3059794e5fd536a6f29a9b550"
--- 
-1.7.11.7
+I've not used these myself.  Based on what I saw on the project web
+page, 6lowpan seems like a pretty good name:
 
+   The goal of this project is to create an implementation of 802.15.4
+   and several protocols which run on top of it (primarily 6LoWPAN) for
+   Linux.
 
+But a quick look around in my apt-cache turns up lowpan-tools.  Seems
+like that's what it's also named in Fedora land, so I'm thinking that's
+probably the right call here, too.
 
+--=20
+-Joe MacDonald.
+:wq
+
+--bWEb1MG/o7IKOlQF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlFZqFcACgkQPN8S4W6ZZncDBACeMBMwJLaDVURfMIAXC7H4d9ZH
+ASsAnRh93QIQzRBiN7qKdIWSB7MKJn5z
+=q8+z
+-----END PGP SIGNATURE-----
+
+--bWEb1MG/o7IKOlQF--
