@@ -1,34 +1,34 @@
-Received: from mail-bk0-f41.google.com ([209.85.214.41])
+Received: from mail-qa0-f52.google.com ([209.85.216.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UMel7-0002oi-7j
+	(envelope-from <philip.balister@gmail.com>) id 1UMfy0-0003wM-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Apr 2013 15:26:49 +0200
-Received: by mail-bk0-f41.google.com with SMTP id i18so915298bkv.0
+	Mon, 01 Apr 2013 16:44:13 +0200
+Received: by mail-qa0-f52.google.com with SMTP id bs12so869473qab.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2013 06:09:40 -0700 (PDT)
+	Mon, 01 Apr 2013 07:27:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=7BEIve6BD2jyHKUimH5sp0R1UDBFtFcUSKAiQ7DXhyQ=;
-	b=sxCG7kNQOpzduqRVFpxKWPybuAmexBoqh+4vjrp++2a9IEoy+st8nFE91baLjEkUIY
-	uKRrwJIjTpXTC+HqQ0kKMwG+r4S+cjCFq2+6/dO67Mkqsn9+oHWrczn4/9JKIb3NaViZ
-	xVkr4Dij/TKjkBvkNSOWlRmU1xiLAHGmnWcyjiudKxvHKmDviulBbBtAVhP+J8wS+1/W
-	F094rsW9tmJ0M3cv1UDb4X1kIVZSxhBtrUwcTOjlH+IdeATnxinkd+UKsKR207BdfUVU
-	+r7/ZHf+M1KM1sBLEh82g2cqvVX2IFoCLZ4dQG8iFEIWGpw28wgmU9MD1MSyAqpNvlRi
-	KCEg==
-X-Received: by 10.205.26.200 with SMTP id rn8mr5068903bkb.13.1364821780589;
-	Mon, 01 Apr 2013 06:09:40 -0700 (PDT)
-MIME-Version: 1.0
-Sender: takeshi.ken.hamasaki@gmail.com
-Received: by 10.204.25.141 with HTTP; Mon, 1 Apr 2013 06:09:20 -0700 (PDT)
-In-Reply-To: <5156DB73.4040507@emagii.com>
-References: <5156DB73.4040507@emagii.com>
-From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
-Date: Mon, 1 Apr 2013 22:09:20 +0900
-X-Google-Sender-Auth: 3zxTqcjaQ0Xb7O6dH5xYI37GYw0
-Message-ID: <CAPESJy7rbqQhi4kfEmLOuwLLogQoSXO9iSx0UD=B8sOu41R6mA@mail.gmail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=lqU/TihMZsoAFZEMd7cEpL50LQLgQAtA4WMl118tpLc=;
+	b=RKPkzBV4P/LaP7aOXRgp6DshJiL9T9S/toPqwsMGm3xBFoVjB51EzY2v54BhkhEZIc
+	pLAY1qWga8o4qGj03Cs3pfUqHKFFjxVfOJ2Zu1QczYwy8u5gKgnALMAZ65QDpyYWioim
+	9NDMbVYFxE7B9aTmhcRfhhpEUboj6yxF7KUhP4DglvMK8L+30Q08paSieP5eddIQxiZO
+	0kyhjEg21Zzjl47PfjzTOZ09hxL1CSrPuDnoQ2nr7q4vq2xO/2FpSb+GyRQ9L/xv6r9a
+	rU3w1CYp99oATfBNYJbDNfmAOyU/+tPsYorA3Y7WHrbFMNki2a3w6eniQYgGkQhYfkaQ
+	7F4A==
+X-Received: by 10.224.178.4 with SMTP id bk4mr12582999qab.70.1364826424214;
+	Mon, 01 Apr 2013 07:27:04 -0700 (PDT)
+Received: from localhost.localdomain
+	(pool-96-240-165-43.ronkva.east.verizon.net. [96.240.165.43])
+	by mx.google.com with ESMTPS id h5sm22110057qai.9.2013.04.01.07.27.03
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 01 Apr 2013 07:27:03 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: philip@balister.org
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
+Date: Mon,  1 Apr 2013 10:26:59 -0400
+Message-Id: <51599937.4541e00a.7e3d.0dd6@mx.google.com>
+X-Mailer: git-send-email 1.7.11.7
+Subject: [meta-oe][PATCH 1/2] orc : Add support for sdk generation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 13:26:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Apr 2013 14:44:13 -0000
 
-Hi Ulf,
+From: Philip Balister <philip@balister.org>
 
-I couldn't find the reason your recipe is stand alone,
-because it doesn't generate image by itself. Does it?
+We need to run orcc on the host.
 
-My idea is written under the quote. How is it?
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-devtools/orc/orc.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-
-Let me go back to your question in first mail.
-
-2013/3/30 Ulf Samuelsson <openembedded@emagii.com>:
-> Trying create a programming script recipe and need to find out the
-> IMAGE_BASENAME of the bitbake target
-> so I can get the filename of the image
->
-> ${MACHINE}-${IMAGE_BASENAME}.ubi
->
-> I.E: if I do
->
-> $ MACHINE=beagleboard  bitbake some-image
->
-> and "some-image_1.0.bb" contains
->
-> IMAGE_BASENAME = "renamed-image"
->
-> Then the resulting image will be
->
->     "beagleboard-renamed-image.ubi"
->
-> How get this info from another recipe?
-
-----  your-image.bb ---- from here ----
-include some-image.bb
-
- ((( use  ${IMAGE_BASENAME} and ${MACHINE} for your process )))
-
- ((( after that, redefine IMAGE_BASENAME and other variables if necessary. )))
-
----- your-image.bb ---- to here ----
-
+diff --git a/meta-oe/recipes-devtools/orc/orc.inc b/meta-oe/recipes-devtools/orc/orc.inc
+index 7a957f3..3a9b2f4 100644
+--- a/meta-oe/recipes-devtools/orc/orc.inc
++++ b/meta-oe/recipes-devtools/orc/orc.inc
+@@ -3,13 +3,13 @@ HOMEPAGE = "http://code.entropywave.com/projects/orc/"
+ LICENSE = "orc"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1400bd9d09e8af56b9ec982b3d85797e"
+ 
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ SRC_URI = "http://code.entropywave.com/download/orc/orc-${PV}.tar.gz;name=orc"
+ 
+ inherit autotools pkgconfig
+ 
+-BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
+ 
+ PACKAGES =+ "orc-examples"
+ FILES_orc-examples = "${libdir}/orc/*"
 -- 
-Takeshi Hamasaki
+1.7.11.7
+
 
 
