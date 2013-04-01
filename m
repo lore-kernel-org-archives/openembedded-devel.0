@@ -1,35 +1,34 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-bk0-f41.google.com ([209.85.214.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>)
-	id 1UMehd-0002iJ-FK; Mon, 01 Apr 2013 15:23:13 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r31D61tp027266
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Apr 2013 06:06:02 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 1 Apr 2013 06:06:02 -0700
-Received: from yow-jmacdona-l1 (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 6540A7FCE;
-	Mon,  1 Apr 2013 09:05:07 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id A7CC82007F; Mon,
-	1 Apr 2013 09:06:00 -0400 (EDT)
-Date: Mon, 1 Apr 2013 09:06:00 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130401130600.GE10672@windriver.com>
-References: <3982011.Guen6pOcoq@helios> <20130401104758.GB9978@windriver.com>
-	<1410613.FPl62IiBfB@helios>
+	(envelope-from <takeshi.ken.hamasaki@gmail.com>) id 1UMel7-0002oi-7j
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Apr 2013 15:26:49 +0200
+Received: by mail-bk0-f41.google.com with SMTP id i18so915298bkv.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Apr 2013 06:09:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=7BEIve6BD2jyHKUimH5sp0R1UDBFtFcUSKAiQ7DXhyQ=;
+	b=sxCG7kNQOpzduqRVFpxKWPybuAmexBoqh+4vjrp++2a9IEoy+st8nFE91baLjEkUIY
+	uKRrwJIjTpXTC+HqQ0kKMwG+r4S+cjCFq2+6/dO67Mkqsn9+oHWrczn4/9JKIb3NaViZ
+	xVkr4Dij/TKjkBvkNSOWlRmU1xiLAHGmnWcyjiudKxvHKmDviulBbBtAVhP+J8wS+1/W
+	F094rsW9tmJ0M3cv1UDb4X1kIVZSxhBtrUwcTOjlH+IdeATnxinkd+UKsKR207BdfUVU
+	+r7/ZHf+M1KM1sBLEh82g2cqvVX2IFoCLZ4dQG8iFEIWGpw28wgmU9MD1MSyAqpNvlRi
+	KCEg==
+X-Received: by 10.205.26.200 with SMTP id rn8mr5068903bkb.13.1364821780589;
+	Mon, 01 Apr 2013 06:09:40 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1410613.FPl62IiBfB@helios>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] New OE layer index now available
+Sender: takeshi.ken.hamasaki@gmail.com
+Received: by 10.204.25.141 with HTTP; Mon, 1 Apr 2013 06:09:20 -0700 (PDT)
+In-Reply-To: <5156DB73.4040507@emagii.com>
+References: <5156DB73.4040507@emagii.com>
+From: Takeshi Hamasaki <hmatrjp@users.sourceforge.jp>
+Date: Mon, 1 Apr 2013 22:09:20 +0900
+X-Google-Sender-Auth: 3zxTqcjaQ0Xb7O6dH5xYI37GYw0
+Message-ID: <CAPESJy7rbqQhi4kfEmLOuwLLogQoSXO9iSx0UD=B8sOu41R6mA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Finding out the IMAGE_BASENAME of the image beeing built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,69 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 13:23:13 -0000
-X-Groupsio-MsgNum: 43832
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RpqchZ26BWispMcB"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Apr 2013 13:26:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---RpqchZ26BWispMcB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Ulf,
 
-[Re: [OE-core] New OE layer index now available] On 13.04.01 (Mon 12:57) Pa=
-ul Eggleton wrote:
+I couldn't find the reason your recipe is stand alone,
+because it doesn't generate image by itself. Does it?
 
-> On Monday 01 April 2013 06:47:59 Joe MacDonald wrote:
-> > I like it, though I have a couple of questions about the accounts
-> > themselves.
-> >=20
-> >    - Any chance we could have them connected (or use the same
-> >      credentials as) the patchworks ones?
->=20
-> Seems like they are both based on Django so I guess it would be possible;=
- the=20
-> only impediment (assuming there was no Django version mismatch) would be =
-that=20
-> patchwork is currently on different infrastructure.
+My idea is written under the quote. How is it?
 
-Okay, that's sort of what I figured, but I thought I'd ask anyway.  I
-would love it as a layer maintainer to have a single dashboard I could
-log into and get the whole view.  It may be that this is something I
-rarely use anyway, though, in comparison to patchworks, so the effort of
-connecting these two pieces isn't worth it.
 
-> >    - If not, what options can we set on accounts?  Right now I just see
-> >      "log out" and "change password".  Both pretty important, but I'd
-> >      also like to add alternate email addresses, for example, since I
-> >      use two quite regularly and update meta-networking from both.
->=20
-> There's no alternate email address field; one could be added I suppose bu=
-t the=20
-> question is, how would you like this to be used within the index?
+Let me go back to your question in first mail.
 
-I don't know?  :-)  Honestly, not really all that sure what I'm looking
-at here, but I'm thinking that if making updates in the interface to
-layer information is tied to an email address, it'd be convenient for me
-to log in as one username and have both my common email addresses
-associated with it (with one being the primary, I guess).  Or to have
-the ability to change the email address as necessary.
+2013/3/30 Ulf Samuelsson <openembedded@emagii.com>:
+> Trying create a programming script recipe and need to find out the
+> IMAGE_BASENAME of the bitbake target
+> so I can get the filename of the image
+>
+> ${MACHINE}-${IMAGE_BASENAME}.ubi
+>
+> I.E: if I do
+>
+> $ MACHINE=beagleboard  bitbake some-image
+>
+> and "some-image_1.0.bb" contains
+>
+> IMAGE_BASENAME = "renamed-image"
+>
+> Then the resulting image will be
+>
+>     "beagleboard-renamed-image.ubi"
+>
+> How get this info from another recipe?
 
---=20
--Joe MacDonald.
-:wq
+----  your-image.bb ---- from here ----
+include some-image.bb
 
---RpqchZ26BWispMcB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ ((( use  ${IMAGE_BASENAME} and ${MACHINE} for your process )))
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+ ((( after that, redefine IMAGE_BASENAME and other variables if necessary. )))
 
-iEYEARECAAYFAlFZhjgACgkQPN8S4W6ZZncVDACfVEpYDaP1SbxlcXPvpGB/RXlH
-xvgAnA2cInnVLkMEQWdUGVqTk8tOlVNo
-=XlBv
------END PGP SIGNATURE-----
+---- your-image.bb ---- to here ----
 
---RpqchZ26BWispMcB--
+-- 
+Takeshi Hamasaki
+
+
