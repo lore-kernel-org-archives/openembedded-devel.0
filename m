@@ -1,25 +1,24 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Jackie.Huang@windriver.com>) id 1UMUpg-0004cV-N0
+	(envelope-from <apelete@seketeli.net>) id 1UMb4j-00074C-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Apr 2013 04:50:59 +0200
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r312XhLo016740
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 01 Apr 2013 11:30:49 +0200
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id EC464EA048
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Mar 2013 19:33:44 -0700 (PDT)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Sun, 31 Mar 2013 19:33:42 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Apr 2013 10:33:37 +0800
-Message-ID: <1364783617-29850-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.4.1
-MIME-Version: 1.0
-Cc: Jackie.Huang@windriver.com
-Subject: [meta-webserver][PATCH] modphp: use libdir instead of baselib to load module
+	Mon,  1 Apr 2013 11:23:21 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id 8667AA40709; Mon,  1 Apr 2013 11:13:59 +0200 (CEST)
+From: Apelete Seketeli <apelete@seketeli.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Apr 2013 11:13:26 +0200
+Message-Id: <ed2406384da34b0dc86c693e481cda9c244f803c.1364806552.git.apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <cover.1364806552.git.apelete@seketeli.net>
+References: <cover.1364806552.git.apelete@seketeli.net>
+In-Reply-To: <cover.1364806552.git.apelete@seketeli.net>
+References: <cover.1364806552.git.apelete@seketeli.net>
+Subject: [meta-handheld][PATCH 2/2] ben-nanonote: clean machine conf according to oe-core rules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 02:51:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Apr 2013 09:30:49 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+The following changes were done to comply with oe-core rules:
+- use DEFAULTTUNE from conf/machine/include/tune-mips32.inc in oe-core
+  repository instead of setting TARGET_ARCH,
+- remove IMAGE_FSTYPES setting, this is done in distro configuration.
 
-When we change the apache2 files layout to debian style,
-the ServerRoot in httpd.conf was changed to "/" from "/usr",
-then the relative path to libphp5 module in 70_mod_php5.conf
-will be invalid so it fails to load the module, use libdir
-(absolute path) instead so it will always find the module.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- meta-webserver/recipes-php/modphp/modphp5.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ conf/machine/ben-nanonote.conf       |    3 ---
+ conf/machine/include/tune-mips32.inc |    3 ---
+ 2 files changed, 6 deletions(-)
+ delete mode 100644 conf/machine/include/tune-mips32.inc
 
-diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
-index c359ff9..33dbe89 100644
---- a/meta-webserver/recipes-php/modphp/modphp5.inc
-+++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-@@ -67,7 +67,7 @@ do_install  () {
- 	install -d ${D}${sysconfdir}/apache2/modules.d
- 	install -d ${D}${sysconfdir}/php/apache2-php5
- 	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
--	sed -i s,lib/,${baselib}/, ${WORKDIR}/70_mod_php5.conf
-+	sed -i s,lib/,${libdir}/, ${WORKDIR}/70_mod_php5.conf
- 	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
- 	cat ${S}/php.ini-production | \
- 		sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+diff --git a/conf/machine/ben-nanonote.conf b/conf/machine/ben-nanonote.conf
+index e53cb3f..1ce5815 100644
+--- a/conf/machine/ben-nanonote.conf
++++ b/conf/machine/ben-nanonote.conf
+@@ -2,7 +2,6 @@
+ #@NAME: Ben Nanonote
+ #@DESCRIPTION: Machine configuration for the Qi-Hardware's Ben Nanonote
+ 
+-TARGET_ARCH = "mipsel"
+ require conf/machine/include/tune-mips32.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-ben-nanonote"
+@@ -11,8 +10,6 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-ben-nanonote"
+ #KERNEL_IMAGETYPE = "uImage"
+ KERNEL_IMAGETYPE = "vmlinux.bin"
+ 
+-IMAGE_FSTYPES =+ "jffs2"
+-
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+ PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
+ 
+diff --git a/conf/machine/include/tune-mips32.inc b/conf/machine/include/tune-mips32.inc
+deleted file mode 100644
+index 67edca2..0000000
+--- a/conf/machine/include/tune-mips32.inc
++++ /dev/null
+@@ -1,3 +0,0 @@
+-TARGET_CC_ARCH = "-march=mips32"
+-FEED_ARCH = "${TARGET_ARCH}"
+-BASE_PACKAGE_ARCH = "${TARGET_ARCH}"
 -- 
-1.7.4.1
+1.7.10.4
 
 
 
