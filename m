@@ -1,36 +1,38 @@
-Received: from mail-ea0-f177.google.com ([209.85.215.177])
+Received: from mail-ee0-f50.google.com ([74.125.83.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UMuv9-0007SE-3z
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UMuvB-0007SI-8b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Apr 2013 08:42:15 +0200
-Received: by mail-ea0-f177.google.com with SMTP id q14so30849eaj.22
+	Tue, 02 Apr 2013 08:42:17 +0200
+Received: by mail-ee0-f50.google.com with SMTP id e53so32412eek.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2013 23:25:05 -0700 (PDT)
+	Mon, 01 Apr 2013 23:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=2zroa+gKQyke1kIrc5OeQJBPmvFapRX/zi1Gepp5nLk=;
-	b=RVlzDcalwuPBpZj7IvZoOH9nJKU6n0URCWQ74XbfpxiOFihZhTeQ55l2WyKtcrfknb
-	hhiVZOfEF4IEkExpUfJ3vt+p7XfyFW+z2E+QFvw0G9TvFKmawteD79O1tEtavOHGptx+
-	aUcFc/h/GNKeeqDjQmDzc1hOO86yXw9QoHLbG97mpSVIJqq7AMET10vLY6G2H2M7jTVT
-	3iC8mZFME7jBlPU6F+QOdtuB3YiXp0lQ+lXUMYAQdS6lGRY99RoreSVBh3XMaF27G98r
-	mGllDHeXquefvr7aSWKEIJpOQGLSyIQ6aHxF5BJGifU01r8H4zIezvtKJ8V55hFMK1SH
-	h8TQ==
-X-Received: by 10.15.36.135 with SMTP id i7mr45579921eev.34.1364883905665;
-	Mon, 01 Apr 2013 23:25:05 -0700 (PDT)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=5vdTMmOPJ+jjAXVdbTZQ7VKs20JTbcirCvBHBSZaFZ4=;
+	b=dJyYYZmLasOphNeCrcx2ebASbX56NgzpCvJr81HNmRBu8iys02IC7qfmRrXRgfr0hu
+	ByjBe+YH0Q9HCzNYRVXoAw9V/qWpIV5aOmrnKtUeJuoEPTAByA20RcUt/rKBJqQCc4fb
+	WL56JEkmEwd/Z6ij18xQSBb0zmPhTjT5rnPZcDKwcLfEC8yXfgk/nM5w77+2R64XmT7K
+	/bs4j+SZu/f1v3lauo1cO/vTmLPeyx0oQVtyKjFYJwOMV5fOf0zefuFUDdvMfv5iJ5hf
+	kDY0Y64Wy+pN/5+dKcIYzNyzrFZNeAh1RPFuS8m8i9JJmmFYbope+jFAiQ9PjfvG7qPf
+	JF8Q==
+X-Received: by 10.14.216.2 with SMTP id f2mr45642155eep.44.1364883908123;
+	Mon, 01 Apr 2013 23:25:08 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3A51.dip.t-dialin.net.
 	[91.10.58.81])
-	by mx.google.com with ESMTPS id s3sm458591eem.4.2013.04.01.23.25.04
+	by mx.google.com with ESMTPS id s3sm458591eem.4.2013.04.01.23.25.05
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 01 Apr 2013 23:25:04 -0700 (PDT)
+	Mon, 01 Apr 2013 23:25:06 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Apr 2013 08:24:50 +0200
-Message-Id: <1364883895-24252-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  2 Apr 2013 08:24:51 +0200
+Message-Id: <1364883895-24252-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1364883895-24252-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1364883895-24252-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce,V2 0/5] exo tweaks / add xfce4-closebutton-plugin
+Subject: [meta-xfce, V2 1/5] exo: inherit perlnative and add liburi-perl-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,42 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2013 06:42:15 -0000
+X-List-Received-Date: Tue, 02 Apr 2013 06:42:17 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The series consists of two parts:
+* this fixes build on perl-less machines
+* perlnative.bbclass adds perl-native to DEPENDS so remove it
 
-  * exo: fix build on perl-less machines
-  * exo-native: When building from xfce-git-repos exo-csource is required. I
-    needed that several times for debugging (e.g when implementing extensions
-    to xfce4-settings).
-  * xfce4-closebutton-plugin: This is a very simple panel plugin I have
-    written. It is intended to close windows in environments with maximized and
-    undecorated windows e.g on low resolution screens.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-xfce/exo/exo_0.10.2.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-The following changes since commit 74eee8a7960cf0a898d795cb024b10a58357dbcd:
-
-  multipath-tools: add recipe for git version (2013-03-29 13:16:39 +0100)
-
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git xfce-patches
-
-Andreas Müller (5):
-      exo: inherit perlnative and add liburi-perl-native to DEPENDS
-      exo: add native build
-      exo: split out exo-csource to exo-dev - it is not required on target
-      xfce4-closebutton-plugin: initial add
-      packagegroup-xfce-extended: add xfce4-closebutton-plugin
-
- .../closebutton/xfce4-closebutton-plugin_git.bb    |   22 ++++++
- .../exo/exo/reduce-build-to-exo-csource-only.patch |   80 ++++++++++++++++++++
- meta-xfce/recipes-xfce/exo/exo_0.10.2.bb           |   15 +++-
- .../packagegroups/packagegroup-xfce-extended.bb    |    3 +-
- 4 files changed, 117 insertions(+), 3 deletions(-)
- create mode 100644 meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
- create mode 100644 meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+index 4fdfd48..6aa1056 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+@@ -2,9 +2,10 @@ DESCRIPTION="Application library for the Xfce desktop environment"
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 perl-native cairo"
++DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
++PR = "r1"
+ 
+-inherit xfce pythonnative
++inherit xfce pythonnative perlnative
+ 
+ # SRC_URI must follow inherited one
+ SRC_URI += " \
 -- 
 1.7.4.4
 
