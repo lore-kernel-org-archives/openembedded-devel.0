@@ -1,45 +1,36 @@
-Received: from mail-ee0-f46.google.com ([74.125.83.46])
+Received: from mail-ea0-f177.google.com ([209.85.215.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UMudK-0007GA-Rl
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UMuv9-0007SE-3z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Apr 2013 08:23:50 +0200
-Received: by mail-ee0-f46.google.com with SMTP id e49so26796eek.33
+	Tue, 02 Apr 2013 08:42:15 +0200
+Received: by mail-ea0-f177.google.com with SMTP id q14so30849eaj.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Apr 2013 23:06:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=adE7NIgZ7juhAsNHs7l1ImuTjlpxwl7v/TLxQT0xT6c=;
-	b=UrSgUHUEvWOY33CLbgEKYDM82c6UlZb0EsG+M1DhbgcUJX9gV3uw+VDp3J3CGc8Jbv
-	Xosxa2Yj+/8FMsPOCmjgnV9aOCX0sP/23jvqpAMo+iXVMTO+NbeqOtYtvkKmmeMN5euP
-	V1ZoUJ5oYsfNnMUlYurq6wN97H6UUfvLZjEVXiZc5fAE8f/ekC67x7/B/1n4C902fYcl
-	QXCyQeuHTninLSXB4tDiqegPpRxAErXh3N9YMeVzos30Y22CEAAeyCRX5OdUyjf6VIKl
-	S8PDvs7FsPlKOZCIOlA+1U+jkqyBfy8YPvpt6dSbp/fDh8xQGP3+tebxMeEBw4RbvLKR
-	aQbA==
-X-Received: by 10.14.109.71 with SMTP id r47mr10085216eeg.25.1364882801378;
-	Mon, 01 Apr 2013 23:06:41 -0700 (PDT)
-Received: from [172.20.0.100] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id q42sm319769eem.14.2013.04.01.23.06.39
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 01 Apr 2013 23:06:39 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20130401210320.GA21215@windriver.com>
-Date: Tue, 2 Apr 2013 08:06:38 +0200
-Message-Id: <DA93B563-DB94-4BB5-8BE5-9F71295214A3@dominion.thruhere.net>
-References: <1364567102-6409-1-git-send-email-koen@dominion.thruhere.net>
-	<20130401181357.GK10672@windriver.com>
-	<23CA3232-CC08-4140-A95E-4B6E1F10186F@dominion.thruhere.net>
-	<20130401182131.GL10672@windriver.com>
-	<3B6011D6-AA55-4A46-849A-07484DEEA060@dominion.thruhere.net>
-	<20130401210320.GA21215@windriver.com>
-To: Joe MacDonald <Joe.MacDonald@windriver.com>
-X-Mailer: Apple Mail (2.1503)
-X-Gm-Message-State: ALoCoQlb1VSmwr2dSpoAEFo7I2DJ+J2RJ5uXjsvn2xRq7Xq7S8u5E3DcrEEuDwmxXPnpzO6jyIlt
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][meta-oe][PATCH 1/2] python-m2crypto: add 0.21.1
+	Mon, 01 Apr 2013 23:25:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=2zroa+gKQyke1kIrc5OeQJBPmvFapRX/zi1Gepp5nLk=;
+	b=RVlzDcalwuPBpZj7IvZoOH9nJKU6n0URCWQ74XbfpxiOFihZhTeQ55l2WyKtcrfknb
+	hhiVZOfEF4IEkExpUfJ3vt+p7XfyFW+z2E+QFvw0G9TvFKmawteD79O1tEtavOHGptx+
+	aUcFc/h/GNKeeqDjQmDzc1hOO86yXw9QoHLbG97mpSVIJqq7AMET10vLY6G2H2M7jTVT
+	3iC8mZFME7jBlPU6F+QOdtuB3YiXp0lQ+lXUMYAQdS6lGRY99RoreSVBh3XMaF27G98r
+	mGllDHeXquefvr7aSWKEIJpOQGLSyIQ6aHxF5BJGifU01r8H4zIezvtKJ8V55hFMK1SH
+	h8TQ==
+X-Received: by 10.15.36.135 with SMTP id i7mr45579921eev.34.1364883905665;
+	Mon, 01 Apr 2013 23:25:05 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3A51.dip.t-dialin.net.
+	[91.10.58.81])
+	by mx.google.com with ESMTPS id s3sm458591eem.4.2013.04.01.23.25.04
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 01 Apr 2013 23:25:04 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Apr 2013 08:24:50 +0200
+Message-Id: <1364883895-24252-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [meta-xfce,V2 0/5] exo tweaks / add xfce4-closebutton-plugin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,99 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2013 06:23:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Apr 2013 06:42:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+The series consists of two parts:
 
-Op 1 apr. 2013, om 23:03 heeft Joe MacDonald =
-<Joe.MacDonald@windriver.com> het volgende geschreven:
+  * exo: fix build on perl-less machines
+  * exo-native: When building from xfce-git-repos exo-csource is required. I
+    needed that several times for debugging (e.g when implementing extensions
+    to xfce4-settings).
+  * xfce4-closebutton-plugin: This is a very simple panel plugin I have
+    written. It is intended to close windows in environments with maximized and
+    undecorated windows e.g on low resolution screens.
 
-> [Re: [oe] [meta-networking][meta-oe][PATCH 1/2] python-m2crypto: add =
-0.21.1] On 13.04.01 (Mon 22:33) Koen Kooi wrote:
->=20
->>=20
->> Op 1 apr. 2013, om 20:21 heeft Joe MacDonald =
-<Joe.MacDonald@windriver.com> het volgende geschreven:
->>=20
->>> [Re: [oe] [meta-networking][meta-oe][PATCH 1/2] python-m2crypto: add =
-0.21.1] On 13.04.01 (Mon 20:15) Koen Kooi wrote:
->>>=20
->>>>=20
->>>> Op 1 apr. 2013, om 20:13 heeft Joe MacDonald =
-<Joe.MacDonald@windriver.com> het volgende geschreven:
->>>>=20
->>>>> Hey Koen,
->>>>>=20
->>>>> [[oe] [meta-networking][meta-oe][PATCH 1/2] python-m2crypto: add =
-0.21.1] On 13.03.29 (Fri 15:25) Koen Kooi wrote:
->>>>>=20
->>>>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->>>>>> ---
->>>>>> ...y-link-in-sysroot-not-in-host-directories.patch | 39 =
-++++++++++++++++++++++
->>>>>> .../python/python-m2crypto_0.21.1.bb               | 19 =
-+++++++++++
->>>>>> 2 files changed, 58 insertions(+)
->>>>>> create mode 100644 =
-meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysr=
-oot-not-in-host-directories.patch
->>>>>> create mode 100644 =
-meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
->>>>>>=20
->>>>>> diff --git =
-a/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sy=
-sroot-not-in-host-directories.patch =
-b/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sy=
-sroot-not-in-host-directories.patch
->>>>>> new file mode 100644
->>>>>> index 0000000..bcbdf24
->>>>>> --- /dev/null
->>>>>> +++ =
-b/meta-oe/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sy=
-sroot-not-in-host-directories.patch
->>>>>> @@ -0,0 +1,39 @@
->>>>>> +=46rom f11b9c71080513f9b867ba8f40613ba2ebc6e960 Mon Sep 17 =
-00:00:00 2001
->>>>>> +From: Koen Kooi <koen@dominion.thruhere.net>
->>>>>> +Date: Fri, 29 Mar 2013 15:17:17 +0100
->>>>>> +Subject: [PATCH] setup.py: link in sysroot, not in host =
-directories
->>>>>> +
->>>>>> +Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->>>>>> +
->>>>>> +Upstream-status: Unknown
->>>>>=20
->>>>> Does this mean you haven't determined if it should be sent =
-upstream yet,
->>>>> or you did and it's gone off into an apparent black hole of a =
-mailing
->>>>> list somewhere?
->>>>=20
->>>> The former
->>>=20
->>> Okay.  Isn't that normally 'Pending' then?  I can make that tweak in =
-my
->>> merge, but I wanted to confirm I had the right information there =
-first.
->>=20
->> If you think 'Pending' reflects the status better than 'Unknown', go =
-for it, but 'Pending' has been the catch-all for Upstream-status fields, =
-so anytime you see 'Pending' you know you can't trust the =
-Upstream-status field.=20
->=20
-> Yeah, certainly no argument here, 'Pending' implies something to me =
-that
-> simply isn't so based both on experience and the strict definition on
-> the website.  But that does seem to fit the definition reasonably =
-well.
->=20
-> So since the meta-networking bit depends on the meta-oe bit being
-> merged, do you want me to merge both at the same time?  Or if you =
-would
-> prefer to do the merge, I'm happy with the meta-networking piece of
-> this, so feel free.
+The following changes since commit 74eee8a7960cf0a898d795cb024b10a58357dbcd:
 
-Feel free to merge both=
+  multipath-tools: add recipe for git version (2013-03-29 13:16:39 +0100)
+
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git xfce-patches
+
+Andreas Müller (5):
+      exo: inherit perlnative and add liburi-perl-native to DEPENDS
+      exo: add native build
+      exo: split out exo-csource to exo-dev - it is not required on target
+      xfce4-closebutton-plugin: initial add
+      packagegroup-xfce-extended: add xfce4-closebutton-plugin
+
+ .../closebutton/xfce4-closebutton-plugin_git.bb    |   22 ++++++
+ .../exo/exo/reduce-build-to-exo-csource-only.patch |   80 ++++++++++++++++++++
+ meta-xfce/recipes-xfce/exo/exo_0.10.2.bb           |   15 +++-
+ .../packagegroups/packagegroup-xfce-extended.bb    |    3 +-
+ 4 files changed, 117 insertions(+), 3 deletions(-)
+ create mode 100644 meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
+ create mode 100644 meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
+
+-- 
+1.7.4.4
+
 
 
