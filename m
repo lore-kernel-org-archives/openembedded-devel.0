@@ -1,32 +1,42 @@
-Received: from mail-oa0-f43.google.com ([209.85.219.43])
+Received: from mail-bk0-f52.google.com ([209.85.214.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>) id 1UNToa-0005Cv-4X
+	(envelope-from <koen@dominion.thruhere.net>) id 1UNU4W-0005wB-HL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 21:57:48 +0200
-Received: by mail-oa0-f43.google.com with SMTP id l10so1942462oag.2
+	Wed, 03 Apr 2013 22:14:16 +0200
+Received: by mail-bk0-f52.google.com with SMTP id it16so1045302bkc.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2013 12:40:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:date:x-google-sender-auth:message-id
-	:subject:from:to:content-type;
-	bh=8S//wTFplIBVAOCqdr+qvj2Vytwwfi6UJVhAS7oqIgw=;
-	b=UgraRt6aJIYTzqB5QUdlj6yV8aYJovalu+Iq5hdFdvvdkS//IWOQaQYi0LYcc2XUpX
-	EZyK2vE2OdUr/eTR0rLv/4FkjP/awaOKN3J+xdQ/+iD4evFnTrs5mqjTpNL8UBoXdEUV
-	ZRWmh2D+fMjj+3K1I4HDfOzJCyiJAuxTifb9xtvzZ5iY92GJSQsus3Rk8Fb9NcR/9u5a
-	B5LyNucFC2m91cFnJNlXRg/+45XHCdpEnhRS5sAbJv94jjauin1BL6pTRQhEmw0UzcdU
-	tvdEFbHxppWmfOYgtezKuShypNbq6wdZSmBeL0kD2sC0tP2VnGOKT3kp4Mz2L0KjlILn
-	U3fw==
-MIME-Version: 1.0
-X-Received: by 10.182.97.5 with SMTP id dw5mr1951376obb.91.1365018035930; Wed,
-	03 Apr 2013 12:40:35 -0700 (PDT)
-Sender: paul.betafive@gmail.com
-Received: by 10.76.154.4 with HTTP; Wed, 3 Apr 2013 12:40:35 -0700 (PDT)
-Date: Wed, 3 Apr 2013 20:40:35 +0100
-X-Google-Sender-Auth: hCA3qkOLA-PaxZTHLmofICyzcRk
-Message-ID: <CANyK_8daYNnSHhWELZD7ms7dgXkWwN8FCFAT8OsYZN+yLgvGsQ@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] VLC 1.1.11 build failure
+	Wed, 03 Apr 2013 12:57:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:references:mime-version:in-reply-to:content-type
+	:content-transfer-encoding:message-id:cc:x-mailer:from:subject:date
+	:to:x-gm-message-state;
+	bh=CmcdxutM6ghrHb+9uv2EKJ2cdxM0huVah9DbpshgExE=;
+	b=BjEZKXYa6k0iTnyMUF7bzlMgNFii9Qfid3QFdM9gwysFXx3wKI6NQHla3umXa9oCiG
+	GHJoF+Sd8BlnIaAgwup8rbwSpuAj70oPk9xgMHq6EpyD1trpR9j1Qsv76rmo9IzPoRlS
+	3gyeByLKTtvUkWEVtUVQTAwV46K1BeO11i8oiV1ZM/jMHtpbU+cc38DDtn+oaN49AcqL
+	PgOTRgc1qf/OJZ3A2j7ucUnPDlx6+L3MGatjrz7elSTa2NpJeho2pt+uT7+p2ZNe8a0U
+	xAlQ9dnNwJlbKcp3XY5vPjYqoC2UbM3raj9A+FP2n3qcweQnZ50U/WJye1UVXue/gPXe
+	bDJA==
+X-Received: by 10.205.1.5 with SMTP id no5mr2307811bkb.64.1365019024505;
+	Wed, 03 Apr 2013 12:57:04 -0700 (PDT)
+Received: from [172.20.0.104] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id x10sm3905060bkv.13.2013.04.03.12.57.02
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 03 Apr 2013 12:57:03 -0700 (PDT)
+References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
+	<515C8459.3080005@balister.org>
+Mime-Version: 1.0 (1.0)
+In-Reply-To: <515C8459.3080005@balister.org>
+Message-Id: <FF0E3122-75E0-47DF-978E-CF9982B94B64@dominion.thruhere.net>
+X-Mailer: iPad Mail (10B329)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 3 Apr 2013 21:57:00 +0200
+To: Philip Balister <philip@balister.org>
+X-Gm-Message-State: ALoCoQmjqUCeq3Yr6G5FRGkwWsBXD12M3MNWntJ9p9rAIl3Z3JPh4V9u3BjiBtFO2u8Pqe5UMQlt
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +50,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 19:57:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 03 Apr 2013 20:14:16 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-I'm building with MACHINE=raspberrypi and the meta-raspberrypi layer
-included (from http://git.yoctoproject.org/cgit/cgit.cgi/meta-raspberrypi/).
 
-I'm getting an error in do_package for vlc. It seems that paths with a
-double forward-slash are ending up in the binaries and this is
-confusing the debugedit program invoked in the function
-split_and_strip_files - the error message from debugedit written to
-the log file is "canonicalization unexpectedly shrank by one
-character". A bit of googling says debugedit attempted to replace the
-double forward-slash with a single forward-slash but can't handle the
-case when the length of a path is reduced by exactly one character.
-These paths are coming in when the include paths for qt4 are added to
-the cxxflags variable in the file vlc-config. On my system paths like
-".../tmp-eglibc/sysroots/raspberrypi/usr//include/qt4/QtCore" are
-being added. I can't find where this double forward-slash is
-originating from, grep isn't showing me any other files with double
-forward-slashes or with a path ending 'usr/' (which may cause a
-problem when joined to a path beginning '/include')
 
-I've managed to prevent this error by adding a line to the
-do_configure() function in vlc.inc which removes these double
-forward-slashes. I can send a patch in for this but I'm not sure if it
-is the best fix. I think it would be better to find the original
-source for these bad paths but I'm a bit stuck on where to look. The
-file vlc-config is generated from vlc-config.in when configure is ran
-I've grepped through everything and not found similar paths in any
-other files.
+Op 3 apr. 2013 om 21:34 heeft Philip Balister <philip@balister.org> het volg=
+ende geschreven:
 
-Any advice or shall I send in the patch I have?
+> On 04/03/2013 02:38 PM, Koen Kooi wrote:
+>> Op 03-04-13 18:50, Carlos Rafael Giani schreef:
+>>=20
+>> Just like https://github.com/naguirre/meta-cubox you're mixing
+>> DISTRO policy in the machine files by setting the tuning to
+>> hardfloat. Don't do that. If you want hardfloat, set that in your
+>> distro config, not in your machine config.
+>=20
+> This keeps coming up, but I do not see an answer that works for people
+> creating BSP's that work with just oe-core and a BSP layer.
+>=20
+> How are we supposed to set TUNE parameters for this case? And yes,
+> this case *must* produce useful output.
 
---
-Paul Barker
+Local.conf
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+
+
+>=20
+> Philip
+>=20
+>=20
+>>=20
+>>=20
+>> _______________________________________________ Openembedded-devel
+>> mailing list Openembedded-devel@lists.openembedded.org=20
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>=20
+>>=20
+>>=20
 
 
