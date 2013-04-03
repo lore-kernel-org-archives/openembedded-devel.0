@@ -1,26 +1,25 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UNTIV-0004bQ-TT
+Received: from starfish.geekisp.com ([216.168.135.166])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1UNTj1-00054r-MK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 21:24:39 +0200
-Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 204E7EA040;
-	Wed,  3 Apr 2013 21:16:27 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 5112F6047C; Wed,  3 Apr 2013 21:07:29 +0200 (CEST)
-Date: Wed, 3 Apr 2013 21:07:29 +0200
-From: Apelete Seketeli <apelete@seketeli.net>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130403190728.GA5202@hermes>
-References: <cover.1364806552.git.apelete@seketeli.net>
-	<1596531.UkNzIxF3VC@helios>
+	Wed, 03 Apr 2013 21:52:06 +0200
+Received: (qmail 31607 invoked by uid 1003); 3 Apr 2013 19:34:51 -0000
+Received: from unknown (HELO ?192.168.1.125?)
+	(philip@opensdr.com@96.240.165.43)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	3 Apr 2013 19:34:50 -0000
+Message-ID: <515C8459.3080005@balister.org>
+Date: Wed, 03 Apr 2013 15:34:49 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
 MIME-Version: 1.0
-In-Reply-To: <1596531.UkNzIxF3VC@helios>
-X-Operating-System: Debian GNU/Linux 7.0
-X-URL: http://www.seketeli.net/~apelete
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH 0/2] Pull request 20130401
+To: openembedded-devel@lists.openembedded.org
+References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
+In-Reply-To: <kjhsve$nqm$1@ger.gmane.org>
+X-Enigmail-Version: 1.5.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 19:24:40 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Apr 2013 19:52:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Le 03-Apr-13, Paul Eggleton a =E9crit:
-> On Monday 01 April 2013 11:13:24 Apelete Seketeli wrote:
-> > The patches that come as a follow-up of this message add machine
-> > support for Qi-Hardware's Ben Nanonote handheld.
-> > The recipes were imported from "oe-classic" and fixed to comply to th=
-e
-> > rules in oe-core. This work is intended to be used by the JLime
-> > distribution which is being ported to oe-core.
-> >=20
-> > The modifications are done on top of the master branch in the
-> > meta-handheld layer.
-> > Please pull into the meta-handheld layer.
-> >=20
-> > The following changes since commit a268810f7c2c1f13e01cc02bcddc23c461=
-18551d:
-> >=20
-> >   linux-yocto-tiny-kexecboot: add patch fixing mtd on SL-C3200 (2013-=
-03-20
-> > 09:23:00 +0000)
-> >=20
-> > are available in the git repository at:
-> >=20
-> >   git://seketeli.fr/~apelete/meta-handheld.git add-nanonote
-> >=20
-> > Apelete Seketeli (2):
-> >   ben-nanonote: import ben-nanonote machine support
-> >   ben-nanonote: clean machine conf according to oe-core rules
->=20
-> Merged these two squashed into commit (as discussed on IRC) - thanks!
->=20
-> FYI you may be able to consider a switch away from kdrive since xorg is=
- a lot=20
-> slimmer these days and is actually maintained, but I'll leave that up t=
-o you.
+On 04/03/2013 02:38 PM, Koen Kooi wrote:
+> Op 03-04-13 18:50, Carlos Rafael Giani schreef:
+> 
+> Just like https://github.com/naguirre/meta-cubox you're mixing
+> DISTRO policy in the machine files by setting the tuning to
+> hardfloat. Don't do that. If you want hardfloat, set that in your
+> distro config, not in your machine config.
+> 
 
-Thanks for the merge, I will consider xorg when the time comes (still
-got a lot of work before getting JLime to build on oe-core).
+This keeps coming up, but I do not see an answer that works for people
+creating BSP's that work with just oe-core and a BSP layer.
 
-Cheers.
---=20
-        Apelete
+How are we supposed to set TUNE parameters for this case? And yes,
+this case *must* produce useful output.
+
+Philip
+
+
+> 
+> 
+> _______________________________________________ Openembedded-devel
+> mailing list Openembedded-devel@lists.openembedded.org 
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> 
+> 
 
 
