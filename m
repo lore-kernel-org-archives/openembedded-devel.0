@@ -1,30 +1,27 @@
-Received: from ptmx.org ([178.63.28.110])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@pseudoterminal.org>) id 1UNWl8-0000QF-Sm
+Received: from sanddollar.geekisp.com ([216.168.135.167])
+	by linuxtogo.org with smtp (Exim 4.72)
+	(envelope-from <philip@balister.org>) id 1UNWo9-0000Wm-65
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 01:06:26 +0200
-Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 32B542127C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Apr 2013 00:49:17 +0200 (CEST)
-Message-ID: <515CB1ED.9080400@pseudoterminal.org>
-Date: Thu, 04 Apr 2013 00:49:17 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+	Thu, 04 Apr 2013 01:09:33 +0200
+Received: (qmail 1893 invoked by uid 1003); 3 Apr 2013 22:52:20 -0000
+Received: from unknown (HELO ?192.168.1.125?)
+	(philip@opensdr.com@96.240.175.73)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	3 Apr 2013 22:52:20 -0000
+Message-ID: <515CB2A3.3080100@balister.org>
+Date: Wed, 03 Apr 2013 18:52:19 -0400
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
 	<515C8459.3080005@balister.org>
-	<FF0E3122-75E0-47DF-978E-CF9982B94B64@dominion.thruhere.net>
-	<515C8C04.3040904@balister.org>
-	<4A3AFD82-E315-40D4-B21E-4E3005CBE86D@dominion.thruhere.net>
-	<515C95F5.3080705@pseudoterminal.org>
-	<CAP9ODKrKkqBQ8BduoazZ+xj8U09yWAnUoGBR=P_bN_dY-q0SbQ@mail.gmail.com>
-	<1E8177FC-75D6-4877-A3F3-12678E7505BF@gmail.com>
-	<515CAD3B.4090809@pseudoterminal.org>
-	<CA+chaQf3TKFEH+N5=ZapLoEPYaUs69tVmBxd7c-sLfLBENxxFQ@mail.gmail.com>
-In-Reply-To: <CA+chaQf3TKFEH+N5=ZapLoEPYaUs69tVmBxd7c-sLfLBENxxFQ@mail.gmail.com>
+	<CAP9ODKpRFNN6EP74C+YN2=uN_hRa1BTwz4CHUcUazCQQWKV9dg@mail.gmail.com>
+In-Reply-To: <CAP9ODKpRFNN6EP74C+YN2=uN_hRa1BTwz4CHUcUazCQQWKV9dg@mail.gmail.com>
+X-Enigmail-Version: 1.5.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,25 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 23:06:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 03 Apr 2013 23:09:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 2013-04-04 00:40, Martin Jansa wrote:
-> Yes that looks correct, you can also find this thread
-> http://patches.openembedded.org/patch/37055/ interesting (better on other
-> archive, but linuxtogo is down now).
->
-> Unfortunately that RFC was rejected, so DISTROs have to hardcode list of
-> supported MACHINEs and their defaulttunes, SHR does the same in:
-> https://github.com/shr-distribution/meta-smartphone/blob/shr/meta-shr/conf/distro/include/defaulttunes.inc
->
->
-> On Thu, Apr 4, 2013 at 12:29 AM, Carlos Rafael Giani
-> <dv@pseudoterminal.org>wrote:
->
->
+On 04/03/2013 05:43 PM, Otavio Salvador wrote:
+> On Wed, Apr 3, 2013 at 4:34 PM, Philip Balister <philip@balister.org> wrote:
+>> On 04/03/2013 02:38 PM, Koen Kooi wrote:
+>>> Op 03-04-13 18:50, Carlos Rafael Giani schreef:
+>>>
+>>> Just like https://github.com/naguirre/meta-cubox you're mixing
+>>> DISTRO policy in the machine files by setting the tuning to
+>>> hardfloat. Don't do that. If you want hardfloat, set that in your
+>>> distro config, not in your machine config.
+>>>
+>>
+>> This keeps coming up, but I do not see an answer that works for people
+>> creating BSP's that work with just oe-core and a BSP layer.
+>>
+>> How are we supposed to set TUNE parameters for this case? And yes,
+>> this case *must* produce useful output.
+> 
+> I don't think TUNE is a distro thing. It is indeed a board setting and
+> I expect every board to have a good know TUNE setting.
 
-Okay, I removed DEFAULTTUNE from the machine conf and updated the readme.
+The problem is if you are building for several machines, you may want to
+force the same tune settings for several machines that are different
+from what the BSP owner "declared" the default to be. Otherwise all
+packages become per machine.
+
+Philip
+
+> 
+> --
+> Otavio Salvador                             O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
 
 
