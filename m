@@ -1,25 +1,24 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from dd19416.kasserver.com ([85.13.139.185])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UNRaO-0000zt-13
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1UNRue-0001qT-N6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 19:35:00 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 03 Apr 2013 10:17:36 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,402,1363158000"; d="scan'208";a="313114306"
-Received: from unknown (HELO helios.localnet) ([10.255.13.159])
-	by fmsmga001.fm.intel.com with ESMTP; 03 Apr 2013 10:17:27 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Apelete Seketeli <apelete@seketeli.net>
-Date: Wed, 03 Apr 2013 18:17:26 +0100
-Message-ID: <1596531.UkNzIxF3VC@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
-In-Reply-To: <cover.1364806552.git.apelete@seketeli.net>
-References: <cover.1364806552.git.apelete@seketeli.net>
+	Wed, 03 Apr 2013 19:55:56 +0200
+Received: from [127.0.0.1] (blfd-5d8209e0.pool.mediaWays.net [93.130.9.224])
+	by dd19416.kasserver.com (Postfix) with ESMTPSA id 53C011840761
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Apr 2013 19:38:46 +0200 (CEST)
+Message-ID: <515C6924.5000600@herbrechtsmeier.net>
+Date: Wed, 03 Apr 2013 19:38:44 +0200
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130215 Thunderbird/17.0.3
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH 0/2] Pull request 20130401
+To: openembedded-devel@lists.openembedded.org
+References: <1364997019-23273-1-git-send-email-stefan@herbrechtsmeier.net>
+	<24CFFAEA-7DF1-44A1-88E3-3CA2DE01D70C@gmail.com>
+	<kjheov$259$1@ger.gmane.org>
+In-Reply-To: <kjheov$259$1@ger.gmane.org>
+Subject: Re: [meta-oe][PATCH] cryptsetup: Update to latest version and use openssl as crypto backend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,45 +32,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 17:35:00 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 03 Apr 2013 17:55:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Monday 01 April 2013 11:13:24 Apelete Seketeli wrote:
-> The patches that come as a follow-up of this message add machine
-> support for Qi-Hardware's Ben Nanonote handheld.
-> The recipes were imported from "oe-classic" and fixed to comply to the
-> rules in oe-core. This work is intended to be used by the JLime
-> distribution which is being ported to oe-core.
-> 
-> The modifications are done on top of the master branch in the
-> meta-handheld layer.
-> Please pull into the meta-handheld layer.
-> 
-> The following changes since commit a268810f7c2c1f13e01cc02bcddc23c46118551d:
-> 
->   linux-yocto-tiny-kexecboot: add patch fixing mtd on SL-C3200 (2013-03-20
-> 09:23:00 +0000)
-> 
-> are available in the git repository at:
-> 
->   git://seketeli.fr/~apelete/meta-handheld.git add-nanonote
-> 
-> Apelete Seketeli (2):
->   ben-nanonote: import ben-nanonote machine support
->   ben-nanonote: clean machine conf according to oe-core rules
+Am 03.04.2013 16:36, schrieb Koen Kooi:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 03-04-13 16:17, Khem Raj schreef:
+>> Stefan
+>>
+>> On Apr 3, 2013, at 6:50 AM, Stefan Herbrechtsmeier
+>> <stefan@herbrechtsmeier.net> wrote:
+>>
+>>> Cryptsetup with the command luksOpen failed with the error message:
+>>> device-mapper: status ioctl failed: Permission denied
+>>>
+>>> The error comes from libgcrypt with drops root privileges if it is
+>>> linked with libcap support [1]. Update cryptsetup to latest version and
+>>> change the crypto backend to openssl as libgcrypt states this behaviour
+>>> as a feature [2].
+>>>
+>>> The license was updated to GPLv2 with OpenSSL exception.
+>>>
+>>> [1] http://code.google.com/p/cryptsetup/issues/detail?id=47 [2]
+>>> https://bugs.g10code.com/gnupg/issue1181
+>>>
+>>> Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net> ---
+>>> .../recipes-support/cryptsetup/cryptsetup_1.1.3.bb |   18
+>>> -------------- .../recipes-support/cryptsetup/cryptsetup_1.6.1.bb |
+>>> 25 ++++++++++++++++++++ 2 files changed, 25 insertions(+), 18
+>>> deletions(-) delete mode 100644
+>>> meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb create mode
+>>> 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
+>>>
+>> would be nice if you use git format-patch -M ..
+Okay, use it for my next patch.
 
-Merged these two squashed into commit (as discussed on IRC) - thanks!
+>>> diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
+>>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb deleted file
+>>> mode 100644 index 254f563..0000000 ---
+>>> a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb +++ /dev/null
+>>> @@ -1,18 +0,0 @@ -DESCRIPTION = "Setup virtual encryption devices under
+>>> dm-crypt Linux" -HOMEPAGE = "http://code.google.com/p/cryptsetup/"
+>>> -SECTION = "console" -LICENSE = "GPLv2" -LIC_FILES_CHKSUM =
+>>> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" - -DEPENDS =
+>>> "util-linux lvm2 libgcrypt popt" -RRECOMMENDS_${PN} =
+>>> "kernel-module-aes \ -                     kernel-module-dm-crypt \ -
+>>> kernel-module-md5 \ -                     kernel-module-cbc \ -
+>>> kernel-module-sha256 \ -                    " -SRC_URI =
+>>> "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
+>>> -SRC_URI[md5sum] = "318a64470861ea5b92a52f2014f1e7c1"
+>>> -SRC_URI[sha256sum] =
+>>> "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e0602bf40208b5e69c0a" -
+>>> -inherit autotools gettext diff --git
+>>> a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
+>>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb new file mode
+>>> 100644 index 0000000..ade69f4 --- /dev/null +++
+>>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb @@ -0,0 +1,25
+>>> @@ +DESCRIPTION = "Setup virtual encryption devices under dm-crypt
+>>> Linux" +HOMEPAGE = "http://code.google.com/p/cryptsetup/" +SECTION =
+>>> "console" +LICENSE = "GPL-2.0-with-OpenSSL-exception" +LIC_FILES_CHKSUM
+>>> = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326" + +DEPENDS =
+>>> "util-linux lvm2 openssl popt" +RRECOMMENDS_${PN} =
+>>> "kernel-module-aes-generic \ +
+>>> kernel-module-dm-crypt \ +                     kernel-module-md5 \ +
+>>> kernel-module-cbc \ +                     kernel-module-sha256-generic
+>>> \ +                     " +
+> R* variables go below do_install
+I only keep the old format, but I will update the file to the Yocto 
+Style Guide.
 
-FYI you may be able to consider a switch away from kdrive since xorg is a lot 
-slimmer these days and is actually maintained, but I'll leave that up to you.
+>>> +PR = "r1"
+>> You can drop PR
+Okay
 
-Cheers,
-Paul
+>>> + +SRC_URI =
+>>> "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
+>>> +SRC_URI[md5sum] = "f374d11e3b0e7ca0f805756fd02e34ff"
+>>> +SRC_URI[sha256sum] =
+>>> "baf36e663c03eb6440482d91c486d61ed47ce5c9268ad04c18ca09082755149c" +
+>>> +inherit autotools gettext + +# Use openssl because libgcrypt drops
+>>> root privileges +# if libgcrypt is linked with libcap support
+>>> +EXTRA_OECONF = "--with-crypto_backend=openssl"
+>>
+>> hmmmm, may be using packageconfig here would be better
+Should I then keep gcrypt as default or change it to openssl by default?
 
--- 
+>>
+>>> -- 1.7.9.5
+>>>
+>>>
+>>> _______________________________________________ Openembedded-devel
+>>> mailing list Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFRXD5mMkyGM64RGpERAlfJAJoDvwX/cgqRMISdDNg40VSsCf6v7gCeN/qe
+> KJRsc0sM5nBwWsopIzLkYGo=
+> =nvrs
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
