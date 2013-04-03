@@ -1,28 +1,37 @@
-Received: from sanddollar.geekisp.com ([216.168.135.167])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1UNWo9-0000Wm-65
+Received: from 17.mo3.mail-out.ovh.net ([87.98.178.58]
+	helo=mo3.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul@paulbarker.me.uk>) id 1UNaym-00040Y-Pc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 01:09:33 +0200
-Received: (qmail 1893 invoked by uid 1003); 3 Apr 2013 22:52:20 -0000
-Received: from unknown (HELO ?192.168.1.125?)
-	(philip@opensdr.com@96.240.175.73)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	3 Apr 2013 22:52:20 -0000
-Message-ID: <515CB2A3.3080100@balister.org>
-Date: Wed, 03 Apr 2013 18:52:19 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
-MIME-Version: 1.0
+	Thu, 04 Apr 2013 05:36:48 +0200
+Received: from mail417.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo3.mail-out.ovh.net (Postfix) with SMTP id 458C4FF88A3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Apr 2013 22:28:12 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 3 Apr 2013 22:11:11 +0200
+Received: from 94-192-12-83.zone6.bethere.co.uk (HELO
+	b5-server.betafive.co.uk) (paul@betafive.co.uk@94.192.12.83)
+	by ns0.ovh.net with SMTP; 3 Apr 2013 22:11:10 +0200
+Received: from b5-vm-mint0.betafive.co.uk (unknown [192.168.0.229])
+	by b5-server.betafive.co.uk (Postfix) with ESMTP id 820681600F1;
+	Wed,  3 Apr 2013 21:10:51 +0100 (BST)
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
-	<515C8459.3080005@balister.org>
-	<CAP9ODKpRFNN6EP74C+YN2=uN_hRa1BTwz4CHUcUazCQQWKV9dg@mail.gmail.com>
-In-Reply-To: <CAP9ODKpRFNN6EP74C+YN2=uN_hRa1BTwz4CHUcUazCQQWKV9dg@mail.gmail.com>
-X-Enigmail-Version: 1.5.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: New meta-cubox layer
+X-Ovh-Mailout: 178.32.228.3 (mo3.mail-out.ovh.net)
+Date: Wed,  3 Apr 2013 21:11:13 +0100
+Message-Id: <1365019873-30178-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.7.10.4
+X-Ovh-Tracer-Id: 10150550610943445321
+X-Ovh-Remote: 94.192.12.83 (94-192-12-83.zone6.bethere.co.uk)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeiuddrleduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeiuddrleduucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Subject: [meta-oe][PATCH] fbset: Replace deprecated update-alternatives syntax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,48 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 23:09:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Apr 2013 03:36:48 -0000
 
-On 04/03/2013 05:43 PM, Otavio Salvador wrote:
-> On Wed, Apr 3, 2013 at 4:34 PM, Philip Balister <philip@balister.org> wrote:
->> On 04/03/2013 02:38 PM, Koen Kooi wrote:
->>> Op 03-04-13 18:50, Carlos Rafael Giani schreef:
->>>
->>> Just like https://github.com/naguirre/meta-cubox you're mixing
->>> DISTRO policy in the machine files by setting the tuning to
->>> hardfloat. Don't do that. If you want hardfloat, set that in your
->>> distro config, not in your machine config.
->>>
->>
->> This keeps coming up, but I do not see an answer that works for people
->> creating BSP's that work with just oe-core and a BSP layer.
->>
->> How are we supposed to set TUNE parameters for this case? And yes,
->> this case *must* produce useful output.
-> 
-> I don't think TUNE is a distro thing. It is indeed a board setting and
-> I expect every board to have a good know TUNE setting.
+Building fbset gave the following warning:
 
-The problem is if you are building for several machines, you may want to
-force the same tune settings for several machines that are different
-from what the BSP owner "declared" the default to be. Otherwise all
-packages become per machine.
+	WARNING: fbset: Use of ALTERNATIVE_NAME is deprecated, see
+		update-alternatives.bbclass for more info.
 
-Philip
+update-alternatives.bbclass states that this warning will eventually become an
+error so this is worth fixing.
 
-> 
-> --
-> Otavio Salvador                             O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
+The use of deprecated syntax is replaced with current syntax to do the same
+thing. To test that this works, a .deb package was created and the post-install
+script was checked to ensure that update-alternatives would be called with the
+exact same arguments as it was by the script generated by the old recipe.
+
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ meta-oe/recipes-support/fbset/fbset_2.1.bb |   10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/meta-oe/recipes-support/fbset/fbset_2.1.bb b/meta-oe/recipes-support/fbset/fbset_2.1.bb
+index 12c1c94..9fe2728 100644
+--- a/meta-oe/recipes-support/fbset/fbset_2.1.bb
++++ b/meta-oe/recipes-support/fbset/fbset_2.1.bb
+@@ -27,12 +27,10 @@ do_install() {
+         install -m 0644 ${WORKDIR}/${P}/*.8 ${D}${datadir}/man/man8
+ }
+ 
+-ALTERNATIVE_NAME = "fbset"
+-ALTERNATIVE_LINK = "${sbindir}/${ALTERNATIVE_NAME}"
+-ALTERNATIVE_PATH = "${sbindir}/fbset.real"
+-ALTERNATIVE_PRIORITY = "55"
+-
+-
++ALTERNATIVE_fbset = "fbset"
++ALTERNATIVE_LINK_NAME[fbset] = "${sbindir}/fbset"
++ALTERNATIVE_TARGET[fbset] = "${sbindir}/fbset.real"
++ALTERNATIVE_PRIORITY[fbset] = "55"
+ 
+ SRC_URI[md5sum] = "40ed9608f46d787bfb65fd1269f7f459"
+ SRC_URI[sha256sum] = "517fa062d7b2d367f931a1c6ebb2bef84907077f0ce3f0c899e34490bbea9338"
+-- 
+1.7.10.4
+
 
 
