@@ -1,20 +1,24 @@
-Received: from ptmx.org ([178.63.28.110])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@pseudoterminal.org>) id 1UNRAG-0007rc-I6
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UNRVQ-0000fb-36
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 19:08:02 +0200
-Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 031FE20C7F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2013 18:50:45 +0200 (CEST)
-Message-ID: <515C5DE6.6040702@pseudoterminal.org>
-Date: Wed, 03 Apr 2013 18:50:46 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
-MIME-Version: 1.0
+	Wed, 03 Apr 2013 19:29:52 +0200
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 03 Apr 2013 10:12:39 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,402,1363158000"; d="scan'208";a="288870694"
+Received: from unknown (HELO helios.localnet) ([10.255.13.159])
+	by orsmga001.jf.intel.com with ESMTP; 03 Apr 2013 10:12:38 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: New meta-cubox layer
+Date: Wed, 03 Apr 2013 18:12:37 +0100
+Message-ID: <2628772.BzK2nQghDU@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
+In-Reply-To: <1364783617-29850-1-git-send-email-jackie.huang@windriver.com>
+References: <1364783617-29850-1-git-send-email-jackie.huang@windriver.com>
+MIME-Version: 1.0
+Subject: Re: [meta-webserver][PATCH] modphp: use libdir instead of baselib to load module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,26 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 17:08:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Apr 2013 17:29:54 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+On Monday 01 April 2013 10:33:37 jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+> 
+> When we change the apache2 files layout to debian style,
+> the ServerRoot in httpd.conf was changed to "/" from "/usr",
+> then the relative path to libphp5 module in 70_mod_php5.conf
+> will be invalid so it fails to load the module, use libdir
+> (absolute path) instead so it will always find the module.
+> 
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-webserver/recipes-php/modphp/modphp5.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc
+> b/meta-webserver/recipes-php/modphp/modphp5.inc index c359ff9..33dbe89
+> 100644
+> --- a/meta-webserver/recipes-php/modphp/modphp5.inc
+> +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
+> @@ -67,7 +67,7 @@ do_install  () {
+>  	install -d ${D}${sysconfdir}/apache2/modules.d
+>  	install -d ${D}${sysconfdir}/php/apache2-php5
+>  	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
+> -	sed -i s,lib/,${baselib}/, ${WORKDIR}/70_mod_php5.conf
+> +	sed -i s,lib/,${libdir}/, ${WORKDIR}/70_mod_php5.conf
+>  	install -m 644  ${WORKDIR}/70_mod_php5.conf
+> ${D}${sysconfdir}/apache2/modules.d cat ${S}/php.ini-production | \
+>  		sed -e 's,extension_dir = \"\./\",extension_dir =
+> \"/usr/lib/extensions\",' \
 
-I have created a BSP layer for the SolidRun Cubox platform. Informations about this device can be found athttp://solid-run.com/cubox  .
-The layer itself is hosted athttps://github.com/dv1/meta-cubox  .
+Merged, thanks!
 
-This layer introduces a new machine, new tunes for the CuBox' Marvell PJ4 processor, in addition to the platform specific recipes for hardware video acceleration and EGL,OpenGL ES,OpenVG support. Both hardfp and softfp are supported.
-The 3D accelerator and the hardware accelerated video engine (called vMeta) require some closed source components. The recipes pick the right ones depending on whether softpfp or hardfp is used.
+Cheers,
+Paul
 
-It also copies the generated uImage into the rootfs (as expected by the bootloader), and autogenerates a boot.scr out of an included boot script using uboot-mkimage.
-The resulting tarball is extracted on an SD card, and the device can be booted.
+-- 
 
-A new xorg driver and a customized xorg.conf are included.
-
-I'm open to feedback, patches, suggestions.
-
-Thanks
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
