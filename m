@@ -1,18 +1,29 @@
-Received: from dd19416.kasserver.com ([85.13.139.185])
+Received: from mail-ve0-f171.google.com ([209.85.128.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1UNOVU-0006k2-DA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 16:17:44 +0200
-Received: from localhost.localdomain (blfd-5d8209e0.pool.mediaWays.net
-	[93.130.9.224])
-	by dd19416.kasserver.com (Postfix) with ESMTPSA id E307F1840EAF;
-	Wed,  3 Apr 2013 15:50:45 +0200 (CEST)
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Apr 2013 15:50:19 +0200
-Message-Id: <1364997019-23273-1-git-send-email-stefan@herbrechtsmeier.net>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] cryptsetup: Update to latest version and use openssl as crypto backend
+	(envelope-from <schnitzeltony@googlemail.com>)
+	id 1UNOXT-0006on-O5; Wed, 03 Apr 2013 16:19:47 +0200
+Received: by mail-ve0-f171.google.com with SMTP id b10so1727738vea.30
+	for <multiple recipients>; Wed, 03 Apr 2013 07:02:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type; bh=oT+k3/maL+b8N5iOZFQ7NVoXllJ+hFDd3W8rJU+GT+0=;
+	b=wSim8VMNY6NnhbJIsBs0kVBVMib8N002KHX0rPRQOV/2xo1TJ6SeS0wrhPp6TXqHYC
+	gUP0GhFGmXYxZSFlGn4AxAtcDqwp575EoQV/HZJkWG6IvSJbu5JDBEQuXkhjf0hzWX5K
+	F0Nq9leYAN6rw1niem6y4QL5WivXLXn8IaNXe0PjhExOI9Gn+FauvklqkqcT3VxgmMvK
+	n+cvBnH08wN813d2ElgnStit9B93d3ge1Ybfj0G+lW777CVhUicAHYiLpCG0scldyiJO
+	L+nRLb6Dnl0G83fYI5vkLbCrdhL8a9lrPag6istm1T93x26sIR4jLC8irfKYVwSchXEV
+	2GCA==
+MIME-Version: 1.0
+X-Received: by 10.58.50.7 with SMTP id y7mr1310614ven.24.1364997755974; Wed,
+	03 Apr 2013 07:02:35 -0700 (PDT)
+Received: by 10.52.185.168 with HTTP; Wed, 3 Apr 2013 07:02:35 -0700 (PDT)
+Date: Wed, 3 Apr 2013 16:02:35 +0200
+Message-ID: <CALbNGRSj7uahrGy1DoSe5zJasciTf2Q7j1xj5N8V-cs_WOW+4g@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core@lists.openembedded.org
+Subject: experiences with images based on current layer heads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,86 +37,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 14:17:44 -0000
+X-List-Received-Date: Wed, 03 Apr 2013 14:19:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Cryptsetup with the command luksOpen failed with the error message:
-device-mapper: status ioctl failed: Permission denied
+Hi,
 
-The error comes from libgcrypt with drops root privileges if it is
-linked with libcap support [1]. Update cryptsetup to latest version
-and change the crypto backend to openssl as libgcrypt states this
-behaviour as a feature [2].
+when migration of systemd to oe-core turned to unbuildable I decided
+to freeze my images and stopped further tests. Now that many issues
+were fixed and we are close to another release I built my standard
+xfce-based image based on latest layer HEADs. With this I face some
+issues which I would like to share:
 
-The license was updated to GPLv2 with OpenSSL exception.
+1. X sessions crash with OOM. This is reproducible by opening
+google-maps with midori and changing to satellite view. In
+Xorg.0.log.old I see only
 
-[1] http://code.google.com/p/cryptsetup/issues/detail?id=47
-[2] https://bugs.g10code.com/gnupg/issue1181
+| (EE)
+| (EE) Backtrace:
+| (EE)
+| (EE) Segmentation fault at address 0x9
+| (EE) BUG: triggered 'if (inSignalContext)'
+| (EE) BUG: log.c:502 in LogVMessageVerb()
+| (EE) Warning: attempting to log data in a signal unsafe manner while
+in signal context.
+| Please update to check inSignalContext and/or use
+LogMessageVerbSigSafe() or ErrorFSigSafe().
+| The offending log format message is:
+|
+| Fatal server error:
+|
+| (EE)
+| (EE) Backtrace:
+| (EE)
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
----
- .../recipes-support/cryptsetup/cryptsetup_1.1.3.bb |   18 --------------
- .../recipes-support/cryptsetup/cryptsetup_1.6.1.bb |   25 ++++++++++++++++++++
- 2 files changed, 25 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
- create mode 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
+With old images only the process causing OOM were stopped. I did not
+fully cross check but I have the feeling that OOM appears much much
+more often than with old images. Sometimes x- session is closed
+without opening an additional application.
 
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
-deleted file mode 100644
-index 254f563..0000000
---- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--DESCRIPTION = "Setup virtual encryption devices under dm-crypt Linux"
--HOMEPAGE = "http://code.google.com/p/cryptsetup/"
--SECTION = "console"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--DEPENDS = "util-linux lvm2 libgcrypt popt"
--RRECOMMENDS_${PN} = "kernel-module-aes \
--                     kernel-module-dm-crypt \
--                     kernel-module-md5 \
--                     kernel-module-cbc \
--                     kernel-module-sha256 \
--                    "
--SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
--SRC_URI[md5sum] = "318a64470861ea5b92a52f2014f1e7c1"
--SRC_URI[sha256sum] = "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e0602bf40208b5e69c0a"
--
--inherit autotools gettext
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
-new file mode 100644
-index 0000000..ade69f4
---- /dev/null
-+++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
-@@ -0,0 +1,25 @@
-+DESCRIPTION = "Setup virtual encryption devices under dm-crypt Linux"
-+HOMEPAGE = "http://code.google.com/p/cryptsetup/"
-+SECTION = "console"
-+LICENSE = "GPL-2.0-with-OpenSSL-exception"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
-+
-+DEPENDS = "util-linux lvm2 openssl popt"
-+RRECOMMENDS_${PN} = "kernel-module-aes-generic \
-+                     kernel-module-dm-crypt \
-+                     kernel-module-md5 \
-+                     kernel-module-cbc \
-+                     kernel-module-sha256-generic \
-+                     "
-+
-+PR = "r1"
-+
-+SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "f374d11e3b0e7ca0f805756fd02e34ff"
-+SRC_URI[sha256sum] = "baf36e663c03eb6440482d91c486d61ed47ce5c9268ad04c18ca09082755149c"
-+
-+inherit autotools gettext
-+
-+# Use openssl because libgcrypt drops root privileges
-+# if libgcrypt is linked with libcap support
-+EXTRA_OECONF = "--with-crypto_backend=openssl"
--- 
-1.7.9.5
+2. Something with udisks/gvfs/thunar-volman seems broken. When
+auto-mounting, the partitions cannot be mounted by label-name. On
+plugging a memory stick I see in kernel log
 
+| VFS: could not find a valid V7 on sda.
+
+Same kernel works properly with old images.
+
+3. dhclient.service does not start (this has never worked):
+
+root@overo:~# systemctl status dhclient.service
+dhclient.service - Dynamic Host Configuration Protocol (DHCP)
+          Loaded: loaded (/lib/systemd/system/dhclient.service; enabled)
+          Active: failed (Result: resources) since Sat 2000-01-01
+00:58:02 UTC; 7min ago
+         Process: 177 ExecStart=/sbin/dhclient -cf
+/etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases
+$INTERFACES (code=exited, status=0/SUCCESS)
+
+Jan 01 00:58:01 overo systemd[1]: Starting Dynamic Host Configuration
+Protocol (DHCP)...
+Jan 01 00:58:02 overo systemd[1]: PID file /var/run/dhclient.pid not
+readable (yet?) after start.
+
+I wonder what happens to networkmanager once this autostart will work...
+
+will test further...
+
+Andreas
 
 
