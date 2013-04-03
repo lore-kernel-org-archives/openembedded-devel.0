@@ -1,25 +1,35 @@
-Received: from ptmx.org ([178.63.28.110])
+Received: from mail-ob0-f182.google.com ([209.85.214.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@pseudoterminal.org>) id 1UNUte-0006pv-S0
+	(envelope-from <otavio.salvador@gmail.com>) id 1UNVjR-0007f3-8w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 23:07:06 +0200
-Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 3AE641FF85
+	Thu, 04 Apr 2013 00:00:37 +0200
+Received: by mail-ob0-f182.google.com with SMTP id ef5so1881490obb.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2013 22:49:57 +0200 (CEST)
-Message-ID: <515C95F5.3080705@pseudoterminal.org>
-Date: Wed, 03 Apr 2013 22:49:57 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+	Wed, 03 Apr 2013 14:43:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=ZwVf3SRHG6kmFfjVtnmlaao3hJsTWc5Vk5ghxbhN+Z0=;
+	b=fOK2z+lSXvUT61omzXoVDHnpVyDM2SqE3EYwFOcopolR2O6ducivke3NPeXCKkYTNb
+	ojGtpvKdafz8OX0GBo1J7a9hy3FBJJBkjhzRwcQfP5PWDv+7AphFPUQA480Amdra+mnV
+	lSYrlH3yxpvJLv561TS7a7ob0tK93DqJUuU6cfFLcopexLZoE0HCIGMwPSUBbi8ljb82
+	Qn9wxRUcvv1EXEcZXxDS3CtEbz9hKDhJoJTKHyON5i7ktoAnl6Gv1M612ql7GJRYAniG
+	lQ/ALaohCCyDFEq7tj6Dul/28+dAAjGvn32bUvD32S9Bmq95iDt+selKiFRle615bZpb
+	RFkw==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.60.63.73 with SMTP id e9mr2255287oes.87.1365025404864; Wed,
+	03 Apr 2013 14:43:24 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.80.198 with HTTP; Wed, 3 Apr 2013 14:43:24 -0700 (PDT)
+In-Reply-To: <515C8459.3080005@balister.org>
 References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
 	<515C8459.3080005@balister.org>
-	<FF0E3122-75E0-47DF-978E-CF9982B94B64@dominion.thruhere.net>
-	<515C8C04.3040904@balister.org>
-	<4A3AFD82-E315-40D4-B21E-4E3005CBE86D@dominion.thruhere.net>
-In-Reply-To: <4A3AFD82-E315-40D4-B21E-4E3005CBE86D@dominion.thruhere.net>
+Date: Wed, 3 Apr 2013 18:43:24 -0300
+X-Google-Sender-Auth: 5B5UmLBQvUEvuSaGOvfXssGmVDs
+Message-ID: <CAP9ODKpRFNN6EP74C+YN2=uN_hRa1BTwz4CHUcUazCQQWKV9dg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
 Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,35 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 21:07:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Apr 2013 22:00:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Okay, I think I see the problem now. DEFAULTTUNES should not be set by 
-the machine config. So, removing it
-and fixing the README accordingly takes care of that. People who for 
-example want hardfp then
-set DEFAULTTUNE ?= "marvellpj4hf" in their local.conf . Is this correct?
+On Wed, Apr 3, 2013 at 4:34 PM, Philip Balister <philip@balister.org> wrote:
+> On 04/03/2013 02:38 PM, Koen Kooi wrote:
+>> Op 03-04-13 18:50, Carlos Rafael Giani schreef:
+>>
+>> Just like https://github.com/naguirre/meta-cubox you're mixing
+>> DISTRO policy in the machine files by setting the tuning to
+>> hardfloat. Don't do that. If you want hardfloat, set that in your
+>> distro config, not in your machine config.
+>>
+>
+> This keeps coming up, but I do not see an answer that works for people
+> creating BSP's that work with just oe-core and a BSP layer.
+>
+> How are we supposed to set TUNE parameters for this case? And yes,
+> this case *must* produce useful output.
 
-On 2013-04-03 22:19, Koen Kooi wrote:
->
->>> Local.conf
->> Fail. This means BSP providers are depending on users to do the right thing.
-> "The right thing"? Is forcing RPM package management "the right thing"? Is moving DEPLOY_DIR "the right thing"?
->
->> The BSP should be able to say what it wants
-> For MACHINE settings yes, for DISTRO settings, no
->
->> and a distro layer needs to
->> override the BSP choice for distributions providing binaries for
->> multiple machines.
-> DISTRO settings in a BSP violates the Yocto Compatible rules as well as the established OE rules, I don't see why that should get changed.
->
-> In this specific case, a BSP can set COMPATIBLE_HOST on the recipes that need to be hardfloat.
->
-> In OE classic we had an ABI flag to set this globally, in OE-core the powers that be force us to set a tune per machine in the DISTRO config. The price of progress I guess.
->
->
+I don't think TUNE is a distro thing. It is indeed a board setting and
+I expect every board to have a good know TUNE setting.
 
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
