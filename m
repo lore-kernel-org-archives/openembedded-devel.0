@@ -1,35 +1,33 @@
-Received: from mail-ve0-f170.google.com ([209.85.128.170])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UNSpX-0003bF-3a
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 20:54:43 +0200
-Received: by mail-ve0-f170.google.com with SMTP id 15so1976964vea.1
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UNSqo-0003jP-6v for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Apr 2013 20:56:02 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UNSaa-0003s7-DC for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Apr 2013 20:39:16 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Apr 2013 20:39:16 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2013 11:37:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=yBu3FpDbHROuhBF0+t0eSotSc/M5+ujJ0R+ylfK3aMM=;
-	b=j4jkPyuBO2HTvJjWOHKgkVeKVgL5gEHhIqDNXVXSHv74gakF6d+VnjnRbsOWek4CSC
-	67xd42zFdOWyrHtU0dB2ocYkGQJvOk9RtewZ+nGYj8x0VBYzxImq+bP6bMynT0V2ya3m
-	CGESefwohUBLAXzVzENUKqh/BRiv8ONem/R+431dyvfc3HiiVugoyApxFKhrdEb+XhIf
-	qtFWyaGJgfPHlYARr/ko7lDxG3ocs7Naf/d0CoMlRMhvn5m5cZZrTV9FEc+kUDA1Q9s6
-	3AeWo84ib7FOkQNFSQAQEY/S6JNYtk83jf5hMneXpq6/BgNNIFsLdhv0Hgj6Zh8TeUfi
-	TH3w==
-X-Received: by 10.58.161.6 with SMTP id xo6mr2155035veb.50.1365014250936; Wed,
-	03 Apr 2013 11:37:30 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.58.134.74 with HTTP; Wed, 3 Apr 2013 11:37:10 -0700 (PDT)
-In-Reply-To: <515C70E1.9000804@pseudoterminal.org>
+	Wed, 03 Apr 2013 20:39:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 03 Apr 2013 20:38:44 +0200
+Message-ID: <kjhsve$nqm$1@ger.gmane.org>
 References: <515C5DE6.6040702@pseudoterminal.org>
-	<CAJTo0LbZxyZxiQy6LQFwSruYtWwYvbet9=Trwbz+CAk168i2-w@mail.gmail.com>
-	<515C70E1.9000804@pseudoterminal.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 3 Apr 2013 19:37:10 +0100
-Message-ID: <CAJTo0La-bVEmF_+wdMd2ei_0GKrdJmsN+s4A7eRCkB_3KS_5Rw@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-X-Gm-Message-State: ALoCoQlK8YHs21vh0z+wwCQqzuWGiy1yqjx2XR3VJ++EQChJ2wMvAhDnEy51jMwmPKp47cfmPenf
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <515C5DE6.6040702@pseudoterminal.org>
+X-Enigmail-Version: 1.5
 Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,15 +42,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 18:54:43 -0000
+X-List-Received-Date: Wed, 03 Apr 2013 18:56:02 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 3 April 2013 19:11, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
-> Well, I have been told that New IT is a good source:
-> https://www.newit.co.uk/shop/proddetail.php?prod=CuBox
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-So it is, thanks!
+Op 03-04-13 18:50, Carlos Rafael Giani schreef:
+> Hello,
+> 
+> I have created a BSP layer for the SolidRun Cubox platform. Informations
+> about this device can be found athttp://solid-run.com/cubox  . The layer
+> itself is hosted athttps://github.com/dv1/meta-cubox  .
 
-Ross
+So how is this different from https://github.com/naguirre/meta-cubox ?
+
+> 
+> This layer introduces a new machine, new tunes for the CuBox' Marvell
+> PJ4 processor, in addition to the platform specific recipes for hardware
+> video acceleration and EGL,OpenGL ES,OpenVG support. Both hardfp and
+> softfp are supported. The 3D accelerator and the hardware accelerated
+> video engine (called vMeta) require some closed source components. The
+> recipes pick the right ones depending on whether softpfp or hardfp is
+> used.
+> 
+> It also copies the generated uImage into the rootfs (as expected by the 
+> bootloader), and autogenerates a boot.scr out of an included boot script
+> using uboot-mkimage. The resulting tarball is extracted on an SD card,
+> and the device can be booted.
+> 
+> A new xorg driver and a customized xorg.conf are included.
+> 
+> I'm open to feedback, patches, suggestions.
+
+Just like https://github.com/naguirre/meta-cubox you're mixing DISTRO policy
+in the machine files by setting the tuning to hardfloat. Don't do that. If
+you want hardfloat, set that in your distro config, not in your machine config.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRXHc0MkyGM64RGpERAmezAJwPD4r3W/6qY5wnDCY2xh6hQTGGDQCeK5sL
+h33NDHBAlEs2TyV+B6ajj5I=
+=F+fa
+-----END PGP SIGNATURE-----
+
 
 
