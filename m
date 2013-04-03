@@ -1,24 +1,37 @@
-Received: from dd19416.kasserver.com ([85.13.139.185])
+Received: from mail-pb0-f49.google.com ([209.85.160.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <stefan@herbrechtsmeier.net>) id 1UNRue-0001qT-N6
+	(envelope-from <raj.khem@gmail.com>) id 1UNS8U-0002Zf-By
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 19:55:56 +0200
-Received: from [127.0.0.1] (blfd-5d8209e0.pool.mediaWays.net [93.130.9.224])
-	by dd19416.kasserver.com (Postfix) with ESMTPSA id 53C011840761
+	Wed, 03 Apr 2013 20:10:14 +0200
+Received: by mail-pb0-f49.google.com with SMTP id um15so970425pbc.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Apr 2013 19:38:46 +0200 (CEST)
-Message-ID: <515C6924.5000600@herbrechtsmeier.net>
-Date: Wed, 03 Apr 2013 19:38:44 +0200
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130215 Thunderbird/17.0.3
-MIME-Version: 1.0
+	Wed, 03 Apr 2013 10:53:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=nvdD368US0yOBmWrIZjHxDvAAGWFvVyiD1jN4qGPhQo=;
+	b=MRbn2vOaGoNu/oSjltDPu89ccyWCl7nT8QLCsp7FhINZYPO/HnsbYWpLTzdtdbiQV2
+	aF5rLfBXEopcjVtEKud+erqjSrz7VvpUToZBhX2krS+A6b+hiO42cOYxirt2ai/ya3M+
+	BU1942mpvbWkdUryNx3LK9BJ6MM5brZVjvfOU3P8HCoUshYAHMxNQU/+bpsnxkvYy7aO
+	72dZxvT0emRjqR28lZuJASdu3hqwFTa9U9lZ3eYsm4SFNWGd+nhaT6UnBTEjcepc7X5C
+	wZVCcnozNhPNbi37mf8oeLPyhR5r4dlpAw134ZLjRPn+mhH30iNeytL5ozc9VOLffLm5
+	Z+Kw==
+X-Received: by 10.68.143.167 with SMTP id sf7mr4009986pbb.21.1365011582054;
+	Wed, 03 Apr 2013 10:53:02 -0700 (PDT)
+Received: from vspringer-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id qd8sm6802171pbc.29.2013.04.03.10.53.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 03 Apr 2013 10:53:01 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <515C5DE6.6040702@pseudoterminal.org>
+Date: Wed, 3 Apr 2013 10:52:59 -0700
+Message-Id: <35A30735-BA00-4711-8C20-453733BB9353@gmail.com>
+References: <515C5DE6.6040702@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1364997019-23273-1-git-send-email-stefan@herbrechtsmeier.net>
-	<24CFFAEA-7DF1-44A1-88E3-3CA2DE01D70C@gmail.com>
-	<kjheov$259$1@ger.gmane.org>
-In-Reply-To: <kjheov$259$1@ger.gmane.org>
-Subject: Re: [meta-oe][PATCH] cryptsetup: Update to latest version and use openssl as crypto backend
+X-Mailer: Apple Mail (2.1503)
+Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,111 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 17:55:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Apr 2013 18:10:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Am 03.04.2013 16:36, schrieb Koen Kooi:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Op 03-04-13 16:17, Khem Raj schreef:
->> Stefan
->>
->> On Apr 3, 2013, at 6:50 AM, Stefan Herbrechtsmeier
->> <stefan@herbrechtsmeier.net> wrote:
->>
->>> Cryptsetup with the command luksOpen failed with the error message:
->>> device-mapper: status ioctl failed: Permission denied
->>>
->>> The error comes from libgcrypt with drops root privileges if it is
->>> linked with libcap support [1]. Update cryptsetup to latest version and
->>> change the crypto backend to openssl as libgcrypt states this behaviour
->>> as a feature [2].
->>>
->>> The license was updated to GPLv2 with OpenSSL exception.
->>>
->>> [1] http://code.google.com/p/cryptsetup/issues/detail?id=47 [2]
->>> https://bugs.g10code.com/gnupg/issue1181
->>>
->>> Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net> ---
->>> .../recipes-support/cryptsetup/cryptsetup_1.1.3.bb |   18
->>> -------------- .../recipes-support/cryptsetup/cryptsetup_1.6.1.bb |
->>> 25 ++++++++++++++++++++ 2 files changed, 25 insertions(+), 18
->>> deletions(-) delete mode 100644
->>> meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb create mode
->>> 100644 meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
->>>
->> would be nice if you use git format-patch -M ..
-Okay, use it for my next patch.
 
->>> diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb
->>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb deleted file
->>> mode 100644 index 254f563..0000000 ---
->>> a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.1.3.bb +++ /dev/null
->>> @@ -1,18 +0,0 @@ -DESCRIPTION = "Setup virtual encryption devices under
->>> dm-crypt Linux" -HOMEPAGE = "http://code.google.com/p/cryptsetup/"
->>> -SECTION = "console" -LICENSE = "GPLv2" -LIC_FILES_CHKSUM =
->>> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" - -DEPENDS =
->>> "util-linux lvm2 libgcrypt popt" -RRECOMMENDS_${PN} =
->>> "kernel-module-aes \ -                     kernel-module-dm-crypt \ -
->>> kernel-module-md5 \ -                     kernel-module-cbc \ -
->>> kernel-module-sha256 \ -                    " -SRC_URI =
->>> "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
->>> -SRC_URI[md5sum] = "318a64470861ea5b92a52f2014f1e7c1"
->>> -SRC_URI[sha256sum] =
->>> "9c8e68a272f6d9cfb6cd65cc0743f4c44a2096c61f74e0602bf40208b5e69c0a" -
->>> -inherit autotools gettext diff --git
->>> a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb
->>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb new file mode
->>> 100644 index 0000000..ade69f4 --- /dev/null +++
->>> b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb @@ -0,0 +1,25
->>> @@ +DESCRIPTION = "Setup virtual encryption devices under dm-crypt
->>> Linux" +HOMEPAGE = "http://code.google.com/p/cryptsetup/" +SECTION =
->>> "console" +LICENSE = "GPL-2.0-with-OpenSSL-exception" +LIC_FILES_CHKSUM
->>> = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326" + +DEPENDS =
->>> "util-linux lvm2 openssl popt" +RRECOMMENDS_${PN} =
->>> "kernel-module-aes-generic \ +
->>> kernel-module-dm-crypt \ +                     kernel-module-md5 \ +
->>> kernel-module-cbc \ +                     kernel-module-sha256-generic
->>> \ +                     " +
-> R* variables go below do_install
-I only keep the old format, but I will update the file to the Yocto 
-Style Guide.
+On Apr 3, 2013, at 9:50 AM, Carlos Rafael Giani <dv@pseudoterminal.org> =
+wrote:
 
->>> +PR = "r1"
->> You can drop PR
-Okay
+> Hello,
+>=20
+> I have created a BSP layer for the SolidRun Cubox platform. =
+Informations about this device can be found athttp://solid-run.com/cubox =
+ .
+> The layer itself is hosted athttps://github.com/dv1/meta-cubox  .
+>=20
+> This layer introduces a new machine, new tunes for the CuBox' Marvell =
+PJ4 processor, in addition to the platform specific recipes for hardware =
+video acceleration and EGL,OpenGL ES,OpenVG support. Both hardfp and =
+softfp are supported.
+> The 3D accelerator and the hardware accelerated video engine (called =
+vMeta) require some closed source components. The recipes pick the right =
+ones depending on whether softpfp or hardfp is used.
+>=20
+> It also copies the generated uImage into the rootfs (as expected by =
+the bootloader), and autogenerates a boot.scr out of an included boot =
+script using uboot-mkimage.
+> The resulting tarball is extracted on an SD card, and the device can =
+be booted.
+>=20
+> A new xorg driver and a customized xorg.conf are included.
+>=20
+> I'm open to feedback, patches, suggestions.
 
->>> + +SRC_URI =
->>> "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
->>> +SRC_URI[md5sum] = "f374d11e3b0e7ca0f805756fd02e34ff"
->>> +SRC_URI[sha256sum] =
->>> "baf36e663c03eb6440482d91c486d61ed47ce5c9268ad04c18ca09082755149c" +
->>> +inherit autotools gettext + +# Use openssl because libgcrypt drops
->>> root privileges +# if libgcrypt is linked with libcap support
->>> +EXTRA_OECONF = "--with-crypto_backend=openssl"
->>
->> hmmmm, may be using packageconfig here would be better
-Should I then keep gcrypt as default or change it to openssl by default?
 
->>
->>> -- 1.7.9.5
->>>
->>>
->>> _______________________________________________ Openembedded-devel
->>> mailing list Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFRXD5mMkyGM64RGpERAlfJAJoDvwX/cgqRMISdDNg40VSsCf6v7gCeN/qe
-> KJRsc0sM5nBwWsopIzLkYGo=
-> =nvrs
-> -----END PGP SIGNATURE-----
->
->
+Carlos
+
+Thanks for doing this. Please add this to layer index here =
+http://layers.openembedded.org/layerindex/
+
+>=20
+> Thanks
+>=20
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
