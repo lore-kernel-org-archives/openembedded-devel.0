@@ -1,33 +1,21 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UNSqo-0003jP-6v for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 20:56:02 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UNSaa-0003s7-DC for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Apr 2013 20:39:16 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2013 20:39:16 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dv@pseudoterminal.org>) id 1UNTFg-0004WQ-0k
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Apr 2013 21:21:44 +0200
+Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 81A141FF85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Apr 2013 20:39:16 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  3 Apr 2013 21:04:34 +0200 (CEST)
+Message-ID: <515C7D42.6070303@pseudoterminal.org>
+Date: Wed, 03 Apr 2013 21:04:34 +0200
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 03 Apr 2013 20:38:44 +0200
-Message-ID: <kjhsve$nqm$1@ger.gmane.org>
-References: <515C5DE6.6040702@pseudoterminal.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <515C5DE6.6040702@pseudoterminal.org>
-X-Enigmail-Version: 1.5
+References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
+In-Reply-To: <kjhsve$nqm$1@ger.gmane.org>
 Subject: Re: New meta-cubox layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,52 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 18:56:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Apr 2013 19:21:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 2013-04-03 20:38, Koen Kooi wrote:
+> So how is this different from https://github.com/naguirre/meta-cubox ?
 
-Op 03-04-13 18:50, Carlos Rafael Giani schreef:
-> Hello,
-> 
-> I have created a BSP layer for the SolidRun Cubox platform. Informations
-> about this device can be found athttp://solid-run.com/cubox  . The layer
-> itself is hosted athttps://github.com/dv1/meta-cubox  .
+I am in contact with the author of that layer. My work started as a fork 
+of that, since the layer did not work for me, but since I anyway was 
+changing pretty much all of it from the ground up, I decided to start my 
+own. Now, covers more features of the CuBox, and supports both soft- and 
+hardfp in all recipes.
 
-So how is this different from https://github.com/naguirre/meta-cubox ?
+>
+> Just like https://github.com/naguirre/meta-cubox you're mixing DISTRO 
+> policy in the machine files by setting the tuning to hardfloat. Don't 
+> do that. If you want hardfloat, set that in your distro config, not in 
+> your machine config.
 
-> 
-> This layer introduces a new machine, new tunes for the CuBox' Marvell
-> PJ4 processor, in addition to the platform specific recipes for hardware
-> video acceleration and EGL,OpenGL ES,OpenVG support. Both hardfp and
-> softfp are supported. The 3D accelerator and the hardware accelerated
-> video engine (called vMeta) require some closed source components. The
-> recipes pick the right ones depending on whether softpfp or hardfp is
-> used.
-> 
-> It also copies the generated uImage into the rootfs (as expected by the 
-> bootloader), and autogenerates a boot.scr out of an included boot script
-> using uboot-mkimage. The resulting tarball is extracted on an SD card,
-> and the device can be booted.
-> 
-> A new xorg driver and a customized xorg.conf are included.
-> 
-> I'm open to feedback, patches, suggestions.
+Do I understand it correctly that I should drop "marvellpj4hf" from 
+https://github.com/dv1/meta-cubox/blob/master/conf/machine/include/tune-marvell-pj4.inc 
+, or at least not set it as DEFAULTTUNE, not even with the ?= operation, 
+and just use "marvellpj4" instead ? Because it is the distros decision 
+to add the "callconvention-hard" feature?
 
-Just like https://github.com/naguirre/meta-cubox you're mixing DISTRO policy
-in the machine files by setting the tuning to hardfloat. Don't do that. If
-you want hardfloat, set that in your distro config, not in your machine config.
+The reason I ask that is because when I was writing the tune, I stumbled 
+upon 
+https://github.com/openembedded/oe-core/blob/master/meta/conf/machine/include/arm/arch-armv7a.inc 
+, which includes armv7a, armv7ahf . This confuses me. Why is it OK there 
+to mix in the callconvention?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRXHc0MkyGM64RGpERAmezAJwPD4r3W/6qY5wnDCY2xh6hQTGGDQCeK5sL
-h33NDHBAlEs2TyV+B6ajj5I=
-=F+fa
------END PGP SIGNATURE-----
-
+Finally, is there a way to give a distro a "hint" about what is 
+preferred for a machine (soft/hardfp)? One that the distro is free to 
+ignore or respect?
 
 
