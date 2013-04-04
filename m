@@ -1,21 +1,23 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UNqo1-0006aM-61
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UNrDV-0007jr-1K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 22:31:08 +0200
+	Thu, 04 Apr 2013 22:57:05 +0200
 Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id D097BD20D2
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DD2C0D20D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Apr 2013 22:13:40 +0200 (CEST)
+	Thu,  4 Apr 2013 22:40:00 +0200 (CEST)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Apr 2013 22:13:30 +0200
-Message-Id: <1365106410-9481-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Thu,  4 Apr 2013 22:39:51 +0200
+Message-Id: <1365107991-16963-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH] libvpx: do not hardcode -mfloat-api=softfp for ARM builds
+In-Reply-To: <1365106410-9481-1-git-send-email-marcin.juszkiewicz@linaro.org>
+References: <1365106410-9481-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Subject: [meta-oe][PATCH v2] libvpx: do not hardcode -mfloat-api=softfp for ARM builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 20:31:09 -0000
+X-List-Received-Date: Thu, 04 Apr 2013 20:57:05 -0000
 
 | Configuring for target 'armv7-linux-gcc'
 |   enabling armv7
@@ -46,17 +48,24 @@ X-List-Received-Date: Thu, 04 Apr 2013 20:31:09 -0000
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../libvpx/do-not-hardcode-softfp-float-api.patch   | 21 +++++++++++++++++++++
- meta-oe/recipes-multimedia/webm/libvpx_0.9.5.bb     |  1 +
- 2 files changed, 22 insertions(+)
+ .../libvpx/do-not-hardcode-softfp-float-api.patch  | 28 ++++++++++++++++++++++
+ meta-oe/recipes-multimedia/webm/libvpx_0.9.5.bb    |  1 +
+ 2 files changed, 29 insertions(+)
  create mode 100644 meta-oe/recipes-multimedia/webm/libvpx/do-not-hardcode-softfp-float-api.patch
 
 diff --git a/meta-oe/recipes-multimedia/webm/libvpx/do-not-hardcode-softfp-float-api.patch b/meta-oe/recipes-multimedia/webm/libvpx/do-not-hardcode-softfp-float-api.patch
 new file mode 100644
-index 0000000..bac599d
+index 0000000..d871694
 --- /dev/null
 +++ b/meta-oe/recipes-multimedia/webm/libvpx/do-not-hardcode-softfp-float-api.patch
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,28 @@
++From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
++
++Upstream-Status: Inappopriate [upstream has it done in other way]
++
++Problem is solved upstream but we have quite old version so backporting patches
++is waste of time.
++
 +---
 + build/make/configure.sh |    4 ++--
 + 1 file changed, 2 insertions(+), 2 deletions(-)
