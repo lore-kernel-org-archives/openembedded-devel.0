@@ -1,40 +1,26 @@
-Received: from mail-pb0-f45.google.com ([209.85.160.45])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UNlqn-0006Zi-8f
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 17:13:20 +0200
-Received: by mail-pb0-f45.google.com with SMTP id ro12so1189064pbb.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Apr 2013 07:56:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=N1HkBdy0QYiTj6G4aI2GMf8WanaLqafGc4xLIyfHpEI=;
-	b=BCx+i+LXeZqogBbFsLy0IAub73xvmboTScQ9WiBroZTlYqvcvhB9izn44jM/lNFKqH
-	3IkrMz3YHmsJW8LQAsLBSuc6ut8LJLLn/v5mJocOe+gIUQWV2kz3E/lL/SAomOY+GKOG
-	Kyvq69oCaJF3ZTO1pwpKkitNhLVJ67JvcSdXoBUORdAHiJ54575HlgOd+7e7pcAlZwti
-	gwvUws49rmCyDE6ut5V/SL5o1UmxOcK82A6XxtrcqHuA6l10IMgXNfmekpbEyKHRK2je
-	P0LUz/FZ2Ogy31rnMpHFk4ZCggEyCutTAA2tNexKdQPoZdSohRVFSE+HK3Tu7ULjcUS0
-	Cy9w==
-X-Received: by 10.66.170.176 with SMTP id an16mr10046792pac.24.1365087362854; 
-	Thu, 04 Apr 2013 07:56:02 -0700 (PDT)
-Received: from vspringer-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPS id fk1sm10470660pbd.36.2013.04.04.07.56.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 04 Apr 2013 07:56:01 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
-Date: Thu, 4 Apr 2013 07:55:57 -0700
-Message-Id: <FF983BDD-B955-4657-A711-56457453F64D@gmail.com>
-References: <1364545389-20291-1-git-send-email-elvis.dowson@gmail.com>
-	<B42120AF-E508-4363-8249-E94E10A2957D@gmail.com>
-	<F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
-To: Elvis Dowson <elvis.dowson@gmail.com>
-X-Mailer: Apple Mail (2.1503)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [v2] gcc-4.8: Refactor gcc-4.8.0 patch files.
+	(envelope-from <paul.eggleton@linux.intel.com>)
+	id 1UNmGv-0000Mr-PU; Thu, 04 Apr 2013 17:40:18 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 04 Apr 2013 08:23:03 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,409,1363158000"; d="scan'208";a="280811575"
+Received: from unknown (HELO helios.localnet) ([10.255.13.167])
+	by azsmga001.ch.intel.com with ESMTP; 04 Apr 2013 08:23:01 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org
+Date: Thu, 04 Apr 2013 16:23 +0100
+Message-ID: <4508990.pcm6NvoxmA@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.1 (Linux/3.5.0-26-generic; KDE/4.10.1; i686; ; )
+In-Reply-To: <CAOT3miKi62MtFGjiNYeykNKAsFQ+srtwqSbsSyge3ZzGHD4DOw@mail.gmail.com>
+References: <3982011.Guen6pOcoq@helios>
+	<CAOT3miKi62MtFGjiNYeykNKAsFQ+srtwqSbsSyge3ZzGHD4DOw@mail.gmail.com>
+MIME-Version: 1.0
+Cc: Nicolas Dechesne <ndec13@gmail.com>,
+	openembedded-devel@lists.openembedded.org, yocto <yocto@yoctoproject.org>
+Subject: Re: [OE-core] New OE layer index now available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 15:13:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Apr 2013 15:40:18 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Elvis
+On Thursday 04 April 2013 17:01:07 Nicolas Dechesne wrote:
+> i was thinking it might be useful (in fact at least it would be very
+> useful for me right now) to get version 'history' for each supported
+> branch. if i understand the design correctly, i first need to set the
+> branch I want to search, then search. but what about an 'all branch
+> search' that displays recipes version *and* layer for multiple
+> branches, so that we can easily see version change and recipe move
+> in-between layers between all branches.
 
+Hmm, I hadn't thought of that, but yes it does sound useful. I'll add it to 
+the todo list.
 
-On Apr 4, 2013, at 2:16 AM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+Cheers,
+Paul
 
->=20
-> On Apr 4, 2013, at 11:41 AM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
->> I have staged this patch in =
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-4.=
-8
->=20
-> Thanks, Khem!
->=20
-> Could we do the same for the gcc-4.7 patches, as well, as those =
-recipes are updated for 4.7.3 and newer, and subsequently retired to the =
-meta-openembedded/toolchain layer?
->=20
+-- 
 
-
-I am reluctant to change 4.7 at this stage of release.
-
-> Elvis Dowson
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
