@@ -1,32 +1,40 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-pb0-f45.google.com ([209.85.160.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1UNkRO-0002sv-2M; Thu, 04 Apr 2013 15:43:01 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r34DaN1M013347; Thu, 4 Apr 2013 14:36:23 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 1-5EFjzVVNt6; Thu,  4 Apr 2013 14:36:23 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r34DaHmZ013323
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Thu, 4 Apr 2013 14:36:20 +0100
-Message-ID: <1365081933.6526.107.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 04 Apr 2013 14:25:33 +0100
-In-Reply-To: <CALbNGRSj7uahrGy1DoSe5zJasciTf2Q7j1xj5N8V-cs_WOW+4g@mail.gmail.com>
-References: <CALbNGRSj7uahrGy1DoSe5zJasciTf2Q7j1xj5N8V-cs_WOW+4g@mail.gmail.com>
-X-Mailer: Evolution 3.6.2-0ubuntu0.1 
-Mime-Version: 1.0
-X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
-	r34DaN1M013347
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] experiences with images based on current layer heads
+	(envelope-from <raj.khem@gmail.com>) id 1UNlqn-0006Zi-8f
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Apr 2013 17:13:20 +0200
+Received: by mail-pb0-f45.google.com with SMTP id ro12so1189064pbb.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Apr 2013 07:56:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=N1HkBdy0QYiTj6G4aI2GMf8WanaLqafGc4xLIyfHpEI=;
+	b=BCx+i+LXeZqogBbFsLy0IAub73xvmboTScQ9WiBroZTlYqvcvhB9izn44jM/lNFKqH
+	3IkrMz3YHmsJW8LQAsLBSuc6ut8LJLLn/v5mJocOe+gIUQWV2kz3E/lL/SAomOY+GKOG
+	Kyvq69oCaJF3ZTO1pwpKkitNhLVJ67JvcSdXoBUORdAHiJ54575HlgOd+7e7pcAlZwti
+	gwvUws49rmCyDE6ut5V/SL5o1UmxOcK82A6XxtrcqHuA6l10IMgXNfmekpbEyKHRK2je
+	P0LUz/FZ2Ogy31rnMpHFk4ZCggEyCutTAA2tNexKdQPoZdSohRVFSE+HK3Tu7ULjcUS0
+	Cy9w==
+X-Received: by 10.66.170.176 with SMTP id an16mr10046792pac.24.1365087362854; 
+	Thu, 04 Apr 2013 07:56:02 -0700 (PDT)
+Received: from vspringer-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id fk1sm10470660pbd.36.2013.04.04.07.56.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 04 Apr 2013 07:56:01 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
+Date: Thu, 4 Apr 2013 07:55:57 -0700
+Message-Id: <FF983BDD-B955-4657-A711-56457453F64D@gmail.com>
+References: <1364545389-20291-1-git-send-email-elvis.dowson@gmail.com>
+	<B42120AF-E508-4363-8249-E94E10A2957D@gmail.com>
+	<F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
+To: Elvis Dowson <elvis.dowson@gmail.com>
+X-Mailer: Apple Mail (2.1503)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [v2] gcc-4.8: Refactor gcc-4.8.0 patch files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,85 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 13:43:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 04 Apr 2013 15:13:24 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2013-04-03 at 16:02 +0200, Andreas M=C3=BCller wrote:
-> Hi,
->=20
-> when migration of systemd to oe-core turned to unbuildable I decided
-> to freeze my images and stopped further tests. Now that many issues
-> were fixed and we are close to another release I built my standard
-> xfce-based image based on latest layer HEADs. With this I face some
-> issues which I would like to share:
->=20
-> 1. X sessions crash with OOM. This is reproducible by opening
-> google-maps with midori and changing to satellite view. In
-> Xorg.0.log.old I see only
->=20
-> | (EE)
-> | (EE) Backtrace:
-> | (EE)
-> | (EE) Segmentation fault at address 0x9
-> | (EE) BUG: triggered 'if (inSignalContext)'
-> | (EE) BUG: log.c:502 in LogVMessageVerb()
-> | (EE) Warning: attempting to log data in a signal unsafe manner while
-> in signal context.
-> | Please update to check inSignalContext and/or use
-> LogMessageVerbSigSafe() or ErrorFSigSafe().
-> | The offending log format message is:
-> |
-> | Fatal server error:
-> |
-> | (EE)
-> | (EE) Backtrace:
-> | (EE)
->=20
-> With old images only the process causing OOM were stopped. I did not
-> fully cross check but I have the feeling that OOM appears much much
-> more often than with old images. Sometimes x- session is closed
-> without opening an additional application.
->=20
-> 2. Something with udisks/gvfs/thunar-volman seems broken. When
-> auto-mounting, the partitions cannot be mounted by label-name. On
-> plugging a memory stick I see in kernel log
->=20
-> | VFS: could not find a valid V7 on sda.
->=20
-> Same kernel works properly with old images.
->=20
-> 3. dhclient.service does not start (this has never worked):
->=20
-> root@overo:~# systemctl status dhclient.service
-> dhclient.service - Dynamic Host Configuration Protocol (DHCP)
->           Loaded: loaded (/lib/systemd/system/dhclient.service; enabled=
-)
->           Active: failed (Result: resources) since Sat 2000-01-01
-> 00:58:02 UTC; 7min ago
->          Process: 177 ExecStart=3D/sbin/dhclient -cf
-> /etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases
-> $INTERFACES (code=3Dexited, status=3D0/SUCCESS)
->=20
-> Jan 01 00:58:01 overo systemd[1]: Starting Dynamic Host Configuration
-> Protocol (DHCP)...
-> Jan 01 00:58:02 overo systemd[1]: PID file /var/run/dhclient.pid not
-> readable (yet?) after start.
->=20
-> I wonder what happens to networkmanager once this autostart will work...
->=20
-> will test further...
-
-The data is certainly interesting, thanks for sharing. It would
-obviously be good to dig into and fix these issues, at least tracking
-the ones from OE-Core in the bugzilla might help so people are aware of
-the issue and of any progress that is made by anyone looking into it...
-
-Cheers,
-
-Richard
+Elvis
 
 
+On Apr 4, 2013, at 2:16 AM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+
+>=20
+> On Apr 4, 2013, at 11:41 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+>> I have staged this patch in =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-4.=
+8
+>=20
+> Thanks, Khem!
+>=20
+> Could we do the same for the gcc-4.7 patches, as well, as those =
+recipes are updated for 4.7.3 and newer, and subsequently retired to the =
+meta-openembedded/toolchain layer?
+>=20
+
+
+I am reluctant to change 4.7 at this stage of release.
+
+> Elvis Dowson
 
 
 
