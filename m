@@ -1,35 +1,32 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UNgzx-0007WE-Tk for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 12:02:26 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UNgji-0006ln-EJ for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Apr 2013 11:45:38 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Apr 2013 11:45:38 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Apr 2013 11:45:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 04 Apr 2013 11:45:00 +0200
-Message-ID: <kjji2n$c31$1@ger.gmane.org>
-References: <515C5DE6.6040702@pseudoterminal.org> <kjhsve$nqm$1@ger.gmane.org>
-	<515C7D42.6070303@pseudoterminal.org>
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1UNkRO-0002sv-2M; Thu, 04 Apr 2013 15:43:01 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r34DaN1M013347; Thu, 4 Apr 2013 14:36:23 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 1-5EFjzVVNt6; Thu,  4 Apr 2013 14:36:23 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r34DaHmZ013323
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT); Thu, 4 Apr 2013 14:36:20 +0100
+Message-ID: <1365081933.6526.107.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 04 Apr 2013 14:25:33 +0100
+In-Reply-To: <CALbNGRSj7uahrGy1DoSe5zJasciTf2Q7j1xj5N8V-cs_WOW+4g@mail.gmail.com>
+References: <CALbNGRSj7uahrGy1DoSe5zJasciTf2Q7j1xj5N8V-cs_WOW+4g@mail.gmail.com>
+X-Mailer: Evolution 3.6.2-0ubuntu0.1 
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <515C7D42.6070303@pseudoterminal.org>
-X-Enigmail-Version: 1.5
-Subject: Re: New meta-cubox layer
+X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
+	r34DaN1M013347
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] experiences with images based on current layer heads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,66 +40,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 10:02:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Apr 2013 13:43:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, 2013-04-03 at 16:02 +0200, Andreas M=C3=BCller wrote:
+> Hi,
+>=20
+> when migration of systemd to oe-core turned to unbuildable I decided
+> to freeze my images and stopped further tests. Now that many issues
+> were fixed and we are close to another release I built my standard
+> xfce-based image based on latest layer HEADs. With this I face some
+> issues which I would like to share:
+>=20
+> 1. X sessions crash with OOM. This is reproducible by opening
+> google-maps with midori and changing to satellite view. In
+> Xorg.0.log.old I see only
+>=20
+> | (EE)
+> | (EE) Backtrace:
+> | (EE)
+> | (EE) Segmentation fault at address 0x9
+> | (EE) BUG: triggered 'if (inSignalContext)'
+> | (EE) BUG: log.c:502 in LogVMessageVerb()
+> | (EE) Warning: attempting to log data in a signal unsafe manner while
+> in signal context.
+> | Please update to check inSignalContext and/or use
+> LogMessageVerbSigSafe() or ErrorFSigSafe().
+> | The offending log format message is:
+> |
+> | Fatal server error:
+> |
+> | (EE)
+> | (EE) Backtrace:
+> | (EE)
+>=20
+> With old images only the process causing OOM were stopped. I did not
+> fully cross check but I have the feeling that OOM appears much much
+> more often than with old images. Sometimes x- session is closed
+> without opening an additional application.
+>=20
+> 2. Something with udisks/gvfs/thunar-volman seems broken. When
+> auto-mounting, the partitions cannot be mounted by label-name. On
+> plugging a memory stick I see in kernel log
+>=20
+> | VFS: could not find a valid V7 on sda.
+>=20
+> Same kernel works properly with old images.
+>=20
+> 3. dhclient.service does not start (this has never worked):
+>=20
+> root@overo:~# systemctl status dhclient.service
+> dhclient.service - Dynamic Host Configuration Protocol (DHCP)
+>           Loaded: loaded (/lib/systemd/system/dhclient.service; enabled=
+)
+>           Active: failed (Result: resources) since Sat 2000-01-01
+> 00:58:02 UTC; 7min ago
+>          Process: 177 ExecStart=3D/sbin/dhclient -cf
+> /etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases
+> $INTERFACES (code=3Dexited, status=3D0/SUCCESS)
+>=20
+> Jan 01 00:58:01 overo systemd[1]: Starting Dynamic Host Configuration
+> Protocol (DHCP)...
+> Jan 01 00:58:02 overo systemd[1]: PID file /var/run/dhclient.pid not
+> readable (yet?) after start.
+>=20
+> I wonder what happens to networkmanager once this autostart will work...
+>=20
+> will test further...
 
-Op 03-04-13 21:04, Carlos Rafael Giani schreef:
-> On 2013-04-03 20:38, Koen Kooi wrote:
->> So how is this different from https://github.com/naguirre/meta-cubox ?
-> 
-> I am in contact with the author of that layer. My work started as a fork
-> of that, since the layer did not work for me, but since I anyway was
-> changing pretty much all of it from the ground up, I decided to start my
-> own. Now, covers more features of the CuBox, and supports both soft- and
-> hardfp in all recipes.
-> 
->> 
->> Just like https://github.com/naguirre/meta-cubox you're mixing DISTRO
->> policy in the machine files by setting the tuning to hardfloat. Don't
->> do that. If you want hardfloat, set that in your distro config, not in
->> your machine config.
-> 
-> Do I understand it correctly that I should drop "marvellpj4hf" from 
-> https://github.com/dv1/meta-cubox/blob/master/conf/machine/include/tune-marvell-pj4.inc
->
-> 
-, or at least not set it as DEFAULTTUNE, not even with the ?= operation, and
-> just use "marvellpj4" instead ? Because it is the distros decision to add
-> the "callconvention-hard" feature?
+The data is certainly interesting, thanks for sharing. It would
+obviously be good to dig into and fix these issues, at least tracking
+the ones from OE-Core in the bugzilla might help so people are aware of
+the issue and of any progress that is made by anyone looking into it...
 
-Exactly!
+Cheers,
 
-> The reason I ask that is because when I was writing the tune, I stumbled
-> upon 
-> https://github.com/openembedded/oe-core/blob/master/meta/conf/machine/include/arm/arch-armv7a.inc
->
-> 
-, which includes armv7a, armv7ahf . This confuses me. Why is it OK there to
-> mix in the callconvention?
+Richard
 
-It isn't, that file just lists all the permutiations available.
 
-> Finally, is there a way to give a distro a "hint" about what is preferred
-> for a machine (soft/hardfp)? One that the distro is free to ignore or
-> respect?
-
-There isn't, apart from a note in the README of your BSP.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRXUucMkyGM64RGpERAlQFAKCpia9xhA+ldV8AdpH2F3GWAkptQwCgsCcd
-2Tz5vaOMU9oX93XPNmAZE/E=
-=fR8B
------END PGP SIGNATURE-----
 
 
 
