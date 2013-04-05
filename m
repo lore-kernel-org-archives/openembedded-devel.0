@@ -1,29 +1,33 @@
-Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+Received: from mail-ee0-f54.google.com ([74.125.83.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1UODHH-0002Va-Cd
+	(envelope-from <andrea.adami@gmail.com>) id 1UOExT-0000F9-Pf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Apr 2013 22:30:28 +0200
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 815F6D1AA61
+	Sat, 06 Apr 2013 00:18:09 +0200
+Received: by mail-ee0-f54.google.com with SMTP id e51so1585332eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Apr 2013 22:13:13 +0200 (CEST)
-Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
-	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id C3A6DA6217;
-	Fri,  5 Apr 2013 22:13:06 +0200 (CEST)
-Date: Fri, 5 Apr 2013 22:13:05 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: clarson@kergoth.com
-Message-ID: <20130405221305.6a7ae319@e6520eb>
-In-Reply-To: <CABcZANkitD_S70HFXiM+xnC73avzC-2LDjRTcezwVMe1VcW+ow@mail.gmail.com>
-References: <1363859339-12187-1-git-send-email-ross.burton@intel.com>
-	<20130321140745.4a0683c8@e6520eb>
-	<CABcZANkitD_S70HFXiM+xnC73avzC-2LDjRTcezwVMe1VcW+ow@mail.gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][for-danny] guile: remove from meta-oe, there is newer version in oe-core
+	Fri, 05 Apr 2013 15:00:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=X7w9JYkxg3Az380IjppiuHuO8hWAylYrw81rozFjg3c=;
+	b=atTHCjEhdwcajxLpjmSctEuYFvvW8zUAvVWeV+ueddUcrrWyKwpUjukgEtE6Wc4DBe
+	QEqXJJx2HpWtcvqyg/gJR0Lai03kyFEASTeYxIsz+6o8KoOvkmmBzWDm/igeqQVKYbMy
+	R6IpgrHEM+aqxC/gypfQipt2uh/aOIi+0n49iKW1t2BXUNbMT1liAeWBmitw3xhfOTWv
+	q+mSRbwzBw0Bv/PgVNiKtpemBs2njqUTA/+3VuIMlQPoSsZVx+N6pUttr5YTmFJyLI0I
+	vPu8eximaa2ykKQKfeUI/lhUpEpovQYRDLjQz5AXYsJ+cH/uXvSk4YSp7/BGPAd2t7+m
+	Nv0w==
+X-Received: by 10.15.99.201 with SMTP id bl49mr9985120eeb.43.1365199253146;
+	Fri, 05 Apr 2013 15:00:53 -0700 (PDT)
+Received: from mizar.localdomain
+	(host43-27-dynamic.248-95-r.retail.telecomitalia.it. [95.248.27.43])
+	by mx.google.com with ESMTPS id d47sm17772159eem.9.2013.04.05.15.00.51
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 05 Apr 2013 15:00:52 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  6 Apr 2013 00:00:30 +0200
+Message-Id: <cover.1365198580.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.7.12.4
+Subject: [meta-handheld][PATCH 0/6] minor fixes for Zaurus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,29 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 20:30:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Apr 2013 22:18:10 -0000
 
-Hi Christopher,
+Spring-cleanings of obsolete variables and removal of machines
+which can be built as spitz or c7x0
 
-Le Fri, 5 Apr 2013 10:02:22 -0700,
-Chris Larson <clarson@kergoth.com> a =C3=A9crit :
-> I'm a bit confused about why this went in. danny is a stable branch, and
-> this is clearly not a bugfix. Did the existence of this recipe actually
-> cause a problem? This just caused a temporary build break for us due to
-> bbappending to a removed recipe. What exactly is the policy for meta-oe's
-> danny branch, if it's not "bugfixes only"?
+Andrea Adami (6):
+  linux-yocto-3.8: remove cruft (to-do about regulators)
+  zaurus: remove u-boot remnants from akita/spitz/c7x0 configs
+  zaurus: remove obsolete ROOT_FLASH_SIZE
+  zaurus: add note about mtdparts of tosa
+  zaurus: remove configurations of models aliased by c7x0 and spitz
+  zaurus: add README.zaurus, about flashing kernel, JFFS2 and UBIFS
+    images
 
-I usually apply patches to danny-next and wait at least one week to get
-feedback before pushing to danny (and usually I try to do that on a
-friday).
-So if you want to prevent this kind of problem for the future, you may
-be able to configure one of your autobuilders to build your
-projects using danny-next's branch so that you get the error before the
-patches are pushed to danny.
+ README.zaurus              | 88 ++++++++++++++++++++++++++++++++++++++++++++++
+ conf/machine/akita.conf    |  5 ---
+ conf/machine/borzoi.conf   |  2 --
+ conf/machine/boxer.conf    |  2 --
+ conf/machine/c7x0.conf     |  8 -----
+ conf/machine/collie.conf   |  2 --
+ conf/machine/corgi.conf    |  3 --
+ conf/machine/husky.conf    |  2 --
+ conf/machine/poodle.conf   |  2 --
+ conf/machine/shepherd.conf |  3 --
+ conf/machine/spitz.conf    |  9 -----
+ conf/machine/terrier.conf  |  2 --
+ conf/machine/tosa.conf     |  3 +-
+ 13 files changed, 90 insertions(+), 41 deletions(-)
+ create mode 100644 README.zaurus
+ delete mode 100644 conf/machine/borzoi.conf
+ delete mode 100644 conf/machine/boxer.conf
+ delete mode 100644 conf/machine/corgi.conf
+ delete mode 100644 conf/machine/husky.conf
+ delete mode 100644 conf/machine/shepherd.conf
+ delete mode 100644 conf/machine/terrier.conf
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/REGULATORS
 
-Best regards,
-Eric
+-- 
+1.7.12.4
+
 
 
