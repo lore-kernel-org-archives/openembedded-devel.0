@@ -1,33 +1,38 @@
-Received: from mail-ee0-f48.google.com ([74.125.83.48])
+Received: from mail-ea0-f180.google.com ([209.85.215.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1UOFVu-0004D8-NF
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UOFwO-0006pf-Q2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Apr 2013 00:53:46 +0200
-Received: by mail-ee0-f48.google.com with SMTP id b15so1592939eek.21
+	Sat, 06 Apr 2013 01:21:09 +0200
+Received: by mail-ea0-f180.google.com with SMTP id d10so1500455eaj.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2013 15:36:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=762ZxRsaBuPLRutJMKjgYfjsGHV1wzYTBRbx/fwk1OY=;
-	b=NoflH+itK5e0ibSUPhA9KUPTl/ZaAmb3mpBenObJ5SxOm7SLOtypG0HHOclNf8uORF
-	GT49q2zNv5S4xL/G8pzh5mcpoLznm+wt1PIqEu47qb9fhyuGdt2MULVibO462LkKVrdD
-	hhSC8xc5sm2n6QnpFas2B11FUd+wJ1wwKxliC+vnwb3YSp/l5L7FQ1qm63ZoeWkfdKBb
-	NCeR4BMmPn0gzLsnrpoERnW94j+SyQ0d7wT2wtXZ53YKJK5MjhCdrcrymTLpefmFFLzj
-	JsZwRZRAHXY92L5kSxwHmNBluMNqJONkLgJL4HSjzZkVgE3iM4CKV7bxLRWYv7RdX3xP
-	WF2w==
-X-Received: by 10.15.34.199 with SMTP id e47mr13853517eev.35.1365201387900;
-	Fri, 05 Apr 2013 15:36:27 -0700 (PDT)
-Received: from mizar.localdomain
-	(host43-27-dynamic.248-95-r.retail.telecomitalia.it. [95.248.27.43])
-	by mx.google.com with ESMTPS id u44sm17899351eel.7.2013.04.05.15.36.26
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 05 Apr 2013 15:36:27 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 05 Apr 2013 16:03:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=h2HcP1ZQZ5ztoiBOtf+8zSvj1Ag6OE/41xJnp8rU2x4=;
+	b=I4zWGU7rBM9jJq/alzIoCQPhJ+cpzG1WER+xtlHgOBEUrbx5lEkB359RSwGD294v6J
+	BXZr02gqdN7EuHsZtHk/NIIosBQ/dyGCs6So60EXAjXOdCXyYeOir6Ib+V6x9qFQ1NnI
+	wf0mvtfK/O+b4lHjHwHQCcJ/iScAd9Xp+110LBUuV16J9DXcg35xuIhTH25nj2c4m2AE
+	AHe/bFLFn8TzLdn+WkmFeVhfSr00+QRZitBqdtvf++04bM6Re/lg+M0YflDSKxmszNNu
+	VXeJ0zCInWl/oRoHIhP72wayS0j/KSuaZmYlLDPoB8C7uJhU9s97iqxPUPOLtxz2zVcI
+	+Gqg==
+X-Received: by 10.14.5.6 with SMTP id 6mr23751238eek.42.1365203030082;
+	Fri, 05 Apr 2013 16:03:50 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A2C0A.dip.t-dialin.net.
+	[91.10.44.10])
+	by mx.google.com with ESMTPS id a1sm18010579eep.2.2013.04.05.16.03.48
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 05 Apr 2013 16:03:49 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  6 Apr 2013 00:36:22 +0200
-Message-Id: <1365201382-13638-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-Subject: [meta-handheld][PATCH] linux-yocto-tiny-kexecboot_3.2: removed unused, non-working MTD-RW patch
+Date: Sat,  6 Apr 2013 01:03:32 +0200
+Message-Id: <1365203016-17804-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1365203016-17804-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1365203016-17804-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [meta-xfce++ 2/6] exo: remove gnome-mount wrapper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +46,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 22:53:49 -0000
+X-List-Received-Date: Fri, 05 Apr 2013 23:21:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* kexecboot doesn't need RW but just RO
+exo-mount was removed long time ago [1]
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+[1] http://git.xfce.org/xfce/exo/commit/?id=5d698bf98b190d7c76a6b406bd5f542b915d0bd1
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../collie/collie-mtd-rw.patch                               | 12 ------------
- recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend |  1 -
- 2 files changed, 13 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+ meta-xfce/recipes-xfce/exo/exo/gnome-mount |   64 ----------------------------
+ meta-xfce/recipes-xfce/exo/exo_0.10.2.bb   |    9 +----
+ 2 files changed, 1 insertions(+), 72 deletions(-)
+ delete mode 100644 meta-xfce/recipes-xfce/exo/exo/gnome-mount
 
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+diff --git a/meta-xfce/recipes-xfce/exo/exo/gnome-mount b/meta-xfce/recipes-xfce/exo/exo/gnome-mount
 deleted file mode 100644
-index 193004d..0000000
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.2/collie/collie-mtd-rw.patch
+index 85fdb25..0000000
+--- a/meta-xfce/recipes-xfce/exo/exo/gnome-mount
 +++ /dev/null
-@@ -1,12 +0,0 @@
--diff --git a/drivers/mtd/maps/sa1100-flash.c b/drivers/mtd/maps/sa1100-flash.c
--index fa9c0a9..bf6b04f 100644
----- a/drivers/mtd/maps/sa1100-flash.c
--+++ b/drivers/mtd/maps/sa1100-flash.c
--@@ -206,6 +206,7 @@ static int sa1100_probe_subdev(struct sa_subdev_info *subdev, struct resource *r
-- 		goto err;
-- 	}
-- 	subdev->mtd->owner = THIS_MODULE;
--+	subdev->mtd->unlock(subdev->mtd, 0xc0000, subdev->mtd->size - 0xc0000);
-- 
-- 	printk(KERN_INFO "SA1100 flash: CFI device at 0x%08lx, %uMiB, %d-bit\n",
-- 		phys, (unsigned)(subdev->mtd->size >> 20),
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-index 7f03732..b1d9c7f 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bbappend
-@@ -43,7 +43,6 @@ SRC_URI_append_collie = " \
-            file://qvga/logo_linux_clut224.ppm.bz2 \
-            file://revert-check-on-console-device.patch \
-            "
--#           file://collie-mtd-rw.patch
+@@ -1,64 +0,0 @@
+-#!/bin/sh
+-#
+-# gnome-mount - wrapper script for use with exo-mount
+-#
+-# Copyright 2009 Enrico Tröger <enrico(at)xfce(dot)org>
+-# Licence: GPLv2
+-#
+-#
+-# This script aims to be a wrapper script to provide the
+-# gnome-mount utility on envrionments which only have
+-# exo-mount (e.g. Xfce). It accepts all command line arguments
+-# which are passed but ignores all which are not supported by
+-# exo-mount.
+-#
+-# (This script was tested with Bash and Dash.)
+-#
+-# Possible use case is as a drop-in replacement to get mounting
+-# local resources with GVfs working, e.g. mounting disks in CD drives.
+-#
+-# Usage:
+-# Save this script as 'gnome-mount' in a directory in your path,
+-# e.g. /usr/local/bin or ~/bin and make it executable.
+-#
+-
+-
+-
+-OPTS=""
+-
+-# first catch all passed arguments and keep those exo-mount supports,
+-# ignore all other arguments
+-while [ -n "$*" ]
+-do
+-	case $1 in
+-		-\?|--help)
+-		OPTS="$OPTS --help"
+-		;;
+-		-e|--eject)
+-		OPTS="$OPTS --eject"
+-		;;
+-		-u|--unmount)
+-		OPTS="$OPTS --unmount"
+-		;;
+-		-h|--hal-udi)
+-		OPTS="$OPTS --hal-udi"
+-		shift
+-		OPTS="$OPTS $1"
+-		;;
+-		-d|--device)
+-		OPTS="$OPTS --device"
+-		shift
+-		OPTS="$OPTS $1"
+-		;;
+-		-n|--no-ui)
+-		OPTS="$OPTS --no-ui"
+-		;;
+-		-V|--version)
+-		OPTS="$OPTS --version"
+-		;;
+-	esac
+-	shift
+-done
+-
+-# now run exo-mount and hope things go well
+-exo-mount $OPTS
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+index ff529db..5e6b5ac 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
+ DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native"
+-PR = "r3"
++PR = "r4"
  
- SRC_URI_append_poodle = " \
-            file://poodle-tiny.scc \
+ inherit xfce pythonnative perlnative
+ 
+@@ -12,7 +12,6 @@ inherit xfce pythonnative perlnative
+ SRC_URI += " \
+     file://exo-no-tests-0.8.patch \
+     file://configure.patch \
+-    file://gnome-mount \
+ "
+ 
+ SRC_URI_append_class-native = " \
+@@ -22,12 +21,6 @@ SRC_URI_append_class-native = " \
+ SRC_URI[md5sum] = "c70f2a217811bfba2e62f938d4b8f748"
+ SRC_URI[sha256sum] = "b385828bf8a38204da3254b57fdfa25a72694495aa189fabd5040f707eec76ce"
+ 
+-# see http://wiki.xfce.org/gnomemount-replacement
+-do_install_append () {
+-	install -m 755 -d ${D}${bindir}/exo-mount-wrapper
+-	install -m 755 ${WORKDIR}//gnome-mount ${D}${bindir}/exo-mount-wrapper
+-}
+-
+ PACKAGES =+ "exo-csource"
+ 
+ # Note: python bindings did not work in oe-dev and are about to be moved to
 -- 
-1.7.12.4
+1.7.4.4
 
 
 
