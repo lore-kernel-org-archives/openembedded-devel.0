@@ -1,38 +1,34 @@
-Received: from mail-ea0-f176.google.com ([209.85.215.176])
+Received: from mail-vc0-f181.google.com ([209.85.220.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UO2L0-00048I-G9
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UO3GF-0003C0-S9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Apr 2013 10:49:45 +0200
-Received: by mail-ea0-f176.google.com with SMTP id h10so1238315eaj.7
+	Fri, 05 Apr 2013 11:48:46 +0200
+Received: by mail-vc0-f181.google.com with SMTP id hv10so3084692vcb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2013 01:32:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=QR/tRcq/9P/rEBxnbthQLRpHr6VQrOQHRIzUzNx84AU=;
-	b=F/JhvustNR1IVwlL/4yrA4AoAIob5u/tQkrK+biWszfOhEjGFe5QeFZnuS9siKRagK
-	aMYFfBZR4ndKufw36O3aPBLvDh4qJrFcdFUdBkcVDomBZuWD9Efj9ssPhmRirldUogoB
-	Kqfl/xUmpK75G/eb+DW+poRC4mYzht6UDpTahfqIVBNbQfKX5XBb+9s8Q1nQot/1yBh0
-	DEDSgS0neqlvmeGFblf74haD+UiydS6X9iUtVQ8J7XIeUqENQ6MK2qcbuKajdNpoTDSO
-	+1pLe1qBoE2YG9/9lDKAfEWS1PeRRP6Hcl5w/tboRS5e0GUau7Vlunbvs33gORAc8AdR
-	RKrA==
-X-Received: by 10.15.32.67 with SMTP id z43mr8216873eeu.24.1365150740337;
-	Fri, 05 Apr 2013 01:32:20 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id q42sm14088968eem.14.2013.04.05.01.32.18
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 05 Apr 2013 01:32:19 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Apr 2013 10:31:59 +0200
-Message-Id: <1365150719-1428-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1.4
+	Fri, 05 Apr 2013 02:31:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=0kIMXUYNfi7uHAiguc1D5MWXQ0S8N/D9KXCzZiUfdoE=;
+	b=LpJKeD6sLQeeEg+yUlQSSFKJWNCSE2h4WdUGwJi10auVnJUjB4Rkq6jSWfC1KjdVK1
+	tuTc4aUGyyk9c8RMrhLT67CPy1g72PT2SGKjsP+o4krTF3LVyO/WI1DLma0ZLq+Jv2Lw
+	Ns1PeNSlH3CRkGvzG7S71DjAwVt6Jq33HbW5KhM4SOYQSNbZaSD/edxuSMUimFfxsrMA
+	cjsVYS5ncPm+BJdc9aesgjqKSXbyCXM9rXZ5/Z6qBUx3UirOomba5EFx/2rqCD1W1AKy
+	3yThWYLiHiB3g6ZMG67RXZyZ7j+/Bd5OlPWTtgGipPK+QdkQivWcGZd49M/om6HYo7XT
+	+DPg==
 MIME-Version: 1.0
-X-Gm-Message-State: ALoCoQluMTKX+wtNgS+LVgkLXthTqx+WJGtprHv6CKpyt7v7PNmj+qsHcgK+KdxFQ63n6RnxJiZA
+X-Received: by 10.52.65.147 with SMTP id x19mr6470495vds.27.1365154289569;
+	Fri, 05 Apr 2013 02:31:29 -0700 (PDT)
+Received: by 10.52.185.168 with HTTP; Fri, 5 Apr 2013 02:31:29 -0700 (PDT)
+In-Reply-To: <1365150719-1428-1-git-send-email-koen@dominion.thruhere.net>
+References: <1365150719-1428-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 5 Apr 2013 11:31:29 +0200
+Message-ID: <CALbNGRSuRPYRnwxQJjBrLo6AHijC5cfaQhcLz+Q0dA2Jv-JMdg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
 Cc: Koen Kooi <koen@dominion.thruhere.net>, eric@eukrea.com
-Subject: [meta-browser][PATCH] chromium 24.0.1312.52: add launch helper and .desktop file
+Subject: Re: [meta-browser][PATCH] chromium 24.0.1312.52: add launch helper and .desktop file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,291 +42,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 08:49:46 -0000
+X-List-Received-Date: Fri, 05 Apr 2013 09:48:58 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-The .desktop file is from the Fedora chrome RPM, the script is a custom one.
+On Fri, Apr 5, 2013 at 10:31 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> The .desktop file is from the Fedora chrome RPM, the script is a custom one.
+>
+> The launch helper has a nasty work around for root users, I'm open for better ways to work around that.
+>
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Cool I was about to prepare something similar - thanks.
 
-The launch helper has a nasty work around for root users, I'm open for better ways to work around that.
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-browser/chromium/chromium/google-chrome    |   7 +
- .../chromium/chromium/google-chrome.desktop        | 222 +++++++++++++++++++++
- recipes-browser/chromium/chromium_24.0.1312.52.bb  |   7 +
- 3 files changed, 236 insertions(+)
- create mode 100755 recipes-browser/chromium/chromium/google-chrome
- create mode 100644 recipes-browser/chromium/chromium/google-chrome.desktop
-
-diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
-new file mode 100755
-index 0000000..d5151ca
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/google-chrome
-@@ -0,0 +1,7 @@
-+#!/bin/sh
-+
-+if [ "${USER}" = "root" ] ; then 
-+	su -c /usr/bin/chrome/chrome $@ - xuser
-+else
-+	/usr/bin/chrome/chrome $@
-+fi
-diff --git a/recipes-browser/chromium/chromium/google-chrome.desktop b/recipes-browser/chromium/chromium/google-chrome.desktop
-new file mode 100644
-index 0000000..d29fdb2
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/google-chrome.desktop
-@@ -0,0 +1,222 @@
-+[Desktop Entry]
-+Version=1.0
-+Name=Chromium
-+# Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
-+# From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
-+GenericName=Web Browser
-+GenericName[ar]=متصفح الشبكة
-+GenericName[bg]=Уеб браузър
-+GenericName[ca]=Navegador web
-+GenericName[cs]=WWW prohlížeč
-+GenericName[da]=Browser
-+GenericName[de]=Web-Browser
-+GenericName[el]=Περιηγητής ιστού
-+GenericName[en_GB]=Web Browser
-+GenericName[es]=Navegador web
-+GenericName[et]=Veebibrauser
-+GenericName[fi]=WWW-selain
-+GenericName[fr]=Navigateur Web
-+GenericName[gu]=વેબ બ્રાઉઝર
-+GenericName[he]=דפדפן אינטרנט
-+GenericName[hi]=वेब ब्राउज़र
-+GenericName[hu]=Webböngésző
-+GenericName[it]=Browser Web
-+GenericName[ja]=ウェブブラウザ
-+GenericName[kn]=ಜಾಲ ವೀಕ್ಷಕ
-+GenericName[ko]=웹 브라우저
-+GenericName[lt]=Žiniatinklio naršyklė
-+GenericName[lv]=Tīmekļa pārlūks
-+GenericName[ml]=വെബ് ബ്രൌസര്‍
-+GenericName[mr]=वेब ब्राऊजर
-+GenericName[nb]=Nettleser
-+GenericName[nl]=Webbrowser
-+GenericName[pl]=Przeglądarka WWW
-+GenericName[pt]=Navegador Web
-+GenericName[pt_BR]=Navegador da Internet
-+GenericName[ro]=Navigator de Internet
-+GenericName[ru]=Веб-браузер
-+GenericName[sl]=Spletni brskalnik
-+GenericName[sv]=Webbläsare
-+GenericName[ta]=இணைய உலாவி
-+GenericName[th]=เว็บเบราว์เซอร์
-+GenericName[tr]=Web Tarayıcı
-+GenericName[uk]=Навігатор Тенет
-+GenericName[zh_CN]=网页浏览器
-+GenericName[zh_HK]=網頁瀏覽器
-+GenericName[zh_TW]=網頁瀏覽器
-+# Not translated in KDE, from Epiphany 2.26.1-0ubuntu1.
-+GenericName[bn]=ওয়েব ব্রাউজার
-+GenericName[fil]=Web Browser
-+GenericName[hr]=Web preglednik
-+GenericName[id]=Browser Web
-+GenericName[or]=ଓ୍ବେବ ବ୍ରାଉଜର
-+GenericName[sk]=WWW prehliadač
-+GenericName[sr]=Интернет прегледник
-+GenericName[te]=మహాతల అన్వేషి
-+GenericName[vi]=Bộ duyệt Web
-+# Gnome and KDE 3 uses Comment.
-+Comment=Access the Internet
-+Comment[ar]=الدخول إلى الإنترنت
-+Comment[bg]=Достъп до интернет
-+Comment[bn]=ইন্টারনেটটি অ্যাক্সেস করুন
-+Comment[ca]=Accedeix a Internet
-+Comment[cs]=Přístup k internetu
-+Comment[da]=Få adgang til internettet
-+Comment[de]=Internetzugriff
-+Comment[el]=Πρόσβαση στο Διαδίκτυο
-+Comment[en_GB]=Access the Internet
-+Comment[es]=Accede a Internet.
-+Comment[et]=Pääs Internetti
-+Comment[fi]=Käytä internetiä
-+Comment[fil]=I-access ang Internet
-+Comment[fr]=Accéder à Internet
-+Comment[gu]=ઇંટરનેટ ઍક્સેસ કરો
-+Comment[he]=גישה אל האינטרנט
-+Comment[hi]=इंटरनेट तक पहुंच स्थापित करें
-+Comment[hr]=Pristup Internetu
-+Comment[hu]=Internetelérés
-+Comment[id]=Akses Internet
-+Comment[it]=Accesso a Internet
-+Comment[ja]=インターネットにアクセス
-+Comment[kn]=ಇಂಟರ್ನೆಟ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿ
-+Comment[ko]=인터넷 연결
-+Comment[lt]=Interneto prieiga
-+Comment[lv]=Piekļūt internetam
-+Comment[ml]=ഇന്റര്‍‌നെറ്റ് ആക്‌സസ് ചെയ്യുക
-+Comment[mr]=इंटरनेटमध्ये प्रवेश करा
-+Comment[nb]=Gå til Internett
-+Comment[nl]=Verbinding maken met internet
-+Comment[or]=ଇଣ୍ଟର୍ନେଟ୍ ପ୍ରବେଶ କରନ୍ତୁ
-+Comment[pl]=Skorzystaj z internetu
-+Comment[pt]=Aceder à Internet
-+Comment[pt_BR]=Acessar a internet
-+Comment[ro]=Accesaţi Internetul
-+Comment[ru]=Доступ в Интернет
-+Comment[sk]=Prístup do siete Internet
-+Comment[sl]=Dostop do interneta
-+Comment[sr]=Приступите Интернету
-+Comment[sv]=Gå ut på Internet
-+Comment[ta]=இணையத்தை அணுகுதல்
-+Comment[te]=ఇంటర్నెట్‌ను ఆక్సెస్ చెయ్యండి
-+Comment[th]=เข้าถึงอินเทอร์เน็ต
-+Comment[tr]=İnternet'e erişin
-+Comment[uk]=Доступ до Інтернету
-+Comment[vi]=Truy cập Internet
-+Comment[zh_CN]=访问互联网
-+Comment[zh_HK]=連線到網際網路
-+Comment[zh_TW]=連線到網際網路
-+Exec=/usr/bin/google-chrome %U
-+Terminal=false
-+Icon=google-chrome
-+Type=Application
-+Categories=Network;WebBrowser;
-+MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
-+X-Ayatana-Desktop-Shortcuts=NewWindow;NewIncognito
-+
-+[NewWindow Shortcut Group]
-+Name=New Window
-+Name[am]=አዲስ መስኮት
-+Name[ar]=نافذة جديدة
-+Name[bg]=Нов прозорец
-+Name[bn]=নতুন উইন্ডো
-+Name[ca]=Finestra nova
-+Name[cs]=Nové okno
-+Name[da]=Nyt vindue
-+Name[de]=Neues Fenster
-+Name[el]=Νέο Παράθυρο
-+Name[en_GB]=New Window
-+Name[es]=Nueva ventana
-+Name[et]=Uus aken
-+Name[fa]=پنجره جدید
-+Name[fi]=Uusi ikkuna
-+Name[fil]=New Window
-+Name[fr]=Nouvelle fenêtre
-+Name[gu]=નવી વિંડો
-+Name[hi]=नई विंडो
-+Name[hr]=Novi prozor
-+Name[hu]=Új ablak
-+Name[id]=Jendela Baru
-+Name[it]=Nuova finestra
-+Name[iw]=חלון חדש
-+Name[ja]=新規ウインドウ
-+Name[kn]=ಹೊಸ ವಿಂಡೊ
-+Name[ko]=새 창
-+Name[lt]=Naujas langas
-+Name[lv]=Jauns logs
-+Name[ml]=പുതിയ വിന്‍ഡോ
-+Name[mr]=नवीन विंडो
-+Name[nl]=Nieuw venster
-+Name[no]=Nytt vindu
-+Name[pl]=Nowe okno
-+Name[pt]=Nova janela
-+Name[pt_BR]=Nova janela
-+Name[ro]=Fereastră nouă
-+Name[ru]=Новое окно
-+Name[sk]=Nové okno
-+Name[sl]=Novo okno
-+Name[sr]=Нови прозор
-+Name[sv]=Nytt fönster
-+Name[sw]=Dirisha Jipya
-+Name[ta]=புதிய சாளரம்
-+Name[te]=క్రొత్త విండో
-+Name[th]=หน้าต่างใหม่
-+Name[tr]=Yeni Pencere
-+Name[uk]=Нове вікно
-+Name[vi]=Cửa sổ Mới
-+Name[zh_CN]=新建窗口
-+Name[zh_TW]=開新視窗
-+Exec=/usr/bin/google-chrome
-+TargetEnvironment=Unity
-+
-+[NewIncognito Shortcut Group]
-+Name=New Incognito Window
-+Name[ar]=نافذة جديدة للتصفح المتخفي
-+Name[bg]=Нов прозорец „инкогнито“
-+Name[bn]=নতুন ছদ্মবেশী উইন্ডো
-+Name[ca]=Finestra d'incògnit nova
-+Name[cs]=Nové anonymní okno
-+Name[da]=Nyt inkognitovindue
-+Name[de]=Neues Inkognito-Fenster
-+Name[el]=Νέο παράθυρο για ανώνυμη περιήγηση
-+Name[en_GB]=New Incognito window
-+Name[es]=Nueva ventana de incógnito
-+Name[et]=Uus inkognito aken
-+Name[fa]=پنجره جدید حالت ناشناس
-+Name[fi]=Uusi incognito-ikkuna
-+Name[fil]=Bagong Incognito window
-+Name[fr]=Nouvelle fenêtre de navigation privée
-+Name[gu]=નવી છુપી વિંડો
-+Name[hi]=नई गुप्त विंडो
-+Name[hr]=Novi anoniman prozor
-+Name[hu]=Új Inkognitóablak
-+Name[id]=Jendela Penyamaran baru
-+Name[it]=Nuova finestra di navigazione in incognito
-+Name[iw]=חלון חדש לגלישה בסתר
-+Name[ja]=新しいシークレット ウィンドウ
-+Name[kn]=ಹೊಸ ಅಜ್ಞಾತ ವಿಂಡೋ
-+Name[ko]=새 시크릿 창
-+Name[lt]=Naujas inkognito langas
-+Name[lv]=Jauns inkognito režīma logs
-+Name[ml]=പുതിയ വേഷ പ്രച്ഛന്ന വിന്‍ഡോ
-+Name[mr]=नवीन गुप्त विंडो
-+Name[nl]=Nieuw incognitovenster
-+Name[no]=Nytt inkognitovindu
-+Name[pl]=Nowe okno incognito
-+Name[pt]=Nova janela de navegação anónima
-+Name[pt_BR]=Nova janela anônima
-+Name[ro]=Fereastră nouă incognito
-+Name[ru]=Новое окно в режиме инкогнито
-+Name[sk]=Nové okno inkognito
-+Name[sl]=Novo okno brez beleženja zgodovine
-+Name[sr]=Нови прозор за прегледање без архивирања
-+Name[sv]=Nytt inkognitofönster
-+Name[ta]=புதிய மறைநிலைச் சாளரம்
-+Name[te]=క్రొత్త అజ్ఞాత విండో
-+Name[th]=หน้าต่างใหม่ที่ไม่ระบุตัวตน
-+Name[tr]=Yeni Gizli pencere
-+Name[uk]=Нове вікно в режимі анонімного перегляду
-+Name[vi]=Cửa sổ ẩn danh mới
-+Name[zh_CN]=新建隐身窗口
-+Name[zh_TW]=新增無痕式視窗
-+Exec=/usr/bin/google-chrome --incognito
-+TargetEnvironment=Unity
-diff --git a/recipes-browser/chromium/chromium_24.0.1312.52.bb b/recipes-browser/chromium/chromium_24.0.1312.52.bb
-index 3976a71..41e4eb5 100644
---- a/recipes-browser/chromium/chromium_24.0.1312.52.bb
-+++ b/recipes-browser/chromium/chromium_24.0.1312.52.bb
-@@ -9,6 +9,8 @@ SRC_URI = "http://commondatastorage.googleapis.com/chromium-browser-official/${P
-         file://unistd-2.patch \
-         file://glib-2.16-use-siginfo_t.patch \
-         file://ui-gl-no-narrowing.patch \
-+        file://google-chrome \
-+        file://google-chrome.desktop \
- "
- 
- # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
-@@ -49,6 +51,11 @@ do_compile() {
- 
- do_install() {
- 	install -d ${D}${bindir}
-+	install -m 0755 ${WORKDIR}/google-chrome ${D}${bindir}/
-+
-+	install -d ${D}${datadir}/applications
-+	install -m 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/
-+
- 	install -d ${D}${bindir}/chrome/
- 	install -m 0755 ${S}/out/Release/chrome ${D}${bindir}/chrome/chrome
- 	install -m 0644 ${S}/out/Release/chrome.pak ${D}${bindir}/chrome/
--- 
-1.8.1.4
-
+Andreas
 
 
