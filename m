@@ -1,38 +1,39 @@
-Received: from mail-ee0-f44.google.com ([74.125.83.44])
+Received: from mail-lb0-f172.google.com ([209.85.217.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1UOExj-0000Gi-N8
+	(envelope-from <kergoth@gmail.com>) id 1UOF5f-0001f3-AI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Apr 2013 00:18:25 +0200
-Received: by mail-ee0-f44.google.com with SMTP id c41so592692eek.17
+	Sat, 06 Apr 2013 00:26:36 +0200
+Received: by mail-lb0-f172.google.com with SMTP id u10so4205168lbi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Apr 2013 15:01:08 -0700 (PDT)
+	Fri, 05 Apr 2013 15:09:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=MRKy5mgxJNwjbqSPGHIVtbFFQu/YjoJfXpJ9av5EN34=;
-	b=yKvme9+RQSzZt10PwsZ091yWy8Zqe8GjPYkl7euygv/AZYEsQak7ISKzQSsXOzSGQm
-	GGpwoAJIEpoY1rDtZg+HsVqDqtOspa84ShygPb27l6VE1pncJCmKtoFwwHUaPnG84WNv
-	pO2hxah4SPYIWCej/2s5q9jFjiHGXo8OOLECL3bKRKv1dJ9yZ2WpSOpr1o5wxfwRlQ36
-	nY/sVk5KlpsQWMHzB/eZoWjbvcKnVFZdCIDyzahBzL32MY6E63W3c/vqAn+9ij+k0wpp
-	bxov26ybYA5CG4PUduU0xoJ11hktwnsy/u4qU3kISDx39aNsMC8tmi6f9OzD0kOQtSz7
-	0NIQ==
-X-Received: by 10.14.4.69 with SMTP id 45mr23684192eei.0.1365199268922;
-	Fri, 05 Apr 2013 15:01:08 -0700 (PDT)
-Received: from mizar.localdomain
-	(host43-27-dynamic.248-95-r.retail.telecomitalia.it. [95.248.27.43])
-	by mx.google.com with ESMTPS id d47sm17772159eem.9.2013.04.05.15.01.07
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 05 Apr 2013 15:01:08 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  6 Apr 2013 00:00:36 +0200
-Message-Id: <5fd2162263a2e8325bedeae4a086e0f405f1bd5e.1365198580.git.andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.7.12.4
-In-Reply-To: <cover.1365198580.git.andrea.adami@gmail.com>
-References: <cover.1365198580.git.andrea.adami@gmail.com>
-In-Reply-To: <cover.1365198580.git.andrea.adami@gmail.com>
-References: <cover.1365198580.git.andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 6/6] zaurus: add README.zaurus, about flashing kernel, JFFS2 and UBIFS images
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=mYAAyJCkYIlc6/H7fYb4JXy0Iwz5iY/4Hm2HXOOQOFM=;
+	b=tBj+vA73389/y9I+4eyE1syuelMnmokgV/jta5wJwQ0N0EBaSay+cKqXkuD4kInIq9
+	z21xy1Am/MDY8h45gVKsbSkP3HeT1FIkUhc5rGhS3JUcSHpal3NtLYMv/jCIlgT2oYMV
+	Sspu7rMT6Jq2laOQG3AEbJowCatNvcZJDxSgkTJSqCzEbOHNyQeuASurIjCE0B5jsa2+
+	YKZ7d700aQcUB8EV0TzqovA05b6Q6T7fg7T5DKPo3l6jqKsYLvdPjpdhUE5Vndc/kOLj
+	XxUsHo1cG66HL7XE5upHhM83lboN2Xu6hPMH/dTBKcz2r5tJIBJuI77S6CAmbu/9YhX9
+	8QIg==
+X-Received: by 10.112.132.2 with SMTP id oq2mr6989067lbb.5.1365199760604; Fri,
+	05 Apr 2013 15:09:20 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.112.125.38 with HTTP; Fri, 5 Apr 2013 15:09:00 -0700 (PDT)
+In-Reply-To: <20130405221305.6a7ae319@e6520eb>
+References: <1363859339-12187-1-git-send-email-ross.burton@intel.com>
+	<20130321140745.4a0683c8@e6520eb>
+	<CABcZANkitD_S70HFXiM+xnC73avzC-2LDjRTcezwVMe1VcW+ow@mail.gmail.com>
+	<20130405221305.6a7ae319@e6520eb>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 5 Apr 2013 15:09:00 -0700
+X-Google-Sender-Auth: C4_sjmhEOjwN_CC1Tqlq5_Sr6Po
+Message-ID: <CABcZANm57z5Ug+VJ8PWRCMU=z=JZFmM_jqxbObdAt62ixK6jgg@mail.gmail.com>
+To: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][for-danny] guile: remove from meta-oe, there is newer version in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,110 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 22:18:30 -0000
+X-List-Received-Date: Fri, 05 Apr 2013 22:26:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- README.zaurus | 88 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 88 insertions(+)
- create mode 100644 README.zaurus
+On Fri, Apr 5, 2013 at 1:13 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
 
-diff --git a/README.zaurus b/README.zaurus
-new file mode 100644
-index 0000000..50539cf
---- /dev/null
-+++ b/README.zaurus
-@@ -0,0 +1,88 @@
-+KEXECBOOT KERNEL
-+================
-+For the Zaurus a special kernel+initramfs has been developed.
-+This special-purpose kernel is small enough to be flashed on NAND and features
-+a framebuffer graphical menu for the selection of boot media containing the 
-+kernel to be kexec'ed in the second phase.
-+Multi-partition cards and lots of filesystems are supported.
-+The kernels to be launched are searched for in /boot of each available partition.
-+There is a also a configuration file (/boot/boot.cfg) which allows selection of
-+other kernels, custom kernel command lines, and specifies the label and the icon
-+for each instance.
-+
-+How to install:
-+Just unpack zaurus-installer-YOURMACHINE.tar.gz on a free (FAT or EXT2/3
-+formatted) partition: the package contains the kexecboot-kernel and the 
-+updater.sh utility. Then proceed as usual for flashing (switch off, pull battery
-+out, insert battery again, before inserting AC plug press OK+Power On.
-+In the Japanese Menu select 4 and finally 3 for SD card or 4 for CF).
-+
-+For the SL-5500 (collie) and optionally for other Zaurus too, flashing is 
-+possible just using the routines of the original firmware: reset the unit,
-+Press C and D button during restart. Note the kernel must be renamed 'zImage'
-+(not 'zImage.bin') and the CF card must be formatted FAT.
-+
-+
-+ZAURUS FLASHING HOW-TO
-+======================
-+The typical flashing procedure mentioned above is easy, using updater.sh
-+script which expects the following files:
-+
-+ zImage     for kernel
-+ initrd.bin for rootfs in mtd2
-+ home.bin   for second rootfs in mtd3 (optional)
-+
-+Alternatively all the flashing work can be done from command line,
-+separately for each partition:
-+
-+ mtd1 kernel (using nandlogical)
-+ mtd2 rootfs (using nandwrite)
-+ mtd3 home   (using nandwrite)
-+
-+
-+kernel
-+======
-+Typically you should rarely update linux-kexecboot on device,
-+
-+Besides the updater.sh method you could use the nandlogical tool.
-+This utility allows flashing of the kernel directly from shell
-+on all Zaurus except collie (collie has NOR flash and not NAND) 
-+
-+Example:
-+
-+ nandlogical /dev/mtd1 WRITE 0x0E0000 0x140000 zImage.bin
-+
-+
-+JFFS2 images on the other partitions
-+====================================
-+Once built, the jffs2 and/or ubifs images need to be flashed on device.
-+For JFFS2 the typical choice is the usual flashing procedure using updater.sh
-+but you could do it from shell as well using nandwrite (from mtd-utils):
-+
-+Example: one image on mtd2 and another one on mtd3 (optional)
-+
-+1st rootfs: plain JFFS2 image
-+ flash_eraseall -j /dev/mtd2
-+ nandwrite /dev/mtd2 /path/to/core-image-base-<machine>-<date>.rootfs.jffs2
-+
-+2nd rootfs: JFFS2-summary image
-+ flash_eraseall -j /dev/mtd3
-+ nandwrite /dev/mtd3 /path/to/core-image-base-<machine>-<date>.rootfs.sum.jffs2
-+
-+Note: flash_eraseall is deprecated because the erase-counters are reset!
-+
-+
-+UBIFS images
-+============
-+Recent kexecboot versions can boot the first ubi volume found on each device.
-+
-+Ubi volumes must be created with the proper ubi-tools (from mtd-utils).
-+
-+Example: one volume with max available size
-+
-+ ubiformat /dev/mtd2
-+ ubiattach -p /dev/mtd2
-+ ubimkvol /dev/ubi0 -N volume_name -m
-+ ubiupdatevol /dev/ubi0_0 /path/to/core-image-base-<machine>-<date>.rootfs.ubifs
-+
-+Same operations can be done for mtd3.
--- 
-1.7.12.4
+> Le Fri, 5 Apr 2013 10:02:22 -0700,
+> Chris Larson <clarson@kergoth.com> a =C3=A9crit :
+> > I'm a bit confused about why this went in. danny is a stable branch, an=
+d
+> > this is clearly not a bugfix. Did the existence of this recipe actually
+> > cause a problem? This just caused a temporary build break for us due to
+> > bbappending to a removed recipe. What exactly is the policy for meta-oe=
+'s
+> > danny branch, if it's not "bugfixes only"?
+>
+> I usually apply patches to danny-next and wait at least one week to get
+> feedback before pushing to danny (and usually I try to do that on a
+> friday).
+> So if you want to prevent this kind of problem for the future, you may
+> be able to configure one of your autobuilders to build your
+> projects using danny-next's branch so that you get the error before the
+> patches are pushed to danny.
+>
 
-
+Good point, I'll keep that in mind.
+--=20
+Christopher Larson
 
