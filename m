@@ -1,34 +1,21 @@
-Received: from mail-oa0-f54.google.com ([209.85.219.54])
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UOTev-0003F9-Ja
+	(envelope-from <dv@pseudoterminal.org>) id 1UOV8h-0003UU-Ul
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Apr 2013 15:59:58 +0200
-Received: by mail-oa0-f54.google.com with SMTP id n12so4832522oag.27
+	Sat, 06 Apr 2013 17:34:53 +0200
+Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 2B74C274E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Apr 2013 06:42:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=UVhP0r6ErA93SSUZqIqbV29LZo/F5FcrS4Be+AK2/VU=;
-	b=ZwAUCxVI0WWRaRmOdJliJt8t0OE++XmxsDTDFhgImfS4Af0JytozTYh40fWkWxTZOC
-	mCtBs3b/UvrFZxi8bIC3RFWKqWgPtoRMhdBFgxAQJ7PvltLImALu55X0nucjwSjufyCt
-	dO2z1lq+897TbY2cz7IDsJ9Y9ngKx5t0odErITQY4sp1kB9lp3Z+Y8zqOhGZfqanymL7
-	CNN3dzpN5/XjiROw+sWFawgvvmLW1pAF8dmPATBo7hY15VEuxqj0Bf6JWtGhdd/5oh9A
-	B/4B74I8FYQXiRqUfWUA0kLBHhWK0Bfc6Oc1duAJvbHo4NIcqOlX6vxrRQCXsLGY9nXW
-	f88g==
+	Sat,  6 Apr 2013 17:17:34 +0200 (CEST)
+Message-ID: <51603C90.8020605@pseudoterminal.org>
+Date: Sat, 06 Apr 2013 17:17:36 +0200
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
 MIME-Version: 1.0
-X-Received: by 10.60.11.228 with SMTP id t4mr10633952oeb.42.1365255761477;
-	Sat, 06 Apr 2013 06:42:41 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.80.198 with HTTP; Sat, 6 Apr 2013 06:42:41 -0700 (PDT)
-In-Reply-To: <cover.1365204818.git.paul.eggleton@linux.intel.com>
-References: <cover.1365204818.git.paul.eggleton@linux.intel.com>
-Date: Sat, 6 Apr 2013 10:42:41 -0300
-X-Google-Sender-Auth: vM3LM22R-dIM8-C3EyM42bu8ZnY
-Message-ID: <CAP9ODKoe-5ZfeR+Wi9HZXYPQJ_2GWLzLTaF1Xm0dLJGLKdCySg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 0/4] Clean up recipes
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: List of distro policies?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,18 +29,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Apr 2013 14:00:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 06 Apr 2013 15:34:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 5, 2013 at 8:35 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> Drop some items that should no longer be in meta-oe.
+Hello,
 
-The Qt ones need to be reworked to keep the upgrade path. I replied accordingly.
+is there a list of settings, values, policies that are distro specific? 
+I haven't found anything like that so far, and the only source of 
+information about what is allowed and what isn't has been this mailing 
+list and the IRC channel. For example, I am suspecting that 
+MULTI_PROVIDER_WHITELIST is a distro policy, but I cannot find that 
+documented anywhere.
 
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+thanks,
+  Carlos
 
 
