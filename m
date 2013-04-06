@@ -1,35 +1,35 @@
-Received: from mail-oa0-f47.google.com ([209.85.219.47])
+Received: from mail-oa0-f41.google.com ([209.85.219.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UOTZq-0002aV-7E
+	(envelope-from <otavio.salvador@gmail.com>) id 1UOTd6-00031Z-M9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Apr 2013 15:54:51 +0200
-Received: by mail-oa0-f47.google.com with SMTP id o17so4797624oag.6
+	Sat, 06 Apr 2013 15:58:07 +0200
+Received: by mail-oa0-f41.google.com with SMTP id f4so4832944oah.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Apr 2013 06:37:26 -0700 (PDT)
+	Sat, 06 Apr 2013 06:40:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:x-received:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=DE8jPL+HyV3Uz4k7lpzwSwXnQor83yjXyQthtR3xCcI=;
-	b=klN1mOqy1fE6PewAvKE8qOchJWU4Fj7Gtb3vYfIlJVQx9zBol9tAbA6CjqgzLI0Rei
-	T9nyJF6Trc5G1dLAvw8qaZa/NPSHUCG9w0+3qVeLW7bIu5lTvdvW0w7G/D+3B06oovj1
-	40fQK1QEWRAUWXfpJb36Yz+xuqoMbzWPjiPHL9klluzox12Af4QMu8zG4TrKfLE3Jnfu
-	33PYgZyKwW9Zs4uxD2f9pIXSMzgSYlgNKmR6ICbt+LnT3KRrPDLJtXHv/BeB0RxxxGvA
-	hdAfD2e3Awy9kfKO+Ua7Fe+xUseBIfdwxauPGIovnDNYjJlrrwhKwdWIs9O3YUhvuN0C
-	Y4/w==
+	bh=NExoM/SvaPAUxnvEAqpoe/uFi0acfoCY1r+fhApjw0I=;
+	b=LW6dRee8SZGkcKBxnSyQsASc8XwhrMkCGc7d0Yb+CNphRS69I2DpoDTGwV6lTOMJQU
+	o3PXtgmN2g/C5SAWDGAXFQmBKAiQvGHZ3EigiRWn/COHom+Oc3Q5IdELwbP+5fykF7jz
+	TGCEorIiWLrnC//xYVOqQKCBM87wIEm0kM1vYeA6NBT8tyv0tk0z8p1fM3IZTEbNdVgO
+	pBBbyF5eLllAFSeRU15Dp0xfeDotY5mVQMBOCxaCOZQWqpQsePmMHw/JKvgBV299iYgE
+	gKIOC7xdK2jXGucluICZEATPuhrNAQn220a2pRq+iaWcB3Mo1c2+5x0fLvnWm0t4TtaS
+	xN3Q==
 MIME-Version: 1.0
-X-Received: by 10.182.39.69 with SMTP id n5mr11067451obk.72.1365255446018;
-	Sat, 06 Apr 2013 06:37:26 -0700 (PDT)
+X-Received: by 10.60.103.165 with SMTP id fx5mr11161420oeb.4.1365255648504;
+	Sat, 06 Apr 2013 06:40:48 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.80.198 with HTTP; Sat, 6 Apr 2013 06:37:25 -0700 (PDT)
-In-Reply-To: <83a882b9aef9d5a8054e9b291db1b24b6157443e.1365204818.git.paul.eggleton@linux.intel.com>
+Received: by 10.182.80.198 with HTTP; Sat, 6 Apr 2013 06:40:48 -0700 (PDT)
+In-Reply-To: <ff614a718daecdf00571e386efbcff5f85e8a667.1365204818.git.paul.eggleton@linux.intel.com>
 References: <cover.1365204818.git.paul.eggleton@linux.intel.com>
-	<83a882b9aef9d5a8054e9b291db1b24b6157443e.1365204818.git.paul.eggleton@linux.intel.com>
-Date: Sat, 6 Apr 2013 10:37:25 -0300
-X-Google-Sender-Auth: otAzwoLkc6CVi_1n_mj54tNBwOM
-Message-ID: <CAP9ODKorieu9sAbJczF83xGuwrxeH8G2KLvaZhn1KSpzAZFNNQ@mail.gmail.com>
+	<ff614a718daecdf00571e386efbcff5f85e8a667.1365204818.git.paul.eggleton@linux.intel.com>
+Date: Sat, 6 Apr 2013 10:40:48 -0300
+X-Google-Sender-Auth: r3d0TUOwnVUtVTgP9mqmmmtfpXQ
+Message-ID: <CAP9ODKrCaAm5QFNhtwjnV2iyoU-63rc6L8xqWv7PA1h-BG6yTg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/4] packagegroup-qte-toolchain-target: remove bbappend
+Subject: Re: [meta-oe][PATCH 1/4] libmad: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Apr 2013 13:55:05 -0000
+X-List-Received-Date: Sat, 06 Apr 2013 13:58:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Fri, Apr 5, 2013 at 8:35 PM, Paul Eggleton
 <paul.eggleton@linux.intel.com> wrote:
-> This added Qwt to the Qt Embedded toolchain. This is a distro policy
-> decision, and in any case Qwt is a third-party library which is not part
-> of Qt. Distros that wish to do this should add this bbappend to their
-> own layers.
+> This is largely equivalent to the recipe in OE-Core apart from
+> LICENSE_FLAGS, insignificant patch differences, and an additional patch
+> for avr32 optimisation (and since there appears to be no public layer
+> for an avr32 machine, there's not a great deal of point in preserving
+> the latter).
 >
 > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-NACK
-
-Keep PRINC please.
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
 --
 Otavio Salvador                             O.S. Systems
