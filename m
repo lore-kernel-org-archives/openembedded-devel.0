@@ -1,35 +1,33 @@
-Received: from mail-pd0-f179.google.com ([209.85.192.179])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UPCDc-0004PO-Bh
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Apr 2013 15:34:45 +0200
-Received: by mail-pd0-f179.google.com with SMTP id x11so3191174pdj.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UPIP2-0003Xn-1P for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Apr 2013 22:11:01 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UPI8J-0006RW-37 for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Apr 2013 21:53:39 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Apr 2013 21:53:39 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Apr 2013 06:17:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=sd+VoSv9xUkjulLNX0aQ6I6QdzluRc1cymp4QBHYJ9U=;
-	b=vrnR1jFYeCZwrYO5198iknmWfJ6uRdT0jQpe2P55U48CshxLVLAinvBoOxac2SYckd
-	vE92Y3ExuKS///SozsFmhKtz7vBH0Pk78vmDFHFNWmatEOGa2FMwrA8OBnf63jVFc7Bb
-	wmH579l9JosLOzRrzU61mz1QmObVe+ziwBWtpIYQg/r51ewjE/KninwYiQTkxjz2A4o8
-	Lsnn9l9TN4rGm+kcna3PwTYP43x1aa/A1trOxmJwkNfi1o26ocsY35jY7jadsS/ZKBjs
-	xwFs558FoSkAEZBbSgPmBW8fe3r/HJVJ+KFq4jcC/U/okSSCerSgLVFyUzr+V80l7r3b
-	FSjA==
-X-Received: by 10.66.88.39 with SMTP id bd7mr37595805pab.184.1365427044661;
-	Mon, 08 Apr 2013 06:17:24 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id lo3sm19538014pab.19.2013.04.08.06.17.22
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 08 Apr 2013 06:17:23 -0700 (PDT)
-Date: Mon, 8 Apr 2013 15:17:17 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 08 Apr 2013 21:53:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130408131717.GA2470@jama>
-References: <5162B803.4090400@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <5162B803.4090400@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 08 Apr 2013 21:53:34 +0200
+Message-ID: <kjv77m$tt7$1@ger.gmane.org>
+References: <5162B803.4090400@nedap.com> <20130408131717.GA2470@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <20130408131717.GA2470@jama>
+X-Enigmail-Version: 1.5
 Subject: Re: machinename with dash in it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,50 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2013 13:34:46 -0000
-X-Groupsio-MsgNum: 43972
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SLDf9lqlvOQaIe6s"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Apr 2013 20:11:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---SLDf9lqlvOQaIe6s
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Mon, Apr 08, 2013 at 02:28:51PM +0200, Jaap de Jong wrote:
-> Hi All,
-> something strange happens with my machinename with a dash in it: x-y
-> If I bitbake some image it will end up that netbase is not found.
-> Inspection of build/tmp-angstrom_v2012_12-eglibc/work shows 2 variants=20
-> of x-y: one with a dash and one where the dash is replaced by an=20
-> underscore: x-y and x_y
-> In x-y only netbase is found, rest of the machinespecific packages are=20
-> in x_y
+Op 08-04-13 15:17, Martin Jansa schreef:
+> On Mon, Apr 08, 2013 at 02:28:51PM +0200, Jaap de Jong wrote:
+>> Hi All, something strange happens with my machinename with a dash in
+>> it: x-y If I bitbake some image it will end up that netbase is not
+>> found. Inspection of build/tmp-angstrom_v2012_12-eglibc/work shows 2
+>> variants of x-y: one with a dash and one where the dash is replaced by
+>> an underscore: x-y and x_y In x-y only netbase is found, rest of the
+>> machinespecific packages are in x_y
+> 
+> MACHINE_ARCH is MACHINE with s/-/_/g (because rpm had issues with -) so
+> it's expected.
+> 
+>> Creating the image fails with the message that netbase is not found... 
+>> Any ideas?
+> 
+> It's probably caused by 
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=4102 do manual cleanup
+> described there and it should work fine.
 
-MACHINE_ARCH is MACHINE with s/-/_/g (because rpm had issues with -) so it'=
-s expected.
-
-> Creating the image fails with the message that netbase is not found...
-> Any ideas?
-
-It's probably caused by
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4102
-do manual cleanup described there and it should work fine.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---SLDf9lqlvOQaIe6s
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+The root cause was this one:
+https://git.linaro.org/gitweb?p=openembedded/meta-linaro.git;a=commit;h=30f353c072336ad764e9528ae3c508adb28fa4ad
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlFiw10ACgkQN1Ujt2V2gByJjgCgpsVTyXZ51YcEYuewPeGj7+bZ
-4T4AnjRWu46/LyOEl2hKJGip22elt5Cl
-=IRXH
+iD8DBQFRYyA+MkyGM64RGpERAlOqAKCo06UHU8N5U7rGLyddRl8vjS9cBgCgka+u
+Zlnl+rXes1ntNxNASOrc6pY=
+=Tjzk
 -----END PGP SIGNATURE-----
 
---SLDf9lqlvOQaIe6s--
+
+
