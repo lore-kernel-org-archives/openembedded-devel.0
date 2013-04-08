@@ -1,26 +1,18 @@
-Received: from mga09.intel.com ([134.134.136.24])
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPLVD-0002p6-SX
+	(envelope-from <dv@pseudoterminal.org>) id 1UPLh2-0003xC-O8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Apr 2013 01:29:33 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 08 Apr 2013 16:10:28 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,434,1363158000"; d="scan'208";a="292008411"
-Received: from unknown (HELO helios.localnet) ([10.255.13.161])
-	by orsmga001.jf.intel.com with ESMTP; 08 Apr 2013 16:12:10 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Carlos Rafael Giani <dv@pseudoterminal.org>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 09 Apr 2013 00:12:10 +0100
-Message-ID: <3085999.SluaBE5glT@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-26-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <51634B82.3070807@pseudoterminal.org>
-References: <1365458017-3185-1-git-send-email-dv@pseudoterminal.org>
-	<1644870.xWQQ3phVp5@helios> <51634B82.3070807@pseudoterminal.org>
-MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] add recipe for mpg123, a decoder for MPEG-1 layer 1, 2, and 3
+	Tue, 09 Apr 2013 01:41:44 +0200
+Received: from localhost.localdomain (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 8DB732705E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Apr 2013 01:24:27 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Apr 2013 01:24:27 +0200
+Message-Id: <1365463467-5893-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.2
+Subject: [meta-oe][PATCH v2] add recipe for mpg123, a decoder for MPEG-1 layer 1, 2, and 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +26,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2013 23:29:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 08 Apr 2013 23:41:53 -0000
 
-On Tuesday 09 April 2013 00:58:10 Carlos Rafael Giani wrote:
-> On 2013-04-09 00:49, Paul Eggleton wrote:
-> > Recipe looks good, however this should probably go into meta-multimedia.
-> > We do still have some multimedia recipes in meta-oe but these ought to be
-> > moved (when someone gets around to it).
->
-> I was already wondering about this. So the long-term plan is to move
-> multimedia stuff out of meta-oe, okay.
-> Shall I re-send the patch in the meta-multimedia directory?
+mpg123 consists of a decoder library, and a command line application.
+The application can be used to playback and dump decoded mp1/mp2/mp3 files.
+The library can be integrated in other applications. CPU usage is minimal.
 
-Yes please.
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ .../recipes-multimedia/mpg123/mpg123_1.15.3.bb     | 30 ++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
 
-Cheers,
-Paul
-
+diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+new file mode 100644
+index 0000000..6b9490e
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Audio decoder for MPEG-1 Layer 1/2/3"
++DESCRIPTION = "The core of mpg123 is an MPEG-1 Layer 1/2/3 decoding library, which can be used by other programs. \
++mpg123 also comes with a command-line tool which can playback using ALSA, PulseAudio, OSS, and several other APIs, \
++and also can write the decoded audio to WAV."
++HOMEPAGE = "http://mpg123.de/"
++BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
++SECTION = "multimedia"
++
++LICENSE = "LGPLv2.1"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
++SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
++
++S = "${WORKDIR}/mpg123-${PV}"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = " \
++	--enable-shared \
++	${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
++	${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
++	${@bb.utils.contains('TUNE_FEATURES', 'i586', '--with-cpu=i586', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
++	"
++
 -- 
+1.8.2
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
