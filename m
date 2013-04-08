@@ -1,20 +1,18 @@
-Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
+Received: from ptmx.org ([178.63.28.110])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <apelete@seketeli.net>) id 1UPJil-0001dl-G5
+	(envelope-from <dv@pseudoterminal.org>) id 1UPKHA-0005DH-T6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Apr 2013 23:35:23 +0200
-Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.net (Postfix) with ESMTP id 23425EA042
+	Tue, 09 Apr 2013 00:10:56 +0200
+Received: from localhost.localdomain (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id DE33B200E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Apr 2013 23:25:35 +0200 (CEST)
-Received: by localhost (Postfix, from userid 1000)
-	id 8D0F9A40685; Mon,  8 Apr 2013 23:18:31 +0200 (CEST)
-From: Apelete Seketeli <apelete@seketeli.net>
+	Mon,  8 Apr 2013 23:53:39 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Apr 2013 23:18:21 +0200
-Message-Id: <cover.1365455095.git.apelete@seketeli.net>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-handheld][PATCH v3 0/1] Pull request 20130408
+Date: Mon,  8 Apr 2013 23:53:37 +0200
+Message-Id: <1365458017-3185-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.2
+Subject: [meta-oe][PATCH] add recipe for mpg123, a decoder for MPEG-1 layer 1, 2, and 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,61 +26,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2013 21:35:26 -0000
+X-List-Received-Date: Mon, 08 Apr 2013 22:10:57 -0000
 
-Hello,
+mpg123 consists of a decoder library, and a command line application.
+The application can be used to playback and dump decoded mp1/mp2/mp3 files.
+The library can be integrated in other applications. CPU usage is minimal.
 
-On Sunday 07 April 2013, Apelete Seketeli wrote:
-> On Friday 05 April 2013, Apelete Seketeli wrote:
-> > Following the patches I sent to the meta-handheld layer a few days ago
-> > to add machine support for the Ben Nanonote, I found out that the
-> > corresponding kernel recipe fails to build on oe-core (builds fine on
-> > oe-classic).
-> > A few settings were missing and, more importantly, the version of gcc
-> > in oe-core seems to enable the -Wunused-but-set-variable switch, which
-> > makes it error on many variables that were indeed 'unused but
-> > set'. After trying to solve this issue the easy way, by setting
-> > 'CFLAGS=-Wno-error=unused-but-set-variable -Wno-error=unused-but-set-parameter'
-> > to no avail, I chose to annotate the aforementioned variables in the
-> > kernel code with __attribute__((__unused__)).
-> >
-> > The patches that come as a follow-up of this message are what it's all
-> > about; sorry for the inconvenience in the first place.
-> 
-> I took the time to fix the patch for the GCC 4.6 build issue. Instead
-> of just fixing the issue on my own, I looked at how it was done in the
-> mainline kernel and backported the fixes through a new patch named
-> fix-gcc-4.6.0-build-errors.patch; this approach seems more logical to
-> me.
-> While I was at it, also removed "[PATCH 2/2] ben-nanonote: add
-> DEFAULTTUNE to machine configuration" from the patchset, following
-> Paul's advice.
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ meta-oe/recipes-multimedia/mpg123/mpg123_1.15.3.bb | 30 ++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/mpg123/mpg123_1.15.3.bb
 
-Added a header to the "fix-gcc-4.6.0-build-errors.patch" kernel patch,
-describing the changes and stating the Upstream-Status.
-
-Tested by building linux-jlime-ben-nanonote from scratch on top of
-master branch.
-Please pull into meta-handheld.
-
-The following changes since commit 913735dce388f660dfbbe288ed736e12ed48c8d8:
-
-  linux-yocto-tiny-kexecboot_3.2: removed unused, non-working MTD-RW patch (2013-04-06 00:25:08 +0100)
-
-are available in the git repository at:
-
-  git://seketeli.fr/~apelete/meta-handheld.git fix-nn-kernel-build
-
-Apelete Seketeli (1):
-  linux-jlime-ben-nanonote: fix GCC-4.6 build errors
-
- .../fix-gcc-4.6.0-build-errors.patch               |  124 ++++++++++++++++++++
- .../linux/linux-jlime-ben-nanonote_2.6.36.bb       |    5 +-
- 2 files changed, 128 insertions(+), 1 deletion(-)
- create mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/fix-gcc-4.6.0-build-errors.patch
-
+diff --git a/meta-oe/recipes-multimedia/mpg123/mpg123_1.15.3.bb b/meta-oe/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+new file mode 100644
+index 0000000..6b9490e
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Audio decoder for MPEG-1 Layer 1/2/3"
++DESCRIPTION = "The core of mpg123 is an MPEG-1 Layer 1/2/3 decoding library, which can be used by other programs. \
++mpg123 also comes with a command-line tool which can playback using ALSA, PulseAudio, OSS, and several other APIs, \
++and also can write the decoded audio to WAV."
++HOMEPAGE = "http://mpg123.de/"
++BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
++SECTION = "multimedia"
++
++LICENSE = "LGPLv2.1"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
++SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
++
++S = "${WORKDIR}/mpg123-${PV}"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = " \
++	--enable-shared \
++	${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
++	${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
++	${@bb.utils.contains('TUNE_FEATURES', 'i586', '--with-cpu=i586', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
++	"
++
 -- 
-1.7.10.4
+1.8.2
 
 
 
