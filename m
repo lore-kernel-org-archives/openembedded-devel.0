@@ -1,35 +1,30 @@
-Received: from mail-vb0-f53.google.com ([209.85.212.53])
+Received: from mail-vb0-f54.google.com ([209.85.212.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UPVfm-0000Ir-Ar
+	(envelope-from <hirst689@gmail.com>) id 1UPVsj-0001ca-Oj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Apr 2013 12:21:15 +0200
-Received: by mail-vb0-f53.google.com with SMTP id i3so4491499vbh.40
+	Tue, 09 Apr 2013 12:34:31 +0200
+Received: by mail-vb0-f54.google.com with SMTP id w16so4591009vbf.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Apr 2013 03:03:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=qq4o5sCcXpHn1MMpMH2M6dfNsjH8eS/HFSvp3G+ho/0=;
-	b=lvONcJ8OrTtHVpcaNeEyxI2T/RpDdgM5tzd4h8Z6/rv/u6z4Fxsy4paioZj4oxQ7zX
-	7uOM4MpnyqNATXUUCtKK01CAr3efD4RDJWzHU+UAxcf/Ek9C22zhkxwQWXw0ATjnoNTh
-	CQ+fdzf1S9rCQq8wiDmIpwXFzbr5ajTNwJy8g7yk7pLCdKhjesaxztyH4P/YNECDp4pC
-	Zg41tvg8RSoiGzGLi/pX8kl0YNWywcxNjXSgSLuiomJPIk3viuWT4jtENLYWZrQDFD66
-	1cllvTyR78BFfxRQpvIawIkNYs7Hvzww+6Jkzba0fJR01TQKA48epUt/ixeSxYTqcx0m
-	3cCw==
-X-Received: by 10.52.23.115 with SMTP id l19mr15993490vdf.55.1365501825994;
-	Tue, 09 Apr 2013 03:03:45 -0700 (PDT)
+	Tue, 09 Apr 2013 03:17:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type; bh=qnaZ5P1arSGxqTw6FTMoN1aCBvEYF7371e8GZ1LXKqQ=;
+	b=WVn/uB3+AaBa4FMmGvQhLSB3B6HfFrb8fctMtCBExGTHdNIY3nQjs584GiVZKO4Qer
+	6BtHZgQTGeBnBcaguTJmlWh2W8EZV88K5gs9V2No8R+hWBMUob6KBdeM9SpBsSz1kFCF
+	3KRhb2AM2kBIkIsMJ/th//oy3S5PYseaATu2cXlTutwrH80YR3Y1DIrCkc5EArPVykq0
+	xRMyI0oKOTyGmPVXs1Ilk6QeTq62MRrLHiblhSPtHuhrLwjDSVDfD/fgcZLUVpEpKxeT
+	0D8b8nuSNf86xXstjZHej/egXuGT82QCFiV3gjxMA2ro7O7oEc/thA4t9Z17c4KEFqTW
+	RazA==
 MIME-Version: 1.0
-Received: by 10.220.100.68 with HTTP; Tue, 9 Apr 2013 03:03:25 -0700 (PDT)
-In-Reply-To: <5163E52F.9000206@pseudoterminal.org>
-References: <1365463467-5893-1-git-send-email-dv@pseudoterminal.org>
-	<kk0d9f$qip$1@ger.gmane.org> <5163E52F.9000206@pseudoterminal.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 9 Apr 2013 11:03:25 +0100
-Message-ID: <CAJTo0LY+3C3kEJYS_FAtKvz9Pw-oJhfM90brVwfFngO-_6gyGg@mail.gmail.com>
+X-Received: by 10.220.221.210 with SMTP id id18mr18527947vcb.74.1365502629595; 
+	Tue, 09 Apr 2013 03:17:09 -0700 (PDT)
+Received: by 10.59.11.37 with HTTP; Tue, 9 Apr 2013 03:17:09 -0700 (PDT)
+Date: Tue, 9 Apr 2013 06:17:09 -0400
+Message-ID: <CAHu+ux1UCAyaf02tKgUSHAsV81p75bhP8Lo_brYqqkgasbjjag@mail.gmail.com>
+From: David Hirst <hirst689@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnn3MQ1g4VJsyizuaccRYZ2SHnjQgWeEGDCRMBGm9VIaJtLBbOUq2KZXAym/+Zfzffuk8zc
-Subject: Re: [meta-oe][PATCH v2] add recipe for mpg123, a decoder for MPEG-1 layer 1, 2, and 3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Archiving my OE enviromnet
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,17 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Apr 2013 10:21:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Apr 2013 10:34:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 9 April 2013 10:53, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
-> Hmm, perhaps I should change it. mpg123 tries to autodetect the machine then
-> anyway. I just added these options to ensure it picks the right ones without
-> having to autodetect anything.
+I am trying to achive (svn or tar ball) my whole oe_layersetup directory
+structure.
+However I seem to have problems when I check it out or untar it on a
+different machine.
+It does not seems to build correctly. I set up the paths to the build tools
+and use /conf/setenv
+to set up other paths.
+It seems impossible to build everything correctly without going through a
+comlete installation of the oe-layersetup form the git clone and setup
+script. Does anyone have experiance with this? and have some advice?
+Thanks
 
-How does it detect?  Traditional "what am I running on?" tests won't
-work as it's being cross-compiled...
-
-Ross
-
+-- 
+David Hirst
+hirst689@gmail.com
 
