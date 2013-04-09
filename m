@@ -1,18 +1,26 @@
-Received: from ptmx.org ([178.63.28.110])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <dv@pseudoterminal.org>) id 1UPLh2-0003xC-O8
+	(envelope-from <jaap.dejong@nedap.com>) id 1UPSET-0003mk-AF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Apr 2013 01:41:44 +0200
-Received: from localhost.localdomain (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 8DB732705E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Apr 2013 01:24:27 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+	Tue, 09 Apr 2013 08:40:42 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Tue, 9 Apr 2013
+	08:23:19 +0200
+X-TM-IMSS-Message-ID: <62c55d770004a4d3@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 62c55d770004a4d3 ;
+	Tue, 9 Apr 2013 08:23:23 +0200
+Message-ID: <5163B3D7.2000400@nedap.com>
+Date: Tue, 9 Apr 2013 08:23:19 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Apr 2013 01:24:27 +0200
-Message-Id: <1365463467-5893-1-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.2
-Subject: [meta-oe][PATCH v2] add recipe for mpg123, a decoder for MPEG-1 layer 1, 2, and 3
+References: <5162B803.4090400@nedap.com> <20130408131717.GA2470@jama>
+	<kjv77m$tt7$1@ger.gmane.org> <20130408201539.GD2470@jama>
+In-Reply-To: <20130408201539.GD2470@jama>
+Subject: Re: machinename with dash in it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,56 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Apr 2013 23:41:53 -0000
+X-List-Received-Date: Tue, 09 Apr 2013 06:40:43 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-mpg123 consists of a decoder library, and a command line application.
-The application can be used to playback and dump decoded mp1/mp2/mp3 files.
-The library can be integrated in other applications. CPU usage is minimal.
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- .../recipes-multimedia/mpg123/mpg123_1.15.3.bb     | 30 ++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
-new file mode 100644
-index 0000000..6b9490e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Audio decoder for MPEG-1 Layer 1/2/3"
-+DESCRIPTION = "The core of mpg123 is an MPEG-1 Layer 1/2/3 decoding library, which can be used by other programs. \
-+mpg123 also comes with a command-line tool which can playback using ALSA, PulseAudio, OSS, and several other APIs, \
-+and also can write the decoded audio to WAV."
-+HOMEPAGE = "http://mpg123.de/"
-+BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
-+SECTION = "multimedia"
-+
-+LICENSE = "LGPLv2.1"
-+LICENSE_FLAGS = "commercial"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
-+
-+SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
-+SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
-+
-+S = "${WORKDIR}/mpg123-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = " \
-+	--enable-shared \
-+	${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
-+	${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
-+	${@bb.utils.contains('TUNE_FEATURES', 'i586', '--with-cpu=i586', '', d)} \
-+	${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
-+	${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
-+	"
-+
--- 
-1.8.2
+On 04/08/2013 10:15 PM, Martin Jansa wrote:
+> On Mon, Apr 08, 2013 at 09:53:34PM +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Op 08-04-13 15:17, Martin Jansa schreef:
+>>> On Mon, Apr 08, 2013 at 02:28:51PM +0200, Jaap de Jong wrote:
+>>>> Hi All, something strange happens with my machinename with a dash in
+>>>> it: x-y If I bitbake some image it will end up that netbase is not
+>>>> found. Inspection of build/tmp-angstrom_v2012_12-eglibc/work shows 2
+>>>> variants of x-y: one with a dash and one where the dash is replaced by
+>>>> an underscore: x-y and x_y In x-y only netbase is found, rest of the
+>>>> machinespecific packages are in x_y
+>>> MACHINE_ARCH is MACHINE with s/-/_/g (because rpm had issues with -) so
+>>> it's expected.
+>>>
+>>>> Creating the image fails with the message that netbase is not found...
+>>>> Any ideas?
+>>> It's probably caused by
+>>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=4102 do manual cleanup
+>>> described there and it should work fine.
+>> The root cause was this one:
+>> https://git.linaro.org/gitweb?p=openembedded/meta-linaro.git;a=commit;h=30f353c072336ad764e9528ae3c508adb28fa4ad
+> Heh, I was expecting that all MACHINEs in PACKAGE_ARCH died long time
+> ago.
+>
+Thanks for the hint, this is fixed now.
+(I have a new error though....)
+Jaap
 
 
 
