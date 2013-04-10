@@ -1,26 +1,34 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-vc0-f175.google.com ([209.85.220.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPwcP-000705-Md
+	(envelope-from <ross.burton@intel.com>) id 1UPwgo-0007Td-66
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 17:08:21 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 10 Apr 2013 07:50:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="284303567"
-Received: from unknown (HELO helios.localnet) ([10.255.14.51])
-	by azsmga001.ch.intel.com with ESMTP; 10 Apr 2013 07:50:02 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jaap de Jong <jaap.dejong@nedap.com>
-Date: Wed, 10 Apr 2013 15:50:01 +0100
-Message-ID: <1683367.FB5G2sIQUU@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <2302654.XPc2iUTDec@helios>
-References: <51656126.2020505@nedap.com> <5165792D.9070200@nedap.com>
-	<2302654.XPc2iUTDec@helios>
+	Wed, 10 Apr 2013 17:11:58 +0200
+Received: by mail-vc0-f175.google.com with SMTP id ib11so440435vcb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2013 07:54:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=77xLEQWPZoCoGKlpc5bn6bHQRQhPmYpxepJ0M/qcbTY=;
+	b=ZlSGPTr1DiWTfc3gUM+eC/KS4EYDCHJNyRRabsMCK+IjdIrkSZzHraYVnqqXijc53u
+	aDGxEo9t8LDhdnuXGNKjYsKjxZMFznUoP6Rv8ikeg+K5b15vNfBSasfoTlPYbijt5dh0
+	+O3BstrP+lRozutM+cR8FCLJpCtaAW4/EKcld1Ah3GfnWJkR2G54qD+fHLfdUuWi3Pez
+	GJ2BzQnYkwWX2MSqCFv7c8cteW7447jztcd9Sdnf4OM6l0rzSYN1RZ3WlFRHLB52MnZn
+	Pc8W/8ZyOcsUYVclmanowtDvrrCu3vMH+SH0kHY9q0WthbNEjYQPBiiceNpVnv2hV5Of
+	JY6A==
+X-Received: by 10.52.108.10 with SMTP id hg10mr1498140vdb.34.1365605676196;
+	Wed, 10 Apr 2013 07:54:36 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: dropbear
+Received: by 10.220.100.68 with HTTP; Wed, 10 Apr 2013 07:54:16 -0700 (PDT)
+In-Reply-To: <1365604639-5235-1-git-send-email-ndec@linaro.org>
+References: <1365604639-5235-1-git-send-email-ndec@linaro.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 10 Apr 2013 15:54:16 +0100
+Message-ID: <CAJTo0LYfznJ8DH_PEaBWRF4_KVP=FqVJe8E6uZfkVtN1MhXYKw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQk9QndJc1I9r8KtwTzIvuOLPUvVeNrKdSqwLjmJFmgFxZoOFHdPgCzR7tJEafFuJ9RRQTSA
+Subject: Re: [meta-multimedia][PATCH] gupnp: remove dependency on gnome-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,45 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 15:08:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 10 Apr 2013 15:11:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wednesday 10 April 2013 15:47:09 Paul Eggleton wrote:
-> On Wednesday 10 April 2013 16:37:33 Jaap de Jong wrote:
-> > On 04/10/2013 04:04 PM, Paul Eggleton wrote:
-> > > On Wednesday 10 April 2013 14:55:02 Jaap de Jong wrote:
-> > >> dropbear 2013.56 is currently the most recent version.
-> > >> Although not documented, they left out the functionality patched in
-> > >> with
-> > >> allow-nopw.patch in the 2013.56 release.
-> > > 
-> > > How did you find this out?
-> > 
-> > the patch fails and inspection of the code learns that it can't be
-> > applied.
-> 
-> Ah right - to explain what has happened, I developed a new patch to change
-> dropbear so that the functionality is now controlled through a command-line
-> switch, and that is now configured in the image using a script in
-> /etc/default/; if you look at the dropbear recipe in master you can see how
-> it works. This avoids the need to rebuild dropbear depending upon the value
-> of IMAGE_FEATURES which was not really ideal.
-> 
-> If you want to use the latest version of dropbear with an older branch I'd
-> suggest just taking the dropbear recipe in master, removing the nopw-option
-> patch (which has been applied).
+On 10 April 2013 15:37, Nicolas Dechesne <ndec@linaro.org> wrote:
+> As discussed in [1], let's remove the dependency on gnome-icon-theme,
+> since it's not required, and it brings additional unwanted dependency,
+> such as the whole gtk+...
+>
+> [1] http://article.gmane.org/gmane.comp.handhelds.openembedded/57483
+>
+> It is build-tested with
+>  - core-image-minimal
+>  - IMAGE_INSTALL += 'gupnp'
+>  - directfb in DISTRO_FEATURES
+>
+> The build was failing before (GTK failed to build with directfb, which
+> is expected).
+>
+> Signed-off-by: Nicolas Dechesne <ndec@linaro.org>
 
-If you do do this you'll also need to apply this patch:
+You'll want to bump PR (ideally adding some form of pr in the .inc at
+the same time).
 
-http://cgit.openembedded.org/openembedded-core/commit/?id=0937054e6e3e02565f57e60a8bdc14b0ad62e249
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
 
