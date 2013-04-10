@@ -1,28 +1,36 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-oa0-f48.google.com ([209.85.219.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1UPwvw-0000qu-A1
+	(envelope-from <nicolas.dechesne@linaro.org>) id 1UPx08-0001T6-7m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 17:27:37 +0200
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 10 Apr 2013
-	17:10:12 +0200
-X-TM-IMSS-Message-ID: <69ce129b0005094d@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 69ce129b0005094d ;
-	Wed, 10 Apr 2013 17:10:14 +0200
-Message-ID: <516580D4.1030802@nedap.com>
-Date: Wed, 10 Apr 2013 17:10:12 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Wed, 10 Apr 2013 17:32:02 +0200
+Received: by mail-oa0-f48.google.com with SMTP id j1so550458oag.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2013 08:14:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=/LkFTqbcJjhEX2XW9wk0mIbXffFYY8ni9KQwK/AP6TI=;
+	b=RC5OQJlMp56reZjq91BYoQngdqucuL4F/b3RxQoyBazbVIXku69Hb0Xv9PDhNUw7mc
+	TaCd4/RW8MTaNVUsfSomJZRSBwStK8RLZVsfKYEYYH/CvH+hIzbYZvecSQFPWZotoM4Q
+	Csi1QInXWU9ShhXWKq8Rys0fPpaX1zV9LaGAIlcm/qyhzJdZ+UdVBiG3J9zFFUkf2UE4
+	kPELxa0NSdwG/QX5a4ULZCfN/aB7Fr9jnkn4SNjdFwj+LhgH9Ki7LQLCwwWEZVr73I7f
+	P+iH0IB1Extm+I+WlDm4Yk2eXyZSwMh4HH9kqIk3hmdqmmBYqoB/99+zOLdUxZMPnvVM
+	5RBw==
+X-Received: by 10.60.34.167 with SMTP id a7mr928597oej.20.1365606874156; Wed,
+	10 Apr 2013 08:14:34 -0700 (PDT)
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <51656126.2020505@nedap.com> <5165792D.9070200@nedap.com>
-	<2302654.XPc2iUTDec@helios> <1683367.FB5G2sIQUU@helios>
-In-Reply-To: <1683367.FB5G2sIQUU@helios>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: dropbear
+Received: by 10.76.35.193 with HTTP; Wed, 10 Apr 2013 08:14:14 -0700 (PDT)
+In-Reply-To: <CAJTo0LYfznJ8DH_PEaBWRF4_KVP=FqVJe8E6uZfkVtN1MhXYKw@mail.gmail.com>
+References: <1365604639-5235-1-git-send-email-ndec@linaro.org>
+	<CAJTo0LYfznJ8DH_PEaBWRF4_KVP=FqVJe8E6uZfkVtN1MhXYKw@mail.gmail.com>
+From: Nicolas Dechesne <ndec@linaro.org>
+Date: Wed, 10 Apr 2013 17:14:14 +0200
+Message-ID: <CAP71WjwrXC6BAyPred-K+c0kZc4aOaDD6Nd_9WC5kmrTv_Hqog@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+X-Gm-Message-State: ALoCoQn/xaVLtCiAIkLMEfiPTmv6NM9LoHdYL2DOTSZHwR/yete/cj6CJvMZZ9EZI8VgbghAH7RU
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH] gupnp: remove dependency on gnome-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,45 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 15:27:43 -0000
-X-List-Received-Date: Wed, 10 Apr 2013 15:27:43 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Apr 2013 15:32:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Wed, Apr 10, 2013 at 4:54 PM, Burton, Ross <ross.burton@intel.com> wrote:
+> You'll want to bump PR (ideally adding some form of pr in the .inc at
+> the same time).
 
-On 04/10/2013 04:50 PM, Paul Eggleton wrote:
-> On Wednesday 10 April 2013 15:47:09 Paul Eggleton wrote:
->> On Wednesday 10 April 2013 16:37:33 Jaap de Jong wrote:
->>> On 04/10/2013 04:04 PM, Paul Eggleton wrote:
->>>> On Wednesday 10 April 2013 14:55:02 Jaap de Jong wrote:
->>>>> dropbear 2013.56 is currently the most recent version.
->>>>> Although not documented, they left out the functionality patched in
->>>>> with
->>>>> allow-nopw.patch in the 2013.56 release.
->>>> How did you find this out?
->>> the patch fails and inspection of the code learns that it can't be
->>> applied.
->> Ah right - to explain what has happened, I developed a new patch to change
->> dropbear so that the functionality is now controlled through a command-line
->> switch, and that is now configured in the image using a script in
->> /etc/default/; if you look at the dropbear recipe in master you can see how
->> it works. This avoids the need to rebuild dropbear depending upon the value
->> of IMAGE_FEATURES which was not really ideal.
->>
->> If you want to use the latest version of dropbear with an older branch I'd
->> suggest just taking the dropbear recipe in master, removing the nopw-option
->> patch (which has been applied).
-Seems that the nopw-option.patch is added to dropbear rev 2013.56, so 
-that one should be remove also from the list of patches to apply.
-> If you do do this you'll also need to apply this patch:
->
-> http://cgit.openembedded.org/openembedded-core/commit/?id=0937054e6e3e02565f57e60a8bdc14b0ad62e249
-Ok.
-Thanks for your help!
+ouch.. indeed.
 
-> Cheers,
-> Paul
->
+do you mean something along these lines:
 
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+index f793236..f7c382a 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+@@ -2,6 +2,8 @@ SUMMARY = "UPnP framework"
+ DESCRIPTION = "GUPnP is an elegant, object-oriented open source
+framework for creating UPnP  devices and control points, written in C
+using G
+ LICENSE = "LGPLv2+"
+
++INC_PR = "r0"
++
+ DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gobject-introspection-stub"
+
+ require no-vala.inc
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
+b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
+index 4fb1d05..5e6ea35 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.18.4.bb
+@@ -1,5 +1,7 @@
+ require gupnp.inc
+
++PR = "${INC_PR}.0"
++
+ SRC_URI = "http://download.gnome.org/sources/${BPN}/0.18/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "0e15fa26be7b1a0255e6dec07c285527"
+ SRC_URI[sha256sum] =
+"6b437d5711b212292c6080626b97480268310da636a6cf937ad6119291af78a1"
+
+then, what I could do is a patch serie where patch 1/2 introduces the
+INC_PR with "r0", and patch 2/2 fixes gupnp and increments INC_PR to
+'r1'.
+
+also, is that worthwhile to add the INC_PR in all other recipes in the
+gupnp folder ? or just in gupnp recipe for now?
 
 
