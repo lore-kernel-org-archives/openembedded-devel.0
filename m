@@ -1,37 +1,37 @@
-Received: from mail-pd0-f181.google.com ([209.85.192.181])
+Received: from mail-wg0-f46.google.com ([74.125.82.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UPwA6-0004KA-VQ
+	(envelope-from <ndec@linaro.org>) id 1UPwQA-0005Z3-Kx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 16:38:11 +0200
-Received: by mail-pd0-f181.google.com with SMTP id y10so291526pdj.40
+	Wed, 10 Apr 2013 16:54:49 +0200
+Received: by mail-wg0-f46.google.com with SMTP id j13so547610wgh.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 07:20:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=kht7Df5ccHkTM550B99uaI1EpCjTzBE8P+zORgjrQ58=;
-	b=kAQ+0tZxEsWE6zyaeMDT8mNe06wLAsQHuCzmEag/huaLQqE8BKar+Q4o/o2YieVy+e
-	sI2B3lTjQoKBkA9j0OV5gU3mJL5+K3ZhZryCohRm8xP/Ed+Vk9HvZEcivC1YNMKGF82Z
-	Gz7ZeAHnhwCcHYDs8kZk9bhkvsjy6cucm5RGO910LNN/gTWjfJWjIp8vUM39yk3146Vw
-	mlbtGHrcbv+KRcXiL2IapXXGnCdhqtULuK0/5lgw9el90/SMa7T94WsaKc1DeVPnMv/y
-	Su3krRFvqPJsbfQYMR3gtnkSp+cqzAk0JYZ3d1NjMsxV6IhgRjobJhlwbfXHqY0/NBWA
-	G7JA==
-X-Received: by 10.66.171.11 with SMTP id aq11mr3963399pac.24.1365603648603;
-	Wed, 10 Apr 2013 07:20:48 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ew5sm145682pbc.9.2013.04.10.07.20.45
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 07:20:47 -0700 (PDT)
-Date: Wed, 10 Apr 2013 16:20:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 10 Apr 2013 07:37:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=9jGJFGfqxakXKPbGimoRVQMn0pLjwwbQNJikD1IXX5A=;
+	b=Vws13qr453LhnT7AtojsLxpQ9XD4mY2sB0l/8iKSd68CpYmDExixPukeNS/yaAf2/q
+	QhdDiDSeiaGf4mi1doKqL052zVWI0JeD8L4EerjRGAt1rURv4NDsVjRBrsLqvAcvOxRe
+	w6uk/FQt8r58j2rM/71tJkKnZECjlOdjFX6RdBSolJiTb60B5bb1ssbKRptjWRVFOYIY
+	duOVw3ApfEF22EENx+uPjp/F+45A4iD65LWVLBr2wbCGcGyQaqOw/qDJFnUjyb7YXZmc
+	UbP7v5510/t1JngszB/rGTV3pYqeJvxgOqO8rfxtTbxhNpqBGk6v/YKDM8vuFa7rE9w/
+	l89w==
+X-Received: by 10.180.188.105 with SMTP id fz9mr2725696wic.21.1365604645096;
+	Wed, 10 Apr 2013 07:37:25 -0700 (PDT)
+Received: from localhost.localdomain (gau06-1-78-243-126-63.fbx.proxad.net.
+	[78.243.126.63])
+	by mx.google.com with ESMTPS id gl11sm32149005wic.8.2013.04.10.07.37.23
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 10 Apr 2013 07:37:24 -0700 (PDT)
+From: Nicolas Dechesne <ndec@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130410142039.GC2471@jama>
-References: <CAOT3miKm12uZ75LrH5fvRxrSvZ7wbyi+ioxMQgROsF3B-mJTvQ@mail.gmail.com>
-	<CAJTo0LZLF9JhAd_Eo3Hr5n2LxXxgGCD_D9K4=ZQ8cSjwvWL6Uw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LZLF9JhAd_Eo3Hr5n2LxXxgGCD_D9K4=ZQ8cSjwvWL6Uw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: why does gupnp depends on gnome-icon-theme?
+Date: Wed, 10 Apr 2013 16:37:19 +0200
+Message-Id: <1365604639-5235-1-git-send-email-ndec@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+X-Gm-Message-State: ALoCoQmgXFQMUamX4PNhcNntmTHplBiGq31C6AoumfX8akIfb8ZHeZE7OilXxn489T0pAqmmgMjZ
+Cc: Nicolas Dechesne <ndec@linaro.org>
+Subject: [meta-multimedia][PATCH] gupnp: remove dependency on gnome-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,61 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 14:38:11 -0000
-X-Groupsio-MsgNum: 44016
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="32u276st3Jlj2kUU"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Apr 2013 14:54:52 -0000
 
---32u276st3Jlj2kUU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+As discussed in [1], let's remove the dependency on gnome-icon-theme,
+since it's not required, and it brings additional unwanted dependency,
+such as the whole gtk+...
 
-On Wed, Apr 10, 2013 at 02:40:16PM +0100, Burton, Ross wrote:
-> On 10 April 2013 14:12, Nicolas Dechesne <ndec13@gmail.com> wrote:
-> > i have noticed that gupnp (in meta-multimedia/recipes-connectivity)
-> > depends on gnome-icon-theme, and I don't really understand why, see
-> >
-> > http://cgit.openembedded.org/meta-openembedded/tree/meta-multimedia/rec=
-ipes-connectivity/gupnp/gupnp.inc#n5
->=20
-> That's historical, the only dependency on g-i-t is in gupnp-tools.
-> Patch welcome to remove it!
->=20
-> > i was able to build an image with gupnp even after patching DEPENDS to
-> > get rid of the dependency, and the main concern with this dependency
-> > is that it brings:
-> >
-> > RRECOMMENDS_${PN} =3D "librsvg-gtk"
-> > and as such attempts to build gtk+, while I am trying to make a
-> > directfb image without GTK.
->=20
-> That's also a bit annoying isn't it...  Maybe that should be removed
-> generally, and we'll leave it to distros/products to decide/know
-> whether they are using SVG icons or not.
+[1] http://article.gmane.org/gmane.comp.handhelds.openembedded/57483
 
-Well I'm not sure if it's still segfaulting like before, but e.g. midori
-was segfaulting when loading some pages without gtk-theme-clearlooks or
-some other usable theme :/. That's why we keep .bbappend with added
-RDEPENDS to change gtk-theme :/.
+It is build-tested with
+ - core-image-minimal
+ - IMAGE_INSTALL += 'gupnp'
+ - directfb in DISTRO_FEATURES
 
-https://github.com/shr-distribution/meta-smartphone/blob/shr/meta-shr/recip=
-es-connectivity/midori/midori_0.5.0.bbappend
+The build was failing before (GTK failed to build with directfb, which
+is expected).
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Nicolas Dechesne <ndec@linaro.org>
+---
+ meta-multimedia/recipes-connectivity/gupnp/gupnp.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---32u276st3Jlj2kUU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+index 81db3ea..f793236 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+@@ -2,7 +2,7 @@ SUMMARY = "UPnP framework"
+ DESCRIPTION = "GUPnP is an elegant, object-oriented open source framework for creating UPnP  devices and control points, written in C using GObject and libsoup. The GUPnP API is intended to be easy to use, efficient and flexible. It provides the same set of features as libupnp, but shields the developer from most of UPnP's internals."
+ LICENSE = "LGPLv2+"
+ 
+-DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gnome-icon-theme gobject-introspection-stub"
++DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gobject-introspection-stub"
+ 
+ require no-vala.inc
+ 
+-- 
+1.8.1.2
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFldTcACgkQN1Ujt2V2gBx/bgCfUNTHT6Cr6XW05QapisVzsQUV
-JVUAnR+UvTu8uY0+artBlN+VBBGmRqtl
-=Dz9L
------END PGP SIGNATURE-----
 
---32u276st3Jlj2kUU--
