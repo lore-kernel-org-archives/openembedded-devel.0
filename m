@@ -1,27 +1,32 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-pd0-f172.google.com ([209.85.192.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPy7U-0003F4-Om
+	(envelope-from <martin.jansa@gmail.com>) id 1UQ2Kg-0008TQ-Oy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:43:37 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 10 Apr 2013 09:26:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="284353075"
-Received: from unknown (HELO helios.localnet) ([10.255.14.51])
-	by azsmga001.ch.intel.com with ESMTP; 10 Apr 2013 09:26:13 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 10 Apr 2013 17:26:12 +0100
-Message-ID: <2008958.M9FfYJ4SC0@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <kk438m$t0a$1@ger.gmane.org>
-References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
-	<a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
-	<kk438m$t0a$1@ger.gmane.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2 2/2] qt4: remove bbappend content
+	Wed, 10 Apr 2013 23:13:33 +0200
+Received: by mail-pd0-f172.google.com with SMTP id 5so473077pdd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2013 13:56:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=v9RAiyb05kPYubF8+5k7nfYqprvABJInc+zIdVYYWB4=;
+	b=CMK5rSFPIjsmD18iQDYVHsFp0pbEoGtaodVfgdpjanYh7EuzS1xkqH9DxIu0i143x8
+	Q4kV1QVlAQ7mrG/H7Cd+6Hz/AvPwxZCjuWJGtVx1kpkA31Qt1R5Nl8JDPxxOmYgbl8Ob
+	bmguF9VurB1OzQdvIHVU07GSU5rt7BdlCfI+KfD4GDPBbGSHfuTw0epBGy29M2eoKLWu
+	NAu0JDfTTm3BFTa1DR/XzSa6CPVdE5+4ouREWsObIR2t6I9f6k8+KxkkRGLRMfcQAQWf
+	300MajhV1XVHJegItZZxWnvu/i0mdCmBqwHAN8nxT7uiCKHJ9Xn42lZwICkXG2LhCjI3
+	wleA==
+X-Received: by 10.68.17.230 with SMTP id r6mr5018592pbd.187.1365627368056;
+	Wed, 10 Apr 2013 13:56:08 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id d6sm1255918pbr.6.2013.04.10.13.56.05
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 10 Apr 2013 13:56:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Apr 2013 22:55:58 +0200
+Message-Id: <1365627358-25863-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-oe][PATCH] live555: Add MIRROR for older versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,60 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:43:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 10 Apr 2013 21:13:33 -0000
 
-On Wednesday 10 April 2013 18:16:28 Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Op 10-04-13 17:57, Paul Eggleton schreef:
-> > These changes to Qt's configuration need to be applied in distro layers,
-> > not in meta-oe.
-> > 
-> > (We have to preserve the PRINC value to avoid PR going backwards.)
-> > 
-> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> ---
-> > meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend |    5 -----
-> > meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend |    5 ----- 2 files
-> > changed, 10 deletions(-)
-> > 
-> > diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-> > b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend index
-> > 27cac11..d9f1c29 100644 ---
-> > a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend +++
-> > b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend @@ -1,6 +1 @@
-> > -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
-> > "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> > -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
-> > "-I${STAGING_INCDIR}/mysql \ -
-> > -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}" diff
-> > --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-> > b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend index
-> > 27cac11..d9f1c29 100644 ---
-> > a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend +++
-> > b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend @@ -1,6 +1 @@
-> > -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
-> > "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> > -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
-> > "-I${STAGING_INCDIR}/mysql \ -
-> > -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}"
-> 
-> So with the reason given "I don't want to rebuilt QT when adding meta-oe" to
-> remove this, this doesn't actually accomplish that. You are adding an extra
-> rebuild with this.
+---
+ meta-oe/recipes-multimedia/live555/live555.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-That's the reason I don't want the bbappend to exist at all. In the absence of 
-the ability to have that for now, let's at least not have the configuration 
-changed and not have postgres and mysql built just by adding meta-oe.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
+index 0301635..523d5de 100644
+--- a/meta-oe/recipes-multimedia/live555/live555.inc
++++ b/meta-oe/recipes-multimedia/live555/live555.inc
+@@ -12,6 +12,8 @@ INC_PR = "r0"
+ URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[6:8]}"
+ SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
+            file://config.linux-cross"
++# only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
++MIRRORS += "http://download.videolan.org/pub/videolan/testing/contrib/live555/"
+ 
+ S = "${WORKDIR}/live"
+ TARGET_CC_ARCH += "${LDFLAGS}"
 -- 
+1.8.1.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
