@@ -1,44 +1,28 @@
-Received: from mail-pb0-f50.google.com ([209.85.160.50])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UPwhN-0007ZA-26
+	(envelope-from <jaap.dejong@nedap.com>) id 1UPwvw-0000qu-A1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 17:12:33 +0200
-Received: by mail-pb0-f50.google.com with SMTP id jt11so310313pbb.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 07:55:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=H1K0PtPlmxcOVQR2lgRwpcsaFYPuLi+KzhMdEMT5hoo=;
-	b=0/kzZASQtFAoOmuzySK9A6e1CZDr2SO99cAQBOvcpnkTjbXGPjGobuiZBeZE0fLXLK
-	BV7iQNtZmz9H0Uz7+XdAnQWc+lkyHWo08PwitR3tdpgPF+fKOdPeOufiCDWt4PiE/zTJ
-	/KlnwkOxAawp6bf9Hwd1MFYHbQbLBjP2wudd21obkiLMjgbzVHbHksL9eD5ns3tQVJjd
-	BsVITL4JWojKj5CiXB/+9nZzHhnbVESIvAh3+gl9Sm0R4nSiApagD1iINYclazRfITGI
-	Eeg4SAeRBy3uauXie+BEOAjEfZm3BJMF/rSi66lHIaCL45Cr3K3CUNel/22iGyIkPJmo
-	IMww==
-X-Received: by 10.68.178.165 with SMTP id cz5mr3188135pbc.214.1365605710845;
-	Wed, 10 Apr 2013 07:55:10 -0700 (PDT)
-Received: from jchheda-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPS id to7sm798585pab.0.2013.04.10.07.55.08
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 07:55:10 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CALbNGRQCDj76uszts=M1R8QSDfmsBRg-OweaiU9aYK51T3gmAA@mail.gmail.com>
-Date: Wed, 10 Apr 2013 07:55:08 -0700
-Message-Id: <9AB146E7-AEB9-4366-9A5C-01AFB5BE24D5@gmail.com>
-References: <1360776335-21633-1-git-send-email-raj.khem@gmail.com>
-	<20130305221857.GA14869@jama>
-	<CALbNGRRZFt3FgMCjyB8JN8Be1w_-Vdgnq=2nZy3tyUM0TxdFpA@mail.gmail.com>
-	<20130305225907.GB14869@jama> <20130409200127.GF2474@jama>
-	<CALbNGRQCDj76uszts=M1R8QSDfmsBRg-OweaiU9aYK51T3gmAA@mail.gmail.com>
-To: =?windows-1252?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-X-Mailer: Apple Mail (2.1503)
-Cc: enrico.scholz@sigma-chemnitz.de, koen@dominion.thruhere.net,
-	Martin Jansa <martin.jansa@gmail.com>, otavio@ossystems.com.br,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: meta-systemd future vote Was: [meta-systemd][PATCH 1/2] Delete systemd class.
+	Wed, 10 Apr 2013 17:27:37 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 10 Apr 2013
+	17:10:12 +0200
+X-TM-IMSS-Message-ID: <69ce129b0005094d@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 69ce129b0005094d ;
+	Wed, 10 Apr 2013 17:10:14 +0200
+Message-ID: <516580D4.1030802@nedap.com>
+Date: Wed, 10 Apr 2013 17:10:12 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <51656126.2020505@nedap.com> <5165792D.9070200@nedap.com>
+	<2302654.XPc2iUTDec@helios> <1683367.FB5G2sIQUU@helios>
+In-Reply-To: <1683367.FB5G2sIQUU@helios>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: dropbear
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,95 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 15:12:43 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Apr 2013 15:27:43 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 15:27:43 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-On Apr 10, 2013, at 4:39 AM, Andreas M=FCller =
-<schnitzeltony@googlemail.com> wrote:
+On 04/10/2013 04:50 PM, Paul Eggleton wrote:
+> On Wednesday 10 April 2013 15:47:09 Paul Eggleton wrote:
+>> On Wednesday 10 April 2013 16:37:33 Jaap de Jong wrote:
+>>> On 04/10/2013 04:04 PM, Paul Eggleton wrote:
+>>>> On Wednesday 10 April 2013 14:55:02 Jaap de Jong wrote:
+>>>>> dropbear 2013.56 is currently the most recent version.
+>>>>> Although not documented, they left out the functionality patched in
+>>>>> with
+>>>>> allow-nopw.patch in the 2013.56 release.
+>>>> How did you find this out?
+>>> the patch fails and inspection of the code learns that it can't be
+>>> applied.
+>> Ah right - to explain what has happened, I developed a new patch to change
+>> dropbear so that the functionality is now controlled through a command-line
+>> switch, and that is now configured in the image using a script in
+>> /etc/default/; if you look at the dropbear recipe in master you can see how
+>> it works. This avoids the need to rebuild dropbear depending upon the value
+>> of IMAGE_FEATURES which was not really ideal.
+>>
+>> If you want to use the latest version of dropbear with an older branch I'd
+>> suggest just taking the dropbear recipe in master, removing the nopw-option
+>> patch (which has been applied).
+Seems that the nopw-option.patch is added to dropbear rev 2013.56, so 
+that one should be remove also from the list of patches to apply.
+> If you do do this you'll also need to apply this patch:
+>
+> http://cgit.openembedded.org/openembedded-core/commit/?id=0937054e6e3e02565f57e60a8bdc14b0ad62e249
+Ok.
+Thanks for your help!
 
-> On Tue, Apr 9, 2013 at 10:01 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->> On Tue, Mar 05, 2013 at 11:59:07PM +0100, Martin Jansa wrote:
->>> On Tue, Mar 05, 2013 at 11:50:41PM +0100, Andreas M=FCller wrote:
->>>> On Tue, Mar 5, 2013 at 11:18 PM, Martin Jansa =
-<martin.jansa@gmail.com> wrote:
->>>>> On Wed, Feb 13, 2013 at 09:25:34AM -0800, Khem Raj wrote:
->>>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>>>=20
->>>>> good old meta-systemd should now parse again,
->>>> Thanks - will come back to test HEADs soon.
->>>=20
->>> But be aware that I've fixed only parsing of avahi and =
-wpa-supplicant.
->>>=20
->>> I haven't tested it properly in runtime because my upgrade path is a =
-bit
->>> broken (because I was building images with khem's patches for a =
-while to
->>> test other stuff) and even clean build with failed to boot with
->>> qemux86-64 and I don't have time to debug it now.
->>>=20
->>>>> I wont apply this 2 commits
->>>>> until systemd discussion in oe-core is finished and future of
->>>>> meta-systemd decided.
->>>>>=20
->>>> After systemd regression is worked around yocto 1.4 release =
-regression
->>>> is knocking at the door...
->>>=20
->>> yes :/
->>>=20
->>> If we need to maintain meta-systemd bbappends for upgrade path we =
-can
->>> also maintain them with PN-systemd packages and good old systemd =
-bbclass.
->>=20
->> Khem pinged me about this patch, so here are my thoughts:
->>=20
->> PN-systemd discussion in oe-core haven't moved a bit since this patch
->> was proposed, I think we have 2-3 options, lets vote about =
-meta-systemd future.
->>=20
->> 1) keep PN-systemd separation in meta-systemd and fixup .bbappends to
->> resolve issues created by oe-core (I've fixed some issues, but still =
-a
->> lot of issues in postinst/postrm/prerm scripts when both inits are
->> sharing the same PN)
->>=20
->> 2) give up on clean separation of PN-<init> and provide upgrade path
->> from PN-systemd to PN (mostly done by these 2 commits from khem).
->>=20
->> 3) give up on clean separation of PN-<init> and upgrade path (there =
-are
->> many issues in other parts of oe-core, so upgrade path from danny to
->> dylan doesn't look usable.
->>=20
->> A) migrate existing .bbappends to their recipes to .bb files and
->> remove this layer. Any volunteer for that?
->>=20
->> My vote: 3) + A) later in 1.5
->> I guess we're all too busy to implement 1), upgrade path would be =
-nice,
->> but is all-or-nothing, doesn't make much sense to spend a lot of time
->> fixing every issue from PN-systemd when there are issues from other
->> recipes we're not going to fix by .bbappends in meta-oe.
->>=20
->> Vote required from Khem, Koen, Andreas, Enrico, Otavio
->> Vote welcome from other meta-systemd contributors
->>=20
-> tend also to 3) + A) but I would prefer to have it as one transaction.
-> Otherwise we might face another upgrade path breakage. I know this
-> will cause questions as who and when=85
-
-
-actually, 3+A is going to take some time I feel first 2 (without upgrade =
-path) and then eventually 3+A would get us there
-
-
->=20
-> Andreas
+> Cheers,
+> Paul
+>
 
 
 
