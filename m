@@ -1,32 +1,32 @@
-Received: from mail-pd0-f172.google.com ([209.85.192.172])
+Received: from mail-pd0-f171.google.com ([209.85.192.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UQ2Kg-0008TQ-Oy
+	(envelope-from <martin.jansa@gmail.com>) id 1UQ2Ln-0000BU-PX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 23:13:33 +0200
-Received: by mail-pd0-f172.google.com with SMTP id 5so473077pdd.3
+	Wed, 10 Apr 2013 23:14:49 +0200
+Received: by mail-pd0-f171.google.com with SMTP id z10so476716pdj.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 13:56:08 -0700 (PDT)
+	Wed, 10 Apr 2013 13:57:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=v9RAiyb05kPYubF8+5k7nfYqprvABJInc+zIdVYYWB4=;
-	b=CMK5rSFPIjsmD18iQDYVHsFp0pbEoGtaodVfgdpjanYh7EuzS1xkqH9DxIu0i143x8
-	Q4kV1QVlAQ7mrG/H7Cd+6Hz/AvPwxZCjuWJGtVx1kpkA31Qt1R5Nl8JDPxxOmYgbl8Ob
-	bmguF9VurB1OzQdvIHVU07GSU5rt7BdlCfI+KfD4GDPBbGSHfuTw0epBGy29M2eoKLWu
-	NAu0JDfTTm3BFTa1DR/XzSa6CPVdE5+4ouREWsObIR2t6I9f6k8+KxkkRGLRMfcQAQWf
-	300MajhV1XVHJegItZZxWnvu/i0mdCmBqwHAN8nxT7uiCKHJ9Xn42lZwICkXG2LhCjI3
-	wleA==
-X-Received: by 10.68.17.230 with SMTP id r6mr5018592pbd.187.1365627368056;
-	Wed, 10 Apr 2013 13:56:08 -0700 (PDT)
+	bh=XUDn8+B5+d/r8yWwOP3tN9330lXWrDLHWSv/u1aTFDk=;
+	b=eUEIrfxLyKfDxe/EqP7S9uslD89SwuYEN27AED2HUOO0SNJisH5wTgp9gUQtDsb1DM
+	3FsbtATHS14mLO5WjKebowdz476xMVKplem44wRj/vokNvsfrAGx6PFPKjUisOm33vo9
+	nKtTlMycdOt1JMBvc0rw38yr58PpaDDuXjvsHlyfYRodqkcl9fuZnBFE3qVqEcZUGK7C
+	MRNeeGTfH8KR/3lKUQGB34sn0v3Yzmgxyed4dEtjizSuKZdarfeT+z4RcNRMlVSTIZWZ
+	4whSV3QQFQz9SIU7VST7wFTYIAQbjGoNxxZnRgp896p6aXM1tZFEK6MKAAIHnZcBTCQT
+	yEjw==
+X-Received: by 10.66.159.234 with SMTP id xf10mr5692568pab.203.1365627437206; 
+	Wed, 10 Apr 2013 13:57:17 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d6sm1255918pbr.6.2013.04.10.13.56.05
+	by mx.google.com with ESMTPS id b3sm1258853pbw.4.2013.04.10.13.57.14
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 13:56:06 -0700 (PDT)
+	Wed, 10 Apr 2013 13:57:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Apr 2013 22:55:58 +0200
-Message-Id: <1365627358-25863-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 10 Apr 2013 22:57:06 +0200
+Message-Id: <1365627426-27104-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-oe][PATCH] live555: Add MIRROR for older versions
+Subject: [meta-oe][PATCH] icon-slicer: remove gtk+-native dependency from native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,25 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 21:13:33 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 21:14:50 -0000
 
+* gtk+-native was removed from oe-core
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-multimedia/live555/live555.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
-index 0301635..523d5de 100644
---- a/meta-oe/recipes-multimedia/live555/live555.inc
-+++ b/meta-oe/recipes-multimedia/live555/live555.inc
-@@ -12,6 +12,8 @@ INC_PR = "r0"
- URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[6:8]}"
- SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
-            file://config.linux-cross"
-+# only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
-+MIRRORS += "http://download.videolan.org/pub/videolan/testing/contrib/live555/"
+diff --git a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb b/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
+index b9a2909..b77fbf5 100644
+--- a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
++++ b/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
+@@ -2,6 +2,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- S = "${WORKDIR}/live"
- TARGET_CC_ARCH += "${LDFLAGS}"
+ DEPENDS = "gtk+ popt"
++DEPENDS_class-native = "popt-native"
+ 
+ SRC_URI = "http://freedesktop.org/software/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-Makefile.am-no-examples.patch"
 -- 
 1.8.1.5
 
