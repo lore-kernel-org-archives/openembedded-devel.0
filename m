@@ -1,35 +1,37 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ea0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UPxy9-0001dg-RB for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:33:58 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UPxhJ-0008To-Mh for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:16:33 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 18:16:33 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1UPxyd-0001m3-Ff
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Apr 2013 18:34:29 +0200
+Received: by mail-ea0-f175.google.com with SMTP id r16so311436ead.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 18:16:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 10 Apr 2013 09:16:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=32MIsKQ7ywpJBU41pet/NoOpwdLpJ1pDW103nRpwkQo=;
+	b=WhG+Yusnnkm67OtjF0Y7+JA1OVQJ5Hq5u7qY/V7FdCSFD3crANkRfhxfnIItERk/Lk
+	HYjurwAHAmI5hPC+nJ/1INxyysBa2Rfyc7/xKeg6nvZ3v2jckWPRfxrry8SLj7n8KbMw
+	Y6UnbAWC2symupLhEQrylmRZy1yI1JV3q4wfnoJCx7yV9ndZ85o6bgNXyfZx10E0jK5l
+	AK8a1GJfLxN+2NzGUOIHPr1k1Fs3XpafDakCfL3AIBt6VZF40HXzxmUWTPkOV6ZDoCqE
+	1rx+Tle9DcU+PFXWgf2Ez2ZkIA537n+ouJWILvDT4o8yLi0enknnLHzw3Fb0r3acat+E
+	TTqw==
+X-Received: by 10.15.102.3 with SMTP id bq3mr6856553eeb.42.1365610619369;
+	Wed, 10 Apr 2013 09:16:59 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id cd3sm712571eeb.6.2013.04.10.09.16.58
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 10 Apr 2013 09:16:58 -0700 (PDT)
+Date: Wed, 10 Apr 2013 18:17:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 10 Apr 2013 18:16:28 +0200
-Message-ID: <kk438m$t0a$1@ger.gmane.org>
-References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
-	<a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
-In-Reply-To: <a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.5
-Subject: Re: [meta-oe][PATCH v2 2/2] qt4: remove bbappend content
+Message-ID: <20130410161700.GE2471@jama>
+References: <1365407863-23360-1-git-send-email-jdk@ti.com>
+	<kk42oq$o6t$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <kk42oq$o6t$1@ger.gmane.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][meta-systemd][danny][PATCH] cloud9: add EnvironmentFile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,57 +45,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:34:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Apr 2013 16:34:42 -0000
+X-Groupsio-MsgNum: 44040
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FEz7ebHBGB6b2e8X"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--FEz7ebHBGB6b2e8X
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 10-04-13 17:57, Paul Eggleton schreef:
-> These changes to Qt's configuration need to be applied in distro layers, 
-> not in meta-oe.
-> 
-> (We have to preserve the PRINC value to avoid PR going backwards.)
-> 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> --- 
-> meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend |    5 ----- 
-> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend |    5 ----- 2 files
-> changed, 10 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
-> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend index
-> 27cac11..d9f1c29 100644 ---
-> a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend +++
-> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend @@ -1,6 +1 @@ 
-> -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
-> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
-> "-I${STAGING_INCDIR}/mysql \ -
-> -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}" diff
-> --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
-> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend index
-> 27cac11..d9f1c29 100644 ---
-> a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend +++
-> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend @@ -1,6 +1 @@ 
-> -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
-> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
-> -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
-> "-I${STAGING_INCDIR}/mysql \ -
-> -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}"
+On Wed, Apr 10, 2013 at 06:07:59PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 08-04-13 09:57, Jason Kridner schreef:
+> > * Allows specification of NODE_PATH
+> >=20
+> > Signed-off-by: Jason Kridner <jdk@ti.com> ---=20
+> > .../recipes-devtools/cloud9/cloud9/cloud9.service  |    1 + 1 files
+> > changed, 1 insertions(+), 0 deletions(-)
+> >=20
+> > diff --git
+> > a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+> > b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service=20
+> > index 714b465..54a9db0 100644 ---
+> > a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service +++
+> > b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service @@
+> > -3,6 +3,7 @@ Description=3DCloud9 IDE ConditionPathExists=3D|/var/lib/c=
+loud9
+> >=20
+> > [Service] +EnvironmentFile=3D-/etc/conf.d/node ExecStart=3D/usr/bin/nod=
+e4
+> > /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
+> >=20
+> > [Install]
+> >=20
+>=20
+>=20
+> It's a bit late now, but this shouldn't go in, it introduces a gentoo-ism
+> (/etc/conf.d) that we don't want.
 
-So with the reason given "I don't want to rebuilt QT when adding meta-oe" to
-remove this, this doesn't actually accomplish that. You are adding an extra
-rebuild with this.
+Ah, sorry about that.
+
+> Martin, can you revert it please?
+
+Sure
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>=20
+> iD8DBQFRZY5fMkyGM64RGpERAsUrAKCpirNbZj9g6fdigv2+GZUqSksGVQCeJths
+> zlp4sG6jcgBF1RjzikHwksw=3D
+> =3D6TFx
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--FEz7ebHBGB6b2e8X
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iD8DBQFRZZBcMkyGM64RGpERAh2tAJ44aceRHVjTRLixQw36lBM6hj6FtgCgkjqY
-3/srLPdum6RLgzFzCmQRs5I=
-=rQLL
+iEYEARECAAYFAlFlkHwACgkQN1Ujt2V2gBxvlACgr2ac3rXSv9EEIaycJW9MU2MR
+J68An0YSPuh0zEyTlXO+Lm0qeCzvAGCj
+=mj7U
 -----END PGP SIGNATURE-----
 
-
-
+--FEz7ebHBGB6b2e8X--
