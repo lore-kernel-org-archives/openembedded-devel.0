@@ -1,39 +1,20 @@
-Received: from mail-pa0-f43.google.com ([209.85.220.43])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UPxRw-0006kh-Lp
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPxgC-0008CL-PT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:00:41 +0200
-Received: by mail-pa0-f43.google.com with SMTP id hz11so385425pad.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 08:43:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=nl+rMOPbLnQS3riqKXj/qGPf58JlZbfl1u7/uCp6R+4=;
-	b=OTca/2K5PGXSb0eZnp/9jFAnxqyLPyNU12Ie7Z0dNWus/oNUXcX1MdDNzbOUIGZdux
-	f0jBIvkWvx4URo5+Iy2RGRlSxo5Q5myt3WXfu9dhRg6lvVWKSACSkJRK+hHZgTf/a3s2
-	p2YI+taIyLkjrYNs1kvdjuRCRPvp0+FVm3I4kR+BtMnNQJ0Q+m3pjy0cMc+bmaMJHpBd
-	NXjpqZGGmvSkXJgeRgPKL0DYypDOlGzz4ic7ylaoy64odJwp/Y7S9luKlRYuwMsUXai6
-	gN6EFAnyoTFWIVOjEddLUqv4X5sQZ/EIAX5cky0QaC2+OiotaHywGgAQxRHcp3lH8Qfp
-	cFmw==
-X-Received: by 10.68.212.100 with SMTP id nj4mr3707731pbc.84.1365608598398;
-	Wed, 10 Apr 2013 08:43:18 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ef3sm882928pad.20.2013.04.10.08.43.15
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 08:43:17 -0700 (PDT)
-Date: Wed, 10 Apr 2013 17:43:10 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 10 Apr 2013 18:15:25 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 10 Apr 2013 08:58:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="320376212"
+Received: from unknown (HELO helios.amr.corp.intel.com) ([10.255.14.51])
+	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2013 08:58:00 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130410154310.GD2471@jama>
-References: <1365604639-5235-1-git-send-email-ndec@linaro.org>
-	<CAJTo0LYfznJ8DH_PEaBWRF4_KVP=FqVJe8E6uZfkVtN1MhXYKw@mail.gmail.com>
-	<CAP71WjwrXC6BAyPred-K+c0kZc4aOaDD6Nd_9WC5kmrTv_Hqog@mail.gmail.com>
-	<CAJTo0LZXHJqCERBQ1m+tEPvkKh_g+zO005_q5y2Cf8JQkEpTbQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LZXHJqCERBQ1m+tEPvkKh_g+zO005_q5y2Cf8JQkEpTbQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-multimedia][PATCH] gupnp: remove dependency on gnome-icon-theme
+Date: Wed, 10 Apr 2013 16:57:57 +0100
+Message-Id: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH v2 0/2] Clean up recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,50 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:00:48 -0000
-X-Groupsio-MsgNum: 44026
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2Z2K0IlrPCVsbNpk"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Apr 2013 16:15:26 -0000
 
---2Z2K0IlrPCVsbNpk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Drop some items that should no longer be in meta-oe.
 
-On Wed, Apr 10, 2013 at 04:37:11PM +0100, Burton, Ross wrote:
-> Hi Nicolas,
->=20
-> On 10 April 2013 16:14, Nicolas Dechesne <ndec@linaro.org> wrote:
-> > then, what I could do is a patch serie where patch 1/2 introduces the
-> > INC_PR with "r0", and patch 2/2 fixes gupnp and increments INC_PR to
-> > 'r1'.
->=20
-> Exactly that.
->=20
-> > also, is that worthwhile to add the INC_PR in all other recipes in the
-> > gupnp folder ? or just in gupnp recipe for now?
->=20
-> Do them all, might as well.
+v2 - Just the parts that havent yet been merged, with PR now preserved
+as requested.
 
-Is it important now, when PR bumps are not strictly required?
 
-There were more dangerous changes without PR bumps included in last
-months.
+The following changes since commit 222b4eb3e469a84e929a968def6773405f369a3d:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  cloud9: add EnvironmentFile (2013-04-09 21:34:17 +0200)
 
---2Z2K0IlrPCVsbNpk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+are available in the git repository at:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+  git://git.openembedded.org/meta-openembedded-contrib paule/cleanup6
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/cleanup6
 
-iEYEARECAAYFAlFliI4ACgkQN1Ujt2V2gBxJ7wCbBVCsQkFzEyle8ALOaVsbgJpj
-VG4AoIpBlpXwJPOrpz/540K8Wtl8qoMt
-=D24R
------END PGP SIGNATURE-----
+Paul Eggleton (2):
+  packagegroup-qte-toolchain-target: remove bbappend content
+  qt4: remove bbappend content
 
---2Z2K0IlrPCVsbNpk--
+ .../packagegroups/packagegroup-qte-toolchain-target.bbappend      |    5 -----
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend                |    5 -----
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend                |    5 -----
+ 3 files changed, 15 deletions(-)
+
+-- 
+1.7.10.4
+
+
+
