@@ -1,20 +1,24 @@
 Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPxgC-0008CL-PT
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPxgE-0008CL-GO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:15:25 +0200
+	Wed, 10 Apr 2013 18:15:29 +0200
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 10 Apr 2013 08:58:01 -0700
+	by fmsmga101.fm.intel.com with ESMTP; 10 Apr 2013 08:58:02 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="320376212"
+X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="320376220"
 Received: from unknown (HELO helios.amr.corp.intel.com) ([10.255.14.51])
-	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2013 08:58:00 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2013 08:58:01 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Apr 2013 16:57:57 +0100
-Message-Id: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+Date: Wed, 10 Apr 2013 16:57:58 +0100
+Message-Id: <9e1b810be2a70ac9b33252d9f8a160f74118f46f.1365609345.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH v2 0/2] Clean up recipes
+In-Reply-To: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH v2 1/2] packagegroup-qte-toolchain-target: remove bbappend content
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,32 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:15:26 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 16:15:29 -0000
 
-Drop some items that should no longer be in meta-oe.
+This added Qwt to the Qt Embedded toolchain. This is a distro policy
+decision, and in any case Qwt is a third-party library which is not part
+of Qt. Distros that wish to do this should add this bbappend to their
+own layers.
 
-v2 - Just the parts that havent yet been merged, with PR now preserved
-as requested.
+(We have to preserve the PRINC value to avoid PR going backwards.)
 
-
-The following changes since commit 222b4eb3e469a84e929a968def6773405f369a3d:
-
-  cloud9: add EnvironmentFile (2013-04-09 21:34:17 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/cleanup6
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/cleanup6
-
-Paul Eggleton (2):
-  packagegroup-qte-toolchain-target: remove bbappend content
-  qt4: remove bbappend content
-
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
  .../packagegroups/packagegroup-qte-toolchain-target.bbappend      |    5 -----
- meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend                |    5 -----
- meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend                |    5 -----
- 3 files changed, 15 deletions(-)
+ 1 file changed, 5 deletions(-)
 
+diff --git a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+index f6e5dd9..d9f1c29 100644
+--- a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
++++ b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+@@ -1,6 +1 @@
+-RDEPENDS_${PN} += "qwt-e-dev"
+-
+-# qwt-e conflicts with qwt, so only one can be built in world and this pulls qwt-e
+-EXCLUDE_FROM_WORLD = "1"
+-
+ PRINC := "${@int(PRINC) + 1}"
 -- 
 1.7.10.4
 
