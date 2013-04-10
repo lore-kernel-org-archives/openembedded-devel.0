@@ -1,25 +1,24 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1UPwQJ-0005ZT-Vg
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPwZe-0006lE-5Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 16:54:58 +0200
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 10 Apr 2013
-	16:37:33 +0200
-X-TM-IMSS-Message-ID: <69b0324a00050772@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 69b0324a00050772 ;
-	Wed, 10 Apr 2013 16:37:36 +0200
-Message-ID: <5165792D.9070200@nedap.com>
-Date: Wed, 10 Apr 2013 16:37:33 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Wed, 10 Apr 2013 17:04:49 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 10 Apr 2013 07:47:11 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="225557421"
+Received: from unknown (HELO helios.localnet) ([10.255.14.51])
+	by AZSMGA002.ch.intel.com with ESMTP; 10 Apr 2013 07:47:10 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jaap de Jong <jaap.dejong@nedap.com>
+Date: Wed, 10 Apr 2013 15:47:09 +0100
+Message-ID: <2302654.XPc2iUTDec@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <5165792D.9070200@nedap.com>
 References: <51656126.2020505@nedap.com> <2047971.fHFQ1GD4mc@helios>
-In-Reply-To: <2047971.fHFQ1GD4mc@helios>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<5165792D.9070200@nedap.com>
+MIME-Version: 1.0
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: dropbear
@@ -36,34 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 14:55:09 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Apr 2013 15:04:50 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 15:04:50 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 04/10/2013 04:04 PM, Paul Eggleton wrote:
-> On Wednesday 10 April 2013 14:55:02 Jaap de Jong wrote:
->> dropbear 2013.56 is currently the most recent version.
->> Although not documented, they left out the functionality patched in with
->> allow-nopw.patch in the 2013.56 release.
-> How did you find this out?
-the patch fails and inspection of the code learns that it can't be applied.
-I found some other way to accomplish the same though..
+On Wednesday 10 April 2013 16:37:33 Jaap de Jong wrote:
+> On 04/10/2013 04:04 PM, Paul Eggleton wrote:
+> > On Wednesday 10 April 2013 14:55:02 Jaap de Jong wrote:
+> >> dropbear 2013.56 is currently the most recent version.
+> >> Although not documented, they left out the functionality patched in with
+> >> allow-nopw.patch in the 2013.56 release.
+> > 
+> > How did you find this out?
+> 
+> the patch fails and inspection of the code learns that it can't be applied.
 
-diff -urN a/svr-runopts.c b/svr-runopts.c
---- a/svr-runopts.c    2013-03-21 16:29:35.000000000 +0100
-+++ b/svr-runopts.c    2013-04-10 15:11:51.000000000 +0200
-@@ -115,7 +115,7 @@
-      svr_opts.norootlogin = 0;
-      svr_opts.noauthpass = 0;
-      svr_opts.norootpass = 0;
--    svr_opts.allowblankpass = 0;
-+    svr_opts.allowblankpass = 1;
-      svr_opts.inetdmode = 0;
-      svr_opts.portcount = 0;
-      svr_opts.hostkey = NULL;
+Ah right - to explain what has happened, I developed a new patch to change 
+dropbear so that the functionality is now controlled through a command-line 
+switch, and that is now configured in the image using a script in 
+/etc/default/; if you look at the dropbear recipe in master you can see how it 
+works. This avoids the need to rebuild dropbear depending upon the value of 
+IMAGE_FEATURES which was not really ideal.
 
-> Cheers,
-> Paul
->
+If you want to use the latest version of dropbear with an older branch I'd 
+suggest just taking the dropbear recipe in master, removing the nopw-option 
+patch (which has been applied).
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
