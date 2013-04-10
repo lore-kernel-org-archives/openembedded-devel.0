@@ -1,39 +1,39 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-ee0-f42.google.com ([74.125.83.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UPxwc-0001NX-4U
+	(envelope-from <koen@dominion.thruhere.net>) id 1UPxwe-0001O0-OR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:32:24 +0200
-Received: by mail-ea0-f173.google.com with SMTP id k11so310933eaj.18
+	Wed, 10 Apr 2013 18:32:26 +0200
+Received: by mail-ee0-f42.google.com with SMTP id d4so333610eek.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 09:15:00 -0700 (PDT)
+	Wed, 10 Apr 2013 09:15:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:x-gm-message-state;
-	bh=aIqnIj22WxK4mfGIBi8xeicykzgFKnibDsMZDRKGcm0=;
-	b=Te6RABnZri2GSL4aYxiu/FavldoXxOn8oog7DxO5nlo+TLlE0n1HpPiA+DcsLRRPbQ
-	nWKawT+qphcGAyBjhmVYEWZ39OjL3BQ01gcO06hLJAo/cvYTEbcLN3ZcUs1HYiUEjswP
-	JVZNBsQZRefkhnvTujkqoQaR7QfxNZ7whdfxlq9gtxDI2GQv+bHEwESZPMlLO/lZ25nc
-	LQsTtGRk6AepOdjUrOscu2d+OWAUdePbXD3wbgooSeQaq2RmI/yiRXmodHljEiVZPduZ
-	6n8SUyDFx9UvqjR5NYnnJd7EI/k+55v3Grv2V5s9QDpJ6aTC7D95kTXiks8RTt/muiLH
-	eThw==
-X-Received: by 10.15.36.2 with SMTP id h2mr7143156eev.2.1365610500463;
-	Wed, 10 Apr 2013 09:15:00 -0700 (PDT)
+	bh=PT8T6tsLmg1Q8qolOgvqQMOYK5OPAY+hptxui/wZILg=;
+	b=BXMUH1vLIoqm5t7rlIkwyTfOMQMZBs1QzIr7Axvhc4IPD807rHmG9T2nzrMJqDBsOY
+	8QmXfNW0nCMc57JvZLFt0COFGuVYSHgzAvhcnx/tYJ0ZYgTeRJhQyMwBNlIFdBvWsTvQ
+	vSFPVGuzT45HKUHuQImhWWxb9KRmyrph8Mr3Dq1fh0H6gRZIRD66S45OTIxymj3Sm5nJ
+	mML3gUdLO23egHggBaD9dEqSsmQh5Qc+HloJnjZEuO4j3vDEH9FqdVlCf1AjWHzbdjYn
+	XfWLS4CmG7xNJpv112iSn92ylc7nCFtMb9b0Pur9oxBqlQ9fIFJmZRodOROkkLAp5PMP
+	MwtA==
+X-Received: by 10.15.94.200 with SMTP id bb48mr6991555eeb.21.1365610503262;
+	Wed, 10 Apr 2013 09:15:03 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id d47sm673685eem.9.2013.04.10.09.14.58
+	by mx.google.com with ESMTPS id d47sm673685eem.9.2013.04.10.09.15.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 09:14:58 -0700 (PDT)
+	Wed, 10 Apr 2013 09:15:01 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Apr 2013 18:14:20 +0200
-Message-Id: <1365610462-29689-6-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 10 Apr 2013 18:14:21 +0200
+Message-Id: <1365610462-29689-7-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.8.1.4
 In-Reply-To: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
 References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlKr9TryY8mB6zLwInZDQGvc58Gzfmax7ENIvYCO1zWF2Fc9dF9MmXTyYGV2/yE8WcTVDf2
+X-Gm-Message-State: ALoCoQmtU2O7tYLwqfdf9ZSWosS8FCkOfYIWEsq1izof/5JpD9oacdg4Jp9rB9zyWvonqQ7dABmO
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 6/8] cloud9: use node4 to build o3-xml binary
+Subject: [meta-oe][PATCH 7/8] cloud9: add autorestart on crash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:32:26 -0000
-
-Using node 0.8.x will make it crash at runtime
+X-List-Received-Date: Wed, 10 Apr 2013 16:32:29 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service | 1 +
+ meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-index a78c653..ef32829 100644
---- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-+++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
+diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+index 714b465..f805ea9 100644
+--- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
++++ b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+@@ -3,6 +3,7 @@ Description=Cloud9 IDE
+ ConditionPathExists=|/var/lib/cloud9
  
- PR = "r2"
+ [Service]
++Restart=always
+ ExecStart=/usr/bin/node4 /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
  
--DEPENDS = "libxml2 nodejs-native"
-+DEPENDS = "libxml2 nodejs4-native"
+ [Install]
+diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
+index 777d2f4..afa85bf 100644
+--- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
++++ b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
+@@ -1,6 +1,6 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
  
- SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
-            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
-@@ -68,11 +68,11 @@ do_configure () {
-  node-waf -vv configure
- }
+-PRINC := "${@int(PRINC) + 1}"
++PRINC := "${@int(PRINC) + 2}"
  
--EXTRA_CXXFLAGS = "-Idefault/include -I../include -Idefault/hosts -I../hosts -Idefault/modules -I../modules -Idefault/deps -I../deps -I${STAGING_DIR_NATIVE}/usr/include/node -fPIC -DPIC"
-+EXTRA_CXXFLAGS = "-Idefault/include -I../include -Idefault/hosts -I../hosts -Idefault/modules -I../modules -Idefault/deps -I../deps -I${STAGING_DIR_NATIVE}/usr/include/node4 -fPIC -DPIC"
+ inherit systemd
  
- do_compile () {
-  cd ${WORKDIR}/o3
-- node tools/gluegen.js
-+ node4 tools/gluegen.js
-  cd hosts
-  ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node.o node-o3/sh_node.cc
-  ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node_libs.o node-o3/sh_node_libs.cc
 -- 
 1.8.1.4
 
