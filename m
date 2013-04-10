@@ -1,37 +1,26 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UPxyd-0001m3-Ff
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPy57-0002pZ-AY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:34:29 +0200
-Received: by mail-ea0-f175.google.com with SMTP id r16so311436ead.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 09:16:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=32MIsKQ7ywpJBU41pet/NoOpwdLpJ1pDW103nRpwkQo=;
-	b=WhG+Yusnnkm67OtjF0Y7+JA1OVQJ5Hq5u7qY/V7FdCSFD3crANkRfhxfnIItERk/Lk
-	HYjurwAHAmI5hPC+nJ/1INxyysBa2Rfyc7/xKeg6nvZ3v2jckWPRfxrry8SLj7n8KbMw
-	Y6UnbAWC2symupLhEQrylmRZy1yI1JV3q4wfnoJCx7yV9ndZ85o6bgNXyfZx10E0jK5l
-	AK8a1GJfLxN+2NzGUOIHPr1k1Fs3XpafDakCfL3AIBt6VZF40HXzxmUWTPkOV6ZDoCqE
-	1rx+Tle9DcU+PFXWgf2Ez2ZkIA537n+ouJWILvDT4o8yLi0enknnLHzw3Fb0r3acat+E
-	TTqw==
-X-Received: by 10.15.102.3 with SMTP id bq3mr6856553eeb.42.1365610619369;
-	Wed, 10 Apr 2013 09:16:59 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id cd3sm712571eeb.6.2013.04.10.09.16.58
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 09:16:58 -0700 (PDT)
-Date: Wed, 10 Apr 2013 18:17:00 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130410161700.GE2471@jama>
-References: <1365407863-23360-1-git-send-email-jdk@ti.com>
-	<kk42oq$o6t$1@ger.gmane.org>
+	Wed, 10 Apr 2013 18:41:17 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 10 Apr 2013 09:23:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="225599578"
+Received: from unknown (HELO helios.localnet) ([10.255.14.51])
+	by AZSMGA002.ch.intel.com with ESMTP; 10 Apr 2013 09:23:30 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Apr 2013 17:23:29 +0100
+Message-ID: <1839154.lsnjsSQGOt@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <1365610462-29689-3-git-send-email-koen@dominion.thruhere.net>
+References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
+	<1365610462-29689-3-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <kk42oq$o6t$1@ger.gmane.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-systemd][danny][PATCH] cloud9: add EnvironmentFile
+Subject: Re: [meta-oe][PATCH 3/8] python-tornado: update to top of 2.2 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,82 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:34:42 -0000
-X-Groupsio-MsgNum: 44040
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FEz7ebHBGB6b2e8X"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Apr 2013 16:41:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---FEz7ebHBGB6b2e8X
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 10 April 2013 18:14:17 Koen Kooi wrote:
+> Drags in a few bugfixes needed for gateone
+> 
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-devtools/python/python-tornado_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-devtools/python/python-tornado_git.bb
+> b/meta-oe/recipes-devtools/python/python-tornado_git.bb index
+> 00d0bbb..82a94e6 100644
+> --- a/meta-oe/recipes-devtools/python/python-tornado_git.bb
+> +++ b/meta-oe/recipes-devtools/python/python-tornado_git.bb
+> @@ -3,8 +3,8 @@ LICENSE = "Apache"
+>  LIC_FILES_CHKSUM = "file://README;md5=e7fb9954003d7cd93322ccf282210d1c"
+> 
+>  PV = "2.2"
+> -SRCREV = "02bc76155de5bf4dca243e4d0c019c0ac4c8b3be"
+>  PR = "r1"
+> +SRCREV = "c501917eba46dec30b1f2ef12497dffc4beec505"
+>  SRC_URI = "git://github.com/facebook/tornado.git;branch=branch2.2 \
+>             file://0001-disable-AI_ADDRCONFIG-flag.patch \
+>            "
 
-On Wed, Apr 10, 2013 at 06:07:59PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Op 08-04-13 09:57, Jason Kridner schreef:
-> > * Allows specification of NODE_PATH
-> >=20
-> > Signed-off-by: Jason Kridner <jdk@ti.com> ---=20
-> > .../recipes-devtools/cloud9/cloud9/cloud9.service  |    1 + 1 files
-> > changed, 1 insertions(+), 0 deletions(-)
-> >=20
-> > diff --git
-> > a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-> > b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service=20
-> > index 714b465..54a9db0 100644 ---
-> > a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service +++
-> > b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service @@
-> > -3,6 +3,7 @@ Description=3DCloud9 IDE ConditionPathExists=3D|/var/lib/c=
-loud9
-> >=20
-> > [Service] +EnvironmentFile=3D-/etc/conf.d/node ExecStart=3D/usr/bin/nod=
-e4
-> > /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
-> >=20
-> > [Install]
-> >=20
->=20
->=20
-> It's a bit late now, but this shouldn't go in, it introduces a gentoo-ism
-> (/etc/conf.d) that we don't want.
+Shouldn't PV include SRCPV here? Looking at the repo I'm guessing PV ought to 
+be "2.2.1+git${SRCPV}"
 
-Ah, sorry about that.
+Cheers,
+Paul
 
-> Martin, can you revert it please?
+-- 
 
-Sure
+Paul Eggleton
+Intel Open Source Technology Centre
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFRZY5fMkyGM64RGpERAsUrAKCpirNbZj9g6fdigv2+GZUqSksGVQCeJths
-> zlp4sG6jcgBF1RjzikHwksw=3D
-> =3D6TFx
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---FEz7ebHBGB6b2e8X
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlFlkHwACgkQN1Ujt2V2gBxvlACgr2ac3rXSv9EEIaycJW9MU2MR
-J68An0YSPuh0zEyTlXO+Lm0qeCzvAGCj
-=mj7U
------END PGP SIGNATURE-----
-
---FEz7ebHBGB6b2e8X--
