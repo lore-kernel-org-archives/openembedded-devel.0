@@ -1,24 +1,24 @@
 Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPxgE-0008CL-GO
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UPxgH-0008DA-05
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 10 Apr 2013 18:15:29 +0200
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
 	by fmsmga101.fm.intel.com with ESMTP; 10 Apr 2013 08:58:02 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="320376220"
+X-IronPort-AV: E=Sophos;i="4.87,447,1363158000"; d="scan'208";a="320376227"
 Received: from unknown (HELO helios.amr.corp.intel.com) ([10.255.14.51])
-	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2013 08:58:01 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2013 08:58:02 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Apr 2013 16:57:58 +0100
-Message-Id: <9e1b810be2a70ac9b33252d9f8a160f74118f46f.1365609345.git.paul.eggleton@linux.intel.com>
+Date: Wed, 10 Apr 2013 16:57:59 +0100
+Message-Id: <a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1365609345.git.paul.eggleton@linux.intel.com>
 References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1365609345.git.paul.eggleton@linux.intel.com>
 References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH v2 1/2] packagegroup-qte-toolchain-target: remove bbappend content
+Subject: [meta-oe][PATCH v2 2/2] qt4: remove bbappend content
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +34,37 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 10 Apr 2013 16:15:29 -0000
 
-This added Qwt to the Qt Embedded toolchain. This is a distro policy
-decision, and in any case Qwt is a third-party library which is not part
-of Qt. Distros that wish to do this should add this bbappend to their
-own layers.
+These changes to Qt's configuration need to be applied in distro layers,
+not in meta-oe.
 
 (We have to preserve the PRINC value to avoid PR going backwards.)
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../packagegroups/packagegroup-qte-toolchain-target.bbappend      |    5 -----
- 1 file changed, 5 deletions(-)
+ meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend |    5 -----
+ meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend |    5 -----
+ 2 files changed, 10 deletions(-)
 
-diff --git a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
-index f6e5dd9..d9f1c29 100644
---- a/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
-+++ b/meta-oe/recipes-qt/packagegroups/packagegroup-qte-toolchain-target.bbappend
+diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+index 27cac11..d9f1c29 100644
+--- a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
++++ b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
 @@ -1,6 +1 @@
--RDEPENDS_${PN} += "qwt-e-dev"
+-DEPENDS += "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
 -
--# qwt-e conflicts with qwt, so only one can be built in world and this pulls qwt-e
--EXCLUDE_FROM_WORLD = "1"
+ PRINC := "${@int(PRINC) + 1}"
+diff --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+index 27cac11..d9f1c29 100644
+--- a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
++++ b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+@@ -1,6 +1 @@
+-DEPENDS += "mysql5 postgresql sqlite"
+-QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite2 -plugin-sql-sqlite"
+-QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
+-                    -I${STAGING_INCDIR}/postgresql"
 -
  PRINC := "${@int(PRINC) + 1}"
 -- 
