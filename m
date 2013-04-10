@@ -1,39 +1,35 @@
-Received: from mail-ea0-f172.google.com ([209.85.215.172])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UPxwg-0001OY-Vg
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 18:32:29 +0200
-Received: by mail-ea0-f172.google.com with SMTP id z7so324601eaf.3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UPxy9-0001dg-RB for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Apr 2013 18:33:58 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UPxhJ-0008To-Mh for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Apr 2013 18:16:33 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2013 18:16:33 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 09:15:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=OeCtTeUzhWdSp3Ltji4V4n9o4CvkaJ0ABtaKmy6ZAJI=;
-	b=dfEtAG0P8OWz7p97KlPUdp/hNsZvq4nLbBs2ZzT8htktacbsxDxyXi3+TsZo2iz1qw
-	p58yxeBOzW39jQdK4u72nOrvGErRZ5lX0B7pEYOFQ4IS5aBpee7nG3cEsNiuM/mMkzyr
-	GlhO6tbxQ6j45PG4FVGgXm8h9P4+seaTESA71xO6onvhMhr4PU0BfThaauKw+MQehXlV
-	N4EQqrK9rSjToIPfpJ0mV02JEu+Lih9TpwtjYbWKMNzxd+KjsDaIJ8pkvDnCRBfiyycx
-	IZiHaJ56G6qxVYHGn9G94XyP+7drwlyakV0X57fCfjM9NsGkSjBexWsq/ljKShBtgnIF
-	uhhw==
-X-Received: by 10.14.210.132 with SMTP id u4mr6954442eeo.19.1365610505412;
-	Wed, 10 Apr 2013 09:15:05 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id d47sm673685eem.9.2013.04.10.09.15.03
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 10 Apr 2013 09:15:04 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Wed, 10 Apr 2013 18:16:33 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Apr 2013 18:14:22 +0200
-Message-Id: <1365610462-29689-8-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1.4
-In-Reply-To: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
-References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmvpe5XX+Mud7pfjm9kwVRT/miHvj0VOsBQAUCCkNxbwkWUsgzcKHAemGTgOSKxzf8NuYkw
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH 8/8] cloud9 bbappend: add EnvironmentFile
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 10 Apr 2013 18:16:28 +0200
+Message-ID: <kk438m$t0a$1@ger.gmane.org>
+References: <cover.1365609345.git.paul.eggleton@linux.intel.com>
+	<a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130107 Thunderbird/17.0.2
+In-Reply-To: <a2eefe761b129b700bbf0a1053a05999ecb69e12.1365609345.git.paul.eggleton@linux.intel.com>
+X-Enigmail-Version: 1.5
+Subject: Re: [meta-oe][PATCH v2 2/2] qt4: remove bbappend content
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 16:32:30 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 16:34:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service | 1 +
- 1 file changed, 1 insertion(+)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-index f805ea9..495b131 100644
---- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-+++ b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-@@ -4,6 +4,7 @@ ConditionPathExists=|/var/lib/cloud9
- 
- [Service]
- Restart=always
-+EnvironmentFile=-/etc/default/node
- ExecStart=/usr/bin/node4 /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
- 
- [Install]
--- 
-1.8.1.4
+Op 10-04-13 17:57, Paul Eggleton schreef:
+> These changes to Qt's configuration need to be applied in distro layers, 
+> not in meta-oe.
+> 
+> (We have to preserve the PRINC value to avoid PR going backwards.)
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com> --- 
+> meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend |    5 ----- 
+> meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend |    5 ----- 2 files
+> changed, 10 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend
+> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend index
+> 27cac11..d9f1c29 100644 ---
+> a/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend +++
+> b/meta-oe/recipes-qt/qt4/qt4-embedded_4.8.4.bbappend @@ -1,6 +1 @@ 
+> -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
+> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
+> -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
+> "-I${STAGING_INCDIR}/mysql \ -
+> -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}" diff
+> --git a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend
+> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend index
+> 27cac11..d9f1c29 100644 ---
+> a/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend +++
+> b/meta-oe/recipes-qt/qt4/qt4-x11-free_4.8.4.bbappend @@ -1,6 +1 @@ 
+> -DEPENDS += "mysql5 postgresql sqlite" -QT_SQL_DRIVER_FLAGS =
+> "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql
+> -plugin-sql-sqlite2 -plugin-sql-sqlite" -QT_CONFIG_FLAGS +=
+> "-I${STAGING_INCDIR}/mysql \ -
+> -I${STAGING_INCDIR}/postgresql" - PRINC := "${@int(PRINC) + 1}"
+
+So with the reason given "I don't want to rebuilt QT when adding meta-oe" to
+remove this, this doesn't actually accomplish that. You are adding an extra
+rebuild with this.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRZZBcMkyGM64RGpERAh2tAJ44aceRHVjTRLixQw36lBM6hj6FtgCgkjqY
+3/srLPdum6RLgzFzCmQRs5I=
+=rQLL
+-----END PGP SIGNATURE-----
 
 
 
