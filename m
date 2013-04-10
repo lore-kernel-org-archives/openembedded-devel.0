@@ -1,24 +1,29 @@
-Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
+Received: from mail-ob0-f181.google.com ([209.85.214.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jaap.dejong@nedap.com>) id 1UPup7-000097-J1
+	(envelope-from <ndec13@gmail.com>) id 1UPv6V-0001ti-6r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Apr 2013 15:12:28 +0200
-Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
-	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Wed, 10 Apr 2013
-	14:55:02 +0200
-X-TM-IMSS-Message-ID: <695253680004ffcb@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.1) id 695253680004ffcb ;
-	Wed, 10 Apr 2013 14:55:04 +0200
-Message-ID: <51656126.2020505@nedap.com>
-Date: Wed, 10 Apr 2013 14:55:02 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+	Wed, 10 Apr 2013 15:30:46 +0200
+Received: by mail-ob0-f181.google.com with SMTP id wo10so378509obc.40
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Apr 2013 06:13:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:from:date:message-id:subject:to
+	:content-type; bh=cyB/tEEE13cWROCRf0JrtsOwTRezN+0I2WdSU+d5Rdk=;
+	b=lC3+LOunVlGpLTZxMbfhD3cAs+/U0rhz9hKB6JMYubXILfEbL+E39HcZ1qMPDlZ0sd
+	gXNvoVomMsbPNu2goEH7McAhsyGSyIe4ZKvgYeQ5G61KN1zSMTATpsQHUsPT5wXp2/ux
+	GwRy76RVW9bN0KRGixF4fBq6yT+fkmo6d0W7bnchCP6nxhnZD3XCSMDTEON7zeVRcdCT
+	BIMXVUDOqqYI+Wzqau4hVApvxwgXKbCGdRIoU+cirJCgmnvm7dga+jKdhLsn+V2CoKJ3
+	AN7riTPOn2KFVUOCv/lGjK1LVOYJzpqm2puiZQCAqXKRWD/bIbPK2hZ8MMSk4pYDIFN6
+	1CEg==
+X-Received: by 10.182.237.50 with SMTP id uz18mr715049obc.51.1365599581285;
+	Wed, 10 Apr 2013 06:13:01 -0700 (PDT)
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: dropbear
+Received: by 10.76.34.39 with HTTP; Wed, 10 Apr 2013 06:12:41 -0700 (PDT)
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Wed, 10 Apr 2013 15:12:41 +0200
+Message-ID: <CAOT3miKm12uZ75LrH5fvRxrSvZ7wbyi+ioxMQgROsF3B-mJTvQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: why does gupnp depends on gnome-icon-theme?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,17 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 13:12:30 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Apr 2013 13:30:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
-dropbear 2013.56 is currently the most recent version.
-Although not documented, they left out the functionality patched in with 
-allow-nopw.patch in the 2013.56 release.
-I would like to update to this new version, but is this functionality 
-important?
-Jaap
+hi there,
 
+i have noticed that gupnp (in meta-multimedia/recipes-connectivity)
+depends on gnome-icon-theme, and I don't really understand why, see
+
+http://cgit.openembedded.org/meta-openembedded/tree/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc#n5
+
+i was able to build an image with gupnp even after patching DEPENDS to
+get rid of the dependency, and the main concern with this dependency
+is that it brings:
+
+RRECOMMENDS_${PN} = "librsvg-gtk"
+and as such attempts to build gtk+, while I am trying to make a
+directfb image without GTK.
+
+so, is there any specific reason why there is such a dependency?
+
+thanks!
+
+nicolas
 
 
