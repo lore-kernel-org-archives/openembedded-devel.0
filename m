@@ -1,37 +1,37 @@
-Received: from mail-pb0-f45.google.com ([209.85.160.45])
+Received: from mail-da0-f52.google.com ([209.85.210.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UQIUu-0001pF-2U
+	(envelope-from <martin.jansa@gmail.com>) id 1UQIY9-0002EG-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 16:29:11 +0200
-Received: by mail-pb0-f45.google.com with SMTP id ro12so876650pbb.32
+	Thu, 11 Apr 2013 16:32:31 +0200
+Received: by mail-da0-f52.google.com with SMTP id f10so704739dak.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 07:11:44 -0700 (PDT)
+	Thu, 11 Apr 2013 07:15:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2FKmvdQh2KfZwkEAN98egUV382tKO0XD9LAAwEIO/Oo=;
-	b=uUb7S0bDnSiDHIxATt8+8QvS/tye4QdvQZJe5xDmyV4Lg87mxfBWrcbMqvMJlMLsbw
-	B+7d6CLW/R9rUD/lX+O0Z9F0xtPrD8on9/zVv2QSIBUkv02J4RKIfS6K4EPm23fP5+To
-	yL9VhtzH0hEmAf+4nCAiFlaVqfiNgVJe8j3ylUOcV13sV9xyPdxwvhS3oQ7aEwnxHfGS
-	H2X3MDf10KzXpPuJkwaaNpi1PpMVxX8G68C4sGJm/WX1mIxDgojKMhdLs8weA75mkUDt
-	j8c0E2IeLYM6fJqtWKtFPZFb28amDcdP89vNrq/bFlJsABrRgJ9P5tYOPWXFPzSWIHMw
-	d+ug==
-X-Received: by 10.66.82.132 with SMTP id i4mr9714291pay.172.1365689504346;
-	Thu, 11 Apr 2013 07:11:44 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=n5b9/Wt79lJN7q0hEGCnLEvnm2oDfN3nmq1vKB1KbNk=;
+	b=QlS6TSvm2ZuynSztwDBg/7/Vr6ojia8pCfB1IsngX5cZV5fKZiROvN/8NdmACYgHW4
+	v7Zlj9xlDwLcHhKcJrUa7KPxNugL0fehZ/PdJ2IGfF5lnS+uZqGNtyhmrgpLFuEdqtPw
+	bhJ1kI6G5ckqufiFE9F0tu2H8LXCqo7z3HBFj5VV1KO8l9a8KJqtb/Y6Ff7L61KAP291
+	VlRkiE7OPSUMwaVGQ9iWu5Fxe+Hr7EyhLFcxH2o0WhugCd6gPXqtbmucOnQsrVd5wE/l
+	ciyjk0NLa/7YvCBa6GN0xlpd5f5GC/6p7ItP5wE7G5Oz7UA9EJxAEmg/lSgR7VVG6CmJ
+	tZow==
+X-Received: by 10.68.197.67 with SMTP id is3mr9177672pbc.104.1365689705973;
+	Thu, 11 Apr 2013 07:15:05 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ao5sm2288287pbc.25.2013.04.11.07.11.41
+	by mx.google.com with ESMTPS id ew5sm4415913pbc.9.2013.04.11.07.15.03
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 11 Apr 2013 07:11:43 -0700 (PDT)
-Date: Thu, 11 Apr 2013 16:11:36 +0200
+	Thu, 11 Apr 2013 07:15:04 -0700 (PDT)
+Date: Thu, 11 Apr 2013 16:14:58 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130411141136.GG2477@jama>
-References: <1365019873-30178-1-git-send-email-paul@paulbarker.me.uk>
-	<CANyK_8dvYJsKsOACNCMvXG79VyNWeb2h-AGMFrAgtJ6StQ0Luw@mail.gmail.com>
+Message-ID: <20130411141458.GH2477@jama>
+References: <1365670626-18585-1-git-send-email-ndec@linaro.org>
+	<1365670626-18585-3-git-send-email-ndec@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <CANyK_8dvYJsKsOACNCMvXG79VyNWeb2h-AGMFrAgtJ6StQ0Luw@mail.gmail.com>
+In-Reply-To: <1365670626-18585-3-git-send-email-ndec@linaro.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] fbset: Replace deprecated update-alternatives syntax
+Subject: Re: [meta-multimedia][PATCH v2 2/2] gupnp: remove dependency on gnome-icon-theme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,84 +45,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 14:29:11 -0000
-X-Groupsio-MsgNum: 44074
+X-List-Received-Date: Thu, 11 Apr 2013 14:32:39 -0000
+X-Groupsio-MsgNum: 44075
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zGQnqpIoxlsbsOfg"
+	protocol="application/pgp-signature"; boundary="VkqCAaSJIySsbD6j"
 Content-Disposition: inline
 
---zGQnqpIoxlsbsOfg
+--VkqCAaSJIySsbD6j
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 11, 2013 at 03:02:44PM +0100, Paul Barker wrote:
-> Is this patch useful?
+On Thu, Apr 11, 2013 at 10:57:06AM +0200, Nicolas Dechesne wrote:
+> As discussed in [1], let's remove the dependency on gnome-icon-theme,
+> since it's not required, and it brings additional unwanted dependency,
+> such as the whole gtk+...
 
-Yes and already applied, thanks!
+Hi, I've already applied first version of this yesterday, I don't think
+we need to introduce more INC_PRs now, so for now I'll keep it as is
+unless someone has good reasons for INC_PRs.
 
-http://git.openembedded.org/meta-openembedded/commit/?id=3Db0fb477a11d24cc6=
-4a40f29dfd934b5e78f6cc7d
-
+> [1] http://article.gmane.org/gmane.comp.handhelds.openembedded/57483
 >=20
-> On 3 April 2013 21:11, Paul Barker <paul@paulbarker.me.uk> wrote:
-> > Building fbset gave the following warning:
-> >
-> >         WARNING: fbset: Use of ALTERNATIVE_NAME is deprecated, see
-> >                 update-alternatives.bbclass for more info.
-> >
-> > update-alternatives.bbclass states that this warning will eventually be=
-come an
-> > error so this is worth fixing.
-> >
-> > The use of deprecated syntax is replaced with current syntax to do the =
-same
-> > thing. To test that this works, a .deb package was created and the post=
--install
-> > script was checked to ensure that update-alternatives would be called w=
-ith the
-> > exact same arguments as it was by the script generated by the old recip=
-e.
-> >
-> > Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-> > ---
-> >  meta-oe/recipes-support/fbset/fbset_2.1.bb |   10 ++++------
-> >  1 file changed, 4 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-support/fbset/fbset_2.1.bb b/meta-oe/recip=
-es-support/fbset/fbset_2.1.bb
-> > index 12c1c94..9fe2728 100644
-> > --- a/meta-oe/recipes-support/fbset/fbset_2.1.bb
-> > +++ b/meta-oe/recipes-support/fbset/fbset_2.1.bb
-> > @@ -27,12 +27,10 @@ do_install() {
-> >          install -m 0644 ${WORKDIR}/${P}/*.8 ${D}${datadir}/man/man8
-> >  }
-> >
-> > -ALTERNATIVE_NAME =3D "fbset"
-> > -ALTERNATIVE_LINK =3D "${sbindir}/${ALTERNATIVE_NAME}"
-> > -ALTERNATIVE_PATH =3D "${sbindir}/fbset.real"
-> > -ALTERNATIVE_PRIORITY =3D "55"
-> > -
-> > -
-> > +ALTERNATIVE_fbset =3D "fbset"
-> > +ALTERNATIVE_LINK_NAME[fbset] =3D "${sbindir}/fbset"
-> > +ALTERNATIVE_TARGET[fbset] =3D "${sbindir}/fbset.real"
-> > +ALTERNATIVE_PRIORITY[fbset] =3D "55"
-> >
-> >  SRC_URI[md5sum] =3D "40ed9608f46d787bfb65fd1269f7f459"
-> >  SRC_URI[sha256sum] =3D "517fa062d7b2d367f931a1c6ebb2bef84907077f0ce3f0=
-c899e34490bbea9338"
-> > --
-> > 1.7.10.4
-> >
+> It is build-tested with
+>  - core-image-minimal
+>  - IMAGE_INSTALL +=3D 'gupnp'
+>  - directfb in DISTRO_FEATURES
 >=20
+> The build was failing before (GTK failed to build with directfb, which
+> is expected).
 >=20
+> Signed-off-by: Nicolas Dechesne <ndec@linaro.org>
+> ---
+>  meta-multimedia/recipes-connectivity/gupnp/gupnp.inc | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >=20
-> --
-> Paul Barker
+> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc b/meta-=
+multimedia/recipes-connectivity/gupnp/gupnp.inc
+> index 31dd407..99bffc0 100644
+> --- a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+> +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
+> @@ -2,9 +2,9 @@ SUMMARY =3D "UPnP framework"
+>  DESCRIPTION =3D "GUPnP is an elegant, object-oriented open source framew=
+ork for creating UPnP  devices and control points, written in C using GObje=
+ct and libsoup. The GUPnP API is intended to be easy to use, efficient and =
+flexible. It provides the same set of features as libupnp, but shields the =
+developer from most of UPnP's internals."
+>  LICENSE =3D "LGPLv2+"
+> =20
+> -INC_PR =3D "r0"
+> +INC_PR =3D "r1"
+> =20
+> -DEPENDS =3D "e2fsprogs gssdp libsoup-2.4 libxml2 gnome-icon-theme gobjec=
+t-introspection-stub"
+> +DEPENDS =3D "e2fsprogs gssdp libsoup-2.4 libxml2 gobject-introspection-s=
+tub"
+> =20
+>  require no-vala.inc
+> =20
+> --=20
+> 1.8.1.2
 >=20
-> Email: paul@paulbarker.me.uk
-> http://www.paulbarker.me.uk
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -132,16 +115,16 @@ c899e34490bbea9338"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---zGQnqpIoxlsbsOfg
+--VkqCAaSJIySsbD6j
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFmxJgACgkQN1Ujt2V2gBw6tACgk8ITR0exRuA2JuvB5epGFmDO
-togAn1X+Pu2PMQ7NNbZ5qcAAtDidb/4A
-=HSGS
+iEYEARECAAYFAlFmxWIACgkQN1Ujt2V2gBwQiACgrXjJ0tb+h8NR2r/LQ6KFvMHF
+nqgAnApTFPqIQ/8vzXZ7ay3bEj8b46nD
+=tQlF
 -----END PGP SIGNATURE-----
 
---zGQnqpIoxlsbsOfg--
+--VkqCAaSJIySsbD6j--
