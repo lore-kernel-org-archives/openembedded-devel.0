@@ -1,43 +1,40 @@
-Received: from mail-ee0-f44.google.com ([74.125.83.44])
+Received: from mail-ea0-f170.google.com ([209.85.215.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UQErE-0005Fr-OL
+	(envelope-from <koen@dominion.thruhere.net>) id 1UQFIB-0007iY-DE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 12:35:58 +0200
-Received: by mail-ee0-f44.google.com with SMTP id c41so691984eek.3
+	Thu, 11 Apr 2013 13:03:49 +0200
+Received: by mail-ea0-f170.google.com with SMTP id a15so660878eae.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 03:18:34 -0700 (PDT)
+	Thu, 11 Apr 2013 03:46:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=ov8JbusDRxquLhpzDcm0x1nUbDTC6UGM++R1HVsg3rQ=;
-	b=R6a9bYnH5771m5Huyil/sXqD3PCEkwpF8q7Ti7xz4fYZMn98Dr7FDYS4pTEuUfp4UP
-	DiFLPe2pjdk6OCSjIS8GEZ7Ssv9XmvySySu5Kwghuktb+kwLpJdX+vZePG1Q6Bt6A1zx
-	ndsz+n9WWRehzpL7IAgxaD5umL1lGMEEbJaGdgHj3pLekDDlwJQfYh5/QZaNV1mfHghg
-	kX2JoqHoauem9TRg05uDM6tKYwvkCtz3zJMq+Q+zX+bscPMdfWF8S1CuKV66xvvp8Aux
-	y1J3DQnwcvi2oc/hYWyPDYNa42vHkCU9Ulu7P8xGRAIm2lJDKjLvhSbfjonvZrwXxVc2
-	9QXw==
-X-Received: by 10.15.111.202 with SMTP id cj50mr15599209eeb.6.1365675513972;
-	Thu, 11 Apr 2013 03:18:33 -0700 (PDT)
-Received: from ?IPv6:2001:610:612::3489:27c8:de55:7ab2?
-	([2001:610:612:0:3489:27c8:de55:7ab2])
-	by mx.google.com with ESMTPS id v6sm4757761eel.10.2013.04.11.03.18.31
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 11 Apr 2013 03:18:32 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
+	bh=la2lh4kP+mQFU9VVSiIPmVYz9FP9NFxhyd3dYTMxHZ0=;
+	b=Qxn7LidxozMbeubNHZFoYVzH8gCdPHMA7Gw8Kvf1dkOsqwC0qM49yhPOgoXlMeYyye
+	J/YAb/QUUiAc/1GD4iXplBPNUb75E8+iYAibsjgpC3uRV0IcIRbq8oXQmfWACxz3iexQ
+	pCaODEPzLjh/orJ8kTueWzLhZhaWMnMxUs9hAZtLnzCrc1Eh3XIKQwJ4aCFlIVZ5K+52
+	S+C5ytLTYuuTOpZDz2qGm+aRvD7Nl3WWTGgCB3mYscpQiYdqCdLZ1xcAVZziFWwCWSZB
+	W5R0MwOqgbcx2UseU0dwQLJg0c3FY6482dTBrw8MSpQfzUSlvAvY58cQMX4eU3Rh4kpJ
+	I1PQ==
+X-Received: by 10.15.101.200 with SMTP id bp48mr15596710eeb.38.1365677184693; 
+	Thu, 11 Apr 2013 03:46:24 -0700 (PDT)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id a41sm4946895eei.4.2013.04.11.03.46.23
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 11 Apr 2013 03:46:23 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20130411092926.GB2477@jama>
-Date: Thu, 11 Apr 2013 12:18:30 +0200
-Message-Id: <93976714-521F-4482-98F0-B6E2E2F865CF@dominion.thruhere.net>
-References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
-	<1365610462-29689-5-git-send-email-koen@dominion.thruhere.net>
-	<20130411092926.GB2477@jama>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1503)
-X-Gm-Message-State: ALoCoQmr/cxtRtymju+dN06QzY4Rblk75RhcMX7rGD7XZnZymra+lgygB0IlSzGEBoNgoDFyRwpR
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 5/8] nodejs4: reinstate installing all the files
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 11 Apr 2013 12:45:59 +0200
+Message-Id: <1365677165-9296-2-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.1.4
+In-Reply-To: <1365677165-9296-1-git-send-email-koen@dominion.thruhere.net>
+References: <1365677165-9296-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQkbikn+SaalWq7ziu0UrqVxk24+7cQ9+vcvifybp+WmpBTmTHYCgPTvnGytjNSpQoYSeaSO
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCHv2 2/8] Revert "cloud9: add EnvironmentFile"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,71 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 10:35:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Apr 2013 11:03:50 -0000
+X-List-Received-Date: Thu, 11 Apr 2013 11:03:50 -0000
 
+This introduces a gentoo-ism which we don't want, and is fixed differently now
 
-Op 11 apr. 2013, om 11:29 heeft Martin Jansa <martin.jansa@gmail.com> =
-het volgende geschreven:
+This reverts commit 222b4eb3e469a84e929a968def6773405f369a3d.
+---
+ meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service | 1 -
+ 1 file changed, 1 deletion(-)
 
-> On Wed, Apr 10, 2013 at 06:14:19PM +0200, Koen Kooi wrote:
->> Cloud9 needs the headers to build the o3-xml binary, using 0.8.x =
-headers makes it crash.
->>=20
->> This installs everything namespaced as 'node4' to avoid collisions.
->>=20
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb | 18 =
-+++++++++++++++---
->> 1 file changed, 15 insertions(+), 3 deletions(-)
->>=20
->> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb =
-b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
->> index 522b539..58ca135 100644
->> --- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
->> +++ b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
->> @@ -28,8 +28,20 @@ do_compile () {
->> }
->>=20
->> do_install () {
->> -  install -d ${D}${bindir}
->> -  install -m 0755 build/default/node ${D}${bindir}/node4
->> -}
->> +  DESTDIR=3D${D} oe_runmake install
->> +
->> +  # fix namespace conflicts with other nodejs recipes
->> +  mv ${D}${bindir}/node ${D}${bindir}/node4
->> +  mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
->> +
->> +  mv ${D}${includedir}/node ${D}${includedir}/node4
->>=20
->> +  mv ${D}${libdir}/node ${D}${libdir}/node4
->> +  mv ${D}${libdir}/pkgconfig/nodejs.pc =
-${D}${libdir}/pkgconfig/nodejs4.pc
->> +  sed -i -e s:include/node:include/node4: =
-${D}${libdir}/pkgconfig/nodejs4.pc
->> +
->> +  mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
->> +}
->>=20
->> +FILES_${PN} +=3D "${libdir}/node4/wafadmin"
->> +BBCLASSEXTEND =3D "native"
->=20
-> nodejs4-native fails here:
-> | mv: cannot stat
-> =
-`/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-linux/=
-nodejs4-native/0.4.12-r0/image/home/jenkins/oe/shr-core-branches/shr-core/=
-tmp-eglibc/sysroots/x86_64-linux/usr/bin/node':
-> No such file or directory
-> | ERROR: Function failed: do_install (see
-> =
-/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-linux/n=
-odejs4-native/0.4.12-r0/temp/log.do_install.6513
-> for further information)
+diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+index 54a9db0..714b465 100644
+--- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
++++ b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+@@ -3,7 +3,6 @@ Description=Cloud9 IDE
+ ConditionPathExists=|/var/lib/cloud9
+ 
+ [Service]
+-EnvironmentFile=-/etc/conf.d/node
+ ExecStart=/usr/bin/node4 /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000
+ 
+ [Install]
+-- 
+1.8.1.4
 
-I'll have a look at that, thanks!=
 
 
