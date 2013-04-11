@@ -1,40 +1,40 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f54.google.com ([74.125.83.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UQFIF-0007io-Ud
+	(envelope-from <koen@dominion.thruhere.net>) id 1UQFIH-0007jN-Ha
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 13:03:53 +0200
-Received: by mail-ea0-f175.google.com with SMTP id r16so664917ead.34
+	Thu, 11 Apr 2013 13:03:56 +0200
+Received: by mail-ee0-f54.google.com with SMTP id e51so672843eek.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 03:46:29 -0700 (PDT)
+	Thu, 11 Apr 2013 03:46:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:x-gm-message-state;
-	bh=TlLl4zHV8iJQ148OJaWOQ6Ltgnd/5emI89w/DRUlxgA=;
-	b=M0Ygh8MQb1tN+dnnqVZnEUqhOsgo8VOUdehDb2SVu/r0L0FD5g2FAvSwmxjCfqbW1+
-	fx3zM+/ee6CkCcSUPU3uHnjMx1QxnrC6nNpaxf+KwqSESrkqh5Tqt26xrlLbZvlkH/ap
-	ARjgWWG+k2gttzAVlUpg+AUdBWNNGnwkmc4nkMbZHJuAKE0GGcHe1rCCPV7sdU91eLRR
-	0APmBjdQ66aJOEoswUD472zA056vXa0+1keoyfTg2GC+7lpXOFRsLBUNaMOrqB0j8FVj
-	USSUFxGe/edwHX6ZmB29mYVngnIs3VOz7LIkumy9VYUVpMHwlFgH2P85TFZ0sOc+5lzL
-	/bHA==
-X-Received: by 10.14.202.71 with SMTP id c47mr15563614eeo.39.1365677189189;
-	Thu, 11 Apr 2013 03:46:29 -0700 (PDT)
+	bh=aIqnIj22WxK4mfGIBi8xeicykzgFKnibDsMZDRKGcm0=;
+	b=dQ+/UOZMkSMx4JMt/4AohRbo6dadAdeLhJey9GUGP0+f3LXMobVOfcwPj2eVyZeFsa
+	nSHYxnfS5n3G60CyJ6IWyYEvzfoojoqX5zZwbT8HMg/Afai8UCHrv2lAa4a9iwyu5Jga
+	2pt0nYs+HZMC400rtQXolVzIwT/o0srIoEB4iE0vQ24Qnz5tpwetWo+sv93Zj6A8DiHQ
+	pNDbdIV9hKAJZ3NOXv/q5/hEsMsAYoFnJgOeft+1O6t+sdGpUI+Z5lzjD9NK/l5RVAN4
+	wdojVKoxCoFKnmJri1pCghvgXoRQIM7uTqvFAqdraxZNB1YOpQ3maknIe97Xok7H3sfb
+	wKQQ==
+X-Received: by 10.14.107.69 with SMTP id n45mr15738639eeg.23.1365677190812;
+	Thu, 11 Apr 2013 03:46:30 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPS id a41sm4946895eei.4.2013.04.11.03.46.27
+	by mx.google.com with ESMTPS id a41sm4946895eei.4.2013.04.11.03.46.29
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 11 Apr 2013 03:46:28 -0700 (PDT)
+	Thu, 11 Apr 2013 03:46:29 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Apr 2013 12:46:02 +0200
-Message-Id: <1365677165-9296-5-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 11 Apr 2013 12:46:03 +0200
+Message-Id: <1365677165-9296-6-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.8.1.4
 In-Reply-To: <1365677165-9296-1-git-send-email-koen@dominion.thruhere.net>
 References: <1365677165-9296-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkgCHNlfJOFHhHhLUVrrO3/9Y/kn1z1WREvoeoebPw/W/Fuxbiom+If6bmaJaD9i/52RAF0
+X-Gm-Message-State: ALoCoQn1YBL4rUL4wHVR+vifr5DYBo+qJZUtWx5OzqGq46LyTyPk+wEkgrgMegsOoHjqTweUqwxG
 Cc: Koen Kooi <koen@dominion.thruhere.net>,
 	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCHv2 5/8] nodejs4: reinstate installing all the files
+Subject: [meta-oe][PATCHv2 6/8] cloud9: use node4 to build o3-xml binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 11:03:56 -0000
+X-List-Received-Date: Thu, 11 Apr 2013 11:03:59 -0000
 
-Cloud9 needs the headers to build the o3-xml binary, using 0.8.x headers makes it crash.
-
-This installs everything namespaced as 'node4' to avoid collisions.
+Using node 0.8.x will make it crash at runtime
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
+ meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
-index 522b539..58ca135 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
-@@ -28,8 +28,20 @@ do_compile () {
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+index a78c653..ef32829 100644
+--- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
++++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
+ 
+ PR = "r2"
+ 
+-DEPENDS = "libxml2 nodejs-native"
++DEPENDS = "libxml2 nodejs4-native"
+ 
+ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
+            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
+@@ -68,11 +68,11 @@ do_configure () {
+  node-waf -vv configure
  }
  
- do_install () {
--  install -d ${D}${bindir}
--  install -m 0755 build/default/node ${D}${bindir}/node4
--}
-+  DESTDIR=${D} oe_runmake install
-+
-+  # fix namespace conflicts with other nodejs recipes
-+  mv ${D}${bindir}/node ${D}${bindir}/node4
-+  mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
-+
-+  mv ${D}${includedir}/node ${D}${includedir}/node4
+-EXTRA_CXXFLAGS = "-Idefault/include -I../include -Idefault/hosts -I../hosts -Idefault/modules -I../modules -Idefault/deps -I../deps -I${STAGING_DIR_NATIVE}/usr/include/node -fPIC -DPIC"
++EXTRA_CXXFLAGS = "-Idefault/include -I../include -Idefault/hosts -I../hosts -Idefault/modules -I../modules -Idefault/deps -I../deps -I${STAGING_DIR_NATIVE}/usr/include/node4 -fPIC -DPIC"
  
-+  mv ${D}${libdir}/node ${D}${libdir}/node4
-+  mv ${D}${libdir}/pkgconfig/nodejs.pc ${D}${libdir}/pkgconfig/nodejs4.pc
-+  sed -i -e s:include/node:include/node4: ${D}${libdir}/pkgconfig/nodejs4.pc
-+
-+  mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
-+}
- 
-+FILES_${PN} += "${libdir}/node4/wafadmin"
-+BBCLASSEXTEND = "native"
+ do_compile () {
+  cd ${WORKDIR}/o3
+- node tools/gluegen.js
++ node4 tools/gluegen.js
+  cd hosts
+  ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node.o node-o3/sh_node.cc
+  ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node_libs.o node-o3/sh_node_libs.cc
 -- 
 1.8.1.4
 
