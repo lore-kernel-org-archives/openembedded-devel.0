@@ -1,41 +1,43 @@
-Received: from mail-ve0-f170.google.com ([209.85.128.170])
+Received: from mail-ee0-f44.google.com ([74.125.83.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UQEZ7-0003Z9-3m
+	(envelope-from <koen@dominion.thruhere.net>) id 1UQErE-0005Fr-OL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 12:17:29 +0200
-Received: by mail-ve0-f170.google.com with SMTP id 15so1269614vea.29
+	Thu, 11 Apr 2013 12:35:58 +0200
+Received: by mail-ee0-f44.google.com with SMTP id c41so691984eek.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 02:59:50 -0700 (PDT)
+	Thu, 11 Apr 2013 03:18:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=0mByjNbr/SNum5rogYJgcHP3idGcZUEsLIAYiEnbZ3Q=;
-	b=ZuL9TvayaNyJIJpXNSuO7S7bkIYP+3hj8fl+iQNlftJfIqkhLeh4SkaTiStElwnhV8
-	oWYdNwCrrjBt0WILUGow/crWSl0l2CXVyqTljgw3l74Ajdjlkm/MaXYISgFjL8+n5hue
-	I4zh/xokt2hrTwRK0ukL3fl1k6gdgxOou9U33yWydG76wvH2Hn1Q0RbuKm1rJ0ntL0s7
-	0t7EmzA1bnAzPw677ozwefH93/Wrx3Y/Rujf2iXKkbv4cWsvMEGcWDfkAjbkSZwZS1NI
-	iJTHUF0C4L+Fsw/qWLCWYoJ+yg29L+ATHznZBK//GcTFMQHJuSWWTosEzji0eA7HU6Wk
-	gvkA==
-X-Received: by 10.58.188.48 with SMTP id fx16mr4455293vec.22.1365674390009;
-	Thu, 11 Apr 2013 02:59:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.220.100.68 with HTTP; Thu, 11 Apr 2013 02:59:29 -0700 (PDT)
-In-Reply-To: <20130410211711.GG2471@jama>
-References: <1360776335-21633-1-git-send-email-raj.khem@gmail.com>
-	<20130305221857.GA14869@jama>
-	<CALbNGRRZFt3FgMCjyB8JN8Be1w_-Vdgnq=2nZy3tyUM0TxdFpA@mail.gmail.com>
-	<20130305225907.GB14869@jama> <20130409200127.GF2474@jama>
-	<F52AA45C-FB86-4749-95C0-0DA24BC50DFB@dominion.thruhere.net>
-	<CAJTo0LZga4SoPiHOCVTQizutkcfe-417jx+fuHxCira--QWiGQ@mail.gmail.com>
-	<20130410211711.GG2471@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 11 Apr 2013 10:59:29 +0100
-Message-ID: <CAJTo0LYRTeois4APOwo4ezwDUXH2vK1QOP9B6gagTxnZinKCRQ@mail.gmail.com>
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=ov8JbusDRxquLhpzDcm0x1nUbDTC6UGM++R1HVsg3rQ=;
+	b=R6a9bYnH5771m5Huyil/sXqD3PCEkwpF8q7Ti7xz4fYZMn98Dr7FDYS4pTEuUfp4UP
+	DiFLPe2pjdk6OCSjIS8GEZ7Ssv9XmvySySu5Kwghuktb+kwLpJdX+vZePG1Q6Bt6A1zx
+	ndsz+n9WWRehzpL7IAgxaD5umL1lGMEEbJaGdgHj3pLekDDlwJQfYh5/QZaNV1mfHghg
+	kX2JoqHoauem9TRg05uDM6tKYwvkCtz3zJMq+Q+zX+bscPMdfWF8S1CuKV66xvvp8Aux
+	y1J3DQnwcvi2oc/hYWyPDYNa42vHkCU9Ulu7P8xGRAIm2lJDKjLvhSbfjonvZrwXxVc2
+	9QXw==
+X-Received: by 10.15.111.202 with SMTP id cj50mr15599209eeb.6.1365675513972;
+	Thu, 11 Apr 2013 03:18:33 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::3489:27c8:de55:7ab2?
+	([2001:610:612:0:3489:27c8:de55:7ab2])
+	by mx.google.com with ESMTPS id v6sm4757761eel.10.2013.04.11.03.18.31
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 11 Apr 2013 03:18:32 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20130411092926.GB2477@jama>
+Date: Thu, 11 Apr 2013 12:18:30 +0200
+Message-Id: <93976714-521F-4482-98F0-B6E2E2F865CF@dominion.thruhere.net>
+References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
+	<1365610462-29689-5-git-send-email-koen@dominion.thruhere.net>
+	<20130411092926.GB2477@jama>
 To: Martin Jansa <martin.jansa@gmail.com>
-X-Gm-Message-State: ALoCoQmXBrfoO89WqTovfpmyv+Iu4oN2wOcDnWzNQGRsyhGnO5h9aKNzW0Q6T6WKqxBrO/yzr4mi
+X-Mailer: Apple Mail (2.1503)
+X-Gm-Message-State: ALoCoQmr/cxtRtymju+dN06QzY4Rblk75RhcMX7rGD7XZnZymra+lgygB0IlSzGEBoNgoDFyRwpR
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-systemd future vote Was: [meta-systemd][PATCH 1/2] Delete systemd class.
+Subject: Re: [meta-oe][PATCH 5/8] nodejs4: reinstate installing all the files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +51,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 10:17:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Apr 2013 10:35:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 10 April 2013 22:17, Martin Jansa <martin.jansa@gmail.com> wrote:
-> I should have asked which Monday he meant.. it's still not fixed
-> connman:
-> http://lists.linuxtogo.org/pipermail/openembedded-core/2013-March/037355.html
->
-> util-linux:
-> http://permalink.gmane.org/gmane.comp.handhelds.openembedded.core/34410
->
-> and I can find a lot more in my sent folder if I really care :/.
 
-Thanks Martin, I'll chase those.  Probably too late for 1.4.0 but
-obviously we can fix in master and add to 1.4.1.
+Op 11 apr. 2013, om 11:29 heeft Martin Jansa <martin.jansa@gmail.com> =
+het volgende geschreven:
 
-Ross
+> On Wed, Apr 10, 2013 at 06:14:19PM +0200, Koen Kooi wrote:
+>> Cloud9 needs the headers to build the o3-xml binary, using 0.8.x =
+headers makes it crash.
+>>=20
+>> This installs everything namespaced as 'node4' to avoid collisions.
+>>=20
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
+>> meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb | 18 =
++++++++++++++++---
+>> 1 file changed, 15 insertions(+), 3 deletions(-)
+>>=20
+>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb =
+b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+>> index 522b539..58ca135 100644
+>> --- a/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs4_0.4.12.bb
+>> @@ -28,8 +28,20 @@ do_compile () {
+>> }
+>>=20
+>> do_install () {
+>> -  install -d ${D}${bindir}
+>> -  install -m 0755 build/default/node ${D}${bindir}/node4
+>> -}
+>> +  DESTDIR=3D${D} oe_runmake install
+>> +
+>> +  # fix namespace conflicts with other nodejs recipes
+>> +  mv ${D}${bindir}/node ${D}${bindir}/node4
+>> +  mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
+>> +
+>> +  mv ${D}${includedir}/node ${D}${includedir}/node4
+>>=20
+>> +  mv ${D}${libdir}/node ${D}${libdir}/node4
+>> +  mv ${D}${libdir}/pkgconfig/nodejs.pc =
+${D}${libdir}/pkgconfig/nodejs4.pc
+>> +  sed -i -e s:include/node:include/node4: =
+${D}${libdir}/pkgconfig/nodejs4.pc
+>> +
+>> +  mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
+>> +}
+>>=20
+>> +FILES_${PN} +=3D "${libdir}/node4/wafadmin"
+>> +BBCLASSEXTEND =3D "native"
+>=20
+> nodejs4-native fails here:
+> | mv: cannot stat
+> =
+`/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-linux/=
+nodejs4-native/0.4.12-r0/image/home/jenkins/oe/shr-core-branches/shr-core/=
+tmp-eglibc/sysroots/x86_64-linux/usr/bin/node':
+> No such file or directory
+> | ERROR: Function failed: do_install (see
+> =
+/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-linux/n=
+odejs4-native/0.4.12-r0/temp/log.do_install.6513
+> for further information)
+
+I'll have a look at that, thanks!=
 
 
