@@ -1,39 +1,40 @@
-Received: from mail-wi0-f174.google.com ([209.85.212.174])
+Received: from mail-we0-f179.google.com ([74.125.82.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ndec@linaro.org>) id 1UQDbY-0005HD-GA
+	(envelope-from <martin.jansa@gmail.com>) id 1UQE55-0008KR-DK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 11:15:44 +0200
-Received: by mail-wi0-f174.google.com with SMTP id hj8so301240wib.13
+	Thu, 11 Apr 2013 11:46:20 +0200
+Received: by mail-we0-f179.google.com with SMTP id p43so1092635wea.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 01:58:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=YbuliQymBATLxODvVm0sdRhXzZdgZYcxrUplFa3+ZIA=;
-	b=G3Z+qI8ojj/KhDep2eCsKWzqxP6dhONKDaAJ7MXFfTUuWuWAOWg8WNcDVeH63AU3xU
-	Kf1W+03k9hTKpiezjDvUg8OIK8OZG6eeHs9d8xv7y5iU2fUajWVVkL/GIQMZoiDzecwL
-	tBbgBC8i6IhnFxxCnkDqPK7+tX1/IwRpFFtqu9y5cq01ZAcrUQucR9Qd27BXs8g0JGlK
-	2rC8Dhol/rXYwht6/VUW2Lg4WXbFoZliae0Ds7Zm0JWn2Q6h4BcsHf57XJ9VlZAL1/dS
-	hCDhItzWzSkCiNQ6Jxfgre5DDk4HN9zrKNW2EzpEa1LlRPA8XXJQbtQxvEfpikiSF44l
-	6VEQ==
-X-Received: by 10.180.87.193 with SMTP id ba1mr8778117wib.10.1365670697944;
-	Thu, 11 Apr 2013 01:58:17 -0700 (PDT)
-Received: from localhost.localdomain (gau06-1-78-243-126-63.fbx.proxad.net.
-	[78.243.126.63])
-	by mx.google.com with ESMTPS id ed6sm1970084wib.9.2013.04.11.01.58.16
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 11 Apr 2013 01:58:17 -0700 (PDT)
-From: Nicolas Dechesne <ndec@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Apr 2013 10:57:06 +0200
-Message-Id: <1365670626-18585-3-git-send-email-ndec@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1365670626-18585-1-git-send-email-ndec@linaro.org>
-References: <1365670626-18585-1-git-send-email-ndec@linaro.org>
-X-Gm-Message-State: ALoCoQn08x0f2RekWPoctCVr1wyTi8ttymrpAjB31ol56yKhb5UWHA0fYfRshE7DAva1OQjpYwO1
-Cc: Nicolas Dechesne <ndec@linaro.org>
-Subject: [meta-multimedia][PATCH v2 2/2] gupnp: remove dependency on gnome-icon-theme
+	Thu, 11 Apr 2013 02:28:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=mMDVSp1JmsSY8pqkgR+ngEmYykfbZgow/YXswP9iOSM=;
+	b=ya0PWMdQ5fUsliDUu74ZJOCTrLmbafVaAhg3QSwYF4D+cA54B0wuI2woWxulojl6ar
+	R62xSU62h3XGAewDIVX2CNZ7a1Y7rAa2ZFcYAd7+0Z7LoRka9yGa7W0P+x+GRNpjOYzg
+	QHHDTlGFpeyWe/87UWqITDggrf9efWZGJfiVEPKZZMJtpZv1CLqSoZL3ZnWyE6tGy+JB
+	mXr5oXXTeX+h3PKQFH83uvJTqUKelEPZYapVIZ1GCYmFDrhMxmeteUDb3FAlxVi2K9pM
+	xk7zvuEv+wakfFUkLB8OC6VL1ISpKkFluFz2kiqkREVs9ndLmdhihP+ORzMVD+7X6wDg
+	yz1A==
+X-Received: by 10.194.11.70 with SMTP id o6mr9217567wjb.29.1365672528676;
+	Thu, 11 Apr 2013 02:28:48 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id s2sm2170629wib.4.2013.04.11.02.28.47
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 11 Apr 2013 02:28:48 -0700 (PDT)
+Date: Thu, 11 Apr 2013 11:28:50 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20130411092850.GA2477@jama>
+References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
+	<1365610462-29689-4-git-send-email-koen@dominion.thruhere.net>
+	<20130410220423.GH2471@jama>
+	<9B4BCA43-0F29-4F57-A776-281D257DAC37@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <9B4BCA43-0F29-4F57-A776-281D257DAC37@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 4/8] gateone: fix html5 feature check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 09:16:00 -0000
+X-List-Received-Date: Thu, 11 Apr 2013 09:46:27 -0000
+X-Groupsio-MsgNum: 44054
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
+Content-Disposition: inline
 
-As discussed in [1], let's remove the dependency on gnome-icon-theme,
-since it's not required, and it brings additional unwanted dependency,
-such as the whole gtk+...
+--T4sUOijqQbZv57TR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[1] http://article.gmane.org/gmane.comp.handhelds.openembedded/57483
+On Thu, Apr 11, 2013 at 07:33:10AM +0200, Koen Kooi wrote:
+>=20
+> Op 11 apr. 2013, om 00:04 heeft Martin Jansa <martin.jansa@gmail.com> het=
+ volgende geschreven:
+>=20
+> > On Wed, Apr 10, 2013 at 06:14:18PM +0200, Koen Kooi wrote:
+> >> The BlobBuilder and Blob checks never succeeded, even on cutting edge =
+browsers. Nudge SRCREV forward to drag in those fixes.
+> >>=20
+> >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> >> ---
+> >> meta-oe/recipes-connectivity/gateone/gateone_git.bb | 2 +-
+> >> 1 file changed, 1 insertion(+), 1 deletion(-)
+> >>=20
+> >> diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/met=
+a-oe/recipes-connectivity/gateone/gateone_git.bb
+> >> index 652876f..8133cf9 100644
+> >> --- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+> >> +++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+> >> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dee5b168=
+fc7de89a0cadc49e27830aa2c"
+> >> PR =3D "r9"
+> >>=20
+> >> PV =3D "1.1"
+> >> -SRCREV =3D "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
+> >> +SRCREV =3D "ea5db3dcb3bbbe445ae6d1a5611c1f8d547c57b9"
+> >=20
+> > I'll at least bump PR in this one.
+>=20
+> Wait, what? Isn't PRSERV mandatory nowadays?
 
-It is build-tested with
- - core-image-minimal
- - IMAGE_INSTALL += 'gupnp'
- - directfb in DISTRO_FEATURES
+Yes but for different SRCREV I would like to see it in something more
+stable then PRSERV (e.g. to be able to compare .ipk files from different
+builders and see which one has this newer SRCREV.)
 
-The build was failing before (GTK failed to build with directfb, which
-is expected).
+Ideally add SRCPV to PV :).
 
-Signed-off-by: Nicolas Dechesne <ndec@linaro.org>
----
- meta-multimedia/recipes-connectivity/gupnp/gupnp.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
-index 31dd407..99bffc0 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp.inc
-@@ -2,9 +2,9 @@ SUMMARY = "UPnP framework"
- DESCRIPTION = "GUPnP is an elegant, object-oriented open source framework for creating UPnP  devices and control points, written in C using GObject and libsoup. The GUPnP API is intended to be easy to use, efficient and flexible. It provides the same set of features as libupnp, but shields the developer from most of UPnP's internals."
- LICENSE = "LGPLv2+"
- 
--INC_PR = "r0"
-+INC_PR = "r1"
- 
--DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gnome-icon-theme gobject-introspection-stub"
-+DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2 gobject-introspection-stub"
- 
- require no-vala.inc
- 
--- 
-1.8.1.2
+--T4sUOijqQbZv57TR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlFmglIACgkQN1Ujt2V2gBx+XgCeNVJL+2w9ZJchOoBqWokoVasm
+mb8An0tfxyz+Yd9cdrcm950UIVBTPbFj
+=196K
+-----END PGP SIGNATURE-----
 
+--T4sUOijqQbZv57TR--
