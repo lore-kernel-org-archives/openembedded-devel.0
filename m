@@ -1,43 +1,43 @@
-Received: from mail-ia0-f182.google.com ([209.85.210.182])
+Received: from mail-ea0-f179.google.com ([209.85.215.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UQ60g-0005p0-Kg
+	(envelope-from <koen@dominion.thruhere.net>) id 1UQAP5-0002TF-I1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 03:09:13 +0200
-Received: by mail-ia0-f182.google.com with SMTP id u20so951003iag.13
+	Thu, 11 Apr 2013 07:50:43 +0200
+Received: by mail-ea0-f179.google.com with SMTP id f15so537293eak.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Apr 2013 17:51:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=2rCFKHcZmcRYUDWcNGzyWT1PK6inwKCSiLdOk5o1EYw=;
-	b=T7I9ET1zJW+7Zp6N/YMt7cGBJo/Edj/jhDGwxwzocuPEZDMEn1B3Edxhh3r66HE7jF
-	1jlICDlGQ51/29525k2MnsxocdVj5MmvJ8CTY8rx6OEdiM1YYp1fOo2U1Zc1RoBp/1kt
-	czb4dzOAfRKaTaOBd6egbNi1Tvl5QJuQ45SfMZzGuff1PriyqeW9CT04zBI/BHrV/9Dj
-	FEek0sEbRe8hQnG+G7THthlL/BYfLCkfcSR4G5XfYZJRHeIIAhziImMK49H3KooqFO+t
-	orrbimOzCs9vRrISYUM+N5llHbL+eLBxDPoTsxRPTehIcBugOpLK7ZK8kB1ZERftkpK7
-	6bxg==
-MIME-Version: 1.0
-X-Received: by 10.50.164.162 with SMTP id yr2mr3063923igb.0.1365641503790;
-	Wed, 10 Apr 2013 17:51:43 -0700 (PDT)
-Received: by 10.50.191.170 with HTTP; Wed, 10 Apr 2013 17:51:43 -0700 (PDT)
-In-Reply-To: <CALbNGRTq3D6XP=wLnMcd-LkFpF6id6AVQtBsHVdMS6GoxUwFYg@mail.gmail.com>
-References: <1360776335-21633-1-git-send-email-raj.khem@gmail.com>
-	<20130305221857.GA14869@jama>
-	<CALbNGRRZFt3FgMCjyB8JN8Be1w_-Vdgnq=2nZy3tyUM0TxdFpA@mail.gmail.com>
-	<20130305225907.GB14869@jama> <20130409200127.GF2474@jama>
-	<CALbNGRTq3D6XP=wLnMcd-LkFpF6id6AVQtBsHVdMS6GoxUwFYg@mail.gmail.com>
-Date: Wed, 10 Apr 2013 17:51:43 -0700
-Message-ID: <CAMKF1srFP+kbnqcCfM_z6U0w8wVWpZsqRj+ciHoo=o3t=X+8Rg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: "enrico.scholz@sigma-chemnitz.de" <enrico.scholz@sigma-chemnitz.de>,
-	"koen@dominion.thruhere.net" <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	"otavio@ossystems.com.br" <otavio@ossystems.com.br>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-systemd future vote Was: [meta-systemd][PATCH 1/2] Delete systemd class.
+	Wed, 10 Apr 2013 22:33:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=pT2coc9QqGclOENxoYUV/ptthfky5tiJhv2YM9XqL38=;
+	b=NfQutGDz19Uk1ev/D1nQWuWRK4GPoRhpubYqd+SlXUqw6lxuUx1aGdm7JprNDhujxC
+	OPO1O9XnZzZ46V4uAqoT5pzfaaiHTvPl9nlxG81P8a9l1cRfq/RRFvDRTv7izBFZqcc0
+	LkXKCIzUkmiWl+QJG3CxdlYaOBXW++1gx/N+4PMq2uqbIjZePb7h63Mo1Qsx8y8pkP9B
+	/cNDDFIXGdkQkben/OFLvW2M6zEtl6H09Yi26QKjMy4oPSIVKsxVfcjJCvA2aREQ9jj1
+	ONUn1LtLuie1HGy1f/GO+SxqZtBbtheOOv7P8FoyAndubcY1Anmdw/MkMqLnAFWDPIfz
+	40Ug==
+X-Received: by 10.14.202.71 with SMTP id c47mr13008933eeo.39.1365658392901;
+	Wed, 10 Apr 2013 22:33:12 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::71d6:d8f2:72cc:23da?
+	([2001:610:612:0:71d6:d8f2:72cc:23da])
+	by mx.google.com with ESMTPS id q5sm3465007eeo.17.2013.04.10.22.33.11
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 10 Apr 2013 22:33:12 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20130410220423.GH2471@jama>
+Date: Thu, 11 Apr 2013 07:33:10 +0200
+Message-Id: <9B4BCA43-0F29-4F57-A776-281D257DAC37@dominion.thruhere.net>
+References: <1365610462-29689-1-git-send-email-koen@dominion.thruhere.net>
+	<1365610462-29689-4-git-send-email-koen@dominion.thruhere.net>
+	<20130410220423.GH2471@jama>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1503)
+X-Gm-Message-State: ALoCoQkY+38n0U7FdqsRTsUkKTL/nObaHaQVQA3S+TuU0t2RKB2MJzF6JaeMqH53VctrdV6uy/8e
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 4/8] gateone: fix html5 feature check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,78 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 01:09:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Apr 2013 05:50:49 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Wednesday, April 10, 2013, Andreas M=C3=BCller <schnitzeltony@googlemail=
-.com>
-wrote:
-> On Tue, Apr 9, 2013 at 10:01 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
->> On Tue, Mar 05, 2013 at 11:59:07PM +0100, Martin Jansa wrote:
->>> On Tue, Mar 05, 2013 at 11:50:41PM +0100, Andreas M=C3=BCller wrote:
->>> > On Tue, Mar 5, 2013 at 11:18 PM, Martin Jansa <martin.jansa@gmail.com=
->
-wrote:
->>> > > On Wed, Feb 13, 2013 at 09:25:34AM -0800, Khem Raj wrote:
->>> > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> > >
->>> > > good old meta-systemd should now parse again,
->>> > Thanks - will come back to test HEADs soon.
->>>
->>> But be aware that I've fixed only parsing of avahi and wpa-supplicant.
->>>
->>> I haven't tested it properly in runtime because my upgrade path is a bi=
-t
->>> broken (because I was building images with khem's patches for a while t=
-o
->>> test other stuff) and even clean build with failed to boot with
->>> qemux86-64 and I don't have time to debug it now.
->>>
->>> > > I wont apply this 2 commits
->>> > > until systemd discussion in oe-core is finished and future of
->>> > > meta-systemd decided.
->>> > >
->>> > After systemd regression is worked around yocto 1.4 release regressio=
-n
->>> > is knocking at the door...
->>>
->>> yes :/
->>>
->>> If we need to maintain meta-systemd bbappends for upgrade path we can
->>> also maintain them with PN-systemd packages and good old systemd
-bbclass.
->>
->> Khem pinged me about this patch, so here are my thoughts:
->>
->> PN-systemd discussion in oe-core haven't moved a bit since this patch
->> was proposed, I think we have 2-3 options, lets vote about meta-systemd
-future.
->>
->> 1) keep PN-systemd separation in meta-systemd and fixup .bbappends to
->> resolve issues created by oe-core (I've fixed some issues, but still a
->> lot of issues in postinst/postrm/prerm scripts when both inits are
->> sharing the same PN)
->>
->> 2) give up on clean separation of PN-<init> and provide upgrade path
->> from PN-systemd to PN (mostly done by these 2 commits from khem).
->>
->> 3) give up on clean separation of PN-<init> and upgrade path (there are
->> many issues in other parts of oe-core, so upgrade path from danny to
->> dylan doesn't look usable.
->>
->> A) migrate existing .bbappends to their recipes to .bb files and
->> remove this layer. Any volunteer for that?
->>
->> My vote: 3) + A) later in 1.5
-> A bit off-topic and mentioned here & there: I am working on
-> network-manager(-applet) 0.9.8.0 update and xinput-calibrator. I could
-> add 3) + A) for them if agreed. Hope to send them beginning of next
-> week.
->
 
-Sure I see no problem
-> Anderas
->
+Op 11 apr. 2013, om 00:04 heeft Martin Jansa <martin.jansa@gmail.com> =
+het volgende geschreven:
+
+> On Wed, Apr 10, 2013 at 06:14:18PM +0200, Koen Kooi wrote:
+>> The BlobBuilder and Blob checks never succeeded, even on cutting edge =
+browsers. Nudge SRCREV forward to drag in those fixes.
+>>=20
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
+>> meta-oe/recipes-connectivity/gateone/gateone_git.bb | 2 +-
+>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>=20
+>> diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb =
+b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+>> index 652876f..8133cf9 100644
+>> --- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+>> +++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+>> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D =
+"file://LICENSE.txt;md5=3Dee5b168fc7de89a0cadc49e27830aa2c"
+>> PR =3D "r9"
+>>=20
+>> PV =3D "1.1"
+>> -SRCREV =3D "bb74e1095adb66b04b51ed6ff10ae0aa96afdd46"
+>> +SRCREV =3D "ea5db3dcb3bbbe445ae6d1a5611c1f8d547c57b9"
+>=20
+> I'll at least bump PR in this one.
+
+Wait, what? Isn't PRSERV mandatory nowadays?=
+
 
