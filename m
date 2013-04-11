@@ -1,35 +1,24 @@
-Received: from mail-da0-f54.google.com ([209.85.210.54])
+Received: from smtp4.nedap.com ([213.160.213.85] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UQGxh-0000ko-HM
+	(envelope-from <jaap.dejong@nedap.com>) id 1UQHSJ-0003r3-7l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 14:50:51 +0200
-Received: by mail-da0-f54.google.com with SMTP id p1so668548dad.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Apr 2013 05:33:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=CLHREI9tSg2As3WUNBxLQpgNkNZDXrOiAJ3rn2NgvZs=;
-	b=UJUBGQxWkpVw2ggoH39eanRjmjliZSMgbmGLOHfEkt6Y8gI4+kQhoideWq0BZr45WU
-	FmhUMNlP1B6uLdlvARrF5+3q950jLKqcQk8bdNP40f3N55KBzsk+2As0dFICXU6g+bxd
-	N3KmdEoYc2bQgAdBUVqXqGVgd0T6ObOqgCu9P6j+swv/Fys1SWOH2wYBAdZWVbmpNWKa
-	ppl4nWg7icxuAdrmKygvb70ACw0eAlLVPWdHfbqADUPKiMyiaWSKyO5uNSxMPWedF5fZ
-	iJVmQbLIE5drr+UXcBDOsUa6SxZrkF//20GgKKmvlsTXCivuCsqHvpyEJ+vP59Dspc61
-	lKDw==
-X-Received: by 10.66.216.198 with SMTP id os6mr9252553pac.145.1365683601604;
-	Thu, 11 Apr 2013 05:33:21 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id dr6sm4829896pac.11.2013.04.11.05.33.18
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 11 Apr 2013 05:33:20 -0700 (PDT)
-Date: Thu, 11 Apr 2013 14:33:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130411123313.GD2477@jama>
-References: <5166A626.2060107@nedap.com>
+	Thu, 11 Apr 2013 15:22:28 +0200
+Received: from nvs0066.nedap.local (10.91.8.1) by relaysmtp1.nedap.local
+	(10.1.8.139) with Microsoft SMTP Server id 8.3.279.5; Thu, 11 Apr 2013
+	15:05:00 +0200
+X-TM-IMSS-Message-ID: <02911f0500002c4c@nedap.com>
+Received: from [10.17.16.17] ([10.17.16.17]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.1) id 02911f0500002c4c ;
+	Thu, 11 Apr 2013 15:05:00 +0200
+Message-ID: <5166B4FB.7080100@nedap.com>
+Date: Thu, 11 Apr 2013 15:04:59 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-In-Reply-To: <5166A626.2060107@nedap.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+To: openembedded-devel@lists.openembedded.org
+References: <5166A626.2060107@nedap.com> <20130411123313.GD2477@jama>
+In-Reply-To: <20130411123313.GD2477@jama>
 Subject: Re: error when bitbaking console-base-image (danny)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,68 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 12:50:53 -0000
-X-Groupsio-MsgNum: 44071
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="g7w8+K/95kPelPD2"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Apr 2013 13:22:35 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---g7w8+K/95kPelPD2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 11, 2013 at 02:01:42PM +0200, Jaap de Jong wrote:
-> Hi All,
-> I've been experimenting with images, and every time I get this error=20
-> even with a completely fresh build directory:
->=20
->     log_check: There were error messages in the logfile
->     log_check: Matched keyword: [Collected errors]
->=20
->     Configuring connman.
->     Configuring connman-systemd.
->     Configuring tinylogin.
->     Configuring angstrom-version.
->     Configuring angstrom-packagegroup-boot.
->     Collected errors:
->       * extract_archive: Cannot create symlink from ./var/log to
->     'volatile/log': File exists.
->       * extract_archive: Cannot create symlink from ./var/run to
->     'volatile/run': File exists.
+On 04/11/2013 02:33 PM, Martin Jansa wrote:
+> On Thu, Apr 11, 2013 at 02:01:42PM +0200, Jaap de Jong wrote:
+>> Hi All,
+>> I've been experimenting with images, and every time I get this error
+>> even with a completely fresh build directory:
+>>
+>>      log_check: There were error messages in the logfile
+>>      log_check: Matched keyword: [Collected errors]
+>>
+>>      Configuring connman.
+>>      Configuring connman-systemd.
+>>      Configuring tinylogin.
+>>      Configuring angstrom-version.
+>>      Configuring angstrom-packagegroup-boot.
+>>      Collected errors:
+>>        * extract_archive: Cannot create symlink from ./var/log to
+>>      'volatile/log': File exists.
+>>        * extract_archive: Cannot create symlink from ./var/run to
+>>      'volatile/run': File exists.
+> Looks like you have inconsistency between fs-perms.txt
+> (e.g. default openembedded-core/meta/files/fs-perms.txt)
+> and what .ipk files are packaging as /var/log and /var/run (probably
+> from base-files, but /var/run is also included in dbus and other
+> packages).
+No differences with denzil.
+I did a bitbake core-image-base and that compiles without a problem.
+Thanks for sharing our thoughts!
 
-Looks like you have inconsistency between fs-perms.txt
-(e.g. default openembedded-core/meta/files/fs-perms.txt)
-and what .ipk files are packaging as /var/log and /var/run (probably
-=66rom base-files, but /var/run is also included in dbus and other
-packages).
+>>      + '[' '!' -z '' ']'
+>>      + package_tryout_install_multilib_ipk
+>>      + multilib_tryout_dirs=
+>>
+>>
+>> Could really use some help here...
+>> Thanks!
+>> Jaap
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
->     + '[' '!' -z '' ']'
->     + package_tryout_install_multilib_ipk
->     + multilib_tryout_dirs=3D
->=20
->=20
-> Could really use some help here...
-> Thanks!
-> Jaap
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---g7w8+K/95kPelPD2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlFmrYkACgkQN1Ujt2V2gBwizQCfZUop0nWMNjy7Y6FY7kcaVPFc
-MewAnjZzBksKOej+IXgXHgdiXNwtoXn0
-=uLg+
------END PGP SIGNATURE-----
-
---g7w8+K/95kPelPD2--
