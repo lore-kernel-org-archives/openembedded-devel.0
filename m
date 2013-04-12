@@ -1,33 +1,25 @@
-Received: from mail.planet-school.de ([194.116.187.5]
-	helo=turboconrad.planet-school.de)
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lists@philipp-wagner.com>) id 1UQO9i-0005Ju-8q
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UQaCy-0004Tk-Kc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Apr 2013 22:31:38 +0200
-Received: from turboconrad.planet-school.de (srv004.service.ps-server.net
-	[194.116.186.79])
-	by turboconrad.planet-school.de (Postfix) with ESMTP id 7B0E6B6A04C;
-	Thu, 11 Apr 2013 22:04:42 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	srv004.service.ps-server.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-101.4 required=5.0 tests=ALL_TRUSTED,AWL,
-	LOCAL_USER_RULE autolearn=unavailable version=3.3.2
-Received: from poweramy.fritz.box (ppp-188-174-13-152.dynamic.mnet-online.de
-	[188.174.13.152])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: lists@philipp-wagner.com)
-	by turboconrad.planet-school.de (Postfix) with ESMTPSA id 37A90B6A045; 
-	Thu, 11 Apr 2013 22:04:42 +0200 (CEST)
-From: lists@philipp-wagner.com
+	Fri, 12 Apr 2013 11:23:57 +0200
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 12 Apr 2013 02:06:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,462,1363158000"; d="scan'208";a="226357968"
+Received: from unknown (HELO helios.localnet) ([10.255.14.15])
+	by AZSMGA002.ch.intel.com with ESMTP; 12 Apr 2013 02:06:19 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Apr 2013 22:04:14 +0200
-Message-Id: <1365710654-22327-1-git-send-email-lists@philipp-wagner.com>
-X-Mailer: git-send-email 1.8.1.4
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Philipp Wagner <mail@philipp-wagner.com>
-Subject: [meta-oe][PATCH] Add dependencies on Perl and Bash to NTP recipe
+Date: Fri, 12 Apr 2013 10:06:18 +0100
+Message-ID: <1397311.kYWOu8yYWG@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <c63fb0a794520e59580eeec88b2086494da43986.1365489405.git.jackie.huang@windriver.com>
+References: <cover.1365489405.git.jackie.huang@windriver.com>
+	<c63fb0a794520e59580eeec88b2086494da43986.1365489405.git.jackie.huang@windriver.com>
+MIME-Version: 1.0
+Subject: Re: [meta-webserver][PATCH 2/2] modphp: enable mysql option in PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2013 20:31:38 -0000
+X-List-Received-Date: Fri, 12 Apr 2013 09:23:57 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Philipp Wagner <mail@philipp-wagner.com>
+On Tuesday 09 April 2013 15:11:05 jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+> 
+> * enable mysql option in PACKAGECONFIG
+>...
+> 
+> -PACKAGECONFIG ??= ""
+> +PACKAGECONFIG ??= "mysql"
+>  PACKAGECONFIG[mysql] =
+> "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5
 
-do_rootfs gave errors about bash and perl not being found.
-This patch adds the two packages to the runtime dependencies
-to fix this problem.
+So, I'm not entirely sure about this. RFC: what do other people think about 
+enabling this by default?
 
-Signed-off-by: Philipp Wagner <mail@philipp-wagner.com>
----
- meta-networking/recipes-support/ntp/ntp.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cheers,
+Paul
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index d93f22d..a563a08 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -59,7 +59,7 @@ PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
- 
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
- # with wonky clocks (e.g. OpenSlug)
--RDEPENDS_${PN} = "${PN}-tickadj"
-+RDEPENDS_${PN} = "${PN}-tickadj perl bash"
- # Handle move from bin to utils package
- RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
 -- 
-1.8.1.4
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
