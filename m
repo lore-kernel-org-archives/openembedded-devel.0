@@ -1,40 +1,34 @@
-Received: from mail-ea0-f182.google.com ([209.85.215.182])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UQb7l-0002UT-Fh
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Apr 2013 12:23:31 +0200
-Received: by mail-ea0-f182.google.com with SMTP id q15so1183488ead.13
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UQb9x-0002rW-Bm for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Apr 2013 12:25:24 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UQat7-0004qc-OL for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Apr 2013 12:07:21 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Apr 2013 12:07:21 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2013 03:05:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=NQ5ByLHIaz+/9N4EPWwNwqfqHJKCxjhM1zZyosxbZTk=;
-	b=U69VJoYqTBR6mMf7wRMhfSvkW3uZfvFtPrLuSYOfDIsHxF6gpasjDpUCWtqOVUWanA
-	EwDl9lnevq5g6bE2O6nPm1rHof7T09RUg0clN34PNoFY1lt7uC4vt37EmdZXGPbQwfdg
-	L4iDAWh+LOJpeLYX/cVy/r77kbyTaUuy7CEJdaUWWMKpWs0gZrJwYze6xm4xVNY/QTDe
-	bveDfisV1UCiMZbGjjr2+vNCbg5u/DzHZkoPRQj5eg3AFu5SLk6vDZeF4jKswQiNmGZ+
-	2eYnI0y579nGlelgdhTOqhgZSURccQ7gGlN2oA/avn1xwjbhlSVVttP68KsWVoBOPU7J
-	k7HQ==
-X-Received: by 10.15.27.195 with SMTP id p43mr26647659eeu.8.1365761105286;
-	Fri, 12 Apr 2013 03:05:05 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id ca4sm10203666eeb.15.2013.04.12.03.05.03
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 12 Apr 2013 03:05:04 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Fri, 12 Apr 2013 12:07:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Apr 2013 12:04:47 +0200
-Message-Id: <1365761087-1229-5-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.1.4
-In-Reply-To: <1365761087-1229-1-git-send-email-koen@dominion.thruhere.net>
-References: <1365761087-1229-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQn3DOUzWsaxnVKV3YPWSL2ebgdhKFrV4BffmTgqVDIGlU2ho0EcPqUgFCCl1d7FFuxmeUNM
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCHv3 5/5] nodejs 8.8.18: unset RDEPENDS for native builds
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 12 Apr 2013 12:07:19 +0200
+Message-ID: <kk8mcf$sdd$1@ger.gmane.org>
+References: <1365710654-22327-1-git-send-email-lists@philipp-wagner.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130216 Thunderbird/17.0.3
+In-Reply-To: <1365710654-22327-1-git-send-email-lists@philipp-wagner.com>
+X-Enigmail-Version: 1.5.1
+Subject: Re: [meta-oe][PATCH] Add dependencies on Perl and Bash to NTP recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2013 10:23:33 -0000
+X-List-Received-Date: Fri, 12 Apr 2013 10:25:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb | 1 +
- 1 file changed, 1 insertion(+)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
-index 3ab2ed6..2db9e68 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
-@@ -36,6 +36,7 @@ do_install () {
- }
- 
- RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
-+RDEPENDS_${PN}_class-native = ""
- 
- FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace"
- BBCLASSEXTEND = "native"
--- 
-1.8.1.4
+Op 11-04-13 22:04, lists@philipp-wagner.com schreef:
+> From: Philipp Wagner <mail@philipp-wagner.com>
+> 
+> do_rootfs gave errors about bash and perl not being found. This patch
+> adds the two packages to the runtime dependencies to fix this problem
+
+The bash dependencies need to get checked and changed to /bin/sh and perl
+scripts need to get split out into a seperate packages, dragging in perl and
+bash for ntp is unacceptable.
+
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRZ9zXMkyGM64RGpERArXAAJ9o7cBaKCvIxdSzniekV5Hblmzc0wCgsDu3
+1d6IKRWK+zMTl55UhyxC1Lg=
+=SxZ0
+-----END PGP SIGNATURE-----
 
 
 
