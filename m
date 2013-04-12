@@ -1,36 +1,32 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pa0-f54.google.com ([209.85.220.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UQaRy-000698-MF for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Apr 2013 11:39:22 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UQaB5-0000EL-IN for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Apr 2013 11:21:51 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2013 11:21:51 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1UQafI-0007Yu-0Z
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Apr 2013 11:53:16 +0200
+Received: by mail-pa0-f54.google.com with SMTP id fa11so1375729pad.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2013 11:21:51 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 12 Apr 2013 02:35:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=tPoEwY2Y54yXfz3oEzTqIMd2e4dU8gE/OwDUDznqbA8=;
+	b=fc3BbsguH5dj5X18ziEQJ0tsmRaEcrkOgjp9SBpue1J0x31QOhFRlOLOJpTO6+pr0m
+	gTRaB6XTLNqyNIqotNyXZlcHs8UOVZZa+eQaAByywmv350314j6C+YRc+1ZcyjPkozHA
+	hSWkdPSZ169A+DnBuLberymHdMOZ9P4WvZRAItoZH/VZ1XeWtXfkbqgnE1Dzk8GDUI5+
+	Tl3ypx96umxsw0NztDl3qA2M2WaFjiHpg3NL3w7DQ+tTQ7qG7Y9eezURUQzvOd7yNhRG
+	Cj9LqMH2dYplnfPWjCa8vLOnOIf5ZLXWAy9KSEje1PI3k7kcif0pHQF2+6MmFxQDx8iD
+	8uzQ==
+X-Received: by 10.66.25.147 with SMTP id c19mr14176239pag.207.1365759339187;
+	Fri, 12 Apr 2013 02:35:39 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id ak5sm8852501pac.4.2013.04.12.02.35.35
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 12 Apr 2013 02:35:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 12 Apr 2013 11:21:43 +0200
-Message-ID: <kk8jn1$mq$1@ger.gmane.org>
-References: <cover.1365489405.git.jackie.huang@windriver.com>
-	<c63fb0a794520e59580eeec88b2086494da43986.1365489405.git.jackie.huang@windriver.com>
-	<1397311.kYWOu8yYWG@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130216 Thunderbird/17.0.3
-In-Reply-To: <1397311.kYWOu8yYWG@helios>
-X-Enigmail-Version: 1.5.1
-Subject: Re: [meta-webserver][PATCH 2/2] modphp: enable mysql option in PACKAGECONFIG
+Date: Fri, 12 Apr 2013 11:35:28 +0200
+Message-Id: <1365759328-22377-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-oe][PATCH] python-vobject: fix LICENSE format
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2013 09:39:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Apr 2013 09:53:21 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+WARNING: python-vobject: No generic license file exists for: Apache in any provider
+WARNING: python-vobject: No generic license file exists for: License in any provider
+WARNING: python-vobject: No generic license file exists for: V2.0 in any provider
+---
+ meta-oe/recipes-devtools/python/python-vobject_0.8.1c.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Op 12-04-13 11:06, Paul Eggleton schreef:
-> On Tuesday 09 April 2013 15:11:05 jackie.huang@windriver.com wrote:
->> From: Jackie Huang <jackie.huang@windriver.com>
->> 
->> * enable mysql option in PACKAGECONFIG ...
->> 
->> -PACKAGECONFIG ??= "" +PACKAGECONFIG ??= "mysql" PACKAGECONFIG[mysql]
->> = 
->> "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5
->
->> 
-> So, I'm not entirely sure about this. RFC: what do other people think
-> about enabling this by default?
-
-It makes sense to make LAMP as easy as possible. And this is the 'M'.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRZ9InMkyGM64RGpERAixUAJ9wy6qMMiecrXKa2cvx2Zj2sxNZDACdEfMK
-/Gj9a0weV+ugccDy7bkJV1U=
-=tyWQ
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-devtools/python/python-vobject_0.8.1c.bb b/meta-oe/recipes-devtools/python/python-vobject_0.8.1c.bb
+index 4a03ea2..5c6d82b 100644
+--- a/meta-oe/recipes-devtools/python/python-vobject_0.8.1c.bb
++++ b/meta-oe/recipes-devtools/python/python-vobject_0.8.1c.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Python package for parsing and generating vCard and vCalendar files" 
+ SECTION = "devel/python" 
+-LICENSE = "Apache License V2.0" 
++LICENSE = "Apache-2.0" 
+ LIC_FILES_CHKSUM = "file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ HOMEPAGE = "http://vobject.skyhouseconsulting.com/" 
+ SRCNAME = "vobject" 
+-- 
+1.8.1.5
 
 
 
