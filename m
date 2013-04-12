@@ -1,34 +1,38 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-pa0-f54.google.com ([209.85.220.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UQb9x-0002rW-Bm for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Apr 2013 12:25:24 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UQat7-0004qc-OL for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Apr 2013 12:07:21 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2013 12:07:21 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1UQbWM-0005cI-Jh
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Apr 2013 12:48:00 +0200
+Received: by mail-pa0-f54.google.com with SMTP id fa11so1397266pad.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Apr 2013 12:07:21 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 12 Apr 2013 12:07:19 +0200
-Message-ID: <kk8mcf$sdd$1@ger.gmane.org>
-References: <1365710654-22327-1-git-send-email-lists@philipp-wagner.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130216 Thunderbird/17.0.3
-In-Reply-To: <1365710654-22327-1-git-send-email-lists@philipp-wagner.com>
-X-Enigmail-Version: 1.5.1
-Subject: Re: [meta-oe][PATCH] Add dependencies on Perl and Bash to NTP recipe
+	Fri, 12 Apr 2013 03:30:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=ckgA3uGkfa5t8VE6CG/Ag0d5xvBFV6ERghCmJclFnFU=;
+	b=yYM/MJjXpBBUVsfB2JXf7upFBKq6ZsWWF7SOIrUFLOgoyOwoKw4A9QXD+bIi8w0iD1
+	4QQP3J9rBtVQsOz28K2psdmi2K3z+9hnV2Y0xk8AORKvShrAwZFbkz8rrxBzGdXEsoZw
+	VqDrlsxu5oS5oQPMjsETjRSPT+sSjdjMLwvY1as/w7uij4/hBDPl8Wgjx1cGDLs9eIZR
+	+nImsy4Lih0YKgRhu1o4h+W+eF6gFPwf8lkTgcWw+NIa62fYAOWcsAbTV8Ht2dhdKPDh
+	QEBA7VqxvsxBoM3VAw/3ibfmpBXu5FgtUqzU6cdQNgFtHss6JeGy3/CkvSmfA0NGAcbM
+	1XlA==
+X-Received: by 10.68.117.135 with SMTP id ke7mr14286236pbb.0.1365762629470;
+	Fri, 12 Apr 2013 03:30:29 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id lf12sm9004146pab.13.2013.04.12.03.30.26
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 12 Apr 2013 03:30:28 -0700 (PDT)
+Date: Fri, 12 Apr 2013 12:30:22 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20130412103022.GK2477@jama>
+References: <1365761087-1229-1-git-send-email-koen@dominion.thruhere.net>
+	<1365761087-1229-5-git-send-email-koen@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <1365761087-1229-5-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv3 5/5] nodejs 8.8.18: unset RDEPENDS for native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +46,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2013 10:25:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Apr 2013 10:48:04 -0000
+X-Groupsio-MsgNum: 44091
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="pN9MePJoZbRKbUk1"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--pN9MePJoZbRKbUk1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 11-04-13 22:04, lists@philipp-wagner.com schreef:
-> From: Philipp Wagner <mail@philipp-wagner.com>
-> 
-> do_rootfs gave errors about bash and perl not being found. This patch
-> adds the two packages to the runtime dependencies to fix this problem
+On Fri, Apr 12, 2013 at 12:04:47PM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb b/meta-oe/r=
+ecipes-devtools/nodejs/nodejs_0.8.18.bb
+> index 3ab2ed6..2db9e68 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+> @@ -36,6 +36,7 @@ do_install () {
+>  }
+> =20
+>  RDEPENDS_${PN} =3D "curl python-shell python-datetime python-subprocess =
+python-crypt python-textutils python-netclient "
+> +RDEPENDS_${PN}_class-native =3D ""
 
-The bash dependencies need to get checked and changed to /bin/sh and perl
-scripts need to get split out into a seperate packages, dragging in perl and
-bash for ntp is unacceptable.
+Sorry if I caused problems by removing it before, why is this needed?=20
+I haven't seen any issues without it.
 
+Also we have patch to upgrade nodejs to 0.10.0, do you know if other
+components using nodejs are compatible with it? We'll also need to add
+node-gyp if that's useful for someone else too.
 
+Cheers,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--pN9MePJoZbRKbUk1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iD8DBQFRZ9zXMkyGM64RGpERArXAAJ9o7cBaKCvIxdSzniekV5Hblmzc0wCgsDu3
-1d6IKRWK+zMTl55UhyxC1Lg=
-=SxZ0
+iEUEARECAAYFAlFn4j4ACgkQN1Ujt2V2gBxiawCfQ9OuybFR2HRBs48VPVV2oQCb
+jWkAl0NothZa835ZrFcVoVRs1lianC4=
+=gxbF
 -----END PGP SIGNATURE-----
 
-
-
+--pN9MePJoZbRKbUk1--
