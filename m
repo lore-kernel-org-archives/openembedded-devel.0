@@ -1,34 +1,34 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0nj-0007Wb-VW
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0no-0007Wz-C4
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 13 Apr 2013 15:47:43 +0200
-Received: by mail-ea0-f173.google.com with SMTP id k11so1555318eaj.4
+Received: by mail-ee0-f52.google.com with SMTP id d17so1598918eek.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:30:06 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=mchgZFrHduEPh9RPNXU1Y+7WOtZ8C208qE8eQCvq7qI=;
-	b=R0hLyTOBdwBz7fG+2YCUf+VVZGxXV2LaTw7jUhrR8N+Uffn0knuJypHOxw95Pk8xI0
-	o1TeADJ55/OmPuk/p3/vVeiyaoXto4KEWaqD4POQU3/mp6PXGbfT0qmMdc4IaHuIrTgP
-	dZmViKItePKZiysaGFT0x5eHvtVJ6ffOFf7S68FRUAlRL44GQ0aHSsi1ETLB00z4suV3
-	vuCFF9Sssuk/EvqByX4SfIKoQKUFSlAJtSUEGDqaqoWSRLdguVwFJS2Nx/26iQvanAu8
-	Hzcv1J/v1i8iaWn/NfJ5KjjbJZ8lWivcm9PYZ6KYxu+Hq/awCKhHERtNRQTeWAebCxlP
-	NN1A==
-X-Received: by 10.14.223.137 with SMTP id v9mr10137666eep.4.1365859806307;
-	Sat, 13 Apr 2013 06:30:06 -0700 (PDT)
+	:references; bh=yvRpoazl+VRnpQ1Mzgsqnza+ipAmWz3lpEIb7Y/MwQ8=;
+	b=qy5C3vwfyfwNkU1pOb15L/mhS64k/Gd4CyDCMhCoUctyJm+KXc4ZnBKxXTOafKvQjB
+	hBYbYTXev2RItaX3TZOWHd/G/0avSIUr0aKIAHAQSUiT7zTLRGtevhwwBmDClnrwk1uj
+	I73RgMSihjpkknrrisAt5JF3FfnFpxbRBkrNHFG9onXC9m4h/kE96As46n2I2ETGmORX
+	pOl8pbrUzao8laiENmSUVd6kTuhh9TiJqIdWoH9X8pNNxE62FHeDHDXKkMxmS9Kdm3w+
+	BVXJazN/15m1J5dzlFpzfJgWrtYSFrPeM2jLRR5yZkl41cpXkS1Ogs3hQ5ojg+gTxrwP
+	J6Pw==
+X-Received: by 10.15.32.142 with SMTP id a14mr39838295eev.22.1365859810739;
+	Sat, 13 Apr 2013 06:30:10 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d47sm16435516eem.9.2013.04.13.06.30.05
+	by mx.google.com with ESMTPS id i53sm16473416eeu.5.2013.04.13.06.30.10
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:30:05 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:30 +0200
-Message-Id: <1365859790-20947-13-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:33 +0200
+Message-Id: <1365859790-20947-16-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 13/33] cloud9: move systemd support from meta-systemd back to meta-oe
+Subject: [meta-systemd][PATCH 16/33] strongswan: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,89 +46,63 @@ X-List-Received-Date: Sat, 13 Apr 2013 13:48:57 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-devtools/cloud9/cloud9/cloud9.service    |  0
- meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb        | 13 ++++++++++++-
- .../recipes-devtools/cloud9/cloud9_0.6.bbappend      | 20 --------------------
- 3 files changed, 12 insertions(+), 21 deletions(-)
- rename {meta-systemd/meta-oe => meta-oe}/recipes-devtools/cloud9/cloud9/cloud9.service (100%)
- delete mode 100644 meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
+ meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb      | 13 ++++++++-----
+ .../recipes-support/strongswan/strongswan_5.0.0.bbappend    | 10 ----------
+ 2 files changed, 8 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-systemd/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bbappend
 
-diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-rename to meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
-diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-index 0c07b12..9ae25bb 100644
---- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-+++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-@@ -3,11 +3,13 @@ HOMEPAGE = "http://c9.io"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
- 
+diff --git a/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb b/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
+index efacc8e..2713f5b 100644
+--- a/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
++++ b/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bb
+@@ -5,7 +5,7 @@ SECTION = "console/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "gmp openssl flex-native flex bison-native"
 -PR = "r2"
-+PR = "r4"
++PR = "r5"
  
- # Nodejs-native for node-waf, nodejs4-native for the headers
- DEPENDS = "libxml2 nodejs-native nodejs4-native"
+ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "c8b861305def7c0abae04f7bbefec212"
+@@ -15,11 +15,9 @@ EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \
+ 		--enable-gmp --disable-mysql --disable-sqlite \
+ 		--enable-openssl"
  
-+inherit systemd
-+
- SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
-            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
-            git://github.com/ajaxorg/ace.git;destsuffix=git/support/ace;name=ace \
-@@ -33,6 +35,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
-            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
-            file://index.js \
-            file://cloud9-avahi.service \
-+           file://cloud9.service \
-            file://0001-ide-use-node-as-interpreter-for-sketches-instead-of-.patch \
-           "
+-SYSTEMD_UNITDIR ??= "no"
++EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
  
-@@ -97,6 +100,9 @@ do_install () {
+-EXTRA_OECONF += "--with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
+-
+-inherit autotools
++inherit autotools systemd
  
-   install -m 0755 -d ${D}${sysconfdir}/avahi/services/
-   install -m 0644 ${WORKDIR}/cloud9-avahi.service ${D}${sysconfdir}/avahi/services/
-+  
-+  install -d ${D}${systemd_unitdir}/system
-+  install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system
- }
+ RRECOMMENDS_${PN} = "kernel-module-ipsec"
  
- FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/.debug \
-@@ -104,3 +110,8 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
-                    "
+@@ -31,3 +29,8 @@ FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libdir}/ipsec/plugins/.debug ${libe
+ FILES_${PN}-plugins += "${libdir}/ipsec/plugins/*"
  
- RDEPENDS_${PN} = "nodejs4 nodejs gzip"
+ INSANE_SKIP_${PN}-plugins = "staticdev"
 +
 +RPROVIDES_${PN} += "${PN}-systemd"
 +RREPLACES_${PN} += "${PN}-systemd"
 +RCONFLICTS_${PN} += "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN} = "cloud9.service"
-diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
++SYSTEMD_SERVICE_${PN} = "${PN}.service"
+diff --git a/meta-systemd/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bbappend b/meta-systemd/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bbappend
 deleted file mode 100644
-index 50c6886..0000000
---- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
+index 0a474fe..0000000
+--- a/meta-systemd/meta-oe/recipes-support/strongswan/strongswan_5.0.0.bbappend
 +++ /dev/null
-@@ -1,20 +0,0 @@
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--
--PRINC := "${@int(PRINC) + 3}"
--
+@@ -1,10 +0,0 @@
 -inherit systemd
 -
--SRC_URI += "file://cloud9.service"
+-PRINC := "${@int(PRINC) + 2}"
 -
--inherit systemd
+-SYSTEMD_UNITDIR = "${systemd_unitdir}/system"
 -
--NATIVE_SYSTEMD_SUPPORT = "1"
 -RPROVIDES_${PN} += "${PN}-systemd"
 -RREPLACES_${PN} += "${PN}-systemd"
 -RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "cloud9.service"
--do_install_append() {
--	install -d ${D}${systemd_unitdir}/system
--	install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system
--}
--
+-SYSTEMD_SERVICE_${PN} = "${PN}.service"
 -- 
 1.8.1.5
 
