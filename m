@@ -1,34 +1,34 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-ee0-f53.google.com ([74.125.83.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0o5-0007Yg-5O
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0o8-0007Yp-1c
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 13 Apr 2013 15:48:52 +0200
-Received: by mail-ea0-f173.google.com with SMTP id k11so1563281eaj.18
+Received: by mail-ee0-f53.google.com with SMTP id c13so1591948eek.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:30:27 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=zoCOlCSipoiFm/kykRtZcVf/7/4yRTzUV+21PxPbt+Y=;
-	b=U8s1r4lMPkSDAjgrU3TMkzVTSk9+mxUdjYdVXYOwzIR9AsGlLLTVKUFGfvoM1/FE5O
-	+ginqTLc45p+0jshjmY8tFg5Hiedg117LE5Q6ZpRSA05fVmdmnJsVWcA+tOdphxmbtUF
-	4g6EwOX8gPs+yQww6HvlVFWHiA6jPV6YTQvAurxMbkkHe8RLD+pF5jaEa76c6oxpsKXe
-	avd7gmDEGwHes9BOl0rG5xyZFG1z/LW9SkkK6AgWJFpv/bupIz5QX3+XlOghcqxkmA1f
-	Utf9AvEa8W0jMaskYHiAG9SzSTBucr0dTMwraAPPIBwvMPOrXBahF+G4e9g3vJtQJkSn
-	JLGw==
-X-Received: by 10.15.43.73 with SMTP id w49mr39859143eev.12.1365859827390;
-	Sat, 13 Apr 2013 06:30:27 -0700 (PDT)
+	:references; bh=WnNQrUQv+COF7nTObXLRX9/KxIWURssKw/QizS9jwQY=;
+	b=Vkqou53dJxXuRSc00QWWywUBkHG+HXNIPIsuPQR0T8h13fzm/57EAdZhKY1zuT5xJw
+	KvbU3MneZy73UM2oRBHtXqoPqQxGJTwQ4sKmaj/lFR6vvppyJNnPRKpNZ9RdLJPxd1rV
+	m9mzdXBCeTb30DbOZaZep5qz3MkPFDt4IcNgdfc+up8mvcGMTKaKIp+/49Ykge2kxAtU
+	4ZX9y3U2gXl3nB8ruMMuMJIX55txSjNLDaFsnsGnanDyIG+yTXRsZd+KVPg783wttFmR
+	3wCeWqftZBg6kISxCj4/7BdQAVlAL4JZeIqL6jGyKL9x+I6TTwc+cSXr0QyKpnoCv883
+	t5Dg==
+X-Received: by 10.14.223.137 with SMTP id v9mr10141374eep.4.1365859830211;
+	Sat, 13 Apr 2013 06:30:30 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id j44sm6913851eeu.10.2013.04.13.06.30.26
+	by mx.google.com with ESMTPS id t4sm16527526eel.0.2013.04.13.06.30.29
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:30:26 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:29 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:45 +0200
-Message-Id: <1365859790-20947-28-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:47 +0200
+Message-Id: <1365859790-20947-30-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 28/33] pcsc-lite: move systemd support from meta-systemd back to meta-oe
+Subject: [meta-systemd][PATCH 30/33] packagegroup-basic: Drop bbappend from meta-systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,51 +44,41 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 13 Apr 2013 13:49:24 -0000
 
+* avahi-systemd is now indluded in deamon
+* systemd-compat-units are RRECOMMENDED from systemd itself
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb             | 9 ++++++++-
- .../meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend   | 8 --------
- 2 files changed, 8 insertions(+), 9 deletions(-)
- delete mode 100644 meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+ meta-oe/recipes-core/packagegroups/packagegroup-basic.bb            | 2 +-
+ .../meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend  | 6 ------
+ 2 files changed, 1 insertion(+), 7 deletions(-)
+ delete mode 100644 meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-index bc51f72..04ec03c 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
-@@ -8,7 +8,9 @@ SRC_URI = "https://alioth.debian.org/frs/download.php/3757/pcsc-lite-${PV}.tar.b
- SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
- SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+index 493ef5e..402579c 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+@@ -5,7 +5,7 @@ DESCRIPTION = "Basic task to get a device online"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
  
--inherit autotools
-+PR = "r3"
-+
-+inherit autotools systemd
+-PR = "r10"
++PR = "r13"
  
- EXTRA_OECONF = " \
- 	--disable-libusb \
-@@ -23,3 +25,8 @@ PACKAGES =+ "${PN}-lib"
- RRECOMMENDS_${PN} = "ccid"
+ inherit packagegroup
  
- FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
-+
-+RPROVIDES_${PN} += "${PN}-systemd"
-+RREPLACES_${PN} += "${PN}-systemd"
-+RCONFLICTS_${PN} += "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN} = "pcscd.socket"
-diff --git a/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend b/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+diff --git a/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend b/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
 deleted file mode 100644
-index f877801..0000000
---- a/meta-systemd/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bbappend
+index c1b5851..0000000
+--- a/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
 +++ /dev/null
-@@ -1,8 +0,0 @@
--inherit systemd
--
+@@ -1,6 +0,0 @@
 -PRINC := "${@int(PRINC) + 2}"
 -
--RPROVIDES_${PN} += "${PN}-systemd"
--RREPLACES_${PN} += "${PN}-systemd"
--RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "pcscd.socket"
+-RDEPENDS_${PN} += "\
+-	systemd-compat-units \
+-	avahi-systemd \
+-"
 -- 
 1.8.1.5
 
