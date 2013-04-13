@@ -1,34 +1,34 @@
-Received: from mail-ea0-f180.google.com ([209.85.215.180])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0na-0007UU-JT
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0nb-0007Un-TX
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 13 Apr 2013 15:47:30 +0200
-Received: by mail-ea0-f180.google.com with SMTP id d10so1560107eaj.11
+Received: by mail-ee0-f47.google.com with SMTP id t10so1593005eei.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:29:56 -0700 (PDT)
+	Sat, 13 Apr 2013 06:29:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=mpKIyIB1YJ0mRZXAWN7lDhnggBvSDm+5aBRsS4UP6gA=;
-	b=FNGYt114fn9iLOsjVHFZDegSqjcLm8hcJvx3AnOV1+jBo/T02NX1gkJBeSvTxakBq/
-	qlpNFruhgDRzsvRqR0R2Y7jDkSVTcYhgsRE7osQg+iQ1E3bhyGB5gOyy3anB3NdKHRZu
-	b4TuyQVLIL/Lj3QXkDPBS9ECHiaQyjbxtkFyhN04bESppCHSYv8yql2BN5x2WMcUE6sq
-	On8SkTqi5t7w9eHtEJ7gfr8iNm/2P6FWJ/o2Yi87exH+ZUKEnTKU/WBW0LjrYZ0NeiP8
-	8ktuNhQEDI2Dx+ZtSfbFJDpsv8LMnOtNER1jG7qWno/rsO/R1kFdSW/80uhLONoopHil
-	NfQw==
-X-Received: by 10.14.181.196 with SMTP id l44mr32387640eem.44.1365859796825;
-	Sat, 13 Apr 2013 06:29:56 -0700 (PDT)
+	:references; bh=SPWOFa9XhnQGD+SawapgK3wyUPT/C0vD1oMq2XgnmOM=;
+	b=EXBwOAstE5aIbF5OvQ94Q2At4c6S9H3Eo4PXOcOOcUOW1XGb3dRYFtxIRqNgj8TFPx
+	wTXyn4gQ4yWl0x2dWAVDcz2+vJjEd8cr/Q2k6E48SGlu3NvripcLz4n2DGA5qGdHWocy
+	E5zq8YmUaSRRdKXZaX65hlgGVk3DT/fv8TsTwrelUkjWlPI+9t6AeBrsrLY9+sf8xl64
+	z1WZKX2AOe1H6tqrC95EdfWaatAwZh48EXfh73E0v9h2PFQfgesMxWU/Ccp9L1wzMdVl
+	CVOsOzlPaFl/7kPczmvFNzqQSDzS8NpFIVnlGSxO/lUsN5Nk4GfJnfk+ah5qE38wU219
+	2QqQ==
+X-Received: by 10.14.201.67 with SMTP id a43mr21935748eeo.33.1365859798254;
+	Sat, 13 Apr 2013 06:29:58 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id a41sm16483317eei.4.2013.04.13.06.29.56
+	by mx.google.com with ESMTPS id ca4sm16372352eeb.15.2013.04.13.06.29.57
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:29:56 -0700 (PDT)
+	Sat, 13 Apr 2013 06:29:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:23 +0200
-Message-Id: <1365859790-20947-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:24 +0200
+Message-Id: <1365859790-20947-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 06/33] entrance: move systemd support from meta-systemd back to meta-efl
+Subject: [meta-systemd][PATCH 07/33] gdm: move systemd support from meta-systemd back to meta-gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,99 +48,97 @@ X-List-Received-Date: Sat, 13 Apr 2013 13:47:43 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-efl/efl/entrance/entrance.service       |  0
- meta-efl/recipes-efl/efl/entrance_svn.bb            | 19 ++++++++++++++++++-
- meta-systemd/conf/layer.conf                        |  2 --
- .../meta-efl/recipes-efl/efl/entrance_svn.bbappend  | 21 ---------------------
- 4 files changed, 18 insertions(+), 24 deletions(-)
- rename {meta-systemd/meta-efl => meta-efl}/recipes-efl/efl/entrance/entrance.service (100%)
- delete mode 100644 meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend
+ .../recipes-gnome/gdm/gdm                            |  0
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb           | 17 +++++++++++------
+ .../meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend | 20 --------------------
+ 3 files changed, 11 insertions(+), 26 deletions(-)
+ rename meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in => meta-gnome/recipes-gnome/gdm/gdm (100%)
+ delete mode 100644 meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
 
-diff --git a/meta-systemd/meta-efl/recipes-efl/efl/entrance/entrance.service b/meta-efl/recipes-efl/efl/entrance/entrance.service
+diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in b/meta-gnome/recipes-gnome/gdm/gdm
 similarity index 100%
-rename from meta-systemd/meta-efl/recipes-efl/efl/entrance/entrance.service
-rename to meta-efl/recipes-efl/efl/entrance/entrance.service
-diff --git a/meta-efl/recipes-efl/efl/entrance_svn.bb b/meta-efl/recipes-efl/efl/entrance_svn.bb
-index 585d552..02eb64b 100644
---- a/meta-efl/recipes-efl/efl/entrance_svn.bb
-+++ b/meta-efl/recipes-efl/efl/entrance_svn.bb
-@@ -4,18 +4,35 @@ LICENSE = "GPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SECTION = "e/apps"
+rename from meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in
+rename to meta-gnome/recipes-gnome/gdm/gdm
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+index 863db2e..45bddc8 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--inherit e gettext
-+inherit e gettext systemd
- SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
-   file://0001-pam-use-common-auth-instead-of-system-auth.patch \
-+  file://entrance.service \
- "
- S = "${WORKDIR}/${SRCNAME}"
+ DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
  
- EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
+-PR = "r10"
++PR = "r15"
  
-+PR = "r4"
- PV = "0.0.4+svnr${SRCPV}"
- SRCREV = "${EFL_SRCREV}"
+-inherit gnome update-rc.d
++inherit gnome update-rc.d systemd
  
- RDEPENDS_${PN} += "${PN}-themes sessreg xauth"
- CONFFILES_${PN} += "${sysconfdir}/entrance.conf"
-+
- RCONFLICTS_${PN} += "xserver-nodm-init"
- RREPLACES_${PN} += "xserver-nodm-init"
-+
-+RCONFLICTS_${PN} += "xserver-nodm-init-systemd"
-+RREPLACES_${PN} += "xserver-nodm-init-systemd"
-+
-+RPROVIDES_${PN} += "${PN}-systemd"
+ SRC_URI += " \
+             file://cross-xdetection.diff \
+@@ -17,6 +17,7 @@ SRC_URI += " \
+             file://gdm.conf \
+             file://gdm-pam \
+             file://Default \
++            file://gdm.service.in \
+            "
+ 
+ SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
+@@ -49,6 +50,10 @@ do_install_append() {
+ 	install -d ${D}/${sysconfdir}/gdm/Init
+ 	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
+ 
++	install -d ${D}${systemd_unitdir}/system
++	sed -e 's,%sbindir%,${sbindir},g' \
++		< ${WORKDIR}/gdm.service.in \
++		> ${D}${systemd_unitdir}/system/gdm.service
+ }
+ 
+ FILES_${PN} += "${datadir}/icon* \
+@@ -60,6 +65,10 @@ RDEPENDS_${PN} += "grep dbus-x11 shadow"
+ CONFFILES_${PN} += "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gdm"
+ RRECOMMENDS_${PN} += "openssh-misc desktop-file-utils glib-2.0-utils metacity gnome-session polkit-gnome consolekit"
+ 
 +RREPLACES_${PN} += "${PN}-systemd"
 +RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "gdm.service"
 +
-+SYSTEMD_SERVICE_${PN} = "entrance.service"
-+
-+do_install_append() {
-+	install -d ${D}${systemd_unitdir}/system
-+	install -m 0644 ${WORKDIR}/entrance.service ${D}${systemd_unitdir}/system
-+}
-diff --git a/meta-systemd/conf/layer.conf b/meta-systemd/conf/layer.conf
-index d06cfa1..c064333 100644
---- a/meta-systemd/conf/layer.conf
-+++ b/meta-systemd/conf/layer.conf
-@@ -20,8 +20,6 @@ BBFILES += "\
-                    '', '${LAYERDIR}/invalid.bb', d)} \
-   ${@base_contains('BBFILE_COLLECTIONS', 'gnome-layer',\
-                    '${LAYERDIR}/meta-gnome/recipes-*/*/*.bbappend', '', d)} \
--  ${@base_contains('BBFILE_COLLECTIONS', 'efl-layer',\
--                   '${LAYERDIR}/meta-efl/recipes-*/*/*.bbappend', '', d)} \
-   ${@base_contains('BBFILE_COLLECTIONS', 'multimedia-layer',\
-                    '${LAYERDIR}/meta-multimedia/recipes-*/*/*.bbappend', '', d)} \
-   ${@base_contains('BBFILE_COLLECTIONS', 'networking',\
-diff --git a/meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend b/meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend
+ INITSCRIPT_NAME = "gdm"
+ INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
+ 
+@@ -87,7 +96,3 @@ pkg_postrm_${PN} () {
+     delgroup gdm || true
+ 	sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
+ }
+-
+-
+-
+-
+diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
 deleted file mode 100644
-index 63c33fb..0000000
---- a/meta-systemd/meta-efl/recipes-efl/efl/entrance_svn.bbappend
+index 6201352..0000000
+--- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
 +++ /dev/null
-@@ -1,21 +0,0 @@
+@@ -1,20 +0,0 @@
+-# look for files in the layer first
 -FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 -
--PRINC := "${@int(PRINC) + 3}"
+-PRINC := "${@int(PRINC) + 4}"
 -
 -inherit systemd
 -
--SRC_URI += "file://entrance.service"
+-SRC_URI += "file://gdm.service.in"
+-
+-do_install_append() {
+-	install -d ${D}${systemd_unitdir}/system
+-	sed -e 's,%sbindir%,${sbindir},g' \
+-		< ${WORKDIR}/gdm.service.in \
+-		> ${D}${systemd_unitdir}/system/gdm.service
+-}
 -
 -RPROVIDES_${PN} += "${PN}-systemd"
 -RREPLACES_${PN} += "${PN}-systemd"
 -RCONFLICTS_${PN} += "${PN}-systemd"
--
--SYSTEMD_SERVICE_${PN} = "entrance.service"
--
--do_install_append() {
--	install -d ${D}${systemd_unitdir}/system
--	install -m 0644 ${WORKDIR}/entrance.service ${D}${systemd_unitdir}/system
--}
--
--RCONFLICTS_${PN} += "xserver-nodm-init-systemd"
--RREPLACES_${PN} += "xserver-nodm-init-systemd"
+-SYSTEMD_SERVICE_${PN} = "gdm.service"
 -- 
 1.8.1.5
 
