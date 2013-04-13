@@ -1,34 +1,34 @@
-Received: from mail-ee0-f53.google.com ([74.125.83.53])
+Received: from mail-ee0-f49.google.com ([74.125.83.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0o8-0007Yp-1c
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0o0-0007Y3-4D
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 13 Apr 2013 15:48:52 +0200
-Received: by mail-ee0-f53.google.com with SMTP id c13so1591948eek.12
+Received: by mail-ee0-f49.google.com with SMTP id l10so1586510eei.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:30:30 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=WnNQrUQv+COF7nTObXLRX9/KxIWURssKw/QizS9jwQY=;
-	b=Vkqou53dJxXuRSc00QWWywUBkHG+HXNIPIsuPQR0T8h13fzm/57EAdZhKY1zuT5xJw
-	KvbU3MneZy73UM2oRBHtXqoPqQxGJTwQ4sKmaj/lFR6vvppyJNnPRKpNZ9RdLJPxd1rV
-	m9mzdXBCeTb30DbOZaZep5qz3MkPFDt4IcNgdfc+up8mvcGMTKaKIp+/49Ykge2kxAtU
-	4ZX9y3U2gXl3nB8ruMMuMJIX55txSjNLDaFsnsGnanDyIG+yTXRsZd+KVPg783wttFmR
-	3wCeWqftZBg6kISxCj4/7BdQAVlAL4JZeIqL6jGyKL9x+I6TTwc+cSXr0QyKpnoCv883
-	t5Dg==
-X-Received: by 10.14.223.137 with SMTP id v9mr10141374eep.4.1365859830211;
-	Sat, 13 Apr 2013 06:30:30 -0700 (PDT)
+	:references; bh=28a6clB5KLe+yXCylSEl63y5fnrxBML5UajKzGh512s=;
+	b=M/9a16TQq8pG3cb5wp4kDNLaOjKh88s1qQ45DG/d0mZthgB95nYCnCtfbPGge2oVhs
+	7X7CHHpkQdUqSV1H9TjQXW8FNCbdTZqKAYJLoWGSfKM0coOjOuV+HQBf/k+0zaMnlmBQ
+	dHuUl6PwW85LLF954rOZIg7Es36f8WzjJBUxLb5nDsBxh6KglOyB/Xlf/wbXOvpUe6Fd
+	yuAse4nAI/OehlN4bP108VSRpGKfKVprK3WFj7M3la6AY9RJuEGA4JGiWCcjlaCqPf6L
+	BVSwngfsFVyUvi41nWB39pnrQs82dD0ZYwK8AuoWnhPOT/sh2zl+B/cErM3Q9LArdAds
+	wohg==
+X-Received: by 10.15.36.2 with SMTP id h2mr39940180eev.2.1365859822294;
+	Sat, 13 Apr 2013 06:30:22 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id t4sm16527526eel.0.2013.04.13.06.30.29
+	by mx.google.com with ESMTPS id d47sm16436604eem.9.2013.04.13.06.30.21
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:30:29 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:47 +0200
-Message-Id: <1365859790-20947-30-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:41 +0200
+Message-Id: <1365859790-20947-24-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 30/33] packagegroup-basic: Drop bbappend from meta-systemd
+Subject: [meta-systemd][PATCH 24/33] zram: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +44,83 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 13 Apr 2013 13:49:24 -0000
 
-* avahi-systemd is now indluded in deamon
-* systemd-compat-units are RRECOMMENDED from systemd itself
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-basic.bb            | 2 +-
- .../meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend  | 6 ------
- 2 files changed, 1 insertion(+), 7 deletions(-)
- delete mode 100644 meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
+ .../recipes-extended/zram/zram/zram.service          |  0
+ meta-oe/recipes-extended/zram/zram_0.1.bb            | 13 +++++++++++--
+ .../meta-oe/recipes-extended/zram/zram_0.1.bbappend  | 20 --------------------
+ 3 files changed, 11 insertions(+), 22 deletions(-)
+ rename {meta-systemd/meta-oe => meta-oe}/recipes-extended/zram/zram/zram.service (100%)
+ delete mode 100644 meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-index 493ef5e..402579c 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-@@ -5,7 +5,7 @@ DESCRIPTION = "Basic task to get a device online"
+diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service b/meta-oe/recipes-extended/zram/zram/zram.service
+similarity index 100%
+rename from meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service
+rename to meta-oe/recipes-extended/zram/zram/zram.service
+diff --git a/meta-oe/recipes-extended/zram/zram_0.1.bb b/meta-oe/recipes-extended/zram/zram_0.1.bb
+index 8526264..115e643 100644
+--- a/meta-oe/recipes-extended/zram/zram_0.1.bb
++++ b/meta-oe/recipes-extended/zram/zram_0.1.bb
+@@ -2,22 +2,31 @@ DESCRIPTION = "Linux zram compressed in-memory swap"
  LICENSE = "MIT"
  LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
  
--PR = "r10"
-+PR = "r13"
+-inherit allarch update-rc.d
++inherit allarch update-rc.d systemd
  
- inherit packagegroup
+ RDEPENDS_${PN} = "util-linux-swaponoff kmod kernel-module-zram"
  
-diff --git a/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend b/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
+-PR = "r0"
++PR = "r3"
+ 
+ SRC_URI = " \
+            file://init \
++           file://zram.service \
+           "
+ 
+ do_install () {
+ 	# Sysvinit
+ 	install -d ${D}${sysconfdir}/init.d
+ 	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
++
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
+ }
+ 
+ FILES_${PN} = "${sysconfdir}/init.d"
+ INITSCRIPT_NAME = "zram"
+ INITSCRIPT_PARAMS = "start 05 2 3 4 5 . stop 22 0 1 6 ."
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "zram.service"
+diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend b/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
 deleted file mode 100644
-index c1b5851..0000000
---- a/meta-systemd/meta-oe/recipes-core/packagegroups/packagegroup-basic.bbappend
+index 227c1c7..0000000
+--- a/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
 +++ /dev/null
-@@ -1,6 +0,0 @@
+@@ -1,20 +0,0 @@
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+-
 -PRINC := "${@int(PRINC) + 2}"
 -
--RDEPENDS_${PN} += "\
--	systemd-compat-units \
--	avahi-systemd \
+-inherit systemd
+-
+-SRC_URI += " \
+-        file://zram.service \
 -"
+-
+-RPROVIDES_${PN} += "${PN}-systemd"
+-RREPLACES_${PN} += "${PN}-systemd"
+-RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "zram.service"
+-
+-do_install_append() {
+-	install -d ${D}${systemd_unitdir}/system
+-	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
+-}
+-
 -- 
 1.8.1.5
 
