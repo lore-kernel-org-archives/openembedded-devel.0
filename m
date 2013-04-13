@@ -1,48 +1,32 @@
-Received: from nm19-vm0.bullet.mail.ne1.yahoo.com ([98.138.91.59])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <prabindh@yahoo.com>) id 1UR2hS-0005IJ-Of
+	(envelope-from <martin.jansa@gmail.com>) id 1UR2nN-0005s8-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 17:49:13 +0200
-Received: from [98.138.226.176] by nm19.bullet.mail.ne1.yahoo.com with NNFMP;
-	13 Apr 2013 15:29:16 -0000
-Received: from [98.138.89.171] by tm11.bullet.mail.ne1.yahoo.com with NNFMP;
-	13 Apr 2013 15:29:16 -0000
-Received: from [127.0.0.1] by omp1027.mail.ne1.yahoo.com with NNFMP;
-	13 Apr 2013 15:29:16 -0000
-X-Yahoo-Newman-Property: ymail-3
-X-Yahoo-Newman-Id: 405885.63040.bm@omp1027.mail.ne1.yahoo.com
-Received: (qmail 35694 invoked by uid 60001); 13 Apr 2013 15:29:16 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1365866956; bh=zF4JnP05vitl1eKwtEhjdllr8EKWZ9AVQJUZ5CRY0pU=;
-	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=SWrmmAppITrsHq0p0zcYmF3TSAKeQrIhU8Af5Bdtfs9+Y92Xt9iHx2NB60NZxOVEhnfKPeX0JqIwKOluQXSNd7IJkdfXtjUbPCIE6JTWcNTbUmF7mATgS4MOaWtDzAwgn/h/JoboppYKPD+Fb8tApAy8mY5y0cCD1KtZ+l3XVsI=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
-	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=xMyicLfGMgHcXg+KF8egDc7wJBMBtUlmXvcQONgAYR/IM5wApFNgjcbo1KwbnwY4p41SiDeK5PteWLNF20FIUq9VCEP7bzAkuf8Cnk5oRwb9r0szAGGW7xGHGXmXt/Wctbs4y3KZMqzqTQxmfevnjVIsnClXm4pQeDJ98B0uKyk=;
-X-YMail-OSG: mYxeafcVM1mBW77y3faG4p3cFZXT2Tvb4PRqM6vwvIvW1hD
-	PuRhVvitZThwoz1WAopmAcIafhS814wwRuU.n3uEqrREuZ_cO7HJEPk_bKb1
-	hRnvV7taKxv9ux9hm59IQT60.G68HAaKbedbAWLvyl8myZHAc1JfMR5GBee1
-	4tQ.Wu0cuWHi8ooOpRikCBUtdC4G8Ocf_OvEXe8n.Fv3XYbCfLb3uvLeC54v
-	lL_vc_xtVfn.Vaz6XLUYtkXK86mFFXuXiWI9eqWLu4R4uRxFKzwcsAhezxCG
-	5d98.i1eJc3tucPJ3U6CMyftQeOLN4dheI_GByS4jrCOc5ao3TkamPm_XI8w
-	vN6U0a8h1Ci5GEVvzGRJwe7PsiPc_62HKX8SVWWxVQ1EzEJYBG0HA_xcZbmN
-	D_PWYbaFDEnY9OfgLaYjgtrEqMGCWmdzdOoiHqDjHfbVAJ7MTIH5r2ysLCYf
-	Y80jXvJstVtwNePMF0Sl8r7Esr91rjxD_b5sSPev4Yv1XxrP6XYoSg6N_fhS
-	YCk1TKx.1gjdlKPjetcVUGj2XFYTuzA26xWtWmdUO.yDUTHMvkx9utSwN2ea
-	rqAI0D5Cp1DnxBfj0HX_j4nayiwE0YtLDAMwWw.95612LtM4Ov6CGnjIgn6I
-	81mALhE5J2qf7pbJ7er2w
-Received: from [122.172.26.27] by web125602.mail.ne1.yahoo.com via HTTP;
-	Sat, 13 Apr 2013 08:29:16 PDT
-X-Rocket-MIMEInfo: 002.001,
-	QmVsb3cgZ2l0aHViIGxpbmsgaGFzIFF0NSBlZ2xmcyBwYXRjaGVzIGZvciByZXZpZXcgLSBmb3Igd29ya2luZyB3aXRoIGdsZXMyIHBsYXRmb3Jtcy4gSXMgdGhpcyB0aGUgcmlnaHQgd2F5IHRvIHN1Ym1pdCBmb3IgcmV2aWV3ID8gSWYgbm90LCBzaG91bGQgSSBzdWJtaXQgaW5kaXZpZHVhbCBwYXRjaGVzID8KCgpodHRwczovL2dpdGh1Yi5jb20vcHJhYmluZGgvbWV0YS1xdDUvY29tbWl0L2M4MTI5ZmI1MDU3ZjkyNTRjNzczZjgyZDJmZGJkODVkOWM1NjQxMGEKCkkgcmFuIGludG8gdGhlIGlzc3VlIG9mIG0BMAEBAQE-
-X-Mailer: YahooMailWebService/0.8.140.532
-Message-ID: <1365866956.81107.YahooMailNeo@web125602.mail.ne1.yahoo.com>
-Date: Sat, 13 Apr 2013 08:29:16 -0700 (PDT)
-From: Prabindh Sundareson <prabindh@yahoo.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-Subject: [meta-qt5] Qt5.0.1 eglfs with gles2 - patchset
+	Sat, 13 Apr 2013 17:55:18 +0200
+Received: by mail-ee0-f47.google.com with SMTP id t10so1630152eei.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Apr 2013 08:37:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=B2ELnZeaUyW1HIaIpZZ8zzZ832qRflcpQFWNT2BKwD0=;
+	b=ZG+oF1PjPncgTUCfqMdwzCk5oMvFTjkq4RBagU75Khob6QFGCjGiF+KDa+O6bZlwo6
+	b0R4LujB9I86rUKHZlD/FXQMn8kPUTzJKokvmmpv7qCZgiyThSEd5FupVUlV1jXN4kxw
+	/qu6TGVbU2XjPhqxQm8+PQtM8nzL8mdp7ZDEmZRhur3oClRVPng6W8KJyVuuLKFTHtTf
+	0X2JshRvO3E2rM6rKf8WxWZ3DWQ6n+5zdy6aOK/iWdzyvqOiomNyOsdHy+24HaIV088G
+	hAkmCZdUJkG4W3xQ2QE1DCDzhCRBKEt0qYfS5Xo1eqqF9v7XIYhg4Uuwvf+eXWyEZK/5
+	qRMg==
+X-Received: by 10.15.111.202 with SMTP id cj50mr40360755eeb.6.1365867471682;
+	Sat, 13 Apr 2013 08:37:51 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id bj2sm17029723eeb.1.2013.04.13.08.37.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 13 Apr 2013 08:37:51 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 13 Apr 2013 17:37:54 +0200
+Message-Id: <1365867474-10261-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-oe][PATCH] llvm: Import from meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,24 +40,564 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 15:49:15 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 13 Apr 2013 15:55:18 -0000
 
-Below github link has Qt5 eglfs patches for review - for working with gles2 platforms. Is this the right way to submit for review ? If not, should I submit individual patches ?
+* llvm is generic enough to be useful outside meta-java
+  e.g. we need it to enable llvmpipe galium driver in mesa
 
+* imported without any modification, all credits go to
+  Henning Heinold and Khem Raj for maintaining it in meta-java
 
-https://github.com/prabindh/meta-qt5/commit/c8129fb5057f9254c773f82d2fdbd85d9c56410a
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/llvm/llvm-common.bb           |  19 ++
+ meta-oe/recipes-core/llvm/llvm-common/llvm-config  |  10 +
+ meta-oe/recipes-core/llvm/llvm.inc                 | 214 +++++++++++++++++++++
+ .../recipes-core/llvm/llvm2.8/0019-issue6065.patch |  20 ++
+ .../llvm/llvm2.8/30may-llvm2.8-pr399-ppc-arm.patch | 113 +++++++++++
+ meta-oe/recipes-core/llvm/llvm2.8/add-unistd.patch |  12 ++
+ .../llvm/llvm2.8/llvm-mc_disable.patch             |  12 ++
+ meta-oe/recipes-core/llvm/llvm2.8_2.8.bb           |  21 ++
+ .../llvm/llvm2.9/arm_fenv_uclibc.patch             |  14 ++
+ meta-oe/recipes-core/llvm/llvm2.9_2.9.bb           |  29 +++
+ 10 files changed, 464 insertions(+)
+ create mode 100644 meta-oe/recipes-core/llvm/llvm-common.bb
+ create mode 100644 meta-oe/recipes-core/llvm/llvm-common/llvm-config
+ create mode 100644 meta-oe/recipes-core/llvm/llvm.inc
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.8/0019-issue6065.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.8/30may-llvm2.8-pr399-ppc-arm.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.8/add-unistd.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.8/llvm-mc_disable.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.8_2.8.bb
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.9/arm_fenv_uclibc.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
 
-I ran into the issue of managing the GL providers for eglfs support, and currently using a DISTRO_FEATURE check for virtual/libgl support and 
-falling back to libgles2. I am sure there are better ways.
-
-This is build tested on Poky, with Yocto, and runtime checked with minimal plugin on Beaglebone, with TI SGX530 drivers on 3.8.5 kernel. There is no fb support on Beaglebone yet, but I hope to get to Arago on one of the EVMs next.
-
-
-Please provide comments.
-
-regards
-Prabindh
+diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes-core/llvm/llvm-common.bb
+new file mode 100644
+index 0000000..38ca1ee
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm-common.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Helper script for OE's llvm support"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
++                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420 \
++                   "
++
++SRC_URI = "file://llvm-config"
++
++do_install() {
++  install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++  install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++}
++
++do_install_virtclass-native() {
++  install -d ${D}${bindir}
++  install -m 0755 ${WORKDIR}/llvm-config ${D}${bindir}
++}
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-core/llvm/llvm-common/llvm-config b/meta-oe/recipes-core/llvm/llvm-common/llvm-config
+new file mode 100644
+index 0000000..a9a416d
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm-common/llvm-config
+@@ -0,0 +1,10 @@
++#!/bin/sh
++# Wrapper script for real llvm-config. Simply calls
++
++if [ $WANT_LLVM_RELEASE ]; then
++	exec `dirname $0`/${TARGET_PREFIX}llvm-config$WANT_LLVM_RELEASE ${@}
++else
++  echo "The variable WANT_LLVM_RELEASE is not defined and exported"
++	echo "by your build recipe. Go figure."
++  exit 1
++fi
+diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
+new file mode 100644
+index 0000000..1fbb0ef
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm.inc
+@@ -0,0 +1,214 @@
++# LLVM does not provide ABI stability between different versions. For this
++# reason OE makes it possible to build and install different llvm versions
++# at the same time.
++#
++# This is true for the normal recipes as well as the native ones.
++#
++# All regular installation directories are prefixed with 'llvm${LLVM_RELEASE}'
++# e.g. "${STAGING_BINDIR}/llvm2.5" or "${STAGING_INCDIR}/llvm2.5"
++#
++# For your program or library that makes use of llvm you do should not need to
++# modify anything as long as it uses the results of various llvm-config
++# invocations. If you need customizations something is wrong and it needs to be
++# fixed (report bug).
++#
++# However the *recipe* for your program/library *must* declare
++# export WANT_LLVM_RELEASE = "<valid version number>"
++# The version number is picked up by a generic wrapper script which just calls
++# the variant of the specified version.
++
++DESCRIPTION = "The Low Level Virtual Machine"
++HOMEPAGE = "http://llvm.org"
++# 3-clause BSD-like
++LICENSE = "NCSA"
++LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
++
++DEPENDS = "llvm${LLVM_RELEASE}-native llvm-common"
++DEPENDS_virtclass-native = "llvm-common-native cmake-native"
++
++INC_PR = "r2"
++
++SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.tgz"
++
++S = "${WORKDIR}/llvm-${PV}"
++
++inherit cmake perlnative pythonnative
++
++# Defines the LLVM supported arches. By now we always build either for ${BUILD}
++# (native) or ${TARGET}. In the future it may make sense to enable all backends
++# for the non-native build. The decision which backends are used is made by
++# the 3rd party program or library that uses llvm anyway.
++LLVM_ARCH = "${@get_llvm_arch(d)}"
++
++# This is used for generating the install directory for the llvm libraries,
++# binaries and headers. It makes side by side installation of those possible.
++LLVM_RELEASE = "${PV}"
++
++# llvm *must* be built out of tree
++OECMAKE_SOURCEPATH = ".."
++OECMAKE_BUILDPATH = "build"
++EXTRA_OECMAKE = "\
++  -DLLVM_TABLEGEN=${STAGING_BINDIR_NATIVE}/llvm${LLVM_RELEASE}/tblgen \
++  -DLLVM_TARGETS_TO_BUILD=${LLVM_ARCH} \
++  -DCMAKE_LINKER:FILEPATH=${LD} \
++  -DCMAKE_AR:FILEPATH=${AR} \
++  -DCMAKE_OBJCOPY:FILEPATH=${OBJCOPY} \
++  -DCMAKE_OBJDUMP:FILEPATH=${OBJDUMP} \
++  -DCMAKE_RANLIB:FILEPATH=${RANLIB} \
++  -DCMAKE_STRIP:FILEPATH=${STRIP} \
++  -DNM_PATH:FILEPATH=${NM} \
++  -DLLVM_ENABLE_PIC:BOOL=ON \
++  -DLLVM_TARGET_ARCH:STRING=${LLVM_ARCH} \
++  -DLLVM_ENABLE_ASSERTIONS:BOOL=ON \
++  -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
++  -DBUILD_SHARED_LIBS:BOOL=ON \
++"
++# We need to reset this to avoid breakage as we build out of tree
++TOOLCHAIN_OPTIONS = ""
++
++PACKAGES_DYNAMIC = "llvm-*"
++
++# the difference to the non-native build is that we do not need
++# to declare the location of the tblgen executable.
++EXTRA_OECMAKE_virtclass-native = "\
++  -DLLVM_TARGETS_TO_BUILD=${LLVM_ARCH} \
++  -DCMAKE_LINKER:FILEPATH=${LD} \
++  -DCMAKE_AR:FILEPATH=${AR} \
++  -DCMAKE_OBJCOPY:FILEPATH=${OBJCOPY} \
++  -DCMAKE_OBJDUMP:FILEPATH=${OBJDUMP} \
++  -DCMAKE_RANLIB:FILEPATH=${RANLIB} \
++  -DCMAKE_STRIP:FILEPATH=${STRIP} \
++  -DNM_PATH:FILEPATH=${NM} \
++"
++
++PACKAGES_virtclass-native = ""
++
++PACKAGES_DYNAMIC_virtclass-native = ""
++
++python populate_packages_prepend () {
++    libllvm_libdir = bb.data.expand('${libdir}/llvm${LLVM_RELEASE}', d)
++    do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm-%s', 'Split package for %s', allow_dirs=True)
++}
++
++FILES_${PN} = ""
++ALLOW_EMPTY_${PN} = "1"
++
++FILES_${PN}-dbg += "${libdir}/llvm${LLVM_RELEASE}/.debug ${bindir}/llvm${LLVM_RELEASE}/.debug"
++
++FILES_${PN}-dev = " \
++                   ${includedir} \
++                   ${bindir}/* \
++                   ${libdir}/llvm${LLVM_RELEASE}/LLVMHello.so \
++                   ${libdir}/llvm${LLVM_RELEASE}/BugpointPasses.so \
++                   ${libdir}/llvm${LLVM_RELEASE}/*.a \
++                 "
++
++do_install() {
++    # Install into a private directory to be able to reorganize the files.
++
++    cd ${OECMAKE_BUILDPATH}
++
++    oe_runmake DESTDIR=${WORKDIR}/llvm-install install
++
++    # Create our custom target directories
++    install -d ${D}${bindir}/llvm${LLVM_RELEASE}
++    install -d ${D}${includedir}/llvm${LLVM_RELEASE}
++    install -d ${D}${libdir}/llvm${LLVM_RELEASE}
++
++    #	Move headers into their own directory
++    cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm \
++    ${D}${includedir}/llvm${LLVM_RELEASE}/
++    cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm-c \
++    ${D}${includedir}/llvm${LLVM_RELEASE}/
++
++    find ${WORKDIR}/llvm-install/${prefix}/lib -name "*" -maxdepth 1 -exec \
++    install {} ${D}${libdir}/llvm${LLVM_RELEASE} \;
++
++	#	I dont know another way out. Binaries are installed into a special subdir
++	find ${WORKDIR}/llvm-install/${prefix}/bin -name "*" -maxdepth 1 -exec \
++	install {} ${D}${bindir}/llvm${LLVM_RELEASE} \;
++
++	# LLVM does not install this by default.
++	install bin/tblgen ${D}${bindir}/llvm${LLVM_RELEASE}
++
++        # we install it here unmodified for native and none native and overwrite it
++        # later for native case
++        install -d ${D}${bindir}
++        install -m 0755 bin/llvm-config ${D}${bindir}
++
++	# Fix the paths in the config script to make it find the binaries and
++	# library files. Doing so allows 3rd party configure scripts working
++	# unmodified.
++	sed -e's!my.*ABS_RUN_DIR =.*!my $ABS_RUN_DIR = "${STAGING_DIR_TARGET}";!' \
++		-e's!my.*INCLUDEDIR =.*!my $INCLUDEDIR = "${STAGING_INCDIR}/llvm${LLVM_RELEASE}";!' \
++		-e's!my.*LIBDIR.*!my $LIBDIR = "${STAGING_LIBDIR}/llvm${LLVM_RELEASE}";!' \
++		-e's!my.*BINDIR.*!my $BINDIR = "${STAGING_BINDIR}/llvm${LLVM_RELEASE}";!' \
++		bin/llvm-config > bin/llvm-config${LLVM_RELEASE}
++
++        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
++        install -m 0755 bin/llvm-config${LLVM_RELEASE} ${SYSROOT_DESTDIR}${bindir_crossscripts}
++}
++
++do_install_virtclass-native() {
++	# Install into a private directory to be able to reorganize the files.
++
++        cd ${OECMAKE_BUILDPATH}
++
++        oe_runmake DESTDIR=${WORKDIR}/llvm-install install
++
++	# Create our custom target directories
++	install -d ${D}${bindir}/llvm${LLVM_RELEASE}
++	install -d ${D}${includedir}/llvm${LLVM_RELEASE}
++	install -d ${D}${libdir}/llvm${LLVM_RELEASE}
++
++	#	Move headers into their own directory
++	cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm \
++	${D}${includedir}/llvm${LLVM_RELEASE}/
++	cp -R ${WORKDIR}/llvm-install/${prefix}/include/llvm-c \
++	${D}${includedir}/llvm${LLVM_RELEASE}/
++
++	find ${WORKDIR}/llvm-install/${prefix}/lib -name "*" -maxdepth 1 -exec \
++	install {} ${D}${libdir}/llvm${LLVM_RELEASE} \;
++
++	#	I dont know another way out. Binaries are installed into a special subdir
++	find ${WORKDIR}/llvm-install/${prefix}/bin -name "*" -maxdepth 1 -exec \
++	install {} ${D}${bindir}/llvm${LLVM_RELEASE} \;
++
++	# LLVM does not install this by default.
++	install bin/tblgen ${D}${bindir}/llvm${LLVM_RELEASE}
++
++	# Fix the paths in the config script to make it find the binaries and
++	# library files. Doing so allows 3rd party configure scripts working
++	# unmodified.
++	sed -e's!my.*ABS_RUN_DIR =.*!my $ABS_RUN_DIR = "${STAGING_DIR_TARGET}";!' \
++		-e's!my.*INCLUDEDIR =.*!my $INCLUDEDIR = "${STAGING_INCDIR}/llvm${LLVM_RELEASE}";!' \
++		-e's!my.*LIBDIR.*!my $LIBDIR = "${STAGING_LIBDIR}/llvm${LLVM_RELEASE}";!' \
++		-e's!my.*BINDIR.*!my $BINDIR = "${STAGING_BINDIR}/llvm${LLVM_RELEASE}";!' \
++		bin/llvm-config > bin/llvm-config${LLVM_RELEASE}
++
++        install -d ${D}${bindir}
++        install -m 0755 bin/llvm-config${LLVM_RELEASE} ${D}${bindir}
++}
++
++
++# Retrieve the target in a way that is compatible to the arch
++# value in llvm (>= 2.5)
++def get_llvm_arch(d):
++    import bb;
++
++    arch = bb.data.getVar('TARGET_ARCH', d, 1)
++    if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
++        arch = "X86"
++    elif arch == "arm":
++        arch = "ARM"
++    elif arch == "mipsel" or arch == "mips":
++        arch = "mips"
++    elif arch == "powerpc" or arch == "powerpc64":
++        arch = "PowerPC"
++    else:
++        bb.warn("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
++
++    return arch
++
++BBCLASSEXTEND = "native"
++
+diff --git a/meta-oe/recipes-core/llvm/llvm2.8/0019-issue6065.patch b/meta-oe/recipes-core/llvm/llvm2.8/0019-issue6065.patch
+new file mode 100644
+index 0000000..a7f7bbe
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.8/0019-issue6065.patch
+@@ -0,0 +1,20 @@
++---
++ ARMJITInfo.cpp |    6 ++++++
++ 1 file changed, 6 insertions(+)
++
++--- a/lib/Target/ARM/ARMJITInfo.cpp
+++++ b/lib/Target/ARM/ARMJITInfo.cpp
++@@ -99,7 +99,13 @@
++     // The above twiddling of the saved return addresses allows us to
++     // deallocate everything, including the LR the stub saved, all in one
++     // pop instruction.
+++#ifndef __thumb__
++     "ldmia  sp!, {r0, r1, r2, r3, lr, pc}\n"
+++#else
+++    // thumb dont allow lr and pc to be poped in the same instruction.
+++    "pop {r0, r1, r2, r3, lr}\n"
+++    "pop {pc}\n"
+++#endif
++       );
++ #else  // Not an ARM host
++   void ARMCompilationCallback() {
+diff --git a/meta-oe/recipes-core/llvm/llvm2.8/30may-llvm2.8-pr399-ppc-arm.patch b/meta-oe/recipes-core/llvm/llvm2.8/30may-llvm2.8-pr399-ppc-arm.patch
+new file mode 100644
+index 0000000..ee5cbaf
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.8/30may-llvm2.8-pr399-ppc-arm.patch
+@@ -0,0 +1,113 @@
++Index: llvm-2.8/lib/ExecutionEngine/JIT/JIT.cpp
++===================================================================
++--- llvm-2.8.orig/lib/ExecutionEngine/JIT/JIT.cpp	2010-08-17 18:19:18.000000000 +0200
+++++ llvm-2.8/lib/ExecutionEngine/JIT/JIT.cpp	2011-12-19 21:16:21.884288536 +0100
++@@ -252,7 +252,12 @@
++     MutexGuard guard(Lock);
++     JITs.erase(jit);
++   }
++-  void *getPointerToNamedFunction(const char *Name) const {
+++  bool empty() {
+++    MutexGuard guard(Lock);
+++    return JITs.empty();
+++  }
+++  void *getPointerToNamedFunction(const char *Name,
+++                                  bool AbortOnFailure = true) const {
++     MutexGuard guard(Lock);
++     assert(JITs.size() != 0 && "No Jit registered");
++     //search function in every instance of JIT
++@@ -264,7 +269,19 @@
++     }
++     // The function is not available : fallback on the first created (will
++     // search in symbol of the current program/library)
++-    return (*JITs.begin())->getPointerToNamedFunction(Name);
+++    return (*JITs.begin())->getPointerToNamedFunction(Name, AbortOnFailure);
+++  }
+++  void *getPointerToGlobalIfAvailable(GlobalValue *V) const {
+++    MutexGuard guard(Lock);
+++    assert(JITs.size() != 0 && "No Jit registered");
+++    //search function in every instance of JIT
+++    for (SmallPtrSet<JIT*, 1>::const_iterator Jit = JITs.begin(),
+++           end = JITs.end();
+++         Jit != end; ++Jit) {
+++      if (void *Ptr = (*Jit)->getPointerToGlobalIfAvailable(V))
+++	return Ptr;
+++    }
+++    return 0;
++   }
++ };
++ ManagedStatic<JitPool> AllJits;
++@@ -280,6 +297,22 @@
++   }
++ }
++ 
+++extern "C" {
+++  // getPointerToNamedFunctionOrNull - same as the above, but returns
+++  // NULL instead of aborting if the function cannot be found.
+++  void *getPointerToNamedFunctionOrNull(const char *Name) {
+++    return !AllJits->empty() ? AllJits->getPointerToNamedFunction(Name, false) : 0;
+++  }
+++}
+++
+++extern "C" {
+++  // getPointerToGlobalIfAvailable - same as the above, but for global
+++  // variables, and only for those that have been codegened already.
+++  void *getPointerToGlobalIfAvailable(GlobalValue *V) {
+++    return !AllJits->empty() ? AllJits->getPointerToGlobalIfAvailable(V) : 0;
+++  }
+++}
+++
++ JIT::JIT(Module *M, TargetMachine &tm, TargetJITInfo &tji,
++          JITMemoryManager *JMM, CodeGenOpt::Level OptLevel, bool GVsWithCode)
++   : ExecutionEngine(M), TM(tm), TJI(tji), AllocateGVsWithCode(GVsWithCode),
++Index: llvm-2.8/lib/Target/ARM/ARMISelLowering.cpp
++===================================================================
++--- llvm-2.8.orig/lib/Target/ARM/ARMISelLowering.cpp	2010-09-03 03:35:08.000000000 +0200
+++++ llvm-2.8/lib/Target/ARM/ARMISelLowering.cpp	2011-12-19 21:16:21.884288536 +0100
++@@ -1119,6 +1119,9 @@
++   }
++ }
++ 
+++extern "C" void *getPointerToNamedFunctionOrNull(const char *Name);
+++extern "C" void *getPointerToGlobalIfAvailable(GlobalValue *Value);
+++
++ /// LowerCall - Lowering a call into a callseq_start <-
++ /// ARMISD:CALL <- callseq_end chain. Also add input and output parameter
++ /// nodes.
++@@ -1272,6 +1275,26 @@
++     InFlag =SDValue();
++   }
++ 
+++  EVT PtrVT = DAG.getTargetLoweringInfo().getPointerTy();
+++
+++  // XXX Work around for http://llvm.org/bugs/show_bug.cgi?id=5201
+++  // and http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=399
+++  // for Shark.
+++  //
+++  // If the callee is an ExternalSymbol node, and the symbol can be
+++  // resolved to a function pointer, then insert that pointer as a
+++  // constant.  This causes the next block of code to fall into the
+++  // block that emits an indirect call.  This works around
+++  //
+++  // This works for Shark because the only kinds of call that Shark
+++  // makes that do not already fall into the indirect call block are
+++  // calls to pre-existing external functions.
+++  if (ExternalSymbolSDNode *S = dyn_cast<ExternalSymbolSDNode>(Callee)) {
+++    void *FuncPtr = getPointerToNamedFunctionOrNull(S->getSymbol());
+++    if (FuncPtr)
+++      Callee = DAG.getConstant((uint64_t) FuncPtr, PtrVT);
+++  }
+++
++   // If the callee is a GlobalAddress/ExternalSymbol node (quite common, every
++   // direct call is) turn it into a TargetGlobalAddress/TargetExternalSymbol
++   // node so that legalize doesn't hack it.
++Index: llvm-2.8/tools/llc/CMakeLists.txt
++===================================================================
++--- llvm-2.8.orig/tools/llc/CMakeLists.txt	2009-09-03 00:45:31.000000000 +0200
+++++ llvm-2.8/tools/llc/CMakeLists.txt	2011-12-19 21:16:21.884288536 +0100
++@@ -1,4 +1,4 @@
++-set(LLVM_LINK_COMPONENTS ${LLVM_TARGETS_TO_BUILD} bitreader asmparser)
+++set(LLVM_LINK_COMPONENTS ${LLVM_TARGETS_TO_BUILD} jit bitreader asmparser)
++ 
++ add_llvm_tool(llc
++   llc.cpp
+diff --git a/meta-oe/recipes-core/llvm/llvm2.8/add-unistd.patch b/meta-oe/recipes-core/llvm/llvm2.8/add-unistd.patch
+new file mode 100644
+index 0000000..1c51b30
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.8/add-unistd.patch
+@@ -0,0 +1,12 @@
++Index: llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp
++===================================================================
++--- llvm-2.8.orig/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:31:21.008318473 +0200
+++++ llvm-2.8/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-14 18:32:53.523734850 +0200
++@@ -19,6 +19,7 @@
++ #include "llvm/Support/ErrorHandling.h"
++ #include "llvm/System/DynamicLibrary.h"
++ #include "llvm/Config/config.h"
+++#include <unistd.h>
++ using namespace llvm;
++ 
++ // AtExitHandlers - List of functions to call when the program exits,
+diff --git a/meta-oe/recipes-core/llvm/llvm2.8/llvm-mc_disable.patch b/meta-oe/recipes-core/llvm/llvm2.8/llvm-mc_disable.patch
+new file mode 100644
+index 0000000..fddc674
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.8/llvm-mc_disable.patch
+@@ -0,0 +1,12 @@
++Index: llvm-2.8/tools/CMakeLists.txt
++===================================================================
++--- llvm-2.8.orig/tools/CMakeLists.txt	2010-08-24 11:16:51.000000000 +0200
+++++ llvm-2.8/tools/CMakeLists.txt	2011-12-21 16:47:47.718508763 +0100
++@@ -14,7 +14,6 @@
++ add_subdirectory(opt)
++ add_subdirectory(llvm-as)
++ add_subdirectory(llvm-dis)
++-add_subdirectory(llvm-mc)
++ 
++ add_subdirectory(llc)
++ add_subdirectory(llvm-ranlib)
+diff --git a/meta-oe/recipes-core/llvm/llvm2.8_2.8.bb b/meta-oe/recipes-core/llvm/llvm2.8_2.8.bb
+new file mode 100644
+index 0000000..27ed41d
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.8_2.8.bb
+@@ -0,0 +1,21 @@
++require llvm.inc
++
++#LICENSE = "University of Illinois/NCSA Open Source License"
++LICENSE = "NCSA"
++LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
++
++PR = "${INC_PR}.2"
++
++SRC_URI += " \
++            file://30may-llvm2.8-pr399-ppc-arm.patch \
++            file://0019-issue6065.patch \
++            file://add-unistd.patch \
++            file://llvm-mc_disable.patch \
++           "
++
++LLVM_RELEASE = "2.8"
++
++EXTRA_OECMAKE += " -DBUILD_SHARED_LIBS:BOOL=OFF "
++
++SRC_URI[md5sum] = "220d361b4d17051ff4bb21c64abe05ba"
++SRC_URI[sha256sum] = "25addb742f1c6cc12877ed0ee924dda962d848368ee095be8e48342ae613d43b"
+diff --git a/meta-oe/recipes-core/llvm/llvm2.9/arm_fenv_uclibc.patch b/meta-oe/recipes-core/llvm/llvm2.9/arm_fenv_uclibc.patch
+new file mode 100644
+index 0000000..c3ae494
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.9/arm_fenv_uclibc.patch
+@@ -0,0 +1,14 @@
++Index: llvm-2.9/include/llvm/Support/FEnv.h
++===================================================================
++--- llvm-2.9.orig/include/llvm/Support/FEnv.h	2010-11-29 20:44:50.000000000 +0100
+++++ llvm-2.9/include/llvm/Support/FEnv.h	2011-11-18 18:42:22.580161297 +0100
++@@ -17,6 +17,9 @@
++ 
++ #include "llvm/Config/config.h"
++ #include <cerrno>
+++
+++#undef HAVE_FENV_H
+++
++ #ifdef HAVE_FENV_H
++ #include <fenv.h>
++ #endif
+diff --git a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
+new file mode 100644
+index 0000000..b956aad
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
+@@ -0,0 +1,29 @@
++require llvm.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
++
++PARALLEL_MAKE_virtclass-native = ""
++
++EXTRA_OECMAKE = "\
++  -DLLVM_TABLEGEN=${STAGING_BINDIR_NATIVE}/llvm${LLVM_RELEASE}/tblgen \
++  -DLLVM_TARGETS_TO_BUILD="X86;${LLVM_ARCH}" \
++  -DCMAKE_LINKER:FILEPATH=${LD} \
++  -DCMAKE_AR:FILEPATH=${AR} \
++  -DCMAKE_OBJCOPY:FILEPATH=${OBJCOPY} \
++  -DCMAKE_OBJDUMP:FILEPATH=${OBJDUMP} \
++  -DCMAKE_RANLIB:FILEPATH=${RANLIB} \
++  -DCMAKE_STRIP:FILEPATH=${STRIP} \
++  -DNM_PATH:FILEPATH=${NM} \
++  -DLLVM_ENABLE_PIC:BOOL=ON \
++  -DLLVM_TARGET_ARCH:STRING=${LLVM_ARCH} \
++  -DLLVM_ENABLE_ASSERTIONS:BOOL=ON \
++  -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
++  -DBUILD_SHARED_LIBS:BOOL=ON \
++"
++
++LLVM_RELEASE = "2.9"
++
++SRC_URI[md5sum] = "793138412d2af2c7c7f54615f8943771"
++SRC_URI[sha256sum] = "661236cfa17428b48cfa9cbb9909f7569c64b8ecd219fd91dbc00e3b557b3779"
+-- 
+1.8.1.5
 
 
 
