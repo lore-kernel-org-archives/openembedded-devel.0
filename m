@@ -1,34 +1,42 @@
-Received: from mail-ee0-f52.google.com ([74.125.83.52])
+Received: from mail-da0-f54.google.com ([209.85.210.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR13r-0002az-2A
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 16:04:17 +0200
-Received: by mail-ee0-f52.google.com with SMTP id d17so1524201eek.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:46:45 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1UR1xw-0000XR-Vc; Sat, 13 Apr 2013 17:02:09 +0200
+Received: by mail-da0-f54.google.com with SMTP id p1so1497834dad.41
+	for <multiple recipients>; Sat, 13 Apr 2013 07:44:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:mime-version
-	:content-type:content-disposition:user-agent;
-	bh=d2Q1lEZ+1PabBJBGcHbJ4bH+J6mn8MNruC1/kqCigdo=;
-	b=mYoG8jNrUDmp6/ridiSQ5PDeMtweNloGA7/e2a4W5SFYqKwqzxW1T4U+qA0ZB2iUOt
-	Bgfu9r1EAfCikPLf8Bx0NsrfJcTyUfWShqyhwzdwXuh4PZci+fwpbWK/yBIxaMtUsKsV
-	lMS1LuEyS/wXmGHpNGLQNK/iVi5bzAMx8XGFIrHl+VZadZDl8ilOZmCqlwNi1RJ+VzNy
-	tl+uybmXQ9k3rTbQpC7ayu0Lzrk2azhOukrNJt+kAibD/abdAhoeKKrg3RbU1ZbiizJA
-	LqOhCxbJp11oyzYnroDEPu/pDBidAlYOYDTF5p5c0ZaAZK8kOWd5W6hVAknzpfEC+TUG
-	+VsA==
-X-Received: by 10.15.102.3 with SMTP id bq3mr39772635eeb.42.1365860805400;
-	Sat, 13 Apr 2013 06:46:45 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=yRBZD3pSIcch7Z0IVppIuwsp8iZatAxlrL/htIwpQI8=;
+	b=MbA+kRrPipyU8nswescqMgcy3HwBRAQ285SyEGssIeV/2LSuOxpEKcIxWhg1Z+DeNi
+	1FkGAvYFwFFMTAWPODSscuk5XnqOh9OAReYQrib3mjluFio5g9tJh6nZ1lcoV2nZA1uU
+	G6ZHugb0HVSmlQ8SgWDw9XFRNCE3CxCqMv9ywlcr5gZhEWd8DAuhuCClR9qSd9c+PE/S
+	PJ4UpaiN5dOO73WyibB7bA6pRE9w4CMgDxmcR5QWbR04w/Ty0hmzEJRMOOTyc0aZUAzT
+	Bou7suidYnKpU92o4AzD5SvwDBidXokBZDBwAwVd1SZ4WuF4SpuG5jWwtJoZQvC1VhK3
+	oCmA==
+X-Received: by 10.68.236.134 with SMTP id uu6mr20223529pbc.55.1365864281934;
+	Sat, 13 Apr 2013 07:44:41 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id a2sm15048158eem.11.2013.04.13.06.46.44
+	by mx.google.com with ESMTPS id
+	ba10sm12845801pbd.21.2013.04.13.07.44.38
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:46:44 -0700 (PDT)
-Date: Sat, 13 Apr 2013 15:46:48 +0200
+	Sat, 13 Apr 2013 07:44:40 -0700 (PDT)
+Date: Sat, 13 Apr 2013 16:44:35 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130413134648.GE2477@jama>
+To: "Burton, Ross" <ross.burton@intel.com>
+Message-ID: <20130413144435.GF2477@jama>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20121223201634.GN8988@jama.palm1.palmone.com>
+	<20121224091242.GS8988@jama.palm1.palmone.com>
+	<20130109132813.GJ3722@jama.palm1.palmone.com>
+	<CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
+	<CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
 MIME-Version: 1.0
+In-Reply-To: <CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Consistent indentation in meta-openembedded metadata
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,69 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 14:04:18 -0000
-X-Groupsio-MsgNum: 44147
+X-List-Received-Date: Sat, 13 Apr 2013 15:02:09 -0000
+X-Groupsio-MsgNum: 44148
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4fo3mGi7Q6pk/+I3"
+	protocol="application/pgp-signature"; boundary="0NUq3YI6/rBc6tSL"
 Content-Disposition: inline
 
---4fo3mGi7Q6pk/+I3
-Content-Type: text/plain; charset=us-ascii
+--0NUq3YI6/rBc6tSL
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Wed, Jan 09, 2013 at 04:25:40PM +0000, Burton, Ross wrote:
+> On 9 January 2013 15:17, Andreas M=FCller <schnitzeltony@googlemail.com> =
+wrote:
+> > 2. bitbake libnotify3 -> Tons of: 'WARNING: The recipe libnotify3 is
+> > trying to install files into a shared area when those files already
+> > exist. Those files and their manifest location are:
+> >    /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/lib/libnotify.a
+> >    Matched in manifest-overo-libnotify
+>=20
+> The current libnotify doesn't actually depend on GTK+ 2 or GTK+ 3
+> (well, the tests do, but that's trivially resolved with an
+> upstreamable patch to add --disable-tests), so we don't need two
+> recipes.
+>=20
+> Speaking of GTK+ 3, I'm about to start pushing a series to add it to oe-c=
+ore.
 
-maybe you remember my proposal to make whitespace consistent for python
-and shell tasks a while back:
-
-http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/026176.html
-
-    * This change is only aesthetic (unlike indentation in Python
-    * tasks).
-    * Some recipes were using tabs.
-    * Some were using 8 spaces.
-    * Some were using mix or different number of spaces.
-    * Make them consistently use 4 spaces everywhere.
-    * Yocto styleguide advises to use tabs (but the only reason to keep
-      tabs is the need to update a lot of recipes). Lately this advice
-      was also merged into the styleguide on the OE wiki.
-    * Using 4 spaces in both types of tasks is better because it's less
-      error prone when someone is not sure if e.g.
-      do_generate_toolchain_file() is Python or shell task and also allows
-      to highlight every tab used in .bb, .inc, .bbappend, .bbclass as
-      potentially bad (shouldn't be used for indenting of multiline
-      variable assignments and cannot be used for Python tasks).
-
-I still have some scripts for semi-automatic conversion.
-
-Now close to creating dylan branch for meta-openembedded is imho best
-time to do this, not many changes from released dylan will be backported
-to danny, because people will start moving to newer release instead of
-backporting more and more stuff to old one (also resolving possible
-whitespace merge conflict it not hard). Causing conflicts for merge was
-IIRC most important reason why my proposal was rejected for oe-core.
-
-meta-efl, meta-webos(-ports), meta-smartphone layers are already using=20
-it for some time and meta-openembedded recipes are using spaces in shell=20
-tasks in majority of recipes.
-
-If nobody objects I'll run my scripts after all pending patches are
-merged.
+Is someone working on making libnotify and libnotify3 playing nice
+together? Would be nice to fix it before branching..
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---4fo3mGi7Q6pk/+I3
+--0NUq3YI6/rBc6tSL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFpYcgACgkQN1Ujt2V2gBwY4ACdEbWQnyFS8a7vmlZ7MZsk22sy
-4nMAoLHPRvp6tXvQIJqwLA34unhdfh6v
-=Z8mf
+iEYEARECAAYFAlFpb1MACgkQN1Ujt2V2gBwvlwCgg85HM7xsMrKH3MiWZd2kJsYm
+pi0AoI+jRfH2231GnjPy27WtidiaTdUo
+=smmt
 -----END PGP SIGNATURE-----
 
---4fo3mGi7Q6pk/+I3--
+--0NUq3YI6/rBc6tSL--
