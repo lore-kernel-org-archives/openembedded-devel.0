@@ -1,34 +1,34 @@
-Received: from mail-ea0-f179.google.com ([209.85.215.179])
+Received: from mail-ea0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0ni-0007WI-Jl
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0nj-0007Wb-VW
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 15:47:41 +0200
-Received: by mail-ea0-f179.google.com with SMTP id f15so1562075eak.10
+	Sat, 13 Apr 2013 15:47:43 +0200
+Received: by mail-ea0-f173.google.com with SMTP id k11so1555318eaj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:30:05 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=pztdJXpLM5hVouaJVSb1M8pu0QuJC6LnpWLtGSH7jf4=;
-	b=GH7oRzd6JmC6o7UJxFwkQstFMCSZBw5kEoZwTrSE4Wf5LpPZOP38Qw3XvG0MehVTSI
-	k64st2svJyPRsvdk/AEOfUAhl1GrDb3ueE0rHq7cVsj0OO8jaaB+U/I+NDfdxOUyhasZ
-	KVbCZyzpAdHBXx5C4RkF+d57kf5mp+otOd3FPCpEYNgXELhcZKvg4F92ZbmLAfmryxR5
-	fS5CRQuRsDKO2DsQ7R5LE6DSh4bJR+fKFlbtvB+1KjhJ6QkvRAD60IeQkvhrFUKTFo7A
-	dBlnTK5+oOk8r+q0JfIa/pDmyYVmJzFjZkanscsf2l+HzI5ovB4U4LPqaR3cpCFO5jlL
-	Mh4A==
-X-Received: by 10.14.210.132 with SMTP id u4mr39459865eeo.19.1365859804973;
-	Sat, 13 Apr 2013 06:30:04 -0700 (PDT)
+	:references; bh=mchgZFrHduEPh9RPNXU1Y+7WOtZ8C208qE8eQCvq7qI=;
+	b=R0hLyTOBdwBz7fG+2YCUf+VVZGxXV2LaTw7jUhrR8N+Uffn0knuJypHOxw95Pk8xI0
+	o1TeADJ55/OmPuk/p3/vVeiyaoXto4KEWaqD4POQU3/mp6PXGbfT0qmMdc4IaHuIrTgP
+	dZmViKItePKZiysaGFT0x5eHvtVJ6ffOFf7S68FRUAlRL44GQ0aHSsi1ETLB00z4suV3
+	vuCFF9Sssuk/EvqByX4SfIKoQKUFSlAJtSUEGDqaqoWSRLdguVwFJS2Nx/26iQvanAu8
+	Hzcv1J/v1i8iaWn/NfJ5KjjbJZ8lWivcm9PYZ6KYxu+Hq/awCKhHERtNRQTeWAebCxlP
+	NN1A==
+X-Received: by 10.14.223.137 with SMTP id v9mr10137666eep.4.1365859806307;
+	Sat, 13 Apr 2013 06:30:06 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id bk42sm16494809eeb.3.2013.04.13.06.30.04
+	by mx.google.com with ESMTPS id d47sm16435516eem.9.2013.04.13.06.30.05
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:30:04 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:29 +0200
-Message-Id: <1365859790-20947-12-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:30 +0200
+Message-Id: <1365859790-20947-13-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 12/33] xfce4-session: move systemd support from meta-systemd back to meta-xfce
+Subject: [meta-systemd][PATCH 13/33] cloud9: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,76 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 13:48:02 -0000
+X-List-Received-Date: Sat, 13 Apr 2013 13:48:57 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend      | 8 --------
- ...001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch | 0
- .../0001-Handle-multiple-interactive-session-save-bug-5379.patch  | 0
- .../0002-Remove-gnome-keyring-remains.patch                       | 0
- .../0003-configure.in-hard-code-path-to-iceauth.patch             | 0
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb      | 4 +++-
- 6 files changed, 3 insertions(+), 9 deletions(-)
- delete mode 100644 meta-systemd/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend
- rename {meta-systemd/meta-xfce/recipes-xfce/xfce4-session/files => meta-xfce/recipes-xfce/xfce4-session/xfce4-session}/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch (100%)
- rename meta-xfce/recipes-xfce/xfce4-session/{files => xfce4-session}/0001-Handle-multiple-interactive-session-save-bug-5379.patch (100%)
- rename meta-xfce/recipes-xfce/xfce4-session/{files => xfce4-session}/0002-Remove-gnome-keyring-remains.patch (100%)
- rename meta-xfce/recipes-xfce/xfce4-session/{files => xfce4-session}/0003-configure.in-hard-code-path-to-iceauth.patch (100%)
+ .../recipes-devtools/cloud9/cloud9/cloud9.service    |  0
+ meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb        | 13 ++++++++++++-
+ .../recipes-devtools/cloud9/cloud9_0.6.bbappend      | 20 --------------------
+ 3 files changed, 12 insertions(+), 21 deletions(-)
+ rename {meta-systemd/meta-oe => meta-oe}/recipes-devtools/cloud9/cloud9/cloud9.service (100%)
+ delete mode 100644 meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
 
-diff --git a/meta-systemd/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend b/meta-systemd/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend
-deleted file mode 100644
-index 59c471e..0000000
---- a/meta-systemd/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bbappend
-+++ /dev/null
-@@ -1,8 +0,0 @@
--# look for files in the layer first
--FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
--
--DEPENDS += "systemd"
--
--PRINC := "${@int(PRINC) + 2}"
--
--SRC_URI += "file://0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch"
-diff --git a/meta-systemd/meta-xfce/recipes-xfce/xfce4-session/files/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch
+diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service b/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
 similarity index 100%
-rename from meta-systemd/meta-xfce/recipes-xfce/xfce4-session/files/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0001-Handle-multiple-interactive-session-save-bug-5379.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Handle-multiple-interactive-session-save-bug-5379.patch
-similarity index 100%
-rename from meta-xfce/recipes-xfce/xfce4-session/files/0001-Handle-multiple-interactive-session-save-bug-5379.patch
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Handle-multiple-interactive-session-save-bug-5379.patch
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0002-Remove-gnome-keyring-remains.patch
-similarity index 100%
-rename from meta-xfce/recipes-xfce/xfce4-session/files/0002-Remove-gnome-keyring-remains.patch
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0002-Remove-gnome-keyring-remains.patch
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0003-configure.in-hard-code-path-to-iceauth.patch
-similarity index 100%
-rename from meta-xfce/recipes-xfce/xfce4-session/files/0003-configure.in-hard-code-path-to-iceauth.patch
-rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0003-configure.in-hard-code-path-to-iceauth.patch
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-index 6ad834d..2c185a5 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
-@@ -3,8 +3,9 @@ SECTION = "x11"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
- DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
-+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
+rename from meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+rename to meta-oe/recipes-devtools/cloud9/cloud9/cloud9.service
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+index 0c07b12..9ae25bb 100644
+--- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
++++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+@@ -3,11 +3,13 @@ HOMEPAGE = "http://c9.io"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
+ 
 -PR = "r2"
-+PR = "r5"
++PR = "r4"
  
- inherit xfce
+ # Nodejs-native for node-waf, nodejs4-native for the headers
+ DEPENDS = "libxml2 nodejs-native nodejs4-native"
  
-@@ -13,6 +14,7 @@ SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a7
- SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch \
-             file://0002-Remove-gnome-keyring-remains.patch \
-             file://0003-configure.in-hard-code-path-to-iceauth.patch \
-+            file://0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch \
- "
++inherit systemd
++
+ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
+            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
+            git://github.com/ajaxorg/ace.git;destsuffix=git/support/ace;name=ace \
+@@ -33,6 +35,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
+            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
+            file://index.js \
+            file://cloud9-avahi.service \
++           file://cloud9.service \
+            file://0001-ide-use-node-as-interpreter-for-sketches-instead-of-.patch \
+           "
  
- # protect from frightening message that xfce might not work correctly
+@@ -97,6 +100,9 @@ do_install () {
+ 
+   install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+   install -m 0644 ${WORKDIR}/cloud9-avahi.service ${D}${sysconfdir}/avahi/services/
++  
++  install -d ${D}${systemd_unitdir}/system
++  install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system
+ }
+ 
+ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/.debug \
+@@ -104,3 +110,8 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
+                    "
+ 
+ RDEPENDS_${PN} = "nodejs4 nodejs gzip"
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "cloud9.service"
+diff --git a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend b/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
+deleted file mode 100644
+index 50c6886..0000000
+--- a/meta-systemd/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bbappend
++++ /dev/null
+@@ -1,20 +0,0 @@
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+-
+-PRINC := "${@int(PRINC) + 3}"
+-
+-inherit systemd
+-
+-SRC_URI += "file://cloud9.service"
+-
+-inherit systemd
+-
+-NATIVE_SYSTEMD_SUPPORT = "1"
+-RPROVIDES_${PN} += "${PN}-systemd"
+-RREPLACES_${PN} += "${PN}-systemd"
+-RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "cloud9.service"
+-do_install_append() {
+-	install -d ${D}${systemd_unitdir}/system
+-	install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system
+-}
+-
 -- 
 1.8.1.5
 
