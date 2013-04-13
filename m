@@ -1,36 +1,34 @@
-Received: from mail-gg0-f178.google.com ([209.85.161.178])
+Received: from mail-oa0-f43.google.com ([209.85.219.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UR4JW-0007dJ-NF
+	(envelope-from <otavio.salvador@gmail.com>) id 1UR6ue-0007Iz-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 19:32:41 +0200
-Received: by mail-gg0-f178.google.com with SMTP id e5so569983ggh.23
+	Sat, 13 Apr 2013 22:19:08 +0200
+Received: by mail-oa0-f43.google.com with SMTP id l10so3453519oag.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 10:15:08 -0700 (PDT)
+	Sat, 13 Apr 2013 13:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=vjLM98eww/dw4mYEaNqdL3h4Vlq0vtzFItTu/D19RPU=;
-	b=0/m2XDaKtdjxPju2AP/nxXdj+6nZvOpEJzuZHgId3V01p0V+AOIsINrBYlP0o1RTF3
-	ftf2460FbTqFq4xSgXEVgI+4f5wSbc/VT/Xh9N4Dr2jEoahFLWOibGSH3Je4/6IB437I
-	CTbq8zbzwaEN0IWNt3W2lLZVjDEW0ADFICQlT6DJCcwIfk3Ltk+VNEAcWwJ/Fu1nU9rN
-	GMVuIF8RFUCILTN4IkVK+wRlS1fXZlaYgHWJ+2fk5iLwZDiTk1DCYm+17XKEd7uq6MV6
-	1mFPimpH61i5H6Ho2k1Bt9DR3TU/4q0TTAD/V6KU1ZmysWRdkxz1RQ45Z8hxzN4vMvqj
-	jEJg==
-X-Received: by 10.236.161.130 with SMTP id w2mr8395320yhk.173.1365873308238;
-	Sat, 13 Apr 2013 10:15:08 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([187.23.144.59])
-	by mx.google.com with ESMTPS id x33sm18491838yhn.18.2013.04.13.10.15.06
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 10:15:07 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=AOhSWa9hY0Ex22KKa+EhWBCuT0i8Jjm5Sj9UZV7hTVQ=;
+	b=eYSPrGDEZxuiEXykIAd8NjoG4fNhyhbFm9wxcmizA0AYfn+t2k5dmmz3ctNhqQBt2x
+	Jv3h9rX5BaDrrhh4NC30UIk3CQvRGotZP0PaZrxmnwsTjSXJ21NFgR0iPu9L8IQuIUOp
+	I7W6HYHpgog/MNPg19Ye/+GpWqnaPpN+YWLho0ucegi0pvAWjvT14pojv8Hmdprc+4XE
+	P5D42BL/ZrlZe1t42iVbHcRr2iVBycQcpbirGhY7ZD6meE8VIn7vz4HaH0RZeChbniXU
+	OByIO8wwPUHhBJMpc5diMwYZrIEOm6vptNwluyeTvr84WZzIpSCetnOF4gyyMWvt1eIb
+	6wiw==
+MIME-Version: 1.0
+X-Received: by 10.182.131.168 with SMTP id on8mr1568206obb.7.1365883297789;
+	Sat, 13 Apr 2013 13:01:37 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.80.198 with HTTP; Sat, 13 Apr 2013 13:01:37 -0700 (PDT)
+In-Reply-To: <20130413134648.GE2477@jama>
+References: <20130413134648.GE2477@jama>
+Date: Sat, 13 Apr 2013 17:01:37 -0300
+X-Google-Sender-Auth: Wst7kalfhfqJl5X9O39fs-qgg2I
+Message-ID: <CAP9ODKrDsqRJORkzjACf4=9ffu_STKFzFNUSBQyfwF_VuTKSFw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 13 Apr 2013 14:15:00 -0300
-Message-Id: <1365873301-29552-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.1
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe PATCH 1/2] libgsf: update to version 1.14.26
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Consistent indentation in meta-openembedded metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +42,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 17:32:57 -0000
+X-List-Received-Date: Sat, 13 Apr 2013 20:19:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Mario Domenech Goulart <mario@ossystems.com.br>
+On Sat, Apr 13, 2013 at 10:46 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Hi,
+>
+> maybe you remember my proposal to make whitespace consistent for python
+> and shell tasks a while back:
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/026176.html
+>
+>     * This change is only aesthetic (unlike indentation in Python
+>     * tasks).
+>     * Some recipes were using tabs.
+>     * Some were using 8 spaces.
+>     * Some were using mix or different number of spaces.
+>     * Make them consistently use 4 spaces everywhere.
+>     * Yocto styleguide advises to use tabs (but the only reason to keep
+>       tabs is the need to update a lot of recipes). Lately this advice
+>       was also merged into the styleguide on the OE wiki.
+>     * Using 4 spaces in both types of tasks is better because it's less
+>       error prone when someone is not sure if e.g.
+>       do_generate_toolchain_file() is Python or shell task and also allows
+>       to highlight every tab used in .bb, .inc, .bbappend, .bbclass as
+>       potentially bad (shouldn't be used for indenting of multiline
+>       variable assignments and cannot be used for Python tasks).
+>
+> I still have some scripts for semi-automatic conversion.
+>
+> Now close to creating dylan branch for meta-openembedded is imho best
+> time to do this, not many changes from released dylan will be backported
+> to danny, because people will start moving to newer release instead of
+> backporting more and more stuff to old one (also resolving possible
+> whitespace merge conflict it not hard). Causing conflicts for merge was
+> IIRC most important reason why my proposal was rejected for oe-core.
+>
+> meta-efl, meta-webos(-ports), meta-smartphone layers are already using
+> it for some time and meta-openembedded recipes are using spaces in shell
+> tasks in majority of recipes.
+>
+> If nobody objects I'll run my scripts after all pending patches are
+> merged.
 
-Previous version was 1.14.21, but Gnumeric requires at least 1.14.24.
-Since we are changing it, we pick the latest available version.
+I fully agree; it is currently a mix in a lot of place so it is going
+to make it way better.
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-gnome/libgsf/{libgsf_1.14.21.bb => libgsf_1.14.26.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.21.bb => libgsf_1.14.26.bb} (71%)
-
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
-similarity index 71%
-rename from meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-rename to meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
-index a4f1ec2..a6127d6 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
-@@ -3,16 +3,16 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
-                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
- 
--PR = "r4"
--
- SECTION = "libs"
- 
- DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
- 
- inherit autotools pkgconfig gnome gconf
- 
--SRC_URI[archive.md5sum] = "2b702648b853402554c97d75405c60d3"
--SRC_URI[archive.sha256sum] = "eef0a9d6eca4e6af6c16b208947e3c958c428b94d22792bdd0b80c08a4b301db"
-+SRC_URI[archive.md5sum] = "3c5a4fbd16a727c36974078e6d0e9575"
-+SRC_URI[archive.sha256sum] = "8919e725aadd785380350c8dec7427d82cf33164bc9a9a549df9440a0c3da6d5"
-+
-+GNOME_COMPRESS_TYPE = "xz"
- 
- EXTRA_OECONF = "\
- 		--without-python \
--- 
-1.8.1
-
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
