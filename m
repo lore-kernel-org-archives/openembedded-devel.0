@@ -1,42 +1,39 @@
-Received: from mail-da0-f54.google.com ([209.85.210.54])
+Received: from mail-da0-f49.google.com ([209.85.210.49])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1UR1xw-0000XR-Vc; Sat, 13 Apr 2013 17:02:09 +0200
-Received: by mail-da0-f54.google.com with SMTP id p1so1497834dad.41
-	for <multiple recipients>; Sat, 13 Apr 2013 07:44:42 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>) id 1UR29X-0001kL-TM
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Apr 2013 17:14:12 +0200
+Received: by mail-da0-f49.google.com with SMTP id t11so1498039daj.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Apr 2013 07:56:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=yRBZD3pSIcch7Z0IVppIuwsp8iZatAxlrL/htIwpQI8=;
-	b=MbA+kRrPipyU8nswescqMgcy3HwBRAQ285SyEGssIeV/2LSuOxpEKcIxWhg1Z+DeNi
-	1FkGAvYFwFFMTAWPODSscuk5XnqOh9OAReYQrib3mjluFio5g9tJh6nZ1lcoV2nZA1uU
-	G6ZHugb0HVSmlQ8SgWDw9XFRNCE3CxCqMv9ywlcr5gZhEWd8DAuhuCClR9qSd9c+PE/S
-	PJ4UpaiN5dOO73WyibB7bA6pRE9w4CMgDxmcR5QWbR04w/Ty0hmzEJRMOOTyc0aZUAzT
-	Bou7suidYnKpU92o4AzD5SvwDBidXokBZDBwAwVd1SZ4WuF4SpuG5jWwtJoZQvC1VhK3
-	oCmA==
-X-Received: by 10.68.236.134 with SMTP id uu6mr20223529pbc.55.1365864281934;
-	Sat, 13 Apr 2013 07:44:41 -0700 (PDT)
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=a94WBRb/7c/pn4lN0i65FcV+CHV2S0ZmTd5hJihgd7Y=;
+	b=bhS8Vd5/pgzPQk6/TjbQeYLQIZSIkPExE2n/+xTKVL5Ptnjzu/pMRE+zcpE1FC8JvE
+	ikDkblK3gD9o136wOC8nxHILhrqFxAJaHnr536ZEJpPWl14CN+UIPOZ/4oW/jKXVSvIN
+	pksV0/byJfUDLJ2N2wIpf5zVAfd5QJrMOXQ2Nmn4I/XurtL9wtV3VoSTtydysIc6i/KS
+	kcfYsP+X3Wb9Uoe4X5kEoYq948t3w/KW+1+gHPRf83+KJq6NYwiULcLgU80U0R+u08t4
+	mtshbtBOsyMIAv2+7f/WtlA7fd5T+il4Zc+Qk/o+tMGzS+jlFKePPS5jOYkE0eKNd+mv
+	iqpg==
+X-Received: by 10.68.94.194 with SMTP id de2mr20152326pbb.111.1365865001236;
+	Sat, 13 Apr 2013 07:56:41 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id
-	ba10sm12845801pbd.21.2013.04.13.07.44.38
+	by mx.google.com with ESMTPS id to7sm14162020pab.0.2013.04.13.07.56.38
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 07:44:40 -0700 (PDT)
-Date: Sat, 13 Apr 2013 16:44:35 +0200
+	Sat, 13 Apr 2013 07:56:40 -0700 (PDT)
+Date: Sat, 13 Apr 2013 16:56:35 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Message-ID: <20130413144435.GF2477@jama>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20121223201634.GN8988@jama.palm1.palmone.com>
-	<20121224091242.GS8988@jama.palm1.palmone.com>
-	<20130109132813.GJ3722@jama.palm1.palmone.com>
-	<CALbNGRTEiLQ8JkN1PvRc6k2rbuvnozP79ywYudMaUyXNViGpSg@mail.gmail.com>
-	<CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130413145635.GG2477@jama>
+References: <1360776335-21633-1-git-send-email-raj.khem@gmail.com>
+	<1360776335-21633-2-git-send-email-raj.khem@gmail.com>
+	<20130214074532.GI3300@jama>
+	<CAMKF1sqA=XarFcXewAJ7MjEG=ZtoLNQ6mvTjLHMGUQRVW8ZXig@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAJTo0LZT_b4mRrYJOVJzfTzgU4-ipZhswQme-=FqFNGD6q845g@mail.gmail.com>
+In-Reply-To: <CAMKF1sqA=XarFcXewAJ7MjEG=ZtoLNQ6mvTjLHMGUQRVW8ZXig@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+Subject: Re: [meta-systemd][PATCH 2/2] meta-systemd: Append ${PN} to SYSTEMD_SERVICE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 15:02:09 -0000
-X-Groupsio-MsgNum: 44148
+X-List-Received-Date: Sat, 13 Apr 2013 15:14:12 -0000
+X-Groupsio-MsgNum: 44149
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0NUq3YI6/rBc6tSL"
+	protocol="application/pgp-signature"; boundary="7GFA+bvAY1vP//DC"
 Content-Disposition: inline
 
---0NUq3YI6/rBc6tSL
-Content-Type: text/plain; charset=iso-8859-1
+--7GFA+bvAY1vP//DC
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 09, 2013 at 04:25:40PM +0000, Burton, Ross wrote:
-> On 9 January 2013 15:17, Andreas M=FCller <schnitzeltony@googlemail.com> =
-wrote:
-> > 2. bitbake libnotify3 -> Tons of: 'WARNING: The recipe libnotify3 is
-> > trying to install files into a shared area when those files already
-> > exist. Those files and their manifest location are:
-> >    /home/andreas/tmp/oe-core-eglibc/sysroots/overo/usr/lib/libnotify.a
-> >    Matched in manifest-overo-libnotify
+On Fri, Feb 15, 2013 at 10:39:15AM -0800, Khem Raj wrote:
+> On Wed, Feb 13, 2013 at 11:45 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > I'm still getting missing RPROVIDER for openssh-sshd-systemd and bitbake
+> > -e shows interesting behavior:
+> >
+> > # $RPROVIDES_openssh-sshd [2 operations]
+> > #   append
+> > #   /OE/shr-core/meta-openembedded/meta-systemd/oe-core/recipes-connect=
+ivity/openssh/openssh_6.1p1.bbappend:8
+> > #     "openssh-sshd-systemd"
+> > #   rename from RPROVIDES_${PN}-sshd data.py:161 [expandKeys]
+> > #     "sshd"
+> > # computed:
+> > #   "sshd"
+> > RPROVIDES_openssh-sshd=3D"sshd"
+> >
+> > Any idea why?
 >=20
-> The current libnotify doesn't actually depend on GTK+ 2 or GTK+ 3
-> (well, the tests do, but that's trivially resolved with an
-> upstreamable patch to add --disable-tests), so we don't need two
-> recipes.
->=20
-> Speaking of GTK+ 3, I'm about to start pushing a series to add it to oe-c=
-ore.
+> hmmm I do not get it. Did you do a clean build or incremental ?
 
-Is someone working on making libnotify and libnotify3 playing nice
-together? Would be nice to fix it before branching..
+Just for reference it was caused by this:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2013-April/044941.h=
+tml
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0NUq3YI6/rBc6tSL
+--7GFA+bvAY1vP//DC
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFpb1MACgkQN1Ujt2V2gBwvlwCgg85HM7xsMrKH3MiWZd2kJsYm
-pi0AoI+jRfH2231GnjPy27WtidiaTdUo
-=smmt
+iEYEARECAAYFAlFpciMACgkQN1Ujt2V2gBxwtQCeOl9sdbLvo+qUFy+75iRQ1jQB
+dgoAnjzUYBNSUtrA9ggndtyX35iA3mOp
+=XTQM
 -----END PGP SIGNATURE-----
 
---0NUq3YI6/rBc6tSL--
+--7GFA+bvAY1vP//DC--
