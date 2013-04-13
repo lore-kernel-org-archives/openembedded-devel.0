@@ -1,34 +1,34 @@
-Received: from mail-ee0-f49.google.com ([74.125.83.49])
+Received: from mail-ea0-f176.google.com ([209.85.215.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0o0-0007Y3-4D
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0o6-0007Yi-Bi
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 13 Apr 2013 15:48:52 +0200
-Received: by mail-ee0-f49.google.com with SMTP id l10so1586510eei.36
+Received: by mail-ea0-f176.google.com with SMTP id h10so1628970eaj.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:30:22 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=28a6clB5KLe+yXCylSEl63y5fnrxBML5UajKzGh512s=;
-	b=M/9a16TQq8pG3cb5wp4kDNLaOjKh88s1qQ45DG/d0mZthgB95nYCnCtfbPGge2oVhs
-	7X7CHHpkQdUqSV1H9TjQXW8FNCbdTZqKAYJLoWGSfKM0coOjOuV+HQBf/k+0zaMnlmBQ
-	dHuUl6PwW85LLF954rOZIg7Es36f8WzjJBUxLb5nDsBxh6KglOyB/Xlf/wbXOvpUe6Fd
-	yuAse4nAI/OehlN4bP108VSRpGKfKVprK3WFj7M3la6AY9RJuEGA4JGiWCcjlaCqPf6L
-	BVSwngfsFVyUvi41nWB39pnrQs82dD0ZYwK8AuoWnhPOT/sh2zl+B/cErM3Q9LArdAds
-	wohg==
-X-Received: by 10.15.36.2 with SMTP id h2mr39940180eev.2.1365859822294;
-	Sat, 13 Apr 2013 06:30:22 -0700 (PDT)
+	:references; bh=UToymKPWwhZuSoSS/WGN9OFFkMgEFLFMY0DLYn0a6rA=;
+	b=QP+UqAW+2TIjNKKmbW1RaErPwVvnWhmem8RA9ajANfA+GAiuTjLsurxvrcVK3TQBlf
+	gS1SCJ7Uc7ouSI9IRaN64JnKDtRt7HGo2ntsvjwhXlKNnf+gIrRT2sv5MANdZxqV93Pt
+	6loSiU3xVHTyuVPtrXi9Ooiz0wzAKSEDM27O4FTgF/L6Mc7GB+p2F6IA1KcLk8gjwueC
+	NsyynJCM1qAbZolf6MX4ATnxWJFjpEgrV53B5v9Zjv5qCQd9XreyO108tjfQsQXbOkKC
+	FunljR+Ewv0X+19xhCnNvReUq/UCEli8Y9/FdGZ/xJcXKa2+x9b7J+miAi39X1iCQbuA
+	peGg==
+X-Received: by 10.15.21.1 with SMTP id c1mr39401109eeu.36.1365859828752;
+	Sat, 13 Apr 2013 06:30:28 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id d47sm16436604eem.9.2013.04.13.06.30.21
+	by mx.google.com with ESMTPS id cd3sm16465664eeb.6.2013.04.13.06.30.28
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:30:21 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:41 +0200
-Message-Id: <1365859790-20947-24-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:46 +0200
+Message-Id: <1365859790-20947-29-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 24/33] zram: move systemd support from meta-systemd back to meta-oe
+Subject: [meta-systemd][PATCH 29/33] networkmanager: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,81 +46,84 @@ X-List-Received-Date: Sat, 13 Apr 2013 13:49:24 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-extended/zram/zram/zram.service          |  0
- meta-oe/recipes-extended/zram/zram_0.1.bb            | 13 +++++++++++--
- .../meta-oe/recipes-extended/zram/zram_0.1.bbappend  | 20 --------------------
- 3 files changed, 11 insertions(+), 22 deletions(-)
- rename {meta-systemd/meta-oe => meta-oe}/recipes-extended/zram/zram/zram.service (100%)
- delete mode 100644 meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
+ .../networkmanager/networkmanager_0.9.2.0.bb               | 14 +++++++++-----
+ .../networkmanager/networkmanager_0.9.2.0.bbappend         | 13 -------------
+ 2 files changed, 9 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bbappend
 
-diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service b/meta-oe/recipes-extended/zram/zram/zram.service
-similarity index 100%
-rename from meta-systemd/meta-oe/recipes-extended/zram/zram/zram.service
-rename to meta-oe/recipes-extended/zram/zram/zram.service
-diff --git a/meta-oe/recipes-extended/zram/zram_0.1.bb b/meta-oe/recipes-extended/zram/zram_0.1.bb
-index 8526264..115e643 100644
---- a/meta-oe/recipes-extended/zram/zram_0.1.bb
-+++ b/meta-oe/recipes-extended/zram/zram_0.1.bb
-@@ -2,22 +2,31 @@ DESCRIPTION = "Linux zram compressed in-memory swap"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+index 074e665..cc6abd7 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
+@@ -4,10 +4,12 @@ SECTION = "net/misc"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
  
--inherit allarch update-rc.d
-+inherit allarch update-rc.d systemd
+-PR = "r8"
++PR = "r11"
  
- RDEPENDS_${PN} = "util-linux-swaponoff kmod kernel-module-zram"
- 
--PR = "r0"
-+PR = "r3"
- 
- SRC_URI = " \
-            file://init \
-+           file://zram.service \
-           "
- 
- do_install () {
- 	# Sysvinit
- 	install -d ${D}${sysconfdir}/init.d
- 	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
+ DEPENDS = "libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
+-inherit gnome gettext
++DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 +
-+	install -d ${D}${systemd_unitdir}/system
-+	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
- }
++inherit gnome gettext systemd
  
- FILES_${PN} = "${sysconfdir}/init.d"
- INITSCRIPT_NAME = "zram"
- INITSCRIPT_PARAMS = "start 05 2 3 4 5 . stop 22 0 1 6 ."
-+
-+RPROVIDES_${PN} += "${PN}-systemd"
-+RREPLACES_${PN} += "${PN}-systemd"
-+RCONFLICTS_${PN} += "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN} = "zram.service"
-diff --git a/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend b/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
-deleted file mode 100644
-index 227c1c7..0000000
---- a/meta-systemd/meta-oe/recipes-extended/zram/zram_0.1.bbappend
-+++ /dev/null
-@@ -1,20 +0,0 @@
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
+     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
+@@ -20,8 +22,6 @@ SRC_URI[sha256sum] = "a178ed2f0b5a1045ec47b217ea531d0feba9208f6bcfe64b701174a5c1
+ 
+ S = "${WORKDIR}/NetworkManager-${PV}"
+ 
+-SYSTEMD_UNITDIR ??= "no"
 -
+ EXTRA_OECONF = " \
+ 		--with-distro=debian \
+ 		--with-crypto=gnutls \
+@@ -29,9 +29,10 @@ EXTRA_OECONF = " \
+                 --with-dhclient=${base_sbindir}/dhclient \
+                 --with-iptables=${sbindir}/iptables \
+                 --with-tests \
+-                --with-systemdsystemunitdir=${SYSTEMD_UNITDIR} \
+ "
+ 
++EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
++
+ do_configure_prepend() {
+     cp ${WORKDIR}/gtk-doc.make ${S}/
+     echo "EXTRA_DIST = version.xml" > gnome-doc-utils.make
+@@ -71,6 +72,7 @@ FILES_${PN} += " \
+ 		${datadir}/polkit-1 \
+ 		${datadir}/dbus-1 \
+ 		${base_libdir}/udev/* \
++		${systemd_unitdir}/system/NetworkManager-wait-online.service \
+ "
+ 
+ RRECOMMENDS_${PN} += "iptables"
+@@ -89,3 +91,5 @@ FILES_${PN}-dev += "${datadir}/NetworkManager/gdb-cmd \
+ FILES_${PN}-tests = "${bindir}/nm-tool \
+                      ${bindir}/libnm_glib_test \
+                      ${bindir}/nm-online"
++
++SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
+diff --git a/meta-systemd/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bbappend b/meta-systemd/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bbappend
+deleted file mode 100644
+index 5508fb2..0000000
+--- a/meta-systemd/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bbappend
++++ /dev/null
+@@ -1,13 +0,0 @@
 -PRINC := "${@int(PRINC) + 2}"
 -
 -inherit systemd
 -
--SRC_URI += " \
--        file://zram.service \
+-DEPENDS += "systemd"
+-
+-SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
+-SYSTEMD_UNITDIR = "${systemd_unitdir}/system"
+-
+-# NetworkManager-wait-online is not catched by systemd.bbclass
+-FILES_${PN} += " \
+-                ${systemd_unitdir}/system/NetworkManager-wait-online.service \
 -"
--
--RPROVIDES_${PN} += "${PN}-systemd"
--RREPLACES_${PN} += "${PN}-systemd"
--RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "zram.service"
--
--do_install_append() {
--	install -d ${D}${systemd_unitdir}/system
--	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
--}
--
 -- 
 1.8.1.5
 
