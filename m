@@ -1,34 +1,34 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f172.google.com ([209.85.215.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR0nb-0007Un-TX
+	(envelope-from <martin.jansa@gmail.com>) id 1UR0nw-0007Xg-M8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 15:47:30 +0200
-Received: by mail-ee0-f47.google.com with SMTP id t10so1593005eei.6
+	Sat, 13 Apr 2013 15:47:46 +0200
+Received: by mail-ea0-f172.google.com with SMTP id z7so1572141eaf.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 06:29:58 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=SPWOFa9XhnQGD+SawapgK3wyUPT/C0vD1oMq2XgnmOM=;
-	b=EXBwOAstE5aIbF5OvQ94Q2At4c6S9H3Eo4PXOcOOcUOW1XGb3dRYFtxIRqNgj8TFPx
-	wTXyn4gQ4yWl0x2dWAVDcz2+vJjEd8cr/Q2k6E48SGlu3NvripcLz4n2DGA5qGdHWocy
-	E5zq8YmUaSRRdKXZaX65hlgGVk3DT/fv8TsTwrelUkjWlPI+9t6AeBrsrLY9+sf8xl64
-	z1WZKX2AOe1H6tqrC95EdfWaatAwZh48EXfh73E0v9h2PFQfgesMxWU/Ccp9L1wzMdVl
-	CVOsOzlPaFl/7kPczmvFNzqQSDzS8NpFIVnlGSxO/lUsN5Nk4GfJnfk+ah5qE38wU219
-	2QqQ==
-X-Received: by 10.14.201.67 with SMTP id a43mr21935748eeo.33.1365859798254;
-	Sat, 13 Apr 2013 06:29:58 -0700 (PDT)
+	:references; bh=THdjMmTtAe01MfL0BGXzhALAQa2NIeQxnk24whYoZyI=;
+	b=cf4DeRHoV1H0cVxxGeVdJ9PhZnB1kVTFt2gUNHqxPuFZkJ1Rjo8OKLx3rfslrfDD6f
+	KGpBJy7dnIbyeC7JREvMPSYnhEh7vPcv78+3gkyK65uzuTtftG+/lO6Bt6+uTwTJiEP7
+	mtQgNkxTlcSHxusMkm9Tq55LlEKZiLjWMa7Woz9pJWobZQcb9Ac1idAN7rgi46yStUlc
+	Y81AOh722xmp1tepXrO/hxLp4BXVKRSfMGHFD3N74qWqfY35FiFE5xvX8EcF+FuklmMY
+	myfWRhCRzUkCWfynD+BOwv5P/maXLxt11c7TEQn774wUeFBhcLCR5bdoKW37TY4LGVlQ
+	wosA==
+X-Received: by 10.15.32.67 with SMTP id z43mr39514296eeu.24.1365859819071;
+	Sat, 13 Apr 2013 06:30:19 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ca4sm16372352eeb.15.2013.04.13.06.29.57
+	by mx.google.com with ESMTPS id d47sm16436384eem.9.2013.04.13.06.30.18
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 06:29:57 -0700 (PDT)
+	Sat, 13 Apr 2013 06:30:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 15:29:24 +0200
-Message-Id: <1365859790-20947-7-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 13 Apr 2013 15:29:39 +0200
+Message-Id: <1365859790-20947-22-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 07/33] gdm: move systemd support from meta-systemd back to meta-gnome
+Subject: [meta-systemd][PATCH 22/33] gateone: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,103 +42,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 13:47:43 -0000
-X-List-Received-Date: Sat, 13 Apr 2013 13:47:43 -0000
-X-List-Received-Date: Sat, 13 Apr 2013 13:47:43 -0000
+X-List-Received-Date: Sat, 13 Apr 2013 13:48:57 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gdm/gdm                            |  0
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb           | 17 +++++++++++------
- .../meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend | 20 --------------------
- 3 files changed, 11 insertions(+), 26 deletions(-)
- rename meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in => meta-gnome/recipes-gnome/gdm/gdm (100%)
- delete mode 100644 meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+ .../recipes-connectivity/gateone/gateone/gateone.service |  0
+ meta-oe/recipes-connectivity/gateone/gateone_git.bb      | 10 ++++++++--
+ .../recipes-connectivity/gateone/gateone_git.bbappend    | 16 ----------------
+ 3 files changed, 8 insertions(+), 18 deletions(-)
+ rename {meta-systemd/meta-oe => meta-oe}/recipes-connectivity/gateone/gateone/gateone.service (100%)
+ delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/gateone/gateone_git.bbappend
 
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in b/meta-gnome/recipes-gnome/gdm/gdm
+diff --git a/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/gateone.service b/meta-oe/recipes-connectivity/gateone/gateone/gateone.service
 similarity index 100%
-rename from meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in
-rename to meta-gnome/recipes-gnome/gdm/gdm
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-index 863db2e..45bddc8 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
+rename from meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/gateone.service
+rename to meta-oe/recipes-connectivity/gateone/gateone/gateone.service
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index e9c182d..3552009 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -2,18 +2,19 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+ LICENSE = "AGPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
  
 -PR = "r10"
-+PR = "r15"
++PR = "r13"
  
--inherit gnome update-rc.d
-+inherit gnome update-rc.d systemd
+ PV = "1.1"
+ SRCREV = "ea5db3dcb3bbbe445ae6d1a5611c1f8d547c57b9"
+ SRC_URI = "git://github.com/liftoff/GateOne.git \
+            file://gateone-avahi.service \
+            file://server.conf \
++           file://gateone.service \
+           "
  
- SRC_URI += " \
-             file://cross-xdetection.diff \
-@@ -17,6 +17,7 @@ SRC_URI += " \
-             file://gdm.conf \
-             file://gdm-pam \
-             file://Default \
-+            file://gdm.service.in \
-            "
+ S = "${WORKDIR}/git"
  
- SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
-@@ -49,6 +50,10 @@ do_install_append() {
- 	install -d ${D}/${sysconfdir}/gdm/Init
- 	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
+-inherit distutils allarch python-dir
++inherit distutils allarch python-dir systemd
  
+ export prefix = "${localstatedir}/lib"
+ 
+@@ -24,6 +25,9 @@ do_install_append() {
+ 	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+ 
+ 	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
++	
 +	install -d ${D}${systemd_unitdir}/system
-+	sed -e 's,%sbindir%,${sbindir},g' \
-+		< ${WORKDIR}/gdm.service.in \
-+		> ${D}${systemd_unitdir}/system/gdm.service
++	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
  }
  
- FILES_${PN} += "${datadir}/icon* \
-@@ -60,6 +65,10 @@ RDEPENDS_${PN} += "grep dbus-x11 shadow"
- CONFFILES_${PN} += "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gdm"
- RRECOMMENDS_${PN} += "openssh-misc desktop-file-utils glib-2.0-utils metacity gnome-session polkit-gnome consolekit"
- 
-+RREPLACES_${PN} += "${PN}-systemd"
-+RCONFLICTS_${PN} += "${PN}-systemd"
-+SYSTEMD_SERVICE_${PN} = "gdm.service"
+ FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
+@@ -57,3 +61,5 @@ RDEPENDS_${PN} = "file \
+                   python-unixadmin \
+                   python-xml \
+                  "
 +
- INITSCRIPT_NAME = "gdm"
- INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
- 
-@@ -87,7 +96,3 @@ pkg_postrm_${PN} () {
-     delgroup gdm || true
- 	sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
- }
--
--
--
--
-diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
++SYSTEMD_SERVICE_${PN} = "gateone.service"
+diff --git a/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone_git.bbappend b/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone_git.bbappend
 deleted file mode 100644
-index 6201352..0000000
---- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+index 8ec9dfa..0000000
+--- a/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone_git.bbappend
 +++ /dev/null
-@@ -1,20 +0,0 @@
--# look for files in the layer first
+@@ -1,16 +0,0 @@
 -FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 -
--PRINC := "${@int(PRINC) + 4}"
+-PRINC := "${@int(PRINC) + 2}"
 -
 -inherit systemd
 -
--SRC_URI += "file://gdm.service.in"
+-SRC_URI += "file://gateone.service"
+-
+-NATIVE_SYSTEMD_SUPPORT = "1"
+-SYSTEMD_SERVICE_${PN} = "gateone.service"
 -
 -do_install_append() {
 -	install -d ${D}${systemd_unitdir}/system
--	sed -e 's,%sbindir%,${sbindir},g' \
--		< ${WORKDIR}/gdm.service.in \
--		> ${D}${systemd_unitdir}/system/gdm.service
+-	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
 -}
 -
--RPROVIDES_${PN} += "${PN}-systemd"
--RREPLACES_${PN} += "${PN}-systemd"
--RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "gdm.service"
 -- 
 1.8.1.5
 
