@@ -1,34 +1,48 @@
-Received: from mail-pb0-f46.google.com ([209.85.160.46])
+Received: from nm19-vm0.bullet.mail.ne1.yahoo.com ([98.138.91.59])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UR2Mq-0003KI-BQ
+	(envelope-from <prabindh@yahoo.com>) id 1UR2hS-0005IJ-Of
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Apr 2013 17:28:23 +0200
-Received: by mail-pb0-f46.google.com with SMTP id rp8so1857333pbb.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Apr 2013 08:10:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=DL9IM6TD/aNtxQdzcbMslGF95Yc1EmyqbWGQxeFlgzM=;
-	b=Gcei2t3jkt+H+8kYD9jiMDTODTlBxjOX+r558qjZR9BWvaceElyQKhOBca7y/5ZQm/
-	P8vZOF4fE3zzYEtRZ1knOIngKXNkT17TcE85N8/mGBAaSkDVi08HigjujkgaGuYcjuMR
-	Xy6A3LamKk98AByit0GN/aLkoZOld8NDPczqfK6B7P1fInnyZYFVs1Ng6aAdq2lZmchx
-	l7L9kiSNsRFEcZag63AQjPQWfarZg5gT2tr6QvL2eLX2m3nZDQ8105j+LnJJ13jsdbuX
-	TKb2Q5zgufqO6p4aPomQSq9XN/Y4Yljf+fvcw0h93+95lK0pT0lOJc7e2+bW4csoHKER
-	gDog==
-X-Received: by 10.66.245.75 with SMTP id xm11mr20977699pac.40.1365865825619;
-	Sat, 13 Apr 2013 08:10:25 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id ce16sm14186089pac.5.2013.04.13.08.10.22
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 13 Apr 2013 08:10:24 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Apr 2013 17:10:19 +0200
-Message-Id: <1365865819-23608-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-In-Reply-To: <20130313161800.GK3260@jama>
-References: <20130313161800.GK3260@jama>
-Subject: [meta-oe][PATCH] minidlna: move to nonworking directory
+	Sat, 13 Apr 2013 17:49:13 +0200
+Received: from [98.138.226.176] by nm19.bullet.mail.ne1.yahoo.com with NNFMP;
+	13 Apr 2013 15:29:16 -0000
+Received: from [98.138.89.171] by tm11.bullet.mail.ne1.yahoo.com with NNFMP;
+	13 Apr 2013 15:29:16 -0000
+Received: from [127.0.0.1] by omp1027.mail.ne1.yahoo.com with NNFMP;
+	13 Apr 2013 15:29:16 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 405885.63040.bm@omp1027.mail.ne1.yahoo.com
+Received: (qmail 35694 invoked by uid 60001); 13 Apr 2013 15:29:16 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1365866956; bh=zF4JnP05vitl1eKwtEhjdllr8EKWZ9AVQJUZ5CRY0pU=;
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=SWrmmAppITrsHq0p0zcYmF3TSAKeQrIhU8Af5Bdtfs9+Y92Xt9iHx2NB60NZxOVEhnfKPeX0JqIwKOluQXSNd7IJkdfXtjUbPCIE6JTWcNTbUmF7mATgS4MOaWtDzAwgn/h/JoboppYKPD+Fb8tApAy8mY5y0cCD1KtZ+l3XVsI=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=xMyicLfGMgHcXg+KF8egDc7wJBMBtUlmXvcQONgAYR/IM5wApFNgjcbo1KwbnwY4p41SiDeK5PteWLNF20FIUq9VCEP7bzAkuf8Cnk5oRwb9r0szAGGW7xGHGXmXt/Wctbs4y3KZMqzqTQxmfevnjVIsnClXm4pQeDJ98B0uKyk=;
+X-YMail-OSG: mYxeafcVM1mBW77y3faG4p3cFZXT2Tvb4PRqM6vwvIvW1hD
+	PuRhVvitZThwoz1WAopmAcIafhS814wwRuU.n3uEqrREuZ_cO7HJEPk_bKb1
+	hRnvV7taKxv9ux9hm59IQT60.G68HAaKbedbAWLvyl8myZHAc1JfMR5GBee1
+	4tQ.Wu0cuWHi8ooOpRikCBUtdC4G8Ocf_OvEXe8n.Fv3XYbCfLb3uvLeC54v
+	lL_vc_xtVfn.Vaz6XLUYtkXK86mFFXuXiWI9eqWLu4R4uRxFKzwcsAhezxCG
+	5d98.i1eJc3tucPJ3U6CMyftQeOLN4dheI_GByS4jrCOc5ao3TkamPm_XI8w
+	vN6U0a8h1Ci5GEVvzGRJwe7PsiPc_62HKX8SVWWxVQ1EzEJYBG0HA_xcZbmN
+	D_PWYbaFDEnY9OfgLaYjgtrEqMGCWmdzdOoiHqDjHfbVAJ7MTIH5r2ysLCYf
+	Y80jXvJstVtwNePMF0Sl8r7Esr91rjxD_b5sSPev4Yv1XxrP6XYoSg6N_fhS
+	YCk1TKx.1gjdlKPjetcVUGj2XFYTuzA26xWtWmdUO.yDUTHMvkx9utSwN2ea
+	rqAI0D5Cp1DnxBfj0HX_j4nayiwE0YtLDAMwWw.95612LtM4Ov6CGnjIgn6I
+	81mALhE5J2qf7pbJ7er2w
+Received: from [122.172.26.27] by web125602.mail.ne1.yahoo.com via HTTP;
+	Sat, 13 Apr 2013 08:29:16 PDT
+X-Rocket-MIMEInfo: 002.001,
+	QmVsb3cgZ2l0aHViIGxpbmsgaGFzIFF0NSBlZ2xmcyBwYXRjaGVzIGZvciByZXZpZXcgLSBmb3Igd29ya2luZyB3aXRoIGdsZXMyIHBsYXRmb3Jtcy4gSXMgdGhpcyB0aGUgcmlnaHQgd2F5IHRvIHN1Ym1pdCBmb3IgcmV2aWV3ID8gSWYgbm90LCBzaG91bGQgSSBzdWJtaXQgaW5kaXZpZHVhbCBwYXRjaGVzID8KCgpodHRwczovL2dpdGh1Yi5jb20vcHJhYmluZGgvbWV0YS1xdDUvY29tbWl0L2M4MTI5ZmI1MDU3ZjkyNTRjNzczZjgyZDJmZGJkODVkOWM1NjQxMGEKCkkgcmFuIGludG8gdGhlIGlzc3VlIG9mIG0BMAEBAQE-
+X-Mailer: YahooMailWebService/0.8.140.532
+Message-ID: <1365866956.81107.YahooMailNeo@web125602.mail.ne1.yahoo.com>
+Date: Sat, 13 Apr 2013 08:29:16 -0700 (PDT)
+From: Prabindh Sundareson <prabindh@yahoo.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+Subject: [meta-qt5] Qt5.0.1 eglfs with gles2 - patchset
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,41 +56,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Apr 2013 15:28:29 -0000
+X-List-Received-Date: Sat, 13 Apr 2013 15:49:15 -0000
+Content-Type: text/plain; charset=us-ascii
 
-* distro-less build for qemuarm fails:
-| Linking minidlna
-| arm-oe-linux-gnueabi-gcc: error: getifaddr.o: No such file or directory
-| arm-oe-linux-gnueabi-gcc: error: sql.o: No such file or directory
-| arm-oe-linux-gnueabi-gcc: error: inotify.o: No such file or directory
-| make: *** [minidlna] Error 1
+Below github link has Qt5 eglfs patches for review - for working with gles2 platforms. Is this the right way to submit for review ? If not, should I submit individual patches ?
 
-* http://comments.gmane.org/gmane.comp.handhelds.openembedded/56989
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../{ => nonworking}/minidlna/minidlna/fix-makefile.patch                 | 0
- .../minidlna/minidlna/search-for-headers-in-staging-dir.patch             | 0
- meta-oe/recipes-multimedia/{ => nonworking}/minidlna/minidlna_1.0.25.bb   | 0
- 3 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-multimedia/{ => nonworking}/minidlna/minidlna/fix-makefile.patch (100%)
- rename meta-oe/recipes-multimedia/{ => nonworking}/minidlna/minidlna/search-for-headers-in-staging-dir.patch (100%)
- rename meta-oe/recipes-multimedia/{ => nonworking}/minidlna/minidlna_1.0.25.bb (100%)
+https://github.com/prabindh/meta-qt5/commit/c8129fb5057f9254c773f82d2fdbd85d9c56410a
 
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
-similarity index 100%
-rename from meta-oe/recipes-multimedia/minidlna/minidlna/fix-makefile.patch
-rename to meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
-similarity index 100%
-rename from meta-oe/recipes-multimedia/minidlna/minidlna/search-for-headers-in-staging-dir.patch
-rename to meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
-similarity index 100%
-rename from meta-oe/recipes-multimedia/minidlna/minidlna_1.0.25.bb
-rename to meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
--- 
-1.8.1.5
+I ran into the issue of managing the GL providers for eglfs support, and currently using a DISTRO_FEATURE check for virtual/libgl support and 
+falling back to libgles2. I am sure there are better ways.
+
+This is build tested on Poky, with Yocto, and runtime checked with minimal plugin on Beaglebone, with TI SGX530 drivers on 3.8.5 kernel. There is no fb support on Beaglebone yet, but I hope to get to Arago on one of the EVMs next.
+
+
+Please provide comments.
+
+regards
+Prabindh
 
 
 
