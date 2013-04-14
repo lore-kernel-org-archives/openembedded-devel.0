@@ -1,37 +1,37 @@
-Received: from mail-ea0-f181.google.com ([209.85.215.181])
+Received: from mail-ea0-f174.google.com ([209.85.215.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UROWx-0004wg-Di
+	(envelope-from <martin.jansa@gmail.com>) id 1UROZS-0005Ai-E2
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Apr 2013 17:08:13 +0200
-Received: by mail-ea0-f181.google.com with SMTP id z10so1802736ead.12
+	Sun, 14 Apr 2013 17:10:27 +0200
+Received: by mail-ea0-f174.google.com with SMTP id m14so1881392eaj.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2013 07:50:20 -0700 (PDT)
+	Sun, 14 Apr 2013 07:52:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=nzzNMawCFNqM1ka5iy+354EYoIe2b4R/mywoZt0qox4=;
-	b=y1J0LvTUCAOB60TbXXcVNWQaWYLjgP5J+aiKjEocP4QltM5jr+UW7g7dkT8mifcusI
-	/bn+cvnrPsY5cIrOMs+/J+wXovKXk7ekOgZKFeIcWupTn8d463W2UpT7KZEten1Mmxej
-	IUfOcULUeHH00Vfx2vX0Lt73ndO9gwfCinLMS72VSDjoJ1GMBM64Dpp/EHLvhGHWSfHM
-	urKLAr2mukJ3gAQU8qeYy3a5w9Y228GirvlXc/u5F3S6DrcWLQ8EDSvrcOhcKdxmdsun
-	Kot/JtXEgNRWfXfPsPR3C+SA6mktKyj3Xz/9zSjBsAZeKjSAt4rbD74mnkPEqnSWNEb0
-	vnbA==
-X-Received: by 10.14.215.193 with SMTP id e41mr32608735eep.32.1365951020242;
-	Sun, 14 Apr 2013 07:50:20 -0700 (PDT)
+	bh=phOWNu5uoFOn+eNiRFEeV4J9AJ2grzFj6uOXOTNjqlA=;
+	b=ThKqDliq79yClrIsNKXZ5DTFSNt95XVC3xh1Lg3SeqJo9SUIb5DY5qsXDc3DWVDj+n
+	pETztynkiPTAI1ygjdyXiyiPvYM7Kf47vtA22QeDVPigv344NTCAMM/cbRtUfrUNzLsr
+	pu+3rIkjepn/TUY4pT0AeCc32k5M4QAuxN9+Kk8amMnW0ULFQO06GIN9Bwi5PzNF8p8m
+	6lwysaeAI0S8ukNerVKTglkdSQRBBe/FLt19ZwlwDKyQa4OclsrYNnuTKtlNfEGVy6pb
+	wFwaeROSbLs0F7aptl0j10NF443x470OUKRk7q9USKHXMUCCxLKloYbnZQU95kHN91Xh
+	/+Nw==
+X-Received: by 10.14.149.141 with SMTP id x13mr19259540eej.31.1365951174908;
+	Sun, 14 Apr 2013 07:52:54 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id cd3sm21896025eeb.6.2013.04.14.07.50.19
+	by mx.google.com with ESMTPS id cd3sm21906240eeb.6.2013.04.14.07.52.53
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 14 Apr 2013 07:50:19 -0700 (PDT)
-Date: Sun, 14 Apr 2013 16:50:24 +0200
+	Sun, 14 Apr 2013 07:52:54 -0700 (PDT)
+Date: Sun, 14 Apr 2013 16:52:59 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130414145024.GB2475@jama>
+Message-ID: <20130414145259.GC2475@jama>
 References: <1365859790-20947-1-git-send-email-Martin.Jansa@gmail.com>
-	<1365859790-20947-7-git-send-email-Martin.Jansa@gmail.com>
+	<1365859790-20947-14-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1365859790-20947-7-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1365859790-20947-14-git-send-email-Martin.Jansa@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-systemd][PATCH 07/33] gdm: move systemd support from meta-systemd back to meta-gnome
+Subject: Re: [meta-systemd][PATCH 14/33] dnsmasq: move systemd support from meta-systemd back to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,127 +45,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2013 15:08:27 -0000
-X-Groupsio-MsgNum: 44161
+X-List-Received-Date: Sun, 14 Apr 2013 15:10:40 -0000
+X-Groupsio-MsgNum: 44162
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="b5gNqxB1S1yM7hjW"
+	protocol="application/pgp-signature"; boundary="TYecfFk8j8mZq+dy"
 Content-Disposition: inline
 
---b5gNqxB1S1yM7hjW
+--TYecfFk8j8mZq+dy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 13, 2013 at 03:29:24PM +0200, Martin Jansa wrote:
+On Sat, Apr 13, 2013 at 03:29:31PM +0200, Martin Jansa wrote:
 > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  .../recipes-gnome/gdm/gdm                            |  0
->  meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb           | 17 +++++++++++---=
----
->  .../meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend | 20 --------------=
+>  meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc       | 14 ++++++++++++=
+--
+>  .../dnsmasq/dnsmasq/dnsmasq.service                    |  0
+>  meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb   |  2 ++
+>  .../recipes-connectivity/dnsmasq/dnsmasq_2.55.bbappend | 18 ------------=
 ------
->  3 files changed, 11 insertions(+), 26 deletions(-)
->  rename meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in =3D>=
- meta-gnome/recipes-gnome/gdm/gdm (100%)
->  delete mode 100644 meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.=
-bbappend
+>  4 files changed, 14 insertions(+), 20 deletions(-)
+>  rename {meta-systemd/meta-oe =3D> meta-oe}/recipes-connectivity/dnsmasq/=
+dnsmasq/dnsmasq.service (100%)
+>  delete mode 100644 meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dns=
+masq_2.55.bbappend
+
+this breaks dnsmasq-dbus which is using the same .inc. dnsmasq-dbus
+removal is in separate patch.
+
 >=20
-> diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in=
- b/meta-gnome/recipes-gnome/gdm/gdm
-> similarity index 100%
-> rename from meta-systemd/meta-gnome/recipes-gnome/gdm/gdm/gdm.service.in
-> rename to meta-gnome/recipes-gnome/gdm/gdm
-
-#       renamed:    gdm -> gdm/gdm.service.in
-
-In my local branch
-
-> diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/reci=
-pes-gnome/gdm/gdm_2.32.2.bb
-> index 863db2e..45bddc8 100644
-> --- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-> +++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-> @@ -4,9 +4,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba3=
-6caa9b7df079bae19f"
+> diff --git a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc b/meta-oe/r=
+ecipes-connectivity/dnsmasq/dnsmasq.inc
+> index d6f3a54..ef99f48 100644
+> --- a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+> +++ b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq.inc
+> @@ -9,9 +9,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215=
+e8d672dc4c32c317bb3 \
+>  #at least versions 2.15 and prior are moved to the archive folder on the=
+ server
+>  SRC_URI =3D "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][fl=
+oat(d.getVar('PV',1).split('.')[1]) > 15]}dnsmasq-${PV}.tar.gz;name=3Ddnsma=
+sq-${PV} \
+>             file://init \
+> -           file://dnsmasq.conf"
+> +           file://dnsmasq.conf \
+> +           file://dnsmasq.service \
+> +"
 > =20
->  DEPENDS =3D "xinput gnome-panel tcp-wrappers libcanberra libxklavier gre=
-p consolekit libpam gnome-doc-utils gtk+ xrdb"
+> -inherit update-rc.d
+> +inherit update-rc.d systemd
 > =20
-> -PR =3D "r10"
-> +PR =3D "r15"
-> =20
-> -inherit gnome update-rc.d
-> +inherit gnome update-rc.d systemd
-> =20
->  SRC_URI +=3D " \
->              file://cross-xdetection.diff \
-> @@ -17,6 +17,7 @@ SRC_URI +=3D " \
->              file://gdm.conf \
->              file://gdm-pam \
->              file://Default \
-> +            file://gdm.service.in \
->             "
-> =20
->  SRC_URI[archive.md5sum] =3D "dbe5187a2e17881cc454e313e0ae8d1e"
-> @@ -49,6 +50,10 @@ do_install_append() {
->  	install -d ${D}/${sysconfdir}/gdm/Init
->  	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
-> =20
-> +	install -d ${D}${systemd_unitdir}/system
-> +	sed -e 's,%sbindir%,${sbindir},g' \
-> +		< ${WORKDIR}/gdm.service.in \
-> +		> ${D}${systemd_unitdir}/system/gdm.service
+>  INITSCRIPT_NAME =3D "dnsmasq"
+>  INITSCRIPT_PARAMS =3D "defaults"
+> @@ -24,6 +26,14 @@ do_install () {
+>          install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d ${D}${sys=
+confdir}/dnsmasq.d
+>          install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
+>          install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+> +
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir=
+}/system
 >  }
 > =20
->  FILES_${PN} +=3D "${datadir}/icon* \
-> @@ -60,6 +65,10 @@ RDEPENDS_${PN} +=3D "grep dbus-x11 shadow"
->  CONFFILES_${PN} +=3D "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gd=
-m"
->  RRECOMMENDS_${PN} +=3D "openssh-misc desktop-file-utils glib-2.0-utils m=
-etacity gnome-session polkit-gnome consolekit"
-> =20
+>  CONFFILES_${PN} =3D "${sysconfdir}/dnsmasq.conf"
+> +
+> +RPROVIDES_${PN} +=3D "${PN}-systemd"
 > +RREPLACES_${PN} +=3D "${PN}-systemd"
 > +RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> +SYSTEMD_SERVICE_${PN} =3D "gdm.service"
-> +
->  INITSCRIPT_NAME =3D "gdm"
->  INITSCRIPT_PARAMS =3D "start 99 5 2 . stop 20 0 1 6 ."
+> +SYSTEMD_SERVICE_${PN} =3D "dnsmasq.service"
+> diff --git a/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dn=
+smasq.service b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service
+> similarity index 100%
+> rename from meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dns=
+masq.service
+> rename to meta-oe/recipes-connectivity/dnsmasq/dnsmasq/dnsmasq.service
+> diff --git a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb b/meta-=
+oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+> index 5f87704..ae37db7 100644
+> --- a/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+> +++ b/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bb
+> @@ -1,4 +1,6 @@
+>  require dnsmasq.inc
 > =20
-> @@ -87,7 +96,3 @@ pkg_postrm_${PN} () {
->      delgroup gdm || true
->  	sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
->  }
-> -
-> -
-> -
-> -
-> diff --git a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappen=
-d b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+> +PR =3D "r3"
+> +
+>  SRC_URI[dnsmasq-2.55.md5sum] =3D "b093d7c6bc7f97ae6fd35d048529232a"
+>  SRC_URI[dnsmasq-2.55.sha256sum] =3D "cf63ecf5977f00474cbda98376a9d874350=
+0a82fd98e13f43d7037bce9f9f929"
+> diff --git a/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.=
+55.bbappend b/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.5=
+5.bbappend
 > deleted file mode 100644
-> index 6201352..0000000
-> --- a/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
+> index 148586e..0000000
+> --- a/meta-systemd/meta-oe/recipes-connectivity/dnsmasq/dnsmasq_2.55.bbap=
+pend
 > +++ /dev/null
-> @@ -1,20 +0,0 @@
-> -# look for files in the layer first
+> @@ -1,18 +0,0 @@
 > -FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
 > -
-> -PRINC :=3D "${@int(PRINC) + 4}"
+> -PRINC :=3D "${@int(PRINC) + 2}"
 > -
 > -inherit systemd
 > -
-> -SRC_URI +=3D "file://gdm.service.in"
-> -
-> -do_install_append() {
-> -	install -d ${D}${systemd_unitdir}/system
-> -	sed -e 's,%sbindir%,${sbindir},g' \
-> -		< ${WORKDIR}/gdm.service.in \
-> -		> ${D}${systemd_unitdir}/system/gdm.service
-> -}
+> -SRC_URI +=3D "file://dnsmasq.service"
 > -
 > -RPROVIDES_${PN} +=3D "${PN}-systemd"
 > -RREPLACES_${PN} +=3D "${PN}-systemd"
 > -RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> -SYSTEMD_SERVICE_${PN} =3D "gdm.service"
+> -SYSTEMD_SERVICE_${PN} =3D "dnsmasq.service"
+> -
+> -do_install_append() {
+> -	install -d ${D}${systemd_unitdir}/system
+> -	install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
+> -}
+> -
 > --=20
 > 1.8.1.5
 >=20
@@ -173,16 +168,16 @@ d b/meta-systemd/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bbappend
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---b5gNqxB1S1yM7hjW
+--TYecfFk8j8mZq+dy
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFqwjAACgkQN1Ujt2V2gBxOygCcCBFOLri7gr/PjEVQZYuCoLjr
-Td4AnijxxVW4Drdmy9NXjfLW7LMvCXYB
-=os9X
+iEYEARECAAYFAlFqwssACgkQN1Ujt2V2gBz80ACcDH4cfqSIQ69+Nf0zsneRf88r
+vAAAnRJN9iG9j9F649H0fq+R73eHuHZ1
+=p9r9
 -----END PGP SIGNATURE-----
 
---b5gNqxB1S1yM7hjW--
+--TYecfFk8j8mZq+dy--
