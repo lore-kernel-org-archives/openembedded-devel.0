@@ -1,26 +1,32 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-ea0-f181.google.com ([209.85.215.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UROpP-0006hA-ME
+	(envelope-from <martin.jansa@gmail.com>) id 1URPEY-0000Cm-Rk
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Apr 2013 17:26:53 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 14 Apr 2013 08:09:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,471,1363158000"; d="scan'208";a="318046521"
-Received: from unknown (HELO helios.localnet) ([10.255.13.160])
-	by orsmga002.jf.intel.com with ESMTP; 14 Apr 2013 08:09:22 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 14 Apr 2013 16:09:21 +0100
-Message-ID: <9692220.xQMF5DQqQm@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <20130414150423.GF2475@jama>
-References: <1365947374-20385-1-git-send-email-Martin.Jansa@gmail.com>
-	<1549811.0FvVnHz5f8@helios> <20130414150423.GF2475@jama>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] dnsmasq: merge dnsmasq-dbus to main recipe
+	Sun, 14 Apr 2013 17:52:53 +0200
+Received: by mail-ea0-f181.google.com with SMTP id z10so1811557ead.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Apr 2013 08:35:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=uhOnglOlEqhgYcYoAcxL9qRXgNkwqwUisYmh/0SPyG0=;
+	b=M/+2xi4r+OaReogkuEHKX0osM2MIR5oRULfpxhb7gmaDjyjTe3CDJ6d6CxlIx4sYvp
+	PJ4vhG3wRODUY1DdhmOjf/b8fWN3k2vf0wOt6gb8xW/yc7X3aE54xhCIsGHl9i+RAof6
+	NQ1mpjC2sygZwAdoRmBAb3HSphW5wAsbODwF1k1AmqjMNPap2LjNUN7sCkmDaUsbLEK+
+	t14CunytRgpynCZ77xUX+iQuXcJ8QSFfS/OnCgJnrWWJMexECOz0GFG62Nj6AAf8qS6p
+	KSBaOe0Nl34RqMVrIU/L+mxbsm0yVZvwYpIszLJ5z1VvN3knN4wOVa5yaS2W6VTTLtGc
+	CYOw==
+X-Received: by 10.15.41.2 with SMTP id r2mr51906248eev.20.1365953723485;
+	Sun, 14 Apr 2013 08:35:23 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id u44sm22068648eel.7.2013.04.14.08.35.22
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 14 Apr 2013 08:35:22 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 14 Apr 2013 17:35:25 +0200
+Message-Id: <1365953726-4464-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-systemd][PATCH 1/2] systemd: add .bbappend to fix upgrade-path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2013 15:27:03 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 14 Apr 2013 15:53:02 -0000
 
-On Sunday 14 April 2013 17:04:23 Martin Jansa wrote:
-> On Sun, Apr 14, 2013 at 04:01:59PM +0100, Paul Eggleton wrote:
-> > On Sunday 14 April 2013 15:49:34 Martin Jansa wrote:
-> > > * they conflict in sysroot anyway, should be converted to PACKAGECONFIG
-> > > 
-> > >   but because dbus is already built in most images I'll let it for
-> > >   someone
-> > >   who has such use-case
-> > 
-> > Hang on a sec, I agree it's good to get rid of this second recipe, but
-> > you're changing the default - so at least give people a way to influence
-> > it. It's not too hard to put in PACKAGECONFIG now while you're changing
-> > the recipe anyway.
->
-> is there someone who needs dnsmasq without dbus?
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/sysinit.target.wants/systemd-udevd.service
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/sysinit.target.wants/systemd-udev-trigger.service
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/systemd-udevd.service
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/systemd-udev-settle.service
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/systemd-udev-trigger.service
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/sockets.target.wants/systemd-udevd-control.socket
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/sockets.target.wants/systemd-udevd-kernel.socket
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/systemd-udevd-control.socket
+        But that file is already provided by package  * udev-systemd
+ * check_data_file_clashes: Package udev wants to install file /lib/systemd/system/systemd-udevd-kernel.socket
+        But that file is already provided by package  * udev-systemd
 
-It's not too hard to imagine a minimal system that wants one and not the 
-other. We had two recipes originally for a reason. Sure, it's fine if you're 
-already using something that uses dbus and therefore you'll have it anyway, 
-but not everyone is in the same situation.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-systemd/oe-core/recipes-core/systemd/systemd_199.bbappend | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 meta-systemd/oe-core/recipes-core/systemd/systemd_199.bbappend
 
-Cheers,
-Paul
-
+diff --git a/meta-systemd/oe-core/recipes-core/systemd/systemd_199.bbappend b/meta-systemd/oe-core/recipes-core/systemd/systemd_199.bbappend
+new file mode 100644
+index 0000000..c530e02
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-core/systemd/systemd_199.bbappend
+@@ -0,0 +1,5 @@
++PRINC := "${@int(PRINC) + 1}"
++
++RPROVIDES_udev += "udev-systemd"
++RREPLACES_udev += "udev-systemd"
++RCONFLICTS_udev += "udev-systemd"
 -- 
+1.8.1.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
