@@ -1,24 +1,39 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-pd0-f172.google.com ([209.85.192.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1URSqG-0002PX-8E
+	(envelope-from <raj.khem@gmail.com>) id 1URTAA-0004Tt-1P
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Apr 2013 21:44:06 +0200
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 14 Apr 2013 12:26:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,471,1363158000"; d="scan'208";a="286014830"
-Received: from unknown (HELO helios.localnet) ([10.255.13.160])
-	by azsmga001.ch.intel.com with ESMTP; 14 Apr 2013 12:26:30 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Apr 2013 20:26:29 +0100
-Message-ID: <1742489.jOxEEgbE7k@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <5A70C57D-2410-4CCA-8842-147914F13AFD@gmail.com>
+	Sun, 14 Apr 2013 22:04:34 +0200
+Received: by mail-pd0-f172.google.com with SMTP id 5so2150998pdd.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Apr 2013 12:47:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=UdZt6MD5oh2nKDDajQvNuzalgtxh1feNbsXsPr/oqn0=;
+	b=cEIR8zCpV5HN2alRqjjIiF9kYoslC6xsi4BbnsvuneA6aWtuv6NrxuClNu5rAhwA/x
+	UkLTTNRkY5CEKHTXcvxz2c+6RxJ6p2nu1R7QNSnwbhoACqnOd1bpn0tEPUBS5y7KqMUl
+	bW8SgOYQJZNI4+aAlHoPbYBLLwZUDG9KZWRfWCZcov8Xxg3up0hTcu4dC/yLBEGVL2iT
+	BauUazuU1c8C96ZCPxczbqHBFEJbCp9Per7haBkj5PvFVVPexCL1bj4msWwQwqp+dY4d
+	XnQVxeNxgBNKqt08udNOwncNexFGLkZMxSG/TqRRlpHz42rMQeSd+qz4yvbv/hmlxZhf
+	r1Qw==
+X-Received: by 10.66.102.33 with SMTP id fl1mr26270631pab.52.1365968825607;
+	Sun, 14 Apr 2013 12:47:05 -0700 (PDT)
+Received: from jchheda-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id xz4sm17318881pbb.18.2013.04.14.12.47.03
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 14 Apr 2013 12:47:04 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1742489.jOxEEgbE7k@helios>
+Date: Sun, 14 Apr 2013 12:47:05 -0700
+Message-Id: <1C395CEF-30CF-4796-B358-7305FEF0D5C3@gmail.com>
 References: <1365867474-10261-1-git-send-email-Martin.Jansa@gmail.com>
 	<5A70C57D-2410-4CCA-8842-147914F13AFD@gmail.com>
-MIME-Version: 1.0
+	<1742489.jOxEEgbE7k@helios>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1503)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] llvm: Import from meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,25 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2013 19:44:58 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 14 Apr 2013 20:04:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Sunday 14 April 2013 09:18:48 Khem Raj wrote:
-> also see
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-extras/tree/recipes/llvm
 
-That's ancient though. If there's a working recipe elsewhere I'll delete the 
-one in meta-extras. (FYI, most of the stuff in meta-extras is old and broken; 
-the layer is there to preserve recipes in case someone decides to pick them up 
-and get them working again.)
+On Apr 14, 2013, at 12:26 PM, Paul Eggleton =
+<paul.eggleton@linux.intel.com> wrote:
 
-Cheers,
-Paul
+> On Sunday 14 April 2013 09:18:48 Khem Raj wrote:
+>> also see
+>> =
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-extras/tree/recipes/llvm
+>=20
+> That's ancient though. If there's a working recipe elsewhere I'll =
+delete the=20
+> one in meta-extras. (FYI, most of the stuff in meta-extras is old and =
+broken;=20
+> the layer is there to preserve recipes in case someone decides to pick =
+them up=20
+> and get them working again.)
 
--- 
+yes there is I merely wanted to make community aware out there that =
+there is duplication
 
-Paul Eggleton
-Intel Open Source Technology Centre
+>=20
+> Cheers,
+> Paul
+>=20
+> --=20
+>=20
+> Paul Eggleton
+> Intel Open Source Technology Centre
+
 
 
