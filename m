@@ -1,33 +1,35 @@
-Received: from mail-pa0-f54.google.com ([209.85.220.54])
+Received: from mail-ea0-f177.google.com ([209.85.215.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1URk7r-0007rY-6q
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 16:11:30 +0200
-Received: by mail-pa0-f54.google.com with SMTP id fa11so2553424pad.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 06:53:49 -0700 (PDT)
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1URkQC-00010l-W3; Mon, 15 Apr 2013 16:30:20 +0200
+Received: by mail-ea0-f177.google.com with SMTP id q14so2196407eaj.8
+	for <multiple recipients>; Mon, 15 Apr 2013 07:12:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Y72PgSK3M+gWu0yQlnkN+SaAXZmyGJa2o6I8HNFM89E=;
-	b=VZFanu8ozeLHZWW11cjyxcr6xyWCVcknf67Xnyd3j4FsYBRuihYhzp0q8xdEZ/ixGc
-	qLz0KfE8lZi82qiGOd2rTxngZzrqDvDb2tmeoXxFXBodG5RuWmn91RIeXXgq5rY2ucYZ
-	FmkYfVWrzyj1w6wjOpRv/RhtgnG78No2ZScq/5GszGb2I7Mje2JAFqDTE4/58QokA5SK
-	MLBtv1GWTAywzteMZptQUSg7rGNv3D2iuGJNktwcbqU+FPBnk5YA9YNC2iEptKspn/60
-	HudA34vEJXD/8ebUBEd9j5oD2QBQ4qWRbLHjeiEoZQVJeo7syUadFEX/OVJCx9SuxbUR
-	JWog==
-X-Received: by 10.66.230.164 with SMTP id sz4mr29607680pac.124.1366034029579; 
-	Mon, 15 Apr 2013 06:53:49 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id ts3sm20447365pbc.12.2013.04.15.06.53.47
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 15 Apr 2013 06:53:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Apr 2013 06:52:49 -0700
-Message-Id: <1366033969-21963-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-systemd][PATCH] ntp: Create a separate package for sntp
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=B+rh/v8mxku+K/tQ05d9Bl7yxpUfFPY+su4q94hAvZY=;
+	b=js81zVyr2Kw6+5+7JzebrNnVQ0dM2yROez9QnKld4j4BzDigy+6n3MvSSNmYMTklzf
+	aN5mOAXGdF11XJW+B9sq+j30idWww19MI66RRNJ67HC+qx6zRwCYuiJW6pjX0BN8RcDF
+	Q4eSkVJnLSMbqu+MQdKp0v/3zmgr7wGq5S7RtOnX1L+uRMH//T5ajsXC3Dad2fb1SGQS
+	icL4FJwNdSvVVpSLFgLxsxt0BEp2fVuDsOmoXpU7W0n7kzMZmsh/yAPDZnYVLRqoXUvA
+	DLq3JWNMgtSskmBqrkCcft2ex19kskv86+8vKg/kjLXjywivE+Tyj3dKGKioulsTlDs2
+	Qo9A==
+X-Received: by 10.15.75.70 with SMTP id k46mr17004263eey.4.1366035168097;
+	Mon, 15 Apr 2013 07:12:48 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id a2sm25613527eem.11.2013.04.15.07.12.46
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 07:12:47 -0700 (PDT)
+Date: Mon, 15 Apr 2013 16:12:53 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Message-ID: <20130415141253.GC10628@jama.dyndns-home.com>
+References: <20121213174202.GE3356@jama.jama.net>
+MIME-Version: 1.0
+In-Reply-To: <20121213174202.GE3356@jama.jama.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,108 +43,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 14:11:30 -0000
-X-List-Received-Date: Mon, 15 Apr 2013 14:11:30 -0000
+X-List-Received-Date: Mon, 15 Apr 2013 14:30:30 -0000
+X-Groupsio-MsgNum: 44199
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="R+My9LyyhiUvIEro"
+Content-Disposition: inline
 
-sntp provides the functionality of obsoleted ntpdate
-so we have option of using ntpd as well as sntp
-sntp does the immediate one time sync with time
-server and corrects the tme immediately. it
-replaces ntpdate nicely.
+--R+My9LyyhiUvIEro
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-support/ntp/ntp.inc        |    3 ++-
- .../meta-networking/recipes-support/ntp/ntp/sntp   |    1 +
- .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
- .../recipes-support/ntp/ntp_4.2.6p5.bbappend       |    9 ++++++++-
- 4 files changed, 22 insertions(+), 2 deletions(-)
- create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
- create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
+Hi,
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index d93f22d..cec0f22 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -54,7 +54,7 @@ do_install_append() {
- 	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
- }
- 
--PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
-+PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
- # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
- 
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-@@ -69,6 +69,7 @@ RSUGGESTS_${PN} = "iana-etc"
- 
- FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
- FILES_${PN}-tickadj = "${bindir}/tickadj"
-+FILES_sntp = "${bindir}/sntp"
- FILES_${PN}-utils = "${bindir}"
- FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate-sync ${bindir}/ntpdate-sync ${sysconfdir}/default/ntpdate"
- 
-diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
-new file mode 100644
-index 0000000..f8c5895
---- /dev/null
-+++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
-@@ -0,0 +1 @@
-+NTPSERVER="ntpserver.example.org"
-diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
-new file mode 100644
-index 0000000..0f09e43
---- /dev/null
-+++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Simple Network Time Service Client
-+After=network.target
-+
-+[Service]
-+Type=oneshot
-+EnvironmentFile=-/etc/default/sntp
-+ExecStart=/usr/bin/sntp -s $NTPSERVER
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
-index 7f2a796..c34bc96 100644
---- a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
-+++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappend
-@@ -4,8 +4,9 @@ PRINC := "${@int(PRINC) + 2}"
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
--SYSTEMD_PACKAGES = "${PN} ntpdate"
-+SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
- SYSTEMD_SERVICE_${PN} = "ntpd.service"
-+SYSTEMD_SERVICE_sntp = "sntp.service"
- SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
-@@ -15,14 +16,20 @@ RREPLACES_ntpdate += "ntpdate-systemd"
- RCONFLICTS_ntpdate += "ntpdate-systemd"
- 
- FILES_ntpdate += "${systemd_unitdir}/system/ntpdate.service"
-+FILES_sntp += "${sysconfdir}/default/sntp"
- 
- SRC_URI += " \
- 	file://ntpdate.service \
-         file://ntpd.service \
-+        file://sntp.service \
-+        file://sntp \
- "
- 
- do_install_append() {
- 	install -d ${D}${systemd_unitdir}/system
-+	install -d ${D}${sysconfdir}/default
- 	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
- 	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-+	install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
-+	install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
- }
--- 
-1.7.9.5
+just reminder of pending build issues with distro-less qemuarm world buils,
+unfortunately a lot of these recipes are still there since I started to send
+"world build status", so I will comment only on new or suspicious entries.
 
+Complete log as always available at
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30415_033339.log/
 
+qemux86 and qemux86-64 still running (one build takes +- 24hours)
 
+# old entries:
+meta-openembedded/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb, do_=
+compile
+meta-openembedded/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.26.0.b=
+b, do_compile
+meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb, do_c=
+ompile
+meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0=
+=2E2.bb, do_configure
+openembedded-core/meta/recipes-graphics/mesa/mesa-demos_8.0.1.bb, do_compile
+meta-openembedded/meta-oe/recipes-kernel/compat-wireless/compat-wireless-al=
+l_3.6.8.bb, do_compile
+meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb, do_=
+compile
+meta-openembedded/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.=
+bb, do_configure
+meta-openembedded/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb, d=
+o_compile
+meta-openembedded/meta-oe/recipes-multimedia/vlc/vlc_1.1.11.bb, do_compile
+meta-openembedded/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb, do_=
+configure
+openembedded-core/meta/recipes-devtools/qemu/qemu_1.4.0.bb, do_compile
+meta-openembedded/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb, do_comp=
+ile
+meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, do_=
+compile
+meta-openembedded/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0=
+=2Ebb, do_compile
+meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-=
+manager_2.32.0.bb, do_compile
+
+*gnome*: biggest part of this is caused by libnotify3/libnotify conflicts a=
+nd list of failing gnome
+recipes always is different, depending which libnotify version was built/re=
+used from sstate first :/
+
+*klibc*: also happen quite often missing limits.h
+
+meta-openembedded/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb, do_compile
+  | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
+linux-gnueabi/llvm2.9/2.9-r2.0/llvm-2.9/lib/ExecutionEngine/JIT/Intercept.c=
+pp: In constructor '{anonymous}::StatSymbols::StatSymbols()':
+  | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
+linux-gnueabi/llvm2.9/2.9-r2.0/llvm-2.9/lib/ExecutionEngine/JIT/Intercept.c=
+pp:69:67: error: 'lseek64' was not declared in this scope
+  from my pending patch, need to hunt this down before merging it or try if=
+ 2.8 suffers the same
+
+meta-openembedded/meta-oe/recipes-kernel/compat-wireless/compat-wireless-al=
+l_3.6.8.bb
+  this is picky about used defconfig, not sure how to "blacklist" it when s=
+omething is missing in defconfig
+
+meta-openembedded/meta-oe/recipes-devtools/php/php_5.3.19.bb
+  Applying patch phar-makefile.patch
+  patching file ext/phar/Makefile.frag
+  Hunk #1 FAILED at 6.
+  1 out of 1 hunk FAILED -- rejects in file ext/phar/Makefile.frag
+  probably reexecuting do_patch in same directory for some reason..
+
+meta-openembedded/meta-oe/recipes-support/tbb/tbb_4.1.bb
+  reported on pending review
+
+meta-openembedded/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+  reported on review, but then I've accidentally merged it (I had it blackl=
+isted as known broken,=20
+  but then v2 came and I supposed it's fixed because it wasn't in list of f=
+ailing :/)
+meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_configu=
+re
+  node-waf: not found
+  probably caused by my pending patch to upgrade nodejs to 0.10.4
+
+meta-openembedded/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb, do_c=
+onfigure
+  fix on ML http://patchwork.openembedded.org/patch/48153/
+
+meta-smartphone/meta-android/recipes-multimedia/android-audiosystem/android=
+-audiosystem_bzr.bb, do_package
+  ERROR: debugedit failed with exit code 1 (cmd was '/home/jenkins/oe/shr-c=
+ore-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/lib/rpm/bin/debu=
+gedit' -b '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv=
+5te-oe-linux-gnueabi' -d '/usr/src/debug' -i -l '/home/jenkins/oe/shr-core-=
+branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/android-audiosys=
+tem/1.8+bzr43-r0/debugsources.list' '/home/jenkins/oe/shr-core-branches/shr=
+-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/android-audiosystem/1.8+bzr4=
+3-r0/package/usr/lib/alsa-lib/libasound_module_pcm_android.so')
+
+meta-smartphone/meta-aurora/recipes-aurora/aurora/aurora-daemon_git.bb, do_=
+package
+  ERROR: debugedit failed with exit code 1 (cmd was '/home/jenkins/oe/shr-c=
+ore-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/lib/rpm/bin/debu=
+gedit' -b '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv=
+5te-oe-linux-gnueabi' -d '/usr/src/debug' -i -l '/home/jenkins/oe/shr-core-=
+branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/aurora-daemon/0.=
+1+gitrAUTOINC+b65354ad6c0e201eea8559743a679ba71ddef0c4-r0.17/debugsources.l=
+ist' '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-o=
+e-linux-gnueabi/aurora-daemon/0.1+gitrAUTOINC+b65354ad6c0e201eea8559743a679=
+ba71ddef0c4-r0.17/package/usr/lib/qt4/imports/Aurora/Components/libaurora-c=
+omponents.so')
+
+meta-smartphone/meta-samsung/recipes-bsp/samsung-rfs-mgr/samsung-rfs-mgr_gi=
+t.bb, do_configure
+  depends on samsung-ipc-1.0 >=3D 0.2', but we have that with negative D_P
+
+meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+  pending review for Koen's patches, still need some improvements
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--R+My9LyyhiUvIEro
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFsCuUACgkQN1Ujt2V2gBxkbwCfWbgautOaAt87eQYRwDRlRxRa
+t9IAn3SQIYJpOXZr+9v58zoXtTptP9r/
+=ew1Y
+-----END PGP SIGNATURE-----
+
+--R+My9LyyhiUvIEro--
