@@ -1,32 +1,38 @@
-Received: from mail-ea0-f176.google.com ([209.85.215.176])
+Received: from mail-pa0-f42.google.com ([209.85.220.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1URVqS-0008Rd-2K
+	(envelope-from <raj.khem@gmail.com>) id 1URZDV-0000ft-E9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 00:56:26 +0200
-Received: by mail-ea0-f176.google.com with SMTP id h10so1973587eaj.21
+	Mon, 15 Apr 2013 04:32:32 +0200
+Received: by mail-pa0-f42.google.com with SMTP id kq13so2290479pab.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2013 15:38:56 -0700 (PDT)
+	Sun, 14 Apr 2013 19:14:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=zj8+HY/doc/t1v3dX+9LpycBC3QDTD+YOdAe7ZctTag=;
-	b=J5ZTQsOtkJNDlpHwXwZkXAJs2Ps2nLwDIkzkMP+G1PS1DCnQiMZUc8UIl03ED7OimL
-	cBKR5iQdvpYKXOuTJMo5m7aSWs9PrMtrGgHOkPMBa82wiPhMsgmnt7OBg5QoKRmZXZsP
-	cmo47y/EJXl/vueneTGgIzQk9694rohFw8dimnyGdtSmDTz6/d3Z0h7OHbSShLtcJmT/
-	yGl53vB0o5qlveWAlupsdlM57lIVAoRi2PZpL4kW7QSFbmwbwh5TpHIPrhvY/UtW0yYQ
-	VOJ8FGguaAgnXTPRyKJEOpT3RozJkVW91M7m84JfIucynfI56rjKCJKbxIL+P1bXyIg4
-	pnIQ==
-X-Received: by 10.15.27.195 with SMTP id p43mr55257196eeu.8.1365979136158;
-	Sun, 14 Apr 2013 15:38:56 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id bj2sm23803632eeb.1.2013.04.14.15.38.54
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 14 Apr 2013 15:38:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=I1zqCZn6CPydQqtt7ES2I4fMYdW7jVUgptIWcZCgitQ=;
+	b=0k8jQv9/im1HSfvISC/gYm9qMu4Gec8RU9J19DM8pfPyNw2EG2DSm5BseTm7tVqV9o
+	Hd5VCjKacSfqrDI/MH4TE+WfOIfmbW2BxZmJR3S+00wh3xbC80oYSlPzJYPVK6CeRYqT
+	q2LJ8wVUVtL3qjUelAmF7Eu90Z3COoXUTN6HFc7ezWC/1MiuqMZdpAcSho9EF1jMeTWJ
+	Oc87TBe0AupXBu3Rb4SvZOK4ThdoTAWU4T9HPAxzTAm5MEzUky9lHdWCO92AHuc6IBKF
+	KtoaBxblFOXl1YKd2/28S6LeNVANIRhquUlPkKaXr0GhE4+7kcH66neOPN1Yq+PaSAw2
+	7Z1g==
+X-Received: by 10.68.98.165 with SMTP id ej5mr15506028pbb.184.1365992096580;
+	Sun, 14 Apr 2013 19:14:56 -0700 (PDT)
+Received: from jchheda-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id wi6sm18269506pbc.22.2013.04.14.19.14.54
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 14 Apr 2013 19:14:55 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <5166C774.5040200@communistcode.co.uk>
+Date: Sun, 14 Apr 2013 19:14:53 -0700
+Message-Id: <BE3ADE1C-F9B9-4B35-B5E0-9B4085F897E7@gmail.com>
+References: <6B577862-4C24-49DB-80F2-3A1408AF8337@gmail.com>
+	<5166C774.5040200@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Apr 2013 00:38:59 +0200
-Message-Id: <1365979139-17061-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-oe][PATCH] libetpan: add liblockfile dependency
+X-Mailer: Apple Mail (2.1503)
+Subject: Re: [RFT] GCC 4.8 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +46,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Apr 2013 22:56:32 -0000
+X-List-Received-Date: Mon, 15 Apr 2013 02:32:32 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* claws-mail failed with
-  | configure:20783: checking whether libetpan-config hints compiles and links fine
-  | configure:20797: arm-oe-linux-gnueabi-gcc  -march=armv5te  -marm -mthumb-interwork   --sysroot=/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm -o conftest -O2 -pipe -g -feliminate-unused-debug-types -Wno-unused-function -Wno-pointer-sign -Wall -pthread -I/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/enchant -I/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include/glib-2.0 -I/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr/lib/glib-2.0/include     -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed conftest.c  -lm  -L/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr/lib -letpan -pthread -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -lgnutls -llockfile -lsasl2 >&5
-  | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.7.2/ld: cannot find -llockfile
-  | collect2: error: ld returned 1 exit status
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/libetpan/libetpan_0.57.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+On Apr 11, 2013, at 7:23 AM, Jack Mitchell <ml@communistcode.co.uk> =
+wrote:
 
-diff --git a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-index 7049938..5deb26f 100644
---- a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-+++ b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
-@@ -2,10 +2,12 @@ DESCRIPTION = "libetpan is a library for communicating with mail and news server
- It supports the protocols SMTP, POP3, IMAP and NNTP."
- HOMEPAGE = "http://www.etpan.org"
- SECTION = "libs"
--DEPENDS = "gnutls"
-+DEPENDS = "gnutls liblockfile"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f18ebe7e452708c26f83954f81062ba7"
- 
-+PR = "r1"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
-            file://libetpan-autoreconf.patch \
-            file://libetpan-ldflags.patch"
--- 
-1.8.1.5
+> On 28/03/13 05:51, Khem Raj wrote:
+>> All,
+>>=20
+>> I have added gcc 4.8 recipes and the branch is here
+>>=20
+>> git://git.openembedded.org/openembedded-core-contrib kraj/gcc-4.8
+>>=20
+>> cgit
+>>=20
+>> =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-4.=
+8
+>>=20
+>> Please test it out on your respective environments if you can.
+>>=20
+>> To enable gcc 4.8 with OE-Core you would
+>>=20
+>> in local.conf set
+>>=20
+>> GCCVERSION =3D "4.8%"
+>>=20
+>> and if you use angstrom. Please checkout 'next' branch of =
+setup-scripts
+>> and then in conf/local.conf
+>>=20
+>> set
+>>=20
+>> ANGSTROM_GCC_VERSION =3D "4.8%"
+>>=20
+>> My testing so far has been building systems-image for all qemu =
+machines and they
+>> seem to boot as good as 4.7 did. But I am hoping for wider testing =
+and finding issues
+>> or very least improve the existing recipes for now and once the 1.4 =
+release is done
+>> we can then propose it for inclusion in OE-Core
+>>=20
+>> Thanks for your time
+>>=20
+>>=20
+>> -Khem
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> =
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+> Hi Khem,
+>=20
+> Testing your patches today threw up a build failure in nativesdk-qemu.
+>=20
+> Log attached.
+
+
+Thanks for trying it out. Do you have meta-beagleboard in your layer set =
+?
+if yes then retry with oe-core of today especially
+
+=
+http://git.openembedded.org/openembedded-core/commit/?id=3Ddfb0c2cf9799d08=
+4a76aa92e243c743d7ff05db8
+
 
 
 
