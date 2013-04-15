@@ -1,36 +1,35 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-la0-f53.google.com ([209.85.215.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1URgat-00014S-KZ
+	(envelope-from <andrea.adami@gmail.com>) id 1URgrB-0002vi-LJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 12:25:07 +0200
-Received: by mail-ea0-f173.google.com with SMTP id k11so2062791eaj.4
+	Mon, 15 Apr 2013 12:41:54 +0200
+Received: by mail-la0-f53.google.com with SMTP id fp13so4107590lab.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 03:07:35 -0700 (PDT)
+	Mon, 15 Apr 2013 03:24:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qq5vRO22diHfYVyC81YAawK/8RMubW6sn/eYB1RU1WY=;
-	b=IlhBfrJuiob9RcBWVyLxGu903Z8ZNg/dSLH0V5jSps8qHJNGcphlxYHJ38+L9hOfGn
-	iOHwXyLecsFwrHnEOdmOFBWLLlEWFYEgSkiT6vco2oLIIJIqmaTMydTab3oUVCSPizYL
-	6qTLYP3jOJXr+RspEn06qW/2AIYbENdElvVPx44qJzEdafgYQueb4ysTg/LORoBFPBpX
-	TBZ9TnJw754hknsLYf92G7bn3jIUFL0/+RVdVUjruvQeidUEPC7n8Sgm5sSTYqYPYJva
-	1PusDzCpo6Ay5mo9MHE7Q3twORdgx15t1DvjvVeuTzQ3+Uu5hoVCse6OpZ5YXgng/+U0
-	TFyg==
-X-Received: by 10.15.41.2 with SMTP id r2mr60433907eev.20.1366020455257;
-	Mon, 15 Apr 2013 03:07:35 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id 8sm9300036eeg.15.2013.04.15.03.07.34
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 15 Apr 2013 03:07:34 -0700 (PDT)
-Date: Mon, 15 Apr 2013 12:07:40 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130415100740.GN2475@jama>
-References: <1366016435-10751-1-git-send-email-b28495@freescale.com>
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=k6Y4aoAXYdAGYR6Aovo/8YZ/eqpTFOjDizavUVB1tMM=;
+	b=zD1MyG5CVMqTFRuQl7oMJK1yWbrq4Yz3+8LfV8IXyh4K+naXUUo8y/ksRODQMxVFUs
+	YzxSDyN2R7KDbIUhs6eRbPD1DjUj6R1KW6/874Ofqzypx6spM/s5u/I7agCOBmiStD2p
+	9+GCIdNlv4kDJoO3D+o6iZSfG51b3IFLOkrrocLE0/pFbW5MSPFGOTKHoa2Z5RVvf51c
+	Hv/VUWFN9RDvY2AqZvQatDE4qkbHFSIxe9CYi2ArPmbLY+5IuWCAAUIYOT8OOtrOANHe
+	wGfGcVad0X8Md0iVYuqXfvz5CvPLuy+sCqepCnAKMq0TBUB2xyDP/jujPnH3OIIUAkgr
+	qDuQ==
 MIME-Version: 1.0
-In-Reply-To: <1366016435-10751-1-git-send-email-b28495@freescale.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v4] tclap: initial add 1.2.1
+X-Received: by 10.112.161.97 with SMTP id xr1mr10245396lbb.15.1366021464995;
+	Mon, 15 Apr 2013 03:24:24 -0700 (PDT)
+Received: by 10.112.5.130 with HTTP; Mon, 15 Apr 2013 03:24:24 -0700 (PDT)
+In-Reply-To: <20130415094445.GL2475@jama>
+References: <1365961831-6466-1-git-send-email-andrea.adami@gmail.com>
+	<20130414184047.GJ2475@jama>
+	<CAAQYJAuk0bW6Sg871Zs__PhcTLZq04xJtGJN8VYKuciZxVAnbg@mail.gmail.com>
+	<20130415094445.GL2475@jama>
+Date: Mon, 15 Apr 2013 12:24:24 +0200
+Message-ID: <CAAQYJAsh+r1m93m+Zc1NrpPd9xG8K77ipyexcJ=jyMWCFKTKsA@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] linux-yocto_3.8: remove patch already upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,128 +43,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 10:25:10 -0000
-X-Groupsio-MsgNum: 44191
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PZYVFYZbFYjzBslI"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Apr 2013 10:41:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---PZYVFYZbFYjzBslI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Apr 15, 2013 at 11:44 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Apr 15, 2013 at 11:20:18AM +0200, Andrea Adami wrote:
+>> On Sun, Apr 14, 2013 at 8:40 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > On Sun, Apr 14, 2013 at 07:50:31PM +0200, Andrea Adami wrote:
+>> >> * the spitz_pm patch was pushed upstream with commit
+>> >> * id 510fcb0d331f314cd20d0067d56f29302846f47b
+>> >> *
+>> >> * remove it to unbreak do_patch
+>> >
+>> > Now it builds with latest oe-core, but still doesn't boot for me.
+>>
+>> There is an outstanding regression due to the power regulators rework:
+>> boot from SD/CF card is atm impossible on pxa Zaurus (and on collie
+>> too, until refresh of thesing's locomo_spi patch). We are working on
+>> it.
+>>
+>> Thanks for your testings
+>
+> Could you prepare some easy way to enable debug in all 3 components
+> (linux-kexecboot, kexecboot itself, linux)?
+>
+> Something like we had in
+> http://git.openembedded.org/meta-handheld/commit/?id=584e66b8e21a0f40b26f0a1d2fa5907856996336
+>
+> It would be nice of occasional testers (which don't like l-y) to just
+> flip one switch, rebuild and get useful output on serial line.
+>
+> Cheers,
 
-On Mon, Apr 15, 2013 at 05:00:35PM +0800, b28495@freescale.com wrote:
-> From: Ting Liu <b28495@freescale.com>
->=20
-> TCLAP (Templatized C++ Command Line Parser Library ) is a small, flexible
-> library that provides a simple interface for defining and accessing comma=
-nd
-> line arguments.
->=20
-> Use the commit of tag tclap-1-2-1-release-final.
->=20
-> Signed-off-by: Ting Liu <b28495@freescale.com>
-> ---
->  .../tclap/files/Makefile.am-disable-docs.patch     |   31 ++++++++++++++=
-++++++
->  meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb      |   14 +++++++++
->  2 files changed, 45 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/tclap/files/Makefile.am-disa=
-ble-docs.patch
->  create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-doc=
-s.patch b/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-docs.pat=
-ch
-> new file mode 100644
-> index 0000000..358cbef
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-docs.patch
+Martin,
 
-why not in meta-oe/recipes-devtools/tclap/tclap? Lookup would be few
-milliseconds faster :)
+since some time the Zaurus has a supposedly working linux-kexecboot :)
+The version is still 3.2 and there is no urgent need to update it
+because it already supports ubifs and so on.
 
-> @@ -0,0 +1,31 @@
-> +From c209ed0e7ffca32fe3714bad9cc54bdb00c286bb Mon Sep 17 00:00:00 2001
-> +From: Ting Liu <b28495@freescale.com>
-> +Date: Mon, 15 Apr 2013 16:28:37 +0800
-> +Subject: [PATCH] Makefile.am: disable docs
-> +
-> +Upstream-Status: Inappropriate [OE specific]
-> +
-> +docs need some generating tool (for example, doxygen) from host which may
-> +be not available. Disable it to avoid build issue.
-> +
-> +Signed-off-by: Ting Liu <b28495@freescale.com>
-> +---
-> + Makefile.am |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index 0a6ebc9..6b42f41 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -1,7 +1,7 @@
-> +=20
-> + ACLOCAL_AMFLAGS =3D -I config
-> +=20
-> +-SUBDIRS =3D include examples docs tests msc config
-> ++SUBDIRS =3D include examples tests msc config
-> +=20
-> + pkgconfigdir =3D $(libdir)/pkgconfig
-> + pkgconfig_DATA =3D $(PACKAGE).pc
-> +--=20
-> +1.7.5
-> +
-> diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/reci=
-pes-devtools/tclap/tclap_1.2.1.bb
-> new file mode 100644
-> index 0000000..c9fab52
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION =3D "Templatized C++ Command Line Parser"=20
-> +HOMEPAGE =3D "http://tclap.sourceforge.net/"=20
-> +LICENSE =3D "MIT"=20
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8ab0ff134bcc584d0e6b5b9f8732=
-453"
-> +
-> +SRCREV =3D "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
-> +SRC_URI =3D "git://tclap.git.sourceforge.net/gitroot/tclap/tclap \
-> +          file://Makefile.am-disable-docs.patch \
+About debugging of new kernels, the provided default-cmdline contains
+'quiet' and you just need to change it to 'debug' or even
+'ignore_loglevel'  in /boot/boot.cfg on the selected partition). As
+you can see, CMDLINE_DEBUG is a weak assignment so you can override
+it.
 
-Please use 4 spaces if you send v5 with .patch file moved.
+See http://cgit.openembedded.org/meta-openembedded/tree/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
 
-> +"=20
-> +
-> +S =3D "${WORKDIR}/git"
-> +inherit autotools
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --=20
-> 1.7.5
->=20
->=20
->=20
+Regards
+
+Andrea
+
+>
+>>
+>> Cheers
+>>
+>> Andrea
+>>
+>> >
+>> >> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+>> >> ---
+>> >>  .../linux/linux-yocto-3.8/akita/akita.scc          |  1 -
+>> >>  .../linux/linux-yocto-3.8/spitz/spitz.scc          |  1 -
+>> >>  .../linux/linux-yocto-3.8/spitz_pm.patch           | 53 ----------------------
+>> >>  3 files changed, 55 deletions(-)
+>> >>  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
+>> >>
+>> >> diff --git a/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc b/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
+>> >> index e1549ef..bad38c4 100644
+>> >> --- a/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
+>> >> +++ b/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
+>> >> @@ -6,6 +6,5 @@ include ../zaurus-common.scc
+>> >>  include ../zaurus-usb-host.scc
+>> >>
+>> >>  patch sharpsl_param.patch
+>> >> -patch spitz_pm.patch
+>> >>  patch pxa27x-sa1100-rtc.patch
+>> >>  patch spi-pxa2xx-fix-mem.patch
+>> >> diff --git a/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc b/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
+>> >> index fe6aac8..f9f9381 100644
+>> >> --- a/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
+>> >> +++ b/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
+>> >> @@ -5,6 +5,5 @@ include ../zaurus-common.scc
+>> >>  include ../zaurus-usb-host.scc
+>> >>
+>> >>  patch sharpsl_param.patch
+>> >> -patch spitz_pm.patch
+>> >>  patch pxa27x-sa1100-rtc.patch
+>> >>  patch spi-pxa2xx-fix-mem.patch
+>> >> diff --git a/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch b/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
+>> >> deleted file mode 100644
+>> >> index 34bcb9d..0000000
+>> >> --- a/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
+>> >> +++ /dev/null
+>> >> @@ -1,53 +0,0 @@
+>> >> -Subject: [PATCH] [ARM] pxa/spitz_pm.c: Fix hang under certain conditions when resuming from STR.
+>> >> -
+>> >> -Devices that use spitz_pm.c will fail to resume
+>> >> -from STR (Suspend To Ram) when the charger plug is inserted
+>> >> -or removed when a device is in STR mode. The culprit is
+>> >> -a misconfigured gpio line - GPIO18. GPIO18 should be configured as a
+>> >> -regular GPIO input but it gets configured as an alternate function
+>> >> -GPIO18_RDY. And then later in postsuspend() it gets configured as
+>> >> -a regular GPIO18 input line.
+>> >> -
+>> >> -Fix this by removing the GPIO18_RDY configuration so that GPIO18
+>> >> -only gets configured as a regular gpio input.
+>> >> -
+>> >> -Signed-off-by: Marko Katic <dromede@gmail.com>
+>> >> ----
+>> >> - arch/arm/mach-pxa/spitz_pm.c |    8 ++------
+>> >> - 1 files changed, 2 insertions(+), 6 deletions(-)
+>> >> -
+>> >> -diff --git a/arch/arm/mach-pxa/spitz_pm.c b/arch/arm/mach-pxa/spitz_pm.c
+>> >> -index 438f02f..842596d 100644
+>> >> ---- a/arch/arm/mach-pxa/spitz_pm.c
+>> >> -+++ b/arch/arm/mach-pxa/spitz_pm.c
+>> >> -@@ -86,10 +86,7 @@ static void spitz_discharge1(int on)
+>> >> -     gpio_set_value(SPITZ_GPIO_LED_GREEN, on);
+>> >> - }
+>> >> -
+>> >> --static unsigned long gpio18_config[] = {
+>> >> --    GPIO18_RDY,
+>> >> --    GPIO18_GPIO,
+>> >> --};
+>> >> -+static unsigned long gpio18_config = GPIO18_GPIO;
+>> >> -
+>> >> - static void spitz_presuspend(void)
+>> >> - {
+>> >> -@@ -112,7 +109,7 @@ static void spitz_presuspend(void)
+>> >> -     PGSR3 &= ~SPITZ_GPIO_G3_STROBE_BIT;
+>> >> -     PGSR2 |= GPIO_bit(SPITZ_GPIO_KEY_STROBE0);
+>> >> -
+>> >> --    pxa2xx_mfp_config(&gpio18_config[0], 1);
+>> >> -+    pxa2xx_mfp_config(&gpio18_config, 1);
+>> >> -     gpio_request_one(18, GPIOF_OUT_INIT_HIGH, "Unknown");
+>> >> -     gpio_free(18);
+>> >> -
+>> >> -@@ -131,7 +128,6 @@ static void spitz_presuspend(void)
+>> >> -
+>> >> - static void spitz_postsuspend(void)
+>> >> - {
+>> >> --    pxa2xx_mfp_config(&gpio18_config[1], 1);
+>> >> - }
+>> >> -
+>> >> - static int spitz_should_wakeup(unsigned int resume_on_alarm)
+>> >> ---
+>> >> -1.7.4.1
+>> >> --
+>> >> 1.8.1.5
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>> > --
+>> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PZYVFYZbFYjzBslI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlFr0WwACgkQN1Ujt2V2gBxcUQCeNrIPgkH83FKzAgpmXmTNTXUM
-cpYAn3ANel3hX7KdTV245a4fbbDLvClO
-=IFcv
------END PGP SIGNATURE-----
-
---PZYVFYZbFYjzBslI--
