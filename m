@@ -1,36 +1,37 @@
-Received: from mail-ee0-f51.google.com ([74.125.83.51])
+Received: from mail-ea0-f171.google.com ([209.85.215.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1URkRE-00014q-FZ
+	(envelope-from <martin.jansa@gmail.com>) id 1URkmz-0003GP-VO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 16:31:28 +0200
-Received: by mail-ee0-f51.google.com with SMTP id c4so2226962eek.38
+	Mon, 15 Apr 2013 16:53:54 +0200
+Received: by mail-ea0-f171.google.com with SMTP id b15so2290950eae.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 07:13:48 -0700 (PDT)
+	Mon, 15 Apr 2013 07:36:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JiWtdgR2DIHAi1qI2ga/q6uU58opJO4fslH3jnQI3Ho=;
-	b=zyH/FezgTurcjtIn6WUjbBW85cRyyL2F9meetC3WhoD06hz5ON9karFa8L4AXzYjHQ
-	g04pHVdmt3WPA1Pzv1j0lz9bOt/QBEB4VkGu8t8m56VqsDVNR5PFBAnitkapav60uE7e
-	c4fwWpS2h3MOvv4iQQ7KthKOH/nFKGFL3UCqPJvsZ88ZNPA02zZKjnnMhFwQeIdKhar7
-	eEIJNyt4sE2LrDKdhT2a0fUHokIUvQnt92U9iu8zJMwjHduGCc2aWJzWFqFCz0f/rkOS
-	uPeMddTvVLEnTn4z2T3AFxwBAOYPFtWpLxl+USljogfTXigRafyBOhqHwgP2Acc/X4Ml
-	XGjQ==
-X-Received: by 10.15.22.76 with SMTP id e52mr63026997eeu.7.1366035228218;
-	Mon, 15 Apr 2013 07:13:48 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=DBqy4c04HjtQ/EqcTvigAMVDQjwtAp8BkkDeF/mw3rg=;
+	b=wJQkQY+5smC4/X7//SaXXEacfTfV66U8/azu4uS4MXZ0oduMxxpdHfsqUqkU6Y5Hwl
+	w1lleXLc/jxyA69Ch6bXsN7IgnMd2pjwnheoA7W7if3wxtzWMq+r7qqQnNDaJGSR73Zj
+	08WPfgtrWyTw1n+cBNornwW3EgmsKEI4z3aFIvBbalQZgxd382zNTaGn+d9SVv9jNsQK
+	eEYTBb3skIjqDAmQMi5y8o9QLhaPD6O6xQHuN3KB9+PmBxX9AsKSpmA+6Yb/QG2demyU
+	1m9+xIRlYW4UWX71gP4YovAvVHTlt65A8ZH4QmmJFAJ34plPO1GVLSPqpdxRVYand+kk
+	h9bw==
+X-Received: by 10.14.201.67 with SMTP id a43mr44974842eeo.33.1366036581192;
+	Mon, 15 Apr 2013 07:36:21 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id x42sm7812884eee.0.2013.04.15.07.13.46
+	by mx.google.com with ESMTPS id a41sm27218905eei.4.2013.04.15.07.36.20
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 15 Apr 2013 07:13:46 -0700 (PDT)
-Date: Mon, 15 Apr 2013 16:13:53 +0200
+	Mon, 15 Apr 2013 07:36:20 -0700 (PDT)
+Date: Mon, 15 Apr 2013 16:36:26 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130415141353.GD10628@jama.dyndns-home.com>
-References: <1366033969-21963-1-git-send-email-raj.khem@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20130415143626.GE10628@jama.dyndns-home.com>
+References: <1365761087-1229-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <1366033969-21963-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1365761087-1229-1-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-systemd][PATCH] ntp: Create a separate package for sntp
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv3 1/5] python-tornado: update to top of 2.2 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,152 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 14:31:34 -0000
-X-Groupsio-MsgNum: 44200
+X-List-Received-Date: Mon, 15 Apr 2013 14:54:05 -0000
+X-Groupsio-MsgNum: 44201
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xB0nW4MQa6jZONgY"
+	protocol="application/pgp-signature"; boundary="gMR3gsNFwZpnI/Ts"
 Content-Disposition: inline
 
---xB0nW4MQa6jZONgY
+--gMR3gsNFwZpnI/Ts
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 15, 2013 at 06:52:49AM -0700, Khem Raj wrote:
-> sntp provides the functionality of obsoleted ntpdate
-> so we have option of using ntpd as well as sntp
-> sntp does the immediate one time sync with time
-> server and corrects the tme immediately. it
-> replaces ntpdate nicely.
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On Fri, Apr 12, 2013 at 12:04:43PM +0200, Koen Kooi wrote:
+> Drags in a few bugfixes needed for gateone
+
+All 5 merged + fix for nodejs4 install on dash
+
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 > ---
->  meta-networking/recipes-support/ntp/ntp.inc        |    3 ++-
->  .../meta-networking/recipes-support/ntp/ntp/sntp   |    1 +
->  .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
->  .../recipes-support/ntp/ntp_4.2.6p5.bbappend       |    9 ++++++++-
->  4 files changed, 22 insertions(+), 2 deletions(-)
->  create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/=
-sntp
->  create mode 100644 meta-systemd/meta-networking/recipes-support/ntp/ntp/=
-sntp.service
-
-It shouldn't create new .bbappends in meta-systemd.
-
-> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networkin=
-g/recipes-support/ntp/ntp.inc
-> index d93f22d..cec0f22 100644
-> --- a/meta-networking/recipes-support/ntp/ntp.inc
-> +++ b/meta-networking/recipes-support/ntp/ntp.inc
-> @@ -54,7 +54,7 @@ do_install_append() {
->  	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
->  }
+>  meta-oe/recipes-devtools/python/python-tornado_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-tornado_git.bb b/meta=
+-oe/recipes-devtools/python/python-tornado_git.bb
+> index 00d0bbb..f158923 100644
+> --- a/meta-oe/recipes-devtools/python/python-tornado_git.bb
+> +++ b/meta-oe/recipes-devtools/python/python-tornado_git.bb
+> @@ -2,9 +2,9 @@ DESCRIPTION =3D "Tornado is an open source version of the=
+ scalable, non-blocking w
+>  LICENSE =3D "Apache"
+>  LIC_FILES_CHKSUM =3D "file://README;md5=3De7fb9954003d7cd93322ccf282210d=
+1c"
 > =20
-> -PACKAGES +=3D "ntpdate ${PN}-tickadj ${PN}-utils"
-> +PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
->  # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
-> =20
->  # ntp originally includes tickadj. It's split off for inclusion in small=
- firmware images on platforms
-> @@ -69,6 +69,7 @@ RSUGGESTS_${PN} =3D "iana-etc"
-> =20
->  FILES_${PN} =3D "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/ini=
-t.d/ntpd ${sbindir} ${libdir}"
->  FILES_${PN}-tickadj =3D "${bindir}/tickadj"
-> +FILES_sntp =3D "${bindir}/sntp"
->  FILES_${PN}-utils =3D "${bindir}"
->  FILES_ntpdate =3D "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpda=
-te-sync ${bindir}/ntpdate-sync ${sysconfdir}/default/ntpdate"
-> =20
-> diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp b/=
-meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
-> new file mode 100644
-> index 0000000..f8c5895
-> --- /dev/null
-> +++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp
-> @@ -0,0 +1 @@
-> +NTPSERVER=3D"ntpserver.example.org"
-> diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.se=
-rvice b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
-> new file mode 100644
-> index 0000000..0f09e43
-> --- /dev/null
-> +++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp/sntp.service
-> @@ -0,0 +1,11 @@
-> +[Unit]
-> +Description=3DSimple Network Time Service Client
-> +After=3Dnetwork.target
+> -PV =3D "2.2"
+> -SRCREV =3D "02bc76155de5bf4dca243e4d0c019c0ac4c8b3be"
+> -PR =3D "r1"
+> +PV =3D "2.2.1+git${SRCPV}"
 > +
-> +[Service]
-> +Type=3Doneshot
-> +EnvironmentFile=3D-/etc/default/sntp
-> +ExecStart=3D/usr/bin/sntp -s $NTPSERVER
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5=
-=2Ebbappend b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.=
-bbappend
-> index 7f2a796..c34bc96 100644
-> --- a/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappe=
-nd
-> +++ b/meta-systemd/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bbappe=
-nd
-> @@ -4,8 +4,9 @@ PRINC :=3D "${@int(PRINC) + 2}"
-> =20
->  FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
-> =20
-> -SYSTEMD_PACKAGES =3D "${PN} ntpdate"
-> +SYSTEMD_PACKAGES =3D "${PN} ntpdate sntp"
->  SYSTEMD_SERVICE_${PN} =3D "ntpd.service"
-> +SYSTEMD_SERVICE_sntp =3D "sntp.service"
->  SYSTEMD_SERVICE_ntpdate =3D "ntpdate.service"
->  RPROVIDES_${PN} +=3D "${PN}-systemd"
->  RREPLACES_${PN} +=3D "${PN}-systemd"
-> @@ -15,14 +16,20 @@ RREPLACES_ntpdate +=3D "ntpdate-systemd"
->  RCONFLICTS_ntpdate +=3D "ntpdate-systemd"
-> =20
->  FILES_ntpdate +=3D "${systemd_unitdir}/system/ntpdate.service"
-> +FILES_sntp +=3D "${sysconfdir}/default/sntp"
-> =20
->  SRC_URI +=3D " \
->  	file://ntpdate.service \
->          file://ntpd.service \
-> +        file://sntp.service \
-> +        file://sntp \
->  "
-> =20
->  do_install_append() {
->  	install -d ${D}${systemd_unitdir}/system
-> +	install -d ${D}${sysconfdir}/default
->  	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/syste=
-m/
->  	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-> +	install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
-> +	install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
->  }
+> +SRCREV =3D "c501917eba46dec30b1f2ef12497dffc4beec505"
+>  SRC_URI =3D "git://github.com/facebook/tornado.git;branch=3Dbranch2.2 \
+>             file://0001-disable-AI_ADDRCONFIG-flag.patch \
+>            "
 > --=20
-> 1.7.9.5
+> 1.8.1.4
 >=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---xB0nW4MQa6jZONgY
+--gMR3gsNFwZpnI/Ts
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFsCyEACgkQN1Ujt2V2gBzO2QCgk59Yg6Rxay5PyUNUm4LaLDBq
-TbcAn0SGNkzJALby0bA5jUHaAppM9UG/
-=5UTv
+iEYEARECAAYFAlFsEGoACgkQN1Ujt2V2gByP9gCfY/FQvJ72d6GW1pye3HfiDB6o
+KrIAoK/SVZ/15ZTWjdW5gSW/42q5dnIl
+=iZSy
 -----END PGP SIGNATURE-----
 
---xB0nW4MQa6jZONgY--
+--gMR3gsNFwZpnI/Ts--
