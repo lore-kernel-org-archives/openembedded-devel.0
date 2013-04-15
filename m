@@ -1,23 +1,37 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-pb0-f51.google.com ([209.85.160.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1URnyr-0008T0-Ac
+	(envelope-from <raj.khem@gmail.com>) id 1URoRa-0002xK-2z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 20:18:20 +0200
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 45667D2284
+	Mon, 15 Apr 2013 20:47:58 +0200
+Received: by mail-pb0-f51.google.com with SMTP id rr4so2648266pbb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 20:00:11 +0200 (CEST)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Mon, 15 Apr 2013 11:30:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=pH7pIXpxPbNZtFABDo5KK3qNLdl4TvaT8vkf746SEVY=;
+	b=LZF/ODA9rNeVSawTC3wUErPS3qj3fmeE1D2iYiTSEOP8h4HgvhX/RKl4JVpp+NfPRh
+	Z6HGLc67lIWYdJdNPhcAhq9D99rTj/7MHHkyEvpepSOskyVNwcR4fnJGxmXxUFNO4NPc
+	t3dvIldcEq3qET5ERlxbCpH+adMIfFMxt5lGfsO2EQFHwqZYYjs89Go8C8K2MsD/xwDI
+	6LIq11bQ7MBq5+EeqDMIGJVIN2kOjYBjZeFFdQkbJMhGFwOskYHV8m/ZDNUO0WWImH5m
+	gVsdEc3cgI5k8p0GhnkKYqxXUN6d5Y2Vx6fte9xAGWoFRkLBWexj24RHlszfFmWxRvD8
+	N5mw==
+X-Received: by 10.66.121.169 with SMTP id ll9mr30864026pab.178.1366050627975; 
+	Mon, 15 Apr 2013 11:30:27 -0700 (PDT)
+Received: from jchheda-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPS id vv6sm3121863pab.6.2013.04.15.11.30.26
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 11:30:27 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20130413134648.GE2477@jama>
+Date: Mon, 15 Apr 2013 11:30:26 -0700
+Message-Id: <09C342D7-E206-4731-905B-C92EB56FFF97@gmail.com>
+References: <20130413134648.GE2477@jama>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Apr 2013 20:00:47 +0200
-Message-Id: <1366048847-6777-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <20130409095840.GA2474@jama>
-References: <20130409095840.GA2474@jama>
-Subject: [meta-oe][PATCH v2] tbb: update to 4.1 Update 3 version from 20130314
+X-Mailer: Apple Mail (2.1503)
+Subject: Re: Consistent indentation in meta-openembedded metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,82 +45,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 18:18:23 -0000
+X-List-Received-Date: Mon, 15 Apr 2013 18:48:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-ARMv7a support was added in 4.1 Update 3
-Older ARM cores support was added by me.
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- .../tbb/allow-to-build-for-older-arm-cores.patch   | 30 ++++++++++++++++++++++
- meta-oe/recipes-support/tbb/tbb_4.1.bb             |  7 ++---
- 2 files changed, 34 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/tbb/tbb/allow-to-build-for-older-arm-cores.patch
+On Apr 13, 2013, at 6:46 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
 
-diff --git a/meta-oe/recipes-support/tbb/tbb/allow-to-build-for-older-arm-cores.patch b/meta-oe/recipes-support/tbb/tbb/allow-to-build-for-older-arm-cores.patch
-new file mode 100644
-index 0000000..cd2ec94
---- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb/allow-to-build-for-older-arm-cores.patch
-@@ -0,0 +1,30 @@
-+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-+Description: Allow to build TBB for ARM cores older than ARMv7a
-+
-+| ../../include/tbb/machine/gcc_armv7.h:39:2: error: #error Threading
-+Building Blocks ARM port requires an ARMv7-a architecture.
-+| make[1]: *** [concurrent_hash_map.o] Error 1
-+
-+https://bugs.launchpad.net/linaro-oe/+bug/1167144
-+
-+Upstream-status: pending
-+
-+---
-+ include/tbb/tbb_machine.h |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- tbb41_20130314oss.orig/include/tbb/tbb_machine.h
-++++ tbb41_20130314oss/include/tbb/tbb_machine.h
-+@@ -237,11 +237,11 @@ template<> struct atomic_selector<8> {
-+         #include "machine/linux_intel64.h"
-+     #elif __ia64__
-+         #include "machine/linux_ia64.h"
-+     #elif __powerpc__
-+         #include "machine/mac_ppc.h"
-+-    #elif __arm__
-++    #elif __ARM_ARCH_7A__
-+         #include "machine/gcc_armv7.h"
-+     #elif __TBB_GCC_BUILTIN_ATOMICS_PRESENT
-+         #include "machine/gcc_generic.h"
-+     #endif
-+     #include "machine/linux_common.h"
-diff --git a/meta-oe/recipes-support/tbb/tbb_4.1.bb b/meta-oe/recipes-support/tbb/tbb_4.1.bb
-index a159321..96137bc 100644
---- a/meta-oe/recipes-support/tbb/tbb_4.1.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_4.1.bb
-@@ -6,17 +6,18 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
- HOMEPAGE = "http://threadingbuildingblocks.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2c7f2caf277a3933e3acdf7f89d54cc1"
--PRDATE = "20130116"
-+PRDATE = "20130314"
- PR = "r${PRDATE}"
- 
- SRC_URI = "http://threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb41_${PRDATE}oss_src.tgz \
-            file://cross-compile.patch \
-+           file://allow-to-build-for-older-arm-cores.patch \
-            file://tbb.pc"
- 
- S = "${WORKDIR}/tbb41_${PRDATE}oss/"
- 
--SRC_URI[md5sum] = "3809790e1001a1b32d59c9fee590ee85"
--SRC_URI[sha256sum] = "4ae2c10899e3b6ef2f686013ec5901fc658444ca90178efaca6014b0665c34b6"
-+SRC_URI[md5sum] = "ed4af7ccfa122f16cf9920b241633a3a"
-+SRC_URI[sha256sum] = "32fd5979971b772caa96d40646cee585ed0070516ba2dbbcb1f9b6033d08a92d"
- 
- do_compile() {
-     oe_runmake compiler=gcc arch=${HOST_ARCH} runtime=cc4
--- 
-1.8.1.2
+> Hi,
+>=20
+> maybe you remember my proposal to make whitespace consistent for =
+python
+> and shell tasks a while back:
+>=20
+> =
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/026176.ht=
+ml
+>=20
+>    * This change is only aesthetic (unlike indentation in Python
+>    * tasks).
+>    * Some recipes were using tabs.
+>    * Some were using 8 spaces.
+>    * Some were using mix or different number of spaces.
+>    * Make them consistently use 4 spaces everywhere.
+>    * Yocto styleguide advises to use tabs (but the only reason to keep
+>      tabs is the need to update a lot of recipes). Lately this advice
+>      was also merged into the styleguide on the OE wiki.
+>    * Using 4 spaces in both types of tasks is better because it's less
+>      error prone when someone is not sure if e.g.
+>      do_generate_toolchain_file() is Python or shell task and also =
+allows
+>      to highlight every tab used in .bb, .inc, .bbappend, .bbclass as
+>      potentially bad (shouldn't be used for indenting of multiline
+>      variable assignments and cannot be used for Python tasks).
+>=20
+> I still have some scripts for semi-automatic conversion.
+>=20
+> Now close to creating dylan branch for meta-openembedded is imho best
+> time to do this, not many changes from released dylan will be =
+backported
+> to danny, because people will start moving to newer release instead of
+> backporting more and more stuff to old one (also resolving possible
+> whitespace merge conflict it not hard). Causing conflicts for merge =
+was
+> IIRC most important reason why my proposal was rejected for oe-core.
+>=20
+> meta-efl, meta-webos(-ports), meta-smartphone layers are already using=20=
+
+> it for some time and meta-openembedded recipes are using spaces in =
+shell=20
+> tasks in majority of recipes.
+>=20
+> If nobody objects I'll run my scripts after all pending patches are
+> merged.
+>=20
+
+I think this is a good idea, so we do not confuse ourselves between =
+python and shell and some times
+both are mixed in same file. But as long as its in one big swoop it =
+should be fine.
+
+Thanks for doing it.
+
+
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
