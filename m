@@ -1,43 +1,34 @@
-Received: from mail-qa0-f47.google.com ([209.85.216.47])
+Received: from mail-ye0-f178.google.com ([209.85.213.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <mario.goulart@gmail.com>) id 1URqb7-0000OW-OY
+	(envelope-from <mario.goulart@gmail.com>) id 1URqqW-0001nP-5v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 23:05:59 +0200
-Received: by mail-qa0-f47.google.com with SMTP id bn16so943212qab.13
+	Mon, 15 Apr 2013 23:21:53 +0200
+Received: by mail-ye0-f178.google.com with SMTP id q1so823715yen.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 13:48:28 -0700 (PDT)
+	Mon, 15 Apr 2013 14:04:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:references:date:in-reply-to
-	:message-id:user-agent:mime-version:content-type;
-	bh=jX4I4bXwHJx2J8DIvAQRPU8dhZvDugDE+Het4iWlZCQ=;
-	b=WUTnESjve4JR3IVVPbOyUULVaEvGCknmVL99QvCCrHWx4WVuCT/b/0STTGFya+pGzT
-	ABWh+uQ5ljN2oeQh1Oio3yHxVefMWj5Iv1Ta5k7lENl+aseiowACObkEW0n97j6jsN3E
-	u+ZrKv4EYQCejC3NrWg1DLD2chwz52JGj7BRrE6O9y7ffnLwDRChKTAfzYIKBrMR8YKw
-	QqRaLHH3nIN7JjKUAUPSEOetkngfLFXWEJyYvEv830DMC/E4nqj2B1M3cmwDVnueIymp
-	3VOjxZxP/v8xTw/uZIgB92DfiTUz+PBbpW50hKpibBQan5/uNZkiQnSPAlnvXzASEsjC
-	+v7A==
-X-Received: by 10.224.75.133 with SMTP id y5mr24131145qaj.78.1366058908242;
-	Mon, 15 Apr 2013 13:48:28 -0700 (PDT)
-Received: from cl-t066-141cl.privatedns.com.gmail.com (wkit.com.br.
-	[67.205.85.241])
-	by mx.google.com with ESMTPS id d4sm17202933qed.6.2013.04.15.13.48.26
-	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
-	Mon, 15 Apr 2013 13:48:27 -0700 (PDT)
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=zlLdauSPFL4HB512nciewmxPyDYyjX4A/LEDav6Ukcc=;
+	b=ZWPUnWzMfq4lwa6nQ+6z5Vr1BsrKvfOO+8xCqC1f2CyRvBcmnj2IkHYJKktzCHaZZV
+	8cy4jaKM/YAhWCAiSXXWLsP8LJqfRhF//kOAvYnVICMQbbu8UOQqx5gDJ7bo4NQ5Enao
+	zGPUzrziOLe1HKJpLD3C9jgfqpubKCwOae6FN8fjQ0X8emn71f8h1S133g42Co77MpH9
+	f1Imktt4//ZVD+MExc7c5Bqxo0znf37D/2Q8Y79WsioXLWIuz517tGcToyle37aTfLN/
+	ghThcVdn3UgDPn6fz5QhJXyI66LP7eCP74TPuk4A+U5ZfNeIcRGz4mW/kpg5+CzhM2Vw
+	BosA==
+X-Received: by 10.236.171.38 with SMTP id q26mr12864378yhl.122.1366059862581; 
+	Mon, 15 Apr 2013 14:04:22 -0700 (PDT)
+Received: from localhost.localdomain ([187.23.144.59])
+	by mx.google.com with ESMTPS id f70sm30492554yhi.12.2013.04.15.14.04.20
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 14:04:21 -0700 (PDT)
 Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
 From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1365873301-29552-1-git-send-email-otavio@ossystems.com.br>
-	<1365873301-29552-2-git-send-email-otavio@ossystems.com.br>
-	<20130415143735.GF10628@jama.dyndns-home.com>
-Date: Mon, 15 Apr 2013 16:48:00 -0400
-In-Reply-To: <20130415143735.GF10628@jama.dyndns-home.com> (Martin Jansa's
-	message of "Mon, 15 Apr 2013 16:37:35 +0200")
-Message-ID: <854nf7plkv.fsf@cl-t066-141cl.privatedns.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.2 (gnu/linux)
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe PATCH 2/2] gnumeric: add recipe for version 1.12.0
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Apr 2013 18:04:11 -0300
+Message-Id: <1366059851-7972-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] goffice: update to version 0.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,48 +42,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 21:06:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Apr 2013 21:21:54 -0000
 
-On Mon, 15 Apr 2013 16:37:35 +0200 Martin Jansa <martin.jansa@gmail.com> wrote:
+That's a version requirement for Gnumeric.
 
-> On Sat, Apr 13, 2013 at 02:15:01PM -0300, Otavio Salvador wrote:
->> From: Mario Domenech Goulart <mario@ossystems.com.br>
->> 
->> Based on the OE classic recipe as of
->> bd204492e0ed296bbac2999da29f831cbdf965f9
->> 
->> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->> ---
->>  .../recipes-gnome/gnumeric/gnumeric_1.12.0.bb      | 44 ++++++++++++++++++++++
->>  1 file changed, 44 insertions(+)
->>  create mode 100644 meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
->> 
->> diff --git a/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
->> new file mode 100644
->> index 0000000..cd42e18
->> --- /dev/null
->> +++ b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
->> @@ -0,0 +1,44 @@
->> +LICENSE = "GPLv2 | GPLv3"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=be0de417af78dd340558810d1ced52e6"
->> +SECTION = "x11/utils"
->> +S = "${WORKDIR}/gnumeric-${PV}"
->> +DEPENDS = "gdk-pixbuf libgsf gtk+3 libxml2 libglade libart-lgpl
->> intltool-native libgnomecanvas libgnomeprint libbonoboui
->> orbit2-native"
->> +DESCRIPTION = "Gnumeric spreadsheet for GNOME"
->> +
->> +GNOME_COMPRESS_TYPE = "xz"
->> +BPN="${PN}"
->
-> Why is this needed ^? It shoudn't be there.
+Note that goffice 0.10.1 requires gtk3.
 
-Thanks for catching that, Martin.  It's not needed, indeed.  I just
-submited a new patch without that line.
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../recipes-support/goffice/goffice_0.10.1.bb      |   47 ++++++++++++++++++++
+ .../recipes-support/goffice/goffice_0.8.17.bb      |   46 -------------------
+ 2 files changed, 47 insertions(+), 46 deletions(-)
+ create mode 100644 meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
+ delete mode 100644 meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
 
-Best wishes.
-Mario
+diff --git a/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb b/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
+new file mode 100644
+index 0000000..e567b1f
+--- /dev/null
++++ b/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
+@@ -0,0 +1,47 @@
++DESCRIPTION="Gnome Office Library"
++
++LICENSE="GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6dc33ff21e1ba1ac1a2a1069d361e29e"
++
++DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl"
++
++inherit gnome pkgconfig perlnative
++
++GNOME_COMPRESS_TYPE = "xz"
++
++SRC_URI[archive.md5sum] = "90fd17c6fe205b779571e00d9b0b4727"
++SRC_URI[archive.sha256sum] = "5c38f4e81e874cc8e89481b080f77c47c72bfd6fe2526f4fc2ef87c17f96cad0"
++
++FILES_${PN}-dbg += "${libdir}/goffice/${PV}/plugins/*/.debug"
++
++RRECOMMENDS_${PN} = " \
++  goffice-plugin-plot-barcol \
++  goffice-plugin-plot-distrib \
++  goffice-plugin-plot-pie \
++  goffice-plugin-plot-radar \
++  goffice-plugin-plot-surface \
++  goffice-plugin-plot-xy \
++  goffice-plugin-reg-linear \
++  goffice-plugin-reg-logfit \
++  goffice-plugin-smoothing \
++"
++
++FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
++            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
++            ${base_bindir}/* ${base_sbindir}/* \
++            ${base_libdir}/*${SOLIBS} \
++            ${datadir}/${PN} \
++            ${datadir}/pixmaps ${datadir}/applications \
++            ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
++            ${libdir}/bonobo/servers"
++
++FILES_${PN}-locale = "${libdir}/locale"
++
++PACKAGES_DYNAMIC += "^goffice-plugin-.*"
++
++python populate_packages_prepend () {
++    goffice_libdir = d.expand('${libdir}/goffice/${PV}/plugins/')
++
++    do_split_packages(d, goffice_libdir, '(.*)', 'goffice-plugin-%s', 'Goffice plugin for %s', allow_dirs=True)
++}
++
+diff --git a/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb b/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
+deleted file mode 100644
+index c5d54ab..0000000
+--- a/meta-gnome/recipes-support/goffice/goffice_0.8.17.bb
++++ /dev/null
+@@ -1,46 +0,0 @@
+-DESCRIPTION="Gnome Office Library"
+-
+-LICENSE="GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fa1348b178f4a7322170203c6c36f4c3"
+-
+-DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+ pango cairo libgsf libpcre libxml2 libart-lgpl"
+-
+-inherit gnome pkgconfig perlnative
+-
+-SRC_URI += " file://c99math.patch \
+-             file://nodolt.patch "
+-
+-SRC_URI[archive.md5sum] = "b4c924457163e02daf8a8d2428f51d10"
+-SRC_URI[archive.sha256sum] = "dd8caef5fefffbc53938fa619de9f58e7c4dc71a1803de134065d42138a68c06"
+-
+-FILES_${PN}-dbg += "${libdir}/goffice/${PV}/plugins/*/.debug"
+-
+-RRECOMMENDS_${PN} = " \
+-  goffice-plugin-plot-barcol \
+-  goffice-plugin-plot-distrib \
+-  goffice-plugin-plot-pie \
+-  goffice-plugin-plot-radar \
+-  goffice-plugin-plot-surface \
+-  goffice-plugin-plot-xy \
+-  goffice-plugin-reg-linear \
+-  goffice-plugin-reg-logfit \
+-  goffice-plugin-smoothing \
+-"
+-
+-FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+-            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+-            ${base_bindir}/* ${base_sbindir}/* \
+-            ${base_libdir}/*${SOLIBS} \
+-            ${datadir}/${PN} \
+-            ${datadir}/pixmaps ${datadir}/applications \
+-            ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
+-            ${libdir}/bonobo/servers"
+-
+-PACKAGES_DYNAMIC += "^goffice-plugin-.*"
+-
+-python populate_packages_prepend () {
+-    goffice_libdir = d.expand('${libdir}/goffice/${PV}/plugins/')
+-
+-    do_split_packages(d, goffice_libdir, '(.*)', 'goffice-plugin-%s', 'Goffice plugin for %s', allow_dirs=True)
+-}
+-
+-- 
+1.7.2.5
+
 
 
