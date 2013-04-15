@@ -1,25 +1,36 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-ea0-f173.google.com ([209.85.215.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1URgRN-00004q-A8
+	(envelope-from <martin.jansa@gmail.com>) id 1URgat-00014S-KZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 12:15:15 +0200
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 15 Apr 2013 02:57:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,474,1363158000"; d="scan'208";a="227249198"
-Received: from unknown (HELO helios.localnet) ([10.255.13.245])
-	by AZSMGA002.ch.intel.com with ESMTP; 15 Apr 2013 02:57:42 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: jackie.huang@windriver.com
-Date: Mon, 15 Apr 2013 10:57:41 +0100
-Message-ID: <1669643.GkN2VCyQEV@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <cover.1365489405.git.jackie.huang@windriver.com>
-References: <cover.1365489405.git.jackie.huang@windriver.com>
+	Mon, 15 Apr 2013 12:25:07 +0200
+Received: by mail-ea0-f173.google.com with SMTP id k11so2062791eaj.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Apr 2013 03:07:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=qq5vRO22diHfYVyC81YAawK/8RMubW6sn/eYB1RU1WY=;
+	b=IlhBfrJuiob9RcBWVyLxGu903Z8ZNg/dSLH0V5jSps8qHJNGcphlxYHJ38+L9hOfGn
+	iOHwXyLecsFwrHnEOdmOFBWLLlEWFYEgSkiT6vco2oLIIJIqmaTMydTab3oUVCSPizYL
+	6qTLYP3jOJXr+RspEn06qW/2AIYbENdElvVPx44qJzEdafgYQueb4ysTg/LORoBFPBpX
+	TBZ9TnJw754hknsLYf92G7bn3jIUFL0/+RVdVUjruvQeidUEPC7n8Sgm5sSTYqYPYJva
+	1PusDzCpo6Ay5mo9MHE7Q3twORdgx15t1DvjvVeuTzQ3+Uu5hoVCse6OpZ5YXgng/+U0
+	TFyg==
+X-Received: by 10.15.41.2 with SMTP id r2mr60433907eev.20.1366020455257;
+	Mon, 15 Apr 2013 03:07:35 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id 8sm9300036eeg.15.2013.04.15.03.07.34
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 03:07:34 -0700 (PDT)
+Date: Mon, 15 Apr 2013 12:07:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130415100740.GN2475@jama>
+References: <1366016435-10751-1-git-send-email-b28495@freescale.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 0/2] modphp: enable mysql option in PACKAGECONFIG
+In-Reply-To: <1366016435-10751-1-git-send-email-b28495@freescale.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH v4] tclap: initial add 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,58 +44,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 10:15:24 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 15 Apr 2013 10:25:10 -0000
+X-Groupsio-MsgNum: 44191
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="PZYVFYZbFYjzBslI"
+Content-Disposition: inline
 
-On Tuesday 09 April 2013 15:11:03 jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
-> 
-> The patches are for the LAMP feature in our layer, to enable mysql option in
-> PACKAGECONFIG works but the old libtool used by modphp doesn't support
-> "--with-libtool-sysroot" which causes a host contamination issue. So this
-> work also includes fixes to support autoconf 2.59+ to avoid the libtool
-> issue.
-> 
-> I think not all people want to enale mysql as default, if so, I think we can
-> only add the fixes, and I will only enable mysql option in our layer.
-> 
+--PZYVFYZbFYjzBslI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Apr 15, 2013 at 05:00:35PM +0800, b28495@freescale.com wrote:
+> From: Ting Liu <b28495@freescale.com>
+>=20
+> TCLAP (Templatized C++ Command Line Parser Library ) is a small, flexible
+> library that provides a simple interface for defining and accessing comma=
+nd
+> line arguments.
+>=20
+> Use the commit of tag tclap-1-2-1-release-final.
+>=20
+> Signed-off-by: Ting Liu <b28495@freescale.com>
 > ---
-> The following changes since commit b07f0a239e7ee2b81157399b6befa811a5009813:
-> 
->   gd: Add mirror for when libgd.org is down (2013-04-08 14:12:24 +0200)
-> 
-> are available in the git repository at:
->   git://git.pokylinux.org/poky-contrib jhuang0/d_modphp_lamp_0409_0
->  
-> http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=jhuang0/d_modphp_lamp
-> _0409_0
-> 
-> Jackie Huang (2):
->   modphp: revert pthread-check.patch and add one against threads.m4
->   modphp: enable mysql option in PACKAGECONFIG
-> 
->  .../modphp/files/php-5.3.14-aconf259.patch         |  209
-> ++++++++++++++++++++ .../modphp/files/pthread-check-threads-m4.patch    |  
-> 30 +++
->  .../recipes-php/modphp/files/pthread-check.patch   |   64 ------
->  meta-webserver/recipes-php/modphp/modphp5.inc      |   26 ++--
->  4 files changed, 252 insertions(+), 77 deletions(-)
->  create mode 100644
-> meta-webserver/recipes-php/modphp/files/php-5.3.14-aconf259.patch create
-> mode 100644
-> meta-webserver/recipes-php/modphp/files/pthread-check-threads-m4.patch
-> delete mode 100644
-> meta-webserver/recipes-php/modphp/files/pthread-check.patch
+>  .../tclap/files/Makefile.am-disable-docs.patch     |   31 ++++++++++++++=
+++++++
+>  meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb      |   14 +++++++++
+>  2 files changed, 45 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/tclap/files/Makefile.am-disa=
+ble-docs.patch
+>  create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+>=20
+> diff --git a/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-doc=
+s.patch b/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-docs.pat=
+ch
+> new file mode 100644
+> index 0000000..358cbef
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/tclap/files/Makefile.am-disable-docs.patch
 
-Merged, thanks!
+why not in meta-oe/recipes-devtools/tclap/tclap? Lookup would be few
+milliseconds faster :)
 
-Cheers,
-Paul
+> @@ -0,0 +1,31 @@
+> +From c209ed0e7ffca32fe3714bad9cc54bdb00c286bb Mon Sep 17 00:00:00 2001
+> +From: Ting Liu <b28495@freescale.com>
+> +Date: Mon, 15 Apr 2013 16:28:37 +0800
+> +Subject: [PATCH] Makefile.am: disable docs
+> +
+> +Upstream-Status: Inappropriate [OE specific]
+> +
+> +docs need some generating tool (for example, doxygen) from host which may
+> +be not available. Disable it to avoid build issue.
+> +
+> +Signed-off-by: Ting Liu <b28495@freescale.com>
+> +---
+> + Makefile.am |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 0a6ebc9..6b42f41 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -1,7 +1,7 @@
+> +=20
+> + ACLOCAL_AMFLAGS =3D -I config
+> +=20
+> +-SUBDIRS =3D include examples docs tests msc config
+> ++SUBDIRS =3D include examples tests msc config
+> +=20
+> + pkgconfigdir =3D $(libdir)/pkgconfig
+> + pkgconfig_DATA =3D $(PACKAGE).pc
+> +--=20
+> +1.7.5
+> +
+> diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/reci=
+pes-devtools/tclap/tclap_1.2.1.bb
+> new file mode 100644
+> index 0000000..c9fab52
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION =3D "Templatized C++ Command Line Parser"=20
+> +HOMEPAGE =3D "http://tclap.sourceforge.net/"=20
+> +LICENSE =3D "MIT"=20
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8ab0ff134bcc584d0e6b5b9f8732=
+453"
+> +
+> +SRCREV =3D "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
+> +SRC_URI =3D "git://tclap.git.sourceforge.net/gitroot/tclap/tclap \
+> +          file://Makefile.am-disable-docs.patch \
 
--- 
+Please use 4 spaces if you send v5 with .patch file moved.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+> +"=20
+> +
+> +S =3D "${WORKDIR}/git"
+> +inherit autotools
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --=20
+> 1.7.5
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--PZYVFYZbFYjzBslI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFr0WwACgkQN1Ujt2V2gBxcUQCeNrIPgkH83FKzAgpmXmTNTXUM
+cpYAn3ANel3hX7KdTV245a4fbbDLvClO
+=IFcv
+-----END PGP SIGNATURE-----
+
+--PZYVFYZbFYjzBslI--
