@@ -1,33 +1,38 @@
-Received: from mail-la0-f43.google.com ([209.85.215.43])
+Received: from mail-ee0-f46.google.com ([74.125.83.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1URfr9-0003bP-1C
+	(envelope-from <martin.jansa@gmail.com>) id 1URg8F-0005nF-Dk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 11:37:54 +0200
-Received: by mail-la0-f43.google.com with SMTP id eg20so3374455lab.16
+	Mon, 15 Apr 2013 11:55:30 +0200
+Received: by mail-ee0-f46.google.com with SMTP id d49so2183543eek.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Apr 2013 02:20:18 -0700 (PDT)
+	Mon, 15 Apr 2013 02:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=KoZIvQ38n0kQl/BpTWcaUoF3rYTL1ST7CITTQDrO3Oc=;
-	b=m6AY9Tw/0bwWfcMAd0gHB69ULwMiodesRFMET3bnwlia1GCRvLxbDUpdS6J9usS/z4
-	sT8zxc8MU/dSdaaRyvepT6iDUaIIN7AWCAqx22B9ymWYALUu7MHXhX0Q5pUL0Xto7nAL
-	Gu8KPGHRMgagdmzbL9GURXmj1aD/idQ1cNiv1cugISN28J7Ezz+hKlYFV9+SQ2B2dYkD
-	YXVq133fmrMSw0t/6avUJG6DcwmS6pcLBCYSscgIaPh1mFWjHnjV1177NlCVFQ09cCpB
-	cRfV56knDNCgoTSnB01sXVs//60BF7364dDNjKj7E7C/Rc9d5zgpoyQQAn2mJl/iKYv8
-	7nYw==
-MIME-Version: 1.0
-X-Received: by 10.112.132.166 with SMTP id ov6mr9906769lbb.71.1366017618438;
-	Mon, 15 Apr 2013 02:20:18 -0700 (PDT)
-Received: by 10.112.5.130 with HTTP; Mon, 15 Apr 2013 02:20:18 -0700 (PDT)
-In-Reply-To: <20130414184047.GJ2475@jama>
-References: <1365961831-6466-1-git-send-email-andrea.adami@gmail.com>
-	<20130414184047.GJ2475@jama>
-Date: Mon, 15 Apr 2013 11:20:18 +0200
-Message-ID: <CAAQYJAuk0bW6Sg871Zs__PhcTLZq04xJtGJN8VYKuciZxVAnbg@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=qCIRsK5qImphxTMEBu+idxcdy31GWGiYbPd6mBCDAbE=;
+	b=V2sFS44U3BD9D311h1OsBeUyIsTtWSW2Qp8I7oOoVCKRiBak/zePFTd12nQtWzOhvU
+	vS/yS4h+Tgw2fVFMYizYS1gzywdBGyO5cJxVDsIcRMbfXhWJf1grv6KcM5EaFilLQoEF
+	YeBnLb5XSjQ8cR4a074fSb2ZO8Urw6let9UmLnDzA57SRbieVp9SvMoOgGOiFJpFSjZx
+	UZCwbz7HWgOu88Gepg4URBubOaE/SXXcaxfdB3dckb6U3KFCTO8IrW0clq2naL8lla8o
+	hS0amg7OS36hInsa5WuP27iETaGXh8Zi5B14cylymNDptg+bcuYRxFSev2olNrvzU8jn
+	NAlQ==
+X-Received: by 10.14.182.72 with SMTP id n48mr2483819eem.3.1366018678902;
+	Mon, 15 Apr 2013 02:37:58 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id
+	cb50sm25794160eeb.14.2013.04.15.02.37.57
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 02:37:58 -0700 (PDT)
+Date: Mon, 15 Apr 2013 11:38:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH] linux-yocto_3.8: remove patch already upstream
+Message-ID: <20130415093804.GK2475@jama>
+References: <1365867474-10261-1-git-send-email-Martin.Jansa@gmail.com>
+	<CAJTo0LZEwOb+u0=aR+BnozYTZ1n0GOO2_e3Na1WW3C6ApNk3Rw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LZEwOb+u0=aR+BnozYTZ1n0GOO2_e3Na1WW3C6ApNk3Rw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] llvm: Import from meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,135 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 09:38:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Apr 2013 09:55:37 -0000
+X-Groupsio-MsgNum: 44187
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cN0A5YokcrYPGsSB"
+Content-Disposition: inline
 
-On Sun, Apr 14, 2013 at 8:40 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sun, Apr 14, 2013 at 07:50:31PM +0200, Andrea Adami wrote:
->> * the spitz_pm patch was pushed upstream with commit
->> * id 510fcb0d331f314cd20d0067d56f29302846f47b
->> *
->> * remove it to unbreak do_patch
->
-> Now it builds with latest oe-core, but still doesn't boot for me.
+--cN0A5YokcrYPGsSB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is an outstanding regression due to the power regulators rework:
-boot from SD/CF card is atm impossible on pxa Zaurus (and on collie
-too, until refresh of thesing's locomo_spi patch). We are working on
-it.
+On Mon, Apr 15, 2013 at 10:19:00AM +0100, Burton, Ross wrote:
+> Hi Martin,
+>=20
+> On 13 April 2013 16:37, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > * llvm is generic enough to be useful outside meta-java
+> >   e.g. we need it to enable llvmpipe galium driver in mesa
+>=20
+> Do you plan on doing this?  I've had this down as something to propose
+> for oe-core, or at least enable elsewhere.
 
-Thanks for your testings
+Yes, we have it in .bbappend, unfortunately galium is disabled without
+PACKAGECONFIG which makes EXTRA_OECONF mangling a bit more complicated,
+when we have working version I can propose some changes to mesa in
+oe-core. We're using danny so we have to backport some stuff too first.
 
-Cheers
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Andrea
+--cN0A5YokcrYPGsSB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
->
->> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->> ---
->>  .../linux/linux-yocto-3.8/akita/akita.scc          |  1 -
->>  .../linux/linux-yocto-3.8/spitz/spitz.scc          |  1 -
->>  .../linux/linux-yocto-3.8/spitz_pm.patch           | 53 ----------------------
->>  3 files changed, 55 deletions(-)
->>  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
->>
->> diff --git a/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc b/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
->> index e1549ef..bad38c4 100644
->> --- a/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
->> +++ b/recipes-kernel/linux/linux-yocto-3.8/akita/akita.scc
->> @@ -6,6 +6,5 @@ include ../zaurus-common.scc
->>  include ../zaurus-usb-host.scc
->>
->>  patch sharpsl_param.patch
->> -patch spitz_pm.patch
->>  patch pxa27x-sa1100-rtc.patch
->>  patch spi-pxa2xx-fix-mem.patch
->> diff --git a/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc b/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
->> index fe6aac8..f9f9381 100644
->> --- a/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
->> +++ b/recipes-kernel/linux/linux-yocto-3.8/spitz/spitz.scc
->> @@ -5,6 +5,5 @@ include ../zaurus-common.scc
->>  include ../zaurus-usb-host.scc
->>
->>  patch sharpsl_param.patch
->> -patch spitz_pm.patch
->>  patch pxa27x-sa1100-rtc.patch
->>  patch spi-pxa2xx-fix-mem.patch
->> diff --git a/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch b/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
->> deleted file mode 100644
->> index 34bcb9d..0000000
->> --- a/recipes-kernel/linux/linux-yocto-3.8/spitz_pm.patch
->> +++ /dev/null
->> @@ -1,53 +0,0 @@
->> -Subject: [PATCH] [ARM] pxa/spitz_pm.c: Fix hang under certain conditions when resuming from STR.
->> -
->> -Devices that use spitz_pm.c will fail to resume
->> -from STR (Suspend To Ram) when the charger plug is inserted
->> -or removed when a device is in STR mode. The culprit is
->> -a misconfigured gpio line - GPIO18. GPIO18 should be configured as a
->> -regular GPIO input but it gets configured as an alternate function
->> -GPIO18_RDY. And then later in postsuspend() it gets configured as
->> -a regular GPIO18 input line.
->> -
->> -Fix this by removing the GPIO18_RDY configuration so that GPIO18
->> -only gets configured as a regular gpio input.
->> -
->> -Signed-off-by: Marko Katic <dromede@gmail.com>
->> ----
->> - arch/arm/mach-pxa/spitz_pm.c |    8 ++------
->> - 1 files changed, 2 insertions(+), 6 deletions(-)
->> -
->> -diff --git a/arch/arm/mach-pxa/spitz_pm.c b/arch/arm/mach-pxa/spitz_pm.c
->> -index 438f02f..842596d 100644
->> ---- a/arch/arm/mach-pxa/spitz_pm.c
->> -+++ b/arch/arm/mach-pxa/spitz_pm.c
->> -@@ -86,10 +86,7 @@ static void spitz_discharge1(int on)
->> -     gpio_set_value(SPITZ_GPIO_LED_GREEN, on);
->> - }
->> -
->> --static unsigned long gpio18_config[] = {
->> --    GPIO18_RDY,
->> --    GPIO18_GPIO,
->> --};
->> -+static unsigned long gpio18_config = GPIO18_GPIO;
->> -
->> - static void spitz_presuspend(void)
->> - {
->> -@@ -112,7 +109,7 @@ static void spitz_presuspend(void)
->> -     PGSR3 &= ~SPITZ_GPIO_G3_STROBE_BIT;
->> -     PGSR2 |= GPIO_bit(SPITZ_GPIO_KEY_STROBE0);
->> -
->> --    pxa2xx_mfp_config(&gpio18_config[0], 1);
->> -+    pxa2xx_mfp_config(&gpio18_config, 1);
->> -     gpio_request_one(18, GPIOF_OUT_INIT_HIGH, "Unknown");
->> -     gpio_free(18);
->> -
->> -@@ -131,7 +128,6 @@ static void spitz_presuspend(void)
->> -
->> - static void spitz_postsuspend(void)
->> - {
->> --    pxa2xx_mfp_config(&gpio18_config[1], 1);
->> - }
->> -
->> - static int spitz_should_wakeup(unsigned int resume_on_alarm)
->> ---
->> -1.7.4.1
->> --
->> 1.8.1.5
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlFrynwACgkQN1Ujt2V2gBzo4ACgmrmXBp6nOPURcR19P+uod9Nq
+OjsAnAsOoi5+wL52M/KLxXV1BLcd1xmO
+=kd85
+-----END PGP SIGNATURE-----
 
+--cN0A5YokcrYPGsSB--
