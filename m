@@ -1,38 +1,37 @@
-Received: from mail-pa0-f42.google.com ([209.85.220.42])
+Received: from mail-ee0-f41.google.com ([74.125.83.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1URZDV-0000ft-E9
+	(envelope-from <koen@dominion.thruhere.net>) id 1URedR-0003ae-DN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Apr 2013 04:32:32 +0200
-Received: by mail-pa0-f42.google.com with SMTP id kq13so2290479pab.15
+	Mon, 15 Apr 2013 10:19:51 +0200
+Received: by mail-ee0-f41.google.com with SMTP id c1so2149351eek.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Apr 2013 19:14:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=I1zqCZn6CPydQqtt7ES2I4fMYdW7jVUgptIWcZCgitQ=;
-	b=0k8jQv9/im1HSfvISC/gYm9qMu4Gec8RU9J19DM8pfPyNw2EG2DSm5BseTm7tVqV9o
-	Hd5VCjKacSfqrDI/MH4TE+WfOIfmbW2BxZmJR3S+00wh3xbC80oYSlPzJYPVK6CeRYqT
-	q2LJ8wVUVtL3qjUelAmF7Eu90Z3COoXUTN6HFc7ezWC/1MiuqMZdpAcSho9EF1jMeTWJ
-	Oc87TBe0AupXBu3Rb4SvZOK4ThdoTAWU4T9HPAxzTAm5MEzUky9lHdWCO92AHuc6IBKF
-	KtoaBxblFOXl1YKd2/28S6LeNVANIRhquUlPkKaXr0GhE4+7kcH66neOPN1Yq+PaSAw2
-	7Z1g==
-X-Received: by 10.68.98.165 with SMTP id ej5mr15506028pbb.184.1365992096580;
-	Sun, 14 Apr 2013 19:14:56 -0700 (PDT)
-Received: from jchheda-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPS id wi6sm18269506pbc.22.2013.04.14.19.14.54
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 14 Apr 2013 19:14:55 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <5166C774.5040200@communistcode.co.uk>
-Date: Sun, 14 Apr 2013 19:14:53 -0700
-Message-Id: <BE3ADE1C-F9B9-4B35-B5E0-9B4085F897E7@gmail.com>
-References: <6B577862-4C24-49DB-80F2-3A1408AF8337@gmail.com>
-	<5166C774.5040200@communistcode.co.uk>
+	Mon, 15 Apr 2013 01:02:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=65NpqOLU+PNika9l8I5pgDPrrsn3vLmq+z/TZpci8tM=;
+	b=g/DdGc2QCo82oJuqpNHE8LD9xMiGlm2ug6ovjxfLHf9o+hiI8e8GbI6+9WvcfkRvx/
+	U635DbsLyXVgCvK9rtdHmYW4sY6581VZy04CE8TlW33tYqlDxc9+93cKliPoOOGPbuC6
+	7jW2s20+g8oM7qOBbAt+B3sFGyYBS2qBuQR3Jlq8ABMbUFdupX6PdLVoJdXpz0kwWYzx
+	YnmNBpKWbn1UY8rQ0IZ53l9bIpqzHVRNaz5Nyn09bhaGPsAAA30LW91dT3iGjYtm4BS1
+	JmKRcls8d2gOsLGTVUc9dioqxIoX9mtO6vyYn+Ix+zRNbdh73dd8il3Ao+Xbx1qkB4JB
+	L/zg==
+X-Received: by 10.15.94.200 with SMTP id bb48mr59833918eeb.21.1366012924925;
+	Mon, 15 Apr 2013 01:02:04 -0700 (PDT)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPS id bj2sm25494213eeb.1.2013.04.15.01.02.03
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 15 Apr 2013 01:02:03 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1503)
-Subject: Re: [RFT] GCC 4.8 recipes
+Date: Mon, 15 Apr 2013 10:01:55 +0200
+Message-Id: <1366012915-7125-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.1.4
+X-Gm-Message-State: ALoCoQmVgUbvghhsmDc80gW52pgoGXwdiCufeiNtBlM0BS6rg+n+J19ojCtcOIBSfaJKM9a9lRVh
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][meta-gnome][PATCH] metacity 2.24.13: fix crash on startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,76 +45,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2013 02:32:32 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 15 Apr 2013 08:19:54 -0000
 
+Metacity crashes without the schemas installed, so RDEPEND on them
 
-On Apr 11, 2013, at 7:23 AM, Jack Mitchell <ml@communistcode.co.uk> =
-wrote:
+root@beaglebone:~# metacity
 
-> On 28/03/13 05:51, Khem Raj wrote:
->> All,
->>=20
->> I have added gcc 4.8 recipes and the branch is here
->>=20
->> git://git.openembedded.org/openembedded-core-contrib kraj/gcc-4.8
->>=20
->> cgit
->>=20
->> =
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-4.=
-8
->>=20
->> Please test it out on your respective environments if you can.
->>=20
->> To enable gcc 4.8 with OE-Core you would
->>=20
->> in local.conf set
->>=20
->> GCCVERSION =3D "4.8%"
->>=20
->> and if you use angstrom. Please checkout 'next' branch of =
-setup-scripts
->> and then in conf/local.conf
->>=20
->> set
->>=20
->> ANGSTROM_GCC_VERSION =3D "4.8%"
->>=20
->> My testing so far has been building systems-image for all qemu =
-machines and they
->> seem to boot as good as 4.7 did. But I am hoping for wider testing =
-and finding issues
->> or very least improve the existing recipes for now and once the 1.4 =
-release is done
->> we can then propose it for inclusion in OE-Core
->>=20
->> Thanks for your time
->>=20
->>=20
->> -Khem
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> =
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> Hi Khem,
->=20
-> Testing your patches today threw up a build failure in nativesdk-qemu.
->=20
-> Log attached.
+(metacity:594): GLib-GIO-ERROR **: Settings schema 'org.gnome.desktop.wm.preferences' is not installed
 
+Trace/breakpoint trap
+6 XSELINUXs still allocated at reset
+SCREEN: 0 objects of 180 bytes = 0 total bytes 0 private allocs
+COLORMAP: 0 objects of 4 bytes = 0 total bytes 0 private allocs
+DEVICE: 0 objects of 64 bytes = 0 total bytes 0 private allocs
+CLIENT: 0 objects of 84 bytes = 0 total bytes 0 private allocs
+WINDOW: 0 objects of 20 bytes = 0 total bytes 0 private allocs
+PIXMAP: 2 objects of 8 bytes = 16 total bytes 0 private allocs
+GC: 4 objects of 8 bytes = 32 total bytes 0 private allocs
+CURSOR: 0 objects of 4 bytes = 0 total bytes 0 private allocs
+DBE_WINDOW: 0 objects of 12 bytes = 0 total bytes 0 private allocs
+TOTAL: 6 objects, 48 bytes, 0 allocs
+2 PIXMAPs still all[  281.248271] tilcdc 4830e000.fb: timeout waiting for framedone
+ocated at reset
+PIXMAP: 2 objects of 8 bytes = 16 total bytes 0 private allocs
+GC: 4 objects of 8 bytes = 32 total bytes 0 private allocs
+CURSOR: 0 objects of 4 bytes = 0 total bytes 0 private allocs
+DBE_WINDOW: 0 objects of 12 bytes = 0 total bytes 0 private allocs
+TOTAL: 6 objects, 48 bytes, 0 allocs
+4 GCs still allocated at reset
+GC: 4 objects of 8 bytes = 32 total bytes 0 private allocs
+CURSOR: 0 objects of 4 bytes = 0 total bytes 0 private allocs
+DBE_WINDOW: 0 objects of 12 bytes = 0 total bytes 0 private allocs
+TOTAL: 4 objects, 32 bytes, 0 allocs
+root@beaglebone:~#
 
-Thanks for trying it out. Do you have meta-beagleboard in your layer set =
-?
-if yes then retry with oe-core of today especially
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-=
-http://git.openembedded.org/openembedded-core/commit/?id=3Ddfb0c2cf9799d08=
-4a76aa92e243c743d7ff05db8
-
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+index 3605201..e82f89c 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://src/include/main.h;endline=24;md5=c2242df552c880280315989bab626b90"
+ 
+ DEPENDS = "gsettings-desktop-schemas startup-notification gtk+ gconf gdk-pixbuf-native libcanberra gnome-doc-utils"
+-PR = "r0"
++PR = "r1"
+ 
+ inherit gnome update-alternatives
+ 
+@@ -27,4 +27,5 @@ do_configure_prepend() {
+ }
+ 
+ FILES_${PN} += "${datadir}/themes ${datadir}/gnome-control-center ${datadir}/gnome"
++RDEPENDS_${PN} += "gsettings-desktop-schemas"
+ 
+-- 
+1.8.1.4
 
 
 
