@@ -1,19 +1,21 @@
-Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
+Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1US5RH-0000mb-5k
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1US5Uh-0001VM-R9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Apr 2013 14:56:50 +0200
-Message-ID: <516D4675.7000806@communistcode.co.uk>
-Date: Tue, 16 Apr 2013 13:39:17 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130403 Thunderbird/17.0.5
-MIME-Version: 1.0
+	Tue, 16 Apr 2013 15:00:28 +0200
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id B9A6BD2284
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Apr 2013 14:42:13 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-References: <cover.1366109533.git.paul.eggleton@linux.intel.com>
-	<516D2F75.6040002@communistcode.co.uk> <4130879.bHlKN1xLuQ@helios>
-In-Reply-To: <4130879.bHlKN1xLuQ@helios>
-Subject: Re: [meta-networking, meta-oe][PATCH 0/9] Move networking recipes to meta-networking
+Date: Tue, 16 Apr 2013 14:42:49 +0200
+Message-Id: <1366116169-19800-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] php: update to 5.4.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,48 +29,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2013 12:56:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Apr 2013 13:00:35 -0000
+X-List-Received-Date: Tue, 16 Apr 2013 13:00:35 -0000
 
-On 16/04/13 13:30, Paul Eggleton wrote:
-> On Tuesday 16 April 2013 12:01:09 Jack Mitchell wrote:
->> On 16/04/13 11:53, Paul Eggleton wrote:
->>> This moves most of the remaining networking recipes in meta-oe to
->>> meta-networking, with some additional tidying up.
->> Could we possibly get net-snmp in with this move?
-> Whoops, I meant to move that one. However I just tried to build it after
-> doing so and it fails during do_compile:
->
-> | ../arm-poky-linux-gnueabi-libtool  --mode=link arm-poky-linux-gnueabi-gcc  -march=armv5te  -marm -mthumb-interwork   -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/paul/poky/poky/build/tmp/sysroots/qemuarm -fno-strict-aliasing -O2 -pipe -g -feliminate-unused-debug-types -Ulinux -Dlinux=linux  -o snmpd snmpd.lo  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  libnetsnmpagent.la libnetsnmpmibs.la ../snmplib/libnetsnmp.la -lm
-> | arm-poky-linux-gnueabi-libtool: link: arm-poky-linux-gnueabi-gcc -march=armv5te -marm -mthumb-interwork -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/paul/poky/poky/build/tmp/sysroots/qemuarm -fno-strict-aliasing -O2 -pipe -g -feliminate-unused-debug-types -Ulinux -Dlinux=linux -o .libs/snmpd .libs/snmpd.o -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  ./.libs/libnetsnmpagent.so ./.libs/libnetsnmpmibs.so /home/paul/poky/poky/build/tmp/work/armv5te-poky-linux-gnueabi/net-snmp/5.7.1-r6.4/net-snmp-5.7.1/agent/.libs/libnetsnmpagent.so /home/paul/poky/poky/build/tmp/work/armv5te-poky-linux-gnueabi/net-snmp/5.7.1-r6.4/net-snmp-5.7.1/snmplib/.libs/libnetsnmp.so -lpci -ldl ../snmplib/.libs/libnetsnmp.so -lcrypto -lm
-> | .libs/snmpd.o: In function `main':
-> | /home/paul/poky/poky/build/tmp/work/armv5te-poky-linux-gnueabi/net-snmp/5.7.1-r6.4/net-snmp-5.7.1/agent/snmpd.c:459: undefined reference to `netsnmp_sd_listen_fds'
-> | collect2: error: ld returned 1 exit status
-> | make[1]: *** [snmpd] Error 1
-> | make[1]: Leaving directory `/home/paul/poky/poky/build/tmp/work/armv5te-poky-linux-gnueabi/net-snmp/5.7.1-r6.4/net-snmp-5.7.1/agent'
-> | make: *** [subdirs] Error 1
-> | ERROR: oe_runmake failed
-> | ERROR: Function failed: do_compile (see /home/paul/poky/poky/build/tmp/work/armv5te-poky-linux-gnueabi/net-snmp/5.7.1-r6.4/temp/log.do_compile.21614 for further information)
->
-> Not sure why this is failing, I doubt the move has anything to do with it
-> though.
->
-> Cheers,
-> Paul
->
+Build tested for AArch64 and x86.
+Runtime tested on x86.
 
-Hmmmm, maybe it's something armv5te related as it builds fine on my 
-armv7a here...maybe one for another day, although it might get a bit 
-more love if it's not hidden away in recipes-extended.
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-devtools/php/php.inc               |  4 +-
+ .../recipes-devtools/php/php/phar-makefile.patch   |  8 +--
+ .../recipes-devtools/php/php/php-m4-divert.patch   | 83 ----------------------
+ .../recipes-devtools/php/php/php_exec_native.patch | 26 ++++---
+ .../php/{php_5.3.19.bb => php_5.4.14.bb}           |  5 +-
+ 5 files changed, 26 insertions(+), 100 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/php/php/php-m4-divert.patch
+ rename meta-oe/recipes-devtools/php/{php_5.3.19.bb => php_5.4.14.bb} (75%)
 
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 176d4a1..225c3d7 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -64,7 +64,9 @@ do_install_append_pn-php-native() {
+ # fixme
+ do_install_append_pn-php() {
+     install -d ${D}/${sysconfdir}/
+-    mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
++    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
++         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
++    fi
+     rm -rf ${D}/${TMPDIR}
+     rm -rf ${D}/.registry
+     rm -rf ${D}/.channels
+diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+index 9d1dc7b..6fde251 100644
+--- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+@@ -4,8 +4,8 @@ index fc93d1d..9a8cd65 100755
+ +++ b/ext/phar/Makefile.frag
+ @@ -6,19 +6,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+  
+-    PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
+-    PHP_PHARCMD_EXECUTABLE = ` \
++ PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
++ PHP_PHARCMD_EXECUTABLE = ` \
+ -	if test -x "$(top_builddir)/$(SAPI_CLI_PATH)"; then \
+ -		$(top_srcdir)/build/shtool echo -n -- "$(top_builddir)/$(SAPI_CLI_PATH) -n"; \
+ -		if test "x$(PHP_MODULES)" != "x"; then \
+@@ -21,6 +21,6 @@ index fc93d1d..9a8cd65 100755
+ -	fi;`
+ +		$(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE)"; `
+ +
+-    PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
++ PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+  
+-    $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
++ $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+diff --git a/meta-oe/recipes-devtools/php/php/php-m4-divert.patch b/meta-oe/recipes-devtools/php/php/php-m4-divert.patch
+deleted file mode 100644
+index dfc7b64..0000000
+--- a/meta-oe/recipes-devtools/php/php/php-m4-divert.patch
++++ /dev/null
+@@ -1,83 +0,0 @@
+-Patch taken from
+-
+-http://cvs.pld-linux.org/cgi-bin/cvsweb/packages/php/php-m4-divert.patch?rev=1.1
+-
+-diff -ur php-5.2.10.org/configure.in php-5.2.10/configure.in
+---- php-5.2.10.org/configure.in	2009-06-17 14:22:41.000000000 +0200
+-+++ php-5.2.10/configure.in	2009-08-18 12:16:25.317640253 +0200
+-@@ -1,7 +1,7 @@
+- ## $Id: configure.in,v 1.579.2.52.2.139 2009/06/17 12:22:41 iliaa Exp $ -*- autoconf -*-
+- dnl ## Process this file with autoconf to produce a configure script.
+- 
+--divert(1)
+-+divert(1001)
+- 
+- dnl ## Diversion 1 is the autoconf + automake setup phase. We also
+- dnl ## set the PHP version, deal with platform-specific compile
+-@@ -263,7 +263,7 @@
+- sinclude(TSRM/tsrm.m4)
+- 
+- 
+--divert(2)
+-+divert(1002)
+- 
+- dnl ## Diversion 2 is where we set PHP-specific options and come up
+- dnl ## with reasonable default values for them. We check for pthreads here
+-@@ -302,7 +302,7 @@
+-   PTHREADS_FLAGS
+- fi
+- 
+--divert(3)
+-+divert(1003)
+- 
+- dnl ## In diversion 3 we check for compile-time options to the PHP
+- dnl ## core and how to deal with different system dependencies.
+-@@ -661,7 +661,7 @@
+-   PHP_CRYPT_R_STYLE
+- fi
+- 
+--divert(4)
+-+divert(1004)
+- 
+- dnl ## In diversion 4 we check user-configurable general settings.
+- 
+-@@ -902,7 +902,7 @@
+-   AC_MSG_RESULT([using system default])
+- fi
+- 
+--divert(5)
+-+divert(1005)
+- 
+- dnl ## In diversion 5 we check which extensions should be compiled.
+- dnl ## All of these are normally in the extension directories.
+-diff -ur php-5.2.10.org/ext/standard/config.m4 php-5.2.10/ext/standard/config.m4
+---- php-5.2.10.org/ext/standard/config.m4	2007-07-11 13:56:03.000000000 +0200
+-+++ php-5.2.10/ext/standard/config.m4	2009-08-18 12:16:25.317640253 +0200
+-@@ -1,6 +1,6 @@
+- dnl $Id: config.m4,v 1.80.2.3.2.3 2007/07/11 11:56:03 jani Exp $ -*- autoconf -*-
+- 
+--divert(3)dnl
+-+divert(1003)dnl
+- 
+- dnl
+- dnl Check if flush should be called explicitly after buffered io
+-@@ -205,7 +205,7 @@
+- AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpclass isinf isnan)
+- AC_FUNC_FNMATCH	
+- 
+--divert(5)dnl
+-+divert(1005)dnl
+- 
+- dnl
+- dnl Check for regex library type
+-diff -ur php-5.2.10.org/scripts/phpize.m4 php-5.2.10/scripts/phpize.m4
+---- php-5.2.10.org/scripts/phpize.m4	2009-06-02 21:54:22.000000000 +0200
+-+++ php-5.2.10/scripts/phpize.m4	2009-08-18 12:16:25.317640253 +0200
+-@@ -1,6 +1,6 @@
+- dnl This file becomes configure.in for self-contained extensions.
+- 
+--divert(1)
+-+divert(1001)
+- 
+- AC_PREREQ(2.13)
+- AC_INIT(config.m4)
+diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+index a563c9a..31be1b7 100644
+--- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
++++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+@@ -1,11 +1,19 @@
+---- php/configure.in.orig	2011-03-12 02:13:19.000000000 +0100
+-+++ php/configure.in	2011-03-12 02:14:05.000000000 +0100
+-@@ -1216,7 +1216,7 @@
+-   PHP_INSTALL_CLI_TARGET="install-cli"
+-   PHP_ADD_SOURCES(sapi/cli, php_cli.c php_cli_readline.c,, cli)
+-   PHP_INSTALLED_SAPIS="cli $PHP_SAPI"
++---
++ sapi/cli/config.m4 |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- php-5.4.14.orig/sapi/cli/config.m4
+++++ php-5.4.14/sapi/cli/config.m4
++@@ -34,11 +34,11 @@ if test "$PHP_CLI" != "no"; then
++     BUILD_CLI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_BINARY_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
++     ;;
++   esac
++ 
++   dnl Set executable for tests
+ -  PHP_EXECUTABLE="\$(top_builddir)/\$(SAPI_CLI_PATH)"
+ +  PHP_EXECUTABLE="${PHP_NATIVE_DIR}/php"
+- else
+-   PHP_INSTALLED_SAPIS="$PHP_SAPI"
+- fi
++   PHP_SUBST(PHP_EXECUTABLE)
++ 
++   dnl Expose to Makefile
++   PHP_SUBST(SAPI_CLI_PATH)
++   PHP_SUBST(BUILD_CLI)
+diff --git a/meta-oe/recipes-devtools/php/php_5.3.19.bb b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+similarity index 75%
+rename from meta-oe/recipes-devtools/php/php_5.3.19.bb
+rename to meta-oe/recipes-devtools/php/php_5.4.14.bb
+index 0ce8113..4e0efb1 100644
+--- a/meta-oe/recipes-devtools/php/php_5.3.19.bb
++++ b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
+ PR = "${INC_PR}.0"
+ 
+ SRC_URI += "file://acinclude-xml2-config.patch \
+-            file://php-m4-divert.patch \
+             file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
+ 
+ SRC_URI_append_pn-php += "file://iconv.patch \
+@@ -18,5 +17,5 @@ SRC_URI_append_pn-php += "file://iconv.patch \
+             file://php-fpm-apache.conf \
+ "
+ 
+-SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
+-SRC_URI[sha256sum] = "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db021020594e2469fd6"
++SRC_URI[md5sum] = "cfdc044be2c582991a1fe0967898fa38"
++SRC_URI[sha256sum] = "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02fe4a46f9c81be20a"
 -- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
+1.8.1.2
 
 
 
