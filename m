@@ -1,33 +1,34 @@
-Received: from mail-pb0-f48.google.com ([209.85.160.48])
+Received: from mail-vc0-f182.google.com ([209.85.220.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1USCtR-0003PW-RV
+	(envelope-from <schnitzeltony@googlemail.com>) id 1USDuj-0001Bp-9G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Apr 2013 22:54:25 +0200
-Received: by mail-pb0-f48.google.com with SMTP id xb4so485282pbc.21
+	Tue, 16 Apr 2013 23:59:45 +0200
+Received: by mail-vc0-f182.google.com with SMTP id ht10so820143vcb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2013 13:36:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=uxHqY/M6/4+vskRfZBafJxdGHXy8sA9YZkRvoZeuqJY=;
-	b=zJJ+JZ2mca65rCAdDEUHrEhSBNyc1e04yrYG2Lj1gsdOLi+FE8FMDaC7TLNZ8mBx64
-	9jkEoFIwLFHYBEhherQAT8985DY65RWFzDtinUdVKvnyLzmgr7aEwmPxDzJz3XR0IMCQ
-	RdrSls5G7U373obRBzCfYNJpSbz4CfzbYAOkM+9Qd/1BkjBq54Lvi+ULpqfg6eB1ud5v
-	1SgAWAQebDIO0of4QQf7wafjupnxREf64SHaKKG+ob/K4GtrbH/p7ObSrEJGawKJW59t
-	F05AuKBWd5NMhst/6ZogVuDU6S2WpmaiChr8uJlAVwteLAGTzz2KyJM4eXYMJolCW1wM
-	N/6Q==
-X-Received: by 10.68.209.162 with SMTP id mn2mr5388742pbc.190.1366144610377;
-	Tue, 16 Apr 2013 13:36:50 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id cp1sm3262263pbc.42.2013.04.16.13.36.48
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 16 Apr 2013 13:36:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 16 Apr 2013 14:42:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=pG0U8KaRycTKA9ey8ylEP3EDI1ceiyaL5enj3JKjfsE=;
+	b=uDTa8aNBR88tS10DaOc7/+CENl15RtQTkwGPAOO/HJHzu8u9R2RZGJszW2GQnmearA
+	HaEZk3e5++/ea/gl74IHm2PdhNoaqKevz+SowtwrAMP66tJgqc1qNsvmDIKQd1komggM
+	jZ776a6k1gZjajkTs6Pcw7hgbeCs8smSB/srNXv04xlC2s0c3sSilSHqMa0HqYU9s6qN
+	Jbw0ocRPgUp12HqDNvdxOhPeT76ifzNWGA4PZRK/iZtY68b1kOOcfMoN29GKlSUwJebf
+	qItRIMHIjINgOkGr9rKVpcYJ/vLokxO0fBrGOOcZGTRd/9fhwaLgR2Cc+/fN2ihJiE8E
+	pyaQ==
+MIME-Version: 1.0
+X-Received: by 10.220.19.8 with SMTP id y8mr2980708vca.31.1366148534157; Tue,
+	16 Apr 2013 14:42:14 -0700 (PDT)
+Received: by 10.52.185.168 with HTTP; Tue, 16 Apr 2013 14:42:14 -0700 (PDT)
+In-Reply-To: <1365873228-29369-1-git-send-email-otavio@ossystems.com.br>
+References: <1365873228-29369-1-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 16 Apr 2013 23:42:14 +0200
+Message-ID: <CALbNGRQDZ2djJk12or5zChv4YY3WqM7JNmfb6gpUVwBcdf9KVg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Apr 2013 13:35:50 -0700
-Message-Id: <1366144550-1493-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-networking][PATCH V2] ntp: Create a separate package for sntp
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-xfce PATCH] xfce4-session: Add x-session-manager alternative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,104 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2013 20:54:28 -0000
+X-List-Received-Date: Tue, 16 Apr 2013 22:00:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-sntp provides the functionality of obsoleted ntpdate
-so we have option of using ntpd as well as sntp
-sntp does the immediate one time sync with time
-server and corrects the tme immediately. it
-replaces ntpdate nicely.
+On Sat, Apr 13, 2013 at 7:13 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> index 6ad834d..d00e466 100644
+> --- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> +++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.0.bb
+> @@ -4,9 +4,9 @@ LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+>  DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
+>  RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
+> -PR = "r2"
+> +PR = "r3"
+>
+> -inherit xfce
+> +inherit xfce update-alternatives
+>
+>  SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
+>  SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a72c46ce"
+> @@ -15,6 +15,9 @@ SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch
+>              file://0003-configure.in-hard-code-path-to-iceauth.patch \
+>  "
+>
+> +ALTERNATIVE_${PN} = "x-session-manager"
+> +ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
+> +
+>  # protect from frightening message that xfce might not work correctly
+>  pkg_postinst_${PN} () {
+>      echo 127.0.0.1    ${MACHINE} >> /etc/hosts
+> --
+> 1.8.1
+>
+Hi Otavio,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-support/ntp/ntp.inc        |   13 +++++++++++--
- meta-networking/recipes-support/ntp/ntp/sntp       |    1 +
- .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
- 3 files changed, 23 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp
- create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp.service
+As pure xfce user I never had a thought about this. I have no time to
+test but I think it looks fine and should go in. Not sure if it still
+applies...
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index a604b9c..004dc9b 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -20,6 +20,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpdate.default \
-            file://ntpdate.service \
-            file://ntpd.service \
-+           file://sntp.service \
-+           file://sntp \
- "
- 
- inherit autotools update-rc.d systemd
-@@ -52,15 +54,18 @@ do_install_append() {
- 
-     install -d ${D}/${sysconfdir}/default
-     install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
-+    install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
-+
-     install -d ${D}/${sysconfdir}/network/if-up.d
-     ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
- 
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
-     install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-+    install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
- }
- 
--PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
-+PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils sntp"
- # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
- 
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
-@@ -71,9 +76,10 @@ RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
- RCONFLICTS_${PN}-utils = "${PN}-bin"
- 
--SYSTEMD_PACKAGES = "${PN} ntpdate"
-+SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
- SYSTEMD_SERVICE_${PN} = "ntpd.service"
- SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
-+SYSTEMD_SERVICE_sntp = "sntp.service"
- 
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
-@@ -94,6 +100,9 @@ FILES_ntpdate = "${bindir}/ntpdate \
-     ${sysconfdir}/default/ntpdate \
-     ${systemd_unitdir}/system/ntpdate.service \
- "
-+FILES_sntp = "${bindir}/sntp \
-+              ${sysconfdir}/default/sntp \
-+             "
- 
- CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
- CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
-diff --git a/meta-networking/recipes-support/ntp/ntp/sntp b/meta-networking/recipes-support/ntp/ntp/sntp
-new file mode 100644
-index 0000000..f8c5895
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/ntp/sntp
-@@ -0,0 +1 @@
-+NTPSERVER="ntpserver.example.org"
-diff --git a/meta-networking/recipes-support/ntp/ntp/sntp.service b/meta-networking/recipes-support/ntp/ntp/sntp.service
-new file mode 100644
-index 0000000..0f09e43
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/ntp/sntp.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Simple Network Time Service Client
-+After=network.target
-+
-+[Service]
-+Type=oneshot
-+EnvironmentFile=-/etc/default/sntp
-+ExecStart=/usr/bin/sntp -s $NTPSERVER
-+
-+[Install]
-+WantedBy=multi-user.target
--- 
-1.7.9.5
-
+Andreas
 
 
