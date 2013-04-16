@@ -1,35 +1,37 @@
-Received: from mail-vc0-f179.google.com ([209.85.220.179])
+Received: from mail-da0-f46.google.com ([209.85.210.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>) id 1US4Ub-0003Md-Te
+	(envelope-from <martin.jansa@gmail.com>) id 1US4qK-0005sV-Ko
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Apr 2013 13:56:18 +0200
-Received: by mail-vc0-f179.google.com with SMTP id hz11so279996vcb.24
+	Tue, 16 Apr 2013 14:18:37 +0200
+Received: by mail-da0-f46.google.com with SMTP id y19so220119dan.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Apr 2013 04:38:39 -0700 (PDT)
+	Tue, 16 Apr 2013 05:01:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=c+LtrwwUv2DWvVG+3m4r1+TMKt9ahaLH0MBypljx70c=;
-	b=W+ZI+Ls0s9gtctAK24/YbpYJ/knWsdVf4Lmi+A55FO/1qso4Yo8I4eBu/Q4mH/erMk
-	h53wQjV3+SQcCYta94BwHkkj3pIGn33JSnZo+TwZR6jXpukaYPq/XWBWPHKko33/G+qG
-	Wr9W1+W6A5QPQcIDI7+sMILJcKgow9z4vuQN1BLRHo4EsewPtoz6HnwRdeESR0PxWDT7
-	97ID2ne+eFZb8N9ohPy7h0MCXaBsOEi1TH8mD2aIPThvhHlSoP14ew8fRK2OFDDzLQ02
-	jISL8Q/jE4s0EIu2gzwjqNDmNcEFqYUvkebBkWbzvzyXqjgr7jQ1wK85cX6BemP6Mec4
-	6AkQ==
-MIME-Version: 1.0
-X-Received: by 10.220.167.9 with SMTP id o9mr1220470vcy.25.1366112319433; Tue,
-	16 Apr 2013 04:38:39 -0700 (PDT)
-Sender: paul.betafive@gmail.com
-Received: by 10.220.224.135 with HTTP; Tue, 16 Apr 2013 04:38:39 -0700 (PDT)
-In-Reply-To: <20130416111424.GJ10628@jama.dyndns-home.com>
-References: <CANyK_8frhEkQ3-ktHygKdQOWZB3cDVEsqLj_VK7ZeLLL-XEj5A@mail.gmail.com>
-	<20130416111424.GJ10628@jama.dyndns-home.com>
-Date: Tue, 16 Apr 2013 12:38:39 +0100
-X-Google-Sender-Auth: z7PerX9Q6Og_XEA2WD3acQNkToE
-Message-ID: <CANyK_8cWf21+4CgXwJLE4-nxYGZwhXdpkQEW4MtfaQ5t=QdXMA@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=gTRV6kA8HvB/S+PU2pgPNOuunaETT6a00q94d74F39U=;
+	b=rRonBRsyXGBGsB9gpvOR0bSQTvx3Dk8Y4K+kNqTEiwloZyE4VHP+XPdaERiuU7rwV0
+	dz01W12PkED02UIOkuNjlpbgVavIkhftdTt07SnxjT2drQ3xEIVqAV5HTW4dyy4ktWfP
+	n5UEKhe8MJej++g8RFQ72RXWtc74q3hzD+eUAZlqV5hwgccJ1/drMSdX6H8pczJvAtca
+	2CSpkOchjxctAn2MzKc/ZcU6HlsV91IQqFGRaVPbDq3jYTcp7Bazo5uYWdVn1HT3BnFn
+	pUEK9vkjnoUDLLN/aQDEyouJQuDwz2y1219JQH8Wlf2tUKnOuqxqEk0KiasYbCNFi+PL
+	3HBQ==
+X-Received: by 10.67.3.74 with SMTP id bu10mr3257836pad.146.1366113665407;
+	Tue, 16 Apr 2013 05:01:05 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id b3sm1871049pbw.4.2013.04.16.05.01.02
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 16 Apr 2013 05:01:04 -0700 (PDT)
+Date: Tue, 16 Apr 2013 14:01:02 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] vim 7.3
+Message-ID: <20130416120102.GK10628@jama.dyndns-home.com>
+References: <cover.1366109533.git.paul.eggleton@linux.intel.com>
+	<f2ef961d7b4e3bf58116e1599a8902d2d6528123.1366109533.git.paul.eggleton@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <f2ef961d7b4e3bf58116e1599a8902d2d6528123.1366109533.git.paul.eggleton@linux.intel.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking, meta-oe][PATCH 3/9] openvpn: move to meta-networking and tweak
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +45,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Apr 2013 11:56:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Apr 2013 12:18:37 -0000
+X-Groupsio-MsgNum: 44240
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aziWXe2aaRGlkyg3"
+Content-Disposition: inline
 
-On 16 April 2013 12:14, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Apr 16, 2013 at 10:53:44AM +0100, Paul Barker wrote:
->> I've also found that just installing vim doesn't give me everything I
->> expect, I also need vim-syntax, vim-help, vim-tutor, vim-vimrc and
->> vim-data. I think for most applications where people want to install
->> vim over using plain vi they probably want these extra runtime files.
->> Is it worth creating a package group to install all these together
->> and/or setting RRECOMMENDS for vim?
->
-> RRECOMMENDS seems enough to me
->
+--aziWXe2aaRGlkyg3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'll put together a patch to do this for the current version of vim.
+On Tue, Apr 16, 2013 at 11:53:57AM +0100, Paul Eggleton wrote:
+> * Move SRC_URI checksums next to SRC_URI
+> * Move packaging definitions to the end
+> * Set SUMMARY instead of DESCRIPTION
+> * Drop unused inc file
+>=20
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  .../recipes-support}/openvpn/openvpn/openvpn       |    0
+>  .../recipes-support}/openvpn/openvpn_2.1.3.bb      |    9 ++++----
+>  meta-oe/recipes-connectivity/openvpn/openvpn.inc   |   22 --------------=
+------
 
-I'm also getting the following warnings:
+This assumes that there isn't any layer with different openvpn version
+using openvpn.inc, but as we weren't using it I guess it's OK to remove
+it. (it looks like I've accidentally included it commit importing
+openvpn from OE-classic after merging .inc to .bb).
 
-    WARNING: File '/usr/bin/vim' from vim was already stripped, this
-will prevent future debugging!
-    WARNING: File '/usr/bin/xxd' from vim was already stripped, this
-will prevent future debugging!
+>  3 files changed, 5 insertions(+), 26 deletions(-)
+>  rename {meta-oe/recipes-connectivity =3D> meta-networking/recipes-suppor=
+t}/openvpn/openvpn/openvpn (100%)
+>  rename {meta-oe/recipes-connectivity =3D> meta-networking/recipes-suppor=
+t}/openvpn/openvpn_2.1.3.bb (92%)
+>  delete mode 100644 meta-oe/recipes-connectivity/openvpn/openvpn.inc
+>=20
+> diff --git a/meta-oe/recipes-connectivity/openvpn/openvpn/openvpn b/meta-=
+networking/recipes-support/openvpn/openvpn/openvpn
+> similarity index 100%
+> rename from meta-oe/recipes-connectivity/openvpn/openvpn/openvpn
+> rename to meta-networking/recipes-support/openvpn/openvpn/openvpn
+> diff --git a/meta-oe/recipes-connectivity/openvpn/openvpn_2.1.3.bb b/meta=
+-networking/recipes-support/openvpn/openvpn_2.1.3.bb
+> similarity index 92%
+> rename from meta-oe/recipes-connectivity/openvpn/openvpn_2.1.3.bb
+> rename to meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
+> index 594b266..f58756e 100644
+> --- a/meta-oe/recipes-connectivity/openvpn/openvpn_2.1.3.bb
+> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
+> @@ -1,16 +1,18 @@
+> -DESCRIPTION =3D "A full-featured SSL VPN solution via tun device."
+> +SUMMARY =3D "A full-featured SSL VPN solution via tun device."
+>  HOMEPAGE =3D "http://openvpn.sourceforge.net"
+>  SECTION =3D "console/network"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5aac200199fde47501876cba7263c=
+b0c"
+>  DEPENDS =3D "lzo openssl"
+> -RRECOMMENDS_${PN} =3D "kernel-module-tun"
+> =20
+>  inherit autotools
+> =20
+>  SRC_URI =3D "http://openvpn.net/release/openvpn-${PV}.tar.gz \
+>             file://openvpn"
+> =20
+> +SRC_URI[md5sum] =3D "7486d3e270ba4b033e311d3e022a0ad7"
+> +SRC_URI[sha256sum] =3D "5185181df2e6043bd667377bc92e36ea5a5bd7600af20965=
+4f109b6403ca5b36"
+> +
+>  CFLAGS +=3D "-fno-inline"
+> =20
+>  # I want openvpn to be able to read password from file (hrw)
+> @@ -22,5 +24,4 @@ do_install_append() {
+>      install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
+>  }
+> =20
+> -SRC_URI[md5sum] =3D "7486d3e270ba4b033e311d3e022a0ad7"
+> -SRC_URI[sha256sum] =3D "5185181df2e6043bd667377bc92e36ea5a5bd7600af20965=
+4f109b6403ca5b36"
+> +RRECOMMENDS_${PN} =3D "kernel-module-tun"
+> diff --git a/meta-oe/recipes-connectivity/openvpn/openvpn.inc b/meta-oe/r=
+ecipes-connectivity/openvpn/openvpn.inc
+> deleted file mode 100644
+> index 61f91a3..0000000
+> --- a/meta-oe/recipes-connectivity/openvpn/openvpn.inc
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -DESCRIPTION =3D "A full-featured SSL VPN solution via tun device."
+> -HOMEPAGE =3D "http://openvpn.sourceforge.net"
+> -SECTION =3D "console/network"
+> -LICENSE =3D "GPLv2"
+> -DEPENDS =3D "lzo openssl"
+> -RRECOMMENDS_${PN} =3D "kernel-module-tun"
+> -
+> -INC_PR =3D "r2"
+> -
+> -SRC_URI =3D "http://openvpn.net/release/openvpn-${PV}.tar.gz \
+> -    file://openvpn"
+> -S =3D "${WORKDIR}/openvpn-${PV}"
+> -
+> -CFLAGS +=3D "-fno-inline"
+> -
+> -inherit autotools
+> -
+> -do_install_append() {
+> -    install -d ${D}/${sysconfdir}/init.d
+> -    install -d ${D}/${sysconfdir}/openvpn
+> -    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
+> -}
+> --=20
+> 1.7.10.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Passing 'STRIP=/bin/true' to configure is recommended in the vim
-Makefile to disable stripping. I'll also send a patch to do this so
-that the non-stripped binaries can be placed in a -dbg package
-properly.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Both changes are to vim.inc so should carry over to the new version.
+--aziWXe2aaRGlkyg3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Thanks,
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
---
-Paul Barker
+iEYEARECAAYFAlFtPX4ACgkQN1Ujt2V2gBxcHQCfXNG97iP7i9yS+/pw0YWkRqL4
+xzkAn0oTXFC91JNor+qxvJVlV+6EqoCG
+=p2zs
+-----END PGP SIGNATURE-----
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
-
-
+--aziWXe2aaRGlkyg3--
