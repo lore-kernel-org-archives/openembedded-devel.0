@@ -1,35 +1,34 @@
-Received: from mail-la0-f48.google.com ([209.85.215.48])
+Received: from mail-ye0-f182.google.com ([209.85.213.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <steven.w.warren@gmail.com>) id 1USVgk-00019Y-L4
+	(envelope-from <mario.goulart@gmail.com>) id 1USWzW-0001Pc-AJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 18:58:32 +0200
-Received: by mail-la0-f48.google.com with SMTP id fq13so593462lab.21
+	Wed, 17 Apr 2013 20:22:26 +0200
+Received: by mail-ye0-f182.google.com with SMTP id r5so299726yen.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2013 09:40:58 -0700 (PDT)
+	Wed, 17 Apr 2013 11:04:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=ukKBpXKksF7hfbO18LcWZawqAw80nvbAJSqIlXBmQ5U=;
-	b=zKkl4+yp5CwMzOxc5K4dp+cxhIO2nfAYX7LYBaDm2xxRuflvIX3/jQqpaVXZUSDCrK
-	BV36O+sw2PWntgDdiPwYOZhyzFUoO33/I5wgjzzx0SZTBeGlvFEpDongBQQE0/0fxPPG
-	M0B0PtgTZmayrtzEuE14uRc6qNBYqQ5dy0zaELc6Yf3n/5601GXPBicQvLpmpbdaUUQ0
-	qTp+P2uu4nsW4OLaRU9eh8smmrOL6r4t2IvwIXgvlQwLh7Az0jHQIpqOXthDBeAWY0Se
-	t6gL4RYbFiBDzQyuu96OvJhrXkxzBE4jY53+D95ydtcza7J2a+UA3JX7eKr6fnBgm+0r
-	gcPg==
-MIME-Version: 1.0
-X-Received: by 10.112.168.135 with SMTP id zw7mr3898957lbb.115.1366216858454; 
-	Wed, 17 Apr 2013 09:40:58 -0700 (PDT)
-Received: by 10.112.199.69 with HTTP; Wed, 17 Apr 2013 09:40:58 -0700 (PDT)
-In-Reply-To: <20130417103635.2e081896@e6520eb>
-References: <1366149409-3168-1-git-send-email-steven.w.warren@gmail.com>
-	<20130417103635.2e081896@e6520eb>
-Date: Wed, 17 Apr 2013 11:40:58 -0500
-Message-ID: <CAFzuKnwN0Fzv_VuKCXUpuoGHmB_RZwCYTWnry+ROtoU8SVZ_Pg@mail.gmail.com>
-From: "wayne, steve" <steven.w.warren@gmail.com>
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] qwt: Adjusted SRC_URI to point to a URL + PATH that works.
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=j+P9ApbsRDBdkXjsToPmsTq98AKOzRMi2oM6VMX7Q1Y=;
+	b=Fl6a8cycOdtwthzlMHkgruRdTg6UZr1zHMuG4dcHtI89jBFhgRvXP86VEc1N4uPh8a
+	IPuKcSOeMP70AqGRp4EoGkNeYqcK1lEmAkHFgivl4/Kh7hpNwuCr8SV8DjP9R5hyODpj
+	NXT2teqj8xGe3wSoNW/Ul1h9zW/gqTDuyTL2VFQwphsZFcX4tRns1Im/fPoH4Ay+TfXS
+	humNqIa0opolM1l/g1Lg986wmHR6+sn1UjlSOsrvWE95o8irk/vKxuSQAp6PmC9qtelz
+	gbyHhverEWxt2HUX3a6BNCECkIXg4z0qUJYX7Un0/SZ0arLcUiIbtjhNQmiiUrtBRt+b
+	iQYA==
+X-Received: by 10.236.188.169 with SMTP id a29mr4784035yhn.131.1366221865972; 
+	Wed, 17 Apr 2013 11:04:25 -0700 (PDT)
+Received: from localhost.localdomain ([187.23.144.59])
+	by mx.google.com with ESMTPS id s45sm11056187yhk.22.2013.04.17.11.04.23
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Wed, 17 Apr 2013 11:04:25 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Apr 2013 15:04:11 -0300
+Message-Id: <1366221851-13863-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-gnome][PATCH v2] libgsf: update to version 1.14.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,72 +42,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 16:58:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Apr 2013 18:23:02 -0000
 
-Eric,
+Previous version was 1.14.21, but Gnumeric requires at least 1.14.24.
+Since we are changing it, we pick the latest available version.
 
-Indeed it is working one my end today using both wget and the unmodified
-recipe in a different clone of the meta-openembedded recipe.
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb |   23 -------------------
+ meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb |   25 +++++++++++++++++++++
+ 2 files changed, 25 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+ create mode 100644 meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
 
-Yesterday I was receiving a '502: Internal Server Error'....I guess if I
-had looked into that (
-http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error) I
-could have figured out there was some temporary service problem at
-sourceforge.
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
+deleted file mode 100644
+index a4f1ec2..0000000
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.21.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "GNOME Structured File Library"
+-LICENSE = "GPLv2 & LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
+-                    file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
+-
+-PR = "r4"
+-
+-SECTION = "libs"
+-
+-DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
+-
+-inherit autotools pkgconfig gnome gconf
+-
+-SRC_URI[archive.md5sum] = "2b702648b853402554c97d75405c60d3"
+-SRC_URI[archive.sha256sum] = "eef0a9d6eca4e6af6c16b208947e3c958c428b94d22792bdd0b80c08a4b301db"
+-
+-EXTRA_OECONF = "\
+-		--without-python \
+-		--without-gnome-vfs --without-bonobo \
+-		--disable-gtk-doc \
+-		--with-bz2"
+-
+-RDEPENDS_${PN} = "gconf" 
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
+new file mode 100644
+index 0000000..286c28d
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "GNOME Structured File Library"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
++                    file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
++
++SECTION = "libs"
++
++DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
++
++inherit autotools pkgconfig gnome gconf
++
++SRC_URI[archive.md5sum] = "3c5a4fbd16a727c36974078e6d0e9575"
++SRC_URI[archive.sha256sum] = "8919e725aadd785380350c8dec7427d82cf33164bc9a9a549df9440a0c3da6d5"
++
++GNOME_COMPRESS_TYPE = "xz"
++
++EXTRA_OECONF = "\
++		--without-python \
++		--without-gnome-vfs --without-bonobo \
++		--disable-gtk-doc \
++		--with-bz2"
++
++RDEPENDS_${PN} = "gconf"
++
++FILES_${PN} += "${datadir}/thumbnailers"
+-- 
+1.7.2.5
 
-Thanks for double-checking!
 
-Wayne
-
-
-
-wayne
-
-
-On Wed, Apr 17, 2013 at 3:36 AM, Eric B=E9nard <eric@eukrea.com> wrote:
-
-> Hi Wayne,
->
-> Le Tue, 16 Apr 2013 16:56:49 -0500,
-> Wayne Warren <steven.w.warren@gmail.com> a =E9crit :
->
-> > Signed-off-by: Wayne Warren <steven.w.warren@gmail.com>
-> > ---
-> >  meta-oe/recipes-qt/qwt/qwt.inc |    2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-qt/qwt/qwt.inc
-> b/meta-oe/recipes-qt/qwt/qwt.inc
-> > index d9d47f0..e771b01 100644
-> > --- a/meta-oe/recipes-qt/qwt/qwt.inc
-> > +++ b/meta-oe/recipes-qt/qwt/qwt.inc
-> > @@ -5,7 +5,7 @@ SECTION =3D "libs"
-> >  LICENSE =3D "QWTv1.0"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddac2743472b0462ff3cfb4af420=
-51c88"
-> >
-> > -SRC_URI =3D "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=3Dqwt \
-> > +SRC_URI =3D "
-> http://sourceforge.net/projects/qwt/files/qwt/${PV}/qwt-${PV}.tar.bz2;nam=
-e=3Dqwt\
->
-> What problem do you meet exactly ?
-> original SRC_URI works fine from here :
-> bitbake.conf defines :
-> SOURCEFORGE_MIRROR =3D "http://downloads.sourceforge.net"
->
-> [ebenard@e6520eb ~]$ wget
-> http://downloads.sourceforge.net/qwt/qwt-6.0.1.tar.bz2
-> [ebenard@e6520eb ~]$ $ echo $?
-> 0
-> [ebenard@e6520eb ~]$ md5sum qwt-6.0.1.tar.bz2
-> ace68558eab873e2da7e641179c4ef0c  qwt-6.0.1.tar.bz2
->
-> and the recipe has :
-> SRC_URI[qwt.md5sum] =3D "ace68558eab873e2da7e641179c4ef0c"
->
-> Eric
->
 
