@@ -1,38 +1,15 @@
-Received: from mail-pa0-f54.google.com ([209.85.220.54])
+Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1USOpL-0002OB-9Q
+	(envelope-from <ml@communistcode.co.uk>) id 1USPXr-00089o-TT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 11:38:59 +0200
-Received: by mail-pa0-f54.google.com with SMTP id fa11so832522pad.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2013 02:21:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=qq4mRUC17BPTZUiEiOTBke5lK2lbV9C9qwck4fUTcHo=;
-	b=S0bphZPMfQCC4UJegjsXUCSvsPuCevaUHeDr1wFudsFJaU+dBYMU7HOLLmXzVyMjIx
-	XFAAXAA+tpYHw0+RTbMBFgZx7qUnYF9iR/IqhiszWUu9JHFJ9Yt/SB08r3c8zaQaLgas
-	UvGmK1iIqKSGi45y9ZTaKZVU6FMijyF8pyRiboAQ88CvQDVV/d51ZLT+idVN7id3F0i1
-	PzkQvdKSnHDwfGhI6x/YawYxx8isNKx7DRmJT6rOXtRXE4f5ka5bPLGUcjDsMup53Fl9
-	IKxP2OAcVG58D3ufTQEt74LszMZq0xBEjM2lFuRBbKgtJwp+8DkuoA6uyWD75VOuHL1F
-	4aFw==
-X-Received: by 10.66.197.165 with SMTP id iv5mr7985401pac.7.1366190483191;
-	Wed, 17 Apr 2013 02:21:23 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id pa2sm6440742pac.9.2013.04.17.02.21.20
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 17 Apr 2013 02:21:22 -0700 (PDT)
-Date: Wed, 17 Apr 2013 11:21:21 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130417092121.GD26007@jama>
-References: <1366139500-880-1-git-send-email-Martin.Jansa@gmail.com>
-	<10677100.l6Guga4Du7@helios>
-MIME-Version: 1.0
-In-Reply-To: <10677100.l6Guga4Du7@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/2] xserver-nodm-init: install .service and conf only with systemd in DISTRO_FEATURES
+	Wed, 17 Apr 2013 12:24:58 +0200
+From: Jack Mitchell <ml@communistcode.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Apr 2013 11:07:16 +0100
+Message-Id: <1366193237-12197-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.2
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-oe][PATCH 1/2] net-snmp: fix failure when starting on system without pci bus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +23,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 09:39:00 -0000
-X-Groupsio-MsgNum: 44272
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WChQLJJJfbwij+9x"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Apr 2013 10:25:07 -0000
+X-List-Received-Date: Wed, 17 Apr 2013 10:25:07 -0000
+X-List-Received-Date: Wed, 17 Apr 2013 10:25:07 -0000
 
---WChQLJJJfbwij+9x
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-On Wed, Apr 17, 2013 at 09:51:45AM +0100, Paul Eggleton wrote:
-> On Tuesday 16 April 2013 21:11:39 Martin Jansa wrote:
-> > * Otavio reported unpackaged files without systemd enabled
->=20
-> We have this problem in a lot of recipes. I've filed this bug to fix it i=
-n=20
-> systemd.bbclass itself:
->=20
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4309
+The snmpd daemon cannot start on platforms without a pci bus:
 
-Yes :/ maybe I should wait a bit more with moving them from meta-systemd
-to get reply here
-http://lists.linuxtogo.org/pipermail/openembedded-core/2013-February/036169=
-=2Ehtml
+snmpd[15460]: pcilib: Cannot open /proc/bus/pci
+snmpd[15460]: pcilib: Cannot find any working access method.
 
-Cheers,
+snmpd should not depend on a PCI bus and should simply move on.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+---
+ .../recipes-extended/net-snmp/files/ifmib.patch    | 66 ++++++++++++++++++++++
+ .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |  1 +
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/net-snmp/files/ifmib.patch
 
---WChQLJJJfbwij+9x
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-oe/recipes-extended/net-snmp/files/ifmib.patch b/meta-oe/recipes-extended/net-snmp/files/ifmib.patch
+new file mode 100644
+index 0000000..859c52c
+--- /dev/null
++++ b/meta-oe/recipes-extended/net-snmp/files/ifmib.patch
+@@ -0,0 +1,66 @@
++Signed-off-by: Jack Mitchell <jack@embed.me.uk>
++Upstream-Status: Pending
++Bug-Report: http://sourceforge.net/p/net-snmp/bugs/2449/
++
++diff --git a/agent/mibgroup/if-mib/data_access/interface_linux.c b/agent/mibgroup/if-mib/data_access/interface_linux.c
++index 3419811..d6eb91a 100644
++--- a/agent/mibgroup/if-mib/data_access/interface_linux.c
+++++ b/agent/mibgroup/if-mib/data_access/interface_linux.c
++@@ -18,7 +18,31 @@ netsnmp_feature_require(interface_ioctl_flags_set)
++ 
++ #ifdef HAVE_PCI_LOOKUP_NAME
++ #include <pci/pci.h>
+++#include <setjmp.h>
++ static struct pci_access *pci_access;
+++
+++/* Avoid letting libpci call exit(1) when no PCI bus is available. */
+++static int do_longjmp =0;
+++static jmp_buf err_buf;
+++static void
+++netsnmp_pci_error(char *msg, ...)
+++{
+++    va_list args;
+++    char *buf;
+++    int buflen;
+++
+++    va_start(args, msg);
+++    buflen = strlen("pcilib: ")+strlen(msg)+2;
+++    buf = malloc(buflen);
+++    snprintf(buf, buflen, "pcilib: %s\n", msg);
+++    snmp_vlog(LOG_ERR, buf, args);
+++    free(buf);
+++    va_end(args);
+++    if (do_longjmp)
+++	longjmp(err_buf, 1);
+++    else
+++	exit(1);
+++}
++ #endif
++ 
++ #ifdef HAVE_LINUX_ETHTOOL_H
++@@ -147,10 +171,22 @@ netsnmp_arch_interface_init(void)
++ 
++ #ifdef HAVE_PCI_LOOKUP_NAME
++     pci_access = pci_alloc();
++-    if (pci_access)
+++    if (!pci_access) {
+++	snmp_log(LOG_ERR, "pcilib: pci_alloc failed\n");
+++	return;
+++    }
+++
+++    pci_access->error = netsnmp_pci_error;
+++
+++    do_longjmp = 1;
+++    if (setjmp(err_buf)) {
+++        pci_cleanup(pci_access);
+++	snmp_log(LOG_ERR, "pcilib: pci_init failed\n");
+++        pci_access = NULL;
+++    }
+++    else if (pci_access)
++ 	pci_init(pci_access);
++-    else
++-	snmp_log(LOG_ERR, "Unable to create pci access method\n");
+++    do_longjmp = 0;
++ #endif
++ }
++ 
+diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+index 14c1036..19aa163 100644
+--- a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
++++ b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+         file://systemd-support.patch \
+         file://snmpd.service \
+         file://snmptrapd.service \
++        file://ifmib.patch \
+ "
+ 
+ EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
+-- 
+1.8.2
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFuaZEACgkQN1Ujt2V2gBwCyACfZ0AOiTFGy1R+s9rEN2w6KQyY
-nc4An2N1JCwJl4Lf8FdK3K/xLyqivdA9
-=fepa
------END PGP SIGNATURE-----
 
---WChQLJJJfbwij+9x--
