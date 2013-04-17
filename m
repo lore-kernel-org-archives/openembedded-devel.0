@@ -1,44 +1,24 @@
-Received: from ch1ehsobe003.messaging.microsoft.com ([216.32.181.183]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B28495@freescale.com>) id 1USJEG-0000S5-OC
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1USNly-0002oQ-UQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 05:40:17 +0200
-Received: from mail185-ch1-R.bigfish.com (10.43.68.231) by
-	CH1EHSOBE016.bigfish.com (10.43.70.66) with Microsoft SMTP Server id
-	14.1.225.23; Wed, 17 Apr 2013 02:52:37 +0000
-Received: from mail185-ch1 (localhost [127.0.0.1])	by
-	mail185-ch1-R.bigfish.com (Postfix) with ESMTP id 631ED24049C	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2013 02:52:37 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h1fc6h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ahzz17326ah8275bh8275chz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1155h)
-Received: from mail185-ch1 (localhost.localdomain [127.0.0.1]) by mail185-ch1
-	(MessageSwitch) id 1366167155587035_10396;
-	Wed, 17 Apr 2013 02:52:35 +0000 (UTC)
-Received: from CH1EHSMHS039.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.243])	by mail185-ch1.bigfish.com (Postfix) with ESMTP id
-	82BE52201EA	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Apr 2013 02:52:35 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS039.bigfish.com
-	(10.43.69.248) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Wed, 17 Apr 2013 02:52:35 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Wed, 17 Apr 2013 02:52:34 +0000
-Received: from sbuilder137.localdomain.localdomain (mars.ap.freescale.net
-	[10.192.208.137])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r3H2qW8b030198;	Tue, 16 Apr 2013 19:52:33 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Apr 2013 10:52:31 +0800
-Message-ID: <1366167151-12043-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.5
+	Wed, 17 Apr 2013 10:31:24 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 17 Apr 2013 01:13:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,492,1363158000"; d="scan'208";a="323519669"
+Received: from unknown (HELO helios.localnet) ([10.255.14.28])
+	by fmsmga002.fm.intel.com with ESMTP; 17 Apr 2013 01:13:21 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Apr 2013 09:13:19 +0100
+Message-ID: <2367395.UoCBAx5Bxq@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <1366144550-1493-1-git-send-email-raj.khem@gmail.com>
+References: <1366144550-1493-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [meta-oe][PATCH v5] tclap: initial add 1.2.1
+Subject: Re: [meta-networking][PATCH V2] ntp: Create a separate package for sntp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,85 +32,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 03:40:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 17 Apr 2013 08:31:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Ting Liu <b28495@freescale.com>
+On Tuesday 16 April 2013 13:35:50 Khem Raj wrote:
+> sntp provides the functionality of obsoleted ntpdate
+> so we have option of using ntpd as well as sntp
+> sntp does the immediate one time sync with time
+> server and corrects the tme immediately. it
+> replaces ntpdate nicely.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-networking/recipes-support/ntp/ntp.inc        |   13 +++++++++++--
+>  meta-networking/recipes-support/ntp/ntp/sntp       |    1 +
+>  .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
+>  3 files changed, 23 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp
+>  create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp.service
+> 
+> diff --git a/meta-networking/recipes-support/ntp/ntp.inc
+> b/meta-networking/recipes-support/ntp/ntp.inc index a604b9c..004dc9b 100644
+> --- a/meta-networking/recipes-support/ntp/ntp.inc
+> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+> @@ -20,6 +20,8 @@ SRC_URI =
+> "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+> file://ntpdate.default \
+>             file://ntpdate.service \
+>             file://ntpd.service \
+> +           file://sntp.service \
+> +           file://sntp \
+>  "
+> 
+>  inherit autotools update-rc.d systemd
+> @@ -52,15 +54,18 @@ do_install_append() {
+> 
+>      install -d ${D}/${sysconfdir}/default
+>      install -m 644 ${WORKDIR}/ntpdate.default
+> ${D}${sysconfdir}/default/ntpdate +    install -m 0644 ${WORKDIR}/sntp
+> ${D}${sysconfdir}/default/
+> +
+>      install -d ${D}/${sysconfdir}/network/if-up.d
+>      ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+> 
+>      install -d ${D}${systemd_unitdir}/system
+>      install -m 0644 ${WORKDIR}/ntpdate.service
+> ${D}${systemd_unitdir}/system/ install -m 0644 ${WORKDIR}/ntpd.service
+> ${D}${systemd_unitdir}/system/ +    install -m 0644 ${WORKDIR}/sntp.service
+> ${D}${systemd_unitdir}/system/ }
+> 
+> -PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
+> +PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils sntp"
+>  # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
+> 
+>  # ntp originally includes tickadj. It's split off for inclusion in small
+> firmware images on platforms @@ -71,9 +76,10 @@ RPROVIDES_${PN}-utils =
+> "${PN}-bin"
+>  RREPLACES_${PN}-utils = "${PN}-bin"
+>  RCONFLICTS_${PN}-utils = "${PN}-bin"
+> 
+> -SYSTEMD_PACKAGES = "${PN} ntpdate"
+> +SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
+>  SYSTEMD_SERVICE_${PN} = "ntpd.service"
+>  SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
+> +SYSTEMD_SERVICE_sntp = "sntp.service"
+> 
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+> @@ -94,6 +100,9 @@ FILES_ntpdate = "${bindir}/ntpdate \
+>      ${sysconfdir}/default/ntpdate \
+>      ${systemd_unitdir}/system/ntpdate.service \
+>  "
+> +FILES_sntp = "${bindir}/sntp \
+> +              ${sysconfdir}/default/sntp \
+> +             "
+> 
+>  CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
+>  CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
+> diff --git a/meta-networking/recipes-support/ntp/ntp/sntp
+> b/meta-networking/recipes-support/ntp/ntp/sntp new file mode 100644
+> index 0000000..f8c5895
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ntp/ntp/sntp
+> @@ -0,0 +1 @@
+> +NTPSERVER="ntpserver.example.org"
+> diff --git a/meta-networking/recipes-support/ntp/ntp/sntp.service
+> b/meta-networking/recipes-support/ntp/ntp/sntp.service new file mode 100644
+> index 0000000..0f09e43
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ntp/ntp/sntp.service
+> @@ -0,0 +1,11 @@
+> +[Unit]
+> +Description=Simple Network Time Service Client
+> +After=network.target
+> +
+> +[Service]
+> +Type=oneshot
+> +EnvironmentFile=-/etc/default/sntp
+> +ExecStart=/usr/bin/sntp -s $NTPSERVER
+> +
+> +[Install]
+> +WantedBy=multi-user.target
 
-TCLAP (Templatized C++ Command Line Parser Library ) is a small, flexible
-library that provides a simple interface for defining and accessing command
-line arguments.
+Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-Use the commit of tag tclap-1-2-1-release-final.
-
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- .../tclap/tclap/Makefile.am-disable-docs.patch     |   31 ++++++++++++++++++++
- meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb      |   14 +++++++++
- 2 files changed, 45 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
- create mode 100644 meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-
-diff --git a/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch b/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
-new file mode 100644
-index 0000000..358cbef
---- /dev/null
-+++ b/meta-oe/recipes-devtools/tclap/tclap/Makefile.am-disable-docs.patch
-@@ -0,0 +1,31 @@
-+From c209ed0e7ffca32fe3714bad9cc54bdb00c286bb Mon Sep 17 00:00:00 2001
-+From: Ting Liu <b28495@freescale.com>
-+Date: Mon, 15 Apr 2013 16:28:37 +0800
-+Subject: [PATCH] Makefile.am: disable docs
-+
-+Upstream-Status: Inappropriate [OE specific]
-+
-+docs need some generating tool (for example, doxygen) from host which may
-+be not available. Disable it to avoid build issue.
-+
-+Signed-off-by: Ting Liu <b28495@freescale.com>
-+---
-+ Makefile.am |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 0a6ebc9..6b42f41 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1,7 +1,7 @@
-+ 
-+ ACLOCAL_AMFLAGS = -I config
-+ 
-+-SUBDIRS = include examples docs tests msc config
-++SUBDIRS = include examples tests msc config
-+ 
-+ pkgconfigdir = $(libdir)/pkgconfig
-+ pkgconfig_DATA = $(PACKAGE).pc
-+-- 
-+1.7.5
-+
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-new file mode 100644
-index 0000000..7075664
---- /dev/null
-+++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Templatized C++ Command Line Parser" 
-+HOMEPAGE = "http://tclap.sourceforge.net/" 
-+LICENSE = "MIT" 
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"
-+
-+SRCREV = "3627d9402e529770df9b0edf2aa8c0e0d6c6bb41"
-+SRC_URI = "git://tclap.git.sourceforge.net/gitroot/tclap/tclap \
-+    file://Makefile.am-disable-docs.patch \
-+" 
-+
-+S = "${WORKDIR}/git"
-+inherit autotools
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
-1.7.5
 
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
