@@ -1,17 +1,15 @@
 Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1USTNA-00019h-Li
+	(envelope-from <ml@communistcode.co.uk>) id 1USTN9-00019g-8W
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 17 Apr 2013 16:30:20 +0200
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Apr 2013 15:10:39 +0100
-Message-Id: <1366207839-3620-2-git-send-email-ml@communistcode.co.uk>
+Date: Wed, 17 Apr 2013 15:10:38 +0100
+Message-Id: <1366207839-3620-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.2
-In-Reply-To: <1366207839-3620-1-git-send-email-ml@communistcode.co.uk>
-References: <1366207839-3620-1-git-send-email-ml@communistcode.co.uk>
 Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [meta-oe][PATCH] php: add sqlite3 and mysql PACKAGECONFIG options
+Subject: [meta-oe][PATCH] php add PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,65 +27,14 @@ X-List-Received-Date: Wed, 17 Apr 2013 14:30:30 -0000
 
 From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
+This change is on top of Marcin's PHP 5.4.14 upgrade
+
+Jack Mitchell (1):
+  php: add sqlite3 and mysql PACKAGECONFIG options
+
  meta-oe/recipes-devtools/php/php.inc | 26 ++++++++++++++++++--------
  1 file changed, 18 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 225c3d7..39ddc33 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
- SECTION = "console/network"
- LICENSE = "PHP-3.0"
- BBCLASSEXTEND = "native"
--DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-+DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
-            libc-client openssl sqlite3"
- DEPENDS_virtclass-native = "zlib-native libxml2-native"
- 
--INC_PR = "r4"
-+INC_PR = "r5"
- 
- SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
- 
-@@ -27,12 +27,7 @@ EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
-                 --with-zlib --with-zlib-dir=${STAGING_LIBDIR}/.. \
-                 --with-iconv=${STAGING_LIBDIR}/.. \
-                 --with-libxml-dir=${STAGING_BINDIR_CROSS} \
--                --disable-embedded-mysqli \
--                --with-mysql="${STAGING_DIR_TARGET}${prefix}" \
--                --with-mysqli="${STAGING_BINDIR_CROSS}/mysql_config" \
--        --with-sqlite3=${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
--                --with-pdo-mysql="${STAGING_BINDIR_CROSS}/mysql_config" \
--                --with-pdo-sqlite=${STAGING_LIBDIR}/.. ${COMMON_EXTRA_OECONF} \
-+                ${COMMON_EXTRA_OECONF} \
- "
- EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
-                 --with-zlib --with-zlib-dir=${STAGING_LIBDIR_NATIVE}/.. \
-@@ -40,6 +35,21 @@ EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
-                 ${COMMON_EXTRA_OECONF} \
- "
- 
-+PACKAGECONFIG ??= "mysql sqlite3"
-+
-+PACKAGECONFIG[mysql] = "--with-mysql=\"${STAGING_DIR_TARGET}${prefix}\" \
-+                        --with-mysqli=\"${STAGING_BINDIR_CROSS}/mysql_config\" \
-+                        --with-pdo-mysql=\"${STAGING_BINDIR_CROSS}/mysql_config\" \
-+                        --disable-embedded-mysqli \
-+                        , \
-+                        ,mysql5"
-+
-+PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
-+                        --enable-sqlite-utf8 \
-+                        --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
-+                        , \
-+                        ,sqlite3"
-+
- LIBS_virtclass-native = " -lxml2 "
- LIBS_pn-php =" -lpthread "
- export LIBS
 -- 
 1.8.2
 
