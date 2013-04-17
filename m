@@ -1,28 +1,15 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1USPsq-0002Bk-Db
+	(envelope-from <ml@communistcode.co.uk>) id 1USQX3-0006nQ-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 12:46:38 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 17 Apr 2013 03:29:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,492,1363158000"; d="scan'208";a="320361972"
-Received: from unknown (HELO helios.localnet) ([10.255.14.28])
-	by fmsmga001.fm.intel.com with ESMTP; 17 Apr 2013 03:28:43 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Date: Wed, 17 Apr 2013 11:28:42 +0100
-Message-ID: <7119347.tG3WeIFq8N@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <20130417102144.GE26007@jama>
-References: <1366193237-12197-1-git-send-email-ml@communistcode.co.uk>
-	<1366193237-12197-2-git-send-email-ml@communistcode.co.uk>
-	<20130417102144.GE26007@jama>
-MIME-Version: 1.0
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 2/2] net-snmp: Update to 5.7.2
+	Wed, 17 Apr 2013 13:28:09 +0200
+From: Jack Mitchell <ml@communistcode.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Apr 2013 12:10:31 +0100
+Message-Id: <1366197032-13504-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.2
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-oe][PATCHv2 1/2] net-snmp: fix failure when starting on system without pci bus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,43 +23,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 10:46:39 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 17 Apr 2013 11:28:14 -0000
 
-On Wednesday 17 April 2013 12:21:44 Martin Jansa wrote:
-> On Wed, Apr 17, 2013 at 11:07:17AM +0100, Jack Mitchell wrote:
-> > From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> > 
-> > - Removed some un-needed patches
-> > 
-> > Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> > ---
-> > 
-> >  .../net-snmp/files/libnl-3-support.patch           |    69 -
-> >  .../net-snmp/files/sync-with-5.7-branch.patch      | 19998
-> >  ------------------- .../recipes-extended/net-snmp/net-snmp_5.7.2.bb    |
-> >     31 +
-> >  3 files changed, 31 insertions(+), 20067 deletions(-)
-> >  delete mode 100644
-> >  meta-oe/recipes-extended/net-snmp/files/libnl-3-support.patch delete
-> >  mode 100644
-> >  meta-oe/recipes-extended/net-snmp/files/sync-with-5.7-branch.patch
-> >  create mode 100644 meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb
-> Is there reason to keep net-snmp_5.7.1.bb?
-> 
-> If no, then please remove it in the same commit and send with -M.
+From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-Also I just tried to "git am" 2/2 on top of master + 1/2 and it failed, not 
-sure exactly why. (I wanted to see if this would fix the build failure I noted 
-earlier.)
+The snmpd daemon cannot start on platforms without a pci bus:
 
-Cheers,
-Paul
+snmpd[15460]: pcilib: Cannot open /proc/bus/pci
+snmpd[15460]: pcilib: Cannot find any working access method.
 
+snmpd should not depend on a PCI bus and should simply move on.
+
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+---
+ .../recipes-extended/net-snmp/files/ifmib.patch    | 66 ++++++++++++++++++++++
+ .../recipes-extended/net-snmp/net-snmp_5.7.1.bb    |  1 +
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/net-snmp/files/ifmib.patch
+
+diff --git a/meta-oe/recipes-extended/net-snmp/files/ifmib.patch b/meta-oe/recipes-extended/net-snmp/files/ifmib.patch
+new file mode 100644
+index 0000000..859c52c
+--- /dev/null
++++ b/meta-oe/recipes-extended/net-snmp/files/ifmib.patch
+@@ -0,0 +1,66 @@
++Signed-off-by: Jack Mitchell <jack@embed.me.uk>
++Upstream-Status: Pending
++Bug-Report: http://sourceforge.net/p/net-snmp/bugs/2449/
++
++diff --git a/agent/mibgroup/if-mib/data_access/interface_linux.c b/agent/mibgroup/if-mib/data_access/interface_linux.c
++index 3419811..d6eb91a 100644
++--- a/agent/mibgroup/if-mib/data_access/interface_linux.c
+++++ b/agent/mibgroup/if-mib/data_access/interface_linux.c
++@@ -18,7 +18,31 @@ netsnmp_feature_require(interface_ioctl_flags_set)
++ 
++ #ifdef HAVE_PCI_LOOKUP_NAME
++ #include <pci/pci.h>
+++#include <setjmp.h>
++ static struct pci_access *pci_access;
+++
+++/* Avoid letting libpci call exit(1) when no PCI bus is available. */
+++static int do_longjmp =0;
+++static jmp_buf err_buf;
+++static void
+++netsnmp_pci_error(char *msg, ...)
+++{
+++    va_list args;
+++    char *buf;
+++    int buflen;
+++
+++    va_start(args, msg);
+++    buflen = strlen("pcilib: ")+strlen(msg)+2;
+++    buf = malloc(buflen);
+++    snprintf(buf, buflen, "pcilib: %s\n", msg);
+++    snmp_vlog(LOG_ERR, buf, args);
+++    free(buf);
+++    va_end(args);
+++    if (do_longjmp)
+++	longjmp(err_buf, 1);
+++    else
+++	exit(1);
+++}
++ #endif
++ 
++ #ifdef HAVE_LINUX_ETHTOOL_H
++@@ -147,10 +171,22 @@ netsnmp_arch_interface_init(void)
++ 
++ #ifdef HAVE_PCI_LOOKUP_NAME
++     pci_access = pci_alloc();
++-    if (pci_access)
+++    if (!pci_access) {
+++	snmp_log(LOG_ERR, "pcilib: pci_alloc failed\n");
+++	return;
+++    }
+++
+++    pci_access->error = netsnmp_pci_error;
+++
+++    do_longjmp = 1;
+++    if (setjmp(err_buf)) {
+++        pci_cleanup(pci_access);
+++	snmp_log(LOG_ERR, "pcilib: pci_init failed\n");
+++        pci_access = NULL;
+++    }
+++    else if (pci_access)
++ 	pci_init(pci_access);
++-    else
++-	snmp_log(LOG_ERR, "Unable to create pci access method\n");
+++    do_longjmp = 0;
++ #endif
++ }
++ 
+diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+index 14c1036..19aa163 100644
+--- a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
++++ b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.1.bb
+@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+         file://systemd-support.patch \
+         file://snmpd.service \
+         file://snmptrapd.service \
++        file://ifmib.patch \
+ "
+ 
+ EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
 -- 
+1.8.2
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
