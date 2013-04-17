@@ -1,24 +1,23 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1USNly-0002oQ-UQ
+	(envelope-from <eric@eukrea.com>) id 1USO8C-0005So-37
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 10:31:24 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 17 Apr 2013 01:13:50 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,492,1363158000"; d="scan'208";a="323519669"
-Received: from unknown (HELO helios.localnet) ([10.255.14.28])
-	by fmsmga002.fm.intel.com with ESMTP; 17 Apr 2013 01:13:21 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Wed, 17 Apr 2013 10:54:21 +0200
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 40D944B019B;
+	Wed, 17 Apr 2013 10:36:37 +0200 (CEST)
+Date: Wed, 17 Apr 2013 10:36:35 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Apr 2013 09:13:19 +0100
-Message-ID: <2367395.UoCBAx5Bxq@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <1366144550-1493-1-git-send-email-raj.khem@gmail.com>
-References: <1366144550-1493-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH V2] ntp: Create a separate package for sntp
+Message-ID: <20130417103635.2e081896@e6520eb>
+In-Reply-To: <1366149409-3168-1-git-send-email-steven.w.warren@gmail.com>
+References: <1366149409-3168-1-git-send-email-steven.w.warren@gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: steven.w.warren@gmail.com
+Subject: Re: [PATCH] qwt: Adjusted SRC_URI to point to a URL + PATH that works.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,114 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 08:31:40 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 17 Apr 2013 08:54:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tuesday 16 April 2013 13:35:50 Khem Raj wrote:
-> sntp provides the functionality of obsoleted ntpdate
-> so we have option of using ntpd as well as sntp
-> sntp does the immediate one time sync with time
-> server and corrects the tme immediately. it
-> replaces ntpdate nicely.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Hi Wayne,
+
+Le Tue, 16 Apr 2013 16:56:49 -0500,
+Wayne Warren <steven.w.warren@gmail.com> a =C3=A9crit :
+
+> Signed-off-by: Wayne Warren <steven.w.warren@gmail.com>
 > ---
->  meta-networking/recipes-support/ntp/ntp.inc        |   13 +++++++++++--
->  meta-networking/recipes-support/ntp/ntp/sntp       |    1 +
->  .../recipes-support/ntp/ntp/sntp.service           |   11 +++++++++++
->  3 files changed, 23 insertions(+), 2 deletions(-)
->  create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp
->  create mode 100644 meta-networking/recipes-support/ntp/ntp/sntp.service
-> 
-> diff --git a/meta-networking/recipes-support/ntp/ntp.inc
-> b/meta-networking/recipes-support/ntp/ntp.inc index a604b9c..004dc9b 100644
-> --- a/meta-networking/recipes-support/ntp/ntp.inc
-> +++ b/meta-networking/recipes-support/ntp/ntp.inc
-> @@ -20,6 +20,8 @@ SRC_URI =
-> "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-> file://ntpdate.default \
->             file://ntpdate.service \
->             file://ntpd.service \
-> +           file://sntp.service \
-> +           file://sntp \
->  "
-> 
->  inherit autotools update-rc.d systemd
-> @@ -52,15 +54,18 @@ do_install_append() {
-> 
->      install -d ${D}/${sysconfdir}/default
->      install -m 644 ${WORKDIR}/ntpdate.default
-> ${D}${sysconfdir}/default/ntpdate +    install -m 0644 ${WORKDIR}/sntp
-> ${D}${sysconfdir}/default/
-> +
->      install -d ${D}/${sysconfdir}/network/if-up.d
->      ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
-> 
->      install -d ${D}${systemd_unitdir}/system
->      install -m 0644 ${WORKDIR}/ntpdate.service
-> ${D}${systemd_unitdir}/system/ install -m 0644 ${WORKDIR}/ntpd.service
-> ${D}${systemd_unitdir}/system/ +    install -m 0644 ${WORKDIR}/sntp.service
-> ${D}${systemd_unitdir}/system/ }
-> 
-> -PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
-> +PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils sntp"
->  # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
-> 
->  # ntp originally includes tickadj. It's split off for inclusion in small
-> firmware images on platforms @@ -71,9 +76,10 @@ RPROVIDES_${PN}-utils =
-> "${PN}-bin"
->  RREPLACES_${PN}-utils = "${PN}-bin"
->  RCONFLICTS_${PN}-utils = "${PN}-bin"
-> 
-> -SYSTEMD_PACKAGES = "${PN} ntpdate"
-> +SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
->  SYSTEMD_SERVICE_${PN} = "ntpd.service"
->  SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
-> +SYSTEMD_SERVICE_sntp = "sntp.service"
-> 
->  RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
-> @@ -94,6 +100,9 @@ FILES_ntpdate = "${bindir}/ntpdate \
->      ${sysconfdir}/default/ntpdate \
->      ${systemd_unitdir}/system/ntpdate.service \
->  "
-> +FILES_sntp = "${bindir}/sntp \
-> +              ${sysconfdir}/default/sntp \
-> +             "
-> 
->  CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
->  CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
-> diff --git a/meta-networking/recipes-support/ntp/ntp/sntp
-> b/meta-networking/recipes-support/ntp/ntp/sntp new file mode 100644
-> index 0000000..f8c5895
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ntp/ntp/sntp
-> @@ -0,0 +1 @@
-> +NTPSERVER="ntpserver.example.org"
-> diff --git a/meta-networking/recipes-support/ntp/ntp/sntp.service
-> b/meta-networking/recipes-support/ntp/ntp/sntp.service new file mode 100644
-> index 0000000..0f09e43
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ntp/ntp/sntp.service
-> @@ -0,0 +1,11 @@
-> +[Unit]
-> +Description=Simple Network Time Service Client
-> +After=network.target
-> +
-> +[Service]
-> +Type=oneshot
-> +EnvironmentFile=-/etc/default/sntp
-> +ExecStart=/usr/bin/sntp -s $NTPSERVER
-> +
-> +[Install]
-> +WantedBy=multi-user.target
+>  meta-oe/recipes-qt/qwt/qwt.inc |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.=
+inc
+> index d9d47f0..e771b01 100644
+> --- a/meta-oe/recipes-qt/qwt/qwt.inc
+> +++ b/meta-oe/recipes-qt/qwt/qwt.inc
+> @@ -5,7 +5,7 @@ SECTION =3D "libs"
+>  LICENSE =3D "QWTv1.0"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ddac2743472b0462ff3cfb4af42051=
+c88"
+> =20
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=3Dqwt \
+> +SRC_URI =3D "http://sourceforge.net/projects/qwt/files/qwt/${PV}/qwt-${P=
+V}.tar.bz2;name=3Dqwt \
 
-Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+What problem do you meet exactly ?
+original SRC_URI works fine from here :
+bitbake.conf defines :
+SOURCEFORGE_MIRROR =3D "http://downloads.sourceforge.net"
 
--- 
+[ebenard@e6520eb ~]$ wget
+http://downloads.sourceforge.net/qwt/qwt-6.0.1.tar.bz2
+[ebenard@e6520eb ~]$ $ echo $?
+0
+[ebenard@e6520eb ~]$ md5sum qwt-6.0.1.tar.bz2=20
+ace68558eab873e2da7e641179c4ef0c  qwt-6.0.1.tar.bz2
 
-Paul Eggleton
-Intel Open Source Technology Centre
+and the recipe has :
+SRC_URI[qwt.md5sum] =3D "ace68558eab873e2da7e641179c4ef0c"
+
+Eric
 
 
