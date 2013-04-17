@@ -1,15 +1,35 @@
-Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1UST8v-00084a-4T
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Apr 2013 16:15:44 +0200
-From: Jack Mitchell <ml@communistcode.co.uk>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1USTC8-0008TR-Pe for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Apr 2013 16:18:51 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1USSvD-00014b-3j for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Apr 2013 16:01:15 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Apr 2013 16:01:15 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Apr 2013 16:01:15 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Apr 2013 14:57:45 +0100
-Message-Id: <1366207065-3413-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.2
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [meta-oe][PATCH] net-snmp: add -systemd packages to PACKAGES list to appease systemd.bbclass
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 17 Apr 2013 16:01:11 +0200
+Message-ID: <kkm9v0$mrc$1@ger.gmane.org>
+References: <1366206552-14452-1-git-send-email-schnitzeltony@googlemail.com>
+	<1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130328 Thunderbird/17.0.5
+In-Reply-To: <1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
+X-Enigmail-Version: 1.5.1
+Subject: Re: [meta-gnome 2/2] libnotify: update to 0.7.5 and drop libnotify3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -23,47 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Apr 2013 14:15:47 -0000
+X-List-Received-Date: Wed, 17 Apr 2013 14:18:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-ERROR: net-snmp-server-snmpd-systemd does not appear in package list, please add it
-ERROR: net-snmp-server-snmptrapd-systemd does not appear in package list, please add it
+Op 17-04-13 15:49, Andreas Müller schreef:
+> removing tests drops dependencies on gtk
+> 
+> Tested by:
+> 
+> * building nautilus3 (the only recipe found depending on libnotify3) *
+> running xfce-based image and checked notififations
 
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
- meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+The problem with libnotify was (is?) that it removed some API that GNOME 2.x
+depends on and later introduced API that GNOME 3.x depends on, hence the 2
+recipes. Do all the GNOME 2.x bits build against this new libnotify? The
+error was a build break, so it things build, they are likely to work :)
 
-diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb
-index 81ad6ff..1e1db6a 100644
---- a/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb
-+++ b/meta-oe/recipes-extended/net-snmp/net-snmp_5.7.2.bb
-@@ -61,7 +61,11 @@ do_install_append() {
- }
- 
- PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
--            ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
-+            ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd \
-+            ${PN}-server-snmpd-systemd ${PN}-server-snmptrapd-systemd "
-+
-+SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
-+                    ${PN}-server-snmptrapd-systemd"
- 
- ALLOW_EMPTY_${PN}-server = "1"
- 
-@@ -91,9 +95,6 @@ INITSCRIPT_PARAMS_${PN}-server = "defaults"
- 
- EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
- 
--SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
--                    ${PN}-server-snmptrapd-systemd"
--
- SYSTEMD_SERVICE_${PN}-server-snmpd = "snmpd.service"
- SYSTEMD_SERVICE_${PN}-server-snmptrapd =  "snmptrapd.service"
- 
--- 
-1.8.2
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRbqsnMkyGM64RGpERAo5KAJ9ocpDhDbogLX0xU08poPwCRT6zhQCfbIIS
+W+EIOPHTJx5UvUsuXNIwRl4=
+=tnMk
+-----END PGP SIGNATURE-----
 
 
 
