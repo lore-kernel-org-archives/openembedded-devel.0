@@ -1,37 +1,39 @@
-Received: from 20.mo1.mail-out.ovh.net ([188.165.45.168]
-	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul@paulbarker.me.uk>) id 1USmLU-0006Yo-NR
+Received: from mail-da0-f43.google.com ([209.85.210.43])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <martin.jansa@gmail.com>) id 1USmjk-0000fS-Ji
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 12:45:43 +0200
-Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo1.mail-out.ovh.net (Postfix) with SMTP id 1384DFFA16F
+	Thu, 18 Apr 2013 13:10:49 +0200
+Received: by mail-da0-f43.google.com with SMTP id u36so1311498dak.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 11:12:15 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 18 Apr 2013 11:12:13 +0200
-Received: from 94-192-12-83.zone6.bethere.co.uk (HELO
-	b5-server.betafive.co.uk) (paul@betafive.co.uk@94.192.12.83)
-	by ns0.ovh.net with SMTP; 18 Apr 2013 11:12:12 +0200
-Received: from b5-vm-mint0.betafive.co.uk (unknown [192.168.0.235])
-	by b5-server.betafive.co.uk (Postfix) with ESMTP id EE6001601A0;
-	Thu, 18 Apr 2013 10:11:07 +0100 (BST)
-From: Paul Barker <paul@paulbarker.me.uk>
+	Thu, 18 Apr 2013 03:53:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=9blq2bJdbWNOSMPcRzekiykoprX41t2ggZzj43gRf8E=;
+	b=zx5KsxTUWCpjC10S8wLQBf0nm3ZDcbknIsZ2J+HrXA4KzHvrvLiZtWDCgxYaAsuOsU
+	Re9KsON6jYnVQNqo63xqbUWZ+5P7nJHozXGgULvFoLKXesSsvWqP/eQLLVkX65hm8cmX
+	/SrkxsJ60g8TaEBj1BUfvWyLOpDvjr0NEBjuYJTcK9+bSQik9sATLH3vET2oTMXmW30d
+	o1IWL4oMDqlVOlHoIKZfgjinryaxAWcSGm7ZPFwnvgwxLUId5fbcYAAgP42oxUYXFU6J
+	AEdu6FX7mPCrkA10m5Xi/Y3OIzUQy7OkPvHGuLjU3KaFQYxJdwK2U1A0FukGI+pLsjYW
+	yhwg==
+X-Received: by 10.68.58.228 with SMTP id u4mr1558904pbq.30.1366282390684;
+	Thu, 18 Apr 2013 03:53:10 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id w8sm9511013pbt.17.2013.04.18.03.53.08
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 18 Apr 2013 03:53:09 -0700 (PDT)
+Date: Thu, 18 Apr 2013 12:53:10 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
-Date: Thu, 18 Apr 2013 10:11:10 +0100
-Message-Id: <1366276270-4422-1-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 1.7.10.4
-X-Ovh-Tracer-Id: 13325025398276327753
-X-Ovh-Remote: 94.192.12.83 (94-192-12-83.zone6.bethere.co.uk)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrvdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
-X-Spam-Check: DONE|U 0.500464/N
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrvdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
-Subject: [meta-oe][PATCH] live555: change MIRROR for older versions
+Message-ID: <20130418105310.GN26007@jama>
+References: <CANyK_8frhEkQ3-ktHygKdQOWZB3cDVEsqLj_VK7ZeLLL-XEj5A@mail.gmail.com>
+	<20130416111424.GJ10628@jama.dyndns-home.com>
+	<CANyK_8cWf21+4CgXwJLE4-nxYGZwhXdpkQEW4MtfaQ5t=QdXMA@mail.gmail.com>
+	<CANyK_8ft6aY8KFArMc35eKAZGYET5O++VpErsgWOrOZ9=r8vbA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CANyK_8ft6aY8KFArMc35eKAZGYET5O++VpErsgWOrOZ9=r8vbA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe] vim 7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 10:45:48 -0000
+X-List-Received-Date: Thu, 18 Apr 2013 11:11:00 -0000
+X-Groupsio-MsgNum: 44313
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yAzUYvkKIfeS0jQX"
+Content-Disposition: inline
 
-http://download.videolan.org/pub/videolan/testing/contrib/live555/ has dropped
-everything before live.2011.12.23.tar.gz, change to using
-http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ as it still has
-live.2011.03.14.tar.gz.
+--yAzUYvkKIfeS0jQX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
----
- meta-oe/recipes-multimedia/live555/live555.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Apr 18, 2013 at 10:51:21AM +0100, Paul Barker wrote:
+> I've now got a recipe for vim-7.3.905 that's been tested on my
+> Raspberry Pi but I have a few questions before I submit a patch:
+>=20
+> 1) vim has new patch releases very often so if I stick with a fixed
+> version we'll fall behind quickly. However the default branch might
+> become vim-7.4 at some point in the future but I'm not sure we want to
+> move to that automatically. There isn't even a vim-7.4 development
+> branch in the upstream repository so that may be a long while away. Do
+> you have any advice on whether I should specify a fixed version or use
+> AUTOREV? It could also be possible to include both a vim_7.3.905.bb
+> file and a vim_hg.bb file.
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
-index 966224d..a36177d 100644
---- a/meta-oe/recipes-multimedia/live555/live555.inc
-+++ b/meta-oe/recipes-multimedia/live555/live555.inc
-@@ -13,7 +13,7 @@ URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[
- SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
-            file://config.linux-cross"
- # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
--MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/pub/videolan/testing/contrib/live555/ \n"
-+MIRRORS += "http://www.live555.com/liveMedia/public/ http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ \n"
- 
- S = "${WORKDIR}/live"
- TARGET_CC_ARCH += "${LDFLAGS}"
--- 
-1.7.10.4
+No AUTOREV in meta-oe, but it's fine to add both
+vim_7.3.905.bb and vim_hg.bb if hg versions have negative
+DEFAULT_PREFERENCE and SRCREV that you can confirm is working (you can chan=
+ge
+it to AUTOREV later in your local.conf if you want).
 
+> 2) Am I right changing SRC_URI in vim.inc to the mercurial URL and
+> just keep SRCREV in the .bb file?
 
+sounds correct
 
+> 3) There's a vimrc file kept along with the recipe for vim, I can't
+> see much useful in the git history of this file. There's also a
+> vimrc_example.vim file in the runtime files distributed with vim that
+> will keep up-to-date with any changes to syntax or features, should we
+> move to using this?
+
+You mean to use vimrc_example.vim from vim archive instead of our local
+vimrc copy? Sounds good too.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--yAzUYvkKIfeS0jQX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlFv0JYACgkQN1Ujt2V2gBwwJACcDx9ksgUooy/AMC+dAd/BX6/v
++KYAn0rlRZOeD3TnZpq90tZszDoa18un
+=eVQW
+-----END PGP SIGNATURE-----
+
+--yAzUYvkKIfeS0jQX--
