@@ -1,39 +1,41 @@
-Received: from mail-da0-f43.google.com ([209.85.210.43])
+Received: from mail-pa0-f41.google.com ([209.85.220.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1USmjk-0000fS-Ji
+	(envelope-from <martin.jansa@gmail.com>) id 1USmqm-0001Nn-Sv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 13:10:49 +0200
-Received: by mail-da0-f43.google.com with SMTP id u36so1311498dak.30
+	Thu, 18 Apr 2013 13:18:03 +0200
+Received: by mail-pa0-f41.google.com with SMTP id kx1so1524261pab.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 03:53:10 -0700 (PDT)
+	Thu, 18 Apr 2013 04:00:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9blq2bJdbWNOSMPcRzekiykoprX41t2ggZzj43gRf8E=;
-	b=zx5KsxTUWCpjC10S8wLQBf0nm3ZDcbknIsZ2J+HrXA4KzHvrvLiZtWDCgxYaAsuOsU
-	Re9KsON6jYnVQNqo63xqbUWZ+5P7nJHozXGgULvFoLKXesSsvWqP/eQLLVkX65hm8cmX
-	/SrkxsJ60g8TaEBj1BUfvWyLOpDvjr0NEBjuYJTcK9+bSQik9sATLH3vET2oTMXmW30d
-	o1IWL4oMDqlVOlHoIKZfgjinryaxAWcSGm7ZPFwnvgwxLUId5fbcYAAgP42oxUYXFU6J
-	AEdu6FX7mPCrkA10m5Xi/Y3OIzUQy7OkPvHGuLjU3KaFQYxJdwK2U1A0FukGI+pLsjYW
-	yhwg==
-X-Received: by 10.68.58.228 with SMTP id u4mr1558904pbq.30.1366282390684;
-	Thu, 18 Apr 2013 03:53:10 -0700 (PDT)
+	bh=e2upOb68FS4ZyZ+/66h7Qujp9AA8FniIv1pN7wacksE=;
+	b=oWvwyVL3Zuqb1ISqEGr0GkA0uqgEFG/Fg14TpmWCsx08Q31B7181ydl3hTLvkgLSaa
+	Kx0+rr7Y0yvM9B5w+s8l0U6RVgyzn2ptyOHvpdvE4iRdwQlsibx6mfMRR8iVx/vCBQno
+	QqkhHA9+jel8WCcABWU96ZHm0DBJ8FZbDGxte0bZcKPQ3oOfr1mCqWjNaJJJkQUL7d8r
+	2wZ5Cesl7tQ4fvS7IbbgVSEaS+VNkg64WBOeZ8x0JGKMV8JsBi5enoOkU2Kc81Ey216q
+	+XWqy3UBPUbCtzRxnOOltBMLvIsAUZWNKE9Ht54k/+50AzpyG3VOLWoNe+bc5A1/y+VW
+	Ztmg==
+X-Received: by 10.68.254.3 with SMTP id ae3mr13009096pbd.82.1366282827266;
+	Thu, 18 Apr 2013 04:00:27 -0700 (PDT)
 Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id w8sm9511013pbt.17.2013.04.18.03.53.08
+	by mx.google.com with ESMTPS id ts3sm9538583pbc.12.2013.04.18.04.00.24
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 18 Apr 2013 03:53:09 -0700 (PDT)
-Date: Thu, 18 Apr 2013 12:53:10 +0200
+	Thu, 18 Apr 2013 04:00:26 -0700 (PDT)
+Date: Thu, 18 Apr 2013 13:00:26 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130418105310.GN26007@jama>
-References: <CANyK_8frhEkQ3-ktHygKdQOWZB3cDVEsqLj_VK7ZeLLL-XEj5A@mail.gmail.com>
-	<20130416111424.GJ10628@jama.dyndns-home.com>
-	<CANyK_8cWf21+4CgXwJLE4-nxYGZwhXdpkQEW4MtfaQ5t=QdXMA@mail.gmail.com>
-	<CANyK_8ft6aY8KFArMc35eKAZGYET5O++VpErsgWOrOZ9=r8vbA@mail.gmail.com>
+Message-ID: <20130418110026.GO26007@jama>
+References: <1366206552-14452-1-git-send-email-schnitzeltony@googlemail.com>
+	<1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
+	<kkm9v0$mrc$1@ger.gmane.org>
+	<CALbNGRRXN5L-TmjUW9e4MxKi-a_jgX=2p17xXPzS+-nt5Q4HUQ@mail.gmail.com>
+	<20130418082201.GL26007@jama>
+	<CALbNGRTfQh7iBf=8XceW1mJ2mCttp4ccB77p9o9LtMkS0kMYUQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CANyK_8ft6aY8KFArMc35eKAZGYET5O++VpErsgWOrOZ9=r8vbA@mail.gmail.com>
+In-Reply-To: <CALbNGRTfQh7iBf=8XceW1mJ2mCttp4ccB77p9o9LtMkS0kMYUQ@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe] vim 7.3
+Subject: Re: [meta-gnome 2/2] libnotify: update to 0.7.5 and drop libnotify3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,63 +49,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 11:11:00 -0000
-X-Groupsio-MsgNum: 44313
+X-List-Received-Date: Thu, 18 Apr 2013 11:18:08 -0000
+X-Groupsio-MsgNum: 44314
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yAzUYvkKIfeS0jQX"
+	protocol="application/pgp-signature"; boundary="6zipuvUKAEymKn2g"
 Content-Disposition: inline
 
---yAzUYvkKIfeS0jQX
-Content-Type: text/plain; charset=us-ascii
+--6zipuvUKAEymKn2g
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 18, 2013 at 10:51:21AM +0100, Paul Barker wrote:
-> I've now got a recipe for vim-7.3.905 that's been tested on my
-> Raspberry Pi but I have a few questions before I submit a patch:
->=20
-> 1) vim has new patch releases very often so if I stick with a fixed
-> version we'll fall behind quickly. However the default branch might
-> become vim-7.4 at some point in the future but I'm not sure we want to
-> move to that automatically. There isn't even a vim-7.4 development
-> branch in the upstream repository so that may be a long while away. Do
-> you have any advice on whether I should specify a fixed version or use
-> AUTOREV? It could also be possible to include both a vim_7.3.905.bb
-> file and a vim_hg.bb file.
+On Thu, Apr 18, 2013 at 11:53:45AM +0200, Andreas M=FCller wrote:
+> On Thu, Apr 18, 2013 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Thu, Apr 18, 2013 at 08:58:24AM +0200, Andreas M=FCller wrote:
+> >> On Wed, Apr 17, 2013 at 4:01 PM, Koen Kooi <koen@dominion.thruhere.net=
+> wrote:
+> >> > -----BEGIN PGP SIGNED MESSAGE-----
+> >> > Hash: SHA1
+> >> >
+> >> > Op 17-04-13 15:49, Andreas M=FCller schreef:
+> >> >> removing tests drops dependencies on gtk
+> >> >>
+> >> >> Tested by:
+> >> >>
+> >> >> * building nautilus3 (the only recipe found depending on libnotify3=
+) *
+> >> >> running xfce-based image and checked notififations
+> >> >
+> >> > The problem with libnotify was (is?) that it removed some API that G=
+NOME 2.x
+> >> > depends on and later introduced API that GNOME 3.x depends on, hence=
+ the 2
+> >> > recipes. Do all the GNOME 2.x bits build against this new libnotify?=
+ The
+> >> > error was a build break, so it things build, they are likely to work=
+ :)
+> >> >
+> >> > regards,
+> >> >
+> >> > Koen
+> >> >
+> >> Martin's world shall let us know
+> >
+> > My slaves are looking forward to serve..
+> >
+> > It's in queue, but still jenkins is 40+ hours behind, so I'll let you k=
+now later..
+> >
+> I started and additional test. At least zenity fails for API change
+> but seems not a big deal to fix. Will send follow up patches.
 
-No AUTOREV in meta-oe, but it's fine to add both
-vim_7.3.905.bb and vim_hg.bb if hg versions have negative
-DEFAULT_PREFERENCE and SRCREV that you can confirm is working (you can chan=
-ge
-it to AUTOREV later in your local.conf if you want).
-
-> 2) Am I right changing SRC_URI in vim.inc to the mercurial URL and
-> just keep SRCREV in the .bb file?
-
-sounds correct
-
-> 3) There's a vimrc file kept along with the recipe for vim, I can't
-> see much useful in the git history of this file. There's also a
-> vimrc_example.vim file in the runtime files distributed with vim that
-> will keep up-to-date with any changes to syntax or features, should we
-> move to using this?
-
-You mean to use vimrc_example.vim from vim archive instead of our local
-vimrc copy? Sounds good too.
+I guess that to test this properly I should cleansstate both libnotify
+or do build from scratch, because I cannot know which one won
+into-the-sysroot race during last build.
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---yAzUYvkKIfeS0jQX
+--6zipuvUKAEymKn2g
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlFv0JYACgkQN1Ujt2V2gBwwJACcDx9ksgUooy/AMC+dAd/BX6/v
-+KYAn0rlRZOeD3TnZpq90tZszDoa18un
-=eVQW
+iEYEARECAAYFAlFv0koACgkQN1Ujt2V2gBy8qQCeLVaDpWQnSaNjRw9JTlNEG49V
+KUYAnibq20AO1GvV60IFcezDZZnZXFY2
+=E5gN
 -----END PGP SIGNATURE-----
 
---yAzUYvkKIfeS0jQX--
+--6zipuvUKAEymKn2g--
