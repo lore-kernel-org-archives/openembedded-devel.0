@@ -1,24 +1,36 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-vc0-f176.google.com ([209.85.220.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1USlWW-0000rS-GZ
+	(envelope-from <paul.betafive@gmail.com>) id 1USllu-0002r2-JO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 11:53:03 +0200
-Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id BE9264B01D0;
-	Thu, 18 Apr 2013 11:35:22 +0200 (CEST)
-Date: Thu, 18 Apr 2013 11:35:21 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Thu, 18 Apr 2013 12:08:58 +0200
+Received: by mail-vc0-f176.google.com with SMTP id hf12so2208905vcb.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Apr 2013 02:51:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=lnd8/zJ3bcRQItkG1WcJSKC/GBSeHUsZkSKmljuGAyg=;
+	b=r9ykoQLBYQaDTjn4KCx/uk4MI5ibnngieM9eV5Hf9K0VNRzcyx5extwNx01CbO4qdj
+	F93k9dtEnKYspffAp2oADWG62GYQ4I3C27ZAMMnyDtSNfpWADAQSfknFGqbnY2xlI1iV
+	fgug+MPL0+MswCmA1JMdbwRnrmtVErhcFi/wp1fxXGSIJaeT/x4oP/WEb3J40+dEWR77
+	A0yNpKYoPHZ31NL7VguAH96s8saD2gFh0++MPiVBZV294ln8d/6dsvp8TXGzu/r+d8WS
+	IrAPMShdUEoTR/ovWioldf4TOKd8eaeV1/tIf25UGcrvEByUIi23H/WLNQlh+5PzqkDL
+	sItQ==
+MIME-Version: 1.0
+X-Received: by 10.52.27.52 with SMTP id q20mr6759462vdg.16.1366278681326; Thu,
+	18 Apr 2013 02:51:21 -0700 (PDT)
+Sender: paul.betafive@gmail.com
+Received: by 10.220.224.135 with HTTP; Thu, 18 Apr 2013 02:51:21 -0700 (PDT)
+In-Reply-To: <CANyK_8cWf21+4CgXwJLE4-nxYGZwhXdpkQEW4MtfaQ5t=QdXMA@mail.gmail.com>
+References: <CANyK_8frhEkQ3-ktHygKdQOWZB3cDVEsqLj_VK7ZeLLL-XEj5A@mail.gmail.com>
+	<20130416111424.GJ10628@jama.dyndns-home.com>
+	<CANyK_8cWf21+4CgXwJLE4-nxYGZwhXdpkQEW4MtfaQ5t=QdXMA@mail.gmail.com>
+Date: Thu, 18 Apr 2013 10:51:21 +0100
+X-Google-Sender-Auth: -j2CBXhWVAiaXdCAsF9Qj7VMSJk
+Message-ID: <CANyK_8ft6aY8KFArMc35eKAZGYET5O++VpErsgWOrOZ9=r8vbA@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130418113521.3713e0f8@e6520eb>
-In-Reply-To: <20130418084437.GM26007@jama>
-References: <1366104524-13236-1-git-send-email-ml@communistcode.co.uk>
-	<20130418084437.GM26007@jama>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>, martin.jansa@gmail.com
-Subject: Re: [meta-oe][PATCH] Hiawatha: update to 9.0, add systemd support
+Subject: Re: [meta-oe] vim 7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,27 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 09:53:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Apr 2013 10:09:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+I've now got a recipe for vim-7.3.905 that's been tested on my
+Raspberry Pi but I have a few questions before I submit a patch:
 
-Le Thu, 18 Apr 2013 10:44:37 +0200,
-Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
+1) vim has new patch releases very often so if I stick with a fixed
+version we'll fall behind quickly. However the default branch might
+become vim-7.4 at some point in the future but I'm not sure we want to
+move to that automatically. There isn't even a vim-7.4 development
+branch in the upstream repository so that may be a long while away. Do
+you have any advice on whether I should specify a fixed version or use
+AUTOREV? It could also be possible to include both a vim_7.3.905.bb
+file and a vim_hg.bb file.
 
->  http://hiawatha-webserver.org/files/hiawatha-9.0.tar.gz
+2) Am I right changing SRC_URI in vim.inc to the mercurial URL and
+just keep SRCREV in the .bb file?
 
-I can confirme that the sha256 is false :
+3) There's a vimrc file kept along with the recipe for vim, I can't
+see much useful in the git history of this file. There's also a
+vimrc_example.vim file in the runtime files distributed with vim that
+will keep up-to-date with any changes to syntax or features, should we
+move to using this?
 
-> +SRC_URI[md5sum] =3D "8abc4f85dbb9a76ed66e7f35de520064"
-> +SRC_URI[sha256sum] =3D "e40119afb050b11737250c08d89ac7ba7472645738a48c06=
-aa79979a19729fc" =20
+Thanks,
 
-here I also get :
-5e40119afb050b11737250c08d89ac7ba7472645738a48c06aa79979a19729fc
-as you get on jenkins.
+--
+Paul Barker
 
-Eric
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
 
