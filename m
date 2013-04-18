@@ -1,15 +1,39 @@
-Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
+Received: from mail-vc0-f172.google.com ([209.85.220.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1USnA7-0003MF-K2
+	(envelope-from <schnitzeltony@googlemail.com>) id 1USnDZ-0003jB-JS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 13:38:01 +0200
-From: Jack Mitchell <ml@communistcode.co.uk>
+	Thu, 18 Apr 2013 13:41:35 +0200
+Received: by mail-vc0-f172.google.com with SMTP id gd11so2332939vcb.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Apr 2013 04:24:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=Gikhd8OBQvoiawupiDPTVd3GD4ly0a/DseiRDfKqO9I=;
+	b=vAWWwEegC6v8mWP0adLiCJfHvlsC0CetgvvwLePVg58EDbYXUTBdS/+WjwTKgJyRZD
+	q+uc4mvssqgkZDcc66H3FeY1zSoOMYnZ46ZyYFsPZSIYPrFgYXXe/nm9SB4KxzJEU4sW
+	D8e0kmsEpjC1tGe64Z576Ao68eR4AjxzD0lunX46JxWr5IURhNm3FoabrW0+jotpUKd7
+	gmThQea6tM1zw3TfkVp59o2dxq5PxuZhEqgWwfmwGPqoYhOkrhKNRn3sJqszS5Jv69DJ
+	rTbTvJc3LWd5+w/mK4zMYpiykhLuGNMdl20ZN8qLDAKw3FKQ9kuafA6ZToAqAfoOEZ+R
+	yQyA==
+MIME-Version: 1.0
+X-Received: by 10.220.65.1 with SMTP id g1mr7873218vci.63.1366284240308; Thu,
+	18 Apr 2013 04:24:00 -0700 (PDT)
+Received: by 10.52.185.168 with HTTP; Thu, 18 Apr 2013 04:24:00 -0700 (PDT)
+In-Reply-To: <20130418110026.GO26007@jama>
+References: <1366206552-14452-1-git-send-email-schnitzeltony@googlemail.com>
+	<1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
+	<kkm9v0$mrc$1@ger.gmane.org>
+	<CALbNGRRXN5L-TmjUW9e4MxKi-a_jgX=2p17xXPzS+-nt5Q4HUQ@mail.gmail.com>
+	<20130418082201.GL26007@jama>
+	<CALbNGRTfQh7iBf=8XceW1mJ2mCttp4ccB77p9o9LtMkS0kMYUQ@mail.gmail.com>
+	<20130418110026.GO26007@jama>
+Date: Thu, 18 Apr 2013 13:24:00 +0200
+Message-ID: <CALbNGRSzmogd602cGauf1hE_c=SMQSaEo-R1hJQyn524dLkCaw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Apr 2013 12:20:20 +0100
-Message-Id: <1366284020-8025-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.2
-Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-Subject: [meta-oe][PATCH v2] Hiawatha: update to 9.0, add systemd support
+Subject: Re: [meta-gnome 2/2] libnotify: update to 0.7.5 and drop libnotify3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -23,90 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 11:38:06 -0000
+X-List-Received-Date: Thu, 18 Apr 2013 11:41:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+On Thu, Apr 18, 2013 at 1:00 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Apr 18, 2013 at 11:53:45AM +0200, Andreas M=C3=BCller wrote:
+>> On Thu, Apr 18, 2013 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>> > On Thu, Apr 18, 2013 at 08:58:24AM +0200, Andreas M=C3=BCller wrote:
+>> >> On Wed, Apr 17, 2013 at 4:01 PM, Koen Kooi <koen@dominion.thruhere.ne=
+t> wrote:
+>> >> > -----BEGIN PGP SIGNED MESSAGE-----
+>> >> > Hash: SHA1
+>> >> >
+>> >> > Op 17-04-13 15:49, Andreas M=C3=BCller schreef:
+>> >> >> removing tests drops dependencies on gtk
+>> >> >>
+>> >> >> Tested by:
+>> >> >>
+>> >> >> * building nautilus3 (the only recipe found depending on libnotify=
+3) *
+>> >> >> running xfce-based image and checked notififations
+>> >> >
+>> >> > The problem with libnotify was (is?) that it removed some API that =
+GNOME 2.x
+>> >> > depends on and later introduced API that GNOME 3.x depends on, henc=
+e the 2
+>> >> > recipes. Do all the GNOME 2.x bits build against this new libnotify=
+? The
+>> >> > error was a build break, so it things build, they are likely to wor=
+k :)
+>> >> >
+>> >> > regards,
+>> >> >
+>> >> > Koen
+>> >> >
+>> >> Martin's world shall let us know
+>> >
+>> > My slaves are looking forward to serve..
+>> >
+>> > It's in queue, but still jenkins is 40+ hours behind, so I'll let you =
+know later..
+>> >
+>> I started and additional test. At least zenity fails for API change
+>> but seems not a big deal to fix. Will send follow up patches.
+>
+> I guess that to test this properly I should cleansstate both libnotify
+> or do build from scratch, because I cannot know which one won
+> into-the-sysroot race during last build.
+>
+> --
+1. I think yes
+2. I found build faults for gnome-power-manager zenity
+gnome-settings-daemon - hope to fix these until tomorrow.
 
-Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
----
-
-v2 - Fix sha256sum
-
- .../recipes-httpd/hiawatha/files/hiawatha.service     | 16 ++++++++++++++++
- .../hiawatha/{hiawatha_8.8.1.bb => hiawatha_9.0.bb}   | 19 ++++++++++++++-----
- 2 files changed, 30 insertions(+), 5 deletions(-)
- create mode 100644 meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
- rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_8.8.1.bb => hiawatha_9.0.bb} (78%)
-
-diff --git a/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
-new file mode 100644
-index 0000000..26cb8d0
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
-@@ -0,0 +1,16 @@
-+[Unit]
-+Description=Hiawatha Web Server
-+After=network.target remote-fs.target nss-lookup.target
-+
-+[Service]
-+Type=simple
-+SyslogIdentifier=hiawatha
-+ExecStartPre=/usr/sbin/hiawatha -k ; /usr/sbin/wigwam
-+ExecStart= /usr/sbin/hiawatha -d
-+TimeoutSec=10
-+#(doesn't like this setting. Can't find files) PrivateTmp=true
-+LimitNOFILE=infinity
-+CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER CAP_FSETID CAP_SETGID CAP_SETUID 
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
-similarity index 78%
-rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
-rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
-index a729970..ac21558 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
-@@ -7,16 +7,19 @@ DEPENDS = "libxml2 libxslt"
- SECTION = "net"
- 
- SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
--           file://hiawatha-init "
-+           file://hiawatha-init \
-+           file://hiawatha.service "
- 
--SRC_URI[md5sum] = "5def93779bbc10a021796abd3609caf7"
--SRC_URI[sha256sum] = "2583d8e7f48ddc6cdedc27bb51d3e130679fc2f4411622bae9ddce3ef965d063"
--
--inherit cmake update-rc.d
-+SRC_URI[md5sum] = "8abc4f85dbb9a76ed66e7f35de520064"
-+SRC_URI[sha256sum] = "5e40119afb050b11737250c08d89ac7ba7472645738a48c06aa79979a19729fc"
- 
- INITSCRIPT_NAME = "hiawatha"
- INITSCRIPT_PARAMS = "defaults 70"
- 
-+SYSTEMD_SERVICE_${PN} = "hiawatha.service"
-+
-+inherit cmake update-rc.d systemd
-+
- EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-                   -DENABLE_CACHE=OFF \
-                   -DENABLE_DEBUG=OFF \
-@@ -44,6 +47,12 @@ do_install_append() {
-     # configure php-fcgi to have a working configuration
-     # by default if php is installed
-     echo "Server = ${bindir}/php-cgi ; 2 ; 127.0.0.1:2005 ; nobody:nobody ; ${sysconfdir}/php/hiawatha-php5/php.ini" >> ${D}${sysconfdir}/hiawatha/php-fcgi.conf
-+
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}/${systemd_unitdir}/system
-+        install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
-+    fi
-+
- }
- 
- CONFFILES_${PN} = " \
--- 
-1.8.2
-
+Andreas
 
 
