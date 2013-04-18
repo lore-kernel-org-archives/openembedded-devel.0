@@ -1,37 +1,37 @@
-Received: from mail-vb0-f41.google.com ([209.85.212.41])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1USloE-0003E0-EE
+Received: from 20.mo1.mail-out.ovh.net ([188.165.45.168]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul@paulbarker.me.uk>) id 1USmLU-0006Yo-NR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 12:11:19 +0200
-Received: by mail-vb0-f41.google.com with SMTP id f13so2124444vbg.14
+	Thu, 18 Apr 2013 12:45:43 +0200
+Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id 1384DFFA16F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 02:53:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=tvp9uIDtZltjclRxjKMo7whE1iSldfODG++B0yeKKjs=;
-	b=SQ1xGqBTUvS0wOPp3gNw93sF41T/Hz38KXNZQ9esn5Ba57E3GD0FZSFecyceYczVSG
-	O1Itoe2OBqM0hOAntIWQpZzN9/2MF8EKQ+YmdltuQLXu1B0WjYj71EiGl34c5vig1+G/
-	8+IFHIO0U17qMZSsxmVUeJNpEy3FcZ1dyqe74+nideMW2+afqxd5L2cnRwaBH4+FkpTD
-	54MDxsHQ2fW9ZW9GrWfVvUk6yBDNZFRdUF6B3bXGMbw37gfeAsMegU2cIuuxrs1Kjruh
-	MsqOIzVTOsQ6dS+MnM+PjHuVLk/qaHqjASmfE/vlJUUOY2nX4LZEhJvyUqhK41T5ukAJ
-	PN4g==
-MIME-Version: 1.0
-X-Received: by 10.58.232.98 with SMTP id tn2mr7473271vec.57.1366278825219;
-	Thu, 18 Apr 2013 02:53:45 -0700 (PDT)
-Received: by 10.52.185.168 with HTTP; Thu, 18 Apr 2013 02:53:45 -0700 (PDT)
-In-Reply-To: <20130418082201.GL26007@jama>
-References: <1366206552-14452-1-git-send-email-schnitzeltony@googlemail.com>
-	<1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
-	<kkm9v0$mrc$1@ger.gmane.org>
-	<CALbNGRRXN5L-TmjUW9e4MxKi-a_jgX=2p17xXPzS+-nt5Q4HUQ@mail.gmail.com>
-	<20130418082201.GL26007@jama>
-Date: Thu, 18 Apr 2013 11:53:45 +0200
-Message-ID: <CALbNGRTfQh7iBf=8XceW1mJ2mCttp4ccB77p9o9LtMkS0kMYUQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 18 Apr 2013 11:12:15 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 18 Apr 2013 11:12:13 +0200
+Received: from 94-192-12-83.zone6.bethere.co.uk (HELO
+	b5-server.betafive.co.uk) (paul@betafive.co.uk@94.192.12.83)
+	by ns0.ovh.net with SMTP; 18 Apr 2013 11:12:12 +0200
+Received: from b5-vm-mint0.betafive.co.uk (unknown [192.168.0.235])
+	by b5-server.betafive.co.uk (Postfix) with ESMTP id EE6001601A0;
+	Thu, 18 Apr 2013 10:11:07 +0100 (BST)
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome 2/2] libnotify: update to 0.7.5 and drop libnotify3
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Date: Thu, 18 Apr 2013 10:11:10 +0100
+Message-Id: <1366276270-4422-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.7.10.4
+X-Ovh-Tracer-Id: 13325025398276327753
+X-Ovh-Remote: 94.192.12.83 (94-192-12-83.zone6.bethere.co.uk)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrvdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.500464/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrvdehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Subject: [meta-oe][PATCH] live555: change MIRROR for older versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 10:11:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Apr 2013 10:45:48 -0000
 
-On Thu, Apr 18, 2013 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Thu, Apr 18, 2013 at 08:58:24AM +0200, Andreas M=C3=BCller wrote:
->> On Wed, Apr 17, 2013 at 4:01 PM, Koen Kooi <koen@dominion.thruhere.net> =
-wrote:
->> > -----BEGIN PGP SIGNED MESSAGE-----
->> > Hash: SHA1
->> >
->> > Op 17-04-13 15:49, Andreas M=C3=BCller schreef:
->> >> removing tests drops dependencies on gtk
->> >>
->> >> Tested by:
->> >>
->> >> * building nautilus3 (the only recipe found depending on libnotify3) =
-*
->> >> running xfce-based image and checked notififations
->> >
->> > The problem with libnotify was (is?) that it removed some API that GNO=
-ME 2.x
->> > depends on and later introduced API that GNOME 3.x depends on, hence t=
-he 2
->> > recipes. Do all the GNOME 2.x bits build against this new libnotify? T=
-he
->> > error was a build break, so it things build, they are likely to work :=
-)
->> >
->> > regards,
->> >
->> > Koen
->> >
->> Martin's world shall let us know
->
-> My slaves are looking forward to serve..
->
-> It's in queue, but still jenkins is 40+ hours behind, so I'll let you kno=
-w later..
->
-I started and additional test. At least zenity fails for API change
-but seems not a big deal to fix. Will send follow up patches.
+http://download.videolan.org/pub/videolan/testing/contrib/live555/ has dropped
+everything before live.2011.12.23.tar.gz, change to using
+http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ as it still has
+live.2011.03.14.tar.gz.
 
-Andreas
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ meta-oe/recipes-multimedia/live555/live555.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
+index 966224d..a36177d 100644
+--- a/meta-oe/recipes-multimedia/live555/live555.inc
++++ b/meta-oe/recipes-multimedia/live555/live555.inc
+@@ -13,7 +13,7 @@ URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[
+ SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
+            file://config.linux-cross"
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+-MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/pub/videolan/testing/contrib/live555/ \n"
++MIRRORS += "http://www.live555.com/liveMedia/public/ http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ \n"
+ 
+ S = "${WORKDIR}/live"
+ TARGET_CC_ARCH += "${LDFLAGS}"
+-- 
+1.7.10.4
+
 
 
