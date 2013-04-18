@@ -1,32 +1,15 @@
-Received: from mail-vb0-f47.google.com ([209.85.212.47])
+Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>) id 1USmr7-0001Q6-FK
+	(envelope-from <ml@communistcode.co.uk>) id 1USnA7-0003MF-K2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 13:18:23 +0200
-Received: by mail-vb0-f47.google.com with SMTP id x13so2184671vbb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 04:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:date:x-google-sender-auth:message-id
-	:subject:from:to:content-type;
-	bh=u2gDCKWPjWHvEziFp8gudXhfN9yyPpL0GYI867duU1M=;
-	b=V5gxEVeLUtSDp/yQkAoEkhOEC3i4HJWiNsS2GAt44W6EUpXH4HvjOQLMSujExg6D37
-	VN0iXklnmYELRByxbzCymhDfrAd10l9t3Ab+4g737rGpFOcUY7HOs3dgDbuO3Fx39bUN
-	6Wls/mQPGEqGUVnXBxm8xwl7UDs699LYLb4kfIsydl8wujZdAAfKAj5gH5AR4vhzP7+b
-	6cnJeWX3NptNkWs/c+419fbbLR7oe3hib+36wzEnGzC3c3D3eFd2cKTc7AgHnEsvKZ4D
-	xOyfW8jKpX49SoqRQuOwOqqcrivcTTbC7tvkaDBD8T12ACVkrNte9BHwRe09AEoIICnR
-	iEKA==
-MIME-Version: 1.0
-X-Received: by 10.220.245.4 with SMTP id ls4mr7758453vcb.17.1366282848063;
-	Thu, 18 Apr 2013 04:00:48 -0700 (PDT)
-Sender: paul.betafive@gmail.com
-Received: by 10.220.224.135 with HTTP; Thu, 18 Apr 2013 04:00:47 -0700 (PDT)
-Date: Thu, 18 Apr 2013 12:00:47 +0100
-X-Google-Sender-Auth: nep2Tp8pKzRbTy8VR3gFoJOrea8
-Message-ID: <CANyK_8c7CqEqO+X5EkNpqpA0Y3brbAzQSxhkH_afThxJXpas-Q@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
+	Thu, 18 Apr 2013 13:38:01 +0200
+From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] libftdi uses library search path "/lib"
+Date: Thu, 18 Apr 2013 12:20:20 +0100
+Message-Id: <1366284020-8025-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.2
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: [meta-oe][PATCH v2] Hiawatha: update to 9.0, add systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +23,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 11:18:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Apr 2013 11:38:06 -0000
 
-I'm getting to a warning about an unsafe library search path when
-building libftdi. A look into the source tree after do_configure shows
-that all the Makefiles have "LIBS= -L/lib -lusb", manually removing
-"-L/lib" before running do_compile removes this warning. I don't know
-enough about autotools to do something to prevent this happening in
-the first place but searching the list archive did turn up
-http://article.gmane.org/gmane.comp.handhelds.openembedded/55197/.
+From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 
-The following is the relevant extract from log.do_compile:
+Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+---
 
-../arm-wych-linux-gnueabi-libtool --tag=CC   --mode=link
-arm-wych-linux-gnueabi-gcc  -march=armv6    -mthumb-interwork
--mfloat-abi=softfp
---sysroot=/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi
- -O2 -pipe -g -feliminate-unused-debug-types
--I/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi/usr/include
--version-info 20:0:19 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
--Wl,--as-needed -o libftdi.la -rpath /usr/lib ftdi.lo  -L/lib -lusb
+v2 - Fix sha256sum
 
-arm-wych-linux-gnueabi-libtool: link: arm-wych-linux-gnueabi-gcc
--march=armv6    -mthumb-interwork -mfloat-abi=softfp
---sysroot=/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi
--shared  -fPIC -DPIC  .libs/ftdi.o   -L/lib
-/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi/lib/libusb.so
--L=/lib -L/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi/lib
-/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi/lib/libusb-1.0.so
--lrt  -march=armv6 -mthumb-interwork -mfloat-abi=softfp
---sysroot=/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/raspberrypi
--O2 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--as-needed
--pthread -Wl,-soname -Wl,libftdi.so.1 -o .libs/libftdi.so.1.19.0
+ .../recipes-httpd/hiawatha/files/hiawatha.service     | 16 ++++++++++++++++
+ .../hiawatha/{hiawatha_8.8.1.bb => hiawatha_9.0.bb}   | 19 ++++++++++++++-----
+ 2 files changed, 30 insertions(+), 5 deletions(-)
+ create mode 100644 meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
+ rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_8.8.1.bb => hiawatha_9.0.bb} (78%)
 
-/home/paul/work/wych/build-raspberrypi/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv6-vfp-wych-linux-gnueabi/gcc/arm-wych-linux-gnueabi/4.7.2/ld:
-warning: library search path "/lib" is unsafe for cross-compilation
+diff --git a/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
+new file mode 100644
+index 0000000..26cb8d0
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/hiawatha/files/hiawatha.service
+@@ -0,0 +1,16 @@
++[Unit]
++Description=Hiawatha Web Server
++After=network.target remote-fs.target nss-lookup.target
++
++[Service]
++Type=simple
++SyslogIdentifier=hiawatha
++ExecStartPre=/usr/sbin/hiawatha -k ; /usr/sbin/wigwam
++ExecStart= /usr/sbin/hiawatha -d
++TimeoutSec=10
++#(doesn't like this setting. Can't find files) PrivateTmp=true
++LimitNOFILE=infinity
++CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER CAP_FSETID CAP_SETGID CAP_SETUID 
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
+similarity index 78%
+rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
+rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
+index a729970..ac21558 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_8.8.1.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.0.bb
+@@ -7,16 +7,19 @@ DEPENDS = "libxml2 libxslt"
+ SECTION = "net"
+ 
+ SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+-           file://hiawatha-init "
++           file://hiawatha-init \
++           file://hiawatha.service "
+ 
+-SRC_URI[md5sum] = "5def93779bbc10a021796abd3609caf7"
+-SRC_URI[sha256sum] = "2583d8e7f48ddc6cdedc27bb51d3e130679fc2f4411622bae9ddce3ef965d063"
+-
+-inherit cmake update-rc.d
++SRC_URI[md5sum] = "8abc4f85dbb9a76ed66e7f35de520064"
++SRC_URI[sha256sum] = "5e40119afb050b11737250c08d89ac7ba7472645738a48c06aa79979a19729fc"
+ 
+ INITSCRIPT_NAME = "hiawatha"
+ INITSCRIPT_PARAMS = "defaults 70"
+ 
++SYSTEMD_SERVICE_${PN} = "hiawatha.service"
++
++inherit cmake update-rc.d systemd
++
+ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
+                   -DENABLE_CACHE=OFF \
+                   -DENABLE_DEBUG=OFF \
+@@ -44,6 +47,12 @@ do_install_append() {
+     # configure php-fcgi to have a working configuration
+     # by default if php is installed
+     echo "Server = ${bindir}/php-cgi ; 2 ; 127.0.0.1:2005 ; nobody:nobody ; ${sysconfdir}/php/hiawatha-php5/php.ini" >> ${D}${sysconfdir}/hiawatha/php-fcgi.conf
++
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}/${systemd_unitdir}/system
++        install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
++    fi
++
+ }
+ 
+ CONFFILES_${PN} = " \
+-- 
+1.8.2
 
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
 
 
