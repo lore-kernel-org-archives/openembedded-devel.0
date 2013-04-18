@@ -1,40 +1,38 @@
-Received: from mail-vb0-f45.google.com ([209.85.212.45])
+Received: from mail-da0-f50.google.com ([209.85.210.50])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1USoUi-0003eI-OL
+	(envelope-from <martin.jansa@gmail.com>) id 1USuUx-0004a4-6U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Apr 2013 15:03:21 +0200
-Received: by mail-vb0-f45.google.com with SMTP id w15so2337381vbf.32
+	Thu, 18 Apr 2013 21:28:04 +0200
+Received: by mail-da0-f50.google.com with SMTP id a4so41393dad.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 05:45:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=Ve+x7ZcbIHENYUFetEld0Uir2cpkBFjGXbdosxu77a8=;
-	b=y4n8XMugYBHhi0l6Mml+lvqLOYzBR82PD21jECEkTfakLgqgzpxcQxXcKa8Ysvxc4B
-	9DlyD47xh+dyKweSvxjDakTZW0gVCHAbBeTwAIdvTYtwEjEmcdn85KY2KqGhWFY9Ce6v
-	92ZLJSGBwK2Kjzbv8e5Er9uVoCXy8CsJg+Eu5dFWn2b0Qp8tT6rRFt8cmWAMToBJJ1jP
-	0SkmM1wuYSLrWnsOOM4P0Sp2HndWhJTLAQt38YxqmLz11LzgSUqnyyjoyJKCDupay6wG
-	aMpZYtWV+OvgIRvmQZEZ/GV8NQXuH8XgZ6wH4YLcC+IcKhDmF6XAHdwrF+7Xj+9rkai1
-	9Mgw==
-MIME-Version: 1.0
-X-Received: by 10.59.11.199 with SMTP id ek7mr8141744ved.19.1366289147254;
-	Thu, 18 Apr 2013 05:45:47 -0700 (PDT)
-Received: by 10.52.185.168 with HTTP; Thu, 18 Apr 2013 05:45:47 -0700 (PDT)
-In-Reply-To: <CALbNGRSzmogd602cGauf1hE_c=SMQSaEo-R1hJQyn524dLkCaw@mail.gmail.com>
-References: <1366206552-14452-1-git-send-email-schnitzeltony@googlemail.com>
-	<1366206552-14452-2-git-send-email-schnitzeltony@googlemail.com>
-	<kkm9v0$mrc$1@ger.gmane.org>
-	<CALbNGRRXN5L-TmjUW9e4MxKi-a_jgX=2p17xXPzS+-nt5Q4HUQ@mail.gmail.com>
-	<20130418082201.GL26007@jama>
-	<CALbNGRTfQh7iBf=8XceW1mJ2mCttp4ccB77p9o9LtMkS0kMYUQ@mail.gmail.com>
-	<20130418110026.GO26007@jama>
-	<CALbNGRSzmogd602cGauf1hE_c=SMQSaEo-R1hJQyn524dLkCaw@mail.gmail.com>
-Date: Thu, 18 Apr 2013 14:45:47 +0200
-Message-ID: <CALbNGRS7+a2+_9G0H8LZkhvj9YA7k6pSW=GEQmhweVRgyyMPnQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 18 Apr 2013 12:10:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=j+uTmTmQyhMcd4eWrdAG/XIhdGLTB0qWSteWZXJVP70=;
+	b=M2O2vAAKMP+k9KO6sZg7O7NdN3xmhD16PuKVnDYOnh6MVgmc2R54ka3Kdkz9U4DcM1
+	zO/1GTcwMXwcZ1E6XRPS0LNlztJCNH6J9/wlxltE/dzZ0hGj46SB97cFQ8O/S+jGJsWv
+	LzDvstQhvZhCozy5tYzK37VM9kR2b/FMRT5nNogyKBWtfttoV6DNunJY4FwLUn60ULiF
+	Avi8EoHfWS5yRYBq5pZyzBFvtPJ9ZOHJiHoiml14AVLzdySklDeKoZJvaX8KC/nGFOIw
+	udqBmtZrUoZFTUwq8UF3d/r6+HrUvPKv5DEwPsPMz09c6K1aXWfv2fAzNAoNfFzpsKPY
+	Hr+A==
+X-Received: by 10.68.58.103 with SMTP id p7mr14842039pbq.156.1366312224904;
+	Thu, 18 Apr 2013 12:10:24 -0700 (PDT)
+Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
+	by mx.google.com with ESMTPS id lo7sm11858689pab.19.2013.04.18.12.10.21
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 18 Apr 2013 12:10:23 -0700 (PDT)
+Date: Thu, 18 Apr 2013 21:10:23 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome 2/2] libnotify: update to 0.7.5 and drop libnotify3
+Message-ID: <20130418191023.GB2489@jama>
+References: <1366209695-4195-1-git-send-email-ml@communistcode.co.uk>
+	<1366209695-4195-2-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <1366209695-4195-2-git-send-email-ml@communistcode.co.uk>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: Re: [meta-oe][PATCHv2] php: add sqlite3 and mysql PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,78 +46,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 13:03:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Apr 2013 19:28:24 -0000
+X-Groupsio-MsgNum: 44321
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xXmbgvnjoT4axfJE"
+Content-Disposition: inline
+
+--xXmbgvnjoT4axfJE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 18, 2013 at 1:24 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Thu, Apr 18, 2013 at 1:00 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
->> On Thu, Apr 18, 2013 at 11:53:45AM +0200, Andreas M=C3=BCller wrote:
->>> On Thu, Apr 18, 2013 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->>> > On Thu, Apr 18, 2013 at 08:58:24AM +0200, Andreas M=C3=BCller wrote:
->>> >> On Wed, Apr 17, 2013 at 4:01 PM, Koen Kooi <koen@dominion.thruhere.n=
-et> wrote:
->>> >> > -----BEGIN PGP SIGNED MESSAGE-----
->>> >> > Hash: SHA1
->>> >> >
->>> >> > Op 17-04-13 15:49, Andreas M=C3=BCller schreef:
->>> >> >> removing tests drops dependencies on gtk
->>> >> >>
->>> >> >> Tested by:
->>> >> >>
->>> >> >> * building nautilus3 (the only recipe found depending on libnotif=
-y3) *
->>> >> >> running xfce-based image and checked notififations
->>> >> >
->>> >> > The problem with libnotify was (is?) that it removed some API that=
- GNOME 2.x
->>> >> > depends on and later introduced API that GNOME 3.x depends on, hen=
-ce the 2
->>> >> > recipes. Do all the GNOME 2.x bits build against this new libnotif=
-y? The
->>> >> > error was a build break, so it things build, they are likely to wo=
-rk :)
->>> >> >
->>> >> > regards,
->>> >> >
->>> >> > Koen
->>> >> >
->>> >> Martin's world shall let us know
->>> >
->>> > My slaves are looking forward to serve..
->>> >
->>> > It's in queue, but still jenkins is 40+ hours behind, so I'll let you=
- know later..
->>> >
->>> I started and additional test. At least zenity fails for API change
->>> but seems not a big deal to fix. Will send follow up patches.
->>
->> I guess that to test this properly I should cleansstate both libnotify
->> or do build from scratch, because I cannot know which one won
->> into-the-sysroot race during last build.
->>
->> --
-> 1. I think yes
-> 2. I found build faults for gnome-power-manager zenity
-> gnome-settings-daemon - hope to fix these until tomorrow.
->
-> Andreas
+On Wed, Apr 17, 2013 at 03:41:35PM +0100, Jack Mitchell wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>=20
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc | 28 +++++++++++++++++++---------
+>  1 file changed, 19 insertions(+), 9 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
+ols/php/php.inc
+> index 225c3d7..639aa01 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -3,11 +3,11 @@ HOMEPAGE =3D "http://www.php.net"
+>  SECTION =3D "console/network"
+>  LICENSE =3D "PHP-3.0"
+>  BBCLASSEXTEND =3D "native"
+> -DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native mysql=
+5 \
+> -           libc-client openssl sqlite3"
+> +DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native \
+> +           libc-client openssl"
+>  DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
+> =20
+> -INC_PR =3D "r4"
+> +INC_PR =3D "r5"
+> =20
+>  SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
+> =20
+> @@ -27,12 +27,7 @@ EXTRA_OECONF =3D "--enable-mbstring --enable-discard-p=
+ath --enable-wddx \
+>                  --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR}/.. \
+>                  --with-iconv=3D${STAGING_LIBDIR}/.. \
+>                  --with-libxml-dir=3D${STAGING_BINDIR_CROSS} \
+> -                --disable-embedded-mysqli \
+> -                --with-mysql=3D"${STAGING_DIR_TARGET}${prefix}" \
+> -                --with-mysqli=3D"${STAGING_BINDIR_CROSS}/mysql_config" \
+> -        --with-sqlite3=3D${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
+> -                --with-pdo-mysql=3D"${STAGING_BINDIR_CROSS}/mysql_config=
+" \
+> -                --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. ${COMMON_EXTRA_=
+OECONF} \
+> +                ${COMMON_EXTRA_OECONF} \
+>  "
+>  EXTRA_OECONF_virtclass-native =3D "--with-cgi --without-libpng --without=
+-libjpeg \
+>                  --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR_NATIVE}/.=
+=2E \
+> @@ -40,6 +35,21 @@ EXTRA_OECONF_virtclass-native =3D "--with-cgi --withou=
+t-libpng --without-libjpeg \
+>                  ${COMMON_EXTRA_OECONF} \
+>  "
+> =20
+> +PACKAGECONFIG ??=3D "mysql sqlite3"
+> +
+> +PACKAGECONFIG[mysql] =3D "--with-mysql=3D\"${STAGING_DIR_TARGET}${prefix=
+}\" \
+> +                        --with-mysqli=3D\"${STAGING_BINDIR_CROSS}/mysql_=
+config\" \
+> +                        --with-pdo-mysql=3D\"${STAGING_BINDIR_CROSS}/mys=
+ql_config\" \
+> +                        --disable-embedded-mysqli \
+> +                        , \
+> +                        ,mysql5"
+> +
+> +PACKAGECONFIG[sqlite3] =3D "--with-sqlite3=3D${STAGING_LIBDIR}/.. \
+> +                        --enable-sqlite-utf8 \
+> +                        --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. \
+> +                        , \
+> +                        ,sqlite3"
+> +
+>  LIBS_virtclass-native =3D " -lxml2 "
+>  LIBS_pn-php =3D" -lpthread "
+>  export LIBS
 
-Now after looking into it I suggest to forget these patches. Between
-0.6.1 and 0.7.x not only the API changed but also the GObject
-interface. The properties
+php-native fails on jenkins with:
+| configure:59644: result: no
+| configure:60451: checking for MSSQL support via FreeTDS
+| configure:60487: result: no
+| configure:61111: checking for MySQL support
+| configure:61147: result: yes
+| configure:61156: checking for specified location of the MySQL UNIX socket
+| configure:61171: result: no
+| configure:61221: error: Cannot find MySQL header files under "/home/jenki=
+ns/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr".
+| Note that the MySQL client library is not bundled anymore!
 
-attach-widget
-status-icon
+I guess you should force both disabled for native.
 
-were removed. This will cause unpredictable results for applications
-using them. The only chance I see is to put them back but this seems
-more efforts and deep understanding the difference between gtk+ and
-gtk3.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Andreas
+--xXmbgvnjoT4axfJE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlFwRR8ACgkQN1Ujt2V2gBwGFgCghDQak9kL54DTYhgv5lSwbGlB
+sZAAnidWJlOo4/nnr+hstrAFY60v6SeH
+=4M78
+-----END PGP SIGNATURE-----
+
+--xXmbgvnjoT4axfJE--
