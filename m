@@ -1,36 +1,20 @@
-Received: from mail-pa0-f46.google.com ([209.85.220.46])
+Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1USz8A-0006QV-Gw
+	(envelope-from <ml@communistcode.co.uk>) id 1UT702-00061U-J5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Apr 2013 02:24:50 +0200
-Received: by mail-pa0-f46.google.com with SMTP id lb1so1899145pab.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Apr 2013 17:07:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ks/BTUFKFe6Ko1jHaPGrANX6Ho9X3rAAFTsqb/oNVW8=;
-	b=HmcHqpZOmwDa1E+C+gO3K2WntZiRKu6hERBg7UibiSh/kihf6nBRuDKvXRwYJPEvy3
-	AhwwgJEr8zyNXuLNCH7DwmvLRlPgoRARL7N3zvS/0OC6AzHqOx0FuI7v5onNYeVSxu7U
-	B1uvkNx/XAgWOqcH7bH4Gx/ZEYVdpJwKh5qtiU/Sz8/tcCCJr5yq3iqaDF4NHb3xUCv6
-	i4jej7u29sMnc+DvFzp6mIc+SCbh1EpK+Y1lZp/bBwYlU29EFa2KOGW59+wF1jphjinI
-	XrniYGoEIVI6JnlrfGpN8gUPGttvhgeNuYhctntDpGywS0ouuD+GObQhqQqZFwl/lw27
-	Dw6A==
-X-Received: by 10.66.144.103 with SMTP id sl7mr2525991pab.55.1366330032048;
-	Thu, 18 Apr 2013 17:07:12 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id wz9sm11340453pbc.5.2013.04.18.17.07.09
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 18 Apr 2013 17:07:11 -0700 (PDT)
-Date: Fri, 19 Apr 2013 02:07:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130419000711.GD2489@jama>
-References: <1366329127-8869-1-git-send-email-andrea.adami@gmail.com>
+	Fri, 19 Apr 2013 10:49:09 +0200
+Message-ID: <517100D7.8070501@communistcode.co.uk>
+Date: Fri, 19 Apr 2013 09:31:19 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130403 Thunderbird/17.0.5
 MIME-Version: 1.0
-In-Reply-To: <1366329127-8869-1-git-send-email-andrea.adami@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-handheld][PATCH 1/2] linux-yocto_3.8: move Zaurus patches to the respective subdirs
+To: openembedded-devel@lists.openembedded.org
+References: <1366209695-4195-1-git-send-email-ml@communistcode.co.uk>
+	<1366209695-4195-2-git-send-email-ml@communistcode.co.uk>
+	<20130418191023.GB2489@jama>
+In-Reply-To: <20130418191023.GB2489@jama>
+Subject: Re: [meta-oe][PATCHv2] php: add sqlite3 and mysql PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,71 +28,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2013 00:24:56 -0000
-X-Groupsio-MsgNum: 44325
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="J5MfuwkIyy7RmF4Q"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 19 Apr 2013 08:49:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---J5MfuwkIyy7RmF4Q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On 18/04/13 20:10, Martin Jansa wrote:
+> On Wed, Apr 17, 2013 at 03:41:35PM +0100, Jack Mitchell wrote:
+>> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>>
+>> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>> ---
+>>   meta-oe/recipes-devtools/php/php.inc | 28 +++++++++++++++++++---------
+>>   1 file changed, 19 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+>> index 225c3d7..639aa01 100644
+>> --- a/meta-oe/recipes-devtools/php/php.inc
+>> +++ b/meta-oe/recipes-devtools/php/php.inc
+>> @@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
+>>   SECTION = "console/network"
+>>   LICENSE = "PHP-3.0"
+>>   BBCLASSEXTEND = "native"
+>> -DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
+>> -           libc-client openssl sqlite3"
+>> +DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
+>> +           libc-client openssl"
+>>   DEPENDS_virtclass-native = "zlib-native libxml2-native"
+>>   
+>> -INC_PR = "r4"
+>> +INC_PR = "r5"
+>>   
+>>   SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
+>>   
+>> @@ -27,12 +27,7 @@ EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
+>>                   --with-zlib --with-zlib-dir=${STAGING_LIBDIR}/.. \
+>>                   --with-iconv=${STAGING_LIBDIR}/.. \
+>>                   --with-libxml-dir=${STAGING_BINDIR_CROSS} \
+>> -                --disable-embedded-mysqli \
+>> -                --with-mysql="${STAGING_DIR_TARGET}${prefix}" \
+>> -                --with-mysqli="${STAGING_BINDIR_CROSS}/mysql_config" \
+>> -        --with-sqlite3=${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
+>> -                --with-pdo-mysql="${STAGING_BINDIR_CROSS}/mysql_config" \
+>> -                --with-pdo-sqlite=${STAGING_LIBDIR}/.. ${COMMON_EXTRA_OECONF} \
+>> +                ${COMMON_EXTRA_OECONF} \
+>>   "
+>>   EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
+>>                   --with-zlib --with-zlib-dir=${STAGING_LIBDIR_NATIVE}/.. \
+>> @@ -40,6 +35,21 @@ EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
+>>                   ${COMMON_EXTRA_OECONF} \
+>>   "
+>>   
+>> +PACKAGECONFIG ??= "mysql sqlite3"
+>> +
+>> +PACKAGECONFIG[mysql] = "--with-mysql=\"${STAGING_DIR_TARGET}${prefix}\" \
+>> +                        --with-mysqli=\"${STAGING_BINDIR_CROSS}/mysql_config\" \
+>> +                        --with-pdo-mysql=\"${STAGING_BINDIR_CROSS}/mysql_config\" \
+>> +                        --disable-embedded-mysqli \
+>> +                        , \
+>> +                        ,mysql5"
+>> +
+>> +PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
+>> +                        --enable-sqlite-utf8 \
+>> +                        --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
+>> +                        , \
+>> +                        ,sqlite3"
+>> +
+>>   LIBS_virtclass-native = " -lxml2 "
+>>   LIBS_pn-php =" -lpthread "
+>>   export LIBS
+> php-native fails on jenkins with:
+> | configure:59644: result: no
+> | configure:60451: checking for MSSQL support via FreeTDS
+> | configure:60487: result: no
+> | configure:61111: checking for MySQL support
+> | configure:61147: result: yes
+> | configure:61156: checking for specified location of the MySQL UNIX socket
+> | configure:61171: result: no
+> | configure:61221: error: Cannot find MySQL header files under "/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr".
+> | Note that the MySQL client library is not bundled anymore!
+>
+> I guess you should force both disabled for native.
 
-On Fri, Apr 19, 2013 at 01:52:06AM +0200, Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  .../linux/linux-yocto-3.8/akita/akita.scc          |   8 +-
->  recipes-kernel/linux/linux-yocto-3.8/c7x0/c7x0.scc |   6 +-
->  .../linux/linux-yocto-3.8/collie-eraseinfo.patch   |  31 -----
->  .../linux/linux-yocto-3.8/collie-jedec-probe.patch |  11 --
->  .../linux/linux-yocto-3.8/collie/collie.scc        |   8 +-
->  .../linux-yocto-3.8/locomo_kbd_tweak-r2.patch      |  75 ------------
->  .../linux/linux-yocto-3.8/mcp-device.patch         |  13 --
->  .../patches-locomokbd/locomo_kbd_tweak-r2.patch    |  75 ++++++++++++
->  .../patches/patches-mfd/mcp-device.patch           |  13 ++
->  .../patches/patches-mtd/collie-eraseinfo.patch     |  31 +++++
->  .../patches/patches-mtd/collie-jedec-probe.patch   |  11 ++
->  .../patches/patches-pxa/pxa27x-sa1100-rtc.patch    |  34 ++++++
->  .../patches/patches-pxa/pxamci-regulator.patch     | 135 +++++++++++++++++++++
->  .../patches/patches-pxa/sharpsl_param.patch        |  24 ++++
->  .../patches/patches-pxa/spi-pxa2xx-fix-mem.patch   |  34 ++++++
->  .../linux/linux-yocto-3.8/poodle/poodle.scc        |   8 +-
->  .../linux/linux-yocto-3.8/pxa27x-sa1100-rtc.patch  |  34 ------
->  .../linux/linux-yocto-3.8/pxamci-regulator.patch   | 135 ---------------------
->  .../linux/linux-yocto-3.8/sharpsl_param.patch      |  24 ----
->  .../linux/linux-yocto-3.8/spi-pxa2xx-fix-mem.patch |  34 ------
->  .../linux/linux-yocto-3.8/spitz/spitz.scc          |   8 +-
->  recipes-kernel/linux/linux-yocto-3.8/tosa/tosa.scc |   6 +-
->  22 files changed, 379 insertions(+), 379 deletions(-)
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie-eraseinfo.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/collie-jedec-probe.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/locomo_kbd_tweak-r2.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/mcp-device.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-mfd/mcp-device.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-mtd/collie-eraseinfo.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-mtd/collie-jedec-probe.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-pxa/pxa27x-sa1100-rtc.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-pxa/pxamci-regulator.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-pxa/sharpsl_param.patch
->  create mode 100644 recipes-kernel/linux/linux-yocto-3.8/patches/patches-pxa/spi-pxa2xx-fix-mem.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/pxa27x-sa1100-rtc.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/pxamci-regulator.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/sharpsl_param.patch
->  delete mode 100644 recipes-kernel/linux/linux-yocto-3.8/spi-pxa2xx-fix-mem.patch
+I'm no make/configure guru here, so I may need a little bit of input but 
+as PHP has no explicit --disable-mysql support, is there a way to force 
+a configure variable? This is the snippet that deals with mysql:
 
-Would be nice to send this with -M.
+php_with_mysql=no
 
---J5MfuwkIyy7RmF4Q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+{ $as_echo "$as_me:$LINENO: checking for MySQL support" >&5
+$as_echo_n "checking for MySQL support... " >&6; }
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+# Check whether --with-mysql was given.
+if test "${with_mysql+set}" = set; then
+   withval=$with_mysql; PHP_MYSQL=$withval
+else
 
-iEYEARECAAYFAlFwiq8ACgkQN1Ujt2V2gBxXXQCgidOF34BL3jrVTZE3Qlv3tyre
-yzsAn3LOiTz6HyQ/JvwTuTwMaVbwiCn6
-=4ELH
------END PGP SIGNATURE-----
+   PHP_MYSQL=no
+   test "$PHP_ENABLE_ALL" && PHP_MYSQL=$PHP_ENABLE_ALL
 
---J5MfuwkIyy7RmF4Q--
+fi
+
+Is there a way to force with_mysql to not set?
+
+Alternatively is there a way to stop PACKAGECONFIG appending to -native?
+
+Cheers,
+
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
+
+
