@@ -1,35 +1,35 @@
-Received: from mail-da0-f42.google.com ([209.85.210.42])
+Received: from mail-ye0-f171.google.com ([209.85.213.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UTCAn-0007V2-Ig
+	(envelope-from <otavio.salvador@gmail.com>) id 1UTGhs-0001In-Bq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Apr 2013 16:20:37 +0200
-Received: by mail-da0-f42.google.com with SMTP id n15so159714dad.1
+	Fri, 19 Apr 2013 21:10:55 +0200
+Received: by mail-ye0-f171.google.com with SMTP id r10so668361yen.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Apr 2013 07:02:46 -0700 (PDT)
+	Fri, 19 Apr 2013 11:53:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=HwJHd4cOyI5s+wQGzt0O4VzvkhtqlK0TTCVnFM5YO4c=;
-	b=g7/6CqLvz7Awu3juRs6gitxjS9STMesjaMsnFJnpTG/qfAlOmqlCaCSpAF/RRZ4VOK
-	+eQ53Yr0B/OmdyLji0rlXG7h32Tu+z3qydYit++idwe673N53i6QUAJ2TYxrE08leloV
-	rjzhSDc0Izjw0WDAPOfiFkV4oeiNtkpVPHItHqACU0bY7l4St143ZG2GnOefTKghBviV
-	Vttxx/Bb97eL8f9WYDFrLT1NiUlp8GyQK9qxvEgcA6vIo0yl3/Sy6U38sYRhJ2LeQZcQ
-	TrtPzFnxCRmE8swdBpCTUPGniPV++lVvl4ctlcMt6tO4SOtWxlXSLqJsBz2xYevfMkp5
-	ky9A==
-X-Received: by 10.68.135.133 with SMTP id ps5mr19526703pbb.158.1366380166286; 
-	Fri, 19 Apr 2013 07:02:46 -0700 (PDT)
-Received: from localhost (ip-62-24-80-7.net.upcbroadband.cz. [62.24.80.7])
-	by mx.google.com with ESMTPS id
-	rt13sm14862662pac.14.2013.04.19.07.02.43
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=PL1l+rlf9G2OpE/HZX9GaV6cwXsF6+Eo+yqFfXXfIC4=;
+	b=yGaAcArbTALj6j5pNZ0EfZbv8hHQyKemMEeySAuuuwa8JKrTUmquJFow+0jxUMBwco
+	1+ohAVFKs5BY7i4S3DKc51anKKAP7qpZq28TtiLArM2c7qfxR7eU0hXyljOy6FSg+OGT
+	QgQzknY15272rcIGAkOumM66eCUN7W/GkPvpgLw1YV4KtOpHQDX/HY9ThXyGWbIpNWj5
+	L1XAE2v5KnL+goVGd89pF7yPk5FzSz8AUxKAHOm/7e+i+i6LClc3HDKQVene4yT+dPNP
+	01Yt7xUAIzWBvxtD8YAXuUgj+Q9hfScjoTLPs+oX5kAosEWkkbzRAHpeitlMB/Rs22ul
+	qBcg==
+X-Received: by 10.236.142.207 with SMTP id i55mr11878356yhj.99.1366397592085; 
+	Fri, 19 Apr 2013 11:53:12 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([187.23.144.59])
+	by mx.google.com with ESMTPS id e63sm26333734yhg.27.2013.04.19.11.53.09
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 19 Apr 2013 07:02:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Apr 2013 16:02:23 +0200
-Message-Id: <1366380143-12256-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-In-Reply-To: <1366380143-12256-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1366380143-12256-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] llvm2.9: try to fix thumb build and disable it after failure
+	Fri, 19 Apr 2013 11:53:11 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Apr 2013 15:52:49 -0300
+Message-Id: <1366397569-8464-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.8.1
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe PATCH] p910nd: Fix the lock directory use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,80 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2013 14:20:41 -0000
+X-List-Received-Date: Fri, 19 Apr 2013 19:11:03 -0000
 
-* khem: could you check what I'm doing wrong? This is out of my league..
+The original code uses a subdir inside of /var/lock which is hard for
+us to manage as it may be running in tmpfs; we did change it for avoid
+the subdir so it just works.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../recipes-core/llvm/llvm2.9/0019-issue6065.patch | 35 ++++++++++++++++++++++
- meta-oe/recipes-core/llvm/llvm2.9_2.9.bb           |  9 ++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
+ .../p910nd/p910nd/fix-var-lock.patch               | 30 ++++++++++++++++++++++
+ meta-oe/recipes-support/p910nd/p910nd_0.95.bb      |  5 ++--
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/p910nd/p910nd/fix-var-lock.patch
 
-diff --git a/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch b/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
+diff --git a/meta-oe/recipes-support/p910nd/p910nd/fix-var-lock.patch b/meta-oe/recipes-support/p910nd/p910nd/fix-var-lock.patch
 new file mode 100644
-index 0000000..aff3d1d
+index 0000000..aa84e18
 --- /dev/null
-+++ b/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
-@@ -0,0 +1,35 @@
-+--- llvm-2.9.orig/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 14:49:28.063566919 +0200
-++++ llvm-2.9/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 15:24:31.065435029 +0200
-+@@ -59,7 +59,17 @@
-+     // for the real target function right now. We have to act as if this
-+     // whole compilation callback doesn't exist as far as the caller is
-+     // concerned, so we can't just preserve the callee saved regs.
-++    // stmdb introduced in http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
-++    // but fails on armv4t
-++    // | {standard input}: Assembler messages:
-++    // | {standard input}:22: Error: selected processor does not support Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
-++    // | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r1,r2,r3,lr}'
-++    // | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
-++#ifndef __thumb__
-+     "stmdb sp!, {r0, r1, r2, r3, lr}\n"
-++#else
-++    "push {r0, r1, r2, r3, lr}\n"
-++#endif
-+ #if (defined(__VFP_FP__) && !defined(__SOFTFP__))
-+     "fstmfdd sp!, {d0, d1, d2, d3, d4, d5, d6, d7}\n"
-+ #endif
-+@@ -99,8 +109,14 @@
-+     // The above twiddling of the saved return addresses allows us to
-+     // deallocate everything, including the LR the stub saved, with two
-+     // updating load instructions.
-++#ifndef __thumb__
-+     "ldmia  sp!, {r0, r1, r2, r3, lr}\n"
-+     "ldr    pc, [sp], #4\n"
-++#else
-++    // thumb dont allow lr and pc to be poped in the same instruction.
-++    "pop {r0, r1, r2, r3, lr}\n"
-++    "pop {pc}\n"
-++#endif
-+       );
-+ #else  // Not an ARM host
-+   void ARMCompilationCallback() {
-diff --git a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-index d5b8c01..dc7f873 100644
---- a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-+++ b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-@@ -4,6 +4,15 @@ PR = "${INC_PR}.0"
- 
- SRC_URI += "file://0035-gcc-4.7.patch"
- 
-+# 0019-issue6065.patch is still needed but a bit modified, because it was resolved by
-+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?r1=120304&r2=124694&pathrev=124694
-+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
-+# and still it fails with 
-+# {standard input}:31: Error: invalid register list to push/pop instruction -- `pop {r0,r1,r2,r3,lr}'
-+# make[2]: *** [lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMJITInfo.cpp.o] Error 1
-+# SRC_URI += "file://0019-issue6065.patch"
-+ARM_INSTRUCTION_SET = "arm"
++++ b/meta-oe/recipes-support/p910nd/p910nd/fix-var-lock.patch
+@@ -0,0 +1,30 @@
++Use /var/lock instead of /var/lock/subsys
 +
- SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
++Upstream-Status: Inappropriate [configuration]
++
++Index: p910nd/p910nd.8
++===================================================================
++--- p910nd.orig/p910nd.8	2011-11-14 22:41:41.904615879 +0100
+++++ p910nd/p910nd.8	2011-11-14 22:49:52.299047607 +0100
++@@ -83,7 +83,7 @@
++ .SH "SEE ALSO"
++ printcap(5), hosts_access(5)
++ .SH FILES
++-/var/run/p9100d.pid, /var/lock/subsys/p9100d, /etc/hosts.allow, /etc/hosts.deny
+++/var/run/p9100d.pid, /var/lock/p9100d, /etc/hosts.allow, /etc/hosts.deny
++ .SH COPYRIGHT
++ .I p910nd
++ is under the GNU Public License Version 2
++Index: p910nd/p910nd.c
++===================================================================
++--- p910nd.orig/p910nd.c	2011-11-14 22:47:41.986401420 +0100
+++++ p910nd/p910nd.c	2011-11-14 22:49:27.274923524 +0100
++@@ -122,7 +122,7 @@
++ #ifdef		LOCKFILE_DIR
++ #define		LOCKFILE	LOCKFILE_DIR "/p910%cd"
++ #else
++-#define		LOCKFILE	"/var/lock/subsys/p910%cd"
+++#define		LOCKFILE	"/var/lock/p910%cd"
++ #endif
++ #ifndef		PRINTERFILE
++ #define         PRINTERFILE     "/dev/lp%c"
+diff --git a/meta-oe/recipes-support/p910nd/p910nd_0.95.bb b/meta-oe/recipes-support/p910nd/p910nd_0.95.bb
+index 6880e1c..5ebbb29 100644
+--- a/meta-oe/recipes-support/p910nd/p910nd_0.95.bb
++++ b/meta-oe/recipes-support/p910nd/p910nd_0.95.bb
+@@ -4,9 +4,10 @@ SECTION = "console/utils"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
  
- PARALLEL_MAKE_virtclass-native = ""
+-PR = "r1"
++PR = "r2"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/p910nd/p910nd-${PV}.tar.bz2"
++SRC_URI = "${SOURCEFORGE_MIRROR}/p910nd/p910nd-${PV}.tar.bz2 \
++           file://fix-var-lock.patch"
+ 
+ SRC_URI[md5sum] = "c7ac6afdf7730ac8387a8e87198d4491"
+ SRC_URI[sha256sum] = "7d78642c86dc247fbdef1ff85c56629dcdc6b2a457c786420299e284fffcb029"
 -- 
-1.8.2.1
+1.8.1
 
 
 
