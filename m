@@ -1,15 +1,15 @@
 Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1UT84Y-00062F-3W
+	(envelope-from <ml@communistcode.co.uk>) id 1UT86c-0006Gp-9O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Apr 2013 11:57:42 +0200
-Message-ID: <517110F2.5010205@communistcode.co.uk>
-Date: Fri, 19 Apr 2013 10:40:02 +0100
+	Fri, 19 Apr 2013 11:59:50 +0200
+Message-ID: <51711172.7070001@communistcode.co.uk>
+Date: Fri, 19 Apr 2013 10:42:10 +0100
 From: Jack Mitchell <ml@communistcode.co.uk>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:17.0) Gecko/20130403 Thunderbird/17.0.5
 MIME-Version: 1.0
-To: Jack Mitchell <ml@communistcode.cuk>
+To: Jack Mitchell <ml@communistcode.co.uk>
 References: <1366363735-31656-1-git-send-email-ml@communistcode.cuk>
 In-Reply-To: <1366363735-31656-1-git-send-email-ml@communistcode.cuk>
 Cc: openembedded-devel@lists.openembedded.org
@@ -27,7 +27,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2013 09:57:47 -0000
+X-List-Received-Date: Fri, 19 Apr 2013 10:00:00 -0000
+X-List-Received-Date: Fri, 19 Apr 2013 10:00:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -44,7 +45,7 @@ On 19/04/13 10:28, Jack Mitchell wrote:
 >   1 file changed, 24 insertions(+), 14 deletions(-)
 >
 
-Sorry these patches are broken; php-native compiles fine, but now php 
+Sorry these patches are broken; php-native compiles fine, but now php
 fails with the same error as php-native used to have!
 
 Attempting a v4 (with subject this time!).
