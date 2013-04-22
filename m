@@ -1,32 +1,27 @@
-Received: from mail-oa0-f46.google.com ([209.85.219.46])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UUMNn-0001rw-HH
+	(envelope-from <eric@eukrea.com>) id 1UUNP8-00088n-Iw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Apr 2013 21:27:12 +0200
-Received: by mail-oa0-f46.google.com with SMTP id k3so3653430oag.5
+	Mon, 22 Apr 2013 22:32:03 +0200
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id EECA62DF44
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2013 12:08:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:date:x-google-sender-auth:message-id
-	:subject:from:to:content-type;
-	bh=tZL2FT6dKoGAAuQsB5N9cgTnb229X/st9nvkl0EqlPg=;
-	b=a2BPw5oGJorMmYQoZEb/ZvGGvPjX7GjmMZ5reA5NfcfKwgVMTYs3+RAoihwJlrf5Bq
-	zGjU0P2DAlMmzbDEWwMNFOLHbf+g6nsnIY3CpURInrZdjZG+p5XPeVjj+Rpy1DYRvuFw
-	7YUvveE9vuNF1b1KDkYRKhoHeeXULMZIz3TKQPuOOmMwfQSlc280WOGQK1dPnF10GQa6
-	BpmWOeaTj/7S3GtawKvXscd4yLjQRkZvgOPTsfTjMhSru9SXJnfEzimL6eMwX9KT49IR
-	whvz8+uhyw7igXEPbiD6lnXPdrcBoDKbEKqlVAwU0WyWUsR2j7yjli3/0qAFE1zHXPZD
-	pymw==
-MIME-Version: 1.0
-X-Received: by 10.60.40.103 with SMTP id w7mr11373884oek.129.1366657735765;
-	Mon, 22 Apr 2013 12:08:55 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.89.226 with HTTP; Mon, 22 Apr 2013 12:08:55 -0700 (PDT)
-Date: Mon, 22 Apr 2013 16:08:55 -0300
-X-Google-Sender-Auth: HAtUCS1L2WAXJLeQP5-d7PaPAGo
-Message-ID: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Meta-OpenEmbedded - Dylan maintenance
+	Mon, 22 Apr 2013 22:14:23 +0200 (CEST)
+Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
+	(Authenticated sender: eukrea)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 42366A6274;
+	Mon, 22 Apr 2013 22:14:17 +0200 (CEST)
+Date: Mon, 22 Apr 2013 22:14:15 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20130422221415.1e88893e@e6520eb>
+In-Reply-To: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
+References: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Meta-OpenEmbedded - Dylan maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,20 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 19:27:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Apr 2013 20:32:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Hi Otavio,
 
-The upcoming release of dylan is very close and we should start think
-about its maintenance; is someone intending to be the maintainer of
-the 'dylan' branch of meta-oe?
+Le Mon, 22 Apr 2013 16:08:55 -0300,
+Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
+> The upcoming release of dylan is very close and we should start think
+> about its maintenance; is someone intending to be the maintainer of
+> the 'dylan' branch of meta-oe?
+>=20
+I can continue maintenance with dylan as experience of the switch from
+denzil to danny showed that n-1 gets very few updates once n is
+released (and as my BSP are switching to dylan next month ;-).
 
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Best regards,
+Eric
 
 
