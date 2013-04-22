@@ -1,22 +1,39 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-pd0-f169.google.com ([209.85.192.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UUJsl-0003Dk-3z
+	(envelope-from <martin.jansa@gmail.com>) id 1UUKGx-0005br-AG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Apr 2013 18:46:30 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 22 Apr 2013 09:28:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,528,1363158000"; d="scan'208";a="322383883"
-Received: from unknown (HELO helios.amr.corp.intel.com) ([10.255.13.204])
-	by orsmga002.jf.intel.com with ESMTP; 22 Apr 2013 09:28:30 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Mon, 22 Apr 2013 19:11:27 +0200
+Received: by mail-pd0-f169.google.com with SMTP id 10so215573pdc.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Apr 2013 09:53:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=wLkKnaAarMCLyqh1xt5uyXBPhXeRrSncGUkhqAbnwxQ=;
+	b=Yh8eT4F5ec6ZkESI43fQUpRaN8TMdY2t98PMp/jDF10asJK84MjrKRqJByOCP6hwUt
+	rNbh3Pcf8EFItjxRuoOxsy0ElkN0F9kCZSNPDu2jghVw6XZuP/RMYGRQljhnHXTD7SOD
+	ugS4g19efExe1rKcrY0eYAIrPhfwyUpjNSc8FxU/sIuwHKjiFWIgfVHQF+uE7f+JBk8L
+	ECFDNpHi6Vckh/TJvV+wNuQpFeFEcxkMLvkBrRIiBCkeBVOkdlomGrc1QwBaz0IqFAZI
+	+2Xqa5XArO7jX/OOVHsGTShVaLqH820p1ihqsKNtzV01jHM81zu/Nn0r6DdZjBKpDSY8
+	qR6A==
+X-Received: by 10.66.121.202 with SMTP id lm10mr13359931pab.138.1366649623451; 
+	Mon, 22 Apr 2013 09:53:43 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPS id
+	c5sm25791196pbl.37.2013.04.22.09.53.40
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 22 Apr 2013 09:53:42 -0700 (PDT)
+Date: Mon, 22 Apr 2013 18:53:50 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Apr 2013 17:28:16 +0100
-Message-Id: <1366648096-14496-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Koen Kooi <koen@beagleboard.org>,
-	Randy MacLeod <Randy.MacLeod@windriver.com>
-Subject: [meta-oe][PATCH] collectd: add recipe for 5.2.2
+Message-ID: <20130422165350.GA3217@jama>
+References: <1366366032-8581-1-git-send-email-ml@communistcode.co.uk>
+	<1366366032-8581-2-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <1366366032-8581-2-git-send-email-ml@communistcode.co.uk>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+Subject: Re: [PATCH 1/2] php: add sqlite3 and mysql PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,360 +47,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 16:46:35 -0000
+X-List-Received-Date: Mon, 22 Apr 2013 17:11:36 -0000
+X-Groupsio-MsgNum: 44366
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="X1bOJ3K7DJ5YkBrT"
+Content-Disposition: inline
 
-Based on initial version by Koen Kooi <koen@beagleboard.org>. Initscript
-borrowed from Debian with some tweaks.
+--X1bOJ3K7DJ5YkBrT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Note that since collectd uses libltdl, building this successfully
-required OE-Core commit db84eaf851b22b262d9dc48eb55bd5224a00fdd2 or else
-you get an error about "config/compile" being missing.
+On Fri, Apr 19, 2013 at 11:07:11AM +0100, Jack Mitchell wrote:
+> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+>=20
+> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc | 29 ++++++++++++++++++++---------
+>  1 file changed, 20 insertions(+), 9 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
+ols/php/php.inc
+> index 225c3d7..892a0b5 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -3,11 +3,11 @@ HOMEPAGE =3D "http://www.php.net"
+>  SECTION =3D "console/network"
+>  LICENSE =3D "PHP-3.0"
+>  BBCLASSEXTEND =3D "native"
+> -DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native mysql=
+5 \
+> -           libc-client openssl sqlite3"
+> +DEPENDS =3D "zlib libxml2 virtual/libiconv php-native lemon-native \
+> +           libc-client openssl"
+>  DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
+> =20
+> -INC_PR =3D "r4"
+> +INC_PR =3D "r5"
+> =20
+>  SRC_URI =3D "http://www.php.net/distributions/php-${PV}.tar.bz2"
+> =20
+> @@ -27,12 +27,7 @@ EXTRA_OECONF =3D "--enable-mbstring --enable-discard-p=
+ath --enable-wddx \
+>                  --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR}/.. \
+>                  --with-iconv=3D${STAGING_LIBDIR}/.. \
+>                  --with-libxml-dir=3D${STAGING_BINDIR_CROSS} \
+> -                --disable-embedded-mysqli \
+> -                --with-mysql=3D"${STAGING_DIR_TARGET}${prefix}" \
+> -                --with-mysqli=3D"${STAGING_BINDIR_CROSS}/mysql_config" \
+> -        --with-sqlite3=3D${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
+> -                --with-pdo-mysql=3D"${STAGING_BINDIR_CROSS}/mysql_config=
+" \
+> -                --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. ${COMMON_EXTRA_=
+OECONF} \
+> +                ${COMMON_EXTRA_OECONF} \
+>  "
+>  EXTRA_OECONF_virtclass-native =3D "--with-cgi --without-libpng --without=
+-libjpeg \
+>                  --with-zlib --with-zlib-dir=3D${STAGING_LIBDIR_NATIVE}/.=
+=2E \
+> @@ -40,6 +35,22 @@ EXTRA_OECONF_virtclass-native =3D "--with-cgi --withou=
+t-libpng --without-libjpeg \
+>                  ${COMMON_EXTRA_OECONF} \
+>  "
+> =20
+> +PACKAGECONFIG ??=3D "mysql sqlite3"
+> +PACKAGECONFIG_class-native =3D ""
+> +
+> +PACKAGECONFIG[mysql] =3D "--with-mysql=3D\"${STAGING_DIR_TARGET}${prefix=
+}\" \
+> +                        --with-mysqli=3D\"${STAGING_BINDIR_CROSS}/mysql_=
+config\" \
+> +                        --with-pdo-mysql=3D\"${STAGING_BINDIR_CROSS}/mys=
+ql_config\" \
+> +                        --disable-embedded-mysqli \
+> +                        , \
+> +                        ,mysql5"
+> +
+> +PACKAGECONFIG[sqlite3] =3D "--with-sqlite3=3D${STAGING_LIBDIR}/.. \
+> +                        --enable-sqlite-utf8 \
+> +                        --with-pdo-sqlite=3D${STAGING_LIBDIR}/.. \
+> +                        , \
+> +                        ,sqlite3"
+> +
+>  LIBS_virtclass-native =3D " -lxml2 "
+>  LIBS_pn-php =3D" -lpthread "
+>  export LIBS
+> --=20
+> 1.8.2.1
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../collectd/collectd/collectd-version.patch       |   31 +++
- .../collectd/collectd/collectd.init                |  201 ++++++++++++++++++++
- .../collectd/collectd/no-gcrypt-badpath.patch      |   30 +++
- .../recipes-extended/collectd/collectd_5.2.2.bb    |   45 +++++
- 4 files changed, 307 insertions(+)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/collectd-version.patch
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/collectd.init
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
- create mode 100644 meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+Now target php is failing with:
+| configure:61165: result: no
+| configure:61215: error: Cannot find MySQL header files under
+"/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/us=
+r".
+| Note that the MySQL client library is not bundled anymore!
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd-version.patch b/meta-oe/recipes-extended/collectd/collectd/collectd-version.patch
-new file mode 100644
-index 0000000..1e2b7c1
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/collectd-version.patch
-@@ -0,0 +1,31 @@
-+Don't pick up version string from parent git repository
-+
-+If the collectd source is extracted from a tarball underneath a
-+directory structure that includes another git repository, that
-+repository will be picked up by "git describe" which is not
-+desirable. Check whether collectd itself is a git repository and just
-+use the default version if not.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+diff --git a/version-gen.sh b/version-gen.sh
-+index e344541..d1c0929 100755
-+--- a/version-gen.sh
-++++ b/version-gen.sh
-+@@ -2,7 +2,10 @@
-+ 
-+ DEFAULT_VERSION="5.2.2.git"
-+ 
-+-VERSION="`git describe 2> /dev/null | sed -e 's/^collectd-//'`"
-++VERSION=""
-++if test -d .git ; then
-++	VERSION="`git describe 2> /dev/null | sed -e 's/^collectd-//'`"
-++fi
-+ 
-+ if test -z "$VERSION"; then
-+ 	VERSION="$DEFAULT_VERSION"
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd.init b/meta-oe/recipes-extended/collectd/collectd/collectd.init
-new file mode 100644
-index 0000000..abdb194
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/collectd.init
-@@ -0,0 +1,201 @@
-+#!/bin/sh
-+#
-+# collectd - start and stop the statistics collection daemon
-+# http://collectd.org/
-+#
-+# Copyright (C) 2005-2006 Florian Forster <octo@verplant.org>
-+# Copyright (C) 2006-2009 Sebastian Harl <tokkee@debian.org>
-+#
-+
-+### BEGIN INIT INFO
-+# Provides:          collectd
-+# Required-Start:    $local_fs $remote_fs
-+# Required-Stop:     $local_fs $remote_fs
-+# Should-Start:      $network $named $syslog $time cpufrequtils
-+# Should-Stop:       $network $named $syslog
-+# Default-Start:     2 3 4 5
-+# Default-Stop:      0 1 6
-+# Short-Description: manage the statistics collection daemon
-+# Description:       collectd is the statistics collection daemon.
-+#                    It is a small daemon which collects system information
-+#                    periodically and provides mechanisms to monitor and store
-+#                    the values in a variety of ways.
-+### END INIT INFO
-+
-+. /etc/init.d/functions
-+
-+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
-+
-+DISABLE=0
-+
-+NAME=collectd
-+DAEMON=/usr/sbin/collectd
-+
-+CONFIGFILE=/etc/collectd.conf
-+PIDFILE=/var/run/collectd.pid
-+
-+USE_COLLECTDMON=1
-+COLLECTDMON_DAEMON=/usr/sbin/collectdmon
-+COLLECTDMON_PIDFILE=/var/run/collectdmon.pid
-+
-+MAXWAIT=30
-+
-+# Gracefully exit if the package has been removed.
-+test -x $DAEMON || exit 0
-+
-+if [ -r /etc/default/$NAME ]; then
-+	. /etc/default/$NAME
-+fi
-+
-+if test "$ENABLE_COREFILES" == 1; then
-+	ulimit -c unlimited
-+fi
-+
-+if test "$USE_COLLECTDMON" == 1; then
-+	_PIDFILE="$COLLECTDMON_PIDFILE"
-+else
-+	_PIDFILE="$PIDFILE"
-+fi
-+
-+# return:
-+#   0 if config is fine
-+#   1 if there is a syntax error
-+#   2 if there is no configuration
-+check_config() {
-+	if test ! -e "$CONFIGFILE"; then
-+		return 2
-+	fi
-+	if ! $DAEMON -t -C "$CONFIGFILE"; then
-+		return 1
-+	fi
-+	return 0
-+}
-+
-+# return:
-+#   0 if the daemon has been started
-+#   1 if the daemon was already running
-+#   2 if the daemon could not be started
-+#   3 if the daemon was not supposed to be started
-+d_start() {
-+	if test "$DISABLE" != 0; then
-+		# we get here during restart
-+		echo "disabled by /etc/default/$NAME"
-+		return 3
-+	fi
-+
-+	if test ! -e "$CONFIGFILE"; then
-+		# we get here during restart
-+		echo "disabled, no configuration ($CONFIGFILE) found"
-+		return 3
-+	fi
-+
-+	check_config
-+	rc="$?"
-+	if test "$rc" -ne 0; then
-+		echo "not starting, configuration error"
-+		return 2
-+	fi
-+
-+	if test "$USE_COLLECTDMON" == 1; then
-+		start-stop-daemon --start --quiet --oknodo --pidfile "$_PIDFILE" \
-+			--exec $COLLECTDMON_DAEMON -- -P "$_PIDFILE" -- -C "$CONFIGFILE" \
-+			|| return 2
-+	else
-+		start-stop-daemon --start --quiet --oknodo --pidfile "$_PIDFILE" \
-+			--exec $DAEMON -- -C "$CONFIGFILE" -P "$_PIDFILE" \
-+			|| return 2
-+	fi
-+	return 0
-+}
-+
-+still_running_warning="
-+WARNING: $NAME might still be running.
-+In large setups it might take some time to write all pending data to
-+the disk. You can adjust the waiting time in /etc/default/collectd."
-+
-+# return:
-+#   0 if the daemon has been stopped
-+#   1 if the daemon was already stopped
-+#   2 if daemon could not be stopped
-+d_stop() {
-+	PID=$( cat "$_PIDFILE" 2> /dev/null ) || true
-+
-+	start-stop-daemon --stop --quiet --oknodo --pidfile "$_PIDFILE"
-+	rc="$?"
-+
-+	if test "$rc" -eq 2; then
-+		return 2
-+	fi
-+
-+	sleep 1
-+	if test -n "$PID" && kill -0 $PID 2> /dev/null; then
-+		i=0
-+		while kill -0 $PID 2> /dev/null; do
-+			i=$(( $i + 2 ))
-+			echo -n " ."
-+
-+			if test $i -gt $MAXWAIT; then
-+				echo "$still_running_warning"
-+				return 2
-+			fi
-+
-+			sleep 2
-+		done
-+		return "$rc"
-+	fi
-+	return "$rc"
-+}
-+
-+case "$1" in
-+	start)
-+		echo -n "Starting $NAME"
-+		d_start
-+		case "$?" in
-+			0|1) echo "." ;;
-+			*) exit 1 ;;
-+		esac
-+		;;
-+	stop)
-+		echo -n "Stopping $NAME"
-+		d_stop
-+		case "$?" in
-+			0|1) echo "." ;;
-+			*) exit 1 ;;
-+		esac
-+		;;
-+	status)
-+		status_of_proc -p "$_PIDFILE" "$DAEMON" "$NAME" && exit 0 || exit $?
-+		;;
-+	restart|force-reload)
-+		echo -n "Restarting $NAME"
-+		check_config
-+		rc="$?"
-+		if test "$rc" -eq 1; then
-+			echo "not restarting, configuration error"
-+			exit 1
-+		fi
-+		d_stop
-+		rc="$?"
-+		case "$rc" in
-+			0|1)
-+				sleep 1
-+				d_start
-+				rc2="$?"
-+				case "$rc2" in
-+					0|1) echo "." ;;
-+					*) exit 1 ;;
-+				esac
-+				;;
-+			*)
-+				exit 1
-+				;;
-+		esac
-+		;;
-+	*)
-+		echo "Usage: $0 {start|stop|restart|force-reload|status}" >&2
-+		exit 3
-+		;;
-+esac
-+
-+# vim: syntax=sh noexpandtab sw=4 ts=4 :
-+
-diff --git a/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch b/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
-new file mode 100644
-index 0000000..02b1601
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
-@@ -0,0 +1,30 @@
-+Disable defaulting of GCRYPT_LDFLAGS to -L/usr/lib
-+
-+Prevents "unsafe for cross compilation" warnings that cause
-+do_qa_configure to fail.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+diff --git a/configure.in b/configure.in
-+index 98395ed..81c3a2c 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -1777,11 +1777,11 @@ then
-+ 		GCRYPT_CPPFLAGS=`"$with_libgcrypt_config" --cflags 2>/dev/null`
-+ 	fi
-+ 
-+-	if test "x$GCRYPT_LDFLAGS" = "x"
-+-	then
-+-		gcrypt_exec_prefix=`"$with_libgcrypt_config" --exec-prefix 2>/dev/null`
-+-		GCRYPT_LDFLAGS="-L$gcrypt_exec_prefix/lib"
-+-	fi
-++#	if test "x$GCRYPT_LDFLAGS" = "x"
-++#	then
-++#		gcrypt_exec_prefix=`"$with_libgcrypt_config" --exec-prefix 2>/dev/null`
-++#		GCRYPT_LDFLAGS="-L$gcrypt_exec_prefix/lib"
-++#	fi
-+ 
-+ 	if test "x$GCRYPT_LIBS" = "x"
-+ 	then
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-new file mode 100644
-index 0000000..a508840
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "Collects and summarises system performance statistics"
-+DESCRIPTION = "collectd is a daemon which collects system performance statistics periodically and provides mechanisms to store the values in a variety of ways, for example in RRD files."
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool"
-+
-+SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-+           file://no-gcrypt-badpath.patch \
-+           file://collectd-version.patch \
-+           file://collectd.init"
-+
-+SRC_URI[md5sum] = "29e61411e51845d5ae71ab676078867e"
-+SRC_URI[sha256sum] = "7b8906d1c8866155b31820ef108be92abcee7fcd278d386bf0d449e704ba4696"
-+
-+inherit autotools pythonnative update-rc.d
-+
-+# Floatingpoint layout, architecture dependent
-+# 'nothing', 'endianflip' or 'intswap'
-+FPLAYOUT ?= "--with-fp-layout=nothing"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp --with-libnetsnmp=no,net-snmp"
-+
-+EXTRA_OECONF = " \
-+                ${FPLAYOUT} \
-+                --disable-perl --with-libperl=no --with-perl-bindings=no \
-+                --with-libgcrypt=${STAGING_BINDIR_CROSS}/libgcrypt-config \
-+"
-+
-+do_install_append() {
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0755 ${WORKDIR}/collectd.init ${D}${sysconfdir}/init.d/collectd
-+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/collectd
-+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/collectd
-+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/collectd
-+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/collectd
-+
-+    # Fix configuration file to allow collectd to start up
-+    sed -i 's!^#FQDNLookup[ \t]*true!FQDNLookup   false!g' ${D}${sysconfdir}/collectd.conf
-+}
-+
-+INITSCRIPT_NAME = "collectd"
-+INITSCRIPT_PARAMS = "defaults"
-+
--- 
-1.7.10.4
+full log here:
+qemuarm
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30422_080202.log/bitbake.world.log
 
+qemux86
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30422_125516.log/bitbake.world.log
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--X1bOJ3K7DJ5YkBrT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlF1ax4ACgkQN1Ujt2V2gBzUoQCgn0yce80Ff0qhh2wK0d/S6dOJ
+vu4An1ev+1UdRQiCBuoO+9/UbRMJTRW+
+=iH3x
+-----END PGP SIGNATURE-----
+
+--X1bOJ3K7DJ5YkBrT--
