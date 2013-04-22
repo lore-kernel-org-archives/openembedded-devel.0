@@ -1,37 +1,37 @@
-Received: from mail-ob0-f170.google.com ([209.85.214.170])
+Received: from mail-ob0-f169.google.com ([209.85.214.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UUOeD-0006Fm-8D
+	(envelope-from <otavio.salvador@gmail.com>) id 1UUOj4-0006jr-86
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Apr 2013 23:51:44 +0200
-Received: by mail-ob0-f170.google.com with SMTP id eh20so4849699obb.29
+	Mon, 22 Apr 2013 23:56:44 +0200
+Received: by mail-ob0-f169.google.com with SMTP id tb18so1761700obb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Apr 2013 14:34:01 -0700 (PDT)
+	Mon, 22 Apr 2013 14:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:x-received:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=oJLcofCGCBs7S063n/NDYSokxtTFxCMj01YtsbWzbr8=;
-	b=tbUfVGlzbn8tvgt61xyo2N18MCsOdrpBTzC5oGD+/LWpgA1+YzA/KqdoaQSuVDNn3Y
-	kqviq/Jn9ftx07i4oubxV8geIrXR9b7ogbItIes1OCQjLqFkHzRa9z76i2Rqd1H/wMQ1
-	MT2+wr5NJXuaO1IyN0wamfK5ENFANZeX5jT7tq7HFbrJulbiuLkA386uLiNQlmDfu1VN
-	6f9HVv8INunt9hVUAnzEornqCEf0Kw/RUZTLoOkAVQ+TE/+3XVTE0WDLWb5jgpl6ewz+
-	3mPPLmmXUKt198908xbtktmBmOj4WsQ+PBKP/JInRNzuFz2Th8ICUT2p7f0AIRUE2560
-	8o2g==
+	bh=5o9MNz1aizwfWjMjmqgakNKCWXsqTp0dAywXpcs2rlo=;
+	b=wWTKicaZgD1u9SdkbfJ2pPDzTg7IqPRJx+dv+sSYJxdxjzHO+taGHY9iPfe+XfLOoo
+	K7XwgD+2gK3aX8ho8X4emNzXuuA7+o9T2BmgOIY4m6q2zDJSwHk4RPItlaWeOr0kJBVc
+	bnXGZz4wIGjnguSMYCmZIsBvVuX2pNF5PakY3vBqlwkqcP7fqa57/97yBoZdZP9/MwHt
+	N+awRd2TZ0KVEY5m6IAzvqy9fBniZDany2VDLPUGdtiBMyW8jt9xGwhVHOAjrcThwI+a
+	4163QZe8VxpjEPa891y8x2FsPVrzR1vGhZp3KnkX3Oa3geJFVXsg2biwNDzuaJmgvWDl
+	LUMw==
 MIME-Version: 1.0
-X-Received: by 10.60.37.36 with SMTP id v4mr11319076oej.53.1366666441256; Mon,
-	22 Apr 2013 14:34:01 -0700 (PDT)
+X-Received: by 10.182.220.161 with SMTP id px1mr10774978obc.42.1366666742188; 
+	Mon, 22 Apr 2013 14:39:02 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.89.226 with HTTP; Mon, 22 Apr 2013 14:34:01 -0700 (PDT)
-In-Reply-To: <20130422230506.3bcae5b2@e6520eb>
-References: <CAP9ODKraNHQ1cwW8Q+aqqDJ1ChSg+5dqoPNe=dA=TZNALu-4kQ@mail.gmail.com>
-	<20130422230506.3bcae5b2@e6520eb>
-Date: Mon, 22 Apr 2013 18:34:01 -0300
-X-Google-Sender-Auth: 7pqyNvNfkXO3LzzrSfW3qh7Fsd4
-Message-ID: <CAP9ODKqa-T9S59uMHfeHg6oOAV1SQCGD0PoVEKaSf8fTK9hvMg@mail.gmail.com>
+Received: by 10.182.89.226 with HTTP; Mon, 22 Apr 2013 14:39:02 -0700 (PDT)
+In-Reply-To: <20130422212342.GB3217@jama>
+References: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
+	<20130422221415.1e88893e@e6520eb> <20130422212342.GB3217@jama>
+Date: Mon, 22 Apr 2013 18:39:02 -0300
+X-Google-Sender-Auth: 6G4uN2KTXtGz0Wz_-E2s9JRCWis
+Message-ID: <CAP9ODKoQWWz6WwJhUnh9cKs++Y02tUCVC6YpTcrV6w5ectaFSA@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [for-danny] Changes for backporting
+Subject: Re: Meta-OpenEmbedded - Dylan maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 21:51:58 -0000
+X-List-Received-Date: Mon, 22 Apr 2013 21:56:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 22, 2013 at 6:05 PM, Eric B=E9nard <eric@eukrea.com> wrote:
-> Hi Otavio,
+On Mon, Apr 22, 2013 at 6:23 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Mon, Apr 22, 2013 at 10:14:15PM +0200, Eric B=E9nard wrote:
+>> Hi Otavio,
+>>
+>> Le Mon, 22 Apr 2013 16:08:55 -0300,
+>> Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
+>> > The upcoming release of dylan is very close and we should start think
+>> > about its maintenance; is someone intending to be the maintainer of
+>> > the 'dylan' branch of meta-oe?
+>> >
+>> I can continue maintenance with dylan as experience of the switch from
+>> denzil to danny showed that n-1 gets very few updates once n is
+>> released (and as my BSP are switching to dylan next month ;-).
 >
-> Le Fri, 19 Apr 2013 10:54:25 -0300,
-> Otavio Salvador <otavio@ossystems.com.br> a =E9crit :
->> * 1bceff8 libgsf: update to version 1.14.26
->> * b2aa32e goffice: update to version 0.10.1
+> Great, you did well with danny, it would be great to see you taking care
+> of dylan too.
 >
-> both these patches where hand edited because of tab/space mix following
-> 45830a39bb47a9eab27980d52966226c9504ea4 please check that the result in
-> danny-next is still OK on your target.
+> Feel free to create dylan branch when you see fit.
+>
+> I don't plan to merge any master-only change soon if I don't have to or
+> overlook it (jenkins is still testing against master).
+>
+> When someone is sending patch which shouldn't go to dylan, please
+> indicate it in subject (something like [master-only] should do).
 
-I started a full build with it.
+I'd love to have dylan created soon so setup scripts from customers
+could be ready.
 
 --
 Otavio Salvador                             O.S. Systems
