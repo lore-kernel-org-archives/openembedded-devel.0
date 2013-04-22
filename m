@@ -1,26 +1,33 @@
-Received: from mga14.intel.com ([143.182.124.37])
+Received: from mail-oa0-f51.google.com ([209.85.219.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UUKix-0008T1-Re
+	(envelope-from <steven.w.warren@gmail.com>) id 1UUM19-0008IN-TZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Apr 2013 19:40:20 +0200
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga102.ch.intel.com with ESMTP; 22 Apr 2013 10:22:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,528,1363158000"; d="scan'208";a="230393884"
-Received: from unknown (HELO helios.localnet) ([10.255.13.204])
-	by AZSMGA002.ch.intel.com with ESMTP; 22 Apr 2013 10:22:38 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Frederick Stakem -X (fstakem - INSIGHT GLOBAL INC@Cisco)" <fstakem@cisco.com>
-Date: Mon, 22 Apr 2013 18:22:37 +0100
-Message-ID: <1873251.PVL8ihXRQi@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.5.0-27-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <8286419.6fgEXAJ5OG@helios>
-References: <48B972723E0C6F45AE2F2588F9846DFE0FB3AAB1@xmb-rcd-x09.cisco.com>
-	<8286419.6fgEXAJ5OG@helios>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Information from a bitbake parse
+	Mon, 22 Apr 2013 21:03:15 +0200
+Received: by mail-oa0-f51.google.com with SMTP id k14so6336869oag.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Apr 2013 11:45:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=XGKeqOQPn9o0CmVPdcaxIlA5/jFrJCsEWX38lFXdGT4=;
+	b=OpMZwevESqccyvTHTIM/G8GN4wkyaWylkUZpuXSnvR0DX+fZM/lEPQ7EBrs/gE4LQh
+	XGgFzmGF236R3L/W2LE86R/E0RHKdTORx2pvhn2uHxxcIAU/w3rMOK4caTV1CpQk9yEQ
+	ntU2NOtmS8HrcNPEkWHdngB6xI2b+H/7h/HmeBW+4do4BZv1y6cfAoPdyzQo/emfPioA
+	e4eT7UAA9838IzACy4onD6gyCyFzGT71vGDfq52rTo1mPkWL4FdGt0xVprijus+/X40W
+	PunSaVjGjphtev9zme5W6itBAKTpHvDZwCXs+kNpvcOCJEbh4rIxIL0mJpvh3XIodXPN
+	lV0A==
+X-Received: by 10.60.34.40 with SMTP id w8mr10618881oei.104.1366656332149;
+	Mon, 22 Apr 2013 11:45:32 -0700 (PDT)
+Received: from engineering0.emacinc.com (watcher.emacinc.com. [66.186.100.194])
+	by mx.google.com with ESMTPS id d10sm20120079oeh.7.2013.04.22.11.45.29
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 22 Apr 2013 11:45:30 -0700 (PDT)
+From: Wayne Warren <steven.w.warren@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Apr 2013 13:45:10 -0500
+Message-Id: <1366656311-5589-1-git-send-email-steven.w.warren@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Wayne Warren <steven.w.warren@gmail.com>
+Subject: [meta-oe][PATCH v2 1/2] qtserialport: Adds initial recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,48 +41,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 17:40:20 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 22 Apr 2013 19:03:15 -0000
 
-On Monday 22 April 2013 18:15:32 Paul Eggleton wrote:
-> On Thursday 18 April 2013 12:39:21 Frederick Stakem -X wrote:
-> > I have been poking through the bitbake python code and can't seem to
-> > figure
-> > out this problem. I want to parse all of the bitbake files for a build and
-> > have this information exported into a text format. In short I want the
-> > information in the recipes condensed into an easier to parse format so
-> > that
-> > I can use it in my own software. Does anyone know how to do this or where
-> > in the code I can gain access to this information. I have put a decent
-> > amount of debug code in the bitbake cooker but have come up empty so far.
-> 
-> So, you might like to look at the update script I wrote for the layer index:
-> 
-> https://git.yoctoproject.org/cgit/cgit.cgi/layerindex-web/tree/layerindex/up
-> date.py
-> 
-> Because I needed it to ignore parsing errors it does parse one file at a
-> time (doing the internal equivalent of a bitbake -e) rather than relying on
-> the cache, something I hope to re-engineer in future. I'm not sure if how
-> it does things will exactly fit what you're trying to do but it should
-> allow you to extract information from each recipe if that's all you need.
+---
+ meta-oe/recipes-qt/qtserialport/qtserialport.inc   |   34 ++++++++++++++++++++
+ .../recipes-qt/qtserialport/qtserialport_5.1.0.bb  |    6 ++++
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/qtserialport/qtserialport.inc
+ create mode 100644 meta-oe/recipes-qt/qtserialport/qtserialport_5.1.0.bb
 
-Sorry, it would help if I mentioned a couple of things about the script 
-specifically:
-
-* This script uses the "tinfoil" wrapper around BitBake that is useful for 
-creating small BitBake-based utilities such as this one.
-
-* The update_recipe_file() function is where you need to look for the actual 
-code that reads the information from each recipe.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-qt/qtserialport/qtserialport.inc b/meta-oe/recipes-qt/qtserialport/qtserialport.inc
+new file mode 100644
+index 0000000..09f2f9a
+--- /dev/null
++++ b/meta-oe/recipes-qt/qtserialport/qtserialport.inc
+@@ -0,0 +1,34 @@
++DESCRIPTION = "Qt Serial Port Library"
++SECTION = "qt/libs"
++HOMEPAGE = "http://qt-project.org/wiki/QtSerialPort"
++
++LICENSE = "LGPL FDL GPL "
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
++    "
++
++inherit qt4e pkgconfig
++
++SRC_URI = " \
++    git://gitorious.org/qt/qtserialport.git \
++"
++
++S = "${WORKDIR}/git"
++B = "${WORKDIR}/${BPN}-${PV}"
++
++QMAKE_PROFILES="${S}/qtserialport.pro"
++EXTRA_QMAKEVARS_PRE += "PREFIX=/usr"
++EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
++
++do_compile_append() {
++ 	BOGUS_PREFIX=`qmake2 -query QT_INSTALL_PREFIX`
++	for f in `find ${B} -name "Makefile"` ;do 
++		sed -i -e "s|\(\$(INSTALL_ROOT)\)${BOGUS_PREFIX}|\1${prefix}|g" ${f}
++	done
++}
++
++do_install() {
++    oe_runmake install DESTDIR=${D} INCLUDEDIR=${includedir}
++}
+diff --git a/meta-oe/recipes-qt/qtserialport/qtserialport_5.1.0.bb b/meta-oe/recipes-qt/qtserialport/qtserialport_5.1.0.bb
+new file mode 100644
+index 0000000..d903eb3
+--- /dev/null
++++ b/meta-oe/recipes-qt/qtserialport/qtserialport_5.1.0.bb
+@@ -0,0 +1,6 @@
++require qtserialport.inc
++
++PR = "r0"
++
++SRCREV="22e45f0b0f956c025339d72ad53dca57ef684858"
++
 -- 
+1.7.9.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
