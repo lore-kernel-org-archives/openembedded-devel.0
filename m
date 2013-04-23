@@ -1,20 +1,38 @@
-Received: from eumx.net ([91.82.101.43] helo=owm.eumx.net)
+Received: from mo1.mail-out.ovh.net ([178.32.228.1])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1UUZgF-0000Qi-Ek
+	(envelope-from <paul@paulbarker.me.uk>) id 1UUZt0-0002FV-IE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Apr 2013 11:38:31 +0200
-Message-ID: <51765270.1090105@communistcode.co.uk>
-Date: Tue, 23 Apr 2013 10:20:48 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130403 Thunderbird/17.0.5
-MIME-Version: 1.0
-To: Jack Mitchell <ml@communistcode.co.uk>
-References: <20130422165350.GA3217@jama>
-	<1366708708-24878-1-git-send-email-ml@communistcode.co.uk>
-In-Reply-To: <1366708708-24878-1-git-send-email-ml@communistcode.co.uk>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v5] php: add sqlite3 and mysql PACKAGECONFIG options
+	Tue, 23 Apr 2013 11:51:47 +0200
+Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id B7FB6FF903C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Apr 2013 10:55:44 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Apr 2013 10:55:44 +0200
+Received: from 94-192-12-83.zone6.bethere.co.uk (HELO
+	b5-server.betafive.co.uk) (paul@betafive.co.uk@94.192.12.83)
+	by ns0.ovh.net with SMTP; 23 Apr 2013 10:55:41 +0200
+Received: from b5-vm-mint0.betafive.co.uk (b5-vm-mint0.betafive.co.uk
+	[192.168.0.100])
+	by b5-server.betafive.co.uk (Postfix) with ESMTP id 116F316009F;
+	Tue, 23 Apr 2013 09:55:36 +0100 (BST)
+From: Paul Barker <paul@paulbarker.me.uk>
+To: openembedded-devel@lists.openembedded.org
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Date: Tue, 23 Apr 2013 09:55:35 +0100
+Message-Id: <1366707335-53174-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.7.10.4
+X-Ovh-Tracer-Id: 5516065119629314377
+X-Ovh-Remote: 94.192.12.83 (94-192-12-83.zone6.bethere.co.uk)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrfeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrfeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Subject: [meta-oe][PATCH] ttf-inconsolata: fix license name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,101 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2013 09:38:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Apr 2013 09:51:48 -0000
 
-On 23/04/13 10:18, Jack Mitchell wrote:
-> From: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
->
-> Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
-> ---
->   meta-oe/recipes-devtools/php/php.inc | 38 +++++++++++++++++++++++-------------
->   1 file changed, 24 insertions(+), 14 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-> index 225c3d7..749f51c 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
->   SECTION = "console/network"
->   LICENSE = "PHP-3.0"
->   BBCLASSEXTEND = "native"
-> -DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-> -           libc-client openssl sqlite3"
-> +DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
-> +           libc-client openssl"
->   DEPENDS_virtclass-native = "zlib-native libxml2-native"
->   
-> -INC_PR = "r4"
-> +INC_PR = "r5"
->   
->   SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
->   
-> @@ -19,27 +19,37 @@ SSTATE_SCAN_FILES += "build-defs.h"
->   
->   # Common EXTRA_OECONF
->   COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
-> -EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
-> -                --enable-magic-quotes --enable-fastcgi --enable-fpm \
-> +EXTRA_OECONF = "--enable-mbstring \
-> +                --enable-wddx \
-> +                --enable-fpm \
->                   --with-imap=${STAGING_DIR_HOST} \
->                   --with-gettext=${STAGING_LIBDIR}/.. \
->                   --with-imap-ssl=${STAGING_DIR_HOST} \
-> -                --with-zlib --with-zlib-dir=${STAGING_LIBDIR}/.. \
-> +                --with-zlib=${STAGING_LIBDIR}/.. \
->                   --with-iconv=${STAGING_LIBDIR}/.. \
->                   --with-libxml-dir=${STAGING_BINDIR_CROSS} \
-> -                --disable-embedded-mysqli \
-> -                --with-mysql="${STAGING_DIR_TARGET}${prefix}" \
-> -                --with-mysqli="${STAGING_BINDIR_CROSS}/mysql_config" \
-> -        --with-sqlite3=${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
-> -                --with-pdo-mysql="${STAGING_BINDIR_CROSS}/mysql_config" \
-> -                --with-pdo-sqlite=${STAGING_LIBDIR}/.. ${COMMON_EXTRA_OECONF} \
-> +                ${COMMON_EXTRA_OECONF} \
->   "
-> -EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
-> -                --with-zlib --with-zlib-dir=${STAGING_LIBDIR_NATIVE}/.. \
-> +EXTRA_OECONF_virtclass-native = " \
-> +                --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
->                   --with-libxml-dir=${STAGING_BINDIR_NATIVE} \
->                   ${COMMON_EXTRA_OECONF} \
->   "
->   
-> +PACKAGECONFIG ??= "mysql sqlite3"
-> +PACKAGECONFIG_class-native = ""
-> +
-> +PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
-> +                        --with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
-> +                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
-> +                        , \
-> +                        ,mysql5"
-> +
-> +PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
-> +                          --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
-> +                          , \
-> +                          ,sqlite3"
-> +
->   LIBS_virtclass-native = " -lxml2 "
->   LIBS_pn-php =" -lpthread "
->   export LIBS
+We have "SIL Open Font License" 1.1 in common-licenses as OFL-1.1.
 
-The patch in my repo has somehow become munged, this is the exact 
-changes I have which is building correctly as above. I don't know how 
-they got joined, but they did. This negates the need for 2/2 of this 
-patchset, it's all rolled in.
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Sorry for the saga this is becoming!
-
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+index 129e137..5e86180 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+@@ -2,7 +2,7 @@ require ttf.inc
+ 
+ DESCRIPTION = "Inconsolata font - TTF Version"
+ HOMEPAGE = "http://www.levien.com/type/myfonts/inconsolata.html"
+-LICENSE = "SIL Open Font License"
++LICENSE = "OFL-1.1"
+ LIC_FILES_CHKSUM = "file://../OFL.txt;md5=969851e3a70122069a4d9ee61dd5a2ed"
+ PR = "r0"
+ 
 -- 
-
-   Jack Mitchell (jack@embed.me.uk)
-   Embedded Systems Engineer
-   http://www.embed.me.uk
-
---
+1.7.10.4
 
 
 
