@@ -1,23 +1,23 @@
 Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UUZ6D-0004CY-F7
+	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UUZ7Q-0004NN-0z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Apr 2013 11:01:19 +0200
+	Tue, 23 Apr 2013 11:02:43 +0200
 Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
 	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 61F3DD20DD
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id B6AEAD20DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Apr 2013 10:43:02 +0200 (CEST)
+	Tue, 23 Apr 2013 10:44:17 +0200 (CEST)
 From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Apr 2013 10:43:35 +0200
-Message-Id: <1366706615-6980-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Date: Tue, 23 Apr 2013 10:44:50 +0200
+Message-Id: <1366706690-7090-1-git-send-email-marcin.juszkiewicz@linaro.org>
 X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <20130218225241.GJ3300@jama>
-References: <20130218225241.GJ3300@jama>
-Subject: [meta-oe][PATCH v2] memcached: add 1.4.15
+In-Reply-To: <1361173974-9291-1-git-send-email-marcin.juszkiewicz@linaro.org>
+References: <1361173974-9291-1-git-send-email-marcin.juszkiewicz@linaro.org>
+Subject: [meta-oe][PATCH v5] libmemcached: add 1.0.15 and 1.0.7 versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,35 +31,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2013 09:01:19 -0000
+X-List-Received-Date: Tue, 23 Apr 2013 09:03:09 -0000
+
+1.0.15 is latest
+1.0.7 is required by HipHopVM
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 ---
- .../recipes-support/memcached/memcached_1.4.15.bb         | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-networking/recipes-support/memcached/memcached_1.4.15.bb
+ .../libmemcached/files/crosscompile.patch          | 30 ++++++++++++++++++++++
+ .../recipes-support/libmemcached/libmemcached.inc  | 10 ++++++++
+ .../libmemcached/libmemcached_1.0.15.bb            |  6 +++++
+ .../libmemcached/libmemcached_1.0.7.bb             |  4 +++
+ 4 files changed, 50 insertions(+)
+ create mode 100644 meta-networking/recipes-support/libmemcached/files/crosscompile.patch
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached.inc
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+ create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.15.bb b/meta-networking/recipes-support/memcached/memcached_1.4.15.bb
+diff --git a/meta-networking/recipes-support/libmemcached/files/crosscompile.patch b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
 new file mode 100644
-index 0000000..016eaeb
+index 0000000..63511bf
 --- /dev/null
-+++ b/meta-networking/recipes-support/memcached/memcached_1.4.15.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Free & open source, high-performance, distributed memory object \
-+caching system, generic in nature, but intended for use in speeding up dynamic \
-+web applications by alleviating database load."
-+HOMEPAGE = "http://memcached.org/"
++++ b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
+@@ -0,0 +1,30 @@
++ libmemcached/backtrace.cc |    3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++--- libmemcached-1.0.15.orig/libmemcached/backtrace.cc
+++++ libmemcached-1.0.15/libmemcached/backtrace.cc
++@@ -75,10 +75,11 @@ void custom_backtrace(void)
++     {
++       for (int x= 0; x < stack_frames; x++) 
++       {
++         bool was_demangled= false;
++ 
+++#if USE_DEMANGLE == 1
++         if (USE_DEMANGLE)
++         {
++ #ifdef HAVE_DLFCN_H
++           Dl_info dlinfo;
++           if (dladdr(backtrace_buffer[x], &dlinfo))
++@@ -107,11 +108,11 @@ void custom_backtrace(void)
++                       dlinfo.dli_fname);
++             }
++           }
++ #endif
++         }
++-
+++#endif
++         if (was_demangled == false)
++         {
++           fprintf(stderr, "?%d  %p in %s\n", x, backtrace_buffer[x], symbollist[x]);
++         }
++       }
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached.inc b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+new file mode 100644
+index 0000000..448a15d
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+@@ -0,0 +1,10 @@
++DESCRIPTION = "open source C/C++ client library and tools for the memcached server"
++DEPENDS = "libevent util-linux"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
++LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
 +
-+SRC_URI = "http://memcached.googlecode.com/files/memcached-${PV}.tar.gz"
++SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "36ea966f5a29655be1746bf4949f7f69"
-+SRC_URI[sha256sum] = "169721ab7a7531add6ae9f6b14b6b5641725fe0b1f0bdf5c3a4327725901e2b4"
++TARGET_LDFLAGS += "-luuid"
 +
-+DEPENDS = "libevent"
++inherit autotools gettext pkgconfig
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+new file mode 100644
+index 0000000..18232b4
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
+@@ -0,0 +1,6 @@
++require libmemcached.inc
 +
-+inherit autotools
++SRC_URI += "file://crosscompile.patch"
++
++SRC_URI[md5sum] = "616297a1aedefc52b3f6922eda5d559a"
++SRC_URI[sha256sum] = "dd7e9560029835bddf761a5b4c2339d9e5c7374558659b6c11b2c95e7d3a4325"
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
+new file mode 100644
+index 0000000..cdf8415
+--- /dev/null
++++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
+@@ -0,0 +1,4 @@
++require libmemcached.inc
++
++SRC_URI[md5sum] = "d59a462a92d296f76bff2d9bc72b2516"
++SRC_URI[sha256sum] = "3efa86c9733eaad55d7119cb16769424e2aa6c22b3392e8f973946fce6678d81"
 -- 
 1.8.1.2
 
