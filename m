@@ -1,23 +1,34 @@
-Received: from tygrysek.juszkiewicz.com.pl ([178.33.81.99])
+Received: from mail-vc0-f181.google.com ([209.85.220.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <marcin.juszkiewicz@linaro.org>) id 1UUZ7Q-0004NN-0z
+	(envelope-from <paul.betafive@gmail.com>) id 1UUZMx-0006Qd-T4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Apr 2013 11:02:43 +0200
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id B6AEAD20DD
+	Tue, 23 Apr 2013 11:18:36 +0200
+Received: by mail-vc0-f181.google.com with SMTP id ia10so356201vcb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Apr 2013 10:44:17 +0200 (CEST)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Tue, 23 Apr 2013 02:00:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=/O5AkCUVWSONsT8I+RQvtfG7JbZY9GP9HWOJneAQDNM=;
+	b=Z6RoNasoXi16aImFxXu8jib+SHMiZ6P4cIF2OAu3nUODeauOBTvGNh/Zl7hFjHwpMS
+	q2PNITbZwVQrSSZFy/wA2ek22zwguhfCOIKXdK2QObtDLvKzDcfvKHMROGn+9ocSpIsA
+	5iyivXcp2m3pXzFe3qGMlDNUyDXaMW07rhP2v1Hdf8gincJKqgae8WXdON7FlNk08lh1
+	PcWmg0hoL44N5OS8ldmyRR88Annn8AFIhuaCsSaXP8d5uRk2E+SLTmMDP6+f2VpaCSTo
+	QFunkKKSdq3KBf+OU3SfJMsDV/Ru1zvPM8FbYxDIm8Xm+qpjaplBLIExx95U8wfwDeND
+	RtdA==
+MIME-Version: 1.0
+X-Received: by 10.220.245.4 with SMTP id ls4mr21520558vcb.17.1366707655199;
+	Tue, 23 Apr 2013 02:00:55 -0700 (PDT)
+Sender: paul.betafive@gmail.com
+Received: by 10.220.224.135 with HTTP; Tue, 23 Apr 2013 02:00:55 -0700 (PDT)
+In-Reply-To: <1366707335-53174-1-git-send-email-paul@paulbarker.me.uk>
+References: <1366707335-53174-1-git-send-email-paul@paulbarker.me.uk>
+Date: Tue, 23 Apr 2013 10:00:55 +0100
+X-Google-Sender-Auth: ldU1p_rMdCne0nTSTNFWT53mi00
+Message-ID: <CANyK_8cMTd4aTzAhHX8V3Zrs6pjZoctEfVr8hLNYJXo1WQUzFw@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Apr 2013 10:44:50 +0200
-Message-Id: <1366706690-7090-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1361173974-9291-1-git-send-email-marcin.juszkiewicz@linaro.org>
-References: <1361173974-9291-1-git-send-email-marcin.juszkiewicz@linaro.org>
-Subject: [meta-oe][PATCH v5] libmemcached: add 1.0.15 and 1.0.7 versions
+Subject: Re: [meta-oe][PATCH] ttf-inconsolata: fix license name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,99 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2013 09:03:09 -0000
+X-List-Received-Date: Tue, 23 Apr 2013 09:18:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-1.0.15 is latest
-1.0.7 is required by HipHopVM
+On 23 April 2013 09:55, Paul Barker <paul@paulbarker.me.uk> wrote:
+> We have "SIL Open Font License" 1.1 in common-licenses as OFL-1.1.
+>
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- .../libmemcached/files/crosscompile.patch          | 30 ++++++++++++++++++++++
- .../recipes-support/libmemcached/libmemcached.inc  | 10 ++++++++
- .../libmemcached/libmemcached_1.0.15.bb            |  6 +++++
- .../libmemcached/libmemcached_1.0.7.bb             |  4 +++
- 4 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/libmemcached/files/crosscompile.patch
- create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached.inc
- create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
- create mode 100644 meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
+There's also a copy of the OFL 1.1 in
+meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata/OFL.txt as the
+bitbake recipe just downloads a single font file. I don't know how to
+do this as it goes across layers (not sure if relative paths would
+work) but would it be better to replace this with reference to the
+file in common-licenses? I realise this is there to satisfy having
+something in LIC_FILES_CHKSUM but it isn't doing the intended job as
+upstream could update the license and it wouldn't break this checksum.
 
-diff --git a/meta-networking/recipes-support/libmemcached/files/crosscompile.patch b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
-new file mode 100644
-index 0000000..63511bf
---- /dev/null
-+++ b/meta-networking/recipes-support/libmemcached/files/crosscompile.patch
-@@ -0,0 +1,30 @@
-+ libmemcached/backtrace.cc |    3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+--- libmemcached-1.0.15.orig/libmemcached/backtrace.cc
-++++ libmemcached-1.0.15/libmemcached/backtrace.cc
-+@@ -75,10 +75,11 @@ void custom_backtrace(void)
-+     {
-+       for (int x= 0; x < stack_frames; x++) 
-+       {
-+         bool was_demangled= false;
-+ 
-++#if USE_DEMANGLE == 1
-+         if (USE_DEMANGLE)
-+         {
-+ #ifdef HAVE_DLFCN_H
-+           Dl_info dlinfo;
-+           if (dladdr(backtrace_buffer[x], &dlinfo))
-+@@ -107,11 +108,11 @@ void custom_backtrace(void)
-+                       dlinfo.dli_fname);
-+             }
-+           }
-+ #endif
-+         }
-+-
-++#endif
-+         if (was_demangled == false)
-+         {
-+           fprintf(stderr, "?%d  %p in %s\n", x, backtrace_buffer[x], symbollist[x]);
-+         }
-+       }
-diff --git a/meta-networking/recipes-support/libmemcached/libmemcached.inc b/meta-networking/recipes-support/libmemcached/libmemcached.inc
-new file mode 100644
-index 0000000..448a15d
---- /dev/null
-+++ b/meta-networking/recipes-support/libmemcached/libmemcached.inc
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "open source C/C++ client library and tools for the memcached server"
-+DEPENDS = "libevent util-linux"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
-+
-+SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${PV}.tar.gz"
-+
-+TARGET_LDFLAGS += "-luuid"
-+
-+inherit autotools gettext pkgconfig
-diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
-new file mode 100644
-index 0000000..18232b4
---- /dev/null
-+++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.15.bb
-@@ -0,0 +1,6 @@
-+require libmemcached.inc
-+
-+SRC_URI += "file://crosscompile.patch"
-+
-+SRC_URI[md5sum] = "616297a1aedefc52b3f6922eda5d559a"
-+SRC_URI[sha256sum] = "dd7e9560029835bddf761a5b4c2339d9e5c7374558659b6c11b2c95e7d3a4325"
-diff --git a/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
-new file mode 100644
-index 0000000..cdf8415
---- /dev/null
-+++ b/meta-networking/recipes-support/libmemcached/libmemcached_1.0.7.bb
-@@ -0,0 +1,4 @@
-+require libmemcached.inc
-+
-+SRC_URI[md5sum] = "d59a462a92d296f76bff2d9bc72b2516"
-+SRC_URI[sha256sum] = "3efa86c9733eaad55d7119cb16769424e2aa6c22b3392e8f973946fce6678d81"
--- 
-1.8.1.2
+--
+Paul Barker
 
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
 
