@@ -1,37 +1,38 @@
-Received: from mail-pd0-f178.google.com ([209.85.192.178])
-	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UUaRT-0006CO-9U
+Received: from 20.mo1.mail-out.ovh.net ([188.165.45.168]
+	helo=mo1.mail-out.ovh.net) by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul@paulbarker.me.uk>) id 1UUaVj-0006qR-EE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Apr 2013 12:27:20 +0200
-Received: by mail-pd0-f178.google.com with SMTP id w11so338313pde.9
+	Tue, 23 Apr 2013 12:31:44 +0200
+Received: from mail99.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo1.mail-out.ovh.net (Postfix) with SMTP id C5790FF9104
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Apr 2013 03:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=cGxUaD6cyq1SWGSUogmQ3RbwGgB8HXqTx3y5o93xQ0w=;
-	b=b0Qje+aE8N/D7P87bgPiI3CjjIg4ycDBY+VfcTCgwbFQ7QIoZV+Pwu4Gxo6coS6Ftg
-	505DNV966WGslyVJFM+OHT9RtZbtlcaO3cwTpc9PO6EnEsYGWov7SEx9CYJXsjCRgEUi
-	crBc+kjGTROXcTT0c2FVa2z0EAfh2eJ9W5QhfX8R2sPInZfhFnAoqp/NxGKlKG/H69Nl
-	Pzha258sfvy166BkdnGmIBbgSdiCOLcyWsjQW+T3ARg9Ebz70mKig1UpfGM1+UZFlHF6
-	2ZDpAFt8CNn4pMIFwuBuP7UMKvy3Ai6fk5zCYYGnj5aQVbRwG6OXq5OpzZNi1RQTkMMc
-	V+Bg==
-X-Received: by 10.68.88.194 with SMTP id bi2mr38666919pbb.12.1366711778288;
-	Tue, 23 Apr 2013 03:09:38 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPS id 9sm4619914pbi.45.2013.04.23.03.09.35
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 23 Apr 2013 03:09:36 -0700 (PDT)
-Date: Tue, 23 Apr 2013 12:09:45 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 23 Apr 2013 10:55:54 +0200 (CEST)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 23 Apr 2013 10:55:54 +0200
+Received: from 94-192-12-83.zone6.bethere.co.uk (HELO
+	b5-server.betafive.co.uk) (paul@betafive.co.uk@94.192.12.83)
+	by ns0.ovh.net with SMTP; 23 Apr 2013 10:55:52 +0200
+Received: from b5-vm-mint0.betafive.co.uk (b5-vm-mint0.betafive.co.uk
+	[192.168.0.100])
+	by b5-server.betafive.co.uk (Postfix) with ESMTP id 934A916009F;
+	Tue, 23 Apr 2013 09:55:47 +0100 (BST)
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130423100945.GC3217@jama>
-References: <1366707335-53174-1-git-send-email-paul@paulbarker.me.uk>
-	<CANyK_8cMTd4aTzAhHX8V3Zrs6pjZoctEfVr8hLNYJXo1WQUzFw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CANyK_8cMTd4aTzAhHX8V3Zrs6pjZoctEfVr8hLNYJXo1WQUzFw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] ttf-inconsolata: fix license name
+X-Ovh-Mailout: 178.32.228.1 (mo1.mail-out.ovh.net)
+Date: Tue, 23 Apr 2013 09:55:47 +0100
+Message-Id: <1366707347-53210-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.7.10.4
+X-Ovh-Tracer-Id: 5519161344403343689
+X-Ovh-Remote: 94.192.12.83 (94-192-12-83.zone6.bethere.co.uk)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: 0
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrfeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+X-Spam-Check: DONE|U 0.5/N
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeeifedrfeeiucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
+Subject: [meta-oe][PATCH] gateone: fix license name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,53 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2013 10:27:26 -0000
-X-Groupsio-MsgNum: 44388
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kVXhAStRUZ/+rrGn"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Apr 2013 10:31:47 -0000
 
---kVXhAStRUZ/+rrGn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The Affero GPL is in common-licenses as 'AGPL-3.0' not 'AGPLv3'.
 
-On Tue, Apr 23, 2013 at 10:00:55AM +0100, Paul Barker wrote:
-> On 23 April 2013 09:55, Paul Barker <paul@paulbarker.me.uk> wrote:
-> > We have "SIL Open Font License" 1.1 in common-licenses as OFL-1.1.
-> >
->=20
-> There's also a copy of the OFL 1.1 in
-> meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata/OFL.txt as the
-> bitbake recipe just downloads a single font file. I don't know how to
-> do this as it goes across layers (not sure if relative paths would
-> work) but would it be better to replace this with reference to the
-> file in common-licenses? I realise this is there to satisfy having
-> something in LIC_FILES_CHKSUM but it isn't doing the intended job as
-> upstream could update the license and it wouldn't break this checksum.
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ meta-oe/recipes-connectivity/gateone/gateone_git.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-You can use
-LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/OFL-1.1;md5=3Dhash"
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index 39b4aff..e5b8527 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+-LICENSE = "AGPLv3"
++LICENSE = "AGPL-3.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
+ 
+ PR = "r13"
+-- 
+1.7.10.4
 
-it's true, that this does not catch license change in upstream source,
-but if there isn't any information about license in SRC_URI, then having
-OFL.txt is as bad as ${COMMON_LICENSE_DIR}/OFL-1.1 reference imho.
 
-Cheers,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---kVXhAStRUZ/+rrGn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlF2XekACgkQN1Ujt2V2gBxs6wCgpfcxSZfv+kUUBlbhbskwucHd
-9hkAnA+bVk6YFT1a35wzTrPBSbMFXrCT
-=i0ZM
------END PGP SIGNATURE-----
-
---kVXhAStRUZ/+rrGn--
