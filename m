@@ -1,22 +1,20 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from seketeli.net ([91.121.166.71] helo=ms.seketeli.net)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1UUgq5-0006Oj-Ti
+	(envelope-from <apelete@seketeli.net>) id 1UUlLA-0005Ss-2N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Apr 2013 19:17:14 +0200
-Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 8B6944B01DD;
-	Tue, 23 Apr 2013 18:59:25 +0200 (CEST)
-Date: Tue, 23 Apr 2013 18:59:24 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Wed, 24 Apr 2013 00:05:32 +0200
+Received: from localhost (176-26-190-109.dsl.ovh.fr [109.190.26.176])
+	by ms.seketeli.net (Postfix) with ESMTP id 6F404EA040
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Apr 2013 00:18:41 +0200 (CEST)
+Received: by localhost (Postfix, from userid 1000)
+	id A5438A460F3; Tue, 23 Apr 2013 23:48:34 +0200 (CEST)
+From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130423185924.6a01867f@e6520eb>
-In-Reply-To: <5175AAA5.3090601@pseudoterminal.org>
-References: <5175AAA5.3090601@pseudoterminal.org>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [meta-oe] libvpx patch backport request
+Date: Tue, 23 Apr 2013 23:48:23 +0200
+Message-Id: <cover.1366753073.git.apelete@seketeli.net>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-opie][PATCH 0/1] Pull request 20130423
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,26 +28,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Apr 2013 17:17:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Apr 2013 22:06:38 -0000
 
-Hi Carlos Refael,
+Hello,
 
-Le Mon, 22 Apr 2013 23:24:53 +0200,
-Carlos Rafael Giani <dv@pseudoterminal.org> a =C3=A9crit :
+The patch that comes as a follow-up of this message fix a compile
+error when building uicmoc-native with GCC-4.7.
 
-> Hello,
->=20
-> in the meta-oe master branch, commit=20
-> 392e30c21accc720c4e7ae38bc830bfc283a6490 introduces a patch to libvpx=20
-> that fixes the library's hardcoded soft/hardfp flags.
-> Without this patch, the library cannot be built for hardfp targets.
-> I cherry-picked it on my local repository, and it worked well with danny.
->=20
-pushed to danny-next,
+The modifications are done on top of the master branch in the
+meta-opie layer, and tested by building uicmoc-native from scratch.
 
-thanks
-Eric
+Please pull into the meta-opie layer.
+
+The following changes since commit c242efc6ca55772a88602f1f8f94dff697b38430:
+
+  layer.conf: use ??= to set variables (2013-03-25 22:42:32 +0000)
+
+are available in the git repository at:
+
+  git://seketeli.fr/~apelete/meta-opie.git fix-uicmoc-build
+
+Apelete Seketeli (1):
+  uicmoc: fix compile issue with GCC-4.7
+
+ recipes-qt/uicmoc/uicmoc-2.3.10/gcc4.7.patch |   11 +++++++++++
+ recipes-qt/uicmoc/uicmoc_2.3.10.bb           |    1 +
+ 2 files changed, 12 insertions(+)
+ create mode 100644 recipes-qt/uicmoc/uicmoc-2.3.10/gcc4.7.patch
+
+-- 
+1.7.10.4
+
 
 
