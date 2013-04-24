@@ -1,40 +1,36 @@
-Received: from mail-wg0-f47.google.com ([74.125.82.47])
+Received: from mail-we0-f177.google.com ([74.125.82.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UV2wd-0005B5-NH
+	(envelope-from <ross.burton@intel.com>) id 1UV2wc-0005B1-4u
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 24 Apr 2013 18:53:29 +0200
-Received: by mail-wg0-f47.google.com with SMTP id j13so918357wgh.2
+Received: by mail-we0-f177.google.com with SMTP id s47so1029663wey.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2013 09:35:41 -0700 (PDT)
+	Wed, 24 Apr 2013 09:35:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references:x-gm-message-state;
-	bh=FTKdW25Pm9bxUMBERljl3S1IvKOJptnfimSrs4skycs=;
-	b=BUzt/UOZiny3oj+bjXD3er+aBzvPoSdmzVrZzwaDy3wpj6b+Er/R2ogT2HiSXIM7Kh
-	0G/sDGKsdnjcdEUYnPOJnvPGRd3Ig2ZmPwwL6iRUqcW6GuUaN3OEuJKNhafYccLdvlSl
-	yRjPThbm4i9+wuhgzN0uifYOsM13VHcgow8vywzB2OyKqIgr40LgxVyaLB9jCgtLb4od
-	U+hB3fqUAplsoeoOIjpHwA50brqY+MdVw76+Z6Zq1betEt2pumAITrccW2scmOObJbel
-	hP87EYVTtetno3LYuRcCrB+Q/uuQwlXKImc95hRTI+wTZCgcj3fhKc8fCUj3ljA3fRJV
-	Td1g==
-X-Received: by 10.180.182.110 with SMTP id ed14mr66512419wic.6.1366821341493; 
-	Wed, 24 Apr 2013 09:35:41 -0700 (PDT)
+	h=x-received:from:to:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=dm3Bjb0/oE4cLDC8h6CKYpnYK2bAPTlOwu6cRVN1NQA=;
+	b=ngJ5nHLYwwlNxtyb1pbPb3+Cylo2ZgxTYLKmGonE+5Vmzv9Rs93EVCkQH8WNLf7eEW
+	mTh9dWi8dDHlN209T0DbnGuJpWnD/xm5EBOuvZu5NLvZD+8QSzUr2cWVuUxKar8PEFcR
+	J+3bgjNcbc00Vt2y8DmNveIXPPXtK5dNsPN6aG/lG4bJvA7mlFPV3wWPl7GB6OmdLL/h
+	Djjci8ieDC4ea9ZVq8w2FOH/+rq0d9Y6OgT4XSx/vWRO8s5PVVI9Jq48zTumV+R3JUTz
+	EXWpGXRGnd1PY+c2VmagpEVxCUxGz/dLCEhrRFC7abA7TlHNcpQzw/cCs04he0yKvWDx
+	ROpw==
+X-Received: by 10.194.8.99 with SMTP id q3mr3307912wja.34.1366821340222;
+	Wed, 24 Apr 2013 09:35:40 -0700 (PDT)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPSA id er1sm33432791wib.5.2013.04.24.09.35.40
+	by mx.google.com with ESMTPSA id er1sm33432791wib.5.2013.04.24.09.35.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Apr 2013 09:35:40 -0700 (PDT)
+	Wed, 24 Apr 2013 09:35:39 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Apr 2013 17:32:42 +0100
-Message-Id: <83aca51e5e0866d965d4d9f621cacb29c84a6875.1366821077.git.ross.burton@intel.com>
+Date: Wed, 24 Apr 2013 17:32:41 +0100
+Message-Id: <cover.1366821077.git.ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1366821077.git.ross.burton@intel.com>
-References: <cover.1366821077.git.ross.burton@intel.com>
-In-Reply-To: <cover.1366821077.git.ross.burton@intel.com>
-References: <cover.1366821077.git.ross.burton@intel.com>
-X-Gm-Message-State: ALoCoQkz/rM69kU8u+CsnveFphD2s3EFWqJDRAzDxKWPS/A8rxU0VOnVUNuBgPvKM9VURHmUF7k/
-Subject: [PATCH 1/2] libgnome-keyring: add (from oe-core)
+X-Gm-Message-State: ALoCoQm5+2J+vk6X2AygBR+RSWv1c83hUiHocAllajS2HPUGBcNIvcuemK4Qx/LOfgi9W2gRbnDH
+Subject: [PATCH 0/2][meta-gnome] Add gnome-keyring
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,41 +46,46 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 24 Apr 2013 16:53:50 -0000
 
-This was in oe-core previously but it's not actually used by anything:
-webkit-gtk claimed a false dependency and the new libsoup has removed all use of
-gnome-keyring.
+Hi,
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- .../gnome-keyring/libgnome-keyring_2.32.0.bb        |   19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+This is currently in oe-core but shortly there will be nothing depending on it,
+so it can move to meta-gnome.
+
+Ross
+
+The following changes since commit 2a5dea2399e2be5e5d964eda7465dcaf4c2e152b:
+
+  ttf-arphic-uming: remove whitespace from license (2013-04-22 19:00:56 +0200)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib ross/keyring
+
+for you to fetch changes up to 71a4379c48d50d14128938bacfb29be4a966fad3:
+
+  gnome-keyring: add (from oe-core) (2013-04-24 17:27:08 +0100)
+
+----------------------------------------------------------------
+Ross Burton (2):
+      libgnome-keyring: add (from oe-core)
+      gnome-keyring: add (from oe-core)
+
+ .../gnome-keyring/gnome-keyring_2.32.1.bb          |   37 ++++++++++++++++++++
+ .../gnome-keyring/libgnome-keyring_2.32.0.bb       |   19 ++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
  create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-new file mode 100644
-index 0000000..8ed44f3
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Compatibility library for accessing secrets"
-+HOMEPAGE = "http://www.gnome.org/"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
-+
-+LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf \
-+                    file://library/gnome-keyring.h;endline=25;md5=68ea64f81c160d670c37da5f137be4fb \
-+                    file://library/gnome-keyring.c;endline=26;md5=8d7a4fb674aaa012ea5a98e7c368b4a5 \
-+                    file://egg/egg-dh.h;endline=22;md5=1626c16af2a8da1f88324cf3ced33f08"
-+
-+SECTION = "x11/gnome/libs"
-+PR = "r3"
-+
-+inherit gnome gtk-doc
-+
-+DEPENDS = "dbus libgcrypt glib-2.0 intltool-native"
-+
-+SRC_URI[archive.md5sum] = "c42b2ca66204835d901d3dbfc1fa5ae6"
-+SRC_URI[archive.sha256sum] = "56388c0d81ddfdb57d30e4963c83ecc1c18498aab99395420e0fff69929a0f0c"
+Ross Burton (2):
+  libgnome-keyring: add (from oe-core)
+  gnome-keyring: add (from oe-core)
+
+ .../gnome-keyring/gnome-keyring_2.32.1.bb          |   37 ++++++++++++++++++++
+ .../gnome-keyring/libgnome-keyring_2.32.0.bb       |   19 ++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+ create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
+
 -- 
 1.7.10.4
 
