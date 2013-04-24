@@ -1,36 +1,31 @@
-Received: from mail-pa0-f52.google.com ([209.85.220.52])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1UUthG-0006c7-BC; Wed, 24 Apr 2013 09:00:54 +0200
-Received: by mail-pa0-f52.google.com with SMTP id fb1so988919pad.25
-	for <multiple recipients>; Tue, 23 Apr 2013 23:43:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=0U2QVI02XXRDkuMSpgeui59UmNcO+dAt62jOEs3F9sQ=;
-	b=eZi9C6cRBE7YxwhZ7wnXkRyFe++Ql7JzK8J7HGVaJ8c1GKwIvOnoD3oBIXA2lLHeoU
-	Wbspka6XP8f+5cOm7c6LFjx5F8vW2gAnljTYfhOWs6FISf7EdMOFiVHk9li2vjYEvBnJ
-	Mw2LUjmN0rRTXTNtVWxrrMlYUaXLDf/JD5rRe9NCi4ALq69x+sPtm/g9zqghSrCJMh5X
-	y6Lydu8QqnhucrzfkGtJXJOgT0VzMAn/3pCLIJVdAHymnpbncNpYlzLeAfs3jD5+cOKs
-	6C7S0u8GQYNbSiuqxyUHug2oHyjViZ7yZGHYW7lQNyXn0kT/kU0aFJKY6eBiwYyrpIGU
-	B6xg==
-X-Received: by 10.68.254.225 with SMTP id al1mr46526031pbd.69.1366785791745;
-	Tue, 23 Apr 2013 23:43:11 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	vk7sm1769918pbc.41.2013.04.23.23.43.08 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 23 Apr 2013 23:43:10 -0700 (PDT)
-Date: Wed, 24 Apr 2013 08:43:19 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130424064319.GD3217@jama>
+	(envelope-from <richard.purdie@linuxfoundation.org>)
+	id 1UUuus-0004TK-Vi; Wed, 24 Apr 2013 10:19:12 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r3O82NNr013724; Wed, 24 Apr 2013 09:02:23 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id p_MOVgZPL9_z; Wed, 24 Apr 2013 09:02:23 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r3O82GYq013716
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT); Wed, 24 Apr 2013 09:02:18 +0100
+Message-ID: <1366790466.23738.86.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 24 Apr 2013 09:01:06 +0100
+In-Reply-To: <20130424064319.GD3217@jama>
 References: <CA+YB3rb6xwk2-rsSa=dQx19qp7jKAVBZiMmQB5DvrGOmLUFG2Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+YB3rb6xwk2-rsSa=dQx19qp7jKAVBZiMmQB5DvrGOmLUFG2Q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: OpenEmbedded TSC 8 April 2013
+	<20130424064319.GD3217@jama>
+X-Mailer: Evolution 3.6.2-0ubuntu0.1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OpenEmbedded TSC 8 April 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,52 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 07:01:14 -0000
-X-Groupsio-MsgNum: 44396
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EY/WZ/HvNxOox07X"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Apr 2013 08:19:13 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---EY/WZ/HvNxOox07X
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 2013-04-24 at 08:43 +0200, Martin Jansa wrote:
+> On Tue, Apr 23, 2013 at 02:47:56PM -0700, Jeff Osier-Mixon wrote:
+> > OpenEmbedded Technical Steering Committee
+> > 8 April 2013
+> > 
+> > b. document whitespace changes to the shell
+> > http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+> > http://www.openembedded.org/wiki/Styleguide
+> > https://wiki.yoctoproject.org/wiki/Recipe_%26_Patch_Style_Guide
+> > => still need to de-dup these, need a volunteer
+> > ask for volunteers after 1.4 (jefro)
+> 
+> Someone probably noticed, but all meta-openembedded layers are now using
+> consistent indentation:
+> http://git.openembedded.org/meta-openembedded/commit/?id=a45830a39bb47a9eab27980d52966226c9504ea4
+> 
+> Can we reevaluate decision to keep styleguide promoting different
+> indentation for python and shell tasks? Otherwise we should mention
+> different rules for oe-core and other layers.
 
-On Tue, Apr 23, 2013 at 02:47:56PM -0700, Jeff Osier-Mixon wrote:
-> OpenEmbedded Technical Steering Committee
-> 8 April 2013
->=20
-> b. document whitespace changes to the shell
-> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-> http://www.openembedded.org/wiki/Styleguide
-> https://wiki.yoctoproject.org/wiki/Recipe_%26_Patch_Style_Guide
-> =3D> still need to de-dup these, need a volunteer
-> ask for volunteers after 1.4 (jefro)
+The TSC talked about it and agreed a particular direction. Its clear
+that some people don't like the direction so they just ignored it and do
+their own thing anyway.
 
-Someone probably noticed, but all meta-openembedded layers are now using
-consistent indentation:
-http://git.openembedded.org/meta-openembedded/commit/?id=3Da45830a39bb47a9e=
-ab27980d52966226c9504ea4
+This is the wrong way to go about making decisions and I'm extremely
+disappointed people are doing this.
 
-Can we reevaluate decision to keep styleguide promoting different
-indentation for python and shell tasks? Otherwise we should mention
-different rules for oe-core and other layers.
+There were specific technical reasons I suggested we not do this. One of
+the asks of the Yocto members is some kind of stability, whatever that
+is. Whitespace changes like this are *extremely* disruptive to patch
+flow. I think its clear there are people out there using older versions
+of the codebase yet they pick patches off master and backport them for a
+variety of reasons. As soon as you get changes like this involved, it
+breaks their ability to do that. With the python change, there was a
+good technical reason we did it. Despite that I was personally literally
+backed into a corner and shouted at by some rather upset people last
+time this happened with the python change. I can see their point too.
+For changing shell, we don't have any good technical reason other than
+cosmetics. I've made this argument before.
 
-Cheers,
+You know what, thanks for the support guys :(
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+At this point I assume I'm free to ignore the TSC since we now have
+precedent for it?
 
---EY/WZ/HvNxOox07X
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Richard
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlF3fwcACgkQN1Ujt2V2gBwiqgCglRZCaALlMIdtBAMkM+Q52A5q
-R/IAoJqBluRy8DVOx8xiXi6KpEuF3RIM
-=9IIN
------END PGP SIGNATURE-----
 
---EY/WZ/HvNxOox07X--
+
