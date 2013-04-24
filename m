@@ -1,38 +1,57 @@
-Received: from mail-pa0-f43.google.com ([209.85.220.43])
+Received: from mail-vb0-f53.google.com ([209.85.212.53])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>)
-	id 1UUvFh-0006fI-HO; Wed, 24 Apr 2013 10:40:34 +0200
-Received: by mail-pa0-f43.google.com with SMTP id hz1so1045612pad.30
-	for <multiple recipients>; Wed, 24 Apr 2013 01:22:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=U8s8nfzg4A8rVkTVsyee3wCFFH5lUGxE5t1K/AxHpC0=;
-	b=lj/KboK29ukI6EBlrB2p97ap7at/u0WzWNGK0aQQdMzOCNjdlgWLJskWP/oSo4MK9M
-	U7XcAqiO24rERQujYp9J70NEsywJnQh8PkC8HHIRqXdggkvSUexe4LbBjWCKShjpZoxD
-	rUeni7L9fU5A/U8ShSqnz0v2y4Yc/6/4I8JVX0aJilyWGFlK+Her+8RcQJgG0YIP9EVo
-	wHmv60LaPVOcrqCiMZj4Q2wbQTtmjDqYawiNrIgk3/Dd7XW1+ILjjhMP44OvFt5fxDCh
-	HiB+Rv+lqnjblnGs5EG7LGx60teqvx3Eu9ydautmDw3XV2cu1WCxWlLR+ighAU74Pf2n
-	HvQA==
-X-Received: by 10.66.245.75 with SMTP id xm11mr17827464pac.40.1366791770992;
-	Wed, 24 Apr 2013 01:22:50 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	wz9sm2157008pbc.5.2013.04.24.01.22.48 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 24 Apr 2013 01:22:50 -0700 (PDT)
-Date: Wed, 24 Apr 2013 10:22:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Message-ID: <20130424082259.GF3217@jama>
-References: <CA+YB3rb6xwk2-rsSa=dQx19qp7jKAVBZiMmQB5DvrGOmLUFG2Q@mail.gmail.com>
-	<20130424064319.GD3217@jama> <1366790466.23738.86.camel@ted>
+	(envelope-from <schnitzeltony@googlemail.com>)
+	id 1UUwn8-0008Dh-KP; Wed, 24 Apr 2013 12:19:13 +0200
+Received: by mail-vb0-f53.google.com with SMTP id i3so1464886vbh.40
+	for <multiple recipients>; Wed, 24 Apr 2013 03:01:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type:content-transfer-encoding;
+	bh=h+OcHvqiJ8XrspfNbikXQEIOaVOoxtdqCqV8gf1WqdE=;
+	b=vFvqmrdXzSU54XqZ62xGKC5iJsl3aCZXEZLpnwtRxJzHEGyK1uIRSdss+KMPp2k4b7
+	xW2J36QOZ0uFbnBkZsuF0zC49X1K8Ilpd0OeslZ6QnUbmAjqKHfAHn29FQxL/M5W1XTg
+	cCxGGeQGZHlE8GW7+PS+p7syOQMhKgIDsUWO0BXYo9MxyYbhQoaeUO91DDNwnh3rwE9G
+	geyc3JjJY0gduYsm0viOJzjJsCYTvV0ahtQYsQM4dTRpISA/2X+o1DHSTNXWrexiUgSN
+	/wPI/FyddxDdwL3ZXw5Mj1+M2PlifmyVCSbpvy78izVahND73prUJ4m1yvDlsguD/mbV
+	A2BQ==
 MIME-Version: 1.0
-In-Reply-To: <1366790466.23738.86.camel@ted>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OpenEmbedded TSC 8 April 2013
+X-Received: by 10.52.68.51 with SMTP id s19mr21084782vdt.92.1366797688429;
+	Wed, 24 Apr 2013 03:01:28 -0700 (PDT)
+Received: by 10.52.183.36 with HTTP; Wed, 24 Apr 2013 03:01:28 -0700 (PDT)
+In-Reply-To: <CALbNGRTSwZM05RArE3=K4QfekU=TWPCyEaoybySdVRzbJsWfdA@mail.gmail.com>
+References: <CALbNGRRDhXutLhQMs+prxLG3wbs3Y4pZbwR-D=VNR4Z=OUycMg@mail.gmail.com>
+	<18219582.KT7bte5u1O@helios>
+	<CALbNGRQpB3dqZBzsftXeYz_P7GW8h_Lq6C6SD-Qj79qHzea0tw@mail.gmail.com>
+	<3344072.3yQMCnL6TJ@helios>
+	<B9C5C522-FF02-4724-B527-ACBE69FDE1B8@dominion.thruhere.net>
+	<CAJTo0LZ54q91K8GNEP0RB7St4L+mpm861-kpaXTGswsqLSUk1A@mail.gmail.com>
+	<6BD1F316-C3AE-41BD-B9ED-296278CEF5A7@dominion.thruhere.net>
+	<CAJTo0LYeJwW-Lbf9bEZogCh1e97bwj7PTgFZV=3NbwN=PMWENg@mail.gmail.com>
+	<CAJTo0LYRPtG_N1WCE37UTvGvy5HYt7ia1ym12iR874Ykb8QwTg@mail.gmail.com>
+	<623CB95B-FD17-49A5-9547-71E0EFC316A7@dominion.thruhere.net>
+	<5171293A.5010300@intel.com>
+	<0E83C36A-8358-40B0-B022-A39DBFF44880@dominion.thruhere.net>
+	<51713804.9000002@intel.com>
+	<5437CC85-9AC1-4A18-BAE8-BDE01613215D@dominion.thruhere.net>
+	<CAJTo0LbkfHKtEGnMDso0L5L0C62rO+ox__NHRu63HOt7Toh5wA@mail.gmail.com>
+	<6B56E483-2965-46F1-A120-2F5F9807C594@dominion.thruhere.net>
+	<447FAD55-F561-4BCB-B4FC-D0E5907143D6@dominion.thruhere.net>
+	<8A0CB92A-B97D-4F53-A6BB-AB3C09ECE46C@dominion.thruhere.net>
+	<84E8DA59-4879-4A6C-BB8A-4B1F766F7E76@dominion.thruhere.net>
+	<1366556948.10502.191.camel@ted>
+	<978AB207-819F-4628-BE0E-DBCA8D826DE7@dominion.thruhere.net>
+	<CALbNGRSVG+PJTNbtLg5waTK0J4LQncksT5bkK5L+DRSg3TkgpQ@mail.gmail.com>
+	<CALbNGRTSwZM05RArE3=K4QfekU=TWPCyEaoybySdVRzbJsWfdA@mail.gmail.com>
+Date: Wed, 24 Apr 2013 12:01:28 +0200
+Message-ID: <CALbNGRQt85MST1a6CsR_EX9CG4zhT4YBMYGgwG81GBwxZJTKCQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [OE-core] postinst does not finish
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,90 +65,206 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 08:40:37 -0000
-X-Groupsio-MsgNum: 44398
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="27ZtN5FSuKKSZcBU"
-Content-Disposition: inline
-
---27ZtN5FSuKKSZcBU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Apr 2013 10:19:26 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 24, 2013 at 09:01:06AM +0100, Richard Purdie wrote:
-> On Wed, 2013-04-24 at 08:43 +0200, Martin Jansa wrote:
-> > On Tue, Apr 23, 2013 at 02:47:56PM -0700, Jeff Osier-Mixon wrote:
-> > > OpenEmbedded Technical Steering Committee
-> > > 8 April 2013
-> > >=20
-> > > b. document whitespace changes to the shell
-> > > http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-> > > http://www.openembedded.org/wiki/Styleguide
-> > > https://wiki.yoctoproject.org/wiki/Recipe_%26_Patch_Style_Guide
-> > > =3D> still need to de-dup these, need a volunteer
-> > > ask for volunteers after 1.4 (jefro)
-> >=20
-> > Someone probably noticed, but all meta-openembedded layers are now using
-> > consistent indentation:
-> > http://git.openembedded.org/meta-openembedded/commit/?id=3Da45830a39bb4=
-7a9eab27980d52966226c9504ea4
-> >=20
-> > Can we reevaluate decision to keep styleguide promoting different
-> > indentation for python and shell tasks? Otherwise we should mention
-> > different rules for oe-core and other layers.
->=20
-> The TSC talked about it and agreed a particular direction. Its clear
-> that some people don't like the direction so they just ignored it and do
-> their own thing anyway.
->=20
-> This is the wrong way to go about making decisions and I'm extremely
-> disappointed people are doing this.
->=20
-> There were specific technical reasons I suggested we not do this. One of
-> the asks of the Yocto members is some kind of stability, whatever that
-> is. Whitespace changes like this are *extremely* disruptive to patch
-> flow. I think its clear there are people out there using older versions
-> of the codebase yet they pick patches off master and backport them for a
-> variety of reasons. As soon as you get changes like this involved, it
-> breaks their ability to do that. With the python change, there was a
-> good technical reason we did it. Despite that I was personally literally
-> backed into a corner and shouted at by some rather upset people last
-> time this happened with the python change. I can see their point too.
-> For changing shell, we don't have any good technical reason other than
-> cosmetics. I've made this argument before.
+On Tue, Apr 23, 2013 at 9:43 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Tue, Apr 23, 2013 at 9:27 AM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> On Mon, Apr 22, 2013 at 10:36 AM, Koen Kooi <koen@dominion.thruhere.net>=
+ wrote:
+>>>
+>>> Op 21 apr. 2013, om 17:09 heeft Richard Purdie <richard.purdie@linuxfou=
+ndation.org> het volgende geschreven:
+>>>
+>>>> On Sun, 2013-04-21 at 08:59 +0200, Koen Kooi wrote:
+>>>>> Op 19 apr. 2013, om 16:00 heeft Koen Kooi <koen@dominion.thruhere.net=
+> het volgende geschreven:
+>>>>>> Op 19 apr. 2013, om 15:37 heeft Koen Kooi <koen@dominion.thruhere.ne=
+t> het volgende geschreven:
+>>>>>> And it still doesn't work :(
+>>>>>>
+>>>>>> root@beaglebone:~# systemctl status gdm -a
+>>>>>> gdm.service - Gnome Display Manager
+>>>>>>  Loaded: loaded (/lib/systemd/system/gdm.service; enabled)
+>>>>>>  Active: active (running) since Sat 2000-01-01 19:22:11 UTC; 13 year=
+s 3 months ago
+>>>>>> Main PID: 147 (gdm-binary)
+>>>>>>  CGroup: name=3Dsystemd:/system/gdm.service
+>>>>>>          =E2=94=94=E2=94=80147 /usr/sbin/gdm-binary -nodaemon
+>>>>>>
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[326]: WARNING: Couldn't =
+look up uid
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[337]: WARNING: User gdm =
+doesn't exist
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[326]: WARNING: Unable to=
+ parse output:
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[326]: WARNING: Unable to=
+ parse D-Bus launch output
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[338]: WARNING: User gdm =
+doesn't exist
+>>>>>> Apr 19 13:56:22 beaglebone gdm-simple-slave[326]: WARNING: Could not=
+ run helper: Failed to execute child process "/usr/lib/gdm/ck-get-x11-displ=
+ay-device" (No such file or directory)
+>>>>>> Apr 19 13:56:22 beaglebone gdm[147]: gdm-binary[147]: WARNING: GdmDi=
+splay: display lasted 1.401004 seconds
+>>>>>> Apr 19 13:56:22 beaglebone gdm-binary[147]: WARNING: GdmDisplay: dis=
+play lasted 1.401004 seconds
+>>>>>> Apr 19 13:56:22 beaglebone gdm-binary[147]: WARNING: GdmLocalDisplay=
+Factory: maximum number of X display failures reached: check X server log f=
+or errors
+>>>>>> Apr 19 13:56:22 beaglebone gdm[147]: gdm-binary[147]: WARNING: GdmLo=
+calDisplayFactory: maximum number of X display failures reached: check X se=
+rver log for errors
+>>>>>>
+>>>>>> Hmm, let's rerun gdm.postinst:
+>>>>>>
+>>>>>> root@beaglebone:~# sh /var/lib/opkg/info/gdm.postinst
+>>>>>> + '[' x '!=3D' x ']'
+>>>>>> + grep '^gdm:' /etc/group
+>>>>>> + grep '^gdm:' /etc/passwd
+>>>>>> + adduser --disabled-password --system --home /var/lib/gdm gdm --ing=
+roup gdm -g gdm
+>>>>>> adduser: /var/lib/gdm: File exists
+>>>>>> + '[' -d /var/lib/gdm ']'
+>>>>>> + chown -R gdm:gdm /var/lib/gdm
+>>>>>> + chmod 0750 /var/lib/gdm
+>>>>>> + mkdir -p /etc/X11/
+>>>>>> + echo /usr/bin/gdm
+>>>>>> + OPTS=3D
+>>>>>> + '[' -n '' ']'
+>>>>>> + type systemctl
+>>>>>> + systemctl enable gdm.service
+>>>>>> + '[' -z '' -a enable =3D enable ']'
+>>>>>> + systemctl restart gdm.service
+>>>>>> + test x '!=3D' x
+>>>>>> + OPT=3D-s
+>>>>>> + type update-rc.d
+>>>>>> + update-rc.d -s gdm start 99 5 2 . stop 20 0 1 6 .
+>>>>>> System startup links for /etc/init.d/gdm already exist.
+>>>>>> + '[' x '!=3D' x ']'
+>>>>>> + GDK_PIXBUF_MODULEDIR=3D/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders
+>>>>>> + gdk-pixbuf-query-loaders --update-cache
+>>>>>> [  102.324520] tilcdc 4830e000.fb: timeout waiting for framedone
+>>>>>> + for icondir in '/usr/share/icons/*'
+>>>>>> + '[' -d /usr/share/icons/Crux ']'
+>>>>>> + gtk-update-icon-cache -fqt /usr/share/icons/Crux
+>>>>>> + for icondir in '/usr/share/icons/*'
+>>>>>> + '[' -d /usr/share/icons/HighContrast ']'
+>>>>>> + gtk-update-icon-cache -fqt /usr/share/icons/HighContrast
+>>>>>> + for icondir in '/usr/share/icons/*'
+>>>>>> + '[' -d /usr/share/icons/HighContrast-SVG ']'
+>>>>>> + gtk-update-icon-cache -fqt /usr/share/icons/HighContrast-SVG
+>>>>>> + for icondir in '/usr/share/icons/*'
+>>>>>> + '[' -d /usr/share/icons/HighContrastInverse ']'
+>>>>>> + gtk-update-icon-cache -fqt /usr/share/icons/HighContrastInverse
+>>>>>> + for icondir in '/usr/share/icons/*'
+>>>>>> + '[' -d /usr/share/icons/HighContrastLargePrint ']'
+>>>>>> + gtk-update-icon-cache -fqt /usr/share/icons/HighContrastLargePrint
+>>>>>>
+>>>>>> (etc)
+>>>>>>
+>>>>>> So it looks like the postinsts do run when used inside run-postinst.=
+service, but don't save their output (sucky description, I know).
+>>>>>
+>>>>> Another datapoint, same GNOME image built for x86 finishes run-postin=
+sts as expected, but also doesn't work, gconf stuff has to get run manually=
+ again to work.
+>>>>
+>>>> FWIW I think there are multiple issues here and they're combining
+>>>> together to make a rather weird problem.
+>>>>
+>>>> One issue we now know about is that the intercept code and the way it
+>>>> uses "exit 1" can cause some later parts of some postinst scripts not =
+to
+>>>> get executed. I believe Laurentiu has a fix for this problem and this =
+is
+>>>> the one causing the gdm issue.
+>>>>
+>>>> I think the hang people are reporting is something else though, perhap=
+s
+>>>> related to the hwdb. I'm also aware of matchbox-session-sato conflicti=
+ng
+>>>> with settings-deamon and some multilib issues such as the wrong
+>>>> qemuwrapper being used.
+>>>>
+>>>> We're going to have to work through each issue in turn and re-evaluate
+>>>> after each fix.
+>>>>
+>>>> I wish we'd come across this earlier as to add fixes to the release at
+>>>> this point would mean slipping the release date by a week :(. I'm
+>>>> therefore leaning towards testing any fixes and queuing them quickly o=
+n
+>>>> the branch post-release, following up with a point release relatively
+>>>> soon to catch things that people find as the release gets more exposur=
+e.
+>>>> I know the point releases have happened slowly and I want to change
+>>>> that.
+>>>
+>>> To be honest, I don't are about point releases, I only care about fixes=
+ getting into the release branch in a timely fashion. I build from git bran=
+ches, not from tarballs after all.
+>>>
+>>> regards,
+>>>
+>>> Koen
+>> I think I got at least a hot hint on this: opkg-cl configure seems
+>> started twice. I did
+>>
+>> * create an image
+>> * deleted /etc/rcS.d/S98run-postinsts from this image manually
+>> * booted fine
+>>
+>> Andreas
+> This was another 'get some coffee before writing heureka' - sorry
+>
+> Andreas
+Again heureka: I debugged this again and again with kernel param
 
-Hi,
+systemd.journald.forward_to_console=3Dtrue
 
-I'm sorry you feel that way about it, I'll try to make it a bit better:
+and finally found strange message (strange because I sent a patch
+somewhere long time ago to fix):
 
-1) it was discussed and acked by major meta-openembedded contributors
-and maintainers:
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2013-April/044989.h=
-tml
+| systemd[1]: Cannot add dependency job for unit
+display-manager.service, ignoring: Unit display-manager.service failed
+to load: No such file or directory.
 
-2) it was done just before we'll branch dylan, so that backporting issue
-is only for people backporting over 2 releases (from after-dylan-master
-to danny). And even if someone gets whitespace wrong in backport, then
-there is no real harm, because as you say, it's only cosmetic now and
-meta-openembedded layers were very inconsistent about it (tabs were used
-only in minority of recipes).
+Looking into lxdm-postinst:
 
-Cheers,
+if [ "x$D" !=3D "x" ]; then
+    exit 1
+fi
+langs=3D""
+....
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+OPTS=3D""
 
---27ZtN5FSuKKSZcBU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+if [ -n "$D" ]; then
+    OPTS=3D"--root=3D$D"
+fi
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
+if type systemctl >/dev/null 2>/dev/null; then
+	systemctl $OPTS enable lxdm.service
 
-iEYEARECAAYFAlF3lmMACgkQN1Ujt2V2gBxELwCfcKMlvQLIbU57euXBy5m7vhxt
-chwAnjrOVHXOd2jEWewmDwjGmJuYrAVv
-=dLe0
------END PGP SIGNATURE-----
+	if [ -z "$D" -a "enable" =3D "enable" ]; then
+		systemctl restart lxdm.service
+	fi
+fi
 
---27ZtN5FSuKKSZcBU--
+Which idiot wrote code causing postinst exititing offline. Hereby all
+appending postinsts are skipped. No systemct-native.
+
+Looking into lxdm recipe (and later also gdm - same there - Koen I
+think your image above had gdm) turned my head into deep red: The
+idiot was me!
+
+Up to now I only tested lxdm fix and postinst works fine now. I will
+check meta-openembedded for further 'postinst-exits' and send a patch
+after lunch.
+
+Andreas
+
+
