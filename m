@@ -1,37 +1,39 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f174.google.com ([209.85.215.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UVP9U-0005TS-BJ
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UVP9V-0005Th-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Apr 2013 18:36:09 +0200
-Received: by mail-ee0-f47.google.com with SMTP id b57so1319874eek.20
+	Thu, 25 Apr 2013 18:36:10 +0200
+Received: by mail-ea0-f174.google.com with SMTP id z16so1339987ead.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Apr 2013 09:18:25 -0700 (PDT)
+	Thu, 25 Apr 2013 09:18:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=HLM4SwcT9EwLQ8BGOdMH90yiuhJ6zB+kqreT4JpAlH0=;
-	b=nKskuxbq5GIIhRkadu5kVNYkPqGl8GVIA31XDii469tHdJg8pGfxNvDLli0TPLRAK4
-	Hp1piRJ0HQpdzML+h8JNI8N0PhlXiGnGPy/fNWd8chsuQ5avACwUD9SWQO6Im06qglPA
-	fnVsqhxu8lY0+ACI0f7EzAbCFq7pVElsRprIhBuaec7jpcNE0fZD4JJ32WT4AOb9PsKm
-	gESC2Z5VJJZpfEgnHgAWQlQ1TQH+T0pqM3Hv0MP/58Mv2Wz49ThMqZNqDrqoBMK34K0m
-	WFdOFkV9Ppgkr1aMIE77L2vlo+AZRordOPDB8BsGboaNuhMzFqi9JpfkPfcof6rTf+x0
-	xyAw==
-X-Received: by 10.15.102.3 with SMTP id bq3mr77085417eeb.42.1366906704812;
-	Thu, 25 Apr 2013 09:18:24 -0700 (PDT)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=V7D9zvSdnk4Sn/BPkC6xUe7zXE4CXLZFHMm9mKJ9iT0=;
+	b=ycGaBxxQz3ySwXz47qodXXndDAymu1Pf4iFGQmcxZVvgv0kISC5ET1/VGz066SLXP1
+	bgnGNxzioJ0k9oYthB1xusVqli4eVFKubXUTfvIil7hBr+6urIQMcroTJJ+IDON2yreq
+	YGzlxvsxVrnZrgO4/r/tL17AxnEbL9QQB/wjPZxyEsbGBYhzK36me/6Jg1n76bvWWv8j
+	wBVgV2Yx+/4Xrvfvea0kG5azv/XrBHnTd2W4B0ycWI6VH6MGwr5a6GQRChXj19RjPN5i
+	am9uOFlRUE85OPUe0NNo2MzLlc+35FhKx37P7xr/vrEPiKYcfEesHAtYBO3fXeLKRWFE
+	aGqg==
+X-Received: by 10.14.182.72 with SMTP id n48mr77545216eem.3.1366906706599;
+	Thu, 25 Apr 2013 09:18:26 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
 	[95.222.160.204])
-	by mx.google.com with ESMTPSA id cd3sm11122257eeb.6.2013.04.25.09.18.22
+	by mx.google.com with ESMTPSA id cd3sm11122257eeb.6.2013.04.25.09.18.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Thu, 25 Apr 2013 09:18:23 -0700 (PDT)
+	Thu, 25 Apr 2013 09:18:25 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Apr 2013 18:16:01 +0200
-Message-Id: <1366906562-30093-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 25 Apr 2013 18:16:02 +0200
+Message-Id: <1366906562-30093-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1366906562-30093-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1366906562-30093-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe 1/2] networkmanager: update to 0.9.8.0
+Subject: [meta-oe 2/2] network-manager-applet: update to 0.9.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,484 +47,250 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Apr 2013 16:36:09 -0000
+X-List-Received-Date: Thu, 25 Apr 2013 16:36:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-run tested for eth0 / hidden WLAN on overo
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...o-run-sbin-dhclient-to-get-the-version-nu.patch |   44 +++---
- ...ger.service-remove-reference-to-NetworkMa.patch |   32 ++++
- ...se-struct-ifpppstatsreq-that-was-removed-.patch |   48 ------
- .../networkmanager/networkmanager/gtk-doc.make     |  173 --------------------
- ...anager_0.9.2.0.bb => networkmanager_0.9.8.0.bb} |   67 ++++----
- 5 files changed, 92 insertions(+), 272 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-NetworkManager.service-remove-reference-to-NetworkMa.patch
- delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch
- delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/gtk-doc.make
- rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.2.0.bb => networkmanager_0.9.8.0.bb} (54%)
+ ...ses-and-properties-which-are-not-supporte.patch |   69 ++++++++++++++++++++
+ .../files/icons/nm-signal-00.png                   |  Bin 0 -> 494 bytes
+ .../files/icons/nm-signal-100.png                  |  Bin 0 -> 413 bytes
+ .../files/icons/nm-signal-25.png                   |  Bin 0 -> 500 bytes
+ .../files/icons/nm-signal-50.png                   |  Bin 0 -> 496 bytes
+ .../files/icons/nm-signal-75.png                   |  Bin 0 -> 474 bytes
+ .../network-manager-applet_0.9.8.0.bb}             |   26 +++++--
+ 7 files changed, 87 insertions(+), 8 deletions(-)
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-00.png
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-100.png
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-25.png
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-50.png
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-75.png
+ rename meta-gnome/recipes-connectivity/{networkmanager/network-manager-applet_0.9.2.0.bb => network-manager-applet/network-manager-applet_0.9.8.0.bb} (61%)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch
-index 4356982..5c9ed92 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch
-@@ -1,32 +1,36 @@
--From 6e7ff802b689df18d7bd1d1a83639925371650cc Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Thu, 17 Nov 2011 11:17:42 +0100
--Subject: [PATCH] don't try to run /sbin/dhclient to get the version number, this break cross-compiling
-+From 7dd40db6606c3b3559365a03944cb99aee5ceabc Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 4 Apr 2013 12:57:58 +0200
-+Subject: [PATCH] don't try to run /sbin/dhclient to get the version number,
-+ this break cross-compiling
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
- 
--Upstream-Status: Unknown
-+Upstream-Status: Inappropriate [build system specific]
- 
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
-  configure.ac |    6 ------
-  1 files changed, 0 insertions(+), 6 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 5ee0cb0..b727db7 100644
-+index cc66e9b..7163287 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -497,12 +497,6 @@ case "${with_dhclient}" in
-- 	/*)
-- 		DHCLIENT_PATH="${with_dhclient}"
-- 		DHCLIENT_VERSION=4
---		if test -x "${with_dhclient}"; then
---			case `"${with_dhclient}" --version 2>&1` in
---				"isc-dhclient-4"*) DHCLIENT_VERSION=4; break;;
---				"isc-dhclient-V3"*) DHCLIENT_VERSION=3; break;;
---			esac
-+@@ -488,12 +488,6 @@ AS_IF([test -z "$with_dhcpcd"], with_dhcpcd=yes)
-+ # Search and check the executables
-+ if test "$with_dhclient" = "yes"; then
-+ 	AC_PATH_PROGS(with_dhclient, dhclient, no, /sbin:/usr/sbin:/usr/local/sbin)
-+-	if test "$with_dhclient" != "no"; then
-+-		if ! $with_dhclient --version 2>&1 | grep -q "^isc-dhclient-4\."; then
-+-			AC_MSG_WARN([Cannot use dhclient, version 4.x is required])
-+-			with_dhclient=no
- -		fi
-- 		AC_MSG_NOTICE(using dhclient at ${DHCLIENT_PATH})
-- 		;;
-- 	no)	AC_MSG_NOTICE(dhclient support disabled)
-+-	fi
-+ fi
-+ if test "$with_dhcpcd" = "yes"; then
-+ 	AC_PATH_PROGS(with_dhcpcd, dhcpcd, no, /sbin:/usr/sbin:/usr/local/sbin)
- -- 
--1.7.2.5
-+1.7.6.5
- 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-NetworkManager.service-remove-reference-to-NetworkMa.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-NetworkManager.service-remove-reference-to-NetworkMa.patch
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
 new file mode 100644
-index 0000000..bbcd021
+index 0000000..b8ba181
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-NetworkManager.service-remove-reference-to-NetworkMa.patch
-@@ -0,0 +1,32 @@
-+From 1137846f778dc9f3be0c89cb2df18d3a37f844d7 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
+@@ -0,0 +1,69 @@
++From 023b17f53d888dfb45981b141ce4dc151ab140f0 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Fri, 19 Apr 2013 18:34:09 +0200
-+Subject: [PATCH] NetworkManager.service: remove reference to
-+ NetworkManager-wait-online.service
++Date: Thu, 4 Apr 2013 20:23:00 +0200
++Subject: [PATCH] remove classes and properties which are not supported by
++ gtk+
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+* NetworkManager-wait-online.service crashes
-+* NetworkManager works fine without NetworkManager-wait-online
++unsupported classes caused nm-connection editor to crash
 +
-+Upstream-Status: Inappropriate [config]
++Upstream-Status: Inappropriate [configuration]
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ data/NetworkManager.service.in |    1 -
-+ 1 files changed, 0 insertions(+), 1 deletions(-)
++ src/connection-editor/ce-page-general.ui      |    7 +------
++ src/connection-editor/nm-connection-editor.ui |    2 +-
++ 2 files changed, 2 insertions(+), 7 deletions(-)
 +
-+diff --git a/data/NetworkManager.service.in b/data/NetworkManager.service.in
-+index 16b53b6..a2e913c 100644
-+--- a/data/NetworkManager.service.in
-++++ b/data/NetworkManager.service.in
-+@@ -18,5 +18,4 @@ KillMode=process
-+ [Install]
-+ WantedBy=multi-user.target
-+ Alias=dbus-org.freedesktop.NetworkManager.service
-+-Also=NetworkManager-wait-online.service
-+ 
++diff --git a/src/connection-editor/ce-page-general.ui b/src/connection-editor/ce-page-general.ui
++index f505c14..a3e8d2b 100644
++--- a/src/connection-editor/ce-page-general.ui
+++++ b/src/connection-editor/ce-page-general.ui
++@@ -37,8 +37,6 @@
++       <object class="GtkComboBox" id="dependent_vpn_combo">
++         <property name="visible">True</property>
++         <property name="can_focus">False</property>
++-        <property name="margin_left">26</property>
++-        <property name="margin_bottom">12</property>
++         <property name="model">dependent_vpn_model</property>
++         <child>
++           <object class="GtkCellRendererText" id="renderer1"/>
++@@ -59,7 +57,6 @@
++         <property name="visible">True</property>
++         <property name="can_focus">True</property>
++         <property name="receives_default">False</property>
++-        <property name="margin_bottom">12</property>
++         <property name="use_underline">True</property>
++         <property name="xalign">0</property>
++         <property name="draw_indicator">True</property>
++@@ -86,11 +83,9 @@
++       </packing>
++     </child>
++     <child>
++-      <object class="GtkBox" id="box2">
+++      <object class="GtkVBox" id="box2">
++         <property name="visible">True</property>
++         <property name="can_focus">False</property>
++-        <property name="valign">start</property>
++-        <property name="vexpand">True</property>
++         <property name="spacing">6</property>
++         <child>
++           <object class="GtkLabel" id="firewall_zone_label">
++diff --git a/src/connection-editor/nm-connection-editor.ui b/src/connection-editor/nm-connection-editor.ui
++index 74ee266..6f1e166 100644
++--- a/src/connection-editor/nm-connection-editor.ui
+++++ b/src/connection-editor/nm-connection-editor.ui
++@@ -11,7 +11,7 @@
++     <property name="icon_name">preferences-system-network</property>
++     <property name="type_hint">dialog</property>
++     <child internal-child="vbox">
++-      <object class="GtkBox" id="dialog-vbox2">
+++      <object class="GtkVBox" id="dialog-vbox2">
++         <property name="visible">True</property>
++         <property name="can_focus">False</property>
++         <property name="orientation">vertical</property>
 +-- 
-+1.7.4.4
++1.7.6.5
 +
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch
-deleted file mode 100644
-index e2f43f3..0000000
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From 6b64e4db2f3c9cfc0e0e240cf0bc58f3b3e90c1f Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Ji=C5=99=C3=AD=20Klime=C5=A1?= <jklimes@redhat.com>
--Date: Wed, 28 Mar 2012 16:42:24 +0200
--Subject: [PATCH 7/9] ppp: don't use struct ifpppstatsreq that was removed
-- from linux/ip_ppp.h
--
--in recent kernels.
--
--We can use ifreq and ppp_stats structures separately. They needn't have to
--to be packed in a structure.
-----
--Upstream-Status: Backport [1]
--[1] http://cgit.freedesktop.org/NetworkManager/NetworkManager/commit/?id=6b64e4db2f3c9cfc0e0e240cf0bc58f3b3e90c1f
-- src/ppp-manager/nm-ppp-manager.c |   12 +++++++-----
-- 1 file changed, 7 insertions(+), 5 deletions(-)
--
--diff --git a/src/ppp-manager/nm-ppp-manager.c b/src/ppp-manager/nm-ppp-manager.c
--index 59698c3..243d2e1 100644
----- a/src/ppp-manager/nm-ppp-manager.c
--+++ b/src/ppp-manager/nm-ppp-manager.c
--@@ -304,18 +304,20 @@ monitor_cb (gpointer user_data)
-- {
-- 	NMPPPManager *manager = NM_PPP_MANAGER (user_data);
-- 	NMPPPManagerPrivate *priv = NM_PPP_MANAGER_GET_PRIVATE (manager);
---	struct ifpppstatsreq req;
--+	struct ifreq req;
--+	struct ppp_stats stats;
-- 
-- 	memset (&req, 0, sizeof (req));
---	req.stats_ptr = (caddr_t) &req.stats;
--+	memset (&stats, 0, sizeof (stats));
--+	req.ifr_data = (caddr_t) &stats;
-- 
---	strncpy (req.ifr__name, priv->ip_iface, sizeof (req.ifr__name));
--+	strncpy (req.ifr_name, priv->ip_iface, sizeof (req.ifr_name));
-- 	if (ioctl (priv->monitor_fd, SIOCGPPPSTATS, &req) < 0) {
-- 		nm_log_warn (LOGD_PPP, "could not read ppp stats: %s", strerror (errno));
-- 	} else {
-- 		g_signal_emit (manager, signals[STATS], 0, 
---		               req.stats.p.ppp_ibytes,
---		               req.stats.p.ppp_obytes);
--+		               stats.p.ppp_ibytes,
--+		               stats.p.ppp_obytes);
-- 	}
-- 
-- 	return TRUE;
---- 
--1.7.9.4
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/gtk-doc.make b/meta-oe/recipes-connectivity/networkmanager/networkmanager/gtk-doc.make
-deleted file mode 100644
-index 354ffb7..0000000
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager/gtk-doc.make
-+++ /dev/null
-@@ -1,173 +0,0 @@
--# -*- mode: makefile -*-
--
--####################################
--# Everything below here is generic #
--####################################
--
--if GTK_DOC_USE_LIBTOOL
--GTKDOC_CC = $(LIBTOOL) --mode=compile $(CC) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
--GTKDOC_LD = $(LIBTOOL) --mode=link $(CC) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS)
--else
--GTKDOC_CC = $(CC) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
--GTKDOC_LD = $(CC) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS)
--endif
--
--# We set GPATH here; this gives us semantics for GNU make
--# which are more like other make's VPATH, when it comes to
--# whether a source that is a target of one rule is then
--# searched for in VPATH/GPATH.
--#
--GPATH = $(srcdir)
--
--TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
--
--EXTRA_DIST = 				\
--	$(content_files)		\
--	$(HTML_IMAGES)			\
--	$(DOC_MAIN_SGML_FILE)		\
--	$(DOC_MODULE)-sections.txt	\
--	$(DOC_MODULE)-overrides.txt
--
--DOC_STAMPS=scan-build.stamp tmpl-build.stamp sgml-build.stamp html-build.stamp \
--	   $(srcdir)/tmpl.stamp $(srcdir)/sgml.stamp $(srcdir)/html.stamp
--
--SCANOBJ_FILES = 		 \
--	$(DOC_MODULE).args 	 \
--	$(DOC_MODULE).hierarchy  \
--	$(DOC_MODULE).interfaces \
--	$(DOC_MODULE).prerequisites \
--	$(DOC_MODULE).signals
--
--REPORT_FILES = \
--	$(DOC_MODULE)-undocumented.txt \
--	$(DOC_MODULE)-undeclared.txt \
--	$(DOC_MODULE)-unused.txt
--
--CLEANFILES = $(SCANOBJ_FILES) $(REPORT_FILES) $(DOC_STAMPS)
--
--if ENABLE_GTK_DOC
--all-local: html-build.stamp
--else
--all-local:
--endif
--
--docs: html-build.stamp
--
--#### scan ####
--
--scan-build.stamp: $(HFILE_GLOB) $(CFILE_GLOB)
--	@echo 'gtk-doc: Scanning header files'
--	@-chmod -R u+w $(srcdir)
--	cd $(srcdir) && \
--	  gtkdoc-scan --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) --ignore-headers="$(IGNORE_HFILES)" $(SCAN_OPTIONS) $(EXTRA_HFILES)
--	if grep -l '^..*$$' $(srcdir)/$(DOC_MODULE).types > /dev/null 2>&1 ; then \
--	    CC="$(GTKDOC_CC)" LD="$(GTKDOC_LD)" CFLAGS="$(GTKDOC_CFLAGS)" LDFLAGS="$(GTKDOC_LIBS)" gtkdoc-scangobj $(SCANGOBJ_OPTIONS) --module=$(DOC_MODULE) --output-dir=$(srcdir) ; \
--	else \
--	    cd $(srcdir) ; \
--	    for i in $(SCANOBJ_FILES) ; do \
--               test -f $$i || touch $$i ; \
--	    done \
--	fi
--	touch scan-build.stamp
--
--$(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt: scan-build.stamp
--	@true
--
--#### templates ####
--
--tmpl-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt
--	@echo 'gtk-doc: Rebuilding template files'
--	@-chmod -R u+w $(srcdir)
--	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE) $(MKTMPL_OPTIONS)
--	touch tmpl-build.stamp
--
--tmpl.stamp: tmpl-build.stamp
--	@true
--
--tmpl/*.sgml:
--	@true
--
--
--#### xml ####
--
--sgml-build.stamp: tmpl.stamp $(HFILE_GLOB) $(CFILE_GLOB) $(DOC_MODULE)-sections.txt $(srcdir)/tmpl/*.sgml $(expand_content_files)
--	@echo 'gtk-doc: Building XML'
--	@-chmod -R u+w $(srcdir)
--	cd $(srcdir) && \
--	gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) --output-format=xml --expand-content-files="$(expand_content_files)" --main-sgml-file=$(DOC_MAIN_SGML_FILE) $(MKDB_OPTIONS)
--	touch sgml-build.stamp
--
--sgml.stamp: sgml-build.stamp
--	@true
--
--#### html ####
--
--html-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files)
--	@echo 'gtk-doc: Building HTML'
--	@-chmod -R u+w $(srcdir)
--	rm -rf $(srcdir)/html
--	mkdir $(srcdir)/html
--	cd $(srcdir)/html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
--	test "x$(HTML_IMAGES)" = "x" || ( cd $(srcdir) && cp $(HTML_IMAGES) html )
--	@echo 'gtk-doc: Fixing cross-references'
--	cd $(srcdir) && gtkdoc-fixxref --module-dir=html --html-dir=$(HTML_DIR) $(FIXXREF_OPTIONS)
--	touch html-build.stamp
--
--##############
--
--clean-local:
--	rm -f *~ *.bak
--	rm -rf .libs
--
--distclean-local:
--	cd $(srcdir) && \
--	  rm -rf xml $(REPORT_FILES) \
--	         $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
--
--maintainer-clean-local: clean
--	cd $(srcdir) && rm -rf xml html
--
--install-data-local:
--	-installfiles=`echo $(srcdir)/html/*`; \
--	if test "$$installfiles" = '$(srcdir)/html/*'; \
--	then echo '-- Nothing to install' ; \
--	else \
--	  $(mkinstalldirs) $(DESTDIR)$(TARGET_DIR); \
--	  for i in $$installfiles; do \
--	    echo '-- Installing '$$i ; \
--	    $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
--	  done; \
--	  echo '-- Installing $(srcdir)/html/index.sgml' ; \
--	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR) || :; \
--	  which gtkdoc-rebase >/dev/null && \
--	    gtkdoc-rebase --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) ; \
--	fi
--	
--
--uninstall-local:
--	rm -f $(DESTDIR)$(TARGET_DIR)/*
--
--#
--# Require gtk-doc when making dist
--#
--if ENABLE_GTK_DOC
--dist-check-gtkdoc:
--else
--dist-check-gtkdoc:
--	@echo "*** gtk-doc must be installed and enabled in order to make dist"
--	@false
--endif
--
--dist-hook: dist-check-gtkdoc dist-hook-local
--	mkdir $(distdir)/tmpl
--	mkdir $(distdir)/xml
--	mkdir $(distdir)/html
--	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
--	-cp $(srcdir)/xml/*.xml $(distdir)/xml
--	cp $(srcdir)/html/* $(distdir)/html
--	-cp $(srcdir)/$(DOC_MODULE).types $(distdir)/
--	-cp $(srcdir)/$(DOC_MODULE)-sections.txt $(distdir)/
--	cd $(distdir) && rm -f $(DISTCLEANFILES)
--	-gtkdoc-rebase --online --relative --html-dir=$(distdir)/html
--
--.PHONY : dist-hook-local docs
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-similarity index 54%
-rename from meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-rename to meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-index e63955d..5b53f7f 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.2.0.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-@@ -4,26 +4,28 @@ SECTION = "net/misc"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-00.png b/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-00.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..836e723a2f53624d375650a8939dcc20b6a582eb
+GIT binary patch
+literal 494
+zcmeAS@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4fY)RhkE)4%caKYZ?lYt_f1s;*b
+z3=G`DAk4@xYmNj^kiEpy*OmP)3#Txr+V|l6HlUDVW=KSdbAE1aYF-JD%fR4Vl$uzQ
+znxasiS(2d;l98(5?&%wlyJ0#|iqX&0#WBR<^xKeye$I{pbMDUEyTsq5LrtT}QK;#l
+zeW;9zMU$g|%Ks)6MaM>EM)#~!>L1+s8Q<@?F6Q-FLE_rmyKmpTJ9Cfe|F_#|wvU$^
+z*WFE8m7jV&eEL?#j57sgbra85GiwWNEC2TFeD#)n+z(v2EI1duWbN5~d-kn+OD*jz
+zTa_N<ZIIj<#>U5LX13j^XNtq~Qz2)z%Q3!G)=_dOKM=O&$H#~J+Dr{B`1txA)B>7J
+z^XE*`J+9s5&bjzvm1FAyC!N*@Un1W=YgnFp`e!54M5b$7I+=8|R32B$_^bJ6vt8lk
+zdHnI;W{o8t8p2Z#EOIC}*~Sv#CBfI;s=uV;&u>Ylr9P~x5}e0_5*Dsn^~SojW6Jif
+zg9_=(oyyNA)oI>au&Uuv;*uA4cJH$9eRqF$SC+wxADT<^1R|fkE%<lymd^4;#<JWw
+h7i<4Aul~{hMsyCpzWI&?evY7E_jL7hS?83{1OS4L#;*VX
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-100.png b/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-100.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..def2da969fda37993833a33a96df7c25f344eb90
+GIT binary patch
+literal 413
+zcmeAS@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4fY)RhkE)4%caKYZ?lYt_f1s;*b
+z3=G`DAk4@xYmNj^kiEpy*OmP)3#Txbfbfx(cYs2QnIRD+&iT2ysd*(pE(3#eQEFmI
+zYKlU6W=V!ZNJgrHyQgnJ?uO|gxxbz+jv*GO-%dFz*kmBkD(}T8mdH5GLAm76MZX;9
+zqs>(Xb1pKiac14LJ8nvfa$-oqo*BXW{_NQ!eu(M+x3^-Ycji~mu`zkP?%cA?!Jl5F
+zzuY0$|GUFB{{6gTkN7UCGxRNNEsVct&CPtEXmhwt2U|Y3x!d%N6=FaCOnMx?xV}WR
+z`>msW-J)IR7g?&zF|W%ti!0e!D|poL_~o0KCI6czEPX7>t*~rUx&d>K!uGhMHu2H!
+zJ_1@<YRU|;TQ?kbOiW`7&YZ~*JT>dyjG()dPCF(hF;-q&Ss>$_;Pv*#)3D>~3>*VO
+z!y<YXSj1nEn?L*1vfo-!*^UWzFBgjZUvZa#^LIa=(I=&eppfu%^>bP0l+XkKkVl`x
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-25.png b/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-25.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..362960b8e744e5dcf34a29e85dff27670d043900
+GIT binary patch
+literal 500
+zcmeAS@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4fY)RhkE)4%caKYZ?lYt_f1s;*b
+z3=G`DAk4@xYmNj^kiEpy*OmP)3#Tv_Yn`O8IZ#M3GbEzKIX^cyHLnE7WngeFN=+<D
+zO;IS%EXhy^$w*aj_w)_O-7p;}#Ter0;uvCa`fZ4z7mK67ns@8w-FR@o!$(iV(D1&v
+z#*9u5wxk!_JbxP&DoAvsH9b2d`GZ0Jf%lc!h8JYh^ZnmX3-x)kCVhMMs@1#LfArty
+zdl_jz>%?lQ$+a`*&Yc&+q|ll0|AE2$?`+H1*Q{B${e1P7eQXaVmaLF$xWX+FKK=RB
+znuyJNH?!|@4pk5?D`hLQnl`OnvW>@J>$#vU(dFzvBcHu92z9VB+P8P-It5OqqsN|!
+zonh)}SyJwMHmlcqR=NsX^HC?Rrq;+3Ctvlw*^K?KrhVowsVMMRrC$_r@WPqrmw)_t
+zl=(2ZxnPU+p5=lEnNM|lB}gT%@-S)_DPP>q)WPwt^7mOz<;@~)PG=TumN+gUc>KI&
+zxbhw6x=<FTRi+ZFvdlhvKPdE(*uT#t-Mm6M+|2xJNP4zRat>p=z%17^4bEFr3Mc0;
+mTVyC3oOJ8^EB1Mh?7PhU#q3uc5qB;G1-_@NpUXO@geCxTwZc9C
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-50.png b/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-50.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..1add41dcbd48a18c4637d46868b1c5b1cf3f3e35
+GIT binary patch
+literal 496
+zcmeAS@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4fY)RhkE)4%caKYZ?lYt_f1s;*b
+z3=G`DAk4@xYmNj^kiEpy*OmP)3#Txr*{dh@kAOmonIRD+&iT2ysd*(pE(3#eQEFmI
+zYKlU6W=V!ZNJgrHyQgnJ?uO|=DaHU#7sn8b({Dqp{SG?_)PD9p%PQdO)spd|mbXPI
+zP{GS@f|2+F7pFxXCo~-vI&3Luh*2plo7VJWbD07s+eL$`Z*F}4@@(%-)_;$;H(P!4
+zmwvwHz?F4p^77XiGYNDS6jp{_vu0lXwV<Np(z<eqzY+&#uWEE<IO2C;#-01ATQ)uW
+z@<t|$Ese?a%`M3rS2omN&`%7h7MM17X-0n@+tpQP&nTQ>czdG4WL~PPoy-@-OU)~q
+z9<?u1YCU$};Qhy^Th&^fveQ;-M(lVQ%Uu!GGbf}ra@iubm4+f4-<rtvrdO|)Zh5%i
+z{}aKE(|fWq7*=bvNKV`~;ZfqRm}eK6lV*hT_$sbiDzb=6h%rCu&ASg9R-9vuc-DRE
+zu~Wdb7DeOfX?0vOHcD6A%FA1R+Wc%c-J5x6Ph@hre*?49CmYr<!7H4nW|c11-?nJ4
+kZ04HZ^Zp(P{^S0U?~!Npu0{X$^nwE3)78&qol`;+02w#XW&i*H
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-75.png b/meta-gnome/recipes-connectivity/network-manager-applet/files/icons/nm-signal-75.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6b509e804f87099546e29af21d4901d2cd33961e
+GIT binary patch
+literal 474
+zcmeAS@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4fY)RhkE)4%caKYZ?lYt_f1s;*b
+z3=G`DAk4@xYmNj^kiEpy*OmP)3n!nErvHMqJU}7E%#er@=ltB<)VvZPmw~~#C^fMp
+zHASI3vm`?yBqLS9-P1Q9cf)j`6r+`=i(`nz>9-+<en$)hWZvHj|J<Q1xM<;d_jS%w
+z_B=TCn?Y6RZY?thYk=ZG=6A9Mo^N8MgpTtCz0*^WT6XHzr<Ag?oCoszd5u5T%)IJ)
+zI&-<!?w$Lzco<CCo{LYv`zs~sb()2prSv-gjK3lWW^d&?!sDPWn7s9#$lLElhV7+%
+zE^KPj*B!&|*za{=vSt>3pL=vcDMNs8=bYjMr2}tPTIAcZ7r*|<czAbpo$q0JCw)<|
+zBU8@jImCR6ey3okc{O8Eg?fMZ>$4ZH^ByWPtQTOtV*XKHso@L9ji$~8Y3$m0r;o4j
+zV=@VemEFUXC@mVzeV9ioSVw6>z;P>veJdx|zJL9MNATc_6RezzI3iy!e5KiT==yCF
+zNtefR-5yRd3o>STtceTUTc0xV@x}Db^SctQf@-$M|2Yu+$NdKjt4HyK2JyNmP!M~%
+L`njxgN@xNAAqunS
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gnome/recipes-connectivity/networkmanager/network-manager-applet_0.9.2.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
+similarity index 61%
+rename from meta-gnome/recipes-connectivity/networkmanager/network-manager-applet_0.9.2.0.bb
+rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
+index 85ea5c8..7dca91c 100644
+--- a/meta-gnome/recipes-connectivity/networkmanager/network-manager-applet_0.9.2.0.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
+@@ -4,14 +4,21 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
--PR = "r11"
--
- DEPENDS = "libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring libgnome-keyring iso-codes"
  
- inherit gnome gettext systemd
+-inherit gnome
++inherit gnome gtk-icon-cache
  
--SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
-+SRC_URI = " \
-+    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
--    file://0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch \
--    file://gtk-doc.make \
-+    file://0002-NetworkManager.service-remove-reference-to-NetworkMa.patch \
- "
--SRC_URI[md5sum] = "bc0b00b8a187762d93c50a9706b4c5c3"
--SRC_URI[sha256sum] = "a178ed2f0b5a1045ec47b217ea531d0feba9208f6bcfe64b701174a5c1479816"
-+SRC_URI[md5sum] = "38d28f6bd9220d85dfff47210706195c"
-+SRC_URI[sha256sum] = "c366bcded6354d8186ad93c05d26d6a20bc550aa0391f974704e7a60e9f6096b"
+-SRC_URI[archive.md5sum] = "feaf2c8427d23924dde7de52ff4c5078"
+-SRC_URI[archive.sha256sum] = "287301692224cc1bb20abe8bc52140461f565e58898a99daef11a188bb29b362"
++GNOME_COMPRESS_TYPE = "xz"
++
++SRC_URI += " \
++    file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
++    file://images/* \
++"
++SRC_URI[archive.md5sum] = "531ce56c51ec86c5d2dc4cbe58649583"
++SRC_URI[archive.sha256sum] = "1afb6e736870ba95132bf0d211c46849e02a820ba3902a059a616be888053590"
  
- 
- S = "${WORKDIR}/NetworkManager-${PV}"
- 
- EXTRA_OECONF = " \
--    --with-distro=debian \
-+    --enable-ifupdown \
-+    --disable-ifcfg-rh \
-+    --disable-ifnet \
-+    --disable-ifcfg-suse \
-+    --with-netconfig \
-     --with-crypto=gnutls \
-     --disable-more-warnings \
-     --with-dhclient=${base_sbindir}/dhclient \
-@@ -33,17 +35,12 @@ EXTRA_OECONF = " \
- 
- EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
- 
--do_configure_prepend() {
--    cp ${WORKDIR}/gtk-doc.make ${S}/
--    echo "EXTRA_DIST = version.xml" > gnome-doc-utils.make
--    sed -i -e 's:man \\:man:' -e s:docs::g ${S}/Makefile.am
--    sed -i -e /^docs/d ${S}/configure.ac
--}
--
- # Work around dbus permission problems since we lack a proper at_console
- do_install_prepend() {
--    sed -i -e s:deny:allow:g ${S}/src/NetworkManager.conf
--    sed -i -e s:deny:allow:g ${S}/callouts/nm-dispatcher.conf
-+    sed -i 's:deny send_destination:allow send_destination:g' ${S}/src/org.freedesktop.NetworkManager.conf
-+    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-dispatcher.conf
-+    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-dhcp-client.conf
-+    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-avahi-autoipd.conf
- }
- 
- do_install_append () {
-@@ -52,18 +49,16 @@ do_install_append () {
-     install -d ${D}/usr/bin
-     install -m 0755 ${S}/test/.libs/libnm* ${D}/usr/bin
- 
--    install -d ${D}/etc/NetworkManager/
--
-     # Install an empty VPN folder as nm-connection-editor will happily segfault without it :o.
-     # With or without VPN support built in ;).
-     install -d ${D}/etc/NetworkManager/VPN
- }
- 
--PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
-+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
- 
- FILES_libnmutil += "${libdir}/libnm-util.so.*"
--FILES_libnmglib += "${libdir}/libnm_glib.so.*"
--FILES_libnmglib-vpn += "${libdir}/libnm_glib_vpn.so.*"
-+FILES_libnmglib += "${libdir}/libnm-glib.so.*"
-+FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
- 
- FILES_${PN} += " \
-     ${libexecdir} \
-@@ -77,19 +72,29 @@ FILES_${PN} += " \
- 
- RRECOMMENDS_${PN} += "iptables"
- RCONFLICTS_${PN} = "connman"
--RDEPENDS_${PN} = "wpa-supplicant dhcp-client \
-+RDEPENDS_${PN} = " \
-+    wpa-supplicant \
-+    dhcp-client \
-     ${@base_contains('COMBINED_FEATURES', '3gmodem', 'ppp', '', d)} \
+ # GTK2.x mode
+-EXTRA_OECONF += "--with-gtkver=2 \
+-                 --with-bluetooth=yes \
++EXTRA_OECONF += " \
++    --with-gtkver=2 \
++    --with-bluetooth=yes \
  "
  
--FILES_${PN}-dbg += "${libdir}/NetworkManager/.debug/ \
--                    ${libdir}/pppd/*/.debug/ "
-+FILES_${PN}-dbg += " \
-+    ${libdir}/NetworkManager/.debug/ \
-+    ${libdir}/pppd/*/.debug/ \
-+"
+ do_configure_append() {
+@@ -22,13 +29,16 @@ do_configure_append() {
+     done
+ }
+ 
++do_install_append() {
++    install -m 0644 ${WORKDIR}/icons/* ${D}/usr/share/icons/hicolor/22x22/apps/
++}
 +
-+FILES_${PN}-dev += " \
-+    ${datadir}/NetworkManager/gdb-cmd \
-+    ${libdir}/pppd/*/*.la \
-+    ${libdir}/NetworkManager/*.la \
-+"
+ RDEPENDS_${PN} =+ "networkmanager"
+ RRECOMMENDS_${PN} =+ "gnome-bluetooth gnome-keyring"
  
--FILES_${PN}-dev += "${datadir}/NetworkManager/gdb-cmd \
--                    ${libdir}/pppd/*/*.la \
--                    ${libdir}/NetworkManager/*.la"
-+FILES_${PN}-tests = " \
-+    ${bindir}/nm-tool \
-+    ${bindir}/libnm-glib-test \
-+    ${bindir}/nm-online \
-+"
+-FILES_${PN} += "${datadir}/nm-applet/ \
++FILES_${PN} += " \
++    ${datadir}/nm-applet/ \
+     ${datadir}/libnm-gtk/wifi.ui \
+-    ${datadir}/gnome-vpn-properties/ \
+-    ${datadir}/gnome/autostart/ \
+ "
  
--FILES_${PN}-tests = "${bindir}/nm-tool \
--                     ${bindir}/libnm_glib_test \
--                     ${bindir}/nm-online"
-+FILES_${PN}-bash-completion = "${datadir}/bash-completion"
- 
- SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
+ FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
 -- 
 1.7.6.5
 
