@@ -1,36 +1,34 @@
-Received: from mail-wi0-f171.google.com ([209.85.212.171])
+Received: from mail-pd0-f172.google.com ([209.85.192.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UV4E9-0005Yg-KY
+	(envelope-from <raj.khem@gmail.com>) id 1UVGri-0007wD-7X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Apr 2013 20:15:39 +0200
-Received: by mail-wi0-f171.google.com with SMTP id l13so7665012wie.16
+	Thu, 25 Apr 2013 09:45:16 +0200
+Received: by mail-pd0-f172.google.com with SMTP id 4so1640933pdd.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Apr 2013 10:57:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer
-	:x-gm-message-state;
-	bh=BXWXgTgLbpevr3+otYsiqHt/ml0ILgp9CyRnTd034Qc=;
-	b=bzTtQdSKteZxYKUHizbDqeXuuKogpB9GZToyHiAxJNvpXofhUjJnOikvRItxEEnZNN
-	QiSSxBy8+pksyX+kIJZkgUoU1Xw6DLjdMeBLiTNC98GpFTTEMcRifr51s+P957BOAP3m
-	uwXHYmDcDn+zVkBqU/ny9WSMp/WLH0Jughu6U944n2vhp1wpZfIbKHOtz2HBKHjFvfdv
-	cJepQrK7vZnwAMAEymX3FJsi7PYaxDtLGctIXMmVPSskyk7/OZ5MVXFEdAb7hjHlsxWM
-	Gmpk2m47UJ4YwK7VfpPuh0CgZH9trWr2uiQMpdBhNtlwPjgkQpIN5GVje0E5EKa/1ukz
-	5GFQ==
-X-Received: by 10.194.240.132 with SMTP id wa4mr16299551wjc.52.1366826269938; 
-	Wed, 24 Apr 2013 10:57:49 -0700 (PDT)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPSA id nf9sm16251175wic.3.2013.04.24.10.57.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Apr 2013 10:57:49 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
+	Thu, 25 Apr 2013 00:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=tAqeBdN/rMuAqfczNjBp1NPLKW0mB3UEkORnCXYTmw0=;
+	b=rzGcmpdxplYx04CAUq5GcmiwB3SfzE76KcYHqZscC1Zcm8uB23gec1vQSiLD4rJ7Cq
+	4GyyJkkC6KJCq7YfAAN/K1kEHOwxVUyhgQbBaYfFz8OoEbqtxnfXo2bS3RtxsShlBbM2
+	sPyxe89tTPNao5HUCHu2mb+OnmwGySAWqxlncS+0pjq03XNSE5HFRTbzFS5RyeMNVTDv
+	WE334HafKIiibpimLAbNCuuXKiler/ChJ9SQFOagIzrI+l6hnN7BrP6iyFAOhbH3/UFo
+	K+q9ClHpib0YhFfCybY0lm4s5+T2I2m57PXIShqKNTdb48z8KNY4Wf0n8tUqOJPmfm4t
+	oJ+w==
+X-Received: by 10.66.235.3 with SMTP id ui3mr27681188pac.200.1366874850389;
+	Thu, 25 Apr 2013 00:27:30 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id g8sm7048229pae.7.2013.04.25.00.27.28
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 25 Apr 2013 00:27:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Apr 2013 18:54:55 +0100
-Message-Id: <1366826095-26594-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-X-Gm-Message-State: ALoCoQm2N+7tQ3X4bBw3aWztE3knkwM9oQi1xHcGNbVfow+d2/noWA4Ytd99f0dUdXX0rF7fh+I3
-Subject: [PATCH][V2][meta-gnome] libgnome-keyring: add (from oe-core)
+Date: Thu, 25 Apr 2013 00:26:19 -0700
+Message-Id: <1366874779-31059-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-networking][PATCH] nuttcp_7.2.1.bb: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,65 +42,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 18:15:53 -0000
+X-List-Received-Date: Thu, 25 Apr 2013 07:45:16 -0000
 
-This was in oe-core previously but it's not actually used by anything:
-webkit-gtk claimed a false dependency and the new libsoup has removed all use of
-gnome-keyring.
+nuttcp is a network perf measurement tool
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gnome-keyring/libgnome-keyring_2.32.0.bb        |   19 +++++++++++++++++++
- .../libgnome/libgnome-keyring_2.32.0.bb             |   12 ------------
- 2 files changed, 19 insertions(+), 12 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
- delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnome-keyring_2.32.0.bb
+ .../recipes-support/nuttcp/nuttcp_7.2.1.bb         |   31 ++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb b/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
 new file mode 100644
-index 0000000..8ed44f3
+index 0000000..225ba1f
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Compatibility library for accessing secrets"
-+HOMEPAGE = "http://www.gnome.org/"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
++++ b/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
+@@ -0,0 +1,31 @@
++# Copyright (C) 2013 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf \
-+                    file://library/gnome-keyring.h;endline=25;md5=68ea64f81c160d670c37da5f137be4fb \
-+                    file://library/gnome-keyring.c;endline=26;md5=8d7a4fb674aaa012ea5a98e7c368b4a5 \
-+                    file://egg/egg-dh.h;endline=22;md5=1626c16af2a8da1f88324cf3ced33f08"
++SUMMARY = "network performance measurement tool"
++DESCRIPTION = "nuttcp is a network performance measurement tool intended for use by network \
++and system managers. Its most basic usage is to determine the raw TCP (or UDP) \
++network layer throughput by transferring memory buffers from a source system \
++across an interconnecting network to a destination system, either transferring \
++data for a specified time interval, or alternatively transferring a specified \
++number of bytes."
++HOMEPAGE = "http://www.nuttcp.net/nuttcp/Welcome%20Page.html"
++LICENSE = "GPL-2.0"
++SECTION = "net"
++DEPENDS = ""
++PR = "r0"
++LIC_FILES_CHKSUM = "file://nuttcp-${PV}.c;beginline=4;endline=30;md5=ae7045c3c3616092e07d87f04ba0d960"
 +
-+SECTION = "x11/gnome/libs"
-+PR = "r3"
++SRC_URI = "http://lcp.nrl.navy.mil/nuttcp/beta/nuttcp-${PV}.c"
++SRC_URI[md5sum] = "1ebf4a08bad2a295a8155f02995e8754"
++SRC_URI[sha256sum] = "c6e33810ccce67260f8d5d627f60e429d44f532365c58ed5673d035e2a59c4db"
 +
-+inherit gnome gtk-doc
++S = "${WORKDIR}"
 +
-+DEPENDS = "dbus libgcrypt glib-2.0 intltool-native"
++do_compile () {
++	${CC} ${CFLAGS} -o nuttcp nuttcp-${PV}.c
++}
 +
-+SRC_URI[archive.md5sum] = "c42b2ca66204835d901d3dbfc1fa5ae6"
-+SRC_URI[archive.sha256sum] = "56388c0d81ddfdb57d30e4963c83ecc1c18498aab99395420e0fff69929a0f0c"
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnome-keyring_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnome-keyring_2.32.0.bb
-deleted file mode 100644
-index d71c782..0000000
---- a/meta-gnome/recipes-gnome/libgnome/libgnome-keyring_2.32.0.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--DESCRIPTION = "Gnome keyring library"
--LICENSE = "LGPLv2 & GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
--                    file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf"
--
--SECTION = "x11/gnome"
--
--inherit gnome lib_package perlnative
--
--SRC_URI[archive.md5sum] = "c42b2ca66204835d901d3dbfc1fa5ae6"
--SRC_URI[archive.sha256sum] = "56388c0d81ddfdb57d30e4963c83ecc1c18498aab99395420e0fff69929a0f0c"
--
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 nuttcp ${D}${bindir}
++}
 -- 
-1.7.10.4
+1.7.9.5
 
 
 
