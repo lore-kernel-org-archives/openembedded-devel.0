@@ -1,33 +1,34 @@
-Received: from mail-wi0-f179.google.com ([209.85.212.179])
+Received: from plane.gmane.org ([80.91.229.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UVqTE-00036J-6K
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Apr 2013 23:46:20 +0200
-Received: by mail-wi0-f179.google.com with SMTP id l13so1088424wie.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UVqfz-0003yx-Jt for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Apr 2013 23:59:37 +0200
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1UVqOk-00013n-Re for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Apr 2013 23:41:42 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Apr 2013 23:41:42 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2013 14:28:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=Gv1LKqCOC11EWPYaPVJaVQqo3LGD7IHonVfTXU/9Tjs=;
-	b=QIXlCle54qO6jxmwKLil1YRfEikFO00Js0YOxsvlgSG2H4GDpkgHspco+302Grl/zj
-	yt80co28qyV9bkpqJqYslXMNEHPkZodVYoC38JYFvs8yOuwuMjkj6Bg0tpwCaRie2BqY
-	Q2ryWG5boKJay680asv0g7Wlcyu4aZDxf2a/Stqd4CEjWwYZIKCej+MSEpPxR3Ulrxrf
-	oogTamkKQo9yxFgUTS1v9SVYYAm8+cM22YkG6AdQB7oCOeo9pP/g6F5h4QPRrPaNnL5d
-	GV2JR8xqbynAx34/25+/map/9RvSYIWhEwyhayxreMATtWFQlWjyCuzwdtU4FpC59Ma2
-	QkOw==
-MIME-Version: 1.0
-X-Received: by 10.180.12.235 with SMTP id b11mr6493588wic.13.1367011714945;
-	Fri, 26 Apr 2013 14:28:34 -0700 (PDT)
-Received: by 10.194.19.42 with HTTP; Fri, 26 Apr 2013 14:28:34 -0700 (PDT)
-In-Reply-To: <517AF0C7.2060201@pseudoterminal.org>
-References: <517AF0C7.2060201@pseudoterminal.org>
-Date: Fri, 26 Apr 2013 23:28:34 +0200
-Message-ID: <CA+chaQesXc0tvUwMhr88KSZHixUW7FRFXpL67=RPx8RuGE0tkA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Question about multiple recipe versions for the same package
+	Fri, 26 Apr 2013 23:41:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 26 Apr 2013 23:41:38 +0200
+Message-ID: <klesac$abk$1@ger.gmane.org>
+References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130328 Thunderbird/17.0.5
+In-Reply-To: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
+X-Enigmail-Version: 1.5.1
+Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 21:46:23 -0000
+X-List-Received-Date: Fri, 26 Apr 2013 21:59:46 -0000
+X-List-Received-Date: Fri, 26 Apr 2013 21:59:46 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Put DEFAULT_PREFERENCE = "-1" in foo_git.bb to prefer foo_1.0 even when git
-recipe has higher PV.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Use PREFERRED_VERSION_foo = "1.0+git%" to select foo_git.bb.
+Op 26-04-13 22:39, Nicolas Dechesne schreef:
+> Import smartmontools recipe from OE classic, and updated to upstream
+> v5.40.
+> 
+> Also added cosmetic changes in the recipe: INC_PR support and homepage.
+> 
+> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org> --- 
+> meta-oe/recipes-support/smartmontools/smartmontools.inc     | 10
+> ++++++++++ meta-oe/recipes-support/smartmontools/smartmontools_5.40.bb |
+> 5 +++++ 2 files changed, 15 insertions(+) create mode 100644
+> meta-oe/recipes-support/smartmontools/smartmontools.inc create mode
+> 100644 meta-oe/recipes-support/smartmontools/smartmontools_5.40.bb
+> 
+> diff --git a/meta-oe/recipes-support/smartmontools/smartmontools.inc
+> b/meta-oe/recipes-support/smartmontools/smartmontools.inc new file mode
+> 100644 index 0000000..6f23055 --- /dev/null +++
+> b/meta-oe/recipes-support/smartmontools/smartmontools.inc @@ -0,0 +1,10
+> @@ +SECTION = "console/utils" +DESCRIPTION = "Control and monitor storage
+> systems using S.M.A.R.T." +HOMEPAGE =
+> "http://smartmontools.sourceforge.net/" +LICENSE = "GPLv2" 
+> +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +INC_PR = "r1"
+
+Drop that
+
+> + +SRC_URI =
+> "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz" + 
+> +inherit autotools diff --git
+> a/meta-oe/recipes-support/smartmontools/smartmontools_5.40.bb
+> b/meta-oe/recipes-support/smartmontools/smartmontools_5.40.bb new file
+> mode 100644 index 0000000..93dc4db --- /dev/null +++
+> b/meta-oe/recipes-support/smartmontools/smartmontools_5.40.bb @@ -0,0
+> +1,5 @@ +require smartmontools.inc +PR = "${INC_PR}.1"
+
+And drop that.
+
+And do you really need a .inc?
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFRevSRMkyGM64RGpERArE1AJ0XBvO7c35yipb1VMI1/GCwgOzCkQCeJQF1
+z4Yu+V8MtCJnn0DZKNyIywk=
+=Jq0r
+-----END PGP SIGNATURE-----
 
 
-On Fri, Apr 26, 2013 at 11:25 PM, Carlos Rafael Giani <dv@pseudoterminal.org
-> wrote:
-
-> Hello,
->
-> if I have a package foo, I wrote a recipe for foo release 1.0 , and
-> another for building directly from its git repository
-> (in other terms, there are two .bb files, foo_1.0.bb and foo_git.bb ),
-> which one is preferred? I would like for the 1.0 one to be used by default.
->
-> And if 1.0 is preferred, how can I explicitely select the git version? Is
-> adding this line to local.conf:
->   PREFERRED_VERSION_foo = "git"
->
-> correct? It would be nice if "git" were enough, instead of something like
-> "1.0+gitr${SRCREV}" .
->
-> cheers
->
-> ______________________________**_________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.**openembedded.org<Openembedded-devel@lists.openembedded.org>
-> http://lists.linuxtogo.org/**cgi-bin/mailman/listinfo/**openembedded-devel<http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->
 
