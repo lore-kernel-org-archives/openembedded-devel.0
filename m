@@ -1,45 +1,37 @@
-Received: from ch1ehsobe003.messaging.microsoft.com ([216.32.181.183]
-	helo=ch1outboundpool.messaging.microsoft.com)
+Received: from mail-da0-f51.google.com ([209.85.210.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <B40290@freescale.com>) id 1UVZvj-0004Xa-OZ
+	(envelope-from <raj.khem@gmail.com>) id 1UVcSc-00017T-2Y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Apr 2013 06:06:40 +0200
-Received: from mail116-ch1-R.bigfish.com (10.43.68.246) by
-	CH1EHSOBE017.bigfish.com (10.43.70.67) with Microsoft SMTP Server id
-	14.1.225.23; Fri, 26 Apr 2013 03:18:44 +0000
-Received: from mail116-ch1 (localhost [127.0.0.1])	by
-	mail116-ch1-R.bigfish.com (Postfix) with ESMTP id 10B4B4203A5	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2013 03:18:44 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h1fc6h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ahzz8275bhz2dh2a8h668h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1155h)
-Received: from mail116-ch1 (localhost.localdomain [127.0.0.1]) by mail116-ch1
-	(MessageSwitch) id 1366946322195373_21324;
-	Fri, 26 Apr 2013 03:18:42 +0000 (UTC)
-Received: from CH1EHSMHS018.bigfish.com (snatpool3.int.messaging.microsoft.com
-	[10.43.68.225])	by mail116-ch1.bigfish.com (Postfix) with ESMTP id
-	2DC992A006E	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2013 03:18:42 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS018.bigfish.com
-	(10.43.70.18) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Fri, 26 Apr 2013 03:18:42 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Fri, 26 Apr 2013 03:18:41 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r3Q3Ic0O025146;	Thu, 25 Apr 2013 20:18:39 -0700
-From: Chunrong Guo <B40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Apr 2013 11:18:35 +0800
-Message-ID: <1366946315-19589-1-git-send-email-B40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: Chunrong Guo <B40290@freescale.com>, B19537@freescale.com
-Subject: [OE-core][PATCH] connman: tist of connman do not support powerpc64
+	Fri, 26 Apr 2013 08:48:47 +0200
+Received: by mail-da0-f51.google.com with SMTP id g27so755119dan.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Apr 2013 23:31:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:content-type:content-transfer-encoding:subject
+	:message-id:date:to:mime-version:x-mailer;
+	bh=nx9EabEuCnOHbm0BRultLpBR67iMHocJVfa0DFB4asY=;
+	b=k32Zlg16jZ1YRPyPB2U4xnfESC1CDATQBdyANSxFhfyb9ivPdYKr8/pVxMnPdwEv2q
+	FAndQ4RurXRLacHkNt6XrxHRyhhAwZkF4yOOV47uFeC2wqBdVECZ/lap6kX8L9HSnqPI
+	3I9Uzmw/q5v43RuICHVKFCs46ddzRFjpE2hhBeLq4uAPxNhMxn31y0hE9WLYguVWPDi4
+	wj1cZ41ofwj3QKUTXBmb31fRNDCKU5DiG6ZoebIoyVAN9ExDN4I3DU5lpf4dvSz4lXUt
+	w3szfi1/Dp10DnQZQqvux6oYkCxbe5x7C/EDiHrYPUZwOZo0QLvG6nSpsRWa6BSOrMUW
+	t70Q==
+X-Received: by 10.68.96.100 with SMTP id dr4mr56738799pbb.172.1366957860176;
+	Thu, 25 Apr 2013 23:31:00 -0700 (PDT)
+Received: from sa-nc-common-173.static.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id t1sm11391276pab.12.2013.04.25.23.30.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 25 Apr 2013 23:30:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Message-Id: <3C51EB5B-47CD-49AF-B489-991DEF365DBC@gmail.com>
+Date: Thu, 25 Apr 2013 23:31:00 -0700
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+X-Mailer: Apple Mail (2.1503)
+Subject: dylan branch for meta-openembedded created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,40 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 04:06:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 26 Apr 2013 06:48:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-    connman build for powerpc 64bit boards were producing errors like this:
-    | make[1]: *** [plugins/plugins_tist_la-tist.lo] Error 1
-    | make[1]: *** Waiting for unfinished jobs....
-    | make: *** [all] Error 2
-    | ERROR: oe_runmake failed
+Hi
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta/recipes-connectivity/connman/connman.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+dylan branch for meta-openembedded has been created and Eric has =
+graciously agreed to maintain it. Please add dylan to subject prefix
+when sending patches for this branch
 
-diff --git a/meta/recipes-connectivity/connman/connman.inc b/meta/recipes-connectivity/connman/connman.inc
-index 589ece8..5389f3a 100644
---- a/meta/recipes-connectivity/connman/connman.inc
-+++ b/meta/recipes-connectivity/connman/connman.inc
-@@ -20,10 +20,11 @@ DEPENDS  = "dbus glib-2.0 ppp iptables gnutls \
-             ${@base_contains('DISTRO_FEATURES', '3g','ofono', '', d)} \
-             "
- 
--INC_PR = "r19"
-+INC_PR = "r20"
- 
- TIST = "--enable-tist"
- TIST_powerpc = ""
-+TIST_powerpc64 = ""
- 
- EXTRA_OECONF += "\
-     ac_cv_path_WPASUPPLICANT=${sbindir}/wpa_supplicant \
--- 
-1.7.5.4
-
+Thanks
+-Khem
 
 
 
