@@ -1,38 +1,25 @@
-Received: from mail-pa0-f45.google.com ([209.85.220.45])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UVd8c-0007AS-D3
+	(envelope-from <eric@eukrea.com>) id 1UVdRV-00017a-Qz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Apr 2013 09:32:10 +0200
-Received: by mail-pa0-f45.google.com with SMTP id lf10so2346189pab.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2013 00:14:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=LzCpgBMmOFCQOza3n3moYVkXaJslCsCfTd3yO+zvJAM=;
-	b=PmPI0EG7Mj1RmNAeBucPD0ylTAklDFCE2PtWUl0VLvB2gC2GDxQsDRtEweRUFdCbvl
-	h4+XiOxoQ+EkJaTIW6eBTWBkSRsuKgxUPdfGuc59dVfuNnmnBNVK8y+oaf7CJk75tcHr
-	vJ1yqNBuNAVqPfVyREvcDeyISjvVwbdiaElZRZIkcFWDYg6eEiYGo666SZSpzE4Vwvu/
-	L4ATIB9Tj1LkAB5TL9O+oPlB5+p4Tkh0HKLv5J7hJgQxBV/Wty6sW957Yc2codPn9jk2
-	fZv/XanfVCY3JvP6o4ddDMiW/kihPA4S42NkE1cMKETHIKp96zJAOuuJWwOIjA6+TumU
-	6iQw==
-X-Received: by 10.66.138.72 with SMTP id qo8mr29118513pab.172.1366960465349;
-	Fri, 26 Apr 2013 00:14:25 -0700 (PDT)
-Received: from sa-nc-common-173.static.jnpr.net (natint3.juniper.net.
-	[66.129.224.36]) by mx.google.com with ESMTPSA id
-	wl5sm11527974pac.18.2013.04.26.00.14.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 26 Apr 2013 00:14:24 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <51706174.6070407@linaro.org>
-Date: Fri, 26 Apr 2013 00:14:25 -0700
-Message-Id: <27CEFBA8-7262-4449-B611-5E75B7F444AA@gmail.com>
-References: <51706174.6070407@linaro.org>
+	Fri, 26 Apr 2013 09:51:42 +0200
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 10BD04B0168;
+	Fri, 26 Apr 2013 09:33:53 +0200 (CEST)
+Date: Fri, 26 Apr 2013 09:33:51 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1503)
-Subject: Re: openldap and icu
+Message-ID: <20130426093351.284c99a9@e6520eb>
+In-Reply-To: <CALbNGRQATxyDT1_bPrHDiJGs3TOX9pYQigDvQfyJ+Eu89iT9-Q@mail.gmail.com>
+References: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
+	<20130422221415.1e88893e@e6520eb> <20130422212342.GB3217@jama>
+	<CAP9ODKoQWWz6WwJhUnh9cKs++Y02tUCVC6YpTcrV6w5ectaFSA@mail.gmail.com>
+	<CALbNGRQATxyDT1_bPrHDiJGs3TOX9pYQigDvQfyJ+Eu89iT9-Q@mail.gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: Meta-OpenEmbedded - Dylan maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 07:32:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 26 Apr 2013 07:51:42 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+Hi Andreas,
 
-On Apr 18, 2013, at 2:11 PM, Marcin Juszkiewicz =
-<marcin.juszkiewicz@linaro.org> wrote:
-
-> dnl International Components for Unicode
-> OL_ICU
-> if test "$ol_icu" =3D no ; then
-> 	AC_MSG_WARN([ICU not available])
-> else
-> 	ICU_LIBS=3D"$ol_icu"
-> fi
-> -----
+Le Mon, 22 Apr 2013 23:50:04 +0200,
+Andreas M=C3=BCller <schnitzeltony@googlemail.com> a =C3=A9crit :
+> Could we wait until images created by dylan do boot properly for all of u=
+s?
 >=20
-> Now the question is: will we kill ICU dependency or will we add it =
-into
-> build dependencies?
+may you please give more details (or mail archive links) concerning
+the problems you have ?
 
-force ice dependency using DEPENDS=
+Thanks
+Eric
 
 
