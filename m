@@ -1,35 +1,33 @@
-Received: from mail-pd0-f169.google.com ([209.85.192.169])
+Received: from mail-pa0-f43.google.com ([209.85.220.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UVj6f-0001f5-Jr
+	(envelope-from <ross.burton@intel.com>) id 1UVjoy-0006XQ-FI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Apr 2013 15:54:48 +0200
-Received: by mail-pd0-f169.google.com with SMTP id 10so2475111pdc.28
+	Fri, 26 Apr 2013 16:40:36 +0200
+Received: by mail-pa0-f43.google.com with SMTP id hz1so2557436pad.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Apr 2013 06:36:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=9S98bkyYsYGe2WwLhIqpaB7Walwmk39xDuP+ARIZtyU=;
-	b=zYFt4id+xSnOUfVpE6d7hbOizBLdrYROVNA3ISWHPNM0LkIQgfTM16YKQGoIe3eGiX
-	aeRa7RqvMoIB9c25yCLZBbjVPfaQMumjiM8/O43g4P/IeOeTU8sYw0LCaz25WZznQ6C7
-	FpJu2doHOa/Nu3hgRbooyKrb9cNS5ZFuIqJ7vvMQUPD2h7GOO+L6d/v3eCeungAhVDQ1
-	LP6cpXnf4/Ekq4M9hf/pJ7CVvlBRwD5s2nDpDvYWd4A5fGBbNQird//YalDSoc60oThE
-	has0Ds62g8Er+vKSIfpixEm/3KpcrgLAQ8hN6QbZeSk4jNiMLjS8eA9+pjAWH0QsslA0
-	q+LQ==
-X-Received: by 10.68.138.7 with SMTP id qm7mr60501764pbb.169.1366983408176;
-	Fri, 26 Apr 2013 06:36:48 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	be7sm12789793pad.20.2013.04.26.06.36.45 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 26 Apr 2013 06:36:47 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Apr 2013 15:36:24 +0200
-Message-Id: <1366983384-31049-4-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-In-Reply-To: <1366983384-31049-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1366983384-31049-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] meta-ruby: Fix subject-prefix
+	Fri, 26 Apr 2013 07:22:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=fQz2WL35sW57q3AuOucLrakp5AKDA7PA+hlsexmtHYc=;
+	b=Kqhq6qUwkL9TJ2AOo/O516GEqb1/pN2edpmJ8g7LwKC9EqHjTj2xKRrnN7SFGcXCDm
+	RThfNvFmjt6/y+KSdIaAJgFPSHy3ev0fNLIbWHr13BqXXRYkVYqJJPllBTT9TFGkCosZ
+	3OxIeAhKFS7rn3nkny5V5bwAyOYeiRaEgn61UBemT7/BVXa9ygwFxjoAL5RGMyXLu2xA
+	xkXyS/Cily6yNtxj1xwKCC3uIQ+V7d4CiFin6MaMyknmbldYRPzK0NhyLkh6p5eZFgxW
+	n63a8YZUiz8N9CiA+rQ7gmolfGB+UgpMx1M6eMntrcf0wvgcor4ZbsdQo00zTKNrkUvD
+	ELGw==
+X-Received: by 10.67.3.35 with SMTP id bt3mr31077262pad.157.1366986154880;
+	Fri, 26 Apr 2013 07:22:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.66.254.102 with HTTP; Fri, 26 Apr 2013 07:22:14 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 26 Apr 2013 15:22:14 +0100
+Message-ID: <CAJTo0LZ1F6YBrNiQx9-Jy5wR35_Oc1WV5UOQAS4kHLBHwy=yeQ@mail.gmail.com>
+To: yocto@yoctoproject.org, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+X-Gm-Message-State: ALoCoQnYJk65cX1cINVPYtoLukFic/05Xce6UAOxdSL+nURJYHV+dCZLOY26tOWaU0cFKAIkl3nV
+Subject: Matchbox Panel usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 13:54:58 -0000
+X-List-Received-Date: Fri, 26 Apr 2013 14:40:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
----
- meta-ruby/README | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi,
 
-diff --git a/meta-ruby/README b/meta-ruby/README
-index cf2f405..7d8875e 100644
---- a/meta-ruby/README
-+++ b/meta-ruby/README
-@@ -8,9 +8,9 @@ URI: git://git.openembedded.org/meta-openembedded
- branch: master
- revision: HEAD
- 
--Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
-+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby]' in the subject'
- 
- When sending single patches, please using something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][PATCH'
- 
- Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
--- 
-1.8.2.1
+I'm currently porting the Matchbox Panel to GTK+ 3 and thinking about
+cleaning up the options and panel size handling.  The current code is
+rather complex and could do with some sanity.  My idea was to reduce
+the options down to:
 
+1) put the panel in the titlebar (assuming Matchbox WM and a suitable
+theme), as Sato does
+2) put the panel on a specified screen border, with a specified
+"height", and either a specified width or expand to fill that border
+
+I'm putting "width" and "height" in quotes as for a panel on the left
+or right edge, "height" would be the physical width.  Maybe those
+should be renamed "depth" and "length" to avoid confusion.
+
+So, anyone is using the Matchbox panel, please speak up with your
+usage.  As far a I know everyone either puts it in the MBWM titlebar
+or full width along the top/bottom, but I want to be sure!
+
+Cheers,
+Ross
 
 
