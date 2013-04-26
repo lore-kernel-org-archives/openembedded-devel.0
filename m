@@ -1,24 +1,33 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-vc0-f178.google.com ([209.85.220.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1UVdRp-00015N-Up
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UVdhp-0003Ym-SO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Apr 2013 09:52:10 +0200
-Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 8B1BA4B0162;
-	Fri, 26 Apr 2013 09:33:35 +0200 (CEST)
-Date: Fri, 26 Apr 2013 09:33:33 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Fri, 26 Apr 2013 10:08:34 +0200
+Received: by mail-vc0-f178.google.com with SMTP id ib11so3558578vcb.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Apr 2013 00:50:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=rU0Iki4qeyA8/GQiOCp4VBNI24cBOi/xVlxJPV2UQOw=;
+	b=Yzto7VYIcV4hGkH2mOd7/Tgnpz174gUUGgBGXZL4t284xZtFKlbbgTg+9MaRjCsHz1
+	sDf6hIeTC8wINq0PZ2dvbOyl33aB10KN3N6Ijy8FxfQDCtluoo3BEx5i0msh6SMdwpVN
+	aCktOkbMBZPlUklw3e5U7FmESq2cjz//Z6XSZx0szzCddiTJIwDPPcK2YSnndQ8pvnSx
+	DjvPiMoJjWt98ojlwXNw3uPRXpVSi6QkDC3s2QU0nKYg5jyvtDO1VOheS/3LFTzMPq2T
+	G58B+u3Ov3W9iW+GDKCBqiR/qdp8pMUKV3UzwTNinxoYNuiI534j33uAu5bbzOfxN3rL
+	6BZQ==
+MIME-Version: 1.0
+X-Received: by 10.52.170.204 with SMTP id ao12mr23785952vdc.83.1366962648928; 
+	Fri, 26 Apr 2013 00:50:48 -0700 (PDT)
+Received: by 10.52.183.36 with HTTP; Fri, 26 Apr 2013 00:50:48 -0700 (PDT)
+In-Reply-To: <1366816884-32023-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1366816884-32023-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 26 Apr 2013 09:50:48 +0200
+Message-ID: <CALbNGRSGhfmbBwUo-y4nTvHjnn_FoMjNH=ps83sTKbZUkyucaw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130426093333.2c7063fc@e6520eb>
-In-Reply-To: <20130422212342.GB3217@jama>
-References: <CAP9ODKrT9eS6pYhUnW1JgqJL3b9cevdYAiH-WLTLBhSuQuEy3Q@mail.gmail.com>
-	<20130422221415.1e88893e@e6520eb> <20130422212342.GB3217@jama>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: martin.jansa@gmail.com, Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: Meta-OpenEmbedded - Dylan maintenance
+Subject: Re: [PATCH] lxdm: fix postinst-code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 07:52:10 -0000
+X-List-Received-Date: Fri, 26 Apr 2013 08:08:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Martin,
+On Wed, Apr 24, 2013 at 5:21 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> Exiting postinst code leaves systemd.bbclass offline postinst code unexec=
+uted,
+> causes postinst not to finish at first boot (lxdm.service is not aliased =
+to
+> display-manager.service -> started much too early) and is not neccesary:
+> language preparation can be done offline.
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+This unbreaks 1st boot postinst issue - so I would like to see it also
+in dylan (of course also in master :).
 
-Le Mon, 22 Apr 2013 23:23:42 +0200,
-Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
-> Feel free to create dylan branch when you see fit.
->=20
-> I don't plan to merge any master-only change soon if I don't have to or
-> overlook it (jenkins is still testing against master).
->=20
-> When someone is sending patch which shouldn't go to dylan, please
-> indicate it in subject (something like [master-only] should do).
+BTW: I am looking into postinst issue for gdm (and other recipes) -
+will send out a patch as soon as I have test results.
 
-dylan and dylan-next branch now exist with an updated README :
-http://cgit.openembedded.org/meta-openembedded/commit/?h=3Ddylan&id=3D8a350=
-e3b4d3431f68d440f9d6ec079fdd1366617
-
-so you can merge patches into master if you want.
-
-Eric
+Andreas
 
 
