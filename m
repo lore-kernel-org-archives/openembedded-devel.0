@@ -1,37 +1,39 @@
-Received: from mail-ee0-f53.google.com ([74.125.83.53])
+Received: from mail-pa0-f44.google.com ([209.85.220.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UWAE0-0004YR-AM
+	(envelope-from <martin.jansa@gmail.com>) id 1UWB71-0001Kd-P1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Apr 2013 20:52:01 +0200
-Received: by mail-ee0-f53.google.com with SMTP id d17so2076327eek.12
+	Sat, 27 Apr 2013 21:48:52 +0200
+Received: by mail-pa0-f44.google.com with SMTP id bi5so3047689pad.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Apr 2013 11:34:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=3qD/Ky5yX+lRYY1VsF5lakKKYbGuZC7FB4Sj/Ym7nfI=;
-	b=tiUBF1FNkb6q6BnUZjXUmCmBZ77Rw57yvs4m1W2pScncWsD78nGHTLy1xAZJLl0Zu1
-	dBQvsCkeJwwg5IFUmerzQQ+fKe+P8iJ2N0svbwsGtrsS9p4qRQ38QqjSrUZ19Th8sxMg
-	L6xLTGyYB21HoCa9jFpVc4TQIiWohcQZuxWBQ4VOvqelmnTVgdBqy2AxjBBSV/qoGt0Y
-	LHJUvep1Pcy25cSCNu5E9tlah/GESI8PrrgCbtzFZbZGuErSz9PMNq/DRdTiMN6YjgXV
-	9ocmi910S3RaUunSUKqQGe/jI9Ldj/4E4LEUR+mRaDV31FUKtHxj+gJDg+nCcm8jHYyt
-	ZS1w==
-X-Received: by 10.15.35.71 with SMTP id f47mr46808039eev.15.1367087649887;
-	Sat, 27 Apr 2013 11:34:09 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A212D.dip0.t-ipconnect.de.
-	[91.10.33.45])
-	by mx.google.com with ESMTPSA id f9sm23175879eeu.11.2013.04.27.11.34.08
+	Sat, 27 Apr 2013 12:31:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=amROFPJwSm0y3taHdwOBDo8qm8t1Gtj/8ts81c1Pm/M=;
+	b=lai7xKrnMlOhy05x5Ht/+zEzLqF4voPwrCUu8922dSKOSQxCfFJc0+LKloQt1upudb
+	qq0N+SG7DOH/SHLmm67zEMYoP19cx0cx0CNYkVUZSE96NyHfoy0eWSEX0517rZliDd0Q
+	63zVjV30+oigqLApxTH7M9atYUfNqCg9uV6m3OTwWtpUcw5BjXEL3eMC4+vHaoINtvxz
+	6VSXf9sGE1UCfwgzH5xMPL6fbopo2Rg+rejoSSDpElj/o7lwAM564zQQSLqlZADuh0Pe
+	njtEJjTLZ3fRhyGBuZ8GaDgyFz+h2p5nLcYVtz/lWzzKF4wQ4BHQXUcj2KmoptP4wwr9
+	pkGw==
+X-Received: by 10.67.10.228 with SMTP id ed4mr53094594pad.41.1367091060449;
+	Sat, 27 Apr 2013 12:31:00 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	dr6sm18339182pac.11.2013.04.27.12.30.57
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sat, 27 Apr 2013 11:34:09 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sat, 27 Apr 2013 12:30:59 -0700 (PDT)
+Date: Sat, 27 Apr 2013 21:31:11 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Apr 2013 20:33:56 +0200
-Message-Id: <1367087640-4264-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
+Message-ID: <20130427193111.GF3199@jama>
+References: <1367087640-4264-1-git-send-email-schnitzeltony@googlemail.com>
+	<1367087640-4264-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-gnome/meta-xfce 0/4] gdm/xfce-enhancements
+In-Reply-To: <1367087640-4264-2-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-gnome/meta-xfce 1/4] gdm: fix postinst-code to unbreak first boot issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,51 +47,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2013 18:52:04 -0000
-X-List-Received-Date: Sat, 27 Apr 2013 18:52:04 -0000
-X-List-Received-Date: Sat, 27 Apr 2013 18:52:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 27 Apr 2013 19:48:58 -0000
+X-Groupsio-MsgNum: 44467
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4VrXvz3cwkc87Wze"
+Content-Disposition: inline
 
-The following changes since commit 2a5dea2399e2be5e5d964eda7465dcaf4c2e152b:
+--4VrXvz3cwkc87Wze
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  ttf-arphic-uming: remove whitespace from license (2013-04-22 19:00:56 +0200)
+On Sat, Apr 27, 2013 at 08:33:57PM +0200, Andreas M=FCller wrote:
+> Exiting postinst code leaves systemd.bbclass offline postinst code unexec=
+uted,
+> causes postinst not to finish at first boot (gdm.service is not aliased to
+> display-manager.service -> started much too early) and is not neccesary:
+> language preparation can be done offline.
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb |   31 ++++++++++------------=
+-----
+>  1 files changed, 12 insertions(+), 19 deletions(-)
+>=20
+> diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/reci=
+pes-gnome/gdm/gdm_2.32.2.bb
+> index 1e55dd9..87efc28 100644
+> --- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+> +++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+> @@ -4,9 +4,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba3=
+6caa9b7df079bae19f"
+> =20
+>  DEPENDS =3D "xinput gnome-panel tcp-wrappers libcanberra libxklavier gre=
+p consolekit libpam gnome-doc-utils gtk+ xrdb"
+> =20
+> -PR =3D "r15"
+> +PR =3D "r16"
+> =20
+> -inherit gnome update-rc.d systemd
+> +inherit gnome update-rc.d systemd useradd
+> =20
+>  SRC_URI +=3D " \
+>              file://cross-xdetection.diff \
+> @@ -33,8 +33,8 @@ do_configure_prepend() {
+>  }
+> =20
+>  do_install_prepend() {
+> -    mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
+> -    cp ${WORKDIR}/%gconf-tree.xml ${D}/var/lib/gdm/.gconf.mandatory/
+> +    install -d ${D}/${localstatedir}/lib/gdm/.gconf.mandatory
+> +    install ${WORKDIR}/%gconf-tree.xml ${D}/${localstatedir}/lib/gdm/.gc=
+onf.mandatory/
+>  }
+> =20
+>  do_install_append() {
+> @@ -54,6 +54,9 @@ do_install_append() {
+>      sed -e 's,%sbindir%,${sbindir},g' \
+>          < ${WORKDIR}/gdm.service.in \
+>          > ${D}${systemd_unitdir}/system/gdm.service
+> +
+> +    chown -R gdm:gdm ${D}${localstatedir}/lib/gdm
+> +    chmod 0750 ${D}${localstatedir}/lib/gdm
+>  }
+> =20
+>  FILES_${PN} +=3D "${datadir}/icon* \
+> @@ -72,23 +75,13 @@ SYSTEMD_SERVICE_${PN} =3D "gdm.service"
+>  INITSCRIPT_NAME =3D "gdm"
+>  INITSCRIPT_PARAMS =3D "start 99 5 2 . stop 20 0 1 6 ."
+> =20
+> -pkg_postinst_${PN} () {
+> -    # can't do this offline
+> -    if [ "x$D" !=3D "x" ]; then
+> -        exit 1
+> -    fi
+> -    grep "^gdm:" /etc/group > /dev/null || addgroup gdm
+> -    grep "^gdm:" /etc/passwd > /dev/null || adduser --disabled-password =
+--system --home /var/lib/gdm gdm --ingroup gdm -g gdm
+> -
+> -if [ -d /var/lib/gdm ]; then
+> -    chown -R gdm:gdm /var/lib/gdm
+> -    chmod 0750 /var/lib/gdm
+> -fi
+> +USERADD_PACKAGES =3D "${PN}"
+> +USERADD_PARAM_${PN} =3D "--system --no-create-home --home ${localstatedi=
+r}/lib/gdm --user-group gdm"
+> =20
+> +pkg_postinst_${PN} () {
+>  # Register up as default dm
+> -mkdir -p ${sysconfdir}/X11/
+> -echo "${bindir}/gdm" > ${sysconfdir}/X11/default-display-manager
+> -
+> +mkdir -p $D${sysconfdir}/X11/
+> +echo "${bindir}/gdm" > $D${sysconfdir}/X11/default-display-manager
 
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git gnome-xfce-fixes
+Maybe we should use u-a for default-display-manager like we use x-window-ma=
+nager for WMs.
 
-Andreas Müller (4):
-      gdm: fix postinst-code to unbreak first boot issues
-      gdm: avoid displaying system users in greeter's list
-      gdm: cosmetics
-      xfce4-session: remove unconditional consolekit RDEPENDS and use PACKAGECONFIG
+but git grep display-manager shows only
+meta-oe/recipes-graphics/nonworking/slim/slim_1.3.2.bb
+doing the same as gdm
 
- .../recipes-gnome/gdm/gdm-2.32.2/gdm-nodocs.patch  |   12 ----
- .../gdm/{gdm-2.32.2 => gdm}/%gconf-tree.xml        |    0
- .../0001-Remove-user-switch-applet.patch           |    0
- ...nager.c-avoid-displaying-system-users-in-.patch |   34 +++++++++++
- .../recipes-gnome/gdm/{gdm-2.32.2 => gdm}/Default  |    0
- .../gdm/{gdm-2.32.2 => gdm}/cross-xdetection.diff  |    0
- .../recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm      |    0
- .../recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm-pam  |    0
- .../recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm.conf |    0
- .../{gdm-2.32.2 => gdm}/sysrooted-pkg-config.patch |    0
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |   60 +++++++++----------
- .../xfce4-session/xfce4-session_4.10.0.bb          |    9 ++-
- 12 files changed, 68 insertions(+), 47 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gdm/gdm-2.32.2/gdm-nodocs.patch
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/%gconf-tree.xml (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/0001-Remove-user-switch-applet.patch (100%)
- create mode 100644 meta-gnome/recipes-gnome/gdm/gdm/0002-gdm-user-manager.c-avoid-displaying-system-users-in-.patch
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/Default (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/cross-xdetection.diff (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm-pam (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/gdm.conf (100%)
- rename meta-gnome/recipes-gnome/gdm/{gdm-2.32.2 => gdm}/sysrooted-pkg-config.patch (100%)
-[
--- 
-1.7.4.4
+>  }
+> =20
+>  pkg_postrm_${PN} () {
+> --=20
+> 1.7.4.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--4VrXvz3cwkc87Wze
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
+
+iEYEARECAAYFAlF8J38ACgkQN1Ujt2V2gBxgmACfddCxPQL1dfXMDa4ghBzqEA6q
+9ocAoIPFCRN5IzVfbrFwVMjAseIb+v/x
+=Kqbv
+-----END PGP SIGNATURE-----
+
+--4VrXvz3cwkc87Wze--
