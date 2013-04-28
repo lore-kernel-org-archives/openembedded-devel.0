@@ -1,34 +1,34 @@
-Received: from plane.gmane.org ([80.91.229.3])
+Received: from mail-ee0-f54.google.com ([74.125.83.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UWRca-0004DS-Fe for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Apr 2013 15:26:30 +0200
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1UWRLN-0000DU-Gz for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Apr 2013 15:08:41 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Apr 2013 15:08:41 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <andrea.adami@gmail.com>) id 1UWZOt-0002u9-E2
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Apr 2013 23:44:54 +0200
+Received: by mail-ee0-f54.google.com with SMTP id e49so1292938eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Apr 2013 15:08:41 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 28 Apr 2013 14:27:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=JLI2vqFOoDyugJUGk+FewP3UJTIknlHH/WDDJU2qv8M=;
+	b=FiO0vX41wclJrXK1trr2j8brBEbmUp16LZt/D4jKU/EwrWq9fk/6LmWoesUTFK4jyd
+	3YhA5zn//BpypRne+CMpS9bImpmecEZyjfruwjvXNpihqXBeDak7ZN0Xyuh0Yz5Yziwq
+	5Wdyyk/dO2x3RY9l57uP2Jo28vjs/h9zCm7y26f0IGu4UcvyAh4UDD3N9ArxPYjEVdkx
+	bQ2zeUxIhBQgt9TDOV292C/991E95LP1wzERuixrjIdCU+ejDWPhTVMTUQkmXpPNw2Ka
+	eGL9+dZFDIyPpwhbJCNR/21CHLy84U3Ac+kSAZdj8SpaET6+JGS/Tje5DVp1IWAGToi3
+	2f4Q==
+X-Received: by 10.14.0.5 with SMTP id 5mr115270481eea.13.1367184423248;
+	Sun, 28 Apr 2013 14:27:03 -0700 (PDT)
+Received: from mizar.localdomain
+	(host80-250-dynamic.0-87-r.retail.telecomitalia.it. [87.0.250.80])
+	by mx.google.com with ESMTPSA id
+	r10sm11473291eez.10.2013.04.28.14.27.01 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 28 Apr 2013 14:27:02 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 28 Apr 2013 15:08:35 +0200
-Message-ID: <klj70d$8h2$1@ger.gmane.org>
-References: <1367153521-12641-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130328 Thunderbird/17.0.5
-In-Reply-To: <1367153521-12641-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.5.1
-Subject: Re: [meta-efl][PATCH] e-wm-0.17.2.1: Update checksums, tarball was repackaged upstream :/
+Date: Sun, 28 Apr 2013 23:26:42 +0200
+Message-Id: <1367184404-4572-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-initramfs][PATCH 1/3] kexec-tools-klibc_2.0.2: mask recipe for x86 and x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Apr 2013 13:26:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 28 Apr 2013 21:45:05 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* current recipe is failing because as of today klibc lacks vfscanf()
+* and basename(). This latter is trivial to solve.
+* Commit 3bf0213789d56054f601c5a06372f78567aacdd9 of kexec-tools
+* introduced the issue in kexec/arch/i386/x86-linux-setup.c
 
-Op 28-04-13 14:52, Martin Jansa schreef:
-> Files enlightenment-0.17.2.1/ChangeLog and
-> enlightenment-0.17.2.1-new/ChangeLog differ Files
-> enlightenment-0.17.2.1/NEWS and enlightenment-0.17.2.1-new/NEWS differ 
-> Files enlightenment-0.17.2.1/po/ca.gmo and
-> enlightenment-0.17.2.1-new/po/ca.gmo differ Files
-> enlightenment-0.17.2.1/po/ca.po and enlightenment-0.17.2.1-new/po/ca.po
-> differ Files enlightenment-0.17.2.1/po/eo.gmo and
-> enlightenment-0.17.2.1-new/po/eo.gmo differ Files
-> enlightenment-0.17.2.1/po/eo.po and enlightenment-0.17.2.1-new/po/eo.po
-> differ
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFRfR9TMkyGM64RGpERAqxHAJ926vBoDeGC3TFolytrKumwtGczugCgk4Ry
-BVh+w4SwXLxHCxHhEln1tiQ=
-=WcLx
------END PGP SIGNATURE-----
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+index 90b876c..d5a2ecc 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+@@ -7,6 +7,11 @@ inherit klibc
+ 
+ FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
+ 
++# current version is known to fail on x86 and x86-64
++# due to missing vfscanf() in klibc
++COMPATIBLE_MACHINE_x86 = "(-)"
++COMPATIBLE_MACHINE_x86-64 = "(-)"
++
+ SRC_URI += "file://elf.patch \
+             file://errno.patch \
+             file://string.patch \
+-- 
+1.8.1.5
 
 
 
