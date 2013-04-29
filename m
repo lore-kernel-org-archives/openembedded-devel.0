@@ -1,36 +1,39 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-pa0-f51.google.com ([209.85.220.51])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UWsiL-0007eW-2g
+	(envelope-from <martin.jansa@gmail.com>) id 1UWtLh-0002sT-NA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Apr 2013 20:22:15 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r3TI4Nen026248
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 29 Apr 2013 21:03:00 +0200
+Received: by mail-pa0-f51.google.com with SMTP id lj1so1111438pab.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2013 11:04:23 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 29 Apr 2013 11:04:23 -0700
-Received: from yow-jmacdona-l1 (unknown [172.25.44.2])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id BA5827FE2	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Apr 2013 14:02:54 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 0C31E43CE6; Mon,
-	29 Apr 2013 14:04:20 -0400 (EDT)
-Date: Mon, 29 Apr 2013 14:04:20 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130429180420.GD3884@windriver.com>
+	Mon, 29 Apr 2013 11:45:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=AkBdC4zrz/nRiVgoB2pQqXPzdb64aWmNDR3fz6py6i8=;
+	b=ULSODwafZXguOG27YzAzM+0QS/F7xta43AxNOSTVPHl0iogLHtUbIJN0W9EnrxYnVJ
+	hFkyckHdq+JSoG0UuGNZ2ptASe5MuLTiyRs+Ip3egNCjw+bPuRq3SYe5CkBJTk9+s5en
+	WSg6eTQaObCLfR/fq1HsuagMWr4+E2TudEwU1yinqs9QcEer/qbgvU+TQvqugp36BGoU
+	lx9w+/klWaAP2TLp49AuhYVwLdf56LAVK9HTTWnObS91aVO2yQrk8HtW64USOk9NSxGo
+	xmDWSQHvtt8x0Yh8WV/thE3zXGTzwLhmclPZbVmoP6zv0pYqz16UOxc/31IyzzxXnJRc
+	J6Rg==
+X-Received: by 10.66.138.109 with SMTP id qp13mr43561636pab.127.1367261103398; 
+	Mon, 29 Apr 2013 11:45:03 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	iy2sm25061121pbb.31.2013.04.29.11.45.00
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 29 Apr 2013 11:45:02 -0700 (PDT)
+Date: Mon, 29 Apr 2013 20:45:16 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130429184516.GM3199@jama>
 References: <cover.1366109533.git.paul.eggleton@linux.intel.com>
 	<1561352.OujRcMfYWi@helios>
 	<5C3F1A93-CC39-45E6-AF2B-FF29F50C67CD@dominion.thruhere.net>
 	<2803066.5t2BvEp21p@helios> <20130429180113.GC3884@windriver.com>
 MIME-Version: 1.0
 In-Reply-To: <20130429180113.GC3884@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [meta-networking, meta-oe][PATCH 0/9] Move networking recipes to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -46,20 +49,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2013 18:23:21 -0000
-X-Groupsio-MsgNum: 44501
+X-List-Received-Date: Mon, 29 Apr 2013 19:03:11 -0000
+X-Groupsio-MsgNum: 44502
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uxuisgdDHaNETlh8"
+	protocol="application/pgp-signature"; boundary="KSyhVCl2eeZHT0Rn"
 Content-Disposition: inline
 
---uxuisgdDHaNETlh8
+--KSyhVCl2eeZHT0Rn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking, meta-oe][PATCH 0/9] Move networking recipes to =
-meta-networking] On 13.04.29 (Mon 14:01) Joe MacDonald wrote:
-
+On Mon, Apr 29, 2013 at 02:01:14PM -0400, Joe MacDonald wrote:
 > [Re: [oe] [meta-networking, meta-oe][PATCH 0/9] Move networking recipes t=
 o meta-networking] On 13.04.16 (Tue 14:22) Paul Eggleton wrote:
 >=20
@@ -107,50 +108,37 @@ n the=20
 > I'm way behind on my meta-networking stuff but finally getting caught up
 > and I was wondering if we had run this one to ground.  Martin's already
 > merged in most of the other moves and I'm also fine with relocating iw,
+
+I hope you don't mind I did merge them. I never merge changes which are
+only for layers with dedicated maintainer, but with this move
+overlapping both layers I took them as nice cleanup.
+
 > but I can see the argument in favour of keeping it in meta-oe.  For now
 > I'm also planning on merging a couple that didn't get picked up already:
 >=20
 >    f501ecadb6 strongswan: move to meta-networking
 >    cdf2bf5654 vsftpd: move from meta-oe to meta-networking and tweak
-
-Scratch the vsftpd one, it already appears to be merged as well.  I'm
-not sure why I didn't see that on my initial scan.
-
--J.
-
 >=20
 > I'll also pick up the iw one if there's a consensus that moving it is
 > the right thing (or not a terrible thing) to do.
->=20
-> I think that addresses the full list of relocations from this thread.
->=20
-> -J.
->=20
-> > For now, I did check and at the moment according to "bitbake-layers sho=
-w-
-> > cross-depends" (thank you Robert) we have only vlc depending on fluidsy=
-nth=20
-> > which is in meta-multimedia, but vlc ought to be moved to meta-multimed=
-ia=20
-> > itself anyway.
-> >=20
-> > Cheers,
-> > Paul
-> >=20
---=20
--Joe MacDonald.
-:wq
 
---uxuisgdDHaNETlh8
+I think the consensus is that iw needs to stay where it is unless stuff
+which references it is also moved or changed (that's why I haven't
+merged this one).
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--KSyhVCl2eeZHT0Rn
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2.0.19 (GNU/Linux)
 
-iEYEARECAAYFAlF+tiQACgkQPN8S4W6ZZneW2gCZAZugN6D4M4av7sKnaOJBRLmP
-DGwAn0rXTTyE+pWbiTggk/WTfhh+gu/3
-=3M8B
+iEYEARECAAYFAlF+v7wACgkQN1Ujt2V2gBydPQCcCk/RfkqPKbrgWmADdZ+6NIx6
+PawAoJT9JZO7y77NYbAJofQ/hokvzyU/
+=N5yl
 -----END PGP SIGNATURE-----
 
---uxuisgdDHaNETlh8--
+--KSyhVCl2eeZHT0Rn--
