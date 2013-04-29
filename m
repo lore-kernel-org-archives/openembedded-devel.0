@@ -1,34 +1,37 @@
-Received: from mail-ea0-f173.google.com ([209.85.215.173])
+Received: from mail-ob0-f177.google.com ([209.85.214.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <andrea.adami@gmail.com>) id 1UWZzR-00068u-Rq
+	(envelope-from <nicolas.dechesne@linaro.org>) id 1UWi3F-0002ie-Cl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Apr 2013 00:22:38 +0200
-Received: by mail-ea0-f173.google.com with SMTP id m14so2286195eaj.4
+	Mon, 29 Apr 2013 08:59:06 +0200
+Received: by mail-ob0-f177.google.com with SMTP id ef5so5075495obb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Apr 2013 15:04:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Np0JBE8eMQVbNw696k1PM/9jP+zBzVEaUdRnYiKjcUk=;
-	b=bY4XlPPCtk3hm6k1ZaCte1sHjyrMmgRlWBxv1lGebc6SZcH/RzC76crHQGhcIW3fJm
-	50lAxjSNc7y3OfzgzGiCBtxERnDsiQrJ+OhrZEp8d0sOi7QxsZehreGHBw8eArNlFCHD
-	QTlgudcKqav1iONZ+ddYhfaTT+VOpKcJGK2B/+GO95pssbZBDaHp0x3/WfAMZJVH+Ezt
-	2VXdMxV6UlCD74VQZNwutGLcRRHg/m39GkPy6SJKqibfyI5mDPPNJheuv36YxBchqY2i
-	mlpxfZacflaopZZmKh49tCC5X5N3s5H/sI73vQiFRa9t/HMa/onHkU5te9p7Hta9yuuJ
-	jeQA==
-X-Received: by 10.15.24.68 with SMTP id i44mr27642072eeu.19.1367186689858;
-	Sun, 28 Apr 2013 15:04:49 -0700 (PDT)
-Received: from mizar.localdomain
-	(host80-250-dynamic.0-87-r.retail.telecomitalia.it. [87.0.250.80])
-	by mx.google.com with ESMTPSA id j43sm29416765eep.4.2013.04.28.15.04.48
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 28 Apr 2013 15:04:49 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sun, 28 Apr 2013 23:41:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=o+W9yGLFbYePmZpILB6p2EGKMIPOgX2KADuXgSUUMY8=;
+	b=IR0sGjem3CVU3R+ckLeOhdrdm9lf3HCDC9/vr94vTghHKzfuj7ooL1/3b/uiuWVjmg
+	3KmdzC4fvBIuByzhpcaf1rXbbnwO0rWsmTNRf0EBD5K+Sg09q+PIukyaEbFYM4levuzb
+	MdRJe7AZsUKVT/2KCQLpmpRXwau7wd9o+Ku1PfGixM5Mr1heD7/D9+R4ANbPFSpZZZ7E
+	r0+FA09ya4hKDwTe1yEXitnQBz/46+J3F7dPTymgX5Rs7IYPGDGc1MS0CEoII8eiaMEw
+	ZPde9PsmAH0AsuiX2FiiapQqbLnji5ohjW76yfyG95UNRAwVCU0jbDXsiO8M6VcMPHuH
+	lOng==
+X-Received: by 10.60.60.10 with SMTP id d10mr22954179oer.6.1367217675718; Sun,
+	28 Apr 2013 23:41:15 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.76.35.193 with HTTP; Sun, 28 Apr 2013 23:40:55 -0700 (PDT)
+In-Reply-To: <1756231.MGNYtfpC2x@helios>
+References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
+	<68356141.McDxtR3Bre@helios> <517BA9C6.6090707@balister.org>
+	<1756231.MGNYtfpC2x@helios>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Mon, 29 Apr 2013 08:40:55 +0200
+Message-ID: <CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Apr 2013 00:04:43 +0200
-Message-Id: <1367186683-5805-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] kexecboot(-klibc): remove runtime dependency on kexec(-klibc)
+X-Gm-Message-State: ALoCoQlaxrOymwufd3CWP+0052btQQcASKP4mA2OlQ3qYo2L8zRhxY4neAQQHHCdcRIGYKdG0ssp
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Apr 2013 22:22:44 -0000
+X-List-Received-Date: Mon, 29 Apr 2013 06:59:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* the binary itself can run without kexec (in host-debug mode) so
-* specify in the cpio IMAGE which packages are needed at runtime
+On Sat, Apr 27, 2013 at 1:13 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+>> > On Friday 26 April 2013 23:41:38 Koen Kooi wrote:
+>> >> And do you really need a .inc?
+>> >
+>> > Are we removing inc files if they were present in OE Classic? First I've
+>> > heard if we are...
+>>
+>> If we are trying to reduce the number of versions of recipes we carry,
+>> dropping .inc files would seem to be a good idea. I don't have strong
+>> feelings, but it seems like something we should consider.
+>
+> I agree we should try to keep only one version of each recipe in software
+> layers, however I figure it makes it easier for people to carry their own
+> versions of recipes in distro layers (particularly older, which may be
+> required in certain circumstances) if we do keep inc files where they already
+> exist.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb | 1 -
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb       | 1 -
- 2 files changed, 2 deletions(-)
+I put the .inc in this patch, indeed because it was there in OE
+Classic. I can update the patch if there is a consensus to remove the
+.inc.
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-index f9aee7c..a158eb4 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-@@ -1,4 +1,3 @@
--RDEPENDS_${PN} = "kexec-klibc"
- PV = "0.5.9"
- PR = "r10+gitr${SRCREV}"
- 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index fe1ef36..d664261 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -1,4 +1,3 @@
--RDEPENDS_${PN} = "kexec"
- PV = "0.5.9"
- PR = "r10+gitr${SRCREV}"
- 
--- 
-1.8.1.5
+also for the INC_PR, I added it, because I thought it makes sense for
+.bb with .inc to have that. again, i can update the patch if you
+recommend doing this way.
 
+thx
 
 
