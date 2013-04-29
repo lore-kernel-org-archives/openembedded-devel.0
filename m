@@ -1,26 +1,24 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <laurentiu.palcu@intel.com>) id 1UWiEh-0004Bk-Cv
+	(envelope-from <eric@eukrea.com>) id 1UWiQu-0005Qe-J1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Apr 2013 09:10:57 +0200
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by azsmga101.ch.intel.com with ESMTP; 28 Apr 2013 23:52:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,571,1363158000"; d="scan'208";a="325820543"
-Received: from lpalcu-linux.rb.intel.com (HELO [10.237.105.165])
-	([10.237.105.165])
-	by fmsmga001.fm.intel.com with ESMTP; 28 Apr 2013 23:51:59 -0700
-Message-ID: <517E188E.6080309@intel.com>
-Date: Mon, 29 Apr 2013 09:51:58 +0300
-From: Laurentiu Palcu <laurentiu.palcu@intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Mon, 29 Apr 2013 09:23:39 +0200
+Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
+	(Authenticated sender: eukrea)
+	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 1CB4A4B0191;
+	Mon, 29 Apr 2013 09:05:38 +0200 (CEST)
+Date: Mon, 29 Apr 2013 09:05:36 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: laurentiu.palcu@intel.com
+Message-ID: <20130429090536.10741da5@e6520eb>
+In-Reply-To: <517E188E.6080309@intel.com>
 References: <1364293926-32661-1-git-send-email-laurentiu.palcu@intel.com>
 	<1364296289-23374-1-git-send-email-laurentiu.palcu@intel.com>
-In-Reply-To: <1364296289-23374-1-git-send-email-laurentiu.palcu@intel.com>
-Cc: otavio@ossystems.com.br
+	<517E188E.6080309@intel.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
 Subject: Re: [meta-browser][PATCH v2] nss: change shebang line for smime script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,47 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2013 07:11:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Apr 2013 07:23:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Ping!
+Hi Laurentiu,
 
-On 03/26/2013 01:11 PM, Laurentiu Palcu wrote:
-> This patch fixes the shebang line of the smime script and also adds a
-> 'perl' RDEPENDS for the main package since smime needs perl to run.
-> 
-> Also, this patch fixes some do_rootfs failures when using RPM backend
-> because RPM automatically scans the files and, if perl scripts are
-> found, adds dependency on the file found in the shebang line (i.e.
-> /usr/local/bin/perl).
-> 
-> Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
-> ---
-> Changes in v2:
->  * moved the RDEPENDS line at the end to conform with the style guide;
-> 
-> Thanks,
-> Laurentiu
-> 
->  recipes-support/nss/nss_3.13.3.bb |    3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/recipes-support/nss/nss_3.13.3.bb b/recipes-support/nss/nss_3.13.3.bb
-> index 59c16e8..fbab6ee 100644
-> --- a/recipes-support/nss/nss_3.13.3.bb
-> +++ b/recipes-support/nss/nss_3.13.3.bb
-> @@ -105,7 +105,10 @@ do_install() {
->  	sed -i s:OELIBDIR:${libdir}:g ${D}${libdir}/pkgconfig/nss.pc
->  	sed -i s:OEINCDIR:${includedir}:g ${D}${libdir}/pkgconfig/nss.pc
->  	sed -i s:OEEXECPREFIX:${exec_prefix}:g ${D}${libdir}/pkgconfig/nss.pc
-> +
-> +	sed -i s:/usr/local/bin/perl:${bindir}/perl:g ${D}${bindir}/smime
->  }
->  
->  FILES_SOLIBSDEV := ""
->  FILES_${PN} += "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*${SOLIBSDEV}"
-> +RDEPENDS_${PN} += "perl"
-> 
+Le Mon, 29 Apr 2013 09:51:58 +0300,
+Laurentiu Palcu <laurentiu.palcu@intel.com> a =C3=A9crit :
+
+> Ping!
+>=20
+> On 03/26/2013 01:11 PM, Laurentiu Palcu wrote:
+> > This patch fixes the shebang line of the smime script and also adds a
+> > 'perl' RDEPENDS for the main package since smime needs perl to run.
+> >=20
+> > Also, this patch fixes some do_rootfs failures when using RPM backend
+> > because RPM automatically scans the files and, if perl scripts are
+> > found, adds dependency on the file found in the shebang line (i.e.
+> > /usr/local/bin/perl).
+> >=20
+> > Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
+> > ---
+> > Changes in v2:
+> >  * moved the RDEPENDS line at the end to conform with the style guide;
+> >=20
+pushed to master & dylan.
+
+Thanks,
+Eric
 
 
