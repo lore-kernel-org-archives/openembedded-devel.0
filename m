@@ -1,19 +1,19 @@
 Received: from mail.bmw-carit.de ([62.245.222.98] helo=linuxmail.bmw-carit.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <lukas.bulwahn@oss.bmw-carit.de>) id 1UX9L3-0007zK-Je
+	(envelope-from <lukas.bulwahn@oss.bmw-carit.de>) id 1UX9Ll-00084F-RW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 14:07:29 +0200
+	Tue, 30 Apr 2013 14:08:32 +0200
 Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
 	[192.168.101.3])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: lukas.bulwahn)
-	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id D03AC401A2;
-	Tue, 30 Apr 2013 13:02:32 +0200 (CEST)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id A9579401A2;
+	Tue, 30 Apr 2013 13:03:41 +0200 (CEST)
 From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2013 13:48:55 +0200
-Message-Id: <1367322535-5430-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+Date: Tue, 30 Apr 2013 13:50:06 +0200
+Message-Id: <1367322606-5466-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Lukas Bulwahn <lukas.bulwahn@bmw-carit.de>
 Subject: [meta-oe][PATCH] python-dateutil: update to 1.5
@@ -30,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 12:07:48 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 12:08:39 -0000
 
 From: Lukas Bulwahn <lukas.bulwahn@bmw-carit.de>
 
