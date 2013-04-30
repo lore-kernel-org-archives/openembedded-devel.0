@@ -1,37 +1,23 @@
-Received: from mail-ve0-f178.google.com ([209.85.128.178])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UXERf-0005cJ-A4
+	(envelope-from <eric@eukrea.com>) id 1UXGV4-0006p3-0o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 19:34:36 +0200
-Received: by mail-ve0-f178.google.com with SMTP id c13so593624vea.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 10:16:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=oYM2r/w6ieaYiTnBYIr9Beh3bkIMOTRts5nk6kCQOXg=;
-	b=f/zrfhOW4hnfJDB5/7UTLyKuzEiLuyz5mF4JNpxm359KFChEMXvzRU8YUda3olpASH
-	NDktvyQ8s5Rc8dDbO6oUOC25Afo8FK2j7f86cFyPiVk8SZfsNf983/sjlATlZ/MwJPOI
-	h+V/UipN6p00MkAOn4mkYbpVuzePWhEJVD4v+/lvS3Ep8ARH9uespekvtjh/57Tpa8bs
-	hcYtNBxODAIZXzL0iS4dTAPDWvu7spBMrtgyFH8QZyFVfDq5+PKly0FnGwv1b5eWfQBh
-	6HT/sAKmILAtRV+7vYiTJhhZnueUDPU0Uwm8YA4jT+n3EqiFfY1Eb9ozdWOZ1nqK9QEc
-	7Z6w==
-MIME-Version: 1.0
-X-Received: by 10.220.78.131 with SMTP id l3mr3221247vck.54.1367342195866;
-	Tue, 30 Apr 2013 10:16:35 -0700 (PDT)
-Received: by 10.52.183.36 with HTTP; Tue, 30 Apr 2013 10:16:35 -0700 (PDT)
-In-Reply-To: <CAP9ODKp-g7F8z30mdstCR_2zska_eeaeYcF7qmpMzLTZCZ5Hfg@mail.gmail.com>
-References: <CAP9ODKpttkSQqRinJQWmDhWTeE+iXJWnLBDqZ1rsath6tJ2Xmw@mail.gmail.com>
-	<CAJTo0LaF8rOcnfVFhqwrtsfAK3Pu4i79Zz27RV7XPpdo0UZU1Q@mail.gmail.com>
-	<CAP9ODKrUJgBvJSocDxp15PtLtP8ObW-+-OgdedbSDt=1ALR9ow@mail.gmail.com>
-	<CALbNGRQH1DbJXwONhYrZ6x0Lze38xtndUfs+mDcenxLZ-DD8Jg@mail.gmail.com>
-	<CAP9ODKp-g7F8z30mdstCR_2zska_eeaeYcF7qmpMzLTZCZ5Hfg@mail.gmail.com>
-Date: Tue, 30 Apr 2013 19:16:35 +0200
-Message-ID: <CALbNGRR_5sB2_-3Vq9VmkA74EczYNm1jTUSe4MuL4Ljww4fVJQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Tue, 30 Apr 2013 21:46:17 +0200
+Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
+	(Authenticated sender: eukrea)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 42ABBA610F;
+	Tue, 30 Apr 2013 21:28:10 +0200 (CEST)
+Date: Tue, 30 Apr 2013 21:28:09 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome] gvfs build error
+Message-ID: <20130430212809.1f69d054@e6520eb>
+In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
+References: <cover.1367339449.git.Martin.Jansa@gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: martin.jansa@gmail.com
+Subject: Re: [meta-oe][dylan][PATCH 00/12] README and llvm2.9 changes for dylan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +31,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 17:34:37 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 19:46:18 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 30, 2013 at 6:49 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Tue, Apr 30, 2013 at 12:33 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Tue, Apr 30, 2013 at 5:22 PM, Otavio Salvador
->> <otavio@ossystems.com.br> wrote:
->>> On Tue, Apr 30, 2013 at 11:58 AM, Burton, Ross <ross.burton@intel.com> =
-wrote:
->>>> On 30 April 2013 15:42, Otavio Salvador <otavio@ossystems.com.br> wrot=
-e:
->>>>> Hello,
->>>>>
->>>>> Did someone see:
->>>>>
->>>>> | metatree.c:71:1: error: unknown type name 'GStaticRWLock'
->>>>> | metatree.c:71:38: error: 'G_STATIC_RW_LOCK_INIT' undeclared here
->>>>> (not in a function)
->>>>> | metatree.c: In function 'meta_tree_ref':
->>>>
->>>> Those APIs are deprecated in new GLibs, so maybe you've a newer GLib
->>>> and an older gvfs, potentially one that is disabling deprecated code
->>>> (which is bad form, and shouldn't be done in GNOME these days afaik).
->>>
->>> I think you're  right as it used to work fine and now it broke.
->>>
->>> It seems meta-gnome will need some love with master updates now :-)
->>>
->> A never ending love story :)
->
-> Did you start looking at these? or should I do?
->
-> I don't really need it for today so I can call it a (two) day ;-)
->
-> --
-I did already: If I am not mistaken there was a patch for this
-mainline on the way to 1.12.0. I will try to update to 1.12.3 and see
-how far I get. A bit frightens me the (hopefully optional) support of
-udisks2...
+Hi Martin,
 
-Andreas
+Le Tue, 30 Apr 2013 18:32:50 +0200,
+Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
+
+> Some changes from master I would like to get in dylan
+>=20
+> The following changes since commit 8a350e3b4d3431f68d440f9d6ec079fdd13666=
+17:
+>=20
+>   update README to dylan (2013-04-23 18:52:43 +0200)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/for-dylan
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Djansa/for-dylan
+>=20
+> Martin Jansa (12):
+>   llvm2.9: Import from meta-java
+>   llvm2.9: fix build with gcc-4.7
+>   llvm2.9: try to fix thumb build and disable it after failure
+>   llvm2.9: remove X86 from LLVM_TARGETS_TO_BUILD
+>   llvm2.9: add LLVM_EXTRA_ARCH to enable X86 unless building for x86
+>   e-wm-0.17.2.1: Update checksums, tarball was repackaged upstream :/
+>   meta-gnome: add README file
+>   meta-ruby: Fix subject-prefix
+>   README: add -M to git send-email example
+>   toolchain-layer, meta-networking: README: add dylan to subject-prefix
+>     and update branch in depends
+>   meta-multimedia/README: add dependency on meta-ruby
+>   README: show github mirror URL in layer dependencies
+>=20
+as discussed, here is the list of commits I plan to push to dylan-next
+tomorrow (hashes are local ones here) :
+
+cca735e apache2: fix multilib builds
+6cbeee1 modphp: update to 5.4.14
+05d7a65 hiawatha: update to 9.1
+a8c0bcb libnotify3, nautilus3: exclude from world
+0957300 compat-wireless: exclude from world
+6e7b548 lxdm: fix postinst-code
+0e0c01f gateone: fix license name
+8120bd1 ttf-inconsolata: fix license name
+3e0ef7a xfce4-mixer: add missing dep on libunique
+1281b23 xfce4-xkb-plugin: Update to latest git
+148a239 qtserialport-e: Various fixes per openembedded-devel list comments.
+0dc2885 qtserialport: Adds initial recipe.
+ceac946 README: show github mirror URL in layer dependencies
+258e8cc meta-multimedia/README: add dependency on meta-ruby
+2c6ca82 toolchain-layer, meta-networking: README: add dylan to subject-pref=
+ix and update branch in depends
+20a10ba README: add -M to git send-email example
+c9d9301 meta-ruby: Fix subject-prefix
+4a89aae meta-gnome: add README file
+7e95a68 e-wm-0.17.2.1: Update checksums, tarball was repackaged upstream :/
+00003b0 llvm2.9: add LLVM_EXTRA_ARCH to enable X86 unless building for x86
+27b6ea6 llvm2.9: remove X86 from LLVM_TARGETS_TO_BUILD
+6970589 llvm2.9: try to fix thumb build and disable it after failure
+db8e72e llvm2.9: fix build with gcc-4.7
+7ee1b70 llvm2.9: Import from meta-java
+
+Eric
 
 
