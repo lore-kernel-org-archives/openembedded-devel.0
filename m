@@ -1,39 +1,39 @@
-Received: from mail-pb0-f51.google.com ([209.85.160.51])
+Received: from mail-pd0-f176.google.com ([209.85.192.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UXDnR-0001Dw-Ue
+	(envelope-from <martin.jansa@gmail.com>) id 1UXDnp-0001Fg-5w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 18:52:58 +0200
-Received: by mail-pb0-f51.google.com with SMTP id rq13so344606pbb.10
+	Tue, 30 Apr 2013 18:53:27 +0200
+Received: by mail-pd0-f176.google.com with SMTP id r10so395988pdi.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 09:35:02 -0700 (PDT)
+	Tue, 30 Apr 2013 09:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=0AgrGlo1pIBnv6AXS8iRTwKzsESThh+sbDJb3mK5qFk=;
-	b=lBNdUX6CYnPZotZIFi3kVb9uIYfFm0W6TQJZtGaEJ3Rhh0FcoNmPLbqukVBtkrG/7t
-	LSwx1klreLzNkVvVzfjBd4sNxQH0jR/Ja2S2kCuZrbftQKBlsTJCV6ElyuQ/4NTeSVjR
-	6r3xl4iJZ09/rzgq4SS+Wun/8BkMgeGZJ0Lw1l4ov5fuoAydRwv9cQwEEybvAXtdC5tA
-	G2HKFqFDxknBmR+yIf/fqZa11PfS4vSzoVUjmFs0qO2gvWC6RSgPUPGYYyuyA0HjeVK1
-	kvuGQk59VARfA+hKKx6F+zMfmhjPjrRoQ1R880QIlGC4cgNyIp40uHamYq36obh+gtWe
-	DvkA==
-X-Received: by 10.66.156.196 with SMTP id wg4mr66336794pab.23.1367339702318;
-	Tue, 30 Apr 2013 09:35:02 -0700 (PDT)
+	bh=/fCPXErWN3E/rKssNNW/sSHecAtUQkwPtjWXh+S3JvE=;
+	b=wBBvJqtgbA3tFj61vmIfXRACcuLU7HarZv+6rsxwoXgtzJcqHUgLc4TxJS2Tm2+n0U
+	QSSEDhzPUByLVCEcWQGp/HQd4VCq0TdQj/WIecp7LmtZCBS3hqRPAJEN3cv6wj9Rm2I8
+	weVeR7nqnePCWIjEjMrb+1jb15DK3HlUoYXdieF7864YSzq7D2oOSnGVEEnDhU9lW69O
+	y7OMAI02AwsfJYI5I0gmGg0l1BKQ6Z20YI12D5/z4oeNMkfQYzKV+68yw7kJQ44jrGGZ
+	YI88ojiQZXMxc6V3CRIa1NRhMlAuFj7qjrWo8oeDT6G/XWzu81Q89wdG20qDdi4Vh6G+
+	gG5g==
+X-Received: by 10.66.50.138 with SMTP id c10mr49414531pao.220.1367339725667;
+	Tue, 30 Apr 2013 09:35:25 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	qb1sm29092874pbb.33.2013.04.30.09.34.53 for <multiple recipients>
+	ux10sm31301132pab.1.2013.04.30.09.35.19 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 30 Apr 2013 09:35:01 -0700 (PDT)
+	Tue, 30 Apr 2013 09:35:24 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2013 18:32:55 +0200
-Message-Id: <00003b0465ed8e479d7fdaeda8b55d93c2b7b562.1367339449.git.Martin.Jansa@gmail.com>
+Date: Tue, 30 Apr 2013 18:32:56 +0200
+Message-Id: <7e95a6882b1a63bf1ac283b60edce70a2d4df7a8.1367339449.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.2.1
 In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
 References: <cover.1367339449.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
 References: <cover.1367339449.git.Martin.Jansa@gmail.com>
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][dylan][PATCH 05/12] llvm2.9: add LLVM_EXTRA_ARCH to enable X86 unless building for x86
+Subject: [meta-oe][dylan][PATCH 06/12] e-wm-0.17.2.1: Update checksums, tarball was repackaged upstream :/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 16:53:22 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 16:54:13 -0000
 
-* now I see why it was there before, at least on arm it fails with:
-  | CMake Error at cmake/modules/LLVMConfig.cmake:127 (message):
-  |   Library `X86' not found in list of llvm libraries.
+Files enlightenment-0.17.2.1/ChangeLog and enlightenment-0.17.2.1-new/ChangeLog differ
+Files enlightenment-0.17.2.1/NEWS and enlightenment-0.17.2.1-new/NEWS differ
+Files enlightenment-0.17.2.1/po/ca.gmo and enlightenment-0.17.2.1-new/po/ca.gmo differ
+Files enlightenment-0.17.2.1/po/ca.po and enlightenment-0.17.2.1-new/po/ca.po differ
+Files enlightenment-0.17.2.1/po/eo.gmo and enlightenment-0.17.2.1-new/po/eo.gmo differ
+Files enlightenment-0.17.2.1/po/eo.po and enlightenment-0.17.2.1-new/po/eo.po differ
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/llvm/llvm2.9_2.9.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-efl/recipes-efl/e17/e-wm_0.17.2.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-index 04195d9..2b46162 100644
---- a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-+++ b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-@@ -17,9 +17,13 @@ SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.17.2.1.bb b/meta-efl/recipes-efl/e17/e-wm_0.17.2.1.bb
+index 228c122..5ff68bb 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.17.2.1.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.17.2.1.bb
+@@ -12,5 +12,5 @@ SRC_URI = "\
+     file://applications.menu \
+ "
  
- PARALLEL_MAKE_virtclass-native = ""
- 
-+LLVM_EXTRA_ARCH = "X86;"
-+LLVM_EXTRA_ARCH_x86 = ""
-+LLVM_EXTRA_ARCH_x86-64 = ""
-+
- EXTRA_OECMAKE = "\
-     -DLLVM_TABLEGEN=${STAGING_BINDIR_NATIVE}/llvm${LLVM_RELEASE}/tblgen \
--    -DLLVM_TARGETS_TO_BUILD="${LLVM_ARCH}" \
-+    -DLLVM_TARGETS_TO_BUILD="${LLVM_EXTRA_ARCH}${LLVM_ARCH}" \
-     -DCMAKE_LINKER:FILEPATH=${LD} \
-     -DCMAKE_AR:FILEPATH=${AR} \
-     -DCMAKE_OBJCOPY:FILEPATH=${OBJCOPY} \
+-SRC_URI[md5sum] = "e78018ba7a4622efbcbebd6d093b7fa4"
+-SRC_URI[sha256sum] = "5e7b7f5ec88d0589bb4db8aae2c198dc9fd91049419e2460cbd7631207ebd799"
++SRC_URI[md5sum] = "dd6ffbe1ee6a804dbd2a7b2645bf3b4d"
++SRC_URI[sha256sum] = "66d250a865ffb97b12cabe8081ae041ce6924f55ffffaca6c65d468bb9f902f9"
 -- 
 1.8.2.1
 
