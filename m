@@ -1,39 +1,38 @@
-Received: from mail-pa0-f42.google.com ([209.85.220.42])
+Received: from mail-oa0-f46.google.com ([209.85.219.46])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UXDpM-0001O9-R4
+	(envelope-from <otavio.salvador@gmail.com>) id 1UXE1B-0002aA-Tb
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 18:55:32 +0200
-Received: by mail-pa0-f42.google.com with SMTP id kl13so443018pab.29
+	Tue, 30 Apr 2013 19:07:11 +0200
+Received: by mail-oa0-f46.google.com with SMTP id k3so699340oag.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 09:36:58 -0700 (PDT)
+	Tue, 30 Apr 2013 09:49:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=HnBqvS8onMdKWB8YdE1RMC7Rp/PixCLc0hcuaS6HAQ0=;
-	b=kKWVg/TtCvZfSLLZoZWjD5myV8Ef+ahNElOVw+kPxnUdIV5eW4ADHY0uXtSJ55x2Jt
-	VbONicrIhBNVSxVxq7k1Z46WORY4sHagRkEv8HAuXR8RthNYl1nwk0byPacn0sJk0E2B
-	0osc1hRP8Plb35ppum+wGyb4UGF7zESVGS2LFXTRpgY32+VMyOCf9Yhs1zZwtx67DbAx
-	sG37+DsdLd2zaCVfXK+HiSdoQuq+JMsjIW+x8RvfdahEnlAotDjVjSJLPYotIj2mDcRO
-	Ok4bRpiViUY94bVPxrfRS8uuKuES2pDud6Q1O3ADoWACr65sYJ7JBlwEVAX7bbf/ZUb2
-	prkA==
-X-Received: by 10.68.196.33 with SMTP id ij1mr77717256pbc.203.1367339818681;
-	Tue, 30 Apr 2013 09:36:58 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	vb8sm29132141pbc.11.2013.04.30.09.36.51 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 30 Apr 2013 09:36:57 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2013 18:33:01 +0200
-Message-Id: <258e8cccbe22868d8595c8c1f335253fb5f4591b.1367339450.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
-References: <cover.1367339449.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
-References: <cover.1367339449.git.Martin.Jansa@gmail.com>
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][dylan][PATCH 11/12] meta-multimedia/README: add dependency on meta-ruby
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=/7LaZZ3ms2udDCEGVZ+wpeESA24CPq+RqeWYuA2yHvQ=;
+	b=xdu53hBQuZ6St9VtWGOZIQ7NXpo8VklKJLNzotXq/107oJHI/L+5W9/ij+NJHmYj0g
+	2b5FRTftjeWpXw9ZNtUI27qIB16P6hdfl5g7Q2hh3ndQsLkTKbh+kmZzocv5A0t3WZ3A
+	MDic+TTSDeDjj5Q7XAHHs1+0mqer9Qoj/CrttC/+TPc776ki4tIP2St6vCC7f66n8CBX
+	pAeJzzVS9MRGLgj5MRDpq4HiKvrz3Bf7o+rFFNB8CDcyu2PbW3yCF3ERHeYHwAYN8Ww6
+	gR4ZlsbXOvAVjVMfY58Q2mUZWPE9Gnt7Xj/mmZ9k+Z3mhOEcu7numVsxiHrWBn8bBbAL
+	zn/w==
+MIME-Version: 1.0
+X-Received: by 10.60.35.197 with SMTP id k5mr30767376oej.138.1367340554354;
+	Tue, 30 Apr 2013 09:49:14 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.89.226 with HTTP; Tue, 30 Apr 2013 09:49:14 -0700 (PDT)
+In-Reply-To: <CALbNGRQH1DbJXwONhYrZ6x0Lze38xtndUfs+mDcenxLZ-DD8Jg@mail.gmail.com>
+References: <CAP9ODKpttkSQqRinJQWmDhWTeE+iXJWnLBDqZ1rsath6tJ2Xmw@mail.gmail.com>
+	<CAJTo0LaF8rOcnfVFhqwrtsfAK3Pu4i79Zz27RV7XPpdo0UZU1Q@mail.gmail.com>
+	<CAP9ODKrUJgBvJSocDxp15PtLtP8ObW-+-OgdedbSDt=1ALR9ow@mail.gmail.com>
+	<CALbNGRQH1DbJXwONhYrZ6x0Lze38xtndUfs+mDcenxLZ-DD8Jg@mail.gmail.com>
+Date: Tue, 30 Apr 2013 13:49:14 -0300
+X-Google-Sender-Auth: 9VG6SVQBax-wCmwJoA57kuZxAy0
+Message-ID: <CAP9ODKp-g7F8z30mdstCR_2zska_eeaeYcF7qmpMzLTZCZ5Hfg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-gnome] gvfs build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 16:56:35 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 17:07:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* mkvtoolnix depends on ruby-native
+On Tue, Apr 30, 2013 at 12:33 PM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> On Tue, Apr 30, 2013 at 5:22 PM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> On Tue, Apr 30, 2013 at 11:58 AM, Burton, Ross <ross.burton@intel.com> w=
+rote:
+>>> On 30 April 2013 15:42, Otavio Salvador <otavio@ossystems.com.br> wrote=
+:
+>>>> Hello,
+>>>>
+>>>> Did someone see:
+>>>>
+>>>> | metatree.c:71:1: error: unknown type name 'GStaticRWLock'
+>>>> | metatree.c:71:38: error: 'G_STATIC_RW_LOCK_INIT' undeclared here
+>>>> (not in a function)
+>>>> | metatree.c: In function 'meta_tree_ref':
+>>>
+>>> Those APIs are deprecated in new GLibs, so maybe you've a newer GLib
+>>> and an older gvfs, potentially one that is disabling deprecated code
+>>> (which is bad form, and shouldn't be done in GNOME these days afaik).
+>>
+>> I think you're  right as it used to work fine and now it broke.
+>>
+>> It seems meta-gnome will need some love with master updates now :-)
+>>
+> A never ending love story :)
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-multimedia/README | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Did you start looking at these? or should I do?
 
-diff --git a/meta-multimedia/README b/meta-multimedia/README
-index d82ceab..b241577 100644
---- a/meta-multimedia/README
-+++ b/meta-multimedia/README
-@@ -4,7 +4,8 @@ URI: git://git.openembedded.org/openembedded-core
- branch: dylan
- revision: HEAD
- 
--URI: git://git.openembedded.org/meta-openembedded/meta-oe
-+URI: git://git.openembedded.org/meta-openembedded
-+layers: meta-oe, meta-ruby
- branch: dylan
- revision: HEAD
- 
--- 
-1.8.2.1
+I don't really need it for today so I can call it a (two) day ;-)
 
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
