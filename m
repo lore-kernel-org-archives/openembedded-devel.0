@@ -1,37 +1,22 @@
-Received: from mail-vb0-f48.google.com ([209.85.212.48])
+Received: from mail.bmw-carit.de ([62.245.222.98] helo=linuxmail.bmw-carit.de)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UX7A4-0007JI-Nu
+	(envelope-from <lukas.bulwahn@oss.bmw-carit.de>) id 1UX9L3-0007zK-Je
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 11:47:54 +0200
-Received: by mail-vb0-f48.google.com with SMTP id p12so223229vbe.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 02:29:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=XIY4oxSQwwj0dsE3kdyb7+R/q0/anUtA7MmNu1UweBE=;
-	b=Ayg35uPHyjlBpiIAv7KbXBPXSAYBMhx6aml10ZAdmblzkzkuA/jTup7ld9AyU9VZy0
-	3HsEK+4s8sGWsAoe/rr6+tOZoI40tw6sklI8ZGJ5XdMhL/rIjrYAOmEvJ2d15O2AcYjL
-	Xz1i98AU1tZA3dTbi2d/tffEE6daNFKuLiS13n5siO9OWtI718oIhBR5l4qbIrkB5MgX
-	HLY9FEi7Ac9dGj26rh1+cZwco79olqTqtmMkb7hPDFI+2YRqWNPxngDTMjTwMbpdzJvT
-	o4ZB+DZrQlR3XfPPZBstImLrhlSeCf3f5UGsMhtvhVgHeSAwfG4YVVPezfEIoibZ2KXI
-	H/bA==
-X-Received: by 10.220.78.131 with SMTP id l3mr2651494vck.54.1367314190007;
-	Tue, 30 Apr 2013 02:29:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.221.8.3 with HTTP; Tue, 30 Apr 2013 02:29:29 -0700 (PDT)
-In-Reply-To: <ABE1F3FA-9C6C-4B22-88CB-860E6311BD13@dominion.thruhere.net>
-References: <CALbNGRRndfF8dvQhtnSgzcE-72KGOP4tb5BQx_Z-205Dr2prGw@mail.gmail.com>
-	<ABE1F3FA-9C6C-4B22-88CB-860E6311BD13@dominion.thruhere.net>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 30 Apr 2013 10:29:29 +0100
-Message-ID: <CAJTo0LYL=ZkYEiGvot9xzDcsvFpAOZhecakt3ekYejqis1rqQA@mail.gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmGIGEcxbOUCqvFUT/Q0yMMdWNfbJBXKaVTJMjllTTrZGp7AyFEzVcr2UcaYStlkxT7mAZx
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] udev-extraconf conflicts
+	Tue, 30 Apr 2013 14:07:29 +0200
+Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
+	[192.168.101.3])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id D03AC401A2;
+	Tue, 30 Apr 2013 13:02:32 +0200 (CEST)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 30 Apr 2013 13:48:55 +0200
+Message-Id: <1367322535-5430-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Lukas Bulwahn <lukas.bulwahn@bmw-carit.de>
+Subject: [meta-oe][PATCH] python-dateutil: update to 1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,15 +30,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 09:47:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 30 Apr 2013 12:07:48 -0000
 
-On 30 April 2013 10:11, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> Indeed, it's fun to see the flurry of patches trying to fix things up for 'xuser'. I'm fond of the saying "If you find yourself in a hole, stop digging".
+From: Lukas Bulwahn <lukas.bulwahn@bmw-carit.de>
 
-Agreed, anything that involves *more* knowledge of xuser beyond the X
-startup script is Very Bad Indeed.
+This commit updates python-dateutil to the latest version 1.5 and resets PR.
 
-Ross
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+---
+ ...on-dateutil_1.4.1.bb => python-dateutil_1.5.bb} |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-dateutil_1.4.1.bb => python-dateutil_1.5.bb} (78%)
+
+diff --git a/meta-oe/recipes-devtools/python/python-dateutil_1.4.1.bb b/meta-oe/recipes-devtools/python/python-dateutil_1.5.bb
+similarity index 78%
+rename from meta-oe/recipes-devtools/python/python-dateutil_1.4.1.bb
+rename to meta-oe/recipes-devtools/python/python-dateutil_1.5.bb
+index 2d913e4..6e10524 100644
+--- a/meta-oe/recipes-devtools/python/python-dateutil_1.4.1.bb
++++ b/meta-oe/recipes-devtools/python/python-dateutil_1.5.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d82268718c68bda0b091006ec6e583c6"
+ SRCNAME = "${PN}"
+-PR = "r3"
++PR = "r0"
+ 
+ SRC_URI = "http://labix.org/download/python-dateutil/${SRCNAME}-${PV}.tar.gz"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+@@ -19,5 +19,5 @@ RDEPENDS_${PN} = "\
+     python-datetime \
+ "
+ 
+-SRC_URI[md5sum] = "2a5f25ab12fcefcf0b21348f2d47595a"
+-SRC_URI[sha256sum] = "74b615c6a55b4421187feba1633fc233e7c5ebdd7abe9b092447a32946823357"
++SRC_URI[md5sum] = "35f3732db3f2cc4afdc68a8533b60a52"
++SRC_URI[sha256sum] = "c08aca7d85f8f8eed61e83b3423b829262c596a9a78f7ca3de0bcee2217d0e3b"
+-- 
+1.7.9.5
+
 
 
