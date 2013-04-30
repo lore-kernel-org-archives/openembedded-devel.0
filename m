@@ -1,39 +1,34 @@
-Received: from mail-we0-f170.google.com ([74.125.82.170])
+Received: from mail-vb0-f48.google.com ([209.85.212.48])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UX6sq-0005nl-6Z
+	(envelope-from <ross.burton@intel.com>) id 1UX7A4-0007JI-Nu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 11:30:08 +0200
-Received: by mail-we0-f170.google.com with SMTP id z53so236560wey.29
+	Tue, 30 Apr 2013 11:47:54 +0200
+Received: by mail-vb0-f48.google.com with SMTP id p12so223229vbe.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 02:12:02 -0700 (PDT)
+	Tue, 30 Apr 2013 02:29:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=Ulz5L84xzlGne2CIXlXSGzCfz5ftVgum13QRV6P3ynY=;
-	b=iM7U3Xkt8Lo+3xn8cTzwSNNX2X4rz/3VtTLYejtNxvtxDgKaOuxHXkedvy0yeHSWGK
-	WCYJHcIwUpIZsxp88qgqDYHpFgTKu/TIkMHUp3NAcGkahMPajmNdFXUcPe80PMK3wNNi
-	2lMH1yMosVWCZ2aHg27LLLnxavp7BlGw80y3E1WCUdH3m5f0CsnvtZQF/8Cpe9A2v74P
-	lx4pTS3UvFOd3GTlzVKBjnj2xTxacdvWmo1cpTiLnBhh+A9qRb+HSIMuVQ+wMWy50Pvj
-	dNGDWEMQKZRONV0cieLWqV5Fx8AGlUm5vUs9awjKwt1qhE2yUlJgtiFgJEJ8G9joRNJT
-	VbKw==
-X-Received: by 10.180.88.33 with SMTP id bd1mr22913065wib.18.1367313122015;
-	Tue, 30 Apr 2013 02:12:02 -0700 (PDT)
-Received: from [172.20.0.3] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPSA id bu18sm1079220wib.1.2013.04.30.02.11.59
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 30 Apr 2013 02:12:00 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CALbNGRRndfF8dvQhtnSgzcE-72KGOP4tb5BQx_Z-205Dr2prGw@mail.gmail.com>
-Date: Tue, 30 Apr 2013 11:11:59 +0200
-Message-Id: <ABE1F3FA-9C6C-4B22-88CB-860E6311BD13@dominion.thruhere.net>
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=XIY4oxSQwwj0dsE3kdyb7+R/q0/anUtA7MmNu1UweBE=;
+	b=Ayg35uPHyjlBpiIAv7KbXBPXSAYBMhx6aml10ZAdmblzkzkuA/jTup7ld9AyU9VZy0
+	3HsEK+4s8sGWsAoe/rr6+tOZoI40tw6sklI8ZGJ5XdMhL/rIjrYAOmEvJ2d15O2AcYjL
+	Xz1i98AU1tZA3dTbi2d/tffEE6daNFKuLiS13n5siO9OWtI718oIhBR5l4qbIrkB5MgX
+	HLY9FEi7Ac9dGj26rh1+cZwco79olqTqtmMkb7hPDFI+2YRqWNPxngDTMjTwMbpdzJvT
+	o4ZB+DZrQlR3XfPPZBstImLrhlSeCf3f5UGsMhtvhVgHeSAwfG4YVVPezfEIoibZ2KXI
+	H/bA==
+X-Received: by 10.220.78.131 with SMTP id l3mr2651494vck.54.1367314190007;
+	Tue, 30 Apr 2013 02:29:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.221.8.3 with HTTP; Tue, 30 Apr 2013 02:29:29 -0700 (PDT)
+In-Reply-To: <ABE1F3FA-9C6C-4B22-88CB-860E6311BD13@dominion.thruhere.net>
 References: <CALbNGRRndfF8dvQhtnSgzcE-72KGOP4tb5BQx_Z-205Dr2prGw@mail.gmail.com>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-X-Mailer: Apple Mail (2.1503)
-X-Gm-Message-State: ALoCoQkeHE7ivnfdVL6oHSxoEeK7Ss5mVk/S2aE53kVLWOJ0XOwqAgPJXoxeQ7lMl2JiGV+FiLWY
+	<ABE1F3FA-9C6C-4B22-88CB-860E6311BD13@dominion.thruhere.net>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 30 Apr 2013 10:29:29 +0100
+Message-ID: <CAJTo0LYL=ZkYEiGvot9xzDcsvFpAOZhecakt3ekYejqis1rqQA@mail.gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQmGIGEcxbOUCqvFUT/Q0yMMdWNfbJBXKaVTJMjllTTrZGp7AyFEzVcr2UcaYStlkxT7mAZx
 Cc: openembedded-devel@lists.openembedded.org,
 	openembedded-core@lists.openembedded.org
 Subject: Re: [OE-core] udev-extraconf conflicts
@@ -50,29 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 09:30:30 -0000
-X-List-Received-Date: Tue, 30 Apr 2013 09:30:30 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Apr 2013 09:47:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 30 April 2013 10:11, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Indeed, it's fun to see the flurry of patches trying to fix things up for 'xuser'. I'm fond of the saying "If you find yourself in a hole, stop digging".
 
-Op 29 apr. 2013, om 23:03 heeft Andreas M=FCller =
-<schnitzeltony@googlemail.com> het volgende geschreven:
+Agreed, anything that involves *more* knowledge of xuser beyond the X
+startup script is Very Bad Indeed.
 
-> Hi,
->=20
-> is it really necessary to add udev-extraconf to systemd RRECOMMENDs?
-
-Most certainly not!
-
-> For me automount.rules turn gvfs/gio (auto)mount to unusable state.
-> I bet there are others (see autonet.rules) failing for hidden =
-'helpers'
-
-Indeed, it's fun to see the flurry of patches trying to fix things up =
-for 'xuser'. I'm fond of the saying "If you find yourself in a hole, =
-stop digging".=20
-
-So: http://patches.openembedded.org/patch/48139/=
+Ross
 
 
