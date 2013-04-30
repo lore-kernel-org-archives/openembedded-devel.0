@@ -1,37 +1,19 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UX5fX-0000Fk-QD
+	(envelope-from <eric@eukrea.com>) id 1UX5sY-0001DQ-W7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 10:12:12 +0200
-Received: by mail-ee0-f47.google.com with SMTP id b57so94675eek.6
+	Tue, 30 Apr 2013 10:25:43 +0200
+Received: from buildor.local.eukrea.com (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 6E0914B017A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 00:54:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=gOHukIYXep2h6txq4FDrIswkMUCbgssb3LZBBUu2V3E=;
-	b=xNwExO030jM9YuCnru5R3ErKyJXAMqa5cxZ0vlZLIi9nBtTBrIvNhSC0oRPA5bJdo0
-	4VJiJG2xHp76DcInSca/o9S2ox2s9yL7MEctww6Se6VIWhhX7zSYf7DWuV4XtfiIq+LH
-	vfcIcipfDresiNo/QTmc4rofWjcDKLRAiygAaqMvSvxtCzyxGcvuq9wOeL1xo1AkMBqJ
-	UKK2bjeygvTJzynVJMHf2bHOZC1DYcPBGE1wjlAHDxWVohi/hL9tb2VhjKM+krWm9Ra1
-	+uDArK2XK7Cz7PbTBHFe9YOjj38T3AMAJX42AaWzNwJGcpg9m8CQx1RchK7RzhEUzIHe
-	Jbhw==
-X-Received: by 10.14.206.129 with SMTP id l1mr87408667eeo.30.1367308461762;
-	Tue, 30 Apr 2013 00:54:21 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
-	[95.222.160.204]) by mx.google.com with ESMTPSA id
-	e50sm20378335eev.13.2013.04.30.00.54.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 30 Apr 2013 00:54:20 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Tue, 30 Apr 2013 10:07:44 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2013 09:51:59 +0200
-Message-Id: <1367308319-29173-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+Date: Tue, 30 Apr 2013 10:07:55 +0200
+Message-Id: <1367309275-9232-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [meta-systemd] dhcp: do not start dhclient by default on boot
+Subject: [meta-oe] sip-native: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +27,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 08:12:14 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 08:25:51 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-* most of the time start fails:
-  | root@overo:~# systemctl status dhclient.service
-  | dhclient.service - Dynamic Host Configuration Protocol (DHCP)
-  |         Loaded: loaded (/lib/systemd/system/dhclient.service; enabled)
-  |         Active: failed (Result: resources) since Thu 2000-01-06 22:07:27 UTC; 15min ago
-  |         Process: 300 ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases $INTERFACES (code=exited, status=0/SUCCESS)
-  |
-  | Jan 06 22:07:27 overo systemd[1]: Starting Dynamic Host Configuration Proto.....
-  | Jan 06 22:07:27 overo systemd[1]: PID file /var/run/dhclient.pid not readab...t.
-  | Jan 06 22:07:27 overo systemd[1]: Failed to start Dynamic Host Configuratio...).
-* in cases it does not fail to start and we have a managing service (e.g
-  networkmanager) two instances of dhclient are running
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- .../recipes-connectivity/dhcp/dhcp_4.2.5.bbappend  |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ meta-oe/recipes-extended/sip/sip-native_4.13.3.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5.bbappend b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5.bbappend
-index 22d412a..e9e09d3 100644
---- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5.bbappend
-@@ -3,12 +3,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
- inherit systemd
- 
--PRINC := "${@int(PRINC) + 2}"
-+PRINC := "${@int(PRINC) + 3}"
- 
- SYSTEMD_PACKAGES = "dhcp-server dhcp-relay dhcp-client"
- SYSTEMD_SERVICE_dhcp-server = "dhcpd.service"
- SYSTEMD_SERVICE_dhcp-relay = "dhcrelay.service"
- SYSTEMD_SERVICE_dhcp-client = "dhclient.service"
-+SYSTEMD_AUTO_ENABLE_dhcp-client = "disable"
- 
- FILES_dhcp-server += "${systemd_unitdir}/system/dhcpd.service"
- FILES_dhcp-relay += "${systemd_unitdir}/system/dhrelay.service"
--- 
-1.7.6.5
+diff --git a/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb b/meta-oe/=
+recipes-extended/sip/sip-native_4.13.3.bb
+index c20683f..c7be0b4 100644
+--- a/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
++++ b/meta-oe/recipes-extended/sip/sip-native_4.13.3.bb
+@@ -5,7 +5,7 @@ SECTION =3D "devel"
+ LICENSE =3D "GPLv2+"
+ LIC_FILES_CHKSUM =3D "file://sipgen.sbf;endline=3D15;md5=3D88e887a386c18=
+a01240d8d055da4e441"
+=20
+-SRC_URI =3D "http://www.riverbankcomputing.co.uk/static/Downloads/sip4/s=
+ip-${PV}.tar.gz"
++SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.=
+tar.gz"
+ SRC_URI[md5sum] =3D "76192829cc42ec558db46e4f9e1d8ba9"
+ SRC_URI[sha256sum] =3D "ec295f71ef339c5b98db5650865f2c6c1200c4085b7a3f33=
+f284111e1f534ac1"
+ S =3D "${WORKDIR}/sip-${PV}/sipgen"
+--=20
+1.7.10.4
 
 
 
