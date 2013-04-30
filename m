@@ -1,39 +1,39 @@
-Received: from mail-pd0-f182.google.com ([209.85.192.182])
+Received: from mail-da0-f45.google.com ([209.85.210.45])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UXDml-0001Ap-Gl
+	(envelope-from <martin.jansa@gmail.com>) id 1UXDn2-0001C4-7i
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Apr 2013 18:52:14 +0200
-Received: by mail-pd0-f182.google.com with SMTP id 14so398898pdj.13
+	Tue, 30 Apr 2013 18:52:51 +0200
+Received: by mail-da0-f45.google.com with SMTP id v40so318423dad.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Apr 2013 09:34:18 -0700 (PDT)
+	Tue, 30 Apr 2013 09:34:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references:in-reply-to:references;
-	bh=HwJHd4cOyI5s+wQGzt0O4VzvkhtqlK0TTCVnFM5YO4c=;
-	b=A6fZUVcw+vbt+A+1vjLpGiMGqmIWjdUlUdLUVc0sxJsQMglExHW0Fyrx/1f2ZxG5vf
-	w6eEPWleqdPkS+x95uyolmvvs2kAVDKTiNBUuHfpRL7ng5RMkoZMukji3579cPv9v07I
-	DLTTQUhVmQJyXqgYTU7fqqGyA8v7SWKLBgBLUWFLIxipn0rXz90v8rbEQaNzvEhZCr8D
-	E8fBouRyynm6iXxUZEpXOlb466wYvAoO9xXgStE4sdKMIsBZqsTog23VRBHX3uwdmmda
-	ub7lSBn5XKKekJ7UlpRX0iRLOOIyfInoJC4Fs7KmvKgqHf2Aj4khxeAAFBLCEeBC0+0H
-	yO3Q==
-X-Received: by 10.68.103.36 with SMTP id ft4mr76324257pbb.2.1367339658878;
-	Tue, 30 Apr 2013 09:34:18 -0700 (PDT)
+	bh=5TOUpBbgbBZf2ZUagkZzE76P9QWSlZMo/HSdQ8vm98c=;
+	b=fTRJfQjsGVd0Vt4mIO7xsY2PUe9VSWZINapkbluSFSloJ/fnNsXpyDVk2uTV/FOc6b
+	1rjg1dsk+uG6v9aTR5f3TuEWPi6xVjrqw7c2ZDxrywFQz73/q+NrQ/dYmDlltvA0U1YS
+	ENYhvZyN8pfH391PlZTBxbG8BvzE8Ro130z+QV5Jea5uRgvTWTDvWEnvC4nbrWKtQfGH
+	XPDxGzw+NivW4kGGaY2upd3tpBsuUZhypPJp8F94QTjTWBIwgEQfBf3R9p6TY0gaZLxh
+	HXE9RghZKkNP48TNcBK8pydfhPPp4DvB/MhQlY8BYV5D+ZVh8qyWv9zu2nLQIZkKvYxP
+	7yRg==
+X-Received: by 10.68.190.131 with SMTP id gq3mr11588006pbc.185.1367339676784; 
+	Tue, 30 Apr 2013 09:34:36 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	bs3sm29085851pbb.36.2013.04.30.09.34.14 for <multiple recipients>
+	z8sm29107782pbt.23.2013.04.30.09.34.31 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 30 Apr 2013 09:34:17 -0700 (PDT)
+	Tue, 30 Apr 2013 09:34:35 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Apr 2013 18:32:53 +0200
-Message-Id: <6970589fe80bf2286d87aea08abf7380ece12586.1367339449.git.Martin.Jansa@gmail.com>
+Date: Tue, 30 Apr 2013 18:32:54 +0200
+Message-Id: <27b6ea6adcf1b6f5da4ab83efc7b2a903e1147e7.1367339449.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.2.1
 In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
 References: <cover.1367339449.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1367339449.git.Martin.Jansa@gmail.com>
 References: <cover.1367339449.git.Martin.Jansa@gmail.com>
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][dylan][PATCH 03/12] llvm2.9: try to fix thumb build and disable it after failure
+Subject: [meta-oe][dylan][PATCH 04/12] llvm2.9: remove X86 from LLVM_TARGETS_TO_BUILD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,78 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Apr 2013 16:52:18 -0000
+X-List-Received-Date: Tue, 30 Apr 2013 16:52:57 -0000
 
-* khem: could you check what I'm doing wrong? This is out of my league..
+* when building for qemux86* it tries to build X86 twice and fails with:
+  | CMake Error at lib/Target/CMakeLists.txt:24 (add_subdirectory):
+  |   The binary directory
+  |
+  |     /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/llvm2.9/2.9-r2.0/llvm-2.9/build/lib/Target/X86
+  |
+  |   is already used to build a source directory.  It cannot be used to build
+  |   source directory
+  |
+  |     /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/llvm2.9/2.9-r2.0/llvm-2.9/lib/Target/X86
+  |
+  |   Specify a unique binary directory name.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-core/llvm/llvm2.9/0019-issue6065.patch | 35 ++++++++++++++++++++++
- meta-oe/recipes-core/llvm/llvm2.9_2.9.bb           |  9 ++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
+ meta-oe/recipes-core/llvm/llvm2.9_2.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch b/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
-new file mode 100644
-index 0000000..aff3d1d
---- /dev/null
-+++ b/meta-oe/recipes-core/llvm/llvm2.9/0019-issue6065.patch
-@@ -0,0 +1,35 @@
-+--- llvm-2.9.orig/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 14:49:28.063566919 +0200
-++++ llvm-2.9/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 15:24:31.065435029 +0200
-+@@ -59,7 +59,17 @@
-+     // for the real target function right now. We have to act as if this
-+     // whole compilation callback doesn't exist as far as the caller is
-+     // concerned, so we can't just preserve the callee saved regs.
-++    // stmdb introduced in http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
-++    // but fails on armv4t
-++    // | {standard input}: Assembler messages:
-++    // | {standard input}:22: Error: selected processor does not support Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
-++    // | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r1,r2,r3,lr}'
-++    // | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
-++#ifndef __thumb__
-+     "stmdb sp!, {r0, r1, r2, r3, lr}\n"
-++#else
-++    "push {r0, r1, r2, r3, lr}\n"
-++#endif
-+ #if (defined(__VFP_FP__) && !defined(__SOFTFP__))
-+     "fstmfdd sp!, {d0, d1, d2, d3, d4, d5, d6, d7}\n"
-+ #endif
-+@@ -99,8 +109,14 @@
-+     // The above twiddling of the saved return addresses allows us to
-+     // deallocate everything, including the LR the stub saved, with two
-+     // updating load instructions.
-++#ifndef __thumb__
-+     "ldmia  sp!, {r0, r1, r2, r3, lr}\n"
-+     "ldr    pc, [sp], #4\n"
-++#else
-++    // thumb dont allow lr and pc to be poped in the same instruction.
-++    "pop {r0, r1, r2, r3, lr}\n"
-++    "pop {pc}\n"
-++#endif
-+       );
-+ #else  // Not an ARM host
-+   void ARMCompilationCallback() {
 diff --git a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-index d5b8c01..dc7f873 100644
+index dc7f873..04195d9 100644
 --- a/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
 +++ b/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb
-@@ -4,6 +4,15 @@ PR = "${INC_PR}.0"
+@@ -19,7 +19,7 @@ PARALLEL_MAKE_virtclass-native = ""
  
- SRC_URI += "file://0035-gcc-4.7.patch"
- 
-+# 0019-issue6065.patch is still needed but a bit modified, because it was resolved by
-+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?r1=120304&r2=124694&pathrev=124694
-+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
-+# and still it fails with 
-+# {standard input}:31: Error: invalid register list to push/pop instruction -- `pop {r0,r1,r2,r3,lr}'
-+# make[2]: *** [lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMJITInfo.cpp.o] Error 1
-+# SRC_URI += "file://0019-issue6065.patch"
-+ARM_INSTRUCTION_SET = "arm"
-+
- SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
- 
- PARALLEL_MAKE_virtclass-native = ""
+ EXTRA_OECMAKE = "\
+     -DLLVM_TABLEGEN=${STAGING_BINDIR_NATIVE}/llvm${LLVM_RELEASE}/tblgen \
+-    -DLLVM_TARGETS_TO_BUILD="X86;${LLVM_ARCH}" \
++    -DLLVM_TARGETS_TO_BUILD="${LLVM_ARCH}" \
+     -DCMAKE_LINKER:FILEPATH=${LD} \
+     -DCMAKE_AR:FILEPATH=${AR} \
+     -DCMAKE_OBJCOPY:FILEPATH=${OBJCOPY} \
 -- 
 1.8.2.1
 
