@@ -1,35 +1,27 @@
-Received: from mail-vc0-f178.google.com ([209.85.220.178])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>)
-	id 1UXwAW-0003hw-5t; Thu, 02 May 2013 18:15:41 +0200
-Received: by mail-vc0-f178.google.com with SMTP id kw10so618187vcb.23
-	for <multiple recipients>; Thu, 02 May 2013 08:57:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=6Hk6gtTxhOq8ftSsFAEeAOD8VUVjfWe3/84R0d0H9pI=;
-	b=a0kIdP1FV72XTW1VAdsgfc8AXr+bzAMsJsR49PafLm0GCaBsX9JHjX6k40+vaE0fDQ
-	sa/RAaFNSqZiMElqn65XkvMULWi+GXBB/cfl2GzALL/cIONUMRPNgJs+SDM2Ts/ADyIB
-	UBWWJgoAYSMpLQjO6hquDZxCNWcS1G8elJgVrJ03HkP2AH/CkAHhhZ3CBFYjRFAxGFv4
-	x9zvCUQcRZh47D94p7lmOb3YLHXe32GrXKqDtwMZqnOhnj/srNKvP2DD1B7NcJZnnGFO
-	sJKBQ6XuKjUZ3r0keF/ml5fOJ+ZzwQcBsd76sQzJazSxcufq03+b0WDhfOE/Al3/GiFh
-	Dh/w==
-X-Received: by 10.52.27.52 with SMTP id q20mr2092598vdg.16.1367510265841; Thu,
-	02 May 2013 08:57:45 -0700 (PDT)
-MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.48.5 with HTTP; Thu, 2 May 2013 08:57:25 -0700 (PDT)
-In-Reply-To: <20130502151833.GC3206@jama>
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UXx9A-0001VK-7l
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 May 2013 19:18:20 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 02 May 2013 10:00:25 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,597,1363158000"; d="scan'208";a="331398333"
+Received: from unknown (HELO helios.localnet) ([10.255.12.165])
+	by fmsmga002.fm.intel.com with ESMTP; 02 May 2013 10:00:24 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Date: Thu, 02 May 2013 18:00:23 +0100
+Message-ID: <1838142.bVj6QfWozi@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.8.0-19-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <CAHUNapSbKx1baQ++toBir_uw6uWhFun7yA9GwRpNYoTm=7L4BA@mail.gmail.com>
 References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Thu, 2 May 2013 16:57:25 +0100
-X-Google-Sender-Auth: byaJf4DR2_O9OLT5O4-S47M9WM0
-Message-ID: <CANyK_8d-AUKrqeFexg1HMT7KypQAZjmfgEF2ChXTwsggok9Ucw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: State of bitbake world
+	<CANyK_8d-AUKrqeFexg1HMT7KypQAZjmfgEF2ChXTwsggok9Ucw@mail.gmail.com>
+	<CAHUNapSbKx1baQ++toBir_uw6uWhFun7yA9GwRpNYoTm=7L4BA@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 May 2013 16:15:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 May 2013 17:18:20 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 2 May 2013 16:18, Martin Jansa <martin.jansa@gmail.com> wrote:
->   meta-openembedded/meta-oe/recipes-multimedia/vlc/vlc_1.1.11.bb, do_package
+On Thursday 02 May 2013 12:30:59 Trevor Woerner wrote:
+> On Thu, May 2, 2013 at 11:57 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+> > The recipe also has dependencies
+> > outside meta-oe (fluidsynth in meta-multimedia IIRC) but that's a
+> > separate issue.
+> 
+> I've noticed that too. Shouldn't dependencies be contained within the
+> same layer? Is it normal from these dependencies to be spread out over
+> various layers?
 
-I did have a potential fix for this, I'll take another look and see
-what I can do about sending a patch. The recipe also has dependencies
-outside meta-oe (fluidsynth in meta-multimedia IIRC) but that's a
-separate issue.
+For meta-oe, this is unusual yes. In fact having checked recently this is the 
+only case I'm aware of where a recipe in meta-oe depends on a recipe in 
+another layer other than OE-Core, at least with no PACKAGECONFIG alterations. 
 
---
-Paul Barker
+For this specific instance, it would be great if someone would send a patch to 
+move fluidsynth to meta-multimedia.
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
