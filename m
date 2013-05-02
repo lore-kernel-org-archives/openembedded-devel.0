@@ -1,40 +1,38 @@
-Received: from mail-ea0-f182.google.com ([209.85.215.182])
+Received: from mail-ea0-f172.google.com ([209.85.215.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UXmuW-0002A0-EP
+	(envelope-from <koen@dominion.thruhere.net>) id 1UXmuV-00029s-9w
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 02 May 2013 08:22:35 +0200
-Received: by mail-ea0-f182.google.com with SMTP id z16so88879ead.41
+Received: by mail-ea0-f172.google.com with SMTP id r16so89121ead.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 May 2013 23:04:39 -0700 (PDT)
+	Wed, 01 May 2013 23:04:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references:x-gm-message-state;
-	bh=IHEOCi2r1rYwprCQRddNQfBzSWcUyrj0E23hovWHXrw=;
-	b=Arm5/DmmQcAsy1vfwIMmTBJyqMgfp4+JbfgdcUN3tY4HQZ5tKbftzhgEALr/PLdQg4
-	009QNFCBN4ehZVULu0iOu4x76MaSJmkUa2A7GPbu43FA2Zh5+Zh3NgMGDcDBOcjdzVPt
-	YaKDBc6BWfxPrDlGMZgYV3GFnQDvO6ZDrj84EcjPkJoEPUk3qcWNNlc2J7Jc1yFUqqbj
-	q1NvdqKrpG6wttZ2EiVlEKI9sRdbWZ1hwMux0kraMGz+H9s1hgjB2FTzUe1OMtCNLmIb
-	PFUAx2Day3f0eA6rF7UQUreU9/pWtwINBrkcppGY5wK+BIWQ0ze4adVV7ZNhduRZ6BEb
-	nU0g==
-X-Received: by 10.15.22.76 with SMTP id e52mr15957147eeu.7.1367474679514;
-	Wed, 01 May 2013 23:04:39 -0700 (PDT)
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=53ztt6NKUOF+5ESSbgB1XambNad1N/VJ0dPRqXazcSI=;
+	b=m3GOT1JcfYnEUg0EOvU67SOXKyusnqSV3fhB2UVVUxi4wzUETJBLL/SeBONsR7ZvC9
+	rPP7IZRR2q5Aq6mCCdRlv+j++f8uuipUYkqaVshIYV3MsHMmLI1h5O/9jeiWzB2M7NPL
+	e8Bnd8X39lInJK/oL9FJmTyUVmATWBn7RTvoXBl/dVRy56iODdMCwpB3faGzuDyuhib6
+	j3LSW/XLdwlij9cXqS6KQyARednkrCbCxTcOfSP5aXpezzN1E63xMzmQOrcINaCUkhFW
+	uoQ2hMkqfpIkDHwT5G9guo2Z6YQvLUHmaSPyibFUC+rbNAVhp2KV8flX3v455+TH4WP/
+	W5Zg==
+X-Received: by 10.15.36.2 with SMTP id h2mr15984030eev.2.1367474678266;
+	Wed, 01 May 2013 23:04:38 -0700 (PDT)
 Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
 	[77.162.165.174])
-	by mx.google.com with ESMTPSA id l6sm7435772eem.9.2013.05.01.23.04.38
+	by mx.google.com with ESMTPSA id l6sm7435772eem.9.2013.05.01.23.04.36
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 01 May 2013 23:04:38 -0700 (PDT)
+	Wed, 01 May 2013 23:04:37 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 May 2013 08:04:21 +0200
-Message-Id: <1367474661-2698-2-git-send-email-koen@dominion.thruhere.net>
+Date: Thu,  2 May 2013 08:04:20 +0200
+Message-Id: <1367474661-2698-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.8.1.4
-In-Reply-To: <1367474661-2698-1-git-send-email-koen@dominion.thruhere.net>
-References: <1367474661-2698-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQl54mGwF0oQD6aMYWaE3gHF3mIjCYsrYV0vR/ImoOZzfWl2Pi0bZ4uu1kasz5xg55dTg9+e
+X-Gm-Message-State: ALoCoQkNG8VbEci2jymJtjB8xdvI2swm50WWUM16943uA8hgkXrK3NYH7+/5S+65WC2U2kR8Ie/5
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-multimedia][PATCH 2/2] xbmc: convert to PACKAGECONFIG and fix runtime dependencies
+Subject: [meta-multimedia][PATCH 1/2] xbmc: add patch to make 'ld-is-gold' work with configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,58 +47,92 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 02 May 2013 06:22:46 -0000
-X-List-Received-Date: Thu, 02 May 2013 06:22:46 -0000
+
+The custom XBMC XB_FIND_SONAME macro doesn't work with the gold linker, backport a patch to fix it
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ ...igure-cope-with-ld-is-gold-DISTRO_FEATURE.patch | 43 ++++++++++++++++++++++
+ .../recipes-mediacentre/xbmc/xbmc_git.bb           |  5 ++-
+ 2 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
 
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
+new file mode 100644
+index 0000000..345e20e
+--- /dev/null
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
+@@ -0,0 +1,43 @@
++From fd8f73826240aae543a41a2bfeea0056e2fe594d Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Mon, 11 Mar 2013 11:04:29 +0100
++Subject: [PATCH] configure: cope with ld-is-gold DISTRO_FEATURE
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++
++Upstream-Stature: backport
++
++ configure.in |   12 +++++++-----
++ 1 files changed, 7 insertions(+), 5 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index ef94683..c8b459b 100755
++--- a/configure.in
+++++ b/configure.in
++@@ -18,9 +18,14 @@ tolower(){
++ # check for library basenames
++ AC_DEFUN([XB_FIND_SONAME],
++ [
+++  #set -x
++   if [[ "$host_vendor" != "apple" ]]; then
++     AC_MSG_CHECKING([for lib$2 soname])
++     $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 -Wl,-M 2>/dev/null | grep "^LOAD.*$2" | awk '{V=2; print $V}')
+++    if [[ -z $$1_FILENAME ]]; then
+++      #try gold linker syntax
+++      $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 -Wl,-t 3>&1 1>&2 2>&3 | grep "$2")
+++    fi
++     if [[ ! -z $$1_FILENAME ]]; then
++       $1_SONAME=$(objdump -p $$1_FILENAME | grep "SONAME.*$2" | awk '{V=2; print $V}')
++     fi
++@@ -55,6 +60,7 @@ AC_DEFUN([XB_FIND_SONAME],
++     AC_MSG_RESULT([$$1_SONAME])
++     AC_SUBST($1_SONAME)
++   fi
+++  #set +x
++ ])
++ 
++ # Function to push and pop libs and includes for a command
++-- 
++1.7.7.6
++
 diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-index 7d0a1d9..cb55f38 100644
+index b385a89..7d0a1d9 100644
 --- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
 +++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
- DEPENDS = "libmad libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
- #require recipes/egl/egl.inc
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
+            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
+            file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \
+            file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \
++           file://0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch \
+            file://configure.in-Avoid-running-code.patch \
+ "
  
+@@ -22,11 +23,13 @@ inherit autotools gettext python-dir
+ 
+ S = "${WORKDIR}/git"
+ 
++# breaks compilation
++CCACHE = ""
 +
- SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
- 
- PV = "11.0"
-@@ -30,13 +31,16 @@ CACHED_CONFIGUREVARS += " \
+ CACHED_CONFIGUREVARS += " \
      ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
  "
  
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
-+PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
-+PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
-+
+-
  EXTRA_OECONF = " \
      --disable-rpath \
      --enable-libusb \
-     --enable-airplay \
-     --disable-optical-drive \
-     --enable-external-libraries \
--    ${@base_contains('DISTRO_FEATURES', 'opengl', '--enable-gl', '--enable-gles', d)} \
- "
- 
- FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
-@@ -79,11 +83,14 @@ FILES_${PN} += "${datadir}/xsessions ${datadir}/icons"
- FILES_${PN}-dbg += "${libdir}/xbmc/.debug ${libdir}/xbmc/*/.debug ${libdir}/xbmc/*/*/.debug ${libdir}/xbmc/*/*/*/.debug"
- 
- # xbmc uses some kind of dlopen() method for libcec so we need to add it manually
-+# OpenGL builds need glxinfo, that's in mesa-demos
- RRECOMMENDS_${PN}_append = " libcec \
-                              python \
-                              python-lang \
-                              python-re \
-                              python-netclient \
-                              libcurl \
-+                             xdpyinfo \
-+                             ${@base_contains('DISTRO_FEATURES', 'opengl', 'mesa-demos', '', d)} \
- "
- RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 glibc-gconv-ibm850"
 -- 
 1.8.1.4
 
