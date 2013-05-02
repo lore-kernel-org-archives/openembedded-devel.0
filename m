@@ -1,24 +1,33 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail-ve0-f179.google.com ([209.85.128.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UXuVG-00064l-IM
+	(envelope-from <ross.burton@intel.com>) id 1UXubn-0006X6-Kz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 May 2013 16:29:00 +0200
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 02 May 2013 07:11:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,597,1363158000"; d="scan'208";a="330315189"
-Received: from unknown (HELO helios.localnet) ([10.255.12.165])
-	by orsmga002.jf.intel.com with ESMTP; 02 May 2013 07:10:57 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 02 May 2013 15:10:56 +0100
-Message-ID: <1714072.P9NRZQZN5F@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-19-generic; KDE/4.10.2; i686; ; )
+	Thu, 02 May 2013 16:35:44 +0200
+Received: by mail-ve0-f179.google.com with SMTP id oz11so541754veb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 May 2013 07:17:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:content-type:x-gm-message-state;
+	bh=WBoPeqpLhdWMc9WVKNBzTFgL6WrYtorwx7lrhU2KTQ8=;
+	b=AOj4xw77bw8FK9LQ732X1Jwz9IiMi88WTpXcb9u9EXtXJgelN1n9vUmy041pzfCXFe
+	0ldDj6G5bRqlcnfGLM/tmXoghtbkLtOXhBDk/PpEyRcsrtDaoH0s/eXv7gXTjh9+xlMQ
+	WG5BvBpXw4cQAltLOF/obmexwJRghPT70tztPsLG6i8xJX79aahVV0RkjdB8z/Zu8okd
+	jsxr422LSkH84HJpTKxaqx7cSG9SCZ+PfDSEkZgbCwRC4qjpadNGPygep3CRsyFGHK15
+	vLRRTeZSakdr2GdSbYOQsn6qgTEVYJOx9KhrrSXxfmxoJOQ4q5z4eLasZxOn0PLVP+xl
+	Jvsw==
+X-Received: by 10.58.90.66 with SMTP id bu2mr2214168veb.29.1367504269667; Thu,
+	02 May 2013 07:17:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.221.8.3 with HTTP; Thu, 2 May 2013 07:17:28 -0700 (PDT)
 In-Reply-To: <5182701F.5030605@pseudoterminal.org>
 References: <2924564.6VWmlqGvL5@helios> <5182701F.5030605@pseudoterminal.org>
-MIME-Version: 1.0
-Cc: Cristian Iorga <cristian.iorga@intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 2 May 2013 15:17:28 +0100
+Message-ID: <CAJTo0LbO+gQshPB4oBLHkrViGMo2154DWqrWexAiSDsOxqe6cA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnWJQrotKa6+g/n4qa7180TNDpzA0kAtfEgflxsPjiUjoGoZBBAFRVGgrogiqAWQdizDq9b
 Subject: Re: Please submit your unindexed layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,31 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 May 2013 14:29:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 02 May 2013 14:35:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thursday 02 May 2013 15:54:39 Carlos Rafael Giani wrote:
-> While I do have a layer for GStreamer 1.0 , I did not want to add it to
-> the index. My guess was that OE core developers might have been
-> preparing recipes for GStreamer 1.0 for later OE core versions already,
-> so the layer would then eventually be in conflict with OE core.
-> 
+On 2 May 2013 14:54, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
+> While I do have a layer for GStreamer 1.0 , I did not want to add it to the
+> index. My guess was that OE core developers might have been preparing
+> recipes for GStreamer 1.0 for later OE core versions already, so the layer
+> would then eventually be in conflict with OE core.
+>
 > So, should I add it now?
 
-I guess it depends on how long it will take to integrate these recipes in OE-
-Core. If it's going to take more than a couple of weeks it's probably fine to 
-add it to the index with a note saying the layer is temporary until the 
-recipes are integrated.
+Please add it, it's useful until it's integrated into oe-core.  With
+that said, please re-base your branch to master and send it to the
+oe-core list - the sooner we get it in the better.
 
-Cristian, Ross - opinions?
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
 
