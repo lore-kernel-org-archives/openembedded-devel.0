@@ -1,39 +1,38 @@
-Received: from mail-ee0-f43.google.com ([74.125.83.43])
+Received: from mail-oa0-f54.google.com ([209.85.219.54])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UYFSV-0000Io-2q
+	(envelope-from <nicolas.dechesne@linaro.org>) id 1UYGof-0001fc-51
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 May 2013 14:51:33 +0200
-Received: by mail-ee0-f43.google.com with SMTP id b15so759007eek.2
+	Fri, 03 May 2013 16:18:33 +0200
+Received: by mail-oa0-f54.google.com with SMTP id j1so1643513oag.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 May 2013 05:33:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=Y7OYlUibky1gHjz6h7WoTZGRnSmqWoVHwoABQCfWGB8=;
-	b=1AhHzE4o7rNOH9Y1RWybIuL9zGdQfX8qaq6bfV93qce52gp5gOYd+h4FgVykxI4ny3
-	vMhc/G1mxx7s0uFpaGI/A06SjGQy7IknSxtmpqXM0sxsgOoGC69z+FOXhgMBF8xxJdB2
-	RxmcKRAVtz7/kwuTMjTIkx6tnWkDw4Vl53O6YnDrBoarnonQ/LHaIT33iTEjxhaFdhz1
-	yTQCxXvh91K0iPYJGNoQ0XflHSkKT391RHfXAARGFrMKu3+bE7OKslDVzu3idWtsPcqA
-	bKuyNdLmfOWDmC1S0laFpCjPllL1qHW7oLGryxe5mMKGp+V52nse9vmSzEnOb0afAp/w
-	gqhA==
-X-Received: by 10.15.23.69 with SMTP id g45mr30865240eeu.25.1367584416203;
-	Fri, 03 May 2013 05:33:36 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
-	[95.222.160.204]) by mx.google.com with ESMTPSA id
-	bk42sm15658333eeb.3.2013.05.03.05.33.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 03 May 2013 05:33:35 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 May 2013 14:31:07 +0200
-Message-Id: <1367584267-8767-5-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
-In-Reply-To: <1367584267-8767-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1367584267-8767-1-git-send-email-schnitzeltony@googlemail.com>
+	Fri, 03 May 2013 07:00:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=Hv2GI/Xrt2uKhw4t9KRTne+Z74jrIgt7uuDlCYC4Jdg=;
+	b=cdR5fmDP3NxJQZRvGRSluwNtNUU4O1Pnh4phjNYcWGrFeFXGLG54fqA6rBXhwpqVfE
+	fuDHYBcGiJoWDoW0kX72S2uuUhoqq9y44ukzIqRCvA2NJLWnj4fxoeC3putNidbwlD8a
+	I5AgyhmEDb5LeMlgGUNhthOUsp5d0QO5C2GC922ExpKGLWcWb0FT8/QXdwRqgKUPiCVw
+	u05SP2XyWGI1ZqQlLzkvp+LNwJPNSz5Ze4Lf0HJ1a3cy99B855d6sjtj9iEHVb/3i8y7
+	qa8TLwtTF6WpPtcQezrcUTNSJH6Tu6B8o+Iw1WCb9fMCVCayKlM3RquhJnWUNG1CG17a
+	yWlA==
+X-Received: by 10.60.60.10 with SMTP id d10mr3000223oer.6.1367589633387; Fri,
+	03 May 2013 07:00:33 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe/master, V2 4/4] geany: update to 1.23 to fix build with glib 2.36
+Received: by 10.76.35.193 with HTTP; Fri, 3 May 2013 07:00:13 -0700 (PDT)
+In-Reply-To: <CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
+References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
+	<68356141.McDxtR3Bre@helios> <517BA9C6.6090707@balister.org>
+	<1756231.MGNYtfpC2x@helios>
+	<CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 3 May 2013 16:00:13 +0200
+Message-ID: <CAP71WjxM+5h436zjUYUAAvO3awMOiyqS1Wo62ibTGQZEmPRiEQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnLZ9gi9m1etS2LXF/su3c8Oy2XBZfx9c9yZAeNREu+uvDDc9coWRwJodMdD0Lwx6pogksw
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2013 12:51:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 03 May 2013 14:18:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-license change of FSF address only
+On Mon, Apr 29, 2013 at 8:40 AM, Nicolas Dechesne
+<nicolas.dechesne@linaro.org> wrote:
+> On Sat, Apr 27, 2013 at 1:13 PM, Paul Eggleton
+> <paul.eggleton@linux.intel.com> wrote:
+>>> > On Friday 26 April 2013 23:41:38 Koen Kooi wrote:
+>>> >> And do you really need a .inc?
+>>> >
+>>> > Are we removing inc files if they were present in OE Classic? First I've
+>>> > heard if we are...
+>>>
+>>> If we are trying to reduce the number of versions of recipes we carry,
+>>> dropping .inc files would seem to be a good idea. I don't have strong
+>>> feelings, but it seems like something we should consider.
+>>
+>> I agree we should try to keep only one version of each recipe in software
+>> layers, however I figure it makes it easier for people to carry their own
+>> versions of recipes in distro layers (particularly older, which may be
+>> required in certain circumstances) if we do keep inc files where they already
+>> exist.
+>
+> I put the .inc in this patch, indeed because it was there in OE
+> Classic. I can update the patch if there is a consensus to remove the
+> .inc.
+>
+> also for the INC_PR, I added it, because I thought it makes sense for
+> .bb with .inc to have that. again, i can update the patch if you
+> recommend doing this way.
+>
+> thx
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../geany/{geany_1.22.bb => geany_1.23.bb}         |    7 +++----
- 1 files changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/geany/{geany_1.22.bb => geany_1.23.bb} (58%)
+hi, can you please let me know what I should do here? i can update the
+patch if needed, but not sure there is a clear consensus on what to
+do!
 
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.22.bb b/meta-oe/recipes-devtools/geany/geany_1.23.bb
-similarity index 58%
-rename from meta-oe/recipes-devtools/geany/geany_1.22.bb
-rename to meta-oe/recipes-devtools/geany/geany_1.23.bb
-index f56c8f3..604c7c2 100644
---- a/meta-oe/recipes-devtools/geany/geany_1.22.bb
-+++ b/meta-oe/recipes-devtools/geany/geany_1.23.bb
-@@ -1,9 +1,8 @@
- DESCRIPTION = "A fast and lightweight IDE"
- HOMEPAGE = "http://www.geany.org/"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
- DEPENDS = "gtk+"
--PR = "r2"
- 
- inherit autotools pkgconfig perlnative
- 
-@@ -11,7 +10,7 @@ SRC_URI = " \
-     http://download.geany.org/${PN}-${PV}.tar.bz2 \
-     file://0001-configure.ac-remove-additional-c-test.patch \
- "
--SRC_URI[md5sum] = "0672077fe83e2a739aa0eaca426aacf0"
--SRC_URI[sha256sum] = "901a35a7395ef10a80fb10b3ab63bae3871693a4e82d56388e9521a27877577e"
-+SRC_URI[md5sum] = "4290e8c32305e916f57bb0f0233bbec2"
-+SRC_URI[sha256sum] = "cdd4a772694803c837ae59e56f7bdc2faba174509317211f522e7d25dfcbe8b0"
- 
- FILES_${PN} += "${datadir}/icons"
--- 
-1.7.6.5
-
+nicolas
 
 
