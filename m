@@ -1,37 +1,27 @@
-Received: from mail-oa0-f46.google.com ([209.85.219.46])
+Received: from mga02.intel.com ([134.134.136.20])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nicolas.dechesne@linaro.org>) id 1UYHHl-0004n6-2V
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UYHM7-0005aD-2f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 May 2013 16:48:33 +0200
-Received: by mail-oa0-f46.google.com with SMTP id j6so1686308oag.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 May 2013 07:30:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=v0hxGaq0vd+1y4FFm/CdsPt3w0ubprXDnvq5aAfk4So=;
-	b=Zn6xCEjtWuYqOMXR87FiwqC6tvWhnCKvo4VwpntAiXsWy1wZdjEf052WMdL5JYfulH
-	ZJ7sbnPHkOc++aQR6Sj5pzF7fA3M/gPY1evSeuCzuFM7Rgfzk0dYWSjXXE7ni72SAw2o
-	1SC2GpFqh+mI7G3vPDY5cadR8B28BPTSwQBhk1fGTPr9agajiV/QQcyF94ncMKUW/5on
-	gz/4rVtPo7TzCBpd2imizVUN1HZS8hP0E39rBJf7Ppa2SJ8r9EWAzjHeMrQhhLQ+e5lU
-	Of0ueH6UCa8STZimvMBCHbAY7Uth5caG4OmSTrGQHR5hAQntTj/4Iij8LvN4dXIeypS8
-	oO3g==
-X-Received: by 10.60.34.167 with SMTP id a7mr3087881oej.20.1367591437348; Fri,
-	03 May 2013 07:30:37 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.35.193 with HTTP; Fri, 3 May 2013 07:30:17 -0700 (PDT)
-In-Reply-To: <576F47F5-73BA-4369-9A2E-666939097E0A@dominion.thruhere.net>
+	Fri, 03 May 2013 16:53:19 +0200
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 03 May 2013 07:35:06 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,605,1363158000"; d="scan'208";a="331007338"
+Received: from unknown (HELO helios.localnet) ([10.255.12.224])
+	by orsmga002.jf.intel.com with ESMTP; 03 May 2013 07:35:05 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 03 May 2013 15:35:04 +0100
+Message-ID: <12323341.7tMrSLVFbj@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.8.0-19-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <CAP71WjxM+5h436zjUYUAAvO3awMOiyqS1Wo62ibTGQZEmPRiEQ@mail.gmail.com>
 References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
-	<68356141.McDxtR3Bre@helios> <517BA9C6.6090707@balister.org>
-	<1756231.MGNYtfpC2x@helios>
-	<576F47F5-73BA-4369-9A2E-666939097E0A@dominion.thruhere.net>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 3 May 2013 16:30:17 +0200
-Message-ID: <CAP71WjwFFivLQ1NaMtudjCZyv1D_Xtodf5utigWPACAg=OA5dw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnUFIh7ZexyM+pfhDK91mbNUupjCNk215RqC92s8LYADwJXgrTNK0VkOEVl1oxp7X9FJSLa
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
+	<CAP71WjxM+5h436zjUYUAAvO3awMOiyqS1Wo62ibTGQZEmPRiEQ@mail.gmail.com>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,27 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2013 14:48:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 May 2013 14:53:25 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, May 3, 2013 at 4:10 PM, Koen Kooi <koen@dominion.thruhere.net>wrote:
+On Friday 03 May 2013 16:00:13 Nicolas Dechesne wrote:
+> On Mon, Apr 29, 2013 at 8:40 AM, Nicolas Dechesne
+> 
+> <nicolas.dechesne@linaro.org> wrote:
+> > On Sat, Apr 27, 2013 at 1:13 PM, Paul Eggleton
+> > 
+> > <paul.eggleton@linux.intel.com> wrote:
+> >>> > On Friday 26 April 2013 23:41:38 Koen Kooi wrote:
+> >>> >> And do you really need a .inc?
+> >>> > 
+> >>> > Are we removing inc files if they were present in OE Classic? First
+> >>> > I've
+> >>> > heard if we are...
+> >>> 
+> >>> If we are trying to reduce the number of versions of recipes we carry,
+> >>> dropping .inc files would seem to be a good idea. I don't have strong
+> >>> feelings, but it seems like something we should consider.
+> >> 
+> >> I agree we should try to keep only one version of each recipe in software
+> >> layers, however I figure it makes it easier for people to carry their own
+> >> versions of recipes in distro layers (particularly older, which may be
+> >> required in certain circumstances) if we do keep inc files where they
+> >> already exist.
+> > 
+> > I put the .inc in this patch, indeed because it was there in OE
+> > Classic. I can update the patch if there is a consensus to remove the
+> > .inc.
+> > 
+> > also for the INC_PR, I added it, because I thought it makes sense for
+> > .bb with .inc to have that. again, i can update the patch if you
+> > recommend doing this way.
+> 
+> hi, can you please let me know what I should do here? i can update the
+> patch if needed, but not sure there is a clear consensus on what to
+> do!
 
-> > I agree we should try to keep only one version of each recipe in software
-> > layers, however I figure it makes it easier for people to carry their own
-> > versions of recipes in distro layers (particularly older, which may be
-> > required in certain circumstances) if we do keep inc files where they
-> already
-> > exist.
->
-> Can people raise their hand if they want to have a different version of
-> smartmontools in their layer?
+IMO, let's keep the separate inc file, but drop PR and INC_PR.
+
+Cheers,
+Paul
 
 
-i think it would be nice to have a policy for that. i am going to send a
-couple of recipes for new components, and it would be good to know what's
-the agreed 'policy' for .inc file. in fact, it's not even clear to me why
-have .inc file is easier to carry different version in distro layers. well
-it's just a 'large' recipe to carry over..
+-- 
 
-nicolas
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
