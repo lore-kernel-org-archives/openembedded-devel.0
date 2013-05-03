@@ -1,24 +1,37 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-ee0-f52.google.com ([74.125.83.52])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <eric@eukrea.com>) id 1UYDK5-0001rk-GO
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UYDzK-00073z-O2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 May 2013 12:34:43 +0200
-Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 671F54B0180;
-	Fri,  3 May 2013 12:16:41 +0200 (CEST)
-Date: Fri, 3 May 2013 12:16:39 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Fri, 03 May 2013 13:17:23 +0200
+Received: by mail-ee0-f52.google.com with SMTP id d41so698902eek.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 May 2013 03:59:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=HulBE3xAlSlfXOTHm+MoG+SgIvSoQpzYtkU2oS5Qz3k=;
+	b=U7Rm+kUCzlluakWLvfNqZtZrmfMh8UQafQDUHbf7DtA7pt49PqsPI5YHpBw8VUE9aC
+	BLZ0glGhVS6+QIDbYwB4P0N1Ey9butbutpzEOFggXIits41mHIuV2LeEkWKXY3m+Q5mO
+	zJO4DN6k2rhu1cP9rwU+r3YbTHdtqQXoQdCV34vzWuSgGd2h+Zhg3+CuScQevROLPw3W
+	JsG6teg8hdrAIuEgvpvHr7itJBhANZSP8vl/29K5/cGAay2DpvHt78NVh87gPCwKonpK
+	Wq13rHsgaEUkFLXuUf0vtWuQC94ZMHTdZZ2Vv8/qrn+JnwiseVHUUyjRQFvaQuS0EjmQ
+	HG1Q==
+X-Received: by 10.14.3.137 with SMTP id 9mr18617674eeh.0.1367578764084;
+	Fri, 03 May 2013 03:59:24 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
+	[95.222.160.204])
+	by mx.google.com with ESMTPSA id n7sm15205167eeo.0.2013.05.03.03.59.22
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 03 May 2013 03:59:23 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130503121639.5ef55ace@e6520eb>
-In-Reply-To: <CALbNGRT7OG1OxNhyvkjrcKxXPysOpX3QO1tqr-oy9SvAPGNy2Q@mail.gmail.com>
-References: <1367575432-5173-1-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRT7OG1OxNhyvkjrcKxXPysOpX3QO1tqr-oy9SvAPGNy2Q@mail.gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.13; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: otavio@ossystems.com.br
-Subject: Re: [PATCH] chromium: fix build with glib >= 2.35
+Date: Fri,  3 May 2013 12:56:56 +0200
+Message-Id: <1367578619-19890-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-oe/master 0/3] glib 2.36 fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,107 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2013 10:34:44 -0000
+X-List-Received-Date: Fri, 03 May 2013 11:17:32 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Le Fri, 3 May 2013 12:08:10 +0200,
-Andreas M=C3=BCller <schnitzeltony@googlemail.com> a =C3=A9crit :
+The following changes since commit 62ad7c96a12bc54871bf37366cfe89ec96881537:
 
-> On Fri, May 3, 2013 at 12:03 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> > ---
-> >  ...ser_main_loop.cc-fix-build-with-glib-2.35.patch |   42 ++++++++++++=
-++++++++
-> >  recipes-browser/chromium/chromium_24.0.1312.52.bb  |    3 +-
-> >  2 files changed, 44 insertions(+), 1 deletions(-)
-> >  create mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/0001=
--browser_main_loop.cc-fix-build-with-glib-2.35.patch
-> >
-> > diff --git a/recipes-browser/chromium/chromium-24.0.1312.52/0001-browse=
-r_main_loop.cc-fix-build-with-glib-2.35.patch b/recipes-browser/chromium/ch=
-romium-24.0.1312.52/0001-browser_main_loop.cc-fix-build-with-glib-2.35.patch
-> > new file mode 100644
-> > index 0000000..cdf8051
-> > --- /dev/null
-> > +++ b/recipes-browser/chromium/chromium-24.0.1312.52/0001-browser_main_=
-loop.cc-fix-build-with-glib-2.35.patch
-> > @@ -0,0 +1,42 @@
-> > +From eb0c0c982322c0e366c1c854475ceda6342dd55a Mon Sep 17 00:00:00 2001
-> > +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googl=
-email.com>
-> > +Date: Thu, 2 May 2013 15:12:24 +0200
-> > +Subject: [PATCH] browser_main_loop.cc: fix build with glib > 2.35
-> > +MIME-Version: 1.0
-> > +Content-Type: text/plain; charset=3DUTF-8
-> > +Content-Transfer-Encoding: 8bit
-> > +
-> > +Upstream-Status: Applied [1]
-> > +
-> > +[1] http://code.ohloh.net/file?fid=3DpYuYekcDZUhiAoN5uY-KdIaKFTI&cid=
-=3D0W4KUpSYxGo&s=3D&browser=3DDefault#L0
-> > +
-> > +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> > +---
-> > + content/browser/browser_main_loop.cc |    5 +++++
-> > + 1 files changed, 5 insertions(+), 0 deletions(-)
-> > +
-> > +diff --git a/content/browser/browser_main_loop.cc b/content/browser/br=
-owser_main_loop.cc
-> > +index ad4b0c6..86deea3 100644
-> > +--- a/content/browser/browser_main_loop.cc
-> > ++++ b/content/browser/browser_main_loop.cc
-> > +@@ -687,12 +687,17 @@ void BrowserMainLoop::InitializeToolkit() {
-> > +   // TODO(stevenjb): Move platform specific code into platform specif=
-ic Parts
-> > +   // (Need to add InitializeToolkit stage to BrowserParts).
-> > + #if defined(OS_LINUX) || defined(OS_OPENBSD)
-> > ++  // g_type_init will be deprecated in 2.36. 2.35 is the development
-> > ++  // version for 2.36, hence do not call g_type_init starting 2.35.
-> > ++  // http://developer.gnome.org/gobject/unstable/gobject-Type-Informa=
-tion.html#g-type-init
-> > ++#if !GLIB_CHECK_VERSION(2, 35, 0)
-> > +   // Glib type system initialization. Needed at least for gconf,
-> > +   // used in net/proxy/proxy_config_service_linux.cc. Most likely
-> > +   // this is superfluous as gtk_init() ought to do this. It's
-> > +   // definitely harmless, so retained as a reminder of this
-> > +   // requirement for gconf.
-> > +   g_type_init();
-> > ++#endif
-> > +
-> > + #if !defined(USE_AURA)
-> > +   gfx::GtkInitFromCommandLine(parsed_command_line_);
-> > +--
-> > +1.7.6.5
-> > +
-> > diff --git a/recipes-browser/chromium/chromium_24.0.1312.52.bb b/recipe=
-s-browser/chromium/chromium_24.0.1312.52.bb
-> > index 2827cc1..a9a2d28 100644
-> > --- a/recipes-browser/chromium/chromium_24.0.1312.52.bb
-> > +++ b/recipes-browser/chromium/chromium_24.0.1312.52.bb
-> > @@ -11,9 +11,10 @@ SRC_URI =3D "http://commondatastorage.googleapis.com=
-/chromium-browser-official/${P
-> >          file://ui-gl-no-narrowing.patch \
-> >          file://google-chrome \
-> >          file://google-chrome.desktop \
-> > +        file://0001-browser_main_loop.cc-fix-build-with-glib-2.35.patc=
-h \
-> >  "
-> >
-> > -PR =3D "r1"
-> > +PR =3D "r2"
-> >
-> >  # include.gypi exists only for armv6 and armv7a and there isn't someth=
-ing like COMPATIBLE_ARCH afaik
-> >  COMPATIBLE_MACHINE =3D "(-)"
-> > --
-> > 1.7.6.5
-> >
-> Aargh Sorry - I forgot meta-browser as subject prefix. Resend?
->=20
-no don't worry I got it
+  connman: Fix .bbappend name (2013-05-02 13:04:52 +0200)
 
-Eric
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git glibc-2.36-fixes
+
+Andreas Müller (3):
+      gvfs: slightly update to 1.10.1 and backport patches to build with glib 2.36
+      orbit2: update to latest stable / fix build with glib 2.36
+      geany: update to 1.23 to fix build with glib 2.36
+
+ ...ect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch |   57 +
+ .../0001-gvfsfusedaemon.c-fix-glib-build.patch     |   31 -
+ ...ib-2.31-deprecations-and-thread-API-chang.patch |  599 +++++
+ .../0003-Adapt-to-glib-mutex-API-changes.patch     | 2454 ++++++++++++++++++++
+ .../0004-Adapt-to-glib-thread-API-changes.patch    |   44 +
+ ..._1.8.2.bb => gvfs-gdu-volume-monitor_1.10.1.bb} |    2 +-
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |   15 +-
+ .../gvfs/{gvfs_1.8.2.bb => gvfs_1.10.1.bb}         |    2 +-
+ ...-src-Makefile.am-fix-build-with-glib-2.36.patch |   34 +
+ .../configure-lossage.patch                        |    0
+ .../{orbit2-2.14.17 => orbit2}/pkgconfig-fix.patch |    0
+ .../{orbit2_2.14.17.bb => orbit2_2.14.19.bb}       |   16 +-
+ .../geany/{geany_1.22.bb => geany_1.23.bb}         |    7 +-
+ 13 files changed, 3213 insertions(+), 48 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-Revert-Respect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gvfs/files/0001-gvfsfusedaemon.c-fix-glib-build.patch
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0003-Adapt-to-glib-mutex-API-changes.patch
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0004-Adapt-to-glib-thread-API-changes.patch
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs-gdu-volume-monitor_1.8.2.bb => gvfs-gdu-volume-monitor_1.10.1.bb} (97%)
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.8.2.bb => gvfs_1.10.1.bb} (97%)
+ create mode 100644 meta-gnome/recipes-gnome/orbit2/orbit2/0001-linc2-src-Makefile.am-fix-build-with-glib-2.36.patch
+ rename meta-gnome/recipes-gnome/orbit2/{orbit2-2.14.17 => orbit2}/configure-lossage.patch (100%)
+ rename meta-gnome/recipes-gnome/orbit2/{orbit2-2.14.17 => orbit2}/pkgconfig-fix.patch (100%)
+ rename meta-gnome/recipes-gnome/orbit2/{orbit2_2.14.17.bb => orbit2_2.14.19.bb} (68%)
+ rename meta-oe/recipes-devtools/geany/{geany_1.22.bb => geany_1.23.bb} (58%)
+
+-- 
+1.7.6.5
+
 
 
