@@ -1,37 +1,43 @@
-Received: from mail-oa0-f54.google.com ([209.85.219.54])
+Received: from mail-ee0-f43.google.com ([74.125.83.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nicolas.dechesne@linaro.org>) id 1UYGof-0001fc-51
+	(envelope-from <koen@dominion.thruhere.net>) id 1UYGyR-0002df-Iw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 May 2013 16:18:33 +0200
-Received: by mail-oa0-f54.google.com with SMTP id j1so1643513oag.27
+	Fri, 03 May 2013 16:28:37 +0200
+Received: by mail-ee0-f43.google.com with SMTP id b15so777641eek.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 May 2013 07:00:33 -0700 (PDT)
+	Fri, 03 May 2013 07:10:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=Hv2GI/Xrt2uKhw4t9KRTne+Z74jrIgt7uuDlCYC4Jdg=;
-	b=cdR5fmDP3NxJQZRvGRSluwNtNUU4O1Pnh4phjNYcWGrFeFXGLG54fqA6rBXhwpqVfE
-	fuDHYBcGiJoWDoW0kX72S2uuUhoqq9y44ukzIqRCvA2NJLWnj4fxoeC3putNidbwlD8a
-	I5AgyhmEDb5LeMlgGUNhthOUsp5d0QO5C2GC922ExpKGLWcWb0FT8/QXdwRqgKUPiCVw
-	u05SP2XyWGI1ZqQlLzkvp+LNwJPNSz5Ze4Lf0HJ1a3cy99B855d6sjtj9iEHVb/3i8y7
-	qa8TLwtTF6WpPtcQezrcUTNSJH6Tu6B8o+Iw1WCb9fMCVCayKlM3RquhJnWUNG1CG17a
-	yWlA==
-X-Received: by 10.60.60.10 with SMTP id d10mr3000223oer.6.1367589633387; Fri,
-	03 May 2013 07:00:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.35.193 with HTTP; Fri, 3 May 2013 07:00:13 -0700 (PDT)
-In-Reply-To: <CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=WObDqSQC5AYeaHhhCXeqwQm8at+VbVfBCRvsY5pl13k=;
+	b=bnCKU1nDRd+T5662KZJtJSxInRKchYY/f4lcDrnMmepUliSNyF6Wy7EvCH80g14weB
+	kcoDLrXWE9GYdlxh/MXglHcutZNUKzug/Aco5OK3qeSEaVtvm+BtHFQg3hgpsJX4D/fK
+	6sf8ziC9QPk/IrRuQbx16iJ0ij23vvOXJuaTZrCp3kjaXwY43smFwXP/2upsbZ9yJel3
+	xTI3QJ2Jn5FYqVBmC+ff6CBVhGETKx1+eMOQBrbzmPJQibBmLcuAKboJlA3WeiHJx9Ap
+	/cZNzeObREaurlEpj7pJoVlBhqjxzzFRjqg1LTIZTZFaarfoWKWwD02C6Lmp6xf0P6QN
+	bEDQ==
+X-Received: by 10.15.36.135 with SMTP id i7mr31753177eev.34.1367590240290;
+	Fri, 03 May 2013 07:10:40 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::dc8:274f:2522:bd85?
+	([2001:610:612:0:dc8:274f:2522:bd85])
+	by mx.google.com with ESMTPSA id c44sm12783443eeb.4.2013.05.03.07.10.38
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 03 May 2013 07:10:39 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1756231.MGNYtfpC2x@helios>
+Date: Fri, 3 May 2013 16:10:40 +0200
+Message-Id: <576F47F5-73BA-4369-9A2E-666939097E0A@dominion.thruhere.net>
 References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
 	<68356141.McDxtR3Bre@helios> <517BA9C6.6090707@balister.org>
 	<1756231.MGNYtfpC2x@helios>
-	<CAP71Wjw0rs0-WA=c4a92zsXCkrea8P7+CsbBdCU7HDd20MWCsQ@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 3 May 2013 16:00:13 +0200
-Message-ID: <CAP71WjxM+5h436zjUYUAAvO3awMOiyqS1Wo62ibTGQZEmPRiEQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnLZ9gi9m1etS2LXF/su3c8Oy2XBZfx9c9yZAeNREu+uvDDc9coWRwJodMdD0Lwx6pogksw
-Cc: Koen Kooi <koen@dominion.thruhere.net>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1503)
+X-Gm-Message-State: ALoCoQlYsxTR+pS36RG3R0rkm5qxDv3WJzOX/cm/8Yv+zYxbqJHE7pgq6UjK86x238Oz3DSl3Tdm
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,43 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2013 14:18:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 May 2013 14:28:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 29, 2013 at 8:40 AM, Nicolas Dechesne
-<nicolas.dechesne@linaro.org> wrote:
-> On Sat, Apr 27, 2013 at 1:13 PM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
->>> > On Friday 26 April 2013 23:41:38 Koen Kooi wrote:
->>> >> And do you really need a .inc?
->>> >
->>> > Are we removing inc files if they were present in OE Classic? First I've
->>> > heard if we are...
->>>
->>> If we are trying to reduce the number of versions of recipes we carry,
->>> dropping .inc files would seem to be a good idea. I don't have strong
->>> feelings, but it seems like something we should consider.
->>
->> I agree we should try to keep only one version of each recipe in software
->> layers, however I figure it makes it easier for people to carry their own
->> versions of recipes in distro layers (particularly older, which may be
->> required in certain circumstances) if we do keep inc files where they already
->> exist.
->
-> I put the .inc in this patch, indeed because it was there in OE
-> Classic. I can update the patch if there is a consensus to remove the
-> .inc.
->
-> also for the INC_PR, I added it, because I thought it makes sense for
-> .bb with .inc to have that. again, i can update the patch if you
-> recommend doing this way.
->
-> thx
 
-hi, can you please let me know what I should do here? i can update the
-patch if needed, but not sure there is a clear consensus on what to
-do!
+Op 27 apr. 2013, om 13:13 heeft Paul Eggleton =
+<paul.eggleton@linux.intel.com> het volgende geschreven:
 
-nicolas
+> On Saturday 27 April 2013 06:34:46 Philip Balister wrote:
+>> On 04/27/2013 04:24 AM, Paul Eggleton wrote:
+>>> On Friday 26 April 2013 23:41:38 Koen Kooi wrote:
+>>>> And do you really need a .inc?
+>>>=20
+>>> Are we removing inc files if they were present in OE Classic? First =
+I've
+>>> heard if we are...
+>>=20
+>> If we are trying to reduce the number of versions of recipes we =
+carry,
+>> dropping .inc files would seem to be a good idea. I don't have strong
+>> feelings, but it seems like something we should consider.
+>=20
+> I agree we should try to keep only one version of each recipe in =
+software=20
+> layers, however I figure it makes it easier for people to carry their =
+own=20
+> versions of recipes in distro layers (particularly older, which may be=20=
+
+> required in certain circumstances) if we do keep inc files where they =
+already=20
+> exist.
+
+Can people raise their hand if they want to have a different version of =
+smartmontools in their layer?=
 
 
