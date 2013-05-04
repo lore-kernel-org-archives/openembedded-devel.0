@@ -1,38 +1,38 @@
-Received: from mail-wg0-f52.google.com ([74.125.82.52])
+Received: from mail-we0-f182.google.com ([74.125.82.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>) id 1UYZ9r-00048R-CZ
+	(envelope-from <paul.betafive@gmail.com>) id 1UYZ9o-00047y-VK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 May 2013 11:53:41 +0200
-Received: by mail-wg0-f52.google.com with SMTP id k13so2253515wgh.19
+	Sat, 04 May 2013 11:53:38 +0200
+Received: by mail-we0-f182.google.com with SMTP id r46so1881197wey.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 May 2013 02:35:39 -0700 (PDT)
+	Sat, 04 May 2013 02:35:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer
 	:in-reply-to:references;
-	bh=NN4/KcVr+FY/OAawUfOQXPJ1UbWIvCK7qjhs21On6xc=;
-	b=r0C1JQkjqrD0tKo0hVeI4J20lX7xOg+MltuOV3RdfSXsFtb+1XVwOSaTwdkdmKbu6R
-	E1PEOtnOMUNezmeN2LNnQI62x1kkWPudh7VKaUUfpAHYd47Z1hZeV3d0b1jUsSTSLviT
-	6k/EOUDdEQBARDANj1nWGkUkvBAlu8wm7jVKOPnOJZ/fGYYhv6CbtOv0gSSzRWX//l9B
-	Vn8jn5BsF/wYzoYQ2+s1+lcSgdD5ZxM4R+6KUgP1ntbr8QxAJoCsYH4/hcYtEfnfMVoc
-	+HjVXJlfRwlOAXVugCKsLh6GavH/9JW2ozJL0XTFC6WrjsO9v55hY1XsQRHyOc6w3gSt
-	er+A==
-X-Received: by 10.194.121.129 with SMTP id lk1mr17658771wjb.45.1367660139406; 
-	Sat, 04 May 2013 02:35:39 -0700 (PDT)
+	bh=IAm1ywmzgoJpoCCX53kxMwE9HjmYQwNxuUFp9j0liR8=;
+	b=bgtDJHpcXjKV65h2QeQ2gzp9+KXm1o6YUNrTfP+aP4ZizPbHCEPNB6EvGCo9rZ8z9/
+	8ZIq2I8wCYCNvJhRDS2WPnl075/EYwebfGA3Qq67zdOlPMIgOmh63PYc+o25Rw1BjcdX
+	N7dt0Kn5yE0mEtUWkiTUcqSg5xgWKBIif79AjSbAHiowbqDXiU2PiO1Kpuc8Yqa0DQCD
+	w8dYVPrgxER5Rqtfle68y7r72xehPrtFAnwy8TozaQO4JhukFlRGpdSrisv3OYFcZOWW
+	nsY/dS0FxpWBkSneKg5MsFbLpbJ+HtfJip0RugxF//i5U/8yio24x3DuQZRQcUnGwIIr
+	oGgA==
+X-Received: by 10.180.21.242 with SMTP id y18mr1487961wie.7.1367660136940;
+	Sat, 04 May 2013 02:35:36 -0700 (PDT)
 Received: from vesta.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
 	[94.192.12.83])
-	by mx.google.com with ESMTPSA id ed20sm2150948wic.0.2013.05.04.02.35.38
+	by mx.google.com with ESMTPSA id ed20sm2150948wic.0.2013.05.04.02.35.35
 	for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 04 May 2013 02:35:38 -0700 (PDT)
+	Sat, 04 May 2013 02:35:36 -0700 (PDT)
 Sender: Paul Barker <paul.betafive@gmail.com>
 From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 May 2013 10:35:16 +0100
-Message-Id: <1367660117-19572-5-git-send-email-paul@paulbarker.me.uk>
+Date: Sat,  4 May 2013 10:35:14 +0100
+Message-Id: <1367660117-19572-3-git-send-email-paul@paulbarker.me.uk>
 X-Mailer: git-send-email 1.8.2.2
 In-Reply-To: <1367660117-19572-1-git-send-email-paul@paulbarker.me.uk>
 References: <1367660117-19572-1-git-send-email-paul@paulbarker.me.uk>
-Subject: [meta-multimedia][PATCH 4/5] vlc: removed unrecognised configure options
+Subject: [meta-multimedia][PATCH 2/5] fluidsynth: added dependency on glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +47,25 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 04 May 2013 09:53:49 -0000
-X-List-Received-Date: Sat, 04 May 2013 09:53:49 -0000
-
-The configure options --enable-libtool, --disable-wxwidgets, --enable-x11,
---enable-wma and --disable-hal were not recognised by the configure script for
-vlc and therefore do not have any effect (they just cause a warning).
-
-These options are removed to prevent confusion.
 
 Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 1fe2d04..059d7d2 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -47,20 +47,17 @@ FILES_${PN}-dbg    += "${libdir}/vlc/*/.debug ${libdir}/vlc/plugins/*/.debug"
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
+index 4986da2..80b2de9 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
+@@ -4,7 +4,7 @@ SECTION = "libs/multimedia"
+ LICENSE = "LGPL-2.0+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
  
- EXTRA_OECONF = "\
-     --enable-dvdread \
--    --enable-libtool \
-     --with-contrib \
-     --enable-run-as-root \
--    --disable-wxwidgets \
--    --enable-x11 --enable-xvideo \ 
-+    --enable-xvideo \ 
-     --disable-screen --disable-caca \
-     --enable-httpd --enable-vlm \
-     --enable-freetype \
-     --enable-sdl \ 
-     --enable-png \
-     --enable-live555 --enable-tremor \
--    --enable-v4l2 --enable-v4l --disable-aa --enable-wma --disable-faad \
-+    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
-     --enable-dbus \
--    --disable-hal \    
-     --without-contrib \
-     --without-kde-solid \
-     --disable-opengl --disable-glx \
+-DEPENDS = "alsa-lib ncurses"
++DEPENDS = "alsa-lib ncurses glib-2.0"
+ 
+ SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
+ SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
 -- 
 1.8.2.2
 
