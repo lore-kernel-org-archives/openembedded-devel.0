@@ -1,28 +1,38 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1UYHzB-0001fG-Go
+Received: from mail-wg0-f46.google.com ([74.125.82.46])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <paul.betafive@gmail.com>) id 1UYZ9q-000485-4o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 May 2013 17:33:27 +0200
-Received: (qmail 17993 invoked by uid 1003); 3 May 2013 15:15:29 -0000
-Received: from unknown (HELO ?192.168.1.106?)
-	(philip@opensdr.com@71.171.26.125)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	3 May 2013 15:15:29 -0000
-Message-ID: <5183D490.8050804@balister.org>
-Date: Fri, 03 May 2013 11:15:28 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
-MIME-Version: 1.0
+	Sat, 04 May 2013 11:53:38 +0200
+Received: by mail-wg0-f46.google.com with SMTP id n12so2191099wgh.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 May 2013 02:35:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer
+	:in-reply-to:references;
+	bh=zYxJZ1rT8kGE4ht3sHPkxN1ZCe4ToKWxinO+K0Vg+g8=;
+	b=yElRgleYLtY2CTPxrsCsZ3vG57JDvI7Zpaodx+sl8TMJI/Ml8z0Z7oU7Lp/fAGG2Jw
+	1X3BvHA8RZr8w0H3Ou9ge2gl+Xi7TcQWKwWHa1+z3TxakHhMcLltQEucM2rf57oTGpPc
+	/ckOvBqlOw5F6Tt2FRtxhWLNUs4atBUSwt4fThB+vClwvHy9kLWb4TFY318ZtZ8DaMNn
+	MUxd9fRbxSrTLxS6sFOhitpkgBrz9JSDM+upQqyjOcyO3m9D6u9fM7jCT0KV19JZEq5k
+	/CwpvrdG935hA1Aft5NW12b54OjV09hdJOzo2xh+V2gxRfa8GsfVsiTqBwmMEpvc+c4W
+	odZA==
+X-Received: by 10.180.187.206 with SMTP id fu14mr1476533wic.11.1367660138173; 
+	Sat, 04 May 2013 02:35:38 -0700 (PDT)
+Received: from vesta.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
+	[94.192.12.83])
+	by mx.google.com with ESMTPSA id ed20sm2150948wic.0.2013.05.04.02.35.36
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 04 May 2013 02:35:37 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
-	<576F47F5-73BA-4369-9A2E-666939097E0A@dominion.thruhere.net>
-	<CAP71WjwFFivLQ1NaMtudjCZyv1D_Xtodf5utigWPACAg=OA5dw@mail.gmail.com>
-	<2863767.6XU4RXlosl@helios> <20130503150917.GB3187@jama>
-In-Reply-To: <20130503150917.GB3187@jama>
-X-Enigmail-Version: 1.5.1
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
+Date: Sat,  4 May 2013 10:35:15 +0100
+Message-Id: <1367660117-19572-4-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.8.2.2
+In-Reply-To: <1367660117-19572-1-git-send-email-paul@paulbarker.me.uk>
+References: <1367660117-19572-1-git-send-email-paul@paulbarker.me.uk>
+Subject: [meta-multimedia][PATCH 3/5] vlc: moved to meta-multimedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,121 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 May 2013 15:33:27 -0000
-X-Groupsio-MsgNum: 44587
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="----enig2IIRDTDSDXLKJMFSDPQQI"
+X-List-Received-Date: Sat, 04 May 2013 09:53:49 -0000
 
-------enig2IIRDTDSDXLKJMFSDPQQI
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+vlc depends on fluidsynth which is in meta-multimedia.
 
-On 05/03/2013 11:09 AM, Martin Jansa wrote:
-> On Fri, May 03, 2013 at 03:42:30PM +0100, Paul Eggleton wrote:
->> On Friday 03 May 2013 16:30:17 Nicolas Dechesne wrote:
->>> On Fri, May 3, 2013 at 4:10 PM, Koen Kooi <koen@dominion.thruhere.net=
->wrote:
->>>>> I agree we should try to keep only one version of each recipe in
->>>>> software
->>>>> layers, however I figure it makes it easier for people to carry the=
-ir
->>>>> own
->>>>> versions of recipes in distro layers (particularly older, which may=
- be
->>>>> required in certain circumstances) if we do keep inc files where th=
-ey
->>>>> already exist.
->>>
->>>> Can people raise their hand if they want to have a different version=
- of
->>>> smartmontools in their layer?
->>>
->>> i think it would be nice to have a policy for that. i am going to sen=
-d a
->>> couple of recipes for new components, and it would be good to know wh=
-at's
->>> the agreed 'policy' for .inc file.=20
->>
->> We probably should have a stated policy, yes. AFAIK the current perhap=
-s=20
->> unstated policy is to keep the inc file if it existed in OE-Classic.
->=20
-> I don't have strong opinion about keeping/loosing .inc files, but
-> I've removed couple of .inc files when importing stuff from OE-Classic
-> in cases where .inc is relatively short (like in smartmontools).=20
->=20
-> I would keep .inc when it's reused in different recipes or really
-> long/complicated (like mesa.inc).
->=20
-> We also have policy that there is only one version per recipe if
-> possible.
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ {meta-oe => meta-multimedia}/recipes-multimedia/vlc/libdvdcss_1.2.10.bb | 0
+ {meta-oe => meta-multimedia}/recipes-multimedia/vlc/vlc.inc             | 0
+ {meta-oe => meta-multimedia}/recipes-multimedia/vlc/vlc_1.1.11.bb       | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-multimedia}/recipes-multimedia/vlc/libdvdcss_1.2.10.bb (100%)
+ rename {meta-oe => meta-multimedia}/recipes-multimedia/vlc/vlc.inc (100%)
+ rename {meta-oe => meta-multimedia}/recipes-multimedia/vlc/vlc_1.1.11.bb (100%)
 
-I agree with Martin. I've dropped some .inc files for recipes I worry
-about also.
-
-Philip
-
->=20
->>> in fact, it's not even clear to me why
->>> have .inc file is easier to carry different version in distro layers.=
- well
->>> it's just a 'large' recipe to carry over..
->>
->> If you carry over the whole recipe rather than "require recipes-
->> xyz/foo/foo.inc", then you won't get any improvements to the non-versi=
-on-
->> specific parts of the recipe when the base layer updates in the future=
-=2E
->>
->> Alternatively if you "require recipes-xyz/foo/foo_6.5.bb" because ther=
-e is no=20
->> .inc, then your recipe will definitely break the next time the recipe =
-in the=20
->> base layer is upgraded, plus you may have to override more parts of th=
-e recipe=20
->> that are specific to a different version than the one you are building=
-=2E
->>
->> Cheers,
->> Paul
->>
->> --=20
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+diff --git a/meta-oe/recipes-multimedia/vlc/libdvdcss_1.2.10.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.10.bb
+similarity index 100%
+rename from meta-oe/recipes-multimedia/vlc/libdvdcss_1.2.10.bb
+rename to meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.10.bb
+diff --git a/meta-oe/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+similarity index 100%
+rename from meta-oe/recipes-multimedia/vlc/vlc.inc
+rename to meta-multimedia/recipes-multimedia/vlc/vlc.inc
+diff --git a/meta-oe/recipes-multimedia/vlc/vlc_1.1.11.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+similarity index 100%
+rename from meta-oe/recipes-multimedia/vlc/vlc_1.1.11.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+-- 
+1.8.2.2
 
 
-------enig2IIRDTDSDXLKJMFSDPQQI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.13 (GNU/Linux)
-Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
-
-iQEcBAEBAgAGBQJRg9SQAAoJEMDJd4rr0merchkH/jj6tSTc20zCbLSveZ2YELrD
-DPD+PLJCV72fCTzQJXzqEvGrkFBc0BhrTZVmvyKGGWK3Lj6c1ND1P0ushqFm+3FB
-uDKD+HDok8/ynnDliWq3jVPCnd32EOiwQfCYraYfFnLEPKouNzPAjn8DvL7tYfsC
-oJfblZEY/3O3fFlDDFZgfBYpbjaFkOKdIiWiLQO/nv+xKGx+Ib0HSE75Y21wvcoI
-VIleAbBEEjVoNhnCwIBlwa+Ctgih/YdR3PU/gxX8j+dbpGy35c0cAqIlMfqD+10/
-68ggyxYQxwyNNcr8DjZKwkyJHA0taV4azTH7XwlPvs0ttA5xFAwGIr/cXbvS2Og=
-=0zpM
------END PGP SIGNATURE-----
-
-------enig2IIRDTDSDXLKJMFSDPQQI--
