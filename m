@@ -1,40 +1,20 @@
-Received: from mail-ob0-f171.google.com ([209.85.214.171])
+Received: from smarthost.techfak.uni-bielefeld.de ([129.70.137.17])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <nicolas.dechesne@linaro.org>) id 1UZGvh-0003WD-Mv
+	(envelope-from <stefan@herbrechtsmeier.net>) id 1UZKgE-0000Lm-2L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 May 2013 10:37:57 +0200
-Received: by mail-ob0-f171.google.com with SMTP id v19so2870190obq.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 May 2013 01:19:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=n/B1KjgPN+KRwAWR/IfAgKkBXex2Eq94sHXi0E8/C/Q=;
-	b=FFvU9A9cG0vZZsoSRDp87Gl/G5fIF2WnHibuz8SS7gXtUWqCMYrnJYOBmhlFCNslcE
-	YaSzrtLjPShAVUyTF8/FMg2n33GESLOV/rUSwGxvXeBpxCh3chBeSLW/FLWUkkrzv0e2
-	cJYJggvKpBBHOY7QnNuPsGs6LURl1Vgbi8EMyuQlm6n5VscNFqqK3G31396yrZ6RDCI0
-	v0fJozczEQCl5lIjkEwdaUE7fZpEm7E6ZSgocPxpGrJUtQ8Wb8TKjfJPHES7YU/Xz2lU
-	nSQ4ps9a985dKpvTB487+FY/GVVJVVAafZWE27xjHcNdeTFF6JW0NXerl9muZtEw+fg2
-	W2WA==
-X-Received: by 10.182.125.164 with SMTP id mr4mr926987obb.94.1367828393812;
-	Mon, 06 May 2013 01:19:53 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.35.193 with HTTP; Mon, 6 May 2013 01:19:33 -0700 (PDT)
-In-Reply-To: <5183D490.8050804@balister.org>
-References: <1367008757-18667-1-git-send-email-nicolas.dechesne@linaro.org>
-	<576F47F5-73BA-4369-9A2E-666939097E0A@dominion.thruhere.net>
-	<CAP71WjwFFivLQ1NaMtudjCZyv1D_Xtodf5utigWPACAg=OA5dw@mail.gmail.com>
-	<2863767.6XU4RXlosl@helios> <20130503150917.GB3187@jama>
-	<5183D490.8050804@balister.org>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Mon, 6 May 2013 10:19:33 +0200
-Message-ID: <CAP71Wjz5Q9-+X0jmdC1zeS98s8Net64zpgwNEBhJkDqdW2MP4A@mail.gmail.com>
+	Mon, 06 May 2013 14:38:10 +0200
+Received: from localhost.localdomain (sarotti.TechFak.Uni-Bielefeld.DE
+	[129.70.144.156])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: sherbrec)
+	by smarthost.TechFak.Uni-Bielefeld.DE (Postfix) with ESMTPSA id
+	3827180010; Mon,  6 May 2013 14:20:10 +0200 (CEST)
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQmzYQ+Y9IlooLAzMC++78GCn6/Qi5/b1ATjZN1WbPjATNclcZOcA8SI8fa7QHFd0cDdarxQ
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe][PATCH] smartmontools: import from OE classic
+Date: Mon,  6 May 2013 14:20:01 +0200
+Message-Id: <1367842801-347-1-git-send-email-stefan@herbrechtsmeier.net>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [meta-oe][PATCH] media-ctl: Use linux-libc-headers instead of linux kernel sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +28,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2013 08:37:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 May 2013 12:38:10 -0000
 
-On Fri, May 3, 2013 at 5:15 PM, Philip Balister <philip@balister.org> wrote:
+Use the headers from the linux-libc-headers instead of the headers
+from the linux kernel sources because user space programs should
+be built against the header files provided by the distribution.
 
-> > I don't have strong opinion about keeping/loosing .inc files, but
-> > I've removed couple of .inc files when importing stuff from OE-Classic
-> > in cases where .inc is relatively short (like in smartmontools).
-> >
-> > I would keep .inc when it's reused in different recipes or really
-> > long/complicated (like mesa.inc).
-> >
-> > We also have policy that there is only one version per recipe if
-> > possible.
->
-> I agree with Martin. I've dropped some .inc files for recipes I worry
-> about also.
->
+In file included from .../usr/src/kernel/include/linux/media.h:27:0,
+                 from conftest.c:56:
+.../usr/src/kernel/include/linux/types.h:13:2: warning: #warning \
+"Attempt to use kernel headers from user space, see http://kernelnewbies.org/KernelHeaders" [-Wcpp]
 
-ok ,thanks for all the inputs. I will rework the recipe, and remove the
-.inc as more people seem to be willing it this way.
+On some platforms (qemu) intern kernel header (linux/types.h) redefines
+some types from the system header (sys/types.h, timer.h, stdint.h)
+and thereby breaks the checking of the linux media header.
 
-also, i realized that there is newer upstream version of smartmontools, so
-i will upgrade the recipe to the most recent one too.
+ERROR: Kernel header file not found or not usable!
+
+In file included from .../usr/include/linux/media.h:27:0,
+                 from conftest.c:56:
+In file included from .../usr/src/kernel/include/linux/types.h:14:26: error: conflicting types for 'fd_set'
+In file included from .../sys/select.h:75:5: note: previous declaration of 'fd_set' was here
+
+Similar errors for dev_t, mode_t, timer_t, uintptr_t and blkcnt_t.
+
+Signed-off-by: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+---
+ .../recipes-multimedia/v4l2apps/media-ctl_git.bb   |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb b/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
+index d96c1f9..cb3072b 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
+@@ -2,17 +2,18 @@ DESCRIPTION = "Media controller control application"
+ LICENSE = "LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
+ 
++DEPENDS = "linux-libc-headers"
++
+ SRC_URI = "git://git.ideasonboard.org/media-ctl.git;protocol=git"
+ SRCREV = "a6ec4a37028952ffd6e62eb52648cf66248eb519"
+ 
+ PV = "0.0.1"
+-PR = "r3"
++PR = "r4"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+-# It needs some kernel definitions only for v4l2, so it isn't machine specific
+-EXTRA_OECONF = "--with-kernel-headers=${STAGING_KERNEL_DIR}"
++EXTRA_OECONF = "--with-kernel-headers=${STAGING_EXECPREFIXDIR}"
+ 
+ PACKAGES =+ "libmediactl libv4l2subdev"
+ FILES_libmediactl = "${libdir}/libmediactl${SOLIBS}"
+-- 
+1.7.0.4
+
+
 
