@@ -1,37 +1,44 @@
-Received: from mail-vc0-f172.google.com ([209.85.220.172])
+Received: from ch1ehsobe004.messaging.microsoft.com ([216.32.181.184]
+	helo=ch1outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.betafive@gmail.com>)
-	id 1UZRAm-0007uq-Dl; Mon, 06 May 2013 21:34:09 +0200
-Received: by mail-vc0-f172.google.com with SMTP id m17so926442vca.17
-	for <multiple recipients>; Mon, 06 May 2013 12:16:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=+f0d62hCx7U9e6/2RrqLhGzr4OKNCq82Wse+ZKY1bQI=;
-	b=jE8BwuWjQBbaOJQ7VCHH5V6jcD0XjMiBr6i32+cXiJu9NQcbvSp/7VnEN8ihhiP4h+
-	eplgUlKBBaUmf+vu4+mB1aIOwtEYJPb7jl2pVq+z5nwtKs0IQfIA9owAK2nOa9ojvpdM
-	mlfvhyiKufloocwDoijfyazxG2c3DvZpDImhLPi7mJ6Oi8u4c6FfA9us+gZIlYoknpgP
-	1Rur12fWz+X30lZ8ENq3sfq9f9GO0NwTNUUeSU7EcbZlg9MOlxoWxhvhXTZp6gW9f2/l
-	6EkfS0jQsOye2c4TRKW8aAaHGSxdlqbKAkWlto+aEMRndqEwQKAXpi94qgZmKHLKlRBM
-	ONrQ==
-X-Received: by 10.58.243.102 with SMTP id wx6mr2684548vec.26.1367867768162;
-	Mon, 06 May 2013 12:16:08 -0700 (PDT)
+	(envelope-from <r63875@freescale.com>) id 1UZauv-0003rJ-Ig
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 May 2013 07:58:29 +0200
+Received: from mail155-ch1-R.bigfish.com (10.43.68.242) by
+	CH1EHSOBE013.bigfish.com (10.43.70.63) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 7 May 2013 04:55:01 +0000
+Received: from mail155-ch1 (localhost [127.0.0.1])	by
+	mail155-ch1-R.bigfish.com (Postfix) with ESMTP id 1F9614808C4	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue,  7 May 2013 04:55:01 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h1fc6h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ahzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1155h)
+Received: from mail155-ch1 (localhost.localdomain [127.0.0.1]) by mail155-ch1
+	(MessageSwitch) id 136790249981412_21856;
+	Tue,  7 May 2013 04:54:59 +0000 (UTC)
+Received: from CH1EHSMHS032.bigfish.com (snatpool2.int.messaging.microsoft.com
+	[10.43.68.239])	by mail155-ch1.bigfish.com (Postfix) with ESMTP id
+	11EF8420A0E	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 May 2013 04:54:59 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS032.bigfish.com
+	(10.43.70.32) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 7 May 2013 04:54:58 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server (TLS) id 14.2.328.11; Tue, 7 May 2013 04:54:57 +0000
+Received: from localhost.localdomain (tank.ap.freescale.net [10.193.20.104])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	r474ssa3014531; Mon, 6 May 2013 21:54:56 -0700
+From: Olivia Yin <hong-hua.yin@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 May 2013 12:14:31 +0800
+Message-ID: <1367900071-1778-1-git-send-email-hong-hua.yin@freescale.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.48.5 with HTTP; Mon, 6 May 2013 12:15:48 -0700 (PDT)
-In-Reply-To: <5187A0D3.2080607@herbrechtsmeier.net>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<5183C9CF.3060304@herbrechtsmeier.net>
-	<5187A0D3.2080607@herbrechtsmeier.net>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Mon, 6 May 2013 20:15:48 +0100
-X-Google-Sender-Auth: lb_wAt4qAxjwvB6ylSPWTEyb1Sw
-Message-ID: <CANyK_8fT_rvPPo4LJz2BcSD-ra8435m4GefggL0jgeFC1kLxRQ@mail.gmail.com>
-To: openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+X-OriginatorOrg: freescale.com
+Subject: yajl: pass the cmake variable LIB_SUFFIX to handle installation on 64-bit systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,58 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 May 2013 19:34:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 May 2013 05:58:29 -0000
+Content-Type: text/plain
 
-I've done a 'bitbake world' and masked off anything that failed.
-Failing logs and other things along with the local.conf and
-bblayers.conf used are available at
-http://www.paulbarker.me.uk/yocto/poky-raspberrypi_20130503/
+WARNING: QA Issue: yajl: Files/directories were installed but not shipped
+  /usr/lib
+  /usr/lib/libyajl.so.2
+  /usr/lib/libyajl.so
+  /usr/lib/libyajl_s.a
+  /usr/lib/libyajl.so.2.0.4
+  /usr/lib/.debug
+  /usr/lib/.debug/libyajl.so.2.0.4
 
-In summary:
+NOTE: for 64-bit systems where lib64 is used you can pass the cmake
+      variable LIB_SUFFIX to cause installation into the system's 'lib64'
+      directory.
 
-maliit-framework: do_compile (looks like glib deprecation warning
-which -Werror turns into an error)
-maliit-plugins: depends on maliit-framework
-gypsy: do_conpile (as maliit-framework)
-navit: depends on gypsy
-gtkhtml2: do_compile
-qcanobserver: do_compile
-mesa-demos: do_compile (vcos_platform_types.h: No such file or directory)
-packagegroup-core-tools-testapps: depends on mesa-demos
-llvm2.9: do_compile (vcos_platform_types.h: No such file or directory)
-weston: do_compile (vcos_platform_types.h: No such file or directory)
-gperftools: do_compile (Error: selected processor does not support ARM
-mode `dmb')
-gst-plugins-gl: do_configure (error: GL or EGL is required)
-omgps: do_compile (as maliit-framework)
-packagekit: do_compile (undefined reference to `g_thread_supported')
-omxplayer: do_compile (vchost_config.h: No such file or directory)
-luajit: do_compile (sys/types.h: No such file or directory)
-mplayer2: do_compile (mad.h: No such file or directory)
-openmotif: fetch failure
-lzip: fetch failure
-mg: do_configure (Looking for term.h... Not found!)
-tk: do_package (QA Issue: tk:
-/work/armv6-vfp-poky-linux-gnueabi/tk/8.5.8-r0/packages-split/tk/usr/bin/wish8.5
-contains probably-redundant RPATH /usr/lib)
-claws-plugin-gtkhtml2-viewer: depends on gtkhtml2
+Signed-off-by: Olivia Yin <hong-hua.yin@freescale.com>
+---
+ meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-I'm building Poky for Raspberry Pi with pretty much the default
-options. There's a couple of installed but not packaged warnings in
-qa.log which can be found at the above link. I've also included commit
-IDs for each layer used and where I've diverged from the master branch
-I've included patches. Most other info should be available within the
-directory I've linked to.
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb b/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
+index 7359520..9d67e2d 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Yet Another JSON Library - A Portable JSON parsing and serialization library in ANSI C"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74f541bd9a2b6c8e5d0714bcdc327f32"
++PR = "r1"
+ 
+ SRCREV = "fee1ebef9fa7dc0e9f5a23f37123b19b68c796ff"
+ SRC_URI = "git://github.com/lloyd/yajl.git"
+@@ -8,3 +9,5 @@ SRC_URI = "git://github.com/lloyd/yajl.git"
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake lib_package
++
++EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib', True).replace('lib', '')}"
+-- 
+1.7.0.4
 
-Let me know if this is useful.
 
-Thanks,
-
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
 
 
