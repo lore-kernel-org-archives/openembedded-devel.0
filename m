@@ -1,38 +1,35 @@
-Received: from mail-vc0-f179.google.com ([209.85.220.179])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UZilk-0003jd-Uj
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UZlGW-0000so-1R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 May 2013 16:21:56 +0200
-Received: by mail-vc0-f179.google.com with SMTP id hz10so523947vcb.10
+	Tue, 07 May 2013 19:01:27 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r47GhMUM019920
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 May 2013 07:03:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type:x-gm-message-state;
-	bh=5A3Z3mraJ7TQtkGE7knH4lKD17O0xSEwzH1s9c+l71c=;
-	b=lsdr1U7PREAPc1jGrJofLTAp2uzwC9/tO1Y0X3ln3DhSa3IT2iSBapC/qAfZA+sgZC
-	zlToy9Dw99CGnbryXmBgX1eX1vNTPwOOAdJlWcDEOVl17Qr9ZRNiYvwjr06wfuHCZ/1m
-	v3Azb5lNFYPzClnkkb2pv49Ik1rc/rmD39FKCz9nc4GFy32pPoQoZ0YJZB8L942vwxHl
-	EFIFw2UvRIKLX97SK1t/b5UU2n2vuenP7bGo4eEF88qfgdqZ8ZFVCbVSVIzwT8EdaMea
-	ajsFgGcqDGNsqYjSyYaynzDAwnY1kTBJuobs5m7LhsgABz/rhQlOikUgLla49rnxutzG
-	zO+A==
-X-Received: by 10.58.207.97 with SMTP id lv1mr1280955vec.39.1367935407619;
-	Tue, 07 May 2013 07:03:27 -0700 (PDT)
+	Tue, 7 May 2013 09:43:22 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 7 May 2013 09:43:21 -0700
+Received: from skynet (unknown [172.25.44.2])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 6D30C7FD0;
+	Tue,  7 May 2013 12:43:17 -0400 (EDT)
+Received: by skynet (Postfix, from userid 1000)	id 68688600426; Tue,  7 May
+	2013 12:43:16 -0400 (EDT)
+Date: Tue, 7 May 2013 12:43:16 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: Aws Ismail <aws.ismail@windriver.com>
+Message-ID: <20130507164315.GL16756@windriver.com>
+References: <1367863609-18196-1-git-send-email-aws.ismail@windriver.com>
 MIME-Version: 1.0
-Received: by 10.221.8.3 with HTTP; Tue, 7 May 2013 07:03:07 -0700 (PDT)
-In-Reply-To: <5188DC2B.9080909@pseudoterminal.org>
-References: <2924564.6VWmlqGvL5@helios> <5182701F.5030605@pseudoterminal.org>
-	<1714072.P9NRZQZN5F@helios>
-	<969F26A8BAB325438E7EB80D3C3134FB1622BB2A@IRSMSX102.ger.corp.intel.com>
-	<5188DC2B.9080909@pseudoterminal.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 7 May 2013 15:03:07 +0100
-Message-ID: <CAJTo0LZ75KduLU-rTXYUm02fLfcuLk87W1u5SoYEbDC1Fu9umw@mail.gmail.com>
-To: Carlos Rafael Giani <dv@pseudoterminal.org>
-X-Gm-Message-State: ALoCoQk6lEuejFgGpRbpFVwICVLaXHFam3SEXNiKfxaADOgh/Ak7zFLC2uO5Ryoa78whnejFA9bU
+In-Reply-To: <1367863609-18196-1-git-send-email-aws.ismail@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Please submit your unindexed layers
+Subject: Re: [meta-networking][PATCH 0/1] Quagga: sync zebra routing table with the
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 14:22:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 May 2013 17:01:34 -0000
+X-Groupsio-MsgNum: 44616
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UUBKWyapWpFAak7q"
+Content-Disposition: inline
 
-On 7 May 2013 11:49, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
-> * it uses _prepend in various places; I was able to replace all but one of
-> them with prefuncs. The remaining one is populate_packages_prepend , and I
-> just do not see how this could be turned into a prefunc. (And it is
-> necessary to use it, because do_packages_split apparently cannot be used
-> anywhere else.)
->   I think prefuncs are cleaner, because they do not modify an existing
-> function. Also, if the indentation style changes again someday, prefuncs
-> cause less problems than _prepend does.
+--UUBKWyapWpFAak7q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The preferred way to do this is to use PACKAGESPLITFUNCS, examples in
-the systemd and update-rc.d classes.
+[[meta-networking][PATCH  0/1] Quagga: sync zebra routing table with the] O=
+n 13.05.06 (Mon 14:06) Aws Ismail wrote:
 
-Ross
+> When interface goes down, and there are some static routes that are
+> made with ip route, they are going to be deleted from kernel fib.
+> That's what kernel does by default. But they are not going to be
+> deleted from zebra's fib. They will be declared inactive.
+>=20
+> This issue was originally discussed in [1] and a patch was proposed.
+>=20
+> [1] http://www.gossamer-threads.com/lists/quagga/dev/22609
+>=20
+> Aws Ismail (1):
+>   Quagga: sync zebra routing table with the kernel one
+>=20
+>  ...c-zebra-routing-table-with-the-kernel-one.patch |   48 ++++++++++++++=
+++++++
+>  .../recipes-protocols/quagga/quagga.inc            |    3 +-
+>  2 files changed, 50 insertions(+), 1 deletions(-)
+>  create mode 100644 meta-networking/recipes-protocols/quagga/files/Zebra-=
+sync-zebra-routing-table-with-the-kernel-one.patch
+>=20
 
+Merged, thanks.
 
+--=20
+-Joe MacDonald.
+:wq
+
+--UUBKWyapWpFAak7q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlGJLyMACgkQPN8S4W6ZZnex7gCePeFoZKyqR4F+fjUVZ4cq+M3t
+1TsAn3Ull/2c9Yvqu7gtAPXEPDbopgCK
+=s5xo
+-----END PGP SIGNATURE-----
+
+--UUBKWyapWpFAak7q--
