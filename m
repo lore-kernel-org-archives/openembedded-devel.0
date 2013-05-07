@@ -1,39 +1,39 @@
-Received: from mail-ee0-f43.google.com ([74.125.83.43])
+Received: from mail-ea0-f176.google.com ([209.85.215.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UZqs1-0003d6-UG
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UZqs3-0003d8-BS
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 08 May 2013 01:00:36 +0200
-Received: by mail-ee0-f43.google.com with SMTP id b15so596938eek.30
+Received: by mail-ea0-f176.google.com with SMTP id h14so579650eak.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 May 2013 15:42:28 -0700 (PDT)
+	Tue, 07 May 2013 15:42:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=+/LhTWkR1uOtAHq26/i+nJZGrGVBVRhfpLv04O6RnAA=;
-	b=oY3XO3T1wDc/IRpDW/uxhK1f+hbAKlVUZlO8wZs9vtkNRPWoB0suulVgf92eYzEqix
-	sMox5y/Ex+Pflc0qel8fjOAKYEsdGClY3RzpV9gtVgJS6Xl6uD2QekRxwoAlItFRsvl/
-	wJebdsw9vCMkjAyQU/rcMdYsjVtfiX1JWqN/OGSH4Ly53/BFvN/DshHDLzt+qkl5wtYT
-	f88Q07dfiE/NFIMBkXKbif3uzrZfrVkooemM4evC2h1Muzj6LAAH8n9VSI36Y/t9o9ig
-	9sxfwJJjn6gFE08CDkS/wnwEKM/U1o+TnQaFnca0GT2RuEMuq44S0u8Q2s7bZfm5+D7U
-	5gKw==
-X-Received: by 10.15.95.74 with SMTP id bc50mr9974900eeb.36.1367966548768;
-	Tue, 07 May 2013 15:42:28 -0700 (PDT)
+	bh=2deha1DMG9617Cf6ryh0xcSBkYRf/LGFAZyrIM0/Ehc=;
+	b=gqxy3lIf79/y6yadI768xKWj6DD8B7hHRkLxfYG6J54uvUW/vh5oJGwYaz39PQPTwb
+	z6XUX0bqposctv7oVWI8I0LdGXYc95EfeL0GQlAUdGmE42IaBUjyyhEPN8UoRWnt/25H
+	v6rM8wo2+VCXWyTKhMupHyI/o3lmASdp2FADDkDsC5TgcjJe94WHJi9vSYAprhLJW6Jn
+	sVCT4/8LZVrMwM71N/jO+6q4rJFfGwdmPmGDEG28sTFwJlCNBsJ/CG8vl6JDobZlQG2Z
+	Wu3Yjrik9bezaZjpbSX9NzoRfdAqEHG4UKtabJeiZrNpsnk8/nG68E8NfQNVbSLJvutl
+	U6aQ==
+X-Received: by 10.14.214.3 with SMTP id b3mr10137954eep.24.1367966550200;
+	Tue, 07 May 2013 15:42:30 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A0896.dip0.t-ipconnect.de.
 	[91.10.8.150])
-	by mx.google.com with ESMTPSA id i3sm41969409eev.1.2013.05.07.15.42.27
+	by mx.google.com with ESMTPSA id i3sm41969409eev.1.2013.05.07.15.42.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 07 May 2013 15:42:28 -0700 (PDT)
+	Tue, 07 May 2013 15:42:29 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 May 2013 00:41:52 +0200
-Message-Id: <1367966513-12566-15-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  8 May 2013 00:41:53 +0200
+Message-Id: <1367966513-12566-16-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1367966513-12566-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1367966513-12566-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-gnome 14/15] gnome-panel: let gconf.bblass take care for postinst
+Subject: [meta-oe/meta-gnome 15/15] rp-pppoe: move chmod form postinst to offline do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,54 +47,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 23:00:57 -0000
+X-List-Received-Date: Tue, 07 May 2013 23:00:59 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../gnome-panel/gnome-panel_2.32.1.bb              |   14 ++------------
- 1 files changed, 2 insertions(+), 12 deletions(-)
+ .../recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb     |   10 ++--------
+ 1 files changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index c4465a5..6abf73e 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
+index d4cc664..56246bc 100644
+--- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
++++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
+@@ -4,7 +4,7 @@ SECTION = "console/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
  
- SECTION = "x11/gnome"
+-PR = "r9"
++PR = "r10"
  
--PR = "r6"
-+PR = "r7"
- 
- DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
- 
--inherit gtk-doc gnome gettext pkgconfig
-+inherit gtk-doc gnome gettext pkgconfig gconf
- 
- SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
- SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
-@@ -26,14 +26,6 @@ do_configure_prepend() {
-     sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
+ SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
+            file://top-autoconf.patch \
+@@ -29,6 +29,7 @@ do_install() {
+     install -m 0755 ${WORKDIR}/pppoe-server.init ${D}${sysconfdir}/init.d/pppoe-server
+     # Install
+     oe_runmake -C ${S} RPM_INSTALL_ROOT=${D} docdir=${docdir} install
++    chmod 4755 ${D}${sbindir}/pppoe
  }
  
--pkg_postinst_${PN}_append () {
--if [ -n "$D" ]; then
--    exit 1
--fi
--    gconftool-2 --config-source=xml:readwrite:${sysconfdir}/gconf/gconf.xml.defaults \
--        --direct --load ${sysconfdir}/gconf/schemas/panel-default-setup.entries
+ # Insert server package before main package
+@@ -41,13 +42,6 @@ FILES_${PN}-server = "${sysconfdir}/default/pppoe-server \
+ FILES_${PN}-relay = "${sbindir}/pppoe-relay"
+ FILES_${PN}-sniff = "${sbindir}/pppoe-sniff"
+ 
+-pkg_postinst_${PN} () {
+-    if [ x"$D" != "x" ]; then
+-        exit 1
+-    fi
+-    chmod 4755 ${sbindir}/pppoe
 -}
 -
- PACKAGES =+ "libpanel-applet"
- FILES_libpanel-applet = "${libdir}/libpanel-applet-*.so.*"
- 
-@@ -43,5 +35,3 @@ FILES_${PN} =+ "${datadir}/gnome* \
-                 ${datadir}/PolicyKit \
-                 ${libdir}/bonobo \
- "
--
--
+ CONFFILES_${PN} = "${sysconfdir}/ppp/pppoe.conf \
+                    ${sysconfdir}/ppp/firewall-standalone \
+                    ${sysconfdir}/ppp/firewall-masq"
 -- 
 1.7.4.4
 
