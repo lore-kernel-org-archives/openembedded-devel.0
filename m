@@ -1,39 +1,39 @@
-Received: from mail-ee0-f47.google.com ([74.125.83.47])
+Received: from mail-ea0-f181.google.com ([209.85.215.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UZqrh-0003KM-GX
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UZqri-0003Qs-TP
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 08 May 2013 01:00:13 +0200
-Received: by mail-ee0-f47.google.com with SMTP id b47so594070eek.6
+Received: by mail-ea0-f181.google.com with SMTP id a15so575662eae.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 May 2013 15:42:08 -0700 (PDT)
+	Tue, 07 May 2013 15:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=MyiHZIJyJMRANILvGk+dVDftjElupytYrF3EHPCBPcM=;
-	b=AcGFyRMYeXGMrJyQLEo9CYwF/P6uhkAU+OwGyv9hwkIYsYnSkBj/0Qt4qht85GvNoA
-	B6jHasLhAuXGIkU547CiuGwJ648ImTC7kA2P6zDJY//ofRSVJZlbtkazGLDcRWzlzHNg
-	aWSHdbQEraIUZ7cMRA5FYCPQeyb+f8m/vKxFLm1HwxcxMPawt7qx7nvRyj+pbGFgaHwx
-	00L6Oc6XxXb6x/vJWgSWJTjfXvtO8f9+QldI0J7dUGTwN9fk6RAacGgkRk3ro4GsyKjD
-	Fxp1q0qC7h5ptzqjT+4rhNoa62rlzuL9mjz3+L1AWBFswPNf93V54i6PwIMyHXgQAStk
-	HKOA==
-X-Received: by 10.14.214.3 with SMTP id b3mr10134960eep.24.1367966528357;
-	Tue, 07 May 2013 15:42:08 -0700 (PDT)
+	bh=genVKcurPDJ1msncUbxDK20iKtNYCtqNqbB0c/29qo4=;
+	b=wpUM863O3l0BIk/mO5C+zHy/qKThn/mOujm8UgFFZX8T43isLYlPheU7hOoSeh85ZX
+	FphwRvywqYiVnx/CUnUfhghJ1CTu0z1K4KCReF3TEg6UvGiBpsmHGkrNjdyaFAlvNOC8
+	72AwVAn4beuKPujRw+GWGZ0suZck7kXGgwvijAvm0U1lw4+SXWfhVBeyQUrdtrhFC9ll
+	9EUvxAJizg7yM3NyMeN3u+obhs2whdFnziDQIlDaGJbdyrz0UqmXM7jvi3kqBi6Gngwg
+	mDxnnh+jiGB79WdvmisOzdh4dmGzKBJkx3U8gpUNy8zdmiw4za2iDhJRN7L1xtvtYw48
+	75lA==
+X-Received: by 10.15.48.193 with SMTP id h41mr10083356eew.23.1367966529776;
+	Tue, 07 May 2013 15:42:09 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A0896.dip0.t-ipconnect.de.
 	[91.10.8.150])
-	by mx.google.com with ESMTPSA id i3sm41969409eev.1.2013.05.07.15.42.06
+	by mx.google.com with ESMTPSA id i3sm41969409eev.1.2013.05.07.15.42.08
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 07 May 2013 15:42:07 -0700 (PDT)
+	Tue, 07 May 2013 15:42:09 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 May 2013 00:41:39 +0200
-Message-Id: <1367966513-12566-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  8 May 2013 00:41:40 +0200
+Message-Id: <1367966513-12566-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1367966513-12566-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1367966513-12566-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-gnome 01/15] libbonobo: fix build with glib 2.36
+Subject: [meta-oe/meta-gnome 02/15] libbonobo: remove unreferenced patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,76 +53,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../0001-Remove-use-of-G_DISABLE_DEPRECATED.patch  |   47 ++++++++++++++++++++
- .../recipes-gnome/bonobo/libbonobo_2.24.3.bb       |    3 +-
- 2 files changed, 49 insertions(+), 1 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo/0001-Remove-use-of-G_DISABLE_DEPRECATED.patch
+ .../bonobo/libbonobo/configure-gthread.patch       |   11 -----------
+ 1 files changed, 0 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo/configure-gthread.patch
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/0001-Remove-use-of-G_DISABLE_DEPRECATED.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/0001-Remove-use-of-G_DISABLE_DEPRECATED.patch
-new file mode 100644
-index 0000000..44cf1f9
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo/0001-Remove-use-of-G_DISABLE_DEPRECATED.patch
-@@ -0,0 +1,47 @@
-+From fef13a371fc91f6d9b42518126c2a8b459fdf0e8 Mon Sep 17 00:00:00 2001
-+From: Colin Walters <walters@verbum.org>
-+Date: Thu, 2 May 2013 14:17:38 -0400
-+Subject: [PATCH] Remove use of G_DISABLE_DEPRECATED
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+This now trips up on GStaticRecMutex; I'm not going to bother to port,
-+realistically no one is actively maintaining this code anymore.
-+
-+Upstream-Status: Applied
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ activation-server/Makefile.am |    1 -
-+ configure.in                  |    2 +-
-+ 2 files changed, 1 insertions(+), 2 deletions(-)
-+
-+diff --git a/activation-server/Makefile.am b/activation-server/Makefile.am
-+index efb18a8..ffa90f6 100644
-+--- a/activation-server/Makefile.am
-++++ b/activation-server/Makefile.am
-+@@ -17,7 +17,6 @@ INCLUDES=					\
-+ 	$(SERVER_CFLAGS)			\
-+ 	$(WARN_CFLAGS)				\
-+ 	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
-+-	-DG_DISABLE_DEPRECATED			\
-+ 	-DG_LOG_DOMAIN=\"Bonobo-Activation-Server\" \
-+ 	$(NULL)
-+ 
-+diff --git a/configure.in b/configure.in
-+index 70a4e26..6be2bca 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -132,7 +132,7 @@ AC_SUBST(SERVER_LIBS)
-+ AC_SUBST(SERVER_CFLAGS)
-+ 
-+ if test "$enable_maintainer_mode" = "yes"; then
-+-	DISABLE_DEPRECATED_CFLAGS="-DG_DISABLE_DEPRECATED -DG_DISABLE_SINGLE_INCLUDES"
-++	DISABLE_DEPRECATED_CFLAGS="-DG_DISABLE_SINGLE_INCLUDES"
-+ 	AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
-+ fi
-+ 
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
-index 253b46a..622f244 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
-@@ -1,5 +1,6 @@
- require libbonobo.inc
--PR = "r1"
-+PR = "r2"
- 
-+SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch"
- SRC_URI[archive.md5sum] = "b217cef6a187505290c66c5bf8225d38"
- SRC_URI[archive.sha256sum] = "5310957fa90691689c0557218b8833f681666cae160bd84e1f2c2705189a4ebe"
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/configure-gthread.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/configure-gthread.patch
+deleted file mode 100644
+index 005fa67..0000000
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo/configure-gthread.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- libbonobo-2.14.0/configure.in.orig	2006-09-04 09:21:54.000000000 +0100
+-+++ libbonobo-2.14.0/configure.in	2006-09-04 09:22:58.000000000 +0100
+-@@ -166,7 +166,7 @@
+- 		AC_MSG_RESULT(no)
+- 		AC_MSG_ERROR(
+- 			[No working gthread-2.0 support found, using --disable-threads IS DISCOURAGED])
+--	]
+-+	],[AC_MSG_RESULT(yes)]
+-   )
+-   CFLAGS=$libbonobo_save_CFLAGS
+-   LIBS=$libbonobo_save_LIBS
 -- 
 1.7.4.4
 
