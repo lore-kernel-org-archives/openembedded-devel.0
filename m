@@ -1,34 +1,39 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1UZghQ-00010a-7B
+Received: from mail-la0-f51.google.com ([209.85.215.51])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <kergoth@gmail.com>) id 1UZicO-00063Z-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 May 2013 14:08:52 +0200
-Received: (qmail 1706 invoked by uid 1003); 7 May 2013 11:50:50 -0000
-Received: from unknown (HELO ?192.168.1.122?)
-	(philip@opensdr.com@71.171.26.125)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	7 May 2013 11:50:50 -0000
-Message-ID: <5188EA99.6000409@balister.org>
-Date: Tue, 07 May 2013 07:50:49 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
+	Tue, 07 May 2013 16:11:54 +0200
+Received: by mail-la0-f51.google.com with SMTP id ep20so579393lab.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 May 2013 06:53:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=MhZyApCmUNA5C3WdBq1cjTV8LAq3y+nnqsNAbb+fvWc=;
+	b=Q8T9yED/bN0Jw0+YvCErn8y5SW6dr7eL4yq8lETYJrMsK2LeMY2MjyQsbARfsdQJAP
+	SWEIHNabf1x+mYCwxY+ysgZjvBM3VVeF6F6U8SSIZVmNYOmHK0iiXfsmiJ97te+SfCBX
+	Wtz+aeJoROQgfm/7YcG7oG7LFwrxKXGlLEVgoiVzracPXT2WEyrnWb0mVgSwdB0OF7TH
+	18zLd4PPmORVFpdkP7WKdcM+y6ZjALnKW9eR9BzTlD6YedvLXuZPDKslSr7LuvqMFuOd
+	nryCCl9y3Z92THKr0U122Iihj3Cxe241rmWxt9NKpHftmbwfI9IB49hLAflaxaYQux4/
+	L8qw==
+X-Received: by 10.152.27.39 with SMTP id q7mr1012348lag.36.1367934827797; Tue,
+	07 May 2013 06:53:47 -0700 (PDT)
 MIME-Version: 1.0
-To: Paul Barker <paul@paulbarker.me.uk>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<5183C9CF.3060304@herbrechtsmeier.net>
-	<5187A0D3.2080607@herbrechtsmeier.net>
-	<CANyK_8fT_rvPPo4LJz2BcSD-ra8435m4GefggL0jgeFC1kLxRQ@mail.gmail.com>
-	<CAHUNapTu45Wpm1zx+vpHUgyduk8rnzdJSninsoOOw6v34ViipQ@mail.gmail.com>
-	<CANyK_8cqMs0MBjrLBUO3eGYrWcN4xFzkbfSK7x0QF5nb1DBSxA@mail.gmail.com>
-In-Reply-To: <CANyK_8cqMs0MBjrLBUO3eGYrWcN4xFzkbfSK7x0QF5nb1DBSxA@mail.gmail.com>
-X-Enigmail-Version: 1.5.1
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-devel@lists.openembedded.org,
-	Trevor Woerner <twoerner@gmail.com>
-Subject: Re: [OE-core] State of bitbake world
+Sender: kergoth@gmail.com
+Received: by 10.112.143.100 with HTTP; Tue, 7 May 2013 06:53:27 -0700 (PDT)
+In-Reply-To: <5188DC2B.9080909@pseudoterminal.org>
+References: <2924564.6VWmlqGvL5@helios> <5182701F.5030605@pseudoterminal.org>
+	<1714072.P9NRZQZN5F@helios>
+	<969F26A8BAB325438E7EB80D3C3134FB1622BB2A@IRSMSX102.ger.corp.intel.com>
+	<5188DC2B.9080909@pseudoterminal.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 7 May 2013 06:53:27 -0700
+X-Google-Sender-Auth: UKXQftiVZCkCp1l1oxdcndhfyqw
+Message-ID: <CABcZANnX=s+aY+a5teETC_gUbzuNYw0VKWsy3zmXazAWSwG-6A@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: "Iorga, Cristian" <cristian.iorga@intel.com>
+Subject: Re: Please submit your unindexed layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 12:08:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 May 2013 14:11:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 05/07/2013 04:38 AM, Paul Barker wrote:
-> On 6 May 2013 20:47, Trevor Woerner <twoerner@gmail.com> wrote:
->>
->> but until I can register for the
->> openembedded-devel mailing list I don't have anywhere to send it.
->>
-> 
-> Have you tried emailing
-> openembedded-devel-owner@lists.openembedded.org about the problems
-> you've had registering?
+On Tue, May 7, 2013 at 3:49 AM, Carlos Rafael Giani
+<dv@pseudoterminal.org>wrote:
 
-We are aware and hope to resolve this "soon".
+> * it uses _prepend in various places; I was able to replace all but one of
+> them with prefuncs. The remaining one is populate_packages_prepend , and I
+> just do not see how this could be turned into a prefunc. (And it is
+> necessary to use it, because do_packages_split apparently cannot be used
+> anywhere else.)
+>   I think prefuncs are cleaner, because they do not modify an existing
+> function. Also, if the indentation style changes again someday, prefuncs
+> cause less problems than _prepend does.
+>
 
-Philip
+Warning: as things stand today, as far as I know, prefuncs/postfuncs don't
+affect the checksums of the variable they interact with, so changing the
+contents of a prefunc/postfunc won't cause the function to be re-run
+automatically. You can work around this by adding it to vardeps as well:
 
-> 
-> --
-> Paul Barker
-> 
-> Email: paul@paulbarker.me.uk
-> http://www.paulbarker.me.uk
-> 
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-core
-> 
-
+    do_foo[vardeps] += "bar"
+    do_foo[prefuncs] += "bar"
+-- 
+Christopher Larson
 
