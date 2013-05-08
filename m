@@ -1,34 +1,24 @@
-Received: from mail-qa0-f43.google.com ([209.85.216.43])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ua6wU-00017u-Tx
+	(envelope-from <eric@eukrea.com>) id 1Ua7jD-0006Yo-1h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 May 2013 18:10:15 +0200
-Received: by mail-qa0-f43.google.com with SMTP id bs12so2871554qab.9
+	Wed, 08 May 2013 19:00:46 +0200
+Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
+	(Authenticated sender: eukrea)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 25693A60F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 May 2013 08:52:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=IMjFl9/zZVojgT45/4n8II9StNDutFlYtSuxxpMHR84=;
-	b=wY4LcXD8GuQkmFMi9MlFuYED0+nvLY9/xYtjHTEF58p7ME/1UFdZSq95+WyCGBfOsQ
-	JgzWIYZVmkm9dJBj2BLFJ6fdvfgLd7CzTn8WSHeDc1lVj+buimUMkh8AYjhapgqz4r98
-	6yZexZjH+XRgFN3KoF88BJ54Hh5PgRwVJoegz1Mb50IJK8BnZrkq7Pw3QWyACFCRsLC8
-	BP2//O7GkTAQqc/o4dmaogvLVAuU+aoQzTfoNXa6UU5Zf5zsBBv0QfYIS/q7SwC4z/bJ
-	n5mxpN9cErITw3hbvBY+gg1BVLej3bThe4uUg7VVb7R5ouNKHlRSOMr3BwqGexeeVsD7
-	Gp2w==
-MIME-Version: 1.0
-X-Received: by 10.229.93.90 with SMTP id u26mr2174227qcm.109.1368028327624;
-	Wed, 08 May 2013 08:52:07 -0700 (PDT)
-Received: by 10.49.103.227 with HTTP; Wed, 8 May 2013 08:52:07 -0700 (PDT)
-In-Reply-To: <CAPhDKbF+OpDsc5QorgeeZV9sTCjBpHCaOZUP7_N2JJOQus0Zvw@mail.gmail.com>
-References: <CAPhDKbFrn7ZgfXT05so7YhBus7PP45W1YafYduCg_TZwzskW+g@mail.gmail.com>
-	<CAPhDKbF+OpDsc5QorgeeZV9sTCjBpHCaOZUP7_N2JJOQus0Zvw@mail.gmail.com>
-Date: Wed, 8 May 2013 17:52:07 +0200
-Message-ID: <CA+chaQchEa7c9uUNeK0sGzTQ=mrjhXuvd=bCFvE25PmPMOdMtA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe][PATCH] python-requests: add version 1.2.0
+	Wed,  8 May 2013 18:42:24 +0200 (CEST)
+Date: Wed, 8 May 2013 18:42:23 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130508184223.67168340@e6520eb>
+In-Reply-To: <kmdavo$etd$1@ger.gmane.org>
+References: <1367966513-12566-1-git-send-email-schnitzeltony@googlemail.com>
+	<kmdavo$etd$1@ger.gmane.org>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.16; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: [meta-oe/meta-gnome 00/15] outstanding patches with fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 16:10:15 -0000
+X-List-Received-Date: Wed, 08 May 2013 17:00:57 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Was this ever submitted to ML? I cannot find it here or on patchwork.
+Le Wed, 08 May 2013 12:55:57 +0200,
+Koen Kooi <koen@dominion.thruhere.net> a =C3=A9crit :
 
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Op 08-05-13 00:41, Andreas M=C3=BCller schreef:
+> > [01-03] further glib 2.36 [04-05] reanimate gnome-terminal [06-11]
+> > pdf-viewer [11-15] postinst improvements
+> >=20
+> > The following changes since commit
+> > 8fec906a4584f9cbc467fb0e406bb6a705848b64:
+> >=20
+> > smartmontools: import from OE classic (2013-05-07 18:59:01 +0200)
+> >=20
+> > are available in the git repository at:=20
+> > git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git
+> > fixes-here-and-there
+> >=20
+> > Andreas M=C3=BCller (15): libbonobo: fix build with glib 2.36 libbonobo:
+> > remove unreferenced patch gnome-vfs: fix build with glib 2.36=20
+> > gnome-terminal: move out of nonworking gnome-terminal: update to 2.30.2=
+=20
+> > poppler: remove unrecognized configure options poppler: merge include
+> > files into poppler - only poppler requires them poppler: update to
+> > 0.22.3 poppler-data: update to 0.4.6 and stylize a bit epdfview: move to
+> > nonworking evince: fix/remove postinst by inheriting gsettings dconf:
+> > fix/remove postinst by inheriting gsettings proftpd: remove postinst -
+> > directory can be setup offline in do_install gnome-panel: let
+> > gconf.bblass take care for postinst rp-pppoe: move chmod form postinst =
+to
+> > offline do_install
+>=20
+> These look good to me, can we also include them in the dylan branch?
+>=20
+yes, that will be done.
 
-On Wed, May 8, 2013 at 1:10 PM, Ilya Dmitrichenko
-<errordeveloper@gmail.com>wrote:
+Eric
 
-> Any comments on this?
->
-> Is something wrong with the way this message was formated? Should I inline
-> the actual patch??
->
-> Well, I quite confused with where and how to submit patches.
->
-> I much prefer to use github for this purpose.
->
-> Regards,
-> --
-> Ilya
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
