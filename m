@@ -1,31 +1,32 @@
-Received: from mail-ia0-f170.google.com ([209.85.210.170])
+Received: from mail-qa0-f43.google.com ([209.85.216.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <errordeveloper@gmail.com>) id 1Ua2Xq-00068F-VV
+	(envelope-from <martin.jansa@gmail.com>) id 1Ua6wU-00017u-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 May 2013 13:28:28 +0200
-Received: by mail-ia0-f170.google.com with SMTP id k20so1854201iak.29
+	Wed, 08 May 2013 18:10:15 +0200
+Received: by mail-qa0-f43.google.com with SMTP id bs12so2871554qab.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 May 2013 04:10:24 -0700 (PDT)
+	Wed, 08 May 2013 08:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:x-received:in-reply-to:references:date:message-id
 	:subject:from:to:content-type;
-	bh=i/Sk9ubOMbKyKRRc3r0cLgcvSlcOygenpQmyfzA1jn8=;
-	b=cG/toCtMYapMU1/OhdklJNwdHgCRxASWE5dVBNM2Hfq2ubSxVB+2kyBe4VGWhDHJ4n
-	eUK9xqpd0U65jPtl6mQD1T2QPC/zi9JgTvzjJnlPANa12hCHvWTgYRrWYLwJ3lKDV8ej
-	d1gHb9qnpfzrJNqdOuK94fDVcTr5MWmbtwdtKqdLnMpssFUdtdyRyCIo4D5UBgLCbmwQ
-	uJs2Kv7USDPwcfFP0fEh25oBus/fDVaBWeF8seTBK3jtLFngGYdiS4jd0D9pj1VWZKCh
-	VwF90ow+KXxp4lNvVyECgUjUJkoCWeHEEBbLyBFbvj8lq1MeuqiV7yPPwKnaMNLb6yIL
-	xQbA==
+	bh=IMjFl9/zZVojgT45/4n8II9StNDutFlYtSuxxpMHR84=;
+	b=wY4LcXD8GuQkmFMi9MlFuYED0+nvLY9/xYtjHTEF58p7ME/1UFdZSq95+WyCGBfOsQ
+	JgzWIYZVmkm9dJBj2BLFJ6fdvfgLd7CzTn8WSHeDc1lVj+buimUMkh8AYjhapgqz4r98
+	6yZexZjH+XRgFN3KoF88BJ54Hh5PgRwVJoegz1Mb50IJK8BnZrkq7Pw3QWyACFCRsLC8
+	BP2//O7GkTAQqc/o4dmaogvLVAuU+aoQzTfoNXa6UU5Zf5zsBBv0QfYIS/q7SwC4z/bJ
+	n5mxpN9cErITw3hbvBY+gg1BVLej3bThe4uUg7VVb7R5ouNKHlRSOMr3BwqGexeeVsD7
+	Gp2w==
 MIME-Version: 1.0
-X-Received: by 10.50.236.100 with SMTP id ut4mr5461808igc.86.1368011424099;
-	Wed, 08 May 2013 04:10:24 -0700 (PDT)
-Received: by 10.64.10.135 with HTTP; Wed, 8 May 2013 04:10:24 -0700 (PDT)
-In-Reply-To: <CAPhDKbFrn7ZgfXT05so7YhBus7PP45W1YafYduCg_TZwzskW+g@mail.gmail.com>
+X-Received: by 10.229.93.90 with SMTP id u26mr2174227qcm.109.1368028327624;
+	Wed, 08 May 2013 08:52:07 -0700 (PDT)
+Received: by 10.49.103.227 with HTTP; Wed, 8 May 2013 08:52:07 -0700 (PDT)
+In-Reply-To: <CAPhDKbF+OpDsc5QorgeeZV9sTCjBpHCaOZUP7_N2JJOQus0Zvw@mail.gmail.com>
 References: <CAPhDKbFrn7ZgfXT05so7YhBus7PP45W1YafYduCg_TZwzskW+g@mail.gmail.com>
-Date: Wed, 8 May 2013 12:10:24 +0100
-Message-ID: <CAPhDKbF+OpDsc5QorgeeZV9sTCjBpHCaOZUP7_N2JJOQus0Zvw@mail.gmail.com>
-From: Ilya Dmitrichenko <errordeveloper@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<CAPhDKbF+OpDsc5QorgeeZV9sTCjBpHCaOZUP7_N2JJOQus0Zvw@mail.gmail.com>
+Date: Wed, 8 May 2013 17:52:07 +0200
+Message-ID: <CA+chaQchEa7c9uUNeK0sGzTQ=mrjhXuvd=bCFvE25PmPMOdMtA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [meta-oe][PATCH] python-requests: add version 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,19 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 11:28:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 May 2013 16:10:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Any comments on this?
+Was this ever submitted to ML? I cannot find it here or on patchwork.
 
-Is something wrong with the way this message was formated? Should I inline
-the actual patch??
 
-Well, I quite confused with where and how to submit patches.
+On Wed, May 8, 2013 at 1:10 PM, Ilya Dmitrichenko
+<errordeveloper@gmail.com>wrote:
 
-I much prefer to use github for this purpose.
-
-Regards,
--- 
-Ilya
+> Any comments on this?
+>
+> Is something wrong with the way this message was formated? Should I inline
+> the actual patch??
+>
+> Well, I quite confused with where and how to submit patches.
+>
+> I much prefer to use github for this purpose.
+>
+> Regards,
+> --
+> Ilya
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
