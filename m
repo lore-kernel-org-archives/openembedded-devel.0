@@ -1,36 +1,35 @@
-Received: from mail-ob0-f173.google.com ([209.85.214.173])
+Received: from mail-gh0-f182.google.com ([209.85.160.182])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Ua8r0-0005dQ-H7
+	(envelope-from <otavio.salvador@gmail.com>) id 1UaT0q-0006Tg-1F
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 May 2013 20:12:42 +0200
-Received: by mail-ob0-f173.google.com with SMTP id 6so2032616oba.32
+	Thu, 09 May 2013 17:44:11 +0200
+Received: by mail-gh0-f182.google.com with SMTP id z15so665761ghb.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 May 2013 10:54:35 -0700 (PDT)
+	Thu, 09 May 2013 08:26:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=r5PDQBGIDGenMkD77iDPMQEmhoCE7tCeWbTQU4Tdf7w=;
-	b=HwkX2DCSsrC+sJNkWhXKuvJoVld0e1BIvHsuWBoxhZBJmEuEIzlEeWFYDxA2lZM7iO
-	7CCZFs59k4G31bDs5RmRbF9ii63/Cgm7vrde4RKQBr8osRfpZXwp+NM12H8seGY70iUB
-	hBrwU8+pG5qTM2AjXIEqC2vRXfj1RjTX0FYDddqunakWTYdl944JVQmGwjSqmZNN8YQa
-	LblqPho8fAx3autVw8V/5OTWCf+Ce5zmmK1/9cM4xGmIBRj4dzoVHU+PsvgOouP4pBPw
-	OnWF4KxjBMXZtYu6j427v6q0gYtldZLeiSGFC2qETJcR0PxzFR838SQNpGWWh0wSQswo
-	q0xQ==
-MIME-Version: 1.0
-X-Received: by 10.60.116.3 with SMTP id js3mr517547oeb.142.1368035674999; Wed,
-	08 May 2013 10:54:34 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.89.226 with HTTP; Wed, 8 May 2013 10:54:34 -0700 (PDT)
-In-Reply-To: <20130508174906.GC9137@windriver.com>
-References: <1368034148-3512-1-git-send-email-otavio@ossystems.com.br>
-	<20130508174906.GC9137@windriver.com>
-Date: Wed, 8 May 2013 14:54:34 -0300
-X-Google-Sender-Auth: GTrCVYSdnUaTdLhQPYcQWhY4Qus
-Message-ID: <CAP9ODKrxBvfMMMVP95PsGE+O2zBRmu9SwmYZUr_Bp=ODJJFTSg@mail.gmail.com>
+	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=fSgvA+pOrXB5l9X1P3JUH/vgIP+cAZMPICLXvgS1Xlk=;
+	b=kRlAvjPsPPY1zXPvG6HSf5HmnhgN8UXrQ+7R6XtqQDIk8xnC1zFF468mX8e9K71fnL
+	pgpYi1kYRmlhVlYFaFsgGbb1pkHbgIBPlx6UuNkPlAv37vuI1r7ay7TXQtPKIcIJ8mvz
+	/q8/H9aUkrBfSUWw7TAkwJWq+GZdtdeHB2MIW4M1NOldgr1BL1UDEpUh9YUkViKctGez
+	IdQ0y1W9NjI5B7K07X0+p7Lkv8bsanQf+q7dTOsOC/MIImglHNMT5Sw4cMm+nDrYg5ue
+	Uo+H8P4Tjui+cnpz5TB9YrXVj4zoQxG0s8xJlOnWMxSiKnOFqVSpfLwQWH6mw9Jp+Cs1
+	Kp8g==
+X-Received: by 10.236.161.102 with SMTP id v66mr9652596yhk.162.1368113163327; 
+	Thu, 09 May 2013 08:26:03 -0700 (PDT)
+Received: from localhost.localdomain ([187.23.151.247])
+	by mx.google.com with ESMTPSA id j27sm4525542yhf.18.2013.05.09.08.26.01
+	for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Thu, 09 May 2013 08:26:02 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Joe MacDonald <Joe.MacDonald@windriver.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][meta-networking PATCH] cifs-utils: Add runtime recommendation to CIFS kernel module
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 May 2013 12:25:45 -0300
+Message-Id: <1368113145-17108-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe PATCH] samba: Add usershare directory to the package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 18:12:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 09 May 2013 15:44:14 -0000
 
-On Wed, May 8, 2013 at 2:49 PM, Joe MacDonald
-<Joe.MacDonald@windriver.com> wrote:
-> [[oe] [meta-oe][meta-networking PATCH] cifs-utils: Add runtime recommendation to CIFS kernel module] On 13.05.08 (Wed 14:29) Otavio Salvador wrote:
->
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->> ---
->> Note: This patch has been tested in master and danny. Please
->>       consider it for master, dylan and danny branches.
->>
->>  meta-networking/recipes-support/cifs/cifs-utils_git.bb | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
->> index 19b60ad..de2786a 100644
->> --- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
->> +++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
->> @@ -5,6 +5,7 @@ LICENSE = "GPLv3 & LGPLv3"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->>
->>  PV = "5.9"
->> +PR = "r1"
->
-> For the sake of one patch in all branches, I think we're okay, but in
-> master we don't actually need PR anymore, do we?
+Change-Id: I0d9ad638c62cca929cded60752dbf75fc100017f
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-connectivity/samba/samba.inc      |    3 +++
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-In master it is not required (but still accepted) however to keep the
-upgrade path from danny -> dylan -> dylan+1 we need.
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index 3ee43ad..f9a54a2 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -92,6 +92,9 @@ do_install_append() {
+ 
+ 	rmdir ${D}${base_sbindir}
+ 	sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
++
++	# usershare mount place
++	mkdir -p ${D}${localstatedir}/lib/samba/usershares
+ }
+ 
+ 
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index 35d20c5..917c826 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -3,7 +3,7 @@ require samba-basic.inc
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PR = "r7"
++PR = "r8"
+ 
+ SRC_URI += "\
+     file://config-h.patch \
+-- 
+1.7.2.5
 
---
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
