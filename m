@@ -1,39 +1,34 @@
-Received: from mail-ee0-f42.google.com ([74.125.83.42])
+Received: from mail-ea0-f174.google.com ([209.85.215.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UbdTd-0008OW-Bk
+	(envelope-from <andrea.adami@gmail.com>) id 1Ubfsn-0007g2-SA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 May 2013 23:06:47 +0200
-Received: by mail-ee0-f42.google.com with SMTP id c50so176763eek.15
+	Mon, 13 May 2013 01:40:51 +0200
+Received: by mail-ea0-f174.google.com with SMTP id z7so2294867eaf.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 May 2013 13:48:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=vXatZEP7jzgzDA0QjlRfbmei5WHW0DOD5pBOCplorb8=;
-	b=cOXGgAUEx75yEP94rwhL7+KlN2wDG3CvHOMgRWrwGoTay2tpVUpe09IgR5cpj/KzqM
-	kM8Kmw8vhlZ6zCj5PENZc+ziKY28pfSqVoqsPqV8oSmaFnJZIUIVeaoRUwa4DbisahTC
-	nz9f7Sgy9kNwCIgDcpOU5GRAojSij8hrk33csb7pWrdjPwpSZSOW66HP935hcpq6lg1q
-	2TZDHHEvbjXiVwbbcFeia+Y3F0EYoQk0FiWPw50cESoNWYCe+UPC7Fg/RDenyhKpZ62Y
-	Zfy3r0KdBs2jT2QDZN2rWYgs1Ge05cMIWo9nsbtVJMagh9IBN3bZzDVpIoLk72/5k4W7
-	va0A==
-X-Received: by 10.14.111.5 with SMTP id v5mr70904827eeg.27.1368391712796;
-	Sun, 12 May 2013 13:48:32 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF06B8.dip0.t-ipconnect.de.
-	[79.223.6.184]) by mx.google.com with ESMTPSA id
-	w52sm18480626eev.12.2013.05.12.13.48.31
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 12 May 2013 13:48:32 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sun, 12 May 2013 16:22:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=4WvVSfn9U/ychqma2wa9Y6iWzAHquQ6nDJ+/o28kRts=;
+	b=IV5hdK2KPBgtAhrUgGk+eJ22MWF+lLLADmLoOqggSEuv0hgTSO/5U5EYJEdF54YvwQ
+	D2XmX1HoOk0KNRbTbIEklGLD35gmL1w5q/F+TZRQeaccNgEpRVDmFQD/10X58YdSGhY+
+	cLcY13YhSzMaK7qLZS8DPcCSxvlxGMVt3SVWmKgXaVDNclovYBwGr2WsEff6C2lusM2d
+	3hZnBuB05Dii9YDioRT+Lb5wees5PIEAUlbOlGBJl5B6+ws1WpRljBaCQshppCU8bcie
+	15LWs1qzlLLFhfn+VzGQ7GH8VMQh7tCfguj8g7G1Eu5kOgj86Nfgp0Lx/UKrdYYg6Ej9
+	K6KA==
+X-Received: by 10.15.23.69 with SMTP id g45mr71513502eeu.25.1368400960707;
+	Sun, 12 May 2013 16:22:40 -0700 (PDT)
+Received: from mizar.localdomain
+	(host170-249-dynamic.17-79-r.retail.telecomitalia.it.
+	[79.17.249.170]) by mx.google.com with ESMTPSA id
+	w43sm19120109eeg.14.2013.05.12.16.22.39 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 12 May 2013 16:22:39 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 May 2013 22:48:16 +0200
-Message-Id: <1368391699-1402-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.4.4
-In-Reply-To: <1368391699-1402-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1368391699-1402-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-oe/meta-network/meta-gnome 1/4] gnome-terminal: add gnome-common-schemas to RRECOMMENDS
+Date: Mon, 13 May 2013 01:22:19 +0200
+Message-Id: <cover.1368400320.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-initramfs][PATCH 0/4] cleanings and fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +42,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 May 2013 21:07:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 12 May 2013 23:40:52 -0000
 
-without libgnome gnome-terminal crashes for missing font assertion:
-| ERROR:terminal-app.c:1451:terminal_app_init: assertion failed: (app->system_font_desc != NULL)
+* minor editing to the images,
+* kexecboot runtime deps fixes,
+* klibc and kexec-tools-klibc refinements needed to unbreak the build
+* for x86 and x86-64
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../recipes-gnome/gnome/gnome-terminal_2.30.2.bb   |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+Andrea Adami (4):
+  initramfs-kexecboot(-klibc)-image: Drop legacy export of
+    IMAGE_BASENAME
+  kexecboot(-klibc): remove runtime dependency on kexec(-klibc)
+  klibc: fix KLIBCARCH for x86-64, powerpc and powerpc64
+  kexec-tools-klibc_2.0.2: refactor and extend patches for building
 
-diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-index 1afd334..0f44900 100644
---- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "GNOME Terminal"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
- DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils"
-+PR = "r1"
- 
- inherit gnome
- 
-@@ -13,3 +14,5 @@ EXTRA_OECONF += "--disable-scrollkeeper"
- 
- SRC_URI[archive.md5sum] = "74c4528f00067072c2bd867d1f8fe844"
- SRC_URI[archive.sha256sum] = "2c7af2250698b9f9f53c6eaa93211c1118cf2c7e29cbbacfd1e8a6a10069e07a"
-+
-+RRECOMMENDS_${PN} += "gnome-common-schemas"
+ .../images/initramfs-kexecboot-image.bb            |  2 -
+ .../images/initramfs-kexecboot-klibc-image.bb      |  2 -
+ .../recipes-bsp/kexecboot/kexecboot-klibc_git.bb   |  1 -
+ .../recipes-bsp/kexecboot/kexecboot_git.bb         |  1 -
+ meta-initramfs/recipes-devtools/klibc/klibc.inc    |  3 +
+ .../kexec-tools-klibc-2.0.2/arm_crashdump.patch    | 12 +++
+ .../kexec-tools-klibc-2.0.2/cflags_static.patch    | 11 +++
+ .../kexec/kexec-tools-klibc-2.0.2/elf.patch        | 94 ---------------------
+ .../kexec/kexec-tools-klibc-2.0.2/errno.patch      | 13 ---
+ .../kexec-tools-klibc-2.0.2/ifdown_errno.patch     | 11 +++
+ .../kexec-tools-klibc-2.0.2/kexec-elf-rel.patch    | 61 ++++++++++++++
+ .../kexec-tools-klibc-2.0.2/kexec-syscall.patch    | 44 ++++++++++
+ .../kexec/kexec-tools-klibc-2.0.2/other.patch      | 97 ----------------------
+ .../kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch     | 18 ++++
+ .../kexec-tools-klibc-2.0.2/purgatory_flags.patch  | 21 +++++
+ .../kexec-tools-klibc-2.0.2/purgatory_string.patch |  9 ++
+ .../kexec/kexec-tools-klibc-2.0.2/sha256.patch     | 13 +++
+ .../kexec/kexec-tools-klibc-2.0.2/string.patch     | 11 ---
+ .../kexec/kexec-tools-klibc-2.0.2/syscall.patch    | 46 ----------
+ .../sysconf_nrprocessors.patch                     | 13 +++
+ .../kexec-tools-klibc-2.0.2/x86_basename.patch     | 14 ++++
+ .../kexec-tools-klibc-2.0.2/x86_kexec_test.patch   | 13 +++
+ .../kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch | 21 +++++
+ .../kexec-tools-klibc-2.0.2/x86_vfscanf.patch      | 27 ++++++
+ .../kexec/kexec-tools-klibc_2.0.2.bb               | 28 +++++--
+ 25 files changed, 310 insertions(+), 276 deletions(-)
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/arm_crashdump.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/cflags_static.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/elf.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/errno.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ifdown_errno.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-elf-rel.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-syscall.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/other.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_flags.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_string.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sha256.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/string.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/syscall.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sysconf_nrprocessors.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_basename.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_kexec_test.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
+
 -- 
-1.7.4.4
+1.8.1.5
 
 
 
