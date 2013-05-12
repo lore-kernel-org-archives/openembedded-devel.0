@@ -1,39 +1,39 @@
-Received: from mail-ea0-f171.google.com ([209.85.215.171])
+Received: from mail-ee0-f42.google.com ([74.125.83.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UbdTe-0008Oo-Jf
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UbdTd-0008OW-Bk
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 12 May 2013 23:06:47 +0200
-Received: by mail-ea0-f171.google.com with SMTP id b15so1408609eae.30
+Received: by mail-ee0-f42.google.com with SMTP id c50so176763eek.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 May 2013 13:48:34 -0700 (PDT)
+	Sun, 12 May 2013 13:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=FhYdp36WOlpbhZrVZMyXK5CCB/dTRd36LY4y+oF6WPA=;
-	b=M6LEgVtBElkULvxiLEEp2JK/M9zW7h4t3W9nqnPSs1shOHjkuWriifLOx9d4siwYQK
-	GI8uAlSv9W2dj+1fHcg3L/EzXXBBvgFLi0Vf4KCIFunPUtnhFJSfNg2mFQlYNx0bn5NG
-	j1e7i0/tgzAVqnVLFtQHitoAe1WwxeviomIxMOiKVamcy8AQC8mXOrsmDtB6Eu/mYeT5
-	irjvNGsWKQK8qyWRObXtMoe772J62hQ2YPAKHdYgEduOuRXCjFSmXV3gfN80xvMVIIIs
-	7xOJJy0Vf4y8WzhBjNb2qQPc4bupplUjO70jN7/DspJKh+dUXsR7+EB3PguKoOWQIa1P
-	Q5JA==
-X-Received: by 10.14.178.129 with SMTP id f1mr33904516eem.10.1368391714160;
-	Sun, 12 May 2013 13:48:34 -0700 (PDT)
+	bh=vXatZEP7jzgzDA0QjlRfbmei5WHW0DOD5pBOCplorb8=;
+	b=cOXGgAUEx75yEP94rwhL7+KlN2wDG3CvHOMgRWrwGoTay2tpVUpe09IgR5cpj/KzqM
+	kM8Kmw8vhlZ6zCj5PENZc+ziKY28pfSqVoqsPqV8oSmaFnJZIUIVeaoRUwa4DbisahTC
+	nz9f7Sgy9kNwCIgDcpOU5GRAojSij8hrk33csb7pWrdjPwpSZSOW66HP935hcpq6lg1q
+	2TZDHHEvbjXiVwbbcFeia+Y3F0EYoQk0FiWPw50cESoNWYCe+UPC7Fg/RDenyhKpZ62Y
+	Zfy3r0KdBs2jT2QDZN2rWYgs1Ge05cMIWo9nsbtVJMagh9IBN3bZzDVpIoLk72/5k4W7
+	va0A==
+X-Received: by 10.14.111.5 with SMTP id v5mr70904827eeg.27.1368391712796;
+	Sun, 12 May 2013 13:48:32 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF06B8.dip0.t-ipconnect.de.
 	[79.223.6.184]) by mx.google.com with ESMTPSA id
-	w52sm18480626eev.12.2013.05.12.13.48.32
+	w52sm18480626eev.12.2013.05.12.13.48.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 12 May 2013 13:48:33 -0700 (PDT)
+	Sun, 12 May 2013 13:48:32 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 May 2013 22:48:17 +0200
-Message-Id: <1368391699-1402-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 12 May 2013 22:48:16 +0200
+Message-Id: <1368391699-1402-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1368391699-1402-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1368391699-1402-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe/meta-network/meta-gnome 2/4] poppler: fix config option --disable-poppler-qt to --disable-poppler-qt4
+Subject: [meta-oe/meta-network/meta-gnome 1/4] gnome-terminal: add gnome-common-schemas to RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,33 +51,32 @@ X-List-Received-Date: Sun, 12 May 2013 21:07:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+without libgnome gnome-terminal crashes for missing font assertion:
+| ERROR:terminal-app.c:1451:terminal_app_init: assertion failed: (app->system_font_desc != NULL)
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/poppler/poppler_0.22.3.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ .../recipes-gnome/gnome/gnome-terminal_2.30.2.bb   |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.22.3.bb b/meta-oe/recipes-support/poppler/poppler_0.22.3.bb
-index 660bc0e..d3d5ce8 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.22.3.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.22.3.bb
-@@ -2,6 +2,8 @@ DESCRIPTION = "Poppler is a PDF rendering library based on the xpdf-3.0 code bas
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
+diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+index 1afd334..0f44900 100644
+--- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
++++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "GNOME Terminal"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
+ DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils"
 +PR = "r1"
-+
- SRC_URI = "http://poppler.freedesktop.org/${PN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "be915388eaad6865cee5a156c8119ec1"
- SRC_URI[sha256sum] = "916a931cbef951366014f13d5f4a574657ccc064ac41051df96dd58e22934431"
-@@ -13,7 +15,7 @@ inherit autotools pkgconfig
- EXTRA_OECONF = "\
-     --enable-xpdf-headers \
-     --disable-gtk-test \
--    --disable-poppler-qt \
-+    --disable-poppler-qt4 \
-     --enable-zlib \
- "
  
+ inherit gnome
+ 
+@@ -13,3 +14,5 @@ EXTRA_OECONF += "--disable-scrollkeeper"
+ 
+ SRC_URI[archive.md5sum] = "74c4528f00067072c2bd867d1f8fe844"
+ SRC_URI[archive.sha256sum] = "2c7af2250698b9f9f53c6eaa93211c1118cf2c7e29cbbacfd1e8a6a10069e07a"
++
++RRECOMMENDS_${PN} += "gnome-common-schemas"
 -- 
 1.7.4.4
 
