@@ -1,36 +1,38 @@
-Received: from mail-ye0-f172.google.com ([209.85.213.172])
+Received: from mail-ea0-f174.google.com ([209.85.215.174])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Uc0s8-0001bx-U3
+	(envelope-from <martin.jansa@gmail.com>) id 1Uc0wX-00022v-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 00:05:36 +0200
-Received: by mail-ye0-f172.google.com with SMTP id l13so1556667yen.31
+	Tue, 14 May 2013 00:10:05 +0200
+Received: by mail-ea0-f174.google.com with SMTP id z7so2860607eaf.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 May 2013 14:47:22 -0700 (PDT)
+	Mon, 13 May 2013 14:51:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=XL7Bsfo5ciZF5/s012O24lifl1FKBzkvCcC59c7qUz0=;
-	b=GlRyhyKBf8jvWsCV32Cz6+AAkKKJ1eDkwYtxA+BI9MfCgAqlUZPCC2yo7aYvmeBY12
-	zDXnegPhNJz+Wx+JS//nKIU0FleF/ksY5MOrmHNLqpsnfHMAqtmEWdLuSI+kOpjErsjd
-	BQSzbQslrqNMgyFHvsr5oNe+78v8yigmP183QwMdgKGy4HwFaHQJe2yeELDYrUfK1coP
-	PtoKLhfYH1lrJbr+TB/KHDByYBKrJopISXwmUuMtOQSTfBUOs6GIR5P1a/3lafYZageh
-	v1VQ8QiZEiJHiY6ehkgYUhFUBi0Goix3f04hRyNBmNpKio1/WNVwkNV4uEbC3BY9eBW9
-	FfDg==
-X-Received: by 10.236.162.164 with SMTP id y24mr17033998yhk.14.1368481642058; 
-	Mon, 13 May 2013 14:47:22 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.194.194.146])
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=pdQRtkv3NnyQeU3vIKc9H8y2wcDNxhE4GrAGMWkWxG4=;
+	b=e65GKNLRrDRx/pYUy3V6VbCNcyPIUpNRasuTBgom80IM7ECoIfmbF/fRPAgz6Ug4w4
+	ylvsaXDlaPPyd/EKuegVPdQ3pRWsD+Plfqcc1oIaJM3yOvGBgVXRD1KRiWJtI4WUG2/m
+	zp6CkZ1lVSD5SZn00DSs27T6foFmI7tizMgdQZbGi5kyBsPPABqTHrcPjux2WWeNXsk6
+	o1VAhK+43Dzp+Emq7iRSbiiagR0XmmJCgVrwUAPWW90H6xI3WWd/KfE+YRwHg1w680YB
+	hUtmKjE2B6SyVaCaB5I81P0SytUfrI32f0WFxQFD67dWaN9e/oYomxIToy2GzGWu7pnK
+	Hm4g==
+X-Received: by 10.14.216.201 with SMTP id g49mr53210246eep.42.1368481915341;
+	Mon, 13 May 2013 14:51:55 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	d51sm23115764yho.14.2013.05.13.14.47.20 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 13 May 2013 14:47:21 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 May 2013 18:47:02 -0300
-Message-Id: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.1
+	y10sm25657847eev.3.2013.05.13.14.51.54 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 13 May 2013 14:51:54 -0700 (PDT)
+Date: Mon, 13 May 2013 23:52:01 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130513215201.GF3187@jama>
+References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+MIME-Version: 1.0
+In-Reply-To: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
+Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,91 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 May 2013 22:05:38 -0000
+X-List-Received-Date: Mon, 13 May 2013 22:10:05 -0000
+X-Groupsio-MsgNum: 44690
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Mjqg7Yu+0hL22rav"
+Content-Disposition: inline
 
-This provides a recipe to install the movies in the rootfs; these
-allow for people to make demo images which carry the movies for show.
+--Mjqg7Yu+0hL22rav
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-These recipes are based on Angstrom ones. Thanks by their base work.
+On Mon, May 13, 2013 at 06:47:02PM -0300, Otavio Salvador wrote:
+> This provides a recipe to install the movies in the rootfs; these
+> allow for people to make demo images which carry the movies for show.
+>=20
+> These recipes are based on Angstrom ones. Thanks by their base work.
+>=20
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb   | 16 ++++++++++=
+++++++
+>  .../recipes-support/bigbuckbunny/bigbuckbunny-480p.bb    | 16 ++++++++++=
+++++++
+>  .../recipes-support/bigbuckbunny/bigbuckbunny-720p.bb    | 16 ++++++++++=
+++++++
+>  3 files changed, 48 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-108=
+0p.bb
+>  create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-480=
+p.bb
+>  create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-720=
+p.bb
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb   | 16 ++++++++++++++++
- .../recipes-support/bigbuckbunny/bigbuckbunny-480p.bb    | 16 ++++++++++++++++
- .../recipes-support/bigbuckbunny/bigbuckbunny-720p.bb    | 16 ++++++++++++++++
- 3 files changed, 48 insertions(+)
- create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb
- create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-480p.bb
- create mode 100644 meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-720p.bb
+meta-multimedia?
+=20
 
-diff --git a/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb
-new file mode 100644
-index 0000000..93a52c0
---- /dev/null
-+++ b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-1080p.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Big Buck Bunny movie - 1080P"
-+LICENSE = "CC-BY"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_1080p_surround.avi;md5=223991c8b33564eb77988a4c13c1c76a"
-+
-+SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_surround.avi"
-+SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
-+SRC_URI[sha256sum] = "69fe2cfe7154a6e752688e3a0d7d6b07b1605bbaf75b56f6470dc7b4c20c06ea"
-+
-+inherit allarch
-+
-+do_install() {
-+	install -d ${D}${datadir}/movies
-+	install -m 0644 ${WORKDIR}/big_buck_bunny_1080p_surround.avi ${D}${datadir}/movies/
-+}
-+
-+FILES_${PN} += "${datadir}/movies"
-diff --git a/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-480p.bb b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-480p.bb
-new file mode 100644
-index 0000000..31a90ca
---- /dev/null
-+++ b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-480p.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Big Buck Bunny movie - 480P"
-+LICENSE = "CC-BY"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_480p_surround-fix.avi;md5=ed7ed01e9aefba8ddd77c13332cec120"
-+
-+SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi"
-+SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
-+SRC_URI[sha256sum] = "40d1cf5bc8e1b0e55dac7bb2e3fbc2aea05b6679444864781299b24db044634f"
-+
-+inherit allarch
-+
-+do_install() {
-+	install -d ${D}${datadir}/movies
-+	install -m 0644 ${WORKDIR}/big_buck_bunny_480p_surround-fix.avi ${D}${datadir}/movies/
-+}
-+
-+FILES_${PN} += "${datadir}/movies"
-diff --git a/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-720p.bb b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-720p.bb
-new file mode 100644
-index 0000000..61cdfdc
---- /dev/null
-+++ b/meta-oe/recipes-support/bigbuckbunny/bigbuckbunny-720p.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Big Buck Bunny movie - 720P"
-+LICENSE = "CC-BY"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_720p_surround.avi;md5=0da8fe124595f5b206d64cb1400bbefc"
-+
-+SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi"
-+SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
-+SRC_URI[sha256sum] = "b957d6e6212638441b52d3b620af157cc8d40c2a0342669294854a06edcd528c"
-+
-+inherit allarch
-+
-+do_install() {
-+	install -d ${D}${datadir}/movies
-+	install -m 0644 ${WORKDIR}/big_buck_bunny_720p_surround.avi ${D}${datadir}/movies/
-+}
-+
-+FILES_${PN} += "${datadir}/movies"
--- 
-1.8.1
+--Mjqg7Yu+0hL22rav
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.19 (GNU/Linux)
 
+iEYEARECAAYFAlGRYIEACgkQN1Ujt2V2gBzc6QCfdNtzpF6MYhc+6efkQNvGJuM0
+GogAoJIxo9h48zOcPcyYvOPnB2Ht6g+v
+=fic6
+-----END PGP SIGNATURE-----
 
+--Mjqg7Yu+0hL22rav--
