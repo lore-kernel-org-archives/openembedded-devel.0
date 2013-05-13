@@ -1,20 +1,36 @@
-Received: from mga02.intel.com ([134.134.136.20])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jukka.rissanen@linux.intel.com>) id 1UbsGB-0000I0-Mf
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UbsLT-0000v7-L8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 May 2013 14:53:48 +0200
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 13 May 2013 05:34:33 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,662,1363158000"; d="scan'208";a="312662924"
-Received: from sorvi.fi.intel.com ([10.237.72.154])
-	by orsmga001.jf.intel.com with ESMTP; 13 May 2013 05:34:32 -0700
-From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 May 2013 15:34:31 +0300
-Message-Id: <1368448471-2941-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-Mailer: git-send-email 1.7.11.7
-Subject: [meta-networking][PATCH] vpnc: Runtime dependency to perl was missing
+	Mon, 13 May 2013 14:59:17 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4DCf4cJ021376
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 May 2013 05:41:04 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Mon, 13 May 2013 05:41:04 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 9DC117FCE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 13 May 2013 08:40:53 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id BAC6E410E5; Mon,
+	13 May 2013 08:41:03 -0400 (EDT)
+Date: Mon, 13 May 2013 08:41:03 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130513124103.GE3984@windriver.com>
+References: <1368391699-1402-1-git-send-email-schnitzeltony@googlemail.com>
+	<1368391699-1402-5-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1368391699-1402-5-git-send-email-schnitzeltony@googlemail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe/meta-network/meta-gnome 4/4] proftpd: pack missing files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,30 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 May 2013 12:53:53 -0000
+X-List-Received-Date: Mon, 13 May 2013 12:59:17 -0000
+X-Groupsio-MsgNum: 44684
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zjcmjzIkjQU2rmur"
+Content-Disposition: inline
 
-Generated package contains perl script but dependecy to perl was missing.
+--zjcmjzIkjQU2rmur
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
----
- meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[[oe] [meta-oe/meta-network/meta-gnome 4/4] proftpd: pack missing files] On=
+ 13.05.12 (Sun 22:48) Andreas M=FCller wrote:
 
-diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-index 2ce9530..df90234 100644
---- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-+++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-@@ -6,7 +6,7 @@ PRIORITY = "optional"
- LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
- DEPENDS = "libgcrypt"
--RDEPENDS_${PN} = "kernel-module-tun"
-+RDEPENDS_${PN} = "kernel-module-tun perl"
- 
- CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
- LDFLAGS_append = " -lgcrypt -lgpg-error"
--- 
-1.7.11.7
+> WARNING: QA Issue: proftpd: Files/directories were installed but not ship=
+ped
+>   /home
+>   /home/ftp
+>   /home/ftp/pub
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 
+Acked-by: Joe MacDonald <joe.macdonald@windriver.com>
 
+> ---
+>  .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    4 +++-
+>  1 files changed, 3 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/=
+meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> index 806413b..3c48422 100644
+> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> @@ -4,7 +4,7 @@ HOMEPAGE =3D "http://www.proftpd.org"
+>  LICENSE =3D "GPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb0d1484d11915fa88a6a7702f1dc=
+184"
+> =20
+> -PR =3D "r2"
+> +PR =3D "r3"
+> =20
+>  SRC_URI =3D "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+>             file://make.patch \
+> @@ -59,3 +59,5 @@ INITSCRIPT_PARAM =3D "defaults 85 15"
+>  USERADD_PACKAGES =3D "${PN}"
+>  GROUPADD_PARAM_${PN} =3D "${FTPGROUP}"
+>  USERADD_PARAM_${PN} =3D "--system -g ${FTPGROUP} ${FTPUSER}"
+> +
+> +FILES_${PN} +=3D "/home/${FTPUSER}"
 
+--zjcmjzIkjQU2rmur
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlGQ318ACgkQPN8S4W6ZZncR4QCfblkqvuLhUo7pFs3sgymd+dk6
+AuoAmgI32RFZQ1rk3bGfrhDWzOO4+AQL
+=k0IS
+-----END PGP SIGNATURE-----
+
+--zjcmjzIkjQU2rmur--
