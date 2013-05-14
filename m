@@ -1,26 +1,39 @@
-Received: from starfish.geekisp.com ([216.168.135.166])
-	by linuxtogo.org with smtp (Exim 4.72)
-	(envelope-from <philip@balister.org>) id 1Uc1iB-0006Ce-6C
+Received: from mail-ee0-f45.google.com ([74.125.83.45])
+	by linuxtogo.org with esmtp (Exim 4.72)
+	(envelope-from <koen@dominion.thruhere.net>) id 1UcA3t-0006L5-KY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 00:59:24 +0200
-Received: (qmail 3242 invoked by uid 1003); 13 May 2013 22:41:02 -0000
-Received: from unknown (HELO ?192.168.1.122?)
-	(philip@opensdr.com@71.171.30.249)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	13 May 2013 22:41:02 -0000
-Message-ID: <51916BFD.5090903@balister.org>
-Date: Mon, 13 May 2013 18:41:01 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130311 Thunderbird/17.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1368448471-2941-1-git-send-email-jukka.rissanen@linux.intel.com>
-	<kmrj87$g8t$1@ger.gmane.org>
-In-Reply-To: <kmrj87$g8t$1@ger.gmane.org>
-X-Enigmail-Version: 1.5.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-networking][PATCH] vpnc: Runtime dependency to perl was missing
+	Tue, 14 May 2013 09:54:21 +0200
+Received: by mail-ee0-f45.google.com with SMTP id l10so117836eei.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 May 2013 00:36:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:from:content-type:content-transfer-encoding:subject
+	:message-id:date:to:mime-version:x-mailer:x-gm-message-state;
+	bh=6ASrZ/nAOSSnLaGZDRAxsHQr4131fbXfFn/hBTj0fAY=;
+	b=CrUE7eukruuyQNA3zJkWrp1dXww5CR2CF6x30nLHZez6U44XJkDDn8AwxIH0uvHxwZ
+	4duRTWiG2m0Z+jn601mmNMj3IlL1ZnqxFoejBZCCHATZNurhS+17XRoqo49KJVOQZuUt
+	PZQrWtGqmjIrd6EQ2rXP0O38YaDi9WL56HIsbIb+nklfsE5gpsIgUw2lRS4+FTvO69Wf
+	35beOj5IYQZzcCx4JQSo6VKqkh6wQbZ8D9qf/xCSqIKVtmeyRb39mErU+zSWuEqEQV4B
+	6cdJhsYpKiTpgz9xNlEu7sRwhumHTZRdqRjAfvnVziO/IFigMUz5NA8+IYaXrz1sTbaH
+	vdfQ==
+X-Received: by 10.14.206.129 with SMTP id l1mr87747180eeo.30.1368516966094;
+	Tue, 14 May 2013 00:36:06 -0700 (PDT)
+Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id
+	bj12sm27610856eeb.8.2013.05.14.00.36.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 14 May 2013 00:36:04 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Message-Id: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
+Date: Tue, 14 May 2013 09:36:02 +0200
+To: "openembedded-devel@lists.openembedded.org List"
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+X-Mailer: Apple Mail (2.1503)
+X-Gm-Message-State: ALoCoQnTJpCNHxhPHCyeulGrjNm9SW0JNv4XSIoNRlfCUva0Ew5MYKQ1Cip6OmeXOn9CtD9h/1Ue
+Subject: [RFC] Layers, PRINC and bbappends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,84 +47,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 May 2013 22:59:40 -0000
-X-Groupsio-MsgNum: 44692
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="----enig2BJWORSDGVIUNNNOAUVGG"
-
-------enig2BJWORSDGVIUNNNOAUVGG
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 May 2013 07:54:30 -0000
+X-List-Received-Date: Tue, 14 May 2013 07:54:30 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On 05/13/2013 04:42 PM, Koen Kooi wrote:
-> Op 13-05-13 14:34, Jukka Rissanen schreef:
->> Generated package contains perl script but dependecy to perl was
->> missing.
->=20
->> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com> ---=20
->> meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +- 1 file
->> changed, 1 insertion(+), 1 deletion(-)
->=20
->> diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
->> b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb index
->> 2ce9530..df90234 100644 ---
->> a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb +++
->> b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb @@ -6,7 +6,7=
- @@
->> PRIORITY =3D "optional" LICENSE =3D "GPL-2.0+" LIC_FILES_CHKSUM =3D
->> "file://COPYING;md5=3D173b74cb8ac640a9992c03f3bce22a33" DEPENDS =3D
->> "libgcrypt" -RDEPENDS_${PN} =3D "kernel-module-tun" +RDEPENDS_${PN} =3D=
+Hi,
 
->> "kernel-module-tun perl"
->=20
-> I've seen a number of patches doing this and I hate it for 2 reasons:
->=20
-> 1) the perl stuff should be looked at and split out in a subpackage whe=
-never
-> possible
-> 2) it doesn't actually fix the problem, since you need to specify the
-> perl-modules it needs as well.
+For the past 2 weeks I've been trying to fix the angstrom feeds manually =
+due to a combination of PRSERV deciding that going backwards is OK and =
+multiple layers getting updates that make PR go backwards as well.
 
-Another way to annoy Koen :), is to suck in all the perl-modules rather
-than work out which ones are really need.
+Getting a simple reduction for PRSERV going backwards is nigh =
+impossible[1], so I can't complain too much about that, but I can =
+complain about what people do :)
 
-Philip
+What triggered PR going backwards this time was a BSP removing its =
+netbase bbappend because it wasn't needed anymore. That's great, I hate =
+netbase bbappends since they tend to be ifupdown specific and don't work =
+as intended with connman/NM/netctl/etc. Long story short:
 
->=20
-> So patches like this drag in perl while at the same time not actually f=
-ixing
-> the problem of failing runtimes, only papering over RPM bitching out
-> dependencies.
->=20
->=20
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
+	ERROR: Package version for package netbase-dbg went backwards =
+which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+	ERROR: Package version for package netbase-staticdev went =
+backwards which would break package feeds from (0:5.0-r3.1 to =
+0:5.0-r1.2)
+	ERROR: Package version for package netbase-dev went backwards =
+which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+	ERROR: Package version for package netbase-doc went backwards =
+which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+	ERROR: Package version for package netbase-locale went backwards =
+which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+	ERROR: Package version for package netbase went backwards which =
+would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+
+To avoid things like that in the future I have a few recommendations I'd =
+like to get feedback on:
+
+1) For a given BSP split it in multiple layers:
+	a) One 'core' BSP layer with only:
+		o Bootloader
+		o Kernel
+		o Tooling to build bootloader/kernel/image
+	b) One BSP layer with bbappends for shadow/netbase/xorg-conf/etc
+	c) One or more layers with bbappends for libav/clutter/etc[2]
 
 
-------enig2BJWORSDGVIUNNNOAUVGG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+2) *Never* use PRINC in type b) bbappends
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.13 (GNU/Linux)
-Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
+3) Avoid PRINC in general
 
-iQEcBAEBAgAGBQJRkWv9AAoJEMDJd4rr0merCPoIAJ6jnL9xtXzGJfGYvv3dFUFz
-uvusH9XmThzGwYGDiWArJ+vOdd7iK1QqbelcxyluVSFjNsNWDxGa30RqS1UsZfnJ
-irDu5yMa4epuKkPzp09u9O727me337FZBZUx/IbCsFGgKzy9xdWTFX+hXmk4m289
-AbwKBoQ7of05xFm+UINgBkOaaky0VMBG6nldHA7VJnbfURQMczlwTeDs0ITohmy8
-H2ssWtlBF5wi1sUWn2m6cKldr4D5cJXFL0jXf8dujVaCJAOPOYkzoo4n87YCKo4l
-KyGFYByH/DPczWlvF9P+moAjcbDrJ1pvWAvoTlXGPHJnRo3HfZSSWes6HpiUZ/0=
-=5v/D
------END PGP SIGNATURE-----
+4) make buildhistory.bbclass mandatory in OE-core
 
-------enig2BJWORSDGVIUNNNOAUVGG--
+There's another use case that suffers from PRINC problems and that is =
+removing layers when they break parsing and the maintainer is slow to =
+push patches. With the current situation I have to choose between "being =
+able to do builds" and "having working feeds".
+
+During the last TSC meeting we discussed that there is currently no way =
+to force maintainers to behave. I think the most we can do is have clear =
+guidelines on the OE side and enforce those during the "Yocto Project =
+Compatible" process.=20
+And have the layer index orange/red flag layers that do stupid things. =
+Come to think of it, that would actually be the most visible way to go, =
+having wikipedia style warning banners on the offending layers.
+
+Thanks,
+
+Koen
+
+[1] It always happens after editing bblayers.conf and dragging in major =
+update to layers. Since I tend to do both at the same time I can't say =
+which action triggers it or if it's the combination.
+[2] I spent 3 days trying to figure out why mesa was so *$(*$(@ broken =
+before I finally located the bbappends in meta-ti that were causing this =
+breakage=
+
+
