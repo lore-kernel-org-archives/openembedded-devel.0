@@ -1,38 +1,32 @@
-Received: from mail-ob0-f181.google.com ([209.85.214.181])
+Received: from mail-vc0-f179.google.com ([209.85.220.179])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <otavio.salvador@gmail.com>) id 1UcDS5-0002zV-JN
+	(envelope-from <paul.betafive@gmail.com>) id 1UcDqI-0004sx-1S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 13:31:31 +0200
-Received: by mail-ob0-f181.google.com with SMTP id dn14so382465obc.40
+	Tue, 14 May 2013 13:56:32 +0200
+Received: by mail-vc0-f179.google.com with SMTP id hz10so387070vcb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 04:13:18 -0700 (PDT)
+	Tue, 14 May 2013 04:38:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=jCVeUbYm4crgxuO5Gr/WXnQrBXGHc19NXuG3EONvRcg=;
-	b=UeJkle0jUVoztSqswUgdqvBC02sBsTK4u9SZZv7Me2W+voIE58PsgR/1JXm2PVwmRd
-	vbwqtawP4e3kgInnm/utenoP/D/bLe9SortKQUEoK8dzRp0ezxri1wvdZzJcXrmXJK3/
-	SW4T1WOa2Lo12OyxkWCxdyKMqeU9pFm25WYCpnwotJYIoDULZowRxJLTxywVVKA61+Tp
-	5wa6nKTupnGlwWzodoSvE1S32GPlQhIyy2759YAWrnQFAELn7VttbdB6z/kt1heSbZSU
-	8eBqc0wxVmdtXEni5kgL60rd4kdO++FspL81Gs2nyWg9UQAo3J0ZROmxsVGVQjNjXByG
-	npNQ==
+	h=x-received:mime-version:sender:from:date:x-google-sender-auth
+	:message-id:subject:to:content-type;
+	bh=TaiWGHdKge4Kv8AGJ9olKQbz3jOyUeLA1DEgnByCckc=;
+	b=sFwbUyRqbIIr9BBQnOFiRIkKzLY6QohfRWkySFnvYJFVOAWs9YE5ZhI8NFpPxoXY1V
+	C1+o5WvhVLGE8ELIwehz0Tv4DGcR29fosINSuxgspi+I/oKtOkAF+0vYV/9JiSPlrHnX
+	Kx6qstZxiAA++ltUaDLoH57WuHZcu7Wk7JzmtdEH/xVmW8MYU9blHUTlCfiM1aZeQ3ji
+	y5psI6cuHEXBFjSJGTvnT0GYwPS9sVr2CoTD7odhKhf8dr9ZDyZLVFS/i7baLABP2OBs
+	5cxo5MgzhFjedm4sEtcuYY0J1Gbv96cuyx8jOiufIU0WnR2OCXOUD2G9bgOB/RqST5CL
+	h65A==
+X-Received: by 10.58.132.232 with SMTP id ox8mr21372647veb.45.1368531496805;
+	Tue, 14 May 2013 04:38:16 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.182.199.106 with SMTP id jj10mr7823381obc.45.1368529997543; 
-	Tue, 14 May 2013 04:13:17 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.89.226 with HTTP; Tue, 14 May 2013 04:13:17 -0700 (PDT)
-In-Reply-To: <CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
-References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
-	<20130513215201.GF3187@jama>
-	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
-	<CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
-Date: Tue, 14 May 2013 08:13:17 -0300
-X-Google-Sender-Auth: 5U2KwRmM5W33J4eEywyCnvAoU7c
-Message-ID: <CAP9ODKrKMLrCNhWbO9GMvR9UsN4871gJFQTjsVjZ8thcTr9boQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
+Sender: paul.betafive@gmail.com
+Received: by 10.220.48.5 with HTTP; Tue, 14 May 2013 04:37:56 -0700 (PDT)
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Tue, 14 May 2013 12:37:56 +0100
+X-Google-Sender-Auth: h7MkzF7B6EMp_5p8zjlqpgdS4Qk
+Message-ID: <CANyK_8dZ+LZtpXhQ27frs6wX6PVzdBi=aHAeoJTQQKKwL+M-0w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe] Unshipped systemd files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 11:31:36 -0000
+X-List-Received-Date: Tue, 14 May 2013 11:56:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, May 14, 2013 at 6:59 AM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> I pondered about it but I think it is of generic use. I don't think we
->> need to have meta-multimedia to be able to use it.
->
-> +1 for meta-multimedia.
+This is drawing on a build done over the weekend so apologies if these
+have already been fixed and I've missed them.
 
-Ok, will move it to there.
+gpsd-3.7: gpsd: Files/directories were installed but not shipped
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/gpsd.service
+  /lib/systemd/system/gpsd.socket
 
-> Also I'm getting bored of Big Buck Bunny, how about Sintel instead. :)
+zram-0.1: zram: Files/directories were installed but not shipped
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/zram.service
 
-We can add it as well. What about we have these all in:
+cloud9-0.6: cloud9: Files/directories were installed but not shipped
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/cloud9.service
 
-meta-multimedia/recipes-support/media-samples/*?
+Further QA log and build details available at
+http://www.paulbarker.me.uk/yocto/20130510_poky-raspberrypi_userland/
 
-So we can have Big Buck Bunny, Sintel and others here.
+Thanks,
 
 --
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
 
