@@ -1,44 +1,38 @@
-Received: from tx2ehsobe001.messaging.microsoft.com ([65.55.88.11]
-	helo=tx2outboundpool.messaging.microsoft.com)
+Received: from mail-ob0-f181.google.com ([209.85.214.181])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <r63875@freescale.com>) id 1UcDKo-0002Jj-HR
+	(envelope-from <otavio.salvador@gmail.com>) id 1UcDS5-0002zV-JN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 13:23:59 +0200
-Received: from mail98-tx2-R.bigfish.com (10.9.14.253) by
-	TX2EHSOBE014.bigfish.com (10.9.40.34) with Microsoft SMTP Server id
-	14.1.225.23; Tue, 14 May 2013 10:20:26 +0000
-Received: from mail98-tx2 (localhost [127.0.0.1])	by mail98-tx2-R.bigfish.com
-	(Postfix) with ESMTP id 0FFE93A028C	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 10:20:26 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ah1fc6hzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1155h)
-Received: from mail98-tx2 (localhost.localdomain [127.0.0.1]) by mail98-tx2
-	(MessageSwitch) id 1368526823840668_29410;
-	Tue, 14 May 2013 10:20:23 +0000 (UTC)
-Received: from TX2EHSMHS011.bigfish.com (unknown [10.9.14.227])	by
-	mail98-tx2.bigfish.com (Postfix) with ESMTP id C79F43E0051	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 10:20:23 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS011.bigfish.com
-	(10.9.99.111) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Tue, 14 May 2013 10:20:17 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Tue, 14 May 2013 10:20:16 +0000
-Received: from localhost.localdomain (tank.ap.freescale.net [10.193.20.104])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	r4EAKEVe021453; Tue, 14 May 2013 03:20:15 -0700
-From: Olivia Yin <hong-hua.yin@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 May 2013 17:38:27 +0800
-Message-ID: <1368524307-8274-1-git-send-email-hong-hua.yin@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
+	Tue, 14 May 2013 13:31:31 +0200
+Received: by mail-ob0-f181.google.com with SMTP id dn14so382465obc.40
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 May 2013 04:13:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=jCVeUbYm4crgxuO5Gr/WXnQrBXGHc19NXuG3EONvRcg=;
+	b=UeJkle0jUVoztSqswUgdqvBC02sBsTK4u9SZZv7Me2W+voIE58PsgR/1JXm2PVwmRd
+	vbwqtawP4e3kgInnm/utenoP/D/bLe9SortKQUEoK8dzRp0ezxri1wvdZzJcXrmXJK3/
+	SW4T1WOa2Lo12OyxkWCxdyKMqeU9pFm25WYCpnwotJYIoDULZowRxJLTxywVVKA61+Tp
+	5wa6nKTupnGlwWzodoSvE1S32GPlQhIyy2759YAWrnQFAELn7VttbdB6z/kt1heSbZSU
+	8eBqc0wxVmdtXEni5kgL60rd4kdO++FspL81Gs2nyWg9UQAo3J0ZROmxsVGVQjNjXByG
+	npNQ==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: [oe-core master] lvm2: add configure option --with-usrlibdir to install shared library in 64-bit systems
+X-Received: by 10.182.199.106 with SMTP id jj10mr7823381obc.45.1368529997543; 
+	Tue, 14 May 2013 04:13:17 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.89.226 with HTTP; Tue, 14 May 2013 04:13:17 -0700 (PDT)
+In-Reply-To: <CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
+References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+	<20130513215201.GF3187@jama>
+	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
+	<CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
+Date: Tue, 14 May 2013 08:13:17 -0300
+X-Google-Sender-Auth: 5U2KwRmM5W33J4eEywyCnvAoU7c
+Message-ID: <CAP9ODKrKMLrCNhWbO9GMvR9UsN4871gJFQTjsVjZ8thcTr9boQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 11:24:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 14 May 2013 11:31:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-According to make.tmpl.in, shared lib will be installed under $(usrlibdir)
-install_lib_shared: $(LIB_SHARED)
-        $(INSTALL_PROGRAM) -D $< $(libdir)/$(<F).$(LIB_VERSION)
-        $(INSTALL_DIR) $(usrlibdir)
-        $(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
+On Tue, May 14, 2013 at 6:59 AM, Burton, Ross <ross.burton@intel.com> wrote:
+> On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>> I pondered about it but I think it is of generic use. I don't think we
+>> need to have meta-multimedia to be able to use it.
+>
+> +1 for meta-multimedia.
 
-But default $(usrlibdir) is $(DESTDIR)${prefix}/lib no matter it is 32-bit or 64-bit system.
-So we need align $(usrlibdir) with $(libdir).
+Ok, will move it to there.
 
-Signed-off-by: Olivia Yin <hong-hua.yin@freescale.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+> Also I'm getting bored of Big Buck Bunny, how about Sintel instead. :)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 157e11b..5de1e3f 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -4,7 +4,7 @@ DEPENDS = "udev"
- LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- 
- S = "${WORKDIR}/LVM2.${PV}"
-@@ -37,3 +37,4 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
- FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
- 
-+EXTRA_OECONF = "--with-usrlibdir=${libdir}"
--- 
-1.7.0.4
+We can add it as well. What about we have these all in:
 
+meta-multimedia/recipes-support/media-samples/*?
 
+So we can have Big Buck Bunny, Sintel and others here.
+
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
