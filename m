@@ -1,20 +1,40 @@
-Received: from mga01.intel.com ([192.55.52.88])
+Received: from mail-ob0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <jukka.rissanen@linux.intel.com>) id 1UcEvj-0003Wz-8r
+	(envelope-from <otavio.salvador@gmail.com>) id 1UcExT-0003kZ-5I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 15:06:13 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 14 May 2013 05:47:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,670,1363158000"; d="scan'208";a="337365722"
-Received: from sorvi.fi.intel.com ([10.237.72.154])
-	by fmsmga002.fm.intel.com with ESMTP; 14 May 2013 05:47:51 -0700
-From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 May 2013 15:47:50 +0300
-Message-Id: <1368535670-26737-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-Mailer: git-send-email 1.7.11.7
-Subject: [meta-networking][PATCH] vpnc: Set RDEPENDS to perl-module-io-file instead of perl
+	Tue, 14 May 2013 15:08:03 +0200
+Received: by mail-ob0-f175.google.com with SMTP id wd6so482057obb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 May 2013 05:49:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=JB6n3/GA3YMWSiZ909LoLvONxkYrLow7mhzKid36T9c=;
+	b=oAroHmXIkm68xi8mxeoYpvgTdyxpNUBA4NMFhQrvn5xVbuJjviK2RUcvEehyTQux5x
+	Drr1MB7K4RkIZ+DDqSdokrZwuHk2Tf5ZRC1ZlKh2wqnG+Dme1eBjQADP9DyGo9WCXHVz
+	JvmSLffFEHByMAkfyC/zFe02774XN1yaopOdwLdkB+eXt+1yNIpDEeYrPbo2soNJzdqH
+	D2uZTu2xjObOg4NSOHIJJ8S/6YHPtkiWr7XP8UT2sw6d7ZjOyloXTKNwUiHlwiLTgW3y
+	efG83tANUJ+X5Ys4CjXJumy0kJC7FrLqXXCe4XNf54RXaPYXRFwNXJa+xLnwI/Z8oIsI
+	2SqA==
+MIME-Version: 1.0
+X-Received: by 10.60.116.3 with SMTP id js3mr14231229oeb.142.1368535786309;
+	Tue, 14 May 2013 05:49:46 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.89.226 with HTTP; Tue, 14 May 2013 05:49:46 -0700 (PDT)
+In-Reply-To: <CAJTo0LbtaJUfc0j5hcw2H_Xoz8RBS5a=2594E3WCpu2yKSFVmg@mail.gmail.com>
+References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+	<20130513215201.GF3187@jama>
+	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
+	<CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
+	<CAP9ODKrKMLrCNhWbO9GMvR9UsN4871gJFQTjsVjZ8thcTr9boQ@mail.gmail.com>
+	<CAJTo0LbtaJUfc0j5hcw2H_Xoz8RBS5a=2594E3WCpu2yKSFVmg@mail.gmail.com>
+Date: Tue, 14 May 2013 09:49:46 -0300
+X-Google-Sender-Auth: kX7JgoFplMWQ6MAsIFiUUmMQ_HU
+Message-ID: <CAP9ODKpxALx9dwkK1r9V8Cny9_TDVtbibAcScZc2SWHC6M2k9g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,36 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 13:06:36 -0000
+X-List-Received-Date: Tue, 14 May 2013 13:08:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Tue, May 14, 2013 at 9:37 AM, Burton, Ross <ross.burton@intel.com> wrote:
+> On 14 May 2013 12:13, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>> On Tue, May 14, 2013 at 6:59 AM, Burton, Ross <ross.burton@intel.com> wrote:
+>>> On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>>>> I pondered about it but I think it is of generic use. I don't think we
+>>>> need to have meta-multimedia to be able to use it.
+>> We can add it as well. What about we have these all in:
+>>
+>> meta-multimedia/recipes-support/media-samples/*?
+>>
+>> So we can have Big Buck Bunny, Sintel and others here.
+>
+> Sure.  Have a look at Guacamayo, that has recipes for Sintel and some
+> freely distributable music.
 
-Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
----
- meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Awesome, let's move it to meta-oe so we can share these.
 
-diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-index df90234..addd150 100644
---- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-+++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-@@ -6,7 +6,6 @@ PRIORITY = "optional"
- LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
- DEPENDS = "libgcrypt"
--RDEPENDS_${PN} = "kernel-module-tun perl"
- 
- CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
- LDFLAGS_append = " -lgcrypt -lgpg-error"
-@@ -19,6 +18,7 @@ do_install () {
- }
- 
- CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
-+RDEPENDS_${PN} = "kernel-module-tun perl-module-io-file"
- 
- SRC_URI = "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz \
-            file://makeman.patch \
--- 
-1.7.11.7
-
+--
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
 
