@@ -1,39 +1,26 @@
-Received: from mail-ee0-f45.google.com ([74.125.83.45])
+Received: from mga03.intel.com ([143.182.124.21])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <koen@dominion.thruhere.net>) id 1UcA3t-0006L5-KY
+	(envelope-from <jukka.rissanen@linux.intel.com>) id 1UcAHL-0001en-M4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 09:54:21 +0200
-Received: by mail-ee0-f45.google.com with SMTP id l10so117836eei.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 00:36:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:from:content-type:content-transfer-encoding:subject
-	:message-id:date:to:mime-version:x-mailer:x-gm-message-state;
-	bh=6ASrZ/nAOSSnLaGZDRAxsHQr4131fbXfFn/hBTj0fAY=;
-	b=CrUE7eukruuyQNA3zJkWrp1dXww5CR2CF6x30nLHZez6U44XJkDDn8AwxIH0uvHxwZ
-	4duRTWiG2m0Z+jn601mmNMj3IlL1ZnqxFoejBZCCHATZNurhS+17XRoqo49KJVOQZuUt
-	PZQrWtGqmjIrd6EQ2rXP0O38YaDi9WL56HIsbIb+nklfsE5gpsIgUw2lRS4+FTvO69Wf
-	35beOj5IYQZzcCx4JQSo6VKqkh6wQbZ8D9qf/xCSqIKVtmeyRb39mErU+zSWuEqEQV4B
-	6cdJhsYpKiTpgz9xNlEu7sRwhumHTZRdqRjAfvnVziO/IFigMUz5NA8+IYaXrz1sTbaH
-	vdfQ==
-X-Received: by 10.14.206.129 with SMTP id l1mr87747180eeo.30.1368516966094;
-	Tue, 14 May 2013 00:36:06 -0700 (PDT)
-Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPSA id
-	bj12sm27610856eeb.8.2013.05.14.00.36.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 14 May 2013 00:36:04 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Message-Id: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-Date: Tue, 14 May 2013 09:36:02 +0200
-To: "openembedded-devel@lists.openembedded.org List"
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-X-Mailer: Apple Mail (2.1503)
-X-Gm-Message-State: ALoCoQnTJpCNHxhPHCyeulGrjNm9SW0JNv4XSIoNRlfCUva0Ew5MYKQ1Cip6OmeXOn9CtD9h/1Ue
-Subject: [RFC] Layers, PRINC and bbappends
+	Tue, 14 May 2013 10:08:14 +0200
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 14 May 2013 00:48:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,667,1363158000"; d="scan'208";a="302119770"
+Received: from sorvi.fi.intel.com (HELO [10.237.72.154]) ([10.237.72.154])
+	by azsmga001.ch.intel.com with ESMTP; 14 May 2013 00:48:55 -0700
+Message-ID: <5191EC66.1070007@linux.intel.com>
+Date: Tue, 14 May 2013 10:48:54 +0300
+From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120801 Thunderbird/14.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1368448471-2941-1-git-send-email-jukka.rissanen@linux.intel.com>
+	<kmrj87$g8t$1@ger.gmane.org>
+In-Reply-To: <kmrj87$g8t$1@ger.gmane.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-networking][PATCH] vpnc: Runtime dependency to perl was missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,80 +34,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 07:54:30 -0000
-X-List-Received-Date: Tue, 14 May 2013 07:54:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 May 2013 08:08:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Koen,
 
-For the past 2 weeks I've been trying to fix the angstrom feeds manually =
-due to a combination of PRSERV deciding that going backwards is OK and =
-multiple layers getting updates that make PR go backwards as well.
+On 13.05.2013 23:42, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Op 13-05-13 14:34, Jukka Rissanen schreef:
+>> Generated package contains perl script but dependecy to perl was
+>> missing.
+>>
+>> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com> ---
+>> meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +- 1 file
+>> changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+>> b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb index
+>> 2ce9530..df90234 100644 ---
+>> a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb +++
+>> b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb @@ -6,7 +6,7 @@
+>> PRIORITY = "optional" LICENSE = "GPL-2.0+" LIC_FILES_CHKSUM =
+>> "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33" DEPENDS =
+>> "libgcrypt" -RDEPENDS_${PN} = "kernel-module-tun" +RDEPENDS_${PN} =
+>> "kernel-module-tun perl"
+>
+> I've seen a number of patches doing this and I hate it for 2 reasons:
+>
+> 1) the perl stuff should be looked at and split out in a subpackage whenever
+> possible
+> 2) it doesn't actually fix the problem, since you need to specify the
+> perl-modules it needs as well.
+>
+> So patches like this drag in perl while at the same time not actually fixing
+> the problem of failing runtimes, only papering over RPM bitching out
+> dependencies.
 
-Getting a simple reduction for PRSERV going backwards is nigh =
-impossible[1], so I can't complain too much about that, but I can =
-complain about what people do :)
-
-What triggered PR going backwards this time was a BSP removing its =
-netbase bbappend because it wasn't needed anymore. That's great, I hate =
-netbase bbappends since they tend to be ifupdown specific and don't work =
-as intended with connman/NM/netctl/etc. Long story short:
-
-	ERROR: Package version for package netbase-dbg went backwards =
-which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
-	ERROR: Package version for package netbase-staticdev went =
-backwards which would break package feeds from (0:5.0-r3.1 to =
-0:5.0-r1.2)
-	ERROR: Package version for package netbase-dev went backwards =
-which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
-	ERROR: Package version for package netbase-doc went backwards =
-which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
-	ERROR: Package version for package netbase-locale went backwards =
-which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
-	ERROR: Package version for package netbase went backwards which =
-would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
-
-To avoid things like that in the future I have a few recommendations I'd =
-like to get feedback on:
-
-1) For a given BSP split it in multiple layers:
-	a) One 'core' BSP layer with only:
-		o Bootloader
-		o Kernel
-		o Tooling to build bootloader/kernel/image
-	b) One BSP layer with bbappends for shadow/netbase/xorg-conf/etc
-	c) One or more layers with bbappends for libav/clutter/etc[2]
+Thanks, I missed that one. I will send a new version with proper dependency.
 
 
-2) *Never* use PRINC in type b) bbappends
+Cheers,
+Jukka
 
-3) Avoid PRINC in general
-
-4) make buildhistory.bbclass mandatory in OE-core
-
-There's another use case that suffers from PRINC problems and that is =
-removing layers when they break parsing and the maintainer is slow to =
-push patches. With the current situation I have to choose between "being =
-able to do builds" and "having working feeds".
-
-During the last TSC meeting we discussed that there is currently no way =
-to force maintainers to behave. I think the most we can do is have clear =
-guidelines on the OE side and enforce those during the "Yocto Project =
-Compatible" process.=20
-And have the layer index orange/red flag layers that do stupid things. =
-Come to think of it, that would actually be the most visible way to go, =
-having wikipedia style warning banners on the offending layers.
-
-Thanks,
-
-Koen
-
-[1] It always happens after editing bblayers.conf and dragging in major =
-update to layers. Since I tend to do both at the same time I can't say =
-which action triggers it or if it's the combination.
-[2] I spent 3 days trying to figure out why mesa was so *$(*$(@ broken =
-before I finally located the bbappends in meta-ti that were causing this =
-breakage=
 
 
