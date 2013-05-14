@@ -1,37 +1,44 @@
-Received: from mail-vc0-f171.google.com ([209.85.220.171])
+Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
+	helo=tx2outboundpool.messaging.microsoft.com)
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <ross.burton@intel.com>) id 1UcCKA-0007ZM-S8
+	(envelope-from <r63875@freescale.com>) id 1UcCqS-0007j0-4g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 12:19:18 +0200
-Received: by mail-vc0-f171.google.com with SMTP id m16so299879vca.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 03:01:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:content-type:x-gm-message-state;
-	bh=LjmiXIg2S+NVoi03+ezmQnNxN7A+3lffyP7IC17PeyQ=;
-	b=FfiHOEkyhUcBm3QedUgTGiwNgMWg+eQX0u6KEE/xk+Uv5lWpug/o7nUPXpIxIDAWaj
-	zt4E8Dp037zNbYyiQOjk15KXJiaqW/dD+1I8QjZCs8iIRrPADh9aOBY3hZUdjyXn7TkE
-	NPGdiAQTquYZ8Z0VFrqtvY2vNxpVoo5T/CkYOuYI5NUC21dXPjGeYiO3NuXIlxR/aga6
-	wQUbzKYlan8kXhzk5niyKVoydpHWs9kidI/vWQc/HOAAh0eeNlbizZ2/wlOekRxZcrfK
-	NiDjSSX2A2TaiGDptHQNV3mevZ0kg8cZ7cwc3dhVLV9IRRuHvchESxWTOCz3vEW1NG9U
-	9skA==
-X-Received: by 10.52.165.99 with SMTP id yx3mr17715532vdb.34.1368525663602;
-	Tue, 14 May 2013 03:01:03 -0700 (PDT)
+	Tue, 14 May 2013 12:52:37 +0200
+Received: from mail110-tx2-R.bigfish.com (10.9.14.228) by
+	TX2EHSOBE007.bigfish.com (10.9.40.27) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 14 May 2013 10:19:20 +0000
+Received: from mail110-tx2 (localhost [127.0.0.1])	by
+	mail110-tx2-R.bigfish.com (Postfix) with ESMTP id E3AA1A01A6	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 14 May 2013 10:19:20 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ah1fc6hzz8275bhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1155h)
+Received: from mail110-tx2 (localhost.localdomain [127.0.0.1]) by mail110-tx2
+	(MessageSwitch) id 1368526759795934_24280;
+	Tue, 14 May 2013 10:19:19 +0000 (UTC)
+Received: from TX2EHSMHS020.bigfish.com (unknown [10.9.14.245])	by
+	mail110-tx2.bigfish.com (Postfix) with ESMTP id B892C48004E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 14 May 2013 10:19:19 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS020.bigfish.com
+	(10.9.99.120) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 14 May 2013 10:19:19 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server (TLS) id 14.2.328.11; Tue, 14 May 2013 10:19:19 +0000
+Received: from localhost.localdomain (tank.ap.freescale.net [10.193.20.104])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id r4EAJGcT024295;
+	Tue, 14 May 2013 03:19:17 -0700
+From: Olivia Yin <hong-hua.yin@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 14 May 2013 17:37:29 +0800
+Message-ID: <1368524249-8219-1-git-send-email-hong-hua.yin@freescale.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Received: by 10.221.8.3 with HTTP; Tue, 14 May 2013 03:00:43 -0700 (PDT)
-In-Reply-To: <CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
-References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
-	<20130513215201.GF3187@jama>
-	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
-	<CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 14 May 2013 11:00:43 +0100
-Message-ID: <CAJTo0LYRkU6rqWh6=X2UhEcrRJiDonW-_anT4YVqRRgffa1tQw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkt9u67OEN6lzI1DKlNXynwIqws+uOTCGtAWdPcmFRBS4qUDGoH9d19Gpu3eANDhkZGtF7r
-Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
+X-OriginatorOrg: freescale.com
+Subject: [oe-core master] yajl: pass the cmake variable LIB_SUFFIX to handle installation on 64-bit systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 10:19:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 May 2013 10:52:40 -0000
+Content-Type: text/plain
 
-On 14 May 2013 10:59, Burton, Ross <ross.burton@intel.com> wrote:
-> On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> I pondered about it but I think it is of generic use. I don't think we
->> need to have meta-multimedia to be able to use it.
->
-> +1 for meta-multimedia.
->
-> Also I'm getting bored of Big Buck Bunny, how about Sintel instead. :)
+WARNING: QA Issue: yajl: Files/directories were installed but not shipped
+  /usr/lib
+  /usr/lib/libyajl.so.2
+  /usr/lib/libyajl.so
+  /usr/lib/libyajl_s.a
+  /usr/lib/libyajl.so.2.0.4
+  /usr/lib/.debug
+  /usr/lib/.debug/libyajl.so.2.0.4
 
-Oh, you should probably say what encoding is used in the description.
-Even the file listing doesn't help as "avi" is rather vague.
+NOTE: for 64-bit systems where lib64 is used you can pass the cmake
+      variable LIB_SUFFIX to cause installation into the system's 'lib64'
+      directory.
 
-Ross
+Signed-off-by: Olivia Yin <hong-hua.yin@freescale.com>
+---
+ meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb b/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
+index 7359520..9d67e2d 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Yet Another JSON Library - A Portable JSON parsing and serialization library in ANSI C"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74f541bd9a2b6c8e5d0714bcdc327f32"
++PR = "r1"
+ 
+ SRCREV = "fee1ebef9fa7dc0e9f5a23f37123b19b68c796ff"
+ SRC_URI = "git://github.com/lloyd/yajl.git"
+@@ -8,3 +9,5 @@ SRC_URI = "git://github.com/lloyd/yajl.git"
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake lib_package
++
++EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib', True).replace('lib', '')}"
+-- 
+1.7.0.4
+
+
 
 
