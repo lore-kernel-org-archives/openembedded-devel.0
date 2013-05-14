@@ -1,37 +1,37 @@
-Received: from mail-ee0-f41.google.com ([74.125.83.41])
+Received: from mail-vc0-f169.google.com ([209.85.220.169])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UcBAo-0004co-LF
+	(envelope-from <ross.burton@intel.com>) id 1UcCJ0-0007Gi-4A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 11:05:30 +0200
-Received: by mail-ee0-f41.google.com with SMTP id d4so159613eek.14
+	Tue, 14 May 2013 12:18:06 +0200
+Received: by mail-vc0-f169.google.com with SMTP id kw10so311099vcb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 01:47:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=lYfkKJmAOKU6JtTRpEFLwDpXK9jlg+eaNzRRhSw3pds=;
-	b=TQs+fg811vD/rEY7aTTG0MgI/leYuqCBO1Qbt3gCoD42dazCaRA5bErRSKm9DRbTIl
-	EhVJcRaiv6FhlCchE+USKFck+WRvpNRnd4TZ9Bp8I7R8i69A4GufVhd6LusZzR0+bcyt
-	TVnPxThm5CQZcnY7u4zWZX3I+Ipbicmip3dOy7Pw/t46yilV1RvLBBOLJNNqDHA1/D4C
-	X3tHNaIInMUcEuyjfqDQJoz+xclOMdzkgXtxSKVqORVVgyar3bi3KuogXO4xO5r5WoBZ
-	1xZLwNqgLIE7YjEU+UEj5NZAU7Lg+qGoYi2CAkk/eHxHT6H5IAqZVBncRNWvUMidQqOu
-	zPtA==
-X-Received: by 10.15.24.136 with SMTP id j8mr88155496eeu.39.1368521239878;
-	Tue, 14 May 2013 01:47:19 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
-	[95.222.160.204])
-	by mx.google.com with ESMTPSA id l6sm27969513eem.9.2013.05.14.01.47.18
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 14 May 2013 01:47:19 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 May 2013 10:44:50 +0200
-Message-Id: <1368521090-5184-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.7.6.5
+	Tue, 14 May 2013 02:59:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=TgvAiM5+5UbByc8jiyO4vpEUxoxbG+DKiO5RG8aycv0=;
+	b=S1bZy7+qcm1rf/I86MfmVdfIwEIFUZIQGesPq7BHOT9NDOowOsKYJLtGVS5MS5fuQ8
+	rEnCtB/Hht7t/Eq5d8C7S8r1DHK3g930Snxaxdt1c03GvS5YW4CttyGAX7kILT/ZHszQ
+	JvCS4nCAiZJ51Qa9GlKyrCHx5C4E8fwlnj2qX1rC4rici/+J+JiB7gwotCUdcCp6zhdf
+	ru1wcGBcJSAXiVqUKGFtts5MvDc0RsV/Kk6oMWHKQ43O8y9bES6HpJlVq81hula3of9o
+	safe0nlQdkdUcReerNBeVO/wguLuZzX+NKuKVEaMs/S5Xq6mHZKvQD+umQa3C1fvaVPL
+	31WQ==
+X-Received: by 10.220.191.129 with SMTP id dm1mr7007645vcb.54.1368525590813;
+	Tue, 14 May 2013 02:59:50 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe] maliit-framework: fix build with glib 2.36
+Received: by 10.221.8.3 with HTTP; Tue, 14 May 2013 02:59:30 -0700 (PDT)
+In-Reply-To: <CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
+References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+	<20130513215201.GF3187@jama>
+	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 14 May 2013 10:59:30 +0100
+Message-ID: <CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmKOHfiPxEt47R6kUr1ef48Vglr0Z3EiWsqTq1BPD+vp83KhLs5t7+wMdNAkzFjuFjaSnDt
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,80 +45,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 09:05:31 -0000
+X-List-Received-Date: Tue, 14 May 2013 10:18:12 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Upstream code has seen many structural changes and the failing test is gone.
-Since changing to latest sources might cause huge reworking/test-efforts this
-patch only fixes the build error.
+On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> I pondered about it but I think it is of generic use. I don't think we
+> need to have meta-multimedia to be able to use it.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...iit_glib_settings-fix-build-for-glib-2.36.patch |   33 ++++++++++++++++++++
- .../recipes-support/maliit/maliit-framework_git.bb |    2 +
- 2 files changed, 35 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-support/maliit/maliit-framework/0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch
++1 for meta-multimedia.
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework/0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch b/meta-oe/recipes-support/maliit/maliit-framework/0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch
-new file mode 100644
-index 0000000..df4f179
---- /dev/null
-+++ b/meta-oe/recipes-support/maliit/maliit-framework/0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch
-@@ -0,0 +1,33 @@
-+From 839e0933f09309a0374aa58cc58439c3a1f157b2 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 14 May 2013 10:24:48 +0200
-+Subject: [PATCH] ut_maliit_glib_settings: fix build for glib 2.36
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate [code removed upstream]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ .../ut_maliit_glib_settings.c                      |    3 ++-
-+ 1 files changed, 2 insertions(+), 1 deletions(-)
-+
-+diff --git a/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c b/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
-+index 476ba33..09b6261 100644
-+--- a/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
-++++ b/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
-+@@ -188,8 +188,9 @@ test_settings_manager_emits_disconnected(void)
-+ int
-+ main (int argc, char **argv) {
-+     g_test_init(&argc, &argv, NULL);
-++#if !GLIB_CHECK_VERSION (2, 36, 0)
-+     g_type_init();
-+-
-++#endif
-+     g_test_add_func("/ut_maliit_glib_settings/MaliitSettingsManager/preferred_description_locale/default",
-+                     test_preferred_description_locale_default);
-+     g_test_add_func("/ut_maliit_glib_settings/MaliitSettingsManager/preferred_description_locale/set-get-roundtrip",
-+-- 
-+1.7.6.5
-+
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-index 2928562..15719f4 100644
---- a/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-+++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-@@ -11,11 +11,13 @@ SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
-     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
-     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
-     file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
-+    file://0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch \
-     file://maliit-server.desktop \
- "
- 
- SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
- PV = "0.92.3+git${SRCPV}"
-+PR = "r1"
- 
- 
- PACKAGES =+ "${PN}-gtk"
--- 
-1.7.6.5
+Also I'm getting bored of Big Buck Bunny, how about Sintel instead. :)
 
+Ross
 
 
