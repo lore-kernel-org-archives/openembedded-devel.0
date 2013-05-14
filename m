@@ -1,35 +1,39 @@
-Received: from mail1.windriver.com ([147.11.146.13])
+Received: from mail-ve0-f177.google.com ([209.85.128.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <Joe.MacDonald@windriver.com>) id 1UcEZb-00013I-7h
+	(envelope-from <ross.burton@intel.com>) id 1UcEm6-0002Hi-Vh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 May 2013 14:43:21 +0200
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4ECP7Nq015449
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 14 May 2013 14:56:17 +0200
+Received: by mail-ve0-f177.google.com with SMTP id ox1so489601veb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 05:25:07 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Tue, 14 May 2013 05:25:06 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id CEA577FCE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 14 May 2013 08:24:54 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 151AD410E3; Tue,
-	14 May 2013 08:25:06 -0400 (EDT)
-Date: Tue, 14 May 2013 08:25:06 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130514122505.GC3918@windriver.com>
-References: <1368518279-8029-1-git-send-email-jukka.rissanen@linux.intel.com>
+	Tue, 14 May 2013 05:38:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=6R+HDLk2LModmMyenEu+BpQ2EEJ9K+dbGjwzg6reDXE=;
+	b=Pdia9GRtaut6er0iYt08iZvjiX/QjdgwbASopbCA6Qt+sRSyoj1T8f7Z58GV5+AXpL
+	j6kZYHyITxs4yXrxkU6WYB5sSDIUnLc0QGlfjizHDcMiwsZrX/mmmIzDzCS4lESYxCiG
+	Ilm5AgpkKF4sIemuZUxIMv7b2lyP18VEv55sX9n9lZMeAIReBdTjsncs0TVicPConcgu
+	Qb0rLxzsnn+ZfgZaT5lVxBuQH6v5p6wA7Xro9EZb+tuFT0md9mFv4Yce3hbPkJpWOHfT
+	EeHRrO10ICieukphOMY2hW7EoMdyVR/Mxz/1eMQKVGnFwqpu2YvRSnt+MKD4ZSIzRGes
+	p4LA==
+X-Received: by 10.58.15.193 with SMTP id z1mr21581126vec.40.1368535083553;
+	Tue, 14 May 2013 05:38:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1368518279-8029-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH v2] vpnc: Runtime dependency to perl was missing
+Received: by 10.221.8.3 with HTTP; Tue, 14 May 2013 05:37:43 -0700 (PDT)
+In-Reply-To: <CAP9ODKrKMLrCNhWbO9GMvR9UsN4871gJFQTjsVjZ8thcTr9boQ@mail.gmail.com>
+References: <1368481622-5465-1-git-send-email-otavio@ossystems.com.br>
+	<20130513215201.GF3187@jama>
+	<CAP9ODKpXcX5H6ndoz9ikz+0cUE9RPC7AvvAt8iKD+vHnoqXyqQ@mail.gmail.com>
+	<CAJTo0LZ-ng_=n_RcWcdhJY3E4ZgnFUiDCKpgBsLwLbOg6ExjSg@mail.gmail.com>
+	<CAP9ODKrKMLrCNhWbO9GMvR9UsN4871gJFQTjsVjZ8thcTr9boQ@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 14 May 2013 13:37:43 +0100
+Message-ID: <CAJTo0LbtaJUfc0j5hcw2H_Xoz8RBS5a=2594E3WCpu2yKSFVmg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQlW/KLNs3/5f5n0SHvLIURe+Kj5oBAyofrm9QdidMMx7Evae/57EjF145RcJG+FhHcyLsYD
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe PATCH] bigbuckbunny: Add 480p, 720p and 1080p movies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 12:43:30 -0000
-X-Groupsio-MsgNum: 44706
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="KDt/GgjP6HVcx58l"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 14 May 2013 12:56:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
---KDt/GgjP6HVcx58l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 14 May 2013 12:13, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> On Tue, May 14, 2013 at 6:59 AM, Burton, Ross <ross.burton@intel.com> wrote:
+>> On 13 May 2013 22:56, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>>> I pondered about it but I think it is of generic use. I don't think we
+>>> need to have meta-multimedia to be able to use it.
+> We can add it as well. What about we have these all in:
+>
+> meta-multimedia/recipes-support/media-samples/*?
+>
+> So we can have Big Buck Bunny, Sintel and others here.
 
-[[oe] [meta-networking][PATCH v2] vpnc: Runtime dependency to perl was miss=
-ing] On 13.05.14 (Tue 10:57) Jukka Rissanen wrote:
+Sure.  Have a look at Guacamayo, that has recipes for Sintel and some
+freely distributable music.
 
->=20
-> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-> ---
-> This version now properly rdepends on perl-module-io-file instead of
-> just the perl package.
->=20
-> Cheers,
-> Jukka
->=20
->  meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/me=
-ta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-> index 2ce9530..a73cd13 100644
-> --- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-> +++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-> @@ -6,7 +6,7 @@ PRIORITY =3D "optional"
->  LICENSE =3D "GPL-2.0+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D173b74cb8ac640a9992c03f3bce22=
-a33"
->  DEPENDS =3D "libgcrypt"
-> -RDEPENDS_${PN} =3D "kernel-module-tun"
-> +RDEPENDS_${PN} =3D "kernel-module-tun perl-module-io-file"
-> =20
->  CFLAGS_append =3D ' -DVERSION=3D\\"${PV}\\"'
->  LDFLAGS_append =3D " -lgcrypt -lgpg-error"
+Ross
 
-Given that I'd already merged your previous change (and Koen is
-absolutely right, I should've pushed back on it too since I completely
-agree with him) can you send out another version of this patch that
-addresses his suggestion about reordering the R* variables and is
-against the latest tree?  This one won't apply as the tree stands now.
 
-Thanks.
-
---=20
--Joe MacDonald.
-:wq
-
---KDt/GgjP6HVcx58l
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlGSLSEACgkQPN8S4W6ZZncnswCfVMUE7Nk2PvVIfpOnn0EQVKmZ
-i5kAnAjY/Mt5wdvM2szcTLaTGg2i51+p
-=RdiS
------END PGP SIGNATURE-----
-
---KDt/GgjP6HVcx58l--
