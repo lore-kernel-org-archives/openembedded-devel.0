@@ -1,37 +1,39 @@
-Received: from mail-ee0-f41.google.com ([74.125.83.41])
+Received: from mail-ea0-f176.google.com ([209.85.215.176])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpm-0006lC-9L
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpn-0006lD-CQ
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 15 May 2013 17:41:43 +0200
-Received: by mail-ee0-f41.google.com with SMTP id d4so1180254eek.28
+Received: by mail-ea0-f176.google.com with SMTP id k11so1016878eaj.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 May 2013 08:23:29 -0700 (PDT)
+	Wed, 15 May 2013 08:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=y06erNSvlaaNT/qJ3KgodIUZMvCs8HKEJm03MhcaGMc=;
-	b=OB7syg0Orksv6iI3mxFPloX0fOT7e1c6qRc5gNiMoGSqVPpaT8J4uVBBQIHTGkiBpy
-	B+3pi2ZCjfRK+LYWmTAYja/Gn+qmxPWpYqxi12Sn9GYnqkUcijiFczeL7SRp3uDGiNRY
-	+/pBDxjTwTjiEVF5saxYZgXdkEvFU7KjUpzXOQgu82KBkXuopnA8DlxSvef8WgKOhpgK
-	5XOf5cVM+jQko7RAzPiKAoU2dmURJRutMkFmQvKD+0F7OzMyzqrZQ3TpTTmcFnNq6ksj
-	yd5gs/7bPzLEeBVrkmHneIAIBM7wsV+gBKBTjs6BUJ7SsdGxDxBHtH3zlc+1FNU1ppy/
-	w9Tg==
-X-Received: by 10.14.108.1 with SMTP id p1mr104945433eeg.31.1368631409661;
-	Wed, 15 May 2013 08:23:29 -0700 (PDT)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=Mfprtml+oQJjk++gnHzuYcKBJL3dbnv+hjIAilgUCwU=;
+	b=iDtGrar5snArwMtv0N+nRwldmLoSfjDpdwZ9C/W7affNW5YeJXjNw7Ue8wUHrXsCSg
+	wQSjJ88X85xZ8J+LSCn0DQCujxItEhLa7w6R2ZQoHBn9nXWj6b6KyDyGFZYvtIgGw1aR
+	ExgMEegnPHh3T/6Cg22roROdgHJuqZRyLbhcq7Zh8LpBOxTHzMQe3TPcaEjuV9xsHGNc
+	vq5pdUVy+V+YHUIVqf29Da2lqIhEWcxzV/mz2XsAgpa0vNK9fmHGwgU0X+f2710AMwxk
+	KcG8pIq2gquSAFzZVQDicT5SX8xvHQGIeaAcB7yC33XFKDeXyzR7f/zq+fk6seRGCfMf
+	49DQ==
+X-Received: by 10.15.49.199 with SMTP id j47mr60470617eew.24.1368631410682;
+	Wed, 15 May 2013 08:23:30 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
 	[95.222.160.204])
-	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.28
+	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 15 May 2013 08:23:28 -0700 (PDT)
+	Wed, 15 May 2013 08:23:30 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 May 2013 17:20:45 +0200
-Message-Id: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 May 2013 17:20:46 +0200
+Message-Id: <1368631259-13401-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 00/14] updates & minor fixes
+Subject: [meta-xfce 01/14] thunar: update to 1.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,65 +51,34 @@ X-List-Received-Date: Wed, 15 May 2013 15:41:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit fcc900a459a5331f51ca41dd5c63644c7ae4a29f:
-
-  phpmyadmin: remove dependency on bash (2013-05-14 23:47:37 +0100)
-
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git xfce-updates
-
-Andreas Müller (14):
-      thunar: update to 1.6.3
-      thunar-plugin.bbclass: initial add
-      thunar-archive-plugin: initial add 0.3.1
-      xarchiver: align libexecdir so that thunar-archive-plugin finds tap files
-      thunar-media-tags-plugin: initial add 0.2.1
-      packagegroup-xfce-extended: add thunar plugins
-      xfwm4: update to 4.10.1
-      xfce4-terminal: update to 0.6.2
-      xfce4-panel: update to 4.10.1
-      garcon: update to 0.2.1
-      garcon: do not display settings in menu which are in settings-manager
-      libxfce4util: update to 4.10.0
-      xfce4-session: update to 4.10.1
-      xfce4-appfinder: update to 4.10.1
-
- meta-xfce/classes/thunar-plugin.bbclass            |   10 +
- .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |    7 +-
- ...4-terminal_0.6.1.bb => xfce4-terminal_0.6.2.bb} |    4 +-
- .../archive/thunar-archive-plugin_0.3.1.bb         |   12 +
- .../media-tags/thunar-media-tags-plugin_0.2.1.bb   |   11 +
- ...ations.menu-don-t-bloat-settings-menu-by-.patch |   35 ++
- .../garcon/{garcon_0.2.0.bb => garcon_0.2.1.bb}    |    6 +-
- ...bxfce4util_4.10.0.bb => libxfce4util_4.10.1.bb} |    4 +-
- .../packagegroups/packagegroup-xfce-extended.bb    |    5 +-
- .../thunar/{thunar_1.6.2.bb => thunar_1.6.3.bb}    |    5 +-
- ...pfinder_4.10.0.bb => xfce4-appfinder_4.10.1.bb} |    4 +-
- ...xfce4-panel_4.10.0.bb => xfce4-panel_4.10.1.bb} |    4 +-
- ...n-reboot-functionality-for-systemd-bug-87.patch |  482 --------------------
- ...ultiple-interactive-session-save-bug-5379.patch |  152 ------
- ...1-configure.in-hard-code-path-to-iceauth.patch} |   10 +-
- .../0002-Remove-gnome-keyring-remains.patch        |   82 ----
- ...4-session_4.10.0.bb => xfce4-session_4.10.1.bb} |   11 +-
- .../xfwm4/{xfwm4_4.10.0.bb => xfwm4_4.10.1.bb}     |    4 +-
- 18 files changed, 103 insertions(+), 745 deletions(-)
- create mode 100644 meta-xfce/classes/thunar-plugin.bbclass
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.6.1.bb => xfce4-terminal_0.6.2.bb} (68%)
- create mode 100644 meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.3.1.bb
- create mode 100644 meta-xfce/recipes-thunar-plugins/media-tags/thunar-media-tags-plugin_0.2.1.bb
- create mode 100644 meta-xfce/recipes-xfce/garcon/files/0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.2.0.bb => garcon_0.2.1.bb} (53%)
- rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.10.0.bb => libxfce4util_4.10.1.bb} (62%)
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../thunar/{thunar_1.6.2.bb => thunar_1.6.3.bb}    |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
  rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.2.bb => thunar_1.6.3.bb} (85%)
- rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.10.0.bb => xfce4-appfinder_4.10.1.bb} (62%)
- rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.10.0.bb => xfce4-panel_4.10.1.bb} (88%)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-Handle-multiple-interactive-session-save-bug-5379.patch
- rename meta-xfce/recipes-xfce/xfce4-session/xfce4-session/{0003-configure.in-hard-code-path-to-iceauth.patch => 0001-configure.in-hard-code-path-to-iceauth.patch} (87%)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0002-Remove-gnome-keyring-remains.patch
- rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.10.0.bb => xfce4-session_4.10.1.bb} (71%)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.10.0.bb => xfwm4_4.10.1.bb} (85%)
 
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
+similarity index 85%
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
+index 973eb47..fc80dc9 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.2.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
+@@ -3,12 +3,11 @@ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify xfce4-panel"
+-PR = "r1"
+ 
+ inherit xfce
+ 
+-SRC_URI[md5sum] = "a446103ab90855cc8ba484dfeedb82d8"
+-SRC_URI[sha256sum] = "7dbd172ae396e7a2533f47dc1ff703a9ea1a61af3edfdc6f4877b9b9331abd85"
++SRC_URI[md5sum] = "4f10d5d5576ce5127308d6badbac3afa"
++SRC_URI[sha256sum] = "9a2706f6881ac29cda9f0b0325d179153bc09e37bcbafcab9823c1c1ec89579d"
+ SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
+ 
+ S = "${WORKDIR}/Thunar-${PV}/"
 -- 
 1.7.6.5
 
