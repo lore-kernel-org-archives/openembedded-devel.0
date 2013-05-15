@@ -1,34 +1,35 @@
-Received: from mail-da0-f54.google.com ([209.85.210.54])
+Received: from mail1.windriver.com ([147.11.146.13])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UceCR-0001a2-NG
+	(envelope-from <Joe.MacDonald@windriver.com>) id 1UcgPu-00056x-Ch
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 May 2013 18:05:25 +0200
-Received: by mail-da0-f54.google.com with SMTP id z17so1056751dal.13
+	Wed, 15 May 2013 20:27:37 +0200
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4FI8tVa016788
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 May 2013 08:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=yv1aSBZYOaCPc7y82kwBQWGaCnBs4MbspPKLxfItUn8=;
-	b=WMLs+/NqPPql6iVVbk6Z8UEU3JGprDeuXlepNP8pGr4woRxPdZkBC6dfXzhUwC8K/U
-	K8fN7x/5b/Bw36qaX4NaYYCFgfBT2+GRUiz+xiiI2Zo322VlIb20k39MmcqDZP2xb22r
-	pXfBe3+HYW7U60xdH8sQGVJf9w1V2/+mgYiBzPtLyzXiLlecXf+RgbFEbsB0elS2gGFI
-	Xd28mRTeEDX89FctU4yIK+h90BrQrAxUFIagVazWWyNyWLxtC/y5pC5ao5o5NxZpn8MY
-	ciGfFDPocTGCVpY+cDOK56DyOvJzu/4bfulRWCM1YmJPr6ediQTUQLdJ3G2sxtazI0Pu
-	wPfA==
-X-Received: by 10.68.106.229 with SMTP id gx5mr28476998pbb.95.1368632814204;
-	Wed, 15 May 2013 08:46:54 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id gc5sm3256376pbb.19.2013.05.15.08.46.53
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 15 May 2013 08:46:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 May 2013 08:45:17 -0700
-Message-Id: <1368632717-20991-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH V2] gnome-bluetooth: Fix build erorrs found with gcc 4.8
+	Wed, 15 May 2013 11:08:55 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Wed, 15 May 2013 11:08:56 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id A7A747FCE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 15 May 2013 14:08:42 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 4D505410E5; Wed,
+	15 May 2013 14:08:55 -0400 (EDT)
+Date: Wed, 15 May 2013 14:08:55 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130515180855.GG751@windriver.com>
+References: <1368535670-26737-1-git-send-email-jukka.rissanen@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1368535670-26737-1-git-send-email-jukka.rissanen@linux.intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] vpnc: Set RDEPENDS to perl-module-io-file instead of perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,86 +43,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 May 2013 16:05:31 -0000
+X-List-Received-Date: Wed, 15 May 2013 18:27:47 -0000
+X-Groupsio-MsgNum: 44736
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1EKig6ypoSyM7jaD"
+Content-Disposition: inline
 
-Fix errors like below
+--1EKig6ypoSyM7jaD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-| bluetooth-input.c:193:4: error: format '%d' expects argument of type
-'int', but argument 5 has type 'XID' [-Werror=format=]
-|     g_message ("has mouse: %s (id = %d)", device_info[i].name,
-device_info[i].id);
-|     ^
-| bluetooth-input.c:198:4: error: format '%d' expects argument of type
-'int', but argument 5 has type 'XID' [-Werror=format=]
-|     g_message ("has keyboard: %s (id = %d)", device_info[i].name,
-device_info[i].id);
-|     ^
+[[oe] [meta-networking][PATCH] vpnc: Set RDEPENDS to perl-module-io-file in=
+stead of perl] On 13.05.14 (Tue 15:47) Jukka Rissanen wrote:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-bluetooth-input-Fix-compile-errors.patch  |   37 ++++++++++++++++++++
- .../gnome-bluetooth/gnome-bluetooth_2.32.0.bb      |    2 ++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
+>=20
+> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+> ---
+>  meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/me=
+ta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+> index df90234..addd150 100644
+> --- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+> +++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+> @@ -6,7 +6,6 @@ PRIORITY =3D "optional"
+>  LICENSE =3D "GPL-2.0+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D173b74cb8ac640a9992c03f3bce22=
+a33"
+>  DEPENDS =3D "libgcrypt"
+> -RDEPENDS_${PN} =3D "kernel-module-tun perl"
+> =20
+>  CFLAGS_append =3D ' -DVERSION=3D\\"${PV}\\"'
+>  LDFLAGS_append =3D " -lgcrypt -lgpg-error"
+> @@ -19,6 +18,7 @@ do_install () {
+>  }
+> =20
+>  CONFFILES_${PN} =3D "${sysconfdir}/vpnc/default.conf"
+> +RDEPENDS_${PN} =3D "kernel-module-tun perl-module-io-file"
+> =20
+>  SRC_URI =3D "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz=
+ \
+>             file://makeman.patch \
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
-new file mode 100644
-index 0000000..0b0cf8b
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0001-bluetooth-input-Fix-compile-errors.patch
-@@ -0,0 +1,37 @@
-+From e3c789d6dca9a8a99b60b86e28d8119c55253c13 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 15 May 2013 08:37:03 -0700
-+Subject: [PATCH] bluetooth-input: Fix compile errors
-+
-+XID is unsigned long type so %d will error out with -Wformat
-+where format warnings are being treated at errors
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Unknown
-+---
-+ wizard/bluetooth-input.c |    4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/wizard/bluetooth-input.c b/wizard/bluetooth-input.c
-+index b3fbdaf..d17e67c 100644
-+--- a/wizard/bluetooth-input.c
-++++ b/wizard/bluetooth-input.c
-+@@ -190,12 +190,12 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
-+ 		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
-+ 			continue;
-+ 		if (is_mouse != FALSE) {
-+-			g_message ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
-++			g_message ("has mouse: %s (id = %lu)", device_info[i].name, device_info[i].id);
-+ 			has_mouse = TRUE;
-+ 			//break;
-+ 		}
-+ 		if (is_keyboard != FALSE) {
-+-			g_message ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
-++			g_message ("has keyboard: %s (id = %lu)", device_info[i].name, device_info[i].id);
-+ 			has_keyboard = TRUE;
-+ 			//break;
-+ 		}
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-index a2037cf..00ac3f8 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-@@ -11,6 +11,8 @@ DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib lib
- 
- inherit gnome
- 
-+SRC_URI += "file://0001-bluetooth-input-Fix-compile-errors.patch \
-+           "
- SRC_URI[archive.md5sum] = "f129686fe46c4c98eb70a0cc85d59cae"
- SRC_URI[archive.sha256sum] = "57b1f06c96a1b85e1c19ff919d708cc38e95edae658881ed99968c325839a973"
- 
--- 
-1.7.9.5
+Merged, thanks.
 
+--=20
+-Joe MacDonald.
+:wq
 
+--1EKig6ypoSyM7jaD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlGTzzYACgkQPN8S4W6ZZnfhPACdGjoRHyRY/xQ/hgfYbvf5lU0B
+BMUAnjDPPvj5aj4yATgfNRHgJAWoRyOE
+=Xk3I
+-----END PGP SIGNATURE-----
+
+--1EKig6ypoSyM7jaD--
