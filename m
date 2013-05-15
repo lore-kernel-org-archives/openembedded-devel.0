@@ -1,39 +1,39 @@
-Received: from mail-ea0-f175.google.com ([209.85.215.175])
+Received: from mail-ee0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpu-0006mg-Rn
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpw-0006mo-KN
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 15 May 2013 17:41:53 +0200
-Received: by mail-ea0-f175.google.com with SMTP id h10so984158eaj.20
+Received: by mail-ee0-f47.google.com with SMTP id t10so1131847eei.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 May 2013 08:23:38 -0700 (PDT)
+	Wed, 15 May 2013 08:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=0T6c+/7qMsKl3ddsF+k1XSR3OClF0vNBLAAgL7ynsUw=;
-	b=zC3r59+IpeT5W5pqAdcXM5jhKisP/TFKTGEqwjZ436+/w261Je0KoD8HAHfI3t+dVx
-	oAyOE8Wh4olzoQZImT0DXrgpfm+Z008And0mM1STQwNMKY3sUHhRryI6SqhZsmMVLVIc
-	j1LV4VwnMXtETSTZxjgX7NsV3peRTBb6YvMk7Pl1jSkyTMXNp53DWYqVT9YtdJD1LlK+
-	S7T/KhqHNqmADQZ/NyljMpU4L3ri7MY4B37+Hm46W/xA+ol4WzclSbDUxxLkTJz6Lqyj
-	UT9jg5JbEu0l4Cn4sX/bRled2gdG2TW6KLhWG4P/yh4syAbhma//AbjT9pFCVWl8fZJT
-	MQxQ==
-X-Received: by 10.15.93.193 with SMTP id w41mr94049714eez.22.1368631418280;
-	Wed, 15 May 2013 08:23:38 -0700 (PDT)
+	bh=m2qVq2vmYnc1NVDKQF8VHXkv7gFS0sQ2MG7cQS6Id/s=;
+	b=TKAuRxjXBXOgBrTq8OsIUKPBISBbF62jEhvtBS9pgeM8VbT6DbHRSg3wT4cv4wtflU
+	nEkKTfHF/4HX6POPaFVWfjg6wxycFZbdjoqdfyPf1vf+jSHPWTi7t/jFqiwopf3cu7EH
+	1LCLjzFDeX4zgXM2BqL4FNjAugHIOE6OjT+2e11I5cWZyClj7hqOMjxpUm8c6gYhvXEb
+	IpmVe3r3tML+2cXGN1B65LbIBLSzHphTBvLw9c3QRxh0l8BL/1gcnYn2GrIG97USS25K
+	jHxayLle7ApCrJrCpvp6flLMlCDhuBki1R7ilLuXrVMQ48lpZBZlTmv7utOHOgLFJkaT
+	dU/w==
+X-Received: by 10.15.82.201 with SMTP id a49mr104826976eez.44.1368631420072;
+	Wed, 15 May 2013 08:23:40 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
 	[95.222.160.204])
-	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.37
+	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 15 May 2013 08:23:37 -0700 (PDT)
+	Wed, 15 May 2013 08:23:39 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 May 2013 17:20:53 +0200
-Message-Id: <1368631259-13401-9-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 May 2013 17:20:55 +0200
+Message-Id: <1368631259-13401-11-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 08/14] xfce4-terminal: update to 0.6.2
+Subject: [meta-xfce 10/14] garcon: update to 0.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +48,32 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
-X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...4-terminal_0.6.1.bb => xfce4-terminal_0.6.2.bb} |    4 ++--
+ .../garcon/{garcon_0.2.0.bb => garcon_0.2.1.bb}    |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.6.1.bb => xfce4-terminal_0.6.2.bb} (68%)
+ rename meta-xfce/recipes-xfce/garcon/{garcon_0.2.0.bb => garcon_0.2.1.bb} (65%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.1.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.2.bb
-similarity index 68%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.1.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.2.bb
-index a8cff39..470bf60 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.1.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.2.bb
-@@ -8,5 +8,5 @@ inherit xfce-app
- FILES_${PN} += "${datadir}/xfce4 \
-                 ${datadir}/gnome-control-center"
+diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.2.0.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.2.1.bb
+similarity index 65%
+rename from meta-xfce/recipes-xfce/garcon/garcon_0.2.0.bb
+rename to meta-xfce/recipes-xfce/garcon/garcon_0.2.1.bb
+index a384889..44a0e68 100644
+--- a/meta-xfce/recipes-xfce/garcon/garcon_0.2.0.bb
++++ b/meta-xfce/recipes-xfce/garcon/garcon_0.2.1.bb
+@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util"
  
--SRC_URI[md5sum] = "98613ce500fef2ed62cdbe788084acca"
--SRC_URI[sha256sum] = "61346427e55af79e86511572bfabb2e025cb13720879226ea1b98a92f0bcd4c8"
-+SRC_URI[md5sum] = "d5cdb302bd770c9f2d30262c26639006"
-+SRC_URI[sha256sum] = "3d92422288d26311880af694bb4e02c9235997ca307a5e85001bf6bef65c3b35"
+ inherit xfce
+ 
+-SRC_URI[md5sum] = "301e7b8015060dd30407b68dd8c4bdb7"
+-SRC_URI[sha256sum] = "02dea3edb9c0039eca4748e964c61b0e1cc10f2d7f9ce0c837287ac5fa9ef76c"
++SRC_URI[md5sum] = "c3cf89c836be0ddb281c81e4808fb68b"
++SRC_URI[sha256sum] = "48b644b8b2ffe597974e2526ca1a5d2d7da6a09c2d434f008dec80e9152701f7"
+ 
+ FILES_${PN} += "${datadir}/desktop-directories"
 -- 
 1.7.6.5
 
