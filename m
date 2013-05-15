@@ -1,37 +1,26 @@
-Received: from mail-pa0-f44.google.com ([209.85.220.44])
+Received: from mga01.intel.com ([192.55.52.88])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1UcTFN-00007n-I7; Wed, 15 May 2013 06:23:26 +0200
-Received: by mail-pa0-f44.google.com with SMTP id jh10so1125565pab.3
-	for <multiple recipients>; Tue, 14 May 2013 21:05:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:content-type:content-transfer-encoding:subject
-	:message-id:date:to:mime-version:x-mailer;
-	bh=Ing8Lj6VjMIaf6s9qOHAlwEH+Ad1l2XwLHBv5rAM97Q=;
-	b=gWjrOMQilYdbU07HBEU5pxum5H7p79f/nRzZ0v2qeXqbLRa8/3MCGQEEHm8ELl0Sx4
-	+utAMZTmLE0tlhD31Pk0n3v6PEzcw2kZshOg8dDSbfThEHG0ATaSd1wa7CQwU8DEhh0u
-	a7u+UAsgo2Kq3b3jPpcoPLNteCQ4xccKhbUtv0jqv2U45PEbqcLpUaRkgtQ0RkEuN7Qd
-	6N/ImC2yzj2hEhO1jkJHTatM/mG9BjLVFJMU2n1xEe4CduE7R80nLZikKN/vAWR95Qtr
-	R6+EqUKKPr+ord//UqZIx0FWokSQNyhBf/pLjDKbyQ41ygMC/hT7z3sFDOW+WDNQDSHU
-	uz8g==
-X-Received: by 10.66.148.132 with SMTP id ts4mr38172909pab.19.1368590712544;
-	Tue, 14 May 2013 21:05:12 -0700 (PDT)
-Received: from vjalali-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPSA id fn2sm1096581pbc.15.2013.05.14.21.05.11
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 14 May 2013 21:05:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Message-Id: <1A97FEA3-4D93-4CE8-A265-1C9CFBB66FEB@gmail.com>
-Date: Tue, 14 May 2013 21:05:10 -0700
-To: "openembedded-core@lists.openembedded.org oe-core layer"
-	<Openembedded-core@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-X-Mailer: Apple Mail (2.1503)
-Subject: RFT: Python3
+	(envelope-from <paul.eggleton@linux.intel.com>) id 1UcdEi-0003rq-QG
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 May 2013 17:03:30 +0200
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 15 May 2013 07:45:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,677,1363158000"; d="scan'208";a="338012361"
+Received: from unknown (HELO helios.localnet) ([10.255.12.118])
+	by fmsmga002.fm.intel.com with ESMTP; 15 May 2013 07:44:54 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 15 May 2013 15:44:53 +0100
+Message-ID: <1499979.6pTC18VfFV@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.8.0-19-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
+References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
+MIME-Version: 1.0
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [RFC] Layers, PRINC and bbappends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,68 +34,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 May 2013 04:23:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 May 2013 15:03:37 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi All,
+Hi Koen,
 
-Python3 (3.3.0) is now available. Please test it out on your platforms =
-and report issues/successes you see, and above all feedback on patches
+On Tuesday 14 May 2013 09:36:02 Koen Kooi wrote:
+> What triggered PR going backwards this time was a BSP removing its netbase
+> bbappend because it wasn't needed anymore. That's great, I hate netbase
+> bbappends since they tend to be ifupdown specific and don't work as
+> intended with connman/NM/netctl/etc. Long story short:
+> 
+> 	ERROR: Package version for package netbase-dbg went backwards which would
+> break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2) ERROR: Package version
+> for package netbase-staticdev went backwards which would break package
+> feeds from (0:5.0-r3.1 to 0:5.0-r1.2) ERROR: Package version for package
+> netbase-dev went backwards which would break package feeds from (0:5.0-r3.1
+> to 0:5.0-r1.2) ERROR: Package version for package netbase-doc went
+> backwards which would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2)
+> ERROR: Package version for package netbase-locale went backwards which
+> would break package feeds from (0:5.0-r3.1 to 0:5.0-r1.2) ERROR: Package
+> version for package netbase went backwards which would break package feeds
+> from (0:5.0-r3.1 to 0:5.0-r1.2)
+> 
+> To avoid things like that in the future I have a few recommendations I'd
+> like to get feedback on:
+> 
+> 1) For a given BSP split it in multiple layers:
+> 	a) One 'core' BSP layer with only:
+> 		o Bootloader
+> 		o Kernel
+> 		o Tooling to build bootloader/kernel/image
+> 	b) One BSP layer with bbappends for shadow/netbase/xorg-conf/etc
+> 	c) One or more layers with bbappends for libav/clutter/etc[2]
+ 
+I don't like this. This will mean effectively 3x the number of BSP layers, with 
+independent testing effectively expected for the different combinations; I don't 
+think this will be practical. It's fine for distros with pre-supplied lists of 
+layers but lots of users are assembling their own layer stacks and this is 
+just going to add pain for them.
 
- the contrib tree for OE-Core is here
+It's probably time we looked seriously at more effective analysis tools for 
+examining what a layer is actually doing. We now have the variable history in 
+bitbake which means that pinpointing a change to a variable down to the 
+specific line in the file that made the change is now possible; we should be 
+able to build upon this to provide tools that determine when e.g. BSP layers 
+are doing things that affect builds for other machines.
 
-=
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/python=
-3
+Of course, getting maintainers to deal with these issues is another problem, 
+but identifying them in the first place would help a lot.
 
-I have tested it on all supported architectures in qemu and few hardware =
-machines I have access to, Recipes have been around for
-a long time so they have received some soak time
+> 2) *Never* use PRINC in type b) bbappends
+> 
+> 3) Avoid PRINC in general
 
-at minimum add=20
+Do we even need PRINC at all any more? I realise we have PRINC values around 
+in bbappends that we can't easily drop without causing the problem you 
+mentioned.
 
-       python3 \
-       python3-modules \
-       python3-misc \
+> 4) make buildhistory.bbclass mandatory in OE-core
 
-to your IMAGE_INSTALL in order to include it in images.=20
+Buildhistory does have some overhead as you know, which is why it's not on by 
+default. I wonder if we could move the version going backwards check to 
+package.bbclass or package QA, instead making it read the previous values from 
+pkgdata. I'm not sure if sstate would get in the way in that the previous set 
+of files might already be removed by the time it got to do_package; this would 
+need to be investigated. Even if that is the case it might be that we can work 
+around it.
 
-Complete set can be included by
+> During the last TSC meeting we discussed that there is currently no way to
+> force maintainers to behave. I think the most we can do is have clear
+> guidelines on the OE side and enforce those during the "Yocto Project
+> Compatible" process. 
 
-python3-2to3            python3-audio \
-python3-codecs          python3-compile \
-python3-compression     python3-core \
-python3-crypt           python3-ctypes \
-python3-curses          python3-datetime \
-python3-debugger        python3-difflib \
-python3-distutils       python3-doctest \
-python3-email           python3-html \
-python3-idle            python3-image \
-python3-io              python3-json \
-python3-lang            python3-logging \
-python3-mailbox         python3-man \
-python3-math            python3-mime \
-python3-misc            python3-modules \
-python3-multiprocessing python3-netclient \
-python3-netserver       python3-numbers \
-python3-pickle          python3-pkgutil \
-python3-pprint          python3-profile \
-python3-pydoc           python3-pyvenv \
-python3-re              python3-readline \
-python3-shell           python3-smtpd \
-python3-sqlite3         python3-sqlite3-tests \
-python3-stringold       python3-subprocess \
-python3-terminal        python3-tests \
-python3-textutils       python3-threading \
-python3-unittest        python3-unixadmin \
-python3-xml \
-python3-distribute \
+Being more specific in the Yocto Project Compatible process requirements might 
+help; I wasn't involved in developing that process so I can't really comment 
+more than that. That wouldn't help with other layers in the OE community that 
+aren't put through that process however.
 
-Thanks
--Khem
+I think we need to improve the documentation we have about what is and what is 
+not appropriate in a BSP layer. Most of the time it's not that maintainers are 
+too lazy or deliberately setting out to force values, it's that they don't 
+know they're doing anything wrong because we haven't documented all of the 
+best practices anywhere. There was recently a question on this very mailing 
+list about what constitute distro policy settings in the context of what 
+shouldn't go into a BSP layer; the response has been a resounding "".
 
+> And have the layer index orange/red flag layers that
+> do stupid things. Come to think of it, that would actually be the most
+> visible way to go, having wikipedia style warning banners on the offending
+> layers.
 
+I think that's reasonable as long as maintainers can understand the problem. 
+We'd need to be notifying maintainers directly about specifically what they are 
+doing wrong and how to fix it; just putting a warning in the index isn't enough 
+IMO. The layer index does record maintainer information and regularly reads 
+layer metadata, so we have the infrastructure to do this now, just not the 
+specific tools.
 
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
