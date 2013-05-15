@@ -1,39 +1,39 @@
-Received: from mail-ee0-f52.google.com ([74.125.83.52])
+Received: from mail-ea0-f171.google.com ([209.85.215.171])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpu-0006mS-0V
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ucdpq-0006m1-Du
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 15 May 2013 17:41:53 +0200
-Received: by mail-ee0-f52.google.com with SMTP id c13so1134836eek.39
+Received: by mail-ea0-f171.google.com with SMTP id b15so1156513eae.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 May 2013 08:23:36 -0700 (PDT)
+	Wed, 15 May 2013 08:23:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=ANIg+eak4Wc56ncmB3uShHywq1lfyvYJ7PCtY3yf/d0=;
-	b=VlVFw/mIKE4f9qZhJHuubrmZoaTElRgN7YBM9eXWSEF/jX9LRG+26u2OrIyCBD8Te+
-	gpdrr0s15i7qdxQtMDPNsEIi7iXgS1Q69LpuQFtRHzYHh1sMykst+zvspbPmuqOqfzrJ
-	dxMXXeXgVThqu438IjdpRySNJ9WAQciMy/AMZOwcXQQbEg4Y69zSsMMzzAsCaS6hCKi9
-	jcsaBpF5CvFYR1TGa07DPICGpOEK848T563orOT03EUqqc1Ra01b0sgG6qTOTPFmjcAF
-	8yxHcsS1XNW599gttRybGVPHjd6Ah4XWXvJF9IPiDVkozVmdfoMEhvkx+5I+olGCqHUu
-	SO+w==
-X-Received: by 10.14.216.201 with SMTP id g49mr74332642eep.42.1368631416524;
-	Wed, 15 May 2013 08:23:36 -0700 (PDT)
+	bh=TJ9KyBVNFbbQxoVDcUNi3dCtmhoA9w+RQHLhoE+FaAI=;
+	b=ol3pRrhPT9Ti53MMo5iKqk9kjQOAbL1S1/qnJ1trjwKVUPRdiSyfJYqX2pAM4x0zLK
+	GUr7jfQyuU7D3mFseHjIe68B8qC67lBMdiavEzNKWZW5EzvzPQcT5JAp8WgfolAlvSbB
+	+/EEAig/WdkvWiCn4iDseg1huJOuw6NV4Fe97eDNvmZPPMmq3AoPiWe9UOcxBwscBDTo
+	xU9vloO04gpo0jZ7TWsjgKbKP/kEnfbzl3CB1kzPnEMLqODc86qs+aKpcwafF6KIx+EJ
+	PrLHUVGi/NSnbf4t5c14v1bz0ipoTAji5tIQskko5tn3jvgoKK4Cj2PZFn8hhgCdBjFu
+	N7tw==
+X-Received: by 10.15.82.201 with SMTP id a49mr104826031eez.44.1368631413847;
+	Wed, 15 May 2013 08:23:33 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
 	[95.222.160.204])
-	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.35
+	by mx.google.com with ESMTPSA id t9sm4599519eeo.11.2013.05.15.08.23.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 15 May 2013 08:23:36 -0700 (PDT)
+	Wed, 15 May 2013 08:23:33 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 May 2013 17:20:51 +0200
-Message-Id: <1368631259-13401-7-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 May 2013 17:20:49 +0200
+Message-Id: <1368631259-13401-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1368631259-13401-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce 06/14] packagegroup-xfce-extended: add thunar plugins
+Subject: [meta-xfce 04/14] xarchiver: align libexecdir so that thunar-archive-plugin finds tap files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +48,46 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
+X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
+X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
+X-List-Received-Date: Wed, 15 May 2013 15:42:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+xarchiver installs tap files for thunar-archive-plugin in
+$libexexdir/thunar-archive-plugin under the assumption that there is a
+single/common $libexexdir for all packages. In bitbake.conf oe-core
+sets libexecdir = "${libdir}/${BPN}" which causes thunar-archive-plugin
+not to find xarchiver tap-files.
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../packagegroups/packagegroup-xfce-extended.bb    |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+ .../recipes-apps/xarchiver/xarchiver_0.5.2.bb      |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 7ee65f6..e2ed864 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/wm"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+index f47a3bc..6482adc 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.2.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Lightweight, desktop independent GTK+ archive manager"
+ HOMEPAGE = "http://xarchiver.sourceforge.net"
+ SECTION = "x11"
+-PR = "r2"
++PR = "r3"
  
--PR = "r9"
-+PR = "r10"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+@@ -14,4 +14,9 @@ SRC_URI[sha256sum] = "cea932ff9d505969201fd502470bbebbc5726ab3d6765e142fc8295aa6
  
- inherit packagegroup
+ inherit gettext pkgconfig autotools gtk-icon-cache
  
-@@ -43,6 +43,9 @@ RRECOMMENDS_${PN} = " \
-     xfce4-brightness-plugin \
-     xfce4-closebutton-plugin \
-     \
-+    thunar-media-tags-plugin \
-+    thunar-archive-plugin \
-+    \
-     xfce4-appfinder \
-     xfce4-screenshooter \
-     xfce4-power-manager \
++# install tap files for thunar-archive-plugin in ${libdir}/thunar-archive-plugin
++EXTRA_OECONF += "--libexecdir=${libdir}"
++
++FILES_${PN} += "${libdir}/thunar-archive-plugin"
++
+ RRECOMMENDS_${PN} = "lzop zip tar bzip2 unzip"
 -- 
 1.7.6.5
 
