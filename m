@@ -1,27 +1,40 @@
-Received: from mga11.intel.com ([192.55.52.93])
+Received: from mail-da0-f41.google.com ([209.85.210.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>)
-	id 1Uctz6-0005ky-C0; Thu, 16 May 2013 10:56:28 +0200
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 16 May 2013 01:37:45 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,683,1363158000"; d="scan'208";a="338507964"
-Received: from unknown (HELO helios.localnet) ([10.255.12.131])
-	by fmsmga002.fm.intel.com with ESMTP; 16 May 2013 01:37:23 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 16 May 2013 09:37:23 +0100
-Message-ID: <3292696.1H20MyJFTP@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-19-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <E8F9ED28-58F5-422C-8B07-ACD8791202A1@dominion.thruhere.net>
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1UcuK9-00082R-HG; Thu, 16 May 2013 11:18:19 +0200
+Received: by mail-da0-f41.google.com with SMTP id y19so1531824dan.0
+	for <multiple recipients>; Thu, 16 May 2013 01:59:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=04/ONADKS7Mi4ewX9muORtckIEFsVAjc/IM925baBXo=;
+	b=xiBKwhAVZPIO/p/RHPBy5qVawasluwJfZSTaywUMdRteXeudrnMQCbHTN5NK0uYpi6
+	gqzN3jvAo3YpMp21xPrpw9podU7A7wWmy6KCZqJmXzlpJqJeOQTqLpgCnPddJZL+VdEl
+	LwJ2J9GLueDT8vjawQYJUD0oF6uOuiFc2GVlIVzaS8RVmZdc3GCcGR19F3FYvErjXW3i
+	szzWa6B/Zaerki87aG5aAxLxTIzQp9bMGI4Pt/e7GKUQzEu9emmn4WOoX4ASTG18pEAU
+	a/4xL/KpdpsAB//XGCFi3PqTbinOGKFD/I8Y6oBWmxxktcwAVbhYxq4dIZ/f11qjXMZt
+	Wbdw==
+X-Received: by 10.68.129.10 with SMTP id ns10mr42512914pbb.13.1368694794642;
+	Thu, 16 May 2013 01:59:54 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	zy5sm6011894pbb.43.2013.05.16.01.59.51 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 16 May 2013 01:59:53 -0700 (PDT)
+Date: Thu, 16 May 2013 10:59:54 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20130516085954.GC24809@jama.dyndns-home.com>
 References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-	<1368650024.18324.102.camel@ted>
-	<E8F9ED28-58F5-422C-8B07-ACD8791202A1@dominion.thruhere.net>
+	<1499979.6pTC18VfFV@helios>
+	<879938A8-B7BD-4FA6-A38B-F2DDF9D5A48B@dominion.thruhere.net>
+	<2253707.h5Yg7SAvOu@helios>
 MIME-Version: 1.0
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
+In-Reply-To: <2253707.h5Yg7SAvOu@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
 	openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
+	openembedded-core layer <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] [RFC] Layers, PRINC and bbappends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,35 +49,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2013 08:56:43 -0000
-X-List-Received-Date: Thu, 16 May 2013 08:56:43 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 16 May 2013 09:18:19 -0000
+X-Groupsio-MsgNum: 44749
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mvpLiMfbWzRoNl4x"
+Content-Disposition: inline
 
-On Thursday 16 May 2013 08:23:35 Koen Kooi wrote:
-> Op 15 mei 2013, om 22:33 heeft Richard Purdie
-> <richard.purdie@linuxfoundation.org> het volgende geschreven:
-> > On Tue, 2013-05-14 at 09:36 +0200, Koen Kooi wrote:
-> >> 2) *Never* use PRINC in type b) bbappends
-> >> 3) Avoid PRINC in general
-> > 
-> > Could we undergo some mass purge of PRINC from master branches and then
-> > change the PR values once and for all in the core recipes? We could make
-> > PRINC throw a bb.fatal() from that point onwards.
-> 
-> That would be nice.
+--mvpLiMfbWzRoNl4x
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Maybe we could add some logic into the PR server that if it sees PRINC go 
-backwards, it could just print a warning and increment the stored PR value to 
-compensate? That might mean storing the previous value of PRINC if we're not 
-already doing that of course.
+On Thu, May 16, 2013 at 09:29:48AM +0100, Paul Eggleton wrote:
+> On Thursday 16 May 2013 08:31:33 Koen Kooi wrote:
+> > The flip side is that adding BSP layers becomes a lot safer. I don't mi=
+nd
+> > adding layers. Adding layers is easy.
+>=20
+> For distros like Angstrom it is, yes, as I said above.
+>=20
+> > Removing layers is pretty much impossible, though.
+>=20
+> With PRINC gone would there be any other issue that would make removing l=
+ayers=20
+> a problem?
 
-Cheers,
-Paul
+Does PR service really fix removing layers? I don't think so, if you add
+layer and checksum of foo is changed AUTOPR is incremented, but then you
+remove the layer and the checksum is unfortunately the same as what you
+had before AUTOPR will go backwards.
 
--- 
+PRINCs were doing this at least consistently and in reproducible way,
+removing layer with PR service will cause only some AUTOPRs going
+backwards (if there were other changes in between).
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--mvpLiMfbWzRoNl4x
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlGUoAoACgkQN1Ujt2V2gByUtwCgi0/3g/LiksRGfglgpFGYtQWn
+0zkAoLDG3jJAGIa+K3flctfx/SE2+VrA
+=+JOz
+-----END PGP SIGNATURE-----
+
+--mvpLiMfbWzRoNl4x--
