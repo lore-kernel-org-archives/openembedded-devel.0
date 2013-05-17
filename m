@@ -1,35 +1,34 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-da0-f43.google.com ([209.85.210.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <richard.purdie@linuxfoundation.org>)
-	id 1Ud4sS-0000qy-RH; Thu, 16 May 2013 22:34:21 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4GKIwTI004365; Thu, 16 May 2013 21:18:58 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id CBDRQ-Ruxr3A; Thu, 16 May 2013 21:18:58 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4GKInjp004341
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Thu, 16 May 2013 21:18:52 +0100
-Message-ID: <1368735334.18324.170.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 16 May 2013 23:15:34 +0300
-In-Reply-To: <20130516092905.GG24809@jama.dyndns-home.com>
-References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-	<2253707.h5Yg7SAvOu@helios>
-	<20130516085954.GC24809@jama.dyndns-home.com>
-	<24887939.8KrA2KDk4J@helios>
-	<20130516092905.GG24809@jama.dyndns-home.com>
-X-Mailer: Evolution 3.6.2-0ubuntu0.1 
-Mime-Version: 1.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core layer <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Layers, PRINC and bbappends
+	(envelope-from <raj.khem@gmail.com>) id 1UdDuv-0007QM-IX
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 May 2013 08:13:32 +0200
+Received: by mail-da0-f43.google.com with SMTP id u7so2142640dae.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 May 2013 22:54:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=+ep49rN9xT9eu9sgRqT//BbUC7cw7cB8UhdDhwvs1kY=;
+	b=dK0ag7s5BN5JMWKrsfNirOk4B6WtDLCUCqLnHY0Hl3q9Tj8QYR9XdiZ5s0YCuHbCnO
+	GOXETLuet6m1woERIlretEV9xxjU3jWb53J9HwkroZLEjkzi1zo2U4PRR2WagrsRGZNU
+	xPzSUQ3nQZCKyVpMoNf64FM/pPo796GqyQHrH2s+4lCNxH7drynkwbDlNVyPAVjhuSLi
+	IYec2gA3pUnVFunGuCLn3c0kFTGN6wOpDiAY+mt99y9ePMdlANEfOurcLbag6b/c3Ese
+	++ds59hoLldCyIgQOHOxmDqH81Vu/6JbsooVZlJb9LnSQiYrGeR7CpZAdGq77cWGgBLv
+	XZeQ==
+X-Received: by 10.68.129.10 with SMTP id ns10mr46821929pbb.13.1368770094917;
+	Thu, 16 May 2013 22:54:54 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id sg4sm9843997pbc.7.2013.05.16.22.54.53
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 16 May 2013 22:54:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 May 2013 22:53:15 -0700
+Message-Id: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] pangomm: Add missing dependency on pango
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2013 20:34:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 May 2013 06:13:51 -0000
 
-On Thu, 2013-05-16 at 11:29 +0200, Martin Jansa wrote:
-> On Thu, May 16, 2013 at 10:10:45AM +0100, Paul Eggleton wrote:
-> > On Thursday 16 May 2013 10:59:54 Martin Jansa wrote:
-> > > On Thu, May 16, 2013 at 09:29:48AM +0100, Paul Eggleton wrote:
-> > > > On Thursday 16 May 2013 08:31:33 Koen Kooi wrote:
-> > > > > Removing layers is pretty much impossible, though.
-> > > > 
-> > > > With PRINC gone would there be any other issue that would make removing
-> > > > layers a problem?
-> > > 
-> > > Does PR service really fix removing layers? I don't think so, if you add
-> > > layer and checksum of foo is changed AUTOPR is incremented, but then you
-> > > remove the layer and the checksum is unfortunately the same as what you
-> > > had before AUTOPR will go backwards.
-> > 
-> > Then I would have to say if that's not the behaviour you want we should change 
-> > it or at least make it optional to force it to always increment even if the 
-> > checksum is the same as a previous value.
-> 
-> That won't work with multiple builders using the same PR server (I don't
-> wont other builders to always increment PRAUTOs used in builds which
-> populate official feed).
+Fixes errors like
 
-I just went and looked at the code and as far as I can tell PRServ
-defaults to always incrementing upon a change. To get the other
-behaviour you'd need nohist=False to PRData() in lib/prserv/db.py and I
-can't see where that is set other than to the default :/. I'm tired and
-perhaps missing something though.
+| configure:15678: error: Package requirements (glibmm-2.4 >= 2.14.1
+cairomm-1.0 >= 1.2.2 pangocairo >= 1.23.0) were not met:
+|
+| No package 'pangocairo' found
 
-Cheers,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Richard
+diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+index 4419113..302062c 100644
+--- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
++++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
+ 
+ PR = "r2"
+ 
+-DEPENDS = "mm-common cairomm glibmm"
++DEPENDS = "mm-common cairomm glibmm pango"
+ 
+ SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+ 
+-- 
+1.7.9.5
 
 
 
