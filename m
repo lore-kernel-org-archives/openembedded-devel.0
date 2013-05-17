@@ -1,34 +1,33 @@
-Received: from mail-da0-f43.google.com ([209.85.210.43])
+Received: from mail-ve0-f170.google.com ([209.85.128.170])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UdDuv-0007QM-IX
+	(envelope-from <schnitzeltony@googlemail.com>) id 1UdFEw-0005ve-Vh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 May 2013 08:13:32 +0200
-Received: by mail-da0-f43.google.com with SMTP id u7so2142640dae.2
+	Fri, 17 May 2013 09:38:12 +0200
+Received: by mail-ve0-f170.google.com with SMTP id 15so1897453vea.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 May 2013 22:54:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=+ep49rN9xT9eu9sgRqT//BbUC7cw7cB8UhdDhwvs1kY=;
-	b=dK0ag7s5BN5JMWKrsfNirOk4B6WtDLCUCqLnHY0Hl3q9Tj8QYR9XdiZ5s0YCuHbCnO
-	GOXETLuet6m1woERIlretEV9xxjU3jWb53J9HwkroZLEjkzi1zo2U4PRR2WagrsRGZNU
-	xPzSUQ3nQZCKyVpMoNf64FM/pPo796GqyQHrH2s+4lCNxH7drynkwbDlNVyPAVjhuSLi
-	IYec2gA3pUnVFunGuCLn3c0kFTGN6wOpDiAY+mt99y9ePMdlANEfOurcLbag6b/c3Ese
-	++ds59hoLldCyIgQOHOxmDqH81Vu/6JbsooVZlJb9LnSQiYrGeR7CpZAdGq77cWGgBLv
-	XZeQ==
-X-Received: by 10.68.129.10 with SMTP id ns10mr46821929pbb.13.1368770094917;
-	Thu, 16 May 2013 22:54:54 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id sg4sm9843997pbc.7.2013.05.16.22.54.53
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 16 May 2013 22:54:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 17 May 2013 00:19:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=1iqn1aqubhaXRR9HKyPjJpDq0k/ykymcbJKofd0JFNY=;
+	b=F3yBBNbRWyoBF8u9wpWOE54bwt04TAe2yF4JncNBdAJbvDZzkXznn/O+qwDqEio5Vt
+	Ql/8QWIxRia0rOP77qcpDVr6mnDtBJpubsLKr+0efpv3K8aD2S9fKPWFcDD19vZyEAgS
+	0eGLbjoq6TLZS4oJqx4gqvMZCXe8VVrJyDvOgZX0dDzkm1D+kdb3jh3jO3SXdfuBt7Tf
+	iVFziteGgU/qSWeOd8CASuzZ6awG8wnt8a1bJ8x7fgfLtdjH/yTkIDo4EgfhFZiti1Tx
+	PTfR81f2uER33k97peRR3RsmOmZ7+t37gq8TUbxoIsF8sbn/qvlQt/UztmW3skubxvwh
+	b4kw==
+MIME-Version: 1.0
+X-Received: by 10.58.32.131 with SMTP id j3mr17452540vei.57.1368775195282;
+	Fri, 17 May 2013 00:19:55 -0700 (PDT)
+Received: by 10.52.18.177 with HTTP; Fri, 17 May 2013 00:19:55 -0700 (PDT)
+In-Reply-To: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
+References: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 17 May 2013 09:19:55 +0200
+Message-ID: <CALbNGRQyQjpW_2seu9NgzU1tb3-fVgeNO8yax=O2mLtWPKT=jg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 May 2013 22:53:15 -0700
-Message-Id: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] pangomm: Add missing dependency on pango
+Subject: Re: [meta-oe][PATCH] pangomm: Add missing dependency on pango
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2013 06:13:51 -0000
+X-List-Received-Date: Fri, 17 May 2013 07:38:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Fixes errors like
+On Fri, May 17, 2013 at 7:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Fixes errors like
+>
+> | configure:15678: error: Package requirements (glibmm-2.4 >=3D 2.14.1
+> cairomm-1.0 >=3D 1.2.2 pangocairo >=3D 1.23.0) were not met:
+> |
+> | No package 'pangocairo' found
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/r=
+ecipes-graphics/pango/pangomm_2.28.2.bb
+> index 4419113..302062c 100644
+> --- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+> +++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c=
+1cb29a1e3fd737b499 \
+>
+>  PR =3D "r2"
+>
+> -DEPENDS =3D "mm-common cairomm glibmm"
+> +DEPENDS =3D "mm-common cairomm glibmm pango"
+>
+>  SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).spl=
+it('.')[1]}"
+>
+> --
+> 1.7.9.5
+>
+>
+You were faster than me :)
 
-| configure:15678: error: Package requirements (glibmm-2.4 >= 2.14.1
-cairomm-1.0 >= 1.2.2 pangocairo >= 1.23.0) were not met:
-|
-| No package 'pangocairo' found
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-index 4419113..302062c 100644
---- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-+++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
- 
- PR = "r2"
- 
--DEPENDS = "mm-common cairomm glibmm"
-+DEPENDS = "mm-common cairomm glibmm pango"
- 
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
- 
--- 
-1.7.9.5
-
+Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 
 
