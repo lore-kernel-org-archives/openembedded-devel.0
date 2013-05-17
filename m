@@ -1,33 +1,41 @@
-Received: from mail-ve0-f170.google.com ([209.85.128.170])
+Received: from mail-pd0-f175.google.com ([209.85.192.175])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1UdFEw-0005ve-Vh
+	(envelope-from <elvis.dowson@gmail.com>) id 1UdOnW-00015k-EK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 May 2013 09:38:12 +0200
-Received: by mail-ve0-f170.google.com with SMTP id 15so1897453vea.1
+	Fri, 17 May 2013 19:50:36 +0200
+Received: by mail-pd0-f175.google.com with SMTP id y14so3508620pdi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2013 00:19:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=1iqn1aqubhaXRR9HKyPjJpDq0k/ykymcbJKofd0JFNY=;
-	b=F3yBBNbRWyoBF8u9wpWOE54bwt04TAe2yF4JncNBdAJbvDZzkXznn/O+qwDqEio5Vt
-	Ql/8QWIxRia0rOP77qcpDVr6mnDtBJpubsLKr+0efpv3K8aD2S9fKPWFcDD19vZyEAgS
-	0eGLbjoq6TLZS4oJqx4gqvMZCXe8VVrJyDvOgZX0dDzkm1D+kdb3jh3jO3SXdfuBt7Tf
-	iVFziteGgU/qSWeOd8CASuzZ6awG8wnt8a1bJ8x7fgfLtdjH/yTkIDo4EgfhFZiti1Tx
-	PTfR81f2uER33k97peRR3RsmOmZ7+t37gq8TUbxoIsF8sbn/qvlQt/UztmW3skubxvwh
-	b4kw==
-MIME-Version: 1.0
-X-Received: by 10.58.32.131 with SMTP id j3mr17452540vei.57.1368775195282;
-	Fri, 17 May 2013 00:19:55 -0700 (PDT)
-Received: by 10.52.18.177 with HTTP; Fri, 17 May 2013 00:19:55 -0700 (PDT)
-In-Reply-To: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
-References: <1368769995-29266-1-git-send-email-raj.khem@gmail.com>
-Date: Fri, 17 May 2013 09:19:55 +0200
-Message-ID: <CALbNGRQyQjpW_2seu9NgzU1tb3-fVgeNO8yax=O2mLtWPKT=jg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] pangomm: Add missing dependency on pango
+	Fri, 17 May 2013 10:32:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
+	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=kXoHuoqs/MUE253oJxS/M2E0vONzrjOZBMYCHklxwXM=;
+	b=XvxthYMCw7Y/loOTuay3GxnzEKJURRWpru1adpW4EoBP38d16NESwuX9i/K/5emlKo
+	S7rogHr1MRX/n5U3BjYFdAIytIHu/jvnmbLYK8fQoLST4sZtOOA+CWMOyCKlN4FGrZ9b
+	QX55ujci6MaZMOikBtVp+ZK1nckFXzXq6Dh30O9XmQsvTQxjJ4nTH0f2zQGyCEFYNZU7
+	M3CxNr6QjODl5sCFAAOpY0PPcyVRaZ5hEf1Llc+t7gupg741S5si8mHiAtOgyeKuVzux
+	TS/K64C5YZSxyEAmE2R+Ui7ChYZnf5OCXyTe79RVvqSsw/cmlE0zB0mDMVKvFOLcvSlU
+	puRQ==
+X-Received: by 10.66.164.3 with SMTP id ym3mr50032667pab.106.1368811933818;
+	Fri, 17 May 2013 10:32:13 -0700 (PDT)
+Received: from [192.168.1.100] ([94.205.106.101])
+	by mx.google.com with ESMTPSA id
+	cq1sm12000973pbc.13.2013.05.17.10.32.10 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 17 May 2013 10:32:12 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
+From: Elvis Dowson <elvis.dowson@gmail.com>
+In-Reply-To: <FF983BDD-B955-4657-A711-56457453F64D@gmail.com>
+Date: Fri, 17 May 2013 21:32:05 +0400
+Message-Id: <EA34DF4F-ACD6-4D49-96B6-212658E8DBEB@gmail.com>
+References: <1364545389-20291-1-git-send-email-elvis.dowson@gmail.com>
+	<B42120AF-E508-4363-8249-E94E10A2957D@gmail.com>
+	<F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
+	<FF983BDD-B955-4657-A711-56457453F64D@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.1498)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [v2] gcc-4.8: Refactor gcc-4.8.0 patch files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2013 07:38:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 17 May 2013 17:50:37 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 17, 2013 at 7:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Fixes errors like
->
-> | configure:15678: error: Package requirements (glibmm-2.4 >=3D 2.14.1
-> cairomm-1.0 >=3D 1.2.2 pangocairo >=3D 1.23.0) were not met:
-> |
-> | No package 'pangocairo' found
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/r=
-ecipes-graphics/pango/pangomm_2.28.2.bb
-> index 4419113..302062c 100644
-> --- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-> +++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c=
-1cb29a1e3fd737b499 \
->
->  PR =3D "r2"
->
-> -DEPENDS =3D "mm-common cairomm glibmm"
-> +DEPENDS =3D "mm-common cairomm glibmm pango"
->
->  SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).spl=
-it('.')[1]}"
->
-> --
-> 1.7.9.5
->
->
-You were faster than me :)
+Hi Khem,
+                  I've noticed that the gcc-4.8.0 patches have made it's =
+way to the master branch, but notice that you don't use the prefix patch =
+numbers for any newly generated patches.
 
-Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+=
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-devtools/=
+gcc/gcc-4.8
+
+e.g. 0036-gcc-4.8-PR56797.patch, as opposed to gcc-4.8-PR56797.patch
+
+It makes it quicker to know the linear sequence from looking at the =
+patches in the gcc-4.8 folder, as well as the gcc-4.8.inc file, as time =
+goes by.
+
+This is what I had hoped to fix, when I submitted the refactored =
+patches, since it will help easily add/remove/port patches for current =
+and future versions of the gcc recipes. It is also useful, while =
+attempting to compare patches across multiple gcc recipes.
+
+Best regards,
+
+Elvis Dowson=
 
 
