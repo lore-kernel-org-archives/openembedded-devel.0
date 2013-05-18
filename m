@@ -1,39 +1,38 @@
-Received: from mail-ia0-f174.google.com ([209.85.210.174])
+Received: from mail-pb0-f41.google.com ([209.85.160.41])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UdQFV-0007bv-G4
+	(envelope-from <raj.khem@gmail.com>) id 1UdkTg-0007GD-Fh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 May 2013 21:23:41 +0200
-Received: by mail-ia0-f174.google.com with SMTP id r13so3418983iar.33
+	Sat, 18 May 2013 18:59:36 +0200
+Received: by mail-pb0-f41.google.com with SMTP id xb12so4211120pbc.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 May 2013 12:05:12 -0700 (PDT)
+	Sat, 18 May 2013 09:41:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=+ctvx0YODG1HGx0hL9EvMW3RFeQahEFAE1HK5HO+dsc=;
-	b=x7R9UADp4RbPp/D6jBT48lDWp4joON+imGN8z2j5tFmLut4y9mUZ26BKo8yvj/RsTG
-	TpRj45/YZgfdKqzQb2JomZDzedvtIjKHGQAfRvyldsVGxcn9K3JETZHWTGO13eu3x40x
-	io7DUT6sjvZB/bFVpf4XPzY31ZneKdLQEJ4gf6+coNdBToTtjTmH/0t/jOfZdX61pgWW
-	d/MzkOvHJ+R8nSsiqiZ+sSbZrdd5AUk2S3n6v6bRozb1Xx8JGn7YGMrMgtOhtfX/XtdL
-	XGxAiikHusX4tCzCS0338G2Jp8K6TYf2PqO+PG0nA2qgHyrvkVrDTEYF8o0BMNuIAzF7
-	xj2Q==
-MIME-Version: 1.0
-X-Received: by 10.43.133.134 with SMTP id hy6mr23396992icc.57.1368817512521;
-	Fri, 17 May 2013 12:05:12 -0700 (PDT)
-Received: by 10.50.109.133 with HTTP; Fri, 17 May 2013 12:05:12 -0700 (PDT)
-In-Reply-To: <EA34DF4F-ACD6-4D49-96B6-212658E8DBEB@gmail.com>
-References: <1364545389-20291-1-git-send-email-elvis.dowson@gmail.com>
-	<B42120AF-E508-4363-8249-E94E10A2957D@gmail.com>
-	<F81A0AC1-9DA1-4A74-949D-94FA709BFD43@gmail.com>
-	<FF983BDD-B955-4657-A711-56457453F64D@gmail.com>
-	<EA34DF4F-ACD6-4D49-96B6-212658E8DBEB@gmail.com>
-Date: Fri, 17 May 2013 12:05:12 -0700
-Message-ID: <CAMKF1soWB-2nteAwWAyy-K8yG74CZYyJ5ZiedQNX-dQ6LU8wiA@mail.gmail.com>
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=c0uEoDJr9d/qQz/Q0RucoDQumTuoAuIlJGsSjpdHSys=;
+	b=k/GsFSfeXSnkoddRKw9S8S1wmYrX2gutUn5w9xh0qPKXzSXig+sg5ySIW9+JtBjVyp
+	mTxmlZZCs8IwL9/GbYeNUOLk6drXMHu5ZJbgvoVZeJyvy2aZuDcB7n3up/BCz9d9MlD0
+	0cv4apY2shr1Gcqsp9LkYwUq2byQtLcY0t5goai3cbX2g3mZH6W0dPerqH6eltDqbE+B
+	43/DsXd4d9TzcGeZ/aMfSnbXaVNXEQX5jJi3uf5Y1UxovRIWVBD4yowLGsjq2EGvIrcY
+	ohJMSHkOlAimKuuVGZuZx4VQtLTrzm3nt2XHfc3mTcBSHg/9ILM5nmxv9CWum8yhCSfE
+	ZFOA==
+X-Received: by 10.68.166.229 with SMTP id zj5mr28390395pbb.167.1368895270232; 
+	Sat, 18 May 2013 09:41:10 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id 10sm16272486pbm.0.2013.05.18.09.41.08
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 18 May 2013 09:41:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-To: Elvis Dowson <elvis.dowson@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [openembedded-core-contrib] gcc-4.8: Refactor gcc-4.8.0 patch files.
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 May 2013 09:39:27 -0700
+Message-Id: <1368895167-6841-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-browser][PATCH] libxi: Match the bbappend to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,33 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2013 19:23:41 -0000
+X-List-Received-Date: Sat, 18 May 2013 16:59:38 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Friday, May 17, 2013, Elvis Dowson <elvis.dowson@gmail.com> wrote:
-> Hi Khem,
->                   I've noticed that the gcc-4.8.0 patches have made it's
-way to the master branch, but notice that you don't use the prefix patch
-numbers for any newly generated patches.
->
->
-http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-devtools/gcc/gcc-4.8
->
-> e.g. 0036-gcc-4.8-PR56797.patch, as opposed to gcc-4.8-PR56797.patch
->
-> It makes it quicker to know the linear sequence from looking at the
-patches in the gcc-4.8 folder, as well as the gcc-4.8.inc file, as time
-goes by.
->
-> This is what I had hoped to fix, when I submitted the refactored patches,
-since it will help easily add/remove/port patches for current and future
-versions of the gcc recipes. It is also useful, while attempting to compare
-patches across multiple gcc recipes.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+CC: Eric Bénard <eric@eukrea.com>
+CC: Denis Carikli <denis@eukrea.com>
+CC: Otavio Salvador <otavio@ossystems.com.br>
 
-Sequence is expressed in series file of quilt
-But if it serves a purpose we can add it personally its not in my workflow
-> Best regards,
->
-> Elvis Dowson
+---
+ recipes-graphics/libxi/libxi_1.7.1.bbappend |    2 ++
+ recipes-graphics/libxi/libxi_1.7.bbappend   |    2 --
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-graphics/libxi/libxi_1.7.1.bbappend
+ delete mode 100644 recipes-graphics/libxi/libxi_1.7.bbappend
+
+diff --git a/recipes-graphics/libxi/libxi_1.7.1.bbappend b/recipes-graphics/libxi/libxi_1.7.1.bbappend
+new file mode 100644
+index 0000000..c90046b
+--- /dev/null
++++ b/recipes-graphics/libxi/libxi_1.7.1.bbappend
+@@ -0,0 +1,2 @@
++PRINC := "${@int(PRINC) + 1}"
++BBCLASSEXTEND += "native"
+diff --git a/recipes-graphics/libxi/libxi_1.7.bbappend b/recipes-graphics/libxi/libxi_1.7.bbappend
+deleted file mode 100644
+index c90046b..0000000
+--- a/recipes-graphics/libxi/libxi_1.7.bbappend
++++ /dev/null
+@@ -1,2 +0,0 @@
+-PRINC := "${@int(PRINC) + 1}"
+-BBCLASSEXTEND += "native"
+-- 
+1.7.9.5
+
+
 
