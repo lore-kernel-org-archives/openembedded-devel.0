@@ -1,23 +1,35 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from mail-ie0-f177.google.com ([209.85.223.177])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1Ue2v8-0007qh-1V; Sun, 19 May 2013 14:41:08 +0200
-Received: from [84.175.25.18] (helo=[192.168.178.24])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1Ue2bN-0005Rx-M2; Sun, 19 May 2013 14:20:42 +0200
-Message-ID: <5198C3F0.2060105@kernelconcepts.de>
-Date: Sun, 19 May 2013 14:22:08 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:17.0) Gecko/20130329 Thunderbird/17.0.5
+	(envelope-from <raj.khem@gmail.com>) id 1Ue9zc-0002Bo-LZ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 19 May 2013 22:14:10 +0200
+Received: by mail-ie0-f177.google.com with SMTP id 9so12516418iec.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 May 2013 12:55:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=0W80hPgSb9cIpUnyxUpTEMNle29PR9aRM2xs5AVsHm0=;
+	b=Xh0A8n/ghrOnfPPwb/1TbdZ80j5fT3fy/pUQq8aPh7y+MyaS7/ffl0fkeRQ8idM+oW
+	bceio892m6xB2ftCumBgF5v0vTzKenh74PkH9Fv9Ur9ZutZMSXvL8UeC0MRwqYTaqz6m
+	bX4QgvTwL/NYnH2FWOl3Ce+taviXHRFAyeRA/gfqmHd7KJyfzlCxcr/hks7i7p1LdZ55
+	mR6mmV5NyvGedV0/plhEkZMdMwbUjX4EfEzd6ojxU4qTF6PktRg3a8iVCZHx0hXn+uuv
+	zzxduIHqNYKHGZdAPlQSamjMQq3DhL9kuQwphSd8IjOV+xWxEPALH9J9bZu+m9Sqy846
+	VodA==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-members@lists.openembedded.org
-X-Enigmail-Version: 1.4.6
-Subject: LinuxTag 2013
+X-Received: by 10.50.30.2 with SMTP id o2mr3406038igh.12.1368993348734; Sun,
+	19 May 2013 12:55:48 -0700 (PDT)
+Received: by 10.50.109.133 with HTTP; Sun, 19 May 2013 12:55:48 -0700 (PDT)
+In-Reply-To: <1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
+References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
+	<1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 19 May 2013 12:55:48 -0700
+Message-ID: <CAMKF1soJ=_CAZ7BO3NsSLyUSZSaJo8wFdaHuJW+6h9E0xoiVAg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [meta-oe++/master 01/11] mm-common: update to 0.9.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,32 +43,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 12:41:10 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 19 May 2013 20:14:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+On Sunday, May 19, 2013, Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+wrote:
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb |   10 ----------
+>  meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb |   12 ++++++++++++
+>  2 files changed, 12 insertions(+), 10 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+>  create mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+>
+> diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bbb/meta-oe/r=
+ecipes-core/mm-common/
+mm-common_0.9.5.bb
+> deleted file mode 100644
+> index c49b4c8..0000000
+> --- a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -inherit gnomebase
+> -
+> -SRC_URI[archive.md5sum] =3D "4a4dad67fc8d7e0c529f3a8c6ba4d8b2"
+> -SRC_URI[archive.sha256sum] =3D
+"9c602dba89d264a4719db996b9b169716df2d4d10bcd24e56fc3572865a5cb8b"
+> -
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe"
+> -
+> -BBCLASSEXTEND =3D "native"
+> -
+> diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bbb/meta-oe/r=
+ecipes-core/mm-common/
+mm-common_0.9.6.bb
+> new file mode 100644
+> index 0000000..f7e2507
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+> @@ -0,0 +1,12 @@
+> +inherit gnomebase
+> +
+> +GNOME_COMPRESS_TYPE=3D"xz"
 
-LinuxTag starts next week and we (well I) will be there.
-
-LinuxTag takes place from May 22th to May 25th at 'Messegelände unter dem
-Funkturm' in Berlin, Germany.
-
-We share the booth 141 'Linux & Embedded' with other cool projects and look
-forward to meet you there.
-
-Greetings
-
-Florian
-
-PS: Someone with enough power please add some note to the news section of the
-website.
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
-
+Does this mean you need to add dependency on xz-native ?
+> +
+> +SRC_URI[archive.md5sum] =3D "3b23749ab39441c392c016ce74632678"
+> +SRC_URI[archive.sha256sum] =3D
+"7c37158a1f37604705a9b9305d3b335fb8256f5de701c8801269dde4e2ce7dde"
+> +
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe"
+> +
+> +BBCLASSEXTEND =3D "native"
+> +
+> --
+> 1.7.4.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
