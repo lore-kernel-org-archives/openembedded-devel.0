@@ -1,39 +1,39 @@
-Received: from mail-ea0-f177.google.com ([209.85.215.177])
+Received: from mail-ee0-f43.google.com ([74.125.83.43])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Ue17b-00005P-Ij
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ue17e-00005m-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 12:45:49 +0200
-Received: by mail-ea0-f177.google.com with SMTP id q14so3182782eaj.8
+	Sun, 19 May 2013 12:45:50 +0200
+Received: by mail-ee0-f43.google.com with SMTP id d41so3131441eek.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 03:27:29 -0700 (PDT)
+	Sun, 19 May 2013 03:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
 	:references:mime-version:content-type:content-transfer-encoding;
-	bh=GRsTHfoFqQBGIS9eMKXW3CRazVJPZD+QY1TMygPK9rk=;
-	b=IcI5N4L4MF2Z6TQNpzJgbclLlYhmmLoRDt5mzm57NrFTQzfqVT4H7L2XrnIHYpY/HI
-	kMFsOcuD16SyyNX2CA5ZjVWF6mkPEeotIAgWEpIh5KQfdV+GPf/GWe4T6rTCrnROSDtO
-	HXwX38cl+5XHBXGAqDf9vbzNWZCGhNmqIOXn9JGtijiOOUy6jT3byjuUZWdxe+1+Ci2J
-	CBv8M5iHxc2EvxuB/rb71v997tjpd1o5vRRo4snAEye2QTk07TrkdVicl3U0MmqYlpXL
-	kjHlnS5PekQF8lpXc/hB628H3HogvUymhpXwWw2/YioiRkSnvL40yLynXhlkmk74djxi
-	7M1Q==
-X-Received: by 10.15.93.193 with SMTP id w41mr142378954eez.22.1368959249340;
-	Sun, 19 May 2013 03:27:29 -0700 (PDT)
+	bh=E27jaR0pY+SVu5SQkgulr4hz1N5T8qfaeWZreMzA2Bc=;
+	b=UcZ5CCIHpeBXu127KcRdZ3AcODxrXcaULPAq55wvUQ67DxAmVQ68JMlJbUTm1WPjfb
+	XBcGnT966zd4qGTDlEz0F0plkrjyc35pUQ9mhB1tW3efcHC1BSqa4bgANqG8q6DKzEq9
+	5YSaT3SQdsO+mHbrMu5vmTfSgy+tgzYcEEgZURXZihVUSPBEQCxreskco+WGVFYq6Bq9
+	ypiQyUtbnDZW7gqXCai570RpIPVyxxbaQBk9q8SM7+TKC1210fG5Kzm0TZCIcTtFA6LH
+	mRG2PB2ZcWO5P6UruoAOY2ybCWztvRQs8+u7RQPL57QTBB4eps18u3jVdOg9s7o+2zZR
+	vaiA==
+X-Received: by 10.14.1.7 with SMTP id 7mr109763148eec.41.1368959251997;
+	Sun, 19 May 2013 03:27:31 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0719.dip0.t-ipconnect.de.
 	[79.223.7.25])
-	by mx.google.com with ESMTPSA id y10sm30762169eev.3.2013.05.19.03.27.28
+	by mx.google.com with ESMTPSA id y10sm30762169eev.3.2013.05.19.03.27.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 19 May 2013 03:27:28 -0700 (PDT)
+	Sun, 19 May 2013 03:27:31 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 May 2013 12:27:06 +0200
-Message-Id: <1368959233-28288-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 19 May 2013 12:27:08 +0200
+Message-Id: <1368959233-28288-7-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe++/master 04/11] glibmm: update to 2.36.2
+Subject: [meta-oe++/master 06/11] gtkmm: merge gtkmm.inc into recipe - and cleanup a bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,62 +47,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 10:45:51 -0000
+X-List-Received-Date: Sun, 19 May 2013 10:45:54 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-core/glib-2.0/glibmm/glib-2.32.patch   |   10 ----------
- .../{glibmm_2.28.2.bb => glibmm_2.36.2.bb}         |    9 +++------
- 2 files changed, 3 insertions(+), 16 deletions(-)
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch
- rename meta-oe/recipes-core/glib-2.0/{glibmm_2.28.2.bb => glibmm_2.36.2.bb} (81%)
+ meta-oe/recipes-gnome/gtk+/gtkmm.inc       |   29 ----------------------------
+ meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb |   28 +++++++++++++++++++++++++-
+ 2 files changed, 26 insertions(+), 31 deletions(-)
+ delete mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm.inc
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch b/meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm.inc b/meta-oe/recipes-gnome/gtk+/gtkmm.inc
 deleted file mode 100644
-index 50b7367..0000000
---- a/meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch
+index fe72a73..0000000
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm.inc
 +++ /dev/null
-@@ -1,10 +0,0 @@
----- glibmm-2.28.2.orig/glib/glibmm/varianttype.cc	2011-06-09 20:29:48.000000000 +0200
--+++ glibmm-2.28.2/glib/glibmm/varianttype.cc	2012-05-06 08:15:32.760680295 +0200
--@@ -23,7 +23,6 @@
-- 
-- #include <glibmm/varianttype.h>
-- #include <glibmm/utility.h>
---#include <glib/gvarianttype.h>
-- 
-- namespace Glib
-- {
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-similarity index 81%
-rename from meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
-rename to meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-index 0bdaa80..9735d6a 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-@@ -8,17 +8,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
- DEPENDS = "mm-common glib-2.0 libsigc++-2.0"
- inherit autotools pkgconfig
- 
--PR = "r3"
+@@ -1,29 +0,0 @@
+-DESCRIPTION = "C++ bindings for the GTK+ toolkit."
+-HOMEPAGE = "http://www.gtkmm.org/"
+-SECTION = "libs"
 -
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+-LICENSE = "LGPLv2.1 & GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
+-                    file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+-
+-DEPENDS = "atk pangomm glibmm gtk+ cairomm"
+-
+-inherit gnome autotools pkgconfig
+-
+-INC_PR = "r0"
+-
+-EXTRA_OECONF = " --disable-documentation "
+-
+-LIBV = "2.4.0"
+-
+-do_install_append () {
+-    install -d ${D}${includedir}/gtkmm-2.4
+-    install -m 0644 gdk/gdkmmconfig.h ${D}${includedir}/gtkmm-2.4
+-    install -m 0644 gtk/gtkmmconfig.h ${D}${includedir}/gtkmm-2.4
+-}
+-
+-PACKAGES =+ "${PN}-demo"
+-
+-FILES_${PN} = "${libdir}/lib*.so.*"
+-FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
+-FILES_${PN}-demo += "${datadir}/*/demo/"
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
+index 05d7108..340657e 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
+@@ -1,7 +1,31 @@
+-require gtkmm.inc
++DESCRIPTION = "C++ bindings for the GTK+ toolkit."
++HOMEPAGE = "http://www.gtkmm.org/"
++SECTION = "libs"
  
- SRC_URI = " \
--    ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.bz2 \
-+    ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
-     file://remove-examples.patch \
--    file://glib-2.32.patch \
- "
--SRC_URI[archive.md5sum] = "cf33d1861d09fb2952a6a1d69e0502e3"
--SRC_URI[archive.sha256sum] = "7b67178363f8494c94f8b3dd704a4c8db7ad75a253fc84a4ad229e5e179ec192"
-+SRC_URI[md5sum] = "5c96d566c22c209d7b9cbf2344c469e9"
-+SRC_URI[sha256sum] = "f15b65bf5740257be03c69f2f5ae71436ac3011ebeb02274b2b99b796c6837cf"
+-PR = "${INC_PR}.2"
++LICENSE = "LGPLv2.1 & GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
++                    file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
++
++PR = "r1"
++
++DEPENDS = "atk pangomm glibmm gtk+ cairomm"
++
++inherit gnome autotools pkgconfig
  
- do_install_append() {
-     install -d ${D}${datadir}/glibmm-2.4
+ SRC_URI[archive.md5sum] = "c0cb0ea5bc1ab511d9b2461083f0445f"
+ SRC_URI[archive.sha256sum] = "c1199bbee423d6f0ef9b5e88973c5620a1e1c52f9f1298dffcfa36284a7fd91a"
+ 
++EXTRA_OECONF = " --disable-documentation "
++
++do_install_append () {
++    install -d ${D}${includedir}/gtkmm-2.4
++    install -m 0644 gdk/gdkmmconfig.h ${D}${includedir}/gtkmm-2.4
++    install -m 0644 gtk/gtkmmconfig.h ${D}${includedir}/gtkmm-2.4
++}
++
++PACKAGES =+ "${PN}-demo"
++
++FILES_${PN} = "${libdir}/lib*.so.*"
++FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
++FILES_${PN}-demo += "${datadir}/*/demo/"
++
 -- 
 1.7.4.4
 
