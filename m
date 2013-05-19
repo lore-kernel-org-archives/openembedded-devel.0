@@ -1,37 +1,39 @@
-Received: from mail-ee0-f42.google.com ([74.125.83.42])
+Received: from mail-ea0-f180.google.com ([209.85.215.180])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <schnitzeltony@googlemail.com>) id 1Ue17W-00004z-32
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ue17X-000054-IQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 12:45:42 +0200
-Received: by mail-ee0-f42.google.com with SMTP id c50so3523911eek.29
+	Sun, 19 May 2013 12:45:43 +0200
+Received: by mail-ea0-f180.google.com with SMTP id g10so3106074eak.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+	Sun, 19 May 2013 03:27:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=aC7y/f5KOBD1qjPks7MFTJnsfcDcCKpQlBeNATLsNMg=;
-	b=OSb+zqDwgcZFrdWPoewe/TIyoSxPvUeD2BtHJekjXZhWv2sSVtfwJX7lBou7Sq4UHa
-	hMi9886/LoeD4pFfKBI0i4BhqK3LTcZdDq41eJNbTDOOvMguZXEmstZ+Q8R8VaG23rIy
-	RWLZtClJG9YqwI3WIKwwQO0OYptFeDbbCRa18+wGxK7FeUS3VzCWOAUnSMjd+IXTTh42
-	k3AMmZjky2G4jBI6gdKJCNLL9sDzm39xG48SbndhOUJQH+P49ivvej4aqXakOHXvImYD
-	wcCuw2s5h9zTKXweS7CfMab7wptLYYFa6INGEOb/zJKnxrjUkEXlGLXwF5zSg0ypFQM9
-	53zQ==
-X-Received: by 10.14.87.9 with SMTP id x9mr20541935eee.3.1368959243813;
-	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+	h=x-received:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:mime-version:content-type:content-transfer-encoding;
+	bh=3/qLZ7awU5+/eUtKVvNrCBn2gE4s3VTTwbpyZAvJBZI=;
+	b=q157GX249sMyeKnD2Tv6n2RRryaNFq0sSdR4OvI+qr6DZnLbJA+U8NbwUgcPAMNUF5
+	/IsGJCoc6Er1P3CZUdRAxY0tHZdaQH1a7qcgCRDOXiMn/sYXS382fRX04F+7JTPV8j2c
+	WgUVF1sYOTLEMjXNE3uLGd1ey5jd8g3oy4GcjMK4RSsu//xycaDG84UN1n1hzZ7AZu/u
+	4i8vQjIU4N7SerDfzEsj5IfSjnzxFUoHRGt9S7ZUK/9NnmmtDMugVw/rszxtsE0EgBom
+	tso5BskSqbwpkbUq6Edni5jh4PqsJzB6IYzpN8rkg7XyV+jNNa/SG48twp2KtGahfVH8
+	ApPw==
+X-Received: by 10.15.23.69 with SMTP id g45mr152332233eeu.25.1368959245314;
+	Sun, 19 May 2013 03:27:25 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0719.dip0.t-ipconnect.de.
 	[79.223.7.25])
-	by mx.google.com with ESMTPSA id y10sm30762169eev.3.2013.05.19.03.27.22
+	by mx.google.com with ESMTPSA id y10sm30762169eev.3.2013.05.19.03.27.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+	Sun, 19 May 2013 03:27:24 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 May 2013 12:27:02 +0200
-Message-Id: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 19 May 2013 12:27:03 +0200
+Message-Id: <1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-oe++/master 00/11] fixes and updates
+Subject: [meta-oe++/master 01/11] mm-common: update to 0.9.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,61 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 10:45:42 -0000
+X-List-Received-Date: Sun, 19 May 2013 10:45:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit 22100f5b136e1be268055f4da14c39d7a32e9023:
-
-  dmidecode: remove (2013-05-19 09:37:34 +0200)
-
-are available in the git repository at:
-  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git updates-and-fixes
-
-Andreas Müller (11):
-      mm-common: update to 0.9.6
-      libsigc++-2.0: update to 2.2.11
-      glibmm: merge glibmm.inc into recipe - and stylize a bit
-      glibmm: update to 2.36.2
-      pangomm: update to 2.34.0
-      gtkmm: merge gtkmm.inc into recipe - and cleanup a bit
-      atkmm: initial add 2.22.7
-      gtkmm: update to 2.24.3
-      gtkhtml2: fix build with glib 2.36
-      evince: fix build with gcc 4.8
-      gnome-system-monitor: fix build after gtkmm update
-
- .../evince/0001-tiff-fix-compile-warning.patch     |   33 +++++++++++++
- meta-gnome/recipes-gnome/evince/evince_2.32.0.bb   |    7 ++-
- ...0002-src-procman.cpp-include-main-gtkmm.h.patch |   49 ++++++++++++++++++++
- .../gnome-system-monitor_2.28.2.bb                 |    7 ++-
- .../recipes-core/glib-2.0/glibmm/glib-2.32.patch   |   10 ----
- meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb     |    9 ----
- .../glib-2.0/{glibmm.inc => glibmm_2.36.2.bb}      |   15 +++---
- ...sigc++-2.0_2.2.9.bb => libsigc++-2.0_2.2.11.bb} |    6 +-
- meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb  |   10 ----
- meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb  |   12 +++++
- meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb          |   19 ++++++++
- meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb         |    7 ---
- .../gtk+/{gtkmm.inc => gtkmm_2.24.3.bb}            |   19 ++------
- ...001-tests-main.c-fix-build-with-glib-2.36.patch |   32 +++++++++++++
- meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb     |    3 +-
- .../pango/{pangomm_2.28.2.bb => pangomm_2.34.0.bb} |    8 +--
- 16 files changed, 176 insertions(+), 70 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch
- create mode 100644 meta-gnome/recipes-gnome/gnome-system-monitor/files/0002-src-procman.cpp-include-main-gtkmm.h.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch
- delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
- rename meta-oe/recipes-core/glib-2.0/{glibmm.inc => glibmm_2.36.2.bb} (75%)
- rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.2.9.bb => libsigc++-2.0_2.2.11.bb} (70%)
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb |   10 ----------
+ meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 10 deletions(-)
  delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
  create mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
- create mode 100644 meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb
- delete mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
- rename meta-oe/recipes-gnome/gtk+/{gtkmm.inc => gtkmm_2.24.3.bb} (53%)
- create mode 100644 meta-oe/recipes-gnome/gtkhtml2/files/0001-tests-main.c-fix-build-with-glib-2.36.patch
- rename meta-oe/recipes-graphics/pango/{pangomm_2.28.2.bb => pangomm_2.34.0.bb} (76%)
 
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+deleted file mode 100644
+index c49b4c8..0000000
+--- a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-inherit gnomebase
+-
+-SRC_URI[archive.md5sum] = "4a4dad67fc8d7e0c529f3a8c6ba4d8b2"
+-SRC_URI[archive.sha256sum] = "9c602dba89d264a4719db996b9b169716df2d4d10bcd24e56fc3572865a5cb8b"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-
+-BBCLASSEXTEND = "native"
+-
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+new file mode 100644
+index 0000000..f7e2507
+--- /dev/null
++++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+@@ -0,0 +1,12 @@
++inherit gnomebase
++
++GNOME_COMPRESS_TYPE="xz"
++
++SRC_URI[archive.md5sum] = "3b23749ab39441c392c016ce74632678"
++SRC_URI[archive.sha256sum] = "7c37158a1f37604705a9b9305d3b335fb8256f5de701c8801269dde4e2ce7dde"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++BBCLASSEXTEND = "native"
++
 -- 
 1.7.4.4
 
