@@ -1,34 +1,36 @@
-Received: from mail-ie0-f178.google.com ([209.85.223.178])
+Received: from mail-ie0-f172.google.com ([209.85.223.172])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1UeA2C-0002SP-D6
+	(envelope-from <raj.khem@gmail.com>) id 1UeA7b-0002m3-Mj
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 22:17:05 +0200
-Received: by mail-ie0-f178.google.com with SMTP id b11so12125555iee.23
+	Sun, 19 May 2013 22:22:31 +0200
+Received: by mail-ie0-f172.google.com with SMTP id 16so12734778iea.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 12:58:28 -0700 (PDT)
+	Sun, 19 May 2013 13:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=tu2Eoo+N8Oysi6hg219NcwtzwBvunK/NFNSt4wcC31k=;
-	b=g5plhriom9j28T3lneErceZ4Ttk37iyekuwWax8IYgyTeSbwRKizGHqVgtBKi7TJvu
-	bbIgoM0xBmeizJOA33v+qh/0yzCcewnNcanEHXFPHD9pdcUpHRk6N5SakWPTLl6HUV+2
-	Vs+5GNd0WBI2n3GexYd1+xbIaKUbSYmRu8l7lov4FJrJ9pMVQoLKOZa0xn3CkDzn2ToI
-	/Eus3bRhN6IwuODUAWB+8yTagHHlVeKjxCKOue2RxpBsX4aIVOAh3/SJfbnqvgU3FxBj
-	uSeOOxAycmIlulq2j78r7+TC2vcqykvuIV2UcKklA5cUtuv2A+RvwMPGVlDUHgJ66xD5
-	CZng==
+	:cc:content-type;
+	bh=/qmrpDqRO5EpFpC636vtP3ou5t0MuXptxio8lYyK4v0=;
+	b=VOjnDAxzrC/GovaFoJsw83QpJO7rsY3fCVAxJDCC9awHhhI5+AwMYO//wiemyQxED7
+	HOt/YYlihurOaTikDzQhQCloSzjbM8nC73wnUG+rK0yCuukv+yuU1LnHTzVISwFONqT1
+	1AzwChA6efVY3H6l117lmrvDFknRk6R4m+DhvdWhIfxW8ocSV88dhoPfrJN5C6kPiDzl
+	rEcd1MowEnTMe5K+dX4X4n36uo15IysV7TY68k45gohXSMnDIfbdIRpJjOfrkyD2RcnC
+	KpowDnrAS379cVSfZbbX4IZKxh2Cn8fOb2chE3xTdIhuLIPLU/zQec+Ys1pmYMLpV8rK
+	Q5JQ==
 MIME-Version: 1.0
-X-Received: by 10.50.87.10 with SMTP id t10mr3578289igz.108.1368993508741;
-	Sun, 19 May 2013 12:58:28 -0700 (PDT)
-Received: by 10.50.109.133 with HTTP; Sun, 19 May 2013 12:58:28 -0700 (PDT)
-In-Reply-To: <1368959233-28288-4-git-send-email-schnitzeltony@googlemail.com>
-References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
-	<1368959233-28288-4-git-send-email-schnitzeltony@googlemail.com>
-Date: Sun, 19 May 2013 12:58:28 -0700
-Message-ID: <CAMKF1soZP1zxrEtopAdi6dTPuRcb5CMnSapgfOE8KCD5t6a-Ow@mail.gmail.com>
+X-Received: by 10.50.87.10 with SMTP id t10mr3586182igz.108.1368993843828;
+	Sun, 19 May 2013 13:04:03 -0700 (PDT)
+Received: by 10.50.109.133 with HTTP; Sun, 19 May 2013 13:04:03 -0700 (PDT)
+In-Reply-To: <20130519115236.GF3196@jama>
+References: <1368457185-8140-1-git-send-email-philip@balister.org>
+	<20130519073217.GA3196@jama> <5198B21A.5090907@balister.org>
+	<20130519115236.GF3196@jama>
+Date: Sun, 19 May 2013 13:04:03 -0700
+Message-ID: <CAMKF1srgbEqRkgemR1n+wKjASNLZnRkn4QHeX=wd7XkzPW+F=w@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe++/master 03/11] glibmm: merge glibmm.inc into recipe - and stylize a bit
+Subject: Re: [meta-oe][PATCH] gnuradio : Update recipe to build on all machines again.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,124 +44,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 20:17:07 -0000
+X-List-Received-Date: Sun, 19 May 2013 20:22:37 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Why merge inc ? Generally its helpful in writing recipes in other layers we
-can share common code
+On Sunday, May 19, 2013, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, May 19, 2013 at 07:06:02AM -0400, Philip Balister wrote:
+>> On 05/19/2013 03:32 AM, Martin Jansa wrote:
+>> > On Mon, May 13, 2013 at 10:59:45AM -0400, Philip Balister wrote:
+>> >> Also updated the git repo address after recent changes in hosting.
+>> >>
+>> >> The recipe failed to build for machines without neon as a tune
+feature.
+>> >> The cmake config options have been changed so that it configures
+properly
+>> >> now.
+>> >>
+>> >> Test on armv7a, x86, and x86-64.
+>> >>
+>> >> Signed-off-by: Philip Balister <philip@balister.org>
+>> >> ---
+>> >>  meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 10 +++-------
+>> >>  1 file changed, 3 insertions(+), 7 deletions(-)
+>> >>
+>> >> diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bbb/meta-oe/recipes-connectivity/gnuradio/
+gnuradio_git.bb
+>> >> index edd4615..9e6998b 100644
+>> >> --- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+>> >> +++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+>> >> @@ -70,7 +70,7 @@ SRCREV = "5f69899e059e9bea58f92af61f70fc3f63825087"
+>> >>  GIT_REPO = "gnuradio.git"
+>> >>  GIT_BRANCH = "master"
+>> >>
+>> >> -SRC_URI = "git://
+gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
+>> >> +SRC_URI = "git://
+git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
+>> >>  "
+>> >>
+>> >>  S="${WORKDIR}/git"
+>> >> @@ -88,15 +88,11 @@ EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE \
+>> >>                   -DQT_LIBRARY_DIR=${STAGING_LIBDIR} \
+>> >>
+-DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so \
+>> >>
+-DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so \
+>> >> +                 ${@base_contains('TUNE_FEATURES', 'neon', \
+>> >> +                     '-Dhave_mfpu_neon=1', '-Dhave_mfpu_neon=0', d)}
+\
+>> >>  "
+>> >>
+>> >>  inherit distutils-base cmake pkgconfig
+>> >>
+>> >>  EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
+>> >>
+>> >> -# Only builds for machines with neon instructions. Problem is in
+upstream cmake.
+>> >> -python () {
+>> >> -    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False,
+d):
+>> >> -        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
+>> >> -}
+>> >
+>> > Hi,
+>> >
+>> > this enables gnuradio to build on qemu* MACHINEs I'm testing and it
+>> > failed on all 3 because of docs generation, can you disable it?
+>> >
+>> > | [ 20%]
+/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml:6:
+warning: failed to load external entity
+"/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/docbookx.dtd"
+>> > | ]>
+>> > |   ^
+>> > | warning: failed to load external entity
+"/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/docbookx.dtd"
+>> > | validity error : Could not load the external subset "docbookx.dtd"
+>> > | Document
+/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml
+does not validate
+>> >
+> Can be in separate patch, but I would like to apply them together (so
+> that I don't get new failure on world builds)
+>
+>> It built on my machine, I wonder if there is a host contamination issue?
+>
+> docs are broken for long time:
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=2416
 
-On Sunday, May 19, 2013, Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-wrote:
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  meta-oe/recipes-core/glib-2.0/glibmm.inc       |   28
------------------------
->  meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb |   29
-+++++++++++++++++++++--
->  2 files changed, 26 insertions(+), 31 deletions(-)
->  delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm.inc
+Can you cook patches for these native recipes for oe-core seems you know
+most about the issue
+It would really be very helpful
 >
-> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm.inc
-b/meta-oe/recipes-core/glib-2.0/glibmm.inc
-> deleted file mode 100644
-> index bdb6ff8..0000000
-> --- a/meta-oe/recipes-core/glib-2.0/glibmm.inc
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -DESCRIPTION =3D "C++ bindings for the glib library."
-> -HOMEPAGE =3D "http://www.gtkmm.org/"
-> -SECTION =3D "libs"
-> -
-> -LICENSE =3D "LGPLv2.1 & GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
-499 \
-> -
- file://COPYING.tools;md5=3D751419260aa954499f7abaabaa882bbe"
-> -
-> -DEPENDS =3D "mm-common glib-2.0 libsigc++-2.0"
-> -SHRT_VER =3D
-"${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-> -
-> -SRC_URI =3D "
-ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.b=
-z2;name=3Darchive
-"
-> -
-> -inherit autotools pkgconfig
-> -
-> -do_install_append() {
-> -    install -d ${D}${datadir}/glibmm-2.4
-> -    install -d ${D}${datadir}/aclocal
-> -
-> -    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
-> -    install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/
-|| true
-> -}
-> -
-> -FILES_${PN} =3D "${libdir}/lib*.so.*"
-> -FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/
-${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
-> -
-> -LIBV =3D "2.4.0"
-> -
-> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bbb/meta-oe/reci=
-pes-core/glib-2.0/
-glibmm_2.28.2.bb
-> index c864153..0bdaa80 100644
-> --- a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
-> +++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
-> @@ -1,9 +1,32 @@
-> -require glibmm.inc
-> +DESCRIPTION =3D "C++ bindings for the glib library."
-> +HOMEPAGE =3D "http://www.gtkmm.org/"
-> +SECTION =3D "libs"
-> +LICENSE =3D "LGPLv2.1 & GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
-499 \
-> +
- file://COPYING.tools;md5=3D751419260aa954499f7abaabaa882bbe"
-> +
-> +DEPENDS =3D "mm-common glib-2.0 libsigc++-2.0"
-> +inherit autotools pkgconfig
+> a lot of components is disabling docs (if configure option available) or
+> dropping them from SUBDIRs in Makefile.am with sed.
 >
->  PR =3D "r3"
+> Cheers,
 >
-> +SHRT_VER =3D
-"${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-> +
-> +SRC_URI =3D " \
-> +
-ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.b=
-z2\
-> +    file://remove-examples.patch \
-> +    file://glib-2.32.patch \
-> +"
->  SRC_URI[archive.md5sum] =3D "cf33d1861d09fb2952a6a1d69e0502e3"
->  SRC_URI[archive.sha256sum] =3D
-"7b67178363f8494c94f8b3dd704a4c8db7ad75a253fc84a4ad229e5e179ec192"
+>>
+>> Philip
+>>
+>> > Cheers,
+>> >
+>> >
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>>
 >
-> -SRC_URI +=3D " file://remove-examples.patch \
-> -             file://glib-2.32.patch"
-> +do_install_append() {
-> +    install -d ${D}${datadir}/glibmm-2.4
-> +    install -d ${D}${datadir}/aclocal
-> +
-> +    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
-> +    install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/
-|| true
-> +}
-> +
-> +FILES_${PN} =3D "${libdir}/lib*.so.*"
-> +FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/
-${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+>
+>
 > --
-> 1.7.4.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
 
