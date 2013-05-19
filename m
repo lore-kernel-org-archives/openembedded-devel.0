@@ -1,38 +1,40 @@
-Received: from mail-pd0-f177.google.com ([209.85.192.177])
+Received: from mail-pd0-f173.google.com ([209.85.192.173])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UdyOF-0005gO-2q
+	(envelope-from <martin.jansa@gmail.com>) id 1UdybB-00073G-7v
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 09:50:51 +0200
-Received: by mail-pd0-f177.google.com with SMTP id g10so4483049pdj.22
+	Sun, 19 May 2013 10:04:14 +0200
+Received: by mail-pd0-f173.google.com with SMTP id v10so4527062pde.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 00:32:28 -0700 (PDT)
+	Sun, 19 May 2013 00:45:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IFkG3T06Oj9fd/9SflkNNNx4RiSHG8omF0a1PW/qeSY=;
-	b=TJq1QGcgA7kSfCckT9SJled3oFZXbLM9QlMKUNyl+vQiiZahbx8E8bCy8kJnR3wO1C
-	6fuXKihPz+tC6cc40KINs1/flt9B5BtZndgIc0QUuMfN/0fdxcCbjq+EL8gKdKI2Gyg9
-	PlBFd0acgFKFaZhMxdi9A8zuFfPdMd3Pqix21fORBsziX7GHATsXilkPS4OLqRox7shZ
-	kGTgiKWMvfmbQ2djxDMuTqNa9LUPv5vC7S9EWzKr7V2e04+nxH8UiU8Jt5IVlkw2OpX/
-	l0mnW9v6UK8t1aO73kH932/Xay1yssrwOOMH5/GXjCwTryznQk5gQ2LnHOLZPr0wbd1s
-	+bzg==
-X-Received: by 10.68.129.234 with SMTP id nz10mr22851611pbb.181.1368948748074; 
-	Sun, 19 May 2013 00:32:28 -0700 (PDT)
+	h=x-received:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent; bh=FzCpl2maLYMR2J5mjNfX6KvuZq8nujCjUEZf09HycNk=;
+	b=Fpofu/XRRtJqqaPlsFCfKnQPOG5eQ6xBhAEEo84fdbVIuPNVwTHw/qWTe9eWhO2IKd
+	+IbgnRSoLO3GR0aaQZMLUX8ngiwyCjljwMPb1J5GJDb4hEiZkCPVHF7r6x6hXjj8AYhP
+	kbYDIe9HLWSrY29qXsEzryTXIh0ae29n6WNSHHWN15Qhbr1znasvdHFmV0YkCKUvPsX+
+	nw9UwiIPHQhT0K9pSf7JW0GuKG9jpURQpS/qUdSGz7xD0PfKFsF1gZ5tVdSDA9cqGh1i
+	72Zao1MLVYfrJpgwFVprkZyRj40GQ94JgBdAZuLBjvnLkLlu0kxe2CNGp8TtGlABq56K
+	nndw==
+X-Received: by 10.66.163.99 with SMTP id yh3mr55441060pab.22.1368949550205;
+	Sun, 19 May 2013 00:45:50 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b7sm18699278pba.39.2013.05.19.00.32.25
-	for <openembedded-devel@lists.openembedded.org>
+	wt5sm18739315pbc.38.2013.05.19.00.45.47 for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 19 May 2013 00:32:26 -0700 (PDT)
-Date: Sun, 19 May 2013 09:32:17 +0200
+	Sun, 19 May 2013 00:45:49 -0700 (PDT)
+Date: Sun, 19 May 2013 09:45:39 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130519073217.GA3196@jama>
-References: <1368457185-8140-1-git-send-email-philip@balister.org>
+Message-ID: <20130519074539.GB3196@jama>
+References: <1368895167-6841-1-git-send-email-raj.khem@gmail.com>
+	<CALbNGRTG44omNit6qx-7EmTLXJGN_HJytYGtsqL_z2pHepOnrA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1368457185-8140-1-git-send-email-philip@balister.org>
+In-Reply-To: <CALbNGRTG44omNit6qx-7EmTLXJGN_HJytYGtsqL_z2pHepOnrA@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] gnuradio : Update recipe to build on all machines again.
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Subject: Re: [meta-browser][PATCH] libxi: Match the bbappend to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,104 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 07:51:06 -0000
-X-Groupsio-MsgNum: 44770
+X-List-Received-Date: Sun, 19 May 2013 08:04:37 -0000
+X-Groupsio-MsgNum: 44771
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
+	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
 Content-Disposition: inline
 
---huq684BweRXVnRxX
-Content-Type: text/plain; charset=us-ascii
+--XOIedfhf+7KOe/yw
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 13, 2013 at 10:59:45AM -0400, Philip Balister wrote:
-> Also updated the git repo address after recent changes in hosting.
+On Sat, May 18, 2013 at 07:35:33PM +0200, Andreas M=FCller wrote:
+> Martin sent same already - for unknown reasons it did not make it into
+> patchwork [1]
 >=20
-> The recipe failed to build for machines without neon as a tune feature.
-> The cmake config options have been changed so that it configures properly
-> now.
+> Andreas
 >=20
-> Test on armv7a, x86, and x86-64.
->=20
-> Signed-off-by: Philip Balister <philip@balister.org>
-> ---
->  meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/meta=
--oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> index edd4615..9e6998b 100644
-> --- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> +++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> @@ -70,7 +70,7 @@ SRCREV =3D "5f69899e059e9bea58f92af61f70fc3f63825087"
->  GIT_REPO =3D "gnuradio.git"
->  GIT_BRANCH =3D "master"
-> =20
-> -SRC_URI =3D "git://gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};proto=
-col=3Dgit \
-> +SRC_URI =3D "git://git.gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};p=
-rotocol=3Dgit \
->  "
-> =20
->  S=3D"${WORKDIR}/git"
-> @@ -88,15 +88,11 @@ EXTRA_OECMAKE =3D "-DENABLE_GR_ATSC=3DFALSE \
->                   -DQT_LIBRARY_DIR=3D${STAGING_LIBDIR} \
->                   -DQT_QTCORE_LIBRARY_RELEASE=3D${STAGING_LIBDIR}/libQtCo=
-re.so \
->                   -DQT_QTGUI_LIBRARY_RELEASE=3D${STAGING_LIBDIR}/libQtGui=
-=2Eso \
-> +                 ${@base_contains('TUNE_FEATURES', 'neon', \
-> +                     '-Dhave_mfpu_neon=3D1', '-Dhave_mfpu_neon=3D0', d)}=
- \
->  "
-> =20
->  inherit distutils-base cmake pkgconfig
-> =20
->  EXTRA_OEMAKE =3D "-C ${OECMAKE_BUILDPATH}"
-> =20
-> -# Only builds for machines with neon instructions. Problem is in upstrea=
-m cmake.
-> -python () {
-> -    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
-> -        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
-> -}
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2013-May/0455=
+97.html
 
-Hi,=20
+It didn't make it into patchwork, because I've used -M and rename-only
+patches are not picked by patchwork :/
 
-this enables gnuradio to build on qemu* MACHINEs I'm testing and it
-failed on all 3 because of docs generation, can you disable it?
+Eric, can you please update status on patches in meta-browser bundle=20
+and when you're there also in danny?, dylan is empty now.
 
-| [ 20%] /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5t=
-e-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml:6:=
- warning: failed to load external entity "/home/jenkins/oe/shr-core-branche=
-s/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git=
-/gr-trellis/doc/docbookx.dtd"
-| ]>
-|   ^
-| warning: failed to load external entity "/home/jenkins/oe/shr-core-branch=
-es/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/gi=
-t/gr-trellis/doc/docbookx.dtd"
-| validity error : Could not load the external subset "docbookx.dtd"
-| Document /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv=
-5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml =
-does not validate
+http://patches.openembedded.org/bundle/jama/meta-browser/?archive=3Dboth
+http://patches.openembedded.org/bundle/jama/danny/?archive=3Dboth
 
-Cheers,
+http://patches.openembedded.org/bundle/jama/dylan/?archive=3Dboth
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---huq684BweRXVnRxX
+--XOIedfhf+7KOe/yw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlGYgAEACgkQN1Ujt2V2gBxmGgCfQBdEY7w/Apds5Eav0I8fIxAe
-0CEAmgPDOhxhgrubQChV6g1OVWdmI2t6
-=Olu+
+iEYEARECAAYFAlGYgyMACgkQN1Ujt2V2gBxrhACeMQXHVUEtxL1Jrt+y/VLFdMYw
+7jYAoLH3vn2/k9OTApbyDuORzKfyqTC5
+=p+MF
 -----END PGP SIGNATURE-----
 
---huq684BweRXVnRxX--
+--XOIedfhf+7KOe/yw--
