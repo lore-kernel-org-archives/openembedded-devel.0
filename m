@@ -1,35 +1,34 @@
-Received: from mail-ie0-f177.google.com ([209.85.223.177])
+Received: from mail-ie0-f178.google.com ([209.85.223.178])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <raj.khem@gmail.com>) id 1Ue9zc-0002Bo-LZ
+	(envelope-from <raj.khem@gmail.com>) id 1UeA2C-0002SP-D6
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 22:14:10 +0200
-Received: by mail-ie0-f177.google.com with SMTP id 9so12516418iec.22
+	Sun, 19 May 2013 22:17:05 +0200
+Received: by mail-ie0-f178.google.com with SMTP id b11so12125555iee.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 12:55:48 -0700 (PDT)
+	Sun, 19 May 2013 12:58:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:content-type;
-	bh=0W80hPgSb9cIpUnyxUpTEMNle29PR9aRM2xs5AVsHm0=;
-	b=Xh0A8n/ghrOnfPPwb/1TbdZ80j5fT3fy/pUQq8aPh7y+MyaS7/ffl0fkeRQ8idM+oW
-	bceio892m6xB2ftCumBgF5v0vTzKenh74PkH9Fv9Ur9ZutZMSXvL8UeC0MRwqYTaqz6m
-	bX4QgvTwL/NYnH2FWOl3Ce+taviXHRFAyeRA/gfqmHd7KJyfzlCxcr/hks7i7p1LdZ55
-	mR6mmV5NyvGedV0/plhEkZMdMwbUjX4EfEzd6ojxU4qTF6PktRg3a8iVCZHx0hXn+uuv
-	zzxduIHqNYKHGZdAPlQSamjMQq3DhL9kuQwphSd8IjOV+xWxEPALH9J9bZu+m9Sqy846
-	VodA==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=tu2Eoo+N8Oysi6hg219NcwtzwBvunK/NFNSt4wcC31k=;
+	b=g5plhriom9j28T3lneErceZ4Ttk37iyekuwWax8IYgyTeSbwRKizGHqVgtBKi7TJvu
+	bbIgoM0xBmeizJOA33v+qh/0yzCcewnNcanEHXFPHD9pdcUpHRk6N5SakWPTLl6HUV+2
+	Vs+5GNd0WBI2n3GexYd1+xbIaKUbSYmRu8l7lov4FJrJ9pMVQoLKOZa0xn3CkDzn2ToI
+	/Eus3bRhN6IwuODUAWB+8yTagHHlVeKjxCKOue2RxpBsX4aIVOAh3/SJfbnqvgU3FxBj
+	uSeOOxAycmIlulq2j78r7+TC2vcqykvuIV2UcKklA5cUtuv2A+RvwMPGVlDUHgJ66xD5
+	CZng==
 MIME-Version: 1.0
-X-Received: by 10.50.30.2 with SMTP id o2mr3406038igh.12.1368993348734; Sun,
-	19 May 2013 12:55:48 -0700 (PDT)
-Received: by 10.50.109.133 with HTTP; Sun, 19 May 2013 12:55:48 -0700 (PDT)
-In-Reply-To: <1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
+X-Received: by 10.50.87.10 with SMTP id t10mr3578289igz.108.1368993508741;
+	Sun, 19 May 2013 12:58:28 -0700 (PDT)
+Received: by 10.50.109.133 with HTTP; Sun, 19 May 2013 12:58:28 -0700 (PDT)
+In-Reply-To: <1368959233-28288-4-git-send-email-schnitzeltony@googlemail.com>
 References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
-	<1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Sun, 19 May 2013 12:55:48 -0700
-Message-ID: <CAMKF1soJ=_CAZ7BO3NsSLyUSZSaJo8wFdaHuJW+6h9E0xoiVAg@mail.gmail.com>
+	<1368959233-28288-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 19 May 2013 12:58:28 -0700
+Message-ID: <CAMKF1soZP1zxrEtopAdi6dTPuRcb5CMnSapgfOE8KCD5t6a-Ow@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [meta-oe++/master 01/11] mm-common: update to 0.9.6
+Subject: Re: [meta-oe++/master 03/11] glibmm: merge glibmm.inc into recipe - and stylize a bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,64 +42,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 20:14:13 -0000
+X-List-Received-Date: Sun, 19 May 2013 20:17:07 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+
+Why merge inc ? Generally its helpful in writing recipes in other layers we
+can share common code
 
 On Sunday, May 19, 2013, Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 wrote:
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 > ---
->  meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb |   10 ----------
->  meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb |   12 ++++++++++++
->  2 files changed, 12 insertions(+), 10 deletions(-)
->  delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
->  create mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+>  meta-oe/recipes-core/glib-2.0/glibmm.inc       |   28
+-----------------------
+>  meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb |   29
++++++++++++++++++++++--
+>  2 files changed, 26 insertions(+), 31 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm.inc
 >
-> diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bbb/meta-oe/r=
-ecipes-core/mm-common/
-mm-common_0.9.5.bb
+> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm.inc
+b/meta-oe/recipes-core/glib-2.0/glibmm.inc
 > deleted file mode 100644
-> index c49b4c8..0000000
-> --- a/meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+> index bdb6ff8..0000000
+> --- a/meta-oe/recipes-core/glib-2.0/glibmm.inc
 > +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -inherit gnomebase
+> @@ -1,28 +0,0 @@
+> -DESCRIPTION =3D "C++ bindings for the glib library."
+> -HOMEPAGE =3D "http://www.gtkmm.org/"
+> -SECTION =3D "libs"
 > -
-> -SRC_URI[archive.md5sum] =3D "4a4dad67fc8d7e0c529f3a8c6ba4d8b2"
-> -SRC_URI[archive.sha256sum] =3D
-"9c602dba89d264a4719db996b9b169716df2d4d10bcd24e56fc3572865a5cb8b"
+> -LICENSE =3D "LGPLv2.1 & GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499 \
 > -
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
+ file://COPYING.tools;md5=3D751419260aa954499f7abaabaa882bbe"
 > -
-> -BBCLASSEXTEND =3D "native"
+> -DEPENDS =3D "mm-common glib-2.0 libsigc++-2.0"
+> -SHRT_VER =3D
+"${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 > -
-> diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bbb/meta-oe/r=
-ecipes-core/mm-common/
-mm-common_0.9.6.bb
-> new file mode 100644
-> index 0000000..f7e2507
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
-> @@ -0,0 +1,12 @@
-> +inherit gnomebase
+> -SRC_URI =3D "
+ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.b=
+z2;name=3Darchive
+"
+> -
+> -inherit autotools pkgconfig
+> -
+> -do_install_append() {
+> -    install -d ${D}${datadir}/glibmm-2.4
+> -    install -d ${D}${datadir}/aclocal
+> -
+> -    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
+> -    install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/
+|| true
+> -}
+> -
+> -FILES_${PN} =3D "${libdir}/lib*.so.*"
+> -FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/
+${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+> -
+> -LIBV =3D "2.4.0"
+> -
+> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bbb/meta-oe/reci=
+pes-core/glib-2.0/
+glibmm_2.28.2.bb
+> index c864153..0bdaa80 100644
+> --- a/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
+> +++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
+> @@ -1,9 +1,32 @@
+> -require glibmm.inc
+> +DESCRIPTION =3D "C++ bindings for the glib library."
+> +HOMEPAGE =3D "http://www.gtkmm.org/"
+> +SECTION =3D "libs"
+> +LICENSE =3D "LGPLv2.1 & GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499 \
 > +
-> +GNOME_COMPRESS_TYPE=3D"xz"
-
-Does this mean you need to add dependency on xz-native ?
+ file://COPYING.tools;md5=3D751419260aa954499f7abaabaa882bbe"
 > +
-> +SRC_URI[archive.md5sum] =3D "3b23749ab39441c392c016ce74632678"
-> +SRC_URI[archive.sha256sum] =3D
-"7c37158a1f37604705a9b9305d3b335fb8256f5de701c8801269dde4e2ce7dde"
+> +DEPENDS =3D "mm-common glib-2.0 libsigc++-2.0"
+> +inherit autotools pkgconfig
+>
+>  PR =3D "r3"
+>
+> +SHRT_VER =3D
+"${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 > +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
+> +SRC_URI =3D " \
 > +
-> +BBCLASSEXTEND =3D "native"
+ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.b=
+z2\
+> +    file://remove-examples.patch \
+> +    file://glib-2.32.patch \
+> +"
+>  SRC_URI[archive.md5sum] =3D "cf33d1861d09fb2952a6a1d69e0502e3"
+>  SRC_URI[archive.sha256sum] =3D
+"7b67178363f8494c94f8b3dd704a4c8db7ad75a253fc84a4ad229e5e179ec192"
+>
+> -SRC_URI +=3D " file://remove-examples.patch \
+> -             file://glib-2.32.patch"
+> +do_install_append() {
+> +    install -d ${D}${datadir}/glibmm-2.4
+> +    install -d ${D}${datadir}/aclocal
 > +
+> +    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
+> +    install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/
+|| true
+> +}
+> +
+> +FILES_${PN} =3D "${libdir}/lib*.so.*"
+> +FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/
+${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
 > --
 > 1.7.4.4
 >
