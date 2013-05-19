@@ -1,40 +1,37 @@
-Received: from mail-pd0-f173.google.com ([209.85.192.173])
+Received: from mail-ee0-f42.google.com ([74.125.83.42])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <martin.jansa@gmail.com>) id 1UdybB-00073G-7v
+	(envelope-from <schnitzeltony@googlemail.com>) id 1Ue17W-00004z-32
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 May 2013 10:04:14 +0200
-Received: by mail-pd0-f173.google.com with SMTP id v10so4527062pde.18
+	Sun, 19 May 2013 12:45:42 +0200
+Received: by mail-ee0-f42.google.com with SMTP id c50so3523911eek.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 May 2013 00:45:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent; bh=FzCpl2maLYMR2J5mjNfX6KvuZq8nujCjUEZf09HycNk=;
-	b=Fpofu/XRRtJqqaPlsFCfKnQPOG5eQ6xBhAEEo84fdbVIuPNVwTHw/qWTe9eWhO2IKd
-	+IbgnRSoLO3GR0aaQZMLUX8ngiwyCjljwMPb1J5GJDb4hEiZkCPVHF7r6x6hXjj8AYhP
-	kbYDIe9HLWSrY29qXsEzryTXIh0ae29n6WNSHHWN15Qhbr1znasvdHFmV0YkCKUvPsX+
-	nw9UwiIPHQhT0K9pSf7JW0GuKG9jpURQpS/qUdSGz7xD0PfKFsF1gZ5tVdSDA9cqGh1i
-	72Zao1MLVYfrJpgwFVprkZyRj40GQ94JgBdAZuLBjvnLkLlu0kxe2CNGp8TtGlABq56K
-	nndw==
-X-Received: by 10.66.163.99 with SMTP id yh3mr55441060pab.22.1368949550205;
-	Sun, 19 May 2013 00:45:50 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	wt5sm18739315pbc.38.2013.05.19.00.45.47 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 19 May 2013 00:45:49 -0700 (PDT)
-Date: Sun, 19 May 2013 09:45:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=aC7y/f5KOBD1qjPks7MFTJnsfcDcCKpQlBeNATLsNMg=;
+	b=OSb+zqDwgcZFrdWPoewe/TIyoSxPvUeD2BtHJekjXZhWv2sSVtfwJX7lBou7Sq4UHa
+	hMi9886/LoeD4pFfKBI0i4BhqK3LTcZdDq41eJNbTDOOvMguZXEmstZ+Q8R8VaG23rIy
+	RWLZtClJG9YqwI3WIKwwQO0OYptFeDbbCRa18+wGxK7FeUS3VzCWOAUnSMjd+IXTTh42
+	k3AMmZjky2G4jBI6gdKJCNLL9sDzm39xG48SbndhOUJQH+P49ivvej4aqXakOHXvImYD
+	wcCuw2s5h9zTKXweS7CfMab7wptLYYFa6INGEOb/zJKnxrjUkEXlGLXwF5zSg0ypFQM9
+	53zQ==
+X-Received: by 10.14.87.9 with SMTP id x9mr20541935eee.3.1368959243813;
+	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+Received: from localhost.localdomain (p4FDF0719.dip0.t-ipconnect.de.
+	[79.223.7.25])
+	by mx.google.com with ESMTPSA id y10sm30762169eev.3.2013.05.19.03.27.22
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Sun, 19 May 2013 03:27:23 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130519074539.GB3196@jama>
-References: <1368895167-6841-1-git-send-email-raj.khem@gmail.com>
-	<CALbNGRTG44omNit6qx-7EmTLXJGN_HJytYGtsqL_z2pHepOnrA@mail.gmail.com>
+Date: Sun, 19 May 2013 12:27:02 +0200
+Message-Id: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTG44omNit6qx-7EmTLXJGN_HJytYGtsqL_z2pHepOnrA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] libxi: Match the bbappend to OE-Core
+Subject: [meta-oe++/master 00/11] fixes and updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,50 +45,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 May 2013 08:04:37 -0000
-X-Groupsio-MsgNum: 44771
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 19 May 2013 10:45:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---XOIedfhf+7KOe/yw
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 22100f5b136e1be268055f4da14c39d7a32e9023:
 
-On Sat, May 18, 2013 at 07:35:33PM +0200, Andreas M=FCller wrote:
-> Martin sent same already - for unknown reasons it did not make it into
-> patchwork [1]
->=20
-> Andreas
->=20
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2013-May/0455=
-97.html
+  dmidecode: remove (2013-05-19 09:37:34 +0200)
 
-It didn't make it into patchwork, because I've used -M and rename-only
-patches are not picked by patchwork :/
+are available in the git repository at:
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git updates-and-fixes
 
-Eric, can you please update status on patches in meta-browser bundle=20
-and when you're there also in danny?, dylan is empty now.
+Andreas Müller (11):
+      mm-common: update to 0.9.6
+      libsigc++-2.0: update to 2.2.11
+      glibmm: merge glibmm.inc into recipe - and stylize a bit
+      glibmm: update to 2.36.2
+      pangomm: update to 2.34.0
+      gtkmm: merge gtkmm.inc into recipe - and cleanup a bit
+      atkmm: initial add 2.22.7
+      gtkmm: update to 2.24.3
+      gtkhtml2: fix build with glib 2.36
+      evince: fix build with gcc 4.8
+      gnome-system-monitor: fix build after gtkmm update
 
-http://patches.openembedded.org/bundle/jama/meta-browser/?archive=3Dboth
-http://patches.openembedded.org/bundle/jama/danny/?archive=3Dboth
+ .../evince/0001-tiff-fix-compile-warning.patch     |   33 +++++++++++++
+ meta-gnome/recipes-gnome/evince/evince_2.32.0.bb   |    7 ++-
+ ...0002-src-procman.cpp-include-main-gtkmm.h.patch |   49 ++++++++++++++++++++
+ .../gnome-system-monitor_2.28.2.bb                 |    7 ++-
+ .../recipes-core/glib-2.0/glibmm/glib-2.32.patch   |   10 ----
+ meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb     |    9 ----
+ .../glib-2.0/{glibmm.inc => glibmm_2.36.2.bb}      |   15 +++---
+ ...sigc++-2.0_2.2.9.bb => libsigc++-2.0_2.2.11.bb} |    6 +-
+ meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb  |   10 ----
+ meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb  |   12 +++++
+ meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb          |   19 ++++++++
+ meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb         |    7 ---
+ .../gtk+/{gtkmm.inc => gtkmm_2.24.3.bb}            |   19 ++------
+ ...001-tests-main.c-fix-build-with-glib-2.36.patch |   32 +++++++++++++
+ meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb     |    3 +-
+ .../pango/{pangomm_2.28.2.bb => pangomm_2.34.0.bb} |    8 +--
+ 16 files changed, 176 insertions(+), 70 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-tiff-fix-compile-warning.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-system-monitor/files/0002-src-procman.cpp-include-main-gtkmm.h.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm/glib-2.32.patch
+ delete mode 100644 meta-oe/recipes-core/glib-2.0/glibmm_2.28.2.bb
+ rename meta-oe/recipes-core/glib-2.0/{glibmm.inc => glibmm_2.36.2.bb} (75%)
+ rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.2.9.bb => libsigc++-2.0_2.2.11.bb} (70%)
+ delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.5.bb
+ create mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+ create mode 100644 meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb
+ delete mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm_2.20.0.bb
+ rename meta-oe/recipes-gnome/gtk+/{gtkmm.inc => gtkmm_2.24.3.bb} (53%)
+ create mode 100644 meta-oe/recipes-gnome/gtkhtml2/files/0001-tests-main.c-fix-build-with-glib-2.36.patch
+ rename meta-oe/recipes-graphics/pango/{pangomm_2.28.2.bb => pangomm_2.34.0.bb} (76%)
 
-http://patches.openembedded.org/bundle/jama/dylan/?archive=3Dboth
+-- 
+1.7.4.4
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---XOIedfhf+7KOe/yw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlGYgyMACgkQN1Ujt2V2gBxrhACeMQXHVUEtxL1Jrt+y/VLFdMYw
-7jYAoLH3vn2/k9OTApbyDuORzKfyqTC5
-=p+MF
------END PGP SIGNATURE-----
-
---XOIedfhf+7KOe/yw--
