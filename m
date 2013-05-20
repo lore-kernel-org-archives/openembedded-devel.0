@@ -1,27 +1,36 @@
-Received: from mga03.intel.com ([143.182.124.21])
+Received: from mail-vb0-f44.google.com ([209.85.212.44])
 	by linuxtogo.org with esmtp (Exim 4.72)
-	(envelope-from <paul.eggleton@linux.intel.com>) id 1UeLyW-0004me-RO
+	(envelope-from <ross.burton@intel.com>) id 1UeMWN-0007xG-Oh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 May 2013 11:01:51 +0200
-Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 20 May 2013 01:43:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,706,1363158000"; d="scan'208";a="244037774"
-Received: from unknown (HELO helios.localnet) ([10.255.12.168])
-	by AZSMGA002.ch.intel.com with ESMTP; 20 May 2013 01:43:26 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 May 2013 09:43:24 +0100
-Message-ID: <2790826.iUURuodTo5@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-21-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <CAMKF1soJ=_CAZ7BO3NsSLyUSZSaJo8wFdaHuJW+6h9E0xoiVAg@mail.gmail.com>
-References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
-	<1368959233-28288-2-git-send-email-schnitzeltony@googlemail.com>
-	<CAMKF1soJ=_CAZ7BO3NsSLyUSZSaJo8wFdaHuJW+6h9E0xoiVAg@mail.gmail.com>
+	Mon, 20 May 2013 11:36:56 +0200
+Received: by mail-vb0-f44.google.com with SMTP id e13so3639835vbg.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 May 2013 02:18:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:x-gm-message-state;
+	bh=pLWAewNF9C/vD/GYVsezFiSspmbNRY9VvrKTCSF8dcg=;
+	b=aUqnToulkpvY6sPSOm81sxQF93s7kcn5xhr/sSVSXxC/5WtMwj9uPl3cepirGDvtGN
+	WI6sD2L1zQwgVgvgEglpJcYzBTYwTjs6e7AEc8K7OAF+rJ3CO4NkBFdh08Zi3ZBSsdAY
+	L3N5l0y8jGtuKizk6lDMrJCDgz5Z5oJB5btrXMIp3iOu4Dhgfth7kF1848LhJaOoSAjp
+	gsROHq00HbzJpwMmBOFfsW9954UuozPoa8ECdowZmaQ6aajQMRD9DvpBiu8CTZ6kRDLE
+	N8l1yPd2TV6fUwlHFsivTjaZo2hatvfT5oJBARKkv0TwCtMK+10aDQqJ0YQRpMI47G44
+	brZQ==
+X-Received: by 10.52.117.212 with SMTP id kg20mr29026795vdb.55.1369041507367; 
+	Mon, 20 May 2013 02:18:27 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe++/master 01/11] mm-common: update to 0.9.6
+Received: by 10.221.8.3 with HTTP; Mon, 20 May 2013 02:18:07 -0700 (PDT)
+In-Reply-To: <1368895167-6841-1-git-send-email-raj.khem@gmail.com>
+References: <1368895167-6841-1-git-send-email-raj.khem@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 20 May 2013 10:18:07 +0100
+Message-ID: <CAJTo0LYDp-wfrSqkswLdj32keLtyV62oCZm5cuX4QXtUGyEG1A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQmesxMPKVXGQ327+fsYzwb+6zmqPsKJYl6BhafxefJd8j4w6iRrDTwPtkxtm9CySGdJemA9
+Cc: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-browser][PATCH] libxi: Match the bbappend to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +44,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 May 2013 09:01:57 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 20 May 2013 09:37:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sunday 19 May 2013 12:55:48 Khem Raj wrote:
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
-> > @@ -0,0 +1,12 @@
-> > +inherit gnomebase
-> > +
-> > +GNOME_COMPRESS_TYPE="xz"
-> 
-> Does this mean you need to add dependency on xz-native ?
+On 18 May 2013 17:39, Khem Raj <raj.khem@gmail.com> wrote:
+> +BBCLASSEXTEND += "native"
 
-No need, base.bbclass does this automatically if .xz is in a SRC_URI entry.
+Why don't you submit a patch to oe-core's libxi, or even
+xorg-lib-common.inc, to add this?
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
 
