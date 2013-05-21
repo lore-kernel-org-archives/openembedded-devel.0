@@ -1,25 +1,23 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id E6B3D620A7
+Return-Path: <eric@eukrea.com>
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by mail.openembedded.org (Postfix) with ESMTP id E525F60897
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2013 16:57:28 +0000 (UTC)
-Received: from [10.1.14.186] (83-64-248-68.inzersdorf.xdsl-line.inode.at
-	[83.64.248.68]) by ptmx.org (Postfix) with ESMTPSA id A0DAA2A308
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2013 18:57:29 +0200 (CEST)
-Message-ID: <519BA779.8090706@pseudoterminal.org>
-Date: Tue, 21 May 2013 18:57:29 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130329 Thunderbird/17.0.5
-MIME-Version: 1.0
+	Tue, 21 May 2013 17:18:14 +0000 (UTC)
+Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
+	(Authenticated sender: eukrea)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 8ED7AA62B4;
+	Tue, 21 May 2013 19:18:09 +0200 (CEST)
+Date: Tue, 21 May 2013 19:18:07 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <519A68E8.9080503@pseudoterminal.org>
-	<CAJTo0LaYF2oHHH=Pgz1kqbLyM1D-Q4AVg5O0ChCwU_wwD_J8+w@mail.gmail.com>
-	<519B47B8.7090002@pseudoterminal.org>
-	<CAJTo0LYA6RqF32e6YTgNBqefThfqQC529DGRTwhhY+PfbEVZiA@mail.gmail.com>
-In-Reply-To: <CAJTo0LYA6RqF32e6YTgNBqefThfqQC529DGRTwhhY+PfbEVZiA@mail.gmail.com>
-Subject: Re: Error message about multiple EGL / GLES providers
+Message-ID: <20130521191807.03321ac0@e6520eb>
+In-Reply-To: <CAP9ODKr+v8t-FjbFFc-D+P+L-753yuz_EyPEgrWsm1gz4mKHsQ@mail.gmail.com>
+References: <CAP9ODKr+v8t-FjbFFc-D+P+L-753yuz_EyPEgrWsm1gz4mKHsQ@mail.gmail.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.16; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: otavio@ossystems.com.br
+Subject: Re: [for-danny, for-dylan] Samba fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +31,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2013 16:57:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 May 2013 17:18:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 05/21/2013 05:22 PM, Burton, Ross wrote:
-> On 21 May 2013 11:08, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
->> It would
->> be useful to instruct Mesa to turn off its OpenGLES and EGL support, leaving
->> Mesa only for GLX+Desktop OpenGL (software-rendered), if anybody really
->> needs it. As an alternative, as you suggest, I could simply turn off desktop
->> OpenGL, but I have the feeling that this would be better off as a user
->> decision that can be configured in the local.conf file. What do you think?
-> You can change mesa's PACKAGECONFIG to not build egl and gles.
-> meta-intel does something like this because the EMGD/CDT drivers are
-> in the same boat.
->
-> However considering our software GL support in Mesa is currently
-> swrast (very very bad) and not llvmpipe (usable if you have enough
-> CPU, which we generally don't) you generally don't want to actually
-> have any OpenGL present at all.  Generally it's mesa-demos that pulls
-> in virtual/libgl, and in master this can be disabled.  This may be
-> worth a backport if someone wants to backport and test it.
->
-> Ross
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Hi Otavio,
 
-Good point. It would also discourage people from using compositing 
-managers which render using desktop OpenGL, then wondering why the 3D 
-effects are so awfully slow. Same goes for stuff like Enlightenment 
-Evas, which uses by default the desktop GL backend instead of the GLES one.
+Le Tue, 21 May 2013 00:02:42 -0300,
+Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
+> Please cherry-pick the bac6da16a0d57f30c2cde1d805b3957147abdaeb into dylan
+> and danny.
+>=20
+pushed to dylan-next, doesn't apply to danny.
+
+Eric
 
