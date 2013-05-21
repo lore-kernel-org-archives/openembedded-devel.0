@@ -1,23 +1,40 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by mail.openembedded.org (Postfix) with ESMTP id E525F60897
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E5D5C60897
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2013 17:18:14 +0000 (UTC)
-Received: from e6520eb (tal33-3-82-233-81-124.fbx.proxad.net [82.233.81.124])
-	(Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 8ED7AA62B4;
-	Tue, 21 May 2013 19:18:09 +0200 (CEST)
-Date: Tue, 21 May 2013 19:18:07 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130521191807.03321ac0@e6520eb>
-In-Reply-To: <CAP9ODKr+v8t-FjbFFc-D+P+L-753yuz_EyPEgrWsm1gz4mKHsQ@mail.gmail.com>
-References: <CAP9ODKr+v8t-FjbFFc-D+P+L-753yuz_EyPEgrWsm1gz4mKHsQ@mail.gmail.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.16; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: otavio@ossystems.com.br
-Subject: Re: [for-danny, for-dylan] Samba fix
+	Tue, 21 May 2013 18:16:01 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id lj1so978148pab.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 May 2013 11:16:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-type:content-transfer-encoding:subject:message-id:date
+	:to:mime-version:x-mailer;
+	bh=2eUBfZPEiq4lblVeBzVQ1k0bWy/dqg54j4AEydWDmIk=;
+	b=RaJzFuDolIkcVd1mMeyoGlnGWez/EuYshxgwtrhcyl6R9ixLBb7Ua+KXRLA8xyI4kb
+	y7jbQzhNVMO8DX/2y3xixFaMMT6qjEQn1tp8iQrOKsYhRZHGZ92N78GHcGIZWD6OHqMl
+	BeFvxlSg6v2iZasIQvTmfC3SRgWW2EkhMIZL3eHKFk04kgT1tg5t3uFSi++cxjUDxgTo
+	B526HS5Jn2r2wmDGWXJWCR5p1QvVPkVM3R/0CCZOrsfAlnTWXv9hLmY/tGNBcaLeQ3oY
+	usQOEjrBXYwwfKUnfeoAJ0FY4Mcpr7kNAk45U6hyePOCHAF2VbV4frH+KM2P4Ci+V8XP
+	dsDQ==
+X-Received: by 10.66.177.46 with SMTP id cn14mr4728442pac.4.1369160163096;
+	Tue, 21 May 2013 11:16:03 -0700 (PDT)
+Received: from sa-nc-common3-43.static.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id w8sm3646343pbo.9.2013.05.21.11.16.01
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 21 May 2013 11:16:02 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Message-Id: <04B2970B-A4CB-48F6-88FD-56862388393F@gmail.com>
+Date: Tue, 21 May 2013 11:16:10 -0700
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
+X-Mailer: Apple Mail (2.1503)
+Subject: world build on angstrom-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,18 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2013 17:18:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 May 2013 18:16:02 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-Hi Otavio,
+Hi All
 
-Le Tue, 21 May 2013 00:02:42 -0300,
-Otavio Salvador <otavio@ossystems.com.br> a =C3=A9crit :
-> Please cherry-pick the bac6da16a0d57f30c2cde1d805b3957147abdaeb into dylan
-> and danny.
->=20
-pushed to dylan-next, doesn't apply to danny.
+I have run world build on angstrom and here are results if anyone is =
+interested and provide fixes.
 
-Eric
+http://sakrah.dontexist.org/files/eglibc.beaglebone.world.log
+
+There are a lot of parsing errors especially from meta-opie
+
+Thanks
+-Khem
+
+=20=
 
