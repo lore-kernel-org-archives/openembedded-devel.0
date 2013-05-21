@@ -1,35 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FECC69697
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ve0-f173.google.com (mail-ve0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AE7061221
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 May 2013 03:02:42 +0000 (UTC)
-Received: by mail-ob0-f170.google.com with SMTP id er7so163880obc.15
+	Tue, 21 May 2013 07:51:22 +0000 (UTC)
+Received: by mail-ve0-f173.google.com with SMTP id cy12so205944veb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 May 2013 20:02:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	bh=/uc3TNWnApJy5bSgqI6FEAhpmPSC8RVWM5ypT/0DLR8=;
-	b=ckIzw6J0uFXp/PGNmPtMu2OF1kmaeDQakSZpADs7nJR2kr6vNJXvfwgsIBkrlsLqws
-	5/TQDbncWmg2z2EBlID8A3KK4WbBccbtWJ74EaSvklhbJnBB6opPoT9beFjB0Xf6dJp/
-	4qC2sDtGBrWXkRczTwAjMZTtZaYwtEAE4+FpV48AJ3EVwp3InGzej3/WVkwAD9S1Hjza
-	JLH38isxRSot2DwRtyRQVjc+eZZ2I1DAQpmR12kmYI5yp3N6RuROja59vOgXdBzq1dBX
-	MCVvenHgN8qFoAlbFuW5ZuJOlcx2g7i2LtQyOl0AErfZSMqWT+hp/l9q8RyZZnX6FFoA
-	GF0Q==
+	Tue, 21 May 2013 00:51:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=LrzpO46jmRUPrRLtaM43U2zmaLPHcuZ9Z/rwDtbBlzw=;
+	b=shTJ/kpD2nYQfgd3lsZ2sJ2WaGw+n3sMta59W+fH2dV7lBL4nSTFA4+1KnyBdSHvJ+
+	gFdW2xxttS0ph/kN7MXH1CfzepLGagBqFgieGsh+5gjtptRFrKc2rt1bDZCSeAufn/rR
+	eaWIWv9W1OpwGClioLLwpemw1bw1lmQ1nh0mSAinJJRXcnj0vntOaGZybRLznVA+gWTO
+	LGQKDNYw8UE9l7ckr39LALgyhGOz+/nsAz6TgXmxRlcQ50CBT+A2hMuvayKIY9py7ebd
+	7jG2DelbtM1/4p9cyeC20wxrzCYCBVpvPdy7ftSN0EUNcEbAUndaN5dUE3rWA98s/97Q
+	RYqg==
 MIME-Version: 1.0
-X-Received: by 10.182.40.202 with SMTP id z10mr190368obk.74.1369105362587;
-	Mon, 20 May 2013 20:02:42 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.89.226 with HTTP; Mon, 20 May 2013 20:02:42 -0700 (PDT)
-Date: Tue, 21 May 2013 00:02:42 -0300
-X-Google-Sender-Auth: p1vZ5EPkVsyKtqN8sISsBwBi7f4
-Message-ID: <CAP9ODKr+v8t-FjbFFc-D+P+L-753yuz_EyPEgrWsm1gz4mKHsQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [for-danny, for-dylan] Samba fix
+X-Received: by 10.52.68.49 with SMTP id s17mr360427vdt.92.1369122682464; Tue,
+	21 May 2013 00:51:22 -0700 (PDT)
+Received: by 10.52.18.177 with HTTP; Tue, 21 May 2013 00:51:22 -0700 (PDT)
+In-Reply-To: <CAMKF1soZP1zxrEtopAdi6dTPuRcb5CMnSapgfOE8KCD5t6a-Ow@mail.gmail.com>
+References: <1368959233-28288-1-git-send-email-schnitzeltony@googlemail.com>
+	<1368959233-28288-4-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1soZP1zxrEtopAdi6dTPuRcb5CMnSapgfOE8KCD5t6a-Ow@mail.gmail.com>
+Date: Tue, 21 May 2013 09:51:22 +0200
+Message-ID: <CALbNGRSri1rP7CXVEum_QYx2a7ArHuDUQDCwVVrtw2kwVAMDKA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe++/master 03/11] glibmm: merge glibmm.inc into recipe - and stylize a bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,18 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2013 03:02:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 May 2013 07:51:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello Eric,
+On Sun, May 19, 2013 at 9:58 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Why merge inc ? Generally its helpful in writing recipes in other layers we
+> can share common code
+>
+Before doing this I have checked: Nothing except glibmm itself
+includes glibmm.inc in the layers I use. So for me it looked like a
+remnant from classic oe where we had more than one version for many
+recipes. So if this code is not really shared I prefer clean recipes
+without includes. Do you have a use case for this include - then I
+should send V2.
 
-Please cherry-pick the bac6da16a0d57f30c2cde1d805b3957147abdaeb into dylan
-and danny.
-
-Regards,
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://projetos.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Andreas
 
