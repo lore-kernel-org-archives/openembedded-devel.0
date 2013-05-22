@@ -1,36 +1,35 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qa0-f46.google.com (mail-qa0-f46.google.com
-	[209.85.216.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A6782608CA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 10:35:39 +0000 (UTC)
-Received: by mail-qa0-f46.google.com with SMTP id bv4so2728310qab.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 03:35:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Cn328KSuRHI2ydcduD2m++P5bdVtEvv8b4ux/FS3Ktk=;
-	b=RkkWJkaHFwTmEgmI43DIKsFKAwX0f5ucvAePt4Wh1hKXplWrKc6w+LJVpPE++/gCfw
-	L/ryJI6dsZw/w3HXJUkWHZ7JcRrC1qVSeHB+W6tJnkECOh+IdTaKI4+ikNKa8t1QhWOy
-	sFO2xvNgpra6C+lq5qwseRDrj8CoeyG6LUnH9m5f6hZ77M+Hsz1Adjrig/Tt2CkjhM37
-	8ilIbe0ach/Y/c8UU4BmAt6iIufCgUeXllHg4CEAnFiW359Oecgg1JTJuVKHNaSKRxrT
-	O7c3V6tdIcPeSn2M3vjJJP9rgtp+trpGw6BLWUFYJv6IikuCtYsN8N0hs5wU3qLCJEsg
-	NfNw==
-X-Received: by 10.224.105.75 with SMTP id s11mr6420131qao.40.1369218940623;
-	Wed, 22 May 2013 03:35:40 -0700 (PDT)
-Received: from localhost.localdomain
-	(pool-96-240-170-171.ronkva.east.verizon.net. [96.240.170.171])
-	by mx.google.com with ESMTPSA id hs4sm6455076qeb.8.2013.05.22.03.35.39
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 22 May 2013 03:35:39 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 May 2013 06:35:37 -0400
-Message-Id: <1369218937-26345-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.7.11.7
-Subject: [meta-oe][PATCHv3] gnuradio : Update recipe to build for all machines.
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ve0-f179.google.com (mail-ve0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B636608CA;
+	Wed, 22 May 2013 11:01:56 +0000 (UTC)
+Received: by mail-ve0-f179.google.com with SMTP id oz10so1315866veb.38
+	for <multiple recipients>; Wed, 22 May 2013 04:01:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=kRBTrwutiESq1UNRWIZWHGF4rAjw4DGgxnxebJZ7+mg=;
+	b=tfp3tATs3QltdYqvEziG7yeEhPkkQgXO6bFE2tf3HP7h5wkbk2Xj+k773y3cGIh0nN
+	DRXvFwHeRL3+3U31lejSDo1agHl96Y9NmAvAgG389vpMQf0sjxMEj2udK+N9PCwP/DbV
+	Cx/+bNk//wdQ7wEOxCl/rXr9Fn6JOhZQtRwzfJmWwtb3B+49LfmDQBEha+eUBjUGlXKz
+	8UMpeErQWycgcs2n5AeQ7LiSRwFO3Vh84L2y99Fqs7X5GZyfK0olyug60v2zpQaIrz3H
+	j9hYU+UsMYFfbNg9gHSXVx5sTocSdWkMx79Irdv5EzV+2VMMUsR7PKZQLPIESGmQk4iW
+	vFNA==
+MIME-Version: 1.0
+X-Received: by 10.220.85.66 with SMTP id n2mr2615548vcl.31.1369220516510; Wed,
+	22 May 2013 04:01:56 -0700 (PDT)
+Received: by 10.52.18.177 with HTTP; Wed, 22 May 2013 04:01:56 -0700 (PDT)
+In-Reply-To: <CAJTo0Lb-d-ZOYc+WxaONDXy+vwbsEJKG8SsnQ0LDP7og5Sm9SQ@mail.gmail.com>
+References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
+	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
+	<CAJTo0Lb-d-ZOYc+WxaONDXy+vwbsEJKG8SsnQ0LDP7og5Sm9SQ@mail.gmail.com>
+Date: Wed, 22 May 2013 13:01:56 +0200
+Message-ID: <CALbNGRQPq9X0JiooyTz11i+-v8zpUHCVWO3R4qzPr3tyJgmKnQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org, ross.burton@intel.com
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,62 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 10:35:39 -0000
+X-List-Received-Date: Wed, 22 May 2013 11:01:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Also updated the git repo address after recent changes in hosting.
+On Wed, May 22, 2013 at 12:31 PM, Burton, Ross <ross.burton@intel.com> wrot=
+e:
+> On 22 May 2013 09:31, Andreas M=C3=BCller <schnitzeltony@googlemail.com> =
+wrote:
+>> 1. systemd migration:
+>>
+>> From what I see the only major step left over is to bury meta-systemd.
+>> The only appends found there are those for oe-core. I asked for this
+>> long time ago [1] and support was offered but...
+>
+> This is a 1.5 goal, and will be getting around to it but I'm also
+> going on holiday in the first week of June, so if you want to send
+> patches before I get to it them you're more than welcome.
+>
+>> * Are there plans to update gtk3 to 3.8.x to have wayland support?
+>
+> Yes, another 1.5 feature I own.  I have most of the pieces around now.
+>  If anyone has a ARM or PPC board to immediate hand, then doing a
+> configure of at-spi2-core and at-spi2-gtk on the devices to get the
+Haven't found at-spi2-gtk. Do you mean at-spi2-atk?
 
-The recipe failed to build for machines without neon as a tune feature.
-The cmake config options have been changed so that it configures properly
-now.
-
-Also dropped documentation from build to work around a doc generation problem.
-
-Test on armv7a, x86, and x86-64.
-
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-index edd4615..45f4c77 100644
---- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-+++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-@@ -70,7 +70,7 @@ SRCREV = "5f69899e059e9bea58f92af61f70fc3f63825087"
- GIT_REPO = "gnuradio.git"
- GIT_BRANCH = "master"
- 
--SRC_URI = "git://gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
-+SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
- "
- 
- S="${WORKDIR}/git"
-@@ -82,21 +82,18 @@ EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE \
-                  -DENABLE_GR_FCD=OFF \
-                  -DENABLE_GR_WXGUI=OFF \
-                  -DENABLE_GR_VIDEO_SDL=OFF \
-+                 -DENABLE_SPHINX=OFF -DENABLE_DOXYGEN=OFF \
-                  -DIMPORT_EXECUTABLES=${S}/gr-vocoder/lib/generate_codebook.txt \
-                  -DQT_HEADERS_DIR=${STAGING_INCDIR}/qt4 \
-                  -DQT_QTCORE_INCLUDE_DIR=${STAGING_INCDIR}/qt4/QtCore \
-                  -DQT_LIBRARY_DIR=${STAGING_LIBDIR} \
-                  -DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so \
-                  -DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so \
-+                 ${@base_contains('TUNE_FEATURES', 'neon', \
-+                     '-Dhave_mfpu_neon=1', '-Dhave_mfpu_neon=0', d)} \
- "
- 
- inherit distutils-base cmake pkgconfig
- 
- EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
- 
--# Only builds for machines with neon instructions. Problem is in upstream cmake.
--python () {
--    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
--        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
--}
--
--- 
-1.7.11.7
-
+Andreas
 
