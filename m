@@ -1,28 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E5DF60657;
-	Wed, 22 May 2013 10:08:14 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 22 May 2013 03:08:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,718,1363158000"; d="scan'208";a="341605257"
-Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by fmsmga002.fm.intel.com with ESMTP; 22 May 2013 03:08:13 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Date: Wed, 22 May 2013 11:08:12 +0100
-Message-ID: <57053358.LVqALflxil@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-21-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <20130522091738.GH32431@jama>
-References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-	<CANyK_8cbVGMQkD7_KEd5KYTBxP+ZT5jY6VVVpdSAv_uY7JPY1w@mail.gmail.com>
-	<20130522091738.GH32431@jama>
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ve0-f179.google.com (mail-ve0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D467560657
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 10:31:28 +0000 (UTC)
+Received: by mail-ve0-f179.google.com with SMTP id oz10so1295365veb.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 03:31:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding:x-gm-message-state;
+	bh=UlmCOckd974NxVMTBnxkvuH8KLMjRb0AEwv4C/XtJNs=;
+	b=nqtAFJRNkX2fvig/5iYl20yQOM336r8eSNfzRXsMEFw3NBYbwAcik7UZRMBS0SfLoe
+	ktEGbk/0pZgLSMWrOYNySxzwV+sra9oZvpM3FRILvIuyHmh2oSdBKcCCypYyCbsp3VYv
+	zofqhhJxTgVuDncs/u/ri03nMh8bN0SbSwYwtdNSZG0utyhOObUeH/uMVYDVoefjjgOI
+	CczZFFnNF/n/UMxzm6Tk9v/Ej6VY5LxonEYpsLQRC6RtAeDgBGqqYqafTcsn5Sn5Op4c
+	qzZ2qW04AK39AhACSh+HQHiAhJfSDTKfwK2uwSuTFopGCu8yhX1uYlSZBs8LfgmshTZW
+	RaUA==
+X-Received: by 10.220.191.129 with SMTP id dm1mr2566056vcb.54.1369218689464;
+	Wed, 22 May 2013 03:31:29 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] [RFC] Layers, PRINC and bbappends
+Received: by 10.220.98.7 with HTTP; Wed, 22 May 2013 03:31:09 -0700 (PDT)
+In-Reply-To: <CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
+References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
+	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 22 May 2013 11:31:09 +0100
+Message-ID: <CAJTo0Lb-d-ZOYc+WxaONDXy+vwbsEJKG8SsnQ0LDP7og5Sm9SQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQn49RsB7JPXRRSvYcYg4So970C1lFCF3TK1X0MCctElADUaVuyFAZ+8pXvuoOsyeTNaH+Zx
+Cc: tsc <tsc@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,45 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 10:08:14 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 22 May 2013 10:31:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 22 May 2013 11:17:38 Martin Jansa wrote:
-> On Wed, May 22, 2013 at 09:47:39AM +0100, Paul Barker wrote:
-> > I've just sent a patch to the yocto@ list to fix this but it's brought
-> > up two things:
-> > 
-> > 1) In openembedded-core/meta/classes/image.bbclass SPLASH is set with
-> > '?='. I'm overriding this with '=' in
-> > meta-raspberrypi/conf/machine/raspberrypi.conf which means it can't be
-> > overridden further in local.conf. Is this worth changing to '??=' in
-> > image.bbclass, '?=' in the machine conf so that it can be overridden
-> > with '=' in local.conf? Is my understanding of the overrides correct
-> > here?
-> 
-> You can still use:
-> SPLASH_forcevariable = "foo"
-> SPLASH_your-distro = "foo"
-> SPLASH_your-machine = "foo"
-> or any other OVERRIDE in local.conf.
+On 22 May 2013 09:31, Andreas M=C3=BCller <schnitzeltony@googlemail.com> wr=
+ote:
+> 1. systemd migration:
+>
+> From what I see the only major step left over is to bury meta-systemd.
+> The only appends found there are those for oe-core. I asked for this
+> long time ago [1] and support was offered but...
 
-This is true; FWIW as the original author of that line in image.bbclass I
-wouldn't object to changing it to ??= though.
+This is a 1.5 goal, and will be getting around to it but I'm also
+going on holiday in the first week of June, so if you want to send
+patches before I get to it them you're more than welcome.
 
-Having said that, I would note that people are best advised not to try to set
-too much from local.conf, especially when it's stuff that affects what is in the
-final image. Anyone doing anything moderately custom should really have their
-own distro config. FYI, we now have a section in the Yocto Project development
-manual documenting this:
+> * Are there plans to update gtk3 to 3.8.x to have wayland support?
 
-http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#creating-your-own-distribution
+Yes, another 1.5 feature I own.  I have most of the pieces around now.
+ If anyone has a ARM or PPC board to immediate hand, then doing a
+configure of at-spi2-core and at-spi2-gtk on the devices to get the
+right alignment values (yet more alignment checks in configure.ac)
+would be incredibly useful.
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
