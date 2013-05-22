@@ -1,38 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 594D060655;
-	Tue, 21 May 2013 21:45:43 +0000 (UTC)
-Received: by mail-pa0-f50.google.com with SMTP id fb10so1136135pad.9
-	for <multiple recipients>; Tue, 21 May 2013 14:45:44 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
+	[209.85.160.45])
+	by mail.openembedded.org (Postfix) with ESMTP id D0BD960420
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 02:18:38 +0000 (UTC)
+Received: by mail-pb0-f45.google.com with SMTP id mc17so1212612pbc.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 May 2013 19:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=kQHI92+sphrqCxffe6Rabq1czmeAgkE/uhn8dJRBoro=;
-	b=ed0uNaOn+lLY62Wr8371B8CJ+0/wiMepRdJ2B3/jwx0CzmsqwZoTMPybMjfByFD9/i
-	LFXBWOqle4Im7H0z/5dOsXR0JXJDeIs4Fcg5/hEtmiCRpTMNXvSVafd2lffhhhs4ipk5
-	jYqrf0waonWtYPDDRmBUbUkpOYPUZCJwob/VNcfwaZD1MecT7PqarG2bWfpezz+Ywa0X
-	CirVkS4D1eeYOAlqOELJWoWoCVBJLVE1dw1txNG7Pg3+SwTGF0vj8IezJcxwu0slhjCN
-	MdNCNc297/BD18gQRN6ZAv2X6ihcVmDuNvNRAWJfrBmY2RLc8p0za78hUwkIUloWd/mc
-	q8/A==
-X-Received: by 10.68.90.197 with SMTP id by5mr4596876pbb.196.1369172744770;
-	Tue, 21 May 2013 14:45:44 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	tq8sm4176552pbc.30.2013.05.21.14.45.42 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 21 May 2013 14:45:44 -0700 (PDT)
-Date: Tue, 21 May 2013 23:45:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20130521214539.GF32431@jama>
-References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=nAT+DEUETiHzNPfXG9GE55ZnlEu5Cs733fyyHM85k9Q=;
+	b=mS2pOJvjPric/8sR/PLm9y7giG+IwJyMq4vDNqKQ/WQKgdIa1shmSgp0hFLitfPAb3
+	HrpSeLMQMWiSDKE0GXWC8Hvd4zzGmFl77vg9/eTImSwq/co/wa8QH0DcY3mB0BQdodBu
+	GEq2Ct/WRG9SqpKmUHwjE2BONAVfflOQ+aV0LiyxzGbHimR5WpWPu1sEgNdnSzUz5oe/
+	5AsOIOGVg8//tS2IizRz7zXmI1Q9rYeWCbjZpF2ho4U59j7lT9N7jcVaCwMj7E/f1SKr
+	AVHaorxRMh5/uIOpkPvz+hks570WHPmbh+J8gTNNQ8dBOz4MMMPgF34KUv3OXN6+IUJv
+	wnzA==
+X-Received: by 10.68.180.67 with SMTP id dm3mr5461135pbc.110.1369189120006;
+	Tue, 21 May 2013 19:18:40 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id 10sm5004849pbr.45.2013.05.21.19.18.38
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 21 May 2013 19:18:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 May 2013 19:16:49 -0700
+Message-Id: <1369189009-18847-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-handheld][PATCH] ezxd: Add LIC_FILES_CHKSUM to recipe and -fPIC to CFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,80 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2013 21:45:43 -0000
-X-Groupsio-MsgNum: 44820
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fwqqG+mf3f7vyBCB"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 May 2013 02:18:38 -0000
 
---fwqqG+mf3f7vyBCB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This recipe has been failing to build. With this patch
+it now builds. build tested for beaglebone
 
-On Tue, May 21, 2013 at 12:36:54PM -0700, Jeff Osier-Mixon wrote:
-> TSC could chair it but make it a public IRC thing
-> -> proposal: monthly IRC meeting to replace one of the bi-weekly TSC
-> meetings, open to all
->  timezone will be an issue
-> =3D> think about for next meeting
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+CC: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ recipes-bsp/ezx/ezxd_svn.bb |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-I really like this idea, I think it will improve situation with:
-status updates - people can watch it immediately on IRC, instead=20
-  of waiting for minutes
-lack of community input - easier for people to comment on issues or add
-  to agenda when they see discussion about related topic
-community involvement - seeing some AR discussed a month ago is too late
-  to volunteer
+diff --git a/recipes-bsp/ezx/ezxd_svn.bb b/recipes-bsp/ezx/ezxd_svn.bb
+index 6dbcd0f..7b69454 100644
+--- a/recipes-bsp/ezx/ezxd_svn.bb
++++ b/recipes-bsp/ezx/ezxd_svn.bb
+@@ -1,12 +1,12 @@
+ DESCRIPTION = "Open implementation of motorola's tapisrv, replaces opentapi"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv2+"
+ SECTION = "devel"
+ AUTHOR = "Daniel Ribeiro"
+ 
+ SRCREV = "2513"
+ PV = "0.0+svnr${SRCPV}"
+ PR = "r4"
+-
++LIC_FILES_CHKSUM = "file://plugin.c;endline=19;md5=16da36fbb577507b411368f133ce2067"
+ SRC_URI = "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;protocol=http \
+            file://ezxd.init \
+           "
+@@ -18,9 +18,9 @@ INITSCRIPT_PARAMS = "start 00 S ."
+ 
+ S = "${WORKDIR}/${PN}"
+ 
+-CFLAGS_append = " -DDEBUG " 
++CFLAGS_append = " -DDEBUG -fPIC " 
+ 
+-TARGET_CC_ARCH += "${LDFLAGS}"
++TARGET_CC_ARCH += "${LDFLAGS} -fPIC"
+ 
+ do_configure() {
+         # Comment out both CC and CROSS definitions
+-- 
+1.7.9.5
 
-> f. python 3
-> hard to support both py2 and 3
-> two issues: python3 on target, using p3 for bitbake
-> don't think we can reasonably support both
-> make the switch in the 1.5 timeframe?
-> need to start informing people of it -now-..
 
-p3-only looks good to me, I would be happy to help testing this and then
-drop p2 from my minimalistic chroot. There are also some external tools
-like opkg-utils (IIRC this one is 99% p3 compatible now, I can take care
-of remaining).
-
-> (9:32:11 AM) RP: For 3a, I'd agreed to provide status updates. I've
-> now provided two of these
-> (9:32:24 AM) Jefro: wiki page is not yet done
-> (9:32:27 AM) RP: I'm trying to turn it into a habit
-> (9:32:50 AM) RP: Did people like/dislike them?
-
-I like them.
-
-> (9:36:03 AM) bluelightning: it's worth noting I'm aware that some
-> people have migrated recipes and then kept them in their own layers
-> (9:36:35 AM) bluelightning: which is not hugely bad but it would be
-> nice if they could send them somewhere more appropriate
-> (9:36:59 AM) RP: bluelightning: any idea why they're doing that?
-> Simply don't know any different?
-
-For many recipes I've used meta-shr as "staging" area to test it on more
-builders and probably by more people before moving them to meta-oe.
-
-But it's also easy to forget them in "staging" area, when they just
-work for me (as I have meta-shr always included) and nobody shows any=20
-interest in them.
-
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---fwqqG+mf3f7vyBCB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlGb6wIACgkQN1Ujt2V2gBy0RwCgqbF2yoV9+VA8c+CZYBP6+smz
-V7UAn3D933Hcw7EVzwA6zhbOnJZAoR9k
-=ejGf
------END PGP SIGNATURE-----
-
---fwqqG+mf3f7vyBCB--
