@@ -1,35 +1,40 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 45EEF60881
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-pb0-f43.google.com (mail-pb0-f43.google.com
+	[209.85.160.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 98CC960984
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 14:33:50 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id u57so1240043wes.12
+	Wed, 22 May 2013 14:49:30 +0000 (UTC)
+Received: by mail-pb0-f43.google.com with SMTP id ma3so1777073pbc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 07:33:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=sV5GyfkgVksdXjoDwG8lsAnhPRcjWoenKHsw18+15bE=;
-	b=t/Gf0beq/biQgpdUS3v8HkQqTEBfIvhGvpkcXWZrYQUoaie09ZXVv/SW9r6QD3HZJB
-	+InJXgoIgSLc/SwOa8MKTbOX+lQ5SZOajAd4ux3JxfT8d+ODE34IINtRmJaFhOeCmDrn
-	srGUk3K0WOzHrHhG//yO5GawVxMJLnzY0sM6xeaxXxOe2ymYPShlqdaJcpUCdKBBx33c
-	Ctz7A7OapdDkCVh87x1eulz7Ch+/fEFmX5PuHQBmnTvEWImZXJWmL2msehtihDMV0ZBp
-	NCB/OqhhV7Bj2AJ1JkhNTJ/A6pMo43HWvV0uqC3ewwTnjrQKQi0UN5kVAeM0EafjDbVB
-	32Iw==
-MIME-Version: 1.0
-X-Received: by 10.180.109.84 with SMTP id hq20mr15392680wib.11.1369233229950; 
-	Wed, 22 May 2013 07:33:49 -0700 (PDT)
-Received: by 10.216.52.133 with HTTP; Wed, 22 May 2013 07:33:49 -0700 (PDT)
-In-Reply-To: <519CCFFF.2060506@windriver.com>
+	Wed, 22 May 2013 07:49:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=DewgfIOCMZvFc4UQyVZOiglcY3ClcxmBb8P3DEe2AGw=;
+	b=oolBUDOLiiTcB1Z9RN88+ei7JRzqlXYIMxny017TGSmkNvTrg6QbCKPM4Gl4XRyUlN
+	4mzSuB5z3FRm8YsCi+Rd11vjxOj9MMz0nJAu+LKE0VByUG6s2ma2/i35ZVgUhnVMUoDP
+	bWJXSxnmcf5OKe4iXRlVXVoGzqigcosRZTfAvEvMHIlSO+1SWMLtIR9SLJDYmnnlkXUV
+	yrHJhM4yFGibeb0o6WMiT5+1EC8+oD/TgU1swFfXzkK7kfw26cQs7eXdK8Obq2Qf+81F
+	3g45nbhBzYGROHDqmek8lkKIeW6LUjUefMoHtfpX1YlIDPyeBJmOrrWpVBtMqgzw6aKT
+	b9sw==
+X-Received: by 10.68.180.67 with SMTP id dm3mr8110870pbc.110.1369234171438;
+	Wed, 22 May 2013 07:49:31 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	zs12sm8432104pab.0.2013.05.22.07.49.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 22 May 2013 07:49:30 -0700 (PDT)
+Date: Wed, 22 May 2013 16:49:25 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130522144925.GJ32431@jama>
 References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
 	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
 	<519CCFFF.2060506@windriver.com>
-Date: Wed, 22 May 2013 16:33:49 +0200
-Message-ID: <CALbNGRTbELHNDyfF_0zfu9qL=ZpG17ffx3DU-bw8GNbrKODcgA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+In-Reply-To: <519CCFFF.2060506@windriver.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,122 +49,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 14:33:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 May 2013 14:49:30 -0000
+X-Groupsio-MsgNum: 44838
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mFHiwr52TKrxpkjc"
+Content-Disposition: inline
+
+--mFHiwr52TKrxpkjc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 22, 2013 at 4:02 PM, Mark Hatle <mark.hatle@windriver.com> wrot=
-e:
-> On 5/22/13 3:31 AM, Andreas M=C3=BCller wrote:
->>
->> On Tue, May 21, 2013 at 9:36 PM, Jeff Osier-Mixon <jefro@jefro.net> wrot=
-e:
->>>
->>> OpenEmbedded Technical Steering Committee
->>> 7 May 2013
->>>
->>> Attendees:
->>>    Koen (koen)
->>>    Khem (khem)
->>>    Fray (fray)
->>>    Paul (bluelightning)
->>>    Richard (RP)
->>> Apologies:
->>>
->>> Notes: Jefro
->>>
->>> Agenda at a glance:
->>>
->>> 1. pick a chair
->>> 2. new issues
->>> 3. lingering issues
->>> a. systemd merge unhappiness
->>> 4. projects in progress - status
->>> a. oe-classic recipe migration status
->>> b. oe-core release
->>> c. systemd into master
->>> d. meta-oe appends/overlayed recipes RFC
->>> e. 1.5 planning
->>> 5. infrastructure
->>> a. mailing list moving to YP server, in progress
->>> b. oe.org flooded
->>> 6. projects deferred
->>> a. raise awareness of "janitor" list, QA "bugs"
->>> b. document whitespace changes to the shell
->>> c. raise ntp with the Yocto Project [RP]
->>>
->> There are three issues I would like to comment on:
->>
->> 1. systemd migration:
->>
->>  From what I see the only major step left over is to bury meta-systemd.
->> The only appends found there are those for oe-core. I asked for this
->> long time ago [1] and support was offered but...
->>
->> 2. indention:
->> Reading between the lines there is some unhappiness on meta-oe using
->> four spaces for shell and python code. I personally agree with Martin
->> here because I have not seen a technical reason for shell requiring
->> tabs so far. To me this looks like a style decision which increases
->> the burden to submit for low-skilled people like me. Could somebody
->> please enlighten me: For what technical reason do we need tabs in
->> shell code?
->
->
-> (Background) When the spacing was decided, looking at the existing OE
-> recipes and classes, the majority of things were indented such that pytho=
-n
-> used tabs, and recipe (shell scripting) used spaces.  During the cleanup =
-of
-> the scripting sections it was decided that the least impact to all was
-> desirable.  Thus the python-tab, shell-spaces convention.
+On Wed, May 22, 2013 at 09:02:39AM -0500, Mark Hatle wrote:
+> (Background) When the spacing was decided, looking at the existing OE rec=
+ipes=20
+> and classes, the majority of things were indented such that python used t=
+abs,=20
+> and recipe (shell scripting) used spaces.  During the cleanup of the scri=
+pting=20
+> sections it was decided that the least impact to all was desirable.  Thus=
+ the=20
+> python-tab, shell-spaces convention.
 
-??? - see
+"python used tabs, and recipe (shell scripting) used spaces"
+"python-tab, shell-spaces convention"=20
 
-commit 604d46c686d06d62d5a07b9c7f4fa170f99307d8
-Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-Date:   Wed Jul 11 17:33:43 2012 +0000
+=2E..=20
 
-    Convert tab indentation in python functions into four-space
+you have it WRONG
 
-    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-
-
-So now at least I am totally confused ( which might be an argument
-preferring only one type of indentation )
-
->
 > It's true that shell scripts don't really care about indenting, so the fo=
-ur
+ur=20
 > spaces is just a convention that was decided on based on that.  The conce=
-rn
-> is that if we go in and change the convention now, it's going to cause a =
-lot
-> of potential disruption.
->
+rn is=20
+> that if we go in and change the convention now, it's going to cause a lot=
+ of=20
+> potential disruption.
+>=20
 > So the answer isn't that it's a technical reason, it's a community reason=
-.
+=2E=20
+> Don't rock the boat on something that is just going to annoy people and p=
+rovide=20
+> no actual help.  So far I haven't seen a compelling argument to change th=
+e=20
+> convention BTW, other then (paraphrase) "I don't like spaces, and want to=
+ use=20
+> tabs".  (Note, when I write shell scripts, I prefer tabs as well..)
 
-Please give me the link to the decision written and I'll follow the communi=
-ty.
+layers in meta-oe repo were using tabs in less shell tasks then some
+amount of spaces.
 
-> Don't rock the boat on something that is just going to annoy people and
-> provide no actual help.  So far I haven't seen a compelling argument to
-> change the convention BTW, other then (paraphrase) "I don't like spaces, =
-and
-> want to use tabs".  (Note, when I write shell scripts, I prefer tabs as
-> well..)
->
+Using combination of tabs and spaces in the same file (and even on the
+same lines) is quite bad, because it looks different based on tab length
+and can show wrong indentation in case like 8 spaces and 2
+4-character-wide tabs on next line (where author was seeing 18 spaces on
+2nd line)
 
-Please don't misunderstand me: I thought I have read some sidenotes on
-meta-oe using four-spaces for all type of code:
+It was acked by 2 TSC members:
+Koen: http://lists.openembedded.org/pipermail/openembedded-devel/2013-April=
+/090162.html
+Khem: http://lists.openembedded.org/pipermail/openembedded-devel/2013-April=
+/090203.html
 
-(9:31:13 AM) fray: ok.. so what about the comment of an 'oe'
-maintainer ignoring the TSC?
+3rd member of TSC and maintainer of some meta-oe layers, was aware of this =
+change=20
+and wasn't complaining:
+Paul: http://lists.openembedded.org/pipermail/openembedded-devel/2013-April=
+/090184.html
 
-Maybe I am over-interpreting this. Whatever, this is not that
-important and should stop here - we face other challenges - sorry for
-the noise
+Joe who also maintains layer in meta-oe repo agreed that it's good idea:
+http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/09018=
+1.html
 
-Andreas
+Otavio also contributes a lot and agreed with that change:
+http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/09014=
+6.html
 
+Andreas is sending also lot of patches and formally supported that
+change now.
+
+You on other hand don't even follow meta-networking/MAINTAINERS file
+when sending patches...
+
+When this was discussed about a year ago in TSC, the most important
+reason was complicating backports, you can read something about it my RFC:
+http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/09013=
+5.html
+Now close to creating dylan branch for meta-openembedded is imho best
+time to do this, not many changes from released dylan will be backported
+to danny, because people will start moving to newer release instead of
+backporting more and more stuff to old one (also resolving possible
+whitespace merge conflict it not hard). Causing conflicts for merge was
+IIRC most important reason why my proposal was rejected for oe-core.
+
+Original proposal here
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/026176.html
+was also supported by
+Chris http://lists.linuxtogo.org/pipermail/openembedded-core/2012-July/0262=
+01.html
+
+Since the change I had to manually update only 6-10 patches submitted for
+meta-oe and backporting patches from dylan to danny or denzil is not
+influenced by this change.
+
+And TSC minutes which discussed it say:
+Reluctant conclusion: tabs for shell, 4 spaces for python.
+
+So please stop trying to show it as action of one maintainer who
+decided to go against TSC decision and to scr3w everybody.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--mFHiwr52TKrxpkjc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlGc2vUACgkQN1Ujt2V2gBxJNQCgpAjhQWhuP42DeqJMJciWXQNL
+sJUAoIFWGkfEE5c2YSvT22kB/PdZWSDx
+=sGGQ
+-----END PGP SIGNATURE-----
+
+--mFHiwr52TKrxpkjc--
