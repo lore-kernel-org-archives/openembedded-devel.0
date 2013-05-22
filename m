@@ -1,37 +1,37 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vc0-f173.google.com (mail-vc0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B0FA60984;
-	Wed, 22 May 2013 08:47:58 +0000 (UTC)
-Received: by mail-vc0-f173.google.com with SMTP id ht10so1133329vcb.18
-	for <multiple recipients>; Wed, 22 May 2013 01:47:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=cgCg0ZxS7VXMc3VGTGoe+Ej8QVq00P9GK9JxjF/kQko=;
-	b=sjcE4rPwPczM2tj5sbM5qsDR3A1Wu8sMWyhn7bgwOYmI7a+eGY+qIWecD3O0HID/Nh
-	5bwLODFnekfcZ0vpY59QXBOI8rQTWZ/syYUKwYz3nfBoTRDA/e73lIZE2sTgjbSQ/P+F
-	sVWdJuPdRITasRpBj23alYeLwz9/Qzkx0JDDq7bdSRzjSVhQv/AB6nbuR6rxOprk1+HU
-	jugbTLYJ537jVWrRBQb6lqRF+mGsEErQgGusnhA4od98E+h/qlc1901sGwjOsO9z6UtO
-	bI3ykp4jm7gs4vqvhbuyg6mtslimusZzFYFWDBxb7THyAH6k7gA8gJUgQLCtiwoTRDVA
-	w8Cw==
-X-Received: by 10.220.172.2 with SMTP id j2mr2444608vcz.17.1369212479450; Wed,
-	22 May 2013 01:47:59 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 31E8660984
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 08:53:06 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id d41so1005537eek.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 01:53:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Ba8UPYIMd23n20G0SkeawWT3d5ukfnhYFNHxIBJ0gss=;
+	b=LMx8vFPfAvIUT11EiVbzsb/LGi97HSFA6wnvzBSFBUmGsY17vxZklamg6WkQhvmYNK
+	hrGXiyq8PuElSrAaneCsFyr5nbrMAhbnp1JcPtSXr+9xkwbU6L03vLuQjZT0pEnk5m+7
+	pJwxsYUwxadfOT4DUuavO7Q5oiCWwxVoTFFxfN8m6aSjixNtk87kyDeXymtnVqA67HuU
+	5/w3I46QrZnXzcTmff//qnE2N1WDyA5c+b7SjXzcQNisR3rVFqo4nxzcKt+f7jTVTWww
+	GmCXleAqdQGBfKN+j6uohyJWWzPdBMHj88wi65pInbsnanFPSM/G5wZaqol8itKA1cSo
+	8nzA==
+X-Received: by 10.14.181.131 with SMTP id l3mr16750938eem.16.1369212786098;
+	Wed, 22 May 2013 01:53:06 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-160-204.unitymediagroup.de.
+	[95.222.160.204])
+	by mx.google.com with ESMTPSA id s8sm8679868eeo.4.2013.05.22.01.53.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Wed, 22 May 2013 01:53:05 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 May 2013 10:50:36 +0200
+Message-Id: <1369212636-6760-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.48.5 with HTTP; Wed, 22 May 2013 01:47:39 -0700 (PDT)
-In-Reply-To: <CANyK_8c4t0Oy1p8sktO-rxMfc1CR+-gbkXYH1RzDSTRy6qQORQ@mail.gmail.com>
-References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-	<1368650024.18324.102.camel@ted>
-	<CANyK_8c4t0Oy1p8sktO-rxMfc1CR+-gbkXYH1RzDSTRy6qQORQ@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Wed, 22 May 2013 09:47:39 +0100
-X-Google-Sender-Auth: bifhZ4LE1P0-6hBvqEXuv2VpNaE
-Message-ID: <CANyK_8cbVGMQkD7_KEd5KYTBxP+ZT5jY6VVVpdSAv_uY7JPY1w@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [RFC] Layers, PRINC and bbappends
+Subject: [meta-oe/master/dylan] icon-slicer: fix native build by depending on gdk-pixbuf only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,56 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 08:47:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 May 2013 08:53:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 16 May 2013 00:02, Paul Barker <paul@paulbarker.me.uk> wrote:
-> On 15 May 2013 21:33, Richard Purdie <richard.purdie@linuxfoundation.org> wrote:
->
->>
->> (e.g. when I include
->> meta-raspberrypi, it changes the psplash logo, regardless of whether I'm
->> building for the pi).
->>
->> In many ways the bbappend is too easy and encourages anti-social
->> behaviour. I would recommend bouncing meta-rpi as being non yocto
->> project compatible due to the psplash issue if it were to apply which it
->> has not.
->>
->
-> I noticed the psplash logo when building a qemu image with
-> meta-raspberrypi included, will look into fixing it so it only goes
-> into MACHINE="raspberrypi" builds. Copying in yocto@ and Andrei as
-> this is raspberrypi related.
->
+| checking for GDK_PIXBUF... no
+| configure: error: GTK+-2.0 is required to compile icon-slicer
+<...>
+ERROR: Task 2643 (virtual:native:/home/andreas/data/oe-core/sources/meta-openembedded/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb, do_configure) failed with exit code '1'
 
-I've just sent a patch to the yocto@ list to fix this but it's brought
-up two things:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../icon-slicer/icon-slicer_0.3.bb                 |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-1) In openembedded-core/meta/classes/image.bbclass SPLASH is set with
-'?='. I'm overriding this with '=' in
-meta-raspberrypi/conf/machine/raspberrypi.conf which means it can't be
-overridden further in local.conf. Is this worth changing to '??=' in
-image.bbclass, '?=' in the machine conf so that it can be overridden
-with '=' in local.conf? Is my understanding of the overrides correct
-here?
+diff --git a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb b/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
+index b77fbf5..d6cfd35 100644
+--- a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
++++ b/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
+@@ -1,8 +1,7 @@
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-DEPENDS = "gtk+ popt"
+-DEPENDS_class-native = "popt-native"
++DEPENDS = "gdk-pixbuf popt"
+ 
+ SRC_URI = "http://freedesktop.org/software/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-Makefile.am-no-examples.patch"
+-- 
+1.7.6.5
 
-2) If you look at the patch I've basically added the raspberrypi logo
-as an extra psplash image and overridden SPLASH in the machine conf to
-make this the default for raspberrypi. Is this the intended approach
-for customising psplash images? There's a lot of interesting logic in
-the psplash recipe and it took me a while to figure out. If I've got
-it right it may be worth adding some documentation comments to explain
-this method. If I've got it wrong could someone correct me.
-
-Both of these (assignment change and adding documentation) would be
-patches to openembedded-core.
-
-Thanks.
-
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
 
