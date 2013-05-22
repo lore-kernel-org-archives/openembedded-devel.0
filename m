@@ -1,39 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id D838061AD0;
-	Wed, 22 May 2013 15:19:55 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id g10so1791825pdj.27
-	for <multiple recipients>; Wed, 22 May 2013 08:19:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yWSAsN8jxFltjisLe2ZKDZPluGFRSKkwTfgRzsD15Ao=;
-	b=OIqbIwNhVVJ1wQz6SUc+Ah+I3TJ/5DgUqUU8NYIERLGCouCgtT+Ce1A0mVfsUlc4LV
-	MkSz8HU8mVv66XOa2oDYT9+cCYc2V56Uys8oJtDFs3udq3WPdxKO344R/wghzdn9fVQB
-	h6UTcsalH66B4/uOluZuImcdM3o47cI65SeUxF8W5Usu9qH1CYGAEHarenvfo2Gh7XE7
-	W45BmxmRZs2J9Y7KQQw21RN91Qk4jwkLpTQrvzZHq4OLxaDKrAktubs4gmJXemRW+QqO
-	gFPTpea5ZU8+2cwuxMIPoVF0kKGqqn78moccC1YoN9ff5I73y3SPVXoG2cqxOiYSP9jI
-	w8Fg==
-X-Received: by 10.66.11.164 with SMTP id r4mr8757752pab.221.1369235996486;
-	Wed, 22 May 2013 08:19:56 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	al2sm7623385pbc.25.2013.05.22.08.19.53 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 22 May 2013 08:19:55 -0700 (PDT)
-Date: Wed, 22 May 2013 17:19:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130522151950.GL32431@jama>
-References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
-	<519CCFFF.2060506@windriver.com> <20130522144925.GJ32431@jama>
-	<3795534.7yd4ZVD7nC@helios>
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 22C086A352
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 15:41:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r4MFfRNu022935
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 08:41:27 -0700 (PDT)
+Received: from Marks-MacBook-Pro.local (172.25.36.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.342.3; Wed, 22 May 2013 08:41:27 -0700
+Message-ID: <519CE726.7090101@windriver.com>
+Date: Wed, 22 May 2013 10:41:26 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
 MIME-Version: 1.0
-In-Reply-To: <3795534.7yd4ZVD7nC@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
+To: <openembedded-devel@lists.openembedded.org>
+References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
+	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
+	<519CCFFF.2060506@windriver.com>
+	<CALbNGRTbELHNDyfF_0zfu9qL=ZpG17ffx3DU-bw8GNbrKODcgA@mail.gmail.com>
+In-Reply-To: <CALbNGRTbELHNDyfF_0zfu9qL=ZpG17ffx3DU-bw8GNbrKODcgA@mail.gmail.com>
 Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -48,122 +39,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 15:19:56 -0000
-X-Groupsio-MsgNum: 44841
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="W/+CTqSGWdiRg+8j"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 May 2013 15:41:27 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
---W/+CTqSGWdiRg+8j
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 5/22/13 9:33 AM, Andreas Müller wrote:
+> On Wed, May 22, 2013 at 4:02 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>> On 5/22/13 3:31 AM, Andreas Müller wrote:
+>>>
+>>> On Tue, May 21, 2013 at 9:36 PM, Jeff Osier-Mixon <jefro@jefro.net> wrote:
+>>>>
+>>>> OpenEmbedded Technical Steering Committee
+>>>> 7 May 2013
+>>>>
+>>>> Attendees:
+>>>>     Koen (koen)
+>>>>     Khem (khem)
+>>>>     Fray (fray)
+>>>>     Paul (bluelightning)
+>>>>     Richard (RP)
+>>>> Apologies:
+>>>>
+>>>> Notes: Jefro
+>>>>
+>>>> Agenda at a glance:
+>>>>
+>>>> 1. pick a chair
+>>>> 2. new issues
+>>>> 3. lingering issues
+>>>> a. systemd merge unhappiness
+>>>> 4. projects in progress - status
+>>>> a. oe-classic recipe migration status
+>>>> b. oe-core release
+>>>> c. systemd into master
+>>>> d. meta-oe appends/overlayed recipes RFC
+>>>> e. 1.5 planning
+>>>> 5. infrastructure
+>>>> a. mailing list moving to YP server, in progress
+>>>> b. oe.org flooded
+>>>> 6. projects deferred
+>>>> a. raise awareness of "janitor" list, QA "bugs"
+>>>> b. document whitespace changes to the shell
+>>>> c. raise ntp with the Yocto Project [RP]
+>>>>
+>>> There are three issues I would like to comment on:
+>>>
+>>> 1. systemd migration:
+>>>
+>>>   From what I see the only major step left over is to bury meta-systemd.
+>>> The only appends found there are those for oe-core. I asked for this
+>>> long time ago [1] and support was offered but...
+>>>
+>>> 2. indention:
+>>> Reading between the lines there is some unhappiness on meta-oe using
+>>> four spaces for shell and python code. I personally agree with Martin
+>>> here because I have not seen a technical reason for shell requiring
+>>> tabs so far. To me this looks like a style decision which increases
+>>> the burden to submit for low-skilled people like me. Could somebody
+>>> please enlighten me: For what technical reason do we need tabs in
+>>> shell code?
+>>
+>>
+>> (Background) When the spacing was decided, looking at the existing OE
+>> recipes and classes, the majority of things were indented such that python
+>> used tabs, and recipe (shell scripting) used spaces.  During the cleanup of
+>> the scripting sections it was decided that the least impact to all was
+>> desirable.  Thus the python-tab, shell-spaces convention.
+>
+> ??? - see
+>
+> commit 604d46c686d06d62d5a07b9c7f4fa170f99307d8
+> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Date:   Wed Jul 11 17:33:43 2012 +0000
+>
+>      Convert tab indentation in python functions into four-space
+>
+>      Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>
+>
+> So now at least I am totally confused ( which might be an argument
+> preferring only one type of indentation )
 
-On Wed, May 22, 2013 at 04:11:02PM +0100, Paul Eggleton wrote:
-> On Wednesday 22 May 2013 16:49:25 Martin Jansa wrote:
-> > Using combination of tabs and spaces in the same file (and even on the
-> > same lines) is quite bad, because it looks different based on tab length
-> > and can show wrong indentation in case like 8 spaces and 2
-> > 4-character-wide tabs on next line (where author was seeing 18 spaces on
-> > 2nd line)
-> >=20
-> > It was acked by 2 TSC members:
-> > Koen:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/0=
-9016
-> > 2.html Khem:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/0=
-9020
-> > 3.html
-> >=20
-> > 3rd member of TSC and maintainer of some meta-oe layers, was aware of t=
-his
-> > change and wasn't complaining:
-> > Paul:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/0=
-9018
-> > 4.html
->=20
-> I didn't feel like I had good reason to object other than what had alread=
-y=20
-> been discussed. That should not be construed as me supporting the move. I=
- now=20
-> regret not commenting further at the time.
+Sorry, I've been working on too many projects lately..  I switched python and 
+shell in what I was saying.
 
-I didn't say that you supported that, just that you was aware and didn't
-complain about it being such a bad idea.
+It's python that's four spaces, shell that's tabs.. but the rational is the 
+same.  Python is strict, shell is not.. existing conventions were used.
 
-> The problem is we now have a split between how shell function indentation=
- is=20
-> done in OE-Core and how it is done elsewhere, which as I'm sure you can=
-=20
-> understand is also a suboptimal situation.
+Sorry for the confusion.
 
-The split was there before too, because more recipes were using some
-number of spaces than recipes using tabs "correctly".
+--Mark
 
-> > When this was discussed about a year ago in TSC, the most important
-> > reason was complicating backports, you can read something about it my R=
-FC:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2013-April/0=
-90135
-> > .html Now close to creating dylan branch for meta-openembedded is imho =
-best
-> > time to do this, not many changes from released dylan will be backporte=
-d to
-> > danny, because people will start moving to newer release instead of
-> > backporting more and more stuff to old one (also resolving possible
-> > whitespace merge conflict it not hard).  Causing conflicts for merge was
-> > IIRC most important reason why my proposal was rejected for oe-core.
->=20
-> We've been through this with OE-Core. We do do a significant number of=20
-> backports and it has been painful when whitespace has changed. The TSC=20
-> decision was taken in order to avoid this.
+>>
+>> It's true that shell scripts don't really care about indenting, so the four
+>> spaces is just a convention that was decided on based on that.  The concern
+>> is that if we go in and change the convention now, it's going to cause a lot
+>> of potential disruption.
+>>
+>> So the answer isn't that it's a technical reason, it's a community reason.
+>
+> Please give me the link to the decision written and I'll follow the community.
+>
+>> Don't rock the boat on something that is just going to annoy people and
+>> provide no actual help.  So far I haven't seen a compelling argument to
+>> change the convention BTW, other then (paraphrase) "I don't like spaces, and
+>> want to use tabs".  (Note, when I write shell scripts, I prefer tabs as
+>> well..)
+>>
+>
+> Please don't misunderstand me: I thought I have read some sidenotes on
+> meta-oe using four-spaces for all type of code:
+>
+> (9:31:13 AM) fray: ok.. so what about the comment of an 'oe'
+> maintainer ignoring the TSC?
+>
+> Maybe I am over-interpreting this. Whatever, this is not that
+> important and should stop here - we face other challenges - sorry for
+> the noise
+>
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-Advantage with this is that if you backport patch with different whitespace,
-worse you can cause is few spaces in shell task in danny recipe.
 
-> > And TSC minutes which discussed it say:
-> > Reluctant conclusion: tabs for shell, 4 spaces for python.
-> >=20
-> > So please stop trying to show it as action of one maintainer who
-> > decided to go against TSC decision and to scr3w everybody.
->=20
-> The problem with this is that you've effectively added pressure on Richar=
-d to=20
-> change the the policy in OE-Core despite the explicit decision not to mak=
-e=20
-> this change there.
->=20
-> This kind of overall policy change *must* be done everywhere and not just=
- in=20
-> one place or even the majority of places. We shouldn't ever need to be in=
- a=20
-> position where OE-Core says you must do one thing and meta-oe and other l=
-ayers=20
-> say you must do the opposite.
-
-That's why I was asking to change styleguide and allow new metadata to
-be submitted with spaces, as it's only aestetic so changing styleguide
-wouldn't force to change every recipe (the same as many recipes having
-RDEPENDS next to DEPENDS instead of near the end of file next to
-do_package and FILES_ etc.).=20
-
-Cheers,
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---W/+CTqSGWdiRg+8j
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlGc4hYACgkQN1Ujt2V2gByYNACfXc2ScnE8YuelqhV5bydGhuKS
-/nUAn3eUSPrmXFkOZ4o65bQj9J0r9xSH
-=yCeX
------END PGP SIGNATURE-----
-
---W/+CTqSGWdiRg+8j--
