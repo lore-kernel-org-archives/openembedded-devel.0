@@ -1,39 +1,28 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id AC32F61AD0
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1031560984
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 13:42:04 +0000 (UTC)
-Received: by mail-pb0-f48.google.com with SMTP id md12so1694990pbc.7
+	Wed, 22 May 2013 14:02:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4ME2fcw018140
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 06:42:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=0LOnLhxtcRk8NX12IimGUf6+ojp0DmlDY9EgNyC3RLg=;
-	b=GBOuJYFnxSN/wy/IGn4ztuVvBFMijfy6NpeJ8LlTXGZkTl+sYXpiFzz15ZUQHeO4WF
-	EIIfVQzTnV3PPJK5l0+cWPioEkbmfpOOJKB2FqR2RhegeQkYn3S58c+ihJj2+ayI4Hai
-	34MJfp6SpwcnZ2b1zktoNsZQ3BKiIR0TZlVBhGiz4Ek/c45SiS/TLNiJ0UTCw/RKJ2/t
-	KM5JG0czi1cR9Dar8tXhh7Auzoy7Z4CKzwFlyd0HuKw7R98gQjZ4+tk5RuiI88Sk2AAG
-	j6BGxszCI3Qtj7A0SCZg+le2NnVTkD5K1RNPQlAN9k8hRQie/meBcX0WquHtnxa/FHxR
-	vr1Q==
-X-Received: by 10.66.197.136 with SMTP id iu8mr8617293pac.0.1369230125833;
-	Wed, 22 May 2013 06:42:05 -0700 (PDT)
+	Wed, 22 May 2013 07:02:41 -0700 (PDT)
+Received: from Marks-MacBook-Pro.local (172.25.36.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.2.342.3; Wed, 22 May 2013 07:02:40 -0700
+Message-ID: <519CCFFF.2060506@windriver.com>
+Date: Wed, 22 May 2013 09:02:39 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
 MIME-Version: 1.0
-Received: by 10.66.100.104 with HTTP; Wed, 22 May 2013 06:41:45 -0700 (PDT)
-In-Reply-To: <CALbNGRQPq9X0JiooyTz11i+-v8zpUHCVWO3R4qzPr3tyJgmKnQ@mail.gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
 References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
 	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
-	<CAJTo0Lb-d-ZOYc+WxaONDXy+vwbsEJKG8SsnQ0LDP7og5Sm9SQ@mail.gmail.com>
-	<CALbNGRQPq9X0JiooyTz11i+-v8zpUHCVWO3R4qzPr3tyJgmKnQ@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 22 May 2013 14:41:45 +0100
-Message-ID: <CAJTo0Lbt=0TpSzLRDXRH=_ndnGKN0k17cwQnpnv=fBwbB-N-jw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Gm-Message-State: ALoCoQmLbGoBki2YfFkMqioqJ49qv6wVK3xbtLkB502XuKiSHGT2NgAT9gSG+inr5+f0NejahvyY
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
+In-Reply-To: <CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
 Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -48,15 +37,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 13:42:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 May 2013 14:02:40 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 22 May 2013 12:01, Andreas M=C3=BCller <schnitzeltony@googlemail.com> wr=
-ote:
-> Haven't found at-spi2-gtk. Do you mean at-spi2-atk?
+On 5/22/13 3:31 AM, Andreas Müller wrote:
+> On Tue, May 21, 2013 at 9:36 PM, Jeff Osier-Mixon <jefro@jefro.net> wrote:
+>> OpenEmbedded Technical Steering Committee
+>> 7 May 2013
+>>
+>> Attendees:
+>>    Koen (koen)
+>>    Khem (khem)
+>>    Fray (fray)
+>>    Paul (bluelightning)
+>>    Richard (RP)
+>> Apologies:
+>>
+>> Notes: Jefro
+>>
+>> Agenda at a glance:
+>>
+>> 1. pick a chair
+>> 2. new issues
+>> 3. lingering issues
+>> a. systemd merge unhappiness
+>> 4. projects in progress - status
+>> a. oe-classic recipe migration status
+>> b. oe-core release
+>> c. systemd into master
+>> d. meta-oe appends/overlayed recipes RFC
+>> e. 1.5 planning
+>> 5. infrastructure
+>> a. mailing list moving to YP server, in progress
+>> b. oe.org flooded
+>> 6. projects deferred
+>> a. raise awareness of "janitor" list, QA "bugs"
+>> b. document whitespace changes to the shell
+>> c. raise ntp with the Yocto Project [RP]
+>>
+> There are three issues I would like to comment on:
+>
+> 1. systemd migration:
+>
+>  From what I see the only major step left over is to bury meta-systemd.
+> The only appends found there are those for oe-core. I asked for this
+> long time ago [1] and support was offered but...
+>
+> 2. indention:
+> Reading between the lines there is some unhappiness on meta-oe using
+> four spaces for shell and python code. I personally agree with Martin
+> here because I have not seen a technical reason for shell requiring
+> tabs so far. To me this looks like a style decision which increases
+> the burden to submit for low-skilled people like me. Could somebody
+> please enlighten me: For what technical reason do we need tabs in
+> shell code?
 
-Yes, typo, sorry.
+(Background) When the spacing was decided, looking at the existing OE recipes 
+and classes, the majority of things were indented such that python used tabs, 
+and recipe (shell scripting) used spaces.  During the cleanup of the scripting 
+sections it was decided that the least impact to all was desirable.  Thus the 
+python-tab, shell-spaces convention.
 
-Ross
+It's true that shell scripts don't really care about indenting, so the four 
+spaces is just a convention that was decided on based on that.  The concern is 
+that if we go in and change the convention now, it's going to cause a lot of 
+potential disruption.
+
+So the answer isn't that it's a technical reason, it's a community reason. 
+Don't rock the boat on something that is just going to annoy people and provide 
+no actual help.  So far I haven't seen a compelling argument to change the 
+convention BTW, other then (paraphrase) "I don't like spaces, and want to use 
+tabs".  (Note, when I write shell scripts, I prefer tabs as well..)
+
+--Mark
+
+> 3. xserver-nodm-init oe-core vs. meta-oe
+> This is a long lasting issue and Martin commented on why there is a
+> different approach in meta-oe [2]. One blocker for progress is xinput
+> calibrator rework. Short story: I have a solution working here which
+> is capable of starting calibrator by udev/systemd and can be invoked
+> by an unprivileged user at any time. Unfortunately this solution has
+> still too many issues to be submitted and from what I see now I won't
+> find the time to fix them in the next future. So if anybody wants to
+> unify xserver-nodm-init - feel free. Users can add xserver.common to
+> images manually (and xinput calibrator is not really working anyway).
+>
+> If I could I would add an additional item on the agenda:
+>
+> gtk3-migration:
+> In meta-gnome we are working with terribly old gnome recipes. These
+> needed much backporting efforts to survive glib-2.36 / gcc 4.8 updates
+> - and I don't think this increases code quality in any way - so it is
+> more or less a useless effort which we will continue.
+>
+> * Are there plans for a step-by step migration? A good starter would
+> be to solve libnotify 2/3 API issue. Is anybody else working on this /
+> thinking about?
+> * Are there plans to update gtk3 to 3.8.x to have wayland support?
+>
+> Cheers
+>
+> Andreas
+>
+> [1] http://lists.openembedded.org/pipermail/openembedded-core/2013-January/073596.html
+> [2] http://lists.openembedded.org/pipermail/openembedded-core/2013-February/075336.html
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
 
