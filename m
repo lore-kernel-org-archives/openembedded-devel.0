@@ -1,25 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C7286099F
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qe0-f53.google.com (mail-qe0-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id DADC86A34D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 May 2013 11:16:25 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 22 May 2013 04:16:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,719,1363158000"; d="scan'208";a="317688832"
-Received: from unknown (HELO helios.localnet) ([10.255.12.181])
-	by orsmga001.jf.intel.com with ESMTP; 22 May 2013 04:16:25 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 22 May 2013 12:16:24 +0100
-Message-ID: <2891290.BElKJ1Rkl4@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-21-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <1369189009-18847-1-git-send-email-raj.khem@gmail.com>
-References: <1369189009-18847-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-handheld][PATCH] ezxd: Add LIC_FILES_CHKSUM to recipe and -fPIC to CFLAGS
+	Wed, 22 May 2013 11:31:03 +0000 (UTC)
+Received: by mail-qe0-f53.google.com with SMTP id s14so1029642qeb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 May 2013 04:31:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=UETLgElV5RudvpwON0mqBLQGys3k2SxqYQodij63PrM=;
+	b=hU58EzzZO1ZvVTEdYddP/S+WXnLh44bleBQzVDuHqR6SSc9qVpwDfOBIppVEiacB15
+	oBwJXOMKYP674syd3/tw4gjq/fUPNfg+dx/EJ5tzwkk7s0qlafcg/L0tMFvSKE0hJL3O
+	zHVVeQnQ31lo1C0T9eBi3Etp7I57bglJJFu688mWnW0nk0RIRJnH8CKlJGXaJU4/vzEN
+	QB7gNNN6DWM9Cn/xKJnJcAguJuI1z4fVKfz1a/1Y6HqxhDmL2k56VntDQSXNH6c5V9Ch
+	BR62+EZ30EKEyK4Y2OdmgW93nwvYsaiKMvNV2KGl9LZweps/zpmmU5NrIs2QDFVrfCoO
+	7Tvg==
+X-Received: by 10.229.165.9 with SMTP id g9mr2435526qcy.66.1369222264495;
+	Wed, 22 May 2013 04:31:04 -0700 (PDT)
+Received: from localhost.localdomain
+	(pool-96-240-170-171.ronkva.east.verizon.net. [96.240.170.171])
+	by mx.google.com with ESMTPSA id l13sm7418737qaj.9.2013.05.22.04.31.03
+	for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Wed, 22 May 2013 04:31:03 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 May 2013 07:31:00 -0400
+Message-Id: <1369222261-29852-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.7.11.7
+Subject: [meta-oe][PATCH 1/2] uhd-firmware : Update to 3.5.3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,60 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2013 11:16:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 22 May 2013 11:31:04 -0000
 
-On Tuesday 21 May 2013 19:16:49 Khem Raj wrote:
-> This recipe has been failing to build. With this patch
-> it now builds. build tested for beaglebone
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> CC: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  recipes-bsp/ezx/ezxd_svn.bb |    8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-bsp/ezx/ezxd_svn.bb b/recipes-bsp/ezx/ezxd_svn.bb
-> index 6dbcd0f..7b69454 100644
-> --- a/recipes-bsp/ezx/ezxd_svn.bb
-> +++ b/recipes-bsp/ezx/ezxd_svn.bb
-> @@ -1,12 +1,12 @@
->  DESCRIPTION = "Open implementation of motorola's tapisrv, replaces
-> opentapi" -LICENSE = "GPLv2"
-> +LICENSE = "GPLv2+"
->  SECTION = "devel"
->  AUTHOR = "Daniel Ribeiro"
-> 
->  SRCREV = "2513"
->  PV = "0.0+svnr${SRCPV}"
->  PR = "r4"
-> -
-> +LIC_FILES_CHKSUM =
-> "file://plugin.c;endline=19;md5=16da36fbb577507b411368f133ce2067" SRC_URI =
-> "svn://svn.openezx.org/trunk/src/userspace/;module=ezxd;protocol=http \
-> file://ezxd.init \
->            "
-> @@ -18,9 +18,9 @@ INITSCRIPT_PARAMS = "start 00 S ."
-> 
->  S = "${WORKDIR}/${PN}"
-> 
-> -CFLAGS_append = " -DDEBUG "
-> +CFLAGS_append = " -DDEBUG -fPIC "
-> 
-> -TARGET_CC_ARCH += "${LDFLAGS}"
-> +TARGET_CC_ARCH += "${LDFLAGS} -fPIC"
-> 
->  do_configure() {
->          # Comment out both CC and CROSS definitions
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ .../{uhd-firmware_003.005.002.bb => uhd-firmware_003.005.003.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/uhd/{uhd-firmware_003.005.002.bb => uhd-firmware_003.005.003.bb} (79%)
 
-Merged, thanks.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.002.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
+similarity index 79%
+rename from meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.002.bb
+rename to meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
+index 3afae27..4369907 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.002.bb
++++ b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
+@@ -4,13 +4,13 @@ HOMEPAGE = "http://www.ettus.com"
+ PE = "1"
+ 
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=29260868c9484a37a7e6b61b29c57a4a"
++LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=e86f2186823b264efc627aafc0ad60a2"
+ 
+ inherit allarch
+ 
+ SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
+-SRC_URI[md5sum] = "2dbb7e2fb0c774e5ea2372bac25102e5"
+-SRC_URI[sha256sum] = "217efa814fb031ad136bd3dcf89ca219dd6d7ee01aa7e65c56c56b77379117bd"
++SRC_URI[md5sum] = "65cf76fd363d576ceff9c1527ade297b"
++SRC_URI[sha256sum] = "9079586def30b6805053092673d942c0051f1f99eebc676b871f070c04b66e35"
+ 
+ S = "${WORKDIR}/uhd-images_${PV}-release"
+ 
 -- 
+1.7.11.7
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
