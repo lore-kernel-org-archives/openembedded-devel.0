@@ -1,37 +1,22 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f51.google.com (mail-vb0-f51.google.com
-	[209.85.212.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 359D26086B
+Return-Path: <marcin.juszkiewicz@linaro.org>
+Received: from tygrysek.juszkiewicz.com.pl (tygrysek.juszkiewicz.com.pl
+	[178.33.81.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 815E86086B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2013 12:10:34 +0000 (UTC)
-Received: by mail-vb0-f51.google.com with SMTP id x16so2067457vbf.38
+	Thu, 23 May 2013 22:19:20 +0000 (UTC)
+Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marcin@juszkiewicz.com.pl)
+	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DD55BD224E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2013 05:10:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=hyeYVpd4arb2wj/CqnHotif1l8nPCzPYpPI/juXE4Is=;
-	b=MEBkbd/v7blPd38YYCSvrKFtNwf93F8mPoW4UJ370Bipkh9DjJAIdrzjSGfbsr/SZP
-	G4AVI7+NkHnco6acPwYC+QJYdgEGPCiUa7FzZ7z37ZiRbUfXF1tabHV+R+Rd+S1jnh9y
-	9cy386vH7Xw1rvdqLyoAOjnk6JxyvbNwJ/lVHtZWYTLsLjuq8ssyPW17dyUiQtY4qXHh
-	4/mZUCVedvOHboavsnQn7/3xBbAN5bVpEYxCc4tg4jtQk2B5S/ryVz1w++hsld1yZqRn
-	Pj6Cixp53/hJE13aPEXfFzZhDsPb1axH5bmFqB1Pytnxplo9WAAEN0XZaOgfciy2RmEJ
-	VQlA==
-MIME-Version: 1.0
-X-Received: by 10.220.191.129 with SMTP id dm1mr5009716vcb.54.1369311035066;
-	Thu, 23 May 2013 05:10:35 -0700 (PDT)
-Received: by 10.52.18.177 with HTTP; Thu, 23 May 2013 05:10:34 -0700 (PDT)
-In-Reply-To: <CALbNGRRp0pW3qZiU+WoDJ52MnqTJg+1SpmzfurucVb1QCRivgw@mail.gmail.com>
-References: <CA+YB3rYf0Tt181v+zAqCwjKk74uP88Zoaht_+FMuS7ee2tJRfQ@mail.gmail.com>
-	<CALbNGRSV7KK5hPddSiVTRborW6_PZfYstDFfu4M2oRJ5QwtV_Q@mail.gmail.com>
-	<CAJTo0Lb-d-ZOYc+WxaONDXy+vwbsEJKG8SsnQ0LDP7og5Sm9SQ@mail.gmail.com>
-	<CALbNGRRp0pW3qZiU+WoDJ52MnqTJg+1SpmzfurucVb1QCRivgw@mail.gmail.com>
-Date: Thu, 23 May 2013 14:10:34 +0200
-Message-ID: <CALbNGRQsK1cqzikHYpdtkCoPh23Cize33cSRJK-5JtNXnEJJvw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 24 May 2013 00:18:53 +0200 (CEST)
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] OE TSC Minutes 7 May 2013
+Date: Fri, 24 May 2013 00:19:18 +0200
+Message-Id: <1369347558-29442-1-git-send-email-marcin.juszkiewicz@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-oe][PATCH] mysql: depend on zlib to not build own one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2013 12:10:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 May 2013 22:19:21 -0000
 
-On Thu, May 23, 2013 at 2:02 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Wed, May 22, 2013 at 12:31 PM, Burton, Ross <ross.burton@intel.com> wr=
-ote:
->>> * Are there plans to update gtk3 to 3.8.x to have wayland support?
->>
->> Yes, another 1.5 feature I own.  I have most of the pieces around now.
->>  If anyone has a ARM or PPC board to immediate hand, then doing a
->> configure of at-spi2-core and at-spi2-gtk on the devices to get the
->> right alignment values (yet more alignment checks in configure.ac)
->> would be incredibly useful.
->>
-> I attached configure.log for at-spi2-core (2.8.0) taken on gumstix
-> overo (cortex A8).
->
-> at-spi2-gtk configure fails for atk >=3D 2.7.90. Are you sure you need
-> that because there I did not find some alignment code. If yes let me
-> know - then I'll see how to make configure happy.
->
-I meant at-spi2-atk - typo copied :)
+When mysql does not detect zlib during configure then their copy of
+zlib 1.2.3 is built. That leads to problems during rootfs creation:
 
-Andreas
+|  * check_data_file_clashes: Package libz-staticdev wants to install file /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/work/genericarmv8-oe-linux/linaro-image-lamp/1.0-r0/rootfs/usr/lib/libz.a
+|       But that file is already provided by package  * libmysqlclient-staticdev
+|  * opkg_install_cmd: Cannot install package libz-staticdev.
+
+Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+---
+ meta-oe/recipes-support/mysql/mysql5_5.1.40.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+index 3d79e19..3b3a42d 100644
+--- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
++++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
+ 
+-DEPENDS = "ncurses"
++DEPENDS = "ncurses zlib"
+ PR = "r11"
+ 
+ SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
+-- 
+1.8.1.2
+
 
