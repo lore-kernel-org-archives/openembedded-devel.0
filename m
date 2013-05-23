@@ -1,40 +1,37 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
-	[209.85.217.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 403996065B;
-	Thu, 23 May 2013 02:50:21 +0000 (UTC)
-Received: by mail-lb0-f177.google.com with SMTP id o10so2791635lbi.8
-	for <multiple recipients>; Wed, 22 May 2013 19:50:21 -0700 (PDT)
+Return-Path: <cazfi74@gmail.com>
+Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 0364F6086B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 May 2013 08:22:12 +0000 (UTC)
+Received: by mail-la0-f54.google.com with SMTP id eg20so2941748lab.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 May 2013 01:22:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=4yij6AFdQMMpJJqCr9uVeXAWWHUqkyRX+FtJek9qHx8=;
-	b=jEc/oxIOlkfgPbht859sW5/u1Lqyc0aPtNvaL8j1amt4TBIXMR2imAjIjakLPS3Emc
-	Pi9O024m19Ipslyh49jbfTm93mL2D5S9fllrtN1FWdCLYiMSWDFqs9vquQ91QreDNg49
-	C+HsksaqnXFI5fWdpMNScoF8lgHesT1hl3dFT+ssnC9K093OkGT35BHRqcOlhc4KvDVZ
-	NCKWNTFfAbYuNvbok9HAGQKgjBF4PN2uITadKrLSthPQUPf0rD3dGRUnFdVoXaMZAeu9
-	kFvVTu1spd9HINrZpj9F1CuKmprXkNrvhkSuojzZnatrQRH3z+dqVbTh5ch5UxuDCtyM
-	mpPQ==
-X-Received: by 10.112.202.105 with SMTP id kh9mr5248595lbc.120.1369277420739; 
-	Wed, 22 May 2013 19:50:20 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.141.74 with HTTP; Wed, 22 May 2013 19:50:00 -0700 (PDT)
-In-Reply-To: <1369217654.6695.62.camel@phil-desktop.brightsign>
-References: <40EC58CA-E878-4F77-8E39-4F8D86F48E29@dominion.thruhere.net>
-	<1368650024.18324.102.camel@ted>
-	<CANyK_8c4t0Oy1p8sktO-rxMfc1CR+-gbkXYH1RzDSTRy6qQORQ@mail.gmail.com>
-	<CANyK_8cbVGMQkD7_KEd5KYTBxP+ZT5jY6VVVpdSAv_uY7JPY1w@mail.gmail.com>
-	<1369217654.6695.62.camel@phil-desktop.brightsign>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 22 May 2013 19:50:00 -0700
-X-Google-Sender-Auth: l1Tw370NTkEqOePp2NhIYOaRiFU
-Message-ID: <CABcZAN=kxmSiDUGxgz0CWgmsr=Biwo9PiLf-inDeBwJhCGpzmA@mail.gmail.com>
-To: Phil Blundell <pb@pbcl.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Layers, PRINC and bbappends
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=NBR23K9P9CqPpA04jyjzq+x7lyQp+R2NL1h/izwMdyc=;
+	b=RCloWgz79GVAuOvLmju7f9orcavxf+4k4XchEzirlv6BdmxMaqO1/PswVKTBQdp9mO
+	RIXDHv4wffiwRKf/xI0IRTYqt/2QA6rEr8aSKyW83qxftnCuNEy74everQolSgbanV/D
+	z9wKNPr3o85lBHSbZqKyX2jnXQl83So9250rUo5NAA4nXLNs/Vc51Pyi5B6iGu65GV+z
+	5klxJ0RhtI89vEC8EJ5XmT992itagxyd6hthfmph0M2aqPmTN094es9t6xHw/8L9dhaX
+	mdT+rMrGOKsyFeBxieM4l8oXLDjsMYQ9RukjI1aibM+MI+8Gk8edMWbKfRtYPnw3FEzp
+	TebA==
+X-Received: by 10.112.131.129 with SMTP id om1mr5383017lbb.45.1369297332617;
+	Thu, 23 May 2013 01:22:12 -0700 (PDT)
+Received: from prime (a91-153-5-47.elisa-laajakaista.fi. [91.153.5.47])
+	by mx.google.com with ESMTPSA id zo6sm4299785lbb.9.2013.05.23.01.22.10
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 23 May 2013 01:22:11 -0700 (PDT)
+Received: from cazfi by prime with local (Exim 4.80)
+	(envelope-from <cazfi74@gmail.com>)
+	id 1UfQmn-0001rY-Fy; Thu, 23 May 2013 11:22:09 +0300
+From: Marko Lindqvist <cazfi74@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 May 2013 11:22:07 +0300
+Message-Id: <1369297327-5864-1-git-send-email-cazfi74@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe]] libmikmod: depend on texinfo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,42 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2013 02:50:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 May 2013 08:22:13 -0000
 
-On Wed, May 22, 2013 at 3:14 AM, Phil Blundell <pb@pbcl.net> wrote:
+With changed behavior of 'missing' in automake-1.13, libmikmod
+build was failing when makeinfo was not present.
 
-> On Wed, 2013-05-22 at 09:47 +0100, Paul Barker wrote:
-> > I've just sent a patch to the yocto@ list to fix this but it's brought
-> > up two things:
-> >
-> > 1) In openembedded-core/meta/classes/image.bbclass SPLASH is set with
-> > '?='. I'm overriding this with '=' in
-> > meta-raspberrypi/conf/machine/raspberrypi.conf which means it can't be
-> > overridden further in local.conf. Is this worth changing to '??=' in
-> > image.bbclass, '?=' in the machine conf so that it can be overridden
-> > with '=' in local.conf? Is my understanding of the overrides correct
-> > here?
->
-> You can always override it from local.conf using a _forcevariable
-> override (which used to be named "_local", in fact, but that terminology
-> turned out to be a bit confusing), or a _MACHINE override of course.  So
-> I don't think there is any major problem here.
->
-> But, that said, it probably is true that the semantics of ??= are less
-> surprising for users (since it isn't position-dependent in the way
-> that ?= is) which might make it a better choice for image.bbclass.
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-??= is great in config files, but not ideal in classes that aren't globally
-inherited. If bitbake.conf sets a ??=, and a distro .conf updates the
-default by using ??= again, and then the class uses ??=, it'll replace the
-latest default set by the config. So, I think for default values, classes
-should use ?=, config files should use ??=.
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
+index efef5d2..e6bdcbe 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
+ 
+-DEPENDS = "alsa-lib"
++DEPENDS = "alsa-lib texinfo"
+ 
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/mikmod/libmikmod-${PV}.tar.gz \
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.10.4
+
 
