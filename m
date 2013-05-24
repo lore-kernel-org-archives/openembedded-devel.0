@@ -1,22 +1,32 @@
-Return-Path: <marcin.juszkiewicz@linaro.org>
-Received: from tygrysek.juszkiewicz.com.pl (tygrysek.juszkiewicz.com.pl
-	[178.33.81.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 815E86086B
+Return-Path: <kirgene@gmail.com>
+Received: from mail-qe0-f51.google.com (mail-qe0-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id B3E1260959
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2013 22:19:20 +0000 (UTC)
-Received: from puchatek.dom (87-206-60-225.dynamic.chello.pl [87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id DD55BD224E
+	Fri, 24 May 2013 00:54:50 +0000 (UTC)
+Received: by mail-qe0-f51.google.com with SMTP id nd7so2283984qeb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2013 00:18:53 +0200 (CEST)
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+	Thu, 23 May 2013 17:54:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=r1RbMxMimw7CYnWV+csOlnVY+uTYd6KEMMuVmfDjvx0=;
+	b=Nk71sxQSMi9+4UjV+dmibKupL4vZ7v7ylnwWMHl5XVvJ0sKGHHggllaj6rCixizJ39
+	syhiqpE0D2CGy/p0/KZLnJnYO7RpIbdBx0qdSg2qWENklpO47aHYSwFC/FW7gviLqw2m
+	PEFQJb+S48WMFGkY71euDRpINZU5QXhfExnSYkHtF25fcB9/2wBAxbd3JngVOWIvfgr9
+	0xlWEgsjeNcwjnNXx5ECZn38eawGMTtoUlZDfbwIHp6C11yZ+lh/sWtdSA++VFNv0FRk
+	aNJAQKgymcWj/4wQnUvb9a5hx4FvWnIgG16kQwngXzC03DYkxlY5mc3ZmJhlMaZbM1Ao
+	JFkw==
+MIME-Version: 1.0
+X-Received: by 10.224.119.83 with SMTP id y19mr13806834qaq.7.1369356891601;
+	Thu, 23 May 2013 17:54:51 -0700 (PDT)
+Received: by 10.49.86.33 with HTTP; Thu, 23 May 2013 17:54:51 -0700 (PDT)
+In-Reply-To: <CADV-EXEWOKenwkeTmPJQQqSbwwDa0P=fi=Ne=hEYqOcU6eDdhQ@mail.gmail.com>
+References: <CADV-EXEWOKenwkeTmPJQQqSbwwDa0P=fi=Ne=hEYqOcU6eDdhQ@mail.gmail.com>
+Date: Fri, 24 May 2013 03:54:51 +0300
+Message-ID: <CADV-EXEPQEhcwvJEvXQp_TKqq+OvS1OYHogJ5c=0KCXoBOvEdg@mail.gmail.com>
+From: Yevhen Kyriukha <kirgene@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 May 2013 00:19:18 +0200
-Message-Id: <1369347558-29442-1-git-send-email-marcin.juszkiewicz@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH] mysql: depend on zlib to not build own one
+Subject: gpsd: GPS is unusable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,34 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 May 2013 22:19:21 -0000
+X-List-Received-Date: Fri, 24 May 2013 00:54:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-When mysql does not detect zlib during configure then their copy of
-zlib 1.2.3 is built. That leads to problems during rootfs creation:
+Hi!
 
-|  * check_data_file_clashes: Package libz-staticdev wants to install file /home/hrw/HDD/devel/canonical/aarch64/openembedded/build/tmp-eglibc/work/genericarmv8-oe-linux/linaro-image-lamp/1.0-r0/rootfs/usr/lib/libz.a
-|       But that file is already provided by package  * libmysqlclient-staticdev
-|  * opkg_install_cmd: Cannot install package libz-staticdev.
+I've installed gpsd package from meta-openembedded layer and get
+following errors in syslog from systemd-udevd:
 
-Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
----
- meta-oe/recipes-support/mysql/mysql5_5.1.40.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+failed to execute '/lib/udev/gpsd.hotplug.wrapper'
+'/lib/udev/gpsd.hotplug.wrapper': No such file or directory
 
-diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-index 3d79e19..3b3a42d 100644
---- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-+++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
- 
--DEPENDS = "ncurses"
-+DEPENDS = "ncurses zlib"
- PR = "r11"
- 
- SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
--- 
-1.8.1.2
+There is no 'gpsd.hotplug.wrapper' file anywhere on the disk.
 
+So I can't use GPS device.
+
+Best regards,
+Yevhen
 
