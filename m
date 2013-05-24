@@ -1,30 +1,39 @@
-Return-Path: <manuel.nickschas@bmw-carit.de>
-Received: from mail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C00A60974
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 716CD60974
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2013 11:34:46 +0000 (UTC)
-Received: from ulm-dc01.bmw-carit.intra ([172.20.0.50]:35684
-	helo=mail.bmw-carit.de)
-	by mail.bmw-carit.de with esmtps (TLSv1:AES128-SHA:128) (Exim 4.76)
-	(envelope-from <Manuel.Nickschas@bmw-carit.de>) id 1UfqGi-0003cq-2X
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 May 2013 13:34:45 +0200
-Received: from luxon.localnet (172.20.20.62) by ULM-DC01.bmw-carit.intra
-	(172.20.0.50) with Microsoft SMTP Server (TLS) id 14.1.218.12;
-	Fri, 24 May 2013 13:34:44 +0200
-X-CTCH-RefID: str=0001.0A0C0203.519F5055.007F, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0
-From: Manuel Nickschas <manuel.nickschas@bmw-carit.de>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 May 2013 13:34:40 +0200
-Message-ID: <3389668.90m8Qn9G8H@luxon>
-Organization: BMW Car IT GmbH
-User-Agent: KMail/4.11 pre (Linux/3.8.6-gentoo; KDE/4.10.60; x86_64;
-	git-23a95d8; 2013-05-21)
+	Fri, 24 May 2013 11:36:54 +0000 (UTC)
+Received: by mail-pb0-f48.google.com with SMTP id md12so4110848pbc.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 May 2013 04:36:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=X27hVHS6pl2KLFS2qGgGh7E3VSnocMbp+U5FjNg2Ghk=;
+	b=XkOa+dUwZpI1OcVgFbnQkO4Hgf4EuZ94uNsmjAnEVV4tXz+rRxuO4N2zzkKfK0+2GT
+	IFbhHfqlwh1SNVJYkEuw9AoJSSom+3hVl0Lk0kYf8QIrGFmulmrxDH4GZ/iQ4VCvQ5KG
+	yxnfF1DiPtDKAo91p8F8fsOvs8WbSxHcqMiXpRLj5etxP6wzowlVMLAZ1jREviVYqUgQ
+	TbCusdWcxTAeXeUwDtc4srJrTAR6arq2fTL/ppxdbevMV+IYlHlxpb4ZodxTpks1EYkn
+	mzV+amNHIFTlLJvrbDzjghhCeoASh8atRus1f51r3L5Ew1lixVSse+dOiNfMdfZuvfJa
+	98lQ==
+X-Received: by 10.68.247.68 with SMTP id yc4mr17331961pbc.54.1369395415604;
+	Fri, 24 May 2013 04:36:55 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	wt5sm15864065pbc.38.2013.05.24.04.36.53 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 24 May 2013 04:36:54 -0700 (PDT)
+Date: Fri, 24 May 2013 13:36:52 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Message-ID: <20130524113652.GU32431@jama>
+References: <1369388734-15750-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.20.62]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Problems with Qt5 and CMake
+In-Reply-To: <1369388734-15750-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] qt: package examples
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,108 +47,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2013 11:34:46 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Fri, 24 May 2013 11:36:55 -0000
+X-Groupsio-MsgNum: 44857
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="K0M4iRgkWWXhiQ9N"
+Content-Disposition: inline
+
+--K0M4iRgkWWXhiQ9N
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Fri, May 24, 2013 at 11:45:34AM +0200, Eric B=E9nard wrote:
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  recipes-qt/qt5/qt5.inc          |    9 ++++++++-
+>  recipes-qt/qt5/qtbase.inc       |    1 +
+>  recipes-qt/qt5/qtmultimedia.inc |    4 ++++
+>  3 files changed, 13 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+> index d370844..018c9ad 100644
+> --- a/recipes-qt/qt5/qt5.inc
+> +++ b/recipes-qt/qt5/qt5.inc
+> @@ -20,7 +20,7 @@ OE_QMAKE_PATH_SETTINGS =3D "${OE_QMAKE_PATH_QT_SETTINGS=
+}"
+>  OE_QMAKE_PATH_EXAMPLES =3D "${OE_QMAKE_PATH_QT_EXAMPLES}"
+>  OE_QMAKE_PATH_TESTS =3D "${OE_QMAKE_PATH_QT_TESTS}"
+> =20
+> -PACKAGES =3D. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${=
+PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs "
+> +PACKAGES =3D. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${=
+PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs ${PN}-examples-stati=
+cdev ${PN}-examples-dbg ${PN}-examples "
+> =20
+>  # extra -dbg packages
+>  FILES_${PN}-qmlplugins-dbg =3D " \
+> @@ -98,3 +98,10 @@ FILES_${PN}-dbg +=3D " \
+>  FILES_${PN}-staticdev +=3D " \
+>      ${OE_QMAKE_PATH_LIBS}/*.a \
+>  "
+> +
+> +FILES_${PN}-examples             =3D "${datadir}/${QT_DIR_NAME}/examples=
+/*"
+> +
+> +FILES_${PN}-examples-dbg         =3D "${datadir}/${QT_DIR_NAME}/examples=
+/.debug ${datadir}/${QT_DIR_NAME}/examples/*/.debug ${datadir}/${QT_DIR_NAM=
+E}/examples/*/*/.debug ${datadir}/${QT_DIR_NAME}/examples/*/*/*/.debug ${da=
+tadir}/${QT_DIR_NAME}/examples/*/*/*/*/.debug ${datadir}/${QT_DIR_NAME}/exa=
+mples/*/*/*/*/*/.debug"
 
-we're trying to deploy a Qt5-based piece of software on a Yocto system =
-(I=20
-hope this is on topic for this mailing list as well; the issue I'm abou=
-t to=20
-describe should occur on pure OE too). As build system for this softwar=
-e, we=20
-use CMake.
+Please wrap it to multiple lines so it's easier to see that it's just
+multiple levels of .debug directories.
 
-We've added meta-qt5 (master) and successfully installed qtbase on the=20=
+> +ALLOW_EMPTY_${PN}-examples =3D "1"
+> +ALLOW_EMPTY_${PN}-examples-staticdev =3D "1"
+> +ALLOW_EMPTY_${PN}-examples-dbg =3D "1"
 
-platform. However, there is a serious issue if one tries to cross-compi=
-le=20
-CMake-based software against the resulting Qt5 installation.
+Do we need to always create them?
 
-As you probably know, Qt5 ships its own support for CMake in the form o=
-f a=20
-bunch of Qt5$ModuleConfig.cmake files somewhere in /usr/lib/cmake.=20
-These files are found with a find_package(Qt5Core) call and set everyth=
-ing=20
-needed for building against the Qt5 installation. The problem is, that =
-those=20
-files contain absolute paths to both the libraries and the host tools f=
-or=20
-building (such as moc, rcc etc).
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index 5d4334a..be6f10a 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -167,3 +167,4 @@ do_install_append() {
+> =20
+>  PACKAGES =3D. "${PN}-fonts "
+>  FILES_${PN}-fonts =3D "${libdir}/${QT_DIR_NAME}/fonts ${libdir}/fonts"
+> +FILES_${PN}-examples-staticdev   =3D "${datadir}/${QT_DIR_NAME}/examples=
+/tools/plugandpaint/plugins/libpnp_basictools.a"
 
-meta-qt5 actually installs two sets of CMake files for Qt5, one in the =
-target=20
-sysroot (from the qtbase package) and one in the native sysroot (from t=
-he=20
-qtbase-native package). A recipe inheriting cmake.bbclass will find the=
- ones=20
-in the target sysroot.
+Shouldn't this go to qt5.inc (with * and *.a)
 
-The issue is that these files hardcode the paths *on the target*, i.e. =
-they try=20
-to find the host tools in /usr/bin/qt5/ and the libraries in /usr/lib/.=
- Obviously,=20
-this fails when trying to build against those, because the target sysro=
-ot path=20
-isn't prepended.
+> diff --git a/recipes-qt/qt5/qtmultimedia.inc b/recipes-qt/qt5/qtmultimedi=
+a.inc
+> index d9fdf79..e773ad1 100644
+> --- a/recipes-qt/qt5/qtmultimedia.inc
+> +++ b/recipes-qt/qt5/qtmultimedia.inc
+> @@ -3,3 +3,7 @@ require qt5.inc
+>  DEPENDS +=3D "qtdeclarative gstreamer alsa-lib "
+> =20
+>  INC_PR =3D "r0"
+> +
+> +do_install_append() {
+> +    rm -f ${D}/${datadir}/${QT_DIR_NAME}/examples/multimedia/spectrum/*.=
+so
+> +}
+> \ No newline at end of file
+> --=20
+> 1.7.10.4
+>=20
 
-If I remove the CMake files from the target sysroot (could not figure o=
-ut how=20
-to force it otherwise in my recipe), the ones from the native sysroot a=
-re found=20
-and used instead. These actually contain proper paths into the native=20=
+Please use OE_QMAKE_PATH_EXAMPLES variable everywhere and add some comment =
+explaining
+why examples/multimedia/spectrum needs to be removed.
 
-sysroot, so the build tools - like moc - are found and the program comp=
-iles=20
-successfully - but it can't link, because it then tries to link to the =
-libraries in=20
-the native sysroot. And those are, of course, built for the wrong archi=
-tecture.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-I'm at a loss as of how to properly fix this issue. What we need is a s=
-et of=20
-CMake config files for Qt5 that point to the tools in the native sysroo=
-t and the=20
-libraries in the target sysroot. However, we probably wouldn't want to =
-deploy=20
-them as such on the target (because there we want to actually point to =
-both=20
-tools and libraries in /usr for the target), and we probably also would=
-n't want=20
-to do it in the native sysroot (because then we couldn't build native t=
-hings=20
-that like to link to the native libraries).
+--K0M4iRgkWWXhiQ9N
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Of course, I could just copy the CMake files from Qt5, patch them=20
-accordingly and ship them as part of my project; but bundling such thin=
-gs is=20
-evil and I would really like to avoid this.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
 
-So now I'm wondering, are people here aware of that issue and have a pl=
-an=20
-or idea on how to fix this?
+iEYEARECAAYFAlGfUNQACgkQN1Ujt2V2gByTgwCdE7TCamLnDBnggQBsii9J95xm
+ES8AninL5e4/8PAn54qGNu9vvFCiVaD5
+=cwIV
+-----END PGP SIGNATURE-----
 
-https://bugreports.qt-project.org/browse/QTBUG-28922 might be relevant,=
-=20
-although I am not sure if this is describing a similar issue and if it =
-applies to=20
-the multiple sysroot approach Yocto uses.
-
-Thank you for any pointers.
-
-Cheers,
-~ Sput
---
-Manuel "Sput" Nickschas * Development Specialist, Head Unit Software
-BMW Car IT GmbH * http://www.bmw-carit.de
-Embedded Software House Ulm * Lise-Meitner-Str. 14 * 89081 Ulm
------------------------------------------------------------------------=
-------
-BMW Car IT GmbH
-Gesch=C3=A4ftsf=C3=BChrer: Harald Heinecke und Reinhard Stolle
-Sitz und Registergericht: M=C3=BCnchen HRB 134810
------------------------------------------------------------------------=
-------
-
+--K0M4iRgkWWXhiQ9N--
