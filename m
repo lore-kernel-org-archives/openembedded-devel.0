@@ -1,21 +1,31 @@
-Return-Path: <stefan@herbrechtsmeier.net>
-Received: from dd19416.kasserver.com (dd19416.kasserver.com [85.13.139.185])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D77A61F47
+Return-Path: <manuel.nickschas@bmw-carit.de>
+Received: from mail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 7367C61F47
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2013 12:44:56 +0000 (UTC)
-Received: from [129.70.144.11] (hooge.TechFak.Uni-Bielefeld.DE [129.70.144.11])
-	by dd19416.kasserver.com (Postfix) with ESMTPSA id 483781841371
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2013 14:44:56 +0200 (CEST)
-Message-ID: <519F60B9.1020604@herbrechtsmeier.net>
-Date: Fri, 24 May 2013 14:44:41 +0200
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Fri, 24 May 2013 13:03:09 +0000 (UTC)
+Received: from ulm-dc01.bmw-carit.intra ([172.20.0.50]:40697
+	helo=mail.bmw-carit.de)
+	by mail.bmw-carit.de with esmtps (TLSv1:AES128-SHA:128) (Exim 4.76)
+	(envelope-from <Manuel.Nickschas@bmw-carit.de>) id 1UfreF-0005AS-04
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 May 2013 15:03:07 +0200
+Received: from luxon.localnet (172.20.20.62) by ULM-DC01.bmw-carit.intra
+	(172.20.0.50) with Microsoft SMTP Server (TLS) id 14.1.218.12;
+	Fri, 24 May 2013 15:03:06 +0200
+X-CTCH-RefID: str=0001.0A0C0209.519F650B.010C, ss=1, re=0.000, recu=0.000,
+	reip=0.000, cl=1, cld=1, fgs=0
+From: Manuel Nickschas <manuel.nickschas@bmw-carit.de>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 May 2013 15:03:02 +0200
+Message-ID: <5622796.kW1BjNgdNO@luxon>
+Organization: BMW Car IT GmbH
+User-Agent: KMail/4.11 pre (Linux/3.8.6-gentoo; KDE/4.10.60; x86_64;
+	git-23a95d8; 2013-05-21)
+In-Reply-To: <519F60B9.1020604@herbrechtsmeier.net>
 References: <3389668.90m8Qn9G8H@luxon> <20130524120750.GV32431@jama>
-In-Reply-To: <20130524120750.GV32431@jama>
+	<519F60B9.1020604@herbrechtsmeier.net>
+MIME-Version: 1.0
+X-Originating-IP: [172.20.20.62]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-qt5] Problems with Qt5 and CMake
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -31,92 +41,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2013 12:44:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 May 2013 13:03:10 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Am 24.05.2013 14:07, schrieb Martin Jansa:
-> On Fri, May 24, 2013 at 01:34:40PM +0200, Manuel Nickschas wrote:
->> Hi,
->>
->> we're trying to deploy a Qt5-based piece of software on a Yocto system (I
->> hope this is on topic for this mailing list as well; the issue I'm about to
->> describe should occur on pure OE too). As build system for this software, we
->> use CMake.
->>
->> We've added meta-qt5 (master) and successfully installed qtbase on the
->> platform. However, there is a serious issue if one tries to cross-compile
->> CMake-based software against the resulting Qt5 installation.
->>
->> As you probably know, Qt5 ships its own support for CMake in the form of a
->> bunch of Qt5$ModuleConfig.cmake files somewhere in /usr/lib/cmake.
->> These files are found with a find_package(Qt5Core) call and set everything
->> needed for building against the Qt5 installation. The problem is, that those
->> files contain absolute paths to both the libraries and the host tools for
->> building (such as moc, rcc etc).
->>
->> meta-qt5 actually installs two sets of CMake files for Qt5, one in the target
->> sysroot (from the qtbase package) and one in the native sysroot (from the
->> qtbase-native package). A recipe inheriting cmake.bbclass will find the ones
->> in the target sysroot.
->>
->> The issue is that these files hardcode the paths *on the target*, i.e. they try
->> to find the host tools in /usr/bin/qt5/ and the libraries in /usr/lib/. Obviously,
->> this fails when trying to build against those, because the target sysroot path
->> isn't prepended.
->>
->> If I remove the CMake files from the target sysroot (could not figure out how
->> to force it otherwise in my recipe), the ones from the native sysroot are found
->> and used instead. These actually contain proper paths into the native
->> sysroot, so the build tools - like moc - are found and the program compiles
->> successfully - but it can't link, because it then tries to link to the libraries in
->> the native sysroot. And those are, of course, built for the wrong architecture.
->>
->> I'm at a loss as of how to properly fix this issue. What we need is a set of
->> CMake config files for Qt5 that point to the tools in the native sysroot and the
->> libraries in the target sysroot. However, we probably wouldn't want to deploy
->> them as such on the target (because there we want to actually point to both
->> tools and libraries in /usr for the target), and we probably also wouldn't want
->> to do it in the native sysroot (because then we couldn't build native things
->> that like to link to the native libraries).
->>
->> Of course, I could just copy the CMake files from Qt5, patch them
->> accordingly and ship them as part of my project; but bundling such things is
->> evil and I would really like to avoid this.
->>
->> So now I'm wondering, are people here aware of that issue and have a plan
->> or idea on how to fix this?
->>
->> https://bugreports.qt-project.org/browse/QTBUG-28922 might be relevant,
->> although I am not sure if this is describing a similar issue and if it applies to
->> the multiple sysroot approach Yocto uses.
->>
->> Thank you for any pointers.
-> I don't have any component which uses CMake and Qt5, so I haven't tested
-> this, but .prl, .la and .pc files were also generated with wrong paths,
-> check those patches in qtbase.
-Pkg-config use /PKG_CONFIG_SYSROOT_DIR to modify the include and library 
-paths and the files are manual fixed to only contain the path on the 
-machine./
+On Friday 24 May 2013 14:44:41 Stefan Herbrechtsmeier wrote:
 
-> It would be good to let CMake respect OE_QMAKE_PATH_* variables, so you can
-> generate .cmake files with correct paths for target and in OE builds
-> override them with OE_QMAKE_PATH_* values to use correct sysroot.
-CMake offers find_xxx functions and CMAKE_FIND_ROOT_PATH to modify the 
-program, include and library paths.
-Or you could use CMAKE_CURRENT_LIST_DIR in a cmake file to get the path 
-of the file.
+Hi,
 
-The problem is that its up to the developer to use this functions and 
-that CMake don't support a common way to model the dependencies like the 
-Requires field of pkg-config files.
+> > It would be good to let CMake respect OE_QMAKE_PATH_* variables, so=
+=20
+you
+> > can
+> > generate .cmake files with correct paths for target and in OE build=
+s
+> > override them with OE_QMAKE_PATH_* values to use correct sysroot.
+>=20
+> CMake offers find_xxx functions and CMAKE_FIND_ROOT_PATH to=20
+modify the
+> program, include and library paths.
+> Or you could use CMAKE_CURRENT_LIST_DIR in a cmake file to get the=20=
 
-> The same for finding native host tools in
-> OE_QMAKE_PATH_EXTERNAL_HOST_BINS.
-The cmake.class overlays the machine sysroot over the native sysroot and 
-don't install any binaries into the machine sysroot. Thereby the 
-find_program function detects the binary in the native sysroot and all 
-the other find_xxx functions detect the include files and libraries in 
-the machine sysroot.
+path
+> of the file.
+>=20
+> The problem is that its up to the developer to use this functions and=
 
+> that CMake don't support a common way to model the dependencies like=20=
+
+the
+> Requires field of pkg-config files.
+>=20
+> > The same for finding native host tools in
+> > OE_QMAKE_PATH_EXTERNAL_HOST_BINS.
+>=20
+> The cmake.class overlays the machine sysroot over the native sysroot =
+and
+> don't install any binaries into the machine sysroot. Thereby the
+> find_program function detects the binary in the native sysroot and al=
+l
+> the other find_xxx functions detect the include files and libraries i=
+n
+> the machine sysroot.
+
+Hm, no, that is not the issue. The issue is that Qt5 uses a fairly rece=
+nt=20
+CMake feature where find_package and friends look for a *Config.cmake f=
+ile=20
+first, and then use that to set everything up. In case of Qt5, please h=
+ave a=20
+look at the files Qt5 (the qtbase package) installs into the target sys=
+root, in=20
+/usr/lib/cmake/.
+
+In particular, the issue is with=20
+$sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
+
+[...]
+    set_target_properties(Qt5::moc PROPERTIES
+        IMPORTED_LOCATION "/usr/bin/qt5/moc"
+    )
+[...]
+
+and similar for other host binaries such as rcc or qdbusxml2cpp (in=20
+Qt5DBus/Qt5DBusConfigExtras.cmake).
+
+The path specified there is clearly wrong for cross-compiling, because =
+it=20
+references the location in the target itself, without prepending the sy=
+sroot=20
+prefix. Thus, it won't find moc. In particular, it needs not even find =
+the moc=20
+from the target sysroot, but from the native sysroot, as it's a host to=
+ol.
+
+Unfortunately, I have no clue how the Qt5 build system ends up generati=
+ng=20
+those paths; I assume it's not using CMake and find_program, but=20
+hardcodes the paths somewhere.
+
+One could probably patch this away, but then you'd end up with host-
+specific absolute paths inside the target, which will then break if you=
+ try to=20
+use them for compiling something inside the target.
+
+Or maybe indeed replace the hardcoded path by some CMake variable that=20=
+
+can then be set at cmake runtime to the proper sysroot; not sure if thi=
+s would=20
+work.
+
+Cheers,
+~ Sput
+--=20
+Manuel "Sput" Nickschas * Development Specialist, Team GENIVI
+BMW Car IT GmbH * http://www.bmw-carit.de
+Embedded Software House Ulm * Lise-Meitner-Str. 14 * 89081 Ulm
+-----------------------------------------------------------------------=
+------
+BMW Car IT GmbH
+Gesch=C3=A4ftsf=C3=BChrer: Harald Heinecke und Reinhard Stolle
+Sitz und Registergericht: M=C3=BCnchen HRB 134810
+-----------------------------------------------------------------------=
+------
 
