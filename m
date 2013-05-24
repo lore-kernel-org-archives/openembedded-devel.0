@@ -1,32 +1,39 @@
-Return-Path: <kirgene@gmail.com>
-Received: from mail-qe0-f51.google.com (mail-qe0-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id B3E1260959
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 May 2013 00:54:50 +0000 (UTC)
-Received: by mail-qe0-f51.google.com with SMTP id nd7so2283984qeb.38
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 May 2013 17:54:51 -0700 (PDT)
+Return-Path: <elvis.dowson@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F54A60825;
+	Fri, 24 May 2013 03:53:00 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id kx1so3795128pab.13
+	for <multiple recipients>; Thu, 23 May 2013 20:53:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=r1RbMxMimw7CYnWV+csOlnVY+uTYd6KEMMuVmfDjvx0=;
-	b=Nk71sxQSMi9+4UjV+dmibKupL4vZ7v7ylnwWMHl5XVvJ0sKGHHggllaj6rCixizJ39
-	syhiqpE0D2CGy/p0/KZLnJnYO7RpIbdBx0qdSg2qWENklpO47aHYSwFC/FW7gviLqw2m
-	PEFQJb+S48WMFGkY71euDRpINZU5QXhfExnSYkHtF25fcB9/2wBAxbd3JngVOWIvfgr9
-	0xlWEgsjeNcwjnNXx5ECZn38eawGMTtoUlZDfbwIHp6C11yZ+lh/sWtdSA++VFNv0FRk
-	aNJAQKgymcWj/4wQnUvb9a5hx4FvWnIgG16kQwngXzC03DYkxlY5mc3ZmJhlMaZbM1Ao
-	JFkw==
-MIME-Version: 1.0
-X-Received: by 10.224.119.83 with SMTP id y19mr13806834qaq.7.1369356891601;
-	Thu, 23 May 2013 17:54:51 -0700 (PDT)
-Received: by 10.49.86.33 with HTTP; Thu, 23 May 2013 17:54:51 -0700 (PDT)
-In-Reply-To: <CADV-EXEWOKenwkeTmPJQQqSbwwDa0P=fi=Ne=hEYqOcU6eDdhQ@mail.gmail.com>
-References: <CADV-EXEWOKenwkeTmPJQQqSbwwDa0P=fi=Ne=hEYqOcU6eDdhQ@mail.gmail.com>
-Date: Fri, 24 May 2013 03:54:51 +0300
-Message-ID: <CADV-EXEPQEhcwvJEvXQp_TKqq+OvS1OYHogJ5c=0KCXoBOvEdg@mail.gmail.com>
-From: Yevhen Kyriukha <kirgene@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: gpsd: GPS is unusable
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:cc:to:mime-version:x-mailer;
+	bh=EtBtKPipeuXvJVG2RDCAL1J2fO6mKq1w65kufOh5lxM=;
+	b=Fc8UYlNR3YbA3FsbWcNRfCt7bP8JTrWdO+D1lG1OMlMkC2A1gjrIPWl6GAvQSzzQ6M
+	o721SODY/8P3SaPNG9OVhcvfbt7+TFQ33XGD813AjZ8X3pa1ncKDDKy2DzHwfmNTQY1Y
+	ep5H92HmJan57ITZVBRYRFXgkHgXMl7wU/kb4ply/NSmexXO85HFNnBTvtDKFntCakUR
+	TOJNjIIv+Jap6gSen5p8imxul/eCxKbcj7iC2h2zNoM0284oYXTdFlyT55heEtXpCScX
+	iSJJo6sb/7NMgMf9mzHdRkQJMMSfsKP2Xy1nAzb4CtUITCXzNlw+r926WeXOx+Jv5uzT
+	i6dQ==
+X-Received: by 10.68.253.230 with SMTP id ad6mr15557593pbd.182.1369367581309; 
+	Thu, 23 May 2013 20:53:01 -0700 (PDT)
+Received: from [192.168.1.100] ([94.205.106.101])
+	by mx.google.com with ESMTPSA id
+	ue8sm15522574pac.14.2013.05.23.20.52.57 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 23 May 2013 20:53:00 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+Date: Fri, 24 May 2013 07:52:53 +0400
+Message-Id: <F001008B-B137-40CA-B102-2FFBC49C2302@gmail.com>
+To: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
+	OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>, 
+	OpenEmbedded Core Mailing List <openembedded-core@lists.openembedded.org>, 
+	meta-xilinx Mailing List <meta-xilinx@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
+X-Mailer: Apple Mail (2.1498)
+Cc: Nathan Rossi <nrossi@xilinx.com>, Sipke Vriend <sipke.vriend@xilinx.com>
+Subject: meta-xilinx moved to meta-xilinx-community
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,21 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2013 00:54:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 24 May 2013 03:53:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Hi!
+Hi,
+      The existing meta-xilinx repo has moved to meta-xilinx-community
 
-I've installed gpsd package from meta-openembedded layer and get
-following errors in syslog from systemd-udevd:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx-community/
 
-failed to execute '/lib/udev/gpsd.hotplug.wrapper'
-'/lib/udev/gpsd.hotplug.wrapper': No such file or directory
+This layer will contain community support for the Xilinx platforms, =
+including legacy boards (ML507) and other soft-processor architectures.
 
-There is no 'gpsd.hotplug.wrapper' file anywhere on the disk.
-
-So I can't use GPS device.
+This paves the way for an officially supported meta-xilinx layer, the =
+details of which will be officially announced by Xilinx.
 
 Best regards,
-Yevhen
+
+Elvis Dowson=
 
