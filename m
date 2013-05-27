@@ -1,19 +1,21 @@
 Return-Path: <eric@eukrea.com>
 Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 948C16A34D
+	by mail.openembedded.org (Postfix) with ESMTP id 4A2A96A34D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2013 23:43:14 +0000 (UTC)
+	Mon, 27 May 2013 23:43:17 +0000 (UTC)
 Received: from buildor.local.eukrea.com (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 8C41E4B0045
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 8CBD54B0024
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2013 01:43:11 +0200 (CEST)
+	Tue, 28 May 2013 01:43:14 +0200 (CEST)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 May 2013 01:43:46 +0200
-Message-Id: <1369698233-4500-1-git-send-email-eric@eukrea.com>
+Date: Tue, 28 May 2013 01:43:47 +0200
+Message-Id: <1369698233-4500-2-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1369698233-4500-1-git-send-email-eric@eukrea.com>
+References: <1369698233-4500-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 1/8] qt: package examples
+Subject: [meta-qt5][PATCH 2/8] qtjsbackend: fix hardfloat detection in v8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,59 +29,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2013 23:43:17 -0000
+X-List-Received-Date: Mon, 27 May 2013 23:43:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes-qt/qt5/qt5.inc |   29 ++++++++++++++++++++++++++++-
- 1 file changed, 28 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/qtjsbackend.inc                     |    1 +
+ .../qtjsbackend/0001-Fix-hardfloat-detection.patch |   33 ++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtjsbackend/0001-Fix-hardfloat-detection.patch
 
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index d370844..87bf5e8 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -20,7 +20,7 @@ OE_QMAKE_PATH_SETTINGS = "${OE_QMAKE_PATH_QT_SETTINGS}"
- OE_QMAKE_PATH_EXAMPLES = "${OE_QMAKE_PATH_QT_EXAMPLES}"
- OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
+diff --git a/recipes-qt/qt5/qtjsbackend.inc b/recipes-qt/qt5/qtjsbackend.inc
+index 4479654..a0dc632 100644
+--- a/recipes-qt/qt5/qtjsbackend.inc
++++ b/recipes-qt/qt5/qtjsbackend.inc
+@@ -13,4 +13,5 @@ INC_PR = "r0"
  
--PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs "
-+PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs ${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-dbg ${PN}-examples "
- 
- # extra -dbg packages
- FILES_${PN}-qmlplugins-dbg = " \
-@@ -98,3 +98,30 @@ FILES_${PN}-dbg += " \
- FILES_${PN}-staticdev += " \
-     ${OE_QMAKE_PATH_LIBS}/*.a \
+ SRC_URI += " \
+     file://0002-v8.pro-respect-external-host-bindir-when-set.patch \
++    file://0001-Fix-hardfloat-detection.patch \
  "
-+FILES_${PN}-examples = " \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/* \
-+"
-+FILES_${PN}-examples-dev = " \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*${SOLIBSDEV} \
-+"
-+FILES_${PN}-examples-dbg = " \
-+    ${OE_QMAKE_PATH_EXAMPLES}/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/.debug \
-+"
-+FILES_${PN}-examples-staticdev = " \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*.a \
-+"
+diff --git a/recipes-qt/qt5/qtjsbackend/0001-Fix-hardfloat-detection.patch b/recipes-qt/qt5/qtjsbackend/0001-Fix-hardfloat-detection.patch
+new file mode 100644
+index 0000000..3d86fbf
+--- /dev/null
++++ b/recipes-qt/qt5/qtjsbackend/0001-Fix-hardfloat-detection.patch
+@@ -0,0 +1,33 @@
++From 05a87fccb76447ce3cb4b926128af929f26469bb Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
++Date: Wed, 22 May 2013 18:50:01 +0200
++Subject: [PATCH] Fix hardfloat detection
++
++based on the same patch for nodejs which says :
++
++gcc has a builtin define to denote hard abi when in use, e.g. when
++using -mfloat-abi=hard it will define __ARM_PCS_VFP to 1 and therefore
++we should check that to determine which calling convention is in use
++and not __VFP_FP__ which merely indicates presence of VFP unit
++
++The fix has been provided by Khem Raj <raj.khem@gmail.com>
++---
++ src/3rdparty/v8/src/platform-linux.cc |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/3rdparty/v8/src/platform-linux.cc b/src/3rdparty/v8/src/platform-linux.cc
++index f6db423..8ae2249 100644
++--- a/src/3rdparty/v8/src/platform-linux.cc
+++++ b/src/3rdparty/v8/src/platform-linux.cc
++@@ -167,7 +167,7 @@ bool OS::ArmCpuHasFeature(CpuFeature feature) {
++ // calling this will return 1.0 and otherwise 0.0.
++ static void ArmUsingHardFloatHelper() {
++   asm("mov r0, #0":::"r0");
++-#if defined(__VFP_FP__) && !defined(__SOFTFP__)
+++#if defined(__ARM_PCS_VFP) && !defined(__SOFTFP__)
++   // Load 0x3ff00000 into r1 using instructions available in both ARM
++   // and Thumb mode.
++   asm("mov r1, #3":::"r1");
++-- 
++1.7.10.4
++
 -- 
 1.7.10.4
 
