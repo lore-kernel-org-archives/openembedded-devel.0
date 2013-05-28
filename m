@@ -1,21 +1,19 @@
 Return-Path: <eric@eukrea.com>
 Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 6509C6A498
+	by mail.openembedded.org (Postfix) with ESMTP id 5F1516A537
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2013 13:03:14 +0000 (UTC)
+	Tue, 28 May 2013 13:24:02 +0000 (UTC)
 Received: from buildor.local.eukrea.com (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 9A75D4B018C
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 188DB4B006B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2013 15:03:11 +0200 (CEST)
+	Tue, 28 May 2013 15:23:59 +0200 (CEST)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 May 2013 15:03:54 +0200
-Message-Id: <1369746234-28179-1-git-send-email-eric@eukrea.com>
+Date: Tue, 28 May 2013 15:24:41 +0200
+Message-Id: <1369747482-29077-1-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <20130528085017.GC3192@jama>
-References: <20130528085017.GC3192@jama>
 MIME-Version: 1.0
-Subject: [PATCH v2] qtbase: install and split package fonts
+Subject: [meta-qt5][PATCH 1/2] qt5: make 5.0.2 the default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,61 +27,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2013 13:03:17 -0000
+X-List-Received-Date: Tue, 28 May 2013 13:24:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-- fonts were not installed (at least in qt 5.0.2) so install
-them manually.
-- split the font package in smaller package as done in qt4 to
-save space on the target.
-
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
-v2 : remove unecessary PACKAGES_DYNAMIC 
+ recipes-qt/qt5/qt5-5.0.2.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- recipes-qt/qt5/qtbase.inc |   29 +++++++++++++++++++++++++++--
- 1 file changed, 27 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index f286274..b252e17 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -170,7 +170,32 @@ do_install_append() {
-     # qemu built on host breaks do_package, remove it here (will be replaces with right qemu when do_compile is fixed
-     # ERROR: objcopy failed with exit code 1 (cmd was 'arm-oe-linux-gnueabi-objcopy' --only-keep-debug '/OE/oe-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/qtbase/5.0.1-r0.0/package/usr/bin/qmake' '/OE/oe-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/qtbase/5.0.1-r0.0/package/usr/bin/.debug/qmake')
-     rm -f ${D}/${bindir}/${QT_DIR_NAME}/qmake
-+    # install fonts manually if they are missing
-+    if [ ! -d ${D}/${libdir}/fonts ]; then
-+        cp -a ${S}/lib/fonts ${D}/${libdir}
-+    fi
- }
+diff --git a/recipes-qt/qt5/qt5-5.0.2.inc b/recipes-qt/qt5/qt5-5.0.2.inc
+index f99809e..303e066 100644
+--- a/recipes-qt/qt5/qt5-5.0.2.inc
++++ b/recipes-qt/qt5/qt5-5.0.2.inc
+@@ -6,7 +6,7 @@ QT_VERSION ?= "${PV}"
+ # it's different for RC versions
+ QT_VERSION_DIR ?= "${QT_VERSION}"
  
--PACKAGES =. "${PN}-fonts "
--FILES_${PN}-fonts = "${libdir}/${QT_DIR_NAME}/fonts ${libdir}/fonts"
-+PACKAGES =. "${PN}-fonts \
-+             ${PN}-fonts-ttf-vera \
-+             ${PN}-fonts-ttf-dejavu \
-+             ${PN}-fonts-pfa \
-+             ${PN}-fonts-pfb \
-+             ${PN}-fonts-qpf "
-+
-+RRECOMMENDS_${PN}-fonts = " \
-+             ${PN}-fonts-ttf-vera \
-+             ${PN}-fonts-ttf-dejavu \
-+             ${PN}-fonts-pfa \
-+             ${PN}-fonts-pfb \
-+             ${PN}-fonts-qpf "
-+
-+ALLOW_EMPTY_${PN}-fonts = "1"
-+
-+FILES_${PN}-fonts-ttf-vera       = "${libdir}/${QT_DIR_NAME}/fonts/Vera*.ttf ${libdir}/fonts/Vera*.ttf"
-+FILES_${PN}-fonts-ttf-dejavu     = "${libdir}/${QT_DIR_NAME}/fonts/DejaVu*.ttf ${libdir}/fonts/DejaVu*.ttf"
-+FILES_${PN}-fonts-pfa            = "${libdir}/${QT_DIR_NAME}/fonts/*.pfa ${libdir}/fonts/*.pfa"
-+FILES_${PN}-fonts-pfb            = "${libdir}/${QT_DIR_NAME}/fonts/*.pfb ${libdir}/fonts/*.pfb"
-+FILES_${PN}-fonts-qpf            = "${libdir}/${QT_DIR_NAME}/fonts/*.qpf* ${libdir}/fonts/*.qpf*"
-+FILES_${PN}-fonts                = "${libdir}/${QT_DIR_NAME}/fonts/README ${libdir}/fonts/README \
-+                                    ${libdir}/${QT_DIR_NAME}/fonts/fontdir ${libdir}/fonts/fontdir"
+-DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE = "1"
+ 
+ SRC_URI += " \
+     http://releases.qt-project.org/qt5/${QT_VERSION_DIR}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
 -- 
 1.7.10.4
 
