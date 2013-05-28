@@ -1,35 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 74B4562051
+Return-Path: <B19537@freescale.com>
+Received: from ch1outboundpool.messaging.microsoft.com
+	(ch1ehsobe004.messaging.microsoft.com [216.32.181.184])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AF296A36E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 May 2013 01:24:57 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id bi5so7368784pad.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 May 2013 18:24:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=6qG81ZrWd/c4oezJCQJOiXBi2YqOGpPAclqEx1gIWeM=;
-	b=d/zgrtA6zCjPEZc4D2XeQoBQOK9Q+2vbhZdXjIx9Fi/CAknue9gSVGbc7bRY3YBoIl
-	qkCE06IjmhGxVBBil3YuUGLv1EMAbkPsyqGImOSME6BgLeS5uLtvAewcadWQY2e7zCXa
-	WkjyzpAXDXS9QLSs8LosZ9J2JlpnWytJwteaIK94z1mYETH8nWvwlN0H7Nrs2xZCd1Sr
-	ovhcHJO5U1bo6xWCsPhpYD6G5fK6WEcecEaKAxy/Q2bXCIS3rkuzsDks6j/2uL8cdZAh
-	kMaF82WqL9kv0r3XnIaa2DgqjGPsxOshtpoLl6n3ufBA+4S+hyt8ZB/CDBbx+/XBLCp+
-	0XmA==
-X-Received: by 10.66.193.72 with SMTP id hm8mr32287440pac.23.1369704298073;
-	Mon, 27 May 2013 18:24:58 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	qb1sm30539104pbb.33.2013.05.27.18.24.56 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 27 May 2013 18:24:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 May 2013 18:22:51 -0700
-Message-Id: <1369704171-2046-1-git-send-email-raj.khem@gmail.com>
+	Tue, 28 May 2013 04:34:34 +0000 (UTC)
+Received: from mail82-ch1-R.bigfish.com (10.43.68.234) by
+	CH1EHSOBE017.bigfish.com (10.43.70.67) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 28 May 2013 04:34:35 +0000
+Received: from mail82-ch1 (localhost [127.0.0.1])	by mail82-ch1-R.bigfish.com
+	(Postfix) with ESMTP id E517E4806C9	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 28 May 2013 04:34:34 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h1ee6h1de0h1fdah1202h1e76h1d1ah1d2ah1fc6hzz8275bh8275dhz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1dc1h1155h)
+Received: from mail82-ch1 (localhost.localdomain [127.0.0.1]) by mail82-ch1
+	(MessageSwitch) id 1369715671399653_3344;
+	Tue, 28 May 2013 04:34:31 +0000 (UTC)
+Received: from CH1EHSMHS019.bigfish.com (snatpool1.int.messaging.microsoft.com
+	[10.43.68.244])	by mail82-ch1.bigfish.com (Postfix) with ESMTP id
+	5B552805A6 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 May 2013 04:34:31 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS019.bigfish.com
+	(10.43.70.19) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Tue, 28 May 2013 04:34:31 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
+	Server (TLS) id 14.2.328.11; Tue, 28 May 2013 04:35:25 +0000
+Received: from b19537-desktop.ap.freescale.net
+	(b19537-desktop.ap.freescale.net [10.192.208.197])	by
+	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id r4S4YRHB024991;
+	Mon, 27 May 2013 21:34:28 -0700
+From: Zhenhua Luo <zhenhua.luo@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 May 2013 12:40:03 +0800
+Message-ID: <1369716003-8053-1-git-send-email-zhenhua.luo@freescale.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] luajit: Fix ppc spe issue with PIC code
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+Cc: Zhenhua Luo <zhenhua.luo@freescale.com>, b40527@freescale.com
+Subject: [meta-oe][PATCH] debianutils: fix for multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,157 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2013 01:24:58 -0000
+X-List-Received-Date: Tue, 28 May 2013 04:34:34 -0000
+Content-Type: text/plain
 
-some parts of libluajit is not compiled with PICness
-lets fix it.
+When do multilib build for debianutils, following error appear:
+    ERROR: Function failed: Fetcher failure for URL:
+    'ftp://ftp.debian.org/debian/pool/main/d/lib64-debianutils/lib64-debianutils_2.30.tar.gz'.
+    Unable to fetch URL from any source.
 
-Also get the hotfix patch for luajit dot org
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
 ---
- .../luajit/luajit/ppc-fixplt.patch                 |  105 ++++++++++++++++++++
- meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb    |   12 ++-
- 2 files changed, 114 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/ppc-fixplt.patch
+ .../debianutils/debianutils_2.30.bb                |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/ppc-fixplt.patch b/meta-oe/recipes-devtools/luajit/luajit/ppc-fixplt.patch
-new file mode 100644
-index 0000000..b9f17f4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luajit/luajit/ppc-fixplt.patch
-@@ -0,0 +1,105 @@
-+Upstream-Status: Unknown
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+libluajit is having symbols that can't be
-+resolved the reloc cannot accommodate an offset greater than 24 bits.
-+
-+Looking at libluajit with readelf -r, you see a bunch of entries that look like:
-+	000082f0  00003c0a R_PPC_REL24       00000000   sqrt + 0
-+
-+These should not occur when the code is compiled and linked with -fPIC.
-+
-+It turns out that libluajit *is* compiled and linked with -fPIC, however...
-+There is one assembler file called lj_vm.s which is generated during the build.
-+This file is missing the `@plt' qualifier from external references.
-+
-+This file is generated by a program called buildvm.  This in turn uses tables
-+in a file called buildvm_arch.h which is generated by dynasm.lua.
-+
-+Index: LuaJIT-2.0.1/src/host/buildvm.c
-+===================================================================
-+--- LuaJIT-2.0.1.orig/src/host/buildvm.c	2013-02-19 12:15:00.000000000 -0800
-++++ LuaJIT-2.0.1/src/host/buildvm.c	2013-05-14 20:26:05.933444512 -0700
-+@@ -107,12 +107,14 @@
-+ #endif
-+   sprintf(name, "%s%s%s", symprefix, prefix, suffix);
-+   p = strchr(name, '@');
-++#if 0
-+   if (p) {
-+     if (!LJ_64 && (ctx->mode == BUILD_coffasm || ctx->mode == BUILD_peobj))
-+       name[0] = '@';
-+     else
-+       *p = '\0';
-+   }
-++#endif
-+   p = (char *)malloc(strlen(name)+1);  /* MSVC doesn't like strdup. */
-+   strcpy(p, name);
-+   return p;
-+Index: LuaJIT-2.0.1/src/vm_ppcspe.dasc
-+===================================================================
-+--- LuaJIT-2.0.1.orig/src/vm_ppcspe.dasc	2013-02-19 12:15:00.000000000 -0800
-++++ LuaJIT-2.0.1/src/vm_ppcspe.dasc	2013-05-14 20:26:05.937444512 -0700
-+@@ -1390,7 +1390,7 @@
-+   |  checknum CARG2
-+   |   evmergehi CARG1, CARG2, CARG2
-+   |  checkfail ->fff_fallback
-+-  |  bl extern func
-++  |  bl extern func@plt
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |  b ->fff_restv
-+   |.endmacro
-+@@ -1405,7 +1405,7 @@
-+   |  checknum CARG1
-+   |   evmergehi CARG3, CARG4, CARG4
-+   |  checkanyfail ->fff_fallback
-+-  |  bl extern func
-++  |  bl extern func@plt
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |  b ->fff_restv
-+   |.endmacro
-+@@ -1437,7 +1437,7 @@
-+   |  checknum CARG2
-+   |   evmergehi CARG1, CARG2, CARG2
-+   |  checkfail ->fff_fallback
-+-  |  bl extern log
-++  |  bl extern log@plt
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |  b ->fff_restv
-+   |
-+@@ -1471,7 +1471,7 @@
-+   |  checknum CARG1
-+   |  checkanyfail ->fff_fallback
-+   |  efdctsi CARG3, CARG4
-+-  |  bl extern ldexp
-++  |  bl extern ldexp@plt
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |  b ->fff_restv
-+   |
-+@@ -1484,7 +1484,7 @@
-+   |  checkfail ->fff_fallback
-+   |  la CARG3, DISPATCH_GL(tmptv)(DISPATCH)
-+   |   lwz PC, FRAME_PC(BASE)
-+-  |  bl extern frexp
-++  |  bl extern frexp@plt
-+   |   lwz TMP1, DISPATCH_GL(tmptv)(DISPATCH)
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |   efdcfsi CRET2, TMP1
-+@@ -1503,7 +1503,7 @@
-+   |  checkfail ->fff_fallback
-+   |  la CARG3, -8(BASE)
-+   |   lwz PC, FRAME_PC(BASE)
-+-  |  bl extern modf
-++  |  bl extern modf@plt
-+   |  evmergelo CRET1, CRET1, CRET2
-+   |   la RA, -8(BASE)
-+   |  evstdd CRET1, 0(BASE)
-+@@ -2399,7 +2399,7 @@
-+     |  checknum CARG1
-+     |   evmergehi CARG3, CARG4, CARG4
-+     |  checkanyfail ->vmeta_arith_vv
-+-    |  bl extern pow
-++    |  bl extern pow@plt
-+     |  evmergelo CRET2, CRET1, CRET2
-+     |  evstddx CRET2, BASE, RA
-+     |  ins_next
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb
-index 99a2ca6..6ca5f34 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb
-@@ -4,11 +4,17 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1793ef52a5d577794cd886a501a7f861"
- HOMEPAGE = "http://luajit.org"
+diff --git a/meta-oe/recipes-support/debianutils/debianutils_2.30.bb b/meta-oe/recipes-support/debianutils/debianutils_2.30.bb
+index e6c03eb..8b378b0 100644
+--- a/meta-oe/recipes-support/debianutils/debianutils_2.30.bb
++++ b/meta-oe/recipes-support/debianutils/debianutils_2.30.bb
+@@ -3,7 +3,9 @@ SECTION = "base"
+ LICENSE = "GPLv2 & BSD & SMAIL_GPL"
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=b948675029f79c64840e78881e91e1d4"
  
- DEPENDS += "lua5.1"
--SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
-+SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz;name=tarball \
-            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-+           http://luajit.org/download/v2.0.1_hotfix1.patch;name=hotfix1 \
-           "
--SRC_URI[md5sum] = "85e406e8829602988eb1233a82e29f1f"
--SRC_URI[sha256sum] = "2371cceb53453d8a7b36451e6a0ccdb66236924545d6042ddd4c34e9668990c0"
-+SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
+-SRC_URI = "${DEBIAN_MIRROR}/main/d/${PN}/${PN}_${PV}.tar.gz"
++PR = "r1"
 +
-+SRC_URI[tarball.md5sum] = "85e406e8829602988eb1233a82e29f1f"
-+SRC_URI[tarball.sha256sum] = "2371cceb53453d8a7b36451e6a0ccdb66236924545d6042ddd4c34e9668990c0"
-+
-+SRC_URI[hotfix1.md5sum] = "5186c5901e37679a3c835d7b7cdac88e"
-+SRC_URI[hotfix1.sha256sum] = "143898de3fe84455684fddb92947d36c1a51c6a6e3884813fe5e025bd4652368"
- 
- S = "${WORKDIR}/LuaJIT-${PV}"
++SRC_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/${BPN}_${PV}.tar.gz"
+ SRC_URI[md5sum] = "7fdd5f8395162d8728d4b79e97b9819e"
+ SRC_URI[sha256sum] = "d62e98fee5b1a758d83b62eed8d8bdec473677ff782fed89fc4ae3ba3f381401"
  
 -- 
 1.7.9.5
+
 
 
