@@ -1,31 +1,29 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 49B676A428;
-	Tue, 28 May 2013 14:06:32 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4SEAeAS017112; Tue, 28 May 2013 15:10:40 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 3ge9DGDo6jOe; Tue, 28 May 2013 15:10:40 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4SEAaw6017108
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Tue, 28 May 2013 15:10:37 +0100
-Message-ID: <1369749977.14887.165.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Martin Jansa <martin.jansa@gmail.com>, Mark Hatle
-	<mark.hatle@windriver.com>
-Date: Tue, 28 May 2013 15:06:17 +0100
-In-Reply-To: <20130528134606.GJ3192@jama>
-References: <20130528132841.A450B5039B@opal> <20130528134606.GJ3192@jama>
-X-Mailer: Evolution 3.6.4-0ubuntu1 
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [oe-commits] Mark Hatle : base.bbclass: Deprecate the PRINC logic
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DF426A428
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 May 2013 15:05:31 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 57775F811FF; Tue, 28 May 2013 09:05:32 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 9F8BCF811EC;
+	Tue, 28 May 2013 09:05:31 -0600 (MDT)
+Message-ID: <51A4C7C1.6050706@mlbassoc.com>
+Date: Tue, 28 May 2013 09:05:37 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130510 Thunderbird/17.0.6
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1369604103-31315-1-git-send-email-raj.khem@gmail.com>
+	<1369604103-31315-2-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1369604103-31315-2-git-send-email-raj.khem@gmail.com>
+Subject: Re: [meta-browser][PATCH 2/2] chromium: Add recipes for 29.0.1518
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,61 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 May 2013 14:06:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 May 2013 15:05:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2013-05-28 at 15:46 +0200, Martin Jansa wrote:
-> On Tue, May 28, 2013 at 01:28:41PM +0000, git@git.openembedded.org wrote:
-> > Module: openembedded-core.git
-> > Branch: master-next
-> > Commit: e1cf564ebc8e7b4fa626a645356f6a4d7f5ba064
-> > URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=e1cf564ebc8e7b4fa626a645356f6a4d7f5ba064
-> > 
-> > Author: Mark Hatle <mark.hatle@windriver.com>
-> > Date:   Tue May 21 13:29:03 2013 -0500
-> > 
-> > base.bbclass: Deprecate the PRINC logic
-> > 
-> > The PRINC logic is now deprecated, the PR server should be used to handle
-> > the automatic incrementing of the PR (package release) field.  The default
-> > setting of '0' has been removed, and a warning message has been added.
-> 
-> How are people supposed to remove existing PRINC without causing version
-> going backwards?
-> 
-> Do I have to choose between seeing 100 warnings about deprecated PRINC
-> or 100 ERRORs from buildhistory about versions going backwards?
+On 2013-05-26 15:35, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> CC: Eric Bénard <eric@eukrea.com>
+> CC: Denis Carikli <denis@eukrea.com>
+> CC: Otavio Salvador <otavio@ossystems.com.br>
+>
+> ---
+>   .../chromium-29.0.1518.2/armv6/include.gypi        |  8 ++
+>   .../chromium-29.0.1518.2/armv6/oe-defaults.gypi    | 15 ++++
+>   .../chromium-29.0.1518.2/armv7a/include.gypi       |  9 +++
+>   .../chromium-29.0.1518.2/armv7a/oe-defaults.gypi   | 15 ++++
+>   .../chromium-29.0.1518.2/i586/include.gypi         |  5 ++
+>   .../chromium-29.0.1518.2/i586/oe-defaults.gypi     | 15 ++++
+>   .../uninitialised-warning.patch                    | 90 ++++++++++++++++++++++
+>   .../chromium/chromium-29.0.1518.2/unistd-2.patch   | 27 +++++++
+>   .../chromium-29.0.1518.2/x86-64/include.gypi       |  5 ++
+>   .../chromium-29.0.1518.2/x86-64/oe-defaults.gypi   | 15 ++++
+>   recipes-browser/chromium/chromium_29.0.1518.2.bb   | 72 +++++++++++++++++
+>   11 files changed, 276 insertions(+)
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/armv6/include.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/armv6/oe-defaults.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/armv7a/include.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/armv7a/oe-defaults.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/i586/include.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/i586/oe-defaults.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/uninitialised-warning.patch
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/unistd-2.patch
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/x86-64/include.gypi
+>   create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/x86-64/oe-defaults.gypi
+>   create mode 100644 recipes-browser/chromium/chromium_29.0.1518.2.bb
+   ... snip
 
-Sorry, this is coming out a bit backwards.
+Have you tried this?  I just built it for my ARMv7a (i.MX6Q SabreLite) and it
+seems to hang up on any page that uses JavaScript.  Try most any of the links
+on the "Chrome Help" page.
 
-At the TSC meeting, we discussed ways of progressing with removal of
-PRINC as it is causing pain and we shouldn't need it any more. We were
-wondering if we could have the system warn on usage of PRINC, then
-accept PR bumps to the main recipe at the same time that the usage of
-PRINC was removed (taking PR bumps and removing PRINC seems to be the
-only way to proceed). Initially I wondered if we could make it a hard
-error, which would then force the PR bump to be in sync with the
-removal. People are justifiably concerned at the idea of hard errors
-though.
+Maybe I'm missing something?
 
-Mark sent me a patch, I thought it was an RFC on the list and applied it
-to master-next to experiment with. It wasn't send to the list, I'm not
-sure what Mark's intention was, its possible I was supposed to raise the
-subject, then post the patch.
-
-Anyhow, as you point out, the patch has a couple of issues. We need to
-put back the default value into local.conf for now at the very least so
-this warns, rather than gives an obtuse error. Its not going into master
-until there is more discussion.
-
-So lets reset here, Mark will post the RFC patch and we can discuss
-whether there is a way we can get rid of the PRINC usage without causing
-people too many problems. Sorry for the confusion caused :/.
-
-Cheers,
-
-Richard
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
