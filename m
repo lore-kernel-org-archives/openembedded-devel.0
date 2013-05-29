@@ -1,25 +1,30 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 35D3E6A39B;
-	Wed, 29 May 2013 13:45:20 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4TDjLNo012622
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 29 May 2013 06:45:21 -0700 (PDT)
-Received: from msp-mhatle-lx2.wrs.com (172.25.34.61) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Wed, 29 May 2013 06:45:19 -0700
-From: Mark Hatle <mark.hatle@windriver.com>
-To: <openembedded-core@lists.openembedded.org>
-Date: Wed, 29 May 2013 08:51:36 -0500
-Message-ID: <1369835496-20815-1-git-send-email-mark.hatle@windriver.com>
-X-Mailer: git-send-email 1.8.1.2.545.g2f19ada
-MIME-Version: 1.0
-X-Originating-IP: [172.25.34.61]
-Cc: richard.purdie@linuxfoundation.org,
-	openembedded-devel@lists.openembedded.org
-Subject: [RFC PATCH] base.bbclass: Deprecate the PRINC logic
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
+	by mail.openembedded.org (Postfix) with ESMTP id B06696A5E1;
+	Wed, 29 May 2013 14:11:26 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r4TEFebr001715; Wed, 29 May 2013 15:15:40 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id D2flnoPjTQQy; Wed, 29 May 2013 15:15:40 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r4TEFYw6001697
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT); Wed, 29 May 2013 15:15:36 +0100
+Message-ID: <1369836670.14887.217.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Mark Hatle <mark.hatle@windriver.com>
+Date: Wed, 29 May 2013 15:11:10 +0100
+In-Reply-To: <1369835496-20815-1-git-send-email-mark.hatle@windriver.com>
+References: <1369835496-20815-1-git-send-email-mark.hatle@windriver.com>
+X-Mailer: Evolution 3.6.4-0ubuntu1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [RFC PATCH] base.bbclass: Deprecate the PRINC logic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,55 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2013 13:45:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 May 2013 14:11:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Background:
+On Wed, 2013-05-29 at 08:51 -0500, Mark Hatle wrote:
+> Background:
+> 
+> At the recent TSC meeting we were discussing ways of removing the PRINC
+> in favor of the PR server, which should now be standard.  The first step
+> in this process is coming up with a simple patch that declared PRINC as
+> deprecated.  If this type of patch is successful, the block of code could
+> be replaced with a bb.error eventually.
+> 
+> It is not expected that this patch will go in by itself, but instead
+> should be coordinated with changes to the recipes in common layers such
+> as openembedded-core, meta-openembedded/meta-* and other community layers.
+> 
+> The commit message follows:
+> 
+> The PRINC logic is now deprecated, the PR server should be used to handle
+> the automatic incrementing of the PR (package release) field.
+> 
+> A warning message has been added when princ is defined as anything but '0'.
+> 
+> The default setting of '0' has been retained as some layers use embedded
+> python to increment the PRINC filed.  This fails if the base PRINC is not
+> defined.
+> 
+> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+> ---
+>  meta/classes/base.bbclass | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/meta/classes/base.bbclass b/meta/classes/base.bbclass
+> index b1642a2..29084a2 100644
+> --- a/meta/classes/base.bbclass
+> +++ b/meta/classes/base.bbclass
+> @@ -465,8 +465,12 @@ python () {
+>              appendVar('EXTRA_OECONF', extraconf)
+>  
+>      # If PRINC is set, try and increase the PR value by the amount specified
+> +    # The PR server is now the preferred way to handle PR changes based on
+> +    # the checksum of the recipe (including bbappend).  The PRINC is now
+> +    # obsolete.  Return a warning to the user.
+>      princ = d.getVar('PRINC', True)
+>      if princ and princ != "0":
+> +        bb.warn("Use of PRINC is deprecated.  The PR server should be used to automatically increment the PR.  See: https://wiki.yoctoproject.org/wiki/PR_Service"
 
-At the recent TSC meeting we were discussing ways of removing the PRINC
-in favor of the PR server, which should now be standard.  The first step
-in this process is coming up with a simple patch that declared PRINC as
-deprecated.  If this type of patch is successful, the block of code could
-be replaced with a bb.error eventually.
+There is a missing ")" here.
 
-It is not expected that this patch will go in by itself, but instead
-should be coordinated with changes to the recipes in common layers such
-as openembedded-core, meta-openembedded/meta-* and other community layers.
+Cheers,
 
-The commit message follows:
+Richard
 
-The PRINC logic is now deprecated, the PR server should be used to handle
-the automatic incrementing of the PR (package release) field.
+>          pr = d.getVar('PR', True)
+>          pr_prefix = re.search("\D+",pr)
+>          prval = re.search("\d+",pr)
 
-A warning message has been added when princ is defined as anything but '0'.
-
-The default setting of '0' has been retained as some layers use embedded
-python to increment the PRINC filed.  This fails if the base PRINC is not
-defined.
-
-Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
----
- meta/classes/base.bbclass | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta/classes/base.bbclass b/meta/classes/base.bbclass
-index b1642a2..29084a2 100644
---- a/meta/classes/base.bbclass
-+++ b/meta/classes/base.bbclass
-@@ -465,8 +465,12 @@ python () {
-             appendVar('EXTRA_OECONF', extraconf)
- 
-     # If PRINC is set, try and increase the PR value by the amount specified
-+    # The PR server is now the preferred way to handle PR changes based on
-+    # the checksum of the recipe (including bbappend).  The PRINC is now
-+    # obsolete.  Return a warning to the user.
-     princ = d.getVar('PRINC', True)
-     if princ and princ != "0":
-+        bb.warn("Use of PRINC is deprecated.  The PR server should be used to automatically increment the PR.  See: https://wiki.yoctoproject.org/wiki/PR_Service"
-         pr = d.getVar('PR', True)
-         pr_prefix = re.search("\D+",pr)
-         prval = re.search("\d+",pr)
--- 
-1.8.1.2.545.g2f19ada
 
 
