@@ -1,33 +1,40 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B0FF61A80;
-	Wed, 29 May 2013 21:24:41 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4TLSvAi023959; Wed, 29 May 2013 22:28:57 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id YuWzSWI9v6Ks; Wed, 29 May 2013 22:28:57 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	r4TLSstk023955
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Wed, 29 May 2013 22:28:56 +0100
-Message-ID: <1369862668.14887.236.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Date: Wed, 29 May 2013 22:24:28 +0100
-In-Reply-To: <CAP9ODKp1Tu3HXXz-4qOBQa1oY_r338keLFvvP6rZRf+aTyHtxQ@mail.gmail.com>
-References: <1369835496-20815-1-git-send-email-mark.hatle@windriver.com>
-	<20130529143740.GL3192@jama> <1369838840.14887.220.camel@ted>
-	<CAP9ODKp1Tu3HXXz-4qOBQa1oY_r338keLFvvP6rZRf+aTyHtxQ@mail.gmail.com>
-X-Mailer: Evolution 3.6.4-0ubuntu1 
-Mime-Version: 1.0
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC PATCH] base.bbclass: Deprecate the PRINC logic
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 28E5E6066A;
+	Thu, 30 May 2013 02:22:55 +0000 (UTC)
+Received: by mail-ie0-f176.google.com with SMTP id at1so26822715iec.35
+	for <multiple recipients>; Wed, 29 May 2013 19:22:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=Uxvh+ezCQUg7C5WrGuKmmxJSOrNfalJGh0QAoh+PG1M=;
+	b=VdQopOiye6M9FaDuXDc/IyXsNug4rBJ6pM/2LWd97RlDRV3S5VH+5ygGmwIaI/W0xb
+	EYQ9OSA23SWiRvA+tbmg9Pe68nFYO8YELcHzJzUU1Rw5N+YrQ7XAQi5weK7grvifzw+m
+	sKD7vxJNvAwnZVIM1M0vVc3eFAaKRH3Je0d9k1N38wOR/BGVK5TLYkkTyySb7EqlG76X
+	vZsfe/XvzPdhpGe6JYU/DGTGg9EKvIEr1phZQDgMiAcUyinS20Og8FY1+4z7TSVCM/FF
+	fQjm+7Qwk7eICu3YeEW1bESFtmLUH//KyqGJwtMEWMIQBgJBNrEcdoiLM9Pt63j/Roza
+	qeGA==
+X-Received: by 10.50.7.97 with SMTP id i1mr9563529iga.82.1369880575846; Wed,
+	29 May 2013 19:22:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.108.45 with HTTP; Wed, 29 May 2013 19:22:25 -0700 (PDT)
+In-Reply-To: <e349520e-8fb7-4ad6-b588-535dc997e6d5@DB8EHSMHS008.ehs.local>
+References: <F001008B-B137-40CA-B102-2FFBC49C2302@gmail.com>
+	<e349520e-8fb7-4ad6-b588-535dc997e6d5@DB8EHSMHS008.ehs.local>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 May 2013 19:22:25 -0700
+Message-ID: <CAMKF1sr5LaBMCEgnMTXPx8Z+0Vma=AVKTQhYLMfOxutyABzVNw@mail.gmail.com>
+To: Sipke Vriend <sipke.vriend@xilinx.com>
+Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
+	meta-xilinx Mailing List <meta-xilinx@yoctoproject.org>,
+	OpenEmbedded Core Mailing List <openembedded-core@lists.openembedded.org>,
+	David Holsgrove <dholsgrove@xilinx.com>,
+	OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>,
+	John Williams <jwilliams@xilinx.com>, Nathan Rossi <nrossi@xilinx.com>,
+	Mike Matera <matera@xilinx.com>
+Subject: Re: [yocto] meta-xilinx moved to meta-xilinx-community
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,69 +48,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2013 21:24:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 May 2013 02:22:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2013-05-29 at 14:00 -0300, Otavio Salvador wrote:
-> On Wed, May 29, 2013 at 11:47 AM, Richard Purdie
-> <richard.purdie@linuxfoundation.org> wrote:
->         On Wed, 2013-05-29 at 16:37 +0200, Martin Jansa wrote:
->         > On Wed, May 29, 2013 at 08:51:36AM -0500, Mark Hatle wrote:
->         > > Background:
->         > >
->         > > At the recent TSC meeting we were discussing ways of
->         removing the PRINC
->         > > in favor of the PR server, which should now be standard.
->          The first step
->         > > in this process is coming up with a simple patch that
->         declared PRINC as
->         > > deprecated.  If this type of patch is successful, the
->         block of code could
->         > > be replaced with a bb.error eventually.
->         > >
->         > > It is not expected that this patch will go in by itself,
->         but instead
->         > > should be coordinated with changes to the recipes in
->         common layers such
->         > > as openembedded-core, meta-openembedded/meta-* and other
->         community layers.
->         >
->         > This doesn't say what's the process of getting all PR
->         increments
->         > applied.
->         >
->         > Should we send list of recipes and required PR increments
->         per layer (and
->         > someone will sum these increments and create actual PR bump
->         from it). Or
->         > will we take turns and send actual PR bump patches per layer
->         and someone
->         > will define order of layers to go in (so that we prevent
->         many conflicts
->         > while merging)?
->         
->         
->         This is something we need to figure out. The realistic process
->         is
->         probably do this layer by layer. If we can batch some up
->         together that
->         would obviously be better...
-
-> If this is the case, to ensure we have the PR in sync we should have
-> it PRINC as a bb.error; this will cause some pain but will avoid
-> PRServer picking the layer PRINC and losing it in next build. Or does
-> PRServer handle this gracefully?
-
-I proposed this but other TSC members didn't like the approach and would
-prefer a grace/warning period, maybe spanning until after the next
-release.
-
-I can see the arguments both ways...
-
-Cheers,
-
-Richard
+Sipke
 
 
+On Wed, May 29, 2013 at 5:14 PM, Sipke Vriend <sipke.vriend@xilinx.com> wro=
+te:
+> Hi,
+>
+> yoctoproject.org is now hosting meta-xilinx from Xilinx.
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx/
+> This repository was previously at www.github.com/Xilinx/meta-xilinx.git, =
+and will remain there as a mirror.
+>
+> This layer contains Xilinx hardware support metadata for Zynq and Microbl=
+aze architecture, currently with bsp layers targeting the evaluation boards=
+ zc702, zedboard and kc705. The layer is under development and further info=
+rmation is available in README files within the layer.
+>
+
+How does it relate to meta-xilinx-community layer ?
+
+eg.
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx-community/tree/conf/m=
+achine
+
+contains
+
+zc702 zc706 and zedboard machines among others.
+
+and the new meta-xilinx layer contains bsps for zc702 and zedboard as well.
+
+I do not know much about xilinx family of chips. But say if I were to
+use zeboard
+which layer would I choose ?
+
+and how are development of these two layers related if at all
+
+
+> Regards
+> Sipke Vriend
+>
+> -----Original Message-----
+> From: Elvis Dowson [mailto:elvis.dowson@gmail.com]
+> Sent: Friday, 24 May 2013 1:53 PM
+> To: Yocto Discussion Mailing List; OpenEmbedded Developer Mailing List; O=
+penEmbedded Core Mailing List; meta-xilinx Mailing List
+> Cc: Sipke Vriend; Nathan Rossi
+> Subject: meta-xilinx moved to meta-xilinx-community
+>
+> Hi,
+>       The existing meta-xilinx repo has moved to meta-xilinx-community
+>
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-xilinx-community/
+>
+> This layer will contain community support for the Xilinx platforms, inclu=
+ding legacy boards (ML507) and other soft-processor architectures.
+>
+> This paves the way for an officially supported meta-xilinx layer, the det=
+ails of which will be officially announced by Xilinx.
+>
+> Best regards,
+>
+> Elvis Dowson
+>
+>
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
 
