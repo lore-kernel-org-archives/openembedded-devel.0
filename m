@@ -1,25 +1,35 @@
-Return-Path: <Lei.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E06961082
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 730CB60991
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2013 03:42:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r4U3gAd7027437
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 30 May 2013 06:18:05 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id 6so9760589pdd.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 May 2013 20:42:10 -0700 (PDT)
-Received: from pek-lpgtest3.wrs.com (128.224.153.83) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.342.3; Wed, 29 May 2013 20:42:09 -0700
-From: <lei.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe.MacDonald@windriver.com>,
-	<lei.yang@windriver.com>
-Date: Thu, 30 May 2013 11:42:08 +0800
-Message-ID: <1369885328-3057-1-git-send-email-lei.yang@windriver.com>
-X-Mailer: git-send-email 1.7.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] vlan: Add vlan recipe
+	Wed, 29 May 2013 23:18:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=bc0Z/xdj71V5GWfg4LyhU2ADz/gBK6R8Atc5mmhqRm0=;
+	b=Biwm7DA8Z3hEQost+hTkjJgIjVtMB8/GnmhD9pIK4ip6vqN141jA9nEfRGDvW9L5az
+	pbwcSQpDufuyHj9ukm/5aBx0S8oxWkwbdWwIZ/IXQPQ26OT6nPEcoOtIoJ8UfPM9cM34
+	ajTou7uf7ls4kfYsSFMWhGdbkNgtMnRXLtIJ4DN2JyeORarOalRh5XDjzw5KtSkerJbQ
+	ZblPJhhLLp1QWKjrhYMCdCrFybBdOnqJRSSOnRnI8+FbTdmV2QVmMcE8WihtVyqufWTY
+	XWZPd6yWuD0+jc/l8t5vPrgPsNTWsdFePO4JQG7Zisfl5yBtc65uz6nsy2Eg+vCMxumE
+	jeLw==
+X-Received: by 10.66.139.8 with SMTP id qu8mr2609196pab.132.1369894686512;
+	Wed, 29 May 2013 23:18:06 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	un15sm41586075pab.7.2013.05.29.23.18.03 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 29 May 2013 23:18:04 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 30 May 2013 16:31:43 +1000
+Message-Id: <1369895503-13935-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3
+Subject: [meta-oe][PATCH] xterm: update to 293
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,198 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2013 03:42:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 May 2013 06:18:05 -0000
 
-From: Lei Yang <lei.yang@windriver.com>
+License copyright years was updated from 1999-2010,2011 to
+1999-2012,2013.
 
-A 802.1q vlan support program,which can be used by virt-test
-
-Signed-off-by: Lei Yang <lei.yang@windriver.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-networking/recipes-support/vlan/files/ip      |   21 +++++++
- .../recipes-support/vlan/files/vlan-post-down      |   28 +++++++++
- .../recipes-support/vlan/files/vlan-pre-up         |   61 ++++++++++++++++++++
- meta-networking/recipes-support/vlan/vlan_1.9.bb   |   38 ++++++++++++
- 4 files changed, 148 insertions(+), 0 deletions(-)
- create mode 100755 meta-networking/recipes-support/vlan/files/ip
- create mode 100755 meta-networking/recipes-support/vlan/files/vlan-post-down
- create mode 100755 meta-networking/recipes-support/vlan/files/vlan-pre-up
- create mode 100755 meta-networking/recipes-support/vlan/vlan_1.9.bb
+ meta-oe/recipes-graphics/xorg-app/{xterm_277.bb => xterm_293.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_277.bb => xterm_293.bb} (73%)
 
-diff --git a/meta-networking/recipes-support/vlan/files/ip b/meta-networking/recipes-support/vlan/files/ip
-new file mode 100755
-index 0000000..d7de05c
---- /dev/null
-+++ b/meta-networking/recipes-support/vlan/files/ip
-@@ -0,0 +1,21 @@
-+#!/bin/sh
-+# This should probably go into ifupdown
-+# But usually only those with lots of interfaces (vlans) need these
-+if [ -d "/proc/sys/net/ipv4/conf/$IFACE" ]
-+then
-+	if [ -n "$IF_IP_PROXY_ARP" ]; then
-+		if [ "$IF_IP_PROXY_ARP" -eq "1" ]; then
-+			echo 1 > "/proc/sys/net/ipv4/conf/$IFACE/proxy_arp"
-+		else
-+			echo 0 > "/proc/sys/net/ipv4/conf/$IFACE/proxy_arp"
-+		fi
-+	fi
-+	if [ -n "$IF_IP_RP_FILTER" ]; then
-+		if [ "$IF_IP_RP_FILTER" -eq "0" ]; then
-+			echo 0 > "/proc/sys/net/ipv4/conf/$IFACE/rp_filter"
-+		else
-+			echo 1 > "/proc/sys/net/ipv4/conf/$IFACE/rp_filter"
-+		fi
-+	fi
-+fi
-+
-diff --git a/meta-networking/recipes-support/vlan/files/vlan-post-down b/meta-networking/recipes-support/vlan/files/vlan-post-down
-new file mode 100755
-index 0000000..89b16fb
---- /dev/null
-+++ b/meta-networking/recipes-support/vlan/files/vlan-post-down
-@@ -0,0 +1,28 @@
-+#!/bin/sh
-+
-+# If IFACE is an automagic vlan interface (without the vlan-raw-device
-+# parameter) then let's try to discover the magic here..  Another way would be
-+# to just probe for the right device name in /proc/net/vlan
-+
-+case "$IFACE" in
-+  # Ignore any alias (#272891)
-+  *:*)
-+    exit 0
-+  ;;
-+  eth*.0*|bond*.0*|wlan*.0*)
-+    IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
-+  ;;
-+  eth*.*|bond*.*|wlan*.*)
-+    IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
-+  ;;
-+  # Test for vlan raw device (#196890, #292648)
-+  *)
-+    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
-+  ;;
-+esac
-+
-+if [ ! -x /sbin/vconfig ]; then
-+    exit 0
-+fi
-+
-+vconfig rem $IFACE
-diff --git a/meta-networking/recipes-support/vlan/files/vlan-pre-up b/meta-networking/recipes-support/vlan/files/vlan-pre-up
-new file mode 100755
-index 0000000..b977be8
---- /dev/null
-+++ b/meta-networking/recipes-support/vlan/files/vlan-pre-up
-@@ -0,0 +1,61 @@
-+#!/bin/sh
-+
-+# Most of this stuff is to enable vlans
-+
-+case "$IFACE" in
-+  # Ignore any alias (#272891) which uses <interface>:<alabel>
-+  *:*)
-+    exit 0
-+  ;;
-+  vlan0*)
-+    vconfig set_name_type VLAN_PLUS_VID
-+    VLANID=`echo $IFACE|sed "s/vlan0*//"`
-+  ;;
-+  vlan*)
-+    vconfig set_name_type VLAN_PLUS_VID_NO_PAD
-+    VLANID=`echo $IFACE|sed "s/vlan0*//"`
-+  ;;
-+  eth*.0*|bond*.0*|wlan*.0*)
-+    vconfig set_name_type DEV_PLUS_VID
-+    VLANID=`echo $IFACE|sed "s/eth[0-9][0-9]*\.0*//g;s/bond[0-9][0-9]*\.0*//;s/wlan[0-9][0-9]*\.0*//"`
-+    IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
-+  ;;
-+  eth*.*|bond*.*|wlan*.*)
-+    vconfig set_name_type DEV_PLUS_VID_NO_PAD
-+    VLANID=`echo $IFACE|sed "s/eth[0-9][0-9]*\.0*//g;s/bond[0-9][0-9]*\.0*//g;s/wlan[0-9][0-9]*\.0*//g"`
-+    IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
-+  ;;
-+  *.0*)
-+    # Silently ignore interfaces which we do not (know how to) support
-+    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
-+    vconfig set_name_type DEV_PLUS_VID
-+    VLANID=`echo $IFACE|sed "s/[^.]*\.0*//g"`
-+  ;;
-+  *.*)
-+    # Silently ignore interfaces which we do not (know how to) support
-+    [ -z "$IF_VLAN_RAW_DEVICE" ] && exit 0
-+    vconfig set_name_type DEV_PLUS_VID_NO_PAD
-+    VLANID=`echo $IFACE|sed "s/[^.]*\.0*//g"`
-+  ;;
-+
-+  *)
-+    exit 0
-+  ;;
-+esac
-+
-+if [ -n "$IF_VLAN_RAW_DEVICE" ]; then
-+    if [ ! -x /sbin/vconfig ]; then
-+        exit 0
-+    fi
-+    if ! ip link show dev "$IF_VLAN_RAW_DEVICE" > /dev/null; then
-+        echo "$IF_VLAN_RAW_DEVICE does not exist, unable to create $IFACE"
-+        exit 1
-+    fi
-+    ip link set up dev $IF_VLAN_RAW_DEVICE
-+    vconfig add $IF_VLAN_RAW_DEVICE $VLANID
-+fi
-+
-+# This is not vlan specific, and should actually go somewhere else.
-+if [ -n "$IF_HW_MAC_ADDRESS" ]; then
-+    ip link set $IFACE address $IF_HW_MAC_ADDRESS
-+fi
-diff --git a/meta-networking/recipes-support/vlan/vlan_1.9.bb b/meta-networking/recipes-support/vlan/vlan_1.9.bb
-new file mode 100755
-index 0000000..464150c
---- /dev/null
-+++ b/meta-networking/recipes-support/vlan/vlan_1.9.bb
-@@ -0,0 +1,38 @@
-+DESCRIPTION = "802.1q vlan support program"
-+HOMEPAGE = "http://www.candelatech.com/~greear/"
-+LICENSE         = "GPLv2"
-+SECTION = "console/network"
-+
-+S = "${WORKDIR}/vlan/"
-+
-+SRC_URI = " \
-+	http://www.candelatech.com/~greear/vlan/vlan.${PV}.tar.gz \
-+	file://ip \
-+	file://vlan-pre-up \
-+	file://vlan-post-down \
-+	"
-+
-+CCFLAGS = "-g -D_GNU_SOURCE -Wall -I${STAGING_INCDIR}"
-+LDLIBS = ""
-+
-+do_compile() {
-+	${CC} ${CCFLAGS} -c vconfig.c
-+	${CC} ${CCFLAGS} ${LDFLAGS} -o vconfig vconfig.o ${LDLIBS}
-+}
-+
-+do_install() {
-+	install -d "${D}${sbindir}"
-+	install -m 755 "${S}/vconfig" "${D}${sbindir}/vconfig"
-+	install -d ${D}/${sysconfdir}/network/if-pre-up.d
-+	install -d ${D}/${sysconfdir}/network/if-post-down.d
-+	install -d ${D}/${sysconfdir}/network/if-up.d
-+	install -m 0755 ${WORKDIR}/ip ${D}/${sysconfdir}/network/if-up.d/
-+	install -m 0755 ${WORKDIR}/vlan-pre-up ${D}/${sysconfdir}/network/if-pre-up.d/vlan
-+	install -m 0755 ${WORKDIR}/vlan-post-down ${D}/${sysconfdir}/network/if-post-down.d/vlan
-+}
-+
-+
-+SRC_URI[md5sum] = "5f0c6060b33956fb16e11a15467dd394"
-+SRC_URI[sha256sum] = "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a77392d9aeb4868842b4cca"
-+LIC_FILES_CHKSUM = "file://macvlan_config.c;beginline=4;endline=62;md5=dc0660d77e4313e8ccdf256fbe436a63"
-+
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_277.bb b/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
+similarity index 73%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_277.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_293.bb
+index c56be09..20e88f1 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_277.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
+@@ -2,11 +2,11 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ DESCRIPTION = "xterm is the standard terminal emulator for the X Window System."
+ DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
+ 
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=33;md5=71d7532e485b8d325906bd751617e2a4"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=33;md5=3aaef904421576f75ce2ee32af88c375"
+ 
+ SRC_URI = "ftp://invisible-island.net/xterm/${PN}-${PV}.tgz"
+-SRC_URI[md5sum] = "c0de5c2f7b3a50244c5cdd53dcab1de5"
+-SRC_URI[sha256sum] = "6cd38606e4179a874220f33dfd41063f93cd1c717aa26c742beb7adea3c1471e"
++SRC_URI[md5sum] = "f9dc37486d5f1e550b6dc2e26a8a0439"
++SRC_URI[sha256sum] = "64e9c41137eac4277d0cfe04312b12dc5d11224f49fc999ff7f6b9597bf55b7b"
+ 
+ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+                  --x-libraries=${STAGING_LIBDIR} \
 -- 
-1.7.1
+1.8.3
 
 
