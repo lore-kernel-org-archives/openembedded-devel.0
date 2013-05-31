@@ -1,24 +1,26 @@
-Return-Path: <Xufeng.Zhang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EF5BB6102A
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C98860655
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2013 06:06:41 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r4V66iPC024745
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 May 2013 23:06:44 -0700 (PDT)
-Received: from localhost.localdomain (128.224.163.210) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 30 May 2013 23:06:42 -0700
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 May 2013 14:18:45 +0800
-Message-ID: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
-X-Mailer: git-send-email 1.7.0.2
+	Fri, 31 May 2013 08:35:28 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 31 May 2013 01:33:20 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,777,1363158000"; d="scan'208";a="346158820"
+Received: from unknown (HELO helios.localnet) ([10.252.121.185])
+	by orsmga002.jf.intel.com with ESMTP; 31 May 2013 01:35:00 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Xufeng Zhang <xufeng.zhang@windriver.com>
+Date: Fri, 31 May 2013 09:34:58 +0100
+Message-ID: <1704407.SDREl8D59z@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.2 (Linux/3.8.0-22-generic; KDE/4.10.2; i686; ; )
+In-Reply-To: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
+References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
 MIME-Version: 1.0
-Subject: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
+Cc: openembedded-devel@lists.openembedded.org,
+	Joe MacDonald <joe.macdonald@windriver.com>
+Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,131 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2013 06:06:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 31 May 2013 08:35:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The main changes include:
-1). Add ntp:ntp(user:group) to system.
-2). Running ntpd dameon as ntp:ntp.
-3). Move relevant files from /usr/bin to /usr/sbin.
-4). Add crypto support.
+On Friday 31 May 2013 14:18:45 Xufeng Zhang wrote:
+> The main changes include:
+> 1). Add ntp:ntp(user:group) to system.
+> 2). Running ntpd dameon as ntp:ntp.
 
-[YOCTO #4567]
-[ CQID: WIND00417282 ]
+> 3). Move relevant files from /usr/bin to /usr/sbin.
 
-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
----
- meta-networking/recipes-support/ntp/files/ntpd    |    8 ++++----
- meta-networking/recipes-support/ntp/files/ntpdate |    6 +++---
- meta-networking/recipes-support/ntp/ntp.inc       |   20 ++++++++++++--------
- 3 files changed, 19 insertions(+), 15 deletions(-)
+I'm not sure but I think the way this has been done (--with-binsubdir=sbin) is 
+going to bypass the ability to set sbindir in the distro config. If that's the 
+case then I don't think this is a good change, although I appreciate having 
+ntpd in /usr/sbin by default would be more appropriate.
 
-diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/files/ntpd
-index ae50f13..285f5c0 100755
---- a/meta-networking/recipes-support/ntp/files/ntpd
-+++ b/meta-networking/recipes-support/ntp/files/ntpd
-@@ -1,7 +1,7 @@
- #! /bin/sh
- #
- # ntpd	init.d script for ntpdc from ntp.isc.org
--test -x /usr/bin/ntpd -a -r /etc/ntp.conf || exit 0
-+test -x /usr/sbin/ntpd -a -r /etc/ntp.conf || exit 0
- # rcS contains TICKADJ
- test -r /etc/default/rcS && . /etc/default/rcS
- 
-@@ -9,9 +9,9 @@ test -r /etc/default/rcS && . /etc/default/rcS
- settick(){
-   	# If TICKADJ is set we *must* adjust it before we start, because the
- 	# driftfile relies on the correct setting
--	test -n "$TICKADJ" -a -x /usr/bin/tickadj && {
-+	test -n "$TICKADJ" -a -x /usr/sbin/tickadj && {
- 		echo -n "Setting tick to $TICKADJ: "
--		/usr/bin/tickadj "$TICKADJ"
-+		/usr/sbin/tickadj "$TICKADJ"
- 		echo "done"
- 	}
- }
-@@ -21,7 +21,7 @@ startdaemon(){
- 	# this.  If ntpd seems to disappear after a while assume TICKADJ
- 	# above is set to a totally incorrect value.
- 	echo -n "Starting ntpd: "
--	start-stop-daemon --start -x /usr/bin/ntpd -- -p /var/run/ntp.pid "$@"
-+	start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
- 	echo "done"
- }
- stopdaemon(){
-diff --git a/meta-networking/recipes-support/ntp/files/ntpdate b/meta-networking/recipes-support/ntp/files/ntpdate
-index ab0551c..17b64d1 100755
---- a/meta-networking/recipes-support/ntp/files/ntpdate
-+++ b/meta-networking/recipes-support/ntp/files/ntpdate
-@@ -1,8 +1,8 @@
- #!/bin/sh
- 
--PATH=/sbin:/bin:/usr/bin
-+PATH=/sbin:/bin:/usr/bin:/usr/sbin
- 
--test -x /usr/bin/ntpdate || exit 0
-+test -x /usr/sbin/ntpdate || exit 0
- 
- if test -f /etc/default/ntpdate ; then
- . /etc/default/ntpdate
-@@ -40,7 +40,7 @@ if [ -x /usr/bin/lockfile-create ]; then
- 	LOCKTOUCHPID="$!"
- fi
- 
--if /usr/bin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
-+if /usr/sbin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
- 	if [ "$UPDATE_HWCLOCK" = "yes" ]; then
- 		hwclock --systohc || :
- 	fi
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index 79e7401..b52a7d6 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -24,14 +24,19 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://sntp \
- "
- 
--inherit autotools update-rc.d systemd
-+inherit autotools update-rc.d systemd useradd
- 
- # The ac_cv_header_readline_history is to stop ntpdc depending on either
- # readline or curses
--EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no"
-+EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
--PACKAGECONFIG ??= ""
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "--system --home /etc/ntp \
-+		       --no-create-home --shell /bin/false \
-+		       --user-group ntp"
-+
-+PACKAGECONFIG ??= "openssl"
- PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-                           --with-openssl-incdir=${STAGING_INCDIR} \
-                           --with-crypto, \
-@@ -91,10 +96,10 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
- 
- RSUGGESTS_${PN} = "iana-etc"
- 
--FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
--FILES_${PN}-tickadj = "${bindir}/tickadj"
--FILES_${PN}-utils = "${bindir}"
--FILES_ntpdate = "${bindir}/ntpdate \
-+FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir}"
-+FILES_${PN}-tickadj = "${sbindir}/tickadj"
-+FILES_${PN}-utils = "${sbindir}"
-+FILES_ntpdate = "${sbindir}/ntpdate \
-     ${sysconfdir}/network/if-up.d/ntpdate-sync \
-     ${bindir}/ntpdate-sync \
-     ${sysconfdir}/default/ntpdate \
-@@ -122,4 +127,3 @@ else
-     fi
- fi
- }
--
+> 4). Add crypto support.
+
+The support is already there, it's just off by default and that was 
+intentional. Those that need this can easily enable it in their distro config.
+
+Cheers,
+Paul
+
 -- 
-1.7.0.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
