@@ -1,35 +1,36 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id CCEBF608F7
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D705619E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2013 14:41:01 +0000 (UTC)
-Received: by mail-pb0-f50.google.com with SMTP id wy17so2285421pbc.23
+	Fri, 31 May 2013 21:56:02 +0000 (UTC)
+Received: by mail-ea0-f172.google.com with SMTP id d10so2135475eaj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2013 07:41:02 -0700 (PDT)
+	Fri, 31 May 2013 14:56:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=eEDFfqzsksZbNiQD3z2HZocioivNFrrXcTEM3C7+s3s=;
-	b=VFGZO0brotz1/CYAwFSFnYOcezyQZ82jmJ+rOg8neOSLZwKYGW2VP/MxEIkJEi8iGN
-	WEqyJx0FbB5TmGQhAXrpqjOB0EdrG3m39mqGP/dYG1dr9PiUP+25SyugtkKoo6hsSzGt
-	1jjJab1ceNWkJJbGws+JYCLa2TTUot8BYy5G80NZo+HMGf5cyyY/0d4G6uYH1lMwois1
-	aXH6Pwjos1IsJvnzlCMtWIFrbPPoc72mJCmv3omkdfynz0Y3up3PBZmSCKoakPhh8zNc
-	7iCFtb49UXska0jw2zNZeNzL4h1M0MHkzCmzwz/cdzODxe0meTZVFNydOrOUexX4L/uO
-	bhIQ==
-X-Received: by 10.66.235.98 with SMTP id ul2mr13844278pac.38.1370011262711;
-	Fri, 31 May 2013 07:41:02 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id 3sm46922180pbj.46.2013.05.31.07.41.00
+	bh=zAhx02IsqWe8wAZ1x/5ypkLcFNcIWY4tv4EWgEJB6Yg=;
+	b=c9Bk9u/OJMhFAk7ps9T9K8s37lRzPF6qYbaqs1E1PJi+GqDAZTJLqPRcAMTs0GFBht
+	isdQnsqIFIk9RtdsLzaKa7mhlEIav6GprI3xoZcTQIjt4btqAGN0q+L0i0c+Gl/MjvwE
+	Grdm6BX12/LXzRYIyTn2EayVBsrpvt6NhmGy+BRuzeRzgD0QcrZcwGOy1Kp84n/bUQnk
+	l1g9yusSqUNSwnbeAPqS5T+0uRDe+ixu3F1px2Yi041dLQKmtK0HU9gfay04fvdwMU6R
+	EBL/Me2vvi7RaC8vM2Icbi4Va+qByX6gv3CL+aSdoC+m36f5LiTV6myTEWfKAk2KjkEs
+	jRBg==
+X-Received: by 10.15.63.129 with SMTP id m1mr14857905eex.108.1370037362239;
+	Fri, 31 May 2013 14:56:02 -0700 (PDT)
+Received: from mizar.localdomain
+	(host199-42-dynamic.183-80-r.retail.telecomitalia.it.
+	[80.183.42.199])
+	by mx.google.com with ESMTPSA id f1sm41488853eem.17.2013.05.31.14.56.00
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 May 2013 07:41:01 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Fri, 31 May 2013 14:56:01 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jun 2013 00:35:38 +1000
-Message-Id: <1370010938-32274-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.8.3
-Subject: [meta-oe][PATCH] llvm-common: move cross script install to sysroot preprocess function
+Date: Fri, 31 May 2013 23:55:55 +0200
+Message-Id: <1370037356-12471-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-initramfs][PATCH 1/2] linux-yocto-tiny-kexecboot_3.2: remove orphan recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2013 14:41:01 -0000
+X-List-Received-Date: Fri, 31 May 2013 21:56:02 -0000
 
-The llvm-config script doesn't get placed in the target sysroot
-crossscripts directory otherwise.
+* this kernel recipe was requiring linux-yocto-tiny_3.2.bb
+* which has been removed on 2013-05-31 with commit id
+* b8d53d8f91bd1b165016ea1063868c8b15f07ce0
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-core/llvm/llvm-common.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../linux/linux-yocto-tiny-kexecboot_3.2.bb             | 17 -----------------
+ 1 file changed, 17 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
 
-diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes-core/llvm/llvm-common.bb
-index 612fd34..c74ba81 100644
---- a/meta-oe/recipes-core/llvm/llvm-common.bb
-+++ b/meta-oe/recipes-core/llvm/llvm-common.bb
-@@ -6,7 +6,10 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
- 
- SRC_URI = "file://llvm-config"
- 
+diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
+deleted file mode 100644
+index d4798e8..0000000
+--- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.2.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require recipes-kernel/linux/linux-yocto-tiny_3.2.bb
+-
+-PACKAGES = ""
+-PROVIDES = ""
+-
+-KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${PR}-${MACHINE}"
+-KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
+-
+-INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
+-
+-do_populate_sysroot() {
+-    :
+-}
+-
 -do_install() {
-+SYSROOT_PREPROCESS_FUNCS += "llvm_common_sysroot_preprocess"
-+SYSROOT_PREPROCESS_FUNCS_virtclass-native += ""
-+
-+llvm_common_sysroot_preprocess() {
-     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-     install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
- }
+-    :
+-}
 -- 
-1.8.3
+1.8.1.5
 
 
