@@ -1,27 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id ABE7760959
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 48D62608F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 May 2013 11:14:01 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 31 May 2013 04:14:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,778,1363158000"; d="scan'208";a="346129843"
-Received: from unknown (HELO helios.localnet) ([10.252.121.185])
-	by fmsmga002.fm.intel.com with ESMTP; 31 May 2013 04:14:01 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Xufeng Zhang <xufeng.zhang@windriver.com>
-Date: Fri, 31 May 2013 12:14 +0100
-Message-ID: <1798099.8KyYg2VTfs@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.2 (Linux/3.8.0-22-generic; KDE/4.10.2; i686; ; )
-In-Reply-To: <51A86887.1050601@windriver.com>
-References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
-	<1704407.SDREl8D59z@helios> <51A86887.1050601@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Joe MacDonald <joe.macdonald@windriver.com>
-Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
+	Fri, 31 May 2013 13:35:26 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id u11so2187160pdi.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 May 2013 06:35:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=TlVtfhJnHj33bi8Jhm6oLAQOMM9dzQ8yBWAd3A2ZAL0=;
+	b=QWmPMYCAnTIq1WHkzw+7+OFEHMIObMKfv2L2Fa3cweuz3DuT38JcFsCSYNHrHG2Wma
+	ZJZvrtu7wCUr0RlGmhhjgQ1ruFAnoyY9CwUAQmO0GvEHtRPYzqz7s2RS2wsVol9Q6SE/
+	+rJlDxVfYc+bRPt337sRQvzi1EwnL2QiUv3UqIKJn1WaKzYO4A3yLtrQ42O4cFBHJ8l5
+	GEDwFWNqmAgSp4qjdoFSeIGcccHBN09l8B4CLUun6v0tyYpiUmwLcH4UdtRplXUyS37l
+	VCDwgIUrhHjNzr8q00Bs+5unYAomrMn5SVC401XCvFW2YzgxvBhlr9gtPd9Z9YWCeM4W
+	NgnQ==
+X-Received: by 10.66.232.164 with SMTP id tp4mr13603845pac.39.1370007327484;
+	Fri, 31 May 2013 06:35:27 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id b7sm46717944pba.39.2013.05.31.06.35.25
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 31 May 2013 06:35:26 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 May 2013 23:30:30 +1000
+Message-Id: <1370007030-19796-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3
+Subject: [meta-oe][PATCH] llvm: fix parallel build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,52 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 May 2013 11:14:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 31 May 2013 13:35:26 -0000
 
-On Friday 31 May 2013 17:08:23 Xufeng Zhang wrote:
-> On 05/31/2013 04:34 PM, Paul Eggleton wrote:
-> > On Friday 31 May 2013 14:18:45 Xufeng Zhang wrote:
-> >> The main changes include:
-> >> 1). Add ntp:ntp(user:group) to system.
-> >> 2). Running ntpd dameon as ntp:ntp.
-> >> 
-> >> 
-> >> 3). Move relevant files from /usr/bin to /usr/sbin.
-> 
-> Thanks for your review, Paul!
-> 
-> > I'm not sure but I think the way this has been done
-> > (--with-binsubdir=sbin) is going to bypass the ability to set sbindir in
-> > the distro config. If that's the case then I don't think this is a good
-> > change, although I appreciate having ntpd in /usr/sbin by default would
-> > be more appropriate.
-> 
-> But currently it's the proper and easy way to do that, right?
-> I can think out any better way to do the same job.
+Doing a parallel build may result in the following:
+*** No rule to make target `native/bin/tblgen', needed by `include/llvm/Intrinsics.gen.tmp'
 
-I'm not sure of the details of ntp's build system, but perhaps we could patch 
-it to use sbindir instead of bindir for the appropriate binaries?
+Avoid this by building tblgen first before building the rest of llvm.
+
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-core/llvm/llvm.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
+index 546a40b..a56fda0 100644
+--- a/meta-oe/recipes-core/llvm/llvm.inc
++++ b/meta-oe/recipes-core/llvm/llvm.inc
+@@ -104,6 +104,11 @@ FILES_${PN}-dev = " \
+                    ${libdir}/llvm${LLVM_RELEASE}/*.a \
+ "
  
-> >> 4). Add crypto support.
-> > 
-> > The support is already there, it's just off by default and that was
-> > intentional. Those that need this can easily enable it in their distro
-> > config.
->
-> I'm not sure why we do that intentional, but shouldn't the package run
-> as secure as possible by default?
-
-The main concern is the dependency on OpenSSL that this introduces which many 
-users do not want. I suspect it also depends on whether the NTP servers you 
-are using support SSL.
-
-Cheers,
-Paul
-
++base_do_compile_prepend() {
++    # Avoid *** No rule to make target `native/bin/tblgen', needed by `include/llvm/Intrinsics.gen.tmp'
++    oe_runmake tblgen
++}
++
+ do_install() {
+     # Install into a private directory to be able to reorganize the files.
+ 
 -- 
+1.8.3
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
