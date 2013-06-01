@@ -1,32 +1,33 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id F236F620C2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 14C426098F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jun 2013 14:47:44 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Uin5t-0002L1-Ha for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Jun 2013 16:47:45 +0200
-Received: from tfitzsim-lnx.cisco.com ([161.44.225.6])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jun 2013 16:47:45 +0200
-Received: from fitzsim by tfitzsim-lnx.cisco.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sat,  1 Jun 2013 18:03:13 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id b15so671592eek.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jun 2013 16:47:45 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 01 Jun 2013 11:03:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=dmJwEq9NJu/L45gs74PHcWhg8n1UtHdCb4BgmmaS25I=;
+	b=kRhRurHFw1g4rel/eTcmUvDWOlnyKZ0WYDw3rD/8jCmVkXy0fp9RdGsDlqB2KeISB2
+	6a1M5ce8wE5BMX70/zypmZE1udMTleytk+VyIN5k8ifuzk5iy2GswosH3dxN2VhjSfm3
+	1W+vNtO2KQzWV57xNZh9ljXWrDI0S3FUHIaeR0s33ML1a1iF/HETi4MwElP++XArUBNG
+	Z+cD2eqtT/s4v08qTV1l3yqWUAyYEHUql1gzGi5jxKJ990WU8Ivu9P6YwVUVQYuMq2j2
+	w+RzlGNSTgu4fksIOUWrFoiQyCnmCE+G0wOdmuHaLjjXLYFo/PUVW4LnLJrwbua4jpLf
+	CG/Q==
+X-Received: by 10.14.215.137 with SMTP id e9mr17485565eep.44.1370109793563;
+	Sat, 01 Jun 2013 11:03:13 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	a5sm74356832ees.6.2013.06.01.11.03.12 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 01 Jun 2013 11:03:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Thomas Fitzsimmons <fitzsim@cisco.com>
-Date: Sat, 01 Jun 2013 10:48:13 -0400
-Message-ID: <m6pg8v2tanv6.fsf@cisco.com>
-References: <m6pgd2s6a4yg.fsf@cisco.com> <5272086.yW5j78zTuC@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: tfitzsim-lnx.cisco.com
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1.50 (gnu/linux)
-Cancel-Lock: sha1:AFFuQrJwd6Zsm/xBppicE6S4fgc=
-Subject: Re: [meta-networking][PATCH] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
+Date: Sat,  1 Jun 2013 20:03:22 +0200
+Message-Id: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.2.1
+Subject: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,97 +41,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jun 2013 14:47:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 01 Jun 2013 18:03:14 -0000
 
-Hi Paul,
+---
+ ...include-Element.h-for-hasTagName-function.patch | 43 ++++++++++++++++++++++
+ meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
 
-Paul Eggleton <paul.eggleton@linux.intel.com> writes:
-
-> Hi Thomas,
->
-> On Friday 31 May 2013 23:24:23 Thomas Fitzsimmons wrote:
->> This patch fixes a net-snmp build failure for non-systemd builds [1]:
->> | .libs/snmpd.o: In function `main':
->> | [...]/net-snmp/5.7.2-r0/net-snmp-5.7.2/agent/snmpd.c:459: undefined
->> | reference to `netsnmp_sd_listen_fds' collect2: error: ld returned 1 exit
->> | status
->> 
->> It backports a typo fix from upstream:
->> 
->> commit 3692875172352f72cf3afd0d35f355e83d7e421b
->> Author: Bart Van Assche <bvanassche@acm.org>
->> Date:   Mon Aug 8 18:22:08 2011 +0200
->> 
->>     Fix typos introduced in commit 19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11.
->> Unbreaks the build.
->> 
->> Thomas
->> 
->> 1. Previously reported here:
->>    http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57756
->> 
->> Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
->> ---
->>  .../net-snmp/net-snmp/systemd-support.patch        |    5 +++--
->>  1 files changed, 3 insertions(+), 2 deletions(-)
->> 
->> diff --git
->> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
->> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
->> index 18955f2..b88531f 100644
->> ---
->> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
->> +++
->> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
->> @@ -7,6 +7,7 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
->>  0641e43c694c485cbbffef0556efc4641bd3ff50
->>  76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
->>  bf108d7f1354f6276fc43c129963f2c49b9fc242
->> +3692875172352f72cf3afd0d35f355e83d7e421b
->>  74412748067c685e1d8ab6ed3bcc3ca9c2774844
->>  86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
->>  63557cf8986a33dba1d4429b583a901361052c4f
->> @@ -89,10 +90,10 @@ index b177d5b..08bdfc7 100644
->>   #endif
->> 
->>   #ifndef WIN32
->> -+#ifndef NETSNMP_NO_SYSYSTEMD
->> ++#ifndef NETSNMP_NO_SYSTEMD
->>  +    /* check if systemd has sockets for us and don't close them */
->>  +    prepared_sockets = netsnmp_sd_listen_fds(0);
->> -+#endif /* NETSNMP_NO_SYSYSTEMD */
->> ++#endif /* NETSNMP_NO_SYSTEMD */
->>  +
->>       /*
->>        * close all non-standard file descriptors we may have
->
-> Could you please include a header with the description, Signed-off-by and 
-> "Upstream-Status: Backport" at the top of the inner patch itself? This makes 
-> things easier when upgrading the recipe in future.
-
-This is actually a patch to an existing backport patch that has a header
-(but no signed-off-by):
-
-Systemd support backported from the master branch as of 23/04/2012 (post 5.7.1, pre 5.8).
-
-The following commits have been cherry-picked:
-
-19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11
-fef6cddfdb94da1a6b1fb768af62918b80f11fd3
-0641e43c694c485cbbffef0556efc4641bd3ff50
-76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
-bf108d7f1354f6276fc43c129963f2c49b9fc242
-3692875172352f72cf3afd0d35f355e83d7e421b
-74412748067c685e1d8ab6ed3bcc3ca9c2774844
-86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
-63557cf8986a33dba1d4429b583a901361052c4f
-
-Upstream-Status: Backport
-
-I updated the header with the extra commit I cherry-picked.  How should
-I handle Signed-off-by in this situation?
-
-Thomas
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
+new file mode 100644
+index 0000000..f553663
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
+@@ -0,0 +1,43 @@
++From 3de7c4633751c3e55152d4e2429dfcc0f69a1de3 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Sat, 1 Jun 2013 19:23:54 +0200
++Subject: [PATCH] ewk: include Element.h for hasTagName function
++
++* ewebkit build fails like gtk in http://trac.webkit.org/changeset/72745
++  | ../../../lib/libwebcore_efl.so.0.1.0: undefined reference to `WebCore::Node::hasTagName(WebCore::QualifiedName const&) const'
++  | collect2: error: ld returned 1 exit status
++  | make[2]: *** [bin/DumpRenderTree] Error 1
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ Source/WebKit/efl/ewk/ewk_frame.cpp | 1 +
++ Source/WebKit/efl/ewk/ewk_view.cpp  | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/Source/WebKit/efl/ewk/ewk_frame.cpp b/Source/WebKit/efl/ewk/ewk_frame.cpp
++index fd1ffd2..c86601a 100644
++--- a/Source/WebKit/efl/ewk/ewk_frame.cpp
+++++ b/Source/WebKit/efl/ewk/ewk_frame.cpp
++@@ -32,6 +32,7 @@
++ #include "FocusController.h"
++ #include "FrameLoaderClientEfl.h"
++ #include "FrameView.h"
+++#include "Element.h"
++ #include "HTMLCollection.h"
++ #include "HTMLHeadElement.h"
++ #include "HTMLImageElement.h"
++diff --git a/Source/WebKit/efl/ewk/ewk_view.cpp b/Source/WebKit/efl/ewk/ewk_view.cpp
++index 9798e94..7a5da60 100644
++--- a/Source/WebKit/efl/ewk/ewk_view.cpp
+++++ b/Source/WebKit/efl/ewk/ewk_view.cpp
++@@ -36,6 +36,7 @@
++ #include "FocusController.h"
++ #include "FrameLoaderClientEfl.h"
++ #include "FrameView.h"
+++#include "Element.h"
++ #include "GraphicsContext.h"
++ #include "HTMLElement.h"
++ #include "HTMLInputElement.h"
++-- 
++1.8.2.1
++
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+index be5a534..ce73431 100644
+--- a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
++++ b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+@@ -12,7 +12,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
+ # 120145 and 122103 introduces dependency on libsoup-2.39.3 and glib-networking-2.33.2
+ SRCREV = "120144"
+ PV = "1.9.3+svnr${SRCPV}"
+-PR = "r2"
++PR = "r3"
+ 
+ SRCREV_FORMAT = "source"
+ 
+@@ -22,6 +22,7 @@ SRC_URI = "\
+     svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
+     svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
+     svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
++    file://0001-ewk-include-Element.h-for-hasTagName-function.patch \
+     file://CMakeLists.txt \
+     file://bison-2.6.patch \
+ "
+-- 
+1.8.2.1
 
 
