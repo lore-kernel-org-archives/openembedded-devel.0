@@ -1,33 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id CE7B0620C2
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id F236F620C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jun 2013 14:02:40 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id a12so1968242wgh.23
+	Sat,  1 Jun 2013 14:47:44 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Uin5t-0002L1-Ha for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Jun 2013 16:47:45 +0200
+Received: from tfitzsim-lnx.cisco.com ([161.44.225.6])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Jun 2013 16:47:45 +0200
+Received: from fitzsim by tfitzsim-lnx.cisco.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jun 2013 07:02:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=m8l9Qdd/bmCSz8p+4kVmDOxpy6kTRavHu28Z58wrxPg=;
-	b=oIdc411BW1usYTWC603fLfgYZhx4Acrdbkt/PzLNRMCK30yo+VdOJNzs3PK12Eg611
-	WMzVp/qpsp/eaTR5bCtLhg78KEeTKkkfuC39bKJS8m4/fQ91cCKxsMEv6Nlu85iR2j5w
-	h49swOT3T7J7RKc4OfXzqGx26gjb/SPHSgobx3eBEoc+AqORIosgIMs/VWM92tlBU1m8
-	WtvyLVFD7zk8Hf11Yp7RcSuyxpu4PqW4mgaXdBedK6zJXgWVtY79lq1AhgOxvJvKCAsd
-	VeFj1T6bbAIfL4IrZWbrnhlm8u/nMDk8Ld/BLWZMbNif0j+KYZpN0PSv2VBWwnLcNYL7
-	nsxQ==
-X-Received: by 10.194.157.65 with SMTP id wk1mr2558261wjb.8.1370095360873;
-	Sat, 01 Jun 2013 07:02:40 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	fu14sm10381597wic.8.2013.06.01.07.02.39 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 01 Jun 2013 07:02:40 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 01 Jun 2013 16:47:45 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jun 2013 16:02:51 +0200
-Message-Id: <1370095371-6702-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-Subject: [meta-oe][PATCH] claws-plugins-*: Update SRC_URI
+From: Thomas Fitzsimmons <fitzsim@cisco.com>
+Date: Sat, 01 Jun 2013 10:48:13 -0400
+Message-ID: <m6pg8v2tanv6.fsf@cisco.com>
+References: <m6pgd2s6a4yg.fsf@cisco.com> <5272086.yW5j78zTuC@helios>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: tfitzsim-lnx.cisco.com
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1.50 (gnu/linux)
+Cancel-Lock: sha1:AFFuQrJwd6Zsm/xBppicE6S4fgc=
+Subject: Re: [meta-networking][PATCH] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,60 +40,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jun 2013 14:02:41 -0000
+X-List-Received-Date: Sat, 01 Jun 2013 14:47:45 -0000
+Content-Type: text/plain
 
-* modules are now in one bigger tarball on sourceforge
-  http://sourceforge.net/projects/sylpheed-claws/files/extra%20plugins/
-* old tarballs are still available in plugins_obsolete directory
+Hi Paul,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb | 2 +-
- meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb        | 3 +--
- meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb           | 2 +-
- 3 files changed, 3 insertions(+), 4 deletions(-)
+Paul Eggleton <paul.eggleton@linux.intel.com> writes:
 
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-index 338ff8c..3bd3deb 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=977f04a8048c04684e521c06e2844a94"
- 
- PR = "r1"
- 
--SRC_URI = "http://www.claws-mail.org/downloads/plugins/gtkhtml2_viewer-${PV}.tar.gz"
-+SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/gtkhtml2_viewer-${PV}.tar.gz"
- SRC_URI[md5sum] = "a6c9dfa6f969ccd844796a5724b52167"
- SRC_URI[sha256sum] = "4d41f6d961efaac0f51705e5052bac732bc0bdafee2ef2082a9cf9d89f183ae5"
- 
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-index 1465df7..5ae1632 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb
-@@ -4,8 +4,7 @@ DEPENDS = "claws-mail"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--SRC_URI = "http://www.claws-mail.org/downloads/plugins/mailmbox-${PV}.tar.gz\
--"
-+SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/mailmbox-${PV}.tar.gz"
- SRC_URI[md5sum] = "7f72c68e6e1a8768f1247f455fd20b62"
- SRC_URI[sha256sum] = "633f7835261c88a0aa06de38553ac935a1799a7128120963a7fa87ace01dac18"
- 
-diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-index c1fcf77..caf32b4 100644
---- a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-+++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
-@@ -4,7 +4,7 @@ DEPENDS = "claws-mail libxml2 curl glib-2.0 gtk+"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0c2348e0a084e573f0220f5e45d8097e"
- 
--SRC_URI = "http://www.claws-mail.org/downloads/plugins/rssyl-${PV}.tar.gz"
-+SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/rssyl-${PV}.tar.gz"
- SRC_URI[md5sum] = "49b45608e8d160b3625d3d50016ec2ca"
- SRC_URI[sha256sum] = "2e96a1cd6a1a5bb7f86cd2eb48f6e174665957fafe1f3b1e8361aac3bb967f79"
- inherit autotools pkgconfig gettext
--- 
-1.8.2.1
+> Hi Thomas,
+>
+> On Friday 31 May 2013 23:24:23 Thomas Fitzsimmons wrote:
+>> This patch fixes a net-snmp build failure for non-systemd builds [1]:
+>> | .libs/snmpd.o: In function `main':
+>> | [...]/net-snmp/5.7.2-r0/net-snmp-5.7.2/agent/snmpd.c:459: undefined
+>> | reference to `netsnmp_sd_listen_fds' collect2: error: ld returned 1 exit
+>> | status
+>> 
+>> It backports a typo fix from upstream:
+>> 
+>> commit 3692875172352f72cf3afd0d35f355e83d7e421b
+>> Author: Bart Van Assche <bvanassche@acm.org>
+>> Date:   Mon Aug 8 18:22:08 2011 +0200
+>> 
+>>     Fix typos introduced in commit 19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11.
+>> Unbreaks the build.
+>> 
+>> Thomas
+>> 
+>> 1. Previously reported here:
+>>    http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57756
+>> 
+>> Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+>> ---
+>>  .../net-snmp/net-snmp/systemd-support.patch        |    5 +++--
+>>  1 files changed, 3 insertions(+), 2 deletions(-)
+>> 
+>> diff --git
+>> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
+>> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
+>> index 18955f2..b88531f 100644
+>> ---
+>> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
+>> +++
+>> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
+>> @@ -7,6 +7,7 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
+>>  0641e43c694c485cbbffef0556efc4641bd3ff50
+>>  76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
+>>  bf108d7f1354f6276fc43c129963f2c49b9fc242
+>> +3692875172352f72cf3afd0d35f355e83d7e421b
+>>  74412748067c685e1d8ab6ed3bcc3ca9c2774844
+>>  86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
+>>  63557cf8986a33dba1d4429b583a901361052c4f
+>> @@ -89,10 +90,10 @@ index b177d5b..08bdfc7 100644
+>>   #endif
+>> 
+>>   #ifndef WIN32
+>> -+#ifndef NETSNMP_NO_SYSYSTEMD
+>> ++#ifndef NETSNMP_NO_SYSTEMD
+>>  +    /* check if systemd has sockets for us and don't close them */
+>>  +    prepared_sockets = netsnmp_sd_listen_fds(0);
+>> -+#endif /* NETSNMP_NO_SYSYSTEMD */
+>> ++#endif /* NETSNMP_NO_SYSTEMD */
+>>  +
+>>       /*
+>>        * close all non-standard file descriptors we may have
+>
+> Could you please include a header with the description, Signed-off-by and 
+> "Upstream-Status: Backport" at the top of the inner patch itself? This makes 
+> things easier when upgrading the recipe in future.
+
+This is actually a patch to an existing backport patch that has a header
+(but no signed-off-by):
+
+Systemd support backported from the master branch as of 23/04/2012 (post 5.7.1, pre 5.8).
+
+The following commits have been cherry-picked:
+
+19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11
+fef6cddfdb94da1a6b1fb768af62918b80f11fd3
+0641e43c694c485cbbffef0556efc4641bd3ff50
+76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
+bf108d7f1354f6276fc43c129963f2c49b9fc242
+3692875172352f72cf3afd0d35f355e83d7e421b
+74412748067c685e1d8ab6ed3bcc3ca9c2774844
+86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
+63557cf8986a33dba1d4429b583a901361052c4f
+
+Upstream-Status: Backport
+
+I updated the header with the extra commit I cherry-picked.  How should
+I handle Signed-off-by in this situation?
+
+Thomas
 
 
