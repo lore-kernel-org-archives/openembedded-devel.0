@@ -1,39 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 89FC16098F
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E42A60912
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Jun 2013 08:09:43 +0000 (UTC)
-Received: by mail-ea0-f176.google.com with SMTP id o14so297230eaj.35
+	Sun,  2 Jun 2013 08:11:25 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id z11so4275237pdj.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Jun 2013 01:09:43 -0700 (PDT)
+	Sun, 02 Jun 2013 01:11:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=5sbmHU+qnw5neFloDU+xqBdtAI9YgUAXuI6kUmDWzrY=;
-	b=bkum8GwB5H/yzxi3zsZ9wOpNaAayUOOfS0mQcs16VK8b4OOfeON7KKHxG3e2fU56Uu
-	WxPQWxO3ioAHdR/U3c7qfMIW/znXX6WL2rvEgl/M8OVSd+qnrfgaRfm/KF3BNMkGkQFo
-	4tse4Yju12IDOasDJpPsnzbi+3BPpLp6ma1UOcXIxRIB+VqxbqERhnke3jkhIuoQKn6p
-	KIF+fS/TIw+8AmQwRuO71voZOt6uwV7eBqq43tiyGLH8GN4s7IYeu3GI1hyBsxGHDk24
-	bvYXjETgitzFnoUVlutalYklk469Agzqddr0SRCgv7dOtrgvorT0hi3EK/qd44/ui9EQ
-	ZTLQ==
-X-Received: by 10.14.214.198 with SMTP id c46mr19303442eep.82.1370160583156;
-	Sun, 02 Jun 2013 01:09:43 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=1F3Txfjo3rsh+25CzwUtsujUYI7D2u0Yl2EcIwiZldE=;
+	b=RkKYbPCuh/R2YvjSC7bGNwj+x+IW6i5OqsOqURBeYwD/DIxBHRAbeR/t/LnrY65MMy
+	9KpkkA3MJz+FbvdFSyqq57phJGGc4UlQTjoZrXLzGC+b9ZxZ2GYIgwEGfpiUB0sek7Ps
+	uBuwm4O4t3qXQEcOtMUt4fXVwyrPhcVFi60gf8u9PMAMVy/Tnm8SgC27lTWV2hapIEDx
+	fUUhd2LLw+byz0mLofxmUxzyMLhLQ7TWSOSayqUWH7W1vsnbYzKmPF9+OhfSVLc2PWl4
+	w9Tqhl0G1Gr4smnZeMFUJNLUboozt2BrkSvA+bnIK3eIEFnMFj0lWO5KmzFZZV4ucnEN
+	pUEQ==
+X-Received: by 10.66.87.5 with SMTP id t5mr20583180paz.169.1370160686460;
+	Sun, 02 Jun 2013 01:11:26 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by mx.google.com with ESMTPSA id
-	y2sm77301723eeu.2.2013.06.02.01.09.42
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 02 Jun 2013 01:09:42 -0700 (PDT)
-Date: Sun, 2 Jun 2013 10:09:56 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	yj2sm54128369pbb.40.2013.06.02.01.11.24 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 02 Jun 2013 01:11:25 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130602080956.GA3279@jama>
-References: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
+Date: Sun,  2 Jun 2013 18:06:15 +1000
+Message-Id: <1370160375-14609-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3
+Subject: [meta-oe][PATCH v2] llvm-common: move cross script install to sysroot preprocess function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,42 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jun 2013 08:09:43 -0000
-X-Groupsio-MsgNum: 44944
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BXVAT5kNtrzKuDFl"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 02 Jun 2013 08:11:25 -0000
 
---BXVAT5kNtrzKuDFl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The llvm-config script doesn't get placed in the target sysroot
+crossscripts directory otherwise.
 
-On Sat, Jun 01, 2013 at 08:03:22PM +0200, Martin Jansa wrote:
-> ---
->  ...include-Element.h-for-hasTagName-function.patch | 43 ++++++++++++++++=
-++++++
->  meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
->  2 files changed, 45 insertions(+), 1 deletion(-)
->  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-inclu=
-de-Element.h-for-hasTagName-function.patch
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-core/llvm/llvm-common.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Ignore this one, it works on armv7a, but fails the same on armv4t and
-x86_64 + there is ICE when building for armv5te.
+diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes-core/llvm/llvm-common.bb
+index 612fd34..3a4232f 100644
+--- a/meta-oe/recipes-core/llvm/llvm-common.bb
++++ b/meta-oe/recipes-core/llvm/llvm-common.bb
+@@ -6,7 +6,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
+ 
+ SRC_URI = "file://llvm-config"
+ 
+-do_install() {
++ALLOW_EMPTY_${PN} = "1"
++SYSROOT_PREPROCESS_FUNCS += "llvm_common_sysroot_preprocess"
++SYSROOT_PREPROCESS_FUNCS_virtclass-native += ""
++
++llvm_common_sysroot_preprocess() {
+     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+     install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+ }
+-- 
+1.8.3
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---BXVAT5kNtrzKuDFl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlGq/dQACgkQN1Ujt2V2gBwlYACfTvrEouQwfjk+GE4cdqwQFqfw
-b2gAn1MGgriBx1wuqPsGhch+EWjVY+Jq
-=4I+O
------END PGP SIGNATURE-----
-
---BXVAT5kNtrzKuDFl--
