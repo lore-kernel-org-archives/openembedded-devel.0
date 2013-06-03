@@ -1,36 +1,40 @@
-Return-Path: <Joe.MacDonald@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id ECBAC6A591
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CD3E16A591
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jun 2013 12:39:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r53Cdcex005673
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  3 Jun 2013 12:44:04 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id x55so1711583wes.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 3 Jun 2013 05:39:38 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 3 Jun 2013 05:39:36 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id C89227FCE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jun 2013 08:39:33 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id BDA11406FB; Mon,
-	3 Jun 2013 08:39:35 -0400 (EDT)
-Date: Mon, 3 Jun 2013 08:39:35 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130603123935.GG4723@windriver.com>
-References: <m6pgd2s6a4yg.fsf@cisco.com> <5272086.yW5j78zTuC@helios>
-	<m6pg8v2tanv6.fsf@cisco.com>
+	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=0SZkujGYoxcXwaQqv8rWFRomyqNxZ56wZ6qJAD1kWEY=;
+	b=jrL5WO++Z2FipNgXDPV39pLVQ9VVzEeOLhvaEkBRhU2VKBxT1yDsJ24b174F1JoOWA
+	21yQBwPGf0Ptd5xRIL2VjdcIL7B2tQST3fxbG6GkZq1Lz4X+yanFXF8ceC9YwhqZ8tKv
+	9UATDQb7NyU3y/De6VlS8+EQye9pAp3Nfe2p20bYEzZfRycrEDuP6Zb4vJVgCuPLNPtj
+	fEknoD4Qbr8nhi1r2Q4pl1xX2JhvG5xoBNLdMsYuhgJHh0c9tuWsQ0QClYjIxdele5ot
+	ejfQcRMIw/Upc+/SVynxN7sJUDTdITDvGR0vXE1RumchrxotJVcOWVs4C35kFk8WDB4k
+	Odzg==
+X-Received: by 10.194.89.233 with SMTP id br9mr18923198wjb.50.1370263444624;
+	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	en3sm23255783wid.1.2013.06.03.05.44.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
+Date: Mon, 3 Jun 2013 14:44:19 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130603124419.GA20775@jama>
+References: <1369218937-26345-1-git-send-email-philip@balister.org>
+	<20130603122433.GB3279@jama>
 MIME-Version: 1.0
-In-Reply-To: <m6pg8v2tanv6.fsf@cisco.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
+In-Reply-To: <20130603122433.GB3279@jama>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
+Subject: Re: [meta-oe][PATCHv3] gnuradio : Update recipe to build for all machines.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,138 +48,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jun 2013 12:39:36 -0000
-X-Groupsio-MsgNum: 44955
+X-List-Received-Date: Mon, 03 Jun 2013 12:44:05 -0000
+X-Groupsio-MsgNum: 44956
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Dx9iWuMxHO1cCoFc"
+	protocol="application/pgp-signature"; boundary="u3/rZRmxL6MmkK24"
 Content-Disposition: inline
 
---Dx9iWuMxHO1cCoFc
+--u3/rZRmxL6MmkK24
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH] net-snmp: Backport fix for NETSNMP_NO_SY=
-STEMD typos] On 13.06.01 (Sat 10:48) Thomas Fitzsimmons wrote:
+On Mon, Jun 03, 2013 at 02:24:33PM +0200, Martin Jansa wrote:
+> On Wed, May 22, 2013 at 06:35:37AM -0400, Philip Balister wrote:
+> > Also updated the git repo address after recent changes in hosting.
+> >=20
+> > The recipe failed to build for machines without neon as a tune feature.
+> > The cmake config options have been changed so that it configures proper=
+ly
+> > now.
+> >=20
+> > Also dropped documentation from build to work around a doc generation p=
+roblem.
+> >=20
+> > Test on armv7a, x86, and x86-64.
+> >=20
+> > Signed-off-by: Philip Balister <philip@balister.org>
+> > ---
+> >  meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 11 ++++-------
+> >  1 file changed, 4 insertions(+), 7 deletions(-)
+> >=20
+> > diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/me=
+ta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> > index edd4615..45f4c77 100644
+> > --- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> > +++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> > @@ -70,7 +70,7 @@ SRCREV =3D "5f69899e059e9bea58f92af61f70fc3f63825087"
+> >  GIT_REPO =3D "gnuradio.git"
+> >  GIT_BRANCH =3D "master"
+> > =20
+> > -SRC_URI =3D "git://gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};pro=
+tocol=3Dgit \
+> > +SRC_URI =3D "git://git.gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH}=
+;protocol=3Dgit \
+> >  "
+> > =20
+> >  S=3D"${WORKDIR}/git"
+> > @@ -82,21 +82,18 @@ EXTRA_OECMAKE =3D "-DENABLE_GR_ATSC=3DFALSE \
+> >                   -DENABLE_GR_FCD=3DOFF \
+> >                   -DENABLE_GR_WXGUI=3DOFF \
+> >                   -DENABLE_GR_VIDEO_SDL=3DOFF \
+> > +                 -DENABLE_SPHINX=3DOFF -DENABLE_DOXYGEN=3DOFF \
+>=20
+> This isn't enough, it still fails to build docs in jenkins builds (see
+> status update email).
 
-> Hi Paul,
->=20
-> Paul Eggleton <paul.eggleton@linux.intel.com> writes:
->=20
-> > Hi Thomas,
-> >
-> > On Friday 31 May 2013 23:24:23 Thomas Fitzsimmons wrote:
-> >> This patch fixes a net-snmp build failure for non-systemd builds [1]:
-> >> | .libs/snmpd.o: In function `main':
-> >> | [...]/net-snmp/5.7.2-r0/net-snmp-5.7.2/agent/snmpd.c:459: undefined
-> >> | reference to `netsnmp_sd_listen_fds' collect2: error: ld returned 1 =
-exit
-> >> | status
-> >>=20
-> >> It backports a typo fix from upstream:
-> >>=20
-> >> commit 3692875172352f72cf3afd0d35f355e83d7e421b
-> >> Author: Bart Van Assche <bvanassche@acm.org>
-> >> Date:   Mon Aug 8 18:22:08 2011 +0200
-> >>=20
-> >>     Fix typos introduced in commit 19499c3c90bf9d7b2b9e5d08baa26cc6bba=
-28a11.
-> >> Unbreaks the build.
-> >>=20
-> >> Thomas
-> >>=20
-> >> 1. Previously reported here:
-> >>    http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57756
-> >>=20
-> >> Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
-> >> ---
-> >>  .../net-snmp/net-snmp/systemd-support.patch        |    5 +++--
-> >>  1 files changed, 3 insertions(+), 2 deletions(-)
-> >>=20
-> >> diff --git
-> >> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.=
-patch
-> >> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.=
-patch
-> >> index 18955f2..b88531f 100644
-> >> ---
-> >> a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.=
-patch
-> >> +++
-> >> b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.=
-patch
-> >> @@ -7,6 +7,7 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
-> >>  0641e43c694c485cbbffef0556efc4641bd3ff50
-> >>  76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
-> >>  bf108d7f1354f6276fc43c129963f2c49b9fc242
-> >> +3692875172352f72cf3afd0d35f355e83d7e421b
-> >>  74412748067c685e1d8ab6ed3bcc3ca9c2774844
-> >>  86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
-> >>  63557cf8986a33dba1d4429b583a901361052c4f
-> >> @@ -89,10 +90,10 @@ index b177d5b..08bdfc7 100644
-> >>   #endif
-> >>=20
-> >>   #ifndef WIN32
-> >> -+#ifndef NETSNMP_NO_SYSYSTEMD
-> >> ++#ifndef NETSNMP_NO_SYSTEMD
-> >>  +    /* check if systemd has sockets for us and don't close them */
-> >>  +    prepared_sockets =3D netsnmp_sd_listen_fds(0);
-> >> -+#endif /* NETSNMP_NO_SYSYSTEMD */
-> >> ++#endif /* NETSNMP_NO_SYSTEMD */
-> >>  +
-> >>       /*
-> >>        * close all non-standard file descriptors we may have
-> >
-> > Could you please include a header with the description, Signed-off-by a=
-nd=20
-> > "Upstream-Status: Backport" at the top of the inner patch itself? This =
-makes=20
-> > things easier when upgrading the recipe in future.
->=20
-> This is actually a patch to an existing backport patch that has a header
-> (but no signed-off-by):
->=20
-> Systemd support backported from the master branch as of 23/04/2012 (post =
-5.7.1, pre 5.8).
->=20
-> The following commits have been cherry-picked:
->=20
-> 19499c3c90bf9d7b2b9e5d08baa26cc6bba28a11
-> fef6cddfdb94da1a6b1fb768af62918b80f11fd3
-> 0641e43c694c485cbbffef0556efc4641bd3ff50
-> 76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
-> bf108d7f1354f6276fc43c129963f2c49b9fc242
-> 3692875172352f72cf3afd0d35f355e83d7e421b
-> 74412748067c685e1d8ab6ed3bcc3ca9c2774844
-> 86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
-> 63557cf8986a33dba1d4429b583a901361052c4f
->=20
-> Upstream-Status: Backport
->=20
-> I updated the header with the extra commit I cherry-picked.  How should
-> I handle Signed-off-by in this situation?
-
-It's possible (read:  likely) that others have different ideas about it,
-but personally I like to see a sign-off from the person providing the
-patch, even if it's a simple back-port or a refresh caused by a
-cherry-pick.  I don't read anything into "signed-off-by" except that
-it's a statement like "I know where this code came from and I am
-confident you can have it".
+| xmlto: /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5t=
+e-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml do=
+es not validate (status 3)
+| xmlto: Fix document syntax or use --skip-validation option
+| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
+nux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml:6: warnin=
+g: failed to load external entity "/home/jenkins/oe/shr-core-branches/shr-c=
+ore/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-tre=
+llis/doc/docbookx.dtd"
+| ]>
+|   ^
+| warning: failed to load external entity "/home/jenkins/oe/shr-core-branch=
+es/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/gi=
+t/gr-trellis/doc/docbookx.dtd"
+| validity error : Could not load the external subset "docbookx.dtd"
+| Document /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv=
+5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml =
+does not validate
+| make[2]: *** [gr-trellis/doc/gr-trellis.html] Error 13
+| make[2]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/t=
+mp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/build'
+| make[1]: *** [gr-trellis/doc/CMakeFiles/gr_trellis_html.dir/all] Error 2
 
 --=20
--Joe MacDonald.
-:wq
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Dx9iWuMxHO1cCoFc
+--u3/rZRmxL6MmkK24
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlGsjocACgkQPN8S4W6ZZndoPwCfdhkCIXVOtOv1YE6hlXJWtRNp
-jcsAn2fWv56X8Nvm9Y6DDAqdExhPvfhD
-=YAIH
+iEYEARECAAYFAlGsj6MACgkQN1Ujt2V2gBzaugCfeAWoovTwgpPdF5dsovFPpJnb
+KkIAoIsN11bd6b7a7vrm+xODw4nPze67
+=M7YU
 -----END PGP SIGNATURE-----
 
---Dx9iWuMxHO1cCoFc--
+--u3/rZRmxL6MmkK24--
