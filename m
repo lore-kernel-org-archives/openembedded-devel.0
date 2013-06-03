@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CD3E16A591
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jun 2013 12:44:04 +0000 (UTC)
-Received: by mail-we0-f173.google.com with SMTP id x55so1711583wes.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id AF42F6A442;
+	Mon,  3 Jun 2013 15:09:54 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id e11so3344947wgh.14
+	for <multiple recipients>; Mon, 03 Jun 2013 08:09:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0SZkujGYoxcXwaQqv8rWFRomyqNxZ56wZ6qJAD1kWEY=;
-	b=jrL5WO++Z2FipNgXDPV39pLVQ9VVzEeOLhvaEkBRhU2VKBxT1yDsJ24b174F1JoOWA
-	21yQBwPGf0Ptd5xRIL2VjdcIL7B2tQST3fxbG6GkZq1Lz4X+yanFXF8ceC9YwhqZ8tKv
-	9UATDQb7NyU3y/De6VlS8+EQye9pAp3Nfe2p20bYEzZfRycrEDuP6Zb4vJVgCuPLNPtj
-	fEknoD4Qbr8nhi1r2Q4pl1xX2JhvG5xoBNLdMsYuhgJHh0c9tuWsQ0QClYjIxdele5ot
-	ejfQcRMIw/Upc+/SVynxN7sJUDTdITDvGR0vXE1RumchrxotJVcOWVs4C35kFk8WDB4k
-	Odzg==
-X-Received: by 10.194.89.233 with SMTP id br9mr18923198wjb.50.1370263444624;
-	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
+	bh=kionEyHYVZainY80hHrkTZjpqSGfzus3JlaDpCYR3D0=;
+	b=HP3m3kCCYWRueFB1q7CwamwoN6l39mcgVCogI4gQxIrBKJq8W1uKd01yCbw3yRjajx
+	X8mNPRv4trKQlvSsYLRj/8bN2cYm/5FUbRvJOFzekW10I1IgE+D1eOAN3oqfo9rnviKe
+	ghbUQR207iwUgRq3RAZr5GDWpqPsUEf3HfvpYo8HwHvLr+DfFmxDJMoO6fBYs3908Wb/
+	x/50jXsgqkBmgktDtrE8LCoog+i5L/gpCXOcOdfsDvIHYcXpxFjQwq8vI7m+tHQ1jaFo
+	DK76LMeZ4SxvDXEKFTLr/bbu7AgMtw6bjXn+ZSyPNMyzDGsFaJvY1DwXiZtt10KkOeBX
+	3vUw==
+X-Received: by 10.180.108.168 with SMTP id hl8mr13278850wib.23.1370272194000; 
+	Mon, 03 Jun 2013 08:09:54 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	en3sm23255783wid.1.2013.06.03.05.44.03
-	for <openembedded-devel@lists.openembedded.org>
+	h8sm24037520wiz.9.2013.06.03.08.09.52 for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 03 Jun 2013 05:44:04 -0700 (PDT)
-Date: Mon, 3 Jun 2013 14:44:19 +0200
+	Mon, 03 Jun 2013 08:09:53 -0700 (PDT)
+Date: Mon, 3 Jun 2013 17:10:08 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130603124419.GA20775@jama>
-References: <1369218937-26345-1-git-send-email-philip@balister.org>
-	<20130603122433.GB3279@jama>
+To: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Message-ID: <20130603151008.GC3279@jama>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20130415141253.GC10628@jama.dyndns-home.com>
+	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
+	<20130516075215.GA24809@jama.dyndns-home.com>
+	<20130520130635.GA32431@jama>
 MIME-Version: 1.0
-In-Reply-To: <20130603122433.GB3279@jama>
+In-Reply-To: <20130520130635.GA32431@jama>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCHv3] gnuradio : Update recipe to build for all machines.
+Subject: Re: State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,97 +48,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jun 2013 12:44:05 -0000
-X-Groupsio-MsgNum: 44956
+X-List-Received-Date: Mon, 03 Jun 2013 15:09:55 -0000
+X-Groupsio-MsgNum: 44957
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="u3/rZRmxL6MmkK24"
+	protocol="application/pgp-signature"; boundary="O3RTKUHj+75w1tg5"
 Content-Disposition: inline
 
---u3/rZRmxL6MmkK24
+--O3RTKUHj+75w1tg5
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 03, 2013 at 02:24:33PM +0200, Martin Jansa wrote:
-> On Wed, May 22, 2013 at 06:35:37AM -0400, Philip Balister wrote:
-> > Also updated the git repo address after recent changes in hosting.
-> >=20
-> > The recipe failed to build for machines without neon as a tune feature.
-> > The cmake config options have been changed so that it configures proper=
-ly
-> > now.
-> >=20
-> > Also dropped documentation from build to work around a doc generation p=
-roblem.
-> >=20
-> > Test on armv7a, x86, and x86-64.
-> >=20
-> > Signed-off-by: Philip Balister <philip@balister.org>
-> > ---
-> >  meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 11 ++++-------
-> >  1 file changed, 4 insertions(+), 7 deletions(-)
-> >=20
-> > diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/me=
-ta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> > index edd4615..45f4c77 100644
-> > --- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> > +++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-> > @@ -70,7 +70,7 @@ SRCREV =3D "5f69899e059e9bea58f92af61f70fc3f63825087"
-> >  GIT_REPO =3D "gnuradio.git"
-> >  GIT_BRANCH =3D "master"
-> > =20
-> > -SRC_URI =3D "git://gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};pro=
-tocol=3Dgit \
-> > +SRC_URI =3D "git://git.gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH}=
-;protocol=3Dgit \
-> >  "
-> > =20
-> >  S=3D"${WORKDIR}/git"
-> > @@ -82,21 +82,18 @@ EXTRA_OECMAKE =3D "-DENABLE_GR_ATSC=3DFALSE \
-> >                   -DENABLE_GR_FCD=3DOFF \
-> >                   -DENABLE_GR_WXGUI=3DOFF \
-> >                   -DENABLE_GR_VIDEO_SDL=3DOFF \
-> > +                 -DENABLE_SPHINX=3DOFF -DENABLE_DOXYGEN=3DOFF \
+On Mon, May 20, 2013 at 03:06:35PM +0200, Martin Jansa wrote:
+> Couple of issues from last email were fixed, so here is updated status:
 >=20
-> This isn't enough, it still fails to build docs in jenkins builds (see
-> status update email).
+> qemuarm Summary: 14 tasks failed:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
+0130520_090009.log
+> qemux86 Summary: 19 tasks failed:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
+0130519_170509.log
+> qemux86-64 Summary: 20 tasks failed:
+> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
+0130520_005747.log
 
-| xmlto: /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5t=
-e-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml do=
-es not validate (status 3)
-| xmlto: Fix document syntax or use --skip-validation option
-| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
-nux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml:6: warnin=
-g: failed to load external entity "/home/jenkins/oe/shr-core-branches/shr-c=
-ore/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-tre=
-llis/doc/docbookx.dtd"
-| ]>
-|   ^
-| warning: failed to load external entity "/home/jenkins/oe/shr-core-branch=
-es/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/gi=
-t/gr-trellis/doc/docbookx.dtd"
-| validity error : Could not load the external subset "docbookx.dtd"
-| Document /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv=
-5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/gr-trellis/doc/gr-trellis.xml =
-does not validate
-| make[2]: *** [gr-trellis/doc/gr-trellis.html] Error 13
-| make[2]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/t=
-mp-eglibc/work/armv5te-oe-linux-gnueabi/gnuradio/3.6.4.1-r0/git/build'
-| make[1]: *** [gr-trellis/doc/CMakeFiles/gr_trellis_html.dir/all] Error 2
+Hi,
+
+updated status, still building with gcc-4.8
+shr-version issue already fixed
+llvm2.9 also fixed
+so if we don't count these 3 failures it's a bit better than last status
+
+qemuarm Summary: 15 tasks failed:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30601_225651.log
+
+qemux86 Summary: 18 tasks failed:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30603_011743.log/
+
+qemux86-64: Summary: 21 tasks failed:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+30602_103752.log
+
+common (13):
+  meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.=
+32.1.bb, do_compile
+  meta-openembedded/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb, do_compi=
+le
+  virtual:native:meta-openembedded/meta-oe/recipes-core/llvm/llvm2.9_2.9.bb=
+, do_compile
+  meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
+  meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_compi=
+le
+  meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb=
+, do_compile
+  meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb, =
+do_compile
+  meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb, do_co=
+mpile
+  meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.5.8.bb, do_configure
+  meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools=
+_0.7.2.bb, do_compile
+  meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, d=
+o_compile
+  meta-smartphone/meta-shr/recipes-shr/shr/shr-version.bb, do_configure
+  meta-smartphone/meta-shr/recipes-shr/shr/shr-version.bb, do_populate_lic
+
+qemuarm (2):
+  meta-openembedded/meta-oe/recipes-support/libunwind/libunwind_1.1.bb, do_=
+compile
+  openembedded-core/meta/recipes-devtools/qemu/qemu_1.4.1.bb, do_compile
+
+qemux86* common (3):
+  openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.21=
+=2E6.bb, do_compile
+  meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
+  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+qemux86 (2):
+  meta-browser/recipes-browser/chromium/chromium_29.0.1518.2.bb, do_compile
+  meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2=
+=2E11.14.bb, do_compile
+
+qemux86-64 (5):
+  meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+  meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobil=
+edevice_1.1.4.bb, do_configure
+  meta-openembedded/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.=
+32.1.bb, do_compile
+  meta-browser/recipes-browser/chromium/chromium_29.0.1518.2.bb, do_compile
+  meta-openembedded/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2=
+=2E1.26.bb, do_configure
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---u3/rZRmxL6MmkK24
+--O3RTKUHj+75w1tg5
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlGsj6MACgkQN1Ujt2V2gBzaugCfeAWoovTwgpPdF5dsovFPpJnb
-KkIAoIsN11bd6b7a7vrm+xODw4nPze67
-=M7YU
+iEYEARECAAYFAlGssdAACgkQN1Ujt2V2gBw1vwCgtX0F649EVbTFAOQrVhXPwm7E
+RaAAn3aiHAMq7PYQnCdY6p8W/awpfbGC
+=AJGR
 -----END PGP SIGNATURE-----
 
---u3/rZRmxL6MmkK24--
+--O3RTKUHj+75w1tg5--
