@@ -1,35 +1,39 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D47F60881
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 740BB6A5B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jun 2013 07:28:58 +0000 (UTC)
-Received: by mail-pd0-f174.google.com with SMTP id 3so5251201pdj.19
+	Mon,  3 Jun 2013 12:24:18 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id hj6so2594227wib.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Jun 2013 00:28:59 -0700 (PDT)
+	Mon, 03 Jun 2013 05:24:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=/EH39qxwp9nklbiKCjBn/5hcW0ERNJwUlYqKQWlQ2Y8=;
-	b=zzSLw6UMe2j8XPlw4G9XS1ZHwkFBuPJO61FexOg2MFUHQUuVhK78k+j5b6I2i/c4jj
-	05e3Fxz42ta6TLKvNOFeJtonqeIK4MCwqqOmUzLcaW0IZl7PEHxiK9ia4nGqyqtvupyC
-	iDIAKpuqQWy/QReoKmaFH42EAH8blnQvxjOlHwGvuQEZvuR+G4iJ0QFVRcBsl1vH0C9O
-	RdxIw7A4Z71T6TObteRCVfaqW2ZMkwFw05I85uoW1tsQT6sI+wutTDWG8p99WM+wkJEK
-	01JdM28A84hCTz/beSQ9ww5F0vFxu1XsswG6Nvpiu3ceNzcJx5nYsLUdTGjshf8g8WUr
-	fOqg==
-X-Received: by 10.66.253.74 with SMTP id zy10mr23137024pac.123.1370244539147; 
-	Mon, 03 Jun 2013 00:28:59 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id 10sm57948929pbm.0.2013.06.03.00.28.56
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 03 Jun 2013 00:28:58 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=J+TpwsiolYALxCf4+SXIwH1Xe+6NTmUZA7qG8hEBkKY=;
+	b=bcsUEGY+H0LHMIJYGWc4S55iEk5FOWldEnJLXBp3zlycqfg4FFyLGkQB4rZOjvh1f5
+	c38AaPTUMzsZk+6V0vEGOwHleasFTu4zZn6iOaZaD1kOI667PzPrTJpr9/ap8JwtZSXB
+	kYPdbdlOGJog9sdDhIXkUsmkoIWNM1n3kN5N8DPynl73THexl/PiXOteGyVEiRygmYiF
+	hS2HwiuDrEImlcBIDPw7g0AqUqsoT9/qTpkBsYFR5cgbZ+EPLnOoKr1SgUiEDpe/lMkj
+	n+DpWyy2PRLmqg2LfpdiALwddXjLl7/QFTYuw4txbP3NCuDy0CG/KnO95UEiS2TrN4hB
+	l8AA==
+X-Received: by 10.180.37.208 with SMTP id a16mr12622361wik.24.1370262258449;
+	Mon, 03 Jun 2013 05:24:18 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	ay7sm23057137wib.9.2013.06.03.05.24.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 03 Jun 2013 05:24:17 -0700 (PDT)
+Date: Mon, 3 Jun 2013 14:24:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Jun 2013 17:42:42 +1000
-Message-Id: <1370245362-3518-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.8.2.3
-Subject: [meta-oe][PATCH v4] llvm3.2: new recipe
+Message-ID: <20130603122433.GB3279@jama>
+References: <1369218937-26345-1-git-send-email-philip@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <1369218937-26345-1-git-send-email-philip@balister.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCHv3] gnuradio : Update recipe to build for all machines.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,142 +47,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jun 2013 07:28:58 -0000
+X-List-Received-Date: Mon, 03 Jun 2013 12:24:18 -0000
+X-Groupsio-MsgNum: 44954
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WYTEVAkct0FjGQmd"
+Content-Disposition: inline
 
-arm_fenv_uclibc.patch was copied from llvm2.9 recipe.
+--WYTEVAkct0FjGQmd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- .../llvm/llvm3.2/arm_fenv_uclibc.patch             | 14 ++++
- meta-oe/recipes-core/llvm/llvm3.2_3.2.bb           | 97 ++++++++++++++++++++++
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
- create mode 100644 meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+On Wed, May 22, 2013 at 06:35:37AM -0400, Philip Balister wrote:
+> Also updated the git repo address after recent changes in hosting.
+>=20
+> The recipe failed to build for machines without neon as a tune feature.
+> The cmake config options have been changed so that it configures properly
+> now.
+>=20
+> Also dropped documentation from build to work around a doc generation pro=
+blem.
+>=20
+> Test on armv7a, x86, and x86-64.
+>=20
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/meta=
+-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> index edd4615..45f4c77 100644
+> --- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> +++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+> @@ -70,7 +70,7 @@ SRCREV =3D "5f69899e059e9bea58f92af61f70fc3f63825087"
+>  GIT_REPO =3D "gnuradio.git"
+>  GIT_BRANCH =3D "master"
+> =20
+> -SRC_URI =3D "git://gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};proto=
+col=3Dgit \
+> +SRC_URI =3D "git://git.gnuradio.org/${GIT_REPO};branch=3D${GIT_BRANCH};p=
+rotocol=3Dgit \
+>  "
+> =20
+>  S=3D"${WORKDIR}/git"
+> @@ -82,21 +82,18 @@ EXTRA_OECMAKE =3D "-DENABLE_GR_ATSC=3DFALSE \
+>                   -DENABLE_GR_FCD=3DOFF \
+>                   -DENABLE_GR_WXGUI=3DOFF \
+>                   -DENABLE_GR_VIDEO_SDL=3DOFF \
+> +                 -DENABLE_SPHINX=3DOFF -DENABLE_DOXYGEN=3DOFF \
 
-diff --git a/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch b/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
-new file mode 100644
-index 0000000..c3ae494
---- /dev/null
-+++ b/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
-@@ -0,0 +1,14 @@
-+Index: llvm-2.9/include/llvm/Support/FEnv.h
-+===================================================================
-+--- llvm-2.9.orig/include/llvm/Support/FEnv.h	2010-11-29 20:44:50.000000000 +0100
-++++ llvm-2.9/include/llvm/Support/FEnv.h	2011-11-18 18:42:22.580161297 +0100
-+@@ -17,6 +17,9 @@
-+ 
-+ #include "llvm/Config/config.h"
-+ #include <cerrno>
-++
-++#undef HAVE_FENV_H
-++
-+ #ifdef HAVE_FENV_H
-+ #include <fenv.h>
-+ #endif
-diff --git a/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb b/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
-new file mode 100644
-index 0000000..3b74306
---- /dev/null
-+++ b/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
-@@ -0,0 +1,97 @@
-+DESCRIPTION = "The Low Level Virtual Machine"
-+HOMEPAGE = "http://llvm.org"
-+# 3-clause BSD-like
-+LICENSE = "NCSA"
-+LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=60fdd7739841f04a2ce2171a726be8f3"
-+
-+DEPENDS = "libffi llvm-common"
-+
-+SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
-+SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
-+
-+SRC_URI[md5sum] = "71610289bbc819e3e15fdd562809a2d7"
-+SRC_URI[sha256sum] = "125090c4d26740f1d5e9838477c931ed7d9ad70d599ba265f46f3a42cb066343"
-+
-+S = "${WORKDIR}/llvm-${PV}.src"
-+
-+inherit autotools perlnative pythonnative
-+
-+LLVM_BUILD_DIR = "${WORKDIR}/llvm-${PV}.build"
-+LLVM_INSTALL_DIR = "${WORKDIR}/llvm-install"
-+LLVM_RELEASE = "3.2"
-+LLVM_DIR = "llvm${LLVM_RELEASE}"
-+
-+EXTRA_OECONF += "--disable-assertions \
-+                 --enable-debug-runtime \
-+                 --disable-expensive-checks \
-+                 --enable-bindings=none \
-+                 --enable-keep-symbols \
-+                 --enable-libffi \
-+                 --enable-optimized \
-+                 --enable-shared \
-+                 --enable-targets=host-only"
-+EXTRA_OEMAKE += "REQUIRES_RTTI=1"
-+FILES_${PN} = "${libdir}/lib*.so \
-+               ${libdir}/${LLVM_DIR}/*"
-+FILES_${PN}-dbg = "${bindir}/${LLVM_DIR}/.debug \
-+                   ${libdir}/${LLVM_DIR}/.debug \
-+                   ${libdir}/.debug \
-+                   /usr/src/debug"
-+FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
-+                   ${includedir}/${LLVM_DIR} \
-+                   ${libdir}/${LLVM_DIR}/BugpointPasses.so \
-+                   ${libdir}/${LLVM_DIR}/LLVMHello.so"
-+FILES_${PN}-static-dev = "${libdir}/${LLVM_DIR}/*.a"
-+FILES_SOLIBSDEV = ""
-+INSANE_SKIP_${PN} = "dev-so"
-+
-+do_configure_prepend() {
-+	# Remove RPATHs
-+	sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' Makefile.rules
-+
-+	# Drop "svn" suffix from version string
-+	sed -i 's/3\.2svn/3.2/g' configure
-+
-+	# Fix paths in llvm-config
-+	sed -i "s|sys::path::parent_path(CurrentPath))|sys::path::parent_path(sys::path::parent_path(CurrentPath)))|g" tools/llvm-config/llvm-config.cpp
-+	sed -i "s|/bin|/bin/${LLVM_DIR}|g" tools/llvm-config/llvm-config.cpp
-+	sed -i "s|/include|/include/${LLVM_DIR}|g" tools/llvm-config/llvm-config.cpp
-+	sed -i "s|/lib|/lib/${LLVM_DIR}|g" tools/llvm-config/llvm-config.cpp
-+
-+	# Fails to build unless using separate directory from source
-+	mkdir -p ${LLVM_BUILD_DIR}
-+	cd ${LLVM_BUILD_DIR}
-+}
-+
-+do_compile() {
-+	cd ${LLVM_BUILD_DIR}
-+	oe_runmake CC=${BUILD_CC} CXX=${BUILD_CXX} cross-compile-build-tools
-+	oe_runmake
-+}
-+
-+do_install() {
-+	cd ${LLVM_BUILD_DIR}
-+	oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
-+
-+	mv ${LLVM_INSTALL_DIR}${bindir}/${HOST_SYS}-llvm-config-host ${LLVM_INSTALL_DIR}/llvm-config-host
-+
-+	install -d ${D}${bindir}/${LLVM_DIR}
-+	mv ${LLVM_INSTALL_DIR}${bindir}/* ${D}${bindir}/${LLVM_DIR}/
-+
-+	install -d ${D}${includedir}/${LLVM_DIR}
-+	mv ${LLVM_INSTALL_DIR}${includedir}/* ${D}${includedir}/${LLVM_DIR}/
-+
-+	install -d ${D}${libdir}/${LLVM_DIR}
-+	mv ${LLVM_INSTALL_DIR}${libdir}/* ${D}${libdir}/${LLVM_DIR}/
-+	ln -s ${LLVM_DIR}/libLLVM-${LLVM_RELEASE}.so ${D}${libdir}/libLLVM-${LLVM_RELEASE}.so
-+
-+	install -d ${D}${docdir}/${LLVM_DIR}
-+	mv ${LLVM_INSTALL_DIR}${prefix}/docs/llvm/* ${D}${docdir}/${LLVM_DIR}
-+}
-+
-+SYSROOT_PREPROCESS_FUNCS += "llvm_sysroot_preprocess"
-+
-+llvm_sysroot_preprocess() {
-+	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
-+	mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${LLVM_RELEASE}
-+}
--- 
-1.8.2.3
+This isn't enough, it still fails to build docs in jenkins builds (see
+status update email).
 
+>                   -DIMPORT_EXECUTABLES=3D${S}/gr-vocoder/lib/generate_cod=
+ebook.txt \
+>                   -DQT_HEADERS_DIR=3D${STAGING_INCDIR}/qt4 \
+>                   -DQT_QTCORE_INCLUDE_DIR=3D${STAGING_INCDIR}/qt4/QtCore \
+>                   -DQT_LIBRARY_DIR=3D${STAGING_LIBDIR} \
+>                   -DQT_QTCORE_LIBRARY_RELEASE=3D${STAGING_LIBDIR}/libQtCo=
+re.so \
+>                   -DQT_QTGUI_LIBRARY_RELEASE=3D${STAGING_LIBDIR}/libQtGui=
+=2Eso \
+> +                 ${@base_contains('TUNE_FEATURES', 'neon', \
+> +                     '-Dhave_mfpu_neon=3D1', '-Dhave_mfpu_neon=3D0', d)}=
+ \
+>  "
+> =20
+>  inherit distutils-base cmake pkgconfig
+> =20
+>  EXTRA_OEMAKE =3D "-C ${OECMAKE_BUILDPATH}"
+> =20
+> -# Only builds for machines with neon instructions. Problem is in upstrea=
+m cmake.
+> -python () {
+> -    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
+> -        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
+> -}
+> -
+> --=20
+> 1.7.11.7
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--WYTEVAkct0FjGQmd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlGsiwEACgkQN1Ujt2V2gBx63wCdHJxCXfjVmYn6X/I+hQRolXL5
+ss4AoJRWvYJCvZJgWyHNdvdtNt3O5pVO
+=hiqV
+-----END PGP SIGNATURE-----
+
+--WYTEVAkct0FjGQmd--
