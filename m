@@ -1,31 +1,35 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id F3A2C6A49F
+Return-Path: <net147@gmail.com>
+Received: from mail-pb0-f54.google.com (mail-pb0-f54.google.com
+	[209.85.160.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 125736A4A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Jun 2013 22:36:00 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ujzpc-0002sA-9G for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Jun 2013 00:35:56 +0200
-Received: from tfitzsim-lnx.cisco.com ([161.44.225.6])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jun 2013 00:35:56 +0200
-Received: from fitzsim by tfitzsim-lnx.cisco.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed,  5 Jun 2013 03:04:04 +0000 (UTC)
+Received: by mail-pb0-f54.google.com with SMTP id ro2so1119149pbb.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Jun 2013 00:35:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 04 Jun 2013 20:04:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=LPcvJw1UET/DSHifwxGD/UpMKyrscix3hXSihH5amy8=;
+	b=RAR4pHJjca4DwGChuTaOBbcOFOh5I812xYtbJ7O5/jWnYCuuMzcKLIJefJfgNdiAgC
+	/ukGFf/G6cMpiW/wY8cdTiwzSmklqA1GxROLZL2o+pd0jUnTBAR6LmlAUYcqjLzMe/6m
+	kxzvO2gRalHvW1hJ2z3gfuGK5x9GI8IGe0+GstUcJDWd3LQN88QHG3pMYXJhXOyNoy+H
+	BeMrpYnzc4fXbVBaRee458dakeyYEtFXqSaInBvRRmdKyTtVhyaP35Iecl1RPP6Rmwv/
+	4ilzDcVEZB7SlUk1xZOSTN6xyHK8OETCcYRODqh4XMiGt5qt/pa3fBMqahdz4D+cOmuw
+	y3/w==
+X-Received: by 10.67.2.33 with SMTP id bl1mr10910247pad.26.1370401444706;
+	Tue, 04 Jun 2013 20:04:04 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	fp2sm65721629pbb.36.2013.06.04.20.04.02 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 04 Jun 2013 20:04:03 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Thomas Fitzsimmons <fitzsim@cisco.com>
-Date: Tue, 04 Jun 2013 18:36:28 -0400
-Message-ID: <m6pg8v2p8pw3.fsf@cisco.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: tfitzsim-lnx.cisco.com
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.1.50 (gnu/linux)
-Cancel-Lock: sha1:04pxoAwq2xvz/y8iI9GkNx6awcw=
-Subject: [meta-networking][PATCH v2] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
+Date: Wed,  5 Jun 2013 13:17:44 +1000
+Message-Id: <1370402264-16211-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.2.3
+Subject: [meta-oe][PATCH v5] llvm3.2: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,64 +43,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jun 2013 22:36:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Jun 2013 03:04:04 -0000
 
-Added Signed-off-by for backport patch refresh.  Bumped PR.
+arm_fenv_uclibc.patch was copied from llvm2.9 recipe.
 
-Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../net-snmp/net-snmp/systemd-support.patch        |    6 ++++--
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb   |    2 ++
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ .../llvm/llvm3.2/arm_fenv_uclibc.patch             |  14 +++
+ meta-oe/recipes-core/llvm/llvm3.2_3.2.bb           | 106 +++++++++++++++++++++
+ 2 files changed, 120 insertions(+)
+ create mode 100644 meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+ create mode 100644 meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
-index 18955f2..e19153b 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support.patch
-@@ -7,12 +7,14 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
- 0641e43c694c485cbbffef0556efc4641bd3ff50
- 76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
- bf108d7f1354f6276fc43c129963f2c49b9fc242
-+3692875172352f72cf3afd0d35f355e83d7e421b
- 74412748067c685e1d8ab6ed3bcc3ca9c2774844
- 86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
- 63557cf8986a33dba1d4429b583a901361052c4f
- 
- Upstream-Status: Backport
- 
-+Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
- diff --git a/README.systemd b/README.systemd
- new file mode 100644
- index 0000000..f731851
-@@ -89,10 +91,10 @@ index b177d5b..08bdfc7 100644
-  #endif
-  
-  #ifndef WIN32
--+#ifndef NETSNMP_NO_SYSYSTEMD
-++#ifndef NETSNMP_NO_SYSTEMD
- +    /* check if systemd has sockets for us and don't close them */
- +    prepared_sockets = netsnmp_sd_listen_fds(0);
--+#endif /* NETSNMP_NO_SYSYSTEMD */
-++#endif /* NETSNMP_NO_SYSTEMD */
- +
-      /*
-       * close all non-standard file descriptors we may have
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-index 4c3939a..d21995a 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
- 
- DEPENDS = "openssl libnl pciutils"
- 
-+PR = "r1"
+diff --git a/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch b/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+new file mode 100644
+index 0000000..c3ae494
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+@@ -0,0 +1,14 @@
++Index: llvm-2.9/include/llvm/Support/FEnv.h
++===================================================================
++--- llvm-2.9.orig/include/llvm/Support/FEnv.h	2010-11-29 20:44:50.000000000 +0100
+++++ llvm-2.9/include/llvm/Support/FEnv.h	2011-11-18 18:42:22.580161297 +0100
++@@ -17,6 +17,9 @@
++ 
++ #include "llvm/Config/config.h"
++ #include <cerrno>
+++
+++#undef HAVE_FENV_H
+++
++ #ifdef HAVE_FENV_H
++ #include <fenv.h>
++ #endif
+diff --git a/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb b/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+new file mode 100644
+index 0000000..673892f
+--- /dev/null
++++ b/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+@@ -0,0 +1,106 @@
++DESCRIPTION = "The Low Level Virtual Machine"
++HOMEPAGE = "http://llvm.org"
++# 3-clause BSD-like
++LICENSE = "NCSA"
++LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=60fdd7739841f04a2ce2171a726be8f3"
 +
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-         file://init \
-         file://snmpd.conf \
++DEPENDS = "libffi libxml2-native llvm-common"
++
++SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.src.tar.gz"
++SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
++
++SRC_URI[md5sum] = "71610289bbc819e3e15fdd562809a2d7"
++SRC_URI[sha256sum] = "125090c4d26740f1d5e9838477c931ed7d9ad70d599ba265f46f3a42cb066343"
++
++S = "${WORKDIR}/llvm-${PV}.src"
++
++inherit autotools perlnative pythonnative
++
++LLVM_BUILD_DIR = "${WORKDIR}/llvm-${PV}.build"
++LLVM_INSTALL_DIR = "${WORKDIR}/llvm-install"
++LLVM_RELEASE = "3.2"
++LLVM_DIR = "llvm${LLVM_RELEASE}"
++
++EXTRA_OECONF += "--disable-assertions \
++                 --enable-debug-runtime \
++                 --disable-expensive-checks \
++                 --enable-bindings=none \
++                 --enable-keep-symbols \
++                 --enable-libffi \
++                 --enable-optimized \
++                 --enable-shared \
++                 --enable-targets=host-only"
++EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
++FILES_${PN} = "${libdir}/lib*.so \
++               ${libdir}/${LLVM_DIR}/*"
++FILES_${PN}-dbg = "${bindir}/${LLVM_DIR}/.debug \
++                   ${libdir}/${LLVM_DIR}/.debug \
++                   ${libdir}/.debug \
++                   /usr/src/debug"
++FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
++                   ${includedir}/${LLVM_DIR} \
++                   ${libdir}/${LLVM_DIR}/BugpointPasses.so \
++                   ${libdir}/${LLVM_DIR}/LLVMHello.so"
++FILES_${PN}-static-dev = "${libdir}/${LLVM_DIR}/*.a"
++FILES_SOLIBSDEV = ""
++INSANE_SKIP_${PN} = "dev-so"
++
++do_configure_prepend() {
++	# Remove RPATHs
++	sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' Makefile.rules
++
++	# Drop "svn" suffix from version string
++	sed -i 's/3\.2svn/3.2/g' configure
++
++	# Fix paths in llvm-config
++	sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" tools/llvm-config/llvm-config.cpp
++	sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" tools/llvm-config/llvm-config.cpp
++
++	# Fails to build unless using separate directory from source
++	mkdir -p ${LLVM_BUILD_DIR}
++	cd ${LLVM_BUILD_DIR}
++}
++
++do_compile() {
++	cd ${LLVM_BUILD_DIR}
++	oe_runmake \
++		AR="${BUILD_AR}" \
++		CC="${BUILD_CC}" \
++		CFLAGS="${BUILD_CFLAGS}" \
++		CXX="${BUILD_CXX}" \
++		CXXFLAGS="${BUILD_CXXFLAGS}" \
++		CPP="${BUILD_CPP}" \
++		CPPFLAGS="${BUILD_CPPFLAGS}" \
++		NM="${BUILD_NM}" \
++		RANLIB="${BUILD_RANLIB}" \
++		PATH="${STAGING_BINDIR_NATIVE}:$PATH" \
++		cross-compile-build-tools
++	oe_runmake
++}
++
++do_install() {
++	cd ${LLVM_BUILD_DIR}
++	oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
++
++	mv ${LLVM_INSTALL_DIR}${bindir}/${HOST_SYS}-llvm-config-host ${LLVM_INSTALL_DIR}/llvm-config-host
++
++	install -d ${D}${bindir}/${LLVM_DIR}
++	mv ${LLVM_INSTALL_DIR}${bindir}/* ${D}${bindir}/${LLVM_DIR}/
++
++	install -d ${D}${includedir}/${LLVM_DIR}
++	mv ${LLVM_INSTALL_DIR}${includedir}/* ${D}${includedir}/${LLVM_DIR}/
++
++	install -d ${D}${libdir}/${LLVM_DIR}
++	mv ${LLVM_INSTALL_DIR}${libdir}/* ${D}${libdir}/${LLVM_DIR}/
++	ln -s ${LLVM_DIR}/libLLVM-${LLVM_RELEASE}.so ${D}${libdir}/libLLVM-${LLVM_RELEASE}.so
++
++	install -d ${D}${docdir}/${LLVM_DIR}
++	mv ${LLVM_INSTALL_DIR}${prefix}/docs/llvm/* ${D}${docdir}/${LLVM_DIR}
++}
++
++SYSROOT_PREPROCESS_FUNCS += "llvm_sysroot_preprocess"
++
++llvm_sysroot_preprocess() {
++	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
++	mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${LLVM_RELEASE}
++}
 -- 
-1.6.0.6
-
+1.8.2.3
 
 
