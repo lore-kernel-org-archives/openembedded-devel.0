@@ -1,37 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 0953E6041D;
-	Thu,  6 Jun 2013 10:12:40 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id a15so64548eae.12
-	for <multiple recipients>; Thu, 06 Jun 2013 03:12:41 -0700 (PDT)
+Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 192246A456
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 Jun 2013 12:34:00 +0000 (UTC)
+Received: by mail-wg0-f43.google.com with SMTP id x12so1985870wgg.34
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Jun 2013 05:34:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0xuNC7cfTPF/6GiaS4uHQCFsuBWtB7K9tI/GmVcpNsA=;
-	b=c8LEx6oVrsLHyAR1I3B7ujFmL3HuquO/fnk954cK9aYsN/yKD5lXK33UmhegZJYWGG
-	MMytDl6IesfvrfZvKWMPRnDoQbINxmlG4ulKntTpguuuwqMBfO6QgDa5GVLtjlSv7AoS
-	5DjTJLd0vf2rWDGrTKsdiwzRbL/zqgXRSaDnZTvC9J6C2tTc6q4VHQdzRQxQ2lnxWtwl
-	cDkd+px+C7rkpW52wgiP/1gkvM5u8mPubULlMo2BP5FVIrG11MsVV3aa45jCM0i9Uv0c
-	LGfdjJHgb3pzOIxC+xpBeOj6asxMEbfwvTEbNtAhbE3hZT0QbEz+ncASL1BbeFFaWm48
-	VhOA==
-X-Received: by 10.14.150.11 with SMTP id y11mr27626430eej.54.1370513560708;
-	Thu, 06 Jun 2013 03:12:40 -0700 (PDT)
+	bh=LQP0tTAgRhQUytR/TvaAWH8uFeK8PtCvUcbdygdg1oc=;
+	b=xgP81f7UInzpCLj5mBaOlaut2Pz/Y5s79njZ4zsinumEwXxGToyCq/vcMnzq3tLu2y
+	cYGx6eIFToMpwk7y59Vm7eauv7nzrpXe3ar+HiU580LP0CyiPLIlSqgZUK/+qQC0IZ72
+	FRv/P+WFqMzU9x5JCWYCtBE33PpPZS4lpQHT0RYqzuAobCBa55jzRZLdxT8wkkgFdzd1
+	RdWSDaBVyckrkVPDnJ1/sHarupbyXooeago7PAufhJJdIeOboqcRD3SOIPr4J3EAcGBq
+	Q7JlrUpSpc02Z0kQhAKDBm4TpwhQ3LFxP23qUbUwDSQqMitJeKh9dvCVIzKluQ9iI2L4
+	oRdA==
+X-Received: by 10.181.13.169 with SMTP id ez9mr2327358wid.8.1370522039180;
+	Thu, 06 Jun 2013 05:33:59 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	l6sm105205528eef.12.2013.06.06.03.12.39 for <multiple recipients>
+	ca19sm15519881wib.3.2013.06.06.05.33.58
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 06 Jun 2013 03:12:39 -0700 (PDT)
-Date: Thu, 6 Jun 2013 12:12:58 +0200
+	Thu, 06 Jun 2013 05:33:58 -0700 (PDT)
+Date: Thu, 6 Jun 2013 14:34:17 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130606101258.GA22710@jama>
-References: <20130524130924.BFD6C50262@opal>
+Message-ID: <20130606123417.GC22710@jama>
+References: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
+	<20130602080956.GA3279@jama>
 MIME-Version: 1.0
-In-Reply-To: <20130524130924.BFD6C50262@opal>
+In-Reply-To: <20130602080956.GA3279@jama>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Ross Burton : librsvg: clean up native depends
+Subject: Re: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,106 +47,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jun 2013 10:12:41 -0000
-X-Groupsio-MsgNum: 44977
+X-List-Received-Date: Thu, 06 Jun 2013 12:34:02 -0000
+X-Groupsio-MsgNum: 44978
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="45Z9DzgjV8m4Oswq"
+	protocol="application/pgp-signature"; boundary="F8dlzb82+Fcn6AgP"
 Content-Disposition: inline
 
---45Z9DzgjV8m4Oswq
+--F8dlzb82+Fcn6AgP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 24, 2013 at 01:09:24PM +0000, git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: dc1fbdd925d4dde294c4b63466e67084ce1ace89
-> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
-;h=3Ddc1fbdd925d4dde294c4b63466e67084ce1ace89
+On Sun, Jun 02, 2013 at 10:09:56AM +0200, Martin Jansa wrote:
+> On Sat, Jun 01, 2013 at 08:03:22PM +0200, Martin Jansa wrote:
+> > ---
+> >  ...include-Element.h-for-hasTagName-function.patch | 43 ++++++++++++++=
+++++++++
+> >  meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
+> >  2 files changed, 45 insertions(+), 1 deletion(-)
+> >  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-inc=
+lude-Element.h-for-hasTagName-function.patch
 >=20
-> Author: Ross Burton <ross.burton@intel.com>
-> Date:   Thu May 16 17:54:08 2013 +0100
->=20
-> librsvg: clean up native depends
->=20
-> inherit gnome was only used for the SRC_URI, so just inherit gnomebase and
-> remove the native-specific DEPENDS which was only required as the gnome c=
-lass
-> pulls in an impossible hicolor-icon-theme-native dependency.
->=20
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
->=20
-> ---
->=20
->  meta/recipes-gnome/librsvg/librsvg_2.32.1.bb |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta/recipes-gnome/librsvg/librsvg_2.32.1.bb b/meta/recipes-=
-gnome/librsvg/librsvg_2.32.1.bb
-> index 2bc1624..9c5f722 100644
-> --- a/meta/recipes-gnome/librsvg/librsvg_2.32.1.bb
-> +++ b/meta/recipes-gnome/librsvg/librsvg_2.32.1.bb
-> @@ -8,12 +8,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9b=
-a36caa9b7df079bae19f \
-> =20
->  SECTION =3D "x11/utils"
->  DEPENDS =3D "cairo glib-2.0 gdk-pixbuf fontconfig freetype libxml2 pango"
-> -DEPENDS_class-native =3D "cairo-native pango-native gdk-pixbuf-native"
->  BBCLASSEXTEND =3D "native"
-> =20
->  PR =3D "r12"
-> =20
-> -inherit autotools pkgconfig gnome gtk-doc pixbufcache
-> +inherit autotools pkgconfig gnomebase gtk-doc pixbufcache
-> =20
->  EXTRA_OECONF =3D "--disable-mozilla-plugin --without-svgz"
+> Ignore this one, it works on armv7a, but fails the same on armv4t and
+> x86_64 + there is ICE when building for armv5te.
 
-Not sure why, but now do_configure is failing with:
+I've merged this in the end, because it fixed webkit-efl build on
+jenkins (and it looks like building from scratch works for other archs
+I'm building locally too).
 
-| checking for gdk-pixbuf-query-loaders... none
-| configure: error: gdk-pixbuf-query-loaders not found in path
-| Configure failed. The contents of all config.log files follows to aid deb=
-ugging
-| /OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/librsvg/2.32.1-r12=
-/librsvg-2.32.1/config.log
-| This file contains any messages produced by compilers while
-| running configure, to aid debugging if configure makes a mistake.
-|
-| It was created by RSVG configure 2.32.1, which was
-| generated by GNU Autoconf 2.69.  Invocation command line was
+Only remaining issue is with -O2 and xscalete DEFAULT_TUNE where it
+triggers ICE:
 
-configure:13908: checking whether to build the GDK-Pixbuf SVG loader
-configure:13917: result: yes
-configure:13924: checking for GDK_PIXBUF
-configure:13931: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=3D $=
-GDK_PIXBUF_REQUIRED"
-configure:13934: $? =3D 0
-configure:13948: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=3D $=
-GDK_PIXBUF_REQUIRED"
-configure:13951: $? =3D 0
-configure:14009: result: yes
-configure:14016: checking for gdk-pixbuf-query-loaders
-configure:14047: result: none
-configure:14057: error: gdk-pixbuf-query-loaders not found in path
+/OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svn=
+r120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp: I=
+n functi
+on 'JSC::JSValue JSC::_ZN3JSCL6decodeEPNS_9ExecStateEPKcb.constprop.89(JSC:=
+:ExecState*, const char*)':
+/OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svn=
+r120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:15=
+0:1: error: could not split insn
+ }
+ ^
+(insn 505 8094 507 (set (reg:SI 1 r1 [orig:494 D.142535 ] [494])
+        (plus:SI (reg/v:SI 5 r5 [orig:157 character ] [157])
+            (const_int -17179934720 [0xfffffffbffff0000]))) /OE/shr-core/tm=
+p-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/=
+Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:108 5 {*arm_addsi=
+3}
+     (nil))
+/OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svn=
+r120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:15=
+0:1: internal compiler error: in final_scan_insn, at final.c:2897
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+{standard input}: Assembler messages:
+{standard input}: Error: open CFI at the end of file; missing .cfi_endproc =
+directive
 
-I'll check DEPENDS with bitbake -e when I don't have any build running in t=
-hat directory..
+Removing -O2 works, I'll check if this is still happening with gcc-4.8.1 wh=
+en we have
+recipes for it and report upstream if needed
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---45Z9DzgjV8m4Oswq
+--F8dlzb82+Fcn6AgP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlGwYKoACgkQN1Ujt2V2gBwcwACff/FCHGa9bIG7tvUPyJuURyTe
-uiAAmwRWINTJetg8HrOIbxfGaczs8L4t
-=yfUy
+iEYEARECAAYFAlGwgckACgkQN1Ujt2V2gBxpJwCeJrzZa4ScevxZchrLV07+ZERd
+O9QAn2/iVbfD3sRgz7neH1tz64vwaq+C
+=OIXa
 -----END PGP SIGNATURE-----
 
---45Z9DzgjV8m4Oswq--
+--F8dlzb82+Fcn6AgP--
