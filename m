@@ -1,34 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 65C966A932
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Jun 2013 10:36:58 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id b15so3032993eae.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Jun 2013 03:36:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=KPHyHL8Svj743dx04dl4EfgQBskQpiZeI6X/IzTVys8=;
-	b=bcsv9zQmyYUcAwi57IyLwN7RGWKwtzRNGUGcTcIXLbQ/7i1Xv0PbXg+TwrJq1nwaEM
-	22tXb1WbIY0veHCPMX7iw11uQ2HjuSi8ZVLzyrhdX/MZbhFqwUq3kRzqkEZK2zfUlkf4
-	OmoSVxSYa86876sBwL1S3HW7/QndQtu5uHW9uVdT4efFg/MmWpF8STABFs6uilpscUcm
-	mtq0x6VnS3dBD5eQc0CrIhEmfmMkg6aNFjeRRolJmtVjfjDFpM8a+v2BMonvd9eQSNPQ
-	3dsTnezy1PeEdcheV5MTVH9ivf6rm68g3n7DAiF140Ri3RvRJXaLbiKKOwI7X2OTg/SQ
-	xReA==
-X-Received: by 10.14.172.70 with SMTP id s46mr2577070eel.133.1370687818212;
-	Sat, 08 Jun 2013 03:36:58 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	cf47sm5205284eeb.17.2013.06.08.03.36.57 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 08 Jun 2013 03:36:57 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  8 Jun 2013 12:36:53 +0200
-Message-Id: <1370687813-14789-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-Subject: [PATCH] emacs: zlib is now in base_libdir
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id E1AC06A901;
+	Sat,  8 Jun 2013 11:44:00 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 08 Jun 2013 04:41:48 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,827,1363158000"; d="scan'208";a="326208624"
+Received: from unknown (HELO helios.localnet) ([10.252.121.253])
+	by orsmga001.jf.intel.com with ESMTP; 08 Jun 2013 04:43:34 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 08 Jun 2013 12:43:33 +0100
+Message-ID: <1562117.pR91UQbp4e@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.3 (Linux/3.8.0-23-generic; KDE/4.10.3; i686; ; )
+In-Reply-To: <20130607222052.GN22710@jama>
+References: <CA+YB3rZ+pWVzy6_=PAa9QRTdsu+Y5OEGwdW7sLpLphnWZ-89yw@mail.gmail.com>
+	<20130607222052.GN22710@jama>
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] OE TSC Minutes 4 June 2013
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Jun 2013 10:36:59 -0000
+X-List-Received-Date: Sat, 08 Jun 2013 11:44:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* moved in
-  http://git.openembedded.org/openembedded-core/commit/?id=ebb8382af892bef8e11fb590292506e1124276c5
+On Saturday 08 June 2013 00:20:52 Martin Jansa wrote:
+> > a. oe-classic recipe migration status
+> > drop from agenda after this
+> 
+> Not sure why I got this idea now when it's "over" but would it be
+> possible to populate new layerindex with at least recipe names from
+> OE-classic?
+> 
+> I guess it would be hard to parse it completely as proper layer,
+> but it would be nice to search for "foo" and see that it's available in
+> OE-classic ready to be migrated to some layer - otherwise people will
+> just start from scratch which isn't always best way.
+> 
+> Even just names from migration wiki page would be enough to give people
+> heads-up that something similar is in OE-classic.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/emacs/emacs.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Indeed, I had thought of this... I think we could do a one-off hacked up parse 
+to get the data into a separate table and then it would be more or less 
+static. At least it would give us an easy way to report on recipes that 
+haven't been migrated (currently I've been doing it with some scripts). 
 
-diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
-index 5068596..fa554ed 100644
---- a/meta-oe/recipes-support/emacs/emacs.inc
-+++ b/meta-oe/recipes-support/emacs/emacs.inc
-@@ -94,6 +94,7 @@ do_compile_prepend() {
-         # after:   86M   ../../qemu-treedir/
-         cp -pPR \
-         ${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
-+        ${STAGING_DIR_TARGET}/${base_libdir}/libz.so.* \
-         ${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
-         ${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
-         ${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
-@@ -118,8 +119,7 @@ do_compile_prepend() {
-         ${STAGING_DIR_TARGET}/${libdir}/libharfbuzz.so.* \
-         ${STAGING_DIR_TARGET}/${libdir}/libicule.so.* \
-         ${STAGING_DIR_TARGET}/${libdir}/libicuuc.so.* \
--        ${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* \
--        ${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
-+        ${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* $treedir/${base_libdir}/
- 
-         # X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
-         cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
--- 
-1.8.2.1
+FYI I've been doing some work in my spare time on the layer index code 
+recently, implementing additional features and tidying a few things up 
+(published in the paule/features branch). The barrier to getting this up on 
+the live site is further testing and the database migration which I haven't 
+been through yet other than locally; I guess the less migrations the better so 
+it would probably be worth implementing the OE-Classic data structures before 
+that happens. I'll take a look at this if I have some spare time over the next 
+couple of weeks.
+
+Cheers,
+Paul
 
 
