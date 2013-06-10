@@ -1,33 +1,24 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
-	[209.85.216.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 1882D6A95B
+Return-Path: <stefan@herbrechtsmeier.net>
+Received: from dd19416.kasserver.com (dd19416.kasserver.com [85.13.139.185])
+	by mail.openembedded.org (Postfix) with ESMTP id 79B6961FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2013 17:07:43 +0000 (UTC)
-Received: by mail-qc0-f182.google.com with SMTP id e10so1474430qcy.13
+	Mon, 10 Jun 2013 18:32:29 +0000 (UTC)
+Received: from [192.168.1.100] (blfd-4db0ef1f.pool.mediaWays.net
+	[77.176.239.31])
+	by dd19416.kasserver.com (Postfix) with ESMTPSA id 0DBA01840A4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2013 10:07:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Lgo/PlED2rRuhwExMpgx8emwLZxdgAWKzL5WfaCqUJ4=;
-	b=ju2Ixj21Uxg7sMDbcy6JLeFSS+DqQXsw81CbRyuCc0LW31EoMQTrOOYnZUUMVlB90J
-	hhjvwgFekevylfY5ZJDGxf8oCHlrXlePc2xtkQ6A4M5DpNfxcDZsDAfdCVuH1WWKuCJs
-	eHZKLFfuEg83o9EN/ILq0Fsu6bCLpaWrq59u2hbuukAgySsayY3cW6nj+Ch3Psp1rkET
-	ZWQRsfmPz3JZkamNljQ62tlI4uQ0lVWdgHxIvWkPERs7JrkdB3TKo2yvBOkbnbWtiaOo
-	MuhBei8Eq0Hsyj4K6n8FavN/AUiOaECHxYvrkZKygatTboljBKBorLUax2wztZlr9Wo1
-	i9KQ==
+	Mon, 10 Jun 2013 20:32:28 +0200 (CEST)
+Message-ID: <51B61BBB.1030508@herbrechtsmeier.net>
+Date: Mon, 10 Jun 2013 20:32:27 +0200
+From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130510 Thunderbird/17.0.6
 MIME-Version: 1.0
-X-Received: by 10.49.24.198 with SMTP id w6mr11586947qef.58.1370884063899;
-	Mon, 10 Jun 2013 10:07:43 -0700 (PDT)
-Received: by 10.224.36.17 with HTTP; Mon, 10 Jun 2013 10:07:43 -0700 (PDT)
-In-Reply-To: <1370883990-5569-1-git-send-email-cazfi74@gmail.com>
-References: <1370883990-5569-1-git-send-email-cazfi74@gmail.com>
-Date: Mon, 10 Jun 2013 20:07:43 +0300
-Message-ID: <CAF6bG8fEUCPMp1RYrEZCvfrYsco3Wp6CZwmf52mFy=UuAxXn2w@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] libungif: add native build
+References: <3389668.90m8Qn9G8H@luxon> <5622796.kW1BjNgdNO@luxon>
+	<519F7FA9.60100@herbrechtsmeier.net> <16136190.1I5tgHWYiU@luxon>
+In-Reply-To: <16136190.1I5tgHWYiU@luxon>
+Subject: Re: [meta-qt5] Problems with Qt5 and CMake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2013 17:07:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Jun 2013 18:32:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
- Motivation for this patch: newer versions of liberation-fonts need
-fontforge to build, and fontforge depends on libungif.
-
-
- - ML
-
-
-On 10 June 2013 20:06, Marko Lindqvist <cazfi74@gmail.com> wrote:
-> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-> ---
->  meta-oe/recipes-extended/libungif/libungif_4.1.3.bb |    2 ++
->  1 file changed, 2 insertions(+)
+Am 10.06.2013 16:09, schrieb Manuel Nickschas:
+> On Friday 24 May 2013 16:56:41 Stefan Herbrechtsmeier wrote:
+>> Am 24.05.2013 15:03, schrieb Manuel Nickschas:
+>>> The path specified there is clearly wrong for cross-compiling, because it
+>>> references the location in the target itself, without prepending the
+>>> sysroot prefix. Thus, it won't find moc. In particular, it needs not even
+>>> find the moc from the target sysroot, but from the native sysroot, as
+>>> it's a host tool.
+>> All paths in the target sysroot represents the path on the target. They
+>> should be
+>> adapted via an variable or automatically detected during runtime.
+> What would be the proper way of doing this in the CMake files shipped by
+> Qt5?
 >
-> diff --git a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb b/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
-> index 0e9bf9b..3e4b78b 100644
-> --- a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
-> +++ b/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
-> @@ -12,3 +12,5 @@ inherit autotools lib_package
->  PACKAGES =+ "${PN}-utils"
->
->  FILES_${PN}-utils = "${bindir}/*"
-> +
-> +BBCLASSEXTEND = "native"
-> --
-> 1.7.10.4
->
+> /usr/bin/qt5/moc is hard-coded. We could prepend that with
+> ${STAGING_DIR_NATIVE} maybe, which could be exported (via
+> EXTRA_OECMAKE) by recipes so it's picked up by CMake, and it would
+> resolve to nothing if it's not set (so the CMake file would still work outside of
+> Bitbake).
+You can try to import the executable from a file passed via -P parameter 
+to cmake. I'm not sure if this works.
+
+add_executable(Qt5::rcc IMPORTED)
+set_target_properties(Qt5::rcc PROPERTIES IMPORTED_LOCATION 
+"${STAGING_BINDIR_NATIVE}/rcc4")
+
+Regards,
+   Stefan
+
 
