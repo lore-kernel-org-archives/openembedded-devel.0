@@ -1,33 +1,35 @@
-Return-Path: <manuel.nickschas@bmw-carit.de>
-Received: from mail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DCB3621CA
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D455D61FB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2013 14:09:50 +0000 (UTC)
-Received: from ulm-dc01.bmw-carit.intra ([172.20.0.50]:33055
-	helo=mail.bmw-carit.de)
-	by mail.bmw-carit.de with esmtps (TLSv1:AES128-SHA:128) (Exim 4.76)
-	(envelope-from <Manuel.Nickschas@bmw-carit.de>) id 1Um2n4-0005VJ-1o
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Jun 2013 16:09:46 +0200
-Received: from luxon.localnet (172.20.20.79) by ULM-DC01.bmw-carit.intra
-	(172.20.0.50) with Microsoft SMTP Server (TLS) id 14.1.218.12;
-	Mon, 10 Jun 2013 16:09:45 +0200
-X-CTCH-RefID: str=0001.0A0C0204.51B5DE2A.021A, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0
-From: Manuel Nickschas <manuel.nickschas@bmw-carit.de>
+	Mon, 10 Jun 2013 15:17:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r5AFHgKo029809
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jun 2013 08:17:42 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Mon, 10 Jun 2013 08:17:41 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 256507FE2	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jun 2013 11:17:31 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 284AF4049F; Mon,
+	10 Jun 2013 11:17:41 -0400 (EDT)
+Date: Mon, 10 Jun 2013 11:17:41 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 10 Jun 2013 16:09:41 +0200
-Message-ID: <16136190.1I5tgHWYiU@luxon>
-Organization: BMW Car IT GmbH
-User-Agent: KMail/4.11 pre (Linux/3.8.8-gentoo; KDE/4.10.60; x86_64;
-	git-23a95d8; 2013-05-21)
-In-Reply-To: <519F7FA9.60100@herbrechtsmeier.net>
-References: <3389668.90m8Qn9G8H@luxon> <5622796.kW1BjNgdNO@luxon>
-	<519F7FA9.60100@herbrechtsmeier.net>
+Message-ID: <20130610151740.GE9561@windriver.com>
+References: <m6pg8v2p8pw3.fsf@cisco.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.20.79]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5] Problems with Qt5 and CMake
+In-Reply-To: <m6pg8v2p8pw3.fsf@cisco.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH v2] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,143 +43,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jun 2013 14:09:51 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Mon, 10 Jun 2013 15:17:42 -0000
+X-Groupsio-MsgNum: 44991
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Rgf3q3z9SdmXC6oT"
+Content-Disposition: inline
+
+--Rgf3q3z9SdmXC6oT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Friday 24 May 2013 16:56:41 Stefan Herbrechtsmeier wrote:
-> Am 24.05.2013 15:03, schrieb Manuel Nickschas:
+[[oe] [meta-networking][PATCH v2] net-snmp: Backport fix for NETSNMP_NO_SYS=
+TEMD typos] On 13.06.04 (Tue 18:36) Thomas Fitzsimmons wrote:
 
-Hi,
+> Added Signed-off-by for backport patch refresh.  Bumped PR.
 
-sorry for not replying sooner, I had some other tasks to do and only re=
-cently=20
-could look into the issue again.
+Merged, thanks.
 
-> >> The cmake.class overlays the machine sysroot over the native sysro=
-ot=20
-and
-> >> don't install any binaries into the machine sysroot. Thereby the
-> >> find_program function detects the binary in the native sysroot and=
- all
-> >> the other find_xxx functions detect the include files and librarie=
-s in
-> >> the machine sysroot.
-> >=20
-> > Hm, no, that is not the issue. The issue is that Qt5 uses a fairly =
-recent
-> > CMake feature where find_package and friends
+-J.
+
 >=20
-> What do you mean by friends?
-
-Well, probably it's only find_package. Not sure if there's other macros=
- that=20
-make use of the *Config.cmake feature.
-
-> >   look for a *Config.cmake file
-> >=20
-> > first, and then use that to set everything up. In case of Qt5, plea=
-se have
-> > a look at the files Qt5 (the qtbase package) installs into the targ=
-et
-> > sysroot, in /usr/lib/cmake/.
+> Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+> ---
+>  .../net-snmp/net-snmp/systemd-support.patch        |    6 ++++--
+>  .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb   |    2 ++
+>  2 files changed, 6 insertions(+), 2 deletions(-)
 >=20
-> I don't use qt but have similar problems with other cmake projects.
->=20
-> > In particular, the issue is with
-> > $sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
-> >=20
-> > [...]
-> >=20
-> >      set_target_properties(Qt5::moc PROPERTIES
-> >     =20
-> >          IMPORTED_LOCATION "/usr/bin/qt5/moc"
-> >     =20
-> >      )
-> >=20
-> > [...]
-> >=20
-> > and similar for other host binaries such as rcc or qdbusxml2cpp (in=
-
-> > Qt5DBus/Qt5DBusConfigExtras.cmake).
->=20
-> If they would use find_program they would get the correct path for mo=
-c.
-
-Well, they don't. I'm not sure why Qt upstream believes so much in=20
-hardcoded paths, maybe it's so you can manage different Qt installation=
-s on=20
-the same host. They do the same for qmake, of course, which also contai=
-ns=20
-hard-coded paths.
-
-Since I don't think we can talk upstream into changing that approach, w=
-e=20
-have to see how we can workaround that on our end.
-
-> > The path specified there is clearly wrong for cross-compiling, beca=
-use it
-> > references the location in the target itself, without prepending th=
-e
-> > sysroot prefix. Thus, it won't find moc. In particular, it needs no=
-t even
-> > find the moc from the target sysroot, but from the native sysroot, =
-as
-> > it's a host tool.
-> All paths in the target sysroot represents the path on the target. Th=
-ey
-> should be
-> adapted via an variable or automatically detected during runtime.
-
-What would be the proper way of doing this in the CMake files shipped b=
-y=20
-Qt5?
-
-/usr/bin/qt5/moc is hard-coded. We could prepend that with=20
-${STAGING_DIR_NATIVE} maybe, which could be exported (via=20
-EXTRA_OECMAKE) by recipes so it's picked up by CMake, and it would=20
-resolve to nothing if it's not set (so the CMake file would still work =
-outside of=20
-Bitbake).
-
-I also had to add
-
--DCMAKE_AUTOMOC_MOC_OPTIONS=3D'-p.'
-
-because moc generates wrong include paths otherwise.
-
-I'd like to see that handled by some cmake-qt5.bbclass or similar thoug=
-h, to=20
-lower the burden for developers.
-
-> > Unfortunately, I have no clue how the Qt5 build system ends up=20
-generating
-> > those paths; I assume it's not using CMake and find_program, but
-> > hardcodes the paths somewhere.
-> >=20
-> > One could probably patch this away, but then you'd end up with host=
--
-> > specific absolute paths inside the target, which will then break if=
- you
-> > try to use them for compiling something inside the target.
->=20
-> You should prepend a variable or use find_program.
-
-The latter idea wouldn't work without completely rewriting Qt's CMake s=
-tuff, I=20
-think; the former would amount to what I suggested above?
-
-Cheers,
-~ Sput
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-=
+support.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd=
+-support.patch
+> index 18955f2..e19153b 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support=
+=2Epatch
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/systemd-support=
+=2Epatch
+> @@ -7,12 +7,14 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
+>  0641e43c694c485cbbffef0556efc4641bd3ff50
+>  76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
+>  bf108d7f1354f6276fc43c129963f2c49b9fc242
+> +3692875172352f72cf3afd0d35f355e83d7e421b
+>  74412748067c685e1d8ab6ed3bcc3ca9c2774844
+>  86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
+>  63557cf8986a33dba1d4429b583a901361052c4f
+> =20
+>  Upstream-Status: Backport
+> =20
+> +Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+>  diff --git a/README.systemd b/README.systemd
+>  new file mode 100644
+>  index 0000000..f731851
+> @@ -89,10 +91,10 @@ index b177d5b..08bdfc7 100644
+>   #endif
+>  =20
+>   #ifndef WIN32
+> -+#ifndef NETSNMP_NO_SYSYSTEMD
+> ++#ifndef NETSNMP_NO_SYSTEMD
+>  +    /* check if systemd has sockets for us and don't close them */
+>  +    prepared_sockets =3D netsnmp_sd_listen_fds(0);
+> -+#endif /* NETSNMP_NO_SYSYSTEMD */
+> ++#endif /* NETSNMP_NO_SYSTEMD */
+>  +
+>       /*
+>        * close all non-standard file descriptors we may have
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb=
+ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+> index 4c3939a..d21995a 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+> @@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D "file://README;beginline=3D3;endline=
+=3D8;md5=3D7f7f00ba639ac8e8deb5
+> =20
+>  DEPENDS =3D "openssl libnl pciutils"
+> =20
+> +PR =3D "r1"
+> +
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+>          file://init \
+>          file://snmpd.conf \
 --=20
-Manuel "Sput" Nickschas * Development Specialist, Team GENIVI
-BMW Car IT GmbH * http://www.bmw-carit.de
-Embedded Software House Ulm * Lise-Meitner-Str. 14 * 89081 Ulm
------------------------------------------------------------------------=
-------
-BMW Car IT GmbH
-Gesch=C3=A4ftsf=C3=BChrer: Harald Heinecke und Reinhard Stolle
-Sitz und Registergericht: M=C3=BCnchen HRB 134810
------------------------------------------------------------------------=
-------
+-Joe MacDonald.
+:wq
 
+--Rgf3q3z9SdmXC6oT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlG17hQACgkQPN8S4W6ZZncVDgCfcKSVQFQzpoLxv1YkV19TBD4K
+1u0AniGV5FAPEYek2xa2LaLfjIIszdO9
+=xyKU
+-----END PGP SIGNATURE-----
+
+--Rgf3q3z9SdmXC6oT--
