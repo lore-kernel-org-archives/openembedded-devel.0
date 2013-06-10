@@ -1,27 +1,33 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E1AC06A901;
-	Sat,  8 Jun 2013 11:44:00 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 08 Jun 2013 04:41:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,827,1363158000"; d="scan'208";a="326208624"
-Received: from unknown (HELO helios.localnet) ([10.252.121.253])
-	by orsmga001.jf.intel.com with ESMTP; 08 Jun 2013 04:43:34 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 08 Jun 2013 12:43:33 +0100
-Message-ID: <1562117.pR91UQbp4e@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.3 (Linux/3.8.0-23-generic; KDE/4.10.3; i686; ; )
-In-Reply-To: <20130607222052.GN22710@jama>
-References: <CA+YB3rZ+pWVzy6_=PAa9QRTdsu+Y5OEGwdW7sLpLphnWZ-89yw@mail.gmail.com>
-	<20130607222052.GN22710@jama>
+Return-Path: <manuel.nickschas@bmw-carit.de>
+Received: from mail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DCB3621CA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jun 2013 14:09:50 +0000 (UTC)
+Received: from ulm-dc01.bmw-carit.intra ([172.20.0.50]:33055
+	helo=mail.bmw-carit.de)
+	by mail.bmw-carit.de with esmtps (TLSv1:AES128-SHA:128) (Exim 4.76)
+	(envelope-from <Manuel.Nickschas@bmw-carit.de>) id 1Um2n4-0005VJ-1o
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Jun 2013 16:09:46 +0200
+Received: from luxon.localnet (172.20.20.79) by ULM-DC01.bmw-carit.intra
+	(172.20.0.50) with Microsoft SMTP Server (TLS) id 14.1.218.12;
+	Mon, 10 Jun 2013 16:09:45 +0200
+X-CTCH-RefID: str=0001.0A0C0204.51B5DE2A.021A, ss=1, re=0.000, recu=0.000,
+	reip=0.000, cl=1, cld=1, fgs=0
+From: Manuel Nickschas <manuel.nickschas@bmw-carit.de>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 10 Jun 2013 16:09:41 +0200
+Message-ID: <16136190.1I5tgHWYiU@luxon>
+Organization: BMW Car IT GmbH
+User-Agent: KMail/4.11 pre (Linux/3.8.8-gentoo; KDE/4.10.60; x86_64;
+	git-23a95d8; 2013-05-21)
+In-Reply-To: <519F7FA9.60100@herbrechtsmeier.net>
+References: <3389668.90m8Qn9G8H@luxon> <5622796.kW1BjNgdNO@luxon>
+	<519F7FA9.60100@herbrechtsmeier.net>
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] OE TSC Minutes 4 June 2013
+X-Originating-IP: [172.20.20.79]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5] Problems with Qt5 and CMake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +41,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Jun 2013 11:44:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 10 Jun 2013 14:09:51 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Saturday 08 June 2013 00:20:52 Martin Jansa wrote:
-> > a. oe-classic recipe migration status
-> > drop from agenda after this
-> 
-> Not sure why I got this idea now when it's "over" but would it be
-> possible to populate new layerindex with at least recipe names from
-> OE-classic?
-> 
-> I guess it would be hard to parse it completely as proper layer,
-> but it would be nice to search for "foo" and see that it's available in
-> OE-classic ready to be migrated to some layer - otherwise people will
-> just start from scratch which isn't always best way.
-> 
-> Even just names from migration wiki page would be enough to give people
-> heads-up that something similar is in OE-classic.
+On Friday 24 May 2013 16:56:41 Stefan Herbrechtsmeier wrote:
+> Am 24.05.2013 15:03, schrieb Manuel Nickschas:
 
-Indeed, I had thought of this... I think we could do a one-off hacked up parse 
-to get the data into a separate table and then it would be more or less 
-static. At least it would give us an easy way to report on recipes that 
-haven't been migrated (currently I've been doing it with some scripts). 
+Hi,
 
-FYI I've been doing some work in my spare time on the layer index code 
-recently, implementing additional features and tidying a few things up 
-(published in the paule/features branch). The barrier to getting this up on 
-the live site is further testing and the database migration which I haven't 
-been through yet other than locally; I guess the less migrations the better so 
-it would probably be worth implementing the OE-Classic data structures before 
-that happens. I'll take a look at this if I have some spare time over the next 
-couple of weeks.
+sorry for not replying sooner, I had some other tasks to do and only re=
+cently=20
+could look into the issue again.
+
+> >> The cmake.class overlays the machine sysroot over the native sysro=
+ot=20
+and
+> >> don't install any binaries into the machine sysroot. Thereby the
+> >> find_program function detects the binary in the native sysroot and=
+ all
+> >> the other find_xxx functions detect the include files and librarie=
+s in
+> >> the machine sysroot.
+> >=20
+> > Hm, no, that is not the issue. The issue is that Qt5 uses a fairly =
+recent
+> > CMake feature where find_package and friends
+>=20
+> What do you mean by friends?
+
+Well, probably it's only find_package. Not sure if there's other macros=
+ that=20
+make use of the *Config.cmake feature.
+
+> >   look for a *Config.cmake file
+> >=20
+> > first, and then use that to set everything up. In case of Qt5, plea=
+se have
+> > a look at the files Qt5 (the qtbase package) installs into the targ=
+et
+> > sysroot, in /usr/lib/cmake/.
+>=20
+> I don't use qt but have similar problems with other cmake projects.
+>=20
+> > In particular, the issue is with
+> > $sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:
+> >=20
+> > [...]
+> >=20
+> >      set_target_properties(Qt5::moc PROPERTIES
+> >     =20
+> >          IMPORTED_LOCATION "/usr/bin/qt5/moc"
+> >     =20
+> >      )
+> >=20
+> > [...]
+> >=20
+> > and similar for other host binaries such as rcc or qdbusxml2cpp (in=
+
+> > Qt5DBus/Qt5DBusConfigExtras.cmake).
+>=20
+> If they would use find_program they would get the correct path for mo=
+c.
+
+Well, they don't. I'm not sure why Qt upstream believes so much in=20
+hardcoded paths, maybe it's so you can manage different Qt installation=
+s on=20
+the same host. They do the same for qmake, of course, which also contai=
+ns=20
+hard-coded paths.
+
+Since I don't think we can talk upstream into changing that approach, w=
+e=20
+have to see how we can workaround that on our end.
+
+> > The path specified there is clearly wrong for cross-compiling, beca=
+use it
+> > references the location in the target itself, without prepending th=
+e
+> > sysroot prefix. Thus, it won't find moc. In particular, it needs no=
+t even
+> > find the moc from the target sysroot, but from the native sysroot, =
+as
+> > it's a host tool.
+> All paths in the target sysroot represents the path on the target. Th=
+ey
+> should be
+> adapted via an variable or automatically detected during runtime.
+
+What would be the proper way of doing this in the CMake files shipped b=
+y=20
+Qt5?
+
+/usr/bin/qt5/moc is hard-coded. We could prepend that with=20
+${STAGING_DIR_NATIVE} maybe, which could be exported (via=20
+EXTRA_OECMAKE) by recipes so it's picked up by CMake, and it would=20
+resolve to nothing if it's not set (so the CMake file would still work =
+outside of=20
+Bitbake).
+
+I also had to add
+
+-DCMAKE_AUTOMOC_MOC_OPTIONS=3D'-p.'
+
+because moc generates wrong include paths otherwise.
+
+I'd like to see that handled by some cmake-qt5.bbclass or similar thoug=
+h, to=20
+lower the burden for developers.
+
+> > Unfortunately, I have no clue how the Qt5 build system ends up=20
+generating
+> > those paths; I assume it's not using CMake and find_program, but
+> > hardcodes the paths somewhere.
+> >=20
+> > One could probably patch this away, but then you'd end up with host=
+-
+> > specific absolute paths inside the target, which will then break if=
+ you
+> > try to use them for compiling something inside the target.
+>=20
+> You should prepend a variable or use find_program.
+
+The latter idea wouldn't work without completely rewriting Qt's CMake s=
+tuff, I=20
+think; the former would amount to what I suggested above?
 
 Cheers,
-Paul
-
+~ Sput
+--=20
+Manuel "Sput" Nickschas * Development Specialist, Team GENIVI
+BMW Car IT GmbH * http://www.bmw-carit.de
+Embedded Software House Ulm * Lise-Meitner-Str. 14 * 89081 Ulm
+-----------------------------------------------------------------------=
+------
+BMW Car IT GmbH
+Gesch=C3=A4ftsf=C3=BChrer: Harald Heinecke und Reinhard Stolle
+Sitz und Registergericht: M=C3=BCnchen HRB 134810
+-----------------------------------------------------------------------=
+------
 
