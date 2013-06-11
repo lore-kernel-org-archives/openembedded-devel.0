@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AB2E6A9F6
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id D1EA76A9F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 05:37:32 +0000 (UTC)
-Received: by mail-ea0-f180.google.com with SMTP id k10so6057288eaj.11
+	Tue, 11 Jun 2013 05:37:33 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id d10so2095914eaj.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jun 2013 22:37:33 -0700 (PDT)
+	Mon, 10 Jun 2013 22:37:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=KuaF0Lbn6rODqzCrzfNLCz2fDeEkLg7d1Vpu7fxGYO4=;
-	b=heawtd59rnVJmvhqgmRVX+gMXO5sEpT/bexHeWd8nEGO1UeqU8FOuAmPrQTHSAA9OW
-	M+UP7IrQ+CTmR+7oZvjz2MZFbcYNqsdGji8P0hBfen7t9VxebBISQfzsdGjDx/xAJV8J
-	SU+IChk/BOoiBAQwaArB8znbXxBUsKDdHx1wcAM/pTkPBXBixtNhljIidfyzvgQ3VA/I
-	Er+LDcS8Ej9OjNBJGhb4cag29TQhF3/pfnTFDIgU/ngDPzztl3ijtnikhdXz0htBFQ/j
-	My6btWKTXH3/ZIhtTwhSn6SM1PxD5aEDMlEBii4hdUbTHL4DsBhs+v30yDV20IA3QLej
-	FoZA==
-X-Received: by 10.15.51.78 with SMTP id m54mr14708149eew.1.1370929053117;
-	Mon, 10 Jun 2013 22:37:33 -0700 (PDT)
+	bh=aiSTVemomAoMFoj1J8YdnA0JOilcB1I2gd1F++EFf8M=;
+	b=oVKD5bjvjm99mDNmZOrgoEFVbnH2cPSCtg1/t7s+ubJMP+/NwV0QQklaS2FWNgDcsK
+	eFeTou8g2cn3KKYTYu8IeyM/z7dGidrZ8F6ZjcWT6PJYOKnBrjmUvEB9qemGKBKngR+t
+	GKauU+o3ZRMAUdRarD3GQg7o8Vr12EwBHcJKdAvY59w3gVucSa1bGmk5YQspG7LUERXB
+	hxwOzsEOed6VNck7QMEbM1F1QgGrZRtYFjQ+6fEdnPAdzNosD/sebaHwtl75MuL0aWkr
+	oFpq8gYu7GOV2IIhIzBEBdjwdzHwZtCoqO1ohHGrt1unvTXmomkOMNTSRcCX4HfJUV9T
+	0ZQA==
+X-Received: by 10.14.7.133 with SMTP id 5mr14671122eep.115.1370929054529;
+	Mon, 10 Jun 2013 22:37:34 -0700 (PDT)
 Received: from localhost.localdomain (ip-178-202-232-2.unitymediagroup.de.
 	[178.202.232.2])
-	by mx.google.com with ESMTPSA id y10sm28009517eev.3.2013.06.10.22.37.31
+	by mx.google.com with ESMTPSA id y10sm28009517eev.3.2013.06.10.22.37.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 10 Jun 2013 22:37:32 -0700 (PDT)
+	Mon, 10 Jun 2013 22:37:33 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2013 07:34:34 +0200
-Message-Id: <1370928876-14423-14-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 11 Jun 2013 07:34:35 +0200
+Message-Id: <1370928876-14423-15-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
 In-Reply-To: <1370928876-14423-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1370928876-14423-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-gnome/meta-oe/meta-xfce 13/15] lxdm: remove consolekit dependencies in systemd environment and fix build
+Subject: [meta-gnome/meta-oe/meta-xfce 14/15] xfce4-power-manager: rework polkit/consolekit selection and implement polkit/systemd shutdown
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,102 +48,726 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 05:37:33 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 05:37:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...heck-only-for-ck-connector-in-case-consol.patch |   48 ++++++++++++++++++++
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |    6 ++-
- 2 files changed, 52 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/0002-configure-check-only-for-ck-connector-in-case-consol.patch
+ ...shutdown-reboot-functionality-for-systemd.patch |  677 ++++++++++++++++++++
+ .../xfce4-power-manager_1.2.0.bb                   |    9 +-
+ 2 files changed, 684 insertions(+), 2 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/0002-configure-check-only-for-ck-connector-in-case-consol.patch b/meta-oe/recipes-graphics/lxdm/lxdm/0002-configure-check-only-for-ck-connector-in-case-consol.patch
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch b/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
 new file mode 100644
-index 0000000..e2ba52a
+index 0000000..d5c5487
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/0002-configure-check-only-for-ck-connector-in-case-consol.patch
-@@ -0,0 +1,48 @@
-+From 8657bfcfc5c26382989001e9b6d18295d740c709 Mon Sep 17 00:00:00 2001
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
+@@ -0,0 +1,677 @@
++From 023333688f73ed26097c693d43f76e4b7d5698e2 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Fri, 7 Jun 2013 14:13:41 +0200
-+Subject: [PATCH] configure: check only for ck-connector in case consolekit is
-+ enabled
++Date: Fri, 7 Jun 2013 18:38:42 +0200
++Subject: [PATCH] Add shutdown/reboot functionality for systemd
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+it failed for --disable-consolekit with
++Upstream-Status: Submitted [2]
 +
-+| lxdm.c:70:26: fatal error: ck-connector.h: No such file or directory
-+| compilation terminated.
-+| make[2]: *** [lxdm_binary-lxdm.o] Error 1
-+
-+Upstream-Status: submitted [1]
-+
-+[1] http://sourceforge.net/mailarchive/message.php?msg_id=31010893
++[1] http://git.xfce.org/xfce/xfce4-session/commit/?id=ae28aef315a7a6b90f1649ce6d1f30b842791cbf
++[2] https://bugzilla.xfce.org/show_bug.cgi?id=10167
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ configure.ac |    3 +--
-+ 1 files changed, 1 insertions(+), 2 deletions(-)
++ configure.ac       |    2 +
++ src/Makefile.am    |   14 +++-
++ src/xfpm-manager.c |   29 ++++++-
++ src/xfpm-power.c   |   66 ++++++++++++++-
++ src/xfpm-systemd.c |  245 ++++++++++++++++++++++++++++++++++++++++++++++++++++
++ src/xfpm-systemd.h |   60 +++++++++++++
++ 6 files changed, 411 insertions(+), 5 deletions(-)
++ create mode 100644 src/xfpm-systemd.c
++ create mode 100644 src/xfpm-systemd.h
 +
 +diff --git a/configure.ac b/configure.ac
-+index 9e21a22..49ba944 100644
++index 633b340..1db2036 100644
 +--- a/configure.ac
 ++++ b/configure.ac
-+@@ -28,8 +28,6 @@ if test "x$USE_PAM" != "xno" ; then
-+ 		 fi])
++@@ -95,6 +95,8 @@ if test "x$ac_cv_enable_polkit" = "xno"; then
++     polkit="no"
++ else
++     AC_MSG_RESULT([yes])
+++    m4_define([polkit_minimum_version], [0.100])
+++    XDT_CHECK_PACKAGE([SYSTEMD], [polkit-gobject-1], [polkit_minimum_version])
++     AC_DEFINE(ENABLE_POLKIT, 1 , [PolicyKit support])
++     polkit="yes"
 + fi
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 0435bed..9b7fdd0 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -18,8 +18,6 @@ xfce4_power_manager_SOURCES =                   \
++ 	xfpm-xfconf.h				\
++ 	xfpm-disks.c				\
++ 	xfpm-disks.h				\
++-	xfpm-console-kit.c			\
++-	xfpm-console-kit.h			\
++ 	egg-idletime.c				\
++ 	egg-idletime.h				\
++ 	xfpm-backlight.c			\
++@@ -39,6 +37,16 @@ xfce4_power_manager_SOURCES =                   \
++ 	xfpm-errors.c				\
++ 	xfpm-errors.h
 + 
-+-AC_CHECK_LIB([ck-connector],[ck_connector_open_session])
-+-
-+ # Checks for header files.
-+ AC_PATH_X
-+ AC_CHECK_HEADERS([shadow.h stdlib.h string.h unistd.h utmpx.h])
-+@@ -102,6 +100,7 @@ if test "x$enable_consolekit" = "xyes" ; then
-+ 	AC_SUBST(CONSOLEKIT_LIBS)],[
-+ 	echo "ConsoleKit devel package not found"
-+ 	])
-++  AC_CHECK_LIB([ck-connector],[ck_connector_open_session])
-+ fi
+++if ENABLE_POLKIT
+++xfce4_power_manager_SOURCES +=			\
+++	xfpm-systemd.c				\
+++	xfpm-systemd.h
+++else
+++xfce4_power_manager_SOURCES +=                  \
+++	xfpm-console-kit.c			\
+++	xfpm-console-kit.h
+++endif
+++
++ xfce4_power_manager_CFLAGS =                    \
++ 	-I$(top_srcdir)                         \
++ 	-I$(top_srcdir)/common                  \
++@@ -52,6 +60,7 @@ xfce4_power_manager_CFLAGS =                    \
++ 	$(LIBXFCE4UI_CFLAGS)                    \
++ 	$(XFCONF_CFLAGS)                        \
++ 	$(LIBNOTIFY_CFLAGS)                     \
+++	$(SYSTEMD_CFLAGS)                       \
++ 	$(XRANDR_CFLAGS)			\
++ 	$(DPMS_CFLAGS)           		\
++ 	$(PLATFORM_CPPFLAGS)			\
++@@ -70,6 +79,7 @@ xfce4_power_manager_LDADD =                     \
++ 	$(LIBXFCE4UI_LIBS)                      \
++ 	$(XFCONF_LIBS)                          \
++ 	$(LIBNOTIFY_LIBS)                       \
+++	$(SYSTEMD_LIBS)                         \
++ 	$(XRANDR_LIBS)				\
++ 	$(DPMS_LIBS)
 + 
++diff --git a/src/xfpm-manager.c b/src/xfpm-manager.c
++index 472ee3e..9bfb53c 100644
++--- a/src/xfpm-manager.c
+++++ b/src/xfpm-manager.c
++@@ -43,7 +43,6 @@
++ #include "xfpm-disks.h"
++ #include "xfpm-dpms.h"
++ #include "xfpm-manager.h"
++-#include "xfpm-console-kit.h"
++ #include "xfpm-button.h"
++ #include "xfpm-backlight.h"
++ #include "xfpm-inhibit.h"
++@@ -58,6 +57,12 @@
++ #include "xfpm-enum-types.h"
++ #include "xfpm-dbus-monitor.h"
 + 
+++#ifdef ENABLE_POLKIT
+++#include "xfpm-systemd.h"
+++#else
+++#include "xfpm-console-kit.h"
+++#endif
+++
++ static void xfpm_manager_finalize   (GObject *object);
++ 
++ static void xfpm_manager_dbus_class_init (XfpmManagerClass *klass);
++@@ -80,7 +85,11 @@ struct XfpmManagerPrivate
++     XfpmButton      *button;
++     XfpmXfconf      *conf;
++     XfpmBacklight   *backlight;
+++#ifdef ENABLE_POLKIT
+++    XfpmSystemd     *systemd;
+++#else
++     XfpmConsoleKit  *console;
+++#endif
++     XfpmDBusMonitor *monitor;
++     XfpmDisks       *disks;
++     XfpmInhibit     *inhibit;
++@@ -131,7 +140,11 @@ xfpm_manager_finalize (GObject *object)
++     g_object_unref (manager->priv->button);
++     g_object_unref (manager->priv->conf);
++     g_object_unref (manager->priv->client);
+++#ifdef ENABLE_POLKIT
+++    g_object_unref (manager->priv->systemd);
+++#else
++     g_object_unref (manager->priv->console);
+++#endif
++     g_object_unref (manager->priv->monitor);
++     g_object_unref (manager->priv->disks);
++     g_object_unref (manager->priv->inhibit);
++@@ -201,7 +214,11 @@ static void
++ xfpm_manager_shutdown (XfpmManager *manager)
++ {
++     GError *error = NULL;
+++#ifdef ENABLE_POLKIT
+++    xfpm_systemd_shutdown (manager->priv->systemd, &error );
+++#else
++     xfpm_console_kit_shutdown (manager->priv->console, &error );
+++#endif
++     
++     if ( error )
++     {
++@@ -521,7 +538,11 @@ void xfpm_manager_start (XfpmManager *manager)
++     manager->priv->power = xfpm_power_get ();
++     manager->priv->button = xfpm_button_new ();
++     manager->priv->conf = xfpm_xfconf_new ();
+++#ifdef ENABLE_POLKIT
+++    manager->priv->systemd = xfpm_systemd_new ();
+++#else
++     manager->priv->console = xfpm_console_kit_new ();
+++#endif
++     manager->priv->monitor = xfpm_dbus_monitor_new ();
++     manager->priv->disks = xfpm_disks_new ();
++     manager->priv->inhibit = xfpm_inhibit_new ();
++@@ -603,9 +624,15 @@ GHashTable *xfpm_manager_get_config (XfpmManager *manager)
++     
++     hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
++     
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (manager->priv->systemd),
+++		  "can-shutdown", &can_shutdown,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (manager->priv->console),
++ 		  "can-shutdown", &can_shutdown,
++ 		  NULL);
+++#endif
++ 
++     g_object_get (G_OBJECT (manager->priv->power),
++                   "auth-suspend", &auth_suspend,
++diff --git a/src/xfpm-power.c b/src/xfpm-power.c
++index 796bef8..391c7fc 100644
++--- a/src/xfpm-power.c
+++++ b/src/xfpm-power.c
++@@ -39,7 +39,6 @@
++ #include "xfpm-xfconf.h"
++ #include "xfpm-notify.h"
++ #include "xfpm-errors.h"
++-#include "xfpm-console-kit.h"
++ #include "xfpm-inhibit.h"
++ #include "xfpm-polkit.h"
++ #include "xfpm-network-manager.h"
++@@ -51,6 +50,12 @@
++ #include "xfpm-enum-types.h"
++ #include "egg-idletime.h"
++ 
+++#ifdef ENABLE_POLKIT
+++#include "xfpm-systemd.h"
+++#else
+++#include "xfpm-console-kit.h"
+++#endif
+++
++ static void xfpm_power_finalize     (GObject *object);
++ 
++ static void xfpm_power_get_property (GObject *object,
++@@ -75,7 +80,11 @@ struct XfpmPowerPrivate
++     
++     GHashTable      *hash;
++     
+++#ifdef ENABLE_POLKIT
+++    XfpmSystemd     *systemd;
+++#else
++     XfpmConsoleKit  *console;
+++#endif
++     XfpmInhibit	    *inhibit;
++     XfpmXfconf      *conf;
++     GtkStatusIcon   *adapter_icon;
++@@ -680,9 +689,15 @@ xfpm_power_add_actions_to_notification (XfpmPower *power, NotifyNotification *n)
++ {
++     gboolean can_shutdown;
++     
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-shutdown", &can_shutdown,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-shutdown", &can_shutdown,
++ 		  NULL);
+++#endif
++ 		  
++     if (  power->priv->can_hibernate && power->priv->auth_hibernate )
++     {
++@@ -756,9 +771,15 @@ xfpm_power_show_critical_action_gtk (XfpmPower *power)
++     const gchar *message;
++     gboolean can_shutdown;
++     
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-shutdown", &can_shutdown,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-shutdown", &can_shutdown,
++ 		  NULL);
+++#endif
++     
++     message = _("System is running on low power. "\
++                "Save your work to avoid losing data");
++@@ -1327,7 +1348,11 @@ xfpm_power_init (XfpmPower *power)
++     power->priv->inhibit = xfpm_inhibit_new ();
++     power->priv->notify  = xfpm_notify_new ();
++     power->priv->conf    = xfpm_xfconf_new ();
+++#ifdef ENABLE_POLKIT
+++    power->priv->systemd = xfpm_systemd_new ();
+++#else
++     power->priv->console = xfpm_console_kit_new ();
+++#endif
++     
++     g_signal_connect_swapped (power->priv->conf, "notify::" SHOW_TRAY_ICON_CFG,
++ 			      G_CALLBACK (xfpm_power_refresh_adaptor_visible), power);
++@@ -1445,7 +1470,11 @@ xfpm_power_finalize (GObject *object)
++     g_object_unref (power->priv->inhibit);
++     g_object_unref (power->priv->notify);
++     g_object_unref (power->priv->conf);
+++#ifdef ENABLE_POLKIT
+++    g_object_unref (power->priv->systemd);
+++#else
++     g_object_unref (power->priv->console);
+++#endif
++     
++     xfpm_power_hide_adapter_icon (power);
++     
++@@ -1607,9 +1636,15 @@ static gboolean xfpm_power_dbus_shutdown (XfpmPower *power,
++ {
++     gboolean can_reboot;
++     
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-shutdown", &can_reboot,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-shutdown", &can_reboot,
++ 		  NULL);
+++#endif
++     
++     if ( !can_reboot)
++     {
++@@ -1618,7 +1653,11 @@ static gboolean xfpm_power_dbus_shutdown (XfpmPower *power,
++         return FALSE;
++     }
++     
+++#ifdef ENABLE_POLKIT
+++    xfpm_systemd_shutdown (power->priv->systemd, error);
+++#else
++     xfpm_console_kit_shutdown (power->priv->console, error);
+++#endif
++     
++     return TRUE;
++ }
++@@ -1628,9 +1667,15 @@ static gboolean xfpm_power_dbus_reboot   (XfpmPower *power,
++ {
++     gboolean can_reboot;
++     
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-restart", &can_reboot,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-restart", &can_reboot,
++ 		  NULL);
+++#endif
++     
++     if ( !can_reboot)
++     {
++@@ -1639,7 +1684,11 @@ static gboolean xfpm_power_dbus_reboot   (XfpmPower *power,
++         return FALSE;
++     }
++     
+++#ifdef ENABLE_POLKIT
+++    xfpm_systemd_reboot (power->priv->systemd, error);
+++#else
++     xfpm_console_kit_reboot (power->priv->console, error);
+++#endif
++     
++     return TRUE;
++ }
++@@ -1694,10 +1743,16 @@ static gboolean xfpm_power_dbus_can_reboot (XfpmPower * power,
++ 					  gboolean * OUT_can_reboot, 
++ 					  GError ** error)
++ {
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-reboot", OUT_can_reboot,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-reboot", OUT_can_reboot,
++ 		  NULL);
++-		  
+++#endif
+++
++     return TRUE;
++ }
++ 
++@@ -1705,9 +1760,16 @@ static gboolean xfpm_power_dbus_can_shutdown (XfpmPower * power,
++ 					    gboolean * OUT_can_shutdown, 
++ 					    GError ** error)
++ {
+++#ifdef ENABLE_POLKIT
+++    g_object_get (G_OBJECT (power->priv->systemd),
+++		  "can-shutdown", OUT_can_shutdown,
+++		  NULL);
+++#else
++     g_object_get (G_OBJECT (power->priv->console),
++ 		  "can-shutdown", OUT_can_shutdown,
++ 		  NULL);
+++#endif
+++
++     return TRUE;
++ }
++ 
++diff --git a/src/xfpm-systemd.c b/src/xfpm-systemd.c
++new file mode 100644
++index 0000000..cc1cba1
++--- /dev/null
+++++ b/src/xfpm-systemd.c
++@@ -0,0 +1,245 @@
+++/*
+++ * * Copyright (C) 2009-2011 Ali <aliov@xfce.org>
+++ * * Copyright (C) 2013 Andreas Müller <schnitzeltony@googlemail.com>
+++ *
+++ * Licensed under the GNU General Public License Version 2
+++ *
+++ * This program is free software; you can redistribute it and/or modify
+++ * it under the terms of the GNU General Public License as published by
+++ * the Free Software Foundation; either version 2 of the License, or
+++ * (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+++ */
+++
+++#ifdef HAVE_CONFIG_H
+++#include <config.h>
+++#endif
+++
+++#include <stdio.h>
+++#include <stdlib.h>
+++#include <string.h>
+++
+++#include <dbus/dbus-glib.h>
+++#include <polkit/polkit.h>
+++
+++#include "xfpm-systemd.h"
+++
+++
+++static void xfpm_systemd_finalize   (GObject *object);
+++
+++static void xfpm_systemd_get_property (GObject *object,
+++                                       guint prop_id,
+++                                       GValue *value,
+++                                       GParamSpec *pspec);
+++
+++#define XFPM_SYSTEMD_GET_PRIVATE(o) \
+++(G_TYPE_INSTANCE_GET_PRIVATE ((o), XFPM_TYPE_SYSTEMD, XfpmSystemdPrivate))
+++
+++struct XfpmSystemdPrivate
+++{
+++    gboolean	     can_shutdown;
+++    gboolean	     can_restart;
+++
+++    PolkitAuthority *authority;
+++    PolkitSubject   *subject;
+++};
+++
+++enum
+++{
+++    PROP_0,
+++    PROP_CAN_RESTART,
+++    PROP_CAN_SHUTDOWN
+++};
+++
+++G_DEFINE_TYPE (XfpmSystemd, xfpm_systemd, G_TYPE_OBJECT)
+++
+++#define SYSTEMD_DBUS_NAME               "org.freedesktop.login1"
+++#define SYSTEMD_DBUS_PATH               "/org/freedesktop/login1"
+++#define SYSTEMD_DBUS_INTERFACE          "org.freedesktop.login1.Manager"
+++#define SYSTEMD_REBOOT_ACTION           "Reboot"
+++#define SYSTEMD_POWEROFF_ACTION         "PowerOff"
+++#define SYSTEMD_REBOOT_TEST             "org.freedesktop.login1.reboot"
+++#define SYSTEMD_POWEROFF_TEST           "org.freedesktop.login1.power-off"
+++
+++static void
+++xfpm_systemd_class_init (XfpmSystemdClass *klass)
+++{
+++    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+++
+++    object_class->finalize = xfpm_systemd_finalize;
+++
+++    object_class->get_property = xfpm_systemd_get_property;
+++
+++    g_object_class_install_property (object_class,
+++                                     PROP_CAN_RESTART,
+++                                     g_param_spec_boolean ("can-restart",
+++                                                           NULL, NULL,
+++                                                           FALSE,
+++                                                           G_PARAM_READABLE));
+++
+++    g_object_class_install_property (object_class,
+++                                     PROP_CAN_SHUTDOWN,
+++                                     g_param_spec_boolean ("can-shutdown",
+++                                                           NULL, NULL,
+++                                                           FALSE,
+++                                                           G_PARAM_READABLE));
+++
+++    g_type_class_add_private (klass, sizeof (XfpmSystemdPrivate));
+++}
+++
+++static gboolean
+++xfpm_systemd_can_method (XfpmSystemd  *systemd,
+++                         gboolean     *can_method,
+++                         const gchar  *method)
+++{
+++    PolkitAuthorizationResult *res;
+++    GError                    *local_error = NULL;
+++
+++    *can_method = FALSE;
+++    res = polkit_authority_check_authorization_sync (systemd->priv->authority,
+++                                                     systemd->priv->subject,
+++                                                     method,
+++                                                     NULL,
+++                                                     POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE,
+++                                                     NULL,
+++                                                     &local_error);
+++    if ( local_error )
+++    {
+++	g_critical ("Unable to get %s : %s", method, local_error->message);
+++	g_error_free (local_error);
+++    }
+++
+++    if(res)
+++    {
+++        *can_method = polkit_authorization_result_get_is_authorized (res) ||
+++                      polkit_authorization_result_get_is_challenge (res);
+++        g_object_unref (G_OBJECT (res));
+++    }
+++}
+++
+++static void
+++xfpm_systemd_init (XfpmSystemd *systemd)
+++{
+++    PolkitAuthorizationResult *res;
+++
+++    systemd->priv = XFPM_SYSTEMD_GET_PRIVATE (systemd);
+++    systemd->priv->authority = polkit_authority_get_sync (NULL, NULL);
+++    systemd->priv->subject = polkit_unix_process_new (getpid());
+++    systemd->priv->can_shutdown = FALSE;
+++    systemd->priv->can_restart  = FALSE;
+++
+++    if(systemd->priv->authority && systemd->priv->subject)
+++    {
+++        xfpm_systemd_can_method (systemd,
+++                                 &systemd->priv->can_shutdown,
+++                                 SYSTEMD_POWEROFF_TEST);
+++        xfpm_systemd_can_method (systemd,
+++                                 &systemd->priv->can_restart,
+++                                 SYSTEMD_REBOOT_TEST);
+++    }
+++}
+++
+++static void xfpm_systemd_get_property (GObject *object,
+++					   guint prop_id,
+++					   GValue *value,
+++					   GParamSpec *pspec)
+++{
+++    XfpmSystemd *systemd;
+++    systemd = XFPM_SYSTEMD (object);
+++
+++    switch (prop_id)
+++    {
+++	case PROP_CAN_SHUTDOWN:
+++	    g_value_set_boolean (value, systemd->priv->can_shutdown);
+++	    break;
+++	case PROP_CAN_RESTART:
+++	    g_value_set_boolean (value, systemd->priv->can_restart);
+++	    break;
+++        default:
+++            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+++            break;
+++    }
+++}
+++
+++static void
+++xfpm_systemd_finalize (GObject *object)
+++{
+++    XfpmSystemd *systemd;
+++
+++    systemd = XFPM_SYSTEMD (object);
+++
+++    if(systemd->priv->authority)
+++        g_object_unref (G_OBJECT (systemd->priv->authority));
+++    if(systemd->priv->subject)
+++        g_object_unref (G_OBJECT (systemd->priv->subject));
+++
+++    G_OBJECT_CLASS (xfpm_systemd_parent_class)->finalize (object);
+++}
+++
+++XfpmSystemd *
+++xfpm_systemd_new (void)
+++{
+++    static gpointer systemd_obj = NULL;
+++
+++    if ( G_LIKELY (systemd_obj != NULL ) )
+++    {
+++	g_object_ref (systemd_obj);
+++    }
+++    else
+++    {
+++	systemd_obj = g_object_new (XFPM_TYPE_SYSTEMD, NULL);
+++	g_object_add_weak_pointer (systemd_obj, &systemd_obj);
+++    }
+++
+++    return XFPM_SYSTEMD (systemd_obj);
+++}
+++
+++static void
+++xfpm_systemd_try_method (XfpmSystemd  *systemd,
+++                         const gchar  *method,
+++                         GError      **error)
+++{
+++    GDBusConnection *bus;
+++    GError          *local_error = NULL;
+++
+++    bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, error);
+++    if (G_LIKELY (bus != NULL))
+++    {
+++        g_dbus_connection_call_sync (bus,
+++                                     SYSTEMD_DBUS_NAME,
+++                                     SYSTEMD_DBUS_PATH,
+++                                     SYSTEMD_DBUS_INTERFACE,
+++                                     method,
+++                                     g_variant_new ("(b)", TRUE),
+++                                     NULL, 0, G_MAXINT, NULL,
+++                                     &local_error);
+++        g_object_unref (G_OBJECT (bus));
+++
+++        if (local_error != NULL)
+++        {
+++            g_propagate_error (error, local_error);
+++        }
+++    }
+++}
+++
+++void xfpm_systemd_shutdown (XfpmSystemd *systemd, GError **error)
+++{
+++    xfpm_systemd_try_method (systemd,
+++                             SYSTEMD_POWEROFF_ACTION,
+++                             error);
+++}
+++
+++void xfpm_systemd_reboot (XfpmSystemd *systemd, GError **error)
+++{
+++    xfpm_systemd_try_method (systemd,
+++                             SYSTEMD_REBOOT_ACTION,
+++                             error);
+++}
++diff --git a/src/xfpm-systemd.h b/src/xfpm-systemd.h
++new file mode 100644
++index 0000000..2890e08
++--- /dev/null
+++++ b/src/xfpm-systemd.h
++@@ -0,0 +1,60 @@
+++/*
+++ * * Copyright (C) 2009-2011 Ali <aliov@xfce.org>
+++ * * Copyright (C) 2013 Andreas Müller <schnitzeltony@googlemail.com>
+++ *
+++ * Licensed under the GNU General Public License Version 2
+++ *
+++ * This program is free software; you can redistribute it and/or modify
+++ * it under the terms of the GNU General Public License as published by
+++ * the Free Software Foundation; either version 2 of the License, or
+++ * (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+++ */
+++
+++#ifndef __XFPM_SYSTEMD_H
+++#define __XFPM_SYSTEMD_H
+++
+++#include <glib-object.h>
+++
+++G_BEGIN_DECLS
+++
+++#define XFPM_TYPE_SYSTEMD            (xfpm_systemd_get_type () )
+++#define XFPM_SYSTEMD(o)              (G_TYPE_CHECK_INSTANCE_CAST ((o), XFPM_TYPE_SYSTEMD, XfpmSystemd))
+++#define XFPM_IS_SYSTEMD(o)           (G_TYPE_CHECK_INSTANCE_TYPE ((o), XFPM_TYPE_SYSTEMD))
+++
+++typedef struct XfpmSystemdPrivate XfpmSystemdPrivate;
+++
+++typedef struct
+++{
+++    GObject         		parent;
+++    XfpmSystemdPrivate		*priv;
+++
+++} XfpmSystemd;
+++
+++typedef struct
+++{
+++    GObjectClass 		parent_class;
+++
+++} XfpmSystemdClass;
+++
+++GType        			XFPM_SYSTEMD_get_type	(void) G_GNUC_CONST;
+++
+++XfpmSystemd       	       *XFPM_SYSTEMD_new	(void);
+++
+++void				XFPM_SYSTEMD_shutdown	(XfpmSystemd *systemd,
+++							 GError **error);
+++
+++void				XFPM_SYSTEMD_reboot	(XfpmSystemd *systemd,
+++							 GError **error);
+++
+++G_END_DECLS
+++
+++#endif /* __XFPM_SYSTEMD_H */
 +-- 
 +1.7.6.5
 +
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-index 6675691..8767e98 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-@@ -8,6 +8,7 @@ SRC_URI = " \
-     file://lxdm-pam \
-     file://lxdm-pam-debug \
-     ${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
-+    file://0002-configure-check-only-for-ck-connector-in-case-consol.patch \
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
+index af2ba5e..efd5aea 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
+@@ -9,14 +9,19 @@ inherit xfce
+ 
+ DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
+            libxrandr virtual/libx11 libxext xfce4-panel"
+-RDEPENDS_${PN} = "networkmanager udisks upower polkit"
++
++SRC_URI += "file://0001-Add-shutdown-reboot-functionality-for-systemd.patch"
++
++RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+ 
+ EXTRA_OECONF = " \
+-    --enable-polkit \
+     --enable-network-manager \
+     --enable-panel-plugins \
  "
  
- LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)}"
-@@ -17,7 +18,8 @@ PV = "0.4.2+git${SRCPV}"
- PE = "1"
- PR = "r7"
- 
--DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
-+DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
-+DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
- 
- # combine oe-core way with angstrom DISTRO_TYPE
- DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
-@@ -26,7 +28,7 @@ inherit autotools gettext systemd
- 
- S = "${WORKDIR}/git"
- 
--EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
- 
- do_compile_append() {
-     # default background configured not available / no password field available / no default screensaver
++PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++PACKAGECONFIG[systemd] = "--enable-polkit, --disable-polkit, polkit"
++
+ PACKAGES += "xfce4-brightness-plugin"
+ FILES_${PN} += "${datadir}/polkit-1"
+ FILES_xfce4-brightness-plugin = " \
 -- 
 1.7.6.5
 
