@@ -1,32 +1,33 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
 	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id DCC8B6A8DA
+	by mail.openembedded.org (Postfix) with ESMTP id A183C6A8DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 08:04:56 +0000 (UTC)
-Received: by mail-ie0-f173.google.com with SMTP id k5so12485618iea.18
+	Tue, 11 Jun 2013 08:08:42 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id k5so12442873iea.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 01:04:58 -0700 (PDT)
+	Tue, 11 Jun 2013 01:08:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=a/2bI20cQGf5aDiXwZf72PlMh0ajVDYHUY+54A0v57Q=;
-	b=KldNppgMnCgXX7qgJ5YfHpRkqZwK0ihVVmQtj6gyn+GdmsOpNRW/qPs4e/zD1fBTWx
-	p7cTiNSu/wuFMyxa/yiXlMus8/aM9vfxzOSMV95IEVtxFWKv5WNouESTPsahjzMJKGdR
-	B0gTZrCt3rxN6nWdSw1k/EJk6ezHcuBlr4jTIQVWAWB7ozHD62IQJP45gJEdOYi9AKjK
-	ipPluO2QEh9k+KARAk084eZw5pz3VZ0hg4uOOb3ASajCGecIevA+RFEHRYZDFXMjTDoX
-	UBqkhgjX/ePkR47iRP9G00bZk+PmeaNiZXAzGbN49vNQcVaUjc2T7slor75xzfox94hV
-	Xicg==
-X-Received: by 10.50.28.112 with SMTP id a16mr333184igh.74.1370937897836; Tue,
-	11 Jun 2013 01:04:57 -0700 (PDT)
+	:content-type; bh=FA5THwF7jBUBBacSRjEFO+O91Ma4VvheYXF6j0ztdiY=;
+	b=rtPONA11VyRkApkSrZOCWFkhehDt1kS/b080k0iqd3yXxbqXGjnaXu//wTsr152QVJ
+	M2Ue9teC4cKNad1+uif6zESNn98NduDbllHX0yGYTeDC5XJU/XbtvMe6J0/3GjnYZj4H
+	+V/Iwv12xzB0E9xMDxnlCGzWFVvCXvvBpDM9nwwoJtjzeoGTbAVgbPmwYYvCFH2pCpxo
+	WMZ/GLdkURHwVYsTpu5X9BpDfFxrCiu4hUVdDvigh1oJG74NMBLfL10r9UTG3GWaOIg+
+	P+8TTeK7vjir2paDeR9fAP7wKOZ+wwtcFOvptZOiHnLjNszejxQdCgCbEjukm9Ir5dGH
+	zVew==
+X-Received: by 10.50.111.38 with SMTP id if6mr338976igb.74.1370938123846; Tue,
+	11 Jun 2013 01:08:43 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:04:27 -0700 (PDT)
-In-Reply-To: <1370468616-10931-1-git-send-email-philip@balister.org>
-References: <1370468616-10931-1-git-send-email-philip@balister.org>
+Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:08:13 -0700 (PDT)
+In-Reply-To: <20130606123417.GC22710@jama>
+References: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
+	<20130602080956.GA3279@jama> <20130606123417.GC22710@jama>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Jun 2013 01:04:27 -0700
-Message-ID: <CAMKF1sqq_2DehmUAdGh06Gq=TgGwRQEePKeQgZouhkm2SqeU0Q@mail.gmail.com>
+Date: Tue, 11 Jun 2013 01:08:13 -0700
+Message-ID: <CAMKF1sr20XzmonOmtDExLhZdUts3KgpdiU2uyNVxUKBo5npamg@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] swig : Update to version 2.0.10 and and add nativesdk support.
+Subject: Re: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,72 +41,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 08:04:57 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 08:08:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jun 5, 2013 at 2:43 PM, Philip Balister <philip@balister.org> wrote:
-> Build tested for armv7a machine.
+On Thu, Jun 6, 2013 at 5:34 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, Jun 02, 2013 at 10:09:56AM +0200, Martin Jansa wrote:
+>> On Sat, Jun 01, 2013 at 08:03:22PM +0200, Martin Jansa wrote:
+>> > ---
+>> >  ...include-Element.h-for-hasTagName-function.patch | 43 ++++++++++++++++++++++
+>> >  meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
+>> >  2 files changed, 45 insertions(+), 1 deletion(-)
+>> >  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
+>>
+>> Ignore this one, it works on armv7a, but fails the same on armv4t and
+>> x86_64 + there is ICE when building for armv5te.
 >
-> Signed-off-by: Philip Balister <philip@balister.org>
-> ---
->  meta-oe/recipes-devtools/swig/swig.inc       | 2 +-
->  meta-oe/recipes-devtools/swig/swig_2.0.10.bb | 9 +++++++++
->  meta-oe/recipes-devtools/swig/swig_2.0.9.bb  | 8 -------
->  3 files changed, 10 insertions(+), 9 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.10.bb
->  delete mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.9.bb
+> I've merged this in the end, because it fixed webkit-efl build on
+> jenkins (and it looks like building from scratch works for other archs
+> I'm building locally too).
 >
+> Only remaining issue is with -O2 and xscalete DEFAULT_TUNE where it
+> triggers ICE:
+>
+> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp: In functi
+> on 'JSC::JSValue JSC::_ZN3JSCL6decodeEPNS_9ExecStateEPKcb.constprop.89(JSC::ExecState*, const char*)':
+> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:150:1: error: could not split insn
+>  }
+>  ^
+> (insn 505 8094 507 (set (reg:SI 1 r1 [orig:494 D.142535 ] [494])
+>         (plus:SI (reg/v:SI 5 r5 [orig:157 character ] [157])
+>             (const_int -17179934720 [0xfffffffbffff0000]))) /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:108 5 {*arm_addsi3}
+>      (nil))
+> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:150:1: internal compiler error: in final_scan_insn, at final.c:2897
+> Please submit a full bug report,
+> with preprocessed source if appropriate.
+> See <http://gcc.gnu.org/bugs.html> for instructions.
+> {standard input}: Assembler messages:
+> {standard input}: Error: open CFI at the end of file; missing .cfi_endproc directive
+>
+> Removing -O2 works, I'll check if this is still happening with gcc-4.8.1 when we have
+> recipes for it and report upstream if needed
 
-git format-pach -M so that it looks like a move and not a copy delete add
+hmmm it needs to be reported. Can you generate preprocessed file and
+put it somewhere accessible
 
 
-> diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
-> index 0476d53..8e83526 100644
-> --- a/meta-oe/recipes-devtools/swig/swig.inc
-> +++ b/meta-oe/recipes-devtools/swig/swig.inc
-> @@ -40,7 +40,7 @@ EXTRA_OECONF = " \
->      --without-tcl \
->  "
 >
-> -BBCLASSEXTEND = "native"
-> +BBCLASSEXTEND = "native nativesdk"
->
->  do_configure() {
->      install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/Tools/config
-> diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.10.bb b/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
-> new file mode 100644
-> index 0000000..312ce11
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
-> @@ -0,0 +1,9 @@
-> +require ${BPN}.inc
-> +
-> +PR = "${INC_PR}.0"
-> +
-> +SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
-> +
-> +SRC_URI[md5sum] = "6d5e7ad05b4a404e5e85db9befb70c9a"
-> +SRC_URI[sha256sum] = "d1eef329e867124ce60838b5ad07c763146b6c8f250dd22a861ead7406f78e63"
-> +
-> diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.9.bb b/meta-oe/recipes-devtools/swig/swig_2.0.9.bb
-> deleted file mode 100644
-> index 9e9544c..0000000
-> --- a/meta-oe/recipes-devtools/swig/swig_2.0.9.bb
-> +++ /dev/null
-> @@ -1,8 +0,0 @@
-> -require ${BPN}.inc
-> -
-> -PR = "${INC_PR}.0"
-> -
-> -SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
-> -
-> -SRC_URI[md5sum] = "54d534b14a70badc226129159412ea85"
-> -SRC_URI[sha256sum] = "586954000d297fafd7e91d1ad31089cc7e249f658889d11a44605d3662569539"
 > --
-> 1.7.11.7
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
