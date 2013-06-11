@@ -1,33 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id A183C6A8DA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 409A36A99A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 08:08:42 +0000 (UTC)
-Received: by mail-ie0-f173.google.com with SMTP id k5so12442873iea.4
+	Tue, 11 Jun 2013 08:10:42 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id c1so3197298eek.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 01:08:43 -0700 (PDT)
+	Tue, 11 Jun 2013 01:10:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=FA5THwF7jBUBBacSRjEFO+O91Ma4VvheYXF6j0ztdiY=;
-	b=rtPONA11VyRkApkSrZOCWFkhehDt1kS/b080k0iqd3yXxbqXGjnaXu//wTsr152QVJ
-	M2Ue9teC4cKNad1+uif6zESNn98NduDbllHX0yGYTeDC5XJU/XbtvMe6J0/3GjnYZj4H
-	+V/Iwv12xzB0E9xMDxnlCGzWFVvCXvvBpDM9nwwoJtjzeoGTbAVgbPmwYYvCFH2pCpxo
-	WMZ/GLdkURHwVYsTpu5X9BpDfFxrCiu4hUVdDvigh1oJG74NMBLfL10r9UTG3GWaOIg+
-	P+8TTeK7vjir2paDeR9fAP7wKOZ+wwtcFOvptZOiHnLjNszejxQdCgCbEjukm9Ir5dGH
-	zVew==
-X-Received: by 10.50.111.38 with SMTP id if6mr338976igb.74.1370938123846; Tue,
-	11 Jun 2013 01:08:43 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=PCyKxtgZhawiUR/Q2EhvNpLLHxnL24kHmZ91TG289J4=;
+	b=YcDBkir3+/Mk1wvv8PZ6tDT3Uh6d96Hqtkt5qrZKSELZbXkbLBjhnXNqx9AmBDm3Sz
+	2aLF3VBNZn6sPyCYgl+OhewPh+mhxXjGOXPebIAJ+UVdnWXRbLwOuVRomC/0+Cuqp7gF
+	TRTWGB6o4rgWA5oQEY7FJCzdRuI7dxRDgmOxFIyyZcGAephGCoN1XcixLC7j9In7I6Ak
+	2Y6JlQLnx8/Jysp9iehaMqtHWLNpMwssKAoKW0cmVR92Nw4/pW/GtM6XhClbUJDLWii4
+	s7uI1/qyOQRHXoiAwbACibi37bYWjI3JMPDRdW5P6D9jHiYFjO6aC5BBNaI8Gov5solj
+	cv2g==
+X-Received: by 10.14.199.134 with SMTP id x6mr15148774een.114.1370938242503;
+	Tue, 11 Jun 2013 01:10:42 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	c5sm28637379eeu.8.2013.06.11.01.10.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 11 Jun 2013 01:10:41 -0700 (PDT)
+Date: Tue, 11 Jun 2013 10:11:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130611081104.GA3233@jama>
+References: <20130524130924.BFD6C50262@opal> <20130606101258.GA22710@jama>
+	<CAJTo0LYvKEuF+PUeuLUo0VSWMkLeFvybjzeZLnQ=VuwQ=7aJ0Q@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:08:13 -0700 (PDT)
-In-Reply-To: <20130606123417.GC22710@jama>
-References: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
-	<20130602080956.GA3279@jama> <20130606123417.GC22710@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Jun 2013 01:08:13 -0700
-Message-ID: <CAMKF1sr20XzmonOmtDExLhZdUts3KgpdiU2uyNVxUKBo5npamg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
+In-Reply-To: <CAJTo0LYvKEuF+PUeuLUo0VSWMkLeFvybjzeZLnQ=VuwQ=7aJ0Q@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [oe-commits] Ross Burton : librsvg: clean up native depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,58 +47,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 08:08:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Jun 2013 08:10:43 -0000
+X-Groupsio-MsgNum: 45025
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3MwIy2ne0vdjdPXF"
+Content-Disposition: inline
 
-On Thu, Jun 6, 2013 at 5:34 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sun, Jun 02, 2013 at 10:09:56AM +0200, Martin Jansa wrote:
->> On Sat, Jun 01, 2013 at 08:03:22PM +0200, Martin Jansa wrote:
->> > ---
->> >  ...include-Element.h-for-hasTagName-function.patch | 43 ++++++++++++++++++++++
->> >  meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
->> >  2 files changed, 45 insertions(+), 1 deletion(-)
->> >  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
->>
->> Ignore this one, it works on armv7a, but fails the same on armv4t and
->> x86_64 + there is ICE when building for armv5te.
->
-> I've merged this in the end, because it fixed webkit-efl build on
-> jenkins (and it looks like building from scratch works for other archs
-> I'm building locally too).
->
-> Only remaining issue is with -O2 and xscalete DEFAULT_TUNE where it
-> triggers ICE:
->
-> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp: In functi
-> on 'JSC::JSValue JSC::_ZN3JSCL6decodeEPNS_9ExecStateEPKcb.constprop.89(JSC::ExecState*, const char*)':
-> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:150:1: error: could not split insn
->  }
->  ^
-> (insn 505 8094 507 (set (reg:SI 1 r1 [orig:494 D.142535 ] [494])
->         (plus:SI (reg/v:SI 5 r5 [orig:157 character ] [157])
->             (const_int -17179934720 [0xfffffffbffff0000]))) /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:108 5 {*arm_addsi3}
->      (nil))
-> /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:150:1: internal compiler error: in final_scan_insn, at final.c:2897
-> Please submit a full bug report,
-> with preprocessed source if appropriate.
-> See <http://gcc.gnu.org/bugs.html> for instructions.
-> {standard input}: Assembler messages:
-> {standard input}: Error: open CFI at the end of file; missing .cfi_endproc directive
->
-> Removing -O2 works, I'll check if this is still happening with gcc-4.8.1 when we have
-> recipes for it and report upstream if needed
+--3MwIy2ne0vdjdPXF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-hmmm it needs to be reported. Can you generate preprocessed file and
-put it somewhere accessible
+On Tue, Jun 11, 2013 at 08:30:33AM +0100, Burton, Ross wrote:
+> On 6 June 2013 11:12, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > Not sure why, but now do_configure is failing with:
+> >
+> > | checking for gdk-pixbuf-query-loaders... none
+> > | configure: error: gdk-pixbuf-query-loaders not found in path
+> > | Configure failed. The contents of all config.log files follows to aid=
+ debugging
+> > | /OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/librsvg/2.32.1=
+-r12/librsvg-2.32.1/config.log
+> > | This file contains any messages produced by compilers while
+> > | running configure, to aid debugging if configure makes a mistake.
+> > |
+> > | It was created by RSVG configure 2.32.1, which was
+> > | generated by GNU Autoconf 2.69.  Invocation command line was
+> >
+> > configure:13908: checking whether to build the GDK-Pixbuf SVG loader
+> > configure:13917: result: yes
+> > configure:13924: checking for GDK_PIXBUF
+> > configure:13931: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=
+=3D $GDK_PIXBUF_REQUIRED"
+> > configure:13934: $? =3D 0
+> > configure:13948: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=
+=3D $GDK_PIXBUF_REQUIRED"
+> > configure:13951: $? =3D 0
+> > configure:14009: result: yes
+> > configure:14016: checking for gdk-pixbuf-query-loaders
+> > configure:14047: result: none
+> > configure:14057: error: gdk-pixbuf-query-loaders not found in path
+> >
+> > I'll check DEPENDS with bitbake -e when I don't have any build running =
+in that directory..
+>=20
+> I've been away for a week, but I *think* that this was a short-lived
+> problem in master (some commits were dropped from a merge).  Can you
+> still replicate this?
 
+It's also in Saul's consolidated pull request, so I'm not the only one
+who has seen it :)
 
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--3MwIy2ne0vdjdPXF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlG225gACgkQN1Ujt2V2gBy3IACePmwYHXl0sD4pq20L2yNxHNub
+GK0AoIfIDF2K8OUw8IRlxkt8aubGOdff
+=gPfy
+-----END PGP SIGNATURE-----
+
+--3MwIy2ne0vdjdPXF--
