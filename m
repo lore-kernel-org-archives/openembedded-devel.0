@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 409A36A99A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 51E856A99A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 08:10:42 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id c1so3197298eek.32
+	Tue, 11 Jun 2013 08:27:39 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id k5so12479932iea.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 01:10:42 -0700 (PDT)
+	Tue, 11 Jun 2013 01:27:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PCyKxtgZhawiUR/Q2EhvNpLLHxnL24kHmZ91TG289J4=;
-	b=YcDBkir3+/Mk1wvv8PZ6tDT3Uh6d96Hqtkt5qrZKSELZbXkbLBjhnXNqx9AmBDm3Sz
-	2aLF3VBNZn6sPyCYgl+OhewPh+mhxXjGOXPebIAJ+UVdnWXRbLwOuVRomC/0+Cuqp7gF
-	TRTWGB6o4rgWA5oQEY7FJCzdRuI7dxRDgmOxFIyyZcGAephGCoN1XcixLC7j9In7I6Ak
-	2Y6JlQLnx8/Jysp9iehaMqtHWLNpMwssKAoKW0cmVR92Nw4/pW/GtM6XhClbUJDLWii4
-	s7uI1/qyOQRHXoiAwbACibi37bYWjI3JMPDRdW5P6D9jHiYFjO6aC5BBNaI8Gov5solj
-	cv2g==
-X-Received: by 10.14.199.134 with SMTP id x6mr15148774een.114.1370938242503;
-	Tue, 11 Jun 2013 01:10:42 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	c5sm28637379eeu.8.2013.06.11.01.10.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 11 Jun 2013 01:10:41 -0700 (PDT)
-Date: Tue, 11 Jun 2013 10:11:04 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130611081104.GA3233@jama>
-References: <20130524130924.BFD6C50262@opal> <20130606101258.GA22710@jama>
-	<CAJTo0LYvKEuF+PUeuLUo0VSWMkLeFvybjzeZLnQ=VuwQ=7aJ0Q@mail.gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=9vNDh7jhHOKJcmBKmwo+6qJkCjQS+6SiK5rKcazcsW0=;
+	b=pitA5m1ma61ysHvdS7p5yhgFpDAPwOYf8trnnYUDFZsGzXdP/W1v6cBx5dSKMeJvI7
+	jsNmJhtkbXUeqdSYEdpVc2ouxUAZaXmSDd/AqwEnXyexmULvEQA3HBMiuToST7dpi8tS
+	3Tg9/WPGNYH9BV8Y35bAUE9KXpFsmm45hPwqrDSHy0AhGHj3A0zh6KA0anvvkWZKgcAn
+	Yj5v67d+nSEC1PYt7EAJyzoIyuktuLOrq0xSKKNmhh4RSjEEElq5zKbY+1lvzWOEQa6/
+	1/1pAZh7KgBsLj3s8LwaD/+DrDScp3yMbYXOcUkiblKE/6ZCxfq2EszGtQmmweZKxr+M
+	Efcg==
+X-Received: by 10.42.11.211 with SMTP id v19mr3425693icv.29.1370939260191;
+	Tue, 11 Jun 2013 01:27:40 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAJTo0LYvKEuF+PUeuLUo0VSWMkLeFvybjzeZLnQ=VuwQ=7aJ0Q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [oe-commits] Ross Burton : librsvg: clean up native depends
+Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:27:10 -0700 (PDT)
+In-Reply-To: <20130606132426.GD22710@jama>
+References: <CALbb29ugW_zahrp72enLdr-Opk=a7wfJq_TLH7RZB3HQxiRSTg@mail.gmail.com>
+	<20130606132426.GD22710@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Jun 2013 01:27:10 -0700
+Message-ID: <CAMKF1spaYVhgSBCvV7rVE3jrty_Bb-r2B9=AGbdaxsAq+MDZ+g@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Pasquale Bongiovanni <palebongiovanni@gmail.com>,
+	Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-multimedia] Problem with xbmc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,70 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 08:10:43 -0000
-X-Groupsio-MsgNum: 45025
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3MwIy2ne0vdjdPXF"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 11 Jun 2013 08:27:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
---3MwIy2ne0vdjdPXF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jun 6, 2013 at 6:24 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Jun 06, 2013 at 03:13:46PM +0200, Pasquale Bongiovanni wrote:
+>> Hi all,
+>> I'm new on yocto, I would like to create a core-image-sato including the
+>> package xbmc.
+>> But when I launch the command bitbake core-image-sato or bitbake xbmc, it
+>> fails at task co_compile with the following file log:
+>>
+>> ...
+>> In file included from DVDClock.cpp:25:0:
+>> /home/pasquale/Scrivania/alibi/projects/prova/image-xbmc/tmp/work/armv7a-vfp-poky-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55dae79cbb2e486e307e23202e76a43efa-r15/git/xbmc/utils/MathUtils.h:
+>> In member function 'int CDVDClock::UpdateFramerate(double, double*)':
+>> /home/pasquale/Scrivania/alibi/projects/prova/image-xbmc/tmp/work/armv7a-vfp-poky-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55dae79cbb2e486e307e23202e76a43efa-r15/git/xbmc/utils/MathUtils.h:101:28:
+>> error: impossible constraint in 'asm'
+>> /home/pasquale/Scrivania/alibi/projects/prova/image-xbmc/tmp/work/armv7a-vfp-poky-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55dae79cbb2e486e307e23202e76a43efa-r15/git/xbmc/utils/MathUtils.h:101:28:
+>> error: impossible constraint in 'asm'
+>> /home/pasquale/Scrivania/alibi/projects/prova/image-xbmc/tmp/work/armv7a-vfp-poky-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55dae79cbb2e486e307e23202e76a43efa-r15/git/xbmc/utils/MathUtils.h:101:28:
+>> error: impossible constraint in 'asm'
+>> /home/pasquale/Scrivania/alibi/projects/prova/image-xbmc/tmp/work/armv7a-vfp-poky-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55dae79cbb2e486e307e23202e76a43efa-r15/git/xbmc/utils/MathUtils.h:101:28:
+>> error: impossible constraint in 'asm'
+>> make[1]: *** [DVDClock.o] Error 1
+>> make: *** [xbmc/cores/dvdplayer/DVDPlayer.a] Error 2
+>> ERROR: oe_runmake failed
+>> ERROR: Function failed: do_compile
+>> How can I solve this problem?
+>
+> It's known problem, fails for all my architectures, koen probably has it
+> working, so maybe he will give you better advise..
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2013-June/090945.html
 
-On Tue, Jun 11, 2013 at 08:30:33AM +0100, Burton, Ross wrote:
-> On 6 June 2013 11:12, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > Not sure why, but now do_configure is failing with:
-> >
-> > | checking for gdk-pixbuf-query-loaders... none
-> > | configure: error: gdk-pixbuf-query-loaders not found in path
-> > | Configure failed. The contents of all config.log files follows to aid=
- debugging
-> > | /OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/librsvg/2.32.1=
--r12/librsvg-2.32.1/config.log
-> > | This file contains any messages produced by compilers while
-> > | running configure, to aid debugging if configure makes a mistake.
-> > |
-> > | It was created by RSVG configure 2.32.1, which was
-> > | generated by GNU Autoconf 2.69.  Invocation command line was
-> >
-> > configure:13908: checking whether to build the GDK-Pixbuf SVG loader
-> > configure:13917: result: yes
-> > configure:13924: checking for GDK_PIXBUF
-> > configure:13931: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=
-=3D $GDK_PIXBUF_REQUIRED"
-> > configure:13934: $? =3D 0
-> > configure:13948: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >=
-=3D $GDK_PIXBUF_REQUIRED"
-> > configure:13951: $? =3D 0
-> > configure:14009: result: yes
-> > configure:14016: checking for gdk-pixbuf-query-loaders
-> > configure:14047: result: none
-> > configure:14057: error: gdk-pixbuf-query-loaders not found in path
-> >
-> > I'll check DEPENDS with bitbake -e when I don't have any build running =
-in that directory..
->=20
-> I've been away for a week, but I *think* that this was a short-lived
-> problem in master (some commits were dropped from a merge).  Can you
-> still replicate this?
+as it seems if you have neon enabled for compiler to use then this
+works out ok. So any arm platforms using neon
+would work out to be ok. If your platform does not have neon then you
+want to explore --with-platform option and probably
+disable some features which includes the offending code
 
-It's also in Saul's consolidated pull request, so I'm not the only one
-who has seen it :)
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3MwIy2ne0vdjdPXF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlG225gACgkQN1Ujt2V2gBy3IACePmwYHXl0sD4pq20L2yNxHNub
-GK0AoIfIDF2K8OUw8IRlxkt8aubGOdff
-=gPfy
------END PGP SIGNATURE-----
-
---3MwIy2ne0vdjdPXF--
