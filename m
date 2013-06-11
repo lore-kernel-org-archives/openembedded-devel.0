@@ -1,35 +1,32 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BF8046A8DA
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id DCC8B6A8DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 08:03:30 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id a13so5805029iee.6
+	Tue, 11 Jun 2013 08:04:56 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id k5so12485618iea.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 01:03:31 -0700 (PDT)
+	Tue, 11 Jun 2013 01:04:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=T7rU5gK/wzeFTuhI6MuKO8YRQK/QMIQlT3namLqveNQ=;
-	b=ATGox0vK7DLKkL4umPLYCyRXQgRTww45ctNBPOI1hv0Uf71OsG25lRTmX6w5x0SU1t
-	Bkk16qg0DWA0sQnfYmlYs/r8MEvsN/E7zlYidT4nmfKtb6j+YxjmTQfEo/5KHl3JOTmZ
-	9AfhltLfV8PdaHN+0/V1yEaSA1uy1BslcTzXffU6+Q5YCbSsET1VhcDq9G0WElLf1UYn
-	lgODED3T86tJQtdzP5KQ6LBcS7kH9SXg43A/tHHdyb80pMxfUdH9S1uScr/fH9qMfD40
-	yfWWpuTAHleh5I2kQjb7ky8NqaucBR0Btkd1wxXez+jeJae8qM6vJhOWDrAIi0w/fP83
-	KChg==
-X-Received: by 10.50.111.38 with SMTP id if6mr330804igb.74.1370937811667; Tue,
-	11 Jun 2013 01:03:31 -0700 (PDT)
+	:content-type; bh=a/2bI20cQGf5aDiXwZf72PlMh0ajVDYHUY+54A0v57Q=;
+	b=KldNppgMnCgXX7qgJ5YfHpRkqZwK0ihVVmQtj6gyn+GdmsOpNRW/qPs4e/zD1fBTWx
+	p7cTiNSu/wuFMyxa/yiXlMus8/aM9vfxzOSMV95IEVtxFWKv5WNouESTPsahjzMJKGdR
+	B0gTZrCt3rxN6nWdSw1k/EJk6ezHcuBlr4jTIQVWAWB7ozHD62IQJP45gJEdOYi9AKjK
+	ipPluO2QEh9k+KARAk084eZw5pz3VZ0hg4uOOb3ASajCGecIevA+RFEHRYZDFXMjTDoX
+	UBqkhgjX/ePkR47iRP9G00bZk+PmeaNiZXAzGbN49vNQcVaUjc2T7slor75xzfox94hV
+	Xicg==
+X-Received: by 10.50.28.112 with SMTP id a16mr333184igh.74.1370937897836; Tue,
+	11 Jun 2013 01:04:57 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:03:01 -0700 (PDT)
-In-Reply-To: <51B6D7DA.1060609@juszkiewicz.com.pl>
-References: <1370165592-15697-1-git-send-email-net147@gmail.com>
-	<51AB1684.1080500@juszkiewicz.com.pl>
-	<CAMKF1soSa-S9kUC1PH9pJYbnJsvRiubNxbgNvYEx8zs4XiwmLw@mail.gmail.com>
-	<51B6D7DA.1060609@juszkiewicz.com.pl>
+Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 01:04:27 -0700 (PDT)
+In-Reply-To: <1370468616-10931-1-git-send-email-philip@balister.org>
+References: <1370468616-10931-1-git-send-email-philip@balister.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Jun 2013 01:03:01 -0700
-Message-ID: <CAMKF1sokFKxLAWEmSOMN15UODnWswpKRZbs79X=ggWvUW2Yepg@mail.gmail.com>
+Date: Tue, 11 Jun 2013 01:04:27 -0700
+Message-ID: <CAMKF1sqq_2DehmUAdGh06Gq=TgGwRQEePKeQgZouhkm2SqeU0Q@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] llvm3.2: new recipe
+Subject: Re: [meta-oe][PATCH] swig : Update to version 2.0.10 and and add nativesdk support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,65 +40,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 08:03:30 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 08:04:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Jun 11, 2013 at 12:55 AM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> W dniu 11.06.2013 09:48, Khem Raj pisze:
->> On Sun, Jun 2, 2013 at 2:55 AM, Marcin Juszkiewicz
->> <marcin@juszkiewicz.com.pl> wrote:
->>> W dniu 02.06.2013 11:33, Jonathan Liu pisze:
->>>> +def get_llvm_arch(d):
->>>> +    import bb;
->>>> +
->>>> +    arch = bb.data.getVar('TARGET_ARCH', d, 1)
->>>> +
->>>> +    if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
->>>> +        arch = "x86"
->>>> +    elif arch == "x86_64":
->>>> +        arch = "x86_64"
->>>> +    elif arch == "arm":
->>>> +        arch = "arm"
->>>> +    elif arch == "mipsel" or arch == "mips":
->>>> +        arch = "mips"
->>>> +    elif arch == "powerpc" or arch == "powerpc64":
->>>> +        arch = "powerpc"
->>>> +    else:
->>>> +        bb.warn("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
->>>> +
->>>> +    return arch
->>>
->>> Can we get rid of such blocks? They are worthless and only generate
->>> extra support questions when OE newbies use OE with 'not supported'
->>> architectures.
+On Wed, Jun 5, 2013 at 2:43 PM, Philip Balister <philip@balister.org> wrote:
+> Build tested for armv7a machine.
 >
->> why do you think they are worthless ? when they give good information
->> instead of failing to build and then generating support question
->> which need more work to come to same conclusion
->
-> $ MACHINE=genericarmv8 bitbake nano
-> "llvm is not supported"
-> "openjdk is not supported"
-> "another-thing-you-do-not-care-for-this-build is not supported"
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  meta-oe/recipes-devtools/swig/swig.inc       | 2 +-
+>  meta-oe/recipes-devtools/swig/swig_2.0.10.bb | 9 +++++++++
+>  meta-oe/recipes-devtools/swig/swig_2.0.9.bb  | 8 -------
+>  3 files changed, 10 insertions(+), 9 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.10.bb
+>  delete mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.9.bb
 >
 
-it could be said if you do not care for such recipes then BBMASK them
-and message
-well may be it could be make bb.note instead of bb.warn to make it
-more of FYI kind of thing
+git format-pach -M so that it looks like a move and not a copy delete add
 
-> This is how your builds look for not supported architectures.
+
+> diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
+> index 0476d53..8e83526 100644
+> --- a/meta-oe/recipes-devtools/swig/swig.inc
+> +++ b/meta-oe/recipes-devtools/swig/swig.inc
+> @@ -40,7 +40,7 @@ EXTRA_OECONF = " \
+>      --without-tcl \
+>  "
 >
-> OE has COMPATIBLE_HOST variable which can be used by recipe maintainers
-> to mark which architectures are supported.
-
-in this case arch does not map to what OE's target arch is so you have
-to do it twice if you want
-to use COMPATIBLE_HOST
-and suppose a non supported arch becomes supported you have to change
-both places.
-
+> -BBCLASSEXTEND = "native"
+> +BBCLASSEXTEND = "native nativesdk"
+>
+>  do_configure() {
+>      install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/Tools/config
+> diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.10.bb b/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
+> new file mode 100644
+> index 0000000..312ce11
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
+> @@ -0,0 +1,9 @@
+> +require ${BPN}.inc
+> +
+> +PR = "${INC_PR}.0"
+> +
+> +SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
+> +
+> +SRC_URI[md5sum] = "6d5e7ad05b4a404e5e85db9befb70c9a"
+> +SRC_URI[sha256sum] = "d1eef329e867124ce60838b5ad07c763146b6c8f250dd22a861ead7406f78e63"
+> +
+> diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.9.bb b/meta-oe/recipes-devtools/swig/swig_2.0.9.bb
+> deleted file mode 100644
+> index 9e9544c..0000000
+> --- a/meta-oe/recipes-devtools/swig/swig_2.0.9.bb
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -require ${BPN}.inc
+> -
+> -PR = "${INC_PR}.0"
+> -
+> -SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
+> -
+> -SRC_URI[md5sum] = "54d534b14a70badc226129159412ea85"
+> -SRC_URI[sha256sum] = "586954000d297fafd7e91d1ad31089cc7e249f658889d11a44605d3662569539"
+> --
+> 1.7.11.7
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
