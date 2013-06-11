@@ -1,42 +1,26 @@
-Return-Path: <marcin@juszkiewicz.com.pl>
-Received: from tygrysek.juszkiewicz.com.pl (tygrysek.juszkiewicz.com.pl
-	[178.33.81.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 325FD6AA00
+Return-Path: <sgh@sgh.dk>
+Received: from mx03.stofanet.dk (mx03.stofanet.dk [212.10.10.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A68B56A9C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 09:11:04 +0000 (UTC)
-Received: by tygrysek.juszkiewicz.com.pl (Postfix, from userid 65534)
-	id B5184D231D; Tue, 11 Jun 2013 11:11:07 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	tygrysek.juszkiewicz.com.pl
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.112] (87-206-60-225.dynamic.chello.pl
-	[87.206.60.225])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marcin@juszkiewicz.com.pl)
-	by tygrysek.juszkiewicz.com.pl (Postfix) with ESMTPSA id 5E6E3D22F9
+	Tue, 11 Jun 2013 13:49:21 +0000 (UTC)
+Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
+	by mx03.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1UmOwr-0002ZR-2b
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Jun 2013 15:49:21 +0200
+Received: from koontz.localnet (localhost [127.0.0.1])
+	by asrock (Postfix) with ESMTPS id 9AFA57EC59
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 11:10:46 +0200 (CEST)
-Message-ID: <51B6E990.3030605@juszkiewicz.com.pl>
-Date: Tue, 11 Jun 2013 11:10:40 +0200
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130529 Thunderbird/17.0.6
-MIME-Version: 1.0
+	Tue, 11 Jun 2013 15:49:21 +0200 (CEST)
+From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-References: <1370165592-15697-1-git-send-email-net147@gmail.com>
-	<51AB1684.1080500@juszkiewicz.com.pl>
-	<CAMKF1soSa-S9kUC1PH9pJYbnJsvRiubNxbgNvYEx8zs4XiwmLw@mail.gmail.com>
-	<51B6D7DA.1060609@juszkiewicz.com.pl>
-	<CAMKF1sokFKxLAWEmSOMN15UODnWswpKRZbs79X=ggWvUW2Yepg@mail.gmail.com>
-	<51B6E5AF.4080808@juszkiewicz.com.pl>
-	<B614F44C-717C-420C-B6C3-69CA11A87E28@gmail.com>
-In-Reply-To: <B614F44C-717C-420C-B6C3-69CA11A87E28@gmail.com>
-X-Enigmail-Version: 1.4.6
-OpenPGP: id=117A251E
-Subject: Re: [meta-oe][PATCH] llvm3.2: new recipe
+Date: Tue, 11 Jun 2013 15:49:21 +0200
+Message-ID: <7063136.DAg8vKBVKy@koontz>
+User-Agent: KMail/4.10.3 (Linux/3.9.0-4-generic; KDE/4.10.4; i686; ; )
+In-Reply-To: <2472586.UfWZc5OvGZ@koontz>
+References: <2472586.UfWZc5OvGZ@koontz>
+MIME-Version: 1.0
+Subject: Re: xf86-video-intel compilation failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,49 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 09:11:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Jun 2013 13:49:22 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-W dniu 11.06.2013 11:07, Khem Raj pisze:
-> 
-> On Jun 11, 2013, at 1:54 AM, Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> wrote:
-> 
->>> in this case arch does not map to what OE's target arch is so you have
->>> to do it twice if you want to use COMPATIBLE_HOST
->>
->> It has 7 OE architectures: i.86, x86_64, arm, mips(el), powerpc(64)
->> which are then mapped into 5 llvm ones. Can be gathered into one
->> COMPATIBLE_HOST (copied from kexec-tools):
->>
->> COMPATIBLE_HOST = '(x86_64.*|i.86.*|arm.*|powerpc.*|mips.*)-(linux)'
->>
->> "mips.*" probably needs to be changed to "mips(el)?" to not cover mips64.
-> 
-> and how will you fold it into -DLLVM_TARGETS_TO_BUILD=<arch>
-> 
-> where arch is not same as OE's target arch so you need the mapping function
-> anyway was my point.
 
-+def get_llvm_arch(d):
-+    import bb;
-+
-+    arch = bb.data.getVar('TARGET_ARCH', d, 1)
-+
-+    if arch == "x86_64" or arch == "i486" or arch == "i586" or arch ==
-"i686":
-+        arch = "x86"
-+    elif arch == "x86_64":
-+        arch = "x86_64"
-+    elif arch == "arm":
-+        arch = "arm"
-+    elif arch == "mipsel" or arch == "mips":
-+        arch = "mips"
-+    elif arch == "powerpc" or arch == "powerpc64":
-+        arch = "powerpc"
-+
-+    return arch
+Copying my local dri2.h into the sysroot like this makes the driver com=
+pile.
 
-And done. If you try to build recipe secured by COMPATIBLE_HOST for not
-compatible architecture then you have to deal with effects.
+ cp /usr/include/xorg/dri2.h  tmp-eglibc/sysroots/vmc16/usr/include/xor=
+g/
+
+Any hint on where that files is.
+
+S=F8ren HolmTirsdag den 11. juni 2013 00:10:34 skrev :
+> Hi
+>=20
+> When compiling xf86-video-intel I get the following compilation error=
+. Do
+> you have any ideas - I have looked everywhere for xorg/dri2.h
+>=20
+> | /home/sgh/git/openembedded/build/tmp-
+>=20
+> eglibc/sysroots/vmc16/usr/include/xorg/xf86.h:202:33: note: previous
+> declaration of 'xf86CVTMode' was here
+>=20
+> | In file included from i830_3d.c:33:0:
+> | intel.h:66:18: fatal error: dri2.h: No such file or directory
+> | compilation terminated.
+> | make[3]: *** [i830_3d.lo] Error 1
+> | make[3]: Leaving directory `/home/sgh/git/openembedded/build/tmp-
+>=20
+> eglibc/work/prescott-oe-linux/xf86-video-intel/2_2.21.6-r0/xf86-video=
+-
+> intel-2.21.6/src'
+>=20
+> | make[2]: *** [all-recursive] Error 1
+> | make[2]: Leaving directory `/home/sgh/git/openembedded/build/tmp-
+>=20
+> eglibc/work/prescott-oe-linux/xf86-video-intel/2_2.21.6-r0/xf86-video=
+-
+> intel-2.21.6/src'
+>=20
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory `/home/sgh/git/openembedded/build/tmp-
+>=20
+> eglibc/work/prescott-oe-linux/xf86-video-intel/2_2.21.6-r0/xf86-video=
+-
+> intel-2.21.6'
+>=20
+> | make: *** [all] Error 2
+> | ERROR: oe_runmake failed
+--=20
+S=F8ren Holm
 
