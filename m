@@ -1,36 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f51.google.com (mail-vb0-f51.google.com
-	[209.85.212.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 316AF6A967
+Return-Path: <ross.burton@intel.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BDF46A967
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 07:28:48 +0000 (UTC)
-Received: by mail-vb0-f51.google.com with SMTP id x17so4924332vbf.38
+	Tue, 11 Jun 2013 07:30:52 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id p10so2781450pdj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 00:28:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=S+wF2r4/fjT4MU6GHvsdYbqftEMJVH2iuN5s6rvvBsI=;
-	b=SygTIUXbJTgzwF0OPOr+HTNsOMsQQzoNyPmDiuayiclIqTya6FVBsmh7eqIUkL/Y9t
-	G4bzmgC0OAPpB292XT+ZeI0D+qIfETQNqp4Y509Hrfm2XCa//0R6zhDKwJQvU4bKm+h8
-	BAwooTC+iXxri+Kz6e3TXc+/C2CM2TCQLwX/bcYJs76yRWM/yHf7BlDiLU0irpx22XXV
-	FThwcipb808K0qJiqpU90aeavW5XtTtpGhiKB3ArU9+YTFCq7ZQOjmcr177Io5EKMNfU
-	qOG554yAFtc8MUwwPnwJSBhbgAZfuO3KPnBE8PtPGRe/nni72P602FgaYo4BtASwX9MA
-	GRNA==
+	Tue, 11 Jun 2013 00:30:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:x-gm-message-state;
+	bh=JCkgyqcat9+Iq0nf5yNcdtWMwTcY8HpeQhJ0V4Z9zPg=;
+	b=IZMnNTp2bf537f44eXkoDUTOiXqTnhL+4Trvz/fCr5hfycP6sTRImEkCFjdh4aFkv2
+	jVmMsPjj6p2oAfDjfdYg1Sm3cGjENXpvmqdZ05mztXD7gflSTcEBUpXhb7eMfCush3AY
+	JG7cczLP8UBoQMsdD7d9haLQqm5RbjqXdW7aL5xC9XMLCWRaRo+LqYGtjMDYoNEfueOq
+	xRAsIO6wFBLQ302a6urIJKbM6yyN2/1JHm+E+WtL7rhHmmZ8r5WdTk/EoTOmVgN8oEQD
+	iCLZDqKdqWoxwVqUyffYfSZKPLG7WsSsNsYHtfykWXRRidTU785mXLrmr0dl7/l1wRoj
+	4Rhg==
+X-Received: by 10.66.27.172 with SMTP id u12mr17214884pag.209.1370935853359;
+	Tue, 11 Jun 2013 00:30:53 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.58.6.141 with SMTP id b13mr7564365vea.45.1370935728729; Tue,
-	11 Jun 2013 00:28:48 -0700 (PDT)
-Received: by 10.52.70.76 with HTTP; Tue, 11 Jun 2013 00:28:48 -0700 (PDT)
-In-Reply-To: <CAMKF1spqaK7Lapq+ty4gpwu7n7OLhQrCevFxzaNQ72PLRhBQeQ@mail.gmail.com>
-References: <1370928876-14423-1-git-send-email-schnitzeltony@googlemail.com>
-	<1370928876-14423-12-git-send-email-schnitzeltony@googlemail.com>
-	<CAMKF1spqaK7Lapq+ty4gpwu7n7OLhQrCevFxzaNQ72PLRhBQeQ@mail.gmail.com>
-Date: Tue, 11 Jun 2013 09:28:48 +0200
-Message-ID: <CALbNGRS33w6-qiM-fEcb4Amt3-dXv5VwdnxwS3Wh4vmEA-sCKg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Received: by 10.66.252.98 with HTTP; Tue, 11 Jun 2013 00:30:33 -0700 (PDT)
+In-Reply-To: <20130606101258.GA22710@jama>
+References: <20130524130924.BFD6C50262@opal> <20130606101258.GA22710@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 11 Jun 2013 08:30:33 +0100
+Message-ID: <CAJTo0LYvKEuF+PUeuLUo0VSWMkLeFvybjzeZLnQ=VuwQ=7aJ0Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome/meta-oe/meta-xfce 11/15] networkmanager: rework settings/dependencies for polkit/consolekit
+X-Gm-Message-State: ALoCoQmaHqQPlxHgiYboYBMWO3VNRLKwl12mJpCxgTqtjx3xSKg5Bs2d83/TcKTRbhjNrwPw+5HL
+Subject: Re: [oe-commits] Ross Burton : librsvg: clean up native depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,18 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 07:28:48 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 07:30:52 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 11, 2013 at 8:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Jun 10, 2013 at 10:34 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> +PACKAGECONFIG =3D "${@base_contains('DISTRO_FEATURES','systemd','system=
-d','consolekit',d)}"
+On 6 June 2013 11:12, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Not sure why, but now do_configure is failing with:
 >
-> intention is to have either systemd or consolekit but not both at same
-> time is that correct ?
+> | checking for gdk-pixbuf-query-loaders... none
+> | configure: error: gdk-pixbuf-query-loaders not found in path
+> | Configure failed. The contents of all config.log files follows to aid debugging
+> | /OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/librsvg/2.32.1-r12/librsvg-2.32.1/config.log
+> | This file contains any messages produced by compilers while
+> | running configure, to aid debugging if configure makes a mistake.
+> |
+> | It was created by RSVG configure 2.32.1, which was
+> | generated by GNU Autoconf 2.69.  Invocation command line was
+>
+> configure:13908: checking whether to build the GDK-Pixbuf SVG loader
+> configure:13917: result: yes
+> configure:13924: checking for GDK_PIXBUF
+> configure:13931: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED"
+> configure:13934: $? = 0
+> configure:13948: $PKG_CONFIG --exists --print-errors "gdk-pixbuf-2.0 >= $GDK_PIXBUF_REQUIRED"
+> configure:13951: $? = 0
+> configure:14009: result: yes
+> configure:14016: checking for gdk-pixbuf-query-loaders
+> configure:14047: result: none
+> configure:14057: error: gdk-pixbuf-query-loaders not found in path
+>
+> I'll check DEPENDS with bitbake -e when I don't have any build running in that directory..
 
-yes - FWIW I took this one from polkit
+I've been away for a week, but I *think* that this was a short-lived
+problem in master (some commits were dropped from a merge).  Can you
+still replicate this?
+
+Ross
 
