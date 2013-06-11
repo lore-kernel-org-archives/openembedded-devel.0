@@ -1,41 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 66D9F61FEC;
-	Tue, 11 Jun 2013 16:04:11 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id o10so3153233eaj.19
-	for <multiple recipients>; Tue, 11 Jun 2013 09:04:11 -0700 (PDT)
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id D716F61FEC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jun 2013 16:05:06 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id d41so2700084eek.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jun 2013 09:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=V9kRaCHnxpVvDJEU57dN3bhAayEQaQboXefgRHzjZjw=;
-	b=SDPRS+oFGgsHqEXRNUa2qEvNlgAVESlFblrHWHbzV+zuHQy+lNgImwYQdxeXdnNOF8
-	cHVuyA8WYKgo8mxFL1GmSUPiktNOdr6xoI/1Gc5jInlitDXTmWQcsKK0qRI+BPFB+G+w
-	wWPOXjwPM6mkgerhIbZx9slUHzG/Y+WhtMH+m907VXBR/NHts/FmKJHWZx4wY8oKfsBA
-	NLDw7tEHO/eaKvm3KFh76A8QttRW8euHk7OSfpggLonQtVwsCBXe2C6SI+aZxt2VVNVU
-	Wn+CI/+j+4o0OvABuvcHL04sfBrbtu0bf7UfRomm4vp9mYmUmMGg8tWFMRoaifH4WhjO
-	S5nA==
-X-Received: by 10.14.100.2 with SMTP id y2mr4704803eef.75.1370966651405;
-	Tue, 11 Jun 2013 09:04:11 -0700 (PDT)
+	bh=Z1q8vz4Hu1m7prFs+Cs2Xw8YpeBjL4I5cPWvGKGXT+s=;
+	b=lImIusYoNLhiRZXvQSCNcU/kbKY6qVgy6+e0ilE/Igm5oNjF3bP2gpyEqw3w8Qog0z
+	GWIex761xyAm/8PYQy7ESSrxg+ybENqBUhqC0dapncFd4t7QTgUUS6/O0HUuaI/3mZPs
+	BNjEFUPhihgK3fnJTV33/cNBtdU+c8w0xS2SX1uD9Wwl4MmZJc0+lE32CDNLteTan9Xx
+	kPuJU6Rv/ZmvuG2S82B06jAJyaY0JaU0vilYeMNdWUQ0nXC5qGln65rGlzUKbLtQW2oC
+	4fJNfWSkrCuvOX1jLgieRlCTpc0aTUF3IKtYCHgLP8BOQBvY6BFca/TkWYcoLPx3ZoE3
+	MkIg==
+X-Received: by 10.14.107.200 with SMTP id o48mr17139507eeg.35.1370966707491;
+	Tue, 11 Jun 2013 09:05:07 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	n42sm31189457eeh.15.2013.06.11.09.04.10 for <multiple recipients>
+	a5sm31264179ees.6.2013.06.11.09.05.06
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 11 Jun 2013 09:04:10 -0700 (PDT)
-Date: Tue, 11 Jun 2013 18:04:34 +0200
+	Tue, 11 Jun 2013 09:05:06 -0700 (PDT)
+Date: Tue, 11 Jun 2013 18:05:30 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Message-ID: <20130611160434.GI3233@jama>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130611160530.GJ3233@jama>
+References: <1370502445-22258-1-git-send-email-cazfi74@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20130603151008.GC3279@jama>
+In-Reply-To: <1370502445-22258-1-git-send-email-cazfi74@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: State of bitbake world
+Subject: Re: [meta-oe][PATCH 1/2] imagemagick: update to upstream version 6.8.5-9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,149 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 16:04:12 -0000
-X-Groupsio-MsgNum: 45038
+X-List-Received-Date: Tue, 11 Jun 2013 16:05:07 -0000
+X-Groupsio-MsgNum: 45039
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DwoPkXS38qd3dnhB"
+	protocol="application/pgp-signature"; boundary="+Hr//EUsa8//ouuB"
 Content-Disposition: inline
 
---DwoPkXS38qd3dnhB
+--+Hr//EUsa8//ouuB
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 03, 2013 at 05:10:08PM +0200, Martin Jansa wrote:
-> On Mon, May 20, 2013 at 03:06:35PM +0200, Martin Jansa wrote:
-> > Couple of issues from last email were fixed, so here is updated status:
-> >=20
-> > qemuarm Summary: 14 tasks failed:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130520_090009.log
-> > qemux86 Summary: 19 tasks failed:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130519_170509.log
-> > qemux86-64 Summary: 20 tasks failed:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130520_005747.log
+On Thu, Jun 06, 2013 at 10:07:24AM +0300, Marko Lindqvist wrote:
+> LICENSE: 2013 added to (c) years
 >=20
-> Hi,
+> PerlMagic_MakePatch.patch now part of upstream
 >=20
-> updated status, still building with gcc-4.8
-> shr-version issue already fixed
-> llvm2.9 also fixed
-> so if we don't count these 3 failures it's a bit better than last status
->=20
-> qemuarm Summary: 15 tasks failed:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130601_225651.log
->=20
-> qemux86 Summary: 18 tasks failed:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130603_011743.log/
->=20
-> qemux86-64: Summary: 21 tasks failed:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130602_103752.log
+> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+> ---
+>  .../imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch |   11 -----=
+------
+>  .../remove.dist-lzip.patch                                  |    0
+>  .../{imagemagick_6.7.5.bb =3D> imagemagick_6.8.5.bb}          |   11 +++=
++-------
+>  3 files changed, 4 insertions(+), 18 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.7.5=
+/PerlMagic_MakePatch.patch
+>  rename meta-oe/recipes-support/imagemagick/{imagemagick-6.7.5 =3D> image=
+magick-6.8.5}/remove.dist-lzip.patch (100%)
+>  rename meta-oe/recipes-support/imagemagick/{imagemagick_6.7.5.bb =3D> im=
+agemagick_6.8.5.bb} (83%)
 
-There weren't many (any) changes merged to meta-oe last week, I hope to
-get better builds now (started few minutes ago).
+Creates new QA issues which need to be fixed before merge:
 
-qemuarm Summary: 14 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30610_065148.log/
-
-qemux86 Summary: 17 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30608_071258.log/
-
-qemux86-64 Summary: 18 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30609_081044.log/
-
-common:
-  meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb, do_p=
-ackage
-  meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.=
-32.1.bb, do_compile
-  openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.bb, do_p=
-ackage
-  meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb=
-, do_compile
-  meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_compi=
-le
-  meta-openembedded/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb, do_compi=
-le
-  meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb, do_co=
-mpile
-  meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.5.8.bb, do_configure
-  meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools=
-_0.7.2.bb, do_compile
-
-qemux86 common:
-  meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
-  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-  openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.21=
-=2E6.bb, do_compile
-
-qemuarm:
-  meta-openembedded/meta-oe/recipes-support/libunwind/libunwind_1.1.bb, do_=
-compile
-  openembedded-core/meta/recipes-graphics/mesa/mesa-demos_8.1.0.bb, do_comp=
-ile
-  meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb, =
-do_compile
-  openembedded-core/meta/recipes-devtools/qemu/qemu_1.4.1.bb, do_compile
-  meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, d=
-o_compile
-
-qemux86:
-  openembedded-core/meta/recipes-gnome/librsvg/librsvg_2.32.1.bb, do_config=
-ure
-  openembedded-core/meta/recipes-devtools/cmake/cmake-native_2.8.11.bb, do_=
-configure
-  meta-openembedded/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb, d=
-o_configure
-  openembedded-core/meta/recipes-graphics/mesa/mesa-demos_8.1.0.bb, do_comp=
-ile
-  meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2=
-=2E11.14.bb, do_compile
-
-qemux86-64
-  meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-  meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobil=
-edevice_1.1.4.bb, do_configure
-  meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
-  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-  meta-openembedded/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.=
-32.1.bb, do_compile
-  meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb, =
-do_compile
-  meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, d=
-o_compile
-  openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.21=
-=2E6.bb, do_compile
-
-And the list of QA issues:
-samba-3.6.8: Fixup Perms: Unable to correct directory link, target already =
-exists: /var/run -> /run
-samba-3.6.8: samba: Files/directories were installed but not shipped
-  /run
-  /run/lock
-base-files-3.0.14: Fixup Perms: Unable to correct directory link, target al=
-ready exists: /var/log -> /var/volatile/log
-base-files-3.0.14: Fixup Perms: Unable to correct directory link, target al=
-ready exists: /var/run -> /run
-base-files-3.0.14: Fixup Perms: Unable to correct directory link, target al=
-ready exists: /var/tmp -> /var/volatile/tmp
-usbmuxd-git: usbmuxd: Files/directories were installed but not shipped
-  /usr/lib64
-  /usr/lib64/libusbmuxd.so
-  /usr/lib64/libusbmuxd.so.1.0.8
-  /usr/lib64/libusbmuxd.so.2
-  /usr/lib64/pkgconfig
-  /usr/lib64/.debug
-  /usr/lib64/pkgconfig/libusbmuxd.pc
-  /usr/lib64/.debug/libusbmuxd.so.1.0.8
 imagemagick-6.8.5: imagemagick: Files/directories were installed but not sh=
 ipped
   /usr/lib/ImageMagick-6.8.5
@@ -201,47 +88,96 @@ ipped
   /usr/share/ImageMagick-6/locale.xml
   /usr/share/ImageMagick-6/francais.xml
   /usr/share/ImageMagick-6/english.xml
-openldap-2.4.23: openldap: Files/directories were installed but not shipped
-  /run
-networkmanager-0.9.8.0: networkmanager: Files/directories were installed bu=
-t not shipped
-  /run
-  /run/NetworkManager
-hiawatha-9.1: hiawatha: Files/directories were installed but not shipped
-  /run
-oscam-1.10+7974: File '/usr/bin/oscam' from oscam was already stripped, thi=
-s will prevent future debugging!
-cherokee-1.2.98: cherokee: Files/directories were installed but not shipped
-  /run
-gdm-2.32.2: gdm: Files/directories were installed but not shipped
-  /run
-  /run/gdm
-  /run/gdm/greeter
-nostromo-1.9.5: nostromo: Files/directories were installed but not shipped
-  /run
-  /run/nostromo
-collectd-5.2.2: collectd: Files/directories were installed but not shipped
-  /run
-lmbench-3.0-a9: lmbench: Files/directories were installed but not shipped
-  /run
-  /run/lmbench
-android-initscripts-1.0: android-initscripts: Files/directories were instal=
-led but not shipped
-  /android_finish
+
+>=20
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMa=
+gic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5=
+/PerlMagic_MakePatch.patch
+> deleted file mode 100644
+> index f8ad0af..0000000
+> --- a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_Mak=
+ePatch.patch
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> ---- /tmp/Makefile.PL.in	2008-10-01 10:39:38.000000000 +0200
+> -+++ ImageMagick-6.4.4/PerlMagick/Makefile.PL.in	2008-10-01 10:40:25.0000=
+00000 +0200
+> -@@ -87,6 +87,8 @@
+> -=20
+> -    # Use same compiler as ImageMagick
+> -    'PERLMAINCC'	=3D> '@PERLMAINCC@ @OPENMP_CFLAGS@',
+> -+   'AR' =3D> '@AR@',
+> -+   'LD' =3D> '@PERLMAINCC@',
+> -=20
+> -    # Set Perl installation prefix to ImageMagick installation prefix
+> - #   'PREFIX'	=3D> '@prefix@',
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove=
+=2Edist-lzip.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.8.5/=
+remove.dist-lzip.patch
+> similarity index 100%
+> rename from meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.=
+dist-lzip.patch
+> rename to meta-oe/recipes-support/imagemagick/imagemagick-6.8.5/remove.di=
+st-lzip.patch
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/m=
+eta-oe/recipes-support/imagemagick/imagemagick_6.8.5.bb
+> similarity index 83%
+> rename from meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+> rename to meta-oe/recipes-support/imagemagick/imagemagick_6.8.5.bb
+> index 2f0fad5..6cb3b4a 100644
+> --- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
+> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.5.bb
+> @@ -1,19 +1,16 @@
+>  DESCRIPTION =3D "ImageMagick is an image convertion tools"
+>  SECTION =3D "console/utils"
+>  LICENSE =3D "ImageMagick"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D944f66dcedc98d5a4e5d964bd3b32=
+e7b"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db1bf06a8d02cb00b02dea7d03ef95=
+25f"
+>  # FIXME: There is much more checked libraries. All should be added or ex=
+plicitly disabled to get consistent results.
+>  DEPENDS =3D "lcms bzip2 jpeg libpng librsvg tiff zlib fftw"
+> =20
+> -PR =3D "r5"
+> -
+> -PATCHSET =3D "6"
+> +PATCHSET =3D "9"
+>  SRC_URI =3D "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATC=
+HSET}.tar.bz2 \
+> -           file://PerlMagic_MakePatch.patch \
+>             file://remove.dist-lzip.patch \
+>  "
+> -SRC_URI[md5sum] =3D "bcf07cf0822572fa2b47fa6d506f699a"
+> -SRC_URI[sha256sum] =3D "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5=
+a7dae01e47bdbd80"
+> +SRC_URI[md5sum] =3D "27b3b24a1a86aedade11820f108289e5"
+> +SRC_URI[sha256sum] =3D "b88ac6551619837fc226c4c878ddc1f0adb106644cefbc88=
+bb02abd55706b3fc"
+> =20
+>  S =3D "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
+> =20
+> --=20
+> 1.7.10.4
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---DwoPkXS38qd3dnhB
+--+Hr//EUsa8//ouuB
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlG3SpIACgkQN1Ujt2V2gBwCMACdGcE4ILIGslBEN22nP55bivcu
-LNAAn2OkBXGoFZy2f3f6paB7FB/oJ8Qd
-=kY9I
+iEYEARECAAYFAlG3SsoACgkQN1Ujt2V2gBx6nACffr6ksYa/qF8sLdqwdnJYpRqI
+jQAAoLBYFxtBOW58bQ+/g6HAN4OESCuo
+=OqCw
 -----END PGP SIGNATURE-----
 
---DwoPkXS38qd3dnhB--
+--+Hr//EUsa8//ouuB--
