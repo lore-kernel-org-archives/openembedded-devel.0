@@ -1,32 +1,33 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id B5B776A9C0
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 769576A9C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 07:44:36 +0000 (UTC)
-Received: by mail-ie0-f171.google.com with SMTP id qd12so4610104ieb.30
+	Tue, 11 Jun 2013 07:48:35 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id x12so607801ief.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 00:44:37 -0700 (PDT)
+	Tue, 11 Jun 2013 00:48:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=pMvan5Z9W+ySYwbOw9KYiILS0m0hEIs+XFgQWO+QZHw=;
-	b=dBH4IV0gLQ7xibN1FjCTu2+3CL/m+PoSOyC3900qnYlqT7POgh5IV4Z7QcxOIio5vP
-	L4CQxt4mkNG5pc1isBg84DEIfa7hvXwir/hiv2cDzHINdE4z74gbdPzMgjJXssx1P2O9
-	xfXPnAH4+vvK+TtmHSKdXEVdLq/kK5jyAJo5pyWvowJIXMPqpv4Dm/WgXmbD1jE2kZwJ
-	/h2ESo4JnV/g5H86Z/oSOY1AIIEPwoIBEQZ/o7eavJxhKVrAI2bY1eZUyzq5afaBNlp0
-	Y9ciuadE1o3R703sxMyoPEoYgJ3skb+GSSvG1GaRLPI+JKQsZ9fFEKgK2QkeGF+K/y9u
-	ob5w==
-X-Received: by 10.50.26.67 with SMTP id j3mr347427igg.15.1370936677384; Tue,
-	11 Jun 2013 00:44:37 -0700 (PDT)
+	:content-type; bh=8bj7CR0bcj8lLJWjBdSEDBW5sM+4LVvFr6BuJ7+lyDA=;
+	b=ONGWUDMGqDhzB55vbvUKln+CxOTaZDP07rrrZ75sPrF7O3uh3Dz162cMgIihJo6Wea
+	VZbMJi66A1xYsHxcEqNMr756VHG2Zo108OaO/5l0ThGMiNxXYTvrQUlnsEvyesv6I6HM
+	XE1RBqQQpBIgqmI/rpkWuWJdcWj14UTG48aJyTto+aOEuMthN/NvOF8M1+nZREInNEwl
+	UnoQjH50QagwuZo+qpDbPFRyyGwKoC2K8VjBjiukepepYaVvfgluT73a81GJofgQQhhI
+	QxJqL63kUEK8+N4y9B1ubPk0cH+WpNXsfsCdz/Wumu9wW29Uk0U2PkWtBBYikgaz/rm+
+	YmsA==
+X-Received: by 10.50.22.37 with SMTP id a5mr304958igf.78.1370936916702; Tue,
+	11 Jun 2013 00:48:36 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 00:44:07 -0700 (PDT)
-In-Reply-To: <1370160375-14609-1-git-send-email-net147@gmail.com>
-References: <1370160375-14609-1-git-send-email-net147@gmail.com>
+Received: by 10.50.79.137 with HTTP; Tue, 11 Jun 2013 00:48:06 -0700 (PDT)
+In-Reply-To: <51AB1684.1080500@juszkiewicz.com.pl>
+References: <1370165592-15697-1-git-send-email-net147@gmail.com>
+	<51AB1684.1080500@juszkiewicz.com.pl>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Jun 2013 00:44:07 -0700
-Message-ID: <CAMKF1spNfEiGVMs586vN8GAJxi=hUchNHK2fAaYHAbNC4k2q6A@mail.gmail.com>
+Date: Tue, 11 Jun 2013 00:48:06 -0700
+Message-ID: <CAMKF1soSa-S9kUC1PH9pJYbnJsvRiubNxbgNvYEx8zs4XiwmLw@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] llvm-common: move cross script install to sysroot preprocess function
+Subject: Re: [meta-oe][PATCH] llvm3.2: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,45 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 07:44:37 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 07:48:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sun, Jun 2, 2013 at 1:06 AM, Jonathan Liu <net147@gmail.com> wrote:
-> The llvm-config script doesn't get placed in the target sysroot
-> crossscripts directory otherwise.
+On Sun, Jun 2, 2013 at 2:55 AM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> W dniu 02.06.2013 11:33, Jonathan Liu pisze:
+>> +def get_llvm_arch(d):
+>> +    import bb;
+>> +
+>> +    arch = bb.data.getVar('TARGET_ARCH', d, 1)
+>> +
+>> +    if arch == "x86_64" or arch == "i486" or arch == "i586" or arch == "i686":
+>> +        arch = "x86"
+>> +    elif arch == "x86_64":
+>> +        arch = "x86_64"
+>> +    elif arch == "arm":
+>> +        arch = "arm"
+>> +    elif arch == "mipsel" or arch == "mips":
+>> +        arch = "mips"
+>> +    elif arch == "powerpc" or arch == "powerpc64":
+>> +        arch = "powerpc"
+>> +    else:
+>> +        bb.warn("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
+>> +
+>> +    return arch
 >
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  meta-oe/recipes-core/llvm/llvm-common.bb | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes-core/llvm/llvm-common.bb
-> index 612fd34..3a4232f 100644
-> --- a/meta-oe/recipes-core/llvm/llvm-common.bb
-> +++ b/meta-oe/recipes-core/llvm/llvm-common.bb
-> @@ -6,7 +6,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
->
->  SRC_URI = "file://llvm-config"
->
-> -do_install() {
-> +ALLOW_EMPTY_${PN} = "1"
-> +SYSROOT_PREPROCESS_FUNCS += "llvm_common_sysroot_preprocess"
-> +SYSROOT_PREPROCESS_FUNCS_virtclass-native += ""
-> +
+> Can we get rid of such blocks? They are worthless and only generate
+> extra support questions when OE newbies use OE with 'not supported'
+> architectures.
 
-so you want this to run for target recipe only it seems. above won't
-do it. you could do something like
+why do you think they are worthless ? when they give good information
+instead of failing to build
+and then generating support question which need more work to come to
+same conclusion
 
-SYSROOT_PREPROCESS_FUNCS_append_class-target = "
-llvm_common_sysroot_preprocess "
-
-> +llvm_common_sysroot_preprocess() {
->      install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
->      install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
->  }
-> --
-> 1.8.3
->
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
