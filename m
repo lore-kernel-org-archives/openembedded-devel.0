@@ -1,23 +1,36 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 59ADB6A990
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vb0-f51.google.com (mail-vb0-f51.google.com
+	[209.85.212.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 316AF6A967
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 07:01:35 +0000 (UTC)
-Received: from e6520eb (pac33-2-82-240-38-71.fbx.proxad.net [82.240.38.71])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 9D6674B008E;
-	Tue, 11 Jun 2013 09:01:30 +0200 (CEST)
-Date: Tue, 11 Jun 2013 09:01:29 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+	Tue, 11 Jun 2013 07:28:48 +0000 (UTC)
+Received: by mail-vb0-f51.google.com with SMTP id x17so4924332vbf.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jun 2013 00:28:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=S+wF2r4/fjT4MU6GHvsdYbqftEMJVH2iuN5s6rvvBsI=;
+	b=SygTIUXbJTgzwF0OPOr+HTNsOMsQQzoNyPmDiuayiclIqTya6FVBsmh7eqIUkL/Y9t
+	G4bzmgC0OAPpB292XT+ZeI0D+qIfETQNqp4Y509Hrfm2XCa//0R6zhDKwJQvU4bKm+h8
+	BAwooTC+iXxri+Kz6e3TXc+/C2CM2TCQLwX/bcYJs76yRWM/yHf7BlDiLU0irpx22XXV
+	FThwcipb808K0qJiqpU90aeavW5XtTtpGhiKB3ArU9+YTFCq7ZQOjmcr177Io5EKMNfU
+	qOG554yAFtc8MUwwPnwJSBhbgAZfuO3KPnBE8PtPGRe/nni72P602FgaYo4BtASwX9MA
+	GRNA==
+MIME-Version: 1.0
+X-Received: by 10.58.6.141 with SMTP id b13mr7564365vea.45.1370935728729; Tue,
+	11 Jun 2013 00:28:48 -0700 (PDT)
+Received: by 10.52.70.76 with HTTP; Tue, 11 Jun 2013 00:28:48 -0700 (PDT)
+In-Reply-To: <CAMKF1spqaK7Lapq+ty4gpwu7n7OLhQrCevFxzaNQ72PLRhBQeQ@mail.gmail.com>
+References: <1370928876-14423-1-git-send-email-schnitzeltony@googlemail.com>
+	<1370928876-14423-12-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1spqaK7Lapq+ty4gpwu7n7OLhQrCevFxzaNQ72PLRhBQeQ@mail.gmail.com>
+Date: Tue, 11 Jun 2013 09:28:48 +0200
+Message-ID: <CALbNGRS33w6-qiM-fEcb4Amt3-dXv5VwdnxwS3Wh4vmEA-sCKg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130611090129.6ec799e5@e6520eb>
-In-Reply-To: <20130604120343.GE3279@jama>
-References: <20130528094347.GG3192@jama>
-	<20130604120343.GE3279@jama>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.0 (GTK+ 2.24.18; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [meta-efl][dylan][PATCH] 2 backports
+Subject: Re: [meta-gnome/meta-oe/meta-xfce 11/15] networkmanager: rework settings/dependencies for polkit/consolekit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,57 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 07:01:37 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 07:28:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Martin,
+On Tue, Jun 11, 2013 at 8:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Jun 10, 2013 at 10:34 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> +PACKAGECONFIG =3D "${@base_contains('DISTRO_FEATURES','systemd','system=
+d','consolekit',d)}"
+>
+> intention is to have either systemd or consolekit but not both at same
+> time is that correct ?
 
-Le Tue, 4 Jun 2013 14:03:43 +0200,
-Martin Jansa <martin.jansa@gmail.com> a =C3=A9crit :
-
-> On Tue, May 28, 2013 at 11:43:47AM +0200, Martin Jansa wrote:
-> > Hi Eric,
-> >=20
-> > please backport 2 commits from meta-efl
-> >=20
-> > It's minor upgrade (I know we shouldn't backport upgrades, but this=20
-> > is from stable bugfix-only branch) and together with following patch
-> > fixes evas segfaults).
-> >=20
-> > commit 8b94591a585e4fb261599a9796f4199d650e24a5
-> > Author: Martin Jansa <Martin.Jansa@gmail.com>
-> > Date:   Wed May 22 13:54:06 2013 +0200
-> >=20
-> >     evas: Add patch to fix segfaults
-> >    =20
-> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >=20
-> > commit 4514f8ca26dac646e7e26fc1585e70304d9ef8ae
-> > Author: Martin Jansa <Martin.Jansa@gmail.com>
-> > Date:   Tue May 14 22:20:31 2013 +0200
-> >=20
-> >     meta-efl: upgrade efl to 1.7.7, e-wm to 0.17.3
-> >    =20
-> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> And one more for meta-oe
->=20
-> commit 2cab9ba0d4d72496633b92b67ac1a63f605c5ada
-> Author: Martin Jansa <Martin.Jansa@gmail.com>
-> Date:   Sat Jun 1 14:59:02 2013 +0200
->=20
->     claws-plugins-*: Update SRC_URI
->    =20
->     * modules are now in one bigger tarball on sourceforge
->       http://sourceforge.net/projects/sylpheed-claws/files/extra%20plugin=
-s/
->     * old tarballs are still available in plugins_obsolete directory
->    =20
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-the 3 commits were pushed to dylan-next
-
-thanks
-Eric
+yes - FWIW I took this one from polkit
 
