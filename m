@@ -1,33 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 754DF6A9F4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id C291A6AA66
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 16:44:21 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b47so3121030eek.7
+	Tue, 11 Jun 2013 23:18:25 +0000 (UTC)
+Received: by mail-pa0-f50.google.com with SMTP id fb1so5966787pad.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 09:44:21 -0700 (PDT)
+	Tue, 11 Jun 2013 16:18:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=wlaSLlXkOO73O3g9T/AlWRwc1fe6idCmc+2ogViEBKY=;
-	b=IkM/JwrqO2/lie1J5yA67UDH0DlaAA9fWmQBYa03XTJaiHe8hm+JTC7MS/XPlUl2k7
-	A22fwqkb5oOT2DNmOf/fcWO2pG00f3n5ZubZSlh38TDO4GAF055NN0dVplqDp/7Fkqaa
-	efNwoM0INw9GeBjw+iAxxkcWaG/BYi/5vbIwhVx+LDC6XvjhFMnIl6c3LUDLdIvZsiTk
-	Xw7PQ7ZRrAjGx+/jWdn2vYkIt0nGtoGpvbpgj6jV9jUDkGYDj0X2FqziLlf6eHxxmr7f
-	050L4hLyr1939qfaPPR3kzX1nDgpqttph9Cppdpdsp9MVpiVySiMawrVbt8kmDXYjDyt
-	ZhWA==
-X-Received: by 10.15.65.8 with SMTP id p8mr8829012eex.55.1370969061299;
-	Tue, 11 Jun 2013 09:44:21 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	bh=0Z7VMWvK5ZTMiVvnPN5AN3n/bUYJtn0BMVBh+5i3qw0=;
+	b=xp2yOpVRQqSrm7UiSbe0OxvUaOPqJdhwgKqb2ZiQcIhTn/ybte6TqA+ejkb8+rgzow
+	e682MV5s7iiSIW/OJOx/5t+QvnUeBaps4k4FP2Ri6rajqHcr/sqp4U/fd+A9quN/rPPZ
+	rSsKdSZPfgVQjBhdIYXeU31GxojOKKomQOjVhsZ3NP6S8QfPVTazeAnadZqbGrt4voM6
+	IB3pOqR5ruwxUdV8w02sgVgMMej6fD7OoxqkccGVJHyrn10ql0LsGPAhb7A4YSqHrqQh
+	DdGYPfj8V0UzDLykd3cgLYRnN9wNTWGpblBWx6xWVpAwHCx4s39WyDsIIwjnM7aS4r4A
+	ePHg==
+X-Received: by 10.68.11.232 with SMTP id t8mr16783424pbb.128.1370992706600;
+	Tue, 11 Jun 2013 16:18:26 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id
-	m1sm22107752eex.17.2013.06.11.09.44.20 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 11 Jun 2013 09:44:20 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	lq4sm21946273pab.19.2013.06.11.16.18.25 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 11 Jun 2013 16:18:25 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2013 18:44:41 +0200
-Message-Id: <1370969081-31095-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-Subject: [meta-systemd][PATCH] openssh: Rename bbappend to match new version from oe-core
+Date: Tue, 11 Jun 2013 16:16:04 -0700
+Message-Id: <1370992564-19617-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-gnome][PATCH] gnome-keyring: Fix build error due to missing asn1 prototypes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,29 +43,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 16:44:22 -0000
+X-List-Received-Date: Tue, 11 Jun 2013 23:18:25 -0000
 
+This fixes the errors that started to pop up recently
+while building gnome-keyring as part of gnome images
+The error is decribed in patch header
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../openssh/{openssh_6.2p1.bbappend => openssh_6.2p2.bbappend}          | 2 --
- 1 file changed, 2 deletions(-)
- rename meta-systemd/oe-core/recipes-connectivity/openssh/{openssh_6.2p1.bbappend => openssh_6.2p2.bbappend} (95%)
+ .../gnome-keyring/gnome-keyring/egg-asn1x.patch    |   55 ++++++++++++++++++++
+ .../gnome-keyring/gnome-keyring_2.32.1.bb          |    3 +-
+ 2 files changed, 57 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p1.bbappend b/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p2.bbappend
-similarity index 95%
-rename from meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p1.bbappend
-rename to meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p2.bbappend
-index 4789ad0..d9ad9ba 100644
---- a/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p1.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.2p2.bbappend
-@@ -1,7 +1,5 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+new file mode 100644
+index 0000000..ad8a40c
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+@@ -0,0 +1,55 @@
++Fixed build error with gcc 4.8
++
++Errors like below
++
++egg-asn1x.c: In function 'anode_encode_build':
++egg-asn1x.c:1280:7: warning: variable 'type' set but not used [-Wunused-but-set-variable]
++egg-asn1x.c: In function 'traverse_and_prepare':
++egg-asn1x.c:3354:3: warning: passing argument 1 of 'egg_asn1x_create' from incompatible pointer type [enabled by default]
++In file included from egg-asn1x.c:50:0:
++egg-asn1x.h:38:8: note: expected 'const struct static_struct_asn *' but argument is of type 'const struct asn1_static_node *'
++egg-asn1x.c: At top level:
++egg-asn1x.c:3509:1: error: conflicting types for 'egg_asn1x_create'
++In file included from egg-asn1x.c:50:0:
++egg-asn1x.h:38:8: note: previous declaration of 'egg_asn1x_create' was here
++egg-asn1x.c:3572:1: error: conflicting types for 'egg_asn1x_create_quark'
++In file included from egg-asn1x.c:50:0:
++egg-asn1x.h:41:8: note: previous declaration of 'egg_asn1x_create_quark' was here
++egg-asn1x.c:3579:1: error: conflicting types for 'egg_asn1x_create_and_decode'
++In file included from egg-asn1x.c:50:0:
++egg-asn1x.h:44:8: note: previous declaration of 'egg_asn1x_create_and_decode' was here
++make[4]: *** [libegg_la-egg-asn1x.lo] Error 1
++
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Upstream-Status: Pending
++Index: gnome-keyring-2.32.1/egg/egg-asn1x.h
++===================================================================
++--- gnome-keyring-2.32.1.orig/egg/egg-asn1x.h	2010-10-18 19:11:38.000000000 -0700
+++++ gnome-keyring-2.32.1/egg/egg-asn1x.h	2013-06-11 15:15:00.675399263 -0700
++@@ -25,6 +25,7 @@
++ #define EGG_ASN1X_H_
++ 
++ #include <glib.h>
+++#include <libtasn1.h>
++ 
++ #ifndef HAVE_EGG_ALLOCATOR
++ typedef void* (*EggAllocator) (void* p, gsize);
++@@ -35,13 +36,13 @@
++ 
++ struct static_struct_asn;
++ 
++-GNode*              egg_asn1x_create                 (const struct static_struct_asn *defs,
+++GNode*              egg_asn1x_create                 (const ASN1_ARRAY_TYPE *defs,
++                                                       const gchar *type);
++ 
++-GNode*              egg_asn1x_create_quark           (const struct static_struct_asn *defs,
+++GNode*              egg_asn1x_create_quark           (const ASN1_ARRAY_TYPE *defs,
++                                                       GQuark type);
++ 
++-GNode*              egg_asn1x_create_and_decode      (const struct static_struct_asn *defs,
+++GNode*              egg_asn1x_create_and_decode      (const ASN1_ARRAY_TYPE *defs,
++                                                       const gchar *type,
++                                                       gconstpointer data,
++                                                       gsize n_data);
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+index 72f2722..0d0f171 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+@@ -15,6 +15,8 @@ PR = "r12"
  
--PRINC := "${@int(PRINC) + 3}"
--
- SYSTEMD_PACKAGES = "${PN}-sshd"
- SYSTEMD_SERVICE_${PN}-sshd = "sshd.socket"
- FILES_${PN}-sshd += "${systemd_unitdir}/system/sshd.socket"
+ inherit autotools gnome gtk-doc pkgconfig gsettings
+ 
++SRC_URI += "file://egg-asn1x.patch"
++
+ DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
+ 
+@@ -24,7 +26,6 @@ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
+ SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
+ 
+ FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
+-                
+ 
+ FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
+                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
 -- 
-1.8.2.1
+1.7.9.5
 
 
