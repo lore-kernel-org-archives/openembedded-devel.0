@@ -1,35 +1,26 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id BF4996A967
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id E60136A984
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2013 08:16:01 +0000 (UTC)
-Received: by mail-pd0-f174.google.com with SMTP id 10so8619151pdc.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2013 01:16:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=7j0HJRYx7pvdFR3/zffUS5KlWMr1c28fpgLBQloWawg=;
-	b=bPMctZr4imZTy4Y6G0AXkr3VCzaHtkM38A+1lbw2n8eSL+nylU32zH5LqLI/nVmgdq
-	zEWS1MwHmU2GOLMyr3N4u07h9/oQMmNNmJXvSiptUuBhgvJ6BFv/+R6cp8Ky2RuEiz9o
-	zWsbOVdYXpXjaZzyU1uVv9mQ4mPlHLnsJMgclMoxzB0DSur5Aczq1NIBP6PhL8tFWyG2
-	JcCibjMWQ5JLA+IvnhCZjNElJ7EE7P4DCKUW2iMmATPzGOGI9eaRmxvbCi3vKO/ECTNJ
-	N3lmY49z3orbCRTrMwz7pnUiSNJTXYTou2EulpmO2hAt8tTBqM1RWArNGKRBaG0UdvGT
-	eAXw==
-X-Received: by 10.68.160.226 with SMTP id xn2mr18457653pbb.174.1371024962783; 
-	Wed, 12 Jun 2013 01:16:02 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id jb2sm695630pbc.8.2013.06.12.01.16.00
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Jun 2013 01:16:01 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Jun 2013 18:30:15 +1000
-Message-Id: <1371025815-2776-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.8.3
-Subject: [meta-oe][PATCH] xserver-nodm-init: do not execute Xsession twice
+	Wed, 12 Jun 2013 09:45:44 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 12 Jun 2013 02:45:45 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,851,1363158000"; d="scan'208";a="328153957"
+Received: from unknown (HELO helios.localnet) ([10.252.122.12])
+	by orsmga001.jf.intel.com with ESMTP; 12 Jun 2013 02:45:44 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Fahad Usman <fahad_usman@mentor.com>
+Date: Wed, 12 Jun 2013 10:45:43 +0100
+Message-ID: <3639423.KAoAmRbK6q@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.3 (Linux/3.8.0-23-generic; KDE/4.10.3; i686; ; )
+In-Reply-To: <1371020915-14924-1-git-send-email-fahad_usman@mentor.com>
+References: <1371020915-14924-1-git-send-email-fahad_usman@mentor.com>
+MIME-Version: 1.0
+Cc: Christopher Larson <chris_larson@mentor.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][dylan][PATCH] libmtp: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 08:16:01 -0000
+X-List-Received-Date: Wed, 12 Jun 2013 09:45:45 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The /etc/X11/Xserver script runs xinit /etc/X11/Xsession already so
-there is no need to do /usr/bin/xinit /etc/X11/Xsession --
-/etc/X11/Xserver. Having xinit nested will result in Xsession being
-executed twice. To resolve this, just execute /etc/X11/Xserver directly
-instead of going through xinit.
+Hi Fahad,
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- .../xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wednesday 12 June 2013 12:08:35 Fahad Usman wrote:
+> this was initially written by 'Christopher Larson'
+> 
+> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+> ---
+>  .../libmtp/libmtp-1.1.5/69-libmtp.rules            | 1000
 
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-index 53e61d7..94d221e 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm.service
-@@ -3,7 +3,7 @@ Description=Xserver startup with a display manager
- 
- [Service]
- EnvironmentFile=/etc/default/xserver-nodm
--ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
-+ExecStart=/etc/X11/Xserver
- 
- [Install]
- Alias=display-manager.service
+It looks like this recipe is not in master so it would need to go there first. 
+I'm also not sure if this is really suitable for meta-networking; MTP is 
+indeed a protocol but it's more something for communicating with cameras and 
+media players, so I'd suggest the meta-oe layer for this where we have other 
+similar components (gphoto2, libimobiledevice, etc...)
+
+Cheers,
+Paul
+
 -- 
-1.8.3
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
