@@ -1,39 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id B5D8F6AA47
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2013 16:09:08 +0000 (UTC)
-Received: by mail-ee0-f51.google.com with SMTP id e52so4545443eek.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jun 2013 09:09:07 -0700 (PDT)
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 966756A9E5;
+	Wed, 12 Jun 2013 17:08:26 +0000 (UTC)
+Received: by mail-vc0-f176.google.com with SMTP id ha12so2885829vcb.7
+	for <multiple recipients>; Wed, 12 Jun 2013 10:08:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/0mZoVPK+cHccubojIJVkNp2Dwv07+6DnPL6gS1P3qc=;
-	b=a2SuOjgsz7Z2c9G3KO9E+sDGv5cGEx+qixRKl+t9bh9r3w3NpsaK2gxBRqkplp5cRu
-	zLPtFtj+SBrDSAC8AwqCn+n03TyIji6LqVrtE2TsRIU7+XpFuyWlwZBnxatDWeSf98zb
-	pQwVzjaBzHOa2Cr1Qbjna2ePv20RO9z+0Z7kz8wT8tWPn+vXR+OZx8EkUeGXt1wwWKVi
-	cZ6fEmjytJi2YAqYZ38Oh5IWxgLNaTHY3ohodCr+zhEGdN5tUfKDr3idQuvvalxZ+Odu
-	/mH2sIt1HeLm1bA/tjx/hDwIFIObbh6+2gmbeRLAuFNHRfDxSA/U6mQC6D/d2TbX+JWB
-	cRDA==
-X-Received: by 10.15.48.129 with SMTP id h1mr22166903eew.65.1371053347832;
-	Wed, 12 Jun 2013 09:09:07 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	p43sm37749905eem.11.2013.06.12.09.09.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 12 Jun 2013 09:09:07 -0700 (PDT)
-Date: Wed, 12 Jun 2013 18:09:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130612160931.GR3233@jama>
-References: <1371045305-11765-1-git-send-email-net147@gmail.com>
-	<20130612140832.GQ3233@jama>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=jnXRTDcU1xmU6YKAN0j43uZr4d3P7O1Qy70Kk/YFPPE=;
+	b=MdFCsRChMFO4ePOa2yqBjctmrJa97P0uZsIQv+JMZbv8bowe/0voeBtimiQMuJUYsK
+	M1a0AzDXlCw1FDMIDvknS1DyVTGoviB/HShlieF9MKp2qvzn45AmKiqkyvamOvK0c51O
+	SXmQVZ6XY/O/2ZFKfZ/TYaxJsExNLreQe403t8viAgMxqHIhXkuvoYxoCpu6a2Zd2dx+
+	62zVqMTDSZ3fBaACIdh89ygQwcWqs6zr9gul5p/BWyxseKWRSdwQNgnouTfhbLqq/FHc
+	gbJhnrY7FuqlaoXkQ/llYZ2XyO232f4METUrRXvYwDF/KJ3b3DbDJB9c81gi/CqBm4Vv
+	iotw==
+X-Received: by 10.58.37.165 with SMTP id z5mr10194043vej.12.1371056907187;
+	Wed, 12 Jun 2013 10:08:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20130612140832.GQ3233@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v3] llvm-common: move cross script install to sysroot preprocess function
+Sender: paul.betafive@gmail.com
+Received: by 10.220.195.201 with HTTP; Wed, 12 Jun 2013 10:07:47 -0700 (PDT)
+In-Reply-To: <20130611160434.GI3233@jama>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20130415141253.GC10628@jama.dyndns-home.com>
+	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
+	<20130516075215.GA24809@jama.dyndns-home.com>
+	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
+	<20130611160434.GI3233@jama>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Wed, 12 Jun 2013 18:07:47 +0100
+X-Google-Sender-Auth: 96vK4Co5Vcd6YFhSkcLofQHs47c
+Message-ID: <CANyK_8faU-wx54fY+4EZdc1rLP-TSmwuuQc6660+guMVXzqWkQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,88 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 16:09:09 -0000
-X-Groupsio-MsgNum: 45054
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Bi+HF1AHjw0mn3zx"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 12 Jun 2013 17:08:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Bi+HF1AHjw0mn3zx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11 June 2013 17:04, Martin Jansa <martin.jansa@gmail.com> wrote:
+> common:
+>   meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb, do_compile
 
-On Wed, Jun 12, 2013 at 04:08:32PM +0200, Martin Jansa wrote:
-> On Wed, Jun 12, 2013 at 11:55:05PM +1000, Jonathan Liu wrote:
-> > The llvm-config script doesn't get placed in the target sysroot
-> > crossscripts directory otherwise.
-> >=20
-> > Signed-off-by: Jonathan Liu <net147@gmail.com>
-> > ---
-> >  meta-oe/recipes-core/llvm/llvm-common.bb | 5 ++++-
-> >  1 file changed, 4 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes=
--core/llvm/llvm-common.bb
-> > index 612fd34..192919e 100644
-> > --- a/meta-oe/recipes-core/llvm/llvm-common.bb
-> > +++ b/meta-oe/recipes-core/llvm/llvm-common.bb
-> > @@ -6,7 +6,10 @@ LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=
-=3D3f40d7994397109285ec7b81fdeb3
-> > =20
-> >  SRC_URI =3D "file://llvm-config"
-> > =20
-> > -do_install() {
-> > +ALLOW_EMPTY_${PN} =3D "1"
-> > +SYSROOT_PREPROCESS_FUNCS_append_class-target =3D " llvm_common_sysroot=
-_preprocess"
-> > +
-> > +llvm_common_sysroot_preprocess() {
-> >      install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-> >      install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_=
-crossscripts}/
-> >  }
->=20
-> There is an issue with llvm-config without version when multiple
-> versions of llvm are built:
->=20
-> WARNING: The recipe llvm2.8 is trying to install files into a shared
-> area when those files already exist. Those files and their manifest
-> location are:
->    /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuar=
-m/usr/bin/crossscripts/llvm-config
->    Matched in manifest-qemuarm-llvm3.2
-> manifest-qemuarm-llvm2.9
-> manifest-qemuarm-llvm-common
-> Please verify which package should provide the above files.
->=20
-> Shouldn't we stage llvm-common only once and only from llvm-common
-> recipe? Not caused by this change, but
-> http://patchwork.openembedded.org/patch/50959/
->=20
-> Other recipes can stage llvm-commonVER.
+I've got patches to pull this up to version 0.8.1 and then fix the
+compile error. A patch to fix the error has also been submitted
+upstream. Building for qemuarm, beagleboard and raspberrypi now (my
+main 3 test platforms) and will submit patches to openembedded-devel
+once it's confirmed to build.
 
-I've merged other llvm changes except this one and similar for
-llvm.inc. I'm not using llvm on target (except llvmpipe), but shouldn't
-we keep llvm-config in do_install? To install llvm-configVER by llvm
-package in runtime as well as to bindir_crossscripts by
-llvm_common_sysroot_preprocess? (assuming that paths returned by
-llvm-configVER are correct for target - not pointing to sysroot).
+--
+Paul Barker
 
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Bi+HF1AHjw0mn3zx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlG4nTsACgkQN1Ujt2V2gBzRwwCdGEabWcwZGqUbewmcjUOKYYgh
-ftYAn1HkZBM+0Clgzznih8LKd6a5vnf4
-=2lc8
------END PGP SIGNATURE-----
-
---Bi+HF1AHjw0mn3zx--
