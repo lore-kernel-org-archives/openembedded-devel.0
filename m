@@ -1,35 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id C291A6AA66
+Received: from mail-pb0-f41.google.com (mail-pb0-f41.google.com
+	[209.85.160.41])
+	by mail.openembedded.org (Postfix) with ESMTP id AEAF16A990
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 23:18:25 +0000 (UTC)
-Received: by mail-pa0-f50.google.com with SMTP id fb1so5966787pad.9
+	Wed, 12 Jun 2013 07:08:27 +0000 (UTC)
+Received: by mail-pb0-f41.google.com with SMTP id rp16so5900326pbb.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jun 2013 16:18:26 -0700 (PDT)
+	Wed, 12 Jun 2013 00:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=0Z7VMWvK5ZTMiVvnPN5AN3n/bUYJtn0BMVBh+5i3qw0=;
-	b=xp2yOpVRQqSrm7UiSbe0OxvUaOPqJdhwgKqb2ZiQcIhTn/ybte6TqA+ejkb8+rgzow
-	e682MV5s7iiSIW/OJOx/5t+QvnUeBaps4k4FP2Ri6rajqHcr/sqp4U/fd+A9quN/rPPZ
-	rSsKdSZPfgVQjBhdIYXeU31GxojOKKomQOjVhsZ3NP6S8QfPVTazeAnadZqbGrt4voM6
-	IB3pOqR5ruwxUdV8w02sgVgMMej6fD7OoxqkccGVJHyrn10ql0LsGPAhb7A4YSqHrqQh
-	DdGYPfj8V0UzDLykd3cgLYRnN9wNTWGpblBWx6xWVpAwHCx4s39WyDsIIwjnM7aS4r4A
-	ePHg==
-X-Received: by 10.68.11.232 with SMTP id t8mr16783424pbb.128.1370992706600;
-	Tue, 11 Jun 2013 16:18:26 -0700 (PDT)
+	bh=RMo63V1CgPuLKxb+eLFRvYk7U/2OBhNdJSrFdtEpgTM=;
+	b=ZyRc9fGY4sjcwdKZpRrrTCFASa/WqFBeMYQSrNx5o34ILu5v7f0lccurO42l67Sqmt
+	xDSEhsoo9fnvoe6/C710s8fTWUIxB/6TiAG4f1FZnjBc+5UY+SJ8C9+Z7fPOsXxekt2a
+	pr0+qSkhOQiCydz/Sj4WpZovuvQaIJJyC0gwlqUx28H+axofTKQRCZnbMwi3vaxjyGrq
+	hnabp+bvQt6QlA09tADBM3GjTeM4ZcLHjOTHZ68Wd2Vi6ox/sbcS2c5r3ACCiB5nZVrl
+	L+25sxSbsHNUS4kmybG6PIDUHxyR53/lwW9LxClP+mIYYet5FMs9FNuviuUy2sVmBRgc
+	zMMw==
+X-Received: by 10.66.252.67 with SMTP id zq3mr22848999pac.186.1371020908435;
+	Wed, 12 Jun 2013 00:08:28 -0700 (PDT)
 Received: from isis.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id
-	lq4sm21946273pab.19.2013.06.11.16.18.25 for <multiple recipients>
+	pm7sm18003767pbb.31.2013.06.12.00.08.27 for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 11 Jun 2013 16:18:25 -0700 (PDT)
+	Wed, 12 Jun 2013 00:08:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jun 2013 16:16:04 -0700
-Message-Id: <1370992564-19617-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 12 Jun 2013 00:06:12 -0700
+Message-Id: <1371020772-20936-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH] gnome-keyring: Fix build error due to missing asn1 prototypes
+Subject: [meta-gnome][PATCH] gnome-session: Fix build on 64bit targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,101 +43,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jun 2013 23:18:25 -0000
+X-List-Received-Date: Wed, 12 Jun 2013 07:08:27 -0000
 
-This fixes the errors that started to pop up recently
-while building gnome-keyring as part of gnome images
-The error is decribed in patch header
+use more portable G_GINT64_FORMAT instead of lld printf format
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gnome-keyring/gnome-keyring/egg-asn1x.patch    |   55 ++++++++++++++++++++
- .../gnome-keyring/gnome-keyring_2.32.1.bb          |    3 +-
- 2 files changed, 57 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+ .../gnome-session/use_G_GINT64_FORMAT.patch        |   61 ++++++++++++++++++++
+ .../gnome-session/gnome-session_2.32.1.bb          |    2 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-session/gnome-session/use_G_GINT64_FORMAT.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session/use_G_GINT64_FORMAT.patch b/meta-gnome/recipes-gnome/gnome-session/gnome-session/use_G_GINT64_FORMAT.patch
 new file mode 100644
-index 0000000..ad8a40c
+index 0000000..b09f8d2
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
-@@ -0,0 +1,55 @@
-+Fixed build error with gcc 4.8
++++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session/use_G_GINT64_FORMAT.patch
+@@ -0,0 +1,61 @@
++This patch fixes the build errors when building gnome-session for 64bit target using gcc 4.8
 +
-+Errors like below
++| gs-idle-monitor.c: In function 'handle_alarm_notify_event':
++| gs-idle-monitor.c:196:9: error: format '%lld' expects argument of type 'long long int', but argument 5 has type 'gint64' [-Werror=format=]
++|          g_debug ("Watch %d fired, idle time = %lld",
++|          ^
++| gs-idle-monitor.c: In function '_xsync_alarm_set':
++| gs-idle-monitor.c:453:17: error: format '%lld' expects argument of type 'long long int', but argument 4 has type 'gint64' [-Werror=format=]
++|                  g_debug ("GSIdleMonitor: updating alarm for positive transition wait=%lld",
++|                  ^
++| gs-idle-monitor.c:457:17: error: format '%lld' expects argument of type 'long long int', but argument 4 has type 'gint64' [-Werror=format=]
++|                  g_debug ("GSIdleMonitor: creating new alarm for positive transition wait=%lld",
++|                  ^
++| gs-idle-monitor.c:464:17: error: format '%lld' expects argument of type 'long long int', but argument 4 has type 'gint64' [-Werror=format=]
++|                  g_debug ("GSIdleMonitor: updating alarm for negative transition wait=%lld",
++|                  ^
++| gs-idle-monitor.c:468:17: error: format '%lld' expects argument of type 'long long int', but argument 4 has type 'gint64' [-Werror=format=]
 +
-+egg-asn1x.c: In function 'anode_encode_build':
-+egg-asn1x.c:1280:7: warning: variable 'type' set but not used [-Wunused-but-set-variable]
-+egg-asn1x.c: In function 'traverse_and_prepare':
-+egg-asn1x.c:3354:3: warning: passing argument 1 of 'egg_asn1x_create' from incompatible pointer type [enabled by default]
-+In file included from egg-asn1x.c:50:0:
-+egg-asn1x.h:38:8: note: expected 'const struct static_struct_asn *' but argument is of type 'const struct asn1_static_node *'
-+egg-asn1x.c: At top level:
-+egg-asn1x.c:3509:1: error: conflicting types for 'egg_asn1x_create'
-+In file included from egg-asn1x.c:50:0:
-+egg-asn1x.h:38:8: note: previous declaration of 'egg_asn1x_create' was here
-+egg-asn1x.c:3572:1: error: conflicting types for 'egg_asn1x_create_quark'
-+In file included from egg-asn1x.c:50:0:
-+egg-asn1x.h:41:8: note: previous declaration of 'egg_asn1x_create_quark' was here
-+egg-asn1x.c:3579:1: error: conflicting types for 'egg_asn1x_create_and_decode'
-+In file included from egg-asn1x.c:50:0:
-+egg-asn1x.h:44:8: note: previous declaration of 'egg_asn1x_create_and_decode' was here
-+make[4]: *** [libegg_la-egg-asn1x.lo] Error 1
-+
++Upstream-Status: Unknown
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Pending
-+Index: gnome-keyring-2.32.1/egg/egg-asn1x.h
++Index: gnome-session-2.32.1/gnome-session/gs-idle-monitor.c
 +===================================================================
-+--- gnome-keyring-2.32.1.orig/egg/egg-asn1x.h	2010-10-18 19:11:38.000000000 -0700
-++++ gnome-keyring-2.32.1/egg/egg-asn1x.h	2013-06-11 15:15:00.675399263 -0700
-+@@ -25,6 +25,7 @@
-+ #define EGG_ASN1X_H_
++--- gnome-session-2.32.1.orig/gnome-session/gs-idle-monitor.c	2010-11-17 03:17:04.000000000 -0800
+++++ gnome-session-2.32.1/gnome-session/gs-idle-monitor.c	2013-06-11 23:33:12.239960082 -0700
++@@ -193,7 +193,7 @@
++                 return;
++         }
 + 
-+ #include <glib.h>
-++#include <libtasn1.h>
++-        g_debug ("Watch %d fired, idle time = %lld",
+++        g_debug ("Watch %d fired, idle time = %" G_GINT64_FORMAT "",
++                  watch->id,
++                  _xsyncvalue_to_int64 (alarm_event->counter_value));
 + 
-+ #ifndef HAVE_EGG_ALLOCATOR
-+ typedef void* (*EggAllocator) (void* p, gsize);
-+@@ -35,13 +36,13 @@
++@@ -450,22 +450,22 @@
 + 
-+ struct static_struct_asn;
++         attr.trigger.test_type = XSyncPositiveTransition;
++         if (watch->xalarm_positive != None) {
++-                g_debug ("GSIdleMonitor: updating alarm for positive transition wait=%lld",
+++                g_debug ("GSIdleMonitor: updating alarm for positive transition wait=%" G_GINT64_FORMAT "",
++                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
++                 XSyncChangeAlarm (GDK_DISPLAY (), watch->xalarm_positive, flags, &attr);
++         } else {
++-                g_debug ("GSIdleMonitor: creating new alarm for positive transition wait=%lld",
+++                g_debug ("GSIdleMonitor: creating new alarm for positive transition wait=%" G_GINT64_FORMAT "",
++                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
++                 watch->xalarm_positive = XSyncCreateAlarm (GDK_DISPLAY (), flags, &attr);
++         }
 + 
-+-GNode*              egg_asn1x_create                 (const struct static_struct_asn *defs,
-++GNode*              egg_asn1x_create                 (const ASN1_ARRAY_TYPE *defs,
-+                                                       const gchar *type);
-+ 
-+-GNode*              egg_asn1x_create_quark           (const struct static_struct_asn *defs,
-++GNode*              egg_asn1x_create_quark           (const ASN1_ARRAY_TYPE *defs,
-+                                                       GQuark type);
-+ 
-+-GNode*              egg_asn1x_create_and_decode      (const struct static_struct_asn *defs,
-++GNode*              egg_asn1x_create_and_decode      (const ASN1_ARRAY_TYPE *defs,
-+                                                       const gchar *type,
-+                                                       gconstpointer data,
-+                                                       gsize n_data);
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-index 72f2722..0d0f171 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-@@ -15,6 +15,8 @@ PR = "r12"
++         attr.trigger.test_type = XSyncNegativeTransition;
++         if (watch->xalarm_negative != None) {
++-                g_debug ("GSIdleMonitor: updating alarm for negative transition wait=%lld",
+++                g_debug ("GSIdleMonitor: updating alarm for negative transition wait=%" G_GINT64_FORMAT "",
++                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
++                 XSyncChangeAlarm (GDK_DISPLAY (), watch->xalarm_negative, flags, &attr);
++         } else {
++-                g_debug ("GSIdleMonitor: creating new alarm for negative transition wait=%lld",
+++                g_debug ("GSIdleMonitor: creating new alarm for negative transition wait=%" G_GINT64_FORMAT "",
++                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
++                 watch->xalarm_negative = XSyncCreateAlarm (GDK_DISPLAY (), flags, &attr);
++         }
+diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
+index 93b0284..73f1ad5 100644
+--- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
+@@ -9,6 +9,8 @@ DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native
  
- inherit autotools gnome gtk-doc pkgconfig gsettings
+ inherit gnome
  
-+SRC_URI += "file://egg-asn1x.patch"
++SRC_URI += "file://use_G_GINT64_FORMAT.patch"
 +
- DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
+ SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
+ SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
  
-@@ -24,7 +26,6 @@ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
- SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
- 
- FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
--                
- 
- FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
-                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
 -- 
 1.7.9.5
 
