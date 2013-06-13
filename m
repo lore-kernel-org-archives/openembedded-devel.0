@@ -1,44 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id C1BA060667;
-	Wed, 12 Jun 2013 22:02:45 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id bi5so7327997pad.4
-	for <multiple recipients>; Wed, 12 Jun 2013 15:02:46 -0700 (PDT)
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 045BA6A8B3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Jun 2013 04:00:11 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id y14so7965287pdi.30
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Jun 2013 21:00:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=kuVyGUxC+3dii5BDTi4MQcweOB0AKgTvYfjW4rV4eB0=;
-	b=qTNZV+8J2yxlwPTM4kP3L9xztNcUG5cWbstTNKbp81G3pe3vz63Kf1nHnhYarsFein
-	1IYGjvX5cAgcPoDGQfIrVssggreWWvbRQwp5Te6Ty9UcboM7HlPqLK5/m4Srgo/7IFNw
-	Ino4BbcuJPgZjD2Mqok4+cmMbfLl4QpLj0uepj2ksXFOHmkIBkqDkRzWwnEsySTwQDda
-	1V/Uc0e26rTeG5avHkyaQKPhRgTBjuKxpQBLztWFmo0EhUXgvgEUnTHcnYUi+WL9K25i
-	x7MiWdaygzlLVfhxz/3chx1iZl/d1pOoydTf8PzFFaf9LZXRwyzrEkD/IO0fq0BgU8gP
-	EEoQ==
-X-Received: by 10.69.3.65 with SMTP id bu1mr21789331pbd.107.1371074566725;
-	Wed, 12 Jun 2013 15:02:46 -0700 (PDT)
-Received: from sa-nc-common3-188.static.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPSA id vv6sm26400850pab.6.2013.06.12.15.02.44
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Jun 2013 15:02:45 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=NaN6rMUygUfrnqzyLdLAeYYJvmkiwk/+XrpZCG1FHUQ=;
+	b=dO29zkN+kwBUmrk+6gwaXqZqwWX1egtM/yDbQUQ//4F3c3/ywVkxcQpYEVhUsvx3a7
+	zEKPAC0BINpXx3FDR91rfXe/UZzBSb9LP4LnlO/52E8At2cjTphTIrEkH87F3MEBtDzF
+	iuyJJEeo1QGhWTEYX+HmB+8Y4d18oHly2UxlNb/LXD4OSL9adV+Eyww/+OBg2frElz6t
+	l2Tfi/QBB4ZpsUZlaeF2fd7J12Tw/UNagGU0MV342uz28JWuNPp/zXrfy6kFAaA3ULtr
+	5FW3BKY5Q3LhzNdA8rKVIuPx7Z12ZXWGm8OExiwZUBYIM/W5+iMvxNSeXpHDFt4xEvpF
+	K4sQ==
+X-Received: by 10.66.231.103 with SMTP id tf7mr928404pac.154.1371096013070;
+	Wed, 12 Jun 2013 21:00:13 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	eq5sm21590254pbc.15.2013.06.12.21.00.11 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 12 Jun 2013 21:00:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130611160434.GI3233@jama>
-Date: Wed, 12 Jun 2013 15:02:46 -0700
-Message-Id: <CD8712FB-DAEB-4A44-A450-5CE8C1398BF1@gmail.com>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1508)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Jun 2013 20:57:55 -0700
+Message-Id: <1371095875-23485-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] gypsy: Fix build with newer glib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,232 +43,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 22:02:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Jun 2013 04:00:12 -0000
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...g_type_init-is-deprecated-for-glib-2.35.0.patch |  114 ++++++++++++++++++++
+ meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      |    4 +-
+ 2 files changed, 117 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-navigation/gypsy/files/0001-g_type_init-is-deprecated-for-glib-2.35.0.patch
 
-On Jun 11, 2013, at 9:04 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-
-> On Mon, Jun 03, 2013 at 05:10:08PM +0200, Martin Jansa wrote:
->> On Mon, May 20, 2013 at 03:06:35PM +0200, Martin Jansa wrote:
->>> Couple of issues from last email were fixed, so here is updated =
-status:
->>>=20
->>> qemuarm Summary: 14 tasks failed:
->>> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130520_090009.log
->>> qemux86 Summary: 19 tasks failed:
->>> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130519_170509.log
->>> qemux86-64 Summary: 20 tasks failed:
->>> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130520_005747.log
->>=20
->> Hi,
->>=20
->> updated status, still building with gcc-4.8
->> shr-version issue already fixed
->> llvm2.9 also fixed
->> so if we don't count these 3 failures it's a bit better than last =
-status
->>=20
->> qemuarm Summary: 15 tasks failed:
->> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130601_225651.log
->>=20
->> qemux86 Summary: 18 tasks failed:
->> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130603_011743.log/
->>=20
->> qemux86-64: Summary: 21 tasks failed:
->> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130602_103752.log
->=20
-> There weren't many (any) changes merged to meta-oe last week, I hope =
-to
-> get better builds now (started few minutes ago).
->=20
-> qemuarm Summary: 14 tasks failed:
-> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130610_065148.log/
->=20
-> qemux86 Summary: 17 tasks failed:
-> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130608_071258.log/
->=20
-> qemux86-64 Summary: 18 tasks failed:
-> =
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20=
-130609_081044.log/
->=20
-> common:
->  meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb, =
-do_package
->  =
-meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.3=
-2.1.bb, do_compile
->  openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.bb, =
-do_package
->  =
-meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb,=
- do_compile
->  meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, =
-do_compile
->  meta-openembedded/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb, =
-do_compile
->  meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb, =
-do_compile
->  meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.5.8.bb, =
-do_configure
->  =
-meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_=
-0.7.2.bb, do_compile
->=20
-> qemux86 common:
->  meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, =
-do_configure
->  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
->  =
-openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.21.=
-6.bb, do_compile
->=20
-> qemuarm:
->  meta-openembedded/meta-oe/recipes-support/libunwind/libunwind_1.1.bb, =
-do_compile
->  openembedded-core/meta/recipes-graphics/mesa/mesa-demos_8.1.0.bb, =
-do_compile
->  =
-meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb, =
-do_compile
->  openembedded-core/meta/recipes-devtools/qemu/qemu_1.4.1.bb, =
-do_compile
->  =
-meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, =
-do_compile
->=20
-> qemux86:
->  openembedded-core/meta/recipes-gnome/librsvg/librsvg_2.32.1.bb, =
-do_configure
->  openembedded-core/meta/recipes-devtools/cmake/cmake-native_2.8.11.bb, =
-do_configure
->  =
-meta-openembedded/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb, =
-do_configure
->  openembedded-core/meta/recipes-graphics/mesa/mesa-demos_8.1.0.bb, =
-do_compile
->  =
-meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.=
-11.14.bb, do_compile
->=20
-> qemux86-64
->  meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, =
-do_compile
->  =
-meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobile=
-device_1.1.4.bb, do_configure
->  meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, =
-do_compile
->  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
->  =
-meta-openembedded/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.3=
-2.1.bb, do_compile
-
-yesterday I have send couple of patches that should fix those gnome =
-related failures.
-
-
->  =
-meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb, =
-do_compile
->  =
-meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, =
-do_compile
->  =
-openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-intel_2.21.=
-6.bb, do_compile
->=20
-
-
-
-> And the list of QA issues:
-> samba-3.6.8: Fixup Perms: Unable to correct directory link, target =
-already exists: /var/run -> /run
-> samba-3.6.8: samba: Files/directories were installed but not shipped
->  /run
->  /run/lock
-> base-files-3.0.14: Fixup Perms: Unable to correct directory link, =
-target already exists: /var/log -> /var/volatile/log
-> base-files-3.0.14: Fixup Perms: Unable to correct directory link, =
-target already exists: /var/run -> /run
-> base-files-3.0.14: Fixup Perms: Unable to correct directory link, =
-target already exists: /var/tmp -> /var/volatile/tmp
-> usbmuxd-git: usbmuxd: Files/directories were installed but not shipped
->  /usr/lib64
->  /usr/lib64/libusbmuxd.so
->  /usr/lib64/libusbmuxd.so.1.0.8
->  /usr/lib64/libusbmuxd.so.2
->  /usr/lib64/pkgconfig
->  /usr/lib64/.debug
->  /usr/lib64/pkgconfig/libusbmuxd.pc
->  /usr/lib64/.debug/libusbmuxd.so.1.0.8
-> imagemagick-6.8.5: imagemagick: Files/directories were installed but =
-not shipped
->  /usr/lib/ImageMagick-6.8.5
->  /usr/lib/ImageMagick-6.8.5/config-Q16
->  /usr/lib/ImageMagick-6.8.5/config-Q16/configure.xml
->  /usr/share/ImageMagick-6
->  /usr/share/ImageMagick-6/locale.xml
->  /usr/share/ImageMagick-6/francais.xml
->  /usr/share/ImageMagick-6/english.xml
-> openldap-2.4.23: openldap: Files/directories were installed but not =
-shipped
->  /run
-> networkmanager-0.9.8.0: networkmanager: Files/directories were =
-installed but not shipped
->  /run
->  /run/NetworkManager
-> hiawatha-9.1: hiawatha: Files/directories were installed but not =
-shipped
->  /run
-> oscam-1.10+7974: File '/usr/bin/oscam' from oscam was already =
-stripped, this will prevent future debugging!
-> cherokee-1.2.98: cherokee: Files/directories were installed but not =
-shipped
->  /run
-> gdm-2.32.2: gdm: Files/directories were installed but not shipped
->  /run
->  /run/gdm
->  /run/gdm/greeter
-> nostromo-1.9.5: nostromo: Files/directories were installed but not =
-shipped
->  /run
->  /run/nostromo
-> collectd-5.2.2: collectd: Files/directories were installed but not =
-shipped
->  /run
-> lmbench-3.0-a9: lmbench: Files/directories were installed but not =
-shipped
->  /run
->  /run/lmbench
-> android-initscripts-1.0: android-initscripts: Files/directories were =
-installed but not shipped
->  /android_finish
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+diff --git a/meta-oe/recipes-navigation/gypsy/files/0001-g_type_init-is-deprecated-for-glib-2.35.0.patch b/meta-oe/recipes-navigation/gypsy/files/0001-g_type_init-is-deprecated-for-glib-2.35.0.patch
+new file mode 100644
+index 0000000..063bea6
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gypsy/files/0001-g_type_init-is-deprecated-for-glib-2.35.0.patch
+@@ -0,0 +1,114 @@
++From 5b859b6e7c82f49d967c25398a8e75b61af9bcc0 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 12 Jun 2013 20:58:51 -0700
++Subject: [PATCH] g_type_init() is deprecated for glib >= 2.35.0
++
++Call it for old versions.
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Upstream-Status: Pending
++---
++ examples/list-known-gps-devices.c |    4 ++--
++ examples/simple-gps-dbus.c        |    3 ++-
++ examples/simple-gps-gypsy.c       |    4 ++--
++ examples/simple-gps-satellites.c  |    4 ++--
++ gypsy/gypsy-marshal.c             |    2 +-
++ src/main.c                        |    4 ++--
++ 6 files changed, 11 insertions(+), 10 deletions(-)
++
++diff --git a/examples/list-known-gps-devices.c b/examples/list-known-gps-devices.c
++index c7c4059..0a8b04b 100644
++--- a/examples/list-known-gps-devices.c
+++++ b/examples/list-known-gps-devices.c
++@@ -20,9 +20,9 @@ main (int argc,
++     GError *error = NULL;
++     GPtrArray *known_devices;
++     int i;
++-
+++#if !GLIB_CHECK_VERSION(2,35,0)
++     g_type_init ();
++-
+++#endif
++     discovery = gypsy_discovery_new ();
++     known_devices = gypsy_discovery_list_devices (discovery, &error);
++ 
++diff --git a/examples/simple-gps-dbus.c b/examples/simple-gps-dbus.c
++index f7044e6..76b18aa 100644
++--- a/examples/simple-gps-dbus.c
+++++ b/examples/simple-gps-dbus.c
++@@ -121,8 +121,9 @@ main (int    argc,
++ 	DBusConnection *conn;
++ 	DBusError error;
++ 	GMainLoop *mainloop;
++-
+++#if !GLIB_CHECK_VERSION(2,35,0)
++ 	g_type_init ();
+++#endif
++ 	conn = get_connection ();
++ 
++ 	dbus_error_init (&error);
++diff --git a/examples/simple-gps-gypsy.c b/examples/simple-gps-gypsy.c
++index 0b6b7a6..86033d9 100644
++--- a/examples/simple-gps-gypsy.c
+++++ b/examples/simple-gps-gypsy.c
++@@ -67,9 +67,9 @@ main (int    argc,
++ 		g_print ("Usage: %s device\n", argv[0]);
++ 		return 0;
++ 	}
++-
+++#if !GLIB_CHECK_VERSION(2,35,0) 
++ 	g_type_init ();
++-
+++#endif
++ 	control = gypsy_control_get_default ();
++ 	path = gypsy_control_create (control, argv[1], &error);
++ 	if (path == NULL) {
++diff --git a/examples/simple-gps-satellites.c b/examples/simple-gps-satellites.c
++index 140c98f..9a3f95a 100644
++--- a/examples/simple-gps-satellites.c
+++++ b/examples/simple-gps-satellites.c
++@@ -42,9 +42,9 @@ main (int    argc,
++ 		g_print ("Usage: %s device\n", argv[0]);
++ 		return 0;
++ 	}
++-
+++#if !GLIB_CHECK_VERSION(2,35,0)
++ 	g_type_init ();
++-
+++#endif
++ 	control = gypsy_control_get_default ();
++ 	path = gypsy_control_create (control, argv[1], &error);
++ 	if (path == NULL) {
++diff --git a/gypsy/gypsy-marshal.c b/gypsy/gypsy-marshal.c
++index 6964644..9ac0095 100644
++--- a/gypsy/gypsy-marshal.c
+++++ b/gypsy/gypsy-marshal.c
++@@ -5,7 +5,7 @@
++ 
++ #ifdef G_ENABLE_DEBUG
++ #define g_marshal_value_peek_boolean(v)  g_value_get_boolean (v)
++-#define g_marshal_value_peek_char(v)     g_value_get_char (v)
+++#define g_marshal_value_peek_char(v)     g_value_get_schar (v)
++ #define g_marshal_value_peek_uchar(v)    g_value_get_uchar (v)
++ #define g_marshal_value_peek_int(v)      g_value_get_int (v)
++ #define g_marshal_value_peek_uint(v)     g_value_get_uint (v)
++diff --git a/src/main.c b/src/main.c
++index 3e8a794..ec980e5 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -187,9 +187,9 @@ main (int    argc,
++ 	g_option_context_free (context);
++ 
++ 	umask (022);
++-
+++#if !GLIB_CHECK_VERSION(2,35,0)
++ 	g_type_init ();
++-
+++#endif
++ 	mainloop = g_main_loop_new (NULL, FALSE);
++ 
++ 	conn = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+index 51207c9..564d3d9 100644
+--- a/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
++++ b/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb
+@@ -13,7 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+ SECTION = "x11"
+ DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
+ 
+-SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
++SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz \
++           file://0001-g_type_init-is-deprecated-for-glib-2.35.0.patch \
++          "
+ PR = "r1"
+ 
+ inherit autotools pkgconfig
+-- 
+1.7.9.5
 
 
