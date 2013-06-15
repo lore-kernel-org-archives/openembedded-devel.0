@@ -1,39 +1,21 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 89C8F6AB83
+Return-Path: <rich@noir.com>
+Received: from sendai.noir.com (m209-5.dsl.rawbw.com [198.144.209.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D9E86AA18
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2013 00:19:29 +0000 (UTC)
-Received: by mail-pd0-f181.google.com with SMTP id 14so1040622pdj.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jun 2013 17:19:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=szZMHwktNJuYF6cq/MrmP7sCh8QCZ2r4uQdRxPPvotc=;
-	b=UbBsRjMuNE2Ge9+ymNmG5g0sT6SrJ4t74mpyg1UDMM5AwX1R2iJZqqOcCguCqv4J4M
-	HAxZXxUy5DOZGM6g0jCIRKWgxxtJ8M07x2HqxII7f8qIFGfZPkLlhTriHphwCZJr96EV
-	lU54hcuBIFmfS/vHt4DKpgK6adcYwSmSQPQ19pe5kkXxhTu2vxoXa7dityICAzuybajB
-	0x4SD/nSbxy0NUiCLls6jI+xXusbh9dgFjwA9fsAnVoPA2YWmRqav8n5zRAfl2bPVdH1
-	Mp9Q/KVaSrlAVqTYroEkUgt4f3A0OV0e8vfMQjHhJb8aygD/l7wyiFk+314ZnZvS5RWf
-	9fgA==
-X-Received: by 10.68.245.170 with SMTP id xp10mr4642089pbc.41.1371255570904;
-	Fri, 14 Jun 2013 17:19:30 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id xd2sm4193117pac.15.2013.06.14.17.19.29
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 14 Jun 2013 17:19:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Jun 2013 17:17:09 -0700
-Message-Id: <1371255429-32747-3-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1371255429-32747-1-git-send-email-raj.khem@gmail.com>
-References: <1371255429-32747-1-git-send-email-raj.khem@gmail.com>
+	Sat, 15 Jun 2013 01:10:06 +0000 (UTC)
+Received: from ono.noir.com (ono.noir.com [192.168.1.11])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by sendai.noir.com (Postfix) with ESMTPS id 409ADE0888;
+	Fri, 14 Jun 2013 18:10:06 -0700 (PDT)
+Message-ID: <51BBBEEE.5080705@noir.com>
+Date: Fri, 14 Jun 2013 18:10:06 -0700
+From: "K. Richard Pixley" <rich@noir.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:23.0) Gecko/20100101 Thunderbird/23.0a2
 MIME-Version: 1.0
-Subject: [meta-browser][PATCH 3/3] nspr: Match the bbappend to OE-Core
+To: openembedded-devel@lists.openembedded.org
+Subject: pseudo fails to compile on rhel-4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,35 +29,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jun 2013 00:19:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 15 Jun 2013 01:10:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Remove PRINC not needed with PR server
+I know rhel-4.7 is ancient, but the code is broken.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-CC:Eric Bénard <eric@eukrea.com>
-CC:Denis Carikli <denis@eukrea.com>
-CC:Otavio Salvador <otavio@ossystems.com.br>
----
- .../{nspr_4.9.6.bbappend => nspr_4.10.bbappend}    |    2 --
- 1 file changed, 2 deletions(-)
- rename recipes-support/nspr/{nspr_4.9.6.bbappend => nspr_4.10.bbappend} (93%)
+Looks like the call and the decl don't match.  Droping the last param on 
+the call gets me built.
 
-diff --git a/recipes-support/nspr/nspr_4.9.6.bbappend b/recipes-support/nspr/nspr_4.10.bbappend
-similarity index 93%
-rename from recipes-support/nspr/nspr_4.9.6.bbappend
-rename to recipes-support/nspr/nspr_4.10.bbappend
-index 3153bf3..3296e91 100644
---- a/recipes-support/nspr/nspr_4.9.6.bbappend
-+++ b/recipes-support/nspr/nspr_4.10.bbappend
-@@ -1,5 +1,3 @@
--PRINC := "${@int(PRINC) + 1}"
--
- # nspr-native is needed by nss
- BBCLASSEXTEND = "native"
- 
--- 
-1.7.9.5
+--rich
+
+cc -fno-strict-aliasing  -pipe -std=gnu99 -Wall -W -Wextra -fPIC 
+-D_LARGEFILE64_SOURCE -D_ATFILE_SOURCE 
+-DPSEUDO_PREFIX='"/home/ericpix/gnu/rhel-4.7"' -DPSEUDO_SUFFIX='""' 
+-DPSEUDO_BINDIR='"bin"' -DPSEUDO_LIBDIR='"lib"' 
+-DPSEUDO_LOCALSTATEDIR='"var/pseudo"' -DPSEUDO_VERSION='"1.5.1"' 
+-DUSE_MEMORY_DB  -O2 -g -L/home/ericpix/gnu/rhel-4.7/lib 
+-I/home/ericpix/gnu/rhel-4.7/include 
+-Wl,-R/home/ericpix/gnu/rhel-4.7/lib -D_GNU_SOURCE -c -o 
+pseudo_wrappers.o pseudo_wrappers.c
+In file included from ports/linux/oldclone/pseudo_wrappers.c:61,
+                  from port_wrappers.c:23,
+                  from pseudo_wrappers.c:255:
+ports/linux/oldclone/guts/clone.c: In function `clone':
+ports/linux/oldclone/guts/clone.c:22: error: too many arguments to function
+In file included from port_wrappers.c:23,
+                  from pseudo_wrappers.c:255:
+ports/linux/oldclone/pseudo_wrappers.c:39: warning: unused variable `tls'
+ports/linux/oldclone/pseudo_wrappers.c:40: warning: unused variable `ctid'
+pseudo_wrappers.c: At top level:
+ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'fn'
+ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 
+'child_stack'
+ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'flags'
+ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'arg'
+make: *** [pseudo_wrappers.o] Error 1
+
+real    0m0.607s
+user    0m0.366s
+sys     0m0.103s
+ericpix@lx-dev6> lsb_release -a
+LSB Version: 
+:core-3.0-ia32:core-3.0-noarch:graphics-3.0-ia32:graphics-3.0-noarch
+Distributor ID: RedHatEnterpriseAS
+Description:    Red Hat Enterprise Linux AS release 4 (Nahant Update 7)
+Release:        4
+Codename:       NahantUpdate7
+ericpix@lx-dev6> uname -a
+Linux lx-dev6 2.6.9-78.ELsmp #1 SMP Wed Jul 9 15:39:47 EDT 2008 i686 
+athlon i386 GNU/Linux
+
+diff --git a/ports/linux/oldclone/guts/clone.c 
+b/ports/linux/oldclone/guts/clone.c
+index 5240bb3..4efe4d8 100644
+--- a/ports/linux/oldclone/guts/clone.c
++++ b/ports/linux/oldclone/guts/clone.c
+@@ -19,7 +19,7 @@
+         myargs->arg = arg;
+
+         /* call the real syscall */
+-       rc = (*real_clone)(wrap_clone_child, child_stack, flags, myargs, 
+pid);
++       rc = (*real_clone)(wrap_clone_child, child_stack, flags, 
+myargs/* , pid */);
+
+         /* If we're not sharing memory, we need to free myargs in the 
+parent */
+         if (!(flags & CLONE_VM))
+
 
 
