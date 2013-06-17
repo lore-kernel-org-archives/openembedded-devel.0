@@ -1,25 +1,40 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id A22C66098F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jun 2013 12:49:16 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 15 Jun 2013 05:49:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,871,1363158000"; d="scan'208";a="353969557"
-Received: from unknown (HELO helios.localnet) ([10.252.122.9])
-	by orsmga002.jf.intel.com with ESMTP; 15 Jun 2013 05:49:16 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "K. Richard Pixley" <rich@noir.com>
-Date: Sat, 15 Jun 2013 13:49:16 +0100
-Message-ID: <6791287.nv6YeJrOrm@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.3 (Linux/3.8.0-23-generic; KDE/4.10.3; i686; ; )
-In-Reply-To: <51BBBEEE.5080705@noir.com>
-References: <51BBBEEE.5080705@noir.com>
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 712E46098F;
+	Mon, 17 Jun 2013 00:02:43 +0000 (UTC)
+Received: by mail-vc0-f182.google.com with SMTP id id13so1575803vcb.13
+	for <multiple recipients>; Sun, 16 Jun 2013 17:02:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=GZfkm6sjxsQacIRGYp8U3IQRojRSOvqOzpQ7qSIAR98=;
+	b=am7TWuOkR7+NabB4rYTQsHTeJfDbhGMgW3l2DluEI4VsFh1AMWkz7p+Ot62aEqYvRX
+	52qClBmrJJjqGMvm37Vu7blXpilehiVq2v1xerVGGpmzwe5ZLmYmJGB2qugCrpOx3FuR
+	4LmlsGiV95Lr05msEQobg3fnoahehNUilYmJnHY2idmMKoVqcHd2DPan74niRhHMKZws
+	myuT4zhesBt2/gokBWEP0ZAu3O/XNUXrb1woilgQesAvRKU3h+08BQ6aFoQcgBHat119
+	vVqDRdO7oglYwzunkjwYU1k2CUMPtdTqHYdEMnbsc0YOcKcEmKcJFq/bhCn4+59q7uaL
+	z81Q==
+X-Received: by 10.52.0.130 with SMTP id 2mr2876408vde.97.1371427363953; Sun,
+	16 Jun 2013 17:02:43 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: pseudo fails to compile on rhel-4.7
+Sender: paul.betafive@gmail.com
+Received: by 10.220.195.201 with HTTP; Sun, 16 Jun 2013 17:02:03 -0700 (PDT)
+In-Reply-To: <20130611160434.GI3233@jama>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20130415141253.GC10628@jama.dyndns-home.com>
+	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
+	<20130516075215.GA24809@jama.dyndns-home.com>
+	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
+	<20130611160434.GI3233@jama>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Mon, 17 Jun 2013 01:02:03 +0100
+X-Google-Sender-Auth: D4Px12JmMwCHVVteFD3z6N33PPI
+Message-ID: <CANyK_8dActF1_nuvK29WMdr-Kh1DONoRXB2YMXqVj89AKmEWYg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,86 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Jun 2013 12:49:16 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 17 Jun 2013 00:02:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Friday 14 June 2013 18:10:06 K. Richard Pixley wrote:
-> I know rhel-4.7 is ancient, but the code is broken.
-> 
-> Looks like the call and the decl don't match.  Droping the last param on
-> the call gets me built.
-> 
-> --rich
-> 
-> cc -fno-strict-aliasing  -pipe -std=gnu99 -Wall -W -Wextra -fPIC
-> -D_LARGEFILE64_SOURCE -D_ATFILE_SOURCE
-> -DPSEUDO_PREFIX='"/home/ericpix/gnu/rhel-4.7"' -DPSEUDO_SUFFIX='""'
-> -DPSEUDO_BINDIR='"bin"' -DPSEUDO_LIBDIR='"lib"'
-> -DPSEUDO_LOCALSTATEDIR='"var/pseudo"' -DPSEUDO_VERSION='"1.5.1"'
-> -DUSE_MEMORY_DB  -O2 -g -L/home/ericpix/gnu/rhel-4.7/lib
-> -I/home/ericpix/gnu/rhel-4.7/include
-> -Wl,-R/home/ericpix/gnu/rhel-4.7/lib -D_GNU_SOURCE -c -o
-> pseudo_wrappers.o pseudo_wrappers.c
-> In file included from ports/linux/oldclone/pseudo_wrappers.c:61,
->                   from port_wrappers.c:23,
->                   from pseudo_wrappers.c:255:
-> ports/linux/oldclone/guts/clone.c: In function `clone':
-> ports/linux/oldclone/guts/clone.c:22: error: too many arguments to function
-> In file included from port_wrappers.c:23,
->                   from pseudo_wrappers.c:255:
-> ports/linux/oldclone/pseudo_wrappers.c:39: warning: unused variable `tls'
-> ports/linux/oldclone/pseudo_wrappers.c:40: warning: unused variable `ctid'
-> pseudo_wrappers.c: At top level:
-> ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'fn'
-> ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter
-> 'child_stack'
-> ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'flags'
-> ports/linux/oldclone/pseudo_wrappers.c:2: warning: unused parameter 'arg'
-> make: *** [pseudo_wrappers.o] Error 1
-> 
-> real    0m0.607s
-> user    0m0.366s
-> sys     0m0.103s
-> ericpix@lx-dev6> lsb_release -a
-> 
-> LSB Version:
-> :core-3.0-ia32:core-3.0-noarch:graphics-3.0-ia32:graphics-3.0-noarch
-> 
-> Distributor ID: RedHatEnterpriseAS
-> Description:    Red Hat Enterprise Linux AS release 4 (Nahant Update 7)
-> Release:        4
-> Codename:       NahantUpdate7
-> ericpix@lx-dev6> uname -a
-> Linux lx-dev6 2.6.9-78.ELsmp #1 SMP Wed Jul 9 15:39:47 EDT 2008 i686
-> athlon i386 GNU/Linux
-> 
-> diff --git a/ports/linux/oldclone/guts/clone.c
-> b/ports/linux/oldclone/guts/clone.c
-> index 5240bb3..4efe4d8 100644
-> --- a/ports/linux/oldclone/guts/clone.c
-> +++ b/ports/linux/oldclone/guts/clone.c
-> @@ -19,7 +19,7 @@
->          myargs->arg = arg;
-> 
->          /* call the real syscall */
-> -       rc = (*real_clone)(wrap_clone_child, child_stack, flags, myargs,
-> pid);
-> +       rc = (*real_clone)(wrap_clone_child, child_stack, flags,
-> myargs/* , pid */);
-> 
->          /* If we're not sharing memory, we need to free myargs in the
-> parent */
->          if (!(flags & CLONE_VM))
-> 
+On 11 June 2013 17:04, Martin Jansa <martin.jansa@gmail.com> wrote:
+> There weren't many (any) changes merged to meta-oe last week, I hope to
+> get better builds now (started few minutes ago).
+>
+> common:
+>   meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb, do_package
+>   meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb, do_compile
+>   openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.bb, do_package
+>   meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb, do_compile
+>   meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_compile
+>   meta-openembedded/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb, do_compile
+>   meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb, do_compile
+>   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.5.8.bb, do_configure
+>   meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb, do_compile
+>
 
-Could you please send this patch to pseudo upstream?
+I decided to do some prodding around into these.
 
-Thanks,
-Paul
+samba: builds for me, I'm not using gcc-4.8 though
+packagekit, gypsy, omgps: Reference deprecated/removed functions in glib
+tk: tcl is version 8.6 in openembedded-core so can't build tk 8.5 anymore
 
--- 
+I'm currently playing around with upgrading packagekit to a more
+recent version, will see how I get on. I'm busy with other work at the
+minute and openembedded work is just a side project for me so it may
+take a while...
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
