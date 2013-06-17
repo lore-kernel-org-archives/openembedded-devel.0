@@ -1,40 +1,39 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E9DB660655
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CAC5608A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2013 20:35:01 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id m6so2744662wiv.2
+	Mon, 17 Jun 2013 20:35:02 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id f11so2789597wgh.15
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 17 Jun 2013 13:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=BhgHXjYEcdNdTgFOUC1mJ3yvQnxl2xvk3H5yMjrX02U=;
-	b=twwdjl14KD8lWCZPwgKHUCPsy4r3Kbrmvbl2Ipd+6GGzvePTcKIQ1QhS8HvRjF7p0f
-	iY3R+hJT1O0PymqS098HOVTG0PfLGlGtOftEN3kQuK4Epr688xMCRhAt07fKqYElXUk3
-	hJtBDrC5Y1T9PjnYOUNmmHJdEkzCruqLrDb4U94Qf4KpT1c7wAXW5tUY+t4JOIiciMKM
-	TWiqjhOOFNartW349d8cfXIN4UxM3zFqpT2KROG1KRaZ3efvPI6fdJCucMRX8fdDIz/U
-	OLhgdb0utiEJnFQnFob5V3twNCSJBHNfyFgTFHnbH/7ZudvupplapxKdI22HppeY2Njt
-	PikQ==
-X-Received: by 10.194.243.129 with SMTP id wy1mr8882471wjc.47.1371501301834;
-	Mon, 17 Jun 2013 13:35:01 -0700 (PDT)
+	bh=Wksn4YO7cLuomW8eIXtgTEDF0m3+2TKjrSIvEAXXlIg=;
+	b=EjLcpzscIAZL26lliqc+424E7RlN2b2ayLfatj/RBeekkdtXv8cTsV7QBivKwM/jfQ
+	4zh6Oy0klfvEOEshXpNi56Y19/XT0nUoOlyCUk1KWKtwtdaCexJQSOevQxdMGmF/Lv5O
+	Fygl++yo1mbwmD2UnQj4xfmFBWcF6brRvjUJ1IARTH6DOir9qVyN02cdRoEZxURRknLv
+	48i+tB+L5T0beUPfXb5yrFfFnO+T3C0QibSAj7A8DJqwkDNgK15YQuwLFIFjRTr7BSmH
+	uIFzl2ZSnKoxdCQAtDGefMSCpct2eY0G6mqBqZkC5JfBBZRlmX3vOWo+/ISzc4RsM1Dp
+	1fiw==
+X-Received: by 10.194.235.161 with SMTP id un1mr9008044wjc.6.1371501302864;
+	Mon, 17 Jun 2013 13:35:02 -0700 (PDT)
 Received: from mizar.localdomain
 	(host253-191-dynamic.56-82-r.retail.telecomitalia.it.
 	[82.56.191.253]) by mx.google.com with ESMTPSA id
-	dz8sm24600208wib.11.2013.06.17.13.35.00 for <multiple recipients>
+	dz8sm24600208wib.11.2013.06.17.13.35.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 17 Jun 2013 13:35:01 -0700 (PDT)
+	Mon, 17 Jun 2013 13:35:02 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jun 2013 22:34:46 +0200
-Message-Id: <8aac82e80f1812b8085ec0d0fc2a2aff9103d19a.1371499248.git.andrea.adami@gmail.com>
+Date: Mon, 17 Jun 2013 22:34:47 +0200
+Message-Id: <5593f9d23c6364b5c16125ec3de77eeea896c01b.1371499248.git.andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <cover.1371499248.git.andrea.adami@gmail.com>
 References: <cover.1371499248.git.andrea.adami@gmail.com>
 In-Reply-To: <cover.1371499248.git.andrea.adami@gmail.com>
 References: <cover.1371499248.git.andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH 3/9] kexecboot(-klibc): add SUMMARY, DESCRIPTION, HOMEPAGE
+Subject: [meta-initramfs][PATCH 4/9] ubi-utils-klibc: add SUMMARY and DESCRIPTION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,33 +51,20 @@ X-List-Received-Date: Mon, 17 Jun 2013 20:35:02 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb | 1 +
- meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc          | 3 +++
- 2 files changed, 4 insertions(+)
+ meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-index a158eb4..5e33182 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
-@@ -9,3 +9,4 @@ S = "${WORKDIR}/git"
- inherit klibc
- 
- require kexecboot.inc
-+SUMMARY = "kexecboot linux-as-bootloader, statically compiled against klibc"
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc b/meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc
-index b06293c..3854b9f 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc
-@@ -31,6 +31,9 @@
- #  --with-kexec-binary     look for kexec binary at path
- #                            [default="/usr/sbin/kexec"]
- ##########################
-+SUMMARY = "kexecboot linux-as-bootloader"
-+DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based on kexec."
-+HOMEPAGE = "http://kexecboot.org"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- inherit autotools
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
+index e00fc30..3039eb7 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb
+@@ -1,4 +1,5 @@
+-DESCRIPTION = "Tools for managing memory technology devices."
++SUMMARY = "UBI utils statically compiled against klibc"
++DESCRIPTION = "Small sized tools from mtd-utils for use with initramfs."
+ SECTION = "base"
+ DEPENDS = "zlib lzo e2fsprogs util-linux"
+ HOMEPAGE = "http://www.linux-mtd.infradead.org/"
 -- 
 1.8.1.5
 
