@@ -1,17 +1,20 @@
-Return-Path: <noor_ahsan@mentor.com>
-Received: from gemini.alm.mentorg.com (nat-lmt.mentorg.com [139.181.28.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 07B826A9BD
+Return-Path: <laurentiu.palcu@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 8112E60667
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2013 11:12:01 +0000 (UTC)
-Received: from pkl-ahsann-ubuntu.mgc.mentorg.com ([137.202.157.70])
-	by gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id r5HBC0oK023104; 
-	Mon, 17 Jun 2013 06:12:01 -0500
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+	Mon, 17 Jun 2013 12:25:54 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 17 Jun 2013 05:26:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,880,1363158000"; d="scan'208";a="354689981"
+Received: from lpalcu-linux.rb.intel.com ([10.237.105.165])
+	by fmsmga002.fm.intel.com with ESMTP; 17 Jun 2013 05:25:52 -0700
+From: Laurentiu Palcu <laurentiu.palcu@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jun 2013 16:11:42 +0500
-Message-Id: <1371467502-9395-1-git-send-email-noor_ahsan@mentor.com>
+Date: Mon, 17 Jun 2013 15:25:41 +0300
+Message-Id: <cover.1371471466.git.laurentiu.palcu@intel.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH V2] gvfs: Handle samba dependency based on GPLv3 license.
+Subject: [meta-oe][PATCH 0/1] xinput-calibrator: move it to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,56 +28,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2013 11:12:02 -0000
+X-List-Received-Date: Mon, 17 Jun 2013 12:25:55 -0000
 
-From: Noor <noor_ahsan@mentor.com>
+The following changes since commit ed84e64d22400595b68da4e75b48ab7ecc342aa9:
 
-* Samba is GPLv3. In GPLv3 free environment one was not able to
-  build gvfs. Add PACKAGECONFIG for samba and enable is when GPLv3
-  is not present in INCOMPATIBLE_LICENSE.
+  openssh: Rename bbappend to match new version from oe-core (2013-06-12 16:23:27 +0200)
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- meta-gnome/recipes-gnome/gvfs/gvfs.inc      |    4 +---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb |    7 ++++++-
- 2 files changed, 7 insertions(+), 4 deletions(-)
+are available in the git repository at:
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-index 0e1c69c..ba52fe7 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
-@@ -10,9 +10,7 @@ SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
- SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
- SRC_URI += "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
- 
--EXTRA_OECONF = "--with-samba-includes=${STAGING_INCDIR} \
--                --with-samba-libs=${STAGING_LIBDIR} \
--                --with-archive-includes=${STAGING_INCDIR} \
-+EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
-                 --with-archive-libs=${STAGING_LIBDIR} \
- "
- 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
-index 7f86151..5274280 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
-@@ -1,6 +1,6 @@
- require gvfs.inc
- 
--DEPENDS = "samba libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
-+DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
- # optional: obexftp libcdio libimobiledevice 
- 
- PR = "${INC_PR}.1"
-@@ -21,3 +21,8 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
- 
- RDEPENDS_${PN} = "gvfs-gdu-volume-monitor"
- RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
-+
-+PACKAGECONFIG ?= "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba', d)}"
-+
-+PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
-+                        --with-samba-libs=${STAGING_LIBDIR}, --disable-samba, samba"
+  git://git.yoctoproject.org/poky-contrib lpalcu/xinput-calibrator_meta-oe
+  http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=lpalcu/xinput-calibrator_meta-oe
+
+Laurentiu Palcu (1):
+  xinput-calibrator: move it to oe-core
+
+ .../pointercal-xinput/pointercal.xinput            |    1 -
+ .../xinput-calibrator/pointercal-xinput_0.0.bb     |   19 ---------
+ .../xinput-calibrator/xinput-calibrator.service    |   11 -----
+ .../xinput-calibrator/xinput-calibrator_git.bb     |   42 --------------------
+ 4 files changed, 73 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput/pointercal.xinput
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
+
 -- 
 1.7.9.5
 
