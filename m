@@ -1,40 +1,35 @@
 Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
-	[209.85.220.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 712E46098F;
-	Mon, 17 Jun 2013 00:02:43 +0000 (UTC)
-Received: by mail-vc0-f182.google.com with SMTP id id13so1575803vcb.13
-	for <multiple recipients>; Sun, 16 Jun 2013 17:02:44 -0700 (PDT)
+Received: from mail-ve0-f171.google.com (mail-ve0-f171.google.com
+	[209.85.128.171])
+	by mail.openembedded.org (Postfix) with ESMTP id B86CD6098F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Jun 2013 00:13:47 +0000 (UTC)
+Received: by mail-ve0-f171.google.com with SMTP id b10so1680712vea.30
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Jun 2013 17:13:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=GZfkm6sjxsQacIRGYp8U3IQRojRSOvqOzpQ7qSIAR98=;
-	b=am7TWuOkR7+NabB4rYTQsHTeJfDbhGMgW3l2DluEI4VsFh1AMWkz7p+Ot62aEqYvRX
-	52qClBmrJJjqGMvm37Vu7blXpilehiVq2v1xerVGGpmzwe5ZLmYmJGB2qugCrpOx3FuR
-	4LmlsGiV95Lr05msEQobg3fnoahehNUilYmJnHY2idmMKoVqcHd2DPan74niRhHMKZws
-	myuT4zhesBt2/gokBWEP0ZAu3O/XNUXrb1woilgQesAvRKU3h+08BQ6aFoQcgBHat119
-	vVqDRdO7oglYwzunkjwYU1k2CUMPtdTqHYdEMnbsc0YOcKcEmKcJFq/bhCn4+59q7uaL
-	z81Q==
-X-Received: by 10.52.0.130 with SMTP id 2mr2876408vde.97.1371427363953; Sun,
-	16 Jun 2013 17:02:43 -0700 (PDT)
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=CAHja7TcwXG+6Br7dfvb/HghDfLT7o0suIXqmbIUDW0=;
+	b=FWsvoRukApp4h8ZvYvKbPJQOUlOtvnb+xqqUzs3tuuqZT+J20MxaSTrX4KPkjm9iMS
+	05WKKjX+y3GyWL+bRboXKynnPtuBfMmkJ0Vg/4Bo7tU23L8pSRKDBzTCn+lri0r49SRC
+	FtlUPSI840BYC9sdMMRzhdPZINqTfamhpsnxV/E9Rp72KYUrZQucEe38vM2C/EDncGK5
+	NkRC4Kvt8SNGR2VFzanbZ+Y9jKb0fk7EhfyjUle4f+Ve0D6BYtfIwu71ezOvkgXo038I
+	rFSgxGO7XvjX/xLWPVWJaEUntzTe93wWO2NFrp8Nf28vTTSrFDC2rL08DwZr5kPX+PRd
+	mF+A==
+X-Received: by 10.58.164.101 with SMTP id yp5mr3742043veb.0.1371428028099;
+	Sun, 16 Jun 2013 17:13:48 -0700 (PDT)
 MIME-Version: 1.0
 Sender: paul.betafive@gmail.com
-Received: by 10.220.195.201 with HTTP; Sun, 16 Jun 2013 17:02:03 -0700 (PDT)
-In-Reply-To: <20130611160434.GI3233@jama>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama>
+Received: by 10.220.195.201 with HTTP; Sun, 16 Jun 2013 17:13:08 -0700 (PDT)
+In-Reply-To: <1371112052-24223-1-git-send-email-raj.khem@gmail.com>
+References: <1371112052-24223-1-git-send-email-raj.khem@gmail.com>
 From: Paul Barker <paul@paulbarker.me.uk>
-Date: Mon, 17 Jun 2013 01:02:03 +0100
-X-Google-Sender-Auth: D4Px12JmMwCHVVteFD3z6N33PPI
-Message-ID: <CANyK_8dActF1_nuvK29WMdr-Kh1DONoRXB2YMXqVj89AKmEWYg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world
+Date: Mon, 17 Jun 2013 01:13:08 +0100
+X-Google-Sender-Auth: 8d7dB-n5FHNao0jjuct1rB2AR-I
+Message-ID: <CANyK_8eaRBQTrqPoakvwkVn3Oj7Uoftgmi7_VK3nRshDDn72WA@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] packagekit: Fix build with new glib-2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,35 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2013 00:02:44 -0000
+X-List-Received-Date: Mon, 17 Jun 2013 00:13:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 11 June 2013 17:04, Martin Jansa <martin.jansa@gmail.com> wrote:
-> There weren't many (any) changes merged to meta-oe last week, I hope to
-> get better builds now (started few minutes ago).
+On 13 June 2013 09:27, Khem Raj <raj.khem@gmail.com> wrote:
+> Fixes errors like
 >
-> common:
->   meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb, do_package
->   meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb, do_compile
->   openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.bb, do_package
->   meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb, do_compile
->   meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_compile
->   meta-openembedded/meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb, do_compile
->   meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb, do_compile
->   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.5.8.bb, do_configure
->   meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.7.2.bb, do_compile
+> | pk-main.c:223: error: undefined reference to 'g_thread_supported'
+> | collect2: error: ld returned 1 exit status
+> | make[3]: *** [packagekitd] Error 1
 >
+> This version is dead upstream so this patch is local
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-I decided to do some prodding around into these.
-
-samba: builds for me, I'm not using gcc-4.8 though
-packagekit, gypsy, omgps: Reference deprecated/removed functions in glib
-tk: tcl is version 8.6 in openembedded-core so can't build tk 8.5 anymore
-
-I'm currently playing around with upgrading packagekit to a more
-recent version, will see how I get on. I'm busy with other work at the
-minute and openembedded work is just a side project for me so it may
-take a while...
+You seem to have picked up a couple of .o files by accident in this one.
 
 --
 Paul Barker
