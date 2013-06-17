@@ -1,38 +1,17 @@
-Return-Path: <Noor_Ahsan@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id CEF236A5DD
+Return-Path: <noor_ahsan@mentor.com>
+Received: from gemini.alm.mentorg.com (nat-lmt.mentorg.com [139.181.28.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 07B826A9BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jun 2013 11:11:56 +0000 (UTC)
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1UoXLo-0006qD-Hx from Noor_Ahsan@mentor.com ;
-	Mon, 17 Jun 2013 04:11:56 -0700
-Received: from SVR-IES-FEM-03.mgc.mentorg.com ([137.202.0.108]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Mon, 17 Jun 2013 04:11:56 -0700
-Received: from EU-MBX-01.mgc.mentorg.com ([169.254.1.178]) by
-	SVR-IES-FEM-03.mgc.mentorg.com ([137.202.0.108]) with mapi id
-	14.02.0247.003; Mon, 17 Jun 2013 12:11:55 +0100
-From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Thread-Topic: [oe] [meta-gnome][PATCH] gvfs: Handle samba dependency based
-	on GPLv3 license.
-Thread-Index: AQHOa0FLyTSzhXZ0LE+IyHsFhh33G5k5wGHw
-Date: Mon, 17 Jun 2013 11:11:54 +0000
-Message-ID: <365E1805BC95084CBE82381A0B869994DE4C3FDB@EU-MBX-01.mgc.mentorg.com>
-References: <1371457230-6773-1-git-send-email-noor_ahsan@mentor.com>
-	<1891782.GSdHg1ETcy@helios>
-In-Reply-To: <1891782.GSdHg1ETcy@helios>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.76]
-MIME-Version: 1.0
-X-OriginalArrivalTime: 17 Jun 2013 11:11:56.0953 (UTC)
-	FILETIME=[7AEF1090:01CE6B4B]
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH] gvfs: Handle samba dependency based on GPLv3 license.
+	Mon, 17 Jun 2013 11:12:01 +0000 (UTC)
+Received: from pkl-ahsann-ubuntu.mgc.mentorg.com ([137.202.157.70])
+	by gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id r5HBC0oK023104; 
+	Mon, 17 Jun 2013 06:12:01 -0500
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Jun 2013 16:11:42 +0500
+Message-Id: <1371467502-9395-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-gnome][PATCH V2] gvfs: Handle samba dependency based on GPLv3 license.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +25,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2013 11:11:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Jun 2013 11:12:02 -0000
 
-Thanks. I'll update it.
+From: Noor <noor_ahsan@mentor.com>
 
------Original Message-----
-From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]=20
-Sent: Monday, June 17, 2013 2:58 PM
-To: Ahsan, Noor
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-gnome][PATCH] gvfs: Handle samba dependency based o=
-n GPLv3 license.
+* Samba is GPLv3. In GPLv3 free environment one was not able to
+  build gvfs. Add PACKAGECONFIG for samba and enable is when GPLv3
+  is not present in INCOMPATIBLE_LICENSE.
 
-On Monday 17 June 2013 13:20:30 Noor, Ahsan wrote:
-> +PACKAGECONFIG =3D "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '',
-> 'samba', d)}" +
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc      |    4 +---
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb |    7 ++++++-
+ 2 files changed, 7 insertions(+), 4 deletions(-)
 
-This needs to use ?=3D or ??=3D so that it can be overridden easily.
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+index 0e1c69c..ba52fe7 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+@@ -10,9 +10,7 @@ SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
+ SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
+ SRC_URI += "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
+ 
+-EXTRA_OECONF = "--with-samba-includes=${STAGING_INCDIR} \
+-                --with-samba-libs=${STAGING_LIBDIR} \
+-                --with-archive-includes=${STAGING_INCDIR} \
++EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
+                 --with-archive-libs=${STAGING_LIBDIR} \
+ "
+ 
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
+index 7f86151..5274280 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
+@@ -1,6 +1,6 @@
+ require gvfs.inc
+ 
+-DEPENDS = "samba libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
++DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
+ # optional: obexftp libcdio libimobiledevice 
+ 
+ PR = "${INC_PR}.1"
+@@ -21,3 +21,8 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
+ 
+ RDEPENDS_${PN} = "gvfs-gdu-volume-monitor"
+ RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
++
++PACKAGECONFIG ?= "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba', d)}"
++
++PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
++                        --with-samba-libs=${STAGING_LIBDIR}, --disable-samba, samba"
+-- 
+1.7.9.5
 
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
