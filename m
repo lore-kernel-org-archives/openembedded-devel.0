@@ -1,27 +1,25 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 65898600FB;
-	Tue, 18 Jun 2013 21:00:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5IL0aVk018819
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 18 Jun 2013 14:00:36 -0700 (PDT)
-Received: from Marks-MacBook-Pro.local (172.25.36.227) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.2.342.3; Tue, 18 Jun 2013 14:00:36 -0700
-Message-ID: <51C0CA73.7090606@windriver.com>
-Date: Tue, 18 Jun 2013 16:00:35 -0500
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id CF60C601DB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jun 2013 21:13:00 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 18 Jun 2013 14:13:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,891,1363158000"; d="scan'208";a="355662711"
+Received: from unknown (HELO helios.localnet) ([10.252.122.67])
+	by fmsmga002.fm.intel.com with ESMTP; 18 Jun 2013 14:13:00 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Tue, 18 Jun 2013 22:13 +0100
+Message-ID: <1629546.H8QlHiyuGC@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.3 (Linux/3.8.0-25-generic; KDE/4.10.3; i686; ; )
+In-Reply-To: <cover.1371499248.git.andrea.adami@gmail.com>
+References: <cover.1371499248.git.andrea.adami@gmail.com>
 MIME-Version: 1.0
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	<openembedded-devel@lists.openembedded.org>, Yocto Project
-	<yocto@yoctoproject.org>
-Subject: [RFC] eglibc / glibc and option-groups being deprecated?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-initramfs][PATCH 0/9] add missing SUMMARY and DESCRIPTION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,50 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 21:00:35 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Jun 2013 21:13:00 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Recently on the eglibc mailing list there has been a discussion about removing 
-the option groups.  See: http://www.eglibc.org/archives/patches/msg01268.html
+On Monday 17 June 2013 22:34:43 Andrea Adami wrote:
+> Andrea Adami (9):
+>   initramfs-kexecboot(-klibc)-image: provide SUMMARY and DESCRIPTION
+>   kexecboot_cfg: add SUMMARY and extend DESCRIPTION
+>   kexecboot(-klibc): add SUMMARY, DESCRIPTION, HOMEPAGE
+>   ubi-utils-klibc: add SUMMARY and DESCRIPTION
+>   kexec-tools-klibc: add custom SUMMARY
+>   linux-yocto-tiny-kexecboot: add custom SUMMARY
+>   klibc(-static)-utils: add SUMMARY
+>   klcc-cross: add SUMMARY
+>   klibc: add SUMMARY
+> 
+>  meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 10
+> ++++------ .../recipes-bsp/images/initramfs-kexecboot-klibc-image.bb      |
+>  6 +++++- meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb      | 
+> 4 +++- meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb    |  1
+> + meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc             |  3 +++
+> meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb      |  1 +
+> .../recipes-devtools/klibc/klibc-static-utils_2.0.2.bb         |  1 +
+> meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.2.bb     |  1 +
+> meta-initramfs/recipes-devtools/klibc/klibc_2.0.2.bb           |  1 +
+> meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb   |  3 ++-
+> meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb |  1 +
+> .../recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bb     |  1 + 12
+> files changed, 24 insertions(+), 9 deletions(-)
 
-For folks who don't know what option-groups are, it's a patch that went into 
-eglibc a number of years ago that allows you to disable various components 
-(effectively altering the API) in order to shrink the size of glibc.
+Merged, thanks.
 
-It was created as an attempt to get into glibc the same type of configuration 
-ability that uclibc has.
+Cheers,
+Paul
 
-In OpenEmbedded Core, it is currently being used to enable the ability to shrink 
-the LibC footprint to a smaller size.  The Yocto Project's Poky-tiny 
-distribution uses it as part of the mechanism to create a smaller filesystem.
+-- 
 
-I encourage you to read the original thread, and if it affects you, please speak 
-up.  The following is my attempt at summarizing the thread.
-
-Currently the maintainer(s) of eglibc are working on syncing up glibc and eglibc 
-to the point that there will no longer be a need for eglibc.  (See 
-http://www.eglibc.org/archives/patches/msg01261.html)
-
-EGlibc was originally developed to house various architecture ports and other 
-embedded friendly features were not allowed into glibc.  The majority of the 
-differences between eglibc and glibc have disappeared, with only a few major 
-exceptions.  One of which is the option-groups support.  This item is taking a 
-significant amount of resources to keep up to date, and it's unclear as to the 
-number of users for this functionality.
-
-The belief of the maintainers is that the days of truly small footprint systems, 
-where even 1 MB of storage was a large number are coming to an end.  As such, 
-the time and effort to maintain the option groups is likely not worth the effort.
-
-I expect that between OpenEmbedded and the Yocto Project, a large percentage of 
-the users would be represented in some way.  But beyond that, I don't have any 
-idea as to how many people actually benefit from this technology.
-
-During the discussion the results were that either assistance with maintaining 
-the option-groups is needed, or the feature will be deprecated and eventually 
-removed.  The last part of the thread it was suggested that in eglibc 2.19 it 
-would be deprecated, and then removed in 2.20.
-
---Mark
+Paul Eggleton
+Intel Open Source Technology Centre
 
