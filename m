@@ -1,32 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 4111C60071
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id CCE776077E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 07:35:06 +0000 (UTC)
-Received: by mail-vc0-f172.google.com with SMTP id ib11so2711612vcb.3
+	Tue, 18 Jun 2013 07:35:37 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id hz11so3723956pad.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 00:35:07 -0700 (PDT)
+	Tue, 18 Jun 2013 00:35:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=xUnjoXrNl1I6ZtPNEQ7Reb6AEQfUXB/GcdLNC8+a29c=;
-	b=SQh+SpyzKL4YV7qqRwe1uCJR9gx2w93Qcw+OOEDmJnhdDXbOOBJo63XWa1Q7EYPK2x
-	W6bUjr8Spo3KvNydhqGaRq34NPF6iyPjH9vvaF5Mh3/0WUZR2GxB2YcxH/1v4MmuIfEz
-	Qapy0nzn7jzFDhCjNBQFDGUIKwzn3hYWyygQ2CtqrhhNRBbsaCYEsd5H1RC+raaa3ULm
-	msgpe6tBCGfCmlrOiwHWTOtrnH7kLyV9gGiyxlI3aassKqZex9DTqq5XIAaF3DbrNhp8
-	84g2KMXfmn5s1n1rZ7YjqyI5pWxCg2VmlBLH9N6Eqb3o2W4sGVyXN5GBNstbEAuv7TvF
-	HSAw==
-MIME-Version: 1.0
-X-Received: by 10.220.169.146 with SMTP id z18mr4835158vcy.80.1371540907115;
-	Tue, 18 Jun 2013 00:35:07 -0700 (PDT)
-Received: by 10.58.68.170 with HTTP; Tue, 18 Jun 2013 00:35:07 -0700 (PDT)
-In-Reply-To: <1371541531-3744-1-git-send-email-net147@gmail.com>
-References: <1371541531-3744-1-git-send-email-net147@gmail.com>
-Date: Tue, 18 Jun 2013 17:35:07 +1000
-Message-ID: <CANwerB0pc0vOXYn6feQwGoe3J8Qg_5YbDcCO-QtSxWDd28ZRWQ@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=yvzW5twnogHWo8VPZVdZmc20ZvXnuRRD7zl/xtYabY8=;
+	b=dwQz2ejvaJ30boxvjtg4HOsg5sEAT1CBNReCUdhS+vpexieSlDKVsLEGwopjMh6DeT
+	EBgJiRTKqq6vLjBH0HGSS7mj3kOUsmX9HfEaBAezyJvFcJhnb4j+xcqy4UAKxIXmuqIG
+	i1BSvuAaarwauOsjgNdeVN0xQWLpXVhzqsi039z6kKUhJiKf3q4UptbTfYTAEgW78DFa
+	Tb7O2Ejej5qTZNjvhL4xuhkYm9+LIl5r02siq91iCRIwcCaAIwLAnzII+QSZFKjPpaYk
+	Xat08ehBW6qkiYdostb323ml9mkg/EiJsuDN4SYqO3NLxZmZnapUneFXKZig21csIupu
+	OiFQ==
+X-Received: by 10.68.203.103 with SMTP id kp7mr8158743pbc.165.1371540939134;
+	Tue, 18 Jun 2013 00:35:39 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	ot10sm17113977pbb.12.2013.06.18.00.35.36 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 18 Jun 2013 00:35:38 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] cyrus-sasl: move plugin *.so symbolic links to cyrus-sasl package
+Date: Tue, 18 Jun 2013 17:49:56 +1000
+Message-Id: <1371541796-3895-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3
+Subject: [meta-networking][PATCH] cyrus-sasl: move plugin *.so symbolic links to cyrus-sasl package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,23 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 07:35:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Jun 2013 07:35:37 -0000
 
-On 18 June 2013 17:45, Jonathan Liu <net147@gmail.com> wrote:
-> From: Jonathan Liu <jon@zydex.com>
->
-> The Cyrus SASL plugins are loaded without their version number so the
-> plugin *.so symbolic links need to be placed in the cyrus-sasl package
-> rather than the cyrus-sasl-dev package.
->
-> Signed-off-by: Jonathan Liu <jon@zydex.com>
-> ---
->  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+The Cyrus SASL plugins are loaded without their version number so the
+plugin *.so symbolic links need to be placed in the cyrus-sasl package
+rather than the cyrus-sasl-dev package.
 
-Wrong email. Please use my patch from gmail.com.
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Regards,
-Jonathan
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+index 0113025..bf6f95c 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+@@ -36,8 +36,10 @@ SRC_URI[sha256sum] = "8fbc5136512b59bb793657f36fadda6359cae3b08f01fd16b3d406f134
+ 
+ PACKAGES =+ "${PN}-bin"
+ 
+-FILES_${PN}           += "${libdir}/sasl2/*.so.*"
++FILES_${PN}           += "${libdir}/sasl2/*.so*"
+ FILES_${PN}-bin       += "${bindir}"
+-FILES_${PN}-dev       += "${libdir}/sasl2/*.so ${libdir}/sasl2/*.la"
++FILES_${PN}-dev       += "${libdir}/sasl2/*.la"
+ FILES_${PN}-dbg       += "${libdir}/sasl2/.debug"
+ FILES_${PN}-staticdev += "${libdir}/sasl2/*.a"
++
++INSANE_SKIP_${PN} += "dev-so"
+-- 
+1.8.3
+
 
