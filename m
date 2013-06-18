@@ -1,25 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id CF60C601DB
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F3BC6023E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 21:13:00 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 18 Jun 2013 14:13:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,891,1363158000"; d="scan'208";a="355662711"
-Received: from unknown (HELO helios.localnet) ([10.252.122.67])
-	by fmsmga002.fm.intel.com with ESMTP; 18 Jun 2013 14:13:00 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andrea Adami <andrea.adami@gmail.com>
-Date: Tue, 18 Jun 2013 22:13 +0100
-Message-ID: <1629546.H8QlHiyuGC@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.3 (Linux/3.8.0-25-generic; KDE/4.10.3; i686; ; )
-In-Reply-To: <cover.1371499248.git.andrea.adami@gmail.com>
-References: <cover.1371499248.git.andrea.adami@gmail.com>
+	Tue, 18 Jun 2013 21:56:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5ILuD2X019551
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jun 2013 14:56:13 -0700 (PDT)
+Received: from fidler.corp.ad.wrs.com (128.224.22.80) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.342.3; Tue, 18 Jun 2013 14:56:12 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Jun 2013 17:55:52 -0400
+Message-ID: <1371592553-6585-1-git-send-email-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 1.8.2.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-initramfs][PATCH 0/9] add missing SUMMARY and DESCRIPTION
+Subject: [PATCH] [meta-webserver] nostromo: make SRC_URI work for multilib builds.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +32,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 21:13:00 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 18 Jun 2013 21:56:11 -0000
+Content-Type: text/plain
 
-On Monday 17 June 2013 22:34:43 Andrea Adami wrote:
-> Andrea Adami (9):
->   initramfs-kexecboot(-klibc)-image: provide SUMMARY and DESCRIPTION
->   kexecboot_cfg: add SUMMARY and extend DESCRIPTION
->   kexecboot(-klibc): add SUMMARY, DESCRIPTION, HOMEPAGE
->   ubi-utils-klibc: add SUMMARY and DESCRIPTION
->   kexec-tools-klibc: add custom SUMMARY
->   linux-yocto-tiny-kexecboot: add custom SUMMARY
->   klibc(-static)-utils: add SUMMARY
->   klcc-cross: add SUMMARY
->   klibc: add SUMMARY
-> 
->  meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 10
-> ++++------ .../recipes-bsp/images/initramfs-kexecboot-klibc-image.bb      |
->  6 +++++- meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb      | 
-> 4 +++- meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb    |  1
-> + meta-initramfs/recipes-bsp/kexecboot/kexecboot.inc             |  3 +++
-> meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb      |  1 +
-> .../recipes-devtools/klibc/klibc-static-utils_2.0.2.bb         |  1 +
-> meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.2.bb     |  1 +
-> meta-initramfs/recipes-devtools/klibc/klibc_2.0.2.bb           |  1 +
-> meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.0.bb   |  3 ++-
-> meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb |  1 +
-> .../recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bb     |  1 + 12
-> files changed, 24 insertions(+), 9 deletions(-)
 
-Merged, thanks.
+Sending to the right list this time.
+I've also used BPN as Mark suggested.
 
-Cheers,
-Paul
+// Randy
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
