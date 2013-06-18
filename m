@@ -1,26 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id DCCBB6ABDD
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
+	[74.125.82.169])
+	by mail.openembedded.org (Postfix) with ESMTP id A251A6023E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 22:40:41 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 18 Jun 2013 15:40:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,892,1363158000"; d="scan'208";a="355795233"
-Received: from unknown (HELO helios.localnet) ([10.252.122.67])
-	by orsmga002.jf.intel.com with ESMTP; 18 Jun 2013 15:40:42 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Randy MacLeod <Randy.MacLeod@windriver.com>
-Date: Tue, 18 Jun 2013 23:40:41 +0100
-Message-ID: <152401983.zdQx05lUsS@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.3 (Linux/3.8.0-25-generic; KDE/4.10.3; i686; ; )
-In-Reply-To: <1371592553-6585-2-git-send-email-Randy.MacLeod@windriver.com>
-References: <1371592553-6585-1-git-send-email-Randy.MacLeod@windriver.com>
-	<1371592553-6585-2-git-send-email-Randy.MacLeod@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] nostromo: make SRC_URI work for multilib builds.
+	Tue, 18 Jun 2013 23:36:28 +0000 (UTC)
+Received: by mail-we0-f169.google.com with SMTP id n57so3983240wev.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Jun 2013 16:36:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=S9qzQ8BH/p9g2BaQlFphk1OT/wmbQx5t4Dbbfv5zn5E=;
+	b=yTJHEgcbqtdX1spN4ceYRz5WhyvWs4mAwEOc4g121eTEx9H8P5jiYd1qJdre2DXJbq
+	GcRN6gGsY+k7u4EcO8idKtSjVW3n58bvlw16g9dnST8NSmoacOO+fmRyzeve2Fq8BtsT
+	y8eKvhUv5n9h2/BPJHFasNaOz1Vv9OaMUfQZcjdDkcgGvXFlOopxkXjIb6IdnCag05v/
+	ehWIPpAAUnLu9176WYsi0PIv9Gp7F7WtN41qchor5LMs6d80p+IsbBpXpETf9q589LzM
+	s0H4/ZFcZJOpJhRmHnaMNSWWcpMEsgG5UjX1VC2rmfiMz9N7dfkFKvF5s9LJCtazeczB
+	HPvQ==
+X-Received: by 10.194.78.110 with SMTP id a14mr53569wjx.84.1371598588974;
+	Tue, 18 Jun 2013 16:36:28 -0700 (PDT)
+Received: from vesta.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
+	[94.192.12.83])
+	by mx.google.com with ESMTPSA id fo10sm5434483wib.8.2013.06.18.16.36.27
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 18 Jun 2013 16:36:28 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Jun 2013 00:36:09 +0100
+Message-Id: <1371598570-16322-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-networking][PATCH] ipsec-tools: update Upstream-Status for patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,41 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 22:40:41 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 18 Jun 2013 23:36:29 -0000
 
-On Tuesday 18 June 2013 17:55:53 Randy MacLeod wrote:
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> ---
->  meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-> b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb index
-> e66676e..94c32d8 100644
-> --- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-> +++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.nazgul.ch/dev_nostromo.html"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM =
-> "file://src/nhttpd/main.c;beginline=2;endline=14;md5=e5ec3fa723b29b7d59d205
-> afd8d36938"
-> 
-> -SRC_URI = "http://www.nazgul.ch/dev/${PN}-${PV}.tar.gz \
-> +SRC_URI = "http://www.nazgul.ch/dev/${BPN}-${PV}.tar.gz \
->            
-> file://0001-GNUmakefile-add-possibility-to-override-variables.patch \
-> file://nhttpd.conf \
->             file://volatiles \
+I've not seen anyone else send in a patch just to change Upstream-Status so this
+may be unnecessary churn. Let me know if it is.
 
-Merged, thanks.
+Paul Barker (1):
+  ipsec-tools: update Upstream-Status for patch
 
-Cheers,
-Paul
+ .../ipsec-tools/ipsec-tools/0001-Fix-warning-with-gcc-4.8.patch        | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 -- 
+1.8.3.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
