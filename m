@@ -1,35 +1,28 @@
-Return-Path: <Joe.MacDonald@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 506E3608A6
+Return-Path: <diego.ml@zoho.com>
+Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
+	by mail.openembedded.org (Postfix) with ESMTP id 37BC2608A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 12:35:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r5ICZIuW008648
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 05:35:18 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Tue, 18 Jun 2013 05:35:18 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 7C7E37FD0;
-	Tue, 18 Jun 2013 08:34:58 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 83C2640534; Tue,
-	18 Jun 2013 08:35:17 -0400 (EDT)
-Date: Tue, 18 Jun 2013 08:35:17 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20130618123516.GA3622@windriver.com>
-References: <1371452640-28576-1-git-send-email-rongqing.li@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1371452640-28576-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH meta-networking] arptables: fix the redefinition of 'arpt_get_target' error
+	Tue, 18 Jun 2013 12:42:01 +0000 (UTC)
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
+	h=from:to:cc:subject:date:message-id; 
+	b=pgdwMyjg7wJVduEeowdxkQMeEsjSMZimpAU0GsYl4X1puTj/KfPhD2y2knzEcg+GB/eREQLJgWRP
+	yfDzHZcfvOzyeEhAzY207DWurjXzHL9GMmdIlNWRuTM+rnaNrTSz  
+Received: from localhost.localdomain (static-217-133-170-65.clienti.tiscali.it
+	[217.133.170.65]) by mx.zohomail.com
+	with SMTPS id 1371559319621626.5595828391519;
+	Tue, 18 Jun 2013 05:41:59 -0700 (PDT)
+From: Diego Rondini <diego.ml@zoho.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Jun 2013 14:07:41 +0200
+Message-Id: <1371557261-22526-1-git-send-email-diego.ml@zoho.com>
+X-Mailer: git-send-email 1.7.9.5
+X-ZohoMail: Ss  SS_10 UW UB ZCF-710TPL UW UB  ZSF-HLOLL_2  SGR3_1_23053_280
+X-ZohoMail-Owner: <1371557261-22526-1-git-send-email-diego.ml@zoho.com>+zmo_0_<diego.ml@zoho.com>
+X-ZohoMail-Sender: 217.133.170.65
+X-Zoho-Virus-Status: 2
+X-ZohoMailClient: External
+Cc: Diego Rondini <diego.ml@zoho.com>
+Subject: [meta-oe][PATCH] glmark2: Add recipe for glmark2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,102 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 12:35:17 -0000
-X-Groupsio-MsgNum: 45120
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Jun 2013 12:42:01 -0000
 
---T4sUOijqQbZv57TR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add a recipe for glmark2, which is an OpenGL 2.0 / OpenGL ES 2.0 benchmark.
 
-Merged, thanks.
--J.
+Signed-off-by: Diego Rondini <diego.ml@zoho.com>
+---
+ .../recipes-benchmark/glmark2/glmark2_2012.12.bb   |   35 ++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
 
-[[PATCH meta-networking] arptables: fix the redefinition of 'arpt_get_targe=
-t' error] On 13.06.17 (Mon 15:04) rongqing.li@windriver.com wrote:
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+new file mode 100644
+index 0000000..b5d483c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "OpenGL (ES) 2.0 benchmark"
++DESCRIPTION = "glmark2 is a benchmark for OpenGL (ES) 2.0. \
++It uses only the subset of the OpenGL 2.0 API that is compatible with OpenGL ES 2.0."
++HOMEPAGE = "https://launchpad.net/glmark2"
++BUGTRACKER = "https://bugs.launchpad.net/glmark2"
++
++LICENSE = "GPLv3+ & SGIv1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
++
++DEPENDS = "libpng12"
++
++SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
++
++SRC_URI[md5sum] = "4f306664aa3886fa0cf93853603603f8"
++SRC_URI[sha256sum] = "bea6f9de2cdce376195bd91e4a2fdfdf80bf3e480abff8e05b90a6458c1deb47"
++
++inherit pkgconfig
++
++PACKAGECONFIG ?= "gl gles2"
++
++PACKAGECONFIG[gl] = "--enable-gl,,virtual/libgl"
++PACKAGECONFIG[gles2] = "--enable-glesv2,,virtual/libgles2"
++
++do_configure() {
++	./waf configure --prefix=${prefix} ${EXTRA_OECONF}
++}
++
++do_compile() {
++	./waf build ${PARALLEL_MAKE}
++}
++
++do_install() {
++	./waf install --destdir=${D}
++}
+-- 
+1.7.9.5
 
-> From: "Roy.Li" <rongqing.li@windriver.com>
->=20
-> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> ---
->  .../arptables-arpt-get-target-fix.patch            |   30 ++++++++++++++=
-++++++
->  .../recipes-support/arptables/arptables_0.0.3-4.bb |    1 +
->  2 files changed, 31 insertions(+)
->  create mode 100644 meta-networking/recipes-support/arptables/arptables-0=
-=2E0.3-4/arptables-arpt-get-target-fix.patch
->=20
-> diff --git a/meta-networking/recipes-support/arptables/arptables-0.0.3-4/=
-arptables-arpt-get-target-fix.patch b/meta-networking/recipes-support/arpta=
-bles/arptables-0.0.3-4/arptables-arpt-get-target-fix.patch
-> new file mode 100644
-> index 0000000..3f5948b
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/arptables/arptables-0.0.3-4/arptabl=
-es-arpt-get-target-fix.patch
-> @@ -0,0 +1,30 @@
-> +arptables: fix the redefinition of 'arpt_get_target'
-> +   =20
-> +Upstream-Status: Pending
-> +
-> +This function is already defined as a static inline function in=20
-> +include/linux/netfilter_arp/arp_tables.h, once GCC uses -O0, the
-> +inline will not work, and the redefinition error will happen
-> +
-> +Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
-> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>=20
-> +
-> +diff --git a/libarptc/libarptc_incl.c b/libarptc/libarptc_incl.c
-> +index 35736db..addd3f9 100644
-> +--- a/libarptc/libarptc_incl.c
-> ++++ b/libarptc/libarptc_incl.c
-> +@@ -11,14 +11,6 @@
-> + /* (C)1999 Paul ``Rusty'' Russell - Placed under the GNU GPL (See
-> +    COPYING for details). */
-> +=20
-> +-#ifndef __OPTIMIZE__
-> +-STRUCT_ENTRY_TARGET *
-> +-GET_TARGET(STRUCT_ENTRY *e)
-> +-{
-> +-	return (void *)e + e->target_offset;
-> +-}
-> +-#endif
-> +-
-> + static int sockfd =3D -1;
-> + static void *arptc_fn =3D NULL;
-> +=20
-> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.=
-bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> index fe14b61..f3deaeb 100644
-> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
-> @@ -12,6 +12,7 @@ SRC_URI =3D " \
->      ${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=3Darptab=
-les \
->      file://arptables-compile-install.patch \
->      file://arptables-init-busybox.patch \
-> +    file://arptables-arpt-get-target-fix.patch \
->  "
->  SRC_URI[arptables.md5sum] =3D "1d4ab05761f063b0751645d8f2b8f8e5"
->  SRC_URI[arptables.sha256sum] =3D "e529fd465c67d69ad335299a043516e6b38cdc=
-d337a5ed21718413e96073f928"
---=20
--Joe MacDonald.
-:wq
 
---T4sUOijqQbZv57TR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlHAVAEACgkQPN8S4W6ZZnfUhgCbBg0xffNm0NEERgx/TRizwMZZ
-J1cAn00Ub7vPF5TPA0UeKkQkNiK/gkrN
-=v2cE
------END PGP SIGNATURE-----
-
---T4sUOijqQbZv57TR--
