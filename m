@@ -1,40 +1,35 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 3699C6041F
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 506E3608A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 10:28:38 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id hz11so3859791pad.2
+	Tue, 18 Jun 2013 12:35:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r5ICZIuW008648
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 03:28:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=nJV54oVjbPDRMfJsnA0GuJFXdCVEIJbs4gyTjDVFbbQ=;
-	b=h2IB/IqlUjmKrPRagQvWsMzpF9ftB2hSB7dijEMX4HhQZVGwnucLEpdEdJq+RRj5gp
-	U+bEY17mGgTv40SG9ZwJ27pxIPY5eNj6oO5GPr2i/O3mW3jTBiaWMi6HmiPm+qZFSxl5
-	k3pl+dK12vO0gm4yOlgauaRgmZPpy14rV3P0K8IA9BiueHMbCnDHpPNL3oI534XmvyTz
-	m7TeMrDyYi9TKcXIHJWY7+opo5R5uohvAU+HVwKsyDq6Ya/7Uqx9kaBxeYD/sAR6EuV/
-	NHVJTKQAWGnk1fRkoNDvUgLAiOy/ZfPL6zxpiqy1p0yBtabWbVENsH/B0VLmdYuIGhSc
-	9Ulw==
-X-Received: by 10.68.162.1 with SMTP id xw1mr16353333pbb.199.1371551319508;
-	Tue, 18 Jun 2013 03:28:39 -0700 (PDT)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244]) by mx.google.com with ESMTPSA id
-	pb5sm17671081pbc.29.2013.06.18.03.28.37
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Jun 2013 03:28:38 -0700 (PDT)
-Message-ID: <51C03652.1040204@gmail.com>
-Date: Tue, 18 Jun 2013 20:28:34 +1000
-From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
+	Tue, 18 Jun 2013 05:35:18 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 18 Jun 2013 05:35:18 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 7C7E37FD0;
+	Tue, 18 Jun 2013 08:34:58 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 83C2640534; Tue,
+	18 Jun 2013 08:35:17 -0400 (EDT)
+Date: Tue, 18 Jun 2013 08:35:17 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <rongqing.li@windriver.com>
+Message-ID: <20130618123516.GA3622@windriver.com>
+References: <1371452640-28576-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1371541405-3651-1-git-send-email-net147@gmail.com>
-In-Reply-To: <1371541405-3651-1-git-send-email-net147@gmail.com>
-Subject: Re: [meta-oe][PATCH] cyrus-sasl: move plugin *.so symbolic links to cyrus-sasl package
+In-Reply-To: <1371452640-28576-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-networking] arptables: fix the redefinition of 'arpt_get_target' error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,24 +43,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 10:28:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Jun 2013 12:35:17 -0000
+X-Groupsio-MsgNum: 45120
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
+Content-Disposition: inline
 
-On 18/06/2013 5:43 PM, Jonathan Liu wrote:
-> From: Jonathan Liu <jon@zydex.com>
->
-> The Cyrus SASL plugins are loaded without their version number so the
-> plugin *.so symbolic links need to be placed in the cyrus-sasl package
-> rather than the cyrus-sasl-dev package.
->
-> Signed-off-by: Jonathan Liu <jon@zydex.com>
+--T4sUOijqQbZv57TR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Merged, thanks.
+-J.
+
+[[PATCH meta-networking] arptables: fix the redefinition of 'arpt_get_targe=
+t' error] On 13.06.17 (Mon 15:04) rongqing.li@windriver.com wrote:
+
+> From: "Roy.Li" <rongqing.li@windriver.com>
+>=20
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
 > ---
->   meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
->
-Wrong email. Please use my patch from gmail.com.
+>  .../arptables-arpt-get-target-fix.patch            |   30 ++++++++++++++=
+++++++
+>  .../recipes-support/arptables/arptables_0.0.3-4.bb |    1 +
+>  2 files changed, 31 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/arptables/arptables-0=
+=2E0.3-4/arptables-arpt-get-target-fix.patch
+>=20
+> diff --git a/meta-networking/recipes-support/arptables/arptables-0.0.3-4/=
+arptables-arpt-get-target-fix.patch b/meta-networking/recipes-support/arpta=
+bles/arptables-0.0.3-4/arptables-arpt-get-target-fix.patch
+> new file mode 100644
+> index 0000000..3f5948b
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/arptables/arptables-0.0.3-4/arptabl=
+es-arpt-get-target-fix.patch
+> @@ -0,0 +1,30 @@
+> +arptables: fix the redefinition of 'arpt_get_target'
+> +   =20
+> +Upstream-Status: Pending
+> +
+> +This function is already defined as a static inline function in=20
+> +include/linux/netfilter_arp/arp_tables.h, once GCC uses -O0, the
+> +inline will not work, and the redefinition error will happen
+> +
+> +Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>=20
+> +
+> +diff --git a/libarptc/libarptc_incl.c b/libarptc/libarptc_incl.c
+> +index 35736db..addd3f9 100644
+> +--- a/libarptc/libarptc_incl.c
+> ++++ b/libarptc/libarptc_incl.c
+> +@@ -11,14 +11,6 @@
+> + /* (C)1999 Paul ``Rusty'' Russell - Placed under the GNU GPL (See
+> +    COPYING for details). */
+> +=20
+> +-#ifndef __OPTIMIZE__
+> +-STRUCT_ENTRY_TARGET *
+> +-GET_TARGET(STRUCT_ENTRY *e)
+> +-{
+> +-	return (void *)e + e->target_offset;
+> +-}
+> +-#endif
+> +-
+> + static int sockfd =3D -1;
+> + static void *arptc_fn =3D NULL;
+> +=20
+> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.=
+bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> index fe14b61..f3deaeb 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> @@ -12,6 +12,7 @@ SRC_URI =3D " \
+>      ${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=3Darptab=
+les \
+>      file://arptables-compile-install.patch \
+>      file://arptables-init-busybox.patch \
+> +    file://arptables-arpt-get-target-fix.patch \
+>  "
+>  SRC_URI[arptables.md5sum] =3D "1d4ab05761f063b0751645d8f2b8f8e5"
+>  SRC_URI[arptables.sha256sum] =3D "e529fd465c67d69ad335299a043516e6b38cdc=
+d337a5ed21718413e96073f928"
+--=20
+-Joe MacDonald.
+:wq
 
-Regards,
-Jonathan
+--T4sUOijqQbZv57TR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlHAVAEACgkQPN8S4W6ZZnfUhgCbBg0xffNm0NEERgx/TRizwMZZ
+J1cAn00Ub7vPF5TPA0UeKkQkNiK/gkrN
+=v2cE
+-----END PGP SIGNATURE-----
+
+--T4sUOijqQbZv57TR--
