@@ -1,36 +1,35 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 820F7601AF
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 48FEF601AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 14:09:50 +0000 (UTC)
-Received: by mail-qc0-f175.google.com with SMTP id k14so2330229qcv.34
+	Tue, 18 Jun 2013 14:11:32 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5IEBYmY012178
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 07:09:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=H3Voe48AAo+pfOjYVuyBepWaG8T3ibt9v3CDZCi90Kk=;
-	b=AMAZOBNpbiAD0gL16IjIGkITo+Jpe2O/43CbDbgUZnSGwwCiDYRQeEJvFDDgjDjYwj
-	l6US+ST5LJdBpirC3Qtmm3msUrYJSwETwJ6EH+lBg2v2FSj7og9YsSZ1dL9YzaosRmd3
-	BhfA9teZzQ3hXkgaG9idKCfLWc0P2lzXcvGDmr2KXP5mG8OgpO0CjLHmVDxVw6lIIv03
-	AZC6ZOogr8KO2xQhG2ExLk5BntQW7yTfnZ+OFTeUqtH4p5dMW4cRQVYInMgaSj+38+LZ
-	PE1ABZ7hqn6HNL06ovvwGLH0LhlR6kne0HZ9n6a8DN6/8HIy6hoAwAU7DYCtYYX1qhBM
-	+ymw==
-X-Received: by 10.224.161.145 with SMTP id r17mr23572906qax.72.1371564590679; 
-	Tue, 18 Jun 2013 07:09:50 -0700 (PDT)
-Received: from localhost.localdomain
-	(pool-96-240-171-202.ronkva.east.verizon.net. [96.240.171.202])
-	by mx.google.com with ESMTPSA id j9sm28110551qas.3.2013.06.18.07.09.49
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 18 Jun 2013 07:09:49 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jun 2013 10:09:45 -0400
-Message-Id: <1371564585-12373-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.7.11.7
-Subject: [meta-oe][PATCH] gnuradio : Update to 3.6.5. Also fix for docs, packaging, and grc RDEPENDS.
+	Tue, 18 Jun 2013 07:11:34 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 18 Jun 2013 07:11:32 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 15A997FD0;
+	Tue, 18 Jun 2013 10:11:13 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 3260740534; Tue,
+	18 Jun 2013 10:11:32 -0400 (EDT)
+Date: Tue, 18 Jun 2013 10:11:32 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <rongqing.li@windriver.com>
+Message-ID: <20130618141131.GA10017@windriver.com>
+References: <1371537142-19210-1-git-send-email-rongqing.li@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1371537142-19210-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] autofs: two fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,120 +43,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 14:09:50 -0000
+X-List-Received-Date: Tue, 18 Jun 2013 14:11:32 -0000
+X-Groupsio-MsgNum: 45123
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="7AUc2qLy4jB3hD7Z"
+Content-Disposition: inline
 
- * Fix packaging so grc and examples packages are not empty.
- * Account for addition of gr-modtool.
- * Update to version 3.6.5 of GNU Radio.
- * Update RDEPENDS for grc to add python-netserver.
- * Try even harder to stop docs from getting built.
----
- .../gnuradio/0001-gr-trellis-Kill-docs-hard.patch  | 38 ++++++++++++++++++++++
- .../recipes-connectivity/gnuradio/gnuradio_git.bb  | 17 +++++-----
- 2 files changed, 47 insertions(+), 8 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
+--7AUc2qLy4jB3hD7Z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch b/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
-new file mode 100644
-index 0000000..38c3a10
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
-@@ -0,0 +1,38 @@
-+From 473342055e423384e2b17cc0957613299382fb79 Mon Sep 17 00:00:00 2001
-+From: Philip Balister <philip@balister.org>
-+Date: Mon, 17 Jun 2013 10:58:29 -0400
-+Subject: [PATCH] gr-trellis : Kill docs hard.
-+
-+Signed-off-by: Philip Balister <philip@balister.org>
-+---
-+ gr-trellis/CMakeLists.txt | 7 -------
-+ 1 file changed, 7 deletions(-)
-+
-+diff --git a/gr-trellis/CMakeLists.txt b/gr-trellis/CMakeLists.txt
-+index 16a3e7c..95e1420 100644
-+--- a/gr-trellis/CMakeLists.txt
-++++ b/gr-trellis/CMakeLists.txt
-+@@ -50,12 +50,6 @@ if(ENABLE_GR_TRELLIS)
-+ include(GrPackage)
-+ CPACK_SET(CPACK_COMPONENT_GROUP_TRELLIS_DESCRIPTION "GNU Radio Trellis Blocks")
-+ 
-+-CPACK_COMPONENT("trellis_docs"
-+-    GROUP        "Trellis"
-+-    DISPLAY_NAME "Documentation"
-+-    DESCRIPTION  "Doxygen HTML and XML"
-+-)
-+-
-+ CPACK_COMPONENT("trellis_runtime"
-+     GROUP        "Trellis"
-+     DISPLAY_NAME "Runtime"
-+@@ -95,7 +89,6 @@ CPACK_COMPONENT("trellis_swig"
-+ # Add subdirectories
-+ ########################################################################
-+ add_subdirectory(src/lib)
-+-add_subdirectory(doc)
-+ if(ENABLE_PYTHON)
-+     add_subdirectory(grc)
-+     add_subdirectory(src/python)
-+-- 
-+1.7.11.7
-+
-diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-index 45f4c77..b0fc630 100644
---- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-+++ b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
-@@ -27,7 +27,7 @@ RDEPENDS_${PN} = "python-core python-audio python-threading python-codecs \
-                   python-netclient python-difflib \
-                   python-pprint python-numpy  \
- "
--RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah"
-+RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah python-netserver"
- 
- C_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
-@@ -43,34 +43,35 @@ do_compile_prepend() {
- }
- 
- PACKAGES += " \
--    ${PN}-examples \
-     ${PN}-grc \
-+    ${PN}-examples \
- "
- 
- FILES_${PN}-grc = "${datadir}/gnuradio/grc"
-+FILES_${PN}-examples = "${datadir}/gnuradio/examples"
- 
--FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/*"
--FILES_${PN} += "${datadir}/gnuradio/*"
-+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/gnuradio"
-+FILES_${PN} += "${datadir}/gnuradio/modtool"
- # The following needs fixing upstream
--FILES_${PN} += "${prefix}/etc/gnuradio/*"
-+FILES_${PN} += "${prefix}/etc/gnuradio"
- 
- FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/.debug \
-                     ${PYTHON_SITEPACKAGES_DIR}/gnuradio/*/.debug \
-                     ${datadir}/gnuradio/examples/*/.debug \
- "
--FILES_${PN}-examples = "${datadir}/gnuradio/examples"
- 
--PV = "3.6.4.1"
-+PV = "3.6.5"
- 
- FILESPATHPKG_prepend = "gnuradio-git:"
- 
--SRCREV = "5f69899e059e9bea58f92af61f70fc3f63825087"
-+SRCREV = "a7b3a9339106aaba72195b693dfeaa98f194e0d5"
- 
- # Make it easy to test against developer repos and branches
- GIT_REPO = "gnuradio.git"
- GIT_BRANCH = "master"
- 
- SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
-+           file://0001-gr-trellis-Kill-docs-hard.patch \
- "
- 
- S="${WORKDIR}/git"
--- 
-1.7.11.7
+Merged.  I re-generated your autofs-5.0.7-fix-lib-deps.patch just to
+pretty it up a bit.  Please try to avoid sending patches with timestamps
+in the diff.
 
+Thanks, Roy.
+-J.
 
+[[PATCH] autofs: two fixes] On 13.06.18 (Tue 14:32) rongqing.li@windriver.c=
+om wrote:
+
+> From: "Roy.Li" <rongqing.li@windriver.com>
+>=20
+> autofs's lib sources have a dependency on a number of files that are
+> generated by rpcgen during buildtime.
+>=20
+> fix a typo in configure.in
+>=20
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> ---
+>  .../autofs-5.0.7/autofs-5.0.7-fix-lib-deps.patch      |   17 +++++++++++=
+++++++
+>  .../recipes-daemons/autofs/autofs_5.0.7.bb            |    2 ++
+>  2 files changed, 19 insertions(+)
+>  create mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.0.7/a=
+utofs-5.0.7-fix-lib-deps.patch
+>=20
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5=
+=2E0.7-fix-lib-deps.patch b/meta-networking/recipes-daemons/autofs/autofs-5=
+=2E0.7/autofs-5.0.7-fix-lib-deps.patch
+> new file mode 100644
+> index 0000000..eff49f1
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/autofs-5.0.7-fi=
+x-lib-deps.patch
+> @@ -0,0 +1,17 @@
+> +Fix the dependency issue
+> +
+> +Upstream-Status: Pending
+> +
+> +autofs's lib sources have a dependency on a number of files that are
+> +generated by rpcgen during buildtime
+> +
+> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> +
+> +diff -uNr autofs-5.0.7.orig/lib/Makefile autofs-5.0.7/lib/Makefile
+> +--- autofs-5.0.7.orig/lib/Makefile	2013-02-04 13:41:49.946341454 -0800
+> ++++ autofs-5.0.7/lib/Makefile	2013-02-04 13:42:19.954107635 -0800
+> +@@ -75,3 +75,4 @@
+> + clean:
+> + 	rm -f $(LIB) $(RPCS) $(OBJS) $(YACCSRC) *.output *~
+> +=20
+> ++$(OBJS): $(RPCS)
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/met=
+a-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> index 74a4e68..0c66ebc 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> @@ -59,6 +59,7 @@ SRC_URI =3D "${KERNELORG_MIRROR}/linux/daemons/autofs/v=
+5/autofs-${PV}.tar.bz2 \
+>             file://libtirpc-name-clash-backout.patch \
+>             file://autofs-5.0.7-do-not-check-for-modprobe.patch \
+>             file://fix_disable_ldap.patch \
+> +           file://autofs-5.0.7-fix-lib-deps.patch \
+>  "
+> =20
+>  SRC_URI[md5sum] =3D "bc46838dece83c02d800ff144ed9f431"
+> @@ -87,6 +88,7 @@ CACHED_CONFIGUREVARS =3D "ac_cv_path_RANLIB=3D${RANLIB}=
+ \
+>  "
+> =20
+>  do_configure_prepend () {
+> +    sed -e "s:filagdir:flagdir:" -i configure.in
+>      if [ ! -e acinclude.m4 ]; then
+>          cp aclocal.m4 acinclude.m4
+>      fi
+--=20
+-Joe MacDonald.
+:wq
+
+--7AUc2qLy4jB3hD7Z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEUEARECAAYFAlHAapMACgkQPN8S4W6ZZnfMegCdFEQvoUl7HKpe8bh9eT1VPYyI
+WboAmLWyL17zTHgELR3jkDfZbRvTF7M=
+=nRtb
+-----END PGP SIGNATURE-----
+
+--7AUc2qLy4jB3hD7Z--
