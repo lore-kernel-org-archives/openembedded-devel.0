@@ -1,36 +1,36 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id A9285607F8
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id C167E607F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 07:29:19 +0000 (UTC)
-Received: by mail-pd0-f174.google.com with SMTP id 10so3611946pdc.33
+	Tue, 18 Jun 2013 07:32:22 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id 10so3617801pdi.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jun 2013 00:29:20 -0700 (PDT)
+	Tue, 18 Jun 2013 00:32:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
 	bh=s8ko4iUGuQFjQhvgNZJz3eWV04TY5NUtjtbWWGODzBI=;
-	b=BucinJUCMsMGxL/8aVpErHQ2XcaInQxRtASOj8PA+EIuD5Yzq/5Q2PUfvLJchB3zGM
-	H+b1Z/O7D438JC9WgM9GeeV5qFlb7+FFtXjlJRvNK+kVw+leFw+U6Fm+JloWh71VP9s1
-	Vdz+v1cEAlPmmRNvjU7awWHIwy65+roymm4R/Jv5p6kkEVrXx90X6tga8vbavl+8m7as
-	DLgKq/uXBq//fYtErJYE4iTe2o/OLt5PdfSojnAh4t/gVdLW5xx4UiOrn+teZTcy82zl
-	THdzWusJYjb3WWXBqmgY23iUa7GFtozwmBVEhIJj6OVH7Q/A81OlWslHeqXxPAiRGJCv
-	Jtmw==
-X-Received: by 10.66.160.1 with SMTP id xg1mr1069074pab.25.1371540560761;
-	Tue, 18 Jun 2013 00:29:20 -0700 (PDT)
+	b=kClOyGDPuveTyGGxUDryaZHTCLsp3UEfBNsJx64PQXFnIcXhdaVs6hpPiohdqvpyjp
+	hpmVDzGhKYjDqFohuI8Bc9ytsOBsUW2RosiS8gmw3+ZPTU2KwP7UCaNObDWm/6tBAmrj
+	WvHn/ZzGNM2ImeNEu7WsnO9lswd5LJPvUMlRag6bfdwW/NRqqIamVgRJ718BiiNFnrB7
+	5Rp9Chse7jzMoXRKakHV/mqLqVBiiRLfH6WdILfK/p+uoq/gocfYqsNbdMYMFzCAdeGz
+	RMmv6Wt/VJA67dl+aBYUbKiN9TUFTo3Zme9oo/g5cRJZgIOBZo6pfgcpVT87nnva3vxz
+	xlDQ==
+X-Received: by 10.68.182.33 with SMTP id eb1mr16287237pbc.186.1371540744159;
+	Tue, 18 Jun 2013 00:32:24 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id fn9sm18406139pab.2.2013.06.18.00.29.18
+	by mx.google.com with ESMTPSA id e2sm17088845pbc.23.2013.06.18.00.32.22
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Jun 2013 00:29:19 -0700 (PDT)
+	Tue, 18 Jun 2013 00:32:23 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jun 2013 17:43:25 +1000
-Message-Id: <1371541405-3651-1-git-send-email-net147@gmail.com>
+Date: Tue, 18 Jun 2013 17:45:31 +1000
+Message-Id: <1371541531-3744-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 1.8.3
 Cc: Jonathan Liu <jon@zydex.com>
-Subject: [meta-oe][PATCH] cyrus-sasl: move plugin *.so symbolic links to cyrus-sasl package
+Subject: [meta-networking][PATCH] cyrus-sasl: move plugin *.so symbolic links to cyrus-sasl package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 07:29:20 -0000
+X-List-Received-Date: Tue, 18 Jun 2013 07:32:22 -0000
 
 From: Jonathan Liu <jon@zydex.com>
 
