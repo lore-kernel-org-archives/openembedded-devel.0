@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A6B66AD8E
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 86EC46AB93
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2013 17:30:08 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id q10so3438339eaj.31
+	Wed, 19 Jun 2013 17:30:09 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id e49so3358682eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jun 2013 10:30:08 -0700 (PDT)
+	Wed, 19 Jun 2013 10:30:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	bh=GiGymCor8qd59yy6967tUPd/xDKglb75jo/YYe0r4W4=;
-	b=EMGzwjjiFj8Pm9CdzjvNpfQhuG0SOV7KCHT752xClOd0+rowgX8e3Bbjb5OasQckk6
-	FbChQxKWKh7jPEm1K0nBMsogCpqiukK1MnAAMdH44fIhzC6hOlMim7AASb8NXfU4jPoQ
-	+LMyIM4lza6tgTgzgJ9h73seWVvqPfsxfd/pDrNIIsGzG9LQOhw2SGqAt8Z6XqAlBxk0
-	OZW2+4xv1W9oBFWPVSHOrytaPIwwOFpVc+LLwzF8ZpZ7x0vFPM2oiEwvXZx6SxH5pn8y
-	cDfoJ1CsV4lDfI7+bKjNWtLZfbwB6G1K7qqD8e6XwGwUAdLoQpOiVhtb82nHLFS3wyZc
-	1HhA==
-X-Received: by 10.14.176.199 with SMTP id b47mr3591014eem.117.1371663008922;
-	Wed, 19 Jun 2013 10:30:08 -0700 (PDT)
+	bh=kKSzBoA/emCAdKkBgCOn32WV6N0usb5Nu4FgOBqBLmo=;
+	b=bej/fKgM5C4gjANHR4mmT5R2YrhX9dwJrXX9FMi1VOaqB3C/zkAHGDOg+4EiDnif/V
+	ZnuO5ghiy6e6z+kFx4zGH9mfRtU6+O9L3tvz9ldNy+gVi9RHS2ClrzXAJaIEurl5ccSp
+	UM404AKayA3h6zCqzPUOGSoWfpq0kL6RRCqyKzdEN01ioOPXtKlsHS5ctyjnpOUurZ6O
+	FtgnR9u3YqJzt4UHz0x4jQmsIIP4URiALou9uT3fL/uKb3GaVdl2j4mGIYDfW82+/ntv
+	7c6Rz2oJhffQ5kKvOMIJa/s4q1rV3l9LyaeazSvAXTonn+l5QtNciCgWPTZPrr6qP0wz
+	pwZQ==
+X-Received: by 10.14.209.5 with SMTP id r5mr3597479eeo.112.1371663010288;
+	Wed, 19 Jun 2013 10:30:10 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A06AC.dip0.t-ipconnect.de.
 	[91.10.6.172]) by mx.google.com with ESMTPSA id
-	n42sm38290045eeh.15.2013.06.19.10.30.07
+	n42sm38290045eeh.15.2013.06.19.10.30.08
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Wed, 19 Jun 2013 10:30:08 -0700 (PDT)
+	Wed, 19 Jun 2013 10:30:09 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Jun 2013 19:29:26 +0200
-Message-Id: <1371662967-31734-20-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 19 Jun 2013 19:29:27 +0200
+Message-Id: <1371662967-31734-21-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
 In-Reply-To: <1371662967-31734-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1371662967-31734-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-gnome/meta-oe/meta-xfce/V2 19/20] xfwm4: don't turn into unusablity after setting system time backwards
+Subject: [meta-gnome/meta-oe/meta-xfce/V2 20/20] xfce4-genmon-plugin: Allow timer period to be set at 250ms resolution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,68 +47,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2013 17:30:08 -0000
+X-List-Received-Date: Wed, 19 Jun 2013 17:30:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...-display-events-when-time-is-set-backward.patch |   33 ++++++++++++++++++++
- meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.1.bb       |    1 +
- 2 files changed, 34 insertions(+), 0 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
+ ...-period-to-be-set-at-250ms-resolution.-Pa.patch |   36 ++++++++++++++++++++
+ .../genmon/xfce4-genmon-plugin_3.4.0.bb            |    2 +
+ 2 files changed, 38 insertions(+), 0 deletions(-)
+ create mode 100644 meta-xfce/recipes-panel-plugins/genmon/files/0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch b/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
+diff --git a/meta-xfce/recipes-panel-plugins/genmon/files/0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch b/meta-xfce/recipes-panel-plugins/genmon/files/0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch
 new file mode 100644
-index 0000000..08fd76b
+index 0000000..28c0eb1
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
-@@ -0,0 +1,33 @@
-+From e87977696f03b0c9f72884f8e3e3ec3248dfd80a Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 18 Jun 2013 12:46:42 +0200
-+Subject: [PATCH] don't block display events when time is set backwards
++++ b/meta-xfce/recipes-panel-plugins/genmon/files/0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch
+@@ -0,0 +1,36 @@
++From 2d5fa307827a7b32af4f7b2ae0604f943e3a6e99 Mon Sep 17 00:00:00 2001
++From: John Lindgren <john.lindgren@aol.com>
++Date: Tue, 21 Aug 2012 19:33:45 -0400
++Subject: [PATCH] Allow timer period to be set at 250ms resolution.  Patch
++ from Miguel Guedes.  Closes: #9102.
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+Upstream-Status: Submitted [1]
++Upstream-Status: Applied [1]
 +
-+[1] https://bugzilla.xfce.org/show_bug.cgi?id=10184
++[1] http://git.xfce.org/panel-plugins/xfce4-genmon-plugin/commit/?id=2d5fa307827a7b32af4f7b2ae0604f943e3a6e99
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ src/display.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
++ panel-plugin/config_gui.c |    4 ++--
++ 1 files changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/display.c b/src/display.c
-+index 00318d5..651bc7a 100644
-+--- a/src/display.c
-++++ b/src/display.c
-+@@ -733,7 +733,7 @@ myDisplayUpdateCurrentTime (DisplayInfo *display, XEvent *ev)
-+             break;
-+     }
++diff --git a/panel-plugin/config_gui.c b/panel-plugin/config_gui.c
++index a4c891d..90e55c1 100644
++--- a/panel-plugin/config_gui.c
+++++ b/panel-plugin/config_gui.c
++@@ -106,8 +106,8 @@ int genmon_CreateConfigGUI (GtkWidget *vbox1,
++     gtk_widget_show (alignment1);
++     gtk_container_add (GTK_CONTAINER (eventbox1), alignment1);
 + 
-+-    if ((timestamp != (guint32) CurrentTime) && TIMESTAMP_IS_BEFORE(display->current_time, timestamp))
-++    if ((timestamp != (guint32) CurrentTime) /*&& TIMESTAMP_IS_BEFORE(display->current_time, timestamp)*/)
-+     {
-+         display->current_time = timestamp;
-+     }
++-    wSc_Period_adj = gtk_adjustment_new (15, 1, 60*60*24, 1, 1, 0);
++-    wSc_Period = gtk_spin_button_new (GTK_ADJUSTMENT (wSc_Period_adj), 1, 0);
+++    wSc_Period_adj = gtk_adjustment_new (15, .25, 60*60*24, .25, 1, 0);
+++    wSc_Period = gtk_spin_button_new (GTK_ADJUSTMENT (wSc_Period_adj), .25, 2);
++     gtk_widget_show (wSc_Period);
++     gtk_container_add (GTK_CONTAINER (alignment1), wSc_Period);
++     gtk_tooltips_set_tip (tooltips, wSc_Period,
 +-- 
 +1.7.6.5
 +
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.1.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.1.bb
-index 687339b..86ac20e 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.1.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.10.1.bb
-@@ -8,6 +8,7 @@ inherit xfce update-alternatives
+diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.4.0.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.4.0.bb
+index e5ef85f..a13db62 100644
+--- a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.4.0.bb
++++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_3.4.0.bb
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=68ad62c64cc6c620126241fd429e68fe"
  
- SRC_URI[md5sum] = "10de50c79ed944cbb9c87741062c2a76"
- SRC_URI[sha256sum] = "380c44fba6eb779e34be0fe94f3726cfa131803014d6073c45aec8a1257fa740"
-+SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
+ inherit xfce-panel-plugin
  
- python populate_packages_prepend () {
-     themedir = d.expand('${datadir}/themes')
++SRC_URI += "file://0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch"
++
+ SRC_URI[md5sum] = "24108b339bb040ed360266f53a245224"
+ SRC_URI[sha256sum] = "b0a5337b49c85623dc89f3c9e47c7374b1d466af2418033d2d6dfc57a9790387"
+ 
 -- 
 1.7.4.4
 
