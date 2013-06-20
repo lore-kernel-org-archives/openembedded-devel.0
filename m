@@ -1,38 +1,33 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-ve0-f174.google.com (mail-ve0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id A1E016AD48;
-	Thu, 20 Jun 2013 10:53:10 +0000 (UTC)
-Received: by mail-ve0-f174.google.com with SMTP id oz10so4900976veb.19
-	for <multiple recipients>; Thu, 20 Jun 2013 03:53:11 -0700 (PDT)
+Return-Path: <philipjcraig@gmail.com>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EFF766969C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jun 2013 11:12:01 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w57so5401292wes.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jun 2013 04:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=M6ntFxpF8m6Pz4tvOOzkpmUae4jE8tENggGdmupL2+Q=;
-	b=gLdSZZdOr/t2u59F6jI90fqNYMSLbfUAf6AoDuK+kCffFclAa6APSuAtPUMkju12t5
-	Hf5YPYfrAhkBO/WRgBqKCtf6OCHkwdHXYIfzlq0gTzN2qNWkjQVSf4cIq9lhKnuIVE3I
-	AaUYuz1uiKblX7RIw6mi9zneBXMhqGOkrwkVzemz7RTwF5ub+iShB5f+aGljThoSdZOw
-	egKNhLDLqI0pkNr504DMKbbbIlqvVgOBi4mKaneYsig2kVQlCX/sqFGzpxhev9zkQvG7
-	xzgisPn7lyAyS13PTj9udKAOVF7zsv+6zyhhl1drwnl9TjOpt+Q9TwWdgkHArQL1VCPR
-	IeaA==
-X-Received: by 10.220.98.68 with SMTP id p4mr2390364vcn.28.1371725591556; Thu,
-	20 Jun 2013 03:53:11 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=jT+V/JhcmV3AKDYLxAKSoRk3j5NAcP5XM5tNFheya3o=;
+	b=k17MQDWn9KHOCCSVBBOhLL0TEesDVvYKMNrdQC6SoVPuKnpxCgHZ5UbNFw90Dn3n+7
+	Q/N93FTTn+IaLTUoAYD2rJ7jntYRWquMmmBTqwaNLrZEhPPqtsGDueefXihbOFahTPcG
+	uzoZJYAdT9mTOFDm/UkQai31auP09sDedy9XSfuByhqMO6ABS99DCO3Ztb4y2djOctL9
+	fX2ZxXUVIN4uKeh+aJRKsLKaQPRXZ+58LwLWkH0hK2dPSJBoyuIxEv9nFa5HdFU4kGTO
+	knzYZzU33DmNJU5NDc0GNTTyDAPxQqV3XfjO7/z9xeVWuXa107YrHIKeIsfXduhq2xzR
+	PJ9A==
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.195.201 with HTTP; Thu, 20 Jun 2013 03:52:31 -0700 (PDT)
-In-Reply-To: <CANyK_8f+tsurm4_5GrdiXwEkak70YAhn3t51roeRydCTx9Mbcw@mail.gmail.com>
-References: <20121213174202.GE3356@jama.jama.net>
-	<CANyK_8eXUptxF52CmcJftYZD+oht4gfkDfRsbY3gOnmTRwyzaQ@mail.gmail.com>
-	<3004132.t7dk9348rv@helios> <1886786.nfT3SfR8Pm@helios>
-	<CANyK_8f+tsurm4_5GrdiXwEkak70YAhn3t51roeRydCTx9Mbcw@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Thu, 20 Jun 2013 11:52:31 +0100
-X-Google-Sender-Auth: Fpm0uwyKiyeg4PVFL1mJCwljAp8
-Message-ID: <CANyK_8eanLYLxAv48juZ7Vr0XVdnvafxbtwr2CYk7MVQt9XcXA@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world
+X-Received: by 10.194.63.46 with SMTP id d14mr5424264wjs.81.1371726722697;
+	Thu, 20 Jun 2013 04:12:02 -0700 (PDT)
+Received: by 10.180.205.202 with HTTP; Thu, 20 Jun 2013 04:12:02 -0700 (PDT)
+In-Reply-To: <137188331.qH2f3OD9K1@luxon>
+References: <3389668.90m8Qn9G8H@luxon> <16136190.1I5tgHWYiU@luxon>
+	<51B61BBB.1030508@herbrechtsmeier.net> <137188331.qH2f3OD9K1@luxon>
+Date: Thu, 20 Jun 2013 21:12:02 +1000
+Message-ID: <CAFpsybmYUbbGo4AWp-BonJdkiX5h7TpiK7n9=tfG1bAREfdjig@mail.gmail.com>
+From: Philip Craig <philipjcraig@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5] Problems with Qt5 and CMake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,43 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 10:53:11 -0000
+X-List-Received-Date: Thu, 20 Jun 2013 11:12:02 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 20 June 2013 11:50, Paul Barker <paul@paulbarker.me.uk> wrote:
-> On 20 June 2013 11:25, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
->> On Thursday 20 June 2013 11:16:37 Paul Eggleton wrote:
->>> To be honest I think ENTERPRISE_DISTRO needs to go. It's not even clear what
->>> it should mean, and it's not consistently implemented. For things we want
->>> to be optional we have PACKAGECONFIG; for items that have licensing
->>> requirements that might be troublesome in certain deployments we have
->>> LICENSE_FLAGS, and LICENSE_FLAGS
->>
->> Sorry, that should have read "and LICENSE_FLAGS already has a mechanism to
->> prevent a recipe being built based on the current settings and report why."
->>
+On 20 June 2013 20:06, Manuel Nickschas <manuel.nickschas@bmw-carit.de> wrote:
+> This gave me the idea for an ugly workaround at least; I can overwrite the
+> location in my project's CMakeLists.txt after processing
+> find_package(Qt5Core). Or I could check if something like qtpaths.cmake
+> exists in the source dir and include that conditionally at this point.
 >
-> I decided to do a quick grep. "ENTERPRISE_DISTRO" isn't found at all
-> in openembedded-core, and in meta-openembedded it's just in the
-> following places, after I've converted mplayer2 to using PACKAGECONFIG
-> instead.
+> To avoid Yocto-specific hacks ending up in the upstream repo, I think the
+> best workaround for now would be to have my recipe patch the
+> CMakeLists.txt to include a generated file that overwrites the locations.
 >
+> But this really should be properly fixed in meta-qt5, by modifying the
+> relevant *Config.cmake files in such a way that the native tools are used
+> when something is built by Bitbake (e.g. by setting some variable), and the
+> target tools in case someone compiles manually on the target. We
+> shouldn't force developers to have to include hackish workarounds in their
+> own recipes, or worse, their upstream code. With the proliferation of Qt5 in
+> the embedded space, and the fact that CMake is the de-facto build system
+> for Qt-based things these days, it's a problem that will come up quite often
+> in the future and deserves a global solution.
 
-That got trashed by word wrapping. It's these files:
+I'm having this exact problem trying to get qt-gstreamer to build in
+OpenEmbedded.
 
-./meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-./meta-oe/recipes-multimedia/libav/libav.inc
-./meta-multimedia/recipes-multimedia/vlc/vlc.inc
-./meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
-./meta-efl/recipes-efl/e17/enjoy_svn.bb
-
->
-> So if we do want to get rid of this, it shouldn't be too much work.
->
-
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+Do you have a workaround yet that would apply to qt-gstreamer too?
 
