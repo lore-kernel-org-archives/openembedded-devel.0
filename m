@@ -1,47 +1,42 @@
-Return-Path: <thilo.cestonaro@ts.fujitsu.com>
-Received: from dgate10.ts.fujitsu.com (dgate10.ts.fujitsu.com [80.70.172.49])
-	by mail.openembedded.org (Postfix) with ESMTP id CFF32621B3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2013 08:19:22 +0000 (UTC)
-DomainKey-Signature: s=s1536a; d=ts.fujitsu.com; c=nofws; q=dns;
-	h=X-SBRSScore:X-IronPort-AV:Received:X-IronPort-AV:
-	Received:Message-ID:Date:From:User-Agent:MIME-Version:To:
-	Subject:References:In-Reply-To:Content-Type:
-	Content-Transfer-Encoding;
-	b=hGcYtSGvrG4CDFel5Y4P6ThkSROUd+3ohbvXpgc2bgRDxIFokX6VtEEr
-	MrroT9hLvBK9qUqpaT9d73ZAJ/Q/0wdj0mBAHh7eEh1Bgr6bvQ5ErwzPe
-	BYiQADgy7X5aG031mZTP130PasH/tspTvpVvlzeBDEl2D6sgEpZtVeP8C
-	Zg/SprEhYN4MyRaYRi9T0W5TVeu/AvQ0AMG3I6Fm4nCeeLwuFNpokf9zp
-	fzIwr9qxc1+2K3tl9irXYHBmlrNel;
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=ts.fujitsu.com; i=@ts.fujitsu.com; q=dns/txt;
-	s=s1536b; t=1371716365; x=1403252365;
-	h=message-id:date:from:mime-version:to:subject:references:
-	in-reply-to:content-transfer-encoding;
-	bh=wu7FNNDIpXRQn89003BwzKFqW+koIWGTbUURuJR5jfo=;
-	b=oy82MzSYaZsVVuqLCsUyUtCDAmbJKfSAiyuFfw+mYKCxLxLZNIOx0ZMi
-	T9nvv41TuINpIOtvd09LNrya5423Ho2XhrYKBJQQypozIm0BI+SnQvhzR
-	D/wxe59/GTP0HfWGuMd6WPLd5CwWvbj1CfF62nm7lZsSICqF4GfVx/tf2
-	lYzHwsbYlRVFsCEcRzM0ip1WkEaHmDk50qstoW5JqgCNhM8vdbJQQfJqu
-	WPF4UlZugPlJiNrif43EfcwPSpROP;
-X-SBRSScore: None
-X-IronPort-AV: E=Sophos;i="4.87,903,1363129200"; d="scan'208";a="150532458"
-Received: from unknown (HELO abgdate50u.abg.fsc.net) ([172.25.138.66])
-	by dgate10u.abg.fsc.net with ESMTP; 20 Jun 2013 10:19:22 +0200
-X-IronPort-AV: E=Sophos;i="4.87,903,1363129200"; d="scan'208";a="12774564"
-Received: from unknown (HELO [192.168.0.34]) ([172.25.162.11])
-	by abgdate50u.abg.fsc.net with ESMTP; 20 Jun 2013 10:19:22 +0200
-Message-ID: <51C2BB08.50308@ts.fujitsu.com>
-Date: Thu, 20 Jun 2013 10:19:20 +0200
-From: Cestonaro Thilo <thilo.cestonaro@ts.fujitsu.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130529 Thunderbird/17.0.6
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-ve0-f180.google.com (mail-ve0-f180.google.com
+	[209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 320BA607F9;
+	Thu, 20 Jun 2013 09:39:53 +0000 (UTC)
+Received: by mail-ve0-f180.google.com with SMTP id pa12so4815796veb.25
+	for <multiple recipients>; Thu, 20 Jun 2013 02:39:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=vRxb5Xg1h/fjp8wWDjRZZbdUJD6q+SyWsserbdU5UPY=;
+	b=uriz3XeoAPXAJX6uKDq8dVDGebC+wbd39oTNaBNOfg3h+N2lBUe3AuJ0Qrbm3THcJk
+	3TkW0PeNkEfLpA4y0HqyiFYafbE5pnwbu4EQkubaca7KmTYNJtZ2QHsnz2obfW1sx8fc
+	1p1nlZQgBlWg1/is9aYDuGYgtK4TglLD92o+btqsbFTxvfzfZccJ0WpjBXFAw6HO69v5
+	T7Lep7/rXguMsFLDhTpU6sg6KXAIN7y16qsXbIoDDqPHAJI+kZU3TkQYILG0HHeI1hQi
+	A7p5kjvkzuQCZ7IemSCGhBK5kf7epJrPwyso2uetZolyiiEhTBeALEZXp0+1dbx/MElQ
+	qDQQ==
+X-Received: by 10.220.250.147 with SMTP id mo19mr2252453vcb.79.1371721194063; 
+	Thu, 20 Jun 2013 02:39:54 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <51C2B063.1050804@ts.fujitsu.com>
-	<6339585B-94AE-44CA-B029-011D77E86461@gmail.com>
-In-Reply-To: <6339585B-94AE-44CA-B029-011D77E86461@gmail.com>
-Subject: Re: chromium 29.0.1518.2 for armv7a
+Sender: paul.betafive@gmail.com
+Received: by 10.220.195.201 with HTTP; Thu, 20 Jun 2013 02:39:13 -0700 (PDT)
+In-Reply-To: <FB95243C-761D-4268-96A1-B0893DA616AF@gmail.com>
+References: <20121213174202.GE3356@jama.jama.net>
+	<20130415141253.GC10628@jama.dyndns-home.com>
+	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
+	<20130516075215.GA24809@jama.dyndns-home.com>
+	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
+	<20130611160434.GI3233@jama>
+	<CANyK_8fMj+=hDVMV+q7CJi7_G5HvztE+n_wcHDn0kTUB7dxFhA@mail.gmail.com>
+	<FB95243C-761D-4268-96A1-B0893DA616AF@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Thu, 20 Jun 2013 10:39:13 +0100
+X-Google-Sender-Auth: gXmiGr6lVrM2h9m3_8Q5_-bJU3g
+Message-ID: <CANyK_8eXUptxF52CmcJftYZD+oht4gfkDfRsbY3gOnmTRwyzaQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,197 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 08:19:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 Jun 2013 09:39:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 20.06.2013 09:37, Khem Raj wrote:
-> On Jun 20, 2013, at 12:33 AM, Cestonaro Thilo <thilo.cestonaro@ts.fujit=
-su.com> wrote:
+On 20 June 2013 03:28, Khem Raj <raj.khem@gmail.com> wrote:
 >
->> Hey,
->>
->> I'm trying to compile chromium from meta-browser for a armv7a SoC.
->> But it always failed with following error[1]. I fixed this bug with th=
-e appended patch and I had to remove
->> the extra cflag "-Wno-error=3Dunused-local-typedefs" from the recipe t=
-o get it to compile.
-> hmm, which version of gcc are you using ? I use gcc 4.8 here and it com=
-piles fine and also runs fine.
-my gcc version is 4.5.4 so it might be it.
-
-thx for the comment. I'll try to use a newer one.
+>> luajit is rather a strange error, HOST_CC can't find <sys/types.h> or
+>> some other common headers.
 >
->> But can someone have a look at the patch and tell why the hell this co=
-mpiles and the original code not, please?
->>
->> However the real problem[2] is, that whenever I try to start chromium =
-on the armv7a machine, it segills right away. Even --help brings the sigi=
-ll :/.
->> I've no idea how to fix such a problem; any comments?
->>
->> Thx.
->>
->> Greetings
->> Thilo
->>
->>
->> 1:
->> --------------------------------------------------------------------
->> + cd /home/cestonarot/Projects/utc_soc/chromium/29/chromium-29.0.1518.=
-2
->> + do_compile
->> + ninja -C /home/cestonarot/Projects/utc_soc/chromium/29/chromium-29.0=
-=2E1518.2/out/Release chrome
->> ninja: Entering directory `/home/cestonarot/Projects/utc_soc/chromium/=
-29/chromium-29.0.1518.2/out/Release'
->> [1/4] CC obj/third_party/webrtc/modules/audio_processing/ns/audio_proc=
-essing_neon.nsx_core_neon.o
->> FAILED: arm-magna-linux-gnueabi-gcc  -march=3Darmv7-a -fno-tree-vector=
-ize      -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcor=
-tex-a8 -mthumb-interwork -mno-thumb --sysroot=3D/home/cestonarot/Projects=
-/utc_soc/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/dm814x-e=
-vm -MMD -MF obj/third_party/webrtc/modules/audio_processing/ns/audio_proc=
-essing_neon.nsx_core_neon.o.d '-DWEBRTC_SVNREVISION=3D"Unavailable(issue6=
-87)"' -D_FILE_OFFSET_BITS=3D64 -DUSE_LINUX_BREAKPAD -DNO_TCMALLOC -DDISAB=
-LE_NACL -DCHROMIUM_BUILD -DUSE_DEFAULT_RENDER_THEME=3D1 -DUSE_LIBJPEG_TUR=
-BO=3D1 -DUSE_NSS=3D1 -DUSE_X11=3D1 -DENABLE_ONE_CLICK_SIGNIN -DGTK_DISABL=
-E_SINGLE_INCLUDES=3D1 -DENABLE_REMOTING=3D1 -DENABLE_WEBRTC=3D1 -DUSE_PRO=
-PRIETARY_CODECS -DENABLE_PEPPER_CDMS -DENABLE_CONFIGURATION_POLICY -DENAB=
-LE_INPUT_SPEECH -DENABLE_NOTIFICATIONS -DENABLE_GPU=3D1 -DENABLE_EGLIMAGE=
-=3D1 -DENABLE_TASK_MANAGER=3D1 -DENABLE_EXTENSIONS=3D1 -DENABLE_PLUGIN_IN=
-STALLATION=3D1 -DENABLE_PLUGINS=3D1 -DENABLE_SESSION_SERVICE=3D1 -DENABLE=
-_THEMES=3D1 -
->   DENABLE_BACKGROUND=3D1 -DENABLE_AUTOMATION=3D1 -DENABLE_GOOGLE_NOW=3D=
-1 -DENABLE_LANGUAGE_DETECTION=3D1 -DENABLE_PRINTING=3D1 -DENABLE_CAPTIVE_=
-PORTAL_DETECTION=3D1 -DENABLE_MANAGED_USERS=3D1 -DWEBRTC_CHROMIUM_BUILD -=
-DWEBRTC_ARCH_ARM -DWEBRTC_ARCH_ARM_V7 -DWEBRTC_ARCH_ARM_NEON -DWEBRTC_LIN=
-UX -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -DNDEBUG -DNVALGRIND -=
-DDYNAMIC_ANNOTATIONS_ENABLED=3D0 -D_FORTIFY_SOURCE=3D2 -I../../third_part=
-y/webrtc -I../../third_party -I../.. -I../../third_party/webrtc/common_au=
-dio/resampler/include -I../../third_party/webrtc/common_audio/signal_proc=
-essing/include -I../../third_party/webrtc/common_audio/vad/include -fstac=
-k-protector --param=3Dssp-buffer-size=3D4 -Werror -pthread -fno-exception=
-s -fno-strict-aliasing -Wall -Wno-unused-parameter -Wno-missing-field-ini=
-tializers -fvisibility=3Dhidden -pipe -fPIC -mfpu=3Dneon -flax-vector-con=
-versions -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Ds=
-oftfp -mthumb -O2 -fno-ident -fdata-sections -ffunction-sections   -c ../=
-=2E./th
->   ird_party/webrtc/modules/audio_processing/ns/nsx_core_neon.c -o obj/t=
-hird_party/webrtc/modules/audio_processing/ns/audio_processing_neon.nsx_c=
-ore_neon.o
->> {standard input}: Assembler messages:
->> {standard input}:274: Error: ']' expected -- `vld1.16 {d22},[r9:64]'
->> ninja: build stopped: subcommand failed.
->> --------------------------------------------------------------------
->>
->> 2:
->> --------------------------------------------------------------------
->> bash-4.2$ /usr/bin/gdb /usr/bin/chrome/chrome
->> GNU gdb (GDB) 7.3.1
->> Copyright (C) 2011 Free Software Foundation, Inc.
->> License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gp=
-l.html>
->> This is free software: you are free to change and redistribute it.
->> There is NO WARRANTY, to the extent permitted by law.  Type "show copy=
-ing"
->> and "show warranty" for details.
->> This GDB was configured as "arm-magna-linux-gnueabi".
->> For bug reporting instructions, please see:
->> <http://www.gnu.org/software/gdb/bugs/>...
->> Reading symbols from /usr/bin/chrome/chrome...done.
->> (gdb) run
->> Starting program: /usr/bin/chrome/chrome
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->> warning: Unable to find libthread_db matching inferior's thread librar=
-y, thread debugging will not be available.
->>
->> Program received signal SIGILL, Illegal instruction.
->> 0x41b09ecc in ___ZNSt6vectorISbItN4base20string16_char_traitsESaItEESa=
-IS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEjRKS3__ven=
-eer ()
->> (gdb) bt full
->> #0  0x41b09ecc in ___ZNSt6vectorISbItN4base20string16_char_traitsESaIt=
-EESaIS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEjRKS3_=
-_veneer ()
->> No symbol table info available.
->> #1  0x4298c190 in __libc_csu_init (argc=3D1, argv=3D0xbe8eeb34, envp=3D=
-0xbe8eeb3c) at elf-init.c:124
->>         i =3D <optimized out>
->> #2  0x4483553c in __libc_start_main () from /lib/libc.so.6
->> No symbol table info available.
->> #3  0x40318944 in _start ()
->> No symbol table info available.
->> (gdb)
->> --------------------------------------------------------------------
->>
->>
->> <fix-armv7a-compile.patch.gz>_________________________________________=
-______
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> hmmm luajit does not fail here for beaglebone/qemuarm so not much I can help.
 >
 
+I'll throw a qemuarm build on today and see whether this is an issue
+with my build host or not.
 
+>>
+>> mplayer2 is failing to find <mad.h>, this needs the same sort of fix I
+>> made to vlc (http://git.openembedded.org/meta-openembedded/commit/?id=3d6369b7c39d78b0d424dbe5a97e736b694e3c48).
+>>
+>> Full logs, conf files, etc: http://www.paulbarker.me.uk/yocto/20130617_poky/
+>>
+>
+> I think missing dependencies. Best is to turn this into PACKAGECONFIG
+>
+
+The dependencies are enabled if ENTERPRISE_DISTRO=0 but I'm building
+with it set to 1. However mplayer2 is still looking for them, much
+like vlc did.
+
+I could remove the ENTERPRISE_DISTRO logic and replace it all with
+PACKAGECONFIG options but it would lead to a "Nothing PROVIDES" error
+if a PACKAGECONFIG option was set for a dependency which isn't built
+when ENTERPRISE_DISTRO=1. The error message doesn't even mention
+ENTERPRISE_DISTRO so it may be confusing for a user.
+
+Perhaps I could write a python function to check the combination and
+issue a better error if the combination is unbuildable. Is there any
+way to get such a function to run during recipe parsing and be able to
+produce output before the "Nothing PROVIDES" error?
+
+Thanks,
+
+--
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
