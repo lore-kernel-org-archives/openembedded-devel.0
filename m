@@ -1,33 +1,47 @@
-Return-Path: <Fahad_Usman@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id E669E6AD1A
+Return-Path: <thilo.cestonaro@ts.fujitsu.com>
+Received: from dgate10.ts.fujitsu.com (dgate10.ts.fujitsu.com [80.70.172.49])
+	by mail.openembedded.org (Postfix) with ESMTP id CFF32621B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2013 07:49:40 +0000 (UTC)
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1UpZcj-0005bG-NX from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Jun 2013 00:49:41 -0700
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Thu, 20 Jun 2013 00:49:41 -0700
-Received: from [137.202.157.99] (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server (TLS) id 14.2.247.3; Thu, 20 Jun 2013 08:49:36 +0100
-Message-ID: <51C2B405.4070303@mentor.com>
-Date: Thu, 20 Jun 2013 12:49:25 +0500
-From: "Usman, Fahad" <Fahad_Usman@mentor.com>
+	Thu, 20 Jun 2013 08:19:22 +0000 (UTC)
+DomainKey-Signature: s=s1536a; d=ts.fujitsu.com; c=nofws; q=dns;
+	h=X-SBRSScore:X-IronPort-AV:Received:X-IronPort-AV:
+	Received:Message-ID:Date:From:User-Agent:MIME-Version:To:
+	Subject:References:In-Reply-To:Content-Type:
+	Content-Transfer-Encoding;
+	b=hGcYtSGvrG4CDFel5Y4P6ThkSROUd+3ohbvXpgc2bgRDxIFokX6VtEEr
+	MrroT9hLvBK9qUqpaT9d73ZAJ/Q/0wdj0mBAHh7eEh1Bgr6bvQ5ErwzPe
+	BYiQADgy7X5aG031mZTP130PasH/tspTvpVvlzeBDEl2D6sgEpZtVeP8C
+	Zg/SprEhYN4MyRaYRi9T0W5TVeu/AvQ0AMG3I6Fm4nCeeLwuFNpokf9zp
+	fzIwr9qxc1+2K3tl9irXYHBmlrNel;
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=ts.fujitsu.com; i=@ts.fujitsu.com; q=dns/txt;
+	s=s1536b; t=1371716365; x=1403252365;
+	h=message-id:date:from:mime-version:to:subject:references:
+	in-reply-to:content-transfer-encoding;
+	bh=wu7FNNDIpXRQn89003BwzKFqW+koIWGTbUURuJR5jfo=;
+	b=oy82MzSYaZsVVuqLCsUyUtCDAmbJKfSAiyuFfw+mYKCxLxLZNIOx0ZMi
+	T9nvv41TuINpIOtvd09LNrya5423Ho2XhrYKBJQQypozIm0BI+SnQvhzR
+	D/wxe59/GTP0HfWGuMd6WPLd5CwWvbj1CfF62nm7lZsSICqF4GfVx/tf2
+	lYzHwsbYlRVFsCEcRzM0ip1WkEaHmDk50qstoW5JqgCNhM8vdbJQQfJqu
+	WPF4UlZugPlJiNrif43EfcwPSpROP;
+X-SBRSScore: None
+X-IronPort-AV: E=Sophos;i="4.87,903,1363129200"; d="scan'208";a="150532458"
+Received: from unknown (HELO abgdate50u.abg.fsc.net) ([172.25.138.66])
+	by dgate10u.abg.fsc.net with ESMTP; 20 Jun 2013 10:19:22 +0200
+X-IronPort-AV: E=Sophos;i="4.87,903,1363129200"; d="scan'208";a="12774564"
+Received: from unknown (HELO [192.168.0.34]) ([172.25.162.11])
+	by abgdate50u.abg.fsc.net with ESMTP; 20 Jun 2013 10:19:22 +0200
+Message-ID: <51C2BB08.50308@ts.fujitsu.com>
+Date: Thu, 20 Jun 2013 10:19:20 +0200
+From: Cestonaro Thilo <thilo.cestonaro@ts.fujitsu.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130510 Thunderbird/17.0.6
+	rv:17.0) Gecko/20130529 Thunderbird/17.0.6
 MIME-Version: 1.0
-To: Fahad Usman <fahad_usman@mentor.com>
-References: <1371544147-10662-1-git-send-email-fahad_usman@mentor.com>
-In-Reply-To: <1371544147-10662-1-git-send-email-fahad_usman@mentor.com>
-X-Originating-IP: [137.202.0.76]
-X-OriginalArrivalTime: 20 Jun 2013 07:49:41.0894 (UTC)
-	FILETIME=[B91D4260:01CE6D8A]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] tracker: add new recipe
+To: openembedded-devel@lists.openembedded.org
+References: <51C2B063.1050804@ts.fujitsu.com>
+	<6339585B-94AE-44CA-B029-011D77E86461@gmail.com>
+In-Reply-To: <6339585B-94AE-44CA-B029-011D77E86461@gmail.com>
+Subject: Re: chromium 29.0.1518.2 for armv7a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,258 +55,197 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 07:49:41 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Jun 2013 08:19:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 06/18/2013 01:29 PM, Fahad Usman wrote:
-> - copy tracker recipe from meta-guacamayo layer to meta-oe
-> - package files that were not being shipped
-> - add systemd suppert for tracker
+On 20.06.2013 09:37, Khem Raj wrote:
+> On Jun 20, 2013, at 12:33 AM, Cestonaro Thilo <thilo.cestonaro@ts.fujit=
+su.com> wrote:
 >
-> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
-> ---
->   meta-oe/recipes-support/tracker/files/90tracker    |  4 ++
->   .../tracker/files/tracker-dbus.service             | 15 +++++
->   .../tracker/files/tracker-miner-fs.service         | 12 ++++
->   .../tracker/files/tracker-store.service            | 12 ++++
->   ...-Fix-missing-gobject-introspection-checks.patch | 17 ++++++
->   .../enable-sqlite-crosscompile.patch               | 13 ++++
->   .../fix-removable-media-detection.patch            | 30 ++++++++++
->   meta-oe/recipes-support/tracker/tracker_0.14.2.bb  | 70 ++++++++++++++++++++++
->   8 files changed, 173 insertions(+)
->   create mode 100644 meta-oe/recipes-support/tracker/files/90tracker
->   create mode 100644 meta-oe/recipes-support/tracker/files/tracker-dbus.service
->   create mode 100644 meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
->   create mode 100644 meta-oe/recipes-support/tracker/files/tracker-store.service
->   create mode 100644 meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
->   create mode 100644 meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
->   create mode 100644 meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
->   create mode 100644 meta-oe/recipes-support/tracker/tracker_0.14.2.bb
->
-> diff --git a/meta-oe/recipes-support/tracker/files/90tracker b/meta-oe/recipes-support/tracker/files/90tracker
-> new file mode 100644
-> index 0000000..9594b91
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/files/90tracker
-> @@ -0,0 +1,4 @@
-> +#!/bin/sh
-> +
-> +/usr/bin/trackerd -m &
-> +
-> diff --git a/meta-oe/recipes-support/tracker/files/tracker-dbus.service b/meta-oe/recipes-support/tracker/files/tracker-dbus.service
-> new file mode 100644
-> index 0000000..9d4fb74
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/files/tracker-dbus.service
-> @@ -0,0 +1,15 @@
-> +[Unit]
-> +Description=tracker DBus session bus handler
-> +Before=tracker-store.service
-> +After=dbus.service
-> +Requires=dbus.service
-> +BindTo=tracker-store.service
-> +
-> +[Service]
-> +Type=forking
-> +EnvironmentFile=-/tmp/tracker.env
-> +ExecStartPre=/bin/rm -rf /tmp/tracker.env
-> +ExecStart=/bin/sh -c 'echo "DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --fork --session --print-address`" > /tmp/tracker.env'
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service b/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
-> new file mode 100644
-> index 0000000..f143924
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=tracker-miner-fs
-> +After=syslog.target local-fs.target udev.service dbus.service tracker-store.service
-> +Requires=tracker-store.service
-> +
-> +[Service]
-> +Environment=HOME=/home/root
-> +EnvironmentFile=-/tmp/tracker.env
-> +ExecStart=/usr/libexec/tracker-miner-fs
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-oe/recipes-support/tracker/files/tracker-store.service b/meta-oe/recipes-support/tracker/files/tracker-store.service
-> new file mode 100644
-> index 0000000..7ca9ff0
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/files/tracker-store.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=tracker-store
-> +After=syslog.target local-fs.target dbus.service
-> +Requires=dbus.service tracker-dbus.service
-> +BindTo=tracker-dbus.service
-> +
-> +[Service]
-> +EnvironmentFile=-/tmp/tracker.env
-> +ExecStart=/usr/libexec/tracker-store
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch b/meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
-> new file mode 100644
-> index 0000000..8701f58
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
-> @@ -0,0 +1,17 @@
-> +diff -Naur ../tracker-0.10.8/configure.ac tracker-0.10.8//configure.ac
-> +--- ../tracker-0.10.8/configure.ac	2011-04-08 15:03:30.000000000 +0300
-> ++++ tracker-0.10.8//configure.ac	2011-04-11 13:47:16.625914002 +0300
-> +@@ -218,7 +218,12 @@
-> +
-> + # Needed to generate .gir files,
-> + # see http://live.gnome.org/GnomeGoals/AddGObjectIntrospectionSupport
-> +-GOBJECT_INTROSPECTION_CHECK([0.9.5])
-> ++#GOBJECT_INTROSPECTION_CHECK([0.9.5])
-> ++# Satisfy missing introspection foo
-> ++AM_CONDITIONAL(HAVE_INTROSPECTION, test "0" == "1")
-> ++
-> ++INTROSPECTION_CFLAGS=""
-> ++AC_SUBST(INTROSPECTION_CFLAGS)
-> +
-> + # NOTE: dbus and dbus-glib-1 are only used now for libtracker-client
-> + # which is deprecated and tracker-writeback which will be refactored
-> diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch b/meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
-> new file mode 100644
-> index 0000000..5dadda2
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
-> @@ -0,0 +1,13 @@
-> +Index: tracker-0.10.17/m4/sqlite-threadsafe.m4
-> +===================================================================
-> +--- tracker-0.10.17.orig/m4/sqlite-threadsafe.m4
-> ++++ tracker-0.10.17/m4/sqlite-threadsafe.m4
-> +@@ -45,7 +45,7 @@ int main ()
-> +   ]])],
-> +        [ax_cv_sqlite_threadsafe=yes],
-> +        [ax_cv_sqlite_threadsafe=no],
-> +-       [ax_cv_sqlite_threadsafe=no])])
-> ++       [ax_cv_sqlite_threadsafe=yes])])
-> +
-> +   LIBS="$save_LIBS"
-> + ])
-> diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch b/meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
-> new file mode 100644
-> index 0000000..6c3d9de
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
-> @@ -0,0 +1,30 @@
-> +Index: tracker-0.14.2/src/libtracker-miner/tracker-storage.c
-> +===================================================================
-> +--- tracker-0.14.2.orig/src/libtracker-miner/tracker-storage.c	2011-08-03 13:53:16.000000000 +0100
-> ++++ tracker-0.14.2/src/libtracker-miner/tracker-storage.c	2012-09-10 08:25:18.322215126 +0100
-> +@@ -20,6 +20,7 @@
-> + #include "config.h"
-> +
-> + #include <string.h>
-> ++#include <sys/stat.h>
-> +
-> + #include <gio/gio.h>
-> + #include <gio/gunixmounts.h>
-> +@@ -646,6 +647,17 @@
-> + 				gchar *content_type;
-> + 				gboolean is_multimedia;
-> + 				gboolean is_blank;
-> ++                                struct stat st;
-> ++
-> ++                                /*
-> ++                                 * Consider all files under /media to be
-> ++                                 * removable unless the file .this-is-root is
-> ++                                 * present.
-> ++                                 */
-> ++                                if (!strncmp (mount_path, "/media/",
-> ++                                              strlen ("/media/")) &&
-> ++                                    stat ("/media/.this-is-root", &st))
-> ++                                  is_removable = TRUE;
-> +
-> + 				content_type = mount_guess_content_type (mount, &is_optical, &is_multimedia, &is_blank);
-> +
-> diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
-> new file mode 100644
-> index 0000000..5838c2d
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
-> @@ -0,0 +1,70 @@
-> +DESCRIPTION = "Tracker is a tool designed to extract information and metadata about your personal data so that it can be searched easily and quickly."
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=ee31012bf90e7b8c108c69f197f3e3a4"
-> +DEPENDS = "file gstreamer gamin dbus libexif gettext sqlite3 icu"
-> +RDEPENDS_${PN} += " gvfs gsettings-desktop-schemas"
-> +HOMEPAGE = "http://projects.gnome.org/tracker/"
-> +
-> +PR = "r7"
-> +
-> +inherit autotools pkgconfig gnome gettext gsettings systemd
-> +
-> +VER_DIR = "${@gnome_verdir("${PV}")}"
-> +SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
-> +           file://0005-Fix-missing-gobject-introspection-checks.patch \
-> +           file://enable-sqlite-crosscompile.patch \
-> +	   file://fix-removable-media-detection.patch \
-> +           file://90tracker \
-> +           file://tracker-store.service \
-> +           file://tracker-miner-fs.service \
-> +           file://tracker-dbus.service \
-> +           "
-> +
-> +SYSTEMD_SERVICE_${PN} = " tracker-store.service tracker-miner-fs.service tracker-dbus.service "
-> +SYSTEMD_AUTO_ENABLE = "disable"
-> +
-> +EXTRA_OECONF += " tracker_cv_have_ioprio=yes --disable-introspection"
-> +
-> +# Disable the desktop-centric miners
-> +EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
-> +                 --disable-miner-evolution --disable-miner-flickr"
-> +
-> +LEAD_SONAME = "libtrackerclient.so.0"
-> +
-> +do_install_append() {
-> +   cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
-> +#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
-> +#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
-> +
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
-> +}
-> +
-> +PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"
-> +
-> +FILES_${PN} += "${datadir}/dbus-1/ \
-> +                ${libdir}/tracker-${VER_DIR}/*.so.* \
-> +                ${libdir}/tracker-${VER_DIR}/extract-modules/*.so \
-> +                ${datadir}/icons/hicolor/*/apps/tracker.* \
-> +                ${libdir}/nautilus/extensions-2.0/*.la \
-> +                ${datadir}/glib-2.0/schemas/* \
-> +                ${systemd_unitdir}/system/tracker-store.service \
-> +                ${systemd_unitdir}/system/tracker-miner-fs.service \
-> +                ${systemd_unitdir}/system/tracker-dbus.service \
-> +"
-> +
-> +FILES_${PN}-dev += "${libdir}/tracker-${VER_DIR}/*.la \
-> +                    ${libdir}/tracker-${VER_DIR}/*.so \
-> +                    ${libdir}/tracker-${VER_DIR}/extract-modules/*.la"
-> +
-> +FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
-> +FILES_${PN}-dbg += "${libdir}/*/*/.debug \
-> +                    ${libdir}/*/.debug"
-> +FILES_${PN}-tests = "${datadir}/tracker-tests/"
-> +FILES_${PN}-vala = "${datadir}/vala/"
-> +FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
-> +
-> +SRC_URI[md5sum] = "f3a871beeebf86fd752863ebd22af9ac"
-> +SRC_URI[sha256sum] = "9b59330aa2e9e09feee587ded895e9247f71fc25f46b023d616d9969314bc7f1"
-kindly merge this patch in dylan branch as well
+>> Hey,
+>>
+>> I'm trying to compile chromium from meta-browser for a armv7a SoC.
+>> But it always failed with following error[1]. I fixed this bug with th=
+e appended patch and I had to remove
+>> the extra cflag "-Wno-error=3Dunused-local-typedefs" from the recipe t=
+o get it to compile.
+> hmm, which version of gcc are you using ? I use gcc 4.8 here and it com=
+piles fine and also runs fine.
+my gcc version is 4.5.4 so it might be it.
 
-Thanks,
-Fahad.
+thx for the comment. I'll try to use a newer one.
+>
+>> But can someone have a look at the patch and tell why the hell this co=
+mpiles and the original code not, please?
+>>
+>> However the real problem[2] is, that whenever I try to start chromium =
+on the armv7a machine, it segills right away. Even --help brings the sigi=
+ll :/.
+>> I've no idea how to fix such a problem; any comments?
+>>
+>> Thx.
+>>
+>> Greetings
+>> Thilo
+>>
+>>
+>> 1:
+>> --------------------------------------------------------------------
+>> + cd /home/cestonarot/Projects/utc_soc/chromium/29/chromium-29.0.1518.=
+2
+>> + do_compile
+>> + ninja -C /home/cestonarot/Projects/utc_soc/chromium/29/chromium-29.0=
+=2E1518.2/out/Release chrome
+>> ninja: Entering directory `/home/cestonarot/Projects/utc_soc/chromium/=
+29/chromium-29.0.1518.2/out/Release'
+>> [1/4] CC obj/third_party/webrtc/modules/audio_processing/ns/audio_proc=
+essing_neon.nsx_core_neon.o
+>> FAILED: arm-magna-linux-gnueabi-gcc  -march=3Darmv7-a -fno-tree-vector=
+ize      -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcor=
+tex-a8 -mthumb-interwork -mno-thumb --sysroot=3D/home/cestonarot/Projects=
+/utc_soc/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/dm814x-e=
+vm -MMD -MF obj/third_party/webrtc/modules/audio_processing/ns/audio_proc=
+essing_neon.nsx_core_neon.o.d '-DWEBRTC_SVNREVISION=3D"Unavailable(issue6=
+87)"' -D_FILE_OFFSET_BITS=3D64 -DUSE_LINUX_BREAKPAD -DNO_TCMALLOC -DDISAB=
+LE_NACL -DCHROMIUM_BUILD -DUSE_DEFAULT_RENDER_THEME=3D1 -DUSE_LIBJPEG_TUR=
+BO=3D1 -DUSE_NSS=3D1 -DUSE_X11=3D1 -DENABLE_ONE_CLICK_SIGNIN -DGTK_DISABL=
+E_SINGLE_INCLUDES=3D1 -DENABLE_REMOTING=3D1 -DENABLE_WEBRTC=3D1 -DUSE_PRO=
+PRIETARY_CODECS -DENABLE_PEPPER_CDMS -DENABLE_CONFIGURATION_POLICY -DENAB=
+LE_INPUT_SPEECH -DENABLE_NOTIFICATIONS -DENABLE_GPU=3D1 -DENABLE_EGLIMAGE=
+=3D1 -DENABLE_TASK_MANAGER=3D1 -DENABLE_EXTENSIONS=3D1 -DENABLE_PLUGIN_IN=
+STALLATION=3D1 -DENABLE_PLUGINS=3D1 -DENABLE_SESSION_SERVICE=3D1 -DENABLE=
+_THEMES=3D1 -
+>   DENABLE_BACKGROUND=3D1 -DENABLE_AUTOMATION=3D1 -DENABLE_GOOGLE_NOW=3D=
+1 -DENABLE_LANGUAGE_DETECTION=3D1 -DENABLE_PRINTING=3D1 -DENABLE_CAPTIVE_=
+PORTAL_DETECTION=3D1 -DENABLE_MANAGED_USERS=3D1 -DWEBRTC_CHROMIUM_BUILD -=
+DWEBRTC_ARCH_ARM -DWEBRTC_ARCH_ARM_V7 -DWEBRTC_ARCH_ARM_NEON -DWEBRTC_LIN=
+UX -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -DNDEBUG -DNVALGRIND -=
+DDYNAMIC_ANNOTATIONS_ENABLED=3D0 -D_FORTIFY_SOURCE=3D2 -I../../third_part=
+y/webrtc -I../../third_party -I../.. -I../../third_party/webrtc/common_au=
+dio/resampler/include -I../../third_party/webrtc/common_audio/signal_proc=
+essing/include -I../../third_party/webrtc/common_audio/vad/include -fstac=
+k-protector --param=3Dssp-buffer-size=3D4 -Werror -pthread -fno-exception=
+s -fno-strict-aliasing -Wall -Wno-unused-parameter -Wno-missing-field-ini=
+tializers -fvisibility=3Dhidden -pipe -fPIC -mfpu=3Dneon -flax-vector-con=
+versions -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Ds=
+oftfp -mthumb -O2 -fno-ident -fdata-sections -ffunction-sections   -c ../=
+=2E./th
+>   ird_party/webrtc/modules/audio_processing/ns/nsx_core_neon.c -o obj/t=
+hird_party/webrtc/modules/audio_processing/ns/audio_processing_neon.nsx_c=
+ore_neon.o
+>> {standard input}: Assembler messages:
+>> {standard input}:274: Error: ']' expected -- `vld1.16 {d22},[r9:64]'
+>> ninja: build stopped: subcommand failed.
+>> --------------------------------------------------------------------
+>>
+>> 2:
+>> --------------------------------------------------------------------
+>> bash-4.2$ /usr/bin/gdb /usr/bin/chrome/chrome
+>> GNU gdb (GDB) 7.3.1
+>> Copyright (C) 2011 Free Software Foundation, Inc.
+>> License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gp=
+l.html>
+>> This is free software: you are free to change and redistribute it.
+>> There is NO WARRANTY, to the extent permitted by law.  Type "show copy=
+ing"
+>> and "show warranty" for details.
+>> This GDB was configured as "arm-magna-linux-gnueabi".
+>> For bug reporting instructions, please see:
+>> <http://www.gnu.org/software/gdb/bugs/>...
+>> Reading symbols from /usr/bin/chrome/chrome...done.
+>> (gdb) run
+>> Starting program: /usr/bin/chrome/chrome
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>> warning: Unable to find libthread_db matching inferior's thread librar=
+y, thread debugging will not be available.
+>>
+>> Program received signal SIGILL, Illegal instruction.
+>> 0x41b09ecc in ___ZNSt6vectorISbItN4base20string16_char_traitsESaItEESa=
+IS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEjRKS3__ven=
+eer ()
+>> (gdb) bt full
+>> #0  0x41b09ecc in ___ZNSt6vectorISbItN4base20string16_char_traitsESaIt=
+EESaIS3_EE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPS3_S5_EEjRKS3_=
+_veneer ()
+>> No symbol table info available.
+>> #1  0x4298c190 in __libc_csu_init (argc=3D1, argv=3D0xbe8eeb34, envp=3D=
+0xbe8eeb3c) at elf-init.c:124
+>>         i =3D <optimized out>
+>> #2  0x4483553c in __libc_start_main () from /lib/libc.so.6
+>> No symbol table info available.
+>> #3  0x40318944 in _start ()
+>> No symbol table info available.
+>> (gdb)
+>> --------------------------------------------------------------------
+>>
+>>
+>> <fix-armv7a-compile.patch.gz>_________________________________________=
+______
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+
+
 
