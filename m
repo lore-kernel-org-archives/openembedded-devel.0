@@ -1,44 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f52.google.com (mail-pb0-f52.google.com
-	[209.85.160.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B25D60071;
-	Thu, 20 Jun 2013 02:28:36 +0000 (UTC)
-Received: by mail-pb0-f52.google.com with SMTP id xa12so5702586pbc.11
-	for <multiple recipients>; Wed, 19 Jun 2013 19:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=psIKvUTZ1EoErpq9kfTksUoCGUnIkaW/Xp2IoqwpHGA=;
-	b=aDQ5TictYIxZ/f4iQ1j9TbsVx6Tagew6kb243v4hXZfFPy/bO89q9cXexvNEQLDm7H
-	SOXj8Mc73S9NP4dEf8ENW8JZTwPHqQmkXgT7SXrdxGjYgIT1qPtHRAkWdmZPJdhXkQ4V
-	wf5JMzf4bUQnkbWthMZ6/hEsgs1bz4RAtoRl6bJrx8Tzg03ysgbdwAZXV15VjtJySFlO
-	MuGEJUQz0Ei3zcolZ/CEgvRBQvSeVPdCXcqF2uLTMMZ3B+OB78RqNXaznI0Wo3hT9LW7
-	7ZguIusgTcvfZP9+hSXXHttPY7XqFfW7hXcc7JO+Zy5jatfWz0gOHMf8MLA2DGlz0t6J
-	jM9g==
-X-Received: by 10.66.219.1 with SMTP id pk1mr9299732pac.29.1371695317154;
-	Wed, 19 Jun 2013 19:28:37 -0700 (PDT)
-Received: from bjupudi-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPSA id u6sm25502910pbb.46.2013.06.19.19.28.35
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
+	[209.85.216.182])
+	by mail.openembedded.org (Postfix) with ESMTP id B3B026AD1A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Jun 2013 03:54:53 +0000 (UTC)
+Received: by mail-qc0-f182.google.com with SMTP id e10so3436291qcy.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jun 2013 20:54:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=pdWpnnJ2mqq7Zqb/Awp8g299yCIcdNTkCsz4peRuSR0=;
+	b=C5QF08CnjOEzbVattFTqWO4CCvnTQLmRU7t+k+2NA7ZT7OGVMXeSQg5J4xyrzLmqCW
+	o4wPHVMlvo+LVjKVxRHbGTwBEwCviQjA74fuBB86qwM2Pa5H3peVTQoRQY5FlDtpo6lk
+	S1NLKU4hXRMsDhFG8grFQ87spOc8Ni+24HWVeMvE3LTRXZ7Q+Fy+nShgDKPab3J2CSxA
+	lb752ydnbhHUW+FfFjcR0ZQ9cYh/LtQuUrGKKQhJud+VgCyVpIDyqposFi6E4mv5EdqD
+	aG8uwxvK/JOizne6Pxp50J5QVu1783SAEVXEOLs47+Jm4mgSVyAzp7jA8DcQVWF45mKK
+	G6Ww==
+X-Received: by 10.229.206.2 with SMTP id fs2mr2342294qcb.68.1371700494395;
+	Wed, 19 Jun 2013 20:54:54 -0700 (PDT)
+Received: from nikaia.hyatt.com (static-209-137-183-3.t1.cavtel.net.
+	[209.137.183.3])
+	by mx.google.com with ESMTPSA id bc5sm38163663qeb.3.2013.06.19.20.54.52
 	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 19 Jun 2013 19:28:36 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CANyK_8fMj+=hDVMV+q7CJi7_G5HvztE+n_wcHDn0kTUB7dxFhA@mail.gmail.com>
-Date: Wed, 19 Jun 2013 19:28:33 -0700
-Message-Id: <FB95243C-761D-4268-96A1-B0893DA616AF@gmail.com>
-References: <20121213174202.GE3356@jama.jama.net>
-	<20130415141253.GC10628@jama.dyndns-home.com>
-	<20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama>
-	<CANyK_8fMj+=hDVMV+q7CJi7_G5HvztE+n_wcHDn0kTUB7dxFhA@mail.gmail.com>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 19 Jun 2013 20:54:53 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1508)
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world
+Date: Wed, 19 Jun 2013 23:54:42 -0400
+Message-Id: <1371700482-12885-1-git-send-email-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+X-Gm-Message-State: ALoCoQlYN0p4pu75NqZjO1NM1ZK5Ue41sMKJPhnQHnQNgyxQESLbpgmavv4qvpfjZpLSjXBQgt80
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-qt5][PATCH] qtbase: typo about virtual/egl depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,40 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 02:28:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 Jun 2013 03:54:54 -0000
 
+The proper 'virtual' name for EGL is virtual/egl, not virtual/libegl,
+as per meta/recipes-graphics/mesa/mesa-common.inc.
 
-> luajit is rather a strange error, HOST_CC can't find <sys/types.h> or
-> some other common headers.
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ recipes-qt/qt5/qtbase.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-hmmm luajit does not fail here for beaglebone/qemuarm so not much I can =
-help.
-
->=20
-> mplayer2 is failing to find <mad.h>, this needs the same sort of fix I
-> made to vlc =
-(http://git.openembedded.org/meta-openembedded/commit/?id=3D3d6369b7c39d78=
-b0d424dbe5a97e736b694e3c48).
->=20
-> Full logs, conf files, etc: =
-http://www.paulbarker.me.uk/yocto/20130617_poky/
->=20
-
-I think missing dependencies. Best is to turn this into PACKAGECONFIG=20
-
-> Note that for the final build everything in "fixes/" has been applied,
-> including Khem's patches for gypsy, omgps, packagekit and tk.
->=20
-> --
-> Paul Barker
->=20
-> Email: paul@paulbarker.me.uk
-> http://www.paulbarker.me.uk
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 569332e..ee4094b 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -41,7 +41,7 @@ QT_DISTRO_FLAGS_linuxstdbase = "-sm"
+ QT_SQL_DRIVER_FLAGS ?= "-no-sql-ibase -no-sql-mysql -no-sql-psql -no-sql-odbc -plugin-sql-sqlite"
+ 
+ # if you want to enable egl/gles2 in your .bbappend, don't forget to add right dependencies, e.g.
+-# GL_DEPENDS = "virtual/libgles2 virtual/libegl"
++# GL_DEPENDS = "virtual/libgles2 virtual/egl"
+ # QT_GLFLAGS = "-opengl es2 -eglfs"
+ GL_DEPENDS ?= "virtual/libgl"
+ QT_GLFLAGS ?= "-opengl"
+-- 
+1.8.1.2
 
 
