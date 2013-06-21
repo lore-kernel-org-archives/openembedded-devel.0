@@ -1,35 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f53.google.com (mail-pb0-f53.google.com
-	[209.85.160.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 62B2E607F8
+Return-Path: <holger+oe@freyther.de>
+Received: from mail.sysmocom.de (mail.sysmocom.de [144.76.43.93])
+	by mail.openembedded.org (Postfix) with ESMTP id D1179605F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2013 23:37:26 +0000 (UTC)
-Received: by mail-pb0-f53.google.com with SMTP id xb12so6853350pbc.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jun 2013 16:37:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=kjAY6MY5Kfxdv0dK5HxPpL9bmci+L8J/6BeI+Y5gzSM=;
-	b=nebUihDR4l8VXhPZq0vloe6wLHMHIqminunp5KTZ9/YPUGsjeXcbHnxy56/a51bhCB
-	GKzx22Qijcx3uk88Lp96P9qCHpwc8PAfA/3cpeR4zJbaEtjg+3Yn0hc4/tr+O9Rru3Be
-	rKGk/SsWfJeUvwwCNRC+fDoI2ETx/XvWwKR2+ROgnKdaSsU31Us0HfgR+biAJBM5sNSN
-	Q3uHsLEWfkTM56/3LmZLZbXaGmR1KRxWIdCyIsql1twW4E1z6EHt9mFHVnxO25LepkAP
-	cLkdx2oJyLI05UhpooRWZMecv7wf+/VUwRquiuwerf6yuBKMu1DSkplrvGz9wp51qNWJ
-	naoA==
-X-Received: by 10.66.139.198 with SMTP id ra6mr13583249pab.140.1371771447658; 
-	Thu, 20 Jun 2013 16:37:27 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id ib9sm2041771pbc.43.2013.06.20.16.37.26
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 20 Jun 2013 16:37:27 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 21 Jun 2013 08:50:59 +0000 (UTC)
+Received: from sangmingze-mail.local (91-65-247-193-dynip.superkabel.de
+	[91.65.247.193])
+	by mail.sysmocom.de (Postfix) with ESMTPSA id 2904A1DC04;
+	Fri, 21 Jun 2013 08:50:48 +0000 (UTC)
+Received: from localhost.lan ([127.0.0.1] helo=xiaoyu.lan)
+	by sangmingze-mail.local with esmtp (Exim 4.80)
+	(envelope-from <holger+oe@freyther.de>)
+	id 1Upx3Y-0007Ls-Lp; Fri, 21 Jun 2013 10:50:56 +0200
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jun 2013 16:37:13 -0700
-Message-Id: <1371771433-9858-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] libzip: Upgrade lzip_1.13.bb -> lzip_1.14.bb
+Date: Fri, 21 Jun 2013 10:50:54 +0200
+Message-Id: <1371804654-27124-1-git-send-email-holger+oe@freyther.de>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Holger Hans Peter Freyther <holger@moiji-mobile.com>,
+	Holger Hans Peter Freyther <zecke@selfish.org>
+Subject: [meta-oe][PATCH] gpsd: Mark the configuration file as a CONFFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 23:37:26 -0000
+X-List-Received-Date: Fri, 21 Jun 2013 08:51:00 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Holger Hans Peter Freyther <holger@moiji-mobile.com>
+
+Mark the file in /etc/default/gpsd as a CONFFILES of the gpsd-conf
+package.
+
+Signed-off-by: Holger Hans Peter Freyther <zecke@selfish.org>
 ---
- .../lzip/{lzip_1.13.bb => lzip_1.14.bb}            |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/lzip/{lzip_1.13.bb => lzip_1.14.bb} (85%)
+ meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/lzip/lzip_1.13.bb b/meta-oe/recipes-support/lzip/lzip_1.14.bb
-similarity index 85%
-rename from meta-oe/recipes-support/lzip/lzip_1.13.bb
-rename to meta-oe/recipes-support/lzip/lzip_1.14.bb
-index e04b6dc..d6e1be4 100644
---- a/meta-oe/recipes-support/lzip/lzip_1.13.bb
-+++ b/meta-oe/recipes-support/lzip/lzip_1.14.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
+index 99f019b..b0d5a79 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
+@@ -7,7 +7,7 @@ PROVIDES = "virtual/gpsd"
  
- SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
+ EXTRANATIVEPATH += "chrpath-native"
  
--SRC_URI[md5sum] = "2f401e995c36cca05bd1805aa9c28231"
--SRC_URI[sha256sum] = "c73d36c0a926b71d484eacc192262a1d209674e3f903016f2c74a2bcbc5c28ac"
-+SRC_URI[md5sum] = "39a4b06952ee45274525dc0582cdd651"
-+SRC_URI[sha256sum] = "7ff5cc521560edb2a0a6cdf258cf3afdaeb1dbcc354d96d011d0dd7ec584cbe7"
+-PR = "r6"
++PR = "r7"
  
- CONFIGUREOPTS = "\
-     '--srcdir=${S}' \
+ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+     file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+@@ -116,6 +116,7 @@ FILES_libgps = "${libdir}/libgps.so.*"
+ 
+ DESCRIPTION_gpsd-conf = "gpsd configuration files and init scripts"
+ FILES_gpsd-conf = "${sysconfdir}"
++CONFFILES_gpsd-conf = "${sysconfdir}/default/gpsd.default"
+ 
+ DESCRIPTION_gpsd-gpsctl = "Tool for tweaking GPS modes"
+ FILES_gpsd-gpsctl = "${bindir}/gpsctl"
 -- 
-1.7.9.5
+1.7.10.4
 
 
