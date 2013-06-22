@@ -1,38 +1,37 @@
 Return-Path: <paul.betafive@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C6606ADB4
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 867696ADBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jun 2013 13:29:06 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id m6so1383490wiv.14
+	Sat, 22 Jun 2013 13:29:08 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id y10so1314920wgg.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jun 2013 06:29:07 -0700 (PDT)
+	Sat, 22 Jun 2013 06:29:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=i/OenXmYf1MK/dnhcX+TOXp4a3VuEQm3BuSwsHT5AO0=;
-	b=smnyQa9VBTmG3lvWTlmoEjbxhPfxyksxclP/DXg9FWmA4tt2Ey/wd19hBWPYhTfKwy
-	GLrBb8Dv48w1uwSE3L4JnPhO+stU96Lub8xgQ0/g5u9hcy9cjtC0Ouf/r6dzi+QPbZ0o
-	h3qLG/P0O+CnlgsqBBvpI+2GM9Dis3oXSYK9DqbxVnbG6guWa7OwI2VCRxFKuDRuGqQQ
-	oR0Van1Z8OhwaUuMoQgKsBtgS+16j4nLxK3elJWNul1+jmJ9udz47DZWPQ28G/JFDsIJ
-	q00TMVqnyYIdUESy//8pVvnVM110HIP+ddKhlSdVu9cMeY7nBsxoYaSX2lKRqLOWgAvt
-	s0IA==
-X-Received: by 10.194.21.138 with SMTP id v10mr3950313wje.16.1371907747233;
-	Sat, 22 Jun 2013 06:29:07 -0700 (PDT)
+	:references; bh=Kr2ijChZM7S7uW/Rxi+i0f8j1Sk5ZcpkHw+VnsURVPM=;
+	b=iWIGPc4ksCeIIY5P2csyOz+cL/8f0xyYy0uBqQHb0FPMQvY/x1qlpstzB0gBfZikFf
+	J2R3p0lkMsX6L5EFSNcbonu02ZB8YvPPs6VSLmFMbmGFnP0B+Z6oCYzv9462oPC6eD5m
+	uXtjtHe665aRzYxAYoBD2n+vgL30pKb2cp9blHpUABhDmpNlt1sz8tzUiJRUyzIV1loa
+	RIguNv6EoCdh3nRA1X4mnXWAHha/+EbVZD3qRAOLpfZXXN6z1nUeVEklTt1SV53WH6ER
+	ZOqq35aFH/J9Akdl3ViQGRweI1bj7le6YbrgZblA/DTLW4yFXRKOEWtZLV8Woq9UMktE
+	WtCA==
+X-Received: by 10.180.82.232 with SMTP id l8mr282176wiy.23.1371907748845;
+	Sat, 22 Jun 2013 06:29:08 -0700 (PDT)
 Received: from vesta.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
 	[94.192.12.83])
-	by mx.google.com with ESMTPSA id nj19sm4038847wic.1.2013.06.22.06.29.05
+	by mx.google.com with ESMTPSA id nj19sm4038847wic.1.2013.06.22.06.29.07
 	for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 22 Jun 2013 06:29:06 -0700 (PDT)
+	Sat, 22 Jun 2013 06:29:07 -0700 (PDT)
 Sender: Paul Barker <paul.betafive@gmail.com>
 From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Jun 2013 14:28:37 +0100
-Message-Id: <1371907719-8868-5-git-send-email-paul@paulbarker.me.uk>
+Date: Sat, 22 Jun 2013 14:28:38 +0100
+Message-Id: <1371907719-8868-6-git-send-email-paul@paulbarker.me.uk>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1371907719-8868-1-git-send-email-paul@paulbarker.me.uk>
 References: <1371907719-8868-1-git-send-email-paul@paulbarker.me.uk>
-Subject: [meta-oe, meta-multimedia, meta-efl][PATCH RFC 4/6] vlc: replace ENTERPRISE_DISTRO with PACKAGECONFIG options
+Subject: [meta-oe, meta-multimedia, meta-efl][PATCH RFC 5/6] mpd: replace ENTERPRISE_DISTRO with PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,43 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jun 2013 13:29:07 -0000
+X-List-Received-Date: Sat, 22 Jun 2013 13:29:09 -0000
 
 Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 531a018..f3d8a03 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -3,8 +3,7 @@ HOMEPAGE = "http://www.videolan.org"
- LICENSE = "GPLv2"
- SECTION = "multimedia"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
+index a6b8898..6f2a912 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
+@@ -3,8 +3,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
  
--DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib \
--           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
-+DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib"
+-DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio \
+-           ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad lame libid3tag', d)}"
++DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
  
- SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+ PR = "r4"
  
-@@ -65,11 +64,12 @@ EXTRA_OECONF = "\
-     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
-     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
-     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
--    ${@base_conditional('ENTERPRISE_DISTRO', '1', \
--	'--disable-mad --disable-id3tag --disable-a52 --disable-libmpeg2', \
--	'--enable-mad --enable-id3tag --enable-a52 --enable-libmpeg2', d)} \
- "
+@@ -21,6 +20,10 @@ inherit autotools useradd systemd
+ EXTRA_OECONF = "enable_bzip2=yes"
+ EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
  
 +PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
-+PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
-+PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
-+PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
- 
- do_configure() {
-     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
++PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
++PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
++
+ do_install_append() {
+     install -d ${D}/${localstatedir}/lib/mpd/music
+     chmod 775 ${D}/${localstatedir}/lib/mpd/music
 -- 
 1.8.3.1
 
