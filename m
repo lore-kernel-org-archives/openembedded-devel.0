@@ -1,23 +1,40 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id D96FD612D1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f42.google.com (mail-pb0-f42.google.com
+	[209.85.160.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E0994618B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jun 2013 14:10:12 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by azsmga102.ch.intel.com with ESMTP; 24 Jun 2013 07:10:13 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,928,1363158000"; d="scan'208";a="354880350"
-Received: from unknown (HELO helios.localnet) ([10.252.122.47])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Jun 2013 07:10:55 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jun 2013 15:10:10 +0100
-Message-ID: <34304782.BKnWrLGkFL@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.3 (Linux/3.8.0-25-generic; KDE/4.10.3; i686; ; )
-In-Reply-To: <1372031841-21518-1-git-send-email-raj.khem@gmail.com>
+	Mon, 24 Jun 2013 15:49:31 +0000 (UTC)
+Received: by mail-pb0-f42.google.com with SMTP id un1so11207373pbc.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jun 2013 08:49:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=K62IDKhYENujIIBEPU9UnxY2fxBzfmlWpkE39s6X0/M=;
+	b=GCPTUNqjHHJxFsgBVQPyFMUj9kGu0qqIXhtGVt2++fVHqIQ3qQCwoIrONk7gpIG8sh
+	1XAPWVS3umP40wft2qwiIRxEKKyaEghFV5MVX8DnCDxoAElxVxjkKS4EsLgBA4+Dy7hj
+	aXeC10iu1qY58hPCnsJ8fYe+oStwZcMWfOF5p5IATeepZliGH/lOhWQD33rAH2/XTtpI
+	bNHKwqmsgC3SvPHipstuFcuFRlhdABv6IKXscoklie+ojCBfGrbYWvWL6VAc02RNGWzv
+	pIY6ZxDty6eQuWLEsBd1ke4XvZLkw50LjYnT+e6QFL0Ep+XBYsmzEUqXv2YTaKKUlb7G
+	y4tg==
+X-Received: by 10.67.10.163 with SMTP id eb3mr14384034pad.70.1372088972961;
+	Mon, 24 Jun 2013 08:49:32 -0700 (PDT)
+Received: from kosborne-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id e2sm18712686pbc.23.2013.06.24.08.49.31
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 24 Jun 2013 08:49:32 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <34304782.BKnWrLGkFL@helios>
+Date: Mon, 24 Jun 2013 08:49:31 -0700
+Message-Id: <9288FDDF-3E67-4A30-BFF2-27A151BB2350@gmail.com>
 References: <1372031841-21518-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
+	<34304782.BKnWrLGkFL@helios>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1508)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] proj: Update to 4.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -32,30 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2013 14:10:13 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 24 Jun 2013 15:49:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Sunday 23 June 2013 16:57:21 Khem Raj wrote:
-> 4.7.0 tars have disappeared on the download servers.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-navigation/proj/proj.inc      |   13 -------------
->  meta-oe/recipes-navigation/proj/proj_4.7.0.bb |    7 -------
->  meta-oe/recipes-navigation/proj/proj_4.8.0.bb |   13 +++++++++++++
->  3 files changed, 13 insertions(+), 20 deletions(-)
->  delete mode 100644 meta-oe/recipes-navigation/proj/proj.inc
->  delete mode 100644 meta-oe/recipes-navigation/proj/proj_4.7.0.bb
->  create mode 100644 meta-oe/recipes-navigation/proj/proj_4.8.0.bb
 
-Just so I'm clear, are we embarking on a policy now of dropping inc files?
+On Jun 24, 2013, at 7:10 AM, Paul Eggleton =
+<paul.eggleton@linux.intel.com> wrote:
 
-Cheers,
-Paul
+> Just so I'm clear, are we embarking on a policy now of dropping inc =
+files?
+>=20
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+depends. if recipes aren't updates frequent enough and chances of =
+overrides existing in
+remote layers is slim and we don't intend to carry multiple versions of =
+the package
+then carrying an .inc is not serving much purpose.=
 
