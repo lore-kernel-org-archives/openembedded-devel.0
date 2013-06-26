@@ -1,37 +1,24 @@
-Return-Path: <phil@blackmoth.com.au>
-Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id DD97A6A8EF
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2763A6ABED
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jun 2013 02:13:20 +0000 (UTC)
-Received: by mail-pb0-f47.google.com with SMTP id rr13so13482193pbb.34
+	Wed, 26 Jun 2013 02:32:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r5Q2WCJ5013205
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jun 2013 19:13:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=AMv0o1nlf872nG/J8fyxSNmU5tjNzAcdDul8RGvQ0uU=;
-	b=CWGnUW52B2b9ctG4Pq2cuphwVC3ks7UHi7l2rlaQbWh5b516Jnus4N4zpMAGxOkNNB
-	8GMVfIa2h1wIsM6tX2rJPD3mxxbj2m8FL//2r9TJn1NNhGvTpiD2uJdivIsgJRTIzl/G
-	o4o470op3vHrk2zC+8Ph1rS04/xTCyhskBCZMOy0lagpBE+VqFex7MYyXuaV5VFz9iW4
-	/6JnXq3HnLyPiWueYidBPqfOga6nSRwaQVb8yQE90H6Nprx8v7atRIly2hLRz92etDjb
-	pqgBUf1xTo+TYsxCDq7/27sPw63vkLt4lfDGNyEs7mjPhEA8+WyvEVdopNwHx1QwlwAl
-	/QRw==
-X-Received: by 10.68.217.137 with SMTP id oy9mr1700034pbc.130.1372212802160;
-	Tue, 25 Jun 2013 19:13:22 -0700 (PDT)
-Received: from localhost.localdomain
-	(ppp118-208-157-139.lns20.bne1.internode.on.net. [118.208.157.139])
-	by mx.google.com with ESMTPSA id pl9sm25741844pbc.5.2013.06.25.19.13.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 25 Jun 2013 19:13:21 -0700 (PDT)
-From: Philip Craig <phil@blackmoth.com.au>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jun 2013 12:13:02 +1000
-Message-Id: <1372212782-28979-1-git-send-email-phil@blackmoth.com.au>
-X-Mailer: git-send-email 1.8.2
-X-Gm-Message-State: ALoCoQnXWG1keA3iBPH6b7fpNe+UAfxw0v4IBcNFEM5PdOgqrKBWeLmTrJUiP2eldHs3eX1E5Bxq
-Subject: [meta-qt5][PATCH] qtbase: disable fontconfig support by default
+	Tue, 25 Jun 2013 19:32:12 -0700 (PDT)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.342.3; Tue, 25 Jun 2013 19:32:12 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Jun 2013 10:32:08 +0800
+Message-ID: <cover.1372213028.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+MIME-Version: 1.0
+Subject: [PATCH 0/1]qt-x11-free: fix LSB Library Check libqt-mt.so.3 fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,51 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2013 02:13:21 -0000
+X-List-Received-Date: Wed, 26 Jun 2013 02:32:11 -0000
+Content-Type: text/plain
 
-Currently fontconfig support is autodetected. It is better to be
-deterministic. Since qtbase-fonts is not installed where fontconfig
-will find it, it seems that current users are not using fontconfig.
+The following changes since commit 4c27cce6688aa39852f3cba5e7b80ec279019605:
 
-Signed-off-by: Philip Craig <phil@blackmoth.com.au>
----
- recipes-qt/qt5/qtbase.inc | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+  layer.conf: avoid unnecessary early expansion with := (2013-03-19 16:33:11 +0000)
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index ee4094b..f521a30 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -21,7 +21,7 @@ SRC_URI += " \
-     file://0020-Use-BGRA-extension-in-bindTexture.patch \
- "
- 
--DEPENDS += "qtbase-native freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS}"
-+DEPENDS += "qtbase-native freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS} ${FONTCONFIG_DEPENDS}"
- 
- # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and dbus/dbus.h
- # XCB_DEPENDS += "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
-@@ -52,6 +52,11 @@ QT_GLFLAGS ?= "-opengl"
- TSLIB_DEPENDS ?= ""
- QT_TSLIB ?= "-no-tslib"
- 
-+# FONTCONFIG_DEPENDS = "fontconfig"
-+# QT_FONTCONFIG = "-fontconfig"
-+FONTCONFIG_DEPENDS ?= ""
-+QT_FONTCONFIG ?= "-no-fontconfig"
-+
- QT_WIDGETS ?= "-widgets"
- QT_XML ?= "-xmlpatterns"
- QT_WEBKIT ?= "-webkit"
-@@ -87,6 +92,7 @@ QT_CONFIG_FLAGS += " \
-     ${QT_TESTS} \
-     ${QT_EXAMPLES} \
-     ${QT_TSLIB} \
-+    ${QT_FONTCONFIG} \
- "
- 
- INC_PR = "r2"
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib hongxu/fix-qt3
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-adt
+
+Hongxu Jia (1):
+  qt-x11-free: add missing DEPENDS on libglu for LSB Library Check
+
+ recipes-qt3/qt3/qt-x11-free_3.3.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
-1.8.2
+1.8.1.2
 
 
