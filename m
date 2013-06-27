@@ -1,35 +1,43 @@
-Return-Path: <Joe.MacDonald@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D786960071
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2013 12:38:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5RCd24I007699
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 27 Jun 2013 05:39:02 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Thu, 27 Jun 2013 05:39:00 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 85BDB7FCE;
-	Thu, 27 Jun 2013 08:38:55 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 7DC3C40534; Thu,
-	27 Jun 2013 08:38:59 -0400 (EDT)
-Date: Thu, 27 Jun 2013 08:38:59 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Paul Barker <paul@paulbarker.me.uk>, <lei.yang@windriver.com>
-Message-ID: <20130627123859.GA3812@windriver.com>
-References: <1372326719-11068-1-git-send-email-lei.yang@windriver.com>
-	<CANyK_8cc7LLLDJssgeWhRHkBy4AshZsGByvjUdwJUZPeBzprgw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CANyK_8cc7LLLDJssgeWhRHkBy4AshZsGByvjUdwJUZPeBzprgw@mail.gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH:V3] vlan: Add vlan recipe
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f42.google.com (mail-pb0-f42.google.com
+	[209.85.160.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DB19618B5;
+	Thu, 27 Jun 2013 15:10:29 +0000 (UTC)
+Received: by mail-pb0-f42.google.com with SMTP id un1so1051129pbc.1
+	for <multiple recipients>; Thu, 27 Jun 2013 08:10:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=pBM5T7Qp94ZgrFYLj/b9rkAGh0Oz2hKixFt1DuaHN/8=;
+	b=QycBp/8NVCaN18bgyeXEAzPZUV/kYmM27W7ZQ3H1CQPl3X7a60t0zwm2s8DZtx+Oa8
+	pe5/5mSg+C6qOgdWiZqm5mOLv/BdWCP3MIfSiZUTqm2cjPIz+VsnDzNV4C6yzNwcsiRt
+	KRjOepQsTxJV/ivnBsmLjji5oJh/O5ZwwttBnC5cqyKDzpDU2ZYLmZw+YmFB0CsdKR0i
+	5CymqvNg7tJM79+8V9grZBd8ty14RJtPyP9W9cvSSJ0dCyAwM29byugEeT+Imn+y4vfZ
+	rtiiXsxZ+1OvPRlDy3a1qoqZSU9c3HkFqXlxsgdPArU7pdDFogyp4yb0QkLHua6p05s0
+	2Edg==
+X-Received: by 10.66.251.202 with SMTP id zm10mr6582948pac.53.1372345830659;
+	Thu, 27 Jun 2013 08:10:30 -0700 (PDT)
+Received: from kosborne-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id yj2sm3520002pbb.40.2013.06.27.08.10.28
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 27 Jun 2013 08:10:29 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1372317615.9930.180.camel@ted>
+Date: Thu, 27 Jun 2013 08:10:30 -0700
+Message-Id: <9D33DF95-E667-4BD8-9D3B-7E87826795A8@gmail.com>
+References: <1831F7C6-54BC-4E5F-BC00-1B8C17E8D1FD@gmail.com>
+	<1372317615.9930.180.camel@ted>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Mailer: Apple Mail (2.1508)
+Cc: "yocto@yoctoproject.org \(yocto@yoctoproject.org\)"
+	<yocto@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] eglibc (would be 2.18) recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,71 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2013 12:39:00 -0000
-X-Groupsio-MsgNum: 45230
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9jxsPFA5p3P2qPhR"
-Content-Disposition: inline
-
---9jxsPFA5p3P2qPhR
+X-List-Received-Date: Thu, 27 Jun 2013 15:10:29 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH:V3] vlan: Add vlan recipe] On 13.06.27 (T=
-hu 12:00) Paul Barker wrote:
 
-> On 27 June 2013 10:51,  <lei.yang@windriver.com> wrote:
-> > From: Lei Yang <lei.yang@windriver.com>
-> >
-> > A 802.1q vlan support program,which can be used by virt-test
-> >
-> > Signed-off-by: Lei Yang <lei.yang@windriver.com>
+On Jun 27, 2013, at 12:20 AM, Richard Purdie =
+<richard.purdie@linuxfoundation.org> wrote:
+
+> On Wed, 2013-06-26 at 14:06 -0700, Khem Raj wrote:
+>> Hi All
+>>=20
+>> I have put together eglibc recipes for upcoming 2.18 release and =
+pushed to a contrib tree here
+>>=20
+>> =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/eglibc=
+-2.18
+>>=20
+>> They built angstrom/systemd-images fine and booted OK on all =
+supported qemu machines
+>> on OE-Core
+>>=20
+>> Please test them out in your configurations and machines and provide =
+feedback, lets weed out
+>> the issue early
 >=20
-> Just took a quick look at this out of interest. What's using the
-> vconfig program once it's installed on the target?
+> You have a fix for bug 4168 in there that nobody else can reproduce or
+> understand:
+
+that was an oversite during rebase. I have refresh the tree and dropped =
+it from there.
+
 >=20
-> vlan-1.9 was released in 2005 and there hasn't been an update since.
-> The ArchWiki suggests that the modern 'ip' command can do what vconfig
-> used to do (https://wiki.archlinux.org/index.php/VLAN).
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4168
 >=20
-> If we can avoid a dependency on such legacy code that would probably
-> be good. Though I may be missing something as I haven't followed all
-> the discussion around this patch and I don't know your use case.
+> I'd really like to better understand what is happening there before we
+> pull that one in.
+>=20
+> Cheers,
+>=20
+> Richard
+>=20
 
-That's a good point.  Seeing something like this hasn't changed since
-2005 is a little concerning, but frankly I'm not completely shocked when
-I find out some piece of networking infrastructure has stabilized to the
-point where it isn't undergoing much development anymore.  Particularly
-if it's something not everyone uses (and sometimes even if it is:
-http://comments.gmane.org/gmane.linux.network/238858).
 
-That said, I remember vconfig coming up a bit when I was working with
-the CGL workgroup and at the time we'd thought that ip was able to do
-everything vconfig was doing, but we were looking at it in the more
-narrow context of the requirements definition.
-
-So I guess my question is the same, is there even a use-case for vlan
-now that cannot be addressed by existing, already integrated tools?
-Lei?  Your comment is specifically saying "can be used by virt-test",
-does that mean that virt-test (or something else in meta-virtualization)
-requires vconfig to do 802.1q testing or simply that it hasn't been
-ported to use other tools (like ip)?
-
---=20
--Joe MacDonald.
-:wq
-
---9jxsPFA5p3P2qPhR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlHMMlwACgkQPN8S4W6ZZndU0wCfWA6L68BPqevH2BKmjgiIG4Vk
-cegAnAnjdjfenTR9L7XYd05JOVpugv7K
-=5d5v
------END PGP SIGNATURE-----
-
---9jxsPFA5p3P2qPhR--
