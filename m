@@ -1,43 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f42.google.com (mail-pb0-f42.google.com
-	[209.85.160.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DB19618B5;
-	Thu, 27 Jun 2013 15:10:29 +0000 (UTC)
-Received: by mail-pb0-f42.google.com with SMTP id un1so1051129pbc.1
-	for <multiple recipients>; Thu, 27 Jun 2013 08:10:30 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 4752C6A4E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jun 2013 15:58:06 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id b57so489847eek.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Jun 2013 08:58:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=pBM5T7Qp94ZgrFYLj/b9rkAGh0Oz2hKixFt1DuaHN/8=;
-	b=QycBp/8NVCaN18bgyeXEAzPZUV/kYmM27W7ZQ3H1CQPl3X7a60t0zwm2s8DZtx+Oa8
-	pe5/5mSg+C6qOgdWiZqm5mOLv/BdWCP3MIfSiZUTqm2cjPIz+VsnDzNV4C6yzNwcsiRt
-	KRjOepQsTxJV/ivnBsmLjji5oJh/O5ZwwttBnC5cqyKDzpDU2ZYLmZw+YmFB0CsdKR0i
-	5CymqvNg7tJM79+8V9grZBd8ty14RJtPyP9W9cvSSJ0dCyAwM29byugEeT+Imn+y4vfZ
-	rtiiXsxZ+1OvPRlDy3a1qoqZSU9c3HkFqXlxsgdPArU7pdDFogyp4yb0QkLHua6p05s0
-	2Edg==
-X-Received: by 10.66.251.202 with SMTP id zm10mr6582948pac.53.1372345830659;
-	Thu, 27 Jun 2013 08:10:30 -0700 (PDT)
-Received: from kosborne-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPSA id yj2sm3520002pbb.40.2013.06.27.08.10.28
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 27 Jun 2013 08:10:29 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1372317615.9930.180.camel@ted>
-Date: Thu, 27 Jun 2013 08:10:30 -0700
-Message-Id: <9D33DF95-E667-4BD8-9D3B-7E87826795A8@gmail.com>
-References: <1831F7C6-54BC-4E5F-BC00-1B8C17E8D1FD@gmail.com>
-	<1372317615.9930.180.camel@ted>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Mailer: Apple Mail (2.1508)
-Cc: "yocto@yoctoproject.org \(yocto@yoctoproject.org\)"
-	<yocto@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<Openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] eglibc (would be 2.18) recipes
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=iWEouHVJSXbWfChFsxSBPPmQalV8bVQgHVBephtR5J8=;
+	b=gBsYr3nYQPu1ANzd2RHdHPoQ/Ooa0BOt0d0SmGopM+pFcgdDJxPwlMuV7iZW4ENBSg
+	8Kzuw/XqufY28bkDy36Fot3W3BsoKoMXm79GceT4WvQlu0gx31GXq++7dnn8TXfjHUBc
+	dgpk5gC4NBSD3mdyivw9V65QPFWt1XgOOfnXmlEBva8PBjM5P8qCq9PtAxgmHcsZ4vo9
+	l9TujG/kOCZ4dbSFTTIpvT6L+d0QBy1kUzBM70g3pd/sFolQ6n8v4XK+J5YzoE4nxFFs
+	7vCao0jq+dmHwt7fM7nLi3/dikNiPRyJ/0JFPAEO3e3i9akwvbiGamV5su7SmxmlaLa8
+	7+/w==
+X-Received: by 10.14.5.129 with SMTP id 1mr9744774eel.56.1372348686526;
+	Thu, 27 Jun 2013 08:58:06 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id i2sm4705540eeu.4.2013.06.27.08.58.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 27 Jun 2013 08:58:05 -0700 (PDT)
+Date: Thu, 27 Jun 2013 17:58:44 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130627155844.GH3261@jama>
+References: <1370109802-11739-1-git-send-email-Martin.Jansa@gmail.com>
+	<20130602080956.GA3279@jama> <20130606123417.GC22710@jama>
+	<CAMKF1sr20XzmonOmtDExLhZdUts3KgpdiU2uyNVxUKBo5npamg@mail.gmail.com>
+	<20130611084204.GB3233@jama>
+MIME-Version: 1.0
+In-Reply-To: <20130611084204.GB3233@jama>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-efl][PATCH] webkit-efl: Fix build with gcc-4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,47 +48,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2013 15:10:29 -0000
+X-List-Received-Date: Thu, 27 Jun 2013 15:58:06 -0000
+X-Groupsio-MsgNum: 45232
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="z+pzSjdB7cqptWpS"
+Content-Disposition: inline
+
+--z+pzSjdB7cqptWpS
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-On Jun 27, 2013, at 12:20 AM, Richard Purdie =
-<richard.purdie@linuxfoundation.org> wrote:
-
-> On Wed, 2013-06-26 at 14:06 -0700, Khem Raj wrote:
->> Hi All
->>=20
->> I have put together eglibc recipes for upcoming 2.18 release and =
-pushed to a contrib tree here
->>=20
->> =
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/eglibc=
--2.18
->>=20
->> They built angstrom/systemd-images fine and booted OK on all =
-supported qemu machines
->> on OE-Core
->>=20
->> Please test them out in your configurations and machines and provide =
-feedback, lets weed out
->> the issue early
+On Tue, Jun 11, 2013 at 10:42:04AM +0200, Martin Jansa wrote:
+> On Tue, Jun 11, 2013 at 01:08:13AM -0700, Khem Raj wrote:
+> > On Thu, Jun 6, 2013 at 5:34 AM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > > On Sun, Jun 02, 2013 at 10:09:56AM +0200, Martin Jansa wrote:
+> > >> On Sat, Jun 01, 2013 at 08:03:22PM +0200, Martin Jansa wrote:
+> > >> > ---
+> > >> >  ...include-Element.h-for-hasTagName-function.patch | 43 +++++++++=
++++++++++++++
+> > >> >  meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  3 +-
+> > >> >  2 files changed, 45 insertions(+), 1 deletion(-)
+> > >> >  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ew=
+k-include-Element.h-for-hasTagName-function.patch
+> > >>
+> > >> Ignore this one, it works on armv7a, but fails the same on armv4t and
+> > >> x86_64 + there is ICE when building for armv5te.
+> > >
+> > > I've merged this in the end, because it fixed webkit-efl build on
+> > > jenkins (and it looks like building from scratch works for other archs
+> > > I'm building locally too).
+> > >
+> > > Only remaining issue is with -O2 and xscalete DEFAULT_TUNE where it
+> > > triggers ICE:
+> > >
+> > > /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9=
+=2E3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunction=
+s.cpp: In functi
+> > > on 'JSC::JSValue JSC::_ZN3JSCL6decodeEPNS_9ExecStateEPKcb.constprop.8=
+9(JSC::ExecState*, const char*)':
+> > > /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9=
+=2E3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunction=
+s.cpp:150:1: error: could not split insn
+> > >  }
+> > >  ^
+> > > (insn 505 8094 507 (set (reg:SI 1 r1 [orig:494 D.142535 ] [494])
+> > >         (plus:SI (reg/v:SI 5 r5 [orig:157 character ] [157])
+> > >             (const_int -17179934720 [0xfffffffbffff0000]))) /OE/shr-c=
+ore/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9.3+svnr120144-r=
+3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunctions.cpp:108 5 {*arm=
+_addsi3}
+> > >      (nil))
+> > > /OE/shr-core/tmp-eglibc/work/xscalete-oe-linux-gnueabi/webkit-efl/1.9=
+=2E3+svnr120144-r3/src/Source/JavaScriptCore/runtime/JSGlobalObjectFunction=
+s.cpp:150:1: internal compiler error: in final_scan_insn, at final.c:2897
+> > > Please submit a full bug report,
+> > > with preprocessed source if appropriate.
+> > > See <http://gcc.gnu.org/bugs.html> for instructions.
+> > > {standard input}: Assembler messages:
+> > > {standard input}: Error: open CFI at the end of file; missing .cfi_en=
+dproc directive
+> > >
+> > > Removing -O2 works, I'll check if this is still happening with gcc-4.=
+8.1 when we have
+> > > recipes for it and report upstream if needed
+> >=20
+> > hmmm it needs to be reported. Can you generate preprocessed file and
+> > put it somewhere accessible
 >=20
-> You have a fix for bug 4168 in there that nobody else can reproduce or
-> understand:
+> I plan to, I just wanted to reproduce it with 4.8.1 and backported
+> http://gcc.gnu.org/ml/gcc-cvs/2013-03/msg00784.html to see if it wasn't
+> fixed upstream already.
+>=20
+> I guess we were all waiting for you to return from holidays and update
+> gcc to 4.8.1 :).
 
-that was an oversite during rebase. I have refresh the tree and dropped =
-it from there.
+Done
+http://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D57735
 
->=20
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4168
->=20
-> I'd really like to better understand what is happening there before we
-> pull that one in.
->=20
-> Cheers,
->=20
-> Richard
->=20
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--z+pzSjdB7cqptWpS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHMYTQACgkQN1Ujt2V2gBzO9ACfdg3T9gCREFtHif7gOJuLI4hC
+YzwAoIZj3ns/u7Lie80Yx4Py+ioY6YPB
+=sltj
+-----END PGP SIGNATURE-----
+
+--z+pzSjdB7cqptWpS--
