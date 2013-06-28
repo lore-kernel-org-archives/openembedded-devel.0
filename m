@@ -1,39 +1,28 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-ve0-f170.google.com (mail-ve0-f170.google.com
-	[209.85.128.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BE8E6AB81
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C1A16AEF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2013 07:45:42 +0000 (UTC)
-Received: by mail-ve0-f170.google.com with SMTP id 14so1558683vea.29
+	Fri, 28 Jun 2013 08:44:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5S8ixKO025227
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Jun 2013 00:45:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=83jZA2y2WFgf4uROZi27f74UiWET/nscy8KZhszhJiE=;
-	b=bW3oiwiJrosd6cr8dr8+HRQX01mNByMs1HTStbA0Oo3H1q9Hhhio6Lv0tfv8q4LA8b
-	QH6wn3CR0GQZQGFr3QPExwWDX6tpy6n3ycIJuDcrE4O7FyL/Y6X7N3hn6WOkRMFmD8cA
-	IDjV3qYAybKHli+MbzF245Nx+HfGbg5YBePmm9kgV3T+oGVy8rfwMwWrY/tEcF/X/aLk
-	IwdeyOj18JSXvP8WNsPwpoKX2T/xkntyxOvGJLi+ERbpxuY2mbnplC78LD32giaqqjY5
-	us0CVOgUk/QgA8BfpOpW8j3DYzwYnQw+HRMrPd9ytJFNEaW3YIIviLOt4zHnTS1RmcEr
-	1ltA==
-X-Received: by 10.52.94.142 with SMTP id dc14mr4316446vdb.86.1372405542523;
-	Fri, 28 Jun 2013 00:45:42 -0700 (PDT)
+	Fri, 28 Jun 2013 01:44:59 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 28 Jun 2013 01:44:58 -0700
+Message-ID: <51CD4D0A.5070802@windriver.com>
+Date: Fri, 28 Jun 2013 16:44:58 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130221 Thunderbird/17.0.3
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.195.201 with HTTP; Fri, 28 Jun 2013 00:45:02 -0700 (PDT)
-In-Reply-To: <CAHsH0E8fpqeSnFRoigJY=3oXR98RFXQ2tc5bKh75Z+o_CCp6CQ@mail.gmail.com>
-References: <1372326719-11068-1-git-send-email-lei.yang@windriver.com>
-	<CANyK_8cc7LLLDJssgeWhRHkBy4AshZsGByvjUdwJUZPeBzprgw@mail.gmail.com>
-	<20130627123859.GA3812@windriver.com>
-	<CAHsH0E8fpqeSnFRoigJY=3oXR98RFXQ2tc5bKh75Z+o_CCp6CQ@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Fri, 28 Jun 2013 08:45:02 +0100
-X-Google-Sender-Auth: -eGytDXnFTQzSJ8E21vonSM2kWo
-Message-ID: <CANyK_8fVm2JRBojCOkh1vVGsy1-32WyLUYKnjY=dzHkv5AweBg@mail.gmail.com>
-To: lei yang <yanglei.fage@gmail.com>
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH:V3] vlan: Add vlan recipe
+To: <openembedded-devel@lists.openembedded.org>
+References: <1372123379-20337-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1372123379-20337-1-git-send-email-rongqing.li@windriver.com>
+Cc: joe.macdonald@windriver.com
+Subject: Re: [PATCH meta-networking] cyrus-sasl: Avoid to call AC_TRY_RUN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,28 +36,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2013 07:45:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 Jun 2013 08:44:57 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 28 June 2013 04:39, lei yang <yanglei.fage@gmail.com> wrote:
-> 01:54:34 DEBUG| Sending command: vconfig add eth0 1
+ping
 
-This is definitely a candidate for a short shell script which maps
-this to the correct invocation of 'ip'.
+On 06/25/2013 09:22 AM, rongqing.li@windriver.com wrote:
+> From: "Roy.Li" <rongqing.li@windriver.com>
+>
+> If the gssapi libraries are compiled before cyrus-sasl, configure will call
+> AC_TRY_RUN to check if gssapi libraries support SPNEGO, but calling AC_TRY_RUN
+> will fail on cross-compile environment.
+>
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> ---
+>   .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |    6 ++-
+>   .../files/avoid-to-call-AC_TRY_RUN.patch           |   46 ++++++++++++++++++++
+>   2 files changed, 51 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/files/avoid-to-call-AC_TRY_RUN.patch
+>
+> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> index bf6f95c..4311540 100644
+> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> @@ -4,7 +4,8 @@ DEPENDS = "openssl virtual/db"
+>   LICENSE = "BSD"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
+>
+> -SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz "
+> +SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
+> +	   file://avoid-to-call-AC_TRY_RUN.patch"
+>
+>   inherit autotools pkgconfig
+>
+> @@ -14,6 +15,9 @@ EXTRA_OECONF += "--with-dblib=berkeley \
+>                    --without-pam --without-opie --without-des \
+>                    andrew_cv_runpath_switch=none"
+>
+> +PACKAGECONFIG ??= ""
+> +PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
+> +
+>   do_configure_prepend () {
+>       rm -f acinclude.m4 config/libtool.m4
+>   }
+> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/files/avoid-to-call-AC_TRY_RUN.patch b/meta-networking/recipes-daemons/cyrus-sasl/files/avoid-to-call-AC_TRY_RUN.patch
+> new file mode 100644
+> index 0000000..df9fa15
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/cyrus-sasl/files/avoid-to-call-AC_TRY_RUN.patch
+> @@ -0,0 +1,46 @@
+> +Avoid to call AC_TRY_RUN
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Avoid to call AC_TRY_RUN to check if GSSAPI libraries support SPNEGO
+> +on cross-compile environment by definition AC_ARG_ENABLE enable-spnego
+> +
+> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> +---
+> + cmulocal/sasl2.m4 |   13 ++++++++++++-
+> + 1 file changed, 12 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/cmulocal/sasl2.m4 b/cmulocal/sasl2.m4
+> +index 3c2841a..a5ecf81 100644
+> +--- a/cmulocal/sasl2.m4
+> ++++ b/cmulocal/sasl2.m4
+> +@@ -281,6 +281,17 @@ if test "$gssapi" != no; then
+> +
+> +   cmu_save_LIBS="$LIBS"
+> +   LIBS="$LIBS $GSSAPIBASE_LIBS"
+> ++  AC_ARG_ENABLE([spnego],
+> ++              [AC_HELP_STRING([--enable-spnego=<DIR>],
+> ++                              [enable SPNEGO support in GSSAPI libraries [no]])],
+> ++              [spnego=$enableval],
+> ++              [spnego=no])
+> ++
+> ++  if test "$spnego" = no; then
+> ++       echo "no"
+> ++  elif test "$spnego" = yes; then
+> ++       AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
+> ++  else
+> +   AC_MSG_CHECKING([for SPNEGO support in GSSAPI libraries])
+> +   AC_TRY_RUN([
+> + #ifdef HAVE_GSSAPI_H
+> +@@ -308,7 +319,7 @@ int main(void)
+> + 	AC_MSG_RESULT(yes) ],
+> + 	AC_MSG_RESULT(no))
+> +   LIBS="$cmu_save_LIBS"
+> +-
+> ++   fi
+> + else
+> +   AC_MSG_RESULT([disabled])
+> + fi
+> +--
+> +1.7.10.4
+> +
+>
 
-To quote the upstream webpage for vlan-1.9:
-
-    It is very unlikely that you need to download anything from this
-site, the packages are left here for posterity's sake.
-
-    802.1Q VLANs and MAC-VLANs can be created with the 'ip' utility
-(vconfig works for vlans, but is crufty and deprecated).
-
-If upstream says it's crufty and deprecated, I wouldn't want to depend on it.
-
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
