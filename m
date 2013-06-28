@@ -1,33 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 628126ABBF
+Return-Path: <yanglei.fage@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 6129E6AD5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2013 16:49:04 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id c4so526608eek.29
+	Fri, 28 Jun 2013 03:39:35 +0000 (UTC)
+Received: by mail-bk0-f48.google.com with SMTP id jf17so574850bkc.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jun 2013 09:49:04 -0700 (PDT)
+	Thu, 27 Jun 2013 20:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=2tXb792n/NJXq1WfNlYZrjUNtRyUPFHAu0jAjo4a8Yc=;
-	b=iNnjqG+GjipYPuwZP/L7loUR8PmlssQWke57cFD9FVBdiLZkyvC7G0On0nPgpxAeEO
-	Fv3O6fd+nCsVYnfPty2376OCI9aYuYDEbaCwyLQOGFdAqqGRU1J8rgDfw4XSm9LCj6i6
-	u2V2aPwdsiwHUWeV1UCJ90ccPuCpeb2jm04ZAGBq0bNVbqCCnQRyjI7LfCuEG1g8+rZ+
-	ugfJTxxR9C06AV69UEgM4a+DN+cTslIr5YhmDHLJLY/XbqbhaDIiYffOvv6Ihtevb/16
-	OA6R0N0Qa0UpxDlhVTIJCBNqDLjP7VQvB3OQwBgfrbT285JdazrkxQZ7nc3zN2iGbZRl
-	fneg==
-X-Received: by 10.15.61.67 with SMTP id h43mr9813151eex.102.1372351744574;
-	Thu, 27 Jun 2013 09:49:04 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	c44sm4936879eeb.8.2013.06.27.09.49.03 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 27 Jun 2013 09:49:04 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=ygbgy6st9WCYWXpV2yC/Cy3F7c/nVtnhmrjs6HjRi80=;
+	b=eHPFVoVrP1ogPiGjUCCKIq2bCAK3zqWLpuw4+G0H7ryJNk9w4UDNpAvi8nRn4b1zNk
+	Kcg2W+HmA15G4uo3Fq3Ox9PNjyVqnm8a9UTIC57IkK0XaoYt31W8PIG/KEvWKMvplHT0
+	lwHZW795ZC8UKvwKS1WxkvO9DwDcGxTKk9yBhAOWIGx1Eg54qgCBGDtUTCouWobCXn09
+	ujIApCRF/LZJbhHqnL9m97w6kArm9m3ojxFFW/yDUs0+mX7aYDm9G3TWLx4uhvr26B2s
+	YcxS7qWCpoLnoUsIPCHxJTfSAROzbFrm+DKS89omN+fvY9JhfNDVsOtJ6QTXUt6K4f1T
+	QiUg==
+MIME-Version: 1.0
+X-Received: by 10.205.114.138 with SMTP id fa10mr1516839bkc.30.1372390774744; 
+	Thu, 27 Jun 2013 20:39:34 -0700 (PDT)
+Received: by 10.205.34.139 with HTTP; Thu, 27 Jun 2013 20:39:34 -0700 (PDT)
+In-Reply-To: <20130627123859.GA3812@windriver.com>
+References: <1372326719-11068-1-git-send-email-lei.yang@windriver.com>
+	<CANyK_8cc7LLLDJssgeWhRHkBy4AshZsGByvjUdwJUZPeBzprgw@mail.gmail.com>
+	<20130627123859.GA3812@windriver.com>
+Date: Fri, 28 Jun 2013 11:39:34 +0800
+Message-ID: <CAHsH0E8fpqeSnFRoigJY=3oXR98RFXQ2tc5bKh75Z+o_CCp6CQ@mail.gmail.com>
+From: lei yang <yanglei.fage@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Jun 2013 18:49:38 +0200
-Message-Id: <1372351778-11262-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-Subject: [meta-efl][PATCH] webkit-efl: Update patch to fix undefined hasTagName reference
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH:V3] vlan: Add vlan recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,64 +44,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2013 16:49:04 -0000
+X-List-Received-Date: Fri, 28 Jun 2013 03:39:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* some builds were still failing to link DumpRenderTree
-  and nm revealed that another possible source of this reference is
-  CSSStyleSheet:
-  ./src/lib/libwebcore_efl.so
-   U _ZNK7WebCore4Node10hasTagNameERKNS_13QualifiedNameE
-  ./src/Source/WebCore/CMakeFiles/webcore_efl.dir/css/CSSStyleSheet.cpp.o
-   U _ZNK7WebCore4Node10hasTagNameERKNS_13QualifiedNameE
+On Thu, Jun 27, 2013 at 8:38 PM, Joe MacDonald
+<Joe.MacDonald@windriver.com>wrote:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...include-Element.h-for-hasTagName-function.patch | 23 ++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+> [Re: [oe] [meta-networking][PATCH:V3] vlan: Add vlan recipe] On 13.06.27
+> (Thu 12:00) Paul Barker wrote:
+>
+> > On 27 June 2013 10:51,  <lei.yang@windriver.com> wrote:
+> > > From: Lei Yang <lei.yang@windriver.com>
+> > >
+> > > A 802.1q vlan support program,which can be used by virt-test
+> > >
+> > > Signed-off-by: Lei Yang <lei.yang@windriver.com>
+> >
+> > Just took a quick look at this out of interest. What's using the
+> > vconfig program once it's installed on the target?
+> >
+> > vlan-1.9 was released in 2005 and there hasn't been an update since.
+> > The ArchWiki suggests that the modern 'ip' command can do what vconfig
+> > used to do (https://wiki.archlinux.org/index.php/VLAN).
+> >
+> > If we can avoid a dependency on such legacy code that would probably
+> > be good. Though I may be missing something as I haven't followed all
+> > the discussion around this patch and I don't know your use case.
+>
+> That's a good point.  Seeing something like this hasn't changed since
+> 2005 is a little concerning, but frankly I'm not completely shocked when
+> I find out some piece of networking infrastructure has stabilized to the
+> point where it isn't undergoing much development anymore.  Particularly
+> if it's something not everyone uses (and sometimes even if it is:
+> http://comments.gmane.org/gmane.linux.network/238858).
+>
+> That said, I remember vconfig coming up a bit when I was working with
+> the CGL workgroup and at the time we'd thought that ip was able to do
+> everything vconfig was doing, but we were looking at it in the more
+> narrow context of the requirements definition.
+>
+> So I guess my question is the same, is there even a use-case for vlan
+> now that cannot be addressed by existing, already integrated tools?
+> Lei?  Your comment is specifically saying "can be used by virt-test",
+> does that mean that virt-test (or something else in meta-virtualization)
+> requires vconfig to do 802.1q testing or simply that it hasn't been
+> ported to use other tools (like ip)?
+>
+>
+Yes, it use vconfig not ip, I can post the log fragment in virt-test
 
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
-index f553663..153097b 100644
---- a/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ewk-include-Element.h-for-hasTagName-function.patch
-@@ -1,4 +1,4 @@
--From 3de7c4633751c3e55152d4e2429dfcc0f69a1de3 Mon Sep 17 00:00:00 2001
-+From a5a5eeb10b56ad1f98899a02281ea825e3cd1202 Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Sat, 1 Jun 2013 19:23:54 +0200
- Subject: [PATCH] ewk: include Element.h for hasTagName function
-@@ -7,13 +7,28 @@ Subject: [PATCH] ewk: include Element.h for hasTagName function
-   | ../../../lib/libwebcore_efl.so.0.1.0: undefined reference to `WebCore::Node::hasTagName(WebCore::QualifiedName const&) const'
-   | collect2: error: ld returned 1 exit status
-   | make[2]: *** [bin/DumpRenderTree] Error 1
-+* SDL port has similar issue:
-+  https://bugs.webkit.org/show_bug.cgi?id=88536
- 
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
- ---
-- Source/WebKit/efl/ewk/ewk_frame.cpp | 1 +
-- Source/WebKit/efl/ewk/ewk_view.cpp  | 1 +
-- 2 files changed, 2 insertions(+)
-+ Source/WebCore/css/CSSStyleSheet.cpp | 1 +
-+ Source/WebKit/efl/ewk/ewk_frame.cpp  | 1 +
-+ Source/WebKit/efl/ewk/ewk_view.cpp   | 1 +
-+ 3 files changed, 3 insertions(+)
- 
-+diff --git a/Source/WebCore/css/CSSStyleSheet.cpp b/Source/WebCore/css/CSSStyleSheet.cpp
-+index 00b2d91..1d03c2e 100644
-+--- a/Source/WebCore/css/CSSStyleSheet.cpp
-++++ b/Source/WebCore/css/CSSStyleSheet.cpp
-+@@ -29,6 +29,7 @@
-+ #include "CSSStyleRule.h"
-+ #include "CachedCSSStyleSheet.h"
-+ #include "Document.h"
-++#include "Element.h"
-+ #include "ExceptionCode.h"
-+ #include "HTMLNames.h"
-+ #include "MediaList.h"
- diff --git a/Source/WebKit/efl/ewk/ewk_frame.cpp b/Source/WebKit/efl/ewk/ewk_frame.cpp
- index fd1ffd2..c86601a 100644
- --- a/Source/WebKit/efl/ewk/ewk_frame.cpp
--- 
-1.8.2.1
 
+/usr/bin/qemu-kvm -name 'vm2' -nodefaults -vga std -monitor
+unix:'/tmp/monitor-humanmonitor1-20120315-015344-Damx',server,nowait
+-serial unix:'/tmp/serial-20120315-015344-Damx',server,nowait -device
+ich9-usb-uhci1,id=usb1 -drive
+file='/root/test.img.qcow2',index=0,if=scsi,cache=none,snapshot=on -device
+e1000,netdev=idxcDeLE,mac='9a:18:1b:f3:d1:c6',id='id6KMAxt' -netdev
+tap,id=idxcDeLE,fd=22 -m 1024 -smp 2 -device
+usb-tablet,id=usb-tablet1,bus=usb1.0 -kernel '/root/kernel.guest.nic'
+-nographic  -append 'root=/dev/sda2 rw console=ttyS0,115200 ip=dhcp'
+01:53:45 DEBUG| VM appears to be alive with PID 9021
+01:53:45 DEBUG| (monitor humanmonitor1) Sending command 'info cpus'
+01:53:45 DEBUG| (monitor humanmonitor1) Response to 'info cpus'
+01:53:45 DEBUG| (monitor humanmonitor1)    * CPU #0: pc=0x00000000000ca1eb
+thread_id=9024
+01:53:45 DEBUG| (monitor humanmonitor1)      CPU #1: pc=0x00000000000f6404
+(halted) thread_id=9025
+01:53:45 DEBUG| Starting screendump thread
+01:53:45 DEBUG| Attempting to log into 'vm1' (timeout 360s)
+01:53:45 DEBUG| No DHCP lease for MAC 9a:18:1b:f3:76:58
+01:54:04 DEBUG| (address cache) DHCP lease OK: 00:15:17:bb:5e:88 -->
+128.224.165.205
+01:54:21 DEBUG| (address cache) DHCP lease OK: 9a:18:1b:f3:76:58 -->
+128.224.165.252
+01:54:21 DEBUG| Login command: 'ssh -o UserKnownHostsFile=/dev/null -o
+PreferredAuthentications=password -p 22 root@128.224.165.252'
+01:54:23 INFO | Logged in
+01:54:23 DEBUG| Sending command: ifconfig -a
+01:54:23 DEBUG| Sending command: dd if=/dev/urandom of=file bs=1024k
+count=10
+01:54:24 DEBUG| Sending command: echo $?
+01:54:25 DEBUG| Sending command: md5sum file
+01:54:25 DEBUG| Sending command: echo $?
+01:54:25 DEBUG| Sending command: /etc/init.d/iptables stop
+01:54:25 DEBUG| Sending command: modprobe 8021q
+01:54:25 DEBUG| Sending command: echo $?
+01:54:25 DEBUG| Attempting to log into 'vm2' (timeout 360s)
+01:54:25 DEBUG| No DHCP lease for MAC 9a:18:1b:f3:d1:c6
+01:54:29 DEBUG| (address cache) DHCP lease OK: 9a:18:1b:f3:d1:c6 -->
+128.224.165.247
+01:54:29 DEBUG| Login command: 'ssh -o UserKnownHostsFile=/dev/null -o
+PreferredAuthentications=password -p 22 root@128.224.165.247'
+01:54:31 INFO | Logged in
+01:54:31 DEBUG| Sending command: ifconfig -a
+01:54:31 DEBUG| Sending command: dd if=/dev/urandom of=file bs=1024k
+count=10
+01:54:33 DEBUG| Sending command: echo $?
+01:54:33 DEBUG| Sending command: md5sum file
+01:54:33 DEBUG| Sending command: echo $?
+01:54:33 DEBUG| Sending command: /etc/init.d/iptables stop
+01:54:33 DEBUG| Sending command: modprobe 8021q
+01:54:33 DEBUG| Sending command: echo $?
+01:54:34 DEBUG| Sending command: vconfig add eth0 1
+01:54:34 DEBUG| Sending command: echo $?
+01:54:34 DEBUG| Sending command: ifconfig eth0.1 192.168.1.1
+01:54:34 DEBUG| Sending command: echo $?
+01:54:34 DEBUG| Sending command: vconfig add eth0 2
+01:54:34 DEBUG| Sending command: echo $?
+01:54:34 DEBUG| Sending command: ifconfig eth0.2 192.168.2.1
+01:54:34 DEBUG| Sending command: echo $?
+01:54:34 DEBUG| Sending command: vconfig add eth0 3
+
+
+
+> --
+> -Joe MacDonald.
+> :wq
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
