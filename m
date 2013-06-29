@@ -1,29 +1,39 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C18E6AF02
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 09E206ABF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jun 2013 05:36:28 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r5T5aRGD012488
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 28 Jun 2013 22:36:28 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 28 Jun 2013 22:36:26 -0700
-Message-ID: <51CE7258.7010909@windriver.com>
-Date: Sat, 29 Jun 2013 13:36:24 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130510 Thunderbird/17.0.6
+	Sat, 29 Jun 2013 12:26:32 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id q56so2015174wes.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Jun 2013 05:26:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=9QHTf0NCzFnZsxWfl1rrx4thxV2CAMo6sfVphEnUHpU=;
+	b=xZv41yTgu/ejKELcEFka4MiSCR2spERZzexWfk/kEPnY3Y7mfYVLIGnSAkjzqVuk7J
+	ScGf3w+40zNl4Zc/CtdE7jKCxNBerxtjiYjLYQ9ZhjLGX832yEiV0EkPRs+zWzAdRS58
+	xbolbFBwRzjBhk/r6tJTAw0iEAUX5FC6liSRSUJAW3be+Ws6fjsWQ7Z610KxAYCQUbfw
+	6gQxizDpG+vehy2wQcH2sSEKYklixfs8wZCg4XqZmXdHeQFYttiq1q20DhchFyRuhmSE
+	RMUXQCNgkJeOdEwARo2mqKaXFYcsEY1qetN7lNC14ehQ+UKvk4yjs7x2OZysdwrE7dOi
+	NELA==
+X-Received: by 10.181.13.106 with SMTP id ex10mr6220044wid.16.1372508793242;
+	Sat, 29 Jun 2013 05:26:33 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	n45sm16766428eew.1.2013.06.29.05.26.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sat, 29 Jun 2013 05:26:32 -0700 (PDT)
+Date: Sat, 29 Jun 2013 14:27:13 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130629122713.GT3261@jama>
+References: <1372437419-31205-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <cover.1372213028.git.hongxu.jia@windriver.com>
-	<702dd5ac09c4e06fcad0b1831217ea3416d6c764.1372213028.git.hongxu.jia@windriver.com>
-	<2693732.0LEd3dIQS8@helios>
-In-Reply-To: <2693732.0LEd3dIQS8@helios>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] qt-x11-free: add missing DEPENDS on libglu for LSB Library Check
+In-Reply-To: <1372437419-31205-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-browser][PATCH V2 1/3] chromium: Remove older recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,55 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jun 2013 05:36:28 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Jun 2013 12:26:33 -0000
+X-Groupsio-MsgNum: 45246
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lCKkSrrNUaKEhaIQ"
+Content-Disposition: inline
 
-Hi Paul,
+--lCKkSrrNUaKEhaIQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Got it
+On Fri, Jun 28, 2013 at 09:36:56AM -0700, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...ser_main_loop.cc-fix-build-with-glib-2.35.patch |   42 --
+>  .../chromium-24.0.1312.52/armv6/include.gypi       |    8 -
+>  .../chromium-24.0.1312.52/armv6/oe-defaults.gypi   |   15 -
+>  .../chromium-24.0.1312.52/armv7a/include.gypi      |    9 -
+>  .../chromium-24.0.1312.52/armv7a/oe-defaults.gypi  |   15 -
+>  .../glib-2.16-use-siginfo_t.patch                  |   35 --
+>  .../chromium-24.0.1312.52/i586/include.gypi        |    5 -
+>  .../chromium-24.0.1312.52/i586/oe-defaults.gypi    |   15 -
+>  .../chromium-24.0.1312.52/ui-gl-no-narrowing.patch |   20 -
+>  .../chromium/chromium-24.0.1312.52/unistd-2.patch  |   27 -
+>  .../chromium-24.0.1312.52/x86-64/include.gypi      |    5 -
+>  .../chromium-24.0.1312.52/x86-64/oe-defaults.gypi  |   15 -
+>  .../chromium/chromium-29.0.1518.2/google-chrome    |    7 +
+>  .../chromium-29.0.1518.2/google-chrome.desktop     |  222 ++++++++
+>  .../chromium/chromium/armv6/include.gypi           |   26 -
+>  .../chromium/chromium/armv7a/include.gypi          |   26 -
+>  recipes-browser/chromium/chromium/bison-2.6.patch  |  558 --------------------
+>  recipes-browser/chromium/chromium/google-chrome    |    7 -
+>  .../chromium/chromium/google-chrome.desktop        |  222 --------
+>  recipes-browser/chromium/chromium/gypi.patch       |   19 -
+>  recipes-browser/chromium/chromium/memset.patch     |   13 -
+>  .../chromium/chromium/softfloat-fix.patch          |   22 -
+>  recipes-browser/chromium/chromium/unistd.patch     |   51 --
+>  recipes-browser/chromium/chromium_19.0.1049.3.bb   |  150 ------
+>  recipes-browser/chromium/chromium_20.0.1086.0.bb   |  141 -----
+>  recipes-browser/chromium/chromium_24.0.1312.52.bb  |   76 ---
+>  26 files changed, 229 insertions(+), 1522 deletions(-)
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/0001-browser_main_loop.cc-fix-build-with-glib-2.35.patch
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/armv6/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/armv6/oe-defaults.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/armv7a/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/armv7a/oe-defaults.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/glib-2.16-use-siginfo_t.patch
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/i586/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/i586/oe-defaults.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/ui-gl-no-narrowing.patch
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/unistd-2.patch
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/x86-64/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium-24.0.1312.52/x86-64/oe-defaults.gypi
+>  create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/google-chrome
+>  create mode 100644 recipes-browser/chromium/chromium-29.0.1518.2/google-chrome.desktop
 
-Thanks,
-Hongxu
+Fails to apply cleanly:
 
-On 06/28/2013 06:50 PM, Paul Eggleton wrote:
-> Hi Hongxu,
->
-> On Wednesday 26 June 2013 10:38:52 Hongxu Jia wrote:
->> When libglu is missing in qt-x11-free's DEPENDS, the LSB 4.1 Library
->> Check will fail:
->> ...
->> Checking library symbols (libqt-mt.so.3)
->> Did not find _ZN10QGLContext10currentCtxE (unversioned) in libqt-mt.so.3
->> Unmangled symbol name: QGLContext::currentCtx
->> ...
->>
->> [YOCTO #4016]
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->> ---
->>   recipes-qt3/qt3/qt-x11-free_3.3.7.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-qt3/qt3/qt-x11-free_3.3.7.bb
->> b/recipes-qt3/qt3/qt-x11-free_3.3.7.bb index a67dd63..af4fc01 100644
->> --- a/recipes-qt3/qt3/qt-x11-free_3.3.7.bb
->> +++ b/recipes-qt3/qt3/qt-x11-free_3.3.7.bb
->> @@ -1,4 +1,4 @@
->> -DEPENDS = "qt-x11-free-native freetype virtual/libx11 libxmu libxft libxext
->> libxrender libxrandr libxcursor  virtual/libgl" +DEPENDS =
->> "qt-x11-free-native freetype virtual/libx11 libxmu libxft libxext
->> libxrender libxrandr libxcursor  virtual/libgl libglu" PROVIDES = "qt3x11"
->>   PR = "${INC_PR}.1"
-> Merged to meta-qt3, thanks.
->
-> I noticed we didn't actually specify in the README in meta-qt3 where patches
-> should be sent, I have now fixed this. In future if you have any patches for
-> this layer could you please send them to the yocto@yoctoproject.org mailing
-> list.
->
-> Thanks,
-> Paul
->
+patching file recipes-browser/chromium/chromium/google-chrome.desktop
+Reversed (or previously applied) patch detected!  Assume -R? [n] ^C
 
+>  delete mode 100644 recipes-browser/chromium/chromium/armv6/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium/armv7a/include.gypi
+>  delete mode 100644 recipes-browser/chromium/chromium/bison-2.6.patch
+>  delete mode 100755 recipes-browser/chromium/chromium/google-chrome
+>  delete mode 100644 recipes-browser/chromium/chromium/google-chrome.desktop
+>  delete mode 100644 recipes-browser/chromium/chromium/gypi.patch
+>  delete mode 100644 recipes-browser/chromium/chromium/memset.patch
+>  delete mode 100644 recipes-browser/chromium/chromium/softfloat-fix.patch
+>  delete mode 100644 recipes-browser/chromium/chromium/unistd.patch
+>  delete mode 100644 recipes-browser/chromium/chromium_19.0.1049.3.bb
+>  delete mode 100644 recipes-browser/chromium/chromium_20.0.1086.0.bb
+>  delete mode 100644 recipes-browser/chromium/chromium_24.0.1312.52.bb
 
+--lCKkSrrNUaKEhaIQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHO0qEACgkQN1Ujt2V2gByT+gCeJGdjKFuwj1fuGxOpPHzUhYSC
+HacAn3pRApG5Ekte7guHYS9C0svOiYGd
+=3daB
+-----END PGP SIGNATURE-----
+
+--lCKkSrrNUaKEhaIQ--
