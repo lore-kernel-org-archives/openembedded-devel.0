@@ -1,37 +1,40 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f51.google.com (mail-pb0-f51.google.com
-	[209.85.160.51])
-	by mail.openembedded.org (Postfix) with ESMTP id A1FA1612D1
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EEB1612D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jun 2013 14:29:36 +0000 (UTC)
-Received: by mail-pb0-f51.google.com with SMTP id um15so3289475pbc.10
+	Sat, 29 Jun 2013 14:30:57 +0000 (UTC)
+Received: by mail-pd0-f169.google.com with SMTP id y10so1596641pdj.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jun 2013 07:29:37 -0700 (PDT)
+	Sat, 29 Jun 2013 07:30:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=dSt/nBKt2IAKG9Lz40x8aS40us+O+lXCL0c1x4/vojE=;
-	b=d8WJzdJWO0D8Y/zuJzIByaHuOctRqLS+QGKt80t6PkHq5gWhhNKUkxkBuUl4SIYuGm
-	7FG2sQHeGmekjfTqelthj4ROdKXFZhOH7SNhVYn8NOSelok7E5ujvqR+iiaXeat/AeuU
-	HdJnFWsnFpOaKCnpNXpwTedDLrfFJZnfs8iI6ND95KNYRbFtsqEXDbECgr41Tv9tsxGk
-	DuHMIvDRbcwcColIvI9hPz4FLTM2VJkAUz0gDvgP1UyguAT+1gAiZ2yiXzCt758uzakG
-	yoONkNdqyy82d7U5BftSYrZ9cYB1EbX7Z0dijAscqWO1EZCLqPe2i97eiixnt96rz4dy
-	DfjQ==
-X-Received: by 10.66.139.227 with SMTP id rb3mr16301241pab.121.1372516177749; 
-	Sat, 29 Jun 2013 07:29:37 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	xl3sm13132379pbb.17.2013.06.29.07.29.36 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 29 Jun 2013 07:29:37 -0700 (PDT)
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer;
+	bh=CiFjKkHCaQpc5xUYI0wiv5034ICvK0YV6x8eNNonMTU=;
+	b=Z+PS3TSutWP/cR07keMrtTLRrGQ0A3Ni59aBido7qHGvYaLu9E5cczPfXE/VR651i+
+	TWcfW5nW0ToPb4SSy5o+U4lxT+7CeCUzjXOpK6Xa5BFa9Fur0I+s2myQ7KHwNbgXtEvs
+	+tBIBxC8kvXYt17LD0NwlfoSYoLvcOhJ0/63+aypCEoSnFhPa5djAvR8DyDyhWzwYGkm
+	DpuFDhSrDtICseky5+2emlahipDD7CnfGGGqstWvwfw2PoXXgus4c8DSqiBn9xODzPNJ
+	EBE0HxXhc9HTedbnJttH2NjT/5h2ik1WwLE1n7EXAkf938TjNGWTkw3AzfOdXfrupXfi
+	MdjA==
+X-Received: by 10.67.1.33 with SMTP id bd1mr16322576pad.75.1372516258875;
+	Sat, 29 Jun 2013 07:30:58 -0700 (PDT)
+Received: from kosborne-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36]) by mx.google.com with ESMTPSA id
+	dg3sm13124518pbc.24.2013.06.29.07.30.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 29 Jun 2013 07:30:58 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
 From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20130629122713.GT3261@jama>
+Date: Sat, 29 Jun 2013 07:30:59 -0700
+Message-Id: <3C785BCF-50C1-4144-8EEC-C2EF2663E2C6@gmail.com>
+References: <1372437419-31205-1-git-send-email-raj.khem@gmail.com>
+	<20130629122713.GT3261@jama>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Jun 2013 07:29:16 -0700
-Message-Id: <1372516156-6648-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1372516156-6648-1-git-send-email-raj.khem@gmail.com>
-References: <1372516156-6648-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-browser][PATCH V3 2/2] libxi_1.7.1.bbappend: Remove
+X-Mailer: Apple Mail (2.1508)
+Subject: Re: [meta-browser][PATCH V2 1/3] chromium: Remove older recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jun 2013 14:29:36 -0000
+X-List-Received-Date: Sat, 29 Jun 2013 14:30:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-This bbappend was generating native version of libxi
-which was used by older chromium recipes but they are
-gone. So let this go as well.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-graphics/libxi/libxi_1.7.1.bbappend |    2 --
- 1 file changed, 2 deletions(-)
- delete mode 100644 recipes-graphics/libxi/libxi_1.7.1.bbappend
+On Jun 29, 2013, at 5:27 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
 
-diff --git a/recipes-graphics/libxi/libxi_1.7.1.bbappend b/recipes-graphics/libxi/libxi_1.7.1.bbappend
-deleted file mode 100644
-index c90046b..0000000
---- a/recipes-graphics/libxi/libxi_1.7.1.bbappend
-+++ /dev/null
-@@ -1,2 +0,0 @@
--PRINC := "${@int(PRINC) + 1}"
--BBCLASSEXTEND += "native"
--- 
-1.7.9.5
+> Fails to apply cleanly:
+>=20
+> patching file recipes-browser/chromium/chromium/google-chrome.desktop
+> Reversed (or previously applied) patch detected!  Assume -R? [n] ^C
+>=20
+>=20
 
+don't know what going on there in your tree, but I observed that one of =
+the patch is already applied
+so I rebased the patch set on top of master and resent a V3. retry and =
+let me know if it works
+this time. If not I will push it to a contrib tree and you can cherry =
+pick=
 
