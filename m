@@ -1,42 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f51.google.com (mail-pb0-f51.google.com
-	[209.85.160.51])
-	by mail.openembedded.org (Postfix) with ESMTP id E776F62240
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id D4AC76AF22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jun 2013 17:47:02 +0000 (UTC)
-Received: by mail-pb0-f51.google.com with SMTP id um15so3374296pbc.24
+	Mon,  1 Jul 2013 07:23:40 +0000 (UTC)
+Received: by mail-pd0-f169.google.com with SMTP id y10so2399305pdj.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Jun 2013 10:47:04 -0700 (PDT)
+	Mon, 01 Jul 2013 00:23:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=liKOMDrMBOGB4ACDYJxJ1cbSZlsGfiUn11Ow3c55rPU=;
-	b=DJGiKVTwXkN4iEWzGvrinyR/g3Nls1iF32nSPio9+PnmrY2hverwceNpb9cXWKG4g4
-	1EfJbkQ9JBWLPElcs7GIKqISCK3/P0mqskqKN6n6ubGEqYcO2wt8qBRQMtolCGi32Oqy
-	ogOURsmRFt6mtwlKEmB5zL9mMW2p3x++Q33ytLdBp9QBkysI76VNN3b446+p1gWqmqwB
-	CkY/ZS+UxDocgYqrhW+Eo6lojtb2Fr0x2XaOP8nRsV0kdDuwOfT2FjARLXK0PhL4dgY5
-	ON894RbO5LDwtRe/NKAC/XSG1UL+AyjdDJDR3LnZ1hPfjV5FkjhvnUvj0WmZxOl+FXfa
-	9YfQ==
-X-Received: by 10.68.197.199 with SMTP id iw7mr16705990pbc.110.1372528024324; 
-	Sat, 29 Jun 2013 10:47:04 -0700 (PDT)
-Received: from kosborne-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36]) by mx.google.com with ESMTPSA id
-	fr1sm13768606pbb.26.2013.06.29.10.47.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 29 Jun 2013 10:47:03 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=zfSVtjDCBYqOJxbGkjK6cFqn8ZAYwVa4I5dbZBO+Kyo=;
+	b=KmEmZPhLkyy1czwTcyo4zBf1vBBLUHfhh+J8Suvj3OPEUWZp67Ejs9jGCs5KnlvLb0
+	JzQTEcWP8pPloMSlHguUVGGfB3dw76OspCVJT/oXN5HOicBA9di7MokR337g3VRLSb5k
+	S5VL34ZTm3H3bjGyZSLjdrNJ5O2MaS4TuJR8Ot7hWXpj2gVuYk7KI9xnF0uRGVp+nWya
+	I/lhjaTprOWk+lFqJjzmOcJGMIVWMMpoBNaYLbmvDV0oZl6BV2AF1wPexTWTN6qxrDmC
+	afgX45dHtDYQGCf/31qeHcTMAEdxfozlC2pQOXG3cFhWvso+64ifGiRWbFpYlRftMlQg
+	8NaA==
+X-Received: by 10.68.218.199 with SMTP id pi7mr22578195pbc.19.1372663421898;
+	Mon, 01 Jul 2013 00:23:41 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	ix3sm20850544pbc.37.2013.07.01.00.23.40 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 01 Jul 2013 00:23:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130629154635.GX3261@jama>
-Date: Sat, 29 Jun 2013 10:47:01 -0700
-Message-Id: <24BF6777-D571-4D01-B8B4-8500B9BBDC40@gmail.com>
-References: <1372437419-31205-1-git-send-email-raj.khem@gmail.com>
-	<20130629122713.GT3261@jama>
-	<3C785BCF-50C1-4144-8EEC-C2EF2663E2C6@gmail.com>
-	<20130629153636.GW3261@jama> <20130629154635.GX3261@jama>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1508)
-Subject: Re: [meta-browser][PATCH V2 1/3] chromium: Remove older recipes
+Date: Mon,  1 Jul 2013 00:23:21 -0700
+Message-Id: <1372663401-12751-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] uhd: Fix compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,92 +43,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Jun 2013 17:47:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Jul 2013 07:23:41 -0000
 
+uhd would fail with wrong scope for uint8_t type
+errors.
 
-On Jun 29, 2013, at 8:46 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+CC: Philip Balister <philip@balister.org>
+---
+ .../0001-use-uint8_t-from-boost-namespace.patch    |   29 ++++++++++++++++++++
+ meta-oe/recipes-connectivity/uhd/uhd_git.bb        |    3 +-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
 
-> On Sat, Jun 29, 2013 at 05:36:36PM +0200, Martin Jansa wrote:
->> On Sat, Jun 29, 2013 at 07:30:59AM -0700, Khem Raj wrote:
->>>=20
->>> On Jun 29, 2013, at 5:27 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->>>=20
->>>> Fails to apply cleanly:
->>>>=20
->>>> patching file =
-recipes-browser/chromium/chromium/google-chrome.desktop
->>>> Reversed (or previously applied) patch detected!  Assume -R? [n] ^C
->>>>=20
->>>>=20
->>>=20
->>> don't know what going on there in your tree, but I observed that one =
-of the patch is already applied
->>> so I rebased the patch set on top of master and resent a V3. retry =
-and let me know if it works
->>> this time. If not I will push it to a contrib tree and you can =
-cherry pick
->>=20
->> I've double checked that my tree was identical to origin/master =
-before
->> writting this, then I've applied it manually and already pushed it =
-before
->> I've replied here, so I wonder if there is another repo which wasn't =
-synced?
->>=20
->> Because your rebase should show that everything is already there.
->>=20
->> I've pushed it to:
->> origin  git@github.com:OSSystems/meta-browser.git (push)
->=20
-> Few more details:
->=20
-> Can you compare downloaded patch from patchwork with your local =
-version to see if it got broken by patchwork?
->=20
-> I've tried to apply v3 again in older revision and it fails the same.
->=20
-> OE @ ~/meta-browser $ git checkout -b =
-dc77daa292ef10b38fdcd143d6bfae5008a81a5a =
-dc77daa292ef10b38fdcd143d6bfae5008a81a5a
-> Switched to a new branch 'dc77daa292ef10b38fdcd143d6bfae5008a81a5a'
->=20
-> OE @ ~/meta-browser $ pw-am.sh.oe-core 52693
-> 2013-06-29 17:40:39 =
-URL:http://patchwork.openembedded.org/patch/52693/mbox/ [68535] -> =
-"pw-am-52693.patch" [1]
-> Applying: chromium: Remove older recipes
-> /OE/meta-browser/.git/rebase-apply/patch:347: trailing whitespace.
-> if [ "${USER}" =3D "root" ] ; then=20
-> error: patch failed: =
-recipes-browser/chromium/chromium/google-chrome.desktop:1
-> error: recipes-browser/chromium/chromium/google-chrome.desktop: patch =
-does not apply
-> Patch failed at 0001 chromium: Remove older recipes
-> The copy of the patch that failed is found in:
->   /OE/meta-browser/.git/rebase-apply/patch
-> When you have resolved this problem, run "git am --resolved".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am =
---abort".
->=20
-> The same when tried from revision =
-1f633bb291fd71f0265a1402e6d6e53d95e00bd1
-> which is before that nspr commit you mentioned.
->=20
-
-
-hmmm https://github.com/OSSystems/meta-browser/commits/master
-shows these patches are already applied
-
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch b/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
+new file mode 100644
+index 0000000..8978ddc
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
+@@ -0,0 +1,29 @@
++From 317f6f08cedf005ce1f2d6f0d04cfb2659863423 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 30 Jun 2013 22:10:50 -0700
++Subject: [PATCH] use uint8_t from boost namespace
++
++Fixes errors like
++codec_ctrl.cpp:113:10: error: 'uint8_t' was not declared in this scope
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ host/lib/usrp/e100/codec_ctrl.cpp |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/host/lib/usrp/e100/codec_ctrl.cpp b/host/lib/usrp/e100/codec_ctrl.cpp
++index 13b3bc9..2c13176 100644
++--- a/host/lib/usrp/e100/codec_ctrl.cpp
+++++ b/host/lib/usrp/e100/codec_ctrl.cpp
++@@ -110,7 +110,7 @@ e100_codec_ctrl_impl::e100_codec_ctrl_impl(spi_iface::sptr iface){
++     //_ad9862_regs.dis2 = ad9862_regs_t::DIS2_DIS; needed for transmit
++ 
++     //write the register settings to the codec
++-    for (uint8_t addr = 0; addr <= 25; addr++){
+++    for (boost::uint8_t addr = 0; addr <= 25; addr++){
++         this->send_reg(addr);
++     }
++ 
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-connectivity/uhd/uhd_git.bb b/meta-oe/recipes-connectivity/uhd/uhd_git.bb
+index 06d5eff..180fd27 100644
+--- a/meta-oe/recipes-connectivity/uhd/uhd_git.bb
++++ b/meta-oe/recipes-connectivity/uhd/uhd_git.bb
+@@ -4,7 +4,8 @@ PV = "3.5.3"
+ PR = "${INC_PR}.0"
+ 
+ SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;branch=maint;protocol=git \
+-"
++           file://0001-use-uint8_t-from-boost-namespace.patch;striplevel=2 \
++          "
+ S = "${WORKDIR}/git/host"
+ 
+ SRCREV = "f4c58120dc1e3674ee0228213f0f0011a0f80dcf"
+-- 
+1.7.9.5
 
 
