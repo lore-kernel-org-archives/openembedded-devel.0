@@ -1,34 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4652D62062
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DB406A468
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Jul 2013 13:37:13 +0000 (UTC)
-Received: by mail-ea0-f177.google.com with SMTP id j14so2761315eak.22
+	Tue,  2 Jul 2013 18:31:57 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id e52so2901087eek.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jul 2013 06:37:13 -0700 (PDT)
+	Tue, 02 Jul 2013 11:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=cywUVSCcNEDDFVKjkmP3Cj1dlWwxVn/lSBAEEjXQs0k=;
-	b=bLywSBVqLaz0NONeU7aQegG6afQpOyDzYWwz2VL6esudZ9PsKNGj5WksC6MNg6ZlhV
-	1R2J92rz1WztmwfGfoIgJOHDd0xWbhZz3BSwONelg0rSoyVpKA3qvgPPySqTweCPs2j7
-	0TbtOGoYRHQLNNQldXlop+T4xGEc2F3UZenoxhCy+vqdEYP/CZgx1P8Loc6RCMDo68mc
-	SXDa5eTyZcZKJMGlWWDgsjx4AogMyi1uOpTW9NJaeQlqnfdJAoDMItUp7g9dOte4z+eu
-	C/bY06j8KeGWXNNJb4xiyj/jeX6ke2aZxHNZ6t/E4XMs689iRj/wZ8VHkYq0b9vQSuAg
-	RRvQ==
-X-Received: by 10.14.53.75 with SMTP id f51mr26392693eec.30.1372772232982;
-	Tue, 02 Jul 2013 06:37:12 -0700 (PDT)
+	bh=XKY93xojhnFrklyd/2IRmNAsHGZpl0VyDH7SUJSqiFw=;
+	b=lbXUpopl61Q0GkKQV7QoEBVxE/YPNfy6D68FpYcInY1O9i5FOoM4OY5oIPhN6m2OMt
+	A3h3qv0EWEljH6b/BgrBuosq5euOkaB8ktxLM518LuLIh54p9f7UtQ8FzfBRjKOxv3fZ
+	1jnQSjGP+GGCsFdnZnebRW3fQREf/HcGV2SeO4m80rHXuprBzwk3i/pubPrYeLG3k3cW
+	hsjrACjRSODlBGXTVXB9HzvLQbxN0iL/fou342XnEO5j+QiYko0xVNNCIxZXbvUw8J1M
+	ioJs4uQ9aACE2wPli8oUoZd86QzxOibuEZDWkUB0iopWe3r0of/CSeOTUfb72X4NBqgL
+	3+4A==
+X-Received: by 10.15.33.13 with SMTP id b13mr27582297eev.0.1372789918716;
+	Tue, 02 Jul 2013 11:31:58 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b7sm36717979eef.16.2013.07.02.06.37.11 for <multiple recipients>
+	c44sm38148152eeb.8.2013.07.02.11.31.57 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 02 Jul 2013 06:37:12 -0700 (PDT)
+	Tue, 02 Jul 2013 11:31:58 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jul 2013 15:37:10 +0200
-Message-Id: <1372772230-9451-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  2 Jul 2013 20:31:56 +0200
+Message-Id: <1372789916-2672-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.2.1
-Subject: [meta-oe][PATCH] f2fs-tools: add util-linux dependency
+Subject: [meta-networking][PATCH] vsftpd: add missing dependency on openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,26 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2013 13:37:14 -0000
+X-List-Received-Date: Tue, 02 Jul 2013 18:31:58 -0000
 
+* Fails without openssl in sysroot:
+  | i586-webos-linux-gcc  -m32 -march=i586 --sysroot=/OE/sysroots/qemux86 -o vsftpd main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o tunables.o ftpdataio.o secbuf.o ls.o postprivparent.o logging.o str.o netstr.o sysstr.o strlist.o banner.o filestr.o parseconf.o secutil.o ascii.o oneprocess.o twoprocess.o privops.o standalone.o hash.o tcpwrap.o ipaddrparse.o access.o features.o readwrite.o opts.o ssl.o sslslave.o ptracesandbox.o ftppolicy.o sysutil.o sysdeputil.o  -lssl -lcrypto -lnsl -lresolv -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -lcrypt -lcap
+  | /OE/sysroots/x86_64-linux/usr/libexec/i586-webos-linux/gcc/i586-webos-linux/4.7.2/ld: cannot find -lssl
+  | /OE/sysroots/x86_64-linux/usr/libexec/i586-webos-linux/gcc/i586-webos-linux/4.7.2/ld: cannot find -lcrypto
+  | collect2: error: ld returned 1 exit status
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-index e5b5439..7755a7f 100644
---- a/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-+++ b/meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb
-@@ -4,6 +4,9 @@ HOMEPAGE = "http://sourceforge.net/projects/f2fs-tools/"
+diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
+index c02ee9c..f146910 100644
+--- a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
++++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
+@@ -4,7 +4,7 @@ SECTION = "network"
  LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=15667d9b3cb737b57471c148b7c50734"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271"
  
-+# to provide libuuid
-+DEPENDS = "util-linux"
-+
- SRCREV = "da59f6146c37e727bb83ae4922ca56d42958e61c"
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;protocol=git"
- S = "${WORKDIR}/git"
+-DEPENDS = "libcap"
++DEPENDS = "libcap openssl"
+ 
+ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
+            file://makefile-destdir.patch \
 -- 
 1.8.2.1
 
