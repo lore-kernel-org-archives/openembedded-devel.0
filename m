@@ -1,36 +1,37 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 417406AFDE
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ob0-f178.google.com (mail-ob0-f178.google.com
+	[209.85.214.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C1546AFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jul 2013 18:29:12 +0000 (UTC)
-Received: by mail-vc0-f181.google.com with SMTP id lf11so345264vcb.12
+	Wed,  3 Jul 2013 18:30:52 +0000 (UTC)
+Received: by mail-ob0-f178.google.com with SMTP id fb19so547575obc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jul 2013 11:29:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:x-gm-message-state;
-	bh=uU4TbLjygO1BTttY4mkvmkcLEl5zTmHP4XicKhkUd14=;
-	b=LQSfncLEsPSDlqp/jRyMnRr1WXggtuTHgETx9Ssy4RotIl5Gw707wITu8HH9GgfNdO
-	+eZTkvq27RRulr88mFruYeXs06Kl4w2dsXeCj0v2roQvNiGWkvBE69N2GOm9ySfQ7B1J
-	c6ENezbRvlQhItpXMn/fAhb4ieH/zJaGsvUoDo4Yyr0Ew3aGXV8tlx8ab89f82iQSNos
-	d/LNJtsoclPTkwJ6lyNOad74HnZVtvHo8EmhyYlaw/szFb0kKmdOQMhif63DzBiywbT+
-	mHYKdkyui3nLuorgWaZG6AccbYznUwj8197hLMvRffH+LnbEpGx0aJJsSe9sSdEW4+1l
-	cTfQ==
-X-Received: by 10.58.24.41 with SMTP id r9mr663460vef.44.1372876152872; Wed,
-	03 Jul 2013 11:29:12 -0700 (PDT)
+	Wed, 03 Jul 2013 11:30:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=fEgSYi6Lc2S/1YLEFHurRNJBmS1+3nVoJgJRtDdhbd8=;
+	b=c67fXp1gK8lR4cIQTjw7XBq9YJIdSg+j8v7G4TylIH1DAg9MJB4PxV5tYRnPuuOwb1
+	MSX0j3RjsR5Eigwgr1uFXbj9aJZRAKX29SXyaipc2kzMqYJ8ptmABVx1u955Wu26hmUX
+	lpQpmny6pnCtJ0SpQqVWPUPMT1wvPS4+udJwDMDk7txefTBsLK6O6r7BIrOE2pyZ2/9A
+	5gYSSIFO7VB+1qDkrfP8kvaI8UKieUrDymOq8xsfldGgG284OM0mQIXObZFFKIc6jvCN
+	cCR0Hc+8/BKmtrcqj+ZnbGBVlzQfeh2JxdrK8MST8oi3zo+bvCUeKuSceg9mDHiYUtj1
+	GJ2g==
 MIME-Version: 1.0
-Received: by 10.220.13.144 with HTTP; Wed, 3 Jul 2013 11:28:52 -0700 (PDT)
-In-Reply-To: <CAP9ODKoyQfZRmikLwxVcxCXdtikVGNKk8DwRsfNaRURqp4+HPA@mail.gmail.com>
+X-Received: by 10.182.118.129 with SMTP id km1mr2090129obb.15.1372876253379;
+	Wed, 03 Jul 2013 11:30:53 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.98.133 with HTTP; Wed, 3 Jul 2013 11:30:53 -0700 (PDT)
+In-Reply-To: <CAJTo0Lar2HO_cr6Az31Sqkxp=7ATSg+jG_b5DkD=t9vCUaJa0g@mail.gmail.com>
 References: <1372864933-17240-1-git-send-email-otavio@ossystems.com.br>
 	<CAJTo0LbQA+r7B0RVDy_0CJivi8H+3yktHUZqCFzz1=AcTkXDiw@mail.gmail.com>
 	<CAP9ODKoyQfZRmikLwxVcxCXdtikVGNKk8DwRsfNaRURqp4+HPA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 3 Jul 2013 19:28:52 +0100
-Message-ID: <CAJTo0Lar2HO_cr6Az31Sqkxp=7ATSg+jG_b5DkD=t9vCUaJa0g@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Gm-Message-State: ALoCoQmP6n5r2oSaTC3oUOO5mybYotRnZGA/LzQWuSX9FFvXYWIojSu1D6eihq8HA9nk61NdsAVa
+	<CAJTo0Lar2HO_cr6Az31Sqkxp=7ATSg+jG_b5DkD=t9vCUaJa0g@mail.gmail.com>
+Date: Wed, 3 Jul 2013 15:30:53 -0300
+X-Google-Sender-Auth: eSPIAbZs0NuXu3ZANY5L-qgvj10
+Message-ID: <CAP9ODKpfZ51PorenwkNq1HccwU0N=3AtGzOAOC4yp1iE1=LJGw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: "Burton, Ross" <ross.burton@intel.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe PATCH] lmbench: Add /run onto package
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -46,23 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jul 2013 18:29:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Jul 2013 18:30:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 3 July 2013 17:46, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> This is part of base-files in oe-core master, so you shouldn't need
->> this to create the /run directory.  Obviously any attempt at packaging
->> files inside /run is doomed.
+On Wed, Jul 3, 2013 at 3:28 PM, Burton, Ross <ross.burton@intel.com> wrote:
+> On 3 July 2013 17:46, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>>> This is part of base-files in oe-core master, so you shouldn't need
+>>> this to create the /run directory.  Obviously any attempt at packaging
+>>> files inside /run is doomed.
+>>
+>> It has a subdir on it.
+>>
+>> ...
+>> lrwxrwxrwx root/root         0 2013-07-03 13:43 ./var/run -> /run
+>> drwxr-xr-x root/root         0 2013-07-03 13:43 ./run/
+>> drwxr-xr-x root/root         0 2013-07-03 13:43 ./run/lmbench/
 >
-> It has a subdir on it.
->
-> ...
-> lrwxrwxrwx root/root         0 2013-07-03 13:43 ./var/run -> /run
-> drwxr-xr-x root/root         0 2013-07-03 13:43 ./run/
-> drwxr-xr-x root/root         0 2013-07-03 13:43 ./run/lmbench/
+> /run is volatile.  Both systemd (directly) and sysvinit (through
+> fstab) put a tmpfs on /run, so that's not going to achieve much.
 
-/run is volatile.  Both systemd (directly) and sysvinit (through
-fstab) put a tmpfs on /run, so that's not going to achieve much.
+Ok; I will remove the /run and send a v2.
 
-Ross
+Thanks,
+
+--
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://projetos.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
