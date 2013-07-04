@@ -1,21 +1,34 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 333086AFF4
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id AA8C66A5AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 21:45:52 +0000 (UTC)
-Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id AC0D5A6246
+	Thu,  4 Jul 2013 21:52:43 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id d49so981900eek.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 23:45:49 +0200 (CEST)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Thu, 04 Jul 2013 14:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=wo7F2sCPA3/ywozeNvxVB61C7Kv+w7cNE4GvfDie66s=;
+	b=NldB1m9u04ND83ST9jqvFKlLX8kZ6SCiOremHKQeM7P26VUDvXnS+gS5nie+UwGGLL
+	Hke2lPbe6PYJWldrY1zlWeLSyk9oA7xrcuzCLznloEvCX5Xo8CBxHhWAbP06qI4sjXM0
+	dRSHyoArMnPmWJzlSFOtQS6na4b2wk5/R2NmTh/pAeHxYIpD3rpbjMYOP8xCUtI3d7Xc
+	qnVeHe4ciDvWjcWGjjIaYa1B9EDSKkh5Zmv0cRANUlX7EPfYJQbZ0Bm/Du4VbLD6hbZG
+	zNn4gON1Ti2ozU8Oc5E3Sqls0ilihxQCK9B4D1amHgjeAhJe6P5uV6JVt6vO8kIsrl1q
+	78Qg==
+X-Received: by 10.15.110.197 with SMTP id ch45mr8665528eeb.149.1372974763275; 
+	Thu, 04 Jul 2013 14:52:43 -0700 (PDT)
+Received: from mizar.localdomain
+	(host69-50-dynamic.0-79-r.retail.telecomitalia.it. [79.0.50.69])
+	by mx.google.com with ESMTPSA id
+	ci50sm8418690eeb.12.2013.07.04.14.52.42 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 04 Jul 2013 14:52:42 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jul 2013 23:47:29 +0200
-Message-Id: <1372974449-19858-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1776530.dBKCTHnX8Z@helios>
-References: <1776530.dBKCTHnX8Z@helios>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] hexedit: new recipe
+Date: Thu,  4 Jul 2013 23:52:35 +0200
+Message-Id: <1372974756-24764-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH 1/2] linux-yocto_3.8: use 'require' instead of 'include' for compliance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,78 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 21:45:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Jul 2013 21:52:44 -0000
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../hexedit/0001-don-t-strip-when-installing.patch |   30 ++++++++++++++++++++
- meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |   17 +++++++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
- create mode 100644 meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
+ recipes-kernel/linux/linux-yocto_3.8.bbappend | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
-new file mode 100644
-index 0000000..a384b05
---- /dev/null
-+++ b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
-@@ -0,0 +1,30 @@
-+From cc67246ca6839e5b3f6a286f10ed24c225b77a5e Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-+Date: Thu, 4 Jul 2013 12:34:32 +0200
-+Subject: [PATCH] don't strip when installing
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Signed-off-by: Eric Bénard <eric@eukrea.com>
-+
-+Upstream-Status: Inappropriate [configuration]
-+---
-+ Makefile.in |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 159463e..735cc72 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -42,6 +42,6 @@ distclean: clean
-+ 
-+ install: $(PRODUCT)
-+ 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
-+-	$(INSTALL) -s -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
-++	$(INSTALL) -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
-+ 	$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)/man1
-+ 	$(INSTALL) -m 644 $(PRODUCT).1 $(DESTDIR)$(mandir)/man1
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-new file mode 100644
-index 0000000..d0658db
---- /dev/null
-+++ b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "view and edit files in hexadecimal or in ASCII"
-+HOMEPAGE = "http://rigaux.org/hexedit.html"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2+"
-+DEPENDS = "ncurses"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+SRC_URI = "http://rigaux.org/${PN}-${PV}.src.tgz \
-+    file://0001-don-t-strip-when-installing.patch "
-+
-+SRC_URI[md5sum] = "a5af1378d028512a9cad27a5ba3e15f9"
-+SRC_URI[sha256sum] = "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54c58c983963b88dd7"
-+
-+inherit autotools
-+
-+S = "${WORKDIR}/${PN}"
+diff --git a/recipes-kernel/linux/linux-yocto_3.8.bbappend b/recipes-kernel/linux/linux-yocto_3.8.bbappend
+index c74d8c1..5423210 100644
+--- a/recipes-kernel/linux/linux-yocto_3.8.bbappend
++++ b/recipes-kernel/linux/linux-yocto_3.8.bbappend
+@@ -1,3 +1,3 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.8:${THISDIR}/${PN}:${THISDIR}/files:"
+ 
+-include linux-yocto-handhelds.inc
++require linux-yocto-handhelds.inc
 -- 
-1.7.10.4
+1.8.1.5
 
 
