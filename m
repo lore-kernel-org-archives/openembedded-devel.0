@@ -1,35 +1,25 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 027D26AA07
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 9072D6041E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 09:53:55 +0000 (UTC)
-Received: by mail-ob0-f169.google.com with SMTP id up14so1427381obb.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jul 2013 02:53:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=yEwvuukiSZ/fl4zvnwTDqbLV5XkXA2fS1WEbcpxrF8E=;
-	b=fq5I3uyC6bXPXWDSQLSOtB8MXppX9SxyhbEnR5lxcotI2i0Y/TNGTWDGa6ev1lOJJp
-	l880r/rOtSKptoOw/yDP3Zq9ZVUB0xnSyb7GnW8NGkPF6J0+mS5JhRBgu88YNrvm2ApM
-	PKwRjucgX+7PRrs1+KfcwuAi4p3EUAUlZ6syn/8hvUUM8YJH7Wa5D/Y1GeligYmfbUPs
-	AQxwZbwyrQktVwwOPPpVMD9+urm2PYhe3WhHBviTAKPutQle7sGzg1zdYic1qxHK+2Lx
-	P9h5g3DYoMArzEuXGOKfMqGdW6+Y8F/ixIusWD7jutrYVnJVVI4q0B6kltRl9pYQNJ/N
-	MoAg==
-X-Received: by 10.60.96.9 with SMTP id do9mr5186422oeb.49.1372931636259; Thu,
-	04 Jul 2013 02:53:56 -0700 (PDT)
+	Thu,  4 Jul 2013 10:48:08 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 04 Jul 2013 03:48:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,994,1363158000"; d="scan'208";a="326732210"
+Received: from unknown (HELO helios.localnet) ([10.252.121.242])
+	by azsmga001.ch.intel.com with ESMTP; 04 Jul 2013 03:48:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Paul Barker <paul@paulbarker.me.uk>
+Date: Thu, 04 Jul 2013 11:48:04 +0100
+Message-ID: <1721069.SICaQ1bLDa@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.4 (Linux/3.8.0-25-generic; KDE/4.10.4; i686; ; )
+In-Reply-To: <CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
+References: <51D42561.8060907@ts.fujitsu.com> <49035936.yua4bikce8@helios>
+	<CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.76.102.11 with HTTP; Thu, 4 Jul 2013 02:53:15 -0700 (PDT)
-In-Reply-To: <49035936.yua4bikce8@helios>
-References: <51D42561.8060907@ts.fujitsu.com> <51D52FD8.8060801@ts.fujitsu.com>
-	<49035936.yua4bikce8@helios>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Thu, 4 Jul 2013 10:53:15 +0100
-X-Google-Sender-Auth: qWBVJx08aQf95ZRtWSDvI80gcJI
-Message-ID: <CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: bitbake dies with an python exception | AttributeError: 'NoneType' object has no attribute 'rfind'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,44 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 09:53:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Jul 2013 10:48:09 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 4 July 2013 10:17, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
-> On Thursday 04 July 2013 10:18:32 Cestonaro Thilo wrote:
->> hey,
->>
->> found it. The Var "FAKEROOTCMD" wasn't set so bitbake died as executing
->> "None" doesn't work.
->>
->> Added
->> FAKEROOTCMD="fakeroot"
->> to my local.conf and it worked.
->>
->> But anyway, shouldn't this be the default?!
->>
->
-> FAKEROOTCMD is set in meta/conf/bitbake.conf, so this is indeed unexpected.
-> BTW, "fakeroot" is not correct - it needs to point to pseudo (and that is the
-> default if you have a look at meta/conf/bitbake.conf).
->
+On Thursday 04 July 2013 10:53:15 Paul Barker wrote:
+> On 4 July 2013 10:17, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> > On Thursday 04 July 2013 10:18:32 Cestonaro Thilo wrote:
+> >> hey,
+> >> 
+> >> found it. The Var "FAKEROOTCMD" wasn't set so bitbake died as executing
+> >> "None" doesn't work.
+> >> 
+> >> Added
+> >> FAKEROOTCMD="fakeroot"
+> >> to my local.conf and it worked.
+> >> 
+> >> But anyway, shouldn't this be the default?!
+> > 
+> > FAKEROOTCMD is set in meta/conf/bitbake.conf, so this is indeed
+> > unexpected.
+> > BTW, "fakeroot" is not correct - it needs to point to pseudo (and that is
+> > the default if you have a look at meta/conf/bitbake.conf).
+> 
+> I stumbled onto this sort of error when I cloned poky at master but
+> copied my bblayers.conf from a previous build and didn't update the
+> paths to point to the correct places for the layers. So I was running
+> latest bitbake with latest poky 'scripts' directory on the path,
+> against an old version of the 'dylan' branch of poky.
+> 
+> What versions of openembedded/poky/bitbake are you using? If they're
+> fetched from git I'd recommend updating everything and trying again.
+> It could just be a mismatch between the bitbake version and the
+> metadata versions.
 
-I stumbled onto this sort of error when I cloned poky at master but
-copied my bblayers.conf from a previous build and didn't update the
-paths to point to the correct places for the layers. So I was running
-latest bitbake with latest poky 'scripts' directory on the path,
-against an old version of the 'dylan' branch of poky.
+If this issue is reproducible I'd really appreciate some help in doing so; we 
+shouldn't be showing tracebacks if we can show a meaningful error.
 
-What versions of openembedded/poky/bitbake are you using? If they're
-fetched from git I'd recommend updating everything and trying again.
-It could just be a mismatch between the bitbake version and the
-metadata versions.
+Cheers,
+Paul
 
-Hope this helps,
+-- 
 
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+Paul Eggleton
+Intel Open Source Technology Centre
 
