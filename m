@@ -1,35 +1,19 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 431FA6AFBE
+Return-Path: <eric@eukrea.com>
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by mail.openembedded.org (Postfix) with ESMTP id DF3E46AF53
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 19:55:06 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id hq4so1539472wib.14
+	Thu,  4 Jul 2013 21:36:14 +0000 (UTC)
+Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 287A7A60F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jul 2013 12:55:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=yfhrR45pv0SBB/aECeEQV4Hsyp335lshoR7HQig9y2A=;
-	b=ei8OFNmV3cpsl1YMRWjPXVm1KwVOM/ujin90c8zlBrWeuuu1T7At4RRXvxUG7O8QCh
-	CEfE27yVOd/k/pE+10GDchLvLEr8y6XKnzAQ7MCIiIDAV2YwEAAgoal6VPAu0NH9pIBC
-	LFGslTRJw38+iIkvt9QCE89LyNXmnk62/+AMtZQQY6xmtOgMwJH0WkEoTIRkeI5PMcKh
-	BFoTrLIrwcYD9ersNIxkrtWumQK+zhImMVs5x6COdsGqKvwzgTg1t6oUnWPXWyhzUL6w
-	0OkOsYMD4F4GwmcFmvMUTsRlhPjw2SkOhQwfGiAO2+WXB4HXgakNwLedjY4asgZCD+N1
-	7x0A==
-X-Received: by 10.194.93.74 with SMTP id cs10mr4235667wjb.9.1372967706228;
-	Thu, 04 Jul 2013 12:55:06 -0700 (PDT)
-Received: from mizar.localdomain
-	(host69-50-dynamic.0-79-r.retail.telecomitalia.it. [79.0.50.69])
-	by mx.google.com with ESMTPSA id i1sm36855980wiz.6.2013.07.04.12.55.04
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 04 Jul 2013 12:55:05 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu,  4 Jul 2013 23:36:09 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jul 2013 21:54:56 +0200
-Message-Id: <1372967696-23853-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] initramfs-kexecboot-image: remove obsolete IMAGE_ vars
+Date: Thu,  4 Jul 2013 23:37:49 +0200
+Message-Id: <1372973869-16805-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] hexedit: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +27,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 19:55:06 -0000
+X-List-Received-Date: Thu, 04 Jul 2013 21:36:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* above variables are not in oe-core anymore
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 4 ----
- 1 file changed, 4 deletions(-)
+ .../hexedit/0001-don-t-strip-when-installing.patch |   30 ++++++++++++++++++++
+ meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |   17 +++++++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
+ create mode 100644 meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
 
-diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-index dd6d07d..35eb245 100644
---- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-+++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-@@ -15,10 +15,6 @@ IMAGE_INSTALL = "kexecboot kexec mtd-utils-ubifs"
- IMAGE_FEATURES = ""
- 
- IMAGE_LINGUAS = ""
--IMAGE_LOGIN_MANAGER = ""
--IMAGE_INIT_MANAGER = ""
--IMAGE_INITSCRIPTS = ""
--IMAGE_DEV_MANAGER = ""
- 
- FEED_DEPLOYDIR_BASE_URI = ""
- LDCONFIGDEPEND = ""
+diff --git a/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
+new file mode 100644
+index 0000000..a384b05
+--- /dev/null
++++ b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
+@@ -0,0 +1,30 @@
++From cc67246ca6839e5b3f6a286f10ed24c225b77a5e Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
++Date: Thu, 4 Jul 2013 12:34:32 +0200
++Subject: [PATCH] don't strip when installing
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: Eric Bénard <eric@eukrea.com>
++
++Upstream-Status: Inappropriate [configuration]
++---
++ Makefile.in |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 159463e..735cc72 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -42,6 +42,6 @@ distclean: clean
++ 
++ install: $(PRODUCT)
++ 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
++-	$(INSTALL) -s -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
+++	$(INSTALL) -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
++ 	$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)/man1
++ 	$(INSTALL) -m 644 $(PRODUCT).1 $(DESTDIR)$(mandir)/man1
++-- 
++1.7.10.4
++
+diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
+new file mode 100644
+index 0000000..85d02f1
+--- /dev/null
++++ b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "view and edit files in hexadecimal or in ASCII"
++HOMEPAGE = "http://rigaux.org/hexedit.html"
++SECTION = "console/utils"
++LICENSE = "GPLv2+"
++DEPENDS = "ncurses"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++SRC_URI = "http://rigaux.org/${PN}-${PV}.src.tgz \
++    file://0001-don-t-strip-when-installing.patch "
++
++SRC_URI[md5sum] = "a5af1378d028512a9cad27a5ba3e15f9"
++SRC_URI[sha256sum] = "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54c58c983963b88dd7"
++
++inherit autotools
++
++S = "${WORKDIR}/${PN}"
 -- 
-1.8.1.5
+1.7.10.4
 
 
