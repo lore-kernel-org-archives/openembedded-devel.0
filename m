@@ -1,25 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 437E96AFB6
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
+	[209.85.219.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E3F0E605F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 10:50:25 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by azsmga102.ch.intel.com with ESMTP; 04 Jul 2013 03:50:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,994,1363158000"; d="scan'208";a="360432403"
-Received: from unknown (HELO helios.localnet) ([10.252.121.242])
-	by fmsmga001.fm.intel.com with ESMTP; 04 Jul 2013 03:51:20 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Chunrong Guo <B40290@freescale.com>
-Date: Thu, 04 Jul 2013 11:50:24 +0100
-Message-ID: <2942656.3ozBKLWcr5@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.4 (Linux/3.8.0-25-generic; KDE/4.10.4; i686; ; )
-In-Reply-To: <1372929983-1410-1-git-send-email-B40290@freescale.com>
-References: <1372929983-1410-1-git-send-email-B40290@freescale.com>
+	Thu,  4 Jul 2013 10:55:54 +0000 (UTC)
+Received: by mail-oa0-f51.google.com with SMTP id i4so1746882oah.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jul 2013 03:55:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=Zf5+qj+UitNd3+TtSXLVP76vFmNn7+/bCQb8Y1D8Q+A=;
+	b=tEXZkYo/xgKO6yxhPQV2Kxdmb2DyIbgDutkxZidkrlfe0JwaLItUMxNy0F2TbOqXuz
+	T0BBwqb+X5kmmhQykihL+f79RleDg9dhICJafJTtROYI71roP3Ie+gqiMkwQu0kSjncE
+	u+pfotx7Mrrlgw8hGqYGzvmMLfe+pbIPPplZVuta7g0KJigpK6x0HyfEDUZWxNHxnjV4
+	/+WvdB9ORveQv//JGiNFP9fDMAaGnC3KCFL6gENvzA0J72ff/PyeAfYlsuByUXwW4h59
+	zW3nYCyJ0MqNpUoHetf+JGdRd4veFVZsASAsEpQbent8uNVKtz6Ka+RJVx+Q+uOB1rKQ
+	VC6Q==
+X-Received: by 10.182.81.202 with SMTP id c10mr5495785oby.27.1372935355303;
+	Thu, 04 Jul 2013 03:55:55 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, b40527@freescale.com
-Subject: Re: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
+Sender: paul.betafive@gmail.com
+Received: by 10.76.102.11 with HTTP; Thu, 4 Jul 2013 03:55:15 -0700 (PDT)
+In-Reply-To: <1721069.SICaQ1bLDa@helios>
+References: <51D42561.8060907@ts.fujitsu.com> <49035936.yua4bikce8@helios>
+	<CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
+	<1721069.SICaQ1bLDa@helios>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Thu, 4 Jul 2013 11:55:15 +0100
+X-Google-Sender-Auth: wQmxpn_9Ij5J9CqRC_N7IQ5sRdU
+Message-ID: <CANyK_8eNmm_jnpFgn44TwBLhOdSr1vyVouraHnvwz0T9iWfbkQ@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: bitbake dies with an python exception | AttributeError: 'NoneType' object has no attribute 'rfind'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,48 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 10:50:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 04 Jul 2013 10:55:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 04 July 2013 17:26:23 Chunrong Guo wrote:
-> Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> ---
->  .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
->  1 files changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
-> 0f5b273..0710893 100644
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> @@ -30,9 +30,11 @@ do_install () {
->      install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d
-> ${D}${sysconfdir}/dnsmasq.d install -m 644 ${WORKDIR}/dnsmasq.conf
-> ${D}${sysconfdir}/
->      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
-> -
-> -    install -d ${D}${systemd_unitdir}/system
-> -    install -m 0644 ${WORKDIR}/dnsmasq.service
-> ${D}${systemd_unitdir}/system +
-> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
-> then +        install -d ${D}${systemd_unitdir}/system
-> +        install -m 0644 ${WORKDIR}/dnsmasq.service
-> ${D}${systemd_unitdir}/system +    fi
-> 
->      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != ""
-> ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
+On 4 July 2013 11:48, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>
+> If this issue is reproducible I'd really appreciate some help in doing so; we
+> shouldn't be showing tracebacks if we can show a meaningful error.
+>
 
-I think we should really have a global fix for this issue rather than hacking 
-up every recipe:
+Not got time to try reproducing right now, but I did have a very quick
+look in git.
 
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=4309
+On the bitbake side:
+http://git.openembedded.org/bitbake/commit/?id=860ec42b220b7ed3f3bbe52c3546bba66644eac8
 
-Cheers,
-Paul
+On the oe-core side:
+http://git.openembedded.org/openembedded-core/commit/?id=003ea0fd1017dde50ced710179d0dc2e835d5185
 
--- 
+If you're running bitbake with the linked commit applied it looks for
+FAKEROOTCMD, if your oe-core doesn't have the linked commit it won't
+find FAKEROOTCMD.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
