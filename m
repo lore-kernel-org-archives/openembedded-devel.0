@@ -1,26 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 9072D6041E
+	by mail.openembedded.org (Postfix) with ESMTP id 437E96AFB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 10:48:08 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 04 Jul 2013 03:48:09 -0700
+	Thu,  4 Jul 2013 10:50:25 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by azsmga102.ch.intel.com with ESMTP; 04 Jul 2013 03:50:26 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,994,1363158000"; d="scan'208";a="326732210"
+X-IronPort-AV: E=Sophos;i="4.87,994,1363158000"; d="scan'208";a="360432403"
 Received: from unknown (HELO helios.localnet) ([10.252.121.242])
-	by azsmga001.ch.intel.com with ESMTP; 04 Jul 2013 03:48:06 -0700
+	by fmsmga001.fm.intel.com with ESMTP; 04 Jul 2013 03:51:20 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Date: Thu, 04 Jul 2013 11:48:04 +0100
-Message-ID: <1721069.SICaQ1bLDa@helios>
+To: Chunrong Guo <B40290@freescale.com>
+Date: Thu, 04 Jul 2013 11:50:24 +0100
+Message-ID: <2942656.3ozBKLWcr5@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.10.4 (Linux/3.8.0-25-generic; KDE/4.10.4; i686; ; )
-In-Reply-To: <CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
-References: <51D42561.8060907@ts.fujitsu.com> <49035936.yua4bikce8@helios>
-	<CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
+In-Reply-To: <1372929983-1410-1-git-send-email-B40290@freescale.com>
+References: <1372929983-1410-1-git-send-email-B40290@freescale.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: bitbake dies with an python exception | AttributeError: 'NoneType' object has no attribute 'rfind'
+Cc: openembedded-devel@lists.openembedded.org, b40527@freescale.com
+Subject: Re: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,42 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 10:48:09 -0000
+X-List-Received-Date: Thu, 04 Jul 2013 10:50:25 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Thursday 04 July 2013 10:53:15 Paul Barker wrote:
-> On 4 July 2013 10:17, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
-> > On Thursday 04 July 2013 10:18:32 Cestonaro Thilo wrote:
-> >> hey,
-> >> 
-> >> found it. The Var "FAKEROOTCMD" wasn't set so bitbake died as executing
-> >> "None" doesn't work.
-> >> 
-> >> Added
-> >> FAKEROOTCMD="fakeroot"
-> >> to my local.conf and it worked.
-> >> 
-> >> But anyway, shouldn't this be the default?!
-> > 
-> > FAKEROOTCMD is set in meta/conf/bitbake.conf, so this is indeed
-> > unexpected.
-> > BTW, "fakeroot" is not correct - it needs to point to pseudo (and that is
-> > the default if you have a look at meta/conf/bitbake.conf).
+On Thursday 04 July 2013 17:26:23 Chunrong Guo wrote:
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> ---
+>  .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
+>  1 files changed, 5 insertions(+), 3 deletions(-)
 > 
-> I stumbled onto this sort of error when I cloned poky at master but
-> copied my bblayers.conf from a previous build and didn't update the
-> paths to point to the correct places for the layers. So I was running
-> latest bitbake with latest poky 'scripts' directory on the path,
-> against an old version of the 'dylan' branch of poky.
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
+> 0f5b273..0710893 100644
+> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> @@ -30,9 +30,11 @@ do_install () {
+>      install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d
+> ${D}${sysconfdir}/dnsmasq.d install -m 644 ${WORKDIR}/dnsmasq.conf
+> ${D}${sysconfdir}/
+>      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+> -
+> -    install -d ${D}${systemd_unitdir}/system
+> -    install -m 0644 ${WORKDIR}/dnsmasq.service
+> ${D}${systemd_unitdir}/system +
+> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
+> then +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${WORKDIR}/dnsmasq.service
+> ${D}${systemd_unitdir}/system +    fi
 > 
-> What versions of openembedded/poky/bitbake are you using? If they're
-> fetched from git I'd recommend updating everything and trying again.
-> It could just be a mismatch between the bitbake version and the
-> metadata versions.
+>      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != ""
+> ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
 
-If this issue is reproducible I'd really appreciate some help in doing so; we 
-shouldn't be showing tracebacks if we can show a meaningful error.
+I think we should really have a global fix for this issue rather than hacking 
+up every recipe:
+
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=4309
 
 Cheers,
 Paul
