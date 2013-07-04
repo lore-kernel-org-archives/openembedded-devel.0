@@ -1,26 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 9164E6AF53
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id CC718607F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 12:47:28 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 04 Jul 2013 05:48:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.87,995,1363158000"; d="scan'208";a="360482353"
-Received: from unknown (HELO helios.localnet) ([10.252.121.242])
-	by fmsmga001.fm.intel.com with ESMTP; 04 Jul 2013 05:48:24 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Joe MacDonald <Joe.MacDonald@windriver.com>
-Date: Thu, 04 Jul 2013 13:47:27 +0100
-Message-ID: <1519816.5pLVqjn9PM@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.4 (Linux/3.8.0-25-generic; KDE/4.10.4; i686; ; )
-In-Reply-To: <20130704111809.GA3831@windriver.com>
-References: <1372929983-1410-1-git-send-email-B40290@freescale.com>
-	<2942656.3ozBKLWcr5@helios> <20130704111809.GA3831@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, b40527@freescale.com
-Subject: Re: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
+	Thu,  4 Jul 2013 12:49:15 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id i57so472204yha.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jul 2013 05:49:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=9K1zZU7FBDo8G/STy4mbO27qw3kwBlWpT+N8r/CNQ+U=;
+	b=GN1qvZu6DrXirJGCWP5PxVP96Y/BnCDHwg8AjyJNv/D37Yjws/sPZHudJcYNF3vVYH
+	EywgUnRWhyuUaRUgdGgOvUhcKMDkErujxT5Vh75IcoqAVjOcVjHZlju2pRlgoXb+uEtH
+	5INDsbXLx0S5JRSOhUiQiVVJ8uGosP+mpBzGNai2GnGpJzDPQSjPPvSmlREOs0O3+k48
+	1+zc5qViiwdNatDLNmPCrKnXh+pLIvA0jp/8Ofg00OsfoLmDJRdqLDFVDlHN8ae3ZGq5
+	/AA+lKIGBSYFIfQkZ2069XkHAWLURkMGwOAfpC9CJsRJNPXffMjNArRK167NByBwK4fC
+	uEhQ==
+X-Received: by 10.236.131.50 with SMTP id l38mr2894863yhi.149.1372942156462;
+	Thu, 04 Jul 2013 05:49:16 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.194.146])
+	by mx.google.com with ESMTPSA id j63sm4489695yhh.17.2013.07.04.05.49.14
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 04 Jul 2013 05:49:15 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  4 Jul 2013 09:48:55 -0300
+Message-Id: <1372942135-7083-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.8.3.1
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe PATCHv2] lmbench: remove /run/lmbench from package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,68 +45,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 12:47:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 04 Jul 2013 12:49:16 -0000
 
-On Thursday 04 July 2013 07:18:09 Joe MacDonald wrote:
-> [Re: [oe] [meta-networking][PATCH] dnsmasq: install .service only with 
-systemd in DISTRO_FEATURES] On 13.07.04 (Thu 11:50) Paul Eggleton wrote:
-> > On Thursday 04 July 2013 17:26:23 Chunrong Guo wrote:
-> > > Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> > > ---
-> > > 
-> > >  .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
-> > >  1 files changed, 5 insertions(+), 3 deletions(-)
-> > > 
-> > > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
-> > > 0f5b273..0710893 100644
-> > > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > @@ -30,9 +30,11 @@ do_install () {
-> > > 
-> > >      install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d
-> > > 
-> > > ${D}${sysconfdir}/dnsmasq.d install -m 644 ${WORKDIR}/dnsmasq.conf
-> > > ${D}${sysconfdir}/
-> > > 
-> > >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
-> > > 
-> > > -
-> > > -    install -d ${D}${systemd_unitdir}/system
-> > > -    install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > ${D}${systemd_unitdir}/system +
-> > > +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
-> > > then +        install -d ${D}${systemd_unitdir}/system
-> > > +        install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > ${D}${systemd_unitdir}/system +    fi
-> > > 
-> > >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
-> > >      ""
-> > > 
-> > > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
-> > 
-> > I think we should really have a global fix for this issue rather than
-> > hacking up every recipe:
-> > 
-> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=4309
-> 
-> I'm inclined to agree, but looking at the bug it looks like the
-> potential solution was discussed in February and it's on the schedule
-> for Yocto 1.5, but that's October.
+Create /run/lmbench on startup using populate-volatiles.sh and
+tmpfiles.d for systemd.
 
-The thing is it could be done by anyone at any time - the bug is at status 
-"NEW" which means the assignee hasn't actually accepted it yet, and the 
-solution being suggested is fairly straightforward. Given that I think it 
-would be easier to just fix the class and then we never have to worry about 
-this issue again.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 31a1109..d42d62c 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -37,9 +37,18 @@ do_compile () {
+ }
+ 
+ do_install () {
+-    install -d ${D}${localstatedir}/run/lmbench \
++    install -d ${D}${sysconfdir}/default/volatiles \
+            ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
+            ${D}${datadir}/lmbench/scripts
++
++    echo "d root root 0755 ${localstatedir}/run/${BPN} none" \
++           > ${D}${sysconfdir}/default/volatiles/99_lmbench
++    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /run/${BPN} - - - -" \
++              > ${D}${sysconfdir}/tmpfiles.d/lmbench.conf
++    fi
++
+     oe_runmake 'BASE=${D}${prefix}' \
+             -C src install
+     mv ${D}${bindir}/line ${D}${bindir}/lm_line
+@@ -52,5 +61,15 @@ do_install () {
+     install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
+ }
+ 
++pkg_postinst_${PN} () {
++    if [ -z "$D" ]; then
++        if command -v systemd-tmpfiles >/dev/null; then
++            systemd-tmpfiles --create
++        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++            ${sysconfdir}/init.d/populate-volatile.sh update
++        fi
++    fi
++}
++
+ RDEPENDS_${PN} = "debianutils"
+ FILES_${PN} += "${datadir}/lmbench ${libdir}/lmbench"
 -- 
+1.8.3.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
