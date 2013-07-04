@@ -1,45 +1,36 @@
-Return-Path: <B40290@freescale.com>
-Received: from va3outboundpool.messaging.microsoft.com
-	(va3ehsobe003.messaging.microsoft.com [216.32.180.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A211607F8
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 027D26AA07
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 09:26:36 +0000 (UTC)
-Received: from mail179-va3-R.bigfish.com (10.7.14.245) by
-	VA3EHSOBE011.bigfish.com (10.7.40.61) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 4 Jul 2013 09:26:36 +0000
-Received: from mail179-va3 (localhost [127.0.0.1])	by
-	mail179-va3-R.bigfish.com (Postfix) with ESMTP id C126F380127	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 09:26:36 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 4
-X-BigFish: VS4(z37d4lzzz1f42h1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275bhz2dh2a8h668h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1155h)
-Received: from mail179-va3 (localhost.localdomain [127.0.0.1]) by mail179-va3
-	(MessageSwitch) id 1372929995288138_1765;
-	Thu,  4 Jul 2013 09:26:35 +0000 (UTC)
-Received: from VA3EHSMHS021.bigfish.com (unknown [10.7.14.236])	by
-	mail179-va3.bigfish.com (Postfix) with ESMTP id 3ADF9360089	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 09:26:35 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS021.bigfish.com
-	(10.7.99.31) with Microsoft SMTP Server (TLS) id 14.1.225.23;
-	Thu, 4 Jul 2013 09:26:32 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.2.328.11; Thu, 4 Jul 2013 09:26:30 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r649QRBO031697;	Thu, 4 Jul 2013 02:26:28 -0700
-From: Chunrong Guo <B40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Jul 2013 17:26:23 +0800
-Message-ID: <1372929983-1410-1-git-send-email-B40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Thu,  4 Jul 2013 09:53:55 +0000 (UTC)
+Received: by mail-ob0-f169.google.com with SMTP id up14so1427381obb.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jul 2013 02:53:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	bh=yEwvuukiSZ/fl4zvnwTDqbLV5XkXA2fS1WEbcpxrF8E=;
+	b=fq5I3uyC6bXPXWDSQLSOtB8MXppX9SxyhbEnR5lxcotI2i0Y/TNGTWDGa6ev1lOJJp
+	l880r/rOtSKptoOw/yDP3Zq9ZVUB0xnSyb7GnW8NGkPF6J0+mS5JhRBgu88YNrvm2ApM
+	PKwRjucgX+7PRrs1+KfcwuAi4p3EUAUlZ6syn/8hvUUM8YJH7Wa5D/Y1GeligYmfbUPs
+	AQxwZbwyrQktVwwOPPpVMD9+urm2PYhe3WhHBviTAKPutQle7sGzg1zdYic1qxHK+2Lx
+	P9h5g3DYoMArzEuXGOKfMqGdW6+Y8F/ixIusWD7jutrYVnJVVI4q0B6kltRl9pYQNJ/N
+	MoAg==
+X-Received: by 10.60.96.9 with SMTP id do9mr5186422oeb.49.1372931636259; Thu,
+	04 Jul 2013 02:53:56 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: b40527@freescale.com
-Subject: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
+Sender: paul.betafive@gmail.com
+Received: by 10.76.102.11 with HTTP; Thu, 4 Jul 2013 02:53:15 -0700 (PDT)
+In-Reply-To: <49035936.yua4bikce8@helios>
+References: <51D42561.8060907@ts.fujitsu.com> <51D52FD8.8060801@ts.fujitsu.com>
+	<49035936.yua4bikce8@helios>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Thu, 4 Jul 2013 10:53:15 +0100
+X-Google-Sender-Auth: qWBVJx08aQf95ZRtWSDvI80gcJI
+Message-ID: <CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: bitbake dies with an python exception | AttributeError: 'NoneType' object has no attribute 'rfind'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,35 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 09:26:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Jul 2013 09:53:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+On 4 July 2013 10:17, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> On Thursday 04 July 2013 10:18:32 Cestonaro Thilo wrote:
+>> hey,
+>>
+>> found it. The Var "FAKEROOTCMD" wasn't set so bitbake died as executing
+>> "None" doesn't work.
+>>
+>> Added
+>> FAKEROOTCMD="fakeroot"
+>> to my local.conf and it worked.
+>>
+>> But anyway, shouldn't this be the default?!
+>>
+>
+> FAKEROOTCMD is set in meta/conf/bitbake.conf, so this is indeed unexpected.
+> BTW, "fakeroot" is not correct - it needs to point to pseudo (and that is the
+> default if you have a look at meta/conf/bitbake.conf).
+>
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index 0f5b273..0710893 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -30,9 +30,11 @@ do_install () {
-     install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d ${D}${sysconfdir}/dnsmasq.d
-     install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
--
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
-+    
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
-+    fi
- 
-     if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
-         install -d ${D}${sysconfdir}/dbus-1/system.d
--- 
-1.7.5.4
+I stumbled onto this sort of error when I cloned poky at master but
+copied my bblayers.conf from a previous build and didn't update the
+paths to point to the correct places for the layers. So I was running
+latest bitbake with latest poky 'scripts' directory on the path,
+against an old version of the 'dylan' branch of poky.
 
+What versions of openembedded/poky/bitbake are you using? If they're
+fetched from git I'd recommend updating everything and trying again.
+It could just be a mismatch between the bitbake version and the
+metadata versions.
 
+Hope this helps,
+
+--
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
