@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F1DB6AF97
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A1AB6AF31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2013 01:23:57 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id b57so1052737eek.22
+	Fri,  5 Jul 2013 01:23:59 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id c1so1063085eek.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jul 2013 18:23:57 -0700 (PDT)
+	Thu, 04 Jul 2013 18:23:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Tgl8bAh+bI4qkmK9lrLrfgx2gNKG5EElqwzmPnC7FzA=;
-	b=UdCmcpV/cq/8IwPTspfGAqeu7N/sypdpz4ie/nU+MEr7EQL82f9ZNQ8FDaVPgWy3LN
-	/9cs/PLFv0amnu3ugYiuyAQfS3W1bhkbPTBPEmpksQAKP/Z78aX6+ZCppX9y90laV4XC
-	myekpCRmUilDZKfH0vJzcJHp70Nt5iX5H2yhDhx5+D/sGao6ixAH/PdO3g2sKL5IBfJX
-	7swN39/dwXapbJsrsZ43bW15l0DktJKZHrf4lAcgEx2Xq0ciBEDNSwnJMXdnQ9kvWewa
-	rZQOzR5RLqlT8c3tScFbgmP3hpUQd4DiENsjuPaQJ5QPjEJmFxeRHUWSt/KdLMsXHcQF
-	ZyYg==
-X-Received: by 10.14.215.197 with SMTP id e45mr9071811eep.130.1372987437675;
-	Thu, 04 Jul 2013 18:23:57 -0700 (PDT)
+	bh=ql7AWVdbViKd8vi6yA9eMwLgAXloTpySBpdmkawqBJ8=;
+	b=ln/qonsbmDGUyvYwDzBA3bGZP1p7MruH7F9VJrR4KuZ8TQx+mhbsznjBj9VbQf3fDQ
+	6PWj0WE6Rb2klQhD+gThvre1XTOxov6KPGEERwYyQwQSN5yoFvvuusb40xODk1on+SrT
+	eiWJke44wozZsr0q6t9i89XZVB6NkmHR638XQy/wERyDIO190H/BIrSeWRqbSinYkDcq
+	mcC3JCTO7OZrRIl6kbk/M2ValeU0F78hGmG2rfvaUKPVoiOmEJLFObMZZPFwTpDzNjLW
+	lTIUOLE9K++08+aup20rCXR/YDhEhLuusNt9X5PBLVmHFDHsHrefI7uYvpio6XBrXFFl
+	35Eg==
+X-Received: by 10.15.55.199 with SMTP id v47mr9242736eew.41.1372987439671;
+	Thu, 04 Jul 2013 18:23:59 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	p49sm9753328eeu.2.2013.07.04.18.23.56 for <multiple recipients>
+	n42sm9576269eeh.15.2013.07.04.18.23.58 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 04 Jul 2013 18:23:57 -0700 (PDT)
+	Thu, 04 Jul 2013 18:23:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jul 2013 03:23:47 +0200
-Message-Id: <788893827d50f72918440c9a71a00743e61aa543.1372987207.git.Martin.Jansa@gmail.com>
+Date: Fri,  5 Jul 2013 03:23:48 +0200
+Message-Id: <7f300eae67abd68533aa21d7289f5c7714f2b7cd.1372987207.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.2.1
 In-Reply-To: <47686756f036d39b24eb30d4522eb1f1b1a12702.1372987207.git.Martin.Jansa@gmail.com>
 References: <47686756f036d39b24eb30d4522eb1f1b1a12702.1372987207.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1372987207.git.Martin.Jansa@gmail.com>
 References: <cover.1372987207.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 03/10] xorg-gsml-doctools: add missing dependency on util-macros
+Subject: [PATCH 04/10] cpufrequtils: inherit gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2013 01:23:57 -0000
+X-List-Received-Date: Fri, 05 Jul 2013 01:23:59 -0000
 
-* fails without:
-  | configure.ac:32: error: must install xorg-macros 1.8 or later before
-  running autoconf/autogen
+* build without gettext-native fails with:
+  | Building ccdv
+  | /bin/sh: 1: xgettext: not found
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb | 2 ++
+ meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-index 502723c..80f1f00 100644
---- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-+++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
-@@ -2,6 +2,8 @@ require xorg-doc-common.inc
- PE = "1"
- PR = "${INC_PR}.0"
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+index bd631af..e74fa44 100644
+--- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
++++ b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+@@ -1,5 +1,7 @@
+ DESCRIPTION = "To make access to the Linux kernel cpufreq subsystem easier for users and cpufreq userspace tools, a cpufrequtils package was created"
  
-+DEPENDS += "util-macros"
++inherit gettext
 +
- LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
+ DEPENDS = "libtool-cross"
  
- SRC_URI[md5sum] = "2588efb3f49f7fc6ecf41ce42e0b2e5e"
+ LICENSE = "GPLv2"
 -- 
 1.8.2.1
 
