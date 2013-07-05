@@ -1,37 +1,25 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f44.google.com (mail-yh0-f44.google.com
-	[209.85.213.44])
-	by mail.openembedded.org (Postfix) with ESMTP id AABEE6AFF4
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 768B16AE2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jul 2013 17:01:31 +0000 (UTC)
-Received: by mail-yh0-f44.google.com with SMTP id t59so929842yho.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jul 2013 10:01:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=khs12lyH//HmDtBsDGn5Nj1TLovQrYWTgyQIQN1HY4U=;
-	b=tPJaKeqS7VO47NSCPEqWityYm6l3up/1gE9wV0+Wp5OKucOiaJdKrZpAFkIu0E4mR9
-	PPUoPTjy8ke1mQV8t9CFiAngKQwXmMTr/EFgeZHslJbkZaUcFtg2jMXjiXlVyp5a5drE
-	8PRXM9VkgaYNekLoZ40j0yI5OOyw/rPtq+cV1n5u2IAqmGXrkHmeOZv/oHM5oP+573B8
-	/k30Xd8PD0/0wlV8ixgkd+tVTV7Y3/gvn64ELUQGPS0qrxTkznmYEoqb8CLM6R+GpDSh
-	4XGRxPE/jXH1fkPuFEdhrfmTmxrtXO/Wtj7XySvpsm1H7CRL5B6WqOMVJ3FIcoGavqJP
-	s8lg==
-X-Received: by 10.236.19.164 with SMTP id n24mr6385138yhn.92.1373043691981;
-	Fri, 05 Jul 2013 10:01:31 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.194.194.146])
-	by mx.google.com with ESMTPSA id
-	s80sm13836674yhe.27.2013.07.05.10.01.30 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 05 Jul 2013 10:01:31 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  5 Jul 2013 14:01:16 -0300
-Message-Id: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.3.1
+	Fri,  5 Jul 2013 17:29:05 +0000 (UTC)
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 05 Jul 2013 10:29:06 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,1003,1363158000"; d="scan'208";a="264528270"
+Received: from unknown (HELO helios.localnet) ([10.252.122.22])
+	by AZSMGA002.ch.intel.com with ESMTP; 05 Jul 2013 10:29:05 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 05 Jul 2013 18:29:04 +0100
+Message-ID: <2710952.otpci6RPJ6@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.4 (Linux/3.8.0-25-generic; KDE/4.10.4; i686; ; )
+In-Reply-To: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
+References: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
+MIME-Version: 1.0
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
+Subject: Re: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2013 17:01:31 -0000
+X-List-Received-Date: Fri, 05 Jul 2013 17:29:06 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../busybox/{busybox_1.20.2.bbappend => busybox_1.21.1.bbappend}        | 2 --
- 1 file changed, 2 deletions(-)
- rename meta-oe/recipes-core/busybox/{busybox_1.20.2.bbappend => busybox_1.21.1.bbappend} (91%)
+On Friday 05 July 2013 14:01:16 Otavio Salvador wrote:
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  .../busybox/{busybox_1.20.2.bbappend => busybox_1.21.1.bbappend}        | 2
+> -- 1 file changed, 2 deletions(-)
+>  rename meta-oe/recipes-core/busybox/{busybox_1.20.2.bbappend =>
+> busybox_1.21.1.bbappend} (91%)
+> 
+> diff --git a/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+> b/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend similarity index 91%
+> rename from meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+> rename to meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
+> index 721ef19..7a2f0c3 100644
+> --- a/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
+> +++ b/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
+> @@ -1,5 +1,3 @@
+> -PRINC := "${@int(PRINC) + 1}"
+> -
+>  # look for files in the layer first
+>  FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-diff --git a/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend b/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
-similarity index 91%
-rename from meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-rename to meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
-index 721ef19..7a2f0c3 100644
---- a/meta-oe/recipes-core/busybox/busybox_1.20.2.bbappend
-+++ b/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
-@@ -1,5 +1,3 @@
--PRINC := "${@int(PRINC) + 1}"
--
- # look for files in the layer first
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
- 
+Could someone *please* figure out what this bbappend is needed for and get it 
+into OE-Core if it is still needed so we can drop it here?
+
+Thanks,
+Paul
+
 -- 
-1.8.3.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
