@@ -1,36 +1,33 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C65C86A5AF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id B02246AF31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jul 2013 21:52:44 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id d41so992220eek.33
+	Fri,  5 Jul 2013 01:23:48 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id e52so1055278eek.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jul 2013 14:52:45 -0700 (PDT)
+	Thu, 04 Jul 2013 18:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=CNp+h+KF9pbhGH1g7Xm4ryiVY8PcsrNi7tckV5fiJFU=;
-	b=r5rMWOlno9KWGrc/2pHDf1FG1uOaEkv5tIqHBsSjP/CAiAbwkg0LCwwtWfv84wZkm5
-	5Y3pHIdOPfJ1RDxA7OwF1OEsr39xiNA67OBEpqrJQwSJUmQIjUCauM505CG3/pCEz9Sw
-	11LBrpF9edOLZ2I7LAsFu8FE7InknjkcQ1EGbwRwTFlbl1yKWfetysU/xNGru2T/OZ8U
-	XmP6p0twhaJIShqztk4jXEbwAK9rDlZo/Qt0KNZCCFyRlTMi+DAQmcNqb2810pCYvz7F
-	RdMH39EWEM2w+WyuMXJRCb4sMV7Xclzhvcjs/WgGsdlG2xOmDVVL0KVX+39lnCYozKJQ
-	6aqg==
-X-Received: by 10.15.31.198 with SMTP id y46mr8827198eeu.135.1372974765518;
-	Thu, 04 Jul 2013 14:52:45 -0700 (PDT)
-Received: from mizar.localdomain
-	(host69-50-dynamic.0-79-r.retail.telecomitalia.it. [79.0.50.69])
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=C0sZAi4r6Q2tXgysquKmxVNO8Xy/7Wi4KYuVe5QoAJY=;
+	b=pa4WjqEX0H+Kaq89UeWtyFuy8cZu5FEuLm/arQQ6i6w4UfAnVXrgY+PGh5WZJFO9Xa
+	6xvjgoQt89MXOoG50LzpXC40gxHF3uZx7XeEUxdhVavFSkRQAVHm6sBPJmMMYukYjuk4
+	kNOU0AA5pJVFJEnLZBEuZXV6C2FkpQiXSA+clrPNaDvco3eGDEk+ayJ+ocN/uriO4eM0
+	XO9QSAxE8qiQyybiXRS9QLR7QfeLzNKBNDj8ocsq06ptpcm+aogP/rhCKkykIRjhTrAM
+	ihhGjBEhhz85NeccSJ5nQS2G3pgPhEenEpWUoaI1frJwwPCHjXlTq7bSyPmCWj9qi0H0
+	2LrQ==
+X-Received: by 10.15.63.204 with SMTP id m52mr9470805eex.59.1372987428748;
+	Thu, 04 Jul 2013 18:23:48 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	ci50sm8418690eeb.12.2013.07.04.14.52.44 for <multiple recipients>
+	cg12sm9684163eeb.7.2013.07.04.18.23.47 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 04 Jul 2013 14:52:44 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 04 Jul 2013 18:23:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jul 2013 23:52:36 +0200
-Message-Id: <1372974756-24764-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-In-Reply-To: <1372974756-24764-1-git-send-email-andrea.adami@gmail.com>
-References: <1372974756-24764-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/2] linux-yocto-tiny-kexecboot_3.8: use 'require' instead of 'include' for compliance
+Date: Fri,  5 Jul 2013 03:23:51 +0200
+Message-Id: <cover.1372987207.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.2.1
+Subject: [PATCH 00/10] Missing deps discovered in per-recipe builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,24 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jul 2013 21:52:45 -0000
+X-List-Received-Date: Fri, 05 Jul 2013 01:23:49 -0000
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bbappend | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I was using simple script to build each component alone:
 
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bbappend
-index ec83a60..eb02812 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bbappend
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.8.bbappend
-@@ -8,4 +8,4 @@ KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
- KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
- KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
- 
--include linux-yocto-handhelds.inc
-+require linux-yocto-handhelds.inc
+#!/bin/bash
+
+rm -rf tmp-eglibc/abi_version tmp-eglibc/buildstats tmp-eglibc/cache tmp-eglibc/deploy tmp-eglibc/log tmp-eglibc/pkgdata pseudodone tmp-eglibc/saved_tmpdir tmp-eglibc/sstate-control tmp-eglibc/stamps tmp-eglibc/sysroots tmp-eglibc/work-shared tmp-eglibc/work/*
+rm -rf log.*
+
+ls -d buildhistory/packages/*/* | xargs -n 1 basename | sort -u > component.list
+ncomponents=`cat component.list | wc -l`
+i=1
+for component in `cat component.list`; do
+  echo "Building component: ${component} ($i/$ncomponents)"
+  bitbake -c cleansstate ${component} | tee log.${component};
+  bitbake ${component} | tee -a log.${component};
+  rm -rf tmp-eglibc/abi_version tmp-eglibc/buildstats tmp-eglibc/cache tmp-eglibc/deploy tmp-eglibc/log tmp-eglibc/pkgdata pseudodone tmp-eglibc/saved_tmpdir tmp-eglibc/sstate-control tmp-eglibc/stamps tmp-eglibc/sysroots tmp-eglibc/work-shared tmp-eglibc/work/*
+  i=`expr $i + 1`
+done
+grep "NOTE: Tasks Summary: Attempted.*failed.$" log.*
+
+That should cover missing mandatory dependencies.
+Comparing depends.dot files in buildhistory between incremental build and this per-component build should detect at least some autodetected dependencies. In per-component builds it can find only libraries already included in dependency tree, so dependencies lost in buildhistory aren't deterministic.
+Even better would be to run per-component build once after building world without removing tmp-eglibc, that will allow components to autodetect all possible libraries and then run another per-component build with removing tmp-eglibc which allows to detect libraries from dependency-tree.
+
+The following changes since commit 46354a697c18a64c5836159adf8dbd92e6547e85:
+
+  vsftpd: add missing dependency on openssl (2013-07-02 14:39:17 -0400)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib jansa/deps
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/deps
+
+Martin Jansa (10):
+  f2fs-tools: add util-linux dependency
+  ruby: add missing dependency on ruby-native
+  xorg-gsml-doctools: add missing dependency on util-macros
+  cpufrequtils: inherit gettext
+  cryptsetup: add missing dependency on libgcrypt
+  gsoap: add missing dependency on zlib
+  libspatialite: add missing dependency on sqlite3
+  wbxml2: add missing dependency on expat
+  fbida: define -I when checking jpeg version
+  iso-codes: add missing dependency on gettext-native
+
+ meta-oe/recipes-core/f2fs-tools/f2fs-tools_1.1.0.bb         | 3 +++
+ meta-oe/recipes-graphics/fbida/fbida_2.09.bb                | 2 +-
+ meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb | 2 ++
+ meta-oe/recipes-navigation/libspatialite/libspatialite.inc  | 2 +-
+ meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb    | 2 ++
+ meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.1.bb      | 2 +-
+ meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb               | 2 +-
+ meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb          | 4 ++++
+ meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb           | 2 ++
+ meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb          | 2 +-
+ 10 files changed, 18 insertions(+), 5 deletions(-)
+
 -- 
-1.8.1.5
+1.8.2.1
 
 
