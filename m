@@ -1,35 +1,18 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 241F96AD31
+Return-Path: <eric@eukrea.com>
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 114F8619DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Jul 2013 20:10:33 +0000 (UTC)
-Received: by mail-ob0-f177.google.com with SMTP id ta17so4100977obb.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Jul 2013 13:10:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=7dKPG00XlA8XPTMpbof0HRag8ecGMKUl6lpXTwHMuBo=;
-	b=U6yB223KT4pULGnpcqVcWFrgjQCp9GaxlRr8rFK278xLEsWoSUdY0MB0fLIVetYHTS
-	DOW9XKmHt8SU92f0X3Dw0c4wf/TDg5ghsgSonXZdcEITA2eM1iUQ/Cui4tguhT+E1e9d
-	KI3PgpL2zThtmW11CZ7FdDNYGFrJ4BEjsaDwgXzVjCYdPIDsbCt+Y/XQ8BGxJDq2Cu+O
-	NcnGPme59wVtsRvuvvS2qpLxQKYW7ViXvMZlo0t/zAwsbCkCKDrS+lkwHZQZxB34R+vb
-	oDbqYQEhxxHsBb1SKxxpBtXGcEXqpz6GXZS61wca8VtnRZucTMtS5J04NE75LNBBnpCn
-	EMXQ==
+	Sat,  6 Jul 2013 20:31:05 +0000 (UTC)
+Received: from localhost.localdomain (unknown [82.233.81.124])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 84AAAA61C4;
+	Sat,  6 Jul 2013 22:31:01 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  6 Jul 2013 22:30:59 +0200
+Message-Id: <1373142659-13482-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Received: by 10.182.142.104 with SMTP id rv8mr11049606obb.3.1373141433533;
-	Sat, 06 Jul 2013 13:10:33 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.60.166 with HTTP; Sat, 6 Jul 2013 13:10:33 -0700 (PDT)
-In-Reply-To: <1373078818-18530-1-git-send-email-net147@gmail.com>
-References: <1373078818-18530-1-git-send-email-net147@gmail.com>
-Date: Sat, 6 Jul 2013 17:10:33 -0300
-X-Google-Sender-Auth: aiKEI7RvYosZYKo03M9nNnPG4iM
-Message-ID: <CAP9ODKo+jxNqd8K4YqRR78YAKrX3bsibt0_npynHL-g3GO935g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] qt-creator: add new recipe for version 2.7.2
+Subject: [meta-qt5][PATCH] qtbase-native-5.0.2: fix compilation on Fedora 19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,17 +26,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jul 2013 20:10:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 06 Jul 2013 20:31:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jul 5, 2013 at 11:46 PM, Jonathan Liu <net147@gmail.com> wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
+the patch 0017-Rename-qAbs-Function-for-timeval.patch is also
+needed for native else, on Fedora 19, we get :
+| ../../include/QtCore/../../../qtbase-opensource-src-5.0.2/src/corelib/global/qglobal.h:483:27: error: from previous declaration 'constexpr T qAbs(const T&) [with T = timeval]'
+|  Q_DECL_CONSTEXPR inline T qAbs(const T &t) { return t >= 0 ? t : -t; }
 
-This recipe seems to be usable in target but it'd be great if Qt
-Creator could also be build as a toolchain part; did you try it?
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes-qt/qt5/qtbase-native_5.0.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://projetos.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+diff --git a/recipes-qt/qt5/qtbase-native_5.0.2.bb b/recipes-qt/qt5/qtbase-native_5.0.2.bb
+index 3df434e..623b17a 100644
+--- a/recipes-qt/qt5/qtbase-native_5.0.2.bb
++++ b/recipes-qt/qt5/qtbase-native_5.0.2.bb
+@@ -3,5 +3,9 @@ require ${PN}.inc
+ 
+ PR = "${INC_PR}.0"
+ 
++SRC_URI += " \
++    file://0017-Rename-qAbs-Function-for-timeval.patch \
++"
++
+ SRC_URI[md5sum] = "a4fec8ed03867c4ee4fe5a46001a11f0"
+ SRC_URI[sha256sum] = "31851ee2f844c100554506a9a446d4b6abb5270bca799c2a683e5f937456a9c8"
+-- 
+1.8.3.1
+
 
