@@ -1,35 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DA406077F
+Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 05A2A6B0A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Jul 2013 11:28:42 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id r10so2680249pdi.41
+	Sat,  6 Jul 2013 11:32:09 +0000 (UTC)
+Received: by mail-pb0-f47.google.com with SMTP id rr13so2850953pbb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Jul 2013 04:28:43 -0700 (PDT)
+	Sat, 06 Jul 2013 04:32:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=VPZ1p+QvSWa6YdvF4KwnWVYjcdLeLHWpcSpbBwItKdg=;
-	b=k49yUGNzuWWsUCG5w5SbK34VFEuU1ZvkFLwVyx70oxEP5+C4zaDwuYrx7Ao5cWtSK9
-	m1+36AlQtyZDAwtXI//sgZBg+T4ohSJwyitVHL+SxVaJumQ/mj9m0YKmzo4DOhk9kZU1
-	QHWvbkaUFoGPFxYmJtQTp5EJXD3h5+AWbBy1hEF42X/jIohnGL9tuMSH0gp1aowGQYtg
-	hwZ09GJPgLFw7Y2eqamLZ/j0NrZULhSR3IvO9W9kL1l4casGT48zTYA5GD9fk2ut8SS+
-	Kq4ZdBd12Zk9PMX5Um13mEZZzDogj11Ui7PWp8Npo8385NvmzKXLxfncKUfyQSvuoAr9
-	onMg==
-X-Received: by 10.69.8.65 with SMTP id di1mr5112254pbd.32.1373110123093;
-	Sat, 06 Jul 2013 04:28:43 -0700 (PDT)
+	bh=jg7/nr+vs270i5v86o9XZ8a2jVdL66PUTuJgkyvX4uk=;
+	b=CU33zp6vSSwBBYDoyanRzNQI7jc1rxTs5hK4gz0f8d9Pc8r6cRgf4q9FUmaRDcPDaq
+	SpEbllTmtcZYnVHutT0vydkwF29bvFPT74QUv2b1xaUAmFjsW4AbuOdtCMkr3mG20xo0
+	Wm6wLDcjvVYD2C5tPtC10jhzZBnOqfsrMeSTpgiV98xw+i/hc/e2tt9CsIDccuMR+Kax
+	8pdz6PsfbaK7RpGxJNo/GTX0XeROI/zapT3sFqMmnRmLKVq4D+goPjzsJvBellPH0rnN
+	5TIcSezdqos5bMBsvE9ut/mqtsi5cvMztE0LK7+swo0bW5mRyrtSPCwnOGGM7sfKOkmi
+	a9EA==
+X-Received: by 10.68.197.136 with SMTP id iu8mr13242534pbc.183.1373110330193; 
+	Sat, 06 Jul 2013 04:32:10 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by mx.google.com with ESMTPSA id
-	jf4sm11876757pbb.19.2013.07.06.04.28.40 for <multiple recipients>
+	eq5sm11895672pbc.15.2013.07.06.04.32.00 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 06 Jul 2013 04:28:42 -0700 (PDT)
+	Sat, 06 Jul 2013 04:32:02 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  6 Jul 2013 21:44:17 +1000
-Message-Id: <1373111057-1183-1-git-send-email-net147@gmail.com>
+Date: Sat,  6 Jul 2013 21:47:38 +1000
+Message-Id: <1373111258-1371-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] networkmanager: remove /var/run from package
+Subject: [meta-oe][PATCH] cherokee: remove empty /var/run directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jul 2013 11:28:42 -0000
+X-List-Received-Date: Sat, 06 Jul 2013 11:32:09 -0000
 
-The /var/run/NetworkManager directory is created by the daemon on
-startup if it doesn't exist. The /var/run directory is already
-created by base-files.
+The /var/run directory is already created by base-files.
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-index 07f0c28..70bda27 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-@@ -58,6 +58,9 @@ do_install_append () {
-     # Install an empty VPN folder as nm-connection-editor will happily segfault without it :o.
-     # With or without VPN support built in ;).
-     install -d ${D}${sysconfdir}/NetworkManager/VPN
-+
-+    rm -rf "${D}${localstatedir}/run"
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+index 1510e70..265e24e 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+@@ -32,6 +32,8 @@ do_install_append () {
+ 
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/cherokee.service ${D}${systemd_unitdir}/system
++    rmdir "${D}${localstatedir}/run"
 +    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
  }
  
- PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
+ # Put -dev near the front so we can move the .la files into it with a wildcard
 -- 
 1.8.3.2
 
