@@ -1,39 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CB22C6A973
+Return-Path: <net147@gmail.com>
+Received: from mail-pb0-f52.google.com (mail-pb0-f52.google.com
+	[209.85.160.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 9857D6AD40
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Jul 2013 16:20:02 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g15so2425142eak.32
+	Mon,  8 Jul 2013 05:21:57 +0000 (UTC)
+Received: by mail-pb0-f52.google.com with SMTP id xa12so3875409pbc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jul 2013 09:20:03 -0700 (PDT)
+	Sun, 07 Jul 2013 22:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=z9TAiycFySjq+lAkA+tJkhnB1KlesjytgPKOzEuYif8=;
-	b=x7u2MQhaJg4rI6ophAFpUx/9vYgLBDRJv4Cqffv0lQpqXGuF7umFDdfjEx7zjCReXG
-	/c0Y7fKLQ01Vx9sABLIBgJMlOx3zwOOFY0HHNpdb9PK6/ZoOM46HF74RRPaY0pKwlDOZ
-	BL+ZOsWaM6dU44CnuNp+iAyBhWuaSHEAm01I0hFGbRBfEd9fF0u4+FNNHK6fOC4hq5aF
-	jzXM01NyLUpAy/4hMFkSWWRGkRSKNxq31vcQDPyUMDicmQ7iOOi3yBbpFiHBQRVEzoVB
-	xiZEm8B2o+f/VzjDIuMCdI1SvqoeYPg93gutQ2brewBm6grMY5C098Pp6Cxnj96huqdF
-	+M1w==
-X-Received: by 10.14.182.132 with SMTP id o4mr20808844eem.94.1373214003010;
-	Sun, 07 Jul 2013 09:20:03 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=JvwSxjQZncM8z6ldyyXIKUXwZoTRdQCkdfWBH9MzpoE=;
+	b=on3uEjh5hG7DTdquRGKWS6/ax6+1zq23koZr/nbJyktn/4/D6Om0YhZBGFE9/ToCCk
+	sykgnBCwdjkfaMDEaW+TxTzO8u2cIl2Z51iXsGzz7dfz67nPKXtzm3aUgav0IBBFa/F9
+	S+uEzMT6SpeEbRD2lKwc0MSxuopx1MldNE0l+IzeVQHXsGRVHJsVnkKGOw2PTfkp9L7Y
+	iGCRXkqrGrqGw/qw6wiunAJqpn0zuFiqzlkRZkLjhQRv+a38gsr+u36v2ULktAfFPqro
+	5ngymld9l2u41YwrBp/YE2exp/bRs5r8S1+XP9Q8xcgxHKnKsY++1s08bvINYBLHHt83
+	dOXQ==
+X-Received: by 10.66.164.232 with SMTP id yt8mr21450305pab.21.1373260918166;
+	Sun, 07 Jul 2013 22:21:58 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by mx.google.com with ESMTPSA id
-	l42sm34185998eeo.14.2013.07.07.09.20.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 07 Jul 2013 09:20:02 -0700 (PDT)
-Date: Sun, 7 Jul 2013 18:20:10 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	xe9sm20306951pbc.21.2013.07.07.22.21.55 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 07 Jul 2013 22:21:57 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130707162010.GH3288@jama>
-References: <1373112225-2084-1-git-send-email-net147@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1373112225-2084-1-git-send-email-net147@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] samba: remove /var/run from package
+Date: Mon,  8 Jul 2013 15:37:30 +1000
+Message-Id: <1373261850-3744-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH v2] samba: remove /var/lock and /var/run from package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,73 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jul 2013 16:20:03 -0000
-X-Groupsio-MsgNum: 45327
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cW+P/jduATWpL925"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Jul 2013 05:21:58 -0000
 
---cW+P/jduATWpL925
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The /var/lock and /var/run directories are already created by
+base-files.
 
-On Sat, Jul 06, 2013 at 10:03:45PM +1000, Jonathan Liu wrote:
-> The /var/run and /var/run/lock directories are already created by
-> base-files.
->=20
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/=
-recipes-connectivity/samba/samba_3.6.8.bb
-> index a27a28c..6bd6644 100644
-> --- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-> +++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-> @@ -57,3 +57,8 @@ do_configure() {
->  do_compile () {
->      base_do_compile
->  }
-> +
-> +do_install_append() {
-> +    rm -rf "${D}${localstatedir}/run"
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-connectivity/samba/samba_3.6.8.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Seems like lock removal is missing here.
-
-samba-3.6.8: samba: Files/directories were installed but not shipped
-  /run
-  /run/lock
-
-Thanks a lot for this patchset, now with libdir and infodir QA checks
-we'll see a lot more QA issues in world builds, so it's great to have
-this /run gone.
+diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+index a27a28c..255c0b4 100644
+--- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
++++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+@@ -57,3 +57,9 @@ do_configure() {
+ do_compile () {
+     base_do_compile
+ }
++
++do_install_append() {
++    rmdir "${D}${localstatedir}/lock"
++    rmdir "${D}${localstatedir}/run"
++    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
++}
+-- 
+1.8.3.2
 
 
-> +    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-> +}
-> --=20
-> 1.8.3.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---cW+P/jduATWpL925
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlHZlToACgkQN1Ujt2V2gBx/OQCfW84kvlTDvMyBwBn0KzSU4WzJ
-iBwAoI3mm5uok3YXh7rdKw+aAQ7EEmaC
-=PlUC
------END PGP SIGNATURE-----
-
---cW+P/jduATWpL925--
