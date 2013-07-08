@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id EC5526B176
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2013 08:41:35 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id c4so2657402eek.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jul 2013 01:41:36 -0700 (PDT)
+Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 311696007C;
+	Mon,  8 Jul 2013 12:10:40 +0000 (UTC)
+Received: by mail-ea0-f169.google.com with SMTP id h15so2870522eak.14
+	for <multiple recipients>; Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=PCZtl02NBQdFBgW5DyIa36bc74R4LzBCn6u43aGU8JE=;
-	b=a4MeXqz0nZoU8fpN7teweZeRfCJwH7a6gqx/5Bp9alMzgRfQu31WWZsFS4blJPgqRY
-	335CfKxGNh+fYF/3+rSf5W0y1/PCXm4FmBR9h/+VZnvQhwObNRQLYVbpdDSjaiYjU4qZ
-	hS5nXalv9xDYlUsWKuRSfJDRpTmR+n0eWfIXI2QUxKbssndf0EQo7SZoGHYG0N5rmX/s
-	VTBQ1ZUorYObddWVJPXOA39G7kfmyE0CTzRf2u2Syg76MVy4PSyUEX/E7UqBbwmV3mJl
-	zEGOvkDBNZ4geIE63St1rdMHD88zs9hlNKuUTFOaPaYg5XQR5UwIscjHteMjFBG3wm0s
-	+2Mg==
-X-Received: by 10.15.65.8 with SMTP id p8mr23944383eex.110.1373272896444;
-	Mon, 08 Jul 2013 01:41:36 -0700 (PDT)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=lqmfpzp1vkFrNKSrJZmaX2nCpb1c+MubtL+SadARDwc=;
+	b=IBXibLRpE9Ciey+sTzL0QF6+Kha6aWnn0y8wE7fzgjvDxPyomB4sDFsot6Q6CejAxw
+	qsjWku0xqLvhrxIckjkPJyAy2qg2Iyq/rv32Z8SO834ZpxsrV8MvAzWvEl+fOmHDnS/N
+	rY6a0RvTJ+bjX8wRzvNN7R87H1RWz+AL3gsNJdEzgYhxwB39cqYo+KhvdZ7jp/eDmW5x
+	uXXY5qpscLqMUeixFIGN/sa7SW7ac7AtDFi2mh3n9Roiq8JrFY2XtosnpkfSXoSpxu5C
+	0dlsEBusZlmgiuYSVCskQBaRuH5fV1FabUhRoPIAel1QSyStmMkNF6zDt3hvNry8rJQV
+	X0eQ==
+X-Received: by 10.14.3.73 with SMTP id 49mr24764649eeg.72.1373285440820;
+	Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	m1sm40294138eex.17.2013.07.08.01.41.35 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 08 Jul 2013 01:41:36 -0700 (PDT)
+	n45sm41784898eew.1.2013.07.08.05.10.39 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
+Date: Mon, 8 Jul 2013 14:10:48 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jul 2013 10:41:33 +0200
-Message-Id: <1373272893-26013-6-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.2.1
-In-Reply-To: <1373272893-26013-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1373272893-26013-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] portaudio: explicitly disable oss, add PACKAGECONFIG for alsa and jack
+Message-ID: <20130708121048.GK3288@jama>
+References: <20130705143917.C20B35040C@opal>
+MIME-Version: 1.0
+In-Reply-To: <20130705143917.C20B35040C@opal>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Khem Raj : eglibc: Add 2.18 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,48 +45,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 08:41:36 -0000
+X-List-Received-Date: Mon, 08 Jul 2013 12:10:41 -0000
+X-Groupsio-MsgNum: 45340
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Rex5+51txc1ort/q"
+Content-Disposition: inline
 
-* autoenabled dependencies on alsa-lib and jack are breaking espeak
-  when it's built against portaudio in sysroot without them
-  | ld: warning: libasound.so.2, needed by usr/lib/libportaudio.so, not found (try using -rpath or -rpath-link)
-  | ld: warning: libjack.so.0, needed by usr/lib/libportaudio.so, not found (try using -rpath or -rpath-link)
-  | usr/lib/libportaudio.so: undefined reference to `snd_pcm_sw_params_sizeof@ALSA_0.9'
-  | usr/lib/libportaudio.so: undefined reference to `snd_pcm_hw_params_test_period_size@ALSA_0.9'
+--Rex5+51txc1ort/q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+On Fri, Jul 05, 2013 at 02:39:17PM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: 59ae9fc07a6a89492c001de0b3322ecd6d3956be
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3D59ae9fc07a6a89492c001de0b3322ecd6d3956be
+>=20
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Wed Jun 26 13:59:01 2013 -0700
+>=20
+> eglibc: Add 2.18 recipes
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Saul Wold <sgw@linux.intel.com>
 
-diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-index ced4b6b..454bd34 100644
---- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-+++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-@@ -2,14 +2,21 @@ DESCRIPTION = "A portable audio library"
- SECTION = "libs/multimedia"
- LICENSE = "PortAudio"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
--SRCREV = "1387"
-+
- PV = "v19+svnr${SRCPV}"
- 
-+SRCREV = "1387"
- SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
- S = "${WORKDIR}/trunk"
- 
- inherit autotools pkgconfig
- 
-+PACKAGECONFIG ??= "alsa jack"
-+PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
-+PACKAGECONFIG[jack] = "--with-jack, --without-jack, jack,"
-+
-+EXTRA_OECONF = "--without-oss"
-+
- TESTS = "  pa_devs patest1      patest_hang patest_many                   patest_prime patest_sine patest_stop     patest_write_sine        \
- pa_fuzz    patest_buffer        patest_in_overflow  patest_maxsines       patest_read_record  patest_sine8         patest_sync              \
- pa_minlat  patest_callbackstop  patest_latency      patest_multi_sine     patest_record       patest_sine_formats  patest_toomanysines      \
--- 
-1.8.2.1
+boost is now failing on all architectures
 
+=2E/boost/atomic/atomic.hpp: At global scope:
+=2E/boost/atomic/atomic.hpp:202:16: error: 'uintptr_t' was not declared in =
+this scope
+ typedef atomic<uintptr_t> atomic_uintptr_t;
+                ^
+=2E/boost/atomic/atomic.hpp:202:25: error: template argument 1 is invalid
+ typedef atomic<uintptr_t> atomic_uintptr_t;
+                         ^
+=2E/boost/atomic/atomic.hpp:202:43: error: invalid type in declaration befo=
+re ';' token
+ typedef atomic<uintptr_t> atomic_uintptr_t;
+                                           ^
+Adding
+#include <stdint.h> in boost/atomic/atomic.hpp solves that, but
+#include <cstdint> doesn't, is it right fix?
 
+--Rex5+51txc1ort/q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHarEgACgkQN1Ujt2V2gBwuJACfWy2Irec4VFZkyKCY7xJDMUk3
+oigAn1/HQxHlGXb0vPBpozISfw21zMge
+=A2A1
+-----END PGP SIGNATURE-----
+
+--Rex5+51txc1ort/q--
