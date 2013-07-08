@@ -1,37 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 311696007C;
-	Mon,  8 Jul 2013 12:10:40 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id h15so2870522eak.14
-	for <multiple recipients>; Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=lqmfpzp1vkFrNKSrJZmaX2nCpb1c+MubtL+SadARDwc=;
-	b=IBXibLRpE9Ciey+sTzL0QF6+Kha6aWnn0y8wE7fzgjvDxPyomB4sDFsot6Q6CejAxw
-	qsjWku0xqLvhrxIckjkPJyAy2qg2Iyq/rv32Z8SO834ZpxsrV8MvAzWvEl+fOmHDnS/N
-	rY6a0RvTJ+bjX8wRzvNN7R87H1RWz+AL3gsNJdEzgYhxwB39cqYo+KhvdZ7jp/eDmW5x
-	uXXY5qpscLqMUeixFIGN/sa7SW7ac7AtDFi2mh3n9Roiq8JrFY2XtosnpkfSXoSpxu5C
-	0dlsEBusZlmgiuYSVCskQBaRuH5fV1FabUhRoPIAel1QSyStmMkNF6zDt3hvNry8rJQV
-	X0eQ==
-X-Received: by 10.14.3.73 with SMTP id 49mr24764649eeg.72.1373285440820;
-	Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	n45sm41784898eew.1.2013.07.08.05.10.39 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 08 Jul 2013 05:10:40 -0700 (PDT)
-Date: Mon, 8 Jul 2013 14:10:48 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A20F6AF13
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Jul 2013 12:35:22 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 08 Jul 2013 05:36:55 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.87,1020,1363158000"; d="scan'208";a="366825233"
+Received: from unknown (HELO helios.localnet) ([10.252.122.28])
+	by fmsmga002.fm.intel.com with ESMTP; 08 Jul 2013 05:35:21 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130708121048.GK3288@jama>
-References: <20130705143917.C20B35040C@opal>
+Date: Mon, 08 Jul 2013 13:35:21 +0100
+Message-ID: <10175102.kSY1axEz5R@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.4 (Linux/3.8.0-26-generic; KDE/4.10.4; i686; ; )
+In-Reply-To: <20130705194525.667209b0@e6520eb>
+References: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
+	<2710952.otpci6RPJ6@helios> <20130705194525.667209b0@e6520eb>
 MIME-Version: 1.0
-In-Reply-To: <20130705143917.C20B35040C@opal>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Khem Raj : eglibc: Add 2.18 recipes
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Subject: Re: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,60 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 12:10:41 -0000
-X-Groupsio-MsgNum: 45340
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Rex5+51txc1ort/q"
-Content-Disposition: inline
-
---Rex5+51txc1ort/q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Jul 2013 12:35:22 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-On Fri, Jul 05, 2013 at 02:39:17PM +0000, git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: 59ae9fc07a6a89492c001de0b3322ecd6d3956be
-> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
-;h=3D59ae9fc07a6a89492c001de0b3322ecd6d3956be
+On Friday 05 July 2013 19:45:25 Eric B=E9nard wrote:
+> Le Fri, 05 Jul 2013 18:29:04 +0100,
+> Paul Eggleton <paul.eggleton@linux.intel.com> a =E9crit :
+> > Could someone *please* figure out what this bbappend is needed for =
+and get
+> > it into OE-Core if it is still needed so we can drop it here?
 >=20
-> Author: Khem Raj <raj.khem@gmail.com>
-> Date:   Wed Jun 26 13:59:01 2013 -0700
->=20
-> eglibc: Add 2.18 recipes
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+> it's only here to install /etc/default/busybox-syslog which contains
+> only one line : OPTIONS=3D"-C64" which sets the size of the logbuffer=
+.
+> So obviously this could go into OE-Core.
 
-boost is now failing on all architectures
+Yes but why is this needed? If we are to merge this into OE-Core we'll =
+need to=20
+say why this change is needed in the commit message.
 
-=2E/boost/atomic/atomic.hpp: At global scope:
-=2E/boost/atomic/atomic.hpp:202:16: error: 'uintptr_t' was not declared in =
-this scope
- typedef atomic<uintptr_t> atomic_uintptr_t;
-                ^
-=2E/boost/atomic/atomic.hpp:202:25: error: template argument 1 is invalid
- typedef atomic<uintptr_t> atomic_uintptr_t;
-                         ^
-=2E/boost/atomic/atomic.hpp:202:43: error: invalid type in declaration befo=
-re ';' token
- typedef atomic<uintptr_t> atomic_uintptr_t;
-                                           ^
-Adding
-#include <stdint.h> in boost/atomic/atomic.hpp solves that, but
-#include <cstdint> doesn't, is it right fix?
+Cheers,
+Paul
 
---Rex5+51txc1ort/q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--=20
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
+Paul Eggleton
+Intel Open Source Technology Centre
 
-iEYEARECAAYFAlHarEgACgkQN1Ujt2V2gBwuJACfWy2Irec4VFZkyKCY7xJDMUk3
-oigAn1/HQxHlGXb0vPBpozISfw21zMge
-=A2A1
------END PGP SIGNATURE-----
-
---Rex5+51txc1ort/q--
