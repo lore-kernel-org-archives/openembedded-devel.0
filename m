@@ -1,36 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 169BC6B0C5
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id D08626B12C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jul 2013 08:41:29 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id h10so2731469eaj.15
+	Mon,  8 Jul 2013 08:41:31 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so2672153eek.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jul 2013 01:41:30 -0700 (PDT)
+	Mon, 08 Jul 2013 01:41:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=/Q2SmcxasYmaephsXw3DInM3i2l/nmnZCW6gt6e+ea8=;
-	b=LSV0AoZEKeJlCNUqTpe5RD0b/KxzJO3fODOKztDtZbY2x1bm0SW/cWQkMDnKj49n10
-	82VQIHszMUyU9qjvYwaki8AMLKiH7e9/vmQWx/hz6RM2FZVequkK6pTwM84RByCWAhKp
-	WfYUwUZPn2JlCHHV2GrkPUr/pdgEgrZwJEXdjd32seqVtl46ylGIY5YDKxAsKyUo2WyW
-	XmFWR6+Ts+oPuWFxxiVLFC3QyYFsfrNFbtr/9CMKQefrZYrejxhfpCu9PGrg2V+xF0sI
-	4VMvEMTmBr3VGFuEAyqG1efHodA9fSIFm7jdlPZfqiO3T2cI/+sYQyttiuDXOmCAwKw3
-	ozLA==
-X-Received: by 10.15.45.5 with SMTP id a5mr24047711eew.7.1373272890730;
-	Mon, 08 Jul 2013 01:41:30 -0700 (PDT)
+	bh=sHez5KSgFw3TAgd+0H2HOHUaSHslAk5yHptFDpo50Ws=;
+	b=vEsSBvZip+vTJL+yKDikNb/8dI0pnTJ2Z+1fcQDmZfcgZetlK2OoqgZXvh9UQHP7jK
+	Zuulm+pe/2UrEMZkDiAPS4EVjNfBBIDI4oQNCn0s5JmNzMMbghf2piAVjVGCFa0lq3TR
+	XhVgvlaOmrYSqOParQNOe5+jfZbEW66o3IE2y6dP62Kx3wzabNynUX87SN8ZfloIaswb
+	vaC1NADMEnxZdO4G0IGgbwshck7acYvpX+0QsvIQQbzwxCBE2YGwDS6a4JXgoqz3OG+D
+	059+Xt6LW6swwbMs4Tpo7kj6QGAwIDHuCnwtU15f2vgO7dHYyM5YQ0UzKekeDFcXydVS
+	pgcQ==
+X-Received: by 10.15.31.198 with SMTP id y46mr23953938eeu.135.1373272892403;
+	Mon, 08 Jul 2013 01:41:32 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	p49sm40450180eeu.2.2013.07.08.01.41.29 for <multiple recipients>
+	n5sm40363666eed.9.2013.07.08.01.41.31 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 08 Jul 2013 01:41:30 -0700 (PDT)
+	Mon, 08 Jul 2013 01:41:31 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jul 2013 10:41:29 +0200
-Message-Id: <1373272893-26013-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon,  8 Jul 2013 10:41:30 +0200
+Message-Id: <1373272893-26013-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.2.1
 In-Reply-To: <1373272893-26013-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1373272893-26013-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/6] gypsy: add dependency on libxslt-native
+Subject: [meta-oe][PATCH 3/6] portaudio: inherit pkgconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 08:41:30 -0000
+X-List-Received-Date: Mon, 08 Jul 2013 08:41:32 -0000
 
-* it's incorrectly used in build (and just "o" is used instead of xslt
-  command):
-  | o gypsy-discovery.xml ../docs/tools/spec-strip-docs.xsl gypsy-discovery-full.xml
-  | /bin/bash: o: command not found
+* without pkgconfig it's failing to expand PKG_CHECK_MODULES macro:
+  | portaudio-v19/v19+svnr1387-r0/trunk/configure:
+    line 11721: syntax error near unexpected token `JACK,'
+  | portaudio-v19/v19+svnr1387-r0/trunk/configure:
+    line 11721: `PKG_CHECK_MODULES(JACK, jack, have_jack=yes, have_jack=no)'
+  | Configure failed. The contents of all config.log files follows to aid debugging
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-navigation/gypsy/gypsy.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-index 0c1735e..ba54356 100644
---- a/meta-oe/recipes-navigation/gypsy/gypsy.inc
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-@@ -6,7 +6,7 @@ client applications, passing the data as simple values for the clients \
- to use."
- LICENSE = "GPLv2.0 & LGPLv2.1"
- SECTION = "x11"
--DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
-+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native"
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+index b35d1d8..ced4b6b 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+@@ -4,12 +4,11 @@ LICENSE = "PortAudio"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
+ SRCREV = "1387"
+ PV = "v19+svnr${SRCPV}"
+-PR = "r0"
  
- inherit autotools pkgconfig gtk-doc
+ SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
+ S = "${WORKDIR}/trunk"
  
+-inherit autotools
++inherit autotools pkgconfig
+ 
+ TESTS = "  pa_devs patest1      patest_hang patest_many                   patest_prime patest_sine patest_stop     patest_write_sine        \
+ pa_fuzz    patest_buffer        patest_in_overflow  patest_maxsines       patest_read_record  patest_sine8         patest_sync              \
 -- 
 1.8.2.1
 
