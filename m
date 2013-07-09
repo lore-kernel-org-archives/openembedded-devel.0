@@ -1,34 +1,38 @@
-Return-Path: <cmayer1@binghamton.edu>
-Received: from mail-ob0-f182.google.com (mail-ob0-f182.google.com
-	[209.85.214.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E24E066123
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F6706AFB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2013 16:23:34 +0000 (UTC)
-Received: by mail-ob0-f182.google.com with SMTP id va7so7228004obc.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2013 09:23:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=dP/8HJUMzN692rVZjh3rI1h0ZzI9C4Qy0k8XawZN3PU=;
-	b=N296iDmkXI3ez4P1B0OawjXV10ZwX6JIvq2nlzHBueV0uJZZVmfQPRgGDCZaQMzYpO
-	fFhkDGlaH38lMezxYNIoc2U//Ssh29xdXhpHT5N8Wr0ycV3teYLnih4orS/kNxnnOhHk
-	ZFf+wKiUEpkFpZBP8FM0Oi9eI04c2MnZZs3MssD6UiVQLZ1/fEQwXkr5scz0DBcxgXaj
-	8KR6Qh7UYBrl4cPNKEjjYhWngK2/ugBcotO/cHZ7UQ7vP7BCwVaFRLpbSL/gWPDMsOWt
-	rAFB3WK8Ekr80YpPqaf3qUZdiOjSaoewRPOgmJSfLnUeBqcWWewWKYygxSwS5rdtf8cj
-	rgOw==
+	Tue,  9 Jul 2013 18:58:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r69Iw4YJ022493
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 9 Jul 2013 11:58:04 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 9 Jul 2013 11:58:04 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id D261F4D8B3;
+	Tue,  9 Jul 2013 14:57:44 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 4FA8C410DF; Tue,
+	9 Jul 2013 14:58:03 -0400 (EDT)
+Date: Tue, 9 Jul 2013 14:58:03 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: Guo Chunrong-B40290 <B40290@freescale.com>
+Message-ID: <20130709185803.GA13741@windriver.com>
+References: <1372929983-1410-1-git-send-email-B40290@freescale.com>
+	<2942656.3ozBKLWcr5@helios> <20130704111809.GA3831@windriver.com>
+	<B21730BB6DA1D24B83348D9301EA417E1040BD1A@039-SN2MPN1-021.039d.mgd.msft.net>
 MIME-Version: 1.0
-X-Received: by 10.60.55.65 with SMTP id q1mr24524505oep.92.1373387015494; Tue,
-	09 Jul 2013 09:23:35 -0700 (PDT)
-Received: by 10.76.19.18 with HTTP; Tue, 9 Jul 2013 09:23:35 -0700 (PDT)
-Date: Tue, 9 Jul 2013 12:23:35 -0400
-Message-ID: <CAOys6npcxfg0e_udHbXtt-V57eJaXRtgU+j3WA0Gp+xOHGS5mQ@mail.gmail.com>
-From: Christopher W Mayer <cmayer1@binghamton.edu>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnuTm39FLhEgZR4FhIGUHj9FERHQKDcFnzefHiyKaFk3VA7dBcgpiQUZQT6elsMHoTbGdhO
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Using Xen from Meta-Virtualization
+In-Reply-To: <B21730BB6DA1D24B83348D9301EA417E1040BD1A@039-SN2MPN1-021.039d.mgd.msft.net>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Yu Zongchun-B40527 <B40527@freescale.com>
+Subject: Re: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,21 +46,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2013 16:23:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 09 Jul 2013 18:58:07 -0000
+X-Groupsio-MsgNum: 45350
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+Content-Disposition: inline
 
-Hi Everyone,
-    I am trying to use the Meta-Virtualization layer to build Xen dom0
-support into an Open Embedded build. I've built the xen-image-minimal
-target but when I try to boot it as dom0, I get this error
+--UlVJffcvxoiEqYs2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+[RE: [oe] [meta-networking][PATCH] dnsmasq: install .service only with syst=
+emd in DISTRO_FEATURES] On 13.07.05 (Fri 07:45) Guo Chunrong-B40290 wrote:
 
-*'elf_xen_note_check: ERROR: Will only load images built for the
-generic loader or Linux images')*
+> Hello, Joe MacDonald
+> New  patch was submitted.
+> I do not modify (atftp/tracker/gateone)  recips and slim recipes do not w=
+ork.
+> SO the code in these recipes  add  ${systemd_unitdir} to FILES and these =
+recipes work well.=20
 
-I used this link<http://xen.1045712.n5.nabble.com/Panic-on-CPU0-Unable-to-boot-with-Xen-4-1-on-Fedora-16-manual-grub2-config-after-compiling-Xen-from-e-td5571653.html>,followed
-Ian Campbell's instructions (the third post down) and found that
-the kernel being built is not Xen capable. Am I missing something simple
-here? Is this a problem with the layer or am I using it wrong? Any help is
-appreciated.
+Just FYI, I saw your patch, I have it in a merge queue, but right now
+I'm looking at the bug Paul quoted and the mailing list discussion
+quoted therein to see if we can come up with a better, more general
+solution.
 
+-J.
+
+>=20
+> Thanks,
+> chunrong
+>=20
+> -----Original Message-----
+> From: Joe MacDonald [mailto:Joe.MacDonald@windriver.com]=20
+> Sent: Thursday, July 04, 2013 7:18 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Guo Chunrong-B40290; Yu Zongchun-B40527
+> Subject: Re: [oe] [meta-networking][PATCH] dnsmasq: install .service only=
+ with systemd in DISTRO_FEATURES
+>=20
+> [Re: [oe] [meta-networking][PATCH] dnsmasq: install .service only with sy=
+stemd in DISTRO_FEATURES] On 13.07.04 (Thu 11:50) Paul Eggleton wrote:
+>=20
+> > On Thursday 04 July 2013 17:26:23 Chunrong Guo wrote:
+> > > Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> > > ---
+> > >  .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
+> > >  1 files changed, 5 insertions(+), 3 deletions(-)
+> > >=20
+> > > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
+> > > 0f5b273..0710893 100644
+> > > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > > @@ -30,9 +30,11 @@ do_install () {
+> > >      install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d=20
+> > > ${D}${sysconfdir}/dnsmasq.d install -m 644 ${WORKDIR}/dnsmasq.conf=20
+> > > ${D}${sysconfdir}/
+> > >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+> > > -
+> > > -    install -d ${D}${systemd_unitdir}/system
+> > > -    install -m 0644 ${WORKDIR}/dnsmasq.service
+> > > ${D}${systemd_unitdir}/system +
+> > > +    if=20
+> > > + ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
+> > > then +        install -d ${D}${systemd_unitdir}/system
+> > > +        install -m 0644 ${WORKDIR}/dnsmasq.service
+> > > ${D}${systemd_unitdir}/system +    fi
+> > >=20
+> > >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}"=
+ !=3D ""
+> > > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
+> >=20
+> > I think we should really have a global fix for this issue rather than=
+=20
+> > hacking up every recipe:
+> >=20
+> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4309
+>=20
+> I'm inclined to agree, but looking at the bug it looks like the potential=
+ solution was discussed in February and it's on the schedule for Yocto 1.5,=
+ but that's October.
+>=20
+> So I did a quick survey, here's the meta-networking recipes that'll be im=
+pacted, if we adopt the workaround approach:
+>=20
+>    - net-snmp
+>    - dnsmasq (obviously)
+>    - ypbind-mt
+>    - yp-tools
+>    - ntp
+>    - atftp
+>=20
+> I decided I'd have a look at meta-oe for contrast (and guidance) and this=
+ is what I found there:
+>=20
+>    - slim
+>    - tracker
+>    - cloud9
+>    - zram
+>    - gpsd
+>    - gateone
+>=20
+> On the other hand, xinput-calibrator and xserver-nodm-init,  already have=
+ the same fix in it Chunrong is proposing.  So the impact of doing either i=
+sn't huge, but it's not small either.
+>=20
+> Chunrong:  Would you be willing to retest and resubmit your patch with th=
+e above listed meta-networking recipes as a set?  I don't see a lot of sens=
+e in doing this piecemeal, I'm okay with taking a workaround until
+> #4309 gets fixed, but I'd rather tear the band-aid off all at once, so to=
+ speak.
+>=20
+> --
+> -Joe MacDonald.
+> :wq
+>=20
+
+--=20
+-Joe MacDonald.
+:wq
+
+--UlVJffcvxoiEqYs2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlHcXTsACgkQPN8S4W6ZZnf55ACeJnz15AWjre5t4cF6N5tt8dRm
+LnoAnRKHHVdIWh72Cmdi9+m12lG3QBen
+=KQga
+-----END PGP SIGNATURE-----
+
+--UlVJffcvxoiEqYs2--
