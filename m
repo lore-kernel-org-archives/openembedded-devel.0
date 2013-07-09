@@ -1,38 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pb0-f44.google.com (mail-pb0-f44.google.com
-	[209.85.160.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 769A2619DD;
-	Tue,  9 Jul 2013 09:48:41 +0000 (UTC)
-Received: by mail-pb0-f44.google.com with SMTP id uo1so5310276pbc.31
-	for <multiple recipients>; Tue, 09 Jul 2013 02:48:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=lc1IlpqtsBRSUFf85P5j9du2HhlHQvajB05gMYOpY38=;
-	b=nLF8TvVvPi7sKUNmNb6W04RFiZUyynf6ZUUR1/DM8lFhPcVXspKeLEmenpl83AGrI+
-	zdyD/IK5m+h9bU2Qc3xbPS6f+xjtUyf4XZwSJFh32QoXsob6skcpdPWGFNCLKF8PEwM2
-	m/nnsIQfaIEfmAJOLM7A6a1bCWtsLLKMMwue+SBjY25Xvnq2ebiHZ0ALkk5BzTt33nkh
-	XK9ewrIkniBgKOf1EedSb7iN4ZS7Tbli0/PjVhm4EIFnEh4v/SDzsawbBKbXLuc9TMTv
-	/JyG40rkdTmcGNocvjSqTDX/qqlthyycq7rvnYK667mlzBX9iX0zrgwjIFXy5eVEQA98
-	FkPg==
-X-Received: by 10.66.179.17 with SMTP id dc17mr14574578pac.85.1373363322304;
-	Tue, 09 Jul 2013 02:48:42 -0700 (PDT)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244]) by mx.google.com with ESMTPSA id
-	zn4sm29213438pac.21.2013.07.09.02.48.39 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 09 Jul 2013 02:48:41 -0700 (PDT)
-Message-ID: <51DBDB50.7050502@gmail.com>
-Date: Tue, 09 Jul 2013 19:43:44 +1000
-From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
+Return-Path: <Noor_Ahsan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FAD3608C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Jul 2013 10:48:23 +0000 (UTC)
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1UwVT6-0005ml-46 from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Jul 2013 03:48:24 -0700
+Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 9 Jul 2013 03:48:24 -0700
+Received: from EU-MBX-01.mgc.mentorg.com ([169.254.1.178]) by
+	SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) with mapi id
+	14.02.0247.003; Tue, 9 Jul 2013 11:48:22 +0100
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-gnome][PATCH V2] gvfs: Handle samba dependency based on
+	GPLv3 license.
+Thread-Index: AQHOa0ukiBZjN9X1U0apcEEFoOBS5ZlcTPFw
+Date: Tue, 9 Jul 2013 10:48:21 +0000
+Message-ID: <365E1805BC95084CBE82381A0B869994DE4D3DB2@EU-MBX-01.mgc.mentorg.com>
+References: <1371467502-9395-1-git-send-email-noor_ahsan@mentor.com>
+In-Reply-To: <1371467502-9395-1-git-send-email-noor_ahsan@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.202.0.76]
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20130705143917.C20B35040C@opal> <20130708121048.GK3288@jama>
-In-Reply-To: <20130708121048.GK3288@jama>
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Khem Raj : eglibc: Add 2.18 recipes
+X-OriginalArrivalTime: 09 Jul 2013 10:48:24.0579 (UTC)
+	FILETIME=[D62E6530:01CE7C91]
+Subject: Re: [meta-gnome][PATCH V2] gvfs: Handle samba dependency based on GPLv3 license.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,42 +45,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2013 09:48:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jul 2013 10:48:23 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 8/07/2013 10:10 PM, Martin Jansa wrote:
-> On Fri, Jul 05, 2013 at 02:39:17PM +0000, git@git.openembedded.org wrote:
->> Module: openembedded-core.git
->> Branch: master
->> Commit: 59ae9fc07a6a89492c001de0b3322ecd6d3956be
->> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=59ae9fc07a6a89492c001de0b3322ecd6d3956be
->>
->> Author: Khem Raj <raj.khem@gmail.com>
->> Date:   Wed Jun 26 13:59:01 2013 -0700
->>
->> eglibc: Add 2.18 recipes
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Signed-off-by: Saul Wold <sgw@linux.intel.com>
-> boost is now failing on all architectures
->
-> ./boost/atomic/atomic.hpp: At global scope:
-> ./boost/atomic/atomic.hpp:202:16: error: 'uintptr_t' was not declared in this scope
->   typedef atomic<uintptr_t> atomic_uintptr_t;
->                  ^
-> ./boost/atomic/atomic.hpp:202:25: error: template argument 1 is invalid
->   typedef atomic<uintptr_t> atomic_uintptr_t;
->                           ^
-> ./boost/atomic/atomic.hpp:202:43: error: invalid type in declaration before ';' token
->   typedef atomic<uintptr_t> atomic_uintptr_t;
->                                             ^
-> Adding
-> #include <stdint.h> in boost/atomic/atomic.hpp solves that, but
-> #include <cstdint> doesn't, is it right fix?
-Please file a bug report with boost. stdint.h is not always available 
-(e.g. Microsoft Visual C++ 2008 and older).
+Hello,
 
-Regards,
-Jonathan
+Kindly apply this patch. Thanks.
+
+Noor
+
+-----Original Message-----
+From: Ahsan, Noor=20
+Sent: Monday, June 17, 2013 4:12 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Ahsan, Noor
+Subject: [meta-gnome][PATCH V2] gvfs: Handle samba dependency based on GPLv=
+3 license.
+
+From: Noor <noor_ahsan@mentor.com>
+
+* Samba is GPLv3. In GPLv3 free environment one was not able to
+  build gvfs. Add PACKAGECONFIG for samba and enable is when GPLv3
+  is not present in INCOMPATIBLE_LICENSE.
+
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc      |    4 +---
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb |    7 ++++++-
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs.inc b/meta-gnome/recipes-gn=
+ome/gvfs/gvfs.inc
+index 0e1c69c..ba52fe7 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs.inc
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs.inc
+@@ -10,9 +10,7 @@ SRC_URI[archive.md5sum] =3D "402f94b187b197b403d25c85caeb=
+9562"
+ SRC_URI[archive.sha256sum] =3D "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fd=
+b66db665d684355ef89345"
+ SRC_URI +=3D "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
+=20
+-EXTRA_OECONF =3D "--with-samba-includes=3D${STAGING_INCDIR} \
+-                --with-samba-libs=3D${STAGING_LIBDIR} \
+-                --with-archive-includes=3D${STAGING_INCDIR} \
++EXTRA_OECONF =3D "--with-archive-includes=3D${STAGING_INCDIR} \
+                 --with-archive-libs=3D${STAGING_LIBDIR} \  "
+=20
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb b/meta-gnome/recip=
+es-gnome/gvfs/gvfs_1.8.2.bb
+index 7f86151..5274280 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.8.2.bb
+@@ -1,6 +1,6 @@
+ require gvfs.inc
+=20
+-DEPENDS =3D "samba libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gcon=
+f libgphoto2"
++DEPENDS =3D "libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libg=
+photo2"
+ # optional: obexftp libcdio libimobiledevice=20
+=20
+ PR =3D "${INC_PR}.1"
+@@ -21,3 +21,8 @@ FILES_gvfsd-trash =3D "${libexecdir}/gvfsd-trash ${datadi=
+r}/gvfs/mounts/trash.moun
+=20
+ RDEPENDS_${PN} =3D "gvfs-gdu-volume-monitor"
+ RRECOMMENDS_gvfsd-ftp +=3D "openssh-sftp openssh-ssh"
++
++PACKAGECONFIG ?=3D "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', =
+'samba', d)}"
++
++PACKAGECONFIG[samba] =3D "--enable-samba --with-samba-includes=3D${STAGING=
+_INCDIR} \
++                        --with-samba-libs=3D${STAGING_LIBDIR}, --disable-s=
+amba, samba"
+--
+1.7.9.5
+
 
