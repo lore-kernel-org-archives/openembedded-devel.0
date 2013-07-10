@@ -1,41 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E773561FE1
+Return-Path: <B40290@freescale.com>
+Received: from ch1outboundpool.messaging.microsoft.com
+	(ch1ehsobe002.messaging.microsoft.com [216.32.181.182])
+	by mail.openembedded.org (Postfix) with ESMTP id D22B7600FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jul 2013 20:43:03 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id t10so4099812eei.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jul 2013 13:43:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/rh93fEP8PT+rHZ88L6PIiM2hv11mJApiRfSiIM9pW8=;
-	b=iXAotkyZCzkoNOng6PvmCP/nOHKpQzoqqsUcu4CpWkeDeod1j0FKFyN9tJuzSe0b35
-	khhYBoYlE+D5Jeq18L760xFanG6L63faucVHuBaQvSJByRYkCzTBB7ej+PI49tAo4xFt
-	ujcy24WHcw940BoWjKDhZbXJAxjXdm+3xEukeP3Wy6PWw5Epvl34XaLEeOkNYDCb/H3O
-	uxxPEO72hfuNaexTLep7GQPtYJqqMCIxNqTmlYpWeGcevPBB6CypZDnr0u+XGi8p28Zb
-	66/shtQW3G5Mw+ISyD2mnc7Vm4l9rblsdCJ1NRefbgyd8GbvSEVlDkpeyzaOUtwq+35W
-	wp7g==
-X-Received: by 10.14.47.196 with SMTP id t44mr21389279eeb.18.1373402583723;
-	Tue, 09 Jul 2013 13:43:03 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	e44sm53986683eeh.11.2013.07.09.13.43.02 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 09 Jul 2013 13:43:03 -0700 (PDT)
-Date: Tue, 9 Jul 2013 22:43:12 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130709204312.GV3288@jama>
-References: <1372929983-1410-1-git-send-email-B40290@freescale.com>
-	<2942656.3ozBKLWcr5@helios> <20130704111809.GA3831@windriver.com>
-	<B21730BB6DA1D24B83348D9301EA417E1040BD1A@039-SN2MPN1-021.039d.mgd.msft.net>
-	<20130709185803.GA13741@windriver.com>
+	Wed, 10 Jul 2013 03:13:22 +0000 (UTC)
+Received: from mail122-ch1-R.bigfish.com (10.43.68.232) by
+	CH1EHSOBE015.bigfish.com (10.43.70.65) with Microsoft SMTP Server id
+	14.1.225.22; Wed, 10 Jul 2013 03:13:22 +0000
+Received: from mail122-ch1 (localhost [127.0.0.1])	by
+	mail122-ch1-R.bigfish.com (Postfix) with ESMTP id D0482320217	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Jul 2013 03:13:21 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275bhz2dh2a8h668h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1155h)
+Received: from mail122-ch1 (localhost.localdomain [127.0.0.1]) by mail122-ch1
+	(MessageSwitch) id 1373425936310075_13337;
+	Wed, 10 Jul 2013 03:12:16 +0000 (UTC)
+Received: from CH1EHSMHS039.bigfish.com (snatpool2.int.messaging.microsoft.com
+	[10.43.68.235])	by mail122-ch1.bigfish.com (Postfix) with ESMTP id
+	8CBD24A00BF	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Jul 2013 03:12:15 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS039.bigfish.com
+	(10.43.69.248) with Microsoft SMTP Server (TLS) id 14.1.225.23;
+	Wed, 10 Jul 2013 03:12:13 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server (TLS) id 14.3.136.1; Wed, 10 Jul 2013 03:14:24 +0000
+Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
+	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id r6A3C7rr025395;	Tue, 9 Jul 2013 20:12:08 -0700
+From: Chunrong Guo <B40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 10 Jul 2013 11:12:03 +0800
+Message-ID: <1373425923-19558-1-git-send-email-B40290@freescale.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
-In-Reply-To: <20130709185803.GA13741@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Yu Zongchun-B40527 <B40527@freescale.com>
-Subject: Re: [meta-networking][PATCH] dnsmasq: install .service only with systemd in DISTRO_FEATURES
+X-OriginatorOrg: freescale.com
+Cc: b40527@freescale.com
+Subject: [meta-networking][PATCH] licences: Add netperf license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,155 +53,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2013 20:43:04 -0000
-X-Groupsio-MsgNum: 45351
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hFEw+uh9kF5V6COn"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Jul 2013 03:13:24 -0000
+Content-Type: text/plain
 
---hFEw+uh9kF5V6COn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ meta-networking/conf/layer.conf  |    2 +
+ meta-networking/licenses/netperf |   43 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 45 insertions(+), 0 deletions(-)
+ create mode 100644 meta-networking/licenses/netperf
 
-On Tue, Jul 09, 2013 at 02:58:03PM -0400, Joe MacDonald wrote:
-> [RE: [oe] [meta-networking][PATCH] dnsmasq: install .service only with sy=
-stemd in DISTRO_FEATURES] On 13.07.05 (Fri 07:45) Guo Chunrong-B40290 wrote:
->=20
-> > Hello, Joe MacDonald
-> > New  patch was submitted.
-> > I do not modify (atftp/tracker/gateone)  recips and slim recipes do not=
- work.
-> > SO the code in these recipes  add  ${systemd_unitdir} to FILES and thes=
-e recipes work well.=20
->=20
-> Just FYI, I saw your patch, I have it in a merge queue, but right now
-> I'm looking at the bug Paul quoted and the mailing list discussion
-> quoted therein to see if we can come up with a better, more general
-> solution.
-
-FWIW: When I was moving systemd support from meta-systemd layer I was
-aware of this issue and I still believe that systemd.bbclass is right
-place to solve this, instead of adding conditionals in many recipes.
-
-Old systemd.bbclass in meta-systemd worked like this, maybe it wasn't
-most elegant solution, but it could be improved instead of pushing this
-issue to every recipes with .service file.
-
-Cheers,
-
-> > -----Original Message-----
-> > From: Joe MacDonald [mailto:Joe.MacDonald@windriver.com]=20
-> > Sent: Thursday, July 04, 2013 7:18 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Guo Chunrong-B40290; Yu Zongchun-B40527
-> > Subject: Re: [oe] [meta-networking][PATCH] dnsmasq: install .service on=
-ly with systemd in DISTRO_FEATURES
-> >=20
-> > [Re: [oe] [meta-networking][PATCH] dnsmasq: install .service only with =
-systemd in DISTRO_FEATURES] On 13.07.04 (Thu 11:50) Paul Eggleton wrote:
-> >=20
-> > > On Thursday 04 July 2013 17:26:23 Chunrong Guo wrote:
-> > > > Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> > > > ---
-> > > >  .../recipes-support/dnsmasq/dnsmasq.inc            |    8 +++++---
-> > > >  1 files changed, 5 insertions(+), 3 deletions(-)
-> > > >=20
-> > > > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
-> > > > 0f5b273..0710893 100644
-> > > > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > > @@ -30,9 +30,11 @@ do_install () {
-> > > >      install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d=20
-> > > > ${D}${sysconfdir}/dnsmasq.d install -m 644 ${WORKDIR}/dnsmasq.conf=
-=20
-> > > > ${D}${sysconfdir}/
-> > > >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
-> > > > -
-> > > > -    install -d ${D}${systemd_unitdir}/system
-> > > > -    install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > > ${D}${systemd_unitdir}/system +
-> > > > +    if=20
-> > > > + ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
-> > > > then +        install -d ${D}${systemd_unitdir}/system
-> > > > +        install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > > ${D}${systemd_unitdir}/system +    fi
-> > > >=20
-> > > >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)=
-}" !=3D ""
-> > > > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
-> > >=20
-> > > I think we should really have a global fix for this issue rather than=
-=20
-> > > hacking up every recipe:
-> > >=20
-> > > https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D4309
-> >=20
-> > I'm inclined to agree, but looking at the bug it looks like the potenti=
-al solution was discussed in February and it's on the schedule for Yocto 1.=
-5, but that's October.
-> >=20
-> > So I did a quick survey, here's the meta-networking recipes that'll be =
-impacted, if we adopt the workaround approach:
-> >=20
-> >    - net-snmp
-> >    - dnsmasq (obviously)
-> >    - ypbind-mt
-> >    - yp-tools
-> >    - ntp
-> >    - atftp
-> >=20
-> > I decided I'd have a look at meta-oe for contrast (and guidance) and th=
-is is what I found there:
-> >=20
-> >    - slim
-> >    - tracker
-> >    - cloud9
-> >    - zram
-> >    - gpsd
-> >    - gateone
-> >=20
-> > On the other hand, xinput-calibrator and xserver-nodm-init,  already ha=
-ve the same fix in it Chunrong is proposing.  So the impact of doing either=
- isn't huge, but it's not small either.
-> >=20
-> > Chunrong:  Would you be willing to retest and resubmit your patch with =
-the above listed meta-networking recipes as a set?  I don't see a lot of se=
-nse in doing this piecemeal, I'm okay with taking a workaround until
-> > #4309 gets fixed, but I'd rather tear the band-aid off all at once, so =
-to speak.
-> >=20
-> > --
-> > -Joe MacDonald.
-> > :wq
-> >=20
->=20
-> --=20
-> -Joe MacDonald.
-> :wq
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index f75080a..14eb048 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -14,3 +14,5 @@ BBFILE_PRIORITY_networking = "5"
+ LAYERVERSION_networking = "1"
+ 
+ LAYERDEPENDS_networking = "core"
++
++LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/meta-networking/licenses/netperf b/meta-networking/licenses/netperf
+new file mode 100644
+index 0000000..3f3ceb2
+--- /dev/null
++++ b/meta-networking/licenses/netperf
+@@ -0,0 +1,43 @@
++
++ 
++              Copyright (C) 1993 Hewlett-Packard Company
++                         ALL RIGHTS RESERVED.
++ 
++  The enclosed software and documentation includes copyrighted works
++  of Hewlett-Packard Co. For as long as you comply with the following
++  limitations, you are hereby authorized to (i) use, reproduce, and
++  modify the software and documentation, and to (ii) distribute the
++  software and documentation, including modifications, for
++  non-commercial purposes only.
++      
++  1.  The enclosed software and documentation is made available at no
++      charge in order to advance the general development of
++      high-performance networking products.
++ 
++  2.  You may not delete any copyright notices contained in the
++      software or documentation. All hard copies, and copies in
++      source code or object code form, of the software or
++      documentation (including modifications) must contain at least
++      one of the copyright notices.
++ 
++  3.  The enclosed software and documentation has not been subjected
++      to testing and quality control and is not a Hewlett-Packard Co.
++      product. At a future time, Hewlett-Packard Co. may or may not
++      offer a version of the software and documentation as a product.
++  
++  4.  THE SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS".
++      HEWLETT-PACKARD COMPANY DOES NOT WARRANT THAT THE USE,
++      REPRODUCTION, MODIFICATION OR DISTRIBUTION OF THE SOFTWARE OR
++      DOCUMENTATION WILL NOT INFRINGE A THIRD PARTY'S INTELLECTUAL
++      PROPERTY RIGHTS. HP DOES NOT WARRANT THAT THE SOFTWARE OR
++      DOCUMENTATION IS ERROR FREE. HP DISCLAIMS ALL WARRANTIES,
++      EXPRESS AND IMPLIED, WITH REGARD TO THE SOFTWARE AND THE
++      DOCUMENTATION. HP SPECIFICALLY DISCLAIMS ALL WARRANTIES OF
++      MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++  
++  5.  HEWLETT-PACKARD COMPANY WILL NOT IN ANY EVENT BE LIABLE FOR ANY
++      DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES
++      (INCLUDING LOST PROFITS) RELATED TO ANY USE, REPRODUCTION,
++      MODIFICATION, OR DISTRIBUTION OF THE SOFTWARE OR DOCUMENTATION.
++ 
++
+-- 
+1.7.5.4
 
 
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---hFEw+uh9kF5V6COn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlHcdeAACgkQN1Ujt2V2gByVggCdE2cuZwmW6Tdc1LJpZOUWC8M8
-6PcAoKd1rCfEq6GaL8usSdB1QcptJxG4
-=A1ds
------END PGP SIGNATURE-----
-
---hFEw+uh9kF5V6COn--
