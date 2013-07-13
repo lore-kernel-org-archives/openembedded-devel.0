@@ -1,20 +1,24 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id EDD9A6A465
+	by mail.openembedded.org (Postfix) with ESMTP id 055546A97F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jul 2013 14:47:37 +0000 (UTC)
+	Sat, 13 Jul 2013 14:47:38 +0000 (UTC)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
 	by orsmga102.jf.intel.com with ESMTP; 13 Jul 2013 07:45:08 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,659,1367996400"; d="scan'208";a="345067067"
+X-IronPort-AV: E=Sophos;i="4.89,659,1367996400"; d="scan'208";a="345067078"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.68])
-	by orsmga001.jf.intel.com with ESMTP; 13 Jul 2013 07:47:32 -0700
+	by orsmga001.jf.intel.com with ESMTP; 13 Jul 2013 07:47:34 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Jul 2013 15:47:20 +0100
-Message-Id: <cover.1373726565.git.paul.eggleton@linux.intel.com>
+Date: Sat, 13 Jul 2013 15:47:22 +0100
+Message-Id: <7da9d2f7816b6c2b36750b47312e2678157d4b69.1373726565.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH 0/3] Add mosh and dependencies
+In-Reply-To: <cover.1373726565.git.paul.eggleton@linux.intel.com>
+References: <cover.1373726565.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1373726565.git.paul.eggleton@linux.intel.com>
+References: <cover.1373726565.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH 2/3] libio-pty-perl: add from OE-Classic and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,37 +34,38 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 13 Jul 2013 14:47:38 -0000
 
-Add a recipe for mosh, and for dependencies migrate libio-pty-perl from
-OE-Classic and bring in protobuf from meta-virtualization.
+* Update to version 1.10
+* Set SUMMARY instead of DESCRIPTION
+* Put SRC_URI checksums under SRC_URI
+* Add LIC_FILES_CHKSUM
+* Make LICENSE slightly more specific and add spacing
 
-I considered putting this in meta-networking, however meta-virtualization
-will still need protobuf and it already depends on meta-oe, and officially
-meta-networking does not depend on meta-oe so splitting these would not
-really work with the current layer dependencies.
-
-
-The following changes since commit c383d6230942bb1558cee02764bced09031cb70f:
-
-  llvm3.3: Add zlib dependency and explicitly enable it (2013-07-12 12:12:09 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/mosh
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/mosh
-
-Paul Eggleton (3):
-  protobuf: add recipe from meta-virtualization and tweak
-  libio-pty-perl: add from OE-Classic and update
-  mosh: add new recipe for version 1.2.4
-
- meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb    | 29 ++++++++++++++++++++++
- .../recipes-devtools/perl/libio-pty-perl_1.10.bb   | 14 +++++++++++
- .../recipes-devtools/protobuf/protobuf_2.4.1.bb    | 20 +++++++++++++++
- 3 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-oe/recipes-devtools/perl/libio-pty-perl_1.10.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/perl/libio-pty-perl_1.10.bb
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf_2.4.1.bb
 
+diff --git a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.10.bb b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.10.bb
+new file mode 100644
+index 0000000..88db683
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.10.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Perl module for pseudo tty IO"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://META.yml;beginline=7;endline=8;md5=f86a66cc3d9522a227298d6898b181a2"
++
++SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "46baec86a145e57f0ec661fa412b097c"
++SRC_URI[sha256sum] = "31a6e21ad187ec5ea93c2b898d6b3519647c5fce9f394b6d3c05a1f7c3f6f8b1"
++
++S = "${WORKDIR}/IO-Tty-${PV}"
++
++inherit cpan
++
 -- 
 1.8.1.2
 
