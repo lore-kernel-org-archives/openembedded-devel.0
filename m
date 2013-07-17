@@ -1,35 +1,34 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C46D6B205
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id EBBEA6B205
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2013 22:09:55 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id h10so1342647eaj.29
+	Wed, 17 Jul 2013 22:20:30 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id c1so1341269eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2013 15:09:55 -0700 (PDT)
+	Wed, 17 Jul 2013 15:20:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
 	bh=/jNiiB41mNCbI7zNzSBaoLZ9QBWrVS3wYep3dVQUBZM=;
-	b=BFEk3x/y9k4vOBLH9nGKc8e4QWZ55c+WDe19drBYqN89iihX4xaVgV866StgdpPZAE
-	6GuF0OmKy263ETW1Njm/t9xD1ztgnMvPBkiBsBFSBI308J6ZNoGB448hQLUbMYtbAxM9
-	f8S2wf6tDQaON17Slv8fybIqUtYSYBZOkfhmConccOj3oL43BXBKn+UOUikP/uTZb4c0
-	4vpJz0jSzIXqFHyzxaMmyQZf+wCrMQnoOo1vyBZoM323xGR/smT/MO3Xp9a2PR8VwZ/7
-	l1v1s9xcUz62mrPEzq1mRYENPNf7/mXK9h0sHCRpF62V5Vfnit8jF20AkUqF8gTUCbXk
-	uOYA==
-X-Received: by 10.14.47.196 with SMTP id t44mr8375289eeb.18.1374098995302;
-	Wed, 17 Jul 2013 15:09:55 -0700 (PDT)
+	b=zE56CyFBa2Ld0RDn4+rO30FR6mcTBcVnqUUxCOkMvJgbzUowcnaFm2VDIxa/O3Xppd
+	5QvajMMZX7R6SJebPNPtPU4zKRPtj2JtgnlOJ6JRuBmKMjA7GczBzFEKyhemPUoHs7N2
+	CTueP4gRK60TYxz6+Ra4jx2pyWuerkbdMHT9m2pCw4dyzaXs5q9UUOP116E4qdLF7OIo
+	dKYc28eMColJCW3lA5RXXaMYn8pkZbInhmJILzx7aMKKoCI40msB6nVeXnIqEy7pL6wS
+	pLVsSIjUEpfXlX7BZpI9+s2t5/iujI+7sBobMDeK48vx0kmFclCset5aZI4S/9t34/gI
+	5Kuw==
+X-Received: by 10.14.115.9 with SMTP id d9mr8315938eeh.87.1374099631150;
+	Wed, 17 Jul 2013 15:20:31 -0700 (PDT)
 Received: from mizar.localdomain
 	(host96-245-dynamic.48-82-r.retail.telecomitalia.it. [82.48.245.96])
 	by mx.google.com with ESMTPSA id
-	e44sm14149036eeh.11.2013.07.17.15.09.53 for <multiple recipients>
+	ci50sm14196011eeb.12.2013.07.17.15.20.29 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 17 Jul 2013 15:09:54 -0700 (PDT)
+	Wed, 17 Jul 2013 15:20:30 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Jul 2013 00:09:50 +0200
-Message-Id: <1374098990-4909-1-git-send-email-andrea.adami@gmail.com>
+Date: Thu, 18 Jul 2013 00:19:21 +0200
+Message-Id: <1374099561-25624-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs] Pull request 20130717
+Subject: [meta-handheld] Pull request 20130717
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2013 22:09:55 -0000
+X-List-Received-Date: Wed, 17 Jul 2013 22:20:31 -0000
 
 The following changes since commit 8f2bec330b1463dc39d35769214cb324a1d4fdc9:
 
