@@ -1,43 +1,24 @@
-Return-Path: <bak2132@columbia.edu>
-Received: from tarap.cc.columbia.edu (tarap.cc.columbia.edu [128.59.29.7])
-	by mail.openembedded.org (Postfix) with ESMTP id D6DE56B215
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 51B656B215
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2013 17:37:33 +0000 (UTC)
-Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
-	[209.85.220.177])
-	by tarap.cc.columbia.edu (8.14.4/8.14.3) with ESMTP id r6GHbUCM016154
-	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128 verify=NOT)
+	Wed, 17 Jul 2013 03:20:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r6H3KjWu017417
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2013 13:37:30 -0400 (EDT)
-Received: by mail-vc0-f177.google.com with SMTP id hv10so649521vcb.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jul 2013 10:37:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=03l21k7TA9jZPO94tCHtRVy0/1VqEspCgFqQz6xhcYY=;
-	b=mKGEy4wEg89WG6IjFNUSJJVW1z20ClNfYZ10PckRNy0uGvTLQzSzsbcbBxzWxhI4Vh
-	TAxWbHV+rPAwVtOIHpJtlFxtb58+xdpd7G4Pypu+N48rQL9Yso4Be8fey2iRTfJjaQq5
-	y0X535JtdkW2YsYJB1+YKn4sENGhsrfs9nHqK3BHMjQkfg7HKn+ADZaCLjtZo7DvhYx4
-	V9LTaeDXiWw0WoxpgCTnyMsn2gWfK6Xpi8VGOG69TOEDSvW/C91fzT+YgKQn/+krR7R2
-	KKAeC4zrT8brbtgKEZo4xazACeXc9jJvlZ1qbb0ub/hBPv6HLyG5uzI0IvvFLkDVOJ9T
-	OG2Q==
-X-Received: by 10.52.66.49 with SMTP id c17mr655686vdt.94.1373996249984;
-	Tue, 16 Jul 2013 10:37:29 -0700 (PDT)
+	Tue, 16 Jul 2013 20:20:45 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.342.3; Tue, 16 Jul 2013 20:20:43 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Jul 2013 11:20:42 +0800
+Message-ID: <1374031242-27577-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Received: by 10.52.66.49 with SMTP id c17mr655682vdt.94.1373996249838; Tue,
-	16 Jul 2013 10:37:29 -0700 (PDT)
-Received: by 10.220.183.196 with HTTP; Tue, 16 Jul 2013 10:37:29 -0700 (PDT)
-Date: Tue, 16 Jul 2013 13:37:29 -0400
-Message-ID: <CANS_96Zyg_YLS0zXpf8vuHHSDcWMFwPzRMqSwRpzjBWSLvwBQw@mail.gmail.com>
-From: Brian Kelly <bak2132@columbia.edu>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQlkS0Z40uct2GJJWTp5ZIZnaVj7j98GsEUD15UNlL2mx31t1A+Vu3+Ax3F+OKB1JR/uRWeLrfZ8m9DSHdg0fBtaJq6vpzxSsCiQ6YIE2XqH1oZ6WbalUPaG5pSydGtowR4uWlb/Q47mi4XNGcfVN/roHGDOLGtjkayjY1R9fzW0qlS6M8QJKtd1pL4IHEIjMSYQHArp
-X-No-Spam-Score: Local
-X-Scanned-By: MIMEDefang 2.68 on 128.59.29.7
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Cross-Compilation of ROOT for ARM machine
+Subject: [meta-networking][PATCH] inetutils: several improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,142 +32,342 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2013 17:37:34 -0000
-X-Groupsio-MsgNum: 45389
-Content-Type: multipart/mixed; boundary=20cf3071d00a6509e204e1a46edc
+X-List-Received-Date: Wed, 17 Jul 2013 03:20:43 -0000
+Content-Type: text/plain
 
---20cf3071d00a6509e204e1a46edc
-Content-Type: text/plain; charset=ISO-8859-1
+From: "Roy.Li" <rongqing.li@windriver.com>
 
-Hello OpemEmbedded Community:
+1. integrate rexec, rlogin, rsh, telnet, tftpd xinetd startup scripts
+2. inherit update-alternatives bbclass, not call update-alternatives directly.
+3. package all commands into subpackages
 
-I am trying to compile the Root library (ver. 5.34.09) for an arm machine
-(i.e. a gumstix verdex XL6P running the Angstrom linux distribution (a
-computer-on-module)). I attempted native compilation but I kept getting an
-internal error in the compiler program, which led to suspect that there was
-not enough memory for the library to compile (this is most likely the case
-since the library compiled fine on a debian arm emulation using qemu).
+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+---
+ .../inetutils-1.9.1/rexec.xinetd.inetutils         |   20 +++
+ .../inetutils-1.9.1/rlogin.xinetd.inetutils        |   23 +++
+ .../inetutils/inetutils-1.9.1/rsh.xinetd.inetutils |   21 +++
+ .../inetutils-1.9.1/telnet.xinetd.inetutils        |   13 ++
+ .../inetutils-1.9.1/tftpd.xinetd.inetutils         |   19 +++
+ .../inetutils/inetutils_1.9.1.bb                   |  148 ++++++++++++++++----
+ 6 files changed, 215 insertions(+), 29 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils
+ create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils
 
-Now I am attempting to the bitbake software. I followed the instructions on
-the website http://wiki.gumstix.org/index.php?title=Verdex_Git_Repository to
-create a working bitbake environment and verdex image was created
-successfully.
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils
+new file mode 100644
+index 0000000..80aed36
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils
+@@ -0,0 +1,20 @@
++# default: off
++# description:
++# Rexecd is the server for the rexec program. The server provides remote 
++# execution facilities with authentication based on user names and 
++# passwords.
++#
++service exec
++{
++	socket_type	= stream
++	protocol	= tcp
++	flags		= NAMEINARGS
++	wait		= no
++	user		= root
++	group		= root
++	log_on_success	+= USERID
++	log_on_failure	+= USERID
++	server		= /usr/bin/tcpd
++	server_args	= /usr/sbin/in.rexecd
++	disable		= yes
++}
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils
+new file mode 100644
+index 0000000..00dbf93
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils
+@@ -0,0 +1,23 @@
++# default: off
++# description:
++# Rlogind is a server for the rlogin program. The server provides remote 
++# execution with authentication based on privileged port numbers from trusted
++# host
++#
++service login
++{
++	socket_type	= stream
++	protocol	= tcp
++	flags		= NAMEINARGS
++	wait		= no
++	user		= root
++	group		= root
++	log_on_success	+= USERID
++	log_on_failure	+= USERID
++	server		= /usr/bin/tcpd
++	server_args	= /usr/sbin/in.rlogind -a
++	disable		= yes
++}
++							
++							
++							
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils
+new file mode 100644
+index 0000000..ad59b62
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils
+@@ -0,0 +1,21 @@
++# default: off
++# description:
++# The rshd server is a server for the rcmd(3) routine and, 
++# consequently, for the rsh(1) program. The server provides 
++# remote execution facilities with authentication based on 
++# privileged port numbers from trusted hosts.
++#
++service shell
++{
++	socket_type	= stream
++	protocol	= tcp
++	flags		= NAMEINARGS
++	wait		= no
++	user		= root
++	group		= root
++	log_on_success	+= USERID
++	log_on_failure	+= USERID
++	server		= /usr/bin/tcpd
++	server_args	= /usr/sbin/in.rshd -aL
++	disable		= yes
++}
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils
+new file mode 100644
+index 0000000..2a2a12e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils
+@@ -0,0 +1,13 @@
++# default: on
++# description: The telnet server serves telnet sessions; it uses \
++#       unencrypted username/password pairs for authentication.
++service telnet
++{
++	disable		= no
++	flags		= REUSE
++	socket_type	= stream
++	wait		= no
++	user		= root
++	server		= /usr/sbin/in.telnetd
++	log_on_failure	+= USERID
++}
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils
+new file mode 100644
+index 0000000..f549163
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils
+@@ -0,0 +1,19 @@
++# default: off
++# description:
++# Tftpd is a server which supports the Internet Trivial File Transfer
++# Pro-tocol (RFC 783). The TFTP server operates at the port indicated
++# in the tftp service description; see services(5).
++#
++service tftp
++{
++        disable         = yes
++        socket_type     = dgram
++        protocol        = udp
++        flags           = IPv6
++        wait            = yes
++        user            = root
++        group           = root
++        server          = /usr/sbin/in.tftpd
++        server_args     = /tftpboot
++}
++
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+index 603bf01..c55851f 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+@@ -3,30 +3,36 @@ networking utilities and servers including ftp, ftpd, rcp, \
+ rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
+ talkd, telnet, telnetd, tftp, tftpd, and uucpd."
+ SECTION = "libs"
+-DEPENDS = "ncurses"
++DEPENDS = "ncurses netbase readline"
+ LICENSE = "GPLv3"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
+ 
+ PR = "r1"
+-
+ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+            file://disable-pre-ANSI-compilers.patch \
+            file://version.patch \
+            file://remove-gets.patch \
+            file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
+            file://inetutils-1.8-0003-wchar.patch \
+-           file://fix-disable-ipv6.patch \
+-" 
++           file://rexec.xinetd.inetutils  \
++           file://rlogin.xinetd.inetutils \
++           file://rsh.xinetd.inetutils \
++           file://telnet.xinetd.inetutils \
++           file://tftpd.xinetd.inetutils \
++"
++
+ SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
+ SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad79ff2b"
+ 
+-inherit autotools gettext
++inherit autotools gettext update-alternatives
+ 
++SRC_URI += "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
+ noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
+ EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
+         --with-path-procnet-dev=/proc/net/dev \
+         ${noipv6} \
++        --with-path-login=/bin/login \
+ "
+ 
+ do_configure_prepend () {
+@@ -35,30 +41,114 @@ do_configure_prepend () {
+     rm -f ${S}/glob/configure*
+ }
+ 
+-do_install () {
+-    autotools_do_install
+-    install -d ${D}${base_sbindir} ${D}${base_bindir}
+-    mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${BPN}
+-    mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${BPN}
+-    mv ${D}${bindir}/logger ${D}${bindir}/logger.${BPN}
+-    mv ${D}${bindir}/traceroute ${D}${bindir}/traceroute.${BPN}
+-    mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${BPN}
+-    mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/ifconfig.${BPN}
++do_install_append () {
++    install -m 0755 -d ${D}${base_bindir}
++    install -m 0755 -d ${D}${base_sbindir}
++    install -m 0755 -d ${D}${sbindir}
++    install -m 0755 -d ${D}${sysconfdir}/xinetd.d
++    mv ${D}${bindir}/ping ${D}${base_bindir}/
++    mv ${D}${bindir}/ping6 ${D}${base_bindir}/
++    mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/
++    mv ${D}${libexecdir}/syslogd ${D}${base_sbindir}/
++    mv ${D}${bindir}/hostname ${D}${base_bindir}/
++    mv ${D}${libexecdir}/tftpd ${D}${sbindir}/in.tftpd
++    mv ${D}${libexecdir}/telnetd ${D}${sbindir}/in.telnetd
++    mv ${D}${libexecdir}/rexecd ${D}${sbindir}/in.rexecd
++    mv ${D}${libexecdir}/rlogind ${D}${sbindir}/in.rlogind
++    mv ${D}${libexecdir}/rshd ${D}${sbindir}/in.rshd
++    mv ${D}${libexecdir}/talkd ${D}${sbindir}/in.talkd
++    mv ${D}${libexecdir}/uucpd ${D}${sbindir}/in.uucpd
++    mv ${D}${libexecdir}/* ${D}${bindir}/
++    cp ${WORKDIR}/rexec.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/rexec
++    cp ${WORKDIR}/rlogin.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/rlogin
++    cp ${WORKDIR}/rsh.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/rsh
++    cp ${WORKDIR}/telnet.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/telnet
++    cp ${WORKDIR}/tftpd.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/tftpd
++    rm -rf ${D}${libexecdir}/
+ }
+ 
+-pkg_postinst_${PN} () {
+-    update-alternatives --install ${bindir}/tftp tftp tftp.${BPN} 100
+-    update-alternatives --install ${bindir}/telnet telnet telnet.${BPN} 100
+-    update-alternatives --install ${bindir}/logger logger logger.${BPN} 100
+-    update-alternatives --install ${bindir}/traceroute traceroute traceroute.${BPN} 100
+-    update-alternatives --install ${base_bindir}/hostname hostname hostname.${BPN} 100
+-    update-alternatives --install ${base_sbindir}/ifconfig ifconfig ifconfig.${BPN} 100
+-}
++PACKAGES =+ "${PN}-ping ${PN}-ping6 ${PN}-hostname ${PN}-ifconfig \
++${PN}-tftp ${PN}-logger ${PN}-traceroute ${PN}-syslogd \
++${PN}-ftp ${PN}-ftpd ${PN}-tftpd ${PN}-telnet ${PN}-telnetd ${PN}-inetd \
++${PN}-rsh ${PN}-rshd"
+ 
+-pkg_prerm_${PN} () {
+-    update-alternatives --remove tftp tftp.${BPN}
+-    update-alternatives --remove telnet telnet.${BPN}
+-    update-alternatives --remove logger logger.${BPN}
+-    update-alternatives --remove traceroute traceroute.${BPN}
+-    update-alternatives --remove ifconfig ifconfig.${BPN}
+-}
++ALTERNATIVE_PRIORITY = "80"
++ALTERNATIVE_${PN} = "talk whois"
++ALTERNATIVE_LINK_NAME[talkd]  = "${sbindir}/in.talkd"
++ALTERNATIVE_LINK_NAME[uucpd]  = "${sbindir}/in.uucpd"
++
++ALTERNATIVE_${PN}-logger = "logger"
++ALTERNATIVE_${PN}-syslogd = "syslogd"
++ALTERNATIVE_LINK_NAME[syslogd]  = "${base_sbindir}/syslogd"
++
++ALTERNATIVE_${PN}-ftp = "ftp"
++ALTERNATIVE_${PN}-ftpd = "ftpd"
++ALTERNATIVE_${PN}-tftp = "tftp"
++ALTERNATIVE_${PN}-tftpd = "tftpd"
++ALTERNATIVE_LINK_NAME_${PN}-tftpd = "${bindir}/tftpd"
++ALTERNATIVE_TARGET_${PN}-tftpd  = "${sbindir}/in.tftpd"
++
++ALTERNATIVE_${PN}-telnet = "telnet"
++ALTERNATIVE_${PN}-telnetd = "telnetd"
++ALTERNATIVE_LINK_NAME_${PN}-telnetd = "${bindir}/telnetd"
++ALTERNATIVE_TARGET_${PN}-telnetd = "${sbindir}/in.telnetd"
++
++ALTERNATIVE_${PN}-rsh = "rcp rexec rlogin rsh"
++ALTERNATIVE_${PN}-rshd = "rshd rexecd rlogind"
++ALTERNATIVE_LINK_NAME_${PN}-rshd = "${bindir}/rshd"
++ALTERNATIVE_TARGET_${PN}-rshd = "${sbindir}/in.rshd"
++ALTERNATIVE_LINK_NAME_${PN}-rexecd = "${bindir}/rexecd"
++ALTERNATIVE_TARGET_${PN}-rexecd = "${sbindir}/in.rexecd"
++ALTERNATIVE_LINK_NAME_${PN}-rlogind = "${bindir}/rlogind"
++ALTERNATIVE_TARGET_${PN}-rlogind = "${sbindir}/in.rlogind"
++
++ALTERNATIVE_${PN}-inetd= "inetd"
++ALTERNATIVE_${PN}-traceroute = "traceroute"
++
++ALTERNATIVE_${PN}-hostname = "hostname"
++ALTERNATIVE_LINK_NAME[hostname]  = "${base_bindir}/hostname"
++
++ALTERNATIVE_${PN}-ifconfig = "ifconfig"
++ALTERNATIVE_LINK_NAME[ifconfig]  = "${base_sbindir}/ifconfig"
++
++ALTERNATIVE_${PN}-ping = "ping"
++ALTERNATIVE_LINK_NAME[ping]   = "${base_bindir}/ping"
++
++ALTERNATIVE_${PN}-ping6 = "ping6"
++ALTERNATIVE_LINK_NAME[ping6]  = "${base_bindir}/ping6"
++
++
++FILES_${PN}-ping = "${base_bindir}/ping.${BPN}"
++FILES_${PN}-ping6 = "${base_bindir}/ping6.${BPN}"
++FILES_${PN}-hostname = "${base_bindir}/hostname.${BPN}"
++FILES_${PN}-ifconfig = "${base_sbindir}/ifconfig.${BPN}"
++FILES_${PN}-traceroute = "${bindir}/traceroute.${BPN}"
++FILES_${PN}-logger = "${bindir}/logger.${BPN}"
++FILES_${PN}-syslogd = "${base_sbindir}/syslogd.${BPN}"
++FILES_${PN}-ftp = "${bindir}/ftp.${BPN}"
++
++FILES_${PN}-tftp = "${bindir}/tftp.${BPN}"
++FILES_${PN}-telnet = "${bindir}/telnet.${BPN}"
++FILES_${PN}-rsh = "${bindir}/rsh.${BPN} ${bindir}/rlogin.${BPN} ${bindir}/rexec.${BPN} ${bindir}/rcp.${BPN}"
++
++FILES_${PN}-rshd = "${sbindir}/in.rshd ${sbindir}/in.rlogind ${sbindir}/in.rexecd \
++                    ${sysconfdir}/xinetd.d/rsh ${sysconfdir}/xinetd.d/rlogin ${sysconfdir}/xinetd.d/rexec"
++RDEPENDS_${PN}-rshd += "xinetd tcp-wrappers"
++RCONFLICTS_${PN}-rshd += "netkit-rshd"
++RPROVIDES_${PN}-rshd = "rshd"
++
++FILES_${PN}-ftpd = "${bindir}/ftpd.${BPN}"
++RDEPENDS_${PN}-ftpd += "xinetd"
++
++FILES_${PN}-tftpd = "${sbindir}/in.tftpd ${sysconfdir}/xinetd.d/tftpd"
++RCONFLICTS_${PN}-tftpd += "netkit-tftpd"
++RDEPENDS_${PN}-tftpd += "xinetd"
++
++FILES_${PN}-telnetd = "${sbindir}/in.telnetd ${sysconfdir}/xinetd.d/telnet"
++RCONFLICTS_${PN}-telnetd += "netkit-telnetd"
++RPROVIDES_${PN}-telnetd = "telnetd"
++RDEPENDS_${PN}-telnetd += "xinetd"
++
++FILES_${PN}-inetd = "${bindir}/inetd.${BPN}"
++
++RDEPENDS_${PN} = "xinetd"
+-- 
+1.7.10.4
 
 
-Now I am trying to create a recipe that will allow me to run Root.
-Supposedly the libraries have been built successfully but the installation
-on the gumstix fails (see attachment).
-
-I have attached my work so far (my recipe, the terminal output from the
-computer I am running bitbake on and the terminal output from my gumstix)
-and, since I am quite inexperienced with bitbake, I would greatly appreciate
-any constructive feedback that will help me get the Root library working on
-the gumstix.
-
-Thank you very much in for any help that you may provide.
-
-Regards,
-V. Satire Cat
-
---20cf3071d00a6509e204e1a46edc
-Content-Type: text/plain; charset=US-ASCII; name="root_5.34.9.bb.txt"
-Content-Disposition: attachment; filename="root_5.34.9.bb.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_hj7dudih0
-
-UFIgPSAicjAiCiAKU1JDX1VSSSA9ICJmdHA6Ly9yb290LmNlcm4uY2gvcm9vdC9yb290X3Y1LjM0
-LjA5LnNvdXJjZS50YXIuZ3oiCgpkb19pbnN0YWxsKCl7CiAgICAgICAgaW5zdGFsbCAtbSAwNzU1
-IC1kICR7RH0ke2JpbmRpcn0gJHtEfSR7ZG9jZGlyfS9yb290CiB9CiAKaW5oZXJpdCBhdXRvdG9v
-bHMK
-
---20cf3071d00a6509e204e1a46edc
-Content-Type: text/plain; charset=US-ASCII; name="gumstix_output.txt"
-Content-Disposition: attachment; filename="gumstix_output.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_hj7duhhc1
-
-W3Jvb3RAZ3Vtc3RpeC12ZXJkZXggfl0KPm9wa2cgaW5zdGFsbCByb290LWRldl81LjM0LjktcjBf
-YXJtdjV0ZS5pcGsKSW5zdGFsbGluZyByb290LWRldiAoNS4zNC45LXIwKSB0byByb290Li4uCkNv
-bmZpZ3VyaW5nIGRlYmlhbnV0aWxzLgp1cGRhdGUtYWx0ZXJuYXRpdmVzOiBMaW5raW5nIC8vdXNy
-L3NiaW4vYWRkLXNoZWxsIHRvIGFkZC1zaGVsbC5kZWJpYW51dGlscwp1cGRhdGUtYWx0ZXJuYXRp
-dmVzOiBMaW5raW5nIC8vdXNyL3NiaW4vaW5zdGFsbGtlcm5lbCB0byBpbnN0YWxsa2VybmVsLmRl
-YmlhbnV0aWxzCnVwZGF0ZS1hbHRlcm5hdGl2ZXM6IExpbmtpbmcgLy91c3Ivc2Jpbi9ta2Jvb3Qg
-dG8gbWtib290LmRlYmlhbnV0aWxzCnVwZGF0ZS1hbHRlcm5hdGl2ZXM6IExpbmtpbmcgLy91c3Iv
-c2Jpbi9yZW1vdmUtc2hlbGwgdG8gcmVtb3ZlLXNoZWxsLmRlYmlhbnV0aWxzCnVwZGF0ZS1hbHRl
-cm5hdGl2ZXM6IExpbmtpbmcgLy91c3IvYmluL3NhdmVsb2cgdG8gc2F2ZWxvZy5kZWJpYW51dGls
-cwp1cGRhdGUtYWx0ZXJuYXRpdmVzOiBMaW5raW5nIC8vdXNyL2Jpbi9zZW5zaWJsZS1icm93c2Vy
-IHRvIHNlbnNpYmxlLWJyb3dzZXIuZGViaWFudXRpbHMKdXBkYXRlLWFsdGVybmF0aXZlczogTGlu
-a2luZyAvL3Vzci9iaW4vc2Vuc2libGUtZWRpdG9yIHRvIHNlbnNpYmxlLWVkaXRvci5kZWJpYW51
-dGlscwp1cGRhdGUtYWx0ZXJuYXRpdmVzOiBMaW5raW5nIC8vdXNyL2Jpbi9zZW5zaWJsZS1wYWdl
-ciB0byBzZW5zaWJsZS1wYWdlci5kZWJpYW51dGlscwp1cGRhdGUtYWx0ZXJuYXRpdmVzOiBMaW5r
-aW5nIC8vdXNyL2Jpbi93aGljaCB0byB3aGljaC5kZWJpYW51dGlscwp1cGRhdGUtYWx0ZXJuYXRp
-dmVzOiBMaW5raW5nIC8vYmluL3J1bi1wYXJ0cyB0byBydW4tcGFydHMuZGViaWFudXRpbHMKdXBk
-YXRlLWFsdGVybmF0aXZlczogRXJyb3I6IGNhbm5vdCByZWdpc3RlciBhbHRlcm5hdGl2ZSB0ZW1w
-ZmlsZSB0byAvYmluL3RlbXBmaWxlIHNpbmNlIGl0IGlzIGFscmVhZHkgcmVnaXN0ZXJlZCB0byAv
-dXNyL2Jpbi90ZW1wZmlsZQpDb25maWd1cmluZyByb290LWRldi4KQ29sbGVjdGVkIGVycm9yczoK
-ICogcGtnX3J1bl9zY3JpcHQ6IHBvc3RpbnN0IHNjcmlwdCByZXR1cm5lZCBzdGF0dXMgMS4KICog
-b3BrZ19jb25maWd1cmU6IGRlYmlhbnV0aWxzLnBvc3RpbnN0IHJldHVybmVkIDEuCltyb290QGd1
-bXN0aXgtdmVyZGV4IH5dCj5yb290Ci1iYXNoOiAvYmluL3Jvb3Q6IGNhbm5vdCBleGVjdXRlIGJp
-bmFyeSBmaWxlCgo=
-
---20cf3071d00a6509e204e1a46edc
-Content-Type: text/plain; charset=US-ASCII; name="bitbake_output.txt"
-Content-Disposition: attachment; filename="bitbake_output.txt"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_hj7duki22
-
-dXNlckBjb21wdXRlcjp+L3ZlcmRleC1vZS9vcmcub3BlbmVtYmVkZGVkLmRldi9yZWNpcGVzL3Jv
-b3RfNS4zNC45JCBiaXRiYWtlIC1iIHJvb3RfNS4zNC45LmJiCk5PVEU6IHBhY2thZ2Ugcm9vdC01
-LjM0Ljk6IHN0YXJ0ZWQKTk9URTogcGFja2FnZSByb290LTUuMzQuOS1yMDogdGFzayBkb19mZXRj
-aDogc3RhcnRlZApOT1RFOiByb290LTUuMzQuOTogZnRwOi8vcm9vdC5jZXJuLmNoL3Jvb3Qvcm9v
-dF92NS4zNC4wOS5zb3VyY2UudGFyLmd6IGhhcyBubyBlbnRyeSBpbiBjb25mL2NoZWNrc3Vtcy5p
-bmksIG5vdCBjaGVja2luZyBVUkkKTk9URTogcGFja2FnZSByb290LTUuMzQuOS1yMDogdGFzayBk
-b19mZXRjaDogY29tcGxldGVkCk5PVEU6IHBhY2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sgZG9f
-dW5wYWNrOiBzdGFydGVkCk5PVEU6IFVucGFja2luZyAvdXNyL3NoYXJlL3NvdXJjZXMvcm9vdF92
-NS4zNC4wOS5zb3VyY2UudGFyLmd6IHRvIC9ob21lL3VzZXIvZ3Vtc3RpeC9ndW1zdGl4LW9lL3Rt
-cC93b3JrL2FybXY1dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9yb290LTUuMzQuOS1yMC8KTk9U
-RTogcGFja2FnZSByb290LTUuMzQuOS1yMDogdGFzayBkb191bnBhY2s6IGNvbXBsZXRlZApOT1RF
-OiBwYWNrYWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX3BhdGNoOiBzdGFydGVkCk5PVEU6IHBh
-Y2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sgZG9fcGF0Y2g6IGNvbXBsZXRlZApOT1RFOiBwYWNr
-YWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX2NvbmZpZ3VyZTogc3RhcnRlZApOT1RFOiBwYWNr
-YWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX2NvbmZpZ3VyZTogY29tcGxldGVkCk5PVEU6IHBh
-Y2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sgZG9fcWFfY29uZmlndXJlOiBzdGFydGVkCk5PVEU6
-IENoZWNraW5nIHNhbml0eSBvZiB0aGUgY29uZmlnLmxvZyBmaWxlCk5PVEU6IHBhY2thZ2Ugcm9v
-dC01LjM0LjktcjA6IHRhc2sgZG9fcWFfY29uZmlndXJlOiBjb21wbGV0ZWQKTk9URTogcGFja2Fn
-ZSByb290LTUuMzQuOS1yMDogdGFzayBkb19jb21waWxlOiBzdGFydGVkCk5PVEU6IHBhY2thZ2Ug
-cm9vdC01LjM0LjktcjA6IHRhc2sgZG9fY29tcGlsZTogY29tcGxldGVkCk5PVEU6IHBhY2thZ2Ug
-cm9vdC01LjM0LjktcjA6IHRhc2sgZG9faW5zdGFsbDogc3RhcnRlZApOT1RFOiBwYWNrYWdlIHJv
-b3QtNS4zNC45LXIwOiB0YXNrIGRvX2luc3RhbGw6IGNvbXBsZXRlZApOT1RFOiBwYWNrYWdlIHJv
-b3QtNS4zNC45LXIwOiB0YXNrIGRvX3BhY2thZ2U6IHN0YXJ0ZWQKTk9URTogRE8gUEFDS0FHRSBR
-QQpOT1RFOiBDaGVja2luZyBQYWNrYWdlOiByb290LWRiZwpOT1RFOiBDaGVja2luZyBQYWNrYWdl
-OiByb290Ck5PVEU6IENoZWNraW5nIFBhY2thZ2U6IHJvb3QtZG9jCk5PVEU6IENoZWNraW5nIFBh
-Y2thZ2U6IHJvb3QtZGV2Ck5PVEU6IENoZWNraW5nIFBhY2thZ2U6IHJvb3QtbG9jYWxlCk5PVEU6
-IERPTkUgd2l0aCBQQUNLQUdFIFFBCk5PVEU6IHBhY2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sg
-ZG9fcGFja2FnZTogY29tcGxldGVkCk5PVEU6IHBhY2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sg
-ZG9fcGFja2FnZV93cml0ZV9pcGs6IHN0YXJ0ZWQKUGFja2FnZWQgY29udGVudHMgb2Ygcm9vdC1k
-YmcgaW50byAvaG9tZS91c2VyL2d1bXN0aXgvZ3Vtc3RpeC1vZS90bXAvZGVwbG95L2dsaWJjL2lw
-ay9hcm12NXRlL3Jvb3QtZGJnXzUuMzQuOS1yMF9hcm12NXRlLmlwawpOT1RFOiBOb3QgY3JlYXRp
-bmcgZW1wdHkgYXJjaGl2ZSBmb3Igcm9vdC01LjM0LjktcjAKTk9URTogTm90IGNyZWF0aW5nIGVt
-cHR5IGFyY2hpdmUgZm9yIHJvb3QtZG9jLTUuMzQuOS1yMApQYWNrYWdlZCBjb250ZW50cyBvZiBy
-b290LWRldiBpbnRvIC9ob21lL3VzZXIvZ3Vtc3RpeC9ndW1zdGl4LW9lL3RtcC9kZXBsb3kvZ2xp
-YmMvaXBrL2FybXY1dGUvcm9vdC1kZXZfNS4zNC45LXIwX2FybXY1dGUuaXBrCk5PVEU6IE5vdCBj
-cmVhdGluZyBlbXB0eSBhcmNoaXZlIGZvciByb290LWxvY2FsZS01LjM0LjktcjAKTk9URTogcGFj
-a2FnZSByb290LTUuMzQuOS1yMDogdGFzayBkb19wYWNrYWdlX3dyaXRlX2lwazogY29tcGxldGVk
-Ck5PVEU6IHBhY2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sgZG9fcGFja2FnZV93cml0ZTogc3Rh
-cnRlZApOT1RFOiBwYWNrYWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX3BhY2thZ2Vfd3JpdGU6
-IGNvbXBsZXRlZApOT1RFOiBwYWNrYWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX3BvcHVsYXRl
-X3N0YWdpbmc6IHN0YXJ0ZWQKTk9URTogcGFja2FnZSByb290LTUuMzQuOS1yMDogdGFzayBkb19w
-b3B1bGF0ZV9zdGFnaW5nOiBjb21wbGV0ZWQKTk9URTogcGFja2FnZSByb290LTUuMzQuOS1yMDog
-dGFzayBkb19xYV9zdGFnaW5nOiBzdGFydGVkCk5PVEU6IFFBIGNoZWNraW5nIHN0YWdpbmcKRVJS
-T1I6IFFBIGlzc3VlOiBsaWJtdWRmbGFwdGgubGEgZmFpbGVkIHNhbml0eSB0ZXN0IChyZWZlcmVu
-Y2UgdG8gd29ya2RpciBvciBpbnN0YWxsZWQpCkVSUk9SOiBRQSBpc3N1ZTogbGlic3RkYysrLmxh
-IGZhaWxlZCBzYW5pdHkgdGVzdCAocmVmZXJlbmNlIHRvIHdvcmtkaXIgb3IgaW5zdGFsbGVkKQpF
-UlJPUjogUUEgaXNzdWU6IGxpYm11ZGZsYXAubGEgZmFpbGVkIHNhbml0eSB0ZXN0IChyZWZlcmVu
-Y2UgdG8gd29ya2RpciBvciBpbnN0YWxsZWQpCkVSUk9SOiBRQSBpc3N1ZTogbGlic3VwYysrLmxh
-IGZhaWxlZCBzYW5pdHkgdGVzdCAocmVmZXJlbmNlIHRvIHdvcmtkaXIgb3IgaW5zdGFsbGVkKQpO
-T1RFOiBwYWNrYWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX3FhX3N0YWdpbmc6IGNvbXBsZXRl
-ZApOT1RFOiBwYWNrYWdlIHJvb3QtNS4zNC45LXIwOiB0YXNrIGRvX2J1aWxkOiBzdGFydGVkCk5P
-VEU6IHBhY2thZ2Ugcm9vdC01LjM0LjktcjA6IHRhc2sgZG9fYnVpbGQ6IGNvbXBsZXRlZApOT1RF
-OiBwYWNrYWdlIHJvb3QtNS4zNC45OiBjb21wbGV0ZWQK
-
---20cf3071d00a6509e204e1a46edc--
