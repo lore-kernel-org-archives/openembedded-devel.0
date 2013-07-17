@@ -1,36 +1,35 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
-	[209.85.219.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FECF6A5A5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B926B6AF13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2013 12:58:30 +0000 (UTC)
-Received: by mail-oa0-f45.google.com with SMTP id j1so2486427oag.32
+	Wed, 17 Jul 2013 15:17:26 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id p10so1929678pdj.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jul 2013 05:58:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=yRMgUKe47DS3FCgD2yr4BOE5qElJ92rdKVi1BmENxLk=;
-	b=FXUHrxTlR6IFGEJWpAmeKRjtbcYyv5tzvZwW2FbwFR/ZzeKsWt6m+V+JnDeH3GLC/z
-	SqnNC+BMXWcIComDO5oHRuT0ML50K6Dz1ZXsJGqjneBde3aAbThAMwOPyW6Jgm1dHzW6
-	mTuUmdxVBs2YcifH4gXpJDNUBiBFIXITOkxjgOXpPCo4i/FK0XPoiExnw+yMggNgWtGR
-	AjX4Rf639votr4d7jDT8RxhQkw2mzOZ5KFJS0DytTEOuf4ZLo+uJ8ETzTrOL+GrRQrJl
-	knrngi1KsD2kwDQ8r8dgSyxGWcJ8+weR0pyDS9EGKTbwVotNchtjflZ/0TYkwDgDBFaM
-	C/nQ==
-X-Received: by 10.182.61.46 with SMTP id m14mr2383764obr.58.1374065910349;
-	Wed, 17 Jul 2013 05:58:30 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.126.144 with HTTP; Wed, 17 Jul 2013 05:58:09 -0700 (PDT)
-In-Reply-To: <CANS_96Zyg_YLS0zXpf8vuHHSDcWMFwPzRMqSwRpzjBWSLvwBQw@mail.gmail.com>
-References: <CANS_96Zyg_YLS0zXpf8vuHHSDcWMFwPzRMqSwRpzjBWSLvwBQw@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Wed, 17 Jul 2013 14:58:09 +0200
-Message-ID: <CAP71WjzU1YPRfVjx3S4EuM0vRKWSvgRQr56bdEafFMPhA7gaeg@mail.gmail.com>
+	Wed, 17 Jul 2013 08:17:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=KqjWpFSQkqzTCUId0LsvcYRZUAqeFhRlEsAKeLBiFFQ=;
+	b=jRmpUy1m2PBkgrhTAD2P7LpVbjqLYWYmPqBsdSsW6tHckgwv1myVqm2qicMj8FKsys
+	FD1rEeViBlmoit5IAlmjc8JlCy8bYuQho4+gD3e3IoY3V+E7UMWRlc0Nr43aQgrkLh1T
+	vk4x1+TT/7yRbPetQIIP3bYLrq5JAuSfwkGqKNHkLYkaPbzzvHJbwz7Hv2aj1adgAXaB
+	mMd+iS8Aq9yTiQcd0CnwJ4TdDvks5Djzy32vwnLh/m1yo3wQwE7MqJuBU+g1WBvs6ugD
+	ZrlCJ4rRnfdp4NwySyqnKkp5bLbdolXLyqOvuXOFODPoDXjSdKaE3/Ilne3K94enyctB
+	AKWA==
+X-Received: by 10.66.144.104 with SMTP id sl8mr8570646pab.9.1374074247096;
+	Wed, 17 Jul 2013 08:17:27 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	zv11sm11102120pab.3.2013.07.17.08.17.25 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 17 Jul 2013 08:17:26 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkRAhjtNeP+jN1tqVdVk1CrpR+rsrMATyCpQioAk9TWVhnQ+JYICDihC3/yfbz31/FAQZp7
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Cross-Compilation of ROOT for ARM machine
+Date: Wed, 17 Jul 2013 08:17:15 -0700
+Message-Id: <1374074235-3571-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] proxy-libintl: Put .a in -dev package and allow empty main package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,52 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2013 12:58:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 17 Jul 2013 15:17:27 -0000
 
-On Tue, Jul 16, 2013 at 7:37 PM, Brian Kelly <bak2132@columbia.edu> wrote:
+This helps in staging the library when it is asked for
+via dependencies otherwise its missing in staging sysroot
+even though its built its stashed into -staticdev package
 
->
-> I am trying to compile the Root library (ver. 5.34.09) for an arm machine
-> (i.e. a gumstix verdex XL6P running the Angstrom linux distribution (a
-> computer-on-module)). I attempted native compilation but I kept getting an
-> internal error in the compiler program, which led to suspect that there was
-> not enough memory for the library to compile (this is most likely the case
-> since the library compiled fine on a debian arm emulation using qemu).
->
-> Now I am attempting to the bitbake software. I followed the instructions on
-> the website http://wiki.gumstix.org/index.php?title=Verdex_Git_Repositoryto
-> create a working bitbake environment and verdex image was created
-> successfully.
->
->
-> Now I am trying to create a recipe that will allow me to run Root.
-> Supposedly the libraries have been built successfully but the installation
-> on the gumstix fails (see attachment).
->
-> I have attached my work so far (my recipe, the terminal output from the
-> computer I am running bitbake on and the terminal output from my gumstix)
-> and, since I am quite inexperienced with bitbake, I would greatly
-> appreciate
-> any constructive feedback that will help me get the Root library working on
-> the gumstix.
->
-> Thank you very much in for any help that you may provide.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../proxy-libintl/proxy-libintl_20100902.bb        |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-hi. i am not sure exactly what you are trying to do here. but you seem to
-be using quite old instructions that relate to 'OE classic'. The wiki you
-mentioned hasn't got any update from more than 2 years.
+diff --git a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
+index 451a3c6..e1531dd 100644
+--- a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
++++ b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
+@@ -14,8 +14,10 @@ SRC_URI[md5sum] = "aef407c2b97ee829383aadd867c61d1e"
+ SRC_URI[sha256sum] = "291ac350cc5eb4a01b0d651ca99fae64cee8a1c06b2005277fab5a4356f9ae91"
+ 
+ S = "${WORKDIR}"
++PACKAGES = "${PN} ${PN}-dev"
+ FILES_${PN}-dev = "${includedir}/libintl.h ${libdir}/libintl.a"
+-
++INSANE_SKIP_${PN}-dev = "staticdev"
++ALLOW_EMPTY_${PN} = "1"
+ CFLAGS_append = " -fPIC -Wall -I ../../include ${@['-DSTUB_ONLY', ''][d.getVar('USE_NLS', 1) != 'no']}"
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+-- 
+1.7.9.5
 
-many changes have happened in OE, i suggest you start with
-http://openembedded.org/wiki/OpenEmbedded-Core
-
-you recipe as it is written wouldn't work with the OE-core, and guidelines
-to migrate recipes can be found here:
-http://openembedded.org/wiki/Migrating_metadata_to_OE-Core
-
-i am not familiar with gumtix, but you might check with that community if
-they release an OE  SDK you could use for cross compilation. or you can at
-least get more up to date information about how to add your recipe in their
-builds.
 
