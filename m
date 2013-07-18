@@ -1,29 +1,37 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EE8466AFF1
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D9D76AFF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2013 07:59:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r6I7x7SL017614
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 18 Jul 2013 00:59:08 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 18 Jul 2013 00:59:06 -0700
-Message-ID: <51E7A048.6010704@windriver.com>
-Date: Thu, 18 Jul 2013 15:59:04 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Thu, 18 Jul 2013 08:19:15 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w57so2665800wes.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Jul 2013 01:19:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=4vedSQF+/jfrvu7us8+Aaf/7uSwZ0T0E9dv2GxCDIwA=;
+	b=lBEn4c6djr43kqbYwfocKip2j6Bl3LSMLptE3cAl1fbzopJJjJ2e+PkXNHRD7Q1h0m
+	5f6UOWJ4x1V0hpq6eNZhNOWlo81YPBtsPg4I/zxA5vbwEHEpBS3ruIqq0APISOv7OWf7
+	d1GHwluxvaH3J1+cNuhzMZzux3cb/Ny5tfJs37IcekdcVw1FMn+sUg5u+0+aDgYsHrQh
+	2WZbqJ/UdBaBj5riYzirZkHqxhfi6mAXKmi3EItjcq5p4cRg1qgNmJkFdJfBtpzEMbPU
+	S5YTpn2qmoRxFYqpyVX3HZY0lKmZvIY/LPyB8ARvO9jvAezTKA55Q6emTday3kqQE4J1
+	DkTg==
+X-Received: by 10.194.133.106 with SMTP id pb10mr7533602wjb.62.1374135554633; 
+	Thu, 18 Jul 2013 01:19:14 -0700 (PDT)
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <1373979075-15576-1-git-send-email-rongqing.li@windriver.com>
-	<20130717184315.GA31259@windriver.com> <12162896.r64JGkun5K@helios>
-In-Reply-To: <12162896.r64JGkun5K@helios>
-Cc: openembedded-devel@lists.openembedded.org,
-	Joe MacDonald <Joe.MacDonald@windriver.com>
-Subject: Re: [meta-networking][PATCH v2] Upgrade vsftpd to 3.0.0
+Received: by 10.217.138.1 with HTTP; Thu, 18 Jul 2013 01:18:54 -0700 (PDT)
+In-Reply-To: <88701C38B5D07249817D428430999C9128CE412D@sestoex05.enea.se>
+References: <88701C38B5D07249817D428430999C9128CE412D@sestoex05.enea.se>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Thu, 18 Jul 2013 10:18:54 +0200
+Message-ID: <CAGiJk9fuk0-ynQQ=BpNvWfbd3wQW9sT3L-A0=NrKG9nnE8aiCg@mail.gmail.com>
+To: =?UTF-8?Q?David_Nystr=C3=B6m?= <David.Nystrom@enea.com>
+Cc: "paul.eggleton@linux.intel.com" <paul.eggleton@linux.intel.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] protobuf: add recipe from meta-virtualization and tweak
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,40 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jul 2013 07:59:08 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Jul 2013 08:19:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-
-
-On 07/18/2013 04:48 AM, Paul Eggleton wrote:
-> On Wednesday 17 July 2013 14:43:16 Joe MacDonald wrote:
->> This adds (unconditional) support for tcp-wrappers and makes it a
->> requirement for the upgraded vsftp.  Is this something we could make
->> conditional based on tcp-wrappers being present?  Or does anyone think
->> this is something worth doing?  tcp-wrappers is coming from oe-core and
->> I don't have any systems where the new requirement would be a problem,
->> but does anyone else have a system they'd want vsftp without
->> tcp-wrappers?
+2013/7/17 David Nystr=C3=B6m <David.Nystrom@enea.com>:
+> On Tuesday 16 July 2013 17:36:08 Samuel Stirtzel wrote:
+>> My assumption is, that the result would the same, and it is currently
+>> skipping tests for the cross compiled protobuf.
+>> Or does it archive anything else?
+[...]
 >
-> We've recently added tcp-wrappers to a number of recipes in OE-Core; at the
-> time there was a discussion about a possible follow-up to add a
-> DISTRO_FEATURES item to disable it system-wide. I guess whether or not it's
-> worth it depends on what the overhead of having it enabled is.
+> Sorry for the indentation issues, I'm on vacation, and did not bring my
+> equipment.
+>
+> Yes, I believe this was an ugly hack to skip/pass tests. A bit of a warni=
+ng
+> though, these recipes have been tested on x86-64 only afaik.
 >
 
-I think the overhead is little.
-I will enable it based on PACKAGECONFIG, as it has in oe-core.
+Hi,
+
+my tests case for this patch also works on ARM.
+So no objections from my side.
 
 
--Roy
-
-
-> Cheers,
-> Paul
->
-
--- 
-Best Reagrds,
-Roy | RongQing Li
+--
+Regards
+Samuel
 
