@@ -1,25 +1,25 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D53186AF56
+	by mail.openembedded.org (Postfix) with ESMTP id 421806AA6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2013 06:29:31 +0000 (UTC)
+	Fri, 19 Jul 2013 09:56:10 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6J6TW0a016640
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6J9uB3J008938
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jul 2013 23:29:32 -0700 (PDT)
+	Fri, 19 Jul 2013 02:56:11 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 18 Jul 2013 23:29:32 -0700
+	14.2.342.3; Fri, 19 Jul 2013 02:56:10 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Jul 2013 14:29:31 +0800
-Message-ID: <1374215371-23406-1-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 19 Jul 2013 17:56:09 +0800
+Message-ID: <1374227769-18100-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
 Cc: Joe.macdonald@windriver.com
-Subject: [meta-networking][PATCH] cyrus-sasl: several fixes
+Subject: [meta-networking][PATCH] bridge-utils: BackPort three patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,121 +33,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2013 06:29:32 -0000
+X-List-Received-Date: Fri, 19 Jul 2013 09:56:10 -0000
 Content-Type: text/plain
 
 From: "Roy.Li" <rongqing.li@windriver.com>
 
-1. Fix hardcoded libdir
-2. configure cyrus-sasl based on PACKAGECONFIG
-3. create user by inherit useradd
-4. add -fPIC to CFLAG to fix the below building failure:
-        ld: ../sasldb/.libs/libsasldb.a(db_berkeley.o): relocation R_X86_64_32S against
-        `.rodata' can not be used when making a shared object; recompile with -fPIC
-        ../sasldb/.libs/libsasldb.a(db_berkeley.o): could not read symbols: Bad value
-   The cause is that libsasldb.a is built twice since {.c.o: and .c.lo} co-exist, one
-   with -fPIC, other without -fPIC. if no -fPIC library follows behind, this error
-   will appear. so we enable -fPIC no matter whatever objects are built.
-5. The version of db in oe-core is 5.0
-
 Signed-off-by: Roy.Li <rongqing.li@windriver.com>
 ---
- .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |   31 ++++++++++++++++----
- .../cyrus-sasl/files/Fix-hardcoded-libdir.patch    |   25 ++++++++++++++++
- 2 files changed, 51 insertions(+), 5 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/files/Fix-hardcoded-libdir.patch
+ .../recipes-support/bridge-utils/bridge-utils.inc  |    6 +-
+ ...5-check-error-returns-from-write-to-sysfs.patch |   87 ++++++++++++++++++++
+ ...5-fix-error-message-for-incorrect-command.patch |   33 ++++++++
+ ...utils-1.5-fix-incorrect-command-in-manual.patch |   33 ++++++++
+ 4 files changed, 158 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch
+ create mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch
+ create mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-incorrect-command-in-manual.patch
 
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-index 4311540..d8cb3d9 100644
---- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-@@ -5,21 +5,39 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+index 271fc82..bd96c6a 100644
+--- a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+@@ -5,7 +5,11 @@ LICENSE = "GPLv2"
  
- SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
--	   file://avoid-to-call-AC_TRY_RUN.patch"
-+	   file://avoid-to-call-AC_TRY_RUN.patch \
-+	   file://Fix-hardcoded-libdir.patch" 
+ DEPENDS = "sysfsutils"
  
--inherit autotools pkgconfig
-+inherit autotools pkgconfig useradd
+-SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz \
++          file://bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch \
++          file://bridge-utils-1.5-fix-error-message-for-incorrect-command.patch \
++          file://bridge-utils-1.5-fix-incorrect-command-in-manual.patch \
++"
  
- EXTRA_OECONF += "--with-dblib=berkeley \
-                  --with-bdb-libdir=${STAGING_LIBDIR} \
-                  --with-bdb-incdir=${STAGING_INCDIR} \
--                 --without-pam --without-opie --without-des \
-+                 --with-bdb=db-5.3 \
-+                 --with-plugindir="${libdir}/sasl2/" \
-                  andrew_cv_runpath_switch=none"
+ inherit autotools
  
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= "ntlm \
-+        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
-+        ${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-+        "
- PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
-+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
-+PACKAGECONFIG[opie] = "--with-opie,--without-opie,opie,"
-+PACKAGECONFIG[des] = "--with-des,--without-des,,"
-+PACKAGECONFIG[ldap] = "--with-ldap=${STAGING_LIBDIR} --enable-ldapdb,--without-ldap --disable-ldapdb,openldap,"
-+PACKAGECONFIG[ntlm] = "--with-ntlm,--without-ntlm,,"
-+
-+CFLAGS += "-fPIC"
- 
- do_configure_prepend () {
-     rm -f acinclude.m4 config/libtool.m4
-+
-+    # make it be able to work with db 5.0 version
-+    local sed_files="sasldb/db_berkeley.c utils/dbconverter-2.c"
-+    for sed_file in $sed_files; do
-+        sed -i 's#DB_VERSION_MAJOR == 4.*#(&) || DB_VERSION_MAJOR == 5#' $sed_file
-+    done
- }
- 
- do_compile_prepend () {
-@@ -29,8 +47,11 @@ do_compile_prepend () {
-     cd ..
- }
- 
-+USERADD_PACKAGES = "${PN}-bin"
-+GROUPADD_PARAM_${PN}-bin = "--system mail"
-+USERADD_PARAM_${PN}-bin = "--system --home=/var/spool/mail -g mail cyrus"
-+
- pkg_postinst_${PN}-bin () {
--    grep cyrus /etc/passwd || adduser --disabled-password --home=/var/spool/mail --ingroup mail -g "Cyrus sasl" cyrus
-     echo "cyrus" | saslpasswd2 -p -c cyrus
-     chgrp mail /etc/sasldb2
- }
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/files/Fix-hardcoded-libdir.patch b/meta-networking/recipes-daemons/cyrus-sasl/files/Fix-hardcoded-libdir.patch
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch
 new file mode 100644
-index 0000000..3fa8431
+index 0000000..d00af9c
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/files/Fix-hardcoded-libdir.patch
-@@ -0,0 +1,25 @@
-+Fix hardcoded libdir.
-+
-+Upstream-Status: Pending 
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch
+@@ -0,0 +1,87 @@
++Upstream-status: BackPort [http://pkgs.fedoraproject.org/cgit/bridge-utils.git/diff/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch?id=b0d10717fd7cebf5d85eed3f941b409fa0384f08]
 +
 +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++
++From bb9970a9df95837e39d680021b1f73d231e85406 Mon Sep 17 00:00:00 2001
++From: Stephen Hemminger <shemminger@vyatta.com>
++Date: Tue, 3 May 2011 09:52:43 -0700
++Subject: [PATCH 3/3] Check error returns from write to sysfs
++
++Add helper function to check write to sysfs files.
++
++Signed-off-by: Petr Sabata <contyk@redhat.com>
 +---
-+ plugins/Makefile.am |    2 +-
++ libbridge/libbridge_devif.c |   37 +++++++++++++++++++++++--------------
++ 1 files changed, 23 insertions(+), 14 deletions(-)
++
++diff --git a/libbridge/libbridge_devif.c b/libbridge/libbridge_devif.c
++index aa8bc36..1e83925 100644
++--- a/libbridge/libbridge_devif.c
+++++ b/libbridge/libbridge_devif.c
++@@ -280,25 +280,38 @@ fallback:
++ 	return old_get_port_info(brname, port, info);
++ }
++ 
+++static int set_sysfs(const char *path, unsigned long value)
+++{
+++	int fd, ret = 0, cc;
+++	char buf[32];
+++
+++	fd = open(path, O_WRONLY);
+++	if (fd < 0)
+++		return -1;
+++
+++	cc = snprintf(buf, sizeof(buf), "%lu\n", value);
+++	if (write(fd, buf, cc) < 0)
+++		ret = -1;
+++	close(fd);
+++
+++	return ret;
+++}
+++
++ 
++ static int br_set(const char *bridge, const char *name,
++ 		  unsigned long value, unsigned long oldcode)
++ {
++ 	int ret;
++ 	char path[SYSFS_PATH_MAX];
++-	FILE *f;
++ 
++-	snprintf(path, SYSFS_PATH_MAX, SYSFS_CLASS_NET "%s/%s", bridge, name);
+++	snprintf(path, SYSFS_PATH_MAX, SYSFS_CLASS_NET "%s/bridge/%s",
+++		 bridge, name);
++ 
++-	f = fopen(path, "w");
++-	if (f) {
++-		ret = fprintf(f, "%ld\n", value);
++-		fclose(f);
++-	} else {
+++	if ((ret = set_sysfs(path, value)) < 0) {
++ 		/* fallback to old ioctl */
++ 		struct ifreq ifr;
++ 		unsigned long args[4] = { oldcode, value, 0, 0 };
++-		
+++
++ 		strncpy(ifr.ifr_name, bridge, IFNAMSIZ);
++ 		ifr.ifr_data = (char *) &args;
++ 		ret = ioctl(br_socket_fd, SIOCDEVPRIVATE, &ifr);
++@@ -348,14 +361,10 @@ static int port_set(const char *bridge, const char *ifname,
++ {
++ 	int ret;
++ 	char path[SYSFS_PATH_MAX];
++-	FILE *f;
++ 
++ 	snprintf(path, SYSFS_PATH_MAX, SYSFS_CLASS_NET "%s/brport/%s", ifname, name);
++-	f = fopen(path, "w");
++-	if (f) {
++-		ret = fprintf(f, "%ld\n", value);
++-		fclose(f);
++-	} else {
+++
+++	if ((ret = set_sysfs(path, value)) < 0) {
++ 		int index = get_portno(bridge, ifname);
++ 
++ 		if (index < 0)
++-- 
++1.7.5.2
++
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch
+new file mode 100644
+index 0000000..2d0494e
+--- /dev/null
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch
+@@ -0,0 +1,33 @@
++Upstream-status: BackPort [http://pkgs.fedoraproject.org/cgit/bridge-utils.git/diff/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch?id=b0d10717fd7cebf5d85eed3f941b409fa0384f08]
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++
++From c7ed0996ef58b497d3d30be802ab5ae6c37099b5 Mon Sep 17 00:00:00 2001
++From: Stephen Hemminger <shemminger@vyatta.com>
++Date: Tue, 3 May 2011 09:49:57 -0700
++Subject: [PATCH 2/3] Fix error message for incorrect command
++
++Debian bug 406907
++Error message was refering to incorrect command argument.
++
++Signed-off-by: Petr Sabata <contyk@redhat.com>
++---
++ brctl/brctl.c |    2 +-
 + 1 files changed, 1 insertions(+), 1 deletions(-)
 +
-+diff --git a/plugins/Makefile.am b/plugins/Makefile.am
-+index b00915f..25262a1 100644
-+--- a/plugins/Makefile.am
-++++ b/plugins/Makefile.am
-+@@ -62,7 +62,7 @@ plugindir = @plugindir@
-+ 
-+ common_sources = plugin_common.c plugin_common.h
-+ 
-+-sasldir = $(prefix)/lib/sasl2
-++sasldir = $(libdir)/sasl2
-+ sasl_LTLIBRARIES = @SASL_MECHS@
-+ EXTRA_LTLIBRARIES = libplain.la libanonymous.la libkerberos4.la libcrammd5.la \
-+ 	libgs2.la libgssapiv2.la libdigestmd5.la liblogin.la libsrp.la libotp.la \
++diff --git a/brctl/brctl.c b/brctl/brctl.c
++index 454b8dd..46ca352 100644
++--- a/brctl/brctl.c
+++++ b/brctl/brctl.c
++@@ -69,7 +69,7 @@ int main(int argc, char *const* argv)
++ 	argc -= optind;
++ 	argv += optind;
++ 	if ((cmd = command_lookup(*argv)) == NULL) {
++-		fprintf(stderr, "never heard of command [%s]\n", argv[1]);
+++		fprintf(stderr, "never heard of command [%s]\n", *argv);
++ 		goto help;
++ 	}
++ 	
 +-- 
-+1.7.4.1
++1.7.5.2
++
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-incorrect-command-in-manual.patch b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-incorrect-command-in-manual.patch
+new file mode 100644
+index 0000000..6f6d6d4
+--- /dev/null
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-incorrect-command-in-manual.patch
+@@ -0,0 +1,33 @@
++Upstream-status: BackPort [http://pkgs.fedoraproject.org/cgit/bridge-utils.git/diff/bridge-utils-1.5-fix-incorrect-command-in-manual.patch?id=b0d10717fd7cebf5d85eed3f941b409fa0384f08]
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++
++From 8ef7b77562b636efcbd8b759eb324d6c069200f2 Mon Sep 17 00:00:00 2001
++From: Stephen Hemminger <shemminger@vyatta.com>
++Date: Tue, 3 May 2011 09:48:40 -0700
++Subject: [PATCH 1/3] Fix incorrect command in manual
++
++Command is "setageing" not "setageingtime"; fix man page.
++Debian bug report.
++
++Signed-off-by: Petr Sabata <contyk@redhat.com>
++---
++ doc/brctl.8 |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/doc/brctl.8 b/doc/brctl.8
++index d904047..771f323 100644
++--- a/doc/brctl.8
+++++ b/doc/brctl.8
++@@ -89,7 +89,7 @@ data. Machines can move to other ports, network cards can be replaced
++ .B brctl showmacs <brname>
++ shows a list of learned MAC addresses for this bridge.
++ 
++-.B brctl setageingtime <brname> <time>
+++.B brctl setageing <brname> <time>
++ sets the ethernet (MAC) address ageing time, in seconds. After <time>
++ seconds of not having seen a frame coming from a certain address, the
++ bridge will time out (delete) that address from the Forwarding
++-- 
++1.7.5.2
 +
 -- 
 1.7.10.4
