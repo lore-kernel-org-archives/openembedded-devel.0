@@ -1,25 +1,31 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from bec-systems.com (u15414263.onlinehome-server.com
-	[74.208.70.121])
-	by mail.openembedded.org (Postfix) with ESMTP id F421D6B1E4;
-	Thu, 18 Jul 2013 19:35:33 +0000 (UTC)
-Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1UztuQ-0004iz-T5; Thu, 18 Jul 2013 15:30:47 -0400
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E2896B118
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Jul 2013 00:30:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6J0UewX019397
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Jul 2013 17:30:40 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 18 Jul 2013 17:30:39 -0700
+Message-ID: <51E888AE.4050201@windriver.com>
+Date: Fri, 19 Jul 2013 08:30:38 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Thu, 18 Jul 2013 19:35:13 GMT
-Message-Id: <1374176113116.1bc6757c@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-07-07 until 2013-07-14
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+References: <1373979075-15576-1-git-send-email-rongqing.li@windriver.com>
+	<20130717184315.GA31259@windriver.com>
+	<51E7A5D5.90403@windriver.com>
+	<20130718131752.GA7744@windriver.com>
+In-Reply-To: <20130718131752.GA7744@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH v2] Upgrade vsftpd to 3.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,547 +39,450 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jul 2013 19:35:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2013-07-07 until 2013-07-14.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Andreas Oberritter (4):
-=20=20xserver-xorg: extend packageconfig and dependencies
-=20=20cogl-1.0: put each library into its own package
-=20=20cogl-1.0: make building cogl-pango optional
-=20=20qt4-x11-free: fix post-processing of QtWebKit.pc
-
-Andrei Dinu (1):
-=20=20e2fsprogs: upgrade to 1.42.8
-
-Bernhard Guillon (1):
-=20=20populate_sdk_base.bbclass: allow $OECORE_NATIVE_SYSROOT in =
-sdk_env_script
-
-Bian Naimeng (1):
-=20=20package_rpm.bbclass: remove xx.spec before doing rpmbuild xx.src.rpm
-
-Bruce Ashfield (1):
-=20=20linux-yocto/3.4: update to v3.4.52
-
-Cristian Iorga (4):
-=20=20glib-2.0: upgrade to 2.36.3
-=20=20libogg: upgrade to 1.3.1
-=20=20xdg-utils: upgrade to 1.1.0-rc1
-=20=20dbus: upgrade to 1.6.10
-
-Darren Hart (1):
-=20=20alsa-state: Provide an empty asound.conf by default
-
-Emilia Ciobanu (1):
-=20=20distrodata.bbaclass: change in git and svn package reporting
-
-Gabriel Barbu (1):
-=20=20ethtool: add ptest
-
-Hongxu Jia (5):
-=20=20nspr: add native version
-=20=20packagegroup-core-lsb: add nss for LSB library check
-=20=20nss: add version 3.15.1
-=20=20nss: create checksum files for the nss libraries
-=20=20nss: fix incorrect shebang line of perl script
-
-Ionut Radu (8):
-=20=20libassuan: Updated from 2.1.0 to 2.1.1
-=20=20augeas: Update from 1.0.0 to 1.1.0
-=20=20libxvmc: Update from 1.0.7 to 1.0.8
-=20=20libxi: Update from 1.7.1 to 1.7.2
-=20=20libgpg-error: Updated from 1.11 to 1.12
-=20=20libxrender: Updated from 0.9.7 to 0.9.8
-=20=20libxv: Updated from 1.0.8 to 1.0.9
-=20=20ethtool: Updated from 3.9 to 3.10
-
-Jackie Huang (3):
-=20=20initscripts: overwrite default hostname.sh
-=20=20initscripts: add dmesg file to /var/log
-=20=20glib-2.0: add -march=3Di486 into CFLAGS automatically when needed.
-
-Jonathan Liu (2):
-=20=20qt4: add upstream QTBUG-31579 patch to fix polyline drawing regression
-=20=20boot-directdisk: allow specifying custom MBR disk signature
-
-Kang Kai (3):
-=20=20webkit: set COMPATIBLE_HOST for mips64
-=20=20packagegroup-core-lsb: set COMPATIBLE_HOST to mips64
-=20=20packagegroup-core-tools-profile: exclude systemtap and valgrind for =
-mips64
-
-Khem Raj (1):
-=20=20eglibc: Update 2.18 recipes to fix ppc/e500 failures
-
-Laurentiu Palcu (6):
-=20=20populate_sdk_base: fix bashism
-=20=20sysvinit: allow users in shutdown group to perform halt/reboot
-=20=20xuser-account: create separate recipe for xuser creation
-=20=20connman: remove xuser creation, RDEPEND on xuser-account
-=20=20xserver-nodm-init: remove xuser creation, RDEPEND on xuser-account
-=20=20shutdown-desktop: give entire path in Exec field
-
-Mark Hatle (1):
-=20=20qemu: QEMU fix libtool usage
-
-Martin Jansa (8):
-=20=20(lib)telepathy*: add missing dependency on libxslt-native
-=20=20gst-plugins-bad: inherit gsettings
-=20=20gst-plugins-base: add missing dependency on glib-2.0-native
-=20=20taglib: add missing dependency on zlib
-=20=20quota: inherit pkgconfig
-=20=20libpam: inherit pkgconfig
-=20=20systemtap: inherit pkgconfig
-=20=20eglibc-locale: add missing dependency on =
-virtual/${TARGET_PREFIX}binutils
-
-Mihaela Sendrea (1):
-=20=20libxml2: Add ptest
-
-Nathan Rossi (2):
-=20=20scripts/runqemu: Add support for 'qemuzynq' machine
-=20=20scripts/runqemu: Add support for 'qemumicroblaze' machine
-
-Paul Eggleton (1):
-=20=20cmake: fix configure error if system Qt installation is broken
-
-Radu Moisan (12):
-=20=20lib/oeqa/utils/qemurunner.py: class to handle qemu instance
-=20=20lib/oeqa/utils/decorators.py: decorators for test methods
-=20=20elfutils: Upgrade to v0.155
-=20=20rxvt-unicode: Upgrade to v9.18
-=20=20ed: Upgrade to v1.8
-=20=20libdmx: Upgrade to v1.1.3
-=20=20apr: Upgrade to v1.4.8
-=20=20apr-util: Upgrade to v1.5.2
-=20=20usbutils: Upgrade to v007
-=20=20iputils: Upgrade to v20121221
-=20=20diffutils: Upgrade to v3.3
-=20=20rxvt-unicode: Check existence of acinclude.m4
-
-Randy Witt (1):
-=20=20systemd: Don't enable systemd services when native.
-
-Robert Yang (3):
-=20=20package_rpm.bbclass: make DESCRIPTION support newline
-=20=20package_ipk.bbclass: make DESCRIPTION support newline
-=20=20package_deb.bbclass: make DESCRIPTION support newline
-
-Ross Burton (2):
-=20=20gtkdoc: set the default docdir to ${S}, not ${B}
-=20=20pango: drop unexplainable elfutils dependency
-
-Roy.Li (1):
-=20=20pango: remove pango-module-basic-x RRECOMMENDS
-
-Saul Wold (10):
-=20=20packagegroup-core-basic: remove libpam
-=20=20util-linux: Use PACKAGECONFIG to control pam and system config options
-=20=20man-pages: Update to 3.52
-=20=20cmake: Update to 2.8.11.2
-=20=20tzcode-native: Update to 2013d
-=20=20kconfig-frontends: Update to 3.10
-=20=20security_flags: Add addition recipes to the non pie list
-=20=20boost: backport glibc patch for new eglibc
-=20=20pciutils: Add kmod dependency
-=20=20ncurses: add xterm-256color to terminfo-base
-
-Sergey Matyukevich (1):
-=20=20powertop: fix update-alternatives link
-
-Stefan Stanacar (6):
-=20=20classes/testimage.bbclass: new class for image tests
-=20=20lib/oeqa/oetest.py: base module for all runtime unittests
-=20=20lib/oeqa/utils/sshcontrol.py: helper module for running remote =
-commands
-=20=20lib/oeqa/utils/oeqemuconsole.py: handle qemu serial console connection
-=20=20lib/oeqa/runtime: image sanity tests
-=20=20lib/oeqa/runtime: add gcc test
-
-Ting Liu (1):
-=20=20qemu: use PACKAGECONFIG to address libaio/attr/libcap dependencies
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Andrea Adami (1):
-=20=20initramfs-kexecboot-image: remove obsolete IMAGE_ vars
-
-Andreas M=C3=BCller (2):
-=20=20abiword: remove abiword.inc - it is of no use
-=20=20asio: fix runtime dependencies for images with dev-pkgs in =
-IMAGE_FEATURES
-
-Eric BENARD (1):
-=20=20hexedit: new recipe
-
-Jonathan Liu (9):
-=20=20openldap: remove empty /var/run directory
-=20=20networkmanager: remove /var/run from package
-=20=20cherokee: remove empty /var/run directory
-=20=20collectd: remove empty /var/run directory
-=20=20gdm: remove /var/run from package
-=20=20samba: remove /var/lock and /var/run from package
-=20=20hiawatha: remove empty /var/run directory
-=20=20qt-creator: add new recipe for version 2.7.2
-=20=20nostromo: fix installed but not shipped /run and /run/nostromo =
-warnings
-
-Khem Raj (1):
-=20=20uhd: Fix compile errors
-
-Martin Jansa (23):
-=20=20f2fs-tools: add util-linux dependency
-=20=20ruby: add missing dependency on ruby-native
-=20=20xorg-sgml-doctools: add missing dependency on util-macros
-=20=20cpufrequtils: inherit gettext
-=20=20cryptsetup: add missing dependency on libgcrypt
-=20=20gsoap: add missing dependency on zlib
-=20=20libspatialite: add missing dependency on sqlite3
-=20=20wbxml2: add missing dependency on expat
-=20=20fbida: define -I when checking jpeg version
-=20=20iso-codes: add missing dependency on gettext-native
-=20=20libetpan: explicitly disable sasl support
-=20=20llvm: Consolidate .inc files
-=20=20llvm2: don't install llvm-config to bindir
-=20=20llvm: use newer class-native overrides instead of virtclass
-=20=20llvm: split packages a bit more
-=20=20llvm3.3: Add zlib dependency and explicitly enable it
-=20=20mysql5: prevent using bundled zlib at all costs
-=20=20gypsy: add dependency on libxslt-native
-=20=20portaudio: inherit pkgconfig
-=20=20media-ctl: inherit pkgconfig
-=20=20rsyslog: inherit pkgconfig
-=20=20portaudio: explicitly disable oss, add PACKAGECONFIG for alsa and jack
-=20=20llvm3.3: Add zlib dependency and explicitly enable it
-
-Noor (1):
-=20=20gvfs: Handle samba dependency based on GPLv3 license.
-
-Otavio Salvador (1):
-=20=20lmbench: remove /run/lmbench from package
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Denys Dmytriyenko (23):
-=20=20qt4-embedded/qt4-tools: update recipes and bbappends to the latest =
-version
-=20=20gdb-canadian-cross: remove overlayed recipe, as python fix is upstream
-=20=20openssl: update bbappend to the latest version
-=20=20openssh: update bbappend to the latest version
-=20=20php: update bbappend to the latest version
-=20=20freetype: update bbappend to the latest version
-=20=20gnutls: update bbappend to the latest version
-=20=20bash: remove overlayed recipe, as the fix is upstream now
-=20=20curl: update bbappend to the latest version
-=20=20pulseaudio: update bbappend to the latest version
-=20=20libav: update bbappend to the latest version
-=20=20libav: remove local tweak due to vpx being broken for hardfp
-=20=20tiff: update bbappend to the latest version
-=20=20dbus: update bbappend to the latest version
-=20=20bluez: update bbappend to the latest version
-=20=20kernel.bbclass: remove locally, as fixes are now upstream
-=20=20tisdk-image: fix RDEPENDS being package-specific
-=20=20external-arago-toolchain: move SUPPORTED file into pkg-specific path
-=20=20ti-wifi-utils: fix RDEPENDS being package-specific
-=20=20packagegroup-arago-tisdk-test-addons: remove unneeded ALLOW_EMPTY
-=20=20packagegroup-{connectivity,matrix}: remove TI/ECS specific WiFi/BT =
-pieces th
-=20=20arago-prefs: update new versions and add providers
-=20=20arago.conf: workaround curl breakage with -D and bump distro version
-
-Franklin S. Cooper Jr (6):
-=20=20u-boot-am33x: Update to latest u-boot versoin for 3.2 kernel
-=20=20linux-am335x-psp: Update to latest 3.2 release
-=20=20arago-source-ipk: Enable sourceipk for oprofile-example
-=20=20ti-tisdk-makefile: Add oprofile-example to SDK top level Makefile
-=20=20packagegroup-arago-tisdk-addons-sdk-host: Add oprofile-example =
-sources to SD
-=20=20packagegroup-arago-tisdk-addons: Only include parted utility for =
-omap-a15
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-Koen Kooi (7):
-=20=20linux-mainline 3.8: import GSoC ADC work, add PPS-gpio support and =
-import so
-=20=20contrib: bone-flash-tool: try harder to get eMMC controller to flush =
-its cac
-=20=20linux-mainline 3.8: fix build failure
-=20=20linux-mainline 3.8: add leds-pwm and bacon cape support
-=20=20contrib: bone-flash-tool: mount vfat async again
-=20=20contrib: bone-flash-tool: switch to new date mode for emmc-prepare =
-and fix v
-=20=20linux-mainline 3.8: add PRU rpmsg support and fix IIO mappings
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Fabio Estevam (1):
-=20=20linux-imx (3.0.35): Update to the latest commit of 4.0.0 branch
-
-Otavio Salvador (9):
-=20=20linux-imx (3.0.35): Sync i.MX6 defconfig files
-=20=20linux-imx (3.0.35): Enable tracing support so lttng's modules are =
-build
-=20=20linux-imx (2.6.35.3): Sync i.MX5 and i.MX28 defconfig files
-=20=20linux-imx (2.6.35.3): Enable tracing support so lttng's modules are =
-build
-=20=20linux-imx (2.6.35.3): Update GIT revision to a0de0f9
-=20=20linux-imx (3.0.35): Update git revision to 08814d9
-=20=20u-boot-fslc: Update to 2013.07-rc2 release
-=20=20imx6dlsabresd: Use U-Boot 2013.07
-=20=20linux-imx (3.0.35): Remove referenced patch kept by mistake
-
-Rogerio Nunes (3):
-=20=20gst-plugins-gl: Upgrade to IMX_MMCODEC_3.0.35_4.0.0
-=20=20gst-plugins-gl: Enforce glib2 deprecated API support
-=20=20gst-plugins-gl: Package arch must match machine arch for i.MX6
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Erik Bot=C3=B6 (1):
-=20=20linux-boundary: Updated SRCREV to pull latest changes.
-
-John Weber (1):
-=20=20linux-wandboard: Add support for non-Android kernel
-
-Otavio Salvador (2):
-=20=20broadcom-nvram-config: Add wandboard-quad as compatible machine
-=20=20wandboard-quad: Add Wandboard Quad support
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-Chunrong Guo (1):
-=20=20u-boot: append sdk version into uboot version
-
-Ting Liu (2):
-=20=20change layout to follow oe-core guidelines of recipes
-=20=20hypervisor: fix sizeof-pointer-memaccess error
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-Andrea Adami (2):
-=20=20linux-yocto_3.8: use 'require' instead of 'include' for compliance
-=20=20linux-yocto-tiny-kexecboot_3.8: use 'require' instead of 'include' =
-for compl
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-Enric Balletbo i Serra (2):
-=20=20linux_git: igep00x0: Switch to use device tree based kernel.
-=20=20u-boot_git: Latest mainline u-boot code.
-
-Enrico Butera (1):
-=20=20Merge pull request #16 from eballetbo/update-dev-packages
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Laurentiu Palcu (2):
-=20=20libva: upgrade to 1.2.1
-=20=20libva-intel-driver: upgrade to 1.2.0
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Andrei Gherzan (2):
-=20=20busybox: Sync recipe's version with upstream
-=20=20qt4: Sync recipe's version with upstream
-
-Florin Sarbu (4):
-=20=20packagegroup-specific-component-p2: Add common-api-c++ and     =
-common-api-c+
-=20=20layer-management: Update to version 1_0_1
-=20=20vexpressa9.conf: Add PREFERRED_VERSION_linux-yocto to be 3.8
-=20=20Update kernel bbappend for version 3.8
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-Eric BENARD (1):
-=20=20qtbase-native-5.0.2: fix compilation on Fedora 19
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Franklin S. Cooper Jr (2):
-=20=20u-boot-am33x: Update am335x to use latest u-boot for 3.2 kernel
-=20=20u-boot: Add memory alignment fix for armv7 for am37x and am3517
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Anatolii Sakhnik (1):
-=20=20webos-image: libpbnjson=3D14
-
-Eric Blade (1):
-=20=20webos-image: luna-init=3Dv2.0.1,3
-
-Gayathri Srinivasan (1):
-=20=20webos-image: nodejs-module-webos-pmlog=3D14
-
-Maksym Shevchenko (1):
-=20=20Assign Copyright to LG Electronics, Inc.
-
-Martin Jansa (6):
-=20=20alsa-plugins: Disable a52 plugin
-=20=20luna-sysservice: Add missing dependency on libxml2 and sqlite3
-=20=20xkeyboard-config: Remove xkbcomp from RDEPENDS
-=20=20boost: Remove .bbappend, resolved in oe-core
-=20=20luna-sysmgr-common: Add dependency on binutils-cross
-=20=20webos-recipe-blacklist: Blacklist more upstream recipes
-
-Roger Stringer (1):
-=20=20webos-image: smartkey-hun=3D6
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-Nathan Rossi (8):
-=20=20site/microblaze-common: Fix glib format configure value
-=20=20binutils: Added MicroBlaze specific patches
-=20=20gcc: Added MicroBlaze specific patches
-=20=20linux-xlnx: Change 3.8 kernel to use .scc for patches
-=20=20linux-xlnx: Resolve Packaging QA error
-=20=20gcc: Add patch to resolve MicroBlaze -mhard-float issue
-=20=20qemumicroblaze: Update TUNE_FEATURES
-=20=20Merge MicroBlaze Toolchain Enablement.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Bruce Ashfield (1):
-=20=20meta-yocto-bsp: update reference board SRCREVs
-
-Emilia Ciobanu (1):
-=20=20package_regex.inc: Changes in regexes
-
-Tom Zanussi (1):
-=20=20yocto-kernel: make BBLAYERS parsing more robust
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-
+X-List-Received-Date: Fri, 19 Jul 2013 00:30:40 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+
+On 07/18/2013 09:17 PM, Joe MacDonald wrote:
+> [Re: [meta-networking][PATCH v2] Upgrade vsftpd to 3.0.0] On 13.07.18 (Thu 16:22) Rongqing Li wrote:
+>
+>>
+>>
+>> On 07/18/2013 02:43 AM, Joe MacDonald wrote:
+>>> Hi Roy,
+>>>
+>>> I merged this into my tree yesterday and on review it turns out I did
+>>> have a question for you (and for anyone else on the list with an
+>>> opinion) and a bit of feedback.
+>>>
+>>> This adds (unconditional) support for tcp-wrappers and makes it a
+>>> requirement for the upgraded vsftp.  Is this something we could make
+>>> conditional based on tcp-wrappers being present?  Or does anyone think
+>>> this is something worth doing?  tcp-wrappers is coming from oe-core and
+>>> I don't have any systems where the new requirement would be a problem,
+>>> but does anyone else have a system they'd want vsftp without
+>>> tcp-wrappers?
+>>>
+>>> A couple of other things below ...
+>>>
+>>> [[meta-networking][PATCH v2] Upgrade vsftpd to 3.0.0] On 13.07.16 (Tue 20:51) rongqing.li@windriver.com wrote:
+>>>
+>>>> From: "Roy.Li" <rongqing.li@windriver.com>
+>>>>
+>>>> Upgrade vsftpd to 3.0.0 with below modification:
+>>>> 1. more strict access limitation, like: do not allow anonymous access
+>>>> 2. use vsftpd.ftpusers and vsftpd.user_list to confine user access
+>>>> 3. enable pam if DISTRO_FEATURE includes pam
+>>>> 4. enable tcp-wrapper
+>>>> 5. install vsftpd.conf with 0600 permission, not 0755
+>>>>
+>>>> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+>>>> ---
+>>>>   .../recipes-daemons/vsftpd/files/vsftpd.conf       |   43 +++++++++++++++++---
+>>>>   .../recipes-daemons/vsftpd/files/vsftpd.ftpusers   |   15 +++++++
+>>>>   .../recipes-daemons/vsftpd/files/vsftpd.user_list  |   20 +++++++++
+>>>>   .../makefile-destdir.patch                         |    4 +-
+>>>>   .../makefile-libs.patch                            |    2 +-
+>>>>   .../makefile-strip.patch                           |    6 +--
+>>>>   .../{vsftpd-2.3.5 => vsftpd-3.0.0}/nopam.patch     |    0
+>>>>   .../vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch |   25 ++++++++++++
+>>>>   .../vsftpd/{vsftpd_2.3.5.bb => vsftpd_3.0.0.bb}    |   36 +++++++++++++---
+>>>>   9 files changed, 133 insertions(+), 18 deletions(-)
+>>>>   mode change 100755 => 100644 meta-networking/recipes-daemons/vsftpd/files/vsftpd.conf
+>>>>   create mode 100644 meta-networking/recipes-daemons/vsftpd/files/vsftpd.ftpusers
+>>>>   create mode 100644 meta-networking/recipes-daemons/vsftpd/files/vsftpd.user_list
+>>>>   rename meta-networking/recipes-daemons/vsftpd/{vsftpd-2.3.5 => vsftpd-3.0.0}/makefile-destdir.patch (95%)
+>>>>   rename meta-networking/recipes-daemons/vsftpd/{vsftpd-2.3.5 => vsftpd-3.0.0}/makefile-libs.patch (92%)
+>>>>   rename meta-networking/recipes-daemons/vsftpd/{vsftpd-2.3.5 => vsftpd-3.0.0}/makefile-strip.patch (68%)
+>>>>   rename meta-networking/recipes-daemons/vsftpd/{vsftpd-2.3.5 => vsftpd-3.0.0}/nopam.patch (100%)
+>>>>   create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch
+>>>>   rename meta-networking/recipes-daemons/vsftpd/{vsftpd_2.3.5.bb => vsftpd_3.0.0.bb} (48%)
+>>>>
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/vsftpd.conf b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.conf
+>>>> old mode 100755
+>>>> new mode 100644
+>>>> index 08f91e0..bb19294
+>>>> --- a/meta-networking/recipes-daemons/vsftpd/files/vsftpd.conf
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.conf
+>>>> @@ -12,17 +12,17 @@
+>>>>   listen=YES
+>>>>
+>>>>   # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+>>>> -anonymous_enable=YES
+>>>> +anonymous_enable=NO
+>>>>   #
+>>>>   # Uncomment this to allow local users to log in.
+>>>> -#local_enable=YES
+>>>> +local_enable=YES
+>>>>   #
+>>>>   # Uncomment this to enable any form of FTP write command.
+>>>>   write_enable=YES
+>>>>   #
+>>>>   # Default umask for local users is 077. You may wish to change this to 022,
+>>>>   # if your users expect that (022 is used by most other ftpd's)
+>>>> -#local_umask=022
+>>>> +local_umask=022
+>>>>   #
+>>>>   # Uncomment this to allow the anonymous FTP user to upload files. This only
+>>>>   # has an effect if the above global write enable is activated. Also, you will
+>>>> @@ -54,7 +54,7 @@ connect_from_port_20=YES
+>>>>   #xferlog_file=/var/log/vsftpd.log
+>>>>   #
+>>>>   # If you want, you can have your log file in standard ftpd xferlog format
+>>>> -#xferlog_std_format=YES
+>>>> +xferlog_std_format=YES
+>>>>   #
+>>>>   # You may change the default value for timing out an idle session.
+>>>>   #idle_session_timeout=600
+>>>> @@ -64,7 +64,7 @@ connect_from_port_20=YES
+>>>>   #
+>>>>   # It is recommended that you define on your system a unique user which the
+>>>>   # ftp server can use as a totally isolated and unprivileged user.
+>>>> -#nopriv_user=ftpsecure
+>>>> +#nopriv_user=ftp
+>>>>   #
+>>>>   # Enable this and the server will recognise asynchronous ABOR requests. Not
+>>>>   # recommended for security (the code is non-trivial). Not enabling it,
+>>>> @@ -105,4 +105,35 @@ connect_from_port_20=YES
+>>>>   # sites. However, some broken FTP clients such as "ncftp" and "mirror" assume
+>>>>   # the presence of the "-R" option, so there is a strong case for enabling it.
+>>>>   #ls_recurse_enable=YES
+>>>> -
+>>>> +#
+>>>> +# This string is the name of the PAM service vsftpd will use.
+>>>> +pam_service_name=vsftpd
+>>>
+>>> I haven't tried this, does it do the right thing when PAM is not present
+>>> on the system?  In particular, what's it do when nopam.patch is applied?
+>>> In that same vein:
+>>>
+>> Yes, it works well when no pam.
+>>
+>> It only tells vsftpd should find which files to apply pam library.
+>>
+>> like: /etc/pam.d/vsftpd
+>
+> Okay, I'm mainly interested to know if it short-circuits anything in the
+> configuration that would cause the non-PAM scenario to no longer allow
+> anyone to log in when the above configuration says "no anonymous / local
+> users allowed".  Sounds like not, so that's cool.
+>
+>>> ERROR: Command Error: exit status: 1  Output:
+>>> Applying patch nopam.patch
+>>> patching file builddefs.h
+>>> Hunk #1 FAILED at 2.
+>>> 1 out of 1 hunk FAILED -- rejects in file builddefs.h
+>>> Patch nopam.patch does not apply (enforce with -f)
+>>> ERROR: Function failed: patch_do_patch
+>>> ERROR: Logfile of failure stored in: /home/jjm/yocto/yocto-build/tmp/work/core2-poky-linux/vsftpd/3.0.0-r0/temp/log.do_patch.26623
+>>> ERROR: Task 1 (/home/jjm/yocto/meta-oe/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb, do_patch) failed with exit code '1'
+>>>
+>>> I had to refresh nopam.patch.  Can you send an updated version with a
+>>> sign-off on it?
+>>
+>>
+>> OK.
+>>
+>>>> +#
+>>>> +# This option is examined if userlist_enable is activated. If you set this
+>>>> +# setting to NO, then users will be denied login  unless  they are  explicitly
+>>>> +# listed  in the file specified by userlist_file.  When login is denied, the
+>>>> +# denial is issued before the user is asked for a password.
+>>>> +userlist_deny=YES
+>>>> +#
+>>>> +# If enabled, vsftpd will load a list of usernames, from the filename given by
+>>>> +# userlist_file.  If a user tries to log in using  a  name in  this  file,  they
+>>>> +# will be denied before they are asked for a password. This may be useful in
+>>>> +# preventing cleartext passwords being transmitted. See also userlist_deny.
+>>>> +userlist_enable=YES
+>>>
+>>> I've always disliked these options in vsftpd.  They are confusing and
+>>> lead to inconsistent configurations.  That said, the behaviour is
+>>> predictable right up until we factor in the (unused?) vsftp.ftpusers
+>>> file.  I think that was intended to be a whitelist and I think it's a
+>>> redhatism, but I really don't know.  Can you confirm (a) it's needed and
+>>> (b) it does something when we already have vsftp.user_list?  Or dump it
+>> >from the commit?  I'd really rather not install both unless both are
+>>> absolutely necessary.  The configuration you have with userlist_deny=YES
+>>> is okay, though what's the behaviour of userlist_deny=NO, have an empty
+>>> file and allow PAM logins?  That seems to be the safest default
+>>> configuration here, since you also are disabling anonymous logins
+>>> (something I think is a good plan).
+>>>
+>>> -J.
+>>>
+>>
+>>
+>> I think vsftpd.user_list has given a good comments.
+>
+> It does.  We're not looking to address how vsftpd implemented a solution
+> that may or may not be simpler than hosts.allow/hosts.deny, I'm just
+> saying that I'd like to see the default configuration as straightforward
+> as possible.
+>
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.user_list
+>>>> @@ -0,0 +1,20 @@
+>>>> +# vsftpd userlist
+>>>> +# If userlist_deny=NO, only allow users in this file
+>>>> +# If userlist_deny=YES (default), never allow users in this file, and
+>>>> +# do not even prompt for a password.
+>>>> +# Note that the default vsftpd pam config also checks /etc/vsftpd/ftpusers
+>>>> +# for users that are denied.
+>>
+>> They are not necessary, but I am keeping these configurations are same
+>> as Fedora Core.
+>
+> I've not logged into a FC machine in a very long time, but if the
+> comment above is to be taken at face value, then your install rule for
+> vsftpd.ftpusers is incorrect.  It installs the file into
+> /etc/vsftpd.ftpusers, not /etc/vsftpd/ftpusers.  I'd rather see ftpusers
+> not installed at all, or left empty, but I'll be okay with this approach
+> so long as the docs are accurate.
+>
+> -J.
+
+Ok, I will fix it.
+
+-Roy
+
+>
+>>
+>>
+>> -Roy
+>>
+>>
+>>>> +#
+>>>> +# If enabled,  vsftpd  will display directory listings with the time in your
+>>>> +# local time zone. The default is to display GMT. The times returned by the
+>>>> +# MDTM FTP command are also affected by this option.
+>>>> +use_localtime=YES
+>>>> +#
+>>>> +# If set to YES, local users will be (by default) placed in a chroot() jail in
+>>>> +# their home directory after login.  Warning: This  option has  security
+>>>> +# implications,  especially  if  the users have upload permission, or shell access.
+>>>> +# Only enable if you know what you are doing.  Note that these security implications
+>>>> +# are not vsftpd specific. They apply to all FTP daemons which offer to put
+>>>> +# local  users in chroot() jails.
+>>>> +chroot_local_user=YES
+>>>> +#
+>>>> +allow_writeable_chroot=YES
+>>>> +#
+>>>> +tcp_wrappers=YES
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/vsftpd.ftpusers b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.ftpusers
+>>>> new file mode 100644
+>>>> index 0000000..096142f
+>>>> --- /dev/null
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.ftpusers
+>>>> @@ -0,0 +1,15 @@
+>>>> +# Users that are not allowed to login via ftp
+>>>> +root
+>>>> +bin
+>>>> +daemon
+>>>> +adm
+>>>> +lp
+>>>> +sync
+>>>> +shutdown
+>>>> +halt
+>>>> +mail
+>>>> +news
+>>>> +uucp
+>>>> +operator
+>>>> +games
+>>>> +nobody
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/vsftpd.user_list b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.user_list
+>>>> new file mode 100644
+>>>> index 0000000..3e2760f
+>>>> --- /dev/null
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/files/vsftpd.user_list
+>>>> @@ -0,0 +1,20 @@
+>>>> +# vsftpd userlist
+>>>> +# If userlist_deny=NO, only allow users in this file
+>>>> +# If userlist_deny=YES (default), never allow users in this file, and
+>>>> +# do not even prompt for a password.
+>>>> +# Note that the default vsftpd pam config also checks /etc/vsftpd/ftpusers
+>>>> +# for users that are denied.
+>>>> +root
+>>>> +bin
+>>>> +daemon
+>>>> +adm
+>>>> +lp
+>>>> +sync
+>>>> +shutdown
+>>>> +halt
+>>>> +mail
+>>>> +news
+>>>> +uucp
+>>>> +operator
+>>>> +games
+>>>> +nobody
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-destdir.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-destdir.patch
+>>>> similarity index 95%
+>>>> rename from meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-destdir.patch
+>>>> rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-destdir.patch
+>>>> index ee37f26..1980d09 100644
+>>>> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-destdir.patch
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-destdir.patch
+>>>> @@ -7,8 +7,8 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>>>   diff --git a/Makefile b/Makefile
+>>>>   --- a/Makefile
+>>>>   +++ b/Makefile
+>>>> -@@ -24,21 +24,21 @@ vsftpd: $(OBJS)
+>>>> - 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS) $(LDFLAGS)
+>>>> +@@ -24,21 +24,21 @@
+>>>> + 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS)
+>>>>
+>>>>    install:
+>>>>   -	if [ -x /usr/local/sbin ]; then \
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-libs.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-libs.patch
+>>>> similarity index 92%
+>>>> rename from meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-libs.patch
+>>>> rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-libs.patch
+>>>> index 6a419db..9a10f72 100644
+>>>> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-libs.patch
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-libs.patch
+>>>> @@ -10,7 +10,7 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>>>   diff --git a/Makefile b/Makefile
+>>>>   --- a/Makefile
+>>>>   +++ b/Makefile
+>>>> -@@ -5,7 +5,7 @@ IFLAGS  = -idirafter dummyinc
+>>>> +@@ -5,7 +5,7 @@
+>>>>    #CFLAGS = -g
+>>>>    CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
+>>>>
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-strip.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-strip.patch
+>>>> similarity index 68%
+>>>> rename from meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-strip.patch
+>>>> rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-strip.patch
+>>>> index a2e0cd0..fd31600 100644
+>>>> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/makefile-strip.patch
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-strip.patch
+>>>> @@ -7,11 +7,11 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>>>   diff --git a/Makefile b/Makefile
+>>>>   --- a/Makefile
+>>>>   +++ b/Makefile
+>>>> -@@ -6,7 +6,6 @@ IFLAGS  = -idirafter dummyinc
+>>>> - CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
+>>>> +@@ -9,7 +9,6 @@ CFLAGS	=	-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 \
+>>>> + 	#-pedantic -Wconversion
+>>>>
+>>>>    LIBS	=	-lssl -lcrypto -lnsl -lresolv
+>>>>   -LINK	=	-Wl,-s
+>>>> + LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
+>>>>
+>>>>    OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
+>>>> - 		tunables.o ftpdataio.o secbuf.o ls.o \
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/nopam.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam.patch
+>>>> similarity index 100%
+>>>> rename from meta-networking/recipes-daemons/vsftpd/vsftpd-2.3.5/nopam.patch
+>>>> rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam.patch
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch
+>>>> new file mode 100644
+>>>> index 0000000..69745b3
+>>>> --- /dev/null
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch
+>>>> @@ -0,0 +1,25 @@
+>>>> +Enable tcp_wrapper.
+>>>> +
+>>>> +Upstream-Status: Inappropriate [configuration]
+>>>> +
+>>>> +Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+>>>> +---
+>>>> + builddefs.h |    2 +-
+>>>> + 1 files changed, 1 insertions(+), 1 deletions(-)
+>>>> +
+>>>> +diff --git a/builddefs.h b/builddefs.h
+>>>> +index e908352..0106d1a 100644
+>>>> +--- a/builddefs.h
+>>>> ++++ b/builddefs.h
+>>>> +@@ -1,7 +1,7 @@
+>>>> + #ifndef VSF_BUILDDEFS_H
+>>>> + #define VSF_BUILDDEFS_H
+>>>> +
+>>>> +-#undef VSF_BUILD_TCPWRAPPERS
+>>>> ++#define VSF_BUILD_TCPWRAPPERS
+>>>> + #define VSF_BUILD_PAM
+>>>> + #undef VSF_BUILD_SSL
+>>>> +
+>>>> +--
+>>>> +1.7.1
+>>>> +
+>>>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>>>> similarity index 48%
+>>>> rename from meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
+>>>> rename to meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>>>> index f146910..0ea1359 100644
+>>>> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
+>>>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>>>> @@ -4,18 +4,29 @@ SECTION = "network"
+>>>>   LICENSE = "GPLv2"
+>>>>   LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271"
+>>>>
+>>>> -DEPENDS = "libcap openssl"
+>>>> +DEPENDS = "libcap openssl tcp-wrappers"
+>>>>
+>>>>   SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
+>>>>              file://makefile-destdir.patch \
+>>>>              file://makefile-libs.patch \
+>>>>              file://makefile-strip.patch \
+>>>> -           file://nopam.patch \
+>>>>              file://init \
+>>>> -           file://vsftpd.conf"
+>>>> +           file://vsftpd.conf \
+>>>> +           file://vsftpd-tcp_wrappers-support.patch \
+>>>> +           file://vsftpd.user_list \
+>>>> +           file://vsftpd.ftpusers \
+>>>> +"
+>>>>
+>>>> -SRC_URI[md5sum] = "01398a5bef8e85b6cf2c213a4b011eca"
+>>>> -SRC_URI[sha256sum] = "d87ee2987df8f03e1dbe294905f7907b2798deb89c67ca965f6e2f60879e54f1"
+>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
+>>>> +                        file://COPYRIGHT;md5=04251b2eb0f298dae376d92454f6f72e \
+>>>> +                        file://LICENSE;md5=654df2042d44b8cac8a5654fc5be63eb"
+>>>> +SRC_URI[md5sum] = "ad9fa952558c2c5b0426ccaccff0f972"
+>>>> +SRC_URI[sha256sum] = "ef70205dcd0c7f03b008b9578fb44c0cbe31e66daab8cfafb9904747c17fc2a8"
+>>>> +
+>>>> +DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+>>>> +RDEPENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-listfile', '', d)}"
+>>>> +SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '', 'file://nopam.patch', d)}"
+>>>> +PAMLIB = "${@base_contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -lpam', '', d)}"
+>>>>
+>>>>   inherit update-rc.d useradd
+>>>>
+>>>> @@ -29,15 +40,28 @@ do_configure() {
+>>>>       mv tunables.c.new tunables.c
+>>>>   }
+>>>>
+>>>> +do_compile() {
+>>>> +   oe_runmake "LIBS=-L${STAGING_LIBDIR} -lcrypt -lcap ${PAMLIB} -lwrap"
+>>>> +}
+>>>> +
+>>>>   do_install() {
+>>>>       install -d ${D}${sbindir}
+>>>>       install -d ${D}${mandir}/man8
+>>>>       install -d ${D}${mandir}/man5
+>>>>       oe_runmake 'DESTDIR=${D}' install
+>>>>       install -d ${D}${sysconfdir}
+>>>> -    install -m 0755 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
+>>>> +    install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
+>>>>       install -d ${D}${sysconfdir}/init.d/
+>>>>       install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
+>>>> +
+>>>> +    install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
+>>>> +    install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
+>>>> +    if ! test -z ${PAMLIB} ; then
+>>>> +        install -d ${D}${sysconfdir}/pam.d/
+>>>> +        cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
+>>>> +        sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
+>>>> +        sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
+>>>> +    fi
+>>>>   }
+>>>>
+>>>>   INITSCRIPT_PACKAGES = "${PN}"
+>>
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
