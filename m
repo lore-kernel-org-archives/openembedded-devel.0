@@ -1,26 +1,22 @@
-Return-Path: <stefan@datenfreihafen.org>
-Received: from sirius.lasnet.de (sirius.lasnet.de [78.47.116.19])
-	by mail.openembedded.org (Postfix) with ESMTP id A65F96AF69
+Return-Path: <eric@eukrea.com>
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E83E601AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jul 2013 20:47:25 +0000 (UTC)
-Received: from host-78-149-134-157.as13285.net ([78.149.134.157]
-	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.69 #1)
-	id 1V0HaE-0005GG-EB by authid <stefan@sostec.de> with srv_auth_cram_md5;
-	Fri, 19 Jul 2013 22:47:24 +0200
-Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.80)
-	(envelope-from <stefan@novatech.datenfreihafen.org>)
-	id 1V0HaD-0000hS-SF; Fri, 19 Jul 2013 21:47:22 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Jul 2013 21:47:11 +0100
-Message-Id: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
-X-Mailer: git-send-email 1.8.3.2
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Subject: [PATCH] qtbase-native_5.0.2: Also use gcc 4.8 fix for the native package.
+	Sat, 20 Jul 2013 13:49:31 +0000 (UTC)
+Received: from e6520eb (unknown [90.84.144.98]) (Authenticated sender: eukrea)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 18BCBA6271;
+	Sat, 20 Jul 2013 15:49:25 +0200 (CEST)
+Date: Sat, 20 Jul 2013 15:49:23 +0200
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: stefan@datenfreihafen.org
+Message-ID: <20130720154923.7f559faf@e6520eb>
+In-Reply-To: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
+References: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] qtbase-native_5.0.2: Also use gcc 4.8 fix for the native package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2013 20:47:26 -0000
+X-List-Received-Date: Sat, 20 Jul 2013 13:49:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-When running on a host with gcc 4.8 we run into a compile problem with stricter
-gcc. This was already fixed for the target packages so we only re-use the patch.
+Hi Stefan,
 
-Signed-off-by: Stefan Schmidt <stefan@datenfreihafen.org>
----
- recipes-qt/qt5/qtbase-native_5.0.2.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+Le Fri, 19 Jul 2013 21:47:11 +0100,
+Stefan Schmidt <stefan@datenfreihafen.org> a =C3=A9crit :
 
-diff --git a/recipes-qt/qt5/qtbase-native_5.0.2.bb b/recipes-qt/qt5/qtbase-native_5.0.2.bb
-index 3df434e..c7b405a 100644
---- a/recipes-qt/qt5/qtbase-native_5.0.2.bb
-+++ b/recipes-qt/qt5/qtbase-native_5.0.2.bb
-@@ -1,7 +1,11 @@
- require qt5-${PV}.inc
- require ${PN}.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
-+
-+SRC_URI += " \
-+    file://0017-Rename-qAbs-Function-for-timeval.patch \
-+"
- 
- SRC_URI[md5sum] = "a4fec8ed03867c4ee4fe5a46001a11f0"
- SRC_URI[sha256sum] = "31851ee2f844c100554506a9a446d4b6abb5270bca799c2a683e5f937456a9c8"
--- 
-1.8.3.2
+> When running on a host with gcc 4.8 we run into a compile problem with st=
+ricter
+> gcc. This was already fixed for the target packages so we only re-use the=
+ patch.
+>=20
+that's already fixed :
+https://github.com/meta-qt5/meta-qt5/commit/75291e7614115dc89045fcf6650bbde=
+ad071da03
 
+Eric
 
