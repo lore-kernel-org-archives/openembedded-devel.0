@@ -1,22 +1,34 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E83E601AF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FD706A549
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2013 13:49:31 +0000 (UTC)
-Received: from e6520eb (unknown [90.84.144.98]) (Authenticated sender: eukrea)
-	by smtp3-g21.free.fr (Postfix) with ESMTPSA id 18BCBA6271;
-	Sat, 20 Jul 2013 15:49:25 +0200 (CEST)
-Date: Sat, 20 Jul 2013 15:49:23 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: stefan@datenfreihafen.org
-Message-ID: <20130720154923.7f559faf@e6520eb>
-In-Reply-To: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
-References: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] qtbase-native_5.0.2: Also use gcc 4.8 fix for the native package.
+	Sat, 20 Jul 2013 15:08:13 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id d10so2962736eaj.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Jul 2013 08:08:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=yZWSCkO/SySFSTZS4ny5ACGW8efFXer/sDsH6KKTuJA=;
+	b=XVhYPhTTLPzKB/9/DeZhPualQ4mCbDSsOyTOyVk6CoKNaNvbmoFuQm/PyO9woJLr9f
+	QXQ7sLw1P9paa4vOJK4j6WotvPJcsEjy8x5n0gtVPLy4pxkNixwON7U59mtNmZ2ULqxy
+	c6ge6HPUgVbBLPiuo9oaaPMZeo7eoOw14lvaJyNId4RSrpko+j8tj3y+47Uh6ZsDARXU
+	NeLp39WsWFt8gdAwtfvbMt4wUxxHiT/vTgplJfSnrtAdIVP+BlZBji5ypRXGWDkzkpJ4
+	7nSV2TWXkCHbvfoC0sexBYDjZt2vtu2aaoCeLOfia2wqYeMBR8ymJwPW1GP2Nm/5RfJm
+	Kaxg==
+X-Received: by 10.15.73.197 with SMTP id h45mr20160606eey.146.1374332893096;
+	Sat, 20 Jul 2013 08:08:13 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	p49sm35990294eeu.2.2013.07.20.08.08.12 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 20 Jul 2013 08:08:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 20 Jul 2013 17:08:31 +0200
+Message-Id: <cover.1374332866.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH 00/11] autodetected dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,23 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2013 13:49:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 20 Jul 2013 15:08:13 -0000
 
-Hi Stefan,
+The following changes since commit 41748a4afc494b714315ba529f138214f80d41b9:
 
-Le Fri, 19 Jul 2013 21:47:11 +0100,
-Stefan Schmidt <stefan@datenfreihafen.org> a =C3=A9crit :
+  licences: Add iozone3, SMAIL_GPL (2013-07-20 17:03:29 +0200)
 
-> When running on a host with gcc 4.8 we run into a compile problem with st=
-ricter
-> gcc. This was already fixed for the target packages so we only re-use the=
- patch.
->=20
-that's already fixed :
-https://github.com/meta-qt5/meta-qt5/commit/75291e7614115dc89045fcf6650bbde=
-ad071da03
+are available in the git repository at:
 
-Eric
+  git://git.openembedded.org/meta-openembedded-contrib jansa/deps
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/deps
+
+Martin Jansa (11):
+  lcdproc5: add PACKAGECONFIG for libftdi, libusb
+  openldap: convert to PACKAGECONFIGs, explicitly disable openssl
+  samba: use more specific LICENSE
+  samba: add dependency on zlib popt, PACKAGECONFIG for pam
+  libgphoto2: add configure option for gd and add PACKAGECONFIG
+  jack: add dependency on libsaplerate0 and readline
+  glog: add dependency on libunwind
+  lvm2: add PACKAGECONFIG for readline
+  libunwind: add PACKAGECONFIG for lzma
+  ntp: add PACKAGECONFIG for libcap and readline
+  vim: add PACKAGECONFIG for acl
+
+ meta-networking/recipes-support/ntp/ntp.inc        |   2 +
+ meta-oe/recipes-connectivity/samba/samba.inc       |   9 +-
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |   8 +-
+ .../libgphoto2-2.4.11/allow.to.disable.gd.patch    |  33 +++++
+ .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |   6 +-
+ meta-oe/recipes-multimedia/jack/jack_0.121.0.bb    |   3 +-
+ meta-oe/recipes-support/glog/glog.inc              |   2 +
+ meta-oe/recipes-support/libunwind/libunwind.inc    |   4 +
+ meta-oe/recipes-support/lvm2/lvm2.inc              |   3 +
+ .../recipes-support/openldap/openldap_2.4.23.bb    | 136 +++++++--------------
+ meta-oe/recipes-support/vim/vim.inc                |   1 +
+ 11 files changed, 107 insertions(+), 100 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.4.11/allow.to.disable.gd.patch
+
+-- 
+1.8.3.2
+
 
