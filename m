@@ -1,34 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FD706A549
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 6932A6B255
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2013 15:08:13 +0000 (UTC)
-Received: by mail-ea0-f182.google.com with SMTP id d10so2962736eaj.13
+	Sat, 20 Jul 2013 15:08:15 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so2943962eek.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2013 08:08:13 -0700 (PDT)
+	Sat, 20 Jul 2013 08:08:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=yZWSCkO/SySFSTZS4ny5ACGW8efFXer/sDsH6KKTuJA=;
-	b=XVhYPhTTLPzKB/9/DeZhPualQ4mCbDSsOyTOyVk6CoKNaNvbmoFuQm/PyO9woJLr9f
-	QXQ7sLw1P9paa4vOJK4j6WotvPJcsEjy8x5n0gtVPLy4pxkNixwON7U59mtNmZ2ULqxy
-	c6ge6HPUgVbBLPiuo9oaaPMZeo7eoOw14lvaJyNId4RSrpko+j8tj3y+47Uh6ZsDARXU
-	NeLp39WsWFt8gdAwtfvbMt4wUxxHiT/vTgplJfSnrtAdIVP+BlZBji5ypRXGWDkzkpJ4
-	7nSV2TWXkCHbvfoC0sexBYDjZt2vtu2aaoCeLOfia2wqYeMBR8ymJwPW1GP2Nm/5RfJm
-	Kaxg==
-X-Received: by 10.15.73.197 with SMTP id h45mr20160606eey.146.1374332893096;
-	Sat, 20 Jul 2013 08:08:13 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	bh=OLKGm0vB6M4RqmshoO5dCwavIvpY9NTjhZPvBVAFlec=;
+	b=Uv5Y8Xb65kzE99qxpEGmAGoDQUcse1S08HQbLTYn6WmgVpN/bjNwAx2SrwZbTxpXVd
+	yUg33QEZ8mITvpjX+1w5uquY/Je5++DEXXaAoe4+H/STOlnoCStwdBu3dUvtKOdawyUH
+	6A6/Jk1aiVLZDvtr2rxqQ0hfbKyjovoQYiPZM3FB9/Zxi2P9/SYuK7s6v0RZeA/RxOiS
+	5w7BQ08qwlc9WBR0Gb0WxgUFbhwCsTc5QaO1yjkPkUWPX+okxzBVNroch9AwhCeHHBTU
+	5mRyITn9sAVdsYT9PKShMA+TNea/F6BRlcsKAAcjtIb7NSIh6J89VHbuqVL3xX/DvGtS
+	AfdA==
+X-Received: by 10.15.95.4 with SMTP id bc4mr20275758eeb.40.1374332895695;
+	Sat, 20 Jul 2013 08:08:15 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	p49sm35990294eeu.2.2013.07.20.08.08.12 for <multiple recipients>
+	w43sm35946484eez.6.2013.07.20.08.08.14 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 20 Jul 2013 08:08:12 -0700 (PDT)
+	Sat, 20 Jul 2013 08:08:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Jul 2013 17:08:31 +0200
-Message-Id: <cover.1374332866.git.Martin.Jansa@gmail.com>
+Date: Sat, 20 Jul 2013 17:08:24 +0200
+Message-Id: <e15f15a2dcc1291e2cfb749c92f1a5918ae0920a.1374332866.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH 00/11] autodetected dependencies
+In-Reply-To: <cover.1374332866.git.Martin.Jansa@gmail.com>
+References: <cover.1374332866.git.Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 01/11] lcdproc5: add PACKAGECONFIG for libftdi, libusb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,44 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2013 15:08:13 -0000
+X-List-Received-Date: Sat, 20 Jul 2013 15:08:15 -0000
 
-The following changes since commit 41748a4afc494b714315ba529f138214f80d41b9:
+* drivers for lis, ula200 and i2500vfd weren't deterministicly enabled
 
-  licences: Add iozone3, SMAIL_GPL (2013-07-20 17:03:29 +0200)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib jansa/deps
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/deps
-
-Martin Jansa (11):
-  lcdproc5: add PACKAGECONFIG for libftdi, libusb
-  openldap: convert to PACKAGECONFIGs, explicitly disable openssl
-  samba: use more specific LICENSE
-  samba: add dependency on zlib popt, PACKAGECONFIG for pam
-  libgphoto2: add configure option for gd and add PACKAGECONFIG
-  jack: add dependency on libsaplerate0 and readline
-  glog: add dependency on libunwind
-  lvm2: add PACKAGECONFIG for readline
-  libunwind: add PACKAGECONFIG for lzma
-  ntp: add PACKAGECONFIG for libcap and readline
-  vim: add PACKAGECONFIG for acl
-
- meta-networking/recipes-support/ntp/ntp.inc        |   2 +
- meta-oe/recipes-connectivity/samba/samba.inc       |   9 +-
- meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |   8 +-
- .../libgphoto2-2.4.11/allow.to.disable.gd.patch    |  33 +++++
- .../recipes-graphics/gphoto2/libgphoto2_2.4.11.bb  |   6 +-
- meta-oe/recipes-multimedia/jack/jack_0.121.0.bb    |   3 +-
- meta-oe/recipes-support/glog/glog.inc              |   2 +
- meta-oe/recipes-support/libunwind/libunwind.inc    |   4 +
- meta-oe/recipes-support/lvm2/lvm2.inc              |   3 +
- .../recipes-support/openldap/openldap_2.4.23.bb    | 136 +++++++--------------
- meta-oe/recipes-support/vim/vim.inc                |   1 +
- 11 files changed, 107 insertions(+), 100 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.4.11/allow.to.disable.gd.patch
-
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+index f5a1f3c..d1a45ca 100644
+--- a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
+@@ -4,7 +4,7 @@ SUMMARY = "Drivers for character-based LCD displays"
+ HOMEPAGE = "http://lcdproc.org"
+ SECTION = "utils"
+ LICENSE = "GPLv2+"
+-DEPENDS = "virtual/libusb0 ncurses"
++DEPENDS = "ncurses"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
+                     file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
+@@ -16,7 +16,11 @@ inherit autotools update-rc.d
+ LCD_DRIVERS ?= "all"
+ LCD_DEFAULT_DRIVER ?= "curses"
+ 
+-EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS} --enable-libusb"
++PACKAGECONFIG ??= "usb"
++PACKAGECONFIG[usb] = "--enable-libusb,--disable-libusb,virtual/libusb0"
++PACKAGECONFIG[ftdi] = "--enable-libftdi,--disable-libftdi,libftdi"
++
++EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS}"
+ 
+ do_install () {
+     # binaries
 -- 
 1.8.3.2
 
