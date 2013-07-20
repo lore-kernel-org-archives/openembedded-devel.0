@@ -1,38 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 311566B33A
+Return-Path: <stefan@datenfreihafen.org>
+Received: from sirius.lasnet.de (sirius.lasnet.de [78.47.116.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 37BAD60FEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2013 15:08:30 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id l10so2949805eei.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jul 2013 08:08:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:in-reply-to:references;
-	bh=RYXq+6mqzJRoY7u8DugiMsCkK0kWwjGdnWd3Gwans2c=;
-	b=E3qGWdyw7MXE2JaVRn5nIARdk1sFQcrmoHdwSEu19STfYruozX+FEBL7TU065YhnFO
-	u3os4W9XASjGmrOSGx5g1sN9NHOa0LaqXrAcDtOBykxQ6QeED2yFdUcnGD2W9EQa5adb
-	lKk0mVn7YfE0DXijvgI8awz1KJPLYqwoQKiv3fT9INZWtwAcA4oL6DetBFqm6tErYvMN
-	bgzZDiXnToqZb3JeKB52NAmRTRua8JUPZhq9FTp6pbzo81zfSvvOJYy2/iQswL2gG7Fr
-	LLMQdWjR4a2v9o12VMbr3fZ1FFrkeXKNle4LU89d+KAYGvduLR2SgUqWasVu1CyUqSeB
-	lbQw==
-X-Received: by 10.14.215.197 with SMTP id e45mr20489217eep.130.1374332910638; 
-	Sat, 20 Jul 2013 08:08:30 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	l42sm35862449eeo.14.2013.07.20.08.08.29 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 20 Jul 2013 08:08:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Jul 2013 17:08:34 +0200
-Message-Id: <7772add23c7ac5bb2ab1ceb18f3f0d858b4f44b9.1374332866.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <e15f15a2dcc1291e2cfb749c92f1a5918ae0920a.1374332866.git.Martin.Jansa@gmail.com>
-References: <e15f15a2dcc1291e2cfb749c92f1a5918ae0920a.1374332866.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1374332866.git.Martin.Jansa@gmail.com>
-References: <cover.1374332866.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/11] vim: add PACKAGECONFIG for acl
+	Sat, 20 Jul 2013 19:17:36 +0000 (UTC)
+Received: from host-78-149-134-157.as13285.net ([78.149.134.157]
+	helo=novatech.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.69 #1)
+	id 1V0cer-0004lX-F6 by authid <stefan@sostec.de> with srv_auth_cram_md5;
+	Sat, 20 Jul 2013 21:17:35 +0200
+Received: from stefan by novatech.datenfreihafen.org with local (Exim 4.80)
+	(envelope-from <stefan@novatech.datenfreihafen.org>)
+	id 1V0cer-0003Mc-AP; Sat, 20 Jul 2013 20:17:33 +0100
+Date: Sat, 20 Jul 2013 20:17:33 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Message-ID: <20130720191733.GA12568@novatech.datenfreihafen.org>
+References: <1374266831-2316-1-git-send-email-stefan@datenfreihafen.org>
+	<20130720154923.7f559faf@e6520eb>
+MIME-Version: 1.0
+In-Reply-To: <20130720154923.7f559faf@e6520eb>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] qtbase-native_5.0.2: Also use gcc 4.8 fix for the native package.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,28 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2013 15:08:30 -0000
+X-List-Received-Date: Sat, 20 Jul 2013 19:17:36 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-* it's autodetected from sysroot
+Hello.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/vim/vim.inc | 1 +
- 1 file changed, 1 insertion(+)
+On Sat, 2013-07-20 at 15:49, Eric Bénard wrote:
+> 
+> Le Fri, 19 Jul 2013 21:47:11 +0100,
+> Stefan Schmidt <stefan@datenfreihafen.org> a écrit :
+> 
+> > When running on a host with gcc 4.8 we run into a compile problem with stricter
+> > gcc. This was already fixed for the target packages so we only re-use the patch.
+> > 
+> that's already fixed :
+> https://github.com/meta-qt5/meta-qt5/commit/75291e7614115dc89045fcf6650bbdead071da03
 
-diff --git a/meta-oe/recipes-support/vim/vim.inc b/meta-oe/recipes-support/vim/vim.inc
-index 12e8c1e..d7336c2 100644
---- a/meta-oe/recipes-support/vim/vim.inc
-+++ b/meta-oe/recipes-support/vim/vim.inc
-@@ -32,6 +32,7 @@ do_configure () {
- PACKAGECONFIG ??= ""
- 
- PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
-+PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
- PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
- PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
- 
--- 
-1.8.3.2
+Indeed. The setup I was working with had the meta-qt layer pinned to a
+rev before your change. I totally did not realise that and made my
+patch base don thois old rev.
 
+Sorry for the noise and thanks for pointing it out. :)
+
+regards
+Stefan Schmidt
 
