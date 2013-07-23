@@ -1,28 +1,32 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id C80686A549
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B31C06077D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2013 12:54:48 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 23 Jul 2013 05:54:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,727,1367996400"; d="scan'208";a="350146882"
-Received: from unknown (HELO helios.localnet) ([10.252.122.115])
-	by orsmga001.jf.intel.com with ESMTP; 23 Jul 2013 05:54:48 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Date: Tue, 23 Jul 2013 13:54:47 +0100
-Message-ID: <2813811.F5BqiUbT83@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-26-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <CAP9ODKoM6TGuwfAsJOJSZr+9xqGOMHmHF069ydmxX4a66L6CeA@mail.gmail.com>
-References: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
-	<5249302.LRk1iTvfYM@helios>
-	<CAP9ODKoM6TGuwfAsJOJSZr+9xqGOMHmHF069ydmxX4a66L6CeA@mail.gmail.com>
+	Tue, 23 Jul 2013 17:51:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6NHq0OL020119
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2013 10:52:00 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 23 Jul 2013 10:52:00 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 9DD917FE3;
+	Tue, 23 Jul 2013 13:51:52 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 83B82404D8; Tue,
+	23 Jul 2013 13:51:59 -0400 (EDT)
+Date: Tue, 23 Jul 2013 13:51:59 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130723175159.GF3643@windriver.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-networking] Update to standalone tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,69 +40,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2013 12:54:48 -0000
+X-List-Received-Date: Tue, 23 Jul 2013 17:52:00 -0000
+X-Groupsio-MsgNum: 45452
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4VrXvz3cwkc87Wze"
+Content-Disposition: inline
+
+--4VrXvz3cwkc87Wze
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
 
-On Tuesday 23 July 2013 09:46:36 Otavio Salvador wrote:
-> On Tue, Jul 23, 2013 at 9:41 AM, Paul Eggleton
->=20
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Tuesday 23 July 2013 09:09:37 Otavio Salvador wrote:
-> >> On Tue, Jul 23, 2013 at 6:44 AM, Paul Eggleton
-> >>=20
-> >> <paul.eggleton@linux.intel.com> wrote:
-> >> > On Monday 08 July 2013 13:35:21 Paul Eggleton wrote:
-> >> >> On Friday 05 July 2013 19:45:25 Eric B=E9nard wrote:
-> >> >> > Le Fri, 05 Jul 2013 18:29:04 +0100,
-> >> >> >=20
-> >> >> > Paul Eggleton <paul.eggleton@linux.intel.com> a =E9crit :
-> >> >> > > Could someone *please* figure out what this bbappend is nee=
-ded for
-> >> >> > > and
-> >> >> > > get
-> >> >> > > it into OE-Core if it is still needed so we can drop it her=
-e?
-> >> >> >=20
-> >> >> > it's only here to install /etc/default/busybox-syslog which c=
-ontains
-> >> >> > only one line : OPTIONS=3D"-C64" which sets the size of the l=
-ogbuffer.
-> >> >> > So obviously this could go into OE-Core.
-> >> >>=20
-> >> >> Yes but why is this needed? If we are to merge this into OE-Cor=
-e we'll
-> >> >> need
-> >> >> to say why this change is needed in the commit message.
-> >> >=20
-> >> > ping...
-> >>=20
-> >> I am working in something else so I cannot work on busybox now. Fe=
-el
-> >> free to handle this.
-> >>=20
-> >> The syslog support would be good to be kept.
-> >=20
-> > The problem is it's not clear to me what we should do here. Surely =
-having
-> > this bbappend or not isn't the determining factor in whether we hav=
-e
-> > syslog support with systemd...?
->=20
-> With systemd we shouldn't provide it but for sysv we should provide i=
-t.
 
-I still need to know what this is needed for. Surely it doesn't actuall=
-y=20
-enable syslog functionality, just adds one configuration value to it? I=
-f that's=20
-the case, why is this configuration change needed?
+   If you are only using meta-networking from meta-openembedded, you
+   need read no further.  This is only for people using my side-project
+   on github.  Absolutely nothing has changed in the official
+   meta-networking.
 
-Cheers,
-Paul
+
+
+For anyone using the standalone meta-networking subtree I maintain on
+github, please be aware that I've made a change to the way I create the
+subtree which, unfortunately, will result in a forced update for all of
+your branches.  And probably a merge on whatever branch you happen to be
+on already (eg. master).  If you get into that scenario, I suggest
+pushing your current branch with the merge in it off a cliff and
+re-creating the current branch tracking the up-stream.  If you're not in
+the habit of doing a git-pull, though, this will probably be cleaner:
+
+   % git fetch --all --tags ; git rebase origin/<up-stream-branch-name
+
+The reason for this (and the advantage) has been in response to requests
+I've had to preserve the original (that is, meta-oe) commit hash so it
+is easy to connect a commit in the standalone meta-networking with the
+official meta-networking I maintain as a part of the larger meta-oe.
+The change is small and hopefully self-explanatory, but I won't let that st=
+op
+me.
+
+Before:
+
+commit a0f9363caddbfb92212b4bf5d4a2590c451b7cef
+Author: Roy.Li <rongqing.li@windriver.com>
+Date:   Fri Jul 19 10:19:25 2013 +0800
+
+    Upgrade vsftpd to 3.0.0
+   =20
+    Upgrade vsftpd to 3.0.0 with below modification:
+    1. more strict access limitation, like: do not allow anonymous access
+    2. use vsftpd.ftpusers and vsftpd.user_list to confine user access
+    3. enable pam if DISTRO_FEATURE includes pam
+    4. enable tcp-wrapper
+    5. install vsftpd.conf with 0600 permission, not 0755
+   =20
+    Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+    Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
+
+After:
+
+commit b188e402a04db35424e22cb2b2100b7070648948
+Author: Roy.Li <rongqing.li@windriver.com>
+Date:   Fri Jul 19 10:19:25 2013 +0800
+
+    Upgrade vsftpd to 3.0.0
+   =20
+      (original commit: 441502b68d03a4ce7796436a53c5e95399724ad2)
+   =20
+    Upgrade vsftpd to 3.0.0 with below modification:
+    1. more strict access limitation, like: do not allow anonymous access
+    2. use vsftpd.ftpusers and vsftpd.user_list to confine user access
+    3. enable pam if DISTRO_FEATURE includes pam
+    4. enable tcp-wrapper
+    5. install vsftpd.conf with 0600 permission, not 0755
+   =20
+    Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+    Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
+
+Where 441502b6... is the commit in meta-oe from Roy that happens to
+upgrade vsftpd.
+
+FWIW, I don't anticipate doing anything destructive like this again.
 
 --=20
+-Joe MacDonald.
+:wq
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--4VrXvz3cwkc87Wze
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlHuwr8ACgkQPN8S4W6ZZnef0ACeOdUv2VP0yarl1cBWSn08NtXi
+IvMAnjMm2jE4ZkSVEjxtN8vHTLs+6fdG
+=Ne8h
+-----END PGP SIGNATURE-----
+
+--4VrXvz3cwkc87Wze--
