@@ -1,25 +1,53 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from bec-systems.com (u15414263.onlinehome-server.com
-	[74.208.70.121])
-	by mail.openembedded.org (Postfix) with ESMTP id DEAF46B102;
-	Mon, 22 Jul 2013 16:15:03 +0000 (UTC)
-Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1V1IgT-0004Uq-3L; Mon, 22 Jul 2013 12:10:09 -0400
+Return-Path: <B40290@freescale.com>
+Received: from am1outboundpool.messaging.microsoft.com
+	(am1ehsobe006.messaging.microsoft.com [213.199.154.209])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F1CF6A5A1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2013 06:34:19 +0000 (UTC)
+Received: from mail110-am1-R.bigfish.com (10.3.201.235) by
+	AM1EHSOBE021.bigfish.com (10.3.207.143) with Microsoft SMTP Server id
+	14.1.225.22; Tue, 23 Jul 2013 06:34:18 +0000
+Received: from mail110-am1 (localhost [127.0.0.1])	by
+	mail110-am1-R.bigfish.com (Postfix) with ESMTP id A37CC802AB	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2013 06:34:18 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -1
+X-BigFish: VS-1(zz9371I542Izz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah1de097h1de096h8275bh8275dhz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1dfeh1dffh1e1dhbe9i1155h)
+Received: from mail110-am1 (localhost.localdomain [127.0.0.1]) by mail110-am1
+	(MessageSwitch) id 1374561256131707_17166;
+	Tue, 23 Jul 2013 06:34:16 +0000 (UTC)
+Received: from AM1EHSMHS012.bigfish.com (unknown [10.3.201.227])	by
+	mail110-am1.bigfish.com (Postfix) with ESMTP id 1B98C4A0048	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jul 2013 06:34:16 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS012.bigfish.com
+	(10.3.207.112) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Tue, 23 Jul 2013 06:34:13 +0000
+Received: from 039-SN2MPN1-021.039d.mgd.msft.net ([169.254.1.249]) by
+	039-SN1MMR1-004.039d.mgd.msft.net ([::1]) with mapi id 14.03.0136.001;
+	Tue, 23 Jul 2013 06:34:12 +0000
+From: Guo Chunrong-B40290 <B40290@freescale.com>
+To: Guo Chunrong-B40290 <B40290@freescale.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-networking][PATCH] Install a systemd unit into
+	${systemd_unitdir} only with systemd in DISTRO_FEATURES
+Thread-Index: AQHOeUCT3Q65+FIybkad+UNxztZkPplx6ooQ
+Date: Tue, 23 Jul 2013 06:34:11 +0000
+Message-ID: <B21730BB6DA1D24B83348D9301EA417E104258EA@039-SN2MPN1-021.039d.mgd.msft.net>
+References: <1373002142-5129-1-git-send-email-B40290@freescale.com>
+In-Reply-To: <1373002142-5129-1-git-send-email-B40290@freescale.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.206]
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 22 Jul 2013 16:14:43 GMT
-Message-Id: <1374509683242.b5f25ac3@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-07-14 until 2013-07-21
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Cc: Yu Zongchun-B40527 <B40527@freescale.com>
+Subject: Re: [meta-networking][PATCH] Install a systemd unit into ${systemd_unitdir} only with systemd in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,361 +61,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2013 16:15:04 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 23 Jul 2013 06:34:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Changelog since 2013-07-14 until 2013-07-21.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Alexandru Palalau (1):
-=20=20lib/oeqa/runtime: add tests for syslog and df
-
-Bruce Ashfield (3):
-=20=20linux-yocto/3.8: update META srcrev
-=20=20linux-yocto/3.4: mips: fix gcc 4.8 compilation
-=20=20linux-yocto/3.8: restore qemumips64 SRCREV
-
-Chen Qi (3):
-=20=20core-image-lsb.bb: add 'package-management' to IMAGE_FEATURES
-=20=20tar: remove an erroneous patch
-=20=20local.conf.sample.extended: add example for EXTRA_USERS_PARAMS
-
-Cristian Iorga (2):
-=20=20bluez4: conflicts with bluez5
-=20=20bluez5: new package for v5.7
-
-Felipe F. Tonello (3):
-=20=20pulseaudio: Added cli-protocol-unix to pulseaudio-misc
-=20=20valgrind: added perl dependency
-=20=20pulseaudio: Removed avahi forced dependency
-
-Hongxu Jia (2):
-=20=20udev-extraconf: allow users in disk group to write vfat filesystem
-=20=20xuser-account: add xuser to disk group
-
-Joe Slater (1):
-=20=20curl: add upstream status to patch
-
-Jonathan Liu (1):
-=20=20gdb: add PACKAGECONFIG for Python support
-
-Kai Kang (1):
-=20=20tcl: fix typo of upstream status in patch file
-
-Khem Raj (4):
-=20=20gcc-4.8: Fix on-device SDK C++ runtime issue
-=20=20uclibc: Build ldd/ldcondif/iconv for main uclibc recipe
-=20=20eglibc-2.18: Remove unused patches
-=20=20eglibc-2.18: Update to latest snapshot
-
-Mark Hatle (4):
-=20=20sanity.bbclass: Update gcc sanity check
-=20=20terminal.bbclass: Fix BB_RUNFMT processing
-=20=20busybox: fix ip reference in simple.script
-=20=20dbus-ptest: Disable python module check
-
-Paul Eggleton (4):
-=20=20qt-mobility: tighten up config generation and use PACKAGECONFIG
-=20=20classes/insane: fix regression in libdir QA regex
-=20=20classes/insane: allow libdir QA check to be skipped using INSANE_SKIP
-=20=20scripts/contrib/*: fix arithmetic bashism
-
-Roy.Li (1):
-=20=20dpkg: backport a patch to support mipsn32el and mips64el
-
-Saul Wold (5):
-=20=20libidn: upgrade to 1.28
-=20=20mc: upgrade to 4.8.9
-=20=20initscripts: Update to 9.48
-=20=20Upstream-Status: Correct capitalization
-=20=20buildtools-tarball: testimage needs the mmap python-module
-
-Simon Busch (1):
-=20=20wpa-supplicant: backport patch to fix dbus interface for autoscan =
-functional
-
-Stefan Stanacar (9):
-=20=20lib/oeqa/runtime/dmesg.py: whitelist dmesg message for systemd net =
-interface
-=20=20lib/oeqa/utils/sshcontrol.py: fix passing command to subprocess
-=20=20testimage.bbclass, lib/oeqa/utils/qemurunner.py: make boot timeout =
-configura
-=20=20lib/oeqa/runtime/multilib.py: use readelf instead of file
-=20=20lib/oeqa/oetest.py: provide a ps command for all tests
-=20=20classes/testimage.bbclass: use a copy of rootfs for tests
-=20=20testimage.bbclass, lib/oeqa: add headers and comments
-=20=20lib/oeqa: fix dependecy check
-=20=20populate_sdk_base.bbclass: use new perm option for find
-
-Yi Zhao (3):
-=20=20iproute2: Fix alternative link for ip command
-=20=20run-postinsts: Fix typo
-=20=20rpm-postinsts.bb: Fix typo
-
-Zhenhua Luo (1):
-=20=20oprofile: add Upstream-Status for several patches
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Chunrong Guo (1):
-=20=20licences: Add netperf license
-
-Jonathan Liu (1):
-=20=20llvm3.3: append --enable-zlib to EXTRA_OECONF instead of overwriting
-
-Martin Jansa (1):
-=20=20dbus: rename .bbappend to match oe-core
-
-Roy.Li (7):
-=20=20zeroconf: The ip is being installed into /sbin as of the latest =
-busybox.
-=20=20ipsec-tools: fix dependencies and enable two configuration
-=20=20netcat: integrate two fixes
-=20=20inetutils: several improvement
-=20=20bridge-utils: BackPort three patches
-=20=20cyrus-sasl: several fixes
-=20=20Upgrade vsftpd to 3.0.0
-
-chunrong guo (1):
-=20=20licences: Add iozone3, SMAIL_GPL
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-Koen Kooi (3):
-=20=20linux-mainline 3.8: PRU rproc PWM support
-=20=20linux-mainline 3.8: add PWM DT info
-=20=20linux-mainline 3.8: additional bacon cape support
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Daiane Angolini (1):
-=20=20gst-fsl-plugin: Add PACKAGECONFIG options
-
-Fabio Estevam (3):
-=20=20linux-imx (2.6.35): Update maintain branch to commit f19246ce
-=20=20linux-imx (3.0.35): Update 4.0.0 branch to commit c3e6a39
-=20=20linux-imx (3.0.35): Update 4.0.0 branch to commit 3383d801
-
-Otavio Salvador (7):
-=20=20imx-lib.inc: Remove unused assignment for FILES definition
-=20=20u-boot-fslc: Update to 2013.07-rc3 release
-=20=20gpu-viv-bin-mx6q.inc: Keep library package suffix for OpenGL =
-interfaces
-=20=20gpu-viv-bin-mx6q.inc: Add libclc-mx6 as runtime depedency of =
-libopencl-mx6-d
-=20=20gst-fsl-plugin: Drop 2.0.3 patches which were kept around by mistake
-=20=20qt4: Enable OpenGL ES2 support for i.MX6
-=20=20mesa: Avoid removing virtual/libgl provider for i.MX5 SoCs
-
-Simon Braunschmidt (1):
-=20=20gpu-viv-bin-mx6q, mesa: fix virtual/libgl dependencies
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Eric BENARD (1):
-=20=20u-boot-script-boundary: handle the case where MACHINE=3Dimx6sabrelite
-
-John Weber (1):
-=20=20linux-wandboard: update defconfig file
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-Ting Liu (1):
-=20=20qemu_fslgit: backport a patch from oe-core to define fdt_t types
-
-Zhenhua Luo (2):
-=20=20e500v2: workaround for ICE of gcc-4.8.x
-=20=20perf: Remove hard coded include to /usr/local/include in Makefile
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Florin Sarbu (3):
-=20=20Remove obsolete eglibc 2.17 append and     corresponding AF_BUS patch.
-=20=20Update dbus bbappend to match OE-core version
-=20=20common-api: Updte dbus bbappend to match OE-core version
-
-Kristofer Hansson Aspman (1):
-=20=20eglibc: Added AF-bus patch and bbappend for eglibc_2.18.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Alekseyev Oleksandr (2):
-=20=20webos-image: libpbnjson=3D15
-=20=20webos-image: luna-service2=3D151
-
-Ed Chejlava (1):
-=20=20webos-image: app-services=3D2
-
-Herb Kuta (4):
-=20=20webos-filesystem-paths: Add new variables for various locations
-=20=20webos_system_bus: Allow alternate locations and naming of sysbus files
-=20=20mojolocation-stub: Simplify by inheriting webos_system_bus
-=20=20luna-init: Don't install /usr/share/fonts/fonts.tgz
-
-Keith Derrick (1):
-=20=20webos-image: pmloglib=3D33,v3.0.1
-
-Martin Jansa (1):
-=20=20alsa-plugins: Add PACKAGECONFIG for libav, pulseaudio, jack
-
-Roger Stringer (1):
-=20=20webos-image: db8=3D75, activitymanager=3D111
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-Sipke Vriend (2):
-=20=20linux-yocto-*: change linux-yocto recipe to target boards rather than =
-    ar
-=20=20linux-yocto: add kc705-trd as target machine.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Chen Qi (1):
-=20=20local.conf.sample.extended: add example for EXTRA_USERS_PARAMS
-
-Cristiana Voicu (1):
-=20=20poky-tiny.conf: blacklist core-image-weston option
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
+Please apply the patch .
+
+
+-----Original Message-----
+From: Guo Chunrong-B40290=20
+Sent: Friday, July 05, 2013 1:29 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Liu Ting-B28495; Luo Zhenhua-B19537; Guo Chunrong-B40290; Yu Zongchun-B=
+40527; Guo Chunrong-B40290
+Subject: [meta-networking][PATCH] Install a systemd unit into ${systemd_uni=
+tdir} only with systemd in DISTRO_FEATURES
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb   |   11 +++++++----
+ .../recipes-support/dnsmasq/dnsmasq.inc            |    5 ++++-
+ .../recipes-support/nis/yp-tools_2.12.bb           |    8 +++++---
+ .../recipes-support/nis/ypbind-mt_1.36.bb          |    8 +++++---
+ meta-networking/recipes-support/ntp/ntp.inc        |   12 +++++++-----
+ 5 files changed, 28 insertions(+), 16 deletions(-)
+
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b=
+/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+index d21995a..2eece50 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://README;beginline=3D3;endline=
+=3D8;md5=3D7f7f00ba639ac8e8deb5
+=20
+ DEPENDS =3D "openssl libnl pciutils"
+=20
+-PR =3D "r1"
++PR =3D "r2"
+=20
+ SRC_URI =3D "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+         file://init \
+@@ -51,9 +51,12 @@ do_install_append() {
+         -e "s@^includedir=3D.*@includedir=3D${STAGING_INCDIR}@g" \
+         -e "s@^libdir=3D.*@libdir=3D${STAGING_LIBDIR}@g" \
+         -i ${STAGING_BINDIR}/net-snmp-config
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/sy=
+stem
++   =20
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; th=
+en
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/sy=
+stem
++        install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir=
+}/system
++    fi
+ }
+=20
+ PACKAGES =3D "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static $=
+{PN}-libs \ diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.in=
+c b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index 0f5b273..242f143 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -31,9 +31,11 @@ do_install () {
+     install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
+     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+=20
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};=20
++ then
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/syst=
+em
+-
++    fi
++  =20
+     if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=3D =
+"" ]; then
+         install -d ${D}${sysconfdir}/dbus-1/system.d
+         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d=
+/
+@@ -46,3 +48,4 @@ RPROVIDES_${PN} +=3D "${PN}-systemd"
+ RREPLACES_${PN} +=3D "${PN}-systemd"
+ RCONFLICTS_${PN} +=3D "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} =3D "dnsmasq.service"
++
+diff --git a/meta-networking/recipes-support/nis/yp-tools_2.12.bb b/meta-ne=
+tworking/recipes-support/nis/yp-tools_2.12.bb
+index 0017845..65c4429 100644
+--- a/meta-networking/recipes-support/nis/yp-tools_2.12.bb
++++ b/meta-networking/recipes-support/nis/yp-tools_2.12.bb
+@@ -1,7 +1,7 @@
+ # This package builds tools to manage NIS  # The source package is utils/n=
+et/NIS/yp-tools  # -PR =3D "r3"
++PR =3D "r4"
+ DESCRIPTION=3D"\
+ Network Information Service tools.  \
+ This package contains ypcat, ypmatch, ypset, \ @@ -26,6 +26,8 @@ RCONFLICT=
+S_${PN} +=3D "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} =3D "domainname.service"
+=20
+ do_install_append() {
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/domainname.service ${D}${systemd_unitdir}/s=
+ystem
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; th=
+en
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/domainname.service ${D}${systemd_unitdi=
+r}/system
++    fi
+ }
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.36.bb b/meta-n=
+etworking/recipes-support/nis/ypbind-mt_1.36.bb
+index 35ef16a..85ecaf8 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_1.36.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_1.36.bb
+@@ -1,7 +1,7 @@
+ # This package builds the NIS ypbind daemon  # The source package is utils=
+/net/NIS/ypbind-mt  # -PR =3D "r3"
++PR =3D "r4"
+ DESCRIPTION=3D"\
+ Multithreaded NIS bind service (ypbind-mt).  \  ypbind-mt is a complete ne=
+w implementation of a NIS \ @@ -40,8 +40,10 @@ do_install_append () {
+     # TODO, use update-rc.d
+     ln -s ../init.d/ypbind ${D}${sysconfdir}/rcS.d/S44ypbind
+=20
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/syste=
+m
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; th=
+en
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/s=
+ystem
++    fi
+ }
+=20
+ inherit systemd
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/=
+recipes-support/ntp/ntp.inc
+index 79e7401..6006aeb 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -8,7 +8,7 @@ SECTION =3D "console/network"
+ LICENSE =3D "NTP"
+ LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Dfea4b50c33b18c2194b4b1c9ca512=
+670"
+=20
+-INC_PR =3D "r6"
++INC_PR =3D "r7"
+=20
+ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${P=
+V}.tar.gz \
+            file://tickadj.c.patch \
+@@ -59,10 +59,12 @@ do_install_append() {
+     install -d ${D}/${sysconfdir}/network/if-up.d
+     ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+=20
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/syst=
+em/
+-    install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+-    install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; th=
+en
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/=
+system/
++        install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/sys=
+tem/
++        install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/sys=
+tem/
++    fi
+ }
+=20
+ PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+--
+1.7.5.4
 
 
 
