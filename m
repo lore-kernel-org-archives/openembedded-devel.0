@@ -1,38 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f180.google.com (mail-ob0-f180.google.com
-	[209.85.214.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 03CC36A549
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B8B06A549
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2013 12:09:37 +0000 (UTC)
-Received: by mail-ob0-f180.google.com with SMTP id eh20so9789648obb.39
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2013 05:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=KSq86LiMg3HZOM+zLNaJxIfHLgaa7W+b61yotqO4474=;
-	b=e8qVFcc5D0iMpxQYrkvXf3lKwSUK8AME1rH2kDifyPLJ6CGYmSisP6sNanQ61lFv9I
-	B2VrReilNjYS/BmwDs55wLGEnEWnkATgYs5aH3PE9xf8/8ZBpNwO7llw/5QHNiY/ASW3
-	Y3aHYhCZHsiTqa7HyNwpH7XwdY/qXaJYSERC9YNbsfRAVrXMgdllAnEt4EoytBQbFlaq
-	QX42SYmizrPeYlHUywIz9CUZa/tF6AyFr71FtkPQ/vbwBBMvMAvxkc5FRXJNCDEztvod
-	PmAQv2iocgykHtZPAPW/JSBFWKkjArhVWy4VaS3z4rImQbUItCPzp4/ZN/XBQ7joLULs
-	ymoA==
-MIME-Version: 1.0
-X-Received: by 10.182.165.133 with SMTP id yy5mr24723038obb.89.1374581377811; 
-	Tue, 23 Jul 2013 05:09:37 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.60.166 with HTTP; Tue, 23 Jul 2013 05:09:37 -0700 (PDT)
-In-Reply-To: <3799962.PMtSgBuqpH@helios>
+	Tue, 23 Jul 2013 12:41:09 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 23 Jul 2013 05:41:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,727,1367996400"; d="scan'208";a="375074601"
+Received: from unknown (HELO helios.localnet) ([10.252.122.115])
+	by orsmga002.jf.intel.com with ESMTP; 23 Jul 2013 05:41:08 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Date: Tue, 23 Jul 2013 13:41:07 +0100
+Message-ID: <5249302.LRk1iTvfYM@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-26-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <CAP9ODKpz26sbQfot2mJJR8VDoLDQuMw=TzJg4Zmrut2imacpfg@mail.gmail.com>
 References: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
-	<20130705194525.667209b0@e6520eb> <10175102.kSY1axEz5R@helios>
 	<3799962.PMtSgBuqpH@helios>
-Date: Tue, 23 Jul 2013 09:09:37 -0300
-X-Google-Sender-Auth: Y-jtTGHNTIoQaZycEehWEikKZjQ
-Message-ID: <CAP9ODKpz26sbQfot2mJJR8VDoLDQuMw=TzJg4Zmrut2imacpfg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+	<CAP9ODKpz26sbQfot2mJJR8VDoLDQuMw=TzJg4Zmrut2imacpfg@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
 Subject: Re: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,39 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2013 12:09:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Jul 2013 12:41:09 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-On Tue, Jul 23, 2013 at 6:44 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Monday 08 July 2013 13:35:21 Paul Eggleton wrote:
->> On Friday 05 July 2013 19:45:25 Eric B=E9nard wrote:
->> > Le Fri, 05 Jul 2013 18:29:04 +0100,
->> >
->> > Paul Eggleton <paul.eggleton@linux.intel.com> a =E9crit :
->> > > Could someone *please* figure out what this bbappend is needed for a=
-nd
->> > > get
->> > > it into OE-Core if it is still needed so we can drop it here?
->> >
->> > it's only here to install /etc/default/busybox-syslog which contains
->> > only one line : OPTIONS=3D"-C64" which sets the size of the logbuffer.
->> > So obviously this could go into OE-Core.
->>
->> Yes but why is this needed? If we are to merge this into OE-Core we'll n=
-eed
->> to say why this change is needed in the commit message.
->
-> ping...
+On Tuesday 23 July 2013 09:09:37 Otavio Salvador wrote:
+> On Tue, Jul 23, 2013 at 6:44 AM, Paul Eggleton
+>=20
+> <paul.eggleton@linux.intel.com> wrote:
+> > On Monday 08 July 2013 13:35:21 Paul Eggleton wrote:
+> >> On Friday 05 July 2013 19:45:25 Eric B=E9nard wrote:
+> >> > Le Fri, 05 Jul 2013 18:29:04 +0100,
+> >> >=20
+> >> > Paul Eggleton <paul.eggleton@linux.intel.com> a =E9crit :
+> >> > > Could someone *please* figure out what this bbappend is needed=
+ for
+> >> > > and
+> >> > > get
+> >> > > it into OE-Core if it is still needed so we can drop it here?
+> >> >=20
+> >> > it's only here to install /etc/default/busybox-syslog which cont=
+ains
+> >> > only one line : OPTIONS=3D"-C64" which sets the size of the logb=
+uffer.
+> >> > So obviously this could go into OE-Core.
+> >>=20
+> >> Yes but why is this needed? If we are to merge this into OE-Core w=
+e'll
+> >> need
+> >> to say why this change is needed in the commit message.
+> >=20
+> > ping...
+>=20
+> I am working in something else so I cannot work on busybox now. Feel
+> free to handle this.
+>=20
+> The syslog support would be good to be kept.
 
-I am working in something else so I cannot work on busybox now. Feel
-free to handle this.
+The problem is it's not clear to me what we should do here. Surely havi=
+ng this=20
+bbappend or not isn't the determining factor in whether we have syslog =
+support=20
+with systemd...?
 
-The syslog support would be good to be kept.
+Cheers,
+Paul
 
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://projetos.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+--=20
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
