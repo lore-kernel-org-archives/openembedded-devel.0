@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 2EBFE6B322
+Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 779C96B333
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:40:55 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id b57so209498eek.36
+	Wed, 24 Jul 2013 12:40:56 +0000 (UTC)
+Received: by mail-ea0-f169.google.com with SMTP id h15so218084eak.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:40:55 -0700 (PDT)
+	Wed, 24 Jul 2013 05:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=lH53MhGK+15Vddh78ZhJFiiCbMuPB0jboYDtoCX5zj4=;
-	b=HUwKO/AeHi6rv8XtEQsom3+WJBujlRMg5EE7xnyLKsPOho9A/e9zy8/Z03wetNfjWu
-	sf/zsT7R8xpxFU6H8skAwvqW9U4ibgjAUuBquSk/P3u7rPgxf1FBXYl+z3aN5k8+g/QJ
-	Kiwy1Yiu7b9wk1v09ZVklCx2mtcrNyUO8F2Mde28dgtD9yt0FGZQ7KHT19ArwFCEmUOU
-	ISZNy6ZpwNa2a8nu77UHxGdGE4Om/Hmb+nK5AC09jKfWzXQEZMlKTSzMDLsr8Yu031YY
-	iGCnxXMMxKtPpark5cJ+kTfX6+iELghcQXV0dJRBqD6Guwl3RZ7AXuh0ZT/W6S+j97Yx
-	rGpg==
-X-Received: by 10.15.34.129 with SMTP id e1mr37758655eev.80.1374669655603;
-	Wed, 24 Jul 2013 05:40:55 -0700 (PDT)
+	bh=2x4YmO1C9VBjA78aYCe6bkO/QyJiY9Dph9ZcXJjRTf0=;
+	b=ABzmjxjgjBtTfICpzuyumNuMBxyaqAirshrDoM2x2+NgBD51nidcTsPY+lPhy6gbtM
+	y1ZAK1Tk4Hob6yMzwhQTKWh7hLsgX781DzyTpiGYnplg2aq5aikVdaWu2z7lP0LMfg60
+	cXArUIS6GxqjqlyzVfuK16XCndGDFJjR2V3G8f2np02TubgnAbiM8XfVjgrgisQoUHTt
+	vByPk+pwBtz7zkOffDXy8GOlX1wv9sV7QH0BOz4zu/vhVQjUPKOVyJ/Uad662pgyBNCy
+	SXSSc0WKqZcg491tHHDZYThx+xxhZltxRE2kXi7/H09mXAhWx134cVCC16/SB42Vbcpz
+	8Hpg==
+X-Received: by 10.14.99.71 with SMTP id w47mr37629114eef.140.1374669656885;
+	Wed, 24 Jul 2013 05:40:56 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	o5sm65890488eef.5.2013.07.24.05.40.54 for <multiple recipients>
+	i2sm65894566eeu.4.2013.07.24.05.40.56 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:40:55 -0700 (PDT)
+	Wed, 24 Jul 2013 05:40:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:40:46 +0200
-Message-Id: <db7eed4a70e3ca4d63a3ba9918106f3c47c5c045.1374669516.git.Martin.Jansa@gmail.com>
+Date: Wed, 24 Jul 2013 14:40:47 +0200
+Message-Id: <cab9f404c0d98acf76838c6a330a510c1850e570.1374669516.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 References: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1374669516.git.Martin.Jansa@gmail.com>
 References: <cover.1374669516.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 02/29] loudmouth: add dependency on libidn
+Subject: [meta-oe][PATCH 03/29] cifs-utils: add PACKAGECONFIG for libcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:40:55 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 12:40:56 -0000
 
-* it's autodetected from sysroot and configure doesn't allow
-  to disable it explicitly
-* feel free to add configure option and PACKAGECONFIG if this
-  extra dependency bothers you
+* libcap is autodetected from sysroot
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/cifs/cifs-utils_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-index 8375386..c864276 100644
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-+++ b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.loudmouth-project.org/"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c4f38aef94828f6b280e00d1173be689"
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+index de2786a..07bf1b8 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+@@ -12,6 +12,9 @@ SRC_URI = "git://git.samba.org/cifs-utils.git"
  
--DEPENDS = "glib-2.0 libcheck openssl"
-+DEPENDS = "glib-2.0 libcheck openssl libidn"
+ S = "${WORKDIR}/git"
  
- inherit gnomebase
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
++
+ inherit autotools
  
+ do_install_append() {
 -- 
 1.8.3.2
 
