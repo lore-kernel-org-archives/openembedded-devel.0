@@ -1,36 +1,38 @@
-Return-Path: <chgans@googlemail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A189B6028B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5089C6028B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 21:31:58 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id bg4so1153105pad.32
+	Wed, 24 Jul 2013 21:55:31 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id d41so517931eek.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 14:31:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=TiA5GtKmBXslzSxogD/ExPt/YEm2wjDLCGB1X6owY9k=;
-	b=UOylpLkrG8jtT77p4d0R0A7pwBMJpTxbRHsvijiJ2sRuR1KkFw0MkDUbgtJMILwlfT
-	UjomWUqbDh+zk8H/8q7aoo1+9FemMuvduF7yrBApKO1vpMW5p2VBVrwtwuOqDaBFlOKZ
-	PJ9X2nfcH9L+n2LCikYBXbC43/H47dpFHREmt+lMA2oJUFoVyH2kGjzQQfoFGxxaDVHC
-	P2yrZt0CFXIkKFcOnESQvTdC0UPS1X5FwHharT3VWC+pKXOkaIjG1DbOwrfWKgMezpdw
-	PJlvnuXb/7h7FpZbL21UCRSb0wYcY1Oi73uHUd1TPyh1Mr/MN60GJRQx28Sy9iV8gxFK
-	Ut0g==
-X-Received: by 10.66.122.99 with SMTP id lr3mr45792132pab.187.1374701519222;
-	Wed, 24 Jul 2013 14:31:59 -0700 (PDT)
-Received: from localhost (222-154-231-245.adsl.xtra.co.nz. [222.154.231.245])
+	Wed, 24 Jul 2013 14:55:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=cFqOZVFPVLhtFASGknd4izcivktyZHh9ABWxa5fJfNg=;
+	b=KO2WcRuu47IPaJqGFiNHkNEbkxe9IKDhw+KLxB1Lch1JQAIoZhV2Mi2flf/oFpQhRn
+	KaIYptO++EZ8AjvZQ1IW2KY+LYVHsNwIC8IMW0gcrVq/cIxDdnrTMr4t7ywEp22AjEC1
+	CVstPyagODBXKbSdqMGmdHYyXl5Zz+Etdq7ErObzhSiqLrXQaMbaikAdkHXy7nJX/JN3
+	S3GB6uLIbxaMzAe2mE2waES4WUiJMUyNX7UlOhMwOk5oBVXXa7Z9BhsQvp3gxQt6g86B
+	TH1OMVMF7DbovtTx1o2YCWhLVzJ0yHqWlQPdcClKVUjtBPhvgaeYMQmBz0WV8yvAgcB3
+	iRDQ==
+X-Received: by 10.15.44.67 with SMTP id y43mr39855154eev.20.1374702931437;
+	Wed, 24 Jul 2013 14:55:31 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	qb15sm53492325pab.13.2013.07.24.14.31.56 for <multiple recipients>
+	r54sm69093582eev.8.2013.07.24.14.55.29
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 14:31:58 -0700 (PDT)
-Sender: Chris Gagneraud <chgans@googlemail.com>
-From: Christian Gagneraud <chgans@gna.org>
+	Wed, 24 Jul 2013 14:55:30 -0700 (PDT)
+Date: Wed, 24 Jul 2013 23:55:53 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Jul 2013 09:31:47 +1200
-Message-Id: <1374701507-26976-1-git-send-email-chgans@gna.org>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-qt5][dylan][PATCH] qtbase.inc: Fix qtbase-tools runtime depencency on perl
+Message-ID: <20130724215553.GB17913@jama>
+References: <1374701507-26976-1-git-send-email-chgans@gna.org>
+MIME-Version: 1.0
+In-Reply-To: <1374701507-26976-1-git-send-email-chgans@gna.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-qt5][dylan][PATCH] qtbase.inc: Fix qtbase-tools runtime depencency on perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,34 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 21:31:59 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 21:55:31 -0000
+X-Groupsio-MsgNum: 45495
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mxv5cy4qt+RJ9ypb"
+Content-Disposition: inline
 
-While building a custom rootfs using poky, meta-oe, meta-ti and meta-qt5 (all on Dylan branch), I got the following error:
-[...]
-| Computing transaction...error: Can't install qtbase-tools-5.0.2-r2.0@armv7a_vfp_neon: no package provides /usr/bin/perl
-[...]
+--mxv5cy4qt+RJ9ypb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-qtbase-tools seems to depends on perl (at runtime), but this wasn't specified in any bb file, this patch fixes it.
+On Thu, Jul 25, 2013 at 09:31:47AM +1200, Christian Gagneraud wrote:
+> While building a custom rootfs using poky, meta-oe, meta-ti and meta-qt5 =
+(all on Dylan branch), I got the following error:
+> [...]
+> | Computing transaction...error: Can't install qtbase-tools-5.0.2-r2.0@ar=
+mv7a_vfp_neon: no package provides /usr/bin/perl
+> [...]
+>=20
+> qtbase-tools seems to depends on perl (at runtime), but this wasn't speci=
+fied in any bb file, this patch fixes it.
 
-Signed-off-by: Christian Gagneraud <chgans@gna.org>
----
- recipes-qt/qt5/qtbase.inc | 2 ++
- 1 file changed, 2 insertions(+)
+Have you tried which files require perl?
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index f521a30..a72a3d6 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -23,6 +23,8 @@ SRC_URI += " \
- 
- DEPENDS += "qtbase-native freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS} ${FONTCONFIG_DEPENDS}"
- 
-+RDEPENDS_${PN}-tools += "perl"
-+
- # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and dbus/dbus.h
- # XCB_DEPENDS += "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
- # reenable when we switch to "-qt-xcb" and build of 
--- 
-1.8.1.2
+>=20
+> Signed-off-by: Christian Gagneraud <chgans@gna.org>
+> ---
+>  recipes-qt/qt5/qtbase.inc | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index f521a30..a72a3d6 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -23,6 +23,8 @@ SRC_URI +=3D " \
+> =20
+>  DEPENDS +=3D "qtbase-native freetype jpeg libpng zlib openssl glib-2.0 $=
+{ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS} ${FONTCONFIG_DEPEN=
+DS}"
+> =20
+> +RDEPENDS_${PN}-tools +=3D "perl"
+> +
+>  # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and dbu=
+s/dbus.h
+>  # XCB_DEPENDS +=3D "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
+>  # reenable when we switch to "-qt-xcb" and build of=20
+> --=20
+> 1.8.1.2
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--mxv5cy4qt+RJ9ypb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHwTWkACgkQN1Ujt2V2gByEmwCgoSNoDS69RaFhPxGPL9FQ3/Bs
+1a8An1X4TivAwngRZpjfY2YvBZS7XB+X
+=gl34
+-----END PGP SIGNATURE-----
+
+--mxv5cy4qt+RJ9ypb--
