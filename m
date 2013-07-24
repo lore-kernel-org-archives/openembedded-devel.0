@@ -1,31 +1,36 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 37CBF60842
+Return-Path: <chgans@googlemail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DC45605F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 02:08:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6O28gMv009074
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 24 Jul 2013 05:14:15 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id kp1so208992pab.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jul 2013 19:08:42 -0700 (PDT)
-Received: from [128.224.162.233] (128.224.162.233) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.342.3;
-	Tue, 23 Jul 2013 19:08:41 -0700
-Message-ID: <51EF3729.8010903@windriver.com>
-Date: Wed, 24 Jul 2013 10:08:41 +0800
-From: ChenQi <Qi.Chen@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1373043676-5621-1-git-send-email-otavio@ossystems.com.br>
-	<5249302.LRk1iTvfYM@helios>
-	<CAP9ODKoM6TGuwfAsJOJSZr+9xqGOMHmHF069ydmxX4a66L6CeA@mail.gmail.com>
-	<2813811.F5BqiUbT83@helios>
-In-Reply-To: <2813811.F5BqiUbT83@helios>
-X-Originating-IP: [128.224.162.233]
-Subject: Re: [meta-oe PATCH] busybox: Follow OE-Core update to 1.12.1 version
+	Tue, 23 Jul 2013 22:14:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=NYsednSSB0qGiOEyF193nelhUOTsPFrm3cMnd2VD1x0=;
+	b=Q6EFsoOlWKAjnATZaIiu9Jb/KGwWXku7blroXaKuoAqv/byohxnm4HUUlHJaVRC8Em
+	FtD4H6D7LGJpImgrSYvyvcbJaqcJIEx3t/N3IwsgaF3429OcL5OBFcaFAuAiXPiBcZc1
+	p81X71vXDhlaQ+AIQZMe7OIyFh9Ek/tgWAtCtTNKlIECOV5OCGygqn9G0uwqHfsjleWk
+	PA4r90HE0hnyACZwr7cS2lGExV8SWkK2TkGX+ITjSoJ+MZ0UF3o3B0n0g8cUcA49RxiM
+	MAcVwvL9TuVMS1qAh7s79mdZMqxQ2Eqwe0l85fbM7bTtcezy2mbpSNRnr8T6394mfwjl
+	Mz1A==
+X-Received: by 10.66.147.65 with SMTP id ti1mr40673598pab.36.1374642856396;
+	Tue, 23 Jul 2013 22:14:16 -0700 (PDT)
+Received: from localhost (222-154-231-245.adsl.xtra.co.nz. [222.154.231.245])
+	by mx.google.com with ESMTPSA id
+	yj2sm45425708pbb.40.2013.07.23.22.14.13 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 23 Jul 2013 22:14:15 -0700 (PDT)
+Sender: Chris Gagneraud <chgans@googlemail.com>
+From: Christian Gagneraud <chgans@gna.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Jul 2013 17:13:54 +1200
+Message-Id: <1374642834-2108-1-git-send-email-chgans@gna.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-qt5][dylan][RFC PATCH] qt5.inc: Fix qtbase-tools runtime depencency on perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,60 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 02:08:41 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 24 Jul 2013 05:14:16 -0000
 
-On 07/23/2013 08:54 PM, Paul Eggleton wrote:
-> On Tuesday 23 July 2013 09:46:36 Otavio Salvador wrote:
->> On Tue, Jul 23, 2013 at 9:41 AM, Paul Eggleton
->>
->> <paul.eggleton@linux.intel.com> wrote:
->>> On Tuesday 23 July 2013 09:09:37 Otavio Salvador wrote:
->>>> On Tue, Jul 23, 2013 at 6:44 AM, Paul Eggleton
->>>>
->>>> <paul.eggleton@linux.intel.com> wrote:
->>>>> On Monday 08 July 2013 13:35:21 Paul Eggleton wrote:
->>>>>> On Friday 05 July 2013 19:45:25 Eric Bénard wrote:
->>>>>>> Le Fri, 05 Jul 2013 18:29:04 +0100,
->>>>>>>
->>>>>>> Paul Eggleton <paul.eggleton@linux.intel.com> a écrit :
->>>>>>>> Could someone *please* figure out what this bbappend is needed for
->>>>>>>> and
->>>>>>>> get
->>>>>>>> it into OE-Core if it is still needed so we can drop it here?
->>>>>>> it's only here to install /etc/default/busybox-syslog which contains
->>>>>>> only one line : OPTIONS="-C64" which sets the size of the logbuffer.
->>>>>>> So obviously this could go into OE-Core.
->>>>>> Yes but why is this needed? If we are to merge this into OE-Core we'll
->>>>>> need
->>>>>> to say why this change is needed in the commit message.
->>>>> ping...
->>>> I am working in something else so I cannot work on busybox now. Feel
->>>> free to handle this.
->>>>
->>>> The syslog support would be good to be kept.
->>> The problem is it's not clear to me what we should do here. Surely having
->>> this bbappend or not isn't the determining factor in whether we have
->>> syslog support with systemd...?
->> With systemd we shouldn't provide it but for sysv we should provide it.
-> I still need to know what this is needed for. Surely it doesn't actually
-> enable syslog functionality, just adds one configuration value to it? If that's
-> the case, why is this configuration change needed?
->
-> Cheers,
-> Paul
->
-Hi All,
+I'm not sure if it is the right way to do that, but here I go:
 
-FWIW, there are two bugs which might be related to this.
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=4837
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=4860
+While building a custom rootfs using poky, meta-oe, meta-ti and meta-qt5 (all on Dylan branch), I got the following error:
+[...]
+| Computing transaction...error: Can't install qtbase-tools-5.0.2-r2.0@armv7a_vfp_neon: no package provides /usr/bin/perl
+[...]
 
-My opinion is to respect the same configuration file in both sysv and 
-systemd systems.
-The configuration file is /etc/syslog-startup.conf.
+qtbase-tools seems to depends and perl (at runtime), but this wasn't specified in any bb file, this patch fixes it.
+---
+ recipes-qt/qt5/qt5.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Best Regards,
-Chen Qi
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 87bf5e8..955d5bd 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -22,6 +22,8 @@ OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
+ 
+ PACKAGES =. "${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs ${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-dbg ${PN}-examples "
+ 
++RDEPENDS_${PN}-tools += "perl"
++
+ # extra -dbg packages
+ FILES_${PN}-qmlplugins-dbg = " \
+     ${OE_QMAKE_PATH_QML}/*/.debug \
+-- 
+1.8.1.2
+
 
