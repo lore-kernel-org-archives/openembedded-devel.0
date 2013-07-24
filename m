@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 45C1F6B355
+Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D2E7D6B36E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:41:04 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id c50so212654eek.39
+	Wed, 24 Jul 2013 12:41:05 +0000 (UTC)
+Received: by mail-ea0-f171.google.com with SMTP id n15so216485ead.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:41:04 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=lTQm8TOkq9Zud5XAnctRbZpFOpcrnnurK/Yb9wp5/OM=;
-	b=CSiTIQOL6u52Zo4afkiOZ7gMiHswaj91zqkTKpX/hwSQghWhhzo6oWFEwUVykp6AZI
-	R/GnIRVTGg3HJFRDWDgbIpNULf/hCLG1u78AhRWavy1S1Ge8/iDgC5ahY3TgHmJP8bBg
-	KSuDACmXO7/0OH55t7VVWDkPnAVXCdsJjJgAqU8NoIQwwehj/uTDtXhL6qkwGytpBFo2
-	EW/VstFZCsqFcQ7VQN4VOjJdYza7L8mTjNmnbD/EjK1l6PvxNUqVM6pMim+8bBZ0xTeR
-	1LHB3b9UiqHg57KM/qeYWa0w3WLVOZGSPqwp4Q5J5AwItUwtq4rZ54EFRvqOBWfi7wWI
-	nlnQ==
-X-Received: by 10.15.82.132 with SMTP id a4mr37753034eez.107.1374669664600;
-	Wed, 24 Jul 2013 05:41:04 -0700 (PDT)
+	bh=99WMrBCQw4dl3mkDqBvRC3S12MCqiFFyZgmAbTCPYvI=;
+	b=nYHud9aadKjom0yEDmEWRAETjFD04ggcuUE8IBdzcymoEJekPFkWVCVwSYi1Kj7P+G
+	DNtAEnEHxihzO+TMo1RN43XaAvHr/5bQN0hKFXh29TgDjviswRgyzsKJlheBGHOb7VJf
+	FaOkyazACio00NSz2gQ5oawdraLPJHVF5KFp8HIYrua5hg+1Nshg1eTlJUuA7+7EPohI
+	4QNdNN+BC6uK1lc13DxMZ938joRTxlNkOu6imD6E8fOKvGn5iYgtfjC4aNtjbcmQoEnt
+	3rB+PKknn7tHiYSx6mPm4sarAn41LFm4C+yZfVUxIXDRQNgEZ70e+z1xinVy5tFb2Tl8
+	zLkw==
+X-Received: by 10.14.32.197 with SMTP id o45mr37838698eea.9.1374669666305;
+	Wed, 24 Jul 2013 05:41:06 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b7sm65839725eef.16.2013.07.24.05.41.03 for <multiple recipients>
+	c3sm65903650eev.3.2013.07.24.05.41.05 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:41:04 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:40:52 +0200
-Message-Id: <fc5bdc6830d8ca7e8f41f57f85f9b0b06f1354f7.1374669516.git.Martin.Jansa@gmail.com>
+Date: Wed, 24 Jul 2013 14:40:53 +0200
+Message-Id: <0f7d67a775aedc355fb46aa84a0a4903f2535f2d.1374669516.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 References: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1374669516.git.Martin.Jansa@gmail.com>
 References: <cover.1374669516.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/29] jasper: add PACKAGECONFIG for jpeg
+Subject: [meta-oe][PATCH 09/29] joe: add PACKAGECONFIG for joe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:41:04 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 12:41:06 -0000
 
 * it's autodetected from sysroot
 * add PACKAGECONFIG to make it deterministic
+* ncurses-libtinfo dependency is added only when ncurses is built before joe
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/joe/joe_3.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb b/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
-index ef9ca6f..a454501 100644
---- a/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
-+++ b/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
-@@ -8,6 +8,9 @@ SRC_URI = "http://www.ece.uvic.ca/~mdadams/jasper/software/jasper-${PV}.zip"
+diff --git a/meta-oe/recipes-support/joe/joe_3.1.bb b/meta-oe/recipes-support/joe/joe_3.1.bb
+index 6c9190f..7c5922d 100644
+--- a/meta-oe/recipes-support/joe/joe_3.1.bb
++++ b/meta-oe/recipes-support/joe/joe_3.1.bb
+@@ -3,10 +3,12 @@ DESCRIPTION = "Console text editor with good functionality, good choice for vi-h
+ HOMEPAGE = "http://joe-editor.sourceforge.net/"
+ LICENSE = "GPLv1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=da10ed7cf8038981c580e11c1d3e8fb6"
+-RDEPENDS_${PN} = "ncurses-terminfo"
  
- inherit autotools lib_package
+ SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz"
  
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[jpeg] = "--enable-libjpeg,--disable-libjpeg,jpeg"
++PACKAGECONFIG ??= "curses"
++PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-terminfo"
 +
- EXTRA_OECONF = "--enable-shared"
+ inherit autotools
  
- SRC_URI[md5sum] = "a342b2b4495b3e1394e161eb5d85d754"
+ SRC_URI[md5sum] = "2a6ef018870fca9b7df85401994fb0e0"
 -- 
 1.8.3.2
 
