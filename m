@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 011E26028B
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 13D2C6B32E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:40:57 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id c4so212173eek.15
+	Wed, 24 Jul 2013 12:40:58 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id e53so213350eek.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:40:58 -0700 (PDT)
+	Wed, 24 Jul 2013 05:40:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=Kw3Id7fuabheaV4ZG1+0OnLMKeTvm5ev5s8D2f+RBPg=;
-	b=rjCExE/oWkVX2hGhvPBzj2eONipgs/66V/eA4kIpHYXQAGBARL6oVoZpKxprVGc61c
-	9ePih9jS8QMSCNBL2tAgbO9VrdC8rakj6PZgFq+kraXg2UIFG8wiDIkn2Zvm1XfJt0AM
-	lA6ax3Y+kSjXGBPW3p/oAko7TcXgTsN/241zT2ldvlpfnY3lYrni0GzhZ81oByiZKmpc
-	7aO1kvCQ6Q15CdG94mjDz94NZA/wLAKrtyvtgrfJD0TCr3ICnlh2jSIGMZwjMFNCQTs/
-	oVjW4axoeYZCGX30Qy037wlu2ceoEhD5p1jeveUHRTMXqAJ+WCRXQY6hIPrXrd9M8jZw
-	BW9w==
-X-Received: by 10.15.21.199 with SMTP id d47mr37014366eeu.36.1374669658168;
-	Wed, 24 Jul 2013 05:40:58 -0700 (PDT)
+	bh=F5QXg3WT6UyiSI1V8Jkjw4y4YNv5Z6f8E2Ei0/e0fy0=;
+	b=NPqjS5Rml40nofcL3+FXbCRxG9pa/P78p64/LXp0f11/DxJ9V7xlBsMojsGNKMke9N
+	80e3Lfyf0Fqe8+hLr0DtRE5gnti5VM6wLYGjZsF3aBIFmE1Mm8SEk7OR/WHTfn2ieqqY
+	hWY71QIek1D3ZHBjHousjRuRPUdg77BAr/3DnlT9b4tK6XssQixi0IoJpQEsO+5HVYT0
+	kd5ZQt/1jvUIPAx8beblFGT6j79mxJ0ivOdNTbowFmlaptMrUQt6/oFRb0xY4Z1kAYFW
+	jc54KP8tZe3cze00Yug2JNpAyuRmA9e5R2wc0bbILT4CssxFMLKEdi04lxY6mbueurm9
+	W14A==
+X-Received: by 10.14.103.196 with SMTP id f44mr37114147eeg.37.1374669659520;
+	Wed, 24 Jul 2013 05:40:59 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	n45sm65924504eew.1.2013.07.24.05.40.57 for <multiple recipients>
+	n5sm65859498eed.9.2013.07.24.05.40.58 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:40:57 -0700 (PDT)
+	Wed, 24 Jul 2013 05:40:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:40:48 +0200
-Message-Id: <5ce129a2d3a1f99aed5f182b36863f1be272e576.1374669516.git.Martin.Jansa@gmail.com>
+Date: Wed, 24 Jul 2013 14:40:49 +0200
+Message-Id: <89cd32a3119a8fca95fea1cd4f37cc9c5e867279.1374669516.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 References: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1374669516.git.Martin.Jansa@gmail.com>
 References: <cover.1374669516.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 04/29] atftp: add PACKAGECONFIG for pcre, readline, tcp-wrapper
+Subject: [meta-oe][PATCH 05/29] fbida: add dependency on curl libungif tiff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:40:58 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 12:40:59 -0000
 
 * it's autodetected from sysroot
+* GNUMakefile doesn't allow to use PACKAGECONFIG to explicitly disable them
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-daemons/atftp/atftp_git.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-graphics/fbida/fbida_2.09.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-index 09451bc..4b9ff05 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-@@ -18,6 +18,11 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb b/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
+index aa4c1ca..24100ee 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
+@@ -6,7 +6,7 @@ SECTION = "utils"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
  
- inherit autotools update-rc.d useradd systemd
+-DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif"
++DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif curl libungif tiff"
  
-+PACKAGECONFIG ??= "tcp-wrappers"
-+PACKAGECONFIG[pcre] = "--enable-libpcre,--disable-libpcre,libpcre"
-+PACKAGECONFIG[tcp-wrappers] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
-+PACKAGECONFIG[readline] = "--enable-libreadline,--disable-libreadline,readline"
-+
- INITSCRIPT_PACKAGES = "${PN}d"
- INITSCRIPT_NAME_${PN}d = "atftpd"
- INITSCRIPT_PARAMS_${PN}d = "defaults 80"
+ SRC_URI = "git://git.kraxel.org/fbida"
+ SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
 -- 
 1.8.3.2
 
