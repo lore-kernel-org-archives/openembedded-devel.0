@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 499A26B383
+Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 462656B340
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:41:13 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id e53so213496eek.40
+	Wed, 24 Jul 2013 12:41:14 +0000 (UTC)
+Received: by mail-ea0-f172.google.com with SMTP id q10so218605eaj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:41:13 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=1iMAhjRTQCTBfNaIeGQCSyLd2vK4fqFJ7D/zUXlC2Pg=;
-	b=gkzkPmqMsnm0wvTNOcwdErAQ+vUeaTt75q+UYurKuztKsOd/JB/fwi2JSbDxwj3V3S
-	AZVhWAl3xB9ihhkv6I9dchbuXjP9y8WUylHZ4aPltfgj+W68iEEgCXXiKZCj6YN0aKEv
-	z2GYPw/fTof90k4TlLsE1OrxJnTGBh++LmmWAxbzUmV30XUUtSoOCL9xSO9o0bsbQUMU
-	nWgpMHDZGskIJNZ84NsmsdFzkxNWOlqxPkc4UqP/0VcNg0Pav0tt9YL/HM2hHhhZ51q/
-	6iEI8e8kSPxLZ8pfE9hxFfZGHE0LYxvSIq1/rSH+dAc6QcMDgrUwCd+92TLCYwOQdwqi
-	j1KA==
-X-Received: by 10.15.35.65 with SMTP id f41mr28110471eev.61.1374669673460;
-	Wed, 24 Jul 2013 05:41:13 -0700 (PDT)
+	bh=mWgTEwLA8e9l8siFCNE+IxON9OUKo6PHCr704cFRbr8=;
+	b=IXas9yF3a48gS59hK+Oza4YNl3Lu4WHK59+gVmZo9Ls4MEaOTuWH7xBNaMt/gDD3/6
+	8+t+IjdEdG25ECXq+5cpj/gXpjeVkrcFGYyza4pGYOBTwYO+jLs3kaoQujPaOuDyeRFn
+	CSkG6pXwgakW5kfPGDgoHL3l76pqgVz4Qr9hdzrg/u1kCTzfE9dTG2VidJCW8PDgg9wn
+	LRCPNT5IXTxdiDC9vS1B+L35HkkqiZ/qBY+mJwrfpQoxh/76PSKs99LnqawOMQeKaFA2
+	EbN4Agpklt9bdL9r7SfE5Fl/W4DtClbS/6KgBSPwva5Cz8XcJMvq61CjgWEBInfOfQx4
+	Eo+A==
+X-Received: by 10.14.223.5 with SMTP id u5mr29305043eep.131.1374669674757;
+	Wed, 24 Jul 2013 05:41:14 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	l42sm65832815eeo.14.2013.07.24.05.41.12 for <multiple recipients>
+	n42sm65833064eeh.15.2013.07.24.05.41.14 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:41:13 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:14 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:40:58 +0200
-Message-Id: <01995f41de94909a078f01304c388d03c955f4a7.1374669516.git.Martin.Jansa@gmail.com>
+Date: Wed, 24 Jul 2013 14:40:59 +0200
+Message-Id: <8c11f02982a666a945338da744e23d38708b4b0a.1374669516.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 References: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1374669516.git.Martin.Jansa@gmail.com>
 References: <cover.1374669516.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 14/29] sox: add PACKAGECONFIG for magic and wavpack
+Subject: [meta-oe][PATCH 15/29] usbmuxd: add PACKAGECONFIG for plist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,33 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:41:13 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 12:41:14 -0000
 
 * it's autodetected from sysroot
 * add PACKAGECONFIG to make it deterministic
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-index 715860b..25b3d5f 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-@@ -10,9 +10,12 @@ PR = "r1"
+diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+index bb92941..595582a 100644
+--- a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
++++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+@@ -17,3 +17,5 @@ S = "${WORKDIR}/git"
  
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
-                    ${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
-+                   magic \
- "
- PACKAGECONFIG[pulseaudio] = "--with-pulseaudio=dyn,--with-pulseaudio=no,pulseaudio,"
- PACKAGECONFIG[alsa] = "--with-alsa=dyn,--with-alsa=no,alsa-lib,"
-+PACKAGECONFIG[wavpack] = "--with-wavpack=dyn,--with-wavpack=no,wavpack,"
-+PACKAGECONFIG[magic] = "--with-magic,--without-magic,file,"
+ FILES_${PN} += "${base_libdir}/udev/rules.d/"
  
- LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[plist] = "-DWANT_PLIST=1,-DWANT_PLIST=0,libplist"
 -- 
 1.8.3.2
 
