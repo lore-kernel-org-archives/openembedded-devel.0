@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 27B766B3A0
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 154306B3A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:41:31 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id a15so218368eae.12
+	Wed, 24 Jul 2013 12:41:32 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id g10so216656eak.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:41:31 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:in-reply-to:references;
-	bh=cmUswwXaZ9yEeSDwM7GMIBY920EmDXoZcUk4xG48bR4=;
-	b=f1mg5+nfiRn/9Au5c4+Aehsa4cTIR2eMnOMgCcVt6HPWFnHIw85f1nwuxPtGG8IAb8
-	At3SUwaNYysoOtIUKUnhzgEw9uzYOEFLrm/2bA+7ORGV5qvcClFVSOwTnJLRM+h08QJo
-	4zzLku5XTgw00TyEAHt4P2wsiNhKd8N+JXGI8jQoh4QuqPwB6Fkom1+1C/nATF7xovCl
-	dn5c4jCpZbu/oa/ZP0cw+yFa8ADrLggtqTiaqmYXHBUmkBVTWjcV9tQFKUDb7mc7p8Uf
-	pGoSdIhbhhRhMtUJ9LtYky7uS6VMYrr2q6pKKULltbls4sakUy+N0SMfgM12/ZNcOn2r
-	TmFQ==
-X-Received: by 10.14.246.77 with SMTP id p53mr36966236eer.11.1374669691491;
-	Wed, 24 Jul 2013 05:41:31 -0700 (PDT)
+	bh=c78XumzEQfhawSoVA1TculaNuAr4VE6vYAXq59doLFM=;
+	b=rtTx8gVmMdSQbbep16CWOABQR7zVHvO4/WrfiOqtQMHzmPe2CkDo3oOtT/kEmU9tlZ
+	l/gufP+zLrdcd0rYrSm9qDR9tUToqhNrnPibwCMEKKSzCB/391x9bINGia0oky7UhvkH
+	zBCUoq43t/MzCEkEXHG1nG8deVO7xhuGs9yzACrfWaUdEeyoDwyq5j9Uj40u3Nzrz12X
+	MQlk+kMB1kPIbsNrRgzf+bPrTnfI1jb2PBch5r2Mv/QyqtYYSPK1Z2oyyQQFtHASojjO
+	rNgUn+4NueTUeWV75siwTQBm8J2Yf4V7T+jJJusrIJ2C/Vr54ig9WTXz36UTLLttFpu3
+	YnJA==
+X-Received: by 10.15.27.195 with SMTP id p43mr37789771eeu.5.1374669693415;
+	Wed, 24 Jul 2013 05:41:33 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	i2sm65898081eeu.4.2013.07.24.05.41.30 for <multiple recipients>
+	p49sm65918692eeu.2.2013.07.24.05.41.32 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:41:30 -0700 (PDT)
+	Wed, 24 Jul 2013 05:41:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:41:10 +0200
-Message-Id: <7f0b07f301c4d815c76f498c6e34044836ac1bd4.1374669516.git.Martin.Jansa@gmail.com>
+Date: Wed, 24 Jul 2013 14:41:11 +0200
+Message-Id: <99489e00228fdc16bc557e0c3e9712afbad874dc.1374669516.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 References: <bddf85b42118361920fbde7c54baffd0e085d5a7.1374669516.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1374669516.git.Martin.Jansa@gmail.com>
 References: <cover.1374669516.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 26/29] samba: add packageconfig for fam
+Subject: [meta-oe][PATCH 27/29] smbnetfs: add packageconfig for gnome-keyring
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,25 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:41:31 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 12:41:33 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-connectivity/smbnetfs/smbnetfs_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index df8ed68..7391bbf 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -43,6 +43,7 @@ EXTRA_OECONF='--disable-cups \
+diff --git a/meta-oe/recipes-connectivity/smbnetfs/smbnetfs_git.bb b/meta-oe/recipes-connectivity/smbnetfs/smbnetfs_git.bb
+index 3bb1c6d..2141137 100644
+--- a/meta-oe/recipes-connectivity/smbnetfs/smbnetfs_git.bb
++++ b/meta-oe/recipes-connectivity/smbnetfs/smbnetfs_git.bb
+@@ -13,4 +13,7 @@ SRCREV = "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
  
- PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
-+PACKAGECONFIG[fam] = "--enable-fam,--disable-fam,gamin"
+ SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;protocol=git;branch=master"
  
- INITSCRIPT_PACKAGES = "samba winbind"
- INITSCRIPT_NAME_samba = "samba"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
++
+ S = "${WORKDIR}/git"
 -- 
 1.8.3.2
 
