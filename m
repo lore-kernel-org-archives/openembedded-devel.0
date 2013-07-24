@@ -1,33 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 76AE361EEB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 12:45:52 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id d49so211709eek.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 05:45:52 -0700 (PDT)
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E8726B0F2;
+	Wed, 24 Jul 2013 16:49:59 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c1so363519eek.38
+	for <multiple recipients>; Wed, 24 Jul 2013 09:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=la5/wneEhw44FBj4iXPZ5xLiK99cxnxwwm3WjyOT8iY=;
-	b=Rk8x0gL2jrgQgtFpNzCoXYs977A0GRna4uESedVBbASbWfmLRQp2FlB0UygKCIgKuy
-	gFuoLf0sF7SsxQoataXUp+HSasiMi7PLPy8xLrp+jKLSGlt4nOR+k+fq6uplVf0Uv8l3
-	lfwRQQy8eqDmt9XJ+Dv/+p+YuCzalprWQGhoSWtnrctGFvXIJJFC2ppD24hwGwZ0G9P9
-	li4vsL4wm5cAe1HZJyNt8yi5up8YRJ6hFfKwjE7nhd0iaCx00XW2CwPmE8NxvGbFL71C
-	Nk3JdIF2QE520mQbNVmnX+wl2BHmzlwEQukIjAynBcI6xwId6jExvv/eSqiugKsG73+1
-	MMvw==
-X-Received: by 10.15.53.4 with SMTP id q4mr37748269eew.134.1374669952896;
-	Wed, 24 Jul 2013 05:45:52 -0700 (PDT)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=QLsASWhv35yJy5YVA4ODDyitWcT2j3AplEd33GxFf88=;
+	b=DIBHJlrZ7HRtoWr+HjUqI2PGhy3KDo4faZPFHmQTf/fCWTpgG+e/Hstn+YHREImWib
+	v7tjQoIRWD/XHX6dKXHWuwYshG1BAOBSwDH6KwzuRzVVgqKIB8Y2ZKEDuhykVALbDQSd
+	f614yN3kG6Y6sK8INf2KlmICQBmufoHhyFgsYVQn/eggHBL1CQtzAoOLWxJPMwaODmN0
+	ZwHDDDpZ4DaPaTYqNF1nkevQo69ev3HbxAMksDDHH8oo3gC/CmWU6M3JMZbZvtweNi62
+	JnBHrKV1XhlXOSrIVepRSogAUQ9bhvSK9f1QQ2x6L3ck4QFpaFG5ememSYtsoTxJoxXr
+	myUg==
+X-Received: by 10.15.33.13 with SMTP id b13mr38697886eev.0.1374684599196;
+	Wed, 24 Jul 2013 09:49:59 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	cg12sm65903046eeb.7.2013.07.24.05.45.51 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 05:45:52 -0700 (PDT)
+	r54sm67392057eev.8.2013.07.24.09.49.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 24 Jul 2013 09:49:58 -0700 (PDT)
+Date: Wed, 24 Jul 2013 18:50:22 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jul 2013 14:46:14 +0200
-Message-Id: <1374669974-21014-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][meta-efl][PATCH] e-base: add module.so to PRIVATE_LIBS
+To: openembedded-core@lists.openembedded.org
+Message-ID: <20130724165022.GA17913@jama>
+References: <cover.1374667312.git.Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <cover.1374667312.git.Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: test-dependencies.sh results from big world build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jul 2013 12:45:52 -0000
+X-List-Received-Date: Wed, 24 Jul 2013 16:50:00 -0000
+X-Groupsio-MsgNum: 45490
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wRRV7LY7NUeQGEoC"
+Content-Disposition: inline
 
-* efl and e17 modules are installed in different directories and nothing is going to
-  link with them -> no need to register them in shlibs providers
+--wRRV7LY7NUeQGEoC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* see https://bugzilla.yoctoproject.org/show_bug.cgi?id=4628 for more
-  details about why this WARNING about multiple shlib providers was added
+My biggest build with 20+ layers included finally finished today (after
+many days because there was hw issue on server where it was running, so
+it was slower then it should be).
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/classes/e-base.bbclass | 5 +++++
- 1 file changed, 5 insertions(+)
+The results are a bit messy because:
+1) It had only some fixes from my last "autodetected dependencies"
+   patchsets for oe-core and meta-oe
+2) It was started when oe-core/master had broken boost, so many packages
+   failed because of boost
+3) It was started when oe-core/master had issues with qt-mobility (not sure if
+   all were fixed already)
+4) It wasn't using latest version of test-dependencies script
+5) It was using complete buildhistory repo which had many stalled
+   packages like task-* and couple of architectures.
 
-diff --git a/meta-efl/classes/e-base.bbclass b/meta-efl/classes/e-base.bbclass
-index f57ff90..e0ae228 100644
---- a/meta-efl/classes/e-base.bbclass
-+++ b/meta-efl/classes/e-base.bbclass
-@@ -7,3 +7,8 @@ EFL_SRCREV ?= "82070"
- ARM_INSTRUCTION_SET = "arm"
- 
- S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
-+
-+# each efl or e17 module is installing module.so in different directory, disable shlibs providers for them
-+# evas-engine-gl-x11-1.7.7 evas-engine-software-16-1.7.7 evas-engine-software-16-x11-1.7.7 evas-engine-software-x11-1.7.7 evas-engine-wayland-shm-1.7.7 evas-cserve2-bmp-1.7.7 evas-cserve2-eet-1.7.7 evas-cserve2-ico-1.7.7 evas-cserve2-jpeg-1.7.7 evas-cserve2-pmaps-1.7.7 evas-cserve2-png-1.7.7 evas-cserve2-psd-1.7.7 evas-cserve2-tga-1.7.7 evas-cserve2-tiff-1.7.7 evas-cserve2-wbmp-1.7.7 evas-cserve2-xpm-1.7.7 evas-loader-bmp-1.7.7 evas-loader-generic-1.7.7 evas-loader-gif-1.7.7 evas-loader-ico-1.7.7 evas-loader-jpeg-1.7.7 evas-loader-pmaps-1.7.7 evas-loader-png-1.7.7 evas-loader-psd-1.7.7 evas-loader-tga-1.7.7 evas-loader-tiff-1.7.7 evas-loader-wbmp-1.7.7 evas-loader-xpm-1.7.7 evas-saver-jpeg-1.7.7 evas-saver-png-1.7.7 evas-saver-tiff-1.7.7 evas-engine-fb-1.7.7
-+# emotion-1.7.7 elementary-1.7.7 elementary-tests-1.7.7 elementary-accessibility-1.7.7 e-wm-0.17.3 elfe-0.0.1+svnr82070 shr-e-gadgets-0.0.0+gitr1+27b6c17d73 cpu-0.0.1+svnr82070 places-0.1.0+svnr82070 forecasts-0.2.0+svnr82070 uptime-0.0.2+svnr82070 screenshot-0.3.0+svnr82070 exalt-client-0.0.1+svnr82070 diskio-0.0.1+svnr82070 rain-0.0.3+svnr82070 news-0.1.0+svnr82070 flame-0.0.3+svnr82070
-+PRIVATE_LIBS = "module.so"
--- 
-1.8.3.2
+But at least it will allow me to restrict recipes to rebuild from 1900 to
+only 256 which were failing in this build.
+
+It was tested only for qemuarm.
+
+Complete logs are here:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/test-dependencies-2013-07-24/
+
+Interesting parts
+11 recipes failed in world build:
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/test-dependencies-2013-07-24/failed.world
+
+101 recipes failed in minimal build (8 caused by boost):
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/test-dependencies-2013-07-24/failed.min
+
+216 packages (160 recipes) doesn't have deterministic dependencies
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/test-dependencies-2013-07-24/failed.dependencies
+
+Next results should be more interesting, because many issues are already
+fixed by change I've sent today to oe-core and oe-devel ML, but not all,
+because they were detected in build without x11 in DISTRO_FEATURES and
+without some layers (like meta-browser meta-efl meta-gnome meta-gpe
+meta-initramfs meta-webserver meta-xfce).
+
+Cheers,
 
 
+--wRRV7LY7NUeQGEoC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHwBc4ACgkQN1Ujt2V2gBzmXACeMSgpwvZ1akYHF/6J+QuRH2ng
++Y8AoK2PftVnEJwwJmpDry554hbGKXNi
+=vTSb
+-----END PGP SIGNATURE-----
+
+--wRRV7LY7NUeQGEoC--
