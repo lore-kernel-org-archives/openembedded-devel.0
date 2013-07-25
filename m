@@ -1,42 +1,35 @@
-Return-Path: <chgans@googlemail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 234B96065F
+Return-Path: <net147@gmail.com>
+Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
+	[209.85.160.45])
+	by mail.openembedded.org (Postfix) with ESMTP id CBE6F6065F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2013 00:13:56 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kl13so1288262pab.6
+	Thu, 25 Jul 2013 02:37:59 +0000 (UTC)
+Received: by mail-pb0-f45.google.com with SMTP id mc8so153708pbc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jul 2013 17:13:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=sender:message-id:date:from:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=fBcySIOmMXS1K94c8qykbGjW2ZWfd44hX650YZGCGsk=;
-	b=fuRTAnbUK8ethjSVL/wD4+yHg1sNt6LAWP4DPHCYxt41sHkJqPBQfEBtyCyByXgsg2
-	y+XiVSYEOxTu5dOh6cm8f61epV19qbPtHzIKCXxx/faPwG/1RJ9r3nVjKgbK1Ut4uwIG
-	YqGouhsow97ZWFe9qr5yxjel+FgivbuH+rrdX5qFfvEViH/s6y7WHSaRKiytnnjTqm2q
-	cT8tICkWw2e3YpqjJJW4Q2q6hG/w8TU22rxlnNeYFfBZhwaLq9HNf1nxzZUuW7tMu03s
-	JwGyEbwsEFZethHVXFmfWZ1beTpxAFV9crOIlrd92fsIrA6BiKPSp2MFS76BGcBxSUD2
-	z2Vg==
-X-Received: by 10.68.253.138 with SMTP id aa10mr44772638pbd.24.1374711236619; 
-	Wed, 24 Jul 2013 17:13:56 -0700 (PDT)
-Received: from krys-red.trunet.local ([210.48.94.225])
-	by mx.google.com with ESMTPSA id nj9sm5925664pbc.13.2013.07.24.17.13.54
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 24 Jul 2013 17:13:55 -0700 (PDT)
-Sender: Chris Gagneraud <chgans@googlemail.com>
-Message-ID: <51F06DC0.5080802@gna.org>
-Date: Thu, 25 Jul 2013 12:13:52 +1200
-From: Christian Gagneraud <chgans@gna.org>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
+	Wed, 24 Jul 2013 19:38:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=LMeJSNfgQMkyEa+EXiteuYzja7RYJMgut7rISEcsMAg=;
+	b=Es3oTT5FUH6NDrpIYgprG5ZTeEUPLnoA5ViX3C8yNNKxcESck+m8ZoogbK5AcOtJcz
+	DcWSEkwD6Efndt48AjcKYTSsu4aGpJJFQPcpnsJvoyp5ES9B1qHHdXbWtOfff0+2znlS
+	AbTbInqrpuPYhBhgWnfY5hDIrG5UjLwV+Bn7hwb6hecRAhY85dk4eX27bBsYS+y9/jRu
+	X9T/z2U68ZGzY6oCAueOP1gUmp5I9SN4gymZ64cZBEg16YSiqFiEE91WAmj2d0gLyG7Y
+	F03y+aCB4LTDDXLSCceH5vi5qPAPMNfPRkVqrn2UZTUVDteF6i2clOxYenUHAfkgIhdb
+	Es6w==
+X-Received: by 10.66.102.101 with SMTP id fn5mr12095491pab.115.1374719880588; 
+	Wed, 24 Jul 2013 19:38:00 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	xe9sm50931343pbc.21.2013.07.24.19.37.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 24 Jul 2013 19:37:59 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1374701507-26976-1-git-send-email-chgans@gna.org>
-	<20130724215553.GB17913@jama>
-In-Reply-To: <20130724215553.GB17913@jama>
-Subject: Re: [meta-qt5][dylan][PATCH] qtbase.inc: Fix qtbase-tools runtime depencency on perl
+Date: Thu, 25 Jul 2013 12:53:39 +1000
+Message-Id: <1374720819-23241-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH] qwt: install Qt Designer plugins to correct directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,62 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2013 00:13:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Jul 2013 02:37:59 -0000
 
-On 25/07/13 09:55, Martin Jansa wrote:
-> On Thu, Jul 25, 2013 at 09:31:47AM +1200, Christian Gagneraud wrote:
->> While building a custom rootfs using poky, meta-oe, meta-ti and meta-qt5 (all on Dylan branch), I got the following error:
->> [...]
->> | Computing transaction...error: Can't install qtbase-tools-5.0.2-r2.0@armv7a_vfp_neon: no package provides /usr/bin/perl
->> [...]
->>
->> qtbase-tools seems to depends on perl (at runtime), but this wasn't specified in any bb file, this patch fixes it.
->
-> Have you tried which files require perl?
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-qt/qwt/qwt.inc | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-I didn't, but now I did:
-christiaga@krys-red:~/projects/yocto/poky-ti-qt5$ file 
-build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.0.2-r2.0/package/usr/bin/qt5/*|grep 
--i perl
-build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.0.2-r2.0/package/usr/bin/qt5/syncqt: 
-Perl script, ASCII text executable
-
->
->>
->> Signed-off-by: Christian Gagneraud <chgans@gna.org>
->> ---
->>   recipes-qt/qt5/qtbase.inc | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
->> index f521a30..a72a3d6 100644
->> --- a/recipes-qt/qt5/qtbase.inc
->> +++ b/recipes-qt/qt5/qtbase.inc
->> @@ -23,6 +23,8 @@ SRC_URI += " \
->>
->>   DEPENDS += "qtbase-native freetype jpeg libpng zlib openssl glib-2.0 ${ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS} ${FONTCONFIG_DEPENDS}"
->>
->> +RDEPENDS_${PN}-tools += "perl"
->> +
->>   # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and dbus/dbus.h
->>   # XCB_DEPENDS += "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
->>   # reenable when we switch to "-qt-xcb" and build of
->> --
->> 1.8.1.2
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.inc
+index d9d47f0..60f73a6 100644
+--- a/meta-oe/recipes-qt/qwt/qwt.inc
++++ b/meta-oe/recipes-qt/qwt/qwt.inc
+@@ -29,10 +29,12 @@ do_install() {
+     for i in * ; do
+         cp -pPR ${i} ${D}/${bindir}/${i}${QT_LIBINFIX}
+     done
++    install -d ${D}${libdir}/${QT_DIR_NAME}
++    mv ${D}${prefix}/plugins ${D}${libdir}/${QT_DIR_NAME}
+ }
+ 
+ PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
+ FILES_${PN}-examples = "${bindir}/*"
+ FILES_${PN}-features = "${prefix}/features"
+-FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
+-FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
++FILES_${PN}-plugins = "${libdir}/${QT_DIR_NAME}/plugins/designer/*.so"
++FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/designer/.debug"
+-- 
+1.8.3.2
 
 
