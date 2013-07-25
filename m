@@ -1,46 +1,40 @@
-Return-Path: <B40290@freescale.com>
-Received: from co9outboundpool.messaging.microsoft.com
-	(co9ehsobe001.messaging.microsoft.com [207.46.163.24])
-	by mail.openembedded.org (Postfix) with ESMTP id DFA5160FEE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 274F460FEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2013 09:27:48 +0000 (UTC)
-Received: from mail204-co9-R.bigfish.com (10.236.132.227) by
-	CO9EHSOBE024.bigfish.com (10.236.130.87) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 25 Jul 2013 09:27:48 +0000
-Received: from mail204-co9 (localhost [127.0.0.1])	by
-	mail204-co9-R.bigfish.com (Postfix) with ESMTP id B63E11001C3	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2013 09:27:48 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h17326ah1de097h1de096h8275bhz2dh2a8h668h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1155h)
-Received: from mail204-co9 (localhost.localdomain [127.0.0.1]) by mail204-co9
-	(MessageSwitch) id 1374744466704005_14097;
-	Thu, 25 Jul 2013 09:27:46 +0000 (UTC)
-Received: from CO9EHSMHS018.bigfish.com (unknown [10.236.132.225])	by
-	mail204-co9.bigfish.com (Postfix) with ESMTP id A8218580047	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jul 2013 09:27:46 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS018.bigfish.com
-	(10.236.130.28) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 25 Jul 2013 09:27:43 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.3.136.1; Thu, 25 Jul 2013 09:27:41 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r6P9Rc59027919;	Thu, 25 Jul 2013 02:27:39 -0700
-From: Chunrong Guo <B40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Jul 2013 17:27:35 +0800
-Message-ID: <1374744455-20983-1-git-send-email-B40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Thu, 25 Jul 2013 10:27:17 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id r16so843226ead.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Jul 2013 03:27:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=NMmRuYne7SYwarRnNCmrJm1444uVmTtahSIZLGe1UYg=;
+	b=e0nnsdC/Hg6ob21HB4KW6RsE45VFtRBCOZKeap5mtoWtwAk/OE8f9S1NlMhJ4ioUFt
+	M1jl1/LeJuPiEo9jZcj8zTOgB0YeUXs8FYRf4EZqR1uWomuU5FSBdKydnnGT+akvAH3x
+	PUY4wOt96QRBmBQ386WCLnn7Yf8TEl79f//2n6g3iuAmr9GSWsS8kERXV40jHjhV/p4t
+	zsIv5h2G96xGzGAaSraoOy0yPij3DBPzDTemi4skEfUOuUCkQm02ukyIm4LhavpcLoUE
+	yjLKBWlMXM61M7boXMwTCvXBQrgJG62iINfImbL2tOMi/KMxnzndgDDQrj5mhVbNF63Q
+	ikYg==
+X-Received: by 10.15.94.142 with SMTP id bb14mr42197417eeb.112.1374748037018; 
+	Thu, 25 Jul 2013 03:27:17 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	e44sm72627033eeh.11.2013.07.25.03.27.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 25 Jul 2013 03:27:16 -0700 (PDT)
+Date: Thu, 25 Jul 2013 12:27:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130725102740.GC17913@jama>
+References: <1374701507-26976-1-git-send-email-chgans@gna.org>
+	<20130724215553.GB17913@jama> <51F06DC0.5080802@gna.org>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: b40527@freescale.com
-Subject: [meta-oe][PATCH] iperf: Fix license
+In-Reply-To: <51F06DC0.5080802@gna.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-qt5][dylan][PATCH] qtbase.inc: Fix qtbase-tools runtime depencency on perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,32 +48,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2013 09:27:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Jul 2013 10:27:19 -0000
+X-Groupsio-MsgNum: 45499
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+xNpyl7Qekk2NvDX"
+Content-Disposition: inline
 
-    *the current version of Iperf has a false LICENSE set,
-     so fix license with the generic BSD license
+--+xNpyl7Qekk2NvDX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Thu, Jul 25, 2013 at 12:13:52PM +1200, Christian Gagneraud wrote:
+> On 25/07/13 09:55, Martin Jansa wrote:
+> > On Thu, Jul 25, 2013 at 09:31:47AM +1200, Christian Gagneraud wrote:
+> >> While building a custom rootfs using poky, meta-oe, meta-ti and meta-q=
+t5 (all on Dylan branch), I got the following error:
+> >> [...]
+> >> | Computing transaction...error: Can't install qtbase-tools-5.0.2-r2.0=
+@armv7a_vfp_neon: no package provides /usr/bin/perl
+> >> [...]
+> >>
+> >> qtbase-tools seems to depends on perl (at runtime), but this wasn't sp=
+ecified in any bb file, this patch fixes it.
+> >
+> > Have you tried which files require perl?
+>=20
+> I didn't, but now I did:
+> christiaga@krys-red:~/projects/yocto/poky-ti-qt5$ file=20
+> build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.0.2-r2.0/packa=
+ge/usr/bin/qt5/*|grep=20
+> -i perl
+> build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.0.2-r2.0/packa=
+ge/usr/bin/qt5/syncqt:=20
+> Perl script, ASCII text executable
 
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-index 8107701..03b8fe0 100644
---- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-+++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Iperf is a tool to measure maximum TCP bandwidth, allowing the tuning of various parameters and UDP characteristics"
- HOMEPAGE = "http://dast.nlanr.net/Projects/Iperf/"
- SECTION = "console/network"
--LICENSE = "NewBSD"
-+LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
- 
- SRC_URI = " \
--- 
-1.7.5.4
+Merged in dylan and master with small modifications, thanks.
 
+>=20
+> >
+> >>
+> >> Signed-off-by: Christian Gagneraud <chgans@gna.org>
+> >> ---
+> >>   recipes-qt/qt5/qtbase.inc | 2 ++
+> >>   1 file changed, 2 insertions(+)
+> >>
+> >> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> >> index f521a30..a72a3d6 100644
+> >> --- a/recipes-qt/qt5/qtbase.inc
+> >> +++ b/recipes-qt/qt5/qtbase.inc
+> >> @@ -23,6 +23,8 @@ SRC_URI +=3D " \
+> >>
+> >>   DEPENDS +=3D "qtbase-native freetype jpeg libpng zlib openssl glib-2=
+=2E0 ${ICU} udev ${XCB_DEPENDS} ${GL_DEPENDS} ${TSLIB_DEPENDS} ${FONTCONFIG=
+_DEPENDS}"
+> >>
+> >> +RDEPENDS_${PN}-tools +=3D "perl"
+> >> +
+> >>   # to provide xcb/xcb_icccm.h, xcb/xcb_image.h, xcb/xcb_keysyms.h and=
+ dbus/dbus.h
+> >>   # XCB_DEPENDS +=3D "xcb-util-wm xcb-util-image xcb-util-keysyms dbus"
+> >>   # reenable when we switch to "-qt-xcb" and build of
+> >> --
+> >> 1.8.1.2
+> >>
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--+xNpyl7Qekk2NvDX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlHw/ZwACgkQN1Ujt2V2gBw6JACfa6nQPNITJLxO/nx8jlVF04eU
+7YsAnRQukM0CZW3tpI9Jv5y/u8NhgLDT
+=xe0G
+-----END PGP SIGNATURE-----
+
+--+xNpyl7Qekk2NvDX--
