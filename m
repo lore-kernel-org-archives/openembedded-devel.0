@@ -1,20 +1,30 @@
-Return-Path: <mihai.prica@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id B11786041D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2013 14:57:26 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 26 Jul 2013 07:57:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,752,1367996400"; d="scan'208";a="337368926"
-Received: from mihai-vostro-460.rb.intel.com ([10.237.105.61])
-	by azsmga001.ch.intel.com with ESMTP; 26 Jul 2013 07:57:22 -0700
-From: Mihai Prica <mihai.prica@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jul 2013 17:57:26 +0300
-Message-Id: <1374850646-17577-1-git-send-email-mihai.prica@intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] postgresql: upgrade to 9.2.4
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AC8C6AE6E;
+	Fri, 26 Jul 2013 16:08:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r6QG8Ji6004219
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 26 Jul 2013 09:08:19 -0700 (PDT)
+Received: from [128.224.20.81] (128.224.20.81) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 26 Jul 2013 09:08:19 -0700
+Message-ID: <51F29EEF.1020806@windriver.com>
+Date: Fri, 26 Jul 2013 12:08:15 -0400
+From: Randy MacLeod <randy.macleod@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <51F18346.2@windriver.com> <20130725202743.GB3280@jama>
+	<2462161.40E7azp51u@helios>
+In-Reply-To: <2462161.40E7azp51u@helios>
+X-Originating-IP: [128.224.20.81]
+Cc: koen@dominion.thruhere.net, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] Add lua to oe-core.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,88 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2013 14:57:26 -0000
+X-List-Received-Date: Fri, 26 Jul 2013 16:08:24 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Mihai Prica <mihai.prica@intel.com>
----
- .../remove.autoconf.version.check.patch            |   12 ++++++------
- meta-oe/recipes-support/postgresql/postgresql.inc  |    4 ++--
- .../{postgresql_8.4.7.bb => postgresql_9.2.4.bb}   |    6 +++---
- 3 files changed, 11 insertions(+), 11 deletions(-)
- rename meta-oe/recipes-support/postgresql/{postgresql-8.4.7 => postgresql-9.2.4}/remove.autoconf.version.check.patch (56%)
- rename meta-oe/recipes-support/postgresql/{postgresql_8.4.7.bb => postgresql_9.2.4.bb} (32%)
+On 13-07-26 10:11 AM, Paul Eggleton wrote:
+> On Thursday 25 July 2013 22:27:43 Martin Jansa wrote:
+>> On Thu, Jul 25, 2013 at 03:57:58PM -0400, Randy MacLeod wrote:
+>>> I've found that many projects use the lua scripting language.
+>>> I'd like to move it from meta-oe to oe-core:
+>>>
+>>> http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/recip
+>>> es-devtools/lua/lua5.1_5.1.5.bb?h=master
+>>>
+>>> http://www.lua.org/about.html
+>>>
+>>> lua-5.2.2 is current, see: http://www.lua.org/download.html
+>>> so we'd likely uprev and send that version.
+>>>
+>>> rpm and lighttpd could (would?) optionally depend on lua.
+>>>
+>>> oe-core.git $ grep -r lua * | egrep -v 'valuat|valuable|uargp|rpm'
+>>>
+>>> meta/recipes-extended/lighttpd/lighttpd_1.4.32.bb:
+>>>                --without-lua \
+>>>
+>>> Any comments pro or con before we do the uprev, testing and send
+>>> a commit?
+>>
+>> 2 recipes which would optionally depend on it doesn't make it good
+>> "core" component IMHO.
+>>
+>> But uprev, few PACKAGECONFIGs and more testing would be nice.
+>
+> I concur with Martin, if we're only talking about optional dependencies this
+> should just be a case of adding the PACKAGECONFIG options to the recipes in
+> OE-Core (or whereever they happen to be), with lua remaining in meta-oe.
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/remove.autoconf.version.check.patch
-similarity index 56%
-rename from meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
-rename to meta-oe/recipes-support/postgresql/postgresql-9.2.4/remove.autoconf.version.check.patch
-index 514a9aa..022aa3d 100644
---- a/meta-oe/recipes-support/postgresql/postgresql-8.4.7/remove.autoconf.version.check.patch
-+++ b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/remove.autoconf.version.check.patch
-@@ -1,15 +1,15 @@
--Index: postgresql-8.4.7/configure.in
-+Index: postgresql-9.2.4/configure.in
- ===================================================================
----- postgresql-8.4.7.orig/configure.in
--+++ postgresql-8.4.7/configure.in
-+--- postgresql-9.2.4.orig/configure.in
-++++ postgresql-9.2.4/configure.in
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
-  
-- AC_INIT([PostgreSQL], [8.4.7], [pgsql-bugs@postgresql.org])
-+ AC_INIT([PostgreSQL], [9.2.4], [pgsql-bugs@postgresql.org])
-  
---m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
-+-m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.63], [], [m4_fatal([Autoconf version 2.63 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
- -recommended.  You can remove the check from 'configure.in' but it is then
- -your responsibility whether the result works or not.])])
-- AC_COPYRIGHT([Copyright (c) 1996-2009, PostgreSQL Global Development Group])
-+ AC_COPYRIGHT([Copyright (c) 1996-2012, PostgreSQL Global Development Group])
-  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-  AC_CONFIG_AUX_DIR(config)
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index 4fda67b..5f2088e 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -2,13 +2,13 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
- HOMEPAGE = "http://www.postgresql.com"
- LICENSE = "BSD"
- DEPENDS = "zlib readline tzcode-native"
--INC_PR = "r8"
-+INC_PR = "r0"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
- #WARNING: this recipe assumes you have the timezone compiler present in /usr/sbin/zic
- 
--SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
-+SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
- 
- LEAD_SONAME = "libpq.so"
- 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-similarity index 32%
-rename from meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb
-rename to meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-index 63f324c..59665da 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_8.4.7.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-@@ -1,10 +1,10 @@
- require postgresql.inc
- 
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=29b81b066680be9ffd98cb9d2afb9de6"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ab55a5887d3f8ba77d0fd7db787e4bab"
- 
- PR = "${INC_PR}.0"
- 
- SRC_URI += "file://remove.autoconf.version.check.patch"
- 
--SRC_URI[md5sum] = "689397187bb1dfe9b5cbde99538311c3"
--SRC_URI[sha256sum] = "08032849da121e67e318f7ff4e68d3ac88f29050e242641f717c4270839b597b"
-+SRC_URI[md5sum] = "6ee5bb53b97da7c6ad9cb0825d3300dd"
-+SRC_URI[sha256sum] = "d97dd918a88a4449225998f46aafa85216a3f89163a3411830d6890507ffae93"
+I understand your reluctance to add bloat to oe-core but from a
+users point of view a base distro should have a reasonable
+collection of tools. I'll add lua to our internal layer since
+we don't support all of meta-oe. We'll uprev and send meta-oe the
+new recipe.
+
+> However I am aware that lua may be a hard dependency for upcoming versions of
+> stuff we do have in OE-Core (I can't recall which). We'll have to cross that
+> bridge when we come to it.
+
+Ok. Thanks for the feedback.
+
+// Randy
+>
+> Cheers,
+> Paul
+>
+
+
 -- 
-1.7.9.5
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350
 
