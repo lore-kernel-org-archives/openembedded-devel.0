@@ -1,38 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id BCE596AB67;
-	Thu, 25 Jul 2013 20:27:18 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id e53so1167532eek.40
-	for <multiple recipients>; Thu, 25 Jul 2013 13:27:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bE+SLvaTZe4qHk3mlT4xCoZYaVf/NXz6qccYAOp5B0M=;
-	b=oM7oiqz91MOqJVCSUhg+MwahaNRdb7TTdqYf+77/IGl5QqSFBwFv3J6Mu53KQ1D0gy
-	gJpOcXY5h4vKkex854KSFXUqIUZf/z20wzDwCitk+Jnb8snKkB90d+iQL5Rq6zVRU005
-	X9D+iH0xaxJUFeEIIVrL8cdn1C05gYVR64tHKpEdY9WogK+Zm7XyNBd08r+H0MlDQecJ
-	H+5cqKRodwt7/cUnT+aKAar5aA4AK7LeRNl/Cg6ZbA2LC7tLHazs1PBafsPOkScE0cak
-	wDl+Qft8y5jsGSVm3W+m2fMfGYfd4YVSUSZVgzX0jr7cAAhcIRvAQXMVt95QUvOwtKD7
-	L5TQ==
-X-Received: by 10.15.24.9 with SMTP id i9mr44028790eeu.28.1374784038882;
-	Thu, 25 Jul 2013 13:27:18 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	n42sm76017103eeh.15.2013.07.25.13.27.17 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 25 Jul 2013 13:27:18 -0700 (PDT)
-Date: Thu, 25 Jul 2013 22:27:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <20130725202743.GB3280@jama>
-References: <51F18346.2@windriver.com>
+Return-Path: <riku.voipio@linaro.org>
+Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EE4F6A960
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jul 2013 08:30:34 +0000 (UTC)
+Received: by mail-qa0-f53.google.com with SMTP id hu14so281315qab.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jul 2013 01:30:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:x-gm-message-state;
+	bh=t6Qnlw29oCUfzW64ESRoSeT5/qER2S0YGCOv8XWcBdA=;
+	b=ixPxsNqBrRRfcPAvYIrJdLZdhRYPr4+GdZpuGWlr+rZQjYwbZMj3XW7Sb3YqqVBOHe
+	5y6s8Lbgxk7BH3koBGAcgK6XMs1wJrctHhnpqsTaOgnp2+J+TaAQqZbEnX7sZnp+FzkR
+	7/VY9MRQuB6BbAl3wECkaSW2le0Nhssv72vdaB8JXG7pLTSTck71uQZEfnCUkGDiNIZy
+	Oml3AgLtakA04jJ91L1qXaglS4AWVydAarY21vvb99CVO+/0McyJ8Jx3qgQ5Vwq94YhP
+	JIKvKlQOvcReQveKt0tKmEcNa9zJ5EwDbVlnOXG3RTuJPlmgUQ2Ezn7lmvRQwMoAbjHC
+	M+3w==
 MIME-Version: 1.0
-In-Reply-To: <51F18346.2@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: koen@dominion.thruhere.net, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: Add lua to oe-core.
+X-Received: by 10.224.80.3 with SMTP id r3mr48340024qak.22.1374827434544; Fri,
+	26 Jul 2013 01:30:34 -0700 (PDT)
+Received: by 10.49.95.74 with HTTP; Fri, 26 Jul 2013 01:30:34 -0700 (PDT)
+In-Reply-To: <1374501894-17068-1-git-send-email-riku.voipio@linaro.org>
+References: <1374501894-17068-1-git-send-email-riku.voipio@linaro.org>
+Date: Fri, 26 Jul 2013 11:30:34 +0300
+Message-ID: <CAAqcGH=k63ut9rtK0RFwqOLZk5CVyEE2JQXx-Yt96+=RN6etEA@mail.gmail.com>
+From: Riku Voipio <riku.voipio@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnaDIzLzPdol+LysM/42MbTMwayxpgbt4rfud54vNu1Ux8aRS5sXR9yQn/kLPytzeFIbjTe
+Cc: paul.eggleton@linux.intel.com
+Subject: Re: [meta-webserver][PATCH] apache2: move pidfile to run
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,58 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2013 20:27:19 -0000
-X-Groupsio-MsgNum: 45502
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3uo+9/B/ebqu+fSQ"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Jul 2013 08:30:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---3uo+9/B/ebqu+fSQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ping?
 
-On Thu, Jul 25, 2013 at 03:57:58PM -0400, Randy MacLeod wrote:
->=20
-> I've found that many projects use the lua scripting language.
-> I'd like to move it from meta-oe to oe-core:
->=20
-> =20
-> http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-oe/reci=
-pes-devtools/lua/lua5.1_5.1.5.bb?h=3Dmaster
->=20
-> http://www.lua.org/about.html
->=20
-> lua-5.2.2 is current, see: http://www.lua.org/download.html
-> so we'd likely uprev and send that version.
->=20
-> rpm and lighttpd could (would?) optionally depend on lua.
->=20
-> oe-core.git $ grep -r lua * | egrep -v 'valuat|valuable|uargp|rpm'
-> meta/recipes-extended/lighttpd/lighttpd_1.4.32.bb:
->               --without-lua \
->=20
-> Any comments pro or con before we do the uprev, testing and send
-> a commit?
+On 22 July 2013 17:04, Riku Voipio <riku.voipio@linaro.org> wrote:
+> pidile was stored in /var/apache2/log which is saved over boots.
+> This might prevent startup of apache2 on boots. Move it to /run
+> where pidfiles in general belong.
+> ---
+>  meta-webserver/recipes-httpd/apache2/apache2_2.4.4.bb | 2 ++
+>  meta-webserver/recipes-httpd/apache2/files/init       | 2 +-
+>  2 files changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.4.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.4.bb
+> index cf1e469..8c9416a 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.4.bb
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.4.bb
+> @@ -68,6 +68,8 @@ do_install_append() {
+>      # Ensure configuration file pulls in conf.d and modules.d
+>      printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+>      printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+> +    # match with that is in init script
+> +    printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+>  }
+>
+>  SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+> diff --git a/meta-webserver/recipes-httpd/apache2/files/init b/meta-webserver/recipes-httpd/apache2/files/init
+> index 346dc0d..a1adbd7 100755
+> --- a/meta-webserver/recipes-httpd/apache2/files/init
+> +++ b/meta-webserver/recipes-httpd/apache2/files/init
+> @@ -14,7 +14,7 @@ NAME=apache2
+>  PATH=/bin:/usr/bin:/sbin:/usr/sbin
+>  DAEMON=/usr/sbin/httpd
+>  SUEXEC=/usr/lib/apache/suexec
+> -PIDFILE=/var/apache2/logs/httpd.pid
+> +PIDFILE=/run/httpd.pid
+>  CONF=/etc/apache2/httpd.conf
+>  APACHECTL=/usr/sbin/apachectl
+>
+> --
+> 1.8.3.1
+>
 
-2 recipes which would optionally depend on it doesn't make it good
-"core" component IMHO.
-
-But uprev, few PACKAGECONFIGs and more testing would be nice.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3uo+9/B/ebqu+fSQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlHxij8ACgkQN1Ujt2V2gBxCTACgmyRJXKH7GIxgHmmMj+0XnSHj
-YOwAnjeQyVRvF7XQ2iCe5YXarJ0BJ1LB
-=iQvR
------END PGP SIGNATURE-----
-
---3uo+9/B/ebqu+fSQ--
