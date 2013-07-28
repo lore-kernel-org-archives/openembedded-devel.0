@@ -1,39 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CEC76041D
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 27A416065F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2013 17:43:20 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id b15so1676166eae.38
+	Sun, 28 Jul 2013 14:10:26 +0000 (UTC)
+Received: by mail-vc0-f170.google.com with SMTP id kw10so1512868vcb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jul 2013 10:43:20 -0700 (PDT)
+	Sun, 28 Jul 2013 07:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=spJaX9yiazXu0tb4PbAwyi2nDSWf1pln32X0uudX97A=;
-	b=RtLgsiQXjQZOQB4dYcCBhXqf0OyvkxhERvct/dP80i67bjXARLEPJ3hP09dCV7nodT
-	rExPwKDs30MYlfH/sXFRCbOUvyAzDZ0ilNkoK+EyIqmb3Exo/KsFuTVvhxkaYgAD4OQk
-	UYQeMcQpjzv0jwCKGlYSQR04GDU6Uh1Fer9o9ELomFQ02OTeW9vJ2FP0D98J663Xxbw/
-	ovYjDkPxZ/cI7Z+uZX2USOqz6A6HvipGOEq4AAaQ1MT+sygMWTwPlcy04h6BCd+Opc5b
-	PKuPyiWWVpRXvQ3O0IsWBqFg0ouvvNEY8r8h1pxgn//xuaQOKc1mW/0ltSVEaXptgkPj
-	sJ0g==
-X-Received: by 10.15.45.5 with SMTP id a5mr48488551eew.7.1374860600128;
-	Fri, 26 Jul 2013 10:43:20 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	r54sm82288748eev.8.2013.07.26.10.43.18
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 26 Jul 2013 10:43:19 -0700 (PDT)
-Date: Fri, 26 Jul 2013 19:43:45 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130726174345.GE3280@jama>
-References: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	bh=KZe1hP3s3B7iUCxIlfgH4ir5GKaEUMIVpcLIZg2HtTM=;
+	b=ec/Etj4pxmt0pXJ2pNsdw3+zVrJS6LkkyzzUmxhRu2Bj8iwCJ4pxro+WYMs1rWRLcS
+	X65hpacNyphEgADDDVzDvZRazMmcwTRdeBXg/ttDcVw1T/eqttsW0qFgjXER5zTVvoA6
+	DtGvNquiguVK6tnCVLfKxH/6xxeFC8uzNjD7DFfH3mTbIy2Bpn5FGSxrM6lj6EXw4X7P
+	dlW37z23HW4pU2N/mcU1rqWhAsckeDj/H1SOHC2yQugEX3b3W+pzBHLBudTMTENITAJY
+	BxUY8eCQchN4CXwTFiZ+YZmVmVJuY936p+828fZGbA8LbIFULQ37s2k3Q6YQ1+qLaDgM
+	WkCg==
+X-Received: by 10.52.75.162 with SMTP id d2mr14249479vdw.86.1375020626102;
+	Sun, 28 Jul 2013 07:10:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH v2] lvm2: Add dependency on bash
+Sender: paul.betafive@gmail.com
+Received: by 10.220.195.201 with HTTP; Sun, 28 Jul 2013 07:09:46 -0700 (PDT)
+In-Reply-To: <51D6BD77.4050008@ts.fujitsu.com>
+References: <51D42561.8060907@ts.fujitsu.com> <49035936.yua4bikce8@helios>
+	<CANyK_8eOaDbVANrOUuRAzhguRSBjv_puQdjjL+NbfVvv79pU7Q@mail.gmail.com>
+	<1721069.SICaQ1bLDa@helios>
+	<CANyK_8eNmm_jnpFgn44TwBLhOdSr1vyVouraHnvwz0T9iWfbkQ@mail.gmail.com>
+	<51D6BD77.4050008@ts.fujitsu.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Sun, 28 Jul 2013 15:09:46 +0100
+X-Google-Sender-Auth: rjGxO_BnjDWwdaWL1jDS9abdPPc
+Message-ID: <CANyK_8deKJoCUCEnQeqCyBJNy0eKkk2GmJcX6ZDG80A66u52ng@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: bitbake dies with an python exception | AttributeError: 'NoneType' object has no attribute 'rfind'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,74 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2013 17:43:20 -0000
-X-Groupsio-MsgNum: 45512
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="d8Lz2Tf5e5STOWUP"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 28 Jul 2013 14:10:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---d8Lz2Tf5e5STOWUP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I've just ran into this again building dylan with the latest version
+of bitbake as it doesn't appear that the dylan branch of
+openembedded-core sets FAKEROOTCMD in bitbake.conf. I've cherry-picked
+the commit below from master onto dylan and it looks like the build is
+now going ahead happily.
 
-On Fri, Jul 26, 2013 at 05:25:29PM +0300, Mihai Prica wrote:
-> Fixes rootfs generation error if bash is not included in the image.
+Bitbake has no dylan branch so I just assumed I was correct using
+master. Am I wrong here? If bitbake master is supposed to be able to
+build old branches of OpenEmbedded, perhaps this commit needs
+backporting to dylan/danny/etc? It looks like it shouldn't cause any
+harm if an older bitbake version is used as it simply adds values for
+FAKEROOTBASEENV and FAKEROOTCMD.
 
-With rpm right?
+>> Not got time to try reproducing right now, but I did have a very quick
+>> look in git.
+>>
+>> On the bitbake side:
+>>
+>> http://git.openembedded.org/bitbake/commit/?id=860ec42b220b7ed3f3bbe52c3546bba66644eac8
+>>
+>> On the oe-core side:
+>>
+>> http://git.openembedded.org/openembedded-core/commit/?id=003ea0fd1017dde50ced710179d0dc2e835d5185
+>>
+>>
 
-Find which script it has in shebang and add bash only to that package
-RDEPENDS, if it's something which isn't always needed put it in separate
-package.
+Thanks,
 
->=20
-> Signed-off-by: Mihai Prica <mihai.prica@intel.com>
-> ---
->  meta-oe/recipes-support/lvm2/lvm2.inc |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-supp=
-ort/lvm2/lvm2.inc
-> index 1f3b62e..cd5a339 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
-> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-> @@ -1,10 +1,10 @@
->  SECTION =3D "utils"
->  DESCRIPTION =3D "LVM2 is a set of utilities to manage logical volumes in=
- Linux."
-> -DEPENDS =3D "udev"
-> +DEPENDS =3D "udev bash"
->  LICENSE =3D "GPLv2 & LGPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f \
->                      file://COPYING.LIB;md5=3Dfbc093901857fcd118f065f9009=
-82c24"
-> -INC_PR =3D "r1"
-> +INC_PR =3D "r2"
-> =20
-> =20
->  S =3D "${WORKDIR}/LVM2.${PV}"
-> --=20
-> 1.7.9.5
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+Paul Barker
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
---d8Lz2Tf5e5STOWUP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlHytVEACgkQN1Ujt2V2gBxm1ACeLRvnHg8/N2oqyFJO2gnrchp/
-QB4An22ijbceNhSL4f9KUpSe1aDy86V8
-=9rKG
------END PGP SIGNATURE-----
-
---d8Lz2Tf5e5STOWUP--
