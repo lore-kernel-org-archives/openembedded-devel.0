@@ -1,38 +1,35 @@
-Return-Path: <mihai.prica@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 25F5F6B24D
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B52676B478
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 14:47:57 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 30 Jul 2013 07:47:58 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,778,1367996400"; d="scan'208";a="378924246"
-Received: from irsmsx101.ger.corp.intel.com ([163.33.3.153])
-	by orsmga002.jf.intel.com with ESMTP; 30 Jul 2013 07:47:57 -0700
-Received: from irsmsx153.ger.corp.intel.com (163.33.192.75) by
-	IRSMSX101.ger.corp.intel.com (163.33.3.153) with Microsoft SMTP Server
-	(TLS) id 14.3.123.3; Tue, 30 Jul 2013 15:47:55 +0100
-Received: from irsmsx101.ger.corp.intel.com ([169.254.1.83]) by
-	IRSMSX153.ger.corp.intel.com ([169.254.9.218]) with mapi id
-	14.03.0123.003; Tue, 30 Jul 2013 15:47:55 +0100
-From: "Prica, Mihai" <mihai.prica@intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, Martin Jansa
-	<martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] lvm2: Add dependency on bash
-Thread-Index: AQHOigv+qQUYKmgA3EOBonOLBxNlSZl3Kn6AgAXczICAAErhkA==
-Date: Tue, 30 Jul 2013 14:47:55 +0000
-Message-ID: <97BD068FB200C44AA73C2B641F162ECF15E7F957@IRSMSX101.ger.corp.intel.com>
-References: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
-	<20130726174345.GE3280@jama> <4071302.P2cxlv2fxA@helios>
-In-Reply-To: <4071302.P2cxlv2fxA@helios>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
+	Tue, 30 Jul 2013 18:06:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r6UI6HUt017641
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jul 2013 11:06:17 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Tue, 30 Jul 2013 11:06:15 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 98C9D7FE2	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jul 2013 14:05:59 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 49D43404D6; Tue,
+	30 Jul 2013 14:06:13 -0400 (EDT)
+Date: Tue, 30 Jul 2013 14:06:13 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20130730180613.GJ3667@windriver.com>
+References: <1374848456-19550-1-git-send-email-mihai.prica@intel.com>
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] lvm2: Add dependency on bash
+In-Reply-To: <1374848456-19550-1-git-send-email-mihai.prica@intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] ebtables: Load ebtables kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,51 +43,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2013 14:47:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 30 Jul 2013 18:06:15 -0000
+X-Groupsio-MsgNum: 45526
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="AXxEqdD4tcVTjWte"
+Content-Disposition: inline
+
+--AXxEqdD4tcVTjWte
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]
->=20
-> On Friday 26 July 2013 19:43:45 Martin Jansa wrote:
-> > On Fri, Jul 26, 2013 at 05:25:29PM +0300, Mihai Prica wrote:
-> > > Fixes rootfs generation error if bash is not included in the image.
-> >
-> > With rpm right?
->=20
-> If it's what you're suggesting technically it's broken with any package b=
-ackend, to
-> some degree.
+Merged, thanks.
+-J.
 
-For the tests I used rpm.
+[[oe] [meta-networking][PATCH] ebtables: Load ebtables kernel module] On 13=
+=2E07.26 (Fri 17:20) Mihai Prica wrote:
 
+> Ebtables needs some kernel configs options to work properly. The standard=
+ yocto
+> kernel config includes these as modules. Add code to load the ebtables mo=
+dule.
 >=20
-> > Find which script it has in shebang and add bash only to that package
-> > RDEPENDS, if it's something which isn't always needed put it in
-> > separate package.
+> Signed-off-by: Mihai Prica <mihai.prica@intel.com>
+> ---
+>  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >=20
-> Or if practical patch the script(s) to remove the bashisms and change the=
- shebang
-> to #!/bin/sh instead.
+> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb=
+ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> index 78e069a..6ac886e 100644
+> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> @@ -2,10 +2,13 @@ SUMMARY =3D "Utility for basic Ethernet frame filtering=
+ on a Linux bridge, MAC NAT
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871a28ab1488fdbd2e=
+73e"
+>  SECTION =3D "console/network"
+> -PR =3D "r2"
+> +PR =3D "r3"
+> =20
+>  RDEPENDS_${PN} +=3D "perl"
+> =20
+> +RRECOMMENDS_${PN} +=3D "kernel-module-ebtables \
+> +    "
+> +
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+>             file://installnonroot.patch \
+>             file://01debian_defaultconfig.patch \
+--=20
+-Joe MacDonald.
+:wq
 
-I've looked over the scripts and there seem to be 4 files which are using b=
-ash. The files=20
-are part of the core lvm2 package. I've used checkbashism and there are not=
- many=20
-changes that need to be done to switch to /bin/sh. I'll send an updated pat=
-ch.=20
+--AXxEqdD4tcVTjWte
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Thanks,
-Mihai
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
->=20
-> Cheers,
-> Paul
->=20
-> --
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
+iEYEARECAAYFAlH4AJQACgkQPN8S4W6ZZndwJQCeICP5uMXm4vZKjjo15Q2+lseL
+zIIAn0PHrDSW2VZ/0AsS3rPmw1xyZHQH
+=Ciy8
+-----END PGP SIGNATURE-----
 
+--AXxEqdD4tcVTjWte--
