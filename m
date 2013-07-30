@@ -1,35 +1,39 @@
-Return-Path: <Joe.MacDonald@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B52676B478
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id BD3136B282
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 18:06:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r6UI6HUt017641
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 30 Jul 2013 21:22:10 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so1279133eek.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 11:06:17 -0700 (PDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Tue, 30 Jul 2013 11:06:15 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 98C9D7FE2	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 14:05:59 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 49D43404D6; Tue,
-	30 Jul 2013 14:06:13 -0400 (EDT)
-Date: Tue, 30 Jul 2013 14:06:13 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20130730180613.GJ3667@windriver.com>
-References: <1374848456-19550-1-git-send-email-mihai.prica@intel.com>
+	Tue, 30 Jul 2013 14:22:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=G2lYQrj4bRcSnAul969JNCK8rNcjOgHolzGy/QSpbSg=;
+	b=ZWEnRVHb8UFJXSFC8eLyhYYrBt7+3M2cLevw/996wa8PwPMpkbFnLhaRvDLHxfWw0q
+	q5URTEWFMKHij5lxadMCBhlUT6FFujlbJbDd9TaU2/u7GT4G8xmLan8mwMpNQ95VgK9z
+	XmxGd1p5FJFuNFOeQYR/yf+bC8Y9YuPluHr8eU1ULShwzVtB8Q0pIro2MscE+PqyIRPe
+	omgX3aV3x5TKIJnFHENpft5MnaLgf4T+Zo5d0uLIvlmJmdpdAXQe3+KCyuvvisA+kohs
+	u2pRTEoXzKv9co2MdKAUq2jROLyBPbvi1GyXuOvMU2wZ8nMSc9Zg64/KFPKExDiAfqBw
+	WavQ==
+X-Received: by 10.14.149.3 with SMTP id w3mr2951213eej.84.1375219331033;
+	Tue, 30 Jul 2013 14:22:11 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	n42sm113473229eeh.15.2013.07.30.14.22.09 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 30 Jul 2013 14:22:10 -0700 (PDT)
+Date: Tue, 30 Jul 2013 23:22:43 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20130730212243.GG3280@jama>
+References: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
+	<20130726174345.GE3280@jama> <4071302.P2cxlv2fxA@helios>
 MIME-Version: 1.0
-In-Reply-To: <1374848456-19550-1-git-send-email-mihai.prica@intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
+In-Reply-To: <4071302.P2cxlv2fxA@helios>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] ebtables: Load ebtables kernel module
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] lvm2: Add dependency on bash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,69 +47,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2013 18:06:15 -0000
-X-Groupsio-MsgNum: 45526
+X-List-Received-Date: Tue, 30 Jul 2013 21:22:11 -0000
+X-Groupsio-MsgNum: 45527
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AXxEqdD4tcVTjWte"
+	protocol="application/pgp-signature"; boundary="hcut4fGOf7Kh6EdG"
 Content-Disposition: inline
 
---AXxEqdD4tcVTjWte
+--hcut4fGOf7Kh6EdG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
--J.
-
-[[oe] [meta-networking][PATCH] ebtables: Load ebtables kernel module] On 13=
-=2E07.26 (Fri 17:20) Mihai Prica wrote:
-
-> Ebtables needs some kernel configs options to work properly. The standard=
- yocto
-> kernel config includes these as modules. Add code to load the ebtables mo=
-dule.
+On Tue, Jul 30, 2013 at 12:15:19PM +0100, Paul Eggleton wrote:
+> On Friday 26 July 2013 19:43:45 Martin Jansa wrote:
+> > On Fri, Jul 26, 2013 at 05:25:29PM +0300, Mihai Prica wrote:
+> > > Fixes rootfs generation error if bash is not included in the image.
+> >=20
+> > With rpm right?
 >=20
-> Signed-off-by: Mihai Prica <mihai.prica@intel.com>
-> ---
->  .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |    5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+> If it's what you're suggesting technically it's broken with any package=
+=20
+> backend, to some degree.
+
+Agreed, I was just commenting on it because "rootfs generation error if
+bash is not included" is quite vague and it could be also bashism in
+postinst script.
+
+> > Find which script it has in shebang and add bash only to that package
+> > RDEPENDS, if it's something which isn't always needed put it in separate
+> > package.
 >=20
-> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb=
- b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> index 78e069a..6ac886e 100644
-> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> @@ -2,10 +2,13 @@ SUMMARY =3D "Utility for basic Ethernet frame filtering=
- on a Linux bridge, MAC NAT
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871a28ab1488fdbd2e=
-73e"
->  SECTION =3D "console/network"
-> -PR =3D "r2"
-> +PR =3D "r3"
-> =20
->  RDEPENDS_${PN} +=3D "perl"
-> =20
-> +RRECOMMENDS_${PN} +=3D "kernel-module-ebtables \
-> +    "
-> +
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
->             file://installnonroot.patch \
->             file://01debian_defaultconfig.patch \
+> Or if practical patch the script(s) to remove the bashisms and change the=
+=20
+> shebang to #!/bin/sh instead.
+>=20
+> Cheers,
+> Paul
+>=20
+> --=20
+>=20
+> Paul Eggleton
+> Intel Open Source Technology Centre
+
 --=20
--Joe MacDonald.
-:wq
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---AXxEqdD4tcVTjWte
+--hcut4fGOf7Kh6EdG
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlH4AJQACgkQPN8S4W6ZZndwJQCeICP5uMXm4vZKjjo15Q2+lseL
-zIIAn0PHrDSW2VZ/0AsS3rPmw1xyZHQH
-=Ciy8
+iEYEARECAAYFAlH4LqMACgkQN1Ujt2V2gBzpTQCfdvEtRgzEejG63GpB732/H6Z4
+bAQAoLekkZhk+PQ2crRmcPBDWIvKH6KA
+=7xGD
 -----END PGP SIGNATURE-----
 
---AXxEqdD4tcVTjWte--
+--hcut4fGOf7Kh6EdG--
