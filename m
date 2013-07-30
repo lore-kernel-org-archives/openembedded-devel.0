@@ -1,24 +1,20 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F0B36B451
+	by mail.openembedded.org (Postfix) with ESMTP id D0BF96A9C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 12:49:03 +0000 (UTC)
+	Tue, 30 Jul 2013 12:49:02 +0000 (UTC)
 Received: from azsmga002.ch.intel.com ([10.2.17.35])
-	by azsmga101.ch.intel.com with ESMTP; 30 Jul 2013 05:49:03 -0700
+	by azsmga101.ch.intel.com with ESMTP; 30 Jul 2013 05:49:02 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,778,1367996400"; d="scan'208";a="275273307"
+X-IronPort-AV: E=Sophos;i="4.89,778,1367996400"; d="scan'208";a="275273303"
 Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.122.217])
-	by AZSMGA002.ch.intel.com with ESMTP; 30 Jul 2013 05:49:02 -0700
+	by AZSMGA002.ch.intel.com with ESMTP; 30 Jul 2013 05:49:01 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jul 2013 13:48:54 +0100
-Message-Id: <b212c471afae377f92a528f659a83a47d31389a9.1375188498.git.paul.eggleton@linux.intel.com>
+Date: Tue, 30 Jul 2013 13:48:53 +0100
+Message-Id: <cover.1375188498.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1375188498.git.paul.eggleton@linux.intel.com>
-References: <cover.1375188498.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1375188498.git.paul.eggleton@linux.intel.com>
-References: <cover.1375188498.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH 1/2] xinput-calibrator: remove
+Subject: [meta-oe][PATCH 0/2] Remove recipes that are now in OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,81 +30,29 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 30 Jul 2013 12:49:03 -0000
 
-This is now part of OE-Core.
+The following changes since commit 47fc1cce49936e0a1c9f083172a7fd45c7434aac:
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
+  connman: Rename bbappend to match new version from oe-core (2013-07-30 11:35:03 +0200)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/xinput-calibrator
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/xinput-calibrator
+
+Paul Eggleton (2):
+  xinput-calibrator: remove
+  pointercal-xinput: remove
+
+ .../pointercal-xinput/pointercal.xinput            |  1 -
+ .../xinput-calibrator/pointercal-xinput_0.0.bb     | 19 ----------
  .../xinput-calibrator/xinput-calibrator.service    | 11 ------
  .../xinput-calibrator/xinput-calibrator_git.bb     | 42 ----------------------
- 2 files changed, 53 deletions(-)
+ 4 files changed, 73 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput/pointercal.xinput
+ delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bb
  delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
  delete mode 100644 meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
 
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
-deleted file mode 100644
-index 2301876..0000000
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator/xinput-calibrator.service
-+++ /dev/null
-@@ -1,11 +0,0 @@
--[Unit]
--Description=Loads xinput calibration data
--ConditionPathExists=/etc/pointercal.xinput
--Requires=display-manager.service
--After=display-manager.service
--
--[Service]
--ExecStart=/usr/bin/xinput_calibrator_once.sh
--
--[Install]
--WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb b/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
-deleted file mode 100644
-index 640aef1..0000000
---- a/meta-oe/recipes-graphics/xinput-calibrator/xinput-calibrator_git.bb
-+++ /dev/null
-@@ -1,42 +0,0 @@
--DESCRIPTION = "A generic touchscreen calibration program for X.Org"
--HOMEPAGE = "http://www.freedesktop.org/wiki/Software/xinput_calibrator"
--LICENSE = "MIT-X"
--LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=1bcba08f67cdb56f34021557898e4b5a"
--DEPENDS = "virtual/libx11 libxi"
--
--PV = "0.7.5+git${SRCPV}"
--PR = "r6"
--
--inherit autotools systemd
--
--SRCREV = "c01c5af807cb4b0157b882ab07a893df9a810111"
--SRC_URI = "git://github.com/tias/xinput_calibrator.git;protocol=git \
--           file://xinput-calibrator.service"
--
--S = "${WORKDIR}/git"
--
--# force native X11 ui as we don't have gtk+ in DEPENDS
--EXTRA_OECONF += "--with-gui=x11"
--
--do_install_append() {
--    install -d ${D}${bindir}
--    install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
--
--    install -d ${D}${sysconfdir}/xdg/autostart
--    sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
--    install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
--
--    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/xinput-calibrator.service ${D}${systemd_unitdir}/system
--    fi
--}
--
--FILES_${PN} += "${sysconfdir}/xdg/autostart"
--RDEPENDS_${PN} = "xinput xterm"
--RRECOMMENDS_${PN} = "pointercal-xinput"
--
--RPROVIDES_${PN} += "${PN}-systemd"
--RREPLACES_${PN} += "${PN}-systemd"
--RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "${PN}.service"
 -- 
 1.8.1.2
 
