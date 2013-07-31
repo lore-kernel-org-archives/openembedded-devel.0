@@ -1,45 +1,48 @@
-Return-Path: <B40290@freescale.com>
-Received: from tx2outboundpool.messaging.microsoft.com
-	(tx2ehsobe003.messaging.microsoft.com [65.55.88.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 812076B1F5
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-bk0-f52.google.com (mail-bk0-f52.google.com
+	[209.85.214.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 2577B6B0CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2013 02:17:09 +0000 (UTC)
-Received: from mail145-tx2-R.bigfish.com (10.9.14.248) by
-	TX2EHSOBE014.bigfish.com (10.9.40.34) with Microsoft SMTP Server id
-	14.1.225.22; Wed, 31 Jul 2013 02:17:09 +0000
-Received: from mail145-tx2 (localhost [127.0.0.1])	by
-	mail145-tx2-R.bigfish.com (Postfix) with ESMTP id D4A2240030B	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2013 02:17:09 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 3
-X-BigFish: VS3(z37d5kzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h17326ah1de096h8275bh1de097hz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1155h)
-Received: from mail145-tx2 (localhost.localdomain [127.0.0.1]) by mail145-tx2
-	(MessageSwitch) id 1375237028362618_5653;
-	Wed, 31 Jul 2013 02:17:08 +0000 (UTC)
-Received: from TX2EHSMHS027.bigfish.com (unknown [10.9.14.231])	by
-	mail145-tx2.bigfish.com (Postfix) with ESMTP id 54CDBE0046	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2013 02:17:08 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS027.bigfish.com
-	(10.9.99.127) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Wed, 31 Jul 2013 02:17:08 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.3.136.1; Wed, 31 Jul 2013 02:17:07 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id r6V2H4QZ027301;	Tue, 30 Jul 2013 19:17:05 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Jul 2013 10:16:56 +0800
-Message-ID: <1375237016-32362-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Wed, 31 Jul 2013 10:02:45 +0000 (UTC)
+Received: by mail-bk0-f52.google.com with SMTP id e11so165489bkh.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Jul 2013 03:02:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=zbuA1wQWI6L6/zStuBjIQVeIcqm9MCG0jRNAoFX20Vs=;
+	b=Myhs6JwYLCgbQRNLQGrQNB2Ds+x5Da9y8D/fA/iR9vxB5Z95biBvVYPg/DmmBdglIF
+	kApOBOB1xGCr/sPNEk/LuBjZ5Uja9bFv9lIrJko0Jzj43KmFi6DIbmyG/DaDjWlyq+iB
+	rm/ZS6gjDIYN44I4qimfahPpCU7saWQtWKVjMS5dRmtX4vesVWURh5xvopHio/nhD6f6
+	uSk5RWoW1JO4UBZfk9yasQyLxRVQCLqUWjRGlhHdo/VIgESCrrHtvOBEniA0KZebelIp
+	gl/uZAwd8GGvzxLt+joIyn1y6jaxFfdvE9f398PUWQ0CSs6BEucyu5hXNdsOjkVHMU9r
+	r+SA==
+X-Received: by 10.204.57.4 with SMTP id a4mr9803146bkh.55.1375264966260;
+	Wed, 31 Jul 2013 03:02:46 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
+	[217.92.177.116])
+	by mx.google.com with ESMTPSA id hn4sm251308bkc.2.2013.07.31.03.02.43
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 31 Jul 2013 03:02:44 -0700 (PDT)
+Message-ID: <51F8E0C2.3070102@dresearch-fe.de>
+Date: Wed, 31 Jul 2013 12:02:42 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe,v2][PATCH] iperf: Fix license
+To: openembedded-core@lists.openembedded.org, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <51ECCF5C.2020505@dresearch-fe.de>
+	<CAP71Wjz6vU5iiSoc9LqDczGo_SJ02ppRJizQui_MLYKPK_61Wg@mail.gmail.com>
+	<51ECFF6F.60601@dresearch-fe.de> <6366141.Q5aULPr4OG@helios>
+In-Reply-To: <6366141.Q5aULPr4OG@helios>
+X-Enigmail-Version: 1.5.2
+X-Gm-Message-State: ALoCoQliQq/0PcMqJYZVHT3gHkjPlMECywjmja97ljpBmmiwmfiyGAfNw1Cemy2PZV3OQKSU2APq
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: [OE-core] SRC_URI and latest HEAD revision with git (in oe-classic)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2013 02:17:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Jul 2013 10:02:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-From: Chunrong Guo <B40290@freescale.com>
+On 22.07.2013 11:51, Paul Eggleton wrote:
+> On Monday 22 July 2013 11:46:23 Steffen Sledz wrote:
+>> On 22.07.2013 11:01, Nicolas Dechesne wrote:
+>>> On Mon, Jul 22, 2013 at 8:21 AM, Steffen Sledz <sledz@dresearch-fe.de
+>>> <mailto:sledz@dresearch-fe.de>> wrote:
+>>>> After being OE abstinent for some months i'd like to ask what is the
+>>>> current suggested method for recipes building from the HEAD revision of
+>>>> a git repository (we need this for continuous integration).
+>>>>
+>>>> I read some RFC's in the ml about PKGV/PKGR stuff, but i miss a final
+>>>> decision, documentation and a good example.> 
+>>> you can use ${AUTOREV} for this purpose. You can look at poky-bleeding
+>>> distro config for such an example.
+>>>
+>>> e.g.
+>>> http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta-yocto/conf/distr
+>>> o/include/poky-floating-revisions.inc
+>> Hmmmm? This doesn't seem the work.
+>>
+>> Here's what i tried in my recipe:
+>>
+>> ------------> snip <------------
+>> PR = "r3"
+>>
+>> SRCREV="${AUTOREV}"
+>> PV = "gitr${SRCPV}"
+>> ------------> snip <------------
+>>
+>> But i get package versions like
+>>
+>>   gitr0+53b64e717404d282d0c58b7fa4a4e74ab2ca81ba-r3
+>>
+>> where SRCPB is always 0. :(
+>>
+>> A bit more description and/or a complete example would be very helpful.
+> 
+> If you want these to increment now AIUI you need to be using the PR server:
+> 
+> https://wiki.yoctoproject.org/wiki/PR_Service
 
-     *the current version of Iperf has a false LICENSE set,
-         so fix license with the generic BSD license
+And here comes my next really big problem. :(
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+We're sitting on an big, old but active project based on oe-classic and bitbake 1.12.0. Irksomely we're forced to switch from SVN to GIT for this project. So we need the AUTOREV/PRSERV stuff for this old environment too.
 
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-index 8107701..4261c95 100644
---- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-+++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Iperf is a tool to measure maximum TCP bandwidth, allowing the tuning of various parameters and UDP characteristics"
- HOMEPAGE = "http://dast.nlanr.net/Projects/Iperf/"
- SECTION = "console/network"
--LICENSE = "NewBSD"
-+LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
- 
- SRC_URI = " \
+Has anyone tried to backport the feature to an older bitbake/oe-classic environment? Or can someone give some hints what's to do?
+
+Steffen
+
 -- 
-1.7.5.4
-
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
