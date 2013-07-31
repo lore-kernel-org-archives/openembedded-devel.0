@@ -1,39 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id BD3136B282
+Return-Path: <B40290@freescale.com>
+Received: from ch1outboundpool.messaging.microsoft.com
+	(ch1ehsobe002.messaging.microsoft.com [216.32.181.182])
+	by mail.openembedded.org (Postfix) with ESMTP id ED5F36B426
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 21:22:10 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c13so1279133eek.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jul 2013 14:22:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=G2lYQrj4bRcSnAul969JNCK8rNcjOgHolzGy/QSpbSg=;
-	b=ZWEnRVHb8UFJXSFC8eLyhYYrBt7+3M2cLevw/996wa8PwPMpkbFnLhaRvDLHxfWw0q
-	q5URTEWFMKHij5lxadMCBhlUT6FFujlbJbDd9TaU2/u7GT4G8xmLan8mwMpNQ95VgK9z
-	XmxGd1p5FJFuNFOeQYR/yf+bC8Y9YuPluHr8eU1ULShwzVtB8Q0pIro2MscE+PqyIRPe
-	omgX3aV3x5TKIJnFHENpft5MnaLgf4T+Zo5d0uLIvlmJmdpdAXQe3+KCyuvvisA+kohs
-	u2pRTEoXzKv9co2MdKAUq2jROLyBPbvi1GyXuOvMU2wZ8nMSc9Zg64/KFPKExDiAfqBw
-	WavQ==
-X-Received: by 10.14.149.3 with SMTP id w3mr2951213eej.84.1375219331033;
-	Tue, 30 Jul 2013 14:22:11 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	n42sm113473229eeh.15.2013.07.30.14.22.09 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 30 Jul 2013 14:22:10 -0700 (PDT)
-Date: Tue, 30 Jul 2013 23:22:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130730212243.GG3280@jama>
-References: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
-	<20130726174345.GE3280@jama> <4071302.P2cxlv2fxA@helios>
+	Wed, 31 Jul 2013 02:04:11 +0000 (UTC)
+Received: from mail86-ch1-R.bigfish.com (10.43.68.226) by
+	CH1EHSOBE018.bigfish.com (10.43.70.68) with Microsoft SMTP Server id
+	14.1.225.22; Wed, 31 Jul 2013 02:04:09 +0000
+Received: from mail86-ch1 (localhost [127.0.0.1])	by mail86-ch1-R.bigfish.com
+	(Postfix) with ESMTP id 920D32A018A;
+	Wed, 31 Jul 2013 02:04:09 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -6
+X-BigFish: VS-6(zz62a3I98dI9371Ic3f2I542I1432I4015Izz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h177df4h17326ah1de096h1954cbh8275bh1de097hz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e1dhbe9i1155h)
+Received: from mail86-ch1 (localhost.localdomain [127.0.0.1]) by mail86-ch1
+	(MessageSwitch) id 1375236247966354_9860;
+	Wed, 31 Jul 2013 02:04:07 +0000 (UTC)
+Received: from CH1EHSMHS030.bigfish.com (snatpool3.int.messaging.microsoft.com
+	[10.43.68.227])	by mail86-ch1.bigfish.com (Postfix) with ESMTP id
+	E0AAE420047;	Wed, 31 Jul 2013 02:04:07 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS030.bigfish.com
+	(10.43.70.30) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Wed, 31 Jul 2013 02:04:07 +0000
+Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.139]) by
+	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
+	14.03.0136.001; Wed, 31 Jul 2013 02:04:07 +0000
+From: Guo Chunrong-B40290 <B40290@freescale.com>
+To: Paul Barker <paul@paulbarker.me.uk>, Openembedded Discussion
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] iperf: Fix license
+Thread-Index: AQHOiRk2/cOskMoKbUqP14xZWUlKR5l7bPDQgAHfLYCAAMA7MA==
+Date: Wed, 31 Jul 2013 02:04:06 +0000
+Message-ID: <B21730BB6DA1D24B83348D9301EA417E104307E3@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1374744455-20983-1-git-send-email-B40290@freescale.com>
+	<B21730BB6DA1D24B83348D9301EA417E1042EA39@039-SN2MPN1-023.039d.mgd.msft.net>
+	<CANyK_8cA_iJLsfq5R1dgtS6L95zyDz5iNNTcWOYP1LnN36+DZQ@mail.gmail.com>
+In-Reply-To: <CANyK_8cA_iJLsfq5R1dgtS6L95zyDz5iNNTcWOYP1LnN36+DZQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.206]
 MIME-Version: 1.0
-In-Reply-To: <4071302.P2cxlv2fxA@helios>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] lvm2: Add dependency on bash
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Cc: Yu Zongchun-B40527 <B40527@freescale.com>
+Subject: Re: [meta-oe][PATCH] iperf: Fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,61 +59,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jul 2013 21:22:11 -0000
-X-Groupsio-MsgNum: 45527
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hcut4fGOf7Kh6EdG"
-Content-Disposition: inline
-
---hcut4fGOf7Kh6EdG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 31 Jul 2013 02:04:12 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 30, 2013 at 12:15:19PM +0100, Paul Eggleton wrote:
-> On Friday 26 July 2013 19:43:45 Martin Jansa wrote:
-> > On Fri, Jul 26, 2013 at 05:25:29PM +0300, Mihai Prica wrote:
-> > > Fixes rootfs generation error if bash is not included in the image.
-> >=20
-> > With rpm right?
->=20
-> If it's what you're suggesting technically it's broken with any package=
-=20
-> backend, to some degree.
+Hello,paul barker
 
-Agreed, I was just commenting on it because "rootfs generation error if
-bash is not included" is quite vague and it could be also bashism in
-postinst script.
+Thank you for your comments.=20
+I agree it .=20
 
-> > Find which script it has in shebang and add bash only to that package
-> > RDEPENDS, if it's something which isn't always needed put it in separate
-> > package.
->=20
-> Or if practical patch the script(s) to remove the bashisms and change the=
-=20
-> shebang to #!/bin/sh instead.
->=20
-> Cheers,
-> Paul
->=20
-> --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
+Thanks,
+chunrong
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-----Original Message-----
+From: paul.betafive@gmail.com [mailto:paul.betafive@gmail.com] On Behalf Of=
+ Paul Barker
+Sent: Tuesday, July 30, 2013 10:15 PM
+To: Openembedded Discussion
+Cc: Guo Chunrong-B40290; Yu Zongchun-B40527
+Subject: Re: [oe] [meta-oe][PATCH] iperf: Fix license
 
---hcut4fGOf7Kh6EdG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+On 29 July 2013 10:45, Guo Chunrong-B40290 <B40290@freescale.com> wrote:
+> Hello,
+>
+> I'd appreciate if someone can review.
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
+I'll take a quick look...
 
-iEYEARECAAYFAlH4LqMACgkQN1Ujt2V2gBzpTQCfdvEtRgzEejG63GpB732/H6Z4
-bAQAoLekkZhk+PQ2crRmcPBDWIvKH6KA
-=7xGD
------END PGP SIGNATURE-----
+> -LICENSE =3D "NewBSD"
+> +LICENSE =3D "BSD"
 
---hcut4fGOf7Kh6EdG--
+Comparing http://sourceforge.net/p/iperf/code/82/tree/trunk/COPYING
+and the common licenses in openembedded-core, it looks like "BSD-2-Clause" =
+would be more accurate. Could you take a look and let me know if you agree?=
+ Currently on the move so can't diff the files myself.
+
+--
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
+
+
+
