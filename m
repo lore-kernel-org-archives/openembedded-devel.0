@@ -1,51 +1,45 @@
 Return-Path: <B40290@freescale.com>
-Received: from ch1outboundpool.messaging.microsoft.com
-	(ch1ehsobe002.messaging.microsoft.com [216.32.181.182])
-	by mail.openembedded.org (Postfix) with ESMTP id ED5F36B426
+Received: from tx2outboundpool.messaging.microsoft.com
+	(tx2ehsobe003.messaging.microsoft.com [65.55.88.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 812076B1F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2013 02:04:11 +0000 (UTC)
-Received: from mail86-ch1-R.bigfish.com (10.43.68.226) by
-	CH1EHSOBE018.bigfish.com (10.43.70.68) with Microsoft SMTP Server id
-	14.1.225.22; Wed, 31 Jul 2013 02:04:09 +0000
-Received: from mail86-ch1 (localhost [127.0.0.1])	by mail86-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 920D32A018A;
-	Wed, 31 Jul 2013 02:04:09 +0000 (UTC)
+	Wed, 31 Jul 2013 02:17:09 +0000 (UTC)
+Received: from mail145-tx2-R.bigfish.com (10.9.14.248) by
+	TX2EHSOBE014.bigfish.com (10.9.40.34) with Microsoft SMTP Server id
+	14.1.225.22; Wed, 31 Jul 2013 02:17:09 +0000
+Received: from mail145-tx2 (localhost [127.0.0.1])	by
+	mail145-tx2-R.bigfish.com (Postfix) with ESMTP id D4A2240030B	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Jul 2013 02:17:09 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -6
-X-BigFish: VS-6(zz62a3I98dI9371Ic3f2I542I1432I4015Izz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h177df4h17326ah1de096h1954cbh8275bh1de097hz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e1dhbe9i1155h)
-Received: from mail86-ch1 (localhost.localdomain [127.0.0.1]) by mail86-ch1
-	(MessageSwitch) id 1375236247966354_9860;
-	Wed, 31 Jul 2013 02:04:07 +0000 (UTC)
-Received: from CH1EHSMHS030.bigfish.com (snatpool3.int.messaging.microsoft.com
-	[10.43.68.227])	by mail86-ch1.bigfish.com (Postfix) with ESMTP id
-	E0AAE420047;	Wed, 31 Jul 2013 02:04:07 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS030.bigfish.com
-	(10.43.70.30) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Wed, 31 Jul 2013 02:04:07 +0000
-Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.139]) by
-	039-SN1MMR1-003.039d.mgd.msft.net ([10.84.1.16]) with mapi id
-	14.03.0136.001; Wed, 31 Jul 2013 02:04:07 +0000
-From: Guo Chunrong-B40290 <B40290@freescale.com>
-To: Paul Barker <paul@paulbarker.me.uk>, Openembedded Discussion
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] iperf: Fix license
-Thread-Index: AQHOiRk2/cOskMoKbUqP14xZWUlKR5l7bPDQgAHfLYCAAMA7MA==
-Date: Wed, 31 Jul 2013 02:04:06 +0000
-Message-ID: <B21730BB6DA1D24B83348D9301EA417E104307E3@039-SN2MPN1-023.039d.mgd.msft.net>
-References: <1374744455-20983-1-git-send-email-B40290@freescale.com>
-	<B21730BB6DA1D24B83348D9301EA417E1042EA39@039-SN2MPN1-023.039d.mgd.msft.net>
-	<CANyK_8cA_iJLsfq5R1dgtS6L95zyDz5iNNTcWOYP1LnN36+DZQ@mail.gmail.com>
-In-Reply-To: <CANyK_8cA_iJLsfq5R1dgtS6L95zyDz5iNNTcWOYP1LnN36+DZQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.192.208.206]
+X-SpamScore: 3
+X-BigFish: VS3(z37d5kzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h17326ah1de096h8275bh1de097hz2dh2a8h668h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1155h)
+Received: from mail145-tx2 (localhost.localdomain [127.0.0.1]) by mail145-tx2
+	(MessageSwitch) id 1375237028362618_5653;
+	Wed, 31 Jul 2013 02:17:08 +0000 (UTC)
+Received: from TX2EHSMHS027.bigfish.com (unknown [10.9.14.231])	by
+	mail145-tx2.bigfish.com (Postfix) with ESMTP id 54CDBE0046	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Jul 2013 02:17:08 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS027.bigfish.com
+	(10.9.99.127) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Wed, 31 Jul 2013 02:17:08 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
+	Server (TLS) id 14.3.136.1; Wed, 31 Jul 2013 02:17:07 +0000
+Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
+	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
+	id r6V2H4QZ027301;	Tue, 30 Jul 2013 19:17:05 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Jul 2013 10:16:56 +0800
+Message-ID: <1375237016-32362-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: Yu Zongchun-B40527 <B40527@freescale.com>
-Subject: Re: [meta-oe][PATCH] iperf: Fix license
+Subject: [meta-oe,v2][PATCH] iperf: Fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,48 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2013 02:04:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Jul 2013 02:17:09 -0000
+Content-Type: text/plain
 
-Hello,paul barker
+From: Chunrong Guo <B40290@freescale.com>
 
-Thank you for your comments.=20
-I agree it .=20
+     *the current version of Iperf has a false LICENSE set,
+         so fix license with the generic BSD license
 
-Thanks,
-chunrong
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
------Original Message-----
-From: paul.betafive@gmail.com [mailto:paul.betafive@gmail.com] On Behalf Of=
- Paul Barker
-Sent: Tuesday, July 30, 2013 10:15 PM
-To: Openembedded Discussion
-Cc: Guo Chunrong-B40290; Yu Zongchun-B40527
-Subject: Re: [oe] [meta-oe][PATCH] iperf: Fix license
-
-On 29 July 2013 10:45, Guo Chunrong-B40290 <B40290@freescale.com> wrote:
-> Hello,
->
-> I'd appreciate if someone can review.
->
-
-I'll take a quick look...
-
-> -LICENSE =3D "NewBSD"
-> +LICENSE =3D "BSD"
-
-Comparing http://sourceforge.net/p/iperf/code/82/tree/trunk/COPYING
-and the common licenses in openembedded-core, it looks like "BSD-2-Clause" =
-would be more accurate. Could you take a look and let me know if you agree?=
- Currently on the move so can't diff the files myself.
-
---
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
+index 8107701..4261c95 100644
+--- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
++++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Iperf is a tool to measure maximum TCP bandwidth, allowing the tuning of various parameters and UDP characteristics"
+ HOMEPAGE = "http://dast.nlanr.net/Projects/Iperf/"
+ SECTION = "console/network"
+-LICENSE = "NewBSD"
++LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
+ 
+ SRC_URI = " \
+-- 
+1.7.5.4
 
 
 
