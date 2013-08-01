@@ -1,47 +1,34 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-bk0-f43.google.com (mail-bk0-f43.google.com
-	[209.85.214.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 508756A39D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BD846A39D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2013 06:11:52 +0000 (UTC)
-Received: by mail-bk0-f43.google.com with SMTP id jm2so519209bkc.2
+	Thu,  1 Aug 2013 07:09:05 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id d10so798812eaj.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jul 2013 23:11:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=IfFErQWbjXx+cIIIAURyYNlf/yrMPF9ou5FJqKEtQvo=;
-	b=MVEqNvDTCtW+9qHrShqey1HjmQ6bnjtJx1VcokhqWmsctkXeZ4jFfn4wcvKEIM/tuy
-	Iwvq9LMjLrQ3g7z05uKGsqQOFcNEAqhq2ktHTHW54d/FUxpK/YxwjL3rz39k3FXB/Uha
-	ySOQ42eIPurrYM0qpwxBa7xigKACsJDeNohcal1N2sg5beN3YT3T8R3glEb/thQnYDXl
-	HKpcjkLMA53iC+u9Np84Ihf+qTtN0t0yHEHwPBt3axkfPl8Qj1yEHHSRlsLsZ7jY7EZP
-	ID7fIpNpvOOhXHWTsZsveticiBcFNV5s/PXdGQc8ycpJrhtCbfZWUIsFSTvGxTGUyHRS
-	hOvA==
-X-Received: by 10.204.77.199 with SMTP id h7mr4663540bkk.112.1375337512160;
-	Wed, 31 Jul 2013 23:11:52 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
-	[217.92.177.116])
-	by mx.google.com with ESMTPSA id oe7sm129687bkb.5.2013.07.31.23.11.50
+	Thu, 01 Aug 2013 00:09:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=rMFeMi+Cc1j28icleN8NKVWqaekBkBgMZY83hJMQQKM=;
+	b=k71sFZgJc+rMNHUmoOXq+/S8YDf4fMOPREMKFRwTZewkWOnKJyFu3e6t2eVFM1NXP2
+	R0oBIoCCRgvTPXaKNeYx6rKxD2+lQQOPXW9O0zOj8gYH8aFtQZwNI0R/EoToXjfi+V2B
+	xJbu/lrKNwoTuBqExAmNql76ZwW2aRPxTzUYCuniL4mQsXT+8Qr4SwM89mjS8DIU2Mq0
+	IxAU7bt2yx/HA2DVwuU5ZTPf1UnNjl3qkkGICD87kmvIQo2X4TPI3a0bstQYz0eFlS56
+	ptBT+3Qo8CGnQQGu6q6PS6w/Q2UkD7XV2ZLv1UxNoUqLykOAUqeEoA8+9O02SQshMCmV
+	MBUg==
+X-Received: by 10.14.47.73 with SMTP id s49mr132231eeb.71.1375340945153;
+	Thu, 01 Aug 2013 00:09:05 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id p5sm1768322eeg.5.2013.08.01.00.09.03
 	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 31 Jul 2013 23:11:51 -0700 (PDT)
-Message-ID: <51F9FC24.3070907@dresearch-fe.de>
-Date: Thu, 01 Aug 2013 08:11:48 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <51ECCF5C.2020505@dresearch-fe.de> <6366141.Q5aULPr4OG@helios>
-	<51F8E0C2.3070102@dresearch-fe.de> <8337615.XrjW46moIm@helios>
-In-Reply-To: <8337615.XrjW46moIm@helios>
-X-Enigmail-Version: 1.5.2
-X-Gm-Message-State: ALoCoQm7+iE3Kr3OvTl0d807lXc8Yimeeu/dkN3ZBKEMXlJM1Vjxv73NGCfA0Tk3vVEFm/GaPjMZ
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] SRC_URI and latest HEAD revision with git (in oe-classic)
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 01 Aug 2013 00:09:04 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Aug 2013 09:09:26 +0200
+Message-Id: <1375340966-597-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-networking][PATCH] ntp: allow to run pkg_postinst_ntpdate in do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,93 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2013 06:11:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 01 Aug 2013 07:09:05 -0000
 
-On 31.07.2013 14:50, Paul Eggleton wrote:
-> On Wednesday 31 July 2013 12:02:42 Steffen Sledz wrote:
->> On 22.07.2013 11:51, Paul Eggleton wrote:
->>> On Monday 22 July 2013 11:46:23 Steffen Sledz wrote:
->>>> On 22.07.2013 11:01, Nicolas Dechesne wrote:
->>>>> On Mon, Jul 22, 2013 at 8:21 AM, Steffen Sledz <sledz@dresearch-fe.de
->>>>>
->>>>> <mailto:sledz@dresearch-fe.de>> wrote:
->>>>>> After being OE abstinent for some months i'd like to ask what is the
->>>>>> current suggested method for recipes building from the HEAD revision of
->>>>>> a git repository (we need this for continuous integration).
->>>>>>
->>>>>> I read some RFC's in the ml about PKGV/PKGR stuff, but i miss a final
->>>>>> decision, documentation and a good example.>
->>>>>
->>>>> you can use ${AUTOREV} for this purpose. You can look at poky-bleeding
->>>>> distro config for such an example.
->>>>>
->>>>> e.g.
->>>>> http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta-yocto/conf/dist
->>>>> r
->>>>> o/include/poky-floating-revisions.inc
->>>>
->>>> Hmmmm? This doesn't seem the work.
->>>>
->>>> Here's what i tried in my recipe:
->>>>
->>>> ------------> snip <------------
->>>> PR = "r3"
->>>>
->>>> SRCREV="${AUTOREV}"
->>>> PV = "gitr${SRCPV}"
->>>> ------------> snip <------------
->>>>
->>>> But i get package versions like
->>>>
->>>>   gitr0+53b64e717404d282d0c58b7fa4a4e74ab2ca81ba-r3
->>>>
->>>> where SRCPB is always 0. :(
->>>>
->>>> A bit more description and/or a complete example would be very helpful.
->>>
->>> If you want these to increment now AIUI you need to be using the PR
->>> server:
->>>
->>> https://wiki.yoctoproject.org/wiki/PR_Service
->>
->> And here comes my next really big problem. :(
->>
->> We're sitting on an big, old but active project based on oe-classic and
->> bitbake 1.12.0. Irksomely we're forced to switch from SVN to GIT for this
->> project. So we need the AUTOREV/PRSERV stuff for this old environment too.
->>
->> Has anyone tried to backport the feature to an older bitbake/oe-classic
->> environment? Or can someone give some hints what's to do?
-> 
-> I'm not sure, but my gut feeling is you'd be better off trying to bring the 
-> project up to be based on OE-Core rather than trying to bring such 
-> functionality back to OE-Classic, particularly since for full functionality it 
-> requires signature-based tasks that are only supported with current versions 
-> of bitbake and require support from the metadata. You'd be trading some 
-> hopefully short-term pain for long-term gain if the project is going to 
-> continue for a reasonable amount of time.
+* read-only rootfs cannot run postinsts on first boot and in this case
+  it doesn't really have to as we can create cron task in do_rootfs
 
-I was afraid to get this answer. ;-)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-networking/recipes-support/ntp/ntp.inc | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
 
-Unfortunately we do not have the manpower to bring up this old project to oe-core. Our team is working hard on a follow-up project based on oe-core.
-
-I read something about a solution using
-
-  BB_GIT_CLONE_FOR_SRCREV = "1"
-  BB_LOCALCOUNT_OVERRIDE = ""
-
-which should be supported by the old oe-classic/bitbake-1.12.0. Could this be a solution for our problem? What drawbacks does it have?
-
-Steffen
-
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index 9367d41..6e8b452 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -114,14 +114,10 @@ INITSCRIPT_NAME = "ntpd"
+ INITSCRIPT_PARAMS = "defaults"
+ 
+ pkg_postinst_ntpdate() {
+-if test "x$D" != "x"; then
+-    exit 1
+-else
+-    if ! grep -q -s ntpdate /var/spool/cron/root; then
++    if ! grep -q -s ntpdate $D/var/spool/cron/root; then
+         echo "adding crontab"
+-        test -d /var/spool/cron || mkdir -p /var/spool/cron
+-        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
++        test -d $D/var/spool/cron || mkdir -p $D/var/spool/cron
++        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> $D/var/spool/cron/root
+     fi
+-fi
+ }
+ 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+1.8.3.2
+
 
