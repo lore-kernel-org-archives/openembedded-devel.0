@@ -1,34 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BD846A39D
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 901F66B1C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2013 07:09:05 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id d10so798812eaj.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Aug 2013 00:09:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=rMFeMi+Cc1j28icleN8NKVWqaekBkBgMZY83hJMQQKM=;
-	b=k71sFZgJc+rMNHUmoOXq+/S8YDf4fMOPREMKFRwTZewkWOnKJyFu3e6t2eVFM1NXP2
-	R0oBIoCCRgvTPXaKNeYx6rKxD2+lQQOPXW9O0zOj8gYH8aFtQZwNI0R/EoToXjfi+V2B
-	xJbu/lrKNwoTuBqExAmNql76ZwW2aRPxTzUYCuniL4mQsXT+8Qr4SwM89mjS8DIU2Mq0
-	IxAU7bt2yx/HA2DVwuU5ZTPf1UnNjl3qkkGICD87kmvIQo2X4TPI3a0bstQYz0eFlS56
-	ptBT+3Qo8CGnQQGu6q6PS6w/Q2UkD7XV2ZLv1UxNoUqLykOAUqeEoA8+9O02SQshMCmV
-	MBUg==
-X-Received: by 10.14.47.73 with SMTP id s49mr132231eeb.71.1375340945153;
-	Thu, 01 Aug 2013 00:09:05 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id p5sm1768322eeg.5.2013.08.01.00.09.03
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 01 Aug 2013 00:09:04 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Aug 2013 09:09:26 +0200
-Message-Id: <1375340966-597-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-networking][PATCH] ntp: allow to run pkg_postinst_ntpdate in do_rootfs
+	Thu,  1 Aug 2013 08:44:52 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga102.ch.intel.com with ESMTP; 01 Aug 2013 01:44:52 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,792,1367996400"; d="scan'208";a="339991178"
+Received: from unknown (HELO helios.localnet) ([10.252.122.169])
+	by azsmga001.ch.intel.com with ESMTP; 01 Aug 2013 01:44:51 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Bryan Evenson <bevenson@melinkcorp.com>
+Date: Thu, 01 Aug 2013 09:44:50 +0100
+Message-ID: <1728270.BLIjGjro2R@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D291@pluto.melinkcorp.local>
+References: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D291@pluto.melinkcorp.local>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: opkg: How to make package signal reboot required?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2013 07:09:05 -0000
+X-List-Received-Date: Thu, 01 Aug 2013 08:44:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* read-only rootfs cannot run postinsts on first boot and in this case
-  it doesn't really have to as we can create cron task in do_rootfs
+Hi Bryan,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-networking/recipes-support/ntp/ntp.inc | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+On Wednesday 31 July 2013 21:28:50 Bryan Evenson wrote:
+> I have a package that I created for my setup which, when upgraded, will
+> require a system reboot.  Is there a general flag/setting that already
+> exists to put in my Bitbake recipe to signal that the package requires a
+> reboot?  If so, does it just set a flag that a reboot is required or does
+> it force a reboot?
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index 9367d41..6e8b452 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -114,14 +114,10 @@ INITSCRIPT_NAME = "ntpd"
- INITSCRIPT_PARAMS = "defaults"
- 
- pkg_postinst_ntpdate() {
--if test "x$D" != "x"; then
--    exit 1
--else
--    if ! grep -q -s ntpdate /var/spool/cron/root; then
-+    if ! grep -q -s ntpdate $D/var/spool/cron/root; then
-         echo "adding crontab"
--        test -d /var/spool/cron || mkdir -p /var/spool/cron
--        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
-+        test -d $D/var/spool/cron || mkdir -p $D/var/spool/cron
-+        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> $D/var/spool/cron/root
-     fi
--fi
- }
- 
+It would be worth checking to see if the package manager has any intrinsic 
+support for this kind of thing; FWIW I don't know that the ones that we use do 
+(at least, we have no out-of-the-box integration for such functionality - I 
+know some package managers have "delay until end" functionality for things 
+like ldconfig and man page indexes, but we don't currently support this as far 
+as I know).
+
+One approach (untested) that could work now however would be to define a 
+postinstall script for the package that would start another script in the 
+background or via cron; the latter script would then wait until the package 
+manager finished and then do whatever was necessary to restart the machine.
+
+Cheers,
+Paul
+
 -- 
-1.8.3.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
