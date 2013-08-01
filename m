@@ -1,42 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id BFC926B1F0;
-	Thu,  1 Aug 2013 11:37:01 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id r16so952289ead.31
-	for <multiple recipients>; Thu, 01 Aug 2013 04:37:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=p61Us68YcyNmcBIiVpkF1g7GWE+pVk4Rn9NfRoDQvNY=;
-	b=riMve4Yd9+l68XMM7Lgb0dAWfx4oqzobXRCADg6697mtrsGkJiEHI3bXYKv8GUKgDw
-	UBhk82eaZBst0FcfwtUwtgeR3l7T++/p9ZBCuhhF8S+v4oiR85Ede6dL290Ergi+IJGV
-	IIIAV0tDTu80wXHGaMVistfeUEfJqyOzdawalSvxwoyRUPl5EhZjNcbSXqG+Cu3B0lsQ
-	vavx15RAzSBjVlUJl3Wh2BdrCt//czA0evy3Zi7Lf3ce4yWowhVrGba/rKGdaB89Tta7
-	0UGdmoa2HdoxCZ5rACueYKf8a5FaV/HbAFVy8bVr/SeSqLuEnPFYmsRitCmfVQ5rPQoL
-	Rsfw==
-X-Received: by 10.15.109.135 with SMTP id cf7mr1187192eeb.0.1375357021782;
-	Thu, 01 Aug 2013 04:37:01 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	e44sm3660856eeh.11.2013.08.01.04.37.00 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 01 Aug 2013 04:37:01 -0700 (PDT)
-Date: Thu, 1 Aug 2013 13:37:36 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20130801113736.GO3280@jama>
-References: <51ECCF5C.2020505@dresearch-fe.de> <6366141.Q5aULPr4OG@helios>
-	<51F8E0C2.3070102@dresearch-fe.de> <8337615.XrjW46moIm@helios>
-	<51F9FC24.3070907@dresearch-fe.de> <20130801103622.GM3280@jama>
-	<51FA3E05.2070205@dresearch-fe.de>
+Return-Path: <bevenson@melinkcorp.com>
+Received: from pluto.melinkcorp.com (rrcs-98-100-91-244.central.biz.rr.com
+	[98.100.91.244])
+	by mail.openembedded.org (Postfix) with ESMTP id F1AC861883
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Aug 2013 12:27:33 +0000 (UTC)
+Received: from pluto.melinkcorp.local ([10.0.2.4]) by pluto.melinkcorp.local
+	([10.0.2.4]) with mapi; Thu, 1 Aug 2013 08:27:33 -0400
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 1 Aug 2013 08:27:32 -0400
+Thread-Topic: [oe] opkg: How to make package signal reboot required?
+Thread-Index: Ac6OomnYa1PGPpp1TruvEo6f351b4wAC3o1g
+Message-ID: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D2BC@pluto.melinkcorp.local>
+References: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D291@pluto.melinkcorp.local>
+	<20130801103252.GL3280@jama>
+In-Reply-To: <20130801103252.GL3280@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 0023EEF0004E400023F03D
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <51FA3E05.2070205@dresearch-fe.de>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] SRC_URI and latest HEAD revision with git (in oe-classic)
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: opkg: How to make package signal reboot required?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,76 +37,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2013 11:37:02 -0000
-X-Groupsio-MsgNum: 45543
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Thv7PGoFpDPJ7Oar"
-Content-Disposition: inline
-
---Thv7PGoFpDPJ7Oar
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Aug 2013 12:27:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 01, 2013 at 12:52:53PM +0200, Steffen Sledz wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Martin and Paul,
+
+Thanks for the replies.  If there is nothing standard in place at the momen=
+t, then I'm planning on setting things up on my end to follow the standard =
+(from what I can tell) Debian practice.  In my pkg_postinst, I'm going to a=
+dd the lines:
+
+#!/bin/sh -e
+if test "x$D" =3D "x"; then
+    touch /var/run/reboot-required
+    cat ${PN} >> /var/run/reboot-required.pkgs
+fi
+
+Then in my script that does the firmware upgrade, I'll check for the existe=
+nce of /var/run/reboot-required to determine whether the system needs to be=
+ rebooted.
+
+If anything can be done to add the above (or something similar) to the pkg_=
+postinst by setting a flag in the Bitbake recipe, I'm all for it.  I'm not =
+quite sure which piece would be responsible for such action (oe-core?  Bitb=
+ake? Something else?).  If someone could suggest the proper place, I'd happ=
+ily submit a request on the proper bug tracker.
+
+Regards,
+Bryan
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Thursday, August 01, 2013 6:33 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] opkg: How to make package signal reboot required?
 >=20
-> On 01.08.2013 12:36, Martin Jansa wrote:
-> > On Thu, Aug 01, 2013 at 08:11:48AM +0200, Steffen Sledz wrote:
-> >> On 31.07.2013 14:50, Paul Eggleton wrote:
-> >>> On Wednesday 31 July 2013 12:02:42 Steffen Sledz wrote:
-> >> ... I read something about a solution using
-> >>=20
-> >> BB_GIT_CLONE_FOR_SRCREV =3D "1" BB_LOCALCOUNT_OVERRIDE =3D ""
-> >>=20
-> >> which should be supported by the old oe-classic/bitbake-1.12.0. Could =
-this be a solution for our problem? What drawbacks does it have?
-> >=20
-> > BB_GIT_CLONE_FOR_SRCREV will need to clone every git repository include=
-d in metadata you're using (even if the recipe isn't built, because it need=
-s to define AUTOREV for parsing and that needs local clone).
+> On Wed, Jul 31, 2013 at 09:28:50PM -0400, Bryan Evenson wrote:
+> > All,
+> >
+> > I have a package that I created for my setup which, when upgraded,
+> will require a system reboot.  Is there a general flag/setting that
+> already exists to put in my Bitbake recipe to signal that the package
+> requires a reboot?  If so, does it just set a flag that a reboot is
+> required or does it force a reboot?
 >=20
-> Every git repo? Or every git repo used with AUTOREV only?
-
-Every git repo with SRCPV.
-
-> > empty BB_LOCALCOUNT_OVERRIDE should work correctly, but you need to syn=
-chronize bb_persist_data.sqlite3 between multiple builders (if you have mul=
-tiple builders populating the same binary feed).
+> I don't know about the feature to do the reboot, but we were using
+> extra metadata flags for .ipk to mark packages which need the reboot
+> (so that package manager can query updated packages and decide if it's
+> needed).
 >=20
-> That should be OK for us.
+> See
+> http://patches.openembedded.org/patch/39181/
+> http://patches.openembedded.org/patch/39183/
 >=20
-> - --=20
-> DResearch Fahrzeugelektronik GmbH
-> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-> Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-> Fax: +49 30 515932-299
-> Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-> Ust.-IDNr. DE273952058
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v2.0.19 (GNU/Linux)
-> Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
+> I don't know why this wasn't ever merged in oe-core
+> http://lists.linuxtogo.org/pipermail/openembedded-core/2012-
+> November/031856.html
+> doesn't have any negative review AFAIK.
 >=20
-> iEYEARECAAYFAlH6PgUACgkQlSfCk8EgCzhRlgCgm/sRrRd945HXKRdsj8aL/+qa
-> bagAnidiDoZO6PtViGA9zJfSRa+n4IcK
-> =3DrQan
-> -----END PGP SIGNATURE-----
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Thv7PGoFpDPJ7Oar
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlH6SIAACgkQN1Ujt2V2gByDGgCfVnrGp00OAuddcbOSwh8Ww5wg
-FfMAn2+YIgAWqxXOKpoI/X0iqYbyiAlk
-=pMIr
------END PGP SIGNATURE-----
-
---Thv7PGoFpDPJ7Oar--
