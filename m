@@ -1,40 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A116361883
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DEB761883
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2013 14:07:51 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id c41so1040559eek.25
+	Thu,  1 Aug 2013 16:23:25 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r71GNQvH017400
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Aug 2013 07:07:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=k8hGWCxOJMenL9pIYmTLeR8ld9iqVN4MJxKGan706M4=;
-	b=UaHC99R5w81DltswsZOad7E+GzspVkaturx8OPk6Qy/tGNLRwAnmA7FYAY+tsJ2jZa
-	7cOfXoGt4mGZAEQo0yZAkjsNnCwEwJbHEP9H0zB2MplQBP0C8PmKIz7KpaLw+vxakod+
-	/m4DIOnfnCaCuPSz48FitJuhzwaez/JfHrfs1HvDtYcpIYeXVB99BmhTyEFPJXXvKcfQ
-	9pSraKDmx805HS6HNbitg8hEfHWR6R52KB2xrKxEbEBB69zNBadxbJ2nJde6roFYJY8R
-	B3/euf4KfAu/B+pTIS/tHHztU9R5kMaNU1TJJyzzDTbuZkzte+qDEsHEIIy5+iefP0Bg
-	hjBQ==
-X-Received: by 10.14.213.136 with SMTP id a8mr1616958eep.62.1375366071825;
-	Thu, 01 Aug 2013 07:07:51 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	k3sm4566426een.16.2013.08.01.07.07.50 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 01 Aug 2013 07:07:51 -0700 (PDT)
-Date: Thu, 1 Aug 2013 16:08:27 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Javier Viguera <javier.viguera@digi.com>
-Message-ID: <20130801140827.GQ3280@jama>
-References: <1375364341-35086-1-git-send-email-javier.viguera@digi.com>
-	<20130801134749.GP3280@jama> <51FA6846.1070006@digi.com>
+	Thu, 1 Aug 2013 09:23:26 -0700 (PDT)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.342.3; Thu, 1 Aug 2013 09:23:24 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 1 Aug 2013 09:23:24 -0700
+Message-ID: <1375374204-5632-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-In-Reply-To: <51FA6846.1070006@digi.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][dylan][PATCH] vsftpd: fix compile-time dependence
+Subject: [meta-selinux][PATCH 1/1] audit: Fixed swig host contamination issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,112 +32,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2013 14:07:52 -0000
-X-Groupsio-MsgNum: 45549
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="s3R87C3fwYeCSZ0b"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Aug 2013 16:23:25 -0000
+Content-Type: text/plain
 
---s3R87C3fwYeCSZ0b
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Anders Hedlund <anders.hedlund@windriver.com>
 
-On Thu, Aug 01, 2013 at 03:53:10PM +0200, Javier Viguera wrote:
-> Hi Martin,
->=20
-> I just subscribed to the list so I didn't know it was already fixed.
->=20
-> Anyway:
->=20
-> # git branch -a --contains 46354a697c18a64c5836159adf8dbd92e6547e85
->=20
-> shows that it's only fixed on *master*.
->=20
-> I was bitten by this using stable dylan branches, that's why my patch=20
-> was sent to apply on dylan.
+CQID: 428272
 
-Backports for dylan need to be marked as such (see README in root of
-meta-oe).
-=20
-> Could this fix be backported to dylan?
+The audit build uses swig to generate a python wrapper.
+Unfortunately, the swig info file references host include
+directories.  Some of these were previously noticed and
+eliminated, but the one fixed here was not.
 
-It's already in my branch with fixes for backport to dylan
-http://git.openembedded.org/meta-openembedded-contrib/log/?h=3Djansa/dylan-=
-backports
+Signed-off-by: Anders Hedlund <anders.hedlund@windriver.com>
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../audit/audit/fix-swig-host-contamination.patch  |   48 ++++++++++++++++++++
+ recipes-security/audit/audit_2.1.3.bb              |    7 ++-
+ recipes-security/audit/audit_2.2.1.bb              |    6 ++-
+ 3 files changed, 56 insertions(+), 5 deletions(-)
+ create mode 100644 recipes-security/audit/audit/fix-swig-host-contamination.patch
 
->=20
-> -
-> Regards,
->=20
-> Javier Viguera
->=20
->=20
-> On 01/08/13 15:47, Martin Jansa wrote:
-> > On Thu, Aug 01, 2013 at 03:39:01PM +0200, Javier Viguera wrote:
-> >> vsftpd links with openssl libraries (libssl and libcrypto) so there is=
- a
-> >> compile-time dependence on openssl package.
-> >>
-> >> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
-> >> ---
-> >>   meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb b/=
-meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
-> >> index c02ee9c..f146910 100644
-> >> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
-> >> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_2.3.5.bb
-> >> @@ -4,7 +4,7 @@ SECTION =3D "network"
-> >>   LICENSE =3D "GPLv2"
-> >>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da6067ad950b28336613aed9dd=
-47b1271"
-> >>
-> >> -DEPENDS =3D "libcap"
-> >> +DEPENDS =3D "libcap openssl"
-> >>
-> >
-> > It was fixed a month ago:
-> >
-> > commit 46354a697c18a64c5836159adf8dbd92e6547e85
-> > Author: Martin Jansa <martin.jansa@gmail.com>
-> > Date:   Tue Jul 2 20:31:56 2013 +0200
-> >
-> >      vsftpd: add missing dependency on openssl
-> >
-> > And current vsftpd is 3.0.0:
-> >
-> > commit 441502b68d03a4ce7796436a53c5e95399724ad2
-> > Author: Roy.Li <rongqing.li@windriver.com>
-> > Date:   Fri Jul 19 10:19:25 2013 +0800
-> >
-> >      Upgrade vsftpd to 3.0.0
-> >
-> >
-> >>   SRC_URI =3D "https://security.appspot.com/downloads/vsftpd-${PV}.tar=
-=2Egz \
-> >>              file://makefile-destdir.patch \
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
->=20
+diff --git a/recipes-security/audit/audit/fix-swig-host-contamination.patch b/recipes-security/audit/audit/fix-swig-host-contamination.patch
+new file mode 100644
+index 0000000..16bb173
+--- /dev/null
++++ b/recipes-security/audit/audit/fix-swig-host-contamination.patch
+@@ -0,0 +1,48 @@
++audit: Fixed swig host contamination issue
++
++The audit build uses swig to generate a python wrapper.
++Unfortunately, the swig info file references host include
++directories.  Some of these were previously noticed and
++eliminated, but the one fixed here was not.
++
++Upstream Status:  pending
++
++Signed-off-by: Anders Hedlund <anders.hedlund@windriver.com>
++Signed-off-by: Joe Slater <jslater@windriver.com>
++
++Index: audit-2.2.1/swig/Makefile.am
++===================================================================
++--- audit-2.2.1.orig/swig/Makefile.am
+++++ audit-2.2.1/swig/Makefile.am
++@@ -25,6 +25,7 @@ AM_CFLAGS = -fPIC -DPIC -fno-strict-alia
++ PYLIBVER ?= python$(PYTHON_VERSION)
++ PYINC ?= /usr/include/$(PYLIBVER)
++ INCLUDES = -I. -I$(top_builddir) -I${top_srcdir}/lib -I$(PYINC)
+++STDINC ?= /usr/include
++ LIBS = $(top_builddir)/lib/libaudit.la
++ pyexec_PYTHON = audit.py
++ pyexec_LTLIBRARIES = _audit.la
++@@ -34,7 +35,7 @@ _audit_la_HEADERS: $(top_builddir)/confi
++ _audit_la_DEPENDENCIES =${top_srcdir}/lib/libaudit.h ${top_builddir}/lib/libaudit.la
++ nodist__audit_la_SOURCES  = audit_wrap.c
++ audit.py audit_wrap.c: ${srcdir}/auditswig.i 
++-	swig -o audit_wrap.c -python ${INCLUDES} ${srcdir}/auditswig.i 
+++	swig -o audit_wrap.c -python ${INCLUDES} -I$(STDINC) ${srcdir}/auditswig.i
++ 
++ CLEANFILES = audit.py* audit_wrap.c *~
++ 
++Index: audit-2.2.1/swig/auditswig.i
++===================================================================
++--- audit-2.2.1.orig/swig/auditswig.i
+++++ audit-2.2.1/swig/auditswig.i
++@@ -37,8 +37,8 @@ signed
++ #define __attribute(X) /*nothing*/
++ typedef unsigned __u32;
++ typedef unsigned uid_t;
++-%include "/usr/include/linux/audit.h"
+++%include "linux/audit.h"
++ #define __extension__ /*nothing*/
++-%include "/usr/include/stdint.h"
+++%include "stdint.h"
++ %include "../lib/libaudit.h"
++ 
+diff --git a/recipes-security/audit/audit_2.1.3.bb b/recipes-security/audit/audit_2.1.3.bb
+index 8c82918..4cd7554 100644
+--- a/recipes-security/audit/audit_2.1.3.bb
++++ b/recipes-security/audit/audit_2.1.3.bb
+@@ -4,7 +4,7 @@ storing and searching the audit records generated by the audit subsystem \
+ in the Linux kernel."
+ HOMEPAGE = "http://people.redhat.com/sgrubb/audit/"
+ SECTION = "base"
+-PR = "r1"
++PR = "r2"
+ LICENSE = "GPLv2+ & LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+@@ -12,7 +12,8 @@ SRC_URI = "http://people.redhat.com/sgrubb/audit/audit-2.1.3.tar.gz \
+ 	   file://disable-ldap.patch \
+ 	   file://audit-python.patch"
+ 
+-SRC_URI += "file://audit-for-cross-compiling.patch"
++SRC_URI += "file://audit-for-cross-compiling.patch \
++	    file://fix-swig-host-contamination.patch"
+ 
+ inherit autotools pythonnative
+ 
+@@ -23,7 +24,7 @@ DEPENDS += "python tcp-wrappers libcap-ng linux-libc-headers (>= 2.6.30)"
+ 
+ EXTRA_OECONF += "--without-prelude --with-libwrap --enable-gssapi-krb5=no --disable-ldap --with-libcap-ng=yes"
+ 
+-EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/$(PYLIBVER)'"
++EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/$(PYLIBVER)' STDINC='${STAGING_INCDIR}'"
+ 
+ SUMMARY_audispd-plugins = "Plugins for the audit event dispatcher"
+ DESCRIPTION_audispd-plugins = "The audispd-plugins package provides plugins for the real-time \
+diff --git a/recipes-security/audit/audit_2.2.1.bb b/recipes-security/audit/audit_2.2.1.bb
+index a58b9e1..e0b86e2 100644
+--- a/recipes-security/audit/audit_2.2.1.bb
++++ b/recipes-security/audit/audit_2.2.1.bb
+@@ -4,7 +4,7 @@ storing and searching the audit records generated by the audit subsystem \
+ in the Linux kernel."
+ HOMEPAGE = "http://people.redhat.com/sgrubb/audit/"
+ SECTION = "base"
+-PR = "r6"
++PR = "r7"
+ LICENSE = "GPLv2+ & LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+@@ -15,7 +15,8 @@ SRC_URI = "http://people.redhat.com/sgrubb/audit/audit-${PV}.tar.gz \
+ SRC_URI += "\
+ 	   file://audit-python-configure.patch \
+ 	   file://audit-cross-compiling.patch \
+-	   file://auditd"
++	   file://auditd \
++	   file://fix-swig-host-contamination.patch"
+ 
+ inherit autotools pythonnative update-rc.d
+ 
+@@ -41,6 +42,7 @@ EXTRA_OECONF += "--without-prelude \
+ EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' \
+ 	PYINC='${STAGING_INCDIR}/$(PYLIBVER)' \
+ 	pyexecdir=${libdir}/python${PYTHON_BASEVERSION}/site-packages \
++	STDINC='${STAGING_INCDIR}' \
+ 	"
+ 
+ SUMMARY_audispd-plugins = "Plugins for the audit event dispatcher"
+-- 
+1.7.3.4
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---s3R87C3fwYeCSZ0b
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlH6a9sACgkQN1Ujt2V2gBwb5ACfUFyElEjb/IOjYfJ9ERROOoog
-fe0An2x1P7xa3s1JHLEZcO1sJaL9OwKa
-=/w29
------END PGP SIGNATURE-----
-
---s3R87C3fwYeCSZ0b--
