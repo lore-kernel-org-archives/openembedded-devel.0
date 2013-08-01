@@ -1,24 +1,25 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C00A6B490
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E0B561883
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Aug 2013 16:24:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r71GOEMD017419
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Aug 2013 09:24:14 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 1 Aug 2013 09:24:13 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 1 Aug 2013 09:24:13 -0700
-Message-ID: <1375374253-5681-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu,  1 Aug 2013 17:06:34 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Aug 2013 10:06:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,795,1367996400"; d="scan'208";a="374684018"
+Received: from unknown (HELO helios.localnet) ([10.252.122.169])
+	by fmsmga001.fm.intel.com with ESMTP; 01 Aug 2013 10:06:34 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe Slater <jslater@windriver.com>
+Date: Thu, 01 Aug 2013 18:06:33 +0100
+Message-ID: <39299095.V2I0ppqtmc@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1375374204-5632-1-git-send-email-jslater@windriver.com>
+References: <1375374204-5632-1-git-send-email-jslater@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-selinux][PATCH 1/1] policycoreutils: fix genhomedircon construction
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-selinux][PATCH 1/1] audit: Fixed swig host contamination issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,70 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2013 16:24:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 01 Aug 2013 17:06:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-CQID: 418197
+Hi Joe,
 
-Reference /usr/sbin instead of the directory into which
-the script is installed on the host.
+On Thursday 01 August 2013 09:23:24 Joe Slater wrote:
+> From: Anders Hedlund <anders.hedlund@windriver.com>
+> 
+> CQID: 428272
+> 
+> The audit build uses swig to generate a python wrapper.
+> Unfortunately, the swig info file references host include
+> directories.  Some of these were previously noticed and
+> eliminated, but the one fixed here was not.
+> 
+> Signed-off-by: Anders Hedlund <anders.hedlund@windriver.com>
+> Signed-off-by: Joe Slater <jslater@windriver.com>
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../selinux/policycoreutils/scripts_makefile.patch |   26 ++++++++++++++++++++
- recipes-security/selinux/policycoreutils_2.1.13.bb |    3 +-
- 2 files changed, 28 insertions(+), 1 deletions(-)
- create mode 100644 recipes-security/selinux/policycoreutils/scripts_makefile.patch
+These meta-selinux patches should go to the yocto@yoctoproject.org mailing 
+list, as specified in the MAINTAINERS file in meta-selinux.
 
-diff --git a/recipes-security/selinux/policycoreutils/scripts_makefile.patch b/recipes-security/selinux/policycoreutils/scripts_makefile.patch
-new file mode 100644
-index 0000000..8972474
---- /dev/null
-+++ b/recipes-security/selinux/policycoreutils/scripts_makefile.patch
-@@ -0,0 +1,26 @@
-+policycoreutils: fix genhomedircon generation
-+
-+The script is put on the target and needs to reference
-+the directory in which semodule is installed.
-+
-+Upstream Status: pending
-+
-+Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+--- a/scripts/Makefile
-++++ b/scripts/Makefile
-+@@ -8,11 +8,12 @@ LOCALEDIR ?= $(PREFIX)/share/locale
-+ 
-+ all: fixfiles genhomedircon chcat
-+ 
-++# we want the script to use the user sbin directory on the target
-++#
-+ genhomedircon:
-+ 	@echo "#!/bin/sh" > genhomedircon
-+ 	@echo >> genhomedircon
-+-	@if [ ! -e semodule_path ]; then echo -n "$(USRSBINDIR)/" >> genhomedircon; fi
-+-	@if [ -e semodule_path ]; then echo -n "`cat semodule_path`/" >> genhomedircon; fi
-++	@echo -n "$(sbindir)/" >> genhomedircon
-+ 	@echo "semodule -Bn" >> genhomedircon
-+ 
-+ install: all
-diff --git a/recipes-security/selinux/policycoreutils_2.1.13.bb b/recipes-security/selinux/policycoreutils_2.1.13.bb
-index 6696357..687347c 100644
---- a/recipes-security/selinux/policycoreutils_2.1.13.bb
-+++ b/recipes-security/selinux/policycoreutils_2.1.13.bb
-@@ -1,4 +1,4 @@
--PR = "r2"
-+PR = "r3"
- 
- include selinux_20120924.inc
- include ${BPN}.inc
-@@ -11,4 +11,5 @@ SRC_URI[sha256sum] = "34040f06f3111d9ee957576e4095841d35b9ca9141ee8d80aab036cbef
- SRC_URI += "\
- 	file://policycoreutils-revert-restorecon-update-type.patch \
- 	file://policycoreutils-revert-run_init-open_init_pty.patch \
-+	file://scripts_makefile.patch \
- 	"
+Cheers,
+Paul
+
 -- 
-1.7.3.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
