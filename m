@@ -1,31 +1,27 @@
-Return-Path: <fgretief@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id BBBC46B22E
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A2F76B22E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Aug 2013 10:28:48 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id z5so320171lbh.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Aug 2013 03:28:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=6Hq1wbPiAtGdZzKlP5Xb0IK48QOPJjQaE+A//avcjxQ=;
-	b=XxWTt33C6monI71EoDM83NM4cHu14B8nIBnzQHS+GOLCTz+1kVHJh42Ck7/jO/7HVX
-	UJqgIQeHpl1bUDHAEuZC74NbwNPgCeCm+H4VIhhRi+AGMOVmxm4WVinNnqtmrd+y8DY6
-	jCpRy21kssyjhhrZbXwuAuZHVVlSjQJ/D2xvhemc7af4heR5lpsARMPV7JCpXHA5lnHs
-	KHKxCDn8DGWmgLWro8VNh1d2ktobSZLzld70Mv+0rkvwIzcNkmpCikUYY50zwjLlbW6N
-	w9+l2YaDzkmlhK4R80Sa5HXQcYhMRtoElMeiRsCwAshTmAzxVbx87gx3C550HxxLAggr
-	2LQg==
+	Fri,  2 Aug 2013 11:02:35 +0000 (UTC)
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 02 Aug 2013 04:02:35 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,800,1367996400"; d="scan'208";a="276753066"
+Received: from unknown (HELO helios.localnet) ([10.252.122.201])
+	by AZSMGA002.ch.intel.com with ESMTP; 02 Aug 2013 04:02:34 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Bryan Evenson <bevenson@melinkcorp.com>
+Date: Fri, 02 Aug 2013 12:02:33 +0100
+Message-ID: <1535997.schkkc0hlE@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D2BC@pluto.melinkcorp.local>
+References: <91586D499ADFD74FBCFB8425266A5DE40153ADA9D291@pluto.melinkcorp.local>
+	<20130801103252.GL3280@jama>
+	<91586D499ADFD74FBCFB8425266A5DE40153ADA9D2BC@pluto.melinkcorp.local>
 MIME-Version: 1.0
-X-Received: by 10.152.22.42 with SMTP id a10mr2757548laf.30.1375439328338;
-	Fri, 02 Aug 2013 03:28:48 -0700 (PDT)
-Received: by 10.152.37.102 with HTTP; Fri, 2 Aug 2013 03:28:48 -0700 (PDT)
-Date: Fri, 2 Aug 2013 12:28:48 +0200
-Message-ID: <CAFpw0gJBdr3jwhYBx2M0QjNM8HSOf1WOB3rFzkR12T3cc5SWJg@mail.gmail.com>
-From: Francois Retief <fgretief@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Cross compiling for x86_64-mingw32
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: opkg: How to make package signal reboot required?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,86 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Aug 2013 10:28:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Aug 2013 11:02:35 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hallo,
+Hi Bryan,
 
-For an upcomming project we need to build a x86_64-mingw32 SDK.   So I
-started
-down the road to create such an SDK. I am using [1] as reference to build
-OE packages.
+On Thursday 01 August 2013 08:27:32 Bryan Evenson wrote:
+> Thanks for the replies.  If there is nothing standard in place at the
+> moment, then I'm planning on setting things up on my end to follow the
+> standard (from what I can tell) Debian practice.  In my pkg_postinst, I'm
+> going to add the lines:
+> 
+> #!/bin/sh -e
+> if test "x$D" = "x"; then
+>     touch /var/run/reboot-required
+>     cat ${PN} >> /var/run/reboot-required.pkgs
+> fi
+> 
+> Then in my script that does the firmware upgrade, I'll check for the
+> existence of /var/run/reboot-required to determine whether the system needs
+> to be rebooted.
+> 
+> If anything can be done to add the above (or something similar) to the
+> pkg_postinst by setting a flag in the Bitbake recipe, I'm all for it.  I'm
+> not quite sure which piece would be responsible for such action (oe-core? 
+> Bitbake? Something else?).  If someone could suggest the proper place, I'd
+> happily submit a request on the proper bug tracker.
 
-So far I gathered that I need to create a sdk conf file for this target:
+Since this is something that would be implemented in OE-Core the best place 
+for this would be the Yocto Project bugzilla which tracks bugs/enhancements 
+for that:
 
-# cat ${OECORE}/meta/conf/machine_sdk/x86_64-mingw32.conf
-SDK_ARCH=x86_64
-SDK_OS=mingw32
+https://bugzilla.yoctoproject.org/
 
-Then the next steps is to make sure I can build binutils:
+If you could file it under Runtime -> Package Management Issues -> 
+package-management-Issues and mark it as "enhancement" in the severity column 
+that would be great.
 
-# SDKMACHINE=x86_64-mingw32 bitbake binutils-crosssdk
+Cheers,
+Paul
 
-This works. The next step is to build the gcc-initial:
+-- 
 
-# SDKMACHINE=x86_64-mingw32 bitbake gcc-crosssdk-initial
-
-But this step requires the mingw-w64 headers. Using references to recipies
-from
-the old oe-classic tree, I was able to craft a recipe for the
-mingw-w64-headers.
-
-recipes-devtools/mingw/mingw-w64-headers_2.0.8.bb
------------------------------------------------------------
-DESCRIPTION = "Header files from the MingGW-w64 project"
-LICENSE = "ZPL"
-LIC_FILES_CHKSUM = "file://../COPYING;md5=3194ff3a0d16f018784d1847bc6a3c4d"
-
-PR = "r1"
-
-BBCLASSEXTEND = "nativesdk"
-
-DEFAULT_PREFERENCE = "-1"
-DEFAULT_PREFERENCE_mingw32 = "1"
-
-SRC_URI =
-"${SOURCEFORGE_MIRROR}/project/mingw-w64/mingw-w64/mingw-w64-release/mingw-w64-v${PV}.tar.gz"
-SRC_URI[md5sum] = "659e5baf45ac8e8b8526f29786ee1112"
-SRC_URI[sha256sum] =
-"1a5a2c57f90c7f1b5eb8402a52f93de645925a8af62c2cfe748f39ce66008cf4"
-
-S = "${WORKDIR}/mingw-w64-v${PV}/mingw-w64-headers"
-B = "${WORKDIR}/build-${TARGET_SYS}"
-
-inherit autotools
-
-INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = ""
-
-do_configure() {
-    oe_runconf
-}
-
-do_compile() {
-    :
-}
------------------------------------------------------------
-
-My question is how do one get the resulting header fiels in the right place
-so that
-gcc-crosssdk-initial can pick it up. From the error messages I can see that
-GCC is looking in
-${TMPDIR}/sysroots/x86_64-nativesdk-angstromsdk-mingw32/usr/local/oecore-x86_64/sysroots/x86_64-angstromsdk-mingw32/usr/include
-
-What is missing from the recipe?  When I run the recipe, it builds fine,
-but the sysroot folder is still empty.
-
-# SDKMACHINE=x86_64-mingw32 bitbake nativesdk-mingw-w64-headers
-
-Any suggestions is helpful.
-
-Cheers
-  Francois
-
-[1] http://www.nathancoulson.com/proj_cross.php
+Paul Eggleton
+Intel Open Source Technology Centre
 
