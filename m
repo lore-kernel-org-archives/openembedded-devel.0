@@ -1,35 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 286C1608BF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id A6EFE601AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 17:50:24 +0000 (UTC)
-Received: by mail-ob0-f170.google.com with SMTP id eh20so3210170obb.1
+	Sat,  3 Aug 2013 18:08:33 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id j13so371854wgh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 10:50:24 -0700 (PDT)
+	Sat, 03 Aug 2013 11:08:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=Vj2W+9dKgmuacoKE5ajJ9rFWKg98j38RqOARLy1ihgw=;
-	b=WTjquvn5iAY4EGvUb1rlvt/Mo6JpCjEf1Qm+SWhLKR0B7/x5CZSGXlNig5nFoGfo3Y
-	4kaO2Z3gX3cLaO3KXYYMbjkcUkem9n7ifiSFDRmQAaeByFR5KPU7DgJzAaRFrSVn47ii
-	NDtmvbODao1R4yG8Tq7F+s8xngazuFtjCtTxwra4j7PltHprg5ucphtPejmyE1PuCBl4
-	NEaknzxhQZsKd/SmYaELOzIt9uwFEXH0m1FgXGQzGIMXEtABZbTijgalLCvjs1+i5idS
-	YKoxE94YYNnXxCVh8p/zIa0eJlC70AiFf4WDRcg+iINXJzMlnM3bFkNy6LOrjjGVVym6
-	Q25Q==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=hG+GGGxLyNhAYSk9MO8TtwxS/Vv+XN82U60qTg541kE=;
+	b=LEo3Y7cHYiNMujJNOUupLwve/irH43Pc7daiDBZKOMJ7aJ1MLqUBD1eZlzTbqwzlqr
+	rNvEqzQsytQETgHJWuOr5WB03X6BEoMEmr3m5F80Gy8cUacwc3aO7IJ/YQsS+3nHYzne
+	6JStUTUsB4hrS1WWOg2q0V+obFAoBH7nqUhjYa4PrCkCV6DPbgTi1z+yFdF6+eMq8+AM
+	AwtcLUxbr4Ytg7SuW7pxwV7noU1uFJbdMcy/hkrdYKATFYIYsBNC/jfedjYrQ/VcgPXA
+	bFLP8lYPazlk3fI55JgZcGmJ+Aj+12N8PemIMuhhpfXEbVKxV5w5uAwaVHysh4l7L1il
+	JJGg==
 MIME-Version: 1.0
-X-Received: by 10.60.124.228 with SMTP id ml4mr2578823oeb.47.1375552224035;
-	Sat, 03 Aug 2013 10:50:24 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Sat, 3 Aug 2013 10:50:23 -0700 (PDT)
-In-Reply-To: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+X-Received: by 10.180.90.202 with SMTP id by10mr1950814wib.39.1375553313330;
+	Sat, 03 Aug 2013 11:08:33 -0700 (PDT)
+Received: by 10.194.16.167 with HTTP; Sat, 3 Aug 2013 11:08:33 -0700 (PDT)
+In-Reply-To: <CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
 References: <1375526327-16139-1-git-send-email-lpapp@kde.org>
-Date: Sat, 3 Aug 2013 14:50:23 -0300
-X-Google-Sender-Auth: cePT_N2HxlZUDd6UUPRj5Di-Xhk
-Message-ID: <CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
+	<CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
+Date: Sat, 3 Aug 2013 20:08:33 +0200
+Message-ID: <CA+chaQdXv5dueX7V+VJC3S0x1bwFFwa_YpMjPnmrRUApW90dxg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] Add QtSerialPort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,20 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 17:50:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 03 Aug 2013 18:08:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sat, Aug 3, 2013 at 7:38 AM, Laszlo Papp <lpapp@kde.org> wrote:
-> Signed-off-by: Laszlo Papp <lpapp@kde.org>
+I've already updated commit message and it's in meta-qt5/jansa/test branch,
+so no need to resend it.
 
-Please use the meta-qt5 prefix and rewrite the commit log as:
 
-qtserialport: Add 5.1.0 version
+On Sat, Aug 3, 2013 at 7:50 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
-We always put the recipe in question as this makes easier to find it later.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://projetos.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> On Sat, Aug 3, 2013 at 7:38 AM, Laszlo Papp <lpapp@kde.org> wrote:
+> > Signed-off-by: Laszlo Papp <lpapp@kde.org>
+>
+> Please use the meta-qt5 prefix and rewrite the commit log as:
+>
+> qtserialport: Add 5.1.0 version
+>
+> We always put the recipe in question as this makes easier to find it later.
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://projetos.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>
 
