@@ -1,36 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B4356B1A4
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 93BB16B41A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 13:08:40 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id z15so781467ead.5
+	Sat,  3 Aug 2013 13:08:43 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c1so781592eek.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 06:08:41 -0700 (PDT)
+	Sat, 03 Aug 2013 06:08:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=sPA0ujs36FUTY5PZDX1TByLn67QX73BIojYLAVfi9x8=;
-	b=Jv71qdAFsZakdVMxI6GNskpZRDQnJYXjZ37AM5bDliOUbhuDOe+uDYBPcextFD/I8z
-	lQKLTrDZfPW6GoeokHj5bOAI67Rgmyd7S0TI0NPeCcpF3Mda3PwaodxKX6Ww3uasCEdU
-	m/ID5XoC3WKKn/raZyDYglkg8Em5QkyEh3u+q5+yYlS9WPDRAl9ZDsNvjg9c4oSpmt43
-	a6p5ksumBLfUiSqVB4ANEgburcG+7eNF29mcaqcvHnbba8i8U4E84TfxYhQzv+bj/npI
-	FgV8o0H4cCAmYpdxpxDr3e4DQ34HDsfggmkQHFXdnnS/veI53spOVBhDS1fNqH0/CJq4
-	Bdzg==
-X-Received: by 10.15.53.4 with SMTP id q4mr9486145eew.134.1375535321173;
-	Sat, 03 Aug 2013 06:08:41 -0700 (PDT)
+	bh=ttyeIE9AmE1pHg7g3TxDrz7cOpQqerF/NLCoxx3kCXQ=;
+	b=spZZxGah1bF5U9bjpW1nDJWlSNGVGqRgcwkzGRcCDGX55IFd7ZOxbsLbQ1yhRAvADX
+	/O3Kgs7Sf2zvwjYTorw6IfLbkElgk9d+9gxovd0NLcLAy3QOOXdkegaZuXaH9VootNfl
+	VLLXKnknAxD3YWae0qnl6/Yfwd0Nlp7ZjNIlvYK4eEEAHEB1poYyCgc/WxcmFs0MxJIw
+	sVspjjE9sh2Hh4Zlg9XN3/Bw0ZFyfqj71XB60JX+ttfu5uVu6S22E1zoP4aomKL0o4mY
+	CJ393MXE/qoO5Da5T0LdcrEqRlR5x/l6sldeOZ2fAVXgVDLhbNQ84NpAKN+yiAw5Bxcn
+	95ag==
+X-Received: by 10.15.54.67 with SMTP id s43mr9456217eew.133.1375535323904;
+	Sat, 03 Aug 2013 06:08:43 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	t6sm9857514eel.12.2013.08.03.06.08.39 for <multiple recipients>
+	a4sm19321351eez.0.2013.08.03.06.08.42 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 03 Aug 2013 06:08:40 -0700 (PDT)
+	Sat, 03 Aug 2013 06:08:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Aug 2013 15:09:10 +0200
-Message-Id: <1375535352-23015-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  3 Aug 2013 15:09:11 +0200
+Message-Id: <1375535352-23015-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1375535352-23015-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1375535352-23015-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 2/4] meta-efl: upgrade efl to 1.7.8, e-wm to 0.17.4
+Subject: [meta-efl][PATCH 3/4] efl: drop .inc and _svn.bb files for libs included in efl.git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,699 +43,1693 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 13:08:42 -0000
+X-List-Received-Date: Sat, 03 Aug 2013 13:08:44 -0000
 
-* announcement:
-  http://www.mail-archive.com/enlightenment-devel@lists.sourceforge.net/msg54004.html
+* in preparation for merged source dir in efl.git I don't plan to support newer SRCREVs from subversion
+* drop INC_PR and fold lib.inc into the recipe
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../e17/{e-wm_0.17.3.bb => e-wm_0.17.4.bb}         |   4 +-
- meta-efl/recipes-efl/efl/ecore_1.7.7.bb            |  11 --
- meta-efl/recipes-efl/efl/ecore_1.7.8.bb            |   9 ++
- meta-efl/recipes-efl/efl/edbus_1.7.7.bb            |  10 --
- meta-efl/recipes-efl/efl/edbus_1.7.8.bb            |   8 ++
- meta-efl/recipes-efl/efl/edje_1.7.7.bb             |  10 --
- meta-efl/recipes-efl/efl/edje_1.7.8.bb             |   8 ++
- meta-efl/recipes-efl/efl/eet_1.7.7.bb              |  10 --
- meta-efl/recipes-efl/efl/eet_1.7.8.bb              |   8 ++
- meta-efl/recipes-efl/efl/eeze_1.7.7.bb             |  10 --
- meta-efl/recipes-efl/efl/eeze_1.7.8.bb             |   8 ++
- meta-efl/recipes-efl/efl/efreet_1.7.7.bb           |  10 --
- meta-efl/recipes-efl/efl/efreet_1.7.8.bb           |   8 ++
- meta-efl/recipes-efl/efl/eina_1.7.7.bb             |  10 --
- meta-efl/recipes-efl/efl/eina_1.7.8.bb             |   8 ++
- meta-efl/recipes-efl/efl/eio_1.7.7.bb              |  10 --
- meta-efl/recipes-efl/efl/eio_1.7.8.bb              |   8 ++
- meta-efl/recipes-efl/efl/elementary_1.7.7.bb       |  10 --
- meta-efl/recipes-efl/efl/elementary_1.7.8.bb       |   8 ++
- meta-efl/recipes-efl/efl/embryo_1.7.7.bb           |  10 --
- meta-efl/recipes-efl/efl/embryo_1.7.8.bb           |   8 ++
- meta-efl/recipes-efl/efl/emotion_1.7.7.bb          |  10 --
- meta-efl/recipes-efl/efl/emotion_1.7.8.bb          |   8 ++
- meta-efl/recipes-efl/efl/ethumb_1.7.7.bb           |  10 --
- meta-efl/recipes-efl/efl/ethumb_1.7.8.bb           |   8 ++
- .../recipes-efl/efl/evas-generic-loaders_1.7.7.bb  |  10 --
- .../recipes-efl/efl/evas-generic-loaders_1.7.8.bb  |   8 ++
- meta-efl/recipes-efl/efl/evas/revert.r83789.patch  | 146 ---------------------
- meta-efl/recipes-efl/efl/evas_1.7.7.bb             |  11 --
- meta-efl/recipes-efl/efl/evas_1.7.8.bb             |   8 ++
- meta-efl/recipes-efl/efl/expedite_1.7.7.bb         |  10 --
- meta-efl/recipes-efl/efl/expedite_1.7.8.bb         |   8 ++
- 32 files changed, 123 insertions(+), 300 deletions(-)
- rename meta-efl/recipes-efl/e17/{e-wm_0.17.3.bb => e-wm_0.17.4.bb} (62%)
- delete mode 100644 meta-efl/recipes-efl/efl/ecore_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/ecore_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/edbus_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/edbus_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/edje_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/edje_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eet_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/eet_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eeze_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/eeze_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/efreet_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/efreet_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eina_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/eina_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eio_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/eio_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/embryo_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/embryo_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/emotion_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/emotion_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/ethumb_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/evas/revert.r83789.patch
- delete mode 100644 meta-efl/recipes-efl/efl/evas_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/evas_1.7.8.bb
- delete mode 100644 meta-efl/recipes-efl/efl/expedite_1.7.7.bb
- create mode 100644 meta-efl/recipes-efl/efl/expedite_1.7.8.bb
+ meta-efl/recipes-efl/efl/ecore.inc                 | 114 --------
+ ...75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch | 287 +++++++++++++++++++++
+ meta-efl/recipes-efl/efl/ecore_1.7.8.bb            | 115 ++++++++-
+ meta-efl/recipes-efl/efl/ecore_svn.bb              |  14 -
+ meta-efl/recipes-efl/efl/edje.inc                  |  66 -----
+ meta-efl/recipes-efl/efl/edje_1.7.8.bb             |  66 ++++-
+ meta-efl/recipes-efl/efl/edje_svn.bb               |  13 -
+ meta-efl/recipes-efl/efl/eet.inc                   |  24 --
+ meta-efl/recipes-efl/efl/eet_1.7.8.bb              |  24 +-
+ meta-efl/recipes-efl/efl/eet_svn.bb                |  13 -
+ meta-efl/recipes-efl/efl/eeze.inc                  |  17 --
+ meta-efl/recipes-efl/efl/eeze_1.7.8.bb             |  17 +-
+ meta-efl/recipes-efl/efl/eeze_svn.bb               |  13 -
+ meta-efl/recipes-efl/efl/efreet.inc                |  17 --
+ meta-efl/recipes-efl/efl/efreet_1.7.8.bb           |  16 +-
+ meta-efl/recipes-efl/efl/efreet_svn.bb             |  13 -
+ meta-efl/recipes-efl/efl/eina.inc                  |  13 -
+ meta-efl/recipes-efl/efl/eina_1.7.8.bb             |  13 +-
+ meta-efl/recipes-efl/efl/eina_svn.bb               |  13 -
+ meta-efl/recipes-efl/efl/eio.inc                   |   9 -
+ meta-efl/recipes-efl/efl/eio_1.7.8.bb              |   9 +-
+ meta-efl/recipes-efl/efl/eio_svn.bb                |  13 -
+ meta-efl/recipes-efl/efl/embryo.inc                |  14 -
+ meta-efl/recipes-efl/efl/embryo_1.7.8.bb           |  14 +-
+ meta-efl/recipes-efl/efl/embryo_svn.bb             |  13 -
+ meta-efl/recipes-efl/efl/emotion.inc               |  17 --
+ meta-efl/recipes-efl/efl/emotion_1.7.8.bb          |  16 +-
+ meta-efl/recipes-efl/efl/emotion_svn.bb            |  13 -
+ meta-efl/recipes-efl/efl/ethumb.inc                |  22 --
+ meta-efl/recipes-efl/efl/ethumb_1.7.8.bb           |  21 +-
+ meta-efl/recipes-efl/efl/ethumb_svn.bb             |  13 -
+ meta-efl/recipes-efl/efl/evas.inc                  | 168 ------------
+ meta-efl/recipes-efl/efl/evas_1.7.8.bb             | 168 +++++++++++-
+ meta-efl/recipes-efl/efl/evas_svn.bb               |  13 -
+ 34 files changed, 755 insertions(+), 636 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/efl/ecore.inc
+ create mode 100644 meta-efl/recipes-efl/efl/ecore/0001-Backport-aa75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch
+ delete mode 100644 meta-efl/recipes-efl/efl/ecore_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/edje.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/edje_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eet.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/eet_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eeze.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/eeze_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/efreet.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/efreet_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eina.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/eina_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eio.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/eio_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/embryo.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/embryo_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/ethumb.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/ethumb_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/evas_svn.bb
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_0.17.3.bb b/meta-efl/recipes-efl/e17/e-wm_0.17.4.bb
-similarity index 62%
-rename from meta-efl/recipes-efl/e17/e-wm_0.17.3.bb
-rename to meta-efl/recipes-efl/e17/e-wm_0.17.4.bb
-index 25bde7d..01895bc 100644
---- a/meta-efl/recipes-efl/e17/e-wm_0.17.3.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_0.17.4.bb
-@@ -12,5 +12,5 @@ SRC_URI = "\
-     file://applications.menu \
+diff --git a/meta-efl/recipes-efl/efl/ecore.inc b/meta-efl/recipes-efl/efl/ecore.inc
+deleted file mode 100644
+index fd75a00..0000000
+--- a/meta-efl/recipes-efl/efl/ecore.inc
++++ /dev/null
+@@ -1,114 +0,0 @@
+-DESCRIPTION = "Ecore is the Enlightenment application framework library"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d6ff2c3c85de2faf5fd7dcd9ccfc8886"
+-DEPENDS = "virtual/libiconv tslib curl eet evas glib-2.0 gnutls \
+-           libxtst libxcomposite libxinerama libxscrnsaver libxdamage libxrandr libxcursor libxfixes"
+-DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
+-# optional
+-# DEPENDS += "directfb virtual/libsdl openssl virtual/libiconv"
+-
+-inherit efl gettext
+-
+-BBCLASSEXTEND = "native"
+-INC_PR = "r2"
+-
+-do_configure_prepend() {
+-    touch ${S}/po/Makefile.in.in || true
+-    sed -i -e 's: po::g' ${S}/Makefile.am
+-}
+-
+-FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+-
+-PACKAGES =+ "\
+-    ${PN}-con \
+-    ${PN}-config \
+-    ${PN}-desktop \
+-    ${PN}-directfb \
+-    ${PN}-sdl \
+-    ${PN}-evas \
+-    ${PN}-fb \
+-    ${PN}-file \
+-    ${PN}-imf-evas \
+-    ${PN}-imf \
+-    ${PN}-ipc \
+-    ${PN}-job \
+-    ${PN}-txt \
+-    ${PN}-x \
+-    ${PN}-input \
+-"
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
+-
+-FILES_${PN} = "${libdir}/libecore*.so.* \
+-    ${bindir} \
+-"
+-FILES_${PN}-con = "${libdir}/libecore_con*.so.*"
+-FILES_${PN}-config = "${libdir}/libecore_config*.so.*"
+-FILES_${PN}-desktop = "${libdir}/libecore_desktop*.so.*"
+-FILES_${PN}-directfb = "${libdir}/libecore_directfb*.so.*"
+-FILES_${PN}-sdl = "${libdir}/libecore_sdl*.so.*"
+-FILES_${PN}-evas = "${libdir}/libecore_evas*.so.*"
+-FILES_${PN}-fb = "${libdir}/libecore_fb*.so.*"
+-FILES_${PN}-file = "${libdir}/libecore_file*.so.*"
+-FILES_${PN}-imf = "${libdir}/libecore_imf*.so.* \
+-    ${libdir}/ecore/immodules/*.so \
+-"
+-FILES_${PN}-imf-evas = "${libdir}/libecore_imf_evas*.so.*"
+-FILES_${PN}-ipc = "${libdir}/libecore_ipc*.so.*"
+-FILES_${PN}-job = "${libdir}/libecore_job*.so.*"
+-FILES_${PN}-txt = "${libdir}/libecore_txt*.so.*"
+-FILES_${PN}-x = "${libdir}/libecore_x*.so.*"
+-FILES_${PN}-input = "${libdir}/libecore_input*.so.*"
+-
+-ECORE_OECONF = "\
+-    --x-includes=${STAGING_INCDIR}/X11 \
+-    --x-libraries=${STAGING_LIBDIR} \
+-    --enable-simple-x11 \
+-    --enable-ecore-config \
+-    --enable-ecore-x \
+-    --enable-ecore-job \
+-    --enable-ecore-fb \
+-    --enable-ecore-evas \
+-    --enable-ecore-evas-software-16-x11 \
+-    --enable-ecore-evas-xrender \
+-    --enable-abstract-sockets \
+-    --enable-ecore-con \
+-    --enable-ecore-ipc \
+-    --enable-ecore-file \
+-    --enable-inotify \
+-    --disable-ecore-desktop \
+-    --disable-ecore-x-xcb \
+-    --disable-ecore-x-xprint \
+-    --disable-ecore-directfb \
+-    --disable-ecore-sdl \
+-    --enable-ecore-evas-opengl-x11 \
+-    --disable-ecore-evas-dfb \
+-    --disable-ecore-evas-sdl \
+-    --disable-openssl \
+-    --disable-poll \
+-    --enable-xim \
+-"
+-
+-EXTRA_OECONF = "${ECORE_OECONF} \
+-                 --enable-curl \
+-"
+-
+-EXTRA_OECONF_virtclass-native = "\
+-                 ${ECORE_OECONF} \
+-                 --disable-curl \
+-                 --disable-ecore-x-composite \
+-                 --disable-ecore-x-damage \
+-                 --disable-ecore-x-dpms \
+-                 --disable-ecore-x-randr \
+-                 --disable-ecore-x-render \
+-                 --disable-ecore-x-screensaver \
+-                 --disable-ecore-x-shape \
+-                 --disable-ecore-x-sync \
+-                 --disable-ecore-x-xfixes \
+-                 --disable-ecore-x-xinerama \
+-                 --disable-ecore-x-xprint \
+-                 --disable-ecore-x-xtest \
+-                 --disable-ecore-x-cursor \
+-                 --disable-ecore-x-input \
+-                 --disable-ecore-x-dri \
+-"
+diff --git a/meta-efl/recipes-efl/efl/ecore/0001-Backport-aa75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch b/meta-efl/recipes-efl/efl/ecore/0001-Backport-aa75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch
+new file mode 100644
+index 0000000..c23c300
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/ecore/0001-Backport-aa75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch
+@@ -0,0 +1,287 @@
++From 27cd63650ce7ef98934cdb51df1c94db25d0ffc3 Mon Sep 17 00:00:00 2001
++From: Chris Michael <cp.michael@samsung.com>
++Date: Thu, 1 Aug 2013 15:18:01 +0100
++Subject: [PATCH] Backport: aa75297 : Add #ifdef ECORE_XRANDR around the edid
++ functions.
++
++NB: Cannot really happen for 1.8 (as --disable-ecore-x-randr has no
++effect), but really these should have been ifdef'd from the start.
++
++NB: IMO, Don't think a ChangeLog is really needed for this....
++
++Signed-off-by: Chris Michael <cp.michael@samsung.com>
++Signed-off-by: Deon Thomas <PrinceAMD.Elive@gmail.com>
++---
++ src/lib/ecore_x/xlib/ecore_x_randr.c | 60 +++++++++++++++++++++++++++++++-----
++ 1 file changed, 52 insertions(+), 8 deletions(-)
++
++diff --git a/src/lib/ecore_x/xlib/ecore_x_randr.c b/src/lib/ecore_x/xlib/ecore_x_randr.c
++index 1ccb5e5..9d80ac0 100644
++--- a/src/lib/ecore_x/xlib/ecore_x_randr.c
+++++ b/src/lib/ecore_x/xlib/ecore_x_randr.c
++@@ -3374,6 +3374,7 @@ ecore_x_randr_edid_has_valid_header(unsigned char *edid, unsigned long edid_leng
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_info_has_valid_checksum(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    unsigned char *iter = NULL;
++    char sum = 0;
++    int i = 0, version = 0;
++@@ -3400,11 +3401,15 @@ ecore_x_randr_edid_info_has_valid_checksum(unsigned char *edid, unsigned long ed
++ 
++    if (sum) return EINA_FALSE;
++    return EINA_TRUE;
+++#else
+++   return EINA_FALSE;
+++#endif
++ }
++ 
++ EAPI int 
++ ecore_x_randr_edid_version_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    if ((edid_length > RANDR_EDID_VERSION_MINOR) && 
++        (ecore_x_randr_edid_has_valid_header(edid, edid_length)))
++      {
++@@ -3413,11 +3418,15 @@ ecore_x_randr_edid_version_get(unsigned char *edid, unsigned long edid_length)
++      }
++ 
++    return ECORE_X_RANDR_EDID_UNKNOWN_VALUE;
+++#else
+++   return 0;
+++#endif
++ }
++ 
++ EAPI char *
++ ecore_x_randr_edid_manufacturer_name_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    if ((edid_length > RANDR_EDID_MANUFACTURER + 1) && 
++        (ecore_x_randr_edid_has_valid_header(edid, edid_length)))
++      {
++@@ -3434,13 +3443,14 @@ ecore_x_randr_edid_manufacturer_name_get(unsigned char *edid, unsigned long edid
++ 
++         return name;
++      }
++-
+++#endif
++    return NULL;
++ }
++ 
++ EAPI char *
++ ecore_x_randr_edid_display_name_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    unsigned char *block = NULL;
++    int version = 0;
++ 
++@@ -3469,13 +3479,14 @@ ecore_x_randr_edid_display_name_get(unsigned char *edid, unsigned long edid_leng
++                }
++           }
++      }
++-
+++#endif
++    return NULL;
++ }
++ 
++ EAPI char *
++ ecore_x_randr_edid_display_ascii_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    unsigned char *block = NULL;
++    int version = 0;
++ 
++@@ -3504,13 +3515,14 @@ ecore_x_randr_edid_display_ascii_get(unsigned char *edid, unsigned long edid_len
++                }
++           }
++      }
++-
+++#endif
++    return NULL;
++ }
++ 
++ EAPI char *
++ ecore_x_randr_edid_display_serial_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    unsigned char *block = NULL;
++    int version = 0;
++ 
++@@ -3539,7 +3551,7 @@ ecore_x_randr_edid_display_serial_get(unsigned char *edid, unsigned long edid_le
++                }
++           }
++      }
++-
+++#endif
++    return NULL;
++ }
++ 
++@@ -3552,77 +3564,90 @@ ecore_x_randr_edid_model_get(unsigned char *edid, unsigned long edid_length)
++ EAPI int 
++ ecore_x_randr_edid_manufacturer_serial_number_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    if ((edid_length > RANDR_EDID_MANUFACTURER + 1) && 
++        (ecore_x_randr_edid_has_valid_header(edid, edid_length)))
++      return (int)(edid[0x0c] + (edid[0x0d] << 8) + 
++                   (edid[0x0e] << 16) + (edid[0x0f] << 24));
++ 
++    return ECORE_X_RANDR_EDID_UNKNOWN_VALUE;
+++#else
+++   return 0;
+++#endif
++ }
++ 
++ EAPI int 
++ ecore_x_randr_edid_manufacturer_model_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    if ((edid_length > RANDR_EDID_MANUFACTURER + 1) && 
++        (ecore_x_randr_edid_has_valid_header(edid, edid_length)))
++      return (int)(edid[0x0a] + (edid[0x0b] << 8));
++-
+++#endif
++    return ECORE_X_RANDR_EDID_UNKNOWN_VALUE;
++ }
++ 
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_dpms_available_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    int version = 0;
++ 
++    version = ecore_x_randr_edid_version_get(edid, edid_length);
++    if (version < RANDR_EDID_VERSION_1_3) return EINA_FALSE;
++ 
++    return !!(edid[0x18] & 0xE0);
+++#else
+++   return EINA_FALSE;
+++#endif
++ }
++ 
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_dpms_standby_available_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    int version = 0;
++ 
++    version = ecore_x_randr_edid_version_get(edid, edid_length);
++    if (version < RANDR_EDID_VERSION_1_3) return EINA_FALSE;
++ 
++    if (edid[0x18] & 0xE0) return !!(edid[0x18] & 0x80);
++-
+++#endif
++    return EINA_FALSE;
++ }
++ 
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_dpms_suspend_available_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    int version = 0;
++ 
++    version = ecore_x_randr_edid_version_get(edid, edid_length);
++    if (version < RANDR_EDID_VERSION_1_3) return EINA_FALSE;
++ 
++    if (edid[0x18] & 0xE0) return !!(edid[0x18] & 0x40);
++-
+++#endif
++    return EINA_FALSE;
++ }
++ 
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_dpms_off_available_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    int version = 0;
++ 
++    version = ecore_x_randr_edid_version_get(edid, edid_length);
++    if (version < RANDR_EDID_VERSION_1_3) return EINA_FALSE;
++ 
++    if (edid[0x18] & 0xE0) return !!(edid[0x18] & 0x20);
++-
+++#endif
++    return EINA_FALSE;
++ }
++ 
++ EAPI Ecore_X_Randr_Edid_Aspect_Ratio 
++ ecore_x_randr_edid_display_aspect_ratio_preferred_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    unsigned char *block = NULL;
++    int version = 0;
++ 
++@@ -3660,11 +3685,15 @@ ecore_x_randr_edid_display_aspect_ratio_preferred_get(unsigned char *edid, unsig
++      }
++ 
++    return ECORE_X_RANDR_EDID_UNKNOWN_VALUE;
+++#else
+++   return 0;
+++#endif
++ }
++ 
++ EAPI Ecore_X_Randr_Edid_Aspect_Ratio 
++ ecore_x_randr_edid_display_aspect_ratios_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    Ecore_X_Randr_Edid_Aspect_Ratio ret;
++    unsigned char *block = NULL;
++    int version = 0;
++@@ -3697,11 +3726,15 @@ ecore_x_randr_edid_display_aspect_ratios_get(unsigned char *edid, unsigned long
++      }
++ 
++    return ret;
+++#else
+++   return 0;
+++#endif
++ }
++ 
++ EAPI Ecore_X_Randr_Edid_Display_Colorscheme 
++ ecore_x_randr_edid_display_colorscheme_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    Ecore_X_Randr_Edid_Display_Colorscheme ret;
++    int version = 0;
++ 
++@@ -3723,22 +3756,30 @@ ecore_x_randr_edid_display_colorscheme_get(unsigned char *edid, unsigned long ed
++      ret = (edid[0x18] & 0x18);
++ 
++    return ret;
+++#else
+++   return 0;
+++#endif
++ }
++ 
++ EAPI Eina_Bool 
++ ecore_x_randr_edid_display_type_digital_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    int version = 0;
++ 
++    version = ecore_x_randr_edid_version_get(edid, edid_length);
++    if (version < RANDR_EDID_VERSION_1_3) return EINA_FALSE;
++ 
++    return !!(edid[0x14] & 0x80);
+++#else
+++   return EINA_FALSE;
+++#endif
++ }
++ 
++ EAPI Ecore_X_Randr_Edid_Display_Interface_Type 
++ ecore_x_randr_edid_display_interface_type_get(unsigned char *edid, unsigned long edid_length)
++ {
+++#ifdef ECORE_XRANDR
++    Ecore_X_Randr_Edid_Display_Interface_Type type;
++    int version = 0;
++ 
++@@ -3753,4 +3794,7 @@ ecore_x_randr_edid_display_interface_type_get(unsigned char *edid, unsigned long
++      type = ECORE_X_RANDR_EDID_UNKNOWN_VALUE;
++ 
++    return type;
+++#else
+++   return 0;
+++#endif
++ }
++-- 
++1.8.3.2
++
+diff --git a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
+index ccd5d97..6f587d0 100644
+--- a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
+@@ -1,8 +1,121 @@
+-require ${BPN}.inc
++DESCRIPTION = "Ecore is the Enlightenment application framework library"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d6ff2c3c85de2faf5fd7dcd9ccfc8886"
++DEPENDS = "virtual/libiconv tslib curl eet evas glib-2.0 gnutls \
++           libxtst libxcomposite libxinerama libxscrnsaver libxdamage libxrandr libxcursor libxfixes"
++DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
++# optional
++# DEPENDS += "directfb virtual/libsdl openssl virtual/libiconv"
++
++inherit efl gettext
++
++BBCLASSEXTEND = "native"
++
++do_configure_prepend() {
++    touch ${S}/po/Makefile.in.in || true
++    sed -i -e 's: po::g' ${S}/Makefile.am
++}
++
++FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
++
++PACKAGES =+ "\
++    ${PN}-con \
++    ${PN}-config \
++    ${PN}-desktop \
++    ${PN}-directfb \
++    ${PN}-sdl \
++    ${PN}-evas \
++    ${PN}-fb \
++    ${PN}-file \
++    ${PN}-imf-evas \
++    ${PN}-imf \
++    ${PN}-ipc \
++    ${PN}-job \
++    ${PN}-txt \
++    ${PN}-x \
++    ${PN}-input \
++"
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN} = "${libdir}/libecore*.so.* \
++    ${bindir} \
++"
++FILES_${PN}-con = "${libdir}/libecore_con*.so.*"
++FILES_${PN}-config = "${libdir}/libecore_config*.so.*"
++FILES_${PN}-desktop = "${libdir}/libecore_desktop*.so.*"
++FILES_${PN}-directfb = "${libdir}/libecore_directfb*.so.*"
++FILES_${PN}-sdl = "${libdir}/libecore_sdl*.so.*"
++FILES_${PN}-evas = "${libdir}/libecore_evas*.so.*"
++FILES_${PN}-fb = "${libdir}/libecore_fb*.so.*"
++FILES_${PN}-file = "${libdir}/libecore_file*.so.*"
++FILES_${PN}-imf = "${libdir}/libecore_imf*.so.* \
++    ${libdir}/ecore/immodules/*.so \
++"
++FILES_${PN}-imf-evas = "${libdir}/libecore_imf_evas*.so.*"
++FILES_${PN}-ipc = "${libdir}/libecore_ipc*.so.*"
++FILES_${PN}-job = "${libdir}/libecore_job*.so.*"
++FILES_${PN}-txt = "${libdir}/libecore_txt*.so.*"
++FILES_${PN}-x = "${libdir}/libecore_x*.so.*"
++FILES_${PN}-input = "${libdir}/libecore_input*.so.*"
++
++ECORE_OECONF = "\
++    --x-includes=${STAGING_INCDIR}/X11 \
++    --x-libraries=${STAGING_LIBDIR} \
++    --enable-simple-x11 \
++    --enable-ecore-config \
++    --enable-ecore-x \
++    --enable-ecore-job \
++    --enable-ecore-fb \
++    --enable-ecore-evas \
++    --enable-ecore-evas-software-16-x11 \
++    --enable-ecore-evas-xrender \
++    --enable-abstract-sockets \
++    --enable-ecore-con \
++    --enable-ecore-ipc \
++    --enable-ecore-file \
++    --enable-inotify \
++    --disable-ecore-desktop \
++    --disable-ecore-x-xcb \
++    --disable-ecore-x-xprint \
++    --disable-ecore-directfb \
++    --disable-ecore-sdl \
++    --enable-ecore-evas-opengl-x11 \
++    --disable-ecore-evas-dfb \
++    --disable-ecore-evas-sdl \
++    --disable-openssl \
++    --disable-poll \
++    --enable-xim \
++"
++
++EXTRA_OECONF = "${ECORE_OECONF} \
++                 --enable-curl \
++"
++
++EXTRA_OECONF_virtclass-native = "\
++                 ${ECORE_OECONF} \
++                 --disable-curl \
++                 --disable-ecore-x-composite \
++                 --disable-ecore-x-damage \
++                 --disable-ecore-x-dpms \
++                 --disable-ecore-x-randr \
++                 --disable-ecore-x-render \
++                 --disable-ecore-x-screensaver \
++                 --disable-ecore-x-shape \
++                 --disable-ecore-x-sync \
++                 --disable-ecore-x-xfixes \
++                 --disable-ecore-x-xinerama \
++                 --disable-ecore-x-xprint \
++                 --disable-ecore-x-xtest \
++                 --disable-ecore-x-cursor \
++                 --disable-ecore-x-input \
++                 --disable-ecore-x-dri \
++"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+     file://fix-ecore-fb-initialization.patch \
++    file://0001-Backport-aa75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch \
  "
  
--SRC_URI[md5sum] = "e20f4d75a40f3de0dcd2862ca0483ebc"
--SRC_URI[sha256sum] = "fb4856c705633f8cbac7b576387204d56a1dbd652005b11a0e5bfdf0f1ca389e"
-+SRC_URI[md5sum] = "ce3b7c8f05975521bdfe1edb72c8e245"
-+SRC_URI[sha256sum] = "090447607c850f98ce8c2089c55e15d77b35a9014eddff9119f38b0e0e49f0b7"
-diff --git a/meta-efl/recipes-efl/efl/ecore_1.7.7.bb b/meta-efl/recipes-efl/efl/ecore_1.7.7.bb
+ SRC_URI[md5sum] = "5a8ca096d8c15647b2493d4664a4b895"
+diff --git a/meta-efl/recipes-efl/efl/ecore_svn.bb b/meta-efl/recipes-efl/efl/ecore_svn.bb
 deleted file mode 100644
-index aad7a27..0000000
---- a/meta-efl/recipes-efl/efl/ecore_1.7.7.bb
+index f421c2b..0000000
+--- a/meta-efl/recipes-efl/efl/ecore_svn.bb
 +++ /dev/null
-@@ -1,11 +0,0 @@
+@@ -1,14 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -    file://fix-ecore-fb-initialization.patch \
 -"
--
--SRC_URI[md5sum] = "8974d55e80bab1405c24b73f1f43153c"
--SRC_URI[sha256sum] = "1a933394897bba8d255c3e458501be9ed30fa2a02f7552e338350f54e2342fd6"
-diff --git a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
-new file mode 100644
-index 0000000..ccd5d97
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
-@@ -0,0 +1,9 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+    file://fix-ecore-fb-initialization.patch \
-+"
-+
-+SRC_URI[md5sum] = "5a8ca096d8c15647b2493d4664a4b895"
-+SRC_URI[sha256sum] = "26cb1dc02213a221fdec32ef4ea4ece608e5239bdbd19c9d62b09cf931863738"
-diff --git a/meta-efl/recipes-efl/efl/edbus_1.7.7.bb b/meta-efl/recipes-efl/efl/edbus_1.7.7.bb
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/edje.inc b/meta-efl/recipes-efl/efl/edje.inc
 deleted file mode 100644
-index f8da1fd..0000000
---- a/meta-efl/recipes-efl/efl/edbus_1.7.7.bb
+index b34453c..0000000
+--- a/meta-efl/recipes-efl/efl/edje.inc
 +++ /dev/null
-@@ -1,10 +0,0 @@
--require ${BPN}.inc
+@@ -1,66 +0,0 @@
+-DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
+-DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1 eio"
+-DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
+-DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"
+-# GPLv2 because of epp in PN-utils
+-LICENSE = "MIT BSD GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
 -
--PR = "${INC_PR}.0"
+-inherit efl
 -
--SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-BBCLASSEXTEND = "native nativesdk"
+-INC_PR = "r0"
+-
+-do_configure_prepend_virtclass-native() {
+-    sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
+-    sed -i 's: cpp -I: /usr/bin/cpp -I:' ${S}/src/bin/edje_cc_parse.c
+-    sed -i 's:\"gcc -I:\"/usr/bin/gcc -I:' ${S}/src/bin/edje_cc_parse.c
+-}
+-# The new lua stuff is a bit broken...
+-do_configure_append() {
+-    for i in $(find "${S}" -name "Makefile") ; do
+-        sed -i -e 's:-L/usr/local/lib::g'  $i
+-    done
+-}
+-
+-do_compile_append() {
+-    sed -i -e s:local/::g -e 's:-L${STAGING_LIBDIR}::g' ${S}/edje.pc
+-}
+-
+-# gain some extra performance at the expense of RAM - generally i'd say bad
+-# and a possible source of bugs
+-#EXTRA_OECONF = "--enable-edje-program-cache"
+-
+-# Since r44323 edje has a fixed-point mode
+-require edje-fpu.inc
+-EXTRA_OECONF += "${@get_edje_fpu_setting(bb, d)}"
+-
+-SNDFILE = "--enable-sndfile"
+-SNDFILE_virtclass-native = "--disable-sndfile"
+-SNDFILE_virtclass-nativesdk = "--disable-sndfile"
+-EXTRA_OECONF += "${SNDFILE}"
+-
+-PACKAGES =+ "${PN}-utils"
+-RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
+-
+-RRECOMMENDS_${PN}-utils = "\
+-    evas-saver-png \
+-    evas-saver-jpeg \
+-    evas-saver-eet \
 -"
 -
--SRC_URI[md5sum] = "d9bf302b9b3f6cfd98840e6e8ca8c0ce"
--SRC_URI[sha256sum] = "ad2b545d29920a3c245e7d73cced8be0fbef28cc003028fe4938961810748fef"
-diff --git a/meta-efl/recipes-efl/efl/edbus_1.7.8.bb b/meta-efl/recipes-efl/efl/edbus_1.7.8.bb
-new file mode 100644
-index 0000000..a9250e9
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/edbus_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "8711070b57873b2b2a0024b198e50906"
-+SRC_URI[sha256sum] = "9e94f1c522ac9faec991cd90c91e4e26b355909dbba21b42585359841937af78"
-diff --git a/meta-efl/recipes-efl/efl/edje_1.7.7.bb b/meta-efl/recipes-efl/efl/edje_1.7.7.bb
-deleted file mode 100644
-index f688363..0000000
---- a/meta-efl/recipes-efl/efl/edje_1.7.7.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require ${BPN}.inc
+-DEBIAN_NOAUTONAME_${PN}-utils = "1"
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
 -
--PR = "${INC_PR}.0"
--
--SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-FILES_${PN}-utils = "\
+-    ${bindir}/edje_* \
+-    ${bindir}/inkscape2edc \
+-    ${libdir}/edje/utils/epp \
+-    ${datadir}/edje/include/edje.inc \
 -"
 -
--SRC_URI[md5sum] = "8aa82193b59aef8fc91577f1226d2daa"
--SRC_URI[sha256sum] = "ad912d56b6f3e27442d069ce1c8f1ba50b635ef5f408a9cc00912c927bed2a1e"
+-FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so \
+-                ${datadir}/mime/packages/edje.xml"
+-FILES_${PN}-dev += "${libdir}/${PN}/modules/*/*/module.la"
+-FILES_${PN}-dbg += "${libdir}/${PN}/modules/*/*/.debug"
 diff --git a/meta-efl/recipes-efl/efl/edje_1.7.8.bb b/meta-efl/recipes-efl/efl/edje_1.7.8.bb
-new file mode 100644
-index 0000000..ea3fc74
---- /dev/null
+index ea3fc74..ed43c32 100644
+--- a/meta-efl/recipes-efl/efl/edje_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/edje_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,68 @@
+-require ${BPN}.inc
++DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
++DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1 eio"
++DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
++DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"
++# GPLv2 because of epp in PN-utils
++LICENSE = "MIT BSD GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++inherit efl
++
++BBCLASSEXTEND = "native nativesdk"
++
++do_configure_prepend_virtclass-native() {
++    sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
++    sed -i 's: cpp -I: /usr/bin/cpp -I:' ${S}/src/bin/edje_cc_parse.c
++    sed -i 's:\"gcc -I:\"/usr/bin/gcc -I:' ${S}/src/bin/edje_cc_parse.c
++}
++# The new lua stuff is a bit broken...
++do_configure_append() {
++    for i in $(find "${S}" -name "Makefile") ; do
++        sed -i -e 's:-L/usr/local/lib::g'  $i
++    done
++}
++
++do_compile_append() {
++    sed -i -e s:local/::g -e 's:-L${STAGING_LIBDIR}::g' ${S}/edje.pc
++}
++
++# gain some extra performance at the expense of RAM - generally i'd say bad
++# and a possible source of bugs
++#EXTRA_OECONF = "--enable-edje-program-cache"
++
++# Since r44323 edje has a fixed-point mode
++require edje-fpu.inc
++EXTRA_OECONF += "${@get_edje_fpu_setting(bb, d)}"
++
++SNDFILE = "--enable-sndfile"
++SNDFILE_virtclass-native = "--disable-sndfile"
++SNDFILE_virtclass-nativesdk = "--disable-sndfile"
++EXTRA_OECONF += "${SNDFILE}"
++
++PACKAGES =+ "${PN}-utils"
++RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
++
++RRECOMMENDS_${PN}-utils = "\
++    evas-saver-png \
++    evas-saver-jpeg \
++    evas-saver-eet \
 +"
 +
-+SRC_URI[md5sum] = "06399e95de312de12342df8f16c7c885"
-+SRC_URI[sha256sum] = "924eae1be1fe755997be8074d32af4b6a83ed7e57057edccb2cf46b83c33202d"
-diff --git a/meta-efl/recipes-efl/efl/eet_1.7.7.bb b/meta-efl/recipes-efl/efl/eet_1.7.7.bb
++DEBIAN_NOAUTONAME_${PN}-utils = "1"
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN}-utils = "\
++    ${bindir}/edje_* \
++    ${bindir}/inkscape2edc \
++    ${libdir}/edje/utils/epp \
++    ${datadir}/edje/include/edje.inc \
++"
++
++FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so \
++                ${datadir}/mime/packages/edje.xml"
++FILES_${PN}-dev += "${libdir}/${PN}/modules/*/*/module.la"
++FILES_${PN}-dbg += "${libdir}/${PN}/modules/*/*/.debug"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/edje_svn.bb b/meta-efl/recipes-efl/efl/edje_svn.bb
 deleted file mode 100644
-index 7c701c5..0000000
---- a/meta-efl/recipes-efl/efl/eet_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/edje_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
+-"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/eet.inc b/meta-efl/recipes-efl/efl/eet.inc
+deleted file mode 100644
+index a7864ec..0000000
+--- a/meta-efl/recipes-efl/efl/eet.inc
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "EET is the Enlightenment data storage library"
+-DEPENDS = "pkgconfig zlib jpeg openssl eina gnutls"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=da947f414a2ca4323245f1abb1980953"
+-
+-inherit efl
+-
+-BBCLASSEXTEND = "native"
+-INC_PR = "r0"
+-
+-EXTRA_OECONF = "\
+-    --enable-openssl \
+-    --enable-cypher \
+-    --enable-signature \
+-    --disable-coverage \
+-    --enable-old-eet-file-format \
+-    --disable-assert \
 -"
 -
--SRC_URI[md5sum] = "a4ee8343fdb93ff00359e595f45488cd"
--SRC_URI[sha256sum] = "d3c801995d7ec1f85de0adda440c4577060e2895c4ef21da60077773d5874f1b"
+-PACKAGES =+ "${PN}-utils"
+-
+-FILES_${PN}-utils = "\
+-    ${bindir}/${PN} \
+-"
 diff --git a/meta-efl/recipes-efl/efl/eet_1.7.8.bb b/meta-efl/recipes-efl/efl/eet_1.7.8.bb
-new file mode 100644
-index 0000000..df4d7c1
---- /dev/null
+index df4d7c1..8258973 100644
+--- a/meta-efl/recipes-efl/efl/eet_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/eet_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,26 @@
+-require ${BPN}.inc
++DESCRIPTION = "EET is the Enlightenment data storage library"
++DEPENDS = "pkgconfig zlib jpeg openssl eina gnutls"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=da947f414a2ca4323245f1abb1980953"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++inherit efl
++
++BBCLASSEXTEND = "native"
++
++EXTRA_OECONF = "\
++    --enable-openssl \
++    --enable-cypher \
++    --enable-signature \
++    --disable-coverage \
++    --enable-old-eet-file-format \
++    --disable-assert \
 +"
 +
-+SRC_URI[md5sum] = "2db9527a95412af26df8f79429ffcc95"
-+SRC_URI[sha256sum] = "faad73b713c08f8f3c9ed76a0f8e4161f969e5ec8215db1dd5108d3f6eeb3a20"
-diff --git a/meta-efl/recipes-efl/efl/eeze_1.7.7.bb b/meta-efl/recipes-efl/efl/eeze_1.7.7.bb
++PACKAGES =+ "${PN}-utils"
++
++FILES_${PN}-utils = "\
++    ${bindir}/${PN} \
++"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/eet_svn.bb b/meta-efl/recipes-efl/efl/eet_svn.bb
 deleted file mode 100644
-index 27485d9..0000000
---- a/meta-efl/recipes-efl/efl/eeze_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/eet_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/eeze.inc b/meta-efl/recipes-efl/efl/eeze.inc
+deleted file mode 100644
+index 5d523c9..0000000
+--- a/meta-efl/recipes-efl/efl/eeze.inc
++++ /dev/null
+@@ -1,17 +0,0 @@
+-DESCRIPTION = "Eeze is a library to simplify the use of devices"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=315521fe061b6fd4290ef01db714a3c8"
+-DEPENDS = "ecore eet udev"
 -
--SRC_URI[md5sum] = "8050f8701e3176a9f880ed50bbfd33a6"
--SRC_URI[sha256sum] = "975461750b6487884bd39dbd1078cd2a1a333451a8b85c8d6bb231d87936caf4"
+-inherit efl
+-
+-BBCLASSEXTEND = "native"
+-INC_PR = "r0"
+-
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
+-
+-FILES_${PN} += "${libdir}/enlightenment/utils/eeze_scanner"
+-FILES_${PN}-dbg += "${libdir}/enlightenment/utils/.debug"
+-
+-RRECOMMENDS_${PN} += "eject"
 diff --git a/meta-efl/recipes-efl/efl/eeze_1.7.8.bb b/meta-efl/recipes-efl/efl/eeze_1.7.8.bb
-new file mode 100644
-index 0000000..bcf1c04
---- /dev/null
+index bcf1c04..f081f33 100644
+--- a/meta-efl/recipes-efl/efl/eeze_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/eeze_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,19 @@
+-require ${BPN}.inc
++DESCRIPTION = "Eeze is a library to simplify the use of devices"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=315521fe061b6fd4290ef01db714a3c8"
++DEPENDS = "ecore eet udev"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
++inherit efl
 +
-+SRC_URI[md5sum] = "3ee68667f65860a0bdb7126e555155ff"
-+SRC_URI[sha256sum] = "9a4df9d086575c54d0116164d46b2c9e29362cc32398ea606c2365cbdf4157dd"
-diff --git a/meta-efl/recipes-efl/efl/efreet_1.7.7.bb b/meta-efl/recipes-efl/efl/efreet_1.7.7.bb
++BBCLASSEXTEND = "native"
++
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN} += "${libdir}/enlightenment/utils/eeze_scanner"
++FILES_${PN}-dbg += "${libdir}/enlightenment/utils/.debug"
++
++RRECOMMENDS_${PN} += "eject"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/eeze_svn.bb b/meta-efl/recipes-efl/efl/eeze_svn.bb
 deleted file mode 100644
-index a7db2fe..0000000
---- a/meta-efl/recipes-efl/efl/efreet_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/eeze_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/efreet.inc b/meta-efl/recipes-efl/efl/efreet.inc
+deleted file mode 100644
+index 6c68526..0000000
+--- a/meta-efl/recipes-efl/efl/efreet.inc
++++ /dev/null
+@@ -1,17 +0,0 @@
+-DESCRIPTION = "The Enlightenment freedesktop.org library"
+-DEPENDS = "ecore"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=9594ec75c5a57e71fccedcbe10dd3ef4"
 -
--SRC_URI[md5sum] = "f470cdfad747f615a25785ba18044ea6"
--SRC_URI[sha256sum] = "674177824a0dd20c29caec20b94355bafa529d15243cc1a06fe6bec1cbe7d88b"
+-inherit efl gettext
+-
+-INC_PR = "r0"
+-
+-PACKAGES =+ "${PN}-mime ${PN}-trash"
+-FILES_${PN}-mime = "${libdir}/libefreet_mime.so.*"
+-FILES_${PN}-trash = "${libdir}/libefreet_trash.so.*"
+-
+-# efreet_desktop_cache_create is needed for e-wm start, don't include it in -tests
+-FILES_${PN} += "${libdir}/efreet/efreet_desktop_cache_create \
+-                ${libdir}/efreet/efreet_icon_cache_create \
+-"
 diff --git a/meta-efl/recipes-efl/efl/efreet_1.7.8.bb b/meta-efl/recipes-efl/efl/efreet_1.7.8.bb
-new file mode 100644
-index 0000000..d1eadb7
---- /dev/null
+index d1eadb7..e7abdaa 100644
+--- a/meta-efl/recipes-efl/efl/efreet_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/efreet_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,18 @@
+-require ${BPN}.inc
++DESCRIPTION = "The Enlightenment freedesktop.org library"
++DEPENDS = "ecore"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=9594ec75c5a57e71fccedcbe10dd3ef4"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++inherit efl gettext
++
++PACKAGES =+ "${PN}-mime ${PN}-trash"
++FILES_${PN}-mime = "${libdir}/libefreet_mime.so.*"
++FILES_${PN}-trash = "${libdir}/libefreet_trash.so.*"
++
++# efreet_desktop_cache_create is needed for e-wm start, don't include it in -tests
++FILES_${PN} += "${libdir}/efreet/efreet_desktop_cache_create \
++                ${libdir}/efreet/efreet_icon_cache_create \
 +"
-+
-+SRC_URI[md5sum] = "42ccb6672be6c3cbd7359c9b71a8e587"
-+SRC_URI[sha256sum] = "b462c6d230af00d052674e175dbd269f1a4aa0ea510f704b2118895429127426"
-diff --git a/meta-efl/recipes-efl/efl/eina_1.7.7.bb b/meta-efl/recipes-efl/efl/eina_1.7.7.bb
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/efreet_svn.bb b/meta-efl/recipes-efl/efl/efreet_svn.bb
 deleted file mode 100644
-index 905d8e2..0000000
---- a/meta-efl/recipes-efl/efl/eina_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/efreet_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/eina.inc b/meta-efl/recipes-efl/efl/eina.inc
+deleted file mode 100644
+index 4a77de3..0000000
+--- a/meta-efl/recipes-efl/efl/eina.inc
++++ /dev/null
+@@ -1,13 +0,0 @@
+-DESCRIPTION = "Eina is the Enlightenment data library"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=9cc092d35d7bbfcd986232cde130a551"
 -
--SRC_URI[md5sum] = "baeb29327fc017e3ced890dc822c74ef"
--SRC_URI[sha256sum] = "9812ea4c98ad4086bb93dedf04f49125c41cf3c72773f7e2a89a2e3ea62cbce4"
+-BBCLASSEXTEND = "native"
+-INC_PR = "r0"
+-
+-inherit efl
+-
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
+-
+-FILES_${PN} += "${libdir}/eina"
 diff --git a/meta-efl/recipes-efl/efl/eina_1.7.8.bb b/meta-efl/recipes-efl/efl/eina_1.7.8.bb
-new file mode 100644
-index 0000000..04f16c4
---- /dev/null
+index 04f16c4..68a6667 100644
+--- a/meta-efl/recipes-efl/efl/eina_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/eina_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,15 @@
+-require ${BPN}.inc
++DESCRIPTION = "Eina is the Enlightenment data library"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=9cc092d35d7bbfcd986232cde130a551"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
++BBCLASSEXTEND = "native"
 +
-+SRC_URI[md5sum] = "4c7715b636f71a5e07be4f33e72c6a69"
-+SRC_URI[sha256sum] = "e39c5d9cc9d0854521983fe653b8f2efe2946e74066c7c0456ffe62342535d18"
-diff --git a/meta-efl/recipes-efl/efl/eio_1.7.7.bb b/meta-efl/recipes-efl/efl/eio_1.7.7.bb
++inherit efl
++
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN} += "${libdir}/eina"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/eina_svn.bb b/meta-efl/recipes-efl/efl/eina_svn.bb
 deleted file mode 100644
-index 2e59e63..0000000
---- a/meta-efl/recipes-efl/efl/eio_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/eina_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/eio.inc b/meta-efl/recipes-efl/efl/eio.inc
+deleted file mode 100644
+index 4d28fab..0000000
+--- a/meta-efl/recipes-efl/efl/eio.inc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-DESCRIPTION = "Enlightenment Input Output Library"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=180fca752525726bd6ba021689509a08"
+-DEPENDS = "ecore eina"
 -
--SRC_URI[md5sum] = "edbbe1cfd6f73de3af74b83c980ba0c8"
--SRC_URI[sha256sum] = "5bf904a6c6e79e2046d0b3f355570f754511436636d41a271aeed6890cb25194"
+-inherit efl
+-
+-BBCLASSEXTEND = "native"
+-INC_PR = "r0"
 diff --git a/meta-efl/recipes-efl/efl/eio_1.7.8.bb b/meta-efl/recipes-efl/efl/eio_1.7.8.bb
-new file mode 100644
-index 0000000..9634459
---- /dev/null
+index 9634459..f5827da 100644
+--- a/meta-efl/recipes-efl/efl/eio_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/eio_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,11 @@
+-require ${BPN}.inc
++DESCRIPTION = "Enlightenment Input Output Library"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=180fca752525726bd6ba021689509a08"
++DEPENDS = "ecore eina"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
++inherit efl
 +
-+SRC_URI[md5sum] = "a5e1608a629667de3cfd17289d599b07"
-+SRC_URI[sha256sum] = "f18831389f6b735e73c74d7f411602722dc8ce214ac3f4171b59d216d842a3b0"
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.7.7.bb b/meta-efl/recipes-efl/efl/elementary_1.7.7.bb
++BBCLASSEXTEND = "native"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/eio_svn.bb b/meta-efl/recipes-efl/efl/eio_svn.bb
 deleted file mode 100644
-index da53e27..0000000
---- a/meta-efl/recipes-efl/efl/elementary_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/eio_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
--
--SRC_URI[md5sum] = "079cce349333b4831d3f56abeefa1d2d"
--SRC_URI[sha256sum] = "b7850d1f1438ba58b780320d37522bf2e9e81339ebc6b660ad9cb3ea81f6c253"
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.7.8.bb b/meta-efl/recipes-efl/efl/elementary_1.7.8.bb
-new file mode 100644
-index 0000000..8dfe880
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/elementary_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "c9d387243a1ffa9318a491315c7007c8"
-+SRC_URI[sha256sum] = "b02bcc17ba9f80a1a9df456ae95584b98747a2ff14f90c9c0471a16869bd35dc"
-diff --git a/meta-efl/recipes-efl/efl/embryo_1.7.7.bb b/meta-efl/recipes-efl/efl/embryo_1.7.7.bb
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/embryo.inc b/meta-efl/recipes-efl/efl/embryo.inc
 deleted file mode 100644
-index 933c3c4..0000000
---- a/meta-efl/recipes-efl/efl/embryo_1.7.7.bb
+index 7997a5f..0000000
+--- a/meta-efl/recipes-efl/efl/embryo.inc
 +++ /dev/null
-@@ -1,10 +0,0 @@
--require ${BPN}.inc
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
 -
--PR = "${INC_PR}.0"
+-inherit efl
 -
--SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
--"
+-LICENSE = "MIT BSD CompuPhase"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=220a7f1107df42c62428d8ebe559ed14"
 -
--SRC_URI[md5sum] = "a4a2aa43a41afa783132a7220c450f6b"
--SRC_URI[sha256sum] = "0b5f0c7f2357f0e31b9cf797e5a606bd491d75c9f3b8e006da15d4a8c17c9225"
+-BBCLASSEXTEND = "native"
+-INC_PR = "r0"
+-
+-DEPENDS += "eina"
+-
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
 diff --git a/meta-efl/recipes-efl/efl/embryo_1.7.8.bb b/meta-efl/recipes-efl/efl/embryo_1.7.8.bb
-new file mode 100644
-index 0000000..3f1e883
---- /dev/null
+index 3f1e883..c4dfbca 100644
+--- a/meta-efl/recipes-efl/efl/embryo_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/embryo_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,16 @@
+-require ${BPN}.inc
++DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
++inherit efl
 +
-+SRC_URI[md5sum] = "8fee23d51be07c72f9a7edf707e1f43f"
-+SRC_URI[sha256sum] = "fe8af458b2f3e5e561181c7e86b763e2623397a2a4bbbfe08e58be06ed052306"
-diff --git a/meta-efl/recipes-efl/efl/emotion_1.7.7.bb b/meta-efl/recipes-efl/efl/emotion_1.7.7.bb
++LICENSE = "MIT BSD CompuPhase"
++LIC_FILES_CHKSUM = "file://COPYING;md5=220a7f1107df42c62428d8ebe559ed14"
++
++BBCLASSEXTEND = "native"
++
++DEPENDS += "eina"
++
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/embryo_svn.bb b/meta-efl/recipes-efl/efl/embryo_svn.bb
 deleted file mode 100644
-index c680b89..0000000
---- a/meta-efl/recipes-efl/efl/emotion_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/embryo_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/emotion.inc b/meta-efl/recipes-efl/efl/emotion.inc
+deleted file mode 100644
+index a4ef02d..0000000
+--- a/meta-efl/recipes-efl/efl/emotion.inc
++++ /dev/null
+@@ -1,17 +0,0 @@
+-DESCRIPTION = "The Enlightenment multimedia library"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
+-# we no longer build the libxine backend, since the gstreamer backend seems more promising
+-DEPENDS = "eet eeze evas ecore edje gstreamer gst-plugins-base eio"
 -
--SRC_URI[md5sum] = "8b53d2d945d6a40b012472f47568879a"
--SRC_URI[sha256sum] = "aab476f80d4ad89056ba3860dfbb681c335c3688825fd587f5cbc6d9728abd41"
+-INC_PR = "r2"
+-
+-inherit efl
+-
+-EXTRA_OECONF = "--disable-xine --disable-generic-vlc --enable-gstreamer --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
+-
+-PACKAGES =+ "emotion-backend-gstreamer"
+-FILES_emotion-backend-gstreamer = "${libdir}/emotion/*.so"
+-RRECOMMENDS_${PN} = "emotion-backend-gstreamer"
+-# upgrade path from libemotion0 to libemotion1
+-RREPLACES_${PN} = "libemotion0"
 diff --git a/meta-efl/recipes-efl/efl/emotion_1.7.8.bb b/meta-efl/recipes-efl/efl/emotion_1.7.8.bb
-new file mode 100644
-index 0000000..b5177d4
---- /dev/null
+index b5177d4..c6eae15 100644
+--- a/meta-efl/recipes-efl/efl/emotion_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/emotion_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,18 @@
+-require ${BPN}.inc
++DESCRIPTION = "The Enlightenment multimedia library"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
++# we no longer build the libxine backend, since the gstreamer backend seems more promising
++DEPENDS = "eet eeze evas ecore edje gstreamer gst-plugins-base eio"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
++inherit efl
 +
-+SRC_URI[md5sum] = "e04679ac7967e698c8c4013b9fd209a1"
-+SRC_URI[sha256sum] = "54c96192cb46f5dce851934adb1633b45e5b007ad3cd05495102eeb255bced31"
-diff --git a/meta-efl/recipes-efl/efl/ethumb_1.7.7.bb b/meta-efl/recipes-efl/efl/ethumb_1.7.7.bb
++EXTRA_OECONF = "--disable-xine --disable-generic-vlc --enable-gstreamer --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
++
++PACKAGES =+ "emotion-backend-gstreamer"
++FILES_emotion-backend-gstreamer = "${libdir}/emotion/*.so"
++RRECOMMENDS_${PN} = "emotion-backend-gstreamer"
++# upgrade path from libemotion0 to libemotion1
++RREPLACES_${PN} = "libemotion0"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/emotion_svn.bb b/meta-efl/recipes-efl/efl/emotion_svn.bb
 deleted file mode 100644
-index 5e700cb..0000000
---- a/meta-efl/recipes-efl/efl/ethumb_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/emotion_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
+-"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/ethumb.inc b/meta-efl/recipes-efl/efl/ethumb.inc
+deleted file mode 100644
+index 32a1306..0000000
+--- a/meta-efl/recipes-efl/efl/ethumb.inc
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "EFL based thumbnail generation library"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e6a6db9e80255adbafa16e817d9a4d8c"
+-DEPENDS = "libexif eet-native evas ecore edje eet edbus emotion epdf"
+-
+-INC_PR = "r0"
+-
+-inherit efl
+-
+-EXTRA_OECONF = "\
+-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+-    --disable-docs \
 -"
 -
--SRC_URI[md5sum] = "58a1e8476dcc15ecffc8d542be656cb9"
--SRC_URI[sha256sum] = "541d07017f99b567976b2678466dbb5b540a4e93bf4fab987f3d0d612010da20"
+-# Some upgrade path tweaking, as in evas
+-AUTO_LIBNAME_PKGS = ""
+-
+-FILES_${PN} += "\
+-    ${bindir}/ethumbd \
+-    ${libexecdir}/ethumbd_slave \
+-"
 diff --git a/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb b/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
-new file mode 100644
-index 0000000..8d7d8bd
---- /dev/null
+index 8d7d8bd..1d36322 100644
+--- a/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,23 @@
+-require ${BPN}.inc
++DESCRIPTION = "EFL based thumbnail generation library"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e6a6db9e80255adbafa16e817d9a4d8c"
++DEPENDS = "libexif eet-native evas ecore edje eet edbus emotion epdf"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++inherit efl
++
++EXTRA_OECONF = "\
++    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
++    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
++    --disable-docs \
 +"
 +
-+SRC_URI[md5sum] = "9c5936d06ff79aea0dd81c5be0bf511e"
-+SRC_URI[sha256sum] = "9047a88122c8713444d66294b3343c07feb15817a1809c7cbc9478ba91587e2d"
-diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.7.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.7.bb
++# Some upgrade path tweaking, as in evas
++AUTO_LIBNAME_PKGS = ""
++
++FILES_${PN} += "\
++    ${bindir}/ethumbd \
++    ${libexecdir}/ethumbd_slave \
++"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/ethumb_svn.bb b/meta-efl/recipes-efl/efl/ethumb_svn.bb
 deleted file mode 100644
-index ea07ae9..0000000
---- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/ethumb_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
+-"
+-S = "${WORKDIR}/${SRCNAME}"
+diff --git a/meta-efl/recipes-efl/efl/evas.inc b/meta-efl/recipes-efl/efl/evas.inc
+deleted file mode 100644
+index 4e5e1e3..0000000
+--- a/meta-efl/recipes-efl/efl/evas.inc
++++ /dev/null
+@@ -1,168 +0,0 @@
+-DESCRIPTION = "Evas is the Enlightenment canvas API"
+-LICENSE = "MIT BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b9b25b03d63aa496552658c7e78b11a1"
+-# can also depend on valgrind, libsdl-x11, directfb
+-DEPENDS = "librsvg eina eet freetype jpeg libpng tiff virtual/libx11 libxext libxrender fontconfig libfribidi giflib"
+-DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-native tiff-native eet-native eina-native libfribidi-native"
+-
+-inherit efl
+-
+-BBCLASSEXTEND = "native"
+-INC_PR = "r1"
+-FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
+-
+-python populate_packages_prepend () {
+-    for plugin_type in "engines loaders savers".split():
+-        bb.note( "splitting packages for evas %s..." % plugin_type )
+-        basedir = d.expand( '${libdir}/evas/modules/%s' % plugin_type)
+-
+-        do_split_packages(d, basedir, '^(.*)',
+-        output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
+-        description = 'Evas module %s',
+-        allow_dirs=True, recursive=False, extra_depends="" )
+-        
+-        plugin_type = "cserve2"
+-        bb.note( "splitting packages for evas %s..." % plugin_type )
+-        basedir = d.expand( '${libdir}/evas/%s/loaders' % plugin_type)
+-
+-        do_split_packages(d, basedir, '^(.*)',
+-        output_pattern = 'evas-' + plugin_type + "-%s",
+-        description = 'Evas csever2 loader module %s',
+-        allow_dirs=True, recursive=False, extra_depends="" )
+-}
+-
+-do_install_append() {
+-    find "${D}" -name .debug -type d -exec rm -rf {} \;
+-}
+-
+-FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
+-FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/ ${libdir}/evas/cserve2/loaders/*/*/.debug/"
+-FILES_${PN}-cserve2 += "${libexecdir}/evas_cserve2* ${libexecdir}/dummy_slave"
+-
+-PACKAGES += "${PN}-cserve2"
+-PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
+-
+-# evas-loader-svg is gone as we don't have esvg and probably won't have anytime soon
+-# http://www.intesis.hr/news/16-esvg-source
+-# http://blog.gmane.org/gmane.comp.window-managers.enlightenment.user/page=3
+-RRECOMMENDS_${PN} += "evas-loader-generic evas-generic-loader-svn"
+-
+-RRECOMMENDS_${PN} = " \
+-    evas-engine-fb \
+-    evas-engine-software-generic \
+-    evas-engine-software-x11 \
+-    evas-engine-software-16 \
+-    evas-engine-software-16-x11 \
+-    evas-engine-xrender-x11 \
+-    \
+-    evas-loader-png \
+-    evas-loader-jpeg \
+-    evas-loader-gif \
+-    evas-loader-svg \
 -"
 -
--SRC_URI[md5sum] = "0af7e3a5e0bf931bf87294d39eae3623"
--SRC_URI[sha256sum] = "4eef549641d26b921f564169af1f21f7854431f523897cd167d3c3c860e854aa"
-diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
-new file mode 100644
-index 0000000..de71858
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "8d6c7f56db854fdf931fc9270d0fda87"
-+SRC_URI[sha256sum] = "4f5f2a00eb065049de3e31cd86aee7de3b0593b9aec70aeb851f4f8189233d34"
-diff --git a/meta-efl/recipes-efl/efl/evas/revert.r83789.patch b/meta-efl/recipes-efl/efl/evas/revert.r83789.patch
-deleted file mode 100644
-index a5b8ce6..0000000
---- a/meta-efl/recipes-efl/efl/evas/revert.r83789.patch
-+++ /dev/null
-@@ -1,146 +0,0 @@
--From 134e338a40af875d5f7b221a7a8dbeefa7a48f55 Mon Sep 17 00:00:00 2001
--From: Daniel Willmann <d.willmann@samsung.com>
--Date: Tue, 07 May 2013 09:49:53 +0000
--Subject: Revert "Backport rev 83789"
+-# Some upgrade path tweaking
+-AUTO_LIBNAME_PKGS = ""
 -
--This reverts commit 9a7a28b7582f516c67b23c4bb1a016cfc2ec5b31.
--Was reverted long ago in efl as it doesn't actually work.
+-EVAS_CPU_TWEAKS = ""
+-# Disabled for now, see http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
+-EVAS_CPU_TWEAKS_armv7a = "--disable-cpu-neon"
 -
--Signed-off-by: Daniel Willmann <d.willmann@samsung.com>
-----
--diff --git a/ChangeLog b/ChangeLog
--index 54da44a..93d3834 100644
----- a/ChangeLog
--+++ b/ChangeLog
--@@ -1294,3 +1294,7 @@
-- 
--         * Evas text: Fixed line size calculation when using multiple
--         fonts.
--+
--+2013-05-16	Daniel Wilmann
--+        * x11 backend: Revert "Fix memory usage spike when rotating with the
--+				software_x11 engine". This doesn't actually work.
--diff --git a/NEWS b/NEWS
--index 6188963..c8002db 100644
----- a/NEWS
--+++ b/NEWS
--@@ -13,6 +13,7 @@ Fixes:
--    * Evas: If an object goes to be hidden without replacing the cur/prev state info, the object context can be corrupted at the next show time. Now it replaces the cur/prev in that rare case.
--    * Fix recursive proxy image rendering to just render black
--    * Evas text: Fixed line size calculation when using multiple fonts.
--+   * Revert "Fix memory usage spike when rotating with the software_x11 engine."
-- 
-- Evas 1.7.6
--     * Fix SIGFPE in evas map update if image is 0.
--diff --git a/src/modules/engines/software_x11/evas_xlib_outbuf.c b/src/modules/engines/software_x11/evas_xlib_outbuf.c
--index 3cb1ea0..e337e99 100644
----- a/src/modules/engines/software_x11/evas_xlib_outbuf.c
--+++ b/src/modules/engines/software_x11/evas_xlib_outbuf.c
--@@ -362,7 +362,7 @@ evas_software_xlib_outbuf_setup_x(int w, int h, int rot, Outbuf_Depth depth,
-- RGBA_Image *
-- evas_software_xlib_outbuf_new_region_for_update(Outbuf *buf, int x, int y, int w, int h, int *cx, int *cy, int *cw, int *ch)
-- {
---   RGBA_Image         *im = NULL;
--+   RGBA_Image         *im;
--    Outbuf_Region      *obr;
--    int                 bpl = 0;
--    int                 use_shm = 1;
--@@ -455,11 +455,6 @@ evas_software_xlib_outbuf_new_region_for_update(Outbuf *buf, int x, int y, int w
-- 	  }
-- 	else
-- 	  {
---            /* FIXME: For the onebuf case we probably need to do the same thing we did below
---             * (try to get an existing image before we allocate a new one). This code path
---             * is not really used at the moment so no way to test (and that's why the change
---             * is not implemented here as well.
---             */
-- #ifdef EVAS_CSERVE2
--              if (evas_cserve2_use_get())
--                im = (RGBA_Image *)evas_cache2_image_empty(evas_common_image_cache2_get());
--@@ -613,73 +608,26 @@ evas_software_xlib_outbuf_new_region_for_update(Outbuf *buf, int x, int y, int w
--      }
--    else
--      {
---        obr->xob = _find_xob(buf->priv.x11.xlib.disp,
---                             buf->priv.x11.xlib.vis,
---                             buf->priv.x11.xlib.depth,
---                             w, h,
---                             use_shm,
---                             NULL);
-- #ifdef EVAS_CSERVE2
--         if (evas_cserve2_use_get())
---          {
---             if (obr->xob)
---               im = (RGBA_Image *)evas_cache2_image_data(evas_common_image_cache2_get(),
---                                                        w, h,
---                                                        (DATA32 *) evas_software_xlib_x_output_buffer_data(obr->xob, &bpl),
---                                                        alpha, EVAS_COLORSPACE_ARGB8888);
---
---             if (!im)
---               {
---                  if (obr->xob) _unfind_xob(obr->xob, 0);
---                  im = (RGBA_Image *)evas_cache2_image_empty(evas_common_image_cache2_get());
---                  if (!im)
---                    {
---                      free(obr);
---                      return NULL;
---                    }
---                  else
---                    {
---                       im->cache_entry.w = w;
---                       im->cache_entry.h = h;
---                       im->cache_entry.flags.alpha |= alpha ? 1 : 0;
---                       evas_cache2_image_surface_alloc(&im->cache_entry, w, h);
---                    }
---               }
---          }
--+          im = (RGBA_Image *)evas_cache2_image_empty(evas_common_image_cache2_get());
--         else
-- #endif
--+          im = (RGBA_Image *)evas_cache_image_empty(evas_common_image_cache_get());
--+        if (!im)
--           {
---             if (obr->xob)
---               im = (RGBA_Image *)evas_cache_image_data(evas_common_image_cache_get(),
---                                                        w, h,
---                                                        (DATA32 *) evas_software_xlib_x_output_buffer_data(obr->xob, &bpl),
---                                                        alpha, EVAS_COLORSPACE_ARGB8888);
---
---             if (!im)
---               {
---                  if (obr->xob) _unfind_xob(obr->xob, 0);
---                  im = (RGBA_Image *)evas_cache_image_empty(evas_common_image_cache_get());
---                  if (!im)
---                    {
---                      free(obr);
---                      return NULL;
---                    }
---                  else
---                    {
---                       im->cache_entry.w = w;
---                       im->cache_entry.h = h;
---                       im->cache_entry.flags.alpha |= alpha ? 1 : 0;
---                       evas_cache_image_surface_alloc(&im->cache_entry, w, h);
---                    }
---               }
--+             free(obr);
--+             return NULL;
--           }
---
---        /* Need to update cache_entry w/h here because the render path expects them to be updated
---         * to the new geometry. */
--         im->cache_entry.w = w;
--         im->cache_entry.h = h;
--         im->cache_entry.flags.alpha |= alpha ? 1 : 0;
---
--+#ifdef EVAS_CSERVE2
--+        if (evas_cserve2_use_get())
--+          evas_cache2_image_surface_alloc(&im->cache_entry, w, h);
--+        else
--+#endif
--+          evas_cache_image_surface_alloc(&im->cache_entry, w, h);
-- 	im->extended_info = obr;
-- 	if ((buf->rot == 0) || (buf->rot == 180))
--           {
----
--cgit v0.9.1
-diff --git a/meta-efl/recipes-efl/efl/evas_1.7.7.bb b/meta-efl/recipes-efl/efl/evas_1.7.7.bb
-deleted file mode 100644
-index 20355ec..0000000
---- a/meta-efl/recipes-efl/efl/evas_1.7.7.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require ${BPN}.inc
--
--PR = "${INC_PR}.2"
--
--SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
--    file://revert.r83789.patch \
+-# common options
+-EVAS_OECONF = " \
+-                --x-includes=${STAGING_INCDIR}/X11 \
+-                --x-libraries=${STAGING_LIBDIR} \
+-                --enable-evas-magic-debug \
+-                --enable-fb \
+-                --disable-directfb \
+-                --disable-sdl \
+-                --enable-buffer=static \
+-                --enable-static-software-generic \
+-                --disable-software-ddraw \
+-                --disable-software-qtopia \
+-                --disable-software-xcb \
+-                --disable-xrender-xcb \
+-                --disable-glitz-x11 \
+-                --enable-image-loader-eet=static \
+-                --disable-image-loader-edb \
+-                --enable-image-loader-png \
+-                --enable-image-loader-jpeg \
+-                --enable-image-loader-tiff \
+-                --enable-image-loader-xpm \
+-                --enable-cpu-c \
+-                --enable-fontconfig \
+-                --enable-font-loader-eet \
+-                --enable-scale-sample \
+-                --enable-scale-smooth \
+-                --enable-convert-yuv \
+-                --enable-small-dither-mask \
+-                --disable-no-dither-mask \
+-                --disable-convert-8-rgb-332 \
+-                --disable-convert-8-rgb-666 \
+-                --disable-convert-8-rgb-232 \
+-                --disable-convert-8-rgb-222 \
+-                --disable-convert-8-rgb-221 \
+-                --disable-convert-8-rgb-121 \
+-                --disable-convert-8-rgb-111 \
+-                --enable-convert-16-rgb-565 \
+-                --disable-convert-16-rgb-555 \
+-                --disable-convert-16-rgb-444 \
+-                --disable-convert-16-rgb-ipq \
+-                --enable-convert-16-rgb-rot-0 \
+-                --enable-convert-16-rgb-rot-90 \
+-                --disable-convert-16-rgb-rot-180 \
+-                --enable-convert-16-rgb-rot-270 \
 -"
 -
--SRC_URI[md5sum] = "980abd6f645a38aa0a5d74f11a0e07f9"
--SRC_URI[sha256sum] = "ea8403d58cd079a651c515e76d7812deb0f7c2f41bb9807b3040a023b2fba78c"
+-# either sgx or 6410 atm
+-GLES ?= "sgx"
+-
+-# This is a hack to get openGL|ES 2.x support enabled for people that have the SDK headers in staging.
+-# We put this in the main recipe, since it will just not build the gl stuff when the headers are missing
+-
+-# If the above sentence confuse you: everything is built and configured as before if you don't have the SDK
+-
+-EXTRA_OECONF = "${EVAS_OECONF} \
+-                ${EVAS_CPU_TWEAKS} \
+-                --enable-pthreads \
+-                --enable-async-events \
+-                --enable-async-preload \
+-                --enable-simple-x11 \
+-                --enable-software-x11 \
+-                --enable-xrender-x11 \
+-                --enable-software-16-x11 \
+-                --enable-image-loader-gif \
+-                --enable-image-loader-svg \
+-                --enable-convert-24-rgb-888 \
+-                --enable-convert-24-bgr-888 \
+-                --enable-convert-32-rgb-8888 \
+-                --enable-convert-32-rgbx-8888 \
+-                --enable-convert-32-bgr-8888 \
+-                --enable-convert-32-bgrx-8888 \
+-                --enable-convert-32-rgb-rot-0 \
+-                --enable-convert-32-rgb-rot-90 \
+-                --disable-convert-32-rgb-rot-180 \
+-                --enable-convert-32-rgb-rot-270 \
+-                --enable-gl-x11 \
+-                --enable-gl-xlib \
+-                --enable-gl-flavor-gles \
+-                --enable-gles-variety-${GLES} \
+-"
+-EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
+-                --disable-software-x11 \
+-                --disable-software-16-x11 \
+-                --disable-gl-x11 \
+-                --disable-gl-xlib \
+-                --disable-xrender-x11 \
+-                --disable-image-loader-gif \
+-                --disable-image-loader-svg \
+-                --disable-convert-24-rgb-888 \
+-                --disable-convert-24-bgr-888 \
+-                --disable-convert-32-rgb-8888 \
+-                --disable-convert-32-rgbx-8888 \
+-                --disable-convert-32-bgr-8888 \
+-                --disable-convert-32-bgrx-8888 \
+-                --disable-convert-32-rgb-rot-0 \
+-                --disable-convert-32-rgb-rot-90 \
+-                --disable-convert-32-rgb-rot-270 \
+-"
 diff --git a/meta-efl/recipes-efl/efl/evas_1.7.8.bb b/meta-efl/recipes-efl/efl/evas_1.7.8.bb
-new file mode 100644
-index 0000000..f9bf8d0
---- /dev/null
+index f9bf8d0..5f2bf78 100644
+--- a/meta-efl/recipes-efl/efl/evas_1.7.8.bb
 +++ b/meta-efl/recipes-efl/efl/evas_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
+@@ -1,4 +1,170 @@
+-require ${BPN}.inc
++DESCRIPTION = "Evas is the Enlightenment canvas API"
++LICENSE = "MIT BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b9b25b03d63aa496552658c7e78b11a1"
++# can also depend on valgrind, libsdl-x11, directfb
++DEPENDS = "librsvg eina eet freetype jpeg libpng tiff virtual/libx11 libxext libxrender fontconfig libfribidi giflib"
++DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-native tiff-native eet-native eina-native libfribidi-native"
 +
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++inherit efl
++
++BBCLASSEXTEND = "native"
++FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
++
++python populate_packages_prepend () {
++    for plugin_type in "engines loaders savers".split():
++        bb.note( "splitting packages for evas %s..." % plugin_type )
++        basedir = d.expand( '${libdir}/evas/modules/%s' % plugin_type)
++
++        do_split_packages(d, basedir, '^(.*)',
++        output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
++        description = 'Evas module %s',
++        allow_dirs=True, recursive=False, extra_depends="" )
++        
++        plugin_type = "cserve2"
++        bb.note( "splitting packages for evas %s..." % plugin_type )
++        basedir = d.expand( '${libdir}/evas/%s/loaders' % plugin_type)
++
++        do_split_packages(d, basedir, '^(.*)',
++        output_pattern = 'evas-' + plugin_type + "-%s",
++        description = 'Evas csever2 loader module %s',
++        allow_dirs=True, recursive=False, extra_depends="" )
++}
++
++do_install_append() {
++    find "${D}" -name .debug -type d -exec rm -rf {} \;
++}
++
++FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
++FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/ ${libdir}/evas/cserve2/loaders/*/*/.debug/"
++FILES_${PN}-cserve2 += "${libexecdir}/evas_cserve2* ${libexecdir}/dummy_slave"
++
++PACKAGES += "${PN}-cserve2"
++PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
++
++# evas-loader-svg is gone as we don't have esvg and probably won't have anytime soon
++# http://www.intesis.hr/news/16-esvg-source
++# http://blog.gmane.org/gmane.comp.window-managers.enlightenment.user/page=3
++RRECOMMENDS_${PN} += "evas-loader-generic evas-generic-loader-svn"
++
++RRECOMMENDS_${PN} = " \
++    evas-engine-fb \
++    evas-engine-software-generic \
++    evas-engine-software-x11 \
++    evas-engine-software-16 \
++    evas-engine-software-16-x11 \
++    evas-engine-xrender-x11 \
++    \
++    evas-loader-png \
++    evas-loader-jpeg \
++    evas-loader-gif \
++    evas-loader-svg \
 +"
 +
-+SRC_URI[md5sum] = "ca6a5a28f0fc5b0eac36210d4df139fb"
-+SRC_URI[sha256sum] = "048f16454c2601851e9b17591579f60e25727c09beadaf3567fa443dfbaed0da"
-diff --git a/meta-efl/recipes-efl/efl/expedite_1.7.7.bb b/meta-efl/recipes-efl/efl/expedite_1.7.7.bb
++# Some upgrade path tweaking
++AUTO_LIBNAME_PKGS = ""
++
++EVAS_CPU_TWEAKS = ""
++# Disabled for now, see http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
++EVAS_CPU_TWEAKS_armv7a = "--disable-cpu-neon"
++
++# common options
++EVAS_OECONF = " \
++                --x-includes=${STAGING_INCDIR}/X11 \
++                --x-libraries=${STAGING_LIBDIR} \
++                --enable-evas-magic-debug \
++                --enable-fb \
++                --disable-directfb \
++                --disable-sdl \
++                --enable-buffer=static \
++                --enable-static-software-generic \
++                --disable-software-ddraw \
++                --disable-software-qtopia \
++                --disable-software-xcb \
++                --disable-xrender-xcb \
++                --disable-glitz-x11 \
++                --enable-image-loader-eet=static \
++                --disable-image-loader-edb \
++                --enable-image-loader-png \
++                --enable-image-loader-jpeg \
++                --enable-image-loader-tiff \
++                --enable-image-loader-xpm \
++                --enable-cpu-c \
++                --enable-fontconfig \
++                --enable-font-loader-eet \
++                --enable-scale-sample \
++                --enable-scale-smooth \
++                --enable-convert-yuv \
++                --enable-small-dither-mask \
++                --disable-no-dither-mask \
++                --disable-convert-8-rgb-332 \
++                --disable-convert-8-rgb-666 \
++                --disable-convert-8-rgb-232 \
++                --disable-convert-8-rgb-222 \
++                --disable-convert-8-rgb-221 \
++                --disable-convert-8-rgb-121 \
++                --disable-convert-8-rgb-111 \
++                --enable-convert-16-rgb-565 \
++                --disable-convert-16-rgb-555 \
++                --disable-convert-16-rgb-444 \
++                --disable-convert-16-rgb-ipq \
++                --enable-convert-16-rgb-rot-0 \
++                --enable-convert-16-rgb-rot-90 \
++                --disable-convert-16-rgb-rot-180 \
++                --enable-convert-16-rgb-rot-270 \
++"
++
++# either sgx or 6410 atm
++GLES ?= "sgx"
++
++# This is a hack to get openGL|ES 2.x support enabled for people that have the SDK headers in staging.
++# We put this in the main recipe, since it will just not build the gl stuff when the headers are missing
++
++# If the above sentence confuse you: everything is built and configured as before if you don't have the SDK
++
++EXTRA_OECONF = "${EVAS_OECONF} \
++                ${EVAS_CPU_TWEAKS} \
++                --enable-pthreads \
++                --enable-async-events \
++                --enable-async-preload \
++                --enable-simple-x11 \
++                --enable-software-x11 \
++                --enable-xrender-x11 \
++                --enable-software-16-x11 \
++                --enable-image-loader-gif \
++                --enable-image-loader-svg \
++                --enable-convert-24-rgb-888 \
++                --enable-convert-24-bgr-888 \
++                --enable-convert-32-rgb-8888 \
++                --enable-convert-32-rgbx-8888 \
++                --enable-convert-32-bgr-8888 \
++                --enable-convert-32-bgrx-8888 \
++                --enable-convert-32-rgb-rot-0 \
++                --enable-convert-32-rgb-rot-90 \
++                --disable-convert-32-rgb-rot-180 \
++                --enable-convert-32-rgb-rot-270 \
++                --enable-gl-x11 \
++                --enable-gl-xlib \
++                --enable-gl-flavor-gles \
++                --enable-gles-variety-${GLES} \
++"
++EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
++                --disable-software-x11 \
++                --disable-software-16-x11 \
++                --disable-gl-x11 \
++                --disable-gl-xlib \
++                --disable-xrender-x11 \
++                --disable-image-loader-gif \
++                --disable-image-loader-svg \
++                --disable-convert-24-rgb-888 \
++                --disable-convert-24-bgr-888 \
++                --disable-convert-32-rgb-8888 \
++                --disable-convert-32-rgbx-8888 \
++                --disable-convert-32-bgr-8888 \
++                --disable-convert-32-bgrx-8888 \
++                --disable-convert-32-rgb-rot-0 \
++                --disable-convert-32-rgb-rot-90 \
++                --disable-convert-32-rgb-rot-270 \
++"
+ 
+ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+diff --git a/meta-efl/recipes-efl/efl/evas_svn.bb b/meta-efl/recipes-efl/efl/evas_svn.bb
 deleted file mode 100644
-index be922b5..0000000
---- a/meta-efl/recipes-efl/efl/expedite_1.7.7.bb
+index 5b13b9e..0000000
+--- a/meta-efl/recipes-efl/efl/evas_svn.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
+-SRCREV = "${EFL_SRCREV}"
+-PV = "1.7.4+svnr${SRCPV}"
 -PR = "${INC_PR}.0"
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRCNAME_append = "-1.7"
 -
 -SRC_URI = "\
--    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
 -"
--
--SRC_URI[md5sum] = "46c6c6b21910b97caa62da57a0cd4b83"
--SRC_URI[sha256sum] = "62f1caba9715ce9d4047fa9a2c4ed6c756cc37fc0078404b7074d16b9293c333"
-diff --git a/meta-efl/recipes-efl/efl/expedite_1.7.8.bb b/meta-efl/recipes-efl/efl/expedite_1.7.8.bb
-new file mode 100644
-index 0000000..8be92c2
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/expedite_1.7.8.bb
-@@ -0,0 +1,8 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "378d4abb513fd4ae1d2e2f75a2d970e4"
-+SRC_URI[sha256sum] = "ac80d3f13af4f644e048a1fcb71fd5f12fdef7c11c19fe61c868273bf3f4deb9"
+-S = "${WORKDIR}/${SRCNAME}"
 -- 
 1.8.3.2
 
