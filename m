@@ -1,40 +1,43 @@
 Return-Path: <lpapp@archlinux.us>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 37B546AE6B
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id DF6BD6AE6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 10:38:38 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id a12so1187748wgh.6
+	Sat,  3 Aug 2013 10:39:08 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id t61so1247226wes.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 03:38:38 -0700 (PDT)
+	Sat, 03 Aug 2013 03:39:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer
-	:x-gm-message-state;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
+	:references:x-gm-message-state;
 	bh=cBX55xwY46xiRdYysJ5v9uVXeqYUdKkVA6vV3n5DN0g=;
-	b=lMvtkAsAz1Me93rdmHO4iHxGxvucq7LtcHV1W7mHlCfnMo5dhUQtndx+OMBujcP/Fd
-	dXhMlamBjYsH8JNcFRKYKuVfWgt6f6LaUHUEJ4nuwyF+hx79DRpW3FuhB8bTEFzzrB3L
-	TV4TtzwZnDw+uOOhHBL0l9T2S3JQ68tQ0EPnpolKHr32U9mcOL3dTEZG9AzSMMZ0jiHq
-	G9NT0c9865wpv+Ra19Lp4+EMzH2PUQfMjnOwBatL+CoT/w+fPUleberKmqul/oi/nnkg
-	gPkLaBc1U4NoEKFpv1tPFdoFyrB7Zvvlo1k4ea7InAHaNf+9RKTRSPmqFDpPdIVA6Fz1
-	lOVg==
-X-Received: by 10.194.201.202 with SMTP id kc10mr7732046wjc.1.1375526318231;
-	Sat, 03 Aug 2013 03:38:38 -0700 (PDT)
+	b=lOvH2NtwPuNXNXxF9Z0PcGUGW5rhWc2/wo/EvDnfSy+QdfV+lapZnieopQcCFuPxW/
+	7JN5hq4WWzhreZcgkX8f9uacQJxEejuQqQfTW++sZ45YeWwKeHaoPRnQ07Mq04wNd8kf
+	soZhPUJnxxWOiQzeoXRDuSM9Ba0kJa+vcqS7hgvx1ZpAoAhPZ1H3TbdZb8PhKePVq2Xy
+	q8F693xlD4gKH4TUT0BauxdDXlzUPQNa/unA5v3I5Pt8Vw/ybxvOovF4KAAN2Y5GnFZ+
+	Cy/vwJAZPgru1f8ziUU20rSV4pI8dZ8FuNNJ8nqw9TeYpeuBz4Vke1GXGY+q1On6s+BE
+	rA0A==
+X-Received: by 10.194.201.168 with SMTP id kb8mr485546wjc.63.1375526348936;
+	Sat, 03 Aug 2013 03:39:08 -0700 (PDT)
 Received: from archlinux.us (cpc11-cmbg15-2-0-cust30.5-4.cable.virginmedia.com.
 	[86.30.245.31])
-	by mx.google.com with ESMTPSA id r6sm8646064wiw.0.2013.08.03.03.38.35
+	by mx.google.com with ESMTPSA id bt8sm1442407wib.8.2013.08.03.03.39.06
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 03 Aug 2013 03:38:37 -0700 (PDT)
+	Sat, 03 Aug 2013 03:39:08 -0700 (PDT)
 Sender: Laszlo Papp <lpapp@archlinux.us>
 Received: by archlinux.us (sSMTP sendmail emulation);
-	Sat, 03 Aug 2013 11:38:49 +0100
+	Sat, 03 Aug 2013 11:39:20 +0100
 From: Laszlo Papp <lpapp@kde.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Aug 2013 11:38:46 +0100
-Message-Id: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+Date: Sat,  3 Aug 2013 11:38:47 +0100
+Message-Id: <1375526327-16139-2-git-send-email-lpapp@kde.org>
 X-Mailer: git-send-email 1.8.3.4
-X-Gm-Message-State: ALoCoQkQx8tQARcxT0a2Nk0H1ZpuhroZXfmYhsSOqWDy5cc0lpzFtgPTsovDk8empIkZMWXGDqf5
-Subject: [PATCH] Add QtSerialPort
+In-Reply-To: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+References: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+X-Gm-Message-State: ALoCoQki/Q+iwHtiiBIgmf3WzqXy97RWOB0NwqaRbpaO8zVATjYFlgaa/S9jyExXk+7ALNUGoisq
+Subject: [meta-qt5][PATCH] Add QtSerialPort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 10:38:38 -0000
+X-List-Received-Date: Sat, 03 Aug 2013 10:39:09 -0000
 
 Signed-off-by: Laszlo Papp <lpapp@kde.org>
 ---
