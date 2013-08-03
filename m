@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id A09386066A
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 286C1608BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 14:34:06 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b15so818161eek.40
+	Sat,  3 Aug 2013 17:50:24 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id eh20so3210170obb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 07:34:06 -0700 (PDT)
+	Sat, 03 Aug 2013 10:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8iEBINvMWLSTvsOBiMgoBCOIyhmiNZ2FOj71Izh6V3o=;
-	b=jH6e81Dmd/QRb1/ZWi9UwQMTg/BkQ6Tb1hV18Z9D0aB3Urz5PcpRMw/zRsiDceUA4l
-	uv5gUS7yayyMafXC7ejAdLntQyhlDrHkkeTjsQuFkjaAaqJ7MqH7mshCxNLjFFSQ7VZM
-	8k5kcK7pMAUdNI5KPKyB/wfiUBgxxuDaVsPr3MiDoF0eCZRD0CRKVlZcf687ZSXMxUh6
-	ErQiCAG3H3UoKzkuZ2DJ5lp9jTPLcnmZsTXf9csQ/GbwEuRI7h2bkxZ6peZ8E29doKQ8
-	aB/+0wK5qbkaSf02OxYCAw6XDH7fq3wqlrdJiU2eNtV0MN+JlnynLfZ/H7/TKXh+8kNi
-	UgQw==
-X-Received: by 10.14.203.67 with SMTP id e43mr9630696eeo.132.1375540446545;
-	Sat, 03 Aug 2013 07:34:06 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	x3sm19199968eeu.1.2013.08.03.07.34.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 03 Aug 2013 07:34:05 -0700 (PDT)
-Date: Sat, 3 Aug 2013 16:34:44 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130803143444.GZ3280@jama>
-References: <1375535352-23015-1-git-send-email-Martin.Jansa@gmail.com>
-	<1375535352-23015-3-git-send-email-Martin.Jansa@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=Vj2W+9dKgmuacoKE5ajJ9rFWKg98j38RqOARLy1ihgw=;
+	b=WTjquvn5iAY4EGvUb1rlvt/Mo6JpCjEf1Qm+SWhLKR0B7/x5CZSGXlNig5nFoGfo3Y
+	4kaO2Z3gX3cLaO3KXYYMbjkcUkem9n7ifiSFDRmQAaeByFR5KPU7DgJzAaRFrSVn47ii
+	NDtmvbODao1R4yG8Tq7F+s8xngazuFtjCtTxwra4j7PltHprg5ucphtPejmyE1PuCBl4
+	NEaknzxhQZsKd/SmYaELOzIt9uwFEXH0m1FgXGQzGIMXEtABZbTijgalLCvjs1+i5idS
+	YKoxE94YYNnXxCVh8p/zIa0eJlC70AiFf4WDRcg+iINXJzMlnM3bFkNy6LOrjjGVVym6
+	Q25Q==
 MIME-Version: 1.0
-In-Reply-To: <1375535352-23015-3-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-efl][PATCH 3/4] efl: drop .inc and _svn.bb files for libs included in efl.git
+X-Received: by 10.60.124.228 with SMTP id ml4mr2578823oeb.47.1375552224035;
+	Sat, 03 Aug 2013 10:50:24 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Sat, 3 Aug 2013 10:50:23 -0700 (PDT)
+In-Reply-To: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+References: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+Date: Sat, 3 Aug 2013 14:50:23 -0300
+X-Google-Sender-Auth: cePT_N2HxlZUDd6UUPRj5Di-Xhk
+Message-ID: <CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [PATCH] Add QtSerialPort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,45 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 14:34:07 -0000
-X-Groupsio-MsgNum: 45565
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="huLXOlJ1ghGp/P5+"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 03 Aug 2013 17:50:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---huLXOlJ1ghGp/P5+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Aug 3, 2013 at 7:38 AM, Laszlo Papp <lpapp@kde.org> wrote:
+> Signed-off-by: Laszlo Papp <lpapp@kde.org>
 
-On Sat, Aug 03, 2013 at 03:09:11PM +0200, Martin Jansa wrote:
-> * in preparation for merged source dir in efl.git I don't plan to support=
- newer SRCREVs from subversion
-> * drop INC_PR and fold lib.inc into the recipe
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-efl/recipes-efl/efl/ecore.inc                 | 114 --------
->  ...75297-Add-ifdef-ECORE_XRANDR-around-the-e.patch | 287 +++++++++++++++=
-++++++
+Please use the meta-qt5 prefix and rewrite the commit log as:
 
-This file doesn't belong here, fixed in jansa/in-test branch.
+qtserialport: Add 5.1.0 version
 
-All 4 patches need a bit more testing in runtime, you can consider them
-as RFC.
+We always put the recipe in question as this makes easier to find it later.
 
-Cheers,
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://projetos.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---huLXOlJ1ghGp/P5+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlH9FQQACgkQN1Ujt2V2gBzyngCgpmWkRHVoVuE+feRo2EavAej2
-J38AnR7KxbucuQhrSUnpdRVQxcJ07Hug
-=B8XT
------END PGP SIGNATURE-----
-
---huLXOlJ1ghGp/P5+--
