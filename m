@@ -1,34 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id A6EFE601AF
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 41ED86A961
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 18:08:33 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id j13so371854wgh.1
+	Sat,  3 Aug 2013 18:11:21 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id kl13so1783845pab.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 11:08:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=hG+GGGxLyNhAYSk9MO8TtwxS/Vv+XN82U60qTg541kE=;
-	b=LEo3Y7cHYiNMujJNOUupLwve/irH43Pc7daiDBZKOMJ7aJ1MLqUBD1eZlzTbqwzlqr
-	rNvEqzQsytQETgHJWuOr5WB03X6BEoMEmr3m5F80Gy8cUacwc3aO7IJ/YQsS+3nHYzne
-	6JStUTUsB4hrS1WWOg2q0V+obFAoBH7nqUhjYa4PrCkCV6DPbgTi1z+yFdF6+eMq8+AM
-	AwtcLUxbr4Ytg7SuW7pxwV7noU1uFJbdMcy/hkrdYKATFYIYsBNC/jfedjYrQ/VcgPXA
-	bFLP8lYPazlk3fI55JgZcGmJ+Aj+12N8PemIMuhhpfXEbVKxV5w5uAwaVHysh4l7L1il
-	JJGg==
+	Sat, 03 Aug 2013 11:11:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:x-gm-message-state;
+	bh=qQ0EodpFZETDNCwV7j1z7pDtA5jQptRiiHsnjddvRhs=;
+	b=WehyfWZNzBS4MXAVp8VZaFghZo9XwDbfGhQPl4/et24Qpw+HNGySqOmkeawaFC+xUV
+	BcIv9mg7BwEjqiC4A7WBFomzCJOfJzHsDBE2KcuuP1Bhae7KWBfk3W8wK/AInLz4H/Pc
+	lGE+H1qsxc8FLq8MIfVN3U5m6u0CI6HI3UsgICX5aBhXdB4L7l68/kd+Bhe8JKGO44Jq
+	hQuHVBt3zCxkK5CqZR/Kv76uj/J8rvJ639JWqbuKJ65weN+0FeRom6GMmvy750vV/dyQ
+	s+59Du85sR12lr94jP0rDn/ICZWLyDJkh8nsg5nBKYEY76WVIyBn33MrpXN/xXddoxjY
+	+IJw==
 MIME-Version: 1.0
-X-Received: by 10.180.90.202 with SMTP id by10mr1950814wib.39.1375553313330;
-	Sat, 03 Aug 2013 11:08:33 -0700 (PDT)
-Received: by 10.194.16.167 with HTTP; Sat, 3 Aug 2013 11:08:33 -0700 (PDT)
+X-Received: by 10.68.172.34 with SMTP id az2mr9933631pbc.201.1375553481959;
+	Sat, 03 Aug 2013 11:11:21 -0700 (PDT)
+Sender: lpapp@archlinux.us
+Received: by 10.70.37.237 with HTTP; Sat, 3 Aug 2013 11:11:21 -0700 (PDT)
 In-Reply-To: <CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
 References: <1375526327-16139-1-git-send-email-lpapp@kde.org>
 	<CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
-Date: Sat, 3 Aug 2013 20:08:33 +0200
-Message-ID: <CA+chaQdXv5dueX7V+VJC3S0x1bwFFwa_YpMjPnmrRUApW90dxg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
+Date: Sat, 3 Aug 2013 19:11:21 +0100
+X-Google-Sender-Auth: wEarprGHCr_ecL-dGaVlJ3iP77U
+Message-ID: <CAOMwXhNkgFxS+sqEZy6B0Y9+UvK3PBBu6atf1fEn_jyoeH7d2g@mail.gmail.com>
+From: Laszlo Papp <lpapp@kde.org>
+To: openembedded-devel@lists.openembedded.org
+X-Gm-Message-State: ALoCoQnZ1V6nRd10ISyJptEuLV5uszLfErat7OotyOoAipJIwxC7+WHFJmEUU3Kqc51Qzcxxa0NZ
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] Add QtSerialPort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,14 +48,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 18:08:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 03 Aug 2013 18:11:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I've already updated commit message and it's in meta-qt5/jansa/test branch,
-so no need to resend it.
+If you check the second email carefully, it already contains the right
+subject...
 
 
-On Sat, Aug 3, 2013 at 7:50 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
+On Sat, Aug 3, 2013 at 6:50 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
 > On Sat, Aug 3, 2013 at 7:38 AM, Laszlo Papp <lpapp@kde.org> wrote:
 > > Signed-off-by: Laszlo Papp <lpapp@kde.org>
@@ -65,5 +70,9 @@ On Sat, Aug 3, 2013 at 7:50 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
 > Otavio Salvador                             O.S. Systems
 > http://www.ossystems.com.br        http://projetos.ossystems.com.br
 > Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
