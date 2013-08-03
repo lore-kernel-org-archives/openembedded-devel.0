@@ -1,39 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 307DF6A59D
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 37B546AE6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 09:00:47 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id d10so712816eaj.26
+	Sat,  3 Aug 2013 10:38:38 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id a12so1187748wgh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 02:00:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=SpWoJJIApGWKCMmWA1/hIJSW14FPwYC+oBVslf6pFeI=;
-	b=imrScp/EVPeIo5yyi3o/uVSFlzSltbSZ0vbjsoje8/7jsDee9Le35a5Q6jDM3sX/Jo
-	oRUEt9ZMeTga+pXTxOoG/TVeDLirnElwiEDYCJc0QOnAJbu+tx7vfeqJt8xtSARck0qP
-	ZAPdEFvnVzz3353phs1ZVHgYLD/oREiJEXAPz0fpU+YNWWb6MPO0oIDH6Q8TwsQfq472
-	qJ031dbSJrjmGpXdLgdfgr0CbbXBooPVNQTiEAGHgRXnlpnQ36qT/K8/HvsfkcjQR76w
-	TTutua0R0/KkOTZW/xloX7nrOMh6zfJA0akEaJsDvF52eGLzA37+0XlLBl5vsZPk5zo+
-	7MUQ==
-X-Received: by 10.14.184.4 with SMTP id r4mr8782919eem.100.1375520447084;
-	Sat, 03 Aug 2013 02:00:47 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	l42sm17960935eeo.14.2013.08.03.02.00.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 03 Aug 2013 02:00:46 -0700 (PDT)
-Date: Sat, 3 Aug 2013 11:01:25 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 03 Aug 2013 03:38:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer
+	:x-gm-message-state;
+	bh=cBX55xwY46xiRdYysJ5v9uVXeqYUdKkVA6vV3n5DN0g=;
+	b=lMvtkAsAz1Me93rdmHO4iHxGxvucq7LtcHV1W7mHlCfnMo5dhUQtndx+OMBujcP/Fd
+	dXhMlamBjYsH8JNcFRKYKuVfWgt6f6LaUHUEJ4nuwyF+hx79DRpW3FuhB8bTEFzzrB3L
+	TV4TtzwZnDw+uOOhHBL0l9T2S3JQ68tQ0EPnpolKHr32U9mcOL3dTEZG9AzSMMZ0jiHq
+	G9NT0c9865wpv+Ra19Lp4+EMzH2PUQfMjnOwBatL+CoT/w+fPUleberKmqul/oi/nnkg
+	gPkLaBc1U4NoEKFpv1tPFdoFyrB7Zvvlo1k4ea7InAHaNf+9RKTRSPmqFDpPdIVA6Fz1
+	lOVg==
+X-Received: by 10.194.201.202 with SMTP id kc10mr7732046wjc.1.1375526318231;
+	Sat, 03 Aug 2013 03:38:38 -0700 (PDT)
+Received: from archlinux.us (cpc11-cmbg15-2-0-cust30.5-4.cable.virginmedia.com.
+	[86.30.245.31])
+	by mx.google.com with ESMTPSA id r6sm8646064wiw.0.2013.08.03.03.38.35
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 03 Aug 2013 03:38:37 -0700 (PDT)
+Sender: Laszlo Papp <lpapp@archlinux.us>
+Received: by archlinux.us (sSMTP sendmail emulation);
+	Sat, 03 Aug 2013 11:38:49 +0100
+From: Laszlo Papp <lpapp@kde.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130803090125.GW3280@jama>
-References: <1375519570-11528-1-git-send-email-net147@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1375519570-11528-1-git-send-email-net147@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-qt5][PATCH] qtbase: add upstream QTBUG-32534 patch for QHttpMultiPart corruption
+Date: Sat,  3 Aug 2013 11:38:46 +0100
+Message-Id: <1375526327-16139-1-git-send-email-lpapp@kde.org>
+X-Mailer: git-send-email 1.8.3.4
+X-Gm-Message-State: ALoCoQkQx8tQARcxT0a2Nk0H1ZpuhroZXfmYhsSOqWDy5cc0lpzFtgPTsovDk8empIkZMWXGDqf5
+Subject: [PATCH] Add QtSerialPort
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,58 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 09:00:47 -0000
-X-Groupsio-MsgNum: 45558
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Sh7h4lnU5nPTsIof"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 03 Aug 2013 10:38:38 -0000
 
---Sh7h4lnU5nPTsIof
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Laszlo Papp <lpapp@kde.org>
+---
+ recipes-qt/qt5/qtserialport.inc      | 3 +++
+ recipes-qt/qt5/qtserialport_5.1.0.bb | 5 +++++
+ 2 files changed, 8 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtserialport.inc
+ create mode 100644 recipes-qt/qt5/qtserialport_5.1.0.bb
 
-On Sat, Aug 03, 2013 at 06:46:10PM +1000, Jonathan Liu wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  ...art-fix-data-corruption-in-readData-metho.patch | 41 ++++++++++++++++=
-++++++
->  ...art-fix-data-corruption-in-readData-metho.patch | 41 ++++++++++++++++=
-++++++
->  ...art-fix-data-corruption-in-readData-metho.patch | 41 ++++++++++++++++=
-++++++
->  recipes-qt/qt5/qtbase.inc                          |  1 +
->  4 files changed, 124 insertions(+)
->  create mode 100644 recipes-qt/qt5/qtbase-5.0.2/0025-QHttpMultiPart-fix-d=
-ata-corruption-in-readData-metho.patch
->  create mode 100644 recipes-qt/qt5/qtbase-5.1.0/0025-QHttpMultiPart-fix-d=
-ata-corruption-in-readData-metho.patch
->  create mode 100644 recipes-qt/qt5/qtbase-git/0025-QHttpMultiPart-fix-dat=
-a-corruption-in-readData-metho.patch
+diff --git a/recipes-qt/qt5/qtserialport.inc b/recipes-qt/qt5/qtserialport.inc
+new file mode 100644
+index 0000000..bbb05a6
+--- /dev/null
++++ b/recipes-qt/qt5/qtserialport.inc
+@@ -0,0 +1,3 @@
++require qt5.inc
++
++DEPENDS += "qtbase"
+diff --git a/recipes-qt/qt5/qtserialport_5.1.0.bb b/recipes-qt/qt5/qtserialport_5.1.0.bb
+new file mode 100644
+index 0000000..9b6f7da
+--- /dev/null
++++ b/recipes-qt/qt5/qtserialport_5.1.0.bb
+@@ -0,0 +1,5 @@
++require qt5-${PV}.inc
++require ${PN}.inc
++
++SRC_URI[md5sum] = "1f70621ae40cbda948106b070c6c37d2"
++SRC_URI[sha256sum] = "0f36803c480b2b7111b343e9dd871ffab1b4fd53147bd564125ef2994b09cfb9"
+-- 
+1.8.3.4
 
-Looks good, will apply it soon.
 
-General question for all meta-qt5 users:
-what do you think about dropping 5.0.2?
-It will stay available in dylan branch.
-
-If people are still using that, I'll keep it until 5.1.1 is released,
-otherwise I would remove it soon to make patches like this one a bit
-easier.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Sh7h4lnU5nPTsIof
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlH8xuUACgkQN1Ujt2V2gBwSsACfavUZUz3qDTcn2qLzvTrhF3q9
-3KMAnjdQUMwzwu9F+SOt2YXs7EGhadJi
-=J24C
------END PGP SIGNATURE-----
-
---Sh7h4lnU5nPTsIof--
