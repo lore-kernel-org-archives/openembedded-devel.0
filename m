@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 881D16AF58
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id AD43D6B53E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Aug 2013 21:47:25 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id c50so1279085eek.4
+	Sun,  4 Aug 2013 21:47:26 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so1276663eek.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=VA/382/lXXDRP2lOmMb+ocLIH8G8e2tvcgUcIyT+WIc=;
-	b=LDhRNC7xJQ7Rfmi1Y85CZjkvq6B5DSwD2sl6GcWwkKdjxxadsz8EHU+V6wZ7+ay5+p
-	U3uqqLoPiksEXhdloMVLthuQca5/YP8q33WbDtMsWZLoU6u8aNzXoyUi6L+8Q+4NYBZb
-	fUHInjTx10lKf6WNae/lFOs/pzbUxeGTbXIePdGxQhHy7kibxeoVKsgybKllQ9+eRceQ
-	Oru5s0oYVpJl+jXMWGUdTLHJesgZHty5gL48cSRFtRk3n733Twi0oN4ZCmJ4zFW+fCoJ
-	T7MTg4TwaM1m6AHbqaoc4La4tyH17ng4iYSrqDEZn1t7GO4d78mB2BbQhRzfcLyIMxFm
-	0JmA==
-X-Received: by 10.14.200.132 with SMTP id z4mr9762960een.14.1375652845587;
-	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
+	bh=mutG19yiNq/+mienRda0goB8eaBPeBpqRl+0HH69wDw=;
+	b=ybSLe3hTYotci1mUKLzz7sqilAW1l5GWA1wQdNvhbMWsiQ6DNRS56Zzltc6978rPGm
+	lh2G/io1x+Q74UlNo+N8U54230bYJAGFnMGIX+NI+U9Mc/WPWhrV5Sb5+HcFCqsMcNh8
+	5vACAesxA0KVOWJBxYCmkAAepJAFea/PMWin+lpXPasoIm5FRnFt3y8UasEeyySE6W7K
+	SrXItZHHX4/0buoKct/pU+woYCzyqaQDxS/w/WmIFRwhRq6EyJfLJgeGOq95ixr6SnMG
+	oRjUg+vMOaCT7vLKvM8SIAgY8902bN3FQwYDTxxMsgGuLbQeHSAg2JIRzBZUNru/uYHz
+	Dh2Q==
+X-Received: by 10.14.241.74 with SMTP id f50mr14462648eer.29.1375652847014;
+	Sun, 04 Aug 2013 14:47:27 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	l42sm28772458eeo.14.2013.08.04.14.47.24 for <multiple recipients>
+	n42sm28772606eeh.15.2013.08.04.14.47.26 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:26 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Aug 2013 23:47:44 +0200
-Message-Id: <1375652867-10498-12-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun,  4 Aug 2013 23:47:45 +0200
+Message-Id: <1375652867-10498-13-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/15] gnome-control-center: add libgtop dependency
+Subject: [meta-oe][PATCH 13/15] gcalctool: move to nonworking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2013 21:47:26 -0000
+X-List-Received-Date: Sun, 04 Aug 2013 21:47:27 -0000
 
-* it fails without it:
-  | make[3]: *** [libcommon.la] Error 1
-  | make[3]: Leaving directory `work/armv5te-oe-linux-gnueabi/gnome-control-center/2.32.1-r1/gnome-control-center-2.32.1/capplets/common'
+* broken at least since April http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57920
+  and nobody complained, it's also replaced by gnome calculator
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{ => nonworking}/gcalctool/gcalctool/fix-includedir.patch             | 0
+ meta-gnome/recipes-gnome/{ => nonworking}/gcalctool/gcalctool_5.32.0.bb   | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-gnome/recipes-gnome/{ => nonworking}/gcalctool/gcalctool/fix-includedir.patch (100%)
+ rename meta-gnome/recipes-gnome/{ => nonworking}/gcalctool/gcalctool_5.32.0.bb (100%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-index ef04c8d..85b3386 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME control center"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra"
-+DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra libgtop"
- 
- PR = "r1"
- 
+diff --git a/meta-gnome/recipes-gnome/gcalctool/gcalctool/fix-includedir.patch b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool/fix-includedir.patch
+similarity index 100%
+rename from meta-gnome/recipes-gnome/gcalctool/gcalctool/fix-includedir.patch
+rename to meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool/fix-includedir.patch
+diff --git a/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
+similarity index 100%
+rename from meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb
+rename to meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
 -- 
 1.8.3.2
 
