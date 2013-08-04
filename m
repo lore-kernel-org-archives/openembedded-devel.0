@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E08876B4FE
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 881D16AF58
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Aug 2013 21:47:23 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id d51so1255309eek.37
+	Sun,  4 Aug 2013 21:47:25 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id c50so1279085eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Aug 2013 14:47:24 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=K0hJ9AcZWa2mYU0ZsJ/DInqz+nkEYTIMoc5ovqNGqqE=;
-	b=qGqPlFZ8uIn4h7XhdDLdhzY+zp3116oRfil1T/uN7oy4GucBKqKiC3Vhd1ELQ6iS6Y
-	me7yAynCzqg4jrD/KCWSHBbFspG96zEtZu5p3aHoY5pW1wHKFOUeRYl6yeLmcVVNZXjm
-	XEOJaR5zsWfgVUOrlE2I+kXGW6zoDViNOqyrGjyieqLtsS9ZcvS8WtdYyJmU+oldOXzW
-	RYgE35ZYR1zQW7MYh9CH0UUlt0isdOmQi4eNQMcuyAY62xKdcwE1U8HVHH1/bfxJi0pH
-	iSnyhAdJ4lXWx3cqsNVlkpke2qeQvZ7x4KJzym8QRLSUxQkpn0gw3AETbNmMcHLwiXPE
-	tKLw==
-X-Received: by 10.14.173.2 with SMTP id u2mr14252686eel.35.1375652844287;
-	Sun, 04 Aug 2013 14:47:24 -0700 (PDT)
+	bh=VA/382/lXXDRP2lOmMb+ocLIH8G8e2tvcgUcIyT+WIc=;
+	b=LDhRNC7xJQ7Rfmi1Y85CZjkvq6B5DSwD2sl6GcWwkKdjxxadsz8EHU+V6wZ7+ay5+p
+	U3uqqLoPiksEXhdloMVLthuQca5/YP8q33WbDtMsWZLoU6u8aNzXoyUi6L+8Q+4NYBZb
+	fUHInjTx10lKf6WNae/lFOs/pzbUxeGTbXIePdGxQhHy7kibxeoVKsgybKllQ9+eRceQ
+	Oru5s0oYVpJl+jXMWGUdTLHJesgZHty5gL48cSRFtRk3n733Twi0oN4ZCmJ4zFW+fCoJ
+	T7MTg4TwaM1m6AHbqaoc4La4tyH17ng4iYSrqDEZn1t7GO4d78mB2BbQhRzfcLyIMxFm
+	0JmA==
+X-Received: by 10.14.200.132 with SMTP id z4mr9762960een.14.1375652845587;
+	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	j2sm28797694eep.6.2013.08.04.14.47.23 for <multiple recipients>
+	l42sm28772458eeo.14.2013.08.04.14.47.24 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 04 Aug 2013 14:47:23 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:25 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Aug 2013 23:47:43 +0200
-Message-Id: <1375652867-10498-11-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun,  4 Aug 2013 23:47:44 +0200
+Message-Id: <1375652867-10498-12-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/15] gmtk: inherit gconf
+Subject: [meta-oe][PATCH 12/15] gnome-control-center: add libgtop dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2013 21:47:24 -0000
+X-List-Received-Date: Sun, 04 Aug 2013 21:47:26 -0000
 
-* do_configure fails without it
-  configure.ac:215: error: possibly undefined macro: AM_GCONF_SOURCE_2
+* it fails without it:
+  | make[3]: *** [libcommon.la] Error 1
+  | make[3]: Leaving directory `work/armv5te-oe-linux-gnueabi/gnome-control-center/2.32.1-r1/gnome-control-center-2.32.1/capplets/common'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb | 2 +-
+ .../recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-index 9aa4e04..0a4b484 100644
---- a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-+++ b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-@@ -13,4 +13,4 @@ SRC_URI[sha256sum] = "a07130d62719e8c1244f8405dd97445798df5204fc0f3f2f2b669b1251
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
+index ef04c8d..85b3386 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME control center"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- EXTRA_OECONF = "--disable-gconf --with-gio --with-alsa --enable-keystore"
+-DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra"
++DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra libgtop"
  
--inherit gettext pkgconfig autotools
-+inherit gettext pkgconfig autotools gconf
+ PR = "r1"
+ 
 -- 
 1.8.3.2
 
