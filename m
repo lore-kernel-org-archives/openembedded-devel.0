@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 65F6C6B50D
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EC656B50D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Aug 2013 21:47:18 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g10so1273662eak.32
+	Sun,  4 Aug 2013 21:47:20 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so1273859eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=J0GoOkKWSrV2DvMjEqf2VDYTmzRjwbpX9z79stGHncI=;
-	b=bCBDhtBRd+DZkZgLFntS2AFRq3uTpi3wHUFay881+FPnw5+hMNKWP26NspooPXu+nj
-	Ii8k/Ats/PpsyFfj0pUkMLDuqEQ2i9pUiix/E6jp51YKyZhdC0WqDOXkbNfGTv9d49kL
-	A7X8USZggx5PsEX2K5oJcR6XT+stgP1doInIxuCVsdiGaCiLAzcz4/qPwxIOVCnXbdAl
-	wxvF8FGcVbGbfLq8fN4F5skAEopGic86IjnxQ4+O/pshdfUKI7O2mtiL+UgkP5Eo7coY
-	6autGyQMZs/sB7zYVviRp+POtNw8RJmUC0oyCcNqQE51HygGHGhnS5IrcaR1H3PjjpN4
-	1lpw==
-X-Received: by 10.15.91.3 with SMTP id r3mr3463545eez.4.1375652838804;
-	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
+	bh=rOSE4G0XGZGCfg6I5yxMQs/JDkaOkdVg7a8lDHu7Vo4=;
+	b=SZIVzg0wTEMlGde5TZnG9J0ZnLPNH8lU3a2iSGsVnhNt1K9UmcRM7iWl0t2RqvCgSP
+	ug62C9zICzdYR7YAhqcn9sXmI8Ei7uZ4mpSM3ivYKG8EkHsC9da96d++tVbxvjyffRl4
+	Xp+0jxcaOYyA6nT1/gmUdfjTEVyMM+Ff3B40evuRbRf+TSSwu1E67bhehYjT3V59HzJy
+	pO2J/V72cfSibzKtLCvXGOi9Z/FAHeqaNJjYlsY4100Fp0y2jEkl/DUlDgKaeE9jBY6V
+	fqLwRlD1MxTJIgpApiN54c/sVeZEFRt9QUx3QYJ5cuNwfG/9c7tEENsdM5jfRHHTZehs
+	2UlA==
+X-Received: by 10.15.111.136 with SMTP id cj8mr14181153eeb.91.1375652840204;
+	Sun, 04 Aug 2013 14:47:20 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	j2sm28797195eep.6.2013.08.04.14.47.17 for <multiple recipients>
+	t6sm19355811eel.12.2013.08.04.14.47.19 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:19 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Aug 2013 23:47:39 +0200
-Message-Id: <1375652867-10498-7-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun,  4 Aug 2013 23:47:40 +0200
+Message-Id: <1375652867-10498-8-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 07/15] fbreader: add sqlite3 dependency
+Cc: Bob Ham <rah@settrans.net>
+Subject: [meta-oe][PATCH 08/15] python-edje: Fix building by preventing attempted use of examples
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,47 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2013 21:47:18 -0000
+X-List-Received-Date: Sun, 04 Aug 2013 21:47:20 -0000
 
-* fails to build without:
-  | Compiling SQLiteCommand.o ...Compiling SQLiteConnection.o ...Compiling
-  SQLiteDataBase.o ...Compiling SQLiteDataReader.o ...Compiling
-  SQLiteFactory.o ...In file included from SQLiteDataReader.h:26:0,
-  |                  from SQLiteDataReader.cpp:20:
-  | SQLiteCommand.h:24:21: fatal error: sqlite3.h: No such file or directory
+From: Bob Ham <rah@settrans.net>
 
+The examples apparently require compilation of .edc files to .edj
+files using a program called edje_cc.  I have no idea how the upstream
+Makefile is supposed to work but it contains no such instructions and
+errors out without this configure option.
+
+Signed-off-by: Bob Ham <rah@settrans.net>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb | 2 +-
- meta-gpe/recipes-support/fbreader/fbreader_git.bb     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-efl/recipes-devtools/python/python-edje.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-index 4786846..662224c 100644
---- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-+++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fbreader.org"
- SECTION = "x11/utils"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://fbreader/LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl"
-+DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl sqlite3"
- 
- SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
- file://Makefile.patch \
-diff --git a/meta-gpe/recipes-support/fbreader/fbreader_git.bb b/meta-gpe/recipes-support/fbreader/fbreader_git.bb
-index 937bdc8..ff0b5da 100644
---- a/meta-gpe/recipes-support/fbreader/fbreader_git.bb
-+++ b/meta-gpe/recipes-support/fbreader/fbreader_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fbreader.org"
- SECTION = "x11/utils"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://fbreader/LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl"
-+DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl sqlite3"
- SRCREV = "2cf1ec0e306e1122dbed850bfa005cd59a6168ee"
- PV = "0.99.5+gitr${SRCPV}"
- PR = "r0"
+diff --git a/meta-efl/recipes-devtools/python/python-edje.inc b/meta-efl/recipes-devtools/python/python-edje.inc
+index 473b92e..2e2e1f2 100644
+--- a/meta-efl/recipes-devtools/python/python-edje.inc
++++ b/meta-efl/recipes-devtools/python/python-edje.inc
+@@ -3,3 +3,4 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+ DEPENDS += "edje python-evas evas"
+ RDEPENDS_${PN} += "python-evas"
++EXTRA_OECONF += "--disable-examples"
 -- 
 1.8.3.2
 
