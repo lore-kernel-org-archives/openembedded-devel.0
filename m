@@ -1,35 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id E8F676B41A
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 65F6C6B50D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Aug 2013 21:47:16 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b15so1285612eek.40
+	Sun,  4 Aug 2013 21:47:18 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id g10so1273662eak.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Aug 2013 14:47:17 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=WWzhhiE8tnneyHTeix/vPauGr+iikxAfuQGGtDbkjig=;
-	b=QQ5JN9OUzulBlpywjIs42Gyd+np9PRReOqFPw1AONmPg1h1Vb1d7ZQreIXKM/BHpOW
-	Qzy8Ou4YwJfS1DP/qnZd+m1GOrGvTE+6u50Yj5ra22qhvHHdz47CyqlptLkkGWKq+qnO
-	Twbc/VHpfqztMp7uxyIXGRsvV09SlSplL8n5ggBtxYIyw/ImXRxr9jHLpD/k1dMkeh35
-	yQhHwT3YgrsBrKKMzxvOiyIJMqoDWJUFaxLnQCiV7sVnUOHQ2RVbGrdNIef1Is2IC415
-	gWiuU/0Vr1ekFLL68KDf4hDgVUrs+8oGzoelf6aZetfqPGykZFuXV9zoQybg3NU7BpBw
-	GslA==
-X-Received: by 10.14.104.69 with SMTP id h45mr3676898eeg.127.1375652837411;
-	Sun, 04 Aug 2013 14:47:17 -0700 (PDT)
+	bh=J0GoOkKWSrV2DvMjEqf2VDYTmzRjwbpX9z79stGHncI=;
+	b=bCBDhtBRd+DZkZgLFntS2AFRq3uTpi3wHUFay881+FPnw5+hMNKWP26NspooPXu+nj
+	Ii8k/Ats/PpsyFfj0pUkMLDuqEQ2i9pUiix/E6jp51YKyZhdC0WqDOXkbNfGTv9d49kL
+	A7X8USZggx5PsEX2K5oJcR6XT+stgP1doInIxuCVsdiGaCiLAzcz4/qPwxIOVCnXbdAl
+	wxvF8FGcVbGbfLq8fN4F5skAEopGic86IjnxQ4+O/pshdfUKI7O2mtiL+UgkP5Eo7coY
+	6autGyQMZs/sB7zYVviRp+POtNw8RJmUC0oyCcNqQE51HygGHGhnS5IrcaR1H3PjjpN4
+	1lpw==
+X-Received: by 10.15.91.3 with SMTP id r3mr3463545eez.4.1375652838804;
+	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id a1sm2587127eem.1.2013.08.04.14.47.16
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	j2sm28797195eep.6.2013.08.04.14.47.17 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 04 Aug 2013 14:47:16 -0700 (PDT)
+	Sun, 04 Aug 2013 14:47:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Aug 2013 23:47:38 +0200
-Message-Id: <1375652867-10498-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun,  4 Aug 2013 23:47:39 +0200
+Message-Id: <1375652867-10498-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 06/15] epiphany: add libgnome-keyring dependency
+Subject: [meta-oe][PATCH 07/15] fbreader: add sqlite3 dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Aug 2013 21:47:17 -0000
+X-List-Received-Date: Sun, 04 Aug 2013 21:47:18 -0000
 
-* configure wails without it:
-  No package 'gnome-keyring-1' found
+* fails to build without:
+  | Compiling SQLiteCommand.o ...Compiling SQLiteConnection.o ...Compiling
+  SQLiteDataBase.o ...Compiling SQLiteDataReader.o ...Compiling
+  SQLiteFactory.o ...In file included from SQLiteDataReader.h:26:0,
+  |                  from SQLiteDataReader.cpp:20:
+  | SQLiteCommand.h:24:21: fatal error: sqlite3.h: No such file or directory
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb | 2 +-
+ meta-gpe/recipes-support/fbreader/fbreader_git.bb     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-index 495172d..00d51f9 100644
---- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-+++ b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME default webbrowser"
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+index 4786846..662224c 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fbreader.org"
+ SECTION = "x11/utils"
  LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ LIC_FILES_CHKSUM = "file://fbreader/LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl"
++DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl sqlite3"
  
--DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates"
-+DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring"
- 
- inherit gnome
- SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
+ SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
+ file://Makefile.patch \
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_git.bb b/meta-gpe/recipes-support/fbreader/fbreader_git.bb
+index 937bdc8..ff0b5da 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_git.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_git.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.fbreader.org"
+ SECTION = "x11/utils"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://fbreader/LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl"
++DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libfribidi curl sqlite3"
+ SRCREV = "2cf1ec0e306e1122dbed850bfa005cd59a6168ee"
+ PV = "0.99.5+gitr${SRCPV}"
+ PR = "r0"
 -- 
 1.8.3.2
 
