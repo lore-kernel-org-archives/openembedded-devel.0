@@ -1,40 +1,33 @@
-Return-Path: <lpapp@archlinux.us>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 41ED86A961
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id A187D605A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Aug 2013 18:11:21 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kl13so1783845pab.20
+	Sun,  4 Aug 2013 21:47:09 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so1281216eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Aug 2013 11:11:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:x-gm-message-state;
-	bh=qQ0EodpFZETDNCwV7j1z7pDtA5jQptRiiHsnjddvRhs=;
-	b=WehyfWZNzBS4MXAVp8VZaFghZo9XwDbfGhQPl4/et24Qpw+HNGySqOmkeawaFC+xUV
-	BcIv9mg7BwEjqiC4A7WBFomzCJOfJzHsDBE2KcuuP1Bhae7KWBfk3W8wK/AInLz4H/Pc
-	lGE+H1qsxc8FLq8MIfVN3U5m6u0CI6HI3UsgICX5aBhXdB4L7l68/kd+Bhe8JKGO44Jq
-	hQuHVBt3zCxkK5CqZR/Kv76uj/J8rvJ639JWqbuKJ65weN+0FeRom6GMmvy750vV/dyQ
-	s+59Du85sR12lr94jP0rDn/ICZWLyDJkh8nsg5nBKYEY76WVIyBn33MrpXN/xXddoxjY
-	+IJw==
-MIME-Version: 1.0
-X-Received: by 10.68.172.34 with SMTP id az2mr9933631pbc.201.1375553481959;
-	Sat, 03 Aug 2013 11:11:21 -0700 (PDT)
-Sender: lpapp@archlinux.us
-Received: by 10.70.37.237 with HTTP; Sat, 3 Aug 2013 11:11:21 -0700 (PDT)
-In-Reply-To: <CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
-References: <1375526327-16139-1-git-send-email-lpapp@kde.org>
-	<CAP9ODKrrK9w93N76hc3G9yw_6YkeaGKLy2iK-Z=V7smCRM=rWg@mail.gmail.com>
-Date: Sat, 3 Aug 2013 19:11:21 +0100
-X-Google-Sender-Auth: wEarprGHCr_ecL-dGaVlJ3iP77U
-Message-ID: <CAOMwXhNkgFxS+sqEZy6B0Y9+UvK3PBBu6atf1fEn_jyoeH7d2g@mail.gmail.com>
-From: Laszlo Papp <lpapp@kde.org>
+	Sun, 04 Aug 2013 14:47:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=YCk316KsNE3tGnGdPomo2d2MQO2leASHfimE7LkdHUQ=;
+	b=P1F8Y9ler+hPbuCnIf67M5qBxW9Y66DfXtoCkIlGdmDrCSrv2CdRGBzg91XuQ1dhGA
+	SxrLnax1w/iqvp/b64rlRL4aoxiqyt3xSOm6tGMfw0eEtUUarzvaJwA5W4sQM6tX7+Pn
+	0ofjFGT4z4IbuWAYh1eVnyxEEL5I8C/WprAKKQJ3SshBE0TMQYr34OkyBxrDUbjmk1xi
+	Th9/JLO57h59il2Y6RjbOCkvdqZtnDt5hOU7IO/jHpJAXIy2G11wy+X7Ng91v5f5xOJR
+	8tlwpqH2k5J0gJq94c6fVNvnCQ/+j6JfakVeBodoFFbSCRS86D4CnOzmQ9GZ4bEVzZHz
+	QoBg==
+X-Received: by 10.14.42.1 with SMTP id i1mr6576809eeb.79.1375652829517;
+	Sun, 04 Aug 2013 14:47:09 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	v41sm28781668eep.10.2013.08.04.14.47.08 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 04 Aug 2013 14:47:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQnZ1V6nRd10ISyJptEuLV5uszLfErat7OotyOoAipJIwxC7+WHFJmEUU3Kqc51Qzcxxa0NZ
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] Add QtSerialPort
+Date: Sun,  4 Aug 2013 23:47:33 +0200
+Message-Id: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH 01/15] ecore: add PACKAGECONFIG for wayland
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,31 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Aug 2013 18:11:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 04 Aug 2013 21:47:10 -0000
 
-If you check the second email carefully, it already contains the right
-subject...
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/ecore_1.7.8.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
+diff --git a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
+index 56c682a..0f09160 100644
+--- a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
+@@ -117,5 +117,8 @@ SRC_URI = "\
+     file://fix-ecore-fb-initialization.patch \
+ "
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[wayland] = "--enable-ecore-wayland,--disable-ecore-wayland,wayland xkbcommon"
++
+ SRC_URI[md5sum] = "5a8ca096d8c15647b2493d4664a4b895"
+ SRC_URI[sha256sum] = "26cb1dc02213a221fdec32ef4ea4ece608e5239bdbd19c9d62b09cf931863738"
+-- 
+1.8.3.2
 
-On Sat, Aug 3, 2013 at 6:50 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
-
-> On Sat, Aug 3, 2013 at 7:38 AM, Laszlo Papp <lpapp@kde.org> wrote:
-> > Signed-off-by: Laszlo Papp <lpapp@kde.org>
->
-> Please use the meta-qt5 prefix and rewrite the commit log as:
->
-> qtserialport: Add 5.1.0 version
->
-> We always put the recipe in question as this makes easier to find it later.
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://projetos.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
