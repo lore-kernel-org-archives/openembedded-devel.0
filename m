@@ -1,36 +1,51 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ve0-f179.google.com (mail-ve0-f179.google.com
-	[209.85.128.179])
-	by mail.openembedded.org (Postfix) with ESMTP id F244D61223
+Return-Path: <B40290@freescale.com>
+Received: from am1outboundpool.messaging.microsoft.com
+	(am1ehsobe004.messaging.microsoft.com [213.199.154.207])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C58661223
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2013 08:45:37 +0000 (UTC)
-Received: by mail-ve0-f179.google.com with SMTP id c13so2765930vea.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Aug 2013 01:45:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:x-gm-message-state;
-	bh=YJDUxFlmWEG+0yPBfZctKHgmVgXpfiVolzYUkIkoYVU=;
-	b=bkyBqB7xFz2UI+33RvXctY25bkDC0+B1yv2auIzpYT8lnoPSd19pMUS2B18Co80vcy
-	ySBcMVIIIHx7eELZgx5B0IzD1rtTl29SIvrtfMT8PhJJrUFAFhvL2S7zCPSRXL2hkhHD
-	YdIxt2nyteDVbhzX89Mjo901AVhjTTK+BekbQT7EiCcOgFVlWDpAdCN1yLXHZYpIk+Jy
-	/q8fT8EPpBCzKAJMPieNQH+7PZjWLU//8rc6J98DpoRZgE2iKYSVh4+gYM/6exzg2u7s
-	Y5Zwh/92c+rkxCmkMK0dPN1PsfCJVdQ6EA6tovYweeNAy+nCc1y1ryMgazgbp4jCQixA
-	7IAg==
-X-Received: by 10.58.181.225 with SMTP id dz1mr5486305vec.95.1375692338219;
-	Mon, 05 Aug 2013 01:45:38 -0700 (PDT)
+	Mon,  5 Aug 2013 09:59:45 +0000 (UTC)
+Received: from mail33-am1-R.bigfish.com (10.3.201.226) by
+	AM1EHSOBE009.bigfish.com (10.3.204.29) with Microsoft SMTP Server id
+	14.1.225.22; Mon, 5 Aug 2013 09:59:45 +0000
+Received: from mail33-am1 (localhost [127.0.0.1])	by mail33-am1-R.bigfish.com
+	(Postfix) with ESMTP id D57C61E0057	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon,  5 Aug 2013 09:59:44 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -1
+X-BigFish: VS-1(z37d5kz62a3I98dI9371I542I1432Izz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah1de096h1954cbh8275bh8275dh1de097h8275chz2dh2a8h668h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e1dhbe9i1155h)
+Received: from mail33-am1 (localhost.localdomain [127.0.0.1]) by mail33-am1
+	(MessageSwitch) id 1375696782644932_31664;
+	Mon,  5 Aug 2013 09:59:42 +0000 (UTC)
+Received: from AM1EHSMHS002.bigfish.com (unknown [10.3.201.251])	by
+	mail33-am1.bigfish.com (Postfix) with ESMTP id 959923C0047	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon,  5 Aug 2013 09:59:42 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS002.bigfish.com
+	(10.3.207.102) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Mon, 5 Aug 2013 09:59:41 +0000
+Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.139]) by
+	039-SN1MMR1-004.039d.mgd.msft.net ([::1]) with mapi id 14.03.0136.001;
+	Mon, 5 Aug 2013 09:59:40 +0000
+From: Guo Chunrong-B40290 <B40290@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe,v2][PATCH] iperf: Fix license
+Thread-Index: AQHOjZQOgzC8kwoMzkadibmJP3/3o5l+2ZKAgAeQB8A=
+Date: Mon, 5 Aug 2013 09:59:39 +0000
+Message-ID: <B21730BB6DA1D24B83348D9301EA417E10433657@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1375237016-32362-1-git-send-email-b40290@freescale.com>
+	<CANyK_8e61+0VN+odPV0YDX=xEhzxfk60hLszJzMXmN5n=1OMvA@mail.gmail.com>
+In-Reply-To: <CANyK_8e61+0VN+odPV0YDX=xEhzxfk60hLszJzMXmN5n=1OMvA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.206]
 MIME-Version: 1.0
-Received: by 10.220.71.201 with HTTP; Mon, 5 Aug 2013 01:45:18 -0700 (PDT)
-In-Reply-To: <1375652867-10498-4-git-send-email-Martin.Jansa@gmail.com>
-References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
-	<1375652867-10498-4-git-send-email-Martin.Jansa@gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 5 Aug 2013 09:45:18 +0100
-Message-ID: <CAJTo0LYsObcmRkiB47Gm8YV+t-gbtMrAQpk4K5pR-F9iVyVG3g@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQkx+tOYe3EA9+RZKXMM0PaXDeAWHS+2+qJgzvP/iubXyCmfQiB8t770XA1vLuqMHzaPrgyr
-Subject: Re: [meta-oe][PATCH 04/15] devilspie: add dependency on startup-notification
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Subject: Re: [meta-oe,v2][PATCH] iperf: Fix license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,14 +59,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2013 08:45:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 05 Aug 2013 09:59:45 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 4 August 2013 22:47, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * Package 'libstartup-notification-1.0', required by 'libwnck-1.0', not found
+Ping.
 
-Doesn't that say that libwnck should have an explicit dependency on
-startup-notification?
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Paul Barker
+Sent: Wednesday, July 31, 2013 10:29 PM
+To: Openembedded Discussion
+Subject: Re: [oe] [meta-oe,v2][PATCH] iperf: Fix license
 
-Ross
+On 31 July 2013 03:16,  <b40290@freescale.com> wrote:
+> From: Chunrong Guo <B40290@freescale.com>
+>
+>      *the current version of Iperf has a false LICENSE set,
+>          so fix license with the generic BSD license
+>
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+
+Acked-by: Paul Barker <paul@paulbarker.me.uk>
+
+> ---
+>  meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb b/meta-oe/rec=
+ipes-benchmark/iperf/iperf_2.0.4.bb
+> index 8107701..4261c95 100644
+> --- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
+> +++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.4.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION =3D "Iperf is a tool to measure maximum TCP bandwidth, allow=
+ing the tuning of various parameters and UDP characteristics"
+>  HOMEPAGE =3D "http://dast.nlanr.net/Projects/Iperf/"
+>  SECTION =3D "console/network"
+> -LICENSE =3D "NewBSD"
+> +LICENSE =3D "BSD-2-Clause"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De8478eae9f479e39bc34975193360=
+298"
+>
+>  SRC_URI =3D " \
+> --
+> 1.7.5.4
+>
+
+--=20
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
