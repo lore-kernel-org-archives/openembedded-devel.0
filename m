@@ -1,35 +1,32 @@
-Return-Path: <mihai.prica@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 70D6861223
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AF5261223
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Aug 2013 12:04:11 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 05 Aug 2013 05:04:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,818,1367996400"; d="scan'208";a="382058816"
-Received: from irsmsx102.ger.corp.intel.com ([163.33.3.155])
-	by orsmga002.jf.intel.com with ESMTP; 05 Aug 2013 05:04:04 -0700
-Received: from irsmsx101.ger.corp.intel.com ([169.254.1.83]) by
-	IRSMSX102.ger.corp.intel.com ([169.254.2.58]) with mapi id
-	14.03.0123.003; Mon, 5 Aug 2013 13:04:03 +0100
-From: "Prica, Mihai" <mihai.prica@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Paul Eggleton
-	<paul.eggleton@linux.intel.com>, Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] lvm2: Add dependency on bash
-Thread-Index: AQHOigv+qQUYKmgA3EOBonOLBxNlSZl3Kn6AgAXczICAAErhkIAJOcjg
-Date: Mon, 5 Aug 2013 12:04:02 +0000
-Message-ID: <97BD068FB200C44AA73C2B641F162ECF15E80DF3@IRSMSX101.ger.corp.intel.com>
-References: <1374848729-19835-1-git-send-email-mihai.prica@intel.com>
-	<20130726174345.GE3280@jama> <4071302.P2cxlv2fxA@helios>
-	<97BD068FB200C44AA73C2B641F162ECF15E7F957@IRSMSX101.ger.corp.intel.com>
-In-Reply-To: <97BD068FB200C44AA73C2B641F162ECF15E7F957@IRSMSX101.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.181]
+	Mon,  5 Aug 2013 13:43:39 +0000 (UTC)
+Received: from [69.196.158.250] (port=48774 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1V6L4T-0001Ip-68 for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Aug 2013 09:43:37 -0400
+Date: Mon, 5 Aug 2013 09:43:34 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.02.1308050937380.6693@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2] lvm2: Add dependency on bash
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: proper way to express dependencies from meta-oe to meta-gnome?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,73 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2013 12:04:11 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Aug 2013 13:43:39 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
->-----Original Message-----
->From: openembedded-devel-bounces@lists.openembedded.org
->[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->Prica, Mihai
->> -----Original Message-----
->> From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]
->>
->> On Friday 26 July 2013 19:43:45 Martin Jansa wrote:
->> > On Fri, Jul 26, 2013 at 05:25:29PM +0300, Mihai Prica wrote:
->> > > Fixes rootfs generation error if bash is not included in the image.
->> >
->> > With rpm right?
->>
->> If it's what you're suggesting technically it's broken with any
->> package backend, to some degree.
->
->For the tests I used rpm.
->
->>
->> > Find which script it has in shebang and add bash only to that
->> > package RDEPENDS, if it's something which isn't always needed put it
->> > in separate package.
 
-From what I discovered, the scripts in question provide some of the core fu=
-nctionality
-for the package so there is no point in splitting them.
+  for the entertainment value, while building for the beaglebone
+black, i did:
 
->>
->> Or if practical patch the script(s) to remove the bashisms and change
->> the shebang to #!/bin/sh instead.
->
->I've looked over the scripts and there seem to be 4 files which are using =
-bash. The
->files are part of the core lvm2 package. I've used checkbashism and there =
-are not
->many changes that need to be done to switch to /bin/sh. I'll send an updat=
-ed
->patch.
+  $ bitbake -c fetchall world
 
-I've taken a deeper look into the problem and it seems there are some speci=
-fic=20
-bashisms that are hard to replace and that might break the functionality.=20
+and got:
 
-I've sent an updated patch changing the DEPENDS to an RDEPENDS.
+ERROR: Nothing RPROVIDES 'gvfs' (but
+/home/rpjday/oe/dist/layers/meta-openembedded/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'gvfs' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['gvfs']
+ERROR: Required build target 'tracker' has no buildable providers.
+Missing or unbuildable dependency chain was: ['tracker', 'gvfs']
 
-Thanks,
-Mihai
+and it's easy enough to see that, yes, tracker RDEPENDS on gvfs, which
+is defined in meta-gnome which is a layer i'm not including.
 
->
->Thanks,
->Mihai
->
->>
->> Cheers,
->> Paul
->>
->> --
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  so what is the preferred way to resolve stuff like that? is one
+simply supposed to *know* (or check) that tracker requires gvfs? or
+read the diagnostics and adjust accordingly?
+
+  given that tracker's home page is at gnome.org, would it make more
+sense for tracker to be part of meta-gnome instead of meta-oe? just
+trying to understand how recipes are distributed among the layers.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
