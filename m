@@ -1,31 +1,34 @@
-Return-Path: <fgretief@gmail.com>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 6752E6A457
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id B4F546B53B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Aug 2013 19:52:25 +0000 (UTC)
-Received: by mail-lb0-f179.google.com with SMTP id v1so836786lbd.10
+	Tue,  6 Aug 2013 20:22:31 +0000 (UTC)
+Received: by mail-ea0-f170.google.com with SMTP id h14so434931eak.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Aug 2013 12:52:25 -0700 (PDT)
+	Tue, 06 Aug 2013 13:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=m53ncqQzVVY99tzQBtrqdouVyYrYBqnKNgzseUAnE4Y=;
-	b=eVBZIp7jojEgXTDyVkNL8n/RMteTc9M+nkdXDE+c3chji38BgYhxkna/jACJpy14wK
-	HCw1jwHETwIaHSWfai2auxWiDmZ9XzIcynDdHQpWfJaddMur0v4NvMsJ+cboxae9grrc
-	2Y3DKYE8LVWwXcIjBoJPDLa6r2iL/wJI4kT2T5k8iy96odSSxs6/KZujWrPRFO6rPvS5
-	yfPX0259nUF5m+c2kNCqFCoUA4UV2jqQBdEwKRBXlkeMd5hOXiVWrDkYW3m7dmfn3jLK
-	JkCXrHo5UFb0Twm96s3O+60oU30mgoDHXVSPbBKl1L7By6Hzyjt1mVrjQ7NRbRWj2Z8L
-	DkjQ==
-MIME-Version: 1.0
-X-Received: by 10.152.120.37 with SMTP id kz5mr1456077lab.21.1375818745156;
-	Tue, 06 Aug 2013 12:52:25 -0700 (PDT)
-Received: by 10.152.37.102 with HTTP; Tue, 6 Aug 2013 12:52:24 -0700 (PDT)
-Date: Tue, 6 Aug 2013 21:52:24 +0200
-Message-ID: <CAFpw0gJVRD0bYmFCuH=rUtG6fBHJH7eiwzjxOq5R_Wjg5e0crQ@mail.gmail.com>
-From: Francois Retief <fgretief@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=hQbWNlO7k+r051lDn+0arHTH1jVD1mx6TflKeGPj+FQ=;
+	b=rxon3rmuuFLZX7zDdsbR991VQcvildWCGaHUABuTtgYVb/jhFIAr8tGGmfND0oZO71
+	D/wH9UJMoSED/9iXB8al20IwdlFLHFvOoTustY/aOawhp32JL9yhzas7NT5tA3NcaWWg
+	r3Li7kVfQmNqg54Ei4RiTQ8KJXIMZWwptRnTXev+GNC3v1AR8lLswTKctCzqe973hbLB
+	HjMprPQi7L94UQSoKQfRWf5kNuvMoPIkHs5X4Jm1ZjT3VSi8Garz5E10I54fhXKvP2OZ
+	rQF7qV7kOdEIVki/xmIy3tdPgvk0nuO5+xilBvIZ/T1OXt4jLfcWjvBkzSMYXTC3KxBq
+	6W6g==
+X-Received: by 10.14.110.194 with SMTP id u42mr2657064eeg.112.1375820551375;
+	Tue, 06 Aug 2013 13:22:31 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id p5sm4520311eeg.5.2013.08.06.13.22.30
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 06 Aug 2013 13:22:30 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Building a MinGW SDK
+Date: Tue,  6 Aug 2013 22:23:12 +0200
+Message-Id: <1375820592-32196-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-systemd][PATCH] util-linux: rename .bbappend to match new oe-core version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,35 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2013 19:52:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 06 Aug 2013 20:22:32 -0000
 
-Hi,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../util-linux/{util-linux_2.23.1.bbappend => util-linux_2.23.2.bbappend} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/oe-core/recipes-core/util-linux/{util-linux_2.23.1.bbappend => util-linux_2.23.2.bbappend} (100%)
 
-I have been struggling for the last week trying to get a MinGW based SDK
-going.
+diff --git a/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.1.bbappend b/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
+similarity index 100%
+rename from meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.1.bbappend
+rename to meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
+-- 
+1.8.3.2
 
-After a long struggle I found that the PREFERRED_PROVIDER for libc-for-gcc
-had to change:
-
-PREFERRED_PROVIDER_virtual/nativesdk-${SDK_PREFIX}libc-for-gcc ?=
-"nativesdk-mingw-w64-runtime"
-
-I am now at a point where the libc-for-gcc is compiled using the
-mingw-w32-crt files, but I am don't know the exact path were OpenEmbedded
-want's the libc-for-gcc libraries to go.
-
-Using the i586-linux SDK as reference, it looks like it should be in
-
-${TMPDIR}/sysroots/x86_64-nativesdk-oesdk-mingw32/usr/local/oecore-x86_64/sysroots/x86_64-oesdk-mingw32
-
-But the gcc does not pick up the crtbegin.o/crtend.o files from there when
-building the libgcc library.
-
-Has anyone experience setting up GCC for a SDK under OpenEmbedded?
-
-I really need some advice.
-
-Cheers
-  Francois
 
