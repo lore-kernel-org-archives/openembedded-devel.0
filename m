@@ -1,34 +1,32 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-qe0-f48.google.com (mail-qe0-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C72661013;
-	Wed,  7 Aug 2013 16:09:19 +0000 (UTC)
-Received: by mail-qe0-f48.google.com with SMTP id 9so1079033qea.21
-	for <multiple recipients>; Wed, 07 Aug 2013 09:09:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=yR9S9hhCZ+ev+QEYxh5H/lJyzEy+78YXuCHkOgnVzWU=;
-	b=z1rIXjfiVvZbvnxILgLsxllcPGMwqUlklvX7oHErK3QO55CYrfk4wY+40fAl9ixPTf
-	XZ368Y6gTR9hYnjg+RMBW7LCJNQBIlQCTomYrEmBsAtRpcwSXJUM2QwU14y8UZSz4wE8
-	RRcFwwymepSJkquXcCdYuoMmSIyzGykV/Q8/zRheDUrwTcBREmaEgETT03eQq9Yb81Fv
-	XUQ1U/hQtUbd+kpoVvgIE1RKOqAOR6EkKfMk6zDDxOVR960op5YwOz8EUjKsR8Mx6Dg1
-	9kZlW/Asw8Zn0I79BUfvxqr1RZ5Jnnf3cPnriIlQTX5nW+h5CkBryViYafEY6dmGBFU/
-	sYTA==
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A642618BC
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Aug 2013 16:19:35 +0000 (UTC)
+Received: from [69.196.158.250] (port=50265 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1V76SS-0008KY-QD for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Aug 2013 12:19:32 -0400
+Date: Wed, 7 Aug 2013 12:19:30 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.02.1308071215080.30398@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-X-Received: by 10.224.65.3 with SMTP id g3mr1455362qai.42.1375891759844; Wed,
-	07 Aug 2013 09:09:19 -0700 (PDT)
-Received: by 10.224.114.207 with HTTP; Wed, 7 Aug 2013 09:09:19 -0700 (PDT)
-In-Reply-To: <20130807122314.GF17450@ibawizard.net>
-References: <51F18346.2@windriver.com> <20130807122314.GF17450@ibawizard.net>
-Date: Wed, 7 Aug 2013 19:09:19 +0300
-Message-ID: <CAF6bG8fFOL8rDQrtJkwBDt2SJw0sWbLVSo0ZMk2pJ6g_f+-Qcw@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: =?UTF-8?Q?Petr_=C5=A0tetiar?= <ynezz@true.cz>
-Cc: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Add lua to oe-core.
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: wanting to clarify something about PACKAGE_GROUP and package-management
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,26 +40,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2013 16:09:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 7 August 2013 15:23, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
-> Randy MacLeod <randy.macleod@windriver.com> [2013-07-25 15:57:58]:
->
->> lua-5.2.2 is current, see: http://www.lua.org/download.html
->> so we'd likely uprev and send that version.
->
-> Just FYI Lua 5.2 has quite a lot of changes to Lua 5.1[1].  So I wouldn't
-> consider it as an drop-in replacement for Lua 5.1. Simply said it's not
-> compatible out of the box.
-
- Yes, 5.1 and 5.2 are incompatible to extend that there simply is no
-way to do some things so that it would work with both (5.1 has it one
-way, 5.2 has it another way, and neither understand the other) It can
-take some effort to switch application from using lua 5.1 to using lua
-5.2.
+X-List-Received-Date: Wed, 07 Aug 2013 16:19:35 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
- - ML
+  perusing core-image.bbclass and i can see the list of available
+image features and what they correspond to:
+
+# - x11                 - X server
+# - x11-base            - X server with minimal environment
+# - x11-sato            - OpenedHand Sato environment
+# - tools-debug         - debugging tools
+# - eclipse-debug       - Eclipse remote debugging support
+# - tools-profile       - profiling tools
+# - tools-testapps      - tools usable to make some device tests
+# - tools-sdk           - SDK (C/C++ compiler, autotools, etc.)
+# - nfs-server          - NFS server
+# - ssh-server-dropbear - SSH server (dropbear)
+# - ssh-server-openssh  - SSH server (openssh)
+# - qt4-pkgs            - Qt4/X11 and demo applications
+# - hwcodecs            - Install hardware acceleration codecs
+# - package-management  - installs package management tools and preserves the package manager database
+# - debug-tweaks        - makes an image suitable for development, e.g. allowing passwordless root logins
+# - dev-pkgs            - development packages (headers, etc.) for all installed packages in the rootfs
+# - dbg-pkgs            - debug symbol packages for all installed packages in the rootfs
+# - doc-pkgs            - documentation packages for all installed packages in the rootfs
+# - read-only-rootfs    - tweaks an image to support read-only rootfs
+#
+PACKAGE_GROUP_x11 = "packagegroup-core-x11"
+PACKAGE_GROUP_x11-base = "packagegroup-core-x11-base"
+PACKAGE_GROUP_x11-sato = "packagegroup-core-x11-sato"
+PACKAGE_GROUP_tools-debug = "packagegroup-core-tools-debug"
+PACKAGE_GROUP_eclipse-debug = "packagegroup-core-eclipse-debug"
+PACKAGE_GROUP_tools-profile = "packagegroup-core-tools-profile"
+PACKAGE_GROUP_tools-testapps = "packagegroup-core-tools-testapps"
+PACKAGE_GROUP_tools-sdk = "packagegroup-core-sdk packagegroup-core-standalone-sdk-target"
+PACKAGE_GROUP_nfs-server = "packagegroup-core-nfs-server"
+PACKAGE_GROUP_ssh-server-dropbear = "packagegroup-core-ssh-dropbear"
+PACKAGE_GROUP_ssh-server-openssh = "packagegroup-core-ssh-openssh"
+PACKAGE_GROUP_package-management = "${ROOTFS_PKGMANAGE}"
+PACKAGE_GROUP_qt4-pkgs = "packagegroup-core-qt-demoapps"
+PACKAGE_GROUP_hwcodecs = "${MACHINE_HWCODECS}"
+
+  i notice from the above that not all possible IMAGE_FEATURES values
+are defined in terms of package groups and that, in cases like that,
+they need to be processed specially in image.bbclass, correct? so i'm
+assuming that is what this snippet means in image.bbclass:
+
+# IMAGE_FEATURES may contain any available package group
+IMAGE_FEATURES ?= ""
+IMAGE_FEATURES[type] = "list"
+IMAGE_FEATURES[validitems] += "debug-tweaks read-only-rootfs package-management"
+
+but if i understand this correctly, the extra "valid item" of
+"package-management" doesn't really need to be there since it *is*
+defined as a package group earlier. am i understanding that right? i
+imagine it does no harm, it's just redundant.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
