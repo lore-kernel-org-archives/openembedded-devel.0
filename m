@@ -1,39 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f54.google.com (mail-pb0-f54.google.com
-	[209.85.160.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E1909605F2;
-	Wed,  7 Aug 2013 18:30:57 +0000 (UTC)
-Received: by mail-pb0-f54.google.com with SMTP id ro12so2227382pbb.27
-	for <multiple recipients>; Wed, 07 Aug 2013 11:30:58 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 64D0E605F2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Aug 2013 20:28:29 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id z15so1047882ead.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Aug 2013 13:28:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=QgEA5l7YYlBRc4zHsbkufunYtqhCDH+OLKY8ZTQNG9Q=;
-	b=L2rdm2R0zpqroSmCWAQRQN1GU+gtQgIA5PqZ4qJxpQrtM+Ci1Ly3PlCo/mCMrV3qD0
-	GeaPS0JtvmTVbW8LEyaAZ6ncbgRMiEFpdvx5Pg8EoEKjRBOcFjfDnM0lkCHd12pDA0IO
-	XbJlhvvce5hqSAM/9akSXr1H5GfZo5rENP2QEVxlTDxGervEjJmPrq1ohmgjFfmTD+HP
-	jFVGIfwae1GubLXATqIbySj2uazEleWcbJFvii1fmaCOGx6EnD0P81E6Zb+ZjPWBm3/e
-	Hicxe1NS+Z0RZ+xOTGlKe1+B8A0wwROlDkC4V2sQP+STZ+/GAf2WbV4x2feJQuCDjjd7
-	WvGA==
-X-Received: by 10.68.170.37 with SMTP id aj5mr2052639pbc.79.1375900258597;
-	Wed, 07 Aug 2013 11:30:58 -0700 (PDT)
-Received: from gourish-sslvpn-nc.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPSA id r7sm11814407pao.18.2013.08.07.11.30.56
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 07 Aug 2013 11:30:56 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130807122314.GF17450@ibawizard.net>
-Date: Wed, 7 Aug 2013 11:30:55 -0700
-Message-Id: <705A265A-57A0-4534-8D31-F7F969183B35@gmail.com>
-References: <51F18346.2@windriver.com> <20130807122314.GF17450@ibawizard.net>
-To: =?windows-1252?Q?Petr_=8Atetiar?= <ynezz@true.cz>
-X-Mailer: Apple Mail (2.1508)
-Cc: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] Add lua to oe-core.
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=H57OEbkJxZGACPKHYQ6nn0UgXKvUbH1OlFA8ZHdozic=;
+	b=WgIL1EOZXTHDwB2rfJSMOQk1hTE4sCg15i90uuCeLD57J871PMsTulqIdQynHFsDdP
+	JTq1gxb6k6xGCeQtOhj96itZqjU77ZMpJQACH2QZ71ed/6huIYzNmvDVUeGg4CwYdp+Y
+	QQxMTcR9SAOZIrwjX7YRd6urk8vS5G/VANeJ1M22Qfd6K0rDou5D6qhHDu/xjAJMzIg8
+	gIhMHKCv4w642Sq18Fzx1YVABygl/JfScKY5biGpCqdcUTNX73MOAABylEwAk7s6kZyn
+	mg8lJyxl5lToeFgKjIiBJdnRu75t8ZTg+/x9CAbknjfhylYqp2raSPXcp/MJiLKHy/sP
+	WNHw==
+X-Received: by 10.14.45.70 with SMTP id o46mr776180eeb.19.1375907309212;
+	Wed, 07 Aug 2013 13:28:29 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	c3sm12750887eev.3.2013.08.07.13.28.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 07 Aug 2013 13:28:28 -0700 (PDT)
+Date: Wed, 7 Aug 2013 22:29:13 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130807202913.GA3269@jama>
+References: <1375652867-10498-1-git-send-email-Martin.Jansa@gmail.com>
+	<1375652867-10498-4-git-send-email-Martin.Jansa@gmail.com>
+	<CAJTo0LYsObcmRkiB47Gm8YV+t-gbtMrAQpk4K5pR-F9iVyVG3g@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LYsObcmRkiB47Gm8YV+t-gbtMrAQpk4K5pR-F9iVyVG3g@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 04/15] devilspie: add dependency on startup-notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,44 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2013 18:30:58 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Wed, 07 Aug 2013 20:28:31 -0000
+X-Groupsio-MsgNum: 45600
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GvXjxJ+pjyke8COw"
+Content-Disposition: inline
+
+--GvXjxJ+pjyke8COw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-On Aug 7, 2013, at 5:23 AM, Petr =8Atetiar <ynezz@true.cz> wrote:
-
-> Randy MacLeod <randy.macleod@windriver.com> [2013-07-25 15:57:58]:
+On Mon, Aug 05, 2013 at 09:45:18AM +0100, Burton, Ross wrote:
+> On 4 August 2013 22:47, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > * Package 'libstartup-notification-1.0', required by 'libwnck-1.0', not=
+ found
 >=20
->> lua-5.2.2 is current, see: http://www.lua.org/download.html
->> so we'd likely uprev and send that version.
->=20
-> Just FYI Lua 5.2 has quite a lot of changes to Lua 5.1[1].  So I =
-wouldn't
-> consider it as an drop-in replacement for Lua 5.1. Simply said it's =
-not
-> compatible out of the box.
+> Doesn't that say that libwnck should have an explicit dependency on
+> startup-notification?
 
-5.2 is not ABI compatible with 5.1 see
+test-dependencies script is running again and after fixing eds it found
+the same issue in cheese
 
-http://www.lua.org/manual/5.2/manual.html#8
+| Package 'libstartup-notification-1.0', required by 'gnome-desktop-2.0', n=
+ot found
 
-so you can add a new recipe for 5.2 on
-the same lines at 5.1 but don't delete 5.1
+so yes I'll have to check which packages autodetect
+startup-notification (script should show it if I wait long enough for it
+to finish 3rd pass :))
 
->=20
->> oe-core.git $ grep -r lua * | egrep -v 'valuat|valuable|uargp|rpm'
->> meta/recipes-extended/lighttpd/lighttpd_1.4.32.bb:
->>             --without-lua \
->=20
-> For example lighttpd uses Lua 5.1.
->=20
-> 1. http://www.corsix.org/content/look-lua-52-work3
->=20
-> -- ynezz
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--GvXjxJ+pjyke8COw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlICrhkACgkQN1Ujt2V2gBw6OQCglEz1tr5kjJPqOmqlFo7TXd9/
+SioAoJxLTck3lLSLT93ePh1WneN4H8gy
+=Xlun
+-----END PGP SIGNATURE-----
+
+--GvXjxJ+pjyke8COw--
