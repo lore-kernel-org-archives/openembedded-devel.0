@@ -1,32 +1,39 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A642618BC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Aug 2013 16:19:35 +0000 (UTC)
-Received: from [69.196.158.250] (port=50265 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1V76SS-0008KY-QD for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Aug 2013 12:19:32 -0400
-Date: Wed, 7 Aug 2013 12:19:30 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.02.1308071215080.30398@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: wanting to clarify something about PACKAGE_GROUP and package-management
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f54.google.com (mail-pb0-f54.google.com
+	[209.85.160.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E1909605F2;
+	Wed,  7 Aug 2013 18:30:57 +0000 (UTC)
+Received: by mail-pb0-f54.google.com with SMTP id ro12so2227382pbb.27
+	for <multiple recipients>; Wed, 07 Aug 2013 11:30:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=QgEA5l7YYlBRc4zHsbkufunYtqhCDH+OLKY8ZTQNG9Q=;
+	b=L2rdm2R0zpqroSmCWAQRQN1GU+gtQgIA5PqZ4qJxpQrtM+Ci1Ly3PlCo/mCMrV3qD0
+	GeaPS0JtvmTVbW8LEyaAZ6ncbgRMiEFpdvx5Pg8EoEKjRBOcFjfDnM0lkCHd12pDA0IO
+	XbJlhvvce5hqSAM/9akSXr1H5GfZo5rENP2QEVxlTDxGervEjJmPrq1ohmgjFfmTD+HP
+	jFVGIfwae1GubLXATqIbySj2uazEleWcbJFvii1fmaCOGx6EnD0P81E6Zb+ZjPWBm3/e
+	Hicxe1NS+Z0RZ+xOTGlKe1+B8A0wwROlDkC4V2sQP+STZ+/GAf2WbV4x2feJQuCDjjd7
+	WvGA==
+X-Received: by 10.68.170.37 with SMTP id aj5mr2052639pbc.79.1375900258597;
+	Wed, 07 Aug 2013 11:30:58 -0700 (PDT)
+Received: from gourish-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id r7sm11814407pao.18.2013.08.07.11.30.56
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 07 Aug 2013 11:30:56 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20130807122314.GF17450@ibawizard.net>
+Date: Wed, 7 Aug 2013 11:30:55 -0700
+Message-Id: <705A265A-57A0-4534-8D31-F7F969183B35@gmail.com>
+References: <51F18346.2@windriver.com> <20130807122314.GF17450@ibawizard.net>
+To: =?windows-1252?Q?Petr_=8Atetiar?= <ynezz@true.cz>
+X-Mailer: Apple Mail (2.1508)
+Cc: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] Add lua to oe-core.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,72 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2013 16:19:35 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 07 Aug 2013 18:30:58 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
 
-  perusing core-image.bbclass and i can see the list of available
-image features and what they correspond to:
+On Aug 7, 2013, at 5:23 AM, Petr =8Atetiar <ynezz@true.cz> wrote:
 
-# - x11                 - X server
-# - x11-base            - X server with minimal environment
-# - x11-sato            - OpenedHand Sato environment
-# - tools-debug         - debugging tools
-# - eclipse-debug       - Eclipse remote debugging support
-# - tools-profile       - profiling tools
-# - tools-testapps      - tools usable to make some device tests
-# - tools-sdk           - SDK (C/C++ compiler, autotools, etc.)
-# - nfs-server          - NFS server
-# - ssh-server-dropbear - SSH server (dropbear)
-# - ssh-server-openssh  - SSH server (openssh)
-# - qt4-pkgs            - Qt4/X11 and demo applications
-# - hwcodecs            - Install hardware acceleration codecs
-# - package-management  - installs package management tools and preserves the package manager database
-# - debug-tweaks        - makes an image suitable for development, e.g. allowing passwordless root logins
-# - dev-pkgs            - development packages (headers, etc.) for all installed packages in the rootfs
-# - dbg-pkgs            - debug symbol packages for all installed packages in the rootfs
-# - doc-pkgs            - documentation packages for all installed packages in the rootfs
-# - read-only-rootfs    - tweaks an image to support read-only rootfs
-#
-PACKAGE_GROUP_x11 = "packagegroup-core-x11"
-PACKAGE_GROUP_x11-base = "packagegroup-core-x11-base"
-PACKAGE_GROUP_x11-sato = "packagegroup-core-x11-sato"
-PACKAGE_GROUP_tools-debug = "packagegroup-core-tools-debug"
-PACKAGE_GROUP_eclipse-debug = "packagegroup-core-eclipse-debug"
-PACKAGE_GROUP_tools-profile = "packagegroup-core-tools-profile"
-PACKAGE_GROUP_tools-testapps = "packagegroup-core-tools-testapps"
-PACKAGE_GROUP_tools-sdk = "packagegroup-core-sdk packagegroup-core-standalone-sdk-target"
-PACKAGE_GROUP_nfs-server = "packagegroup-core-nfs-server"
-PACKAGE_GROUP_ssh-server-dropbear = "packagegroup-core-ssh-dropbear"
-PACKAGE_GROUP_ssh-server-openssh = "packagegroup-core-ssh-openssh"
-PACKAGE_GROUP_package-management = "${ROOTFS_PKGMANAGE}"
-PACKAGE_GROUP_qt4-pkgs = "packagegroup-core-qt-demoapps"
-PACKAGE_GROUP_hwcodecs = "${MACHINE_HWCODECS}"
+> Randy MacLeod <randy.macleod@windriver.com> [2013-07-25 15:57:58]:
+>=20
+>> lua-5.2.2 is current, see: http://www.lua.org/download.html
+>> so we'd likely uprev and send that version.
+>=20
+> Just FYI Lua 5.2 has quite a lot of changes to Lua 5.1[1].  So I =
+wouldn't
+> consider it as an drop-in replacement for Lua 5.1. Simply said it's =
+not
+> compatible out of the box.
 
-  i notice from the above that not all possible IMAGE_FEATURES values
-are defined in terms of package groups and that, in cases like that,
-they need to be processed specially in image.bbclass, correct? so i'm
-assuming that is what this snippet means in image.bbclass:
+5.2 is not ABI compatible with 5.1 see
 
-# IMAGE_FEATURES may contain any available package group
-IMAGE_FEATURES ?= ""
-IMAGE_FEATURES[type] = "list"
-IMAGE_FEATURES[validitems] += "debug-tweaks read-only-rootfs package-management"
+http://www.lua.org/manual/5.2/manual.html#8
 
-but if i understand this correctly, the extra "valid item" of
-"package-management" doesn't really need to be there since it *is*
-defined as a package group earlier. am i understanding that right? i
-imagine it does no harm, it's just redundant.
+so you can add a new recipe for 5.2 on
+the same lines at 5.1 but don't delete 5.1
 
-rday
+>=20
+>> oe-core.git $ grep -r lua * | egrep -v 'valuat|valuable|uargp|rpm'
+>> meta/recipes-extended/lighttpd/lighttpd_1.4.32.bb:
+>>             --without-lua \
+>=20
+> For example lighttpd uses Lua 5.1.
+>=20
+> 1. http://www.corsix.org/content/look-lua-52-work3
+>=20
+> -- ynezz
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
 
