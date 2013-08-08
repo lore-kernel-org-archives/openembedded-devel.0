@@ -1,34 +1,38 @@
-Return-Path: <mranostay@gmail.com>
-Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id CDAC8608BF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 60169608BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Aug 2013 04:03:27 +0000 (UTC)
-Received: by mail-pb0-f47.google.com with SMTP id rr4so2664923pbb.6
+	Thu,  8 Aug 2013 05:48:49 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id lf1so145412pab.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Aug 2013 21:03:28 -0700 (PDT)
+	Wed, 07 Aug 2013 22:48:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=XIGdEaWdBS2P4eMLy5sul4GR+dNzKwvA2oi4U9cwGdU=;
-	b=Ys4qatZwPyShTVsPo9KH3ydGilZfIAqs6GX38ZX9YorGzP3NpablL+EbUONLBZCK6R
-	dFw6BKpRGpIzpdDsxm0CJFp0wDwUxC7hLG59ErJQjuf6Wgo54wbWuLRf8pO33bKkb769
-	0BJ5mk16TYPSgHKs4xqTnVYHd6zgmQlKN/F3eGBuNeCr0WMw9GQ+okY38VnI6lFr3OCg
-	kgylNmhawAs+njl5fSaEbuIGIYiw2wx0Bi6P6JYEugiOZNa4nT+0mdS1KwYR0Eaz8Z1t
-	6SlKYacWphO8J8Zd1+ilrPJ3pYU2w3h8uNbnmzzzK2ndzXz65ovrxJpGUHRmtjHfMsKy
-	5fAA==
-X-Received: by 10.68.211.194 with SMTP id ne2mr4013342pbc.40.1375934608550;
-	Wed, 07 Aug 2013 21:03:28 -0700 (PDT)
-Received: from localhost.localdomain (c-76-105-193-198.hsd1.or.comcast.net.
-	[76.105.193.198]) by mx.google.com with ESMTPSA id
-	xl3sm11516402pbb.17.2013.08.07.21.03.27 for <multiple recipients>
+	h=from:content-type:content-transfer-encoding:subject:message-id:date
+	:to:mime-version;
+	bh=ziiN9IOjtisVCAjp+DEgaUS8Ii7N6UrWGGAZI9U3MiQ=;
+	b=Jt+5txZ/OOcOnYRIUOnxPhhN8NBcXlZoDcja+CqjqSMJy4lyo7YtbgQU0hIW3A3LZX
+	17vPsFyKHZuMpq8dv6idDxtmr2lEkEGX7i2aqVj28xIsTvOoBByxVT+GxMjhb2Y9iIWN
+	DQ452WoIbnGkxt4agLgPqg3iJL8n4fm7Tg6KYN3R/G3UXDl2CmR7x3DP99BEz2w/ghtU
+	zT/tZKyJhOsBhd1GrnwfbJwkpACnl/2+hnn2DEtDXWpAwOoeZdF3vs2bLFAfJb+LaTns
+	CZBycmfxp+/qry8CsKNGLwisogMhzxfGUgmPf9E590beMEaUCgiH8vaC43l80CFI4HpP
+	pSbQ==
+X-Received: by 10.68.211.138 with SMTP id nc10mr4178243pbc.162.1375940929820; 
+	Wed, 07 Aug 2013 22:48:49 -0700 (PDT)
+Received: from gourish-sslvpn-nc.jnpr.net (natint3.juniper.net.
+	[66.129.224.36]) by mx.google.com with ESMTPSA id
+	ai6sm14310816pad.15.2013.08.07.22.48.48
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 07 Aug 2013 21:03:28 -0700 (PDT)
-From: Matt Ranostay <mranostay@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Aug 2013 04:02:54 +0000
-Message-Id: <1375934574-15191-1-git-send-email-mranostay@gmail.com>
-X-Mailer: git-send-email 1.8.2.rc3.6.g407929c
-Subject: [PATCH] flashrom: Add flashrom recipe
+	Wed, 07 Aug 2013 22:48:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Message-Id: <BE65E360-0A4E-432B-9020-A3BCA9E05AF9@gmail.com>
+Date: Wed, 7 Aug 2013 22:48:48 -0700
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+X-Mailer: Apple Mail (2.1508)
+Subject: parsing errors with angstrom/meta-linaro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,38 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2013 04:03:27 -0000
+X-List-Received-Date: Thu, 08 Aug 2013 05:48:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Add flashrom recipe for managing recovery from bad UEFI updates.
+Hi
 
-Signed-off-by: Matt Ranostay <mranostay@gmail.com>
----
- meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
+Often I see this error when parsing angstrom-next, has anyone seen =
+something similar or delved into the reason behind
+it ?
 
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb b/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
-new file mode 100644
-index 0000000..a1f0b30
---- /dev/null
-+++ b/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "flashrom is a utility for identifying, reading, writing, verifying and erasing flash chips"
-+LICENSE = "GPLv2"
-+HOMEPAGE = "http://flashrom.org"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+DEPENDS = "pciutils"
-+
-+SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2"
-+
-+SRC_URI[md5sum] = "407e836c0a2b17ec76583cb6809f65e5"
-+SRC_URI[sha256sum] = "6f7b588cce74c90b4fe9c9c794de105de76e0323442fb5770b1aeab81e9d560a"
-+
-+do_install() {
-+    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-+}
--- 
-1.8.2.rc3.6.g407929c
+NOTE: Started PRServer with DBfile: =
+/builds1/angstrom/cache/prserv.sqlite3, IP: 127.0.0.1, PORT: 45141, PID: =
+6728
+Parsing recipes...ERROR: ExpansionError during parsing =
+/builds1/angstrom/sources/meta-linaro/meta-aarch64/recipes-kernel/linux/li=
+nux-linaro_git.bb: Failure expanding variable SRCPV, expression was =
+${@bb.fetch2.get_srcrev(d)} which triggered exception FetchError: =
+Fetcher failure: Fetch command failed with exit code 128, output:
+fatal: read error: Connection reset by peer
+
+ERROR: Command execution failed: Exited with 1
+
+Summary: There were 2 ERROR messages shown, returning a non-zero exit =
+code.
+
 
 
