@@ -1,26 +1,32 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 8131C6066D
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 1411C6AFC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2013 12:13:47 +0000 (UTC)
-Received: (qmail 27049 invoked by uid 1003); 9 Aug 2013 12:13:48 -0000
-Received: from unknown (HELO ?192.168.1.103?)
-	(philip@opensdr.com@71.171.36.155)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	9 Aug 2013 12:13:47 -0000
-Message-ID: <5204DCFA.6090101@balister.org>
-Date: Fri, 09 Aug 2013 08:13:46 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
+	Fri,  9 Aug 2013 16:46:23 +0000 (UTC)
+Received: from [69.196.158.250] (port=59027 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1V7ppT-0004Qu-NZ for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Aug 2013 12:46:19 -0400
+Date: Fri, 9 Aug 2013 12:46:16 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.02.1308091242270.18531@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
-	<1376038471-32202-10-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1376038471-32202-10-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [meta-oe][PATCH 10/12] uhd: add dependency on ncurses
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: what sources are *not* fetched by a "-c fetchall"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2013 12:13:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Aug 2013 16:46:24 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Acked-by: Philip Balister <philip@balister.org>
 
-Thanks for catching this Martin!
+  currently testing a build for my beaglebone black using the meta-ti
+layer and, as i am wont to do, i did a:
 
-Philip
+  $ bitbake -c fetchall core-image-minimal
 
-On 08/09/2013 04:54 AM, Martin Jansa wrote:
-> * when it's not found in target sysroots it's trying to use native one
->   | cd uhd/1_3.5.3-r3.0/git/host/build/examples && sysroots/x86_64-linux/usr/bin/cmake -E cmake_link_script CMakeFiles/rx_ascii_art_dft.dir/link.txt --verbose=1
->   | sysroots/x86_64-linux/usr/bin/armv5te-oe-linux-gnueabi/arm-oe-linux-gnueabi-g++    -march=armv5te -marm -mthumb-interwork  --sysroot=sysroots/qemuarm  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -fpermissive -O2 -pipe -g -feliminate-unused-debug-types  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -DNDEBUG  -march=armv5te -marm -mthumb-interwork  --sysroot=sysroots/qemuarm  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed CMakeFiles/rx_ascii_art_dft.dir/rx_ascii_art_dft.cpp.o  -o rx_ascii_art_dft
->   -Lsysroots/x86_64-linux/usr/lib -rdynamic ../lib/libuhd.so.003.005 -lcurses sysroots/x86_64-linux/usr/lib/libform.so -lboost_date_time-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system-mt -lboost_thread-mt -lboost_unit_test_framework -lrt -lusb-1.0 -lpthread -ldl -Wl,-rpath,uhd/1_3.5.3-r3.0/git/host/build/lib:sysroots/x86_64-linux/usr/lib:
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: sysroots/x86_64-linux/usr/lib/libform.so: incompatible target
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libncurses.so.5 while searching for libncurses.so.5
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libncurses.so.5 while searching for libncurses.so.5
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: cannot find libncurses.so.5
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libtinfo.so while searching for tinfo
->   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: cannot find -ltinfo
->   | uhd/1_3.5.3-r3.0/git/host/examples/rx_ascii_art_dft.cpp:149: error: undefined reference to 'initscr'
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/uhd/uhd.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
-> index d3cc4c8..476b763 100644
-> --- a/meta-oe/recipes-connectivity/uhd/uhd.inc
-> +++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
-> @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.ettus.com"
->  LICENSE = "GPLv3+"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=51b35d652c070d136bf20244494be2d3"
->  
-> -DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native"
-> +DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native ncurses"
->  RDEPENDS_${PN} += "uhd-firmware"
->  
->  PE = "1"
-> 
+to (allegedly) fetch everything i would need for such a build.
+
+  at that point, i did:
+
+  $ bitbake core-image-minimal
+
+and while this is running, i can see more source tarballs being pulled
+into the downloads directory -- examples:
+
+  * file-5.13.tar.gz
+  * icu4c-50_1_2-src.tgz
+  * mklibs_0.1.34.tar.gz
+  * pcre-8.32.tar.bz2
+
+and perhaps more since the build is not yet done.
+
+  what is it about these particular packages that doesn't fall under
+the regular fetching from "-c fetchall"?
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
