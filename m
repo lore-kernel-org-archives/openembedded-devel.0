@@ -1,38 +1,26 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
-	[209.85.214.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 88CAA6066D
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 8131C6066D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2013 12:09:41 +0000 (UTC)
-Received: by mail-ob0-f179.google.com with SMTP id fb19so6167670obc.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2013 05:09:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=FicCo05QOsyq1tOpBWPJlbjBV9b5Gk/MAy8v4kDfUrM=;
-	b=KSdPje7wfHsw8VHJ8JlGTdv/THgolraVG7emDU8kGYFjHCWM66ymIiMfdY11KxGpb2
-	bWmD0zQ4boGkA2vSFYc90/XtHOwZfiglVizs3nKrNdw3AatNBUAN+UFHa9M0aebp09NG
-	7RZ4Connd6wdcFfgOmCEjZZyPKWNRgicZHo5hJfvH+OLvW5+vpjDCiNNJ4LI2/6OlYMP
-	G5ZLrWha6xsWQIzHBXhx3Q1tzDAnNefy7PaNllbdd3c1WzJkynrUSGlp6UV4y3Yfda9S
-	pkOURzdVNGjDqsmnA37wkKuFo0vINjdmzl2Iks+m8S0wZgYckqQyLTEo84PpGZL0A+Tj
-	68sg==
+	Fri,  9 Aug 2013 12:13:47 +0000 (UTC)
+Received: (qmail 27049 invoked by uid 1003); 9 Aug 2013 12:13:48 -0000
+Received: from unknown (HELO ?192.168.1.103?)
+	(philip@opensdr.com@71.171.36.155)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 Aug 2013 12:13:47 -0000
+Message-ID: <5204DCFA.6090101@balister.org>
+Date: Fri, 09 Aug 2013 08:13:46 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Received: by 10.182.130.131 with SMTP id oe3mr286026obb.34.1376050181806;
-	Fri, 09 Aug 2013 05:09:41 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Fri, 9 Aug 2013 05:09:41 -0700 (PDT)
-In-Reply-To: <20130809115037.GF17945@jama>
+To: openembedded-devel@lists.openembedded.org
 References: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
-	<1376038471-32202-5-git-send-email-Martin.Jansa@gmail.com>
-	<CAJTo0LZg4jsH2HT2joWUXcK=8Ao3xBSGKifRt0w4CMC78fLofA@mail.gmail.com>
-	<20130809115037.GF17945@jama>
-Date: Fri, 9 Aug 2013 09:09:41 -0300
-X-Google-Sender-Auth: 1jO-HgJRi5ryEskTeF2_dHRjamI
-Message-ID: <CAP9ODKqjcKOLZeWS1Vrghg9-v7-JPsPgw5LQv1E8Bm4FE7NqjA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 05/12] libwnck(3): add PACKAGECONFIG for startup-notification
+	<1376038471-32202-10-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1376038471-32202-10-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [meta-oe][PATCH 10/12] uhd: add dependency on ncurses
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,28 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2013 12:09:41 -0000
+X-List-Received-Date: Fri, 09 Aug 2013 12:13:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 9, 2013 at 8:50 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Aug 09, 2013 at 10:18:41AM +0100, Burton, Ross wrote:
->> On 9 August 2013 09:54, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > * it's autodetected from sysroot and couple of packages are failing
->> >   when pkg-config is trying to use libwnck*.pc without
->> >   startup-notification in sysroot
->>
->> Why not enable this by default?  People who have no need for
->> startup-notification can disable it, but this could be surprisingly
->> hard to debug if someone tries building e.g. GNOME and wonders why
->> they don't have any startup notification hints.
->
-> I don't have any preference, I was just interested in making it
-> explicit. I'll change it to enabled by default in branch.
+Acked-by: Philip Balister <philip@balister.org>
 
-I agree with Ross here as well.
+Thanks for catching this Martin!
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://projetos.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Philip
+
+On 08/09/2013 04:54 AM, Martin Jansa wrote:
+> * when it's not found in target sysroots it's trying to use native one
+>   | cd uhd/1_3.5.3-r3.0/git/host/build/examples && sysroots/x86_64-linux/usr/bin/cmake -E cmake_link_script CMakeFiles/rx_ascii_art_dft.dir/link.txt --verbose=1
+>   | sysroots/x86_64-linux/usr/bin/armv5te-oe-linux-gnueabi/arm-oe-linux-gnueabi-g++    -march=armv5te -marm -mthumb-interwork  --sysroot=sysroots/qemuarm  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -fpermissive -O2 -pipe -g -feliminate-unused-debug-types  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -DNDEBUG  -march=armv5te -marm -mthumb-interwork  --sysroot=sysroots/qemuarm  -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed CMakeFiles/rx_ascii_art_dft.dir/rx_ascii_art_dft.cpp.o  -o rx_ascii_art_dft
+>   -Lsysroots/x86_64-linux/usr/lib -rdynamic ../lib/libuhd.so.003.005 -lcurses sysroots/x86_64-linux/usr/lib/libform.so -lboost_date_time-mt -lboost_filesystem-mt -lboost_program_options-mt -lboost_regex-mt -lboost_system-mt -lboost_thread-mt -lboost_unit_test_framework -lrt -lusb-1.0 -lpthread -ldl -Wl,-rpath,uhd/1_3.5.3-r3.0/git/host/build/lib:sysroots/x86_64-linux/usr/lib:
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: sysroots/x86_64-linux/usr/lib/libform.so: incompatible target
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libncurses.so.5 while searching for libncurses.so.5
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libncurses.so.5 while searching for libncurses.so.5
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: cannot find libncurses.so.5
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: warning: skipping incompatible sysroots/x86_64-linux/usr/lib/libtinfo.so while searching for tinfo
+>   | sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld: error: cannot find -ltinfo
+>   | uhd/1_3.5.3-r3.0/git/host/examples/rx_ascii_art_dft.cpp:149: error: undefined reference to 'initscr'
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-connectivity/uhd/uhd.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
+> index d3cc4c8..476b763 100644
+> --- a/meta-oe/recipes-connectivity/uhd/uhd.inc
+> +++ b/meta-oe/recipes-connectivity/uhd/uhd.inc
+> @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.ettus.com"
+>  LICENSE = "GPLv3+"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=51b35d652c070d136bf20244494be2d3"
+>  
+> -DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native"
+> +DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native ncurses"
+>  RDEPENDS_${PN} += "uhd-firmware"
+>  
+>  PE = "1"
+> 
 
