@@ -1,35 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 41E1D6B5F6
+Return-Path: <ross.burton@intel.com>
+Received: from mail-vc0-f173.google.com (mail-vc0-f173.google.com
+	[209.85.220.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C8A646007B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2013 08:54:02 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id c50so1998378eek.4
+	Fri,  9 Aug 2013 09:19:01 +0000 (UTC)
+Received: by mail-vc0-f173.google.com with SMTP id id13so434353vcb.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2013 01:54:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=43FhBEdI1JLlbWgJJ7QZHPbRjD0yuhTGinXiImIYk2E=;
-	b=0ELeoK0tlRUTM4hx9Ig9JcmNk3IuWyauuwrfNaz26BzP9ECXE2edV0f3cekwbuZ+i8
-	GvH149Cu+X05MeWNfyrM+fIpxpQrvuelEC5jJqPkYPuWjh5MDFVF+fQGDAiJwT5FeD15
-	MWuVd0PcyOS236Ki8g9bNAysEzzjGm2iLxOiZBEPGKAM9fx/e99oB3swHoQkPoTNnZug
-	xikCnq3663Vrye9rx2rnOVpOXwcojhfCYO+ZinwxTzxE2iOVIOR61Wpl8+Oc2U+q6m1J
-	5Dow5e34z30S32RWW/MDaiZcKo8VMuvH/hsCEBhNndpaukG65xmSCXKlBkSqAmfGi6jz
-	gTdg==
-X-Received: by 10.14.211.134 with SMTP id w6mr12365040eeo.26.1376038442554;
-	Fri, 09 Aug 2013 01:54:02 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	t6sm26780455eel.12.2013.08.09.01.54.01 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 09 Aug 2013 01:54:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Aug 2013 10:54:31 +0200
-Message-Id: <1376038471-32202-12-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
+	Fri, 09 Aug 2013 02:19:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=jS8S/p4igC/n2LIW6Uwi4ThGJSDDJ3YrU0ybcGgTz+o=;
+	b=LeKZPnzmNONOG+1c7bAAu/PS0BOQ7RDWYRqO3NrRI6QpJaEglLefDVmCJ1qjqPHqnh
+	nRimbtyWO/qvLAL/SlrZsZjn3Bsu5FD+8EvF4//b8zmgy/HBsyrNiF6zhLpezDwSUxsB
+	FzKikfi7OtWpmZn4oHdykK4raCAPlw5FK4y5AcrjYRbuvpLVDmOL8R7M5m45fKT8j/a4
+	Mzv12bGkF5CRPpCQRPmmsbwTQBU3Ex1T+bKO5dGxLFrsDbXzA06pSCO+oX8zPj2TfE3v
+	setmC62aA/pZ30VfYmPZRQeeOxmilYEDZPC6d6r3MGkzZoCIdRacqI5zNXFLhNCi1iJL
+	/mlQ==
+X-Gm-Message-State: ALoCoQlEK7Wc2cH3xhFu3fMLrTgJ9NwvP4u1fV8tAwixILT/hgK2/NNbmI6+sE7GFyTTLq7u71Jx
+X-Received: by 10.58.219.232 with SMTP id pr8mr5324195vec.80.1376039942154;
+	Fri, 09 Aug 2013 02:19:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.71.201 with HTTP; Fri, 9 Aug 2013 02:18:41 -0700 (PDT)
+In-Reply-To: <1376038471-32202-5-git-send-email-Martin.Jansa@gmail.com>
 References: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 12/12] xfce4-icon-theme: add dependency on intltool-native
+	<1376038471-32202-5-git-send-email-Martin.Jansa@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 9 Aug 2013 10:18:41 +0100
+Message-ID: <CAJTo0LZg4jsH2HT2joWUXcK=8Ao3xBSGKifRt0w4CMC78fLofA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 05/12] libwnck(3): add PACKAGECONFIG for startup-notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2013 08:54:02 -0000
+X-List-Received-Date: Fri, 09 Aug 2013 09:19:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* fails without it:
-  | NOTE: Executing intltoolize --copy --force --automake
-  | xfce4-icon-theme/4.4.3-r0/temp/run.do_configure.2826:
-    intltoolize: not found
-  | ERROR: Function failed: do_configure (log file is located at
-    xfce4-icon-theme/4.4.3-r0/temp/log.do_configure.2826)
+On 9 August 2013 09:54, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * it's autodetected from sysroot and couple of packages are failing
+>   when pkg-config is trying to use libwnck*.pc without
+>   startup-notification in sysroot
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Why not enable this by default?  People who have no need for
+startup-notification can disable it, but this could be surprisingly
+hard to debug if someone tries building e.g. GNOME and wonders why
+they don't have any startup notification hints.
 
-diff --git a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-index 37f88af..f6a9d2b 100644
---- a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-+++ b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-@@ -3,6 +3,8 @@ SECTION = "x11/wm"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
-+DEPENDS = "intltool-native"
-+
- inherit xfce
- 
- SRC_URI = "http://archive.xfce.org/src/art/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
--- 
-1.8.3.2
-
+Ross
 
