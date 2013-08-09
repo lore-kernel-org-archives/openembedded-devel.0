@@ -1,36 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 966946B582
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id E89596B5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Aug 2013 08:53:50 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id h14so1963043eak.1
+	Fri,  9 Aug 2013 08:53:51 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so1994834eek.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Aug 2013 01:53:51 -0700 (PDT)
+	Fri, 09 Aug 2013 01:53:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=0GRdHzP7nh/4I6X1ZsHrH8QK0f2o8AWW8QMF6yBg29g=;
-	b=tlSXSUSabVxipCmKMGNtoOysDNY4HL2nMWu/YMvV4IiSIoIPwwkZqpPo4JClsigOpk
-	e7AXRsaR4I6/AY/9xSwxgM+b8Vca3xAjkj9XdrQo8WwMeWscBtDcQXXDmn26FcYBXLCo
-	HLrnzjMK+AwOBcs5diHg87uJJuI+iAAM6cycvFIzMJvxKzpaMmtn+vpODzS1LI7SjBAZ
-	Aax5sHKWZaq3Db+oi9mum/LSfp7edePq1WOIL50wz/IE/5L4MA/xRBifHP/roNc4Ly8t
-	zLu1lpIPHBfaQp/e3HJvT8wjnalhgXEu0IT8s27docKVM6n/mTTdQ2/4m/oskEXshmKH
-	yu9A==
-X-Received: by 10.14.47.200 with SMTP id t48mr12218722eeb.142.1376038431060;
-	Fri, 09 Aug 2013 01:53:51 -0700 (PDT)
+	bh=3Wth8UIfxOgsnoGi+/FweXVup0sBiWEUr4Dp6ipmjjI=;
+	b=IyLbfSGMHDzUB9GbJpu9o32rp5GHZ2M9sIqQfZOVzosZvkO/ugSCnwyo645sB9WTox
+	2zwFvTcb2eRgjKHtijmqnYFhywSvRqS3WbxsppddJlSm+CkHp8da4JnWvx+pxLfnhyt0
+	A35ql4P5ZCwDSUEv2PTItkYd+bKITndcqRrH8RN1uDZ9dlnByROS/HfY/H6q+gGaYwzp
+	PZeBTfF5Jq2fd5YbbCQo11D72sKhgXSLkdFI7XigUiwB2LqEGi8ZrgD/hs3th1myZCaR
+	TDZCemmGMKDuq+6xt1jiDDSykuZ8E7jYjDKpvhPygBFW6X4lTdmQvjvsQ2/Xx72iE70G
+	cF/Q==
+X-Received: by 10.14.149.3 with SMTP id w3mr12346574eej.84.1376038432385;
+	Fri, 09 Aug 2013 01:53:52 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	bn13sm26780181eeb.11.2013.08.09.01.53.50 for <multiple recipients>
+	m54sm26806670eex.2.2013.08.09.01.53.51 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 09 Aug 2013 01:53:50 -0700 (PDT)
+	Fri, 09 Aug 2013 01:53:51 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Aug 2013 10:54:23 +0200
-Message-Id: <1376038471-32202-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri,  9 Aug 2013 10:54:24 +0200
+Message-Id: <1376038471-32202-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 04/12] mysql-python: add dependency on mysql
+Subject: [meta-oe][PATCH 05/12] libwnck(3): add PACKAGECONFIG for startup-notification
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,45 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2013 08:53:51 -0000
+X-List-Received-Date: Fri, 09 Aug 2013 08:53:52 -0000
 
-* fails without mysql_config:
-  ERROR: Function failed: do_compile (log file is located at mysql-python/1.2.4-r0/temp/log.do_compile.29833)
-  ERROR: Logfile of failure stored in: mysql-python/1.2.4-r0/temp/log.do_compile.29833
-  Log data follows:
-  | DEBUG: Executing shell function do_compile
-  | sh: 1: mysql_config: not found
-  | Traceback (most recent call last):
-  |   File "setup.py", line 18, in <module>
-  |     metadata, options = get_config()
-  |   File "mysql-python/1.2.4-r0/MySQL-python-1.2.4/setup_posix.py", line 43, in get_config
-  |     libs = mysql_config("libs_r")
-  |   File "mysql-python/1.2.4-r0/MySQL-python-1.2.4/setup_posix.py", line 25, in mysql_config
-  |     raise EnvironmentError("%s not found" % (mysql_config.path,))
-  | EnvironmentError: mysql_config not found
-  | ERROR: python setup.py build_ext execution failed.
-  | ERROR: Function failed: do_compile (log file is located at mysql-python/1.2.4-r0/temp/log.do_compile.29833)
-  NOTE: recipe mysql-python-1.2.4-r0: task do_compile: Failed
-  ERROR: Task 6 (meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb, do_compile) failed with exit code '1'
+* it's autodetected from sysroot and couple of packages are failing
+  when pkg-config is trying to use libwnck*.pc without
+  startup-notification in sysroot
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb | 3 +++
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb | 3 +++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb b/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb
-index 37ad21c..678f17c 100644
---- a/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb
-+++ b/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb
-@@ -4,6 +4,8 @@ SECTION = "devel/python"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
+index e54b8d3..20c100a 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
+@@ -9,6 +9,9 @@ DEPENDS = "gobject-introspection-stub gtk+3 gdk-pixbuf-native"
  
-+DEPENDS = "mysql5"
+ PR = "r1"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
 +
- PR = "r0"
- SRCNAME = "MySQL-python"
+ inherit gnome
+ SRC_URI[archive.md5sum] = "e4ea87320dd0600a81c50186e3804aae"
+ SRC_URI[archive.sha256sum] = "4946b612c22d53238810d431f1b05c21f073f201edfd247ff74e2fa228618083"
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
+index 935d4a3..03fbcf5 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
+@@ -7,6 +7,9 @@ PR = "r2"
+ SECTION = "x11/libs"
+ DEPENDS = "gobject-introspection-stub gtk+ gdk-pixbuf-native"
  
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
++
+ inherit gnome
+ SRC_URI[archive.md5sum] = "4162d5b96151e6d24ec02ae3a822203c"
+ SRC_URI[archive.sha256sum] = "56b6681e89cd45491bb640165d62276d81369a08974042b26645dc1e0e954cc1"
 -- 
 1.8.3.2
 
