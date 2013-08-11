@@ -1,25 +1,33 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 2804460780
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B17B61013
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2013 02:10:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7B2AKtK026947
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sun, 11 Aug 2013 07:35:59 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r7B7koFk018391 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Aug 2013 08:46:50 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id qunTQZiVXCrY
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Aug 2013 22:10:21 -0400 (EDT)
-Received: from yow-masselst-d1.wrs.com (128.224.146.23) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Sat, 10 Aug 2013 19:10:26 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <joe.macdonald@windriver.com>, <openembedded-devel@lists.openembedded.org>
-Date: Sat, 10 Aug 2013 22:10:25 -0400
-Message-ID: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-MIME-Version: 1.0
-X-Originating-IP: [128.224.146.23]
-Subject: [meta-networking][PATCH] dnsmasq: don't expect systemd support to be set
+	Sun, 11 Aug 2013 08:46:50 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	r7B7khgp018383
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Aug 2013 08:46:45 +0100
+Message-ID: <1376206543.27470.24.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 11 Aug 2013 08:35:43 +0100
+In-Reply-To: <alpine.DEB.2.02.1308091242270.18531@oneiric>
+References: <alpine.DEB.2.02.1308091242270.18531@oneiric>
+X-Mailer: Evolution 3.6.4-0ubuntu1 
+Mime-Version: 1.0
+Subject: Re: what sources are *not* fetched by a "-c fetchall"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2013 02:10:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 11 Aug 2013 07:35:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-If you don't have 'systemd' set in your DISTRO_FEATURES 'dnsmasq' will
-fail to package due to a QA error;
+On Fri, 2013-08-09 at 12:46 -0400, Robert P. J. Day wrote:
+>   currently testing a build for my beaglebone black using the meta-ti
+> layer and, as i am wont to do, i did a:
+> 
+>   $ bitbake -c fetchall core-image-minimal
+> 
+> to (allegedly) fetch everything i would need for such a build.
+> 
+>   at that point, i did:
+> 
+>   $ bitbake core-image-minimal
+> 
+> and while this is running, i can see more source tarballs being pulled
+> into the downloads directory -- examples:
+> 
+>   * file-5.13.tar.gz
+>   * icu4c-50_1_2-src.tgz
+>   * mklibs_0.1.34.tar.gz
+>   * pcre-8.32.tar.bz2
+> 
+> and perhaps more since the build is not yet done.
+> 
+>   what is it about these particular packages that doesn't fall under
+> the regular fetching from "-c fetchall"?
 
-ERROR: QA Issue: dnsmasq: Files/directories were installed but not shipped
-  /lib
+Which version of bitbake and the metadata was this with? There were some
+issues fixed in that area fairly recently if I remember rightly.
 
-Check for systemd in DISTRO_FEATURES before performing installation
-instructions related to systemd.
+Cheers,
 
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
- meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index 0f5b273..b9e7ff6 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -31,8 +31,10 @@ do_install () {
-     install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
- 
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
-+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
-+    fi
- 
-     if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
-         install -d ${D}${sysconfdir}/dbus-1/system.d
--- 
-1.8.1.2
+Richard
 
 
