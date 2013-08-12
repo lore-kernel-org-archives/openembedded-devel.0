@@ -1,39 +1,34 @@
-Return-Path: <Joe.MacDonald@windriver.com>
-Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CC6A61222;
-	Mon, 12 Aug 2013 11:32:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7CBWT6o020219
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 12 Aug 2013 07:32:30 -0400 (EDT)
-Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 12 Aug 2013 04:32:29 -0700
-Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
-	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id 609777FE3;
-	Mon, 12 Aug 2013 07:31:58 -0400 (EDT)
-Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 9FDBA40498; Mon,
-	12 Aug 2013 07:32:28 -0400 (EDT)
-Date: Mon, 12 Aug 2013 07:32:28 -0400
-From: Joe MacDonald <Joe.MacDonald@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20130812113228.GB3634@windriver.com>
-References: <20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama> <20130622181656.GK14021@jama>
-	<20130725162341.GA3280@jama> <20130808225419.GB17945@jama>
-	<20130811114403.GG17945@jama>
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ve0-f172.google.com (mail-ve0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 71A6A6B582
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Aug 2013 11:45:56 +0000 (UTC)
+Received: by mail-ve0-f172.google.com with SMTP id oz10so5554441veb.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Aug 2013 04:45:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=nyIr0KEagpQ0Bc0ei+pdDCMtMhEMPVsjPQ/Fi77HGQk=;
+	b=zJis1Jod+5KepQXw6sTA6KsnyXso+pghqlwS6SNo1ugOifoujSfM0jMeTcMgOQiamG
+	r/uG0in9AEQoihg2ove6P/IghJQJExQySg80u2rElR/PfmS+8YAf2A2Iz855geOowTUo
+	PMKd6CfLbRBqGp8BbDh7o+i6oh7WvM1cvcmI9gOUPBJTeRVQiP/4x4hNSkWBNTaDbKti
+	Q/elaA4P44ZFcYszihR5C6ccqLLhYVbtay1nSgVEY068bVraExU9KatDZrOun5MBHQvg
+	iUgB/RYgBA9stHeQzOUnLLHggqsi7OIiWnEBdv+XzhAK60HkmVhwP4mROVVMWr18B8Nu
+	wX9w==
 MIME-Version: 1.0
-In-Reply-To: <20130811114403.GG17945@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+X-Received: by 10.52.73.135 with SMTP id l7mr5285071vdv.9.1376307956354; Mon,
+	12 Aug 2013 04:45:56 -0700 (PDT)
+Received: by 10.52.236.133 with HTTP; Mon, 12 Aug 2013 04:45:56 -0700 (PDT)
+In-Reply-To: <1376038471-32202-9-git-send-email-Martin.Jansa@gmail.com>
+References: <1376038471-32202-1-git-send-email-Martin.Jansa@gmail.com>
+	<1376038471-32202-9-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 12 Aug 2013 13:45:56 +0200
+Message-ID: <CALbNGRSr1GJY84hvnhuJ657SrVpTdV=Svk=1DOWxTaKKOQFvrA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 09/12] tumbler: add dependency on xfce4-dev-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,514 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2013 11:32:32 -0000
-X-Groupsio-MsgNum: 45649
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TakKZr9L6Hm6aLOc"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 Aug 2013 11:45:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
---TakKZr9L6Hm6aLOc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Aug 9, 2013 at 10:54 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * tumbler configure needs XDT_I18N macro provided by xfce4-dev-tools
+>   | tumbler-0.1.29/configure: line 13752: syntax error near unexpected token `$linguas'
+>   | tumbler-0.1.29/configure: line 13752: `XDT_I18N($linguas)'
+>   | Configure failed. The contents of all config.log files follows to aid debugging
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
+> index fd28e84..286dad2 100644
+> --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
+> +++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus speci
+>  SECTION = "x11/libs"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> -DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl"
+> +DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools"
+>
+>  inherit xfce
+>
+> --
+> 1.8.3.2
+>
+I think xfce4-dev-tools-native would be the better depends
 
-[Re: [OE-core] State of bitbake world] On 13.08.11 (Sun 13:44) Martin Jansa=
- wrote:
+Andreas
 
-> On Fri, Aug 09, 2013 at 12:54:19AM +0200, Martin Jansa wrote:
-> > On Thu, Jul 25, 2013 at 06:23:41PM +0200, Martin Jansa wrote:
-> > > On Sat, Jun 22, 2013 at 08:16:56PM +0200, Martin Jansa wrote:
-> > > > On Tue, Jun 11, 2013 at 06:04:34PM +0200, Martin Jansa wrote:
-> > > > Last week hero Khem, sent many world fixes, but it seems like some =
-fixes weren't enough
-> > > > (tk, packagekit are still failing - I hope I haven't missed some ot=
-her vN)
-> > > > qemuarm: Summary: 11 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130620_105211.log/
-> > > >=20
-> > > > qemux86: Summary: 14 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130621_023143.log/
-> > > >=20
-> > > > qemux86_64: Summary: 15 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130621_181258.log/
-> > > >=20
-> > > > common (9):
-> > > >   openembedded-core/meta/recipes-qt/qt4/qt4-embedded_4.8.4.bb, do_c=
-ompile
-> > > >   openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.=
-bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.=
-bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_sv=
-n.bb, do_compile
-> > > >   meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_=
-0.5.6.bb, do_compile
-> > > >   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_=
-compile
-> > > >   meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-data-ser=
-ver_git.bb, do_compile
-> > > >   meta-openembedded/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.=
-32.0.bb, do_compile
-> > > >   meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_g=
-it.bb, do_compile
-> > > >=20
-> > > > qemuarm (2):
-> > > >   openembedded-core/meta/recipes-devtools/qemu/qemu_1.5.0.bb, do_co=
-mpile
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_=
-git.bb, do_compile
-> > > >=20
-> > > > qemux86* common (4):
-> > > >   openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-in=
-tel_2.21.9.bb, do_compile
-> > > >   openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_conf=
-igure
-> > > >   meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do=
-_compile
-> > > >=20
-> > > > qemux86 (1):
-> > > >   meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video=
--geode_2.11.14.bb, do_compile
-> > > >=20
-> > > > qemux86-64 (2):=20
-> > > >   meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_co=
-mpile
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/l=
-ibimobiledevice_1.1.4.bb, do_configure
-> > >=20
-> > > This time only qemuarm build:
-> > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.wor=
-ld.20130724_125425.log/
-> > >=20
-> > > Summary: 8 tasks failed
-> > >   openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.bb=
-, do_package
-> > >   meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-data-serve=
-r_git.bb, do_compile
-> > >   meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do=
-_compile
-> > >   meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.=
-bb, do_compile
-> > >   meta-openembedded/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb=
-, do_compile
-> > >   meta-openembedded/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32=
-=2E0.bb, do_compile
-> > >   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_co=
-mpile
-> > >   meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git=
-=2Ebb, do_compile
-> >=20
-> > Again just qemuarm build, but together with test-dependencies.sh run
-> >=20
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130806_055749.log/
-> >=20
-> > Summary: 7 tasks failed:
-> >   meta-qt5/recipes-qt/qt5/qtdeclarative_5.0.2.bb, do_configure
-> >   meta-openembedded/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.=
-bb, do_compile
-> >   meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
-ompile
-> >   meta-openembedded/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb, =
-do_compile
-> >   meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb=
-, do_compile
-> >   meta-openembedded/meta-networking/recipes-protocols/quagga/quagga_0.9=
-9.21.bb, do_compile
-> >   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-> >=20
-> > Most recipes failing with minimal dependencies are fixed in my
-> > jansa/test branches:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130806_055749.log/min_failed/failed/
-> >=20
-> > But many packages still have autodetected deps:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130806_055749.log/dependency-changes.warn
-> >=20
-> > Some recipes create few packages only when dependencies available:
-> > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world=
-=2E20130806_055749.log/dependency-changes.error
-> >=20
-> > Next run shouldn't take long, because I'll be building only recipes
-> > where issues were found.
->=20
-> With fixes sent to ML lately it's a bit better, let me know if someone el=
-se plans to
-> work on this, otherwise I'll start first with oe-core/meta-oe/meta-efl re=
-cipes and
-> leave meta-gnome/meta-xfce last as they have dedicated maintainer.
-
-If you haven't already gotten to quagga, I'll take care of it.
-
--J.
-
->=20
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130808_230701.log
->=20
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130808_230701.log/complete.log
-> Summary: 8 tasks failed:
->   meta-qt5/recipes-qt/qt5/qtdeclarative_5.0.2.bb, do_configure
->   meta-openembedded/meta-oe/recipes-multimedia/mikmod/libmikmod_3.1.12.bb=
-, do_compile
->   meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_com=
-pile
->   meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb, =
-do_compile
->   meta-openembedded/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb, do=
-_compile
->   meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.=
-bb, do_compile
->   meta-openembedded/meta-networking/recipes-protocols/quagga/quagga_0.99.=
-21.bb, do_compile
->   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
->=20
-> 26 recipes with missing deps:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130808_230701.log/min_failed/
->   cheese                 gnome-panel3           libgnomekbd            nu=
-mptyphysics          qt-creator             xfce4-icon-theme
->   devicekit-power        gnome-power-manager    monav                  om=
-gps                  samsung-rfs-mgr
->   devilspie2             gnome-system-monitor   mousepad               op=
-enmoocow             ubi-utils-klibc
->   gcr                    kexec-tools-klibc      mpg123                 pa=
-ckagegroup-shr-feed  webkit-efl
->   gnome-panel            kexecboot-klibc        nautilus3              qc=
-anobserver           xbmc
->=20
-> 134 packages with autodetected deps:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130808_230701.log/dependency-changes.warn
-> WARN: packages/armv5te-oe-linux-gnueabi/abiword/abiword/latest lost depen=
-dency on  enchant
-> WARN: packages/armv5te-oe-linux-gnueabi/abiword/abiword-meta/latest lost =
-dependency on  abiword-plugin-collab
-> WARN: packages/armv5te-oe-linux-gnueabi/aspell/aspell/latest lost depende=
-ncy on  ncurses-libncurses ncurses-libtinfo
-> WARN: packages/armv5te-oe-linux-gnueabi/cherokee/cherokee/latest lost dep=
-endency on  gnutls libavcodec libavformat libavutil libbz2 libcap libgcrypt=
- libgpg-error libtasn1 openldap
-> WARN: packages/armv5te-oe-linux-gnueabi/claws-mail/claws-mail/latest lost=
- dependency on  dbus-glib enchant openldap startup-notification
-> WARN: packages/armv5te-oe-linux-gnueabi/collectd/collectd/latest lost dep=
-endency on  iptables libdbi libmemcached libmodbus libow libowcapi libpq li=
-busb-compat libusb1 lmsensors-libsensors util-linux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/consolekit/consolekit/latest lost=
- dependency on  polkit
-> WARN: packages/armv5te-oe-linux-gnueabi/e-wm/e-wm/latest lost dependency =
-on  libpam
-> WARN: packages/armv5te-oe-linux-gnueabi/edb/edb-tests/latest lost depende=
-ncy on  ncurses-libncurses ncurses-libtinfo
-> WARN: packages/armv5te-oe-linux-gnueabi/entrance/entrance/latest lost dep=
-endency on  consolekit dbus-lib
-> WARN: packages/armv5te-oe-linux-gnueabi/epiphany/epiphany/latest lost dep=
-endency on  libavahi-client libavahi-common libavahi-gobject libnotify
-> WARN: packages/armv5te-oe-linux-gnueabi/evolution-data-server/evolution-d=
-ata-server/latest lost dependency on  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/evolution-data-server/libcamel/la=
-test lost dependency on  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/evolution-data-server/libebook/la=
-test lost dependency on  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/evolution-data-server/libedata-bo=
-ok/latest lost dependency on  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/evolution-data-server/libedataser=
-verui/latest lost dependency on  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/expedite/expedite/latest lost dep=
-endency on  libsdl
-> WARN: packages/armv5te-oe-linux-gnueabi/fbida/fbida/latest lost dependenc=
-y on  libx11 libxext libxpm libxt openmotif
-> WARN: packages/armv5te-oe-linux-gnueabi/firefox/firefox/latest lost depen=
-dency on  libnotify3 nspr
-> WARN: packages/armv5te-oe-linux-gnueabi/firefox/firefox-dev/latest lost d=
-ependency on  nspr
-> WARN: packages/armv5te-oe-linux-gnueabi/fluidsynth/fluidsynth/latest lost=
- dependency on  dbus-lib libcap libice libjack libjson libpulse libpulse-si=
-mple libpulsecommon libsm libsndfile1 libx11 libx11-xcb libxau libxcb libxd=
-mcp libxext libxi libxtst ncurses-libncurses portaudio-v19 readline util-li=
-nux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/foxtrotgps/foxtrotgps/latest lost=
- dependency on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gammu/gammu/latest lost dependenc=
-y on  glib-2.0 libgudev-1.0
-> WARN: packages/armv5te-oe-linux-gnueabi/gammu/libgammu/latest lost depend=
-ency on  glib-2.0
-> WARN: packages/armv5te-oe-linux-gnueabi/gegl/gegl/latest lost dependency =
-on  jasper libavcodec libavformat
-> WARN: packages/armv5te-oe-linux-gnueabi/gimp/gimp/latest lost dependency =
-on  jasper libbz2 libgudev-1.0 libudev libxmu libxpm
-> WARN: packages/armv5te-oe-linux-gnueabi/glade3/glade3/latest lost depende=
-ncy on  dbus-glib dbus-lib gconf gnome-vfs libart-lgpl libavahi-client liba=
-vahi-common libavahi-glib libbonobo libbonoboui libcanberra libcap libgcryp=
-t libgnome libgnome-keyring libgnomecanvas libgnomeui libgpg-error libice l=
-ibltdl libogg libsm libvorbis libxcomposite libxcursor libxdamage libxfixes=
- libxrandr orbit2 popt util-linux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/glib-networking/glib-networking/l=
-atest lost dependency on  p11-kit
-> WARN: packages/armv5te-oe-linux-gnueabi/gmtk/gmtk/latest lost dependency =
-on  cairo-gobject dbus-lib gtk+3 libcap libice libjson libpulse libpulse-ma=
-inloop-glib libpulsecommon libsm libsndfile1 libx11-xcb libxi libxtst util-=
-linux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-control-center/gnome-contro=
-l-center/latest lost dependency on  libcanberra libcanberra-gtk2 libxscrnsa=
-ver
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-desktop/libgnome-desktop/la=
-test lost dependency on  libx11-xcb startup-notification xcb-util
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-desktop3/libgnome-desktop3/=
-latest lost dependency on  libx11-xcb startup-notification xcb-util
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-mplayer/gnome-mplayer/lates=
-t lost dependency on  cairo gtk+3 libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-mplayer/gnome-mplayer-nauti=
-lus-extension/latest lost dependency on  eglibc glib-2.0 gtk+
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-settings-daemon/gnome-setti=
-ngs-daemon/latest lost dependency on  firefox libcanberra libcanberra-gtk2 =
-libcap libjson libltdl libogg libpulse libpulse-mainloop-glib libpulsecommo=
-n libsndfile1 libvorbis libx11-xcb libxtst startup-notification xcb-util
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs/latest lost d=
-ependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-bzip2/=
-latest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-comput=
-er/latest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-dns-sd=
-/latest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-file/l=
-atest lost dependency on  libattr libavahi-client libavahi-common libavahi-=
-glib libgamin
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-ftp/la=
-test lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-gzip/l=
-atest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-http/l=
-atest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-networ=
-k/latest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-nntp/l=
-atest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-sftp/l=
-atest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-tar/la=
-test lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnome-vfs/gnome-vfs-plugin-vfs-te=
-st/latest lost dependency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/gnuplot/gnuplot/latest lost depen=
-dency on  cairo glib-2.0 pango
-> WARN: packages/armv5te-oe-linux-gnueabi/gnuradio/gnuradio/latest lost dep=
-endency on  libjack libpython3 portaudio-v19
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/gps-utils/latest lost depend=
-ency on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/gpsd/latest lost dependency =
-on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/gpsd-gpsctl/latest lost depe=
-ndency on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/libgps/latest lost dependenc=
-y on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/libgpsd/latest lost dependen=
-cy on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gpsd/python-pygps/latest lost dep=
-endency on  bluez4
-> WARN: packages/armv5te-oe-linux-gnueabi/gstreamer1.0-libav/gstreamer1.0-l=
-ibav/latest lost dependency on  liborc-0.4
-> WARN: packages/armv5te-oe-linux-gnueabi/guile/guile/latest lost dependenc=
-y on  ncurses-libncurses readline
-> WARN: packages/armv5te-oe-linux-gnueabi/gvfs/gvfs/latest lost dependency =
-on  bluez4 dbus-glib expat libarchive libcdio libcdio-cdda libcdio-paranoia
-> WARN: packages/armv5te-oe-linux-gnueabi/imagemagick/imagemagick/latest lo=
-st dependency on  jasper
-> WARN: packages/armv5te-oe-linux-gnueabi/imlib2/imlib2-loaders/latest lost=
- dependency on  giflib libbz2 libid3tag liblzma tiff
-> WARN: packages/armv5te-oe-linux-gnueabi/lame/lame/latest lost dependency =
-on  ncurses-libtinfo
-> WARN: packages/armv5te-oe-linux-gnueabi/libav/libavdevice/latest lost dep=
-endency on  libx11 libxext libxfixes
-> WARN: packages/armv5te-oe-linux-gnueabi/libetpan/libetpan/latest lost dep=
-endency on  libcurl
-> WARN: packages/armv5te-oe-linux-gnueabi/libgnome/libgnome/latest lost dep=
-endency on  libavahi-client libavahi-common libavahi-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/libgsf/libgsf/latest lost depende=
-ncy on  gdk-pixbuf
-> WARN: packages/armv5te-oe-linux-gnueabi/libgtop/libgtop/latest lost depen=
-dency on  libxau
-> WARN: packages/armv5te-oe-linux-gnueabi/libmatchbox/libmatchbox/latest lo=
-st dependency on  libpng12
-> WARN: packages/armv5te-oe-linux-gnueabi/libmemcached/libmemcached/latest =
-lost dependency on  cyrus-sasl
-> WARN: packages/armv5te-oe-linux-gnueabi/librsvg/rsvg/latest lost dependen=
-cy on  gdk-pixbuf gtk+
-> WARN: packages/armv5te-oe-linux-gnueabi/libungif/libungif/latest lost dep=
-endency on  libice libsm libx11 libxau libxcb libxdmcp util-linux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/libungif/libungif-utils/latest lo=
-st dependency on  libx11
-> WARN: packages/armv5te-oe-linux-gnueabi/libunique/libunique/latest lost d=
-ependency on  dbus-glib dbus-lib
-> WARN: packages/armv5te-oe-linux-gnueabi/libwnck/libwnck/latest lost depen=
-dency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/libwnck3/libwnck3/latest lost dep=
-endency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/libxklavier/libxklavier/latest lo=
-st dependency on  libxext libxi
-> WARN: packages/armv5te-oe-linux-gnueabi/lightmediascanner/lightmediascann=
-er/latest lost dependency on  libvorbis
-> WARN: packages/armv5te-oe-linux-gnueabi/maliit-framework/maliit-framework=
--gtk/latest lost dependency on  gtk+3
-> WARN: packages/armv5te-oe-linux-gnueabi/matchbox-wm/matchbox-wm/latest lo=
-st dependency on  libxcursor libxfixes
-> WARN: packages/armv5te-oe-linux-gnueabi/metacity/metacity/latest lost dep=
-endency on  libgtop
-> WARN: packages/armv5te-oe-linux-gnueabi/midori/midori/latest lost depende=
-ncy on  libnotify3 libxscrnsaver
-> WARN: packages/armv5te-oe-linux-gnueabi/mkvtoolnix/mkvtoolnix/latest lost=
- dependency on  libflac
-> WARN: packages/armv5te-oe-linux-gnueabi/mpd/mpd/latest lost dependency on=
-  audiofile libcdio libcdio-cdda libcdio-paranoia libjack libmms libmodplug=
- libsoup-2.4 mpg123 wavpack yajl
-> WARN: packages/armv5te-oe-linux-gnueabi/mpeg2dec/mpeg2dec/latest lost dep=
-endency on  libx11 libxext libxv
-> WARN: packages/armv5te-oe-linux-gnueabi/mplayer2/mplayer2/latest lost dep=
-endency on  libxscrnsaver libxxf86dga mpg123
-> WARN: packages/armv5te-oe-linux-gnueabi/navit/navit/latest lost dependenc=
-y on  fribidi
-> WARN: packages/armv5te-oe-linux-gnueabi/navit/navit-graphics-gtk/latest l=
-ost dependency on  imlib2
-> WARN: packages/armv5te-oe-linux-gnueabi/navit/navit-graphics-sdl/latest l=
-ost dependency on  eglibc freetype libjpeg-turbo liblzma libpng libsdl libs=
-dl-image tiff tslib zlib
-> WARN: packages/armv5te-oe-linux-gnueabi/network-manager-applet/network-ma=
-nager-applet/latest lost dependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/networkmanager/networkmanager/lat=
-est lost dependency on  libsoup-2.4
-> WARN: packages/armv5te-oe-linux-gnueabi/nss/nss/latest lost dependency on=
-  firefox
-> WARN: packages/armv5te-oe-linux-gnueabi/openbox/openbox-core/latest lost =
-dependency on  imlib2 libxcursor libxinerama libxrandr startup-notification
-> WARN: packages/armv5te-oe-linux-gnueabi/opencv/libopencv-highgui/latest l=
-ost dependency on  jasper
-> WARN: packages/armv5te-oe-linux-gnueabi/openmotif/openmotif/latest lost d=
-ependency on  libjpeg-turbo libpng zlib
-> WARN: packages/armv5te-oe-linux-gnueabi/orage/orage/latest lost dependenc=
-y on  libnotify3 popt
-> WARN: packages/armv5te-oe-linux-gnueabi/packagekit/packagekit/latest lost=
- dependency on  libarchive libattr
-> WARN: packages/armv5te-oe-linux-gnueabi/proftpd/proftpd/latest lost depen=
-dency on  ncurses-libncurses ncurses-libtinfo
-> WARN: packages/armv5te-oe-linux-gnueabi/python3/python3-misc/latest lost =
-dependency on  liblzma
-> WARN: packages/armv5te-oe-linux-gnueabi/qemu/qemu/latest lost dependency =
-on  cairo firefox gdk-pixbuf gnutls gtk+ libvte ncurses-libncurses ncurses-=
-libtinfo nspr util-linux-libuuid
-> WARN: packages/armv5te-oe-linux-gnueabi/sox/sox/latest lost dependency on=
-  libid3tag libmad libmp3lame
-> WARN: packages/armv5te-oe-linux-gnueabi/subversion/subversion/latest lost=
- dependency on  file
-> WARN: packages/armv5te-oe-linux-gnueabi/synergy/synergy/latest lost depen=
-dency on  libxinerama
-> WARN: packages/armv5te-oe-linux-gnueabi/systemd/systemd/latest lost depen=
-dency on  cryptsetup
-> WARN: packages/armv5te-oe-linux-gnueabi/tcl/tcl-lib/latest lost dependenc=
-y on  zlib
-> WARN: packages/armv5te-oe-linux-gnueabi/telepathy-mission-control/telepat=
-hy-mission-control/latest lost dependency on  libnmglib upower
-> WARN: packages/armv5te-oe-linux-gnueabi/thunar/thunar/latest lost depende=
-ncy on  libnotify3 libpcre
-> WARN: packages/armv5te-oe-linux-gnueabi/thunar-volman/thunar-volman/lates=
-t lost dependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/tracker/tracker/latest lost depen=
-dency on  cairo dbus-glib enca expat fontconfig freetype giflib gnome-panel=
-3 gnutls gstreamer gtk+3 lcms libbz2 libgee libgsf libgstpbutils-0.10 libgs=
-ttag-0.10 libgudev-1.0 liblzma libnmglib libnmutil libpoppler libpoppler-gl=
-ib libtasn1 libudev libunistring libx11 libxau libxcb libxcb-render libxcb-=
-shm libxdmcp libxext libxrender pixman tiff upower
-> WARN: packages/armv5te-oe-linux-gnueabi/tracker/tracker-nautilus-extensio=
-n/latest lost dependency on  libunistring
-> WARN: packages/armv5te-oe-linux-gnueabi/tumbler/tumbler/latest lost depen=
-dency on  gstreamer1.0 libbz2 libgsf libgsttag-1.0 libxml2
-> WARN: packages/armv5te-oe-linux-gnueabi/udisks/udisks/latest lost depende=
-ncy on  parted
-> WARN: packages/armv5te-oe-linux-gnueabi/uhd/uhd/latest lost dependency on=
-  liborc-0.4
-> WARN: packages/armv5te-oe-linux-gnueabi/upower/upower/latest lost depende=
-ncy on  libimobiledevice libplist
-> WARN: packages/armv5te-oe-linux-gnueabi/v4l-utils/v4l-utils/latest lost d=
-ependency on  libx11
-> WARN: packages/armv5te-oe-linux-gnueabi/vagalume/vagalume/latest lost dep=
-endency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/vlc/vlc/latest lost dependency on=
-  atk dbus-glib enca gconf gnome-vfs gtk+ libass libavahi-glib libebml libj=
-ack libjpeg-turbo liblzma libmatroska libmodplug libmpeg2 libmtp libnotify3=
- libproxy libpulse-simple libsdl-image libsmbclient libusb1 libv4l ncurses-=
-libncurses portaudio-v19 readline taglib tiff xcb-util-keysyms
-> WARN: packages/armv5te-oe-linux-gnueabi/weston/weston-examples/latest los=
-t dependency on  libpoppler-glib
-> WARN: packages/armv5te-oe-linux-gnueabi/wget/wget/latest lost dependency =
-on  libpcre
-> WARN: packages/armv5te-oe-linux-gnueabi/wv/wv/latest lost dependency on  =
-libpng
-> WARN: packages/armv5te-oe-linux-gnueabi/x11vnc/x11vnc/latest lost depende=
-ncy on  libxdamage libxfixes libxinerama libxrandr libxtst
-> WARN: packages/armv5te-oe-linux-gnueabi/xchat/xchat/latest lost dependenc=
-y on  dbus-glib libcrypto libssl
-> WARN: packages/armv5te-oe-linux-gnueabi/xdpyinfo/xdpyinfo/latest lost dep=
-endency on  libxcomposite
-> WARN: packages/armv5te-oe-linux-gnueabi/xf86-input-synaptics/xf86-input-s=
-ynaptics/latest lost dependency on  libxtst
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-clipman-plugin/xfce4-clipma=
-n-plugin/latest lost dependency on  libunique
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-closebutton-plugin/xfce4-cl=
-osebutton-plugin/latest lost dependency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-panel/xfce4-panel-plugin-pa=
-ger/latest lost dependency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-panel/xfce4-panel-plugin-sh=
-owdesktop/latest lost dependency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-panel/xfce4-panel-plugin-ta=
-sklist/latest lost dependency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-panel/xfce4-panel-plugin-wi=
-ndowmenu/latest lost dependency on  libxres
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-places-plugin/xfce4-places-=
-plugin/latest lost dependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-power-manager/xfce4-power-m=
-anager/latest lost dependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/xfce4-settings/xfce4-settings/lat=
-est lost dependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/xfdesktop/xfdesktop/latest lost d=
-ependency on  libnotify3
-> WARN: packages/armv5te-oe-linux-gnueabi/xterm/xterm/latest lost dependenc=
-y on  fontconfig libxft
->=20
-> 5 autocreated packages based on deps:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130808_230701.log/dependency-changes.error
-> ERROR: test-dependencies/1376003221/3_min/packages/armv5te-oe-linux-gnuea=
-bi/abiword/abiword-plugin-collab/latest doesn't exist
-> ERROR: test-dependencies/1376003221/3_min/packages/armv5te-oe-linux-gnuea=
-bi/qemu/qemu-locale-de-de/latest doesn't exist
-> ERROR: test-dependencies/1376003221/3_min/packages/armv5te-oe-linux-gnuea=
-bi/qemu/qemu-locale-fr-fr/latest doesn't exist
-> ERROR: test-dependencies/1376003221/3_min/packages/armv5te-oe-linux-gnuea=
-bi/qemu/qemu-locale-it/latest doesn't exist
-> ERROR: test-dependencies/1376003221/3_min/packages/armv5te-oe-linux-gnuea=
-bi/qemu/qemu-locale-tr/latest doesn't exist
->=20
---=20
--Joe MacDonald.
-:wq
-
---TakKZr9L6Hm6aLOc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlIIx8wACgkQPN8S4W6ZZnfZ9ACcDNFc+UDmqBLD6GsuJvdPajQA
-TaEAn0OhnULS0BCeF6+nqdHt6FJixqD3
-=3I6u
------END PGP SIGNATURE-----
-
---TakKZr9L6Hm6aLOc--
