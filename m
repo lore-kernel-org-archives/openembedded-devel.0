@@ -1,26 +1,40 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3405A6B5FE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id A42B061222
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 04:35:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7C4ZsLY008146
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 12 Aug 2013 06:58:17 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id d41so3250672eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2013 21:35:54 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Sun, 11 Aug 2013 21:35:52 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 Aug 2013 12:35:40 +0800
-Message-ID: <10f44aeb482225ca18a91d7512437dfd9ea10dab.1376281943.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1376281943.git.hongxu.jia@windriver.com>
-References: <cover.1376281943.git.hongxu.jia@windriver.com>
+	Sun, 11 Aug 2013 23:58:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=mnUX034KskH7/ALQrgeX5PIGuOLZsXBIsIp452KUJVE=;
+	b=ALhopKDC4zSk9xuc9M/ja9kK2ugFJGB1cpgYHmsrEx8vkHHnglG9rVnbdig29E074h
+	q2Gpl0x4AdcHaNFTEDKWANEz5iDfXUiwyf6NNzUmiAsoZQwSwFqkYrkyf8rigSVWU9Tw
+	Fy3Caka9WVgA5hINyVvWue4qs3G2hfqczYc3OW/6QPeZsE3/WOpGjyHqF7Ja54653SzH
+	GqUPoAM6L01P21ZVv5z35BOVF+QvQIo/2Rxdkfzgn3N8Yyxz/Trekqf1jeI4GUj3iS6+
+	PBxJyyUIhkJ9T5RplnweAP0AEr3t1hNs+CSLMS3LCZhJQt8p0Fmykae2IYr+Eke89r/a
+	vftQ==
+X-Received: by 10.15.63.142 with SMTP id m14mr24029224eex.106.1376290697190;
+	Sun, 11 Aug 2013 23:58:17 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	m54sm54814442eex.2.2013.08.11.23.58.16 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sun, 11 Aug 2013 23:58:16 -0700 (PDT)
+Date: Mon, 12 Aug 2013 08:59:05 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130812065905.GH17945@jama>
+References: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
+	<8194550.0BPKn9U7hO@helios>
 MIME-Version: 1.0
-Subject: [meta-cpan 3/3] libdbd-sqlite-perl: add version 1.40
+In-Reply-To: <8194550.0BPKn9U7hO@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Mark Asselstine <mark.asselstine@windriver.com>,
+	joe.macdonald@windriver.com
+Subject: Re: [meta-networking][PATCH] dnsmasq: don't expect systemd support to be set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,149 +48,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2013 04:35:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 Aug 2013 06:58:18 -0000
+X-Groupsio-MsgNum: 45639
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WIIRZ1HQ6FgrlPgb"
+Content-Disposition: inline
 
-DBD::SQLite is a Perl DBI driver for SQLite, that includes the entire
-thing in the distribution. So in order to get a fast transaction capable
-RDBMS working for your perl project you simply have to install this
-module, and nothing else.
+--WIIRZ1HQ6FgrlPgb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is a perl script for test, while variable PERL_DBM_TEST is assigned
-the value '1', the script will be added, and you could run the script to
-test whether DBD::SQLite is working properly.
+On Sun, Aug 11, 2013 at 09:41:32PM +0100, Paul Eggleton wrote:
+> Hi Mark,
+>=20
+> On Saturday 10 August 2013 22:10:25 Mark Asselstine wrote:
+> > If you don't have 'systemd' set in your DISTRO_FEATURES 'dnsmasq' will
+> > fail to package due to a QA error;
+> >=20
+> > ERROR: QA Issue: dnsmasq: Files/directories were installed but not ship=
+ped
+> >   /lib
+> >=20
+> > Check for systemd in DISTRO_FEATURES before performing installation
+> > instructions related to systemd.
+> >=20
+> > Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+> > ---
+> >  meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
+> > 0f5b273..b9e7ff6 100644
+> > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> > @@ -31,8 +31,10 @@ do_install () {
+> >      install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
+> >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+> >=20
+> > -    install -d ${D}${systemd_unitdir}/system
+> > -    install -m 0644 ${WORKDIR}/dnsmasq.service
+> > ${D}${systemd_unitdir}/system +    if ${@base_contains('DISTRO_FEATURES=
+',
+> > 'systemd', 'true', 'false', d)}; then +        install -d
+> > ${D}${systemd_unitdir}/system
+> > +        install -m 0644 ${WORKDIR}/dnsmasq.service
+> > ${D}${systemd_unitdir}/system +    fi
+> >=20
+> >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
+=3D ""
+> > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
+>=20
+> There's already a global fix for this in OE-Core:
+>=20
+> http://cgit.openembedded.org/openembedded-core/commit/meta/classes/system=
+d.bbclass?id=3Dac5d20f4adac69ea1702694fb50849c9e465b443
 
-[YOCTO #4128]
+I wanted to reply the same, but it doesn't fix empty /lib after
+/lib/systemd is removed.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- recipes-perl/libdb/files/sqlite-perl-test.pl  | 69 +++++++++++++++++++++++++++
- recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb | 39 +++++++++++++++
- 2 files changed, 108 insertions(+)
- create mode 100755 recipes-perl/libdb/files/sqlite-perl-test.pl
- create mode 100644 recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
+We should add this:
+rmdir --ignore-fail-on-non-empty ${D}/lib
 
-diff --git a/recipes-perl/libdb/files/sqlite-perl-test.pl b/recipes-perl/libdb/files/sqlite-perl-test.pl
-new file mode 100755
-index 0000000..40f5916
---- /dev/null
-+++ b/recipes-perl/libdb/files/sqlite-perl-test.pl
-@@ -0,0 +1,69 @@
-+#! /usr/bin/env perl
-+#
-+# This program is free software; you can redistribute it and/or modify
-+# it under the terms of the GNU General Public License as published by
-+# the Free Software Foundation; either version 2 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU General Public License for more details.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program; if not, write to the Free Software Foundation.
-+#
-+# Copyright (C) 2013 Wind River Systems, Inc.
-+#
-+# - It tests DBI and DBD::SQLite could work correctly which means one could
-+#   manipulate sqlite database in perl
-+# - The test includes create/insert/update/delete/select, the five important
-+#   things one can do with a table
-+use DBI;
-+
-+sub execute_sql {
-+    my $dbh = $_[0];
-+    my $sql = $_[1];
-+    my $sth = $dbh->prepare($sql)
-+        or die "Couldn't prepare statement: " . $dbh->errstr;
-+    $sth->execute();
-+    print "$sql\n";
-+    return $sth;
-+}
-+
-+sub select_all {
-+    my $dbh = $_[0];
-+    my $table = $_[1];
-+    my $sth = &execute_sql($dbh, "Select * from $table");
-+
-+    print "-----------------------------------\n";
-+    while (@data = $sth->fetchrow_array()) {
-+        my $name = $data[0];
-+        my $id = $data[1];
-+        print "$name: $id\n";
-+    }
-+    print "\n";
-+
-+    $sth->finish;
-+    return $sth;
-+}
-+
-+# A private, temporary in-memory database is created for the connection.
-+# This in-memory database will vanish when the database connection is
-+# closed. It is handy for your library tests.
-+my $dbfile = ":memory:";
-+my $dbh = DBI->connect("DBI:SQLite:dbname=$dbfile","","")
-+        or die "Couldn't connect to database: " . DBI->errstr;
-+print "Connect to SQLite's in-memory database\n";
-+
-+&execute_sql($dbh, "Create table tbl1(name varchar(10), id smallint)");
-+&execute_sql($dbh, "Insert into tbl1 values('yocto',10)");
-+&execute_sql($dbh, "Insert into tbl1 values('windriver', 20)");
-+&select_all($dbh, "tbl1");
-+
-+&execute_sql($dbh, "Update tbl1 set name = 'oe-core' where id = 10");
-+&execute_sql($dbh, "Delete from tbl1 where id = 20");
-+&select_all($dbh, "tbl1");
-+
-+$dbh->disconnect;
-+print "Test Success\n"
-diff --git a/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb b/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-new file mode 100644
-index 0000000..fad03d8
---- /dev/null
-+++ b/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "A Perl DBI driver for SQLite"
-+DESCRIPTION = "DBD::SQLite is a Perl DBI driver for SQLite, that includes the entire \
-+thing in the distribution. So in order to get a fast transaction capable \
-+RDBMS working for your perl project you simply have to install this \
-+module, and nothing else. \
-+"
-+HOMEPAGE = "http://search.cpan.org/~ishigaki/DBD-SQLite/"
-+
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+DEPENDS += "libdbi-perl-native"
-+RDEPENDS_${PN} += "libdbi-perl \
-+                   sqlite3 \
-+                   perl-module-constant \
-+                   perl-module-locale \
-+                   perl-module-tie-hash \
-+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1726e2117494ba3e13e1c3d93f795360"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
-+           file://sqlite-perl-test.pl \
-+"
-+
-+SRC_URI[md5sum] = "b9876882186499583428b14cf5c0e29c"
-+SRC_URI[sha256sum] = "21fb65e740b6265512c82232b4ad8f75c19ac84c216830112656274eb8e375fb"
-+
-+S = "${WORKDIR}/DBD-SQLite-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
-+
-+do_install_append() {
-+    if [ ${PERL_DBM_TEST} = "1" ]; then
-+        install -m 755 -D ${WORKDIR}/sqlite-perl-test.pl ${D}/${bindir}/sqlite-perl-test.pl
-+    fi
-+}
-+
--- 
-1.8.1.2
+into that global fix to cover also this case.
 
+(I'm intentionally not using base_libdir, because systemd_unitdir is
+also defined as bitbake.conf:export systemd_unitdir =3D "/lib/systemd")
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--WIIRZ1HQ6FgrlPgb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlIIh7kACgkQN1Ujt2V2gBzeCACfec2xOp1PZ3mn/uVDmdQcb880
+F6MAn0ejMeFzDEhLeaheco38/mrmY7/t
+=XCHm
+-----END PGP SIGNATURE-----
+
+--WIIRZ1HQ6FgrlPgb--
