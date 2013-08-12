@@ -1,26 +1,35 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EB0E6B600
+Return-Path: <Joe.MacDonald@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6479761222
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 08:00:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7C80X5L009398
+	Mon, 12 Aug 2013 11:28:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r7CBSp2K025601
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 01:00:33 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Mon, 12 Aug 2013 01:00:31 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 Aug 2013 16:00:21 +0800
-Message-ID: <1013bbb9484e040d579f114a15bbf0f346c771a1.1376294039.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1376294039.git.hongxu.jia@windriver.com>
-References: <cover.1376294039.git.hongxu.jia@windriver.com>
+	Mon, 12 Aug 2013 04:28:51 -0700 (PDT)
+Received: from yow-jmacdona-d1.ottawa.wrs.com (128.224.146.66) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server
+	(TLS) id 14.2.342.3; Mon, 12 Aug 2013 04:28:50 -0700
+Received: from yow-jmacdona-l1 (yow-jmacdona-d2.wrs.com [128.224.146.166])	by
+	yow-jmacdona-d1.ottawa.wrs.com (Postfix) with ESMTP id C86287FE3;
+	Mon, 12 Aug 2013 07:28:19 -0400 (EDT)
+Received: by yow-jmacdona-l1 (Postfix, from userid 1000)	id 0F71240498; Mon,
+	12 Aug 2013 07:28:49 -0400 (EDT)
+Date: Mon, 12 Aug 2013 07:28:49 -0400
+From: Joe MacDonald <Joe.MacDonald@windriver.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
+Message-ID: <20130812112849.GA3634@windriver.com>
+References: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH 3/3] libdbd-sqlite-perl: add version 1.40
+In-Reply-To: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] dnsmasq: don't expect systemd support to be set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,149 +43,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2013 08:00:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 Aug 2013 11:28:55 -0000
+X-Groupsio-MsgNum: 45648
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="d6Gm4EdcadzBjdND"
+Content-Disposition: inline
 
-DBD::SQLite is a Perl DBI driver for SQLite, that includes the entire
-thing in the distribution. So in order to get a fast transaction capable
-RDBMS working for your perl project you simply have to install this
-module, and nothing else.
+--d6Gm4EdcadzBjdND
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is a perl script for test, while variable PERL_DBM_TEST is assigned
-the value '1', the script will be added, and you could run the script to
-test whether DBD::SQLite is working properly.
+Hey Mark,
 
-[YOCTO #4128]
+[[meta-networking][PATCH] dnsmasq: don't expect systemd support to be set] =
+On 13.08.10 (Sat 22:10) Mark Asselstine wrote:
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- recipes-perl/libdb/files/sqlite-perl-test.pl  | 69 +++++++++++++++++++++++++++
- recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb | 39 +++++++++++++++
- 2 files changed, 108 insertions(+)
- create mode 100755 recipes-perl/libdb/files/sqlite-perl-test.pl
- create mode 100644 recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
+> If you don't have 'systemd' set in your DISTRO_FEATURES 'dnsmasq' will
+> fail to package due to a QA error;
+>=20
+> ERROR: QA Issue: dnsmasq: Files/directories were installed but not shipped
+>   /lib
+>=20
+> Check for systemd in DISTRO_FEATURES before performing installation
+> instructions related to systemd.
+>=20
+> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+> ---
+>  meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-n=
+etworking/recipes-support/dnsmasq/dnsmasq.inc
+> index 0f5b273..b9e7ff6 100644
+> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> @@ -31,8 +31,10 @@ do_install () {
+>      install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
+>      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
+> =20
+> -    install -d ${D}${systemd_unitdir}/system
+> -    install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/sy=
+stem
+> +    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d=
+)}; then
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir=
+}/system
+> +    fi
+> =20
+>      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
+=3D "" ]; then
+>          install -d ${D}${sysconfdir}/dbus-1/system.d
 
-diff --git a/recipes-perl/libdb/files/sqlite-perl-test.pl b/recipes-perl/libdb/files/sqlite-perl-test.pl
-new file mode 100755
-index 0000000..40f5916
---- /dev/null
-+++ b/recipes-perl/libdb/files/sqlite-perl-test.pl
-@@ -0,0 +1,69 @@
-+#! /usr/bin/env perl
-+#
-+# This program is free software; you can redistribute it and/or modify
-+# it under the terms of the GNU General Public License as published by
-+# the Free Software Foundation; either version 2 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU General Public License for more details.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program; if not, write to the Free Software Foundation.
-+#
-+# Copyright (C) 2013 Wind River Systems, Inc.
-+#
-+# - It tests DBI and DBD::SQLite could work correctly which means one could
-+#   manipulate sqlite database in perl
-+# - The test includes create/insert/update/delete/select, the five important
-+#   things one can do with a table
-+use DBI;
-+
-+sub execute_sql {
-+    my $dbh = $_[0];
-+    my $sql = $_[1];
-+    my $sth = $dbh->prepare($sql)
-+        or die "Couldn't prepare statement: " . $dbh->errstr;
-+    $sth->execute();
-+    print "$sql\n";
-+    return $sth;
-+}
-+
-+sub select_all {
-+    my $dbh = $_[0];
-+    my $table = $_[1];
-+    my $sth = &execute_sql($dbh, "Select * from $table");
-+
-+    print "-----------------------------------\n";
-+    while (@data = $sth->fetchrow_array()) {
-+        my $name = $data[0];
-+        my $id = $data[1];
-+        print "$name: $id\n";
-+    }
-+    print "\n";
-+
-+    $sth->finish;
-+    return $sth;
-+}
-+
-+# A private, temporary in-memory database is created for the connection.
-+# This in-memory database will vanish when the database connection is
-+# closed. It is handy for your library tests.
-+my $dbfile = ":memory:";
-+my $dbh = DBI->connect("DBI:SQLite:dbname=$dbfile","","")
-+        or die "Couldn't connect to database: " . DBI->errstr;
-+print "Connect to SQLite's in-memory database\n";
-+
-+&execute_sql($dbh, "Create table tbl1(name varchar(10), id smallint)");
-+&execute_sql($dbh, "Insert into tbl1 values('yocto',10)");
-+&execute_sql($dbh, "Insert into tbl1 values('windriver', 20)");
-+&select_all($dbh, "tbl1");
-+
-+&execute_sql($dbh, "Update tbl1 set name = 'oe-core' where id = 10");
-+&execute_sql($dbh, "Delete from tbl1 where id = 20");
-+&select_all($dbh, "tbl1");
-+
-+$dbh->disconnect;
-+print "Test Success\n"
-diff --git a/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb b/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-new file mode 100644
-index 0000000..fad03d8
---- /dev/null
-+++ b/recipes-perl/libdb/libdbd-sqlite-perl_1.40.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "A Perl DBI driver for SQLite"
-+DESCRIPTION = "DBD::SQLite is a Perl DBI driver for SQLite, that includes the entire \
-+thing in the distribution. So in order to get a fast transaction capable \
-+RDBMS working for your perl project you simply have to install this \
-+module, and nothing else. \
-+"
-+HOMEPAGE = "http://search.cpan.org/~ishigaki/DBD-SQLite/"
-+
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+DEPENDS += "libdbi-perl-native"
-+RDEPENDS_${PN} += "libdbi-perl \
-+                   sqlite3 \
-+                   perl-module-constant \
-+                   perl-module-locale \
-+                   perl-module-tie-hash \
-+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1726e2117494ba3e13e1c3d93f795360"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
-+           file://sqlite-perl-test.pl \
-+"
-+
-+SRC_URI[md5sum] = "b9876882186499583428b14cf5c0e29c"
-+SRC_URI[sha256sum] = "21fb65e740b6265512c82232b4ad8f75c19ac84c216830112656274eb8e375fb"
-+
-+S = "${WORKDIR}/DBD-SQLite-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
-+
-+do_install_append() {
-+    if [ ${PERL_DBM_TEST} = "1" ]; then
-+        install -m 755 -D ${WORKDIR}/sqlite-perl-test.pl ${D}/${bindir}/sqlite-perl-test.pl
-+    fi
-+}
-+
--- 
-1.8.1.2
+My first reaction to this was we just had it fixed in oe-core quite
+recently, but Martin identified a condition that's not covered (yet) in
+the oe-core fix.  That said, I'm going to wait for the oe-core fix,
+since right now I'd rather weed out any systemd on/off handling in
+meta-networking.
 
+--=20
+-Joe MacDonald.
+:wq
 
+--d6Gm4EdcadzBjdND
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlIIxu4ACgkQPN8S4W6ZZnchzwCeKvHkW5qK4Vt/Znf3GI81gasS
+oakAnRc1jZ645TthhxFmqIPfENi+aT2j
+=EudY
+-----END PGP SIGNATURE-----
+
+--d6Gm4EdcadzBjdND--
