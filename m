@@ -1,29 +1,38 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B947161222
+Return-Path: <joe@deserted.net>
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B6C4261222
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 12:25:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r7CCPau9001118
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 12 Aug 2013 05:25:36 -0700 (PDT)
-Received: from yow-masselst-d1.localnet (128.224.146.23) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.2.342.3; Mon, 12 Aug 2013 05:25:36 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 12 Aug 2013 08:25:45 -0400
-Message-ID: <2627145.WSXbXYcGLU@yow-masselst-d1>
-Organization: Wind River Internation Inc.
-User-Agent: KMail/4.10.5 (Linux/3.8.0-26-generic; KDE/4.10.5; x86_64; ; )
-In-Reply-To: <20130812065905.GH17945@jama>
-References: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
-	<8194550.0BPKn9U7hO@helios> <20130812065905.GH17945@jama>
+	Mon, 12 Aug 2013 13:05:37 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id h10so3440474eaj.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Aug 2013 06:05:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=w879hW/MkLWBxaMn39rAbyPi+iJwUjOqH9DvblDIEEs=;
+	b=HBuZ1mPhowtO1gQLEs1EsxybePAwqyOjcGsCTUB0uXG4NQP9JStGRFRf7Z1jckPR7P
+	SVhDp40+yqLVP+IlMBK67e+50cTPFirECX99GWkBedLK+8PK98y77z300vxodk1qXz/8
+	1QHmqoGOx9ntsZSVhJ/0EKTpbSDfqbxgptNer4vBWYOpsXKCxTZRwaTqKx9xAmKwlWHN
+	uQCOTtG8sGfwqjLx+UyW5ECXhRdT/rBm5ZPAjJ+oHU6GjueCY4YTgp/39/Wu2vFPA75D
+	5nX4M+ev/UBGOf2DYEjdjyXwIUfsinr3yOuCUFRfvxoXNnc2rKAaITDuGPRhnNOpHzo+
+	QErw==
+X-Gm-Message-State: ALoCoQmNgZLiPQWmdKVDm+gnRKqItJ6L30vr2O+6z7NWbb6JOgf7lLPEewlS/E3Nz8OhsCTyL6Ne
+X-Received: by 10.15.24.129 with SMTP id j1mr25956033eeu.17.1376312737599;
+	Mon, 12 Aug 2013 06:05:37 -0700 (PDT)
+Received: from burninator.wrs.com ([128.224.252.2])
+	by mx.google.com with ESMTPSA id p5sm57201932eeg.5.2013.08.12.06.05.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 12 Aug 2013 06:05:36 -0700 (PDT)
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 12 Aug 2013 09:05:23 -0400
+Message-Id: <1376312723-5608-1-git-send-email-joe@deserted.net>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Originating-IP: [128.224.146.23]
-Cc: openembedded-devel@lists.openembedded.org, joe.macdonald@windriver.com
-Subject: Re: [meta-networking][PATCH] dnsmasq: don't expect systemd support to be set
+Subject: [meta-networking][PATCH] quagga: backport documentation patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,79 +46,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2013 12:25:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 12 Aug 2013 13:05:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On August 12, 2013 08:59:05 Martin Jansa wrote:
-> On Sun, Aug 11, 2013 at 09:41:32PM +0100, Paul Eggleton wrote:
-> > Hi Mark,
-> > 
-> > On Saturday 10 August 2013 22:10:25 Mark Asselstine wrote:
-> > > If you don't have 'systemd' set in your DISTRO_FEATURES 'dnsmasq' will
-> > > fail to package due to a QA error;
-> > > 
-> > > ERROR: QA Issue: dnsmasq: Files/directories were installed but not
-> > > shipped
-> > > 
-> > >   /lib
-> > > 
-> > > Check for systemd in DISTRO_FEATURES before performing installation
-> > > instructions related to systemd.
-> > > 
-> > > Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-> > > ---
-> > > 
-> > >  meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 6 ++++--
-> > >  1 file changed, 4 insertions(+), 2 deletions(-)
-> > > 
-> > > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
-> > > 0f5b273..b9e7ff6 100644
-> > > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > > @@ -31,8 +31,10 @@ do_install () {
-> > > 
-> > >      install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
-> > >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
-> > > 
-> > > -    install -d ${D}${systemd_unitdir}/system
-> > > -    install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > ${D}${systemd_unitdir}/system +    if
-> > > ${@base_contains('DISTRO_FEATURES',
-> > > 'systemd', 'true', 'false', d)}; then +        install -d
-> > > ${D}${systemd_unitdir}/system
-> > > +        install -m 0644 ${WORKDIR}/dnsmasq.service
-> > > ${D}${systemd_unitdir}/system +    fi
-> > > 
-> > >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
-> > >      ""
-> > > 
-> > > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
-> > 
-> > There's already a global fix for this in OE-Core:
-> > 
-> > http://cgit.openembedded.org/openembedded-core/commit/meta/classes/systemd
-> > .bbclass?id=ac5d20f4adac69ea1702694fb50849c9e465b443
-> I wanted to reply the same, but it doesn't fix empty /lib after
-> /lib/systemd is removed.
+The latest stable quagga adopted this patch:
 
-Correct, /lib hanging around is not corrected by the fix Paul mentions. I am 
-fine with the more global solution trumping my fix and Joe has already 
-indicated that he will wait for this to resolve this issue. Thanks for having 
-a look and getting this fixed for everyone.
+   http://git.savannah.gnu.org/gitweb/?p=quagga.git;a=commit;h=b58c90807c9d0bfa9601704c7490a16070906004
 
-Mark 
+to repair a documentation build error.  Trivial backport.
 
-> 
-> We should add this:
-> rmdir --ignore-fail-on-non-empty ${D}/lib
-> 
-> into that global fix to cover also this case.
-> 
-> (I'm intentionally not using base_libdir, because systemd_unitdir is
-> also defined as bitbake.conf:export systemd_unitdir = "/lib/systemd")
-> 
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Joe MacDonald <joe@deserted.net>
+---
+ ...1-doc-fix-makeinfo-errors-and-one-warning.patch |   61 ++++++++++++++++++++
+ .../recipes-protocols/quagga/quagga_0.99.21.bb     |    2 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/0001-doc-fix-makeinfo-errors-and-one-warning.patch
+
+diff --git a/meta-networking/recipes-protocols/quagga/files/0001-doc-fix-makeinfo-errors-and-one-warning.patch b/meta-networking/recipes-protocols/quagga/files/0001-doc-fix-makeinfo-errors-and-one-warning.patch
+new file mode 100644
+index 0000000..24fdac5
+--- /dev/null
++++ b/meta-networking/recipes-protocols/quagga/files/0001-doc-fix-makeinfo-errors-and-one-warning.patch
+@@ -0,0 +1,61 @@
++From d6cbd8bbc34529a1aff74b5ee73366b89526c961 Mon Sep 17 00:00:00 2001
++From: Joe MacDonald <joe@deserted.net>
++Date: Fri, 22 Mar 2013 08:54:44 +0000
++Subject: [PATCH] doc: fix makeinfo errors and one warning
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++commit 4afa50b added few lines that are syntactically incorrect
++with leading plus sign.
++
++Upstream-Status: Backport [http://git.savannah.gnu.org/gitweb/?p=quagga.git;a=commit;h=b58c90807c9d0bfa9601704c7490a16070906004]
++
++Cc: Denis Ovsienko <infrastation@yandex.ru>
++Signed-off-by: Timo Teräs <timo.teras@iki.fi>
++Signed-off-by: David Lamparter <equinox@opensourcerouting.org>
++Signed-off-by: Joe MacDonald <joe@deserted.net>
++---
++ doc/ipv6.texi   |    4 ++--
++ doc/quagga.texi |    6 +++---
++ 2 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/doc/ipv6.texi b/doc/ipv6.texi
++index b6cc437..2482c1c 100644
++--- a/doc/ipv6.texi
+++++ b/doc/ipv6.texi
++@@ -136,8 +136,8 @@ for the lowest preference possible.
++ Default: 0
++ @end deffn
++ 
++-+@deffn {Interface Command} {ipv6 nd home-agent-lifetime <0-65520>} {}
++-+@deffnx {Interface Command} {no ipv6 nd home-agent-lifetime [<0-65520>]} {}
+++@deffn {Interface Command} {ipv6 nd home-agent-lifetime <0-65520>} {}
+++@deffnx {Interface Command} {no ipv6 nd home-agent-lifetime [<0-65520>]} {}
++ The value to be placed in Home Agent Option, when Home Agent config flag is set, 
++ which indicates to hosts Home Agent Lifetime. The default value of 0 means to
++ place the current Router Lifetime value.
++diff --git a/doc/quagga.texi b/doc/quagga.texi
++index ff913aa..b4105ac 100644
++--- a/doc/quagga.texi
+++++ b/doc/quagga.texi
++@@ -1,13 +1,13 @@
++ \input texinfo @c -*- texinfo -*-
+++@c Set variables - sourced from defines.texi
+++@include defines.texi
+++
++ @c %**start of header
++ @setchapternewpage odd
++ @settitle @uref{http://www.quagga.net,,@value{PACKAGE_NAME}}
++ @setfilename quagga.info
++ @c %**end of header
++ 
++-@c Set variables - sourced from defines.texi
++-@include defines.texi
++-
++ @c automake will automatically generate version.texi
++ @c and set EDITION, VERSION, UPDATED and UPDATED-MONTH
++ @include version.texi
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+index 5c403a9..2b46930 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
++++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+@@ -2,6 +2,8 @@ require quagga.inc
+ 
+ PR = "${INC_PR}.0"
+ 
++SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch"
++
+ SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
+ SRC_URI[quagga-0.99.21.sha256sum] = "9b8aea9026b4771a28e254a66cbd854723bcd0d71eebd0201d11838d4eb392ee"
+ 
+-- 
+1.7.10.4
+
 
