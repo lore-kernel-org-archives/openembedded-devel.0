@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id A42B061222
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 976876B110
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 06:58:17 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id d41so3250672eek.36
+	Mon, 12 Aug 2013 07:02:44 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id d49so3248510eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Aug 2013 23:58:17 -0700 (PDT)
+	Mon, 12 Aug 2013 00:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=mnUX034KskH7/ALQrgeX5PIGuOLZsXBIsIp452KUJVE=;
-	b=ALhopKDC4zSk9xuc9M/ja9kK2ugFJGB1cpgYHmsrEx8vkHHnglG9rVnbdig29E074h
-	q2Gpl0x4AdcHaNFTEDKWANEz5iDfXUiwyf6NNzUmiAsoZQwSwFqkYrkyf8rigSVWU9Tw
-	Fy3Caka9WVgA5hINyVvWue4qs3G2hfqczYc3OW/6QPeZsE3/WOpGjyHqF7Ja54653SzH
-	GqUPoAM6L01P21ZVv5z35BOVF+QvQIo/2Rxdkfzgn3N8Yyxz/Trekqf1jeI4GUj3iS6+
-	PBxJyyUIhkJ9T5RplnweAP0AEr3t1hNs+CSLMS3LCZhJQt8p0Fmykae2IYr+Eke89r/a
-	vftQ==
-X-Received: by 10.15.63.142 with SMTP id m14mr24029224eex.106.1376290697190;
-	Sun, 11 Aug 2013 23:58:17 -0700 (PDT)
+	bh=4XQM4NrtTc+MBxMPyFRThJIhyfpd10Hgm2EfuEiUiQQ=;
+	b=EHz34eyM1ztxMi1LOcu1SzC+BIFvX8LqvIv1zG+/aHn5FcXnbpNsmACtW3ubXH19ay
+	Lq+AuaFWVtljR2DrvDVFdrscbUWhWppz4nvBJ4PFVGya75ReIZaGZdxael5AYsZGDaF6
+	L6xqcmlL8n8yJEuQ/zahaxk3OBXykx6COzKiEq37uixHYrgr8iHcxtgvDmUGTDUJ4Y9S
+	eXaZwaczUMcPzukjnwXs0eFfrEj9W2SxhSTYxSMMBXRCsKGHzuOZ8PZl6RKGfxydxxZO
+	Fc9HvTJ65GceB29Nv7+rzP4Y5eUgkyyAd16v8x5UIAJPtS3hk5mz1BsQ7Qre0OxLUn2f
+	m7Yg==
+X-Received: by 10.15.98.203 with SMTP id bj51mr24376626eeb.22.1376290964830;
+	Mon, 12 Aug 2013 00:02:44 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	m54sm54814442eex.2.2013.08.11.23.58.16 for <multiple recipients>
+	k3sm54865041een.16.2013.08.12.00.02.44
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 11 Aug 2013 23:58:16 -0700 (PDT)
-Date: Mon, 12 Aug 2013 08:59:05 +0200
+	Mon, 12 Aug 2013 00:02:44 -0700 (PDT)
+Date: Mon, 12 Aug 2013 09:03:33 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130812065905.GH17945@jama>
-References: <1376187025-22368-1-git-send-email-mark.asselstine@windriver.com>
-	<8194550.0BPKn9U7hO@helios>
+Message-ID: <20130812070333.GI17945@jama>
+References: <cover.1376281943.git.hongxu.jia@windriver.com>
+	<b924f5411208349fcab702a887b1bfd30a182fd7.1376281943.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <8194550.0BPKn9U7hO@helios>
+In-Reply-To: <b924f5411208349fcab702a887b1bfd30a182fd7.1376281943.git.hongxu.jia@windriver.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	joe.macdonald@windriver.com
-Subject: Re: [meta-networking][PATCH] dnsmasq: don't expect systemd support to be set
+Subject: Re: [meta-cpan 1/3] meta-cpan creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,87 +47,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2013 06:58:18 -0000
-X-Groupsio-MsgNum: 45639
+X-List-Received-Date: Mon, 12 Aug 2013 07:02:45 -0000
+X-Groupsio-MsgNum: 45640
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WIIRZ1HQ6FgrlPgb"
+	protocol="application/pgp-signature"; boundary="BghK6+krpKHjj+jk"
 Content-Disposition: inline
 
---WIIRZ1HQ6FgrlPgb
+--BghK6+krpKHjj+jk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 11, 2013 at 09:41:32PM +0100, Paul Eggleton wrote:
-> Hi Mark,
+On Mon, Aug 12, 2013 at 12:35:38PM +0800, Hongxu Jia wrote:
+> ---
+>  COPYING.MIT     | 17 +++++++++++
+>  README          | 88 +++++++++++++++++++++++++++++++++++++++++++++++++++=
+++++++
+>  conf/layer.conf | 10 +++++++
+>  3 files changed, 115 insertions(+)
+>  create mode 100644 COPYING.MIT
+>  create mode 100644 README
+>  create mode 100644 conf/layer.conf
 >=20
-> On Saturday 10 August 2013 22:10:25 Mark Asselstine wrote:
-> > If you don't have 'systemd' set in your DISTRO_FEATURES 'dnsmasq' will
-> > fail to package due to a QA error;
-> >=20
-> > ERROR: QA Issue: dnsmasq: Files/directories were installed but not ship=
-ped
-> >   /lib
-> >=20
-> > Check for systemd in DISTRO_FEATURES before performing installation
-> > instructions related to systemd.
-> >=20
-> > Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-> > ---
-> >  meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc index
-> > 0f5b273..b9e7ff6 100644
-> > --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> > @@ -31,8 +31,10 @@ do_install () {
-> >      install -m 644 ${WORKDIR}/dnsmasq.conf ${D}${sysconfdir}/
-> >      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
-> >=20
-> > -    install -d ${D}${systemd_unitdir}/system
-> > -    install -m 0644 ${WORKDIR}/dnsmasq.service
-> > ${D}${systemd_unitdir}/system +    if ${@base_contains('DISTRO_FEATURES=
-',
-> > 'systemd', 'true', 'false', d)}; then +        install -d
-> > ${D}${systemd_unitdir}/system
-> > +        install -m 0644 ${WORKDIR}/dnsmasq.service
-> > ${D}${systemd_unitdir}/system +    fi
-> >=20
-> >      if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
-=3D ""
-> > ]; then install -d ${D}${sysconfdir}/dbus-1/system.d
+> diff --git a/COPYING.MIT b/COPYING.MIT
+> new file mode 100644
+> index 0000000..89de354
+> --- /dev/null
+> +++ b/COPYING.MIT
+> @@ -0,0 +1,17 @@
+> +Permission is hereby granted, free of charge, to any person obtaining a =
+copy
+> +of this software and associated documentation files (the "Software"), to=
+ deal
+> +in the Software without restriction, including without limitation the ri=
+ghts
+> +to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> +copies of the Software, and to permit persons to whom the Software is
+> +furnished to do so, subject to the following conditions:
+> +
+> +The above copyright notice and this permission notice shall be included =
+in
+> +all copies or substantial portions of the Software.
+> +
+> +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS =
+OR
+> +IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> +FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL =
+THE
+> +AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> +LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING =
+FROM,
+> +OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> +THE SOFTWARE.
+> diff --git a/README b/README
+> new file mode 100644
+> index 0000000..091da85
+> --- /dev/null
+> +++ b/README
+> @@ -0,0 +1,88 @@
+> +meta-cpan
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +This layer provides commonly-used perl libraries in the Comprehensive
+> +Perl Archive Network.
+> +
+> +Contents and Help
+> +-----------------
+> +
+> +In this section the contents of the layer is listed, along with a short
+> +help for each package.
+> +
+> +         -- libdbi-perl --
+> +         The DBI is a database access module for the Perl programming la=
+nguage.
+> +         It defines a set of methods, variables, and conventions that pr=
+ovide
+> +         a consistent database interface, independent of the actual data=
+base
+> +         being used.
+> +                      |<- Scope of DBI ->|
+> +                           .-.   .--------------.   .-------------.
+> +           .-------.       | |---| XYZ Driver   |---| XYZ Engine  |
+> +           | Perl  |       | |   `--------------'   `-------------'
+> +           | script|  |A|  |D|   .--------------.   .-------------.
+> +           | using |--|P|--|B|---|Oracle Driver |---|Oracle Engine|
+> +           | DBI   |  |I|  |I|   `--------------'   `-------------'
+> +           | API   |       | |...
+> +           |methods|       | |... Other drivers
+> +           `-------'       | |...
+> +                           `-'
+> +
+> +        -- libdbd-sqlite-perl --
+> +        DBD::SQLite is a Perl DBI driver for SQLite, that includes the e=
+ntire
+> +        thing in the distribution. So in order to get a fast transaction=
+ capable
+> +        RDBMS working for your perl project you simply have to install t=
+his
+> +        module, and nothing else.
+> +
+> +        usage: there is a test case to show you how it works
+> +
+> +        1) vim local.conf:
+> +        ...
+> +        IMAGE_INSTALL_append =3D " libdbd-sqlite-perl"
+> +        PERL_DBM_TEST =3D "1"
+> +        ...
+> +        2) build core-image-sato and boot the target
+> +
+> +        3) run "sqlite-perl-test.pl" on target. This script includes five
+> +           operations create/insert/update/delete/select to do with a ta=
+ble.
+> +
+> +        More information can be found in the recipe's git log.
+> +
+> +Dependencies
+> +------------
+> +
+> +This layer depends on:
+> +
+> +  URI: git://git.openembedded.org/openembedded-core
+> +  branch: master
+> +  revision: HEAD
+> +  prio: default
+> +
+> +Adding the meta-cpan layer to your build
+> +---------------------------------------
+> +
+> +In order to use this layer, you need to make the build system aware of
+> +it.
+> +
+> +Assuming the meta-cpan layer exists at the top-level of your
+> +yocto build tree, you can add it to the build system by adding the
+> +location of the meta-cpan layer to bblayers.conf, along with any
+> +other layers needed. e.g.:
+> +
+> +  BBLAYERS ?=3D " \
+> +    /path/to/oe-core/meta \
+> +    /path/to/layer/meta-cpan \
+> +
+> +Maintenance
+> +-----------
+> +
+> +Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g with
+> +'[meta-cpan]' in the subject.
+
+Looks good, but it would be nice to add git send-email example like
+other layer/README have in meta-oe (maybe except meta-networking).
+
+> +
+> +Layer maintainer: Hongxu Jia <hongxu.jia@windriver.com>
+> +
+> +License
+> +-------
+> +
+> +All metadata is MIT licensed unless otherwise stated. Source code includ=
+ed
+> +in tree for individual recipes is under the LICENSE stated in each recipe
+> +(.bb file) unless otherwise stated.
+> +
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> new file mode 100644
+> index 0000000..11da11f
+> --- /dev/null
+> +++ b/conf/layer.conf
+> @@ -0,0 +1,10 @@
+> +# We have a conf and classes directory, add to BBPATH
+> +BBPATH .=3D ":${LAYERDIR}"
+> +
+> +# We have recipes-* directories, add to BBFILES
+> +BBFILES +=3D "${LAYERDIR}/recipes-*/*/*.bb \
+> +	${LAYERDIR}/recipes-*/*/*.bbappend"
+> +
+> +BBFILE_COLLECTIONS +=3D "perl"
+
+I don't have strong opinion either way, but lets call this layer
+meta-perl or meta-cpan and use the same name in BBFILE_COLLECTIONS.
+
+meta-perl would be more generic (matching with meta-ruby) and maybe
+we'll need to add some perl related recipes which aren't from cpan?
+
+> +BBFILE_PATTERN_perl =3D "^${LAYERDIR}/"
+> +BBFILE_PRIORITY_perl =3D "6"
+> --=20
+> 1.8.1.2
 >=20
-> There's already a global fix for this in OE-Core:
->=20
-> http://cgit.openembedded.org/openembedded-core/commit/meta/classes/system=
-d.bbclass?id=3Dac5d20f4adac69ea1702694fb50849c9e465b443
-
-I wanted to reply the same, but it doesn't fix empty /lib after
-/lib/systemd is removed.
-
-We should add this:
-rmdir --ignore-fail-on-non-empty ${D}/lib
-
-into that global fix to cover also this case.
-
-(I'm intentionally not using base_libdir, because systemd_unitdir is
-also defined as bitbake.conf:export systemd_unitdir =3D "/lib/systemd")
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---WIIRZ1HQ6FgrlPgb
+--BghK6+krpKHjj+jk
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.20 (GNU/Linux)
 
-iEYEARECAAYFAlIIh7kACgkQN1Ujt2V2gBzeCACfec2xOp1PZ3mn/uVDmdQcb880
-F6MAn0ejMeFzDEhLeaheco38/mrmY7/t
-=XCHm
+iEYEARECAAYFAlIIiMUACgkQN1Ujt2V2gBzkrwCeOeB9/GQKqVCarrLuw2s3Y88k
+CRsAn1/T9bOwEdktz/ZGoy9SmLzlaSoC
+=XkVX
 -----END PGP SIGNATURE-----
 
---WIIRZ1HQ6FgrlPgb--
+--BghK6+krpKHjj+jk--
