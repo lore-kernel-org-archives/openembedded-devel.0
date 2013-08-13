@@ -1,39 +1,26 @@
-Return-Path: <erik.boto@pelagicore.com>
-Received: from mail-la0-f50.google.com (mail-la0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 61D2C60664
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 068526A994
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2013 06:47:36 +0000 (UTC)
-Received: by mail-la0-f50.google.com with SMTP id fn20so5422634lab.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Aug 2013 23:47:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=Zmf5Waus+SksceyvxmCb6ad78hy0IDGvjE6EWxmv2Do=;
-	b=luW18rzimTYeahFqR7Qxzcq0FieOPLhkPo2dP9Yv4qy0bI+OhFFBohZumdxBQ8y/kI
-	2lWsccK4/esvRLLmF1VoF5fyJRkO/9h3fshgCv5ia/GioXB833rRFdlWIRQtqlRNHHN2
-	Uc2x9CmQrdIHHQk0fv0AV1AW3/XDVfKDPgkOeHfn2BQuZwKB6Q9EwZZpbBw50SZgyF7h
-	uT708tIn0rtOfx3pUSI467EiHqmYR8XB2Aldb03zv052vu6It5NUlan4ANtUWitijfrG
-	M7MK5aEWRtKtUFlxDShJlEjhIkRfA6zHDEac+4trMChvcsyMNR96rfGlUa6kl+CgZz3X
-	MugQ==
-X-Gm-Message-State: ALoCoQksfjKRkm/DS4QoNj/ogEX2lUJecHGyQ6dxEdMK6IkB3ZwNyHGrGl2UGfzZeyg62aN5b59q
-X-Received: by 10.152.115.242 with SMTP id jr18mr157391lab.40.1376376455877;
-	Mon, 12 Aug 2013 23:47:35 -0700 (PDT)
-Received: from erik-mbook.office.pelagicore.net
-	(194-237-7-146.customer.telia.com. [194.237.7.146])
-	by mx.google.com with ESMTPSA id
-	js17sm13340741lab.5.2013.08.12.23.47.34 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 12 Aug 2013 23:47:34 -0700 (PDT)
-From: =?UTF-8?q?Erik=20Bot=C3=B6?= <erik.boto@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Aug 2013 08:47:07 +0200
-Message-Id: <1376376427-21427-1-git-send-email-erik.boto@pelagicore.com>
-X-Mailer: git-send-email 1.8.1.2
+	Tue, 13 Aug 2013 07:52:15 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 13 Aug 2013 00:52:15 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,867,1367996400"; d="scan'208";a="386202203"
+Received: from unknown (HELO helios.localnet) ([10.252.122.219])
+	by orsmga002.jf.intel.com with ESMTP; 13 Aug 2013 00:52:14 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe Slater <jslater@windriver.com>
+Date: Tue, 13 Aug 2013 08:52:13 +0100
+Message-ID: <3732752.OjNRY3qOuQ@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1376069480-19679-2-git-send-email-jslater@windriver.com>
+References: <1376069480-19679-1-git-send-email-jslater@windriver.com>
+	<1376069480-19679-2-git-send-email-jslater@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qt5-5.0.2.inc: update path to sources
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH 1/1] nostromo: make sure usr/group www-data exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,32 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Aug 2013 06:47:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 Aug 2013 07:52:15 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-They moved the 5.0.2 sources into an archive dir upstream, this updates
-the SRC_URI accordingly.
+Hi Joe,
 
-Signed-off-by: Erik Botö <erik.boto@pelagicore.com>
----
- recipes-qt/qt5/qt5-5.0.2.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Friday 09 August 2013 10:31:20 Joe Slater wrote:
+> CQID: 422203
+> 
+> nostromo runs as user/group www-data and needs these
+> to exist when we install it.
+> 
+> Signed-off-by: Joe Slater <jslater@windriver.com>
+> ---
+>  recipes-httpd/nostromo/nostromo_1.9.5.bb |    7 ++++++-
+>  1 files changed, 6 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes-httpd/nostromo/nostromo_1.9.5.bb
+> b/recipes-httpd/nostromo/nostromo_1.9.5.bb index 94c32d8..98195b1 100644
+> --- a/recipes-httpd/nostromo/nostromo_1.9.5.bb
+> +++ b/recipes-httpd/nostromo/nostromo_1.9.5.bb
+> @@ -17,7 +17,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
+> 
+>  DEPENDS = "openssl"
+> 
+> -inherit update-rc.d
+> +inherit update-rc.d useradd
+> 
+>  INITSCRIPT_NAME = "nostromo"
+>  INITSCRIPT_PARAMS = "defaults 70"
+> @@ -26,6 +26,11 @@ do_compile() {
+>      oe_runmake
+>  }
+> 
+> +# we need user/group www-data to exist when we install
+> +#
+> +USERADD_PACKAGES = "${PN}"
+> +USERADD_PARAM_${PN} = "--system -g www-data www-data"
+> +
+>  do_install() {
+>      install -d ${D}/${sbindir}
+>      install -m 0755 src/nhttpd/nhttpd ${D}/${sbindir}/nhttpd
 
-diff --git a/recipes-qt/qt5/qt5-5.0.2.inc b/recipes-qt/qt5/qt5-5.0.2.inc
-index e2a56e5..0bf1404 100644
---- a/recipes-qt/qt5/qt5-5.0.2.inc
-+++ b/recipes-qt/qt5/qt5-5.0.2.inc
-@@ -7,7 +7,7 @@ QT_VERSION ?= "${PV}"
- QT_VERSION_DIR ?= "${QT_VERSION}"
- 
- SRC_URI += " \
--    http://releases.qt-project.org/qt5/${QT_VERSION_DIR}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
-+    http://releases.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
- "
- 
- S = "${WORKDIR}/${QT_MODULE}-opensource-src-${QT_VERSION}"
+I've applied this, but it was actually against the wrong directory path. In 
+future could you please send patches generated against meta-oe?
+
+Thanks,
+Paul
+
 -- 
-1.8.1.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
