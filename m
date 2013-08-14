@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 04AAA614A3
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 643B360780
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2013 06:31:09 +0000 (UTC)
+	Wed, 14 Aug 2013 06:31:11 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7E6V9Hf004368
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r7E6VBd0000148
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2013 02:31:10 -0400 (EDT)
+	Tue, 13 Aug 2013 23:31:11 -0700 (PDT)
 Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Tue, 13 Aug 2013 23:31:08 -0700
+	14.2.342.3; Tue, 13 Aug 2013 23:31:10 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Aug 2013 14:30:53 +0800
-Message-ID: <a4c39e85485f80316e6cefa9b6ad79d0838c83a2.1376461413.git.hongxu.jia@windriver.com>
+Date: Wed, 14 Aug 2013 14:30:54 +0800
+Message-ID: <a13ea988edbbe08b730eef565a3465659d1b88d1.1376461413.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.8.1.2
 In-Reply-To: <cover.1376461413.git.hongxu.jia@windriver.com>
 References: <cover.1376461413.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [RFC PATCH 01/13] meta-filesystems creation
+Subject: [RFC PATCH 02/13] fuse: move to meta-filesystems and upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,207 +34,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2013 06:31:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 14 Aug 2013 06:31:12 -0000
+Content-Type: text/plain
 
-This layer contains filesystem related recipes.
+- Move fuse from meta-oe to meta-filesystems
+- Upgrade fuse to 2.9.3
 
 [YOCTO #4178]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-filesystems/COPYING.MIT     |  17 +++++
- meta-filesystems/README          | 138 +++++++++++++++++++++++++++++++++++++++
- meta-filesystems/conf/layer.conf |  10 +++
- 3 files changed, 165 insertions(+)
- create mode 100644 meta-filesystems/COPYING.MIT
- create mode 100644 meta-filesystems/README
- create mode 100644 meta-filesystems/conf/layer.conf
+ .../recipes-support/fuse/files}/aarch64.patch      | 15 ++++-
+ .../fuse/files}/gold-unversioned-symbol.patch      | 76 +++++++++++++++-------
+ .../recipes-support/fuse/fuse_2.9.3.bb             | 13 ++--
+ 3 files changed, 76 insertions(+), 28 deletions(-)
+ rename {meta-oe/recipes-support/fuse/fuse-2.9.2 => meta-filesystems/recipes-support/fuse/files}/aarch64.patch (49%)
+ rename {meta-oe/recipes-support/fuse/fuse-2.9.2 => meta-filesystems/recipes-support/fuse/files}/gold-unversioned-symbol.patch (45%)
+ rename meta-oe/recipes-support/fuse/fuse_2.9.2.bb => meta-filesystems/recipes-support/fuse/fuse_2.9.3.bb (67%)
 
-diff --git a/meta-filesystems/COPYING.MIT b/meta-filesystems/COPYING.MIT
-new file mode 100644
-index 0000000..89de354
---- /dev/null
-+++ b/meta-filesystems/COPYING.MIT
-@@ -0,0 +1,17 @@
-+Permission is hereby granted, free of charge, to any person obtaining a copy
-+of this software and associated documentation files (the "Software"), to deal
-+in the Software without restriction, including without limitation the rights
-+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-+copies of the Software, and to permit persons to whom the Software is
-+furnished to do so, subject to the following conditions:
+diff --git a/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch b/meta-filesystems/recipes-support/fuse/files/aarch64.patch
+similarity index 49%
+rename from meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
+rename to meta-filesystems/recipes-support/fuse/files/aarch64.patch
+index 180f544..050d114 100644
+--- a/meta-oe/recipes-support/fuse/fuse-2.9.2/aarch64.patch
++++ b/meta-filesystems/recipes-support/fuse/files/aarch64.patch
+@@ -1,7 +1,17 @@
+-Upstream-Status: Submitted
++fuse: add aarch64 support
 +
-+The above copyright notice and this permission notice shall be included in
-+all copies or substantial portions of the Software.
++u64/u32 is not defined in sys/types.h, include linux/types.h like
++the kernel version of fuse.h does. Patch sent to upstream mailing list.
+ 
++Upstream-Status: Submitted
+ Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ include/fuse_kernel.h | 7 +------
++ 1 file changed, 1 insertion(+), 6 deletions(-)
+ 
++diff --git a/include/fuse_kernel.h b/include/fuse_kernel.h
++index c632b58..e804278 100644
+ --- a/include/fuse_kernel.h
+ +++ b/include/fuse_kernel.h
+ @@ -88,12 +88,7 @@
+@@ -18,3 +28,6 @@ Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
+  
+  /*
+   * Version negotiation:
++-- 
++1.8.1.2
 +
-+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-+THE SOFTWARE.
-diff --git a/meta-filesystems/README b/meta-filesystems/README
-new file mode 100644
-index 0000000..d2716f8
---- /dev/null
-+++ b/meta-filesystems/README
-@@ -0,0 +1,138 @@
-+This README file contains information on the contents of the
-+filesystems layer.
+diff --git a/meta-oe/recipes-support/fuse/fuse-2.9.2/gold-unversioned-symbol.patch b/meta-filesystems/recipes-support/fuse/files/gold-unversioned-symbol.patch
+similarity index 45%
+rename from meta-oe/recipes-support/fuse/fuse-2.9.2/gold-unversioned-symbol.patch
+rename to meta-filesystems/recipes-support/fuse/files/gold-unversioned-symbol.patch
+index 8ee97df..d47f692 100644
+--- a/meta-oe/recipes-support/fuse/fuse-2.9.2/gold-unversioned-symbol.patch
++++ b/meta-filesystems/recipes-support/fuse/files/gold-unversioned-symbol.patch
+@@ -1,8 +1,37 @@
+-Index: fuse-2.8.6/lib/fuse.c
+-===================================================================
+---- fuse-2.8.6.orig/lib/fuse.c	2011-09-13 00:23:14.000000000 -0700
+-+++ fuse-2.8.6/lib/fuse.c	2011-10-19 09:20:27.537099939 -0700
+-@@ -3947,11 +3947,11 @@
++fuse: Fix linking issues with gold linker
 +
-+Please see the corresponding sections below for details.
++fuse has problems when linking with gold since it uses version
++scripts in a way thats so perticular to bfd ld
 +
++/home/kraj/work/angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/x86_64-linux/usr/libexec/armv5te-angstrom-linux-gnueabi/gcc/arm-angstro
++error: symbol __fuse_exited has undefined version
++| collect2: ld returned 1 exit status
++| make[1]: *** [libfuse.la] Error 1
++| make[1]: *** Waiting for unfinished jobs....
 +
-+Dependencies
-+============
++For more details
 +
-+This layer depends on:
++http://blog.flameeyes.eu/2011/06/01/gold-readiness-obstacle-2-base-versioning
++http://sources.redhat.com/bugzilla/show_bug.cgi?id=10861
++http://comments.gmane.org/gmane.comp.file-systems.fuse.devel/9524
++http://www.airs.com/blog/archives/300
 +
-+  URI: git://git.openembedded.org/bitbake
-+  branch: master
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ lib/fuse.c             | 10 +++++-----
++ lib/fuse_mt.c          |  2 +-
++ lib/fuse_versionscript |  3 +++
++ lib/helper.c           |  6 +++---
++ 4 files changed, 12 insertions(+), 9 deletions(-)
 +
-+  URI: git://git.openembedded.org/openembedded-core
-+  layers: meta
-+  branch: master
++diff --git a/lib/fuse.c b/lib/fuse.c
++index 067d0dc..6d27711 100644
++--- a/lib/fuse.c
+++++ b/lib/fuse.c
++@@ -4873,11 +4873,11 @@ struct fuse *fuse_new_compat1(int fd, int flags,
+  				      11);
+  }
+  
+@@ -18,21 +47,21 @@ Index: fuse-2.8.6/lib/fuse.c
+ +FUSE_SYMVER(".symver fuse_new_compat2,fuse_new@FUSE_UNVERSIONED");
+  FUSE_SYMVER(".symver fuse_new_compat22,fuse_new@FUSE_2.2");
+  
+- #endif /* __FreeBSD__ */
+-Index: fuse-2.8.6/lib/fuse_mt.c
+-===================================================================
+---- fuse-2.8.6.orig/lib/fuse_mt.c	2011-09-13 00:23:14.000000000 -0700
+-+++ fuse-2.8.6/lib/fuse_mt.c	2011-10-19 09:20:27.537099939 -0700
+-@@ -113,4 +113,4 @@
+- 	return fuse_session_loop_mt(fuse_get_session(f));
++ #endif /* __FreeBSD__ || __NetBSD__  */
++diff --git a/lib/fuse_mt.c b/lib/fuse_mt.c
++index f6dbe71..fd5ac23 100644
++--- a/lib/fuse_mt.c
+++++ b/lib/fuse_mt.c
++@@ -119,4 +119,4 @@ int fuse_loop_mt(struct fuse *f)
++ 	return res;
+  }
+  
+ -FUSE_SYMVER(".symver fuse_loop_mt_proc,__fuse_loop_mt@");
+ +FUSE_SYMVER(".symver fuse_loop_mt_proc,__fuse_loop_mt@FUSE_UNVERSIONED");
+-Index: fuse-2.8.6/lib/fuse_versionscript
+-===================================================================
+---- fuse-2.8.6.orig/lib/fuse_versionscript	2011-09-13 00:23:14.000000000 -0700
+-+++ fuse-2.8.6/lib/fuse_versionscript	2011-10-19 09:20:27.541099939 -0700
++diff --git a/lib/fuse_versionscript b/lib/fuse_versionscript
++index 8d91887..de16ab2 100644
++--- a/lib/fuse_versionscript
+++++ b/lib/fuse_versionscript
+ @@ -1,3 +1,6 @@
+ +FUSE_UNVERSIONED {
+ +};
+@@ -40,11 +69,11 @@ Index: fuse-2.8.6/lib/fuse_versionscript
+  FUSE_2.2 {
+  	global:
+  		fuse_destroy;
+-Index: fuse-2.8.6/lib/helper.c
+-===================================================================
+---- fuse-2.8.6.orig/lib/helper.c	2011-09-13 00:23:14.000000000 -0700
+-+++ fuse-2.8.6/lib/helper.c	2011-10-19 09:20:27.541099939 -0700
+-@@ -409,10 +409,10 @@
++diff --git a/lib/helper.c b/lib/helper.c
++index b644012..c5349bf 100644
++--- a/lib/helper.c
+++++ b/lib/helper.c
++@@ -436,10 +436,10 @@ int fuse_mount_compat1(const char *mountpoint, const char *args[])
+  	return fuse_mount_compat22(mountpoint, NULL);
+  }
+  
+@@ -57,4 +86,7 @@ Index: fuse-2.8.6/lib/helper.c
+ +FUSE_SYMVER(".symver fuse_main_compat2,fuse_main@FUSE_UNVERSIONED");
+  FUSE_SYMVER(".symver fuse_main_real_compat22,fuse_main_real@FUSE_2.2");
+  
+- #endif /* __FreeBSD__ */
++ #endif /* __FreeBSD__ || __NetBSD__ */
++-- 
++1.8.1.2
 +
-+  URI: git://git.openembedded.org/meta-openembedded
-+  layers: meta-oe
-+  branch: master
-+
-+Patches
-+=======
-+
-+Please submit any patches against the filesystems layer to the
-+OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
-+with '[meta-filesystems]' in the subject.
-+
-+Maintainers List:
-+  physfs      Andreas Müller <schnitzeltony@googlemail.com>
-+
-+  fuse        Koen Kooi <koen@dominion.thruhere.net>
-+              Philip Balister <philip@balister.org>
-+              hongxu jia <hongxu.jia@windriver.com>
-+
-+  ifuse       Sander van Grieken <sander@outrightsolutions.nl>
-+              Koen Kooi <koen@dominion.thruhere.net>
-+
-+  sshfs-fuse  Philip Balister <philip@balister.org>
-+              Koen Kooi <koen@dominion.thruhere.net>
-+
-+  owfs        Otavio Salvador <otavio@ossystems.com.br>
-+              Koen Kooi <koen@dominion.thruhere.net>
-+              hongxu jia <hongxu.jia@windriver.com>
-+
-+  ntfs-3g-ntfsprogs  Otavio Salvador <otavio@ossystems.com.br>
-+                     hongxu jia <hongxu.jia@windriver.com>
-+
-+  cramfs      Koen Kooi <koen@dominion.thruhere.net>
-+
-+  smbnetfs    Sander van Grieken <sander@outrightsolutions.nl>
-+              Koen Kooi <koen@dominion.thruhere.net>
-+
-+  fuse-exfat  hongxu jia <hongxu.jia@windriver.com>
-+
-+  exfat-utils hongxu jia <hongxu.jia@windriver.com>
-+
-+  f2fs-tools  Martin Jansa <Martin.Jansa@gmail.com>
-+              Koen Kooi <koen@dominion.thruhere.net>
-+
-+  xfsprogs    Koen Kooi <koen@dominion.thruhere.net>
-+              hongxu jia <hongxu.jia@windriver.com>
-+
-+When sending single patches, please use something like:
-+
-+   git send-email -1 -M \
-+        --to openembedded-devel@lists.openembedded.org \
-+        --subject-prefix=meta-filesystems][PATCH
-+
-+
-+Table of Contents
-+=================
-+
-+  I. Adding the filesystems layer to your build
-+ II. Misc
-+
-+
-+I. Adding the filesystems layer to your build
-+=================================================
-+
-+In order to use this layer, you need to make the build system aware of
-+it.
-+
-+Assuming the filesystems layer exists at the top-level of your
-+yocto build tree, you can add it to the build system by adding the
-+location of the filesystems layer to bblayers.conf, along with any
-+other layers needed. e.g.:
-+
-+  BBLAYERS ?= " \
-+    /path/to/yocto/meta \
-+    /path/to/yocto/meta-oe \
-+    /path/to/yocto/meta-filesystems \
-+    "
-+
-+
-+II. Misc
-+========
-+
-+  --- physfs ---
-+  A library to provide abstract access to various archives
-+
-+  --- fuse ---
-+  Filesystem in Userspace (FUSE) is a simple interface for userspace programs
-+  to export a virtual filesystem to the Linux kernel.
-+
-+  --- ifuse ---
-+  A fuse filesystem to access the contents of an iPhone or iPod Touch
-+
-+  --- sshfs-fuse ---
-+  A filesystem client based on the SSH File Transfer Protocol
-+
-+  --- owfs ---
-+  An easy way to use the 1-Wire file system
-+
-+  --- ntfs-3g-ntfsprogs ---
-+  The ntfs-3g is a freely available read/write NTFS driver for Linux and
-+  ntfsprogs includes utilities for doing all required tasks to NTFS partitions.
-+
-+  --- cramfs ---
-+  Builds cramfs filesystems for embedded systems
-+
-+  --- smbnetfs ---
-+  SMBNetFS is a Linux/FreeBSD filesystem that allow you to use samba/microsoft
-+  network in the same manner as the network neighborhood in Microsoft Windows.
-+
-+  --- fuse-exfat ---
-+  A read and write exFAT driver for FUSE
-+
-+  --- exfat-utils ---
-+  Utilities to create, check, label and dump exFAT filesystem
-+
-+  --- f2fs-tools ---
-+  Tools needed for creating and managing f2fs partitions
-+
-+  --- xfsprogs ---
-+  It provides XFS filesystem utilities.
-+
-diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
-new file mode 100644
-index 0000000..d62d396
---- /dev/null
-+++ b/meta-filesystems/conf/layer.conf
-@@ -0,0 +1,10 @@
-+# We have a conf and classes directory, add to BBPATH
-+BBPATH .= ":${LAYERDIR}"
-+
-+# We have recipes-* directories, add to BBFILES
-+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
-+	${LAYERDIR}/recipes-*/*/*.bbappend"
-+
-+BBFILE_COLLECTIONS += "filesystems"
-+BBFILE_PATTERN_filesystems = "^${LAYERDIR}/"
-+BBFILE_PRIORITY_filesystems = "6"
+diff --git a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.3.bb
+similarity index 67%
+rename from meta-oe/recipes-support/fuse/fuse_2.9.2.bb
+rename to meta-filesystems/recipes-support/fuse/fuse_2.9.3.bb
+index b6c2a9e..358b58e 100644
+--- a/meta-oe/recipes-support/fuse/fuse_2.9.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.3.bb
+@@ -1,18 +1,21 @@
+-DESCRIPTION = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
++SUMMARY = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
++DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspace \
++programs to export a virtual filesystem to the Linux kernel.  FUSE \
++also aims to provide a secure method for non privileged users to \
++create and mount their own filesystem implementations. \
++"
+ HOMEPAGE = "http://fuse.sf.net"
+ SECTION = "libs"
+ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+ 
+-PR = "r1"
+-
+ SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+ "
+-SRC_URI[md5sum] = "7d80d0dc9cc2b9199a0c53787c151205"
+-SRC_URI[sha256sum] = "81a728fb3f87da33063068735e2fb7e2cd89df207d32687d3d3278385279cefc"
++SRC_URI[md5sum] = "33cae22ca50311446400daf8a6255c6a"
++SRC_URI[sha256sum] = "0beb83eaf2c5e50730fc553406ef124d77bc02c64854631bdfc86bfd6437391c"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
 1.8.1.2
 
