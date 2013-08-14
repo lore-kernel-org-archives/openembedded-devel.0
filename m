@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 783096B6DA
+Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 354936B6D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Aug 2013 06:31:12 +0000 (UTC)
+	Wed, 14 Aug 2013 06:31:15 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7E6VE47011125
+	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7E6VFT2004376
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Aug 2013 23:31:14 -0700 (PDT)
+	Wed, 14 Aug 2013 02:31:15 -0400 (EDT)
 Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Tue, 13 Aug 2013 23:31:11 -0700
+	14.2.342.3; Tue, 13 Aug 2013 23:31:13 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Aug 2013 14:30:55 +0800
-Message-ID: <413256449b9a92938c9f805322fa5f59c33ca855.1376461413.git.hongxu.jia@windriver.com>
+Date: Wed, 14 Aug 2013 14:30:56 +0800
+Message-ID: <f7ae4832e4c2ec7f1f801ce8c20a7c56826a2e1a.1376461413.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.8.1.2
 In-Reply-To: <cover.1376461413.git.hongxu.jia@windriver.com>
 References: <cover.1376461413.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [RFC PATCH 03/13] physfs: move to meta-filesystems
+Subject: [RFC PATCH 04/13] ifuse: move to meta-filesystems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,23 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2013 06:31:12 -0000
+X-List-Received-Date: Wed, 14 Aug 2013 06:31:15 -0000
 Content-Type: text/plain
 
-Move physfs from meta-oe to meta-filesystems
+Move ifuse from meta-oe to meta-filesystems
 
 [YOCTO #4178]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- {meta-oe => meta-filesystems}/recipes-support/physfs/physfs_2.0.3.bb | 0
+ .../recipes-filesystems}/ifuse/ifuse_1.1.2.bb                             | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe => meta-filesystems}/recipes-support/physfs/physfs_2.0.3.bb (100%)
+ rename {meta-oe/recipes-connectivity => meta-filesystems/recipes-filesystems}/ifuse/ifuse_1.1.2.bb (100%)
 
-diff --git a/meta-oe/recipes-support/physfs/physfs_2.0.3.bb b/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+diff --git a/meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
 similarity index 100%
-rename from meta-oe/recipes-support/physfs/physfs_2.0.3.bb
-rename to meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+rename from meta-oe/recipes-connectivity/ifuse/ifuse_1.1.2.bb
+rename to meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
 -- 
 1.8.1.2
 
