@@ -1,29 +1,44 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 40B6862176
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id BB9186009A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 02:18:35 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7F2IZOt025200
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 14 Aug 2013 19:18:36 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 14 Aug 2013 19:18:33 -0700
-Message-ID: <520C3A77.9080300@windriver.com>
-Date: Thu, 15 Aug 2013 10:18:31 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130803 Thunderbird/17.0.8
+	Thu, 15 Aug 2013 07:14:53 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so176764eek.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Aug 2013 00:14:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=resent-from:resent-date:resent-message-id:resent-to:date:from:to
+	:subject:message-id:mime-version:content-type:content-disposition
+	:user-agent; bh=7Cpwoya8ajgKSyh1HHm6Ch1YhTIaSDwsnahYQSPsZC8=;
+	b=U0mbgHw/5+wLNFHkbpIsCcvu5V9I51JBKlmwnGMhLguvckWRchSaNe51PYioIaTnvb
+	jeMIfrUsR2ZKOtGSIDec1piWOW2NMSYGtQjy1CVC1KsGg4VipCtQmv0W8qm7iO7OE7WS
+	tkSDkHJ1oGi2V6xoZBytheB/fU3+GEUB7HVFI7Hz8DrXtEUHjoZZeRBa0XPGOOd+wzSV
+	Y4Gqdy6R91qviu8/ptMbFNcRS/nhEouK/gyjP5N2lXTrioKD/Y2ZEOupOHnNBBRNvmnd
+	azezo5VRno9WaPM7mceCJJzCu8MCpUd4U0G6t+V1LVa0K0Q75I6Ur7pE09hBYoxeKfos
+	omKg==
+X-Received: by 10.15.111.136 with SMTP id cj8mr87947eeb.91.1376550893862;
+	Thu, 15 Aug 2013 00:14:53 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	bp43sm81894446eeb.4.2013.08.15.00.14.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 15 Aug 2013 00:14:53 -0700 (PDT)
+Resent-From: Martin Jansa <Martin.Jansa@gmail.com>
+Resent-Date: Thu, 15 Aug 2013 09:15:45 +0200
+Resent-Message-ID: <20130815071545.GZ17945@jama>
+Resent-To: openembedded-devel@lists.openembedded.org
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	dj7sm23038957wib.6.2013.05.28.02.43.37 for <eric@eukrea.com>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 28 May 2013 02:43:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
+Message-ID: <20130528094347.GG3192@jama>
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <cover.1376461413.git.hongxu.jia@windriver.com>
-	<20130814071513.GS17945@jama> <520B321F.8070301@windriver.com>
-	<20130814115342.GW17945@jama>
-In-Reply-To: <20130814115342.GW17945@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC PATCH 00/13] create meta-filesystems layer to collect filesystem related recipes
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-efl][dylan][PATCH] 2 backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,205 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 02:18:36 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Thu, 15 Aug 2013 07:14:54 -0000
+X-Original-Date: Tue, 28 May 2013 11:43:47 +0200
+X-List-Received-Date: Thu, 15 Aug 2013 07:14:54 -0000
+X-Groupsio-MsgNum: 45689
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WkfBGePaEyrk4zXB"
+Content-Disposition: inline
 
-On 08/14/2013 07:53 PM, Martin Jansa wrote:
-> On Wed, Aug 14, 2013 at 03:30:39PM +0800, Hongxu Jia wrote:
->> On 08/14/2013 03:15 PM, Martin Jansa wrote:
->>> On Wed, Aug 14, 2013 at 02:30:52PM +0800, Hongxu Jia wrote:
->>>> Survey the filesystem related items in meta-oe, and move them to the
->>>> meta-openembedded/meta-filesystems layer
->>> Whole patchset looks good to me. Only thing I've noticed is that we have
->>> interesting collection of BBFILE_COLLECTIONS names, I know it's not
->>> important as long as we use correct name in other assignments, but
->>> maybe some convention (like styleguide for recipes) would be nice:
->>>
->>> meta-efl/conf/layer.conf:BBFILE_COLLECTIONS += "efl-layer"
->>> meta-gnome/conf/layer.conf:BBFILE_COLLECTIONS += "gnome-layer"
->>> meta-gpe/conf/layer.conf:BBFILE_COLLECTIONS += "gpe-layer"
->>> meta-initramfs/conf/layer.conf:BBFILE_COLLECTIONS += "meta-initramfs"
->>> meta-multimedia/conf/layer.conf:BBFILE_COLLECTIONS += "multimedia-layer"
->>> meta-networking/conf/layer.conf:BBFILE_COLLECTIONS += "networking"
->>> meta-oe/conf/layer.conf:BBFILE_COLLECTIONS += "openembedded-layer"
->>> meta-ruby/conf/layer.conf:BBFILE_COLLECTIONS += "ruby-layer"
->>> meta-systemd/conf/layer.conf:BBFILE_COLLECTIONS += "systemd-layer"
->>> meta-webserver/conf/layer.conf:BBFILE_COLLECTIONS += "webserver"
->>> meta-xfce/conf/layer.conf:BBFILE_COLLECTIONS += "xfce-layer"
->>> toolchain-layer/conf/layer.conf:BBFILE_COLLECTIONS += "toolchain-layer"
->>>
->>> meta-filesystems/conf/layer.conf:BBFILE_COLLECTIONS += "filesystems"
->>> meta-perl/conf/layer.conf:BBFILE_COLLECTIONS += "perl-layer"
->>>
->>> What about using <foo>-layer for meta-<foo> layer.conf?
->>>
->>> Only
->>> meta-initramfs, meta-networking, meta-oe, meta-webserver,
->>> meta-filesystems, toolchain-layer aren't using that convention now
->> Agree, follow the convention is good and I will fix it by hand.
-> I've already updated layer.conf for meta-filesystems when merging it for
-> test in "bitbake world"
->
-> Now they are in jansa/in-test so you don't need to resend them.
+--WkfBGePaEyrk4zXB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Got it, I have updated the branch, and will not resend the pull
-request again.
+Hi Eric,
 
-git://git.pokylinux.org/poky-contrib hongxu/meta-filesystems
+please backport 2 commits from meta-efl
 
-Thanks,
-Hongxu
+It's minor upgrade (I know we shouldn't backport upgrades, but this=20
+is from stable bugfix-only branch) and together with following patch
+fixes evas segfaults).
 
->> BTW, it's better to modify the script 'yocto-layer' in meta-oe
->> which I used to create the new layer.
->>
->> The layer.conf format defined in
->> 'scripts/lib/bsp/substrate/target/arch/layer/conf/layer.conf'
->>
->> //Hongxu
->>
->>>> *1, already layout in meta-oe, they will be moved to meta-filesystems with
->>>>       the exception of lvm2 and udisks.
->>>>       - lvm2 is depended by udisks/cryptsetup/multipath-tools.
->>>>       - udisks has close relations with systemd.
->>>> meta-oe--------------->|recipes-core---------------->|f2fs-tools
->>>>                          |recipes-extended------------>|owfs
->>>>                          |recipes-connectivity-------->|ifuse
->>>>                                                        |sshfs-fuse
->>>>                                                        |smbnetfs
->>>>                          |recipes-support------------->|ntfs-3g-ntfsprogs
->>>>                                                        |xfsprogs
->>>>                                                        |cramfs
->>>>                                                        |physfs
->>>>                                                        |fuse
->>>>                                                        |lvm2
->>>>                                                        |udisks
->>>>
->>>> *2, already layout in oe-core/meta, they will stay where they are.
->>>> oe-core/meta---------->|recipes-devtools------------>|file
->>>>                                                        |dosfstools
->>>>                                                        |squashfs-tools
->>>>                                                        |devel-config------->nfs-export-root
->>>>                                                        |btrfs-tools
->>>>                                                        |genext2fs
->>>>                                                        |e2fsprogs
->>>>                                                        |util-linux
->>>>                                                        |packagegroups------>packagegroup-base.bb
->>>>                                                        |sysfsutils
->>>>                          |recipes-extended------------>|stat
->>>>                          |recipes-support------------->|attr
->>>>
->>>> *3, TOBE layout in meta-filesystems layer.
->>>> ifuse, sshfs-fuse, owfs, smbnetfs, ntfs-3g-ntfsprogs, fuse-exfat are based on fuse
->>>>
->>>> meta-filesystems------>|recipes-filesystems--------->|ifuse
->>>>                                                        |sshfs-fuse
->>>>                                                        |owfs
->>>>                                                        |ntfs-3g-ntfsprogs
->>>>                                                        |cramfs
->>>>                                                        |smbnetfs
->>>>                                                        |fuse-exfat
->>>>                          |recipes-support------------->|fuse
->>>>                                                        |physfs
->>>>                          |recipes-utils--------------->|f2fs-tools
->>>>                                                        |exfat-utils
->>>>                                                        |xfsprogs
->>>>
->>>> *4, upgrade and newly added
->>>> 1) 4 Packages need to be upgraded
->>>>       owfs, 2.8p20-->2.9p1
->>>>       ntfs-3g-ntfsprogs, 2011.4.12-->2013.1.13
->>>>       xfsprogs, 3.1.8-->3.1.11
->>>>       fuse, 2.9.2-->2.9.3
->>>>
->>>> 2) 2 Packages are newly added to meta-filesystems
->>>>       fuse-exfat: add version 1.0.1
->>>>       exfat-utils: add version 1.0.1
->>>>
->>>> [YOCTO #4178]
->>>>
->>>> //Hongxu
->>>>
->>>> The following changes since commit fa914e4c80bcb29d2526bda3d0d916f71f8f6df4:
->>>>
->>>>     gst-ffmpeg: drop .bbappend, moved to oe-core (2013-08-14 00:20:24 +0200)
->>>>
->>>> are available in the git repository at:
->>>>
->>>>     git://git.pokylinux.org/poky-contrib hongxu/meta-filesystems
->>>>     http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/meta-filesystems
->>>>
->>>> Hongxu Jia (13):
->>>>     meta-filesystems creation
->>>>     fuse: move to meta-filesystems and upgrade
->>>>     physfs: move to meta-filesystems
->>>>     ifuse: move to meta-filesystems
->>>>     smbnetfs: move to meta-filesystems
->>>>     sshfs-fuse: move to meta-filesystems
->>>>     owfs: move to meta-filesystems and upgrade
->>>>     cramfs: move to meta-filesystems
->>>>     xfsprogs: move to meta-filesystems and upgrade
->>>>     ntfs-3g-ntfsprogs: move to meta-filesystems and upgrade
->>>>     f2fs-tools: move to meta-filesystems
->>>>     fuse-exfat: add version 1.0.1
->>>>     exfat-utils: add version 1.0.1
->>>>
->>>>    meta-filesystems/COPYING.MIT                       |  17 ++
->>>>    meta-filesystems/README                            | 138 +++++++++++++
->>>>    meta-filesystems/conf/layer.conf                   |  10 +
->>>>    .../recipes-filesystems}/cramfs/cramfs_1.1.bb      |   0
->>>>    .../fuse-exfat/fuse-exfat_1.0.1.bb                 |  26 +++
->>>>    .../recipes-filesystems}/ifuse/ifuse_1.1.2.bb      |   0
->>>>    .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |  15 +-
->>>>    .../recipes-filesystems}/owfs/owfs/owhttpd         |   0
->>>>    .../recipes-filesystems}/owfs/owfs/owserver        |   0
->>>>    .../recipes-filesystems/owfs/owfs_2.9p1.bb         |  11 +-
->>>>    .../recipes-filesystems}/smbnetfs/smbnetfs_git.bb  |   0
->>>>    .../sshfs-fuse/sshfs-fuse_2.4.bb                   |   0
->>>>    .../recipes-support/fuse/files}/aarch64.patch      |  15 +-
->>>>    .../fuse/files}/gold-unversioned-symbol.patch      |  76 +++++--
->>>>    .../recipes-support/fuse/fuse_2.9.3.bb             |  13 +-
->>>>    .../recipes-support/physfs/physfs_2.0.3.bb         |   0
->>>>    .../recipes-utils/exfat-utils/exfat-utils_1.0.1.bb |  29 +++
->>>>    .../recipes-utils}/f2fs-tools/f2fs-tools_1.1.0.bb  |   0
->>>>    .../files}/drop-configure-check-for-aio.patch      |  42 ++--
->>>>    .../xfsprogs/files}/remove-install-as-user.patch   | 225 +++------------------
->>>>    .../recipes-utils/xfsprogs/xfsprogs_3.1.11.bb      |   5 +-
->>>>    21 files changed, 363 insertions(+), 259 deletions(-)
->>>>    create mode 100644 meta-filesystems/COPYING.MIT
->>>>    create mode 100644 meta-filesystems/README
->>>>    create mode 100644 meta-filesystems/conf/layer.conf
->>>>    rename {meta-oe/recipes-support => meta-filesystems/recipes-filesystems}/cramfs/cramfs_1.1.bb (100%)
->>>>    create mode 100644 meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb
->>>>    rename {meta-oe/recipes-connectivity => meta-filesystems/recipes-filesystems}/ifuse/ifuse_1.1.2.bb (100%)
->>>>    rename meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb => meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb (63%)
->>>>    rename {meta-oe/recipes-extended => meta-filesystems/recipes-filesystems}/owfs/owfs/owhttpd (100%)
->>>>    rename {meta-oe/recipes-extended => meta-filesystems/recipes-filesystems}/owfs/owfs/owserver (100%)
->>>>    rename meta-oe/recipes-extended/owfs/owfs_2.8p20.bb => meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb (85%)
->>>>    rename {meta-oe/recipes-connectivity => meta-filesystems/recipes-filesystems}/smbnetfs/smbnetfs_git.bb (100%)
->>>>    rename {meta-oe/recipes-connectivity => meta-filesystems/recipes-filesystems}/sshfs-fuse/sshfs-fuse_2.4.bb (100%)
->>>>    rename {meta-oe/recipes-support/fuse/fuse-2.9.2 => meta-filesystems/recipes-support/fuse/files}/aarch64.patch (49%)
->>>>    rename {meta-oe/recipes-support/fuse/fuse-2.9.2 => meta-filesystems/recipes-support/fuse/files}/gold-unversioned-symbol.patch (45%)
->>>>    rename meta-oe/recipes-support/fuse/fuse_2.9.2.bb => meta-filesystems/recipes-support/fuse/fuse_2.9.3.bb (67%)
->>>>    rename {meta-oe => meta-filesystems}/recipes-support/physfs/physfs_2.0.3.bb (100%)
->>>>    create mode 100644 meta-filesystems/recipes-utils/exfat-utils/exfat-utils_1.0.1.bb
->>>>    rename {meta-oe/recipes-core => meta-filesystems/recipes-utils}/f2fs-tools/f2fs-tools_1.1.0.bb (100%)
->>>>    rename {meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8 => meta-filesystems/recipes-utils/xfsprogs/files}/drop-configure-check-for-aio.patch (67%)
->>>>    rename {meta-oe/recipes-support/xfsprogs/xfsprogs-3.1.8 => meta-filesystems/recipes-utils/xfsprogs/files}/remove-install-as-user.patch (46%)
->>>>    rename meta-oe/recipes-support/xfsprogs/xfsprogs_3.1.8.bb => meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb (90%)
->>>>
->>>> -- 
->>>> 1.8.1.2
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+commit 8b94591a585e4fb261599a9796f4199d650e24a5
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Wed May 22 13:54:06 2013 +0200
 
+    evas: Add patch to fix segfaults
+   =20
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
+commit 4514f8ca26dac646e7e26fc1585e70304d9ef8ae
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Tue May 14 22:20:31 2013 +0200
+
+    meta-efl: upgrade efl to 1.7.7, e-wm to 0.17.3
+   =20
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--WkfBGePaEyrk4zXB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlGkfFMACgkQN1Ujt2V2gBzqCgCgmwmjTCq7Da9F73Wzs0Raq55l
+gy4An2TN+PqgkZcL7FhYZnwN7BnJxrS1
+=S9MS
+-----END PGP SIGNATURE-----
+
+--WkfBGePaEyrk4zXB--
