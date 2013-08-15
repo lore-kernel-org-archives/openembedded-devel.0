@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id BA3CA6B7C3
+Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 234256B814
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:19:48 +0000 (UTC)
-Received: by mail-ea0-f177.google.com with SMTP id f15so180543eak.36
+	Thu, 15 Aug 2013 07:19:49 +0000 (UTC)
+Received: by mail-ea0-f176.google.com with SMTP id q16so180880ead.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:19:49 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=7vfwVzDh3IRgBMaZqvA1Bo47GwAc0PzG2mPmChsPHfg=;
-	b=cQdFIRx+LOAUL7OnE1yCghno89PDdY7Fz4lfKzy/rQykmcg+svvdlXMI1RQzBA3NSb
-	5vFs5gVMGwU5vRqMhWRzh7utmqcxxLsZYPQFV/6HjXenCzDg/1E72I8t9svTQ5twrrC7
-	yeA9XC2DmKuW+wHbQ9FT3LgZdpMOnazNbD311W6+dfEK6tqVLoh2+egh6O+PmasbdTZ4
-	jPkg+31XGajH8znTVdOF1HGekIq4DNNjDaiYnX28/7xQ8/jqpLbskhyhd2DS/6FHA/5Y
-	IRa1CWmoJYsgRFtyo0YAW/mP3Kluciri5ta0iJUe2MqLi4LYnRiAY6x+waEJiHWtVrjo
-	bYig==
-X-Received: by 10.14.246.11 with SMTP id p11mr20952489eer.9.1376551189197;
-	Thu, 15 Aug 2013 00:19:49 -0700 (PDT)
+	:references; bh=VvzDuxnSMzuh4wvT9c4wj5iu3QPhmT1bSjetwcplU7U=;
+	b=wU1mxDbYGFl1DM22fVbD3qG6BnwosfAJpQ08xbxz0v/aMjA8+GK3BxxPE/nq4FRBJa
+	rz6RKh306YfUsfWgCLvipk3ZdS7nvK57dawLLjf//EGWrs4h9mWMJqdOWMPTUHRF9DWX
+	85Gq9xIA5h87SNhx/0GrQXfnN1QR+x5XngACYC8hz+ebBSKb1QEuiHtdmjMmKanaMkAR
+	9UzvuUiAuHj3NSnrwY9BMv4JimGXFSLXpWXq67jPJUnsk7epXqclkKcH9jiEi2HfeP0q
+	TylOa7DKfUCOrQCWP18whWLqW6d93tR2hmJxYMMfKZwPx0mKJlYTl0Yd9nEM0ZkKKdSO
+	EsUw==
+X-Received: by 10.14.38.14 with SMTP id z14mr20907126eea.49.1376551190600;
+	Thu, 15 Aug 2013 00:19:50 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	n48sm82051592eeg.17.2013.08.15.00.19.48
+	r48sm74956387eev.14.2013.08.15.00.19.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:19:48 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:19:22 +0200
-Message-Id: <85f80f10ff0cd215ece4126602932a4594d4da2b.1376551135.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:19:23 +0200
+Message-Id: <4dcb1f0088a6ff3062ec3f335b4cee592b31fa56.1376551135.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 42/60] libass: add PACKAGECONFIG for harfbuzz
+Subject: [meta-oe][dylan][PATCH 43/60] links: add PACKAGECONFIG for bzip2, lzma
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,32 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:19:49 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:19:50 -0000
 
 * it's autodetected from sysroot
 * add PACKAGECONFIG to make it deterministic
-* runtime dependencies for glib-2.0 harfbuzz libffi libicudata libicule libicuuc libstdc++ are added
-  only when harfbuzz is detected
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-multimedia/libass/libass.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/links/links.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
-index 4dd5181..a0dc564 100644
---- a/meta-oe/recipes-multimedia/libass/libass.inc
-+++ b/meta-oe/recipes-multimedia/libass/libass.inc
-@@ -13,6 +13,9 @@ SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
- 
- inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/links/links.inc b/meta-oe/recipes-support/links/links.inc
+index e77e2c4..78d7ec7 100644
+--- a/meta-oe/recipes-support/links/links.inc
++++ b/meta-oe/recipes-support/links/links.inc
+@@ -10,4 +10,8 @@ SRC_URI = "http://links.twibright.com/download/links-${PV}.tar.bz2 \
+            file://ac-prog-cxx.patch \
+ "
  
 +PACKAGECONFIG ??= ""
-+PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
++PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
++PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,lzma"
 +
- EXTRA_OECONF = " \
-     --enable-enca \
-     --enable-fontconfig \
+ inherit autotools
 -- 
 1.8.3.2
 
