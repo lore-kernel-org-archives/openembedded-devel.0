@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 09D006B800
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 911206B7F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:19:16 +0000 (UTC)
-Received: by mail-ee0-f44.google.com with SMTP id b47so182009eek.17
+	Thu, 15 Aug 2013 07:19:18 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id z15so180704ead.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:19:17 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=tnCUZctDBbxkBiOb25n1IrnNWLgvVCz9crOm77RaPk8=;
-	b=1HBgfpkzpKLeCyj4fxgiuf3la3nx+ZGwZiAUp9rY75YYwkjfDRHCqQNNMAVHakutss
-	XObKfRmV1uC01OU2RtQnERrrTGv5zGsZZZwJg/rtFQxPkSvPo2PZ2ypo86v8exKTvL40
-	rZu+2EXX4BvmPYyz+uOQk2QOyzHfbi5qCI04R/uSfHwaXIvgs8IM8YcKDKPTQCMp8M7q
-	Uay9/YgOwt6wpS3kRJ/6WEVqCG9MqraJViglVzyyybQD9apOFy9YLF7G70SSny2+STSR
-	MOkkKw5kBuV/L4wD1qRs5KKySpMl9EWcAhgywjEP7iC8fP6fwV8e9AqDEBXcf10kS9zZ
-	5moQ==
-X-Received: by 10.15.41.77 with SMTP id r53mr1746244eev.64.1376551157444;
-	Thu, 15 Aug 2013 00:19:17 -0700 (PDT)
+	:references; bh=hSXlYZYFbrcvbFBndz8sZsbRyytLUW7ewaYhq41NFyA=;
+	b=ks2tINxc3ZF38cX/pZ+Q3GG2IdqJKG2dZ33QvVfIL31XVaGqNr0BnR9t5HaCsqmE2L
+	p5q7VJDBwHeGCBFDyEo6lP973rt8apmsCvJc/Ow17HhpBaSbJ7hITULU0P1+oNqcY6Xc
+	S7rt+MEMyBsIciBrHBO4AJ4ss4diG5DreJ1erqy+XV2cTiMAMfgWuDw1lLQ6JpcUJROH
+	A7wRFveA7/KRaAJ20Zswq6nWXmhhdMtrjAQ892JDCSzlQdGXvkR/HyBdKn29QW4+N+tl
+	HjqTTxd86jhpP2Pv46uIFFNSgGOol5l+dXFol+H7Ho5ce29J3wIdl6Q5ALTZUF96WIT0
+	0arg==
+X-Received: by 10.14.22.71 with SMTP id s47mr105612ees.95.1376551158942;
+	Thu, 15 Aug 2013 00:19:18 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	k3sm81999632een.16.2013.08.15.00.19.16
+	bq1sm81933540eeb.9.2013.08.15.00.19.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:19:17 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:18:58 +0200
-Message-Id: <5b6987efeee70f3b8f94f9b991f533e6793bc053.1376551135.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:18:59 +0200
+Message-Id: <358df22dd010d12db312afabf21b04db395f17bd.1376551135.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 18/60] mysql5: prevent using bundled zlib at all costs
+Subject: [meta-oe][dylan][PATCH 19/60] portaudio: inherit pkgconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,46 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:19:17 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:19:18 -0000
 
-* in some seldom cases mysql's m4 macro decides that system
-  zlib (from DEPENDS) is not worthy and decides to use own
-  bundled version which prefers stuff like static libz.a and
-  stages libz.la again:
-  mysql-5.1.40/config/ac-macros/zlib.m4
-  NOTE: recipe mysql5-5.1.40-r11: task do_package_setscene: Started
-  NOTE: recipe zlib-1.2.7-r0: task do_packagedata_setscene: Succeeded
-  WARNING: The recipe zlib is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-  sysroots/om-gta04/usr/lib/libz.a
-  Matched in manifest-om-gta04-mysql5
-  Please verify which package should provide the above files.
-  NOTE: recipe zlib-1.2.7-r0: task do_populate_sysroot_setscene: Succeeded
-
-* this libz.la + libz.a is breaking many packages which are now trying to
-  link shared libs against libz.a from mysql which was built without fPIC
-  breaking libxml2, glib-2.0, gnutls, libpng, ...
-  | ld: sysroots/om-gta04/usr/lib/libz.a(crc32.o): relocation R_ARM_MOVW_ABS_NC against `a local symbol' can not be used when making a shared object; recompile with -fPIC
-  | sysroots/om-gta04/usr/lib/libz.a: could not read symbols: Bad value
-  | collect2: ld returned 1 exit status
+* without pkgconfig it's failing to expand PKG_CHECK_MODULES macro:
+  | portaudio-v19/v19+svnr1387-r0/trunk/configure:
+    line 11721: syntax error near unexpected token `JACK,'
+  | portaudio-v19/v19+svnr1387-r0/trunk/configure:
+    line 11721: `PKG_CHECK_MODULES(JACK, jack, have_jack=yes, have_jack=no)'
+  | Configure failed. The contents of all config.log files follows to aid debugging
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/mysql/mysql5_5.1.40.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-index 3d79e19..21bf8b0 100644
---- a/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-+++ b/meta-oe/recipes-support/mysql/mysql5_5.1.40.inc
-@@ -32,7 +32,7 @@ export ac_cv_path_PS="/bin/ps"
- export ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null"
- PARALLEL_MAKE = " "
- EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
--EXTRA_OECONF = " --with-atomic-ops=up --with-embedded-server --prefix=/usr --sysconfdir=/etc/mysql --localstatedir=/var/mysql --disable-dependency-tracking --without-raid --without-debug --with-low-memory --without-query-cache --without-man --without-docs --without-innodb "
-+EXTRA_OECONF = " --with-atomic-ops=up --with-embedded-server --prefix=/usr --sysconfdir=/etc/mysql --localstatedir=/var/mysql --disable-dependency-tracking --without-raid --without-debug --with-low-memory --without-query-cache --without-man --without-docs --without-innodb --with-zlib-dir=${STAGING_EXECPREFIXDIR}"
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+index a2b25cc..454bd34 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+@@ -4,13 +4,12 @@ LICENSE = "PortAudio"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
  
- do_configure_append() {
-     sed -i /comp_err/d ${S}/sql/share/Makefile
+ PV = "v19+svnr${SRCPV}"
+-PR = "r0"
+ 
+ SRCREV = "1387"
+ SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
+ S = "${WORKDIR}/trunk"
+ 
+-inherit autotools
++inherit autotools pkgconfig
+ 
+ PACKAGECONFIG ??= "alsa jack"
+ PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
 -- 
 1.8.3.2
 
