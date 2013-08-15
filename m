@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AF0B6B7D0
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E0C4A6B7E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:19:06 +0000 (UTC)
-Received: by mail-ea0-f182.google.com with SMTP id o10so184528eaj.27
+	Thu, 15 Aug 2013 07:19:07 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so183094eek.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:19:07 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=0p5SeDFam7gh12ieLLxxRYPXepDIHuEHz3rvTfvWLy4=;
-	b=xAtRiqeAOljbeCxNnt+7HrEYdA0bdr1ZXc4K4aKDc7OK9flY5aQNI5rhIg9cEW+szO
-	PHNCc/+8Q/G6BGDSMKj4UsOrZOPXf2ZykSetW0b8N4EGFE+L8vCYorjt0lupbgsvdX2d
-	uyM7IpacQLUJyuIh6EPlM8OOnAI0meenKOgeHU4hSJ4TmN4gRBYbWXzsQt17AiHCHc2i
-	rWUQOU8wdo3S9NYQdiU04Qk1egfuvuLixnkMRakjLHTS2FKgAPFwUkl5XigTPkqjkuu2
-	t8K3805lcUFByvxpjUNloDdLnWzv2YTUyXF5jQ+3R9g/xZ9cDyKavOBDZyOXAcZzHOZg
-	qAVA==
-X-Received: by 10.14.5.78 with SMTP id 54mr2614633eek.55.1376551147016;
-	Thu, 15 Aug 2013 00:19:07 -0700 (PDT)
+	:references; bh=kb4nhZ82DkeKaVH/t2yAVH8WiZ8A2Vpfv1gGaPIZQVk=;
+	b=MGqE1CQKruWsoP+SOztcmc3TFYHZPw3BttIE7NBkeR4vWf7wSyEBoj+tgH7WCu2kJz
+	tN1FXXplnZVU0vrEbHDS56U3IYNWsUfddmcpVdI5z7CW3g9i21i0Zw03aBzy9CMZQ3fC
+	2xO3R/09urCUUiLl9R/jjyaaeRgQXBqYf2Jefy3zzZVUpLwmCOjSK1mMbzyypmyq3fb6
+	XHq7bJaFwTGlWGGvb3EF1kIOXQzw0awYEN4pGnhnKwPw64IuPlpEBZQ+g3Mjh93I4SG1
+	uhQvEi2WfSWMbNyulxDFTrAg2KPT5Qj34Kp2vUUlL+ZwSH3kRiI3XOlGFx4uc7LfaUES
+	Lf4Q==
+X-Received: by 10.14.223.1 with SMTP id u1mr20817919eep.10.1376551148373;
+	Thu, 15 Aug 2013 00:19:08 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	a4sm81924936eez.0.2013.08.15.00.19.06
+	r48sm74951170eev.14.2013.08.15.00.19.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:19:06 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:18:51 +0200
-Message-Id: <97599a85054e4fac4df520cf452a0fd01f113a41.1376551135.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:18:52 +0200
+Message-Id: <ca642ab4307d575f8ba30d19206e8da94ffabce6.1376551135.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 11/60] ruby: add missing dependency on ruby-native
+Subject: [meta-oe][dylan][PATCH 12/60] cpufrequtils: inherit gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,37 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:19:07 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:19:08 -0000
 
-* without ruby available on host it fails:
-  | NOTE: make LIBRUBYARG=-lruby-static
-  |       CC = i586-starfish-linux-gcc  -m32 -march=i586 --sysroot=/OE/sysroots/qemux86
-  |       LD = i586-starfish-linux-ld --sysroot=/OE/sysroots/qemux86
-  |       LDSHARED = i586-starfish-linux-gcc  -m32 -march=i586 --sysroot=/OE/sysroots/qemux86 -shared
-  |       CFLAGS = -O2 -pipe -g -feliminate-unused-debug-types -fPIC
-  |       XCFLAGS = -include ruby/config.h -include ruby/missing.h -fvisibility=hidden -DRUBY_EXPORT
-  |       CPPFLAGS =   -I. -I.ext/include/i386-linux -I./include -I.
-  |       DLDFLAGS = -Wl,-soname,libruby.so.1.9
-  |       SOLIBS = -lpthread -lrt -ldl -lcrypt -lm
-  | executable host ruby is required. use --with-baseruby option.
-  | make: *** [.rbconfig.time] Error 1
+* build without gettext-native fails with:
+  | Building ccdv
+  | /bin/sh: 1: xgettext: not found
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb
-index 6611ce1..bed678e 100644
---- a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb
-+++ b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p194.bb
-@@ -1,7 +1,7 @@
- require ruby.inc
- PR = "${INC_PR}.0"
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+index bd631af..e74fa44 100644
+--- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
++++ b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+@@ -1,5 +1,7 @@
+ DESCRIPTION = "To make access to the Linux kernel cpufreq subsystem easier for users and cpufreq userspace tools, a cpufrequtils package was created"
  
--DEPENDS += "libyaml"
-+DEPENDS += "libyaml ruby-native"
++inherit gettext
++
+ DEPENDS = "libtool-cross"
  
- SRC_URI += "\
-     file://0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch \
+ LICENSE = "GPLv2"
 -- 
 1.8.3.2
 
