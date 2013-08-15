@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id AF8446B860
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E40CD6B81C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:19:56 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id h14so185537eak.1
+	Thu, 15 Aug 2013 07:19:57 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so180835eek.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:19:57 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=nr1hqjcU9/cB2LYBg2PPoXrVmrbq6RrZpGjWfDXXbnw=;
-	b=vzOeceTcvn6I6uxFJ1Pf7rA6KXrS7/S/7qkIxMc2l54QdgSj3B+933vKb1s79x4W2B
-	zFKHTetMBNXZS/fDMIZCDgtuh/JtrVJtsm0E2/KLR9zlBnidyBMSL8MShRRGnnjSeCRQ
-	/1nuy10Ue8OR5asn1XoWp0jtqNsV3srEjUd7bdxDfR3CzqBI7BCksIAEsi0zNK7aDKrH
-	jvP9wo0odj9bZWGHsMQkHQ1Ix0jpeQOTUGlUsWQyuuqQx3/dwJxx2SY3G2h3ITUDzDPO
-	raaaDJVRKretRv9TjPJpo2OizcwymIJxlFxzjoHuO1tVzchQcHuAFORuZgv+iDZJURHl
-	Qrzg==
-X-Received: by 10.14.204.194 with SMTP id h42mr20916422eeo.47.1376551197166;
-	Thu, 15 Aug 2013 00:19:57 -0700 (PDT)
+	:references; bh=84F3JwysR006RWu5v2EUOU8z8ZwpCfnx8MyxEZPIowI=;
+	b=U011dc4zK020G/FQKbtXjiBekDqg3WHzBMovk1McOcV8RWjl52WNWvC7yT5wyLPOev
+	nwkiRqFGB3qCJHhK0nngfcA9SImjFCTderxPwa0K/mc5De17CXao9EYL8PyvXouYdvcc
+	kevShGK9bgwNJJj14oj9++6g9vfEhSW66Onzt5qQpT+NrwhM0VOc4/9FLyCvSa6soT3p
+	6yn6IWMnf7IZ1BzKu8aI+b2psrLZsdHp+GBTr84SWaM2HxDWgnkUDoMwMSwZIe22e7R8
+	dW0X2gRFW3JATqrQGtNEN3JiCsdXfLynSSP/YEKSKK+kd8/FppQ1EtV6wSC49/DWC89K
+	fAmg==
+X-Received: by 10.15.67.131 with SMTP id u3mr20545258eex.34.1376551198359;
+	Thu, 15 Aug 2013 00:19:58 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	h52sm4980702eez.3.2013.08.15.00.19.56
+	a4sm81931259eez.0.2013.08.15.00.19.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:19:56 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:19:28 +0200
-Message-Id: <e2c723f2c646f99a2260fb1098e5ed33c67e1cf1.1376551135.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:19:29 +0200
+Message-Id: <9f1042ea3d19a784d7d5dfc3e1fe2b0acd3e746c.1376551135.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 48/60] libav: add PACKAGECONFIG for bzip2 and jack
+Subject: [meta-oe][dylan][PATCH 49/60] libnice: add PACKAGECONFIG for gupnp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,28 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:19:57 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:19:58 -0000
+
+* it's autodetected from sysroot
+* add PACKAGECONFIG to make it deterministic
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-multimedia/libav/libav.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/libav/libav.inc b/meta-oe/recipes-multimedia/libav/libav.inc
-index 6e91061..898ecfb 100644
---- a/meta-oe/recipes-multimedia/libav/libav.inc
-+++ b/meta-oe/recipes-multimedia/libav/libav.inc
-@@ -28,6 +28,10 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
- EXTRA_FFCONF_armv7a = "--cpu=cortex-a8"
- EXTRA_FFCONF ?= ""
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+index 94ec9a2..3205aaf 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+@@ -13,6 +13,9 @@ PR = "r4"
  
-+PACKAGECONFIG ??= "bzip2"
-+PACKAGECONFIG[jack] = "--enable-indev=jack,--disable-indev=jack,jack"
-+PACKAGECONFIG[bzip2] = "--enable-bzlib,--disable-bzlib,bzip2"
+ DEPENDS = "glib-2.0 gstreamer"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
 +
- EXTRA_OECONF = " \
-     --enable-shared \
-     --enable-pthreads \
+ inherit autotools
+ 
+ FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
 -- 
 1.8.3.2
 
