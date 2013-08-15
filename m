@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id EC64E6B867
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 26A596B7D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:20:03 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id d17so183538eek.28
+	Thu, 15 Aug 2013 07:20:05 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so180492eek.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:20:04 -0700 (PDT)
+	Thu, 15 Aug 2013 00:20:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=XJQ+9+WeJKoYUKHvwsuj+F8MEJ8GXOHVF+1wD9cMDT4=;
-	b=Wu1cnSYEoRPahiDl4Ushl6gvs2t5xS0r2tlMAFDObncInCMvOrkvkeJJkWoyvOZ3Q7
-	r3T32xdD7vMv+rDGy2rpbA+PzDfTuDSz4CGq/BLUUeo92qjQD1A9ByFsQp3jvrUfH7+o
-	JD57ZhsSylZxboIuPi0x2MY5kbhHpUa9EbHT49arSMzMM/tPhqFE4lbBllAHzPSvvTzB
-	0OiiUsU7hriZNX0LW3dvpxVuWmvZNfGAwLGtBG+gym6hyYQWILk9DV3wu97VakAAkozB
-	yt1RwK6LZCb2IKarSOMyS9HX66YTbWjFoskYMhI911jS18XVneh/BZNDcO32WCmKcNg/
-	iUEA==
-X-Received: by 10.14.225.199 with SMTP id z47mr20909786eep.24.1376551204402;
-	Thu, 15 Aug 2013 00:20:04 -0700 (PDT)
+	:references; bh=95dNGJYqM4MvEFiAYPkeEyebbkRXKrxQ/8OygNy9PGY=;
+	b=PGOvZZWRVlLZve2BLroONzokREEg4Z+b0SG57dTlIp8TkSBmkVsyJQWNCvd0Mhjo0G
+	2b+Jm31EdN1HiTWKhzbNHF/vxmtWNoiXGyS32W4rw4IgYk6+FrAK6IAaulKYdRFrYksQ
+	Df8TXUMAjZXMw6a3IGXXgkJr3x7ZKABjhmpzlZPO0PQG14Sz6xdqy6K/G2fsLmttXQcX
+	G21WU2xIO2kjYGLMqKKWCjdDD2ummRiGsxcbFxcXr5xuwv8qXnHCBybNsb9pICN3+Ztt
+	EPDfMGZLCfdJ8dUTOhTc+mAkE9YQjM6vINBXt2gSAIuEen7OXJCa3ovAOAuKbYC+5PfO
+	f3Ow==
+X-Received: by 10.14.102.72 with SMTP id c48mr2811635eeg.52.1376551205573;
+	Thu, 15 Aug 2013 00:20:05 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	k7sm81959509eeg.13.2013.08.15.00.20.03
+	bq1sm81939251eeb.9.2013.08.15.00.20.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:20:04 -0700 (PDT)
+	Thu, 15 Aug 2013 00:20:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:19:33 +0200
-Message-Id: <5bb3ce134412f4b60a66f88e5467018b2466ae81.1376551136.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:19:34 +0200
+Message-Id: <231a1b03401268dd134de7719c40ae7fa1861429.1376551136.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 53/60] ntfs-3g-ntfsprogs: add packageconfig for uuid
+Subject: [meta-oe][dylan][PATCH 54/60] openldap: add dependency on util-linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:20:04 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:20:05 -0000
+
+* openldap-slapd was sometime depending on util-linux-libuuid
+  add dependency to explicitly enable it
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb   | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/openldap/openldap_2.4.23.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-index db5686e..42f7ca5 100644
---- a/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-+++ b/meta-oe/recipes-support/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2011.4.12.bb
-@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "aa8c747f0bfe819b2387b05e12db8d35e4ac96dcb2432873a0b939e248
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
+index 55b0d06..06896d2 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
+@@ -20,6 +20,8 @@ SRC_URI += "file://initscript"
+ SRC_URI[md5sum] = "90150b8c0d0192e10b30157e68844ddf"
+ SRC_URI[sha256sum] = "5a5ede91d5e8ab3c7f637620aa29a3b96eb34318a8b26c8eef2d2c789fc055e3"
  
- inherit autotools
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[uuid] = "--with-uuid,--without-uuid,util-linux"
++DEPENDS = "util-linux"
 +
- # required or it calls ldconfig at install step
- EXTRA_OEMAKE = "LDCONFIG=echo"
- 
+ PR = "r1"
+ # The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
+ # installing .so and executables, this fails in cross compilation
 -- 
 1.8.3.2
 
