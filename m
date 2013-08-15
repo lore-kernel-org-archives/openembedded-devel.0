@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
 	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BBCC6B7ED
+	by mail.openembedded.org (Postfix) with ESMTP id B152E6B7F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:19:14 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g10so181059eak.18
+	Thu, 15 Aug 2013 07:19:15 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id g10so181065eak.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 00:19:14 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=pI4UQjK0AJDQQs80Y9YSj2uePf4RVgu9VgmCGM3Nygo=;
-	b=mGvzYVYcZEfqdSQK1ME7o9l6DeGCNYbtDTooKfHW4NiolNWh7W0Q+nsZ0uaX3sqo9U
-	tYVuaLElEDrGp0HQfbX2bpbWYvp6hvSAzk6l31ZZcAJNLASq+Ac1ETWkvICxEr5MKegM
-	LnH9rwXYTQcb/3LQ0xq03FK4LHXCE9G48hvAriRKS04ko5WNgzXq3VhD7E0zVzEUbsjD
-	/LE6xEgOF8ajw7jObZ539f9k7cBN/bKGW4eDK/lRrXoTgw1LZTi7VUiCSyapNjKYZdCe
-	peTHQIQFlyHIZ45E5ObNhz8O3Y3la/2s7BoOb2tJVjs5a4DHWeQs5vAf6XelTKPIuECj
-	5GmA==
-X-Received: by 10.15.33.132 with SMTP id c4mr20855526eev.2.1376551154525;
-	Thu, 15 Aug 2013 00:19:14 -0700 (PDT)
+	:references; bh=l7pjlhfC66E3xbcgnWezu9MR75WVb7x/Ahj9NrSOipc=;
+	b=Mrf9CXFe2iPH6YXVyagOurK2i0kdJyhAXMfZmp3r3Ab8Ou9/k4KeVCxjVCi3wKlzn2
+	3I1Iuu/f3NMyop/+ASzWo2WjGJYnxhGhZ9TAIpUUeNjtrCA6/0OBp9YHXT8k/61QaduR
+	Hg5pNikZCoUol0LUU0slVFnl4tt4TtD/rT9LCtWS0eC8nLVPfgFONT1KQjoAwa3rLNVk
+	d9ivhXZ7Bwj++Lqo3X3e7VCD6u3UdQDcmOhChYarv1WPX21msk/X+zh1BnZSxzGa0Ld3
+	lzPqG0gRulk9cUq7vXG5y8JDmukld6lMD6TT7xLm1A2u3OGtjBH2/8vrVNe1/W66QdwQ
+	5yWw==
+X-Received: by 10.15.24.129 with SMTP id j1mr20855476eeu.17.1376551156147;
+	Thu, 15 Aug 2013 00:19:16 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	k7sm81953233eeg.13.2013.08.15.00.19.13
+	k3sm81999407een.16.2013.08.15.00.19.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 00:19:13 -0700 (PDT)
+	Thu, 15 Aug 2013 00:19:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Aug 2013 09:18:56 +0200
-Message-Id: <0766821991bbb34cb2e8a8bca4d4ba245f4b4c8f.1376551135.git.Martin.Jansa@gmail.com>
+Date: Thu, 15 Aug 2013 09:18:57 +0200
+Message-Id: <eee1163d139f2c6f68b694203195f948b9d8aac8.1376551135.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
 References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Subject: [meta-oe][dylan][PATCH 16/60] iso-codes: add missing dependency on gettext-native
+Subject: [meta-oe][dylan][PATCH 17/60] portaudio: explicitly disable oss, add PACKAGECONFIG for alsa and jack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 07:19:14 -0000
+X-List-Received-Date: Thu, 15 Aug 2013 07:19:16 -0000
 
-* msgfmt is called in do_install and both MSGFMT variables
-  are empty without gettext-native detected in configure
-  %.mo: %.po
-        $(MSGFMT) $(MSGFMT_FLAGS) -o $@ $<
+* autoenabled dependencies on alsa-lib and jack are breaking espeak
+  when it's built against portaudio in sysroot without them
+  | ld: warning: libasound.so.2, needed by usr/lib/libportaudio.so, not found (try using -rpath or -rpath-link)
+  | ld: warning: libjack.so.0, needed by usr/lib/libportaudio.so, not found (try using -rpath or -rpath-link)
+  | usr/lib/libportaudio.so: undefined reference to `snd_pcm_sw_params_sizeof@ALSA_0.9'
+  | usr/lib/libportaudio.so: undefined reference to `snd_pcm_hw_params_test_period_size@ALSA_0.9'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb b/meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb
-index 9502923..ed89a12 100644
---- a/meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb
-+++ b/meta-oe/recipes-support/iso-codes/iso-codes_1.4.bb
-@@ -8,6 +8,10 @@ SRC_URI = "ftp://pkg-isocodes.alioth.debian.org/pub/pkg-isocodes/iso-codes-${PV}
- SRC_URI[md5sum] = "4073466e57df23d39721513219e4f7ae"
- SRC_URI[sha256sum] = "0a7cf177c25b3f0d77c60a5f1149aab9e03ba70f69bac70138a867efe19a1d97"
- 
-+# inherit gettext cannot be used, because it adds gettext-native to BASEDEPENDS which
-+# are inhibited by allarch
-+DEPENDS = "gettext-native"
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+index b35d1d8..a2b25cc 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
+@@ -2,15 +2,22 @@ DESCRIPTION = "A portable audio library"
+ SECTION = "libs/multimedia"
+ LICENSE = "PortAudio"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
+-SRCREV = "1387"
 +
- inherit autotools allarch
+ PV = "v19+svnr${SRCPV}"
+ PR = "r0"
  
- FILES_${PN} += "${datadir}/xml/"
++SRCREV = "1387"
+ SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
+ S = "${WORKDIR}/trunk"
+ 
+ inherit autotools
+ 
++PACKAGECONFIG ??= "alsa jack"
++PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
++PACKAGECONFIG[jack] = "--with-jack, --without-jack, jack,"
++
++EXTRA_OECONF = "--without-oss"
++
+ TESTS = "  pa_devs patest1      patest_hang patest_many                   patest_prime patest_sine patest_stop     patest_write_sine        \
+ pa_fuzz    patest_buffer        patest_in_overflow  patest_maxsines       patest_read_record  patest_sine8         patest_sync              \
+ pa_minlat  patest_callbackstop  patest_latency      patest_multi_sine     patest_record       patest_sine_formats  patest_toomanysines      \
 -- 
 1.8.3.2
 
