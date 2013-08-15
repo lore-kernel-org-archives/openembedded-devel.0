@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 971406B2CA
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B4A16AE7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 14:51:22 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b15so416572eek.40
+	Thu, 15 Aug 2013 19:18:41 +0000 (UTC)
+Received: by mail-ea0-f172.google.com with SMTP id r16so564970ead.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 07:51:22 -0700 (PDT)
+	Thu, 15 Aug 2013 12:18:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=V9vJyoiGQTeKHYSZ9RLcl3UCKQh0+eUOq04CYaW2UKQ=;
-	b=bFY3UMASLm2fRke5BxNILfKsyPJSLALVvY8ken86LBHCe4MJXZUoHSRgy6G+khHavJ
-	5KviyMvAsdCB25lma83dfhtvOKKNdNx0xT6xaW2UKKm+csArDJLhj5EF0a3xRBRFMKAs
-	wgWe9zLqrX8U177jD7aJlA7fgOtifoXb3hiYnbOxiipPR3N+a/nKwUGxNhcuIPaWm2nt
-	gtRjAOJIpAHE11F3jWfca1O3vlsdZ65ge0oKXHUSoy9fw0roLgbqL/NRcEDFc0lVyjoh
-	9pvsQtfmK3cq3VVKbFFePjKC1RYvLs4Hr1kN1dPVEiwR52Z1ae8LdSYC3oR/t1L0+wD0
-	opGA==
-X-Received: by 10.15.35.196 with SMTP id g44mr23562851eev.18.1376578282093;
-	Thu, 15 Aug 2013 07:51:22 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	d8sm71945617eeh.8.2013.08.15.07.51.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 07:51:21 -0700 (PDT)
-Date: Thu, 15 Aug 2013 16:52:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=mmOQXvw3mcie168TfTS6Se3sO0nGmvPpkGVj8ZoZI3U=;
+	b=CiGyUHA5/ugsMn49yd1ufYOuT1B1ESO/8Eey/9vZP3AFmwyyazNx3oi6ZoHJCB3BlH
+	C50OLYCBkdkTSw3t0WV3bk0lruNGDO5Az82+UfWE3PFcsi3VSj2rKe73PBUwn1bxumsa
+	qRBNLWmIyqWRMRWHepybf4yKQUhUzLxMZ6jNbO7x5cJ6891+8VfUm2AJViN6ZwKMWSKJ
+	N7fSdWPQ18138YuF8Vo07tgzqJor8Aum2UlQ1GQNnWDbC0OH08hZcyywEb0nA/8SlGoK
+	jTH0adGsMiK+ARpXNYEoCje5Q4KrZPAav5vO4h682A87ANX0jSrYg+/jaqfSHYu4Ahnr
+	oZLg==
+X-Received: by 10.15.108.72 with SMTP id cc48mr4771519eeb.69.1376594321808;
+	Thu, 15 Aug 2013 12:18:41 -0700 (PDT)
+Received: from nb.lan (ip-85.162.253.42.o2inet.sk. [85.162.253.42])
+	by mx.google.com with ESMTPSA id f49sm931917eec.7.2013.08.15.12.18.40
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 15 Aug 2013 12:18:40 -0700 (PDT)
+Sender: Belisko Marek <marek.belisko@gmail.com>
+From: Marek Belisko <marek.belisko@open-nandra.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130815145213.GC17945@jama>
-References: <CAAfyv35Cig9wH7tYx2b72_groQeqLeWO8jZdRrGmn+ZBonFaFg@mail.gmail.com>
-	<CAAfyv379BfBtBff1yg4MDAVfYmSm2MuDi2UgO+JP2EQEgsWspg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAAfyv379BfBtBff1yg4MDAVfYmSm2MuDi2UgO+JP2EQEgsWspg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-qt5][dylan] Problem with fetching qt5 sources
+Date: Thu, 15 Aug 2013 21:18:36 +0200
+Message-Id: <1376594316-9677-1-git-send-email-marek.belisko@open-nandra.com>
+X-Mailer: git-send-email 1.8.1.2
+Cc: Marek Belisko <marek.belisko@open-nandra.com>
+Subject: [meta-qt5][dylan][PATCH] Fix download url for qt5-5.0.2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,77 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 14:51:23 -0000
-X-Groupsio-MsgNum: 45756
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Z4ZSWl3cPHKQyRxO"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Aug 2013 19:18:43 -0000
 
---Z4ZSWl3cPHKQyRxO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+---
+ recipes-qt/qt5/qt5-5.0.2.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, Aug 15, 2013 at 02:09:28PM +0200, Belisko Marek wrote:
-> Hi,
->=20
-> I'm using meta-qt5 (dylan branch) but fetching qt5.0.2 sources failed.
-> Fix follows:
+diff --git a/recipes-qt/qt5/qt5-5.0.2.inc b/recipes-qt/qt5/qt5-5.0.2.inc
+index 0bf1404..c04b3a2 100644
+--- a/recipes-qt/qt5/qt5-5.0.2.inc
++++ b/recipes-qt/qt5/qt5-5.0.2.inc
+@@ -7,7 +7,7 @@ QT_VERSION ?= "${PV}"
+ QT_VERSION_DIR ?= "${QT_VERSION}"
+ 
+ SRC_URI += " \
+-    http://releases.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
++    http://download.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
+ "
+ 
+ S = "${WORKDIR}/${QT_MODULE}-opensource-src-${QT_VERSION}"
+-- 
+1.8.1.2
 
-yes it was changed again yesterday or few days ago, would you care to
-send proper git patch, so that I can pick it from patchwork instead of
-applying it manually from e-mail? Thanks
 
-> diff --git a/recipes-qt/qt5/qt5-5.0.2.inc b/recipes-qt/qt5/qt5-5.0.2.inc
-> index 0bf1404..c04b3a2 100644
-> --- a/recipes-qt/qt5/qt5-5.0.2.inc
-> +++ b/recipes-qt/qt5/qt5-5.0.2.inc
-> @@ -7,7 +7,7 @@ QT_VERSION ?=3D "${PV}"
->  QT_VERSION_DIR ?=3D "${QT_VERSION}"
->=20
->  SRC_URI +=3D " \
-> -    http://releases.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/subm=
-odules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz
-> \
-> +    http://download.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/subm=
-odules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz
-> \
->  "
->=20
->  S =3D "${WORKDIR}/${QT_MODULE}-opensource-src-${QT_VERSION}"
->=20
->=20
-> Marek
->=20
-> --
-> as simple and primitive as possible
-> -------------------------------------------------
-> Marek Belisko - OPEN-NANDRA
-> Freelance Developer
->=20
-> Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-> Tel: +421 915 052 184
-> skype: marekwhite
-> twitter: #opennandra
-> web: http://open-nandra.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Z4ZSWl3cPHKQyRxO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlIM6x0ACgkQN1Ujt2V2gBw6YQCdEqQGiGJB8R1q062Vpt5yE9E6
-+uwAnj55KEsBgx81GuKcgUjKEU/U2Vna
-=mtDP
------END PGP SIGNATURE-----
-
---Z4ZSWl3cPHKQyRxO--
