@@ -1,38 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F0796B2CA
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EA3B6A9F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 20:03:50 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id e53so570323eek.41
+	Fri, 16 Aug 2013 02:23:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7G2NrWt007634
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Aug 2013 13:03:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wd1CdihO8/vfuPKyJXdaoBVjuo5ZAWsjKkhztCDq7f4=;
-	b=TBdOHKPDbG20e7ZPZHa8/GkoxDGC7Jczt5j9KJoYaxx2FO/8rcj+D2dNPFGcx0v+xj
-	s4P8frbQ70z6cIh+JDYL/+ErNsLlRGlptcWYKtTAB5BsqKTyHZDjWBu1yv6ABDw89pyf
-	Gw3tZDiN4SfIMygy8hDglyzf7HWXwV3weymt5ttXo4Ac+0OMW6/kaLkB+2tG6JkuT+Ii
-	ZN19xTIobIYzKwle0nOtgORDDl8poei7uqWdO93owvf7Y8pWRtaq6TTBklnF6kTlfw1o
-	nF4rmh4FT4QT58VGreTjCtoqAPnS504yRKBkchS+2i3DdknE9bgb1QsvMbsac94Gzw9q
-	P2yw==
-X-Received: by 10.14.122.132 with SMTP id t4mr25070442eeh.20.1376597029832;
-	Thu, 15 Aug 2013 13:03:49 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	n48sm1268052eeg.17.2013.08.15.13.03.48 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 15 Aug 2013 13:03:49 -0700 (PDT)
-Date: Thu, 15 Aug 2013 22:04:41 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130815200441.GF17945@jama>
-References: <1376594316-9677-1-git-send-email-marek.belisko@open-nandra.com>
+	Thu, 15 Aug 2013 22:23:53 -0400 (EDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.342.3; Thu, 15 Aug 2013 19:23:52 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe.macdonald@windriver.com>
+Date: Fri, 16 Aug 2013 10:23:59 +0800
+Message-ID: <1376619839-23232-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-In-Reply-To: <1376594316-9677-1-git-send-email-marek.belisko@open-nandra.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Marek Belisko <marek.belisko@open-nandra.com>
-Subject: Re: [meta-qt5][dylan][PATCH] Fix download url for qt5-5.0.2.
+Subject: [PATCH meta-networking] quagga: two fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,62 +32,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 20:03:51 -0000
-X-Groupsio-MsgNum: 45759
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i6U+WTAJHBcf3BHs"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Aug 2013 02:23:54 -0000
+Content-Type: text/plain
 
---i6U+WTAJHBcf3BHs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: "Roy.Li" <rongqing.li@windriver.com>
 
-On Thu, Aug 15, 2013 at 09:18:36PM +0200, Marek Belisko wrote:
-> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
-> ---
->  recipes-qt/qt5/qt5-5.0.2.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+1. quagga should depend on iproute2, since ip from busybox is not sufficient
+2. fix a typOS(should chmod, not chown)
 
-Thanks, applied in dylan as well as master.
+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+---
+ meta-networking/recipes-protocols/quagga/quagga.inc |    9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
->=20
-> diff --git a/recipes-qt/qt5/qt5-5.0.2.inc b/recipes-qt/qt5/qt5-5.0.2.inc
-> index 0bf1404..c04b3a2 100644
-> --- a/recipes-qt/qt5/qt5-5.0.2.inc
-> +++ b/recipes-qt/qt5/qt5-5.0.2.inc
-> @@ -7,7 +7,7 @@ QT_VERSION ?=3D "${PV}"
->  QT_VERSION_DIR ?=3D "${QT_VERSION}"
-> =20
->  SRC_URI +=3D " \
-> -    http://releases.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/subm=
-odules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
-> +    http://download.qt-project.org/archive/qt/5.0/${QT_VERSION_DIR}/subm=
-odules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
->  "
-> =20
->  S =3D "${WORKDIR}/${QT_MODULE}-opensource-src-${QT_VERSION}"
-> --=20
-> 1.8.1.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index f5489c6..89b9f7a 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -5,7 +5,7 @@ Unix platforms, particularly FreeBSD, Linux, Solaris and NetBSD. \
+ Quagga is a fork of GNU Zebra which was developed by Kunihiro \
+ Ishiguro. The Quagga tree aims to build a more involved community \
+ around Quagga than the current centralised model of GNU Zebra."
+-HOMEPAGE = "http://www.quagga.net/"
++HOMEPAGE = "http://www.nongnu.org/quagga/"
+ SECTION = "network"
+ LICENSE = "GPL-2.0 & LGPL-2.0"
+ DEPENDS = "readline ncurses perl-native"
+@@ -17,6 +17,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+ 
+ INC_PR = "r2"
+ 
++# the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
++RDEPENDS_${PN} += "iproute2"
++
+ QUAGGASUBDIR = ""
+ # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
+ # versions and leave it empty for recent versions.
+@@ -128,11 +131,11 @@ pkg_postinst_${PN} () {
+     if [ "x$D" != "x" ] ; then
+         exit 1
+     fi
+-    for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
++    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
+     chown quagga:quaggavty ${sysconfdir}/quagga
+     chown quagga:quagga ${sysconfdir}/quagga/*.conf
+     chmod 750 ${sysconfdir}/quagga
+-    chown 640 ${sysconfdir}/quagga/*.conf
++    chmod 640 ${sysconfdir}/quagga/*.conf
+     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
+         ${sysconfdir}/init.d/populate-volatile.sh update
+     fi
+-- 
+1.7.10.4
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---i6U+WTAJHBcf3BHs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlINNFkACgkQN1Ujt2V2gBxL0gCfT0DEjKWCSYyxY85lfjX+cK9B
-XcAAn0I2QQHSh+zA85gedQJYCuWbtcCf
-=JqvB
------END PGP SIGNATURE-----
-
---i6U+WTAJHBcf3BHs--
