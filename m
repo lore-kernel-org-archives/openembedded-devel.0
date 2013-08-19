@@ -1,38 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 89E606010E
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DFEFC6010E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2013 19:43:20 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id m14so1883883eaj.6
+	Mon, 19 Aug 2013 01:34:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r7J1Yeb9029960
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2013 12:43:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0nLC5TK0JVgaWzN7PXF0mGXocqnpjrmndGz4ZOXrYR0=;
-	b=U0NV72DmShOP/W7EYZE2M6vD85vWl78zzo8JsAlSV0BYlPdzRhkJ50OfyrbC+ZhX6Y
-	B90xxn0PcEYosW6P2GojjXxOczmuvXxec3RLxYSvN4AohX1uNsi4Tk6lqpcXi8AKG8be
-	qqvGTAuJ27PyAOQeuNYMseWPUh+RV/G7T5+Jx+gixRK204Tm8yAlxqV937J5pFEQ/44L
-	46mBYw4kdq9L74eE5xwi2jX+t6uoIsj+4LRjP/uL9isbDIMTPku02u4t+vBQ5WPMSJm6
-	mtw93n08aN6XMF8qZsRkpFnRtA962+nHLTr3gtUCLe6BWl3XUWLTIx5wrbFiWwiD+8p3
-	UfaQ==
-X-Received: by 10.15.48.67 with SMTP id g43mr7565440eew.17.1376854999736;
-	Sun, 18 Aug 2013 12:43:19 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	x47sm1052040eea.16.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sun, 18 Aug 2013 12:43:19 -0700 (PDT)
-Date: Sun, 18 Aug 2013 21:44:22 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130818194422.GB3573@jama>
-References: <1376854084-8959-1-git-send-email-cheepeero@gmx.net>
+	Sun, 18 Aug 2013 18:34:40 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 18 Aug 2013 18:34:39 -0700
+Message-ID: <5211762A.3020201@windriver.com>
+Date: Mon, 19 Aug 2013 09:34:34 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130803 Thunderbird/17.0.8
 MIME-Version: 1.0
-In-Reply-To: <1376854084-8959-1-git-send-email-cheepeero@gmx.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] libmicrohttpd: bump to version 0.9.27
+To: <openembedded-devel@lists.openembedded.org>
+References: <cover.1376461413.git.hongxu.jia@windriver.com>
+	<a4c39e85485f80316e6cefa9b6ad79d0838c83a2.1376461413.git.hongxu.jia@windriver.com>
+	<CAGNsrLDyg3Rq0Gk+sG8Vp4y0i+=me2eTjadW2tt4dyU_qU0_cw@mail.gmail.com>
+In-Reply-To: <CAGNsrLDyg3Rq0Gk+sG8Vp4y0i+=me2eTjadW2tt4dyU_qU0_cw@mail.gmail.com>
+Subject: Re: [RFC PATCH 01/13] meta-filesystems creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,77 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2013 19:43:20 -0000
-X-Groupsio-MsgNum: 45771
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rS8CxjVDS/+yyDmU"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Aug 2013 01:34:41 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---rS8CxjVDS/+yyDmU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 08/18/2013 02:22 PM, Fathi Boudra wrote:
+> Hi,
+>
+> On 14 August 2013 09:30, Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> This layer contains filesystem related recipes.
+> My build started to fail with:
+> ERROR: Nothing RPROVIDES 'sshfs-fuse'
+>
+> After adding meta-filesystems layer, I've got another error:
+> ERROR: ParseError at
+> meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb:8:
+> Could not inherit file classes/gitpkgv.bbclass
 
-On Sun, Aug 18, 2013 at 10:28:04PM +0300, Ciprian Ciubotariu wrote:
-> ---
->  .../libmicrohttpd/libmicrohttpd_0.9.27.bb                | 16 ++++++++++=
-++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/libmicrohttpd/libmicroht=
-tpd_0.9.27.bb
+As README said, meta-filesystems layer depends on:
 
-Is there some reason to keep older version?
++This layer depends on:
++
++  URI: git://git.openembedded.org/bitbake
++  branch: master
++
++  URI: git://git.openembedded.org/openembedded-core
++  layers: meta
++  branch: master
++
++  URI: git://git.openembedded.org/meta-openembedded
++  layers: meta-oe
 
->=20
-> diff --git a/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9=
-=2E27.bb b/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.=
-bb
-> new file mode 100644
-> index 0000000..802ae40
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "GNU libmicrohttpd is a small C library that is supposed=
- to make it easy to run an HTTP server as part of another application."
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9331186f4f80db7da0e724bdd6554=
-ee5"
-> +
-> +DEPENDS =3D "libgcrypt curl"
-> +
-> +SRC_URI =3D "ftp://ftp.nluug.nl/pub/gnu/libmicrohttpd//libmicrohttpd-${P=
-V}.tar.gz"
-> +SRC_URI[md5sum] =3D "a10496b7f1b495aaf6897584da52f51b"
-> +SRC_URI[sha256sum] =3D "d532edf64c3a9da472114c2d10fc94606e3b31f21b883ec2=
-e796ab8478f7e9cb"
-> +
-> +
-> +inherit autotools lib_package
-> +
-> +do_compile_append() {
-> +	sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
-> +}
-> --=20
-> 1.8.1.5
->=20
+gitpkgv.bbclass is in meta-oe.
+
+Thanks,
+Hongxu
+
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---rS8CxjVDS/+yyDmU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.20 (GNU/Linux)
-
-iEYEARECAAYFAlIRJBYACgkQN1Ujt2V2gBxitQCfeB3PUlSRPDXAz0f3EeJq9Rjj
-qkcAn2KXb+8G6x7p3Cxb9GDhcvN4ZV42
-=OhJb
------END PGP SIGNATURE-----
-
---rS8CxjVDS/+yyDmU--
