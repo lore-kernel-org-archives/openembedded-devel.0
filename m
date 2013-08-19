@@ -1,16 +1,16 @@
 Return-Path: <dingo@movis.dk>
 Received: from sabrina (0904ds6-noe.0.fullrate.dk [89.150.185.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 415D06AFCA
+	by mail.openembedded.org (Postfix) with ESMTP id EA04A6AFB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2013 12:12:03 +0000 (UTC)
+	Mon, 19 Aug 2013 12:17:09 +0000 (UTC)
 Received: by sabrina (Postfix, from userid 1000)
-	id 0A2AD1C40155; Mon, 19 Aug 2013 14:11:41 +0200 (CEST)
+	id 00EFF1C40155; Mon, 19 Aug 2013 14:16:48 +0200 (CEST)
 From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Aug 2013 14:11:25 +0200
-Message-Id: <1376914285-16938-1-git-send-email-erp@movis.dk>
+Date: Mon, 19 Aug 2013 14:16:38 +0200
+Message-Id: <1376914598-18054-1-git-send-email-erp@movis.dk>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] perl-module-test-more: deleted, perl-module-test-simple: add Test::Simple contains Test::More and a number of other packages. As such, Test::More has been removed and Test::Simple added with RPROVIDES and PROVIDES set.
+Subject: [PATCH] perl-module-common-sense: added, perl-module-json-xs: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,65 +24,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2013 12:12:04 -0000
+X-List-Received-Date: Mon, 19 Aug 2013 12:17:10 -0000
 
+Added JSON::XS and it's dependency common::sense
+My apologies for any previous malformatted commits.
+
+Signed-off-by: Emil Petersen <erp@movis.dk>
 ---
- .../perl-module-test-more_0.98.bb                   |   19 -------------------
- .../perl-module-test-simple_0.98.bb                 |   19 +++++++++++++++++++
- 2 files changed, 19 insertions(+), 19 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
- create mode 100644 meta-perl/recipes-perl/perl-module-test-simple/perl-module-test-simple_0.98.bb
+ .../perl-module-common-sense_3.6.bb                   |   17 +++++++++++++++++
+ .../perl-module-json-xs/perl-module-json-xs_2.34.bb   |   17 +++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/perl-module-common-sense/perl-module-common-sense_3.6.bb
+ create mode 100644 meta-perl/recipes-perl/perl-module-json-xs/perl-module-json-xs_2.34.bb
 
-diff --git a/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb b/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
-deleted file mode 100644
-index 429284d..0000000
---- a/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--SUMMARY = "Test::More - yet another framework for writing test scripts"
--AUTHOR = "Michael G Schwern <schwern@pobox.com>"
--HOMEPAGE = "https://metacpan.org/module/Test::More"
--SECTION = "cpan"
--LICENSE = "GPLv1"
--LIC_FILES_CHKSUM = "file://README;md5=23e939b09e39c1a3069cf98c7f04500e"
--
--RDEPENDS_${PN} += 'perl-module-test-harness'
--
--SRC_URI = "http://cpan.metacpan.org/authors/id/M/MS/MSCHWERN/Test-Simple-0.98.tar.gz"
--SRC_URI[md5sum] = "a8b26c97440269b33dd79fd847c521d8"
--SRC_URI[sha256sum] = "2fb203e2cb75e72c6f70af71c6b01998f2c0ec2afba6c38cc5053c6107cd12a8"
--
--S = "${WORKDIR}/Test-Simple-${PV}"
--
--inherit cpan
--
--BBCLASSEXTEND = "native"
--
-diff --git a/meta-perl/recipes-perl/perl-module-test-simple/perl-module-test-simple_0.98.bb b/meta-perl/recipes-perl/perl-module-test-simple/perl-module-test-simple_0.98.bb
+diff --git a/meta-perl/recipes-perl/perl-module-common-sense/perl-module-common-sense_3.6.bb b/meta-perl/recipes-perl/perl-module-common-sense/perl-module-common-sense_3.6.bb
 new file mode 100644
-index 0000000..daeb7bb
+index 0000000..4373cfc
 --- /dev/null
-+++ b/meta-perl/recipes-perl/perl-module-test-simple/perl-module-test-simple_0.98.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Test::Builder - Backend for building test libraries"
-+AUTHOR = "Michael G. Schwern <mschwern@cpan.org>"
-+HOMEPAGE = "https://metacpan.org/module/Test::Builder"
++++ b/meta-perl/recipes-perl/perl-module-common-sense/perl-module-common-sense_3.6.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "common::sense - save a tree AND a kitten, use common::sense!"
++AUTHOR = "Marc Lehmann"
++HOMEPAGE = "http://search.cpan.org/~mlehmann/common-sense-3.6/sense.pm.PL"
 +SECTION = "cpan"
 +LICENSE = "GPLv1"
-+LIC_FILES_CHKSUM = "file://README;md5=23e939b09e39c1a3069cf98c7f04500e"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=043dba8b278e1db1b0ef93f30140b02b"
 +
-+PROVIDES_${PN} += 'perl-module-test-builder perl-module-builder-io-scalar perl-module-builder-module perl-module-builder-tester perl-module-builder-tester-color perl-module-test-more perl-module-test-simple'
-+RPROVIDES_${PN} += 'perl-module-test-builder perl-module-builder-io-scalar perl-module-builder-module perl-module-builder-tester perl-module-builder-tester-color perl-module-test-more perl-module-test-simple'
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz"
++SRC_URI[md5sum] = "9332e9fe85b0bce8c287a0429d164809"
++SRC_URI[sha256sum] = "86e2c2e109a7dd4bc5441757e729d7d622da125c6e14607a78fb56e057b86b5a"
 +
-+SRC_URI = "http://cpan.metacpan.org/authors/id/M/MS/MSCHWERN/Test-Simple-0.98.tar.gz"
-+SRC_URI[md5sum] = "a8b26c97440269b33dd79fd847c521d8"
-+SRC_URI[sha256sum] = "2fb203e2cb75e72c6f70af71c6b01998f2c0ec2afba6c38cc5053c6107cd12a8"
-+
-+S = "${WORKDIR}/Test-Simple-${PV}"
++S = "${WORKDIR}/common-sense-${PV}"
 +
 +inherit cpan
 +
 +BBCLASSEXTEND = "native"
++
+diff --git a/meta-perl/recipes-perl/perl-module-json-xs/perl-module-json-xs_2.34.bb b/meta-perl/recipes-perl/perl-module-json-xs/perl-module-json-xs_2.34.bb
+new file mode 100644
+index 0000000..cb69e8c
+--- /dev/null
++++ b/meta-perl/recipes-perl/perl-module-json-xs/perl-module-json-xs_2.34.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "JSON::XS - JSON serialising/deserialising, done correctly and fast"
++AUTHOR = "Marc Lehmann <schmorp@schmorp.de>"
++HOMEPAGE = "https://metacpan.org/module/JSON::XS"
++SECTION = "cpan"
++LICENSE = "GPLv1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=043dba8b278e1db1b0ef93f30140b02b"
++
++SRC_URI = "http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/JSON-XS-2.34.tar.gz"
++SRC_URI[md5sum] = "dda3c03335665cdeff91c37a269b833b"
++SRC_URI[sha256sum] = "a62fdf2777b9ae206aef382dbb62c9a126ce2ceef0229edacee3f6a9c78900ea"
++
++S = "${WORKDIR}/JSON-XS-${PV}"
++
++inherit cpan
++
++BBCLASSEXTEND = "native"
++
 -- 
 1.7.10.4
 
