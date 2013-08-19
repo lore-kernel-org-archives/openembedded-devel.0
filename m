@@ -1,38 +1,38 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 2082569686
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 749226010E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2013 05:10:04 +0000 (UTC)
-Received: by mail-la0-f54.google.com with SMTP id ea20so3078113lab.27
+	Mon, 19 Aug 2013 06:33:57 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id l10so1922163eei.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Aug 2013 22:10:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=OuYampWGvnaOURS+59pgXv/wka/Td+8p7fi+ergzoMU=;
-	b=Mst4Fjq4hRkQtuO+j5nNxoVs/DFkMU3Ay4t6eAkvAl3D24gkuOcE0fsIubWVq5osFE
-	IkJ28BAMbIyVp0La8pcSA2hEBFQVJhLjvIli0znveDBWE6dBjnWlOuvJ7o9+CzBJP3PY
-	pO31oNTkLKHKQxUp7s9Cu6JeEX+TmfLImaNx8nR1ps+INqqoYPBmMD5alLp7TCOWmRmu
-	4qnguMa+V/JI7dmI9krLVQX3u3NZTbABbXC9GXMaPOfkbb/o32CsjtQuXLgu5oouf21j
-	OG0Ojx5ifvBIpFGxUFHxxROdjTwmz/22Eig49CpKUECXUbQ/UQeCYJoGClyH22BtKpnO
-	GkbA==
-X-Gm-Message-State: ALoCoQnwgdGHLCMnCU+2iGnHz2IO344B0lyBPxfnXcj5tYFwnTKUsugLIwKEE9ccNsuwMCLlHFb7
-MIME-Version: 1.0
-X-Received: by 10.112.72.229 with SMTP id g5mr10172377lbv.10.1376889004911;
-	Sun, 18 Aug 2013 22:10:04 -0700 (PDT)
-Received: by 10.112.160.73 with HTTP; Sun, 18 Aug 2013 22:10:04 -0700 (PDT)
-In-Reply-To: <5211762A.3020201@windriver.com>
-References: <cover.1376461413.git.hongxu.jia@windriver.com>
-	<a4c39e85485f80316e6cefa9b6ad79d0838c83a2.1376461413.git.hongxu.jia@windriver.com>
-	<CAGNsrLDyg3Rq0Gk+sG8Vp4y0i+=me2eTjadW2tt4dyU_qU0_cw@mail.gmail.com>
-	<5211762A.3020201@windriver.com>
-Date: Mon, 19 Aug 2013 08:10:04 +0300
-Message-ID: <CAGNsrLDdKhgixhCE+1B8KgYGxw1ySpyWWB99WiERsoTDDsgGrA@mail.gmail.com>
-From: Fathi Boudra <fathi.boudra@linaro.org>
+	Sun, 18 Aug 2013 23:33:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ZgsCC3Yl1dmB7vXi+SVyZwWIJnggdz5WAurTImS+ryI=;
+	b=c73ctkdxEmEIbkad0eABnu/VHhQOwJX6f3j8DIFyykUuKZ4WS62Kmv4X5fMi5k0P7w
+	+EhUrS0+jt3Fe+HMokwT7JcLFfCAAMfe+cJp2q42syxHnMm2sLL6Z9fuII1CyzrBbshI
+	6NYIf4SH7rThYlEsxUIkRffpMZdBSI4f1ln4QtY1PawTLrbt7NV9EGJtdgJGL0axJJlI
+	vY9gwW4VkyKjY9gPpQOPTmU6M5ShUYOl99O/x0Tf6CxNYYF9ogK5AD5voIt3ZOcZO3GA
+	p52aKIFb4wM2D5bJ6fceOo/D2CI01nd2X7our2vnCUZEOTaE3ayVydQ5XDDrDkztiIYe
+	v6NQ==
+X-Received: by 10.14.29.67 with SMTP id h43mr20245576eea.7.1376894037032;
+	Sun, 18 Aug 2013 23:33:57 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	d8sm15052034eeh.8.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sun, 18 Aug 2013 23:33:56 -0700 (PDT)
+Date: Mon, 19 Aug 2013 08:35:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC PATCH 01/13] meta-filesystems creation
+Message-ID: <20130819063500.GC3573@jama>
+References: <1375853946-4583-1-git-send-email-raj.khem@gmail.com>
+	<CAMKF1sqEn0EOz7f-Vu4+W=PNHdZ60d8Dz_g5YUVgz=Qf4wj=2Q@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqEn0EOz7f-Vu4+W=PNHdZ60d8Dz_g5YUVgz=Qf4wj=2Q@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH] proxy-libintl: rprovide the gettext packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,46 +46,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2013 05:10:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 19 Aug 2013 06:33:57 -0000
+X-Groupsio-MsgNum: 45774
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DSayHWYpDlRfCAAQ"
+Content-Disposition: inline
 
-On 19 August 2013 04:34, Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> On 08/18/2013 02:22 PM, Fathi Boudra wrote:
->>
->> Hi,
->>
->> On 14 August 2013 09:30, Hongxu Jia <hongxu.jia@windriver.com> wrote:
->>>
->>> This layer contains filesystem related recipes.
->>
->> My build started to fail with:
->> ERROR: Nothing RPROVIDES 'sshfs-fuse'
->>
->> After adding meta-filesystems layer, I've got another error:
->> ERROR: ParseError at
->>
->> meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb:8:
->> Could not inherit file classes/gitpkgv.bbclass
->
->
-> As README said, meta-filesystems layer depends on:
->
->
-> +This layer depends on:
-> +
-> +  URI: git://git.openembedded.org/bitbake
-> +  branch: master
-> +
-> +  URI: git://git.openembedded.org/openembedded-core
-> +  layers: meta
-> +  branch: master
-> +
-> +  URI: git://git.openembedded.org/meta-openembedded
-> +  layers: meta-oe
->
-> gitpkgv.bbclass is in meta-oe.
+--DSayHWYpDlRfCAAQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I had meta-oe in my conf. The root cause of my issue was a  typo...
+On Tue, Aug 13, 2013 at 06:43:22PM -0700, Khem Raj wrote:
+> ignore this one please. I have a different one that fixes the problem
+> coming out shortly.
 
-Sorry for the noise.
+I'm sorry, I was a bit blind when checking patches to merge last week
+and somehow I've missed this reply, should I revert it or can you send
+follow-up quickly?
+=20
+> On Tue, Aug 6, 2013 at 10:39 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+> > This helps in stubbing out gettext when proxy-libintl is chosen
+> > usually on small/uclibc based images
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../proxy-libintl/proxy-libintl_20100902.bb        |    2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.=
+bbb/meta-oe/recipes-core/proxy-libintl/
+> > proxy-libintl_20100902.bb
+> > index e1531dd..0c652b6 100644
+> > --- a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
+> > +++ b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
+> > @@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D
+> > "file://src/proxy-libintl/COPYING.LIB.txt;md5=3Dbc400bc21422f9a
+> >
+> >  PR =3D "r1"
+> >  PROVIDES =3D "virtual/libintl virtual/gettext"
+> > +RPROVIDES_${PN} +=3D "gettext"
+> > +RPROVIDES_${PN}-dev +=3D "gettext-dev"
+> >
+> >  SRC_URI =3D " \
+> >
+> > http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/${PN}-dev_${=
+PV}_win32.zip\
+> > --
+> > 1.7.9.5
+> >
+> >
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--DSayHWYpDlRfCAAQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.20 (GNU/Linux)
+
+iEYEARECAAYFAlIRvJQACgkQN1Ujt2V2gBw2NwCdFO7yzeDZo/fVNmpnmUlgYq5y
+MhYAoJnsAMC+875vmxkkiM0e3tH60d7Y
+=HETW
+-----END PGP SIGNATURE-----
+
+--DSayHWYpDlRfCAAQ--
