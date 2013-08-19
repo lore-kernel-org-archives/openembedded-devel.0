@@ -1,14 +1,14 @@
 Return-Path: <dingo@movis.dk>
 Received: from sabrina (0904ds6-noe.0.fullrate.dk [89.150.185.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E7566AFCA
+	by mail.openembedded.org (Postfix) with ESMTP id C2B8A6AFCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2013 11:56:04 +0000 (UTC)
+	Mon, 19 Aug 2013 11:58:17 +0000 (UTC)
 Received: by sabrina (Postfix, from userid 1000)
-	id 156BC1C40155; Mon, 19 Aug 2013 13:55:43 +0200 (CEST)
+	id F415C1C40155; Mon, 19 Aug 2013 13:57:56 +0200 (CEST)
 From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Aug 2013 13:55:41 +0200
-Message-Id: <1376913341-18910-1-git-send-email-erp@movis.dk>
+Date: Mon, 19 Aug 2013 13:57:52 +0200
+Message-Id: <1376913472-22315-1-git-send-email-erp@movis.dk>
 X-Mailer: git-send-email 1.7.10.4
 Subject: [PATCH] Added recipes for Test::More and its dependency Test::Harness Signed-off-by: Emil Petersen <erp@movis.dk>
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -24,7 +24,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2013 11:56:04 -0000
+X-List-Received-Date: Mon, 19 Aug 2013 11:58:18 -0000
 
 ---
  .../perl-module-test-harness_3.28.bb                |   18 ++++++++++++++++++
