@@ -1,33 +1,16 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-qa0-f44.google.com (mail-qa0-f44.google.com
-	[209.85.216.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 86E0D6AFCA
+Return-Path: <dingo@movis.dk>
+Received: from sabrina (0904ds6-noe.0.fullrate.dk [89.150.185.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E7566AFCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2013 10:38:26 +0000 (UTC)
-Received: by mail-qa0-f44.google.com with SMTP id hu16so1709478qab.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Aug 2013 03:38:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=CBeT2ZG//HNdKvbiyi2D0SnVrH9X1RkM61XWuMsinag=;
-	b=E+yCA/Rwe7FF19V4xM6veOicPTNGK1pMQHADRWNhsJ7ACHsBT9CcreURYQhJISqOIi
-	1qNef5Xx/VVcvFqKPndnGOKcY88jiSwM+G7o8a/6VzoOlVj5cbZmGok8R41XjAfmcuMQ
-	tkyz3QB3FUQj/Zw+qPFpLafzggeAQOwA0Kaasv/XXeyMOF8R6ME5L7Tbldnt+bAZixJQ
-	I9vJjf+kzlq9n9NDoOxLV8u8/YRnSR6eZQhV47CeULa5StbmSnWN+isez9eB3UW48sfI
-	QntAW8tMz0f+VYJINx8Iht1pKgZuV0UwyS4rgDkhmrlnxE6NrHd7xpctZmkEpt7CGlRL
-	7UzQ==
-MIME-Version: 1.0
-X-Received: by 10.229.134.133 with SMTP id j5mr3276353qct.41.1376908706598;
-	Mon, 19 Aug 2013 03:38:26 -0700 (PDT)
-Received: by 10.224.114.207 with HTTP; Mon, 19 Aug 2013 03:38:26 -0700 (PDT)
-In-Reply-To: <20130819102620.GA522@jama>
-References: <1376647801-30792-1-git-send-email-cazfi74@gmail.com>
-	<20130819102620.GA522@jama>
-Date: Mon, 19 Aug 2013 13:38:26 +0300
-Message-ID: <CAF6bG8fbW0s0QReuzK=U9-0KYTV8Ho=VBpaTpGDAUy8+K5+N3w@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
+	Mon, 19 Aug 2013 11:56:04 +0000 (UTC)
+Received: by sabrina (Postfix, from userid 1000)
+	id 156BC1C40155; Mon, 19 Aug 2013 13:55:43 +0200 (CEST)
+From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ImageMagick: update to upstream version 6.8.6-8
+Date: Mon, 19 Aug 2013 13:55:41 +0200
+Message-Id: <1376913341-18910-1-git-send-email-erp@movis.dk>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH] Added recipes for Test::More and its dependency Test::Harness Signed-off-by: Emil Petersen <erp@movis.dk>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,21 +24,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2013 10:38:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Aug 2013 11:56:04 -0000
 
-On 19 August 2013 13:26, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Aug 16, 2013 at 01:10:01PM +0300, Marko Lindqvist wrote:
->> - License changed by additional copyright year only.
->> - Patch PerlMagic_MakePatch.patch part of upstream now
->
-> Looks good now, do you still need freetype support?
-> http://patchwork.openembedded.org/patch/51217/
+---
+ .../perl-module-test-harness_3.28.bb                |   18 ++++++++++++++++++
+ .../perl-module-test-more_0.98.bb                   |   19 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/perl-module-test-harness/perl-module-test-harness_3.28.bb
+ create mode 100644 meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
 
- Oh, I had completely forgotten I had submitted similar patch already!
-Yes, I'm going to need freetype delegate in ImageMagick assuming I get
-the freeciv mapimg feature otherwise to work.
+diff --git a/meta-perl/recipes-perl/perl-module-test-harness/perl-module-test-harness_3.28.bb b/meta-perl/recipes-perl/perl-module-test-harness/perl-module-test-harness_3.28.bb
+new file mode 100644
+index 0000000..a7ed42e
+--- /dev/null
++++ b/meta-perl/recipes-perl/perl-module-test-harness/perl-module-test-harness_3.28.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Test::Harness - Run Perl standard test scripts with statistics"
++AUTHOR = "Curis \"Ovid\" Poe <ovid@cpan.org>"
++HOMEPAGE = "https://metacpan.org/module/Test::Harness"
++SECTION = "devtools"
++LICENSE = "GPLv1"
++LIC_FILES_CHKSUM = "file://README;md5=37947a7c4fbd4a63c41d1bfa385e0c1e"
++
++SRC_URI = "http://cpan.metacpan.org/authors/id/O/OV/OVID/Test-Harness-3.28.tar.gz"
++SRC_URI[md5sum] = "e71faf73830f249e2eb569a52362c106"
++SRC_URI[sha256sum] = "209d538a7809935967c2c148a36c75a2959a3c3432e1d406288662632870a07c"
++
++S = "${WORKDIR}/Test-Harness-${PV}/"
++
++inherit cpan
++
++BBCLASSEXTEND = "native"
++
++
+diff --git a/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb b/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
+new file mode 100644
+index 0000000..429284d
+--- /dev/null
++++ b/meta-perl/recipes-perl/perl-module-test-more/perl-module-test-more_0.98.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Test::More - yet another framework for writing test scripts"
++AUTHOR = "Michael G Schwern <schwern@pobox.com>"
++HOMEPAGE = "https://metacpan.org/module/Test::More"
++SECTION = "cpan"
++LICENSE = "GPLv1"
++LIC_FILES_CHKSUM = "file://README;md5=23e939b09e39c1a3069cf98c7f04500e"
++
++RDEPENDS_${PN} += 'perl-module-test-harness'
++
++SRC_URI = "http://cpan.metacpan.org/authors/id/M/MS/MSCHWERN/Test-Simple-0.98.tar.gz"
++SRC_URI[md5sum] = "a8b26c97440269b33dd79fd847c521d8"
++SRC_URI[sha256sum] = "2fb203e2cb75e72c6f70af71c6b01998f2c0ec2afba6c38cc5053c6107cd12a8"
++
++S = "${WORKDIR}/Test-Simple-${PV}"
++
++inherit cpan
++
++BBCLASSEXTEND = "native"
++
+-- 
+1.7.10.4
 
-
- - ML
 
