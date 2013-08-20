@@ -1,24 +1,39 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 03C446B5AA
+Return-Path: <ross.burton@intel.com>
+Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 93D736065F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2013 06:57:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7K6vRkw005517
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 20 Aug 2013 08:37:19 +0000 (UTC)
+Received: by mail-vc0-f179.google.com with SMTP id ht10so70807vcb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2013 02:57:27 -0400 (EDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.342.3; Mon, 19 Aug 2013 23:57:26 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe.macdonald@windriver.com>
-Date: Tue, 20 Aug 2013 14:57:37 +0800
-Message-ID: <1376981857-9687-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Tue, 20 Aug 2013 01:37:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=ywZhG6p32z0CmknbzI/E8qAHe/bNGBl1AAgX3x9FvCo=;
+	b=iOPLZqUb5qd1PrzzJ0W0BCn2+2femU4kQRmnczD4i/TJqP5y/M6/6OGl3HY8Vaukw4
+	0pRqSK71R5Ku1dOkl4KA7GWMRxC+rrsS+HDo9PuOg5bJi4UgM5TLBrjA9Hxc19rH+ZaB
+	HfekpQhc99dGVm0hxUKCIsOZza7OzYOJz5dp1y1uekPUJWG2rXMvNPpkWjHq0MPOZiHi
+	9mIdGdl+UhJs/OQcFPqNQFPYqpmLEbxjDA+88alXFKY8xhxv2GVUpV5dW+uL9VhMkIWP
+	pTNAjHrCrvJ41R7zHaoT4jx8YceIBbY+98l7pcdxQzdp+wwdJvKvHb2nJflF7dUQ7lid
+	rBLQ==
+X-Gm-Message-State: ALoCoQkUUk2E6U35gtWtEJvqHypzXqEtka4NB44DoqMerAFUoJcLjpT4OPg+z5VffTUaNW1vtgyH
+X-Received: by 10.58.237.105 with SMTP id vb9mr174865vec.2.1376987839583; Tue,
+	20 Aug 2013 01:37:19 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH meta-networking] atftp: port a patch from OpenSUSE to fix "Sorcerer's Apprentice Syndrome"(SAS)
+Received: by 10.220.71.201 with HTTP; Tue, 20 Aug 2013 01:36:59 -0700 (PDT)
+In-Reply-To: <5211762A.3020201@windriver.com>
+References: <cover.1376461413.git.hongxu.jia@windriver.com>
+	<a4c39e85485f80316e6cefa9b6ad79d0838c83a2.1376461413.git.hongxu.jia@windriver.com>
+	<CAGNsrLDyg3Rq0Gk+sG8Vp4y0i+=me2eTjadW2tt4dyU_qU0_cw@mail.gmail.com>
+	<5211762A.3020201@windriver.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 20 Aug 2013 09:36:59 +0100
+Message-ID: <CAJTo0LYFNSGhEjjMLTO4zTSTMXQC+vnxada0nb+EaVWWnn9Rxw@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [RFC PATCH 01/13] meta-filesystems creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,131 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2013 06:57:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Aug 2013 08:37:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: "Roy.Li" <rongqing.li@windriver.com>
+Hi,
 
-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
----
- meta-networking/recipes-daemons/atftp/atftp_git.bb |    1 +
- .../files/atftp-0.7-sorcerers_apprentice.patch     |   94 ++++++++++++++++++++
- 2 files changed, 95 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/atftp/files/atftp-0.7-sorcerers_apprentice.patch
+On 19 August 2013 02:34, Hongxu Jia <hongxu.jia@windriver.com> wrote:
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-index 4b9ff05..8f9b4e3 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://atftp.git.sourceforge.net/gitroot/atftp/atftp;protocol=git \
-            file://atftpd-0.7_unprotected_assignments_crash.patch \
-            file://atftpd.init \
-            file://atftpd.service \   
-+           file://atftp-0.7-sorcerers_apprentice.patch \
- "
- S = "${WORKDIR}/git"
- 
-diff --git a/meta-networking/recipes-daemons/atftp/files/atftp-0.7-sorcerers_apprentice.patch b/meta-networking/recipes-daemons/atftp/files/atftp-0.7-sorcerers_apprentice.patch
-new file mode 100644
-index 0000000..fc64291
---- /dev/null
-+++ b/meta-networking/recipes-daemons/atftp/files/atftp-0.7-sorcerers_apprentice.patch
-@@ -0,0 +1,94 @@
-+atftp exhibits the well known "Sorcerer's Apprentice Syndrome"(SAS) problem.
-+According to RFC 1350, the fix to SAS is quite simple: further copies of the
-+acknowledgment for a particular data block would be ignored.
-+
-+Patch originally from OpenSUSE:
-+https://build.opensuse.org/package/view_file?file=atftp-0.7-sorcerers_apprentice.patch&package=atftp.539&project=openSUSE%3A12.1%3AUpdate&rev=84569792975e00573d7df597d2a6e895
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+Index: atftp-0.7/tftp_file.c
-+===================================================================
-+--- atftp-0.7.orig/tftp_file.c	2011-11-22 15:12:53.792744083 +0100
-++++ atftp-0.7/tftp_file.c	2011-11-22 15:13:51.706421893 +0100
-+@@ -605,6 +605,7 @@
-+      int timeout_state = state; /* what state should we go on when timeout */
-+      int result;
-+      long block_number = 0;
-++     long last_requested_block = -1;
-+      long last_block = -1;
-+      int data_size;             /* size of data received */
-+      int sockfd = data->sockfd; /* just to simplify calls */
-+@@ -765,6 +766,17 @@
-+                          connected = 1;
-+                     }
-+                     block_number = ntohs(tftphdr->th_block);
-++
-++                    if (last_requested_block >= block_number)
-++                    {
-++                        if (data->trace)
-++                            fprintf(stderr, "received duplicated ACK <block: %ld >= %ld>\n",
-++                                    last_requested_block, block_number);
-++                        break;
-++                    }
-++                    else
-++                        last_requested_block = block_number;
-++
-+                     if (data->trace)
-+                          fprintf(stderr, "received ACK <block: %ld>\n",
-+                                  block_number);
-+Index: atftp-0.7/tftpd_file.c
-+===================================================================
-+--- atftp-0.7.orig/tftpd_file.c	2011-11-22 15:12:53.793744112 +0100
-++++ atftp-0.7/tftpd_file.c	2011-11-22 15:15:04.617534260 +0100
-+@@ -403,6 +403,7 @@
-+      int timeout_state = state;
-+      int result;
-+      long block_number = 0;
-++     long last_requested_block = -1;
-+      long last_block = -1;
-+      int block_loops = 0;
-+      int data_size;
-+@@ -859,6 +860,32 @@
-+                     {
-+                          logger(LOG_DEBUG, "received ACK <block: %d>", block_number);
-+                     }
-++
-++		    /* check whether the block request isn't already fulfilled */
-++
-++                    /* multicast, block numbers could contain gaps */
-++                    if (multicast) {
-++                        if (last_requested_block >= block_number)
-++                        {
-++                            if (data->trace)
-++                                logger(LOG_DEBUG, "received duplicated ACK <block: %d >= %d>", last_requested_block, block_number);
-++                            break;
-++                        }
-++                        else
-++                            last_requested_block = block_number;
-++                    /* unicast, blocks should be requested one after another */
-++		    } else {
-++                        if (last_requested_block + 1 != block_number && last_requested_block != -1)
-++                        {
-++                            if (data->trace)
-++                                logger(LOG_DEBUG, "received out of order ACK <block: %d != %d>", last_requested_block + 1, block_number);
-++                            break;
-++                        }
-++                        else
-++                            last_requested_block = block_number;
-++                    }
-++
-++
-+                     if (ntohs(tftphdr->th_block) == 65535)
-+                     {
-+                          block_loops++;
-+@@ -958,6 +985,8 @@
-+                          /* nedd to send an oack to that client */
-+                          state = S_SEND_OACK;                
-+                          fseek(fp, 0, SEEK_SET);
-++			 /* reset the last block received counter */
-++			 last_requested_block = -1;
-+                     }
-+                     else
-+                     {
--- 
-1.7.10.4
+> gitpkgv.bbclass is in meta-oe.
+>
 
+Is this the only part of meta-oe that meta-filesystems needs?  If it's
+genuinely useful should we this be considered for oe-core?
+
+(layers that depend on meta-oe bother me, especially when they depend on
+just a tiny fraction of it)
+
+Ross
 
