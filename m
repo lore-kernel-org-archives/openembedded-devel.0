@@ -1,23 +1,26 @@
 Return-Path: <Pengyu.Ma@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E7D0A6B7C8
+Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 98AC56B88D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2013 03:14:52 +0000 (UTC)
+	Wed, 21 Aug 2013 03:18:40 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7L3EsRi022965
+	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7L3Iepa004995
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2013 20:14:54 -0700 (PDT)
+	Tue, 20 Aug 2013 23:18:40 -0400 (EDT)
 Received: from yu.com (128.224.162.249) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 20 Aug 2013 20:14:52 -0700
+	Tue, 20 Aug 2013 20:18:39 -0700
 From: Pengyu Ma <pengyu.ma@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <pengyu.ma@windriver.com>
-Date: Wed, 21 Aug 2013 11:14:50 +0800
-Message-ID: <1377054890-12769-1-git-send-email-pengyu.ma@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<bruce.ashfield@windriver.com>, <Liezhi.Yang@windriver.com>,
+	<pengyu.ma@windriver.com>
+Date: Wed, 21 Aug 2013 11:18:35 +0800
+Message-ID: <1377055115-12815-1-git-send-email-pengyu.ma@windriver.com>
 X-Mailer: git-send-email 1.7.12-rc1
 MIME-Version: 1.0
+Cc: weiwei.wang@windriver.com
 Subject: [meta-filesystems][PATCH v1] yaffs2: Adds git version recipe (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -32,7 +35,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2013 03:14:53 -0000
+X-List-Received-Date: Wed, 21 Aug 2013 03:18:40 -0000
 Content-Type: text/plain
 
 Added CONFIG in CFLAGS to resolve missing definition error.
