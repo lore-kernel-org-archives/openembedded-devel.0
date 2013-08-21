@@ -1,21 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 1112D6B6AE
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A9816B7B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2013 23:21:28 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 20 Aug 2013 16:21:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,923,1367996400"; d="scan'208";a="390550347"
-Received: from akagikob-mobl.ger.corp.intel.com (HELO
-	helios.ger.corp.intel.com) ([10.252.122.209])
-	by orsmga002.jf.intel.com with ESMTP; 20 Aug 2013 16:21:13 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Wed, 21 Aug 2013 01:41:47 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id g10so1162767pdj.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Aug 2013 18:41:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=9n94afj59IWV5+8Jy1aybbLRdaH4I1bjVjRyoRtEyOg=;
+	b=x4G4a4nbpQV6faf73Xh2hXA+iHB8r1Lt08aTWrwd20WzMtYe3pdo0h0QXzjwmf1Ggf
+	NUHxYNO9sdpLhgTKOhAnPcz+dkILqqZPCdZDdkFXe5Vv/U2L3JLk5fS4DGKf1ZL1xMwa
+	4m3pg4Sxmp5heXNXjc4ZlO+923Cu7LN2yv4f9nJNjoVHNQrF/0JmdIbzOnu0Px0ydiSc
+	VhGjdLERrEAr9lVLuhDe71ZGW3dbpsPAIpJnbh7mdKS5xwsD156Ky3xUIwvuftBQvxMR
+	xAD83xN1OV4aqu0RFpjJWZUmdSWEEnsBNPrGzVZyjhXuxgSkWIIT35YQgYFyZOWn9U5n
+	Cbqw==
+X-Received: by 10.68.200.9 with SMTP id jo9mr4940009pbc.120.1377049307627;
+	Tue, 20 Aug 2013 18:41:47 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	qp10sm6662709pab.13.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 20 Aug 2013 18:41:47 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Aug 2013 00:20:53 +0100
-Message-Id: <1377040853-17307-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH] tslib: remove
+Date: Wed, 21 Aug 2013 11:36:41 +1000
+Message-Id: <1377049001-8170-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3.4
+Subject: [meta-oe][PATCH] llvm: include /usr/lib/libLLVM-*.so in lib package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,155 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2013 23:21:28 -0000
+X-List-Received-Date: Wed, 21 Aug 2013 01:41:48 -0000
 
-A newer recipe is now in OE-Core.
+/usr/lib/libLLVM-*.so was being split into the dev package but it should
+be in the lib package otherwise software that depends on the LLVM shared
+library will be unable to to locate it when the dev package isn't
+installed.
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../tslib/tslib/obsolete_automake_macros.patch     | 16 ------
- meta-oe/recipes-graphics/tslib/tslib/ts.conf       | 25 ---------
- meta-oe/recipes-graphics/tslib/tslib/tslib.sh      |  8 ---
- meta-oe/recipes-graphics/tslib/tslib_git.bb        | 59 ----------------------
- 4 files changed, 108 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/tslib/tslib/obsolete_automake_macros.patch
- delete mode 100644 meta-oe/recipes-graphics/tslib/tslib/ts.conf
- delete mode 100644 meta-oe/recipes-graphics/tslib/tslib/tslib.sh
- delete mode 100644 meta-oe/recipes-graphics/tslib/tslib_git.bb
+ meta-oe/recipes-core/llvm/llvm.inc | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/tslib/tslib/obsolete_automake_macros.patch b/meta-oe/recipes-graphics/tslib/tslib/obsolete_automake_macros.patch
-deleted file mode 100644
-index 752077d..0000000
---- a/meta-oe/recipes-graphics/tslib/tslib/obsolete_automake_macros.patch
-+++ /dev/null
-@@ -1,16 +0,0 @@
--Upstream-Status: Submitted [https://github.com/kergoth/tslib/pull/14]
--
--Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
--diff --git a/configure.ac b/configure.ac
--index c42be91..6d71be0 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -6,7 +6,7 @@ AC_INIT(tslib, 1.0.0, kergoth@handhelds.org)
-- # AC_CONFIG_AUX_DIR(config)
-- AM_INIT_AUTOMAKE(dist-bzip2)
-- AC_CONFIG_SRCDIR([src/ts_close.c])
---AM_CONFIG_HEADER(config.h)
--+AC_CONFIG_HEADERS(config.h)
--
-- PACKAGE_DESCRIPTION="Touchscreen Access Library"
-- AC_SUBST(PACKAGE_DESCRIPTION)
-diff --git a/meta-oe/recipes-graphics/tslib/tslib/ts.conf b/meta-oe/recipes-graphics/tslib/tslib/ts.conf
-deleted file mode 100644
-index 1b0da93..0000000
---- a/meta-oe/recipes-graphics/tslib/tslib/ts.conf
-+++ /dev/null
-@@ -1,25 +0,0 @@
--# Uncomment if you wish to use the linux input layer event interface
--module_raw input
--
--# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
--# module_raw collie
--
--# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
--# module_raw corgi
--
--# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
--# module_raw ucb1x00
--
--# Uncomment if you're using an HP iPaq h3600 or similar
--# module_raw h3600
--
--# Uncomment if you're using a Hitachi Webpad
--# module_raw mk712
--
--# Uncomment if you're using an IBM Arctic II
--# module_raw arctic2
--
--module pthres pmin=1
--module variance delta=30
--module dejitter delta=100
--module linear
-diff --git a/meta-oe/recipes-graphics/tslib/tslib/tslib.sh b/meta-oe/recipes-graphics/tslib/tslib/tslib.sh
-deleted file mode 100644
-index 7068e8d..0000000
---- a/meta-oe/recipes-graphics/tslib/tslib/tslib.sh
-+++ /dev/null
-@@ -1,8 +0,0 @@
--#!/bin/sh
--
--if [ -e /dev/input/touchscreen0 ]; then
--    TSLIB_TSDEVICE=/dev/input/touchscreen0
--
--    export TSLIB_TSDEVICE
--fi
--
-diff --git a/meta-oe/recipes-graphics/tslib/tslib_git.bb b/meta-oe/recipes-graphics/tslib/tslib_git.bb
-deleted file mode 100644
-index b653978..0000000
---- a/meta-oe/recipes-graphics/tslib/tslib_git.bb
-+++ /dev/null
-@@ -1,59 +0,0 @@
--SUMMARY = "An abstraction layer for touchscreen panel events."
--DESCRIPTION = "Tslib is an abstraction layer for touchscreen panel \
--events, as well as a filter stack for the manipulation of those events. \
--Tslib is generally used on embedded devices to provide a common user \
--space interface to touchscreen functionality."
--HOMEPAGE = "http://tslib.berlios.de/"
--
--AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
--SECTION = "base"
--LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
--
--PR = "r1"
--
--DEFAULT_PREFERENCE = "-1"
--
--SRC_URI = "git://github.com/kergoth/tslib.git;protocol=git \
--           file://obsolete_automake_macros.patch \
--           file://ts.conf \
--           file://tslib.sh"
--SRCREV = "e17263ef401ee885a27d649b90b577cfb44500e0"
--S = "${WORKDIR}/git"
--
--PV = "1.0+gitr${SRCPV}"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF = "--enable-shared --disable-h3600 --enable-input --disable-corgi --disable-collie --disable-mk712 --disable-arctic2 --disable-ucb1x00"
--
--do_install_prepend() {
--    install -m 0644 ${WORKDIR}/ts.conf ${S}/etc/ts.conf
--}
--
--do_install_append() {
--    install -d ${D}${sysconfdir}/profile.d/
--    install -m 0755 ${WORKDIR}/tslib.sh ${D}${sysconfdir}/profile.d/
--}
--
--SRC_URI_OVERRIDES_PACKAGE_ARCH = "0"
--
--# People should consider using udev's /dev/input/touchscreen0 symlink
--# instead of detect-stylus
--#RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
--RPROVIDES_tslib-conf = "libts-0.0-conf"
--
--PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate"
--DEBIAN_NOAUTONAME_tslib-conf = "1"
--DEBIAN_NOAUTONAME_tslib-tests = "1"
--DEBIAN_NOAUTONAME_tslib-calibrate = "1"
--
--RDEPENDS_${PN} = "tslib-conf"
--RRECOMMENDS_${PN} = "pointercal"
--
--FILES_${PN}-dbg += "${libdir}/ts/.debug*"
--FILES_${PN}-dev += "${libdir}/ts/*.la"
--FILES_tslib-conf = "${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh ${datadir}/tslib"
--FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so*"
--FILES_tslib-calibrate += "${bindir}/ts_calibrate"
--FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_test"
+diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
+index c0d6b6e..525dd3c 100644
+--- a/meta-oe/recipes-core/llvm/llvm.inc
++++ b/meta-oe/recipes-core/llvm/llvm.inc
+@@ -42,20 +42,24 @@ DOTDEBUG-dbg = " ${bindir}/${LLVM_DIR}/.debug \
+                  /usr/src/debug \
+ "
+ 
+-FILES_${PN}-dev += "${bindir}/${LLVM_DIR} \
+-                    ${libdir}/${LLVM_DIR}/BugpointPasses.so \
+-                    ${libdir}/${LLVM_DIR}/LLVMHello.so \
++FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
++                   ${includedir}/${LLVM_DIR} \
++                   ${libdir}/${LLVM_DIR}/BugpointPasses.so \
++                   ${libdir}/${LLVM_DIR}/LLVMHello.so \
+ "
+ 
+ PACKAGES_DYNAMIC = "^libllvm-.*$"
+ 
+ python llvm_populate_packages() {
++    libdir = bb.data.expand('${libdir}', d)
+     libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
+-    split_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s', 'Split package for %s', allow_dirs=True)
+     split_dbg_packages = do_split_packages(d, libllvm_libdir+'/.debug', '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s-dbg', 'Split debug package for %s', allow_dirs=True)
++    split_packages = do_split_packages(d, libdir, '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s', 'Split package for %s', allow_dirs=True, allow_links=True, recursive=True)
+     split_staticdev_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.a$', 'libllvm${LLVM_RELEASE}-%s-staticdev', 'Split staticdev package for %s', allow_dirs=True)
+     if split_packages:
+         pn = d.getVar('PN', True)
++        for package in split_packages:
++            d.appendVar('INSANE_SKIP_' + package, ' dev-so')
+         d.appendVar('RDEPENDS_' + pn, ' '+' '.join(split_packages))
+         d.appendVar('RDEPENDS_' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
+         d.appendVar('RDEPENDS_' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
 -- 
-1.8.1.2
+1.8.3.4
 
 
