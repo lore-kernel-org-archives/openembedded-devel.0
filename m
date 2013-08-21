@@ -1,27 +1,36 @@
-Return-Path: <Pengyu.Ma@windriver.com>
-Received: from mail7.windriver.com (mail7.windriver.com [128.224.252.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 98AC56B88D
+Return-Path: <cazfi74@gmail.com>
+Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C5DD6B88D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Aug 2013 03:18:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail7.windriver.com (8.14.5/8.14.3) with ESMTP id r7L3Iepa004995
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 21 Aug 2013 15:03:20 +0000 (UTC)
+Received: by mail-la0-f49.google.com with SMTP id ev20so428120lab.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Aug 2013 23:18:40 -0400 (EDT)
-Received: from yu.com (128.224.162.249) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 20 Aug 2013 20:18:39 -0700
-From: Pengyu Ma <pengyu.ma@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<bruce.ashfield@windriver.com>, <Liezhi.Yang@windriver.com>,
-	<pengyu.ma@windriver.com>
-Date: Wed, 21 Aug 2013 11:18:35 +0800
-Message-ID: <1377055115-12815-1-git-send-email-pengyu.ma@windriver.com>
-X-Mailer: git-send-email 1.7.12-rc1
-MIME-Version: 1.0
-Cc: weiwei.wang@windriver.com
-Subject: [meta-filesystems][PATCH v1] yaffs2: Adds git version recipe (initial recipe)
+	Wed, 21 Aug 2013 08:03:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=IxQUdyPRCVu2vla4ku8ontGcH4Hm3MEfYxUPe2ACV8A=;
+	b=I4S11PoYDjlU/aeKILJEodI7IwLD/4TWqI/mJizm314I91QjvxDcHYZfJJH+QRPY7B
+	GDRPtdDoym23XhT3bVO56/8stL1HUyB/kH0fn6/RKadT3pJzMJywHFfvFdlvoKy7nplO
+	OSu5qZb2nTEa/axkucuWLSOmEKDGrkNQNuxBd0bmHwcfpQkureifUh5HCdMO+MKrzG5/
+	vj4MOd76U1Fgu9b3wD9IVCWzJRp4VhAxYBcetOlx6FdGdOjilNJR/Ds5Fd5KqvZPhrqr
+	VIou0UXSAwTzsBsb3MBLIbFcoT9ta31KmFwASd7SrG/Jy5pmsVP5wE2iC0Tyrn/PlWCL
+	rCUw==
+X-Received: by 10.152.22.35 with SMTP id a3mr608514laf.45.1377097400331;
+	Wed, 21 Aug 2013 08:03:20 -0700 (PDT)
+Received: from prime (a91-153-14-158.elisa-laajakaista.fi. [91.153.14.158])
+	by mx.google.com with ESMTPSA id b6sm3075837lae.0.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 21 Aug 2013 08:03:19 -0700 (PDT)
+Received: from cazfi by prime with local (Exim 4.80)
+	(envelope-from <cazfi74@gmail.com>)
+	id 1VC9wL-0006W9-D9; Wed, 21 Aug 2013 18:03:17 +0300
+From: Marko Lindqvist <cazfi74@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Aug 2013 18:03:16 +0300
+Message-Id: <1377097396-25020-1-git-send-email-cazfi74@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] libungif: update to upstream version 4.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,62 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2013 03:18:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Aug 2013 15:03:20 -0000
 
-Added CONFIG in CFLAGS to resolve missing definition error.
-
-Signed-off-by: Pengyu Ma <pengyu.ma@windriver.com>
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 ---
- .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+ .../libungif/{libungif_4.1.3.bb => libungif_4.1.4.bb}            |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/libungif/{libungif_4.1.3.bb => libungif_4.1.4.bb} (53%)
 
-diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-new file mode 100644
-index 0000000..2b7452b
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "Yet Another Flash File System"
-+
-+DESCRIPTION = "Tools for managing 'yaffs2' file systems."
-+
-+SECTION = "base"
-+HOMEPAGE = "http://www.yaffs.net"
-+LICENSE = "GPLv2"
-+
-+PR = "r0"
-+PV = "0.0+git${SRCPV}"
-+
-+DEPENDS = "mtd-utils"
-+S = "${WORKDIR}/git"
-+
-+# Source is the HEAD of master branch at the time of writing this recipe
-+SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
-+          "
-+SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
-+
-+LIC_FILES_CHKSUM = "file://utils/mkyaffs2image.c;beginline=12;endline=14;md5=5f5464f9b3e981ca574e65b00e438561"
-+
-+CFLAGS_append = " -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES"
-+
-+do_compile() {
-+	cd utils && oe_runmake
-+}
-+
-+INSTALL_FILES = "mkyaffsimage \
-+                 mkyaffs2image \
-+                "
-+do_install() {
-+	install -d ${D}${sbindir}/
-+	for i in ${INSTALL_FILES}; do
-+		install -m 0755 utils/$i ${D}${sbindir}/
-+	done
-+}
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb b/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+similarity index 53%
+rename from meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
+rename to meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+index 3e4b78b..9c9d2ed 100644
+--- a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
++++ b/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+@@ -3,9 +3,9 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/libungif-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "8c198831cc0495596c78134b8849e9ad"
+-SRC_URI[sha256sum] = "59e835a57e6df03e4d2253b2357253f3d13da9473ff465563a3b9833a744fc36"
++SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/libungif-4.x/libungif-${PV}/libungif-${PV}.tar.bz2"
++SRC_URI[md5sum] = "76865bc1bed90ecb5992a1edcc4d6c15"
++SRC_URI[sha256sum] = "708a7eac218d3fd8e8dfb13f1089d4e1e98246985180a17d6ecfca5a6bd4d332"
+ 
+ inherit autotools lib_package
+ 
 -- 
-1.7.12-rc1
+1.7.10.4
 
 
