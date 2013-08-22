@@ -1,23 +1,39 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by mail.openembedded.org (Postfix) with ESMTP id F12A56B9F4
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
+	[74.125.82.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 63D236BA4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Aug 2013 07:51:46 +0000 (UTC)
-Received: from e6520eb (unknown [88.170.243.169])
-	(Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id AF4B14B0091;
-	Thu, 22 Aug 2013 09:51:40 +0200 (CEST)
-Date: Thu, 22 Aug 2013 09:51:39 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: martin.jansa@gmail.com
-Message-ID: <20130822095139.3291a90a@e6520eb>
-In-Reply-To: <cover.1376551134.git.Martin.Jansa@gmail.com>
-References: <cover.1376551134.git.Martin.Jansa@gmail.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][dylan][PATCH 00/60] Backports for deterministic dependencies
+	Thu, 22 Aug 2013 17:31:16 +0000 (UTC)
+Received: by mail-we0-f171.google.com with SMTP id p57so1807642wes.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Aug 2013 10:31:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=1EIgkp2xJ5nKuxG3Hb47u8u3baarzQK3iey2/6o1tqQ=;
+	b=jMHrP4JHEdAzyOVr6XBYC3c4SNSrHbiJwAvpGRtTGpVLI3Q1VnJi0o/mfi6EwcL+3/
+	iCikvfSLnwKsTfCiKD/cIM61JPWmszq6ghZdNhvhX8krh1LvoqrQXB0NjA8yD7pTnhcn
+	VP74NLg6vYnkQYRW33ibXsMQDf1i7wCElagSrxroBASDdIO8dPX03baB6JYwr4tuCrq0
+	j2efi8XDuaz4DP0Cf0Y9GYrMn7jdCZxjPijMewW6oQLTPEhfRl/ERjF4DIRLfedQM2ik
+	OC2pFerjQcWn/KbOxzpLA6s3gLxRwaUpBi4Ic0HPK94c0X+jRPfmvbtKIayPQi7oXGHc
+	N/pA==
+X-Gm-Message-State: ALoCoQmAFJPw4khUHvd/lQyJngSPRL7TDa4vrg9wv1a+C4RtqzZgJYyYpzoAYHNoZ4Kc+gPZEQEN
+X-Received: by 10.180.109.167 with SMTP id ht7mr10686617wib.45.1377192676525; 
+	Thu, 22 Aug 2013 10:31:16 -0700 (PDT)
+Received: from lpapp@archlinux.us ([212.44.19.228])
+	by mx.google.com with ESMTPSA id
+	gg10sm18367056wib.1.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 22 Aug 2013 10:31:15 -0700 (PDT)
+Sender: Laszlo Papp <lpapp@archlinux.us>
+Received: by lpapp@archlinux.us (sSMTP sendmail emulation);
+	Thu, 22 Aug 2013 18:28:59 +0100
+From: "root@myhostname" <lpapp@kde.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Aug 2013 18:28:57 +0100
+Message-Id: <1377192537-9770-1-git-send-email-root@pol-lx-007.polatis.com>
+X-Mailer: git-send-email 1.8.3.4
+Subject: [meta-networking][PATCH] stunnel: Add 4.56 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,99 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2013 07:51:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Aug 2013 17:31:17 -0000
 
-Hi Martin,
+From: Laszlo Papp <lpapp@kde.org>
 
-Le Thu, 15 Aug 2013 09:18:40 +0200,
-Martin Jansa <martin.jansa@gmail.com> a =E9crit :
+---
+ meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-networking/recipes-support/stunnel/stunnel_4.56.bb
 
-> The following changes since commit 13ae5105ee30410136beeae66ec41ee4a8a2e2=
-b0:
->=20
->   icon-slicer: fix native build by depending on gdk-pixbuf only (2013-05-=
-28 09:58:04 +0200)
->=20
-> are available in the git repository at:
->=20
->   git://git.openembedded.org/meta-openembedded-contrib jansa/dylan-backpo=
-rts
->   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
-=3Djansa/dylan-backports
->=20
-> Martin Jansa (57):
->   vsftpd: add missing dependency on openssl
->   fbida: define -I when checking jpeg version
->   xorg-sgml-doctools: add missing dependency on util-macros
->   gypsy: add dependency on libxslt-native
->   media-ctl: inherit pkgconfig
->   rsyslog: inherit pkgconfig
->   libspatialite: add missing dependency on sqlite3
->   ruby: add missing dependency on ruby-native
->   cpufrequtils: inherit gettext
->   cryptsetup: add missing dependency on libgcrypt
->   gsoap: add missing dependency on zlib
->   wbxml2: add missing dependency on expat
->   iso-codes: add missing dependency on gettext-native
->   portaudio: explicitly disable oss, add PACKAGECONFIG for alsa and jack
->   mysql5: prevent using bundled zlib at all costs
->   portaudio: inherit pkgconfig
->   f2fs-tools: add util-linux dependency
->   lcdproc5: add PACKAGECONFIG for libftdi, libusb
->   openldap: convert to PACKAGECONFIGs, explicitly disable openssl
->   samba: use more specific LICENSE
->   samba: add dependency on zlib popt, PACKAGECONFIG for pam
->   jack: add dependency on libsaplerate0 and readline
->   glog: add dependency on libunwind
->   lvm2: add PACKAGECONFIG for readline
->   libunwind: add PACKAGECONFIG for lzma
->   ntp: add PACKAGECONFIG for libcap and readline
->   vim: add PACKAGECONFIG for acl
->   mkvtoolnix: inherit gettext and export RUBYLIB
->   rrdtool: add PACKAGECONFIG for dbi
->   loudmouth: add dependency on libidn
->   cifs-utils: add PACKAGECONFIG for libcap
->   atftp: add PACKAGECONFIG for pcre, readline, tcp-wrapper
->   fbida: add dependency on curl libungif tiff
->   mbuffer: add PACKAGECONFIG for md5
->   inetutils: add PACKAGECONFIG for ftp and uucpd
->   jasper: add PACKAGECONFIG for jpeg
->   joe: add PACKAGECONFIG for joe
->   krb5: add PACKAGECONFIG for openssl and libedit
->   libass: add PACKAGECONFIG for harfbuzz
->   links: add PACKAGECONFIG for bzip2, lzma
->   quagga: add PACKAGECONFIG for capabilities
->   sox: add PACKAGECONFIG for magic and wavpack
->   usbmuxd: add PACKAGECONFIG for plist
->   usbmuxd: fix unpackaged files
->   libav: add PACKAGECONFIG for bzip2 and jack
->   libnice: add PACKAGECONFIG for gupnp
->   farsight2: add PACKAGECONFIG for gupnp
->   x264: explicitly disable swscale
->   libftdi: add PACKAGECONFIG for cpp-wrapper
->   ntfs-3g-ntfsprogs: add packageconfig for uuid
->   openldap: add dependency on util-linux
->   smbnetfs: add packageconfig for gnome-keyring
->   libgphoto2: add configure option for gd and add PACKAGECONFIG
->   libgphoto2: add PACKAGECONFIG for serial
->   samba: add packageconfig for fam
->   ruby: add dependency on db gdbm readline
->   cifs-utils: inherit pkgconfig
->=20
-> Mihai Prica (1):
->   python-feedparser: Changed from distutils to setuptools
->=20
-> Paul Barker (1):
->   fluidsynth: added dependency on glib
->=20
-> Roy.Li (1):
->   cyrus-sasl: Avoid to call AC_TRY_RUN
->=20
-pushed to dylan-next
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
+new file mode 100644
+index 0000000..21fa436
+--- /dev/null
++++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
++SECTION = "net"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
++DEPENDS = "openssl"
++
++SRC_URI = "https://www.stunnel.org/downloads/${PN}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "ac4c4a30bd7a55b6687cbd62d864054c"
++SRC_URI[sha256sum] = "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c871293"
++
++inherit autotools
++
++EXTRA_OECONF += "--with-ssl='${STAGING_INCDIR}' --disable-fips"
+-- 
+1.8.3.4
 
-Thanks !
-
-Eric
 
