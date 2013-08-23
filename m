@@ -1,37 +1,38 @@
-Return-Path: <eren@hambedded.org>
-Received: from mail-bk0-f45.google.com (mail-bk0-f45.google.com
-	[209.85.214.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 113116065F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C6DC66AF21
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 14:46:21 +0000 (UTC)
-Received: by mail-bk0-f45.google.com with SMTP id mx11so266144bkb.18
+	Fri, 23 Aug 2013 17:26:35 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id q10so915806pdj.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 07:46:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=0rfxGagYY2jUCxZNgHeSUFdCPQAgL0ofdxLg/OHRd50=;
-	b=HwAT+7KJU6auFoJfcD8Xrnwn8kYEzr0AJDjEn1c0wntyWOOqrkBok9woSQy8vOAybT
-	jE6MfYm9N+eri47iKZls0Jb4fEWT4sbbKTxAF1keyVLtbVUONMU3pLAdAg5+j5CCfE71
-	9Il4SOjHaXFWXYaXTIWI9WxQihSt2ko9S6/8tCV5bx+/h8PsgzdsVxhL9Sv8uUy+EMpS
-	4vXlJohglt+E7jrCpVxKPTQfFzZlWfJMUuPPIH/AybTBAWLGF5Ol2jdcu9aQzCgtIt6D
-	MIHVhOoMT5umUj1hQfXbqp98TB0nzIT4RbFqumTbtcuNWuLjMLVHtYZ0xMEN0mdhWm12
-	pt/w==
-X-Gm-Message-State: ALoCoQkCerSA3iliMZUy+/hfPe7VCQ99aZAU6mcKdKsR95dU0VqnMfAKu27wuwya9XzdYEhwmfUU
-X-Received: by 10.204.241.194 with SMTP id lf2mr49084bkb.142.1377269181151;
-	Fri, 23 Aug 2013 07:46:21 -0700 (PDT)
-Received: from localhost.localdomain (farscape.ibun.edu.tr. [194.27.149.253])
-	by mx.google.com with ESMTPSA id ku9sm55719bkb.1.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 23 Aug 2013 07:46:20 -0700 (PDT)
-From: =?UTF-8?q?Eren=20T=C3=BCrkay?= <eren@hambedded.org>
+	Fri, 23 Aug 2013 10:26:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=IwRHTXpjFKGYddszchkSyZvHbWjgNOx+3Br7MfEvKZU=;
+	b=WFADaQBt1yYLehfYjr+PAigjsVWfAI40SeP0+7HlMmDG4LfAgGREprIGJmtEWm+lQV
+	Sem1POD4770AL1lcAgoEYp85RxnYuBSyYjSGPxAvHfJjdeYIypziDL9NpZq8rZko/Rbo
+	ssJLAmcUJQx+c0QekCSOpyrXezHGS164t8GhK6xGzn/ihGrePpFpAXAmOP0FbZSP5A6S
+	cU/3y1T9Ey3wakrJpPWdmjJKbGY2rlYVKug1dDbMY+XfffS8b8KVxxAF0ims8TV+BLeJ
+	ahydFyOaNzieMkiA32eyqW5Z5ZNN7kv5AtIhIplR3edDqJ2OhnIT9mqbWIvtLT3Af992
+	u6Ng==
+X-Received: by 10.68.175.164 with SMTP id cb4mr694145pbc.191.1377278796297;
+	Fri, 23 Aug 2013 10:26:36 -0700 (PDT)
+Received: from sa-nc-finance-109.static.jnpr.net (natint3.juniper.net.
+	[66.129.224.36])
+	by mx.google.com with ESMTPSA id tr10sm966825pbc.22.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 23 Aug 2013 10:26:35 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <5217126A.5000403@gmail.com>
+Date: Fri, 23 Aug 2013 10:26:34 -0700
+Message-Id: <0EB65E80-0A96-4D8F-9244-983EF566FC13@gmail.com>
+References: <5217126A.5000403@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Aug 2013 17:41:52 +0300
-Message-Id: <1377268912-8340-1-git-send-email-eren@hambedded.org>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] omgps: add libcap dependency
+X-Mailer: Apple Mail (2.1508)
+Subject: Re: Issues with xbmc and expat.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,35 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 14:46:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Aug 2013 17:26:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082530.html
 
-Omgps links against libcap without checking the library. If it cannot
-find it as in the minimal build, it emits an error in the linking stage.
-Add the dependency explicitly.
+On Aug 23, 2013, at 12:42 AM, Martin Ertsaas <martiert@gmail.com> wrote:
 
-Signed-off-by: Eren Türkay <eren@hambedded.org>
----
- meta-oe/recipes-navigation/omgps/omgps_svn.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Hi.
+>=20
+> I'm trying to build xbmc, but I am stuck at the following error:
+>=20
+> | arm-atto-linux-gnueabi-libtool: link: arm-atto-linux-gnueabi-gcc=20
+> -march=3Darmv7-a -mthumb-interwork -mfloat-abi=3Dhard
+> =
+--sysroot=3D/home/martin/Programmering/attolinux/build/tmp-attolinux_next-=
+eglibc-eglibc/sysroots/pandaboard
+> -shared  -fPIC -DPIC  .libs/psymbol.o .libs/pscan.o .libs/ploader.o
+> .libs/pinfo.o .libs/pcontrol.o .libs/serial.o .libs/logging.o
+> .libs/context.o .libs/cpluff.o .libs/util.o .libs/list.o .libs/hash.o
+> .libs/thread_posix.o   /usr/lib/libexpat.so -ldl  -march=3Darmv7-a
+> -mthumb-interwork -mfloat-abi=3Dhard
+> =
+--sysroot=3D/home/martin/Programmering/attolinux/build/tmp-attolinux_next-=
+eglibc-eglibc/sysroots/pandaboard
+> -O4 -O2 -mno-apcs-stack-check -Wl,-O1 -Wl,--hash-style=3Dgnu
+> -Wl,--as-needed   -Wl,-soname -Wl,libcpluff.so.0 -o =
+.libs/libcpluff.so.0.0.3
+> | /usr/lib/libexpat.so: file not recognized: File format not =
+recognized
+> | collect2: error: ld returned 1 exit status
+>=20
+>=20
+> What is strange to me is the /usr/lib/libexpat.so inside of there, =
+which
+> seems like it shouldn't be there. To me it looks like it tries to link
+> to my host system expat libary, which of course would fail badly. Any
+> tips on what might be wrong, or how to fix it?
 
-diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-index 1a79df4..625377d 100644
---- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-+++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://omgps.googlecode.com"
- SECTION = "openmoko/applications"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--DEPENDS = "gtk+ python-pygobject dbus-glib"
-+DEPENDS = "gtk+ python-pygobject dbus-glib libcap"
- SRCREV = "109"
- PV = "0.1+svnr${SRCPV}"
- PR = "r2"
--- 
-1.7.9.5
+most probably hosed up libtool, make sure that libtool scripts in there =
+are 2.4 compatible and can
+understand sysroot.
+
+>=20
+> Regards
+> Martin
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
