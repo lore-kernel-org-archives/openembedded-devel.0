@@ -1,20 +1,37 @@
-Return-Path: <mihai.prica@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E53D6AFC2
+Return-Path: <eren@hambedded.org>
+Received: from mail-bk0-f45.google.com (mail-bk0-f45.google.com
+	[209.85.214.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 113116065F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 14:31:49 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 23 Aug 2013 07:28:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,941,1367996400"; d="scan'208";a="367414784"
-Received: from unknown (HELO mihai-Vostro-460.rb.intel.com) ([10.237.105.31])
-	by orsmga001.jf.intel.com with ESMTP; 23 Aug 2013 07:31:48 -0700
-From: Mihai Prica <mihai.prica@intel.com>
+	Fri, 23 Aug 2013 14:46:21 +0000 (UTC)
+Received: by mail-bk0-f45.google.com with SMTP id mx11so266144bkb.18
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Aug 2013 07:46:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=0rfxGagYY2jUCxZNgHeSUFdCPQAgL0ofdxLg/OHRd50=;
+	b=HwAT+7KJU6auFoJfcD8Xrnwn8kYEzr0AJDjEn1c0wntyWOOqrkBok9woSQy8vOAybT
+	jE6MfYm9N+eri47iKZls0Jb4fEWT4sbbKTxAF1keyVLtbVUONMU3pLAdAg5+j5CCfE71
+	9Il4SOjHaXFWXYaXTIWI9WxQihSt2ko9S6/8tCV5bx+/h8PsgzdsVxhL9Sv8uUy+EMpS
+	4vXlJohglt+E7jrCpVxKPTQfFzZlWfJMUuPPIH/AybTBAWLGF5Ol2jdcu9aQzCgtIt6D
+	MIHVhOoMT5umUj1hQfXbqp98TB0nzIT4RbFqumTbtcuNWuLjMLVHtYZ0xMEN0mdhWm12
+	pt/w==
+X-Gm-Message-State: ALoCoQkCerSA3iliMZUy+/hfPe7VCQ99aZAU6mcKdKsR95dU0VqnMfAKu27wuwya9XzdYEhwmfUU
+X-Received: by 10.204.241.194 with SMTP id lf2mr49084bkb.142.1377269181151;
+	Fri, 23 Aug 2013 07:46:21 -0700 (PDT)
+Received: from localhost.localdomain (farscape.ibun.edu.tr. [194.27.149.253])
+	by mx.google.com with ESMTPSA id ku9sm55719bkb.1.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 23 Aug 2013 07:46:20 -0700 (PDT)
+From: =?UTF-8?q?Eren=20T=C3=BCrkay?= <eren@hambedded.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Aug 2013 17:31:18 +0300
-Message-Id: <1377268278-2292-1-git-send-email-mihai.prica@intel.com>
+Date: Fri, 23 Aug 2013 17:41:52 +0300
+Message-Id: <1377268912-8340-1-git-send-email-eren@hambedded.org>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH] midori: upgrade to 0.5.5
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] omgps: add libcap dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,36 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 14:31:50 -0000
+X-List-Received-Date: Fri, 23 Aug 2013 14:46:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Mihai Prica <mihai.prica@intel.com>
+http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082530.html
+
+Omgps links against libcap without checking the library. If it cannot
+find it as in the minimal build, it emits an error in the linking stage.
+Add the dependency explicitly.
+
+Signed-off-by: Eren Türkay <eren@hambedded.org>
 ---
- .../midori/{midori_0.5.2.bb => midori_0.5.5.bb}    |    7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-connectivity/midori/{midori_0.5.2.bb => midori_0.5.5.bb} (83%)
+ meta-oe/recipes-navigation/omgps/omgps_svn.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-connectivity/midori/midori_0.5.2.bb b/meta-gnome/recipes-connectivity/midori/midori_0.5.5.bb
-similarity index 83%
-rename from meta-gnome/recipes-connectivity/midori/midori_0.5.2.bb
-rename to meta-gnome/recipes-connectivity/midori/midori_0.5.5.bb
-index f4f6221..e545753 100644
---- a/meta-gnome/recipes-connectivity/midori/midori_0.5.2.bb
-+++ b/meta-gnome/recipes-connectivity/midori/midori_0.5.5.bb
-@@ -4,10 +4,11 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native librsvg-native libnotify libunique"
- 
--SRC_URI = "http://archive.xfce.org/src/apps/midori/0.5/midori-${PV}.tar.bz2;name=midori \
-+SRC_URI = "http://www.midori-browser.org/downloads/${PN}_${PV}_all_.tar.bz2 \
- "
--SRC_URI[midori.md5sum] = "e2c1e0b617397ec9f9eef4fdb47b3565"
--SRC_URI[midori.sha256sum] = "a9c5cb4606e8e4967a2b980caa9ada25623c50d927a302b6bf73eeac5815c97c"
-+
-+SRC_URI[md5sum] = "b99e87d4b73a4732ed1c1e591f0242ac"
-+SRC_URI[sha256sum] = "ca69382a285222a86028abebd73fed1976735883027ff0adc094b627789bbd62"
- 
- inherit gtk-icon-cache pkgconfig vala pythonnative
- 
+diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+index 1a79df4..625377d 100644
+--- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
++++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://omgps.googlecode.com"
+ SECTION = "openmoko/applications"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-DEPENDS = "gtk+ python-pygobject dbus-glib"
++DEPENDS = "gtk+ python-pygobject dbus-glib libcap"
+ SRCREV = "109"
+ PV = "0.1+svnr${SRCPV}"
+ PR = "r2"
 -- 
 1.7.9.5
 
