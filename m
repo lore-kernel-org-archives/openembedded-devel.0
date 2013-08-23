@@ -1,21 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id C4BA26065F
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 171C86AE18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 11:33:53 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 23 Aug 2013 04:33:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,941,1367996400"; d="scan'208";a="350624739"
-Received: from timevans-mobl.ger.corp.intel.com (HELO
-	helios.ger.corp.intel.com) ([10.252.122.235])
-	by azsmga001.ch.intel.com with ESMTP; 23 Aug 2013 04:33:39 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Fri, 23 Aug 2013 13:43:02 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id g10so696064pdj.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Aug 2013 06:43:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=+A1xES1fnQ42Wo7rTTI7EezKennVDIrtmzH5y1ehN1w=;
+	b=ZavSBC3IGoqAbTy8QhBp+VWsUq+lVbrw/3xx83PKm+MvpbLTinPb5EcEzOjSl8Eeu4
+	j/O8AZ0UHipUzt9UvGfq41m0MAyNZBmOAEdRD0fyMsLtVeRsS6qV8w65OVkQBJDNEOHX
+	bHMrkMngNWSIODswz8nKULi3Myg5FzovYCjhXH6078NHkjBJ/d2JUA2GzvoVJ/PSqVAi
+	/ZmSCEAoR1OITVFjgvfpRfMGV6alc1TkdZbgvlrc49e3nMiyj5uYqvqzZ4U5F9K7tke7
+	pu4a5Ngr8WS4NkHQJxmk+ko8vBIceMnDffnGGtOu6zYZ54YHXnTjoAlGXzLpX+GP3WrC
+	94FQ==
+X-Received: by 10.68.125.226 with SMTP id mt2mr11221593pbb.115.1377265382722; 
+	Fri, 23 Aug 2013 06:43:02 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id vz4sm1188388pab.11.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 23 Aug 2013 06:43:02 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Aug 2013 12:33:36 +0100
-Message-Id: <cover.1377257565.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-oe][PATCH 0/1] Remove busybox bbappend
+Date: Fri, 23 Aug 2013 23:38:24 +1000
+Message-Id: <1377265104-14340-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.3.4
+Subject: [meta-oe][PATCH] xf86-video-ati: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,31 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 11:33:54 -0000
+X-List-Received-Date: Fri, 23 Aug 2013 13:43:02 -0000
 
-Note: this patch needs to be applied right after the patch that does
-the merge of the bbappend in OE-Core (just sent to the OE-Core list).
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ .../recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb  | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
 
-
-The following changes since commit d4571b3d94d999ad54d8965f0d049dcfd34da504:
-
-  quagga: two fixes (2013-08-16 11:00:19 -0400)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/busybox
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/busybox
-
-Paul Eggleton (1):
-  busybox: remove bbappend
-
- meta-oe/recipes-core/busybox/busybox/busybox-syslog.default |  1 -
- meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend        | 11 -----------
- 2 files changed, 12 deletions(-)
- delete mode 100644 meta-oe/recipes-core/busybox/busybox/busybox-syslog.default
- delete mode 100644 meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
-
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
+new file mode 100644
+index 0000000..7703a17
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
+@@ -0,0 +1,15 @@
++require recipes-graphics/xorg-driver/xorg-driver-video.inc
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=aabff1606551f9461ccf567739af63dc"
++
++SUMMARY = "X.Org X server -- ATI Radeon video driver"
++
++DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
++
++DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
++            virtual/libgl xineramaproto libpciaccess"
++
++COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
++
++SRC_URI[md5sum] = "5ab9a826699e5c86ef89fca43ebb3821"
++SRC_URI[sha256sum] = "f30f5efdc8d7d18d06eda7ef2f91a8b7290f1cfbf6ff26362cd47ab8969daec4"
 -- 
-1.8.1.2
+1.8.3.4
 
 
