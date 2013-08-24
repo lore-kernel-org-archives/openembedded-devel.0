@@ -1,38 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B26B60609
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 144CF60896
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 21:49:43 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id b10so524584eae.10
+	Sat, 24 Aug 2013 01:29:09 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id l10so568424eei.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Aug 2013 14:49:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=Zme4XWZAMqvQrC8i5xR/zG2Xk2JqXSWl78iCJz1Jnwc=;
-	b=Qu0OPCyCfGAEtDUW8LC7iSIFdvUsdgCrFF2G/IqTa6LJIQP82Z10PBRcyAZOI31FcY
-	dXoT4yhDt8RWf3SpwVvBZUrAeopmr9Y8l74IRjPFlzAfe/eRx8myoK7DU2z9Xz6FicT9
-	9C+P0dWFfwWA8OSt9722MPY4Su8z082YACoKeYHYNklx5zzDNGkTdTGHFQUx7bHqb6fg
-	Nv2wN2tI10/PbKjkkaSL8ptrqfyk0tl7aRBdrnOXW8GcHVCXo4nAfmE4DpuV5qRVQfqa
-	tfwwfr9nRXahwcBBQlREc8B0kEug/nK86p1JhRR76wodne644Y2dZreScd2OgY18wBsk
-	U14g==
-X-Received: by 10.14.42.3 with SMTP id i3mr188848eeb.95.1377294583430;
-	Fri, 23 Aug 2013 14:49:43 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	t6sm2395780eel.12.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 23 Aug 2013 14:49:42 -0700 (PDT)
-Date: Fri, 23 Aug 2013 23:50:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Fathi Boudra <fathi.boudra@linaro.org>
-Message-ID: <20130823215050.GE3544@jama>
+	Fri, 23 Aug 2013 18:29:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=aDV47MZ2lI/N3MuAx2L1KzX44Z1ccc399FsrAMadfFQ=;
+	b=FfdXflC1hgVNEdYxJa8A8tRoWHY2Z6EgyWAEJvf5RYZGdFK/hBNrceqwfPD40J4Wf9
+	lPDmKcQD090PO/u5FZHhbbGRzCAKJ/PV4XLAnz0H2Kh1hSa8NnK0/Z4uD/3OHJWhDw9N
+	K8F1hZYUQL8mxsmwOKaMFbw9Kr0bSIZY9/WZjUvgKVk3sQI05WJ7yn1+TsPlpRjYLBA5
+	ALP4NKmCp3TwYHmPJob1JqDfpsDa+lODv5GYAZ/45Mw+4PPuSJmgzpZGp7snlXDSJCNF
+	eoEYcT3bFP2AfQId1YUxjh2ApP6IFK7cxxyovJDdnktL4bUAN+vHbsRzW1b2ouB0K93P
+	FmRw==
+X-Gm-Message-State: ALoCoQmkyYGJdTOjJdvZNBR8DCsT0qX7k+Qvjx5lXb8xR4XNMQKINtzyRSwTRd/kWWkjhyBAJW38
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Naresh Bhat <naresh.bhat@linaro.org>
-Subject: acpica failing to build
+X-Received: by 10.14.115.133 with SMTP id e5mr3367401eeh.27.1377307749381;
+	Fri, 23 Aug 2013 18:29:09 -0700 (PDT)
+Received: by 10.14.117.67 with HTTP; Fri, 23 Aug 2013 18:29:09 -0700 (PDT)
+In-Reply-To: <CALmOhgkdXWZ8rtY5-TgPEMMdmoBD74L9s0RDP-vv07PAU+1c0A@mail.gmail.com>
+References: <CALmOhgkdXWZ8rtY5-TgPEMMdmoBD74L9s0RDP-vv07PAU+1c0A@mail.gmail.com>
+Date: Fri, 23 Aug 2013 21:29:09 -0400
+Message-ID: <CALmOhgnuBkNyJJFxrRCrZeLCnM8NUUMde6uRdv7froP5Gi0Gng@mail.gmail.com>
+From: Trevor Woerner <trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: building and running a qt5 application
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,88 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 21:49:43 -0000
-X-Groupsio-MsgNum: 45821
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qFgkTsE6LiHkLPZw"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 24 Aug 2013 01:29:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---qFgkTsE6LiHkLPZw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+After finding the answers to these questions I'll update this email in
+case others come asking the same questions.
 
-Can you please check why it's sometimes failing like this:
+On 16 August 2013 00:13, Trevor Woerner <trevor.woerner@linaro.org> wrote:
+> If the build system knows it's going to be putting the qt5 header
+> files in $sysroot/usr/include/qt5/etc, why not simply use that instead
+> of requiring the users to update the include paths themselves in all
+> their recipes?
 
-| make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/t=
-mp-eglibc/work/armv5te-oe-linux-gnueabi/acpica/20130626-r1/acpica-unix2-201=
-30626/generate/unix/acpidump'
-| 64-bit version of acpidump:
-| -rwxr-xr-x 1 jenkins jenkins 121136 Aug 23 17:54 ../bin/acpidump
-|=20
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtparserle=
-x.o obj/dtparserlex.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbstats.o ../=
-=2E./../source/components/debugger/dbstats.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtparserpa=
-rse.o obj/dtparserparse.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/prparserle=
-x.o obj/prparserlex.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_NAMES_APP -I../../../source/tools/acpinames -Wall -o obj/excreate.o =
-=2E./../../source/components/executer/excreate.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbutils.o ../=
-=2E./../source/components/debugger/dbutils.c
-| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --sysr=
-oot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemua=
-rm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOURCE -=
-I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/include =
--DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbxface.o ../=
-=2E./../source/components/debugger/dbxface.c
-| ../../../source/compiler/prparser.l:46:24: fatal error: prparser.y.h: No =
-such file or directory
-|  #include "prparser.y.h"
-|                         ^
-| compilation terminated.
-| make[1]: *** [obj/prparserlex.o] Error 1
-| make[1]: *** Waiting for unfinished jobs....
+This is so that qt4 and qt5 applications can co-exist in the same
+image. My assumption had been that if you were using qt4 then
+everything would need to be qt4 and if you were using qt5 everything
+would need to be qt5. Apparently this is not so. Apparently qt4 and
+qt5 applications can mingle. To support this mingling the qt5 headers
+are placed in their own qt5 subdirectory.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+If, as occurred in my case, you're only using qt5 then you can use the
+line I provided above in your recipe to make the qt5 includes the
+default:
 
---qFgkTsE6LiHkLPZw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+    OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
+> Secondly, I added both "qtbase" and my package to IMAGE_INSTALL, added
+> the "meta-qt5" layer to "bblayers.conf", specified "QT5_VERSION" as
+> "5.0.2", and then built. When I tried to run my application I received:
+>
+>     Failed to load platform plugin "xcb". Available platforms are:
+>
+>     Aborted
 
-iEYEARECAAYFAlIX2ToACgkQN1Ujt2V2gBxDqwCcCvV6P/y8yhhD0Dpa9QWWuN8b
-ETQAnRYeivPpdT17nZqipaSNnAG0RAgU
-=hzNv
------END PGP SIGNATURE-----
+To fix this I needed to add "qtbase-plugins" to my image in addition
+to what I had done above.
 
---qFgkTsE6LiHkLPZw--
