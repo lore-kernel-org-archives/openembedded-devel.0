@@ -1,36 +1,23 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-la0-f46.google.com (mail-la0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E2A561F47
+Return-Path: <eric@eukrea.com>
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+	by mail.openembedded.org (Postfix) with ESMTP id CCB8161F47
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Aug 2013 06:46:51 +0000 (UTC)
-Received: by mail-la0-f46.google.com with SMTP id eh20so1524934lab.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Aug 2013 23:46:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=U7Pi4L8mJdXQtYDU3A9n8oX3sVOGdU0gy8TAtbI24yo=;
-	b=HOJFQyJQH5cwHOrMcbauncfSJok22etoA8Dcomj3xmUK1//tdQB64O9pPalcWm/zeo
-	as72mdTbTWjlX/FOaI3XWsr6E2It1dqtIYTv9z4o/QKJ3AQ21eKYM/lKcksCVySsQppR
-	gVI3l9JxBg+3oUOo+BdG3b+vnIKMnRaA0NVANH74xwEDmHE9fs0s01huTx+nIsADCgW7
-	Tn0bmzDEB/2oj9g1m78YL9oFle6wFAUCOlbJFySHqEsms/dBCGMH02Wk/++FjVu3uCML
-	vwQmZ479tSxFCHeoAg4QfRQzgtlnaZp6NvuQEEgaXDFh9gnko+7HC3bBQBaSmo6ruBOf
-	aHBA==
-X-Received: by 10.112.28.109 with SMTP id a13mr6929321lbh.3.1377413210081;
-	Sat, 24 Aug 2013 23:46:50 -0700 (PDT)
-Received: from prime (a91-153-14-158.elisa-laajakaista.fi. [91.153.14.158])
-	by mx.google.com with ESMTPSA id ay4sm2902572lbb.2.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 24 Aug 2013 23:46:49 -0700 (PDT)
-Received: from cazfi by prime with local (Exim 4.80)
-	(envelope-from <cazfi74@gmail.com>)
-	id 1VDU63-0007TL-DF; Sun, 25 Aug 2013 09:46:47 +0300
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Aug 2013 09:46:46 +0300
-Message-Id: <1377413206-28690-1-git-send-email-cazfi74@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH v2] ImageMagick: update to upstream version 6.8.6-8
+	Sun, 25 Aug 2013 07:09:15 +0000 (UTC)
+Received: from e6520eb (unknown [82.233.81.124]) (Authenticated sender: eukrea)
+	by smtp4-g21.free.fr (Postfix) with ESMTPSA id 44BFB4C808E;
+	Sun, 25 Aug 2013 09:09:09 +0200 (CEST)
+Date: Sun, 25 Aug 2013 09:09:07 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20130825090907.636cd35c@e6520eb>
+In-Reply-To: <1372974449-19858-1-git-send-email-eric@eukrea.com>
+References: <1776530.dBKCTHnX8Z@helios>
+	<1372974449-19858-1-git-send-email-eric@eukrea.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] hexedit: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,85 +31,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Aug 2013 06:46:51 -0000
+X-List-Received-Date: Sun, 25 Aug 2013 07:09:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-- License changed by additional copyright year only.
-- Patch PerlMagic_MakePatch.patch part of upstream now
+Hi Martin,
 
-Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
----
- .../imagemagick-6.7.5/PerlMagic_MakePatch.patch         |   11 -----------
- .../remove.dist-lzip.patch                              |    0
- .../{imagemagick_6.7.5.bb => imagemagick_6.8.6.bb}      |   15 ++++++---------
- 3 files changed, 6 insertions(+), 20 deletions(-)
- delete mode 100644 meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
- rename meta-oe/recipes-support/imagemagick/{imagemagick-6.7.5 => imagemagick-6.8.6}/remove.dist-lzip.patch (100%)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_6.7.5.bb => imagemagick_6.8.6.bb} (77%)
+Le Thu,  4 Jul 2013 23:47:29 +0200,
+Eric B=E9nard <eric@eukrea.com> a =E9crit :
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
-deleted file mode 100644
-index f8ad0af..0000000
---- a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/PerlMagic_MakePatch.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- /tmp/Makefile.PL.in	2008-10-01 10:39:38.000000000 +0200
--+++ ImageMagick-6.4.4/PerlMagick/Makefile.PL.in	2008-10-01 10:40:25.000000000 +0200
--@@ -87,6 +87,8 @@
-- 
--    # Use same compiler as ImageMagick
--    'PERLMAINCC'	=> '@PERLMAINCC@ @OPENMP_CFLAGS@',
--+   'AR' => '@AR@',
--+   'LD' => '@PERLMAINCC@',
-- 
--    # Set Perl installation prefix to ImageMagick installation prefix
-- #   'PREFIX'	=> '@prefix@',
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch b/meta-oe/recipes-support/imagemagick/imagemagick-6.8.6/remove.dist-lzip.patch
-similarity index 100%
-rename from meta-oe/recipes-support/imagemagick/imagemagick-6.7.5/remove.dist-lzip.patch
-rename to meta-oe/recipes-support/imagemagick/imagemagick-6.8.6/remove.dist-lzip.patch
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-similarity index 77%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-index 2f0fad5..1af1f0b 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.7.5.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-@@ -1,19 +1,16 @@
- DESCRIPTION = "ImageMagick is an image convertion tools"
- SECTION = "console/utils"
- LICENSE = "ImageMagick"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b1bf06a8d02cb00b02dea7d03ef9525f"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw"
- 
--PR = "r5"
--
--PATCHSET = "6"
-+PATCHSET = "8"
- SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
--           file://PerlMagic_MakePatch.patch \
-            file://remove.dist-lzip.patch \
- "
--SRC_URI[md5sum] = "bcf07cf0822572fa2b47fa6d506f699a"
--SRC_URI[sha256sum] = "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5a7dae01e47bdbd80"
-+SRC_URI[md5sum] = "ea66fbb6fc1354312bc4971c0a0cfb3c"
-+SRC_URI[sha256sum] = "eb33e0ba6aeb542b7127ee1c2f62961236428b233e9911aa86e1b66b3342ea1d"
- 
- S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
- 
-@@ -27,8 +24,8 @@ FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
-                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
-                 ${libdir}/ImageMagick-${PV}/modules-Q16/filters \
-                 ${libdir}/ImageMagick-${PV}/modules-Q16/coders \
--                ${libdir}/ImageMagick-${PV}/config/ \
--                ${datadir}/ImageMagick-${PV}"
-+                ${libdir}/ImageMagick-${PV}/config-Q16 \
-+                ${datadir}/ImageMagick-6 "
- 
- FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
- 
--- 
-1.7.10.4
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  .../hexedit/0001-don-t-strip-when-installing.patch |   30 ++++++++++++++=
+++++++
+>  meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |   17 +++++++++++
+>  2 files changed, 47 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-s=
+trip-when-installing.patch
+>  create mode 100644 meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
+>=20
+> diff --git a/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-wh=
+en-installing.patch b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-s=
+trip-when-installing.patch
+> new file mode 100644
+> index 0000000..a384b05
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-inst=
+alling.patch
+> @@ -0,0 +1,30 @@
+> +From cc67246ca6839e5b3f6a286f10ed24c225b77a5e Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Eric=3D20B=3DC3=3DA9nard?=3D <eric@eukrea.com>
+> +Date: Thu, 4 Jul 2013 12:34:32 +0200
+> +Subject: [PATCH] don't strip when installing
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=3DUTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +---
+> + Makefile.in |    2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/Makefile.in b/Makefile.in
+> +index 159463e..735cc72 100644
+> +--- a/Makefile.in
+> ++++ b/Makefile.in
+> +@@ -42,6 +42,6 @@ distclean: clean
+> +=20
+> + install: $(PRODUCT)
+> + 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
+> +-	$(INSTALL) -s -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
+> ++	$(INSTALL) -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
+> + 	$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)/man1
+> + 	$(INSTALL) -m 644 $(PRODUCT).1 $(DESTDIR)$(mandir)/man1
+> +--=20
+> +1.7.10.4
+> +
+> diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb b/meta-oe=
+/recipes-extended/hexedit/hexedit_1.2.13.bb
+> new file mode 100644
+> index 0000000..d0658db
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY =3D "view and edit files in hexadecimal or in ASCII"
+> +HOMEPAGE =3D "http://rigaux.org/hexedit.html"
+> +SECTION =3D "console/utils"
+> +LICENSE =3D "GPLv2+"
+> +DEPENDS =3D "ncurses"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
+bb3"
+> +
+> +SRC_URI =3D "http://rigaux.org/${PN}-${PV}.src.tgz \
+> +    file://0001-don-t-strip-when-installing.patch "
+> +
+> +SRC_URI[md5sum] =3D "a5af1378d028512a9cad27a5ba3e15f9"
+> +SRC_URI[sha256sum] =3D "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54=
+c58c983963b88dd7"
+> +
+> +inherit autotools
+> +
+> +S =3D "${WORKDIR}/${PN}"
 
+is there any problem with this patch which prevent it to be applied ?
+
+Eric
 
