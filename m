@@ -1,38 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id D07936A9E1
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BBE761F47
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 07:05:00 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id m14so1382049eaj.20
+	Mon, 26 Aug 2013 07:27:51 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so1409682eek.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
+	Mon, 26 Aug 2013 00:27:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=i1kRywRy7UHDC8DdTrCEVz6snRBfLpi3A/yq3i6Ha5E=;
-	b=TzxYQduoT28R2HGqSHFR3Rdxt3bqpuvIT60aLGnekoOk+YcjUwuG0ybdNrvSDHXp8q
-	VQjOloMuuOLd/23RYo3Fn0d7/GkfSG3c0aAjD4Kxb5KyaFkgE6uogCh+0M/IkXeWJjlX
-	h09Zu2+Uiju6uWpnjzcZLvBsfSzKrLzZabdUTgudfzRAIj4yRTpxKBzdTGNss9uxl5zk
-	asNv7NcCYsFfsit84wUppbDOy7YYyavUam/qg0cO0a+bwVmVyjePryIacEsnN3AgQsZ+
-	l41WNiMmZVF1JbeAJzDTsWRzqItjFEjk1Yy1FNpcchppewNAyFkeMVKP8wkXixpn19K/
-	4t0A==
-X-Received: by 10.14.8.72 with SMTP id 48mr23803339eeq.25.1377500700864;
-	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
+	bh=axdxlgWqFq8q1hJqCe12uZMzxREGuPzscgzLZnW+aM8=;
+	b=TAYJ9CtjVNZ5kqxlbUALAkxYIhwKbw4+TloVKmOLjONb7tjQ4wNBR7SOukfO1yJOJI
+	+3lyuQnAobhEoofTzyDfpqc7RPKBDL7OM+xEqDYEKX+ZJM45VpEMx7Ie2mptGbDiszKd
+	3K2oVLaMAwkYnTO3zOpkExe03r7n/eVAvVLSNTnAQ5DqlEILHRGTTiGynrmOUuuO8v9k
+	oJZ0Hrpjpr3NN4xWzEAqpnAQaclOLCCjR68+N2ZVehqy1R6IQ+oqZKboZ7dAx36N4moY
+	dNGD343BVcloXejqM4i4fv+yyQvBhWxLovknF9eUQVAWu4cA7BieLHS/mo32NAi0T9KE
+	lDJQ==
+X-Received: by 10.15.67.131 with SMTP id u3mr23618591eex.34.1377502071199;
+	Mon, 26 Aug 2013 00:27:51 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	r48sm19064590eev.14.1969.12.31.16.00.00
+	i1sm19259013eeg.0.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
-Date: Mon, 26 Aug 2013 09:06:10 +0200
+	Mon, 26 Aug 2013 00:27:50 -0700 (PDT)
+Date: Mon, 26 Aug 2013 09:29:00 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130826070610.GL3544@jama>
-References: <1377487327-31367-1-git-send-email-b40290@freescale.com>
+Message-ID: <20130826072900.GN3544@jama>
+References: <1377097396-25020-1-git-send-email-cazfi74@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1377487327-31367-1-git-send-email-b40290@freescale.com>
+In-Reply-To: <1377097396-25020-1-git-send-email-cazfi74@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 3/4] daq: add recipe
+Subject: Re: [meta-oe][PATCH] libungif: update to upstream version 4.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,86 +45,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2013 07:05:01 -0000
-X-Groupsio-MsgNum: 45839
+X-List-Received-Date: Mon, 26 Aug 2013 07:27:52 -0000
+X-Groupsio-MsgNum: 45840
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RNGrj7vazCqBHNw7"
+	protocol="application/pgp-signature"; boundary="4Y142/9l9nQlBiaj"
 Content-Disposition: inline
 
---RNGrj7vazCqBHNw7
+--4Y142/9l9nQlBiaj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 26, 2013 at 11:22:07AM +0800, b40290@freescale.com wrote:
-> From: Chunrong Guo <B40290@freescale.com>
->=20
->   *The dump DAQ test the various inline mode features
->   *snort depends daq
->=20
-> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+On Wed, Aug 21, 2013 at 06:03:16PM +0300, Marko Lindqvist wrote:
+> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 > ---
->  meta-oe/recipes-connectivity/daq/daq_2.0.0.bb      |   17 ++++++++++++++=
-+++
->  .../daq/files/disable-check-pcap-version.patch     |   11 +++++++++++
->  2 files changed, 28 insertions(+), 0 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.0.bb
->  create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-check-=
-pcap-version.patch
+>  .../libungif/{libungif_4.1.3.bb =3D> libungif_4.1.4.bb}            |    =
+6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-extended/libungif/{libungif_4.1.3.bb =3D> libungi=
+f_4.1.4.bb} (53%)
 >=20
-> diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.0.bb b/meta-oe/reci=
-pes-connectivity/daq/daq_2.0.0.bb
-> new file mode 100644
-> index 0000000..0a71894
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/daq/daq_2.0.0.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION =3D "The dump DAQ test the various inline mode features "
-> +HOMEPAGE =3D "http://www.snort.org"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9ce51a65dd738dc1ae631d8b21c4=
-0e0"
-> +
-> +
-> +DEPENDS =3D "libpcap libpcre "
-> +
-> +SRC_URI[md5sum] =3D "a00855a153647df76d47f1ea454f74ae"
-> +SRC_URI[sha256sum] =3D "fbafc8e362a96fcadc69731f91203ef90845507aae0a4774=
-d5c2825e9d2c1c38"
-> +
-> +SRC_URI =3D "http://fossies.org/linux/misc/daq-2.0.0.tar.gz\
-> +           file://disable-check-pcap-version.patch "
-> +
-> +
-> +inherit autotools
-> +
-> diff --git a/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-ve=
-rsion.patch b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-ver=
-sion.patch
-> new file mode 100644
-> index 0000000..416ef65
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.p=
-atch
+> diff --git a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb b/meta-o=
+e/recipes-extended/libungif/libungif_4.1.4.bb
+> similarity index 53%
+> rename from meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
+> rename to meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+> index 3e4b78b..9c9d2ed 100644
+> --- a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
+> +++ b/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+> @@ -3,9 +3,9 @@ SECTION =3D "libs"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dae11c61b04b2917be39b11f78d715=
+19a"
+> =20
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/libungif-${PV}.tar.bz2"
+> -SRC_URI[md5sum] =3D "8c198831cc0495596c78134b8849e9ad"
+> -SRC_URI[sha256sum] =3D "59e835a57e6df03e4d2253b2357253f3d13da9473ff46556=
+3a3b9833a744fc36"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/libungif-4.x/libungif-${PV}/li=
+bungif-${PV}.tar.bz2"
+> +SRC_URI[md5sum] =3D "76865bc1bed90ecb5992a1edcc4d6c15"
+> +SRC_URI[sha256sum] =3D "708a7eac218d3fd8e8dfb13f1089d4e1e98246985180a17d=
+6ecfca5a6bd4d332"
+> =20
+>  inherit autotools lib_package
 
-Please add header explaining why this patch is needed.
+I know it isn't new issue caused by this patch, but if you care about
+libungif, can you try to resolve this warning:
 
-> @@ -0,0 +1,11 @@
-> +--- a/configure.ac	2013-08-22 02:37:02.453253534 -0500
-> ++++ b/configure.ac	2013-08-22 02:37:53.008254362 -0500
-> +@@ -179,7 +179,7 @@
-> +               [enable_pcap_module=3D"$enableval"], [enable_pcap_module=
-=3D"$DEFAULT_ENABLE"])
-> + if test "$enable_pcap_module" =3D yes; then
-> +     AC_CHECK_HEADER([pcap.h], [], [enable_pcap_module=3Dno])
-> +-    AC_CHECK_PCAP_VER("1.0.0")
-> ++    #AC_CHECK_PCAP_VER("1.0.0")
-> +     if test "$enable_pcap_module" =3D yes; then
-> +         STATIC_LIBS=3D"${STATIC_LIBS} -lpcap"
-> +     fi
+WARNING: The recipe libungif is trying to install files into a shared
+area when those files already exist. Those files and their manifest
+location are:
+   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
+usr/include/gif_lib.h
+   Matched in manifest-qemuarm-giflib
+Please verify which package should provide the above files.
+
+Can we drop libungif and use giflib everywhere now?
+
+> =20
 > --=20
-> 1.7.5.4
->=20
+> 1.7.10.4
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -135,16 +115,16 @@ Please add header explaining why this patch is needed.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---RNGrj7vazCqBHNw7
+--4Y142/9l9nQlBiaj
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlIa/mIACgkQN1Ujt2V2gBy5tgCeIVf5Th5PkN05Sm9vb0pT1ueI
-TLgAmweJ1lkH1xyqXu34ha3YJ/iEjL9x
-=Cqoy
+iEYEARECAAYFAlIbA7wACgkQN1Ujt2V2gBwohgCfTqm7VeNjzHRsqCjrl0DT7wk8
+m3sAoJ4gXGhhWnVdtCpvWBwNO+Exq0PB
+=bx96
 -----END PGP SIGNATURE-----
 
---RNGrj7vazCqBHNw7--
+--4Y142/9l9nQlBiaj--
