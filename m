@@ -1,20 +1,34 @@
-Return-Path: <mihai.prica@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 705996BABF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 473E86BB14
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 13:55:19 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 26 Aug 2013 06:55:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,958,1367996400"; d="scan'208";a="351708259"
-Received: from unknown (HELO mihai-Vostro-460.rb.intel.com) ([10.237.105.31])
-	by azsmga001.ch.intel.com with ESMTP; 26 Aug 2013 06:55:18 -0700
-From: Mihai Prica <mihai.prica@intel.com>
+	Mon, 26 Aug 2013 14:54:29 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id a15so1649346eae.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Aug 2013 07:54:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=QZ5ZuxRAi/GivoTJeax80HP2W01sRtx5rmBJsf0vwAw=;
+	b=YRpW5oyd6AfQ7gfkLx9LkNi4vIiTPLTSETlHH+H/2kPahTpFNCEdCCAcrlxcESIY9g
+	hRElIvImkWMxKfNP6SYRic4/EZfStWcCRLXbgX0Gu/hbqy0HULJ8Iric0gfEx0h5XXus
+	qbiiF3PNmhTcV3HY/Y9SySOVFjGVl86aYCfNNfM3/5P8DunGDU7sePODZJbUXv6b6iZj
+	bIY1cUk23NwhSX0dE4uQzmG3LnGpvuLqID3S892wTBHR+bn3TuXb4HakFshsqCUtjcX5
+	GhBdL2vHYrd/qpHDwq1gZO4MYKURwQjsjDaMT0Nk11sFXciGWaYgC+I/7Xch3keBhjRu
+	8CNA==
+X-Received: by 10.15.52.2 with SMTP id o2mr365764eew.83.1377528869070;
+	Mon, 26 Aug 2013 07:54:29 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	f49sm21963549eec.7.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 26 Aug 2013 07:54:28 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Aug 2013 16:54:47 +0300
-Message-Id: <1377525287-9015-1-git-send-email-mihai.prica@intel.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] python-docutils: upgrade to 0.11
+Date: Mon, 26 Aug 2013 16:55:37 +0200
+Message-Id: <1377528937-13035-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] connman: rename .bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,40 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2013 13:55:19 -0000
+X-List-Received-Date: Mon, 26 Aug 2013 14:54:31 -0000
 
-Signed-off-by: Mihai Prica <mihai.prica@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...hon-docutils_0.5.bb => python-docutils_0.11.bb} |    7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-docutils_0.5.bb => python-docutils_0.11.bb} (55%)
+ .../connman/{connman_1.16.bbappend => connman_1.17.bbappend}              | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.16.bbappend => connman_1.17.bbappend} (100%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb b/meta-oe/recipes-devtools/python/python-docutils_0.11.bb
-similarity index 55%
-rename from meta-oe/recipes-devtools/python/python-docutils_0.5.bb
-rename to meta-oe/recipes-devtools/python/python-docutils_0.11.bb
-index e4c8a7d..f435e1b 100644
---- a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb
-+++ b/meta-oe/recipes-devtools/python/python-docutils_0.11.bb
-@@ -2,14 +2,13 @@ DESCRIPTION = "Text processing system"
- HOMEPAGE = "http://docutils.sourceforge.net"
- SECTION = "devel/python"
- LICENSE = "PSF"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=ac6ee29ac0310c091afab5ac4bea2fa3"
--PR = "r2"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=da0d261d1db78ab21ce86c79364a4098"
- 
- DEPENDS = "python"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/docutils/docutils-${PV}.tar.gz"
--SRC_URI[md5sum] = "dd72dac92fc8e3eb0f48c3effeef80f6"
--SRC_URI[sha256sum] = "747cf984edfca0575addbb42453274a1bdd98ec7780bd37a883dc8b2a66a610e"
-+SRC_URI[md5sum] = "20ac380a18b369824276864d98ec0ad6"
-+SRC_URI[sha256sum] = "9af4166adf364447289c5c697bb83c52f1d6f57e77849abcccd6a4a18a5e7ec9"
- 
- S = "${WORKDIR}/docutils-${PV}"
- 
+diff --git a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.16.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.17.bbappend
+similarity index 100%
+rename from meta-systemd/oe-core/recipes-connectivity/connman/connman_1.16.bbappend
+rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.17.bbappend
 -- 
-1.7.9.5
+1.8.3.2
 
 
