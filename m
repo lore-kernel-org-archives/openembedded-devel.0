@@ -1,40 +1,40 @@
 Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F89D6BB2E
+Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9937B6BB9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 10:33:20 +0000 (UTC)
-Received: by mail-lb0-f169.google.com with SMTP id u10so2251910lbi.0
+	Mon, 26 Aug 2013 10:33:21 +0000 (UTC)
+Received: by mail-lb0-f177.google.com with SMTP id p5so1240477lbi.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 03:33:20 -0700 (PDT)
+	Mon, 26 Aug 2013 03:33:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=/6x5LjNEtzvcSpsBiy0GqDdN5tfjgMWCl8Tv4oyP+Q0=;
-	b=D9mFWmeSg1XwgG1a78fQyjCgqJpmxcQ8j3MySfu0iRzqrfWzMejvygSuB+Pjas5qNo
-	ut8dbdItuZ086XuvgyTM3bGXUqDicXwdQWmUwEbO2obecFvCFOlGH4uuPnETHzICrPCA
-	dQLYh4IxfVvL0R7QOLuq+KZRCkSkBmtnQyJbS/gWn4B4N5ySiTFnSCaDSrBRAsvkeV/b
-	4Nks1HlZuVCJpfW9PVeaufnDtAog+6gW+F9lAE+pYhjJ7zLv0f0h1Ma9KS1iF6149ySn
-	TLHbs1qgo/63tIYnR8b/HmVJpFGdMZ4XzCgAk4K8gYLiTMY43hUTSZXeQwT6hMHwI30g
-	X2kg==
-X-Gm-Message-State: ALoCoQmzjBuv4Z0cx1xOgwZqTgcsudi8HpC5K95pvX8nXrHf7MdvhRLZYYx3Rx1LCHspKYBjrdcL
-X-Received: by 10.152.116.7 with SMTP id js7mr13263089lab.11.1377513200524;
-	Mon, 26 Aug 2013 03:33:20 -0700 (PDT)
+	bh=QXreXU47ZiW+dp5ZH5QlIIOD+TPaKf6JaFyNpu1TnoY=;
+	b=fpvqtb/zr2XRIxzVTMSaQLPEqBz4BJOQQ6NyRzAfktF3OyyVMSRmDKsp4CWPNnH83I
+	bXmk5nBrPDOjkV3nAxhymGSDmPohwz4+w7/DcNO+VxcffibXTGz3+oyk0JNnHZ6hk/R2
+	6fU4UzeBoTEXJWU1+yN3wYAuaLssPilbEue62ESdzUUKiM29PR5YxnViZqHEWfs6qw9i
+	pAumFEbgUkwkk34QUOCevCDotcvKt6pysFRIVEPbYVtmp+FYwWS/b3xvw3nrcK4RnneB
+	1lO0kzii02SA/PNMDsfgi1qVKh0MX64k37H+W2FcNGaJ/TpdYyO/+gaak8XK8F7Ua3FY
+	Ew1g==
+X-Gm-Message-State: ALoCoQn5j6E1++9dWof5e4B09Oy46aqp7s3G8HfU7HAukChshUBfOw/R4bnP3lrMzcmRlYGZny9k
+X-Received: by 10.152.88.74 with SMTP id be10mr13427007lab.4.1377513201872;
+	Mon, 26 Aug 2013 03:33:21 -0700 (PDT)
 Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
 	[91.152.78.194])
 	by mx.google.com with ESMTPSA id ap7sm5461308lac.10.1969.12.31.16.00.00
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 26 Aug 2013 03:33:20 -0700 (PDT)
+	Mon, 26 Aug 2013 03:33:21 -0700 (PDT)
 From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Aug 2013 13:33:13 +0300
-Message-Id: <1377513195-21664-2-git-send-email-fathi.boudra@linaro.org>
+Date: Mon, 26 Aug 2013 13:33:14 +0300
+Message-Id: <1377513195-21664-3-git-send-email-fathi.boudra@linaro.org>
 X-Mailer: git-send-email 1.8.1.2
 In-Reply-To: <1377513195-21664-1-git-send-email-fathi.boudra@linaro.org>
 References: <1377513195-21664-1-git-send-email-fathi.boudra@linaro.org>
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH 1/3] acpica: fix parallel build
+Cc: koen@dominion.thruhere.net, Graeme Gregory <graeme.gregory@linaro.org>
+Subject: [meta-oe][PATCH 2/3] acpica: fix recipe to be OE compliant with spacing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,119 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2013 10:33:21 -0000
+X-List-Received-Date: Mon, 26 Aug 2013 10:33:22 -0000
 
-The compilation of the iasl utility fails when `make -j<N>' > 1.  This
-commit cleans up the rules in generate/unix/iasl such that a `make -j'
-will succeed.
-
-Signed-off-by: Andrew McDermott <andrew.mcdermott@linaro.org>
+Signed-off-by: Graeme Gregory <graeme.gregory@linaro.org>
 ---
- meta-oe/recipes-extended/acpica/acpica_20130626.bb |  3 +-
- .../acpica/files/fix-parallel-build.patch          | 80 ++++++++++++++++++++++
- 2 files changed, 82 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/acpica/files/fix-parallel-build.patch
+ meta-oe/recipes-extended/acpica/acpica_20130626.bb | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
 diff --git a/meta-oe/recipes-extended/acpica/acpica_20130626.bb b/meta-oe/recipes-extended/acpica/acpica_20130626.bb
-index 65eadac..bf38fa3 100644
+index bf38fa3..af0dd45 100644
 --- a/meta-oe/recipes-extended/acpica/acpica_20130626.bb
 +++ b/meta-oe/recipes-extended/acpica/acpica_20130626.bb
-@@ -17,7 +17,8 @@ PR="r1"
+@@ -1,21 +1,18 @@
++SUMMARY = "ACPICA tools for the development and debug of ACPI tables"
+ DESCRIPTION = "The ACPI Component Architecture (ACPICA) project provides an \
+ OS-independent reference implementation of the Advanced Configuration and \
+ Power Interface Specification (ACPI). ACPICA code contains those portions of \
+ ACPI meant to be directly integrated into the host OS as a kernel-resident \
+ subsystem, and a small set of tools to assist in developing and debugging \
+ ACPI tables."
+-SUMMARY = "ACPICA tools for the development and debug of ACPI tables"
+ HOMEPAGE = "http://www.acpica.org/"
+ SECTION = "console/tools"
+ LICENSE = "BSD | GPLv2"
+ LIC_FILES_CHKSUM = "file://generate/unix/readme.txt;md5=204407e197c1a01154a48f6c6280c3aa"
+-DEPENDS="bison \
+-    flex"
+-COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
+-
++DEPENDS = "bison flex"
+ PR="r1"
  
- SRC_URI="https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
+-SRC_URI="https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
++SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
      file://cross-compile.patch \
--    file://no-werror.patch"
-+    file://no-werror.patch \
-+    file://fix-parallel-build.patch"
- 
+     file://no-werror.patch \
+     file://fix-parallel-build.patch"
+@@ -23,7 +20,7 @@ SRC_URI="https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
  SRC_URI[md5sum] = "b7112b3deffef8fe25aac7810cc419a9"
  SRC_URI[sha256sum] = "888dda6227265c396a686624f971c51693c2bba84f24c634536234c8dca7b465"
-diff --git a/meta-oe/recipes-extended/acpica/files/fix-parallel-build.patch b/meta-oe/recipes-extended/acpica/files/fix-parallel-build.patch
-new file mode 100644
-index 0000000..42e3fb1
---- /dev/null
-+++ b/meta-oe/recipes-extended/acpica/files/fix-parallel-build.patch
-@@ -0,0 +1,80 @@
-+diff --git a/generate/unix/iasl/Makefile b/generate/unix/iasl/Makefile
-+index e9520ed..1b73d7a 100644
-+--- a/generate/unix/iasl/Makefile
-++++ b/generate/unix/iasl/Makefile
-+@@ -212,13 +212,10 @@ INTERMEDIATES = \
-+ MISC = \
-+ 	$(OBJDIR)/aslcompilerparse.h\
-+ 	$(OBJDIR)/aslcompiler.y.h\
-+-	$(OBJDIR)/aslcompilerparse.output\
-+ 	$(OBJDIR)/dtparserparse.h\
-+ 	$(OBJDIR)/dtparser.y.h\
-+-	$(OBJDIR)/dtparserparse.output\
-+ 	$(OBJDIR)/prparserparse.h\
-+-	$(OBJDIR)/prparser.y.h\
-+-	$(OBJDIR)/prparserparse.output
-++	$(OBJDIR)/prparser.y.h
-+ 
-+ #
-+ # Flags specific to iASL compiler
-+@@ -240,21 +237,29 @@ include ../Makefile.rules
-+ $(OBJDIR)/aslcompilerlex.c :   $(ASL_COMPILER)/aslcompiler.l $(ASL_COMPILER)/aslsupport.l
-+ 	$(LEX) $(LFLAGS) -PAslCompiler -o$@ $(ASL_COMPILER)/aslcompiler.l
-+ 
-+-$(OBJDIR)/aslcompilerparse.c $(OBJDIR)/aslcompilerparse.h : $(ASL_COMPILER)/aslcompiler.y
-++$(OBJDIR)/aslcompilerparse.c : $(ASL_COMPILER)/aslcompiler.y
-+ 	$(YACC) $(YFLAGS) -pAslCompiler -o$@ $?
-+ 
-+ $(OBJDIR)/dtparserlex.c :      $(ASL_COMPILER)/dtparser.l
-+ 	$(LEX) $(LFLAGS) -PDtParser -o$@ $?
-+ 
-+-$(OBJDIR)/dtparserparse.c $(OBJDIR)/dtparserparse.h : $(ASL_COMPILER)/dtparser.y
-++$(OBJDIR)/dtparserparse.c : $(ASL_COMPILER)/dtparser.y
-+ 	$(YACC) $(YFLAGS) -pDtParser -o$@ $?
-+ 
-+ $(OBJDIR)/prparserlex.c :      $(ASL_COMPILER)/prparser.l
-+ 	$(LEX) $(LFLAGS) -PPrParser -o$@ $?
-+ 
-+-$(OBJDIR)/prparserparse.c $(OBJDIR)/prparserparse.h : $(ASL_COMPILER)/prparser.y
-++$(OBJDIR)/prparserparse.c : $(ASL_COMPILER)/prparser.y
-+ 	$(YACC) $(YFLAGS) -pPrParser -o$@ $?
-+ 
-++$(OBJDIR)/aslcompilerparse.h : $(OBJDIR)/aslcompilerparse.c
-++	touch $@
-++
-++$(OBJDIR)/dtparserparse.h : $(OBJDIR)/dtparserparse.c
-++	touch $@
-++
-++$(OBJDIR)/prparserparse.h:  $(OBJDIR)/prparserparse.c
-++	touch $@
-+ 
-+ #
-+ # Rename the headers produced by bison/yacc
-+@@ -279,19 +284,21 @@ $(OBJDIR)/prparser.y.h: $(OBJDIR)/prparserparse.h
-+ # by the utilities above and they are not necessarily ANSI C, etc.
-+ #
-+ $(OBJDIR)/aslcompilerlex.o :   $(OBJDIR)/aslcompilerlex.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-+ 
-+ $(OBJDIR)/aslcompilerparse.o : $(OBJDIR)/aslcompilerparse.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-+ 
-+ $(OBJDIR)/dtparserlex.o :      $(OBJDIR)/dtparserlex.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-+ 
-+ $(OBJDIR)/dtparserparse.o :    $(OBJDIR)/dtparserparse.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-+ 
-+ $(OBJDIR)/prparserlex.o :      $(OBJDIR)/prparserlex.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-+ 
-+ $(OBJDIR)/prparserparse.o :    $(OBJDIR)/prparserparse.c
-+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
-++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
-++
-++$(OBJECTS): $(HEADERS)
+ 
+-S="${WORKDIR}/acpica-unix2-${PV}"
++S = "${WORKDIR}/acpica-unix2-${PV}"
+ 
+ EXTRA_OEMAKE = "'OPT_CFLAGS=-Wall'"
+ 
+@@ -36,3 +33,5 @@ do_install() {
+     install -D -p -m0755 generate/unix/bin*/acpisrc ${D}${bindir}/acpisrc
+     install -D -p -m0755 generate/unix/bin*/acpixtract ${D}${bindir}/acpixtract
+ }
++
++COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 -- 
 1.8.1.2
 
