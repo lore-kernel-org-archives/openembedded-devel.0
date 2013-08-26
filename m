@@ -1,45 +1,39 @@
-Return-Path: <B40290@freescale.com>
-Received: from db9outboundpool.messaging.microsoft.com
-	(mail-db9lp0248.outbound.messaging.microsoft.com [213.199.154.248])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D1026B4BE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 46F306A95B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 03:25:12 +0000 (UTC)
-Received: from mail76-db9-R.bigfish.com (10.174.16.245) by
-	DB9EHSOBE021.bigfish.com (10.174.14.84) with Microsoft SMTP Server id
-	14.1.225.22; Mon, 26 Aug 2013 03:25:11 +0000
-Received: from mail76-db9 (localhost [127.0.0.1])	by mail76-db9-R.bigfish.com
-	(Postfix) with ESMTP id 86D4D300267	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 03:25:11 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 3
-X-BigFish: VS3(zzc8kzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah186068h8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail76-db9 (localhost.localdomain [127.0.0.1]) by mail76-db9
-	(MessageSwitch) id 1377487508560869_21888;
-	Mon, 26 Aug 2013 03:25:08 +0000 (UTC)
-Received: from DB9EHSMHS018.bigfish.com (unknown [10.174.16.240])	by
-	mail76-db9.bigfish.com (Postfix) with ESMTP id 83927140057	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 03:25:08 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB9EHSMHS018.bigfish.com
-	(10.174.14.28) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Mon, 26 Aug 2013 03:25:08 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.3.146.2; Mon, 26 Aug 2013 03:25:06 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r7Q3P24Q000677;	Sun, 25 Aug 2013 20:25:04 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Aug 2013 11:24:59 +0800
-Message-ID: <1377487499-31434-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Mon, 26 Aug 2013 07:03:48 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id b15so1385109eek.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Aug 2013 00:03:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=2brxgz8cF11UutvgkJvQPKvyQOjGhPVmrEurVfhHKBk=;
+	b=FMYvlIogJ+p305Z3NoDoax86Tnh0dav8Tk2SJTN98WHvn15qgCCzXv1oLKu2ZCmQgF
+	0n0ivEFubCK0AjjpXaLBo3vEru05dcUx+7LdNLYngzyCzNbyGJEYjxUVk3/zufk2nPvo
+	o7JBUp0h1pEB9/siCRcpWC/KqbH1QAC294LF5nSH3QEJznWy38J1MvfQFD6yphwrPzMa
+	+o9pvsNrhEJnBut04aZxbc6C1kPqTccNPReBYmap75tmm6s8yl65fXpqOw1mfusVzNVh
+	CsfhiuoyLCMocmr5HHA93uUI/kyWTj9Tp8PHLWqZsPvyrVPoDzV03BZ+h7LmHDxGs39a
+	knCw==
+X-Received: by 10.15.63.14 with SMTP id l14mr18592870eex.13.1377500628115;
+	Mon, 26 Aug 2013 00:03:48 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	b45sm19112341eef.4.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 26 Aug 2013 00:03:47 -0700 (PDT)
+Date: Mon, 26 Aug 2013 09:04:57 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Naresh Bhat <naresh.bhat@linaro.org>
+Message-ID: <20130826070457.GK3544@jama>
+References: <20130823215050.GE3544@jama>
+	<CAFoFrHahfobkP_i-y0+nQpiB-YWoO2C8OXaviKuHbQTNjdgQ-A@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH 4/4] barnyard: add recipe
+In-Reply-To: <CAFoFrHahfobkP_i-y0+nQpiB-YWoO2C8OXaviKuHbQTNjdgQ-A@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: acpica failing to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,156 +47,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2013 03:25:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Aug 2013 07:03:49 -0000
+X-Groupsio-MsgNum: 45838
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kswDJesP0akhmDn8"
+Content-Disposition: inline
 
-From: Chunrong Guo <B40290@freescale.com>
+--kswDJesP0akhmDn8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  *Barnyard is a output system for Snort
+On Mon, Aug 26, 2013 at 11:53:39AM +0530, Naresh Bhat wrote:
+> Are you able to see the "prparser.y.h" under acpica source and recipe
+> is unable to locate it ?
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/licenses/QPL                               |   99 ++++++++++++++++++++
- .../barnyard/barnyard_0.2.0.bb                     |   22 +++++
- 2 files changed, 121 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/licenses/QPL
- create mode 100644 meta-oe/recipes-connectivity/barnyard/barnyard_0.2.0.bb
+I can check later when it fails again on jenkins, but workspace is gone
+already.
 
-diff --git a/meta-oe/licenses/QPL b/meta-oe/licenses/QPL
-new file mode 100644
-index 0000000..af39932
---- /dev/null
-+++ b/meta-oe/licenses/QPL
-@@ -0,0 +1,99 @@
-+			     THE Q PUBLIC LICENSE
-+				  version 1.0
-+
-+		   Copyright (C) 1999 Troll Tech AS, Norway.
-+		       Everyone is permitted to copy and
-+		       distribute this license document.
-+
-+The intent of this license is to establish freedom to share and change the
-+software regulated by this license under the open source model.
-+
-+This license applies to any software containing a notice placed by the
-+copyright holder saying that it may be distributed under the terms of
-+the Q Public License version 1.0.  Such software is herein referred to as
-+the Software.  This license covers modification and distribution of the
-+Software, use of third-party application programs based on the Software,
-+and development of free software which uses the Software.
-+
-+				 Granted Rights
-+
-+1. You are granted the non-exclusive rights set forth in this license
-+   provided you agree to and comply with any and all conditions in this
-+   license.  Whole or partial distribution of the Software, or software
-+   items that link with the Software, in any form signifies acceptance of
-+   this license.
-+
-+2. You may copy and distribute the Software in unmodified form provided
-+   that the entire package, including - but not restricted to - copyright,
-+   trademark notices and disclaimers, as released by the initial developer
-+   of the Software, is distributed.
-+
-+3. You may make modifications to the Software and distribute your
-+   modifications, in a form that is separate from the Software, such as
-+   patches. The following restrictions apply to modifications:
-+
-+     a. Modifications must not alter or remove any copyright notices in
-+        the Software.
-+
-+     b. When modifications to the Software are released under this
-+        license, a non-exclusive royalty-free right is granted to the
-+        initial developer of the Software to distribute your modification
-+        in future versions of the Software provided such versions remain
-+        available under these terms in addition to any other license(s) of
-+        the initial developer.
-+
-+4. You may distribute machine-executable forms of the Software or
-+   machine-executable forms of modified versions of the Software, provided
-+   that you meet these restrictions:
-+
-+     a. You must include this license document in the distribution.
-+
-+     b. You must ensure that all recipients of the machine-executable forms
-+        are also able to receive the complete machine-readable source code
-+        to the distributed Software, including all modifications, without
-+        any charge beyond the costs of data transfer, and place prominent
-+        notices in the distribution explaining this.
-+
-+     c. You must ensure that all modifications included in the
-+        machine-executable forms are available under the terms of this
-+        license.
-+
-+5. You may use the original or modified versions of the Software to
-+   compile, link and run application programs legally developed by you
-+   or by others.
-+
-+6. You may develop application programs, reusable components and other
-+   software items that link with the original or modified versions of the
-+   Software.  These items, when distributed, are subject to the following
-+   requirements:
-+
-+     a. You must ensure that all recipients of machine-executable forms of
-+        these items are also able to receive and use the complete
-+        machine-readable source code to the items without any charge
-+        beyond the costs of data transfer.
-+
-+     b. You must explicitly license all recipients of your items to use
-+        and re-distribute original and modified versions of the items in
-+        both machine-executable and source code forms. The recipients must
-+        be able to do so without any charges whatsoever, and they must be
-+        able to re-distribute to anyone they choose.
-+
-+
-+     c. If the items are not available to the general public, and the
-+        initial developer of the Software requests a copy of the items,
-+        then you must supply one.
-+
-+			    Limitations of Liability
-+
-+In no event shall the initial developers or copyright holders be liable
-+for any damages whatsoever, including - but not restricted to - lost
-+revenue or profits or other direct, indirect, special, incidental or
-+consequential damages, even if they have been advised of the possibility
-+of such damages, except to the extent invariable law, if any, provides
-+otherwise.
-+
-+			          No Warranty
-+
-+The Software and this license document are provided AS IS with NO WARRANTY
-+OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS
-+FOR A PARTICULAR PURPOSE.
-diff --git a/meta-oe/recipes-connectivity/barnyard/barnyard_0.2.0.bb b/meta-oe/recipes-connectivity/barnyard/barnyard_0.2.0.bb
-new file mode 100644
-index 0000000..a13ebdc
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/barnyard/barnyard_0.2.0.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Barnyard is a output system for Snort."
-+HOMEPAGE = "http://www.snort.org/"
-+LICENSE = "QPL"
-+LIC_FILES_CHKSUM = "file://LICENSE.QPL;md5=1b8ff8c0012b5a2d647357699bf44b41"
-+
-+DEPENDS = "libpcap"
-+RDEPENDS_${PN} = "libpcap"
-+
-+SRC_URI = " ${GENTOO_MIRROR}/${P}.tar.gz;name=tarball \
-+          "
-+SRC_URI[tarball.md5sum] = "be3283028cf414b52b220308ceb411e9"
-+SRC_URI[tarball.sha256sum] = "09e0f8e095e79cfe70ea069d13e7d02521a504a1f400a45556a634dccfd31a3a"
-+
-+
-+S = "${WORKDIR}/${P}"
-+inherit autotools pkgconfig
-+
-+do_configure_prepend () {
-+	#fix hardcoded include path
-+	sed -i -e 's:extra_incl=-I/usr/include/pcap::g' ${S}/configure.in
-+}
-+
--- 
-1.7.5.4
+> On 24 August 2013 03:20, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > Can you please check why it's sometimes failing like this:
+> >
+> > | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-co=
+re/tmp-eglibc/work/armv5te-oe-linux-gnueabi/acpica/20130626-r1/acpica-unix2=
+-20130626/generate/unix/acpidump'
+> > | 64-bit version of acpidump:
+> > | -rwxr-xr-x 1 jenkins jenkins 121136 Aug 23 17:54 ../bin/acpidump
+> > |
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtpars=
+erlex.o obj/dtparserlex.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbstats.o=
+ ../../../source/components/debugger/dbstats.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtpars=
+erparse.o obj/dtparserparse.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/prpars=
+erlex.o obj/prparserlex.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_NAMES_APP -I../../../source/tools/acpinames -Wall -o obj/excreat=
+e.o ../../../source/components/executer/excreate.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbutils.o=
+ ../../../source/components/debugger/dbutils.c
+> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
+sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
+emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
+CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
+ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbxface.o=
+ ../../../source/components/debugger/dbxface.c
+> > | ../../../source/compiler/prparser.l:46:24: fatal error: prparser.y.h:=
+ No such file or directory
+> > |  #include "prparser.y.h"
+> > |                         ^
+> > | compilation terminated.
+> > | make[1]: *** [obj/prparserlex.o] Error 1
+> > | make[1]: *** Waiting for unfinished jobs....
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--kswDJesP0akhmDn8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.21 (GNU/Linux)
+
+iEYEARECAAYFAlIa/hkACgkQN1Ujt2V2gBzQEACghu3J8gZBh0ArG6gl8lxI8RkV
+hPQAn0hbKAHaSgYkZ1tZQJWHoGg6mVqM
+=IAsz
+-----END PGP SIGNATURE-----
+
+--kswDJesP0akhmDn8--
