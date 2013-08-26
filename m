@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 46F306A95B
+Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id D07936A9E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 07:03:48 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b15so1385109eek.26
+	Mon, 26 Aug 2013 07:05:00 +0000 (UTC)
+Received: by mail-ea0-f175.google.com with SMTP id m14so1382049eaj.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Aug 2013 00:03:48 -0700 (PDT)
+	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2brxgz8cF11UutvgkJvQPKvyQOjGhPVmrEurVfhHKBk=;
-	b=FMYvlIogJ+p305Z3NoDoax86Tnh0dav8Tk2SJTN98WHvn15qgCCzXv1oLKu2ZCmQgF
-	0n0ivEFubCK0AjjpXaLBo3vEru05dcUx+7LdNLYngzyCzNbyGJEYjxUVk3/zufk2nPvo
-	o7JBUp0h1pEB9/siCRcpWC/KqbH1QAC294LF5nSH3QEJznWy38J1MvfQFD6yphwrPzMa
-	+o9pvsNrhEJnBut04aZxbc6C1kPqTccNPReBYmap75tmm6s8yl65fXpqOw1mfusVzNVh
-	CsfhiuoyLCMocmr5HHA93uUI/kyWTj9Tp8PHLWqZsPvyrVPoDzV03BZ+h7LmHDxGs39a
-	knCw==
-X-Received: by 10.15.63.14 with SMTP id l14mr18592870eex.13.1377500628115;
-	Mon, 26 Aug 2013 00:03:48 -0700 (PDT)
+	bh=i1kRywRy7UHDC8DdTrCEVz6snRBfLpi3A/yq3i6Ha5E=;
+	b=TzxYQduoT28R2HGqSHFR3Rdxt3bqpuvIT60aLGnekoOk+YcjUwuG0ybdNrvSDHXp8q
+	VQjOloMuuOLd/23RYo3Fn0d7/GkfSG3c0aAjD4Kxb5KyaFkgE6uogCh+0M/IkXeWJjlX
+	h09Zu2+Uiju6uWpnjzcZLvBsfSzKrLzZabdUTgudfzRAIj4yRTpxKBzdTGNss9uxl5zk
+	asNv7NcCYsFfsit84wUppbDOy7YYyavUam/qg0cO0a+bwVmVyjePryIacEsnN3AgQsZ+
+	l41WNiMmZVF1JbeAJzDTsWRzqItjFEjk1Yy1FNpcchppewNAyFkeMVKP8wkXixpn19K/
+	4t0A==
+X-Received: by 10.14.8.72 with SMTP id 48mr23803339eeq.25.1377500700864;
+	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b45sm19112341eef.4.1969.12.31.16.00.00
+	r48sm19064590eev.14.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 26 Aug 2013 00:03:47 -0700 (PDT)
-Date: Mon, 26 Aug 2013 09:04:57 +0200
+	Mon, 26 Aug 2013 00:05:00 -0700 (PDT)
+Date: Mon, 26 Aug 2013 09:06:10 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Naresh Bhat <naresh.bhat@linaro.org>
-Message-ID: <20130826070457.GK3544@jama>
-References: <20130823215050.GE3544@jama>
-	<CAFoFrHahfobkP_i-y0+nQpiB-YWoO2C8OXaviKuHbQTNjdgQ-A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130826070610.GL3544@jama>
+References: <1377487327-31367-1-git-send-email-b40290@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <CAFoFrHahfobkP_i-y0+nQpiB-YWoO2C8OXaviKuHbQTNjdgQ-A@mail.gmail.com>
+In-Reply-To: <1377487327-31367-1-git-send-email-b40290@freescale.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: acpica failing to build
+Subject: Re: [meta-oe][PATCH 3/4] daq: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,99 +46,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Aug 2013 07:03:49 -0000
-X-Groupsio-MsgNum: 45838
+X-List-Received-Date: Mon, 26 Aug 2013 07:05:01 -0000
+X-Groupsio-MsgNum: 45839
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kswDJesP0akhmDn8"
+	protocol="application/pgp-signature"; boundary="RNGrj7vazCqBHNw7"
 Content-Disposition: inline
 
---kswDJesP0akhmDn8
+--RNGrj7vazCqBHNw7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 26, 2013 at 11:53:39AM +0530, Naresh Bhat wrote:
-> Are you able to see the "prparser.y.h" under acpica source and recipe
-> is unable to locate it ?
+On Mon, Aug 26, 2013 at 11:22:07AM +0800, b40290@freescale.com wrote:
+> From: Chunrong Guo <B40290@freescale.com>
+>=20
+>   *The dump DAQ test the various inline mode features
+>   *snort depends daq
+>=20
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> ---
+>  meta-oe/recipes-connectivity/daq/daq_2.0.0.bb      |   17 ++++++++++++++=
++++
+>  .../daq/files/disable-check-pcap-version.patch     |   11 +++++++++++
+>  2 files changed, 28 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.0.bb
+>  create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-check-=
+pcap-version.patch
+>=20
+> diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.0.bb b/meta-oe/reci=
+pes-connectivity/daq/daq_2.0.0.bb
+> new file mode 100644
+> index 0000000..0a71894
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/daq/daq_2.0.0.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION =3D "The dump DAQ test the various inline mode features "
+> +HOMEPAGE =3D "http://www.snort.org"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9ce51a65dd738dc1ae631d8b21c4=
+0e0"
+> +
+> +
+> +DEPENDS =3D "libpcap libpcre "
+> +
+> +SRC_URI[md5sum] =3D "a00855a153647df76d47f1ea454f74ae"
+> +SRC_URI[sha256sum] =3D "fbafc8e362a96fcadc69731f91203ef90845507aae0a4774=
+d5c2825e9d2c1c38"
+> +
+> +SRC_URI =3D "http://fossies.org/linux/misc/daq-2.0.0.tar.gz\
+> +           file://disable-check-pcap-version.patch "
+> +
+> +
+> +inherit autotools
+> +
+> diff --git a/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-ve=
+rsion.patch b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-ver=
+sion.patch
+> new file mode 100644
+> index 0000000..416ef65
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.p=
+atch
 
-I can check later when it fails again on jenkins, but workspace is gone
-already.
+Please add header explaining why this patch is needed.
 
-> On 24 August 2013 03:20, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > Can you please check why it's sometimes failing like this:
-> >
-> > | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-co=
-re/tmp-eglibc/work/armv5te-oe-linux-gnueabi/acpica/20130626-r1/acpica-unix2=
--20130626/generate/unix/acpidump'
-> > | 64-bit version of acpidump:
-> > | -rwxr-xr-x 1 jenkins jenkins 121136 Aug 23 17:54 ../bin/acpidump
-> > |
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtpars=
-erlex.o obj/dtparserlex.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbstats.o=
- ../../../source/components/debugger/dbstats.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/dtpars=
-erparse.o obj/dtparserparse.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_ASL_COMPILER -I../../../source/compiler -Iobj -Wall -oobj/prpars=
-erlex.o obj/prparserlex.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_NAMES_APP -I../../../source/tools/acpinames -Wall -o obj/excreat=
-e.o ../../../source/components/executer/excreate.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbutils.o=
- ../../../source/components/debugger/dbutils.c
-> > | arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm -mthumb-interwork --=
-sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/q=
-emuarm -c -O2 -pipe -g -feliminate-unused-debug-types -D_CYGWIN -D_GNU_SOUR=
-CE -I../../../source/include -D_CYGWIN -D_GNU_SOURCE -I../../../source/incl=
-ude -DACPI_EXEC_APP -I../../../source/tools/acpiexec -Wall -o obj/dbxface.o=
- ../../../source/components/debugger/dbxface.c
-> > | ../../../source/compiler/prparser.l:46:24: fatal error: prparser.y.h:=
- No such file or directory
-> > |  #include "prparser.y.h"
-> > |                         ^
-> > | compilation terminated.
-> > | make[1]: *** [obj/prparserlex.o] Error 1
-> > | make[1]: *** Waiting for unfinished jobs....
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> @@ -0,0 +1,11 @@
+> +--- a/configure.ac	2013-08-22 02:37:02.453253534 -0500
+> ++++ b/configure.ac	2013-08-22 02:37:53.008254362 -0500
+> +@@ -179,7 +179,7 @@
+> +               [enable_pcap_module=3D"$enableval"], [enable_pcap_module=
+=3D"$DEFAULT_ENABLE"])
+> + if test "$enable_pcap_module" =3D yes; then
+> +     AC_CHECK_HEADER([pcap.h], [], [enable_pcap_module=3Dno])
+> +-    AC_CHECK_PCAP_VER("1.0.0")
+> ++    #AC_CHECK_PCAP_VER("1.0.0")
+> +     if test "$enable_pcap_module" =3D yes; then
+> +         STATIC_LIBS=3D"${STATIC_LIBS} -lpcap"
+> +     fi
+> --=20
+> 1.7.5.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---kswDJesP0akhmDn8
+--RNGrj7vazCqBHNw7
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlIa/hkACgkQN1Ujt2V2gBzQEACghu3J8gZBh0ArG6gl8lxI8RkV
-hPQAn0hbKAHaSgYkZ1tZQJWHoGg6mVqM
-=IAsz
+iEYEARECAAYFAlIa/mIACgkQN1Ujt2V2gBy5tgCeIVf5Th5PkN05Sm9vb0pT1ueI
+TLgAmweJ1lkH1xyqXu34ha3YJ/iEjL9x
+=Cqoy
 -----END PGP SIGNATURE-----
 
---kswDJesP0akhmDn8--
+--RNGrj7vazCqBHNw7--
