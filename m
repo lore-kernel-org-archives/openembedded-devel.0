@@ -1,20 +1,24 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 92A626BA73
+Return-Path: <Maxin.John@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id 6EC736BA72
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2013 07:11:42 +0000 (UTC)
-Received: from [192.168.178.14] (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id DAB7329C75
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2013 09:11:40 +0200 (CEST)
-Message-ID: <521C514F.1000405@pseudoterminal.org>
-Date: Tue, 27 Aug 2013 09:12:15 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130806 Thunderbird/17.0.8
+	Tue, 27 Aug 2013 07:23:30 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.2.318.1;
+	Tue, 27 Aug 2013 09:23:29 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4454)	id 7475428B66D;
+	Tue, 27 Aug 2013 09:23:29 +0200 (CEST)
+Date: Tue, 27 Aug 2013 09:23:29 +0200
+From: "Maxin B. John" <maxin.john@enea.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20130827072329.GA59842@sestofb10.enea.se>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: How can I make recipes conditionally enabled?
+In-Reply-To: <2418237.2zCjuWRh6q@helios>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Received-SPF: None (SESTOEX03.enea.se: maxin.john@enea.com does not
+	designate permitted sender hosts)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] [PATCH] log4cplus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,28 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2013 07:11:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Aug 2013 07:23:31 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Mon, Aug 26, 2013 at 07:59:57PM +0100, Paul Eggleton wrote:
 
-I have a question about a problem I've had several times in the past:
+Hi Paul,
 
-if I write a layer, and add .bbappends, then the layers with the 
-corresponding .bb files become hard dependencies.
-But lets say I want to write a BSP layer, and I add some machine 
-specific Qt5 patches. Now everybody who wants to use
-my layer must also include meta-qt5, even when they don't really want to 
-use Qt5 anywhere. This is made even worse
-if I have a dependency on meta-oe, which itself brings in a lot of 
-modifications.
+> Hi Maxin,
+> On Monday 26 August 2013 13:06:19 maxin.john@enea.com wrote:
+> > From: "Maxin B. John" <maxin.john@enea.com>
+> > log4cplus provides a simple C++ logging API for log management.
+> > Signed-off-by: Maxin B. John <maxin.john@enea.com>
+> > ---
+> >  .../recipes-devtools/log4cplus/log4cplus_1.1.1.bb    |   18
+> > ++++++++++++++++++ 1 file changed, 18 insertions(+)
+<snip>
+> If you're setting a short description only, please set it in SUMMARY rath=
+er=B7
+> than DESCRIPTION.
+Ok, I will set it in SUMMARY.
 
-In short, I'd like to be able to make .bbappends and .bb files dependend 
-on whether or not a layer is available. The hard
-dependency is fine if it concerns things that are essential in my layer. 
-But if its about optional things, it shouldn't cause
-a build failure.
+> > +SECTION =3D "libs"
+> > +HOMEPAGE =3D "http://sourceforge.net/projects/liblog4cplus/"
+> This HOMEPAGE value is incorrect.
+ouch. Will correct it.
 
-Thoughts?
+Thank you very much for reviewing this. I will send the updated
+version soon.
+> Cheers,
+> Paul
+
+Thanks and Regards,
+Maxin
 
