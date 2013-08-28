@@ -1,35 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 572176BC09
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B25BD6BA7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2013 06:34:56 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id lb1so5853330pab.12
+	Wed, 28 Aug 2013 09:22:52 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r7S9Mshx009020
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Aug 2013 23:34:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=4SBZNoNBTEAtU47xJXYY1LYzRl/z1w0l8N+YwYg+Pk4=;
-	b=fmeqTtdMuYiF4takFixZB94CntGDzGturiR6/OHx4olwycRFrbZbxd4dzohfWpq9NP
-	hpmSzLfxIlv////dE1M1bxVgyZ2c0BkNgC93Rq6i+qIe+wJn2VJl5Wa7S9WqGxZqqHwT
-	e9WDnrA5MB5x46+TKbSDUDb/iI/Ycuew7TV0A7OVMmHFAD0MgA2ctn942ur624nc+azI
-	2qTEf3slx8XnMoOaHTLt0QRdIcw2aNKPFXRDFm2ZHy9i4kay3iX4THwQAmht81bjjFTG
-	zIArFjjl31/QcuR7YFCIMRv1S9ezJO4dhEaa7VoVS0q9m5w9eyzFcn1q9X+kPXPcxV8Y
-	AtxA==
-X-Received: by 10.68.254.166 with SMTP id aj6mr368369pbd.193.1377671697243;
-	Tue, 27 Aug 2013 23:34:57 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	ct4sm20021614pbb.41.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 27 Aug 2013 23:34:55 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Aug 2013 23:34:10 -0700
-Message-Id: <1377671650-16398-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.4
-Subject: [toolchain-layer][PATCH] gcc-4.6: Update to match gcc restructing in OE-Core
+	Wed, 28 Aug 2013 02:22:54 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Wed, 28 Aug 2013 02:22:53 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Aug 2013 17:22:58 +0800
+Message-ID: <1377681778-2387-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH meta-networking] tftp-hpa: add error check for disk filled up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,87 +32,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2013 06:34:58 -0000
+X-List-Received-Date: Wed, 28 Aug 2013 09:22:54 -0000
+Content-Type: text/plain
 
-The include file infra in gcc recipes recieved an overhaul
-on OE-Core. This patch matches the toolchain layer recipes
-to use the new include files
+From: "Roy.Li" <rongqing.li@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Add error check when the write-buffer is finally flushed to the file,
+the caller can detect if the disk filled up (or had an i/o error) and
+return a NOSAPCE nak to the other side.
+
+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
 ---
- .../recipes-devtools/gcc/gcc-cross-canadian_4.6.bb    | 19 -------------------
- toolchain-layer/recipes-devtools/gcc/gcc-cross_4.6.bb |  8 +-------
- .../recipes-devtools/gcc/gcc-runtime_4.6.bb           |  8 +-------
- toolchain-layer/recipes-devtools/gcc/gcc_4.6.bb       |  5 +----
- 4 files changed, 3 insertions(+), 37 deletions(-)
+ .../files/add-error-check-for-disk-filled-up.patch |   81 ++++++++++++++++++++
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |    4 +-
+ 2 files changed, 84 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/add-error-check-for-disk-filled-up.patch
 
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-index 5c2435f..29ddd67 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-cross-canadian_4.6.bb
-@@ -2,22 +2,3 @@ inherit cross-canadian
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/add-error-check-for-disk-filled-up.patch b/meta-networking/recipes-daemons/tftp-hpa/files/add-error-check-for-disk-filled-up.patch
+new file mode 100644
+index 0000000..073b769
+--- /dev/null
++++ b/meta-networking/recipes-daemons/tftp-hpa/files/add-error-check-for-disk-filled-up.patch
+@@ -0,0 +1,81 @@
++From bd5773947af5ca80ca546ad5625818fc912bdd60 Mon Sep 17 00:00:00 2001
++From: "Roy.Li" <rongqing.li@windriver.com>
++Date: Thu, 22 Aug 2013 08:56:09 +0800
++Subject: [PATCH] tftp-hpa: add error check for disk filled up
++
++Upstream-status: Pending [Sent to http://www.syslinux.org/archives/2013-August/020765.html]
++
++Add error check when the write-buffer is finally flushed to the file,
++the caller can detect if the disk filled up (or had an i/o error) and
++return a NOSAPCE nak to the other side.
++
++Signed-off-by: Ming Liu <ming.liu@windriver.com>
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++---
++ common/tftpsubs.c |    8 +++++---
++ tftpd/tftpd.c     |   12 ++++++++++--
++ 2 files changed, 15 insertions(+), 5 deletions(-)
++
++diff --git a/common/tftpsubs.c b/common/tftpsubs.c
++index 8c999f6..b4d4ffe 100644
++--- a/common/tftpsubs.c
+++++ b/common/tftpsubs.c
++@@ -206,20 +206,22 @@ int write_behind(FILE * file, int convert)
++ 
++     p = buf;
++     ct = count;
+++    count = 0;
++     while (ct--) {              /* loop over the buffer */
++         c = *p++;               /* pick up a character */
++         if (prevchar == '\r') { /* if prev char was cr */
++             if (c == '\n')      /* if have cr,lf then just */
++-                fseek(file, -1, 1);     /* smash lf on top of the cr */
+++                count = count - 1;
++             else if (c == '\0') /* if have cr,nul then */
++                 goto skipit;    /* just skip over the putc */
++             /* else just fall through and allow it */
++         }
++-        putc(c, file);
+++        buf[count] = c;
+++        count ++;
++       skipit:
++         prevchar = c;
++     }
++-    return count;
+++    return write(fileno(file), buf, count);
++ }
++ 
++ /* When an error has occurred, it is possible that the two sides
++diff --git a/tftpd/tftpd.c b/tftpd/tftpd.c
++index 1873e70..c2adbda 100644
++--- a/tftpd/tftpd.c
+++++ b/tftpd/tftpd.c
++@@ -1681,7 +1681,11 @@ static void tftp_recvfile(const struct formats *pf, struct tftphdr *oap, int oac
++             syslog(LOG_WARNING, "tftpd: write(ack): %m");
++             goto abort;
++         }
++-        write_behind(file, pf->f_convert);
+++        if(write_behind(file, pf->f_convert) < 0) {
+++            nak(ENOSPACE, NULL);
+++            (void)fclose(file);
+++            goto abort;
+++        }
++         for (;;) {
++             n = recv_time(peer, dp, PKTSIZE, 0, &r_timeout);
++             if (n < 0) {        /* really? */
++@@ -1712,7 +1716,11 @@ static void tftp_recvfile(const struct formats *pf, struct tftphdr *oap, int oac
++             goto abort;
++         }
++     } while (size == segsize);
++-    write_behind(file, pf->f_convert);
+++    if(write_behind(file, pf->f_convert) < 0) {
+++        nak(ENOSPACE, NULL);
+++        (void)fclose(file);
+++        goto abort;
+++    }
++     (void)fclose(file);         /* close data file */
++ 
++     ap->th_opcode = htons((u_short) ACK);       /* send the "final" ack */
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index cb5b234..9cb25f0 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -23,7 +23,9 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
+            file://tftp-hpa-0.49-stats.patch \
+            file://tftp-hpa-5.2-pktinfo.patch \
+            file://default \
+-           file://init"
++           file://init \
++           file://add-error-check-for-disk-filled-up.patch \
++"
  
- require recipes-devtools/gcc/gcc-${PV}.inc
- require recipes-devtools/gcc/gcc-cross-canadian.inc
--require recipes-devtools/gcc/gcc-configure-sdk.inc
--require recipes-devtools/gcc/gcc-package-sdk.inc
--
--DEPENDS += "nativesdk-gmp nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
--RDEPENDS_${PN} += "nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
--
--SYSTEMHEADERS = "/usr/include"
--SYSTEMLIBS = "/lib/"
--SYSTEMLIBS1 = "/usr/lib/"
--
--EXTRA_OECONF += "--disable-libunwind-exceptions --disable-libssp \
--    --disable-libgomp --disable-libmudflap \
--    --with-mpfr=${STAGING_DIR_HOST}${layout_exec_prefix} \
--    --with-mpc=${STAGING_DIR_HOST}${layout_exec_prefix}"
--
--# to find libmpfr
--# export LD_LIBRARY_PATH = "{STAGING_DIR_HOST}${layout_exec_prefix}"
--
--PARALLEL_MAKE = ""
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-cross_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-cross_4.6.bb
-index eb8896c..cdaa7e8 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-cross_4.6.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-cross_4.6.bb
-@@ -1,8 +1,2 @@
- require recipes-devtools/gcc/gcc-${PV}.inc
--require recipes-devtools/gcc/gcc-cross4.inc
--
--EXTRA_OECONF += "--disable-libunwind-exceptions \
--                 --with-mpfr=${STAGING_DIR_NATIVE}${prefix_native} \
--                 --with-system-zlib "
--
--ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_DIR_TARGET}${target_includedir}"
-+require recipes-devtools/gcc/gcc-cross.inc
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc-runtime_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc-runtime_4.6.bb
-index 13431c8..b755f55 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc-runtime_4.6.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc-runtime_4.6.bb
-@@ -1,8 +1,2 @@
- require recipes-devtools/gcc/gcc-${PV}.inc
--require recipes-devtools/gcc/gcc-configure-runtime.inc
--require recipes-devtools/gcc/gcc-package-runtime.inc
--
--ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
--
--EXTRA_OECONF += "--disable-libunwind-exceptions"
--EXTRA_OECONF_append_linuxstdbase = " --enable-clocale=gnu"
-+require recipes-devtools/gcc/gcc-runtime.inc
-diff --git a/toolchain-layer/recipes-devtools/gcc/gcc_4.6.bb b/toolchain-layer/recipes-devtools/gcc/gcc_4.6.bb
-index 97e6c32..6ad8973 100644
---- a/toolchain-layer/recipes-devtools/gcc/gcc_4.6.bb
-+++ b/toolchain-layer/recipes-devtools/gcc/gcc_4.6.bb
-@@ -1,5 +1,2 @@
- require recipes-devtools/gcc/gcc-${PV}.inc
--require recipes-devtools/gcc/gcc-configure-target.inc
--require recipes-devtools/gcc/gcc-package-target.inc
--
--ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
-+require recipes-devtools/gcc/gcc-target.inc
+ SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
+ SRC_URI[sha256sum] = "0a9f88d4c1c02687b4853b02ab5dd8779d4de4ffdb9b2e5c9332841304d1a269"
 -- 
-1.8.4
+1.7.10.4
 
 
