@@ -1,24 +1,55 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C2486BCB0
+Return-Path: <B19537@freescale.com>
+Received: from co9outboundpool.messaging.microsoft.com
+	(co9ehsobe003.messaging.microsoft.com [207.46.163.26])
+	by mail.openembedded.org (Postfix) with ESMTP id 127486B8A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Aug 2013 10:45:07 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 28 Aug 2013 03:44:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,975,1367996400"; d="scan'208";a="394649045"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.123.7])
-	by orsmga002.jf.intel.com with ESMTP; 28 Aug 2013 03:44:39 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Aug 2013 11:43:26 +0100
-Message-Id: <fb7f50b7c12b9e9a598fbcc2386a483c93ada94e.1377686481.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1377686481.git.paul.eggleton@linux.intel.com>
-References: <cover.1377686481.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1377686481.git.paul.eggleton@linux.intel.com>
-References: <cover.1377686481.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe,meta-gnome][PATCH 4/6] python-docutils: remove
+	Wed, 28 Aug 2013 12:32:37 +0000 (UTC)
+Received: from mail155-co9-R.bigfish.com (10.236.132.246) by
+	CO9EHSOBE001.bigfish.com (10.236.130.64) with Microsoft SMTP Server id
+	14.1.225.22; Wed, 28 Aug 2013 12:32:37 +0000
+Received: from mail155-co9 (localhost [127.0.0.1])	by
+	mail155-co9-R.bigfish.com (Postfix) with ESMTP id 7995618012D	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Aug 2013 12:32:37 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -3
+X-BigFish: VS-3(zz98dI9371I542I1432Izz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah186068h8275bh8275dh1de097hz2dh2a8h839h8e2h8e3h944hd25hf0ah1220h1288h12a5h12a9h12bdh137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e1dh1fe8h1ff5hbe9i1155h)
+Received: from mail155-co9 (localhost.localdomain [127.0.0.1]) by mail155-co9
+	(MessageSwitch) id 1377693156496524_32705;
+	Wed, 28 Aug 2013 12:32:36 +0000 (UTC)
+Received: from CO9EHSMHS023.bigfish.com (unknown [10.236.132.227])	by
+	mail155-co9.bigfish.com (Postfix) with ESMTP id 6B12920041	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Aug 2013 12:32:36 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS023.bigfish.com
+	(10.236.130.33) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Wed, 28 Aug 2013 12:32:35 +0000
+Received: from 039-SN2MPN1-023.039d.mgd.msft.net ([169.254.3.40]) by
+	039-SN1MMR1-002.039d.mgd.msft.net ([10.84.1.15]) with mapi id
+	14.03.0146.002; Wed, 28 Aug 2013 12:32:35 +0000
+From: Luo Zhenhua-B19537 <B19537@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH ] libhugetlbfs: add recipe
+Thread-Index: AQHOovnWqhmtF+sp3Eu4ooAnXC5dupmosOaAgAE9FwCAACJKgIAABf/ggAAFmYCAAGgyAA==
+Date: Wed, 28 Aug 2013 12:32:33 +0000
+Message-ID: <CA452391058F6D4E9715FB2C29D9312A016C6C00@039-SN2MPN1-023.039d.mgd.msft.net>
+References: <1377589711-14948-1-git-send-email-b40290@freescale.com>
+	<CAGNsrLC=F+urFnDux=ZB1RSez3jF7err6KEqV3zcBj_x6pXEqA@mail.gmail.com>
+	<CA452391058F6D4E9715FB2C29D9312A016BC265@039-SN2MPN1-023.039d.mgd.msft.net>
+	<CAGNsrLC9ZP5seQjwsvb=Py0QE6-fVy8FnRSV7NWxwz9bAS+EUA@mail.gmail.com>
+	<CA452391058F6D4E9715FB2C29D9312A016C2499@039-SN2MPN1-023.039d.mgd.msft.net>
+	<CAGNsrLCU8_+o1GPH+QwNvncNANfd-61nd+kFjnOPhGxkScUF_w@mail.gmail.com>
+In-Reply-To: <CAGNsrLCU8_+o1GPH+QwNvncNANfd-61nd+kFjnOPhGxkScUF_w@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.192.208.84]
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Subject: Re: [meta-oe][PATCH ] libhugetlbfs: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,42 +63,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2013 10:45:07 -0000
+X-List-Received-Date: Wed, 28 Aug 2013 12:32:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-This is now in OE-Core as of 1bc1ff887c29376bb0d05beee1bbc2cf25b08419.
+Sure, I can do it.=20
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../recipes-devtools/python/python-docutils_0.5.bb    | 19 -------------------
- 1 file changed, 19 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/python/python-docutils_0.5.bb
 
-diff --git a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb b/meta-oe/recipes-devtools/python/python-docutils_0.5.bb
-deleted file mode 100644
-index e4c8a7d..0000000
---- a/meta-oe/recipes-devtools/python/python-docutils_0.5.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "Text processing system"
--HOMEPAGE = "http://docutils.sourceforge.net"
--SECTION = "devel/python"
--LICENSE = "PSF"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=ac6ee29ac0310c091afab5ac4bea2fa3"
--PR = "r2"
--
--DEPENDS = "python"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/docutils/docutils-${PV}.tar.gz"
--SRC_URI[md5sum] = "dd72dac92fc8e3eb0f48c3effeef80f6"
--SRC_URI[sha256sum] = "747cf984edfca0575addbb42453274a1bdd98ec7780bd37a883dc8b2a66a610e"
--
--S = "${WORKDIR}/docutils-${PV}"
--
--inherit distutils
--
--BBCLASSEXTEND = "native"
--
--- 
-1.8.1.2
+Best Regards,
+
+Zhenhua
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Fathi Boudra
+> Sent: Wednesday, August 28, 2013 1:39 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH ] libhugetlbfs: add recipe
+>=20
+> On 28 August 2013 08:21, Luo Zhenhua-B19537 <B19537@freescale.com> wrote:
+> >> -----Original Message-----
+> >> From: openembedded-devel-bounces@lists.openembedded.org
+> >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+> >> Of Fathi Boudra
+> >>
+> >> On 28 August 2013 05:56, Luo Zhenhua-B19537 <B19537@freescale.com>
+> wrote:
+> >> > Hi,
+> >> >
+> >> > libhugetlbfs should be moved to a common layer, since it can be
+> >> > used by
+> >> other BSPs
+> >>
+> >> agreed.
+> >>
+> >> > except linaro.
+> >>
+> >> what do you mean by "except Linaro"?
+> > [Luo Zhenhua-B19537] I mean libhugetlbfs recipe is maintained in meta-
+> linaro layer.
+>=20
+> It make sense to get rid of if in meta-linaro and move libhugetlbfs in a
+> common layer where it can be used by everybody.
+> Now the question is who's doing this work? I suggested that you'll do it
+> since you've submitted libhugetlbfs inclusion.
+> However, if you don't want to do it, fair enough, I'll take a look to
+> make it generic and will propose patches.
+>=20
+> Thought?
+>=20
+> Cheers,
+> Fathi
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
 
