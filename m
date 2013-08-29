@@ -1,38 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D47696BEA0
+Return-Path: <kergoth@gmail.com>
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id D91A56BF47
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:52:16 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id z15so344127ead.5
+	Thu, 29 Aug 2013 16:03:07 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id z5so194824lbh.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:52:17 -0700 (PDT)
+	Thu, 29 Aug 2013 09:03:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=vJWv5HNGGovydRNzdiNR24f8OOrCKFbl3HJ6V41zrZE=;
-	b=qUiucHsTEBdjicvKAmLkvQbuknDV+r7CKApRQYWATeLAPplLzILePcv0L9Ozymcgis
-	KuvVBlDaQXlhH2vXUHkl5IDmc/X/ptm0bgszJbo9gKHl+d3ixgc7CV3qx5tb/oVc6r/c
-	wFbSpVUH4BgeUQG9Ypqcf1hVGIYbXUmn7RY0VOZ8ED4vpwCDAirn2mXlwWj0yBHzEY3E
-	mJpG/YEsbuq8iIaTcri/azYyN/J0kXbIGl8t8FTYB71mx/9D9mVWEVXPDoMD8yTesR1D
-	5dbc9PGs+efUcd9gVbEyv0/vIBq8W61Z8T01G92WQqopXuKAem2nsaskFjmN77y64qRy
-	SIDg==
-X-Received: by 10.15.67.131 with SMTP id u3mr5334743eex.34.1377791537157;
-	Thu, 29 Aug 2013 08:52:17 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	t6sm47170033eel.12.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:52:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:59 +0200
-Message-Id: <17f8e20d0952dba45ae02b778cfbf6a95ee26c14.1377791378.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=+lp72lcUrVw+0M62xz0UpWbQAc4owJPCf/h67RMLbGc=;
+	b=t5okFRLhYO9SaB26lpkOpYBqu1daUOXYHNKCWpLIqtRwToHVYbZdr9wONhmLcHhrCn
+	py5e7a36hHuRKtgwGIF15PnOxmOXsa4E4ZPP39UzT7FjadcGmiDya04CSMcrsg+mxjYr
+	oM/kmAcffCI3EVxO0BYQKd8xpX8Tk+F2rLKoZmgbaz4nNaXN/tf7w2qp0Fumf0yWXtPs
+	IeE4IsLsyC4Sl/vH0i4JPtmJUQnxaVWWMT3efnyLdZp331ZoIpcp8wwkMm01eRKONu/b
+	5aI7fN+9k22Om8vxssMpnWxiyqa2xEBbP4gHN0VqrAVsOL6z/B+eKBvz6YuUNB2phvsT
+	T4cA==
+X-Received: by 10.152.170.166 with SMTP id an6mr3495346lac.20.1377792187906;
+	Thu, 29 Aug 2013 09:03:07 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.112.53.197 with HTTP; Thu, 29 Aug 2013 09:02:47 -0700 (PDT)
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
-References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 66/66] qcanobserver: Move to nonworking
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 29 Aug 2013 09:02:47 -0700
+X-Google-Sender-Auth: Lh9Eh2vRKMPQ1bhvQHXPTAf_kSQ
+Message-ID: <CABcZAN=1muf8Ta-ao47uZ2q3NPuTx285Fg9Fw2apWFFuc-1Vpw@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [WIP][PATCH 00/66] Deterministic dependencies II
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,55 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:52:17 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 16:03:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* depends on qwt-5 APIs, I've tried to update it to support qwt-6 which
-  is used in meta-oe, but it looks more complicated then what I've
-  expected, my WIP patch is here:
-  http://git.openembedded.org/meta-openembedded-contrib/log/?h=jansa/qcanobserver
-  if you want to finish it and move qcanobserver back to recipes-qt
-* qwt-5 was removed more then 1 year ago:
-  commit 5ad3d0d042dcd3f3bf54d44144b731cd0607b2e3
-  Author: Eric BENARD <eric@eukrea.com>
-  Date:   Thu Apr 12 15:09:48 2012 +0000
+On Thu, Aug 29, 2013 at 8:50 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-    qwt: add 6.0.1 version
+> WIP because verification build is still running and I must admit that I'm
+> mostly
+> testing that all dependencies are correctly "disabled" and in the end
+> deterministic.
+>
+> I'm not testing if every possible combination of PACKAGECONFIG options
+> provide sufficient
+> dependency tree.
+>
+> The following changes since commit
+> 72e23c12296fbc77193898c38426add58d0c2d71:
+>
+>   mysql5: replace with mariadb 5.1.67 and tweak (2013-08-27 16:39:31 +0100)
+>
+> are available in the git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded-contrib jansa/deps
+>
+> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/deps
+>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../{ => nonworking}/qcanobserver/qcanobserver-socketcan_svn.bb           | 0
- .../0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch       | 0
- .../qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch            | 0
- meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver/candemo.xml | 0
- meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver_svn.bb      | 0
- 5 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver-socketcan_svn.bb (100%)
- rename meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch (100%)
- rename meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch (100%)
- rename meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver/candemo.xml (100%)
- rename meta-oe/recipes-qt/{ => nonworking}/qcanobserver/qcanobserver_svn.bb (100%)
-
-diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb
-similarity index 100%
-rename from meta-oe/recipes-qt/qcanobserver/qcanobserver-socketcan_svn.bb
-rename to meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver-socketcan_svn.bb
-diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
-similarity index 100%
-rename from meta-oe/recipes-qt/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
-rename to meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch
-diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
-similarity index 100%
-rename from meta-oe/recipes-qt/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
-rename to meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/0002-qconsole-writethread-gcc-4.5-fixes.patch
-diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml
-similarity index 100%
-rename from meta-oe/recipes-qt/qcanobserver/qcanobserver/candemo.xml
-rename to meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver/candemo.xml
-diff --git a/meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb b/meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb
-similarity index 100%
-rename from meta-oe/recipes-qt/qcanobserver/qcanobserver_svn.bb
-rename to meta-oe/recipes-qt/nonworking/qcanobserver/qcanobserver_svn.bb
+Haven't reviewed all the patches, but just wanted to say, this is an
+impressive amount of work on this task, nicely done.
 -- 
-1.8.3.2
-
+Christopher Larson
 
