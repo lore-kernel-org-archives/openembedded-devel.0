@@ -1,38 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 933FF6BE66
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C3EF86BE87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:52:07 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id r16so345540ead.17
+	Thu, 29 Aug 2013 15:52:08 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so347257eek.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:52:08 -0700 (PDT)
+	Thu, 29 Aug 2013 08:52:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=0t6brQeX4amP4S5M+2q9C6SVDK7hmQNtsLtfwK5rjgk=;
-	b=N4pqmgzxJOPkTVpVChND1BoB2sCSxWs+jrO0Ltqzmb1LcmgjyR44wzr5Q9cfFpEfIh
-	CPGXW8kMLYKiwAF1Jo9FIAi/aHFCQGPY121khbsX70CrpZ+kkm0nH8a7QuyW+TEcfkZO
-	Z0XlSsSK25x1/nlgq0KSRBm903DJZcjNmkrniX1hyafVozMjTQPAafBilgUPw9XfiJT7
-	CDAX3I6+2c/n/fhG95Ku5+8JnYmJWtbliaZABKEvuGRck4FuOIbGiRuabzTcKmgyhmrp
-	HPYCB8oaF8F4ggJA1Ow6JBjrjHM7vbURFVsr3hPkHwEkc0/q6/CvtLfCWgMJ3NAxWXcG
-	8GOw==
-X-Received: by 10.15.100.198 with SMTP id bn46mr5320711eeb.11.1377791528056;
-	Thu, 29 Aug 2013 08:52:08 -0700 (PDT)
+	:references; bh=Y8ETTrbl0cFlNBLQrvezWw2uriEWoSa8DF+HUgDzJIs=;
+	b=lmXYqm+NpwoLjkJB40Tqe1cmp2gaB0lAVOwunR6iKr1kg5PHYZuFB2jsFyUNnanRog
+	dGQ7TGVJl0BrjsOOcmPVtl/q98QG19N2qn6+e67SNHO+akZo3pUNxQf/Q64Md9vr7qf4
+	arHyNpQRA0YHHE5yBgWI+SOxGFhfJOLnn5UoU833Y7Re1HH0qPf38PqDj3Ec04O61mPQ
+	9pUqXEPA2CeZvxZAxtjjbWj4L3UIeCnkufr/A6zugQy2PAbmMNvij3XcAxwG1TDPilgK
+	Zzavoz2k9XlKVABD4e3A0AWRBmfxGKzz1NJKly4fNAFK5SrNawgOYdnbWsrjiDeb1PxP
+	Gx7w==
+X-Received: by 10.14.89.72 with SMTP id b48mr5398618eef.43.1377791529241;
+	Thu, 29 Aug 2013 08:52:09 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b45sm47159966eef.4.1969.12.31.16.00.00
+	p5sm47162615eeg.5.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:52:07 -0700 (PDT)
+	Thu, 29 Aug 2013 08:52:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:52 +0200
-Message-Id: <b05407c77f6988d3ab9cd0b0e3313b8e52664e37.1377791378.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:53 +0200
+Message-Id: <8424302d860fd3961ed478faf77c69501466c9ee.1377791378.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 59/66] xfce4-clipman-plugin: Add PACKAGECONFIG for unique
+Subject: [WIP][PATCH 60/66] xfce4-places-plugin: Add PACKAGECONFIG for notify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,24 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:52:07 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 15:52:09 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.3.bb | 3 +++
+ meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.3.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.3.bb
-index d3c7138..80792cf 100644
---- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.2.3.bb
-@@ -10,3 +10,6 @@ DEPENDS += "xfconf xproto libxtst"
+diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+index 2e0b810..f68365c 100644
+--- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
++++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.5.0.bb
+@@ -7,3 +7,6 @@ inherit xfce-panel-plugin
  
- SRC_URI[md5sum] = "61f3be97efa379cb358980c94e14692a"
- SRC_URI[sha256sum] = "4424447067cb2c3972c375330d2e1d19f12e59c41bd03e111c2e6e9e174a5067"
+ SRC_URI[md5sum] = "84c39fb123e07e1c7caaf006d9383656"
+ SRC_URI[sha256sum] = "6996051669a13d4791a5a453747801dc2f7f6fa5546785622d80b34966283d44"
 +
 +PACKAGECONFIG ??= ""
-+PACKAGECONFIG[unique] = "--enable-unique,--disable-unique,libunique"
++PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
 -- 
 1.8.3.2
 
