@@ -1,37 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FD496BE26
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 118886BE19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:39 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b15so342750eek.40
+	Thu, 29 Aug 2013 15:51:40 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id h10so339506eaj.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:51:40 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=LKqzprszQyqaEgfwMB3U3idqvh+stA4MgCrFD3JhoOY=;
-	b=u7pBZzyftpfn6LWe/kjDJkByNSkR4whAcKFZZYfALxGfOKpHbsJViPUMEaHfRMHGtC
-	cXHnSoJ3TA5vn0JgVyJuVTkG9+mceheZ8rE8oSVyBXDIE8evhpQrYuc6Cu1aLHHGwgD4
-	QaWDB7WDW0o79PDHzBLlCVt5OCNtXoYFGP3dUFV6D0DLug2QHVEqBI2kqNMggBkXjLac
-	qa4CPcomJaZeM0c5hEXYJOZTfVSoKlVVPwDs3cI95JyOCiH/kMKR80oy1TqtKV1v+seH
-	NDMc36w71A45QHXZz7T5sBgqUE5fjqrAlQ9cXyvKkMAZNCoZUa8b4YWnLjz3zFuwRfjJ
-	mDeQ==
-X-Received: by 10.15.35.196 with SMTP id g44mr5414710eev.18.1377791500111;
-	Thu, 29 Aug 2013 08:51:40 -0700 (PDT)
+	:references; bh=1RMPw3YgZLfat1GeR8EpL/nMf62NaekupYvGEChAdQo=;
+	b=lGl7XaMV3gNh+LBcro0143XgNcGeGNpg+Pwmr0ojZGNOovvENduAEJmaEiSEibNHdU
+	qOa4dk/ZddSAOk25evQeUCrE253l3wL2OFsCJCyxI0s7r6a+/kYDN/enk3BztndMJ1fa
+	8hqf12CrrOPdb0u58FTTdtUdfR8rfDNDHq4n3VfXsIHhoLNSj2xL4ao6a3eHtp2YgXx1
+	SHEb56NMq9B3N914qKbSujOyJzdVqrCebsR66g/4XfZfXOVAZb33OG3SwcBVhCdpThHg
+	p94yrIwuWQnvum8TzBpqHa+ZPsmBhHeDY7nSq+ek5Xcuz1tnJXg5sqGgDichSmkpm/8z
+	TBVw==
+X-Received: by 10.14.220.200 with SMTP id o48mr5296424eep.62.1377791501314;
+	Thu, 29 Aug 2013 08:51:41 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	d8sm47160616eeh.8.1969.12.31.16.00.00
+	x47sm47204610eea.16.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:39 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:31 +0200
-Message-Id: <c250c58097af844eb5df9195fe39d858eb05a836.1377791378.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:32 +0200
+Message-Id: <4d10a88842bea1905ac7e924d85978a4d4aabaf3.1377791378.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 38/66] openbox: Add PACKAGECONFIG for imlib2, xrandr, xinerama, xcursor, startup-notification
+Subject: [WIP][PATCH 39/66] v4l-utils: Add libx11 dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:51:40 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 15:51:41 -0000
+
+* configure doesn't allow to explicitly disable it
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb b/meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb
-index 1fe2e17..9480388 100644
---- a/meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb
-+++ b/meta-oe/recipes-graphics/openbox/openbox_3.5.0.bb
-@@ -17,6 +17,13 @@ ALTERNATIVE_${PN}-core = "x-window-manager"
- ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/openbox"
- ALTERNATIVE_PRIORITY[x-window-manager] = "10"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+index c00f119..e2884a6 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
  
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
-+PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
-+PACKAGECONFIG[xrandr] = "--enable-xrandr,--disable-xrandr,libxrandr"
-+PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
-+PACKAGECONFIG[xcursor] = "--enable-xcursor,--disable-xcursor,libxcursor"
-+
- EXTRA_OECONF += "--with-plugins=none"
+ PR = "r2"
  
- PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome ${PN}-config"
+-DEPENDS = "jpeg"
++DEPENDS = "jpeg virtual/libx11"
+ 
+ inherit autotools gettext
+ 
 -- 
 1.8.3.2
 
