@@ -1,37 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 43B5B6BDAB
+Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BF896BE01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:42 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id b45so348657eek.1
+	Thu, 29 Aug 2013 15:51:43 +0000 (UTC)
+Received: by mail-ea0-f175.google.com with SMTP id m14so340915eaj.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:51:42 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=P4BcuuUK9TIbxFrcm7YMuUjwnf7XNaIC3eT5Qn8P61A=;
-	b=el1V+GpKD6flKiu3d8Ul5qNTG8sTjeh2VWztX+eMWPiNNDhJ+K/flFblefRcfQRcBQ
-	0yTyhnZLk1ZQodIJgPyo6VksuyGFE/AQzG2h30sA+CIJdxyMWNReXvxrGV9npm3iKILa
-	e+0xYYsavOtDhwJkDhufHExkKFgnzRz8+vvhC/qMxQpO3L6ckQVonUYYCtxozoXj+STJ
-	KrSKYz9NvEFLzKbu+/vzQi46YBFmo93rIe3lDZcjrehMxN3O46iLgdT4NgytEaE8/9UG
-	Tmd/oLNmxfyGHkoOpvrn04OMdzdxbQ3n8umi+yu9K/e0O8WtznxX4S+Pp/G9GneznC8M
-	H5cA==
-X-Received: by 10.14.183.130 with SMTP id q2mr5454099eem.5.1377791502738;
-	Thu, 29 Aug 2013 08:51:42 -0700 (PDT)
+	:references; bh=bKjTh29tstWUVDK0d8xb9tM68gwrcEw4m9rLW/0AQPw=;
+	b=oLYd1z67rbAsyRFmxid/V/TmfwBRM5FgRxVrBl42i47prNoh+QEDJPSLj7I0bnm4w6
+	/5n84E5xEj2oPua/D6tTLAh+poEluzRr2cP1kfaV120a1TptRFwlIU+bwv0htL7P24mn
+	VgfF89vRcLeqvepz/LwkNOA+Rn4KgwP+cQnJjkAOkExt2tTcfVzF0dubOHuU2JIzmoWT
+	ax4UZOg3FzHKtoFK9FQ2wZhnpF623LS2+0jSQTs2OgPGUxU8qusujkJJJQGPT4MfRgC/
+	GhdhOtkuCNYiNE6BHuPPSUSabBdsbdfrD7iP6XadP9Gv8pK80GN2savRTKXDZ2Syy8nI
+	apJA==
+X-Received: by 10.15.41.205 with SMTP id s53mr4622786eev.63.1377791503948;
+	Thu, 29 Aug 2013 08:51:43 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	k7sm47172138eeg.13.1969.12.31.16.00.00
+	i1sm47160971eeg.0.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:42 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:33 +0200
-Message-Id: <aea426b24749da56c7cf450d61284410bd77f52e.1377791378.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:34 +0200
+Message-Id: <da1d049a705fcfd8bd25bca79c5c612a48038274.1377791378.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 40/66] epiphany: Add PACKAGECONFIG for zeroconf
+Subject: [WIP][PATCH 41/66] libungif: Add dependency on libx11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,27 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:51:42 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 15:51:43 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-extended/libungif/libungif_4.1.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-index 00d51f9..ccccad9 100644
---- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-+++ b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-@@ -8,6 +8,9 @@ inherit gnome
- SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
- SRC_URI[archive.sha256sum] = "278a5c00ce07e6a3ea440d289de22dbec3ebec4ded4ff3b4c48b580f469c2dcc"
+diff --git a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb b/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
+index 3e4b78b..6a0fd51 100644
+--- a/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
++++ b/meta-oe/recipes-extended/libungif/libungif_4.1.3.bb
+@@ -3,6 +3,8 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
  
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)}"
-+PACKAGECONFIG[zeroconf] = "--enable-zeroconf,--disable-zeroconf,avahi"
++DEPENDS = "virtual/libx11"
 +
- EXTRA_OECONF += " --disable-nss --with-distributor-name=${DISTRO} --without-ca-file"
- 
- do_configure_prepend() {
+ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/libungif-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "8c198831cc0495596c78134b8849e9ad"
+ SRC_URI[sha256sum] = "59e835a57e6df03e4d2253b2357253f3d13da9473ff465563a3b9833a744fc36"
 -- 
 1.8.3.2
 
