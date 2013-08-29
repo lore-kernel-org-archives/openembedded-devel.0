@@ -1,45 +1,42 @@
-Return-Path: <B40290@freescale.com>
-Received: from tx2outboundpool.messaging.microsoft.com
-	(tx2ehsobe003.messaging.microsoft.com [65.55.88.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A4F56BD5B
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id EB1E86BD60
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 06:45:22 +0000 (UTC)
-Received: from mail91-tx2-R.bigfish.com (10.9.14.228) by
-	TX2EHSOBE013.bigfish.com (10.9.40.33) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 29 Aug 2013 06:45:21 +0000
-Received: from mail91-tx2 (localhost [127.0.0.1])	by mail91-tx2-R.bigfish.com
-	(Postfix) with ESMTP id 92280420086	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 06:45:21 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -1
-X-BigFish: VS-1(zz936eIzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h177df4h17326ah186068h1954cbh8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail91-tx2 (localhost.localdomain [127.0.0.1]) by mail91-tx2
-	(MessageSwitch) id 1377758719333130_27048;
-	Thu, 29 Aug 2013 06:45:19 +0000 (UTC)
-Received: from TX2EHSMHS024.bigfish.com (unknown [10.9.14.252])	by
-	mail91-tx2.bigfish.com (Postfix) with ESMTP id 43E5B80041	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 06:45:19 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS024.bigfish.com
-	(10.9.99.124) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 29 Aug 2013 06:45:18 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.3.146.2; Thu, 29 Aug 2013 06:45:18 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r7T6jFWR013633;	Wed, 28 Aug 2013 23:45:16 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Aug 2013 14:45:12 +0800
-Message-ID: <1377758712-4916-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Thu, 29 Aug 2013 07:28:32 +0000 (UTC)
+Received: by mail-we0-f177.google.com with SMTP id q55so62792wes.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Aug 2013 00:28:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=Ol2Trd2z/SFtQ7TbMpdVNheZIenO1ouVuz4cVVyZ+FE=;
+	b=J8BZYwPCZN32gqXgQKE4CcB+ORFfVQufGkCbUpgVjGQ6W9XYWLYg8AqEicqtqt6mjp
+	3U1GAU9vGkL9wiNbxtwOE/xaP/BmOevZzGRiEUU1H18EcN/PahVO0Rw7lHP1YQ1HzUaE
+	4d7aRx4ZoWrIzvFf49oM3OMiG8Gad2fJZ8LRsa14uDSYQUgCt9NzXJ3x6q0vnuXJ7P4r
+	L3NFoHI2u/rPTp/dFlH3AHHUZ2gMaoKMy519MPjuvVnl4HzwR9aKy+xdx+Nx3tTKWXHK
+	aI4j86bqwkvvCizR6RCocPsJOc3uCqFCRKoaU3C1uFgdQqWtPClTuDxtKc31sc5WQWot
+	ZMIg==
+X-Gm-Message-State: ALoCoQmViG7Bs6TW4Vh/AnXL+VZ5uY0GlUM82RHxI1Tuq/nD4Ji8ZH9YnEjCHzKlTuwjrlS4Itoj
+X-Received: by 10.194.86.5 with SMTP id l5mr3508276wjz.45.1377761312789;
+	Thu, 29 Aug 2013 00:28:32 -0700 (PDT)
+Received: from iMac.local (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id om9sm10276925wic.8.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 29 Aug 2013 00:28:31 -0700 (PDT)
+Message-ID: <521EF819.4040700@dominion.thruhere.net>
+Date: Thu, 29 Aug 2013 09:28:25 +0200
+From: Koen Kooi <koen@dominion.thruhere.net>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH V3 ] daq: add recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1377758712-4916-1-git-send-email-b40290@freescale.com>
+In-Reply-To: <1377758712-4916-1-git-send-email-b40290@freescale.com>
+X-Enigmail-Version: 1.5.1
+Subject: Re: [meta-oe][PATCH V3 ] daq: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,73 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 06:45:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Aug 2013 07:28:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Chunrong Guo <B40290@freescale.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-  *The dump DAQ test the various inline mode features
-  *snort depends daq
+I have a few minor style nitpicks, see below
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-connectivity/daq/daq_2.0.1.bb      |   18 ++++++++++++++++++
- .../daq/files/disable-check-pcap-version.patch     |   19 +++++++++++++++++++
- 2 files changed, 37 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
- create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.patch
+Op 29-08-13 08:45, b40290@freescale.com schreef:
 
-diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
+
+There's a stray space at the end. Can you also add a SUMMARY field?
+
+
+
+These checksums tend to go below the SRC_URI
+
+
 new file mode 100644
-index 0000000..e3ddf09
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "The dump DAQ test the various inline mode features "
-+HOMEPAGE = "http://www.snort.org"
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
-+
-+
-+DEPENDS = "libpcap libpcre "
-+
-+SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
-+SRC_URI[sha256sum] = "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
-+
-+SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz\
-+           file://disable-check-pcap-version.patch "
-+
-+inherit autotools
-+
-+
-diff --git a/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.patch b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.patch
-new file mode 100644
-index 0000000..05f4031
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/daq/files/disable-check-pcap-version.patch
+
 @@ -0,0 +1,19 @@
-+Upstream-Status:Inappropriate [embedded specific]
-+
-+fix the below error:
-+checking for libpcap version >= "1.0.0"... configure
-+configure: error: cannot run test program while cross compiling
-+
-+Signed-off-by: Chunrong Guo <B40290@freescale.com>
-+
-+--- a/configure.ac	2013-08-22 02:37:02.453253534 -0500
-++++ b/configure.ac	2013-08-22 02:37:53.008254362 -0500
-+@@ -179,7 +179,7 @@
-+               [enable_pcap_module="$enableval"], [enable_pcap_module="$DEFAULT_ENABLE"])
-+ if test "$enable_pcap_module" = yes; then
-+     AC_CHECK_HEADER([pcap.h], [], [enable_pcap_module=no])
-+-    AC_CHECK_PCAP_VER("1.0.0")
-++    #AC_CHECK_PCAP_VER("1.0.0")
-+     if test "$enable_pcap_module" = yes; then
-+         STATIC_LIBS="${STATIC_LIBS} -lpcap"
-+     fi
--- 
-1.7.5.4
 
 
+I guess it doesn't matter either way since OE actually has dependency
+tracking, but would it make sense to fix the AC_CHECK_PCAP_VER to stop using
+AC_TRY_RUN?
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFSHvgZMkyGM64RGpERApt/AJsEqzPKL5OHmzUefLfrzNxBUMlTIQCfRZfO
+X3WZ7aQfuil0gVtyjfCAxoQ=
+=na+u
+-----END PGP SIGNATURE-----
 
