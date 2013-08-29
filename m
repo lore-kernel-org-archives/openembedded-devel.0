@@ -1,39 +1,27 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 598FE6BED3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 19:41:42 +0000 (UTC)
-Received: by mail-lb0-f179.google.com with SMTP id x18so1109043lbi.38
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 12:41:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=HW597z7bSsaXcgFIiBfZIO4ZS//sc3yB9EgeRciWAwo=;
-	b=o/3R7AcAPs8ZmBepWp4u7s2P4hejVXe07ZkDy5prwb84Lg93/p9i4Mzi6p9lS38OIj
-	Kl4WmNGfN66s0DIGXBtLzqx44ktoalvRZv9D2kTyCy6CqYkNOTppw9R9qtIFGtkAYeoY
-	yN7SvtU409o4xkHpJgb0aft/UtUAstWsHjV+yRcpkWBXdJo657Faqeb9GnUtF6NLLU9Z
-	AEBTkAjhTEVH3jxSzuvhXP75ApIdhQRD3QI79ZwIjHheHRgge6TQO4enWWtRiL1MbX8A
-	HZaugFLrdSNOzOeRdxIkkhiafMX17ystdKDRyV4t44pR2kF2gJEWteUXhFaYrEfoiwgP
-	TsuQ==
-MIME-Version: 1.0
-X-Received: by 10.112.155.39 with SMTP id vt7mr4452676lbb.29.1377805302449;
-	Thu, 29 Aug 2013 12:41:42 -0700 (PDT)
-Received: by 10.112.12.103 with HTTP; Thu, 29 Aug 2013 12:41:42 -0700 (PDT)
-In-Reply-To: <E1133807-C464-4793-8EFB-4328B0FCE7BF@gmail.com>
-References: <20130829115339.a5c5c4a29245e5c988b774ab8f895ac5.53f04ab59e.wbe@email15.secureserver.net>
-	<CADkTA4NWhz3rmAqH=yB_5H4V4f11w4qZdYUTOG73SNLyv6R-=A@mail.gmail.com>
-	<1CD7EF41-C972-4088-B6CD-21975EEBB93B@gmail.com>
-	<CADkTA4M=sOdCcYWXeoM5HTNDq8P661XZyGv8V+KHXgi=WZw5Vg@mail.gmail.com>
-	<E1133807-C464-4793-8EFB-4328B0FCE7BF@gmail.com>
-Date: Thu, 29 Aug 2013 15:41:42 -0400
-Message-ID: <CADkTA4NTetttQWMsH4faYDLezrDHVpLO_eLg8oeuE+2-W1h09Q@mail.gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-To: Elvis Dowson <elvis.dowson@gmail.com>
-Cc: OpenEmbedded Developer Mailing List
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 404E86BD72;
+	Thu, 29 Aug 2013 21:42:55 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009))
+	with ESMTPA id <0MSB002SSAYE3Q60@vms173001.mailsrvcs.net>; Thu,
+	29 Aug 2013 16:42:25 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A4C762008D; Thu,
+	29 Aug 2013 17:42:14 -0400 (EDT)
+Date: Thu, 29 Aug 2013 17:42:14 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-members@lists.openembedded.org
+Message-id: <20130829214214.GA5477@denix.org>
+References: <521F5066.8050005@balister.org>
+MIME-version: 1.0
+In-reply-to: <521F5066.8050005@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [oe-core] QEMU with ARM Cortex A9 with hard float configuration - Kernel panic
+Subject: Re: Yocto Dev Day Sponsorship Opportunity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,40 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 19:41:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 29 Aug 2013 21:42:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thu, Aug 29, 2013 at 3:39 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
->
-> On Aug 29, 2013, at 11:24 PM, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
->
->>>
->>> I mean either you don't publish anything that Wind River chooses to keep proprietary
->>> or support the machine configurations defined in the linux-yocto meta branch.
->>
->> I'm not following what you mean here  .. sorry.
->
->
-> I'm referrring to the qemuarma9 machine definition in the linux-yocto kernel meta-branch.
->
-> http://git.yoctoproject.org/cgit/cgit.cgi/linux-yocto-3.8/tree/meta/cfg/kernel-cache/bsp/qemuarma9?h=meta
->
-> It's presence indicates that it was developed at some point, but not released with full support.
+On Thu, Aug 29, 2013 at 09:45:10AM -0400, Philip Balister wrote:
+> This is kind of short notice, but I'd like some feedback on this idea ...
+> 
+> So for the Yocto Dev Day before ELCE in Edinburgh, the Yocto Project is
+> looking for additional Sponsorship to cover the cost of coffee breaks
+> (and some other stuff, but these are the least expensive)
+> 
+> I'm wondering if OpenEmbedded would like to sponsor a coffee break.
 
-There never was any runqemu or any integration more than what you see there.
-Everything was pushed that was available, and I mentioned a few days ago that
-I've just been carrying it along in case it ever became useful again.
-
-Cheers,
-
-Bruce
-
->
-> Elvis Dowson
+What is the amount we are talking about for this particular instance?
 
 
+> Obviously, we'd need to do a quick round of fund raising to make this
+> happen. I think it would be a good way for us to increase visibility of
+> the OpenEmbedded brand and gives many of the smaller players a chance to
+> contribute to some of the larger Yocto Project costs.
+> 
+> So I'd like to hear two things from everyone:
+> 
+> 1) Should we sponsor events when it makes sense?
+
+Not talking as a Board member, but as an individual member, I would definitely 
+like to see OpenEmbedded getting more visibility, even through sponsoring some 
+smaller portions of the bigger events.
+
+
+> 2) If you are interested in helping sponsor this particular even, send
+> me a private email with amounts. If there is sufficient interest we have
+> access to US and EU bank accounts for money collection.
+> 
+> Long term, I'd like to get a more organized fund raising plan in place
+> and identify how we can support the needs of the project better. Some
+> ideas that have been tossed around over the years, travel grants for
+> people promoting OE, event sponsorship, pay for infrastructure
+> improvements, contribute to auto builder costs etc. Many of these are
+> being covered by volunteers working in the community It would be nice to
+> help them out.
+> 
+> I'll be semi-afk through Tuesday, but should be able to see email.
 
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end"
+Denys
 
