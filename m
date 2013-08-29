@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 436DA6BE60
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CB8C6BE60
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:59 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id d10so339542eaj.40
+	Thu, 29 Aug 2013 15:52:01 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id a15so340903eae.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:52:00 -0700 (PDT)
+	Thu, 29 Aug 2013 08:52:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=mOIvhE1bqmj7+kd8ExkzIUkrL2ncDfneHQwG0CO5tBg=;
-	b=E9EAZE40SHBo8iukUe1si0Lx0ffowkG5YUGejyP6Z0leXST2tQFT99Bl8hpvMQTw4b
-	Ro1bRbfbUtFH38ySM3uAz5MYXmtgOTQYnSWcKw/UAAcU4vL1gshIG2amftGAx2UCnCHH
-	30rcA8dq41BoKoAvjOcVU6S4x6gNGRLcLhv2Ex9kl89jZJNfb6J95cK9gPZmg4q3xUlV
-	Pc4LjAA2Epxf7aXHPX5L407DAJlbbs49gdN+oYy9Ya09Ty95a/hLchN1GKuUGblrHSDB
-	MTl6N65vtEQbIcgzQpRg3Ho0dm1YPokW5rcenVhQDBQW+9pCCWWrehIP1MmyaXmoRRRs
-	61Lw==
-X-Received: by 10.14.94.133 with SMTP id n5mr4335212eef.71.1377791520299;
-	Thu, 29 Aug 2013 08:52:00 -0700 (PDT)
+	:references; bh=6g5GlyY7uF/r4QoCxO+Noj5d2IXBhqLb0pEdZGvuRJU=;
+	b=0Jl2H59mcOstUeVtzzgJzJ3iIpJ8sZGzgn3JZFmt6ufIPJSEphjgLPybxjK0vZYNG4
+	q69hrWpXfnOq46rSY4yHSa3VOdaCc4OHOrMc9iNivZzSsiMTCxpTsj4cNrQq8+gahaEC
+	SVXNyqyu6HAX2a6NwxdzyA0I9HgrRVOdYPPzSbjH4zhl1RC0v8PSkwLX+04ZDhp8ra/M
+	yBX6rQfDfXJBUzWsodDUqHtmy3tqC5T6ui7MlSPvWck0pRDg35OuB9RlRG0LrX6tzqIY
+	UQNjfB7wchaRvubAQwL1fRfmlydM7Qh7qMWMgO+z0+RIN4Qcui/2IXZilmFV0nwfEcco
+	syVw==
+X-Received: by 10.14.99.193 with SMTP id x41mr5400209eef.52.1377791521630;
+	Thu, 29 Aug 2013 08:52:01 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	i1sm47163002eeg.0.1969.12.31.16.00.00
+	m54sm47165643eex.2.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:59 -0700 (PDT)
+	Thu, 29 Aug 2013 08:52:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:46 +0200
-Message-Id: <f2c7d233b9a563eb38bf4abcfa495ea7a257cbbb.1377791378.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:47 +0200
+Message-Id: <4307151532ba9fdfa3deefe1649b4901e43ef889.1377791378.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 53/66] maliit-framework: Add dependency on gtk+3
+Subject: [WIP][PATCH 54/66] packagekit: Add PACKAGECONFIG for service-packs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:52:00 -0000
-
-* it's autodetected and configure doesn't allow to explicitly disable it
+X-List-Received-Date: Thu, 29 Aug 2013 15:52:01 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/maliit/maliit-framework_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/maliit/maliit-framework_git.bb b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-index 15719f4..ae20fa3 100644
---- a/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-+++ b/meta-oe/recipes-support/maliit/maliit-framework_git.bb
-@@ -23,6 +23,7 @@ PR = "r1"
- PACKAGES =+ "${PN}-gtk"
- GTKIMMODULES_PACKAGES = "${PN}-gtk"
+diff --git a/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb b/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb
+index c8de9d8..7d9c2bf 100644
+--- a/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb
++++ b/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb
+@@ -18,6 +18,9 @@ SRC_URI[archive.sha256sum] = "0eafd1be5516a41ebc0f0c3acff0b0763da105a4178b5eee0f
  
-+DEPENDS = "gtk+3"
- RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
+ S = "${WORKDIR}/PackageKit-${PV}"
  
- RRECOMMENDS_${PN} = "maliit-plugins"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[service-packs] = "--enable-service-packs,--disable-service-packs,libarchive"
++
+ EXTRA_OECONF = "--with-security-framework=dummy \
+                 --with-default-backend=opkg \
+                 --enable-opkg \
 -- 
 1.8.3.2
 
