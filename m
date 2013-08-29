@@ -1,39 +1,40 @@
 Return-Path: <elvis.dowson@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 084256BED0
+Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
+	[209.85.160.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 74D186BE4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 18:55:21 +0000 (UTC)
-Received: by mail-pd0-f179.google.com with SMTP id v10so819995pde.24
+	Thu, 29 Aug 2013 19:15:59 +0000 (UTC)
+Received: by mail-pb0-f49.google.com with SMTP id xb4so856120pbc.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 11:55:22 -0700 (PDT)
+	Thu, 29 Aug 2013 12:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=content-type:mime-version:subject:from:in-reply-to:date:cc
 	:content-transfer-encoding:message-id:references:to;
-	bh=yDaiEmOfd9XjtZ+XRqS1c4gvSmq/E4H+pHzwbxHqybc=;
-	b=lP0NLmbdCZ9csWRcv0Fxr/MTEVZceiPAe4PgA32SPSyQdntmlHNBDbDR4rp5DL0DMf
-	RDB4QGgNngIeXu6pGmrXIFwVnvZVLHYuGDOXYSgyF1ieGky/UVrrUBnh5rbf2vCCWPzP
-	spxqscrv207Ltas8CS/7rxwBpZyxEFLX0Rr+pQBjJjnTCg/QvtW2jIUlQlKqKSlVnX6Y
-	vcu0Ark7Eji3rYLlqkOtEJxCnBNsYmZ3LaJXCgDI/9MI+a5L+rRM13nwpBZqRTbrVeei
-	PsMpWc13zMPN+MOFxugEDS/IzV7HRBkBcaWLiamgLqkNpgi70WlxV7nmGAix3Xr1uKYx
-	oFzw==
-X-Received: by 10.66.246.229 with SMTP id xz5mr5931764pac.128.1377802521999;
-	Thu, 29 Aug 2013 11:55:21 -0700 (PDT)
+	bh=aAFJa1ogx1isRcSOJoc5kD1P7fBhdWIUY/8rrMjHIts=;
+	b=IjdiwiMxWryhVi6w2j6CNOgUh1tPu9XB1ETNgfc0ZV0Ye6OuLhuw4EnyyB/BAJgxC8
+	PinrUoK8A8rNQZ8/1O1cCa0Upg9tMEROkHnYzVNjzyzM3RjxrJsVoKr00t3ZDg532f48
+	3CcfpKESwiFiXh8N9p7AjIaN+G5wRJKdJnEsykDb79IgNoYVn57hCYTpOf0ocB2nKg+a
+	T6lCNEfoGH2NchofnlzTHxkIh4PLM8UlNbfvSILoHtG+L/eV0KufEjUjiBcDM6kg7c+f
+	tDJLvTHgBNwAVNWFnP7W3CqpKjlG1DF1XJKYHyd1p9mw9OT682VDVPg0VdoCYSEJ8M6g
+	Az/Q==
+X-Received: by 10.66.171.77 with SMTP id as13mr6056220pac.170.1377803760359;
+	Thu, 29 Aug 2013 12:16:00 -0700 (PDT)
 Received: from [192.168.1.106] ([94.205.106.26])
-	by mx.google.com with ESMTPSA id sb9sm29957644pbb.0.1969.12.31.16.00.00
+	by mx.google.com with ESMTPSA id wr9sm39587546pbc.7.1969.12.31.16.00.00
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 11:55:20 -0700 (PDT)
+	Thu, 29 Aug 2013 12:15:59 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
 From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <521F96B0.3030209@windriver.com>
-Date: Thu, 29 Aug 2013 22:55:12 +0400
-Message-Id: <CFB8B97E-3126-42E1-8A32-CB02BFC4DE39@gmail.com>
-References: <1377801711-4120-1-git-send-email-elvis.dowson@gmail.com>
-	<521F96B0.3030209@windriver.com>
-To: Bruce Ashfield <bruce.ashfield@windriver.com>
+In-Reply-To: <CADkTA4NWhz3rmAqH=yB_5H4V4f11w4qZdYUTOG73SNLyv6R-=A@mail.gmail.com>
+Date: Thu, 29 Aug 2013 23:15:51 +0400
+Message-Id: <1CD7EF41-C972-4088-B6CD-21975EEBB93B@gmail.com>
+References: <20130829115339.a5c5c4a29245e5c988b774ab8f895ac5.53f04ab59e.wbe@email15.secureserver.net>
+	<CADkTA4NWhz3rmAqH=yB_5H4V4f11w4qZdYUTOG73SNLyv6R-=A@mail.gmail.com>
+To: Bruce Ashfield <bruce.ashfield@gmail.com>
 X-Mailer: Apple Mail (2.1498)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-core] qemuarma9: Update qemuarma9-standard.scc definition.
+Cc: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [oe-core] QEMU with ARM Cortex A9 with hard float configuration - Kernel panic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,61 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 18:55:21 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 19:16:02 -0000
 Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+HI Bruce,
 
-On Aug 29, 2013, at 10:45 PM, Bruce Ashfield =
-<bruce.ashfield@windriver.com> wrote:
+On Aug 29, 2013, at 10:58 PM, Bruce Ashfield <bruce.ashfield@gmail.com> =
+wrote:
 
-> On 13-08-29 02:41 PM, Elvis Dowson wrote:
->> This commit
->> - updates the KMACHINE definition to vexpress.
->> - updates the branch to qemuarma9.
->>=20
->> Signed-off-by: Elvis Dowson <elvis.dowson@gmail.com>
->> ---
->>  meta/cfg/kernel-cache/bsp/qemuarma9/qemuarma9-standard.scc |    4 =
-++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>=20
->> diff --git =
-a/meta/cfg/kernel-cache/bsp/qemuarma9/qemuarma9-standard.scc =
-b/meta/cfg/kernel-cache/bsp/qemuarma9/qemuarma9-standard.scc
->> index c71fe1c..83911ff 100644
->> --- a/meta/cfg/kernel-cache/bsp/qemuarma9/qemuarma9-standard.scc
->> +++ b/meta/cfg/kernel-cache/bsp/qemuarma9/qemuarma9-standard.scc
->> @@ -1,9 +1,9 @@
->> -define KMACHINE qemuarma9
->> +define KMACHINE vexpress
->=20
-> There's no reason to delete the old machine, they are all valid
-> and additive. Think of them as aliases. You can have as many
-> as you want :)
+> I have a vexpress A15 that works here as well, but I wouldn't mind =
+comparing
+> configs. If you send it along, I'd have a look.
 
-In the kernel, there is no qemuarma9 machine. The corresponding
-kernel machine is vexpress .. I checked the kernel sources, ..=20
-correct me if I'm wrong, but I thought the intent of the KMACHINE
-variable was to map to the correct machine defined in the kernel.
+Does this mean you've got vexpress-a9 and vexpress-a15, but you've never =
+intentionally
+published or made these qemu configurations available, so that WindRiver =
+has a commercial
+advantage when it comes to machine emulation for these machine =
+architectures?
 
->=20
->>  define KTYPE standard
->>  define KARCH arm
->>=20
->>  include ktypes/standard/standard.scc
->> -branch arm-versatile-926ejs
->> +branch qemuarma9
->=20
-> There's no reason for a custom branch as well. Unless patches are
-> being maintained that break compatibility with other boards.
->=20
+I can't but help think of the discussions that we had over the meta-zynq =
+layer, where
+the meta-zynq layer was not maintained, and WindRiver never released any =
+of the
+updates to meta-zynq because of some "issues".=20
 
+At that time, you were pushing for linux-yocto and LTSI, and fast =
+forward 1 year or more
+and the meta-zynq layer is still not updated or maintained, and it's =
+only recently that
+Xilinx themselves added support to their meta-xilinx layer for =
+linux-yocto.
 
-If we plan on having multiple arm architecture support (A8, A8, A15) to
-QEMU, perhaps its better to rename this branch to qemuarm.
+I've also observed that you're the only one maintaining linux-yocto!!
+
+So, what I'm trying to get at it, it doesn't really help any one in the =
+open source
+community if work that's useful for other is withheld for WindRiver =
+gaining a commercial
+advantage (meta-zynq & xilinx case in point) and (versatile-a9 and =
+versatile-a15)
+in point, especially when you're the sole maintainer for the linux-yocto =
+kernel, which
+happened to mentioned qemuarma9 machine support.
+
+I mean either you don't publish anything that Wind River chooses to keep =
+proprietary
+or support the machine configurations defined in the linux-yocto meta =
+branch.
 
 Best regards,
 
-Elvis Dowson=
+Elvis Dowson
+
+
 
