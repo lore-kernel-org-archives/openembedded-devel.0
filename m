@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 087136BDAF
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 373B76BE44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:55 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id d10so344974eaj.12
+	Thu, 29 Aug 2013 15:51:57 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id o10so346785eaj.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:51:56 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=uhfbt0MO0t/qvFwUA7k1SZXZ2+Q4SqqDr5l4QyGDBjE=;
-	b=zbQTL7y/Ofm2kUEX9LvJp2vauTap7CzDFMh9g6j9/DXk5RV/tG0WvIQBZA1ynq+oEc
-	jYtxwXLBZqMeq6LSZouRsBRojEHqF0VzD4+bLP7i1b1SbVQE6X3HqeTLc6OLx3ZJ6aYK
-	5yaK0huC7MarnjHJIs9MgMVU5zdvxvKzif5ykNCzqbtbMS8XJhSRf9o/Y0cqwSEOOuwV
-	tZask3BA1yRJ1OHrnhv42+2eUB7Kmv3S5SltqxxhkUyW/nwUw7kUfzrJrGPxewGmTrTF
-	H2/FpIMiOlpUB8PQV958WRRSgY6aHxM86SKATgrSwdsmWWxphhyCcw0qKIwRb4h0Ea6Y
-	4mxQ==
-X-Received: by 10.15.33.132 with SMTP id c4mr5444793eev.2.1377791516474;
-	Thu, 29 Aug 2013 08:51:56 -0700 (PDT)
+	:references; bh=eGubt18oONTq2CGK6zUsJl4LP1O7Smkn6RoKYhTg0l8=;
+	b=z/siFC2XsSJ+n3vhzf2X+p6Id4a4KrAfnL13saQw9VPO3LiXwLZ3JR7aAd0NPcUQwp
+	sXvnOQAAH5vPRtgMzVsWp7wFPdPqGOb5KHVx9+fLWcWBuPCFc66uPeFF5XFG/lrERouA
+	q0H5O578YSfEh+vKmgrkISUSHSeUhIBNg/bbIbz+7ulbam3eChYLyRrpEu8K8btyKxO8
+	ZZeCHs5RCDBSpglmubuUB6UR35uGKHzrn9uuZX8C7kfKygK9jBOpFmJhp1bSagO8NFLP
+	PhGubWHTpaYXIRcajmOFqS67tmFT0kaQut+0g5r6/svEGTx+qa8NOFED/iTuv/awyidn
+	AyCA==
+X-Received: by 10.15.75.73 with SMTP id k49mr5305901eey.36.1377791517665;
+	Thu, 29 Aug 2013 08:51:57 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	n48sm47241258eeg.17.1969.12.31.16.00.00
+	a6sm47163102eei.10.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:55 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:43 +0200
-Message-Id: <cd23a20ecdb092ad5aa5317a0145b7a944be44ca.1377791378.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:44 +0200
+Message-Id: <e92b7e2841ecd45de71847dd1b299afa45a1008f.1377791378.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 50/66] gnome-vfs: Add PACKAGECONFIG for fam
+Subject: [WIP][PATCH 51/66] lightmediascanner: Add PACKAGECONFIG for ogg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,25 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:51:56 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 15:51:57 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb    | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-index 535006b..78110b5 100644
---- a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-+++ b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-@@ -31,6 +31,7 @@ SRC_URI[archive.sha256sum] = "62de64b5b804eb04104ff98fcd6a8b7276d510a49fbd9c0feb
+diff --git a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
+index a3ff5d2..f17a443 100644
+--- a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
++++ b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
+@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace
  
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
- PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
-+PACKAGECONFIG[fam] = "--enable-fam,--disable-fam,gamin"
+ S = "${WORKDIR}/release_${PV}"
  
- EXTRA_OECONF = " --disable-hal \
-                  --disable-openssl \
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis"
++
+ inherit autotools pkgconfig
+ 
+ do_install_append() {
 -- 
 1.8.3.2
 
