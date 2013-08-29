@@ -1,37 +1,34 @@
-Return-Path: <elvis.dowson@gmail.com>
-Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 74D186BE4F
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 546CD6BB13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 19:15:59 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id xb4so856120pbc.36
+	Thu, 29 Aug 2013 19:24:03 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id el20so739200lab.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 12:16:00 -0700 (PDT)
+	Thu, 29 Aug 2013 12:24:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=aAFJa1ogx1isRcSOJoc5kD1P7fBhdWIUY/8rrMjHIts=;
-	b=IjdiwiMxWryhVi6w2j6CNOgUh1tPu9XB1ETNgfc0ZV0Ye6OuLhuw4EnyyB/BAJgxC8
-	PinrUoK8A8rNQZ8/1O1cCa0Upg9tMEROkHnYzVNjzyzM3RjxrJsVoKr00t3ZDg532f48
-	3CcfpKESwiFiXh8N9p7AjIaN+G5wRJKdJnEsykDb79IgNoYVn57hCYTpOf0ocB2nKg+a
-	T6lCNEfoGH2NchofnlzTHxkIh4PLM8UlNbfvSILoHtG+L/eV0KufEjUjiBcDM6kg7c+f
-	tDJLvTHgBNwAVNWFnP7W3CqpKjlG1DF1XJKYHyd1p9mw9OT682VDVPg0VdoCYSEJ8M6g
-	Az/Q==
-X-Received: by 10.66.171.77 with SMTP id as13mr6056220pac.170.1377803760359;
-	Thu, 29 Aug 2013 12:16:00 -0700 (PDT)
-Received: from [192.168.1.106] ([94.205.106.26])
-	by mx.google.com with ESMTPSA id wr9sm39587546pbc.7.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 12:15:59 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
-From: Elvis Dowson <elvis.dowson@gmail.com>
-In-Reply-To: <CADkTA4NWhz3rmAqH=yB_5H4V4f11w4qZdYUTOG73SNLyv6R-=A@mail.gmail.com>
-Date: Thu, 29 Aug 2013 23:15:51 +0400
-Message-Id: <1CD7EF41-C972-4088-B6CD-21975EEBB93B@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=q6uPcmFUIn/KqSY33hFGD1njIyuQ36emUKmqSAw8Cs8=;
+	b=Za0VBGE9iyKSIF8aVARXCRcFFwVRx091Gl32N1vcEjwdralY4T8OnP0S5CCHeWCIur
+	MSb5x6FYrhlEiuFe0LMMzupwV3vlB+Z5oY4SE7xfyHUV9IqNID/lZXnbEE1dQCo3fp4l
+	X/JjyVwWCulsnnobZ4kpYKY3Pc3d7VTmDYhkGlqhykWPOvLcdZcFubqEty2Qf800R/9A
+	ECozNiaiQ5HMEJApIvGWm4XgIw7ectqr1AfP4ardolXUCsagO6tSI4fcHiUyoiAqtYrN
+	6nZP/7qYVkfSx7qIPDTfKbwiEepFNDq17RPPCx+JTXOu+Yf3gCeiMHR/kXlhL6KfiKyr
+	QVTg==
+MIME-Version: 1.0
+X-Received: by 10.152.115.242 with SMTP id jr18mr2703950lab.40.1377804243075; 
+	Thu, 29 Aug 2013 12:24:03 -0700 (PDT)
+Received: by 10.112.12.103 with HTTP; Thu, 29 Aug 2013 12:24:02 -0700 (PDT)
+In-Reply-To: <1CD7EF41-C972-4088-B6CD-21975EEBB93B@gmail.com>
 References: <20130829115339.a5c5c4a29245e5c988b774ab8f895ac5.53f04ab59e.wbe@email15.secureserver.net>
 	<CADkTA4NWhz3rmAqH=yB_5H4V4f11w4qZdYUTOG73SNLyv6R-=A@mail.gmail.com>
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-X-Mailer: Apple Mail (2.1498)
+	<1CD7EF41-C972-4088-B6CD-21975EEBB93B@gmail.com>
+Date: Thu, 29 Aug 2013 15:24:02 -0400
+Message-ID: <CADkTA4M=sOdCcYWXeoM5HTNDq8P661XZyGv8V+KHXgi=WZw5Vg@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: Elvis Dowson <elvis.dowson@gmail.com>
 Cc: OpenEmbedded Developer Mailing List
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [OE-core] [oe-core] QEMU with ARM Cortex A9 with hard float configuration - Kernel panic
@@ -48,59 +45,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 19:16:02 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Aug 2013 19:24:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-HI Bruce,
+On Thu, Aug 29, 2013 at 3:15 PM, Elvis Dowson <elvis.dowson@gmail.com> wrote:
+> HI Bruce,
+>
+> On Aug 29, 2013, at 10:58 PM, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
+>
+>> I have a vexpress A15 that works here as well, but I wouldn't mind comparing
+>> configs. If you send it along, I'd have a look.
+>
+> Does this mean you've got vexpress-a9 and vexpress-a15, but you've never intentionally
+> published or made these qemu configurations available, so that WindRiver has a commercial
+> advantage when it comes to machine emulation for these machine architectures?
 
-On Aug 29, 2013, at 10:58 PM, Bruce Ashfield <bruce.ashfield@gmail.com> =
-wrote:
+There's no commercial advantage to emulated machines. I've been using qemu since
+it was bochs, and have booted and tried pretty much everything over
+the years .. I
+just like emulated platforms and machines.
 
-> I have a vexpress A15 that works here as well, but I wouldn't mind =
-comparing
-> configs. If you send it along, I'd have a look.
+The work that I did was hacks, that I had no interest in fully
+supporting in Yocto. Everytime
+we add a machine, there's a tax for every uprev cycle, and every
+build. If you add it, you
+can't let it bit rot.
 
-Does this mean you've got vexpress-a9 and vexpress-a15, but you've never =
-intentionally
-published or made these qemu configurations available, so that WindRiver =
-has a commercial
-advantage when it comes to machine emulation for these machine =
-architectures?
+I don't think I need to be accused of intentionally doing or not doing anything.
 
-I can't but help think of the discussions that we had over the meta-zynq =
-layer, where
-the meta-zynq layer was not maintained, and WindRiver never released any =
-of the
-updates to meta-zynq because of some "issues".=20
+>
+> I can't but help think of the discussions that we had over the meta-zynq layer, where
+> the meta-zynq layer was not maintained, and WindRiver never released any of the
+> updates to meta-zynq because of some "issues".
+>
+> At that time, you were pushing for linux-yocto and LTSI, and fast forward 1 year or more
+> and the meta-zynq layer is still not updated or maintained, and it's only recently that
+> Xilinx themselves added support to their meta-xilinx layer for linux-yocto.
 
-At that time, you were pushing for linux-yocto and LTSI, and fast =
-forward 1 year or more
-and the meta-zynq layer is still not updated or maintained, and it's =
-only recently that
-Xilinx themselves added support to their meta-xilinx layer for =
-linux-yocto.
+You do realize that the entire reason that layer isn't updated, is that we
+agreed with Xilinx and the other active contributors to merge all the
+support into their layer, and kill off the old one. It simply took us a while to
+get everyone up to speed and aligned.
 
-I've also observed that you're the only one maintaining linux-yocto!!
+>
+> I've also observed that you're the only one maintaining linux-yocto!!
 
-So, what I'm trying to get at it, it doesn't really help any one in the =
-open source
-community if work that's useful for other is withheld for WindRiver =
-gaining a commercial
-advantage (meta-zynq & xilinx case in point) and (versatile-a9 and =
-versatile-a15)
-in point, especially when you're the sole maintainer for the linux-yocto =
-kernel, which
-happened to mentioned qemuarma9 machine support.
+Clearly you aren't on the linux-yocto mailing list :)
 
-I mean either you don't publish anything that Wind River chooses to keep =
-proprietary
-or support the machine configurations defined in the linux-yocto meta =
-branch.
+>
+> So, what I'm trying to get at it, it doesn't really help any one in the open source
+> community if work that's useful for other is withheld for WindRiver gaining a commercial
+> advantage (meta-zynq & xilinx case in point) and (versatile-a9 and versatile-a15)
+> in point, especially when you're the sole maintainer for the linux-yocto kernel, which
+> happened to mentioned qemuarma9 machine support.
 
-Best regards,
+Wind River works upstream first, we don't have any commercial support for any of
+the emulations you are talking about. Simple because I say I've uses something,
+doesn't mean that it is a commercial product.
 
-Elvis Dowson
+I'd suggest toning down the conversation and accusations .. they
+aren't productive
+I'm just trying to help.
+
+>
+> I mean either you don't publish anything that Wind River chooses to keep proprietary
+> or support the machine configurations defined in the linux-yocto meta branch.
+
+I'm not following what you mean here  .. sorry.
+
+Bruce
+
+>
+> Best regards,
+>
+> Elvis Dowson
+>
+>
 
 
+
+-- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
