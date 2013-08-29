@@ -1,37 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CC706BDD5
+Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 560CF6BDBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:19 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id d17so344042eek.28
+	Thu, 29 Aug 2013 15:51:21 +0000 (UTC)
+Received: by mail-ea0-f170.google.com with SMTP id h14so349912eak.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:51:20 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=VLOWZ2RsBxcgAd14MqgUBfRGcnpvImIl+8J6q5qts+c=;
-	b=NICzwCWkyIrKhL3InT7ZmRENfn33gQMRcKgXI6ibQhaqvUbK9P8ok26XLMCB4zBF0b
-	ARiyTUZgr4pRmo+ZG8UPK+FPCgeDdXjOWirI/eS4cnmdVxWY84SxUnC4o3az7/SGR+rt
-	CnOHbx7G4HF4R7fKLeywlvsUSC2cfLgZUxXH6bXdNti9wtPff8mIXFlDapW9g+OynUhJ
-	iRfVfF3juj2gyxMovk95kC9Z71gLOrOMmF5WXq8I3vxQe1YC96T98f+e1cevLcVHqNX3
-	glGijZzsUDOGzgpU0XuJkbyXu7IFoQ6IhbngkDPcKmFETrftGVCaWMpw8gTdPkTNpV28
-	U+4g==
-X-Received: by 10.15.83.2 with SMTP id b2mr5412996eez.28.1377791480564;
-	Thu, 29 Aug 2013 08:51:20 -0700 (PDT)
+	:references; bh=MIKKxxNQVG5OaT1oTJg8yjaJZK4h3DHh6Gi5WIIeXkY=;
+	b=rDnrb/EoYzgzhdsfO6+J3Y1WGE+G7zHdV2q0T3fmaZMhf6JIxSE8HH81q9hMmmQvBQ
+	Qq0CRfg8UWyqlTEkklovy5HJzMdnWd5+xLby8Obrsat/siWs8Jades3opUmWvryHXxRo
+	fafAbb9Zzdk4tf2v5oeq5GT+xWQTvjrDFDHtKEMmP07VIkUptBFRpJEc/NHB5p/cf8L5
+	JqtWqXGD98vR0Sf/2aL++CgvqHkFAjcWEelg6Igs+vk3YZ6tf4uZfoRx2vIDw2UyPT+T
+	EbBM7ZBgULeJQ5LuNc8DrDYRvB2c9mH2ijteJp6xZUmtsivr6iDC+5IqDwQD9UpRPZRN
+	q82A==
+X-Received: by 10.14.107.68 with SMTP id n44mr5432476eeg.26.1377791481785;
+	Thu, 29 Aug 2013 08:51:21 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	a6sm47158513eei.10.1969.12.31.16.00.00
+	t6sm47163385eel.12.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:20 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:16 +0200
-Message-Id: <802bd2bc63792faa95ef7fbe2a70d559f980595f.1377791377.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:17 +0200
+Message-Id: <afb3d86cd598c9cbf08e20e3baca86495ab56a35.1377791377.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 23/66] mpd: Add PACKAGECONFIG for undeterministic dependencies
+Subject: [WIP][PATCH 24/66] cherokee: Add PACKAGECONFIG for ffmpeg and ldap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:51:20 -0000
+X-List-Received-Date: Thu, 29 Aug 2013 15:51:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
-index 6f2a912..1e93928 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
-@@ -23,6 +23,14 @@ EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemds
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
- PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
-+PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
-+PACKAGECONFIG[cdio] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio"
-+PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
-+PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
-+PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
-+PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4"
-+PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
-+PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+index 265e24e..0cc0104 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+@@ -18,6 +18,10 @@ SRC_URI[sha256sum] = "042b5687b1a3db3ca818167548ce5d32c35e227c6640732dcb622a6f4a
  
- do_install_append() {
-     install -d ${D}/${localstatedir}/lib/mpd/music
+ inherit autotools pkgconfig binconfig update-rc.d systemd
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
++PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
++
+ EXTRA_OECONF = "--disable-static \
+                 --disable-nls \
+                ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
 -- 
 1.8.3.2
 
