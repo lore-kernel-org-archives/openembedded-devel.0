@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DA746BDB4
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 81A606BD6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 15:51:09 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id e53so340021eek.41
+	Thu, 29 Aug 2013 15:51:11 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id d51so341384eek.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Aug 2013 08:51:09 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=eWEz3nqF53prpMJWCJ1mQx3T1dlPhcjvDD39War0EQ0=;
-	b=hpOnVXwDKCNTMqgSTw+tKlPmC6CiGlm56jwKe3z/hId6fSiF9VKhG6aKpwzWwEB+D+
-	rcCprlMYsFiws3Cglme+RcP0RLOPPyyE2Q6cvKQAMZB/s3HBsaVBYYKOa/Nr9TEUksRB
-	X8eP1rzjABEmKUxob1UvjD/EJS+1fibTDbcz4AnQsmt0aweQ0y8zz6p+4h8xnSuqDwIy
-	PW70siYXfe/0voGf8UAtZxnoxfJr242+wlvCBb4e37QEpcEJRMqwG1DliRYU4xyAx3fl
-	TfXsonwAMA7l7uzNYguwRahEnnbOcmr5OYZvH8hLtlETOf01R4y+oRvu02mrLNgFUZV3
-	vWbw==
-X-Received: by 10.15.63.14 with SMTP id l14mr5447168eex.13.1377791469704;
-	Thu, 29 Aug 2013 08:51:09 -0700 (PDT)
+	:references; bh=ShAB/n0XxigsPtgbN5Zw6+oUO9bcDoqwspRcu7W9s48=;
+	b=zA2ATa3IwUxfpe4BDlCqxFBeC2X/447KBFyqiHVuC1fXoOHxQ9KmgBgRx9S+/hl/os
+	26JoX+ocSmTOHmhaIMXKJbopkBBO2e8z2Sd6oBFRvXHyiD84WD6xmjin1iy5ziMQKH4M
+	bMkaecaCtOrpVw2cz3/43IBRIorFm+LFfHfTNc1tcmdWVB66qglH3Dm/OWX5TnVDVM7G
+	ws5nFrQHUie5SitWb/lmrKS/cgm0Fw0TuqkfeiLc6NFLMoYvQlC25kwyFjcWm0AvI7Mx
+	8sZARAjZBk1smg44fu9cHOstUmoZTrltFXt+KbTKuyGiLFGIL6wmzzU4tNCDC7tkUn6O
+	fWoQ==
+X-Received: by 10.14.183.2 with SMTP id p2mr5369804eem.44.1377791471913;
+	Thu, 29 Aug 2013 08:51:11 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b45sm47153335eef.4.1969.12.31.16.00.00
+	i1sm47157122eeg.0.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 29 Aug 2013 08:51:09 -0700 (PDT)
+	Thu, 29 Aug 2013 08:51:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Aug 2013 17:51:09 +0200
-Message-Id: <368333060a75571ede30a7eeda08e17f99084a36.1377791377.git.Martin.Jansa@gmail.com>
+Date: Thu, 29 Aug 2013 17:51:10 +0200
+Message-Id: <31d7786f5b0cdcb8386cf4fadf1b975502362bcd.1377791377.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1377791377.git.Martin.Jansa@gmail.com>
 References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-Subject: [WIP][PATCH 16/66] libgtop: Add dependency on libxau
+Subject: [WIP][PATCH 17/66] wv: Add PACKAGECONFIG for png
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2013 15:51:09 -0000
-
-* libxau is included in libgtop_common-2.0.la
+X-List-Received-Date: Thu, 29 Aug 2013 15:51:12 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/wv/wv_1.2.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb
-index b6a8869..8f0c89f 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb
-@@ -6,4 +6,4 @@ inherit gnome lib_package
- SRC_URI[archive.md5sum] = "ed44d736efd97d062b77621de6aff439"
- SRC_URI[archive.sha256sum] = "49958d7da1f76b257bfd0d557d8ed2b218a5ab0d31b59fed1c32ddf2a1529f5d"
+diff --git a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
+index 3ac40aa..453513e 100644
+--- a/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
++++ b/meta-gnome/recipes-gnome/wv/wv_1.2.0.bb
+@@ -15,4 +15,7 @@ inherit autotools pkgconfig
  
--DEPENDS = "glib-2.0 intltool-native"
-+DEPENDS = "glib-2.0 intltool-native libxau"
+ S = "${WORKDIR}/${PN}-${PV}"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
++
+ EXTRA_OECONF = ""
 -- 
 1.8.3.2
 
