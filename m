@@ -1,26 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C4106BE37;
-	Fri, 30 Aug 2013 18:20:09 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 30 Aug 2013 11:20:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.89,992,1367996400"; d="scan'208";a="353958681"
-Received: from unknown (HELO helios.localnet) ([10.252.123.73])
-	by azsmga001.ch.intel.com with ESMTP; 30 Aug 2013 11:20:00 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Philip Balister <philip@balister.org>
-Date: Fri, 30 Aug 2013 19:19:59 +0100
-Message-ID: <5743790.7vGz66EoOP@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <521F5066.8050005@balister.org>
-References: <521F5066.8050005@balister.org>
-MIME-Version: 1.0
-Cc: openembedded-members@lists.openembedded.org,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Yocto Dev Day Sponsorship Opportunity
+Return-Path: <elvis.dowson@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F30D6BDE5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Aug 2013 21:54:33 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id y10so2344414pdj.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Aug 2013 14:54:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-type:content-transfer-encoding:subject:date:message-id
+	:cc:to:mime-version;
+	bh=IG5UR3XOqXNrl7+Jxv5olukG1sOPraSuEpUhLBGpwKw=;
+	b=CKyySvkzdPrzW0cvwxZWVTCREdYGMfoqlZc4LkyvALo8s+poO6FI/C8nZf82Q9syWz
+	S2T15a3UyW29qsMB2yKQAheYygxUotFWfywNnp0y85Nbh2bLn+Xd8E27+Zug24AkabXj
+	EAzqlZMoobWflpxfBHEKSsytA1vtdBEzSUows+uULXBVFuyk06nGz9w++TqDY89WDR7x
+	UgHjIfedNjjh7PiDphHPdZq7lWFFhXVxFIy1IemQJLm+PzI6jsNgnsTBkyhOloxgKdMi
+	kdwL2NrewwcEQJ9yZ4CpA3d+nDldEM5vV23PArl68cTHHnOkR8kDV+k14eCIZjFT0qYX
+	p+sg==
+X-Received: by 10.66.162.136 with SMTP id ya8mr12857053pab.110.1377899674216; 
+	Fri, 30 Aug 2013 14:54:34 -0700 (PDT)
+Received: from [192.168.1.106] ([94.205.106.26])
+	by mx.google.com with ESMTPSA id tg7sm29414pbc.36.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 30 Aug 2013 14:54:33 -0700 (PDT)
+From: Elvis Dowson <elvis.dowson@gmail.com>
+Date: Sat, 31 Aug 2013 01:54:26 +0400
+Message-Id: <D43CA667-1051-4FBC-8E12-D140F94AFAFC@gmail.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>, 
+	Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@windriver.com>
+Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
+X-Mailer: Apple Mail (2.1498)
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Adding support for additional qemu machine configurations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,57 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2013 18:20:10 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 30 Aug 2013 21:54:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Hi Philip,
+Hi,
+     I'd like to put forward a proposal for adding support for =
+additional qemu machine configurations, either by way of creating a new =
+meta-qemu layer, or adding additional machine configurations to the =
+oe-core, targetting a future release (say 1.6 or 1.7).
 
-On Thursday 29 August 2013 09:45:10 Philip Balister wrote:
-> This is kind of short notice, but I'd like some feedback on this idea ...
-> 
-> So for the Yocto Dev Day before ELCE in Edinburgh, the Yocto Project is
-> looking for additional Sponsorship to cover the cost of coffee breaks
-> (and some other stuff, but these are the least expensive)
-> 
-> I'm wondering if OpenEmbedded would like to sponsor a coffee break.
-> Obviously, we'd need to do a quick round of fund raising to make this
-> happen. I think it would be a good way for us to increase visibility of
-> the OpenEmbedded brand and gives many of the smaller players a chance to
-> contribute to some of the larger Yocto Project costs.
-> 
-> So I'd like to hear two things from everyone:
-> 
-> 1) Should we sponsor events when it makes sense?
+Proposed qemu machine configurations, not currently included in oe-core, =
+are as follows:
 
-If possible, I think so.
- 
-> 2) If you are interested in helping sponsor this particular even, send
-> me a private email with amounts. If there is sufficient interest we have
-> access to US and EU bank accounts for money collection.
+- qemuarmv7 (useful for emulating TI OMAP 3 based platforms)
+- qemuarma9 (useful for emulating TI OMAP 4 and Freescale i.MX6 =
+platforms)
+- qemuarmv8 (for AArch64 platforms)
+- qemumips64
 
-If we're able to raise the asking amount then I'd be happy to put some of my 
-own money towards this.
- 
-> Long term, I'd like to get a more organized fund raising plan in place
-> and identify how we can support the needs of the project better. Some
-> ideas that have been tossed around over the years, travel grants for
-> people promoting OE, event sponsorship, pay for infrastructure
-> improvements, contribute to auto builder costs etc. Many of these are
-> being covered by volunteers working in the community It would be nice to
-> help them out.
+As a first step, I can contribute support for qemuarmv7, qemuarma9 and =
+qemuarmv8.
 
-Travel grants is a good one - not something I'd personally take advantage of 
-but I know it's been helpful getting folks along to conferences to meet with 
-other OE community members in the past. We've also had some infrastructure 
-concerns over the last year or so but I don't know if it's money that's really 
-the big problem there - seems to be more about people's time.
+Thanks and do let me know your thoughts on this.
 
-Cheers,
-Paul
+Best regards,
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Elvis Dowson=
 
