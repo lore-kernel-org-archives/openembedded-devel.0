@@ -1,38 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 128FF6BCE7
+Return-Path: <B40290@freescale.com>
+Received: from va3outboundpool.messaging.microsoft.com
+	(va3ehsobe001.messaging.microsoft.com [216.32.180.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 816956BD79
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 09:00:32 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id r16so778691ead.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 02:00:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=p/OUUbVPlwDEB1ScPZQMbuMifhF/r6sOl2TWbSr7Grg=;
-	b=Btf2T5ooO+6nzEJZRri/Six0ZqJ5anrrkLtDCr2TxK+K0EOkit1ZqVQK5HZGw28+Je
-	7jTfY+34hETInE/M4wl2XACLbUhKgNfrgfaPEU1oG/BS4/rzujaDVePigNHhCPAQ3dM4
-	S/Ee92WdPKC+n/TVPLUF9htPWCJXT2vndSv3uE+QqiiuX8AKjxZ8H9+qaZZVomm+DoTc
-	rgVzh9rAbfhpyW0b8dTPfgrWrBlisn7CYFK1obfCxSRJWBBbaBsTjMrrC+5z8Qkt/o5V
-	eCrLYqfYiHgahPh5O4sSEu9wycVE3ADFhpL6FGd1x5hpZIuqQ54zIC929dVzrs/fBKq1
-	diug==
-X-Received: by 10.15.54.199 with SMTP id t47mr11031590eew.46.1377853232897;
-	Fri, 30 Aug 2013 02:00:32 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	k7sm52897455eeg.13.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 30 Aug 2013 02:00:32 -0700 (PDT)
-Date: Fri, 30 Aug 2013 11:01:46 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130830090146.GS3544@jama>
-References: <1377824151-7538-1-git-send-email-net147@gmail.com>
+	Fri, 30 Aug 2013 10:21:34 +0000 (UTC)
+Received: from mail211-va3-R.bigfish.com (10.7.14.225) by
+	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
+	14.1.225.22; Fri, 30 Aug 2013 10:21:34 +0000
+Received: from mail211-va3 (localhost [127.0.0.1])	by
+	mail211-va3-R.bigfish.com (Postfix) with ESMTP id 2F229C00185	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Aug 2013 10:21:34 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -1
+X-BigFish: VS-1(zz936eIzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h177df4h17326ah186068h1954cbh8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
+Received: from mail211-va3 (localhost.localdomain [127.0.0.1]) by mail211-va3
+	(MessageSwitch) id 137785809297264_18220;
+	Fri, 30 Aug 2013 10:21:32 +0000 (UTC)
+Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.249])	by
+	mail211-va3.bigfish.com (Postfix) with ESMTP id 0B3BE40040	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Aug 2013 10:21:32 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS016.bigfish.com
+	(10.7.99.26) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Fri, 30 Aug 2013 10:21:29 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.3.146.2; Fri, 30 Aug 2013 10:21:28 +0000
+Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
+	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id r7UALPx6014645;	Fri, 30 Aug 2013 03:21:26 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 30 Aug 2013 18:21:24 +0800
+Message-ID: <1377858084-31009-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
-In-Reply-To: <1377824151-7538-1-git-send-email-net147@gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] qt-creator: update to 2.8.1
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Subject: [meta-oe][PATCH V4 ] daq: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,70 +53,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2013 09:00:34 -0000
-X-Groupsio-MsgNum: 45992
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PyTGrrL9CIKSRohn"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Aug 2013 10:21:34 -0000
+Content-Type: text/plain
 
---PyTGrrL9CIKSRohn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Chunrong Guo <B40290@freescale.com>
 
-On Fri, Aug 30, 2013 at 10:55:51AM +1000, Jonathan Liu wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  .../qt-creator/{qt-creator_2.8.0.bb =3D> qt-creator_2.8.1.bb}           =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-qt/qt-creator/{qt-creator_2.8.0.bb =3D> qt-creato=
-r_2.8.1.bb} (87%)
->=20
-> diff --git a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb b/meta-oe/=
-recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> similarity index 87%
-> rename from meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
-> rename to meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> index a95ad5a..21d5264 100644
-> --- a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
-> +++ b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D "file://LGPL_EXCEPTION.TXT;md5=3Deb6=
-c371255e1262c55ae9b652a90b5
->  SECTION =3D "qt/app"
-> =20
->  SRC_URI =3D "http://download.qt-project.org/official_releases/qtcreator/=
-2.8/${PV}/${BP}-src.tar.gz"
-> -SRC_URI[md5sum] =3D "5aacdad4491b7dda9758a81384d8da79"
-> -SRC_URI[sha256sum] =3D "7ac5d9a36c2f561f74d77378d4eae95a78c7752b323e1df9=
-24d6e895e99f45d2"
-> +SRC_URI[md5sum] =3D "79ef6c6ece0c00035ef744c9d6e3bd3b"
-> +SRC_URI[sha256sum] =3D "d5ae007a297a4288d0e95fd605edbfb8aee80f6788c7a6cf=
-b9cb297f50c364b9"
+   *The dump DAQ test the various inline mode features
+   *snort depends daq
 
-Hi, does it fix build on arm?
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ meta-oe/recipes-connectivity/daq/daq_2.0.1.bb      |   16 +++++++++++
+ ...le-run-test-program-while-cross-compiling.patch |   29 ++++++++++++++++++++
+ 2 files changed, 45 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
+ create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
 
-One issue was missing cpuid.h
-http://lists.openembedded.org/pipermail/openembedded-devel/2013-August/0919=
-52.html
+diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
+new file mode 100644
+index 0000000..4c1be44
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "The dump DAQ test the various inline mode features "
++HOMEPAGE = "http://www.snort.org"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
++
++PARALLEL_MAKE = ""
++
++DEPENDS = "libpcap libpcre "
++
++SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
++            file://disable-run-test-program-while-cross-compiling.patch "
++
++SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
++SRC_URI[sha256sum] = "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
++
++inherit autotools
+diff --git a/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch b/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
+new file mode 100644
+index 0000000..12a6cba
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
+@@ -0,0 +1,29 @@
++Upstream-Status:Inappropriate [embedded specific]
++
++fix the below error:
++configure: error: cannot run test program while cross compiling
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++
++--- a/m4/sf.m4old	2013-08-30 04:08:18.768409680 -0500
+++++ b/m4/sf.m4	2013-08-30 04:09:24.591367890 -0500
++@@ -135,19 +135,6 @@
++         exit 1
++     fi
++     AC_MSG_CHECKING([for libpcap version >= $1])
++-    AC_RUN_IFELSE(
++-    [AC_LANG_PROGRAM(
++-    [[
++-    #include <pcap.h>
++-    #include <string.h>
++-    extern char pcap_version[];
++-    ]],
++-    [[
++-        if (strcmp(pcap_version, $1) < 0)
++-            return 1;
++-    ]])],
++-    [libpcap_version_1x="yes"],
++-    [libpcap_version_1x="no"])
++     if test "x$libpcap_version_1x" = "xno"; then
++         AC_MSG_RESULT(no)
++         echo
+-- 
+1.7.5.4
 
-and then there were some warning causing build failure with -Werror.
 
-If yes, I'll happily replace my patch with this one :).
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---PyTGrrL9CIKSRohn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
-
-iEYEARECAAYFAlIgX3oACgkQN1Ujt2V2gBxylwCfc4hEWamuwurMHrYqXBry/KGW
-H3oAoKVqClVJhYVUj/Z88PR6DxM9MoKl
-=CFgE
------END PGP SIGNATURE-----
-
---PyTGrrL9CIKSRohn--
