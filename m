@@ -1,33 +1,26 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 46DF46BE11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 15:45:07 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VFQsi-0005Fr-9D for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Aug 2013 17:45:06 +0200
-Received: from adsl-69-211-97-123.dsl.chcgil.ameritech.net ([69.211.97.123])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 17:45:04 +0200
-Received: from dales773 by adsl-69-211-97-123.dsl.chcgil.ameritech.net with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 17:45:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Dale Schaafsma <dales773@hotmail.com>
-Date: Fri, 30 Aug 2013 15:40:09 +0000 (UTC)
-Message-ID: <loom.20130830T173615-388@post.gmane.org>
-References: <SNT146-W6864849A2A4EBFC6A267A683340@phx.gbl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 69.211.97.123 (Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36
-	(KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36)
-Subject: Re: [meta-oe]recipes-devtools/cloud9/cloud9_0.6.bb,do_fetch fails
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C4106BE37;
+	Fri, 30 Aug 2013 18:20:09 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 30 Aug 2013 11:20:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,992,1367996400"; d="scan'208";a="353958681"
+Received: from unknown (HELO helios.localnet) ([10.252.123.73])
+	by azsmga001.ch.intel.com with ESMTP; 30 Aug 2013 11:20:00 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Philip Balister <philip@balister.org>
+Date: Fri, 30 Aug 2013 19:19:59 +0100
+Message-ID: <5743790.7vGz66EoOP@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <521F5066.8050005@balister.org>
+References: <521F5066.8050005@balister.org>
+MIME-Version: 1.0
+Cc: openembedded-members@lists.openembedded.org,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Yocto Dev Day Sponsorship Opportunity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,39 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2013 15:45:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Aug 2013 18:20:10 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Dale Schaafsma <dales773 <at> hotmail.com> writes:
+Hi Philip,
 
+On Thursday 29 August 2013 09:45:10 Philip Balister wrote:
+> This is kind of short notice, but I'd like some feedback on this idea ...
 > 
-> All, My apologies if this is not the correct place to send this...please let 
-me know where it should be sent.
->  The cloud9 image for the BeagleBoneBlack doesn't currently build for me as 
-the sass.js git repo no longer
-> seems to exist. The following is the offending line in recipes-
-devtools/cloud9/cloud9_0.6.bb:
+> So for the Yocto Dev Day before ELCE in Edinburgh, the Yocto Project is
+> looking for additional Sponsorship to cover the cost of coffee breaks
+> (and some other stuff, but these are the least expensive)
 > 
-git://github.com/visionmedia/sass.js.git;destsuffix=git/support/connect/suppor
-t/sass;name=sass \
->  Searching github found this repository, but I'm not sure if this is an 
-appropriate replacement (I'm not
-> familiar with sass).  https://github.com/stunti/sass.js
-> Thanks,Dale 		 	   		  
+> I'm wondering if OpenEmbedded would like to sponsor a coffee break.
+> Obviously, we'd need to do a quick round of fund raising to make this
+> happen. I think it would be a good way for us to increase visibility of
+> the OpenEmbedded brand and gives many of the smaller players a chance to
+> contribute to some of the larger Yocto Project costs.
 > 
+> So I'd like to hear two things from everyone:
+> 
+> 1) Should we sponsor events when it makes sense?
 
+If possible, I think so.
+ 
+> 2) If you are interested in helping sponsor this particular even, send
+> me a private email with amounts. If there is sufficient interest we have
+> access to US and EU bank accounts for money collection.
 
-All,
- The stunti location won't work (doesn't contain required commit). The 
-following repository seems to work:
- git://github.com/matehat/sass.js.git
+If we're able to raise the asking amount then I'd be happy to put some of my 
+own money towards this.
+ 
+> Long term, I'd like to get a more organized fund raising plan in place
+> and identify how we can support the needs of the project better. Some
+> ideas that have been tossed around over the years, travel grants for
+> people promoting OE, event sponsorship, pay for infrastructure
+> improvements, contribute to auto builder costs etc. Many of these are
+> being covered by volunteers working in the community It would be nice to
+> help them out.
 
- I'll try to pull together a proper patch request, but it'll be a bit (due to 
-unfamiliarity and other commitments).
+Travel grants is a good one - not something I'd personally take advantage of 
+but I know it's been helpful getting folks along to conferences to meet with 
+other OE community members in the past. We've also had some infrastructure 
+concerns over the last year or so but I don't know if it's money that's really 
+the big problem there - seems to be more about people's time.
 
-Thanks,
-Dale
+Cheers,
+Paul
 
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
