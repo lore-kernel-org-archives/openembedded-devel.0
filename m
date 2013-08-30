@@ -1,45 +1,40 @@
-Return-Path: <B40290@freescale.com>
-Received: from va3outboundpool.messaging.microsoft.com
-	(va3ehsobe001.messaging.microsoft.com [216.32.180.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 816956BD79
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BD1806BD61
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 10:21:34 +0000 (UTC)
-Received: from mail211-va3-R.bigfish.com (10.7.14.225) by
-	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
-	14.1.225.22; Fri, 30 Aug 2013 10:21:34 +0000
-Received: from mail211-va3 (localhost [127.0.0.1])	by
-	mail211-va3-R.bigfish.com (Postfix) with ESMTP id 2F229C00185	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 10:21:34 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -1
-X-BigFish: VS-1(zz936eIzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h177df4h17326ah186068h1954cbh8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail211-va3 (localhost.localdomain [127.0.0.1]) by mail211-va3
-	(MessageSwitch) id 137785809297264_18220;
-	Fri, 30 Aug 2013 10:21:32 +0000 (UTC)
-Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.249])	by
-	mail211-va3.bigfish.com (Postfix) with ESMTP id 0B3BE40040	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Aug 2013 10:21:32 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS016.bigfish.com
-	(10.7.99.26) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Fri, 30 Aug 2013 10:21:29 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.3.146.2; Fri, 30 Aug 2013 10:21:28 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r7UALPx6014645;	Fri, 30 Aug 2013 03:21:26 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Aug 2013 18:21:24 +0800
-Message-ID: <1377858084-31009-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Fri, 30 Aug 2013 10:42:40 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id hz10so2170291pad.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Aug 2013 03:42:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=dhRn1/skizJN7qhPaRCZlK+MBAlYjqCavgKtl7nbRsA=;
+	b=VIqNc0Ne+5k2xcVGeJz1OjFzMZySskCDbyBOCj2ekmhD+/QXmd3c6jCcOS0LQ3xMJv
+	QEfE8Od34QFTBVJsaG01Yshf0P0TGC7fmoQ6MpVvHw0a38Gur9NaII6txHLL1A2qi64M
+	If5fukz2mjhqLA+GVLlAMfJKOivIX7ySGanUstAYdbE+KuJxvuiyE22J6ZCG6SfAt2Km
+	1rJjXcqi6o9oOKPxJdb2paW5dIWzVPuUAh/n4XVkH5s30CBpVLIt4Aarxv8eEifJveUZ
+	NuTkVn6LkPRa2y6RzjN6hGb/kR744KQtbL3qe6gpe5gn3RasssjWmj63eeZzH6FbfSJB
+	fuuA==
+X-Received: by 10.66.178.143 with SMTP id cy15mr9908990pac.105.1377859361284; 
+	Fri, 30 Aug 2013 03:42:41 -0700 (PDT)
+Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
+	[60.242.179.244])
+	by mx.google.com with ESMTPSA id xe9sm47022686pab.0.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 30 Aug 2013 03:42:40 -0700 (PDT)
+Message-ID: <522075F2.7070804@gmail.com>
+Date: Fri, 30 Aug 2013 20:37:38 +1000
+From: Jonathan Liu <net147@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH V4 ] daq: add recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1377824151-7538-1-git-send-email-net147@gmail.com>
+	<20130830090146.GS3544@jama>
+In-Reply-To: <20130830090146.GS3544@jama>
+Subject: Re: [meta-oe][PATCH] qt-creator: update to 2.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,81 +48,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Aug 2013 10:21:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 30 Aug 2013 10:42:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Chunrong Guo <B40290@freescale.com>
-
-   *The dump DAQ test the various inline mode features
-   *snort depends daq
-
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-connectivity/daq/daq_2.0.1.bb      |   16 +++++++++++
- ...le-run-test-program-while-cross-compiling.patch |   29 ++++++++++++++++++++
- 2 files changed, 45 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
- create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
-
-diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-new file mode 100644
-index 0000000..4c1be44
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "The dump DAQ test the various inline mode features "
-+HOMEPAGE = "http://www.snort.org"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
-+
-+PARALLEL_MAKE = ""
-+
-+DEPENDS = "libpcap libpcre "
-+
-+SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
-+            file://disable-run-test-program-while-cross-compiling.patch "
-+
-+SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
-+SRC_URI[sha256sum] = "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
-+
-+inherit autotools
-diff --git a/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch b/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
-new file mode 100644
-index 0000000..12a6cba
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch
-@@ -0,0 +1,29 @@
-+Upstream-Status:Inappropriate [embedded specific]
-+
-+fix the below error:
-+configure: error: cannot run test program while cross compiling
-+
-+Signed-off-by: Chunrong Guo <B40290@freescale.com>
-+
-+--- a/m4/sf.m4old	2013-08-30 04:08:18.768409680 -0500
-++++ b/m4/sf.m4	2013-08-30 04:09:24.591367890 -0500
-+@@ -135,19 +135,6 @@
-+         exit 1
-+     fi
-+     AC_MSG_CHECKING([for libpcap version >= $1])
-+-    AC_RUN_IFELSE(
-+-    [AC_LANG_PROGRAM(
-+-    [[
-+-    #include <pcap.h>
-+-    #include <string.h>
-+-    extern char pcap_version[];
-+-    ]],
-+-    [[
-+-        if (strcmp(pcap_version, $1) < 0)
-+-            return 1;
-+-    ]])],
-+-    [libpcap_version_1x="yes"],
-+-    [libpcap_version_1x="no"])
-+     if test "x$libpcap_version_1x" = "xno"; then
-+         AC_MSG_RESULT(no)
-+         echo
--- 
-1.7.5.4
-
-
+On 30/08/2013 7:01 PM, Martin Jansa wrote:
+> On Fri, Aug 30, 2013 at 10:55:51AM +1000, Jonathan Liu wrote:
+>> Signed-off-by: Jonathan Liu <net147@gmail.com>
+>> ---
+>>   .../qt-creator/{qt-creator_2.8.0.bb => qt-creator_2.8.1.bb}           | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>   rename meta-oe/recipes-qt/qt-creator/{qt-creator_2.8.0.bb => qt-creator_2.8.1.bb} (87%)
+>>
+>> diff --git a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
+>> similarity index 87%
+>> rename from meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
+>> rename to meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
+>> index a95ad5a..21d5264 100644
+>> --- a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
+>> +++ b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
+>> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LGPL_EXCEPTION.TXT;md5=eb6c371255e1262c55ae9b652a90b5
+>>   SECTION = "qt/app"
+>>   
+>>   SRC_URI = "http://download.qt-project.org/official_releases/qtcreator/2.8/${PV}/${BP}-src.tar.gz"
+>> -SRC_URI[md5sum] = "5aacdad4491b7dda9758a81384d8da79"
+>> -SRC_URI[sha256sum] = "7ac5d9a36c2f561f74d77378d4eae95a78c7752b323e1df924d6e895e99f45d2"
+>> +SRC_URI[md5sum] = "79ef6c6ece0c00035ef744c9d6e3bd3b"
+>> +SRC_URI[sha256sum] = "d5ae007a297a4288d0e95fd605edbfb8aee80f6788c7a6cfb9cb297f50c364b9"
+> Hi, does it fix build on arm?
+I tested for x86 target. I haven't tested on ARM. 
+https://codereview.qt-project.org/#change,61264 hasn't been merged yet 
+and I don't see any ARM build fixes in the logs between v2.8.0 and 
+v2.8.1 so I am guessing compiling for ARM isn't fixed yet.
+>
+> One issue was missing cpuid.h
+> http://lists.openembedded.org/pipermail/openembedded-devel/2013-August/091952.html
+>
+> and then there were some warning causing build failure with -Werror.
+Is -Werror standard or added through a conf option?
+>
+> If yes, I'll happily replace my patch with this one :).
+Regards,
+Jonathan
 
