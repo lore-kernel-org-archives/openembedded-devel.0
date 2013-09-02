@@ -1,31 +1,26 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A9376BEEB;
-	Mon,  2 Sep 2013 21:39:09 +0000 (UTC)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r82Ld7j8024510;
-	Mon, 2 Sep 2013 16:39:07 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r82Ld7Ox027459;
-	Mon, 2 Sep 2013 16:39:07 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 2 Sep 2013 16:39:07 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r82Ld6UR003191;
-	Mon, 2 Sep 2013 16:39:07 -0500
-Date: Mon, 2 Sep 2013 17:39:06 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20130902213906.GA20096@edge>
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 68C9D6BE11;
+	Mon,  2 Sep 2013 21:41:55 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009))
+	with ESMTPA id <0MSI00CFVPLG7B50@vms173005.mailsrvcs.net>; Mon,
+	02 Sep 2013 16:41:50 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 030F920088; Mon,
+	02 Sep 2013 17:41:38 -0400 (EDT)
+Date: Mon, 02 Sep 2013 17:41:38 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-id: <20130902214138.GA30776@denix.org>
 References: <5772089.rktQrocuuR@helios>
-MIME-Version: 1.0
-In-Reply-To: <5772089.rktQrocuuR@helios>
+MIME-version: 1.0
+In-reply-to: <5772089.rktQrocuuR@helios>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: Heads up: _remove in recipe namespace - check your layers
+Subject: Re: [OE-core] Heads up: _remove in recipe namespace - check your layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,9 +34,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2013 21:39:11 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Sep 2013 21:41:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
 On Mon, Sep 02, 2013 at 10:54:20AM +0100, Paul Eggleton wrote:
 > Hi all,
@@ -63,10 +58,10 @@ On Mon, Sep 02, 2013 at 10:54:20AM +0100, Paul Eggleton wrote:
 
 Paul,
 
-Thanks for the heads up! While meta-arago is currently based on Dylan, I've 
-made the necessary change in my layer so it will be ready for the master. 
+Thanks for the heads up! While meta-arago is currently based on Dylan, I've
+made the necessary change in my layer so it will be ready for the master.
 Thanks.
 
--- 
+--
 Denys
 
