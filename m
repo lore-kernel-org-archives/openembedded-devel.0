@@ -1,26 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 68C9D6BE11;
-	Mon,  2 Sep 2013 21:41:55 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0MSI00CFVPLG7B50@vms173005.mailsrvcs.net>; Mon,
-	02 Sep 2013 16:41:50 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 030F920088; Mon,
-	02 Sep 2013 17:41:38 -0400 (EDT)
-Date: Mon, 02 Sep 2013 17:41:38 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-id: <20130902214138.GA30776@denix.org>
-References: <5772089.rktQrocuuR@helios>
-MIME-version: 1.0
-In-reply-to: <5772089.rktQrocuuR@helios>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [OE-core] Heads up: _remove in recipe namespace - check your layers
+Return-Path: <cazfi74@gmail.com>
+Received: from mail-vb0-f42.google.com (mail-vb0-f42.google.com
+	[209.85.212.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 213B66BEF8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Sep 2013 23:38:21 +0000 (UTC)
+Received: by mail-vb0-f42.google.com with SMTP id e12so3559583vbg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Sep 2013 16:38:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=IRGQ2+ET+WOTWdEmKsntTgzT9qsBvRBgC8er5w9e9Y0=;
+	b=UzvSLORj5aBf4tQeT7fxWatvnSj84GzIDbWPherTQIkNRYo9fn8Oqhh/H9wa+GibLT
+	m3/fK0Z8wNa5tgBqQ/v/rQxkOszEGuiVLuOuMGb8zzyZK6GEqyQ5nnDxFfk2eooWh/CM
+	Pa+ktEYu11Hjun7GOnjutsMh/xK3OiE0v3TADazTZMvUXdNNKs9KnrLEJUwW+dSydioV
+	Unro4UvABEGmDSDJ+Y2/cT8FsgAx3gSTH9YaIweAp0yx0VBJOt/t6dWuO+UxEVhsytwt
+	tUzgic0FDx9rIay2pf4WLcq2/2CnGHQJq2N3eh3VFgt3ISrRz6WMuH++SgE8LuGyunAi
+	o9rA==
+MIME-Version: 1.0
+X-Received: by 10.52.119.228 with SMTP id kx4mr316043vdb.12.1378165100849;
+	Mon, 02 Sep 2013 16:38:20 -0700 (PDT)
+Received: by 10.58.86.69 with HTTP; Mon, 2 Sep 2013 16:38:20 -0700 (PDT)
+In-Reply-To: <20130829182913.GQ3544@jama>
+References: <cover.1377791377.git.Martin.Jansa@gmail.com>
+	<ce667a200941cb8764ff7ce563650571fc3b3378.1377791377.git.Martin.Jansa@gmail.com>
+	<CAF6bG8e1DwCb-59==JnD5jgwWbND2SRiSo=WPXC-673jvLQ00Q@mail.gmail.com>
+	<20130829182913.GQ3544@jama>
+Date: Tue, 3 Sep 2013 02:38:20 +0300
+Message-ID: <CAF6bG8cNn0YOyDMiceqnYu98+sSFNTm52UGXFV8qNEW=dWd-DQ@mail.gmail.com>
+From: Marko Lindqvist <cazfi74@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [WIP][PATCH 02/66] libmikmod: upgrade to 3.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2013 21:41:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 02 Sep 2013 23:38:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Sep 02, 2013 at 10:54:20AM +0100, Paul Eggleton wrote:
-> Hi all,
-> 
-> With the recent addition of a _remove operator into BitBake in master [1] any 
-> use of _remove_ within a name or _remove at the end of a name within recipe 
-> namespace (i.e. function and variable names) needs to be changed to avoid 
-> unexpected behaviour. This change is now in master and will be in the upcoming 
-> release. Please check the layers you maintain and change any instances of 
-> these to avoid the use of _remove. You can use the following command to find 
-> these (of course ignoring anything that's not in a recipe, bbclass, inc file 
-> etc.):
-> 
->   git grep _remove[^a-zA-Z]
-> 
-> In particular I've checked a number of layers that I have fetched locally, and 
-> references exist in meta-arago-distro and meta-angstrom, so these will need to 
-> be fixed as soon as possible.
+On 29 August 2013 21:29, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Aug 29, 2013 at 07:27:54PM +0300, Marko Lindqvist wrote:
+>> On 29 August 2013 18:50, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > * 3.3 is only beta
+>> > * 3.1.12 was failing to build with texinfo-5, see
+>> >   http://sourceforge.net/p/mikmod/mercurial/ci/1fd17189f82561a3a0e343aef05e5cf0b39b8f26/
+>>
+>>  As libSDL-mixer dependency, and thus recursive dependency for many
+>> recipes in meta-games, this is important for me. In my local tree I've
+>> solved the build issue by simply patching doc building part away. Let
+>> me know if you want that patch (say, to go in to stable branch instead
+>> of full version upgrade)
+>
+> I was thinking about it, but if you confirm that 3.2.0 doesn't break any
+> of your games I'm fine with it.
 
-Paul,
+ Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 
-Thanks for the heads up! While meta-arago is currently based on Dylan, I've
-made the necessary change in my layer so it will be ready for the master.
-Thanks.
 
---
-Denys
+ - ML
 
