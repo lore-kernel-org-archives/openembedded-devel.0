@@ -1,38 +1,26 @@
-Return-Path: <lpapp@archlinux.us>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 42B976BC15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2013 08:32:56 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id x12so3428719wgg.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2013 01:32:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=KOx4A1WHbHWP5aH5WbJwrICfLkED1d2BRAclbHRARNs=;
-	b=ffPE8DsI+QDsp+fG4MkVlwTjfaw9drgpuw17ZUxV9+3UtnrSZGxUhatANhiFWg9ame
-	PSHgLoXZhYjb0uwhKBZVARWiM7GkFHuL7lV0J5aINy8H9XAo9NRDylxjmjMkcHKY8v2X
-	Re6v4R/9eRUeeKeHjHL1NdBbQ1AHjwW9TBxJZiEViljfsyN5siiIbDaLxn8fVyf88Fkz
-	LigcB2uZlzy5U7XcEiZTLXPKENOemFz3hGD93Z8sFvFEGvFUnTllpR2Som7xse6UydJl
-	7pOIRaYYpf8D5s6OF3YCkOQrg5Ggl54ccyG+DrigeoHZCxh/nCnLEt5X8qqpfCI8jEVy
-	be+A==
-X-Gm-Message-State: ALoCoQnaWbZRbHyjgsZF9x9iyjN5q2mwmTpl5Uf8QqijcgR7Et+6avzYjkrXv+FtYnLy65QcdlVy
-X-Received: by 10.180.183.206 with SMTP id eo14mr12564197wic.33.1378110775883; 
-	Mon, 02 Sep 2013 01:32:55 -0700 (PDT)
-Received: from archlinux.us (cpc11-cmbg15-2-0-cust30.5-4.cable.virginmedia.com.
-	[86.30.245.31])
-	by mx.google.com with ESMTPSA id i12sm15902573wiw.3.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 02 Sep 2013 01:32:55 -0700 (PDT)
-Sender: Laszlo Papp <lpapp@archlinux.us>
-Received: by archlinux.us (sSMTP sendmail emulation);
-	Mon, 02 Sep 2013 09:33:00 +0100
-From: Laszlo Papp <lpapp@kde.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Sep 2013 09:20:51 +0100
-Message-Id: <1378110051-8976-1-git-send-email-lpapp@kde.org>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-networking][PATCH] openflow: Add latest from git
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A0D66BC88;
+	Mon,  2 Sep 2013 09:54:23 +0000 (UTC)
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga101.ch.intel.com with ESMTP; 02 Sep 2013 02:54:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.89,1006,1367996400"; d="scan'208";a="289793083"
+Received: from unknown (HELO helios.localnet) ([10.252.123.85])
+	by AZSMGA002.ch.intel.com with ESMTP; 02 Sep 2013 02:54:21 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>, Chase Maupin <chase.maupin@ti.com>,
+	Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 02 Sep 2013 10:54:20 +0100
+Message-ID: <5772089.rktQrocuuR@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-27-generic; KDE/4.10.5; i686; ; )
+X-PRIORITY: 2 (High)
+Priority: urgent
+MIME-Version: 1.0
+Subject: Heads up: _remove in recipe namespace - check your layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,57 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2013 08:32:56 -0000
+X-List-Received-Date: Mon, 02 Sep 2013 09:54:25 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-1) The version in meta-virtualization is quite old. It is basically from 2009,
-and a lot of things has changed since then.
+Hi all,
 
-2) More importantly, this software is more like for networking rather than
-virtualization, so I think it was misplaced.
----
- .../recipes-support/openflow/openflow_1.0.bb       | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-support/openflow/openflow_1.0.bb
+With the recent addition of a _remove operator into BitBake in master [1] any 
+use of _remove_ within a name or _remove at the end of a name within recipe 
+namespace (i.e. function and variable names) needs to be changed to avoid 
+unexpected behaviour. This change is now in master and will be in the upcoming 
+release. Please check the layers you maintain and change any instances of 
+these to avoid the use of _remove. You can use the following command to find 
+these (of course ignoring anything that's not in a recipe, bbclass, inc file 
+etc.):
 
-diff --git a/meta-networking/recipes-support/openflow/openflow_1.0.bb b/meta-networking/recipes-support/openflow/openflow_1.0.bb
-new file mode 100644
-index 0000000..eb7770e
---- /dev/null
-+++ b/meta-networking/recipes-support/openflow/openflow_1.0.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "OpenFlow"
-+DESCRIPTION = "Open standard that enables researchers to run experimental protocols in the campus networks"
-+HOMEPAGE = "http://www.openflow.org"
-+SECTION = "networking"
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e870c934e2c3d6ccf085fd7cf0a1e2e2"
-+
-+SRCREV = "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
-+PV = "1.0+git${SRCPV}"
-+SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git"
-+
-+DEPENDS = "virtual/libc"
-+
-+EXTRA_OECONF += "KARCH=${TARGET_ARCH}"
-+
-+PACKAGECONFIG ??= "libssl"
-+PACKAGECONFIG[libssl] = "--enable-ssl,--disable-ssl, openssl, libssl"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools
-+
-+do_configure() {
-+    ./boot.sh
-+    oe_runconf
-+}
-+
-+do_install_append() {
-+	# Remove /var/run as it is created on startup
-+    rm -rf ${D}${localstatedir}/run
-+}
+  git grep _remove[^a-zA-Z]
+
+In particular I've checked a number of layers that I have fetched locally, and 
+references exist in meta-arago-distro and meta-angstrom, so these will need to 
+be fixed as soon as possible.
+
+Cheers,
+Paul
+
+[1] 
+http://cgit.openembedded.org/bitbake/commit/?id=9c91948e10df278dad4832487fa56888cd58d187
+
 -- 
-1.8.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
