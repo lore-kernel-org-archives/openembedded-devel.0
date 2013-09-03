@@ -1,35 +1,32 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-vb0-f42.google.com (mail-vb0-f42.google.com
-	[209.85.212.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 213B66BEF8
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E4B06BEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Sep 2013 23:38:21 +0000 (UTC)
-Received: by mail-vb0-f42.google.com with SMTP id e12so3559583vbg.1
+	Tue,  3 Sep 2013 01:56:51 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id el20so4157206lab.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2013 16:38:21 -0700 (PDT)
+	Mon, 02 Sep 2013 18:56:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=IRGQ2+ET+WOTWdEmKsntTgzT9qsBvRBgC8er5w9e9Y0=;
-	b=UzvSLORj5aBf4tQeT7fxWatvnSj84GzIDbWPherTQIkNRYo9fn8Oqhh/H9wa+GibLT
-	m3/fK0Z8wNa5tgBqQ/v/rQxkOszEGuiVLuOuMGb8zzyZK6GEqyQ5nnDxFfk2eooWh/CM
-	Pa+ktEYu11Hjun7GOnjutsMh/xK3OiE0v3TADazTZMvUXdNNKs9KnrLEJUwW+dSydioV
-	Unro4UvABEGmDSDJ+Y2/cT8FsgAx3gSTH9YaIweAp0yx0VBJOt/t6dWuO+UxEVhsytwt
-	tUzgic0FDx9rIay2pf4WLcq2/2CnGHQJq2N3eh3VFgt3ISrRz6WMuH++SgE8LuGyunAi
-	o9rA==
+	:content-type; bh=NQLTb6SwgIE8vQpaICv11YefdQHmkLmsCdeDV7uhSqA=;
+	b=cLc89sKyvqu82y/NStHCvmHU+MNUE1MUuubbaaRD8DE1XKJOjE04+bD+GN6ZxV+AhW
+	h3yqJMn6VQauFxtBul8gigvbt9R3bDWcKQZ/PvjVBnatH2wLXRQ3CFOkXmnAA25hGWpZ
+	iy2QYUmK2KO5jkhOCGhfMbf+/X8JTRZO5DxFdNKLr6LYgTyvSLk0xlxV8LybAsYnlXI1
+	rXdHrwI+SSVUorT+Gjp1YyiQLIqdvFzGLaaa+3YEFjZY7CX4lxxChIQYvLfNp4tXgIkY
+	z8dDHAZP2H5pdnt+b2wKoL6W52hpzf1nBykPvrxsB7+1/xH6LFk4niIkMOpmkjDHoYU/
+	q9Cw==
 MIME-Version: 1.0
-X-Received: by 10.52.119.228 with SMTP id kx4mr316043vdb.12.1378165100849;
-	Mon, 02 Sep 2013 16:38:20 -0700 (PDT)
-Received: by 10.58.86.69 with HTTP; Mon, 2 Sep 2013 16:38:20 -0700 (PDT)
-In-Reply-To: <20130829182913.GQ3544@jama>
-References: <cover.1377791377.git.Martin.Jansa@gmail.com>
-	<ce667a200941cb8764ff7ce563650571fc3b3378.1377791377.git.Martin.Jansa@gmail.com>
-	<CAF6bG8e1DwCb-59==JnD5jgwWbND2SRiSo=WPXC-673jvLQ00Q@mail.gmail.com>
-	<20130829182913.GQ3544@jama>
-Date: Tue, 3 Sep 2013 02:38:20 +0300
-Message-ID: <CAF6bG8cNn0YOyDMiceqnYu98+sSFNTm52UGXFV8qNEW=dWd-DQ@mail.gmail.com>
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [WIP][PATCH 02/66] libmikmod: upgrade to 3.2.0
+X-Received: by 10.152.21.225 with SMTP id y1mr24260793lae.18.1378173410464;
+	Mon, 02 Sep 2013 18:56:50 -0700 (PDT)
+Received: by 10.112.12.103 with HTTP; Mon, 2 Sep 2013 18:56:50 -0700 (PDT)
+In-Reply-To: <1378110051-8976-1-git-send-email-lpapp@kde.org>
+References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
+Date: Mon, 2 Sep 2013 21:56:50 -0400
+Message-ID: <CADkTA4NZ-M6XBYx2bBBW_QtMtsUnDNdyYggr1Wa=6Qu33EHvPQ@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +40,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2013 23:38:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Sep 2013 01:56:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 29 August 2013 21:29, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Aug 29, 2013 at 07:27:54PM +0300, Marko Lindqvist wrote:
->> On 29 August 2013 18:50, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > * 3.3 is only beta
->> > * 3.1.12 was failing to build with texinfo-5, see
->> >   http://sourceforge.net/p/mikmod/mercurial/ci/1fd17189f82561a3a0e343aef05e5cf0b39b8f26/
->>
->>  As libSDL-mixer dependency, and thus recursive dependency for many
->> recipes in meta-games, this is important for me. In my local tree I've
->> solved the build issue by simply patching doc building part away. Let
->> me know if you want that patch (say, to go in to stable branch instead
->> of full version upgrade)
+On Mon, Sep 2, 2013 at 4:20 AM, Laszlo Papp <lpapp@kde.org> wrote:
+> 1) The version in meta-virtualization is quite old. It is basically from 2009,
+> and a lot of things has changed since then.
+
+And that was on purpose, there are some tight bindings to SDN and hence why
+it is in meta-virtualization, and not a valid reason to not contact the layer
+maintainers directly, have a discussion and not set the update to the current
+layer.
+
+If you would have asked, you would have been told that updates are pending
+with bindings that need to stay in lock step with other parts of meta-virt.
+
 >
-> I was thinking about it, but if you confirm that 3.2.0 doesn't break any
-> of your games I'm fine with it.
+> 2) More importantly, this software is more like for networking rather than
+> virtualization, so I think it was misplaced.
 
- Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+I disagree, so for now meta-virt is going to keep it's variants of the
+recipes and
+we need to have an actual discussion to figure out the best way forward.
+
+Cheers,
+
+Bruce
+
+> ---
+>  .../recipes-support/openflow/openflow_1.0.bb       | 32 ++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/openflow/openflow_1.0.bb
+>
+> diff --git a/meta-networking/recipes-support/openflow/openflow_1.0.bb b/meta-networking/recipes-support/openflow/openflow_1.0.bb
+> new file mode 100644
+> index 0000000..eb7770e
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/openflow/openflow_1.0.bb
+> @@ -0,0 +1,32 @@
+> +SUMMARY = "OpenFlow"
+> +DESCRIPTION = "Open standard that enables researchers to run experimental protocols in the campus networks"
+> +HOMEPAGE = "http://www.openflow.org"
+> +SECTION = "networking"
+> +LICENSE = "GPLv2"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=e870c934e2c3d6ccf085fd7cf0a1e2e2"
+> +
+> +SRCREV = "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
+> +PV = "1.0+git${SRCPV}"
+> +SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git"
+> +
+> +DEPENDS = "virtual/libc"
+> +
+> +EXTRA_OECONF += "KARCH=${TARGET_ARCH}"
+> +
+> +PACKAGECONFIG ??= "libssl"
+> +PACKAGECONFIG[libssl] = "--enable-ssl,--disable-ssl, openssl, libssl"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit autotools
+> +
+> +do_configure() {
+> +    ./boot.sh
+> +    oe_runconf
+> +}
+> +
+> +do_install_append() {
+> +       # Remove /var/run as it is created on startup
+> +    rm -rf ${D}${localstatedir}/run
+> +}
+> --
+> 1.8.4
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
- - ML
+
+-- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
