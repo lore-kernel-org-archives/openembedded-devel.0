@@ -1,18 +1,48 @@
-Return-Path: <erp@movis.dk>
-Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B7A66BEF5
+Return-Path: <olof.johansson@axis.com>
+Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.12])
+	by mail.openembedded.org (Postfix) with ESMTP id DEECA6C018
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 14:58:57 +0000 (UTC)
-Received: (qmail 25526 invoked by uid 89); 3 Sep 2013 14:58:47 -0000
-Received: from unknown (HELO sabrina.webspeed.dk)
-	(erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 3 Sep 2013 14:58:47 -0000
-From: Emil Petersen <erp@movis.dk>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2013 16:58:24 +0200
-Message-Id: <1378220304-12867-1-git-send-email-erp@movis.dk>
-X-Mailer: git-send-email 1.8.4.rc3
-Subject: [PATCH] libtest-perl_1.26: added
+	Tue,  3 Sep 2013 15:09:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by anubis.se.axis.com (Postfix) with ESMTP id 9B04D19D74
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:36 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
+Received: from anubis.se.axis.com ([127.0.0.1])
+	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id iV4twXBiPWVi
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:36 +0200 (CEST)
+Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
+	by anubis.se.axis.com (Postfix) with ESMTP id 6DB6319D0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
+Received: from boulder.se.axis.com (localhost [127.0.0.1])
+	by postfix.imss71 (Postfix) with ESMTP id 50F955A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
+Received: from seth.se.axis.com (seth.se.axis.com [10.0.2.172])
+	by boulder.se.axis.com (Postfix) with ESMTP id 4610846D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
+Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
+	by seth.se.axis.com (Postfix) with ESMTP id 444203E06F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
+Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
+	Microsoft SMTP Server (TLS) id 8.2.255.0; Tue, 3 Sep 2013 17:09:27 +0200
+Date: Tue, 3 Sep 2013 17:09:25 +0200
+From: Olof Johansson <olof.johansson@axis.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20130903150925.GC12638@axis.com>
+References: <1378219473-12551-1-git-send-email-erp@movis.dk>
+MIME-Version: 1.0
+In-Reply-To: <1378219473-12551-1-git-send-email-erp@movis.dk>
+Thread-Topic: [oe] [PATCH] libtest-harness-perl: added
+Accept-Language: en-US, sv-SE
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] libtest-harness-perl: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,44 +56,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 14:58:58 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 15:09:42 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+Content-Language: en-US
 
-Test recipe added
+Awesome, thanks for your efforts.
 
-Signed-off-by: Emil Petersen <erp@movis.dk>
----
- .../recipes-perl/libtest-perl/libtest-perl_1.26.bb  | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libtest-perl/libtest-perl_1.26.bb
 
-diff --git a/meta-perl/recipes-perl/libtest-perl/libtest-perl_1.26.bb b/meta-perl/recipes-perl/libtest-perl/libtest-perl_1.26.bb
-new file mode 100644
-index 0000000..5596ffe
---- /dev/null
-+++ b/meta-perl/recipes-perl/libtest-perl/libtest-perl_1.26.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Test - provides a simple framework for writing test scripts"
-+AUTHOR = "Jesse Vincent <jesse+cpan@fsck.com>"
-+HOMEPAGE = "https://metacpan.org/module/Test"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=82da57b253d95f830de58fae58c3af4e"
-+
-+RDEPEND_${PN} = "libfile-spec-perl \
-+                 libtest-harness-perl \
-+                "
-+
-+SRC_URI = "http://cpan.metacpan.org/authors/id/J/JE/JESSE/Test-${PV}.tar.gz"
-+SRC_URI[md5sum] = "6ec6583c34be3770edd466876546fb50"
-+SRC_URI[sha256sum] = "f7701bd28e05e7f82fe9a181bbab38f53fa6aeae48d2a810da74d1b981d4f392"
-+
-+S = "${WORKDIR}/Test-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
-+
+On 13-09-03 16:44 +0200, Emil Petersen wrote:
+> +LICENSE = "GPLv1+"
+
+This is actually artistic or GPLv1, just like in the other
+recipes you posted.
+
+LICENSE = "Artistic-1.0 | GPL-1.0+"
+
+From Test::Harness POD:
+> This module is free software; you can redistribute it and/or
+> modify it under the same terms as Perl itself. See perlartistic.
+
+Regards,
 -- 
-1.8.4.rc3
-
+olofjn
 
