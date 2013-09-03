@@ -1,18 +1,18 @@
 Return-Path: <erp@movis.dk>
 Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 102BA6C002
+	by mail.openembedded.org (Postfix) with ESMTP id DE7496C044
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:40:01 +0000 (UTC)
-Received: (qmail 25868 invoked by uid 89); 3 Sep 2013 15:39:51 -0000
+	Tue,  3 Sep 2013 15:41:43 +0000 (UTC)
+Received: (qmail 25921 invoked by uid 89); 3 Sep 2013 15:41:33 -0000
 Received: from unknown (HELO sabrina.webspeed.dk)
 	(erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 3 Sep 2013 15:39:51 -0000
+	by 0 with ESMTPA; 3 Sep 2013 15:41:33 -0000
 From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2013 17:39:28 +0200
-Message-Id: <1378222768-13941-1-git-send-email-erp@movis.dk>
+Date: Tue,  3 Sep 2013 17:41:10 +0200
+Message-Id: <1378222870-14027-1-git-send-email-erp@movis.dk>
 X-Mailer: git-send-email 1.8.4.rc3
-Subject: [meta-perl][PATCH] libencode-perl_2.52: added
+Subject: [meta-perl][PATCH] libencode-locale-perl_1.03: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,67 +26,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:40:02 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 15:41:44 -0000
 
-Encode recipe added
+Encode::Locale added
 
 Signed-off-by: Emil Petersen <erp@movis.dk>
 ---
- .../libencode-perl/libencode-perl_2.52.bb          | 49 ++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
+ .../libencode-locale-perl_1.03.bb                    | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libencode-locale-perl/libencode-locale-perl_1.03.bb
 
-diff --git a/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb b/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
+diff --git a/meta-perl/recipes-perl/libencode-locale-perl/libencode-locale-perl_1.03.bb b/meta-perl/recipes-perl/libencode-locale-perl/libencode-locale-perl_1.03.bb
 new file mode 100644
-index 0000000..b2e261a
+index 0000000..1919488
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
-@@ -0,0 +1,49 @@
-+SUMMARY = "Encode - character encodings"
-+DESCRIPTION = "The \"Encode\" module provides the interfaces between Perl's strings and the rest of the system.  Perl strings are \
-+       sequences of characters. \ 
-+       See \"perldoc Encode\" for the rest of the story"
-+AUTHOR = "Dan Kogai <dankogai+cpan@gmail.com>"
-+HOMEPAGE = "https://metacpan.org/release/Encode"
-+SECTION = "lib"
++++ b/meta-perl/recipes-perl/libencode-locale-perl/libencode-locale-perl_1.03.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Encode::Locale - Determine the locale encoding"
++AUTHOR = "Gisle Aas <gisle@activestate.com>"
++HOMEPAGE = "https://metacpan.org/module/Encode::Locale"
++SECTION = "libs"
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://META.json;md5=f335275cdfe14e39d59aee6a883b78cd"
++LIC_FILES_CHKSUM = "file://README;md5=14e8006c2134045725fd81292a323d24"
 +
-+RPROVIDES_${PN} += "libencode-perl \
-+                    libencode-alias-perl \
-+                    libencode-byte-perl \
-+                    libencode-cjkconstants-perl \
-+                    libencode-cn-perl \
-+                    libencode-cn-hz-perl \
-+                    libencode-config-perl \
-+                    libencode-ebcdic-perl \
-+                    libencode-encoder-perl \
-+                    libencode-encoding-perl \
-+                    libencode-gsm0338-perl \
-+                    libencode-guess-perl \
-+                    libencode-jp-perl \
-+                    libencode-jp-h2z-perl \
-+                    libencode-jp-jis7-perl \
-+                    libencode-kr-perl \
-+                    libencode-kr-2022_kr-perl \
-+                    libencode-mime-header-perl \
-+                    libencode-mime-name-perl \
-+                    libencode-symbol-perl \
-+                    libencode-tw-perl \
-+                    libencode-unicode--perl \
-+                    libencode-unicode-utf7-perl \
-+                    libencoding-perl \
-+                    libencode-internal-perl \
-+                    libencode-mime-header-iso_2022_jp-perl \
-+                    libencode-utf8-perl \
-+                    libencode-utf_ebcdic-perl \
-+                    "
-+ 
-+SRC_URI = "http://cpan.metacpan.org/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
-+SRC_URI[md5sum] = "bf26ef62725b1938181d71d1127f22d8"
-+SRC_URI[sha256sum] = "2411a2027195b684065339abb1286dd540ca3ca32d546bd682c4964579ad3c60"
++RDEPENDS_${PN} = "libencode-perl \
++                 libencode-alias-perl \
++                 "
 +
-+S = "${WORKDIR}/Encode-${PV}"
++SRC_URI = "http://cpan.metacpan.org/authors/id/G/GA/GAAS/Encode-Locale-${PV}.tar.gz"
++SRC_URI[md5sum] = "de8422d068634e7c1068dab4e18b452f"
++SRC_URI[sha256sum] = "f76337e0933225914111fcc3319ff4db359b1abfd1aa56dff2df5378db0e2d55"
++
++S = "${WORKDIR}/Encode-Locale-${PV}"
 +
 +inherit cpan
 +
