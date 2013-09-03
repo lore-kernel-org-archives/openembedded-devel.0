@@ -1,48 +1,18 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.12])
-	by mail.openembedded.org (Postfix) with ESMTP id DEECA6C018
+Return-Path: <erp@movis.dk>
+Received: from clobix.com (mail.clobix.com [54.229.118.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C550C6C018
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:09:40 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by anubis.se.axis.com (Postfix) with ESMTP id 9B04D19D74
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:36 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
-Received: from anubis.se.axis.com ([127.0.0.1])
-	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id iV4twXBiPWVi
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:36 +0200 (CEST)
-Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
-	by anubis.se.axis.com (Postfix) with ESMTP id 6DB6319D0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
-Received: from boulder.se.axis.com (localhost [127.0.0.1])
-	by postfix.imss71 (Postfix) with ESMTP id 50F955A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
-Received: from seth.se.axis.com (seth.se.axis.com [10.0.2.172])
-	by boulder.se.axis.com (Postfix) with ESMTP id 4610846D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
-Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
-	by seth.se.axis.com (Postfix) with ESMTP id 444203E06F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:09:27 +0200 (CEST)
-Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
-	Microsoft SMTP Server (TLS) id 8.2.255.0; Tue, 3 Sep 2013 17:09:27 +0200
-Date: Tue, 3 Sep 2013 17:09:25 +0200
-From: Olof Johansson <olof.johansson@axis.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20130903150925.GC12638@axis.com>
-References: <1378219473-12551-1-git-send-email-erp@movis.dk>
-MIME-Version: 1.0
-In-Reply-To: <1378219473-12551-1-git-send-email-erp@movis.dk>
-Thread-Topic: [oe] [PATCH] libtest-harness-perl: added
-Accept-Language: en-US, sv-SE
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] libtest-harness-perl: added
+	Tue,  3 Sep 2013 15:10:38 +0000 (UTC)
+Received: (qmail 25621 invoked by uid 89); 3 Sep 2013 15:10:28 -0000
+Received: from unknown (HELO sabrina.webspeed.dk)
+	(erp@movis.dk@::ffff:83.93.56.101)
+	by 0 with ESMTPA; 3 Sep 2013 15:10:28 -0000
+From: Emil Petersen <erp@movis.dk>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Sep 2013 17:10:04 +0200
+Message-Id: <1378221004-13038-1-git-send-email-erp@movis.dk>
+X-Mailer: git-send-email 1.8.4.rc3
+Subject: [meta-perl] libtest-harness-perl_3.28: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +26,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:09:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-Content-Language: en-US
+X-List-Received-Date: Tue, 03 Sep 2013 15:10:39 -0000
 
-Awesome, thanks for your efforts.
+Added Test::Harness
 
+Signed-off-by: Emil Petersen <erp@movis.dk>
+---
+ .../libtest-harness-perl_3.28.bb                   | 53 +++++++++++++++++++++-
+ 1 file changed, 51 insertions(+), 2 deletions(-)
 
-On 13-09-03 16:44 +0200, Emil Petersen wrote:
-> +LICENSE = "GPLv1+"
-
-This is actually artistic or GPLv1, just like in the other
-recipes you posted.
-
-LICENSE = "Artistic-1.0 | GPL-1.0+"
-
-From Test::Harness POD:
-> This module is free software; you can redistribute it and/or
-> modify it under the same terms as Perl itself. See perlartistic.
-
-Regards,
+diff --git a/meta-perl/recipes-perl/libtest-harness-perl/libtest-harness-perl_3.28.bb b/meta-perl/recipes-perl/libtest-harness-perl/libtest-harness-perl_3.28.bb
+index 881f5a6..62e6386 100644
+--- a/meta-perl/recipes-perl/libtest-harness-perl/libtest-harness-perl_3.28.bb
++++ b/meta-perl/recipes-perl/libtest-harness-perl/libtest-harness-perl_3.28.bb
+@@ -1,10 +1,59 @@
+ SUMMARY = "Test::Harness - Run Perl standard test scripts with statistics"
+ AUTHOR = "Curis \"Ovid\" Poe <ovid@cpan.org>"
+ HOMEPAGE = "https://metacpan.org/module/Test::Harness"
+-SECTION = "devtools"
+-LICENSE = "GPLv1+"
++SECTION = "libs"
++LICENSE = "GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;md5=37947a7c4fbd4a63c41d1bfa385e0c1e"
+ 
++RPROVIDES_${PN} = "libapp-prove-perl \
++                  libapp-prove-state-perl \
++                  libapp-prove-state-result-perl \
++                  libapp-prove-state-result-test-perl \
++                  libtap-base-perl \
++                  libtap-formatter-base-perl \
++                  libtap-formatter-color-perl \
++                  libtap-formatter-console-perl \
++                  libtap-formatter-console-parallelsession-perl \                  
++                  libtap-formatter-console-session-perl \
++                  libtap-formatter-file-perl \
++                  libtap-formatter-file-session-perl \
++                  libtap-formatter-session-perl \
++                  libtap-harness-perl \
++                  libtap-object-perl \
++                  libtap-parser-perl \
++                  libtap-parser-aggregator-perl \
++                  libtap-parser-grammar-perl \
++                  libtap-parser-iterator-perl \
++                  libtap-parser-iterator-array-perl \
++                  libtap-parser-iterator-process-perl \
++                  libtap-parser-iterator-stream-perl \
++                  libtap-parser-iteratorfactory-perl \
++                  libtap-parser-multiplexer-perl \
++                  libtap-parser-result-perl \
++                  libtap-parsser-result-bailout-perl \
++                  libtap-parser-result-comment-perl \
++                  libtap-parser-result-plan-perl \
++                  libtap-parser-result-pragma-perl \
++                  libtap-parser-result-test-perl \
++                  libtap-parser-result-unknown-perl \
++                  libtap-parser-result-version-perl \
++                  libtap-parser-result-yaml-perl \
++                  libtap-parser-resultfactory-perl \
++                  libtap-parser-scheduler-perl \
++                  libtap-parser-scheduler-job-perl \
++                  libtap-parser-scheduler-spinner-perl \
++                  libtap-parser-source-perl \
++                  libtap-parser-sourcehandler-perl \
++                  libtap-parser-sourcehandler-executable-perl \
++                  libtap-parser-sourcehandler-file-perl \
++                  libtap-parser-sourcehandler-handle-perl \
++                  libtap-parser-sourcehandler-perl-perl \
++                  libtap-parser-sourcehandler-rawtap-perl \
++                  libtap-parser-utils-perl \
++                  libtap-parser-yamlish-reader-perl \
++                  libtap-parser-yamlish-writer-perl \
++                  "
++                  
+ SRC_URI = "http://cpan.metacpan.org/authors/id/O/OV/OVID/Test-Harness-${PV}.tar.gz"
+ SRC_URI[md5sum] = "e71faf73830f249e2eb569a52362c106"
+ SRC_URI[sha256sum] = "209d538a7809935967c2c148a36c75a2959a3c3432e1d406288662632870a07c"
 -- 
-olofjn
+1.8.4.rc3
+
 
