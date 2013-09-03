@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
-	[209.85.215.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 184866BD11
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CBF086BD11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:53:21 +0000 (UTC)
-Received: by mail-ea0-f171.google.com with SMTP id n15so3171153ead.30
+	Tue,  3 Sep 2013 17:54:09 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id a15so3189973eae.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Sep 2013 10:53:22 -0700 (PDT)
+	Tue, 03 Sep 2013 10:54:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JmDoXvUMGl3aQtaYgWzPMKgq21o8YWlwoOHyFKAgtI8=;
-	b=i/3w6SNVjwrSmeKRqhCdlaOWNq/5bT7FtkwIp+HhcvzfxzZbkV69pgSUNM49JO8Jzq
-	72Yg6a8TeN3l2XyjYklVpcz1SWXcSun83UwvxsCIgyzjqKD4C+luGU2Uk+IB0hFEHq35
-	ws9iRMezu9G8jBmDInTDhvFyFo7J2q/45Yo1diyao150a96v4uV+B2vyNqluvUhOd5Lt
-	j2VnIoiWRmYZ9M7+4aMAzG/R4wEd5loLJVWQwbrRqppXZyumMGYUFHOLtT61onsgwb48
-	8L4Eu81wSiWNPD52qRUyX2KodKOYZJHkqCi780oeQEvk+r3Q6ch2xwYWkg3ytPSsyGuW
-	VT+w==
-X-Received: by 10.14.115.133 with SMTP id e5mr48385544eeh.27.1378230802317;
-	Tue, 03 Sep 2013 10:53:22 -0700 (PDT)
+	bh=3NoKvcR83AhyV9wH7dgFCHFe+Ew5zAEflFgz9K+lJtU=;
+	b=TND22mR3VwmR42MOaKlTWMGCCoA4PjTfOMO2WKokPc8UZAY1dgRMBENzcnWrlsYHX6
+	pB//ZJJkiiAcMj6Plf1xI/lMcKeyROTokh0PLPO77FcXLhsYKd/gBvLqZKQi+KvE7/FV
+	BQDleqZLTEdUJZApAfZf9GI3gDRM0ZQnq6pBPQGaGe87//mDA1Mo6pGGFVs3DrarNmT+
+	1xtb1iGcHlORpKsttakN+4Qfpc8NvxQ0j3SgrpcGxM6Aftj/sgPSrN4yJ8u4H7bUaAT5
+	CtKsDrRjbfAsSpr4svVBGdk0HOtEoz/Mn2ZzxLPh+KqbwZGKCQGo71tL1qttWuKWWLVl
+	WtjQ==
+X-Received: by 10.15.64.1 with SMTP id n1mr48660234eex.15.1378230850202;
+	Tue, 03 Sep 2013 10:54:10 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	bn13sm33366426eeb.11.1969.12.31.16.00.00
+	a6sm33376608eei.10.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 03 Sep 2013 10:53:22 -0700 (PDT)
-Date: Tue, 3 Sep 2013 19:54:40 +0200
+	Tue, 03 Sep 2013 10:54:09 -0700 (PDT)
+Date: Tue, 3 Sep 2013 19:55:28 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Fathi Boudra <fathi.boudra@linaro.org>
-Message-ID: <20130903175440.GB3553@jama>
-References: <1377513195-21664-1-git-send-email-fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130903175528.GC3553@jama>
+References: <1377819594-27497-1-git-send-email-andrea.adami@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1377513195-21664-1-git-send-email-fathi.boudra@linaro.org>
+In-Reply-To: <1377819594-27497-1-git-send-email-andrea.adami@gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 0/3] ACPICA updates
+Subject: Re: [meta-filesystems][PATCH] cramfs: remove, we use mkfs.cramfs from util-linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,53 +46,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 17:53:22 -0000
-X-Groupsio-MsgNum: 46045
+X-List-Received-Date: Tue, 03 Sep 2013 17:54:10 -0000
+X-Groupsio-MsgNum: 46046
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1LKvkjL3sHcu1TtY"
+	protocol="application/pgp-signature"; boundary="tqI+Z3u+9OQ7kwn0"
 Content-Disposition: inline
 
---1LKvkjL3sHcu1TtY
+--tqI+Z3u+9OQ7kwn0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 26, 2013 at 01:33:12PM +0300, Fathi Boudra wrote:
-> Fathi Boudra (3):
->   acpica: fix parallel build
->   acpica: fix recipe to be OE compliant with spacing
->   acpica: bump to version 20130823
+On Fri, Aug 30, 2013 at 01:39:54AM +0200, Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
-All 3 applied, thanks!
+Applied, thanks
 
+> ---
+>  .../recipes-filesystems/cramfs/cramfs_1.1.bb       | 29 ----------------=
+------
+>  1 file changed, 29 deletions(-)
+>  delete mode 100644 meta-filesystems/recipes-filesystems/cramfs/cramfs_1.=
+1.bb
 >=20
->  meta-oe/recipes-extended/acpica/acpica_20130626.bb | 37 ----------
->  meta-oe/recipes-extended/acpica/acpica_20130823.bb | 37 ++++++++++
->  .../acpica/files/fix-parallel-build.patch          | 80 ++++++++++++++++=
-++++++
->  3 files changed, 117 insertions(+), 37 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/acpica/acpica_20130626.bb
->  create mode 100644 meta-oe/recipes-extended/acpica/acpica_20130823.bb
->  create mode 100644 meta-oe/recipes-extended/acpica/files/fix-parallel-bu=
-ild.patch
->=20
+> diff --git a/meta-filesystems/recipes-filesystems/cramfs/cramfs_1.1.bb b/=
+meta-filesystems/recipes-filesystems/cramfs/cramfs_1.1.bb
+> deleted file mode 100644
+> index 0bca0e1..0000000
+> --- a/meta-filesystems/recipes-filesystems/cramfs/cramfs_1.1.bb
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -DESCRIPTION =3D "Builds cramfs filesystems for embedded systems"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
+833"
+> -DEPENDS =3D "zlib"
+> -
+> -PE =3D "1"
+> -
+> -SRC_URI =3D "http://sourceforge.net/projects/cramfs/files/cramfs/1.1/${B=
+PN}-${PV}.tar.gz"
+> -
+> -SRC_URI[md5sum] =3D "d3912b9f7bf745fbfea68f6a9b9de30f"
+> -SRC_URI[sha256sum] =3D "133caca2c4e7c64106555154ee0ff693f5cf5beb9421ce2e=
+b86baee997d22368"
+> -
+> -EXTRA_OEMAKE =3D "\
+> -    'CC=3D${CC}' \
+> -    'CFLAGS=3D${CFLAGS}' \
+> -    'LDFLAGS=3D${LDFLAGS}' \
+> -"
+> -
+> -do_compile_prepend() {
+> -    ln -sf GNUmakefile Makefile
+> -}
+> -
+> -do_install() {
+> -    install -d ${D}${bindir}
+> -    install mkcramfs ${D}${bindir}
+> -    install cramfsck ${D}${bindir}
+> -}
+> -
+> -BBCLASSEXTEND =3D "native"
 > --=20
-> 1.8.1.2
+> 1.8.1.5
 >=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---1LKvkjL3sHcu1TtY
+--tqI+Z3u+9OQ7kwn0
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlImImAACgkQN1Ujt2V2gBwlIACglYSoU8n9MIn2GwDRm/TDH2ss
-mS8AniCcywoDQeIsI7vS/Nn939nY0que
-=Z6o5
+iEYEARECAAYFAlImIpAACgkQN1Ujt2V2gBwSDACfdutKx5KcnFpnqFpaDQdx8vvu
+FsoAoK5+7+13xWwkDbAmNhzdmMSF7TPG
+=d4dM
 -----END PGP SIGNATURE-----
 
---1LKvkjL3sHcu1TtY--
+--tqI+Z3u+9OQ7kwn0--
