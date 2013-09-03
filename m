@@ -1,18 +1,18 @@
 Return-Path: <erp@movis.dk>
 Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B7046C018
+	by mail.openembedded.org (Postfix) with ESMTP id 102BA6C002
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:38:48 +0000 (UTC)
-Received: (qmail 25820 invoked by uid 89); 3 Sep 2013 15:38:38 -0000
+	Tue,  3 Sep 2013 15:40:01 +0000 (UTC)
+Received: (qmail 25868 invoked by uid 89); 3 Sep 2013 15:39:51 -0000
 Received: from unknown (HELO sabrina.webspeed.dk)
 	(erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 3 Sep 2013 15:38:38 -0000
+	by 0 with ESMTPA; 3 Sep 2013 15:39:51 -0000
 From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2013 17:38:11 +0200
-Message-Id: <1378222691-13852-1-git-send-email-erp@movis.dk>
+Date: Tue,  3 Sep 2013 17:39:28 +0200
+Message-Id: <1378222768-13941-1-git-send-email-erp@movis.dk>
 X-Mailer: git-send-email 1.8.4.rc3
-Subject: [meta-perl][PATCH] libdigest-md5-perl_2.53: added
+Subject: [meta-perl][PATCH] libencode-perl_2.52: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,34 +26,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:38:49 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 15:40:02 -0000
+
+Encode recipe added
 
 Signed-off-by: Emil Petersen <erp@movis.dk>
 ---
- .../libdigest-md5-perl/libdigest-md5-perl_2.53.bb      | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
+ .../libencode-perl/libencode-perl_2.52.bb          | 49 ++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
 
-diff --git a/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
+diff --git a/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb b/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
 new file mode 100644
-index 0000000..bbbaf2d
+index 0000000..b2e261a
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Digest::MD5 - Perl interface to the MD5 Algorithm"
-+AUTHOR = "Gisle Aas <gisle@activestate.com>"
-+HOMEPAGE = "https://metacpan.org/module/Digest::MD5"
-+SECTION = "libs"
++++ b/meta-perl/recipes-perl/libencode-perl/libencode-perl_2.52.bb
+@@ -0,0 +1,49 @@
++SUMMARY = "Encode - character encodings"
++DESCRIPTION = "The \"Encode\" module provides the interfaces between Perl's strings and the rest of the system.  Perl strings are \
++       sequences of characters. \ 
++       See \"perldoc Encode\" for the rest of the story"
++AUTHOR = "Dan Kogai <dankogai+cpan@gmail.com>"
++HOMEPAGE = "https://metacpan.org/release/Encode"
++SECTION = "lib"
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=2f93400875dbb56f36691d5f69f3eba5"
++LIC_FILES_CHKSUM = "file://META.json;md5=f335275cdfe14e39d59aee6a883b78cd"
 +
-+RDEPENDS_${PN} = "libdigest-base-perl"
++RPROVIDES_${PN} += "libencode-perl \
++                    libencode-alias-perl \
++                    libencode-byte-perl \
++                    libencode-cjkconstants-perl \
++                    libencode-cn-perl \
++                    libencode-cn-hz-perl \
++                    libencode-config-perl \
++                    libencode-ebcdic-perl \
++                    libencode-encoder-perl \
++                    libencode-encoding-perl \
++                    libencode-gsm0338-perl \
++                    libencode-guess-perl \
++                    libencode-jp-perl \
++                    libencode-jp-h2z-perl \
++                    libencode-jp-jis7-perl \
++                    libencode-kr-perl \
++                    libencode-kr-2022_kr-perl \
++                    libencode-mime-header-perl \
++                    libencode-mime-name-perl \
++                    libencode-symbol-perl \
++                    libencode-tw-perl \
++                    libencode-unicode--perl \
++                    libencode-unicode-utf7-perl \
++                    libencoding-perl \
++                    libencode-internal-perl \
++                    libencode-mime-header-iso_2022_jp-perl \
++                    libencode-utf8-perl \
++                    libencode-utf_ebcdic-perl \
++                    "
++ 
++SRC_URI = "http://cpan.metacpan.org/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
++SRC_URI[md5sum] = "bf26ef62725b1938181d71d1127f22d8"
++SRC_URI[sha256sum] = "2411a2027195b684065339abb1286dd540ca3ca32d546bd682c4964579ad3c60"
 +
-+SRC_URI = "http://cpan.metacpan.org/authors/id/G/GA/GAAS/Digest-MD5-${PV}.tar.gz"
-+SRC_URI[md5sum] = "affc629d05c4c7b3efe4b3b874bce528"
-+SRC_URI[sha256sum] = "cde667c0c0c8a4d819d332ba9a4cad7e9f75fc7cabd490aae405ce7bc54d5152"
-+
-+S = "${WORKDIR}/Digest-MD5-${PV}"
++S = "${WORKDIR}/Encode-${PV}"
 +
 +inherit cpan
 +
