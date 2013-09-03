@@ -1,18 +1,18 @@
 Return-Path: <erp@movis.dk>
 Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 76A1C6BF80
+	by mail.openembedded.org (Postfix) with ESMTP id 7B7046C018
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:34:09 +0000 (UTC)
-Received: (qmail 25761 invoked by uid 89); 3 Sep 2013 15:33:59 -0000
+	Tue,  3 Sep 2013 15:38:48 +0000 (UTC)
+Received: (qmail 25820 invoked by uid 89); 3 Sep 2013 15:38:38 -0000
 Received: from unknown (HELO sabrina.webspeed.dk)
 	(erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 3 Sep 2013 15:33:59 -0000
+	by 0 with ESMTPA; 3 Sep 2013 15:38:38 -0000
 From: Emil Petersen <erp@movis.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2013 17:33:35 +0200
-Message-Id: <1378222415-13643-1-git-send-email-erp@movis.dk>
+Date: Tue,  3 Sep 2013 17:38:11 +0200
+Message-Id: <1378222691-13852-1-git-send-email-erp@movis.dk>
 X-Mailer: git-send-email 1.8.4.rc3
-Subject: [meta-perl] libwww-perl_5.834: added
+Subject: [meta-perl][PATCH] libdigest-md5-perl_2.53: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,86 +26,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:34:10 -0000
-
-libwww which provides most of LWP::* added
+X-List-Received-Date: Tue, 03 Sep 2013 15:38:49 -0000
 
 Signed-off-by: Emil Petersen <erp@movis.dk>
 ---
- .../recipes-perl/libwww-perl/libwww-perl_5.834.bb  | 68 ++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
+ .../libdigest-md5-perl/libdigest-md5-perl_2.53.bb      | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
 
-diff --git a/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb b/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
+diff --git a/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
 new file mode 100644
-index 0000000..f1a77d5
+index 0000000..bbbaf2d
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
-@@ -0,0 +1,68 @@
-+SUMMARY = "libwww-perl provides a simple and consistent API to the World Wide Web"
++++ b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Digest::MD5 - Perl interface to the MD5 Algorithm"
 +AUTHOR = "Gisle Aas <gisle@activestate.com>"
-+HOMEPAGE = "https://metacpan.org/release/libwww-perl"
++HOMEPAGE = "https://metacpan.org/module/Digest::MD5"
 +SECTION = "libs"
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=b7d978c7767cb9fb392f80103af8ca0a"
++LIC_FILES_CHKSUM = "file://README;md5=2f93400875dbb56f36691d5f69f3eba5"
 +
-+RDEPENDS_${PN} += "libdigest-md5-perl \
-+                   libencode-perl \
-+                   libencode-locale-perl \
-+                   libfile-listing-perl \
-+                   libhtml-entities-perl \
-+                   libhtml-headparser-perl \
-+                   libhttp-date-perl \
-+                   libhttp-cookies-perl \
-+                   libhttp-daemon-perl \
-+                   libhttp-negotiate-perl \
-+                   libhttp-request-perl \
-+                   libhttp-request-common-perl \
-+                   libhttp-response-perl \
-+                   libhttp-status-perl \
-+                   libio-select-perl \
-+                   libio-socket-perl \
-+                   liblwp-mediatypes-perl \
-+                   libmime-base64-perl \
-+                   libnet-ftp-perl \
-+                   libnet-http-perl \
-+                   liburi-perl \
-+                   liburi-escape-perl \
-+                   libwww-robotrules-perl \
-+                   "
++RDEPENDS_${PN} = "libdigest-base-perl"
 +
-+RPROVIDES_${PN} += "liblwp-perl \
-+                    liblwp-authen-ntlm-perl \
-+                    liblwp-conncache-perl \
-+                    liblwp-debug-perl \
-+                    liblwp-membermixin-perl \
-+                    liblwp-protocol-perl \
-+                    liblwp-robotua-perl \
-+                    liblwp-simple-perl \
-+                    liblwp-useragent-perl \
-+                    liblwp-authen-basic-perl \
-+                    liblwp-authen-digest-perl \
-+                    liblwp-protocol-cpan-perl \
-+                    liblwp-protocol-data-perl \
-+                    liblwp-protocol-file-perl \
-+                    liblwp-protocol-ftp-perl \                    
-+                    liblwp-protocol-ghttp-perl \                    
-+                    liblwp-protocol-gopher-perl \
-+                    liblwp-protocol-http-perl \                    
-+                    liblwp-protocol-http-socket-perl \                    
-+                    liblwp-protocol-http-socketmethods-perl \                    
-+                    liblwp-protocol-loopback-perl \
-+                    liblwp-protocol-mailto-perl \
-+                    liblwp-protocol-myftp-perl \
-+                    liblwp-protocol-nntp-perl \
-+                    liblwp-protocol-nogo-perl \
-+                    "
++SRC_URI = "http://cpan.metacpan.org/authors/id/G/GA/GAAS/Digest-MD5-${PV}.tar.gz"
++SRC_URI[md5sum] = "affc629d05c4c7b3efe4b3b874bce528"
++SRC_URI[sha256sum] = "cde667c0c0c8a4d819d332ba9a4cad7e9f75fc7cabd490aae405ce7bc54d5152"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/libwww-perl-${PV}.tar.gz;name=libwww-perl-${PV}"
-+SRC_URI[libwww-perl-5.834.md5sum] = "f2ed8a461f76556c9caed9087f47c86c"
-+SRC_URI[libwww-perl-5.834.sha256sum] = "1a50eb91d1deeca3be10982e129e786809ad6f0f8049b156e91e889e5a7288ff"
-+
-+S = "${WORKDIR}/libwww-perl-${PV}"
++S = "${WORKDIR}/Digest-MD5-${PV}"
 +
 +inherit cpan
 +
