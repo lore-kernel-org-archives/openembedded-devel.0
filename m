@@ -1,18 +1,22 @@
 Return-Path: <erp@movis.dk>
 Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F3316C057
+	by mail.openembedded.org (Postfix) with ESMTP id 9F7EF6C053
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:47:20 +0000 (UTC)
-Received: (qmail 25987 invoked by uid 89); 3 Sep 2013 15:47:09 -0000
-Received: from unknown (HELO sabrina.webspeed.dk)
-	(erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 3 Sep 2013 15:47:09 -0000
-From: Emil Petersen <erp@movis.dk>
+	Tue,  3 Sep 2013 15:49:14 +0000 (UTC)
+Received: (qmail 26010 invoked by uid 89); 3 Sep 2013 15:49:04 -0000
+Received: from unknown (HELO ?10.0.0.129?) (erp@movis.dk@::ffff:83.93.56.101)
+	by 0 with ESMTPA; 3 Sep 2013 15:49:04 -0000
+Message-ID: <522604DB.4040602@movis.dk>
+Date: Tue, 03 Sep 2013 17:48:43 +0200
+From: "Emil R. Petersen" <erp@movis.dk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.12) Gecko/20130116 Icedove/10.0.12
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Sep 2013 17:46:46 +0200
-Message-Id: <1378223206-14183-1-git-send-email-erp@movis.dk>
-X-Mailer: git-send-email 1.8.4.rc3
-Subject: [meta-perl][PATCH] libhtml-parser-perl_3.71.bb: added
+References: <1378222415-13643-1-git-send-email-erp@movis.dk>
+	<20130903154414.GD12638@axis.com>
+In-Reply-To: <20130903154414.GD12638@axis.com>
+Subject: Re: [meta-perl] libwww-perl_5.834: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,52 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:47:20 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 15:49:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-HTML::Parser and RPROVIDES added
+Oh? Well I wouldn't have added them if I thought they were core modules.
 
-Signed-off-by: Emil Petersen <erp@movis.dk>
----
- .../libhtml-parser-perl_3.71.bb                    | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
+MIME::Base64 has it's own CPAN entry: 
+https://metacpan.org/release/MIME-Base64
 
-diff --git a/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb b/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
-new file mode 100644
-index 0000000..ad8c57a
---- /dev/null
-+++ b/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
-@@ -0,0 +1,29 @@
-+SUMARRY = "This package contains the Parser.pm module with friends."
-+AUTHOR = "Gisle Aas <gisle@activestate.com>"
-+HOMEPAGE = "https://metacpan.org/release/HTML-Parser"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=6c3dacf9f405c7483870ab5f148770c3"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTML-Parser-${PV}.tar.gz"
-+SRC_URI[md5sum] = "9128a45893097dfa3bf03301b19c5efe"
-+SRC_URI[sha256sum] = "be918b3749d3ff93627f72ee4b825683332ecb4c81c67a3a8d72b0435ffbd802"
-+
-+RDEPENDS_${PN} += 'libhtml-tagset-perl libxsloader-perl'
-+
-+RPROVIDES_${PN} += "libhtml-entities-perl \
-+                    libhtml-filter-perl \
-+                    libhtml-headparser-perl \
-+                    libhtml-linkextor-perl \
-+                    libhtml-parser-perl \
-+                    libhtml-pullparser-perl \
-+                    libhtml-tokeparser-perl \
-+                    "
-+
-+S = "${WORKDIR}/HTML-Parser-${PV}"
-+
-+EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
--- 
-1.8.4.rc3
+And does not appear, immediately, to be part of the core distribution?
 
+Or am I missing something?
+
+On 03/09/13 17:44, Olof Johansson wrote:
+> On 13-09-03 17:33 +0200, Emil Petersen wrote:
+>> +RDEPENDS_${PN} += "libdigest-md5-perl \
+>> +                   libencode-perl \
+>> +                   libio-select-perl \
+>> +                   libio-socket-perl \
+>> +                   libmime-base64-perl \
+>> +                   libnet-ftp-perl \
+>> +                   "
+> I notice that some of these modules are core modules
+> (specifically the ones left in the quote), and I guess it would
+> be better to depend on the perl-modules package instead (the
+> package containing all core modules)? Otherwise this may require
+> a great deal of maintenance when upgrading to newer releases.
+>
 
