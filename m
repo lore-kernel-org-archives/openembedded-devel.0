@@ -1,46 +1,18 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 321646C011
+Return-Path: <erp@movis.dk>
+Received: from clobix.com (mail.clobix.com [54.229.118.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F3316C057
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 15:44:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by anubis.se.axis.com (Postfix) with ESMTP id 7DA5D19D36
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:21 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
-Received: from anubis.se.axis.com ([127.0.0.1])
-	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id dbwvrgPXSyYl
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:20 +0200 (CEST)
-Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
-	by anubis.se.axis.com (Postfix) with ESMTP id AD2CD19D1C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:16 +0200 (CEST)
-Received: from boulder.se.axis.com (localhost [127.0.0.1])
-	by postfix.imss71 (Postfix) with ESMTP id 909FF551
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:16 +0200 (CEST)
-Received: from seth.se.axis.com (seth.se.axis.com [10.0.2.172])
-	by boulder.se.axis.com (Postfix) with ESMTP id 85A5B71C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:16 +0200 (CEST)
-Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
-	by seth.se.axis.com (Postfix) with ESMTP id 83C9E3E06F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:44:16 +0200 (CEST)
-Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
-	Microsoft SMTP Server (TLS) id 8.2.255.0; Tue, 3 Sep 2013 17:44:16 +0200
-Date: Tue, 3 Sep 2013 17:44:15 +0200
-From: Olof Johansson <olof.johansson@axis.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20130903154414.GD12638@axis.com>
-References: <1378222415-13643-1-git-send-email-erp@movis.dk>
-MIME-Version: 1.0
-In-Reply-To: <1378222415-13643-1-git-send-email-erp@movis.dk>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-perl] libwww-perl_5.834: added
+	Tue,  3 Sep 2013 15:47:20 +0000 (UTC)
+Received: (qmail 25987 invoked by uid 89); 3 Sep 2013 15:47:09 -0000
+Received: from unknown (HELO sabrina.webspeed.dk)
+	(erp@movis.dk@::ffff:83.93.56.101)
+	by 0 with ESMTPA; 3 Sep 2013 15:47:09 -0000
+From: Emil Petersen <erp@movis.dk>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Sep 2013 17:46:46 +0200
+Message-Id: <1378223206-14183-1-git-send-email-erp@movis.dk>
+X-Mailer: git-send-email 1.8.4.rc3
+Subject: [meta-perl][PATCH] libhtml-parser-perl_3.71.bb: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,25 +26,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:44:21 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 Sep 2013 15:47:20 -0000
 
-On 13-09-03 17:33 +0200, Emil Petersen wrote:
-> +RDEPENDS_${PN} += "libdigest-md5-perl \
-> +                   libencode-perl \
-> +                   libio-select-perl \
-> +                   libio-socket-perl \
-> +                   libmime-base64-perl \
-> +                   libnet-ftp-perl \
-> +                   "
+HTML::Parser and RPROVIDES added
 
-I notice that some of these modules are core modules
-(specifically the ones left in the quote), and I guess it would
-be better to depend on the perl-modules package instead (the
-package containing all core modules)? Otherwise this may require
-a great deal of maintenance when upgrading to newer releases.
+Signed-off-by: Emil Petersen <erp@movis.dk>
+---
+ .../libhtml-parser-perl_3.71.bb                    | 29 ++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
 
+diff --git a/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb b/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
+new file mode 100644
+index 0000000..ad8c57a
+--- /dev/null
++++ b/meta-perl/recipes-perl/libhtml-parser-perl/libhtml-parser-perl_3.71.bb
+@@ -0,0 +1,29 @@
++SUMARRY = "This package contains the Parser.pm module with friends."
++AUTHOR = "Gisle Aas <gisle@activestate.com>"
++HOMEPAGE = "https://metacpan.org/release/HTML-Parser"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://README;md5=6c3dacf9f405c7483870ab5f148770c3"
++
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTML-Parser-${PV}.tar.gz"
++SRC_URI[md5sum] = "9128a45893097dfa3bf03301b19c5efe"
++SRC_URI[sha256sum] = "be918b3749d3ff93627f72ee4b825683332ecb4c81c67a3a8d72b0435ffbd802"
++
++RDEPENDS_${PN} += 'libhtml-tagset-perl libxsloader-perl'
++
++RPROVIDES_${PN} += "libhtml-entities-perl \
++                    libhtml-filter-perl \
++                    libhtml-headparser-perl \
++                    libhtml-linkextor-perl \
++                    libhtml-parser-perl \
++                    libhtml-pullparser-perl \
++                    libhtml-tokeparser-perl \
++                    "
++
++S = "${WORKDIR}/HTML-Parser-${PV}"
++
++EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
++
++inherit cpan
++
++BBCLASSEXTEND = "native"
 -- 
-olofjn
+1.8.4.rc3
+
 
