@@ -1,37 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AFC26BFFA
+Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 011276BEDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 17:57:44 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id c50so3172665eek.4
+	Tue,  3 Sep 2013 17:58:23 +0000 (UTC)
+Received: by mail-ea0-f175.google.com with SMTP id m14so3188631eaj.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Sep 2013 10:57:44 -0700 (PDT)
+	Tue, 03 Sep 2013 10:58:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/mVPPKHYcNRTX7Y0OK8JMzartWKgcfONLAgw2VCo2f8=;
-	b=OjMJqb10G9BecGFR279pAYqlYvb7pWMnqZa/FDF8LCsxjv3xHNRhc5O/aCcsimaJee
-	95PL1H7CLofqSyL0wLQ08l9dwwwHTi0VIKNPvtQOUX4sCHVsjicXPw5cs+YO+rdrRKI/
-	LzSePyCmqE7N/RDMDAu3gBVVOdeaSi43MEQi3THb6hZbdlGn8MqbuAQLBGpJtTi8Frw+
-	GkNgreD5bTxpFP0R+qIWLY4GRJnSoo0bYR3MIzCcC2O6Mk0helqFtbrPueSmZFdycU4i
-	YJVpTWs7fJeNBiCShCDo0Qxnh+eLS02Re8c/TDr1Upw+fLrP5ioUs2VWMsgFWrduqsq7
-	2Gqw==
-X-Received: by 10.15.10.5 with SMTP id f5mr251087eet.87.1378231064719;
-	Tue, 03 Sep 2013 10:57:44 -0700 (PDT)
+	bh=p8hLvVFYJ/mTXikpfgoqZqGUb3S0ErQG/+pLfW4dxL8=;
+	b=BsdbcXTauNrD3Z+wANzyatFNrnH9/midS5dQd+usy9sRcOttu+BaSvt3y2Kk27h7Gs
+	WZUPOyeOPmwfiFRJxIpkf2gWv+JCzFtUr4uW8q+P8d/TpGz18emetSPteyGK2FhLuOeo
+	76vtSsZRPFJ+IWZ9iK7Zmbq4BVrHBzhzI4vUJUib5ye3yiRHFlDUTNIP3KmPok4TldqP
+	UOOfj/vi/6uVjE1XaeXsv/KZsUGzBgfSDNZRmGK+XSdKOawXolxnGN/Ny5U/c9nvu65y
+	RyczPqW6sLAF+FgGV/sIFQaXXgwSX9fi0I+iZimhY9zC3Jh3g5Mu9tY5EStwkB8oYSk8
+	nxgA==
+X-Received: by 10.14.10.1 with SMTP id 1mr260498eeu.81.1378231104318;
+	Tue, 03 Sep 2013 10:58:24 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	a43sm33404534eep.9.1969.12.31.16.00.00
+	t6sm33397219eel.12.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 03 Sep 2013 10:57:44 -0700 (PDT)
-Date: Tue, 3 Sep 2013 19:59:02 +0200
+	Tue, 03 Sep 2013 10:58:23 -0700 (PDT)
+Date: Tue, 3 Sep 2013 19:59:42 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130903175902.GG3553@jama>
-References: <1377265124-14387-1-git-send-email-net147@gmail.com>
+Message-ID: <20130903175942.GA11500@jama>
+References: <cover.1377257565.git.paul.eggleton@linux.intel.com>
+	<da4ddacdf801a6744fbdd2081bcc41586ec326ac.1377257565.git.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1377265124-14387-1-git-send-email-net147@gmail.com>
+In-Reply-To: <da4ddacdf801a6744fbdd2081bcc41586ec326ac.1377257565.git.paul.eggleton@linux.intel.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] xf86-video-nouveau: new recipe
+Subject: Re: [meta-oe][PATCH 1/1] busybox: remove bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,56 +47,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 17:57:44 -0000
-X-Groupsio-MsgNum: 46050
+X-List-Received-Date: Tue, 03 Sep 2013 17:58:24 -0000
+X-Groupsio-MsgNum: 46051
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/Zw+/jwnNHcBRYYu"
+	protocol="application/pgp-signature"; boundary="1yeeQ81UyVL57Vl7"
 Content-Disposition: inline
 
---/Zw+/jwnNHcBRYYu
+--1yeeQ81UyVL57Vl7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 23, 2013 at 11:38:44PM +1000, Jonathan Liu wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
+On Fri, Aug 23, 2013 at 12:33:37PM +0100, Paul Eggleton wrote:
+> This bbappend has effectively been merged into OE-Core, although the
+> log buffer size is the busybox default rather than 64K - layers may
+> change this either by providing their own /etc/default/busybox-syslog
+> file (when using systemd) or modifying the
+> CONFIG_FEATURE_IPC_SYSLOG_BUFFER_SIZE option in busybox's build time
+> config.
 
-Both xf86-video applied, thanks!
+Applied, thanks!
 
-> ---
->  .../xorg-driver/xf86-video-nouveau_1.0.9.bb              | 16 ++++++++++=
-++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-nouve=
-au_1.0.9.bb
 >=20
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.=
-9.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.9.bb
-> new file mode 100644
-> index 0000000..7b52de0
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.9.bb
-> @@ -0,0 +1,16 @@
-> +require recipes-graphics/xorg-driver/xorg-driver-video.inc
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4641deddaa80fe7ca88e944e1fd94=
-a94"
-> +
-> +SUMMARY =3D "X.Org X server -- nouveau video driver"
-> +
-> +DESCRIPTION =3D "Open-source X.org graphics driver for NVIDIA graphics"
-> +
-> +DEPENDS +=3D "virtual/libx11 libxvmc drm xf86driproto glproto \
-> +            virtual/libgl xineramaproto libpciaccess"
-> +RDEPENDS_${PN} +=3D "xserver-xorg-module-exa"
-> +
-> +COMPATIBLE_HOST =3D '(i.86|x86_64).*-linux'
-> +
-> +SRC_URI[md5sum] =3D "8b2c0df5de3929597ade8c5ddb489a44"
-> +SRC_URI[sha256sum] =3D "b247c800e532fad1c80a5666d8ca0d4e5712064b6d7a3b03=
-0b32206a8de04482"
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  meta-oe/recipes-core/busybox/busybox/busybox-syslog.default |  1 -
+>  meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend        | 11 -------=
+----
+>  2 files changed, 12 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/busybox/busybox/busybox-syslog.d=
+efault
+>  delete mode 100644 meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
+>=20
+> diff --git a/meta-oe/recipes-core/busybox/busybox/busybox-syslog.default =
+b/meta-oe/recipes-core/busybox/busybox/busybox-syslog.default
+> deleted file mode 100644
+> index 8a21e6d..0000000
+> --- a/meta-oe/recipes-core/busybox/busybox/busybox-syslog.default
+> +++ /dev/null
+> @@ -1 +0,0 @@
+> -OPTIONS=3D"-C64"
+> diff --git a/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend b/meta-=
+oe/recipes-core/busybox/busybox_1.21.1.bbappend
+> deleted file mode 100644
+> index 7a2f0c3..0000000
+> --- a/meta-oe/recipes-core/busybox/busybox_1.21.1.bbappend
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -# look for files in the layer first
+> -FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${PN}:"
+> -
+> -SRC_URI +=3D "file://busybox-syslog.default"
+> -
+> -do_install_append() {
+> -    install -d ${D}${sysconfdir}/default
+> -    install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/=
+default/busybox-syslog
+> -}
+> -
+> -FILES_${PN}-syslog +=3D "${sysconfdir}/default/busybox-syslog"
 > --=20
-> 1.8.3.4
+> 1.8.1.2
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -104,16 +117,16 @@ a94"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---/Zw+/jwnNHcBRYYu
+--1yeeQ81UyVL57Vl7
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlImI2YACgkQN1Ujt2V2gBxR2gCgnyi/ETN06Q0goh/KlhwWKGbc
-OwAAoITshN29OEEMIe3xsEl1Pb6Wwd43
-=kJOn
+iEYEARECAAYFAlImI44ACgkQN1Ujt2V2gBwGkACgrp2RSLFReENVKUy+R5yHnZ9q
+pRAAoJe1EB+KJl4nGqSRA63qqF5G6ohM
+=GMll
 -----END PGP SIGNATURE-----
 
---/Zw+/jwnNHcBRYYu--
+--1yeeQ81UyVL57Vl7--
