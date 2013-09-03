@@ -1,39 +1,37 @@
-Return-Path: <lpapp@archlinux.us>
-Received: from mail-pb0-f44.google.com (mail-pb0-f44.google.com
-	[209.85.160.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 490116BF08
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AD666BEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2013 03:55:14 +0000 (UTC)
-Received: by mail-pb0-f44.google.com with SMTP id xa7so5426894pbc.3
+	Tue,  3 Sep 2013 06:58:47 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id c10so2856529wiw.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2013 20:55:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=N2YLSQMMpk4kdPZKg/7l4SpgeDu7db9bI6OhMRG2UNQ=;
-	b=bBQCX+IvM5w7GG5BOj3TT+IwSl6TSgi94xnpYhMu2P+oGa+SQWxT3Dk+n3i0WndjXt
-	xuQPJR+D+f2uSckTDpZsrPgPRixEFJcfD+sd3iFzauhGZKg+iaQB2zO60DKnO5YWFKe5
-	wX7bafrttLPLBN5ylqGZn3PRJoYtnGPpVkBPmd6BSpVwV//aLFumC2rOQJBwD2qDfVxj
-	rgRqScz4quO16431YIeJJZYSOmW1/wy00JuqfC4XTucci/8y+vKl7Dy8xVT2cyEYCh8k
-	+b5px2tnYnxj4TYkvcUReEvC/1yGRqvG63S1UfHJV2kwsb6RBNbiblmz9k4NhtJyIzXz
-	3xTQ==
-X-Gm-Message-State: ALoCoQkX4KtVOlFuZ0UHpZ2PvGYxsbk6dLHU5xC3gAoX5cRxnsy2YZ5k/s/uiJAzW/xGMwS8iCno
-MIME-Version: 1.0
-X-Received: by 10.66.142.42 with SMTP id rt10mr29393776pab.1.1378180515016;
-	Mon, 02 Sep 2013 20:55:15 -0700 (PDT)
-Sender: lpapp@archlinux.us
-Received: by 10.70.57.234 with HTTP; Mon, 2 Sep 2013 20:55:14 -0700 (PDT)
-In-Reply-To: <CADkTA4NZ-M6XBYx2bBBW_QtMtsUnDNdyYggr1Wa=6Qu33EHvPQ@mail.gmail.com>
-References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
-	<CADkTA4NZ-M6XBYx2bBBW_QtMtsUnDNdyYggr1Wa=6Qu33EHvPQ@mail.gmail.com>
-Date: Tue, 3 Sep 2013 04:55:14 +0100
-X-Google-Sender-Auth: D_3mBTg1uiiFG6xNZyKAm_6pAsg
-Message-ID: <CAOMwXhNV70uRZiL1T+gbguZnBrwUwdUzfGA30d6N-OvhSK__xA@mail.gmail.com>
-From: Laszlo Papp <lpapp@kde.org>
+	Mon, 02 Sep 2013 23:58:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=3qGOD7Qxp8yWZzth2bVc2aPTtja76w3K9XHxL78ioro=;
+	b=Eb81SfOm6xbF1ZZFmJRqGGoPI4Tu2Gk/u4OJNko+YcNIHg7gixYDcUI1/iJTbPIutu
+	6dc9SSQhJVWzM0h0oM/oXyhUD3k+cxvsQ/KpLoH6NdA7v9fGSICVja4FmqdLFWmXSYDJ
+	J8mRL0yu1IgAXZK2GWWzQs8izzYiS2kOJFurOhindHQbVncpgZLK+lnolCHElNQ4P3xP
+	aanU6kXVGNZbbs5/EgDOtBBJSyuFLiekGpcQo/by3FzlO7XMYjJUmxrvILgzjvv9oiUo
+	OzzDrf32j9D8K6Dacc8iGSyXPp4muiDO2cDcjb+8uqCL33XZLfrtD4KIl3niqKINpNqC
+	Jmvg==
+X-Received: by 10.180.75.15 with SMTP id y15mr16797539wiv.12.1378191527441;
+	Mon, 02 Sep 2013 23:58:47 -0700 (PDT)
+Received: from localhost.localdomain (ip-178-200-247-59.unitymediagroup.de.
+	[178.200.247.59])
+	by mx.google.com with ESMTPSA id a8sm23332641wie.6.1969.12.31.16.00.00
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 02 Sep 2013 23:58:46 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
+Date: Tue,  3 Sep 2013 08:58:30 +0200
+Message-Id: <1378191510-31214-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-networking] ntp: enable systemd-timedated control for ntp.service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,58 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 03:55:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Sep 2013 06:58:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 3, 2013 at 2:56 AM, Bruce Ashfield <bruce.ashfield@gmail.com>wrote:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-networking/recipes-support/ntp/ntp.inc       |    5 +++++
+ meta-networking/recipes-support/ntp/ntp/ntpd.list |    1 +
+ 2 files changed, 6 insertions(+), 0 deletions(-)
+ create mode 100644 meta-networking/recipes-support/ntp/ntp/ntpd.list
 
-> On Mon, Sep 2, 2013 at 4:20 AM, Laszlo Papp <lpapp@kde.org> wrote:
-> > 1) The version in meta-virtualization is quite old. It is basically from
-> 2009,
-> > and a lot of things has changed since then.
->
-> And that was on purpose, there are some tight bindings to SDN and hence why
-> it is in meta-virtualization, and not a valid reason to not contact the
-> layer
-> maintainers directly, have a discussion and not set the update to the
-> current
-> layer.
->
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index 79e7401..ebfa222 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -22,6 +22,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.service \
+            file://sntp.service \
+            file://sntp \
++           file://ntpd.list \
+ "
+ 
+ inherit autotools update-rc.d systemd
+@@ -63,6 +64,10 @@ do_install_append() {
+     install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+     install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+     install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
++
++    # see http://www.freedesktop.org/wiki/Software/systemd/timedated/
++    install -d ${D}${libdir}/systemd/ntp-units.d
++    install -m 0644 ${WORKDIR}/ntpd.list ${D}${libdir}/systemd/ntp-units.d/60-ntpd.list
+ }
+ 
+ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+diff --git a/meta-networking/recipes-support/ntp/ntp/ntpd.list b/meta-networking/recipes-support/ntp/ntp/ntpd.list
+new file mode 100644
+index 0000000..d1fe6b7
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/ntp/ntpd.list
+@@ -0,0 +1 @@
++ntpd.service
+-- 
+1.7.6.5
 
-I do not understand why I would need to contact a foo layer maintainer when
-I think a recipe has not much to do with foo.
-
-
-> If you would have asked, you would have been told that updates are pending
-> with bindings that need to stay in lock step with other parts of meta-virt.
->
-
-Sorry, but how is this relevant? It is an extremely old recipe, and should
-not be used. Moreover, this should not block the non-ancient users at all,
-which is probably the majority.
-
-
-> > 2) More importantly, this software is more like for networking rather
-> than
-> > virtualization, so I think it was misplaced.
->
-> I disagree, so for now meta-virt is going to keep it's variants of the
-> recipes and
-> we need to have an actual discussion to figure out the best way forward.
->
-
-,,, and I disagree with you. Read the specification for openflow, please. I
-fail to understand how it has anything to do with virtualization.
-Seriously, this is a software for networking devices. That is, exactly the
-main purpose what meta-networking is trying to achieve: aiding the
-development for networking devices. As for me, it is totally
-non-comprehensive why a networking specification and the relevant
-implementation would be in meta-virtualization rather than meta-networking.
-
-Not to mention, I do not understand why you are trying to set a straw man
-in here. The discussion you are "requesting" is exactly what this thread is
-meant to be. So, I think you are simply incorrect IMHO. :-)
-
-Cheers,
-Laszlo
 
