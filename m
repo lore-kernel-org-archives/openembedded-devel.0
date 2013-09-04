@@ -1,41 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id F32D96BD85
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 4F59E6BDDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Sep 2013 12:49:14 +0000 (UTC)
-Received: by mail-ea0-f176.google.com with SMTP id q16so153043ead.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Sep 2013 05:49:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=5W6qEganbtNI+sgZvzxwIIhLAE7nCrbFkjW2y6oKIQc=;
-	b=CO0TloD6hEalilfTdgtJiJ43lMJmbSWxODHEnxQ/AvO788WeW/QKQRV60lxcFt4ToB
-	koTQUHPkXgEDq8ujTAibMjZWG4kF/dPHOOkhjR1yQaBu6RGL42RMiw723nPV2vY2+6KV
-	xw6slTFhQyJTtTrgWWVrq8il/khLMeUfox7cUC32yNy73jR3ydA2gtjSMtXwJRZYwazF
-	8S7M1hvr4riVnAkQtYKQCMWkHk7hFWA1HBf7qwrhyErW6Wu4W67e2F97TidA1Zi7iuBt
-	OBJltl/j+JlgZ8+PfZpGQmvqXNzFLvgfTEFaQ8J2C233EuKdK6O/zQQ8k3dIL2IkH2Sm
-	5OSQ==
-X-Received: by 10.14.108.9 with SMTP id p9mr4579905eeg.8.1378298956468;
-	Wed, 04 Sep 2013 05:49:16 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	j7sm39766662eeo.15.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 04 Sep 2013 05:49:16 -0700 (PDT)
-Date: Wed, 4 Sep 2013 14:50:35 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Jonathan Liu <net147@gmail.com>
-Message-ID: <20130904125035.GF11500@jama>
-References: <1377824151-7538-1-git-send-email-net147@gmail.com>
-	<20130830090146.GS3544@jama> <522075F2.7070804@gmail.com>
-	<20130830105458.GV3544@jama>
+	Wed,  4 Sep 2013 13:13:41 +0000 (UTC)
+Received: (qmail 24598 invoked by uid 1003); 4 Sep 2013 13:13:42 -0000
+Received: from unknown (HELO ?192.168.1.103?)
+	(philip@opensdr.com@71.171.32.225)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	4 Sep 2013 13:13:42 -0000
+Message-ID: <52273204.503@balister.org>
+Date: Wed, 04 Sep 2013 09:13:40 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-In-Reply-To: <20130830105458.GV3544@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] qt-creator: update to 2.8.1
+To: openembedded-devel@lists.openembedded.org
+References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
+	<CADkTA4NZ-M6XBYx2bBBW_QtMtsUnDNdyYggr1Wa=6Qu33EHvPQ@mail.gmail.com>
+	<CAOMwXhNV70uRZiL1T+gbguZnBrwUwdUzfGA30d6N-OvhSK__xA@mail.gmail.com>
+	<CADkTA4P-tyfnX5Dywf8Z+tSEVxjbrykio5tFg_UmhkrTvORdyw@mail.gmail.com>
+	<CAOMwXhNp0w=1=QW=e+82Q135wECMROUdcJ3aEaLUFKOu_68DEQ@mail.gmail.com>
+	<CADkTA4PUf5ce5B206zP+7i4hZ0LWN_YD1VuooSZLkC4j-nmuJw@mail.gmail.com>
+	<20130903210803.GD20985@deserted.net>
+	<CADkTA4M=4Jrr6-4JP4bWM0Bwm7XxMvgyTi49XkcLGtLSpSMBvg@mail.gmail.com>
+	<CANBf+V2Mp7Q+E0uW6YtoctCUcQa3sCma31Ygmm9f7nejYbUZJg@mail.gmail.com>
+In-Reply-To: <CANBf+V2Mp7Q+E0uW6YtoctCUcQa3sCma31Ygmm9f7nejYbUZJg@mail.gmail.com>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,89 +41,358 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Sep 2013 12:49:15 -0000
-X-Groupsio-MsgNum: 46062
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1Y7d0dPL928TPQbc"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Sep 2013 13:13:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---1Y7d0dPL928TPQbc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 09/03/2013 11:27 PM, Joe MacDonald wrote:
+> On Tue, Sep 3, 2013 at 6:39 PM, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
+>>
+>> On Tue, Sep 3, 2013 at 5:08 PM, Joe MacDonald <joe@deserted.net> wrote:
+>>> Little late coming to this party, I guess.  Sorry all.  In my defense
+>>> I'll just say that I was less connected than I expected to be over my
+>>> vacation and there's been considerable catching up to do.
+>>>
+>>> [Re: [oe] [meta-networking][PATCH] openflow: Add latest from git] On 13.09.03 (Tue 09:38) Bruce Ashfield wrote:
+>>>
+>>>> On Tue, Sep 3, 2013 at 9:13 AM, Laszlo Papp <lpapp@kde.org> wrote:
+>>>>> IMO, most of this email is red herring, and the main topic is a networking
+>>>>> specification should be in meta-networking. Why would I (or anyone for that
+>>>>> matter) need *any* virtualization layer when I am working on a network
+>>>>> device?
+>>>>
+>>>> Ah, so I see we won't address the fact that the mailing list should have
+>>>> been consulted and that the goals of the oe-layers should be to reduce
+>>>> duplication and get everyone working together. I promise, I won't mention
+>>>> this again, but it is a key point I want to make.
+>>>>
+>>>> I understand where this is going, and I'll try to engage at a technical
+>>>> level, it's all that I can do.
+>>>>
+>>>>>
+>>>>> I am sorry for your historical misplacement, but it is not an excuse for
+>>>>> future mistakes IMHO. If your virtualization depends on network stuff, you
+>>>>> should *not* force others for virtualization whatever that is. If you need
+>>>>> that, build on top of networking or use own recipes maintained by you.
+>>>>
+>>>> I don't agree with that characterization, since it is very black and white.
+>>>>
+>>>> Having a binding to the larger meta-oe universe (at least for some recipes),
+>>>> isn't always a good thing, and having self contained layers is also something
+>>>> that is a goal at times. I'm not saying this is the case here, just that what
+>>>> you describe above about networking devices not wanting virtualization,
+>>>> is at times flipped around from other layers when looking at meta-oe.
+>>>
+>>> The archives contain my response to this and I did say I won't be going
+>>> back to this particular topic again, so I'll just say that if you really
+>>> feel that a dis-incentive to contributing something to meta-networking
+>>> (or to using meta-networking in your project) is an implicit dependency
+>>> on the larger meta-oe world, we should talk about that sometime.
+>>
+>> Ha. My bad on this front, I honestly didn't check the archives for what you
+>> had said before, I was just responding to the appearance of the recipe.
+>>
+>> As for the larger meta-oe being required to get at meta-networking, I'm not
+>> sure that you and I can solve that. The concern about being able to get an
+>> updated package from meta-networking, and not other packages from the
+>> other layers, i.e. the granularity of the one big chunk is hard to deal with
+>> if you only want to get a specific layer updated.
+> 
+> That is exactly the topic I was suggesting we can talk about if that's
+> an issue you're trying to work around in meta-virtualization.  This
+> isn't really the place for it, though, and I don't want to confuse
+> anyone or subvert the thread.  Let me say that I'll leave it with you.
+>  I'd be happy to try to understand what the concerns are you have with
+> depending on meta-networking and whether they're inherent in meta-net
+> or if they're due to meta-net being part of the larger meta-oe.
+> 
+> The same applies to anyone else working on a layer with clearly
+> networking components that may be reluctant to incorporate it into
+> meta-net.  I'm welcoming submissions of useful components and I'd be
+> really disappointed if we ended up having the same (or similar)
+> recipes in multiple public layers purely due to reticence and
+> (perceived?) extra dependencies.  I'll be other meta-oe maintainers
+> feel the same, too.  Balkanisation benefits no one.
+> 
+> Back on topic, then.
 
-On Fri, Aug 30, 2013 at 12:54:58PM +0200, Martin Jansa wrote:
-> On Fri, Aug 30, 2013 at 08:37:38PM +1000, Jonathan Liu wrote:
-> > On 30/08/2013 7:01 PM, Martin Jansa wrote:
-> > > On Fri, Aug 30, 2013 at 10:55:51AM +1000, Jonathan Liu wrote:
-> > >> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> > >> ---
-> > >>   .../qt-creator/{qt-creator_2.8.0.bb =3D> qt-creator_2.8.1.bb}     =
-      | 4 ++--
-> > >>   1 file changed, 2 insertions(+), 2 deletions(-)
-> > >>   rename meta-oe/recipes-qt/qt-creator/{qt-creator_2.8.0.bb =3D> qt-=
-creator_2.8.1.bb} (87%)
-> > >>
-> > >> diff --git a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb b/met=
-a-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> > >> similarity index 87%
-> > >> rename from meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
-> > >> rename to meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> > >> index a95ad5a..21d5264 100644
-> > >> --- a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.0.bb
-> > >> +++ b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
-> > >> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D "file://LGPL_EXCEPTION.TXT;md5=
-=3Deb6c371255e1262c55ae9b652a90b5
-> > >>   SECTION =3D "qt/app"
-> > >>  =20
-> > >>   SRC_URI =3D "http://download.qt-project.org/official_releases/qtcr=
-eator/2.8/${PV}/${BP}-src.tar.gz"
-> > >> -SRC_URI[md5sum] =3D "5aacdad4491b7dda9758a81384d8da79"
-> > >> -SRC_URI[sha256sum] =3D "7ac5d9a36c2f561f74d77378d4eae95a78c7752b323=
-e1df924d6e895e99f45d2"
-> > >> +SRC_URI[md5sum] =3D "79ef6c6ece0c00035ef744c9d6e3bd3b"
-> > >> +SRC_URI[sha256sum] =3D "d5ae007a297a4288d0e95fd605edbfb8aee80f6788c=
-7a6cfb9cb297f50c364b9"
-> > > Hi, does it fix build on arm?
-> > I tested for x86 target. I haven't tested on ARM.=20
-> > https://codereview.qt-project.org/#change,61264 hasn't been merged yet=
-=20
-> > and I don't see any ARM build fixes in the logs between v2.8.0 and=20
-> > v2.8.1 so I am guessing compiling for ARM isn't fixed yet.
-> > >
-> > > One issue was missing cpuid.h
-> > > http://lists.openembedded.org/pipermail/openembedded-devel/2013-Augus=
-t/091952.html
-> > >
-> > > and then there were some warning causing build failure with -Werror.
-> > Is -Werror standard or added through a conf option?
->=20
-> I haven't spent much time on this one so I don't know from where -Werror
-> was passed, but you can see the error in
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.2=
-0130829_131018.log/min_failed/qt-creator
->=20
-> |
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/u=
-sr/include/qt4/QtCore/qsharedpointer_impl.h:336:11:
-> error: 'product' may be used uninitialized in this function
-> [-Werror=3Dmaybe-uninitialized]
+I am really late to the game ...
 
-Both issues are still there with 2.8.1
+If you are having trouble figuring out what layer a recipe belongs in
+due to it being needed for several layers, maybe the package in question
+belongs in oe-core.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Philip
 
---1Y7d0dPL928TPQbc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> 
+>>
+>> Does anyone else have a good suggestion on how to deal with that ?
+>>
+>>>
+>>>> meta-virt and meta-networking are very similar in age and the group of
+>>>> recipes to start meta-virt were a merging of two existing layers (a good
+>>>> collaboration) and a lot contributed by ENEA, it was a good effort and I
+>>>> don't think it's right to drop all traces of that effort or describe it as a
+>>>> mistake.
+>>>>
+>>>> Again, opinions vary, that's part of the fun.
+>>>>
+>>>>>
+>>>>> I fail to see how it is a problem. Even more, the recipe was completely
+>>>>> broken like virtual/libc, *ancient* version, wrong rm'f stuff, bad
+>>>>> description IMHO, etc for meta-networking.
+>>>>
+>>>> Patches would have been accepted :)
+>>>>
+>>>>>
+>>>>> I do not personally mind if you keep your clone because it is your
+>>>>> business, but surely, networking devices should use a network layer, and
+>>>>> that is exactly the point of meta-networking.
+>>>>
+>>>> I'll agree to disagree, I've tried to say that we should look at what the two
+>>>> layers need, come up with a plan, keep the credit to the original authors
+>>>> and then decide how to move forward. i.e. if there are multiple users of the
+>>>> recipe, maybe see about getting it into oe-core, etc. But I see that isn't on
+>>>> the menu today.
+>>>>
+>>>> I'll ping Joe and we'll see what we can figure out as timing for a path forward.
+>>>
+>>> At this point I'm inclined to agree that OpenFlow is a reasonable fit
+>>> for meta-networking, it's something I think I may have even referenced
+>>
+>> FWIW, I agree as well.
+>>
+>>> in my original proposal for creating meta-networking.  But if Laszlo is
+>>> going to propose a new recipe for inclusion, I'll wait to see it before
+>>> trying out any of the existing stuff in my tree.  I certainly don't want
+>>> to invalidate or break any of the work in meta-virtualization and I
+>>> appreciate hearing that this is a concern, but hopefully you understand
+>>> that if that did happen, it'd be by accident as I'm not on the
+>>> meta-virtualization list and I don't know what you guys are doing over
+>>> there.
+>>
+>> What about the following:
+>>
+>>   - We at least give reference to the other recipe, either in the git commit
+>>     message or the recipe itself ? Regardless if this was a clean room
+>>     implementation or not .. they are nearly identical (of course that means
+>>     there is one right way to do this), and at least maintaining the paper trail
+>>     if the recipe migrates is valuable.
+> 
+> That was one of my few comments to Laszlo in this thread.  I'd like to see that.
+> 
+>>  - We run some tests against meta-virt and give you the thumbs up when it
+>>    is safe to merge, and the meta-virt copy can be deleted. I definitely don't
+>>    want two of these running around.
+> 
+> I don't mind delaying a merge a bit while waiting for more feedback on
+> testing, provided we're talking about a reasonable timeframe.
+> Otherwise, if the submitted OpenFlow is working well enough in
+> meta-net, I'm inclined to merge it and take patches from you guys if
+> you find issues down the road.  That'll be how it will work anyway in
+> three month's time, for example, when meta-virt has dropped their
+> copy.
+> 
+> How long do you think you'll need on this?
+> 
+>>  - Now that everyone is aware of the specific use case, we can watch and
+>>    coordinate updates in the future ?
+> 
+> Sure, again, provided we're talking a reasonable timeframe.  One of
+> the things on my exceedingly long todo list (and that others have been
+> immensely helpful with) has been to bring forward OE Classic recipes
+> that make sense for meta-net.   Wherever possible I prefer to try to
+> coordinate with the OE Classic recipe maintainers / contributors, but
+> that's not always possible.  I think the same thing would apply here,
+> we'll do our best to coordinate and know that occasionally there may
+> be hiccups like this one.
+> 
+> -J.
+> 
+>>
+>> Would that be acceptable ?
+>>
+>> Cheers,
+>>
+>> Bruce
+>>
+>>>
+>>> That is to say feel free to pipe up on any stuff like this in the
+>>> future and if you have any specific requests on how this merge happens,
+>>> please let me know.
+>>>
+>>> -J.
+>>>
+>>>>
+>>>> Cheers,
+>>>>
+>>>> Bruce
+>>>>
+>>>>>
+>>>>>
+>>>>> On Tue, Sep 3, 2013 at 2:04 PM, Bruce Ashfield <bruce.ashfield@gmail.com>wrote:
+>>>>>
+>>>>>> On Mon, Sep 2, 2013 at 11:55 PM, Laszlo Papp <lpapp@kde.org> wrote:
+>>>>>>> On Tue, Sep 3, 2013 at 2:56 AM, Bruce Ashfield <bruce.ashfield@gmail.com
+>>>>>>> wrote:
+>>>>>>>
+>>>>>>>> On Mon, Sep 2, 2013 at 4:20 AM, Laszlo Papp <lpapp@kde.org> wrote:
+>>>>>>>>> 1) The version in meta-virtualization is quite old. It is basically
+>>>>>> from
+>>>>>>>> 2009,
+>>>>>>>>> and a lot of things has changed since then.
+>>>>>>>>
+>>>>>>>> And that was on purpose, there are some tight bindings to SDN and hence
+>>>>>> why
+>>>>>>>> it is in meta-virtualization, and not a valid reason to not contact the
+>>>>>>>> layer
+>>>>>>>> maintainers directly, have a discussion and not set the update to the
+>>>>>>>> current
+>>>>>>>> layer.
+>>>>>>>>
+>>>>>>>
+>>>>>>> I do not understand why I would need to contact a foo layer maintainer
+>>>>>> when
+>>>>>>> I think a recipe has not much to do with foo.
+>>>>>>
+>>>>>> really ? I honestly don't know what to say about that logic.
+>>>>>>
+>>>>>> There's a recipe in another public layer, that is being updated, and was
+>>>>>> put there for a reason. You grab a copy, send it to another layer and
+>>>>>> don't even bother to cc' the originating layer's mailing list ?
+>>>>>>
+>>>>>> You don't think the right thing to do would be to ask a few questions,
+>>>>>> and agree to the path forward ?
+>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>> If you would have asked, you would have been told that updates are
+>>>>>> pending
+>>>>>>>> with bindings that need to stay in lock step with other parts of
+>>>>>> meta-virt.
+>>>>>>>>
+>>>>>>>
+>>>>>>> Sorry, but how is this relevant? It is an extremely old recipe, and
+>>>>>> should
+>>>>>>> not be used. Moreover, this should not block the non-ancient users at
+>>>>>> all,
+>>>>>>> which is probably the majority.
+>>>>>>
+>>>>>> The only difference between your recipe is a new SRCREV, of which there
+>>>>>> was one already pending. And perhaps, if you asked, you would have found
+>>>>>> out that there were dependent other layers and recipes on some particular
+>>>>>> SRCREV.
+>>>>>>
+>>>>>> In such a situation, we could have updated the recipe to create a new one
+>>>>>> and kept the old revision around.
+>>>>>>
+>>>>>> Instead, you copied it, updated the SRCREV with no reference to the
+>>>>>> original
+>>>>>> layer, the authors and their contributions. So we have two copies in the
+>>>>>> ecosystem.
+>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>>> 2) More importantly, this software is more like for networking rather
+>>>>>>>> than
+>>>>>>>>> virtualization, so I think it was misplaced.
+>>>>>>>>
+>>>>>>>> I disagree, so for now meta-virt is going to keep it's variants of the
+>>>>>>>> recipes and
+>>>>>>>> we need to have an actual discussion to figure out the best way forward.
+>>>>>>>>
+>>>>>>>
+>>>>>>> ,,, and I disagree with you. Read the specification for openflow,
+>>>>>> please. I
+>>>>>>
+>>>>>> I've read the specification, but I don't understand why I'm being talked
+>>>>>> down
+>>>>>> to here.
+>>>>>>
+>>>>>> See above, there's enough reason to have a discussion or at least
+>>>>>> follow some etiquette.
+>>>>>>
+>>>>>>> fail to understand how it has anything to do with virtualization.
+>>>>>>> Seriously, this is a software for networking devices. That is, exactly
+>>>>>> the
+>>>>>>> main purpose what meta-networking is trying to achieve: aiding the
+>>>>>>> development for networking devices. As for me, it is totally
+>>>>>>> non-comprehensive why a networking specification and the relevant
+>>>>>>> implementation would be in meta-virtualization rather than
+>>>>>> meta-networking.
+>>>>>>
+>>>>>> There are different opinions on many things, that's the way things work.
+>>>>>> I don't think branding those alternate opinions as invalid and "non
+>>>>>> comprehensive"
+>>>>>> is productive .. do you ?
+>>>>>>
+>>>>>> openflow has control channels to openvswitch, openvswitch is tightly
+>>>>>> coupled
+>>>>>> to the cloud and infrastructure work that happens in meta-virt.
+>>>>>> OpenDayLight
+>>>>>> also has bindings to openvswitch, virtualization and more SDN components.
+>>>>>> Having them all move in lockstep and not introduce incompatible SRCREVs
+>>>>>> as they all update has proven tricky in the past, and will do so. Spreading
+>>>>>> out across multiple layers will only make it more difficult.
+>>>>>>
+>>>>>> I'm not arguing that openflow isn't networking, that wouldn't be logical.
+>>>>>> I'm
+>>>>>> saying that it is where it is for a reason, there are multiple uses and we
+>>>>>> can't
+>>>>>> simply wave a wand and invalidate those other uses because we don't agree
+>>>>>> with them.
+>>>>>>
+>>>>>>>
+>>>>>>> Not to mention, I do not understand why you are trying to set a straw man
+>>>>>>> in here. The discussion you are "requesting" is exactly what this thread
+>>>>>> is
+>>>>>>> meant to be. So, I think you are simply incorrect IMHO. :-)
+>>>>>>
+>>>>>> You didn't cc' the meta-vitualization mailing list. I happen to be on
+>>>>>> both, and
+>>>>>> by chance this is happening, and shouldn't replace a more reasonable
+>>>>>> workflow.
+>>>>>>
+>>>>>> Cheers,
+>>>>>>
+>>>>>> Bruce
+>>>>>>
+>>>>>>>
+>>>>>>> Cheers,
+>>>>>>> Laszlo
+>>>>>>> _______________________________________________
+>>>>>>> Openembedded-devel mailing list
+>>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> --
+>>>>>> "Thou shalt not follow the NULL pointer, for chaos and madness await
+>>>>>> thee at its end"
+>>>>>> _______________________________________________
+>>>>>> Openembedded-devel mailing list
+>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>>
+>>>>> _______________________________________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>
+>>>>
+>>>>
+>>> --
+>>> -Joe MacDonald.
+>>> :wq
+>>
+>>
+>>
+>> --
+>> "Thou shalt not follow the NULL pointer, for chaos and madness await
+>> thee at its end"
+> 
+> 
+> 
+> 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
-
-iEYEARECAAYFAlInLJsACgkQN1Ujt2V2gBzNGACdGZdWjUKA9srqycVUR9V1BUwp
-BfkAoKpuP4sijJ0L4QqdExHC0nhTcK9y
-=kxZQ
------END PGP SIGNATURE-----
-
---1Y7d0dPL928TPQbc--
