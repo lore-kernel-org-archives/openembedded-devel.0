@@ -1,45 +1,35 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qe0-f42.google.com (mail-qe0-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BFAFE6BBD8
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 84C6961613
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Sep 2013 21:14:37 +0000 (UTC)
-Received: by mail-qe0-f42.google.com with SMTP id 1so391195qec.1
+	Wed,  4 Sep 2013 22:03:01 +0000 (UTC)
+Received: by mail-vc0-f181.google.com with SMTP id hz10so580699vcb.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Sep 2013 14:14:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=wr+0ULcRvX78f3Xnp4K7hPWg7DtEq7T8WjbBBm5BSAw=;
-	b=TO4jDjhMaFT3ebs6xDWy1PPN2X5UV6nbcLNMXy9z4OiLJrvDYmJMGBgygVvTPZ6QTb
-	VWkY2rqrOWqoWCKIF0wQpZU1kScW+8QdhfpQBwQbmFLag/3hpS8pFfL9KWhktiCuB1p0
-	kHkyos3DETxlUradyuVlbp1Frzn55AR1xvNDTxZDzY2MlgHCFLHu5EeEg+K6S0+wj609
-	jvtTynGpA95y0p6B5jz4igYCwGd3vpAnXLcQ7Yx3OLUov2udVMtZ+TFlN88JWJD1scS1
-	FV//DZ+BZFWDULzIPVey67myRBiiyCoi3NT9oe90IwT4RsB7XasyHyPpzF/9BrDfqWAO
-	ldag==
-X-Gm-Message-State: ALoCoQk5yLzJBdJRB7yxHITaHnIqD102pK7qKDg+6t/lPHFmLkDFzBJCRYD6S+hvr5HFgAkHEfzZ
-X-Received: by 10.49.105.230 with SMTP id gp6mr5702803qeb.71.1378329278628;
-	Wed, 04 Sep 2013 14:14:38 -0700 (PDT)
-Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
-	by mx.google.com with ESMTPSA id
-	s9sm40001041qev.6.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 04 Sep 2013 14:14:37 -0700 (PDT)
-Date: Wed, 4 Sep 2013 17:14:16 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: Laszlo Papp <lpapp@kde.org>
-Message-ID: <20130904211411.GR3761@deserted.net>
-References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
+	Wed, 04 Sep 2013 15:03:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=zwvdHcFPNJjFhG0Ce8fnydsi1FNiEjgb4nq2Bu30bME=;
+	b=olo96pJ+erxdFSEU5XejkwyRojEgGVbTQ7UPvlerlRTssUp+SG0VYUsGDdf33F4NXC
+	dUwLqU1uuhkfehb5U2O6jTdg0bjaec3eT5TowmbxDwLg9YFJPtdlpl5EY9ZkzxlIOi0C
+	koU2v4VYNBT8ZtqzxlA0Ietknbez2oNq6kfZC+DGb3bs/6LlMNy03aRHSKeIaRMdbKnf
+	IJDwf5XhXq3RPVdCITTHYg7I9fJpO9q5BXQKv5MxAGuj58dwq1jYwow8+i/caRvc9Rkg
+	mlNAXlLTTm+UEoW6Eiewb3Ck7Ygqhh6IHeJqauOW3lG3ycZaG/DARIFCOG1QARNCwklN
+	Bjhg==
+X-Received: by 10.58.146.71 with SMTP id ta7mr3797749veb.23.1378332183075;
+	Wed, 04 Sep 2013 15:03:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1378110051-8976-1-git-send-email-lpapp@kde.org>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
+Sender: paul.betafive@gmail.com
+Received: by 10.220.155.17 with HTTP; Wed, 4 Sep 2013 15:02:21 -0700 (PDT)
+In-Reply-To: <16E29A58-2D18-42F9-9A52-C27BB0A9FE3E@gmail.com>
+References: <16E29A58-2D18-42F9-9A52-C27BB0A9FE3E@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Wed, 4 Sep 2013 23:02:21 +0100
+X-Google-Sender-Auth: BwWTJGgMNvVt8h_EOgo6ODpQgl4
+Message-ID: <CANyK_8c9rr+g0iZ+6urSwVEPCCuWK2T71nfTNTnidn8+kXaGug@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: mercurial fetch issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,110 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Sep 2013 21:14:38 -0000
-X-Groupsio-MsgNum: 46070
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xMJbWctQEcNQiBqK"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Sep 2013 22:03:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---xMJbWctQEcNQiBqK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 4 September 2013 20:42, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> I am seeing something like below with dylan branch
+>
+> WARNING: Failed to fetch URL hg://vim.googlecode.com/hg/;protocol=https;module=vim, attempting MIRRORS if available
+> ERROR: Fetcher failure: Fetch command failed with exit code 255, output:
+> warning: vim.googlecode.com certificate with fingerprint ca:2d:b2:a7:41:f5:00:83:e7:66:57:bf:6f:be:57:a7:56:92:c0:4f not verified (check hostfingerprints or web.cacerts config setting)
+> abort: HTTP Error 404: Not Found
+>
+> ERROR: Function failed: Fetcher failure for URL: 'hg://vim.googlecode.com/hg/;protocol=https;module=vim'. Unable to fetch URL from any source.
+>
 
-Actually, after all of that, I do have a couple of additional requests
-(beyond just the tweak to the commit log).
+I set the URL for this so figured I should test this quickly: I can
+manually clone that with "hg clone https://vim.googlecode.com/hg" and
+"hg clone https://vim.googlecode.com/hg/vim", both work and are
+equivalent so it's likely not a problem with the URL or Google Code
+being down.
 
-   Explicitly cc:ing Bruce here since I'm intentionally not adding
-   meta-virt@.  I've gotten bounced from it in the past as I'm not a
-   subscriber and it's subscriber-only.
+I'm getting the certificate warning running mercurial on my desktop
+system (Arch Linux).
 
-[[oe] [meta-networking][PATCH] openflow: Add latest from git] On 13.09.02 (=
-Mon 09:20) Laszlo Papp wrote:
+-- 
+Paul Barker
 
-> 1) The version in meta-virtualization is quite old. It is basically from =
-2009,
-> and a lot of things has changed since then.
->=20
-> 2) More importantly, this software is more like for networking rather than
-> virtualization, so I think it was misplaced.
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
-SOB please?
-
-> ---
->  .../recipes-support/openflow/openflow_1.0.bb       | 32 ++++++++++++++++=
-++++++
-
-Is this actually based on an OpenFlow 1.0 release, or has it always been
-1.0+git?  I don't have a copy of meta-virt around to check myself.  If
-there was a real 1.0 recipe around, can we keep it as is and make this
-openflow_git.bb, more in line with the other +git... recipes?
-
->  1 file changed, 32 insertions(+)
->  create mode 100644 meta-networking/recipes-support/openflow/openflow_1.0=
-=2Ebb
->=20
-> diff --git a/meta-networking/recipes-support/openflow/openflow_1.0.bb b/m=
-eta-networking/recipes-support/openflow/openflow_1.0.bb
-> new file mode 100644
-> index 0000000..eb7770e
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/openflow/openflow_1.0.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY =3D "OpenFlow"
-> +DESCRIPTION =3D "Open standard that enables researchers to run experimen=
-tal protocols in the campus networks"
-> +HOMEPAGE =3D "http://www.openflow.org"
-> +SECTION =3D "networking"
-> +LICENSE =3D "GPLv2"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De870c934e2c3d6ccf085fd7cf0a1e=
-2e2"
-> +
-> +SRCREV =3D "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
-> +PV =3D "1.0+git${SRCPV}"
-> +SRC_URI =3D "git://gitosis.stanford.edu/openflow.git;protocol=3Dgit"
-> +
-> +DEPENDS =3D "virtual/libc"
-> +
-> +EXTRA_OECONF +=3D "KARCH=3D${TARGET_ARCH}"
-> +
-> +PACKAGECONFIG ??=3D "libssl"
-> +PACKAGECONFIG[libssl] =3D "--enable-ssl,--disable-ssl, openssl, libssl"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools
-> +
-> +do_configure() {
-> +    ./boot.sh
-> +    oe_runconf
-> +}
-> +
-> +do_install_append() {
-> +	# Remove /var/run as it is created on startup
-> +    rm -rf ${D}${localstatedir}/run
-> +}
-
-And while we're in the neighbourhood, can we also clean up the
-inconsistent spacing?
-
-Thanks.
-
---=20
--Joe MacDonald.
-:wq
-
---xMJbWctQEcNQiBqK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlInoqMACgkQwFvcllog0XyowwCgp7gBdzCVJEZOFZcxdny0Dqb/
-QUMAoJyWImBB8EE1YnD3e50wyoWEo2pB
-=OH5k
------END PGP SIGNATURE-----
-
---xMJbWctQEcNQiBqK--
