@@ -1,35 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EBFF6162A
+Return-Path: <ross.burton@intel.com>
+Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id ED74B61604
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 05:33:43 +0000 (UTC)
-Received: by mail-pa0-f54.google.com with SMTP id kx10so1425990pab.41
+	Thu,  5 Sep 2013 09:01:57 +0000 (UTC)
+Received: by mail-vc0-f177.google.com with SMTP id gf12so906311vcb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Sep 2013 22:33:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=js+dtw0siimRiwbnXm1LueOOtDMJ5ydDVJWbLVmEQNQ=;
-	b=evCSn2oUrmvH83cK5blj8mKIfn0bks5wk4RJvbY/TbkECZ1WIHNb1MkpZsLwPX6f8k
-	qS42nejfPg0DV8aIldhCT2Nb58P+84LwTJ08w1UHo8puV9tJIMj451JJ3OhCRfZHTCf0
-	WBpJxBCy8r2thZ+Wh+4jmmbDttejnuuR/IWH4c1kNwxOSW7pDbUw1jOvws4MxNGoCDRt
-	4i3SX7anZdg+wn3L/akzXq+4svQwHK/KuLHoIHEyagdE/zBGHK/Jv+IF2CEFb2Fh3x2l
-	PtXJsKiBmLSxO8ACBFb77a15gYlzgXwPs+nzvR4YPmNKDLXht/GNTblAO35FjC2R0yOJ
-	2QJg==
-X-Received: by 10.66.230.138 with SMTP id sy10mr7382627pac.103.1378359225180; 
-	Wed, 04 Sep 2013 22:33:45 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id
-	qp10sm35240349pab.13.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 04 Sep 2013 22:33:44 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Sep 2013 15:30:16 +1000
-Message-Id: <1378359016-5186-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-oe][PATCH] nostromo: specify configuration for systemd-tmpfiles --update
+	Thu, 05 Sep 2013 02:01:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=+c1q86YGUfxX6RRblZsCK6sz5L4J41vvTo/SOzxh15Y=;
+	b=btW3xixqjoktbd+UkOdaRp/AOqTabAX78rtiVTqTkdzXu1v7Z8nxVhX6J/eZIwbsKP
+	NCWbfZ99c5L3Ky2sscpXEp6ZLmsITgdz4wj8b2femTUaT+/9Dyw3aldWHJcE8m+7jkpx
+	/GKldpoSXsDTmyWSjMNWFlATzYhmpHjYZgigtGCkHeROmsdDW535YuDtb+6IJfSUCell
+	pRBhs1KysnMQTGT8nKKPQGc1YZofmAhEjvLqyYSBjizK8yGZAafLQ78f1v52l2opmIN2
+	sUNV7nHP3DsqUi7HU40VUbA+Gq+7RQmWcqg9bpSKG74o1aHWzNyPO78jPL7vLx/i5kz+
+	SoTw==
+X-Gm-Message-State: ALoCoQm5wWQdyJdNaKl/QVMXXyhkUvtNzznUns8wv+jZsAehz0g358Lx3UUxZktXUEMfei1nGT3u
+X-Received: by 10.52.164.16 with SMTP id ym16mr404813vdb.32.1378371719245;
+	Thu, 05 Sep 2013 02:01:59 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.71.201 with HTTP; Thu, 5 Sep 2013 02:01:39 -0700 (PDT)
+In-Reply-To: <CADkTA4PbVB2X9abGFMKsAt6NRaZxnZa1GK86e3L+=CGzNfswdA@mail.gmail.com>
+References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
+	<20130904211411.GR3761@deserted.net>
+	<CADkTA4PbVB2X9abGFMKsAt6NRaZxnZa1GK86e3L+=CGzNfswdA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 5 Sep 2013 10:01:39 +0100
+Message-ID: <CAJTo0LYA4pa_xSQe=PL9eYXfEr3rULSd7nJGSNLnoJKYEX_uMw@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,36 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 05:33:43 -0000
+X-List-Received-Date: Thu, 05 Sep 2013 09:01:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Running systemd-tmpfiles --update without specifying a configuration
-file results in all tmpfiles.d configuration files being processed.
+On 5 September 2013 05:39, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
+> The meta-virt recipe had the same _1.0.bb extension, and it's SRCREV lines up
+> with the openflow-1.0.0 tag in the repository:
+>
+> --------
+>
+> commit 5ccca75a69f99791659bcfbcf35353ab1921320a
+> Author: Glen Gibb <grg@stanford.edu>
+> Date:   Thu Dec 31 16:00:53 2009 -0800
+>
+>     docs: Update ChangeLog to include 1.0.0 information
+>
+> :100644 100644 2f13dd7... aa0e92e... M  ChangeLog
+>
+> -------
+>
+> So it's definitely an option to keep that recipe around as the tagged 1.0, and
+> create a _git that tracks newer changes (where "newer" is relative, 2011 is
+> the latest commit in that repo).
 
-/usr/lib/tmpfiles.d/systemd.conf creates /run/nologin on boot to
-prevent non-root users from logging in while the system is booting.
-If systemd-tmpfiles --update is run after the system has started,
-it will still create /run/nologin which would prevent non-root users
-from logging in with the message "System is booting up.".
+FWIW, I massively prefer "releases that are taken from git" like this
+(where its a git fetch on a hash that is the tag of the releases) to
+be versioned correctly like _1.0.bb instead of _git.bb for clarity and
+future alternatives such as true git snapshot or multiple versions.
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-index 3aaa5c2..fe860ec 100644
---- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-+++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
-@@ -61,7 +61,7 @@ CONFFILES_${PN} += "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf"
- pkg_postinst_${PN} () {
-     if [ -z "$D" ]; then
-         if [ -e /sys/fs/cgroup/systemd ]; then
--            systemd-tmpfiles --create
-+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/nostromo.conf
-         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-             ${sysconfdir}/init.d/populate-volatile.sh update
-         fi
--- 
-1.8.4
-
+Ross
 
