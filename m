@@ -1,36 +1,38 @@
-Return-Path: <lpapp@archlinux.us>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FBBE6163E
+Return-Path: <jkridner@beagleboard.org>
+Received: from mail-qe0-f44.google.com (mail-qe0-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 761636BE78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 15:43:22 +0000 (UTC)
-Received: by mail-pa0-f44.google.com with SMTP id fz6so2077967pac.17
+	Thu,  5 Sep 2013 16:26:17 +0000 (UTC)
+Received: by mail-qe0-f44.google.com with SMTP id 5so921136qeb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 08:43:24 -0700 (PDT)
+	Thu, 05 Sep 2013 09:26:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:date:message-id:subject:from
-	:to:cc:content-type;
-	bh=chdooiNyHbY6cMKa6IVLijl1bsKC4T5KssqEO78thr8=;
-	b=TXkn4/dyLjDbdM/i5FvgWRp2b7NAIIJHibi/NW/eX3GMDRjg/i7SRwewH7F1AoOH2k
-	AH+LZQPyx86SuGTGPf9K3fQ/m7GDhKntWM7zhqVOlkADF7CwCOFA7DjeG98vxRT9Z5O9
-	1TnxgpBQV6VU6oOF+zbwS6r9IWTG0DIOHRGZFbiFcHGmr3cZ3Q0Yzc2cqgxY+jLffqT5
-	JCPBr8j63HDwtgp4RWDa1WqcHE+7Kh3DcTLR4dHc4BLWQv8lDgX1DAUmzUudeuIhcs9W
-	xXrlRbzUzU6OiQIsYYQEWfPbX83H2YRS5jzFSBhXwnRU6MtsF+Nhl/X2kwnqLwT4ufBH
-	sdBA==
-X-Gm-Message-State: ALoCoQkyiz2d0HY4XGmbQefw/ZJ9kX9RU8tW6Kxikk5jQ95rvhOxAOVAIiooukHabpMse9ifID3f
-MIME-Version: 1.0
-X-Received: by 10.66.228.234 with SMTP id sl10mr10013797pac.149.1378395804242; 
-	Thu, 05 Sep 2013 08:43:24 -0700 (PDT)
-Sender: lpapp@archlinux.us
-Received: by 10.70.57.234 with HTTP; Thu, 5 Sep 2013 08:43:24 -0700 (PDT)
-Date: Thu, 5 Sep 2013 16:43:24 +0100
-X-Google-Sender-Auth: 4xSi9ntsMXwC5f6fikxz6YjoDG0
-Message-ID: <CAOMwXhNZ+gPnaDF20MaXAQLUkEf_7w19pzt4PCS=JLM7_8=g-w@mail.gmail.com>
-From: Laszlo Papp <lpapp@kde.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=pPs65UCvmgBzeMP0y6OFqxDFkOLWHIRm429pMmq2GBM=;
+	b=dMi/sprnlWu1EZ5EsgLqlO14k2tHP9pXG4A6T935SEYkbuY7COIy3QQBfn80QqEyPi
+	hdd5P/iafC1pRrptvSuXLT0oQFU6rqf7rs6cJSVO4JknrCR0K8b9sNzhDLj35jaGVCs8
+	FfTJTNO9E6/ZNZsYdQnnFb3smok0XDBVcjBkpHBBQhSmCvihLy3hbSZBzVa3DqXf0Mh6
+	rKfVrmO/6ZzGFmFSboxLJgym3jnIjDo0qr9INW9jt+64WC229P6eSTtRkowajqiR5zgz
+	UNenUrveOMxKhp70H8yagXB7Jmm2t4kagIo/97MLEhq3bw53HbeOSoHvx2jPJ4xf0PC0
+	uzXw==
+X-Gm-Message-State: ALoCoQl6tEbG3YfbqqZ75jsk+Z5MdaIfSJX4Q4eDm0eTP8++hLsScH+EZSOFvBJXW9TwXW7jPezG
+X-Received: by 10.224.147.71 with SMTP id k7mr2075714qav.121.1378398379079;
+	Thu, 05 Sep 2013 09:26:19 -0700 (PDT)
+Received: from ip-10-74-22-218.ec2.internal
+	(ec2-184-72-149-51.compute-1.amazonaws.com. [184.72.149.51])
+	by mx.google.com with ESMTPSA id
+	p10sm42326872qat.10.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 05 Sep 2013 09:26:18 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Dropped libnl fix for net-snmp: Why?
+Date: Thu,  5 Sep 2013 16:25:56 +0000
+Message-Id: <1378398356-21164-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Dale Schaafsma <dales773@hotmail.com>
+Subject: [PATCH] [meta-oe] cloud9: update repository for sass.js
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 15:43:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Sep 2013 16:26:17 -0000
 
-Hi Joe and co,
+From: Jason Kridner <jdk@ti.com>
 
-what exactly is the reason for this patch having been dropped?
+Updated repository location due to old repository being removed.
 
-http://patches.openembedded.org/patch/20563/
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg32587.html
 
-This was not so thoughtful decision. The current net-snmp version will not
-build against denzil, and in fact, this patch should be even upstreamed. I
-will take care about that one, but is there any objection against me
-submitting this change for net-snmp in meta-networking?
+Signed-off-by: Jason Kridner <jdk@ti.com>
+Cc: Dale Schaafsma <dales773@hotmail.com>
+---
+ meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Cheers,
-Laszlo
+diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+index 3300fd2..a755470 100644
+--- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
++++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://c9.io"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
+ 
+-PR = "r4"
++PR = "r5"
+ 
+ # Nodejs-native for node-waf, nodejs4-native for the headers
+ DEPENDS = "libxml2 nodejs-native nodejs4-native"
+@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
+            git://github.com/visionmedia/expresso.git;destsuffix=git/support/connect/support/expresso;name=expresso \
+            git://github.com/visionmedia/node-jscoverage.git;destsuffix=git/support/connect/support/expresso/deps/jscoverage;name=jscoverage \
+            git://github.com/cloudhead/less.js.git;destsuffix=git/support/connect/support/less;name=less \
+-           git://github.com/visionmedia/sass.js.git;destsuffix=git/support/connect/support/sass;name=sass \
++           git://github.com/matehat/sass.js.git;destsuffix=git/support/connect/support/sass;name=sass \
+            git://github.com/ajaxorg/jsDAV.git;destsuffix=git/support/jsdav;name=jsdav \
+            git://github.com/fjakobs/async.js.git;destsuffix=git/support/jsdav/support/async.js;name=async-js \
+            git://github.com/felixge/node-formidable.git;destsuffix=git/support/jsdav/support/formidable;name=formidable \
+-- 
+1.7.10.4
+
 
