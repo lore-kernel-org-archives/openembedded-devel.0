@@ -1,39 +1,36 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 035726C6B7
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FBBE6163E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 14:49:03 +0000 (UTC)
-Received: from [216.82.249.147:39918] by server-12.bemta-12.messagelabs.com id
-	85/F1-10790-1E998225; Thu, 05 Sep 2013 14:49:05 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-2.tower-29.messagelabs.com!1378392544!28296671!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.12; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 20790 invoked from network); 5 Sep 2013 14:49:05 -0000
-Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-2.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
-	5 Sep 2013 14:49:05 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.327.1;
-	Thu, 5 Sep 2013 09:49:13 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.123.3;
-	Thu, 5 Sep 2013 09:49:04 -0500
-Received: from log-cln-jviguera.digi.com (10.101.1.79) by
-	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
-	8.3.327.1; Thu, 5 Sep 2013 16:49:03 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Sep 2013 16:49:01 +0200
-Message-ID: <1378392541-2166-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 1.8.4
+	Thu,  5 Sep 2013 15:43:22 +0000 (UTC)
+Received: by mail-pa0-f44.google.com with SMTP id fz6so2077967pac.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Sep 2013 08:43:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:sender:date:message-id:subject:from
+	:to:cc:content-type;
+	bh=chdooiNyHbY6cMKa6IVLijl1bsKC4T5KssqEO78thr8=;
+	b=TXkn4/dyLjDbdM/i5FvgWRp2b7NAIIJHibi/NW/eX3GMDRjg/i7SRwewH7F1AoOH2k
+	AH+LZQPyx86SuGTGPf9K3fQ/m7GDhKntWM7zhqVOlkADF7CwCOFA7DjeG98vxRT9Z5O9
+	1TnxgpBQV6VU6oOF+zbwS6r9IWTG0DIOHRGZFbiFcHGmr3cZ3Q0Yzc2cqgxY+jLffqT5
+	JCPBr8j63HDwtgp4RWDa1WqcHE+7Kh3DcTLR4dHc4BLWQv8lDgX1DAUmzUudeuIhcs9W
+	xXrlRbzUzU6OiQIsYYQEWfPbX83H2YRS5jzFSBhXwnRU6MtsF+Nhl/X2kwnqLwT4ufBH
+	sdBA==
+X-Gm-Message-State: ALoCoQkyiz2d0HY4XGmbQefw/ZJ9kX9RU8tW6Kxikk5jQ95rvhOxAOVAIiooukHabpMse9ifID3f
 MIME-Version: 1.0
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: [meta-oe][dylan] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
+X-Received: by 10.66.228.234 with SMTP id sl10mr10013797pac.149.1378395804242; 
+	Thu, 05 Sep 2013 08:43:24 -0700 (PDT)
+Sender: lpapp@archlinux.us
+Received: by 10.70.57.234 with HTTP; Thu, 5 Sep 2013 08:43:24 -0700 (PDT)
+Date: Thu, 5 Sep 2013 16:43:24 +0100
+X-Google-Sender-Auth: 4xSi9ntsMXwC5f6fikxz6YjoDG0
+Message-ID: <CAOMwXhNZ+gPnaDF20MaXAQLUkEf_7w19pzt4PCS=JLM7_8=g-w@mail.gmail.com>
+From: Laszlo Papp <lpapp@kde.org>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Dropped libnl fix for net-snmp: Why?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,53 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 14:49:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Sep 2013 15:43:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Use patch from master branch to fix:
+Hi Joe and co,
 
-snmpd.c:459: undefined reference to `netsnmp_sd_listen_fds'
+what exactly is the reason for this patch having been dropped?
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
----
+http://patches.openembedded.org/patch/20563/
 
-Notes:
-    Adapted patch from Thomas Fitzsimmons in master branch (the path for
-    net-snmp recipe changed).
+This was not so thoughtful decision. The current net-snmp version will not
+build against denzil, and in fact, this patch should be even upstreamed. I
+will take care about that one, but is there any objection against me
+submitting this change for net-snmp in meta-networking?
 
- meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch b/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
-index 18955f2..e19153b 100644
---- a/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
-+++ b/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
-@@ -7,12 +7,14 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
- 0641e43c694c485cbbffef0556efc4641bd3ff50
- 76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
- bf108d7f1354f6276fc43c129963f2c49b9fc242
-+3692875172352f72cf3afd0d35f355e83d7e421b
- 74412748067c685e1d8ab6ed3bcc3ca9c2774844
- 86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
- 63557cf8986a33dba1d4429b583a901361052c4f
- 
- Upstream-Status: Backport
- 
-+Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
- diff --git a/README.systemd b/README.systemd
- new file mode 100644
- index 0000000..f731851
-@@ -89,10 +91,10 @@ index b177d5b..08bdfc7 100644
-  #endif
-  
-  #ifndef WIN32
--+#ifndef NETSNMP_NO_SYSYSTEMD
-++#ifndef NETSNMP_NO_SYSTEMD
- +    /* check if systemd has sockets for us and don't close them */
- +    prepared_sockets = netsnmp_sd_listen_fds(0);
--+#endif /* NETSNMP_NO_SYSYSTEMD */
-++#endif /* NETSNMP_NO_SYSTEMD */
- +
-      /*
-       * close all non-standard file descriptors we may have
+Cheers,
+Laszlo
 
