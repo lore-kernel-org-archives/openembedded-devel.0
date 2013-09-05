@@ -1,35 +1,34 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 84C6961613
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A182615E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Sep 2013 22:03:01 +0000 (UTC)
-Received: by mail-vc0-f181.google.com with SMTP id hz10so580699vcb.26
+	Thu,  5 Sep 2013 01:31:54 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id hz10so1206589pad.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Sep 2013 15:03:03 -0700 (PDT)
+	Wed, 04 Sep 2013 18:31:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=zwvdHcFPNJjFhG0Ce8fnydsi1FNiEjgb4nq2Bu30bME=;
-	b=olo96pJ+erxdFSEU5XejkwyRojEgGVbTQ7UPvlerlRTssUp+SG0VYUsGDdf33F4NXC
-	dUwLqU1uuhkfehb5U2O6jTdg0bjaec3eT5TowmbxDwLg9YFJPtdlpl5EY9ZkzxlIOi0C
-	koU2v4VYNBT8ZtqzxlA0Ietknbez2oNq6kfZC+DGb3bs/6LlMNy03aRHSKeIaRMdbKnf
-	IJDwf5XhXq3RPVdCITTHYg7I9fJpO9q5BXQKv5MxAGuj58dwq1jYwow8+i/caRvc9Rkg
-	mlNAXlLTTm+UEoW6Eiewb3Ck7Ygqhh6IHeJqauOW3lG3ycZaG/DARIFCOG1QARNCwklN
-	Bjhg==
-X-Received: by 10.58.146.71 with SMTP id ta7mr3797749veb.23.1378332183075;
-	Wed, 04 Sep 2013 15:03:03 -0700 (PDT)
-MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.155.17 with HTTP; Wed, 4 Sep 2013 15:02:21 -0700 (PDT)
-In-Reply-To: <16E29A58-2D18-42F9-9A52-C27BB0A9FE3E@gmail.com>
-References: <16E29A58-2D18-42F9-9A52-C27BB0A9FE3E@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Wed, 4 Sep 2013 23:02:21 +0100
-X-Google-Sender-Auth: BwWTJGgMNvVt8h_EOgo6ODpQgl4
-Message-ID: <CANyK_8c9rr+g0iZ+6urSwVEPCCuWK2T71nfTNTnidn8+kXaGug@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Subject: Re: mercurial fetch issues
+	h=from:to:cc:subject:date:message-id;
+	bh=1pxj8avElX547ZqOK4AmE9Hx33U4UdJnST5VgXewdFI=;
+	b=zok3Zpu+amqa1Pp1a1H4qsoKruqKOl/M4wnMSNJc+vS1HkbZGfJOQkzPJXE5ZhaEF3
+	sdAiMvySqSxmaGMlVVv3RKTG9VLPnQ5V0Ndhr9IRhC+hW0kiD0yKgoU74bt3SAFLG6O7
+	mRsYf+IhI/37XGaEaCY0UKExrkkB71MaEYccg05zJxcMkQgMCE+oIgcSOKuWMktYXbrb
+	zTSMLJrHUaB8c+RhHy8Pjz7TCKMjdPXK5DmGjjpG1ECdu2hPFA/WiKFAqBAptbgcVgFy
+	blTEFftpqA9f6Q3LMHjLHDKGXb0ZSme0nq0N1O67NWEM90rGXoUX3d2X7i9VRUc5o/h6
+	wqGQ==
+X-Received: by 10.66.146.42 with SMTP id sz10mr2451962pab.100.1378344716279;
+	Wed, 04 Sep 2013 18:31:56 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id 7sm33945277paf.22.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 04 Sep 2013 18:31:55 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Sep 2013 11:28:27 +1000
+Message-Id: <1378344507-30904-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.4
+Subject: [meta-oe][PATCH] xf86-video-ati: add missing xserver-xorg-module-exa RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Sep 2013 22:03:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Sep 2013 01:31:54 -0000
 
-On 4 September 2013 20:42, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
->
-> I am seeing something like below with dylan branch
->
-> WARNING: Failed to fetch URL hg://vim.googlecode.com/hg/;protocol=https;module=vim, attempting MIRRORS if available
-> ERROR: Fetcher failure: Fetch command failed with exit code 255, output:
-> warning: vim.googlecode.com certificate with fingerprint ca:2d:b2:a7:41:f5:00:83:e7:66:57:bf:6f:be:57:a7:56:92:c0:4f not verified (check hostfingerprints or web.cacerts config setting)
-> abort: HTTP Error 404: Not Found
->
-> ERROR: Function failed: Fetcher failure for URL: 'hg://vim.googlecode.com/hg/;protocol=https;module=vim'. Unable to fetch URL from any source.
->
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-I set the URL for this so figured I should test this quickly: I can
-manually clone that with "hg clone https://vim.googlecode.com/hg" and
-"hg clone https://vim.googlecode.com/hg/vim", both work and are
-equivalent so it's likely not a problem with the URL or Google Code
-being down.
-
-I'm getting the certificate warning running mercurial on my desktop
-system (Arch Linux).
-
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
+index 7703a17..a453f90 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.2.0.bb
+@@ -8,6 +8,7 @@ DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
+ 
+ DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
+             virtual/libgl xineramaproto libpciaccess"
++RDEPENDS_${PN} += "xserver-xorg-module-exa"
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
 -- 
-Paul Barker
+1.8.4
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
 
