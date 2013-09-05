@@ -1,40 +1,25 @@
-Return-Path: <lpapp@archlinux.us>
-Received: from mail-pb0-f41.google.com (mail-pb0-f41.google.com
-	[209.85.160.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A68562273
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 17:26:54 +0000 (UTC)
-Received: by mail-pb0-f41.google.com with SMTP id rp2so2066312pbb.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 10:26:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=6SOZCD1nWpRhH+lcmtQqk5to9Ia0qSqo4QenxyUe08c=;
-	b=K6IFikVxdOib6/i2IT9/VPN2c8bmLPanEAmdAzKU9DiDSBj8siJ6cVg5liyYY4JxMa
-	SDa0hRaQ/Tl9p8+RVhpdbkFYtrr80+3pntcdHUeFapiIP+ROIDJsJYRz5cIMJ3GYd10b
-	4+wSrm+Jj65o7VEJGh6HNqljoZt3MKli8HhNklzG4TH/xTf7fCm2u+bIlHce1kqxAqbu
-	/o4aUDbtn85rpVF+CVJIsPQneEU5wrlV8f58xUekjClP7egypRMxEsEaE9Y5z0xIW2Vm
-	gQ5yTqJdKPPCmEcM6Y0wwTOcX287wJNb8v/CZwClrWhrM/TRlN1P0mAB0uxWSNRtWq4n
-	aKbA==
-X-Gm-Message-State: ALoCoQl9GVSuyDnuMP5iyq+fgCD/OKiUIG3R3r1rhkKUvdv/G857Xy6WdbE9Zgjj0i48eqiKMxzW
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id F1BE16147D;
+	Thu,  5 Sep 2013 18:52:46 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 05 Sep 2013 11:49:51 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.90,848,1371106800"; d="scan'208";a="374051786"
+Received: from unknown (HELO helios.localnet) ([10.252.123.106])
+	by orsmga001.jf.intel.com with ESMTP; 05 Sep 2013 11:52:46 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 05 Sep 2013 19:52:45 +0100
+Message-ID: <2350938.FMkgc32xKC@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-29-generic; KDE/4.10.5; i686; ; )
 MIME-Version: 1.0
-X-Received: by 10.66.118.204 with SMTP id ko12mr4663436pab.184.1378402016084; 
-	Thu, 05 Sep 2013 10:26:56 -0700 (PDT)
-Sender: lpapp@archlinux.us
-Received: by 10.70.57.234 with HTTP; Thu, 5 Sep 2013 10:26:56 -0700 (PDT)
-In-Reply-To: <20130905172239.GB27479@deserted.net>
-References: <CAOMwXhNZ+gPnaDF20MaXAQLUkEf_7w19pzt4PCS=JLM7_8=g-w@mail.gmail.com>
-	<20130905172239.GB27479@deserted.net>
-Date: Thu, 5 Sep 2013 18:26:56 +0100
-X-Google-Sender-Auth: 12QcMX0DdEjuLGoxI7XkcxXYTME
-Message-ID: <CAOMwXhPPvkT-V+rKCmsCOo8KJCZWTpK53OO4VdR8vjzMFoYd5g@mail.gmail.com>
-From: Laszlo Papp <lpapp@kde.org>
-To: Joe MacDonald <joe@deserted.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Dropped libnl fix for net-snmp: Why?
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	Jeffrey Osier-mixon <jeffrey.osier-mixon@intel.com>
+Subject: Invitation: OpenEmbedded public TSC/workgroup meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,43 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 17:26:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Sep 2013 18:52:47 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-OK, thanks. I am just trying to make sure not to break anything for libnl
-3.x.
+Hi all,
 
-Here is the old upstream report:
-https://sourceforge.net/p/net-snmp/bugs/2238/
+Please join the OpenEmbedded TSC (Technical Steering Committee) this coming 
+Tuesday for a public IRC meeting to discuss ongoing community technical work.
+
+As you may be aware, the role of the OpenEmbedded TSC is currently evolving to 
+focus our efforts on setting technical direction and resolving conflicts (should 
+they arise), instead of spearheading specific technical contributions. While 
+each of us expects to continue to be involved in technical contributions, we 
+want to reach out to the OpenEmbedded community and work to establish a better 
+way for work to be done. The plan is to hold these public meetings on a 
+monthly basis and reduce separate TSC meetings to quarterly or as-needed.
+
+Time: Tuesday September 10th at 16:00 GMT (9am PDT, 11am CDT, 12 EDT, 18:00 
+CEST, 17:00 BST)
+Where: Freenode IRC, channel #oe
+
+The goal of this meeting is to continue to discuss outstanding tasks, discuss 
+and collect any new tasks or issues, and establish one or more task-
+force/working group/etc in order to accomplish the tasks.
+
+While we are still working on a more formal agenda, we expect to cover topics 
+such as:
+
+* SPDX integration, other licensing issues
+* janitor tasks (general cleanup/maintenance activities)
+
+Cheers,
+Paul
 
 
-On Thu, Sep 5, 2013 at 6:22 PM, Joe MacDonald <joe@deserted.net> wrote:
+-- 
 
-> [Dropped libnl fix for net-snmp: Why?] On 13.09.05 (Thu 16:43) Laszlo Papp
-> wrote:
->
-> > Hi Joe and co,
-> >
-> > what exactly is the reason for this patch having been dropped?
-> >
-> > http://patches.openembedded.org/patch/20563/
-> >
-> > This was not so thoughtful decision. The current net-snmp version will
-> not
-> > build against denzil, and in fact, this patch should be even upstreamed.
-> I will
-> > take care about that one, but is there any objection against me
-> submitting this
-> > change for net-snmp in meta-networking?
->
-> Nope, no objection from me.  It appears to be reasonable.  I think the
-> only reason it doesn't appear in meta-net today is it was sent against
-> OE Classic and perhaps never sent for inclusion in meta-openembedded.
-> That's just a wild guess, though, it looks like the whole thing
-> may pre-date my involvement with the project.
->
-> --
-> -Joe MacDonald.
-> :wq
->
+Paul Eggleton
+Intel Open Source Technology Centre
 
