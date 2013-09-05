@@ -1,44 +1,42 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 268AB6BE71
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id A867E6BE71
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 13:13:11 +0000 (UTC)
-Received: by mail-ea0-f177.google.com with SMTP id f15so892920eak.36
+	Thu,  5 Sep 2013 13:13:46 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so911799eek.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 06:13:13 -0700 (PDT)
+	Thu, 05 Sep 2013 06:13:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=BpgX9WOD7Vz1w3qxWveSRz2l/QwkmqcW2hnGuB/kQlE=;
-	b=Jb6Z4cdoDf2oBnqG2ye/qjbAOF2/N0kRAVD63ah+QE/n95Tb4tZcsFot0bHpAuWTI+
-	QCAt50r3iGJTkra4CmIg01Yo/LDxuV2b0YA8N7x5jQdkQvxkBUpWs9zHmPEIAhTLToCq
-	SaaUFcMLSVXeC/a56JYOc9ryt7YvH/HNfGfAIXI8kUkr9DlazacaIl+ZnlFBDSQkuhH1
-	UGDiEKQIIdDLceSurcPV7UGxNMMoTWgdZYS9ksl89b8qx+MFfleYx46dcpHWurYB7vk3
-	bChAsqt1fkKOxJVq6bLSDOyxwTSSkk/m0AX+7pGYO1RDmi2zvykUR0Tf4AoTBVYiO3al
-	+oYg==
-X-Gm-Message-State: ALoCoQmWUgG7k/d9GGp3s98ntVKAb0pJPvxUNoqoyzL1ShnUKXi3ryiZ0w1uRUasJAQKbvJkXyZJ
-X-Received: by 10.14.8.72 with SMTP id 48mr13512420eeq.25.1378386793512;
-	Thu, 05 Sep 2013 06:13:13 -0700 (PDT)
+	bh=70NCYK+yHhiWzp+K7ceo2dPiVmv7UPXIqRpplk1ApNI=;
+	b=ROFpFMfimubEWNW/VIxlux4XjQKBiE7IdKsPZwtxzGkabxirc8prg6IZ8D95Tcjz6b
+	MR5KeU98zepkxT2gYB5By93DVLGZDz9q65lN1eLCTuMcyxvKrRxPTWsPYtsn3Go59ZpY
+	PJnVZQ8Ds73gHFam4l0N5tb04d2W/S/b8Yg9/qyry0SALwVAJ2mFqjP3s1Rsj840IabT
+	XIpSqUcWjnlTQLQs3ROymKPPP4Yf/CUqTFBctfc9FJ16IE8bNOw1p89O9UlVAjapvMuR
+	xM0C1JnYcISqqzrvwo4GhOGeMflyuJxEIRfkVYB/UGmTnmZYqpZQXk5KpmTDuFgxiJr/
+	X1Mg==
+X-Gm-Message-State: ALoCoQmP87fzL9gdLOOM+Bfvc+etq8Ay7mj1ODgjv0ExH0wXy+4fvl9nMYwWCacsClWtEYTLsXaZ
+X-Received: by 10.15.36.9 with SMTP id h9mr13567161eev.30.1378386828197;
+	Thu, 05 Sep 2013 06:13:48 -0700 (PDT)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id i1sm48619508eeg.0.1969.12.31.16.00.00
+	by mx.google.com with ESMTPSA id i1sm48623274eeg.0.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 05 Sep 2013 06:13:12 -0700 (PDT)
-Date: Thu, 5 Sep 2013 09:13:08 -0400
+	Thu, 05 Sep 2013 06:13:47 -0700 (PDT)
+Date: Thu, 5 Sep 2013 09:13:43 -0400
 From: Joe MacDonald <joe@deserted.net>
-To: Laszlo Papp <lpapp@kde.org>
-Message-ID: <20130905131306.GI5086@deserted.net>
-References: <CAOMwXhN2MBV=1pB7ZUsm+Qt7aN-c7tuOY8u5F3s8VrZ2iR5zJA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130905131341.GJ5086@deserted.net>
+References: <1378358657-12195-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAOMwXhN2MBV=1pB7ZUsm+Qt7aN-c7tuOY8u5F3s8VrZ2iR5zJA@mail.gmail.com>
+In-Reply-To: <1378358657-12195-1-git-send-email-raj.khem@gmail.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] stunnel: Add 4.56 version
+Subject: Re: [meta-oe][meta-networking][PATCH] atftp, libuio: Update the SRC_URI to match upstream sf.net change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,92 +50,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 13:13:13 -0000
-X-Groupsio-MsgNum: 46099
+X-List-Received-Date: Thu, 05 Sep 2013 13:13:47 -0000
+X-Groupsio-MsgNum: 46100
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BWWlCdgt6QLN7tv3"
+	protocol="application/pgp-signature"; boundary="8tZVdKiiYitVG083"
 Content-Disposition: inline
 
---BWWlCdgt6QLN7tv3
-Content-Type: text/plain; charset=iso-8859-1
+--8tZVdKiiYitVG083
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-
-[Re: [meta-networking][PATCH] stunnel: Add 4.56 version] On 13.09.05 (Thu 0=
-6:06) Laszlo Papp wrote:
-
-> Seriously: ping?
 
 Merged, thanks.
 
 -J.
 
->=20
->=20
-> On Wed, Sep 4, 2013 at 8:47 AM, Laszlo Papp <lpapp@kde.org> wrote:
->=20
->     Ping?
->=20
->=20
->     On Thu, Aug 22, 2013 at 8:07 PM, Laszlo Papp <lpapp@kde.org> wrote:
->=20
->         Signed-off-by: Laszlo Papp <lpapp@kde.org>
->         ---
->         =A0meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 14
->         ++++++++++++++
->         =A01 file changed, 14 insertions(+)
->         =A0create mode 100644 meta-networking/recipes-support/stunnel/
->         stunnel_4.56.bb
->=20
->         diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56=
-=2Ebb b/
->         meta-networking/recipes-support/stunnel/stunnel_4.56.bb
->         new file mode 100644
->         index 0000000..0ee8cc8
->         --- /dev/null
->         +++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
->         @@ -0,0 +1,14 @@
->         +SUMMARY =3D "SSL encryption wrapper between remote client and lo=
-cal
->         (inetd-startable) or remote server."
->         +SECTION =3D "net"
->         +LICENSE =3D "GPLv2"
->         +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D
->         f41ebed8571077706fee0b860c4d6666"
->         +DEPENDS =3D "openssl"
->         +
->         +SRC_URI =3D "https://www.stunnel.org/downloads/${BP}.tar.gz"
->         +
->         +SRC_URI[md5sum] =3D "ac4c4a30bd7a55b6687cbd62d864054c"
->         +SRC_URI[sha256sum] =3D
->         "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c871293"
->         +
->         +inherit autotools
->         +
->         +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_INCDIR}' --disable-fi=
-ps"
->         --
->         1.8.3.4
->=20
->   =20
->=20
->=20
->=20
+[[oe] [meta-oe][meta-networking][PATCH] atftp, libuio: Update the SRC_URI t=
+o match upstream sf.net change] On 13.09.04 (Wed 22:24) Khem Raj wrote:
 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-networking/recipes-daemons/atftp/atftp_git.bb | 2 +-
+>  meta-oe/recipes-extended/libuio/libuio_0.2.1.bb    | 4 ++--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-ne=
+tworking/recipes-daemons/atftp/atftp_git.bb
+> index 0bef7a6..6156bb1 100644
+> --- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
+> +++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
+> @@ -8,7 +8,7 @@ PR =3D "r3"
+> =20
+>  SRCREV =3D "be3291a18c069ae23a124ffdc56d64a5ff0bbec7"
+> =20
+> -SRC_URI =3D "git://atftp.git.sourceforge.net/gitroot/atftp/atftp \
+> +SRC_URI =3D "git://git.code.sf.net/p/atftp/code \
+>             file://atftpd-0.7_circumvent_tftp_size_restrictions.patch \
+>             file://atftpd-0.7_unprotected_assignments_crash.patch \
+>             file://atftpd.init \
+> diff --git a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb b/meta-oe/re=
+cipes-extended/libuio/libuio_0.2.1.bb
+> index c16bbd3..48e2930 100644
+> --- a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+> +++ b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+> @@ -3,11 +3,11 @@ SECTION =3D "base"
+>  LICENSE =3D "GPL-2.0"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
+833"
+> =20
+> -SRC_URI =3D "git://libuio.git.sourceforge.net/gitroot/libuio/libuio"
+> +SRC_URI =3D "git://git.code.sf.net/p/libuio/code"
+> =20
+>  inherit autotools
+> =20
+> -SRCREV =3D "e1e0e4fa28838b3115e215c9553905fe630ca145"
+> +SRCREV =3D "ed4f07ea147ac403c28105ab44d01bbf524d36f9"
+> =20
+>  S =3D "${WORKDIR}/git"
+> =20
 --=20
 -Joe MacDonald.
 :wq
 
---BWWlCdgt6QLN7tv3
+--8tZVdKiiYitVG083
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlIog2IACgkQwFvcllog0XzpKQCbBdZHqGsmKszJYm/GYbSJqwAt
-04QAnRgt0jMh8AXKgoNPNZWi7cS95LKh
-=Kq0A
+iEYEARECAAYFAlIog4UACgkQwFvcllog0Xw2igCgh/i6fQQl45+MWEtWhhKj4BVk
+UTkAoKhWRtUCiHimvKYq2xnptkEDaTdX
+=YngK
 -----END PGP SIGNATURE-----
 
---BWWlCdgt6QLN7tv3--
+--8tZVdKiiYitVG083--
