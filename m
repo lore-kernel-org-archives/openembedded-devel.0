@@ -1,36 +1,40 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id ED74B61604
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 97CA161604
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 09:01:57 +0000 (UTC)
-Received: by mail-vc0-f177.google.com with SMTP id gf12so906311vcb.22
+	Thu,  5 Sep 2013 09:13:08 +0000 (UTC)
+Received: by mail-pd0-f169.google.com with SMTP id r10so1553603pdi.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 02:01:59 -0700 (PDT)
+	Thu, 05 Sep 2013 02:13:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=+c1q86YGUfxX6RRblZsCK6sz5L4J41vvTo/SOzxh15Y=;
-	b=btW3xixqjoktbd+UkOdaRp/AOqTabAX78rtiVTqTkdzXu1v7Z8nxVhX6J/eZIwbsKP
-	NCWbfZ99c5L3Ky2sscpXEp6ZLmsITgdz4wj8b2femTUaT+/9Dyw3aldWHJcE8m+7jkpx
-	/GKldpoSXsDTmyWSjMNWFlATzYhmpHjYZgigtGCkHeROmsdDW535YuDtb+6IJfSUCell
-	pRBhs1KysnMQTGT8nKKPQGc1YZofmAhEjvLqyYSBjizK8yGZAafLQ78f1v52l2opmIN2
-	sUNV7nHP3DsqUi7HU40VUbA+Gq+7RQmWcqg9bpSKG74o1aHWzNyPO78jPL7vLx/i5kz+
-	SoTw==
-X-Gm-Message-State: ALoCoQm5wWQdyJdNaKl/QVMXXyhkUvtNzznUns8wv+jZsAehz0g358Lx3UUxZktXUEMfei1nGT3u
-X-Received: by 10.52.164.16 with SMTP id ym16mr404813vdb.32.1378371719245;
-	Thu, 05 Sep 2013 02:01:59 -0700 (PDT)
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=1FpTzB2LmauUWzIi6iyq/7aMreGGHe4gI7DtzhtOURQ=;
+	b=NE2oYcUbYRwHzQXrF5LZt1EMdQpb5XZqBYhtD8xmSoILohD1LKv83nMkSYsbnnFA+W
+	JGzYIBJggQR901zK3DvlT+kHBGWRGKJj4mRLgee5AksN6xeFkXzx/uOrvIlFTiMl1938
+	fXSh+hd/cjj2IOnk2wgswt+v3l6cNjPRTZTgUtvSSakZZRn/G7DL0ncTCDVKxyDxRBWN
+	MMpQJmeWbeCW7gbzKif722y26Wtcz3edw3/i7lIZ52wOlpCWNfB0wau60HQ1Agr6vknO
+	jCgsFrLuGQ4K/4KIdYJJEVSqyzS2xvJOGqpqv6kJc8/H9c/gPiLWCFxd/IPSnsAQmboJ
+	kQIQ==
+X-Gm-Message-State: ALoCoQksmrn2Vk1LdFoyGu/Q6FByAqR8tBVFO/iDnHcIPWaOvuIo+9IVwTjLunq02EXbH7AInHKI
 MIME-Version: 1.0
-Received: by 10.220.71.201 with HTTP; Thu, 5 Sep 2013 02:01:39 -0700 (PDT)
-In-Reply-To: <CADkTA4PbVB2X9abGFMKsAt6NRaZxnZa1GK86e3L+=CGzNfswdA@mail.gmail.com>
+X-Received: by 10.68.182.225 with SMTP id eh1mr7925104pbc.172.1378372390549;
+	Thu, 05 Sep 2013 02:13:10 -0700 (PDT)
+Sender: lpapp@archlinux.us
+Received: by 10.70.57.234 with HTTP; Thu, 5 Sep 2013 02:13:10 -0700 (PDT)
+In-Reply-To: <CAJTo0LYA4pa_xSQe=PL9eYXfEr3rULSd7nJGSNLnoJKYEX_uMw@mail.gmail.com>
 References: <1378110051-8976-1-git-send-email-lpapp@kde.org>
 	<20130904211411.GR3761@deserted.net>
 	<CADkTA4PbVB2X9abGFMKsAt6NRaZxnZa1GK86e3L+=CGzNfswdA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 5 Sep 2013 10:01:39 +0100
-Message-ID: <CAJTo0LYA4pa_xSQe=PL9eYXfEr3rULSd7nJGSNLnoJKYEX_uMw@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
+	<CAJTo0LYA4pa_xSQe=PL9eYXfEr3rULSd7nJGSNLnoJKYEX_uMw@mail.gmail.com>
+Date: Thu, 5 Sep 2013 10:13:10 +0100
+X-Google-Sender-Auth: hXXpYQbnZEZpIsteuVEwngXCkpM
+Message-ID: <CAOMwXhNruxN=K=h0vrrZa6vFgFYufwLr9tF7gYsQNzXsOsnULA@mail.gmail.com>
+From: Laszlo Papp <lpapp@kde.org>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-networking][PATCH] openflow: Add latest from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -45,33 +49,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 09:01:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 Sep 2013 09:13:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 5 September 2013 05:39, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
-> The meta-virt recipe had the same _1.0.bb extension, and it's SRCREV lines up
-> with the openflow-1.0.0 tag in the repository:
->
-> --------
->
-> commit 5ccca75a69f99791659bcfbcf35353ab1921320a
-> Author: Glen Gibb <grg@stanford.edu>
-> Date:   Thu Dec 31 16:00:53 2009 -0800
->
->     docs: Update ChangeLog to include 1.0.0 information
->
-> :100644 100644 2f13dd7... aa0e92e... M  ChangeLog
->
-> -------
->
-> So it's definitely an option to keep that recipe around as the tagged 1.0, and
-> create a _git that tracks newer changes (where "newer" is relative, 2011 is
-> the latest commit in that repo).
+On Thu, Sep 5, 2013 at 10:01 AM, Burton, Ross <ross.burton@intel.com> wrote:
 
-FWIW, I massively prefer "releases that are taken from git" like this
-(where its a git fetch on a hash that is the tag of the releases) to
-be versioned correctly like _1.0.bb instead of _git.bb for clarity and
-future alternatives such as true git snapshot or multiple versions.
+> On 5 September 2013 05:39, Bruce Ashfield <bruce.ashfield@gmail.com>
+> wrote:
+> > The meta-virt recipe had the same _1.0.bb extension, and it's SRCREV
+> lines up
+> > with the openflow-1.0.0 tag in the repository:
+> >
+> > --------
+> >
+> > commit 5ccca75a69f99791659bcfbcf35353ab1921320a
+> > Author: Glen Gibb <grg@stanford.edu>
+> > Date:   Thu Dec 31 16:00:53 2009 -0800
+> >
+> >     docs: Update ChangeLog to include 1.0.0 information
+> >
+> > :100644 100644 2f13dd7... aa0e92e... M  ChangeLog
+> >
+> > -------
+> >
+> > So it's definitely an option to keep that recipe around as the tagged
+> 1.0, and
+> > create a _git that tracks newer changes (where "newer" is relative, 2011
+> is
+> > the latest commit in that repo).
+>
+> FWIW, I massively prefer "releases that are taken from git" like this
+> (where its a git fetch on a hash that is the tag of the releases) to
+> be versioned correctly like _1.0.bb instead of _git.bb for clarity and
+> future alternatives such as true git snapshot or multiple versions.
+>
 
-Ross
+... and I massively prefer "released not to be taken from git". So if 1.0
+has to be *really* supported which I do not think so, it should get the
+release tarball.
+
+Moreover, there have not been new git commits for about two years now
+because the standard was taken over by a different organization which seems
+to work behind the scenes. Too bad, they have not released the latest
+before that change. Hopefully, this will not mislead anyone that this
+software is still actively developed in public.
+
+That is another very reason IMHO which it would not fit the core layer at
+all.
+
+-- Laszlo
+
+
+>
+> Ross
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
