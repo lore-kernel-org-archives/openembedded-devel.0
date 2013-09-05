@@ -1,35 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 410B76162A
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EBFF6162A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 05:33:29 +0000 (UTC)
-Received: by mail-pb0-f50.google.com with SMTP id uo5so1333278pbc.9
+	Thu,  5 Sep 2013 05:33:43 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id kx10so1425990pab.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Sep 2013 22:33:31 -0700 (PDT)
+	Wed, 04 Sep 2013 22:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=4iGEhnGHBRwnww3l6HtNVQPm8oVuxP5mgc0jvYmSU8w=;
-	b=zRrXsRIxdyDd3Ad/vWbGgmMqptJ2Il3FqxbNDn25HNmAGU33YDmm00dk2aCPhhdTtt
-	Jy7kfGYQofmyB/8E6p9MPsZBIPKF80Mt3VcwRNa2K5ygMENjBXstElxdm6vNZtxVS6AO
-	XTS7tPmZL1zJsHEQhQUZQ6VSoAIlxYHbb2EeYIn7hLg4RvxWBcZESFyy1e7WKJPVSkFt
-	vEvePy+Ud8bnzwsEt8Sa++JuhMvFJ6+y00oq5v3Tdc6sG/RVFzhuUf5ASHMhHgFeekUs
-	vbAxJRV+ryem4ipVRSSbBOpBoBBt/Bgr8qTaIA5J4acF3lt0nwURofcG5g5sDxppoF7Z
-	WlKg==
-X-Received: by 10.66.121.234 with SMTP id ln10mr7221245pab.20.1378359211244;
-	Wed, 04 Sep 2013 22:33:31 -0700 (PDT)
+	bh=js+dtw0siimRiwbnXm1LueOOtDMJ5ydDVJWbLVmEQNQ=;
+	b=evCSn2oUrmvH83cK5blj8mKIfn0bks5wk4RJvbY/TbkECZ1WIHNb1MkpZsLwPX6f8k
+	qS42nejfPg0DV8aIldhCT2Nb58P+84LwTJ08w1UHo8puV9tJIMj451JJ3OhCRfZHTCf0
+	WBpJxBCy8r2thZ+Wh+4jmmbDttejnuuR/IWH4c1kNwxOSW7pDbUw1jOvws4MxNGoCDRt
+	4i3SX7anZdg+wn3L/akzXq+4svQwHK/KuLHoIHEyagdE/zBGHK/Jv+IF2CEFb2Fh3x2l
+	PtXJsKiBmLSxO8ACBFb77a15gYlzgXwPs+nzvR4YPmNKDLXht/GNTblAO35FjC2R0yOJ
+	2QJg==
+X-Received: by 10.66.230.138 with SMTP id sy10mr7382627pac.103.1378359225180; 
+	Wed, 04 Sep 2013 22:33:45 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by mx.google.com with ESMTPSA id
-	bb1sm33030108pbc.10.1969.12.31.16.00.00
+	qp10sm35240349pab.13.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 04 Sep 2013 22:33:30 -0700 (PDT)
+	Wed, 04 Sep 2013 22:33:44 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Sep 2013 15:29:55 +1000
-Message-Id: <1378358995-5119-1-git-send-email-net147@gmail.com>
+Date: Thu,  5 Sep 2013 15:30:16 +1000
+Message-Id: <1378359016-5186-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 1.8.4
-Subject: [meta-oe][PATCH] lmbench: specify configuration for systemd-tmpfiles --update
+Subject: [meta-oe][PATCH] nostromo: specify configuration for systemd-tmpfiles --update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 05:33:30 -0000
+X-List-Received-Date: Thu, 05 Sep 2013 05:33:43 -0000
 
 Running systemd-tmpfiles --update without specifying a configuration
 file results in all tmpfiles.d configuration files being processed.
@@ -56,19 +56,19 @@ from logging in with the message "System is booting up.".
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 2 +-
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index d42d62c..fb8cf4f 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -64,7 +64,7 @@ do_install () {
+diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
+index 3aaa5c2..fe860ec 100644
+--- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
++++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
+@@ -61,7 +61,7 @@ CONFFILES_${PN} += "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf"
  pkg_postinst_${PN} () {
      if [ -z "$D" ]; then
-         if command -v systemd-tmpfiles >/dev/null; then
+         if [ -e /sys/fs/cgroup/systemd ]; then
 -            systemd-tmpfiles --create
-+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/lmbench.conf
++            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/nostromo.conf
          elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
              ${sysconfdir}/init.d/populate-volatile.sh update
          fi
