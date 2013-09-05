@@ -1,21 +1,25 @@
-Return-Path: <erp@movis.dk>
-Received: from clobix.com (mail.clobix.com [54.229.118.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B332C60F1B
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E9736160A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 12:10:26 +0000 (UTC)
-Received: (qmail 6809 invoked by uid 89); 5 Sep 2013 12:10:16 -0000
-Received: from unknown (HELO ?10.0.0.129?) (erp@movis.dk@::ffff:83.93.56.101)
-	by 0 with ESMTPA; 5 Sep 2013 12:10:16 -0000
-Message-ID: <52287493.9030107@movis.dk>
-Date: Thu, 05 Sep 2013 14:09:55 +0200
-From: "Emil R. Petersen" <erp@movis.dk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.12) Gecko/20130116 Icedove/10.0.12
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Thu,  5 Sep 2013 12:15:39 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 05 Sep 2013 05:15:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.90,847,1371106800"; d="scan'208";a="398666519"
+Received: from unknown (HELO helios.localnet) ([10.252.123.106])
+	by orsmga002.jf.intel.com with ESMTP; 05 Sep 2013 05:15:29 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Emil R. Petersen" <erp@movis.dk>
+Date: Thu, 05 Sep 2013 13:15:28 +0100
+Message-ID: <1500957.tfn1Jz7R43@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-29-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <52287347.7050808@movis.dk>
 References: <1378382068-24795-1-git-send-email-javier.viguera@digi.com>
-	<20130905140917.48edcb06@e6520eb>
-In-Reply-To: <20130905140917.48edcb06@e6520eb>
+	<52287347.7050808@movis.dk>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-webserver] cherokee: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -30,52 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 12:10:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Sep 2013 12:15:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Which would also invalidate my concern about possibly insecure 
-third-party mirrors. Fantastic.
+Hi Emil,
 
-On 05/09/13 14:09, Eric Bénard wrote:
-> Hi Javier,
->
-> Le Thu, 5 Sep 2013 13:54:28 +0200,
-> Javier Viguera<javier.viguera@digi.com>  a écrit :
->
->> The package is no longer available in the official cherokee site,
->> so download it from a mirror.
->>
->> Signed-off-by: Javier Viguera<javier.viguera@digi.com>
->> ---
->>
->> Notes:
->>      To be cherry-picked to Dylan as well.
->>
->>   meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
->> index 265e24e..4b2d68d 100644
->> --- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
->> +++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
->> @@ -9,7 +9,7 @@ PR = "r9"
->>
->>   DEPENDS = "libpcre openssl mysql5 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
->>
->> -SRC_URI = "http://www.cherokee-project.com/download/1.2/${PV}/cherokee-${PV}.tar.gz \
->> +SRC_URI = "ftp://ftp.osuosl.org/.1/cherokee/1.2/${PV}/cherokee-${PV}.tar.gz \
->>              file://cherokee.init \
->>              file://cherokee.service \
->>   "
-> in fact the correct URL is now :
-> https://github.com/cherokee/webserver/archive/v1.2.98.tar.gz
-> so I think you can switch to :
-> +SRC_URI = "https://github.com/cherokee/webserver/archive/v${PV}.tar.gz
->
-> Eric
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On Thursday 05 September 2013 14:04:23 Emil R. Petersen wrote:
+> I can see that this is hosted on a University website, but is there a
+> policy for using non-official mirrors?
+> 
+> This seems like it opens up a lot of potential security problems IMO.
+> Not only could the third-party mirror be easy to compromise, but how
+> would be assure we don't use a malicious mirror? Or that a malicious
+> contributer doesn't add a deliberatively tainted mirror?
+
+The SRC_URI checksums protect against this being a problem. If the tarball was 
+tampered with it could not pass both the md5sum and sha256sum.
+
+> In short, is there some sort of policy on when and how we use
+> third-party mirrors? Is security considerations part of the policy?
+
+We use them if we're forced to; however we also have the option of uploading 
+files to the openembedded.org mirrors if needed e.g. in the case where upstream 
+completely goes away and there are no other stable mirrors.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
