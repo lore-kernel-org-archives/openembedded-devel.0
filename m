@@ -1,42 +1,42 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id A867E6BE71
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B54B6C6B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 13:13:46 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id e53so911799eek.27
+	Thu,  5 Sep 2013 13:14:24 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c1so905063eek.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 06:13:48 -0700 (PDT)
+	Thu, 05 Sep 2013 06:14:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=70NCYK+yHhiWzp+K7ceo2dPiVmv7UPXIqRpplk1ApNI=;
-	b=ROFpFMfimubEWNW/VIxlux4XjQKBiE7IdKsPZwtxzGkabxirc8prg6IZ8D95Tcjz6b
-	MR5KeU98zepkxT2gYB5By93DVLGZDz9q65lN1eLCTuMcyxvKrRxPTWsPYtsn3Go59ZpY
-	PJnVZQ8Ds73gHFam4l0N5tb04d2W/S/b8Yg9/qyry0SALwVAJ2mFqjP3s1Rsj840IabT
-	XIpSqUcWjnlTQLQs3ROymKPPP4Yf/CUqTFBctfc9FJ16IE8bNOw1p89O9UlVAjapvMuR
-	xM0C1JnYcISqqzrvwo4GhOGeMflyuJxEIRfkVYB/UGmTnmZYqpZQXk5KpmTDuFgxiJr/
-	X1Mg==
-X-Gm-Message-State: ALoCoQmP87fzL9gdLOOM+Bfvc+etq8Ay7mj1ODgjv0ExH0wXy+4fvl9nMYwWCacsClWtEYTLsXaZ
-X-Received: by 10.15.36.9 with SMTP id h9mr13567161eev.30.1378386828197;
-	Thu, 05 Sep 2013 06:13:48 -0700 (PDT)
+	bh=tpHqBd4lpD3iYdNlIRo4EDX0pTpgeCTK8WMzRA8Wo/E=;
+	b=Oa7NKYMmT/f6uu1pnBTJPVAuqzj7LLWNXCbGbGFRNPC43dlMjhZ+3IOsOGkHe9iOPO
+	mJvUi8/s2Sexjl5mkh3MR4vkijLG2R3u625LLKPuba9ApefN1M5EAPOndDXOcNP1oynv
+	K+4xikowGUgoUQTFoOfucvHSJE3Y3cUUaq91jwiFUdRZwGN2wTLI6mUag06fw2PXgzwL
+	koa0IMDF63fWE6dxrLkJhKQ2kJK/7nFH4bMUoSK4gwQfnSD+utA0I4PLzd/tUXVqC+t8
+	tC+MLzXbOhklSJfmk/3TtQ/NbwxuN/5c3v/ODUm+NzZ5BOInR3ZqmiZEpKL6+MdLYf29
+	bUbA==
+X-Gm-Message-State: ALoCoQnZCEAfgItVzrwk2GQ8wzNNa95tkja9bcUru9VjGb4RAC+zEhucumo7wWcKFcazEr9bMgpP
+X-Received: by 10.14.183.2 with SMTP id p2mr13440475eem.44.1378386865297;
+	Thu, 05 Sep 2013 06:14:25 -0700 (PDT)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id i1sm48623274eeg.0.1969.12.31.16.00.00
+	by mx.google.com with ESMTPSA id a6sm48590859eei.10.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 05 Sep 2013 06:13:47 -0700 (PDT)
-Date: Thu, 5 Sep 2013 09:13:43 -0400
+	Thu, 05 Sep 2013 06:14:24 -0700 (PDT)
+Date: Thu, 5 Sep 2013 09:14:20 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130905131341.GJ5086@deserted.net>
-References: <1378358657-12195-1-git-send-email-raj.khem@gmail.com>
+Message-ID: <20130905131418.GK5086@deserted.net>
+References: <1378191510-31214-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1378358657-12195-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1378191510-31214-1-git-send-email-schnitzeltony@googlemail.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][meta-networking][PATCH] atftp, libuio: Update the SRC_URI to match upstream sf.net change
+Subject: Re: [meta-networking] ntp: enable systemd-timedated control for ntp.service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,78 +50,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 13:13:47 -0000
-X-Groupsio-MsgNum: 46100
+X-List-Received-Date: Thu, 05 Sep 2013 13:14:24 -0000
+X-Groupsio-MsgNum: 46101
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8tZVdKiiYitVG083"
+	protocol="application/pgp-signature"; boundary="LHvWgpbS7VDUdu2f"
 Content-Disposition: inline
 
---8tZVdKiiYitVG083
-Content-Type: text/plain; charset=us-ascii
+--LHvWgpbS7VDUdu2f
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Merged, thanks.
-
 -J.
 
-[[oe] [meta-oe][meta-networking][PATCH] atftp, libuio: Update the SRC_URI t=
-o match upstream sf.net change] On 13.09.04 (Wed 22:24) Khem Raj wrote:
+[[oe] [meta-networking] ntp: enable systemd-timedated control for ntp.servi=
+ce] On 13.09.03 (Tue 08:58) Andreas M=FCller wrote:
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
 > ---
->  meta-networking/recipes-daemons/atftp/atftp_git.bb | 2 +-
->  meta-oe/recipes-extended/libuio/libuio_0.2.1.bb    | 4 ++--
->  2 files changed, 3 insertions(+), 3 deletions(-)
+>  meta-networking/recipes-support/ntp/ntp.inc       |    5 +++++
+>  meta-networking/recipes-support/ntp/ntp/ntpd.list |    1 +
+>  2 files changed, 6 insertions(+), 0 deletions(-)
+>  create mode 100644 meta-networking/recipes-support/ntp/ntp/ntpd.list
 >=20
-> diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-ne=
-tworking/recipes-daemons/atftp/atftp_git.bb
-> index 0bef7a6..6156bb1 100644
-> --- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
-> +++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-> @@ -8,7 +8,7 @@ PR =3D "r3"
+> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networkin=
+g/recipes-support/ntp/ntp.inc
+> index 79e7401..ebfa222 100644
+> --- a/meta-networking/recipes-support/ntp/ntp.inc
+> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+> @@ -22,6 +22,7 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/n=
+tp4/ntp-4.2/ntp-${PV}.tar.g
+>             file://ntpd.service \
+>             file://sntp.service \
+>             file://sntp \
+> +           file://ntpd.list \
+>  "
 > =20
->  SRCREV =3D "be3291a18c069ae23a124ffdc56d64a5ff0bbec7"
+>  inherit autotools update-rc.d systemd
+> @@ -63,6 +64,10 @@ do_install_append() {
+>      install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/sy=
+stem/
+>      install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/syste=
+m/
+>      install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/syste=
+m/
+> +
+> +    # see http://www.freedesktop.org/wiki/Software/systemd/timedated/
+> +    install -d ${D}${libdir}/systemd/ntp-units.d
+> +    install -m 0644 ${WORKDIR}/ntpd.list ${D}${libdir}/systemd/ntp-units=
+=2Ed/60-ntpd.list
+>  }
 > =20
-> -SRC_URI =3D "git://atftp.git.sourceforge.net/gitroot/atftp/atftp \
-> +SRC_URI =3D "git://git.code.sf.net/p/atftp/code \
->             file://atftpd-0.7_circumvent_tftp_size_restrictions.patch \
->             file://atftpd-0.7_unprotected_assignments_crash.patch \
->             file://atftpd.init \
-> diff --git a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb b/meta-oe/re=
-cipes-extended/libuio/libuio_0.2.1.bb
-> index c16bbd3..48e2930 100644
-> --- a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
-> +++ b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
-> @@ -3,11 +3,11 @@ SECTION =3D "base"
->  LICENSE =3D "GPL-2.0"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
-833"
-> =20
-> -SRC_URI =3D "git://libuio.git.sourceforge.net/gitroot/libuio/libuio"
-> +SRC_URI =3D "git://git.code.sf.net/p/libuio/code"
-> =20
->  inherit autotools
-> =20
-> -SRCREV =3D "e1e0e4fa28838b3115e215c9553905fe630ca145"
-> +SRCREV =3D "ed4f07ea147ac403c28105ab44d01bbf524d36f9"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
+>  PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+> diff --git a/meta-networking/recipes-support/ntp/ntp/ntpd.list b/meta-net=
+working/recipes-support/ntp/ntp/ntpd.list
+> new file mode 100644
+> index 0000000..d1fe6b7
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ntp/ntp/ntpd.list
+> @@ -0,0 +1 @@
+> +ntpd.service
 --=20
 -Joe MacDonald.
 :wq
 
---8tZVdKiiYitVG083
+--LHvWgpbS7VDUdu2f
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlIog4UACgkQwFvcllog0Xw2igCgh/i6fQQl45+MWEtWhhKj4BVk
-UTkAoKhWRtUCiHimvKYq2xnptkEDaTdX
-=YngK
+iEYEARECAAYFAlIog6oACgkQwFvcllog0XzFVgCfbUjxtN1nIU6m1mHkFI0eWss6
+oZ8AoIJ9C36vYZPOUA6W0lBoWmzgCAAD
+=t8Xh
 -----END PGP SIGNATURE-----
 
---8tZVdKiiYitVG083--
+--LHvWgpbS7VDUdu2f--
