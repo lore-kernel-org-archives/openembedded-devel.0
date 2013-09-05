@@ -1,25 +1,42 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E9736160A
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1618A61788
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 12:15:39 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 05 Sep 2013 05:15:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.90,847,1371106800"; d="scan'208";a="398666519"
-Received: from unknown (HELO helios.localnet) ([10.252.123.106])
-	by orsmga002.jf.intel.com with ESMTP; 05 Sep 2013 05:15:29 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Emil R. Petersen" <erp@movis.dk>
-Date: Thu, 05 Sep 2013 13:15:28 +0100
-Message-ID: <1500957.tfn1Jz7R43@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-29-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <52287347.7050808@movis.dk>
-References: <1378382068-24795-1-git-send-email-javier.viguera@digi.com>
-	<52287347.7050808@movis.dk>
+	Thu,  5 Sep 2013 12:21:52 +0000 (UTC)
+Received: from [216.82.249.147:6495] by server-13.bemta-12.messagelabs.com id
+	72/EB-30364-16778225; Thu, 05 Sep 2013 12:21:53 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-12.tower-29.messagelabs.com!1378383712!23138824!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.12; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29394 invoked from network); 5 Sep 2013 12:21:52 -0000
+Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-12.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
+	5 Sep 2013 12:21:52 -0000
+Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 5 Sep 2013 07:22:01 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by
+	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
+	8.3.327.1; Thu, 5 Sep 2013 07:21:51 -0500
+Received: from [10.101.1.79] (10.101.1.79) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 5 Sep 2013 14:21:50 +0200
+Message-ID: <52287758.6050506@digi.com>
+Date: Thu, 5 Sep 2013 14:21:44 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130804 Thunderbird/17.0.8
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+References: <1378382068-24795-1-git-send-email-javier.viguera@digi.com>
+	<20130905140917.48edcb06@e6520eb>
+In-Reply-To: <20130905140917.48edcb06@e6520eb>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-webserver] cherokee: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -34,36 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 12:15:40 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 05 Sep 2013 12:21:52 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Emil,
+Hi Eric
 
-On Thursday 05 September 2013 14:04:23 Emil R. Petersen wrote:
-> I can see that this is hosted on a University website, but is there a
-> policy for using non-official mirrors?
-> 
-> This seems like it opens up a lot of potential security problems IMO.
-> Not only could the third-party mirror be easy to compromise, but how
-> would be assure we don't use a malicious mirror? Or that a malicious
-> contributer doesn't add a deliberatively tainted mirror?
+On 05/09/13 14:09, Eric Bénard wrote:
+> in fact the correct URL is now :
+> https://github.com/cherokee/webserver/archive/v1.2.98.tar.gz
+> so I think you can switch to :
+> +SRC_URI = "https://github.com/cherokee/webserver/archive/v${PV}.tar.gz
 
-The SRC_URI checksums protect against this being a problem. If the tarball was 
-tampered with it could not pass both the md5sum and sha256sum.
+The problem with the "official" one in github is that it is not the 
+same. The checksums are different and a basic *diff* verification 
+between the unpacked packages shows a bunch of differences.
 
-> In short, is there some sort of policy on when and how we use
-> third-party mirrors? Is security considerations part of the policy?
+The one in the OSUOSL is exactly the same (same checksums).
 
-We use them if we're forced to; however we also have the option of uploading 
-files to the openembedded.org mirrors if needed e.g. in the case where upstream 
-completely goes away and there are no other stable mirrors.
-
-Cheers,
-Paul
+Regarding the mirror policies i just don't know. I was bitten by this 
+problem trying to build cherokee in Dylan branch and tried to find a 
+mirror. I selected OSUOSL because of its track supporting open source 
+projects.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
 
