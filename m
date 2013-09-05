@@ -1,43 +1,39 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D2895616F4
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 035726C6B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2013 13:28:56 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id k11so913283eaj.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2013 06:28:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=GTagQQOLyFeUUSFmuY/ILHCXzcDRFUDeNWn7SflO59M=;
-	b=eC6B3dXapET5eZfdaVho4qzh6bfugh3vaCDt+5EXITQpaXoxJbdZuo6Y/2CB0+7hG9
-	5wMjDPE3gABPx6dD+GbqJ4KbVZcBGbnpuPw+9KQaMQuPll+2Fvg/XepuFJjqMpK6qfDR
-	qTguhXMgEBZi4OmLYhuvmqg08MsotVRGgdlswp/17b3lOPIFLglTHV7EQvp/eHJOMwRB
-	Tp+rwoZZaT1ezatc0fLK3AXDrs4C4aBoaBQDDv6+FBlIO4tLqxOJO9YEO/3gkDhgpo2M
-	qSafM7dkzmkIZ/Pmvgt3gO3lEmPhM2rnbKgw1IrhaUlZRf1a0AHSLJ8x2ISWgJ5Ogxb2
-	IAmA==
-X-Gm-Message-State: ALoCoQmTUb7mKRb7OEAWb4N3Ar0gDpL3bPNhj4SAPBDdOuFL2o+0+tkQ1NjytSEoYumEzapnZLEy
-X-Received: by 10.14.99.193 with SMTP id x41mr4295582eef.52.1378387738154;
-	Thu, 05 Sep 2013 06:28:58 -0700 (PDT)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id t6sm48689244eel.12.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 05 Sep 2013 06:28:57 -0700 (PDT)
-Date: Thu, 5 Sep 2013 09:28:53 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130905132851.GM5086@deserted.net>
-References: <1376619839-23232-1-git-send-email-rongqing.li@windriver.com>
+	Thu,  5 Sep 2013 14:49:03 +0000 (UTC)
+Received: from [216.82.249.147:39918] by server-12.bemta-12.messagelabs.com id
+	85/F1-10790-1E998225; Thu, 05 Sep 2013 14:49:05 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-2.tower-29.messagelabs.com!1378392544!28296671!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.12; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 20790 invoked from network); 5 Sep 2013 14:49:05 -0000
+Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-2.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
+	5 Sep 2013 14:49:05 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 5 Sep 2013 09:49:13 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.123.3;
+	Thu, 5 Sep 2013 09:49:04 -0500
+Received: from log-cln-jviguera.digi.com (10.101.1.79) by
+	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
+	8.3.327.1; Thu, 5 Sep 2013 16:49:03 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 5 Sep 2013 16:49:01 +0200
+Message-ID: <1378392541-2166-1-git-send-email-javier.viguera@digi.com>
+X-Mailer: git-send-email 1.8.4
 MIME-Version: 1.0
-In-Reply-To: <1376619839-23232-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH meta-networking] quagga: two fixes
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: [meta-oe][dylan] net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,92 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 13:28:58 -0000
-X-Groupsio-MsgNum: 46103
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="n1iI6MeELQa9IOaF"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Sep 2013 14:49:04 -0000
+Content-Type: text/plain
 
---n1iI6MeELQa9IOaF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Use patch from master branch to fix:
 
-Merged, thanks.
+snmpd.c:459: undefined reference to `netsnmp_sd_listen_fds'
 
--J.
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+---
 
-[[oe] [PATCH meta-networking] quagga: two fixes] On 13.08.16 (Fri 10:23) ro=
-ngqing.li@windriver.com wrote:
+Notes:
+    Adapted patch from Thomas Fitzsimmons in master branch (the path for
+    net-snmp recipe changed).
 
-> From: "Roy.Li" <rongqing.li@windriver.com>
->=20
-> 1. quagga should depend on iproute2, since ip from busybox is not suffici=
-ent
-> 2. fix a typOS(should chmod, not chown)
->=20
-> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> ---
->  meta-networking/recipes-protocols/quagga/quagga.inc |    9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-n=
-etworking/recipes-protocols/quagga/quagga.inc
-> index f5489c6..89b9f7a 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
-> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> @@ -5,7 +5,7 @@ Unix platforms, particularly FreeBSD, Linux, Solaris and =
-NetBSD. \
->  Quagga is a fork of GNU Zebra which was developed by Kunihiro \
->  Ishiguro. The Quagga tree aims to build a more involved community \
->  around Quagga than the current centralised model of GNU Zebra."
-> -HOMEPAGE =3D "http://www.quagga.net/"
-> +HOMEPAGE =3D "http://www.nongnu.org/quagga/"
->  SECTION =3D "network"
->  LICENSE =3D "GPL-2.0 & LGPL-2.0"
->  DEPENDS =3D "readline ncurses perl-native"
-> @@ -17,6 +17,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ca43cbc842c=
-2336e835926c2166c28b \
-> =20
->  INC_PR =3D "r2"
-> =20
-> +# the "ip" command from busybox is not sufficient (flush by protocol flu=
-shes all routes)
-> +RDEPENDS_${PN} +=3D "iproute2"
-> +
->  QUAGGASUBDIR =3D ""
->  # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
->  # versions and leave it empty for recent versions.
-> @@ -128,11 +131,11 @@ pkg_postinst_${PN} () {
->      if [ "x$D" !=3D "x" ] ; then
->          exit 1
->      fi
-> -    for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch =
-${sysconfdir}/quagga/$f.conf; done
-> +    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do =
-touch ${sysconfdir}/quagga/$f.conf; done
->      chown quagga:quaggavty ${sysconfdir}/quagga
->      chown quagga:quagga ${sysconfdir}/quagga/*.conf
->      chmod 750 ${sysconfdir}/quagga
-> -    chown 640 ${sysconfdir}/quagga/*.conf
-> +    chmod 640 ${sysconfdir}/quagga/*.conf
->      if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
->          ${sysconfdir}/init.d/populate-volatile.sh update
->      fi
---=20
--Joe MacDonald.
-:wq
+ meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
---n1iI6MeELQa9IOaF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch b/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
+index 18955f2..e19153b 100644
+--- a/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
++++ b/meta-oe/recipes-extended/net-snmp/net-snmp/systemd-support.patch
+@@ -7,12 +7,14 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
+ 0641e43c694c485cbbffef0556efc4641bd3ff50
+ 76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
+ bf108d7f1354f6276fc43c129963f2c49b9fc242
++3692875172352f72cf3afd0d35f355e83d7e421b
+ 74412748067c685e1d8ab6ed3bcc3ca9c2774844
+ 86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
+ 63557cf8986a33dba1d4429b583a901361052c4f
+ 
+ Upstream-Status: Backport
+ 
++Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+ diff --git a/README.systemd b/README.systemd
+ new file mode 100644
+ index 0000000..f731851
+@@ -89,10 +91,10 @@ index b177d5b..08bdfc7 100644
+  #endif
+  
+  #ifndef WIN32
+-+#ifndef NETSNMP_NO_SYSYSTEMD
+++#ifndef NETSNMP_NO_SYSTEMD
+ +    /* check if systemd has sockets for us and don't close them */
+ +    prepared_sockets = netsnmp_sd_listen_fds(0);
+-+#endif /* NETSNMP_NO_SYSYSTEMD */
+++#endif /* NETSNMP_NO_SYSTEMD */
+ +
+      /*
+       * close all non-standard file descriptors we may have
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlIohxMACgkQwFvcllog0XzqXwCglvVT+9vc4yFSlchw3amTvsd7
-BPIAnAtD5ge9IN3rFy1+oS0wSMsfcywD
-=rwuM
------END PGP SIGNATURE-----
-
---n1iI6MeELQa9IOaF--
