@@ -1,25 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id F1BE16147D;
-	Thu,  5 Sep 2013 18:52:46 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 05 Sep 2013 11:49:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.90,848,1371106800"; d="scan'208";a="374051786"
-Received: from unknown (HELO helios.localnet) ([10.252.123.106])
-	by orsmga001.jf.intel.com with ESMTP; 05 Sep 2013 11:52:46 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Thu, 05 Sep 2013 19:52:45 +0100
-Message-ID: <2350938.FMkgc32xKC@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-29-generic; KDE/4.10.5; i686; ; )
-MIME-Version: 1.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Jeffrey Osier-mixon <jeffrey.osier-mixon@intel.com>
-Subject: Invitation: OpenEmbedded public TSC/workgroup meeting
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 437F560F77
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Sep 2013 21:04:13 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id y10so2329692pdj.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Sep 2013 14:04:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=jWFC2AL0g2Wn04O+zdrYGbsiSIk/NdQBfx1TCaM+tgk=;
+	b=SUTWslUDmNVRtpnDtyK4268Hg4pk9qyZFdZQICfDFoN5ItQIr+LSl+1ErIRaCbewuk
+	hA6Uspc4CIORQXiI+P94FwxiAoujW4bTV2LssBdrlBuBdmXMrGPKZcdmosZPtYZj/f4S
+	hga8AlprbLRBtJTJniSk0Sd/nYr5SzbUrhxyUgR8D20nME3Rp3bOlFWbc77UusxaiqwK
+	WfBXhk27IfTkYLedRBGmT2ZLdCSc+Slr+B2JRO4rLMA9MAmeyYgOZk9H/fzPU/K4tpZ3
+	92t6fxDv6QMWfOp6NBMhTKW32of6iXLAL/nw7x6IlEvv+Q+uayJ1lEBrKXdSMPYPaPCw
+	7Phg==
+X-Received: by 10.66.158.196 with SMTP id ww4mr46153pab.57.1378415055119;
+	Thu, 05 Sep 2013 14:04:15 -0700 (PDT)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	py4sm37682573pbb.33.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 05 Sep 2013 14:04:14 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Sep 2013 14:02:55 -0700
+Message-Id: <1378414975-13587-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.4
+Subject: [meta-networking][PATCH] inetutils: Remove empty usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 18:52:47 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 05 Sep 2013 21:04:13 -0000
 
-Hi all,
+This directory is empty and is flagged by QA checker
 
-Please join the OpenEmbedded TSC (Technical Steering Committee) this coming 
-Tuesday for a public IRC meeting to discuss ongoing community technical work.
+ERROR: QA Issue: inetutils: Files/directories were installed but not
+shipped
+  /usr/lib
 
-As you may be aware, the role of the OpenEmbedded TSC is currently evolving to 
-focus our efforts on setting technical direction and resolving conflicts (should 
-they arise), instead of spearheading specific technical contributions. While 
-each of us expects to continue to be involved in technical contributions, we 
-want to reach out to the OpenEmbedded community and work to establish a better 
-way for work to be done. The plan is to hold these public meetings on a 
-monthly basis and reduce separate TSC meetings to quarterly or as-needed.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Time: Tuesday September 10th at 16:00 GMT (9am PDT, 11am CDT, 12 EDT, 18:00 
-CEST, 17:00 BST)
-Where: Freenode IRC, channel #oe
-
-The goal of this meeting is to continue to discuss outstanding tasks, discuss 
-and collect any new tasks or issues, and establish one or more task-
-force/working group/etc in order to accomplish the tasks.
-
-While we are still working on a more formal agenda, we expect to cover topics 
-such as:
-
-* SPDX integration, other licensing issues
-* janitor tasks (general cleanup/maintenance activities)
-
-Cheers,
-Paul
-
-
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+index 7c7343e..e371ae5 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+@@ -70,6 +70,8 @@ do_install_append () {
+     cp ${WORKDIR}/telnet.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/telnet
+     cp ${WORKDIR}/tftpd.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/tftpd
+     rm -rf ${D}${libexecdir}/
++    # remove usr/lib if empty
++    rmdir ${D}${libdir}
+ }
+ 
+ PACKAGES =+ "${PN}-ping ${PN}-ping6 ${PN}-hostname ${PN}-ifconfig \
 -- 
+1.8.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
