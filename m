@@ -1,34 +1,17 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id F1F2361158
+Return-Path: <muhammad_shakeel@mentor.com>
+Received: from gemini.alm.mentorg.com (nat-lmt.mentorg.com [139.181.28.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F03A6C010
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2013 09:29:51 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VHsMR-0003V6-Q3 for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Sep 2013 11:29:51 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2013 11:29:51 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2013 11:29:51 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri,  6 Sep 2013 11:51:46 +0000 (UTC)
+Received: from pkl-mshakeel-ubuntu.mgc.mentorg.com ([137.202.157.119])
+	by gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id r86Bpiek016623; 
+	Fri, 6 Sep 2013 06:51:46 -0500
+From: Muhammad Shakeel <muhammad_shakeel@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 06 Sep 2013 11:29:41 +0200
-Message-ID: <l0c79r$2t4$1@ger.gmane.org>
-References: <1378398356-21164-1-git-send-email-jkridner@beagleboard.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
-In-Reply-To: <1378398356-21164-1-git-send-email-jkridner@beagleboard.org>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [PATCH] [meta-oe] cloud9: update repository for sass.js
+Date: Fri,  6 Sep 2013 16:52:58 +0500
+Message-Id: <1378468378-16789-1-git-send-email-muhammad_shakeel@mentor.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] tracker: Do not use hardcoded paths in systemd service files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,32 +25,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2013 09:29:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Sep 2013 11:51:47 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+- 'sed' base_bindir and libexecdir in service files to align these
+with a particular distro
+- Fix whitespaces
 
-Op 05-09-13 18:25, Jason Kridner schreef:
-> From: Jason Kridner <jdk@ti.com>
-> 
-> Updated repository location due to old repository being removed.
-> 
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg32587.html
->
->  Signed-off-by: Jason Kridner <jdk@ti.com> Cc: Dale Schaafsma
-> <dales773@hotmail.com>
+Signed-off-by: Muhammad Shakeel <muhammad_shakeel@mentor.com>
+---
+ .../tracker/files/tracker-dbus.service             |    2 +-
+ .../tracker/files/tracker-miner-fs.service         |    2 +-
+ .../tracker/files/tracker-store.service            |    2 +-
+ meta-oe/recipes-support/tracker/tracker_0.14.2.bb  |   19 +++++++++++--------
+ 4 files changed, 14 insertions(+), 11 deletions(-)
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSKaCFMkyGM64RGpERAkBdAJ9oTZPGNabzE1IOFOa/mFQSQgtf4wCgnVwu
-hly45zOpvkQCD/R7EX08Dwg=
-=pkop
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-dbus.service b/meta-oe/recipes-support/tracker/files/tracker-dbus.service
+index 9d4fb74..c97f49a 100644
+--- a/meta-oe/recipes-support/tracker/files/tracker-dbus.service
++++ b/meta-oe/recipes-support/tracker/files/tracker-dbus.service
+@@ -8,7 +8,7 @@ BindTo=tracker-store.service
+ [Service]
+ Type=forking
+ EnvironmentFile=-/tmp/tracker.env
+-ExecStartPre=/bin/rm -rf /tmp/tracker.env
++ExecStartPre=@BASE_BINDIR@/rm -rf /tmp/tracker.env
+ ExecStart=/bin/sh -c 'echo "DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --fork --session --print-address`" > /tmp/tracker.env'
+ 
+ [Install]
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service b/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
+index f143924..34d9a1e 100644
+--- a/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
++++ b/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
+@@ -6,7 +6,7 @@ Requires=tracker-store.service
+ [Service]
+ Environment=HOME=/home/root
+ EnvironmentFile=-/tmp/tracker.env
+-ExecStart=/usr/libexec/tracker-miner-fs
++ExecStart=@LIBEXECDIR@/tracker-miner-fs
+ 
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-store.service b/meta-oe/recipes-support/tracker/files/tracker-store.service
+index 7ca9ff0..c5037f3 100644
+--- a/meta-oe/recipes-support/tracker/files/tracker-store.service
++++ b/meta-oe/recipes-support/tracker/files/tracker-store.service
+@@ -6,7 +6,7 @@ BindTo=tracker-dbus.service
+ 
+ [Service]
+ EnvironmentFile=-/tmp/tracker.env
+-ExecStart=/usr/libexec/tracker-store
++ExecStart=@LIBEXECDIR@/tracker-store
+ 
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+index 5838c2d..d6febbf 100644
+--- a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+@@ -13,7 +13,7 @@ VER_DIR = "${@gnome_verdir("${PV}")}"
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
+            file://0005-Fix-missing-gobject-introspection-checks.patch \
+            file://enable-sqlite-crosscompile.patch \
+-	   file://fix-removable-media-detection.patch \
++           file://fix-removable-media-detection.patch \
+            file://90tracker \
+            file://tracker-store.service \
+            file://tracker-miner-fs.service \
+@@ -32,14 +32,17 @@ EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
+ LEAD_SONAME = "libtrackerclient.so.0"
+ 
+ do_install_append() {
+-   cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
+-#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
+-#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
++	cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
++	#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
++	#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
+ 
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
++	sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
++		-e 's,@BASE_BINDIR@,${base_bindir},g' \
++		${D}${systemd_unitdir}/system/*.service
+ }
+ 
+ PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"
+-- 
+1.7.9.5
 
 
