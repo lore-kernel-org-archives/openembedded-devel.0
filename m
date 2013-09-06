@@ -1,34 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A16A6A94D
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id F1F2361158
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2013 07:01:38 +0000 (UTC)
-Received: by mail-pd0-f169.google.com with SMTP id r10so2899741pdi.28
+	Fri,  6 Sep 2013 09:29:51 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VHsMR-0003V6-Q3 for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Sep 2013 11:29:51 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Sep 2013 11:29:51 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2013 00:01:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Nw43nrcUWRbZnhDzlcniLigWleW0ls4LxXX1NXwMtbI=;
-	b=uSeakLpJ1Gq2zs7bSPT+qjMvMXDm1AQYQRZBEXpyDM4AfY+Z+6AWG1oVVaAa4M2cjm
-	u+MdihpHAclrfYa6+Gaaw1U/xZeKcJ/MNNQCfBtGclZiSi1r+E1Iucl0gfnWZgipEWZs
-	zoIHDf8PXLX0YjStez8TbomxHIKvFnmkGlKTcp+0qP+Vng7e480GDkiJhlSwp0zQQk0C
-	sfQzKCY2PSY3PZUwttqd3bKov13jY5dOvMUhTpPM3gC3O/hY7jj3avkMXxIzSNi5Dy0u
-	gHz/d9V3XEloaWv35/dj6v1l8z0Y6TtQhSrbq3HaAtvvZ1Q0aRKq8aKi/6ysq9qzXKzR
-	xlpA==
-X-Received: by 10.66.169.172 with SMTP id af12mr2188080pac.23.1378450814727;
-	Fri, 06 Sep 2013 00:00:14 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id bg3sm1748830pbb.44.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 06 Sep 2013 00:00:14 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 06 Sep 2013 11:29:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Sep 2013 23:58:52 -0700
-Message-Id: <1378450732-16024-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-oe][PATCH] uml-utilities: Fix build errors exposed with multilib
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 06 Sep 2013 11:29:41 +0200
+Message-ID: <l0c79r$2t4$1@ger.gmane.org>
+References: <1378398356-21164-1-git-send-email-jkridner@beagleboard.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+In-Reply-To: <1378398356-21164-1-git-send-email-jkridner@beagleboard.org>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [PATCH] [meta-oe] cloud9: update repository for sass.js
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2013 07:01:38 -0000
+X-List-Received-Date: Fri, 06 Sep 2013 09:29:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-With multilib it cant package the files that go into
-the arch independend lib dir
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Fixes
+Op 05-09-13 18:25, Jason Kridner schreef:
+> From: Jason Kridner <jdk@ti.com>
+> 
+> Updated repository location due to old repository being removed.
+> 
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg32587.html
+>
+>  Signed-off-by: Jason Kridner <jdk@ti.com> Cc: Dale Schaafsma
+> <dales773@hotmail.com>
 
-ERROR: QA Issue: uml-utilities: Files/directories were installed but not
-shipped
-  /usr/lib
-  /usr/lib/uml
-  /usr/lib/uml/port-helper
-  /usr/lib/uml/.debug
-  /usr/lib/uml/.debug/port-helper
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-index 8b3059d..4d9d3c2 100644
---- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-+++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
-@@ -22,5 +22,5 @@ do_install() {
-     oe_runmake install DESTDIR=${D}
- }
- 
--FILES_${PN} += "${libdir}"
--FILES_${PN}-dbg += "${libdir}/uml/.debug"
-+FILES_${PN} += "${exec_prefix}${nonarch_base_libdir}"
-+FILES_${PN}-dbg += "${exec_prefix}${nonarch_base_libdir}/uml/.debug"
--- 
-1.8.4
+iD8DBQFSKaCFMkyGM64RGpERAkBdAJ9oTZPGNabzE1IOFOa/mFQSQgtf4wCgnVwu
+hly45zOpvkQCD/R7EX08Dwg=
+=pkop
+-----END PGP SIGNATURE-----
 
 
