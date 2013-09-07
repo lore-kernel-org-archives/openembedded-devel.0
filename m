@@ -1,38 +1,41 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-la0-f48.google.com (mail-la0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E9C4560F1F
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 2481E6C782
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2013 21:58:28 +0000 (UTC)
-Received: by mail-la0-f48.google.com with SMTP id er20so3235360lab.21
+	Sat,  7 Sep 2013 06:29:02 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id hq15so1685144wib.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2013 14:58:30 -0700 (PDT)
+	Fri, 06 Sep 2013 23:29:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OSUgX2IdzQF8m8x+c4yyYJIWx00bY+ipPqwsMioLFb8=;
-	b=hcH0dTPUhen78XkjfuegRYhZU0zGkrx2EvDvgb+lx5z4uS0Kui0ajbBubIFwVvLQAG
-	h0bFHupH8AmQTFjFO/5FO7rfBRAH9DHPxXCEdCag60ufbog4qKGVmOCfRfZaHZGhAKcw
-	we/XZtr4ZOTr7S4gMx938YpYPJ49KpELINODdcOAf9sctfK8gwqGdau80n59qZuB/L6N
-	FpvRziazgfLNGNhwLbepBS6qmElR+2IPY/BagPyjUNdyO9uMVVa2f+3reTMrCVRCqeND
-	MccI65x24hf6T1jLXf/kbS8L50AB+HV18Dl/qP1L7OLRn+2e3XFlNDa5D41GS8BF+78q
-	/JTQ==
-X-Gm-Message-State: ALoCoQnH5zBX0NEl34/nI+poSgJrePCMwRQ4c2eNY3m6gwO8VBpQl39JPN2gX/tgVG4FiuKBedJu
-X-Received: by 10.152.26.72 with SMTP id j8mr4016158lag.19.1378504709681;
-	Fri, 06 Sep 2013 14:58:29 -0700 (PDT)
-Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
-	[91.152.78.194])
-	by mx.google.com with ESMTPSA id vx8sm112359lbb.8.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 06 Sep 2013 14:58:29 -0700 (PDT)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2013 00:58:12 +0300
-Message-Id: <1378504692-3593-1-git-send-email-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=iuRRHi/r7oTmfokGk3SQtin7d5+miNkLBeL5e7kEHhM=;
+	b=H1aIBF1VWDGI9uYivayDBp4zKX3/ByFiHCgk8M2kiYuvNdDNOSLkqhwmwH8refO3Vr
+	0psl+c8Ebsh5fuTaIgQk9foX3zqBjShEhJ8LOsE8B/cOJ/WLx/BMo74T+tNYRT1PICKY
+	cR9j5Zis+E1nG9wgHODozmETA8duhkGhmDi0lEtXqiaPHGUIAshxtqyq04uzlps9zRZi
+	HyEUPYYtKTziGqkQCsuaQfXmuQWxrXdHaLMTwhJMu3+/piXJvRZ1YYKy63YnxZPrm/T2
+	2cjIuC1IbOAgsHOKgi5tSxvHp5N1sCgAayIt+5zB9JlZJk2L7uy37uaIQtVAcdHRrmt9
+	RRAg==
+X-Gm-Message-State: ALoCoQm/dSorQjnRt8xArKaW9QfExywlj5W1GpQVTi3gPoeYOWavfb1d16Kh4rGgLa2yCOKGrsrt
+X-Received: by 10.180.206.129 with SMTP id lo1mr1115548wic.15.1378535344214;
+	Fri, 06 Sep 2013 23:29:04 -0700 (PDT)
+Received: from [172.20.0.132] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id b11sm1458490wik.1.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 06 Sep 2013 23:29:03 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1378504692-3593-1-git-send-email-fathi.boudra@linaro.org>
+Date: Sat, 7 Sep 2013 08:29:02 +0200
+Message-Id: <15335D9C-70A1-49CD-A96B-4B76B1A36FC3@dominion.thruhere.net>
+References: <1378504692-3593-1-git-send-email-fathi.boudra@linaro.org>
+To: Fathi Boudra <fathi.boudra@linaro.org>
+X-Mailer: Apple Mail (2.1508)
+Cc: openembedded-devel@lists.openembedded.org,
 	Joe MacDonald <joe.macdonald@windriver.com>
-Subject: [meta-networking][PATCH V2] fping: add recipe
+Subject: Re: [meta-networking][PATCH V2] fping: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,50 +49,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2013 21:58:29 -0000
+X-List-Received-Date: Sat, 07 Sep 2013 06:29:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
- V1->V2
- drop PR
- use PACKAGECONFIG for ipv6
- drop COMPATIBLE_HOST
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- meta-networking/recipes-support/fping/fping_3.5.bb | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-networking/recipes-support/fping/fping_3.5.bb
+Op 6 sep. 2013, om 23:58 heeft Fathi Boudra <fathi.boudra@linaro.org> =
+het volgende geschreven:
 
-diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb b/meta-networking/recipes-support/fping/fping_3.5.bb
-new file mode 100644
-index 0000000..064c630
---- /dev/null
-+++ b/meta-networking/recipes-support/fping/fping_3.5.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "sends ICMP ECHO_REQUEST packets to network hosts"
-+DESCRIPTION = "fping is a ping like program which uses the Internet Control \
-+Message Protocol (ICMP) echo request to determine if a target host is \
-+responding. fping differs from ping in that you can specify any number of \
-+targets on the command line, or specify a file containing the lists of \
-+targets to ping.  Instead of sending to one target until it times out or \
-+replies, fping will send out a ping packet and move on to the next target \
-+in a round-robin fashion."
-+HOMEPAGE = "http://www.fping.org/"
-+SECTION = "console/tools"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=09d77789fe32be35acde9637a5ee39b1"
-+
-+SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
-+SRC_URI[md5sum] = "2e17cb655aa4eb59b5a4a38a89e746ed"
-+SRC_URI[sha256sum] = "09b8960e235341bae6000085d38106357eae656a79e0119bd27e816c9003656a"
-+
-+S = "${WORKDIR}/fping-${PV}"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--enable-ipv4"
-+
-+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
--- 
-1.8.1.2
+> V1->V2
+> drop PR
+> use PACKAGECONFIG for ipv6
+> drop COMPATIBLE_HOST
+
+Changelogs like this go below the '---' so they don't end up in git log.
+
+> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+> ---
+> meta-networking/recipes-support/fping/fping_3.5.bb | 24 =
+++++++++++++++++++++++
+> 1 file changed, 24 insertions(+)
+> create mode 100644 meta-networking/recipes-support/fping/fping_3.5.bb
+>=20
+> diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb =
+b/meta-networking/recipes-support/fping/fping_3.5.bb
+> new file mode 100644
+> index 0000000..064c630
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/fping/fping_3.5.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY =3D "sends ICMP ECHO_REQUEST packets to network hosts"
+> +DESCRIPTION =3D "fping is a ping like program which uses the Internet =
+Control \
+> +Message Protocol (ICMP) echo request to determine if a target host is =
+\
+> +responding. fping differs from ping in that you can specify any =
+number of \
+> +targets on the command line, or specify a file containing the lists =
+of \
+> +targets to ping.  Instead of sending to one target until it times out =
+or \
+> +replies, fping will send out a ping packet and move on to the next =
+target \
+> +in a round-robin fashion."
+> +HOMEPAGE =3D "http://www.fping.org/"
+> +SECTION =3D "console/tools"
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3D09d77789fe32be35acde9637a5ee39b1"
+> +
+> +SRC_URI =3D "http://www.fping.org/dist/fping-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "2e17cb655aa4eb59b5a4a38a89e746ed"
+> +SRC_URI[sha256sum] =3D =
+"09b8960e235341bae6000085d38106357eae656a79e0119bd27e816c9003656a"
+> +
+> +S =3D "${WORKDIR}/fping-${PV}"
+> +
+> +inherit autotools
+> +
+> +EXTRA_OECONF =3D "--enable-ipv4"
+> +
+> +PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
+
+You'll also need:
+
+PACKAGECONFIG ?=3D "${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', =
+'', d)}"
+
+See meta/recipes-extended/iptables/iptables_1.4.17.bb in OE-core for =
+reference on ipv6 PACKAGECONFIG.
+
+regards,
+
+Koen
+
+> --=20
+> 1.8.1.2
+>=20
 
 
