@@ -1,41 +1,25 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C6D2617A9
+Return-Path: <mike.looijmans@topic.nl>
+Received: from atl4mhob15.myregisteredsite.com
+	(atl4mhob15.myregisteredsite.com [209.17.115.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E741617A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Sep 2013 14:52:23 +0000 (UTC)
-Received: by mail-lb0-f169.google.com with SMTP id z5so4213559lbh.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Sep 2013 07:52:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=RLzZrT6xpiP2caDhqzE4x/7W7l2ntfZgUOAONjq4BSU=;
-	b=e5kvR8VDfkCyccHvmsgXFr861k9cxvV4XyQPvis6gU9P/gN9frXlbuaeePIz+JE2uN
-	ZVs+c71WvfU9V+AMkz2EwC/mHiIAMB+watFymU8Ayt6/Tx4SjEBjJhCVRxUWRuGgKeJu
-	c0h1XawmcAo9E+hl6+6+vDbwv8Xyl5x926q12U8qOtcfPSu1w6x3uFx7HHVcSE9r2B0h
-	KrtayuQm9jP5ZZzNL1EgBMC1OpZhXElb6jLb5QAsIyRPEd3Cl7H+JEyiHm5RakOXUzKO
-	FDGuqjGnybRwrBgq1aaV3UYqjhWrZewhxgdFnfzASJoKOFhXS/AiuERa2S9VSCfrF/CN
-	xmjg==
-X-Gm-Message-State: ALoCoQk4Cn7w9T0vpdUW9AO66fSd5N8iiNZtc1nkrIRV1eRvXjHFcnFZW6ucD0Udo+0h1liaUsfG
-X-Received: by 10.152.10.99 with SMTP id h3mr12122954lab.13.1378651944996;
-	Sun, 08 Sep 2013 07:52:24 -0700 (PDT)
-Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
-	[91.152.78.194])
-	by mx.google.com with ESMTPSA id zw2sm3628616lbb.14.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 08 Sep 2013 07:52:24 -0700 (PDT)
-From: Fathi Boudra <fathi.boudra@linaro.org>
+	Mon,  9 Sep 2013 05:47:11 +0000 (UTC)
+Received: from mailpod.hostingplatform.com ([10.30.71.204])
+	by atl4mhob15.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
+	r895lCUM015897 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Sep 2013 01:47:12 -0400
+Received: (qmail 23494 invoked by uid 0); 9 Sep 2013 05:47:12 -0000
+X-TCPREMOTEIP: 88.159.208.100
+X-Authenticated-UID: mike@milosoftware.com
+Received: from unknown (HELO paradigit.TOPIC.LOCAL)
+	(mike@milosoftware.com@88.159.208.100)
+	by 0 with ESMTPA; 9 Sep 2013 05:47:12 -0000
+From: Mike Looijmans <mike.looijmans@topic.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Sep 2013 17:52:12 +0300
-Message-Id: <1378651932-25060-2-git-send-email-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1378651932-25060-1-git-send-email-fathi.boudra@linaro.org>
-References: <1378651932-25060-1-git-send-email-fathi.boudra@linaro.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	Joe MacDonald <joe.macdonald@windriver.com>
-Subject: [meta-networking][PATCH V2] fping: add recipe
+Date: Mon,  9 Sep 2013 07:47:06 +0200
+Message-Id: <1378705626-3201-1-git-send-email-mike.looijmans@topic.nl>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH] ntfs-3g-ntfsprogs does not rdepend on util-linux-mount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,46 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Sep 2013 14:52:24 -0000
+X-List-Received-Date: Mon, 09 Sep 2013 05:47:11 -0000
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+ntfs-3g-ntfsprogs has no runtime dependency on util-linux-mount, for
+example busybox mount will also do just fine. It might be less useful
+without any mount program, but that's not the same as depending on it.
+
+Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
 ---
- meta-networking/recipes-support/fping/fping_3.5.bb | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-networking/recipes-support/fping/fping_3.5.bb
+ .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb b/meta-networking/recipes-support/fping/fping_3.5.bb
-new file mode 100644
-index 0000000..fe88934
---- /dev/null
-+++ b/meta-networking/recipes-support/fping/fping_3.5.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "sends ICMP ECHO_REQUEST packets to network hosts"
-+DESCRIPTION = "fping is a ping like program which uses the Internet Control \
-+Message Protocol (ICMP) echo request to determine if a target host is \
-+responding. fping differs from ping in that you can specify any number of \
-+targets on the command line, or specify a file containing the lists of \
-+targets to ping.  Instead of sending to one target until it times out or \
-+replies, fping will send out a ping packet and move on to the next target \
-+in a round-robin fashion."
-+HOMEPAGE = "http://www.fping.org/"
-+SECTION = "console/tools"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=09d77789fe32be35acde9637a5ee39b1"
-+
-+SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
-+SRC_URI[md5sum] = "2e17cb655aa4eb59b5a4a38a89e746ed"
-+SRC_URI[sha256sum] = "09b8960e235341bae6000085d38106357eae656a79e0119bd27e816c9003656a"
-+
-+S = "${WORKDIR}/fping-${PV}"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--enable-ipv4"
-+
-+PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
-+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
+index e084187..a34a791 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
+@@ -5,6 +5,7 @@ PROVIDES = "ntfsprogs ntfs-3g"
+ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++PR = "r1"
+ 
+ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
+ S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+@@ -23,7 +24,7 @@ EXTRA_OEMAKE = "LDCONFIG=echo"
+ PACKAGES =+ "ntfs-3g ntfsprogs libntfs-3g"
+ 
+ FILES_ntfs-3g = "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* ${base_sbindir}/mount.ntfs"
+-RDEPENDS_ntfs-3g += "fuse util-linux-mount"
++RDEPENDS_ntfs-3g += "fuse"
+ 
+ FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
+ FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
 -- 
-1.8.1.2
+1.7.9.5
 
 
