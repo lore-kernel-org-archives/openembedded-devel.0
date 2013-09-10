@@ -1,45 +1,47 @@
 Return-Path: <B40290@freescale.com>
 Received: from co1outboundpool.messaging.microsoft.com
 	(co1ehsobe006.messaging.microsoft.com [216.32.180.189])
-	by mail.openembedded.org (Postfix) with ESMTP id E5A616101A
+	by mail.openembedded.org (Postfix) with ESMTP id E4E216101A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2013 02:02:50 +0000 (UTC)
-Received: from mail74-co1-R.bigfish.com (10.243.78.236) by
-	CO1EHSOBE011.bigfish.com (10.243.66.74) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 10 Sep 2013 02:02:51 +0000
-Received: from mail74-co1 (localhost [127.0.0.1])	by mail74-co1-R.bigfish.com
-	(Postfix) with ESMTP id 659555000EE	for
+	Tue, 10 Sep 2013 02:03:01 +0000 (UTC)
+Received: from mail26-co1-R.bigfish.com (10.243.78.254) by
+	CO1EHSOBE001.bigfish.com (10.243.66.64) with Microsoft SMTP Server id
+	14.1.225.22; Tue, 10 Sep 2013 02:03:03 +0000
+Received: from mail26-co1 (localhost [127.0.0.1])	by mail26-co1-R.bigfish.com
+	(Postfix) with ESMTP id C428EC80101	for
 	<openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2013 02:02:51 +0000 (UTC)
+	Tue, 10 Sep 2013 02:03:03 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
 X-SpamScore: 0
-X-BigFish: VS0(zz936eI168aJc8kzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h1de097h8275bh8275dhz2dh2a8h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail74-co1 (localhost.localdomain [127.0.0.1]) by mail74-co1
-	(MessageSwitch) id 1378778568501543_5503;
-	Tue, 10 Sep 2013 02:02:48 +0000 (UTC)
-Received: from CO1EHSMHS032.bigfish.com (unknown [10.243.78.228])	by
-	mail74-co1.bigfish.com (Postfix) with ESMTP id 76B3880050	for
+X-BigFish: VS0(zz936eI168aJc8kzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h1de097h8275bh8275dhz2dh2a8h839he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h1155h)
+Received: from mail26-co1 (localhost.localdomain [127.0.0.1]) by mail26-co1
+	(MessageSwitch) id 1378778580399613_21324;
+	Tue, 10 Sep 2013 02:03:00 +0000 (UTC)
+Received: from CO1EHSMHS005.bigfish.com (unknown [10.243.78.233])	by
+	mail26-co1.bigfish.com (Postfix) with ESMTP id 53CDCAC004A	for
 	<openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2013 02:02:48 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS032.bigfish.com
-	(10.243.66.42) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 10 Sep 2013 02:02:48 +0000
+	Tue, 10 Sep 2013 02:03:00 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS005.bigfish.com
+	(10.243.66.15) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Tue, 10 Sep 2013 02:02:59 +0000
 Received: from tx30smr01.am.freescale.net (10.81.153.31) by
 	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 10 Sep 2013 02:02:47 +0000
+	Server (TLS) id 14.3.158.2; Tue, 10 Sep 2013 02:02:58 +0000
 Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
 	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r8A22hqf004347;	Mon, 9 Sep 2013 19:02:44 -0700
+	ESMTP id r8A22hqg004347;	Mon, 9 Sep 2013 19:02:56 -0700
 From: Chunrong Guo <B40290@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Sep 2013 10:02:38 +0800
-Message-ID: <1378778559-22147-1-git-send-email-B40290@freescale.com>
+Date: Tue, 10 Sep 2013 10:02:39 +0800
+Message-ID: <1378778559-22147-2-git-send-email-B40290@freescale.com>
 X-Mailer: git-send-email 1.7.5.4
+In-Reply-To: <1378778559-22147-1-git-send-email-B40290@freescale.com>
+References: <1378778559-22147-1-git-send-email-B40290@freescale.com>
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe ] libhugetlbfs: add recipe
+Subject: [meta-oe][PATCH] libhugetlbfs: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2013 02:02:51 -0000
+X-List-Received-Date: Tue, 10 Sep 2013 02:03:02 -0000
 Content-Type: text/plain
 
 Signed-off-by: Chunrong Guo <B40290@freescale.com>
