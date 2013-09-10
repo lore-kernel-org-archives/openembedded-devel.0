@@ -1,26 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 45C6B615F5;
-	Tue, 10 Sep 2013 13:16:51 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 10 Sep 2013 06:16:52 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.90,878,1371106800"; d="scan'208";a="358397623"
-Received: from akagikob-mobl.ger.corp.intel.com (HELO helios.localnet)
-	([10.252.123.124])
-	by azsmga001.ch.intel.com with ESMTP; 10 Sep 2013 06:16:51 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Date: Tue, 10 Sep 2013 14:16:50 +0100
-Message-ID: <1893978.VDA3SxeMzl@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-29-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <CANyK_8egdmC3tsFq2fZKbaqmxnpuruWyJPhbBgYEdMz-qqffKA@mail.gmail.com>
+Return-Path: <fransmeulenbroeks@gmail.com>
+Received: from mail-vb0-f45.google.com (mail-vb0-f45.google.com
+	[209.85.212.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 728506BE78;
+	Tue, 10 Sep 2013 20:32:07 +0000 (UTC)
+Received: by mail-vb0-f45.google.com with SMTP id e15so5270798vbg.4
+	for <multiple recipients>; Tue, 10 Sep 2013 13:32:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=zspu2RLntvP99ucG/nS5jIn7IDUUARsh+ICPmScXQ2I=;
+	b=khHi58wCcZsi7ry/7oaGe0SIcFYTpfC24UMCutCPA0IJesf+m7mRTRySbDrjfb4XL0
+	7uRDiM8fDvV5Ns8v2EmVwkIKYzkTciigjWLfe34pl7Q3NRSeVmEq2/iCqcJoB4hQBA/U
+	REfr00cHW1HL7VzOYNyYa5gWZoHQCvbPIoL4YyyVf17SQovQVFuqOAmqbAYdBZVqNsNX
+	+Hnxjc37zrBUm3qplzuqWX15Z9RL1WhyanWwUQ54bOEVA1i02AWvj2AfJSV2G0C/yXJK
+	4RJzOvg7pzoO6mCXYCmenIxOqnFJU8XgyICLGd/NsjH8IeYwTX5rsQGundZdEz0IOovw
+	SY9Q==
+MIME-Version: 1.0
+X-Received: by 10.58.201.69 with SMTP id jy5mr2037220vec.29.1378845128346;
+	Tue, 10 Sep 2013 13:32:08 -0700 (PDT)
+Received: by 10.58.171.73 with HTTP; Tue, 10 Sep 2013 13:32:08 -0700 (PDT)
+In-Reply-To: <1893978.VDA3SxeMzl@helios>
 References: <2350938.FMkgc32xKC@helios>
 	<CANyK_8egdmC3tsFq2fZKbaqmxnpuruWyJPhbBgYEdMz-qqffKA@mail.gmail.com>
-MIME-Version: 1.0
-Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
-	openembedded-core@lists.openembedded.org
+	<1893978.VDA3SxeMzl@helios>
+Date: Tue, 10 Sep 2013 22:32:08 +0200
+Message-ID: <CACW_hTYjF5uk0Kqt0PvcJ8KT5UoJOXg_Ldg+y8TGmtg_spqF9A@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] Invitation: OpenEmbedded public TSC/workgroup meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,69 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2013 13:16:51 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 10 Sep 2013 20:32:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Paul,
-
-On Tuesday 10 September 2013 12:13:12 Paul Barker wrote:
-> On 5 September 2013 19:52, Paul Eggleton <paul.eggleton@linux.intel.com>
-> wrote:
-> > Please join the OpenEmbedded TSC (Technical Steering Committee) this
-> > coming Tuesday for a public IRC meeting to discuss ongoing community
-> > technical work.
-> > 
-> > As you may be aware, the role of the OpenEmbedded TSC is currently
-> > evolving to focus our efforts on setting technical direction and
-> > resolving conflicts (should they arise), instead of spearheading specific
-> > technical contributions. While each of us expects to continue to be
-> > involved in technical contributions, we want to reach out to the
-> > OpenEmbedded community and work to establish a better way for work to be
-> > done. The plan is to hold these public meetings on a monthly basis and
-> > reduce separate TSC meetings to quarterly or as-needed.
-> > 
-> > Time: Tuesday September 10th at 16:00 GMT (9am PDT, 11am CDT, 12 EDT,
-> > 18:00
-> > CEST, 17:00 BST)
-> > Where: Freenode IRC, channel #oe
-> > 
-> > The goal of this meeting is to continue to discuss outstanding tasks,
-> > discuss and collect any new tasks or issues, and establish one or more
-> > task- force/working group/etc in order to accomplish the tasks.
-> > 
-> > While we are still working on a more formal agenda, we expect to cover
-> > topics such as:
-> > 
-> > * SPDX integration, other licensing issues
-> > * janitor tasks (general cleanup/maintenance activities)
-> 
-> I'm unsure if I'll have internet access around this time as I'm
-> travelling today. Incase I can't make it, I briefly want to say that
-> we should set up a wiki page for non-urgent janitor tasks and try to
-> make a list of those tasks which we think could easily be handled by a
-> new contributor to OE/Yocto. That would hopefully make it easier for
-> people to learn the ropes and get involved.
-
-Absolutely. Between OE and the Yocto Project we do have a couple of wiki 
-pages:
-
-http://www.openembedded.org/wiki/OpenEmbeddedJanitors
-https://wiki.yoctoproject.org/wiki/Janitors
-
-We need to work on getting this information into one place though and turning 
-it into a reasonable list with pointers on how people can get started.
-
-> I assume that an IRC log will be posted after the meeting, is that correct?
-
-That's correct.
-
-Cheers,
-Paul
+2013/9/10 Paul Eggleton <paul.eggleton@linux.intel.com>
 
 
--- 
+> > I assume that an IRC log will be posted after the meeting, is that
+> correct?
+>
+> That's correct.
+>
+#oe is permanently logged (unless the bot is dead)
+logs are at http://ibot.rikers.org/%23oe/
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Enjoy!
+Frans
 
