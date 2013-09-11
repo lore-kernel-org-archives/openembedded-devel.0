@@ -1,32 +1,33 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vb0-f47.google.com (mail-vb0-f47.google.com
-	[209.85.212.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A932A6BC00
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ve0-f169.google.com (mail-ve0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id ADD7B62273
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2013 11:43:46 +0000 (UTC)
-Received: by mail-vb0-f47.google.com with SMTP id h10so5855346vbh.20
+	Wed, 11 Sep 2013 13:31:58 +0000 (UTC)
+Received: by mail-ve0-f169.google.com with SMTP id db12so5957463veb.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2013 04:43:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:from:date:message-id:subject:to:content-type;
-	bh=T6liLYnM8XUKDeH1rSjaaL5zbygIduvGqVC/RzA6S/8=;
-	b=yDOcZi/5yYFCX27EgCttsi7jl+mHrBJCZphSHx0SnDq0X0RDlq6kPf+E9VZkGvdEDm
-	BFSihSLFvDHRlsB8OZc5Yj52pc6aLIAdl0AgknR2iXJlczk2JMK9xneXl+rgbnI7R1ET
-	cIZSGYJMvxTWKjdxK7hJ3SjKjfZUjQGeevBg5ivFRHB2Z32CMQ4x+f0RUUOna7t3V0G9
-	JDwPEYzJwoo57KE474xZqiZkl6juS0dYBqmX4X+lAi2MoS8jt0qOwbCDugDLUlE//qgD
-	6nzoWe+NC3f/GhfUZdZiIRrdWCcw5Nz6yedVRd75Q0KzlqLXttITrcLLPUtCZTvGzXaG
-	01Bw==
-X-Received: by 10.220.43.19 with SMTP id u19mr854397vce.3.1378899828222; Wed,
-	11 Sep 2013 04:43:48 -0700 (PDT)
+	Wed, 11 Sep 2013 06:32:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=R0oNLJp/+7esaH6+A7AT7wE9uWQ724zUFk5uBCwbLXE=;
+	b=YqXsOB6EvSw0Irs39xlYGawb+oVjFcxl6MMdEiJqq/vCm8NAshTaB5s2Yfe5ujKnRy
+	RDOgZg5YZ+1jAxIke+8sg6VuY1fD+cdxKifpdbQl7UgeBL0Pa59pn2lxLTmlaW63rKUu
+	1sRMPJzAzL0yHlzBjYZFr+/KKTdgezmCpvtRW95skUjiooX36fhMDF0vk5NF7E//cL7g
+	qtPRlZmUYYib4/3GeZMIM+Tvzv7U2KE7jmwILjxYQge/VMk0TYe5zndEQEbB/sIK3BN2
+	TH4Da0/Ubt7N49V7uoOc9YcDLnK2JDTnUm44cNeL0seCfPBoPeK4rOFtYUE0PGNO2pzF
+	svyA==
+X-Gm-Message-State: ALoCoQl9kOhO5uzSBdepywRxiwXERPORKr65q4GQ3qdSCMdrww8eHjtc+o+lGqL8PKlnvn11R6Sx
+X-Received: by 10.220.164.70 with SMTP id d6mr1251226vcy.19.1378906320187;
+	Wed, 11 Sep 2013 06:32:00 -0700 (PDT)
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.155.17 with HTTP; Wed, 11 Sep 2013 04:43:08 -0700 (PDT)
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Wed, 11 Sep 2013 12:43:08 +0100
-X-Google-Sender-Auth: dex9PQAzT4r8AM3pitKAjT4UMm4
-Message-ID: <CANyK_8d6cN_HUUBbw6Q0H9ttp1qwuukMVEPwbOS6L2gfYsM6nA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Subject: Terms of Service on OE wiki
+Received: by 10.220.71.201 with HTTP; Wed, 11 Sep 2013 06:31:40 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 11 Sep 2013 14:31:40 +0100
+Message-ID: <CAJTo0LZQM09ue4aWs-H4K94f+CsFUeTbFDA5mH4+aQQ=HdcHOQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Does meta-oe want imake?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,24 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2013 11:43:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Sep 2013 13:31:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The form to request an account on the OE wiki requires you to tick a
-box saying you've read and agreed to the terms of service, however the
-link given points at
-http://openembedded.org/wiki/Openembedded.org:Terms_of_Service, which
-is currently an empty placeholder,
+Hi,
 
-I've submitted an account request anyway as I need to edit a couple of
-pages but this needs fixing by someone who knows what the Ts & Cs
-should be.
+I'm planning on removing imake from oe-core on the grounds that it's
+2013, not 1993.  Is anyone aware of anything still using imake?  If
+there are users then I'll send the recipes on to meta-oe, otherwise
+they can just disappear.
 
-Thanks,
-
--- 
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+Ross
 
