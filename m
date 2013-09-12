@@ -1,25 +1,17 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from atl4mhob05.myregisteredsite.com
-	(atl4mhob05.myregisteredsite.com [209.17.115.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0619160289
+Return-Path: <muhammad_shakeel@mentor.com>
+Received: from gemini.alm.mentorg.com (nat-lmt.mentorg.com [139.181.28.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D13361864
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2013 09:37:40 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.204])
-	by atl4mhob05.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	r8C9bgbr006534 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2013 05:37:42 -0400
-Received: (qmail 15518 invoked by uid 0); 12 Sep 2013 09:37:42 -0000
-X-TCPREMOTEIP: 88.159.208.100
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO paradigit.TOPIC.LOCAL)
-	(mike@milosoftware.com@88.159.208.100)
-	by 0 with ESMTPA; 12 Sep 2013 09:37:41 -0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
+	Thu, 12 Sep 2013 15:26:51 +0000 (UTC)
+Received: from pkl-mshakeel-ubuntu.mgc.mentorg.com ([137.202.157.119])
+	by gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id r8CFQmAY022787; 
+	Thu, 12 Sep 2013 10:26:50 -0500
+From: Muhammad Shakeel <muhammad_shakeel@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2013 11:37:35 +0200
-Message-Id: <1378978655-2635-1-git-send-email-mike.looijmans@topic.nl>
+Date: Thu, 12 Sep 2013 20:28:08 +0500
+Message-Id: <cover.1378998806.git.muhammad_shakeel@mentor.com>
 X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] ntfs-3g-ntfsprogs does not rdepend on util-linux-mount
+Subject: [meta-oe][meta-systemd][PATCH 0/3] Remove systemd support for the packages which already have it in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,42 +25,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2013 09:37:42 -0000
+X-List-Received-Date: Thu, 12 Sep 2013 15:26:53 -0000
 
-ntfs-3g-ntfsprogs has no runtime dependency on util-linux-mount, for
-example busybox mount will also do just fine. It might be less useful
-without any mount program, but that's not the same as depending on it.
+Signed-off-by: Muhammad Shakeel <muhammad_shakeel@mentor.com>
+The following changes since commit a506a9efc86cda9dbf36cd916dbbfb1ae2162c45:
 
-The dependency broke several images because util-linux-mount behaves
-differently than busybox mount, resulting in failure to mount ext2/3
-volumes and network shares on user's systems.
+  log4cplus: add recipe (2013-09-10 22:48:36 +0200)
 
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
----
- .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+are available in the git repository at:
 
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
-index e084187..a34a791 100644
---- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
-@@ -5,6 +5,7 @@ PROVIDES = "ntfsprogs ntfs-3g"
- LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
-                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-+PR = "r1"
- 
- SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
- S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
-@@ -23,7 +24,7 @@ EXTRA_OEMAKE = "LDCONFIG=echo"
- PACKAGES =+ "ntfs-3g ntfsprogs libntfs-3g"
- 
- FILES_ntfs-3g = "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* ${base_sbindir}/mount.ntfs"
--RDEPENDS_ntfs-3g += "fuse util-linux-mount"
-+RDEPENDS_ntfs-3g += "fuse"
- 
- FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
- FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
+  https://github.com/mshakeel/meta-oe.git master
+  https://github.com//tree/master
+
+Muhammad Shakeel (3):
+  openssh: Remove systemd support which is merged in oe-core
+  lighttpd: Remove systemd support which is merged in oe-core
+  rpcbind: Remove systemd support which is merged in oe-core
+
+ .../openssh/openssh/sshd.socket                    |   11 -----------
+ .../openssh/openssh/sshd@.service                  |    9 ---------
+ .../openssh/openssh/sshdgenkeys.service            |   10 ----------
+ .../openssh/openssh_6.2p2.bbappend                 |   16 ----------------
+ .../lighttpd/lighttpd/lighttpd.service             |   13 -------------
+ .../lighttpd/lighttpd_1.4.32.bbappend              |   15 ---------------
+ .../rpcbind/rpcbind/rpcbind.service                |   13 -------------
+ .../rpcbind/rpcbind_0.2.0.bbappend                 |   16 ----------------
+ 8 files changed, 103 deletions(-)
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh/sshd.socket
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh/sshd@.service
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh/sshdgenkeys.service
+ delete mode 100644 meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd/lighttpd.service
+ delete mode 100644 meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind/rpcbind.service
+
 -- 
 1.7.9.5
 
