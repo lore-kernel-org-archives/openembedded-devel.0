@@ -1,21 +1,35 @@
-Return-Path: <muhammad_shakeel@mentor.com>
-Received: from gemini.alm.mentorg.com (nat-lmt.mentorg.com [139.181.28.34])
-	by mail.openembedded.org (Postfix) with ESMTP id DF7266BD66
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F94F600A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2013 15:27:43 +0000 (UTC)
-Received: from pkl-mshakeel-ubuntu.mgc.mentorg.com ([137.202.157.119])
-	by gemini.alm.mentorg.com (8.14.4/8.14.4) with ESMTP id r8CFRW9G022993; 
-	Thu, 12 Sep 2013 10:27:44 -0500
-From: Muhammad Shakeel <muhammad_shakeel@mentor.com>
+	Thu, 12 Sep 2013 15:31:58 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id cb5so3749704wib.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Sep 2013 08:32:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=IpVv6ZyisegRslcwHuJ+nb6qoxmSXXhKJxT//6bmoqs=;
+	b=i4udLV5nvWO8pap9zZWedeZ5nbAzYfZUIFpcSXpHTr5KyMnhb0NtrQdrWAigG67Bxm
+	AfEmNmLThTj06Hggc6XRbhfa/k1dzWQIS3KNpot07u5S24v8V8cgmhd+ZxCqzMoAs6s+
+	JutsIT9o6ZLA+mOK9ttAgpHA+V6G/Oz/oKAI4hC54BKBDMoPHSDqPKXnJlsKXtHhJ/dF
+	oCd/Hv5bFmn+joPfb8tq8xTOp2dX0zDNO8JNa9dqWiezhOuntrMrDcsgvbIl56tW2+DH
+	C16Q/AVwYcykjwS7Y08wFkkeBm81Rn6unXwsj9IsxdUeEt1hJGC77Q2c8CLNbVdt7zHg
+	en6w==
+X-Gm-Message-State: ALoCoQloq98FGfyg75yFM+Wa64KKNynTvf4p9hA5iYL4+huFTz9UlIp51hOXcb17fO67zR605/pv
+X-Received: by 10.194.123.8 with SMTP id lw8mr6811591wjb.40.1378999920550;
+	Thu, 12 Sep 2013 08:32:00 -0700 (PDT)
+Received: from melchett.burtonini.com ([81.2.106.35])
+	by mx.google.com with ESMTPSA id ey4sm5278877wic.11.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 12 Sep 2013 08:31:59 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2013 20:28:54 +0500
-Message-Id: <9c8d3a26d593894194b2727ec817805c5eb39d91.1378998806.git.muhammad_shakeel@mentor.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <2833ee588a108d99fb999bb8b21b297ec4af97fa.1378998806.git.muhammad_shakeel@mentor.com>
-References: <2833ee588a108d99fb999bb8b21b297ec4af97fa.1378998806.git.muhammad_shakeel@mentor.com>
-In-Reply-To: <cover.1378998806.git.muhammad_shakeel@mentor.com>
-References: <cover.1378998806.git.muhammad_shakeel@mentor.com>
-Subject: [meta-oe][meta-systemd][PATCH 3/3] rpcbind: Remove systemd support which is merged in oe-core
+Date: Thu, 12 Sep 2013 16:31:53 +0100
+Message-Id: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-multimedia][PATCH] dleyna: switch to git clones instead of generated tarballs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,62 +43,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2013 15:27:44 -0000
+X-List-Received-Date: Thu, 12 Sep 2013 15:31:59 -0000
 
-OE-Core has been updated to support rpcbind with systemd. Stuff here is
-not required anymore.
+The tarballs used were the dynamically-generated tarballs from github, which
+recently have changed checksum.  Avoid this problem entirely by fetching from
+git, locked to the relevant tag.
 
-Signed-off-by: Muhammad Shakeel <muhammad_shakeel@mentor.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../rpcbind/rpcbind/rpcbind.service                |   13 -------------
- .../rpcbind/rpcbind_0.2.0.bbappend                 |   16 ----------------
- 2 files changed, 29 deletions(-)
- delete mode 100644 meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind/rpcbind.service
+ .../recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb        |    6 +++---
+ .../recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb     |    6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind/rpcbind.service b/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind/rpcbind.service
-deleted file mode 100644
-index a028ace..0000000
---- a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind/rpcbind.service
-+++ /dev/null
-@@ -1,13 +0,0 @@
--[Unit]
--Description=RPC Bind
--After=network.target
--Wants=rpcbind.target
--Before=rpcbind.target
--
--[Service]
--Type=forking
--ExecStart=/usr/sbin/rpcbind
--Restart=always
--
--[Install]
--WantedBy=multi-user.target
-diff --git a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend b/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-index 9f83f65..f006b3f 100644
---- a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-+++ b/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
-@@ -1,19 +1,3 @@
--inherit systemd
--
--PRINC := "${@int(PRINC) + 2}"
--
--# look for files in the layer first
--FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
--
--SRC_URI += "file://rpcbind.service"
--
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "rpcbind.service"
--
--do_install_append() {
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${WORKDIR}/rpcbind.service ${D}${systemd_unitdir}/system
--}
--
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb b/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb
+index 6d81ed2..fb0194b 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb
+@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+ 
+ DEPENDS = "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
+ 
+-SRC_URI = "https://github.com/01org/${BPN}/archive/v${PV}.zip"
+-SRC_URI[md5sum] = "9fc4db84b3459bc77232b24bde48b000"
+-SRC_URI[sha256sum] = "9cdee47bbbfa3de5aaa5cf3fc9e208ccd97e5079f6d8fa84a6d1f24a1b760237"
++SRC_URI = "git://github.com/01org/${BPN}.git"
++SRCREV = "1996ecbe4a06c95d22f7d958e32e3d28f7a4a2e9"
++S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
+index d23babe..478b1c7 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
+@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+ 
+ DEPENDS = "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
+ 
+-SRC_URI = "https://github.com/01org/${BPN}/archive/v${PV}.zip"
+-SRC_URI[md5sum] = "1e19349712a34dd56a14fc280b5d8b74"
+-SRC_URI[sha256sum] = "d6623d98dd35ee32bc08349b4a22d12101dda38a2ece1e468ff0160e519a854d"
++SRC_URI = "git://github.com/01org/${BPN}.git"
++SRCREV = "4a0b1d7cd8e22d3cb0e09c77c344ceccbcbbd34f"
++S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
 -- 
-1.7.9.5
+1.7.10.4
 
 
