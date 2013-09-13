@@ -1,34 +1,34 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A5E560135
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A78D60135
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 20:08:25 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id f12so1606040wgh.17
+	Fri, 13 Sep 2013 20:12:02 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VKZij-0000eN-AB for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Sep 2013 22:12:01 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Sep 2013 22:12:01 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 13:08:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=mOi6dCHqJhDNwwiysPsuFVi9pcYjMTbz7T2FBni7+JY=;
-	b=uQK9LOkgyeMWHBd8DKmVlBme3jGtgqg68g7dUvucEp+JZxiYARr/yS01Ws4nxgTyLy
-	phQLZQP67vo+IU7WrXIpfKHwasFpsQR35Qfvo57LpNSyPfOFPqJHAjotdVYzQ8dJQH56
-	K7NScnIlbmAVZ/jblnGZuYS/R9ldyoK8KQOONcjGTzx58uJXo3Tdd0w5LD6Jonnt1RiT
-	HG5Ftmckck9ecY0jypJ7kt9a2yf2xJ0+FLe0zOGtlAAu3EHHTtywnYNTaGU6o0SocP+N
-	DSSn+ylG131qLmtJRiiPLWvRSvERTjjfPqluN+/vRJagP9SqB0IjVGfPRf7GDi2UQcb4
-	Lo+A==
-X-Received: by 10.194.77.167 with SMTP id t7mr12352002wjw.27.1379102906016;
-	Fri, 13 Sep 2013 13:08:26 -0700 (PDT)
-Received: from turn.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
-	[94.192.12.83])
-	by mx.google.com with ESMTPSA id b11sm5826444wik.1.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Sep 2013 13:08:25 -0700 (PDT)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
+	Fri, 13 Sep 2013 22:12:01 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2013 21:08:22 +0100
-Message-Id: <1379102902-3192-1-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-oe][PATCH] vim: upgrade to v7.4.27 and refactor
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 13 Sep 2013 22:11:54 +0200
+Message-ID: <l0vrhv$bsr$1@ger.gmane.org>
+References: <1379087323-27447-1-git-send-email-ml@communistcode.co.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+In-Reply-To: <1379087323-27447-1-git-send-email-ml@communistcode.co.uk>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [meta-oe][PATCHv4] libsoc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,93 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 20:08:26 -0000
+X-List-Received-Date: Fri, 13 Sep 2013 20:12:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-'vim.inc' is merged into the new recipe 'vim_7.4.27.bb', the recipe is slightly
-reorganised and a minor omission in the comments is corrected.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-DESCRIPTION is replaced with SUMMARY. PR and INC_PR values are dropped. The
-variable PV_MAJOR is also dropped as it isn't used.
+Op 13-09-13 17:48, Jack Mitchell schreef:
+> From: Jack Mitchell <jack@embed.me.uk>
+> 
+> Signed-off-by: Jack Mitchell <jack@embed.me.uk> --- v3 -> v4 - Added
+> libgcc in RDEPENDS
+> 
+> v2 -> v3 - Removed DEPENDS on libgcc - Removed autogen.sh pre-configure
+> as was unneeded
+> 
+> v1 -> v2 -added signed-off-by
+> 
+> meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 14 ++++++++++++++ 1 file
+> changed, 14 insertions(+) create mode 100644
+> meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+> 
+> diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+> b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb new file mode 100644 index
+> 0000000..41ff8e6 --- /dev/null +++
+> b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb @@ -0,0 +1,14 @@ +SUMMARY
+> = "libsoc is a C library for interfacing with common SoC peripherals
+> through generic kernel interfaces" +HOMEPAGE =
+> "https://github.com/jackmitch/libsoc" + +LICENSE = "LGPLv2.1" 
+> +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5" + +inherit
+> autotools + +RDEPENDS_${PN} = "libgcc"
 
-LIC_FILES_CHECKSUM is updated as an address and version number given in the
-license have been modified. The main license text itself is unchanged.
+And a nitpick: please move R* variabled below do_install, in this case to
+the bottom of the recipe.
 
-The setting of PARALLEL_MAKE to force single-threaded compilation is removed as
-there is no justification in the git history for this being needed and the
-compilation completes fine without it.
+> + +SRCREV = "0764ee52b590d5ccb4bd4698f0011496b536ed70" +SRC_URI =
+> "git://github.com/jackmitch/libsoc.git" + +S = "${WORKDIR}/git"
+> 
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
----
- meta-oe/recipes-support/vim/vim_7.3.1314.bb           |  7 -------
- .../recipes-support/vim/{vim.inc => vim_7.4.27.bb}    | 19 ++++++++-----------
- 2 files changed, 8 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vim/vim_7.3.1314.bb
- rename meta-oe/recipes-support/vim/{vim.inc => vim_7.4.27.bb} (87%)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.3.1314.bb b/meta-oe/recipes-support/vim/vim_7.3.1314.bb
-deleted file mode 100644
-index 1be5a91..0000000
---- a/meta-oe/recipes-support/vim/vim_7.3.1314.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require ${PN}.inc
--
--PR = "${INC_PR}.0"
--
--SRCREV = "v7-3-1314"
--
--SRC_URI += "file://configure.in_remove_CC_quotes.patch;patchdir=.."
-diff --git a/meta-oe/recipes-support/vim/vim.inc b/meta-oe/recipes-support/vim/vim_7.4.27.bb
-similarity index 87%
-rename from meta-oe/recipes-support/vim/vim.inc
-rename to meta-oe/recipes-support/vim/vim_7.4.27.bb
-index 991ba74..77507d4 100644
---- a/meta-oe/recipes-support/vim/vim.inc
-+++ b/meta-oe/recipes-support/vim/vim_7.4.27.bb
-@@ -1,20 +1,19 @@
--DESCRIPTION = "Vi IMproved - enhanced vi editor"
-+SUMMARY = "Vi IMproved - enhanced vi editor"
- SECTION = "console/utils"
- DEPENDS = "ncurses"
- # vimdiff doesn't like busybox diff
- RSUGGESTS_${PN} = "diffutils"
- LICENSE = "vim"
--LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=4c91d841bb7b75f68b5bb8ad7118f5b8"
-+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
- 
--PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
--VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
--
--INC_PR = "r13"
--
--SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
-+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-+	file://configure.in_remove_CC_quotes.patch;patchdir=.."
-+SRCREV = "v7-4-027"
- 
- S = "${WORKDIR}/${PN}/src"
- 
-+VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
-+
- inherit autotools update-alternatives
- 
- # vim configure.in contains functions which got 'dropped' by autotools.bbclass
-@@ -28,7 +27,7 @@ do_configure () {
-     touch auto/config.mk auto/config.h
- }
- 
--#Available PACKAGECONFIG options are gtkgui, x11, tiny
-+#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
- PACKAGECONFIG ??= ""
- 
- PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
-@@ -76,5 +75,3 @@ ALTERNATIVE_${PN} = "vi"
- ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
- ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
- ALTERNATIVE_PRIORITY[vi] = "100"
--
--PARALLEL_MAKE = ""
--- 
-1.8.4
+iD8DBQFSM3GKMkyGM64RGpERAjVeAKCsmVjaE/7sh+KLAVEQm2O/3/5LqgCdHdF8
+xNpxd01pUYH9OH1Kv+UXPP0=
+=1IWz
+-----END PGP SIGNATURE-----
 
 
