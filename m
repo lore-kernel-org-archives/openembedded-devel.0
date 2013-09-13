@@ -1,44 +1,34 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 4444560EE8
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A5E560135
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 19:55:15 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id e14so3603604iej.34
+	Fri, 13 Sep 2013 20:08:25 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id f12so1606040wgh.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 12:55:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=Jrg0kbgixc20alX+zOZNSc3nQJ0m07IWO+2l7odKahw=;
-	b=TaoKpEUA8Pg0N3FCj9y622QYV79+dqzkGtLVGNxnZ7p7o7H6VIKzMvGvJ5SLo7L/3N
-	rcIRSCIarH3/7YXpcRCXI0nhhYjCImNUC66J5VtVglBO5JZ8mw4h4EYmVcz7yxk8gQp7
-	FNlSR+bjkYTRDAPPUam9Qji4vr/Ng8yI+44n9VFB7f8UEviGHO9V97CyvbZtemNdz7Pp
-	VcLd9GT2/nY5QxZTYDnfRw3S5SCgwR1QaQzVsV1VBq7pWIWp1ZzgtsAeWNtujjh/Cqty
-	bxrH3nGTfSEtxz9ZBui/hdJ/QlSdhhzRkPgUK19R16odCBeteCWv9VnZNnPQYphygYUB
-	G5Vw==
-X-Gm-Message-State: ALoCoQkVIw8m7WqcxWQtISSdSkPE3XGCCI03HwbPlCOacunDGFX7F7ajKKe3OifbqIEX6/DOaVDD
-X-Received: by 10.50.9.37 with SMTP id w5mr1964662iga.29.1379102116637;
-	Fri, 13 Sep 2013 12:55:16 -0700 (PDT)
-Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
-	by mx.google.com with ESMTPSA id k6sm1351789igx.8.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 13 Sep 2013 12:55:16 -0700 (PDT)
-Date: Fri, 13 Sep 2013 12:55:09 -0700
-From: Joe MacDonald <joe@deserted.net>
+	Fri, 13 Sep 2013 13:08:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=mOi6dCHqJhDNwwiysPsuFVi9pcYjMTbz7T2FBni7+JY=;
+	b=uQK9LOkgyeMWHBd8DKmVlBme3jGtgqg68g7dUvucEp+JZxiYARr/yS01Ws4nxgTyLy
+	phQLZQP67vo+IU7WrXIpfKHwasFpsQR35Qfvo57LpNSyPfOFPqJHAjotdVYzQ8dJQH56
+	K7NScnIlbmAVZ/jblnGZuYS/R9ldyoK8KQOONcjGTzx58uJXo3Tdd0w5LD6Jonnt1RiT
+	HG5Ftmckck9ecY0jypJ7kt9a2yf2xJ0+FLe0zOGtlAAu3EHHTtywnYNTaGU6o0SocP+N
+	DSSn+ylG131qLmtJRiiPLWvRSvERTjjfPqluN+/vRJagP9SqB0IjVGfPRf7GDi2UQcb4
+	Lo+A==
+X-Received: by 10.194.77.167 with SMTP id t7mr12352002wjw.27.1379102906016;
+	Fri, 13 Sep 2013 13:08:26 -0700 (PDT)
+Received: from turn.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
+	[94.192.12.83])
+	by mx.google.com with ESMTPSA id b11sm5826444wik.1.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 13 Sep 2013 13:08:25 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130913195507.GA10892@deserted.net>
-References: <1378651932-25060-1-git-send-email-fathi.boudra@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <1378651932-25060-1-git-send-email-fathi.boudra@linaro.org>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-networking][PATCH V3] fping: add recipe
+Date: Fri, 13 Sep 2013 21:08:22 +0100
+Message-Id: <1379102902-3192-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.8.4
+Subject: [meta-oe][PATCH] vim: upgrade to v7.4.27 and refactor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,83 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 19:55:16 -0000
-X-Groupsio-MsgNum: 46178
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TB36FDmn/VVEgNH/"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Sep 2013 20:08:26 -0000
 
---TB36FDmn/VVEgNH/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+'vim.inc' is merged into the new recipe 'vim_7.4.27.bb', the recipe is slightly
+reorganised and a minor omission in the comments is corrected.
 
-Merged, thanks.
--J.
+DESCRIPTION is replaced with SUMMARY. PR and INC_PR values are dropped. The
+variable PV_MAJOR is also dropped as it isn't used.
 
-[[oe] [meta-networking][PATCH V3] fping: add recipe] On 13.09.08 (Sun 17:52=
-) Fathi Boudra wrote:
+LIC_FILES_CHECKSUM is updated as an address and version number given in the
+license have been modified. The main license text itself is unchanged.
 
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-> ---
->  meta-networking/recipes-support/fping/fping_3.5.bb | 25 ++++++++++++++++=
-++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 meta-networking/recipes-support/fping/fping_3.5.bb
->=20
-> diff --git a/meta-networking/recipes-support/fping/fping_3.5.bb b/meta-ne=
-tworking/recipes-support/fping/fping_3.5.bb
-> new file mode 100644
-> index 0000000..fe88934
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/fping/fping_3.5.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY =3D "sends ICMP ECHO_REQUEST packets to network hosts"
-> +DESCRIPTION =3D "fping is a ping like program which uses the Internet Co=
-ntrol \
-> +Message Protocol (ICMP) echo request to determine if a target host is \
-> +responding. fping differs from ping in that you can specify any number o=
-f \
-> +targets on the command line, or specify a file containing the lists of \
-> +targets to ping.  Instead of sending to one target until it times out or=
- \
-> +replies, fping will send out a ping packet and move on to the next targe=
-t \
-> +in a round-robin fashion."
-> +HOMEPAGE =3D "http://www.fping.org/"
-> +SECTION =3D "console/tools"
-> +LICENSE =3D "BSD"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D09d77789fe32be35acde9637a5ee3=
-9b1"
-> +
-> +SRC_URI =3D "http://www.fping.org/dist/fping-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "2e17cb655aa4eb59b5a4a38a89e746ed"
-> +SRC_URI[sha256sum] =3D "09b8960e235341bae6000085d38106357eae656a79e0119b=
-d27e816c9003656a"
-> +
-> +S =3D "${WORKDIR}/fping-${PV}"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF =3D "--enable-ipv4"
-> +
-> +PACKAGECONFIG ?=3D "${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', =
-'', d)}"
-> +PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
---=20
--Joe MacDonald.
-:wq
+The setting of PARALLEL_MAKE to force single-threaded compilation is removed as
+there is no justification in the git history for this being needed and the
+compilation completes fine without it.
 
---TB36FDmn/VVEgNH/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+---
+ meta-oe/recipes-support/vim/vim_7.3.1314.bb           |  7 -------
+ .../recipes-support/vim/{vim.inc => vim_7.4.27.bb}    | 19 ++++++++-----------
+ 2 files changed, 8 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/vim/vim_7.3.1314.bb
+ rename meta-oe/recipes-support/vim/{vim.inc => vim_7.4.27.bb} (87%)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+diff --git a/meta-oe/recipes-support/vim/vim_7.3.1314.bb b/meta-oe/recipes-support/vim/vim_7.3.1314.bb
+deleted file mode 100644
+index 1be5a91..0000000
+--- a/meta-oe/recipes-support/vim/vim_7.3.1314.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require ${PN}.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRCREV = "v7-3-1314"
+-
+-SRC_URI += "file://configure.in_remove_CC_quotes.patch;patchdir=.."
+diff --git a/meta-oe/recipes-support/vim/vim.inc b/meta-oe/recipes-support/vim/vim_7.4.27.bb
+similarity index 87%
+rename from meta-oe/recipes-support/vim/vim.inc
+rename to meta-oe/recipes-support/vim/vim_7.4.27.bb
+index 991ba74..77507d4 100644
+--- a/meta-oe/recipes-support/vim/vim.inc
++++ b/meta-oe/recipes-support/vim/vim_7.4.27.bb
+@@ -1,20 +1,19 @@
+-DESCRIPTION = "Vi IMproved - enhanced vi editor"
++SUMMARY = "Vi IMproved - enhanced vi editor"
+ SECTION = "console/utils"
+ DEPENDS = "ncurses"
+ # vimdiff doesn't like busybox diff
+ RSUGGESTS_${PN} = "diffutils"
+ LICENSE = "vim"
+-LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=4c91d841bb7b75f68b5bb8ad7118f5b8"
++LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
+ 
+-PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+-VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
+-
+-INC_PR = "r13"
+-
+-SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
++SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
++	file://configure.in_remove_CC_quotes.patch;patchdir=.."
++SRCREV = "v7-4-027"
+ 
+ S = "${WORKDIR}/${PN}/src"
+ 
++VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
++
+ inherit autotools update-alternatives
+ 
+ # vim configure.in contains functions which got 'dropped' by autotools.bbclass
+@@ -28,7 +27,7 @@ do_configure () {
+     touch auto/config.mk auto/config.h
+ }
+ 
+-#Available PACKAGECONFIG options are gtkgui, x11, tiny
++#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
+ PACKAGECONFIG ??= ""
+ 
+ PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
+@@ -76,5 +75,3 @@ ALTERNATIVE_${PN} = "vi"
+ ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
+ ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+ ALTERNATIVE_PRIORITY[vi] = "100"
+-
+-PARALLEL_MAKE = ""
+-- 
+1.8.4
 
-iEYEARECAAYFAlIzbZsACgkQwFvcllog0XxbfQCdG4JBa/6uyPH5KlMkSIfOGSuk
-CaUAn1awbMbf76zAiQiHd3qtydVdeHvw
-=topM
------END PGP SIGNATURE-----
 
---TB36FDmn/VVEgNH/--
