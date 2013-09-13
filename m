@@ -1,15 +1,15 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 8406B60FDF
+	by mail.openembedded.org (Postfix) with ESMTP id DD40960FDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 13:20:01 +0000 (UTC)
+	Fri, 13 Sep 2013 13:23:07 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2013 14:19:55 +0100
-Message-Id: <1379078395-23592-1-git-send-email-ml@communistcode.co.uk>
+Date: Fri, 13 Sep 2013 14:22:54 +0100
+Message-Id: <1379078574-23993-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.4
 Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCH] libsoc: new recipe
+Subject: [meta-oe][PATCHv2] libsoc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,11 +23,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 13:20:02 -0000
+X-List-Received-Date: Fri, 13 Sep 2013 13:23:08 -0000
 
 From: Jack Mitchell <jack@embed.me.uk>
 
+Signed-off-by: Jack Mitchell <jack@embed.me.uk>
 ---
+
+Change from v1: added signed-off-by
+
  meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 18 ++++++++++++++++++
  1 file changed, 18 insertions(+)
  create mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.3.bb
