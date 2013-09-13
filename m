@@ -1,36 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 360686B6C3
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D28360FDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 13:58:07 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id c41so590424eek.25
+	Fri, 13 Sep 2013 14:18:34 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VKUCb-0002ah-HA for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Sep 2013 16:18:29 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Sep 2013 16:18:29 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 06:58:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=nhMhGU6I13TLxyrk7SjTTUqEspFytFtA9bCgTZOsL7k=;
-	b=MuC3ohAqW40z3Bz8QPm28kAXdhcrYaRyuc3TrwYM8PAPE0UiFHFK9HRE8U5yV6CfZe
-	2PiFLTP+ygqzqbiGSbhWLgRmL65MvvGH7wHnqjHEw2+aqwwLoa8tx7CaXrdvwyplTkF9
-	CZtpV9p0n0pAckwoJJe6uvwLp6kvcTG7DM2ObqOTdIwpfuMLGDJk8TTxII4YaJqo90he
-	BKLjpZMIxoWl1imdJXnwxXplCYIOqBNtjovyn44RLVyK2BFAWSBjLTpLnvyHKZm6OKN6
-	v2FxjavsymGFhyjMEtbDmaJJm3Kg9Ih51Cv1/dx/JnSXOy3aCzco7qqPxCC2F0ZhO+Iv
-	X12w==
-X-Received: by 10.14.4.1 with SMTP id 1mr18670698eei.21.1379080688411;
-	Fri, 13 Sep 2013 06:58:08 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	h52sm15191046eez.3.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Sep 2013 06:58:07 -0700 (PDT)
-Date: Fri, 13 Sep 2013 15:59:36 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20130913135936.GD11500@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: meta-perl, meta-filesystems maintenance
+	Fri, 13 Sep 2013 16:18:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 13 Sep 2013 16:18:19 +0200
+Message-ID: <l0v6r0$a1c$1@ger.gmane.org>
+References: <1379078574-23993-1-git-send-email-ml@communistcode.co.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+In-Reply-To: <1379078574-23993-1-git-send-email-ml@communistcode.co.uk>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [meta-oe][PATCHv2] libsoc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,48 +42,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 13:58:08 -0000
-X-Groupsio-MsgNum: 46169
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="KqIDP7BYbqnwKRO+"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Sep 2013 14:18:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---KqIDP7BYbqnwKRO+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi,
+Op 13-09-13 15:22, Jack Mitchell schreef:
+> From: Jack Mitchell <jack@embed.me.uk>
+> 
+> Signed-off-by: Jack Mitchell <jack@embed.me.uk> ---
+> 
+> Change from v1: added signed-off-by
+> 
+> meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 18 ++++++++++++++++++ 1
+> file changed, 18 insertions(+) create mode 100644
+> meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+> 
+> diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+> b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb new file mode 100644 index
+> 0000000..e91e152 --- /dev/null +++
+> b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb @@ -0,0 +1,18 @@ +SUMMARY
+> = "libsoc is a C library for interfacing with common SoC peripherals
+> through generic kernel interfaces" +HOMEPAGE =
+> "https://github.com/jackmitch/libsoc" + +LICENSE = "LGPLv2.1" 
+> +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5" + +inherit
+> autotools + +DEPENDS = "libgcc"
 
-there were some patches for meta-perl, meta-filesystems
-do you want me to merge patches which looks OK without your ACK or
-should I always wait for it (you're listed in meta-perl as Maintainer
-and in meta-filesystems for couple of recipes + you created it)?
+Isn't that automatically implied with gcc-cross?
 
-If you don't have write access I'm OK with pushing them for you once
-they are acked on ML - or even better if you send me list of patchwork
-IDs to merge or some consolidated pull request.
+> + +SRCREV = "0764ee52b590d5ccb4bd4698f0011496b536ed70" +SRC_URI =
+> "git://github.com/jackmitch/libsoc.git" + +S = "${WORKDIR}/git" + 
+> +do_configure_prepend () { +  ./autogen.sh +}
 
-You can see what's in queue:
-http://patches.openembedded.org/bundle/jama/meta-filesystems/?archive=3Dboth
-http://patches.openembedded.org/bundle/jama/meta-perl/?archive=3Dboth
+What is autotools.bbclass missing that autogen does?
 
-If you don't have maintainer permission for patchwork, please ask Khem
-to add it for you.
+regards,
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---KqIDP7BYbqnwKRO+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlIzGkgACgkQN1Ujt2V2gBy+cgCfRkMQtGjr4LvHWsCqHYs3ISD+
-LjEAoKCu4LZ1MLlfHXbMpTFYhxgWjgVP
-=B2nn
+iD8DBQFSMx6rMkyGM64RGpERArDxAJwKCadoIk9k805PYnEChUKBRuSMrACeOUyq
+0+C2PxH9+SPbYA8QgwAmrdE=
+=c9HA
 -----END PGP SIGNATURE-----
 
---KqIDP7BYbqnwKRO+--
+
