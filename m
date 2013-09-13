@@ -1,15 +1,19 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id F188860EE8
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE7160EE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2013 22:15:48 +0000 (UTC)
+	Fri, 13 Sep 2013 22:16:56 +0000 (UTC)
+Message-ID: <52338ED8.7080701@communistcode.co.uk>
+Date: Fri, 13 Sep 2013 23:16:56 +0100
 From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130806 Thunderbird/17.0.8
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2013 23:15:32 +0100
-Message-Id: <1379110532-29457-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.4
-Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCHv5] libsoc: new recipe
+References: <1379078395-23592-1-git-send-email-ml@communistcode.co.uk>
+	<CAP9ODKonACidq+Yk-vqnM5=N94kbvJLArDu7_U3Co1v3TCHcXg@mail.gmail.com>
+In-Reply-To: <CAP9ODKonACidq+Yk-vqnM5=N94kbvJLArDu7_U3Co1v3TCHcXg@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libsoc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,50 +27,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 22:15:50 -0000
+X-List-Received-Date: Fri, 13 Sep 2013 22:16:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Jack Mitchell <jack@embed.me.uk>
+On 13/09/13 22:29, Otavio Salvador wrote:
+> On Fri, Sep 13, 2013 at 10:19 AM, Jack Mitchell <ml@communistcode.co.uk> wrote:
+>> From: Jack Mitchell <jack@embed.me.uk>
+> ...
+>> +DEPENDS = "libgcc"
+>
+> Does this is really need?
+>
 
-Signed-off-by: Jack Mitchell <jack@embed.me.uk>
----
- v4 -> v5
- - Moved RDEPENDS to below do_install
+Hi Otavio,
 
- v3 -> v4
- - Added libgcc in RDEPENDS
+There was some conversation about this in another revision of the patch. 
+It's been changed now to RDEPENDS and I've just posted a v5 for review.
 
- v2 -> v3
- - Removed DEPENDS on libgcc
- - Removed autogen.sh pre-configure as was unneeded
+Cheers,
+Jack.
 
- v1 -> v2
- -added signed-off-by
-
- meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.3.bb
-
-diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.3.bb b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
-new file mode 100644
-index 0000000..1bf2782
---- /dev/null
-+++ b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "libsoc is a C library for interfacing with common SoC peripherals through generic kernel interfaces"
-+HOMEPAGE = "https://github.com/jackmitch/libsoc"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
-+
-+inherit autotools
-+
-+SRCREV = "0764ee52b590d5ccb4bd4698f0011496b536ed70"
-+SRC_URI = "git://github.com/jackmitch/libsoc.git"
-+
-+S = "${WORKDIR}/git"
-+
-+RDEPENDS_${PN} = "libgcc"
 -- 
-1.8.4
-
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   Cambrideshire, UK
+   http://www.embed.me.uk
+--
 
