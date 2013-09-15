@@ -1,35 +1,30 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id AD84B6102D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Sep 2013 19:43:48 +0000 (UTC)
-Received: by mail-pd0-f169.google.com with SMTP id r10so2594253pdi.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Sep 2013 12:43:50 -0700 (PDT)
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 57C996102E;
+	Sun, 15 Sep 2013 07:33:13 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id tp5so5345023ieb.40
+	for <multiple recipients>; Sun, 15 Sep 2013 00:33:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Nl9VqX7VscN+x1G3+pJtwDxOlgyHOhsCio4UxBBKCCc=;
-	b=VAodf0qwCa9wNakqxUjeB/K4dPTvERL4C5fLpfjoN/sfwzAeMDuX7TZiMTL4dqpIyx
-	d0N8Ov4PiA9glGmldnPF+VMzMxr/tvAALLBLC9z+0UAdhg8vJoMSePf+zKE//4YNeNP1
-	Q7a64SNgzbcCPLwUOJJlf64z8w/2H5dYyeT7LzsVqpqZNuDWkf9THso7J8EUHg/2Dp7Q
-	arJcAbKxsB1TludSHhYmiCafym1PLbOukp0etGL4132dZlTfbnMSATg0uUEllsMK8s7f
-	nqkdNSiFmuvykGVaJ3P2iVyXwsCa42MySs+UjbR05u9Q0aiGc6WomTG7kcE7Xu7gam4Z
-	ioUg==
-X-Received: by 10.68.247.36 with SMTP id yb4mr20346400pbc.138.1379187830648;
-	Sat, 14 Sep 2013 12:43:50 -0700 (PDT)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	yh1sm15470402pbc.21.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 14 Sep 2013 12:43:50 -0700 (PDT)
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=JuphKaTyEdya5r5PxVvwZhMKlaeTTtvjB5zT76p64G4=;
+	b=p89v95lL4rcOuxAx11XYGn+L5EYb2tjFbBrkKVXXGBQ653MOLoRZmQOhzWgEdtKN/W
+	a6AkdDlZe8n72FfRWWj3G2lgS5V7OUw+8ucWdz+11KEyc/usvMZQDBA/lmDvm/+Fcd39
+	ANpbOz78kxwYvCiiO+NBiJ2cwsgMEZSb2lZCFvKS5QSK7ugnGBSjGHOCr6YNnMW5wdmR
+	zbyA4FlAN4r8Pyk1+6I5S6Z5Pm9oplMs2O3cMzYScUg5YCpDcIyVwdjuCPrwr3Py8Rol
+	/m1t4wubEprvTfOPjwDLpfGHAId9lGV24B8w8Y9mETZp4J+Y055qgnXteWf63rOrw1WT
+	Dx9w==
+X-Received: by 10.42.51.144 with SMTP id e16mr5667269icg.2.1379230394469; Sun,
+	15 Sep 2013 00:33:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.216.195 with HTTP; Sun, 15 Sep 2013 00:32:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Sep 2013 12:42:36 -0700
-Message-Id: <1379187756-9984-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-oe][PATCH] proxy-libintl: Do not act as gettext provider
+Date: Sun, 15 Sep 2013 00:32:44 -0700
+Message-ID: <CAMKF1sonakYiB++QeeeXKVztx+7CKW3zn=ndn=kP+kSVmqu3Qw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: patchwork updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +38,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2013 19:43:49 -0000
+X-List-Received-Date: Sun, 15 Sep 2013 07:33:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-It only is a replacement for libintl so lets not
-go overboard.
+Hi All,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+The patchwork has been updated to latest. Please keep an eye if you
+see something non working let me know immediately.
 
-diff --git a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-index 0c652b6..df12299 100644
---- a/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-+++ b/meta-oe/recipes-core/proxy-libintl/proxy-libintl_20100902.bb
-@@ -5,9 +5,7 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://src/proxy-libintl/COPYING.LIB.txt;md5=bc400bc21422f9a92e76ec2c5167ca2e"
- 
- PR = "r1"
--PROVIDES = "virtual/libintl virtual/gettext"
--RPROVIDES_${PN} += "gettext"
--RPROVIDES_${PN}-dev += "gettext-dev"
-+PROVIDES = "virtual/libintl"
- 
- SRC_URI = " \
-     http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/${PN}-dev_${PV}_win32.zip \
--- 
-1.8.4
 
+Thanks
+-Khem
 
