@@ -1,30 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 57C996102E;
-	Sun, 15 Sep 2013 07:33:13 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id tp5so5345023ieb.40
-	for <multiple recipients>; Sun, 15 Sep 2013 00:33:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=JuphKaTyEdya5r5PxVvwZhMKlaeTTtvjB5zT76p64G4=;
-	b=p89v95lL4rcOuxAx11XYGn+L5EYb2tjFbBrkKVXXGBQ653MOLoRZmQOhzWgEdtKN/W
-	a6AkdDlZe8n72FfRWWj3G2lgS5V7OUw+8ucWdz+11KEyc/usvMZQDBA/lmDvm/+Fcd39
-	ANpbOz78kxwYvCiiO+NBiJ2cwsgMEZSb2lZCFvKS5QSK7ugnGBSjGHOCr6YNnMW5wdmR
-	zbyA4FlAN4r8Pyk1+6I5S6Z5Pm9oplMs2O3cMzYScUg5YCpDcIyVwdjuCPrwr3Py8Rol
-	/m1t4wubEprvTfOPjwDLpfGHAId9lGV24B8w8Y9mETZp4J+Y055qgnXteWf63rOrw1WT
-	Dx9w==
-X-Received: by 10.42.51.144 with SMTP id e16mr5667269icg.2.1379230394469; Sun,
-	15 Sep 2013 00:33:14 -0700 (PDT)
+Return-Path: <lists@philipp-wagner.com>
+Received: from turboconrad.planet-school.de (mail.planet-school.de
+	[194.116.187.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 9AE4261017
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Sep 2013 13:22:29 +0000 (UTC)
+Received: from turboconrad.planet-school.de (srv004.service.ps-server.net
+	[194.116.186.79])
+	by turboconrad.planet-school.de (Postfix) with ESMTP id 22A8DB6A06E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Sep 2013 15:22:28 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	srv004.service.ps-server.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-101.0 required=5.0 tests=ALL_TRUSTED, LOCAL_USER_RULE
+	autolearn=unavailable version=3.3.2
+Received: from poweramy.site (ppp-93-104-169-145.dynamic.mnet-online.de
+	[93.104.169.145])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: mail@philipp-wagner.com)
+	by turboconrad.planet-school.de (Postfix) with ESMTPSA id EEE66B6A068
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Sep 2013 15:22:27 +0200 (CEST)
+Message-ID: <5235B492.6070400@philipp-wagner.com>
+Date: Sun, 15 Sep 2013 15:22:26 +0200
+From: Philipp Wagner <lists@philipp-wagner.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
 MIME-Version: 1.0
-Received: by 10.50.216.195 with HTTP; Sun, 15 Sep 2013 00:32:44 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 15 Sep 2013 00:32:44 -0700
-Message-ID: <CAMKF1sonakYiB++QeeeXKVztx+7CKW3zn=ndn=kP+kSVmqu3Qw@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: patchwork updated
+To: openembedded-devel@lists.openembedded.org
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: [meta-oe][PATCH] Update iw to 3.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,15 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2013 07:33:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 15 Sep 2013 13:22:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+Hi,
 
-The patchwork has been updated to latest. Please keep an eye if you
-see something non working let me know immediately.
+this updates iw to the most recent version 3.11.
 
+Signed-off-by: Philipp Wagner <mail@philipp-wagner.com>
+---
+diff --git a/meta-oe/recipes-connectivity/iw/iw_3.11.bb b/meta-oe/recipes-connectivity/iw/iw_3.11.bb
+index a09339c..9152e7a 100644
+--- a/meta-oe/recipes-connectivity/iw/iw_3.11.bb
++++ b/meta-oe/recipes-connectivity/iw/iw_3.11.bb
+@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
 
-Thanks
--Khem
+ DEPENDS = "libnl pkgconfig"
+
+-SRC_URI = "http://wireless.kernel.org/download/iw/${P}.tar.bz2 \
++SRC_URI = "http://www.kernel.org/pub/software/network/iw/${P}.tar.bz2 \
+            file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
+ "
+
+-SRC_URI[md5sum] = "1c18bfbbc8773629e5e8ac733a39540c"
+-SRC_URI[sha256sum] = "df11036ac11df31f44083da962a6e9c74bdea7c01c596c4b5840f948cdb6c857"
++SRC_URI[md5sum] = "e633cf7c875c7d8b547abafc0d95f6c4"
++SRC_URI[sha256sum] = "09348d4f7371fad00c07cfb67b9e34f24403cbd9361f9634cfb4dff9cdd40139"
+
+ EXTRA_OEMAKE = ""
 
