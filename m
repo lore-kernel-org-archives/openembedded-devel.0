@@ -1,42 +1,37 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 74CAE6C80B
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-ve0-f178.google.com (mail-ve0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B8266041D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2013 18:44:21 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id f12so4139275wgh.14
+	Mon, 16 Sep 2013 19:13:03 +0000 (UTC)
+Received: by mail-ve0-f178.google.com with SMTP id jw12so3332063veb.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2013 11:44:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=qFfI6rxrYPrPWJBiBIjdyukTGVq/2ifxAgZX6kTS64U=;
-	b=RlkQKaE8kfMWLGP4BuJS7k19ApieL7O5OjW7n9iE5NGb4S63rjdRu5CD1gFfk1wS2t
-	nEUvn7XHSe7lv4Y+gDbeRd9+htHAUQmVqF8JUNUhVllGRXpH2Ll2wIpIuB0z7fsbjK5R
-	Thfw3JHzW0nUPZFFp/MdbimaZ0mhiJ1UxQ8iKJZcJQ7O4wMJR+wX3dRALan1bKN6W5+T
-	p38Qzb+fXU0ZEd3gieCvO4avz14nDob1YyLMn8Wd8IHJMRdpfQkACCf+m43Ue5n3ZQJ4
-	Z3FDmEFLNPh0REz88hWnp6NHa0c4n0TFdqT8+pE8eLbASM/LiH6/VqJk6y2n18dqI6zj
-	J9AA==
-X-Gm-Message-State: ALoCoQlwGeoKr7PMOFrE16v2u65RO9yxJ6fZ41/86G00XHuj/n3qKCWE31mGMVuoUio/2nbhRs24
-X-Received: by 10.194.235.138 with SMTP id um10mr23956378wjc.30.1379357062798; 
-	Mon, 16 Sep 2013 11:44:22 -0700 (PDT)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id l9sm25592668wif.10.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 16 Sep 2013 11:44:21 -0700 (PDT)
-Date: Mon, 16 Sep 2013 14:44:18 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130916184416.GA13978@deserted.net>
-References: <1379315195-18861-1-git-send-email-schnitzeltony@googlemail.com>
+	Mon, 16 Sep 2013 12:13:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=t29bwailXjckQT0KjOMk2AS+6hL7Nzuj9R42VcHb/ck=;
+	b=vCT32yUMjqBAEGkBxU3BvJY+H2YXZkf3T6fFHNxHUleWGk9Le87KX3AGzAPmG2s3Ue
+	k2uYV3ha/rS6NTIo7FTLGLLvuRcxqAtKvUSSM+puW3DyxZlJ4PAp4xS+HztEqZqyvSWE
+	3EGHDcYbPthEYUz0X8aoCpXVxJPQ7ZLuIev7axmP76RWNm1AWqpPB6/VscLKm7L5FTye
+	GSoLIl+NJBsXCYMkhi0hphmsrz+cFCRT/HomTHHSDOMspOmSzWjBAXJlv53HcB7cr0Ok
+	DBH6SynHvJYZ4GAvaAE5lxx+XNgFFLwyGT9a4U40gZA1ICycdM9sx2+PVMbGVNX4VkBs
+	ojdQ==
+X-Received: by 10.220.174.200 with SMTP id u8mr28444268vcz.6.1379358784542;
+	Mon, 16 Sep 2013 12:13:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1379315195-18861-1-git-send-email-schnitzeltony@googlemail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking] ntp: disable automatic panic shutdown for ntpd
+Sender: paul.betafive@gmail.com
+Received: by 10.220.109.72 with HTTP; Mon, 16 Sep 2013 12:12:24 -0700 (PDT)
+In-Reply-To: <CAKS01ondqDK+WSxXaFSSk6_gBp5V9A6=Qh7g_TQz8WWUAaoHhQ@mail.gmail.com>
+References: <CAKS01onp9CcPLNOybKbTh9bsp4QwuLJtJABrU7_zDe=Px0t6Nw@mail.gmail.com>
+	<02f901ceb2d2$d93db7e0$8bb927a0$@oss.bmw-carit.de>
+	<CAKS01ondqDK+WSxXaFSSk6_gBp5V9A6=Qh7g_TQz8WWUAaoHhQ@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Mon, 16 Sep 2013 20:12:24 +0100
+X-Google-Sender-Auth: 69M4qXMJPTui0rQapa5WPVgWIDY
+Message-ID: <CANyK_8fQ_fm0RW=BmBrciy+9CPjpxu2i4SYNOr+2N6fD8EVP9g@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: using deb as source while building image.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,72 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2013 18:44:21 -0000
-X-Groupsio-MsgNum: 46215
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="17pEHd4RhPHOinZp"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Sep 2013 19:13:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---17pEHd4RhPHOinZp
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 16 September 2013 13:32, Anup Kini <akini@synapticon.com> wrote:
+> I am trying to understand how deb packages can be used to build the image.
+> Since, i need to install a few pre-built application.
+> let me know if you have any pointers on how to proceed with this.
+>
 
-[[oe] [meta-networking] ntp: disable automatic panic shutdown for ntpd] On =
-13.09.16 (Mon 09:06) Andreas M=FCller wrote:
+Packages pre-built for another distribution generally won't work as
+intended within an OpenEmbedded/Yocto system. Just as you wouldn't
+install a Ubuntu package on a RHEL system, you shouldn't install a
+Ubuntu package on an OpenEmbedded based system. What's the exact
+software you need?
 
-> Taken from [1]:
->=20
-> "However, if the difference between the client time and server time is gr=
-eater
-> than the panic threshold, which defaults to 1000 s, the daemon will send a
-> message to the system log and shut down without setting the clock."
->=20
-> On RTC-less or 'fresh' systems with unpredicatble inital date ntpd will s=
-top
-> with work undone (note: I did NOT find the message mentioned above - so it
-> took long way to fix). This is a wide use case for using NTP in productio=
-n:
-> No need for initial datetime setup by some operator.
->=20
-> [1] http://doc.ntp.org/4.1.1/debug.htm
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  .../recipes-support/ntp/ntp/ntpd.service           |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/ntp/ntp/ntpd.service b/meta-=
-networking/recipes-support/ntp/ntp/ntpd.service
-> index bd87b1e..eb9c030 100644
-> --- a/meta-networking/recipes-support/ntp/ntp/ntpd.service
-> +++ b/meta-networking/recipes-support/ntp/ntp/ntpd.service
-> @@ -5,7 +5,7 @@ After=3Dnetwork.target
->  [Service]
->  Type=3Dforking
->  PIDFile=3D/run/ntpd.pid
-> -ExecStart=3D/usr/bin/ntpd -p /run/ntpd.pid
-> +ExecStart=3D/usr/bin/ntpd -p /run/ntpd.pid -g
-> =20
->  [Install]
->  WantedBy=3Dmulti-user.target
+You could use the recipe search on layers.openembedded.org to see if a
+recipe already exists for the software you need, if it doesn't then
+it's usually not too difficult to write your own recipe.
 
-Merged, thanks.
+-- 
+Paul Barker
 
---=20
--Joe MacDonald.
-:wq
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
---17pEHd4RhPHOinZp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlI3UYAACgkQwFvcllog0XyDNgCeKPL+VB2ZeC1i+kRm1by5xB0s
-5tQAni5aAjbfvHoES8tz2/f7TGtcnLn/
-=5Q/i
------END PGP SIGNATURE-----
-
---17pEHd4RhPHOinZp--
