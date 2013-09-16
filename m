@@ -1,34 +1,36 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id E8FB760FF0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 4176761590
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2013 23:18:13 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id b10so1681324eae.10
+	Mon, 16 Sep 2013 07:06:49 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id d41so1778494eek.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2013 16:18:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=vJJv3i4oU9pJRBLNqko8ggi7t+mqMt6YyhVhIQeySYY=;
-	b=l2Ly64qPGIXX1KfrDwJkhcSS8ZGL5dFZo2nVzGDyKFOvKZyi1cMF9jCtKOXsecV5XB
-	sxQt6V2ihdkqG8ryQ1tE4fvLkH4zCACWNn0PFcRvCopK6S1DsJjrrmiwoEssaTFoArR1
-	a6lrgxhpMhZ85BXEnwWQr+a++dY+d1jl0uCjvFvx3a9Q4psKsLomPGmgxV3sgDNURYdu
-	gYXf1Ql+9wKCNjGUNkiO7Ky5kjLQqZWSzbk8c45brRpn7PHrloTbF6jBf6jz2ub69qk0
-	ydMVBb8fyNdnhRh/a4gIOHpAoQX9johW+ahQ6frGJI2cnhnrXQVrUBUIi2swm4Zoj6by
-	+AfA==
-X-Received: by 10.14.210.8 with SMTP id t8mr7184106eeo.39.1379287095024;
-	Sun, 15 Sep 2013 16:18:15 -0700 (PDT)
-Received: from mizar.localdomain
-	(host50-7-dynamic.20-79-r.retail.telecomitalia.it. [79.20.7.50])
-	by mx.google.com with ESMTPSA id a43sm36942843eep.9.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 15 Sep 2013 16:18:14 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 16 Sep 2013 00:06:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=KIstXGYwPHierxqxi+OqI4InXoROoEEMa3bSwB9EBZ4=;
+	b=IB9/uvT/d7QWbfSJy6al/4ivwR84z4hzkOA9kylTJ7funwlXSuLukso+c2hJcKDqk7
+	b+NInyr0nZfvNiADax/po+/5RA3s09bQn6Jz3eKZTN18VomJLA9ppLhptMqyf/XvqrWI
+	EKRCG0b6odfwujcMJ6AASa5g9FIU8A9+nJywsVmfBgzvRGFUt0JzxyZP1Iptmuqmd4ur
+	qrqziJ9zJYouacTWT67osJ3q+y27UIIkGU8lB70fMb41pLIQVvToyKXDklETVcnDo6O/
+	nzmYLWydbxu0hznqsJcRCl4f5wc0FQlrbk7Q60r3zWFj2lb77ENWrM4kUtDeeflTYQpz
+	+lDg==
+X-Received: by 10.15.43.13 with SMTP id w13mr40946239eev.37.1379315210631;
+	Mon, 16 Sep 2013 00:06:50 -0700 (PDT)
+Received: from localhost.localdomain (ip-178-200-247-59.unitymediagroup.de.
+	[178.200.247.59])
+	by mx.google.com with ESMTPSA id a6sm39320484eei.10.1969.12.31.16.00.00
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 16 Sep 2013 00:06:49 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2013 01:17:56 +0200
-Message-Id: <1379287076-2610-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: exclude all packaging tasks
+Date: Mon, 16 Sep 2013 09:06:35 +0200
+Message-Id: <1379315195-18861-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
+MIME-Version: 1.0
+Subject: [meta-networking] ntp: disable automatic panic shutdown for ntpd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,57 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2013 23:18:14 -0000
+X-List-Received-Date: Mon, 16 Sep 2013 07:06:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Taken from [1]:
+
+"However, if the difference between the client time and server time is greater
+than the panic threshold, which defaults to 1000 s, the daemon will send a
+message to the system log and shut down without setting the clock."
+
+On RTC-less or 'fresh' systems with unpredicatble inital date ntpd will stop
+with work undone (note: I did NOT find the message mentioned above - so it
+took long way to fix). This is a wide use case for using NTP in production:
+No need for initial datetime setup by some operator.
+
+[1] http://doc.ntp.org/4.1.1/debug.htm
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../linux/linux-yocto-tiny-kexecboot_3.10.bb       | 33 ++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ .../recipes-support/ntp/ntp/ntpd.service           |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-index 9f9808e..887921e 100644
---- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-+++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-@@ -22,5 +22,38 @@ do_install() {
- do_package() {
- }
+diff --git a/meta-networking/recipes-support/ntp/ntp/ntpd.service b/meta-networking/recipes-support/ntp/ntp/ntpd.service
+index bd87b1e..eb9c030 100644
+--- a/meta-networking/recipes-support/ntp/ntp/ntpd.service
++++ b/meta-networking/recipes-support/ntp/ntp/ntpd.service
+@@ -5,7 +5,7 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/ntpd.pid
+-ExecStart=/usr/bin/ntpd -p /run/ntpd.pid
++ExecStart=/usr/bin/ntpd -p /run/ntpd.pid -g
  
-+do_package_deb() {
-+    :
-+}
-+
- do_package_ipk() {
-+    :
-+}
-+
-+do_package_rpm() {
-+    :
-+}
-+
-+do_package_tar() {
-+    :
-+}
-+
-+do_package_write_deb() {
-+    :
-+}
-+
-+do_package_write_ipk() {
-+    :
-+}
-+
-+do_package_write_rpm() {
-+    :
-+}
-+
-+do_package_write_tar() {
-+    :
-+}
-+
-+do_packagedata() {
-+    :
- }
+ [Install]
+ WantedBy=multi-user.target
 -- 
-1.8.1.5
+1.7.6.5
 
 
