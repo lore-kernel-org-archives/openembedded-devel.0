@@ -1,41 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B7FD6B6CD;
-	Tue, 17 Sep 2013 12:29:23 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id c50so2680272eek.4
-	for <multiple recipients>; Tue, 17 Sep 2013 05:29:24 -0700 (PDT)
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 914486B6CD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Sep 2013 12:34:17 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id l10so2696890eei.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Sep 2013 05:34:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=HAZYAuEUeam8glZeLpt1XOtU1cQGyVhrwTGD7GS1Sq8=;
-	b=EXrL0jXRyGnruGGjZZtPtmGrBhYbuat+JlwdgZ/GjjEcCiRZGdy/2Hy3g8BftnnuRX
-	OBiRX8fPHWjMxIuAWz21N/VgXih9/M1SMlc309OW82t2+uthDXDJbWDBFGAA+jCY1QEd
-	DqnDSMez5Gr8bZUIltjelu1bQ3WXHWvovyj/QCo5AoyABbcuzs6wEJ0uyf7i8BzdnEYH
-	TWsOt6+Gs32z9bPiX8s0ShxCL0IyInDjEwXxfUc1OX0C+v9ct74Buq8WtrFW4Q3mStJi
-	zGyEKoMiGL6BYbCUQEmWXCovJzaWL2Ms8lezEr7iLzGtAhkdPvgNbLL3OMVBf9BR/Wxm
-	Xz1Q==
-X-Received: by 10.14.210.195 with SMTP id u43mr1985883eeo.80.1379420964059;
-	Tue, 17 Sep 2013 05:29:24 -0700 (PDT)
+	bh=E2dcUp+g98dPMYfl/8JThVB+5Td+4PulXVt5Q2LObfI=;
+	b=bFJRd9Zroju5GPivdKfRPvfu9B5VKqzfVcYFiF4aQNFuoBEJzXep3XhpyUHOk+F1Do
+	cb6mf3IcOA4Nbqjjedt3qrLfc5V66Hea7iy5tym6ZEPDzN+zDzYfouG5PDwLxlvn9htd
+	7+7ffqiqXV/TuMosh2rH/XO+pLR8tXXr/SmLKzk69vh7KU0e8+fl6FmywpJGwJMwk5Ah
+	D2tE4/NG4/JkEFtdynM6WwhyQIkQ/Tol1IH27gyL3r+U5bf1MwmgmweHqI5IMLfm/CpK
+	4qlXqOeFTPUVc78vlcpMFbaXvod83rWbm7cvDmA58nYGPuQr5Bs/G6IQqou7FsW0fEBU
+	jucQ==
+X-Received: by 10.14.107.68 with SMTP id n44mr51892994eeg.26.1379421258748;
+	Tue, 17 Sep 2013 05:34:18 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	h52sm50534020eez.3.1969.12.31.16.00.00
+	a43sm50535098eep.9.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 17 Sep 2013 05:29:23 -0700 (PDT)
-Date: Tue, 17 Sep 2013 14:30:58 +0200
+	Tue, 17 Sep 2013 05:34:18 -0700 (PDT)
+Date: Tue, 17 Sep 2013 14:35:53 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Message-ID: <20130917123058.GC7313@jama>
-References: <20130427105400.GB3199@jama> <20130502151833.GC3206@jama>
-	<20130516075215.GA24809@jama.dyndns-home.com>
-	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama> <20130622181656.GK14021@jama>
-	<20130725162341.GA3280@jama> <20130808225419.GB17945@jama>
-	<20130811114403.GG17945@jama>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20130917123553.GD7313@jama>
+References: <1378778559-22147-1-git-send-email-B40290@freescale.com>
+	<1378778559-22147-2-git-send-email-B40290@freescale.com>
+	<B21730BB6DA1D24B83348D9301EA417E10478AB8@039-SN2MPN1-023.039d.mgd.msft.net>
 MIME-Version: 1.0
-In-Reply-To: <20130811114403.GG17945@jama>
+In-Reply-To: <B21730BB6DA1D24B83348D9301EA417E10478AB8@039-SN2MPN1-023.039d.mgd.msft.net>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: State of bitbake world
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,201 +47,1134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Sep 2013 12:29:24 -0000
-X-Groupsio-MsgNum: 46220
+X-List-Received-Date: Tue, 17 Sep 2013 12:34:18 -0000
+X-Groupsio-MsgNum: 46221
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WfZ7S8PLGjBY9Voh"
+	protocol="application/pgp-signature"; boundary="2iBwrppp/7QCDedR"
 Content-Disposition: inline
 
---WfZ7S8PLGjBY9Voh
+--2iBwrppp/7QCDedR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 11, 2013 at 01:44:03PM +0200, Martin Jansa wrote:
-> On Fri, Aug 09, 2013 at 12:54:19AM +0200, Martin Jansa wrote:
-> > On Thu, Jul 25, 2013 at 06:23:41PM +0200, Martin Jansa wrote:
-> > > On Sat, Jun 22, 2013 at 08:16:56PM +0200, Martin Jansa wrote:
-> > > > On Tue, Jun 11, 2013 at 06:04:34PM +0200, Martin Jansa wrote:
-> > > > Last week hero Khem, sent many world fixes, but it seems like some =
-fixes weren't enough
-> > > > (tk, packagekit are still failing - I hope I haven't missed some ot=
-her vN)
-> > > > qemuarm: Summary: 11 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130620_105211.log/
-> > > >=20
-> > > > qemux86: Summary: 14 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130621_023143.log/
-> > > >=20
-> > > > qemux86_64: Summary: 15 tasks failed:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.w=
-orld.20130621_181258.log/
-> > > >=20
-> > > > common (9):
-> > > >   openembedded-core/meta/recipes-qt/qt4/qt4-embedded_4.8.4.bb, do_c=
-ompile
-> > > >   openembedded-core/meta/recipes-core/base-files/base-files_3.0.14.=
-bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.=
-bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-qt/qcanobserver/qcanobserver_sv=
-n.bb, do_compile
-> > > >   meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_=
-0.5.6.bb, do_compile
-> > > >   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_=
-compile
-> > > >   meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-data-ser=
-ver_git.bb, do_compile
-> > > >   meta-openembedded/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.=
-32.0.bb, do_compile
-> > > >   meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_g=
-it.bb, do_compile
-> > > >=20
-> > > > qemuarm (2):
-> > > >   openembedded-core/meta/recipes-devtools/qemu/qemu_1.5.0.bb, do_co=
-mpile
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/gnuradio/gnuradio_=
-git.bb, do_compile
-> > > >=20
-> > > > qemux86* common (4):
-> > > >   openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-in=
-tel_2.21.9.bb, do_compile
-> > > >   openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-> > > >   meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_conf=
-igure
-> > > >   meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do=
-_compile
-> > > >=20
-> > > > qemux86 (1):
-> > > >   meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video=
--geode_2.11.14.bb, do_compile
-> > > >=20
-> > > > qemux86-64 (2):=20
-> > > >   meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_co=
-mpile
-> > > >   meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/l=
-ibimobiledevice_1.1.4.bb, do_configure
+On Mon, Sep 16, 2013 at 07:43:25AM +0000, Guo Chunrong-B40290 wrote:
+> Hello ,
+> Please give some comments about patch .
 
-I haven't updated this status for few weeks because there were always
-some issue deeper in the dependency tree so it was hiding a lot of other
-issues, now it's good time to update all qemu* statuses. All these
-builds had both my dependency-fixes patchsets included.
+Hi,
 
-qemuarm: Summary: 5 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30915_024550.log
+fails to build for qemux86-64 with gold enabled:
 
-qemux86: Summary: 10 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30915_190536.log
+| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-li=
+nux/usr/libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/4.8.1/ld: error: zero_f=
+ilesize_segment.ld: SECTIONS seen after other input files; try -T/--script
+| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-li=
+nux/usr/libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/4.8.1/ld: internal erro=
+r in input_sections_begin, at /home/jenkins/oe/shr-core-branches/shr-core/t=
+mp-eglibc/work/x86_64-oe-linux/binutils-cross/2.23.2-r4/binutils-2.23.2/gol=
+d/merge.h:269
+| collect2: error: ld returned 1 exit status
+| 	 CC64 obj64/linkhuge.o
+| 	 LD64 (hugelink test) obj64/linkhuge
+| 	 CC64 obj64/linkhuge_nofd.o
+| 	 LD64 (hugelink test) obj64/linkhuge_nofd
+| 	 CC64 obj64/linkshare.o
+| 	 LD64 (hugelink test) obj64/linkshare
+| 	 LD64 (xB test) obj64/xB.linkhuge
+| x86_64-oe-linux-ld: internal error in read_script_file, at /home/jenkins/=
+oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/binutils-cros=
+s/2.23.2-r4/binutils-2.23.2/gold/script.cc:1600
+| collect2: error: ld returned 1 exit status
+| make[1]: *** [obj64/xB.linkhuge] Error 1
+| make: *** [tests/all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/shr-core-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/libhugetlbfs/=
+git-r0/temp/log.do_compile.8133)
+NOTE: recipe libhugetlbfs-git-r0: task do_compile: Failed
+ERROR: Task 23473 (/home/jenkins/oe/shr-core-branches/shr-core/meta-openemb=
+edded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb, do_compil=
+e) failed with exit code '1'
 
-qemux86-64: Summary: 14 tasks failed:
-http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
-30916_160509.log
+Can you try to resolve it?
 
-common (4):
-  meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_compi=
-le
-  meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_insta=
-ll
-  meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
-  meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, d=
-o_compile
-
-qemuarm (1):
-  openembedded-core/meta/recipes-gnome/gtk+/gtk+_2.24.20.bb, do_compile
-
-qemux86* common (5):
-  openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-  meta-openembedded/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-ke=
-xecboot_3.8.bb, do_package
-  meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
-  meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
-  meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb, d=
-o_compile
-
-qemux86 (1):
-  meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2=
-=2E11.14.bb, do_compile
-
-qemux86-64 (5):
-  meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-  meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobil=
-edevice_1.1.4.bb, do_configure
-  meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb=
-, do_compile
-  meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git=
-=2Ebb, do_compile
-  meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.=
-bb, do_compile
-
-QA (incomplete because many recipes were reused from sstate):
-qwt-6.0.1: File '/usr/lib/libqwt.so.6.0.1' from qwt was already stripped, t=
-his will prevent future debugging!
-qwt-6.0.1: File '/usr/lib/libqwtmathml.so.6.0.1' from qwt was already strip=
-ped, this will prevent future debugging!
-qwt-6.0.1: File '/usr/lib/qt4/plugins/designer/libqwt_designer_plugin.so' f=
-rom qwt was already stripped, this will prevent future debugging!
-qtwebkit-5.1.0: package qtwebkit contains bad RPATH /home/jenkins/oe/shr-co=
-re-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/qtwebkit/5.1.0-r0/buil=
-d/lib in file /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x=
-86_64-oe-linux/qtwebkit/5.1.0-r0/packages-split/qtwebkit/usr/lib/qt5/libexe=
-c/QtWebPluginProcess
-qtwebkit-5.1.0: package qtwebkit contains bad RPATH /home/jenkins/oe/shr-co=
-re-branches/shr-core/tmp-eglibc/work/x86_64-oe-linux/qtwebkit/5.1.0-r0/buil=
-d/lib in file /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/x=
-86_64-oe-linux/qtwebkit/5.1.0-r0/packages-split/qtwebkit/usr/lib/qt5/libexe=
-c/QtWebProcess
-ed-1.9: The /usr/share/info/dir file is not meant to be shipped in a partic=
-ular package.
-qt-creator-2.8.1: qt-creator: found library in wrong location: /usr/share/q=
-tcreator/qbs/lib/qbs/plugins/libqbs_qt_scanner.so
-qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/q=
-bs/plugins/libqbs_cpp_scanner.so
-qt-creator-dbg: found library in wrong location: /usr/share/qtcreator/qbs/l=
-ib/qbs/plugins/.debug/libqbs_cpp_scanner.so
-qt-creator-dbg: found library in wrong location: /usr/share/qtcreator/qbs/l=
-ib/qbs/plugins/.debug/libqbs_qt_scanner.so
-oscam-1.10+7974: File '/usr/bin/oscam' from oscam was already stripped, thi=
-s will prevent future debugging!
-aurora-daemon-0.1+gitrAUTOINC+b65354ad6c: aurora-daemon: found library in w=
-rong location: /usr/share/aurora/applications/settings/libaurora-app-settin=
-gs.so
-wxpython-2.9.5.0: wxpython: Files/directories were installed but not shipped
-  /home
-  /home/jenkins
-  /home/jenkins/oe
-  /home/jenkins/oe/shr-core-branches
-  /home/jenkins/oe/shr-core-branches/shr-core
-  /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc
-chromium-29.0.1518.2: chromium: found library in wrong location: /usr/bin/c=
-hrome/libffmpegsumo.so
-chromium-dbg: found library in wrong location: /usr/bin/chrome/.debug/libff=
-mpegsumo.so
-lzip-1.14: The /usr/share/info/dir file is not meant to be shipped in a par=
-ticular package.
-atftp-0.7.1+gitAUTOINC+be3291a18c: atftp: Files/directories were installed =
-but not shipped
-  /etc
-tracker-0.14.2: tracker: Files/directories were installed but not shipped
-  /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.so
-  /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.la
+>=20
+> Thanks,
+> chunrong
+>=20
+> -----Original Message-----
+> From: Guo Chunrong-B40290=20
+> Sent: Tuesday, September 10, 2013 10:03 AM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Liu Ting-B28495; Luo Zhenhua-B19537; Guo Chunrong-B40290; Guo Chunron=
+g-B40290
+> Subject: [meta-oe][PATCH] libhugetlbfs: add recipe
+>=20
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> ---
+>  ...fs-Remove-segment-based-alignment-restric.patch |  131 ++++++++++++++=
+++++++
+>  ...-run_tests.py-fix-typo-in-test-invocation.patch |   30 +++++
+>  .../files/Fix-cross-compiling-on-PPC.patch         |   28 ++++
+>  .../libhugetlbfs/files/aarch64-support.patch       |   88 +++++++++++++
+>  .../files/aarch64-unit-test-fixes.patch            |   62 +++++++++
+>  .../files/add-PROT-NONE-to-the-mprotest-test.patch |   38 ++++++
+>  .../files/checks-if-mtab-is-a-symlink.patch        |   30 +++++
+>  .../libhugetlbfs/files/cross-compile.patch         |   83 ++++++++++++
+>  ...x-lib64-can-not-be-shiped-in-64bit-target.patch |   64 ++++++++++
+>  .../libhugetlbfs/files/install64-fix.patch         |   20 +++
+>  ...s-Fix-perl-lib-can-not-be-shiped-to-sub-p.patch |   31 +++++
+>  ...s-avoid-search-host-library-path-for-cros.patch |   99 +++++++++++++++
+>  ...ng-LIB32-and-LIB64-if-they-point-to-the-s.patch |   48 +++++++
+>  .../libhugetlbfs/libhugetlbfs_git.bb               |   51 ++++++++
+>  14 files changed, 803 insertions(+), 0 deletions(-)  create mode 100644 =
+meta-oe/recipes-benchmark/libhugetlbfs/files/0003-libhugetlbfs-Remove-segme=
+nt-based-alignment-restric.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0004-tes=
+ts-run_tests.py-fix-typo-in-test-invocation.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/Fix-cros=
+s-compiling-on-PPC.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-=
+support.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-=
+unit-test-fixes.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT=
+-NONE-to-the-mprotest-test.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/checks-i=
+f-mtab-is-a-symlink.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/cross-co=
+mpile.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib6=
+4-can-not-be-shiped-in-64bit-target.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/install6=
+4-fix.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhuget=
+lbfs-Fix-perl-lib-can-not-be-shiped-to-sub-p.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhuget=
+lbfs-avoid-search-host-library-path-for-cros.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/skip-che=
+cking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+>  create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_g=
+it.bb
+>=20
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-libhugetlb=
+fs-Remove-segment-based-alignment-restric.patch b/meta-oe/recipes-benchmark=
+/libhugetlbfs/files/0003-libhugetlbfs-Remove-segment-based-alignment-restri=
+c.patch
+> new file mode 100644
+> index 0000000..31f0516
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-libhugetlbfs-Rem
+> +++ ove-segment-based-alignment-restric.patch
+> @@ -0,0 +1,131 @@
+> +Upstream-Status: Accepted
+> +
+> +From eee53989d5b7393352d77451b66066768113072a Mon Sep 17 00:00:00 2001
+> +From: Becky Bruce <beckyb@kernel.crashing.org>
+> +Date: Tue, 19 Apr 2011 14:13:18 -0500
+> +Subject: [PATCH 1/2] libhugetlbfs: Remove segment-based alignment=20
+> +restrictions
+> +
+> +The existing library code enforces classic PPC segment restrictons on=20
+> +the alignment and allocation of hugepages.  BookE Freescale processors=
+=20
+> +don't have this restriction and allowing it to remain in place is=20
+> +overly restrictive on 32-bit processors.  Define PPC_NO_SEGMENTS to=20
+> +turn this off.
+> +
+> +Signed-off-by: Becky Bruce <beckyb@kernel.crashing.org>
+> +---
+> + Makefile                   |    2 +-
+> + elflink.c                  |    7 ++++---
+> + libhugetlbfs_internal.h    |    3 ++-
+> + morecore.c                 |    2 +-
+> + tests/brk_near_huge.c      |    2 +-
+> + tests/truncate_above_4GB.c |    6 ++++--
+> + 6 files changed, 13 insertions(+), 9 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index d781871..3160f83 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -29,7 +29,7 @@ INSTALL =3D install
+> + LDFLAGS +=3D -Wl,-z,noexecstack -ldl
+> + CFLAGS ?=3D -O2 -g
+> + CFLAGS +=3D -Wall -fPIC
+> +-CPPFLAGS +=3D -D__LIBHUGETLBFS__
+> ++CPPFLAGS +=3D -D__LIBHUGETLBFS__ -DPPC_NO_SEGMENTS
+> +=20
+> + ARCH =3D $(shell uname -m | sed -e s/i.86/i386/)
+> +=20
+> +diff --git a/elflink.c b/elflink.c
+> +index c24bedc..432f3d7 100644
+> +--- a/elflink.c
+> ++++ b/elflink.c
+> +@@ -552,7 +552,8 @@ bail2:
+> + 	seg->extrasz =3D end_orig - start;
+> + }
+> +=20
+> +-#if defined(__powerpc64__) || defined (__powerpc__)
+> ++#if defined(__powerpc64__) || \
+> ++	(defined(__powerpc__) && !defined(PPC_NO_SEGMENTS))
+> + #define SLICE_LOW_TOP		(0x100000000UL)
+> + #define SLICE_LOW_SIZE		(1UL << SLICE_LOW_SHIFT)
+> + #define SLICE_HIGH_SIZE		(1UL << SLICE_HIGH_SHIFT)
+> +@@ -574,7 +575,7 @@ static unsigned long hugetlb_slice_start(unsigned lo=
+ng addr)
+> + 		return SLICE_LOW_TOP;
+> + 	else
+> + 		return ALIGN_DOWN(addr, SLICE_HIGH_SIZE); -#elif=20
+> +defined(__powerpc__)
+> ++#elif defined(__powerpc__) && !defined(PPC_NO_SEGMENTS)
+> + 	return ALIGN_DOWN(addr, SLICE_LOW_SIZE);  #else
+> + 	return ALIGN_DOWN(addr, gethugepagesize()); @@ -588,7 +589,7 @@=20
+> +static unsigned long hugetlb_slice_end(unsigned long addr)
+> + 		return ALIGN_UP(addr, SLICE_LOW_SIZE) - 1;
+> + 	else
+> + 		return ALIGN_UP(addr, SLICE_HIGH_SIZE) - 1; -#elif=20
+> +defined(__powerpc__)
+> ++#elif defined(__powerpc__) && !defined(PPC_NO_SEGMENTS)
+> + 	return ALIGN_UP(addr, SLICE_LOW_SIZE) - 1;  #else
+> + 	return ALIGN_UP(addr, gethugepagesize()) - 1; diff --git=20
+> +a/libhugetlbfs_internal.h b/libhugetlbfs_internal.h index=20
+> +97b19fa..ef9f668 100644
+> +--- a/libhugetlbfs_internal.h
+> ++++ b/libhugetlbfs_internal.h
+> +@@ -49,7 +49,8 @@
+> + #define ALIGN_UP(x,a)	ALIGN(x,a)
+> + #define ALIGN_DOWN(x,a) ((x) & ~((a) - 1))
+> +=20
+> +-#if defined(__powerpc64__) || defined (__powerpc__)
+> ++#if defined(__powerpc64__) || \
+> ++	(defined(__powerpc__) && !defined(PPC_NO_SEGMENTS))
+> + #define SLICE_LOW_SHIFT		28
+> + #define SLICE_HIGH_SHIFT	40
+> + #elif defined(__ia64__)
+> +diff --git a/morecore.c b/morecore.c
+> +index 6b4364c..01c560e 100644
+> +--- a/morecore.c
+> ++++ b/morecore.c
+> +@@ -44,7 +44,7 @@ static long hugetlbfs_next_addr(long addr)  {  #if=20
+> +defined(__powerpc64__)
+> + 	return ALIGN(addr, 1L << SLICE_HIGH_SHIFT); -#elif=20
+> +defined(__powerpc__)
+> ++#elif defined(__powerpc__) && !defined(PPC_NO_SEGMENTS)
+> + 	return ALIGN(addr, 1L << SLICE_LOW_SHIFT);  #elif defined(__ia64__)
+> + 	if (addr < (1UL << SLICE_HIGH_SHIFT)) diff --git=20
+> +a/tests/brk_near_huge.c b/tests/brk_near_huge.c index 71eb803..f6d1e07=
+=20
+> +100644
+> +--- a/tests/brk_near_huge.c
+> ++++ b/tests/brk_near_huge.c
+> +@@ -47,7 +47,7 @@ void *next_chunk(void *addr)
+> + 		/* 1TB segments above */
+> + 		return PALIGN(addr, 0x10000000000UL);  } -#elif defined(__powerpc__)
+> ++#elif defined(__powerpc__) && !defined(PPC_NO_SEGMENTS)
+> + void *next_chunk(void *addr)
+> + {
+> + 	return PALIGN(addr, 0x10000000UL);
+> +diff --git a/tests/truncate_above_4GB.c b/tests/truncate_above_4GB.c=20
+> +index 5b8c08f..4c427fc 100644
+> +--- a/tests/truncate_above_4GB.c
+> ++++ b/tests/truncate_above_4GB.c
+> +@@ -102,11 +102,13 @@ int main(int argc, char *argv[])
+> + 	*qi =3D 0;
+> +=20
+> + 	/* This part of the test makes the problem more obvious, but
+> +-	 * is not essential.  It can't be done on powerpc, where
+> ++	 * is not essential.  It can't be done on segmented powerpc, where
+> + 	 * segment restrictions prohibit us from performing such a
+> + 	 * mapping, so skip it there. Similarly, ia64's address space
+> + 	 * restrictions prevent this. */
+> +-#if !defined(__powerpc__) && !defined(__powerpc64__) &&=20
+> +!defined(__ia64__)
+> ++#if (defined(__powerpc__) && defined(PPC_NO_SEGMENTS)) \
+> ++	|| !defined(__powerpc__) && !defined(__powerpc64__) \
+> ++	&& !defined(__ia64__)
+> + 	/* Replace middle hpage by tinypage mapping to trigger
+> + 	 * nr_ptes BUG */
+> + 	verbose_printf("Replacing map at %p-%p...", q + hpage_size,
+> +--
+> +1.5.6.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-tests-run_=
+tests.py-fix-typo-in-test-invocation.patch b/meta-oe/recipes-benchmark/libh=
+ugetlbfs/files/0004-tests-run_tests.py-fix-typo-in-test-invocation.patch
+> new file mode 100644
+> index 0000000..747ee93
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-tests-run_tests.
+> +++ py-fix-typo-in-test-invocation.patch
+> @@ -0,0 +1,30 @@
+> +From b3d5429449aef61cb8926c33925fd7b5cad737de Mon Sep 17 00:00:00 2001
+> +From: Becky Bruce <beckyb@kernel.crashing.org>
+> +Date: Tue, 19 Apr 2011 19:06:16 -0500
+> +Subject: [PATCH 2/2] tests/run_tests.py: fix typo in test invocation.
+> +
+> +One test was being invoked with HUGETLB_MORECORE=3Des (instead of yes)..=
+=2E..
+> +
+> +Upstream-Status: Accepted
+> +
+> +Signed-off-by: Becky Bruce <beckyb@kernel.crashing.org>
+> +---
+> + tests/run_tests.py |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/tests/run_tests.py b/tests/run_tests.py index=20
+> +8055940..f0049b3 100755
+> +--- a/tests/run_tests.py
+> ++++ b/tests/run_tests.py
+> +@@ -567,7 +567,7 @@ def functional_tests():
+> +     do_test("heapshrink", LD_PRELOAD=3D"libhugetlbfs.so libheapshrink.s=
+o",
+> +             HUGETLB_MORECORE=3D"yes")
+> +     do_test("heapshrink", LD_PRELOAD=3D"libheapshrink.so", HUGETLB_MORE=
+CORE=3D"yes",
+> +-            HUGETLB_MORECORE_SHRINK=3D"es")
+> ++            HUGETLB_MORECORE_SHRINK=3D"yes")
+> +     do_test("heapshrink", LD_PRELOAD=3D"libhugetlbfs.so libheapshrink.s=
+o",
+> +             HUGETLB_MORECORE=3D"yes", HUGETLB_MORECORE_SHRINK=3D"yes")
+> +     do_test("heap-overflow", HUGETLB_VERBOSE=3D"1",=20
+> +HUGETLB_MORECORE=3D"yes")
+> +--
+> +1.5.6.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/Fix-cross-compi=
+ling-on-PPC.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/Fix-cross-=
+compiling-on-PPC.patch
+> new file mode 100644
+> index 0000000..30d421d
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/Fix-cross-compiling-o
+> +++ n-PPC.patch
+> @@ -0,0 +1,28 @@
+> +Upstream-Status: Accepted
+> +
+> +Renamed ARCH check to use powerpc (for ppc32) and powerpc64.
+> +
+> +Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
+> +Signed-off-by: Guo Chunrong <B40290@freescale.com>
+> +
+> +
+> +--- a/Makefileold	2013-09-05 03:19:24.261312044 -0500
+> ++++ b/Makefile	2013-09-05 03:20:43.312456972 -0500
+> +@@ -36,7 +36,7 @@
+> +=20
+> + CUSTOM_LDSCRIPTS =3D yes
+> +=20
+> +-ifeq ($(ARCH),ppc64)
+> ++ifeq ($(ARCH),powerpc64)
+> + CC64 =3D $(CC) -m64
+> + ELF64 =3D elf64ppc
+> + TMPLIB64 =3D lib64
+> +@@ -46,7 +46,7 @@
+> + ELF32 =3D elf32ppclinux
+> + endif
+> + else
+> +-ifeq ($(ARCH),ppc)
+> ++ifeq ($(ARCH),powerpc)
+> + CC32 =3D $(CC) -m32
+> + ELF32 =3D elf32ppclinux
+> + TMPLIB32 =3D lib
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support=
+=2Epatch b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.pat=
+ch
+> new file mode 100644
+> index 0000000..ceac6b4
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.patch
+> @@ -0,0 +1,88 @@
+> +Upstream-Status: Pending
+> +
+> +From 52b8430eb4f03e35721f29862de33041fe9c9768 Mon Sep 17 00:00:00 2001
+> +From: Steve Capper <steve.capper@linaro.org>
+> +Date: Wed, 10 Apr 2013 14:51:12 +0100
+> +Subject: [PATCH] Aarch64 support.
+> +
+> +This patch adds support for Aarch64.
+> +
+> +As with ARMv7, We do not add the xBT/xBDT style linker scripts as these=
+=20
+> +have been deprecated in favour of adjusting the page sizes via command=
+=20
+> +line parameter to ld.
+> +
+> +Signed-off-by: Steve Capper <steve.capper@linaro.org>
+> +---
+> + Makefile               |    7 +++++++
+> + sys-aarch64elf_linux.S |   34 ++++++++++++++++++++++++++++++++++
+> + 2 files changed, 41 insertions(+)
+> + create mode 100644 sys-aarch64elf_linux.S
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 48205af..28ceade 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -57,6 +57,12 @@ TMPLIB32 =3D lib
+> + ELF32 +=3D armelf_linux_eabi
+> + CUSTOM_LDSCRIPTS =3D no
+> + else
+> ++ifeq ($(ARCH),aarch64)
+> ++CC64 =3D gcc
+> ++ELF64 =3D aarch64elf_linux
+> ++TMPLIB64 =3D lib64
+> ++CUSTOM_LDSCRIPTS =3D no
+> ++else
+> + ifeq ($(ARCH),i386)
+> + CC32 =3D gcc
+> + ELF32 =3D elf_i386
+> +@@ -100,6 +106,7 @@ endif
+> + endif
+> + endif
+> + endif
+> ++endif
+> +=20
+> + ifdef CC32
+> + OBJDIRS +=3D obj32
+> +diff --git a/sys-aarch64elf_linux.S b/sys-aarch64elf_linux.S new file=20
+> +mode 100644 index 0000000..699ff4c
+> +--- /dev/null
+> ++++ b/sys-aarch64elf_linux.S
+> +@@ -0,0 +1,34 @@
+> ++/*
+> ++ * libhugetlbfs - Easy use of Linux hugepages
+> ++ * Copyright (C) 2013 Linaro Ltd.
+> ++ *
+> ++ * This library is free software; you can redistribute it and/or
+> ++ * modify it under the terms of the GNU Lesser General Public License
+> ++ * version 2.1 as published by the Free Software Foundation.
+> ++ *
+> ++ * This library is distributed in the hope that it will be useful, but
+> ++ * WITHOUT ANY WARRANTY; without even the implied warranty of
+> ++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+> ++ * Lesser General Public License for more details.
+> ++ *
+> ++ * You should have received a copy of the GNU Lesser General Public
+> ++ * License along with this library; if not, write to the Free Software
+> ++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA=20
+> ++02110-1301 USA  */
+> ++
+> ++        .text
+> ++
+> ++        .globl  direct_syscall
+> ++
+> ++
+> ++direct_syscall:
+> ++	uxtw	x8, w0
+> ++	mov	x0, x1
+> ++	mov	x1, x2
+> ++	mov	x2, x3
+> ++	mov	x3, x4
+> ++	mov	x4, x5
+> ++	mov	x5, x6
+> ++	mov	x6, x7
+> ++	svc	0x0
+> ++	RET
+> +--
+> +1.7.9.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-te=
+st-fixes.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-=
+test-fixes.patch
+> new file mode 100644
+> index 0000000..0b6fd8a
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-test-fix
+> +++ es.patch
+> @@ -0,0 +1,62 @@
+> +Upstream-Status: Pending
+> +
+> +From 9bb940bd6a86f09280bdcd48a7177a835d72a25c Mon Sep 17 00:00:00 2001
+> +From: Steve Capper <steve.capper@linaro.org>
+> +Date: Wed, 10 Apr 2013 15:52:46 +0100
+> +Subject: [PATCH] Aarch64 unit test fixes.
+> +
+> +On Aarch64, zero bytes are illegal instructions, this is added to the=20
+> +icache-hygiene test.
+> +
+> +In mremap-expand-slice-collision, if __LP64__ is defined then mappings=
+=20
+> +are attempted at 1TB boundaries which are outside the allowable mmap=20
+> +region for Aarch64. For __aarch64__ we change this mapping back to=20
+> +256MB slices.
+> +
+> +Signed-off-by: Steve Capper <steve.capper@linaro.org>
+> +---
+> + tests/icache-hygiene.c                |    7 ++++---
+> + tests/mremap-expand-slice-collision.c |    2 +-
+> + 2 files changed, 5 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/tests/icache-hygiene.c b/tests/icache-hygiene.c index=20
+> +51792b3..876ce10 100644
+> +--- a/tests/icache-hygiene.c
+> ++++ b/tests/icache-hygiene.c
+> +@@ -54,7 +54,7 @@ static void cacheflush(void *p)  {  #if=20
+> +defined(__powerpc__)
+> + 	asm volatile("dcbst 0,%0; sync; icbi 0,%0; isync" : : "r"(p)); -#elif=
+=20
+> +defined(__arm__)
+> ++#elif defined(__arm__) || defined(__aarch64__)
+> + 	__clear_cache(p, p + COPY_SIZE);
+> + #endif
+> + }
+> +@@ -87,8 +87,9 @@ static void *sig_expected;  static void=20
+> +sig_handler(int signum, siginfo_t *si, void *uc)  {  #if=20
+> +defined(__powerpc__) || defined(__powerpc64__) || defined(__ia64__) || \
+> +-    defined(__s390__) || defined(__s390x__) || defined(__sparc__)
+> +-	/* On powerpc and ia64 and s390, 0 bytes are an illegal
+> ++    defined(__s390__) || defined(__s390x__) || defined(__sparc__) || \
+> ++    defined(__aarch64__)
+> ++	/* On powerpc, ia64, s390 and Aarch64, 0 bytes are an illegal
+> + 	 * instruction, so, if the icache is cleared properly, we SIGILL
+> + 	 * as soon as we jump into the cleared page */
+> + 	if (signum =3D=3D SIGILL) {
+> +diff --git a/tests/mremap-expand-slice-collision.c=20
+> +b/tests/mremap-expand-slice-collision.c
+> +index c25f4c6..853f3c3 100644
+> +--- a/tests/mremap-expand-slice-collision.c
+> ++++ b/tests/mremap-expand-slice-collision.c
+> +@@ -38,7 +38,7 @@ void init_slice_boundary(int fd)
+> + 	unsigned long slice_size;
+> + 	void *p1, *p2, *heap;
+> + 	int slices_ok, i, rc;
+> +-#ifdef __LP64__
+> ++#if defined(__LP64__) && !defined(__aarch64__)
+> + 	/* powerpc: 1TB slices starting at 1 TB */
+> + 	slice_boundary =3D 0x10000000000;
+> + 	slice_size =3D 0x10000000000;
+> +--
+> +1.7.9.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-t=
+o-the-mprotest-test.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/ad=
+d-PROT-NONE-to-the-mprotest-test.patch
+> new file mode 100644
+> index 0000000..673f204
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-to-the-
+> +++ mprotest-test.patch
+> @@ -0,0 +1,38 @@
+> +Upstream-Status: Pending
+> +
+> +From c7fcb7270bb510d7271a1c0cea095a4dbea49420 Mon Sep 17 00:00:00 2001
+> +From: Steve Capper <steve.capper@linaro.org>
+> +Date: Mon, 3 Jun 2013 17:00:45 +0100
+> +Subject: [PATCH] Add PROT_NONE to the mprotect test.
+> +
+> +The mprotect unit test checks PROT_READ and PROT_READ | PROT_WRITE=20
+> +protections. We recently found that PROT_NONE wasn't properly supported=
+=20
+> +in our huge page kernel code.
+> +
+> +This patch adds PROT_NONE tests to mprotect. The expected behaviour is=
+=20
+> +that neither reads nor writes should succeed.
+> +
+> +Signed-off-by: Steve Capper <steve.capper@linaro.org>
+> +---
+> + tests/mprotect.c |    6 ++++++
+> + 1 file changed, 6 insertions(+)
+> +
+> +diff --git a/tests/mprotect.c b/tests/mprotect.c index aa4673e..db6a662=
+=20
+> +100644
+> +--- a/tests/mprotect.c
+> ++++ b/tests/mprotect.c
+> +@@ -213,5 +213,11 @@ int main(int argc, char *argv[])
+> + 	test_mprotect(fd, "RW->R 1/2", 2*hpage_size, PROT_READ|PROT_WRITE,
+> + 		      hpage_size, PROT_READ);
+> +=20
+> ++	/* PROT_NONE tests */
+> ++	test_mprotect(fd, "NONE->R", hpage_size, PROT_NONE,
+> ++		      hpage_size, PROT_READ);
+> ++	test_mprotect(fd, "NONE->RW", hpage_size, PROT_NONE,
+> ++		      hpage_size, PROT_READ|PROT_WRITE);
+> ++
+> + 	PASS();
+> + }
+> +--
+> +1.7.9.5
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/checks-if-mtab-=
+is-a-symlink.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/checks-if=
+-mtab-is-a-symlink.patch
+> new file mode 100644
+> index 0000000..f555947
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/checks-if-mtab-is-a-s
+> +++ ymlink.patch
+> @@ -0,0 +1,30 @@
+> +Upstream-Status: Accepted
+> +
+> +If /etc/mtab is a symlink to /proc/self/mounts, mounting fails because=
+=20
+> +addmntent returns an error.
+> +As a consequence, the Private directory is unusable.
+> +This is a patch which checks if /etc/mtab is a symlink, and if so,=20
+> +doesn't try to call addmntent.
+> +
+> +Signed-off-by: Guo Chunrong <B40290@freescale.com>
+> +
+> +
+> +--- a/hugeadm.c	2013-07-31 23:46:04.461258351 -0500
+> ++++ b/hugeadm.c	2013-07-31 23:50:03.249359534 -0500
+> +@@ -552,6 +552,16 @@
+> + 			return 1;
+> + 		}
+> +=20
+> ++         char dummy;
+> ++         int useMtab;
+> ++          /* Check if mtab is a symlink */
+> ++          useMtab =3D (readlink(MOUNTED, &dummy, 1) < 0);
+> ++        if (!useMtab) {
+> ++         /* No need updating mtab */
+> ++          return 0;
+> ++        }
+> ++ =20
+> ++
+> + 		mounts =3D setmntent(MOUNTED, "a+");
+> + 		if (mounts) {
+> + 			entry.mnt_fsname =3D FS_NAME;
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/cross-compile.p=
+atch b/meta-oe/recipes-benchmark/libhugetlbfs/files/cross-compile.patch
+> new file mode 100644
+> index 0000000..13b4fde
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/cross-compile.patch
+> @@ -0,0 +1,83 @@
+> +Upstream-Status: Accepted
+> +
+> +Fix cross compiling
+> +
+> +Signed-off-by: Guo Chunrong <B40290@freescale.com>
+> +
+> +Index: git/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- git.orig/Makefile
+> ++++ git/Makefile
+> +@@ -37,60 +37,60 @@ ARCH =3D $(shell uname -m | sed -e s/i.86/ =20
+> +CUSTOM_LDSCRIPTS =3D yes
+> +=20
+> + ifeq ($(ARCH),ppc64)
+> +-CC64 =3D gcc -m64
+> ++CC64 =3D $(CC) -m64
+> + ELF64 =3D elf64ppc
+> + TMPLIB64 =3D lib64
+> + TMPLIB32 =3D lib
+> + ifneq ($(BUILDTYPE),NATIVEONLY)
+> +-CC32 =3D gcc -m32
+> ++CC32 =3D $(CC) -m32
+> + ELF32 =3D elf32ppclinux
+> + endif
+> + else
+> + ifeq ($(ARCH),ppc)
+> +-CC32 =3D gcc -m32
+> ++CC32 =3D $(CC) -m32
+> + ELF32 =3D elf32ppclinux
+> + TMPLIB32 =3D lib
+> + else
+> + ifeq ($(ARCH),armv7l)
+> +-CC32 =3D gcc
+> ++CC32 =3D $(CC)
+> + TMPLIB32 =3D lib
+> + ELF32 +=3D armelf_linux_eabi
+> + CUSTOM_LDSCRIPTS =3D no
+> + else
+> + ifeq ($(ARCH),aarch64)
+> +-CC64 =3D gcc
+> ++CC64 =3D $(CC)
+> + ELF64 =3D aarch64elf_linux
+> + TMPLIB64 =3D lib64
+> + CUSTOM_LDSCRIPTS =3D no
+> + else
+> + ifeq ($(ARCH),i386)
+> +-CC32 =3D gcc
+> ++CC32 =3D $(CC)
+> + ELF32 =3D elf_i386
+> + TMPLIB32 =3D lib
+> + else
+> + ifeq ($(ARCH),x86_64)
+> +-CC64 =3D gcc -m64
+> ++CC64 =3D $(CC) -m64
+> + ELF64 =3D elf_x86_64
+> + TMPLIB64 =3D lib64
+> + TMPLIB32 =3D lib
+> + ifneq ($(BUILDTYPE),NATIVEONLY)
+> +-CC32 =3D gcc -m32
+> ++CC32 =3D $(CC) -m32
+> + ELF32 =3D elf_i386
+> + endif
+> + else
+> + ifeq ($(ARCH),ia64)
+> +-CC64 =3D gcc
+> ++CC64 =3D $(CC)
+> + TMPLIB64 =3D lib64
+> + CFLAGS +=3D -DNO_ELFLINK
+> + else
+> + ifeq ($(ARCH),sparc64)
+> +-CC64 =3D gcc -m64
+> ++CC64 =3D $(CC) -m64
+> + TMPLIB64 =3D lib64
+> + CFLAGS +=3D -DNO_ELFLINK
+> + else
+> + ifeq ($(ARCH),s390x)
+> +-CC64 =3D gcc -m64
+> +-CC32 =3D gcc -m31
+> ++CC64 =3D $(CC) -m64
+> ++CC32 =3D $(CC) -m31
+> + ELF32 =3D elf_s390
+> + ELF64 =3D elf64_s390
+> + TMPLIB64 =3D lib64
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-n=
+ot-be-shiped-in-64bit-target.patch b/meta-oe/recipes-benchmark/libhugetlbfs=
+/files/fix-lib64-can-not-be-shiped-in-64bit-target.patch
+> new file mode 100644
+> index 0000000..fe79d95
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-not-be-
+> +++ shiped-in-64bit-target.patch
+> @@ -0,0 +1,64 @@
+> +Upstream-Status: Inappropriate [oe-core specific]
+> +
+> +
+> +fix the below error:
+> +  ERROR: QA Issue: libhugetlbfs: Files/directories were installed but=20
+> +not shipped
+> +  /usr/lib64
+> +  /usr/lib64/libhugetlbfs.so
+> +  /usr/lib64/libhugetlbfs.a
+> +  /usr/lib64/libhugetlbfs_privutils.so
+> +  /usr/lib64/perl5
+> +  /usr/lib64/perl5/TLBC
+> +  /usr/lib64/perl5/TLBC/PerfCollect.pm
+> +  /usr/lib64/perl5/TLBC/Report.pm
+> +  /usr/lib64/perl5/TLBC/DataCollect.pm
+> +  /usr/lib64/perl5/TLBC/OpCollect.pm
+> +$<50>ERROR: QA run found fatal errors. Please consider fixing them.
+> +
+> +
+> +Signed-off-by: Guo Chunrong <B40290@freescale.com>
+> +
+> +--- a/Makefileold	2013-09-08 22:17:29.695428823 -0500
+> ++++ b/Makefile	2013-09-08 22:15:50.224377019 -0500
+> +@@ -60,7 +60,7 @@
+> + ifeq ($(ARCH),aarch64)
+> + CC64 =3D $(CC)
+> + ELF64 =3D aarch64elf_linux
+> +-TMPLIB64 =3D lib64
+> ++TMPLIB64 =3D lib
+> + CUSTOM_LDSCRIPTS =3D no
+> + else
+> + ifeq ($(ARCH),i386)
+> +@@ -71,7 +71,7 @@
+> + ifeq ($(ARCH),x86_64)
+> + CC64 =3D $(CC) -m64
+> + ELF64 =3D elf_x86_64
+> +-TMPLIB64 =3D lib64
+> ++TMPLIB64 =3D lib
+> + TMPLIB32 =3D lib
+> + ifneq ($(BUILDTYPE),NATIVEONLY)
+> + CC32 =3D $(CC) -m32
+> +@@ -171,11 +171,23 @@
+> + BINDIR =3D $(PREFIX)/share/libhugetlbfs
+> + EXEDIR =3D $(PREFIX)/bin
+> + DOCDIR =3D $(PREFIX)/share/doc/libhugetlbfs
+> ++
+> + ifdef CC32
+> + PMDIR =3D $(PREFIX)/lib/perl5/TLBC
+> ++endif
+> ++
+> ++ifdef CC64
+> ++ifeq ($(ARCH),x86_64)
+> ++PMDIR =3D $(PREFIX)/lib/perl5/TLBC
+> ++else
+> ++ifeq ($(ARCH),aarch64)
+> ++PMDIR =3D $(PREFIX)/lib/perl5/TLBC
+> + else
+> + PMDIR =3D $(PREFIX)/lib64/perl5/TLBC
+> + endif
+> ++endif
+> ++endif
+> ++
+> + MANDIR1 =3D $(PREFIX)/share/man/man1
+> + MANDIR3 =3D $(PREFIX)/share/man/man3
+> + MANDIR7 =3D $(PREFIX)/share/man/man7
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.p=
+atch b/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch
+> new file mode 100644
+> index 0000000..9652c3d
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch
+> @@ -0,0 +1,20 @@
+> +Upstream-Status: Inappropriate [oe-core specific]
+> +
+> +TESTS_64 is empty, install will fail due to missing file operand
+> +
+> +
+> +Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> +
+> +Index: git/tests/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- git.orig/tests/Makefile
+> ++++ git/tests/Makefile
+> +@@ -292,7 +292,7 @@ obj64/install:
+> + 	$(INSTALL) -m 755 wrapper-utils.sh $(DESTDIR)$(INST_TESTSDIR64)/obj64
+> + 	$(INSTALL) -m 755 $(HELPERS:%=3Dobj64/%) $(DESTDIR)$(INST_TESTSDIR64)/=
+obj64
+> + 	$(INSTALL) -m 755 $(HELPER_LIBS:%=3Dobj64/%) $(DESTDIR)$(INST_TESTSDIR=
+64)/obj64
+> +-	$(INSTALL) -m 755 $(TESTS_64:%=3Dobj64/%) $(DESTDIR)$(INST_TESTSDIR64)=
+/obj64
+> ++#	$(INSTALL) -m 755 $(TESTS_64:%=3Dobj64/%) $(DESTDIR)$(INST_TESTSDIR64=
+)/obj64
+> + 	$(INSTALL) -m 755 run_tests.py $(DESTDIR)$(INST_TESTSDIR64)
+> +=20
+> + install: $(OBJDIRS:%=3D%/install)
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-Fi=
+x-perl-lib-can-not-be-shiped-to-sub-p.patch b/meta-oe/recipes-benchmark/lib=
+hugetlbfs/files/libhugetlbfs-Fix-perl-lib-can-not-be-shiped-to-sub-p.patch
+> new file mode 100644
+> index 0000000..9fb5b77
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-Fix-perl
+> +++ -lib-can-not-be-shiped-to-sub-p.patch
+> @@ -0,0 +1,31 @@
+> +Upstream-Status: Accepted
+> +
+> +From f6aab55052b8ad7b9498b325c8a26cac25703b01 Mon Sep 17 00:00:00 2001
+> +From: Yu Zongchun <b40527@freescale.com>
+> +Date: Mon, 6 May 2013 18:06:02 +0800
+> +Subject: [PATCH] libhugetlbfs:Fix perl lib can not be shiped to=20
+> +sub-package  issue for 64bit board
+> +
+> +---
+> + Makefile |    4 ++++
+> + 1 files changed, 4 insertions(+), 0 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 03966b2..adbd91e 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -149,7 +149,11 @@ LDSCRIPTDIR =3D=20
+> +$(PREFIX)/share/libhugetlbfs/ldscripts
+> + BINDIR =3D $(PREFIX)/share/libhugetlbfs
+> + EXEDIR =3D $(PREFIX)/bin
+> + DOCDIR =3D $(PREFIX)/share/doc/libhugetlbfs
+> ++ifdef CC32
+> + PMDIR =3D $(PREFIX)/lib/perl5/TLBC
+> ++else
+> ++PMDIR =3D $(PREFIX)/lib64/perl5/TLBC
+> ++endif
+> + MANDIR1 =3D $(PREFIX)/share/man/man1
+> + MANDIR3 =3D $(PREFIX)/share/man/man3
+> + MANDIR7 =3D $(PREFIX)/share/man/man7
+> +--
+> +1.7.5.4
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-av=
+oid-search-host-library-path-for-cros.patch b/meta-oe/recipes-benchmark/lib=
+hugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+> new file mode 100644
+> index 0000000..b3fd843
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-se
+> +++ arch-host-library-path-for-cros.patch
+> @@ -0,0 +1,99 @@
+> +From 0a2877400a086e9d6ddd32a80462b7a931921dc2 Mon Sep 17 00:00:00 2001
+> +From: Chunrong Guo <B40290@freescale.com>
+> +Date: Sun, 8 Sep 2013 23:21:49 -0500
+> +Subject: [PATCH] libhugetlbfs: avoid search host library path for cross =
+=20
+> +compilation
+> +
+> +Upstream-Status: Inappropriate [oe-core specific]
+> +
+> +Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> +---
+> + ldscripts/elf32ppclinux.xB   |    2 +-
+> + ldscripts/elf32ppclinux.xBDT |    2 +-
+> + ldscripts/elf64ppc.xB        |    2 +-
+> + ldscripts/elf64ppc.xBDT      |    2 +-
+> + ldscripts/elf_x86_64.xB      |    2 +-
+> + ldscripts/elf_x86_64.xBDT    |    2 +-
+> + 6 files changed, 6 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/ldscripts/elf32ppclinux.xB b/ldscripts/elf32ppclinux.xB=20
+> +index 28ad88d..33d482d 100644
+> +--- a/ldscripts/elf32ppclinux.xB
+> ++++ b/ldscripts/elf32ppclinux.xB
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc",
+> + 	      "elf32-powerpc")
+> + OUTPUT_ARCH(powerpc:common)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/powerpc-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/powerpc-linux-gnu/lib");=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT(-lhugetlbfs);
+> + PHDRS
+> + {
+> +diff --git a/ldscripts/elf32ppclinux.xBDT=20
+> +b/ldscripts/elf32ppclinux.xBDT index 497882b..823475e 100644
+> +--- a/ldscripts/elf32ppclinux.xBDT
+> ++++ b/ldscripts/elf32ppclinux.xBDT
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc",
+> + 	      "elf32-powerpc")
+> + OUTPUT_ARCH(powerpc:common)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/powerpc-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/powerpc-linux-gnu/lib");=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT(-lhugetlbfs);
+> + PHDRS
+> + {
+> +diff --git a/ldscripts/elf64ppc.xB b/ldscripts/elf64ppc.xB index=20
+> +1a9c1ab..8cc557d 100644
+> +--- a/ldscripts/elf64ppc.xB
+> ++++ b/ldscripts/elf64ppc.xB
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc",
+> + 	      "elf64-powerpc")
+> + OUTPUT_ARCH(powerpc:common64)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64");=20
+> +SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> +SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64");=20
+> ++SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> ++SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib");=
+=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT(-lhugetlbfs);
+> + PHDRS
+> + {
+> +diff --git a/ldscripts/elf64ppc.xBDT b/ldscripts/elf64ppc.xBDT index=20
+> +5477294..53e0749 100644
+> +--- a/ldscripts/elf64ppc.xBDT
+> ++++ b/ldscripts/elf64ppc.xBDT
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc",
+> + 	      "elf64-powerpc")
+> + OUTPUT_ARCH(powerpc:common64)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64");=20
+> +SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> +SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64");=20
+> ++SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> ++SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib");=
+=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT( -lhugetlbfs );
+> + PHDRS
+> + {
+> +diff --git a/ldscripts/elf_x86_64.xB b/ldscripts/elf_x86_64.xB index=20
+> +ed21a2c..ba50e9f 100644
+> +--- a/ldscripts/elf_x86_64.xB
+> ++++ b/ldscripts/elf_x86_64.xB
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
+> + 	      "elf64-x86-64")
+> + OUTPUT_ARCH(i386:x86-64)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/x86_64-linux-gnu/lib64");=20
+> +SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> +SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/x86_64-linux-gnu/lib64");=20
+> ++SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> ++SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib");=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT(-lhugetlbfs);
+> + /* Do we need any of these for elf?
+> +    __DYNAMIC =3D 0;    */
+> +diff --git a/ldscripts/elf_x86_64.xBDT b/ldscripts/elf_x86_64.xBDT=20
+> +index 1855202..c62d245 100644
+> +--- a/ldscripts/elf_x86_64.xBDT
+> ++++ b/ldscripts/elf_x86_64.xBDT
+> +@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
+> + 	      "elf64-x86-64")
+> + OUTPUT_ARCH(i386:x86-64)
+> + ENTRY(_start)
+> +-SEARCH_DIR("/usr/x86_64-linux-gnu/lib64");=20
+> +SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> +SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib");=20
+> +SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> +SEARCH_DIR("/usr/lib");
+> ++/*SEARCH_DIR("/usr/x86_64-linux-gnu/lib64");=20
+> ++SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64");=20
+> ++SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib");=20
+> ++SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib");=20
+> ++SEARCH_DIR("/usr/lib");*/
+> + INPUT(-lhugetlbfs);
+> + /* Do we need any of these for elf?
+> +    __DYNAMIC =3D 0;    */
+> +--
+> +1.7.9.7
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-L=
+IB32-and-LIB64-if-they-point-to-the-s.patch b/meta-oe/recipes-benchmark/lib=
+hugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+> new file mode 100644
+> index 0000000..3296376
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-a
+> +++ nd-LIB64-if-they-point-to-the-s.patch
+> @@ -0,0 +1,48 @@
+> +From 355c014573de7f95202cc7c819f81f0f230e4a1a Mon Sep 17 00:00:00 2001
+> +From: Ting Liu <b28495@freescale.com>
+> +Date: Mon, 18 Jun 2012 16:37:05 +0800
+> +Subject: [PATCH] skip checking LIB32 and LIB64 if they point to the=20
+> +same place
+> +
+> +
+> +Upstream-Status: Inappropriate [oe-core specific]
+> +Signed-off-by: Ting Liu <b28495@freescale.com>
+> +---
+> + Makefile |   22 +++++++++++-----------
+> + 1 files changed, 11 insertions(+), 11 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 1017950..bac5f01 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -131,17 +131,17 @@ endif
+> +=20
+> + # If TMPLIB64 is set, then sure we are not resolving LIB32 and LIB64=20
+> +to the  # same place -ifdef TMPLIB64
+> +-
+> +-REALLIB32 =3D $(realpath $(PREFIX)/$(LIB32))
+> +-REALLIB64 =3D $(realpath $(PREFIX)/$(LIB64)) -ifneq ($(realpath=20
+> +$(PREFIX)),) -ifeq ($(REALLIB32),$(REALLIB64)) -$(error LIB32=20
+> +($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to=20
+> +$(REALLIB64)) are resolving to the same place. Manually specify LIB32=20
+> +and LIB64. e.g. make PREFIX=3D$(PREFIX) LIB32=3Dlib32 LIB64=3Dlib64) -en=
+dif=20
+> +-endif
+> +-
+> +-endif
+> ++#ifdef TMPLIB64
+> ++#
+> ++#REALLIB32 =3D $(realpath $(PREFIX)/$(LIB32))
+> ++#REALLIB64 =3D $(realpath $(PREFIX)/$(LIB64)) #ifneq ($(realpath=20
+> ++$(PREFIX)),) #ifeq ($(REALLIB32),$(REALLIB64)) #$(error LIB32=20
+> ++($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to=
+=20
+> ++$(REALLIB64)) are resolving to the same place. Manually specify LIB32=
+=20
+> ++and LIB64. e.g. make PREFIX=3D$(PREFIX) LIB32=3Dlib32 LIB64=3Dlib64) #e=
+ndif=20
+> ++#endif # #endif
+> +=20
+> + HEADERDIR =3D $(PREFIX)/include
+> + LIBDIR32 =3D $(PREFIX)/$(LIB32)
+> +--
+> +1.7.0.4
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b=
+/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> new file mode 100644
+> index 0000000..75f8969
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -0,0 +1,51 @@
+> +DESCRIPTION =3D "A library which provides easy access to huge pages of m=
+emory"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://LGPL-2.1;md5=3D2d5025d4aa3495befef8f17206a5=
+b0a1"
+> +
+> +DEPENDS =3D "sysfsutils perl"
+> +RDEPENDS_${PN} +=3D "python python-io python-lang python-subprocess pyth=
+on-resource"
+> +
+> +SRCREV =3D "7649454b6fed355bf53517d5106ae211b533aced"
+> +SRC_URI =3D "git://git.code.sf.net/p/libhugetlbfs/code \
+> +    file://checks-if-mtab-is-a-symlink.patch \
+> +    file://aarch64-support.patch \
+> +    file://aarch64-unit-test-fixes.patch \
+> +    file://add-PROT-NONE-to-the-mprotest-test.patch \
+> +    file://install64-fix.patch \
+> +    file://cross-compile.patch \
+> +    file://Fix-cross-compiling-on-PPC.patch \
+> +    file://0003-libhugetlbfs-Remove-segment-based-alignment-restric.patc=
+h \
+> +    file://0004-tests-run_tests.py-fix-typo-in-test-invocation.patch \
+> +    file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+> +    file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+> +    file://libhugetlbfs-Fix-perl-lib-can-not-be-shiped-to-sub-p.patch \
+> +    file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \ "
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
+> +
+> +
+> +EXTRA_OEMAKE =3D "'ARCH=3D${TARGET_ARCH}' 'OPT=3D${CFLAGS}' 'CC=3D${CC}'=
+ BUILDTYPE=3DNATIVEONLY ${LIBARGS}"
+> +CFLAGS +=3D "-fexpensive-optimizations -frename-registers -fomit-frame-p=
+ointer -g0"
+> +
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> +
+> +do_install() {
+> +        oe_runmake PREFIX=3D${prefix} DESTDIR=3D${D}  \
+> +          INST_TESTSDIR32=3D/opt/libhugetlbfs/tests \
+> +          INST_TESTSDIR64=3D/opt/libhugetlbfs/tests \
+> +          install-tests
+> +}
+> +
+> +PARALLEL_MAKE_pn-${PN} =3D ""
+> +
+> +PACKAGES =3D+ "${PN}-perl ${PN}-tests ${PN}-perl5"
+> +FILES_${PN}-dbg +=3D "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir=
+}/libhugetlbfs/tests/obj64/.debug"
+> +FILES_${PN}-perl =3D "${libdir}/perl"
+> +FILES_${PN}-perl5 =3D "${libdir}/perl5 "
+> +FILES_${PN}-tests +=3D "/opt/libhugetlbfs/tests"
+> +
+> +INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
+> +INSANE_SKIP_${PN}-tests +=3D "dev-deps"
+> --
+> 1.7.5.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---WfZ7S8PLGjBY9Voh
+--2iBwrppp/7QCDedR
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlI4S4IACgkQN1Ujt2V2gByeNQCghpBlIqmm5PPXBIQDmdBVCUJt
-2UoAoK6TZyutzzN4QUNs08AIZrGRW1HA
-=33sG
+iEYEARECAAYFAlI4TKkACgkQN1Ujt2V2gBxKuQCbBZ+R/HQYAN1Ws8k/DRRFrpMB
+dXAAn1WvwbO6k/bnyI6dqklmYFIjM0i7
+=2rzZ
 -----END PGP SIGNATURE-----
 
---WfZ7S8PLGjBY9Voh--
+--2iBwrppp/7QCDedR--
