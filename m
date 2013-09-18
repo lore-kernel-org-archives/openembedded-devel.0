@@ -1,28 +1,34 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 13AC96B6C3
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id B30BB61DDD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2013 09:13:27 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r8I9DU95014010
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 18 Sep 2013 13:06:30 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so3471127eek.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2013 02:13:30 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 18 Sep 2013 02:13:28 -0700
-Message-ID: <52396EB6.3010304@windriver.com>
-Date: Wed, 18 Sep 2013 17:13:26 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130803 Thunderbird/17.0.8
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1378978655-2635-1-git-send-email-mike.looijmans@topic.nl>
-	<52394067.6040205@topic.nl>
-In-Reply-To: <52394067.6040205@topic.nl>
-Subject: Re: [meta-oe][PATCH] ntfs-3g-ntfsprogs does not rdepend on util-linux-mount
+	Wed, 18 Sep 2013 06:06:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=quH1ziTh8YvVV7T0ygvODqa1cjOBHlumVXm6SLdrtj4=;
+	b=QpyxAIkfXVVV/DG9+6Eo1CY4OZEIOWGsEtVcGfPiwk4MVUBOorNmFbAM0sIkBK8gPi
+	5ZT2ygks324MZsOEMUiQd7w2MCaG34rtKDa85PTJ3Mj5klJGvcAfgZs9F0EqYHZd/WbX
+	u/zFCoWivwo8MXQC1/UjNteaGC5SaTYCQ4XXlmUMBHwLfSQrshpHZd11yaNmKeo/Kdgr
+	B9WC4fc0+ZlDHJS5SvnwW8MOGfKxkGOI78AhwHOo8NxCXHfBTbnKDVFeo71zC2JWUUYH
+	Sl11I45A1hKYaR9LcHEmeYKOKpJYN6Nk5W1WbY5+lX2WLaojXNGSO4VrtaNL8V1kd2oz
+	3/nQ==
+X-Received: by 10.14.149.14 with SMTP id w14mr341465eej.107.1379509591733;
+	Wed, 18 Sep 2013 06:06:31 -0700 (PDT)
+Received: from s-stirtzel-linux.zera.local
+	(ip-178-200-247-59.unitymediagroup.de. [178.200.247.59])
+	by mx.google.com with ESMTPSA id a43sm2681555eep.9.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 18 Sep 2013 06:06:31 -0700 (PDT)
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Sep 2013 15:06:22 +0200
+Message-Id: <1379509584-16503-1-git-send-email-s.stirtzel@googlemail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH 1/3] utouch-evemu: Add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,118 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2013 09:13:28 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 18 Sep 2013 13:06:31 -0000
 
-Hi Mike,
+used by utouch-mtview, a visual multitouch test application for X
 
-The reason why add util-linux-mount to RDEPENDS is the mount in
-busybox doesn't support 'syntax of external mount helpers' very well.
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ meta-oe/recipes-support/utouch/utouch-evemu_git.bb |   15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-support/utouch/utouch-evemu_git.bb
 
-Which means you could directly invoke mount rather than 
-mount.ntfs/mount.exfat
-to mount ntfs/exfat filesystem.
-
-Thanks,
-Hongxu
-
-On 09/18/2013 01:55 PM, Mike Looijmans wrote:
-> Ping!
->
-> Anything wrong with the patch? anyone reading this at all?
->
-> BTW, the same problem is in the exfat recipe, so I was going to send a 
-> patch for that as well.
->
->
-> On 09/12/2013 11:37 AM, Mike Looijmans wrote:
->> ntfs-3g-ntfsprogs has no runtime dependency on util-linux-mount, for
->> example busybox mount will also do just fine. It might be less useful
->> without any mount program, but that's not the same as depending on it.
->>
->> The dependency broke several images because util-linux-mount behaves
->> differently than busybox mount, resulting in failure to mount ext2/3
->> volumes and network shares on user's systems.
->>
->> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
->> ---
->>   .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |    3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git 
->> a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
->> b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
->>
->> index e084187..a34a791 100644
->> --- 
->> a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
->> +++ 
->> b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
->> @@ -5,6 +5,7 @@ PROVIDES = "ntfsprogs ntfs-3g"
->>   LICENSE = "GPLv2 & LGPLv2"
->>   LIC_FILES_CHKSUM = 
->> "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
->> file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
->> +PR = "r1"
->>
->>   SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
->>   S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
->> @@ -23,7 +24,7 @@ EXTRA_OEMAKE = "LDCONFIG=echo"
->>   PACKAGES =+ "ntfs-3g ntfsprogs libntfs-3g"
->>
->>   FILES_ntfs-3g = "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* 
->> ${base_sbindir}/mount.ntfs"
->> -RDEPENDS_ntfs-3g += "fuse util-linux-mount"
->> +RDEPENDS_ntfs-3g += "fuse"
->>
->>   FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
->>   FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
->>
->
->
->
-> Met vriendelijke groet / kind regards,
->
-> Mike Looijmans
->
-> TOPIC Embedded Systems
-> Eindhovenseweg 32-C, NL-5683 KH Best
-> Postbus 440, NL-5680 AK Best
-> Telefoon: (+31) – (0)499 - 33.69.79
-> Telefax: (+31) - (0)499 - 33.69.70
-> E-mail: mike.looijmans@topic.nl
-> Website: www.topic.nl
->
-> Dit e-mail bericht en de eventueel daarbij behorende bijlagen zijn 
-> uitsluitend bestemd voor de geadresseerde, zoals die blijkt uit het 
-> e-mail bericht en/of de bijlagen. Er kunnen gegevens met betrekking 
-> tot een derde instaan. Indien u als niet-geadresseerde dit bericht en 
-> de bijlagen ontvangt, terwijl u niet bevoegd of gemachtigd bent om dit 
-> bericht namens de geadresseerde te ontvangen, wordt u verzocht de 
-> afzender hierover direct te informeren en het e-mail bericht met de 
-> bijlagen te vernietigen. Ieder gebruik van de inhoud van het e-mail 
-> bericht, waaronder de daarbij behorende bijlagen, door een ander dan 
-> de geadresseerde is onrechtmatig jegens ons dan wel de eventueel in 
-> het e-mail bericht of de bijlagen voorkomende andere personen. TOPIC 
-> Embedded Systems is niet aansprakelijk voor enigerlei schade 
-> voortvloeiend uit het gebruik en/of acceptatie van dit e-mail bericht 
-> of de daarbij behorende bijlagen.
->
-> The contents of this message, as well as any enclosures, are addressed 
-> personally to, and thus solely intended for the addressee. They may 
-> contain information regarding a third party. A recipient who is 
-> neither the addressee, nor empowered to receive this message on behalf 
-> of the addressee, is kindly requested to immediately inform the sender 
-> of receipt, and to destroy the message and the enclosures. Any use of 
-> the contents of this message and/or the enclosures by any other person 
-> than the addressee or person who is empowered to receive this message, 
-> is illegal towards the sender and/or the aforementioned third party. 
-> TOPIC Embedded Systems is not  liable for any damage as a result of 
-> the use and/or acceptance of this message and as well as any enclosures.
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
+new file mode 100644
+index 0000000..ec98ae4
+--- /dev/null
++++ b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Kernel evdev device emulation"
++DESCRIPTION = "The evemu library and tools are used to describe devices, record data, create devices and replay data from kernel evdev devices. "
++HOMEPAGE = "http://bitmath.org/code/frame/"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++
++inherit autotools
++
++SRC_URI = "git://bitmath.org/git/evemu.git;protocol=http"
++SRCREV = "9752b50e922572e4cd214ac45ed95e4ee410fe24"
++
++PV = "1.0.5+git${SRCPV}"
++
++S = "${WORKDIR}/git/"
+-- 
+1.7.9.5
 
 
