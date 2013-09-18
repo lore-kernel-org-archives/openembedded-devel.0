@@ -1,34 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id DC71E6C8E0
+Return-Path: <mike.looijmans@topic.nl>
+Received: from smtp102.mer-nm.internl.net (smtp102.mer-nm.internl.net
+	[217.149.192.138])
+	by mail.openembedded.org (Postfix) with ESMTP id 469FA6C7B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2013 03:37:05 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id r10so6464197pdi.41
+	Wed, 18 Sep 2013 05:55:53 +0000 (UTC)
+Received: from amavisd-new (mailscanner04.wrt-nm.internl.net [217.149.192.127])
+	by smtp102.mer-nm.internl.net (Postfix) with ESMTP id AC51C3F690
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Sep 2013 20:37:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=kBa2dFuyTbnTYBikYC3/kQq2jmsZdScFokqtb0o7+Ok=;
-	b=rZ6olHkXaC3zuOr4CopzkuvmtlpJAvduC0Daorete4q9m3pJ0dM9MM/7VKB0MOFDE3
-	m/n3CwCpAYctbyH9ooXicE5Y7tXjizTW0gzH4IwTeYVNUlg0tSTwoBAtU8bOgZjCt3Xx
-	Wpm1aLSZGOawuMjfaakoFSTeI+JmxiphflE9r32VUP2KDuoHkt6eZJSlLbEtKBf7rYcK
-	inAIK47rbUXEepO5W5+BYYCd+JQE3ayw6tXF//8nGcRN2tR5II2UBby8HbTkK/7c+bdQ
-	gm8Rm0qgJQGkrbv+dSTm9C3rSuXdvlqgSJ9BVks8FEiruZupZtUwUoW+p5aBFa6qLpA/
-	SYkw==
-X-Received: by 10.66.171.77 with SMTP id as13mr6982636pac.170.1379475427920;
-	Tue, 17 Sep 2013 20:37:07 -0700 (PDT)
-Received: from haswell.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id qa9sm1304095pbc.7.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 17 Sep 2013 20:37:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Sep 2013 20:36:58 -0700
-Message-Id: <1379475418-24630-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] opencv: Update SRC_URI to use git
+	Wed, 18 Sep 2013 07:55:53 +0200 (CEST)
+X-Spam-scanned: scanned by InterNLnet Mail Scan System
+X-Spam-Flag: NO
+X-Spam-Score: -4.4
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 tagged_above=-999 required=4.5
+	tests=[BAYES_00=-2.9, KHOP_THREADED=-1.5] autolearn=no
+X-Spam-Languages: en
+Received: from smtp102.mer-nm.internl.net ([217.149.192.138])
+	by amavisd-new (mailscanner04.wrt-nm.internl.net [217.149.192.160])
+	(amavisd-new, port 10024)
+	with ESMTP for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Sep 2013 07:55:53 +0200 (CEST)
+Received: from TOP-EX01.TOPIC.LOCAL (mail.topic.nl [82.204.13.182])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by smtp102.mer-nm.internl.net (Postfix) with ESMTPS
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Sep 2013 07:55:52 +0200 (CEST)
+Received: from [192.168.80.45] (192.168.80.45) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.1.438.0;
+	Wed, 18 Sep 2013 07:55:55 +0200
+Message-ID: <52394067.6040205@topic.nl>
+Date: Wed, 18 Sep 2013 07:55:51 +0200
+From: Mike Looijmans <mike.looijmans@topic.nl>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1378978655-2635-1-git-send-email-mike.looijmans@topic.nl>
+In-Reply-To: <1378978655-2635-1-git-send-email-mike.looijmans@topic.nl>
+X-Originating-IP: [192.168.80.45]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+Subject: Re: [meta-oe][PATCH] ntfs-3g-ntfsprogs does not rdepend on util-linux-mount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,75 +55,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2013 03:37:06 -0000
+X-List-Received-Date: Wed, 18 Sep 2013 05:55:54 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-opencv now has moved to using git. Lets use the git
-version to fetch SRCs
+=EF=BB=BFPing!
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../{opencv-samples_2.4.3.bb => opencv-samples_2.4.bb}       | 12 +++++-------
- .../opencv/{opencv_2.4.3.bb => opencv_2.4.bb}                | 10 ++++------
- 2 files changed, 9 insertions(+), 13 deletions(-)
- rename meta-oe/recipes-support/opencv/{opencv-samples_2.4.3.bb => opencv-samples_2.4.bb} (82%)
- rename meta-oe/recipes-support/opencv/{opencv_2.4.3.bb => opencv_2.4.bb} (91%)
+Anything wrong with the patch? anyone reading this at all?
 
-diff --git a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-similarity index 82%
-rename from meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-rename to meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-index 50efd77..e00a5e6 100644
---- a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-@@ -7,14 +7,12 @@ DEPENDS = "opencv"
- 
- LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
- "
-+SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
-+SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
-+          "
-+PV = "2.4.3+git${SRCPV}"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
--"
--
--SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
--SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
--
--S = "${WORKDIR}/OpenCV-${PV}"
-+S = "${WORKDIR}/git"
- 
- do_install() {
-     cd samples/c
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-similarity index 91%
-rename from meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-rename to meta-oe/recipes-support/opencv/opencv_2.4.bb
-index 39b608a..3ca32f9 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -9,16 +9,14 @@ ARM_INSTRUCTION_SET = "arm"
- 
- DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
-+SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
-+SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
-            file://opencv-fix-pkgconfig-generation.patch \
- "
- 
--SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
--SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
-+PV = "2.4.3+git${SRCPV}"
- 
--PR = "r2"
--
--S = "${WORKDIR}/OpenCV-${PV}"
-+S = "${WORKDIR}/git"
- 
- # Do an out-of-tree build
- OECMAKE_SOURCEPATH = "${S}"
--- 
-1.8.3.2
+BTW, the same problem is in the exfat recipe, so I was going to send a=20
+patch for that as well.
 
+
+On 09/12/2013 11:37 AM, Mike Looijmans wrote:
+> ntfs-3g-ntfsprogs has no runtime dependency on util-linux-mount, for
+> example busybox mount will also do just fine. It might be less useful
+> without any mount program, but that's not the same as depending on it.
+>
+> The dependency broke several images because util-linux-mount behaves
+> differently than busybox mount, resulting in failure to mount ext2/3
+> volumes and network shares on user's systems.
+>
+> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> ---
+>   .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |    3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-=
+3g-ntfsprogs_2013.1.13.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-nt=
+fsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
+> index e084187..a34a791 100644
+> --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfs=
+progs_2013.1.13.bb
+> +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfs=
+progs_2013.1.13.bb
+> @@ -5,6 +5,7 @@ PROVIDES =3D "ntfsprogs ntfs-3g"
+>   LICENSE =3D "GPLv2 & LGPLv2"
+>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f=
+6552 \
+>                       file://COPYING.LIB;md5=3Df30a9716ef3762e3467a2f62bf=
+790f0a"
+> +PR =3D "r1"
+>
+>   SRC_URI =3D "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
+>   S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+> @@ -23,7 +24,7 @@ EXTRA_OEMAKE =3D "LDCONFIG=3Decho"
+>   PACKAGES =3D+ "ntfs-3g ntfsprogs libntfs-3g"
+>
+>   FILES_ntfs-3g =3D "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* ${base_=
+sbindir}/mount.ntfs"
+> -RDEPENDS_ntfs-3g +=3D "fuse util-linux-mount"
+> +RDEPENDS_ntfs-3g +=3D "fuse"
+>
+>   FILES_ntfsprogs =3D "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
+>   FILES_libntfs-3g =3D "${libdir}/*${SOLIBS}"
+>
+
+
+
+Met vriendelijke groet / kind regards,
+
+Mike Looijmans
+
+TOPIC Embedded Systems
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: (+31) =E2=80=93 (0)499 - 33.69.79
+Telefax: (+31) - (0)499 - 33.69.70
+E-mail: mike.looijmans@topic.nl
+Website: www.topic.nl
+
+Dit e-mail bericht en de eventueel daarbij behorende bijlagen zijn uitsluit=
+end bestemd voor de geadresseerde, zoals die blijkt uit het e-mail bericht =
+en/of de bijlagen. Er kunnen gegevens met betrekking tot een derde instaan.=
+ Indien u als niet-geadresseerde dit bericht en de bijlagen ontvangt, terwi=
+jl u niet bevoegd of gemachtigd bent om dit bericht namens de geadresseerde=
+ te ontvangen, wordt u verzocht de afzender hierover direct te informeren e=
+n het e-mail bericht met de bijlagen te vernietigen. Ieder gebruik van de i=
+nhoud van het e-mail bericht, waaronder de daarbij behorende bijlagen, door=
+ een ander dan de geadresseerde is onrechtmatig jegens ons dan wel de event=
+ueel in het e-mail bericht of de bijlagen voorkomende andere personen. TOPI=
+C Embedded Systems is niet aansprakelijk voor enigerlei schade voortvloeien=
+d uit het gebruik en/of acceptatie van dit e-mail bericht of de daarbij beh=
+orende bijlagen.
+
+The contents of this message, as well as any enclosures, are addressed pers=
+onally to, and thus solely intended for the addressee. They may contain inf=
+ormation regarding a third party. A recipient who is neither the addressee,=
+ nor empowered to receive this message on behalf of the addressee, is kindl=
+y requested to immediately inform the sender of receipt, and to destroy the=
+ message and the enclosures. Any use of the contents of this message and/or=
+ the enclosures by any other person than the addressee or person who is emp=
+owered to receive this message, is illegal towards the sender and/or the af=
+orementioned third party. TOPIC Embedded Systems is not  liable for any dam=
+age as a result of the use and/or acceptance of this message and as well as=
+ any enclosures.
 
