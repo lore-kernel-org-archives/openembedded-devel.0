@@ -1,28 +1,32 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D2FA610F7
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 61757610F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2013 18:04:21 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id CB07AF8121D; Wed, 18 Sep 2013 12:04:22 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 272FDF811FB;
-	Wed, 18 Sep 2013 12:04:22 -0600 (MDT)
-Message-ID: <5239EB61.1090805@mlbassoc.com>
-Date: Wed, 18 Sep 2013 12:05:21 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130804 Thunderbird/17.0.8
+	Wed, 18 Sep 2013 20:44:00 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so3745263eek.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Sep 2013 13:44:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=5ShwncFqYDnRYRpHzsIWTgPPzcyf+j97v4Jw4ply/Rk=;
+	b=NGLjS35GwQuZwYGrcOHuOEaNNuQ4fn0bnp2LOIG+BXQN9HqgXGrx1rPvnMyJIfNq6k
+	7wujZaFAda9d05gO0zAraKlnTUpU4woHVJGFC3IpRjjK4WrlLtgqeB3Tfs5W1xcV/kl0
+	6x481fMJXUYLNGmQQjxJVEyVw1QqA5lmRim3OK5DymqHp/398A464x4DMUnoYXml8NWv
+	GSqUQPvsOZKEJvIy7zj82dsuDMPT0+Ag0kiJ+Kue7EcNtTMeyJMOglw5Yr/aZcthS/zy
+	S1VsFTapDdPCQR+3FF+NRu0uqLIRU6Tmpn+YHtSBRw2YLMN8RQ0knrrkKbfCuf/I7Hgl
+	5APA==
+X-Gm-Message-State: ALoCoQmeRd1w7FUPQJEKxCGue6Bhi+8F8trkf3dYdnWggnVgbZTdQ6JoYCajEW5/0Fc1J8TLuxvN
 MIME-Version: 1.0
+X-Received: by 10.14.39.73 with SMTP id c49mr5386446eeb.61.1379537040986; Wed,
+	18 Sep 2013 13:44:00 -0700 (PDT)
+Received: by 10.14.117.67 with HTTP; Wed, 18 Sep 2013 13:44:00 -0700 (PDT)
+Date: Wed, 18 Sep 2013 16:44:00 -0400
+Message-ID: <CALmOhgm8XfD31FZbAARZcpxFwH2arMX7PeNWa1TMhbzmi-pXqg@mail.gmail.com>
+From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-References: <CAKS01ok2XmnwqMz2i0radhW3UB87AXmMa3zW2nxZpGmmBeE60g@mail.gmail.com>
-In-Reply-To: <CAKS01ok2XmnwqMz2i0radhW3UB87AXmMa3zW2nxZpGmmBeE60g@mail.gmail.com>
-Subject: Re: help with building image.
+Subject: qt5 qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,56 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2013 18:04:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Sep 2013 20:44:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 2013-09-18 08:12, Anup Kini wrote:
-> Hi All,
->
-> When i try to run build images in HOB, i end up with the following error.
->
-> dpkg-scanpackages: info: Wrote 4631 entries to output Packages file.
-> dpkg-scanpackages: info: Wrote 38 entries to output Packages file.
-> dpkg-scanpackages: info: Wrote 14 entries to output Packages file.
-> Reading package lists...
-> W: Unable to read
-> /home/akini/oe/openembedded-core/build/tmp-eglibc-eglibc/sysroots/x86_64-linux/etc/apt/sources.list.d/
-> - DirectoryExists (2: No such file or directory)
-> W: Unable to read
-> /home/akini/oe/openembedded-core/build/tmp-eglibc-eglibc/sysroots/x86_64-linux/etc/apt/sources.list
-> - RealFileExists (2: No such file or directory)
-> Reading package lists...
-> Building dependency tree...
-> W: Unable to read
-> /home/akini/oe/openembedded-core/build/tmp-eglibc-eglibc/sysroots/x86_64-linux/etc/apt/sources.list.d/
-> - DirectoryExists (2: No such file or directory)
-> W: Unable to read
-> /home/akini/oe/openembedded-core/build/tmp-eglibc-eglibc/sysroots/x86_64-linux/etc/apt/sources.list
-> - RealFileExists (2: No such file or directory)
-> W: You may want to run apt-get update to correct these problems
-> E: Unable to locate package libgcc1
-> E: Unable to locate package busybox
-> E: Unable to locate package libglapi-dev
-> ...
->
->
-> What am i missing here ?
->
+If I want to run the devshell on a qt5 recipe from meta-qt5, I can't
+help notice that if I do:
 
-Actually, it's what we are missing (from you) in order to be able to help!
+    $ which qmake
 
-Please provide some more details - what are your values for:
-   OE-core version?
-   Host machine?
-   Build target (machine)?
+I get
 
-Exactly what steps did you perform to try this?
-What might one need to do to recreate your problem?
+    /usr/bin/qmake
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+The qt5 qmake gets installed (in my case) to:
+
+    $TMPDIR/sysroots/x86_64-linux/usr/bin/qt5/
+
+Should the PATH which is generated for the devshell include this path too?
 
