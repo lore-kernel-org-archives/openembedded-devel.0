@@ -1,37 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D10F6158B
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id BAC076158B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 12:09:11 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id l10so4066996eei.7
+	Thu, 19 Sep 2013 12:09:33 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id g10so4124500eak.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 05:09:13 -0700 (PDT)
+	Thu, 19 Sep 2013 05:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+aicHRoE9350gGFIulOB6ZIvdpxvLlzVG6ti/d6+dFk=;
-	b=nKqE6x+T3hf9c9p9VHl8UMaMDw5WbkTRU5zOWi5NedimopGs/bnCAsLHdn2Tq3rFXI
-	Pu1J1sx9uCm69UGmrUZQfIwVBGMOarh0pobmcExhi9Fmgm5EJgE4xqykJhUYecDUzvq4
-	kzNuPv0rHZGr5gE34/Hr5o1iTaSEjc1Lc9+GlJGMCyNZDHBvXHghCLeMy8E279REyWNk
-	3K4AW+AGM32nzDR6a/bykycecpZjrMGxnl6F6FFeLLQuCjjNZlS9nl3xRsOLIppiQWRH
-	b4L6BtY05jX297LjoUJw4lO/wrmqngiQ1PrVr63ciaacjrrx75Etd1ji7jmnWWClcVld
-	WTCQ==
-X-Received: by 10.14.4.1 with SMTP id 1mr1832863eei.21.1379592553606;
-	Thu, 19 Sep 2013 05:09:13 -0700 (PDT)
+	bh=jrpncqfBYUMakp7UUjXWjmq/jwl5e5W6lKEDExWG4w0=;
+	b=knDdHivIHYY4gMqGXt5Gi5+dCmGw4JK8qpgn5k46M/cw9CPGqpCpAE5e2I/N7Zi4Pn
+	9AXzTU4/BQhc/w7aMW7+XUCYfMYNxFIgXHhbU5kvAW6SQIZL/38x0ZbX/t2mNtw6WGAG
+	zb0k9RG5ic9edZtcO/G62bLmzfPjkDTNt4wKfwZird9OW/CPD0XDsvvdsEP0IyUrihz/
+	J4W3ZA9U1Kz7iq+4lgRaboWBweZEvq/uolMdwOfsnJGQrQW4w7qsL0LHM/mBY0zLzBh5
+	rmJ4nTQ9++6EFQVaAtAfEN0A31Mi+W1C0oa+y6swIGxF6MOn+BLNnuLih+YREUWkSiva
+	czoQ==
+X-Received: by 10.15.10.5 with SMTP id f5mr1786970eet.87.1379592575221;
+	Thu, 19 Sep 2013 05:09:35 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	f49sm10813699eec.7.1969.12.31.16.00.00
+	b45sm10829488eef.4.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 05:09:12 -0700 (PDT)
-Date: Thu, 19 Sep 2013 14:10:51 +0200
+	Thu, 19 Sep 2013 05:09:34 -0700 (PDT)
+Date: Thu, 19 Sep 2013 14:11:12 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130919121051.GC18414@jama>
-References: <1379102902-3192-1-git-send-email-paul@paulbarker.me.uk>
+Message-ID: <20130919121112.GD18414@jama>
+References: <1379110532-29457-1-git-send-email-ml@communistcode.co.uk>
 MIME-Version: 1.0
-In-Reply-To: <1379102902-3192-1-git-send-email-paul@paulbarker.me.uk>
+In-Reply-To: <1379110532-29457-1-git-send-email-ml@communistcode.co.uk>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] vim: upgrade to v7.4.27 and refactor
+Cc: Jack Mitchell <jack@embed.me.uk>
+Subject: Re: [meta-oe][PATCHv5] libsoc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,119 +47,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2013 12:09:12 -0000
-X-Groupsio-MsgNum: 46248
+X-List-Received-Date: Thu, 19 Sep 2013 12:09:34 -0000
+X-Groupsio-MsgNum: 46249
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="E/DnYTRukya0zdZ1"
+	protocol="application/pgp-signature"; boundary="DiL7RhKs8rK9YGuF"
 Content-Disposition: inline
 
---E/DnYTRukya0zdZ1
+--DiL7RhKs8rK9YGuF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 13, 2013 at 09:08:22PM +0100, Paul Barker wrote:
-> 'vim.inc' is merged into the new recipe 'vim_7.4.27.bb', the recipe is sl=
-ightly
-> reorganised and a minor omission in the comments is corrected.
+On Fri, Sep 13, 2013 at 11:15:32PM +0100, Jack Mitchell wrote:
+> From: Jack Mitchell <jack@embed.me.uk>
 >=20
-> DESCRIPTION is replaced with SUMMARY. PR and INC_PR values are dropped. T=
-he
-> variable PV_MAJOR is also dropped as it isn't used.
->=20
-> LIC_FILES_CHECKSUM is updated as an address and version number given in t=
-he
-> license have been modified. The main license text itself is unchanged.
->=20
-> The setting of PARALLEL_MAKE to force single-threaded compilation is remo=
-ved as
-> there is no justification in the git history for this being needed and the
-> compilation completes fine without it.
-
-Merged, thanks!
-
->=20
-> Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+> Signed-off-by: Jack Mitchell <jack@embed.me.uk>
 > ---
->  meta-oe/recipes-support/vim/vim_7.3.1314.bb           |  7 -------
->  .../recipes-support/vim/{vim.inc =3D> vim_7.4.27.bb}    | 19 ++++++++---=
---------
->  2 files changed, 8 insertions(+), 18 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/vim/vim_7.3.1314.bb
->  rename meta-oe/recipes-support/vim/{vim.inc =3D> vim_7.4.27.bb} (87%)
+>  v4 -> v5
+>  - Moved RDEPENDS to below do_install
 >=20
-> diff --git a/meta-oe/recipes-support/vim/vim_7.3.1314.bb b/meta-oe/recipe=
-s-support/vim/vim_7.3.1314.bb
-> deleted file mode 100644
-> index 1be5a91..0000000
-> --- a/meta-oe/recipes-support/vim/vim_7.3.1314.bb
-> +++ /dev/null
-> @@ -1,7 +0,0 @@
-> -require ${PN}.inc
-> -
-> -PR =3D "${INC_PR}.0"
-> -
-> -SRCREV =3D "v7-3-1314"
-> -
-> -SRC_URI +=3D "file://configure.in_remove_CC_quotes.patch;patchdir=3D.."
-> diff --git a/meta-oe/recipes-support/vim/vim.inc b/meta-oe/recipes-suppor=
-t/vim/vim_7.4.27.bb
-> similarity index 87%
-> rename from meta-oe/recipes-support/vim/vim.inc
-> rename to meta-oe/recipes-support/vim/vim_7.4.27.bb
-> index 991ba74..77507d4 100644
-> --- a/meta-oe/recipes-support/vim/vim.inc
-> +++ b/meta-oe/recipes-support/vim/vim_7.4.27.bb
-> @@ -1,20 +1,19 @@
-> -DESCRIPTION =3D "Vi IMproved - enhanced vi editor"
-> +SUMMARY =3D "Vi IMproved - enhanced vi editor"
->  SECTION =3D "console/utils"
->  DEPENDS =3D "ncurses"
->  # vimdiff doesn't like busybox diff
->  RSUGGESTS_${PN} =3D "diffutils"
->  LICENSE =3D "vim"
-> -LIC_FILES_CHKSUM =3D "file://../runtime/doc/uganda.txt;md5=3D4c91d841bb7=
-b75f68b5bb8ad7118f5b8"
-> +LIC_FILES_CHKSUM =3D "file://../runtime/doc/uganda.txt;md5=3Db779e18be6e=
-d77facc770691c967b8f8"
-> =20
-> -PV_MAJOR =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).spl=
-it('.')[1]}"
-> -VIMDIR =3D "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).s=
-plit('.')[1]}"
-> -
-> -INC_PR =3D "r13"
-> -
-> -SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhttps;module=3Dvim"
-> +SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhttps;module=3Dvim \
-> +	file://configure.in_remove_CC_quotes.patch;patchdir=3D.."
-> +SRCREV =3D "v7-4-027"
-> =20
->  S =3D "${WORKDIR}/${PN}/src"
-> =20
-> +VIMDIR =3D "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).s=
-plit('.')[1]}"
+>  v3 -> v4
+>  - Added libgcc in RDEPENDS
+>=20
+>  v2 -> v3
+>  - Removed DEPENDS on libgcc
+>  - Removed autogen.sh pre-configure as was unneeded
+>=20
+>  v1 -> v2
+>  -added signed-off-by
+
+Merged, thanks
+
+>=20
+>  meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+>=20
+> diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.3.bb b/meta-oe/recip=
+es-support/libsoc/libsoc_0.3.bb
+> new file mode 100644
+> index 0000000..1bf2782
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY =3D "libsoc is a C library for interfacing with common SoC perip=
+herals through generic kernel interfaces"
+> +HOMEPAGE =3D "https://github.com/jackmitch/libsoc"
 > +
->  inherit autotools update-alternatives
-> =20
->  # vim configure.in contains functions which got 'dropped' by autotools.b=
-bclass
-> @@ -28,7 +27,7 @@ do_configure () {
->      touch auto/config.mk auto/config.h
->  }
-> =20
-> -#Available PACKAGECONFIG options are gtkgui, x11, tiny
-> +#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
->  PACKAGECONFIG ??=3D ""
-> =20
->  PACKAGECONFIG[gtkgui] =3D "--enable-gtk2-test --enable-gui=3Dgtk2,--enab=
-le-gui=3Dno,gtk+,"
-> @@ -76,5 +75,3 @@ ALTERNATIVE_${PN} =3D "vi"
->  ALTERNATIVE_TARGET[vi] =3D "${bindir}/${PN}"
->  ALTERNATIVE_LINK_NAME[vi] =3D "${base_bindir}/vi"
->  ALTERNATIVE_PRIORITY[vi] =3D "100"
-> -
-> -PARALLEL_MAKE =3D ""
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De0bfebea12a718922225ba987b212=
+6a5"
+> +
+> +inherit autotools
+> +
+> +SRCREV =3D "0764ee52b590d5ccb4bd4698f0011496b536ed70"
+> +SRC_URI =3D "git://github.com/jackmitch/libsoc.git"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +RDEPENDS_${PN} =3D "libgcc"
 > --=20
 > 1.8.4
 >=20
@@ -169,16 +117,16 @@ le-gui=3Dno,gtk+,"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---E/DnYTRukya0zdZ1
+--DiL7RhKs8rK9YGuF
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlI66csACgkQN1Ujt2V2gBw2lwCfem3ig45QKsCSFbHtrSXaWcHd
-kjwAoKBOB37FY/OYpN8WlQItxfrDVRu5
-=lKTO
+iEYEARECAAYFAlI66eAACgkQN1Ujt2V2gByZTwCguTeOoDC8DO1gX2dGmkPJp5Ke
+fekAn3PUBHq8x7VBruFkZxaGGEj6ZaW0
+=dJVs
 -----END PGP SIGNATURE-----
 
---E/DnYTRukya0zdZ1--
+--DiL7RhKs8rK9YGuF--
