@@ -1,38 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E9D06158C
+Return-Path: <eu@felipetonello.com>
+Received: from mail-qa0-f41.google.com (mail-qa0-f41.google.com
+	[209.85.216.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 70AA96A564
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 12:53:36 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id b45so4168342eek.15
+	Thu, 19 Sep 2013 19:09:26 +0000 (UTC)
+Received: by mail-qa0-f41.google.com with SMTP id ii20so402665qab.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 05:53:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=zqbzYb7VSU1QfOZvlbqhXERQGcUEPy56DvndBg6J3dA=;
-	b=n7LlkgicfM6cZAvtpZFgKJv0vV0R91+CWiUwVyEWL+y8Kki4KRJ8HOGeupfLxQdiTG
-	0IUM5OltCoy2J4sdGv5O8Z7yITE3ol0mM1OVBe4aFhSORTIiOXpYz7uw8oGj3KGwCsBU
-	rp6tu63KKZAdnzxCYzWLNoWmLHp1aBHIJR7B7EuvCDxepcaCO9rOzKbXhNn/jNu5h8bi
-	q9tYQ02rwE2A2FyJHR3NI0MG8wGm9HW9dytYrCNdRRHinvukaTmF98AbPNKDNru5SSwt
-	ccBcMq5EhS1uyoVOgC2yG54t62EBrz8ekn2jMwPWd5dST0rUw6iI2UdZIqf5Vt3aCuk3
-	GB2g==
-X-Received: by 10.14.98.8 with SMTP id u8mr2053443eef.59.1379595217905;
-	Thu, 19 Sep 2013 05:53:37 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	f49sm11105411eec.7.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 05:53:36 -0700 (PDT)
-Date: Thu, 19 Sep 2013 14:55:15 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20130919125515.GH18414@jama>
-References: <20130913135936.GD11500@jama>
-MIME-Version: 1.0
-In-Reply-To: <20130913135936.GD11500@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-perl, meta-filesystems maintenance
+	Thu, 19 Sep 2013 12:09:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=zv+LVVPVk6PIVJDX+UDojb/AXRremevIs2/xIfjGWhM=;
+	b=QZ2w0vxnNzNetsG6bQZKV9DkD9FPLwif5Uzw5xBaLek0SFkoZOJvExYjYw19WLVYnw
+	n+XFbzotGRvJQgy0L44fzOP7bfSW2+TT51vhTFyKduMoxUmnSYOv2TBwIYhLeDS6Gpv8
+	uRw4edJVB2/gvIDFI1Gyz3B2bhDl/IKGX0aGLazBEMGVlS+vnzkYaOtrZi0kQkskIxqG
+	7uKZb1LidYkC74At1dBUqjMPz0vf0NzeGsHf595bulM12HcZ7SWRnftMcclne3ITa4e1
+	ZgxPdzvCubZMvtIUhe6Qv6R7xYQiOm2VeC+CTYbXv/TZf+6QqLYE/FHJk9ChhIgi6eoy
+	3/UA==
+X-Gm-Message-State: ALoCoQl98wDKtotLjRfRoSJe7C0pZLmaiCPgjdyjni4Rff5v++CYqHmqS7q6SydWb48An2XKmda9
+X-Received: by 10.224.51.199 with SMTP id e7mr390199qag.41.1379617767885;
+	Thu, 19 Sep 2013 12:09:27 -0700 (PDT)
+Received: from localhost.localdomain.com (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPSA id k3sm13345014qaz.11.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 19 Sep 2013 12:09:27 -0700 (PDT)
+From: "Felipe F. Tonello" <eu@felipetonello.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Sep 2013 12:09:12 -0700
+Message-Id: <1379617754-6342-1-git-send-email-eu@felipetonello.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH 0/2] Improvements in gypsy recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,52 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2013 12:53:37 -0000
-X-Groupsio-MsgNum: 46253
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4LFBTxd4L5NLO6ly"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Sep 2013 19:09:27 -0000
 
---4LFBTxd4L5NLO6ly
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 
-On Fri, Sep 13, 2013 at 03:59:36PM +0200, Martin Jansa wrote:
-> Hi,
->=20
-> there were some patches for meta-perl, meta-filesystems
-> do you want me to merge patches which looks OK without your ACK or
-> should I always wait for it (you're listed in meta-perl as Maintainer
-> and in meta-filesystems for couple of recipes + you created it)?
->=20
-> If you don't have write access I'm OK with pushing them for you once
-> they are acked on ML - or even better if you send me list of patchwork
-> IDs to merge or some consolidated pull request.
->=20
-> You can see what's in queue:
-> http://patches.openembedded.org/bundle/jama/meta-filesystems/?archive=3Db=
-oth
-> http://patches.openembedded.org/bundle/jama/meta-perl/?archive=3Dboth
->=20
-> If you don't have maintainer permission for patchwork, please ask Khem
-> to add it for you.
+Felipe F. Tonello (2):
+  gypsy: Improvements in recipes
+  gypsy: Added init script
 
-ping
+ .../gypsy/files/gypsy-initscript                   | 61 ++++++++++++++++++++++
+ meta-oe/recipes-navigation/gypsy/gypsy.inc         | 29 ++++++++--
+ meta-oe/recipes-navigation/gypsy/gypsy_0.9.bb      | 21 ++------
+ meta-oe/recipes-navigation/gypsy/gypsy_git.bb      | 12 +++--
+ 4 files changed, 99 insertions(+), 24 deletions(-)
+ create mode 100755 meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+1.8.3.1
 
---4LFBTxd4L5NLO6ly
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
-
-iEYEARECAAYFAlI69DMACgkQN1Ujt2V2gBwH6gCfXvWrbBOvwnH/FtjMmeKzTGHD
-SR0AoJ4rWbZXMPQuUjaBHkGIyDVZN08/
-=Vgn2
------END PGP SIGNATURE-----
-
---4LFBTxd4L5NLO6ly--
