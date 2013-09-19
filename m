@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2092C6CA20
+Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 902C16158B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 12:03:34 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id r16so4129345ead.17
+	Thu, 19 Sep 2013 12:04:23 +0000 (UTC)
+Received: by mail-ea0-f176.google.com with SMTP id q16so4071946ead.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 05:03:36 -0700 (PDT)
+	Thu, 19 Sep 2013 05:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wQHi9X4dqOu9Ci8MtDV2O5j3FePfEXOFoUrJEg6w5os=;
-	b=ZRP/GEK9VqWqGD4bqyUHL8y55cijQrPeoUVOpGteKSoU2IixH3MpqxSc/AMbORzp4v
-	JnOOCna6ieHmKbvZkxMh9ujLM/eYH2BrzrK2PWE6/Ua/ne3w4cL2OugOEhQXtDxzz5VZ
-	PG2irp/TflhoJQRihC8OaSeVm2pCgVA8MqGoGmgVtI7IPBu+9heVU+JZ5FOYgCfem40q
-	gfsgQHnq0vXkBFPdx9BfEvR6B5C9FnTGqYO2qsZVFhzK2Wkee0yfrcAy3VP/XHA+6KAB
-	kMNA4WxqTB5ibGkTxxiVbAMrI2AgsojGbrDpChuCucfO0D8/JxwEZX0afwSaB36qDDQx
-	zxqw==
-X-Received: by 10.14.109.66 with SMTP id r42mr1784365eeg.43.1379592216645;
-	Thu, 19 Sep 2013 05:03:36 -0700 (PDT)
+	bh=5zPKZKGM1iFxH69WFsuKx5LCA0ytqldHKqhvQSrQu3Y=;
+	b=l7R/FPBhW3BrGaeVz3lDHtndWvW2YGtlgdOjvijNtdptzPoIEoMoAPBjmH5E9DtluL
+	mFHRgRS6sDN64x0/+opblLF7+EyeI8fIp1XxAAc+itR7F12kpZ7fF4HE0ZGT8MnPihtS
+	YgOtaGX2RVEHkYgPm128l2BdWyB6F0on9vivu4TXLS4DEpL2InOXS/qkbJdLxAsDTLNQ
+	zcHzKagyDDlV29IglEcFWMZqhvmlCAdF30Wx+rn/NvwT76FR9uRLFjFjfXpqj7HEwCoG
+	G1p6lDL/Zto6jTX6tcMZft5ZPuAm/3r2jkcRZKtsb7xS7g2RyJkevJk/IgWjPtnVgooI
+	hshg==
+X-Received: by 10.14.224.198 with SMTP id x46mr1771704eep.53.1379592264715;
+	Thu, 19 Sep 2013 05:04:24 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	h45sm2110656eeg.5.1969.12.31.16.00.00
+	h45sm2115849eeg.5.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 05:03:35 -0700 (PDT)
-Date: Thu, 19 Sep 2013 14:05:14 +0200
+	Thu, 19 Sep 2013 05:04:23 -0700 (PDT)
+Date: Thu, 19 Sep 2013 14:06:01 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130919120514.GL7313@jama>
-References: <1379440036-7538-1-git-send-email-jc@vtkloud.com>
+Message-ID: <20130919120601.GM7313@jama>
+References: <1379322259-3831-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <1379440036-7538-1-git-send-email-jc@vtkloud.com>
+In-Reply-To: <1379322259-3831-1-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-multimedia][PATCH] libao: add version 1.1.0
+Subject: Re: [meta-oe/meta-xfce 0/9] minor libcanberra cleanup / new xfce stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,70 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2013 12:03:35 -0000
-X-Groupsio-MsgNum: 46244
+X-List-Received-Date: Thu, 19 Sep 2013 12:04:23 -0000
+X-Groupsio-MsgNum: 46245
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rVkomL2febZOZtGQ"
+	protocol="application/pgp-signature"; boundary="6CiRFyVmOOJ3DkBX"
 Content-Disposition: inline
 
---rVkomL2febZOZtGQ
-Content-Type: text/plain; charset=us-ascii
+--6CiRFyVmOOJ3DkBX
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 17, 2013 at 01:47:16PM -0400, JC wrote:
-> This is basically a 99% import of Peter Tworek's recipe from tworaz666@gm=
-ail.com found in https://github.com/tworaz/oe-tworaz/blob/master/meta-jlime=
-/recipes-support/libao/libao_1.1.0.bb
->=20
-> Signed-off-by: JC <jc@vtkloud.com>
+On Mon, Sep 16, 2013 at 11:04:10AM +0200, Andreas M=FCller wrote:
+> [1-3] libcanberra: While working on event sounds libcanberra needed some =
+love.
+>       Sounds still doesn't work properly in gtk2 environment. There will =
+be
+>       follow ups.
+> [4-9] Updates + new datetime setter for XFCE
 
-Please use full name in commits.
+All merged thanks.
 
-> ---
->  .../recipes-multimedia/libao/libao_1.1.0.bb        | 23 ++++++++++++++++=
-++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/libao/libao_1.1.0.=
-bb
 >=20
-> diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb b/me=
-ta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-> new file mode 100644
-> index 0000000..08950b5
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-> @@ -0,0 +1,23 @@
-> +SECTION =3D "multimedia"
-> +SUMMARY =3D "Libao is a cross-platform audio library that allows program=
-s to output audio using a simple API on a wide variety of platforms"
-> +HOMEPAGE =3D "https://www.xiph.org/ao/"
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +
-> +SRC_URI=3D"http://downloads.xiph.org/releases/ao/${BP}.tar.gz"
-> +SRC_URI[md5sum] =3D "2b2508c29bc97e4dc218fa162cf883c8"
-> +SRC_URI[sha256sum] =3D "29de5bb9b1726ba890455ef7e562d877df87811febb0d99e=
-e69164b88c171bd4"
-> +
-> +inherit autotools
-> +
-> +do_install_append () {
-> +    find "${D}" -name '*.la' -exec rm -f {} +
-> +}
-> +
-> +python populate_packages_prepend () {
-> +    rootdir =3D bb.data.expand('${libdir}/ao/plugins-4', d)
-> +    rootdir_dbg =3D bb.data.expand('${libdir}/ao/plugins-4/.debug', d)
-> +    do_split_packages(d, rootdir, '^(.*)\.so$', output_pattern=3D'${BPN}=
--plugin-%s', description=3D'AO %s plugin')
-> +    do_split_packages(d, rootdir_dbg, '^(.*)\.so$', output_pattern=3D'${=
-BPN}-plugin-%s-dbg', description=3D'AO %s plugin debug data')
-> +}
+> Andreas M=FCller (9):
+>   libcanberra: add PACKAGES_DYNAMIC so we use the splitted packages
+>   libcanberra: remove r0 - it is of no use
+>   libcanberra: handle alsa and pulsaudio by PACKAGECONFIG - defaults
+>     based upon DISTRO_FEATURES
+>   libxfce4ui: update to git head
+>   xfce4-settings: move to schnitzeltony's git repo to get new datetime
+>     setter
+>   xfwm4: move to git repo
+>   xfce4-weather-plugin: update to 0.8.3
+>   xfce4-equake-plugin: initial add 1.3.3
+>   packagegroup-xfce-extended: add xfce4-equake-plugin
+>=20
+>  .../libcanberra/libcanberra_0.29.bb                |   12 +-
+>  .../equake/xfce4-equake-plugin_1.3.3.bb            |   13 +
+>  .../weather/files/port-to-libxfce4ui.patch         |  104 --
+>  .../weather/xfce4-weather-plugin_0.7.4.bb          |   23 -
+>  .../weather/xfce4-weather-plugin_0.8.3.bb          |   11 +
+>  .../recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb   |   17 +-
+>  .../packagegroups/packagegroup-xfce-extended.bb    |    1 +
+>  ...the-settings-manager-window-size-bug-9384.patch |  155 ---
+>  .../0001-add-cursor-theme-xfce-invisible.patch     |    8 +-
+>  ...ngs-dialog-add-touchscreen-pointer-option.patch | 1083 +-------------=
+------
+>  ...tect-a-change-of-pointer-device-used-and-.patch |   10 +-
+>  ...e4-settings_4.11.0.bb =3D> xfce4-settings_git.bb} |   23 +-
+>  .../xfwm4/{xfwm4_4.10.1.bb =3D> xfwm4_git.bb}        |   17 +-
+>  13 files changed, 90 insertions(+), 1387 deletions(-)
+>  create mode 100644 meta-xfce/recipes-panel-plugins/equake/xfce4-equake-p=
+lugin_1.3.3.bb
+>  delete mode 100644 meta-xfce/recipes-panel-plugins/weather/files/port-to=
+-libxfce4ui.patch
+>  delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather=
+-plugin_0.7.4.bb
+>  create mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather=
+-plugin_0.8.3.bb
+>  delete mode 100644 meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/=
+0003-Remember-the-settings-manager-window-size-bug-9384.patch
+>  rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.11.0.bb =
+=3D> xfce4-settings_git.bb} (64%)
+>  rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.10.1.bb =3D> xfwm4_git.bb} =
+(70%)
+>=20
 > --=20
-> 1.8.1.2
+> 1.7.6.5
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -119,16 +122,16 @@ BPN}-plugin-%s-dbg', description=3D'AO %s plugin debug data')
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---rVkomL2febZOZtGQ
+--6CiRFyVmOOJ3DkBX
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlI66HoACgkQN1Ujt2V2gByV2QCfQ7zXG/KThWsRjcwfVSvXAipO
-eLoAniGR2qnxvB0aqZZKwSkTj4wwpUq3
-=p33Z
+iEYEARECAAYFAlI66KkACgkQN1Ujt2V2gBxkQwCfWh1WV+chozMYfFue2f33Nwz7
+uAgAmwW15/l1kKR7NvIE9SnFhN/G6vQ9
+=76P6
 -----END PGP SIGNATURE-----
 
---rVkomL2febZOZtGQ--
+--6CiRFyVmOOJ3DkBX--
