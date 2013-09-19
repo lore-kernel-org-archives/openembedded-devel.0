@@ -1,39 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id BAC076158B
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 2739E6158B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 12:09:33 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g10so4124500eak.4
+	Thu, 19 Sep 2013 12:09:52 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id c50so4131205eek.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 05:09:35 -0700 (PDT)
+	Thu, 19 Sep 2013 05:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jrpncqfBYUMakp7UUjXWjmq/jwl5e5W6lKEDExWG4w0=;
-	b=knDdHivIHYY4gMqGXt5Gi5+dCmGw4JK8qpgn5k46M/cw9CPGqpCpAE5e2I/N7Zi4Pn
-	9AXzTU4/BQhc/w7aMW7+XUCYfMYNxFIgXHhbU5kvAW6SQIZL/38x0ZbX/t2mNtw6WGAG
-	zb0k9RG5ic9edZtcO/G62bLmzfPjkDTNt4wKfwZird9OW/CPD0XDsvvdsEP0IyUrihz/
-	J4W3ZA9U1Kz7iq+4lgRaboWBweZEvq/uolMdwOfsnJGQrQW4w7qsL0LHM/mBY0zLzBh5
-	rmJ4nTQ9++6EFQVaAtAfEN0A31Mi+W1C0oa+y6swIGxF6MOn+BLNnuLih+YREUWkSiva
-	czoQ==
-X-Received: by 10.15.10.5 with SMTP id f5mr1786970eet.87.1379592575221;
-	Thu, 19 Sep 2013 05:09:35 -0700 (PDT)
+	bh=+rUfY8ZwOC/QzR8kiY7GZ8cceQwyPqAITz/drOPORCI=;
+	b=ivD13kLxtSsfPbDQ8E+8XaSI9/nDFGhPKNqd0m35lg+OzsNaeieOFT3hnP1Vm0tciC
+	/BtRKWXqk8bWZ5UjxF2IQv6SiUsO33dGdav0Xf4rlH3hsGXcFit4T4bbk+bgvFe28a+r
+	2a8Mf3MMOkxsPT96krLdmnP9N9cNoR4X1apTiIj8Po606W/zcyKCXWLhhylrYGLCJMGk
+	kfog3njea+DIAUe/5V9AUTsJbp5jo6rQZ94pEIY3vznv3WSjpANRdVodTk9/QF1pvrFy
+	lKWax0madMsIVOUpPGtc5+iwjW6tBJwFLP+WZI0+d3ldGYaKZ4dqcbBFAhES/MGzvzMr
+	EL2A==
+X-Received: by 10.14.149.14 with SMTP id w14mr740684eej.107.1379592593738;
+	Thu, 19 Sep 2013 05:09:53 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	b45sm10829488eef.4.1969.12.31.16.00.00
+	a1sm10848800eem.1.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 05:09:34 -0700 (PDT)
-Date: Thu, 19 Sep 2013 14:11:12 +0200
+	Thu, 19 Sep 2013 05:09:52 -0700 (PDT)
+Date: Thu, 19 Sep 2013 14:11:31 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130919121112.GD18414@jama>
-References: <1379110532-29457-1-git-send-email-ml@communistcode.co.uk>
+Message-ID: <20130919121131.GE18414@jama>
+References: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1379110532-29457-1-git-send-email-ml@communistcode.co.uk>
+In-Reply-To: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: Re: [meta-oe][PATCHv5] libsoc: new recipe
+Subject: Re: [meta-multimedia][PATCH] dleyna: switch to git clones instead of generated tarballs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,67 +45,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2013 12:09:34 -0000
-X-Groupsio-MsgNum: 46249
+X-List-Received-Date: Thu, 19 Sep 2013 12:09:52 -0000
+X-Groupsio-MsgNum: 46250
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DiL7RhKs8rK9YGuF"
+	protocol="application/pgp-signature"; boundary="SNIs70sCzqvszXB4"
 Content-Disposition: inline
 
---DiL7RhKs8rK9YGuF
+--SNIs70sCzqvszXB4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 13, 2013 at 11:15:32PM +0100, Jack Mitchell wrote:
-> From: Jack Mitchell <jack@embed.me.uk>
+On Thu, Sep 12, 2013 at 04:31:53PM +0100, Ross Burton wrote:
+> The tarballs used were the dynamically-generated tarballs from github, wh=
+ich
+> recently have changed checksum.  Avoid this problem entirely by fetching =
+=66rom
+> git, locked to the relevant tag.
+
+Merged, thanks!
+
 >=20
-> Signed-off-by: Jack Mitchell <jack@embed.me.uk>
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
 > ---
->  v4 -> v5
->  - Moved RDEPENDS to below do_install
+>  .../recipes-multimedia/dleyna/media-service-upnp_0.4.0.bb        |    6 =
++++---
+>  .../recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb     |    6 =
++++---
+>  2 files changed, 6 insertions(+), 6 deletions(-)
 >=20
->  v3 -> v4
->  - Added libgcc in RDEPENDS
->=20
->  v2 -> v3
->  - Removed DEPENDS on libgcc
->  - Removed autogen.sh pre-configure as was unneeded
->=20
->  v1 -> v2
->  -added signed-off-by
-
-Merged, thanks
-
->=20
->  meta-oe/recipes-support/libsoc/libsoc_0.3.bb | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.3.bb
->=20
-> diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.3.bb b/meta-oe/recip=
-es-support/libsoc/libsoc_0.3.bb
-> new file mode 100644
-> index 0000000..1bf2782
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libsoc/libsoc_0.3.bb
-> @@ -0,0 +1,14 @@
-> +SUMMARY =3D "libsoc is a C library for interfacing with common SoC perip=
-herals through generic kernel interfaces"
-> +HOMEPAGE =3D "https://github.com/jackmitch/libsoc"
-> +
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De0bfebea12a718922225ba987b212=
-6a5"
-> +
-> +inherit autotools
-> +
-> +SRCREV =3D "0764ee52b590d5ccb4bd4698f0011496b536ed70"
-> +SRC_URI =3D "git://github.com/jackmitch/libsoc.git"
-> +
+> diff --git a/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp=
+_0.4.0.bb b/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.=
+4.0.bb
+> index 6d81ed2..fb0194b 100644
+> --- a/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.=
+bb
+> +++ b/meta-multimedia/recipes-multimedia/dleyna/media-service-upnp_0.4.0.=
+bb
+> @@ -7,9 +7,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd25=
+5951079008b364516c \
+> =20
+>  DEPENDS =3D "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
+> =20
+> -SRC_URI =3D "https://github.com/01org/${BPN}/archive/v${PV}.zip"
+> -SRC_URI[md5sum] =3D "9fc4db84b3459bc77232b24bde48b000"
+> -SRC_URI[sha256sum] =3D "9cdee47bbbfa3de5aaa5cf3fc9e208ccd97e5079f6d8fa84=
+a6d1f24a1b760237"
+> +SRC_URI =3D "git://github.com/01org/${BPN}.git"
+> +SRCREV =3D "1996ecbe4a06c95d22f7d958e32e3d28f7a4a2e9"
 > +S =3D "${WORKDIR}/git"
-> +
-> +RDEPENDS_${PN} =3D "libgcc"
+> =20
+>  inherit autotools
+> =20
+> diff --git a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-u=
+pnp_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-u=
+pnp_0.3.0.bb
+> index d23babe..478b1c7 100644
+> --- a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3=
+=2E0.bb
+> +++ b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3=
+=2E0.bb
+> @@ -7,9 +7,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd25=
+5951079008b364516c \
+> =20
+>  DEPENDS =3D "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
+> =20
+> -SRC_URI =3D "https://github.com/01org/${BPN}/archive/v${PV}.zip"
+> -SRC_URI[md5sum] =3D "1e19349712a34dd56a14fc280b5d8b74"
+> -SRC_URI[sha256sum] =3D "d6623d98dd35ee32bc08349b4a22d12101dda38a2ece1e46=
+8ff0160e519a854d"
+> +SRC_URI =3D "git://github.com/01org/${BPN}.git"
+> +SRCREV =3D "4a0b1d7cd8e22d3cb0e09c77c344ceccbcbbd34f"
+> +S =3D "${WORKDIR}/git"
+> =20
+>  inherit autotools
+> =20
 > --=20
-> 1.8.4
+> 1.7.10.4
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -117,16 +131,16 @@ herals through generic kernel interfaces"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---DiL7RhKs8rK9YGuF
+--SNIs70sCzqvszXB4
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlI66eAACgkQN1Ujt2V2gByZTwCguTeOoDC8DO1gX2dGmkPJp5Ke
-fekAn3PUBHq8x7VBruFkZxaGGEj6ZaW0
-=dJVs
+iEYEARECAAYFAlI66fMACgkQN1Ujt2V2gBzlYwCffWeps+iLHOiriIRbhzg9sqaW
+xusAoIFzZF2HW5m7x3h3FoQYHlqDqdG6
+=ZPIO
 -----END PGP SIGNATURE-----
 
---DiL7RhKs8rK9YGuF--
+--SNIs70sCzqvszXB4--
