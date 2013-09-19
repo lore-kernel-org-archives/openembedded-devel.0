@@ -1,39 +1,19 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
-	[209.85.216.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DFED6C9B8
+Return-Path: <eric@eukrea.com>
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 774C961013
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 19:09:29 +0000 (UTC)
-Received: by mail-qa0-f53.google.com with SMTP id k4so3898926qaq.12
+	Thu, 19 Sep 2013 20:56:20 +0000 (UTC)
+Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 285654C8229
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 12:09:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=N0/UAmVireWtvqnYVoNWPDsYzbSDAmCwb79HpGil34k=;
-	b=GrGUTsxXnkLIBv3iukgSOG85TItd6F7UZWDkE9G0uv2Lk19gfbO+CJZxsDq2dXws54
-	gsklcHNtq0AeoU5gfZmsGk4gjhQSRLmLHFu23FD7oEnxpYPKiSYj6oDBFUAkguav1GHE
-	3JDsSCUerZBtiJgBFS1nV71j6Pb0Ch236wrNgZMM38dRtDnvqiz8E4vmi9ss1bk7AiCH
-	+MZhFrJwiHJdjIqKA22hE5+Rs8K6zAJusH3yXXXv65yhQ5mut/kNRIdIT9NeEAEubdJS
-	Nj1EKqmpj8ZgHZFmASs3DL82f0r6fhVitS1Ukp1Wje+S/ubASOZKQzD51LASuAFZRwNx
-	APeg==
-X-Gm-Message-State: ALoCoQn8AP0/Nz77fJ7LaV+k6HajWw4QrIV1utlquvudNrwmgwHJChnCJb1241RkkE29OzPEeiBZ
-X-Received: by 10.224.61.198 with SMTP id u6mr343710qah.83.1379617770863;
-	Thu, 19 Sep 2013 12:09:30 -0700 (PDT)
-Received: from localhost.localdomain.com (wsip-70-183-20-162.oc.oc.cox.net.
-	[70.183.20.162])
-	by mx.google.com with ESMTPSA id k3sm13345014qaz.11.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 12:09:30 -0700 (PDT)
-From: "Felipe F. Tonello" <eu@felipetonello.com>
+	Thu, 19 Sep 2013 22:56:17 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Sep 2013 12:09:14 -0700
-Message-Id: <1379617754-6342-3-git-send-email-eu@felipetonello.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1379617754-6342-1-git-send-email-eu@felipetonello.com>
-References: <1379617754-6342-1-git-send-email-eu@felipetonello.com>
-Subject: [PATCH 2/2] gypsy: Added init script
+Date: Thu, 19 Sep 2013 22:56:21 +0200
+Message-Id: <1379624182-10388-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.4.rc3
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/2] libsocketcan: upgrade to 0.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,122 +27,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2013 19:09:29 -0000
+X-List-Received-Date: Thu, 19 Sep 2013 20:56:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: "Felipe F. Tonello" <eu@felipetonello.com>
+and include a compile fix
 
-Added a modified version of the example init script, gypsy-example-initscript,
-from the gypsy repository to be compatible with OE based distros.
-
-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- .../gypsy/files/gypsy-initscript                   | 61 ++++++++++++++++++++++
- meta-oe/recipes-navigation/gypsy/gypsy.inc         | 13 ++++-
- 2 files changed, 73 insertions(+), 1 deletion(-)
- create mode 100755 meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
+ ...e-strcmp-instead-of-sizeof-on-char-string.patch | 39 ++++++++++++++++++++++
+ ...libsocketcan_0.0.8.bb => libsocketcan_0.0.9.bb} |  7 ++--
+ 2 files changed, 43 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
+ rename meta-oe/recipes-extended/socketcan/{libsocketcan_0.0.8.bb => libsocketcan_0.0.9.bb} (57%)
 
-diff --git a/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript b/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
-new file mode 100755
-index 0000000..c3c94e5
+diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch b/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
+new file mode 100644
+index 0000000..aa6196e
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
-@@ -0,0 +1,61 @@
-+#! /bin/sh
-+#
-+# based on gypsy-example-initscript in gypsy repository
-+# there are some little modifications to work with OE based distros
-+# []' Felipe Tonello eu@felipetonello.com
-+#
++++ b/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
+@@ -0,0 +1,39 @@
++From 94094cc4ee7ae585da3e5e7e83e7d82b5d6de656 Mon Sep 17 00:00:00 2001
++From: Alexander Stein <alexander.stein@systec-electronic.com>
++Date: Wed, 14 Nov 2012 12:13:06 +0100
++Subject: [PATCH] Use strcmp instead of sizeof on char* string
 +
-+set -e
++This bug was detected by the clang warning:
++libsocketcan.c:384:16: warning: argument to 'sizeof' in 'strncmp' call
++is the same expression as the source; did you mean to provide an
++explicit length? [-Wsizeof-pointer-memaccess]
++sizeof(name)) != 0)
++~~~~~~~^~~~~~
 +
-+DESC="Gypsy daemon"
-+NAME="gypsy-daemon"
-+DAEMON=/usr/lib/gypsy/$NAME
-+PIDFILE=/var/run/$NAME.pid
-+SCRIPTNAME=/etc/init.d/$NAME
-+USER=root
++Signed-off-by: Alexander Stein <alexander.stein@systec-electronic.com>
++Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
++---
++Upstream-Status: Backport
 +
-+# Gracefully exit if the package has been removed.
-+test -x $DAEMON || exit 0
++ src/libsocketcan.c | 5 ++---
++ 1 file changed, 2 insertions(+), 3 deletions(-)
 +
-+#
-+#	Function that starts the daemon/service.
-+#
-+d_start() {
-+	start-stop-daemon --start --quiet --pidfile $PIDFILE \
-+		--user $USER --exec $DAEMON -- $DAEMON_OPTS
-+}
++diff --git a/src/libsocketcan.c b/src/libsocketcan.c
++index fedcbdc..841c2ed 100644
++--- a/src/libsocketcan.c
+++++ b/src/libsocketcan.c
++@@ -379,9 +379,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
++ 				nl_msg->nlmsg_len - NLMSG_LENGTH(sizeof(struct ifaddrmsg));
++ 			parse_rtattr(tb, IFLA_MAX, IFLA_RTA(ifi), len);
++ 
++-			if (strncmp
++-			    ((char *)RTA_DATA(tb[IFLA_IFNAME]), name,
++-			     sizeof(name)) != 0)
+++			if (strcmp
+++			    ((char *)RTA_DATA(tb[IFLA_IFNAME]), name) != 0)
++ 				continue;
++ 
++ 			if (tb[IFLA_LINKINFO])
++-- 
++1.8.3.1
 +
-+#
-+#	Function that stops the daemon/service.
-+#
-+d_stop() {
-+	start-stop-daemon --stop --quiet --pidfile $PIDFILE \
-+		 --oknodo --user $USER --exec $DAEMON
-+}
-+
-+
-+case "$1" in
-+  start)
-+	echo -n "Starting $DESC: $NAME"
-+	d_start
-+	echo "."
-+	;;
-+  stop)
-+	echo -n "Stopping $DESC: $NAME"
-+	d_stop
-+	echo "."
-+	;;
-+  restart|force-reload)
-+	echo -n "Restarting $DESC: $NAME"
-+	d_stop
-+	sleep 1
-+	d_start
-+	echo "."
-+	;;
-+  *)
-+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
-+	exit 1
-+	;;
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-index 747b61d..1f50d79 100644
---- a/meta-oe/recipes-navigation/gypsy/gypsy.inc
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-@@ -8,13 +8,20 @@ LICENSE = "GPLv2.0 & LGPLv2.1"
- SECTION = "console/network"
- DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
+diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+similarity index 57%
+rename from meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb
+rename to meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+index 34ba56b..6b31a1e 100644
+--- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.8.bb
++++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+@@ -5,9 +5,10 @@ SECTION = "libs/network"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
  
--inherit autotools pkgconfig gtk-doc
- PACKAGES += "libgypsy"
-+SRC_URI = "file://gypsy-initscript"
-+
-+inherit autotools pkgconfig gtk-doc update-rc.d
-+
-+INITSCRIPT_NAME = "gypsy-daemon"
-+# make sure it starts after X
-+INITSCRIPT_PARAMS = "start 10 5 3 2 . stop 20 0 1 6 ."
+-SRCREV = "3a2cec63a4e6212cc63d21008453bd799cfe8774"
++SRCREV = "e1a224bf1c409adf0c02b07a90deada634e54b88"
  
- EXTRA_OECONF += "--with-distro=debian"
- 
- FILES_${PN} = " \
-   ${sysconfdir}/gypsy.conf \
-+  ${sysconfdir}/init.d/gypsy-daemon \
-   ${sysconfdir}/dbus-1 \
-   ${libexecdir}/gypsy-daemon \
-   ${datadir}/dbus-1 \
-@@ -23,3 +30,7 @@ FILES_${PN} = " \
- FILES_libgypsy = " \
-   ${libdir}/libgypsy${SOLIBS} \
+-SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git \
++SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git \
++    file://0001-Use-strcmp-instead-of-sizeof-on-char-string.patch \
  "
-+
-+do_install_append() {
-+  install -D ${WORKDIR}/gypsy-initscript ${D}/${sysconfdir}/init.d/gypsy-daemon
-+}
+ 
+ S = "${WORKDIR}/git"
+@@ -15,5 +16,5 @@ S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
+ 
+ do_configure_prepend() {
+-    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.8: configure.ac
++    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: configure.ac
+ }
 -- 
-1.8.3.1
+1.8.4.rc3
 
 
