@@ -1,40 +1,38 @@
-Return-Path: <jc@vtkloud.com>
-Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2732C6028B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 337916C9FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 11:58:33 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w62so386156wes.15
+	Fri, 20 Sep 2013 21:16:52 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id d41so516299eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 04:58:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:content-transfer-encoding:message-id:references:to;
-	bh=kg49p9t/rxhs49Dx0Fkr5ZCwrBZ5+4/HiKKScczOR1Q=;
-	b=AEnuexjoUELiAdg84Wu+0hF5hf3Jsl/ctkEZrPdCVrDMVZqOPsg1DfB7VG4HOk/uZ9
-	9sWOgARYznDctrVlXC+cwZOgrp+9v0NcFFsB5rUsPUYtmFYMWHfj2UZBatSrdZkoIRlL
-	6SHbmvFyZJ88ZBsgNQfdfnrv4tB0ccIO3+rfAI2og1FhnLYiM2zzJ66eOssz3UGgMFqw
-	SIkXPxW8EnuvorJLPeJuudfpIMKoEG2WTTHrBSa/SxLAL0Rx31NybhFbzjkDSIlk06TR
-	nPPQdxwSXScSh/i94/xUPmK9yVdMS2GYgeidHeV/ldNvURZXUqTPlaOYUiYp5M6RNxt4
-	e64w==
-X-Gm-Message-State: ALoCoQlpPwV5KFcQ797cBhjMkClklOcXVlggRjcVsBfHTTmUM+m0v1L44VgipY9hGYqTv6nWwHg/
-X-Received: by 10.194.5.35 with SMTP id p3mr1213425wjp.47.1379678314079;
-	Fri, 20 Sep 2013 04:58:34 -0700 (PDT)
-Received: from [172.24.63.121] ([94.103.137.126])
-	by mx.google.com with ESMTPSA id e1sm3935720wij.6.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 20 Sep 2013 04:58:33 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
-From: =?iso-8859-1?Q?Jean-Charles_JC_Verdi=E9?= <jc@vtkloud.com>
-In-Reply-To: <20130919125451.GG18414@jama>
-Date: Fri, 20 Sep 2013 13:58:32 +0200
-Message-Id: <94A739DE-DF19-4615-9C74-3045D098F5F2@vtkloud.com>
-References: <20130919120514.GL7313@jama> <1379594661647.2d381edb@Nodemailer>
-	<20130919125451.GG18414@jama>
+	Fri, 20 Sep 2013 14:16:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=xw2e7T+L2IUMcdnO1Y8pBYxduzaGhaZT9X+US56N34M=;
+	b=awf5WDMtQKfC24wZ0omWuTq1fLCMkPRrU5J49iNK/vY4EvXyW8Dl6xQv9pqWhjflp4
+	OO1pTw9XpwUWDdeTIT5l74bgd6NKXsQn37EPUe5Eerz4lZB/0nxiN+GJ918tDwiJdtAf
+	5RSDVucptCqWSyNPdF4Tzh9vOjIyG8SClpVPThf7ZO6MFqPKMdCLotrzHG4cSWGS5vEG
+	JKUkVM8m6+GzEPLL+mGjtgraoim/nH/byCmfMvhZ8eIxBRaVD6NKJIxKMX/yf1bmEysa
+	bSjJ8o0MbOu57oUqWVc9AAWFPBzfbio4DSWJcLsajNB6NDeNUi93Rvi4iKM2kU/UHiqO
+	ma0g==
+X-Received: by 10.15.36.9 with SMTP id h9mr13639937eev.30.1379711813113;
+	Fri, 20 Sep 2013 14:16:53 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	i1sm22273092eeg.0.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 20 Sep 2013 14:16:52 -0700 (PDT)
+Date: Fri, 20 Sep 2013 23:18:31 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1510)
-Subject: Re: [meta-multimedia][PATCH] libao: add version 1.1.0
+Message-ID: <20130920211831.GK18414@jama>
+References: <1379509584-16503-1-git-send-email-s.stirtzel@googlemail.com>
+	<1379509584-16503-2-git-send-email-s.stirtzel@googlemail.com>
+MIME-Version: 1.0
+In-Reply-To: <1379509584-16503-2-git-send-email-s.stirtzel@googlemail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-oe][PATCH 2/3] utouch-frame: Add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,34 +46,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 11:58:33 -0000
+X-List-Received-Date: Fri, 20 Sep 2013 21:16:52 -0000
+X-Groupsio-MsgNum: 46269
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="M0YLxmUXciMpOLPE"
+Content-Disposition: inline
+
+--M0YLxmUXciMpOLPE
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-On 19Sep 2013, at 2:54 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> On Thu, Sep 19, 2013 at 05:44:22AM -0700, JC wrote:
->> Hi Martin
->>=20
->> There's a genuine email address isn't it enough :)? It's harder than =
-Facebook here ;)
->>=20
->> Anyway, I'll update it but I'd like to see more reviews before to =
-avoid doing a new patch just for that
+On Wed, Sep 18, 2013 at 03:06:23PM +0200, Samuel Stirtzel wrote:
+> used by utouch-mtview, a visual multitouch test application for X
 >=20
-> True, we cannot find you on facebook and linkedin without your full =
-name
-> :).
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> ---
+>  meta-oe/recipes-support/utouch/utouch-frame_git.bb |   15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/utouch/utouch-frame_git.bb
 >=20
-> Unfortunately I've noticed it only after pushing it to master, so you
-> don't need to resend, unless we agree to revert and reapply with full
-> name.
+> diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe=
+/recipes-support/utouch/utouch-frame_git.bb
+> new file mode 100644
+> index 0000000..83a4e25
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "Touch Frame Library"
+> +DESCRIPTION =3D "The frame library and tools are used to handle touch fr=
+ames, i.e., collections of tracked contacts. Bindings for mtdev and XI2.1."
+> +HOMEPAGE =3D "http://bitmath.org/code/evemu/"
+> +
+> +LICENSE =3D "GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2f31b266d3440dd7ee50f92cf67d8=
+e6c"
+> +
+> +inherit autotools
+> +
+> +SRC_URI =3D "git://bitmath.org/git/frame.git;protocol=3Dhttp"
+> +SRCREV =3D "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
+> +
+> +PV =3D "1.1.2+git${SRCPV}"
+> +
+> +S =3D "${WORKDIR}/git/"
 
-AFAIC I don't really care, so if that's not a problem for you, let's =
-keep it this way :)
+Missing dependency on utouch-evemu
 
-Regards,
-Jay
+| configure:12204: error: Package requirements (utouch-evemu >=3D 1.0.5) we=
+re not met:
+| No package 'utouch-evemu' found
 
 
+> --=20
+> 1.7.9.5
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--M0YLxmUXciMpOLPE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.21 (GNU/Linux)
+
+iEYEARECAAYFAlI8u6cACgkQN1Ujt2V2gBzBMACgqvxdVVXPcm0Ngqe8om9NE5Fp
+wqAAn234z3oJ+1AO13v6RZtc/PRqaY3D
+=xC7K
+-----END PGP SIGNATURE-----
+
+--M0YLxmUXciMpOLPE--
