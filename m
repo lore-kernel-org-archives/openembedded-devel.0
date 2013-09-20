@@ -1,36 +1,23 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E2656BEA6
+Return-Path: <amy.fong@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F265360EE1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 00:26:51 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id hj3so8743061wib.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 17:26:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=3mnUyszz6IYiX7ikWX1er+Z+Pv3tIGKRttj7eY5VdTc=;
-	b=ATTKzrvfm/27u3jnBz7jwB2blcPsAckWI//6Wh6cIL/+zFjLvsHiFp0DN2bcy1hTp4
-	wtmmjDRoP5HiuR+CReauhhdta1jLOd9eMZuVbLXqVkoK1w/pSw69b0sRoA8RbOqq7rxY
-	3B5CK0Tt3SWnEhE7dTSNwZ/H15WSRku6Z3aIbWaFkbELzmxJxBbAvFofvKilG+AZntNT
-	OdvHZ2wHlILnohMlrO86/NWBRRDVydp6SgV8bLfwGt8mnsCDE52mJnI9ocFeKgpEoSqW
-	fgtVFsrqE8flzwbpUDoV9vyhzDdO+k+MEjVWWaBHLoAU59CwwYV1AATg2Bkjeyha9jDX
-	y0Tw==
-X-Gm-Message-State: ALoCoQlsf9I2YDm1LOcQR8YQQ8DthwFk74vXEwEV9aWBvn8iI4/vImMVZCAPHZ3UG965gtSxSv4d
-MIME-Version: 1.0
-X-Received: by 10.180.100.202 with SMTP id fa10mr567857wib.8.1379636812767;
-	Thu, 19 Sep 2013 17:26:52 -0700 (PDT)
-Received: by 10.194.20.195 with HTTP; Thu, 19 Sep 2013 17:26:52 -0700 (PDT)
-In-Reply-To: <1379617754-6342-3-git-send-email-eu@felipetonello.com>
-References: <1379617754-6342-1-git-send-email-eu@felipetonello.com>
-	<1379617754-6342-3-git-send-email-eu@felipetonello.com>
-Date: Thu, 19 Sep 2013 17:26:52 -0700
-Message-ID: <CAGrhNMz51bGuRHJ5bCZ=0ECoUmxQok9uri9YhdMr1oJxLzu5LQ@mail.gmail.com>
-From: Felipe Tonello <eu@felipetonello.com>
+	Fri, 20 Sep 2013 02:35:28 +0000 (UTC)
+Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
+	[128.224.146.164])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r8K2ZTX0023060
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
+	Thu, 19 Sep 2013 19:35:30 -0700 (PDT)
+Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
+	4.80) (envelope-from <amy.fong@windriver.com>)
+	id 1VMqZ7-0007Qx-BJ; Thu, 19 Sep 2013 22:35:29 -0400
+Date: Thu, 19 Sep 2013 22:35:29 -0400
+From: Amy Fong <amy.fong@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] gypsy: Added init script
+Message-ID: <20130920023529.GA28484@windriver.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: distutils: Replacing path to native path only to be done to non-native python packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 00:26:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 20 Sep 2013 02:35:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Sep 19, 2013 at 12:09 PM, Felipe F. Tonello
-<eu@felipetonello.com> wrote:
-> From: "Felipe F. Tonello" <eu@felipetonello.com>
->
-> Added a modified version of the example init script, gypsy-example-initscript,
-> from the gypsy repository to be compatible with OE based distros.
->
+distutils: Replacing path to native path only to be done to non-native python packages
 
-Actually I just realized that the daemon is called by dbus when
-clients connect to it. So I believe this patch is not necessary,
-unless we separate in a different package.
+distutils: Replacing path to native python by path to python in the
+image to support python packages with console-script setup resulted in
+a "bad interpreter" error message because coreutils-native is not
+a specified dependency of a number of native python packages.
 
-Felipe Tonello
+We modify the change to apply specifically to non-native packages.
+
+Signed-off-by: Amy Fong <Amy.Fong@windriver.com>
+---
+ meta/classes/distutils.bbclass | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/meta/classes/distutils.bbclass b/meta/classes/distutils.bbclass
+index 60cf9ee..fbe0ec8 100644
+--- a/meta/classes/distutils.bbclass
++++ b/meta/classes/distutils.bbclass
+@@ -47,14 +47,18 @@ distutils_do_install() {
+ 
+         if test -e ${D}${bindir} ; then	
+             for i in ${D}${bindir}/* ; do \
+-                sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
++                if [ ${PN} != "${BPN}-native" ]; then
++                	sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
++		fi
+                 sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
+             done
+         fi
+ 
+         if test -e ${D}${sbindir}; then
+             for i in ${D}${sbindir}/* ; do \
+-                sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
++                if [ ${PN} != "${BPN}-native" ]; then
++                	sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
++		fi
+                 sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
+             done
+         fi
+-- 
+1.7.12.4
+
 
