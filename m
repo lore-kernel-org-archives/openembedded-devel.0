@@ -1,23 +1,36 @@
-Return-Path: <amy.fong@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F265360EE1
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-qc0-f169.google.com (mail-qc0-f169.google.com
+	[209.85.216.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 07A286BD2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 02:35:28 +0000 (UTC)
-Received: from yow-afong-lx2.ottawa.windriver.com (yow-afong-lx2.wrs.com
-	[128.224.146.164])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r8K2ZTX0023060
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
-	Thu, 19 Sep 2013 19:35:30 -0700 (PDT)
-Received: from afong by yow-afong-lx2.ottawa.windriver.com with local (Exim
-	4.80) (envelope-from <amy.fong@windriver.com>)
-	id 1VMqZ7-0007Qx-BJ; Thu, 19 Sep 2013 22:35:29 -0400
-Date: Thu, 19 Sep 2013 22:35:29 -0400
-From: Amy Fong <amy.fong@windriver.com>
+	Fri, 20 Sep 2013 03:16:38 +0000 (UTC)
+Received: by mail-qc0-f169.google.com with SMTP id c9so6220607qcz.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Sep 2013 20:16:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=/N/Y1ociah3DlNcbRn6/J0BXtMQSMoy8OdK2QxkTSdA=;
+	b=afnk56/dq9afkZRcs7PBCTuyBGjm9S5jeOu/S01ebpShouomqqL0Kcfc6WV/vU0Rl+
+	30tzbgIrUMsiHuMca+xodYPqRLGCeI4TkjhFSIfxa//hALMifj9X5irOPKDR1ZVs9nWf
+	BHJMxrXt0ucoQdG1z5Z94YlL0v5KLEr82/SkTKjP44Mk2ik/Um9iiSn4ssppKOZivygl
+	vcCTwReaiS4ruWp+CCyWbosxt2s8cnkp2IUl9H7yCisS/bWfGr7dqujDeIBC8m3hAhjj
+	Rmxr2zhWAyF7AUjX2+EwrJnK99lC4FPgyJNVLmC3w5C4esxJHzfvzKGlBcyOAlibF02C
+	zxDg==
+X-Gm-Message-State: ALoCoQlYVUwhLobT6rCetS57NovtSlUKOsk4T4X8WoRYWsbkRcmQf0CI5/cCZpZButxGgvUbmVZU
+X-Received: by 10.49.47.84 with SMTP id b20mr1669613qen.83.1379647000426;
+	Thu, 19 Sep 2013 20:16:40 -0700 (PDT)
+Received: from suse64-i7.site (dsl-67-55-9-50.acanac.net. [67.55.9.50])
+	by mx.google.com with ESMTPSA id a7sm15721328qew.2.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 19 Sep 2013 20:16:39 -0700 (PDT)
+From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130920023529.GA28484@windriver.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: distutils: Replacing path to native path only to be done to non-native python packages
+Date: Thu, 19 Sep 2013 23:16:06 -0400
+Message-Id: <1379646966-3513-1-git-send-email-trevor.woerner@linaro.org>
+X-Mailer: git-send-email 1.8.4.rc3.1.gc1ebd90
+Cc: patches@linaro.org
+Subject: [meta-qt5][PATCH] devshell: include PATH for qt5 native applications
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,50 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 02:35:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 20 Sep 2013 03:16:39 -0000
 
-distutils: Replacing path to native path only to be done to non-native python packages
+If you perform a "bitbake -c devshell <some qt5 recipe>" and then try "which
+qmake" in the devshell, you'll find your host's qmake is found (which is most
+likely to be based on qt4) rather than the one that is built as part of
+meta-qt5. The reason for this is that the qt5 items are installed to
+${STAGING_DIR_NATIVE}/usr/bin/qt5 and not ${STAGING_DIR_NATIVE}/usr/bin. The
+reason for the extra "qt5" directory at the end is so that qt4-based items
+that are built in OE can live side-by-side with things from meta-qt5 without
+interfering with each other.
 
-distutils: Replacing path to native python by path to python in the
-image to support python packages with console-script setup resulted in
-a "bad interpreter" error message because coreutils-native is not
-a specified dependency of a number of native python packages.
+This patch prepends ${STAGING_DIR_NATIVE}/usr/bin/qt5 to the devshell's PATH
+so that the qt5-based native tools which are built as part of meta-qt5 will be
+found before the host's.
 
-We modify the change to apply specifically to non-native packages.
-
-Signed-off-by: Amy Fong <Amy.Fong@windriver.com>
+Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
 ---
- meta/classes/distutils.bbclass | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ recipes-qt/qt5/qt5.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta/classes/distutils.bbclass b/meta/classes/distutils.bbclass
-index 60cf9ee..fbe0ec8 100644
---- a/meta/classes/distutils.bbclass
-+++ b/meta/classes/distutils.bbclass
-@@ -47,14 +47,18 @@ distutils_do_install() {
- 
-         if test -e ${D}${bindir} ; then	
-             for i in ${D}${bindir}/* ; do \
--                sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
-+                if [ ${PN} != "${BPN}-native" ]; then
-+                	sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
-+		fi
-                 sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
-             done
-         fi
- 
-         if test -e ${D}${sbindir}; then
-             for i in ${D}${sbindir}/* ; do \
--                sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
-+                if [ ${PN} != "${BPN}-native" ]; then
-+                	sed -i -e s:${STAGING_BINDIR_NATIVE}/python-native/python:${bindir}/env\ python:g $i
-+		fi
-                 sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
-             done
-         fi
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 80acb73..7c58b18 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -126,3 +126,5 @@ FILES_${PN}-examples-staticdev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*.a \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*.a \
+ "
++
++PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
 -- 
-1.7.12.4
+1.8.4.rc3.1.gc1ebd90
 
 
