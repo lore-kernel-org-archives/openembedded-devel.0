@@ -1,36 +1,40 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-qc0-f169.google.com (mail-qc0-f169.google.com
-	[209.85.216.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 07A286BD2B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 03:16:38 +0000 (UTC)
-Received: by mail-qc0-f169.google.com with SMTP id c9so6220607qcz.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2013 20:16:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=/N/Y1ociah3DlNcbRn6/J0BXtMQSMoy8OdK2QxkTSdA=;
-	b=afnk56/dq9afkZRcs7PBCTuyBGjm9S5jeOu/S01ebpShouomqqL0Kcfc6WV/vU0Rl+
-	30tzbgIrUMsiHuMca+xodYPqRLGCeI4TkjhFSIfxa//hALMifj9X5irOPKDR1ZVs9nWf
-	BHJMxrXt0ucoQdG1z5Z94YlL0v5KLEr82/SkTKjP44Mk2ik/Um9iiSn4ssppKOZivygl
-	vcCTwReaiS4ruWp+CCyWbosxt2s8cnkp2IUl9H7yCisS/bWfGr7dqujDeIBC8m3hAhjj
-	Rmxr2zhWAyF7AUjX2+EwrJnK99lC4FPgyJNVLmC3w5C4esxJHzfvzKGlBcyOAlibF02C
-	zxDg==
-X-Gm-Message-State: ALoCoQlYVUwhLobT6rCetS57NovtSlUKOsk4T4X8WoRYWsbkRcmQf0CI5/cCZpZButxGgvUbmVZU
-X-Received: by 10.49.47.84 with SMTP id b20mr1669613qen.83.1379647000426;
-	Thu, 19 Sep 2013 20:16:40 -0700 (PDT)
-Received: from suse64-i7.site (dsl-67-55-9-50.acanac.net. [67.55.9.50])
-	by mx.google.com with ESMTPSA id a7sm15721328qew.2.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Sep 2013 20:16:39 -0700 (PDT)
-From: Trevor Woerner <trevor.woerner@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Sep 2013 23:16:06 -0400
-Message-Id: <1379646966-3513-1-git-send-email-trevor.woerner@linaro.org>
-X-Mailer: git-send-email 1.8.4.rc3.1.gc1ebd90
-Cc: patches@linaro.org
-Subject: [meta-qt5][PATCH] devshell: include PATH for qt5 native applications
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id DF2FD60EE1;
+	Fri, 20 Sep 2013 04:11:50 +0000 (UTC)
+Received: by mail-pd0-f176.google.com with SMTP id q10so9146964pdj.7
+	for <multiple recipients>; Thu, 19 Sep 2013 21:11:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=TUj71AfOEN6kDBeugM7xwssebwCreR7Dznaba4zlhAg=;
+	b=NMJ85nLSpFAS3OJr79WsmJetYHr+LvzOhGPeIHW37ChbRJ9fHCHvAdYfeJalV4Mc1s
+	DGNOF1uGajaIbpp9LsqJtONKSWLifpU+HY7ViPYEtX/ka02kGia3JWrKIVxSlBO8exJD
+	2nigdCTqHCxZnYiCfwvpbJfwDu/XtOhdZ0a3u1gK3tWzh5MOp2QgsnMAFQCOIUYXYp0/
+	GhAjieJK9r7kj4hvpEEDsAePxrVBy4IzFrGGkp5oALYVFAlR4DDmL1lhZUA3qOk/wqOd
+	PfPjGlp2Ruqf1T6YIxuFsyNOGDDNUown/dScXdthBfBEuRz2dIklNYjOED8vfSFbt+nl
+	mNeA==
+X-Received: by 10.66.141.39 with SMTP id rl7mr6584938pab.46.1379650312567;
+	Thu, 19 Sep 2013 21:11:52 -0700 (PDT)
+Received: from [192.168.0.104] (99-57-140-209.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.209])
+	by mx.google.com with ESMTPSA id yo2sm15951287pab.8.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 19 Sep 2013 21:11:52 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <20130919120202.GK7313@jama>
+Date: Thu, 19 Sep 2013 21:11:50 -0700
+Message-Id: <19D9595C-FE9E-4E24-B249-D32F62F25EA2@gmail.com>
+References: <CAMKF1sonakYiB++QeeeXKVztx+7CKW3zn=ndn=kP+kSVmqu3Qw@mail.gmail.com>
+	<20130919120202.GK7313@jama>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1510)
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] patchwork updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,37 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 03:16:39 -0000
+X-List-Received-Date: Fri, 20 Sep 2013 04:11:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-If you perform a "bitbake -c devshell <some qt5 recipe>" and then try "which
-qmake" in the devshell, you'll find your host's qmake is found (which is most
-likely to be based on qt4) rather than the one that is built as part of
-meta-qt5. The reason for this is that the qt5 items are installed to
-${STAGING_DIR_NATIVE}/usr/bin/qt5 and not ${STAGING_DIR_NATIVE}/usr/bin. The
-reason for the extra "qt5" directory at the end is so that qt4-based items
-that are built in OE can live side-by-side with things from meta-qt5 without
-interfering with each other.
 
-This patch prepends ${STAGING_DIR_NATIVE}/usr/bin/qt5 to the devshell's PATH
-so that the qt5-based native tools which are built as part of meta-qt5 will be
-found before the host's.
+On Sep 19, 2013, at 5:02 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
----
- recipes-qt/qt5/qt5.inc | 2 ++
- 1 file changed, 2 insertions(+)
+> On Sun, Sep 15, 2013 at 12:32:44AM -0700, Khem Raj wrote:
+>> Hi All,
+>>=20
+>> The patchwork has been updated to latest. Please keep an eye if you
+>> see something non working let me know immediately.
+>=20
+> Hi,
+>=20
+> something is wrong,
+>=20
+> http://patchwork.openembedded.org/user/bundles/
+>=20
+> returns 502 Bad Gateway for me and I cannot access individual bundles,
+> which is very bad, because all oe-devel patches are separated into
+> bundles based on layer.
 
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index 80acb73..7c58b18 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -126,3 +126,5 @@ FILES_${PN}-examples-staticdev = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*.a \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*.a \
- "
-+
-+PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
--- 
-1.8.4.rc3.1.gc1ebd90
+OK. I have created a local fix for it and also started a discussion on =
+patchwork ml
+bundles should be visible now. Let me know if there are further issues.
+
+>=20
+> Regards,
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
