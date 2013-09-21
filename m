@@ -1,33 +1,22 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E472B6C008
+Return-Path: <superandy@localhost.localdomain>
+Received: from localhost.localdomain (p5B0A2F3E.dip0.t-ipconnect.de
+	[91.10.47.62])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CD516C7AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2013 09:48:17 +0000 (UTC)
-Received: by mail-vc0-f178.google.com with SMTP id ha12so1044400vcb.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2013 02:48:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=CovPqQdFo8BHheVG1gJifMohnL++rWp54hmsFjUT6j4=;
-	b=BwgXa84+Htrumx36b6gJaNi4LPewydJON4C3RZma7U4fC0RmFz3DcBl48OWqpMl7jE
-	2ulVx1nvZhiIXuexJFjAREpbKb5d1yIVpu5ZYi497Df1BxJIdr4//dysO73BbSSKJeKU
-	z7gHVcdtrE12hrR+Tqt/+fL7ZEWixC/cvNr8v+OM5B0oYp49cjeWIT93wyOgiEdWgQow
-	+E2698+3sdyi3xTmd8LjCL+UrUI0IObIHs8Sxzyzo6u+NXittsmjH8aBIXHixUlEHwNK
-	sIRds1L7jFd1i7JpY0Q2JwDDcYvIJQcXQhYQ/F37Yo21295eUWGUt4+ufHNsY0CNG1Rg
-	9AmA==
+	Sat, 21 Sep 2013 10:41:47 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by localhost.localdomain (8.14.7/8.14.7) with ESMTP id r8LAfheO013426; 
+	Sat, 21 Sep 2013 12:41:43 +0200
+Received: (from superandy@localhost)
+	by localhost.localdomain (8.14.7/8.14.7/Submit) id r8LAffmx013425;
+	Sat, 21 Sep 2013 12:41:41 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 21 Sep 2013 12:41:31 +0200
+Message-Id: <1379760101-13380-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Received: by 10.52.161.231 with SMTP id xv7mr9219478vdb.1.1379756898995;
-	Sat, 21 Sep 2013 02:48:18 -0700 (PDT)
-Received: by 10.52.236.129 with HTTP; Sat, 21 Sep 2013 02:48:18 -0700 (PDT)
-Date: Sat, 21 Sep 2013 11:48:18 +0200
-Message-ID: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>, Khem Raj <raj.khem@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Angstrom mailserver down?
+Subject: [meta-oe/meta-xfce 00/10] new recipes / updates / fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +30,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Sep 2013 09:48:18 -0000
+X-List-Received-Date: Sat, 21 Sep 2013 10:41:48 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+The following changes since commit a83a588b4d096e89909e537b765d8988b4ca64b0:
 
-yesterday I sent two patches to angstrom-devel. Today I get:
+  libao: add version 1.1.0 (2013-09-19 13:56:58 +0200)
 
-This is an automatically generated Delivery Status Notification
+are available in the git repository at:
 
-THIS IS A WARNING MESSAGE ONLY.
+  git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
 
-YOU DO NOT NEED TO RESEND YOUR MESSAGE.
+for you to fetch changes up to 65ec21e2e59f2ffbb6c67d4da4d78cac7d73c7cf:
 
-Delivery to the following recipient has been delayed:
+  packagegroup-xfce-extended: add xfce4-taskmanager and xfce4-notes-plugin (2013-09-21 12:27:18 +0200)
 
-     angstrom-distro-devel@linuxtogo.org
+----------------------------------------------------------------
+Andreas Müller (10):
+      libxfce4ui: avoid dragging in gtk3
+      xfce4-vala: update to 4.10.3
+      xfce4-cpufreq-plugin: update to 1.1.0
+      sound-theme-freedesktop: initial add 0.8.0
+      libcanberra avoid gtk3 dragged in at gtk2 environments
+      libcanberra: move libtool librarties for modules to dev package
+      xfce4-settings: add PACKAGECONFIG for sound-settings
+      xfce4-taskmanager: inital add git-version
+      xfce4-notes-plugin: initial add 1.7.7
+      packagegroup-xfce-extended: add xfce4-taskmanager and xfce4-notes-plugin
 
-Message will be retried for 2 more day(s)
+ meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb                                         |  13 ++++++
+ meta-oe/recipes-support/libcanberra/files/0001-build-gtk-and-gtk3-version-for-canberra_gtk_play.patch          |  92 +++++++++++++++++++++++++++++++++++++++++
+ meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb                                                        |  15 ++++---
+ meta-xfce/recipes-apps/xfce4-taskmanager/files/0001-do-not-build-documantation-Makefile-has-no-install-t.patch |  29 +++++++++++++
+ meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_git.bb                                              |  22 ++++++++++
+ meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch                                                |  39 -----------------
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb                                                           |  17 --------
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb                                                           |  14 +++++++
+ meta-xfce/recipes-panel-plugins/cpufreq/files/port-to-libxfce4ui.patch                                         | 138 -------------------------------------------------------------
+ meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.0.0.bb                                          |  11 -----
+ meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.0.bb                                          |  15 +++++++
+ meta-xfce/recipes-panel-plugins/notes/files/0001-Bump-dependency-to-Xfce-4.10.patch                            | 128 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-xfce/recipes-panel-plugins/notes/files/0002-main-status-icon.c-remove-deprecated-g_type_init.patch        |  32 ++++++++++++++
+ meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.7.7.bb                                              |  20 +++++++++
+ meta-xfce/recipes-xfce/libxfce4ui/files/0002-configure.ac.in-remove-optional-gtk3-support.patch                |  37 +++++++++++++++++
+ meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb                                                         |   1 +
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb                                             |   2 +
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb                                                    |   8 +++-
+ 18 files changed, 421 insertions(+), 212 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+ create mode 100644 meta-oe/recipes-support/libcanberra/files/0001-build-gtk-and-gtk3-version-for-canberra_gtk_play.patch
+ create mode 100644 meta-xfce/recipes-apps/xfce4-taskmanager/files/0001-do-not-build-documantation-Makefile-has-no-install-t.patch
+ create mode 100644 meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_git.bb
+ delete mode 100644 meta-xfce/recipes-bindings/vala/files/0001-align-vapi-dir.patch
+ delete mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.2.bb
+ create mode 100644 meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+ delete mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/files/port-to-libxfce4ui.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.0.0.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.0.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/notes/files/0001-Bump-dependency-to-Xfce-4.10.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/notes/files/0002-main-status-icon.c-remove-deprecated-g_type_init.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.7.7.bb
+ create mode 100644 meta-xfce/recipes-xfce/libxfce4ui/files/0002-configure.ac.in-remove-optional-gtk3-support.patch
 
-Technical details of temporary failure:
-The recipient server did not accept our requests to connect. Learn
-more at http://support.google.com/mail/bin/answer.py?answer=7720
-[(10) mail.linuxtogo.org. [188.40.83.200]:25: Connection refused]
+-- 
+1.8.3.1
 
-The mail was sent from a newly installed system so I am not quite sure
-if it is a problem on my side or on mail server side. Could somebody
-please check?
-
-Andreas
 
