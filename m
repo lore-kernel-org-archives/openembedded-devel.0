@@ -1,24 +1,26 @@
-Return-Path: <superandy@localhost.localdomain>
-Received: from localhost.localdomain (p5B0A2F3E.dip0.t-ipconnect.de
-	[91.10.47.62])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AA576CA6B
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 6B7C060EDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2013 10:42:14 +0000 (UTC)
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost.localdomain (8.14.7/8.14.7) with ESMTP id r8LAgCpX013466; 
-	Sat, 21 Sep 2013 12:42:12 +0200
-Received: (from superandy@localhost)
-	by localhost.localdomain (8.14.7/8.14.7/Submit) id r8LAgB4X013465;
-	Sat, 21 Sep 2013 12:42:11 +0200
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Sep 2013 12:41:41 +0200
-Message-Id: <1379760101-13380-11-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1379760101-13380-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1379760101-13380-1-git-send-email-schnitzeltony@googlemail.com>
+	Sat, 21 Sep 2013 12:37:42 +0000 (UTC)
+Received: (qmail 24298 invoked by uid 1003); 21 Sep 2013 12:37:43 -0000
+Received: from unknown (HELO ?192.168.1.103?)
+	(philip@opensdr.com@71.171.32.225)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	21 Sep 2013 12:37:43 -0000
+Message-ID: <523D9316.6000107@balister.org>
+Date: Sat, 21 Sep 2013 08:37:42 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-Subject: [meta-oe/meta-xfce 10/10] packagegroup-xfce-extended: add xfce4-taskmanager and xfce4-notes-plugin
+To: openembedded-devel@lists.openembedded.org
+References: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
+In-Reply-To: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
+X-Enigmail-Version: 1.5.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: Angstrom mailserver down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Sep 2013 10:42:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 21 Sep 2013 12:37:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas MÃ¼ller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Linuxtogo does mail for Angstrom and it has been having issues this week.
 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 059d8c9..30fd138 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -43,6 +43,7 @@ RRECOMMENDS_${PN} = " \
-     xfce4-brightness-plugin \
-     xfce4-closebutton-plugin \
-     xfce4-equake-plugin \
-+    xfce4-notes-plugin \
-     \
-     thunar-media-tags-plugin \
-     thunar-archive-plugin \
-@@ -52,4 +53,5 @@ RRECOMMENDS_${PN} = " \
-     xfce4-power-manager \
-     xfce4-mixer \
-     ristretto \
-+    xfce4-taskmanager \
- "
--- 
-1.8.3.1
+Philip
 
+On 09/21/2013 05:48 AM, Andreas Müller wrote:
+> Hi,
+> 
+> yesterday I sent two patches to angstrom-devel. Today I get:
+> 
+> This is an automatically generated Delivery Status Notification
+> 
+> THIS IS A WARNING MESSAGE ONLY.
+> 
+> YOU DO NOT NEED TO RESEND YOUR MESSAGE.
+> 
+> Delivery to the following recipient has been delayed:
+> 
+>      angstrom-distro-devel@linuxtogo.org
+> 
+> Message will be retried for 2 more day(s)
+> 
+> Technical details of temporary failure:
+> The recipient server did not accept our requests to connect. Learn
+> more at http://support.google.com/mail/bin/answer.py?answer=7720
+> [(10) mail.linuxtogo.org. [188.40.83.200]:25: Connection refused]
+> 
+> The mail was sent from a newly installed system so I am not quite sure
+> if it is a problem on my side or on mail server side. Could somebody
+> please check?
+> 
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
 
