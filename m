@@ -1,38 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 337916C9FD
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id E472B6C008
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 21:16:52 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id d41so516299eek.36
+	Sat, 21 Sep 2013 09:48:17 +0000 (UTC)
+Received: by mail-vc0-f178.google.com with SMTP id ha12so1044400vcb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2013 14:16:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=xw2e7T+L2IUMcdnO1Y8pBYxduzaGhaZT9X+US56N34M=;
-	b=awf5WDMtQKfC24wZ0omWuTq1fLCMkPRrU5J49iNK/vY4EvXyW8Dl6xQv9pqWhjflp4
-	OO1pTw9XpwUWDdeTIT5l74bgd6NKXsQn37EPUe5Eerz4lZB/0nxiN+GJ918tDwiJdtAf
-	5RSDVucptCqWSyNPdF4Tzh9vOjIyG8SClpVPThf7ZO6MFqPKMdCLotrzHG4cSWGS5vEG
-	JKUkVM8m6+GzEPLL+mGjtgraoim/nH/byCmfMvhZ8eIxBRaVD6NKJIxKMX/yf1bmEysa
-	bSjJ8o0MbOu57oUqWVc9AAWFPBzfbio4DSWJcLsajNB6NDeNUi93Rvi4iKM2kU/UHiqO
-	ma0g==
-X-Received: by 10.15.36.9 with SMTP id h9mr13639937eev.30.1379711813113;
-	Fri, 20 Sep 2013 14:16:53 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	i1sm22273092eeg.0.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 20 Sep 2013 14:16:52 -0700 (PDT)
-Date: Fri, 20 Sep 2013 23:18:31 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130920211831.GK18414@jama>
-References: <1379509584-16503-1-git-send-email-s.stirtzel@googlemail.com>
-	<1379509584-16503-2-git-send-email-s.stirtzel@googlemail.com>
+	Sat, 21 Sep 2013 02:48:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=CovPqQdFo8BHheVG1gJifMohnL++rWp54hmsFjUT6j4=;
+	b=BwgXa84+Htrumx36b6gJaNi4LPewydJON4C3RZma7U4fC0RmFz3DcBl48OWqpMl7jE
+	2ulVx1nvZhiIXuexJFjAREpbKb5d1yIVpu5ZYi497Df1BxJIdr4//dysO73BbSSKJeKU
+	z7gHVcdtrE12hrR+Tqt/+fL7ZEWixC/cvNr8v+OM5B0oYp49cjeWIT93wyOgiEdWgQow
+	+E2698+3sdyi3xTmd8LjCL+UrUI0IObIHs8Sxzyzo6u+NXittsmjH8aBIXHixUlEHwNK
+	sIRds1L7jFd1i7JpY0Q2JwDDcYvIJQcXQhYQ/F37Yo21295eUWGUt4+ufHNsY0CNG1Rg
+	9AmA==
 MIME-Version: 1.0
-In-Reply-To: <1379509584-16503-2-git-send-email-s.stirtzel@googlemail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH 2/3] utouch-frame: Add initial recipe
+X-Received: by 10.52.161.231 with SMTP id xv7mr9219478vdb.1.1379756898995;
+	Sat, 21 Sep 2013 02:48:18 -0700 (PDT)
+Received: by 10.52.236.129 with HTTP; Sat, 21 Sep 2013 02:48:18 -0700 (PDT)
+Date: Sat, 21 Sep 2013 11:48:18 +0200
+Message-ID: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>, Khem Raj <raj.khem@gmail.com>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Angstrom mailserver down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,79 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 21:16:52 -0000
-X-Groupsio-MsgNum: 46269
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="M0YLxmUXciMpOLPE"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 21 Sep 2013 09:48:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
---M0YLxmUXciMpOLPE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Wed, Sep 18, 2013 at 03:06:23PM +0200, Samuel Stirtzel wrote:
-> used by utouch-mtview, a visual multitouch test application for X
->=20
-> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
-> ---
->  meta-oe/recipes-support/utouch/utouch-frame_git.bb |   15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-oe/recipes-support/utouch/utouch-frame_git.bb
->=20
-> diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe=
-/recipes-support/utouch/utouch-frame_git.bb
-> new file mode 100644
-> index 0000000..83a4e25
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY =3D "Touch Frame Library"
-> +DESCRIPTION =3D "The frame library and tools are used to handle touch fr=
-ames, i.e., collections of tracked contacts. Bindings for mtdev and XI2.1."
-> +HOMEPAGE =3D "http://bitmath.org/code/evemu/"
-> +
-> +LICENSE =3D "GPLv3"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2f31b266d3440dd7ee50f92cf67d8=
-e6c"
-> +
-> +inherit autotools
-> +
-> +SRC_URI =3D "git://bitmath.org/git/frame.git;protocol=3Dhttp"
-> +SRCREV =3D "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
-> +
-> +PV =3D "1.1.2+git${SRCPV}"
-> +
-> +S =3D "${WORKDIR}/git/"
+yesterday I sent two patches to angstrom-devel. Today I get:
 
-Missing dependency on utouch-evemu
+This is an automatically generated Delivery Status Notification
 
-| configure:12204: error: Package requirements (utouch-evemu >=3D 1.0.5) we=
-re not met:
-| No package 'utouch-evemu' found
+THIS IS A WARNING MESSAGE ONLY.
 
+YOU DO NOT NEED TO RESEND YOUR MESSAGE.
 
-> --=20
-> 1.7.9.5
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Delivery to the following recipient has been delayed:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+     angstrom-distro-devel@linuxtogo.org
 
---M0YLxmUXciMpOLPE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Message will be retried for 2 more day(s)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
+Technical details of temporary failure:
+The recipient server did not accept our requests to connect. Learn
+more at http://support.google.com/mail/bin/answer.py?answer=7720
+[(10) mail.linuxtogo.org. [188.40.83.200]:25: Connection refused]
 
-iEYEARECAAYFAlI8u6cACgkQN1Ujt2V2gBzBMACgqvxdVVXPcm0Ngqe8om9NE5Fp
-wqAAn234z3oJ+1AO13v6RZtc/PRqaY3D
-=xC7K
------END PGP SIGNATURE-----
+The mail was sent from a newly installed system so I am not quite sure
+if it is a problem on my side or on mail server side. Could somebody
+please check?
 
---M0YLxmUXciMpOLPE--
+Andreas
+
