@@ -1,26 +1,29 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 6B7C060EDA
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4188061585
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2013 12:37:42 +0000 (UTC)
-Received: (qmail 24298 invoked by uid 1003); 21 Sep 2013 12:37:43 -0000
-Received: from unknown (HELO ?192.168.1.103?)
-	(philip@opensdr.com@71.171.32.225)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	21 Sep 2013 12:37:43 -0000
-Message-ID: <523D9316.6000107@balister.org>
-Date: Sat, 21 Sep 2013 08:37:42 -0400
-From: Philip Balister <philip@balister.org>
+	Sun, 22 Sep 2013 01:28:41 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r8M1Sfu2017357
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sat, 21 Sep 2013 18:28:42 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 21 Sep 2013 18:28:41 -0700
+Message-ID: <523E47C8.4000505@windriver.com>
+Date: Sun, 22 Sep 2013 09:28:40 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
+	rv:17.0) Gecko/20130803 Thunderbird/17.0.8
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
-In-Reply-To: <CALbNGRQfsVkphr3RCB9taJ1B5V3B88ZYDexMT9zOZ7vdFNrydQ@mail.gmail.com>
-X-Enigmail-Version: 1.5.2
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: Angstrom mailserver down?
+To: Mike Looijmans <mike.looijmans@topic.nl>
+References: <1378978655-2635-1-git-send-email-mike.looijmans@topic.nl>
+	<52394067.6040205@topic.nl> <52396EB6.3010304@windriver.com>
+	<523A8BB9.5030009@topic.nl> <523C0592.5020701@topic.nl>
+In-Reply-To: <523C0592.5020701@topic.nl>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ntfs-3g-ntfsprogs does not rdepend on util-linux-mount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,45 +37,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Sep 2013 12:37:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 22 Sep 2013 01:28:42 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Linuxtogo does mail for Angstrom and it has been having issues this week.
+On 09/20/2013 04:21 PM, Mike Looijmans wrote:
+>
+> On 09/19/2013 07:29 AM, Mike Looijmans wrote:
+>> On 09/18/2013 11:13 AM, Hongxu Jia wrote:
+>>> Hi Mike,
+>>>
+>>> The reason why add util-linux-mount to RDEPENDS is the mount in
+>>> busybox doesn't support 'syntax of external mount helpers' very well.
+>>>
+>>> Which means you could directly invoke mount rather than
+>>> mount.ntfs/mount.exfat
+>>> to mount ntfs/exfat filesystem.
+>>
+>> I really don't have the faintest clue what you're referring to. Could
+>> you please explain?
+>>
+>> And my experience is exactly the opposite - When util-linux-mount gets
+>> installed, it breaks things. Busybox mount works just fine.
+>>
+>> If anything, it should rdepend on something like "virtual/mount" or so.
+>>
+>> It doesn't seem right for a package to enforce choices that the distro
+>> should make. Regardless of how broken busybox might be - that's the
+>> distro's problem, not something a filesystem driver should care about.
+>
+> Additionally:
+>
+> How about a compromise: Put util-linux-mount into the RRECOMMENDS 
+> instead of RDEPENDS. Then at least the distro can get rid of it using 
+> a BAD_RECOMMENDS or similar construct.
+>
+> Let me know, I'll post a patch.
+>
+Looks good to me.
 
-Philip
+Thanks,
+Hongxu
 
-On 09/21/2013 05:48 AM, Andreas Müller wrote:
-> Hi,
-> 
-> yesterday I sent two patches to angstrom-devel. Today I get:
-> 
-> This is an automatically generated Delivery Status Notification
-> 
-> THIS IS A WARNING MESSAGE ONLY.
-> 
-> YOU DO NOT NEED TO RESEND YOUR MESSAGE.
-> 
-> Delivery to the following recipient has been delayed:
-> 
->      angstrom-distro-devel@linuxtogo.org
-> 
-> Message will be retried for 2 more day(s)
-> 
-> Technical details of temporary failure:
-> The recipient server did not accept our requests to connect. Learn
-> more at http://support.google.com/mail/bin/answer.py?answer=7720
-> [(10) mail.linuxtogo.org. [188.40.83.200]:25: Connection refused]
-> 
-> The mail was sent from a newly installed system so I am not quite sure
-> if it is a problem on my side or on mail server side. Could somebody
-> please check?
-> 
-> Andreas
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
+> Mike.
+>
+>>> Thanks,
+>>> Hongxu
+>>>
+>>> On 09/18/2013 01:55 PM, Mike Looijmans wrote:
+>>>> Ping!
+>>>>
+>>>> Anything wrong with the patch? anyone reading this at all?
+>>>>
+>>>> BTW, the same problem is in the exfat recipe, so I was going to send a
+>>>> patch for that as well.
+>>>>
+>>>>
+>>>> On 09/12/2013 11:37 AM, Mike Looijmans wrote:
+>>>>> ntfs-3g-ntfsprogs has no runtime dependency on util-linux-mount, for
+>>>>> example busybox mount will also do just fine. It might be less useful
+>>>>> without any mount program, but that's not the same as depending on 
+>>>>> it.
+>>>>>
+>>>>> The dependency broke several images because util-linux-mount behaves
+>>>>> differently than busybox mount, resulting in failure to mount ext2/3
+>>>>> volumes and network shares on user's systems.
+>>>>>
+>>>>> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+>>>>> ---
+>>>>>   .../ntfs-3g-ntfsprogs_2013.1.13.bb                 | 3 ++-
+>>>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git
+>>>>> a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
+>>>>>
+>>>>>
+>>>>> b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
+>>>>>
+>>>>>
+>>>>>
+>>>>> index e084187..a34a791 100644
+>>>>> ---
+>>>>> a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
+>>>>>
+>>>>>
+>>>>>
+>>>>> +++
+>>>>> b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb 
+>>>>>
+>>>>>
+>>>>>
+>>>>> @@ -5,6 +5,7 @@ PROVIDES = "ntfsprogs ntfs-3g"
+>>>>>   LICENSE = "GPLv2 & LGPLv2"
+>>>>>   LIC_FILES_CHKSUM =
+>>>>> "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+>>>>> file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+>>>>> +PR = "r1"
+>>>>>
+>>>>>   SRC_URI = 
+>>>>> "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
+>>>>>   S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+>>>>> @@ -23,7 +24,7 @@ EXTRA_OEMAKE = "LDCONFIG=echo"
+>>>>>   PACKAGES =+ "ntfs-3g ntfsprogs libntfs-3g"
+>>>>>
+>>>>>   FILES_ntfs-3g = "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g*
+>>>>> ${base_sbindir}/mount.ntfs"
+>>>>> -RDEPENDS_ntfs-3g += "fuse util-linux-mount"
+>>>>> +RDEPENDS_ntfs-3g += "fuse"
+>>>>>
+>>>>>   FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
+>>>>>   FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
+>
+>
+>
+> Met vriendelijke groet / kind regards,
+>
+> Mike Looijmans
+>
+> TOPIC Embedded Systems
+> Eindhovenseweg 32-C, NL-5683 KH Best
+> Postbus 440, NL-5680 AK Best
+> Telefoon: (+31) â€“ (0)499 - 33.69.79
+> Telefax: (+31) - (0)499 - 33.69.70
+> E-mail: mike.looijmans@topic.nl
+> Website: www.topic.nl
+>
+> Dit e-mail bericht en de eventueel daarbij behorende bijlagen zijn 
+> uitsluitend bestemd voor de geadresseerde, zoals die blijkt uit het 
+> e-mail bericht en/of de bijlagen. Er kunnen gegevens met betrekking 
+> tot een derde instaan. Indien u als niet-geadresseerde dit bericht en 
+> de bijlagen ontvangt, terwijl u niet bevoegd of gemachtigd bent om dit 
+> bericht namens de geadresseerde te ontvangen, wordt u verzocht de 
+> afzender hierover direct te informeren en het e-mail bericht met de 
+> bijlagen te vernietigen. Ieder gebruik van de inhoud van het e-mail 
+> bericht, waaronder de daarbij behorende bijlagen, door een ander dan 
+> de geadresseerde is onrechtmatig jegens ons dan wel de eventueel in 
+> het e-mail bericht of de bijlagen voorkomende andere personen. TOPIC 
+> Embedded Systems is niet aansprakelijk voor enigerlei schade 
+> voortvloeiend uit het gebruik en/of acceptatie van dit e-mail bericht 
+> of de daarbij behorende bijlagen.
+>
+> The contents of this message, as well as any enclosures, are addressed 
+> personally to, and thus solely intended for the addressee. They may 
+> contain information regarding a third party. A recipient who is 
+> neither the addressee, nor empowered to receive this message on behalf 
+> of the addressee, is kindly requested to immediately inform the sender 
+> of receipt, and to destroy the message and the enclosures. Any use of 
+> the contents of this message and/or the enclosures by any other person 
+> than the addressee or person who is empowered to receive this message, 
+> is illegal towards the sender and/or the aforementioned third party. 
+> TOPIC Embedded Systems is not  liable for any damage as a result of 
+> the use and/or acceptance of this message and as well as any enclosures.
+
 
