@@ -1,23 +1,42 @@
-Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
-Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id 3383C610FF
+Return-Path: <joe@deserted.net>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B011610DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 09:43:03 +0000 (UTC)
-Received: from [192.168.101.5] (afplatform.bmw-carit.intra [192.168.101.5])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: lukas.bulwahn)
-	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 4F5D34007F
+	Mon, 23 Sep 2013 14:00:23 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id l10so1748810eei.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 10:39:42 +0200 (CEST)
-Message-ID: <52400D28.2070904@oss.bmw-carit.de>
-Date: Mon, 23 Sep 2013 11:43:04 +0200
-From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
-MIME-Version: 1.0
+	Mon, 23 Sep 2013 07:00:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=ChAKWMozetoRtzzlGPWsh7D2mAwep7GHl1dpeL5sv6U=;
+	b=FicqI3mshqF1ul+cRmr84PZ3MvbMTD3p8jBImBhVo4suHwpGRnyPESoAKjsjbZzMcU
+	ubtM6mBxxCPPEStURBpH1crS4b9FZ4LbvFIUXvAPQjYOnLA+352KjzUeMOd0KMuBVpfH
+	EXvrNB1Yqd8DAPangur9npaDij+xbFP+oxvHMw0wc9UQjh5JvUmAF22cz45gIyjXsm43
+	DhdtQM/B6HMYzdxbbgzH51r34wUDQg8nUiXKvffAzyM4m0ytcHZDuuswvDlF1mOUUPzL
+	3tVYDu1wyQcD9UJef3DXBH7REaSlX/ijh5Z0G9Z812iwM5nBooKqZ9Bls+Ld9w5NoTlO
+	DU3Q==
+X-Gm-Message-State: ALoCoQk7p6RC0YdSwJKWnqBmhPotkG3C9DcZqJdVuG1XJ4JNdQlaKPkSIUYQpe/22b4o4Zcpeqqw
+X-Received: by 10.15.54.199 with SMTP id t47mr4684490eew.46.1379944821842;
+	Mon, 23 Sep 2013 07:00:21 -0700 (PDT)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id d8sm42358846eeh.8.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 23 Sep 2013 07:00:21 -0700 (PDT)
+Date: Mon, 23 Sep 2013 10:00:15 -0400
+From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Permission to use OpenEmbedded Logo on ROS wiki
+Message-ID: <20130923135948.GD4025@deserted.net>
+References: <1379928661-9188-1-git-send-email-Qi.Chen@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1379928661-9188-1-git-send-email-Qi.Chen@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH] quagga: fix babeld_option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,47 +50,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2013 09:43:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Sep 2013 14:00:24 -0000
+X-Groupsio-MsgNum: 46299
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IMjqdzrDRly81ofr"
+Content-Disposition: inline
 
-Dear OpenEmbedded e.V. board of directors,
+--IMjqdzrDRly81ofr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On the ROS wiki [1], we describe an installation instruction [2] to 
-install the ROS (Robot Operating System) middleware on an OpenEmbedded 
-distribution. We refer to this page on the Installation Platform page 
-[3], which links to the ROS installation instructions for all the 
-supported Linux distributions.
+Merged.  Please ensure these are tagged with [meta-networking] in the
+subject.
 
-On this page, every supported OS distribution is depicted by a logo. We 
-would also like to add the OpenEmbedded logo resized to 50x50 pixels 
-there. To my understanding, the OpenEmbedded e.V. holds the copyright 
-for the OpenEmbedded logo.
+Thanks,
+-J.
 
-Could we obtain the right to use the logo on this page and for pages of 
-future ROS distributions?
+[[oe] [PATCH] quagga: fix babeld_option] On 13.09.23 (Mon 17:31) Qi.Chen@wi=
+ndriver.com wrote:
 
+> From: Chen Qi <Qi.Chen@windriver.com>
+>=20
+> Fix babeld_option to make babeld start correctly.
+>=20
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> ---
+>  .../recipes-protocols/quagga/files/quagga.default  |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-protocols/quagga/files/quagga.defaul=
+t b/meta-networking/recipes-protocols/quagga/files/quagga.default
+> index 438c3b6..0c1ce6c 100644
+> --- a/meta-networking/recipes-protocols/quagga/files/quagga.default
+> +++ b/meta-networking/recipes-protocols/quagga/files/quagga.default
+> @@ -4,7 +4,7 @@ vtysh_enable=3Dyes
+> =20
+>  # Bind all daemons to loopback only by default
+>  zebra_options=3D" --daemon -A 127.0.0.1"
+> -babeld_options=3D"-D 127.0.0.1"
+> +babeld_options=3D"--daemon -A 127.0.0.1"
+>  bgpd_options=3D"  --daemon -A 127.0.0.1"
+>  ospfd_options=3D" --daemon -A 127.0.0.1"
+>  ospf6d_options=3D"--daemon -A ::1"
+--=20
+-Joe MacDonald.
+:wq
 
-Yours sincerely,
+--IMjqdzrDRly81ofr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Lukas Bulwahn, BMW Car IT GmbH
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-References:
+iEYEARECAAYFAlJASUsACgkQwFvcllog0XyW8gCfRjWLAgdAVUzxV2dpcZUhzEIq
+Sx4AoKgIv2AchMu2UouMlo0RosLNmeJj
+=oy4d
+-----END PGP SIGNATURE-----
 
-[1] http://wiki.ros.org/
-[2] http://wiki.ros.org/hydro/Installation/OpenEmbedded
-[3] http://wiki.ros.org/ROS/Installation
-
-
-BMW Car IT GmbH
-Petuelring 116
-D-80809 Muenchen
-Germany
-Mail: lukas.bulwahn@oss.bmw-carit.de
-Web: http://www.bmw-carit.de
--------------------------------------------------------------
-BMW Car IT GmbH
-Geschäftsführer: Harald Heinecke und Reinhard Stolle
-Sitz und Registergericht: München HRB134810
--------------------------------------------------------------
-
+--IMjqdzrDRly81ofr--
