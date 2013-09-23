@@ -1,35 +1,45 @@
-Return-Path: <s.stirtzel@googlemail.com>
-Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
-	[209.85.219.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 509BB6007B
+Return-Path: <B40290@freescale.com>
+Received: from db8outboundpool.messaging.microsoft.com
+	(mail-db8lp0185.outbound.messaging.microsoft.com [213.199.154.185])
+	by mail.openembedded.org (Postfix) with ESMTP id 498A3610FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 07:26:17 +0000 (UTC)
-Received: by mail-oa0-f52.google.com with SMTP id n2so267620oag.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 00:26:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=zKq998oF4eIEhioWDlp465eXQnS1t5pWb5KGuEvVjEc=;
-	b=cEn7dKfexYq4mzWw4KD6U3F7/gsToOqngqG7oxnnsEK/xj0+xDVkGWmUpPRJkRvh6e
-	wCaVwqnpSD1t7jvHYHNDX/r01QsPdsWYbbOX1TFWcFtgODfqHdUjHV75+ootmSxbC1CI
-	+1Y7RayBx+PNrEW0saVtEc7zNCptcAfnqI9v9qkWZnZWPFJD414LS6ekqDg0PpebEfbl
-	Lr0zEqorbWmPKV1cOwfvFA6tCF4mHh4GIgo6Z0HACzxiD0f7UwngfKdNKD2AX5ra4XLr
-	PEFsAzYBRnms9lLJqpXEsPxcRz3QdDqhYAipnfMIWuU1D8ebCN5OfnhG1+NgLoHywoBq
-	AF+w==
-X-Received: by 10.182.34.194 with SMTP id b2mr604867obj.41.1379921178345; Mon,
-	23 Sep 2013 00:26:18 -0700 (PDT)
+	Mon, 23 Sep 2013 08:02:15 +0000 (UTC)
+Received: from mail66-db8-R.bigfish.com (10.174.8.234) by
+	DB8EHSOBE010.bigfish.com (10.174.4.73) with Microsoft SMTP Server id
+	14.1.225.22; Mon, 23 Sep 2013 08:02:16 +0000
+Received: from mail66-db8 (localhost [127.0.0.1])	by mail66-db8-R.bigfish.com
+	(Postfix) with ESMTP id 721AC8C01AE	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Sep 2013 08:02:16 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zz936eI168aJc8kzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h1de097h8275bh8275dhz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
+Received: from mail66-db8 (localhost.localdomain [127.0.0.1]) by mail66-db8
+	(MessageSwitch) id 1379923264981219_6782;
+	Mon, 23 Sep 2013 08:01:04 +0000 (UTC)
+Received: from DB8EHSMHS023.bigfish.com (unknown [10.174.8.228])	by
+	mail66-db8.bigfish.com (Postfix) with ESMTP id 4D7F6600048	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Sep 2013 08:01:04 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB8EHSMHS023.bigfish.com
+	(10.174.4.33) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Mon, 23 Sep 2013 08:01:02 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Mon, 23 Sep 2013 08:01:00 +0000
+Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
+	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id r8N80vE8019869;	Mon, 23 Sep 2013 01:00:58 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 23 Sep 2013 16:00:55 +0800
+Message-ID: <1379923255-5300-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
-Received: by 10.60.44.66 with HTTP; Mon, 23 Sep 2013 00:25:58 -0700 (PDT)
-In-Reply-To: <20130920211831.GK18414@jama>
-References: <1379509584-16503-1-git-send-email-s.stirtzel@googlemail.com>
-	<1379509584-16503-2-git-send-email-s.stirtzel@googlemail.com>
-	<20130920211831.GK18414@jama>
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-Date: Mon, 23 Sep 2013 09:25:58 +0200
-Message-ID: <CAGiJk9dLp4kuH4xSggSyN=quj=fHjL4-eR1VdKNuAvk1d-bz9A@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/3] utouch-frame: Add initial recipe
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Subject: [meta-oe][PATCH v3] libhugetlbfs: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,54 +53,562 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2013 07:26:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Sep 2013 08:02:16 -0000
+Content-Type: text/plain
 
-2013/9/20 Martin Jansa <martin.jansa@gmail.com>:
-> On Wed, Sep 18, 2013 at 03:06:23PM +0200, Samuel Stirtzel wrote:
->> used by utouch-mtview, a visual multitouch test application for X
->>
->> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
->> ---
->>  meta-oe/recipes-support/utouch/utouch-frame_git.bb |   15 +++++++++++++++
->>  1 file changed, 15 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/utouch/utouch-frame_git.bb
->>
->> diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
->> new file mode 100644
->> index 0000000..83a4e25
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
->> @@ -0,0 +1,15 @@
->> +SUMMARY = "Touch Frame Library"
->> +DESCRIPTION = "The frame library and tools are used to handle touch frames, i.e., collections of tracked contacts. Bindings for mtdev and XI2.1."
->> +HOMEPAGE = "http://bitmath.org/code/evemu/"
->> +
->> +LICENSE = "GPLv3"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=2f31b266d3440dd7ee50f92cf67d8e6c"
->> +
->> +inherit autotools
->> +
->> +SRC_URI = "git://bitmath.org/git/frame.git;protocol=http"
->> +SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
->> +
->> +PV = "1.1.2+git${SRCPV}"
->> +
->> +S = "${WORKDIR}/git/"
->
-> Missing dependency on utouch-evemu
->
-> | configure:12204: error: Package requirements (utouch-evemu >= 1.0.5) were not met:
-> | No package 'utouch-evemu' found
->
+From: Chunrong Guo <B40290@freescale.com>
 
-Hi,
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ .../libhugetlbfs/files/aarch64-support.patch       |   88 +++++++++++++++++
+ .../files/aarch64-unit-test-fixes.patch            |   62 ++++++++++++
+ .../files/add-PROT-NONE-to-the-mprotest-test.patch |   38 ++++++++
+ ...x-lib64-can-not-be-shiped-in-64bit-target.patch |   75 +++++++++++++++
+ .../libhugetlbfs/files/install64-fix.patch         |   20 ++++
+ ...s-avoid-search-host-library-path-for-cros.patch |   99 ++++++++++++++++++++
+ ...ng-LIB32-and-LIB64-if-they-point-to-the-s.patch |   48 ++++++++++
+ .../libhugetlbfs/libhugetlbfs_git.bb               |   51 ++++++++++
+ 8 files changed, 481 insertions(+), 0 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-test-fixes.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-to-the-mprotest-test.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-not-be-shiped-in-64bit-target.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
 
-fixed in v2.
-Thanks for testing.
-
-
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.patch
+new file mode 100644
+index 0000000..ceac6b4
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-support.patch
+@@ -0,0 +1,88 @@
++Upstream-Status: Pending
++
++From 52b8430eb4f03e35721f29862de33041fe9c9768 Mon Sep 17 00:00:00 2001
++From: Steve Capper <steve.capper@linaro.org>
++Date: Wed, 10 Apr 2013 14:51:12 +0100
++Subject: [PATCH] Aarch64 support.
++
++This patch adds support for Aarch64.
++
++As with ARMv7, We do not add the xBT/xBDT style linker scripts as
++these have been deprecated in favour of adjusting the page sizes
++via command line parameter to ld.
++
++Signed-off-by: Steve Capper <steve.capper@linaro.org>
++---
++ Makefile               |    7 +++++++
++ sys-aarch64elf_linux.S |   34 ++++++++++++++++++++++++++++++++++
++ 2 files changed, 41 insertions(+)
++ create mode 100644 sys-aarch64elf_linux.S
++
++diff --git a/Makefile b/Makefile
++index 48205af..28ceade 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -57,6 +57,12 @@ TMPLIB32 = lib
++ ELF32 += armelf_linux_eabi
++ CUSTOM_LDSCRIPTS = no
++ else
+++ifeq ($(ARCH),aarch64)
+++CC64 = gcc
+++ELF64 = aarch64elf_linux
+++TMPLIB64 = lib64
+++CUSTOM_LDSCRIPTS = no
+++else
++ ifeq ($(ARCH),i386)
++ CC32 = gcc
++ ELF32 = elf_i386
++@@ -100,6 +106,7 @@ endif
++ endif
++ endif
++ endif
+++endif
++ 
++ ifdef CC32
++ OBJDIRS += obj32
++diff --git a/sys-aarch64elf_linux.S b/sys-aarch64elf_linux.S
++new file mode 100644
++index 0000000..699ff4c
++--- /dev/null
+++++ b/sys-aarch64elf_linux.S
++@@ -0,0 +1,34 @@
+++/*
+++ * libhugetlbfs - Easy use of Linux hugepages
+++ * Copyright (C) 2013 Linaro Ltd.
+++ *
+++ * This library is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU Lesser General Public License
+++ * version 2.1 as published by the Free Software Foundation.
+++ *
+++ * This library is distributed in the hope that it will be useful, but
+++ * WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+++ * Lesser General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU Lesser General Public
+++ * License along with this library; if not, write to the Free Software
+++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+++ */
+++
+++        .text
+++
+++        .globl  direct_syscall
+++
+++
+++direct_syscall:
+++	uxtw	x8, w0
+++	mov	x0, x1
+++	mov	x1, x2
+++	mov	x2, x3
+++	mov	x3, x4
+++	mov	x4, x5
+++	mov	x5, x6
+++	mov	x6, x7
+++	svc	0x0
+++	RET
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-test-fixes.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-test-fixes.patch
+new file mode 100644
+index 0000000..0b6fd8a
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/aarch64-unit-test-fixes.patch
+@@ -0,0 +1,62 @@
++Upstream-Status: Pending
++
++From 9bb940bd6a86f09280bdcd48a7177a835d72a25c Mon Sep 17 00:00:00 2001
++From: Steve Capper <steve.capper@linaro.org>
++Date: Wed, 10 Apr 2013 15:52:46 +0100
++Subject: [PATCH] Aarch64 unit test fixes.
++
++On Aarch64, zero bytes are illegal instructions, this is added to
++the icache-hygiene test.
++
++In mremap-expand-slice-collision, if __LP64__ is defined then
++mappings are attempted at 1TB boundaries which are outside the
++allowable mmap region for Aarch64. For __aarch64__ we change this
++mapping back to 256MB slices.
++
++Signed-off-by: Steve Capper <steve.capper@linaro.org>
++---
++ tests/icache-hygiene.c                |    7 ++++---
++ tests/mremap-expand-slice-collision.c |    2 +-
++ 2 files changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/tests/icache-hygiene.c b/tests/icache-hygiene.c
++index 51792b3..876ce10 100644
++--- a/tests/icache-hygiene.c
+++++ b/tests/icache-hygiene.c
++@@ -54,7 +54,7 @@ static void cacheflush(void *p)
++ {
++ #if defined(__powerpc__)
++ 	asm volatile("dcbst 0,%0; sync; icbi 0,%0; isync" : : "r"(p));
++-#elif defined(__arm__)
+++#elif defined(__arm__) || defined(__aarch64__)
++ 	__clear_cache(p, p + COPY_SIZE);
++ #endif
++ }
++@@ -87,8 +87,9 @@ static void *sig_expected;
++ static void sig_handler(int signum, siginfo_t *si, void *uc)
++ {
++ #if defined(__powerpc__) || defined(__powerpc64__) || defined(__ia64__) || \
++-    defined(__s390__) || defined(__s390x__) || defined(__sparc__)
++-	/* On powerpc and ia64 and s390, 0 bytes are an illegal
+++    defined(__s390__) || defined(__s390x__) || defined(__sparc__) || \
+++    defined(__aarch64__)
+++	/* On powerpc, ia64, s390 and Aarch64, 0 bytes are an illegal
++ 	 * instruction, so, if the icache is cleared properly, we SIGILL
++ 	 * as soon as we jump into the cleared page */
++ 	if (signum == SIGILL) {
++diff --git a/tests/mremap-expand-slice-collision.c b/tests/mremap-expand-slice-collision.c
++index c25f4c6..853f3c3 100644
++--- a/tests/mremap-expand-slice-collision.c
+++++ b/tests/mremap-expand-slice-collision.c
++@@ -38,7 +38,7 @@ void init_slice_boundary(int fd)
++ 	unsigned long slice_size;
++ 	void *p1, *p2, *heap;
++ 	int slices_ok, i, rc;
++-#ifdef __LP64__
+++#if defined(__LP64__) && !defined(__aarch64__)
++ 	/* powerpc: 1TB slices starting at 1 TB */
++ 	slice_boundary = 0x10000000000;
++ 	slice_size = 0x10000000000;
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-to-the-mprotest-test.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-to-the-mprotest-test.patch
+new file mode 100644
+index 0000000..673f204
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/add-PROT-NONE-to-the-mprotest-test.patch
+@@ -0,0 +1,38 @@
++Upstream-Status: Pending
++
++From c7fcb7270bb510d7271a1c0cea095a4dbea49420 Mon Sep 17 00:00:00 2001
++From: Steve Capper <steve.capper@linaro.org>
++Date: Mon, 3 Jun 2013 17:00:45 +0100
++Subject: [PATCH] Add PROT_NONE to the mprotect test.
++
++The mprotect unit test checks PROT_READ and PROT_READ | PROT_WRITE
++protections. We recently found that PROT_NONE wasn't properly
++supported in our huge page kernel code.
++
++This patch adds PROT_NONE tests to mprotect. The expected behaviour
++is that neither reads nor writes should succeed.
++
++Signed-off-by: Steve Capper <steve.capper@linaro.org>
++---
++ tests/mprotect.c |    6 ++++++
++ 1 file changed, 6 insertions(+)
++
++diff --git a/tests/mprotect.c b/tests/mprotect.c
++index aa4673e..db6a662 100644
++--- a/tests/mprotect.c
+++++ b/tests/mprotect.c
++@@ -213,5 +213,11 @@ int main(int argc, char *argv[])
++ 	test_mprotect(fd, "RW->R 1/2", 2*hpage_size, PROT_READ|PROT_WRITE,
++ 		      hpage_size, PROT_READ);
++ 
+++	/* PROT_NONE tests */
+++	test_mprotect(fd, "NONE->R", hpage_size, PROT_NONE,
+++		      hpage_size, PROT_READ);
+++	test_mprotect(fd, "NONE->RW", hpage_size, PROT_NONE,
+++		      hpage_size, PROT_READ|PROT_WRITE);
+++
++ 	PASS();
++ }
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-not-be-shiped-in-64bit-target.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-not-be-shiped-in-64bit-target.patch
+new file mode 100644
+index 0000000..1ab461c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/fix-lib64-can-not-be-shiped-in-64bit-target.patch
+@@ -0,0 +1,75 @@
++Upstream-Status: Inappropriate [oe-core specific]
++
++
++fix the below error:
++  ERROR: QA Issue: libhugetlbfs: Files/directories were installed but not shipped
++  /usr/lib64
++  /usr/lib64/libhugetlbfs.so
++  /usr/lib64/libhugetlbfs.a
++  /usr/lib64/libhugetlbfs_privutils.so
++  /usr/lib64/perl5
++  /usr/lib64/perl5/TLBC
++  /usr/lib64/perl5/TLBC/PerfCollect.pm
++  /usr/lib64/perl5/TLBC/Report.pm
++  /usr/lib64/perl5/TLBC/DataCollect.pm
++  /usr/lib64/perl5/TLBC/OpCollect.pm
++$<50>ERROR: QA run found fatal errors. Please consider fixing them.
++
++
++Signed-off-by: Guo Chunrong <B40290@freescale.com>
++
++--- a/Makefile	2013-09-23 02:28:57.340566998 -0500
+++++ b/Makefile	2013-09-23 02:31:05.344569896 -0500
++@@ -33,7 +33,6 @@
++ CPPFLAGS += -D__LIBHUGETLBFS__ -DPPC_NO_SEGMENTS
++ 
++ ARCH = $(shell uname -m | sed -e s/i.86/i386/)
++-CC = gcc
++ 
++ CUSTOM_LDSCRIPTS = yes
++ 
++@@ -59,9 +58,9 @@
++ CUSTOM_LDSCRIPTS = no
++ else
++ ifeq ($(ARCH),aarch64)
++-CC64 = gcc
+++CC64 = $(CC)
++ ELF64 = aarch64elf_linux
++-TMPLIB64 = lib64
+++TMPLIB64 = lib
++ CUSTOM_LDSCRIPTS = no
++ else
++ ifeq ($(ARCH),i386)
++@@ -72,7 +71,7 @@
++ ifeq ($(ARCH),x86_64)
++ CC64 = $(CC) -m64
++ ELF64 = elf_x86_64
++-TMPLIB64 = lib64
+++TMPLIB64 = lib
++ TMPLIB32 = lib
++ ifneq ($(BUILDTYPE),NATIVEONLY)
++ CC32 = $(CC) -m32
++@@ -172,11 +171,23 @@
++ BINDIR = $(PREFIX)/share/libhugetlbfs
++ EXEDIR = $(PREFIX)/bin
++ DOCDIR = $(PREFIX)/share/doc/libhugetlbfs
+++
++ ifdef CC32
++ PMDIR = $(PREFIX)/lib/perl5/TLBC
+++endif
+++
+++ifdef CC64
+++ifeq ($(ARCH),x86_64)
+++PMDIR = $(PREFIX)/lib/perl5/TLBC
+++else
+++ifeq ($(ARCH),aarch64)
+++PMDIR = $(PREFIX)/lib/perl5/TLBC
++ else
++ PMDIR = $(PREFIX)/lib64/perl5/TLBC
++ endif
+++endif
+++endif
+++
++ MANDIR1 = $(PREFIX)/share/man/man1
++ MANDIR3 = $(PREFIX)/share/man/man3
++ MANDIR7 = $(PREFIX)/share/man/man7
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch
+new file mode 100644
+index 0000000..9652c3d
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/install64-fix.patch
+@@ -0,0 +1,20 @@
++Upstream-Status: Inappropriate [oe-core specific]
++
++TESTS_64 is empty, install will fail due to missing file operand
++
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++
++Index: git/tests/Makefile
++===================================================================
++--- git.orig/tests/Makefile
+++++ git/tests/Makefile
++@@ -292,7 +292,7 @@ obj64/install:
++ 	$(INSTALL) -m 755 wrapper-utils.sh $(DESTDIR)$(INST_TESTSDIR64)/obj64
++ 	$(INSTALL) -m 755 $(HELPERS:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
++ 	$(INSTALL) -m 755 $(HELPER_LIBS:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
++-	$(INSTALL) -m 755 $(TESTS_64:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
+++#	$(INSTALL) -m 755 $(TESTS_64:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
++ 	$(INSTALL) -m 755 run_tests.py $(DESTDIR)$(INST_TESTSDIR64)
++ 
++ install: $(OBJDIRS:%=%/install)
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+new file mode 100644
+index 0000000..b3fd843
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+@@ -0,0 +1,99 @@
++From 0a2877400a086e9d6ddd32a80462b7a931921dc2 Mon Sep 17 00:00:00 2001
++From: Chunrong Guo <B40290@freescale.com>
++Date: Sun, 8 Sep 2013 23:21:49 -0500
++Subject: [PATCH] libhugetlbfs: avoid search host library path for cross 
++ compilation
++
++Upstream-Status: Inappropriate [oe-core specific]
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++---
++ ldscripts/elf32ppclinux.xB   |    2 +-
++ ldscripts/elf32ppclinux.xBDT |    2 +-
++ ldscripts/elf64ppc.xB        |    2 +-
++ ldscripts/elf64ppc.xBDT      |    2 +-
++ ldscripts/elf_x86_64.xB      |    2 +-
++ ldscripts/elf_x86_64.xBDT    |    2 +-
++ 6 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/ldscripts/elf32ppclinux.xB b/ldscripts/elf32ppclinux.xB
++index 28ad88d..33d482d 100644
++--- a/ldscripts/elf32ppclinux.xB
+++++ b/ldscripts/elf32ppclinux.xB
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc",
++ 	      "elf32-powerpc")
++ OUTPUT_ARCH(powerpc:common)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/powerpc-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/powerpc-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT(-lhugetlbfs);
++ PHDRS
++ {
++diff --git a/ldscripts/elf32ppclinux.xBDT b/ldscripts/elf32ppclinux.xBDT
++index 497882b..823475e 100644
++--- a/ldscripts/elf32ppclinux.xBDT
+++++ b/ldscripts/elf32ppclinux.xBDT
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-powerpc", "elf32-powerpc",
++ 	      "elf32-powerpc")
++ OUTPUT_ARCH(powerpc:common)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/powerpc-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/powerpc-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT(-lhugetlbfs);
++ PHDRS
++ {
++diff --git a/ldscripts/elf64ppc.xB b/ldscripts/elf64ppc.xB
++index 1a9c1ab..8cc557d 100644
++--- a/ldscripts/elf64ppc.xB
+++++ b/ldscripts/elf64ppc.xB
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc",
++ 	      "elf64-powerpc")
++ OUTPUT_ARCH(powerpc:common64)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT(-lhugetlbfs);
++ PHDRS
++ {
++diff --git a/ldscripts/elf64ppc.xBDT b/ldscripts/elf64ppc.xBDT
++index 5477294..53e0749 100644
++--- a/ldscripts/elf64ppc.xBDT
+++++ b/ldscripts/elf64ppc.xBDT
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-powerpc", "elf64-powerpc",
++ 	      "elf64-powerpc")
++ OUTPUT_ARCH(powerpc:common64)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/powerpc64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/powerpc64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT( -lhugetlbfs );
++ PHDRS
++ {
++diff --git a/ldscripts/elf_x86_64.xB b/ldscripts/elf_x86_64.xB
++index ed21a2c..ba50e9f 100644
++--- a/ldscripts/elf_x86_64.xB
+++++ b/ldscripts/elf_x86_64.xB
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
++ 	      "elf64-x86-64")
++ OUTPUT_ARCH(i386:x86-64)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/x86_64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/x86_64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT(-lhugetlbfs);
++ /* Do we need any of these for elf?
++    __DYNAMIC = 0;    */
++diff --git a/ldscripts/elf_x86_64.xBDT b/ldscripts/elf_x86_64.xBDT
++index 1855202..c62d245 100644
++--- a/ldscripts/elf_x86_64.xBDT
+++++ b/ldscripts/elf_x86_64.xBDT
++@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
++ 	      "elf64-x86-64")
++ OUTPUT_ARCH(i386:x86-64)
++ ENTRY(_start)
++-SEARCH_DIR("/usr/x86_64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
+++/*SEARCH_DIR("/usr/x86_64-linux-gnu/lib64"); SEARCH_DIR("/usr/local/lib64"); SEARCH_DIR("/lib64"); SEARCH_DIR("/usr/lib64"); SEARCH_DIR("/usr/x86_64-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
++ INPUT(-lhugetlbfs);
++ /* Do we need any of these for elf?
++    __DYNAMIC = 0;    */
++-- 
++1.7.9.7
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+new file mode 100644
+index 0000000..3296376
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+@@ -0,0 +1,48 @@
++From 355c014573de7f95202cc7c819f81f0f230e4a1a Mon Sep 17 00:00:00 2001
++From: Ting Liu <b28495@freescale.com>
++Date: Mon, 18 Jun 2012 16:37:05 +0800
++Subject: [PATCH] skip checking LIB32 and LIB64 if they point to the same place
++
++
++Upstream-Status: Inappropriate [oe-core specific]
++Signed-off-by: Ting Liu <b28495@freescale.com>
++---
++ Makefile |   22 +++++++++++-----------
++ 1 files changed, 11 insertions(+), 11 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 1017950..bac5f01 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -131,17 +131,17 @@ endif
++ 
++ # If TMPLIB64 is set, then sure we are not resolving LIB32 and LIB64 to the
++ # same place
++-ifdef TMPLIB64
++-
++-REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
++-REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
++-ifneq ($(realpath $(PREFIX)),)
++-ifeq ($(REALLIB32),$(REALLIB64))
++-$(error LIB32 ($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to $(REALLIB64)) are resolving to the same place. Manually specify LIB32 and LIB64. e.g. make PREFIX=$(PREFIX) LIB32=lib32 LIB64=lib64)
++-endif
++-endif
++-
++-endif
+++#ifdef TMPLIB64
+++#
+++#REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
+++#REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
+++#ifneq ($(realpath $(PREFIX)),)
+++#ifeq ($(REALLIB32),$(REALLIB64))
+++#$(error LIB32 ($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to $(REALLIB64)) are resolving to the same place. Manually specify LIB32 and LIB64. e.g. make PREFIX=$(PREFIX) LIB32=lib32 LIB64=lib64)
+++#endif
+++#endif
+++#
+++#endif
++ 
++ HEADERDIR = $(PREFIX)/include
++ LIBDIR32 = $(PREFIX)/$(LIB32)
++-- 
++1.7.0.4
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+new file mode 100644
+index 0000000..7835300
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -0,0 +1,51 @@
++DESCRIPTION = "A library which provides easy access to huge pages of memory"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
++
++DEPENDS = "sysfsutils perl"
++RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
++
++SRCREV = "49fedbe172343b3f7b39dc81bd2d81a18a34eb2f"
++SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
++    file://aarch64-support.patch \
++    file://aarch64-unit-test-fixes.patch \
++    file://add-PROT-NONE-to-the-mprotest-test.patch \
++    file://install64-fix.patch \
++    file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
++    file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
++    file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \
++"
++
++S = "${WORKDIR}/git"
++
++COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
++
++
++EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' BUILDTYPE=NATIVEONLY ${LIBARGS}"
++CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++#The CUSTOM_LDSCRIPTS doesn't work with the gold linker
++do_configure() {
++    if [ "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', 'ld-is-gold', '', d)}" = "ld-is-gold" ] ; then
++      sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
++    fi
++}
++
++do_install() {
++        oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
++          INST_TESTSDIR32=/opt/libhugetlbfs/tests \
++          INST_TESTSDIR64=/opt/libhugetlbfs/tests \
++          install-tests
++}
++
++PARALLEL_MAKE_pn-${PN} = ""
++
++PACKAGES =+ "${PN}-perl ${PN}-tests ${PN}-perl5"
++FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
++FILES_${PN}-perl = "${libdir}/perl"
++FILES_${PN}-perl5 = "${libdir}/perl5 "
++FILES_${PN}-tests += "/opt/libhugetlbfs/tests"
++
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 -- 
-Regards
-Samuel
+1.7.5.4
+
+
 
