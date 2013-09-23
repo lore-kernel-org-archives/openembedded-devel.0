@@ -1,24 +1,23 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 87EAD610FF
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 3383C610FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 09:30:59 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id r8N9V2RM016193
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 23 Sep 2013 09:43:03 +0000 (UTC)
+Received: from [192.168.101.5] (afplatform.bmw-carit.intra [192.168.101.5])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 4F5D34007F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 02:31:02 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.213) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Mon, 23 Sep 2013 02:31:00 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Sep 2013 17:31:01 +0800
-Message-ID: <1379928661-9188-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 23 Sep 2013 10:39:42 +0200 (CEST)
+Message-ID: <52400D28.2070904@oss.bmw-carit.de>
+Date: Mon, 23 Sep 2013 11:43:04 +0200
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-Subject: [PATCH] quagga: fix babeld_option
+To: openembedded-devel@lists.openembedded.org
+Subject: Permission to use OpenEmbedded Logo on ROS wiki
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2013 09:31:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 23 Sep 2013 09:43:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Chen Qi <Qi.Chen@windriver.com>
+Dear OpenEmbedded e.V. board of directors,
 
-Fix babeld_option to make babeld start correctly.
+On the ROS wiki [1], we describe an installation instruction [2] to 
+install the ROS (Robot Operating System) middleware on an OpenEmbedded 
+distribution. We refer to this page on the Installation Platform page 
+[3], which links to the ROS installation instructions for all the 
+supported Linux distributions.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-protocols/quagga/files/quagga.default  |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On this page, every supported OS distribution is depicted by a logo. We 
+would also like to add the OpenEmbedded logo resized to 50x50 pixels 
+there. To my understanding, the OpenEmbedded e.V. holds the copyright 
+for the OpenEmbedded logo.
 
-diff --git a/meta-networking/recipes-protocols/quagga/files/quagga.default b/meta-networking/recipes-protocols/quagga/files/quagga.default
-index 438c3b6..0c1ce6c 100644
---- a/meta-networking/recipes-protocols/quagga/files/quagga.default
-+++ b/meta-networking/recipes-protocols/quagga/files/quagga.default
-@@ -4,7 +4,7 @@ vtysh_enable=yes
- 
- # Bind all daemons to loopback only by default
- zebra_options=" --daemon -A 127.0.0.1"
--babeld_options="-D 127.0.0.1"
-+babeld_options="--daemon -A 127.0.0.1"
- bgpd_options="  --daemon -A 127.0.0.1"
- ospfd_options=" --daemon -A 127.0.0.1"
- ospf6d_options="--daemon -A ::1"
--- 
-1.7.9.5
+Could we obtain the right to use the logo on this page and for pages of 
+future ROS distributions?
 
+
+Yours sincerely,
+
+Lukas Bulwahn, BMW Car IT GmbH
+
+References:
+
+[1] http://wiki.ros.org/
+[2] http://wiki.ros.org/hydro/Installation/OpenEmbedded
+[3] http://wiki.ros.org/ROS/Installation
+
+
+BMW Car IT GmbH
+Petuelring 116
+D-80809 Muenchen
+Germany
+Mail: lukas.bulwahn@oss.bmw-carit.de
+Web: http://www.bmw-carit.de
+-------------------------------------------------------------
+BMW Car IT GmbH
+Geschäftsführer: Harald Heinecke und Reinhard Stolle
+Sitz und Registergericht: München HRB134810
+-------------------------------------------------------------
 
