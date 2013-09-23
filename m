@@ -1,23 +1,19 @@
 Return-Path: <eric@eukrea.com>
-Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DC9D6007B
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 913306007B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 08:14:22 +0000 (UTC)
-Received: from e6520eb (unknown [88.170.243.169])
-	(Authenticated sender: eukrea)
-	by smtp5-g21.free.fr (Postfix) with ESMTPSA id E378ED4807B
+	Mon, 23 Sep 2013 08:15:10 +0000 (UTC)
+Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 52ED84C81DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 10:14:19 +0200 (CEST)
-Date: Mon, 23 Sep 2013 10:14:18 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
+	Mon, 23 Sep 2013 10:15:09 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130923101418.4afd4092@e6520eb>
-In-Reply-To: <1379923935-28909-1-git-send-email-eric@eukrea.com>
-References: <1379923935-28909-1-git-send-email-eric@eukrea.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH] gnokii: add 0.6.31
+Date: Mon, 23 Sep 2013 10:15:19 +0200
+Message-Id: <1379924119-6674-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.4.rc3
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] gnokii: add 0.6.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,52 +27,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2013 08:14:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Sep 2013 08:15:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Le Mon, 23 Sep 2013 10:12:15 +0200,
-Eric B=E9nard <eric@eukrea.com> a =E9crit :
+- was backported from oe-classic and upgraded to last version
+- X11 configuration is not tested
 
-> - was backported from oe-classic and upgraded to last version
-> - X11 configuration is not tested
->=20
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> ---
->  .../recipes-connectivity/gnokii/gnokii_0.6.31.bb   | 28 ++++++++++++++++=
-++++++
->  1 file changed, 28 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
->=20
-> diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-=
-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-> new file mode 100644
-> index 0000000..511eaa3
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-> @@ -0,0 +1,28 @@
-> +DESCRIPTION =3D "Cellphone tools and driver software"
-> +SECTION =3D "console/network"
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
-bb3"
-> +
-> +SRC_URI =3D "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2"
-> +
-> +DEPENDS =3D "glib-2.0"
-> +X11DEPENDS =3D " libxpm gtk+"
-> +
-> +PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '=
-', d)}"
-> +PACKAGECONFIG[x11] =3D "--with-x-toolkit=3Dgtk,--without-x,${X11DEPENDS}"
-> +
-> +inherit autotools pkgconfig
-> +
-> +PACKAGES +=3D "libgnokii libgnokii-dev"
-> +
-> +EXTRA_OECONF =3D "--without-x --disable-smsd"
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ .../recipes-connectivity/gnokii/gnokii_0.6.31.bb   | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
 
-forget this one I missed to commit the last fixes
+diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+new file mode 100644
+index 0000000..7845ae2
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Cellphone tools and driver software"
++SECTION = "console/network"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++SRC_URI = "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2"
++
++DEPENDS = "glib-2.0"
++X11DEPENDS = " libxpm gtk+"
++
++PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
++PACKAGECONFIG[x11] = ",--without-x,${X11DEPENDS}"
++
++inherit autotools pkgconfig
++
++PACKAGES += "libgnokii libgnokii-dev"
++
++EXTRA_OECONF = "--disable-smsd"
++
++FILES_${PN} = "${bindir} ${sbindir}"
++FILES_libgnokii-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
++                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
++	        /lib/*.a /lib/*.o ${datadir}/aclocal"
++FILES_${PN}-dev = ""
++FILES_libgnokii = "${libdir}/libgnokii.so.*"
++
++SRC_URI[md5sum] = "d9627f4a1152d3ea7806df4532850d5f"
++SRC_URI[sha256sum] = "8f5a083b05c1a66a3402ca5cd80084e14c2c0632c991bb53b03c78e9adb02501"
+-- 
+1.8.4.rc3
 
-Eric
 
