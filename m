@@ -1,36 +1,36 @@
-Return-Path: <s.stirtzel@googlemail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id BCF686CA5B
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ve0-f173.google.com (mail-ve0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 90B89610FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 12:55:27 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id d49so2414895eek.6
+	Tue, 24 Sep 2013 13:51:58 +0000 (UTC)
+Received: by mail-ve0-f173.google.com with SMTP id cz12so3446785veb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 05:55:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TBPryT+GyXp1OOPbr8VEsrmKv4uaSka7112VP0wXt5I=;
-	b=auYKZTA7K1we80T3dU9fdoIK658zv6b+wdZD31RtkJgQen8G5ueIl27JW5PrqWdm1+
-	jbFgIxV+BXxDxHqjJpOFY7z8s84U6l/uVnPnLYiiK2ALI6K9TvkrYwhlNuvH7QU3VyoU
-	bttor+2bfowGC9ROUzUZ6ZHId49lCbshABIG8+JR7e6KWhTCNhr09UEhMQIeUXex5OSn
-	7RaFc6qykdxH9kx+5RqrqSCANpQblAuTco3GB5JWFzFZIdJR1IyIGrtYEEVWgnVEmtxW
-	MSdjave0Yd/W7RlAFtoEzfrkzM7u3P3na+D3bv5Fzw/8Rf/QGzlt5Kd5VPIhdhe+jIif
-	YNTw==
-X-Received: by 10.15.67.131 with SMTP id u3mr45810420eex.34.1380027329283;
-	Tue, 24 Sep 2013 05:55:29 -0700 (PDT)
-Received: from s-stirtzel-linux.zera.local
-	(ip-178-200-247-59.unitymediagroup.de. [178.200.247.59])
-	by mx.google.com with ESMTPSA id v8sm2902433eeo.12.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 24 Sep 2013 05:55:28 -0700 (PDT)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Sep 2013 14:55:09 +0200
-Message-Id: <1380027310-24350-2-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1380027310-24350-1-git-send-email-s.stirtzel@googlemail.com>
-References: <1380027310-24350-1-git-send-email-s.stirtzel@googlemail.com>
-Subject: [meta-oe][PATCH v3 2/3] utouch-frame: Add initial recipe
+	Tue, 24 Sep 2013 06:52:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=rLz+m24cd1Ddif9s/1yzUPRwx87xn+37zU3xej7IQdU=;
+	b=BGqxTQd48yGCW2x0EPamp+6wfYJ0rgPGqA7PQhr84clacsQkUP26G2HY8Fjstav1XP
+	BHADxwQf835Kafm+3vzPcda9l9ZhmGc44JMn03t+a/S5LGFm8lhaifClU0UpAfWRTq17
+	sIw2mpwWq6CMauK/qcQleMHg8JwIEWwGDutUTuo1F/RZLsoYy4GIlUq0bv2BDd30tIZv
+	PPSdr6voT1M98KVpvqiYeZlfujgD/RgRnJmgcCdynM8SrtyUiWebPBKjcCvv63/mT4xJ
+	mPwzN5qX1ddNbXk6CML5/2X3OmJUs1PGMFWugJJp19LBDuLObM6wuqmsN4i9zq4/3ZEE
+	ct1g==
+X-Gm-Message-State: ALoCoQk8dpnGG56LW4fmj3bTIDhkdO9MrTq/8FcZplqEhdNU4AR404hU9eq9YRZKH9ka6OZaVKRR
+X-Received: by 10.58.169.193 with SMTP id ag1mr6071517vec.26.1380030719907;
+	Tue, 24 Sep 2013 06:51:59 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.220.71.201 with HTTP; Tue, 24 Sep 2013 06:51:39 -0700 (PDT)
+In-Reply-To: <20130919121131.GE18414@jama>
+References: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
+	<20130919121131.GE18414@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 24 Sep 2013 14:51:39 +0100
+Message-ID: <CAJTo0LbtppQegr=Z6M1Ewmd2b7rC5-LSdc6UDFf5Cdxz86=0DA@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH] dleyna: switch to git clones instead of generated tarballs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 12:55:28 -0000
+X-List-Received-Date: Tue, 24 Sep 2013 13:51:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-used by utouch-mtview, a visual multitouch test application for X
+On 19 September 2013 13:11, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, Sep 12, 2013 at 04:31:53PM +0100, Ross Burton wrote:
+>> The tarballs used were the dynamically-generated tarballs from github, which
+>> recently have changed checksum.  Avoid this problem entirely by fetching from
+>> git, locked to the relevant tag.
+>
+> Merged, thanks!
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- meta-oe/recipes-support/utouch/utouch-frame_git.bb |   17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/utouch/utouch-frame_git.bb
+Did you actually push that merge?  I don't see it merged here.
 
-diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-new file mode 100644
-index 0000000..00b7cf3
---- /dev/null
-+++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Touch Frame Library"
-+DESCRIPTION = "The frame library and tools are used to handle touch frames, i.e., collections of tracked contacts. Bindings for mtdev and XI2.1."
-+HOMEPAGE = "http://bitmath.org/code/frame/"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2f31b266d3440dd7ee50f92cf67d8e6c"
-+
-+DEPENDS += "mtdev utouch-evemu"
-+
-+inherit autotools
-+
-+SRC_URI = "git://bitmath.org/git/frame.git;protocol=http"
-+SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
-+
-+PV = "1.1.2+git${SRCPV}"
-+
-+S = "${WORKDIR}/git/"
--- 
-1.7.9.5
-
+Ross
 
