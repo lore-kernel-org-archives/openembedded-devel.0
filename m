@@ -1,36 +1,22 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-ve0-f173.google.com (mail-ve0-f173.google.com
-	[209.85.128.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 90B89610FB
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 530A2610FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 13:51:58 +0000 (UTC)
-Received: by mail-ve0-f173.google.com with SMTP id cz12so3446785veb.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 06:52:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=rLz+m24cd1Ddif9s/1yzUPRwx87xn+37zU3xej7IQdU=;
-	b=BGqxTQd48yGCW2x0EPamp+6wfYJ0rgPGqA7PQhr84clacsQkUP26G2HY8Fjstav1XP
-	BHADxwQf835Kafm+3vzPcda9l9ZhmGc44JMn03t+a/S5LGFm8lhaifClU0UpAfWRTq17
-	sIw2mpwWq6CMauK/qcQleMHg8JwIEWwGDutUTuo1F/RZLsoYy4GIlUq0bv2BDd30tIZv
-	PPSdr6voT1M98KVpvqiYeZlfujgD/RgRnJmgcCdynM8SrtyUiWebPBKjcCvv63/mT4xJ
-	mPwzN5qX1ddNbXk6CML5/2X3OmJUs1PGMFWugJJp19LBDuLObM6wuqmsN4i9zq4/3ZEE
-	ct1g==
-X-Gm-Message-State: ALoCoQk8dpnGG56LW4fmj3bTIDhkdO9MrTq/8FcZplqEhdNU4AR404hU9eq9YRZKH9ka6OZaVKRR
-X-Received: by 10.58.169.193 with SMTP id ag1mr6071517vec.26.1380030719907;
-	Tue, 24 Sep 2013 06:51:59 -0700 (PDT)
+	Tue, 24 Sep 2013 14:12:33 +0000 (UTC)
+Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
+	[192.168.101.5])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id BB9D340074;
+	Tue, 24 Sep 2013 15:09:06 +0200 (CEST)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 24 Sep 2013 16:12:07 +0200
+Message-Id: <1380031928-29350-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Received: by 10.220.71.201 with HTTP; Tue, 24 Sep 2013 06:51:39 -0700 (PDT)
-In-Reply-To: <20130919121131.GE18414@jama>
-References: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
-	<20130919121131.GE18414@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 24 Sep 2013 14:51:39 +0100
-Message-ID: <CAJTo0LbtppQegr=Z6M1Ewmd2b7rC5-LSdc6UDFf5Cdxz86=0DA@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] dleyna: switch to git clones instead of generated tarballs
+Subject: [meta-oe][PATCH 1/2] libeigen: initial contribution required by opencv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,18 +30,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 13:51:59 -0000
+X-List-Received-Date: Tue, 24 Sep 2013 14:12:34 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 19 September 2013 13:11, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Sep 12, 2013 at 04:31:53PM +0100, Ross Burton wrote:
->> The tarballs used were the dynamically-generated tarballs from github, which
->> recently have changed checksum.  Avoid this problem entirely by fetching from
->> git, locked to the relevant tag.
->
-> Merged, thanks!
+As opencv depends on libeigen, libeigen is added to the meta-oe
+layer. This commit is derived from the work [1] by Kartik Mohta.
 
-Did you actually push that merge?  I don't see it merged here.
+[1] https://github.com/kartikmohta/meta-km/tree/master/recipes-extended/eigen
 
-Ross
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+---
+ .../libeigen/libeigen/eigen-disable-tests.patch    |   75 ++++++++++++++++++++
+ meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb |   25 +++++++
+ 2 files changed, 100 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
+
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch b/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+new file mode 100644
+index 0000000..b3dddbe
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+@@ -0,0 +1,75 @@
++libeigen: don't try building tests
++
++While configuring, if the tests are enabled, it checks some machine-specific
++settings which we don't want to do while cross-compiling.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
++
++--- a/CMakeLists.txt~	2013-07-29 16:59:48.403504947 -0400
+++++ b/CMakeLists.txt	2013-07-29 17:00:19.868020948 -0400
++@@ -346,25 +346,25 @@
++
++ add_subdirectory(doc EXCLUDE_FROM_ALL)
++
++-include(EigenConfigureTesting)
+++#include(EigenConfigureTesting)
++
++ # fixme, not sure this line is still needed:
++-enable_testing() # must be called from the root CMakeLists, see man page
+++#enable_testing() # must be called from the root CMakeLists, see man page
++
++
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
++-else()
++-  add_subdirectory(test EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
+++#else()
+++#  add_subdirectory(test EXCLUDE_FROM_ALL)
+++#endif()
++
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(blas)
++-  add_subdirectory(lapack)
++-else()
++-  add_subdirectory(blas EXCLUDE_FROM_ALL)
++-  add_subdirectory(lapack EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(blas)
+++#  add_subdirectory(lapack)
+++#else()
+++#  add_subdirectory(blas EXCLUDE_FROM_ALL)
+++#  add_subdirectory(lapack EXCLUDE_FROM_ALL)
+++#endif()
++
++ add_subdirectory(unsupported)
++
++@@ -384,7 +384,7 @@
++
++ configure_file(scripts/cdashtesting.cmake.in cdashtesting.cmake @ONLY)
++
++-ei_testing_print_summary()
+++#ei_testing_print_summary()
++
++ message(STATUS "")
++ message(STATUS "Configured Eigen ${EIGEN_VERSION_NUMBER}")
++--- a/unsupported/CMakeLists.txt~	2013-07-29 16:59:54.091598607 -0400
+++++ b/unsupported/CMakeLists.txt	2013-07-29 17:00:27.052139300 -0400
++@@ -1,7 +1,7 @@
++ add_subdirectory(Eigen)
++ add_subdirectory(doc EXCLUDE_FROM_ALL)
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
++-else()
++-  add_subdirectory(test EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
+++#else()
+++#  add_subdirectory(test EXCLUDE_FROM_ALL)
+++#endif()
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb b/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
+new file mode 100644
+index 0000000..4183f05
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
++AUTHOR = "Benoît Jacob and Gaël Guennebaud and others"
++HOMEPAGE = "http://eigen.tuxfamily.org/"
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
++
++SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
++           file://eigen-disable-tests.patch"
++SRC_URI[md5sum] = "894381be5be65bb7099c6fd91d61b357"
++SRC_URI[sha256sum] = "011f78960d939227f9276173d0c4cc0053bb9e0a7356539a9a6c7c89d984fab6"
++
++S = "${WORKDIR}/eigen-eigen-ffa86ffb5570"
++
++inherit cmake
++
++OECMAKE_SOURCEPATH = ".."
++OECMAKE_BUILDPATH = "build"
++
++EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir}"
++
++FILES_${PN} = "${includedir} ${libdir}"
++
++# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
++RDEPENDS_${PN}-dev = ""
++RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+-- 
+1.7.10.4
+
 
