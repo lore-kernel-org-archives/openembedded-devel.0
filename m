@@ -1,37 +1,34 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qc0-f172.google.com (mail-qc0-f172.google.com
-	[209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F7706CA54
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-oa0-f54.google.com (mail-oa0-f54.google.com
+	[209.85.219.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C559610FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 12:44:15 +0000 (UTC)
-Received: by mail-qc0-f172.google.com with SMTP id l13so3046088qcy.3
+	Tue, 24 Sep 2013 12:53:54 +0000 (UTC)
+Received: by mail-oa0-f54.google.com with SMTP id n5so2054364oag.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 05:44:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GrvGSCMkeMu0rIox+9pVPbuqq715DGXJxhVl0Ww+Ikg=;
-	b=tJI9C9i3Zlbt1jxPdOIlR4M5+NBllJnYzYgSt9JHKMuvF3JgRi/ALT5JrNFrkkD/44
-	VyRwbPidz3qDojkrSlWhrMXmk2uIsMhtvBSQbe0tDfDm3rcmb4ZU1hVV2ca77720oAep
-	6LZIM8L0/Ixgjx2Q0A5DSQETBjl6k53ZUkblK3D1Ee5qN5GrVqTGmFWefBTGD8/G2AoE
-	FH5n7Jur7aeOjX7pSS7ST1G8KdEuCWEMID6BrIJlE6IbKhzR3H/F60V/i7R/JjNavPvF
-	O/dZIY89ZbaUOHtKBgVXvjhR2Lx/Cmm2muqZCeL6i6jIk5LYbIjaWxwQM7Mkn1+2jMST
-	hePg==
-X-Received: by 10.224.112.69 with SMTP id v5mr8775909qap.66.1380026656864;
-	Tue, 24 Sep 2013 05:44:16 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.194.209.11])
-	by mx.google.com with ESMTPSA id e7sm45657372qag.7.1969.12.31.16.00.00
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 24 Sep 2013 05:44:16 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Sep 2013 09:43:57 -0300
-Message-Id: <1380026637-6511-2-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
-References: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] wvdial: add recipe for version 1.61
+	Tue, 24 Sep 2013 05:53:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=TIl+Lu77a4ueD6alkR9ceUpYVyQYT1iigbu73tYx5Wg=;
+	b=X3ZL07Utd9tF9ELQxzETc0xTkfQxWe9HCdx1xNAcOxuEpx2kli8lEnwDPiZpvXbp0M
+	/C08xM/jhlnORFS9FQd1jFO/pvTvKyjpi7tv6Ol+zCIobL/W2IR8znN0ZFdnPPgEPp3R
+	Wiu5QQ/NfPA8hdOo7LK2IQdjZ6z53dB0AMLipdBc98VE5VAVJQ8IhG5PJg2gdsJ5Ldq5
+	CSEHNszD8OD51VRSBHnz98ty5snVzPdB2Yta1C5FsnN+mc8cwhJoyMTXlEhJB+Jatwp+
+	jsjUB2snTNUFYPSqvfUVOcRsxU1w1LZTrDyrelLCU2DXK0wETaVXY0UE8NDmFX7lYZHR
+	lzBQ==
+X-Received: by 10.182.242.11 with SMTP id wm11mr12172984obc.26.1380027235425; 
+	Tue, 24 Sep 2013 05:53:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.60.44.66 with HTTP; Tue, 24 Sep 2013 05:53:35 -0700 (PDT)
+In-Reply-To: <1379920720-7125-2-git-send-email-s.stirtzel@googlemail.com>
+References: <1379920720-7125-2-git-send-email-s.stirtzel@googlemail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Tue, 24 Sep 2013 14:53:35 +0200
+Message-ID: <CAGiJk9f8785DakJ77n_QErc4NmGh94eXxud2QLTa7h4JqjaLbQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2 2/3] utouch-frame: Add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,112 +42,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 12:44:15 -0000
+X-List-Received-Date: Tue, 24 Sep 2013 12:53:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Recipe based on OE classic's recipe for version 1.60, as of
-ff0d06489db2e50353d72d24aada74c60bddb016.
+2013/9/23 Samuel Stirtzel <s.stirtzel@googlemail.com>:
+> used by utouch-mtview, a visual multitouch test application for X
+>
+> Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+> ---
+>  meta-oe/recipes-support/utouch/utouch-frame_git.bb |   17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/utouch/utouch-frame_git.bb
+>
+> diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+> new file mode 100644
+> index 0000000..c160543
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY = "Touch Frame Library"
+> +DESCRIPTION = "The frame library and tools are used to handle touch frames, i.e., collections of tracked contacts. Bindings for mtdev and XI2.1."
+> +HOMEPAGE = "http://bitmath.org/code/evemu/"
+> +
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=2f31b266d3440dd7ee50f92cf67d8e6c"
+> +
+> +DEPENDS += "mtdev utouch-evemu"
+> +
+> +inherit autotools
+> +
+> +SRC_URI = "git://bitmath.org/git/frame.git;protocol=http"
+> +SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
+> +
+> +PV = "1.1.2+git${SRCPV}"
+> +
+> +S = "${WORKDIR}/git/"
+> --
+> 1.7.9.5
+>
 
-Summary of changes against OE classic's recipe:
+Hi,
 
-* Apply typo_pon.wvdial.1.patch patch from Debian's
-  http://patch-tracker.debian.org/package/wvdial/1.61-4.1
+missed out that the HOMEPAGE is wrong here and in the utouch-evemu recipe,
+v3 coming soon.
 
-* Fix Makefile in do_configure task
 
-* Add wvstreams' include dir to BUILD_CPPFLAGS
-
-* Minor adjustments for the current build system (add
-  LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
-  PR)
-
-* Disable parallel make, since it was causing errors like
-
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| NOTE: make -j 8
-| * Generating CC
-| ./CXX -c wvdialer
-| * Generating CXX
-| ./CXX -c wvmodemscan
-| /bin/bash: ./CXX: No such file or directory
-| make: *** [wvdialer.o] Error 127
-| make: *** Waiting for unfinished jobs....
-| make: *** wait: No child processes.  Stop.
-| ERROR: oe_runmake failed
-| WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvdial/1.61-r0/temp/run.do_compile.18676:1 exit 1 from
-|   exit 1
-
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- .../wvdial/wvdial/typo_pon.wvdial.1.patch          |   20 +++++++++++++
- meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb |   30 ++++++++++++++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvdial/typo_pon.wvdial.1.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial/typo_pon.wvdial.1.patch b/meta-oe/recipes-connectivity/wvdial/wvdial/typo_pon.wvdial.1.patch
-new file mode 100644
-index 0000000..eec5a5d
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvdial/typo_pon.wvdial.1.patch
-@@ -0,0 +1,20 @@
-+Remove warnings found by lintian
-+Last-Update: 2011-01-09
-+Index: wvdial-1.61/pon.wvdial.1
-+===================================================================
-+--- wvdial-1.61.orig/pon.wvdial.1	2011-01-09 21:33:03.000000000 +0300
-++++ wvdial-1.61/pon.wvdial.1	2011-01-09 21:33:15.000000000 +0300
-+@@ -8,13 +8,11 @@
-+ .SH DESCRIPTION
-+ .B pon.wvdial
-+ .br
-+-.TR
-+ .B poff.wvdial
-+ .br
-+ .RS
-+ Replacement scripts for pon and poff.
-+ .RE
-+-\."
-+ .SH SEE ALSO
-+ .BR wvdial (1),
-+ .BR pon (1),
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-new file mode 100644
-index 0000000..af1ebf3
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-@@ -0,0 +1,30 @@
-+HOMEPAGE = "http://www.alumnit.ca/wiki/?WvDial"
-+DESCRIPTION = "WvDial is a program that makes it easy to connect your Linux workstation to the Internet."
-+
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
-+
-+DEPENDS = "wvstreams"
-+RDEPENDS_${PN} = "ppp"
-+
-+SRC_URI = "http://${PN}.googlecode.com/files/${PN}-${PV}.tar.bz2 \
-+           file://typo_pon.wvdial.1.patch \
-+          "
-+
-+SRC_URI[md5sum] = "37e9a2d664effe4efd44c0e1a20136de"
-+SRC_URI[sha256sum] = "99906d9560cbdbc97e1855e7b0a7169f1e11983be3ac539140423f09debced82"
-+
-+EXTRA_OEMAKE = ""
-+export WVLINK="${LD}"
-+
-+PARALLEL_MAKE = ""
-+
-+BUILD_CPPFLAGS += "-I${STAGING_INCDIR}/wvstreams"
-+
-+do_configure() {
-+    sed -i 's/LDFLAGS+=-luniconf/LIBS+=-luniconf/' ${S}/Makefile
-+}
-+
-+do_install() {
-+    oe_runmake prefix=${D}/usr PPPDIR=${D}/etc/ppp/peers install
-+}
 -- 
-1.7.10.4
-
+Regards
+Samuel
 
