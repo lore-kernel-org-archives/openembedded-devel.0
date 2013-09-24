@@ -1,44 +1,36 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D60160EDA
+Return-Path: <eu@felipetonello.com>
+Received: from mail-oa0-f50.google.com (mail-oa0-f50.google.com
+	[209.85.219.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CB3F60F26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 18:11:05 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id t60so4927378wes.36
+	Tue, 24 Sep 2013 19:05:05 +0000 (UTC)
+Received: by mail-oa0-f50.google.com with SMTP id j1so2718238oag.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 11:11:06 -0700 (PDT)
+	Tue, 24 Sep 2013 12:05:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=+xPlmYyXeqBJ+HccVWOcfZPrV2kANJMioMR7JmwFn8o=;
-	b=OPRIpQIAngblFeUeTScu5r0/Ypb6PFhmET35WrUrwV7CPapN01wE0ZW3djnT3WBMgu
-	6bjINlVWDVtITVgLAjXqYDcsSoW6ARuR0sI8fuJ4cSG4mXnG9NFKnZbtfLRAKirCKz6V
-	8evCK30t3l4hqSuFxkZrplcSDu4fCtVRvisBoF6SngwX5V5Q7b0ok3bCSPhuc3ifGu1O
-	SuhOW/yWXf9kvGNLuEpNnVZY476wAenjuPomsdl7JjCfSm9q9oTxVvQ8fu0dqC58OyuN
-	DQANtkMabaRhtuaY8qcvmVD79PpigEjLn12OjUe57n1ZAGbg6mjmh5XMNZxJW0xy1tpH
-	8cxQ==
-X-Gm-Message-State: ALoCoQnHmTLMqjvYuJ1yXSgIOzIEnX9vwV8//98cNmSk2z8lEpS5qthCGhEBAySzhyHW1iG6Yf8t
-X-Received: by 10.194.5.35 with SMTP id p3mr2983198wjp.47.1380046266623;
-	Tue, 24 Sep 2013 11:11:06 -0700 (PDT)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id ey2sm9939127wib.5.1969.12.31.16.00.00
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0SS1PKenvBmQmQc3rN0yDV2yaz44NTTZK+/2c891EHI=;
+	b=irrjHy+vCA3HcmmPtvSlKOX9rvy78OTX3J0kafxmEpX/yK6s9MSKMu46BW2degccpo
+	0gFKuGBFECYYBQwHBjGNeSq4xGHkKxR1dkJiPgCaeYm6lWNxsbUejhatLGO3QDJvPqJ0
+	0lpQWHoh4a/iD4TyfW/LtIvJVrREVR/8Q53l+vw1d4xDudmTofhJnwmU0IaX+VaZxIVE
+	5I0XRVxRS5JeDKK4Q5HFAhKJb+U9iAgGJEGqmwQZzVxGmZMmBSwPWx9W58xYt0/A9APG
+	hULH9hTJmOnwJAx+VWQOe3UeRBYK7dGNb2/b2jCiXlzTGXqZkWuwlwbQ4QE1RAvM89A/
+	ao7g==
+X-Gm-Message-State: ALoCoQmOFFNSZgHMaiTDywLRwmN7OG9ZAB+lHfVlb3IPDFAAuBqEYHb7J9mGlkfYTWoECBfr0mc+
+X-Received: by 10.182.215.202 with SMTP id ok10mr2644797obc.62.1380049506618; 
+	Tue, 24 Sep 2013 12:05:06 -0700 (PDT)
+Received: from localhost.localdomain.com (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPSA id hs4sm23720141obb.5.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 24 Sep 2013 11:11:05 -0700 (PDT)
-Date: Tue, 24 Sep 2013 14:11:02 -0400
-From: Joe MacDonald <joe@deserted.net>
+	Tue, 24 Sep 2013 12:05:05 -0700 (PDT)
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20130924181100.GB23080@deserted.net>
-References: <1380027255-15489-1-git-send-email-paul.eggleton@linux.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1380027255-15489-1-git-send-email-paul.eggleton@linux.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-networking][PATCH] lowpan-tools: add git version
+Date: Tue, 24 Sep 2013 12:04:56 -0700
+Message-Id: <1380049496-22413-1-git-send-email-eu@felipetonello.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH] GeoClue: Created recipe for GeoClue 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,88 +44,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 18:11:05 -0000
-X-Groupsio-MsgNum: 46344
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i9LlY+UWpKt15+FH"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Sep 2013 19:05:07 -0000
 
---i9LlY+UWpKt15+FH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 
-Merged, thanks.
+Geoclue is a D-Bus service that provides location information. The primary
+goal of the Geoclue project is to make creating location-aware applications as
+simple as possible, while the secondary goal is to ensure that no application
+can access location information without explicit permission from user.
 
--J.
+Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+---
+ .../geoclue/files/soup-session-fix.patch           | 30 ++++++++++++++++++++
+ .../recipes-navigation/geoclue/geoclue_2.0.0.bb    | 32 ++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+ create mode 100644 meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
 
-[[oe] [meta-networking][PATCH] lowpan-tools: add git version] On 13.09.24 (=
-Tue 13:54) Paul Eggleton wrote:
+diff --git a/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch b/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+new file mode 100644
+index 0000000..70fe3f5
+--- /dev/null
++++ b/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+@@ -0,0 +1,30 @@
++Upstream-Status: Upstream-Status: Inappropriate [poky 9.0 has older libsoup]
++
++Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
++
++diff --git a/src/gclue-ipclient.c b/src/gclue-ipclient.c
++index 09add30..1771d5c 100644
++--- a/src/gclue-ipclient.c
+++++ b/src/gclue-ipclient.c
++@@ -83,7 +83,7 @@ gclue_ipclient_init (GClueIpclient *ipclient)
++ {
++         ipclient->priv = G_TYPE_INSTANCE_GET_PRIVATE ((ipclient), GCLUE_TYPE_IPCLIENT, GClueIpclientPrivate);
++ 
++-        ipclient->priv->soup_session = soup_session_new ();
+++        ipclient->priv->soup_session = soup_session_sync_new ();
++ }
++ 
++ /**
++diff --git a/src/geoip-server/geoip-update.c b/src/geoip-server/geoip-update.c
++index 6cce7b2..ef672ba 100644
++--- a/src/geoip-server/geoip-update.c
+++++ b/src/geoip-server/geoip-update.c
++@@ -214,7 +214,7 @@ main (int argc, char **argv)
++                         path = GEOIP_DATABASE_PATH;
++         }
++ 
++-        session = soup_session_new ();
+++        session = soup_session_sync_new ();
++ 
++         for (i = 0; i < G_N_ELEMENTS (db_info_map); i++) {
++                 SoupMessage *msg = NULL;
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+new file mode 100644
+index 0000000..6793ca9
+--- /dev/null
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "The Geolocation Service"
++DESCRIPTION = "Geoclue is a D-Bus service that provides location information. \
++The primary goal of the Geoclue project is to make creating location-aware applications \
++as simple as possible, while the secondary goal is to ensure that no application \
++can access location information without explicit permission from user."
++LICENSE = "GPLv2.0+"
++SECTION = "console/network"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=8114b83a0435d8136b47bd70111ce5cd"
++
++PR = "r0"
++DEPENDS = "glib-2.0 dbus dbus-glib json-glib libsoup-2.4"
++
++inherit autotools pkgconfig gtk-doc
++
++SRC_URI = " \
++  http://www.freedesktop.org/software/geoclue/releases/2.0/geoclue-${PV}.tar.xz \
++  file://soup-session-fix.patch \
++"
++
++SRC_URI[md5sum] = "401ff99d530b177c62afacef0a33efd9"
++SRC_URI[sha256sum] = "4a82f184e55a163d86e0ad69bbe1bba9960bb5094220fe1f01350bceda8c67a1"
++
++EXTRA_OECONF += " \
++  --with-dbus-service-user=root \
++  --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
++"
++
++FILES_${PN} += " \
++  ${datadir}/dbus-1/system-services/org.freedesktop.GeoClue2.service \
++  ${datadir}/geoclue-2.0/geoclue-interface.xml \
++"
+\ No newline at end of file
+-- 
+1.8.3.1
 
-> The 0.3 release was a year ago and git HEAD contains fixes to make it
-> work with contiki, so build from git instead of backporting all of the
-> patches.
->=20
-> Based on a patch by Koen Kooi <koen@dominion.thruhere.net>
->=20
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  .../lowpan-tools/lowpan-tools_git.bb               | 25 ++++++++++++++++=
-++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-t=
-ools_git.bb
->=20
-> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_gi=
-t.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> new file mode 100644
-> index 0000000..cf78b45
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY =3D "Utilities for managing the Linux LoWPAN stack"
-> +DESCRIPTION =3D "This is a set of utils to manage the Linux LoWPAN stack=
-=2E \
-> +The LoWPAN stack aims for IEEE 802.15.4-2003 (and for lesser extent IEEE=
- 802.15.4-2006) compatibility."
-> +
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> +
-> +DEPENDS =3D "libnl python"
-> +
-> +PV =3D "0.3+git${SRCPV}"
-> +SRC_URI =3D "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee=
-/linux-zigbee"
-> +SRCREV =3D "a1d9615adde6d1a568813c24a128273ed755af04"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools
-> +
-> +do_install_append() {
-> +	rmdir ${D}${localstatedir}/run
-> +}
-> +
-> +FILES_${PN}-dbg +=3D "${libexecdir}/lowpan-tools/.debug/"
-> +
-> +PACKAGES =3D+ "${PN}-python"
-> +FILES_${PN}-python =3D "${libdir}/python*"
---=20
--Joe MacDonald.
-:wq
 
---i9LlY+UWpKt15+FH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlJB1bQACgkQwFvcllog0XxfdwCgsqq6dDPaHEkGo5BUAChXd9lu
-4cQAn042ktAGMWagOUm6I11fBdVtM94t
-=ndbt
------END PGP SIGNATURE-----
-
---i9LlY+UWpKt15+FH--
