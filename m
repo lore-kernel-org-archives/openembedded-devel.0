@@ -1,45 +1,15 @@
-Return-Path: <B28495@freescale.com>
-Received: from va3outboundpool.messaging.microsoft.com
-	(va3ehsobe004.messaging.microsoft.com [216.32.180.14])
-	by mail.openembedded.org (Postfix) with ESMTP id B3FE4601D6
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 82E6360F54
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 07:17:40 +0000 (UTC)
-Received: from mail195-va3-R.bigfish.com (10.7.14.244) by
-	VA3EHSOBE009.bigfish.com (10.7.40.29) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 24 Sep 2013 07:17:41 +0000
-Received: from mail195-va3 (localhost [127.0.0.1])	by
-	mail195-va3-R.bigfish.com (Postfix) with ESMTP id 8F1A33000A3	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 07:17:41 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h1de097h8275bhz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail195-va3 (localhost.localdomain [127.0.0.1]) by mail195-va3
-	(MessageSwitch) id 1380007059756860_15740;
-	Tue, 24 Sep 2013 07:17:39 +0000 (UTC)
-Received: from VA3EHSMHS044.bigfish.com (unknown [10.7.14.242])	by
-	mail195-va3.bigfish.com (Postfix) with ESMTP id B2C72180244	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 07:17:39 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS044.bigfish.com
-	(10.7.99.54) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 24 Sep 2013 07:17:39 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 24 Sep 2013 07:17:39 +0000
-Received: from NETWORKudp177383uds.ap.freescale.net ([10.193.20.27])	by
-	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id r8O7HaN3027984;
-	Tue, 24 Sep 2013 00:17:37 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Sep 2013 15:17:36 +0800
-Message-ID: <1380007056-16010-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH v2] tipcutils: add recipe
+	Tue, 24 Sep 2013 09:35:31 +0000 (UTC)
+From: Jack Mitchell <ml@communistcode.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 24 Sep 2013 10:35:24 +0100
+Message-Id: <1380015325-28852-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.4
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: [meta-oe][PATCH 1/2] lm_sensors: add ALLOW_EMPTY to lmsensors and lmsensors-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,74 +23,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 07:17:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Sep 2013 09:35:31 -0000
 
-From: Ting Liu <b28495@freescale.com>
+From: Jack Mitchell <jmitchell@cbnl.com>
 
-The Transparent Inter-Process Communication protocol allows applications
-in a clustered computer environment to communicate quickly and reliably
-with other applications, regardless of their location within the
-cluster.
+When building with dev-pkgs enabled I was hitting an error lmsensors-dev
+not available. Adding ALLOW_EMPTY allowed the empty package to be created
+and therefore satisfy the dependancy.
 
-demo binaries are packaged to tipcutils-demos.
-
-Signed-off-by: Ting Liu <b28495@freescale.com>
+Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
 ---
-v2: add subdirectory meta-oe/
+ meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb | 2 ++
+ meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb      | 2 ++
+ 2 files changed, 4 insertions(+)
 
- .../recipes-extended/tipcutils/tipcutils_2.0.6.bb  |   40 ++++++++++++++++++++
- 1 files changed, 40 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-
-diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-new file mode 100644
-index 0000000..f91ef0e
---- /dev/null
-+++ b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-@@ -0,0 +1,40 @@
-+DESCRIPTION = "Transparent Inter-Process Communication protocol"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://tipc-config/tipc-config.c;endline=32;md5=527a3d5745e1581b15a4fddfb5dfda68"
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+index 058ae1b..4b859cd 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+@@ -12,6 +12,8 @@ SRC_URI = "file://fancontrol \
+            file://sensors.conf \
+ "
+ 
++ALLOW_EMPTY_${PN} = "1"
 +
-+SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
-+SRCREV = "292a03e17f889013fca2c7bd0aaeebd600c88f40"
+ do_install() {
+     # Install fancontrol configuration file
+     install -d ${D}${sysconfdir}
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
+index 60df0c6..b5c2921 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
+@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "ecc91ba3d918e96fb7d5eb9acce978af803b130e0b33b08d5ea05b2bfc
+ 
+ inherit update-rc.d
+ 
++ALLOW_EMPTY_${PN} = "1"
 +
-+DEPENDS="virtual/kernel"
-+
-+inherit autotools
-+
-+S = "${WORKDIR}/git"
-+
-+do_configure_prepend() {
-+    ( cd ${S}; ${S}/bootstrap )
-+}
-+
-+do_install_append() {
-+    demos="benchmark hello_world topology_subscr_demo connection_demo \
-+           multicast_demo stream_demo"
-+    for i in $demos;do
-+        install -d ${D}/opt/tipcutils/demos/$i
-+        install ${S}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
-+        install ${S}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
-+    done
-+    install -d ${D}/opt/tipcutils/demos/inventory_sim
-+    install ${S}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
-+
-+    install -d ${D}/opt/tipcutils/ptts
-+    install ${S}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
-+    install ${S}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
-+
-+    install -d ${D}${sysconfdir}
-+    cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
-+}
-+
-+PACKAGES += "${PN}-demos"
-+FILES_${PN}-dbg += "/opt/tipcutils/demos/*/.debug /opt/tipcutils/ptts/.debug"
-+FILES_${PN}-demos = "/opt/tipcutils/*"
-+
+ INITSCRIPT_PACKAGES = "${PN}-fancontrol ${PN}-sensord"
+ INITSCRIPT_NAME_${PN}-fancontrol = "fancontrol"
+ INITSCRIPT_NAME_${PN}-sensord = "sensord"
 -- 
-1.7.3.4
-
+1.8.4
 
 
