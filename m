@@ -1,15 +1,17 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 82E6360F54
+	by mail.openembedded.org (Postfix) with ESMTP id 81D98601D6
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 24 Sep 2013 09:35:31 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Sep 2013 10:35:24 +0100
-Message-Id: <1380015325-28852-1-git-send-email-ml@communistcode.co.uk>
+Date: Tue, 24 Sep 2013 10:35:25 +0100
+Message-Id: <1380015325-28852-2-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.4
+In-Reply-To: <1380015325-28852-1-git-send-email-ml@communistcode.co.uk>
+References: <1380015325-28852-1-git-send-email-ml@communistcode.co.uk>
 Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: [meta-oe][PATCH 1/2] lm_sensors: add ALLOW_EMPTY to lmsensors and lmsensors-config
+Subject: [meta-oe][PATCH 2/2] lmsensors: split out cgi into seperate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,42 +29,51 @@ X-List-Received-Date: Tue, 24 Sep 2013 09:35:31 -0000
 
 From: Jack Mitchell <jmitchell@cbnl.com>
 
-When building with dev-pkgs enabled I was hitting an error lmsensors-dev
-not available. Adding ALLOW_EMPTY allowed the empty package to be created
-and therefore satisfy the dependancy.
+Split the CGI files out of sensord package into there own package. This
+is in order to split out the lighttpd dependancy.
 
 Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
 ---
- meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb | 2 ++
- meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb      | 2 ++
- 2 files changed, 4 insertions(+)
+ meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb | 8 +++++++-
+ meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb      | 2 +-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
-index 058ae1b..4b859cd 100644
+index 4b859cd..ffec22e 100644
 --- a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
 +++ b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
-@@ -12,6 +12,8 @@ SRC_URI = "file://fancontrol \
-            file://sensors.conf \
- "
+@@ -42,11 +42,17 @@ PACKAGES =+ "${PN}-sensord"
+ # fancontrol script configuration
+ PACKAGES =+ "${PN}-fancontrol"
  
-+ALLOW_EMPTY_${PN} = "1"
++# sensord web cgi support
++PACKAGES =+ "${PN}-cgi"
++RRECOMMENDS_${PN}-cgi = "lighttpd lighttpd-module-cgi"
++RDEPENDS_${PN}-cgi = "${PN}-sensord"
++FILES_${PN}-cgi = "/www/*" 
 +
- do_install() {
-     # Install fancontrol configuration file
-     install -d ${D}${sysconfdir}
+ # libsensors configuration file
+ FILES_${PN}-libsensors = "${sysconfdir}/sensors.d/sensors.conf"
+ 
+ # sensord logging daemon configuration files
+-FILES_${PN}-sensord = "${sysconfdir}/sensord.conf /www/*"
++FILES_${PN}-sensord = "${sysconfdir}/sensord.conf"
+ 
+ # fancontrol script configuration file
+ FILES_${PN}-fancontrol = "${sysconfdir}/fancontrol"
 diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
-index 60df0c6..b5c2921 100644
+index b5c2921..ab58e2d 100644
 --- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
 +++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.3.bb
-@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "ecc91ba3d918e96fb7d5eb9acce978af803b130e0b33b08d5ea05b2bfc
+@@ -93,7 +93,7 @@ RDEPENDS_${PN}-sensors = "${PN}-libsensors"
+ FILES_${PN}-sensord = "${bindir}/sensord ${sysconfdir}/init.d/sensord"
+ FILES_${PN}-sensord-dbg = "${bindir}/.debug/sensord"
+ FILES_${PN}-sensord-doc = "${mandir}/man8/sensord.8"
+-RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool lighttpd lighttpd-module-cgi"
++RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool"
+ RRECOMMENDS_${PN}-sensord = "lmsensors-config-sensord"
  
- inherit update-rc.d
- 
-+ALLOW_EMPTY_${PN} = "1"
-+
- INITSCRIPT_PACKAGES = "${PN}-fancontrol ${PN}-sensord"
- INITSCRIPT_NAME_${PN}-fancontrol = "fancontrol"
- INITSCRIPT_NAME_${PN}-sensord = "sensord"
+ # fancontrol script files
 -- 
 1.8.4
 
