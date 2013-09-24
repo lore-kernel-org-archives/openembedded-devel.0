@@ -1,38 +1,36 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-vb0-f46.google.com (mail-vb0-f46.google.com
-	[209.85.212.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D637610FB
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f53.google.com (mail-oa0-f53.google.com
+	[209.85.219.53])
+	by mail.openembedded.org (Postfix) with ESMTP id DC803610FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 14:41:30 +0000 (UTC)
-Received: by mail-vb0-f46.google.com with SMTP id p13so3352150vbe.5
+	Tue, 24 Sep 2013 14:42:19 +0000 (UTC)
+Received: by mail-oa0-f53.google.com with SMTP id i7so2203836oag.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 07:41:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=SY5zLzLa7fy87DJS7ML7GXXI9RlmzYWPATC3jD2s+KM=;
-	b=PLkp/S2x+jWW+6oFC1L6mgisahl5H9GMWf3+d2+n4UQkuxAdKmUV+H3Cquh80S1UAG
-	JFMz3w5Iu7BHlUfJFf7+DpWulFViytTULvSBXxhNm7W+YNQHxMLHpz6JlU0Yiahq9nsc
-	EJY7fIkjNfmlCzRkmnC3GqbBuF0IWZzOcAh1Bem/W50+y0ufGRJtJucecN8VyPjCO+XS
-	vQw9MnUhsqK5oal3lWeBxZYjPddOnkGITUCtbnXIHme1w/znIxI4TXahIzksfZEnwJXL
-	9CEvuEWmfTkINi2eh3DNhHPHEQRNiB3+FMimb0w3UFWy20lXh9pPyj+BHyFHltWxxBxo
-	x53w==
-X-Gm-Message-State: ALoCoQmOqlOMc/IZGgqLHdOn9EvJF+3EZBltv6LOv9x+2rpRW/0pE1wtp8nlBugjjgIB4UKFwsFO
-X-Received: by 10.221.32.133 with SMTP id sk5mr658953vcb.27.1380033692244;
-	Tue, 24 Sep 2013 07:41:32 -0700 (PDT)
+	Tue, 24 Sep 2013 07:42:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ltCWBT2IXx87k/dcfdw9TZebPmWb09sz1oQCn3kup5w=;
+	b=MIQaDiI9CPn60rzyXM80SMfpFc45O5cD0qSUME9kBftT4u404s4Lp+hzeTkNVkStoQ
+	h/bfUVF1DU3LcEtytEwDCjJoGRM9YsR1wZjuS5tuQKfcWaiHUr4Z/uAJCqHKwzT751Yh
+	+0svuNPNphQp7DFZwIbMhYuD/EMy1etIppNImnNhoW0KgV/g237roy6jxvR0JbwMlCFS
+	LEkKQb05bBS3vPxql3zDS1RtBP1CmY2Fg5z9UAzXeSOgRgG3j+uOZAsiMwq0Je5yCUeY
+	HwYIYWQa/N8DK1TuvHCZOQpA06EFvbu+D1ZLEUh/Q+3yFfFISXuil7OYHG4bCVNmZI5G
+	7plg==
 MIME-Version: 1.0
-Received: by 10.220.71.201 with HTTP; Tue, 24 Sep 2013 07:41:12 -0700 (PDT)
-In-Reply-To: <20130924141853.GD3631@jama>
-References: <1378999913-22567-1-git-send-email-ross.burton@intel.com>
-	<20130919121131.GE18414@jama>
-	<CAJTo0LbtppQegr=Z6M1Ewmd2b7rC5-LSdc6UDFf5Cdxz86=0DA@mail.gmail.com>
-	<20130924141853.GD3631@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 24 Sep 2013 15:41:12 +0100
-Message-ID: <CAJTo0Laa8Xhzfh8J4s+3zrzHWYrWmddjL8j2zvk0aqQy_xTu9A@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] dleyna: switch to git clones instead of generated tarballs
+X-Received: by 10.182.16.201 with SMTP id i9mr25831326obd.21.1380033741444;
+	Tue, 24 Sep 2013 07:42:21 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Tue, 24 Sep 2013 07:42:21 -0700 (PDT)
+In-Reply-To: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
+References: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
+Date: Tue, 24 Sep 2013 11:42:21 -0300
+X-Google-Sender-Auth: 1NKSynheT_jbkdBzKWxYS3S3Kr0
+Message-ID: <CAP9ODKpxHF4NUurt-U9HakdAWJ6LAz6HaNoHnuuf5fpEh0h-ow@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 1/2] wvstreams: add recipe for version 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 14:41:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Sep 2013 14:42:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 24 September 2013 15:18, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Sep 24, 2013 at 02:51:39PM +0100, Burton, Ross wrote:
->> On 19 September 2013 13:11, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > On Thu, Sep 12, 2013 at 04:31:53PM +0100, Ross Burton wrote:
->> >> The tarballs used were the dynamically-generated tarballs from github, which
->> >> recently have changed checksum.  Avoid this problem entirely by fetching from
->> >> git, locked to the relevant tag.
->> >
->> > Merged, thanks!
->>
->> Did you actually push that merge?  I don't see it merged here.
+On Tue, Sep 24, 2013 at 9:43 AM, Mario Domenech Goulart
+<mario@ossystems.com.br> wrote:
+> Recipe based on OE classic's recipe for version 4.4.1, as of
+> 0585ccfa49f71a81652c7f63885202e952ebd0e9.
 >
-> Yes
-> http://git.openembedded.org/meta-openembedded/commit/?id=ef3f283609c5b165f5dfa9d6458f3c9ffb53f209
+> Summary of changes against OE classic's recipe:
+>
+> * Apply some Debian patches from
+>   http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
+>
+> * Minor adjustments for the current build system (add
+>   LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
+>   PR)
+>
+> * Disable parallel make, since it was causing errors like
+>
+> Log data follows:
+> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make -j 8
+> | ./CXX -c utils/wvbuffer
+> | ./CXX -c utils/wvbufferstore
+> | ./CXX -c utils/wvcont
+> | /bin/bash: ./CXX: No such file or directory
+> | /bin/bash: ./CXX: No such file or directory
+> | /bin/bash: ./CXX: No such file or directory
+> | * Generating CC using c
+> | make: * Generating CXX using cc
+> | *** [utils/wvbuffer.o] Error 127
+> | make: *** Waiting for unfinished jobs....
+> | make: *** [utils/wvbufferstore.o] Error 127
+> | make: *** [utils/wvcont.o] Error 127
+> | ERROR: oe_runmake failed
+> | WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/run.do_compile.19302:1 exit 1 from
+> |   exit 1
+> | ERROR: Function failed: do_compile (log file is located at .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile.19302)
+>
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 
-So my .git/config is wonky and doing a git pull isn't actually pulling
-origin. whoops.
+Just for reference, Mario and I discussed about the path for including
+this recipe.
 
-Ross
+We agreed it to be placed at wvdial subdir as it will only be used by it.
+
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
