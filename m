@@ -1,24 +1,39 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id C20A3610FB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id ACC9C6C99C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 14:48:26 +0000 (UTC)
-Received: (qmail 11854 invoked by uid 1003); 24 Sep 2013 14:48:27 -0000
-Received: from unknown (HELO ?192.168.1.103?)
-	(philip@opensdr.com@71.171.32.225)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Sep 2013 14:48:27 -0000
-Message-ID: <5241A63B.8050004@balister.org>
-Date: Tue, 24 Sep 2013 10:48:27 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
-MIME-Version: 1.0
+	Tue, 24 Sep 2013 16:09:56 +0000 (UTC)
+Received: by mail-pa0-f52.google.com with SMTP id kl14so3865611pab.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Sep 2013 09:09:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=XEiTCbG7HtAJ0pH+oGyF3UATlSPEX96kRRZxLZtW4K8=;
+	b=YBGf5imFQwNiGxzQw6L/bxKkozhGuN67rIPLP+Dd+kuoTeqJ3dZIG1nrlX1cg1cCtd
+	tgP46r91je8AdmrW6MxZIABsxJWwuxE3XOqCE8mYoZfng8nm5j2BWHrG2Zx0gA8yal4j
+	tjz0zSHC7e3iyP0k5R4HQ9wph1HX136ieuColzvCHohx03Uo+lUvt5ockpN1NUzaQKXT
+	kMnboGzPOo8Zdzl8Wfp4Z4nKhvZBYTI+/+OZlIDI19s+N7/0fCRC/hhXx5znA/ErmL4/
+	cBjWZiqbRf/irTGzOfKVY+sTvclUDvYY3tsGWShl/mRPwheTxHGf6IjI2ihb/BZj+Yam
+	Zg2w==
+X-Received: by 10.66.250.138 with SMTP id zc10mr29322178pac.72.1380038998226; 
+	Tue, 24 Sep 2013 09:09:58 -0700 (PDT)
+Received: from [172.23.9.234] (natint3.juniper.net. [66.129.224.36])
+	by mx.google.com with ESMTPSA id
+	yg3sm46683400pab.16.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 24 Sep 2013 09:09:57 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1380031928-29350-2-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+Date: Tue, 24 Sep 2013 09:09:56 -0700
+Message-Id: <054B3A27-3D25-4794-A81B-9C78A920FDC1@gmail.com>
+References: <1380031928-29350-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+	<1380031928-29350-2-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
 To: openembedded-devel@lists.openembedded.org
-References: <52400D28.2070904@oss.bmw-carit.de>
-In-Reply-To: <52400D28.2070904@oss.bmw-carit.de>
-X-Enigmail-Version: 1.5.2
-Subject: Re: Permission to use OpenEmbedded Logo on ROS wiki
+X-Mailer: Apple Mail (2.1510)
+Subject: Re: [meta-oe][PATCH 2/2] opencv: adding libeigen dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,63 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 14:48:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 24 Sep 2013 16:09:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 09/23/2013 05:43 AM, Lukas Bulwahn wrote:
-> Dear OpenEmbedded e.V. board of directors,
-> 
-> On the ROS wiki [1], we describe an installation instruction [2] to
-> install the ROS (Robot Operating System) middleware on an OpenEmbedded
-> distribution. We refer to this page on the Installation Platform page
-> [3], which links to the ROS installation instructions for all the
-> supported Linux distributions.
-> 
-> On this page, every supported OS distribution is depicted by a logo. We
-> would also like to add the OpenEmbedded logo resized to 50x50 pixels
-> there. To my understanding, the OpenEmbedded e.V. holds the copyright
-> for the OpenEmbedded logo.
-> 
-> Could we obtain the right to use the logo on this page and for pages of
-> future ROS distributions?
+Lukas
 
-The OE board discussed this briefly and we have no problem with you
-using the logo. Thanks for asking!
+Thanks for patch. while you are at it. Can you convert this to be a =
+PACKAGECONFIG as well ?
 
-If you stop using OE, please remove the logo. We would like to avoid
-being mentioned on bit rotting web pages :)
 
-Philip
+On Sep 24, 2013, at 7:12 AM, Lukas Bulwahn =
+<lukas.bulwahn@oss.bmw-carit.de> wrote:
 
-> 
-> 
-> Yours sincerely,
-> 
-> Lukas Bulwahn, BMW Car IT GmbH
-> 
-> References:
-> 
-> [1] http://wiki.ros.org/
-> [2] http://wiki.ros.org/hydro/Installation/OpenEmbedded
-> [3] http://wiki.ros.org/ROS/Installation
-> 
-> 
-> BMW Car IT GmbH
-> Petuelring 116
-> D-80809 Muenchen
-> Germany
-> Mail: lukas.bulwahn@oss.bmw-carit.de
-> Web: http://www.bmw-carit.de
-> -------------------------------------------------------------
-> BMW Car IT GmbH
-> Geschäftsführer: Harald Heinecke und Reinhard Stolle
-> Sitz und Registergericht: München HRB134810
-> -------------------------------------------------------------
+> In the opencv's CMakeLists.txt under Optional 3rd party components,
+> the option "WITH_EIGEN" is by default ON. Hence, this commit adds
+> the libeigen dependency to opencv.
+>=20
+> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+> ---
+> meta-oe/recipes-support/opencv/opencv_2.4.3.bb |    2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb =
+b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+> index 39b608a..21a4f06 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D =
+"file://include/opencv2/opencv.hpp;endline=3D41;md5=3D6d690d8488a
+>=20
+> ARM_INSTRUCTION_SET =3D "arm"
+>=20
+> -DEPENDS =3D "python-numpy v4l-utils libav gtk+ libtool swig =
+swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
+> +DEPENDS =3D "python-numpy v4l-utils libav gtk+ libtool swig =
+swig-native python jpeg bzip2 zlib libpng tiff glib-2.0 libeigen"
+
+
+
+
+>=20
+> SRC_URI =3D =
+"${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz=
+2 \
+>            file://opencv-fix-pkgconfig-generation.patch \
+> --=20
+> 1.7.10.4
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
+
 
