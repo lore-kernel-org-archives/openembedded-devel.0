@@ -1,41 +1,45 @@
-Return-Path: <koansoftware@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 254D9601D6
+Return-Path: <B28495@freescale.com>
+Received: from db9outboundpool.messaging.microsoft.com
+	(mail-db9lp0250.outbound.messaging.microsoft.com [213.199.154.250])
+	by mail.openembedded.org (Postfix) with ESMTP id 9350D601D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2013 06:28:39 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id b45so2233801eek.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2013 23:28:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:reply-to:organization:user-agent:mime-version
-	:to:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=nPr6yahW2G/FmjpGnbWLXKrvRz5HRhMkOHSrPAMOboU=;
-	b=xVdBKkKY3Wh6yqP7Z0mjC/QGiImxA3A82VUrySYuDI11JjY/b3hOajMBOVKh0xb/cT
-	hHz7IxAcXZsFSWMNaxRsEKFM+xZmUOYmGrWrSNq5j+t0Bsx5Sk5zyBBeyvy4uyrEty5l
-	/ym3niCQcHsk+2mtvZCWDiQVjGEiZm1zBfly3ZjW44W+Vo7dm1J4vqzLt/THdFi5lNKT
-	6y+qme1zdK35uZ1wobe4pLANcuH3T54ALD1BmFRnZFMq7mNx90Ghi321a0Qj5NOsQbB7
-	CmIgdY49+2K94dT6Oyjh1Je+jRnn/99nzx655IjoEHy7tAc5PykesBVQOIBBBw/AgDiV
-	iYEQ==
-X-Received: by 10.14.5.3 with SMTP id 3mr10548663eek.49.1380004121141;
-	Mon, 23 Sep 2013 23:28:41 -0700 (PDT)
-Received: from [10.1.10.31]
-	(host61-87-static.14-79-b.business.telecomitalia.it. [79.14.87.61])
-	by mx.google.com with ESMTPSA id m54sm49707227eex.2.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 23 Sep 2013 23:28:40 -0700 (PDT)
-Message-ID: <52413116.6080908@gmail.com>
-Date: Tue, 24 Sep 2013 08:28:38 +0200
-From: Marco <koansoftware@gmail.com>
-Organization: MC
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	Tue, 24 Sep 2013 07:11:26 +0000 (UTC)
+Received: from mail179-db9-R.bigfish.com (10.174.16.232) by
+	DB9EHSOBE027.bigfish.com (10.174.14.90) with Microsoft SMTP Server id
+	14.1.225.22; Tue, 24 Sep 2013 07:11:27 +0000
+Received: from mail179-db9 (localhost [127.0.0.1])	by
+	mail179-db9-R.bigfish.com (Postfix) with ESMTP id 3D7B4E0050	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Sep 2013 07:11:27 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h1de097h8275bhz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
+Received: from mail179-db9 (localhost.localdomain [127.0.0.1]) by mail179-db9
+	(MessageSwitch) id 1380006685176889_7101;
+	Tue, 24 Sep 2013 07:11:25 +0000 (UTC)
+Received: from DB9EHSMHS030.bigfish.com (unknown [10.174.16.254])	by
+	mail179-db9.bigfish.com (Postfix) with ESMTP id 268453C004C	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Sep 2013 07:11:25 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB9EHSMHS030.bigfish.com
+	(10.174.14.40) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Tue, 24 Sep 2013 07:11:24 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Tue, 24 Sep 2013 07:11:22 +0000
+Received: from NETWORKudp177383uds.ap.freescale.net ([10.193.20.27])	by
+	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id r8O7BKPY023089;
+	Tue, 24 Sep 2013 00:11:21 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Sep 2013 15:11:19 +0800
+Message-ID: <1380006679-15867-1-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <52400D28.2070904@oss.bmw-carit.de> <52404FCA.1030506@balister.org>
-	<20130923144721.GB14100@denix.org>
-In-Reply-To: <20130923144721.GB14100@denix.org>
-Subject: Re: Permission to use OpenEmbedded Logo on ROS wiki
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Subject: [meta-oe][PATCH] tipcutils: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,25 +53,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 06:28:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 24 Sep 2013 07:11:27 -0000
+Content-Type: text/plain
 
-Il 23/09/2013 16:47, Denys Dmytriyenko ha scritto:
-> I don't see a problem here either. Do we need an official response?
->
+From: Ting Liu <b28495@freescale.com>
 
-For me is not a problem.
-There are many companies and individuals already using OE logo without 
-official permission.
-Just my two cents.
+The Transparent Inter-Process Communication protocol allows applications
+in a clustered computer environment to communicate quickly and reliably
+with other applications, regardless of their location within the
+cluster.
+
+demo binaries are packaged to tipcutils-demos.
+
+Signed-off-by: Ting Liu <b28495@freescale.com>
+---
+ recipes-extended/tipcutils/tipcutils_2.0.6.bb |   40 +++++++++++++++++++++++++
+ 1 files changed, 40 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-extended/tipcutils/tipcutils_2.0.6.bb
+
+diff --git a/recipes-extended/tipcutils/tipcutils_2.0.6.bb b/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+new file mode 100644
+index 0000000..f91ef0e
+--- /dev/null
++++ b/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+@@ -0,0 +1,40 @@
++DESCRIPTION = "Transparent Inter-Process Communication protocol"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://tipc-config/tipc-config.c;endline=32;md5=527a3d5745e1581b15a4fddfb5dfda68"
++
++SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
++SRCREV = "292a03e17f889013fca2c7bd0aaeebd600c88f40"
++
++DEPENDS="virtual/kernel"
++
++inherit autotools
++
++S = "${WORKDIR}/git"
++
++do_configure_prepend() {
++    ( cd ${S}; ${S}/bootstrap )
++}
++
++do_install_append() {
++    demos="benchmark hello_world topology_subscr_demo connection_demo \
++           multicast_demo stream_demo"
++    for i in $demos;do
++        install -d ${D}/opt/tipcutils/demos/$i
++        install ${S}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
++        install ${S}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
++    done
++    install -d ${D}/opt/tipcutils/demos/inventory_sim
++    install ${S}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
++
++    install -d ${D}/opt/tipcutils/ptts
++    install ${S}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
++    install ${S}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
++
++    install -d ${D}${sysconfdir}
++    cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
++}
++
++PACKAGES += "${PN}-demos"
++FILES_${PN}-dbg += "/opt/tipcutils/demos/*/.debug /opt/tipcutils/ptts/.debug"
++FILES_${PN}-demos = "/opt/tipcutils/*"
++
+-- 
+1.7.3.4
 
 
-Cordiali Saluti / Kindest Regards / Mit freundlichen Grüßen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
-  embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-       http://www.KoanSoftware.com
-         http://www.KaeilOS.com
 
