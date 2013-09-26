@@ -1,54 +1,33 @@
-Return-Path: <enrico.scholz@sigma-chemnitz.de>
-Received: from mail.cvg.de (mail.cvg.de [62.153.82.30])
-	by mail.openembedded.org (Postfix) with ESMTP id 276CC6B8AB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 41CDA60EB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 10:46:00 +0000 (UTC)
-Received: from mail.cvg.de (mail.cvg.de [62.153.82.30])
-	by mailout-1.intern.sigma-chemnitz.de (8.14.4/8.14.4) with ESMTP id
-	r8QAjtSu028812
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=OK)
+	Thu, 26 Sep 2013 12:17:09 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so498706eek.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 12:45:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sigma-chemnitz.de;
-	s=v2012061000; t=1380192358;
-	bh=3K3Xw4eLXFdA76tB9oyq0U01WkW4ZxVneMtJFJrw1RY=;
-	h=From:To:Subject:References:Date:In-Reply-To:Message-ID:
-	MIME-Version:Content-Type:Sender;
-	b=dJoZeIwbrGsb5USwgA+rKs0IF93Lg3RZ49fQXfJCA+zTgmu6n+fAH5TKGsvRmjMmc
-	5hZkR0IjDK4p0loIcEJN9dcZ2GU6Rw9zurf5donNeWlr4UUkO/AgART9ucznXw6ydw
-	ptvXMfS46XXZlgfJzX48yv2Yxg7KF4Nio2p1X/do=
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id r8QAjkIL022357
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 12:45:49 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.80.1) (envelope-from <ensc@sigma-chemnitz.de>) id 1VP94s-0003nK-O5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Sep 2013 12:45:46 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Thu, 26 Sep 2013 05:17:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=U188MIwo7e6faRx3ekh+kXwSqYutByv4S9xUGpmsJDc=;
+	b=ewcfPiYRS8BUlVxr5uZPUHZKLT/76tfiKx2ZYfUwjvi/SbosXYH1TjeN9g4Prqi9+z
+	dv4CgzTprsVxzk2QPD6H1EoPNMW6ONNRoS8NY3yLck1aMbOZK54zkG7eWmw07uTLdlal
+	H9KbXWAkJQ01aj5BJO8ViDFNFYfANdSE/8DvhCHNGXvZKuTShdUweyjy20jTVrvxWUtU
+	4X3G4ij4taPAX0mT77RYdf45oO8MH8Pb3wZyPA25JnSBZNniilv4T2DnBS3v//T4sm+l
+	uLvKKXbzGolCNj9xmWWi6/88YUioKKn7+Qsax4czeuYIdErO0UG41bG5MBw3WgJ9lJ/2
+	+uDg==
+X-Received: by 10.14.4.1 with SMTP id 1mr828853eei.21.1380197829966;
+	Thu, 26 Sep 2013 05:17:09 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	h52sm3378249eez.3.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 26 Sep 2013 05:17:09 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1380188747-9731-1-git-send-email-schnitzeltony@googlemail.com>
-	<52440392.5080908@communistcode.co.uk>
-	<CAJTo0LagmtFYtGFzRGs5yxc8Ua60zFH298SyKwFKYrPH41Drvw@mail.gmail.com>
-Mail-Followup-To: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Date: Thu, 26 Sep 2013 12:45:46 +0200
-In-Reply-To: <CAJTo0LagmtFYtGFzRGs5yxc8Ua60zFH298SyKwFKYrPH41Drvw@mail.gmail.com>
-	(Ross Burton's message of "Thu, 26 Sep 2013 10:58:38 +0100")
-Message-ID: <lyr4cbhndx.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.3 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-DSPAM-Result: Innocent
-X-DSPAM-Probability: 0
-X-DSPAM-Confidence: 0.83
-X-Spam-Score: -6.0
-X-Spam-Level: ------
-X-Spam-Tests: AWL, BAYES_00, DKIM_ADSP_ALL, RP_MATCHES_RCVD, SPF_NEUTRAL,
-	DSPAM_INNOCENT
-X-Scanned-By: MIMEDefang 2.74
-Subject: Re: [meta-qt5] fix do_rootfs for images with dev-pkgs in IMAGE_FEATURES
+Date: Thu, 26 Sep 2013 14:17:13 +0200
+Message-Id: <1380197833-19970-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH] krb5: Upgrade to 1.11.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,40 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 10:46:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Sep 2013 12:17:11 -0000
 
-"Burton, Ross" <ross.burton@intel.com> writes:
+* 1.11 is often failing with:
+  | common.o: file not recognized: File truncated
+  | collect2: ld returned 1 exit status
+  | make[2]: *** [t_export_name] Error 1
+  when higher parallelism is used
+  1.11.2 and newer have fix for that:
+  http://krbdev.mit.edu/rt/Ticket/Display.html?id=7587
+* LIC_FILES_CHKSUM is only from year update
+  < Copyright (C) 1985-2012 by the Massachusetts Institute of Technology.
+  ---
+  > Copyright (C) 1985-2013 by the Massachusetts Institute of Technology.
 
->> I ran into this problem the other day, and after speaking to Ross
->> Burton, he suggested that the better way to fix this is with:
->>
->> RDEPENDS_${PN}-dev = ""
->>
->> I'm starting to get the feeling that the dev-pkgs feature is also a
->> little broken, as it seems as though it doesn't handle cases where
->> sub-packages are installed, but the main package is not.
->
-> Well, the problem is the default dependency on the main package in the
-> -dev package, which happens whether or not the main package even
-> exists.  That's why I prefer removing the dependency instead of
-> creating empty packages just for the bad dependency.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../krb5/{krb5_1.11.bb => krb5_1.11.3.bb}                     | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-connectivity/krb5/{krb5_1.11.bb => krb5_1.11.3.bb} (78%)
 
-ack.  This causes also problems with populate_sdk as it can add
-conflicting packages to the package set.  E.g. when having 'dropbear'
-and 'openssh-sftp-server' in the image, the -dev RDEPENDS tries to add
-the conflicting 'dropbear' and 'openssh' packages to the sdk.
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+similarity index 78%
+rename from meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+index a68e85d..820a135 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+@@ -2,16 +2,15 @@ DESCRIPTION = "A network authentication protocol"
+ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=e8fad1d174de32f8da0ddc56b67b6941"
++LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d9c8180d79838c02eb5eb1a3b184eb9"
+ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+ 
+ inherit autotools binconfig perlnative
+ 
+-PR = "r2"
+-
+-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
+-SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
+-SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
++SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
++SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar"
++SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
++SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
+ 
+ S = "${WORKDIR}/${P}/src/"
+ 
+-- 
+1.8.3.2
 
-Instead of (or better: additional to) changing 'RDEPENDS_${PN}-dev', I
-would prefer the removal of 'ALLOW_EMPTY_${PN}-dev' from bitbake.conf.
-There is not reason to create -dev packages for applications.
-
-In 'meta/conf/bitbake.conf' the '${PN}' in
-
-|:RDEPENDS_${PN}-dev = "${PN} (= ${EXTENDPKGV})"
-
-should be replaced by something which means the "library" package(s).
-
-
-Enrico
 
