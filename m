@@ -1,45 +1,37 @@
-Return-Path: <B28495@freescale.com>
-Received: from db8outboundpool.messaging.microsoft.com
-	(mail-db8lp0187.outbound.messaging.microsoft.com [213.199.154.187])
-	by mail.openembedded.org (Postfix) with ESMTP id E72E561105
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id DD1A261105
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 09:20:40 +0000 (UTC)
-Received: from mail195-db8-R.bigfish.com (10.174.8.240) by
-	DB8EHSOBE007.bigfish.com (10.174.4.70) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 26 Sep 2013 09:20:42 +0000
-Received: from mail195-db8 (localhost [127.0.0.1])	by
-	mail195-db8-R.bigfish.com (Postfix) with ESMTP id ED52E34034F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 09:20:41 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h1de097h8275bhz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail195-db8 (localhost.localdomain [127.0.0.1]) by mail195-db8
-	(MessageSwitch) id 1380187239747432_22531;
-	Thu, 26 Sep 2013 09:20:39 +0000 (UTC)
-Received: from DB8EHSMHS022.bigfish.com (unknown [10.174.8.249])	by
-	mail195-db8.bigfish.com (Postfix) with ESMTP id B189CA00041	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 09:20:39 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB8EHSMHS022.bigfish.com
-	(10.174.4.32) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 26 Sep 2013 09:20:39 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 26 Sep 2013 09:20:37 +0000
-Received: from NETWORKudp177383uds.ap.freescale.net ([10.193.20.27])	by
-	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id r8Q9KZ6w027107;
-	Thu, 26 Sep 2013 02:20:36 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Sep 2013 17:20:31 +0800
-Message-ID: <1380187231-23854-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu, 26 Sep 2013 09:45:59 +0000 (UTC)
+Received: by mail-ea0-f177.google.com with SMTP id f15so397910eak.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Sep 2013 02:46:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=muLH9iCvaiyqIluz5Mf5bSCxNvD+fAnVXmvcBl0zBUk=;
+	b=Nq2JuqEWyjnFjJOYTNePhXniELNLTdP+AJVfr0/bR90GRKvu8CctW9uKHKxvqHmWhb
+	vO8++Niu7eCytiT5wmA61uNtVf0BCQRMElRmuiWWzYhZPF113FKJB/L6cn9P+JkQo6n5
+	4aV7O+H4UzIyxAyrZ4phDucYqXxoOLcQY45Lt6q/KZp8CdP+S0bNNPJgMWbWl81S7SOe
+	8+rTkzezC+CF50Tmi+UKoO2RsPeiYMqhyegj0LhfARpyhYA5DP0sxZ3n2ix3p0w9elrO
+	m1VWRJKF4pXbTC26f+8ry11uRpV+hxdkJEF7ZnAXgVfKG2QtRl+75dB7ce/yOMXkhI4v
+	unSA==
+X-Received: by 10.15.54.199 with SMTP id t47mr84461eew.46.1380188761008;
+	Thu, 26 Sep 2013 02:46:01 -0700 (PDT)
+Received: from localhost.localdomain (ip-178-200-247-59.unitymediagroup.de.
+	[178.200.247.59])
+	by mx.google.com with ESMTPSA id k7sm1820855eeg.13.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 26 Sep 2013 02:46:00 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Sep 2013 11:45:47 +0200
+Message-Id: <1380188747-9731-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH] netperf: set _FILE_OFFSET_BITS to 64 to support large files
+Subject: [meta-qt5] fix do_rootfs for images with dev-pkgs in IMAGE_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,37 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 09:20:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Sep 2013 09:46:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Ting Liu <b28495@freescale.com>
+| Collected errors:
+|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for qtquickcontrols-dev:
+|  *     qtquickcontrols (= 5.1.0-r0) *
+|  * opkg_install_cmd: Cannot install package qtquickcontrols-dev.
 
-Without this patch, netperf2.6 can only
-support files smaller than 2GB with TCP_SENDFILE item.
-
-Signed-off-by: Ting Liu <b28495@freescale.com>
-Tested-by: Jianhua Xie<jianhua.xie@freescale.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-support/netperf/netperf_2.6.0.bb       |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes-qt/qt5/qtquickcontrols.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-index eda7859..1d9ba20 100644
---- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-+++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-@@ -23,6 +23,10 @@ S = "${WORKDIR}/netperf-${PV}"
- # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
- CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+diff --git a/recipes-qt/qt5/qtquickcontrols.inc b/recipes-qt/qt5/qtquickcontrols.inc
+index 63e884e..06b5350 100644
+--- a/recipes-qt/qt5/qtquickcontrols.inc
++++ b/recipes-qt/qt5/qtquickcontrols.inc
+@@ -1,3 +1,5 @@
+ require qt5.inc
  
-+# set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files 
-+# larger than 2GB
-+CFLAGS_append = " -D_FILE_OFFSET_BITS=64"
+ DEPENDS += "qtdeclarative"
 +
- # autotools.bbclass attends to include m4 files with path depth <= 2 by
- # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
- do_configure_prepend() {
++ALLOW_EMPTY_${PN} = "1"
 -- 
-1.7.3.4
-
+1.8.3.1
 
 
