@@ -1,33 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 41CDA60EB6
+Return-Path: <aguirre.nicolas@gmail.com>
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id AE5916CB6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 12:17:09 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c13so498706eek.33
+	Thu, 26 Sep 2013 16:26:48 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id q58so1421366wes.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2013 05:17:10 -0700 (PDT)
+	Thu, 26 Sep 2013 09:26:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=U188MIwo7e6faRx3ekh+kXwSqYutByv4S9xUGpmsJDc=;
-	b=ewcfPiYRS8BUlVxr5uZPUHZKLT/76tfiKx2ZYfUwjvi/SbosXYH1TjeN9g4Prqi9+z
-	dv4CgzTprsVxzk2QPD6H1EoPNMW6ONNRoS8NY3yLck1aMbOZK54zkG7eWmw07uTLdlal
-	H9KbXWAkJQ01aj5BJO8ViDFNFYfANdSE/8DvhCHNGXvZKuTShdUweyjy20jTVrvxWUtU
-	4X3G4ij4taPAX0mT77RYdf45oO8MH8Pb3wZyPA25JnSBZNniilv4T2DnBS3v//T4sm+l
-	uLvKKXbzGolCNj9xmWWi6/88YUioKKn7+Qsax4czeuYIdErO0UG41bG5MBw3WgJ9lJ/2
-	+uDg==
-X-Received: by 10.14.4.1 with SMTP id 1mr828853eei.21.1380197829966;
-	Thu, 26 Sep 2013 05:17:09 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	h52sm3378249eez.3.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 26 Sep 2013 05:17:09 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=eKe7r3MrqRWSYKhUKisHYsntXuE57PnJWzG0d372dOg=;
+	b=PCmxwaetFGyCzXH2XtR9e712RUmV8Q4QxoOvBkAqaoxqNWzuk4n5Sjh2SC0P8VOmrd
+	GomqLY/gTs/BObJYC0qaflD2dhLk5beNmhNViLsSb+E4IrXNrRuFJ2DoPcidfFHx/LDE
+	NT5RwmRznqnJ790gC01CzJt1LWnQ5pVQyzMgm66EKrnAG1ADCAlBHAzfkosusdJjbNEx
+	kzY72s2Eq3RTMordpCYt4AQCATV/4CVDd6tuUY+0v/ceipiMhuBdIqzqoDW2ctNJ0a40
+	mmQh/3ZXOB3CYq9MQpzsUUgOREFLRp8fo8lrPqHzhXjDW10zweYyk1w1FrERncms0BKP
+	Ft5Q==
+X-Received: by 10.180.160.240 with SMTP id xn16mr28225138wib.62.1380212809585; 
+	Thu, 26 Sep 2013 09:26:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.180.80.69 with HTTP; Thu, 26 Sep 2013 09:26:29 -0700 (PDT)
+From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
+Date: Thu, 26 Sep 2013 18:26:29 +0200
+Message-ID: <CAHTvVMe_qJ+k6gDMxnn=A=O3cemKz+cmGpsDWBOSg6VFqEzefA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Sep 2013 14:17:13 +0200
-Message-Id: <1380197833-19970-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] krb5: Upgrade to 1.11.3
+Subject: [meta-efl] question about OpenGL ES and Evas
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,56 +38,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 12:17:11 -0000
+X-List-Received-Date: Thu, 26 Sep 2013 16:26:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* 1.11 is often failing with:
-  | common.o: file not recognized: File truncated
-  | collect2: ld returned 1 exit status
-  | make[2]: *** [t_export_name] Error 1
-  when higher parallelism is used
-  1.11.2 and newer have fix for that:
-  http://krbdev.mit.edu/rt/Ticket/Display.html?id=7587
-* LIC_FILES_CHKSUM is only from year update
-  < Copyright (C) 1985-2012 by the Massachusetts Institute of Technology.
-  ---
-  > Copyright (C) 1985-2013 by the Massachusetts Institute of Technology.
+Hi,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../krb5/{krb5_1.11.bb => krb5_1.11.3.bb}                     | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-connectivity/krb5/{krb5_1.11.bb => krb5_1.11.3.bb} (78%)
+I'm building an image based on meta-efl.
+I added recipes to build OpenGL ES for my hardware (allwinner sunxi
+based processor with mali gpu) but i'm facing a problem.
+When Evas is build, it will try to find gles includes in sysroot. If
+they are found, it's correctly built with this support. So i need to
+build and install all this stuff before building evas.
+Which is not always the case, when i build an image from scratch for example
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
-similarity index 78%
-rename from meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-rename to meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
-index a68e85d..820a135 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
-@@ -2,16 +2,15 @@ DESCRIPTION = "A network authentication protocol"
- HOMEPAGE = "http://web.mit.edu/Kerberos/"
- SECTION = "console/network"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=e8fad1d174de32f8da0ddc56b67b6941"
-+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d9c8180d79838c02eb5eb1a3b184eb9"
- DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
- 
- inherit autotools binconfig perlnative
- 
--PR = "r2"
--
--SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
--SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
--SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
-+SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
-+SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar"
-+SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
-+SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
- 
- S = "${WORKDIR}/${P}/src/"
- 
+I would like to know wihch is the best practice in this case ?
+
+- Add a bbappend to evas in my specific case ?
+- Modify evas recipe upstream : detect opengl in distro feature and
+add a dependency on virtual/gl in this case ?
+- Another solution ?
+
+Best regards,
 -- 
-1.8.3.2
-
+Nicolas Aguirre
+Mail: aguirre.nicolas@gmail.com
+Web: http://enna.geexbox.org
+Blog: http://dev.enlightenment.fr/~captainigloo/
 
