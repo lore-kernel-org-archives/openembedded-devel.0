@@ -1,35 +1,34 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id EB6A6610F8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f54.google.com (mail-pb0-f54.google.com
+	[209.85.160.54])
+	by mail.openembedded.org (Postfix) with ESMTP id B7CB06C9A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2013 22:06:19 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id d17so1494276eek.14
+	Sat, 28 Sep 2013 10:26:43 +0000 (UTC)
+Received: by mail-pb0-f54.google.com with SMTP id ro12so3569400pbb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2013 15:06:21 -0700 (PDT)
+	Sat, 28 Sep 2013 03:26:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fP+7y8FBP6vu68RbUPwZhu/WYGinfgq4DxSIC+UXdG8=;
-	b=qRhxQc6Nq4PzZaS1BgmcoxwCMNYwyMqmaKA5XdxWTHb5HBfD5l4Wp2hC1IWGP8Ifpc
-	Jfujt/76kJOIcoRykwISrA7vAfzHJB4b1wVbrxJvTKQ/otysVDp9uqsk28TiZDWvW9Ba
-	Qzi+pUVZDPSjPrwLrJFW3yrDt8UCLgQ4cdA+C0s238SNnWqEsMorC/qC9W9RjCKUeChu
-	teseutXahZsgg7ZIkJYJrzguV/ejrUvzf1QffAnv6dpwqPUKufwZrbEjpOQKb6Yix3xo
-	NX/GKA4ACY4WrIpmPp1bRR12Dw8oVcPFhS5AodGD7aEFSWeBsQKTLqfnioU5ujv1eHIo
-	Z97Q==
-X-Received: by 10.14.184.132 with SMTP id s4mr13921717eem.13.1380319581295;
-	Fri, 27 Sep 2013 15:06:21 -0700 (PDT)
-Received: from mizar.localdomain ([87.13.50.106])
-	by mx.google.com with ESMTPSA id
-	x47sm20616818eea.16.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 27 Sep 2013 15:06:20 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=kBa2dFuyTbnTYBikYC3/kQq2jmsZdScFokqtb0o7+Ok=;
+	b=Zbkeqee/KUBW9SBQFS33XOz6o8y+iYhOJojGE2e7LjJHx0QVAOQBhEWMD25XdCiajF
+	v2cwwAnl1T0GxkF7DTffh/fU9R5K6qWMgvYdVzSPi8831ocgd59xF+1bvETN7Dx1QMKv
+	00H8uetiDaN9z5OoHMOinp+4jMvXvI4xjKrvj8hQ9CV1CfYm9Bt0o4CXf9JgV/Xv202r
+	xHLvQ6wDWnSKut8pcCvKnujSquvh+4L8HhhY39pLRNfgtJ+rJvMta+6Iz7zTW93erbwY
+	Zgf6h/o3DsOruH4l1ZtKksu48IMaRlQUwupF5d/nBS7VvpE6wtmXoSmrMTXO7fm92Apx
+	tkKA==
+X-Received: by 10.68.196.227 with SMTP id ip3mr712111pbc.163.1380364004660;
+	Sat, 28 Sep 2013 03:26:44 -0700 (PDT)
+Received: from haswell.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id f2sm14143276pbg.44.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 28 Sep 2013 03:26:43 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Sep 2013 00:05:59 +0200
-Message-Id: <1380319559-12074-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-In-Reply-To: <1380319559-12074-1-git-send-email-andrea.adami@gmail.com>
-References: <1380319559-12074-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] klcc-cross: disable more unused tasks
+Date: Sat, 28 Sep 2013 03:26:31 -0700
+Message-Id: <1380363991-27494-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH] opencv: Update SRC_URI to use git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,44 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2013 22:06:20 -0000
+X-List-Received-Date: Sat, 28 Sep 2013 10:26:44 -0000
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+opencv now has moved to using git. Lets use the git
+version to fetch SRCs
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ .../{opencv-samples_2.4.3.bb => opencv-samples_2.4.bb}       | 12 +++++-------
+ .../opencv/{opencv_2.4.3.bb => opencv_2.4.bb}                | 10 ++++------
+ 2 files changed, 9 insertions(+), 13 deletions(-)
+ rename meta-oe/recipes-support/opencv/{opencv-samples_2.4.3.bb => opencv-samples_2.4.bb} (82%)
+ rename meta-oe/recipes-support/opencv/{opencv_2.4.3.bb => opencv_2.4.bb} (91%)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb
-index 17ae0c1..07b76d7 100644
---- a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.2.bb
-@@ -11,10 +11,6 @@ FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
+diff --git a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
+similarity index 82%
+rename from meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
+rename to meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
+index 50efd77..e00a5e6 100644
+--- a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
+@@ -7,14 +7,12 @@ DEPENDS = "opencv"
  
- inherit cross
+ LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
+ "
++SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
++SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
++          "
++PV = "2.4.3+git${SRCPV}"
  
--do_configure () {
--    :
--}
+-SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
+-"
 -
- do_compile() {
-     oe_runmake 'INSTALLDIR=${STAGING_DIR_TARGET}${target_libdir}/klibc' klcc
- }
-@@ -23,3 +19,14 @@ do_install() {
-     install -d ${D}${bindir}
-     install -m 0755 klcc/klcc ${D}${bindir}/${TARGET_PREFIX}klcc
- }
-+
-+# disable task already run in klibc recipe
-+do_configure[noexec] = "1"
-+
-+# disable unneeded tasks
-+do_package[noexec] = "1"
-+do_packagedata[noexec] = "1"
-+do_package_write_ipk[noexec] = "1"
-+do_package_write_rpm[noexec] = "1"
-+do_package_write_deb[noexec] = "1"
-+do_package_write_tar[noexec] = "1"
+-SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
+-SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
+-
+-S = "${WORKDIR}/OpenCV-${PV}"
++S = "${WORKDIR}/git"
+ 
+ do_install() {
+     cd samples/c
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+similarity index 91%
+rename from meta-oe/recipes-support/opencv/opencv_2.4.3.bb
+rename to meta-oe/recipes-support/opencv/opencv_2.4.bb
+index 39b608a..3ca32f9 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+@@ -9,16 +9,14 @@ ARM_INSTRUCTION_SET = "arm"
+ 
+ DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
++SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
++SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
+            file://opencv-fix-pkgconfig-generation.patch \
+ "
+ 
+-SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
+-SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
++PV = "2.4.3+git${SRCPV}"
+ 
+-PR = "r2"
+-
+-S = "${WORKDIR}/OpenCV-${PV}"
++S = "${WORKDIR}/git"
+ 
+ # Do an out-of-tree build
+ OECMAKE_SOURCEPATH = "${S}"
 -- 
-1.8.1.5
+1.8.3.2
 
 
