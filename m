@@ -1,34 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E26C16A441
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id A02956A441
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2013 23:15:49 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id b45so1913116eek.29
+	Sat, 28 Sep 2013 23:16:39 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id o10so1879401eaj.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2013 16:15:51 -0700 (PDT)
+	Sat, 28 Sep 2013 16:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=eJ8XFIdG5/lX4vRHCinXa8MBWkz3NdeOFuL91Ndv8DM=;
-	b=CMnSonDjLGrVeJLKLGwbqxf+MW86q6iWGFYfr0giC2ydHtS0Ff7fgQBrgncOus81RJ
-	/vRAsfYDoeKNcFUA1AhmEQFZhnUjvIWrvoSc76pWsN0/QCs4QTsJYUEZs9tErwybwXd9
-	DiH4e5eRFL4LAeunZBZvUOeCj1qyY1eONeKPCONDO9ZWgOd/71qfTAoTc8uz1Of5TIwi
-	V25ddRE53Po1wTn4GsrVpqANjjWxNLubgV17lSOYXFl+DStZOPqhcAQ/FEOtYhJHm1bl
-	39O24tVLyJAE0gSdIalEJopXHmv6fvPQM1GcMoHsTslmGIebZpOu/fLB+31wMzfmN23c
-	U7lQ==
-X-Received: by 10.14.225.199 with SMTP id z47mr23550019eep.24.1380410150866;
-	Sat, 28 Sep 2013 16:15:50 -0700 (PDT)
+	bh=zhXPB9DqWX27YqPlLUbhCsbRUt2eIgkr9jjtoJT4am4=;
+	b=XlYwZXyxD8a5rcOy8KiSEo6j22eZgI8rIIl2fXQ+pBQqdhS6qf5PMumA27THaivhg/
+	acWzvQwpzaiqYbM8FEdkaRTMZ8ZdPLLsSBZIiXY/o9H5yaa5jC4vtEGC877ZUjQljsUI
+	uOn2QGSZL5g/ljd7IG0/3kPX/xiySM6QGnGyGQV7Sd1ROqMC7UaLGOCWKU91BolQ1qov
+	ZtBB87Sc+hiJjjnyGoLUKIWtgGD5eWM0r9ae11XMLH1XgLf7BEbDbsQBazqA2Ob2DBiW
+	uIRYOJSUFfzOR95NbGGdAGWKnNd9YWbCHoF1AK/NUBYPdIWZl0t3wHzRvDhBn0DqtZlz
+	s2Mg==
+X-Received: by 10.14.177.199 with SMTP id d47mr23112990eem.14.1380410201101;
+	Sat, 28 Sep 2013 16:16:41 -0700 (PDT)
 Received: from mizar.localdomain
 	(host172-229-dynamic.20-79-r.retail.telecomitalia.it.
-	[79.20.229.172])
-	by mx.google.com with ESMTPSA id j7sm32747921eeo.15.1969.12.31.16.00.00
+	[79.20.229.172]) by mx.google.com with ESMTPSA id
+	r48sm32759342eev.14.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 28 Sep 2013 16:15:50 -0700 (PDT)
+	Sat, 28 Sep 2013 16:16:40 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Sep 2013 01:15:39 +0200
-Message-Id: <1380410139-10193-1-git-send-email-andrea.adami@gmail.com>
+Date: Sun, 29 Sep 2013 01:16:33 +0200
+Message-Id: <1380410193-10260-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] kexecboot: add BBCLASSEXTEND for the klibc static flavor
+Subject: [meta-handheld][PATCH] kexecboot-klibc: remove stale bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,53 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Sep 2013 23:15:51 -0000
+X-List-Received-Date: Sat, 28 Sep 2013 23:16:40 -0000
 
-remove kexecboot-klibc recipe
-bump PV to local 0.5.9.1
-remove PR
+The recipe is now using BBCLASSEXTEND = "klibc"
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb | 12 ------------
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb       |  5 +++--
- 2 files changed, 3 insertions(+), 14 deletions(-)
- delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
+ recipes-bsp/kexecboot/kexecboot-klibc_git.bbappend | 3 ---
+ 1 file changed, 3 deletions(-)
+ delete mode 100644 recipes-bsp/kexecboot/kexecboot-klibc_git.bbappend
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
+diff --git a/recipes-bsp/kexecboot/kexecboot-klibc_git.bbappend b/recipes-bsp/kexecboot/kexecboot-klibc_git.bbappend
 deleted file mode 100644
-index 4144d85..0000000
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-klibc_git.bb
+index 61ba802..0000000
+--- a/recipes-bsp/kexecboot/kexecboot-klibc_git.bbappend
 +++ /dev/null
-@@ -1,12 +0,0 @@
--PV = "0.5.9"
--PR = "r10+gitr${SRCREV}"
+@@ -1,3 +0,0 @@
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 -
--SRC_URI = "git://github.com/kexecboot/kexecboot.git"
--SRCREV = "0bcc14671aa2d84ec20f260582aca36bb901ccf1"
--S = "${WORKDIR}/git"
--
--# the binary is statically linked against klibc
--inherit klibc
--
--require kexecboot.inc
--SUMMARY = "kexecboot linux-as-bootloader, statically compiled against klibc"
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index dd630a9..1b08805 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -1,8 +1,9 @@
--PV = "0.5.9"
--PR = "r10+gitr${SRCREV}"
-+PV = "0.5.9.1"
- 
- SRC_URI = "git://github.com/kexecboot/kexecboot.git"
- SRCREV = "0bcc14671aa2d84ec20f260582aca36bb901ccf1"
- S = "${WORKDIR}/git"
- 
- require kexecboot.inc
-+
-+BBCLASSEXTEND = "klibc"
+-require kexecboot-handhelds.inc
 -- 
 1.8.1.5
 
