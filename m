@@ -1,34 +1,38 @@
-Return-Path: <andrea.adami@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A78E460071
+	by mail.openembedded.org (Postfix) with ESMTP id 277F161EF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2013 23:54:56 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c13so1899292eek.19
+	Sun, 29 Sep 2013 07:08:42 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so1985408eek.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2013 16:54:57 -0700 (PDT)
+	Sun, 29 Sep 2013 00:08:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=FgGvnQ2JWD1XALKe51nmWVMS6KRja1D7UxRh19v3XA4=;
-	b=wNx6om57mte3z+e6P+nXES2q2JQEfxfyxImjryyF6r3G+6xvHC4ZdzZhAjjFXC946u
-	3njr5qhWIyD7W4GnuQxPOSWqF42wNlOhY1xuGNUvR9P+Gq/2okOHMXXiTgvm2tZnIYiz
-	IQ56/K+iYdx62krNczuQWlhh75+ddm8FKWaSyBa7zX0Q2ljxoKQ9V6EPWKWADGzVaR0h
-	qE0/U/M95j4P34feGfJFYCBCaAqQoyIBsZVFguChLWwuS8u9G2/JJvBuGV2jxwkNIk7l
-	WDLSbwNiqhHybCJoNkYX0bJNrZMJllUtyz4HoUVFjP9roCdQ98Ju7pTczoE6usOcAJtr
-	2v/w==
-X-Received: by 10.14.122.132 with SMTP id t4mr23747236eeh.20.1380412497759;
-	Sat, 28 Sep 2013 16:54:57 -0700 (PDT)
-Received: from mizar.localdomain
-	(host172-229-dynamic.20-79-r.retail.telecomitalia.it.
-	[79.20.229.172]) by mx.google.com with ESMTPSA id
-	r48sm33037046eev.14.1969.12.31.16.00.00
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=6Cq9dErgNmqaC84xuYht2bRfpQvgEaZZXGo79YekOxo=;
+	b=vczYSAQDMpJ07cYKIZApnNuJT5tfBE/tMEl09V2k20XtMnOOqq7yN5dloviR0Axdiw
+	MJpMD8MkZrP2K2Vyv1fVpla7A/RfKGWctVuRnJir6AtiMRUz748/7wdxwh2HRL2DapGI
+	guLUUki4Mm/HCEXoRK7uifPRfjwVqiVg4xMgd2iH+MD49ZrgJtMqH7+gSX55xo/U454T
+	0A1kyiGb1Kl5Mxpb/8hIBf8/rae489zMevtwNudIy+PRlMKoyJsRysN2y8eLvUk3uIap
+	FPo9JpdD5TalxPBOjjFScRMTlDhvRXxRYpzhk+q8v4gKA/N+uQV2fcsfcGUqpEo4OT2H
+	xwDQ==
+X-Received: by 10.14.174.131 with SMTP id x3mr129350eel.61.1380438524365;
+	Sun, 29 Sep 2013 00:08:44 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	d8sm36220782eeh.8.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 28 Sep 2013 16:54:57 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sun, 29 Sep 2013 00:08:43 -0700 (PDT)
+Date: Sun, 29 Sep 2013 09:08:45 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Sep 2013 01:54:52 +0200
-Message-Id: <1380412492-15152-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] nandlogical: move to 1.1.0 and add BBCLASSEXTEND for the klibc version
+Message-ID: <20130929070845.GC3575@jama>
+References: <1380407119-2352-1-git-send-email-stefan@datenfreihafen.org>
+	<1380407119-2352-4-git-send-email-stefan@datenfreihafen.org>
+MIME-Version: 1.0
+In-Reply-To: <1380407119-2352-4-git-send-email-stefan@datenfreihafen.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH 4/6] maliit-*-qt5: Adjust MKSPEC path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,67 +46,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Sep 2013 23:54:58 -0000
+X-List-Received-Date: Sun, 29 Sep 2013 07:08:44 -0000
+X-Groupsio-MsgNum: 46385
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uXxzq0nDebZQVNAZ"
+Content-Disposition: inline
 
-Remove nandlogical-klibc recipe
-Sync PV to 1.1.0 like the source tarball
-Remove PR
+--uXxzq0nDebZQVNAZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-bsp/zaurus-utils/nandlogical-klibc_1.0.0.bb              | 9 ---------
- .../zaurus-utils/{nandlogical_1.0.0.bb => nandlogical_1.1.0.bb}  | 6 +++++-
- 2 files changed, 5 insertions(+), 10 deletions(-)
- delete mode 100644 recipes-bsp/zaurus-utils/nandlogical-klibc_1.0.0.bb
- rename recipes-bsp/zaurus-utils/{nandlogical_1.0.0.bb => nandlogical_1.1.0.bb} (83%)
+On Sat, Sep 28, 2013 at 11:25:17PM +0100, Stefan Schmidt wrote:
+> ---
+>  recipes-qt/maliit/maliit-framework-qt5_git.bb | 7 ++++---
+>  recipes-qt/maliit/maliit-plugins-qt5_git.bb   | 1 +
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/m=
+aliit/maliit-framework-qt5_git.bb
+> index 7b336ff..4f2da19 100644
+> --- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
+> +++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+> @@ -54,7 +54,7 @@ EXTRA_QMAKEVARS_PRE =3D "\
+>      PREFIX=3D${prefix} \
+>      LIBDIR=3D${libdir} \
+>      QT_IM_PLUGIN_PATH=3D${libdir}/qt4/plugins/inputmethods \
+> -    MALIIT_INSTALL_PRF=3D${datadir}/qt4/mkspecs/features \
+> +    MALIIT_INSTALL_PRF=3D${QMAKE_MKSPEC_PATH}/mkspecs/features \
+>      SCHEMADIR=3D${sysconfdir}/gconf/schemas \
+>      CONFIG+=3Ddisable-gconf \
+>      CONFIG+=3Ddisable-gtk-cache-update \
+> @@ -68,8 +68,9 @@ EXTRA_OEMAKE +=3D "INSTALL_ROOT=3D${D}"
+> =20
+>  do_install_append() {
+>      #Fix absolute paths
+> -    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/q=
+t4/mkspecs/features/maliit-framework.prf
+> -    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/q=
+t4/mkspecs/features/maliit-plugins.prf
+> +    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/usr/lib/qt5/=
+mkspecs/features/maliit-framework.prf
+> +    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/usr/lib/qt5/=
+mkspecs/features/maliit-plugins.prf
+> +    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/usr/lib/qt5/=
+mkspecs/features/maliit-defines.prf
 
-diff --git a/recipes-bsp/zaurus-utils/nandlogical-klibc_1.0.0.bb b/recipes-bsp/zaurus-utils/nandlogical-klibc_1.0.0.bb
-deleted file mode 100644
-index 47902d7..0000000
---- a/recipes-bsp/zaurus-utils/nandlogical-klibc_1.0.0.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require nandlogical_${PV}.bb
--
--inherit klibc
--
--do_compile() {
--        ${CC} ${CFLAGS} ${LDFLAGS} -static -I${STAGING_INCDIR} nandlogical.c -o nandlogical
--}
--
--FILESPATH =. "${FILE_DIRNAME}/nandlogical:"
-diff --git a/recipes-bsp/zaurus-utils/nandlogical_1.0.0.bb b/recipes-bsp/zaurus-utils/nandlogical_1.1.0.bb
-similarity index 83%
-rename from recipes-bsp/zaurus-utils/nandlogical_1.0.0.bb
-rename to recipes-bsp/zaurus-utils/nandlogical_1.1.0.bb
-index 07180c5..0fb6e2c 100644
---- a/recipes-bsp/zaurus-utils/nandlogical_1.0.0.bb
-+++ b/recipes-bsp/zaurus-utils/nandlogical_1.1.0.bb
-@@ -1,7 +1,8 @@
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:${THISDIR}/files:"
-+
- DESCRIPTION = "Nandlogical for Sharp mtd1"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://nandlogical.c;endline=15;md5=77804e7fdf625e56869f32d9aec762a2"
--PR = "r6"
- 
- SRC_URI = "http://distro.ibiblio.org/pub/linux/distributions/pdaxrom/download/1.1.0beta4/src/survive-1.1.0.tar.bz2 \
-            file://oobblock-to-writesize.patch"
-@@ -11,6 +12,8 @@ SRC_URI[sha256sum] = "0d02edc12509f6dc98cded37c68238f939c522cbd398fd527785a1e7e3
- 
- S = "${WORKDIR}/survive-1.1.0"
- 
-+EXTRA_OEMAKE_class-klibc = "-static -I${STAGING_INCDIR}"
-+
- do_compile () {
-         ${CC} ${CFLAGS} ${LDFLAGS} nandlogical.c -o nandlogical
- }
-@@ -21,3 +24,4 @@ do_install () {
- }
- 
- COMPATIBLE_MACHINE = "(poodle|c7x0|akita|spitz|tosa)"
-+BBCLASSEXTEND = "klibc"
--- 
-1.8.1.5
+Why not use QMAKE_MKSPEC_PATH here as well?
 
+> =20
+>      install -d ${D}${datadir}/applications
+>      install -m 644 ${WORKDIR}/maliit-server.desktop ${D}${datadir}/appli=
+cations
+> diff --git a/recipes-qt/maliit/maliit-plugins-qt5_git.bb b/recipes-qt/mal=
+iit/maliit-plugins-qt5_git.bb
+> index 9d5b0e2..6b019ef 100644
+> --- a/recipes-qt/maliit/maliit-plugins-qt5_git.bb
+> +++ b/recipes-qt/maliit/maliit-plugins-qt5_git.bb
+> @@ -23,6 +23,7 @@ PV =3D "0.99.0+git${SRCPV}"
+> =20
+>  EXTRA_QMAKEVARS_PRE =3D "\
+>      PREFIX=3D${prefix} \
+> +    MALIIT_INSTALL_PRF=3D${QMAKE_MKSPEC_PATH}/mkspecs/features \
+>      LIBDIR=3D${libdir} \
+>      CONFIG+=3Dnodoc \
+>  "
+> --=20
+> 1.8.4.rc3
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--uXxzq0nDebZQVNAZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.21 (GNU/Linux)
+
+iEYEARECAAYFAlJH0f0ACgkQN1Ujt2V2gBz3rACghLdTHYMMNrd7TJZnVlYQFFwc
+cJUAniI1x06x8DtM5ruTwiy5ujjBp2n6
+=vGan
+-----END PGP SIGNATURE-----
+
+--uXxzq0nDebZQVNAZ--
