@@ -1,23 +1,41 @@
-Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
-Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id EF2856CC4D
+Return-Path: <riku.voipio@linaro.org>
+Received: from mail-qc0-f179.google.com (mail-qc0-f179.google.com
+	[209.85.216.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B77FD6CC34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 07:44:22 +0000 (UTC)
-Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
-	[192.168.101.5])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: lukas.bulwahn)
-	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 6BA034002C;
-	Tue,  1 Oct 2013 08:40:26 +0200 (CEST)
-From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Oct 2013 09:44:14 +0200
-Message-Id: <1380613454-3799-3-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1380613454-3799-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-References: <1380613454-3799-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-Subject: [meta-oe][PATCHv2 3/3] opencv: adding PACKAGECONFIG for eigen gtk jpeg libav png tiff v4l
+	Tue,  1 Oct 2013 07:44:55 +0000 (UTC)
+Received: by mail-qc0-f179.google.com with SMTP id l4so4475388qcv.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Oct 2013 00:44:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=d1Q+dWtM/VWVshBZ33t1C0QCag34ZVIAPYlAE5bed1Q=;
+	b=YvvRxG2RWevRfmnueiWGwfM0DjWyg49NFBrMZEFswp01EZDtBjuxC+lkCQVmzoWT7h
+	phIdsCl3XdY1GwymGM9zt2WcLRJBhbvaa4at3MBHi6g6NkmDeAuwPW+pU/eZJwurGJ04
+	uUPpw9x95MzFcVa3eA2vHtc5v7nHJX2CVV4SeAuY2u0iBqoMdrg7DOd5FydoIQz3iUCY
+	7N1eFIX2m+8DjGaODstKaM9fhsZwnGztEdURcg7xAx3pSMip/wdqh/xTbhx7CvN9R1mp
+	aQewDxczv3sMNeM8jLqfNjfOfLCMXQCQmMPM/akzRRcGero1pPJxs8DOIjK6z26rFvMQ
+	FcUg==
+X-Gm-Message-State: ALoCoQkex2mfBlHqE0PngDnHzlrDsCrjS8ikWMD11/AWsGBSMsskyvhGmKikk5TQVwmtjA00opdM
+MIME-Version: 1.0
+X-Received: by 10.224.129.134 with SMTP id o6mr157239qas.107.1380613496768;
+	Tue, 01 Oct 2013 00:44:56 -0700 (PDT)
+Received: by 10.49.71.232 with HTTP; Tue, 1 Oct 2013 00:44:56 -0700 (PDT)
+In-Reply-To: <20130930193046.GB22970@mail.zedat.fu-berlin.de>
+References: <1380548771-13812-1-git-send-email-riku.voipio@linaro.org>
+	<1380548771-13812-3-git-send-email-riku.voipio@linaro.org>
+	<20130930155838.08e5f9d4@e6520eb>
+	<20130930193046.GB22970@mail.zedat.fu-berlin.de>
+Date: Tue, 1 Oct 2013 10:44:56 +0300
+Message-ID: <CAAqcGH=MgJOj_f08u8LA1NMJd6-bT2xC=uLQvee2sKtbh+1pOw@mail.gmail.com>
+From: Riku Voipio <riku.voipio@linaro.org>
+To: Henning Heinold <heinold@inf.fu-berlin.de>
+Cc: openembedded-devel@lists.openembedded.org,
+	Patch Tracking <patches@linaro.org>
+Subject: Re: [meta-java][PATCH 3/3] jamvm/java: allow spaces in arguments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,51 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 07:44:23 -0000
+X-List-Received-Date: Tue, 01 Oct 2013 07:44:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
----
- meta-oe/recipes-support/opencv/opencv_2.4.3.bb |   14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+On 30 September 2013 22:30, Henning Heinold <heinold@inf.fu-berlin.de> wrot=
+e:
+> On Mon, Sep 30, 2013 at 03:58:38PM +0200, Eric B=E9nard wrote:
+>> Hi Riku,
+>>
+>> Le Mon, 30 Sep 2013 16:46:11 +0300,
+>> Riku Voipio <riku.voipio@linaro.org> a =E9crit :
+>>
+>> > Current IFS mangling blows up on the face:
+>> >
+>> >     | configure:2341: javac  -classpath .: Test.java
+>> >     | Invalid maximum heap size: -Xmx1024m-cp/srv/oe/b
+>> >
+>
+> Which shell blows it up? With dash on ubuntu its working fine.
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-index 21a4f06..a0adc32 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a
- 
- ARM_INSTRUCTION_SET = "arm"
- 
--DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0 libeigen"
-+DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
-            file://opencv-fix-pkgconfig-generation.patch \
-@@ -26,14 +26,20 @@ OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
- 
- EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-                  -DBUILD_PYTHON_SUPPORT=ON \
--                 -DWITH_FFMPEG=ON \
-                  -DWITH_GSTREAMER=OFF \
--                 -DWITH_V4L=ON \
--                 -DWITH_GTK=ON \
-                  -DCMAKE_SKIP_RPATH=ON \
-                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
- "
- 
-+PACKAGECONFIG ??= "eigen gtk jpeg libav png tiff v4l"
-+PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
-+PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
-+PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
-+PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
-+PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
-+PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
-+PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-+
- inherit distutils-base pkgconfig cmake
- 
- export BUILD_SYS
--- 
-1.7.10.4
+I'm using bash (oe handbook tells to switch /bin/sh from dash to bash.
 
+$ cat test.sh
+#!/bin/sh
+IFS=3D""
+
+exec echo jamvm ${1+"$@"}
+$ dash test.sh foo bar bar bar
+jamvm foo bar bar bar
+$ bash test.sh foo bar bar bar
+jamvm foobarbarbar
+$ vi test.sh
+
+While the simpler version:
+$ cat test.sh
+#!/bin/sh
+
+exec echo jamvm "$@"
+$ dash test.sh foo bar bar bar
+jamvm foo bar bar bar
+$ bash test.sh foo bar bar bar
+jamvm foo bar bar bar
+
+seems to run fine (echo added in both for clarity)
+
+Riku
 
