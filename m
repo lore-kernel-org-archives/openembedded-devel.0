@@ -1,37 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id BEB5A6CC4C
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id A4C956C7BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 23:34:16 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g10so20763eak.4
+	Tue,  1 Oct 2013 23:36:40 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so22474eek.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Oct 2013 16:34:18 -0700 (PDT)
+	Tue, 01 Oct 2013 16:36:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BoWt4bJ/IhGWPltueO9Db5kv8OJaEFRt0VFYDRt/WsE=;
-	b=MJ4NFy9SGNyXwzazo9MFBweqAKqhGQRn56tH6PG8CqvUQ1clkbj8pcKd5prXwAeoZs
-	aZgektGUjwEJusAWILAgIwPlNXkaar8bKnp8HeMnbZ1SR/5GVkwqoE63aQC+b0mAPaGY
-	REVUgGcEAVOXtPs2nRhWTooijkkimw+gu0cdZqPLICr55pyzo8EbssZtozQOEwuHzg6Y
-	uzXofsj977JbQ4xRHEsiK7J0tKtTABiS87hhMyyWt9ReCouO/UCOX+rqStOXjvuegQf8
-	+TtCVCuHbkbUgN7Ie/WesR71bFu934kMPCS/Ipb2gQNX02lO4a7kbk5AkRrVoS34V3Jj
-	aHHA==
-X-Received: by 10.14.122.132 with SMTP id t4mr50404779eeh.20.1380670457948;
-	Tue, 01 Oct 2013 16:34:17 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=T/wQdtf2W1mpTtMTuoIJUpgGSM2BPolq3uVJcj0E914=;
+	b=sdONVn+KDIZXzby6MnLDz9KhgZKMYwUfkwdkkbZe8oaPDSy4TBLflanuK10b4QJfD2
+	WjInhIRPWLJxoWgy+Xh7H2fhthvwgFFpsAg56ynV0FWvZoFFLyJaXv+gcj93fj45kpaJ
+	8oqYuOT6rXrGsWt9pTeb3h3shvJAqUp8iS+vOz0zR/wu9Wrlg+ARUfcCKOm1V0ta2nnA
+	19M7GzLdTothKFlx0Agkp0AF5sDIcIkjyC2Reg3kNfbNLkgHbxCu5jQPnkzP2EHxv83H
+	yin1qVCumyBX8xQ+IVSj3L9Y0/WAUUgJs2ZpaGooUqaqwoNNm2p+STRYV+2b0zIQguXD
+	yhFg==
+X-Received: by 10.14.9.72 with SMTP id 48mr49273593ees.42.1380670601870;
+	Tue, 01 Oct 2013 16:36:41 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	n48sm18446284eeg.17.1969.12.31.16.00.00
+	v8sm18445805eeo.12.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 01 Oct 2013 16:34:17 -0700 (PDT)
+	Tue, 01 Oct 2013 16:36:41 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Oct 2013 01:34:10 +0200
-Message-Id: <1380670450-16802-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  2 Oct 2013 01:36:44 +0200
+Message-Id: <1380670604-17092-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1380670450-16802-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1380670450-16802-1-git-send-email-Martin.Jansa@gmail.com>
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][dylan][PATCH 2/2] krb5: Add PACKAGECONFIG and new configure param to disable keyutils detection
+Subject: [meta-oe][PATCH] krb5: Add PACKAGECONFIG and new configure param to disable keyutils detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,13 +41,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 23:34:17 -0000
+X-List-Received-Date: Tue, 01 Oct 2013 23:36:41 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
  ...d-parameter-to-disable-keyutils-detection.patch | 33 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.11.bb     |  3 ++
- 2 files changed, 36 insertions(+)
+ meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb   |  6 +++-
+ 2 files changed, 38 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
 
 diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
@@ -93,19 +89,22 @@ index 0000000..f0c310c
 +-- 
 +1.8.3.2
 +
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-index 63676fd..00ad9f9 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.bb
-@@ -11,6 +11,7 @@ PR = "r2"
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+index 820a135..d0dfc46 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+@@ -8,7 +8,9 @@ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+ inherit autotools binconfig perlnative
  
- SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar \
-            file://055d1ffa81d0730e92aa3f1ed5045cd805c74957.patch \
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar"
++SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar \
 +           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
- "
- SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
- SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
-@@ -20,6 +21,7 @@ S = "${WORKDIR}/${P}/src/"
++"
+ SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
+ SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
+ 
+@@ -17,6 +19,7 @@ S = "${WORKDIR}/${P}/src/"
  PACKAGECONFIG ??= "openssl"
  PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
  PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
@@ -113,7 +112,7 @@ index 63676fd..00ad9f9 100644
  
  EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
  CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
-@@ -45,5 +47,6 @@ python do_unpack() {
+@@ -42,5 +45,6 @@ python do_unpack() {
  
  do_configure() {
      gnu-configize --force
