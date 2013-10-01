@@ -1,34 +1,34 @@
-Return-Path: <heinold@inf.fu-berlin.de>
-Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de
-	[130.133.4.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A619360EA8
+Return-Path: <akini@synapticon.com>
+Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
+	[209.85.217.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 1053060EA8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 08:17:20 +0000 (UTC)
-Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
-	by outpost1.zedat.fu-berlin.de (Exim 4.80.1) with esmtp
-	(envelope-from <heinold@inf.fu-berlin.de>)
-	id <1VQv90-002mv7-4y>; Tue, 01 Oct 2013 10:17:22 +0200
-Received: from g225007222.adsl.alicedsl.de ([92.225.7.222]
-	helo=mail.zedat.fu-berlin.de)
-	by inpost2.zedat.fu-berlin.de (Exim 4.80.1) with esmtpsa
-	(envelope-from <heinold@inf.fu-berlin.de>)
-	id <1VQv8z-002fL2-Qq>; Tue, 01 Oct 2013 10:17:22 +0200
-Date: Tue, 1 Oct 2013 10:17:16 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Riku Voipio <riku.voipio@linaro.org>
-Message-ID: <20131001081715.GA25557@mail.zedat.fu-berlin.de>
-References: <1380548771-13812-1-git-send-email-riku.voipio@linaro.org>
-	<1380548771-13812-3-git-send-email-riku.voipio@linaro.org>
-	<20130930155838.08e5f9d4@e6520eb>
-	<20130930193046.GB22970@mail.zedat.fu-berlin.de>
-	<CAAqcGH=MgJOj_f08u8LA1NMJd6-bT2xC=uLQvee2sKtbh+1pOw@mail.gmail.com>
+	Tue,  1 Oct 2013 08:32:05 +0000 (UTC)
+Received: by mail-lb0-f171.google.com with SMTP id u14so5568436lbd.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Oct 2013 01:32:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=bdIkgEY/Vq/YSpWnnucJtY3IcTDAP2KuYNY//bfk1EI=;
+	b=j+PnFyh1Rt3Lc+V1TeZSl0tx6Vnb73z+PuKo0VmMLMxuzJs5robLgGONmRzG9QYy5+
+	Qq/SuGUG3rSmVYNv3Q7Dz6+LCvFYJTny885JPM9z6BATVXOO9+7FPz6yt42cKHUs0ciJ
+	Fz2YSZ7mLzL6794oVXjBvl2d7DaJ3HyhTvP27wv1+tF6DRxxxRgRvwm9EBtO4fwagBBX
+	OglAkNaVUghqRp0zSEBA16XbouI9dxF1tfwAHuKhLYoKix/qsSuFVkKwZZd8QA6iFQmp
+	Mh/eei9Iu5VMZgBByLosA//oKCx4BWdmvV3pQjLqhtf6qfUYAS7t8zGZ+3HReKcQnei2
+	XOoQ==
+X-Gm-Message-State: ALoCoQkqg9F/T2Tusv32D0DeO3C5M32D6qhUrrZQfi8gOE6OAgXuH9WUVq77xCCLCggRxbmqEnb2
 MIME-Version: 1.0
-In-Reply-To: <CAAqcGH=MgJOj_f08u8LA1NMJd6-bT2xC=uLQvee2sKtbh+1pOw@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Originating-IP: 92.225.7.222
-Cc: openembedded-devel@lists.openembedded.org,
-	Patch Tracking <patches@linaro.org>
-Subject: Re: [meta-java][PATCH 3/3] jamvm/java: allow spaces in arguments
+X-Received: by 10.152.37.41 with SMTP id v9mr24200972laj.9.1380616326968; Tue,
+	01 Oct 2013 01:32:06 -0700 (PDT)
+Received: by 10.114.3.8 with HTTP; Tue, 1 Oct 2013 01:32:06 -0700 (PDT)
+Date: Tue, 1 Oct 2013 10:32:06 +0200
+Message-ID: <CAKS01onnW6h7NvP42gk4eE9k3KVskoTdPsntFD1sKaYt-xJNvA@mail.gmail.com>
+From: Anup Kini <akini@synapticon.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: unable to compile eglibc_2.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,57 +42,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 08:17:21 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Oct 2013 08:32:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Oct 01, 2013 at 10:44:56AM +0300, Riku Voipio wrote:
-> On 30 September 2013 22:30, Henning Heinold <heinold@inf.fu-berlin.de> wrote:
-> > On Mon, Sep 30, 2013 at 03:58:38PM +0200, Eric Bénard wrote:
-> >> Hi Riku,
-> >>
-> >> Le Mon, 30 Sep 2013 16:46:11 +0300,
-> >> Riku Voipio <riku.voipio@linaro.org> a écrit :
-> >>
-> >> > Current IFS mangling blows up on the face:
-> >> >
-> >> >     | configure:2341: javac  -classpath .: Test.java
-> >> >     | Invalid maximum heap size: -Xmx1024m-cp/srv/oe/b
-> >> >
-> >
-> > Which shell blows it up? With dash on ubuntu its working fine.
-> 
-> I'm using bash (oe handbook tells to switch /bin/sh from dash to bash.
-> 
-> $ cat test.sh
-> #!/bin/sh
-> IFS=""
-> 
-> exec echo jamvm ${1+"$@"}
-> $ dash test.sh foo bar bar bar
-> jamvm foo bar bar bar
-> $ bash test.sh foo bar bar bar
-> jamvm foobarbarbar
-> $ vi test.sh
-> 
-> While the simpler version:
-> $ cat test.sh
-> #!/bin/sh
-> 
-> exec echo jamvm "$@"
-> $ dash test.sh foo bar bar bar
-> jamvm foo bar bar bar
-> $ bash test.sh foo bar bar bar
-> jamvm foo bar bar bar
-> 
-> seems to run fine (echo added in both for clarity)
-> 
-> Riku
+Hi All,
 
-Okay thanks,
+I am facing a weird error while trying to build core-image-minimal with OE
 
-patch is now applied.
+Build Configuration:
+BB_VERSION            = "1.20.0"
+BUILD_SYS               = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-12.04"
+TARGET_SYS            = "arm-oe-linux-gnueabi"
+MACHINE                  = "zc702-zynq7"
+DISTRO_VERSION     = "oe-core.0"
+TUNE_FEATURES      = " armv7a vfp neon zynq"
+TARGET_FPU            = "vfp-neon"
+meta                          =
+"master:3f5f9d2681d41e44dade5d3a5a4bff3fd38f5506"
+meta-xilinx                  =
+"master:6efe82fb07d98f190e9b078132526eeadd8cf9fc"
 
-Bye Henning
+" bitbake -v core-image-minimal " gives me the following error:
+
+/2.18-r0/eglibc-2.18/libc/pwd/../nss/getXXbyYY_r.c:308: undefined reference
+to `__nss_database_custom'
+
+/home/akini/openembedded-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv7a-vfp-neon-oe-linux-gnueabi.gcc-cross-initial/gcc/arm-oe-linux-gnueabi/4.8.1/ld:
+/home/akini/openembedded-core/build/tmp-eglibc/work/armv7a-vfp-neon-oe-linux-gnueabi/eglibc/2.18-r0/build-arm-oe-linux-gnueabi/libc.so:
+hidden symbol `__nss_not_use_nscd_group' isn't defined
+
+/home/akini/openembedded-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv7a-vfp-neon-oe-linux-gnueabi.gcc-cross-initial/gcc/arm-oe-linux-gnueabi/4.8.1/ld:
+final link failed: Bad value
+collect2: error: ld returned 1 exit status
+
+
+PasteBin link to log.do_compile = http://pastebin.com/ujVwTrjg
+
+
+Let me know if i am going wrong somewhere or missed some thing !!
+
+-- 
+
+*Anup Kini
+*Systems Engineer****
+*
+------------------------------
+*
+
+*Synapticon** * |  Cyber-Physical System Solutions ****
+
+Mobile:
+
+Direct:
+
++49 151 / 638 646 73
+
++49 7335 / 186 999 21
+
+Fax:****
++49 7335 / 186 999 1
+
+
+ **
+
+ ****
+
+synapticon.com <http://www.synapticon.com/>  |
+@synapticon_co<https://twitter.com/#!/synapticon_co>
+****
+
+Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
+Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
+Registry Court Ulm HRB 725114  |  USt-ID DE271647127****
+
+This message and any files transmitted with it are confidential and
+intended
+solely for the use of the individual or entity to whom they are addressed.
+Please notify the sender immediately if you have received this e-mail by
+mistake and delete it from your system.
 
