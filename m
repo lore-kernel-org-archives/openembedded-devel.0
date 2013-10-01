@@ -1,39 +1,22 @@
-Return-Path: <riku.voipio@linaro.org>
-Received: from mail-qe0-f48.google.com (mail-qe0-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id B06B66CBFD
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id D212C616EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 07:30:35 +0000 (UTC)
-Received: by mail-qe0-f48.google.com with SMTP id nd7so4613042qeb.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Oct 2013 00:30:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=OcTs/Lq6Spqadg2sb9dwANosEAieMakPPlk8NIaBhqY=;
-	b=On6hFGvPIYx75yk+ZyCNIy3TJUAThPFpDXSC/iRya03RLjufNIS4uvnTKlodFnQ/PD
-	eanY861fwMTim9AmjPokVgSKD+mV2Q0qa70der4lxLiLYA8KkiqdQ2czTVgJlwU4raox
-	1U0AueYXWjfi7/kVjAg2LV6QGre5RRwURDArgKaqXPpMDhCGsZK/Mz9whubMlWWdUXOr
-	hUrdWWZ1wIw9RjmH6p1xCQBlq8gGlT1rbeA8xPv290KPjlwHwTw+HEPSBuiLHn9GEAYb
-	Hh6FFwdaXH+p34mnR2LB3GhdsgODRtMjfmFDMPyvLjvwB+ZiIOb5IYTL1oHV8XKrIELD
-	eMPw==
-X-Gm-Message-State: ALoCoQkp31jUdXtXpynYDsBUeWy2tyrK7RXSB4PHtUd+09xApIc2EuzIyxvUlZ/z7X4fgV/aOPwH
+	Tue,  1 Oct 2013 07:44:20 +0000 (UTC)
+Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
+	[192.168.101.5])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 768F34002C;
+	Tue,  1 Oct 2013 08:40:23 +0200 (CEST)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Oct 2013 09:44:12 +0200
+Message-Id: <1380613454-3799-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Received: by 10.224.51.131 with SMTP id d3mr38628035qag.0.1380612636924;
-	Tue, 01 Oct 2013 00:30:36 -0700 (PDT)
-Received: by 10.49.71.232 with HTTP; Tue, 1 Oct 2013 00:30:36 -0700 (PDT)
-In-Reply-To: <20130930192643.GA22970@mail.zedat.fu-berlin.de>
-References: <1380548771-13812-1-git-send-email-riku.voipio@linaro.org>
-	<1380548771-13812-2-git-send-email-riku.voipio@linaro.org>
-	<20130930192643.GA22970@mail.zedat.fu-berlin.de>
-Date: Tue, 1 Oct 2013 10:30:36 +0300
-Message-ID: <CAAqcGHn4D8fkPxrKhnkgOkEMF-GEPL6C8zoRbMqE0urAYOuqRg@mail.gmail.com>
-From: Riku Voipio <riku.voipio@linaro.org>
-To: Henning Heinold <heinold@inf.fu-berlin.de>
-Cc: openembedded-devel@lists.openembedded.org,
-	Patch Tracking <patches@linaro.org>
-Subject: Re: [meta-java][PATCH 2/3] jamvm: update to latest in openjdk-7
+Subject: [meta-oe][PATCHv2 1/3] libeigen: initial contribution required by opencv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,62 +30,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 07:30:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Oct 2013 07:44:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+As opencv depends on libeigen, libeigen is added to the meta-oe
+layer. This commit is derived from the work [1] by Kartik Mohta.
 
-On 30 September 2013 22:26, Henning Heinold <heinold@inf.fu-berlin.de> wrote:
-> On Mon, Sep 30, 2013 at 04:46:10PM +0300, Riku Voipio wrote:
->> jamvm has wrong wrong checksums for version referred. Update
->> the version to match that is in jamvm_git.bb and make checksums
->> match.
->> ---
->>  recipes-core/openjdk/openjdk-7-release-25b30.inc | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/recipes-core/openjdk/openjdk-7-release-25b30.inc b/recipes-core/openjdk/openjdk-7-release-25b30.inc
->> index 363b6e2..60f4f43 100644
->> --- a/recipes-core/openjdk/openjdk-7-release-25b30.inc
->> +++ b/recipes-core/openjdk/openjdk-7-release-25b30.inc
->> @@ -43,11 +43,11 @@ CACAO_URI = "http://icedtea.classpath.org/download/drops/cacao/${CACAO_FILE};nam
->>  SRC_URI[cacao.md5sum] = "ec1def7f0d3d25e9e7da47c480f26a73"
->>  SRC_URI[cacao.sha256sum] = "d49f79debc131a5694cae6ab3ba2864e7f3249ee8d9dc09aae8afdd4dc6b09f9"
->>
->> -JAMVM_VERSION = "0972452d441544f7dd29c55d64f1ce3a5db90d82"
->> +JAMVM_VERSION = "ac22c9948434e528ece451642b4ebde40953ee7e"
->>  JAMVM_FILE = "jamvm-${JAMVM_VERSION}.tar.gz"
->>  JAMVM_URI = "http://icedtea.classpath.org/download/drops/jamvm/${JAMVM_FILE};name=jamvm;unpack=false"
->> -SRC_URI[jamvm.md5sum] = "740c2587502831cac6797d1233a7e27b"
->> -SRC_URI[jamvm.sha256sum] = "47fce7bd556c1b1d29a93b8c45497e0d872b48b7f535066b303336f29d0f0d8d"
->> +SRC_URI[jamvm.md5sum] = "3a67d0f3471bd2d5b2446d91bfa73f73"
->> +SRC_URI[jamvm.sha256sum] = "4662da1fe3e0e11d8fa685c7f2fc748576b9f3d3e37dc56b798dd6a5bd6b61e7"
->>
->>  # Allow overriding this separately
->>  OEPATCHES = "\
->> --
->> 1.8.1.2
->
-> Hi,
->
-> jamvm version is fine we use the one openjdk 2.3 expect for now, but I have to update the cacao one.
->
-> So this patch will be dropped.
+[1] https://github.com/kartikmohta/meta-km/tree/master/recipes-extended/eigen
 
-If you want to keep the current jamvm, you still need to fix the checksums:
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+---
+ .../libeigen/libeigen/eigen-disable-tests.patch    |   75 ++++++++++++++++++++
+ meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb |   25 +++++++
+ 2 files changed, 100 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
 
-wget http://icedtea.classpath.org/download/drops/jamvm/jamvm-0972452d441544f7dd29c55d64f1ce3a5db90d82.tar.gz
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch b/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+new file mode 100644
+index 0000000..b3dddbe
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen/eigen-disable-tests.patch
+@@ -0,0 +1,75 @@
++libeigen: don't try building tests
++
++While configuring, if the tests are enabled, it checks some machine-specific
++settings which we don't want to do while cross-compiling.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
++
++--- a/CMakeLists.txt~	2013-07-29 16:59:48.403504947 -0400
+++++ b/CMakeLists.txt	2013-07-29 17:00:19.868020948 -0400
++@@ -346,25 +346,25 @@
++
++ add_subdirectory(doc EXCLUDE_FROM_ALL)
++
++-include(EigenConfigureTesting)
+++#include(EigenConfigureTesting)
++
++ # fixme, not sure this line is still needed:
++-enable_testing() # must be called from the root CMakeLists, see man page
+++#enable_testing() # must be called from the root CMakeLists, see man page
++
++
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
++-else()
++-  add_subdirectory(test EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
+++#else()
+++#  add_subdirectory(test EXCLUDE_FROM_ALL)
+++#endif()
++
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(blas)
++-  add_subdirectory(lapack)
++-else()
++-  add_subdirectory(blas EXCLUDE_FROM_ALL)
++-  add_subdirectory(lapack EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(blas)
+++#  add_subdirectory(lapack)
+++#else()
+++#  add_subdirectory(blas EXCLUDE_FROM_ALL)
+++#  add_subdirectory(lapack EXCLUDE_FROM_ALL)
+++#endif()
++
++ add_subdirectory(unsupported)
++
++@@ -384,7 +384,7 @@
++
++ configure_file(scripts/cdashtesting.cmake.in cdashtesting.cmake @ONLY)
++
++-ei_testing_print_summary()
+++#ei_testing_print_summary()
++
++ message(STATUS "")
++ message(STATUS "Configured Eigen ${EIGEN_VERSION_NUMBER}")
++--- a/unsupported/CMakeLists.txt~	2013-07-29 16:59:54.091598607 -0400
+++++ b/unsupported/CMakeLists.txt	2013-07-29 17:00:27.052139300 -0400
++@@ -1,7 +1,7 @@
++ add_subdirectory(Eigen)
++ add_subdirectory(doc EXCLUDE_FROM_ALL)
++-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
++-  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
++-else()
++-  add_subdirectory(test EXCLUDE_FROM_ALL)
++-endif()
+++#if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+++#  add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
+++#else()
+++#  add_subdirectory(test EXCLUDE_FROM_ALL)
+++#endif()
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb b/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
+new file mode 100644
+index 0000000..4183f05
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.2.0.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
++AUTHOR = "Benoît Jacob and Gaël Guennebaud and others"
++HOMEPAGE = "http://eigen.tuxfamily.org/"
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
++
++SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
++           file://eigen-disable-tests.patch"
++SRC_URI[md5sum] = "894381be5be65bb7099c6fd91d61b357"
++SRC_URI[sha256sum] = "011f78960d939227f9276173d0c4cc0053bb9e0a7356539a9a6c7c89d984fab6"
++
++S = "${WORKDIR}/eigen-eigen-ffa86ffb5570"
++
++inherit cmake
++
++OECMAKE_SOURCEPATH = ".."
++OECMAKE_BUILDPATH = "build"
++
++EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir}"
++
++FILES_${PN} = "${includedir} ${libdir}"
++
++# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
++RDEPENDS_${PN}-dev = ""
++RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+-- 
+1.7.10.4
 
-voipio@aimless:~/tmp$ md5sum
-jamvm-0972452d441544f7dd29c55d64f1ce3a5db90d82.tar.gz
-f4616713ec609e35aa8070811bd952aa
-jamvm-0972452d441544f7dd29c55d64f1ce3a5db90d82.tar.gz
-voipio@aimless:~/tmp$ sha256sum
-jamvm-0972452d441544f7dd29c55d64f1ce3a5db90d82.tar.gz
-bfa706402ac934d24f7119eb78f6be65e91439a4b2e49dbcc21e288137808f03
-jamvm-0972452d441544f7dd29c55d64f1ce3a5db90d82.tar.gz
-
-These do not match with the checksums in openjdk-7-release-25b30.inc
-
-Riku
 
