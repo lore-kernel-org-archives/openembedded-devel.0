@@ -1,36 +1,37 @@
-Return-Path: <akini@synapticon.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 259A4610FE
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qe0-f47.google.com (mail-qe0-f47.google.com
+	[209.85.128.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 28A0B6CA93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 11:38:55 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id z5so5738201lbh.37
+	Tue,  1 Oct 2013 12:35:12 +0000 (UTC)
+Received: by mail-qe0-f47.google.com with SMTP id b4so4856229qen.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Oct 2013 04:38:57 -0700 (PDT)
+	Tue, 01 Oct 2013 05:35:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=0rOzBVAIG7NGUW6hfr/y9KmM5fkfCXm+J+YPXw6yz4E=;
-	b=Lb3DtiqgytS95pQl4fK5Q4S27nxN77FKBt4ZsvfdPmUVfx84d7mVEggrTWYlLUk/Az
-	kO+fFd4KZBOpVb79fGixomOjZPVjcTRaWbJZOeG04D4goMUSD+61YhYk4o0Vx3mUCg8/
-	RdULZCaTvN5JDUAYcIhI6Hl9qvTPXmX/RLzRlHhFuuxv1EzJ7EHVg9Wdn02ztEyuUkms
-	qVsXRiP8MKZgQ6fbiwp3AOOO7+a3PezHrGeU02vPHgEvHVssIa5OBRP/SNipya4m8MU6
-	veudEgu8Lzry+319Q58eDe9pE4GjLEoDJfedbcC5DqHnutKu1scdHuLrq/UhhATnOKCW
-	5A/w==
-X-Gm-Message-State: ALoCoQnwPOzrQFPC7QLO6KnMauZPMGOrqM2GPXQPUsGrzFHlBO3dzh3eLo+oFEKcetG5Ls5ebtMi
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=cDVShpv1/EsCMgm7SmgjQrVMrPHGPvQDWqE4TqmsM6s=;
+	b=c3Vd9tzbyvopLUVO3hf8VyMpMYNra64q6+DuEiDytM+vc8tSUrc42Z9QwOBK01YRUu
+	TpSEHxqrRWY6DkYxjnwnQTq+uKI+sO4xXjVpqMOoaIOvi96esYGCbx9uMs8pO5j8LBqg
+	QDW1s06wVgMV1EGM/uHjsclFqLILnTwcwl3HrHirm/sC2O4J7LEp2MRrJ0jiGrV5zwOm
+	SF0MeTWXFxQxWUoI8S92im5u/PAqYXlc4fGj40bMXZCQg7hYguPOnHePgC2r/lguNO5q
+	Z3Y4i/ch1CGRhINbnxg+iRnqDh6MLrD0j65UzyNltAs8R0k62DbN9htF6Cz8h422BtBl
+	S3Dg==
+X-Gm-Message-State: ALoCoQmpUcqqHt0na8hDZnRZ9VszKNt9eFO5TE1E/5QEtnAcEG0mCIqwPIjPPW7V5BnJz9oZKxKJ
+X-Received: by 10.224.11.133 with SMTP id t5mr20840814qat.34.1380630913754;
+	Tue, 01 Oct 2013 05:35:13 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.152.28.7 with SMTP id x7mr24565838lag.26.1380627536814; Tue,
-	01 Oct 2013 04:38:56 -0700 (PDT)
-Received: by 10.114.3.8 with HTTP; Tue, 1 Oct 2013 04:38:56 -0700 (PDT)
-In-Reply-To: <CAJTo0Lb7+Kdzg-M6N=j0rb0CRAXZ1OWbCrxAkzNXGafWK9Fc+A@mail.gmail.com>
+Received: by 10.140.25.131 with HTTP; Tue, 1 Oct 2013 05:34:53 -0700 (PDT)
+In-Reply-To: <CAKS01o=pE_6PiWyk=Xct8ias3xFQ+X2CtLufLGsNeAXgj_wTkg@mail.gmail.com>
 References: <CAKS01onnW6h7NvP42gk4eE9k3KVskoTdPsntFD1sKaYt-xJNvA@mail.gmail.com>
 	<00d001cebe98$360affc0$a220ff40$@oss.bmw-carit.de>
 	<CAJTo0Lb7+Kdzg-M6N=j0rb0CRAXZ1OWbCrxAkzNXGafWK9Fc+A@mail.gmail.com>
-Date: Tue, 1 Oct 2013 13:38:56 +0200
-Message-ID: <CAKS01o=pE_6PiWyk=Xct8ias3xFQ+X2CtLufLGsNeAXgj_wTkg@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
-To: "Burton, Ross" <ross.burton@intel.com>
+	<CAKS01o=pE_6PiWyk=Xct8ias3xFQ+X2CtLufLGsNeAXgj_wTkg@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 1 Oct 2013 13:34:53 +0100
+Message-ID: <CAJTo0Lbn3fYmzCmvDwdxrVw3CUwzoR5ugU0iQV4gs8YNYyLJHw@mail.gmail.com>
+To: Anup Kini <akini@synapticon.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: OE-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: unable to compile eglibc_2.18
@@ -47,82 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 11:38:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Oct 2013 12:35:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Thank you Ross,
-but i already tried that..
+On 1 October 2013 12:38, Anup Kini <akini@synapticon.com> wrote:
 
-I get the following error
-ERROR: Please ensure that your setting of VIRTUAL-RUNTIME_init_manager
-(sysvinit) matches the entries enabled in DISTRO_FEATURES
-ERROR: Unable to parse
-/home/akini/openembedded-core/meta/recipes-core/packagegroups/
-packagegroup-core-boot.bb: Exited with "1"
-
-Hence i used DISTRO_FEATURES += "opengl x11"
-
-Anything i am missing with DISTRO_FEATURES ?
-I am making this entry in the conf/local.conf file.
-
-
-
-On 1 October 2013 13:31, Burton, Ross <ross.burton@intel.com> wrote:
-
-> On 1 October 2013 12:20, Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
-> wrote:
-> > I can confirm this error that occurs when you set DISTRO_FEATURES =
-> "opengl
-> > x11".
->
-> If that's all DISTRO_FEATURES is set to then I'm eglibc is bound to
-> not compile, because almost everything has been disabled.
->
-> You probably want DISTRO_FEATURES_append = " opengl x11" so that you
-> don't overwrite the default features.
->
-> Ross
+> Thank you Ross,
+> but i already tried that..
 >
 
+_append doesn't insert whitespace, so I expect you did "opengl x11".  You
+need " opengl x11", with the leading space very important.
 
+(the variable ended in sysvinit, but you turned it into sysvinitopengl,
+which is why you got the warning)
 
--- 
-
-*Anup Kini
-*Systems Engineer****
-*
-------------------------------
-*
-
-*Synapticon** * |  Cyber-Physical System Solutions ****
-
-Mobile:
-
-Direct:
-
-+49 151 / 638 646 73
-
-+49 7335 / 186 999 21
-
-Fax:****
-+49 7335 / 186 999 1
-
-
- **
-
- ****
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-****
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127****
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
+Ross
 
