@@ -1,39 +1,27 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qe0-f47.google.com (mail-qe0-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 28A0B6CA93
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 51E766CA93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2013 12:35:12 +0000 (UTC)
-Received: by mail-qe0-f47.google.com with SMTP id b4so4856229qen.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Oct 2013 05:35:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=cDVShpv1/EsCMgm7SmgjQrVMrPHGPvQDWqE4TqmsM6s=;
-	b=c3Vd9tzbyvopLUVO3hf8VyMpMYNra64q6+DuEiDytM+vc8tSUrc42Z9QwOBK01YRUu
-	TpSEHxqrRWY6DkYxjnwnQTq+uKI+sO4xXjVpqMOoaIOvi96esYGCbx9uMs8pO5j8LBqg
-	QDW1s06wVgMV1EGM/uHjsclFqLILnTwcwl3HrHirm/sC2O4J7LEp2MRrJ0jiGrV5zwOm
-	SF0MeTWXFxQxWUoI8S92im5u/PAqYXlc4fGj40bMXZCQg7hYguPOnHePgC2r/lguNO5q
-	Z3Y4i/ch1CGRhINbnxg+iRnqDh6MLrD0j65UzyNltAs8R0k62DbN9htF6Cz8h422BtBl
-	S3Dg==
-X-Gm-Message-State: ALoCoQmpUcqqHt0na8hDZnRZ9VszKNt9eFO5TE1E/5QEtnAcEG0mCIqwPIjPPW7V5BnJz9oZKxKJ
-X-Received: by 10.224.11.133 with SMTP id t5mr20840814qat.34.1380630913754;
-	Tue, 01 Oct 2013 05:35:13 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.25.131 with HTTP; Tue, 1 Oct 2013 05:34:53 -0700 (PDT)
+	Tue,  1 Oct 2013 12:38:01 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 01 Oct 2013 05:38:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.90,1013,1371106800"; d="scan'208";a="368209113"
+Received: from timevans-mobl.ger.corp.intel.com (HELO helios.localnet)
+	([10.252.120.75])
+	by azsmga001.ch.intel.com with ESMTP; 01 Oct 2013 05:37:45 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Anup Kini <akini@synapticon.com>
+Date: Tue, 01 Oct 2013 13:37:44 +0100
+Message-ID: <3515829.zzyu314FgW@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-30-generic; KDE/4.10.5; i686; ; )
 In-Reply-To: <CAKS01o=pE_6PiWyk=Xct8ias3xFQ+X2CtLufLGsNeAXgj_wTkg@mail.gmail.com>
 References: <CAKS01onnW6h7NvP42gk4eE9k3KVskoTdPsntFD1sKaYt-xJNvA@mail.gmail.com>
-	<00d001cebe98$360affc0$a220ff40$@oss.bmw-carit.de>
 	<CAJTo0Lb7+Kdzg-M6N=j0rb0CRAXZ1OWbCrxAkzNXGafWK9Fc+A@mail.gmail.com>
 	<CAKS01o=pE_6PiWyk=Xct8ias3xFQ+X2CtLufLGsNeAXgj_wTkg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 1 Oct 2013 13:34:53 +0100
-Message-ID: <CAJTo0Lbn3fYmzCmvDwdxrVw3CUwzoR5ugU0iQV4gs8YNYyLJHw@mail.gmail.com>
-To: Anup Kini <akini@synapticon.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: unable to compile eglibc_2.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -48,20 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2013 12:35:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 01 Oct 2013 12:38:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 1 October 2013 12:38, Anup Kini <akini@synapticon.com> wrote:
+On Tuesday 01 October 2013 13:38:56 Anup Kini wrote:
+> Hence i used DISTRO_FEATURES += "opengl x11"
 
-> Thank you Ross,
-> but i already tried that..
->
+To round this off, you cannot use += to set DISTRO_FEATURES in local.conf 
+because the default value of DISTRO_FEATURES is set with ?= in the Poky / OE-
+Core distro configuration, and that is parsed after local.conf, thus if you set 
+it to anything in local.conf the ?= statement containing all of the other 
+normal values will not apply. Use _append instead which takes effect at the end 
+of parsing, or more appropriately create your own distro configuration to set 
+the value.
 
-_append doesn't insert whitespace, so I expect you did "opengl x11".  You
-need " opengl x11", with the leading space very important.
+Cheers,
+Paul
 
-(the variable ended in sysvinit, but you turned it into sysvinitopengl,
-which is why you got the warning)
+-- 
 
-Ross
+Paul Eggleton
+Intel Open Source Technology Centre
 
