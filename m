@@ -1,21 +1,20 @@
 Return-Path: <frederic.paut@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 90DB6610FC
+Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 715B8610FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Oct 2013 15:02:00 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 02 Oct 2013 08:02:02 -0700
+	Wed,  2 Oct 2013 15:02:08 +0000 (UTC)
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 02 Oct 2013 08:01:43 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.90,1019,1371106800"; d="scan'208";a="404266023"
+X-IronPort-AV: E=Sophos;i="4.90,1019,1371106800"; d="scan'208";a="302239650"
 Received: from fpaut-mobl2.mp.intel.com ([10.237.24.36])
-	by fmsmga001.fm.intel.com with ESMTP; 02 Oct 2013 08:02:00 -0700
+	by AZSMGA002.ch.intel.com with ESMTP; 02 Oct 2013 08:01:41 -0700
 From: Frederic PAUT <frederic.paut@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Oct 2013 17:02:00 +0200
-Message-Id: <1380726120-29331-1-git-send-email-frederic.paut@linux.intel.com>
+Date: Wed,  2 Oct 2013 17:01:41 +0200
+Message-Id: <1380726101-29289-1-git-send-email-frederic.paut@linux.intel.com>
 X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Subject: [PATCH] cloudeebus recipe (v0.6.0)
+Subject: [PATCH] autobahn recipe (v0.5.14)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,68 +28,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Oct 2013 15:02:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 02 Oct 2013 15:02:08 -0000
 
-Cloudeebus, D-Bus for the cloud, is a component that provides
-D-Bus proxies for JavaScript. Unlike a web runtime, it doesn’t
-rely on any custom web browser API, but on HTML5 WebSockets and
-python D-Bus bindings.
-Cloudeebus can be used as a web API fast prototyping tool.
+AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hixie-76)
+framework for creating WebSocket-based clients and servers.
+AutobahnPython also includes an implementation of WAMP
+(The WebSockets Application Messaging Protocol), a light-weight,
+asynchronous RPC/PubSub over JSON/WebSocket protocol.
 ---
- .../recipes-devtools/python/cloudeebus_0.6.0.bb    |   42 ++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/cloudeebus_0.6.0.bb
+ .../python/python-autobahn_0.5.14.bb               |   32 ++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb
 
-diff --git a/meta-oe/recipes-devtools/python/cloudeebus_0.6.0.bb b/meta-oe/recipes-devtools/python/cloudeebus_0.6.0.bb
+diff --git a/meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb b/meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb
 new file mode 100644
-index 0000000..0bb3668
+index 0000000..9f051a3
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/python/cloudeebus_0.6.0.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "A component which enables calling DBus methods and registering on DBus signals from Javascript"
-+HOMEPAGE = "https://github.com/01org/cloudeebus"
-+SECTION = "devel/python"
++++ b/meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hixie-76) framework for creating WebSocket-based clients and servers. \
++AutobahnPython also includes an implementation of WAMP (The WebSockets Application Messaging Protocol), a light-weight,  \
++asynchronous RPC/PubSub over JSON/WebSocket protocol."
++HOMEPAGE = "http://autobahn.ws/python"
++SECTION = "console/network"
++
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 +
-+DEPENDS += " python"
++SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
++SRC_URI[md5sum] = "e2c80ba3e46428b32837537609d4d582"
 +
-+SRC_URI = "\
-+  git://github.com/01org/cloudeebus.git;protocol=http;branch=master \
-+"
-+SRCREV = "b5cc957eeabfe98cb996baf8e5a0ac848993c3d4"
++S = "${WORKDIR}/autobahn-${PV}"
 +
-+DEPENDS_${PN} = "python python-setuptools"
-+RDEPENDS_${PN} = "python python-dbus python-json python-argparse python-pygobject python-autobahn python-twisted python-subprocess"
++inherit setuptools
 +
++RDEPENDS_${PN} = "python python-pprint python-twisted-protocols python-netserver python-twisted-web"
 +
-+S = "${WORKDIR}/git"
-+
-+inherit distutils 
-+
-+DISTUTILS_INSTALL_ARGS = "--root=${D} \
-+    --single-version-externally-managed \
-+    --prefix=${prefix} \
-+    --install-lib=${PYTHON_SITEPACKAGES_DIR} \
-+    --install-data=${datadir}"
-+
-+do_install_prepend() {
-+  install -d ${D}${PYTHON_SITEPACKAGES_DIR}/${PN}
-+}
-+
-+do_install() {
-+
-+  distutils_do_install
-+
-+  install -d ${D}${datadir}/doc/${BPN}/
-+  install -m 0644 ${S}/README.md ${D}${datadir}/doc/${BPN}/
-+}
-+
-+FILES_${PN} += "${datadir}/${BPN}"
-+FILES_${PN} += "${sysconfdir}/dbus-1/system.d/org.cloudeebus.conf"
-+
++FILES_${PN}-${PV} = " \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/httpstatus.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/__init__.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/pbkdf2.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/prefixmap.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/resource.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/useragent.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/utf8validator.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/util.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/_version.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/wamp.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/websocket.py \
++    ${libdir}/${PYTHON_DIR}/site-packages/autobahn/xormasker.py \
++    "                     
+\ No newline at end of file
 -- 
 1.7.10.4
 
