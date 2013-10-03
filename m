@@ -1,47 +1,27 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp102.mer-nm.internl.net (smtp102.mer-nm.internl.net
-	[217.149.192.138])
-	by mail.openembedded.org (Postfix) with ESMTP id 9850260FCA
+Return-Path: <frederic.paut@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 4735660FCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2013 06:30:39 +0000 (UTC)
-Received: from amavisd-new (mailscanner04.wrt-nm.internl.net [217.149.192.127])
-	by smtp102.mer-nm.internl.net (Postfix) with ESMTP id 6CD933F532
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2013 08:30:40 +0200 (CEST)
-X-Spam-scanned: scanned by InterNLnet Mail Scan System
-X-Spam-Flag: NO
-X-Spam-Score: -4.4
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 tagged_above=-999 required=4.5
-	tests=[BAYES_00=-2.9, KHOP_THREADED=-1.5] autolearn=no
-X-Spam-Languages: en
-Received: from smtp102.mer-nm.internl.net ([217.149.192.138])
-	by amavisd-new (mailscanner04.wrt-nm.internl.net [217.149.192.160])
-	(amavisd-new, port 10024)
-	with ESMTP for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2013 08:30:38 +0200 (CEST)
-Received: from TOP-EX01.TOPIC.LOCAL (mail.topic.nl [82.204.13.182])
-	(using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by smtp102.mer-nm.internl.net (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2013 08:30:38 +0200 (CEST)
-Received: from [192.168.80.45] (192.168.80.45) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.1.438.0;
-	Thu, 3 Oct 2013 08:30:40 +0200
-Message-ID: <524D0F0D.40803@topic.nl>
-Date: Thu, 3 Oct 2013 08:30:37 +0200
-From: Mike Looijmans <mike.looijmans@topic.nl>
+	Thu,  3 Oct 2013 08:04:32 +0000 (UTC)
+Received: from azsmga002.ch.intel.com ([10.2.17.35])
+	by azsmga102.ch.intel.com with ESMTP; 03 Oct 2013 01:04:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.90,1024,1371106800"; 
+	d="scan'208,217";a="302579057"
+Received: from fpaut-mobl2.mp.intel.com (HELO [10.237.24.31]) ([10.237.24.31])
+	by AZSMGA002.ch.intel.com with ESMTP; 03 Oct 2013 01:04:32 -0700
+Message-ID: <524D2511.3090509@linux.intel.com>
+Date: Thu, 03 Oct 2013 10:04:33 +0200
+From: Frederic PAUT <frederic.paut@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1379667640-2763-1-git-send-email-mike.looijmans@topic.nl>
-In-Reply-To: <1379667640-2763-1-git-send-email-mike.looijmans@topic.nl>
-X-Originating-IP: [192.168.80.45]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-Subject: Re: [meta-oe][PATCH] fuse-exfat, ntfs-3g-ntfsprogs: Move util-linux-mount to RRECOMMENDS
+To: openembedded-devel@lists.openembedded.org
+References: <1380726101-29289-1-git-send-email-frederic.paut@linux.intel.com>
+	<CAJTo0Lbr21atGMqp7YiFjSSaP0oCNwz7GATBEfR=Wm9EnmzQDQ@mail.gmail.com>
+In-Reply-To: <CAJTo0Lbr21atGMqp7YiFjSSaP0oCNwz7GATBEfR=Wm9EnmzQDQ@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] autobahn recipe (v0.5.14)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,101 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2013 06:30:40 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 Oct 2013 08:04:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-=EF=BB=BFJust a "ping" to inform if this patch will ever make it into mains=
-tream,=20
-of if there's something wrong with it.
+Hi,
 
-Mike.
-
-On 09/20/2013 11:00 AM, Mike Looijmans wrote:
-> Soften the dependency to allow distros to use another mount provider
-> like busybox instead of being forced to use util-linux-mount.
+On 10/02/2013 06:01 PM, Burton, Ross wrote:
+> On 2 October 2013 16:01, Frederic PAUT <frederic.paut@linux.intel.com> wrote:
+>> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+> This should be a file inside the source tree (relative paths are
+> resolved from $S), best practise is to checksum the license file and
+> the license header of a source file (you can restrict the md5 to a
+> subset of lines).
+Yes, because I don't found a license file in the source tree... But I 
+will checksum the license of a source file to a subset of lines.
 >
-> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
-> ---
->   .../fuse-exfat/fuse-exfat_1.0.1.bb                 |    2 +-
->   .../ntfs-3g-ntfsprogs_2013.1.13.bb                 |    3 ++-
->   2 files changed, 3 insertions(+), 2 deletions(-)
+>> +FILES_${PN}-${PV} = " \
+> Just FILES_${PN} here, but inherit distutils handles this for you, so
+> you can delete this.
+Ok, I will delete this.
 >
-> diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1=
-.0.1.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.=
-bb
-> index d29dc0a..f984c4b 100644
-> --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb
-> +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb
-> @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673=
-463ab874e80d47fae504"
->   SRC_URI =3D "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.t=
-ar.gz \
->   "
->   DEPENDS =3D "fuse virtual/libc"
-> -RDEPENDS_${PN} +=3D "util-linux-mount"
-> +RRECOMMENDS_${PN} =3D "util-linux-mount"
->
->   inherit scons
->
-> diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-=
-3g-ntfsprogs_2013.1.13.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-nt=
-fsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
-> index e084187..c1392cc 100644
-> --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfs=
-progs_2013.1.13.bb
-> +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfs=
-progs_2013.1.13.bb
-> @@ -23,7 +23,8 @@ EXTRA_OEMAKE =3D "LDCONFIG=3Decho"
->   PACKAGES =3D+ "ntfs-3g ntfsprogs libntfs-3g"
->
->   FILES_ntfs-3g =3D "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* ${base_=
-sbindir}/mount.ntfs"
-> -RDEPENDS_ntfs-3g +=3D "fuse util-linux-mount"
-> +RDEPENDS_ntfs-3g +=3D "fuse"
-> +RRECOMMENDS_ntfs-3g =3D "util-linux-mount"
->
->   FILES_ntfsprogs =3D "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
->   FILES_libntfs-3g =3D "${libdir}/*${SOLIBS}"
->
+> Ross
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+Thanks,
 
+Frederic
 
-Met vriendelijke groet / kind regards,
+  * English - detected
+  * English
+  * French
 
-Mike Looijmans
+  * English
+  * French
 
-TOPIC Embedded Systems
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: (+31) =E2=80=93 (0)499 - 33.69.79
-Telefax: (+31) - (0)499 - 33.69.70
-E-mail: mike.looijmans@topic.nl
-Website: www.topic.nl
-
-Dit e-mail bericht en de eventueel daarbij behorende bijlagen zijn uitsluit=
-end bestemd voor de geadresseerde, zoals die blijkt uit het e-mail bericht =
-en/of de bijlagen. Er kunnen gegevens met betrekking tot een derde instaan.=
- Indien u als niet-geadresseerde dit bericht en de bijlagen ontvangt, terwi=
-jl u niet bevoegd of gemachtigd bent om dit bericht namens de geadresseerde=
- te ontvangen, wordt u verzocht de afzender hierover direct te informeren e=
-n het e-mail bericht met de bijlagen te vernietigen. Ieder gebruik van de i=
-nhoud van het e-mail bericht, waaronder de daarbij behorende bijlagen, door=
- een ander dan de geadresseerde is onrechtmatig jegens ons dan wel de event=
-ueel in het e-mail bericht of de bijlagen voorkomende andere personen. TOPI=
-C Embedded Systems is niet aansprakelijk voor enigerlei schade voortvloeien=
-d uit het gebruik en/of acceptatie van dit e-mail bericht of de daarbij beh=
-orende bijlagen.
-
-The contents of this message, as well as any enclosures, are addressed pers=
-onally to, and thus solely intended for the addressee. They may contain inf=
-ormation regarding a third party. A recipient who is neither the addressee,=
- nor empowered to receive this message on behalf of the addressee, is kindl=
-y requested to immediately inform the sender of receipt, and to destroy the=
- message and the enclosures. Any use of the contents of this message and/or=
- the enclosures by any other person than the addressee or person who is emp=
-owered to receive this message, is illegal towards the sender and/or the af=
-orementioned third party. TOPIC Embedded Systems is not  liable for any dam=
-age as a result of the use and/or acceptance of this message and as well as=
- any enclosures.
+<javascript:void(0);>
+auto-copied
 
