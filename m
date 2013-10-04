@@ -1,43 +1,35 @@
 Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qe0-f48.google.com (mail-qe0-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id CB72660EA3
+Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
+	[209.85.216.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 9912D60FA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 17:04:18 +0000 (UTC)
-Received: by mail-qe0-f48.google.com with SMTP id nd7so3201564qeb.7
+	Fri,  4 Oct 2013 17:18:39 +0000 (UTC)
+Received: by mail-qa0-f50.google.com with SMTP id j7so1264440qaq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 10:04:20 -0700 (PDT)
+	Fri, 04 Oct 2013 10:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
-	:user-agent:mime-version:content-type;
-	bh=zW8/4+JYqVPe0RENRrrBoYI+JQ4h3mk7yqLPkvtBUcw=;
-	b=E4uXXs1qDaFYlSgrSVfDwh9NOrUD7cvXOQvtvHG9S2p1lsAnd6pcnWWkkGmEE9fPVl
-	lA4jn4+Hze3xEaenXC7oY+VBIFc1c4u+BvBXmKVnIRovEXVp29jO2PFbwsbjDrhtJ43O
-	msXy22DGozbbhuFBUSmLBXv9txmueMzFsiEpdT1S+nzZgPTBa5WrrdK5AVubjtCcIKVx
-	OSZjpmoDBWn02IUUygr0EofshFCQAcT/oD6wiOvlqhO6KF3RTZqzvWo06sTCCDVX0WIW
-	mG6hgX5OykGpM6BMIineKnu3W7F1ZCEzZsHAdZo4N8Zi1VNxGBlOdvrPkPElTwAdEoCK
-	hYZA==
-X-Received: by 10.49.24.74 with SMTP id s10mr19664765qef.24.1380906260010;
-	Fri, 04 Oct 2013 10:04:20 -0700 (PDT)
-Received: from parenteses.gmail.com (email.parenteses.org. [198.199.72.94])
-	by mx.google.com with ESMTPSA id a7sm26013150qew.2.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 10:04:19 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=f83GpIGiU89BQV7RvXbp7aDSl8dHoKMm29RfXkBqtao=;
+	b=wtVNI7K8WFVvwhudwa0KV/WiLtAtwc7Lu54QoxiAOFKJOllCYcBRFiDPiNcnO+G1JP
+	ARJAT5jZzqlbhgFDrcK7injjHIEY4CL3bgGGtf2rfAThZ1Kw5KTjbGMsffVmZ7vsOt9N
+	FiPDzpUYrd9vrGTFliOPxcV8LvgGubjxmVwRWEwzpqLs9AAigxQBRfBPOHFHSCqNtxYC
+	XWqTQTciJFLBXl0HGzP2eElH8gj/Md7nzw/YD8ddQcqb8UVvHXsgyg08NIlfmeqQWTKk
+	liydngn2B3Mx6CeNGA+NqZmaQ+NFuS1ouvto2DaRCpI9VmYNRBIJ6BRW1TbzGKSqq3NF
+	TpDg==
+X-Received: by 10.49.94.172 with SMTP id dd12mr19722610qeb.4.1380907121159;
+	Fri, 04 Oct 2013 10:18:41 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id n10sm30877432qas.5.1969.12.31.16.00.00
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 04 Oct 2013 10:18:40 -0700 (PDT)
 Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
 From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: Otavio Salvador <otavio@ossystems.com.br>
-References: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
-	<CAP9ODKpxHF4NUurt-U9HakdAWJ6LAz6HaNoHnuuf5fpEh0h-ow@mail.gmail.com>
-	<20131004141938.GI6240@jama>
-	<CAP9ODKqLRgh2jO4dDDPwkFd5RLM+hZjaFVVg=VXuTy0C_ukTkg@mail.gmail.com>
-Date: Fri, 04 Oct 2013 17:04:14 +0000
-In-Reply-To: <CAP9ODKqLRgh2jO4dDDPwkFd5RLM+hZjaFVVg=VXuTy0C_ukTkg@mail.gmail.com>
-	(Otavio Salvador's message of "Fri, 4 Oct 2013 11:27:46 -0300")
-Message-ID: <877gdtufw1.fsf@parenteses.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.3.50 (gnu/linux)
-MIME-Version: 1.0
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] wvstreams: add recipe for version 4.6.1
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Oct 2013 14:18:31 -0300
+Message-Id: <1380907111-9176-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCHv2] wvstreams: add recipe for version 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,82 +43,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 17:04:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 04 Oct 2013 17:18:41 -0000
 
-Hi,
+Recipe based on OE classic's recipe for version 4.4.1, as of
+0585ccfa49f71a81652c7f63885202e952ebd0e9.
 
-On Fri, 4 Oct 2013 11:27:46 -0300 Otavio Salvador <otavio@ossystems.com.br> wrote:
+Summary of changes against OE classic's recipe:
 
-> On Fri, Oct 4, 2013 at 11:19 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> On Tue, Sep 24, 2013 at 11:42:21AM -0300, Otavio Salvador wrote:
->>> On Tue, Sep 24, 2013 at 9:43 AM, Mario Domenech Goulart
->>> <mario@ossystems.com.br> wrote:
->>> > Recipe based on OE classic's recipe for version 4.4.1, as of
->>> > 0585ccfa49f71a81652c7f63885202e952ebd0e9.
->>> >
->>> > Summary of changes against OE classic's recipe:
->>> >
->>> > * Apply some Debian patches from
->>> >   http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
->>> >
->>> > * Minor adjustments for the current build system (add
->>> >   LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
->>> >   PR)
->>> >
->>> > * Disable parallel make, since it was causing errors like
->>> >
->>> > Log data follows:
->>> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
->>> > | common-linux', 'common-glibc', 'arm-linux',
->>> > | arm-linux-gnueabi', 'common']
->>> > | DEBUG: Executing shell function do_compile
->>> > | NOTE: make -j 8
->>> > | ./CXX -c utils/wvbuffer
->>> > | ./CXX -c utils/wvbufferstore
->>> > | ./CXX -c utils/wvcont
->>> > | /bin/bash: ./CXX: No such file or directory
->>> > | /bin/bash: ./CXX: No such file or directory
->>> > | /bin/bash: ./CXX: No such file or directory
->>> > | * Generating CC using c
->>> > | make: * Generating CXX using cc
->>> > | *** [utils/wvbuffer.o] Error 127
->>> > | make: *** Waiting for unfinished jobs....
->>> > | make: *** [utils/wvbufferstore.o] Error 127
->>> > | make: *** [utils/wvcont.o] Error 127
->>> > | ERROR: oe_runmake failed
->>> > | WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/run.do_compile.19302:1 exit 1 from
->>> > |   exit 1
->>> > | ERROR: Function failed: do_compile (log file is located at
->>> > | .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile.19302)
->>> >
->>> > Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
->>>
->>> Just for reference, Mario and I discussed about the path for including
->>> this recipe.
->>>
->>> We agreed it to be placed at wvdial subdir as it will only be used by it.
->>>
->>> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
->>
->> Sorry for huge delay caused by monster build running on jenkins for 11
->> days.. but this needs small fix for new QA issue:
->>
->> wvstreams-4.6.1: wvstreams: Files/directories were installed but not
->> shipped
->>   /usr/lib/valgrind
->>   /usr/lib/valgrind/wvstreams.supp
->
-> Sure; Mario, can you split this into a ${PN}-valgrind package?
+* Apply some Debian patches from
+  http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
 
-Thanks for spotting that, Martin.  I've submitted a v2 with a change
-that will hopefully fix that issue.
+* Minor adjustments for the current build system (add
+  LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
+  PR)
 
-As agreed with Otavio on a private discussion, we decided to disable
-valgrind by passing --without-valgrind to configure.
+* Add --without-valgrind to EXTRA_OECONF
 
-Best wishes.
-Mario
+* Disable parallel make, since it was causing errors like
+
+Log data follows:
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 8
+| ./CXX -c utils/wvbuffer
+| ./CXX -c utils/wvbufferstore
+| ./CXX -c utils/wvcont
+| /bin/bash: ./CXX: No such file or directory
+| /bin/bash: ./CXX: No such file or directory
+| /bin/bash: ./CXX: No such file or directory
+| * Generating CC using c
+| make: * Generating CXX using cc
+| *** [utils/wvbuffer.o] Error 127
+| make: *** Waiting for unfinished jobs....
+| make: *** [utils/wvbufferstore.o] Error 127
+| make: *** [utils/wvcont.o] Error 127
+| ERROR: oe_runmake failed
+| WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/run.do_compile.19302:1 exit 1 from
+|   exit 1
+| ERROR: Function failed: do_compile (log file is located at .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile.19302)
+
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../wvdial/wvstreams/04_signed_request.diff        |   13 ++++++
+ .../wvdial/wvstreams/05_gcc.diff                   |   41 +++++++++++++++++++
+ .../wvdial/wvstreams/06_gcc-4.7.diff               |   18 +++++++++
+ .../wvdial/wvstreams/07_buildflags.diff            |   32 +++++++++++++++
+ .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   42 ++++++++++++++++++++
+ 5 files changed, 146 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
+new file mode 100644
+index 0000000..5ab633b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
+@@ -0,0 +1,13 @@
++Index: wvstreams-4.6/crypto/wvx509.cc
++===================================================================
++--- wvstreams-4.6.orig/crypto/wvx509.cc	2009-07-29 11:58:16.000000000 -0400
+++++ wvstreams-4.6/crypto/wvx509.cc	2009-07-29 11:58:43.000000000 -0400
++@@ -325,7 +325,7 @@
++     }
++ 
++     int verify_result = X509_REQ_verify(certreq, pk);
++-    if (verify_result == 0)
+++    if (verify_result == 0 || verify_result == -1)
++     {
++ 	debug(WvLog::Warning, "Self signed request failed");
++ 	X509_REQ_free(certreq);
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
+new file mode 100644
+index 0000000..8e4fd03
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
+@@ -0,0 +1,41 @@
++Index: wvstreams-4.6.1/crypto/wvx509.cc
++===================================================================
++--- wvstreams-4.6.1.orig/crypto/wvx509.cc	2011-05-20 00:02:38.119136584 +0200
+++++ wvstreams-4.6.1/crypto/wvx509.cc	2011-05-20 00:02:26.035136589 +0200
++@@ -1157,7 +1157,7 @@
++         
++         if (ext)
++         {
++-            X509V3_EXT_METHOD *method = X509V3_EXT_get(ext);
+++            X509V3_EXT_METHOD *method = (X509V3_EXT_METHOD *)X509V3_EXT_get(ext);
++             if (!method)
++             {
++                 WvDynBuf buf;
++Index: wvstreams-4.6.1/ipstreams/wvunixdgsocket.cc
++===================================================================
++--- wvstreams-4.6.1.orig/ipstreams/wvunixdgsocket.cc	2011-05-20 00:02:38.391136584 +0200
+++++ wvstreams-4.6.1/ipstreams/wvunixdgsocket.cc	2011-05-20 00:02:35.283136585 +0200
++@@ -1,8 +1,6 @@
++ #include "wvunixdgsocket.h"
++-#ifdef MACOS
++ #include <sys/types.h>
++ #include <sys/stat.h>
++-#endif
++ 
++ WvUnixDGSocket::WvUnixDGSocket(WvStringParm filename, bool _server, int perms)
++     : socketfile(filename)
++Index: wvstreams-4.6.1/streams/wvatomicfile.cc
++===================================================================
++--- wvstreams-4.6.1.orig/streams/wvatomicfile.cc	2011-05-20 00:02:38.223136584 +0200
+++++ wvstreams-4.6.1/streams/wvatomicfile.cc	2011-05-20 00:02:31.619136587 +0200
++@@ -10,10 +10,7 @@
++ #include "wvatomicfile.h"
++ #include "wvfileutils.h"
++ #include "wvstrutils.h"
++-
++-#ifdef MACOS
++ #include <sys/stat.h>
++-#endif
++ 
++ WvAtomicFile::WvAtomicFile(WvStringParm filename, int flags, mode_t create_mode)
++     : tmp_file(WvString::null)
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
+new file mode 100644
+index 0000000..a75067a
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
+@@ -0,0 +1,18 @@
++Description: Fix FTBFS with gcc-4.7
++ Small header include change. This is borderlinde cosmetic, but still needed
++ to prevent the FTBFS.
++Author: Paul Tagliamonte <paultag@ubuntu.com>
++Origin: vendor
++Bug-Debian: http://bugs.debian.org/667418
++Last-Update: 2012-04-13
++
++--- wvstreams-4.6.1.orig/utils/wvuid.cc
+++++ wvstreams-4.6.1/utils/wvuid.cc
++@@ -33,6 +33,7 @@ wvuid_t wvgetuid()
++ 
++ #else // not WIN32
++ 
+++#include <unistd.h>
++ 
++ WvString wv_username_from_uid(wvuid_t uid)
++ {
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
+new file mode 100644
+index 0000000..ec99dcd
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
+@@ -0,0 +1,32 @@
++Index: b/gen-cc
++===================================================================
++--- a/gen-cc
+++++ b/gen-cc
++@@ -15,6 +15,11 @@
++ 	shift
++ 	shift
++ 	
+++	echo $CC \$MODE -o \$BASE.o \$BASE.$EXT \\
+++	        -MMD -MF \$DEPFILE -MP -MQ \$BASE.o \\
+++	        $CPPFLAGS \\
+++	        $CFLAGS \\
+++	        "\$@"
++ 	$CC \$MODE -o \$BASE.o \$BASE.$EXT \\
++ 	        -MMD -MF \$DEPFILE -MP -MQ \$BASE.o \\
++ 	        $CPPFLAGS \\
++Index: b/wvrules-posix.mk
++===================================================================
++--- a/wvrules-posix.mk
+++++ b/wvrules-posix.mk
++@@ -35,11 +35,6 @@
++ # Default compiler we use for linking
++ WVLINK_CC = $(CXX)
++ 
++-ifneq ("$(enable_optimization)", "no")
++-  CXXFLAGS+=-O2
++-  CFLAGS+=-O2
++-endif
++-
++ ifneq ("$(enable_warnings)", "no")
++   CXXFLAGS+=-Wall -Woverloaded-virtual
++   CFLAGS+=-Wall
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+new file mode 100644
+index 0000000..ce2b337
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -0,0 +1,42 @@
++HOMEPAGE = "http://alumnit.ca/wiki/index.php?page=WvStreams"
++DESCRIPTION = "WvStreams is a network programming library in C++"
++
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
++
++DEPENDS = "zlib openssl (>= 0.9.8)"
++
++SRC_URI = "http://${PN}.googlecode.com/files/${PN}-${PV}.tar.gz \
++           file://04_signed_request.diff \
++           file://05_gcc.diff \
++           file://06_gcc-4.7.diff \
++           file://07_buildflags.diff \
++          "
++
++SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
++SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
++
++inherit autotools pkgconfig
++
++PARALLEL_MAKE = ""
++
++LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
++
++EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
++
++PACKAGES_prepend = "libuniconf libuniconf-dbg "
++PACKAGES_prepend = "uniconfd uniconfd-dbg "
++PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
++PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
++
++FILES_libuniconf     = "${libdir}/libuniconf.so.*"
++FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
++
++FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
++FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
++
++FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
++FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
++
++FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
++FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
 -- 
-http://www.ossystems.com.br
+1.7.10.4
+
 
