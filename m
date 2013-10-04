@@ -1,34 +1,38 @@
-Return-Path: <akini@synapticon.com>
-Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A8D146CC50
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 52A5860FA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 11:33:10 +0000 (UTC)
-Received: by mail-lb0-f169.google.com with SMTP id z5so3135065lbh.14
+	Fri,  4 Oct 2013 11:57:26 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id u57so3005282wes.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 04:33:11 -0700 (PDT)
+	Fri, 04 Oct 2013 04:57:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=9FOh7PAgEDMZuyrjBF4vWaguRkUOFwLx2VqD+jq5KZc=;
-	b=E+aEi9KxFTYP+KC1Gk3W8TypfVdB16y+CYyAvJJ6RuqcGm7WFCvsU+m7wqYRI0ajZO
-	lF02xt6jqkYS6qmqXhDe6Rexl9+jJJxiJWUInW96WUDn6kmMJxQmfAGe4k4z7hETEnfp
-	hyStsplHAq2kLBjjhEP2wnu7Jv25MKJJSo43a639w0YzIMzP91wKvhDb+SwKjLOuwX39
-	Y4Gak0SZRPX4rXIRgHvJ0hCmq3qwFRrZ92zXVFdai7RgNjAggiiiC8ONpGICt/WlFV7R
-	TX/UviDyRPojmZd8bg6SwbaSNIFqO3zCKXmcG9O9HeWTfc8KnRirAVWKzDZ6tH037Jnl
-	8qOg==
-X-Gm-Message-State: ALoCoQkoBP/FkOHo2n4J13G3Edf68Srmw3o4CcgjHvHdP5Kv1jdfy9nRb8l/TnNKl6hMY6gtIIOo
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=pS1q9F0SeLZG2QfzJALGPx3RSvdu+W/Wq3fEpgw6Bzs=;
+	b=DYwD6Z106VYP3Xz/JPRZZodMFoLhgjOZpSJT4HkfBZynT59ZKnO6RiUxGad4+fvrG4
+	CgTCC3vitsD9JLQl0QOjuZgpyidLHMojWFT3tKPkOKY0GeV8Fefsgk+uX68pUXXpn+Zv
+	bSDCyW+3Fz4GibzZYHO0IHRtk/n4eZDQigH28lk4JDQUsRqthTuCyiEeNWygX8xL4l9o
+	9DeZyfZPasR/2amz5xCnaU3dVVdsHWRPqtJ8TprPTWl0+Nl3KstUzwb0FTrj0L7jnOuQ
+	ZOSpksefekaQbMoCvnZWMax2ahd1PC06ViyACUEewxauZ5GGiL9V5HSBiSDGgm0GnJAp
+	eVfQ==
+X-Gm-Message-State: ALoCoQkNcFdmfO4OIJdzu/IbQAzgZIZeIVB9TmHvOHbYnrVxWw2HpREoMmL1cEJNHS7EgxyW4oQt
+X-Received: by 10.180.74.164 with SMTP id u4mr7075267wiv.17.1380887846832;
+	Fri, 04 Oct 2013 04:57:26 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.112.210.136 with SMTP id mu8mr11354069lbc.25.1380886391473; 
-	Fri, 04 Oct 2013 04:33:11 -0700 (PDT)
-Received: by 10.114.3.8 with HTTP; Fri, 4 Oct 2013 04:33:11 -0700 (PDT)
-Date: Fri, 4 Oct 2013 13:33:11 +0200
-Message-ID: <CAKS01onZvQhWDq63OmQ+u7E9NCPSvWyhSnShnrexGXi6ma77Nw@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: building a recipe with runtime dependencies - ERROR: QA Issue : contains bad RPATH.
+Received: by 10.180.74.46 with HTTP; Fri, 4 Oct 2013 04:57:06 -0700 (PDT)
+In-Reply-To: <20131004100904.GC6240@jama>
+References: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
+	<20131004100904.GC6240@jama>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 4 Oct 2013 13:57:06 +0200
+Message-ID: <CAP71WjyKDm_NYTbA_DRLxcK8nkfsURca0UgRHPkoO+O5bzso7Q@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: ruby-native problem (on dylan)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,95 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 11:33:11 -0000
+X-List-Received-Date: Fri, 04 Oct 2013 11:57:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+On Fri, Oct 4, 2013 at 12:09 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Try to add this in qtwebkit.inc:
+>
+> # make sure rb files are used from sysroot, not from host
+> # ruby-1.9.3-always-use-i386.patch is doing target_cpu=`echo $target_cpu | sed s/i.86/i386/`
+> # we need to replace it too (a bit longer version without importing re)
+> RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
+> export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
+>
+> if you can confirm it works for you I'll push it to meta-qt5.
 
-I am trying to build a recipe for PCL library, similar to the one that
-Lukas [1] has derived but for a older version because fo some dependencies
-with other packages and support for ARM platform.
+yes, it is working fine with this change.
 
-1.
-https://github.com/bulwahn/meta-ros/commit/2c1fb8dbc46f8bc3f3fe58fbdfb7b2c8f244431a
+however, don't you think that this is just a workaround? the real
+issue being that ruby has hard coded paths?
 
-I am using PCL 1.6 instead of PCL 1.7 as used by Lukas.
-
-When i try to include the package in the image (rootfs) i get the following
-error message:
-ERROR: QA Issue: libpcl: Files/directories were installed but not shipped
-  /usr/share
-  /usr/share/pcl-1.6
-  /usr/share/pcl-1.6/PCLConfigVersion.cmake
-  /usr/share/pcl-1.6/PCLConfig.cmake
-ERROR: QA Issue: package libpcl *contains bad
-RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
-in
-file
-/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/pcl_ply2raw
-ERROR: QA Issue: package libpcl* contains bad
-RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
-in
-file
-/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/timed_trigger_test
-ERROR: QA Issue: package libpcl *contains bad
-RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
-in
-file
-/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/pcl_convert_pcd_ascii_binary
-... many more such errors.
-ERROR: Function failed: do_package_qa
-
-VTK is a runtime dependency for PCL and i have included the following line
-in my recipe:
-
-...
-RDEPENDS_${PN} = "eigen boost libflann vtk"
-...
-
-Let me know if i am doing something wrong and hwo to over come this error
-the right way !!
-
-
-
-Thanks,
--- 
-
-*Anup Kini
-*Systems Engineer****
-*
-------------------------------
-*
-
-*Synapticon** * |  Cyber-Physical System Solutions ****
-
-Mobile:
-
-Direct:
-
-+49 151 / 638 646 73
-
-+49 7335 / 186 999 21
-
-Fax:****
-+49 7335 / 186 999 1
-
-
- **
-
- ****
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-****
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127****
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
+thanks
 
