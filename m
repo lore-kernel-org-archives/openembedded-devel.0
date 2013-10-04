@@ -1,43 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 069CF60FA6
+Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 21A7960FA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 14:13:33 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id d41so1823779eek.22
+	Fri,  4 Oct 2013 14:14:25 +0000 (UTC)
+Received: by mail-ea0-f177.google.com with SMTP id f15so1785674eak.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 07:13:34 -0700 (PDT)
+	Fri, 04 Oct 2013 07:14:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=xsFXqBh+LfMpK2dvvCgrgwnzc+cpP5dsSXnF9nA+VDI=;
-	b=ZYqcZR84oumAtDnGBGX0Zt1mphKJZytwdK5W5KBzCtkSHXh9AbOEbWVHCCO1OGlZFo
-	4vFXo9n3XWdD6l0s7z10/p54S+227w1z6bJxDDqbydHC9GEarc1k6WxRIohLAi3EbTWn
-	nkdv+SygfzRpHCQdBNPgJ/T25aA/5gYXu4ICiHjHxQrHnoK6WEv2OHp+0lCrXDL+rkaW
-	MJxCZ9CPbRcs+1Gcq1sxe7mrKLN6n4ZsAJm8ILqeQ3t7mr4DeJ9L24L3vzwymCxH0xVs
-	EuxyGTiNwp6nLBLkxJCSEi5hY92iekPVtliNUHj45RHhRkzkT+2Kfx3EeOMprzafv66R
-	ZhCw==
-X-Received: by 10.14.4.137 with SMTP id 9mr34737eej.124.1380896014836;
-	Fri, 04 Oct 2013 07:13:34 -0700 (PDT)
+	bh=mgPWszN8FGh0YsxDsYkVwhhNAeuEVqbIUDi/aoOtRgU=;
+	b=MF/L6Ok8riN0udAQngnempLK709AW3JHShIVy+jmWFldidGAWFHns89d9PIMYGDnuZ
+	YsRpcqj4Vox3bnAkGe/x4KZ+lyoXPBbTCPWMZqtzQXXZZ09wqOifoETJkFcG/VDjRPAb
+	M3lANWsmDOKUH+o/Daw0hEyyawfGaUHIAoTjvOF6pnIOJGQ2PuEM86HjxIeW53izrXY9
+	roFzU0Cdx+WWFH1abmC6xils9u55YHAvZHJ8wEDcYrAX3ElRS5ImIkwaJdyDf4oIRD/+
+	GoNuYHGX8JXkEuNsXy2ikrw3nbiOyO9Ifrd+UnzriqYCuK1i/sDipVgbBSjfhObptd7B
+	Ad/Q==
+X-Received: by 10.15.91.3 with SMTP id r3mr22318914eez.4.1380896067453;
+	Fri, 04 Oct 2013 07:14:27 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	x47sm28506729eea.16.1969.12.31.16.00.00
+	k7sm28500341eeg.13.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 07:13:33 -0700 (PDT)
-Date: Fri, 4 Oct 2013 16:13:40 +0200
+	Fri, 04 Oct 2013 07:14:26 -0700 (PDT)
+Date: Fri, 4 Oct 2013 16:14:33 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Message-ID: <20131004141340.GF6240@jama>
-References: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
-	<20131004100904.GC6240@jama>
-	<CAP71WjyKDm_NYTbA_DRLxcK8nkfsURca0UgRHPkoO+O5bzso7Q@mail.gmail.com>
-	<20131004132250.GE6240@jama>
-	<CAP71WjzY7STw_W1Zt2Lkg1D-GmZaxfGe_O37+tiH2wa6Bz4Vqg@mail.gmail.com>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+Message-ID: <20131004141433.GG6240@jama>
+References: <CALmOhgkzmnVuviF+cAzELRpdZomHDzpHn5-1dZEwa_xznG8JiQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAP71WjzY7STw_W1Zt2Lkg1D-GmZaxfGe_O37+tiH2wa6Bz4Vqg@mail.gmail.com>
+In-Reply-To: <CALmOhgkzmnVuviF+cAzELRpdZomHDzpHn5-1dZEwa_xznG8JiQ@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+Cc: Abhijit Potnis <abhijit_potnis@mentor.com>,
 	openembedded-devel@lists.openembedded.org
-Subject: Re: ruby-native problem (on dylan)
+Subject: Re: meta-qt5, master, qtwebkit-examples build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,54 +48,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 14:13:35 -0000
-X-Groupsio-MsgNum: 46442
+X-List-Received-Date: Fri, 04 Oct 2013 14:14:27 -0000
+X-Groupsio-MsgNum: 46443
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AH+kv8CCoFf6qPuz"
+	protocol="application/pgp-signature"; boundary="gvF4niNJ+uBMJnEh"
 Content-Disposition: inline
 
---AH+kv8CCoFf6qPuz
+--gvF4niNJ+uBMJnEh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 04, 2013 at 03:26:21PM +0200, Nicolas Dechesne wrote:
-> On Fri, Oct 4, 2013 at 3:22 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> > qmake also has hard coded paths inside and we depend on qt.conf
-> > overrides to set correct paths when building on host with different
-> > paths to sysroot.
+On Fri, Oct 04, 2013 at 09:03:06AM -0400, Trevor Woerner wrote:
+> Hi,
 >=20
-> well, gcc too in fact, since it has hardcoded sysroot ...
+> I tried performing a
 >=20
-> >
-> > I think that only better solution is to patch ruby/qmake to remove the
-> > support for "default" paths hard coded in binary and to always show an
-> > error when correct paths aren't supplied by env variable or some cmdline
-> > param.
+>     $ bitbake qtwebkit-examples
 >=20
-> i think that's what --enable-load-relative does in ruby ./configure.
+> and had a build failure in do_configure. I was just wondering if anyone
+> else is seeing
+> the same thing?
 >=20
-> i wonder what happens on ruby on the target then. i guess the standard
-> /usr/lib/xxx might be used by default.. but i haven't tried that.
->=20
-> can you make a similar patch on the dylan branch too?
+>     Unknown module(s) in QT: webkit
 
-Yes will do in next round.
+Just lucky guess, do you have ICU enabled in qtbase?
+
+>=20
+> Full error:
+>=20
+> ERROR: Function failed: do_configure (log file is located at
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401)
+> ERROR: Logfile of failure stored in:
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401
+> Log data follows:
+> | DEBUG: Executing python function sysroot_cleansstate
+> | DEBUG: Python function sysroot_cleansstate finished
+> | DEBUG: Executing shell function qmake5_base_preconfigure
+> | DEBUG: Shell function qmake5_base_preconfigure finished
+> | DEBUG: Executing shell function do_configure
+> | Reading
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
+es/
+> examples.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-pok=
+y-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples]
+> |  Reading
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
+es/webkitqml/
+> webkitqml.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-po=
+ky-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml]
+> |   Reading
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
+es/webkitqml/shared/
+> shared.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-=
+linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml/shared]
+> |   Reading
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
+es/webkitqml/flickrview/
+> flickrview.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-p=
+oky-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml/flick=
+rview]
+> | Project ERROR: Unknown module(s) in QT: webkit
+> | ERROR: Error calling
+> /home/trevor/build/yocto/tmp/master/qemuarm/sysroots/x86_64-linux/usr/bin=
+/qt5/qmake
+> -makefile -o Makefile  -r
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/
+> qtwebkit-examples.pro
+> | WARNING:
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/temp/run.do_configure.20401:1
+> exit 1 from
+> |   exit 1
+> | ERROR: Function failed: do_configure (log file is located at
+> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
+bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401)
+> ERROR: Task 6 (/home/trevor/devel/yocto/git/meta-qt5/recipes-qt/qt5/
+> qtwebkit-examples_5.1.0.bb, do_configure) failed with exit code '1'
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---AH+kv8CCoFf6qPuz
+--gvF4niNJ+uBMJnEh
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlJOzRQACgkQN1Ujt2V2gBwmYgCgupFkuZA/8kgI4AO64nwoMs/+
-pXMAn0yhBdJctJJVPBSyeM1SIeJn/bzu
-=kRLb
+iEYEARECAAYFAlJOzUkACgkQN1Ujt2V2gBzM6ACfbBDkyDn8HE2J5HoW601DW4Tt
+ieYAn0VJs22YmqQImHDu7OAXTtUmla0y
+=3z1/
 -----END PGP SIGNATURE-----
 
---AH+kv8CCoFf6qPuz--
+--gvF4niNJ+uBMJnEh--
