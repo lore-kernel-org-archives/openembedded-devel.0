@@ -1,40 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 32FB66BB33
+Return-Path: <akini@synapticon.com>
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id A8D146CC50
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 10:08:57 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id m14so1674549eaj.20
+	Fri,  4 Oct 2013 11:33:10 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id z5so3135065lbh.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 03:08:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=on+gSFMaYjHx3+sPTMhQUXB1j86zEybPbt94bgac1eE=;
-	b=vaGxK3EkR4c/H2h6K5TiWyRQ9mJlqHymWub31lrgJihzPiyTs8IR2giUMugOOWOCGp
-	THd4VtNFvaf67UEncz7CUFgtaj+DjtAeAttNwwncoipoWQ2hm2ZERqf9PeUGZCzuiUiP
-	vou4m28/fcKnkV0mbQ/uluHRVxBKEcsSaEXGCi3XypHiEPl4w7j+U8h2GtycSTC76tdz
-	AgKSFLF/6RFZNqZUt/B4PiOJQ/UqrgP8qrPhS8/nLTS8yJupvv7gfD+QU/shhTskKFPY
-	W2jX7okzzu5+chm0L2vvgyX/9/0ra2JfcEHGzT7BclmurjO6QpGdTXo6WW+Kb74kAB0o
-	ZX+g==
-X-Received: by 10.14.4.1 with SMTP id 1mr20786919eei.21.1380881338457;
-	Fri, 04 Oct 2013 03:08:58 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	h45sm26260366eeg.5.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 03:08:57 -0700 (PDT)
-Date: Fri, 4 Oct 2013 12:09:04 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Message-ID: <20131004100904.GC6240@jama>
-References: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
+	Fri, 04 Oct 2013 04:33:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=9FOh7PAgEDMZuyrjBF4vWaguRkUOFwLx2VqD+jq5KZc=;
+	b=E+aEi9KxFTYP+KC1Gk3W8TypfVdB16y+CYyAvJJ6RuqcGm7WFCvsU+m7wqYRI0ajZO
+	lF02xt6jqkYS6qmqXhDe6Rexl9+jJJxiJWUInW96WUDn6kmMJxQmfAGe4k4z7hETEnfp
+	hyStsplHAq2kLBjjhEP2wnu7Jv25MKJJSo43a639w0YzIMzP91wKvhDb+SwKjLOuwX39
+	Y4Gak0SZRPX4rXIRgHvJ0hCmq3qwFRrZ92zXVFdai7RgNjAggiiiC8ONpGICt/WlFV7R
+	TX/UviDyRPojmZd8bg6SwbaSNIFqO3zCKXmcG9O9HeWTfc8KnRirAVWKzDZ6tH037Jnl
+	8qOg==
+X-Gm-Message-State: ALoCoQkoBP/FkOHo2n4J13G3Edf68Srmw3o4CcgjHvHdP5Kv1jdfy9nRb8l/TnNKl6hMY6gtIIOo
 MIME-Version: 1.0
-In-Reply-To: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: ruby-native problem (on dylan)
+X-Received: by 10.112.210.136 with SMTP id mu8mr11354069lbc.25.1380886391473; 
+	Fri, 04 Oct 2013 04:33:11 -0700 (PDT)
+Received: by 10.114.3.8 with HTTP; Fri, 4 Oct 2013 04:33:11 -0700 (PDT)
+Date: Fri, 4 Oct 2013 13:33:11 +0200
+Message-ID: <CAKS01onZvQhWDq63OmQ+u7E9NCPSvWyhSnShnrexGXi6ma77Nw@mail.gmail.com>
+From: Anup Kini <akini@synapticon.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: building a recipe with runtime dependencies - ERROR: QA Issue : contains bad RPATH.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,113 +42,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 10:08:58 -0000
-X-Groupsio-MsgNum: 46436
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OBd5C1Lgu00Gd/Tn"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 04 Oct 2013 11:33:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---OBd5C1Lgu00Gd/Tn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi All,
 
-On Fri, Oct 04, 2013 at 10:09:53AM +0200, Nicolas Dechesne wrote:
-> hi,
->=20
-> we got some build failures in our autobuilders last night, which
-> seemed to be related to ruby-native. We use dylan, but I believe the
-> same problem is there in master/dora too.
->=20
-> The exact build error was in qtwebkit do_compile:
->=20
-> ruby /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_c=
-loud/machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-=
-gnueabi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScript=
-Core/offlineasm/generate_offset_extractor.rb
-> /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_cloud/=
-machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-gnuea=
-bi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScriptCore/=
-llint/LowLevelInterpreter.asm
-> LLIntDesiredOffsets.h
->=20
-> <internal:gem_prelude>:1:in `require': cannot load such file --
-> rubygems.rb (LoadError)
-> from <internal:gem_prelude>:1:in `<compiled>'
->=20
-> Yesterday I had 'moved' our BUILDDIR location. However for every build, w=
-e:
->  - delete the TMPDIR completely
->  - reuse our sstate
->=20
-> The problem seems to be that 'ruby' has hard coded paths in the
-> binary. This is discussed in [1] or more at length in [2], and easy to
-> check:
+I am trying to build a recipe for PCL library, similar to the one that
+Lukas [1] has derived but for a older version because fo some dependencies
+with other packages and support for ARM platform.
 
-Try to add this in qtwebkit.inc:
+1.
+https://github.com/bulwahn/meta-ros/commit/2c1fb8dbc46f8bc3f3fe58fbdfb7b2c8f244431a
 
-# make sure rb files are used from sysroot, not from host
-# ruby-1.9.3-always-use-i386.patch is doing target_cpu=3D`echo $target_cpu =
-| sed s/i.86/i386/`
-# we need to replace it too (a bit longer version without importing re)
-RUBY_SYS =3D "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i=
-386').replace('i686', 'i386') }"
-export RUBYLIB=3D"${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIV=
-E}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
+I am using PCL 1.6 instead of PCL 1.7 as used by Lukas.
 
-if you can confirm it works for you I'll push it to meta-qt5.
+When i try to include the package in the image (rootfs) i get the following
+error message:
+ERROR: QA Issue: libpcl: Files/directories were installed but not shipped
+  /usr/share
+  /usr/share/pcl-1.6
+  /usr/share/pcl-1.6/PCLConfigVersion.cmake
+  /usr/share/pcl-1.6/PCLConfig.cmake
+ERROR: QA Issue: package libpcl *contains bad
+RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
+in
+file
+/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/pcl_ply2raw
+ERROR: QA Issue: package libpcl* contains bad
+RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
+in
+file
+/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/timed_trigger_test
+ERROR: QA Issue: package libpcl *contains bad
+RPATH*/usr/lib:/home/akini/poky/build/tmp/sysroots/zc702-zynq7/usr/lib/vtk-5.8
+in
+file
+/home/akini/poky/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libpcl/1.6.0-r0/packages-split/libpcl/usr/bin/pcl_convert_pcd_ascii_binary
+... many more such errors.
+ERROR: Function failed: do_package_qa
 
->=20
-> $ strings tmp/sysroots/x86_64-linux/usr/bin/ruby | grep project
-> /work/project/build/tmp/sysroots/x86_64-linux/usr
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby/x86_=
-64-linux
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby/x8=
-6_64-linux
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/share/rubygems
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/x86_64-linux
->=20
-> So, the 'ruby' binary which was in the sstate, knew about the *old*
-> paths. When building today, ruby was pulled from sstate, but TMPDIR
-> has changed now, and the hardcoded paths no longer exists, leading to
-> the build failure.
->=20
-> I verified that the following 'solved' the build issue:
-> $ bitbake -c cleansstate ruby-native
-> $ bitbake ruby-native
-> $ bitbake qtwebkit
->=20
-> There seems to be a configure option, --enable-load-relative, after
-> using this option in ruby build, still ruby fails to start for the
-> same reason. I might have done something wrong, but i wanted to bring
-> it on the list, to see if anyone has a better solution, as it seems
-> like a big issue.
->=20
-> thanks
->=20
-> nicolas
->=20
->=20
-> [1] http://stackoverflow.com/questions/10221387/moving-ruby-installation-=
-causes-it-to-not-function-how-to-get-around-this
-> [2] http://yehudakatz.com/2012/06/
+VTK is a runtime dependency for PCL and i have included the following line
+in my recipe:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+...
+RDEPENDS_${PN} = "eigen boost libflann vtk"
+...
 
---OBd5C1Lgu00Gd/Tn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Let me know if i am doing something wrong and hwo to over come this error
+the right way !!
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlJOk8AACgkQN1Ujt2V2gBw9mACfdrojhdWzWBXlmI77OdQE0sTH
-Fy0Anj1ty2qCsQnMlOEv3THVcxR3kUSU
-=Avdr
------END PGP SIGNATURE-----
 
---OBd5C1Lgu00Gd/Tn--
+Thanks,
+-- 
+
+*Anup Kini
+*Systems Engineer****
+*
+------------------------------
+*
+
+*Synapticon** * |  Cyber-Physical System Solutions ****
+
+Mobile:
+
+Direct:
+
++49 151 / 638 646 73
+
++49 7335 / 186 999 21
+
+Fax:****
++49 7335 / 186 999 1
+
+
+ **
+
+ ****
+
+synapticon.com <http://www.synapticon.com/>  |
+@synapticon_co<https://twitter.com/#!/synapticon_co>
+****
+
+Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
+Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
+Registry Court Ulm HRB 725114  |  USt-ID DE271647127****
+
+This message and any files transmitted with it are confidential and
+intended
+solely for the use of the individual or entity to whom they are addressed.
+Please notify the sender immediately if you have received this e-mail by
+mistake and delete it from your system.
+
