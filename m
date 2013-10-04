@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 21A7960FA6
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 51FD160FA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 14:14:25 +0000 (UTC)
-Received: by mail-ea0-f177.google.com with SMTP id f15so1785674eak.8
+	Fri,  4 Oct 2013 14:18:07 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id o10so1859831eaj.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 07:14:27 -0700 (PDT)
+	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=mgPWszN8FGh0YsxDsYkVwhhNAeuEVqbIUDi/aoOtRgU=;
-	b=MF/L6Ok8riN0udAQngnempLK709AW3JHShIVy+jmWFldidGAWFHns89d9PIMYGDnuZ
-	YsRpcqj4Vox3bnAkGe/x4KZ+lyoXPBbTCPWMZqtzQXXZZ09wqOifoETJkFcG/VDjRPAb
-	M3lANWsmDOKUH+o/Daw0hEyyawfGaUHIAoTjvOF6pnIOJGQ2PuEM86HjxIeW53izrXY9
-	roFzU0Cdx+WWFH1abmC6xils9u55YHAvZHJ8wEDcYrAX3ElRS5ImIkwaJdyDf4oIRD/+
-	GoNuYHGX8JXkEuNsXy2ikrw3nbiOyO9Ifrd+UnzriqYCuK1i/sDipVgbBSjfhObptd7B
-	Ad/Q==
-X-Received: by 10.15.91.3 with SMTP id r3mr22318914eez.4.1380896067453;
-	Fri, 04 Oct 2013 07:14:27 -0700 (PDT)
+	bh=TiAi4hqNPOdOQBabU8BadOGosNwsQRNT5ViW8HXFhWI=;
+	b=JP+ZdgCrHAHrYYBR+ChM4TlIusSvf/eLIC7zFsYLUrI4HoStf99A9Wec4QSJmqRKee
+	q8Ba7kOzSTF79pErZP20lOhT6LK5MCxPtE3igdOXKA3+mP5hiRTZjBegg+tLM6uSv7SR
+	K7ftXxsG09xOPzINXaWb12iJ/XUrnAaxAZowDqmuszt4lN0WimssyDLqVFuFBlPuOYIx
+	rUIzSl5nXFmcQAknXhzgEAVGksKTXLRAGDu2fcRjQO1kkKmo9H9OQpPDHlyTP3WbeohI
+	NV4OmAqigJgE1IBN/fsf8ukxnh+bJEJ0k2jUjD7POQ976Z1HhnzNUbvjzgiZIowX0yck
+	/log==
+X-Received: by 10.14.48.14 with SMTP id u14mr2839895eeb.74.1380896288850;
+	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	k7sm28500341eeg.13.1969.12.31.16.00.00
+	x47sm28547982eea.16.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 07:14:26 -0700 (PDT)
-Date: Fri, 4 Oct 2013 16:14:33 +0200
+	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
+Date: Fri, 4 Oct 2013 16:18:15 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Message-ID: <20131004141433.GG6240@jama>
-References: <CALmOhgkzmnVuviF+cAzELRpdZomHDzpHn5-1dZEwa_xznG8JiQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131004141815.GH6240@jama>
+References: <1379760101-13380-1-git-send-email-schnitzeltony@googlemail.com>
+	<1379760101-13380-8-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <CALmOhgkzmnVuviF+cAzELRpdZomHDzpHn5-1dZEwa_xznG8JiQ@mail.gmail.com>
+In-Reply-To: <1379760101-13380-8-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Abhijit Potnis <abhijit_potnis@mentor.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: meta-qt5, master, qtwebkit-examples build failure
+Subject: Re: [meta-oe/meta-xfce 07/10] xfce4-settings: add PACKAGECONFIG for sound-settings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,104 +47,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 14:14:27 -0000
-X-Groupsio-MsgNum: 46443
+X-List-Received-Date: Fri, 04 Oct 2013 14:18:08 -0000
+X-Groupsio-MsgNum: 46444
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gvF4niNJ+uBMJnEh"
+	protocol="application/pgp-signature"; boundary="CNfT9TXqV7nd4cfk"
 Content-Disposition: inline
 
---gvF4niNJ+uBMJnEh
-Content-Type: text/plain; charset=us-ascii
+--CNfT9TXqV7nd4cfk
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 04, 2013 at 09:03:06AM -0400, Trevor Woerner wrote:
-> Hi,
+On Sat, Sep 21, 2013 at 12:41:38PM +0200, Andreas M=FCller wrote:
+> defaults based upon DISTRO_FEATURES for alsa and pulseaudio
 >=20
-> I tried performing a
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 >=20
->     $ bitbake qtwebkit-examples
->=20
-> and had a build failure in do_configure. I was just wondering if anyone
-> else is seeing
-> the same thing?
->=20
->     Unknown module(s) in QT: webkit
+> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb =
+b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> index 4b75dd7..227858a 100644
+> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+> @@ -23,9 +23,13 @@ PV =3D "4.10.0+git${SRCPV}"
+>  =20
+>  EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
 
-Just lucky guess, do you have ICU enabled in qtbase?
+Last xfce4-settings change caused PV going backwards:
+xfce4-settings-4.10.0+gitAUTOINC+b7a0e1fd77: Package version for package
+xfce4-settings-locale-si went backwards which would break package feeds
+=66rom (0:4.11.0-r0.55 to 0:4.10.0+git0+b7a0e1fd77-r0.2)
 
+commit 23f020f742aea622e5dd7aef81eb59c99f8ef000
+Author: Andreas M<C3><BC>ller <schnitzeltony@googlemail.com>
+Date:   Mon Sep 16 09:04:15 2013 +0000
+
+    xfce4-settings: move to schnitzeltony's git repo to get new datetime
+setter
+   =20
+Is this git version really older tna old release we had?
+
+Sorry that I haven't reported it on the commit which caused it :).
+
+> =20
+> -PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES','systemd','datet=
+ime-setter','',d)}"
+> +PACKAGECONFIG ??=3D " \
+> +    ${@base_contains('DISTRO_FEATURES','systemd','datetime-setter','',d)=
+} \
+> +    ${@base_contains('DISTRO_FEATURES','alsa','sound-setter', base_conta=
+ins('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
+> +"
+>  PACKAGECONFIG[datetime-setter] =3D "--enable-datetime-settings, --disabl=
+e-datetime-settings,, tzdata"
+>  PACKAGECONFIG[notify] =3D "--enable-libnotify,--disable-libnotify,libnot=
+ify"
+> +PACKAGECONFIG[sound-setter] =3D "--enable-sound-settings, --disable-soun=
+d-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
+> =20
+>  do_configure_prepend() {
+>      NOCONFIGURE=3Dyes ./autogen.sh
+> @@ -43,3 +47,5 @@ do_install_prepend() {
+>  }
+> =20
+>  RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
+> +RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','alsa','libca=
+nberra-alsa','',d)}"
+> +RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','pulseaudio',=
+'libcanberra-pulse','',d)}"
+> --=20
+> 1.8.3.1
 >=20
-> Full error:
->=20
-> ERROR: Function failed: do_configure (log file is located at
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401)
-> ERROR: Logfile of failure stored in:
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401
-> Log data follows:
-> | DEBUG: Executing python function sysroot_cleansstate
-> | DEBUG: Python function sysroot_cleansstate finished
-> | DEBUG: Executing shell function qmake5_base_preconfigure
-> | DEBUG: Shell function qmake5_base_preconfigure finished
-> | DEBUG: Executing shell function do_configure
-> | Reading
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
-es/
-> examples.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-pok=
-y-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples]
-> |  Reading
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
-es/webkitqml/
-> webkitqml.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-po=
-ky-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml]
-> |   Reading
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
-es/webkitqml/shared/
-> shared.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-=
-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml/shared]
-> |   Reading
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/exampl=
-es/webkitqml/flickrview/
-> flickrview.pro[/home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-p=
-oky-linux-gnueabi/qtwebkit-examples/5.1.0-r0/build/examples/webkitqml/flick=
-rview]
-> | Project ERROR: Unknown module(s) in QT: webkit
-> | ERROR: Error calling
-> /home/trevor/build/yocto/tmp/master/qemuarm/sysroots/x86_64-linux/usr/bin=
-/qt5/qmake
-> -makefile -o Makefile  -r
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/qtwebkit-examples-opensource-src-5.1.0/
-> qtwebkit-examples.pro
-> | WARNING:
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/temp/run.do_configure.20401:1
-> exit 1 from
-> |   exit 1
-> | ERROR: Function failed: do_configure (log file is located at
-> /home/trevor/build/yocto/tmp/master/qemuarm/work/armv5te-poky-linux-gnuea=
-bi/qtwebkit-examples/5.1.0-r0/temp/log.do_configure.20401)
-> ERROR: Task 6 (/home/trevor/devel/yocto/git/meta-qt5/recipes-qt/qt5/
-> qtwebkit-examples_5.1.0.bb, do_configure) failed with exit code '1'
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---gvF4niNJ+uBMJnEh
+--CNfT9TXqV7nd4cfk
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlJOzUkACgkQN1Ujt2V2gBzM6ACfbBDkyDn8HE2J5HoW601DW4Tt
-ieYAn0VJs22YmqQImHDu7OAXTtUmla0y
-=3z1/
+iEYEARECAAYFAlJOzicACgkQN1Ujt2V2gBzeqQCeNoFtO2Xn/SVrv4WpSzxlSHtD
+PKMAnia+30JI8hfNbdvBCouOsXLzsmhj
+=v1Uj
 -----END PGP SIGNATURE-----
 
---gvF4niNJ+uBMJnEh--
+--CNfT9TXqV7nd4cfk--
