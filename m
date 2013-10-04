@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 51FD160FA6
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F15F60FA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 14:18:07 +0000 (UTC)
-Received: by mail-ea0-f182.google.com with SMTP id o10so1859831eaj.27
+	Fri,  4 Oct 2013 14:19:31 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so1811170eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
+	Fri, 04 Oct 2013 07:19:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TiAi4hqNPOdOQBabU8BadOGosNwsQRNT5ViW8HXFhWI=;
-	b=JP+ZdgCrHAHrYYBR+ChM4TlIusSvf/eLIC7zFsYLUrI4HoStf99A9Wec4QSJmqRKee
-	q8Ba7kOzSTF79pErZP20lOhT6LK5MCxPtE3igdOXKA3+mP5hiRTZjBegg+tLM6uSv7SR
-	K7ftXxsG09xOPzINXaWb12iJ/XUrnAaxAZowDqmuszt4lN0WimssyDLqVFuFBlPuOYIx
-	rUIzSl5nXFmcQAknXhzgEAVGksKTXLRAGDu2fcRjQO1kkKmo9H9OQpPDHlyTP3WbeohI
-	NV4OmAqigJgE1IBN/fsf8ukxnh+bJEJ0k2jUjD7POQ976Z1HhnzNUbvjzgiZIowX0yck
-	/log==
-X-Received: by 10.14.48.14 with SMTP id u14mr2839895eeb.74.1380896288850;
-	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
+	bh=brl/UKLhb+kSu7lnVoihfEq7EnlPrSwzWeIB0bSdZYA=;
+	b=uaQR1xp+HvWn3YYrREeOHkNtvJRjbRQ+Djw4rk/hTbcXXNUIC0PvP7/d18ul8Fxta2
+	HG46E/RmyaxORpMcYDS8XcV1DlryNtauKc5h1AiQ/nPBGd1Fq3ZVRCu2FhqsRZu/Ggiv
+	s1ck3nB9P+r08FUEN7dm/qtpyUA2o8kTi3pYCm/zLqC6R+h8ESSPh1/QF0D3OQIQBFNV
+	46Gg1PuZou/+5UaOJtSnt3UJIRBSO4IFJQ1eh5KICZDqNFZRMzCAIEQvB1fEihmExaLR
+	OctJmk5x9gzVU1ISRqv3H9m1Yg2SQ8CRgOdV4wI8zMIhebrbBsmYVBve//9tFurpf5O9
+	p+kQ==
+X-Received: by 10.15.99.205 with SMTP id bl53mr2729916eeb.82.1380896372729;
+	Fri, 04 Oct 2013 07:19:32 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	x47sm28547982eea.16.1969.12.31.16.00.00
+	d8sm28556674eeh.8.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 07:18:08 -0700 (PDT)
-Date: Fri, 4 Oct 2013 16:18:15 +0200
+	Fri, 04 Oct 2013 07:19:31 -0700 (PDT)
+Date: Fri, 4 Oct 2013 16:19:38 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131004141815.GH6240@jama>
-References: <1379760101-13380-1-git-send-email-schnitzeltony@googlemail.com>
-	<1379760101-13380-8-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20131004141938.GI6240@jama>
+References: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
+	<CAP9ODKpxHF4NUurt-U9HakdAWJ6LAz6HaNoHnuuf5fpEh0h-ow@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1379760101-13380-8-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <CAP9ODKpxHF4NUurt-U9HakdAWJ6LAz6HaNoHnuuf5fpEh0h-ow@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe/meta-xfce 07/10] xfce4-settings: add PACKAGECONFIG for sound-settings
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 1/2] wvstreams: add recipe for version 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,97 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 14:18:08 -0000
-X-Groupsio-MsgNum: 46444
+X-List-Received-Date: Fri, 04 Oct 2013 14:19:32 -0000
+X-Groupsio-MsgNum: 46445
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CNfT9TXqV7nd4cfk"
+	protocol="application/pgp-signature"; boundary="MFZs98Tklfu0WsCO"
 Content-Disposition: inline
 
---CNfT9TXqV7nd4cfk
-Content-Type: text/plain; charset=iso-8859-1
+--MFZs98Tklfu0WsCO
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 21, 2013 at 12:41:38PM +0200, Andreas M=FCller wrote:
-> defaults based upon DISTRO_FEATURES for alsa and pulseaudio
+On Tue, Sep 24, 2013 at 11:42:21AM -0300, Otavio Salvador wrote:
+> On Tue, Sep 24, 2013 at 9:43 AM, Mario Domenech Goulart
+> <mario@ossystems.com.br> wrote:
+> > Recipe based on OE classic's recipe for version 4.4.1, as of
+> > 0585ccfa49f71a81652c7f63885202e952ebd0e9.
+> >
+> > Summary of changes against OE classic's recipe:
+> >
+> > * Apply some Debian patches from
+> >   http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
+> >
+> > * Minor adjustments for the current build system (add
+> >   LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
+> >   PR)
+> >
+> > * Disable parallel make, since it was causing errors like
+> >
+> > Log data follows:
+> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-l=
+inux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+> > | DEBUG: Executing shell function do_compile
+> > | NOTE: make -j 8
+> > | ./CXX -c utils/wvbuffer
+> > | ./CXX -c utils/wvbufferstore
+> > | ./CXX -c utils/wvcont
+> > | /bin/bash: ./CXX: No such file or directory
+> > | /bin/bash: ./CXX: No such file or directory
+> > | /bin/bash: ./CXX: No such file or directory
+> > | * Generating CC using c
+> > | make: * Generating CXX using cc
+> > | *** [utils/wvbuffer.o] Error 127
+> > | make: *** Waiting for unfinished jobs....
+> > | make: *** [utils/wvbufferstore.o] Error 127
+> > | make: *** [utils/wvcont.o] Error 127
+> > | ERROR: oe_runmake failed
+> > | WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6=
+=2E1-r0/temp/run.do_compile.19302:1 exit 1 from
+> > |   exit 1
+> > | ERROR: Function failed: do_compile (log file is located at .../tmp/wo=
+rk/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile=
+=2E19302)
+> >
+> > Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 >=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+> Just for reference, Mario and I discussed about the path for including
+> this recipe.
 >=20
-> diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb =
-b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> index 4b75dd7..227858a 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
-> @@ -23,9 +23,13 @@ PV =3D "4.10.0+git${SRCPV}"
->  =20
->  EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
-
-Last xfce4-settings change caused PV going backwards:
-xfce4-settings-4.10.0+gitAUTOINC+b7a0e1fd77: Package version for package
-xfce4-settings-locale-si went backwards which would break package feeds
-=66rom (0:4.11.0-r0.55 to 0:4.10.0+git0+b7a0e1fd77-r0.2)
-
-commit 23f020f742aea622e5dd7aef81eb59c99f8ef000
-Author: Andreas M<C3><BC>ller <schnitzeltony@googlemail.com>
-Date:   Mon Sep 16 09:04:15 2013 +0000
-
-    xfce4-settings: move to schnitzeltony's git repo to get new datetime
-setter
-   =20
-Is this git version really older tna old release we had?
-
-Sorry that I haven't reported it on the commit which caused it :).
-
-> =20
-> -PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES','systemd','datet=
-ime-setter','',d)}"
-> +PACKAGECONFIG ??=3D " \
-> +    ${@base_contains('DISTRO_FEATURES','systemd','datetime-setter','',d)=
-} \
-> +    ${@base_contains('DISTRO_FEATURES','alsa','sound-setter', base_conta=
-ins('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
-> +"
->  PACKAGECONFIG[datetime-setter] =3D "--enable-datetime-settings, --disabl=
-e-datetime-settings,, tzdata"
->  PACKAGECONFIG[notify] =3D "--enable-libnotify,--disable-libnotify,libnot=
-ify"
-> +PACKAGECONFIG[sound-setter] =3D "--enable-sound-settings, --disable-soun=
-d-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
-> =20
->  do_configure_prepend() {
->      NOCONFIGURE=3Dyes ./autogen.sh
-> @@ -43,3 +47,5 @@ do_install_prepend() {
->  }
-> =20
->  RRECOMMENDS_${PN} +=3D "gnome-icon-theme"
-> +RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','alsa','libca=
-nberra-alsa','',d)}"
-> +RRECOMMENDS_${PN} +=3D "${@base_contains('DISTRO_FEATURES','pulseaudio',=
-'libcanberra-pulse','',d)}"
-> --=20
-> 1.8.3.1
+> We agreed it to be placed at wvdial subdir as it will only be used by it.
 >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Sorry for huge delay caused by monster build running on jenkins for 11
+days.. but this needs small fix for new QA issue:
+
+wvstreams-4.6.1: wvstreams: Files/directories were installed but not
+shipped
+  /usr/lib/valgrind
+  /usr/lib/valgrind/wvstreams.supp
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---CNfT9TXqV7nd4cfk
+--MFZs98Tklfu0WsCO
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.21 (GNU/Linux)
 
-iEYEARECAAYFAlJOzicACgkQN1Ujt2V2gBzeqQCeNoFtO2Xn/SVrv4WpSzxlSHtD
-PKMAnia+30JI8hfNbdvBCouOsXLzsmhj
-=v1Uj
+iEYEARECAAYFAlJOznoACgkQN1Ujt2V2gByW9ACfdYIzFohK3BYVAvkV/uwQ/B9y
+1FUAniGkucXbdV1zEAyX1wucVgGtfgXm
+=txFo
 -----END PGP SIGNATURE-----
 
---CNfT9TXqV7nd4cfk--
+--MFZs98Tklfu0WsCO--
