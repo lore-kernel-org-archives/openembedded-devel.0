@@ -1,35 +1,41 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
-	[209.85.216.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 9912D60FA4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 383DB6CC78
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2013 17:18:39 +0000 (UTC)
-Received: by mail-qa0-f50.google.com with SMTP id j7so1264440qaq.9
+	Fri,  4 Oct 2013 17:39:28 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id b47so1972359eek.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2013 10:18:41 -0700 (PDT)
+	Fri, 04 Oct 2013 10:39:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=f83GpIGiU89BQV7RvXbp7aDSl8dHoKMm29RfXkBqtao=;
-	b=wtVNI7K8WFVvwhudwa0KV/WiLtAtwc7Lu54QoxiAOFKJOllCYcBRFiDPiNcnO+G1JP
-	ARJAT5jZzqlbhgFDrcK7injjHIEY4CL3bgGGtf2rfAThZ1Kw5KTjbGMsffVmZ7vsOt9N
-	FiPDzpUYrd9vrGTFliOPxcV8LvgGubjxmVwRWEwzpqLs9AAigxQBRfBPOHFHSCqNtxYC
-	XWqTQTciJFLBXl0HGzP2eElH8gj/Md7nzw/YD8ddQcqb8UVvHXsgyg08NIlfmeqQWTKk
-	liydngn2B3Mx6CeNGA+NqZmaQ+NFuS1ouvto2DaRCpI9VmYNRBIJ6BRW1TbzGKSqq3NF
-	TpDg==
-X-Received: by 10.49.94.172 with SMTP id dd12mr19722610qeb.4.1380907121159;
-	Fri, 04 Oct 2013 10:18:41 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id n10sm30877432qas.5.1969.12.31.16.00.00
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 10:18:40 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Oct 2013 14:18:31 -0300
-Message-Id: <1380907111-9176-1-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCHv2] wvstreams: add recipe for version 4.6.1
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=doqE7nbAMmStcvJn2uvrQ1TGTg6tHlPBUCoSJPfO25Y=;
+	b=i7AqxfiX9RfpwUVboyGGmFiiiToLLQ3qyA7ZDr0tRMiWfrTX//HYT5VR3oG41aYkXl
+	t8roTVife9c/Cy4ByeJVfkWIyuXVHy2ZZgRL2m4ID5GQ5sej19Vb5HZlShh19YHgSUhD
+	6loxaxOXZpzpPCV/gwgSv/QaG/rRXP4P/WAFj6zqbFvmofTJkw62UInZ/Fiixq7FCT+e
+	IuE1bihHa6LNkNvLkPzSQ24Eg/TjBn3+PQ/EYPsBQ8ENT6B7zYjQJp5qNKEntkJxEwqD
+	Ah3RspV7qWdESGurayUTey/S0crIymKSe0MpsH4QXAl/iihXf88ZwQ8B4G2yv3yZRUgv
+	LDIw==
+X-Received: by 10.15.48.197 with SMTP id h45mr23535162eew.0.1380908368917;
+	Fri, 04 Oct 2013 10:39:28 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	b45sm30337734eef.4.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 04 Oct 2013 10:39:27 -0700 (PDT)
+Date: Fri, 4 Oct 2013 19:39:34 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+Message-ID: <20131004173934.GL6240@jama>
+References: <CALmOhgkzmnVuviF+cAzELRpdZomHDzpHn5-1dZEwa_xznG8JiQ@mail.gmail.com>
+	<20131004141433.GG6240@jama>
+	<CALmOhgnnSusbb0OPO32TN9C8xQRmqMmW+ZDoEq7d2870JoQfRw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CALmOhgnnSusbb0OPO32TN9C8xQRmqMmW+ZDoEq7d2870JoQfRw@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Abhijit Potnis <abhijit_potnis@mentor.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: meta-qt5, master, qtwebkit-examples build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,236 +49,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 17:18:41 -0000
+X-List-Received-Date: Fri, 04 Oct 2013 17:39:29 -0000
+X-Groupsio-MsgNum: 46451
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DXIF1lRUlMsbZ3S1"
+Content-Disposition: inline
 
-Recipe based on OE classic's recipe for version 4.4.1, as of
-0585ccfa49f71a81652c7f63885202e952ebd0e9.
+--DXIF1lRUlMsbZ3S1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Summary of changes against OE classic's recipe:
+On Fri, Oct 04, 2013 at 12:50:17PM -0400, Trevor Woerner wrote:
+> Thanks Martin,
+>=20
+> On 4 October 2013 10:14, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > Just lucky guess, do you have ICU enabled in qtbase?
+>=20
+> That was a good guess!
+>=20
+> It appears there's very important rule to know when using meta-qt5's
+> master branch (i.e. 5.1.0):
+> - if all you need is qtbase then ICU is not required and therefore not
+> enabled (to save space)
+> - if you need anything on top of qtbase then ICU must be enabled in
+> qtbase's configuration
+>=20
+> Do you think this would be a good thing to include in this layer's
+> README (or is it somewhere I should have looked)?
 
-* Apply some Debian patches from
-  http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
+There are few comments in qtbase.inc where people should look when they
+are changing PACKAGECONFIG, but you're right that it isn't the place
+where most people will look when they get misleading error like this
+one.
 
-* Minor adjustments for the current build system (add
-  LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
-  PR)
+# separate some parts of PACKAGECONFIG which are often changed
+# be aware that you need to add icu to build qtwebkit, default
+# PACKAGECONFIG is kept rather minimal for people who don't need
+# stuff like webkit (and it's easier to add options than remove)
 
-* Add --without-valgrind to EXTRA_OECONF
+# gl or gles needs to be enabled in order to build qtdeclarative
+# http://qt.gitorious.org/qt/qtdeclarative/commit/e988998a08b1420ed10bd02d9=
+d4b3b8ed2289df9
+PACKAGECONFIG_GL ?=3D "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl',
+'', d)}"
 
-* Disable parallel make, since it was causing errors like
+# accessibility is required to compile qtquickcontrols
+PACKAGECONFIG[accessibility] =3D "-accessibility,-no-accessibility"
 
-Log data follows:
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| DEBUG: Executing shell function do_compile
-| NOTE: make -j 8
-| ./CXX -c utils/wvbuffer
-| ./CXX -c utils/wvbufferstore
-| ./CXX -c utils/wvcont
-| /bin/bash: ./CXX: No such file or directory
-| /bin/bash: ./CXX: No such file or directory
-| /bin/bash: ./CXX: No such file or directory
-| * Generating CC using c
-| make: * Generating CXX using cc
-| *** [utils/wvbuffer.o] Error 127
-| make: *** Waiting for unfinished jobs....
-| make: *** [utils/wvbufferstore.o] Error 127
-| make: *** [utils/wvcont.o] Error 127
-| ERROR: oe_runmake failed
-| WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/run.do_compile.19302:1 exit 1 from
-|   exit 1
-| ERROR: Function failed: do_compile (log file is located at .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile.19302)
+# gl or gles2 is needed in order to build qtdeclarative
+# (qtdeclarative.do_configure fails to find quick module without)
+PACKAGECONFIG[gl] =3D "-opengl desktop -no-eglfs,,virtual/libgl"
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- .../wvdial/wvstreams/04_signed_request.diff        |   13 ++++++
- .../wvdial/wvstreams/05_gcc.diff                   |   41 +++++++++++++++++++
- .../wvdial/wvstreams/06_gcc-4.7.diff               |   18 +++++++++
- .../wvdial/wvstreams/07_buildflags.diff            |   32 +++++++++++++++
- .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   42 ++++++++++++++++++++
- 5 files changed, 146 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+# depends on glib
+PACKAGECONFIG[gstreamer] =3D "-gstreamer,-no-gstreamer,gstreamer"
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
-new file mode 100644
-index 0000000..5ab633b
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/04_signed_request.diff
-@@ -0,0 +1,13 @@
-+Index: wvstreams-4.6/crypto/wvx509.cc
-+===================================================================
-+--- wvstreams-4.6.orig/crypto/wvx509.cc	2009-07-29 11:58:16.000000000 -0400
-++++ wvstreams-4.6/crypto/wvx509.cc	2009-07-29 11:58:43.000000000 -0400
-+@@ -325,7 +325,7 @@
-+     }
-+ 
-+     int verify_result = X509_REQ_verify(certreq, pk);
-+-    if (verify_result == 0)
-++    if (verify_result == 0 || verify_result == -1)
-+     {
-+ 	debug(WvLog::Warning, "Self signed request failed");
-+ 	X509_REQ_free(certreq);
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
-new file mode 100644
-index 0000000..8e4fd03
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/05_gcc.diff
-@@ -0,0 +1,41 @@
-+Index: wvstreams-4.6.1/crypto/wvx509.cc
-+===================================================================
-+--- wvstreams-4.6.1.orig/crypto/wvx509.cc	2011-05-20 00:02:38.119136584 +0200
-++++ wvstreams-4.6.1/crypto/wvx509.cc	2011-05-20 00:02:26.035136589 +0200
-+@@ -1157,7 +1157,7 @@
-+         
-+         if (ext)
-+         {
-+-            X509V3_EXT_METHOD *method = X509V3_EXT_get(ext);
-++            X509V3_EXT_METHOD *method = (X509V3_EXT_METHOD *)X509V3_EXT_get(ext);
-+             if (!method)
-+             {
-+                 WvDynBuf buf;
-+Index: wvstreams-4.6.1/ipstreams/wvunixdgsocket.cc
-+===================================================================
-+--- wvstreams-4.6.1.orig/ipstreams/wvunixdgsocket.cc	2011-05-20 00:02:38.391136584 +0200
-++++ wvstreams-4.6.1/ipstreams/wvunixdgsocket.cc	2011-05-20 00:02:35.283136585 +0200
-+@@ -1,8 +1,6 @@
-+ #include "wvunixdgsocket.h"
-+-#ifdef MACOS
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+-#endif
-+ 
-+ WvUnixDGSocket::WvUnixDGSocket(WvStringParm filename, bool _server, int perms)
-+     : socketfile(filename)
-+Index: wvstreams-4.6.1/streams/wvatomicfile.cc
-+===================================================================
-+--- wvstreams-4.6.1.orig/streams/wvatomicfile.cc	2011-05-20 00:02:38.223136584 +0200
-++++ wvstreams-4.6.1/streams/wvatomicfile.cc	2011-05-20 00:02:31.619136587 +0200
-+@@ -10,10 +10,7 @@
-+ #include "wvatomicfile.h"
-+ #include "wvfileutils.h"
-+ #include "wvstrutils.h"
-+-
-+-#ifdef MACOS
-+ #include <sys/stat.h>
-+-#endif
-+ 
-+ WvAtomicFile::WvAtomicFile(WvStringParm filename, int flags, mode_t create_mode)
-+     : tmp_file(WvString::null)
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
-new file mode 100644
-index 0000000..a75067a
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/06_gcc-4.7.diff
-@@ -0,0 +1,18 @@
-+Description: Fix FTBFS with gcc-4.7
-+ Small header include change. This is borderlinde cosmetic, but still needed
-+ to prevent the FTBFS.
-+Author: Paul Tagliamonte <paultag@ubuntu.com>
-+Origin: vendor
-+Bug-Debian: http://bugs.debian.org/667418
-+Last-Update: 2012-04-13
-+
-+--- wvstreams-4.6.1.orig/utils/wvuid.cc
-++++ wvstreams-4.6.1/utils/wvuid.cc
-+@@ -33,6 +33,7 @@ wvuid_t wvgetuid()
-+ 
-+ #else // not WIN32
-+ 
-++#include <unistd.h>
-+ 
-+ WvString wv_username_from_uid(wvuid_t uid)
-+ {
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff b/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
-new file mode 100644
-index 0000000..ec99dcd
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/07_buildflags.diff
-@@ -0,0 +1,32 @@
-+Index: b/gen-cc
-+===================================================================
-+--- a/gen-cc
-++++ b/gen-cc
-+@@ -15,6 +15,11 @@
-+ 	shift
-+ 	shift
-+ 	
-++	echo $CC \$MODE -o \$BASE.o \$BASE.$EXT \\
-++	        -MMD -MF \$DEPFILE -MP -MQ \$BASE.o \\
-++	        $CPPFLAGS \\
-++	        $CFLAGS \\
-++	        "\$@"
-+ 	$CC \$MODE -o \$BASE.o \$BASE.$EXT \\
-+ 	        -MMD -MF \$DEPFILE -MP -MQ \$BASE.o \\
-+ 	        $CPPFLAGS \\
-+Index: b/wvrules-posix.mk
-+===================================================================
-+--- a/wvrules-posix.mk
-++++ b/wvrules-posix.mk
-+@@ -35,11 +35,6 @@
-+ # Default compiler we use for linking
-+ WVLINK_CC = $(CXX)
-+ 
-+-ifneq ("$(enable_optimization)", "no")
-+-  CXXFLAGS+=-O2
-+-  CFLAGS+=-O2
-+-endif
-+-
-+ ifneq ("$(enable_warnings)", "no")
-+   CXXFLAGS+=-Wall -Woverloaded-virtual
-+   CFLAGS+=-Wall
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-new file mode 100644
-index 0000000..ce2b337
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -0,0 +1,42 @@
-+HOMEPAGE = "http://alumnit.ca/wiki/index.php?page=WvStreams"
-+DESCRIPTION = "WvStreams is a network programming library in C++"
-+
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
-+
-+DEPENDS = "zlib openssl (>= 0.9.8)"
-+
-+SRC_URI = "http://${PN}.googlecode.com/files/${PN}-${PV}.tar.gz \
-+           file://04_signed_request.diff \
-+           file://05_gcc.diff \
-+           file://06_gcc-4.7.diff \
-+           file://07_buildflags.diff \
-+          "
-+
-+SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
-+SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
-+
-+inherit autotools pkgconfig
-+
-+PARALLEL_MAKE = ""
-+
-+LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
-+
-+EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
-+
-+PACKAGES_prepend = "libuniconf libuniconf-dbg "
-+PACKAGES_prepend = "uniconfd uniconfd-dbg "
-+PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
-+PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
-+
-+FILES_libuniconf     = "${libdir}/libuniconf.so.*"
-+FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
-+
-+FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
-+FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
-+
-+FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
-+FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
-+
-+FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
-+FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
--- 
-1.7.10.4
+# needed for qtdeclarative (qtdeclarative.do_configure fails to find
+# quick module without)
+PACKAGECONFIG[icu] =3D "-icu,-no-icu,${ICU}"
 
+I'm thinking about using bb.warn when building qtbase without one of
+them disabled, but again most people won't check qtbase build log when
+they see "no such module qtwebkit" error.
 
+I'll add at least some note to README file.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--DXIF1lRUlMsbZ3S1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.21 (GNU/Linux)
+
+iEYEARECAAYFAlJO/VYACgkQN1Ujt2V2gBxIMgCgkaqYrDS4aYYufS8tvsDXMhAB
+UZUAnjW77l//9bYPZW3O5NunUII7eeUd
+=YIQy
+-----END PGP SIGNATURE-----
+
+--DXIF1lRUlMsbZ3S1--
