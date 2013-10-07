@@ -1,38 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BFDF6CC7B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7569C612D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Oct 2013 11:27:11 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id h14so2318024eak.1
+	Mon,  7 Oct 2013 05:46:25 +0000 (UTC)
+Received: by mail-ie0-f171.google.com with SMTP id at1so14441644iec.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Oct 2013 04:27:12 -0700 (PDT)
+	Sun, 06 Oct 2013 22:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PrtHC4AlMrL69uY4GRtyjTiXJgTHaMoN9pJBNEFO+BE=;
-	b=LNtqfKGJk5x28oJopQlfAQchh9XsTF9xznPol6fkEdlctfJdGe0NwyLxytoLQHwxyF
-	pNwuifTpPSJGbe0dTmpB4z7ZAJddPEJ03JZrya2+KBY56oJVg6JV/3itlQrs6iRcPzmK
-	MZx0HWBMKhFpjccyl5q5vfFR15Mu+CV9xWj+fGWFwQudFvxotsSadsE7k2e/XmP6veyt
-	KV+w13JzE2u5mBe+WdpreSaYEt8+92Tkja50R1MPUTcW+4OEwkDZT0y4n6wYuVbWaW0M
-	sRe29fAUt3Hpu7J83IAeQCl+JJBkMwI8bZ/dNjRCv65jTqaYF3kz7jrG4Cx66XDDmS0p
-	cNSw==
-X-Received: by 10.14.210.8 with SMTP id t8mr29783120eeo.39.1380972432133;
-	Sat, 05 Oct 2013 04:27:12 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	a43sm38740615eep.9.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 05 Oct 2013 04:27:11 -0700 (PDT)
-Date: Sat, 5 Oct 2013 13:27:19 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131005112719.GN6240@jama>
-References: <1380187231-23854-1-git-send-email-b28495@freescale.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=YtxLjEABEfntx52yTjA4/MwSYpEp5FUtoZaX1bvjVdA=;
+	b=tLtEpAEH3L+FZ4BO1Is4cCWCTRVIjMMbcLPeeleoap0oO8vGW4QK/5XkB/c/bli2X1
+	RmHo4w8rEHO4tPMFN61YYbPWuIwih+0WF3w7oKjKwqW+Nz91Nxkwd5mYEXHxXl43Lk6z
+	qrJe3Oervj9g/ADi+YeLIv6e9MbpCB03u+cfLF5XW3DTbhTc1c1aK2FPBX7FIFLJHMLz
+	tjVSpchPYx/cedUmpOHbbYXwivuq14u/uBzqdfsV86dGEVvc71C/h7NtYdgPU0CYRUcZ
+	4NeM8DM2e4FkfY3vcUsxg/CT6EUSx92VVyg8HxJhqg1wOQ24UcfATRUtxER+bVWrE9yj
+	9bMw==
+X-Received: by 10.50.61.179 with SMTP id q19mr15546611igr.33.1381124786506;
+	Sun, 06 Oct 2013 22:46:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1380187231-23854-1-git-send-email-b28495@freescale.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] netperf: set _FILE_OFFSET_BITS to 64 to support large files
+Received: by 10.50.5.225 with HTTP; Sun, 6 Oct 2013 22:45:56 -0700 (PDT)
+In-Reply-To: <CAP9ODKqLRgh2jO4dDDPwkFd5RLM+hZjaFVVg=VXuTy0C_ukTkg@mail.gmail.com>
+References: <1380026637-6511-1-git-send-email-mario@ossystems.com.br>
+	<CAP9ODKpxHF4NUurt-U9HakdAWJ6LAz6HaNoHnuuf5fpEh0h-ow@mail.gmail.com>
+	<20131004141938.GI6240@jama>
+	<CAP9ODKqLRgh2jO4dDDPwkFd5RLM+hZjaFVVg=VXuTy0C_ukTkg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 6 Oct 2013 22:45:56 -0700
+Message-ID: <CAMKF1spqdOMP3YTawqtXtGQ3UUcGki91GJN56iT7wirmLSrrKA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 1/2] wvstreams: add recipe for version 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,75 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2013 11:27:12 -0000
-X-Groupsio-MsgNum: 46454
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qi3SIpffvxS/TM8d"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 07 Oct 2013 05:46:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
---qi3SIpffvxS/TM8d
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Oct 4, 2013 at 7:27 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> On Fri, Oct 4, 2013 at 11:19 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> On Tue, Sep 24, 2013 at 11:42:21AM -0300, Otavio Salvador wrote:
+>>> On Tue, Sep 24, 2013 at 9:43 AM, Mario Domenech Goulart
+>>> <mario@ossystems.com.br> wrote:
+>>> > Recipe based on OE classic's recipe for version 4.4.1, as of
+>>> > 0585ccfa49f71a81652c7f63885202e952ebd0e9.
+>>> >
+>>> > Summary of changes against OE classic's recipe:
+>>> >
+>>> > * Apply some Debian patches from
+>>> >   http://patch-tracker.debian.org/package/wvstreams/4.6.1-6
+>>> >
+>>> > * Minor adjustments for the current build system (add
+>>> >   LIC_FILES_CHKSUM, md5 and sha256 sums for SRC_URI, fix LICENSE, remove
+>>> >   PR)
+>>> >
+>>> > * Disable parallel make, since it was causing errors like
+>>> >
+>>> > Log data follows:
+>>> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+>>> > | DEBUG: Executing shell function do_compile
+>>> > | NOTE: make -j 8
+>>> > | ./CXX -c utils/wvbuffer
+>>> > | ./CXX -c utils/wvbufferstore
+>>> > | ./CXX -c utils/wvcont
+>>> > | /bin/bash: ./CXX: No such file or directory
+>>> > | /bin/bash: ./CXX: No such file or directory
+>>> > | /bin/bash: ./CXX: No such file or directory
+>>> > | * Generating CC using c
+>>> > | make: * Generating CXX using cc
+>>> > | *** [utils/wvbuffer.o] Error 127
+>>> > | make: *** Waiting for unfinished jobs....
+>>> > | make: *** [utils/wvbufferstore.o] Error 127
+>>> > | make: *** [utils/wvcont.o] Error 127
+>>> > | ERROR: oe_runmake failed
+>>> > | WARNING: .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/run.do_compile.19302:1 exit 1 from
+>>> > |   exit 1
+>>> > | ERROR: Function failed: do_compile (log file is located at .../tmp/work/armv7a-vfp-neon-oel-linux-gnueabi/wvstreams/4.6.1-r0/temp/log.do_compile.19302)
+>>> >
+>>> > Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+>>>
+>>> Just for reference, Mario and I discussed about the path for including
+>>> this recipe.
+>>>
+>>> We agreed it to be placed at wvdial subdir as it will only be used by it.
+>>>
+>>> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+>>
+>> Sorry for huge delay caused by monster build running on jenkins for 11
+>> days.. but this needs small fix for new QA issue:
+>>
+>> wvstreams-4.6.1: wvstreams: Files/directories were installed but not
+>> shipped
+>>   /usr/lib/valgrind
+>>   /usr/lib/valgrind/wvstreams.supp
+>
+> Sure; Mario, can you split this into a ${PN}-valgrind package?
 
-On Thu, Sep 26, 2013 at 05:20:31PM +0800, b28495@freescale.com wrote:
-> From: Ting Liu <b28495@freescale.com>
->=20
-> Without this patch, netperf2.6 can only
-> support files smaller than 2GB with TCP_SENDFILE item.
->=20
-> Signed-off-by: Ting Liu <b28495@freescale.com>
-> Tested-by: Jianhua Xie<jianhua.xie@freescale.com>
-> ---
->  .../recipes-support/netperf/netperf_2.6.0.bb       |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/m=
-eta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> index eda7859..1d9ba20 100644
-> --- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> +++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> @@ -23,6 +23,10 @@ S =3D "${WORKDIR}/netperf-${PV}"
->  # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ ma=
-cros
->  CFLAGS_append =3D " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
-> =20
-> +# set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files=
-=20
-> +# larger than 2GB
-> +CFLAGS_append =3D " -D_FILE_OFFSET_BITS=3D64"
-> +
+May be they should go into ${PN}-dev package and IMHO don't disable
+it. since its a good
+thing we want to make sure the tools like valgrind can be tried easily
+out of box if possible.
 
-http://patchwork.openembedded.org/patch/57331/
-This patch is superseded, right?
-
-Please update as Otavio requested.
-
->  # autotools.bbclass attends to include m4 files with path depth <=3D 2 by
->  # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
->  do_configure_prepend() {
-> --=20
-> 1.7.3.4
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---qi3SIpffvxS/TM8d
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.21 (GNU/Linux)
-
-iEYEARECAAYFAlJP95cACgkQN1Ujt2V2gBxkyQCdFUXeuuE94y/jzWlmugQlkNkJ
-mRAAn0HfRgL/Ug3qLfIePQ2XncLMtr60
-=6/Aa
------END PGP SIGNATURE-----
-
---qi3SIpffvxS/TM8d--
