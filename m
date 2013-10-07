@@ -1,30 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by mail.openembedded.org (Postfix) with ESMTP id CF94860FAF
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qe0-f52.google.com (mail-qe0-f52.google.com
+	[209.85.128.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 6769160FAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Oct 2013 19:49:22 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUB00FCDDQBJWS0@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	07 Oct 2013 14:49:23 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 090AB2009D; Mon,
-	07 Oct 2013 15:49:22 -0400 (EDT)
-Date: Mon, 07 Oct 2013 15:49:22 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Laszlo Papp <lpapp@kde.org>
-Message-id: <20131007194922.GE18775@denix.org>
-References: <20131007180120.GC18775@denix.org>
-	<20131007202956.718ce202@e6520eb> <20131007183739.GD18775@denix.org>
-	<20131007205710.386447ba@e6520eb> <20131007193306.GT6240@jama>
-	<CAOMwXhNV3q5P_+kCZtnDNUpZpG-OvMoe7Rem=cw86Z6vx8WmbA@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAOMwXhNV3q5P_+kCZtnDNUpZpG-OvMoe7Rem=cw86Z6vx8WmbA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] Update to 5.1.1?
+	Mon,  7 Oct 2013 20:07:28 +0000 (UTC)
+Received: by mail-qe0-f52.google.com with SMTP id w7so1529640qeb.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Oct 2013 13:07:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=vnhXd+nFdb1VEqLffMIk+WcT1Nfuar5vlkwtOUrC/So=;
+	b=hGsULbAnG6I8WMvOamyHylJeNmNZcV4Osyw/8NDDs2LlvijJhXlu6thm4kZOQdp4Ev
+	x3GqupwPDadGIOA5p1CBTNYCCNS4mtUx210f/ALcs35QQqOgXNZh8mP/esqYyoL5g9ho
+	d/AmJ+P2/JyuWDuR6/SfUoee6dT2NQfeuZtVwEUTKi6yHrQW+BrClcayS+EYO6DeMg+0
+	JqUEVWvKuQ7sUbJI30M9Y+GiEuMIveZCT2fD+9ZkL4RxfMmBrr0lbfLUQGORpmdVXOlq
+	+icjp61yEen4aTiUFmJWzdj+/r0UNzI1lj0w+iRynDwYcSw/raEWbdyM3ocpQm3SdNwc
+	o+ow==
+X-Received: by 10.224.19.201 with SMTP id c9mr39720463qab.47.1381176449737;
+	Mon, 07 Oct 2013 13:07:29 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id x8sm65720688qam.2.1969.12.31.16.00.00
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 07 Oct 2013 13:07:29 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  7 Oct 2013 17:07:17 -0300
+Message-Id: <1381176437-4382-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-oe][PATCH] wvstreams: generate wvstreams-valgrind package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,55 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2013 19:49:23 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Mon, 07 Oct 2013 20:07:30 -0000
 
-On Mon, Oct 07, 2013 at 08:43:48PM +0100, Laszlo Papp wrote:
-> On Mon, Oct 7, 2013 at 8:33 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> 
-> > On Mon, Oct 07, 2013 at 08:57:10PM +0200, Eric Bénard wrote:
-> > > Le Mon, 07 Oct 2013 14:37:39 -0400,
-> > > Denys Dmytriyenko <denis@denix.org> a écrit :
-> > >
-> > > > On Mon, Oct 07, 2013 at 08:29:56PM +0200, Eric Bénard wrote:
-> > > > > Hi Denys,
-> > > > >
-> > > > > Le Mon, 07 Oct 2013 14:01:20 -0400,
-> > > > > Denys Dmytriyenko <denis@denix.org> a écrit :
-> > > > >
-> > > > > > Martin, Otavio, et al,
-> > > > > >
-> > > > > > Are you planning on updating Qt version in master to 5.1.1 any
-> > time soon,
-> > > > > > preferably before 1.5 release? :) If nobody looked into that yet,
-> > will you be
-> > > > > > open to take patches for the same?
-> > > > > >
-> > > > > I have 5.1.1 in test here. I expect to send the patch in the coming
-> > > > > days.
-> > > >
-> > > > Thanks! Sounds good. Let me know if you need help in testing!
-> > > >
-> > >
-> > > as soon as it finish to compile here I'll send the patch serie for
-> > > testing.
-> >
-> > +Laszlo
-> >
-> > Laszlo also said that he is working on patches for 5.1.1 I don't know
-> > how far he got..
-> >
-> 
-> Not any far, sorry, but I would be happy to use someone else's patches. By
-> the way, it would be nice to have 5.2.0 alpha (and later beta) updates
-> soon, too.
+Explicitly set --with-valgrind in EXTRA_OECONF (since it doesn't add
+up dependencies) and generate the wvstreams-valgrind package.
 
-Having 5.2.0 alpha would be nice, but that's probably too unstable to try and 
-get in before Dora release. I want 5.1.1 as the latest stable to get into 
-Dora. :) So, I'm offering any help to expedite things like testing and such :)
+Fixes
 
+  wvstreams-4.6.1: wvstreams: Files/directories were installed but not shipped
+    /usr/lib/valgrind
+    /usr/lib/valgrind/wvstreams.supp
+
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb |    7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index ce2b337..a1b38bd 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -22,8 +22,9 @@ PARALLEL_MAKE = ""
+ 
+ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
+ 
+-EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
++EXTRA_OECONF = " --without-tcl --without-qt --without-pam --with-valgrind"
+ 
++PACKAGES_prepend = "${PN}-valgrind "
+ PACKAGES_prepend = "libuniconf libuniconf-dbg "
+ PACKAGES_prepend = "uniconfd uniconfd-dbg "
+ PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
+@@ -40,3 +41,7 @@ FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
+ 
+ FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
+ FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
++
++FILES_${PN}-valgrind = "${libdir}/valgrind"
++
++RDEPENDS_${PN}-valgrind += "valgrind"
 -- 
-Denys
+1.7.10.4
+
 
