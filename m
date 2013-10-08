@@ -1,35 +1,38 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D66E6CEA3
+Return-Path: <joe@deserted.net>
+Received: from mail-qa0-f44.google.com (mail-qa0-f44.google.com
+	[209.85.216.44])
+	by mail.openembedded.org (Postfix) with ESMTP id A6B6A6CEA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 13:26:08 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUC00ATMQNLGV40@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	08 Oct 2013 08:26:09 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 19D06200A9; Tue,
-	08 Oct 2013 09:26:09 -0400 (EDT)
-Date: Tue, 08 Oct 2013 09:26:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Laszlo Papp <lpapp@kde.org>
-Message-id: <20131008132609.GB22340@denix.org>
-References: <20131007193306.GT6240@jama>
-	<CAOMwXhNV3q5P_+kCZtnDNUpZpG-OvMoe7Rem=cw86Z6vx8WmbA@mail.gmail.com>
-	<20131007194922.GE18775@denix.org> <20131007201536.GU6240@jama>
-	<20131007202336.GF18775@denix.org>
-	<CAOMwXhMpx8KjDyq_4fD949owFWE8r1O61E7D085+U31=fR5kNg@mail.gmail.com>
-	<20131007203527.GG18775@denix.org>
-	<CAOMwXhORbuT7J8B6evLhcJSx2Z8BUCoAeXKGDe=twQsuY-wtOQ@mail.gmail.com>
-	<20131008132109.GA22340@denix.org>
-	<CAOMwXhN4C=Lob8ow9utU6hnqDOUjpt=PGj+Rp6W-pbnY5uky1g@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAOMwXhN4C=Lob8ow9utU6hnqDOUjpt=PGj+Rp6W-pbnY5uky1g@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] Update to 5.1.1?
+	Tue,  8 Oct 2013 13:35:15 +0000 (UTC)
+Received: by mail-qa0-f44.google.com with SMTP id j7so3819343qaq.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Oct 2013 06:35:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=rD3wzq/cA58BxQXqxPtMkrNEUi0uxwZB6hc2z9nH30Q=;
+	b=iaoj1zJ17q2syau4WWC3HM2zRluMIcaqZEGavcZAHAN0SlS/OLh2FbUU3BuEi5UFmu
+	Aj3Cc8ZiDgxBf7j4yifVbdbtADtmWhfYJuZplq6zMrp7mL7OueFmUB2a8iawtmWTTQxn
+	v82cKQ/1rM386qGduB9ZgTFPTrMFFw51iP9kMlhcwyf+w6hMUKE4Lal6cX40P+nsvDiH
+	4l6g5FkdKyptXNkReXbEqrWgbMiLjVgjC/+wADVor9UP+EL0fTakmcjt6YLGmv0DaHxd
+	ug3JQGmhsI6/sk8TYXJGCJhwXUyIGaEDh8yHMrnXeN0StjK8x2vt/MZ/j3TiAM659IDx
+	MWUQ==
+X-Gm-Message-State: ALoCoQl/rFHRpPd02l47oXNsbuZa0vzSA1B91xijg1etpG+Li/ZYXX7dJAAgeZP4VC4Cs6ncqp0E
+X-Received: by 10.49.24.202 with SMTP id w10mr1369123qef.12.1381239317130;
+	Tue, 08 Oct 2013 06:35:17 -0700 (PDT)
+Received: from burninator.corp.ad.wrs.com ([128.224.252.2])
+	by mx.google.com with ESMTPSA id og1sm37505560qeb.3.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 08 Oct 2013 06:35:16 -0700 (PDT)
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Oct 2013 09:35:08 -0400
+Message-Id: <1381239308-8682-1-git-send-email-joe@deserted.net>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Cc: bruce.ashfield@windriver.com, lpapp@kde.org
+Subject: [meta-networking][PATCH] openflow: import and tweak
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,140 +46,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 13:26:08 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Tue, 08 Oct 2013 13:35:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 08, 2013 at 02:23:13PM +0100, Laszlo Papp wrote:
-> On Tue, Oct 8, 2013 at 2:21 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > On Tue, Oct 08, 2013 at 08:15:53AM +0100, Laszlo Papp wrote:
-> > > On Mon, Oct 7, 2013 at 9:35 PM, Denys Dmytriyenko <denis@denix.org>
-> > wrote:
-> > >
-> > > > On Mon, Oct 07, 2013 at 09:29:50PM +0100, Laszlo Papp wrote:
-> > > > > On Mon, Oct 7, 2013 at 9:23 PM, Denys Dmytriyenko <denis@denix.org>
-> > > > wrote:
-> > > > >
-> > > > > > On Mon, Oct 07, 2013 at 10:15:36PM +0200, Martin Jansa wrote:
-> > > > > > > On Mon, Oct 07, 2013 at 03:49:22PM -0400, Denys Dmytriyenko
-> > wrote:
-> > > > > > > > On Mon, Oct 07, 2013 at 08:43:48PM +0100, Laszlo Papp wrote:
-> > > > > > > > > On Mon, Oct 7, 2013 at 8:33 PM, Martin Jansa <
-> > > > martin.jansa@gmail.com>
-> > > > > > wrote:
-> > > > > > > > >
-> > > > > > > > > > On Mon, Oct 07, 2013 at 08:57:10PM +0200, Eric BÈnard
-> > wrote:
-> > > > > > > > > > > Le Mon, 07 Oct 2013 14:37:39 -0400,
-> > > > > > > > > > > Denys Dmytriyenko <denis@denix.org> a Ècrit :
-> > > > > > > > > > >
-> > > > > > > > > > > > On Mon, Oct 07, 2013 at 08:29:56PM +0200, Eric BÈnard
-> > > > wrote:
-> > > > > > > > > > > > > Hi Denys,
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Le Mon, 07 Oct 2013 14:01:20 -0400,
-> > > > > > > > > > > > > Denys Dmytriyenko <denis@denix.org> a Ècrit :
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > > Martin, Otavio, et al,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Are you planning on updating Qt version in master
-> > to
-> > > > 5.1.1
-> > > > > > any
-> > > > > > > > > > time soon,
-> > > > > > > > > > > > > > preferably before 1.5 release? :) If nobody looked
-> > into
-> > > > > > that yet,
-> > > > > > > > > > will you be
-> > > > > > > > > > > > > > open to take patches for the same?
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > I have 5.1.1 in test here. I expect to send the
-> > patch in
-> > > > the
-> > > > > > coming
-> > > > > > > > > > > > > days.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Thanks! Sounds good. Let me know if you need help in
-> > > > testing!
-> > > > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > as soon as it finish to compile here I'll send the patch
-> > > > serie
-> > > > > > for
-> > > > > > > > > > > testing.
-> > > > > > > > > >
-> > > > > > > > > > +Laszlo
-> > > > > > > > > >
-> > > > > > > > > > Laszlo also said that he is working on patches for 5.1.1 I
-> > > > don't
-> > > > > > know
-> > > > > > > > > > how far he got..
-> > > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Not any far, sorry, but I would be happy to use someone
-> > else's
-> > > > > > patches. By
-> > > > > > > > > the way, it would be nice to have 5.2.0 alpha (and later
-> > beta)
-> > > > > > updates
-> > > > > > > > > soon, too.
-> > > > > > > >
-> > > > > > > > Having 5.2.0 alpha would be nice, but that's probably too
-> > unstable
-> > > > to
-> > > > > > try and
-> > > > > > > > get in before Dora release. I want 5.1.1 as the latest stable
-> > to
-> > > > get
-> > > > > > into
-> > > > > > > > Dora. :) So, I'm offering any help to expedite things like
-> > testing
-> > > > and
-> > > > > > such :)
-> > > > > > >
-> > > > > > > I've already branched meta-qt5/dora before removing 5.0.2 recipes
-> > > > from
-> > > > > > > master.
-> > > > > > >
-> > > > > > > I'm willing to "backport" 5.1.1 from master to dora or even
-> > remove
-> > > > 5.0.2
-> > > > > > > there as well, but last time I've asked around nobody responded
-> > to
-> > > > say
-> > > > > > > if they are still using 5.0.2 or 5.1.* is good enough for
-> > everybody.
-> > > > > >
-> > > > > > Sorry for not responding before, but for our needs 5.0.2 is not
-> > > > sufficient,
-> > > > > > 5.1.x and specifically 5.1.1 is preferred. I would very appreciate
-> > > > > > backporting
-> > > > > > 5.1.1 into Dora
-> > > > >
-> > > > > Be careful with this. I assume you mean the dora branch as opposed
-> > to the
-> > > > > Dora poky release.
-> > > >
-> > > > And besides, Poky release does not contain meta-qt5, as far as I know.
-> > > >
-> > >
-> > > That was my point, yes. Your email reads like as if they were strictly
-> > tied
-> > > together, or maybe even integrated. While, you can freely use post-dora
-> > > meta-qt5 version with Dora, too. As I wrote, they are orthogonal.
-> >
-> > Just knowing what mailing list this is would clear all your doubts right
-> > away.
-> 
-> 
-> As you can see, it has not. So, please be clear in the future. :) meta-qt5
-> is orthogonal to Dora as far as it is not integrated.
+Based on work by David Nystr√∂m (meta-virtualization) and Laszlo Papp
+(meta-oe).
 
-Since Dora is a branch of meta-qt5, I don't understand your statements about 
-being orthogonal and not integrated...
+   - Import OpenFlow 1.0 from meta-virtualization and provide an updated
+     version of the recipe for the head of tree in the OpenFlow git
+     repository.
 
+   - Minor tweak in both recipes for do_install_append() spacing.
+
+   - Update 'libssl' PACKAGECONFIG flag in both to follow the 'openssl'
+     convention used elsewhere in meta-oe.
+
+   - Create common include file for both versioned and git recipes.
+
+Signed-off-by: Joe MacDonald <joe@deserted.net>
+---
+ .../recipes-protocols/openflow/openflow.inc        |   35 ++++++++++++++++++++
+ .../recipes-protocols/openflow/openflow_1.0.bb     |    4 +++
+ .../recipes-protocols/openflow/openflow_git.bb     |    4 +++
+ 3 files changed, 43 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/openflow/openflow.inc
+ create mode 100644 meta-networking/recipes-protocols/openflow/openflow_1.0.bb
+ create mode 100644 meta-networking/recipes-protocols/openflow/openflow_git.bb
+
+diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/meta-networking/recipes-protocols/openflow/openflow.inc
+new file mode 100644
+index 0000000..43af54e
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openflow/openflow.inc
+@@ -0,0 +1,35 @@
++SUMMARY = "OpenFlow communications protocol"
++DESCRIPTION = "\
++Open standard that enables researchers to run experimental protocols in \
++contained networks.  OpenFlow is a communications interface between \
++control and forwarding planes of a software-defined networking architecture.\
++"
++HOMEPAGE = "http://www.openflow.org"
++
++SECTION = "networking"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=e870c934e2c3d6ccf085fd7cf0a1e2e2"
++
++SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git"
++
++DEPENDS = "virtual/libc"
++
++EXTRA_OECONF += "KARCH=${TARGET_ARCH}"
++
++PACKAGECONFIG ??= "openssl"
++PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl, openssl, libssl"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++do_configure() {
++    ./boot.sh
++    oe_runconf
++}
++
++do_install_append() {
++    # Remove /var/run as it is created on startup
++    rm -rf ${D}${localstatedir}/run
++}
+diff --git a/meta-networking/recipes-protocols/openflow/openflow_1.0.bb b/meta-networking/recipes-protocols/openflow/openflow_1.0.bb
+new file mode 100644
+index 0000000..a7e254d
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openflow/openflow_1.0.bb
+@@ -0,0 +1,4 @@
++include ${BPN}.inc
++
++SRCREV = "5ccca75a69f99791659bcfbcf35353ab1921320a"
++PV = "1.0"
+diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+new file mode 100644
+index 0000000..6403bfb
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+@@ -0,0 +1,4 @@
++include ${BPN}.inc
++
++SRCREV = "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
++PV = "1.0+git${SRCPV}"
 -- 
-Denys
+1.7.10.4
+
 
