@@ -1,34 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id EBF756CC7F
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id A81616CE9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 23:09:51 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id k11so4244eaj.0
+	Tue,  8 Oct 2013 23:40:55 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id o10so11608eaj.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Oct 2013 16:09:53 -0700 (PDT)
+	Tue, 08 Oct 2013 16:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=Z8lWsMyC8l+YkEtjdC+EmeTnos2yr+Xzoi4pSbxGVm0=;
-	b=jZWNu31AVjDYpNCmhdwI5eoQ1LhHqWbYnoUU3uZttiGcUb8VcbEgYJ0BloudxX4zY9
-	EdAr381Mz4A+V5GhyIm+t/2CYS3SxousaZS0Vso8LcFJOdDR56y8EASvQnJOkVKIDfDS
-	Z1GBVZZP+WzLtNV4VLxSPw+2XCDs3in+kz1yunjq5BYP66UQ7uM4MTDYVCwMeUzxcAHS
-	JCgr981QnvoWyxBphswI4TyUHZCJg6l30jWIHgFabm8KF3kfmfc4itympj9IvmiLm41F
-	DKfjlskxwsmJ4dcqd5PTBpIOihtblvAMfIWS8msTHOcf7kffFIz3D+5eblXoMB/4T1Tk
-	zk/Q==
-X-Received: by 10.15.45.8 with SMTP id a8mr6210021eew.1.1381273793464;
-	Tue, 08 Oct 2013 16:09:53 -0700 (PDT)
+	bh=Plmpzj9t3Fi5ut8wfuwlbDlxUzoguiVbZ8X8UuF2WpM=;
+	b=flirl9XuSWYL9O4JCnEkt55Q1k+uf1p7sFRD+8m4pxFN9cxH4IYYgQGV7wm3dRBB7p
+	3F5wyYcRLjHlgnPlh1zECkehA59jWvpEWmdLQbGGh6j1gUdWB8ZZ4ZSLOLbjy72LlJn3
+	8sm2aEBBk4LuNM2xe42Xm7/w0qZBC2/8pkb+VpVoPwgfEQ1Rdit8IdGcCqzBdo3jcn56
+	1yA4dJ81KwNZ4up+2EcjHiBv+QrUgCDzthQN3x7mj0ISSqV2iPoKHZFaJmp2clBwCdK3
+	4CraNsih1eE0PuUrLh7hFiEjDAF0Kf45cbR7aCly66Gz+Rvq5oeC61D9ykVo4867pTXD
+	7/Cw==
+X-Received: by 10.15.36.9 with SMTP id h9mr6511858eev.30.1381275657002;
+	Tue, 08 Oct 2013 16:40:57 -0700 (PDT)
 Received: from mizar.localdomain
 	(host40-228-dynamic.1-79-r.retail.telecomitalia.it. [79.1.228.40])
-	by mx.google.com with ESMTPSA id f49sm81229054eec.7.1969.12.31.16.00.00
+	by mx.google.com with ESMTPSA id d8sm81475383eeh.8.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 08 Oct 2013 16:09:53 -0700 (PDT)
+	Tue, 08 Oct 2013 16:40:56 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Oct 2013 01:09:46 +0200
-Message-Id: <1381273786-10336-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed,  9 Oct 2013 01:40:51 +0200
+Message-Id: <1381275653-25949-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH v2] linux-yocto-handhelds.inc: split COMPATIBLE_MACHINE filtering
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Subject: [meta-handheld][PATCH 1/3] ipaq-boot-params: h3600: use ttySA0 as default param
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,70 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 23:09:52 -0000
+X-List-Received-Date: Tue, 08 Oct 2013 23:40:57 -0000
 
-This allows to add new machines to one single kernel variant
+These machines use ttySA0,115200n8 (SA1100).
 
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-kernel/linux/linux-yocto-dev.bbappend                 | 2 ++
- recipes-kernel/linux/linux-yocto-handhelds.inc                | 2 --
- recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend | 2 ++
- recipes-kernel/linux/linux-yocto_3.10.bbappend                | 3 ++-
- 4 files changed, 6 insertions(+), 3 deletions(-)
+ recipes-bsp/ipaq-boot-params/files/h3600/params | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 recipes-bsp/ipaq-boot-params/files/h3600/params
 
-diff --git a/recipes-kernel/linux/linux-yocto-dev.bbappend b/recipes-kernel/linux/linux-yocto-dev.bbappend
-index 5d7e4bd..31b2db3 100644
---- a/recipes-kernel/linux/linux-yocto-dev.bbappend
-+++ b/recipes-kernel/linux/linux-yocto-dev.bbappend
-@@ -1,5 +1,7 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-dev:${THISDIR}/${PN}:${THISDIR}/files:"
- 
-+COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
-+
- # Override kernel features
- #KERNEL_EXTRA_FEATURES ?= "features/netfilter/netfilter.scc"
- 
-diff --git a/recipes-kernel/linux/linux-yocto-handhelds.inc b/recipes-kernel/linux/linux-yocto-handhelds.inc
-index 2e0b7a9..119086f 100644
---- a/recipes-kernel/linux/linux-yocto-handhelds.inc
-+++ b/recipes-kernel/linux/linux-yocto-handhelds.inc
-@@ -1,5 +1,3 @@
--COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
--
- KMACHINE_akita = "akita"
- KMACHINE_c7x0 = "c7x0"
- KMACHINE_collie = "collie"
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
-index 2ca53cb..eddffd6 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
-@@ -1,5 +1,7 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.10:${THISDIR}/${PN}:${THISDIR}/files:"
- 
-+COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
-+
- # Zaurus machines need kernel size-check.
- KERNEL_IMAGE_MAXSIZE_akita = "1294336"
- KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
-diff --git a/recipes-kernel/linux/linux-yocto_3.10.bbappend b/recipes-kernel/linux/linux-yocto_3.10.bbappend
-index 1f42ecc..537bf37 100644
---- a/recipes-kernel/linux/linux-yocto_3.10.bbappend
-+++ b/recipes-kernel/linux/linux-yocto_3.10.bbappend
-@@ -1,5 +1,7 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.10:${THISDIR}/${PN}:${THISDIR}/files:"
- 
-+COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
-+
- # Override kernel features
- #KERNEL_EXTRA_FEATURES ?= "features/netfilter/netfilter.scc"
- 
-@@ -10,5 +12,4 @@ KERNEL_EXTRA_FEATURES_poodle ?= ""
- KERNEL_EXTRA_FEATURES_spitz ?= ""
- KERNEL_EXTRA_FEATURES_tosa ?= ""
- 
--
- require linux-yocto-handhelds.inc
+diff --git a/recipes-bsp/ipaq-boot-params/files/h3600/params b/recipes-bsp/ipaq-boot-params/files/h3600/params
+new file mode 100644
+index 0000000..edb83ac
+--- /dev/null
++++ b/recipes-bsp/ipaq-boot-params/files/h3600/params
+@@ -0,0 +1 @@
++set linuxargs "root=mtd1 noinitrd console=ttySA0,115200n8 console=tty0"
 -- 
 1.8.1.5
 
