@@ -1,21 +1,21 @@
 Return-Path: <eric@eukrea.com>
 Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C3C361957
+	by mail.openembedded.org (Postfix) with ESMTP id 05DDD6CE72
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 08:46:20 +0000 (UTC)
+	Tue,  8 Oct 2013 08:46:27 +0000 (UTC)
 Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id A2AA9A6101
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 60B6DA62E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 10:46:18 +0200 (CEST)
+	Tue,  8 Oct 2013 10:46:25 +0200 (CEST)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Oct 2013 10:46:03 +0200
-Message-Id: <1381221981-1585-3-git-send-email-eric@eukrea.com>
+Date: Tue,  8 Oct 2013 10:46:05 +0200
+Message-Id: <1381221981-1585-5-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.8.4.rc3
 In-Reply-To: <1381221981-1585-1-git-send-email-eric@eukrea.com>
 References: <1381221981-1585-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/21] qtjsbackend: update to 5.1.1
+Subject: [PATCH 05/21] qtxmlpatterns: update to 5.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,78 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 08:46:22 -0000
+X-List-Received-Date: Tue, 08 Oct 2013 08:46:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- .../0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch      | 0
- .../0002-v8.pro-respect-external-host-bindir-when-set.patch          | 0
- recipes-qt/qt5/qtjsbackend-native_5.1.0.bb                           | 5 -----
- recipes-qt/qt5/qtjsbackend-native_5.1.1.bb                           | 5 +++++
- recipes-qt/qt5/qtjsbackend_5.1.0.bb                                  | 5 -----
- recipes-qt/qt5/qtjsbackend_5.1.1.bb                                  | 5 +++++
- 6 files changed, 10 insertions(+), 10 deletions(-)
- rename recipes-qt/qt5/{qtjsbackend-5.1.0 => qtjsbackend-5.1.1}/0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch (100%)
- rename recipes-qt/qt5/{qtjsbackend-5.1.0 => qtjsbackend-5.1.1}/0002-v8.pro-respect-external-host-bindir-when-set.patch (100%)
- delete mode 100644 recipes-qt/qt5/qtjsbackend-native_5.1.0.bb
- create mode 100644 recipes-qt/qt5/qtjsbackend-native_5.1.1.bb
- delete mode 100644 recipes-qt/qt5/qtjsbackend_5.1.0.bb
- create mode 100644 recipes-qt/qt5/qtjsbackend_5.1.1.bb
+ recipes-qt/qt5/qtxmlpatterns_5.1.0.bb | 5 -----
+ recipes-qt/qt5/qtxmlpatterns_5.1.1.bb | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ delete mode 100644 recipes-qt/qt5/qtxmlpatterns_5.1.0.bb
+ create mode 100644 recipes-qt/qt5/qtxmlpatterns_5.1.1.bb
 
-diff --git a/recipes-qt/qt5/qtjsbackend-5.1.0/0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch b/recipes-qt/qt5/qtjsbackend-5.1.1/0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch
-similarity index 100%
-rename from recipes-qt/qt5/qtjsbackend-5.1.0/0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch
-rename to recipes-qt/qt5/qtjsbackend-5.1.1/0001-Install-the-mkv8snapshot-tool-to-the-native-side.patch
-diff --git a/recipes-qt/qt5/qtjsbackend-5.1.0/0002-v8.pro-respect-external-host-bindir-when-set.patch b/recipes-qt/qt5/qtjsbackend-5.1.1/0002-v8.pro-respect-external-host-bindir-when-set.patch
-similarity index 100%
-rename from recipes-qt/qt5/qtjsbackend-5.1.0/0002-v8.pro-respect-external-host-bindir-when-set.patch
-rename to recipes-qt/qt5/qtjsbackend-5.1.1/0002-v8.pro-respect-external-host-bindir-when-set.patch
-diff --git a/recipes-qt/qt5/qtjsbackend-native_5.1.0.bb b/recipes-qt/qt5/qtjsbackend-native_5.1.0.bb
+diff --git a/recipes-qt/qt5/qtxmlpatterns_5.1.0.bb b/recipes-qt/qt5/qtxmlpatterns_5.1.0.bb
 deleted file mode 100644
-index fcc7cde..0000000
---- a/recipes-qt/qt5/qtjsbackend-native_5.1.0.bb
+index f054159..0000000
+--- a/recipes-qt/qt5/qtxmlpatterns_5.1.0.bb
 +++ /dev/null
 @@ -1,5 +0,0 @@
 -require qt5-${PV}.inc
 -require ${PN}.inc
 -
--SRC_URI[md5sum] = "bb4a74f3cd1db59274c9f4aaca0912af"
--SRC_URI[sha256sum] = "8df057d527f98b1c2aa2941ff22adaf9b9c6441ea0e6c44f91f49bbcdbab57ce"
-diff --git a/recipes-qt/qt5/qtjsbackend-native_5.1.1.bb b/recipes-qt/qt5/qtjsbackend-native_5.1.1.bb
+-SRC_URI[md5sum] = "1d1ebc4d6efa4d05368c0c716858d314"
+-SRC_URI[sha256sum] = "9d06493a4387d19e561f79f79c0a9c4c333eb764d64af54dc05f13a978694537"
+diff --git a/recipes-qt/qt5/qtxmlpatterns_5.1.1.bb b/recipes-qt/qt5/qtxmlpatterns_5.1.1.bb
 new file mode 100644
-index 0000000..aac7b85
+index 0000000..646e32a
 --- /dev/null
-+++ b/recipes-qt/qt5/qtjsbackend-native_5.1.1.bb
++++ b/recipes-qt/qt5/qtxmlpatterns_5.1.1.bb
 @@ -0,0 +1,5 @@
 +require qt5-${PV}.inc
 +require ${PN}.inc
 +
-+SRC_URI[md5sum] = "7225169d7d166cc5660384a85e4d4a2f"
-+SRC_URI[sha256sum] = "42628eac133738df30e9104c2014eb70478e8fcf2cc86c1f500359c12216b192"
-diff --git a/recipes-qt/qt5/qtjsbackend_5.1.0.bb b/recipes-qt/qt5/qtjsbackend_5.1.0.bb
-deleted file mode 100644
-index fcc7cde..0000000
---- a/recipes-qt/qt5/qtjsbackend_5.1.0.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require qt5-${PV}.inc
--require ${PN}.inc
--
--SRC_URI[md5sum] = "bb4a74f3cd1db59274c9f4aaca0912af"
--SRC_URI[sha256sum] = "8df057d527f98b1c2aa2941ff22adaf9b9c6441ea0e6c44f91f49bbcdbab57ce"
-diff --git a/recipes-qt/qt5/qtjsbackend_5.1.1.bb b/recipes-qt/qt5/qtjsbackend_5.1.1.bb
-new file mode 100644
-index 0000000..aac7b85
---- /dev/null
-+++ b/recipes-qt/qt5/qtjsbackend_5.1.1.bb
-@@ -0,0 +1,5 @@
-+require qt5-${PV}.inc
-+require ${PN}.inc
-+
-+SRC_URI[md5sum] = "7225169d7d166cc5660384a85e4d4a2f"
-+SRC_URI[sha256sum] = "42628eac133738df30e9104c2014eb70478e8fcf2cc86c1f500359c12216b192"
++SRC_URI[md5sum] = "0db5f74de2a2e93bc2747a609ff81d5f"
++SRC_URI[sha256sum] = "bc7b48347ce3ab5d6a22223c001659f3d898cbd3ef9e35688d7ad1bf8e7510b5"
 -- 
 1.8.4.rc3
 
