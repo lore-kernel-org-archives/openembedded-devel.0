@@ -1,23 +1,19 @@
 Return-Path: <eric@eukrea.com>
-Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E40D16CABC
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E03D61957
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 06:24:49 +0000 (UTC)
-Received: from e6520eb (unknown [82.233.81.124]) (Authenticated sender: eukrea)
-	by smtp5-g21.free.fr (Postfix) with ESMTPSA id 849B2D4820C;
-	Tue,  8 Oct 2013 08:24:43 +0200 (CEST)
-Date: Tue, 8 Oct 2013 08:24:42 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Message-ID: <20131008082442.3283605a@e6520eb>
-In-Reply-To: <20131008001604.GJ18775@denix.org>
-References: <1381188738-29468-1-git-send-email-eric@eukrea.com>
-	<20131008001604.GJ18775@denix.org>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 01/18] qtgraphicaleffects: allow empty package
+	Tue,  8 Oct 2013 08:46:13 +0000 (UTC)
+Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 141D5A6301
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Oct 2013 10:46:11 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Oct 2013 10:46:01 +0200
+Message-Id: <1381221981-1585-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.4.rc3
+MIME-Version: 1.0
+Subject: [PATCH 01/21] cinematicexperience: add example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,19 +27,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 06:24:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 08 Oct 2013 08:46:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Le Mon, 07 Oct 2013 20:16:04 -0400,
-Denys Dmytriyenko <denis@denix.org> a =E9crit :
+for more informations on this demo :
+http://kgronholm.blogspot.fr/2012/08/qt5-cinematic-experience.html
+http://quitcoding.com/?page=work#cinex
 
-> And the series misses qtquickcontrols-5.1.0, qtserialport-5.1.0 and=20
-> qttools-native-5.1.0 - those require qt5-${PV}.inc which is now renamed a=
-nd it=20
-> breaks parsing...
->=20
-I'll rebase the serie, sorry I was on dora branch.
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes-qt/examples/cinematicexperience_1.0.bb | 40 ++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 recipes-qt/examples/cinematicexperience_1.0.bb
 
-Eric=20
+diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
+new file mode 100644
+index 0000000..3fa6f06
+--- /dev/null
++++ b/recipes-qt/examples/cinematicexperience_1.0.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "Qt5 technology demo"
++DESCRIPTION = "Cinematic Experience collects many of the new Qt5 QtQuick 2.0 features into the same UX demo application. It uses particles, sprites, path animation, custom shaders etc. features which Qt5 introduces for QML UIs."
++HOMEPAGE = "http://quitcoding.com/?page=work#cinex"
++LICENSE = "CC-BY-3.0"
++LIC_FILES_CHKSUM = "file://README;beginline=38;endline=50;md5=51babd597624b70752069953876aaa18"
++
++SRC_URI = "http://quitcoding.com/download/Qt5_CinematicExperience_rpi_1.0.tgz"
++
++SRC_URI[md5sum] = "935a5db0a6b2a72c67236e72f52be7d1"
++SRC_URI[sha256sum] = "0dd602983ced5f7c0cfd5ad0fbfe2b0b7e3c9ff715e4ef23eef818ccc2b6c60b"
++
++S = "${WORKDIR}/Qt5_CinematicExperience_rpi_${PV}/"
++
++# other version available for small screens
++#SRC_URI = "http://quitcoding.com/download/Qt5_CinematicExperience_1.0.tgz"
++#SRC_URI[md5sum] = "1c4f9bf5411c985fc5d3dbfc5d826a29"
++#SRC_URI[sha256sum] = "0e547e0259667915a24e84ade5efdcd0c553f81786734452c2c8dbce19a19f44"
++#S = "${WORKDIR}/Qt5_CinematicExperience_${PV}/"
++
++DEPENDS = "qtdeclarative qtgraphicaleffects"
++RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
++
++require recipes-qt/qt5/qt5.inc
++
++do_install() {
++    install -d ${D}${datadir}/${P}
++    install -m 0755 ${B}/Qt5_CinematicExperience ${D}${datadir}/${P}
++    cp -a ${S}/content ${D}${datadir}/${P}
++    install -m 0644 ${S}/Qt5_CinematicExperience.qml ${D}${datadir}/${P}
++
++    install -d ${D}${bindir}
++    echo "#!/bin/sh" > ${D}${bindir}/Qt5_CinematicExperience
++    echo "export QML_IMPORT_PATH=${datadir}/${P}" >> ${D}${bindir}/Qt5_CinematicExperience
++    echo "export QML2_IMPORT_PATH=${datadir}/${P}" >> ${D}${bindir}/Qt5_CinematicExperience
++    echo "${datadir}/${P}/Qt5_CinematicExperiencea \$* " >> ${D}${bindir}/Qt5_CinematicExperience
++    chmod +x ${D}${bindir}/Qt5_CinematicExperience
++}
++
++FILES_${PN}-dbg += "${datadir}/${P}/.debug"
++FILES_${PN} += "${datadir}"
+-- 
+1.8.4.rc3
+
 
