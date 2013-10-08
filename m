@@ -1,19 +1,43 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
-	by mail.openembedded.org (Postfix) with ESMTP id A28276CBAC
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EB506CE72
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 15:18:10 +0000 (UTC)
-Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp6-g21.free.fr (Postfix) with ESMTP id 9D785823B8
+	Tue,  8 Oct 2013 15:47:57 +0000 (UTC)
+Received: by mail-ee0-f42.google.com with SMTP id b45so4173871eek.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 17:18:06 +0200 (CEST)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Oct 2013 17:18:16 +0200
-Message-Id: <1381245496-23623-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.8.4.rc3
+	Tue, 08 Oct 2013 08:47:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=p3hbeNHDqIUdm7/wzYJZapEMUHRFwampMgZEPorkf0o=;
+	b=bClypoX/WY0OvWjVOIdVZE/nxa9im2SygKraVbQDH99rj6fTfWxusDcrBK0XTTAMEL
+	nIVUk78tfAujpjU6AgVqN+mK9Ng1vKGSgYtXuSa88YuSv+iNQGvhWHiGhQr4A+N9r7eI
+	d9arWtlaAR+BHXRJ0FRE1RR9pdgkiI0iKP28M1xXyk9EeCXoWCt/DgPqP966j7cgCYBB
+	Aj2pQFpA12cVPS6gDIa6RAKQT2Mo4ZhnVdqVdLGnvgIpZfNhGYIK22+8qz3/L+MSzHdL
+	jb5QnTYtLULGH32wggcT2hRDcJIYMIhkSfsmhryz8BTTDxdlnINx5IoS3Dv8zbs7nkCO
+	cWBw==
+X-Gm-Message-State: ALoCoQlGX5K0qRhW0cAdOCgeQkf9mVQ/zhzr1DSzGg4VmSFcdLEm5yVH4Yvc0tcjN4Owm2kVP2RF
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qt5.inc: extend FILES_${PN}-examples-*
+X-Received: by 10.14.109.66 with SMTP id r42mr3357438eeg.43.1381247278241;
+	Tue, 08 Oct 2013 08:47:58 -0700 (PDT)
+Received: by 10.14.117.67 with HTTP; Tue, 8 Oct 2013 08:47:58 -0700 (PDT)
+In-Reply-To: <20131008133918.GB2872@jama>
+References: <20131007194922.GE18775@denix.org> <20131007201536.GU6240@jama>
+	<20131007202336.GF18775@denix.org>
+	<CAOMwXhMpx8KjDyq_4fD949owFWE8r1O61E7D085+U31=fR5kNg@mail.gmail.com>
+	<20131007203527.GG18775@denix.org>
+	<CAOMwXhORbuT7J8B6evLhcJSx2Z8BUCoAeXKGDe=twQsuY-wtOQ@mail.gmail.com>
+	<20131008132109.GA22340@denix.org>
+	<CAOMwXhN4C=Lob8ow9utU6hnqDOUjpt=PGj+Rp6W-pbnY5uky1g@mail.gmail.com>
+	<20131008132609.GB22340@denix.org>
+	<CAOMwXhP_EobkzYT91BQGLjqWWOtsvTwzYSPk9MJHsMRm1q7otQ@mail.gmail.com>
+	<20131008133918.GB2872@jama>
+Date: Tue, 8 Oct 2013 11:47:58 -0400
+Message-ID: <CALmOhgmaCJQkmrZuSHjBV4EY8rtNr_-gCBGo6SnX9wP7py5VDg@mail.gmail.com>
+From: Trevor Woerner <trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5] Update to 5.1.1?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,52 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 15:18:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 08 Oct 2013 15:47:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-this fix :
-ERROR: QA Issue: non debug package contains .debug directory: qtquick1-examples path
-/work/armv7a-vfp-neon-oe-linux-gnueabi/qtquick1/5.1.1-r0/packages-split/qtquick1-examples/
-usr/share/qt5/examples/declarative/cppextensions/plugins/org/qtproject/TimeExample/.debug/libqmlqtimeexampleplugin.so
+On 8 October 2013 09:39, Martin Jansa <martin.jansa@gmail.com> wrote:
+> So the same branch names are the only supported combination, if you want
+> to use meta-qt5/master with oe-core/dylan then you're on your own. It
+> works now, but only because we're lucky.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes-qt/qt5/qt5.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
+I have been experimenting with using meta-qt5's master with oe-core's
+dylan and have noticed the following:
 
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index f1fd951..268ddd7 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -115,6 +115,8 @@ FILES_${PN}-examples-dev = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*${SOLIBSDEV} \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*${SOLIBSDEV} \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/*${SOLIBSDEV} \
- "
- FILES_${PN}-examples-dbg = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/.debug \
-@@ -123,6 +125,8 @@ FILES_${PN}-examples-dbg = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/.debug \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/.debug \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/.debug \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/.debug \
- "
- FILES_${PN}-examples-staticdev = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*.a \
-@@ -131,6 +135,8 @@ FILES_${PN}-examples-staticdev = " \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*.a \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*.a \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*.a \
-+    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/*.a \
- "
- 
- PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
--- 
-1.8.4.rc3
+1) master now has a nice PACKAGECONFIG, so if you were setting/using
+any configuration settings you'll need to update your .bbappend (or
+whatever) to use the new facility
 
+2) if all you want is qtbase then this doesn't apply; but if you want
+other qt components you'll need to explicitly enable ICU in qtbase
+(this wasn't required in dylan)
+
+3) if you want to enable support for DirectFB you'll find that the
+version of DirectFB in oe-core's dylan branch isn't high enough
+
+But other than that, yes it works.
 
