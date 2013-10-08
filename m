@@ -1,40 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BB7C46CBAA
+Return-Path: <eu@felipetonello.com>
+Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id ABE646CE94
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 21:20:40 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id m14so4311708eaj.34
+	Tue,  8 Oct 2013 21:58:18 +0000 (UTC)
+Received: by mail-ob0-f175.google.com with SMTP id uz6so993895obc.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Oct 2013 14:20:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ogdz/WW/apbB/y9nxOf6D6dwBQnUDXvg9PxW9VYfxG0=;
-	b=Wf+ituRVQozuhL3xrcOa8PvgQmeZbnSOsMJCE7mhl8SII2WXyYM+a/yP3DGNbC3nq0
-	JKDWtlbllF9VpEATBxcnYvXYs3ClmnM/6OpmjOYw4mqWwXLWMusSg3NHJ1WrreeAO55y
-	npkveWZolwmzo8bO33A141SyLozFno90VE4HWXQhu3DYW7/aeUsKe2HHxlAr4Z3a8GaV
-	t4Jvax9AibvRWI119wIFVzLcawM7JA60hpsQkhQagsPLfdVgCL9LjF+yMDzD+lqeRCxG
-	zLubEPgDFmovGhvb/SO0HUPVzlh5kww09oGHnAcAsMz1vpx3/LNMyPRD1aziT3fuUecI
-	3MZA==
-X-Received: by 10.14.210.8 with SMTP id t8mr5452816eeo.39.1381267242231;
-	Tue, 08 Oct 2013 14:20:42 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	j7sm80390315eeo.15.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 08 Oct 2013 14:20:41 -0700 (PDT)
-Date: Tue, 8 Oct 2013 23:20:41 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 08 Oct 2013 14:58:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nmauRH9wryK5iSM0LKJXOPjEv4vLUr5ynVQkI248DXI=;
+	b=H46slr5A1LSuPgZjvKd2mAlDLwATO8kXXqhlam5qfon8FUxxKlVcGXKRAv23gLxUWL
+	yZrxtwgoieZICh3Cq4jxZIHcc3/OyOJAiBw5RgijqKu+1UdvUkM/P717gwvr2fV+Mt+U
+	w11mGM8Iive9Ubb9sQB0c3FRAZkxJCyne4qT9BLtTMbZHspL48gVga+B15DvaTxMQGLl
+	t1R4DcSVDU2SvykD5WKtufshA6fdE6S8TzlynFDTJkIMpIlyBAc0A6QU71/y0pl6r0Qj
+	xErkwVUw4NwyflOGpvH7FRtBLJjKvlatgO5mypYtq09Wu+XcRoUUCQMvNqZS3pJP6+Qj
+	iYdw==
+X-Gm-Message-State: ALoCoQmglSXbfxnkkimdRK15VKqFjSO2MytfTw2PVVSQekf8K1BJyIhpHxkMQyJA/iyFZnM8QoFu
+X-Received: by 10.182.246.39 with SMTP id xt7mr2955896obc.16.1381269500159;
+	Tue, 08 Oct 2013 14:58:20 -0700 (PDT)
+Received: from localhost.localdomain.com (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162])
+	by mx.google.com with ESMTPSA id s14sm74027654oeo.1.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 08 Oct 2013 14:58:19 -0700 (PDT)
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131008212041.GF2872@jama>
-References: <1380561400-574-1-git-send-email-eu@felipetonello.com>
-	<20131004142146.GJ6240@jama>
-	<CAGrhNMyaauXyRX1+XUhq64_Sddc+3whLd3=sHGW0_k-NO0wf8Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAGrhNMyaauXyRX1+XUhq64_Sddc+3whLd3=sHGW0_k-NO0wf8Q@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] ofono: libqofono: Added libqofono recipe
+Date: Tue,  8 Oct 2013 14:58:15 -0700
+Message-Id: <1381269495-25407-1-git-send-email-eu@felipetonello.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH] Revert "gypsy: Added init script"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,167 +44,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 21:20:41 -0000
-X-Groupsio-MsgNum: 46565
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3oCie2+XPXTnK5a5"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 08 Oct 2013 21:58:19 -0000
 
---3oCie2+XPXTnK5a5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 
-On Tue, Oct 08, 2013 at 02:03:33PM -0700, Felipe Tonello wrote:
-> Hi Martin,
->=20
-> On Fri, Oct 4, 2013 at 7:21 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> > On Mon, Sep 30, 2013 at 10:16:40AM -0700, Felipe F. Tonello wrote:
-> >> From: "Felipe F. Tonello" <eu@felipetonello.com>
-> >>
-> >> libqofono is a Qt library for oFono that provides easy to use Qt libra=
-ry and
-> >> QML components to use oFono.
-> >>
-> >> OBS: This recipe provides the Qt4 support only, but the library also w=
-orks
-> >> with Qt5.
-> >>
-> >> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
-> >> ---
-> >>  meta-oe/recipes-qt/libqofono/libqofono_0.4.bb | 88 ++++++++++++++++++=
-+++++++++
-> >>  1 file changed, 88 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-qt/libqofono/libqofono_0.4.bb
-> >>
-> >> diff --git a/meta-oe/recipes-qt/libqofono/libqofono_0.4.bb b/meta-oe/r=
-ecipes-qt/libqofono/libqofono_0.4.bb
-> >> new file mode 100644
-> >> index 0000000..7c34db2
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-qt/libqofono/libqofono_0.4.bb
-> >> @@ -0,0 +1,88 @@
-> >> +DESCRIPTION =3D "Qt Library for oFono"
-> >> +HOMEPAGE =3D "https://github.com/nemomobile/libqofono"
-> >> +LICENSE =3D "Apache-2.0"
-> >> +LIC_FILES_CHKSUM =3D "file://README;endline=3D3;md5=3D8a15bce3921d123=
-8d9a9f23828612947"
-> >> +
-> >> +SECTION =3D "qt/lib"
-> >> +
-> >> +PR =3D "r0"
-> >> +
-> >> +inherit qt4x11 pkgconfig
-> >> +
-> >> +RDEPENDS_${PN} =3D "ofono"
-> >> +RDEPENDS_${PN}-plugin =3D "${PN}"
-> >> +
-> >> +PROVIDES +=3D "${PN}-plugin"
-> >> +
-> >> +PACKAGES =3D+ "${PN}-plugin ${PN}-plugin-dbg ${PN}-test"
-> >> +RRECOMMENDS_${PN} =3D "${PN}-plugin"
-> >> +
-> >> +BRANCH =3D "master"
-> >> +TAG =3D "${PV}"
-> >> +
-> >> +SRC_URI =3D " \
-> >> +  git://github.com/nemomobile/${PN}.git;branch=3D${BRANCH};tag=3D${TA=
-G} \
-> >> +"
-> >> +
-> >> +S =3D "${WORKDIR}/git"
-> >> +
-> >> +QT_IMPORTS_DIR =3D "${libdir}/qt4/imports"
-> >> +PLUGINS_TARGET =3D "${QT_IMPORTS_DIR}/MeeGo/QOfono"
-> >> +
-> >> +FILES_${PN} =3D " \
-> >> +  ${libdir}/libqofono${SOLIBS} \
-> >> +"
-> >> +
-> >> +FILES_${PN}-dev =3D " \
-> >> +  ${includedir}/qofono/* \
-> >> +  ${includedir}/qofono/dbus/* \
-> >> +  ${libdir}/libqofono${SOLIBSDEV} \
-> >> +  ${libdir}/libqofono.prl \
-> >> +  ${libdir}/pkgconfig/qofono.pc \
-> >> +  ${datadir}/qt4/mkspecs/features/qofono.prf \
-> >> +"
-> >> +
-> >> +FILES_${PN}-plugin =3D " \
-> >> +  ${PLUGINS_TARGET}/qmldir \
-> >> +  ${PLUGINS_TARGET}/lib*.so \
-> >> +"
-> >> +
-> >> +FILES_${PN}-plugin-dbg =3D " \
-> >> +  ${PLUGINS_TARGET}/.debug \
-> >> +"
-> >> +
-> >> +FILES_${PN}-test =3D " \
-> >> +  /opt/ofonotest/bin/ofonotest \
-> >> +  /opt/ofonotest/qml/ofonotest \
-> >> +  ${libdir}/libqofono/tests/tst_qofonotest \
-> >> +"
-> >> +
-> >> +FILES_${PN}-dbg +=3D " \
-> >> +  /opt/ofonotest/bin/.debug \
-> >> +  ${libdir}/libqofono/tests/.debug \
-> >> +"
-> >> +
-> >> +EXTRA_QMAKEVARS_PRE =3D " \
-> >> +  PREFIX=3D${prefix} \
-> >> +"
-> >> +
-> >> +do_configure_prepend() {
-> >> +  # Hack *.pro variables
-> >> +  find . -iname '*.pro' -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],$=
-{QT_IMPORTS_DIR},g' '{}' ';'
-> >> +  find . -iname '*.pro' -exec sed -i -e 's,$$\[QT_INSTALL_PREFIX\],$$=
-INSTALL_ROOT$$PREFIX,g' '{}' ';'
-> >> +}
-> >> +
-> >> +do_install() {
-> >> +  cd ${S} && (INSTALL_ROOT=3D${D} oe_runmake install)
-> >> +
-> >> +  cd ${D}/${datadir}/qt4/mkspecs/features
-> >> +
-> >> +  sed -i -e '/DEPENDPATH.*/d' qofono.prf
-> >> +  sed -i -e '/INCLUDEPATH.*/d' qofono.prf
-> >> +  sed -i -e '/LIBS.*/d' qofono.prf
-> >> +
-> >> +  # to make it work with the SDK
-> >> +  echo 'DEPENDPATH +=3D $(OE_QMAKE_INCDIR_QT)/../qofono' >> qofono.prf
-> >> +  echo 'INCLUDEPATH +=3D $(OE_QMAKE_INCDIR_QT)/../qofono' >> qofono.p=
-rf
-> >> +  echo 'LIBS +=3D -lqofono' >> qofono.prf
-> >> +}
-> >
-> > It's trying to install in root, do you know why?
->=20
-> Maybe because you are using dash. This recipe doesn't work in dash,
-> you can fix it just by removing the INSTALL_ROOT=3D${D} on the same line
-> as the make command. Just add export INSTALL_ROOT=3D${D} one line above.
->=20
-> If you want I can fix it, or you can.. I don't mind.
+This reverts commit 13f540c5a98d3a64b41117db9cf554956eebafe9.
 
-Ah right, I'm using dash on jenkins slave to catch such issues :)
+This daemon is called by dbus when I client connects to it. So it's not
+necessary to have the init script. This patch would be useful if we add the
+init script as a separeted package. But for now we can remove it.
 
-I'll fix it, because it's faster for me to amend commit than fetching
-new one from patchwork and squashing it, thanks.
+Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+---
+ .../gypsy/files/gypsy-initscript                   | 61 ----------------------
+ meta-oe/recipes-navigation/gypsy/gypsy.inc         | 13 +----
+ 2 files changed, 1 insertion(+), 73 deletions(-)
+ delete mode 100755 meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript b/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
+deleted file mode 100755
+index c3c94e5..0000000
+--- a/meta-oe/recipes-navigation/gypsy/files/gypsy-initscript
++++ /dev/null
+@@ -1,61 +0,0 @@
+-#! /bin/sh
+-#
+-# based on gypsy-example-initscript in gypsy repository
+-# there are some little modifications to work with OE based distros
+-# []' Felipe Tonello eu@felipetonello.com
+-#
+-
+-set -e
+-
+-DESC="Gypsy daemon"
+-NAME="gypsy-daemon"
+-DAEMON=/usr/lib/gypsy/$NAME
+-PIDFILE=/var/run/$NAME.pid
+-SCRIPTNAME=/etc/init.d/$NAME
+-USER=root
+-
+-# Gracefully exit if the package has been removed.
+-test -x $DAEMON || exit 0
+-
+-#
+-#	Function that starts the daemon/service.
+-#
+-d_start() {
+-	start-stop-daemon --start --quiet --pidfile $PIDFILE \
+-		--user $USER --exec $DAEMON -- $DAEMON_OPTS
+-}
+-
+-#
+-#	Function that stops the daemon/service.
+-#
+-d_stop() {
+-	start-stop-daemon --stop --quiet --pidfile $PIDFILE \
+-		 --oknodo --user $USER --exec $DAEMON
+-}
+-
+-
+-case "$1" in
+-  start)
+-	echo -n "Starting $DESC: $NAME"
+-	d_start
+-	echo "."
+-	;;
+-  stop)
+-	echo -n "Stopping $DESC: $NAME"
+-	d_stop
+-	echo "."
+-	;;
+-  restart|force-reload)
+-	echo -n "Restarting $DESC: $NAME"
+-	d_stop
+-	sleep 1
+-	d_start
+-	echo "."
+-	;;
+-  *)
+-	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
+-	exit 1
+-	;;
+-esac
+-
+-exit 0
+diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+index 1f50d79..747b61d 100644
+--- a/meta-oe/recipes-navigation/gypsy/gypsy.inc
++++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+@@ -8,20 +8,13 @@ LICENSE = "GPLv2.0 & LGPLv2.1"
+ SECTION = "console/network"
+ DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
+ 
++inherit autotools pkgconfig gtk-doc
+ PACKAGES += "libgypsy"
+-SRC_URI = "file://gypsy-initscript"
+-
+-inherit autotools pkgconfig gtk-doc update-rc.d
+-
+-INITSCRIPT_NAME = "gypsy-daemon"
+-# make sure it starts after X
+-INITSCRIPT_PARAMS = "start 10 5 3 2 . stop 20 0 1 6 ."
+ 
+ EXTRA_OECONF += "--with-distro=debian"
+ 
+ FILES_${PN} = " \
+   ${sysconfdir}/gypsy.conf \
+-  ${sysconfdir}/init.d/gypsy-daemon \
+   ${sysconfdir}/dbus-1 \
+   ${libexecdir}/gypsy-daemon \
+   ${datadir}/dbus-1 \
+@@ -30,7 +23,3 @@ FILES_${PN} = " \
+ FILES_libgypsy = " \
+   ${libdir}/libgypsy${SOLIBS} \
+ "
+-
+-do_install_append() {
+-  install -D ${WORKDIR}/gypsy-initscript ${D}/${sysconfdir}/init.d/gypsy-daemon
+-}
+-- 
+1.8.3.1
 
---3oCie2+XPXTnK5a5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlJUdykACgkQN1Ujt2V2gBxsUwCgsNxboGeh7lt9lqUufv6siQqs
-rVIAnRwoPzjEw0wHxL2QUH8JilBRZXpx
-=ewDW
------END PGP SIGNATURE-----
-
---3oCie2+XPXTnK5a5--
