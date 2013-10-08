@@ -1,22 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by mail.openembedded.org (Postfix) with ESMTP id A014F6CC42
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 018806CC42
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 01:03:18 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUB00I5LS99PPM1@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	07 Oct 2013 20:03:10 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C281B2009D; Mon,
-	07 Oct 2013 21:03:09 -0400 (EDT)
-Date: Mon, 07 Oct 2013 21:03:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20131008010309.GK18775@denix.org>
-References: <20131007183739.GD18775@denix.org>
+	Tue,  8 Oct 2013 01:03:53 +0000 (UTC)
+Received: by mail-ie0-f172.google.com with SMTP id x13so18361768ief.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Oct 2013 18:03:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=reelJA6J8eaLvY3FI1azthWl4heZDI16cJPPiZU86KM=;
+	b=xCmrTzZ/ifD2M5eNlwttPN+8h8S+vionQZusoWyUkMqW5ZTGJvL7RlbR3sjarDUO7g
+	WVpWIuVnXbss3xDN83tgYYBubkwB+j/yHOq3geO4Q3+RHAFiPjfvoozIfgjF5EHfGfQs
+	C30MCvPP/Ukx0IzhxS3BuswfKAVyguUkpX68ZM4BQ+bbV58/ye9pmpYqfOUgL7Hdd+D8
+	32nt1AKKyEvh7Aib9ybOBGO7ZpZmxc0wpFawj/DsEyyIKu8NIuA3yVPPjnjAwIBYgqiZ
+	uOqsjBQendiGnHZHMtsZXFgoQfyCazDE7MZVw+dIoa8LmZ2Sxy6b/ckPCyK+DfAly0Ql
+	IHAw==
+MIME-Version: 1.0
+X-Received: by 10.50.114.168 with SMTP id jh8mr19448711igb.6.1381194235536;
+	Mon, 07 Oct 2013 18:03:55 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.64.20.229 with HTTP; Mon, 7 Oct 2013 18:03:54 -0700 (PDT)
+In-Reply-To: <CALmOhgmsSCvdcwGO-op9QtoNyF_bTkVsbj5BYmMg3uszXGUEsg@mail.gmail.com>
+References: <20131007180120.GC18775@denix.org>
+	<20131007202956.718ce202@e6520eb>
+	<20131007183739.GD18775@denix.org>
 	<20131007205710.386447ba@e6520eb> <20131007193306.GT6240@jama>
 	<CAOMwXhNV3q5P_+kCZtnDNUpZpG-OvMoe7Rem=cw86Z6vx8WmbA@mail.gmail.com>
 	<20131007194922.GE18775@denix.org> <20131007201536.GU6240@jama>
@@ -24,9 +33,11 @@ References: <20131007183739.GD18775@denix.org>
 	<CAOMwXhMpx8KjDyq_4fD949owFWE8r1O61E7D085+U31=fR5kNg@mail.gmail.com>
 	<20131007203527.GG18775@denix.org>
 	<CALmOhgmsSCvdcwGO-op9QtoNyF_bTkVsbj5BYmMg3uszXGUEsg@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CALmOhgmsSCvdcwGO-op9QtoNyF_bTkVsbj5BYmMg3uszXGUEsg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Date: Mon, 7 Oct 2013 22:03:54 -0300
+X-Google-Sender-Auth: Iva5Zd6quBfQDO8L4n8HB0a2MFY
+Message-ID: <CAP9ODKqm5-=6XhquH5R2uTJW5+5TGVXrD8q86BPg0abRci-_1w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5] Update to 5.1.1?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,17 +52,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 01:03:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 08 Oct 2013 01:03:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Oct 07, 2013 at 08:57:18PM -0400, Trevor Woerner wrote:
+On Mon, Oct 7, 2013 at 9:57 PM, Trevor Woerner
+<trevor.woerner@linaro.org> wrote:
 > Would the intent here be to replace 5.1.0 with 5.1.1? Or to have both
 > versions available and let the user choose?
 
-5.1.1 is a minor patch-release in 5.1 series. There's no reason to keep both 
-5.1.0 and 5.1.1...
+I'd prefer drop 5.1.0 and move to 5.1.1
 
 -- 
-Denys
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
