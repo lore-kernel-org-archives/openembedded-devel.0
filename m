@@ -1,21 +1,21 @@
 Return-Path: <eric@eukrea.com>
 Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 517306CE72
+	by mail.openembedded.org (Postfix) with ESMTP id A23246CEC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 08:46:30 +0000 (UTC)
+	Tue,  8 Oct 2013 08:46:34 +0000 (UTC)
 Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id AB730A61C9
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 05E3EA6262
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 10:46:28 +0200 (CEST)
+	Tue,  8 Oct 2013 10:46:31 +0200 (CEST)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Oct 2013 10:46:06 +0200
-Message-Id: <1381221981-1585-6-git-send-email-eric@eukrea.com>
+Date: Tue,  8 Oct 2013 10:46:07 +0200
+Message-Id: <1381221981-1585-7-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.8.4.rc3
 In-Reply-To: <1381221981-1585-1-git-send-email-eric@eukrea.com>
 References: <1381221981-1585-1-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-Subject: [PATCH 06/21] qtdeclarative: update to 5.1.1
+Subject: [PATCH 07/21] qtgraphicaleffects: update to 5.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,46 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 08:46:32 -0000
+X-List-Received-Date: Tue, 08 Oct 2013 08:46:36 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- .../0001-qmltestexample-fix-link.patch                                | 0
- .../0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch      | 0
- recipes-qt/qt5/{qtdeclarative_5.1.0.bb => qtdeclarative_5.1.1.bb}     | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename recipes-qt/qt5/{qtdeclarative-5.1.0 => qtdeclarative-5.1.1}/0001-qmltestexample-fix-link.patch (100%)
- rename recipes-qt/qt5/{qtdeclarative-5.1.0 => qtdeclarative-5.1.1}/0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch (100%)
- rename recipes-qt/qt5/{qtdeclarative_5.1.0.bb => qtdeclarative_5.1.1.bb} (68%)
+ recipes-qt/qt5/qtgraphicaleffects_5.1.0.bb | 5 -----
+ recipes-qt/qt5/qtgraphicaleffects_5.1.1.bb | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ delete mode 100644 recipes-qt/qt5/qtgraphicaleffects_5.1.0.bb
+ create mode 100644 recipes-qt/qt5/qtgraphicaleffects_5.1.1.bb
 
-diff --git a/recipes-qt/qt5/qtdeclarative-5.1.0/0001-qmltestexample-fix-link.patch b/recipes-qt/qt5/qtdeclarative-5.1.1/0001-qmltestexample-fix-link.patch
-similarity index 100%
-rename from recipes-qt/qt5/qtdeclarative-5.1.0/0001-qmltestexample-fix-link.patch
-rename to recipes-qt/qt5/qtdeclarative-5.1.1/0001-qmltestexample-fix-link.patch
-diff --git a/recipes-qt/qt5/qtdeclarative-5.1.0/0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch b/recipes-qt/qt5/qtdeclarative-5.1.1/0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch
-similarity index 100%
-rename from recipes-qt/qt5/qtdeclarative-5.1.0/0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch
-rename to recipes-qt/qt5/qtdeclarative-5.1.1/0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch
-diff --git a/recipes-qt/qt5/qtdeclarative_5.1.0.bb b/recipes-qt/qt5/qtdeclarative_5.1.1.bb
-similarity index 68%
-rename from recipes-qt/qt5/qtdeclarative_5.1.0.bb
-rename to recipes-qt/qt5/qtdeclarative_5.1.1.bb
-index 2421bdb..be72469 100644
---- a/recipes-qt/qt5/qtdeclarative_5.1.0.bb
-+++ b/recipes-qt/qt5/qtdeclarative_5.1.1.bb
-@@ -6,8 +6,8 @@ SRC_URI += " \
-     file://0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch \
- "
- 
--SRC_URI[md5sum] = "604a6e3ae051a21aac0024694d55cb3b"
--SRC_URI[sha256sum] = "d8849755c17fca9bb44c09c442001bc5593c24986ea616c536719414e85d90cc"
-+SRC_URI[md5sum] = "486fc16ad7b7d0c1488ba5482536d66c"
-+SRC_URI[sha256sum] = "0ee989a5d45a94e927609b22e2413c7f2788a7b4a23af66ecfa15c31db2a9b31"
- 
- # /usr/lib/qt5/qml/QtQuick/Dialogs/images/*.png
- FILES_${PN}-qmlplugins += " \
+diff --git a/recipes-qt/qt5/qtgraphicaleffects_5.1.0.bb b/recipes-qt/qt5/qtgraphicaleffects_5.1.0.bb
+deleted file mode 100644
+index 3d24d7a..0000000
+--- a/recipes-qt/qt5/qtgraphicaleffects_5.1.0.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require qt5-${PV}.inc
+-require ${PN}.inc
+-
+-SRC_URI[md5sum] = "0e38ef686197fbf1207a9510f07d0656"
+-SRC_URI[sha256sum] = "ea30ed7c3523d1a800a63cb888096cef89c61b590bfc81ba815ab9b12e283a89"
+diff --git a/recipes-qt/qt5/qtgraphicaleffects_5.1.1.bb b/recipes-qt/qt5/qtgraphicaleffects_5.1.1.bb
+new file mode 100644
+index 0000000..311f113
+--- /dev/null
++++ b/recipes-qt/qt5/qtgraphicaleffects_5.1.1.bb
+@@ -0,0 +1,5 @@
++require qt5-${PV}.inc
++require ${PN}.inc
++
++SRC_URI[md5sum] = "40d0989d68fb08c1184b7d5088da9c48"
++SRC_URI[sha256sum] = "347c33ee496d67d98d64b6fa43797c45eae85752bb0026eb234bfb420f77febf"
 -- 
 1.8.4.rc3
 
