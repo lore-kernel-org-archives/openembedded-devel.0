@@ -1,35 +1,19 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 339CD6CE98
+Return-Path: <eric@eukrea.com>
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
+	by mail.openembedded.org (Postfix) with ESMTP id A28276CBAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2013 14:16:17 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUC003DTSYSDXF0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	08 Oct 2013 09:16:05 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A5CC020101; Tue,
-	08 Oct 2013 10:16:04 -0400 (EDT)
-Date: Tue, 08 Oct 2013 10:16:04 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-id: <20131008141604.GE22340@denix.org>
-References: <20131007201536.GU6240@jama> <20131007202336.GF18775@denix.org>
-	<CAOMwXhMpx8KjDyq_4fD949owFWE8r1O61E7D085+U31=fR5kNg@mail.gmail.com>
-	<20131007203527.GG18775@denix.org>
-	<CAOMwXhORbuT7J8B6evLhcJSx2Z8BUCoAeXKGDe=twQsuY-wtOQ@mail.gmail.com>
-	<20131008132109.GA22340@denix.org>
-	<CAOMwXhN4C=Lob8ow9utU6hnqDOUjpt=PGj+Rp6W-pbnY5uky1g@mail.gmail.com>
-	<20131008132609.GB22340@denix.org>
-	<CAOMwXhP_EobkzYT91BQGLjqWWOtsvTwzYSPk9MJHsMRm1q7otQ@mail.gmail.com>
-	<20131008133918.GB2872@jama>
-MIME-version: 1.0
-In-reply-to: <20131008133918.GB2872@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Laszlo Papp <lpapp@kde.org>, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] Update to 5.1.1?
+	Tue,  8 Oct 2013 15:18:10 +0000 (UTC)
+Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
+	by smtp6-g21.free.fr (Postfix) with ESMTP id 9D785823B8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Oct 2013 17:18:06 +0200 (CEST)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Oct 2013 17:18:16 +0200
+Message-Id: <1381245496-23623-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.4.rc3
+MIME-Version: 1.0
+Subject: [meta-qt5][PATCH] qt5.inc: extend FILES_${PN}-examples-*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +27,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 14:16:17 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 08 Oct 2013 15:18:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 08, 2013 at 03:39:18PM +0200, Martin Jansa wrote:
-> On Tue, Oct 08, 2013 at 02:30:05PM +0100, Laszlo Papp wrote:
-> > On Tue, Oct 8, 2013 at 2:26 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > > Since Dora is a branch of meta-qt5, I don't understand your statements
-> > > about
-> > > being orthogonal and not integrated...
-> > >
-> > 
-> > You will be able to use *any* meta-qt5 on top of Dora, just as you can use
-> > meta-qt5 on top of denzil nowadays. The "dora branching" sounds like red
-> > herring to me. The dependencies in Dora will be good enough for 1-2 years,
-> > if not much more.
-> 
-> That's not true, we were just lucky that there weren't any incompatible
-> changes in oe-core, but as soon as 1.6. brings e.g. new cmake, master
-> branch will work only with master and dora only with dora (because of
-> .bbappend).
-> 
-> So the same branch names are the only supported combination, if you want
-> to use meta-qt5/master with oe-core/dylan then you're on your own. It
-> works now, but only because we're lucky.
+this fix :
+ERROR: QA Issue: non debug package contains .debug directory: qtquick1-examples path
+/work/armv7a-vfp-neon-oe-linux-gnueabi/qtquick1/5.1.1-r0/packages-split/qtquick1-examples/
+usr/share/qt5/examples/declarative/cppextensions/plugins/org/qtproject/TimeExample/.debug/libqmlqtimeexampleplugin.so
 
-Yep, well said!
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes-qt/qt5/qt5.inc | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index f1fd951..268ddd7 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -115,6 +115,8 @@ FILES_${PN}-examples-dev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*${SOLIBSDEV} \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*${SOLIBSDEV} \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*${SOLIBSDEV} \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*${SOLIBSDEV} \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/*${SOLIBSDEV} \
+ "
+ FILES_${PN}-examples-dbg = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/.debug \
+@@ -123,6 +125,8 @@ FILES_${PN}-examples-dbg = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/.debug \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/.debug \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/.debug \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/.debug \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/.debug \
+ "
+ FILES_${PN}-examples-staticdev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*.a \
+@@ -131,6 +135,8 @@ FILES_${PN}-examples-staticdev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*.a \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*.a \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*.a \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*.a \
++    ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/*.a \
+ "
+ 
+ PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
 -- 
-Denys
+1.8.4.rc3
+
 
